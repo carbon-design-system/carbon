@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2025, 2025
+ * Copyright IBM Corp. 2025, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -29,7 +29,6 @@ type Item = {
  * @param onChange - Optional callback called when hidden items change. Receives array of currently hidden items.
  * @returns Object with `visibleItems` (items to display), `hiddenItems` (items that don't fit), and `itemRefHandler` (function to attach refs to items for width measurement).
  */
-
 const useOverflowItems = <T extends Item>(
   items: T[] | ReactNode,
   containerRef: RefObject<HTMLDivElement>,
@@ -39,13 +38,10 @@ const useOverflowItems = <T extends Item>(
 ) => {
   const itemsRef = useRef<Map<string, number> | null>(null);
   const [maxWidth, setMaxWidth] = useState(0);
-  if (!items || !Array.isArray(items)) {
-    return {
-      visibleItems: [] as T[],
-      hiddenItems: [] as T[],
-      itemRefHandler: () => {},
-    };
-  }
+  const overflowItems = useMemo(
+    () => (Array.isArray(items) ? items : []),
+    [items]
+  );
 
   const handleResize = () => {
     if (containerRef.current) {
@@ -54,7 +50,6 @@ const useOverflowItems = <T extends Item>(
       setMaxWidth(newMax);
     }
   };
-  // eslint-disable-next-line  react-hooks/rules-of-hooks -- https://github.com/carbon-design-system/carbon/issues/20452
   useResizeObserver({
     ref: containerRef,
     onResize: handleResize,
@@ -84,60 +79,49 @@ const useOverflowItems = <T extends Item>(
   };
 
   const getVisibleItems = () => {
-    if (!items || Array.isArray(items) === false) {
-      return [];
-    }
     if (!containerRef) {
-      return items;
+      return overflowItems;
     }
 
     const map = getMap();
     let maxReached = false;
     let accumulatedWidth = 0;
 
-    const visibleItems = items.slice(0, maxItems).reduce((prev, cur) => {
-      if (maxReached) {
-        return prev;
-      }
+    const visibleItems = overflowItems
+      .slice(0, maxItems)
+      .reduce((prev, cur) => {
+        if (maxReached) {
+          return prev;
+        }
 
-      const itemWidth = map.get(cur.id) || 0;
-      const willFit = accumulatedWidth + itemWidth <= maxWidth;
-      if (willFit) {
-        accumulatedWidth += itemWidth;
-        prev.push(cur);
-      } else {
-        maxReached = true;
-      }
-      return prev;
-    }, [] as T[]);
+        const itemWidth = map.get(cur.id) || 0;
+        const willFit = accumulatedWidth + itemWidth <= maxWidth;
+        if (willFit) {
+          accumulatedWidth += itemWidth;
+          prev.push(cur);
+        } else {
+          maxReached = true;
+        }
+        return prev;
+      }, [] as T[]);
     return visibleItems;
   };
 
   // Memoize visible items calculation to avoid recalculating on every render
-  // eslint-disable-next-line  react-hooks/rules-of-hooks -- https://github.com/carbon-design-system/carbon/issues/20452
   const visibleItems = useMemo(() => {
-    if (!Array.isArray(items)) {
-      return [];
-    }
     return getVisibleItems();
     // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20452
-  }, [items, maxWidth, maxItems]);
+  }, [overflowItems, maxWidth, maxItems]);
 
   // Memoize hidden items calculation
-  // eslint-disable-next-line  react-hooks/rules-of-hooks -- https://github.com/carbon-design-system/carbon/issues/20452
   const hiddenItems = useMemo(() => {
-    if (!Array.isArray(items)) {
-      return [];
-    }
-    return items.slice(visibleItems.length);
-  }, [items, visibleItems]);
+    return overflowItems.slice(visibleItems.length);
+  }, [overflowItems, visibleItems]);
 
   // Use previous value to compare and only call onChange when needed
-  // eslint-disable-next-line  react-hooks/rules-of-hooks -- https://github.com/carbon-design-system/carbon/issues/20452
   const previousHiddenItems = usePreviousValue(hiddenItems);
 
   // Only call onChange if hidden items actually changed
-  // eslint-disable-next-line  react-hooks/rules-of-hooks -- https://github.com/carbon-design-system/carbon/issues/20452
   useEffect(() => {
     if (previousHiddenItems && onChange) {
       const hasChanged =
