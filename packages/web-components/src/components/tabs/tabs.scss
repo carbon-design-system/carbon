@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2019, 2024
+// Copyright IBM Corp. 2019, 2026
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -186,7 +186,7 @@ $inset-transition: inset 110ms motion(standard, productive);
   outline: none;
 
   .#{$prefix}--tabs__nav-link {
-    border-block-end: $tab-underline-disabled;
+    border-block-end: $tab-underline-color;
     color: $tab-text-disabled;
     outline: none;
     pointer-events: none;
@@ -236,7 +236,7 @@ $inset-transition: inset 110ms motion(standard, productive);
   .#{$prefix}--tabs__nav-link {
     @include type-style('body-short-01');
 
-    border-block-end: $tab-underline-disabled;
+    border-block-end: $tab-underline-color;
 
     color: $tab-text-disabled;
 
