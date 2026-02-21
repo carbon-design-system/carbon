@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2025
+ * Copyright IBM Corp. 2025, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -19,6 +19,7 @@ import {
 import * as hooks from '../../internal/useMatchMedia';
 import { breakpoints } from '@carbon/layout';
 import { Breadcrumb, BreadcrumbItem } from '../Breadcrumb';
+import { IdPrefix } from '../IdPrefix';
 import { TabList, Tab, TabPanels, TabPanel } from '../Tabs/Tabs';
 import { Bee } from '@carbon/icons-react';
 
@@ -568,6 +569,44 @@ describe('PageHeader', () => {
       expect(screen.getByText('Tag 1')).toBeInTheDocument();
       expect(screen.getByText('Tag 2')).toBeInTheDocument();
       expect(screen.getByText('Tag 3')).toBeInTheDocument();
+    });
+
+    it('should regenerate fallback tag `id`s when `id` prefix changes', () => {
+      const tagsWithoutIds = [
+        { type: 'blue', text: 'Tag 1', size: 'md' },
+        { type: 'green', text: 'Tag 2', size: 'md' },
+      ];
+
+      mockUseOverflowItems.mockImplementation((items) => ({
+        visibleItems: items,
+        hiddenItems: [],
+        itemRefHandler: jest.fn(),
+      }));
+
+      const { rerender } = render(
+        <IdPrefix prefix="prefix-a">
+          <PageHeaderTabBarDirect tags={tagsWithoutIds} />
+        </IdPrefix>
+      );
+
+      const firstCallItems =
+        mockUseOverflowItems.mock.calls[
+          mockUseOverflowItems.mock.calls.length - 1
+        ][0];
+      expect(firstCallItems[0].id).toContain('prefix-a-PageHeaderTabBar');
+
+      rerender(
+        <IdPrefix prefix="prefix-b">
+          <PageHeaderTabBarDirect tags={tagsWithoutIds} />
+        </IdPrefix>
+      );
+
+      const secondCallItems =
+        mockUseOverflowItems.mock.calls[
+          mockUseOverflowItems.mock.calls.length - 1
+        ][0];
+      expect(secondCallItems[0].id).toContain('prefix-b-PageHeaderTabBar');
+      expect(secondCallItems[0].id).not.toEqual(firstCallItems[0].id);
     });
 
     describe('Overflow functionality', () => {
