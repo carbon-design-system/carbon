@@ -808,8 +808,7 @@ export const MultiSelect = React.forwardRef(
                   !disabled && !readOnly ? clearSelection : noopFn
                 }
                 selectionCount={selectedItemsLength}
-                // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-                translateWithId={translateWithId!}
+                translateWithId={translateWithId}
                 disabled={disabled}
               />
             )}
@@ -844,8 +843,7 @@ export const MultiSelect = React.forwardRef(
           </div>
           <ListBox.Menu {...menuProps}>
             {isOpen &&
-              // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
-              sortItems!(filteredItems, sortOptions).map((item, index) => {
+              sortItems(filteredItems, sortOptions).map((item, index) => {
                 const {
                   hasIndividualSelections,
                   nonSelectAllSelectedCount,
