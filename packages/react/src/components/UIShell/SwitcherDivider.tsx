@@ -12,7 +12,7 @@ import { usePrefix } from '../../internal/usePrefix';
 
 export interface SwitcherDividerProps {
   /**
-   * Optionally provide a custom class to apply to the underlying `<li>` node
+   * Optionally provide a custom class to apply to the underlying `<hr>` node
    */
   className?: string;
 }
@@ -26,12 +26,16 @@ const SwitcherDivider = ({
     [customClassName || '']: !!customClassName,
   });
 
-  return <hr {...other} className={classNames} />;
+  return (
+    <li>
+      <hr {...other} className={classNames} />
+    </li>
+  );
 };
 
 SwitcherDivider.propTypes = {
   /**
-   * Optionally provide a custom class to apply to the underlying `<li>` node
+   * Optionally provide a custom class to apply to the underlying `<hr>` node
    */
   className: PropTypes.string,
 };
