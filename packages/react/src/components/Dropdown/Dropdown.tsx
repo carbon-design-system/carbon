@@ -391,12 +391,7 @@ const Dropdown = React.forwardRef(
       (changes: UseSelectStateChange<ItemType>) => {
         const { highlightedIndex } = changes;
 
-        if (
-          highlightedIndex !== undefined &&
-          highlightedIndex > -1 &&
-          // eslint-disable-next-line valid-typeof , no-constant-binary-expression -- https://github.com/carbon-design-system/carbon/issues/20452
-          typeof window !== undefined
-        ) {
+        if (highlightedIndex !== undefined && highlightedIndex > -1) {
           const itemArray = document.querySelectorAll(
             `li.${prefix}--list-box__menu-item[role="option"]`
           );
