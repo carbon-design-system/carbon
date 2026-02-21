@@ -375,6 +375,8 @@ describe('Carbon Components React', () => {
         "usePrefix",
         "useTheme",
         "validateNumberSeparators",
+        "withComposedModalPresence",
+        "withModalPresence",
       ]
     `);
   });
