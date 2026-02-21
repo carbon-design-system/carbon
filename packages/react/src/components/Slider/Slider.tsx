@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2025
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -1340,18 +1340,11 @@ const Slider = (props: SliderProps) => {
 
     const showWarning =
       normalizedProps.warn ||
-      // TODO: https://github.com/carbon-design-system/carbon/issues/18991#issuecomment-2795709637
-      // eslint-disable-next-line valid-typeof , no-constant-binary-expression -- https://github.com/carbon-design-system/carbon/issues/20452
-      (typeof correctedValue !== null &&
-        correctedPosition === HandlePosition.LOWER &&
-        isValid);
+      (correctedPosition === HandlePosition.LOWER && isValid);
     const showWarningUpper =
       normalizedUpperProps.warn ||
-      // TODO: https://github.com/carbon-design-system/carbon/issues/18991#issuecomment-2795709637
-      // eslint-disable-next-line valid-typeof, no-constant-binary-expression -- https://github.com/carbon-design-system/carbon/issues/20452
-      (typeof correctedValue !== null &&
-        correctedPosition ===
-          (twoHandles ? HandlePosition.UPPER : HandlePosition.LOWER) &&
+      (correctedPosition ===
+        (twoHandles ? HandlePosition.UPPER : HandlePosition.LOWER) &&
         (twoHandles ? isValidUpper : isValid));
 
     return (
