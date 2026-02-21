@@ -49,7 +49,6 @@ figma.connect(
         label="Actions"
         kind={button.kind}
         disabled={button.disabled}>
-        {/* eslint-disable-next-line react/jsx-no-undef -- https://github.com/carbon-design-system/carbon/issues/20452 */}
         Open Menu button to view <MenuItem /> props and code
       </MenuButton>
     ),
