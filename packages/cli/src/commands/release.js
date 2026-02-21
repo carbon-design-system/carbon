@@ -243,11 +243,11 @@ async function resetProjectState() {
 
   logger.info('Cleaning any local artifacts or node_modules');
   // Make sure that our tooling is defined before running clean
-  await execa('yarn', ['install', '--offline']);
+  await execa('yarn', ['install', '--immutable']);
   await execa('yarn', ['clean']);
 
-  logger.info('Installing known dependencies from offline mirror');
-  await execa('yarn', ['install', '--offline']);
+  logger.info('Installing dependencies from lockfile');
+  await execa('yarn', ['install', '--immutable']);
 
   logger.info('Building packages from source');
   await execa('yarn', ['build']);
