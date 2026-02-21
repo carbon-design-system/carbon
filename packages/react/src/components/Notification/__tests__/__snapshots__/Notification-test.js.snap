@@ -8,6 +8,7 @@ exports[`ActionableNotification should render 1`] = `
     role="alertdialog"
   >
     <span
+      aria-hidden="true"
       class="cds--visually-hidden"
       role="link"
       tabindex="0"
@@ -85,6 +86,7 @@ exports[`ActionableNotification should render 1`] = `
       </div>
     </div>
     <span
+      aria-hidden="true"
       class="cds--visually-hidden"
       role="link"
       tabindex="0"
