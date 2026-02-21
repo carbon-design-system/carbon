@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2025
+ * Copyright IBM Corp. 2025, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -111,5 +111,23 @@ describe('initCarousel', () => {
     const active = carousel.getActiveItem();
 
     expect(active.index).toBe(0);
+  });
+
+  test('should stop transition callbacks after `destroyEvents`', () => {
+    const carousel = initCarousel(container, {
+      onViewChangeStart: mockOnViewChangeStart,
+      onViewChangeEnd: mockOnViewChangeEnd,
+    });
+
+    mockOnViewChangeEnd.mockClear();
+
+    const activeItem = carousel.getActiveItem().item;
+
+    activeItem?.dispatchEvent(new Event('transitionend'));
+    expect(mockOnViewChangeEnd).toHaveBeenCalledTimes(1);
+
+    carousel.destroyEvents();
+    activeItem?.dispatchEvent(new Event('transitionend'));
+    expect(mockOnViewChangeEnd).toHaveBeenCalledTimes(1);
   });
 });
