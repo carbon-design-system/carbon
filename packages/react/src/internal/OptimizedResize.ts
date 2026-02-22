@@ -5,8 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-// mdn resize function
-import window from 'window-or-global';
+// Use `globalThis` for universal access to global object (browser, workers, Node).
+const win = globalThis as Window & typeof globalThis;
 
 /**
  * A callback function to be executed on `resize`.
@@ -28,7 +28,7 @@ export const OptimizedResize = (() => {
   const handleResize = () => {
     if (!running) {
       running = true;
-      window.requestAnimationFrame(runCallbacks);
+      win.requestAnimationFrame(runCallbacks);
     }
   };
 
@@ -43,7 +43,7 @@ export const OptimizedResize = (() => {
     /** Adds a callback function to be executed on window `resize`. */
     add: (callback: Callback) => {
       if (!callbacks.length) {
-        window.addEventListener('resize', handleResize);
+        win.addEventListener('resize', handleResize);
       }
       addCallback(callback);
       return {

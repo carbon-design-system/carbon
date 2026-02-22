@@ -151,6 +151,7 @@ export const FixedSideNav = {
             <cds-side-nav-menu-item
               active
               aria-current="page"
+              target="_blank"
               href="${linksHref}">
               L0 menu item
             </cds-side-nav-menu-item>

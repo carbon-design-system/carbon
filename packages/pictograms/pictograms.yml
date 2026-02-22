@@ -552,6 +552,12 @@
     - texas
     - bridge
     - bats
+- name: austin--texas
+  friendly_name: Austin, Texas
+  aliases:
+    - Texas
+    - map
+    - geography
 - name: automate--modular--management
   friendly_name: Automate modular management
   aliases:
@@ -796,6 +802,13 @@
   aliases:
     - big data
     - cloud
+- name: binocular
+  friendly_name: Binocular
+  aliases:
+    - binocular
+    - sports
+    - golf
+    - shot
 - name: birthday--cake
   friendly_name: Birthday cake
   aliases:
@@ -971,6 +984,14 @@
     - industry
     - construction
     - machinery
+- name: burger
+  friendly_name: Burger
+  aliases:
+    - burger
+    - cheeseburger
+    - hamburger
+    - fast food
+    - food
 - name: bus
   friendly_name: Bus
   aliases:
@@ -1008,6 +1029,31 @@
   friendly_name: C++
   aliases:
     - c++, coding language
+- name: cactus--01
+  friendly_name: Cactus 01
+  aliases:
+    - nature
+    - cactus
+    - vegetation
+    - spiky
+    - desert
+- name: cactus--02
+  friendly_name: Cactus 02
+  aliases:
+    - nature
+    - cactus
+    - vegetation
+    - spiky
+    - desert
+- name: cactus--flower
+  friendly_name: Cactus flower
+  aliases:
+    - nature
+    - cactus
+    - vegetation
+    - spiky
+    - desert
+    - flower
 - name: cafe
   friendly_name: Café
   aliases:
@@ -1199,6 +1245,16 @@
     - ship
     - shipment
     - shipping
+- name: cat--01
+  friendly_name: Cat sitting
+  aliases:
+    - cat
+    - animals
+    - pets
+    - cats
+    - kitty
+    - feline
+    - sitting
 - name: cell
   friendly_name: Cell
   aliases:
@@ -1343,6 +1399,15 @@
     - chart
     - line
     - line chart
+    - data
+    - analytics
+    - data analytics
+- name: chart--lollipop
+  friendly_name: Chart lollipop
+  aliases:
+    - chart
+    - lollipop
+    - lollipop chart
     - data
     - analytics
     - data analytics
@@ -1641,6 +1706,16 @@
     - data
     - data analytics
     - analytics
+- name: cleat
+  friendly_name: Cleat
+  aliases:
+    - shoe
+    - player
+    - football
+    - soccer
+    - baseball
+    - cleat
+    - fantasy football
 - name: client--financing--01
   friendly_name: Client financing 01
   aliases:
@@ -1666,7 +1741,7 @@
     - office
     - team
     - people
-    - coworker
+    - co-worker
 - name: clothes--rack--01
   friendly_name: Clothes rack 01
   aliases:
@@ -2415,6 +2490,13 @@
     - discount
     - torn
     - money
+- name: cow
+  friendly_name: Cow
+  aliases:
+    - cow
+    - animal
+    - farm
+    - bovine
 - name: cowboy--boot
   friendly_name: Cowboy boot
   aliases:
@@ -3034,6 +3116,29 @@
   aliases:
     - documentation
     - cloud
+- name: dog--01
+  friendly_name: Dog sitting
+  aliases:
+    - animals
+    - pets
+    - dogs
+    - puppy
+    - sitting
+- name: dog--02
+  friendly_name: Dog standing
+  aliases:
+    - animals
+    - pets
+    - dogs
+    - puppy
+    - standing
+- name: dog--walking
+  friendly_name: Dog walking
+  aliases:
+    - dog
+    - pet
+    - walk
+    - leisure
 - name: door--handle
   friendly_name: Door handle
   aliases:
@@ -3602,6 +3707,12 @@
     - face
     - unhappy
     - people
+- name: face--melting
+  friendly_name: Melting face
+  aliases:
+    - heat
+    - sun
+    - melting
 - name: face--neutral
   friendly_name: Face neutral
   aliases:
@@ -3956,6 +4067,14 @@
     - file
     - document
     - catalog
+- name: food--truck
+  friendly_name: Food truck
+  aliases:
+    - car
+    - automobile
+    - truck
+    - food
+    - street vendor
 - name: football
   friendly_name: Football
   aliases:
@@ -3982,6 +4101,16 @@
     - gridiron
     - goal post
     - uprights
+- name: football--pose
+  friendly_name: Football pose
+  aliases:
+    - Sports
+    - player
+    - football
+    - fantasy football
+    - action pose
+    - quarterback
+    - throw
 - name: forecasting
   friendly_name: Forecasting
   aliases:
@@ -4041,6 +4170,12 @@
     - south
     - farm
     - agriculture
+- name: frozen--pipe
+  friendly_name: Frozen pipe
+  aliases:
+    - freeze
+    - pipe
+    - ice
 - name: fuel
   friendly_name: Fuel
   aliases:
@@ -4315,6 +4450,15 @@
     - golf ball
     - masters
     - sports
+- name: golf--cart
+  friendly_name: Golf cart
+  aliases:
+    - Golf cart
+    - cart
+    - human,
+    - sports
+    - golf
+    - shot
 - name: golf--club
   friendly_name: Golf club
   aliases:
@@ -4332,6 +4476,24 @@
     - hole in one
     - masters
     - sports
+- name: golf--pose--01
+  friendly_name: Golf pose 01
+  aliases:
+    - Golf swing
+    - pose
+    - human
+    - sports
+    - golf
+    - shot
+- name: golf--pose--02
+  friendly_name: Golf pose 02
+  aliases:
+    - Golf swing
+    - pose
+    - human
+    - sports
+    - golf
+    - shot
 - name: govern--users--and--identities
   friendly_name: Govern users and identities
   aliases:
@@ -4474,6 +4636,12 @@
     - sky
     - precipitation
     - forecast
+- name: half-note
+  friendly_name: Half note
+  aliases:
+    - music
+    - sound
+    - note
 - name: hamburg--philharmone
   friendly_name: Hamburg Elbphilharmonie
   aliases:
@@ -4617,6 +4785,15 @@
     - acing
     - F1
     - sports
+- name: helmet--football
+  friendly_name: Football helmet
+  aliases:
+    - Sports
+    - helmet
+    - safety
+    - player
+    - football
+    - fantasy football
 - name: help-desk
   friendly_name: Help desk
   aliases:
@@ -4678,6 +4855,13 @@
     - highly available
     - high availability
     - cloud
+- name: hiking
+  friendly_name: Hiking
+  aliases:
+    - hike
+    - trail
+    - trek
+    - leisure
 - name: hills
   friendly_name: Hills
   aliases:
@@ -4718,6 +4902,14 @@
     - China
     - city
     - cityscape
+- name: horse
+  friendly_name: Horse
+  aliases:
+    - horse
+    - animal
+    - farm
+    - riding
+    - equestrian
 - name: hospital
   friendly_name: Hospital
   aliases:
@@ -5552,6 +5744,13 @@
     - lightning
     - weather
     - forecast
+- name: limes
+  friendly_name: Limes
+  aliases:
+    - limes
+    - fruit
+    - food
+    - tart
 - name: link
   friendly_name: Link
   aliases:
@@ -5885,6 +6084,29 @@
     - flow
     - workflow
     - process
+- name: mandolin
+  friendly_name: Mandolin
+  aliases:
+    - mandolin
+    - music
+    - strings
+    - instrument
+- name: margarita-glass
+  friendly_name: Margarita glass
+  aliases:
+    - glass
+    - drink
+    - margarita
+    - alcohol
+    - cocktail
+- name: martini-glass
+  friendly_name: Martini glass
+  aliases:
+    - glass
+    - drink
+    - martini
+    - alcohol
+    - cocktail
 - name: marketplace
   friendly_name: Marketplace
   aliases:
@@ -6002,6 +6224,13 @@
     - melbourne
     - city
     - cities
+- name: melting--ice--cream
+  friendly_name: Melting ice cream
+  aliases:
+    - heat
+    - sweet
+    - ice cream
+    - melting
 - name: memory
   friendly_name: Memory
   aliases:
@@ -6273,6 +6502,17 @@
   aliases:
     - motion
     - movement
+- name: mountain--biking
+  friendly_name: Mountain biking
+  aliases:
+    - mountain
+    - bike
+    - biking
+    - trail riding
+    - mtb
+    - off-road
+    - sport
+    - single track
 - name: movement--in--overlapping--networks
   friendly_name: Movement in overlapping networks
   aliases:
@@ -6370,6 +6610,13 @@
     - sound
     - soundtrack
     - audio
+- name: nachos
+  friendly_name: Nachos
+  aliases:
+    - nachos
+    - food
+    - chips
+    - snack
 - name: natural--language--classifier
   friendly_name: Natural language classifier
   aliases:
@@ -6574,6 +6821,23 @@
     - open-source
     - cross-platform
     - javascript
+- name: north--america
+  friendly_name: North America
+  aliases:
+    - globe
+    - world
+    - map
+    - geography
+    - north america
+    - continent
+- name: northern--mockingbird
+  friendly_name: Northern mockingbird
+  aliases:
+    - bird
+    - Mockingbird
+    - Texas
+    - nature
+    - wildlife
 - name: notifications
   friendly_name: Notifications
   aliases:
@@ -6677,6 +6941,13 @@
     - building structure
     - structure
     - workplace
+- name: oil--lamp
+  friendly_name: Oil lamp
+  aliases:
+    - light
+    - lamp
+    - flame
+    - Texas
 - name: oil--pump
   friendly_name: Oil pump
   aliases:
@@ -6807,6 +7078,14 @@
   friendly_name: Overview
   aliases:
     - overview
+- name: paddleboarding
+  friendly_name: Paddleboarding
+  aliases:
+    - sport
+    - water
+    - movement
+    - leisure
+    - standup
 - name: paper
   friendly_name: Paper
   aliases:
@@ -6936,6 +7215,21 @@
     - writing
     - edit
     - draw
+- name: people--dancing
+  friendly_name: People dancing
+  aliases:
+    - people
+    - dancing
+    - movement
+    - disco
+    - groove
+- name: pepper
+  friendly_name: Pepper
+  aliases:
+    - pepper
+    - hot
+    - vegetable
+    - spiciy
 - name: performance
   friendly_name: Performance
   aliases:
@@ -7008,6 +7302,13 @@
     - person 09
     - people
     - human
+- name: person--sweating
+  friendly_name: Person sweating
+  aliases:
+    - heat
+    - sweat
+    - sauna
+    - perspiration
 - name: person--working
   friendly_name: Person working
   aliases:
@@ -7047,6 +7348,13 @@
   aliases:
     - php
     - coding language
+- name: piano
+  friendly_name: Piano
+  aliases:
+    - piano
+    - music
+    - instrument
+    - keyboard
 - name: pill--bottle--01
   friendly_name: Pill bottle 01
   aliases:
@@ -7078,6 +7386,12 @@
     - tube
     - gas
     - water pipe
+- name: pizza
+  friendly_name: Pizza
+  aliases:
+    - pizza
+    - fast food
+    - food
 - name: planning--analytics
   friendly_name: Planning analytics
   aliases:
@@ -7138,6 +7452,21 @@
     - enforcement
     - security
     - people
+- name: popsicle
+  friendly_name: popsicle
+  aliases:
+    - popsicle
+    - sweet
+    - frozen
+    - treat
+- name: popsicle--melting
+  friendly_name: Melting popsicle
+  aliases:
+    - popsicle
+    - heat
+    - frozen
+    - treat
+    - melting
 - name: population--diagram
   friendly_name: Population diagram
   aliases:
@@ -7555,6 +7884,16 @@
     - precipitation
     - weather
     - forecast
+- name: road--biking
+  friendly_name: Road biking
+  aliases:
+    - bike
+    - road bike
+    - biking
+    - cycling
+    - roadie
+    - sport
+    - velo
 - name: rainy--heavy
   friendly_name: Rainy heavy
   aliases:
@@ -7906,6 +8245,14 @@
     - SaaS
     - integration
     - cloud
+- name: salad
+  friendly_name: Salad
+  aliases:
+    - fast food
+    - food
+    - salad
+    - leaves
+    - greens
 - name: sales--connect
   friendly_name: Sales connect
   aliases:
@@ -8153,6 +8500,13 @@
     - select
     - range
     - multiline select
+- name: selectric-typewriter
+  friendly_name: Selectric typewriter
+  aliases:
+    - selectric
+    - typewriter
+    - typing
+    - IBM
 - name: sell
   friendly_name: Sell
   aliases:
@@ -8288,6 +8642,13 @@
     - sound
     - quiet area
     - mouth
+- name: silicon--wafer
+  friendly_name: Silicon wafer
+  aliases:
+    - IBM
+    - silicon
+    - wafer
+    - semiconductor
 - name: singapore
   friendly_name: Singapore
   aliases:
@@ -8352,6 +8713,16 @@
     - snow
     - weather
     - holiday
+- name: snowboarding
+  friendly_name: Snowboarding
+  aliases:
+    - mountain
+    - snow
+    - board
+    - snowboard
+    - snowboarding
+    - winter
+    - sport
 - name: social--distancing
   friendly_name: Social distancing
   aliases:
@@ -8555,6 +8926,17 @@
   aliases:
     - stack limitation
     - packaging
+- name: stadium--seats
+  friendly_name: Stadium seats
+  aliases:
+    - Sports
+    - seats
+    - stadium seats
+    - football
+    - soccer
+    - baseball
+    - bleacher
+    - fantasy football
 - name: stage
   friendly_name: Stage
   aliases:
@@ -8592,6 +8974,12 @@
     - stairs up
     - stairwell
     - workplace
+- name: star
+  friendly_name: Star
+  aliases:
+    - star
+    - light
+    - shine
 - name: start-for-free
   friendly_name: Start for free
   aliases:
@@ -9012,6 +9400,12 @@
     - tablet device
     - tablet device check
     - tablet
+- name: taco
+  friendly_name: Taco
+  aliases:
+    - taco
+    - food
+    - snack
 - name: tags
   friendly_name: Tags
   aliases:
@@ -9702,6 +10096,14 @@
     - clothing
     - garment
     - retail
+- name: trumpet
+  friendly_name: Trumpet
+  aliases:
+    - trumpet,
+    - music
+    - instrument
+    - wind
+    - brass
 - name: trust
   friendly_name: Trust
   aliases:
@@ -10023,6 +10425,14 @@
   aliases:
     - view graphs and dashboard
     - Cloud
+- name: vinyl--record
+  friendly_name: Vinyl record
+  aliases:
+    - record
+    - music
+    - sound
+    - album
+    - vinyl
 - name: virtual
   friendly_name: Virtual
   aliases:
@@ -10267,6 +10677,14 @@
     - hi
     - bye
     - greeting
+- name: waymo-car
+  friendly_name: Waymo car
+  aliases:
+    - car
+    - autonomous
+    - driverless
+    - ride share
+    - ride-hailing
 - name: weather
   friendly_name: Weather
   aliases:

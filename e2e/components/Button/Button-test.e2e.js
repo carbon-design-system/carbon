@@ -9,7 +9,8 @@
 
 const { test } = require('@playwright/test');
 const { themes } = require('../../test-utils/env');
-const { snapshotStory } = require('../../test-utils/storybook');
+const { snapshotStory, visitStory } = require('../../test-utils/storybook');
+const { snapshot } = require('../../test-utils/snapshot');
 
 test.describe('Button', () => {
   themes.forEach((theme) => {
@@ -73,7 +74,211 @@ test.describe('Button', () => {
       test('set of buttons @vrt', async ({ page }) => {
         await snapshotStory(page, {
           component: 'Button',
-          id: 'components-button--set-of-buttons',
+          id: 'components-button-set-of-buttons--default',
+          theme,
+        });
+      });
+
+      test('set of buttons fluid 1 wide @vrt', async ({ page }) => {
+        await visitStory(page, {
+          component: 'Button',
+          id: 'components-button-set-of-buttons--fluid',
+          theme,
+          args: {
+            'Fluid buttons': '0',
+            'Container width': '800px',
+          },
+        });
+        await snapshot(page, {
+          component: 'Button',
+          id: 'components-button-set-of-buttons--fluid',
+          theme,
+        });
+      });
+
+      test('set of buttons fluid 1 wide ghost @vrt', async ({ page }) => {
+        await visitStory(page, {
+          component: 'Button',
+          id: 'components-button-set-of-buttons--fluid',
+          theme,
+          args: {
+            'Fluid buttons': '3',
+            'Container width': '800px',
+          },
+        });
+        await snapshot(page, {
+          component: 'Button',
+          id: 'components-button-set-of-buttons--fluid',
+          theme,
+        });
+      });
+
+      test('set of buttons fluid 1 narrow @vrt', async ({ page }) => {
+        await visitStory(page, {
+          component: 'Button',
+          id: 'components-button-set-of-buttons--fluid',
+          theme,
+          args: {
+            'Fluid buttons': '0',
+            'Container width': '280px',
+          },
+        });
+        await snapshot(page, {
+          component: 'Button',
+          id: 'components-button-set-of-buttons--fluid',
+          theme,
+        });
+      });
+
+      test('set of buttons fluid 2 wide @vrt', async ({ page }) => {
+        await visitStory(page, {
+          component: 'Button',
+          id: 'components-button-set-of-buttons--fluid',
+          theme,
+          args: {
+            'Fluid buttons': '4',
+            'Container width': '800px',
+          },
+        });
+        await snapshot(page, {
+          component: 'Button',
+          id: 'components-button-set-of-buttons--fluid',
+          theme,
+        });
+      });
+
+      test('set of buttons fluid 2 wide ghost @vrt', async ({ page }) => {
+        await visitStory(page, {
+          component: 'Button',
+          id: 'components-button-set-of-buttons--fluid',
+          theme,
+          args: {
+            'Fluid buttons': '5',
+            'Container width': '800px',
+          },
+        });
+        await snapshot(page, {
+          component: 'Button',
+          id: 'components-button-set-of-buttons--fluid',
+          theme,
+        });
+      });
+
+      test('set of buttons fluid 2 narrow @vrt', async ({ page }) => {
+        await visitStory(page, {
+          component: 'Button',
+          id: 'components-button-set-of-buttons--fluid',
+          theme,
+          args: {
+            'Fluid buttons': '4',
+            'Container width': '320px',
+          },
+        });
+        await snapshot(page, {
+          component: 'Button',
+          id: 'components-button-set-of-buttons--fluid',
+          theme,
+        });
+      });
+
+      test('set of buttons fluid 3 wide @vrt', async ({ page }) => {
+        await visitStory(page, {
+          component: 'Button',
+          id: 'components-button-set-of-buttons--fluid',
+          theme,
+          args: {
+            'Fluid buttons': '6',
+            'Container width': '800px',
+          },
+        });
+        await snapshot(page, {
+          component: 'Button',
+          id: 'components-button-set-of-buttons--fluid',
+          theme,
+        });
+      });
+
+      test('set of buttons fluid 3 wide ghost @vrt', async ({ page }) => {
+        await visitStory(page, {
+          component: 'Button',
+          id: 'components-button-set-of-buttons--fluid',
+          theme,
+          args: {
+            'Fluid buttons': '7',
+            'Container width': '800px',
+          },
+        });
+        await snapshot(page, {
+          component: 'Button',
+          id: 'components-button-set-of-buttons--fluid',
+          theme,
+        });
+      });
+
+      test('set of buttons fluid 3 narrow @vrt', async ({ page }) => {
+        await visitStory(page, {
+          component: 'Button',
+          id: 'components-button-set-of-buttons--fluid',
+          theme,
+          args: {
+            'Fluid buttons': '6',
+            'Container width': '500px',
+          },
+        });
+        await snapshot(page, {
+          component: 'Button',
+          id: 'components-button-set-of-buttons--fluid',
+          theme,
+        });
+      });
+
+      test('set of buttons fluid 4 wide @vrt', async ({ page }) => {
+        await visitStory(page, {
+          component: 'Button',
+          id: 'components-button-set-of-buttons--fluid',
+          theme,
+          args: {
+            'Fluid buttons': '9',
+            'Container width': '1000px',
+          },
+        });
+        await snapshot(page, {
+          component: 'Button',
+          id: 'components-button-set-of-buttons--fluid',
+          theme,
+        });
+      });
+
+      test('set of buttons fluid 4 wide ghost @vrt', async ({ page }) => {
+        await visitStory(page, {
+          component: 'Button',
+          id: 'components-button-set-of-buttons--fluid',
+          theme,
+          args: {
+            'Fluid buttons': '10',
+            'Container width': '1000px',
+          },
+        });
+        await snapshot(page, {
+          component: 'Button',
+          id: 'components-button-set-of-buttons--fluid',
+          theme,
+        });
+      });
+
+      test('set of buttons fluid 4 narrow @vrt', async ({ page }) => {
+        await visitStory(page, {
+          component: 'Button',
+          id: 'components-button-set-of-buttons--fluid',
+          theme,
+          args: {
+            'Fluid buttons': '9',
+            'Container width': '600px',
+          },
+        });
+        await snapshot(page, {
+          component: 'Button',
+          id: 'components-button-set-of-buttons--fluid',
           theme,
         });
       });

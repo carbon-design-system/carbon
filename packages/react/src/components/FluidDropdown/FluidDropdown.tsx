@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2022, 2025
+ * Copyright IBM Corp. 2022, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -58,12 +58,6 @@ export interface FluidDropdownProps<ItemType>
    * Specify if the `FluidDropdown` should render its menu items in condensed mode
    */
   isCondensed?: boolean;
-
-  /**
-   * Function to render items as custom components instead of strings.
-   * Defaults to null and is overridden by a getter
-   */
-  itemToElement?: React.JSXElementConstructor<ItemType> | null;
 
   /**
    * Helper function passed to downshift that allows the library to render a
@@ -184,8 +178,7 @@ FluidDropdown.propTypes = {
   isCondensed: PropTypes.bool,
 
   /**
-   * Function to render items as custom components instead of strings.
-   * Defaults to null and is overridden by a getter
+   * Renders an item as a custom React node instead of a string.
    */
   itemToElement: PropTypes.func,
 

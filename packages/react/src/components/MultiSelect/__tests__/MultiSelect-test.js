@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2025
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -38,11 +38,16 @@ describe('MultiSelect', () => {
     };
   });
 
-  describe.skip('automated accessibility tests', () => {
+  describe('automated accessibility tests', () => {
     it('should have no axe violations', async () => {
       const items = generateItems(4, generateGenericItem);
       const { container } = render(
-        <MultiSelect id="test" label="Field" items={items} />
+        <MultiSelect
+          id="test"
+          label="Field"
+          titleText="Multiselect title"
+          items={items}
+        />
       );
       await waitForPosition();
 
@@ -52,7 +57,12 @@ describe('MultiSelect', () => {
     it('should have no AC violations', async () => {
       const items = generateItems(4, generateGenericItem);
       const { container } = render(
-        <MultiSelect id="test" label="Field" items={items} />
+        <MultiSelect
+          id="test"
+          label="Field"
+          titleText="Multiselect title"
+          items={items}
+        />
       );
       await waitForPosition();
 
@@ -680,6 +690,84 @@ describe('MultiSelect', () => {
         expect(option).toHaveAttribute('aria-selected', 'false');
       });
     });
+
+    it('should display helper text instead of warning when disabled', async () => {
+      render(
+        <MultiSelect
+          disabled
+          warn
+          warnText="Warning message"
+          helperText="Helper text"
+          {...mockProps}
+        />
+      );
+      await waitForPosition();
+
+      const warnMessage = screen.queryByText('Warning message');
+      const helper = screen.queryByText('Helper text');
+      expect(helper).toBeInTheDocument();
+      expect(warnMessage).not.toBeInTheDocument();
+    });
+
+    it('should display helper text instead of warning when readOnly', async () => {
+      render(
+        <MultiSelect
+          readOnly
+          warn
+          warnText="Warning message"
+          helperText="Helper text"
+          {...mockProps}
+        />
+      );
+      await waitForPosition();
+
+      const warnMessage = screen.queryByText('Warning message');
+      const helper = screen.queryByText('Helper text');
+      expect(warnMessage).not.toBeInTheDocument();
+      expect(helper).toBeInTheDocument();
+    });
+
+    it('should display helper text instead of invalid message when disabled', async () => {
+      const { container } = render(
+        <MultiSelect
+          disabled
+          invalid
+          invalidText="Invalid message"
+          helperText="Helper text"
+          {...mockProps}
+        />
+      );
+      await waitForPosition();
+
+      const multiselectComponent = container.firstChild;
+      const inputComponent = multiselectComponent.childNodes[1];
+      const invalidMessage = screen.queryByText('Invalid message');
+      const helper = screen.queryByText('Helper text');
+      expect(inputComponent).not.toHaveAttribute('data-invalid', 'true');
+      expect(invalidMessage).not.toBeInTheDocument();
+      expect(helper).toBeInTheDocument();
+    });
+
+    it('should display helper text instead of invalid message when readOnly', async () => {
+      const { container } = render(
+        <MultiSelect
+          readOnly
+          invalid
+          invalidText="Invalid message"
+          helperText="Helper text"
+          {...mockProps}
+        />
+      );
+      await waitForPosition();
+
+      const multiselectComponent = container.firstChild;
+      const inputComponent = multiselectComponent.childNodes[1];
+      const invalidMessage = screen.queryByText('Invalid message');
+      const helper = screen.queryByText('Helper text');
+      expect(inputComponent).not.toHaveAttribute('data-invalid', 'true');
+      expect(invalidMessage).not.toBeInTheDocument();
+      expect(helper).toBeInTheDocument();
+    });
   });
 
   describe('Controlled', () => {
@@ -943,12 +1031,14 @@ describe('MultiSelect', () => {
       (acc, { name, value }) => ({ ...acc, [name]: value }),
       {}
     );
+    const idPrefix = attributes.id.replace(/-label$/, '');
 
     expect(attributes).toEqual({
       class: 'cds--label',
-      for: 'downshift-_r_5o_-toggle-button',
-      id: 'downshift-_r_5o_-label',
+      for: attributes.for,
+      id: attributes.id,
     });
+    expect(attributes.for).toBe(`${idPrefix}-toggle-button`);
   });
 
   it('should add certain label props when `titleText` is an element', () => {
@@ -964,7 +1054,7 @@ describe('MultiSelect', () => {
 
     expect(attributes).toEqual({
       class: 'cds--label',
-      id: 'downshift-_r_5r_-label',
+      id: attributes.id,
     });
   });
 

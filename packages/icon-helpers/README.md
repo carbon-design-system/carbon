@@ -42,8 +42,8 @@ const attributes = getAttributes({ width: 20, height: 20 });
 ```
 
 In order for the icon to be considered focusable, you will need to provide
-either `aria-label`, `aria-labelledby`, or `title` in the given `attributes` in
-addition to `tabindex`. For example:
+either `aria-label` or `aria-labelledby` in the given `attributes` in addition
+to `tabindex`. For example:
 
 ```js
 const { getAttributes } = require('@carbon/icon-helpers');

@@ -1,11 +1,12 @@
 /**
- * Copyright IBM Corp. 2025
+ * Copyright IBM Corp. 2025, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
 import { expect, fixture, html } from '@open-wc/testing';
+import { sendKeys } from '@web/test-runner-commands';
 import '@carbon/web-components/es/components/popover/index.js';
 
 describe('cds-popover', function () {
@@ -308,5 +309,299 @@ describe('cds-popover-content', function () {
         c.includes('--popover--tab-tip__button')
       )
     ).to.be.false;
+  });
+});
+describe('cds-popover focusout/outsideclick', () => {
+  it('does not close when clicking the trigger button', async () => {
+    const el = await fixture(html`
+      <cds-popover open>
+        <button id="trigger" type="button">Test</button>
+        <cds-popover-content></cds-popover-content>
+      </cds-popover>
+    `);
+
+    await el.updateComplete;
+    expect(el.hasAttribute('open')).to.be.true;
+
+    const trigger = el.querySelector('#trigger');
+    trigger.click();
+
+    await el.updateComplete;
+    expect(el.hasAttribute('open')).to.be.true;
+  });
+
+  it('does not close when clicking the popover content', async () => {
+    const el = await fixture(html`
+      <cds-popover open>
+        <button type="button">Test</button>
+        <cds-popover-content>
+          <div>Content</div>
+        </cds-popover-content>
+      </cds-popover>
+    `);
+
+    await el.updateComplete;
+    expect(el.hasAttribute('open')).to.be.true;
+
+    const content = el
+      .querySelector('cds-popover-content')
+      .shadowRoot?.querySelector('.cds--popover-content');
+
+    content.click();
+
+    await el.updateComplete;
+    expect(el.hasAttribute('open')).to.be.true;
+  });
+
+  it('closes on outside click', async () => {
+    const el = await fixture(html`
+      <div>
+        <cds-popover open id="popover">
+          <button type="button">Test</button>
+          <cds-popover-content></cds-popover-content>
+        </cds-popover>
+        <button id="outside"></button>
+      </div>
+    `);
+
+    await el.updateComplete;
+    const popover = el.querySelector('#popover');
+    const outside = el.querySelector('#outside');
+    expect(popover.hasAttribute('open')).to.be.true;
+
+    outside.click();
+    await el.updateComplete;
+    expect(popover.hasAttribute('open')).to.be.false;
+  });
+
+  it('fires cds-popover-closed event when closing on outside click', async () => {
+    const el = await fixture(html`
+      <div>
+        <cds-popover open id="popover">
+          <button type="button">Test</button>
+          <cds-popover-content></cds-popover-content>
+        </cds-popover>
+        <button id="outside"></button>
+      </div>
+    `);
+
+    await el.updateComplete;
+    const popover = el.querySelector('#popover');
+    const outside = el.querySelector('#outside');
+
+    let eventFired = false;
+    popover.addEventListener('cds-popover-closed', () => {
+      eventFired = true;
+    });
+
+    outside.click();
+    await el.updateComplete;
+
+    expect(eventFired).to.be.true;
+    expect(popover.hasAttribute('open')).to.be.false;
+  });
+
+  it('fires cds-popover-closed event on focusout to outside element', async () => {
+    const el = await fixture(html`
+      <div>
+        <cds-popover open id="popover">
+          <button id="trigger" type="button">Test</button>
+          <cds-popover-content>
+            <button id="inside">Inside</button>
+          </cds-popover-content>
+        </cds-popover>
+        <button id="outside"></button>
+      </div>
+    `);
+
+    await el.updateComplete;
+    const popover = el.querySelector('#popover');
+    const inside = popover.querySelector('#inside');
+    const outside = el.querySelector('#outside');
+
+    let eventFired = false;
+    popover.addEventListener('cds-popover-closed', () => {
+      eventFired = true;
+    });
+
+    // focus the inside button first
+    inside.focus();
+    await el.updateComplete;
+
+    // tab to the outside button
+    await sendKeys({ press: 'Tab' });
+    await el.updateComplete;
+
+    // popover should close and event should fire
+    expect(eventFired).to.be.true;
+    expect(popover.hasAttribute('open')).to.be.false;
+    expect(document.activeElement).to.equal(outside);
+  });
+
+  it('does not fire cds-popover-closed event when clicking trigger button', async () => {
+    const el = await fixture(html`
+      <cds-popover open>
+        <button id="trigger" type="button">Test</button>
+        <cds-popover-content></cds-popover-content>
+      </cds-popover>
+    `);
+
+    await el.updateComplete;
+
+    let eventFired = false;
+    el.addEventListener('cds-popover-closed', () => {
+      eventFired = true;
+    });
+
+    const trigger = el.querySelector('#trigger');
+    trigger.click();
+    await el.updateComplete;
+
+    expect(eventFired).to.be.false;
+  });
+
+  it('does not fire cds-popover-closed event when focus moves to trigger', async () => {
+    const el = await fixture(html`
+      <cds-popover open id="popover">
+        <button id="trigger" type="button">Test</button>
+        <cds-popover-content>
+          <button id="inside">Inside</button>
+        </cds-popover-content>
+      </cds-popover>
+    `);
+
+    await el.updateComplete;
+    const inside = el.querySelector('#inside');
+    const trigger = el.querySelector('#trigger');
+
+    let eventFired = false;
+    el.addEventListener('cds-popover-closed', () => {
+      eventFired = true;
+    });
+
+    // Focus inside first, then move focus to trigger
+    inside.focus();
+    await el.updateComplete;
+    trigger.focus();
+
+    await el.updateComplete;
+    expect(eventFired).to.be.false;
+  });
+
+  it('closes on focusout when focus moves outside', async () => {
+    const el = await fixture(html`
+      <div>
+        <cds-popover open id="popover">
+          <button id="trigger" type="button">Test</button>
+          <cds-popover-content>
+            <button id="inside">Inside</button>
+          </cds-popover-content>
+        </cds-popover>
+        <button id="outside"></button>
+      </div>
+    `);
+
+    await el.updateComplete;
+    const popover = el.querySelector('#popover');
+    const inside = popover.querySelector('#inside');
+    const outside = el.querySelector('#outside');
+
+    expect(popover.hasAttribute('open')).to.be.true;
+
+    // focus the inside button first
+    inside.focus();
+    await el.updateComplete;
+
+    // tab to the outside button
+    await sendKeys({ press: 'Tab' });
+    await el.updateComplete;
+
+    // popover should close and outside button should receive focus
+    expect(popover.hasAttribute('open')).to.be.false;
+    expect(document.activeElement).to.equal(outside);
+  });
+
+  it('should allow preventing close via beingclosed event', async () => {
+    const el = await fixture(html`
+      <div>
+        <cds-popover open id="popover">
+          <button id="trigger" type="button">Test</button>
+          <cds-popover-content>
+            <button id="inside">Inside</button>
+          </cds-popover-content>
+        </cds-popover>
+        <button id="outside"></button>
+      </div>
+    `);
+
+    await el.updateComplete;
+    const popover = el.querySelector('#popover');
+    const inside = popover.querySelector('#inside');
+    const outside = el.querySelector('#outside');
+
+    let beingClosedEventFired = false;
+    popover.addEventListener('cds-popover-beingclosed', (event) => {
+      beingClosedEventFired = true;
+      event.preventDefault();
+    });
+
+    expect(popover.hasAttribute('open')).to.be.true;
+
+    // Focus the inside button first
+    inside.focus();
+    await el.updateComplete;
+
+    // Tab to the outside button
+    await sendKeys({ press: 'Tab' });
+    await el.updateComplete;
+
+    // Event should have fired but popover should still be open
+    expect(beingClosedEventFired).to.be.true;
+    expect(popover.hasAttribute('open')).to.be.true;
+    expect(document.activeElement).to.equal(outside);
+  });
+
+  it('should properly handle keyboard nav within elements inside popover', async () => {
+    const el = await fixture(html`
+      <cds-popover open id="popover">
+        <button id="trigger" type="button">Test</button>
+        <cds-popover-content>
+          <button id="first">First</button>
+          <button id="second">Second</button>
+        </cds-popover-content>
+      </cds-popover>
+    `);
+
+    await el.updateComplete;
+
+    const first = el.querySelector('#first');
+    const second = el.querySelector('#second');
+
+    expect(el.hasAttribute('open')).to.be.true;
+
+    // Focus first button and tab to second button
+    first.focus();
+    await el.updateComplete;
+    expect(document.activeElement).to.equal(first);
+
+    await sendKeys({ press: 'Tab' });
+    await el.updateComplete;
+
+    // Popover should remain open and second button should be focused
+    expect(el.hasAttribute('open')).to.be.true;
+    expect(document.activeElement).to.equal(second);
+
+    // Press Enter key while focused on the second button
+    await sendKeys({ press: 'Enter' });
+    await el.updateComplete;
+
+    // _tabKeyPressed flag should update to false so focusout (if fired) will return early and popover will remain open
+    expect(el.hasAttribute('open')).to.be.true;
+    expect(document.activeElement).to.equal(second);
+
+    // Click Tab key, the _tabKeyPressed flag will be true and popover will close
+    await sendKeys({ press: 'Tab' });
+    await el.updateComplete;
+    expect(el.hasAttribute('open')).to.be.false;
   });
 });

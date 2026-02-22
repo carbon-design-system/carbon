@@ -8,7 +8,7 @@
 'use strict';
 
 const { babel } = require('@rollup/plugin-babel');
-const { camelCase } = require('change-case');
+const { camelCase } = require('change-case-all');
 const fs = require('fs-extra');
 const path = require('path');
 const { rollup } = require('rollup');

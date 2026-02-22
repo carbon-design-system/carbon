@@ -11,7 +11,7 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/styles/scss/utilities/focus-outline' as *;
 @use '@carbon/styles/scss/motion' as *;
-@use '../link/link';
+@use '@carbon/styles/scss/components/link';
 @use '@carbon/styles/scss/components/tile/index' as *;
 @use '@carbon/styles/scss/components/form/index' as *;
 @use '@carbon/styles/scss/utilities/ai-gradient' as *;

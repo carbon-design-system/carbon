@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2025
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -32,9 +32,9 @@
 // used via the `useReactId` function. If the user is running React 17 or
 // lower, `useCompatibleId` is used.
 
-import React, { useEffect, useLayoutEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { setupGetInstanceId } from '../tools/setupGetInstanceId';
-import { canUseDOM } from './environment';
+import useIsomorphicEffect from './useIsomorphicEffect';
 import { useIdPrefix } from './useIdPrefix';
 
 // This tricks bundlers so they can't statically analyze this and produce
@@ -44,7 +44,6 @@ import { useIdPrefix } from './useIdPrefix';
 const _React = { ...React };
 
 const instanceId = setupGetInstanceId();
-const useIsomorphicLayoutEffect = canUseDOM ? useLayoutEffect : useEffect;
 
 let serverHandoffCompleted = false;
 
@@ -68,7 +67,7 @@ export function useCompatibleId(prefix = defaultId) {
     return null;
   });
 
-  useIsomorphicLayoutEffect(() => {
+  useIsomorphicEffect(() => {
     if (id === null) {
       setId(
         `${contextPrefix ? `${contextPrefix}-` : ``}${prefix}-${instanceId()}`

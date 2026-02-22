@@ -61,6 +61,11 @@ const argTypes = {
     control: 'boolean',
     description: '<code>true</code> to disable this slider.',
   },
+  formatLabel: {
+    control: false,
+    description:
+      'The callback to format the label associated with the minimum/maximum value and the value tooltip when hideTextInput is true.',
+  },
   hideLabel: {
     control: 'boolean',
     description: 'Hide label (hide-label)',
@@ -245,18 +250,64 @@ const argTypesSkelton = {
 };
 
 export const Default = {
-  render: () => {
+  args,
+  argTypes: {
+    ...argTypes,
+    formatLabel: {
+      table: {
+        disable: true,
+      },
+    },
+  },
+  render: (args) => {
+    const {
+      ariaLabelInput,
+      disabled,
+      hideLabel,
+      hideTextInput = false,
+      invalid,
+      invalidText,
+      inputType,
+      labelText,
+      max,
+      min,
+      maxLabel,
+      minLabel,
+      name,
+      readOnly,
+      required,
+      step,
+      stepMultiplier,
+      warn,
+      warnText,
+      value,
+      onChange,
+    } = args || {};
     return html`
       <cds-form-item>
         <cds-slider
-          label-text="Slider Label"
-          max="100"
-          min="0"
-          step="1"
-          value="50">
+          ?disabled="${disabled}"
+          ?hide-label="${hideLabel}"
+          ?hide-text-input="${hideTextInput}"
+          ?invalid="${invalid}"
+          invalid-text="${ifDefined(invalidText)}"
+          label-text="${labelText}"
+          max="${ifDefined(max)}"
+          min="${ifDefined(min)}"
+          max-label="${ifDefined(maxLabel)}"
+          min-label="${ifDefined(minLabel)}"
+          ?readonly="${ifDefined(readOnly)}"
+          step="${ifDefined(step)}"
+          step-multiplier="${ifDefined(stepMultiplier)}"
+          ?warn="${warn}"
+          warn-text="${warnText}"
+          value="${ifDefined(value)}"
+          @cds-slider-changed="${onChange}">
           <cds-slider-input
-            aria-label="Slider value"
-            type="number"></cds-slider-input>
+            aria-label="${ifDefined(ariaLabelInput)}"
+            type="${ifDefined(inputType)}"
+            ?required="${ifDefined(required)}"
+            ?name="${ifDefined(name)}"></cds-slider-input>
         </cds-slider>
       </cds-form-item>
     `;
@@ -264,6 +315,8 @@ export const Default = {
 };
 
 export const ControlledSlider = {
+  args,
+  argTypes,
   render: () => {
     let value = 87;
     function onClick() {
@@ -281,6 +334,7 @@ export const ControlledSlider = {
       <cds-form-item>
         <cds-slider
           controlled
+          label-text="Slider label"
           max="100"
           min="0"
           step="1"
@@ -296,6 +350,8 @@ export const ControlledSlider = {
 };
 
 export const ControlledSliderWithLayer = {
+  args,
+  argTypes,
   render: () => {
     let value = 87;
     function onClick() {
@@ -316,7 +372,12 @@ export const ControlledSliderWithLayer = {
         <div>
           <button type="button" @click="${onClick}">randomize value</button>
           <cds-form-item>
-            <cds-slider max="100" min="0" step="1" value="${ifDefined(value)}">
+            <cds-slider
+              label-text="Slider label"
+              max="100"
+              min="0"
+              step="1"
+              value="${ifDefined(value)}">
               <cds-slider-input
                 aria-label="Slider value"
                 type="number"></cds-slider-input>
@@ -329,29 +390,98 @@ export const ControlledSliderWithLayer = {
   },
 };
 
-export const WithLayer = {
-  render: () => {
+export const Skeleton = {
+  parameters: {
+    percy: {
+      skip: true,
+    },
+  },
+  render: () => html`
+    <cds-form-item>
+      <cds-slider-skeleton>
+        <cds-slider> </cds-slider>
+      </cds-slider-skeleton>
+    </cds-form-item>
+  `,
+};
+
+export const SliderWithCustomValueLabel = {
+  args: {
+    ...args,
+    hideTextInput: true,
+    step: 1,
+    stepMultiplier: 50,
+  },
+  argTypes,
+  render: (args) => {
+    const {
+      ariaLabelInput,
+      disabled,
+      hideTextInput = true,
+      invalid,
+      invalidText,
+      inputType,
+      max,
+      min,
+      maxLabel,
+      minLabel,
+      name,
+      readOnly,
+      required,
+      step,
+      stepMultiplier,
+      warn,
+      warnText,
+      value,
+      onChange,
+    } = args || {};
+
     return html`
-      <sb-template-layers>
-        <cds-form-item>
-          <cds-slider
-            label-text="Slider label"
-            max="100"
-            min="0"
-            step="1"
-            value="50">
-            <cds-slider-input
-              aria-label="Slider value"
-              type="number"></cds-slider-input>
-          </cds-slider>
-        </cds-form-item>
-      </sb-template-layers>
+      <cds-form-item>
+        <cds-slider
+          ?disabled="${disabled}"
+          ?hide-text-input="${hideTextInput}"
+          ?invalid="${invalid}"
+          invalid-text="${ifDefined(invalidText)}"
+          label-text="Slider label with low/medium/high"
+          max="${ifDefined(max)}"
+          min="${ifDefined(min)}"
+          max-label="${ifDefined(maxLabel)}"
+          min-label="${ifDefined(minLabel)}"
+          ?readonly="${ifDefined(readOnly)}"
+          step="${ifDefined(step)}"
+          step-multiplier="${ifDefined(stepMultiplier)}"
+          ?warn="${warn}"
+          warn-text="${warnText}"
+          value="${ifDefined(value)}"
+          .formatLabel=${(value) => {
+            if (value < 25) {
+              return 'Low';
+            } else if (value > 75) {
+              return 'High';
+            }
+            return 'Medium';
+          }}
+          @cds-slider-changed="${onChange}">
+          <cds-slider-input
+            aria-label="${ifDefined(ariaLabelInput)}"
+            type="${ifDefined(inputType)}"
+            ?required="${ifDefined(required)}"
+            ?name="${ifDefined(name)}"></cds-slider-input>
+        </cds-slider>
+      </cds-form-item>
     `;
   },
 };
 
 export const SliderWithHiddenInputs = {
-  args,
+  args: {
+    ...args,
+    hideTextInput: true,
+    labelText: 'Slider label',
+    step: 1,
+    stepMultiplier: 10,
+  },
   argTypes,
   render: (args) => {
     const {
@@ -404,6 +534,21 @@ export const SliderWithHiddenInputs = {
       </cds-form-item>
     `;
   },
+};
+
+export const TwoHandleSkeleton = {
+  args,
+  argTypes: argTypesSkelton,
+  parameters: {
+    percy: {
+      skip: true,
+    },
+  },
+  render: () => html`
+    <cds-form-item>
+      <cds-slider-skeleton twoHandles> </cds-slider-skeleton>
+    </cds-form-item>
+  `,
 };
 
 export const TwoHandleSlider = {
@@ -468,6 +613,7 @@ export const TwoHandleSlider = {
     `;
   },
 };
+
 export const TwoHandleSliderWithHiddenInputs = {
   args: argsTwohandle,
   argTypes,
@@ -530,88 +676,26 @@ export const TwoHandleSliderWithHiddenInputs = {
     `;
   },
 };
-export const Skeleton = {
-  parameters: {
-    percy: {
-      skip: true,
-    },
-  },
-  render: () => html`
-    <cds-form-item
-      ><cds-slider-skeleton><cds-slider></cds-slider></cds-slider-skeleton
-    ></cds-form-item>
-  `,
-};
 
-export const TwoHandleSkeleton = {
-  args,
-  argTypes: argTypesSkelton,
-  parameters: {
-    percy: {
-      skip: true,
-    },
-  },
-  render: () => html`
-    <cds-form-item
-      ><cds-slider-skeleton twoHandles></cds-slider-skeleton
-    ></cds-form-item>
-  `,
-};
-
-export const Playground = {
+export const WithLayer = {
   args,
   argTypes,
-  render: (args) => {
-    const {
-      ariaLabelInput,
-      disabled,
-      hideLabel,
-      hideTextInput = false,
-      invalid,
-      invalidText,
-      inputType,
-      labelText,
-      max,
-      min,
-      maxLabel,
-      minLabel,
-      name,
-      readOnly,
-      required,
-      step,
-      stepMultiplier,
-      warn,
-      warnText,
-      value,
-      onChange,
-    } = args || {};
+  render: () => {
     return html`
-      <cds-form-item>
-        <cds-slider
-          ?disabled="${disabled}"
-          ?hide-label="${hideLabel}"
-          ?hide-text-input="${hideTextInput}"
-          ?invalid="${invalid}"
-          invalid-text="${ifDefined(invalidText)}"
-          label-text="${labelText}"
-          max="${ifDefined(max)}"
-          min="${ifDefined(min)}"
-          max-label="${ifDefined(maxLabel)}"
-          min-label="${ifDefined(minLabel)}"
-          ?readonly="${ifDefined(readOnly)}"
-          step="${ifDefined(step)}"
-          step-multiplier="${ifDefined(stepMultiplier)}"
-          ?warn="${warn}"
-          warn-text="${warnText}"
-          value="${ifDefined(value)}"
-          @cds-slider-changed="${onChange}">
-          <cds-slider-input
-            aria-label="${ifDefined(ariaLabelInput)}"
-            type="${ifDefined(inputType)}"
-            ?required="${ifDefined(required)}"
-            ?name="${ifDefined(name)}"></cds-slider-input>
-        </cds-slider>
-      </cds-form-item>
+      <sb-template-layers>
+        <cds-form-item>
+          <cds-slider
+            label-text="Slider label"
+            max="100"
+            min="0"
+            step="1"
+            value="50">
+            <cds-slider-input
+              aria-label="Slider value"
+              type="number"></cds-slider-input>
+          </cds-slider>
+        </cds-form-item>
+      </sb-template-layers>
     `;
   },
 };

@@ -17,6 +17,7 @@ collect:
         - align
         - alignment
         - alignment-axis-offset
+        - allow-empty
         - aria-current
         - aria-label
         - aria-labelledby
@@ -39,6 +40,7 @@ collect:
         - checked
         - checkmark-label
         - clear-selection-label
+        - clickable
         - close-button-label-text
         - close-icon-description
         - close-on-activation
@@ -50,12 +52,14 @@ collect:
         - counter-mode
         - danger-description
         - data-table
+        - decrement-button-assistive-text
         - default-checked
         - default-open
         - default-value
         - defaultOpen
         - description
         - direction
+        - disable-wheel
         - disabled
         - download
         - dropShadow
@@ -81,6 +85,7 @@ collect:
         - hide-close-button
         - hide-divider
         - hide-label
+        - hide-steppers
         - hidePasswordLabel
         - highContrast
         - highlighted
@@ -89,6 +94,7 @@ collect:
         - icon
         - icon-description
         - id
+        - increment-button-assistive-text
         - indeterminate
         - index
         - inline
@@ -116,6 +122,7 @@ collect:
         - low-contrast
         - max
         - max-count
+        - max-length
         - menu-alignment
         - min
         - multiple
@@ -132,6 +139,7 @@ collect:
         - oncds-header-menu-button-toggled
         - oncds-notification-beingclosed
         - oncds-notification-closed
+        - oncds-number-input
         - oncds-radio-button-changed
         - oncds-search-input
         - oncds-select-selected
@@ -154,6 +162,7 @@ collect:
         - optional-classes
         - orientation
         - overflow-menu-on-hover
+        - page
         - paragraph
         - pattern
         - ping
@@ -179,6 +188,7 @@ collect:
         - selection-name
         - selection-value
         - selector-initial-focus
+        - shortcut
         - show-password-visibility-toggle
         - showPasswordLabel
         - size
@@ -204,6 +214,7 @@ collect:
         - tooltip-text
         - tooltipAlignment
         - tooltipDirection
+        - total-items
         - trigger-content
         - type
         - use-zebra-styles
@@ -213,6 +224,8 @@ collect:
         - visited
         - warn
         - warn-text
+        - warning
+        - warning-text
         - width
         - within-grid
         # cds-accordion
@@ -253,13 +266,20 @@ collect:
         - md
         - sm
         - span
+        - xlg
         # cds-combo-box
+        - allow-custom-value
         - input-label
         - oncds-combo-box-beingselected
         - oncds-combo-box-beingtoggled
         - oncds-combo-box-selected
         - oncds-combo-box-toggled
         - should-filter-item
+        - typeahead
+        # cds-contained-list
+        - is-inset
+        # cds-contained-list-item
+        - oncds-contained-list-item-click
         # cds-copy-button
         - autoAlign
         # cds-date-picker
@@ -298,6 +318,8 @@ collect:
         - error-subject
         - oncds-file-uploader-item-beingdeleted
         - oncds-file-uploader-item-deleted
+        # cds-fluid-time-picker-skeleton
+        - is-only-two
         # cds-form-group
         - message
         - message-text
@@ -334,20 +356,25 @@ collect:
         - aria-checked
         - boundaries
         - onicon-detect
-        - renderIcon
-        - shortcut
         - submenuOpen
         # cds-menu-item-radio-group
         - items
         - itemToString
         - selectedItem
+        # cds-menu-item-selectable
+        - renderIcon
         # cds-modal
         - alert
         - container-class
         - has-scrolling-content
+        - loading-description
+        - loading-icon-description
+        - loading-status
+        - loading-success-delay
         - oncds-modal-beingclosed
         - oncds-modal-closed
         - prevent-close
+        - should-submit-on-enter
         # cds-modal-close-button
         - close-button-label
         # cds-modal-footer
@@ -364,13 +391,6 @@ collect:
         - selection-feedback
         # cds-multi-select-item
         - is-select-all
-        # cds-number-input
-        - allow-empty
-        - decrement-button-assistive-text
-        - disable-wheel
-        - hide-steppers
-        - increment-button-assistive-text
-        - oncds-number-input
         # cds-operational-tag
         - oncds-operational-tag-beforeselected
         - oncds-operational-tag-selected
@@ -390,15 +410,18 @@ collect:
         - items-per-page-text
         - oncds-page-sizes-select-changed
         - oncds-pagination-changed-current
-        - page
         - page-input-disabled
         - page-size
         - page-size-input-disabled
         - page-size-label-text
         - pages-unknown
         - start
-        - total-items
         - totalPages
+        # cds-pagination-nav
+        - disable-overflow
+        - items-shown
+        - loop
+        - oncds-page-changed
         # cds-password-input
         - hide-password-label
         - show-password-label
@@ -407,7 +430,6 @@ collect:
         - ononChange
         - space-equally
         # cds-progress-step
-        - clickable
         - complete
         - current
         - icon-label
@@ -522,10 +544,6 @@ collect:
         - oncds-current-selectable-tile-selections
         - radioTiles
         - selectableTiles
-        # cds-time-picker
-        - max-length
-        - warning
-        - warning-text
         # cds-toggle
         - hideLabel
         - label-a
@@ -615,6 +633,7 @@ collect:
         - danger-primary
         - danger-tertiary
         - default
+        - disclosed
         - draft
         - error
         - failed
@@ -631,6 +650,7 @@ collect:
         - medium
         - normal
         - not-started
+        - on-page
         - pending
         - primary
         - secondary
@@ -766,6 +786,11 @@ collect:
         # cds-menu-button - menu-background-token
         - background
         - layer
+        # cds-modal - loading-status
+        - active
+        - error
+        - finished
+        - inactive
         # cds-multi-select - selection-feedback
         - fixed
         - top

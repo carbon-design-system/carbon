@@ -1,25 +1,25 @@
 /**
- * Copyright IBM Corp. 2019, 2023
+ * Copyright IBM Corp. 2019, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 import { getAttributes } from '@carbon/icon-helpers';
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { forwardRef, type ReactSVGElement } from 'react';
 
 export interface IconProps
   extends Omit<React.SVGProps<React.ReactSVGElement>, 'ref' | 'tabIndex'> {
+  // TODO: Remove support for string in v12.
   /**
    * @see React.SVGAttributes.tabIndex
-   * @todo remove support for string in v12
    */
   tabIndex?: string | number | undefined;
 
   title?: string | undefined;
 }
 
-const Icon = React.forwardRef(function Icon(
+const Icon = forwardRef<ReactSVGElement, IconProps>(function Icon(
   {
     className,
     children,
@@ -27,8 +27,8 @@ const Icon = React.forwardRef(function Icon(
     xmlns = 'http://www.w3.org/2000/svg',
     preserveAspectRatio = 'xMidYMid meet',
     ...rest
-  }: IconProps,
-  ref: React.ForwardedRef<React.ReactSVGElement>
+  },
+  ref
 ) {
   const { tabindex, ...attrs } = getAttributes({
     ...rest,

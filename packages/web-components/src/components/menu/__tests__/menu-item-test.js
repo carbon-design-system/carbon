@@ -191,6 +191,22 @@ describe('cds-menu-item', () => {
       // Restore original method
       el._handleClick = originalHandleClick;
     });
+
+    it('should dispatch a close request when activated without a submenu', async () => {
+      const el = await fixture(
+        html`<cds-menu-item label="Test Item"></cds-menu-item>`
+      );
+
+      const events = [];
+      el.addEventListener('cds-menu-close-root-request', (event) => {
+        events.push(event);
+      });
+
+      el.dispatchEvent(new MouseEvent('click', { bubbles: true }));
+
+      expect(events.length).to.equal(1);
+      expect(events[0].detail.triggerEvent).to.be.instanceOf(MouseEvent);
+    });
   });
 
   describe('submenu positioning', () => {

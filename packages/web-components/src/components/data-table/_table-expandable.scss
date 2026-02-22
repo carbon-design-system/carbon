@@ -5,6 +5,12 @@
 // LICENSE file in the root directory of this source tree.
 //
 
+@use '@carbon/styles/scss/config' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/motion' as *;
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/utilities/ai-gradient' as *;
+
 :host(#{$prefix}-table-expanded-row) {
   display: table-row;
   block-size: 0;

@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2020
+ * Copyright IBM Corp. 2020, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -7,7 +7,6 @@
 
 import React from 'react';
 import PaginationNav from '../PaginationNav';
-import './styles.scss';
 import mdx from './PaginationNav.mdx';
 
 export default {
@@ -17,6 +16,9 @@ export default {
   parameters: {
     docs: {
       page: mdx,
+    },
+    controls: {
+      exclude: ['translateWithId'],
     },
   },
 };

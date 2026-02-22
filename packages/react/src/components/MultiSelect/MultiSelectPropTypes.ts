@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -38,22 +38,19 @@ export const sortingPropTypes = {
   sortItems: PropTypes.func,
 };
 
-interface DownshiftTypedProps<ItemType> {
-  itemToString?(item: ItemType): string;
-}
-
 interface SharedOptions {
   locale: string;
 }
 
-interface CompareItems {
-  (itemA: string, itemB: string, options: SharedOptions): number;
-}
+export type CompareItems = (
+  itemA: string,
+  itemB: string,
+  options: { locale: string }
+) => number;
 
-export interface SortItemsOptions<ItemType>
-  extends SharedOptions,
-    DownshiftTypedProps<ItemType> {
+export interface SortItemsOptions<ItemType> extends SharedOptions {
   compareItems: CompareItems;
+  itemToString: (item: ItemType) => string;
   selectedItems: ItemType[];
 }
 

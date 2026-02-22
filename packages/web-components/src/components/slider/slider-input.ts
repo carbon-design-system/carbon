@@ -242,24 +242,20 @@ class CDSSliderInput extends FocusMixin(LitElement) {
       class: `${prefix}--slider__invalid-icon ${prefix}--slider__invalid-icon--warning`,
     });
     return html`
-      ${!hideTextInput
-        ? html`
-            <input
-              ?disabled="${disabled}"
-              ?data-invalid="${normalizedProps.invalid}"
-              type="${ifDefined(type)}"
-              class="${classes}"
-              max="${max}"
-              min="${min}"
-              ?readonly="${ifDefined(readonly)}"
-              step="${step}"
-              .value="${value}"
-              @change="${handleChange}"
-              @input="${handleInput}" />
-            ${normalizedProps.invalid ? html`${invalidIcon}` : null}
-            ${normalizedProps.warn ? html`${warnIcon}` : null}
-          `
-        : null}
+      <input
+        ?disabled="${disabled}"
+        ?data-invalid="${normalizedProps.invalid}"
+        type="${hideTextInput ? 'hidden' : ifDefined(type)}"
+        class="${classes}"
+        max="${max}"
+        min="${min}"
+        ?readonly="${ifDefined(readonly)}"
+        step="${step}"
+        .value="${value}"
+        @change="${handleChange}"
+        @input="${handleInput}" />
+      ${!hideTextInput && normalizedProps.invalid ? html`${invalidIcon}` : null}
+      ${!hideTextInput && normalizedProps.warn ? html`${warnIcon}` : null}
     `;
   }
 

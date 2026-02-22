@@ -149,6 +149,11 @@ describe('TimePicker', () => {
       render(<TimePicker id="time-picker" labelText="🐳" />);
       expect(screen.getByLabelText('🐳')).toBeInTheDocument();
     });
+
+    it('renders labelText with value 0', () => {
+      render(<TimePicker id="time-picker" labelText={0} />);
+      expect(screen.getByLabelText('0')).toBeInTheDocument();
+    });
   });
 
   describe('events', () => {

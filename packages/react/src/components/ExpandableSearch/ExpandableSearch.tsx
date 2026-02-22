@@ -1,32 +1,36 @@
 /**
- * Copyright IBM Corp. 2021, 2025
+ * Copyright IBM Corp. 2021, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, forwardRef } from 'react';
 import classnames from 'classnames';
 import Search, { type SearchProps } from '../Search';
 import { usePrefix } from '../../internal/usePrefix';
 import { composeEventHandlers } from '../../tools/events';
 import { match, keys } from '../../internal/keyboard';
 import { mergeRefs } from '../../tools/mergeRefs';
+import { isSearchValuePresent } from '../Search/utils';
 
-const ExpandableSearch = React.forwardRef(function ExpandableSearch(
-  {
+const frFn = forwardRef<HTMLInputElement, SearchProps>;
+
+const ExpandableSearch = frFn((props, forwardedRef) => {
+  const {
     onBlur,
     onChange,
     onExpand,
     onKeyDown,
     defaultValue,
     isExpanded,
-    ...props
-  }: SearchProps,
-  forwardedRef: React.Ref<HTMLInputElement>
-) {
+    ...rest
+  } = props;
+
   const [expanded, setExpanded] = useState(isExpanded || false);
-  const [hasContent, setHasContent] = useState(defaultValue ? true : false);
+  const [hasContent, setHasContent] = useState(
+    isSearchValuePresent(defaultValue)
+  );
   const searchRef = useRef<HTMLInputElement>(null);
   const prefix = usePrefix();
 
@@ -69,12 +73,12 @@ const ExpandableSearch = React.forwardRef(function ExpandableSearch(
     {
       [`${prefix}--search--expanded`]: expanded,
     },
-    props.className
+    rest.className
   );
 
   return (
     <Search
-      {...props}
+      {...rest}
       defaultValue={defaultValue}
       isExpanded={expanded}
       ref={mergeRefs(searchRef, forwardedRef)}

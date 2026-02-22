@@ -6,11 +6,9 @@
  */
 
 import path from 'path';
-import { promisify } from 'util';
 import * as sass from 'sass';
 import { createFilter } from '@rollup/pluginutils';
 
-const renderSass = promisify(sass.render);
 const noop = (s) => s;
 
 /**
@@ -70,10 +68,11 @@ export default function LitSCSS({
         );
        ${contents}`;
 
-      const { css } = await renderSass({
-        ...options,
-        file: id,
-        data: finalContent,
+      const { includePaths, ...sassOptions } = options;
+      const { css } = sass.compileString(finalContent, {
+        ...sassOptions,
+        url: `file://${path.resolve(id)}`,
+        loadPaths: includePaths || [],
       });
 
       return {

@@ -1,11 +1,11 @@
 /**
- * Copyright IBM Corp. 2023, 2025
+ * Copyright IBM Corp. 2023, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useLayoutEffect, useRef } from 'react';
+import React, { useRef } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { ChevronDown } from '@carbon/icons-react';
@@ -15,6 +15,7 @@ import { Menu } from '../Menu';
 import { useAttachedMenu } from '../../internal/useAttachedMenu';
 import { useId } from '../../internal/useId';
 import { usePrefix } from '../../internal/usePrefix';
+import useIsomorphicEffect from '../../internal/useIsomorphicEffect';
 import {
   useFloating,
   flip,
@@ -151,7 +152,7 @@ const ComboButton = React.forwardRef<HTMLDivElement, ComboButtonProps>(
       handleClose,
     } = useAttachedMenu(containerRef);
 
-    useLayoutEffect(() => {
+    useIsomorphicEffect(() => {
       const updatedFloatingStyles = {
         ...floatingStyles,
         visibility: middlewareData.hide?.referenceHidden ? 'hidden' : 'visible',

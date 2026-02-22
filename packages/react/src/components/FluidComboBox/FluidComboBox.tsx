@@ -1,12 +1,12 @@
 /**
- * Copyright IBM Corp. 2022, 2025
+ * Copyright IBM Corp. 2022, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
 import PropTypes from 'prop-types';
-import React, { ComponentType, ForwardedRef, type ComponentProps } from 'react';
+import React, { type ComponentProps, type ForwardedRef } from 'react';
 import classnames from 'classnames';
 import ComboBox from '../ComboBox';
 import { usePrefix } from '../../internal/usePrefix';
@@ -63,12 +63,6 @@ export interface FluidComboBoxProps<ItemType>
    * Specify if the `FluidComboBox` should render its menu items in condensed mode
    */
   isCondensed?: boolean;
-
-  /**
-   * Function to render items as custom components instead of strings.
-   * Defaults to null and is overridden by a getter
-   */
-  itemToElement?: ComponentType<ItemType> | null;
 
   /**
    * Helper function passed to downshift that allows the library to render a
@@ -181,8 +175,7 @@ FluidComboBox.propTypes = {
   isCondensed: PropTypes.bool,
 
   /**
-   * Function to render items as custom components instead of strings.
-   * Defaults to null and is overridden by a getter
+   * Renders an item as a custom React node instead of a string.
    */
   itemToElement: PropTypes.func,
 

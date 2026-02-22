@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2022
+ * Copyright IBM Corp. 2022, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -10,7 +10,7 @@ import Select from '../Select';
 import SelectItem from '../../SelectItem';
 import SelectSkeleton from '../../Select/Select.Skeleton';
 import userEvent from '@testing-library/user-event';
-import { render, screen } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 import { AILabel } from '../../AILabel';
 
 const prefix = 'cds';
@@ -156,20 +156,41 @@ describe('Select', () => {
       expect(screen.getByRole('combobox')).toBeDisabled();
     });
 
-    it('should respect helperText prop', () => {
-      render(
-        <Select
-          id="select"
-          labelText="Select"
-          helperText="This is some helper text"
-        />
-      );
+    it('should not render helper text when helperText is not provided', () => {
+      const { container } = render(<Select id="select" labelText="Select" />);
 
-      expect(screen.getByText('This is some helper text')).toBeInTheDocument();
-      expect(screen.getByText('This is some helper text')).toHaveClass(
-        `${prefix}--form__helper-text`
+      expect(
+        container.querySelector(`.${prefix}--form__helper-text`)
+      ).toBeNull();
+      expect(screen.getByRole('combobox')).not.toHaveAttribute(
+        'aria-describedby'
       );
     });
+
+    it.each([
+      { label: 'string', value: 'Some helper text', shouldRender: true },
+      { label: 'true', value: true, shouldRender: true },
+      { label: 'false', value: false, shouldRender: true },
+      { label: 'component', value: <span>hmm</span>, shouldRender: true },
+      { label: 'empty string', value: '', shouldRender: true },
+      { label: 'null', value: null, shouldRender: false },
+      { label: 'undefined', value: undefined, shouldRender: false },
+      { label: 'zero', value: '0', shouldRender: true },
+    ])(
+      'should render helper wrapper based on helperText value: $label',
+      ({ label, value, shouldRender }) => {
+        const { container } = render(
+          <Select id={`select-${label}`} labelText={label} helperText={value} />
+        );
+        const helper = container.querySelector(`.${prefix}--form__helper-text`);
+
+        if (shouldRender) {
+          expect(helper).toBeInTheDocument();
+        } else {
+          expect(helper).toBeNull();
+        }
+      }
+    );
 
     it('should respect hideLabel prop', () => {
       render(<Select id="select" labelText="Select" hideLabel />);
@@ -244,7 +265,7 @@ describe('Select', () => {
       expect(selectWrapper).not.toBeInTheDocument();
     });
 
-    it.skip('should respect readOnly prop', async () => {
+    it('should respect readOnly prop', async () => {
       const onChange = jest.fn();
       const onClick = jest.fn();
 
@@ -265,19 +286,12 @@ describe('Select', () => {
       const theSelect = screen.getByRole('combobox');
       await userEvent.click(theSelect);
       expect(onClick).toHaveBeenCalledTimes(1);
+      expect(theSelect).toHaveAttribute('aria-readonly', 'true');
 
-      //------------------------------------------------------------------------
-      // Testing library - userEvent.type() does not work on <select> elements
-      // and using selectOption causes the value to change.
-      // Ideally we'd use userEvent.type(theSelect, '{arrowdown}{enter}') to test the readOnly prop
-      // or have a way to click on a slotted option.
-      // https://github.com/testing-library/user-event/issues/786
-      //------------------------------------------------------------------------
-      await userEvent.selectOptions(theSelect, 'option-1');
-
-      // Change events should *not* fire
-      expect(screen.getByText('Option 1').selected).toBe(false);
-
+      // Access keys that would open or select options should be blocked.
+      expect(fireEvent.keyDown(theSelect, { key: 'ArrowDown' })).toBe(false);
+      expect(fireEvent.keyDown(theSelect, { key: 'ArrowUp' })).toBe(false);
+      expect(fireEvent.keyDown(theSelect, { key: ' ' })).toBe(false);
       expect(onChange).toHaveBeenCalledTimes(0);
     });
 
@@ -336,6 +350,92 @@ describe('Select', () => {
       expect(container.firstChild.firstChild).toHaveClass(
         `${prefix}--select--decorator`
       );
+    });
+
+    it('should not display invalid message if disabled', () => {
+      render(
+        <Select
+          id="select"
+          labelText="Select"
+          disabled
+          invalid
+          invalidText="This is an error message"
+        />
+      );
+
+      expect(
+        screen.queryByText('This is an error message')
+      ).not.toBeInTheDocument();
+    });
+
+    it('should not display invalid message if readOnly', () => {
+      render(
+        <Select
+          id="select"
+          labelText="Select"
+          readOnly
+          invalid
+          invalidText="This is an error message"
+        />
+      );
+
+      expect(
+        screen.queryByText('This is an error message')
+      ).not.toBeInTheDocument();
+    });
+
+    it('should not display warning message if disabled', () => {
+      render(
+        <Select
+          id="select"
+          labelText="Select"
+          disabled
+          warn
+          warnText="This is a warning message"
+        />
+      );
+
+      expect(
+        screen.queryByText('This is a warning message')
+      ).not.toBeInTheDocument();
+    });
+
+    it('should not display warning message if readOnly', () => {
+      render(
+        <Select
+          id="select"
+          labelText="Select"
+          readOnly
+          warn
+          warnText="This is a warning message"
+        />
+      );
+
+      expect(
+        screen.queryByText('This is a warning message')
+      ).not.toBeInTheDocument();
+    });
+
+    it('should not display warning styles if disabled', () => {
+      const { container } = render(
+        <Select id="select" labelText="Select" disabled warn />
+      );
+
+      // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
+      const selectWrapper = container.querySelector(`.${prefix}--select`);
+
+      expect(selectWrapper).not.toHaveClass(`${prefix}--select--warning`);
+    });
+
+    it('should not display warning styles if readOnly', () => {
+      const { container } = render(
+        <Select id="select" labelText="Select" readOnly warn />
+      );
+
+      // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
+      const selectWrapper = container.querySelector(`.${prefix}--select`);
+
+      expect(selectWrapper).not.toHaveClass(`${prefix}--select--warning`);
     });
   });
 
@@ -457,6 +557,18 @@ describe('Select', () => {
         </main>
       );
       await expect(container).toHaveNoACViolations('Select');
+    });
+
+    it('should not set aria-invalid if disabled', () => {
+      render(<Select id="select" labelText="Select" disabled invalid />);
+
+      expect(screen.getByRole('combobox')).not.toHaveAttribute('aria-invalid');
+    });
+
+    it('should not set aria-invalid if readOnly', () => {
+      render(<Select id="select" labelText="Select" readOnly invalid />);
+
+      expect(screen.getByRole('combobox')).not.toHaveAttribute('aria-invalid');
     });
   });
 });

@@ -5,6 +5,10 @@
 // LICENSE file in the root directory of this source tree.
 //
 
+@use '@carbon/styles/scss/config' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/utilities/convert' as *;
+
 //
 // "xs" table size variant
 //

@@ -119,12 +119,23 @@ export const Dismissible = {
         defaultValue: { summary: 'bottom' },
       },
     },
+    dismissTooltipLabel: {
+      control: 'text',
+      description: 'Text to show on clear filters',
+    },
   },
   args: {
     ...defaultArgs,
     dismissTooltipAlignment: 'bottom',
+    dismissTooltipLabel: 'Dismiss',
   },
-  render: ({ disabled, size, text, dismissTooltipAlignment }) => {
+  render: ({
+    disabled,
+    size,
+    text,
+    dismissTooltipAlignment,
+    dismissTooltipLabel,
+  }) => {
     const tags = [
       {
         type: 'red',
@@ -194,6 +205,7 @@ export const Dismissible = {
             tag-title="${tag.tagTitle}"
             type="${tag.type}"
             size="${size}"
+            dismiss-tooltip-label="${dismissTooltipLabel}"
             dismiss-tooltip-alignment="${dismissTooltipAlignment}"
             >${iconLoader(Asleep16, { slot: 'icon' })}
           </cds-dismissible-tag>`
@@ -413,6 +425,10 @@ export const ReadOnly = {
       control: 'text',
       description: 'Text to show on clear filters',
     },
+    text: {
+      control: 'text',
+      description: 'Provide text to be rendered inside of a the tag.',
+    },
     filter: {
       control: 'boolean',
       description: 'Determine if `Tag` is a filter/chip',
@@ -422,15 +438,16 @@ export const ReadOnly = {
     ...defaultArgs,
     filter: false,
     title: 'Clear filters',
+    text: 'Tag content',
   },
-  render: ({ filter, title, size, disabled }) =>
+  render: ({ filter, title, size, disabled, text }) =>
     html` <cds-tag
         type="red"
         ?filter="${filter}"
         title="${title}"
         size="${size}"
         ?disabled="${disabled}">
-        Tag content with a long text description
+        ${text}
       </cds-tag>
       ${types
         .slice(1)
@@ -442,39 +459,64 @@ export const ReadOnly = {
               title="${title}"
               size="${size}"
               ?disabled="${disabled}"
-              >Tag content</cds-tag
+              >${text}</cds-tag
             >`
         )}`,
 };
 
 export const WithAILabel = {
-  render: () =>
-    html`<cds-tag type="red"
-        >Tag
+  argTypes: {
+    ...controls,
+    dismissTooltipLabel: {
+      control: 'text',
+      description: 'Text to show on clear filters',
+    },
+    text: {
+      control: 'text',
+      description: 'Provide text to be rendered inside of a the tag.',
+    },
+  },
+  args: {
+    ...defaultArgs,
+    text: 'Tag content',
+    dismissTooltipLabel: 'Dismiss',
+  },
+  render: ({ disabled, size, text, dismissTooltipLabel }) =>
+    html`<cds-tag type="red" ?disabled="${disabled}" size="${size}"
+        >${text}
         <cds-ai-label alignment="bottom-left">
           ${content}${actions}</cds-ai-label
         >
       </cds-tag>
 
-      <cds-tag filter type="purple">
-        Tag
+      <cds-dismissible-tag
+        type="purple"
+        ?disabled="${disabled}"
+        size="${size}"
+        dismiss-tooltip-label="${dismissTooltipLabel}"
+        text="${text}">
         <cds-ai-label alignment="bottom-left">
           ${content}${actions}</cds-ai-label
         >
-      </cds-tag>
+      </cds-dismissible-tag>
 
-      <cds-tag type="blue">
-        ${iconLoader(Asleep16, { slot: 'icon' })} Tag
+      <cds-tag type="blue" ?disabled="${disabled}" size="${size}">
+        ${iconLoader(Asleep16, { slot: 'icon' })} ${text}
         <cds-ai-label alignment="bottom-left">
           ${content}${actions}</cds-ai-label
         >
       </cds-tag>
-      <cds-tag filter type="green">
-        ${iconLoader(Asleep16, { slot: 'icon' })} Tag
+      <cds-dismissible-tag
+        type="green"
+        ?disabled="${disabled}"
+        size="${size}"
+        dismiss-tooltip-label="${dismissTooltipLabel}"
+        text="${text}">
+        ${iconLoader(Asleep16, { slot: 'icon' })}
         <cds-ai-label alignment="bottom-left">
           ${content}${actions}</cds-ai-label
         >
-      </cds-tag>`,
+      </cds-dismissible-tag>`,
 };
 
 const meta = {

@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2025
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -8,9 +8,9 @@
 import PropTypes from 'prop-types';
 import React, {
   cloneElement,
-  useLayoutEffect,
   useRef,
   useState,
+  type ElementType,
   type ReactNode,
 } from 'react';
 import classNames from 'classnames';
@@ -28,6 +28,7 @@ import { DismissibleTagBaseProps } from './DismissibleTag';
 import { useMergedRefs } from '../../internal/useMergedRefs';
 import { AILabel } from '../AILabel';
 import { isComponentElement } from '../../internal';
+import useIsomorphicEffect from '../../internal/useIsomorphicEffect';
 
 export const TYPES = {
   red: 'Red',
@@ -104,7 +105,7 @@ export interface TagBaseProps {
   slug?: ReactNode;
 
   /**
-   * @deprecated The `title` prop has been deprecated and will be removed in the next major version. Use DismissibleTag instead.
+   * @deprecated The `title` prop has been deprecated and will be removed in the next major version. Use `children` instead.
    */
   title?: string;
 
@@ -173,7 +174,7 @@ const TagBase = React.forwardRef<
     const tagId = id || `tag-${useId()}`;
     const [isEllipsisApplied, setIsEllipsisApplied] = useState(false);
 
-    useLayoutEffect(() => {
+    useIsomorphicEffect(() => {
       const newElement = tagRef.current?.getElementsByClassName(
         `${prefix}--tag__label`
       )[0];
@@ -217,7 +218,7 @@ const TagBase = React.forwardRef<
         : null;
 
     if (filter) {
-      const ComponentTag = (BaseComponent as React.ElementType) ?? 'div';
+      const ComponentTag: ElementType = BaseComponent ?? 'div';
       return (
         <ComponentTag className={tagClasses} id={tagId} {...other}>
           {CustomIconElement && size !== 'sm' ? (
@@ -320,7 +321,9 @@ const TagBase = React.forwardRef<
   }
 );
 const Tag = TagBase as TagComponent;
-(Tag as React.FC).propTypes = {
+
+// @ts-expect-error - `propTypes` isn't typed.
+Tag.propTypes = {
   /**
    * Provide an alternative tag or component to use instead of the default
    * wrapping element

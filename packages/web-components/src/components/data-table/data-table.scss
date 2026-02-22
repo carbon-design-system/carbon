@@ -16,17 +16,14 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/utilities/convert' as *;
 @use '@carbon/styles/scss/utilities/ai-gradient' as *;
 @use '@carbon/styles/scss/components/checkbox';
-
 @use '@carbon/styles/scss/components/data-table' as *;
 @use '@carbon/styles/scss/components/link' as *;
-
 @use '@carbon/styles/scss/components/data-table/expandable';
 @use '@carbon/styles/scss/components/data-table/skeleton';
 
-// TODO: deprecate @import
-@import 'table-action';
-@import 'table-core';
-@import 'table-expandable';
-@import 'table-sizes';
-@import 'table-selection';
-@import 'table-sort';
+@use 'table-action';
+@use 'table-core';
+@use 'table-expandable';
+@use 'table-sizes';
+@use 'table-selection';
+@use 'table-sort';

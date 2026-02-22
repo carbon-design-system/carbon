@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2025
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -355,6 +355,24 @@ describe('ComboBox', () => {
     });
   });
 
+  it('should call onChange when clearing a committed custom value', async () => {
+    render(<ComboBox {...mockProps} allowCustomValue />);
+
+    const input = findInputNode();
+
+    await userEvent.type(input, 'Apple');
+    await userEvent.keyboard('[Enter]');
+    mockProps.onChange.mockClear();
+
+    await userEvent.clear(input);
+
+    expect(mockProps.onChange).toHaveBeenCalledTimes(1);
+    expect(mockProps.onChange).toHaveBeenCalledWith({
+      inputValue: '',
+      selectedItem: null,
+    });
+  });
+
   it('should respect slug prop', async () => {
     const spy = jest.spyOn(console, 'warn').mockImplementation(() => {});
     const { container } = render(
@@ -672,6 +690,28 @@ describe('ComboBox', () => {
       expect(screen.getByTestId('selected-item').textContent).toBe('none');
       expect(findInputNode()).toHaveDisplayValue('');
     });
+    it('should sync the menu active item when `selectedItem` updates externally', async () => {
+      render(<ControlledComboBox />);
+      await openMenu();
+      let menuItems = screen.getAllByRole('option');
+      expect(menuItems[0]).toHaveClass(
+        `${prefix}--list-box__menu-item--active`
+      );
+
+      await userEvent.keyboard('{Escape}');
+      await userEvent.click(
+        screen.getByRole('button', { name: 'Choose item 3' })
+      );
+
+      await openMenu();
+      menuItems = screen.getAllByRole('option');
+      expect(menuItems[3]).toHaveClass(
+        `${prefix}--list-box__menu-item--active`
+      );
+      expect(menuItems[0]).not.toHaveClass(
+        `${prefix}--list-box__menu-item--active`
+      );
+    });
     it('should update and call `onChange` once when selection is updated externally', async () => {
       const { rerender } = render(
         <ComboBox {...mockProps} selectedItem={mockProps.items[0]} />
@@ -781,6 +821,78 @@ describe('ComboBox', () => {
       expect(findListBoxNode()).not.toHaveClass(
         `${prefix}--list-box--expanded`
       );
+    });
+  });
+
+  describe('invalid and warn states', () => {
+    it('should not display invalid state when readonly', async () => {
+      render(
+        <ComboBox {...mockProps} invalid invalidText="Invalid text" readOnly />
+      );
+      await waitForPosition();
+
+      // Check that the invalid class is not applied
+      expect(findListBoxNode()).not.toHaveClass(`${prefix}--list-box--invalid`);
+
+      // Check that the invalid text is not displayed
+      expect(screen.queryByText('Invalid text')).not.toBeInTheDocument();
+    });
+
+    it('should not display invalid state when disabled', async () => {
+      render(
+        <ComboBox {...mockProps} invalid invalidText="Invalid text" disabled />
+      );
+      await waitForPosition();
+
+      // Check that the invalid class is not applied
+      expect(findListBoxNode()).not.toHaveClass(`${prefix}--list-box--invalid`);
+
+      // Check that the invalid text is not displayed
+      expect(screen.queryByText('Invalid text')).not.toBeInTheDocument();
+    });
+
+    it('should not display warn state when readonly', async () => {
+      render(<ComboBox {...mockProps} warn warnText="Warning text" readOnly />);
+      await waitForPosition();
+
+      // Check that the warn class is not applied
+      expect(findListBoxNode()).not.toHaveClass(`${prefix}--list-box--warning`);
+
+      // Check that the warn text is not displayed
+      expect(screen.queryByText('Warning text')).not.toBeInTheDocument();
+    });
+
+    it('should not display warn state when disabled', async () => {
+      render(<ComboBox {...mockProps} warn warnText="Warning text" disabled />);
+      await waitForPosition();
+
+      // Check that the warn class is not applied
+      expect(findListBoxNode()).not.toHaveClass(`${prefix}--list-box--warning`);
+
+      // Check that the warn text is not displayed
+      expect(screen.queryByText('Warning text')).not.toBeInTheDocument();
+    });
+
+    it('should display invalid state when not readonly or disabled', async () => {
+      render(<ComboBox {...mockProps} invalid invalidText="Invalid text" />);
+      await waitForPosition();
+
+      // Check that the invalid class is applied
+      expect(findListBoxNode()).toHaveClass(`${prefix}--list-box--invalid`);
+
+      // Check that the invalid text is displayed
+      expect(screen.getByText('Invalid text')).toBeInTheDocument();
+    });
+
+    it('should display warn state when not readonly or disabled', async () => {
+      render(<ComboBox {...mockProps} warn warnText="Warning text" />);
+      await waitForPosition();
+
+      // Check that the warn class is applied
+      expect(findListBoxNode()).toHaveClass(`${prefix}--list-box--warning`);
+
+      // Check that the warn text is displayed
+      expect(screen.getByText('Warning text')).toBeInTheDocument();
     });
   });
 

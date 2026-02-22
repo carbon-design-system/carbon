@@ -1,5 +1,6 @@
 fixes:
   - 'es/components/::packages/web-components/src/components/'
+  - 'src/components/::packages/web-components/src/components/'
   - '../feature-flags/es/::packages/feature-flags/es/'
 coverage:
   status:

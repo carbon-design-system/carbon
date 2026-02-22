@@ -264,9 +264,9 @@ class CDSDatePickerInput extends FocusMixin(LitElement) {
       'slot-text': string;
       icon: ReturnType<typeof iconLoader>;
     } = {
-      disabled: !readonly && disabled,
-      invalid: !readonly && invalid,
-      warn: !readonly && !invalid && warn,
+      disabled: disabled && !readonly,
+      invalid: invalid && !readonly && !disabled,
+      warn: warn && !readonly && !disabled && !invalid,
       'slot-name': '',
       'slot-text': '',
       icon: null,
@@ -317,11 +317,11 @@ class CDSDatePickerInput extends FocusMixin(LitElement) {
             id="input"
             type="${type}"
             class="${inputClasses}"
-            ?disabled="${disabled}"
+            ?disabled="${normalizedProps.disabled}"
             pattern="${pattern}"
             placeholder="${ifDefined(placeholder)}"
             .value="${ifDefined(value)}"
-            ?data-invalid="${invalid}"
+            ?data-invalid="${normalizedProps.invalid}"
             @input="${handleInput}"
             ?readonly="${readonly}" />
           ${normalizedProps.icon || this._renderIcon()}

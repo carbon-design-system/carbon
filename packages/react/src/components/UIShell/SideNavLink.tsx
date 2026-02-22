@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2025
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -10,7 +10,6 @@ import PropTypes, { WeakValidationMap } from 'prop-types';
 import React, {
   ComponentType,
   ElementType,
-  ForwardedRef,
   JSX,
   ReactNode,
   forwardRef,
@@ -79,8 +78,10 @@ export interface SideNavLinkComponent {
 // First define a non-generic base component to work with forwardRef
 type SideNavLinkPropsWithoutRef = Omit<SideNavLinkProps<'a'>, 'ref'>;
 
-const SideNavLinkBase = (
-  {
+const frFn = forwardRef<HTMLAnchorElement, SideNavLinkPropsWithoutRef>;
+
+const SideNavLink = frFn((props, ref) => {
+  const {
     children,
     className: customClassName,
     renderIcon: IconElement,
@@ -89,9 +90,7 @@ const SideNavLinkBase = (
     large = false,
     tabIndex,
     ...rest
-  }: SideNavLinkPropsWithoutRef,
-  ref: ForwardedRef<HTMLAnchorElement>
-) => {
+  } = props;
   const isRail = useContext(SideNavContext);
 
   const prefix = usePrefix();
@@ -123,12 +122,8 @@ const SideNavLinkBase = (
       </Link>
     </SideNavItem>
   );
-};
-
-// Use forwardRef with the non-generic function and cast to the generic component type
-const SideNavLink = forwardRef(
-  SideNavLinkBase
-) as unknown as SideNavLinkComponent;
+  // Cast preserves the generic call signature for consumers after forwardRef.
+}) as SideNavLinkComponent;
 
 SideNavLink.displayName = 'SideNavLink';
 SideNavLink.propTypes = {

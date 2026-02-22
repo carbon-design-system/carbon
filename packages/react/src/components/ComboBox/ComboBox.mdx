@@ -173,11 +173,11 @@ const items = ['Option 1', 'Option 2', 'Option 3']
 You can use `selectedItem` for a fully controlled component.
 
 <Canvas
-  of={ComboBoxStories._fullyControlled}
+  of={ComboBoxStories.Controlled}
   additionalActions={[
     {
       title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(ComboBoxStories._fullyControlled),
+      onClick: () => stackblitzPrefillConfig(ComboBoxStories.Controlled),
     },
   ]}
 />
@@ -211,8 +211,8 @@ return (
       items={options}
       selectedItem={value}
       itemToString={(item) => (item ? item.text : '')}
-      titleText="Fully Controlled ComboBox title"
-      helperText="Combobox helper text"
+      titleText="Label"
+      helperText="Helper text"
     />
     <div
       style={{
@@ -283,8 +283,8 @@ prop.
 <ComboBox
   id="carbon-combobox"
   items={['Apple', 'Orange', 'Banana']}
-  titleText="ComboBox title"
-  helperText="Combobox helper text"
+  titleText="Label"
+  helperText="Helper text"
   shouldFilterItem={(menu) =>
     menu?.item?.toLowerCase().includes(menu?.inputValue?.toLowerCase())
   }
@@ -297,8 +297,8 @@ const filterItems = (menu) => {
 };
 
 <Combobox
-  titleText="ComboBox title"
-  helperText="Combobox helper text"
+  titleText="Label"
+  helperText="Helper text"
   items={['Apple', 'Orange', 'Banana']}
   shouldFilterItem={filterItems}
   onChange={() => {}}

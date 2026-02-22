@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2023
+ * Copyright IBM Corp. 2023, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -38,14 +38,6 @@ describe('DataTableSkeleton', () => {
       render(<DataTableSkeleton columnCount={3} />);
 
       expect(screen.getAllByRole('columnheader').length).toEqual(3);
-    });
-
-    it('should respect the compact prop', () => {
-      render(<DataTableSkeleton compact />);
-
-      expect(screen.getByRole('table')).toHaveClass(
-        `${prefix}--data-table--compact`
-      );
     });
 
     it('should respect the headers prop', () => {
@@ -92,6 +84,22 @@ describe('DataTableSkeleton', () => {
       // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
       const toolbar = container.querySelector(`.${prefix}--table-toolbar`);
       expect(toolbar).not.toBeInTheDocument();
+    });
+
+    it('should apply the default size when none is provided', () => {
+      render(<DataTableSkeleton />);
+
+      expect(screen.getByRole('table')).toHaveClass(
+        `${prefix}--data-table--lg`
+      );
+    });
+
+    it('should respect the size prop', () => {
+      render(<DataTableSkeleton size="xs" />);
+
+      expect(screen.getByRole('table')).toHaveClass(
+        `${prefix}--data-table--xs`
+      );
     });
 
     it('should respect the zebra prop', () => {

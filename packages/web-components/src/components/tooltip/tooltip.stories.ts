@@ -14,30 +14,16 @@ import './index';
 import { POPOVER_ALIGNMENT } from '../popover/defs';
 import { iconLoader } from '../../globals/internal/icon-loader';
 import styles from './tooltip-story.scss?lit';
-import Information16 from '@carbon/icons/es/information/16.js';
-
-const tooltipAlignments = {
-  [`top`]: POPOVER_ALIGNMENT.TOP,
-  [`top-left`]: POPOVER_ALIGNMENT.TOP_LEFT,
-  [`top-right`]: POPOVER_ALIGNMENT.TOP_RIGHT,
-  [`bottom`]: POPOVER_ALIGNMENT.BOTTOM,
-  [`bottom-left`]: POPOVER_ALIGNMENT.BOTTOM_LEFT,
-  [`bottom-right`]: POPOVER_ALIGNMENT.BOTTOM_RIGHT,
-  [`left`]: POPOVER_ALIGNMENT.LEFT,
-  [`left-bottom`]: POPOVER_ALIGNMENT.LEFT_BOTTOM,
-  [`left-top`]: POPOVER_ALIGNMENT.LEFT_TOP,
-  [`right`]: POPOVER_ALIGNMENT.RIGHT,
-  [`right-bottom`]: POPOVER_ALIGNMENT.RIGHT_BOTTOM,
-  [`right-top`]: POPOVER_ALIGNMENT.RIGHT_TOP,
-};
+import OverflowMenuVertical16 from '@carbon/icons/es/overflow-menu--vertical/16.js';
+import '../button';
 
 const defaultArgs = {
-  align: POPOVER_ALIGNMENT.BOTTOM,
+  align: POPOVER_ALIGNMENT.TOP,
   closeOnActivation: false,
   defaultOpen: false,
+  dropShadow: false,
   enterDelayMs: 100,
-  label:
-    'Occassionally, services are updated in a specified time window to ensure no down time for customers.',
+  label: 'Options',
   leaveDelayMs: 300,
 };
 
@@ -45,7 +31,20 @@ const controls = {
   align: {
     control: 'select',
     description: 'Specify how the trigger should align with the tooltip',
-    options: tooltipAlignments,
+    options: [
+      POPOVER_ALIGNMENT.TOP,
+      POPOVER_ALIGNMENT.TOP_START,
+      POPOVER_ALIGNMENT.TOP_END,
+      POPOVER_ALIGNMENT.BOTTOM,
+      POPOVER_ALIGNMENT.BOTTOM_START,
+      POPOVER_ALIGNMENT.BOTTOM_END,
+      POPOVER_ALIGNMENT.LEFT,
+      POPOVER_ALIGNMENT.LEFT_END,
+      POPOVER_ALIGNMENT.LEFT_START,
+      POPOVER_ALIGNMENT.RIGHT,
+      POPOVER_ALIGNMENT.RIGHT_END,
+      POPOVER_ALIGNMENT.RIGHT_START,
+    ],
   },
   closeOnActivation: {
     control: 'boolean',
@@ -56,6 +55,10 @@ const controls = {
     control: 'boolean',
     description:
       'Specify whether the tooltip should be open when it first renders',
+  },
+  dropShadow: {
+    control: 'boolean',
+    description: 'Specify whether a drop shadow should be rendered',
   },
   enterDelayMs: {
     control: 'number',
@@ -80,6 +83,7 @@ export const Default = {
     align,
     closeOnActivation,
     defaultOpen,
+    dropShadow,
     enterDelayMs,
     label,
     leaveDelayMs,
@@ -87,6 +91,7 @@ export const Default = {
     <cds-tooltip
       ?defaultOpen=${defaultOpen}
       align=${align}
+      .dropShadow=${dropShadow}
       enter-delay-ms=${enterDelayMs}
       leave-delay-ms=${leaveDelayMs}
       ?closeOnActivation=${closeOnActivation}>
@@ -94,7 +99,7 @@ export const Default = {
         class="sb-tooltip-trigger"
         role="button"
         aria-labelledby="content">
-        ${iconLoader(Information16)}
+        ${iconLoader(OverflowMenuVertical16)}
       </button>
       <cds-tooltip-content id="content"> ${label} </cds-tooltip-content>
     </cds-tooltip>
@@ -102,33 +107,115 @@ export const Default = {
 };
 
 export const Alignment = {
-  render: () => html`
-    <cds-tooltip align="bottom-left">
-      <button
-        class="sb-tooltip-trigger"
-        role="button"
-        aria-labelledby="content">
-        ${iconLoader(Information16)}
-      </button>
-      <cds-tooltip-content id="content">
-        Tooltip alignment
-      </cds-tooltip-content>
+  argTypes: controls,
+  args: {
+    ...defaultArgs,
+    align: POPOVER_ALIGNMENT.BOTTOM_START,
+    label: 'Tooltip alignment',
+  },
+  render: ({
+    align,
+    closeOnActivation,
+    defaultOpen,
+    dropShadow,
+    label,
+    enterDelayMs,
+    leaveDelayMs,
+  }) => html`
+    <cds-tooltip
+      ?defaultOpen=${defaultOpen}
+      align=${align}
+      .dropShadow=${dropShadow}
+      enter-delay-ms=${enterDelayMs}
+      leave-delay-ms=${leaveDelayMs}
+      ?closeOnActivation=${closeOnActivation}>
+      <cds-button role="button" aria-labelledby="content">
+        This button has a tooltip
+      </cds-button>
+      <cds-tooltip-content id="content">${label}</cds-tooltip-content>
     </cds-tooltip>
   `,
 };
 
 export const Duration = {
-  render: () => html`
-    <cds-tooltip enter-delay-ms=${0} leave-delay-ms=${300}>
-      <button
-        class="sb-tooltip-trigger"
-        role="button"
-        aria-labelledby="content">
-        ${iconLoader(Information16)}
-      </button>
-      <cds-tooltip-content id="content"> Label one </cds-tooltip-content>
+  argTypes: controls,
+  args: {
+    ...defaultArgs,
+    enterDelayMs: 0,
+    leaveDelayMs: 300,
+    label: 'Label one',
+  },
+  render: ({
+    align,
+    closeOnActivation,
+    defaultOpen,
+    dropShadow,
+    label,
+    enterDelayMs,
+    leaveDelayMs,
+  }) => html`
+    <cds-tooltip
+      ?defaultOpen=${defaultOpen}
+      align=${align}
+      .dropShadow=${dropShadow}
+      enter-delay-ms=${enterDelayMs}
+      leave-delay-ms=${leaveDelayMs}
+      ?closeOnActivation=${closeOnActivation}>
+      <cds-button role="button" aria-labelledby="content">
+        This button has a tooltip
+      </cds-button>
+      <cds-tooltip-content id="content">${label}</cds-tooltip-content>
     </cds-tooltip>
   `,
+};
+
+export const ExperimentalAutoAlign = {
+  argTypes: controls,
+  parameters: {
+    controls: {
+      exclude: ['align'],
+    },
+  },
+  args: {
+    ...defaultArgs,
+    label:
+      'Scroll the container up, down, left or right to observe how the tooltip will automatically change its position in attempt to stay within the viewport. This works on initial render in addition to on scroll.',
+  },
+  render: ({
+    closeOnActivation,
+    defaultOpen,
+    dropShadow,
+    label,
+    enterDelayMs,
+    leaveDelayMs,
+  }) => {
+    requestAnimationFrame(() => {
+      document.querySelector('cds-tooltip')?.scrollIntoView({
+        block: 'center',
+        inline: 'center',
+      });
+    });
+    return html`
+      <div style="width: 5000px; height: 5000px;">
+        <div
+          style="position: absolute; top: 2500px;
+          left: 2500px; padding-right: 2500px;">
+          <cds-tooltip
+            ?defaultOpen=${defaultOpen}
+            .dropShadow=${dropShadow}
+            autoalign
+            enter-delay-ms=${enterDelayMs}
+            leave-delay-ms=${leaveDelayMs}
+            ?closeOnActivation=${closeOnActivation}>
+            <cds-button role="button" aria-labelledby="content">
+              This button has a tooltip
+            </cds-button>
+            <cds-tooltip-content id="content">${label}</cds-tooltip-content>
+          </cds-tooltip>
+        </div>
+      </div>
+    `;
+  },
 };
 
 const meta = {

@@ -10,6 +10,7 @@ import {
   CarouselResponse,
   CarouselStackHistory,
   Config,
+  CarouselHTMLElement,
 } from './types';
 import { registerSwipeEvents } from './swipeEvents';
 
@@ -26,12 +27,16 @@ export const initCarousel = (
   const prefix = 'carousel';
   let viewIndexStack = [0];
   let previousViewIndexStack = [0];
-  const refs: Record<number, HTMLElement | null> = {};
+  const refs: Record<number, CarouselHTMLElement | null> = {};
 
-  const minHeight = 10; // 10 rem
+  const minHeight = 4; // 4 rem
 
-  const { onViewChangeStart, onViewChangeEnd, excludeSwipeSupport } =
-    config || {};
+  const {
+    onViewChangeStart,
+    onViewChangeEnd,
+    excludeSwipeSupport,
+    useMaxHeight,
+  } = config || {};
 
   /**
    * Registers an HTMLElement at a specific index in the refs array.
@@ -70,7 +75,7 @@ export const initCarousel = (
   const getHistory = () => {
     return viewIndexStack.map((id) => ({
       id,
-      elem: refs[id],
+      elem: refs[id] as HTMLLIElement,
     }));
   };
   /**
@@ -145,11 +150,9 @@ export const initCarousel = (
    * Handles the 'transitionend' event for a given element.
    * This function checks if the element has a 'data-index' attribute and if its value matches the current view index.
    * If both conditions are met, it calls the 'onViewChangeEnd' callback with the response from 'getCallbackResponse'.
-   *
-   * @param {HTMLElement | null} el - The element to handle the 'transitionend' event for.
    * @returns {void}
    */
-  const transitionToViewIndex = (idx: number) => {
+  const transitionToViewIndex = (idx: number): void => {
     const sanitizedIndex = sanitizeIndex(idx);
     if (viewIndexStack[0] !== sanitizedIndex) {
       handleTransitionStart();
@@ -240,6 +243,8 @@ export const initCarousel = (
    */
   const performAnimation = (isInitial: boolean) => {
     let itemHeightSmallest = 0;
+    let itemHeightMaximum = 0;
+
     Array.from(viewItems).forEach((viewItem: HTMLElement, index) => {
       const stackIndex = viewIndexStack.findIndex((idx) => idx === index);
       const stackIndexInstanceCount = previousViewIndexStack.filter(
@@ -271,15 +276,25 @@ export const initCarousel = (
         registerRef(index, viewItem);
 
         setTimeout(() => {
-          if (
-            !itemHeightSmallest ||
-            (viewItem.offsetHeight < itemHeightSmallest &&
-              itemHeightSmallest > remToPx(minHeight))
-          ) {
-            itemHeightSmallest = viewItem.offsetHeight;
+          if (useMaxHeight) {
+            const heights: number[] = Array.from(viewItems).map(
+              (viewItem) => viewItem.scrollHeight
+            );
+            itemHeightMaximum = Math.max(...heights);
+
+            viewItem.style.position = 'absolute';
+            updateHeightForWrapper(itemHeightMaximum);
+          } else {
+            if (
+              !itemHeightSmallest ||
+              (viewItem.offsetHeight < itemHeightSmallest &&
+                itemHeightSmallest > remToPx(minHeight))
+            ) {
+              itemHeightSmallest = viewItem.offsetHeight;
+            }
+            viewItem.style.position = 'absolute';
+            updateHeightForWrapper(itemHeightSmallest);
           }
-          viewItem.style.position = 'absolute';
-          updateHeightForWrapper(itemHeightSmallest);
         });
 
         const listener = (e: Event) => {
@@ -290,8 +305,7 @@ export const initCarousel = (
           }
         };
         // store reference on the element for later removal
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
-        (viewItem as any)._carouselListener = listener;
+        (viewItem as CarouselHTMLElement)._carouselListener = listener;
 
         viewItem.addEventListener('animationend', listener);
         viewItem.addEventListener('transitionend', listener);
@@ -356,6 +370,13 @@ export const initCarousel = (
    * @returns {void}
    */
   const reset = () => {
+    // Remove recycle classes from all views before resetting
+    Array.from(viewItems).forEach((viewItem: HTMLElement) => {
+      removeReCycleClasses(viewItem);
+    });
+
+    // Update previous stack to avoid recycle-out class being applied
+    previousViewIndexStack = [0];
     viewIndexStack = [0];
     performAnimation(false);
   };
@@ -366,12 +387,10 @@ export const initCarousel = (
    */
   const destroyEvents = () => {
     Object.values(refs).forEach((el) => {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
-      if (el && (el as any)._carouselListener) {
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
-        el.removeEventListener('animationend', (el as any)._carouselListener);
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
-        el.removeEventListener('transitionend', (el as any)._carouselListener);
+      const carouselEl = el as CarouselHTMLElement;
+      if (el && carouselEl._carouselListener) {
+        el.removeEventListener('animationend', carouselEl._carouselListener);
+        el.removeEventListener('transitionend', carouselEl._carouselListener);
       }
     });
     if (!excludeSwipeSupport) {
@@ -416,7 +435,7 @@ export const initCarousel = (
     reset,
     goToIndex,
     getActiveItem,
-    destroyEvents: destroyEvents,
+    destroyEvents,
     allViews: refs,
   };
 };

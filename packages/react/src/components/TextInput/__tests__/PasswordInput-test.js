@@ -73,6 +73,11 @@ describe('PasswordInput', () => {
       );
     });
 
+    it('should render helperText with value 0', () => {
+      render(<PasswordInput id="input-1" labelText="label" helperText={0} />);
+      expect(screen.getByText('0')).toBeInTheDocument();
+    });
+
     it('should respect hideLabel prop', () => {
       render(
         <PasswordInput id="input-1" labelText="TextInput label" hideLabel />
@@ -166,6 +171,11 @@ describe('PasswordInput', () => {
       expect(screen.getByText('TextInput label')).toHaveClass(
         `${prefix}--label`
       );
+    });
+
+    it('should render labelText with value 0', () => {
+      render(<PasswordInput id="input-1" labelText={0} />);
+      expect(screen.getByText('0')).toBeInTheDocument();
     });
 
     it('should respect placeholder prop', () => {
@@ -377,7 +387,7 @@ describe('PasswordInput', () => {
       expect(inputElement).toHaveAttribute('readonly');
     });
 
-    it('should disable hide toggle button when readOnly is true', () => {
+    it('should not disable hide toggle button when readOnly is true', () => {
       const { getByRole } = render(
         <PasswordInput
           id="input-1"
@@ -387,7 +397,25 @@ describe('PasswordInput', () => {
         />
       );
       const toggleButton = getByRole('button');
-      expect(toggleButton).toBeDisabled();
+      expect(toggleButton).not.toBeDisabled();
+    });
+
+    it('should allow toggling password visibility when readOnly is true', async () => {
+      render(
+        <PasswordInput
+          id="input-1"
+          labelText="TextInput label"
+          hidePasswordLabel="Hide Password"
+          showPasswordLabel="Show Password"
+          readOnly
+        />
+      );
+
+      await userEvent.click(screen.getByRole('button'));
+      expect(screen.getByText('Hide Password')).toBeInTheDocument();
+
+      await userEvent.click(screen.getByRole('button'));
+      expect(screen.getByText('Show Password')).toBeInTheDocument();
     });
 
     it('should not allow input change when readOnly is true', () => {

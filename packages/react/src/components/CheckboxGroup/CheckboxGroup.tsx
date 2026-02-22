@@ -47,7 +47,7 @@ export interface CustomType {
   kind: string;
 }
 
-const CheckboxGroup: React.FC<CheckboxGroupProps> = ({
+const CheckboxGroup = ({
   children,
   className,
   decorator,
@@ -62,7 +62,7 @@ const CheckboxGroup: React.FC<CheckboxGroupProps> = ({
   slug,
   orientation = 'vertical',
   ...rest
-}) => {
+}: CheckboxGroupProps) => {
   const prefix = usePrefix();
 
   const showWarning = !readOnly && !invalid && warn;
@@ -70,15 +70,16 @@ const CheckboxGroup: React.FC<CheckboxGroupProps> = ({
 
   const checkboxGroupInstanceId = useId();
 
-  const helperId = !helperText
+  const hasHelper = typeof helperText !== 'undefined' && helperText !== null;
+  const helperId = !hasHelper
     ? undefined
     : `checkbox-group-helper-text-${checkboxGroupInstanceId}`;
 
-  const helper = helperText ? (
+  const helper = hasHelper && (
     <div id={helperId} className={`${prefix}--form__helper-text`}>
       {helperText}
     </div>
-  ) : null;
+  );
 
   const fieldsetClasses = cx(`${prefix}--checkbox-group`, className, {
     [`${prefix}--checkbox-group--${orientation}`]: orientation === 'horizontal',

@@ -5,11 +5,12 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { html, LitElement } from 'lit';
+import { adoptStyles, html, LitElement } from 'lit';
 import { property, state } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
 import { POPOVER_ALIGNMENT } from '../popover/defs';
 import '../popover/index';
+import popoverStyles from '../popover/popover.scss?lit';
 import styles from './tooltip.scss?lit';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
@@ -49,6 +50,8 @@ class CDSDefinitionTooltip extends LitElement {
 
   connectedCallback() {
     super.connectedCallback();
+
+    adoptStyles(this.renderRoot as ShadowRoot, [popoverStyles, styles]);
 
     if (this.hasAttribute('default-open')) {
       this.open = true;

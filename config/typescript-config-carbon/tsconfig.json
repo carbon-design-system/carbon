@@ -2,7 +2,8 @@
   "extends": "./tsconfig.base.json",
   "compilerOptions": {
     "emitDeclarationOnly": false,
-    "module": "commonjs"
+    "module": "commonjs",
+    "outDir": "dist"
   },
   "include": ["index.ts"]
 }

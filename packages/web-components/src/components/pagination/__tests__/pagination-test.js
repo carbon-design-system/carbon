@@ -393,4 +393,66 @@ describe('cds-pagination', () => {
 
     expect(el.totalPages).to.equal(5);
   });
+  it('should fire cds-pagination-changed-current only once when clicking next button', async () => {
+    const el = await fixture(html`
+      <cds-pagination total-items="30" page-size="10" page="1">
+        <cds-select-item value="10">10</cds-select-item>
+      </cds-pagination>
+    `);
+    await el.updateComplete;
+
+    let eventCount = 0;
+    el.addEventListener('cds-pagination-changed-current', () => {
+      eventCount++;
+    });
+
+    const buttons = el.shadowRoot?.querySelectorAll('cds-button');
+    const nextBtn = buttons?.[1];
+
+    nextBtn?.click();
+    await el.updateComplete;
+
+    expect(eventCount).to.equal(1);
+  });
+
+  it('should fire cds-pagination-changed-current only once when clicking previous button', async () => {
+    const el = await fixture(html`
+      <cds-pagination total-items="30" page-size="10" page="2">
+        <cds-select-item value="10">10</cds-select-item>
+      </cds-pagination>
+    `);
+    await el.updateComplete;
+    let eventCount = 0;
+    el.addEventListener('cds-pagination-changed-current', () => {
+      eventCount++;
+    });
+    const buttons = el.shadowRoot?.querySelectorAll('cds-button');
+    const prevBtn = buttons?.[0];
+    prevBtn?.click();
+    await el.updateComplete;
+    expect(eventCount).to.equal(1);
+  });
+  it('should fire cds-pagination-changed-current only once when changing page via dropdown', async () => {
+    const el = await fixture(html`
+      <cds-pagination total-items="30" page-size="10" page="1">
+        <cds-select-item value="10">10</cds-select-item>
+      </cds-pagination>
+    `);
+    await el.updateComplete;
+
+    let eventCount = 0;
+    el.addEventListener('cds-pagination-changed-current', () => {
+      eventCount++;
+    });
+    const pageSelect = el.shadowRoot?.querySelector('#pages-select');
+    pageSelect?.dispatchEvent(
+      new CustomEvent('cds-select-selected', {
+        bubbles: true,
+        composed: true,
+        detail: { value: '2' },
+      })
+    );
+    await el.updateComplete;
+    expect(eventCount).to.equal(1);
+  });
 });

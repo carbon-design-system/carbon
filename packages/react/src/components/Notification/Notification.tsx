@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2025
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -70,6 +70,10 @@ function useEscapeToClose(ref, callback, override = true) {
     return () => document.removeEventListener('keydown', handleKeyDown, false);
   });
 }
+
+type NotificationCloseHandler =
+  | ((event: MouseEvent) => boolean)
+  | ((event: MouseEvent) => void);
 
 export interface NotificationActionButtonProps extends ButtonProps<'button'> {
   /**
@@ -356,8 +360,7 @@ export interface ToastNotificationProps extends HTMLAttributes<HTMLDivElement> {
   /**
    * Provide a function that is called when menu is closed
    */
-  // eslint-disable-next-line   @typescript-eslint/no-invalid-void-type -- https://github.com/carbon-design-system/carbon/issues/20452
-  onClose?(event: MouseEvent): boolean | void;
+  onClose?: NotificationCloseHandler;
 
   /**
    * Provide a function that is called when the close button is clicked
@@ -631,8 +634,7 @@ export interface InlineNotificationProps
   /**
    * Provide a function that is called when menu is closed
    */
-  // eslint-disable-next-line   @typescript-eslint/no-invalid-void-type -- https://github.com/carbon-design-system/carbon/issues/20452
-  onClose?(event: MouseEvent): boolean | void;
+  onClose?: NotificationCloseHandler;
 
   /**
    * Provide a function that is called when the close button is clicked
@@ -891,8 +893,7 @@ export interface ActionableNotificationProps
    * Provide a function that is called when menu is closed.
    * Default behavior of hiding the notification is prevented if this function returns false.
    */
-  // eslint-disable-next-line   @typescript-eslint/no-invalid-void-type -- https://github.com/carbon-design-system/carbon/issues/20452
-  onClose?(event: MouseEvent): boolean | void;
+  onClose?: NotificationCloseHandler;
 
   /**
    * Provide a function that is called when the close button is clicked
@@ -974,7 +975,7 @@ export function ActionableNotification({
   useIsomorphicEffect(() => {
     if (hasFocus && role === 'alertdialog') {
       const button = document.querySelector(
-        'button.cds--actionable-notification__action-button'
+        `button.${prefix}--actionable-notification__action-button`
       ) as HTMLButtonElement;
       button?.focus();
     }
@@ -999,6 +1000,7 @@ export function ActionableNotification({
         endTrapNode,
         currentActiveNode,
         oldActiveNode,
+        prefix,
       });
     }
   }
@@ -1052,60 +1054,61 @@ export function ActionableNotification({
           Focus sentinel
         </span>
       )}
-
-      <div className={`${prefix}--actionable-notification__details`}>
-        <NotificationIcon
-          notificationType={inline ? 'inline' : 'toast'}
-          kind={kind}
-          iconDescription={statusIconDescription || `${kind} icon`}
-        />
-        <div className={`${prefix}--actionable-notification__text-wrapper`}>
-          <div className={`${prefix}--actionable-notification__content`}>
-            {title && (
-              <Text
-                as="div"
-                className={`${prefix}--actionable-notification__title`}
-                id={id}>
-                {title}
-              </Text>
-            )}
-            {subtitle && (
-              <Text
-                as="div"
-                className={`${prefix}--actionable-notification__subtitle`}
-                id={subtitleId}>
-                {subtitle}
-              </Text>
-            )}
-            {caption && (
-              <Text
-                as="div"
-                className={`${prefix}--actionable-notification__caption`}>
-                {caption}
-              </Text>
-            )}
-            {children}
+      <div
+        ref={innerModal}
+        className={`${prefix}--actionable-notification__focus-wrapper`}>
+        <div className={`${prefix}--actionable-notification__details`}>
+          <NotificationIcon
+            notificationType={inline ? 'inline' : 'toast'}
+            kind={kind}
+            iconDescription={statusIconDescription || `${kind} icon`}
+          />
+          <div className={`${prefix}--actionable-notification__text-wrapper`}>
+            <div className={`${prefix}--actionable-notification__content`}>
+              {title && (
+                <Text
+                  as="div"
+                  className={`${prefix}--actionable-notification__title`}
+                  id={id}>
+                  {title}
+                </Text>
+              )}
+              {subtitle && (
+                <Text
+                  as="div"
+                  className={`${prefix}--actionable-notification__subtitle`}
+                  id={subtitleId}>
+                  {subtitle}
+                </Text>
+              )}
+              {caption && (
+                <Text
+                  as="div"
+                  className={`${prefix}--actionable-notification__caption`}>
+                  {caption}
+                </Text>
+              )}
+              {children}
+            </div>
           </div>
         </div>
-      </div>
-      <div
-        className={`${prefix}--actionable-notification__button-wrapper`}
-        ref={innerModal}>
-        {actionButtonLabel && (
-          <NotificationActionButton
-            onClick={onActionButtonClick}
-            inline={inline}>
-            {actionButtonLabel}
-          </NotificationActionButton>
-        )}
+        <div className={`${prefix}--actionable-notification__button-wrapper`}>
+          {actionButtonLabel && (
+            <NotificationActionButton
+              onClick={onActionButtonClick}
+              inline={inline}>
+              {actionButtonLabel}
+            </NotificationActionButton>
+          )}
 
-        {!hideCloseButton && (
-          <NotificationButton
-            aria-label={deprecatedAriaLabel || ariaLabel}
-            notificationType="actionable"
-            onClick={handleCloseButtonClick}
-          />
-        )}
+          {!hideCloseButton && (
+            <NotificationButton
+              aria-label={deprecatedAriaLabel || ariaLabel}
+              notificationType="actionable"
+              onClick={handleCloseButtonClick}
+            />
+          )}
+        </div>
       </div>
       {!focusTrapWithoutSentinels && (
         <span
@@ -1463,12 +1466,9 @@ Callout.propTypes = {
 /**
  * @deprecated Use `CalloutProps` instead.
  */
-// eslint-disable-next-line @typescript-eslint/no-empty-object-type -- https://github.com/carbon-design-system/carbon/issues/20452
-export interface StaticNotificationProps extends CalloutProps {}
+export type StaticNotificationProps = CalloutProps;
 let didWarnAboutDeprecation = false;
-export const StaticNotification: React.FC<StaticNotificationProps> = (
-  props
-) => {
+export const StaticNotification = (props: StaticNotificationProps) => {
   if (process.env.NODE_ENV !== 'production') {
     warning(
       didWarnAboutDeprecation,

@@ -15,6 +15,8 @@
 @mixin theme($args...) {
   @include theme.theme($args...);
 
+  color-scheme: custom-property.get-var('color-scheme', light);
+
   // If the system is in high-contrast mode, use the system defined colors.  This mostly happens automatically, but
   // we need to do it manually for icons and selected backgrounds.  Importantly, the custom properties we set here
   // need to override the CSS custom properties set above.  See:

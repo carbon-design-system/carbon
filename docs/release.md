@@ -182,13 +182,9 @@ git push upstream v11.2.0
 - [ ] Verify that this triggers a run of the
       [Release Workflow](https://github.com/carbon-design-system/carbon/actions/workflows/release.yml)
 
-The packages that have been published will be switched to latest on the last
-Wednesday of a sprint. To make the switch, you will need to:
+This automatically promotes Carbon packages with new release versions to latest.
+Next you will need to:
 
-- [ ] Run the
-      [Promotion Workflow](https://github.com/carbon-design-system/carbon/actions/workflows/promote.yml)
-      to automatically promote Carbon packages with new release versions to
-      latest
 - [ ] Verify the packages have been promoted to latest
       [on NPM](https://www.npmjs.com/package/@carbon/react)
 - [ ] Update the latest release notes with the generated output from Carbon Cli
@@ -202,6 +198,7 @@ Wednesday of a sprint. To make the switch, you will need to:
   - [ ] #carbon-announcements
   - [ ] #carbon-design-system
   - [ ] #carbon-react
+  - [ ] #carbon-web-components
 
 <details>
   <summary>Click to view slack announcement template</summary>
@@ -233,7 +230,7 @@ Or, use the
 
 ### Update gatsby-theme-carbon and carbon-website
 
-After the promotion workflow is completed this will trigger the
+After the release workflow for stable release is completed this will trigger the
 `deploy-packages` workflow to update both `design-language-website` and
 `gatsby-theme-carbon` to the latest version of the Carbon packages.
 
@@ -241,8 +238,10 @@ After the promotion workflow is completed this will trigger the
       [gatsby-theme-carbon](https://github.com/carbon-design-system/gatsby-theme-carbon/pulls)
       to verify no breaking changes have occurred in this release. If the PR
       from the previous release was not merged, the existing PR will be updated.
-- [ ] Run the `release-it` workflow in the `gatsby-theme-carbon` repo to trigger
-      a release of `gatsby-theme-carbon`.
+- [ ] Run the
+      [`release-it`](https://github.com/carbon-design-system/gatsby-theme-carbon/actions/workflows/release.yml)
+      workflow in the `gatsby-theme-carbon` repo to trigger a release of
+      `gatsby-theme-carbon`.
 - [ ] Check that
       [gatsby-theme-carbon](https://github.com/carbon-design-system/gatsby-theme-carbon)
       has been released and is on the
@@ -515,6 +514,9 @@ To do this, packages must be versioned manually.
 1. Run `yarn lerna version --no-git-tag-version --no-push`
 1. An interactive prompt will be presented - select the appropriate version bump
    for each package
+   - If you are prompted with a package that does not need a version change,
+     select **Custom Version** and enter the existing version to keep it
+     unchanged
 1. After the interactive prompt is complete, run `yarn install` to update
    `yarn.lock`
 1. Commit `chore(release): v11.23.1`

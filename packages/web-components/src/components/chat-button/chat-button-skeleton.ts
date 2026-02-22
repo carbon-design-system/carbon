@@ -6,10 +6,11 @@
  */
 
 import { classMap } from 'lit/directives/class-map.js';
-import { LitElement, html } from 'lit';
+import { adoptStyles, LitElement, html } from 'lit';
 import { property } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
 import { CHAT_BUTTON_SIZE } from './defs';
+import buttonStyles from '../button/button.scss?lit';
 import styles from './chat-button.scss?lit';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
@@ -27,6 +28,12 @@ class CDSChatButtonSkeleton extends LitElement {
   @property({ reflect: true })
   size = CHAT_BUTTON_SIZE.LARGE;
 
+  connectedCallback() {
+    super.connectedCallback();
+
+    adoptStyles(this.renderRoot as ShadowRoot, [buttonStyles, styles]);
+  }
+
   render() {
     const skeletonClasses = classMap({
       [`${prefix}--skeleton`]: true,
@@ -37,8 +44,6 @@ class CDSChatButtonSkeleton extends LitElement {
 
     return html` <div class="${skeletonClasses}"></div> `;
   }
-
-  static styles = styles;
 }
 
 export default CDSChatButtonSkeleton;

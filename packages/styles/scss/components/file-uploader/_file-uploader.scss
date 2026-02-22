@@ -290,7 +290,7 @@
     .#{$prefix}--form-requirement__title,
   .#{$prefix}--file__selected-file--invalid
     .#{$prefix}--form-requirement__supplement {
-    @include type-style('label-01');
+    @include type-style('helper-text-01');
 
     padding: 0 $spacing-05;
   }
@@ -307,7 +307,7 @@
 
   // TODO: deprecate
   .#{$prefix}--file__selected-file--invalid + .#{$prefix}--form-requirement {
-    @include type-style('label-01');
+    @include type-style('helper-text-01');
 
     display: block;
     overflow: visible;

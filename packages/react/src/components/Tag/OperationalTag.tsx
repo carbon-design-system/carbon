@@ -8,7 +8,6 @@
 import PropTypes from 'prop-types';
 import React, {
   MouseEventHandler,
-  useLayoutEffect,
   useState,
   useRef,
   forwardRef,
@@ -23,6 +22,7 @@ import { Tooltip } from '../Tooltip';
 import { Text } from '../Text';
 import { isEllipsisActive } from './isEllipsisActive';
 import { mergeRefs } from '../../tools/mergeRefs';
+import useIsomorphicEffect from '../../internal/useIsomorphicEffect';
 
 const TYPES = {
   red: 'Red',
@@ -103,7 +103,7 @@ const OperationalTag = forwardRef(
     const tagClasses = classNames(`${prefix}--tag--operational`, className);
     const [isEllipsisApplied, setIsEllipsisApplied] = useState(false);
 
-    useLayoutEffect(() => {
+    useIsomorphicEffect(() => {
       const newElement = tagRef.current?.getElementsByClassName(
         `${prefix}--tag__label`
       )[0];

@@ -56,6 +56,7 @@ describe('@carbon/themes/scss', () => {
 
   test('scss/_themes.scss', async () => {
     const { unwrap } = await render(`
+      @use 'sass:map';
       @use '../scss/themes';
 
       // Themes
@@ -63,12 +64,22 @@ describe('@carbon/themes/scss', () => {
       $_: get('themes.$g10', themes.$g10);
       $_: get('themes.$g90', themes.$g90);
       $_: get('themes.$g100', themes.$g100);
+
+      $_: get('color-scheme.white', map.get(themes.$white, 'color-scheme'));
+      $_: get('color-scheme.g10', map.get(themes.$g10, 'color-scheme'));
+      $_: get('color-scheme.g90', map.get(themes.$g90, 'color-scheme'));
+      $_: get('color-scheme.g100', map.get(themes.$g100, 'color-scheme'));
     `);
 
     // Themes should be available
     for (const theme of Object.keys(themes)) {
       expect(unwrap(`themes.$${theme}`)).toBeDefined();
     }
+
+    expect(unwrap('color-scheme.white')).toBe('light');
+    expect(unwrap('color-scheme.g10')).toBe('light');
+    expect(unwrap('color-scheme.g90')).toBe('dark');
+    expect(unwrap('color-scheme.g100')).toBe('dark');
   });
 
   describe('configuration', () => {
