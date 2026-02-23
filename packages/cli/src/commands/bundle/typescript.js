@@ -93,6 +93,7 @@ export default async function bundle(entrypoint, options) {
             extensions: ['.js'],
           }),
         ],
+        maxParallelFileOps: 2,
       });
       const outputOptions = {
         exports: 'auto',

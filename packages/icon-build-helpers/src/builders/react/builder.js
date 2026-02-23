@@ -141,6 +141,7 @@ const didWarnAboutDeprecation = {};`;
       }),
       babel(babelConfig),
     ],
+    maxParallelFileOps: 2,
   });
 
   const bundles = [
@@ -179,6 +180,7 @@ const didWarnAboutDeprecation = {};`;
       }),
       babel(babelConfig),
     ],
+    maxParallelFileOps: 2,
   });
 
   await umd.write({

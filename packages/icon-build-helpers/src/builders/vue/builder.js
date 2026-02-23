@@ -81,6 +81,7 @@ async function builder(metadata, { output }) {
     input,
     external,
     plugins: [virtual(files), babel(babelConfig)],
+    maxParallelFileOps: 2,
   });
 
   const bundles = [
@@ -110,6 +111,7 @@ async function builder(metadata, { output }) {
     input: 'index.js',
     external,
     plugins: [virtual(files), babel(babelConfig)],
+    maxParallelFileOps: 2,
   });
 
   await umd.write({
