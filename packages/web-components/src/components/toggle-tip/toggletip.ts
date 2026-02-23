@@ -19,6 +19,7 @@ import FloatingUIController from '../../globals/controllers/floating-controller'
 import styles from './toggletip.scss?lit';
 import popoverStyles from '../popover/popover.scss?lit';
 import { iconLoader } from '../../globals/internal/icon-loader';
+import { deepShadowContains } from '../../globals/internal/deep-shadow-contains';
 
 /**
  * Definition tooltip.
@@ -118,27 +119,10 @@ class CDSToggletip extends HostListenerMixin(FocusMixin(LitElement)) {
       return;
     }
 
-    if (this._deepShadowContains(this, event.relatedTarget)) {
+    if (deepShadowContains(this, event.relatedTarget)) {
       return;
     }
     this.open = false;
-  }
-
-  private _deepShadowContains(root: Node, el: EventTarget | null): boolean {
-    if (!(el instanceof Node)) {
-      return false;
-    }
-    if (el === root) {
-      return true;
-    }
-
-    return this._deepShadowContains(
-      root,
-      (el as HTMLElement).assignedSlot ||
-        el.parentNode ||
-        (el.getRootNode() as ShadowRoot).host ||
-        null
-    );
   }
 
   protected _renderToggleTipLabel = () => {

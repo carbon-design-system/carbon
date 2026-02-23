@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2025
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -8,7 +8,7 @@
 import { ChevronDown } from '@carbon/icons-react';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
-import React, { forwardRef } from 'react';
+import React, { forwardRef, type SelectHTMLAttributes } from 'react';
 
 import { usePrefix } from '../../internal/usePrefix';
 
@@ -26,8 +26,7 @@ export type TimePickerSelectProps = {
   /**
    * Optionally provide the default value of the `<select>`
    */
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
-  defaultValue?: any;
+  defaultValue?: SelectHTMLAttributes<HTMLSelectElement>['defaultValue'];
 
   /**
    * Specify whether the control is disabled

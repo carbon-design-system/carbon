@@ -137,11 +137,9 @@ const ControlledPasswordInput = forwardRef<
       hideLabel,
       invalid = false,
       invalidText = '',
-      helperText = '',
+      helperText,
       light,
-
       type = 'password',
-
       togglePasswordVisibility,
       tooltipPosition = 'bottom',
       tooltipAlignment = 'center',

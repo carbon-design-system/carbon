@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2025
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -88,6 +88,23 @@ describe('TextArea', () => {
     it('should render helperText with value 0', () => {
       render(<TextArea id="textarea-1" labelText="label" helperText={0} />);
       expect(screen.getByText('0')).toBeInTheDocument();
+    });
+
+    it('should not set aria-describedby when helperText is omitted', () => {
+      render(<TextArea id="textarea-1" labelText="TextArea label" />);
+      expect(screen.getByRole('textbox')).not.toHaveAttribute(
+        'aria-describedby'
+      );
+    });
+
+    it('should set aria-describedby when helperText is 0', () => {
+      render(<TextArea id="textarea-1" labelText="label" helperText={0} />);
+
+      const textbox = screen.getByRole('textbox');
+      const helperId = textbox.getAttribute('aria-describedby');
+
+      expect(helperId).toMatch(/^text-area-helper-text-/);
+      expect(document.getElementById(helperId)).toHaveTextContent('0');
     });
 
     it('should respect hideLabel prop', () => {

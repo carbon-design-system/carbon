@@ -471,7 +471,10 @@ export const OverflowMenu = forwardRef<HTMLButtonElement, OverflowMenuProps>(
         menuBody.ownerDocument,
         focusinEventName,
         (event: Event) => {
-          const target = event.target as HTMLElement;
+          const target = event.target;
+
+          if (!(target instanceof Element)) return;
+
           const triggerEl = triggerRef.current;
           if (typeof target.matches === 'function') {
             if (

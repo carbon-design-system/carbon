@@ -95,6 +95,7 @@ exports[`Public API should only change with a semver change 1`] = `
   "chatShellBackground",
   "code01",
   "code02",
+  "colorScheme",
   "colors",
   "container",
   "container01",

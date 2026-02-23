@@ -528,6 +528,10 @@ export const group = TokenGroup.create({
       properties: ['background'],
     },
     {
+      name: 'color-scheme',
+      properties: ['color-scheme'],
+    },
+    {
       name: 'toggle-off',
     },
     {

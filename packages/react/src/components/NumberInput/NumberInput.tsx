@@ -782,7 +782,7 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
       if ('type' in evt.target && evt.target.type === 'button') {
         setIsFocused(false);
       } else {
-        setIsFocused(evt.type === 'focus' ? true : false);
+        setIsFocused(evt.type === 'focus');
       }
     };
 

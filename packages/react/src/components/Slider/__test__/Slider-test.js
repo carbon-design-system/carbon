@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2025
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -352,18 +352,19 @@ describe('Slider', () => {
         expect(onChange).not.toHaveBeenCalled();
       });
 
-      it.skip('gracefully tolerates empty event passed to _onDrag', () => {
+      it('gracefully tolerates empty event passed to _onDrag', () => {
         const { mouseDown, mouseUp, mouseMove } = fireEvent;
-        const { container } = renderSlider({
+        renderSlider({
           ariaLabelInput: inputAriaValue,
-          value: 1,
+          value: 50,
+          min: 0,
           max: 100,
           onChange,
         });
         const theSlider = screen.getByRole('slider');
-        mouseDown(theSlider, { clientX: 0 });
-        mouseMove(container.firstChild, { clientX: 0 });
-        mouseUp(theSlider);
+        mouseDown(theSlider);
+        mouseMove(document);
+        mouseUp(document);
         expect(onChange).not.toHaveBeenCalled();
       });
 

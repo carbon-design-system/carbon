@@ -690,12 +690,15 @@ const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>((props, ref) => {
             calendarContainer.querySelector('.selected') && fpSelectedDateElem;
           const todayDateElem =
             calendarContainer.querySelector('.today') && fpTodayDateElem;
-          (
-            (selectedDateElem ||
-              todayDateElem ||
-              calendarContainer.querySelector('.flatpickr-day[tabindex]') ||
-              calendarContainer) as HTMLElement
-          ).focus();
+          const focusTarget =
+            selectedDateElem ||
+            todayDateElem ||
+            calendarContainer.querySelector('.flatpickr-day[tabindex]') ||
+            calendarContainer;
+
+          if (focusTarget instanceof HTMLElement) {
+            focusTarget.focus();
+          }
 
           if (event.target === startInputField.current) {
             lastFocusedField.current = startInputField.current;

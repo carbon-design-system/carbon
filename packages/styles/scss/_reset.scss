@@ -113,6 +113,10 @@
     font-family: inherit;
   }
 
+  :root {
+    color-scheme: custom-property.get-var('color-scheme', light);
+  }
+
   /* HTML5 display-role reset for older browsers */
   article,
   aside,

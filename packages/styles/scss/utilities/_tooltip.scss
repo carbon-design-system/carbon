@@ -161,7 +161,7 @@
   }
 
   // content box
-  // @todo Simplify CSS selectors on next major release
+  // TODO: Simplify CSS selectors on next major release
   &::after,
   .#{$prefix}--assistive-text,
   + .#{$prefix}--assistive-text {
@@ -279,7 +279,7 @@
     }
   }
 
-  // @todo Simplify CSS selectors on next major release
+  // TODO: Simplify CSS selectors on next major release
   &::before,
   &::after,
   .#{$prefix}--assistive-text,
@@ -339,7 +339,7 @@
   }
 
   // alignment options available only for top and bottom tooltip position
-  // @todo Simplify CSS selectors on next major release
+  // TODO: Simplify CSS selectors on next major release
   &::after,
   .#{$prefix}--assistive-text,
   + .#{$prefix}--assistive-text {
@@ -378,7 +378,7 @@
     }
   }
 
-  // @todo simplify on next major release to move the ::before pseudo element within the tooltip instead of the trigger
+  // TODO: simplify on next major release to move the ::before pseudo element within the tooltip instead of the trigger
   @if $tooltip-type == 'definition' {
     &.#{$prefix}--tooltip--a11y + .#{$prefix}--assistive-text {
       @if ($position == 'bottom') {

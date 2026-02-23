@@ -710,9 +710,8 @@ class CDSMultiSelect extends CDSDropdown {
         if (aiLabel) {
           sortedMenuItems.unshift(aiLabel);
         }
-        // @todo remove typecast once we've updated to Typescript.
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
-        (this as any).replaceChildren(...sortedMenuItems);
+
+        this.replaceChildren(...sortedMenuItems);
       }
     }
     if (changedProperties.has('open')) {
@@ -728,7 +727,6 @@ class CDSMultiSelect extends CDSDropdown {
         if (aiLabel) {
           sortedMenuItems.unshift(aiLabel);
         }
-        // @todo remove typecast once we've updated to Typescript.
         sortedMenuItems.forEach((item) => {
           this.appendChild(item);
         });

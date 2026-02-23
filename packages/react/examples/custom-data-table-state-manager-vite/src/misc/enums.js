@@ -3,11 +3,6 @@
  */
 export const TABLE_SIZE = {
   /**
-   * Compact size.
-   */
-  COMPACT: 'compact',
-
-  /**
    * Short size.
    */
   SHORT: 'short',

@@ -56,6 +56,9 @@ import {
 } from '@carbon/colors';
 import { adjustLightness, adjustAlpha } from './tools';
 
+// Color scheme
+export const colorScheme = 'dark';
+
 // Background
 export const background = gray100;
 export const backgroundInverse = gray10;

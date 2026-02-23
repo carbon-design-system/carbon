@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2022
+ * Copyright IBM Corp. 2022, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -38,7 +38,7 @@ describe('ExpandableSearch', () => {
       expect(container.firstChild).toHaveClass(`${prefix}--search--expanded`);
     });
 
-    it('is renders a defaultValue', () => {
+    it('renders a defaultValue', () => {
       render(
         <ExpandableSearch
           defaultValue="This is default text"
@@ -149,6 +149,36 @@ describe('ExpandableSearch', () => {
 
       expect(container.firstChild).toHaveClass(`${prefix}--search--expanded`);
     });
+
+    it.each([
+      { label: 'empty string', value: '', shouldRemainExpanded: false },
+      { label: 'zero', value: 0, shouldRemainExpanded: true },
+      { label: 'non-empty string', value: 'hmm', shouldRemainExpanded: true },
+      { label: 'undefined', value: undefined, shouldRemainExpanded: false },
+    ])(
+      'should handle blur when defaultValue is $label',
+      async ({ value, shouldRemainExpanded }) => {
+        const { container } = render(
+          <>
+            <ExpandableSearch defaultValue={value} labelText="test-search" />
+            <button type="button">second-element</button>
+          </>
+        );
+
+        await userEvent.click(screen.getAllByRole('button')[0]);
+        await userEvent.click(screen.getByText('second-element'));
+
+        if (shouldRemainExpanded) {
+          expect(container.firstChild).toHaveClass(
+            `${prefix}--search--expanded`
+          );
+        } else {
+          expect(container.firstChild).not.toHaveClass(
+            `${prefix}--search--expanded`
+          );
+        }
+      }
+    );
 
     it('closes and clears value on escape', async () => {
       const { container } = render(

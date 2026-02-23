@@ -208,9 +208,9 @@
   }
 
   //----------------------------------------------------------------------------
-  // Compact, Short, Tall Sortable
+  // Extra small, Short, Tall Sortable
   //----------------------------------------------------------------------------
-  // Sortable compact
+  // Sortable Extra small
   .#{$prefix}--data-table--xs.#{$prefix}--data-table--sort th {
     block-size: convert.to-rem(24px);
   }
