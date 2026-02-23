@@ -476,7 +476,7 @@ class CDSComboBox extends CDSDropdown {
             id="selection-button"
             role="button"
             class="${prefix}--list-box__selection"
-            tabindex="0"
+            tabindex="-1"
             title="${clearSelectionLabel}">
             ${iconLoader(Close16, { 'aria-label': clearSelectionLabel })}
           </div>

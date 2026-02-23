@@ -447,7 +447,7 @@ class CDSMultiSelect extends CDSDropdown {
             id="clear-button"
             role="button"
             class="${prefix}--list-box__selection"
-            tabindex="0"
+            tabindex="-1"
             title="${clearSelectionLabel}">
             ${iconLoader(Close16, { 'aria-label': clearSelectionLabel })}
           </div>
@@ -795,6 +795,21 @@ class CDSMultiSelect extends CDSDropdown {
     if (changedProperties.has('open') && !this.open) {
       this._triggerNode.classList.remove('no-focus-style');
       this.removeAttribute('item-clicked');
+
+      // Clear filter input when closing if filterable
+      if (this.filterable && this._filterInputNode) {
+        this._filterInputNode.value = '';
+        this.toggleAttribute('has-value', false);
+
+        const items = this.querySelectorAll(
+          (this.constructor as typeof CDSMultiSelect).selectorItemFiltered
+        );
+        forEach(items, (item) => {
+          (item as CDSMultiSelectItem).removeAttribute('filtered');
+        });
+
+        this.requestUpdate();
+      }
     }
   }
 
