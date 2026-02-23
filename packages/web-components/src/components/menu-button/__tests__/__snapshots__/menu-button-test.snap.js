@@ -124,3 +124,19 @@ snapshots['cds-menu-button should support xs size'] = `<cds-button
 </slot>
 `;
 /* end snapshot cds-menu-button should support xs size */
+snapshots['cds-menu-button should support xs size'] = `<cds-button
+  danger-description="danger"
+  has-main-content=""
+  kind="primary"
+  size="xs"
+  tab-index="0"
+  tooltip-alignment=""
+  tooltip-position="top"
+  type="button"
+>
+  Actions
+</cds-button>
+<slot>
+</slot>
+`;
+/* end snapshot cds-menu-button should support xs size */
