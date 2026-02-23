@@ -191,13 +191,18 @@ export default class CDSTabs extends HostListenerMixin(CDSContentSwitcher) {
       // Get all enabled (selectable) tabs AFTER removal
       const enabledTabs = this.querySelectorAll<CDSTab>(selectorItemEnabled);
       if (enabledTabs.length === 0) {
-        return; // No tabs left to focus
+        // Clear selection when no enabled tabs remain
+        // Setting value to empty string triggers parent's _updateSelectedItemFromValue
+        // which automatically sets selected=false on all tabs
+        this.value = '';
+        return;
       }
       const nextTab =
         index < enabledTabs.length
           ? enabledTabs[index]
           : enabledTabs[index - 1];
       if (nextTab) {
+        nextTab.highlighted = true;
         (
           nextTab.shadowRoot?.querySelector(
             '.cds--tabs__nav-link--dismissable'
