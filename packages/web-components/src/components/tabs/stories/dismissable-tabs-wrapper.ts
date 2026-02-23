@@ -9,21 +9,23 @@ import { LitElement, html } from 'lit';
 import { property, state } from 'lit/decorators.js';
 import { prefix } from '../../../globals/settings';
 import { TABS_TYPE } from '../tabs';
+import '../../button';
 
 /**
  * Wrapper component for dismissable tabs story with state management
  */
 export class DismissableTabsWrapper extends LitElement {
-  /**
-   * Array of tab configurations
-   */
-  @state()
-  private _tabs = [
+  private _defaultTabs = [
     { id: 'all', label: 'Dashboard', value: 'all' },
     { id: 'cloudFoundry', label: 'Monitoring', value: 'cloudFoundry' },
     { id: 'staging', label: 'Activity', value: 'staging' },
     { id: 'dea', label: 'Settings', value: 'dea', disabled: true },
   ];
+  /**
+   * Array of tab configurations
+   */
+  @state()
+  private _tabs = this._defaultTabs;
 
   /**
    * Whether tabs are disabled
@@ -60,8 +62,16 @@ export class DismissableTabsWrapper extends LitElement {
     }
   }
 
+  private resetTabs() {
+    this._tabs = [...this._defaultTabs];
+  }
+
   render() {
+    const { resetTabs } = this;
     return html`
+      <cds-button style="margin-bottom: 3rem" @click="${resetTabs}">
+        Reset
+      </cds-button>
       <cds-tabs
         ?disabled="${this.disabled}"
         selection-mode="${this.selectionMode}"
@@ -106,6 +116,6 @@ export class DismissableTabsWrapper extends LitElement {
   }
 }
 
-customElements.define('dismissable-tabs-wrapper', DismissableTabsWrapper);
+customElements.define('dismissable-tabs-story-wrapper', DismissableTabsWrapper);
 
 // Made with Bob

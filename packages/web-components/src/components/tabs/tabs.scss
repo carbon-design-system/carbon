@@ -320,5 +320,46 @@ $inset-transition: inset 110ms motion(standard, productive);
 :host(#{$prefix}-tab) {
   .#{$prefix}--tabs__nav-link--dismissable {
     display: flex;
+    padding-inline-end: $spacing-08;
+  }
+}
+:host(#{$prefix}-tab) {
+  .#{$prefix}--tabs__nav-item--close {
+    position: relative;
+    display: flex;
+    align-items: center;
+    inset-inline-start: calc(-#{$spacing-04} - 1px);
+    margin-inline-start: calc(-#{$spacing-06} + 1px);
+  }
+  .#{$prefix}--tabs__nav-item--close--hidden {
+    display: none;
+  }
+  .#{$prefix}--tabs__nav-item--close::part(button) {
+    @include button-reset.reset();
+
+    block-size: convert.to-rem(24px);
+    inline-size: convert.to-rem(24px);
+    padding-block: $spacing-02;
+    padding-inline: $spacing-02;
+    pointer-events: auto;
+
+    svg {
+      block-size: convert.to-rem(16px);
+      fill: $text-secondary;
+      inline-size: convert.to-rem(16px);
+    }
+
+    svg:hover {
+      fill: $icon-primary;
+    }
+
+    &:hover {
+      background-color: $layer-hover;
+    }
+
+    &:focus,
+    &:active {
+      @include focus-outline('outline');
+    }
   }
 }

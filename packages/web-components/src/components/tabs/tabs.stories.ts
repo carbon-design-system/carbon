@@ -191,11 +191,11 @@ export const Dismissable = {
       <style>
         ${styles}
       </style>
-      <dismissable-tabs-wrapper
+      <dismissable-tabs-story-wrapper
         ?disabled="${disabled}"
         ?contained="${contained}"
         selection-mode="${selectionMode}">
-      </dismissable-tabs-wrapper>
+      </dismissable-tabs-story-wrapper>
     `;
   },
 };

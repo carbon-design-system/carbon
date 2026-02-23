@@ -181,6 +181,33 @@ export default class CDSTabs extends HostListenerMixin(CDSContentSwitcher) {
     }
   }
 
+  @HostListener('cds-tab-closed')
+  protected _handleTabClosed(event: CustomEvent) {
+    const { index } = event.detail;
+    const { selectorItemEnabled } = this.constructor as typeof CDSTabs;
+
+    // Defer focus logic until after the tab is removed from DOM
+    requestAnimationFrame(() => {
+      // Get all enabled (selectable) tabs AFTER removal
+      const enabledTabs = this.querySelectorAll<CDSTab>(selectorItemEnabled);
+      if (enabledTabs.length === 0) {
+        return; // No tabs left to focus
+      }
+      const nextTab =
+        index < enabledTabs.length
+          ? enabledTabs[index]
+          : enabledTabs[index - 1];
+      if (nextTab) {
+        (
+          nextTab.shadowRoot?.querySelector(
+            '.cds--tabs__nav-link--dismissable'
+          ) as HTMLLinkElement
+        )?.focus();
+        nextTab.scrollIntoView({ block: 'nearest', inline: 'nearest' });
+      }
+    });
+  }
+
   /**
    * Handles click on overflow scroll buttons.
    *
@@ -228,7 +255,7 @@ export default class CDSTabs extends HostListenerMixin(CDSContentSwitcher) {
     if (nextItem) {
       (nextItem as CDSTab).hideDivider = true;
     }
-    this._updateTabsDismissable();
+    this._updateTabsState();
   }
 
   protected _selectionDidChange(
@@ -466,7 +493,7 @@ export default class CDSTabs extends HostListenerMixin(CDSContentSwitcher) {
     }
 
     if (changedProperties.has('dismissable')) {
-      this._updateTabsDismissable();
+      this._updateTabsState();
     }
   }
 
@@ -558,10 +585,11 @@ export default class CDSTabs extends HostListenerMixin(CDSContentSwitcher) {
     `;
   }
 
-  protected _updateTabsDismissable() {
+  protected _updateTabsState() {
     const tabs = this.querySelectorAll<CDSTab>('cds-tab');
-    tabs.forEach((tab: CDSTab) => {
+    tabs.forEach((tab: CDSTab, index: number) => {
       tab._dismissable = this.dismissable;
+      tab._index = index;
     });
   }
 

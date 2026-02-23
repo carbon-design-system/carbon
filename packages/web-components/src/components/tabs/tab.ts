@@ -55,6 +55,12 @@ export default class CDSTab extends CDSContentSwitcherItem {
   _dismissable = false;
 
   /**
+   * The index of the tab component
+   */
+  @state()
+  _index = -1;
+
+  /**
    * Handles `slotchange` event.
    */
   protected _handleSlotChange({ target }: Event) {
@@ -75,17 +81,25 @@ export default class CDSTab extends CDSContentSwitcherItem {
       [`${prefix}--tabs__nav-link`]: true,
       [`${prefix}--tabs__nav-link--dismissable`]: this._dismissable,
     });
+    const closeButtonClasses = classMap({
+      [`${prefix}--tabs__nav-item--close`]: this._dismissable,
+      [`${prefix}--tabs__nav-item--close--hidden`]: !this._dismissable,
+    });
     const {
       disabled,
       selected,
       tabTitle,
-      _dismissable: parentDismissable,
       _handleSlotChange: handleSlotChange,
       _handleClick: handleClick,
     } = this;
 
     const iconButton = html`
-      <cds-button kind="ghost" size="xs" @click="${handleClick}">
+      <cds-button
+        class="${closeButtonClasses}"
+        kind="ghost"
+        size="xs"
+        @click="${handleClick}"
+        ?disabled="${disabled}">
         ${iconLoader(Close16, { 'aria-label': 'close', slot: 'icon' })}
       </cds-button>
     `;
@@ -100,25 +114,19 @@ export default class CDSTab extends CDSContentSwitcherItem {
         ?disabled="${disabled}"
         aria-selected="${Boolean(selected)}">
         <slot @slotchange="${handleSlotChange}"></slot>
-        ${parentDismissable ? iconButton : ''}
       </a>
+      ${iconButton}
     `;
   }
 
   _handleClick(event: Event) {
     event.stopPropagation();
-
-    // Get index of this tab within parent tabs
-    const parentTabs = this.closest(`${prefix}-tabs`);
-    const allTabs = parentTabs?.querySelectorAll(`${prefix}-tab`);
-    const index = allTabs ? Array.from(allTabs).indexOf(this) : -1;
-
     const init = {
       bubbles: true,
       cancelable: true,
       composed: true,
       detail: {
-        index,
+        index: this._index,
       },
     };
     if (
