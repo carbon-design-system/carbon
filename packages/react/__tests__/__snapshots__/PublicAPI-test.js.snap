@@ -7657,6 +7657,9 @@ Map {
       "closeMenu": {
         "type": "func",
       },
+      "dangerDescription": {
+        "type": "string",
+      },
       "disabled": {
         "type": "bool",
       },
