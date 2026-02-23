@@ -19,6 +19,7 @@
 @use '@carbon/styles/scss/layout' as *;
 @use '@carbon/styles/scss/utilities/layout';
 @use '@carbon/styles/scss/utilities/convert';
+@use '@carbon/styles/scss/utilities/visually-hidden';
 @use '@carbon/styles/scss/utilities/skeleton' as *;
 
 $inset-transition: inset 110ms motion(standard, productive);
@@ -110,6 +111,14 @@ $inset-transition: inset 110ms motion(standard, productive);
   }
 
   outline: none;
+}
+
+:host(#{$prefix}-tab:not([type='contained']))
+  .#{$prefix}--tabs__nav-item--close--hidden {
+  @include visually-hidden.visually-hidden;
+
+  position: static;
+  inline-size: convert.to-rem(3px);
 }
 
 :host(#{$prefix}-tab[selected]) {

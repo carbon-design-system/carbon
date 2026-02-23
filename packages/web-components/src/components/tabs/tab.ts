@@ -75,6 +75,9 @@ export default class CDSTab extends CDSContentSwitcherItem {
         aria-selected="${Boolean(selected)}">
         <slot @slotchange="${handleSlotChange}"></slot>
       </a>
+      <div
+        class="${prefix}--tabs__nav-item--close--hidden"
+        aria-hidden="true"></div>
     `;
   }
 
