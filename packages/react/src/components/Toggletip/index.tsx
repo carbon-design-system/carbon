@@ -186,8 +186,8 @@ export function Toggletip<E extends ElementType = 'span'>({
 
     const handleOutsideClick = (event: MouseEvent | PointerEvent) => {
       const node = event.target as Node | null;
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
-      if (open && node && !ref.current!.contains(node)) {
+
+      if (open && node && !ref.current?.contains(node)) {
         setOpen(false);
       }
     };
