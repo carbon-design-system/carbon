@@ -80,8 +80,28 @@ jobs:
         env:
           YARN_ENABLE_HARDENED_MODE: 0
         run: yarn install --immutable --immutable-cache
+      - name: Resource snapshot (before)
+        shell: bash
+        run: |
+        set -euxo pipefail
+        echo "=== date ==="; date -u
+        echo "=== runner ==="; uname -a
+        echo "=== disk ==="; df -h; echo; du -h -d 2 "$GITHUB_WORKSPACE" | sort -h | tail -n 50 || true
+        echo "=== memory ==="; free -h; echo; cat /proc/meminfo | head -n 50
+        echo "=== processes (top) ==="; ps aux --sort=-%mem | head -n 30
+        echo "=== cgroup memory (if present) ==="
+        cat /sys/fs/cgroup/memory.current 2>/dev/null || true
+        cat /sys/fs/cgroup/memory.max 2>/dev/null || true
       - name: Build project
         run: yarn build
+      - name: Resource snapshot (after)
+        if: ${{ always() }}
+        shell: bash
+        run: |
+        set -euxo pipefail
+        echo "=== disk ==="; df -h
+        echo "=== memory ==="; free -h
+        echo "=== processes (top) ==="; ps aux --sort=-%mem | head -n 30
       - name: Check generated styles
         run: |
           yarn carbon-cli check --ignore '**/@(node_modules|examples|components|react|fixtures|compat)/**' 'packages/**/*.scss'
