@@ -400,7 +400,6 @@ const ModalDialog = React.forwardRef(function ModalDialog(
 
   function handleOnClick(evt: React.MouseEvent<HTMLDivElement>) {
     const { target } = evt;
-    evt.stopPropagation();
 
     const shouldCloseOnOutsideClick =
       // Passive modals can close on clicks outside the modal when
