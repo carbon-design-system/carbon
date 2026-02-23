@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2025
+ * Copyright IBM Corp. 2025, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -202,5 +202,24 @@ describe('useOverflowItems', () => {
     // Should return all items as visible when no container
     expect(result.current.visibleItems).toEqual(mockItems);
     expect(result.current.hiddenItems).toEqual([]);
+  });
+
+  it('should handle rerenders when items changes between array and non-array values', () => {
+    const { result, rerender } = renderHook(
+      ({ currentItems }) =>
+        useOverflowItems(currentItems, containerRef, offsetRef),
+      { initialProps: { currentItems: mockItems } }
+    );
+
+    expect(result.current.visibleItems).toBeDefined();
+    expect(result.current.hiddenItems).toBeDefined();
+
+    rerender({ currentItems: 'not an array' });
+    expect(result.current.visibleItems).toEqual([]);
+    expect(result.current.hiddenItems).toEqual([]);
+
+    rerender({ currentItems: mockItems });
+    expect(result.current.visibleItems).toBeDefined();
+    expect(result.current.hiddenItems).toBeDefined();
   });
 });
