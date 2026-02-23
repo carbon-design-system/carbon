@@ -360,7 +360,7 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
     selectionFeedback = 'top-after-reopen',
     selectedItems: selected,
     size,
-    sortItems = defaultSortItems as FilterableMultiSelectProps<ItemType>['sortItems'],
+    sortItems = defaultSortItems,
     translateWithId,
     useTitleInItem,
     warn = false,
@@ -960,10 +960,11 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
       getMenuProps(
         {
           ref: autoAlign ? refs.setFloating : null,
+          hidden: !isOpen,
         },
         { suppressRefError: true }
       ),
-    [autoAlign, getMenuProps, refs.setFloating]
+    [autoAlign, getMenuProps, isOpen, refs.setFloating]
   );
 
   const handleFocus = (evt: FocusEvent<HTMLDivElement> | undefined) => {

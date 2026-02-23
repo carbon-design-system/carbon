@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -205,6 +205,23 @@ describe('RadioButtonGroup', () => {
         screen.getByRole('radio', {
           checked: true,
         })
+      );
+    });
+
+    it('should keep `defaultSelected` when `valueSelected` is undefined', () => {
+      render(
+        <RadioButtonGroup
+          defaultSelected="test-1"
+          valueSelected={undefined}
+          name="test"
+          legendText="test">
+          <RadioButton labelText="test-1" value="test-1" />
+          <RadioButton labelText="test-2" value="test-2" />
+        </RadioButtonGroup>
+      );
+
+      expect(screen.getByLabelText('test-1')).toEqual(
+        screen.getByRole('radio', { checked: true })
       );
     });
 

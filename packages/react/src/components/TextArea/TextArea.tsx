@@ -32,8 +32,7 @@ import { isComponentElement } from '../../internal';
 export interface TextAreaProps
   extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
   /**
-   * Provide a custom className that is applied directly to the underlying
-   * `<textarea>` node
+   * Provide a custom className that is applied to the wrapper node
    */
   className?: string;
 
@@ -180,7 +179,7 @@ const TextArea = frFn((props, forwardRef) => {
     onKeyDown = noopFn,
     invalid = false,
     invalidText = '',
-    helperText = '',
+    helperText,
     light,
     placeholder = '',
     enableCounter = false,
@@ -456,7 +455,7 @@ const TextArea = frFn((props, forwardRef) => {
     ariaDescribedBy = warnId;
   } else {
     const ids: string[] = [];
-    if (!isFluid && helperText && helperId) ids.push(helperId);
+    if (!isFluid && hasHelper && helperId) ids.push(helperId);
     if (counterDescriptionId) ids.push(counterDescriptionId);
     ariaDescribedBy = ids.length > 0 ? ids.join(' ') : undefined;
   }
@@ -586,8 +585,7 @@ const TextArea = frFn((props, forwardRef) => {
 TextArea.displayName = 'TextArea';
 TextArea.propTypes = {
   /**
-   * Provide a custom className that is applied directly to the underlying
-   * `<textarea>` node
+   * Provide a custom className that is applied to the wrapper node
    */
   className: PropTypes.string,
 

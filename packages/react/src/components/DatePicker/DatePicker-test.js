@@ -492,6 +492,7 @@ describe('Simple date picker', () => {
     let cleanup;
     let render;
     let screen;
+    let waitForElementToBeRemoved;
     let LazyDatePicker;
     let LazyDatePickerInput;
 
@@ -500,24 +501,17 @@ describe('Simple date picker', () => {
       cleanup = require('@testing-library/react/pure').cleanup;
       render = require('@testing-library/react/pure').render;
       screen = require('@testing-library/react/pure').screen;
+      waitForElementToBeRemoved =
+        require('@testing-library/react/pure').waitForElementToBeRemoved;
     });
 
     afterEach(() => {
       cleanup();
     });
 
-    it.skip('should initialize a calendar when using react.lazy', async () => {
-      LazyDatePicker = React.lazy(() =>
-        import('@carbon/react').then((module) => ({
-          default: module.DatePicker,
-        }))
-      );
-
-      LazyDatePickerInput = React.lazy(() =>
-        import('@carbon/react').then((module) => ({
-          default: module.DatePickerInput,
-        }))
-      );
+    it('should initialize a calendar when using react.lazy', async () => {
+      LazyDatePicker = React.lazy(() => import('./DatePicker'));
+      LazyDatePickerInput = React.lazy(() => import('../DatePickerInput'));
 
       render(
         <React.Suspense fallback="Loading">
@@ -530,6 +524,8 @@ describe('Simple date picker', () => {
           </LazyDatePicker>
         </React.Suspense>
       );
+
+      await waitForElementToBeRemoved(() => screen.queryByText('Loading'));
 
       const labeledElement = await screen.findByLabelText(
         'Date Picker label',
