@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2019, 2025
+ * Copyright IBM Corp. 2019, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -139,7 +139,7 @@ class CDSContentSwitcherItem extends FocusMixin(LitElement) {
       ?disabled="${disabled}"
       tabindex="${selected ? '0' : '-1'}"
       aria-controls="${ifDefined(target)}"
-      aria-selected="${Boolean(selected)}">
+      aria-selected="${selected}">
       <span class="${prefix}--content-switcher__label"><slot></slot></span>
     </button>`;
 
