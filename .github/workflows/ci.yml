@@ -37,7 +37,7 @@ jobs:
       - name: Install dependencies
         env:
           YARN_ENABLE_HARDENED_MODE: 0
-        run: yarn install --immutable --immutable-cache
+        run: yarn install --immutable
       - name: Check formatting of project files
         run: yarn format:diff
 
@@ -52,7 +52,7 @@ jobs:
       - name: Install dependencies
         env:
           YARN_ENABLE_HARDENED_MODE: 0
-        run: yarn install --immutable --immutable-cache
+        run: yarn install --immutable
       - name: Lint code
         run: yarn lint
       - name: Lint styles
@@ -79,7 +79,7 @@ jobs:
       - name: Install dependencies
         env:
           YARN_ENABLE_HARDENED_MODE: 0
-        run: yarn install --immutable --immutable-cache
+        run: yarn install --immutable
       - name: Build project
         run: yarn build
       - name: Check generated styles
@@ -115,7 +115,7 @@ jobs:
       - name: Install dependencies
         env:
           YARN_ENABLE_HARDENED_MODE: 0
-        run: yarn install --immutable --immutable-cache
+        run: yarn install --immutable
       - name: Build web-components project
         run:
           yarn lerna run build --scope='@carbon/web-components'
@@ -155,7 +155,7 @@ jobs:
       - name: Install dependencies
         env:
           YARN_ENABLE_HARDENED_MODE: 0
-        run: yarn install --immutable --immutable-cache
+        run: yarn install --immutable
       - uses: dorny/paths-filter@de90cc6fb38fc0963ad72b210f1f284cd68cea36 # v3.0.2
         id: filter
         with:
@@ -201,7 +201,7 @@ jobs:
       - name: Install dependencies
         env:
           YARN_ENABLE_HARDENED_MODE: 0
-        run: yarn install --immutable --immutable-cache
+        run: yarn install --immutable
       - name: Install browsers
         run: yarn playwright install --with-deps
       - name: Build project
@@ -282,7 +282,7 @@ jobs:
       - name: Install dependencies
         env:
           YARN_ENABLE_HARDENED_MODE: 0
-        run: yarn install --immutable --immutable-cache
+        run: yarn install --immutable
       - name: Install browsers
         run: yarn playwright install --with-deps
       - name: Build project
@@ -349,7 +349,7 @@ jobs:
       - name: Install dependencies
         env:
           YARN_ENABLE_HARDENED_MODE: 0
-        run: yarn install --immutable --immutable-cache
+        run: yarn install --immutable
 
       - name: Download vrt blob reports from GitHub Actions Artifacts
         uses: actions/download-artifact@v7
@@ -421,7 +421,7 @@ jobs:
       - name: Install dependencies
         env:
           YARN_ENABLE_HARDENED_MODE: 0
-        run: yarn install --immutable --immutable-cache
+        run: yarn install --immutable
       - name: Build project
         run: yarn build
       - name: Build storybook
