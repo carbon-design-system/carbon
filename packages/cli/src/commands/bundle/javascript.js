@@ -74,6 +74,7 @@ export default async function bundle(entrypoint, options) {
         extensions: ['.js'],
       }),
     ],
+    maxParallelFileOps: 2,
   });
 
   await Promise.all(

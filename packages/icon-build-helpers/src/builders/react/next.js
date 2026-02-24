@@ -177,6 +177,7 @@ async function builder(metadata, { output }) {
       }),
       babel(babelConfig),
     ],
+    maxParallelFileOps: 2,
   });
   const targets = [
     {

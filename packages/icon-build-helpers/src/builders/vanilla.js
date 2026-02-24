@@ -61,9 +61,11 @@ async function builder(metadata, { output }) {
       `\nexport { default as ${m.moduleName} } from '${m.filepath}';`;
   }
 
+  console.log('icon-build-helpers: 🔎 Creating bundle...');
   const bundle = await rollup({
     input,
     plugins: [virtual(files), babel(babelConfig)],
+    maxParallelFileOps: 2,
   });
 
   const bundles = [
@@ -76,7 +78,7 @@ async function builder(metadata, { output }) {
       format: 'commonjs',
     },
   ];
-
+  console.log('icon-build-helpers: done');
   for (const { directory, format } of bundles) {
     const outputOptions = {
       dir: directory,
@@ -86,19 +88,25 @@ async function builder(metadata, { output }) {
       exports: 'auto',
     };
 
+    console.log(`icon-build-helpers: 📦  Writing ${format} bundle...`);
     await bundle.write(outputOptions);
+    console.log(`icon-build-helpers: ${format} done`);
   }
 
+  console.log('icon-build-helpers: 🔎 Creating umd bundle...');
   const umd = await rollup({
     input: 'index.js',
     plugins: [virtual(files), babel(babelConfig)],
+    maxParallelFileOps: 2,
   });
-
+  console.log(`icon-build-helpers: done`);
+  console.log(`icon-build-helpers: 📦  Writing umd bundle...`);
   await umd.write({
     file: path.join(output, 'umd/index.js'),
     format: 'umd',
     name: 'CarbonIcons',
   });
+  console.log(`icon-build-helpers: umd done`);
 }
 
 module.exports = builder;

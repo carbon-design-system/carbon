@@ -11,7 +11,7 @@ on:
 jobs:
   build:
     name: Create Release
-    runs-on: ubuntu-latest-larger-disk
+    runs-on: ubuntu-latest
     timeout-minutes: 60
     # Needed as recommended by npm docs on publishing with provenance https://docs.npmjs.com/generating-provenance-statements
     permissions:
@@ -105,4 +105,3 @@ jobs:
         uses: peter-evans/repository-dispatch@v4
         with:
           event-type: deploy-packages
-

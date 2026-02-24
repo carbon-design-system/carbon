@@ -127,7 +127,7 @@ const didWarnAboutDeprecation = {};`;
       files['index.ts'] += `export { ${m.moduleName} } from '${filename}';`;
     }
   }
-
+  console.log('icon-build-helpers-react: 🔎 Creating bundle...');
   const bundle = await rollup({
     input,
     external,
@@ -141,6 +141,7 @@ const didWarnAboutDeprecation = {};`;
       }),
       babel(babelConfig),
     ],
+    maxParallelFileOps: 2,
   });
 
   const bundles = [
@@ -153,7 +154,7 @@ const didWarnAboutDeprecation = {};`;
       format: 'commonjs',
     },
   ];
-
+  console.log('icon-build-helpers-react: done');
   for (const { directory, format } of bundles) {
     const outputOptions = {
       dir: directory,
@@ -162,10 +163,11 @@ const didWarnAboutDeprecation = {};`;
       banner: BANNER,
       exports: 'auto',
     };
-
+    console.log(`icon-build-helpers-react: 📦  Writing ${format} bundle...`);
     await bundle.write(outputOptions);
+    console.log('icon-build-helpers-react: done');
   }
-
+  console.log('icon-build-helpers-react: 🔎 Creating umd bundle...');
   const umd = await rollup({
     input: 'index.ts',
     external,
@@ -179,8 +181,10 @@ const didWarnAboutDeprecation = {};`;
       }),
       babel(babelConfig),
     ],
+    maxParallelFileOps: 2,
   });
-
+  console.log(`icon-build-helpers-react: done`);
+  console.log(`icon-build-helpers-react: 📦  Writing umd bundle...`);
   await umd.write({
     file: path.join(output, 'umd/index.js'),
     format: 'umd',
@@ -191,6 +195,7 @@ const didWarnAboutDeprecation = {};`;
       react: 'React',
     },
   });
+  console.log(`icon-build-helpers-react: umd done`);
 }
 
 /**
