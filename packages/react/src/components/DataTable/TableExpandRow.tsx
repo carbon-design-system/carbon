@@ -10,7 +10,6 @@ import PropTypes from 'prop-types';
 import React, {
   Children,
   forwardRef,
-  isValidElement,
   type HTMLAttributes,
   type MouseEventHandler,
   type PropsWithChildren,
@@ -141,9 +140,8 @@ const TableExpandRow = forwardRef<HTMLTableCellElement, TableExpandRowProps>(
 
     const normalizedChildren = Children.toArray(children).map((child) => {
       if (
-        isValidElement(child) &&
-        child.type !== TableSlugRow &&
-        child.type !== TableDecoratorRow
+        !isComponentElement(child, TableSlugRow) &&
+        !isComponentElement(child, TableDecoratorRow)
       ) {
         return child;
       }
