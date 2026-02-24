@@ -39,7 +39,7 @@ jobs:
       - name: Install dependencies
         env:
           YARN_ENABLE_HARDENED_MODE: 0
-        run: yarn install --immutable --immutable-cache
+        run: yarn install --immutable
 
       - name: Publish to Figma Code Connect
         working-directory: packages/${{ matrix.package }}
