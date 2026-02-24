@@ -852,13 +852,11 @@ const ComboBox = forwardRef(
         setHighlightedIndex(indexToHighlight(normalizedInput));
       },
       onHighlightedIndexChange: ({ highlightedIndex }) => {
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
-        if (highlightedIndex! > -1) {
+        if (highlightedIndex > -1) {
           const itemArray = document.querySelectorAll(
             `li.${prefix}--list-box__menu-item[role="option"]`
           );
-          // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
-          const highlightedItem = itemArray[highlightedIndex!];
+          const highlightedItem = itemArray[highlightedIndex];
           if (highlightedItem) {
             highlightedItem.scrollIntoView({
               behavior: 'smooth',
