@@ -102,6 +102,12 @@ jobs:
           echo "=== disk ==="; df -h
           echo "=== memory ==="; free -h
           echo "=== processes (top) ==="; ps aux --sort=-%mem | head -n 30
+      - name: Check kernel messages for OOM (best effort)
+        if: ${{ failure() || cancelled() }}
+        shell: bash
+        run: |
+          set +e
+          sudo dmesg -T | egrep -i "out of memory|oom-kill|killed process" | tail -n 200 || true
       - name: Check generated styles
         run: |
           yarn carbon-cli check --ignore '**/@(node_modules|examples|components|react|fixtures|compat)/**' 'packages/**/*.scss'
@@ -160,6 +166,12 @@ jobs:
           echo "=== disk ==="; df -h
           echo "=== memory ==="; free -h
           echo "=== processes (top) ==="; ps aux --sort=-%mem | head -n 30
+      - name: Check kernel messages for OOM (best effort)
+        if: ${{ failure() || cancelled() }}
+        shell: bash
+        run: |
+          set +e
+          sudo dmesg -T | egrep -i "out of memory|oom-kill|killed process" | tail -n 200 || true
       - name: Run tests
         run: |
           cd packages/web-components
@@ -231,6 +243,12 @@ jobs:
           echo "=== disk ==="; df -h
           echo "=== memory ==="; free -h
           echo "=== processes (top) ==="; ps aux --sort=-%mem | head -n 30
+      - name: Check kernel messages for OOM (best effort)
+        if: ${{ failure() || cancelled() }}
+        shell: bash
+        run: |
+          set +e
+          sudo dmesg -T | egrep -i "out of memory|oom-kill|killed process" | tail -n 200 || true
       - name: Run e2e tests
         if: ${{ steps.filter.outputs.e2e == 'true' }}
         run: yarn test:e2e
@@ -286,6 +304,12 @@ jobs:
           echo "=== disk ==="; df -h
           echo "=== memory ==="; free -h
           echo "=== processes (top) ==="; ps aux --sort=-%mem | head -n 30
+      - name: Check kernel messages for OOM (best effort)
+        if: ${{ failure() || cancelled() }}
+        shell: bash
+        run: |
+          set +e
+          sudo dmesg -T | egrep -i "out of memory|oom-kill|killed process" | tail -n 200 || true
       - name: Build storybook
         run: yarn workspace @carbon/react storybook:build
       - name: Run storybook
@@ -387,6 +411,12 @@ jobs:
           echo "=== disk ==="; df -h
           echo "=== memory ==="; free -h
           echo "=== processes (top) ==="; ps aux --sort=-%mem | head -n 30
+      - name: Check kernel messages for OOM (best effort)
+        if: ${{ failure() || cancelled() }}
+        shell: bash
+        run: |
+          set +e
+          sudo dmesg -T | egrep -i "out of memory|oom-kill|killed process" | tail -n 200 || true
       - name: Build storybook
         run: yarn workspace @carbon/react storybook:build
       - name: Run storybook
