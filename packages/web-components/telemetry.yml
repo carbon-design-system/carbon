@@ -140,6 +140,8 @@ collect:
         - oncds-notification-beingclosed
         - oncds-notification-closed
         - oncds-number-input
+        - oncds-popover-beingclosed
+        - oncds-popover-closed
         - oncds-radio-button-changed
         - oncds-search-input
         - oncds-select-selected
@@ -513,7 +515,6 @@ collect:
         - sort-direction
         # cds-table-skeleton
         - column-count
-        - compact
         - headers
         - row-count
         - show-header

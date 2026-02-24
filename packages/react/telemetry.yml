@@ -305,7 +305,6 @@ collect:
         - onAnimationEnd
         # DataTableSkeleton
         - columnCount
-        - compact
         - showHeader
         - showToolbar
         - zebra
