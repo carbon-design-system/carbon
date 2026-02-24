@@ -370,6 +370,13 @@ export const initCarousel = (
    * @returns {void}
    */
   const reset = () => {
+    // Remove recycle classes from all views before resetting
+    Array.from(viewItems).forEach((viewItem: HTMLElement) => {
+      removeReCycleClasses(viewItem);
+    });
+
+    // Update previous stack to avoid recycle-out class being applied
+    previousViewIndexStack = [0];
     viewIndexStack = [0];
     performAnimation(false);
   };

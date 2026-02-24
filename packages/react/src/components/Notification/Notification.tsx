@@ -1054,60 +1054,61 @@ export function ActionableNotification({
           Focus sentinel
         </span>
       )}
-
-      <div className={`${prefix}--actionable-notification__details`}>
-        <NotificationIcon
-          notificationType={inline ? 'inline' : 'toast'}
-          kind={kind}
-          iconDescription={statusIconDescription || `${kind} icon`}
-        />
-        <div className={`${prefix}--actionable-notification__text-wrapper`}>
-          <div className={`${prefix}--actionable-notification__content`}>
-            {title && (
-              <Text
-                as="div"
-                className={`${prefix}--actionable-notification__title`}
-                id={id}>
-                {title}
-              </Text>
-            )}
-            {subtitle && (
-              <Text
-                as="div"
-                className={`${prefix}--actionable-notification__subtitle`}
-                id={subtitleId}>
-                {subtitle}
-              </Text>
-            )}
-            {caption && (
-              <Text
-                as="div"
-                className={`${prefix}--actionable-notification__caption`}>
-                {caption}
-              </Text>
-            )}
-            {children}
+      <div
+        ref={innerModal}
+        className={`${prefix}--actionable-notification__focus-wrapper`}>
+        <div className={`${prefix}--actionable-notification__details`}>
+          <NotificationIcon
+            notificationType={inline ? 'inline' : 'toast'}
+            kind={kind}
+            iconDescription={statusIconDescription || `${kind} icon`}
+          />
+          <div className={`${prefix}--actionable-notification__text-wrapper`}>
+            <div className={`${prefix}--actionable-notification__content`}>
+              {title && (
+                <Text
+                  as="div"
+                  className={`${prefix}--actionable-notification__title`}
+                  id={id}>
+                  {title}
+                </Text>
+              )}
+              {subtitle && (
+                <Text
+                  as="div"
+                  className={`${prefix}--actionable-notification__subtitle`}
+                  id={subtitleId}>
+                  {subtitle}
+                </Text>
+              )}
+              {caption && (
+                <Text
+                  as="div"
+                  className={`${prefix}--actionable-notification__caption`}>
+                  {caption}
+                </Text>
+              )}
+              {children}
+            </div>
           </div>
         </div>
-      </div>
-      <div
-        className={`${prefix}--actionable-notification__button-wrapper`}
-        ref={innerModal}>
-        {actionButtonLabel && (
-          <NotificationActionButton
-            onClick={onActionButtonClick}
-            inline={inline}>
-            {actionButtonLabel}
-          </NotificationActionButton>
-        )}
+        <div className={`${prefix}--actionable-notification__button-wrapper`}>
+          {actionButtonLabel && (
+            <NotificationActionButton
+              onClick={onActionButtonClick}
+              inline={inline}>
+              {actionButtonLabel}
+            </NotificationActionButton>
+          )}
 
-        {!hideCloseButton && (
-          <NotificationButton
-            aria-label={deprecatedAriaLabel || ariaLabel}
-            notificationType="actionable"
-            onClick={handleCloseButtonClick}
-          />
-        )}
+          {!hideCloseButton && (
+            <NotificationButton
+              aria-label={deprecatedAriaLabel || ariaLabel}
+              notificationType="actionable"
+              onClick={handleCloseButtonClick}
+            />
+          )}
+        </div>
       </div>
       {!focusTrapWithoutSentinels && (
         <span

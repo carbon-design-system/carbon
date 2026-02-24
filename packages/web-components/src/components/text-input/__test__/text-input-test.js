@@ -60,6 +60,21 @@ describe('cds-text-input', () => {
     expect(helper.textContent).to.include('Helpful info');
   });
 
+  it('should render helper text from slot without helper-text attribute', async () => {
+    const el = await fixture(html`
+      <cds-text-input label-text="Text input">
+        <cds-text-input-label slot="label-text"
+          >Text input</cds-text-input-label
+        >
+        <span slot="helper-text"><strong>Rich</strong> helper text</span>
+      </cds-text-input>
+    `);
+    await el.updateComplete;
+    const helper = el.shadowRoot.querySelector('.cds--form__helper-text');
+    expect(helper).to.exist;
+    expect(helper.hidden).to.be.false;
+  });
+
   it('should apply disabled attribute', async () => {
     const el = await fixture(html`
       <cds-text-input disabled label-text="Disabled">

@@ -10,7 +10,6 @@ import React, { // eslint-disable-line @typescript-eslint/no-unused-vars -- http
   useEffect,
   useMemo,
   useState,
-  type ChangeEvent,
   type MouseEvent,
   type ReactElement,
   type ReactNode,
@@ -44,7 +43,9 @@ import TableSlugRow from './TableSlugRow';
 import TableToolbar from './TableToolbar';
 import TableToolbarAction from './TableToolbarAction';
 import TableToolbarContent from './TableToolbarContent';
-import TableToolbarSearch from './TableToolbarSearch';
+import TableToolbarSearch, {
+  type TableToolbarSearchOnChangeEvent,
+} from './TableToolbarSearch';
 import TableToolbarMenu from './TableToolbarMenu';
 import type { TranslateWithId, TFunc } from '../../types/common';
 import { deprecate } from '../../prop-types/deprecate';
@@ -113,6 +114,7 @@ export interface DataTableHeader {
   header: ReactNode;
   slug?: ReactElement;
   decorator?: ReactElement;
+  isSortable?: boolean;
 }
 // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
 export interface DataTableRenderProps<RowType, ColTypes extends any[]> {
@@ -241,9 +243,12 @@ export interface DataTableRenderProps<RowType, ColTypes extends any[]> {
 
   /**
    * Handles input value changes.
+   *
+   * Note: the `''` event sentinel is supported for compatibility with
+   * `TableToolbarSearch` and should be removed in the next major release.
    */
   onInputChange: (
-    event: ChangeEvent<HTMLInputElement>,
+    event: TableToolbarSearchOnChangeEvent,
     defaultValue?: string
   ) => void;
 
@@ -346,7 +351,7 @@ export const DataTable = <RowType, ColTypes extends any[]>(
     render,
     translateWithId: t = defaultTranslateWithId,
     size,
-    isSortable: isSortableProp,
+    isSortable,
     useZebraStyles,
     useStaticWidth,
     stickyHeader,
@@ -392,7 +397,7 @@ export const DataTable = <RowType, ColTypes extends any[]>(
   const getHeaderProps: RenderProps['getHeaderProps'] = ({
     header,
     onClick,
-    isSortable = isSortableProp,
+    isSortable: headerIsSortable,
     ...rest
   }) => {
     const { sortDirection, sortHeaderKey } = state;
@@ -402,7 +407,7 @@ export const DataTable = <RowType, ColTypes extends any[]>(
       ...rest,
       key,
       sortDirection,
-      isSortable,
+      isSortable: headerIsSortable ?? header.isSortable ?? isSortable,
       isSortHeader: sortHeaderKey === key,
       slug,
       decorator,
@@ -588,7 +593,7 @@ export const DataTable = <RowType, ColTypes extends any[]>(
     return {
       useZebraStyles,
       size: size ?? 'lg',
-      isSortable: isSortableProp,
+      isSortable,
       useStaticWidth,
       stickyHeader,
       overflowMenuOnHover: overflowMenuOnHover ?? false,
@@ -810,10 +815,12 @@ export const DataTable = <RowType, ColTypes extends any[]>(
    * Event handler for table filter input changes.
    */
   const handleOnInputValueChange = (
-    event: ChangeEvent<HTMLInputElement>,
+    event: TableToolbarSearchOnChangeEvent,
     defaultValue?: string
   ) => {
-    const value = defaultValue || event.target?.value;
+    // TODO: Remove `''` sentinel support once `TableToolbarSearch` no
+    // longer emits it on mount.
+    const value = defaultValue ?? (event === '' ? event : event.target.value);
 
     setState((prev) => ({ ...prev, filterInputValue: value }));
   };
@@ -909,6 +916,7 @@ DataTable.propTypes = {
     PropTypes.shape({
       key: PropTypes.string.isRequired,
       header: PropTypes.node.isRequired,
+      isSortable: PropTypes.bool,
     })
   ).isRequired,
 

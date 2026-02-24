@@ -263,6 +263,7 @@ function stateReducer(state, actionAndChanges) {
 
   switch (type) {
     case ItemMouseMove:
+      return state;
     case MenuMouseLeave:
       if (changes.highlightedIndex === state.highlightedIndex) {
         // Prevent state update if highlightedIndex hasn't changed
@@ -518,7 +519,7 @@ const Dropdown = React.forwardRef(
       ) : null;
 
     const handleFocus = (evt: FocusEvent<HTMLDivElement>) => {
-      setIsFocused(evt.type === 'focus' && !selectedItem ? true : false);
+      setIsFocused(evt.type === 'focus' && !selectedItem);
     };
 
     const buttonRef = useRef<HTMLButtonElement>(null);
@@ -534,16 +535,22 @@ const Dropdown = React.forwardRef(
 
     const onKeyDownHandler = useCallback(
       (evt: React.KeyboardEvent<HTMLButtonElement>) => {
-        if (
-          evt.code !== 'Space' ||
-          !['ArrowDown', 'ArrowUp', ' ', 'Enter'].includes(evt.key)
-        ) {
+        const navigationKeys = ['ArrowDown', 'ArrowUp', ' ', 'Enter'];
+
+        // If the key is not a navigation key, the user is typing
+        if (!navigationKeys.includes(evt.key)) {
           setIsTyping(true);
-        }
-        if (
-          (isTyping && evt.code === 'Space') ||
-          !['ArrowDown', 'ArrowUp', ' ', 'Enter'].includes(evt.key)
-        ) {
+          // Reset the timer for typing timeout
+          if (currTimer) {
+            clearTimeout(currTimer);
+          }
+          setCurrTimer(
+            setTimeout(() => {
+              setIsTyping(false);
+            }, 3000)
+          );
+        } else if (isTyping && evt.key === ' ') {
+          // If user is typing and presses space, reset the timer
           if (currTimer) {
             clearTimeout(currTimer);
           }
@@ -553,6 +560,7 @@ const Dropdown = React.forwardRef(
             }, 3000)
           );
         }
+
         if (['ArrowDown'].includes(evt.key)) {
           setIsFocused(false);
         }
@@ -629,10 +637,10 @@ const Dropdown = React.forwardRef(
           size={size}
           className={className}
           invalid={normalizedProps.invalid}
-          invalidText={isFluid ? invalidText : undefined}
+          invalidText={invalidText}
           invalidTextId={normalizedProps.invalidId}
           warn={normalizedProps.warn}
-          warnText={isFluid ? warnText : undefined}
+          warnText={warnText}
           warnTextId={normalizedProps.warnId}
           light={light}
           isOpen={isOpen}
@@ -723,7 +731,6 @@ const Dropdown = React.forwardRef(
           </ListBox.Menu>
         </ListBox>
         {!inline && !isFluid && !normalizedProps.validation && helper}
-        {!inline && !isFluid && normalizedProps.validation}
       </div>
     );
   }

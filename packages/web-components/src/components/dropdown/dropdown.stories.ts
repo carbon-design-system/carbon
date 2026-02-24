@@ -51,7 +51,7 @@ const items = [
   },
   {
     value: 'option-3',
-    text: 'Option 3 - a disabled item',
+    text: 'Option 3',
     disabled: true,
   },
   {
@@ -84,16 +84,16 @@ const defaultArgs = {
   hideLabel: false,
   helperText: '',
   invalid: false,
-  invalidText: '',
-  label: 'This is an example label',
+  invalidText: 'Error message goes here',
+  label: 'Choose an option',
   open: false,
   readOnly: false,
   size: null,
-  titleText: 'This is an example title',
+  titleText: 'Label',
   type: null,
   value: '',
   warn: false,
-  warnText: '',
+  warnText: 'Warning message goes here',
 };
 
 const controls = {
@@ -176,9 +176,9 @@ export const Default = {
   argTypes: controls,
   args: {
     ...defaultArgs,
-    helperText: 'This is some helper text',
-    invalidText: 'invalid selection',
-    warnText: 'please notice the warning',
+    helperText: 'Helper text',
+    invalidText: 'Error message goes here',
+    warnText: 'Warning message goes here',
   },
   render: ({
     ariaLabel,
@@ -233,11 +233,15 @@ export const ExperimentalAutoAlign = {
   args: {
     ...defaultArgs,
     autoalign: true,
-    direction: DROPDOWN_DIRECTION.BOTTOM,
-    helperText: 'This is some helper text',
+    direction: DROPDOWN_DIRECTION.TOP,
+    helperText: 'Helper text',
+    invalid: false,
+    invalidText: 'Error message goes here',
     label: 'Option 1',
-    titleText: 'Dropdown label',
+    titleText: 'Label',
     value: 'option-1',
+    warn: false,
+    warnText: 'Warning message goes here',
   },
   render: ({
     ariaLabel,
@@ -296,7 +300,7 @@ export const Inline = {
   args: {
     ...defaultArgs,
     label: 'Option 1',
-    titleText: 'Inline dropdown label',
+    titleText: 'Label',
     type: DROPDOWN_TYPE.INLINE,
     value: 'option-1',
   },
@@ -353,7 +357,7 @@ export const InlineWithLayer = {
   args: {
     ...defaultArgs,
     label: 'Option 1',
-    titleText: 'Inline dropdown label',
+    titleText: 'Label',
     type: DROPDOWN_TYPE.INLINE,
     value: 'option-1',
   },
@@ -457,10 +461,14 @@ export const WithAILabel = {
   argTypes: controls,
   args: {
     ...defaultArgs,
-    helperText: 'This is some helper text',
+    helperText: 'Helper text',
+    invalid: false,
+    invalidText: 'Error message goes here',
     label: 'Option 1',
-    titleText: 'Dropdown title',
+    titleText: 'Label',
     value: 'option-1',
+    warn: false,
+    warnText: 'Warning message goes here',
   },
   render: ({
     ariaLabel,
@@ -515,10 +523,14 @@ export const WithLayer = {
   argTypes: controls,
   args: {
     ...defaultArgs,
-    helperText: 'This is some helper text',
+    helperText: 'Helper text',
+    invalid: false,
+    invalidText: 'Error message goes here',
     label: 'Option 1',
-    titleText: 'Dropdown label',
+    titleText: 'Label',
     value: 'option-1',
+    warn: false,
+    warnText: 'Warning message goes here',
   },
   render: ({
     ariaLabel,
@@ -579,7 +591,7 @@ export const WithToggletipLabel = {
   args: {
     ...defaultArgs,
     label: 'placeholder',
-    titleText: 'Dropdown title',
+    titleText: 'Label',
     value: 'placeholder',
   },
   render: ({

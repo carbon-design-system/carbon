@@ -15,6 +15,7 @@ import {
   StaticNotification,
   Callout,
 } from '../Notification';
+import { Link } from '../../Link';
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
@@ -340,6 +341,28 @@ describe('ActionableNotification', () => {
     await waitFor(() => {
       expect(screen.queryByRole('alertdialog')).not.toBeInTheDocument();
     });
+  });
+
+  it('includes children elements within the focusWrap', async () => {
+    render(
+      <ActionableNotification actionButtonLabel="My custom action">
+        <Link href="#">link1</Link>
+        <Link href="#">link2</Link>
+      </ActionableNotification>
+    );
+
+    // actionButton should have focus on initial render
+    const actionButton = screen.getByRole('button', {
+      name: 'My custom action',
+    });
+    expect(actionButton).toHaveFocus();
+
+    // shift tab because link is before action button
+    await userEvent.tab({ shift: true });
+    expect(screen.getByRole('link', { name: 'link2' })).toHaveFocus();
+
+    await userEvent.tab({ shift: true });
+    expect(screen.getByRole('link', { name: 'link1' })).toHaveFocus();
   });
 
   it('supports `title`, `subtitle`, `caption` props', () => {

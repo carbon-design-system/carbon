@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2019, 2024
+ * Copyright IBM Corp. 2019, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -64,7 +64,7 @@ class CDSIconButton extends CDSButton {
    * Specify the duration in milliseconds to delay before hiding the tooltip
    */
   @property({ attribute: 'leave-delay-ms', type: Number })
-  leaveDelayMs = 300;
+  leaveDelayMs = 100;
 
   /**
    * Specify the size of the Button. Defaults to `md`.
@@ -102,7 +102,7 @@ class CDSIconButton extends CDSButton {
 
   protected _renderTooltipContent() {
     return html`
-      <cds-tooltip-content>
+      <cds-tooltip-content ?hidden=${this.disabled}>
         <slot name="tooltip-content"></slot>
       </cds-tooltip-content>
     `;
@@ -122,9 +122,10 @@ class CDSIconButton extends CDSButton {
         ?autoalign=${autoalign}
         align=${align}
         ?defaultOpen=${defaultOpen}
-        close-on-activation="${closeOnActivation}"
+        ?closeOnActivation=${closeOnActivation}
         enter-delay-ms=${enterDelayMs}
-        leave-delay-ms=${leaveDelayMs}>
+        leave-delay-ms=${leaveDelayMs}
+        .dropShadow=${false}>
         ${super.render()} ${this._renderTooltipContent()}
       </cds-tooltip>
     `;

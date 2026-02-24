@@ -27,7 +27,7 @@ import { useWindowEvent } from '../../internal/useEvent';
 import { useDelayedState } from '../../internal/useDelayedState';
 import { breakpoints } from '@carbon/layout';
 import { useMatchMedia } from '../../internal/useMatchMedia';
-// TO-DO: comment back in when footer is added for rails
+// TODO: comment back in when footer is added for rails
 // import SideNavFooter from './SideNavFooter';
 
 export interface SideNavProps {
@@ -39,7 +39,7 @@ export interface SideNavProps {
     value: boolean
   ) => void;
   href?: string | undefined;
-  // TO-DO: comment back in when footer is added for rails
+  // TODO: comment back in when footer is added for rails
   // translateById?: ((id: TranslationId) => Translation) | undefined;
   isFixedNav?: boolean | undefined;
   isRail?: boolean | undefined;
@@ -71,7 +71,7 @@ const SideNav = frFn((props, ref) => {
     children,
     onToggle,
     className: customClassName,
-    // TO-DO: comment back in when footer is added for rails
+    // TODO: comment back in when footer is added for rails
     // translateById: t = (id) => translations[id],
     href,
     isFixedNav = false,
@@ -111,7 +111,7 @@ const SideNav = frFn((props, ref) => {
     'aria-labelledby': ariaLabelledBy,
   };
 
-  // TO-DO: comment back in when footer is added for rails
+  // TODO: comment back in when footer is added for rails
   // const assistiveText = expanded
   //   ? t('carbon.sidenav.state.open')
   //   : t('carbon.sidenav.state.closed');

@@ -75,6 +75,11 @@ describe('TextInput', () => {
       );
     });
 
+    it('should render helperText with value 0', () => {
+      render(<TextInput id="input-1" labelText="label" helperText={0} />);
+      expect(screen.getByText('0')).toBeInTheDocument();
+    });
+
     it('should respect hideLabel prop', () => {
       render(<TextInput id="input-1" labelText="TextInput label" hideLabel />);
 
@@ -145,6 +150,11 @@ describe('TextInput', () => {
       expect(screen.getByText('TextInput label')).toHaveClass(
         `${prefix}--label`
       );
+    });
+
+    it('should render labelText with value 0', () => {
+      render(<TextInput id="input-1" labelText={0} />);
+      expect(screen.getByText('0')).toBeInTheDocument();
     });
 
     it('should respect placeholder prop', () => {

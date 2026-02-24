@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2025
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -38,11 +38,16 @@ describe('MultiSelect', () => {
     };
   });
 
-  describe.skip('automated accessibility tests', () => {
+  describe('automated accessibility tests', () => {
     it('should have no axe violations', async () => {
       const items = generateItems(4, generateGenericItem);
       const { container } = render(
-        <MultiSelect id="test" label="Field" items={items} />
+        <MultiSelect
+          id="test"
+          label="Field"
+          titleText="Multiselect title"
+          items={items}
+        />
       );
       await waitForPosition();
 
@@ -52,7 +57,12 @@ describe('MultiSelect', () => {
     it('should have no AC violations', async () => {
       const items = generateItems(4, generateGenericItem);
       const { container } = render(
-        <MultiSelect id="test" label="Field" items={items} />
+        <MultiSelect
+          id="test"
+          label="Field"
+          titleText="Multiselect title"
+          items={items}
+        />
       );
       await waitForPosition();
 
@@ -1021,12 +1031,14 @@ describe('MultiSelect', () => {
       (acc, { name, value }) => ({ ...acc, [name]: value }),
       {}
     );
+    const idPrefix = attributes.id.replace(/-label$/, '');
 
     expect(attributes).toEqual({
       class: 'cds--label',
-      for: 'downshift-_r_64_-toggle-button',
-      id: 'downshift-_r_64_-label',
+      for: attributes.for,
+      id: attributes.id,
     });
+    expect(attributes.for).toBe(`${idPrefix}-toggle-button`);
   });
 
   it('should add certain label props when `titleText` is an element', () => {
@@ -1042,7 +1054,7 @@ describe('MultiSelect', () => {
 
     expect(attributes).toEqual({
       class: 'cds--label',
-      id: 'downshift-_r_67_-label',
+      id: attributes.id,
     });
   });
 

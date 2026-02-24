@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2025
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -7,17 +7,13 @@
 
 import cx from 'classnames';
 import PropTypes from 'prop-types';
-import React, {
-  useLayoutEffect,
-  useRef,
-  useState,
-  type HTMLAttributes,
-} from 'react';
+import React, { useRef, useState, type HTMLAttributes } from 'react';
 import Filename from './Filename';
 import { keys, matches } from '../../internal/keyboard';
 import { useId } from '../../internal/useId';
 import { usePrefix } from '../../internal/usePrefix';
 import { noopFn } from '../../internal/noopFn';
+import useIsomorphicEffect from '../../internal/useIsomorphicEffect';
 import { Text } from '../Text';
 import { Tooltip } from '../Tooltip';
 
@@ -118,7 +114,7 @@ function FileUploaderItem({
     return isActive;
   };
 
-  useLayoutEffect(() => {
+  useIsomorphicEffect(() => {
     isEllipsisActive(textRef.current);
   }, [prefix, name]);
 

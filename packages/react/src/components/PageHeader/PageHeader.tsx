@@ -1,12 +1,11 @@
 /**
- * Copyright IBM Corp. 2025
+ * Copyright IBM Corp. 2025, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 import React, {
   useEffect,
-  useLayoutEffect,
   useState,
   useRef,
   useMemo,
@@ -31,6 +30,7 @@ import useOverflowItems from '../../internal/useOverflowItems';
 import { Popover, PopoverContent } from '../Popover';
 import { useId } from '../../internal/useId';
 import { Grid, Column } from '../Grid';
+import useIsomorphicEffect from '../../internal/useIsomorphicEffect';
 
 /**
  * ----------
@@ -214,9 +214,8 @@ const PageHeaderContent = React.forwardRef<
       return element.offsetHeight < element.scrollHeight;
     };
 
-    useLayoutEffect(() => {
-      // eslint-disable-next-line  @typescript-eslint/no-unused-expressions -- https://github.com/carbon-design-system/carbon/issues/20452
-      titleRef.current && isEllipsisActive(titleRef.current);
+    useIsomorphicEffect(() => {
+      if (titleRef.current) isEllipsisActive(titleRef.current);
     }, [title]);
 
     return (
@@ -353,7 +352,7 @@ const PageHeaderContentPageActions = ({
 
   // need to set the grid columns width based on the menu button's width
   // to avoid overlapping when resizing
-  useLayoutEffect(() => {
+  useIsomorphicEffect(() => {
     if (menuButtonVisibility && offsetRef.current) {
       const width = offsetRef.current.offsetWidth;
       document.documentElement.style.setProperty(

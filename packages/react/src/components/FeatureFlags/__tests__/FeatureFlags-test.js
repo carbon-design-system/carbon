@@ -1,18 +1,18 @@
 /**
- * Copyright IBM Corp. 2015, 2023
+ * Copyright IBM Corp. 2015, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
-import * as GlobalFeatureFlags from '@carbon/feature-flags';
+import { add } from '@carbon/feature-flags';
 import { render } from '@testing-library/react';
 import React from 'react';
 import { FeatureFlags, useFeatureFlags, useFeatureFlag } from '../';
 
 describe('FeatureFlags', () => {
   it('should default to the global feature flag scope', () => {
-    GlobalFeatureFlags.add('enable-feature-flags-test', true);
+    add('enable-feature-flags-test', true);
 
     const checkFlags = jest.fn();
     const checkFlag = jest.fn();

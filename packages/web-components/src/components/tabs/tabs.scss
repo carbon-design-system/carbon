@@ -309,3 +309,10 @@ $inset-transition: inset 110ms motion(standard, productive);
 :host(#{$prefix}-tab-skeleton:first-of-type) {
   margin-inline-start: 0;
 }
+
+// Windows HCM fix
+:host(#{$prefix}-tab[selected]) .#{$prefix}--tabs__nav-link {
+  @include high-contrast-mode {
+    background-color: SelectedItem;
+  }
+}

@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2025
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -76,7 +76,7 @@ const HeaderPanel = React.forwardRef<HTMLDivElement, HeaderPanelProps>(
     const expandedProp = controlled ? expanded : expandedState;
 
     const [lastClickedElement, setLastClickedElement] =
-      useState<HTMLElement | null>(null);
+      useState<Element | null>(null);
 
     const className = cx(`${prefix}--header-panel`, {
       [`${prefix}--header-panel--expanded`]: expandedProp,
@@ -114,8 +114,8 @@ const HeaderPanel = React.forwardRef<HTMLDivElement, HeaderPanelProps>(
     }
 
     useWindowEvent('click', (event: MouseEvent) => {
-      const target = event.target as HTMLElement | null;
-      if (!(target instanceof HTMLElement)) return;
+      const { target } = event;
+      if (!(target instanceof Element)) return;
       setLastClickedElement(target);
 
       const isChildASwitcher =
