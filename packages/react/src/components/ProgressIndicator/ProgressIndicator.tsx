@@ -327,7 +327,7 @@ function ProgressStep({
         })}
         disabled={disabled}
         aria-disabled={disabled}
-        tabIndex={!current && onClick && !disabled ? 0 : -1}
+        tabIndex={disabled ? -1 : 0}
         onClick={!current ? onClick : undefined}
         onKeyDown={handleKeyDown}
         title={label}
@@ -340,11 +340,11 @@ function ProgressStep({
           prefix={prefix}
         />
         <div className={`${prefix}--progress-text`}>
-          <Text as="p" className={`${prefix}--progress-label`}>
+          <Text as="span" className={`${prefix}--progress-label`}>
             {label}
           </Text>
           {secondaryLabel !== null && secondaryLabel !== undefined ? (
-            <Text as="p" className={`${prefix}--progress-optional`}>
+            <Text as="span" className={`${prefix}--progress-optional`}>
               {secondaryLabel}
             </Text>
           ) : null}

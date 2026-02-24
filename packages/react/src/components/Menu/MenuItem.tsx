@@ -139,7 +139,7 @@ export const MenuItem = forwardRef<HTMLLIElement, MenuItemProps>(
     const menuItem = useRef<HTMLLIElement>(null);
     const ref = useMergedRefs([forwardRef, menuItem, refs.setReference]);
 
-    const hasChildren = Boolean(children);
+    const hasChildren = React.Children.toArray(children).length > 0;
 
     const isDisabled = disabled && !hasChildren;
     const isDanger = kind === 'danger' && !hasChildren;
@@ -149,7 +149,7 @@ export const MenuItem = forwardRef<HTMLLIElement, MenuItemProps>(
         type: 'registerItem',
         payload: {
           ref: menuItem,
-          disabled: Boolean(disabled),
+          disabled: disabled ?? false,
         },
       });
     }

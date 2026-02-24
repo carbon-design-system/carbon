@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2019, 2024
+ * Copyright IBM Corp. 2019, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -157,7 +157,7 @@ class CDSHeaderMenu extends HostListenerMixin(FocusMixin(LitElement)) {
         class="${linkClasses}"
         href="javascript:void 0"
         aria-haspopup="menu"
-        aria-expanded="${String(Boolean(expanded))}"
+        aria-expanded="${String(expanded)}"
         @click=${handleClick}>
         ${triggerContent}${iconLoader(ChevronDown16, {
           part: 'trigger-icon',
