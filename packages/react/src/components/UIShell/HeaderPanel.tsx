@@ -8,12 +8,12 @@
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 import React, {
-  isValidElement,
   useRef,
   useState,
   type ComponentProps,
   type ReactNode,
 } from 'react';
+import { isComponentElement } from '../../internal';
 import { usePrefix } from '../../internal/usePrefix';
 import { keys, match } from '../../internal/keyboard';
 import { useWindowEvent } from '../../internal/useEvent';
@@ -118,10 +118,7 @@ const HeaderPanel = React.forwardRef<HTMLDivElement, HeaderPanelProps>(
       if (!(target instanceof Element)) return;
       setLastClickedElement(target);
 
-      const isChildASwitcher =
-        isValidElement(children) &&
-        typeof children.type !== 'string' &&
-        children.type === Switcher;
+      const isChildASwitcher = isComponentElement(children, Switcher);
 
       if (
         isChildASwitcher &&

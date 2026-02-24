@@ -184,9 +184,7 @@ const TableToolbarSearch = ({
     []
   );
 
-  const searchClasses = cx(className, {
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    [searchContainerClass!]: searchContainerClass,
+  const searchClasses = cx(className, searchContainerClass, {
     [`${prefix}--toolbar-search-container-active`]: expanded,
     [`${prefix}--toolbar-search-container-disabled`]: disabled,
     [`${prefix}--toolbar-search-container-expandable`]: !persistent,

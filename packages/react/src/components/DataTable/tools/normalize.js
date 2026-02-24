@@ -1,11 +1,12 @@
 /**
- * Copyright IBM Corp. 2016, 2025
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
 import { AILabel } from '../../AILabel';
+import { isComponentElement } from '../../../internal';
 import { getCellId } from './cells';
 
 /**
@@ -56,7 +57,7 @@ const normalize = (rows, headers, prevState = {}) => {
         isEditing: false,
         isValid: true,
         errors: null,
-        hasAILabelHeader: !!(slug || decorator?.type === AILabel),
+        hasAILabelHeader: !!(slug || isComponentElement(decorator, AILabel)),
         info: {
           header: key,
         },

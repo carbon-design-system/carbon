@@ -514,6 +514,24 @@
     - watsonx
   sizes:
     - 32
+- name: AI-enabled-EDT
+  friendly_name: AI-enabled EDT
+  aliases:
+    - ai
+    - artificial intelligence
+    - EDT
+    - enterprise design thinking
+  sizes:
+    - 32
+- name: AI-enabled-PDLC
+  friendly_name: AI-enabled EDT
+  aliases:
+    - ai
+    - artificial intelligence
+    - PDLC
+    - product development lifecycle
+  sizes:
+    - 32
 - name: ai-financial-sustainability-check
   friendly_name: AI Financial Sustainability Check
   aliases:
@@ -1326,6 +1344,26 @@
   aliases:
     - area
     - boundary
+    - field
+    - range
+    - space
+  sizes:
+    - 32
+- name: area-range--dashed
+  friendly_name: Area range dashed
+  aliases:
+    - area
+    - dashed
+    - field
+    - range
+    - space
+  sizes:
+    - 32
+- name: area-range--solid
+  friendly_name: Area range solid
+  aliases:
+    - area
+    - solid
     - field
     - range
     - space
@@ -2564,6 +2602,126 @@
     - boxplot
     - data
     - statistics
+  sizes:
+    - 32
+- name: BPMN-compensation--fill
+  friendly_name: BPMN Compensation fill
+  aliases:
+    - compensation
+    - rollback
+    - undo
+    - reverse
+    - recovery
+    - workflow
+    - fill
+  sizes:
+    - 32
+- name: BPMN-compensation--outline
+  friendly_name: BPMN Compensation outline
+  aliases:
+    - compensation
+    - rollback
+    - undo
+    - reverse
+    - recovery
+    - workflow
+    - outline
+  sizes:
+    - 32
+- name: BPMN-conditional--fill
+  friendly_name: BPMN Conditional fill
+  aliases:
+    - conditional
+    - condition
+    - rule
+    - logic
+    - decision
+    - trigger
+    - fill
+  sizes:
+    - 32
+- name: BPMN-conditional--outline
+  friendly_name: BPMN Conditional outline
+  aliases:
+    - conditional
+    - condition
+    - rule
+    - logic
+    - decision
+    - trigger
+    - outline
+  sizes:
+    - 32
+- name: BPMN-error--fill
+  friendly_name: BPMN Error fill
+  aliases:
+    - error
+    - failure
+    - fault
+    - exception
+    - stop
+    - invalid
+    - fill
+  sizes:
+    - 32
+- name: BPMN-error--outline
+  friendly_name: BPMN Error outline
+  aliases:
+    - error
+    - failure
+    - fault
+    - exception
+    - stop
+    - invalid
+    - outline
+  sizes:
+    - 32
+- name: BPMN-escalation--fill
+  friendly_name: BPMN Escalation fill
+  aliases:
+    - escalation
+    - priority
+    - alert
+    - exception
+    - raise
+    - workflow
+    - fill
+  sizes:
+    - 32
+- name: BPMN-escalation--outline
+  friendly_name: BPMN Escalation outline
+  aliases:
+    - escalation
+    - priority
+    - alert
+    - exception
+    - raise
+    - workflow
+    - outline
+  sizes:
+    - 32
+- name: BPMN-link--fill
+  friendly_name: BPMN Link fill
+  aliases:
+    - link
+    - connector
+    - jump
+    - navigation
+    - goto
+    - workflow
+    - fill
+  sizes:
+    - 32
+- name: BPMN-link--outline
+  friendly_name: BPMN Link outline
+  aliases:
+    - link
+    - connector
+    - jump
+    - navigation
+    - goto
+    - workflow
+    - outline
   sizes:
     - 32
 - name: branch
@@ -4031,6 +4189,16 @@
   aliases:
     - chart logistic regression
     - logistic regression chart
+    - chart
+    - graph
+    - data
+  sizes:
+    - 32
+- name: chart--lollipop
+  friendly_name: Chart lollipop
+  aliases:
+    - chart lollipop
+    - lollipop chart
     - chart
     - graph
     - data
@@ -6351,6 +6519,26 @@
     - mouse
     - click
     - pointer
+- name: curved-line--dashed
+  friendly_name: Curved line dashed
+  aliases:
+    - curved line dashed
+    - dashed curved line
+    - graph
+    - chart
+    - data
+  sizes:
+    - 32
+- name: curved-line--solid
+  friendly_name: Curved line solid
+  aliases:
+    - curved line solid
+    - solid curved line
+    - graph
+    - chart
+    - data
+  sizes:
+    - 32
 - name: customer
   friendly_name: Customer
   aliases:
@@ -9271,6 +9459,13 @@
     - sysml
   sizes:
     - 32
+- name: feedback-documentation
+  friendly_name: Feedback & documentation
+  aliases:
+    - feedback
+    - documentation
+  sizes:
+    - 32
 - name: fetch-upload
   friendly_name: Fetch upload
   aliases:
@@ -10800,6 +10995,28 @@
     - home
     - start
     - main
+  sizes:
+    - 32
+- name: horizontal-line--dashed
+  friendly_name: Horizontal line dashed
+  aliases:
+    - horizontal line dashed
+    - dashed horizontal line
+    - datavis
+    - graph
+    - chart
+    - data
+  sizes:
+    - 32
+- name: horizontal-line--solid
+  friendly_name: Horizontal line solid
+  aliases:
+    - horizontal line solid
+    - solid horizontal line
+    - datavis
+    - graph
+    - chart
+    - data
   sizes:
     - 32
 - name: horizontal-view
@@ -13032,6 +13249,14 @@
     - security
   sizes:
     - 32
+- name: ibm-partner-plus
+  friendly_name: IBM Partner Plus
+  aliases:
+    - ibm partner plus
+    - partner plus
+    - partnership
+  sizes:
+    - 32
 - name: ibm-quantum--safe-remediator
   friendly_name: IBM Quantum Safe™ Remediator
   aliases:
@@ -15257,6 +15482,28 @@
     - hookup
   sizes:
     - 32
+- name: line--thick
+  friendly_name: Line thick
+  aliases:
+    - line
+    - thickness
+    - chart
+    - thick
+    - data
+    - graph
+  sizes:
+    - 32
+- name: line--thin
+  friendly_name: Line thin
+  aliases:
+    - line
+    - thickness
+    - chart
+    - thin
+    - data
+    - graph
+  sizes:
+    - 32
 - name: linux
   friendly_name: Linux®
   aliases:
@@ -16080,6 +16327,17 @@
     - avatar
     - tag
     - identification
+- name: logo--model-context-protocol
+  friendly_name: Logo Model Context Protocol (MCP)
+  aliases:
+    - MCP
+    - MCP server
+    - model context protocol
+    - AI
+    - data source
+    - logo
+  sizes:
+    - 32
 - name: logo--npm
   friendly_name: Logo npm
   aliases:
@@ -16654,6 +16912,14 @@
     - marine
     - warning
     - forecast
+  sizes:
+    - 32
+- name: material-request
+  friendly_name: Resourceful
+  aliases:
+    - resourceful
+    - material request
+    - resources
   sizes:
     - 32
 - name: math-curve
@@ -21070,6 +21336,17 @@
     - shield
   sizes:
     - 32
+- name: rule-grouping--data-quality
+  friendly_name: Rule grouping data quality
+  aliases:
+    - rule grouping
+    - rule management
+    - set
+    - group
+    - data quality
+    - rule
+  sizes:
+    - 32
 - name: ruler
   friendly_name: Ruler
   aliases:
@@ -21856,6 +22133,16 @@
     - view
     - gear
     - eye
+  sizes:
+    - 32
+- name: shadow
+  friendly_name: Shadow
+  aliases:
+    - shadow
+    - datavis
+    - graph
+    - chart
+    - data
   sizes:
     - 32
 - name: shape--except
@@ -26322,6 +26609,14 @@
     - VPC
     - cloud
     - hybrid
+- name: visual-inspection
+  friendly_name: Visual inspection
+  aliases:
+    - AI visual inspection
+    - inspection
+    - defect detection
+  sizes:
+    - 32
 - name: visual-recognition
   friendly_name: Visual recognition
   aliases:
@@ -26360,6 +26655,15 @@
     - activate
     - user
     - input
+  sizes:
+    - 32
+- name: voice-mode
+  friendly_name: Voice mode
+  aliases:
+    - chat
+    - speak
+    - talk
+    - voice
   sizes:
     - 32
 - name: voicemail

@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2025
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -17,6 +17,7 @@ import React, {
   type ReactNode,
 } from 'react';
 import RadioTile from '../RadioTile';
+import { isComponentElement } from '../../internal';
 import { usePrefix } from '../../internal/usePrefix';
 import { noopFn } from '../../internal/noopFn';
 
@@ -110,10 +111,7 @@ export const TileGroup = <T extends string | number = string>({
         if (!isValidElement(child)) return child;
 
         // If a `RadioTile` is found, return it with necessary props,
-        if (
-          isValidElement<ComponentProps<typeof RadioTile>>(child) &&
-          child.type === RadioTile
-        ) {
+        if (isComponentElement(child, RadioTile)) {
           const { value, ...otherProps } = child.props;
           return (
             <RadioTile

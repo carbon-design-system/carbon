@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Icon" xmlns="http://www.w3.org/2000/svg" width="32" height="32" version="1.1" viewBox="0 0 32 32">
+  <!-- Generator: Adobe Illustrator 30.1.0, SVG Export Plug-In . SVG Version: 2.1.1 Build 136)  -->
+  <defs>
+    <style>
+      .st0 {
+        fill: none;
+      }
+    </style>
+  </defs>
+  <path d="M19,18v-7h-1v-2h4v2h-1v7h1v2h-4v-2h1ZM10,9h3l3.5005,11h-2l-.6184-2h-4.7781l-.6018,2h-1.9988l3.4966-11ZM11.3342,10.5889l-1.6284,5.4111h3.5579s-1.6736-5.4135-1.6736-5.4135l-.2559.0024ZM0,0v30h16v-2H2V2h26v22c0,1.1025-.8975,2-2,2h-3.1718s2.5859-2.586,2.5859-2.586l-1.4141-1.414-5,5,5,5,1.4141-1.4142-2.5859-2.5859h3.1718c2.2061,0,4-1.7938,4-3.9999V0H0Z"/>
+  <rect id="__x3C_Transparent_Rectangle_x3E_" class="st0" width="32" height="32"/>
+</svg>
