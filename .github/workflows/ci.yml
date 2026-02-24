@@ -149,7 +149,7 @@ jobs:
           cat /sys/fs/cgroup/memory.current 2>/dev/null || true
           cat /sys/fs/cgroup/memory.max 2>/dev/null || true
       - name: Build web-components project
-        run:
+        run: >-
           yarn lerna run build --scope='@carbon/web-components'
           --include-dependencies --concurrency=1
       - name: Resource snapshot (after)
@@ -279,19 +279,14 @@ jobs:
           URL: 'http://localhost:3000'
         timeout-minutes: 3
       - name: Run VRT
-        if:
-          ${{ github.repository == 'carbon-design-system/carbon' &&
-          github.event.pull_request.draft == false }}
+        if: ${{ github.repository == 'carbon-design-system/carbon' && github.event.pull_request.draft == false }}
         env:
           PERCY_TOKEN: c9a21a3fde4fda0a0f822d633426ab26e2ab2c1cba55221d342d4047744c8c24
           PERCY_PARALLEL_TOTAL: 4
         run: |
           yarn percy exec --parallel -- yarn playwright test --project chromium --grep @vrt --shard="${{ matrix.shardIndex }}/${{ matrix.shardTotal }}"
       - name: Dry run VRT on draft PRs
-        if:
-          ${{ github.repository == 'carbon-design-system/carbon' &&
-          github.event.pull_request.draft == true && github.base_ref != 'main'
-          }}
+        if: ${{ github.repository == 'carbon-design-system/carbon' && github.event.pull_request.draft == true && github.base_ref != 'main' }}
         env:
           PERCY_TOKEN: c9a21a3fde4fda0a0f822d633426ab26e2ab2c1cba55221d342d4047744c8c24
           PERCY_PARALLEL_TOTAL: 4
@@ -404,9 +399,7 @@ jobs:
 
   merge-playwright-reports:
     # Merge reports after *-runner jobs, even if some shards have failed
-    if:
-      ${{ github.repository == 'carbon-design-system/carbon' && !cancelled() &&
-      github.event.pull_request.draft == false }}
+    if: ${{ github.repository == 'carbon-design-system/carbon' && !cancelled() && github.event.pull_request.draft == false }}
     needs: [vrt-runner, avt-runner]
 
     runs-on: ubuntu-latest-large
@@ -439,7 +432,7 @@ jobs:
           merge-multiple: true
 
       - name: Merge vrt reports into HTML Report
-        run:
+        run: >-
           npx playwright merge-reports --reporter html
           ./all-playwright-vrt-blob-reports
 
@@ -458,7 +451,7 @@ jobs:
           merge-multiple: true
 
       - name: Merge avt reports into HTML Report
-        run:
+        run: >-
           npx playwright merge-reports --reporter html
           ./all-playwright-avt-blob-reports
 
@@ -470,9 +463,7 @@ jobs:
           retention-days: 14
 
   chromatic-react:
-    if:
-      ${{ github.repository == 'carbon-design-system/carbon' &&
-      github.event.pull_request.draft == false }}
+    if: ${{ github.repository == 'carbon-design-system/carbon' && github.event.pull_request.draft == false }}
     runs-on: ubuntu-latest-large
     outputs:
       buildUrl: ${{ steps.chromatic.outputs.buildUrl }}
