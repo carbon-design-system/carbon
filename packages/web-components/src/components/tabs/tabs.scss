@@ -322,6 +322,14 @@ $inset-transition: inset 110ms motion(standard, productive);
     display: flex;
     padding-inline-end: $spacing-08;
   }
+  .#{$prefix}--tabs--dismissable.#{$prefix}--tabs--contained {
+    padding-inline-end: calc($spacing-09 - 1px);
+  }
+}
+:host(#{$prefix}-tab[type='contained']) {
+  .#{$prefix}--tabs__nav-link.#{$prefix}--tabs__nav-link--dismissable {
+    padding-inline-end: calc($spacing-09 - 1px);
+  }
 }
 :host(#{$prefix}-tab) {
   .#{$prefix}--tabs__nav-item--close {

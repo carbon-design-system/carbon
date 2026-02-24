@@ -38,6 +38,11 @@ export class DismissableTabsWrapper extends LitElement {
    */
   @property({ type: Boolean })
   contained = false;
+  /**
+   * Whether the rendered Tab children should be dismissable.
+   */
+  @property({ type: Boolean })
+  dismissable = true;
 
   /**
    * Selection mode
@@ -76,7 +81,7 @@ export class DismissableTabsWrapper extends LitElement {
         ?disabled="${this.disabled}"
         selection-mode="${this.selectionMode}"
         type="${this.contained ? TABS_TYPE.CONTAINED : TABS_TYPE.REGULAR}"
-        ?dismissable="${true}"
+        ?dismissable="${this.dismissable}"
         value="all"
         @cds-tab-closed="${this._handleDismissed}"
         @cds-tabs-beingselected="${this._handleBeforeSelected}">
@@ -116,6 +121,6 @@ export class DismissableTabsWrapper extends LitElement {
   }
 }
 
-customElements.define('dismissable-tabs-story-wrapper', DismissableTabsWrapper);
+customElements.define('tabs-story-wrapper', DismissableTabsWrapper);
 
 // Made with Bob
