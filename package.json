@@ -134,20 +134,17 @@
   },
   "lint-staged": {
     "**/*.{cjs,js,jsx,mjs,ts,tsx}": [
-      "yarn prettier --cache --write",
+      "prettier --cache --write",
       "eslint --cache --fix --max-warnings 0 --no-warn-ignored"
     ],
     "**/*.scss": [
-      "yarn prettier --cache --write",
-      "stylelint --report-needless-disables --report-invalid-scope-disables --allow-empty-input"
+      "prettier --cache --write",
+      "stylelint --cache --report-needless-disables --report-invalid-scope-disables --allow-empty-input"
     ],
     "!(*sass).md": [
-      "yarn prettier --cache --write"
+      "prettier --cache --write"
     ],
-    "README.md": [
-      "all-contributors generate"
-    ],
-    ".all-contributorsrc": [
+    "{README.md,.all-contributorsrc}": [
       "all-contributors generate"
     ]
   },

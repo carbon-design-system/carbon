@@ -37,7 +37,7 @@ jobs:
       - name: Install dependencies
         env:
           YARN_ENABLE_HARDENED_MODE: 0
-        run: yarn install --immutable --immutable-cache
+        run: yarn install --immutable
       - name: Check formatting of project files
         run: yarn format:diff
 
@@ -52,7 +52,7 @@ jobs:
       - name: Install dependencies
         env:
           YARN_ENABLE_HARDENED_MODE: 0
-        run: yarn install --immutable --immutable-cache
+        run: yarn install --immutable
       - name: Lint code
         run: yarn lint
       - name: Lint styles
@@ -79,19 +79,7 @@ jobs:
       - name: Install dependencies
         env:
           YARN_ENABLE_HARDENED_MODE: 0
-        run: yarn install --immutable --immutable-cache
-      - name: Resource snapshot (before)
-        shell: bash
-        run: |
-          set -euxo pipefail
-          echo "=== date ==="; date -u
-          echo "=== runner ==="; uname -a
-          echo "=== disk ==="; df -h; echo; du -h -d 2 "$GITHUB_WORKSPACE" | sort -h | tail -n 50 || true
-          echo "=== memory ==="; free -h; echo; cat /proc/meminfo | head -n 50
-          echo "=== processes (top) ==="; ps aux --sort=-%mem | head -n 30
-          echo "=== cgroup memory (if present) ==="
-          cat /sys/fs/cgroup/memory.current 2>/dev/null || true
-          cat /sys/fs/cgroup/memory.max 2>/dev/null || true
+        run: yarn install --immutable
       - name: Build project
         run: yarn build
       - name: Resource snapshot (after)
@@ -135,19 +123,7 @@ jobs:
       - name: Install dependencies
         env:
           YARN_ENABLE_HARDENED_MODE: 0
-        run: yarn install --immutable --immutable-cache
-      - name: Resource snapshot (before)
-        shell: bash
-        run: |
-          set -euxo pipefail
-          echo "=== date ==="; date -u
-          echo "=== runner ==="; uname -a
-          echo "=== disk ==="; df -h; echo; du -h -d 2 "$GITHUB_WORKSPACE" | sort -h | tail -n 50 || true
-          echo "=== memory ==="; free -h; echo; cat /proc/meminfo | head -n 50
-          echo "=== processes (top) ==="; ps aux --sort=-%mem | head -n 30
-          echo "=== cgroup memory (if present) ==="
-          cat /sys/fs/cgroup/memory.current 2>/dev/null || true
-          cat /sys/fs/cgroup/memory.max 2>/dev/null || true
+        run: yarn install --immutable
       - name: Build web-components project
         run: >-
           yarn lerna run build --scope='@carbon/web-components'
@@ -195,7 +171,7 @@ jobs:
       - name: Install dependencies
         env:
           YARN_ENABLE_HARDENED_MODE: 0
-        run: yarn install --immutable --immutable-cache
+        run: yarn install --immutable
       - uses: dorny/paths-filter@de90cc6fb38fc0963ad72b210f1f284cd68cea36 # v3.0.2
         id: filter
         with:
@@ -261,7 +237,7 @@ jobs:
       - name: Install dependencies
         env:
           YARN_ENABLE_HARDENED_MODE: 0
-        run: yarn install --immutable --immutable-cache
+        run: yarn install --immutable
       - name: Install browsers
         run: yarn playwright install --with-deps
       - name: Build project
@@ -279,14 +255,19 @@ jobs:
           URL: 'http://localhost:3000'
         timeout-minutes: 3
       - name: Run VRT
-        if: ${{ github.repository == 'carbon-design-system/carbon' && github.event.pull_request.draft == false }}
+        if:
+          ${{ github.repository == 'carbon-design-system/carbon' &&
+          github.event.pull_request.draft == false }}
         env:
           PERCY_TOKEN: c9a21a3fde4fda0a0f822d633426ab26e2ab2c1cba55221d342d4047744c8c24
           PERCY_PARALLEL_TOTAL: 4
         run: |
           yarn percy exec --parallel -- yarn playwright test --project chromium --grep @vrt --shard="${{ matrix.shardIndex }}/${{ matrix.shardTotal }}"
       - name: Dry run VRT on draft PRs
-        if: ${{ github.repository == 'carbon-design-system/carbon' && github.event.pull_request.draft == true && github.base_ref != 'main' }}
+        if:
+          ${{ github.repository == 'carbon-design-system/carbon' &&
+          github.event.pull_request.draft == true && github.base_ref != 'main'
+          }}
         env:
           PERCY_TOKEN: c9a21a3fde4fda0a0f822d633426ab26e2ab2c1cba55221d342d4047744c8c24
           PERCY_PARALLEL_TOTAL: 4
@@ -337,7 +318,7 @@ jobs:
       - name: Install dependencies
         env:
           YARN_ENABLE_HARDENED_MODE: 0
-        run: yarn install --immutable --immutable-cache
+        run: yarn install --immutable
       - name: Install browsers
         run: yarn playwright install --with-deps
       - name: Resource snapshot (before)
@@ -399,7 +380,9 @@ jobs:
 
   merge-playwright-reports:
     # Merge reports after *-runner jobs, even if some shards have failed
-    if: ${{ github.repository == 'carbon-design-system/carbon' && !cancelled() && github.event.pull_request.draft == false }}
+    if:
+      ${{ github.repository == 'carbon-design-system/carbon' && !cancelled() &&
+      github.event.pull_request.draft == false }}
     needs: [vrt-runner, avt-runner]
 
     runs-on: ubuntu-latest-large
@@ -422,7 +405,7 @@ jobs:
       - name: Install dependencies
         env:
           YARN_ENABLE_HARDENED_MODE: 0
-        run: yarn install --immutable --immutable-cache
+        run: yarn install --immutable
 
       - name: Download vrt blob reports from GitHub Actions Artifacts
         uses: actions/download-artifact@v7
@@ -463,7 +446,9 @@ jobs:
           retention-days: 14
 
   chromatic-react:
-    if: ${{ github.repository == 'carbon-design-system/carbon' && github.event.pull_request.draft == false }}
+    if:
+      ${{ github.repository == 'carbon-design-system/carbon' &&
+      github.event.pull_request.draft == false }}
     runs-on: ubuntu-latest-large
     outputs:
       buildUrl: ${{ steps.chromatic.outputs.buildUrl }}
@@ -492,14 +477,14 @@ jobs:
       - name: Install dependencies
         env:
           YARN_ENABLE_HARDENED_MODE: 0
-        run: yarn install --immutable --immutable-cache
+        run: yarn install --immutable
       - name: Build project
         run: yarn build
       - name: Build storybook
         run: yarn workspace @carbon/react storybook:build --stats-json
       - id: chromatic
         name: Run Chromatic
-        uses: chromaui/action@a8ce9c58f59be5cc7090cadfc8f130fb08fcf0c3 # v15.1.0
+        uses: chromaui/action@93712e37669f856c4828136f9cb535dbfa60b50c # v15.1.1
         with:
           # 👇 Token is intentionally plaintext
           # https://www.chromatic.com/docs/github-actions/#run-chromatic-on-external-forks-of-open-source-projects
