@@ -84,7 +84,6 @@
     "@mordech/vite-lit-loader": "^0.37.0",
     "@open-wc/testing": "^4.0.0",
     "@playwright/test": "^1.36.2",
-    "@rollup/plugin-node-resolve": "^16.0.1",
     "@storybook/addon-docs": "^9.1.8",
     "@storybook/addon-links": "^9.1.8",
     "@storybook/web-components-vite": "^9.1.8",
