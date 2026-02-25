@@ -62,6 +62,7 @@ async function builder(metadata, { output }) {
       entry: input,
       failOnWarn: false,
       format: format === 'commonjs' ? 'cjs' : 'esm',
+      logLevel: 'warn',
       inputOptions(inputOptions) {
         const options = { ...inputOptions };
         if ('define' in options) {
@@ -96,6 +97,7 @@ async function builder(metadata, { output }) {
     failOnWarn: false,
     format: 'iife',
     globalName: 'CarbonIcons',
+    logLevel: 'warn',
     inputOptions(inputOptions) {
       const options = { ...inputOptions };
       if ('define' in options) {

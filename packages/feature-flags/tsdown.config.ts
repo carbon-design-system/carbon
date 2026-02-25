@@ -14,6 +14,7 @@ export default defineConfig({
   dts: false,
   entry: ['src/index.js'],
   failOnWarn: false,
+  logLevel: 'warn',
   inputOptions(options) {
     // Temporary compatibility shim for tsdown+rolldown option validation.
     if ('define' in options) {

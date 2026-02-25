@@ -4,6 +4,7 @@ export default defineConfig({
   clean: false,
   dts: false,
   entry: ['src/index.ts'],
+  logLevel: 'warn',
   target: 'es2022',
   inputOptions(options) {
     // Temporary compatibility shim for tsdown+rolldown option validation.

@@ -131,6 +131,7 @@ const didWarnAboutDeprecation = {};`;
       external,
       failOnWarn: false,
       format: format === 'commonjs' ? 'cjs' : 'esm',
+      logLevel: 'warn',
       inputOptions(inputOptions) {
         const options = { ...inputOptions };
         if ('define' in options) {
@@ -171,6 +172,7 @@ const didWarnAboutDeprecation = {};`;
     failOnWarn: false,
     format: 'iife',
     globalName: 'CarbonIconsReact',
+    logLevel: 'warn',
     inputOptions(inputOptions) {
       const options = { ...inputOptions };
       if ('define' in options) {

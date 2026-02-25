@@ -57,6 +57,7 @@ async function build() {
       failOnWarn: false,
       format: format.type,
       inputOptions: patchInputOptions,
+      logLevel: 'warn',
       loader: {
         '.js': 'jsx',
       },
@@ -94,6 +95,7 @@ async function build() {
     failOnWarn: false,
     format: 'cjs',
     inputOptions: patchInputOptions,
+    logLevel: 'warn',
     loader: {
       '.js': 'jsx',
     },
@@ -122,6 +124,7 @@ async function build() {
     failOnWarn: false,
     format: 'esm',
     inputOptions: patchInputOptions,
+    logLevel: 'warn',
     loader: {
       '.js': 'jsx',
     },

@@ -15,6 +15,7 @@ export default defineConfig({
   entry: ['src/index.js'],
   external: ['@carbon/react'],
   failOnWarn: false,
+  logLevel: 'warn',
   inputOptions(options) {
     // Temporary compatibility shim for tsdown+rolldown option validation.
     if ('define' in options) {

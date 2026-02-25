@@ -184,6 +184,7 @@ async function builder(metadata, { output }) {
       external,
       failOnWarn: false,
       format: target.format === 'commonjs' ? 'cjs' : 'esm',
+      logLevel: 'warn',
       inputOptions(inputOptions) {
         const options = { ...inputOptions };
         if ('define' in options) {
