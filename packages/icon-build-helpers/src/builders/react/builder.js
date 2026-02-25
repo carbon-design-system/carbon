@@ -134,12 +134,6 @@ const didWarnAboutDeprecation = {};`;
       logLevel: 'warn',
       inputOptions(inputOptions) {
         const options = { ...inputOptions };
-        if ('define' in options) {
-          delete options.define;
-        }
-        if ('inject' in options) {
-          delete options.inject;
-        }
         options.plugins = [...(options.plugins || []), virtual(virtualFiles)];
         return options;
       },
@@ -175,12 +169,6 @@ const didWarnAboutDeprecation = {};`;
     logLevel: 'warn',
     inputOptions(inputOptions) {
       const options = { ...inputOptions };
-      if ('define' in options) {
-        delete options.define;
-      }
-      if ('inject' in options) {
-        delete options.inject;
-      }
       options.plugins = [...(options.plugins || []), virtual(virtualFiles)];
       return options;
     },

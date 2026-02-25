@@ -53,17 +53,6 @@ export default async function bundle(entrypoint, options) {
       failOnWarn: false,
       format,
       globalName: format === 'umd' ? name : undefined,
-      inputOptions(inputOptions) {
-        // Compatibility shim for tsdown option validation.
-        const options = { ...inputOptions };
-        if ('define' in options) {
-          delete options.define;
-        }
-        if ('inject' in options) {
-          delete options.inject;
-        }
-        return options;
-      },
       outDir: directory,
       outputOptions(outputOptions) {
         const options = {

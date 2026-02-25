@@ -187,12 +187,6 @@ async function builder(metadata, { output }) {
       logLevel: 'warn',
       inputOptions(inputOptions) {
         const options = { ...inputOptions };
-        if ('define' in options) {
-          delete options.define;
-        }
-        if ('inject' in options) {
-          delete options.inject;
-        }
         options.plugins = [
           ...(options.plugins || []),
           // We use a "virtual" plugin to pass all generated components in-memory.

@@ -82,12 +82,6 @@ async function builder(metadata, { output }) {
       logLevel: 'warn',
       inputOptions(inputOptions) {
         const options = { ...inputOptions };
-        if ('define' in options) {
-          delete options.define;
-        }
-        if ('inject' in options) {
-          delete options.inject;
-        }
         options.plugins = [...(options.plugins || []), virtual(files)];
         return options;
       },
@@ -118,12 +112,6 @@ async function builder(metadata, { output }) {
     logLevel: 'warn',
     inputOptions(inputOptions) {
       const options = { ...inputOptions };
-      if ('define' in options) {
-        delete options.define;
-      }
-      if ('inject' in options) {
-        delete options.inject;
-      }
       options.plugins = [...(options.plugins || []), virtual(files)];
       return options;
     },

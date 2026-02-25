@@ -56,7 +56,6 @@ async function build() {
       inlineOnly: false,
       failOnWarn: false,
       format: format.type,
-      inputOptions: patchInputOptions,
       logLevel: 'warn',
       loader: {
         '.js': 'jsx',
@@ -94,7 +93,6 @@ async function build() {
     inlineOnly: false,
     failOnWarn: false,
     format: 'cjs',
-    inputOptions: patchInputOptions,
     logLevel: 'warn',
     loader: {
       '.js': 'jsx',
@@ -123,7 +121,6 @@ async function build() {
     inlineOnly: false,
     failOnWarn: false,
     format: 'esm',
-    inputOptions: patchInputOptions,
     logLevel: 'warn',
     loader: {
       '.js': 'jsx',
@@ -170,20 +167,6 @@ async function ensureIconsTypes(filepath) {
     filepath,
     `${banner}\nexport * from '@carbon/icons-react';\n`
   );
-}
-
-function patchInputOptions(inputOptions) {
-  const options = { ...inputOptions };
-
-  // Temporary compatibility shim for tsdown+rolldown option validation.
-  if ('define' in options) {
-    delete options.define;
-  }
-  if ('inject' in options) {
-    delete options.inject;
-  }
-
-  return options;
 }
 
 function getExternalPatterns() {

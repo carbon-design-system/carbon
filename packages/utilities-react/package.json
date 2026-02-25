@@ -31,8 +31,8 @@
   },
   "scripts": {
     "build:types": "tsc",
-    "build": "yarn clean && tsdown --config tsdown.config.ts && yarn build:types",
-    "watch": "tsdown --config tsdown.config.ts --watch",
+    "build": "yarn clean && tsdown --config tsdown.config.mts && yarn build:types",
+    "watch": "tsdown --config tsdown.config.mts --watch",
     "clean": "rimraf es lib",
     "postinstall": "ibmtelemetry --config=telemetry.yml"
   },

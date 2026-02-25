@@ -92,14 +92,6 @@ function withInputCompatibilityAndPlugins({ postCSSPlugins }) {
   return function patchInputOptions(inputOptions) {
     const options = { ...inputOptions };
 
-    // Temporary compatibility shim for tsdown+rolldown option validation.
-    if ('define' in options) {
-      delete options.define;
-    }
-    if ('inject' in options) {
-      delete options.inject;
-    }
-
     options.plugins = [
       ...(options.plugins || []),
       replaceNodeEnvProduction(),

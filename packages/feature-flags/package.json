@@ -31,9 +31,9 @@
     "provenance": true
   },
   "scripts": {
-    "build": "yarn clean && node tasks/build.js && tsdown --config tsdown.config.ts",
+    "build": "yarn clean && node tasks/build.mjs && tsdown --config tsdown.config.mts",
     "clean": "rimraf es lib scss/generated src/generated",
-    "watch": "node tasks/build.js && tsdown --config tsdown.config.ts --watch",
+    "watch": "node tasks/build.mjs && tsdown --config tsdown.config.mts --watch",
     "postinstall": "ibmtelemetry --config=telemetry.yml"
   },
   "devDependencies": {
