@@ -79,8 +79,8 @@ async function builder(metadata, { output }) {
     };
   });
 
-  // Rollup allows us to define multiple "entrypoints" instead of only one when
-  // creating a bundle. This allows us to map different input paths in the
+  // The bundler allows us to define multiple entrypoints instead of only one
+  // when creating a bundle. This allows us to map different input paths in the
   // `input` object to files that we're generating for each icon component in
   // the `files` object
   const files = {
