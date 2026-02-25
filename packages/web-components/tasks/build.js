@@ -11,7 +11,7 @@ import { fileURLToPath } from 'url';
 import { globby } from 'globby';
 import autoprefixer from 'autoprefixer';
 import cssnano from 'cssnano';
-import litSCSS from '../tools/rollup-plugin-lit-scss.js';
+import litSCSS from '../tools/lit-scss-plugin.js';
 import path from 'path';
 import postcss from 'postcss';
 import fs from 'fs-extra';

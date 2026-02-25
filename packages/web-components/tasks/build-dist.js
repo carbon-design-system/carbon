@@ -15,7 +15,7 @@ import fs from 'fs/promises';
 import postcss from 'postcss';
 
 import fixHostPseudo from '../tools/postcss-fix-host-pseudo.js';
-import litSCSS from '../tools/rollup-plugin-lit-scss.js';
+import litSCSS from '../tools/lit-scss-plugin.js';
 import * as packageJson from '../package.json' with { type: 'json' };
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
