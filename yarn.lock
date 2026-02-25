@@ -1709,9 +1709,6 @@ __metadata:
     "@octokit/plugin-retry": "npm:^3.0.7"
     "@octokit/plugin-throttling": "npm:^4.0.0"
     "@octokit/rest": "npm:^22.0.0"
-    "@rollup/plugin-babel": "npm:^6.0.0"
-    "@rollup/plugin-commonjs": "npm:^28.0.3"
-    "@rollup/plugin-node-resolve": "npm:^15.0.0"
     chalk: "npm:^5.4.1"
     change-case-all: "npm:^2.1.0"
     child-process-promise: "npm:^2.2.1"
@@ -1727,9 +1724,8 @@ __metadata:
     progress-estimator: "npm:^0.3.0"
     remark: "npm:^15.0.1"
     replace-in-file: "npm:^8.3.0"
-    rollup: "npm:^4.41.1"
     sass: "npm:^1.77.7"
-    typescript-config-carbon: "workspace:^0.9.0"
+    tsdown: "npm:^0.20.3"
     yargs: "npm:^17.7.2"
   bin:
     carbon-cli: ./bin/carbon-cli.js
