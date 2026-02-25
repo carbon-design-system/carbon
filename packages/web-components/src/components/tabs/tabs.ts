@@ -18,12 +18,23 @@ import ChevronRight16 from '@carbon/icons/es/chevron--right/16.js';
 import CDSContentSwitcher, {
   NAVIGATION_DIRECTION,
 } from '../content-switcher/content-switcher';
-import { TABS_KEYBOARD_ACTION, TABS_TYPE } from './defs';
+import {
+  TABS_KEYBOARD_ACTION,
+  TABS_ORIENTATION,
+  TABS_TYPE,
+  VERTICAL_NAVIGATION_DIRECTION,
+} from './defs';
 import CDSTab from './tab';
 import styles from './tabs.scss?lit';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
-export { NAVIGATION_DIRECTION, TABS_KEYBOARD_ACTION, TABS_TYPE };
+export {
+  NAVIGATION_DIRECTION,
+  TABS_KEYBOARD_ACTION,
+  TABS_ORIENTATION,
+  TABS_TYPE,
+  VERTICAL_NAVIGATION_DIRECTION,
+};
 
 /**
  * Tabs.
@@ -132,7 +143,11 @@ export default class CDSTabs extends HostListenerMixin(CDSContentSwitcher) {
   @HostListener('keydown')
   protected _handleKeydown(event: KeyboardEvent) {
     const { key } = event;
-    const action = (this.constructor as typeof CDSTabs).getAction(key);
+    const isVertical = this.orientation === TABS_ORIENTATION.VERTICAL;
+    const action = (this.constructor as typeof CDSTabs).getAction(
+      key,
+      isVertical
+    );
     const enabledTabs = this.querySelectorAll(`${prefix}-tab:not([disabled])`);
     switch (action) {
       case TABS_KEYBOARD_ACTION.HOME:
@@ -159,7 +174,10 @@ export default class CDSTabs extends HostListenerMixin(CDSContentSwitcher) {
         break;
       case TABS_KEYBOARD_ACTION.NAVIGATING:
         {
-          const direction = NAVIGATION_DIRECTION[key];
+          // Get direction based on orientation
+          const direction = isVertical
+            ? VERTICAL_NAVIGATION_DIRECTION[key]
+            : NAVIGATION_DIRECTION[key];
           if (direction) {
             this._navigate(direction);
           }
@@ -296,6 +314,19 @@ export default class CDSTabs extends HostListenerMixin(CDSContentSwitcher) {
   type = TABS_TYPE.REGULAR;
 
   /**
+   * Tabs orientation. Determines the layout direction of tabs.
+   */
+  @property({ reflect: true })
+  orientation = TABS_ORIENTATION.HORIZONTAL;
+
+  /**
+   * Custom height for vertical tabs. Only applies when orientation is vertical.
+   * Can be any valid CSS height value (e.g., '500px', '50vh', '100%').
+   */
+  @property({ attribute: 'custom-height' })
+  customHeight?: string;
+
+  /**
    * `true` if left-hand scroll intersection sentinel intersects with the host element.
    * In this condition, the left-hand paginator button should be hidden.
    */
@@ -417,6 +448,18 @@ export default class CDSTabs extends HostListenerMixin(CDSContentSwitcher) {
   updated(changedProperties) {
     // Call super to keep selection/value in sync
     super.updated?.(changedProperties);
+
+    // Apply custom height for vertical tabs
+    if (
+      changedProperties.has('orientation') ||
+      changedProperties.has('customHeight')
+    ) {
+      if (this.orientation === TABS_ORIENTATION.VERTICAL && this.customHeight) {
+        this.style.height = this.customHeight;
+      } else {
+        this.style.removeProperty('height');
+      }
+    }
 
     if (changedProperties.has('value')) {
       const tab = this.querySelector(
@@ -607,16 +650,21 @@ export default class CDSTabs extends HostListenerMixin(CDSContentSwitcher) {
 
   /**
    * @param key The key symbol.
-   * @returns A action for dropdown for the given key symbol.
+   * @param isVertical Whether the tabs are in vertical orientation.
+   * @returns A action for tabs for the given key symbol.
    */
-  static getAction(key: string) {
+  static getAction(key: string, isVertical = false) {
     if (key === 'Home') {
       return TABS_KEYBOARD_ACTION.HOME;
     }
     if (key === 'End') {
       return TABS_KEYBOARD_ACTION.END;
     }
-    if (key in NAVIGATION_DIRECTION) {
+    // Check for navigation keys based on orientation
+    const navigationKeys = isVertical
+      ? VERTICAL_NAVIGATION_DIRECTION
+      : NAVIGATION_DIRECTION;
+    if (key in navigationKeys) {
       return TABS_KEYBOARD_ACTION.NAVIGATING;
     }
     if (key === 'Enter' || key === ' ') {

@@ -316,3 +316,76 @@ $inset-transition: inset 110ms motion(standard, productive);
     background-color: SelectedItem;
   }
 }
+
+//-----------------------------
+// Vertical Tabs Orientation
+//-----------------------------
+
+:host(#{$prefix}-tabs[orientation='vertical']) {
+  background: $layer;
+  box-shadow: inset -1px 0 $border-subtle;
+  grid-column: span 2;
+  max-block-size: none;
+
+  @include breakpoint(lg) {
+    grid-column: span 4;
+  }
+
+  .#{$prefix}--tabs-nav-content-container {
+    block-size: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+
+  .#{$prefix}--tabs-nav-content {
+    position: relative;
+    block-size: 100%;
+  }
+
+  .#{$prefix}--tabs-nav {
+    position: relative;
+  }
+
+  .#{$prefix}--tab--list {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .#{$prefix}--tab--overflow-nav-button {
+    display: none;
+  }
+}
+
+:host(#{$prefix}-tabs[orientation='vertical']) ::slotted(#{$prefix}-tab) {
+  flex: none;
+  background-color: $layer-01;
+  block-size: $spacing-10;
+  border-block-end: 1px solid $border-subtle;
+  border-inline-end: 1px solid $border-subtle;
+  box-shadow: inset 3px 0 0 0 $border-subtle;
+  inline-size: 100%;
+}
+
+:host(#{$prefix}-tabs[orientation='vertical'])
+  ::slotted(#{$prefix}-tab[selected]) {
+  border-inline: none;
+  box-shadow: inset 3px 0 0 0 $border-interactive;
+}
+
+:host(#{$prefix}-tabs[orientation='vertical'])
+  ::slotted(#{$prefix}-tab:not([selected]):not([disabled]):hover) {
+  background-color: $layer-hover;
+  box-shadow: inset 3px 0 0 0 $border-strong;
+}
+
+:host(#{$prefix}-tabs[orientation='vertical']) {
+  .#{$prefix}--tabs__nav-item-label {
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    line-height: var(--cds-body-compact-01-line-height);
+    text-overflow: ellipsis;
+    white-space: normal;
+  }
+}
