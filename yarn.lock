@@ -5646,7 +5646,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@rollup/plugin-node-resolve@npm:^15.0.0, @rollup/plugin-node-resolve@npm:^15.0.1":
+"@rollup/plugin-node-resolve@npm:^15.0.1":
   version: 15.3.1
   resolution: "@rollup/plugin-node-resolve@npm:15.3.1"
   dependencies:
@@ -9358,9 +9358,6 @@ __metadata:
     "@carbon/styles": "npm:^1.101.0-rc.0"
     "@carbon/test-utils": "npm:^10.40.0"
     "@ibm/telemetry-js": "npm:^1.5.0"
-    "@rollup/plugin-babel": "npm:^6.0.0"
-    "@rollup/plugin-commonjs": "npm:^28.0.3"
-    "@rollup/plugin-node-resolve": "npm:^15.0.0"
     babel-plugin-dev-expression: "npm:^0.2.3"
     babel-preset-carbon: "npm:^0.8.0"
     browserslist-config-carbon: "npm:^11.2.0"
@@ -9369,8 +9366,7 @@ __metadata:
     react: "npm:^19.2.3"
     react-dom: "npm:^19.2.3"
     rimraf: "npm:^6.0.1"
-    rollup: "npm:^4.41.1"
-    rollup-plugin-strip-banner: "npm:^3.0.0"
+    tsdown: "npm:^0.20.3"
   peerDependencies:
     react: ^16.8.6 || ^17.0.1 || ^18.2.0 || ^19.0.0
     react-dom: ^16.8.6 || ^17.0.1 || ^18.2.0 || ^19.0.0
