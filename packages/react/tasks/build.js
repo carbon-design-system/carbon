@@ -72,7 +72,9 @@ async function build() {
       },
       platform: 'browser',
       report: false,
-      target: 'es2022',
+      // Keep ES2020 for Jest/SSR compatibility; ES2022 can emit static class
+      // block syntax that our current Babel/Jest path does not transform.
+      target: 'es2020',
       tsconfig: tsconfigPath,
     });
   }
@@ -82,6 +84,7 @@ async function build() {
     path.join(packageRoot, 'es'),
     path.join(packageRoot, 'lib')
   );
+  await patchCjsIndexDefaultInterop(path.join(packageRoot, 'lib', 'index.js'));
 
   // Build @carbon/react icons CJS + d.ts.
   await tsdown({
@@ -167,6 +170,21 @@ async function ensureIconsTypes(filepath) {
     filepath,
     `${banner}\nexport * from '@carbon/icons-react';\n`
   );
+}
+
+async function patchCjsIndexDefaultInterop(filepath) {
+  const contents = await fs.readFile(filepath, 'utf8');
+  // tsdown can emit `exports.X = require_X;` for some CJS re-exports, which
+  // makes React components import as module objects in downstream CJS tests.
+  // Normalize to `default || module` so consumers receive the component value.
+  const updated = contents.replace(
+    /^exports\.(\w+)\s*=\s*(require_\w+);$/gm,
+    'exports.$1 = $2.default || $2;'
+  );
+
+  if (updated !== contents) {
+    await fs.writeFile(filepath, updated);
+  }
 }
 
 function getExternalPatterns() {
