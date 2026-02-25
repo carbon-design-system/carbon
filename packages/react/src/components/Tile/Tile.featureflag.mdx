@@ -4,17 +4,41 @@ import { Meta } from '@storybook/addon-docs/blocks';
 
 # Tile Contrast
 
-Designed to meet accessibility standards, particularly regarding contrast
+The `enable-tile-contrast` flag is designed to meet accessibility standards, particularly regarding contrast
 minimums. The new variant ensures that tiles are more accessible to users with
 visual impairments.
 
 ## Enable tile contrast
 
 ```js
-<FeatureFlags
-  flags={{
-    'enable-tile-contrast': true,
-  }}>
+<FeatureFlags enableTileContrast>
   ...
 </FeatureFlags>
+```
+
+The `enable-v12-tile-default-icons` flag will enable default icons for Tile components.
+
+## Enable default icons
+
+```js
+<FeatureFlags enableV12TileDefaultIcons>
+  ...
+</FeatureFlags>
+```
+
+The `enable-v12-tile-radio-icons` flag will enable rendering an updated radio icon for Tile components.
+
+```js
+<FeatureFlags enableV12TileRadioIcons>
+  ...
+</FeatureFlags>
+
+and
+
+```scss
+@use '@carbon/react' with (
+  $feature-flags: (
+    'enable-v12-tile-radio-icons': true,
+  )
+);
 ```
