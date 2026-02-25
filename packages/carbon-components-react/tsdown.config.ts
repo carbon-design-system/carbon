@@ -8,7 +8,7 @@ const BANNER = `/**
  */
 `;
 
-export default defineConfig({
+const sharedConfig = defineConfig({
   banner: BANNER,
   clean: false,
   dts: false,
@@ -36,3 +36,16 @@ export default defineConfig({
   report: false,
   target: 'es2022',
 });
+
+export default defineConfig([
+  {
+    ...sharedConfig,
+    format: 'esm',
+    outDir: 'es',
+  },
+  {
+    ...sharedConfig,
+    format: 'cjs',
+    outDir: 'lib',
+  },
+]);

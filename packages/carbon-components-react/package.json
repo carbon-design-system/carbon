@@ -33,9 +33,7 @@
     "provenance": true
   },
   "scripts": {
-    "build:es": "tsdown --config tsdown.config.ts --format esm --out-dir es",
-    "build:cjs": "tsdown --config tsdown.config.ts --format cjs --out-dir lib",
-    "build": "yarn clean && node tasks/build-styles.js && yarn build:es && yarn build:cjs",
+    "build": "yarn clean && node tasks/build-styles.js && tsdown --config tsdown.config.ts",
     "clean": "rimraf es lib",
     "postinstall": "ibmtelemetry --config=telemetry.yml && node scripts/postinstall.js"
   },

@@ -1,6 +1,6 @@
 import { defineConfig } from 'tsdown';
 
-export default defineConfig({
+const sharedConfig = defineConfig({
   clean: false,
   dts: false,
   entry: ['src/index.ts'],
@@ -24,3 +24,16 @@ export default defineConfig({
     };
   },
 });
+
+export default defineConfig([
+  {
+    ...sharedConfig,
+    format: 'esm',
+    outDir: 'es',
+  },
+  {
+    ...sharedConfig,
+    format: 'cjs',
+    outDir: 'lib',
+  },
+]);

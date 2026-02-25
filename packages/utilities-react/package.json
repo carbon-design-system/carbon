@@ -30,11 +30,9 @@
     "provenance": true
   },
   "scripts": {
-    "build:es": "tsdown --config tsdown.config.ts --format esm --out-dir es",
-    "build:cjs": "tsdown --config tsdown.config.ts --format cjs --out-dir lib",
     "build:types": "tsc",
-    "build": "yarn clean && yarn build:es && yarn build:cjs && yarn build:types",
-    "watch": "yarn build:es --watch & yarn build:cjs --watch",
+    "build": "yarn clean && tsdown --config tsdown.config.ts && yarn build:types",
+    "watch": "tsdown --config tsdown.config.ts --watch",
     "clean": "rimraf es lib",
     "postinstall": "ibmtelemetry --config=telemetry.yml"
   },
