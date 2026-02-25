@@ -1716,6 +1716,36 @@
     - baseball
     - cleat
     - fantasy football
+- name: cricket--ball
+  friendly_name: Cricket ball
+  aliases:
+    - cricket ball
+    - sports
+    - ball
+    - leather ball
+    - bounce
+- name: cricket--bat-and-ball
+  friendly_name: Cricket bat and ball
+  aliases:
+    - cricket bat and ball
+    - sports
+    - bat
+    - ball
+- name: cricket--field
+  friendly_name: Cricket field
+  aliases:
+    - cricket field
+    - ground
+    - play ground
+    - field
+    - pitch
+- name: cricket--helmet
+  friendly_name: Cricket helmet
+  aliases:
+    - cricket helmet
+    - sports
+    - protection
+    - gear
 - name: client--financing--01
   friendly_name: Client financing 01
   aliases:
@@ -2527,6 +2557,13 @@
     - south
     - farm
     - agriculture
+- name: crab
+  friendly_name: Crab
+  aliases:
+    - crab
+    - sea
+    - marine life
+    - animal
 - name: credit--card
   friendly_name: Credit card
   aliases:
@@ -2929,6 +2966,23 @@
     - desktop
     - computer
     - PC
+- name: drone--1
+  friendly_name: Drone 1
+  aliases:
+    - drone
+    - UAV (Unmanned Aerial Vehicle)
+    - quadcopter
+    - aerial drone
+    - flying camera
+    - package
+- name: drone
+  friendly_name: Drone
+  aliases:
+    - drone
+    - UAV (Unmanned Aerial Vehicle)
+    - quadcopter
+    - aerial drone
+    - flying camera
 - name: destination
   friendly_name: Destination
   aliases:
@@ -3938,6 +3992,13 @@
     - fireworks
     - explosive
     - celebration
+- name: fish
+  friendly_name: Fish
+  aliases:
+    - fish
+    - sea
+    - marine life
+    - animal
 - name: firefighter
   friendly_name: Firefighter
   aliases:
@@ -6313,6 +6374,13 @@
     - record
     - podcast
     - workplace
+- name: mouse
+  friendly_name: Mouse
+  aliases:
+    - mouse
+    - mouse with buttons
+    - computer
+    - technology
 - name: microscope
   friendly_name: Microscope
   aliases:
@@ -6838,6 +6906,13 @@
     - Texas
     - nature
     - wildlife
+- name: octopus
+  friendly_name: Octopus
+  aliases:
+    - octopus
+    - sea
+    - marine life
+    - animal
 - name: notifications
   friendly_name: Notifications
   aliases:
@@ -7615,6 +7690,14 @@
     - office
     - workplace
     - support
+- name: radio
+  friendly_name: Radio
+  aliases:
+    - radio
+    - electronics
+    - sound
+    - music
+    - entertainment
 - name: private--network--01
   friendly_name: Private network 01
   aliases:
@@ -7894,6 +7977,14 @@
     - roadie
     - sport
     - velo
+- name: skiing
+  friendly_name: Skiing
+  aliases:
+    - ski
+    - skiing
+    - sport
+    - mountain
+    - winter
 - name: rainy--heavy
   friendly_name: Rainy heavy
   aliases:
@@ -8337,6 +8428,20 @@
     - scale
     - weight
     - healthcare
+- name: sea-shell
+  friendly_name: Sea shell
+  aliases:
+    - sea shell
+    - sea
+    - marine life
+    - animal
+- name: shrimp
+  friendly_name: Shrimp
+  aliases:
+    - shrimp
+    - sea
+    - marine life
+    - animal
 - name: scale--02
   friendly_name: Scale 02
   aliases:
@@ -8945,6 +9050,13 @@
     - showtime
     - show
     - performance
+- name: starfish
+  friendly_name: Starfish
+  aliases:
+    - starfish
+    - sea
+    - marine life
+    - animal
 - name: stairs
   friendly_name: Stairs
   aliases:
@@ -9569,6 +9681,14 @@
     - data storage
     - hardware
     - workloads
+- name: visual--inspection
+  friendly_name: Visual inspection
+  aliases:
+    - AI Visual Inspection
+    - Visual Inspection
+    - Inspection
+    - Defect detection
+    - Anomaly detection
 - name: temperature--high
   friendly_name: Temperature high
   aliases:
@@ -10732,6 +10852,13 @@
     - creative
     - workplace
     - food
+- name: whale
+  friendly_name: Whale
+  aliases:
+    - whale
+    - sea
+    - marine life
+    - animal
 - name: wheat
   friendly_name: Wheat
   aliases:

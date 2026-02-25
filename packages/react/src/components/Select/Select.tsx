@@ -157,7 +157,7 @@ const Select = forwardRef<HTMLSelectElement, SelectProps>(
       hideLabel = false,
       invalid = false,
       invalidText = '',
-      helperText = '',
+      helperText,
       light = false,
       readOnly,
       size,
