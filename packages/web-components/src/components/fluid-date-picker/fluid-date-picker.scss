@@ -11,11 +11,41 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/components/fluid-date-picker' as *;
 @use '@carbon/styles/scss/layout' as *;
 @use '@carbon/styles/scss/spacing' as *;
-@use '@carbon/styles/scss/theme';
+@use '@carbon/styles/scss/theme' as *;
 @use '@carbon/styles/scss/type' as *;
 @use '@carbon/styles/scss/utilities/skeleton' as *;
 @use '@carbon/styles/scss/components/fluid-date-picker/index' as *;
 
 :host(#{$prefix}-fluid-date-picker) {
   @include emit-layout-tokens();
+}
+
+:host(#{$prefix}-fluid-date-picker-skeleton) {
+  @extend .#{$prefix}--date-picker--fluid__skeleton;
+}
+
+:host(#{$prefix}-fluid-date-picker-skeleton) {
+  @extend .#{$prefix}--date-picker--fluid__skeleton;
+}
+
+:host(#{$prefix}--date-picker--fluid) {
+  @extend .#{$prefix}--date-picker--fluid;
+}
+
+.#{$prefix}--skeleton {
+  &::before {
+    position: absolute;
+    animation: 3000ms ease-in-out #{$prefix}--skeleton infinite;
+    background: $skeleton-element;
+    // background: red;
+    block-size: 100%;
+    content: '';
+    inline-size: 100%;
+    inset-inline-start: 0;
+    will-change: transform-origin, transform, opacity;
+
+    @media (prefers-reduced-motion: reduce) {
+      animation: none;
+    }
+  }
 }

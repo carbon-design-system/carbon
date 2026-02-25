@@ -10,12 +10,12 @@ import { html } from 'lit';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import CDSDatePicker from '../date-picker/date-picker';
 import styles from './fluid-date-picker.scss?lit';
-// import { classMap } from 'lit/directives/class-map.js';
+import { classMap } from 'lit/directives/class-map.js';
 
 /**
- * Fluid number input.
+ * Fluid date picker.
  *
- * @element cds-fluid-number-input
+ * @element cds-fluid-date-picker
  */
 @customElement(`${prefix}-fluid-date-picker`)
 class CDSFluidDatePicker extends CDSDatePicker {
@@ -29,15 +29,14 @@ class CDSFluidDatePicker extends CDSDatePicker {
   }
 
   render() {
-    // const wrapperClasses = classMap({
-    //   [`${prefix}--number-input--fluid`]: true,
-    //   [`${prefix}--number-input--fluid--invalid`]: this.invalid,
-    //   [`${prefix}--number-input--fluid--warning`]: this.warn && !this.invalid,
-    //   [`${prefix}--number-input--fluid--disabled`]: this.disabled,
-    //   [`${prefix}--number-input--fluid--readonly`]: this.readonly,
-    // });
+    const wrapperClasses = classMap({
+      [`${prefix}--date-picker--fluid`]: true,
+      // [`${prefix}--date-picker--fluid--invalid`]: this.invalid,
+      // [`${prefix}--date-picker--fluid--warn`]: this.warn && !this.invalid,
+      // [`${prefix}--date-picker--fluid--readonly`]: this.readonly,
+    });
 
-    return html`<div>${super.render()}</div>`;
+    return html`<div class="${wrapperClasses}">${super.render()}</div>`;
   }
 
   static styles = [CDSDatePicker.styles, styles];

@@ -6,23 +6,31 @@
  */
 
 import { prefix } from '../../globals/settings';
-import { html } from 'lit';
+//import { property } from 'lit/decorators.js';
+import { html, LitElement } from 'lit';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
+// import { DATE_PICKER_INPUT_KIND } from '../date-picker/date-picker-input';
 import styles from './fluid-date-picker.scss?lit';
-import CDSDatePickerInputSkeleton from '../date-picker/date-picker-input-skeleton';
+
+// import CDSDatePickerInputSkeleton from '../date-picker/date-picker-input-skeleton';
 
 /**
  * Fluid number input.
  *
- * @element cds-fluid-number-input-skeleton
+ * @element cds-fluid-date-picker-skeleton
  */
-@customElement(`${prefix}-fluid-date-picker-input-skeleton`)
-class CDSFluidDatePickerInputSkeleton extends CDSDatePickerInputSkeleton {
+@customElement(`${prefix}-fluid-date-picker-skeleton`)
+class CDSFluidDatePickerSkeleton extends LitElement {
   render() {
-    return html` ${super.render()} `;
+    return html` <div class="${prefix}--date-picker--fluid__skeleton">
+      <div class="${prefix}--date-picker--fluid__skeleton--container">
+        <span class="${prefix}--label ${prefix}--skeleton"></span>
+        <div class="${prefix}--text-input ${prefix}--skeleton"></div>
+      </div>
+    </div>`;
   }
 
-  static styles = [CDSDatePickerInputSkeleton.styles, styles];
+  static styles = [styles];
 }
 
-export default CDSFluidDatePickerInputSkeleton;
+export default CDSFluidDatePickerSkeleton;

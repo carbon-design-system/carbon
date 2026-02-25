@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2019, 2025
+ * Copyright IBM Corp. 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -24,6 +24,7 @@ const sizes = {
 };
 
 const defaultArgs = {
+  defaultWidth: 300,
   dateFormat: 'm/d/Y',
   disabled: false,
   allowInput: true,
@@ -31,12 +32,10 @@ const defaultArgs = {
   minDate: '',
   maxDate: '',
   readonly: false,
-  short: false,
-  helperText: '',
   invalid: false,
-  invalidText: '',
+  invalidText: 'Invalid date format.',
   warn: false,
-  warnText: '',
+  warnText: 'Warning message.',
   placeholder: 'mm/dd/yyyy',
   size: INPUT_SIZE.MEDIUM,
 };
@@ -105,6 +104,47 @@ const controls = {
 export const Simple = {
   args: defaultArgs,
   argTypes: controls,
+  render: ({
+    allowInput,
+    closeOnSelect,
+    dateFormat,
+    disabled,
+    invalid,
+    invalidText,
+    maxDate,
+    minDate,
+    placeholder,
+    readonly,
+    size,
+    warn,
+    warnText,
+  }) => {
+    return html`
+      <cds-fluid-date-picker
+        allow-input="${allowInput}"
+        close-on-select="${closeOnSelect}"
+        date-format="${dateFormat}"
+        max-date="${maxDate}"
+        min-date="${minDate}">
+        <cds-fluid-date-picker-input
+          ?disabled="${disabled}"
+          label-text="Date Picker label"
+          placeholder="${placeholder}"
+          ?readonly="${readonly}"
+          size="${size}"
+          ?invalid="${invalid}"
+          invalid-text="${invalidText}"
+          ?warn="${warn}"
+          warn-text="${warnText}">
+        </cds-fluid-date-picker-input>
+      </cds-fluid-date-picker>
+    `;
+  },
+};
+
+export const Single = {
+  args: defaultArgs,
+  argTypes: controls,
   render: (args) => {
     const {
       allowInput,
@@ -126,45 +166,46 @@ export const Simple = {
         allow-input="${allowInput}"
         close-on-select="${closeOnSelect}"
         date-format="${dateFormat}"
+        ?disabled="${disabled}"
+        ?invalid="${invalid}"
+        invalid-text="${invalidText}"
         max-date="${maxDate}"
-        min-date="${minDate}">
-        <cds-date-picker-input
-          ?disabled="${disabled}"
+        min-date="${minDate}"
+        ?readonly="${readonly}"
+        size="${size}"
+        ?warn="${warn}"
+        warn-text="${warnText}">
+        <cds-fluid-date-picker-input
+          kind="single"
           label-text="Date Picker label"
-          placeholder="${placeholder}"
-          ?readonly="${readonly}"
-          size="${size}"
-          ?invalid="${invalid}"
-          invalid-text="${invalidText}"
-          ?warn="${warn}"
-          warn-text="${warnText}">
-        </cds-date-picker-input>
+          placeholder="${placeholder}">
+        </cds-fluid-date-picker-input>
       </cds-fluid-date-picker>
     `;
   },
 };
 
-const skeletonControls = {
-  hideLabel: {
-    control: 'boolean',
-    description: 'Specify whether the label should be hidden, or not',
-  },
-  range: {
-    control: 'boolean',
-    description: 'Specify whether the skeleton should be of range date picker.',
-  },
-};
+// const skeletonControls = {
+//   hideLabel: {
+//     control: 'boolean',
+//     description: 'Specify whether the label should be hidden, or not',
+//   },
+//   range: {
+//     control: 'boolean',
+//     description: 'Specify whether the skeleton should be of range date picker.',
+//   },
+// };
 
 export const Skeleton = {
-  args: { hideLabel: false, range: true },
-  argTypes: skeletonControls,
+  args: { defaultWidth: 300 },
+
+  // argTypes: skeletonControls,
   render: (args) => {
-    const { hideLabel, range } = args;
+    const { defaultWidth } = args;
     return html`
-      <cds-date-picker-input-skeleton
-        ?hide-label="${hideLabel}"
-        ?range="${range}">
-      </cds-date-picker-input-skeleton>
+      <div style="width:${defaultWidth}px;">
+        <cds-fluid-date-picker-skeleton />
+      </div>
     `;
   },
   decorators: [(story) => html` <div>${story()}</div> `],
@@ -231,22 +272,22 @@ export const WithAILabel = {
         close-on-select="${closeOnSelect}"
         date-format="${dateFormat}"
         ?disabled="${disabled}"
+        ?invalid="${invalid}"
+        invalid-text="${invalidText}"
         max-date="${maxDate}"
         min-date="${minDate}"
-        ?readonly="${readonly}">
-        <cds-date-picker-input
+        ?readonly="${readonly}"
+        size="${size}"
+        ?warn="${warn}"
+        warn-text="${warnText}">
+        <cds-fluid-date-picker-input
           kind="single"
           label-text="Date Picker label"
-          placeholder="${placeholder}"
-          size="${size}"
-          ?invalid="${invalid}"
-          invalid-text="${invalidText}"
-          ?warn="${warn}"
-          warn-text="${warnText}">
+          placeholder="${placeholder}">
           <cds-ai-label alignment="bottom-left">
             ${content}${actions}</cds-ai-label
           >
-        </cds-date-picker-input>
+        </cds-fluid-date-picker-input>
       </cds-fluid-date-picker>
     `;
   },
