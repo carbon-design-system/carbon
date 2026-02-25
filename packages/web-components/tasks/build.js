@@ -9,25 +9,31 @@
 
 import { fileURLToPath } from 'url';
 import { globby } from 'globby';
-import { rollup } from 'rollup';
-import alias from '@rollup/plugin-alias';
 import autoprefixer from 'autoprefixer';
-
-import commonjs from '@rollup/plugin-commonjs';
-import copy from 'rollup-plugin-copy';
 import cssnano from 'cssnano';
 import litSCSS from '../tools/rollup-plugin-lit-scss.js';
-import nodeResolve from '@rollup/plugin-node-resolve';
 import path from 'path';
 import postcss from 'postcss';
-import typescript from '@rollup/plugin-typescript';
 import fs from 'fs-extra';
 
 import * as packageJson from '../package.json' with { type: 'json' };
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
+const banner = `/**
+ * Copyright IBM Corp. 2024
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+`;
+
 async function build() {
+  const { build: tsdown } = await import('tsdown');
+  const packageRoot = path.resolve(__dirname, '..');
+  const tsconfigPath = path.resolve(packageRoot, 'tsconfig.json');
+  const external = getExternalPatterns();
+
   const esInputs = await globby([
     'src/**/*.ts',
     '!src/**/*.stories.ts',
@@ -45,119 +51,114 @@ async function build() {
     '!src/globals/mixins/**/*.ts',
   ]);
 
-  const entryPoint = {
-    rootDir: 'src',
-    outputDirectory: path.resolve(__dirname, '..'),
-  };
-
   const formats = [
     {
       type: 'esm',
       directory: 'es',
+      inputs: esInputs,
     },
     {
-      type: 'commonjs',
+      type: 'cjs',
       directory: 'lib',
+      inputs: libInputs,
     },
   ];
 
   for (const format of formats) {
-    const outputDirectory = path.join(
-      entryPoint.outputDirectory,
-      format.directory
-    );
-
-    const cwcInputConfig = getRollupConfig(
-      format.type === 'esm' ? esInputs : libInputs,
-      entryPoint.rootDir,
-      outputDirectory
-    );
-
-    const cwcBundle = await rollup(cwcInputConfig);
-
-    await cwcBundle.write({
-      dir: outputDirectory,
-      format: format.type,
-      preserveModules: true,
-      preserveModulesRoot: 'src',
+    await tsdown({
       banner,
-      exports: 'named',
-      sourcemap: true,
+      clean: false,
+      dts: true,
+      entry: format.inputs.map((input) => path.resolve(packageRoot, input)),
+      external,
+      failOnWarn: false,
+      format: format.type,
+      inputOptions: withInputCompatibilityAndPlugins,
+      logLevel: 'warn',
+      outDir: path.resolve(packageRoot, format.directory),
+      outputOptions(options) {
+        return {
+          ...options,
+          chunkFileNames: '[name].js',
+          entryFileNames: '[name].js',
+          exports: 'named',
+          preserveModules: true,
+          preserveModulesRoot: path.resolve(packageRoot, 'src'),
+          sourcemap: true,
+        };
+      },
+      platform: 'browser',
+      report: false,
+      target: 'es2022',
+      tsconfig: tsconfigPath,
     });
   }
 
+  await copyScssSources();
   await postBuild();
 }
 
-const banner = `/**
- * Copyright IBM Corp. 2024
- *
- * This source code is licensed under the Apache-2.0 license found in the
- * LICENSE file in the root directory of this source tree.
- */
-`;
+function withInputCompatibilityAndPlugins(inputOptions) {
+  const options = { ...inputOptions };
 
-function getRollupConfig(input, rootDir, outDir) {
-  return {
-    input,
-    // Mark dependencies listed in `package.json` as external so that they are
-    // not included in the output bundle.
-    external: [
-      ...Object.keys(packageJson.default.dependencies),
-      ...Object.keys(packageJson.default.devDependencies),
-    ].map((name) => {
-      // Transform the name of each dependency into a regex so that imports from
-      // nested paths are correctly marked as external.
-      //
-      // Example:
-      // import 'module-name';
-      // import 'module-name/path/to/nested/module';
-      return new RegExp(`^${name}(/.*)?`);
+  // Temporary compatibility shim for tsdown+rolldown option validation.
+  if ('define' in options) {
+    delete options.define;
+  }
+  if ('inject' in options) {
+    delete options.inject;
+  }
+
+  options.plugins = [
+    ...(options.plugins || []),
+    litSCSS({
+      includePaths: [
+        path.resolve(__dirname, '../node_modules'),
+        path.resolve(__dirname, '../../../node_modules'),
+      ],
+      async preprocessor(contents, id) {
+        return (
+          await postcss([autoprefixer(), cssnano()]).process(contents, {
+            from: id,
+          })
+        ).css;
+      },
     }),
-    plugins: [
-      alias({
-        entries: [{ find: /^(.*)\.scss\?lit$/, replacement: '$1.scss' }],
-      }),
-      copy({
-        targets: [{ src: 'src/components/**/*.scss', dest: 'scss' }],
-        flatten: false,
-      }),
-      nodeResolve({
-        browser: true,
-        mainFields: ['jsnext', 'module', 'main'],
-        extensions: ['.js', '.ts'],
-      }),
-      commonjs({
-        include: [/node_modules/],
-      }),
-      litSCSS({
-        includePaths: [
-          path.resolve(__dirname, '../node_modules'),
-          path.resolve(__dirname, '../../../node_modules'),
-        ],
-        async preprocessor(contents, id) {
-          return (
-            await postcss([autoprefixer(), cssnano()]).process(contents, {
-              from: id,
-            })
-          ).css;
-        },
-      }),
-      typescript({
-        noEmitOnError: true,
-        compilerOptions: {
-          rootDir,
-          outDir,
-        },
-      }),
-    ],
-  };
+  ];
+
+  return options;
 }
 
-build().catch((error) => {
-  console.log(error);
-  process.exit(1);
-});
+function getExternalPatterns() {
+  const deps = [
+    ...Object.keys(packageJson.default.dependencies),
+    ...Object.keys(packageJson.default.devDependencies),
+  ];
+
+  return deps.map((name) => {
+    const escapedName = name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    return new RegExp(`^${escapedName}(/.*)?`);
+  });
+}
+
+async function copyScssSources() {
+  const files = await globby(['src/components/**/*.scss']);
+
+  await Promise.all(
+    files.map(async (file) => {
+      const relative = path.relative('src/components', file);
+      const destination = path.resolve(
+        __dirname,
+        '..',
+        'scss',
+        'components',
+        relative
+      );
+      await fs.ensureDir(path.dirname(destination));
+      await fs.copyFile(path.resolve(__dirname, '..', file), destination);
+    })
+  );
+}
 
 // TODO: remove and add scoped elements!
 async function postBuild() {
@@ -182,3 +183,8 @@ async function postBuild() {
     );
   }
 }
+
+build().catch((error) => {
+  console.log(error);
+  process.exit(1);
+});

@@ -9,120 +9,100 @@
 
 import path from 'path';
 import { fileURLToPath } from 'url';
-import { rollup } from 'rollup';
 import autoprefixer from 'autoprefixer';
-import alias from '@rollup/plugin-alias';
-import commonjs from '@rollup/plugin-commonjs';
 import cssnano from 'cssnano';
-import fs from 'fs';
+import fs from 'fs/promises';
 import postcss from 'postcss';
-import replace from '@rollup/plugin-replace';
-import { nodeResolve } from '@rollup/plugin-node-resolve';
-import { promisify } from 'util';
-import terser from '@rollup/plugin-terser';
-import typescript from '@rollup/plugin-typescript';
 
 import fixHostPseudo from '../tools/postcss-fix-host-pseudo.js';
-import license from '../tools/rollup-plugin-license.js';
 import litSCSS from '../tools/rollup-plugin-lit-scss.js';
+import * as packageJson from '../package.json' with { type: 'json' };
 
-const readFile = promisify(fs.readFile);
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const DIST_BANNER = 'let process = { env: {} };';
 
 /**
  * Gets all of the folders and returns out
  *
  * @param {string} dir Directory to check
- * @returns {string[]} List of folders
+ * @returns {Promise<string[]>} List of folders
  * @private
  */
-function _getFolders(dir) {
-  return fs
-    .readdirSync(dir)
-    .filter((file) => fs.statSync(path.join(dir, file)).isDirectory());
+async function getFolders(dir) {
+  const entries = await fs.readdir(dir, { withFileTypes: true });
+  return entries
+    .filter((entry) => entry.isDirectory())
+    .map((entry) => entry.name);
 }
 
 /**
- * Builds all of the rollup bundles for all components
- *
- * @param {object} [options] The build options.
- * @param {string} [options.mode=development] The build mode.
+ * Builds all dist bundles for components.
  */
 async function buildDist() {
-  if (!fs.existsSync('dist')) {
-    fs.mkdirSync('dist');
-  }
+  const { build: tsdown } = await import('tsdown');
+  const packageRoot = path.resolve(__dirname, '..');
+  const componentsDir = path.resolve(packageRoot, 'src/components');
+  const postCSSPlugins = [fixHostPseudo(), autoprefixer(), cssnano()];
+  const licenseBanner = await createLicenseBanner(packageRoot);
+  const folders = await getFolders(componentsDir);
+  const entry = {};
 
-  const folders = _getFolders('src/components');
-
-  for (let i = folders.length - 1; i >= 0; i--) {
-    if (!fs.existsSync(`src/components/${folders[i]}/index.ts`)) {
-      folders.splice(i, 1);
+  for (const folder of folders) {
+    try {
+      await fs.access(path.join(componentsDir, folder, 'index.ts'));
+      entry[`${folder}.min`] = path.join(componentsDir, folder, 'index.ts');
+    } catch {
+      // Skip component directories without dist entrypoint.
     }
   }
 
-  // Generate inputs with flat file names
-  const inputs = {};
-  folders.forEach((folder) => {
-    inputs[`${folder}.min`] = `src/components/${folder}/index.ts`;
-  });
-
-  return rollup(getRollupConfig({ inputs }))
-    .then((bundle) => {
-      bundle.write({
-        format: 'es',
-        dir: 'dist',
-        // This ensures output files are named based on input keys
+  await tsdown({
+    clean: false,
+    dts: false,
+    entry,
+    external: [],
+    failOnWarn: false,
+    format: 'esm',
+    inputOptions: withInputCompatibilityAndPlugins({
+      postCSSPlugins,
+      packageRoot,
+    }),
+    inlineOnly: false,
+    logLevel: 'warn',
+    noExternal: [/.*/],
+    minify: true,
+    outDir: path.resolve(packageRoot, 'dist'),
+    outputOptions(options) {
+      return {
+        ...options,
+        banner: `${DIST_BANNER}\n${licenseBanner}`,
+        chunkFileNames: '[name]-[hash].js',
         entryFileNames: '[name].js',
-        banner: 'let process = { env: {} };',
-      });
-    })
-    .catch((err) => {
-      console.error(err);
-    });
+      };
+    },
+    platform: 'browser',
+    report: false,
+    sourcemap: false,
+    target: 'es2022',
+    tsconfig: path.resolve(packageRoot, 'tsconfig.json'),
+  });
 }
 
-/**
- * Sets the rollup configuration based on various settings
- *
- * @param {object} [options] The build options.
- * @param {object} [options.inputs] Map input files
- * @returns {object} The Rollup config.
- */
-function getRollupConfig({ inputs = {} } = {}) {
-  const postCSSPlugins = [fixHostPseudo(), autoprefixer(), cssnano()];
+function withInputCompatibilityAndPlugins({ postCSSPlugins }) {
+  return function patchInputOptions(inputOptions) {
+    const options = { ...inputOptions };
 
-  const licenseOptions = {
-    whitelist: /^(carbon-components|@carbon*)$/i,
-    async licenseSelf() {
-      return readFile(path.resolve(__dirname, '../tools/license.js'), 'utf8');
-    },
-  };
+    // Temporary compatibility shim for tsdown+rolldown option validation.
+    if ('define' in options) {
+      delete options.define;
+    }
+    if ('inject' in options) {
+      delete options.inject;
+    }
 
-  return {
-    input: inputs,
-    plugins: [
-      alias({
-        entries: [{ find: /^(.*)\.scss\?lit$/, replacement: '$1.scss' }],
-      }),
-      nodeResolve({
-        browser: true,
-        mainFields: ['jsnext', 'module', 'main'],
-        dedupe: ['carbon-components'],
-        extensions: ['.js', '.ts'],
-      }),
-      commonjs({
-        include: [/node_modules/],
-        sourceMap: true,
-      }),
-      typescript({
-        noEmitOnError: true,
-        declaration: false,
-        compilerOptions: {
-          rootDir: 'src',
-          outDir: 'dist',
-        },
-      }),
+    options.plugins = [
+      ...(options.plugins || []),
+      replaceNodeEnvProduction(),
       litSCSS({
         includePaths: [
           path.resolve(__dirname, '../node_modules'),
@@ -133,13 +113,62 @@ function getRollupConfig({ inputs = {} } = {}) {
             .css;
         },
       }),
-      replace({
-        'process.env.NODE_ENV': 'production',
-        preventAssignment: true,
-      }),
-      terser(),
-      license(licenseOptions),
-    ],
+    ];
+
+    return options;
+  };
+}
+
+async function createLicenseBanner() {
+  const whitelist = /^(carbon-components|@carbon.*)$/i;
+  const thirdPartyDependencies = new Set([
+    ...Object.keys(packageJson.default.dependencies || {}),
+    // Transitive packages commonly bundled into dist artifacts.
+    'lit-html',
+    'lit-element',
+    '@lit/reactive-element',
+    '@floating-ui/core',
+    '@floating-ui/utils',
+  ]);
+
+  const links = Array.from(thirdPartyDependencies)
+    .filter((name) => !whitelist.test(name))
+    .sort((a, b) => a.localeCompare(b))
+    .map((name) => ` * https://www.npmjs.com/package/${name}`)
+    .join('\n');
+
+  return `/**
+ * @license
+ *
+ * Copyright IBM Corp. 2019, 2026
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ *
+ * Also refer to the following links for third-party dependencies:
+${links}
+ */
+`;
+}
+
+function replaceNodeEnvProduction() {
+  return {
+    name: 'replace-node-env-production',
+    transform(code, id) {
+      if (!/\.(m?[jt]s|tsx?)$/i.test(id)) {
+        return null;
+      }
+
+      const replaced = code.replaceAll('process.env.NODE_ENV', '"production"');
+      if (replaced === code) {
+        return null;
+      }
+
+      return {
+        code: replaced,
+        map: null,
+      };
+    },
   };
 }
 

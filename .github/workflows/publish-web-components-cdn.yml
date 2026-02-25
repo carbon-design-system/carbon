@@ -28,7 +28,7 @@ jobs:
       - name: Install dependencies
         run: |
           yarn install
-          yarn build
+          yarn --cwd packages/web-components build:cdn
       - name: Check release type
         if: contains(github.ref_name, '-rc.')
         run: echo "PRE_RELEASE=true" >> $GITHUB_ENV
