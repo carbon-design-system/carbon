@@ -1777,14 +1777,11 @@ __metadata:
     "@babel/types": "npm:^7.27.3"
     "@carbon/scss-generator": "npm:^10.20.0"
     "@ibm/telemetry-js": "npm:^1.5.0"
-    "@rollup/plugin-babel": "npm:^6.0.0"
-    "@rollup/plugin-node-resolve": "npm:^15.0.0"
     change-case-all: "npm:^2.1.0"
     fs-extra: "npm:^11.0.0"
     js-yaml: "npm:^4.1.0"
     rimraf: "npm:^6.0.1"
-    rollup: "npm:^4.41.1"
-    rollup-plugin-strip-banner: "npm:^3.0.0"
+    tsdown: "npm:^0.20.3"
   languageName: unknown
   linkType: soft
 

@@ -31,9 +31,11 @@
     "provenance": true
   },
   "scripts": {
-    "build": "yarn clean && node tasks/build.js && rollup -c",
+    "build:es": "tsdown --config tsdown.config.ts --format esm --out-dir es",
+    "build:cjs": "tsdown --config tsdown.config.ts --format cjs --out-dir lib",
+    "build": "yarn clean && node tasks/build.js && yarn build:es && yarn build:cjs",
     "clean": "rimraf es lib scss/generated src/generated",
-    "watch": "yarn clean && node tasks/build.js && rollup -c -w",
+    "watch": "node tasks/build.js && yarn build:es --watch & yarn build:cjs --watch",
     "postinstall": "ibmtelemetry --config=telemetry.yml"
   },
   "devDependencies": {
@@ -43,14 +45,11 @@
     "@babel/template": "^7.27.2",
     "@babel/types": "^7.27.3",
     "@carbon/scss-generator": "^10.20.0",
-    "@rollup/plugin-babel": "^6.0.0",
-    "@rollup/plugin-node-resolve": "^15.0.0",
     "change-case-all": "^2.1.0",
     "fs-extra": "^11.0.0",
     "js-yaml": "^4.1.0",
     "rimraf": "^6.0.1",
-    "rollup": "^4.41.1",
-    "rollup-plugin-strip-banner": "^3.0.0"
+    "tsdown": "^0.20.3"
   },
   "sideEffects": false,
   "babel": {
