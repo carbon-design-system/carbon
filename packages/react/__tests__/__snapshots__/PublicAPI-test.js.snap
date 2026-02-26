@@ -15830,5 +15830,7 @@ Map {
   "usePrefix" => {},
   "useTheme" => {},
   "validateNumberSeparators" => {},
+  "withComposedModalPresence" => {},
+  "withModalPresence" => {},
 }
 `;
