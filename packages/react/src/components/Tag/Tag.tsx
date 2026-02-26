@@ -170,8 +170,8 @@ const TagBase = React.forwardRef<
       );
     }
     const ref = useMergedRefs([forwardRef, tagRef]);
-    // eslint-disable-next-line  react-hooks/rules-of-hooks -- https://github.com/carbon-design-system/carbon/issues/20452
-    const tagId = id || `tag-${useId()}`;
+    const generatedTagId = useId();
+    const tagId = id ?? `tag-${generatedTagId}`;
     const [isEllipsisApplied, setIsEllipsisApplied] = useState(false);
 
     useIsomorphicEffect(() => {

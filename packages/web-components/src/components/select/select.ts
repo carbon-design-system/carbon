@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2020, 2025
+ * Copyright IBM Corp. 2020, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -473,8 +473,8 @@ class CDSSelect extends FormMixin(LitElement) {
         class="${inputClasses}"
         ?disabled="${disabled}"
         title="${value}"
-        aria-readonly="${String(Boolean(readonly))}"
-        aria-invalid="${String(Boolean(normalizedProps.invalid))}"
+        aria-readonly="${String(readonly)}"
+        aria-invalid="${String(normalizedProps.invalid)}"
         aria-describedby="${ifDefined(describedBy)}"
         @input="${handleInput}">
         ${!placeholder || value
