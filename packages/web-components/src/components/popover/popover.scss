@@ -400,6 +400,60 @@ $popover-border-color: custom-property.get-var(
 }
 
 //-----------------------------------------------------------------------------
+// Bottom - No Caret Spacing (non-autoalign)
+//-----------------------------------------------------------------------------
+
+:host(
+    #{$prefix}-popover-content[align='bottom']:not([caret]):not(
+        [autoalign]
+      ):not([tabTip])
+  ),
+:host(
+    #{$prefix}-popover-content[align='bottom-start']:not([caret]):not(
+        [autoalign]
+      ):not([tabTip])
+  ),
+:host(
+    #{$prefix}-popover-content[align='bottom-end']:not([caret]):not(
+        [autoalign]
+      ):not([tabTip])
+  ) {
+  .#{$prefix}--popover-content {
+    inset-block-end: -$spacing-02;
+  }
+}
+
+:host(
+    #{$prefix}-popover-content[align='bottom-start']:not([caret]):not(
+        [autoalign]
+      ):not([tabTip])
+  ),
+:host(
+    #{$prefix}-popover-content[align='bottom-left']:not([caret]):not(
+        [autoalign]
+      ):not([tabTip])
+  ) {
+  .#{$prefix}--popover-content {
+    inset-inline-start: calc(50% - $popover-offset - 1rem);
+  }
+}
+
+:host(
+    #{$prefix}-popover-content[align='bottom-end']:not([caret]):not(
+        [autoalign]
+      ):not([tabTip])
+  ),
+:host(
+    #{$prefix}-popover-content[align='bottom-right']:not([caret]):not(
+        [autoalign]
+      ):not([tabTip])
+  ) {
+  .#{$prefix}--popover-content {
+    inset-inline-end: calc(50% - $popover-offset - 1rem);
+  }
+}
+
+//-----------------------------------------------------------------------------
 // Left
 //-----------------------------------------------------------------------------
 
@@ -529,6 +583,30 @@ $popover-border-color: custom-property.get-var(
 }
 
 //-----------------------------------------------------------------------------
+// Left - No Caret Spacing (non-autoalign)
+//-----------------------------------------------------------------------------
+
+:host(
+    #{$prefix}-popover-content[align='left']:not([caret]):not([autoalign]):not(
+        [tabTip]
+      )
+  ),
+:host(
+    #{$prefix}-popover-content[align='left-start']:not([caret]):not(
+        [autoalign]
+      ):not([tabTip])
+  ),
+:host(
+    #{$prefix}-popover-content[align='left-end']:not([caret]):not(
+        [autoalign]
+      ):not([tabTip])
+  ) {
+  .#{$prefix}--popover-content {
+    inset-inline-end: calc(100% + $spacing-02);
+  }
+}
+
+//-----------------------------------------------------------------------------
 // Right
 //-----------------------------------------------------------------------------
 
@@ -648,6 +726,30 @@ $popover-border-color: custom-property.get-var(
   .#{$prefix}--popover-content {
     inset-inline-end: 100%;
     inset-inline-start: initial;
+  }
+}
+
+//-----------------------------------------------------------------------------
+// Right - No Caret Spacing (non-autoalign)
+//-----------------------------------------------------------------------------
+
+:host(
+    #{$prefix}-popover-content[align='right']:not([caret]):not([autoalign]):not(
+        [tabTip]
+      )
+  ),
+:host(
+    #{$prefix}-popover-content[align='right-start']:not([caret]):not(
+        [autoalign]
+      ):not([tabTip])
+  ),
+:host(
+    #{$prefix}-popover-content[align='right-end']:not([caret]):not(
+        [autoalign]
+      ):not([tabTip])
+  ) {
+  .#{$prefix}--popover-content {
+    inset-inline-start: calc(100% + $spacing-02);
   }
 }
 
@@ -801,6 +903,64 @@ $popover-border-color: custom-property.get-var(
   }
 }
 
+//-----------------------------------------------------------------------------
+// Top - No Caret Spacing (non-autoalign)
+//-----------------------------------------------------------------------------
+
+:host(
+    #{$prefix}-popover-content[align='top']:not([caret]):not([autoalign]):not(
+        [tabTip]
+      )
+  ),
+:host(
+    #{$prefix}-popover-content[align='top-start']:not([caret]):not(
+        [autoalign]
+      ):not([tabTip])
+  ),
+:host(
+    #{$prefix}-popover-content[align='top-end']:not([caret]):not(
+        [autoalign]
+      ):not([tabTip])
+  ) {
+  .#{$prefix}--popover-content {
+    inset-block-start: -$spacing-02;
+  }
+}
+
+:host(
+    #{$prefix}-popover-content[align='top-start']:not([caret]):not(
+        [autoalign]
+      ):not([tabTip])
+  ),
+:host(
+    #{$prefix}-popover-content[align='top-left']:not([caret]):not(
+        [autoalign]
+      ):not([tabTip])
+  ) {
+  .#{$prefix}--popover-content {
+    inset-inline-start: calc(50% - $popover-offset - 1rem);
+  }
+}
+
+:host(
+    #{$prefix}-popover-content[align='top-end']:not([caret]):not(
+        [autoalign]
+      ):not([tabTip])
+  ),
+:host(
+    #{$prefix}-popover-content[align='top-right']:not([caret]):not(
+        [autoalign]
+      ):not([tabTip])
+  ) {
+  .#{$prefix}--popover-content {
+    inset-inline-end: calc(50% - $popover-offset - 1rem);
+  }
+}
+
+//-----------------------------------------------------------------------------
+// AutoAlign
+//-----------------------------------------------------------------------------
+
 :host(#{$prefix}-toggletip[autoalign]),
 :host(#{$prefix}-tooltip-content[autoalign]),
 :host(#{$prefix}-popover-content[autoalign]) {
@@ -820,10 +980,6 @@ $popover-border-color: custom-property.get-var(
     position: static;
   }
 }
-
-//-----------------------------------------------------------------------------
-// AutoAlign
-//-----------------------------------------------------------------------------
 
 // autoalign caret
 :host(#{$prefix}-popover-content[open][caret][autoalign]),

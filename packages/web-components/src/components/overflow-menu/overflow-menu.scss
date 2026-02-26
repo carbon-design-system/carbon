@@ -106,6 +106,10 @@
 
   outline: none;
 
+  button {
+    justify-content: space-between;
+  }
+
   button:hover {
     background-color: $layer-hover;
   }
