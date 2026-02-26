@@ -95,3 +95,16 @@ to a different level:
   <ComposedModal ... />
 </ComposedModalPresence>
 ```
+
+Instead of wrapping your component with `ComposedModalPresence`, you can also use the higher-order function `withComposedModalPresence`.
+This will automatically wrap your component and handle the props and types for you:
+
+```jsx
+export const MyComposedModal = withComposedModalPresence(
+  ({ onSubmit, onClose }) => {
+    ...
+  },
+);
+
+<MyComposedModal open={open} onSubmit={noop} onClose={noop} />
+```
