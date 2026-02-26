@@ -27,7 +27,7 @@ export const initCarousel = (
   let viewIndexStack = [0];
   let previousViewIndexStack = [0];
   const refs: Record<number, HTMLElement | null> = {};
-  const carouselListeners = new Map<HTMLElement, EventListener>();
+  const carouselListeners = new WeakMap<HTMLElement, EventListener>();
 
   const minHeight = 4; // 4 rem
 
@@ -396,9 +396,9 @@ export const initCarousel = (
         el.removeEventListener('animationend', listener);
         el.removeEventListener('transitionend', listener);
       }
-    });
 
-    carouselListeners.clear();
+      carouselListeners.delete(el);
+    });
 
     if (!excludeSwipeSupport) {
       registerSwipeEvents(carouselContainer, navigateNext, navigatePrev, true);
