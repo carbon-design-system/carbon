@@ -17,11 +17,14 @@ import {
 } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import ComposedModal, { ModalBody } from './ComposedModal';
-import { ComposedModalPresence } from './ComposedModalPresence';
+import {
+  ComposedModalPresence,
+  withComposedModalPresence,
+} from './ComposedModalPresence';
 import { FeatureFlags, useFeatureFlag } from '../FeatureFlags';
 import { ModalHeader } from './ModalHeader';
 import { ModalFooter } from './ModalFooter';
-import { TextInput } from '../../';
+import { TextInput, OverflowMenu, OverflowMenuItem } from '../../';
 import { AILabel } from '../AILabel';
 
 const prefix = 'cds';
@@ -668,8 +671,37 @@ describe.each([
         expect(spy).toHaveBeenCalledWith(
           'Warning: `<ComposedModal>` prop `preventCloseOnClickOutside` should not be `false` when `<ModalFooter>` is present. Transactional, non-passive Modals should not be dissmissable by clicking outside. See: https://carbondesignsystem.com/components/modal/usage/#transactional-modal'
         );
-
         spy.mockRestore();
+      });
+      it('should close overflow menu on outside click without closing modal', async () => {
+        const onClose = jest.fn();
+        render(
+          <Component open onClose={onClose}>
+            <ModalHeader>Modal with Overflow Menu</ModalHeader>
+            <ModalBody>
+              <OverflowMenu iconDescription="More options">
+                <OverflowMenuItem itemText="Download" />
+                <OverflowMenuItem itemText="Share" />
+              </OverflowMenu>
+              <p>Test content</p>
+            </ModalBody>
+            <ModalFooter
+              primaryButtonText="Primary button"
+              secondaryButtonText="Secondary button"
+            />
+          </Component>
+        );
+        const button = screen.getByRole('button', { name: /options/i });
+
+        const backgroundLayer = screen.getByRole('presentation', {
+          hidden: true,
+        });
+        expect(backgroundLayer).toHaveClass('is-visible');
+
+        await userEvent.click(button);
+        expect(button).toHaveAttribute('aria-expanded', 'true');
+        await userEvent.click(backgroundLayer);
+        expect(button).toHaveAttribute('aria-expanded', 'false');
       });
     });
   });
@@ -886,5 +918,26 @@ describe('state with presence context', () => {
     expect(childModal).not.toBeInTheDocument();
     expect(siblingModal).not.toBeInTheDocument();
     expect(screen.queryByTestId('modal')).toBeInTheDocument();
+  });
+});
+
+const ComposedModalWithPresenceHof = withComposedModalPresence((props) => {
+  return <ComposedModal {...props} />;
+});
+
+describe('state with hof withModalPresence', () => {
+  it('should be present when state is open', () => {
+    render(<ComposedModalWithPresenceHof open data-testid="modal" />);
+    expect(screen.queryByTestId('modal')).toBeInTheDocument();
+  });
+
+  it('should not be present when open is false', () => {
+    render(<ComposedModalWithPresenceHof open={false} data-testid="modal" />);
+    expect(screen.queryByTestId('modal')).not.toBeInTheDocument();
+  });
+
+  it('should not be present when open is undefined', () => {
+    render(<ComposedModalWithPresenceHof data-testid="modal" />);
+    expect(screen.queryByTestId('modal')).not.toBeInTheDocument();
   });
 });

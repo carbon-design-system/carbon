@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2025
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -16,6 +16,8 @@ import React, {
   ReactElement,
   ReactNode,
   useContext,
+  useEffect,
+  useRef,
   useState,
 } from 'react';
 import { Text } from '../Text';
@@ -127,7 +129,7 @@ function AccordionItem({
   ...rest
 }: PropsWithChildren<AccordionItemProps>) {
   const [isOpen, setIsOpen] = useState(open);
-  const [prevIsOpen, setPrevIsOpen] = useState(open);
+  const prevOpenRef = useRef(open);
   const accordionState = useContext(AccordionContext);
 
   const disabledIsControlled = typeof controlledDisabled === 'boolean';
@@ -159,10 +161,12 @@ function AccordionItem({
     [isOpen]
   );
 
-  if (open !== prevIsOpen) {
-    setIsOpen(open);
-    setPrevIsOpen(open);
-  }
+  useEffect(() => {
+    if (open !== prevOpenRef.current) {
+      setIsOpen(open);
+      prevOpenRef.current = open;
+    }
+  }, [open]);
 
   // When the AccordionItem heading is clicked, toggle the open state of the
   // panel
