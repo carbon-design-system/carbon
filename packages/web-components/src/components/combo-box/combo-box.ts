@@ -316,10 +316,18 @@ class CDSComboBox extends CDSDropdown {
       return;
     }
 
-    if (this.value) {
-      this._revertInputToSelected(true);
-    } else if (this._filterInputNode.value) {
-      this._clearInputWithoutSelecting(true);
+    if (this.open) {
+      this._handleUserInitiatedToggle(false);
+    } else {
+      if (this.value) {
+        this._revertInputToSelected(true);
+      } else if (this._filterInputNode.value) {
+        this._clearInputWithoutSelecting(true);
+      }
+
+      if (this.value || this._filterInputNode.value) {
+        this._handleUserInitiatedClearInput();
+      }
     }
   }
 
