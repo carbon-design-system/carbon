@@ -508,7 +508,7 @@ class CDSMultiSelect extends CDSDropdown {
     const inputValue = this._filterInputNode.value.toLocaleLowerCase();
     this.toggleAttribute('has-value', inputValue.length > 0);
 
-    if (!this.open) {
+    if (!this.open && inputValue.length > 0) {
       this.open = true;
     }
 
@@ -557,7 +557,7 @@ class CDSMultiSelect extends CDSDropdown {
 
     if (visibleItems.length > 0) {
       visibleItems.forEach((i) => i.removeAttribute('highlighted'));
-      this.setAttribute('item-clicked', '');
+      this.toggleAttribute('item-clicked', inputValue.length > 0);
       const first = visibleItems[0] as HTMLElement;
       first.setAttribute('highlighted', '');
       first.focus();
@@ -587,7 +587,6 @@ class CDSMultiSelect extends CDSDropdown {
     const constructor = this.constructor as typeof CDSMultiSelect;
     const items = this.querySelectorAll(constructor.selectorItemFiltered);
     this._filterInputNode.value = '';
-    this.open = true;
     this._filterInputNode.focus();
     forEach(items, (item) => {
       (item as CDSMultiSelectItem).removeAttribute('filtered');
