@@ -511,8 +511,7 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
     );
 
     // Sort only non-select-all items, select-all item must stay at the top
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
-    const sortedReal = sortItems!(nonSelectAllItems, {
+    const sortedReal = sortItems(nonSelectAllItems, {
       selectedItems: {
         top: controlledSelectedItems,
         fixed: [],
