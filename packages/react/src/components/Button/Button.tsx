@@ -40,7 +40,7 @@ export type ButtonTooltipPosition = (typeof ButtonTooltipPositions)[number];
 export interface ButtonBaseProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   /**
-   * Specify the message read by screen readers for the danger button variant
+   * Specify the message read by screen readers for the danger button variants
    */
   dangerDescription?: string;
 
@@ -66,7 +66,7 @@ export interface ButtonBaseProps
   isExpressive?: boolean;
 
   /**
-   * Specify whether the Button is currently selected. Only applies to the Ghost variant.
+   * Specify whether the Button is currently selected. Only applies to the icon only Ghost variant.
    */
   isSelected?: boolean;
 
@@ -99,7 +99,7 @@ export interface ButtonBaseProps
 
   /**
    * Specify the alignment of the tooltip to the icon-only button.
-   * Can be one of: start, center, or end.
+   * Can be one of: `start`, `center`, or `end`.
    */
   tooltipAlignment?: ButtonTooltipAlignment;
 
@@ -116,7 +116,7 @@ export interface ButtonBaseProps
 
   /**
    * Specify the direction of the tooltip for icon-only buttons.
-   * Can be either top, right, bottom, or left.
+   * Can be either `top`, `right`, `bottom`, or `left`.
    */
   tooltipPosition?: ButtonTooltipPosition;
 }
@@ -266,7 +266,7 @@ Button.propTypes = {
   className: PropTypes.string,
 
   /**
-   * Specify the message read by screen readers for the danger button variant
+   * Specify the message read by screen readers for the danger button variants
    */
   dangerDescription: PropTypes.string,
 
@@ -304,7 +304,7 @@ Button.propTypes = {
   isExpressive: PropTypes.bool,
 
   /**
-   * Specify whether the Button is currently selected. Only applies to the Ghost variant.
+   * Specify whether the Button is currently selected. Only applies to the icon only Ghost variant.
    */
   isSelected: PropTypes.bool,
 
@@ -392,7 +392,7 @@ Button.propTypes = {
 
   /**
    * Specify the alignment of the tooltip to the icon-only button.
-   * Can be one of: start, center, or end.
+   * Can be one of: `start`, `center`, or `end`.
    */
   tooltipAlignment: PropTypes.oneOf(['start', 'center', 'end']),
 
@@ -409,7 +409,7 @@ Button.propTypes = {
 
   /**
    * Specify the direction of the tooltip for icon-only buttons.
-   * Can be either top, right, bottom, or left.
+   * Can be either `top`, `right`, `bottom`, or `left`.
    */
   tooltipPosition: PropTypes.oneOf(['top', 'right', 'bottom', 'left']),
 

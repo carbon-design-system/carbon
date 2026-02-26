@@ -17,6 +17,7 @@ import isEqual from 'react-fast-compare';
 import PropTypes from 'prop-types';
 import React, {
   cloneElement,
+  useEffect,
   isValidElement,
   useCallback,
   useContext,
@@ -349,9 +350,9 @@ export const MultiSelect = React.forwardRef(
     const prefix = usePrefix();
     const { isFluid } = useContext(FormContext);
     const multiSelectInstanceId = useId();
+    const prevOpenPropRef = useRef(open);
     const [inputFocused, setInputFocused] = useState(false);
     const [isOpen, setIsOpen] = useState(open || false);
-    const [prevOpenProp, setPrevOpenProp] = useState(open);
     const [topItems, setTopItems] = useState<ItemType[]>([]);
     const [itemsCleared, setItemsCleared] = useState(false);
 
@@ -521,13 +522,13 @@ export const MultiSelect = React.forwardRef(
       }
     };
 
-    /**
-     * programmatically control this `open` prop
-     */
-    if (prevOpenProp !== open) {
-      setIsOpenWrapper(open);
-      setPrevOpenProp(open);
-    }
+    useEffect(() => {
+      if (prevOpenPropRef.current !== open) {
+        setIsOpen(open);
+        onMenuChange?.(open);
+        prevOpenPropRef.current = open;
+      }
+    }, [open, onMenuChange]);
 
     const normalizedProps = useNormalizedInputProps({
       id,
@@ -794,8 +795,7 @@ export const MultiSelect = React.forwardRef(
                   !disabled && !readOnly ? clearSelection : noopFn
                 }
                 selectionCount={selectedItemsLength}
-                // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-                translateWithId={translateWithId!}
+                translateWithId={translateWithId}
                 disabled={disabled}
               />
             )}
@@ -830,8 +830,7 @@ export const MultiSelect = React.forwardRef(
           </div>
           <ListBox.Menu {...menuProps}>
             {isOpen &&
-              // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
-              sortItems!(filteredItems, sortOptions).map((item, index) => {
+              sortItems(filteredItems, sortOptions).map((item, index) => {
                 const {
                   hasIndividualSelections,
                   nonSelectAllSelectedCount,
