@@ -1,12 +1,18 @@
 /**
- * Copyright IBM Corp. 2016, 2025
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
 import PropTypes from 'prop-types';
-import React, { cloneElement, useRef, useState, type ReactNode } from 'react';
+import React, {
+  cloneElement,
+  useRef,
+  useState,
+  type ElementType,
+  type ReactNode,
+} from 'react';
 import classNames from 'classnames';
 import { Close } from '@carbon/icons-react';
 import { useId } from '../../internal/useId';
@@ -164,8 +170,8 @@ const TagBase = React.forwardRef<
       );
     }
     const ref = useMergedRefs([forwardRef, tagRef]);
-    // eslint-disable-next-line  react-hooks/rules-of-hooks -- https://github.com/carbon-design-system/carbon/issues/20452
-    const tagId = id || `tag-${useId()}`;
+    const generatedTagId = useId();
+    const tagId = id ?? `tag-${generatedTagId}`;
     const [isEllipsisApplied, setIsEllipsisApplied] = useState(false);
 
     useIsomorphicEffect(() => {
@@ -212,7 +218,7 @@ const TagBase = React.forwardRef<
         : null;
 
     if (filter) {
-      const ComponentTag = (BaseComponent as React.ElementType) ?? 'div';
+      const ComponentTag: ElementType = BaseComponent ?? 'div';
       return (
         <ComponentTag className={tagClasses} id={tagId} {...other}>
           {CustomIconElement && size !== 'sm' ? (
