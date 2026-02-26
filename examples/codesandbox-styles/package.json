@@ -2,7 +2,7 @@
   "name": "codesandbox-styles",
   "description": "CodeSandbox styles example",
   "private": true,
-  "version": "0.104.0-rc.0",
+  "version": "0.104.0",
   "type": "module",
   "repository": {
     "type": "git",
@@ -25,6 +25,6 @@
     "vite": "^7.2.4"
   },
   "dependencies": {
-    "@carbon/styles": "^1.101.0-rc.0"
+    "@carbon/styles": "^1.101.0"
   }
 }
