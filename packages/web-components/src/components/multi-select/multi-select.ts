@@ -20,6 +20,7 @@ import { SELECTION_FEEDBACK_OPTION } from './defs';
 import CDSMultiSelectItem from './multi-select-item';
 import styles from './multi-select.scss?lit';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
+import HostListener from '../../globals/decorators/host-listener';
 
 export {
   DROPDOWN_SIZE,
@@ -98,15 +99,23 @@ class CDSMultiSelect extends CDSDropdown {
     menuOpen: boolean;
     isInputTarget: boolean;
   }) {
-    if (!menuOpen) {
-      return true;
-    }
-
     if (!isInputTarget) {
       return false;
     }
 
-    return Boolean(this._filterInputNode?.value);
+    if (menuOpen) {
+      return false;
+    }
+
+    if (!menuOpen) {
+      if (this._selectedItemsCount > 0) {
+        this._handleUserInitiatedSelectItem();
+      }
+
+      return Boolean(this._filterInputNode?.value);
+    }
+
+    return false;
   }
 
   /**
@@ -227,9 +236,43 @@ class CDSMultiSelect extends CDSDropdown {
     ) {
       super._handleClickInner(event);
       if (this.filterable) {
+        if (!this.open && this._filterInputNode) {
+          this._clearInput();
+        }
         this._filterInputNode.focus();
       }
     }
+  }
+
+  /**
+   * Clears selections on Escape click
+   */
+  protected _handleKeydownInner(event: KeyboardEvent) {
+    const { key } = event;
+    if (
+      key === 'Escape' &&
+      !this.filterable &&
+      !this.open &&
+      this._selectedItemsCount > 0
+    ) {
+      this._handleUserInitiatedSelectItem();
+      return;
+    }
+    super._handleKeydownInner(event);
+  }
+
+  @HostListener('focusout')
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20452
+  // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
+  protected _handleFocusOut(event: FocusEvent) {
+    if (
+      this.filterable &&
+      this._filterInputNode &&
+      !this.contains(event.relatedTarget as Node)
+    ) {
+      this._clearInput();
+    }
+    super._handleFocusOut(event);
   }
 
   /**
@@ -795,21 +838,6 @@ class CDSMultiSelect extends CDSDropdown {
     if (changedProperties.has('open') && !this.open) {
       this._triggerNode.classList.remove('no-focus-style');
       this.removeAttribute('item-clicked');
-
-      // Clear filter input when closing if filterable
-      if (this.filterable && this._filterInputNode) {
-        this._filterInputNode.value = '';
-        this.toggleAttribute('has-value', false);
-
-        const items = this.querySelectorAll(
-          (this.constructor as typeof CDSMultiSelect).selectorItemFiltered
-        );
-        forEach(items, (item) => {
-          (item as CDSMultiSelectItem).removeAttribute('filtered');
-        });
-
-        this.requestUpdate();
-      }
     }
   }
 
@@ -851,6 +879,21 @@ class CDSMultiSelect extends CDSDropdown {
 
     selectAllItem.selected = allSelected;
     selectAllItem.indeterminate = selectedCount > 0 && !allSelected;
+  }
+
+  /**
+   * Clears the filterable input field
+   */
+  private _clearInput() {
+    this._filterInputNode.value = '';
+    this.toggleAttribute('has-value', false);
+
+    const items = this.querySelectorAll(
+      (this.constructor as typeof CDSMultiSelect).selectorItemFiltered
+    );
+    forEach(items, (item) => {
+      (item as CDSMultiSelectItem).removeAttribute('filtered');
+    });
   }
 
   connectedCallback() {
