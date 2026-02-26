@@ -12,7 +12,7 @@ const { camelCase } = require('change-case-all');
 const fs = require('fs-extra');
 const path = require('path');
 const { rollup } = require('rollup');
-const virtual = require('../plugins/virtual');
+const { stageFiles } = require('../plugins/staged-files');
 
 const BANNER = `/**
  * Copyright IBM Corp. 2019, 2023
@@ -127,75 +127,75 @@ const didWarnAboutDeprecation = {};`;
       files['index.ts'] += `export { ${m.moduleName} } from '${filename}';`;
     }
   }
-  console.log('icon-build-helpers-react: 🔎 Creating bundle...');
-  const bundle = await rollup({
-    input,
-    external,
-    plugins: [
-      virtual({
-        './Icon.tsx': await fs.readFile(
-          path.resolve(__dirname, './components/Icon.tsx'),
-          'utf8'
-        ),
-        ...files,
-      }),
-      babel(babelConfig),
-    ],
-    maxParallelFileOps: 2,
-  });
+  const staged = await stageFiles(
+    {
+      './Icon.tsx': await fs.readFile(
+        path.resolve(__dirname, './components/Icon.tsx'),
+        'utf8'
+      ),
+      ...files,
+    },
+    { prefix: 'icon-build-helpers-react-' }
+  );
 
-  const bundles = [
-    {
-      directory: path.join(output, 'es'),
-      format: 'esm',
-    },
-    {
-      directory: path.join(output, 'lib'),
-      format: 'commonjs',
-    },
-  ];
-  console.log('icon-build-helpers-react: done');
-  for (const { directory, format } of bundles) {
-    const outputOptions = {
-      dir: directory,
-      format,
-      entryFileNames: '[name]',
-      banner: BANNER,
-      exports: 'auto',
-    };
-    console.log(`icon-build-helpers-react: 📦  Writing ${format} bundle...`);
-    await bundle.write(outputOptions);
+  try {
+    console.log('icon-build-helpers-react: 🔎 Creating bundle...');
+    const bundle = await rollup({
+      input: staged.resolveInput(input),
+      external,
+      plugins: [staged.compatPlugin(), babel(babelConfig)],
+      maxParallelFileOps: 2,
+    });
+
+    const bundles = [
+      {
+        directory: path.join(output, 'es'),
+        format: 'esm',
+      },
+      {
+        directory: path.join(output, 'lib'),
+        format: 'commonjs',
+      },
+    ];
     console.log('icon-build-helpers-react: done');
+    for (const { directory, format } of bundles) {
+      const outputOptions = {
+        dir: directory,
+        format,
+        entryFileNames: '[name]',
+        banner: BANNER,
+        exports: 'auto',
+      };
+      console.log(`icon-build-helpers-react: 📦  Writing ${format} bundle...`);
+      await bundle.write(outputOptions);
+      console.log('icon-build-helpers-react: done');
+    }
+    await bundle.close();
+
+    console.log('icon-build-helpers-react: 🔎 Creating umd bundle...');
+    const umd = await rollup({
+      input: staged.resolve('index.ts'),
+      external,
+      plugins: [staged.compatPlugin(), babel(babelConfig)],
+      maxParallelFileOps: 2,
+    });
+    console.log(`icon-build-helpers-react: done`);
+    console.log(`icon-build-helpers-react: 📦  Writing umd bundle...`);
+    await umd.write({
+      file: path.join(output, 'umd/index.js'),
+      format: 'umd',
+      name: 'CarbonIconsReact',
+      globals: {
+        '@carbon/icon-helpers': 'CarbonIconHelpers',
+        'prop-types': 'PropTypes',
+        react: 'React',
+      },
+    });
+    await umd.close();
+    console.log(`icon-build-helpers-react: umd done`);
+  } finally {
+    await staged.cleanup();
   }
-  console.log('icon-build-helpers-react: 🔎 Creating umd bundle...');
-  const umd = await rollup({
-    input: 'index.ts',
-    external,
-    plugins: [
-      virtual({
-        './Icon.tsx': await fs.readFile(
-          path.resolve(__dirname, './components/Icon.tsx'),
-          'utf8'
-        ),
-        ...files,
-      }),
-      babel(babelConfig),
-    ],
-    maxParallelFileOps: 2,
-  });
-  console.log(`icon-build-helpers-react: done`);
-  console.log(`icon-build-helpers-react: 📦  Writing umd bundle...`);
-  await umd.write({
-    file: path.join(output, 'umd/index.js'),
-    format: 'umd',
-    name: 'CarbonIconsReact',
-    globals: {
-      '@carbon/icon-helpers': 'CarbonIconHelpers',
-      'prop-types': 'PropTypes',
-      react: 'React',
-    },
-  });
-  console.log(`icon-build-helpers-react: umd done`);
 }
 
 /**

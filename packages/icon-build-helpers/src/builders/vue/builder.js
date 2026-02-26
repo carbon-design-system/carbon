@@ -11,7 +11,7 @@ const { babel } = require('@rollup/plugin-babel');
 const fs = require('fs-extra');
 const path = require('path');
 const { rollup } = require('rollup');
-const virtual = require('../plugins/virtual');
+const { stageFiles } = require('../plugins/staged-files');
 
 const BANNER = `/**
  * Copyright IBM Corp. 2019, 2023
@@ -77,52 +77,60 @@ async function builder(metadata, { output }) {
       `\nexport { default as ${m.moduleName} } from '${m.filepath}';`;
   }
 
-  const bundle = await rollup({
-    input,
-    external,
-    plugins: [virtual(files), babel(babelConfig)],
-    maxParallelFileOps: 2,
+  const staged = await stageFiles(files, {
+    prefix: 'icon-build-helpers-vue-',
   });
 
-  const bundles = [
-    {
-      directory: path.join(output, 'es'),
-      format: 'esm',
-    },
-    {
-      directory: path.join(output, 'lib'),
-      format: 'commonjs',
-    },
-  ];
+  try {
+    const bundle = await rollup({
+      input: staged.resolveInput(input),
+      external,
+      plugins: [staged.compatPlugin(), babel(babelConfig)],
+    });
 
-  for (const { directory, format } of bundles) {
-    const outputOptions = {
-      dir: directory,
-      format,
-      entryFileNames: '[name]',
-      banner: BANNER,
-      exports: 'auto',
-    };
+    const bundles = [
+      {
+        directory: path.join(output, 'es'),
+        format: 'esm',
+      },
+      {
+        directory: path.join(output, 'lib'),
+        format: 'commonjs',
+      },
+    ];
 
-    await bundle.write(outputOptions);
+    for (const { directory, format } of bundles) {
+      const outputOptions = {
+        dir: directory,
+        format,
+        entryFileNames: '[name]',
+        banner: BANNER,
+        exports: 'auto',
+      };
+
+      await bundle.write(outputOptions);
+    }
+    await bundle.close();
+
+    const umd = await rollup({
+      input: staged.resolve('index.js'),
+      external,
+      plugins: [staged.compatPlugin(), babel(babelConfig)],
+    });
+
+    await umd.write({
+      file: path.join(output, 'umd/index.js'),
+      format: 'umd',
+      name: 'CarbonIconsVue',
+      globals: {
+        '@carbon/icon-helpers': 'CarbonIconHelpers',
+        vue: 'Vue',
+      },
+    });
+    await umd.close();
+  } finally {
+    await staged.cleanup();
   }
-
-  const umd = await rollup({
-    input: 'index.js',
-    external,
-    plugins: [virtual(files), babel(babelConfig)],
-    maxParallelFileOps: 2,
-  });
-
-  await umd.write({
-    file: path.join(output, 'umd/index.js'),
-    format: 'umd',
-    name: 'CarbonIconsVue',
-    globals: {
-      '@carbon/icon-helpers': 'CarbonIconHelpers',
-      vue: 'Vue',
-    },
-  });
 }
 
 /**

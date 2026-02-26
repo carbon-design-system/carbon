@@ -8,7 +8,7 @@
 const { babel } = require('@rollup/plugin-babel');
 const path = require('path');
 const { rollup } = require('rollup');
-const virtual = require('./plugins/virtual');
+const { stageFiles } = require('./plugins/staged-files');
 
 const BANNER = `/**
  * Copyright IBM Corp. 2016, 2023
@@ -61,52 +61,62 @@ async function builder(metadata, { output }) {
       `\nexport { default as ${m.moduleName} } from '${m.filepath}';`;
   }
 
-  console.log('icon-build-helpers: 🔎 Creating bundle...');
-  const bundle = await rollup({
-    input,
-    plugins: [virtual(files), babel(babelConfig)],
-    maxParallelFileOps: 2,
+  const staged = await stageFiles(files, {
+    prefix: 'icon-build-helpers-vanilla-',
   });
 
-  const bundles = [
-    {
-      directory: path.join(output, 'es'),
-      format: 'esm',
-    },
-    {
-      directory: path.join(output, 'lib'),
-      format: 'commonjs',
-    },
-  ];
-  console.log('icon-build-helpers: done');
-  for (const { directory, format } of bundles) {
-    const outputOptions = {
-      dir: directory,
-      format,
-      entryFileNames: '[name]',
-      banner: BANNER,
-      exports: 'auto',
-    };
+  try {
+    console.log('icon-build-helpers: 🔎 Creating bundle...');
+    const bundle = await rollup({
+      input: staged.resolveInput(input),
+      plugins: [staged.compatPlugin(), babel(babelConfig)],
+      maxParallelFileOps: 2,
+    });
 
-    console.log(`icon-build-helpers: 📦  Writing ${format} bundle...`);
-    await bundle.write(outputOptions);
-    console.log(`icon-build-helpers: ${format} done`);
+    const bundles = [
+      {
+        directory: path.join(output, 'es'),
+        format: 'esm',
+      },
+      {
+        directory: path.join(output, 'lib'),
+        format: 'commonjs',
+      },
+    ];
+    console.log('icon-build-helpers: done');
+    for (const { directory, format } of bundles) {
+      const outputOptions = {
+        dir: directory,
+        format,
+        entryFileNames: '[name]',
+        banner: BANNER,
+        exports: 'auto',
+      };
+
+      console.log(`icon-build-helpers: 📦  Writing ${format} bundle...`);
+      await bundle.write(outputOptions);
+      console.log(`icon-build-helpers: ${format} done`);
+    }
+    await bundle.close();
+
+    console.log('icon-build-helpers: 🔎 Creating umd bundle...');
+    const umd = await rollup({
+      input: staged.resolve('index.js'),
+      plugins: [staged.compatPlugin(), babel(babelConfig)],
+      maxParallelFileOps: 2,
+    });
+    console.log(`icon-build-helpers: done`);
+    console.log(`icon-build-helpers: 📦  Writing umd bundle...`);
+    await umd.write({
+      file: path.join(output, 'umd/index.js'),
+      format: 'umd',
+      name: 'CarbonIcons',
+    });
+    await umd.close();
+    console.log(`icon-build-helpers: umd done`);
+  } finally {
+    await staged.cleanup();
   }
-
-  console.log('icon-build-helpers: 🔎 Creating umd bundle...');
-  const umd = await rollup({
-    input: 'index.js',
-    plugins: [virtual(files), babel(babelConfig)],
-    maxParallelFileOps: 2,
-  });
-  console.log(`icon-build-helpers: done`);
-  console.log(`icon-build-helpers: 📦  Writing umd bundle...`);
-  await umd.write({
-    file: path.join(output, 'umd/index.js'),
-    format: 'umd',
-    name: 'CarbonIcons',
-  });
-  console.log(`icon-build-helpers: umd done`);
 }
 
 module.exports = builder;

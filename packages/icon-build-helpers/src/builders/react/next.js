@@ -15,7 +15,7 @@ const fs = require('fs-extra');
 const path = require('path');
 const { rollup } = require('rollup');
 const ts = require('typescript');
-const virtual = require('../plugins/virtual');
+const { stageFiles } = require('../plugins/staged-files');
 const { babelConfig } = require('./next/babel');
 const { svgToJSX, jsToAST } = require('./next/convert');
 const templates = require('./next/templates');
@@ -145,7 +145,7 @@ async function builder(metadata, { output }) {
 
   files['index.ts'] = generate(t.file(t.program(files['index.ts']))).code;
 
-  const defaultVirtualOptions = {
+  const filesToStage = {
     // Each Icon module uses the "./Icon.tsx" path to import this base component
     // Babel transforms the .tsx extension to .js
     './Icon.tsx': await fs.readFile(
@@ -162,47 +162,53 @@ async function builder(metadata, { output }) {
       ]),
     };
   `,
+    ...files,
   };
 
-  const bundle = await rollup({
-    input,
-    external: ['@carbon/icon-helpers', 'react', 'prop-types'],
-    plugins: [
-      // We use a "virtual" plugin to pass all of our components that we
-      // created from our metadata to rollup instead of rollup trying to read
-      // these files from disk
-      virtual({
-        ...defaultVirtualOptions,
-        ...files,
-      }),
-      babel(babelConfig),
-    ],
-    maxParallelFileOps: 2,
+  const staged = await stageFiles(filesToStage, {
+    prefix: 'icon-build-helpers-react-next-',
   });
-  const targets = [
-    {
-      directory: path.join(output, 'es'),
-      format: 'esm',
-      tsModuleKind: ts.ModuleKind.ESNext,
-    },
-    {
-      directory: path.join(output, 'lib'),
-      format: 'commonjs',
-      tsModuleKind: ts.ModuleKind.CommonJS,
-    },
-  ];
 
-  for (const target of targets) {
-    await bundle.write({
-      dir: target.directory,
-      format: target.format,
-      entryFileNames: '[name]',
-      banner: templates.banner,
-      exports: 'auto',
+  try {
+    const bundle = await rollup({
+      input: staged.resolveInput(input),
+      external: ['@carbon/icon-helpers', 'react', 'prop-types'],
+      plugins: [staged.compatPlugin(), babel(babelConfig)],
+      maxParallelFileOps: 2,
     });
+    const targets = [
+      {
+        directory: path.join(output, 'es'),
+        format: 'esm',
+        tsModuleKind: ts.ModuleKind.ESNext,
+      },
+      {
+        directory: path.join(output, 'lib'),
+        format: 'commonjs',
+        tsModuleKind: ts.ModuleKind.CommonJS,
+      },
+    ];
 
-    // write TypeScript definition files
-    writeTsDefinitions(modules, buckets, target.tsModuleKind, target.directory);
+    for (const target of targets) {
+      await bundle.write({
+        dir: target.directory,
+        format: target.format,
+        entryFileNames: '[name]',
+        banner: templates.banner,
+        exports: 'auto',
+      });
+
+      // write TypeScript definition files
+      writeTsDefinitions(
+        modules,
+        buckets,
+        target.tsModuleKind,
+        target.directory
+      );
+    }
+    await bundle.close();
+  } finally {
+    await staged.cleanup();
   }
 }
 
