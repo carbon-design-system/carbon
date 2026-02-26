@@ -49,12 +49,11 @@ In Sass, you can enable feature flags in any of your stylesheets. Most often
 this is done at the root/entrypoint stylesheet.
 
 ```sass
-@use '@carbon/react/scss/feature-flags' with (
+@use '@carbon/react' with (
   $feature-flags: (
     'enable-tile-contrast': true,
   )
 );
-@use '@carbon/react';
 ```
 
 Feature flags can also be enabled via the provided `enable()` mixin
