@@ -288,6 +288,8 @@ categories:
           - arrow--up
           - arrow--up-left
           - arrow--up-right
+          - BPMN-link--fill
+          - BPMN-link--outline
           - caret--down
           - caret--left
           - caret--right
@@ -345,6 +347,10 @@ categories:
           - bookmark
           - bookmark--add
           - bookmark--filled
+          - BPMN-compensation--fill
+          - BPMN-compensation--outline
+          - BPMN-conditional--fill
+          - BPMN-conditional--outline
           - branch
           - build-tool
           - calls
@@ -432,6 +438,7 @@ categories:
           - mac--option
           - mac--shift
           - manage-protection
+          - material-request
           - maximize
           - merge
           - migrate
@@ -622,6 +629,7 @@ categories:
           - logo--jupyter
           - logo--keybase
           - logo--kubernetes
+          - logo--model-context-protocol
           - logo--npm
           - logo--openshift
           - logo--python
@@ -649,6 +657,7 @@ categories:
           - cloud-app
           - edt-loop
           - ibm-cloud
+          - ibm-partner-plus
           - ibm-security
           - watson
           - watson--machine-learning
@@ -687,6 +696,8 @@ categories:
           - AI
           - ai-agent-invocation
           - ai-business-impact-assessment
+          - AI-enabled-EDT
+          - AI-enabled-PDLC
           - ai-governance--lifecycle
           - ai-governance--tracked
           - ai-governance--untracked
@@ -712,11 +723,14 @@ categories:
           - model--foundation
           - model--reference
           - model--tuned
+          - logo--model-context-protocol
           - prompt-session
           - prompt-template
           - question-answering
           - RAG
           - tuning
+          - visual-inspection
+          - voice-mode
           - watsonx
           - watsonx-ai
           - watsonx-data
@@ -1252,6 +1266,8 @@ categories:
           - analytics--custom
           - analytics--reference
           - app-connectivity
+          - area-range--dashed
+          - area-range--solid
           - archive
           - bland-altman-plot
           - blockchain
@@ -1295,6 +1311,7 @@ categories:
           - chart--line--data
           - chart--line-smooth
           - chart--logistic-regression
+          - chart--lollipop
           - chart--marimekko
           - chart--maximum
           - chart--minimum
@@ -1336,6 +1353,8 @@ categories:
           - cost--total
           - covariate
           - cross-tab
+          - curved-line--dashed
+          - curved-line--solid
           - data--1
           - data--2
           - data--base
@@ -1404,6 +1423,8 @@ categories:
           - heat-map--02
           - heat-map--03
           - heat-map--stocks
+          - horizontal-line--dashed
+          - horizontal-line--solid
           - hybrid-networking
           - improve-relevance
           - interactions
@@ -1418,6 +1439,8 @@ categories:
           - join--right-outer
           - kubernetes--ip-address
           - kubernetes--pod
+          - line--thick
+          - line--thin
           - linux
           - linux--alt
           - list-tree
@@ -1461,6 +1484,7 @@ categories:
           - scatter-matrix
           - schematics
           - service-levels
+          - shadow
           - share-knowledge
           - show-data--cards
           - skill-level
@@ -1588,6 +1612,7 @@ categories:
           - download
           - DVR
           - export
+          - feedback-documentation
           - floorplan
           - folder
           - folder--add
@@ -1667,6 +1692,10 @@ categories:
           - repo--source-code
           - result--draft
           - roadmap
+          - result
+          - result--new
+          - result--old
+          - REXX
           - rule
           - rule--cancelled
           - rule--data-quality
@@ -1675,10 +1704,7 @@ categories:
           - rule--locked
           - rule--partial
           - rule--test
-          - result
-          - result--new
-          - result--old
-          - REXX
+          - rule-grouping--data-quality
           - scale
           - script
           - script--reference
@@ -1724,6 +1750,10 @@ categories:
       - name: Status
         members:
           - async
+          - BPMN-error--fill
+          - BPMN-error--outline
+          - BPMN-escalation--fill
+          - BPMN-escalation--outline
           - caution
           - caution-inverted
           - checkmark
