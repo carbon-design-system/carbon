@@ -9,6 +9,7 @@ import * as white from './white';
 import * as g10 from './g10';
 import * as g90 from './g90';
 import * as g100 from './g100';
+import * as vscode from './vscode';
 import * as v10 from './v10';
 import * as buttonTokens from './component-tokens/button';
 import * as tagTokens from './component-tokens/tag';
@@ -23,6 +24,7 @@ const themes = {
   g10,
   g90,
   g100,
+  vscode,
 };
 
 export * from './white';
@@ -31,6 +33,7 @@ export {
   g10,
   g90,
   g100,
+  vscode,
   themes,
   v10,
   buttonTokens,

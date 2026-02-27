@@ -17,7 +17,7 @@ import { allModes } from './modes';
 import './styles.scss';
 import '../src/feature-flags';
 
-import { white, g10, g90, g100 } from '@carbon/themes';
+import { white, g10, g90, g100, vscode } from '@carbon/themes';
 import React, { useEffect, useState } from 'react';
 import useIsomorphicEffect from '../src/internal/useIsomorphicEffect';
 import { breakpoints } from '@carbon/layout';
@@ -129,7 +129,7 @@ const globalTypes = {
     toolbar: {
       icon: 'paintbrush',
       title: 'Theme',
-      items: ['white', 'g10', 'g90', 'g100'],
+      items: ['white', 'g10', 'g90', 'g100', 'vscode'],
     },
   },
   ...(process.env.NODE_ENV === 'development' ? devTools : {}),
@@ -166,6 +166,7 @@ const parameters = {
       g10: { name: 'g10', value: g10.background },
       g90: { name: 'g90', value: g90.background },
       g100: { name: 'g100', value: g100.background },
+      vscode: { name: 'vscode', value: vscode.background },
     },
   },
   controls: {

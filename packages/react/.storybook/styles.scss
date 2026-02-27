@@ -26,6 +26,10 @@
   @include styles.theme(styles.$g100);
 }
 
+[data-carbon-theme='vscode'] {
+  @include styles.theme(styles.$vscode);
+}
+
 body {
   background: styles.$background;
   color: styles.$text-primary;
