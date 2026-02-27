@@ -213,106 +213,110 @@ export const Vertical = {
       <style>
         ${styles}
       </style>
-      <div class="${prefix}--vertical-tabs-container" style="height: 400px;">
-        <cds-tabs
-          disabled="${disabled}"
-          selection-mode="${selectionMode}"
-          type="${contained ? TABS_TYPE.CONTAINED : null}"
-          orientation="vertical"
-          custom-height="400px"
-          value="all"
-          @cds-tabs-beingselected="${handleBeforeSelected}">
-          <cds-tab id="tab-all" target="panel-all" value="all"
-            >Tab label 1</cds-tab
-          >
-          <cds-tab
-            id="tab-cloudFoundry"
-            target="panel-cloudFoundry"
-            value="cloudFoundry">
-            Tab label 2
-          </cds-tab>
-          <cds-tab
-            id="tab-staging"
-            target="panel-staging"
-            value="staging"
-            disabled>
-            Tab label 3
-          </cds-tab>
-          <cds-tab id="tab-dea" target="panel-dea" value="dea"
-            >Tab label 4</cds-tab
-          >
-          <cds-tab id="tab-router" target="panel-router" value="router"
-            >Tab label 5</cds-tab
-          >
-          <cds-tab id="tab-diego" target="panel-diego" value="diego"
-            >Tab label 6</cds-tab
-          >
-          <cds-tab
-            id="tab-loggregator"
-            target="panel-loggregator"
-            value="loggregator"
-            >Tab label 7</cds-tab
-          >
-        </cds-tabs>
-        <div class="${prefix}-ce-demo-devenv--tab-panels">
-          <div id="panel-all" role="tabpanel" aria-labelledby="tab-all" hidden>
-            Tab Panel 1
-          </div>
-          <div
-            id="panel-cloudFoundry"
-            role="tabpanel"
-            aria-labelledby="tab-cloudFoundry"
-            hidden>
-            <form style="margin: 2em">
-              <legend class="${prefix}--label">Validation example</legend>
-              <cds-checkbox
-                id="cb"
-                label-text="Accept privacy policy"></cds-checkbox>
-              <cds-button
-                style="margin-top: 1rem; margin-bottom: 1rem"
-                type="submit">
-                Submit
-              </cds-button>
-              <cds-text-input
-                type="text"
-                label="Text input label"
-                helper-text="Optional help text"
-                id="text-input-1"></cds-text-input>
-            </form>
-          </div>
-          <div
-            id="panel-staging"
-            role="tabpanel"
-            aria-labelledby="tab-staging"
-            hidden>
-            Tab Panel 3
-          </div>
-          <div id="panel-dea" role="tabpanel" aria-labelledby="tab-dea" hidden>
-            Tab Panel 4
-          </div>
-          <div
-            id="panel-router"
-            role="tabpanel"
-            aria-labelledby="tab-router"
-            hidden>
-            Tab Panel 5
-          </div>
-          <div
-            id="panel-diego"
-            role="tabpanel"
-            aria-labelledby="tab-diego"
-            hidden>
-            Tab Panel 6
-          </div>
-          <div
-            id="panel-loggregator"
-            role="tabpanel"
-            aria-labelledby="tab-loggregator"
-            hidden>
-            Tab Panel 7
-          </div>
-        </div>
-      </div>
+      <cds-tabs
+        disabled="${disabled}"
+        selection-mode="${selectionMode}"
+        type="${contained ? TABS_TYPE.CONTAINED : null}"
+        orientation="vertical"
+        custom-height="400px"
+        value="all"
+        @cds-tabs-beingselected="${handleBeforeSelected}">
+        <cds-tab id="tab-all" target="panel-all" value="all"
+          >Tab label 1</cds-tab
+        >
+        <cds-tab
+          id="tab-cloudFoundry"
+          target="panel-cloudFoundry"
+          value="cloudFoundry">
+          Tab label 2
+        </cds-tab>
+        <cds-tab
+          id="tab-staging"
+          target="panel-staging"
+          value="staging"
+          disabled>
+          Tab label 3
+        </cds-tab>
+        <cds-tab id="tab-dea" target="panel-dea" value="dea"
+          >Tab label 4</cds-tab
+        >
+        <cds-tab id="tab-router" target="panel-router" value="router"
+          >Tab label 5</cds-tab
+        >
+        <cds-tab id="tab-diego" target="panel-diego" value="diego"
+          >Tab label 6</cds-tab
+        >
+        <cds-tab
+          id="tab-loggregator"
+          target="panel-loggregator"
+          value="loggregator"
+          >Tab label 7</cds-tab
+        >
+        <cds-tab-panel
+          slot="panel"
+          id="panel-all"
+          aria-labelledby="tab-all"
+          hidden>
+          Tab Panel 1
+        </cds-tab-panel>
+        <cds-tab-panel
+          slot="panel"
+          id="panel-cloudFoundry"
+          aria-labelledby="tab-cloudFoundry"
+          hidden>
+          <form style="margin: 2em">
+            <legend class="${prefix}--label">Validation example</legend>
+            <cds-checkbox
+              id="cb"
+              label-text="Accept privacy policy"></cds-checkbox>
+            <cds-button
+              style="margin-top: 1rem; margin-bottom: 1rem"
+              type="submit">
+              Submit
+            </cds-button>
+            <cds-text-input
+              type="text"
+              label="Text input label"
+              helper-text="Optional help text"
+              id="text-input-1"></cds-text-input>
+          </form>
+        </cds-tab-panel>
+        <cds-tab-panel
+          slot="panel"
+          id="panel-staging"
+          aria-labelledby="tab-staging"
+          hidden>
+          Tab Panel 3
+        </cds-tab-panel>
+        <cds-tab-panel
+          slot="panel"
+          id="panel-dea"
+          aria-labelledby="tab-dea"
+          hidden>
+          Tab Panel 4
+        </cds-tab-panel>
+        <cds-tab-panel
+          slot="panel"
+          id="panel-router"
+          aria-labelledby="tab-router"
+          hidden>
+          Tab Panel 5
+        </cds-tab-panel>
+        <cds-tab-panel
+          slot="panel"
+          id="panel-diego"
+          aria-labelledby="tab-diego"
+          hidden>
+          Tab Panel 6
+        </cds-tab-panel>
+        <cds-tab-panel
+          slot="panel"
+          id="panel-loggregator"
+          aria-labelledby="tab-loggregator"
+          hidden>
+          Tab Panel 7
+        </cds-tab-panel>
+      </cds-tabs>
     `;
   },
 };

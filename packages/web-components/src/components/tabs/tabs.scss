@@ -20,6 +20,7 @@
 @use '@carbon/styles/scss/utilities/layout';
 @use '@carbon/styles/scss/utilities/convert';
 @use '@carbon/styles/scss/utilities/skeleton' as *;
+@use '@carbon/styles/scss/utilities/update_fields_on_layer' as *;
 
 $inset-transition: inset 110ms motion(standard, productive);
 
@@ -387,5 +388,41 @@ $inset-transition: inset 110ms motion(standard, productive);
     line-height: var(--cds-body-compact-01-line-height);
     text-overflow: ellipsis;
     white-space: normal;
+  }
+}
+
+//-----------------------------
+// Tab Panel
+//-----------------------------
+
+:host(#{$prefix}-tab-panel) {
+  @extend .#{$prefix}--tab-content;
+
+  display: block;
+  padding: layout.density('padding-inline');
+
+  &:focus {
+    @include focus-outline('outline');
+  }
+}
+
+:host(#{$prefix}-tab-panel[hidden]) {
+  display: none;
+}
+
+// Tab panel styles for contained tabs
+:host(#{$prefix}-tabs[type='contained']) ~ :host(#{$prefix}-tab-panel) {
+  background: $layer;
+}
+
+// Tab panel styles for vertical tabs
+:host(#{$prefix}-tabs[orientation='vertical']) ~ :host(#{$prefix}-tab-panel) {
+  @include update_fields_on_layer;
+
+  grid-column: 3/-1;
+  overflow-y: auto;
+
+  @include breakpoint(lg) {
+    grid-column: 5/-1;
   }
 }

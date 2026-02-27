@@ -7,5 +7,6 @@
 
 import './tabs';
 import './tab';
+import './tab-panel';
 import './tab-skeleton';
 import './tabs-skeleton';
