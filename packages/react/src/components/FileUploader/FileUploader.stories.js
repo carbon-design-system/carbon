@@ -92,7 +92,6 @@ _FileUploaderItem.parameters = {
       'accept',
       'buttonKind',
       'buttonLabel',
-      // 'disabled',
       'labelDescription',
       'labelTitle',
       'multiple',

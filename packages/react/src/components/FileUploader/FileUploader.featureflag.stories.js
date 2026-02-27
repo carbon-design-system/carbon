@@ -107,7 +107,7 @@ export const ControlledFileState = (args) => {
     const currentFiles = fileUploaderRef.current.getCurrentFiles();
     if (!currentFiles?.length) return;
 
-    const mutatedFiles = currentFiles.map((file, index) => ({
+    const mutatedFiles = currentFiles.map((file) => ({
       ...file,
       disabled: args.disabled,
     }));
