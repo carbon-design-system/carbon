@@ -30,6 +30,10 @@ $button-separator: (
       theme: themes.$g100,
       value: map.get(button.$button-separator, g-100),
     ),
+    (
+      theme: themes.$vscode,
+      value: map.get(button.$button-separator, vscode),
+    ),
   ),
 ) !default;
 
@@ -51,6 +55,10 @@ $button-primary: (
     (
       theme: themes.$g100,
       value: map.get(button.$button-primary, g-100),
+    ),
+    (
+      theme: themes.$vscode,
+      value: map.get(button.$button-primary, vscode),
     ),
   ),
 ) !default;
@@ -74,6 +82,10 @@ $button-secondary: (
       theme: themes.$g100,
       value: map.get(button.$button-secondary, g-100),
     ),
+    (
+      theme: themes.$vscode,
+      value: map.get(button.$button-secondary, vscode),
+    ),
   ),
 ) !default;
 
@@ -95,6 +107,10 @@ $button-tertiary: (
     (
       theme: themes.$g100,
       value: map.get(button.$button-tertiary, g-100),
+    ),
+    (
+      theme: themes.$vscode,
+      value: map.get(button.$button-tertiary, vscode),
     ),
   ),
 ) !default;
@@ -118,6 +134,10 @@ $button-danger-primary: (
       theme: themes.$g100,
       value: map.get(button.$button-danger-primary, g-100),
     ),
+    (
+      theme: themes.$vscode,
+      value: map.get(button.$button-danger-primary, vscode),
+    ),
   ),
 ) !default;
 
@@ -139,6 +159,10 @@ $button-danger-secondary: (
     (
       theme: themes.$g100,
       value: map.get(button.$button-danger-secondary, g-100),
+    ),
+    (
+      theme: themes.$vscode,
+      value: map.get(button.$button-danger-secondary, vscode),
     ),
   ),
 ) !default;
@@ -162,6 +186,10 @@ $button-danger-active: (
       theme: themes.$g100,
       value: map.get(button.$button-danger-active, g-100),
     ),
+    (
+      theme: themes.$vscode,
+      value: map.get(button.$button-danger-active, vscode),
+    ),
   ),
 ) !default;
 
@@ -183,6 +211,10 @@ $button-primary-active: (
     (
       theme: themes.$g100,
       value: map.get(button.$button-primary-active, g-100),
+    ),
+    (
+      theme: themes.$vscode,
+      value: map.get(button.$button-primary-active, vscode),
     ),
   ),
 ) !default;
@@ -206,6 +238,10 @@ $button-secondary-active: (
       theme: themes.$g100,
       value: map.get(button.$button-secondary-active, g-100),
     ),
+    (
+      theme: themes.$vscode,
+      value: map.get(button.$button-secondary-active, vscode),
+    ),
   ),
 ) !default;
 
@@ -227,6 +263,10 @@ $button-tertiary-active: (
     (
       theme: themes.$g100,
       value: map.get(button.$button-tertiary-active, g-100),
+    ),
+    (
+      theme: themes.$vscode,
+      value: map.get(button.$button-tertiary-active, vscode),
     ),
   ),
 ) !default;
@@ -250,6 +290,10 @@ $button-danger-hover: (
       theme: themes.$g100,
       value: map.get(button.$button-danger-hover, g-100),
     ),
+    (
+      theme: themes.$vscode,
+      value: map.get(button.$button-danger-hover, vscode),
+    ),
   ),
 ) !default;
 
@@ -271,6 +315,10 @@ $button-primary-hover: (
     (
       theme: themes.$g100,
       value: map.get(button.$button-primary-hover, g-100),
+    ),
+    (
+      theme: themes.$vscode,
+      value: map.get(button.$button-primary-hover, vscode),
     ),
   ),
 ) !default;
@@ -294,6 +342,10 @@ $button-secondary-hover: (
       theme: themes.$g100,
       value: map.get(button.$button-secondary-hover, g-100),
     ),
+    (
+      theme: themes.$vscode,
+      value: map.get(button.$button-secondary-hover, vscode),
+    ),
   ),
 ) !default;
 
@@ -316,6 +368,10 @@ $button-tertiary-hover: (
       theme: themes.$g100,
       value: map.get(button.$button-tertiary-hover, g-100),
     ),
+    (
+      theme: themes.$vscode,
+      value: map.get(button.$button-tertiary-hover, vscode),
+    ),
   ),
 ) !default;
 
@@ -337,6 +393,10 @@ $button-disabled: (
     (
       theme: themes.$g100,
       value: map.get(button.$button-disabled, g-100),
+    ),
+    (
+      theme: themes.$vscode,
+      value: map.get(button.$button-disabled, vscode),
     ),
   ),
 ) !default;
