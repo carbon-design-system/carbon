@@ -27,7 +27,9 @@
     "telemetry:config": "lerna run telemetry:config",
     "test": "cross-env BABEL_ENV=test jest",
     "test:e2e": "cross-env BABEL_ENV=test jest -c jest.e2e.config.js",
-    "postinstall": "husky"
+    "postinstall": "husky",
+    "vscode-preview": "yarn workspace @carbon/vscode-preview build",
+    "vscode-preview:full": "yarn workspace @carbon/themes build && yarn workspace @carbon/vscode-preview build"
   },
   "resolutions": {
     "@types/react": "~19.2.0",

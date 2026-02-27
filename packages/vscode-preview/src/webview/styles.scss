@@ -5,22 +5,41 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-// Import all Carbon styles, using the vscode theme as the default.
-// The webview document always has data-carbon-theme="vscode" set on <html>,
-// so VS Code's injected --vscode-* CSS custom properties are picked up
-// automatically by the Carbon vscode theme tokens.
+// Import all Carbon styles.
 @use '@carbon/react' as styles with (
   $font-path: '~@ibm/plex'
 );
 
-// Apply the VS Code theme as the root theme.
-// Carbon token values like var(--vscode-button-background, #0e639c) will
-// resolve to the real VS Code CSS properties in the webview context.
+// Default theme: VS Code (uses --vscode-* CSS custom properties injected by VS Code)
 :root {
   @include styles.theme(styles.$vscode);
 }
 
-// Ensure body inherits VS Code background and text colors
+// Carbon theme overrides — applied when data-carbon-theme is set on the
+// preview container. This allows the theme switcher in the toolbar to
+// override the root vscode theme for the preview area only.
+[data-carbon-theme='white'] {
+  @include styles.theme(styles.$white);
+}
+
+[data-carbon-theme='g10'] {
+  @include styles.theme(styles.$g10);
+}
+
+[data-carbon-theme='g90'] {
+  @include styles.theme(styles.$g90);
+}
+
+[data-carbon-theme='g100'] {
+  @include styles.theme(styles.$g100);
+}
+
+[data-carbon-theme='vscode'] {
+  @include styles.theme(styles.$vscode);
+}
+
+// Ensure body inherits VS Code background and text colors for the shell UI
+// (sidebar, toolbar). The preview area uses Carbon theme tokens instead.
 body {
   background: var(--vscode-editor-background, #1e1e1e);
   color: var(--vscode-editor-foreground, #d4d4d4);
