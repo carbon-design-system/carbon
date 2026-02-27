@@ -106,6 +106,12 @@ test.describe('@avt ProgressIndicator', () => {
     await page.keyboard.press('Enter');
     await page.keyboard.press('Escape');
 
+    // Testing the second element interaction (current step is now focusable)
+    await page.keyboard.press('Tab');
+    await expect(
+      page.getByRole('button', { name: 'Really long label' })
+    ).toBeFocused();
+
     // Testing the third element interaction
     await page.keyboard.press('Tab');
     await expect(

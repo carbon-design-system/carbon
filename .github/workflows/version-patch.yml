@@ -121,7 +121,7 @@ jobs:
         run: |
           git cherry-pick ${{ github.event.inputs.commit-5 }}
       - name: Install dependencies
-        run: yarn install --immutable --immutable-cache --check-cache
+        run: yarn install --immutable --check-cache
       - name: Update telemetry.yml
         run: yarn run telemetry:config
       - name: Create patch release
