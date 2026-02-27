@@ -10,6 +10,7 @@ import { property } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
 import styles from './number-input.scss?lit';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
+import { INPUT_SIZE } from '../text-input/text-input';
 
 /**
  * Skeleton of number input.
@@ -22,12 +23,20 @@ class CDSNumberInputSkeleton extends LitElement {
   @property({ type: Boolean, reflect: true, attribute: 'hide-label' })
   hideLabel = false;
 
+  /**
+   * Specify the size of the Number Input skeleton.
+   */
+  @property({ reflect: true })
+  size = INPUT_SIZE.MEDIUM;
+
   render() {
-    const { hideLabel } = this;
+    const { hideLabel, size } = this;
     return html`
-      ${!hideLabel &&
-      html` <span class="${prefix}--label ${prefix}--skeleton"></span> `}
-      <div class="${prefix}--number ${prefix}--skeleton"></div>
+      ${hideLabel
+        ? ''
+        : html` <span class="${prefix}--label ${prefix}--skeleton"></span> `}
+      <div
+        class="${prefix}--number ${prefix}--skeleton ${prefix}--number--${size}"></div>
     `;
   }
 

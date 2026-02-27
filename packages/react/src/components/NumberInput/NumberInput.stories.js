@@ -275,6 +275,24 @@ WithTypeOfCustomValidation.argTypes = {
   ...sharedArgTypes,
 };
 
-export const Skeleton = () => {
-  return <NumberInputSkeleton />;
+export const Skeleton = (args) => {
+  return <NumberInputSkeleton {...args} />;
+};
+
+Skeleton.argTypes = {
+  size: {
+    table: {
+      defaultValue: { summary: '"md"' },
+    },
+  },
+};
+
+Skeleton.args = {
+  size: 'md',
+};
+
+Skeleton.parameters = {
+  controls: {
+    include: ['size', 'hideLabel'],
+  },
 };

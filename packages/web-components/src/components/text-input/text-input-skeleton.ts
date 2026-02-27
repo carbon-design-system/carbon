@@ -14,7 +14,7 @@ import styles from './text-input.scss?lit';
 /**
  * @element cds-text-input-skeleton
  *
- * Skeleton of number input.
+ * Skeleton of text input.
  */
 @customElement(`${prefix}-text-input-skeleton`)
 class CDSTextInputSkeleton extends LitElement {
