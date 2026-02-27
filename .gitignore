@@ -73,7 +73,6 @@ blob-report
 # Yarn
 .yarn/*
 !.yarn/patches/
-!.yarn/plugins/
 !.yarn/releases/
 **/.yarn/cache/
 **/.yarn/build-state.yml
