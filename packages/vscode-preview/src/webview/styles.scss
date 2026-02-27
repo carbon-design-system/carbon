@@ -1,0 +1,33 @@
+//
+// Copyright IBM Corp. 2018, 2023
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+// Import all Carbon styles, using the vscode theme as the default.
+// The webview document always has data-carbon-theme="vscode" set on <html>,
+// so VS Code's injected --vscode-* CSS custom properties are picked up
+// automatically by the Carbon vscode theme tokens.
+@use '@carbon/react' as styles with (
+  $font-path: '~@ibm/plex'
+);
+
+// Apply the VS Code theme as the root theme.
+// Carbon token values like var(--vscode-button-background, #0e639c) will
+// resolve to the real VS Code CSS properties in the webview context.
+:root {
+  @include styles.theme(styles.$vscode);
+}
+
+// Ensure body inherits VS Code background and text colors
+body {
+  background: var(--vscode-editor-background, #1e1e1e);
+  color: var(--vscode-editor-foreground, #d4d4d4);
+  margin: 0;
+  padding: 0;
+  font-family: var(--vscode-font-family, 'IBM Plex Sans', sans-serif);
+  font-size: var(--vscode-font-size, 13px);
+}
+
+// Made with Bob

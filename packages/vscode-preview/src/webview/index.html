@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" data-carbon-theme="vscode">
+
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!--
+      Content Security Policy (relaxed for internal testing):
+      - script-src ${cspSource}: allow scripts from the VS Code webview resource origin
+      - style-src 'unsafe-inline': Carbon injects inline styles for some components
+      - font-src / img-src: allow webview resources and data URIs
+    -->
+    <meta http-equiv="Content-Security-Policy"
+      content="default-src 'none'; style-src 'unsafe-inline' ${cspSource}; script-src ${cspSource}; font-src ${cspSource}; img-src ${cspSource} data:;" />
+    <title>Carbon Component Preview</title>
+  </head>
+
+  <body>
+    <div id="root"></div>
+    <script type="module" src="./index.tsx"></script>
+  </body>
+
+</html>
