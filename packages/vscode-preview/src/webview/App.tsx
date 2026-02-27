@@ -5,8 +5,9 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { componentRegistry } from './components';
+import { TokenInspector } from './components/TokenInspector';
 
 // Available Carbon themes. "vscode" uses real --vscode-* CSS vars injected by
 // VS Code; the others use Carbon's built-in token values.
@@ -209,6 +210,9 @@ export function App() {
   // Default to "vscode" so designers immediately see the VS Code-mapped theme.
   const [activeTheme, setActiveTheme] = useState<ThemeId>('vscode');
 
+  // Ref passed to TokenInspector so it can scan the rendered component's DOM
+  const previewCardRef = useRef<HTMLDivElement>(null);
+
   const selectedGroup = selection
     ? componentRegistry.find((g) => g.title === selection.groupTitle)
     : null;
@@ -314,14 +318,27 @@ export function App() {
           style={{ ...styles.preview, background: previewBackground }}
           data-carbon-theme={activeTheme}>
           {selectedStory ? (
-            <div style={styles.previewCard}>
-              <div style={styles.previewTitle}>
-                {selection?.groupTitle} · {selection?.storyName}
+            <>
+              {/* Component preview card */}
+              <div style={styles.previewCard} ref={previewCardRef}>
+                <div style={styles.previewTitle}>
+                  {selection?.groupTitle} · {selection?.storyName}
+                </div>
+                {/* Carbon components rendered here receive real --vscode-* CSS vars
+                    injected by VS Code into this webview document */}
+                {selectedStory.render()}
               </div>
-              {/* Carbon components rendered here receive real --vscode-* CSS vars
-                  injected by VS Code into this webview document */}
-              {selectedStory.render()}
-            </div>
+
+              {/* Token inspector — dynamically discovers all --cds-* tokens
+                  used by the CSS rules that apply to the rendered component.
+                  scanKey changes on every story/component switch so the
+                  inspector re-scans the new DOM. */}
+              <TokenInspector
+                containerRef={previewCardRef}
+                activeTheme={activeTheme}
+                scanKey={`${selection?.groupTitle}/${selection?.storyName}`}
+              />
+            </>
           ) : (
             <div style={styles.emptyState}>
               <div>No story selected</div>
