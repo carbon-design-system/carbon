@@ -18,24 +18,80 @@
 // Carbon theme overrides — applied when data-carbon-theme is set on the
 // preview container. This allows the theme switcher in the toolbar to
 // override the root vscode theme for the preview area only.
+//
+// Each non-vscode block also resets layout tokens to Carbon defaults,
+// because the vscode block sets compact values that inherit to descendants.
+// Without these resets, switching away from VS Code theme would still show
+// the compact sizes (inherited from the vscode block on a parent element).
+
+// Mixin to reset all layout tokens to Carbon's default values.
+// These match the values emitted by emit-layout-tokens() in _layout.scss.
+@mixin reset-layout-tokens {
+  --cds-layout-size-height-xs: 1.5rem;
+  --cds-layout-size-height-sm: 2rem;
+  --cds-layout-size-height-md: 2.5rem;
+  --cds-layout-size-height-lg: 3rem;
+  --cds-layout-size-height-xl: 4rem;
+  --cds-layout-size-height-2xl: 5rem;
+  --cds-layout-density-padding-inline-condensed: 0.5rem;
+  --cds-layout-density-padding-inline-normal: 1rem;
+}
+
 [data-carbon-theme='white'] {
   @include styles.theme(styles.$white);
+  @include reset-layout-tokens;
 }
 
 [data-carbon-theme='g10'] {
   @include styles.theme(styles.$g10);
+  @include reset-layout-tokens;
 }
 
 [data-carbon-theme='g90'] {
   @include styles.theme(styles.$g90);
+  @include reset-layout-tokens;
 }
 
 [data-carbon-theme='g100'] {
   @include styles.theme(styles.$g100);
+  @include reset-layout-tokens;
 }
 
 [data-carbon-theme='vscode'] {
   @include styles.theme(styles.$vscode);
+
+  // ---------------------------------------------------------------------------
+  // VS Code compact layout token overrides
+  //
+  // Carbon's layout tokens are emitted as CSS custom properties at :root by
+  // packages/styles/scss/_layout.scss. They are intentionally outside the
+  // color theme system — but because they are plain CSS custom properties,
+  // they can be overridden here at runtime without any Sass recompilation.
+  //
+  // VS Code's native UI is significantly more compact than Carbon's defaults:
+  //   Carbon default  →  VS Code target
+  //   xs  1.5rem (24px)  →  1.375rem (22px)
+  //   sm  2rem   (32px)  →  1.75rem  (28px)  ← standard VS Code control height
+  //   md  2.5rem (40px)  →  2rem     (32px)
+  //   lg  3rem   (48px)  →  2.25rem  (36px)
+  //   xl  4rem   (64px)  →  2.75rem  (44px)
+  //   2xl 5rem   (80px)  →  3.5rem   (56px)
+  //
+  // To experiment: change these values, run `yarn vscode-preview`, press F5.
+  // Use the Token Inspector panel to confirm which token controls which element.
+  // ---------------------------------------------------------------------------
+
+  // Size / height tokens (control component heights: buttons, inputs, tabs, etc.)
+  --cds-layout-size-height-xs: 1.375rem; // 22px — compact icon buttons, tags
+  --cds-layout-size-height-sm: 1.75rem; // 28px — standard VS Code control height
+  --cds-layout-size-height-md: 2rem; // 32px — medium controls
+  --cds-layout-size-height-lg: 2.25rem; // 36px — large controls
+  --cds-layout-size-height-xl: 2.75rem; // 44px — extra large
+  --cds-layout-size-height-2xl: 3.5rem; // 56px — 2XL (e.g. expressive buttons)
+
+  // Density / padding tokens (control horizontal padding inside controls)
+  --cds-layout-density-padding-inline-condensed: 0.5rem; // 8px  — unchanged
+  --cds-layout-density-padding-inline-normal: 0.75rem; // 12px — tighter than Carbon's 1rem
 }
 
 // Ensure body inherits VS Code background and text colors for the shell UI
