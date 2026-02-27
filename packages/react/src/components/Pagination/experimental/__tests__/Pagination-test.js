@@ -80,5 +80,25 @@ describe('Preview Pagination', () => {
         expect.objectContaining({ page: 1, pageSize: 20 })
       );
     });
+
+    it('should reset to page 1 when changing page size using the dropdown', async () => {
+      render(
+        <Pagination
+          totalItems={40}
+          pageSizes={[10, 20]}
+          pageSize={10}
+          initialPage={2}
+          onChange={() => {}}
+        />
+      );
+
+      expect(screen.getByText('11–20 of 40 items')).toBeInTheDocument();
+
+      await userEvent.selectOptions(screen.getByLabelText('Items per page:'), [
+        '20',
+      ]);
+
+      expect(screen.getByText('1–20 of 40 items')).toBeInTheDocument();
+    });
   });
 });

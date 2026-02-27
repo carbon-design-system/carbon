@@ -83,10 +83,12 @@ function Pagination({
               inline
               onChange={(event) => {
                 const pageSize = Number(event.target.value);
+                const page = 1;
+                setCurrentPage(page);
                 setCurrentPageSize(pageSize);
 
                 if (onChange) {
-                  onChange({ page: currentPage, pageSize });
+                  onChange({ page, pageSize });
                 }
               }}
               value={currentPageSize}>
