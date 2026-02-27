@@ -142,7 +142,7 @@ jobs:
                   "type": "section",
                   "text": {
                     "type": "mrkdwn",
-                    "text": "*Carbon Developer Office Hours (Americas)* is a bi-weekly opportunity on Tuesdays at 10:00 am ET to discuss topics like these and get help from the team, scheduled for Americas time zones (ET, CT, MT, PT, UTC). Developers from the Carbon team will be available to help and answer questions. While it's very informal, please be prepared to share your screen and show your issue!"
+                    "text": "*Carbon Developer Office Hours (Americas)* is a bi-weekly opportunity on Tuesdays at 10:00 am ET to discuss topics like these and get help from the team, scheduled for American time zones (ET, CT, MT, PT, UTC). Developers from the Carbon team will be available to help and answer questions. While it's very informal, please be prepared to share your screen and show your issue!"
                   }
                 },
                 {
