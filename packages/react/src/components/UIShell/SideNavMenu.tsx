@@ -10,7 +10,9 @@ import cx from 'classnames';
 import PropTypes from 'prop-types';
 import React, {
   forwardRef,
+  useEffect,
   useContext,
+  useRef,
   useState,
   type ReactNode,
   type Ref,
@@ -85,7 +87,7 @@ const SideNavMenu = forwardRef<HTMLElement, SideNavMenuProps>(
     const { isRail } = useContext(SideNavContext);
     const prefix = usePrefix();
     const [isExpanded, setIsExpanded] = useState<boolean>(defaultExpanded);
-    const [prevExpanded, setPrevExpanded] = useState<boolean>(defaultExpanded);
+    const prevExpandedRef = useRef(false);
     const className = cx({
       [`${prefix}--side-nav__item`]: true,
       [`${prefix}--side-nav__item--active`]:
@@ -95,13 +97,17 @@ const SideNavMenu = forwardRef<HTMLElement, SideNavMenuProps>(
       [customClassName as string]: !!customClassName,
     });
 
-    if (!isSideNavExpanded && isExpanded && isRail) {
-      setIsExpanded(false);
-      setPrevExpanded(true);
-    } else if (isSideNavExpanded && prevExpanded && isRail) {
-      setIsExpanded(true);
-      setPrevExpanded(false);
-    }
+    useEffect(() => {
+      if (!isRail) return;
+
+      if (!isSideNavExpanded && isExpanded) {
+        setIsExpanded(false);
+        prevExpandedRef.current = true;
+      } else if (isSideNavExpanded && prevExpandedRef.current) {
+        setIsExpanded(true);
+        prevExpandedRef.current = false;
+      }
+    }, [isExpanded, isRail, isSideNavExpanded]);
 
     return (
       // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
