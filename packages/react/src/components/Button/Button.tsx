@@ -1,12 +1,12 @@
 /**
- * Copyright IBM Corp. 2016, 2025
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { type ReactNode } from 'react';
 import { IconButton, IconButtonKind, IconButtonKinds } from '../IconButton';
 import { PopoverAlignment } from '../Popover';
 import ButtonBase from './ButtonBase';
@@ -125,11 +125,8 @@ export type ButtonProps<T extends React.ElementType> =
   PolymorphicComponentPropWithRef<T, ButtonBaseProps>;
 
 export type ButtonComponent = <T extends React.ElementType = 'button'>(
-  props: ButtonProps<T>,
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
-  context?: any
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
-) => React.ReactElement | any;
+  props: ButtonProps<T>
+) => ReactNode;
 
 function isIconOnlyButton(
   hasIconOnly: ButtonBaseProps['hasIconOnly'],
