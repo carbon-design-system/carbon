@@ -110,6 +110,9 @@ const defaultFormatLabel: NonNullable<SliderProps['formatLabel']> = (
   return `${value}${label ?? ''}`;
 };
 
+const hasUpperValue = (valueUpper: State['valueUpper']): valueUpper is number =>
+  typeof valueUpper !== 'undefined';
+
 // TODO: Assuming a 16ms throttle corresponds to 60 FPS, should it be halved,
 // since many systems can handle 120 FPS? If it doesn't correspond to 60 FPS,
 // what does it correspond to?
@@ -382,7 +385,7 @@ const Slider = (props: SliderProps) => {
   // TODO: Delete this function and set its return value as the value of
   // `twoHandles`.
   const hasTwoHandles = () => {
-    return typeof state.valueUpper !== 'undefined';
+    return hasUpperValue(state.valueUpper);
   };
 
   const twoHandles = hasTwoHandles();
@@ -1542,11 +1545,11 @@ const Slider = (props: SliderProps) => {
                 ) : undefined}
               </div>
             </ThumbWrapper>
-            {twoHandles ? (
+            {hasUpperValue(valueUpper) ? (
               <ThumbWrapper
                 hasTooltip={hideTextInput}
                 className={upperThumbWrapperClasses}
-                label={formatLabel(valueUpper ?? 0, undefined)}
+                label={formatLabel(valueUpper, undefined)}
                 align="top"
                 {...upperThumbWrapperProps}>
                 <div
@@ -1561,17 +1564,17 @@ const Slider = (props: SliderProps) => {
                   onFocus={() =>
                     setState({ activeHandle: HandlePosition.UPPER })
                   }>
-                  {twoHandles && !isRtl ? (
+                  {!isRtl ? (
                     <>
                       <UpperHandle aria-label={ariaLabelInputUpper} />
                       <UpperHandleFocus aria-label={ariaLabelInputUpper} />
                     </>
-                  ) : twoHandles && isRtl ? (
+                  ) : (
                     <>
                       <LowerHandle aria-label={ariaLabelInput} />
                       <LowerHandleFocus aria-label={ariaLabelInput} />
                     </>
-                  ) : undefined}
+                  )}
                 </div>
               </ThumbWrapper>
             ) : null}
