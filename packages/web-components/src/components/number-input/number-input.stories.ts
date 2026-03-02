@@ -181,12 +181,18 @@ export const Default = {
 };
 
 export const Skeleton = {
+  args: {
+    size: INPUT_SIZE.MEDIUM,
+  },
+  argTypes,
   parameters: {
     percy: {
       skip: true,
     },
   },
-  render: () => html` <cds-number-input-skeleton></cds-number-input-skeleton> `,
+  render: ({ size }) => html`
+    <cds-number-input-skeleton size=${size}></cds-number-input-skeleton>
+  `,
 };
 
 export const WithAILabel = {

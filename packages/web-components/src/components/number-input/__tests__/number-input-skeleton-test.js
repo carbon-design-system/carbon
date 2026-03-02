@@ -49,4 +49,28 @@ describe('<cds-number-input-skeleton>', () => {
     expect(numberSkeleton).to.exist;
     expect(numberSkeleton.classList.contains('cds--skeleton')).to.be.true;
   });
+
+  it('should render with md size class by default', async () => {
+    const el = await fixture(
+      html`<cds-number-input-skeleton></cds-number-input-skeleton>`
+    );
+    const numberSkeleton = el.shadowRoot.querySelector('.cds--number');
+    expect(numberSkeleton.classList.contains('cds--number--md')).to.be.true;
+  });
+
+  it('should render with sm size class when size is sm', async () => {
+    const el = await fixture(
+      html`<cds-number-input-skeleton size="sm"></cds-number-input-skeleton>`
+    );
+    const numberSkeleton = el.shadowRoot.querySelector('.cds--number');
+    expect(numberSkeleton.classList.contains('cds--number--sm')).to.be.true;
+  });
+
+  it('should render with lg size class when size is lg', async () => {
+    const el = await fixture(
+      html`<cds-number-input-skeleton size="lg"></cds-number-input-skeleton>`
+    );
+    const numberSkeleton = el.shadowRoot.querySelector('.cds--number');
+    expect(numberSkeleton.classList.contains('cds--number--lg')).to.be.true;
+  });
 });
