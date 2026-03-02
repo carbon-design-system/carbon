@@ -113,7 +113,6 @@
   .#{$prefix}--parent-row.#{$prefix}--expandable-row > td,
   .#{$prefix}--parent-row.#{$prefix}--expandable-row + tr[data-child-row] > td {
     border-block-end: 1px solid $border-subtle;
-    box-shadow: 0 1px $border-subtle;
   }
 
   .#{$prefix}--parent-row:not(.#{$prefix}--expandable-row)
@@ -156,7 +155,7 @@
 
   tr.#{$prefix}--parent-row.#{$prefix}--expandable-row:hover td:first-of-type {
     // First td doesn't have a visible border
-    border-block-end: 1px solid $layer-hover;
+    border-block-end: 1px solid transparent;
   }
 
   // Child row when hovering on expanded parent
@@ -165,6 +164,7 @@
     td {
     background-color: $layer-hover;
     border-block-end: 1px solid $border-subtle;
+    border-block-start: 1px solid transparent;
     color: $text-primary;
   }
 
