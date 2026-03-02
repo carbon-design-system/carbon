@@ -128,7 +128,7 @@ export interface PaginationProps
   /**
    * Specify the size of the Pagination.
    */
-  size?: 'sm' | 'md' | 'lg';
+  size?: 'xs' | 'sm' | 'md' | 'lg';
 
   /**
    * The total number of items.
@@ -568,7 +568,7 @@ Pagination.propTypes = {
   /**
    * Specify the size of the Pagination.
    */
-  size: PropTypes.oneOf(['sm', 'md', 'lg']),
+  size: PropTypes.oneOf(['sm', 'md', 'lg', 'xs']),
 
   /**
    * The total number of items.

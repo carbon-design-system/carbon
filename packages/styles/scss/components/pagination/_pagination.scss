@@ -66,6 +66,10 @@
     }
   }
 
+  .#{$prefix}--pagination--xs {
+    min-block-size: convert.to-rem(24px);
+  }
+
   .#{$prefix}--pagination--sm {
     min-block-size: convert.to-rem(32px);
   }
@@ -108,7 +112,9 @@
     .#{$prefix}--select-input {
     padding-inline: $spacing-05 2.25rem;
   }
-
+  .#{$prefix}--pagination--xs .#{$prefix}--select-input {
+    line-height: convert.to-rem(24px);
+  }
   .#{$prefix}--pagination--sm .#{$prefix}--select-input {
     line-height: convert.to-rem(32px);
   }
@@ -242,6 +248,13 @@
   [dir='rtl'] .#{$prefix}--pagination__button > svg,
   [dir='rtl'] .#{$prefix}--btn--ghost.#{$prefix}--pagination__button > svg {
     transform: rotate(0.5turn);
+  }
+
+  .#{$prefix}--pagination--xs .#{$prefix}--pagination__button,
+  .#{$prefix}--pagination--xs
+    .#{$prefix}--btn--ghost.#{$prefix}--pagination__button {
+    block-size: convert.to-rem(24px);
+    min-block-size: convert.to-rem(24px);
   }
 
   .#{$prefix}--pagination--sm .#{$prefix}--pagination__button,
