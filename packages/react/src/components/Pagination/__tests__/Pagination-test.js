@@ -315,13 +315,13 @@ describe('Pagination', () => {
           pageSize={4}
           page={2}
           pagesUnknown={false}
-          pageSelectLabelText={(page, totalPages) => {
-            return `Select Label ${page} de ${totalPages}`;
+          pageSelectLabelText={(totalPages) => {
+            return `Página de ${totalPages} ${totalPages === 1 ? 'página' : 'páginas'}`;
           }}
         />
       );
 
-      expect(screen.getByText('Select Label 2 de 4')).toBeInTheDocument();
+      expect(screen.getByText('Página de 2 páginas')).toBeInTheDocument();
     });
 
     it('should respect pageSize prop', () => {
