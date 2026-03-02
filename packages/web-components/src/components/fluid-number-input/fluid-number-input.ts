@@ -24,8 +24,8 @@ class CDSFluidNumberInput extends CDSNumberInput {
     super.connectedCallback();
   }
 
-  updated() {
-    super.updated();
+  updated(changedProperties: Map<string, unknown>) {
+    super.updated(changedProperties);
   }
 
   render() {

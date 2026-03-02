@@ -576,7 +576,7 @@ class CDSNumberInput extends CDSTextInput {
   /**
    * Handle stepping up or down
    */
-  protected _handleStep(event: Event, direction: 'up' | 'down') {
+  protected _handleStep(_event: Event, direction: 'up' | 'down') {
     const currentValue =
       this.type === NUMBER_INPUT_TYPE.NUMBER
         ? Number(this._input.value)
