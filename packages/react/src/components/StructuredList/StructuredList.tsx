@@ -287,8 +287,8 @@ export function StructuredListRow(props: StructuredListRowProps) {
     ...other
   } = props;
   const [hasFocusWithin, setHasFocusWithin] = useState(false);
-  // eslint-disable-next-line  react-hooks/rules-of-hooks -- https://github.com/carbon-design-system/carbon/issues/20452
-  const rowId = id ?? useId('grid-input');
+  const generatedRowId = useId('grid-input');
+  const rowId = id ?? generatedRowId;
   const selectedRow = React.useContext(GridSelectedRowStateContext);
   const setSelectedRow = React.useContext(GridSelectedRowDispatchContext);
   const prefix = usePrefix();

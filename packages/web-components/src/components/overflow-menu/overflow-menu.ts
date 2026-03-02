@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2019, 2023
+ * Copyright IBM Corp. 2019, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -165,14 +165,14 @@ class CDSOverflowMenu
       }
       const { _menuBody: menuBody, size } = this;
       if (menuBody) {
-        menuBody.setAttribute('breadcrumb', String(Boolean(this.breadcrumb)));
+        menuBody.setAttribute('breadcrumb', String(this.breadcrumb));
         menuBody.open = open;
         menuBody.size = size;
 
         const tooltipContent = this.querySelector(
           '[slot=tooltip-content]'
         )?.textContent;
-        button?.setAttribute('aria-expanded', String(Boolean(open)));
+        button?.setAttribute('aria-expanded', String(open));
         button?.setAttribute('aria-label', String(tooltipContent));
       }
     }

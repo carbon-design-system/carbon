@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2025
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -9,6 +9,7 @@ import PropTypes from 'prop-types';
 import React, {
   cloneElement,
   createContext,
+  useEffect,
   useRef,
   useState,
   type ReactElement,
@@ -164,18 +165,16 @@ const RadioButtonGroup = React.forwardRef(
     const prefix = usePrefix();
 
     const [selected, setSelected] = useState(valueSelected ?? defaultSelected);
-    const [prevValueSelected, setPrevValueSelected] = useState(valueSelected);
+    const prevValueSelected = useRef(valueSelected);
 
     const radioButtonGroupInstanceId = useId();
 
-    /**
-     * prop + state alignment - getDerivedStateFromProps
-     * only update if selected prop changes
-     */
-    if (valueSelected !== prevValueSelected) {
-      setSelected(valueSelected);
-      setPrevValueSelected(valueSelected);
-    }
+    useEffect(() => {
+      if (valueSelected !== prevValueSelected.current) {
+        setSelected(valueSelected);
+        prevValueSelected.current = valueSelected;
+      }
+    }, [valueSelected]);
 
     function getRadioButtons() {
       const mappedChildren = React.Children.map(
