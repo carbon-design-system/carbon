@@ -105,6 +105,7 @@ export const getMenuOffset: MenuOffset = (
       direction
     );
   }
+
   const { offsetWidth: menuWidth } = menuBody;
 
   switch (triggerButtonPositionProp) {
@@ -201,7 +202,7 @@ export interface OverflowMenuProps
   menuOffset?: MenuOffset;
 
   /**
-   * The adjustment in position applied to the floating menu.
+   * The adjustment in position applied to the floating menu when flipped.
    */
   menuOffsetFlip?: MenuOffset;
 
@@ -733,7 +734,7 @@ OverflowMenu.propTypes = {
   ]),
 
   /**
-   * The adjustment in position applied to the floating menu.
+   * The adjustment in position applied to the floating menu when flipped.
    */
   menuOffsetFlip: PropTypes.oneOfType([
     PropTypes.shape({

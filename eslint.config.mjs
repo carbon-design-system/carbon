@@ -223,6 +223,7 @@ export default defineConfig(
     rules: {
       '@typescript-eslint/ban-ts-comment': ['error', { 'ts-nocheck': false }],
       '@typescript-eslint/no-unused-vars': 'off',
+      'react-hooks/rules-of-hooks': 'off',
       'react/jsx-no-undef': 'off',
     },
   },
