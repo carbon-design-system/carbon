@@ -23,11 +23,9 @@ export default {
   title: 'Components/Modal/Feature Flags',
   component: Modal,
   tags: ['!autodocs'],
-  argTypes: {
-    launcherButtonRef: {
-      table: {
-        disable: true,
-      },
+  parameters: {
+    controls: {
+      exclude: ['launcherButtonRef'],
     },
   },
 };
@@ -49,7 +47,7 @@ export const EnableDialogElement = () => {
         }>
         <Button onClick={() => setOpen(true)}>Launch modal</Button>
         <ClassPrefix prefix="dialog-refactor">
-          <div className="experimental-modal">
+          <div className="preview-modal">
             <Modal
               open={open}
               onRequestClose={() => setOpen(false)}
@@ -108,24 +106,24 @@ export const EnableDialogElement = () => {
 };
 EnableDialogElement.storyName = 'enable-dialog-element';
 
-export const EnableExperimentalFocusWrapWithoutSentinels = () => {
+export const EnableFocusWrapWithoutSentinels = () => {
   const [open, setOpen] = useState(false);
   return (
-    <FeatureFlags enableExperimentalFocusWrapWithoutSentinels>
+    <FeatureFlags enableFocusWrapWithoutSentinels>
       <Annotation
         type="feature-flags"
         text={
           <span>
             This story is rendered with{' '}
             <LinkTo title="Getting Started/Feature Flags" name="Overview">
-              enable-experimental-focus-wrap-without-sentinels
+              enable-preview-focus-wrap-without-sentinels
             </LinkTo>{' '}
             enabled
           </span>
         }>
         <Button onClick={() => setOpen(true)}>Launch modal</Button>
         <ClassPrefix prefix="dialog-refactor">
-          <div className="experimental-modal">
+          <div className="preview-modal">
             <Modal
               open={open}
               onRequestClose={() => setOpen(false)}
@@ -182,5 +180,5 @@ export const EnableExperimentalFocusWrapWithoutSentinels = () => {
     </FeatureFlags>
   );
 };
-EnableExperimentalFocusWrapWithoutSentinels.storyName =
-  'enable-experimental-focus-wrap-without-sentinels';
+EnableFocusWrapWithoutSentinels.storyName =
+  'enable-focus-wrap-without-sentinels';

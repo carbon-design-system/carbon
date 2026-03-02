@@ -1,12 +1,12 @@
 /**
- * Copyright IBM Corp. 2022
+ * Copyright IBM Corp. 2022, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
 import PropTypes from 'prop-types';
-import React, { ComponentType, ForwardedRef } from 'react';
+import React, { type ComponentProps, type ForwardedRef } from 'react';
 import classnames from 'classnames';
 import ComboBox from '../ComboBox';
 import { usePrefix } from '../../internal/usePrefix';
@@ -20,7 +20,9 @@ interface OnChangeData<ItemType> {
   inputValue?: string | null;
 }
 
-export interface FluidComboBoxProps<ItemType> extends ComboBoxProps<ItemType> {
+export interface FluidComboBoxProps<ItemType>
+  extends ComboBoxProps<ItemType>,
+    Pick<ComponentProps<typeof ComboBox>, 'translateWithId'> {
   /**
    * Specify an optional className to be applied to the outer FluidForm wrapper
    */
@@ -63,12 +65,6 @@ export interface FluidComboBoxProps<ItemType> extends ComboBoxProps<ItemType> {
   isCondensed?: boolean;
 
   /**
-   * Function to render items as custom components instead of strings.
-   * Defaults to null and is overridden by a getter
-   */
-  itemToElement?: ComponentType<ItemType> | null;
-
-  /**
    * Helper function passed to downshift that allows the library to render a
    * given item to a string label. By default, it extracts the `label` field
    * from a given item to serve as the item label in the list.
@@ -93,12 +89,6 @@ export interface FluidComboBoxProps<ItemType> extends ComboBoxProps<ItemType> {
   onChange: (data: OnChangeData<ItemType>) => void;
 
   /**
-   * An optional callback to render the currently selected item as a react element instead of only
-   * as a string.
-   */
-  renderSelectedItem?: (selectedItem: ItemType) => React.ReactNode;
-
-  /**
    * In the case you want to control the dropdown selection entirely.
    * */
   selectedItem?: ItemType | null;
@@ -108,11 +98,6 @@ export interface FluidComboBoxProps<ItemType> extends ComboBoxProps<ItemType> {
    * visiting this control
    */
   titleText?: React.ReactNode;
-
-  /**
-   * Callback function for translating ListBoxMenuIcon SVG title
-   */
-  translateWithId?: (id: string) => string;
 
   /**
    * Specify whether the control is currently in warning state
@@ -190,8 +175,7 @@ FluidComboBox.propTypes = {
   isCondensed: PropTypes.bool,
 
   /**
-   * Function to render items as custom components instead of strings.
-   * Defaults to null and is overridden by a getter
+   * Renders an item as a custom React node instead of a string.
    */
   itemToElement: PropTypes.func,
 
@@ -221,12 +205,6 @@ FluidComboBox.propTypes = {
   onChange: PropTypes.func.isRequired,
 
   /**
-   * An optional callback to render the currently selected item as a react element instead of only
-   * as a string.
-   */
-  renderSelectedItem: PropTypes.func,
-
-  /**
    * In the case you want to control the dropdown selection entirely.
    */
   selectedItem: PropTypes.oneOfType([
@@ -242,7 +220,7 @@ FluidComboBox.propTypes = {
   titleText: PropTypes.node,
 
   /**
-   * Callback function for translating ListBoxMenuIcon SVG title
+   * Translates component strings using your i18n tool.
    */
   translateWithId: PropTypes.func,
 

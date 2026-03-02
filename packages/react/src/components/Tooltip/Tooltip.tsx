@@ -84,7 +84,7 @@ interface TooltipBaseProps {
   /**
    * Render the component using the high-contrast theme
    */
-  highContrast?: boolean;
+  highContrast?: boolean; // TODO: remove in v12, highContrast should not be configurable
 
   /**
    * Provide the label to be rendered inside of the Tooltip. The label will use
@@ -108,8 +108,10 @@ export type TooltipProps<T extends React.ElementType> =
 
 type TooltipComponent = <T extends React.ElementType = typeof Popover>(
   props: TooltipProps<T>
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
 ) => React.ReactElement | any;
 
+// eslint-disable-next-line react/display-name -- https://github.com/carbon-design-system/carbon/issues/20452
 const Tooltip: TooltipComponent = React.forwardRef(
   <T extends React.ElementType = typeof Popover>(
     {
@@ -124,7 +126,7 @@ const Tooltip: TooltipComponent = React.forwardRef(
       defaultOpen = false,
       closeOnActivation = false,
       dropShadow = false,
-      highContrast = true,
+      highContrast = true, // TODO: remove in v12, highContrast should not be configurable
       ...rest
     }: TooltipProps<T>,
     ref?: PolymorphicRef<T>
@@ -164,6 +166,7 @@ const Tooltip: TooltipComponent = React.forwardRef(
       'aria-describedby': describedBy,
     };
 
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
     function getChildEventHandlers(childProps: any) {
       const eventHandlerFunctions = Object.keys(triggerProps).filter((prop) =>
         prop.startsWith('on')
@@ -278,6 +281,7 @@ const Tooltip: TooltipComponent = React.forwardRef(
     }, [isDragging, onDragStop]);
 
     return (
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
       <Popover<any>
         as={as}
         ref={ref}
@@ -285,7 +289,7 @@ const Tooltip: TooltipComponent = React.forwardRef(
         align={align}
         className={cx(`${prefix}--tooltip`, customClassName)}
         dropShadow={dropShadow}
-        highContrast={highContrast}
+        highContrast={highContrast} // TODO: v12 hard-set highContrast to true
         onKeyDown={onKeyDown}
         onMouseLeave={onMouseLeave}
         open={open}>
@@ -310,7 +314,8 @@ const Tooltip: TooltipComponent = React.forwardRef(
   }
 );
 
-(Tooltip as React.FC).propTypes = {
+// @ts-expect-error - `propTypes` isn't typed.
+Tooltip.propTypes = {
   /**
    * Specify how the trigger should align with the tooltip
    */
@@ -387,7 +392,7 @@ const Tooltip: TooltipComponent = React.forwardRef(
   /**
    * Render the component using the high-contrast theme
    */
-  highContrast: PropTypes.bool,
+  highContrast: PropTypes.bool, // TODO: remove in v12, highContrast should not be configurable
 
   /**
    * Provide the label to be rendered inside of the Tooltip. The label will use

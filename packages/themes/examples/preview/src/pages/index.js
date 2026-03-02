@@ -171,11 +171,11 @@ export default function IndexPage() {
             <tbody>
               {tokens
                 .filter((token) => {
-                  const group = token.groups.find((group) => {
-                    return group.name === activeGroup;
-                  });
-
-                  if (!group) {
+                  if (
+                    activeGroup !== 'All' &&
+                    token.groups &&
+                    !token.groups.includes(activeGroup)
+                  ) {
                     return false;
                   }
 

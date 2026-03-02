@@ -21,23 +21,6 @@ export default {
       page: mdx,
     },
   },
-  argTypes: {
-    as: {
-      table: {
-        disable: true,
-      },
-    },
-    children: {
-      table: {
-        disable: true,
-      },
-    },
-    className: {
-      table: {
-        disable: true,
-      },
-    },
-  },
   args: {
     level: 0,
   },

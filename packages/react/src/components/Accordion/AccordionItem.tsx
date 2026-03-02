@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2025
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -16,6 +16,8 @@ import React, {
   ReactElement,
   ReactNode,
   useContext,
+  useEffect,
+  useRef,
   useState,
 } from 'react';
 import { Text } from '../Text';
@@ -38,6 +40,12 @@ export interface AccordionItemProps {
    * this value will be managed by the parent Accordion.
    */
   disabled?: boolean;
+
+  /**
+   * Specify a custom label for the accordion button.
+   * This is important for accessibility when the accordion has no visible title.
+   */
+  'aria-label'?: AriaAttributes['aria-label'];
 
   /**
    * The handler of the massaged `click` event.
@@ -68,6 +76,7 @@ export interface AccordionItemProps {
    */
   renderExpando?: (
     props: PropsWithChildren<AccordionToggleProps>
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
   ) => ReactElement<any>;
 
   /**
@@ -76,6 +85,7 @@ export interface AccordionItemProps {
    */
   renderToggle?: (
     props: PropsWithChildren<AccordionToggleProps>
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
   ) => ReactElement<any>;
 
   /**
@@ -93,6 +103,7 @@ export interface AccordionItemProps {
 export interface AccordionToggleProps {
   'aria-controls'?: AriaAttributes['aria-controls'];
   'aria-expanded'?: AriaAttributes['aria-expanded'];
+  'aria-label'?: AriaAttributes['aria-label'];
   className?: string;
   disabled?: boolean;
   onClick?: MouseEventHandler<HTMLButtonElement>;
@@ -114,10 +125,11 @@ function AccordionItem({
   title = 'title',
   disabled: controlledDisabled,
   handleAnimationEnd,
+  'aria-label': ariaLabel,
   ...rest
 }: PropsWithChildren<AccordionItemProps>) {
   const [isOpen, setIsOpen] = useState(open);
-  const [prevIsOpen, setPrevIsOpen] = useState(open);
+  const prevOpenRef = useRef(open);
   const accordionState = useContext(AccordionContext);
 
   const disabledIsControlled = typeof controlledDisabled === 'boolean';
@@ -149,10 +161,12 @@ function AccordionItem({
     [isOpen]
   );
 
-  if (open !== prevIsOpen) {
-    setIsOpen(open);
-    setPrevIsOpen(open);
-  }
+  useEffect(() => {
+    if (open !== prevOpenRef.current) {
+      setIsOpen(open);
+      prevOpenRef.current = open;
+    }
+  }, [open]);
 
   // When the AccordionItem heading is clicked, toggle the open state of the
   // panel
@@ -185,6 +199,7 @@ function AccordionItem({
         disabled={disabled}
         aria-controls={id}
         aria-expanded={isOpen}
+        aria-label={ariaLabel}
         className={`${prefix}--accordion__heading`}
         onClick={onClick}
         onKeyDown={onKeyDown}
@@ -221,6 +236,12 @@ AccordionItem.propTypes = {
    * Specify whether an individual AccordionItem should be disabled
    */
   disabled: PropTypes.bool,
+
+  /**
+   * Specify a custom label for the accordion button.
+   * This is important for accessibility when the accordion has no visible title.
+   */
+  'aria-label': PropTypes.string,
 
   /**
    * The handler of the massaged `click` event.

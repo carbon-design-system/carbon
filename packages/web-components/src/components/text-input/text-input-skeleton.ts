@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2019, 2024
+ * Copyright IBM Corp. 2019, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -27,8 +27,9 @@ class CDSTextInputSkeleton extends LitElement {
   render() {
     const { hideLabel } = this;
     return html`
-      ${!hideLabel &&
-      html` <span class="${prefix}--label ${prefix}--skeleton"></span> `}
+      ${hideLabel
+        ? ''
+        : html`<span class="${prefix}--label ${prefix}--skeleton"></span>`}
       <div class="${prefix}--text-input ${prefix}--skeleton"></div>
     `;
   }

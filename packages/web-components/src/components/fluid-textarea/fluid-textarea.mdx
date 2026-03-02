@@ -1,0 +1,44 @@
+import { ArgTypes, Canvas, Markdown, Meta } from '@storybook/addon-docs/blocks';
+import { cdnJs } from '../../globals/internal/storybook-cdn';
+import * as FluidTextAreaStories from './fluid-textarea.stories';
+
+<Meta of={FluidTextAreaStories} />
+
+# Text Area
+
+[Source code](https://github.com/carbon-design-system/carbon/tree/main/packages/web-components/src/components/fluid-textarea)
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Skeleton](#skeleton)
+- [Default With Tooltip](#default-with-tooltip)
+- [Component API](#component-api)
+- [CDN](#cdn)
+- [Feedback](#feedback)
+
+## Overview
+
+<Canvas of={FluidTextAreaStories.Default} />
+
+## Skeleton
+
+<Canvas of={FluidTextAreaStories.Skeleton} />
+
+## Default With Toggletip
+
+<Canvas of={FluidTextAreaStories.DefaultWithToggletip} />
+
+## Component API
+
+## `cds-fluid-textarea`
+
+<ArgTypes of="cds-textarea" />
+
+<Markdown>{`${cdnJs({ components: ['fluid-textarea'] })}`}</Markdown>
+
+## Feedback
+
+Help us improve this component by providing feedback, asking questions on Slack,
+or updating this file on
+[GitHub](https://github.com/carbon-design-system/carbon/edit/main/packages/web-components/src/components/fluid-textarea/fluid-textarea.mdx).

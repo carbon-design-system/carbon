@@ -192,16 +192,6 @@ $css--plex: true !default;
   padding-block-start: $spacing-03;
 }
 
-.controlled-accordion-btnset {
-  @extend .cds--btn-set !optional;
-
-  padding-block-end: $spacing-03;
-
-  .controlled-accordion-btn:not(:first-child)::part(button) {
-    box-shadow: -0.0625rem 0 0 0 button-tokens.$button-separator;
-  }
-}
-
 .controlled-accordion-btn {
   max-inline-size: 13.25rem;
 }

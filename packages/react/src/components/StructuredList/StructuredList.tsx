@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2025
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -287,7 +287,8 @@ export function StructuredListRow(props: StructuredListRowProps) {
     ...other
   } = props;
   const [hasFocusWithin, setHasFocusWithin] = useState(false);
-  const rowId = id ?? useId('grid-input');
+  const generatedRowId = useId('grid-input');
+  const rowId = id ?? generatedRowId;
   const selectedRow = React.useContext(GridSelectedRowStateContext);
   const setSelectedRow = React.useContext(GridSelectedRowDispatchContext);
   const prefix = usePrefix();
@@ -325,7 +326,7 @@ export function StructuredListRow(props: StructuredListRowProps) {
       ref={itemRef}
       onClick={(event) => {
         setSelectedRow?.(rowId);
-        onClick && onClick(event);
+        onClick?.(event);
         if (selection) {
           // focus items only when selection is enabled
           setHasFocusWithin(true);
@@ -458,7 +459,7 @@ export function StructuredListInput(props: StructuredListInputProps) {
       value={row?.id ?? ''}
       onChange={(event) => {
         setSelectedRow?.(event.target.value);
-        onChange && onChange(event);
+        onChange?.(event);
       }}
       id={id ?? defaultId}
       className={classes}

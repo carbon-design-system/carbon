@@ -1,6 +1,4 @@
 /**
- * @license
- *
  * Copyright IBM Corp. 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
@@ -9,6 +7,7 @@
 
 import { expect, fixture, html } from '@open-wc/testing';
 import { isFeatureFlagEnabled } from '@carbon/web-components/es/components/feature-flags/index.js';
+import '@carbon/web-components/es/components/toggle/index.js';
 
 describe('featue-flag', function () {
   it('should render', async () => {
@@ -17,6 +16,24 @@ describe('featue-flag', function () {
     ></feature-flags>`;
     const el = await fixture(featureFlag);
     await expect(el).dom.to.equalSnapshot();
+  });
+
+  it('should add feature flag to child component', async () => {
+    const featureFlag = html`<feature-flags
+      enable-v12-toggle-reduced-label-spacing>
+      <cds-toggle
+        id="child"
+        label-text="Label"
+        label-a="On"
+        label-b="Off"
+        toggled></cds-toggle>
+    </feature-flags>`;
+    const el = await fixture(featureFlag);
+    const child = el.querySelector('#child');
+    expect(child).to.have.attribute(
+      'enable-v12-toggle-reduced-label-spacing',
+      ''
+    );
   });
 
   it('should return true if feature is enabled', async () => {

@@ -41,7 +41,7 @@ export default {
 export const _FileUploaderItem = (args) => {
   return (
     <FileUploaderItem
-      errorBody="500 KB max file size. Select a new file and try again."
+      errorBody="1 MB max file size. Select a new file and try again."
       errorSubject="File size exceeds limit"
       iconDescription="Delete file"
       invalid={false}
@@ -79,40 +79,21 @@ _FileUploaderItem.argTypes = {
     control: 'text',
     description: 'Unique identifier for the file object',
   },
+};
 
-  // Remove all the props that don't apply to FileUploaderItem
-  accept: {
-    table: { disable: true },
-  },
-  buttonKind: {
-    table: { disable: true },
-  },
-  buttonLabel: {
-    table: { disable: true },
-  },
-  className: {
-    table: { disable: true },
-  },
-  disabled: {
-    table: { disable: true },
-  },
-  labelDescription: {
-    table: { disable: true },
-  },
-  labelTitle: {
-    table: { disable: true },
-  },
-  multiple: {
-    table: { disable: true },
-  },
-  onChange: {
-    table: { disable: true },
-  },
-  onClick: {
-    table: { disable: true },
-  },
-  filenameStatus: {
-    table: { disable: true },
+// Remove all the props that don't apply to FileUploaderItem
+_FileUploaderItem.parameters = {
+  controls: {
+    exclude: [
+      'accept',
+      'buttonKind',
+      'buttonLabel',
+      'disabled',
+      'labelDescription',
+      'labelTitle',
+      'multiple',
+      'filenameStatus',
+    ],
   },
 };
 
@@ -121,10 +102,10 @@ export const _FileUploaderDropContainer = () => {
     <FileUploaderDropContainer
       labelText="Drag and drop files here or click to upload"
       multiple={true}
+      maxFileSize={1024 * 1024}
       accept={['image/jpeg', 'image/png']}
       disabled={false}
       name=""
-      tabIndex={0}
     />
   );
 };
@@ -136,6 +117,7 @@ DragAndDropUploadContainerExampleApplication.args = {
   labelText: 'Drag and drop files here or click to upload',
   name: '',
   multiple: true,
+  maxFileSize: 1024 * 1024,
   accept: ['image/jpeg', 'image/png'],
   disabled: false,
   tabIndex: 0,
@@ -151,6 +133,7 @@ DragAndDropUploadSingleContainerExampleApplication.args = {
   labelText: 'Drag and drop a file here or click to upload',
   name: '',
   multiple: false,
+  maxFileSize: 1024 * 1024,
   accept: ['image/jpeg', 'image/png'],
   disabled: false,
   tabIndex: 0,
@@ -177,13 +160,14 @@ export const Default = (args) => {
 
 Default.args = {
   labelTitle: 'Upload files',
-  labelDescription: 'Max file size is 500 MB. Only .jpg files are supported.',
+  labelDescription: 'Max file size is 1 MB. Only .jpg files are supported.',
   buttonLabel: 'Add file',
   buttonKind: 'primary',
   size: 'md',
   filenameStatus: 'edit',
   accept: ['.jpg', '.png'],
   multiple: true,
+  maxFileSize: 1024 * 1024,
   disabled: false,
   iconDescription: 'Delete file',
   name: '',
@@ -211,13 +195,8 @@ Default.argTypes = {
     control: { type: 'select' },
     options: ['sm', 'md', 'lg'],
   },
-  accept: {
-    table: { disable: true },
-  },
-  className: {
-    table: { disable: true },
-  },
-  role: {
-    table: { disable: true },
-  },
+};
+
+Default.parameters = {
+  controls: { exclude: ['accept', 'role'] },
 };

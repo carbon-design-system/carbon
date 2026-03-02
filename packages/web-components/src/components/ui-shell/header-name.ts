@@ -45,7 +45,7 @@ class CDSHeaderName extends FocusMixin(LitElement) {
         `;
     return html`
       <a part="link" class="${prefix}--header__name" href="${ifDefined(href)}"
-        >${namePrefixPart}&nbsp;<slot></slot
+        >${namePrefixPart}&nbsp;<span><slot></slot></span
       ></a>
     `;
   }

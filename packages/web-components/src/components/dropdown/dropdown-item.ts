@@ -7,8 +7,9 @@
 
 import { LitElement, html } from 'lit';
 import { property, state } from 'lit/decorators.js';
-import Checkmark16 from '@carbon/icons/lib/checkmark/16.js';
 import { prefix } from '../../globals/settings';
+import { iconLoader } from '../../globals/internal/icon-loader';
+import Checkmark16 from '@carbon/icons/es/checkmark/16.js';
 import { DROPDOWN_SIZE } from './dropdown';
 import styles from './dropdown.scss?lit';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
@@ -62,6 +63,57 @@ class CDSDropdownItem extends LitElement {
   @state()
   _hasEllipsisApplied = false;
 
+  /**
+   * Reference to the next sibling element for hover state management.
+   */
+  protected _nextSiblingRef: Element | null = null;
+
+  /**
+   * Gets the next dropdown/combo-box item sibling.
+   */
+  protected _getNextItem(): Element | null {
+    let next = this.nextElementSibling;
+    while (next) {
+      if (
+        next instanceof HTMLElement &&
+        (next.tagName.toLowerCase() === `${prefix}-dropdown-item` ||
+          next.tagName.toLowerCase() === `${prefix}-combo-box-item`)
+      ) {
+        return next;
+      }
+      next = next.nextElementSibling;
+    }
+    return null;
+  }
+
+  /**
+   * Syncs the hovered-next-sibling attribute with the next item.
+   */
+  protected _syncNextSibling(attribute: string, shouldSet: boolean) {
+    const currentSibling = this._nextSiblingRef;
+    currentSibling?.removeAttribute(attribute);
+    if (shouldSet) {
+      const next = this._getNextItem();
+      if (next) {
+        next.setAttribute(attribute, '');
+        this._nextSiblingRef = next;
+        return;
+      }
+    }
+    this._nextSiblingRef = null;
+  }
+
+  protected _handleMouseEnter = () => {
+    if (this.hasAttribute('disabled')) {
+      return;
+    }
+    this._syncNextSibling('hovered-next-sibling', true);
+  };
+
+  protected _handleMouseLeave = () => {
+    this._syncNextSibling('hovered-next-sibling', false);
+  };
+
   connectedCallback() {
     super.connectedCallback();
     if (!this.hasAttribute('role')) {
@@ -75,6 +127,15 @@ class CDSDropdownItem extends LitElement {
       );
     }
     this.setAttribute('aria-selected', String(this.selected));
+    this.addEventListener('mouseenter', this._handleMouseEnter);
+    this.addEventListener('mouseleave', this._handleMouseLeave);
+  }
+
+  disconnectedCallback() {
+    this.removeEventListener('mouseenter', this._handleMouseEnter);
+    this.removeEventListener('mouseleave', this._handleMouseLeave);
+    this._syncNextSibling('hovered-next-sibling', false);
+    super.disconnectedCallback();
   }
 
   /**
@@ -84,11 +145,10 @@ class CDSDropdownItem extends LitElement {
    * browser tooltip appears for menu items that result in ellipsis
    */
   protected _handleSlotChange({ target }: Event) {
-    const text = (target as HTMLSlotElement)
-      .assignedNodes()
-      .filter(
-        (node) => node.nodeType !== Node.TEXT_NODE || node!.textContent!.trim()
-      );
+    const text = (target as HTMLSlotElement).assignedNodes().filter(
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
+      (node) => node.nodeType !== Node.TEXT_NODE || node!.textContent!.trim()
+    );
 
     const textContainer = this.shadowRoot?.querySelector(
       `.${prefix}--list-box__menu-item__option`
@@ -115,7 +175,7 @@ class CDSDropdownItem extends LitElement {
         <slot @slotchange=${handleSlotChange}></slot>
         ${!selected
           ? undefined
-          : Checkmark16({
+          : iconLoader(Checkmark16, {
               part: 'selected-icon',
               class: `${prefix}--list-box__menu-item__selected-icon`,
             })}

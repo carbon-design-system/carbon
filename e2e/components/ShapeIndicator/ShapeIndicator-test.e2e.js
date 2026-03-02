@@ -17,7 +17,7 @@ test.describe('ShapeIndicator', () => {
       test('shape indicator @vrt', async ({ page }) => {
         await snapshotStory(page, {
           component: 'ShapeIndicator',
-          id: 'experimental-statusindicators-unstable-shapeindicator--default',
+          id: 'preview-statusindicators-preview-shapeindicator--default',
           theme,
         });
       });
@@ -25,7 +25,7 @@ test.describe('ShapeIndicator', () => {
       test('shape indicator text size 14 @vrt', async ({ page }) => {
         await visitStory(page, {
           component: 'ShapeIndicator',
-          id: 'experimental-statusindicators-unstable-shapeindicator--default',
+          id: 'preview-statusindicators-preview-shapeindicator--default',
           theme,
           args: {
             textSize: '14',
@@ -33,7 +33,7 @@ test.describe('ShapeIndicator', () => {
         });
         await snapshot(page, {
           component: 'ShapeIndicator',
-          id: 'experimental-statusindicators-unstable-shapeindicator--default',
+          id: 'preview-statusindicators-preview-shapeindicator--default',
           theme,
         });
       });

@@ -8,8 +8,8 @@
 import { LitElement, html } from 'lit';
 import { property } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
-import ArrowsVertical32 from '@carbon/icons/lib/arrows--vertical/32.js';
-import ArrowDown32 from '@carbon/icons/lib/arrow--down/32.js';
+import ArrowsVertical32 from '@carbon/icons/es/arrows--vertical/32.js';
+import ArrowDown32 from '@carbon/icons/es/arrow--down/32.js';
 import { prefix } from '../../globals/settings';
 import FocusMixin from '../../globals/mixins/focus';
 import {
@@ -17,6 +17,7 @@ import {
   TABLE_SORT_CYCLES,
   TABLE_SORT_DIRECTION,
 } from './defs';
+import { iconLoader } from '../../globals/internal/icon-loader';
 import styles from './data-table.scss?lit';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
@@ -207,11 +208,11 @@ class CDSTableHeaderCell extends FocusMixin(LitElement) {
     if (sortDirection) {
       const sortIcon =
         sortDirection === TABLE_SORT_DIRECTION.NONE
-          ? ArrowsVertical32({
+          ? iconLoader(ArrowsVertical32, {
               part: 'sort-icon',
               class: `${prefix}--table-sort__icon-unsorted`,
             })
-          : ArrowDown32({
+          : iconLoader(ArrowDown32, {
               part: 'sort-icon',
               class: `${prefix}--table-sort__icon`,
             });

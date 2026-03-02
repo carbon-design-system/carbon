@@ -39,7 +39,7 @@ export interface SideNavSwitcherProps {
 }
 
 const SideNavSwitcher = forwardRef<HTMLSelectElement, SideNavSwitcherProps>(
-  function SideNavSwitcher(props, ref) {
+  (props, ref) => {
     const id = useId('side-nav-switcher');
     const prefix = usePrefix();
     const { className: customClassName, labelText, onChange, options } = props;

@@ -1,16 +1,17 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
+import React, { type HTMLAttributes } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { usePrefix } from '../../internal/usePrefix';
 
-export interface SkeletonPlaceholderProps {
+export interface SkeletonPlaceholderProps
+  extends HTMLAttributes<HTMLDivElement> {
   /**
    * Add a custom class to the component to set the height and width
    */
@@ -34,8 +35,7 @@ const SkeletonPlaceholder = ({
 
 SkeletonPlaceholder.propTypes = {
   /**
-   * Add a custom class to the component
-   * to set the height and width
+   * Add a custom class to the component to set the height and width
    */
   className: PropTypes.string,
 };

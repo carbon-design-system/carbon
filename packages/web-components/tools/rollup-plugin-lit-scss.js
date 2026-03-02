@@ -6,11 +6,9 @@
  */
 
 import path from 'path';
-import { promisify } from 'util';
 import * as sass from 'sass';
 import { createFilter } from '@rollup/pluginutils';
 
-const renderSass = promisify(sass.render);
 const noop = (s) => s;
 
 /**
@@ -70,18 +68,11 @@ export default function LitSCSS({
         );
        ${contents}`;
 
-      const { css } = await renderSass({
-        ...options,
-        file: id,
-        data: finalContent,
-        // suppress mixed-declarations warnings until resolved in
-        // https://github.com/carbon-design-system/carbon/issues/16962
-        logger: {
-          warn: (message) =>
-            message.includes('mixed-decls')
-              ? undefined
-              : { type: 'warn', message },
-        },
+      const { includePaths, ...sassOptions } = options;
+      const { css } = sass.compileString(finalContent, {
+        ...sassOptions,
+        url: `file://${path.resolve(id)}`,
+        loadPaths: includePaths || [],
       });
 
       return {

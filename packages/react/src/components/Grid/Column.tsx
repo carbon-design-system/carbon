@@ -1,21 +1,17 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
-import * as FeatureFlags from '@carbon/feature-flags';
+import { enabled } from '@carbon/feature-flags';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { usePrefix } from '../../internal/usePrefix';
-import { PolymorphicProps } from '../../types/common';
 import { useGridSettings } from './GridContext';
-import {
-  PolymorphicComponentPropWithRef,
-  PolymorphicRef,
-} from '../../internal/PolymorphicProps';
+import { PolymorphicComponentPropWithRef } from '../../internal/PolymorphicProps';
 
 type ColumnSpanPercent = '25%' | '50%' | '75%' | '100%';
 
@@ -97,11 +93,15 @@ export type ColumnProps<T extends React.ElementType> =
 export interface ColumnComponent {
   <T extends React.ElementType>(
     props: ColumnProps<T>,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
     context?: any
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
   ): React.ReactElement<any, any> | null;
 }
 
+// eslint-disable-next-line react/display-name -- https://github.com/carbon-design-system/carbon/issues/20452
 const Column = React.forwardRef<
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
   any,
   ColumnBaseProps & {
     as?: React.ElementType;
@@ -150,7 +150,7 @@ const Column = React.forwardRef<
 
 const percentSpanType = PropTypes.oneOf(['25%', '50%', '75%', '100%']);
 
-const spanPropType = FeatureFlags.enabled('enable-css-grid')
+const spanPropType = enabled('enable-css-grid')
   ? PropTypes.oneOfType([
       PropTypes.bool,
       PropTypes.number,
@@ -234,6 +234,7 @@ Column.propTypes = {
   xlg: spanPropType,
 };
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any , react/display-name -- https://github.com/carbon-design-system/carbon/issues/20452
 const CSSGridColumn = React.forwardRef<any, ColumnProps<any>>(
   (
     {

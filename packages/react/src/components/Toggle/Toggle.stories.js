@@ -77,7 +77,7 @@ Default.argTypes = {
   },
 };
 
-export const SmallToggle = () => {
+export const SmallToggle = (args) => {
   return (
     <Toggle
       size="sm"
@@ -86,6 +86,7 @@ export const SmallToggle = () => {
       labelB="On"
       defaultToggled
       id="toggle-2"
+      {...args}
     />
   );
 };
@@ -117,10 +118,14 @@ export const WithAccessibleLabels = () => {
   );
 };
 
-export const Skeleton = () => {
+export const Skeleton = (args) => {
   return (
     <div>
       <ToggleSkeleton />
     </div>
   );
+};
+
+Skeleton.parameters = {
+  controls: { include: ['className'] },
 };

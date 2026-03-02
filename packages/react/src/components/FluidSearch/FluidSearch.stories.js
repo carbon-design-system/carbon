@@ -7,10 +7,19 @@
 
 import React from 'react';
 import { FluidSearch, FluidSearchSkeleton } from '.';
+import mdx from './FluidSearch.mdx';
 
 export default {
-  title: 'Experimental/Fluid Components/unstable__FluidSearch',
+  title: 'Components/Fluid Components/FluidSearch',
   component: FluidSearch,
+  parameters: {
+    docs: {
+      page: mdx,
+    },
+    controls: {
+      exclude: ['id'],
+    },
+  },
   subcomponents: {
     FluidSearchSkeleton,
   },
@@ -40,11 +49,6 @@ Default.argTypes = {
   defaultWidth: {
     control: { type: 'range', min: 300, max: 800, step: 50 },
   },
-  className: {
-    table: {
-      disable: true,
-    },
-  },
   closeButtonLabelText: {
     control: {
       type: 'text',
@@ -53,11 +57,6 @@ Default.argTypes = {
   disabled: {
     control: {
       type: 'boolean',
-    },
-  },
-  id: {
-    table: {
-      disable: true,
     },
   },
   defaultValue: {

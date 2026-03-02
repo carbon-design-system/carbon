@@ -8,3 +8,4 @@
 export * from '@carbon/utilities';
 
 export * from './useNoInteractiveChildren';
+export * from './StepFlow';

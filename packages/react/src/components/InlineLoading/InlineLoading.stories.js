@@ -84,12 +84,13 @@ Default.args = {
   iconDescription: 'Loading data...',
 };
 
-Default.argTypes = {
-  className: {
-    table: {
-      disable: true,
-    },
+Default.parameters = {
+  controls: {
+    exclude: ['successDelay'],
   },
+};
+
+Default.argTypes = {
   description: {
     control: {
       type: 'text',
@@ -98,16 +99,6 @@ Default.argTypes = {
   iconDescription: {
     control: {
       type: 'text',
-    },
-  },
-  onSuccess: {
-    table: {
-      disable: true,
-    },
-  },
-  successDelay: {
-    table: {
-      disable: true,
     },
   },
 };

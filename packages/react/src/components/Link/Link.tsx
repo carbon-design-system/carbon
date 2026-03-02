@@ -72,10 +72,13 @@ export type LinkProps<T extends React.ElementType> =
 
 type LinkComponent = <T extends React.ElementType = 'a'>(
   props: LinkProps<T>
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
 ) => React.ReactElement | any;
 
 // First create the component with basic types
+// eslint-disable-next-line react/display-name -- https://github.com/carbon-design-system/carbon/issues/20452
 const LinkBase = React.forwardRef<
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
   any,
   LinkBaseProps & {
     as?: ElementType;
@@ -120,6 +123,7 @@ const LinkBase = React.forwardRef<
       linkProps['aria-disabled'] = true;
     }
 
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
     const BaseComponentAsAny = (BaseComponent ?? 'a') as any;
 
     const handleOnClick = (event: React.MouseEvent<HTMLAnchorElement>) => {
@@ -143,9 +147,9 @@ const LinkBase = React.forwardRef<
         onClick={handleOnClick}>
         {children}
         {!inline && Icon && (
-          <div className={`${prefix}--link__icon`}>
+          <span className={`${prefix}--link__icon`}>
             <Icon />
-          </div>
+          </span>
         )}
       </BaseComponentAsAny>
     );
@@ -153,8 +157,10 @@ const LinkBase = React.forwardRef<
 );
 const Link = LinkBase as LinkComponent;
 
-(Link as React.FC).displayName = 'Link';
-(Link as React.FC).propTypes = {
+// @ts-expect-error - `displayName` isn't typed.
+Link.displayName = 'Link';
+// @ts-expect-error - `propTypes` isn't typed.
+Link.propTypes = {
   /**
    * Provide a custom element or component to render the top-level node for the
    * component.

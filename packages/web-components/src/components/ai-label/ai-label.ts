@@ -1,19 +1,22 @@
 /**
- * Copyright IBM Corp. 2019, 2024
+ * Copyright IBM Corp. 2019, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
 import { classMap } from 'lit/directives/class-map.js';
-import { html } from 'lit';
+import { adoptStyles, html } from 'lit';
 import { property } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
 import CDSToggleTip from '../toggle-tip/toggletip';
+import popoverStyles from '../popover/popover.scss?lit';
+import toggletipStyles from '../toggle-tip/toggletip.scss?lit';
 import styles from './ai-label.scss?lit';
-import Undo16 from '@carbon/icons/lib/undo/16.js';
+import Undo16 from '@carbon/icons/es/undo/16.js';
 import { AI_LABEL_SIZE, AI_LABEL_KIND } from './defs';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
+import { iconLoader } from '../../globals/internal/icon-loader';
 
 /**
  * Basic AI Label.
@@ -74,58 +77,21 @@ class CDSAILabel extends CDSToggleTip {
   previousValue;
 
   connectedCallback() {
-    super.connectedCallback?.();
-    document.addEventListener('click', this._handleOutsideClick, true);
-    document.addEventListener('focusin', this._handleFocusChange, true);
-  }
-  disconnectedCallback() {
-    super.disconnectedCallback?.();
-    document.removeEventListener('click', this._handleOutsideClick, true);
-    document.removeEventListener('click', this._handleFocusChange, true);
-  }
+    super.connectedCallback();
 
-  private _handleOutsideClick = (event: MouseEvent) => {
-    const path = event.composedPath();
-    if (!path.includes(this)) {
-      this.open = false;
-      this.requestUpdate();
-    }
-  };
-
-  private _handleFocusChange = (event: FocusEvent) => {
-    if (
-      this.open &&
-      (!(event.target instanceof Node) || !this.contains(event.target))
-    ) {
-      this.open = false;
-      this.requestUpdate();
-    }
-  };
+    adoptStyles(this.renderRoot as ShadowRoot, [
+      popoverStyles,
+      toggletipStyles,
+      styles,
+    ]);
+  }
 
   protected _handleClick = () => {
-    const activeElement = document.activeElement;
-    if (activeElement instanceof HTMLElement) {
-      activeElement.blur();
-    }
-
     if (this.revertActive) {
       this.revertActive = false;
       this.removeAttribute('revert-active');
     } else {
-      this.open = !this.open;
-      this.requestUpdate();
-    }
-  };
-
-  protected _handleAIKeydown = (event: KeyboardEvent) => {
-    if (event.key === 'Enter' || event.key === ' ' || event.key === 'Escape') {
-      event.stopPropagation();
-    }
-
-    if (event.key === 'Escape') {
-      event.preventDefault();
-      this.open = false;
-      this.requestUpdate();
+      super._handleClick();
     }
   };
 
@@ -148,7 +114,6 @@ class CDSAILabel extends CDSToggleTip {
       <button
         aria-controls="${this.id}"
         @click="${this._handleClick}"
-        @keydown="${this._handleAIKeydown}"
         class=${classes}
         aria-label="${ariaLabel}">
         <span class="${prefix}--slug__text">${aiText}</span>
@@ -172,10 +137,9 @@ class CDSAILabel extends CDSToggleTip {
               ?autoalign=${autoalign}
               kind="ghost"
               size="sm"
-              @click="${this._handleClick}"
-              @keydown="${this._handleAIKeydown}">
+              @click="${this._handleClick}">
               <span slot="tooltip-content"> ${revertLabel} </span>
-              ${Undo16({ slot: 'icon' })}
+              ${iconLoader(Undo16, { slot: 'icon' })}
             </cds-icon-button>
           `
         : html`
@@ -187,11 +151,12 @@ class CDSAILabel extends CDSToggleTip {
   attributeChangedCallback(name, old, newValue) {
     super.attributeChangedCallback(name, old, newValue);
 
-    //@ts-ignore typescript does not think requestUpdate() exists on parentElement
-    name === 'revert-active' ? this.parentElement?.requestUpdate() : ``;
+    if (name === 'revert-active') {
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20452
+      // @ts-ignore typescript does not think requestUpdate() exists on parentElement
+      this.parentElement?.requestUpdate();
+    }
   }
-
-  static styles = styles;
 }
 
 export default CDSAILabel;

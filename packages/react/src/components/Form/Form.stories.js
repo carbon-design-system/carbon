@@ -496,16 +496,6 @@ withAILabel.args = {
 };
 
 withAILabel.argTypes = {
-  children: {
-    table: {
-      disable: true,
-    },
-  },
-  className: {
-    table: {
-      disable: true,
-    },
-  },
   disabled: {
     control: {
       type: 'boolean',

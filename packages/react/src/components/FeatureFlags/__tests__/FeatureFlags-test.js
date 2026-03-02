@@ -1,18 +1,18 @@
 /**
- * Copyright IBM Corp. 2015, 2023
+ * Copyright IBM Corp. 2015, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
-import * as GlobalFeatureFlags from '@carbon/feature-flags';
+import { add } from '@carbon/feature-flags';
 import { render } from '@testing-library/react';
 import React from 'react';
 import { FeatureFlags, useFeatureFlags, useFeatureFlag } from '../';
 
 describe('FeatureFlags', () => {
   it('should default to the global feature flag scope', () => {
-    GlobalFeatureFlags.add('enable-feature-flags-test', true);
+    add('enable-feature-flags-test', true);
 
     const checkFlags = jest.fn();
     const checkFlag = jest.fn();
@@ -33,7 +33,7 @@ describe('FeatureFlags', () => {
     expect(checkFlag).toHaveBeenLastCalledWith(true);
   });
   it('should provide access to the feature flags for a scope through deprecated flags prop', () => {
-    consoleSpy = jest.spyOn(console, 'warn').mockImplementation(() => {});
+    const consoleSpy = jest.spyOn(console, 'warn').mockImplementation(() => {});
     const checkFlags = jest.fn();
     const checkFlag = jest.fn();
 
@@ -55,21 +55,24 @@ describe('FeatureFlags', () => {
       return null;
     }
 
-    render(
-      <FeatureFlags flags={{ a: true, b: false }}>
-        <TestComponent />
-      </FeatureFlags>
-    );
+    try {
+      render(
+        <FeatureFlags flags={{ a: true, b: false }}>
+          <TestComponent />
+        </FeatureFlags>
+      );
 
-    expect(checkFlags).toHaveBeenLastCalledWith({
-      a: true,
-      b: false,
-    });
-    expect(checkFlag).toHaveBeenLastCalledWith({
-      a: true,
-      b: false,
-    });
-    consoleSpy.mockRestore();
+      expect(checkFlags).toHaveBeenLastCalledWith({
+        a: true,
+        b: false,
+      });
+      expect(checkFlag).toHaveBeenLastCalledWith({
+        a: true,
+        b: false,
+      });
+    } finally {
+      consoleSpy.mockRestore();
+    }
   });
 
   it('should provide access to the feature flags for a scope', () => {
@@ -225,6 +228,46 @@ describe('FeatureFlags', () => {
       enableV12Overflowmenu: false,
       enableTreeviewControllable: false,
     });
+  });
+
+  it('should update nested scope when parent scope changes', () => {
+    const checkFlag = jest.fn();
+    const consoleSpy = jest.spyOn(console, 'warn').mockImplementation(() => {});
+
+    const TestComponent = () => {
+      const a = useFeatureFlag('a');
+
+      checkFlag(a);
+
+      return null;
+    };
+
+    try {
+      const { rerender } = render(
+        <FeatureFlags flags={{ a: false }}>
+          <FeatureFlags>
+            <TestComponent />
+          </FeatureFlags>
+        </FeatureFlags>
+      );
+
+      expect(checkFlag).toHaveBeenLastCalledWith(false);
+      checkFlag.mockClear();
+
+      rerender(
+        <FeatureFlags flags={{ a: true }}>
+          <FeatureFlags>
+            <TestComponent />
+          </FeatureFlags>
+        </FeatureFlags>
+      );
+
+      expect(checkFlag).toHaveBeenCalled();
+      expect(checkFlag.mock.calls).toEqual([[true]]);
+      expect(checkFlag).toHaveBeenLastCalledWith(true);
+    } finally {
+      consoleSpy.mockRestore();
+    }
   });
 
   it('should handle boolean props and flags object with no overlapping keys', () => {
@@ -580,6 +623,60 @@ describe('FeatureFlags', () => {
       });
     });
 
+    it('enable-focus-wrap-without-sentinels - enableFocusWrapWithoutSentinels', () => {
+      const checkFlags = jest.fn();
+      const checkFlag = jest.fn();
+
+      function TestComponent() {
+        const featureFlags = useFeatureFlags();
+        const enableFocusWrapWithoutSentinels = useFeatureFlag(
+          'enable-focus-wrap-without-sentinels'
+        );
+
+        checkFlags({
+          enableFocusWrapWithoutSentinels: featureFlags.enabled(
+            'enable-focus-wrap-without-sentinels'
+          ),
+        });
+
+        checkFlag({
+          enableFocusWrapWithoutSentinels,
+        });
+
+        return null;
+      }
+
+      // Render the default
+      const { rerender } = render(
+        <FeatureFlags>
+          <TestComponent />
+        </FeatureFlags>
+      );
+
+      // Ensure the default value is as defined and as expected
+      expect(checkFlags).toHaveBeenLastCalledWith({
+        enableFocusWrapWithoutSentinels: false,
+      });
+      expect(checkFlag).toHaveBeenLastCalledWith({
+        enableFocusWrapWithoutSentinels: false,
+      });
+
+      // Enable the flag
+      rerender(
+        <FeatureFlags enableFocusWrapWithoutSentinels>
+          <TestComponent />
+        </FeatureFlags>
+      );
+
+      // Ensure that when enabled, this flag does not error
+      expect(checkFlags).toHaveBeenLastCalledWith({
+        enableFocusWrapWithoutSentinels: true,
+      });
+      expect(checkFlag).toHaveBeenLastCalledWith({
+        enableFocusWrapWithoutSentinels: true,
+      });
+    });
+
     it('enable-v12-dynamic-floating-styles - enableV12DynamicFloatingStyles', () => {
       const checkFlags = jest.fn();
       const checkFlag = jest.fn();
@@ -633,6 +730,7 @@ describe('FeatureFlags', () => {
         enableV12DynamicFloatingStyles: true,
       });
     });
+
     it('enable-enhanced-file-uploader - enableEnhancedFileUploader', () => {
       const checkFlags = jest.fn();
       const checkFlag = jest.fn();
@@ -684,6 +782,56 @@ describe('FeatureFlags', () => {
       });
       expect(checkFlag).toHaveBeenLastCalledWith({
         enableEnhancedFileUploader: true,
+      });
+    });
+
+    it('enable-presence - enablePresence', () => {
+      const checkFlags = jest.fn();
+      const checkFlag = jest.fn();
+
+      function TestComponent() {
+        const featureFlags = useFeatureFlags();
+        const enablePresence = useFeatureFlag('enable-presence');
+
+        checkFlags({
+          enablePresence: featureFlags.enabled('enable-presence'),
+        });
+
+        checkFlag({
+          enablePresence,
+        });
+
+        return null;
+      }
+
+      // Render the default
+      const { rerender } = render(
+        <FeatureFlags>
+          <TestComponent />
+        </FeatureFlags>
+      );
+
+      // Ensure the default value is as defined and as expected
+      expect(checkFlags).toHaveBeenLastCalledWith({
+        enablePresence: false,
+      });
+      expect(checkFlag).toHaveBeenLastCalledWith({
+        enablePresence: false,
+      });
+
+      // Enable the flag
+      rerender(
+        <FeatureFlags enablePresence>
+          <TestComponent />
+        </FeatureFlags>
+      );
+
+      // Ensure that when enabled, this flag does not error
+      expect(checkFlags).toHaveBeenLastCalledWith({
+        enablePresence: true,
+      });
+      expect(checkFlag).toHaveBeenLastCalledWith({
+        enablePresence: true,
       });
     });
   });

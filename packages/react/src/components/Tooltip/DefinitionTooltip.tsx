@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2025
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -76,7 +76,7 @@ export interface DefinitionTooltipProps
   triggerClassName?: string;
 }
 
-const DefinitionTooltip: React.FC<DefinitionTooltipProps> = ({
+const DefinitionTooltip = ({
   align = 'bottom',
   autoAlign,
   className,
@@ -88,7 +88,7 @@ const DefinitionTooltip: React.FC<DefinitionTooltipProps> = ({
   tooltipText,
   triggerClassName,
   ...rest
-}) => {
+}: DefinitionTooltipProps) => {
   const [isOpen, setOpen] = useState(defaultOpen);
   const prefix = usePrefix();
   const tooltipId = useFallbackId(id);
@@ -111,7 +111,9 @@ const DefinitionTooltip: React.FC<DefinitionTooltipProps> = ({
         setOpen(false);
       }}
       onMouseEnter={() => {
-        openOnHover ? setOpen(true) : null;
+        if (openOnHover) {
+          setOpen(true);
+        }
       }}
       onFocus={() => {
         setOpen(true);

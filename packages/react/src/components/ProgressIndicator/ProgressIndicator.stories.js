@@ -28,7 +28,7 @@ export const Interactive = () => {
     <ProgressIndicator currentIndex={1} onChange={() => alert('Clicked')}>
       <ProgressStep
         label="Click me"
-        description="Step 1: Register a onChange event"
+        description="Step 1: Register an onChange event"
       />
       <ProgressStep
         label="Really long label"
@@ -84,21 +84,6 @@ Default.args = {
 };
 
 Default.argTypes = {
-  children: {
-    table: {
-      disable: true,
-    },
-  },
-  className: {
-    table: {
-      disable: true,
-    },
-  },
-  onChange: {
-    table: {
-      disable: true,
-    },
-  },
   currentIndex: {
     control: { type: 'number' },
   },

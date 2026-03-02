@@ -47,7 +47,7 @@ const InvalidPasswordProps = {
 };
 
 export default {
-  title: 'Experimental/Fluid Components/FluidForm',
+  title: 'Components/Fluid Components/FluidForm',
   component: FluidForm,
   parameters: {
     docs: {

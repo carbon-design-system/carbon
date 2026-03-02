@@ -1,11 +1,11 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
-import { render, screen, fireEvent } from '@testing-library/react';
+import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import React from 'react';
 import SideNav from '../SideNav';
 
@@ -333,5 +333,52 @@ describe('SideNav', () => {
     mockHeaderMenuButton.focus();
     fireEvent.keyDown(window, { key: 'Tab' });
     expect(document.activeElement).toBe(sideNav);
+  });
+
+  it('should set inert when not rail, not expanded, and below lg', async () => {
+    render(<SideNav aria-label="test" expanded={false} isRail={false} />);
+
+    const nav = screen.getByRole('navigation');
+
+    await waitFor(() => {
+      expect(nav).toHaveAttribute('inert');
+    });
+  });
+
+  it('should remove inert when expanded', async () => {
+    const { rerender } = render(
+      <SideNav aria-label="test" expanded={false} isRail={false} />
+    );
+
+    const nav = screen.getByRole('navigation');
+
+    await waitFor(() => expect(nav).toHaveAttribute('inert'));
+
+    rerender(<SideNav aria-label="test" expanded isRail={false} />);
+
+    await waitFor(() => {
+      expect(nav).not.toHaveAttribute('inert');
+    });
+  });
+
+  it('should not set inert at or above lg breakpoint', async () => {
+    window.matchMedia.mockImplementationOnce((query) => ({
+      matches: true,
+      media: query,
+      onchange: null,
+      addListener: jest.fn(),
+      removeListener: jest.fn(),
+      addEventListener: jest.fn(),
+      removeEventListener: jest.fn(),
+      dispatchEvent: jest.fn(),
+    }));
+
+    render(<SideNav aria-label="test" expanded={false} isRail={false} />);
+
+    const nav = screen.getByRole('navigation');
+
+    await waitFor(() => {
+      expect(nav).not.toHaveAttribute('inert');
+    });
   });
 });

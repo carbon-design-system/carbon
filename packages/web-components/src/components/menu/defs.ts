@@ -41,3 +41,18 @@ export enum MENU_ITEM_KIND {
    */
   DANGER = 'danger',
 }
+
+/**
+ * Menu background token.
+ */
+export enum MENU_BACKGROUND_TOKEN {
+  /**
+   * Use the layer token for the background.
+   */
+  LAYER = 'layer',
+
+  /**
+   * Use the background token for the background.
+   */
+  BACKGROUND = 'background',
+}

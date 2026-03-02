@@ -16,10 +16,19 @@ import {
 } from '../Toggletip';
 import { Information } from '@carbon/icons-react';
 import './test.scss';
+import mdx from './FluidTextInput.mdx';
 
 export default {
-  title: 'Experimental/Fluid Components/unstable__FluidTextInput',
+  title: 'Components/Fluid Components/FluidTextInput',
   component: FluidTextInput,
+  parameters: {
+    docs: {
+      page: mdx,
+    },
+    controls: {
+      exclude: ['isPassword'],
+    },
+  },
   subcomponents: {
     FluidTextInputSkeleton,
   },
@@ -47,7 +56,6 @@ export const Default = (args) => (
 
 Default.args = {
   defaultWidth: 300,
-  className: 'test-class',
   placeholder: 'Placeholder text',
   invalid: false,
   invalidText:
@@ -88,11 +96,6 @@ Default.argTypes = {
       type: 'text',
     },
   },
-  isPassword: {
-    table: {
-      disable: true,
-    },
-  },
   disabled: {
     control: {
       type: 'boolean',
@@ -120,7 +123,7 @@ Default.argTypes = {
   },
 };
 
-export const DefaultWithTooltip = () => (
+export const DefaultWithToggletip = () => (
   <FluidTextInput labelText={ToggleTip} placeholder="Placeholder text" />
 );
 

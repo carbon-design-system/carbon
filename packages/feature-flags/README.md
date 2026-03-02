@@ -21,8 +21,8 @@ yarn add @carbon/feature-flags
 ## Usage
 
 The `@carbon/feature-flags` provides a runtime-based feature flag system that
-you can use to enable or disable experimental features from Carbon or in your
-own code.
+you can use to enable or disable preview features from Carbon or in your own
+code.
 
 To check if a feature flag is enabled, you can use the `enabled` function in
 JavaScript:

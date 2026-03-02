@@ -93,6 +93,28 @@ describe('Menu', () => {
       expect(screen.getByRole('menu')).toHaveClass('cds--menu--lg');
     });
 
+    it('should add border class when border prop is true', () => {
+      render(<Menu open border />);
+
+      expect(screen.getByRole('menu')).toHaveClass('cds--menu--border');
+    });
+
+    it('should add background token class when backgroundToken is "background"', () => {
+      render(<Menu open backgroundToken="background" />);
+
+      expect(screen.getByRole('menu')).toHaveClass(
+        'cds--menu--background-token__background'
+      );
+    });
+
+    it('should not add background token class when backgroundToken is "layer"', () => {
+      render(<Menu open backgroundToken="layer" />);
+
+      expect(screen.getByRole('menu')).not.toHaveClass(
+        'cds--menu--background-token__background'
+      );
+    });
+
     it('should append to target element', () => {
       const el = document.createElement('div');
       document.body.appendChild(el);
@@ -102,6 +124,20 @@ describe('Menu', () => {
       // eslint-disable-next-line testing-library/no-node-access
       expect(document.querySelector('.custom-class')).toBeInTheDocument();
       document.body.removeChild(el);
+    });
+
+    it('should not call onClose when relatedTarget is null on blur', () => {
+      const onClose = jest.fn();
+      render(
+        <Menu open onClose={onClose} label="Test Menu">
+          <MenuItem label="item" />
+        </Menu>
+      );
+
+      const menu = screen.getByRole('menu');
+      fireEvent.blur(menu, { relatedTarget: null });
+
+      expect(onClose).not.toHaveBeenCalled();
     });
   });
 

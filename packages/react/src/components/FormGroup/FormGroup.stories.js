@@ -18,31 +18,12 @@ import mdx from './FormGroup.mdx';
 export default {
   title: 'Components/FormGroup',
   component: FormGroup,
-  argTypes: {
-    legendId: {
-      table: {
-        disable: true,
-      },
-    },
-    className: {
-      table: {
-        disable: true,
-      },
-    },
-    invalid: {
-      table: {
-        disable: true,
-      },
-    },
-    children: {
-      table: {
-        disable: true,
-      },
-    },
-  },
   parameters: {
     docs: {
       page: mdx,
+    },
+    controls: {
+      exclude: ['legendId', 'invalid'],
     },
   },
 };

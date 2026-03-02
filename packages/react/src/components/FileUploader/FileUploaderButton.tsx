@@ -115,14 +115,15 @@ function FileUploaderButton({
   onChange = noopFn,
   name,
   size = 'md',
-  // eslint-disable-next-line react/prop-types
+
   innerRef,
   ...other
 }: FileUploaderButtonProps) {
   const prefix = usePrefix();
   const [labelText, setLabelText] = useState(ownerLabelText);
   const [prevOwnerLabelText, setPrevOwnerLabelText] = useState(ownerLabelText);
-  const { current: inputId } = useRef(id || useId());
+  const generatedId = useId();
+  const { current: inputId } = useRef(id || generatedId);
   const inputNode = useRef<HTMLInputElement>(null);
   const classes = cx(`${prefix}--btn`, className, {
     [`${prefix}--btn--${buttonKind}`]: buttonKind,

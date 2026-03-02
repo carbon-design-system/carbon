@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2024
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -24,10 +24,6 @@ figma.connect(
         Small: 'sm',
       }),
       titleText: figma.string('Label text'),
-      hideLabel: figma.boolean('Show label', {
-        true: false,
-        false: true,
-      }),
       label: figma.string('Prompt text'),
       helperText: figma.boolean('Show helper', {
         true: figma.string('Helper text'),
@@ -82,10 +78,6 @@ figma.connect(
         Large: 'lg',
         Medium: 'md',
         Small: 'sm',
-      }),
-      hideLabel: figma.boolean('Show label', {
-        true: false,
-        false: true,
       }),
     },
     example: ({ ...props }) => {

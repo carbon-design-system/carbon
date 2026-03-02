@@ -5,13 +5,14 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { html, svg } from 'lit';
+import { html } from 'lit';
 import { classMap } from 'lit/directives/class-map.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { prefix } from '../../globals/settings';
 import SelectableTile from './selectable-tile';
-import CheckmarkFilled16 from '@carbon/icons/lib/checkmark--filled/16.js';
+import CheckmarkFilled16 from '@carbon/icons/es/checkmark--filled/16.js';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
+import { iconLoader } from '../../globals/internal/icon-loader';
 
 /**
  * Radio tile.
@@ -83,11 +84,9 @@ class CDSRadioTile extends SelectableTile {
         @change=${!disabled ? handleChange : undefined}
         @keydown="${!disabled ? handleKeydown : undefined}" />
       <label part="label" for="input" class="${classes}">
-        ${CheckmarkFilled16({
-          children: !checkmarkLabel
-            ? undefined
-            : svg`<title>${checkmarkLabel}</title>`,
+        ${iconLoader(CheckmarkFilled16, {
           class: `${prefix}--tile__checkmark`,
+          title: checkmarkLabel,
         })}
         <div class="${prefix}--tile-content"><slot></slot></div>
       </label>

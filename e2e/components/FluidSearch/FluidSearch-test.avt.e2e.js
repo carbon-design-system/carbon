@@ -14,7 +14,7 @@ test.describe('@avt FluidSearch', () => {
   test('@avt-default-state', async ({ page }) => {
     await visitStory(page, {
       component: 'FluidSearch',
-      id: 'experimental-fluid-components-unstable-fluidsearch--default',
+      id: 'components-fluid-components-fluidsearch--default',
       globals: {
         theme: 'white',
       },
@@ -25,7 +25,7 @@ test.describe('@avt FluidSearch', () => {
   test('@avt-advanced-states skeleton', async ({ page }) => {
     await visitStory(page, {
       component: 'FluidSearch',
-      id: 'experimental-fluid-components-unstable-fluidsearch--skeleton',
+      id: 'components-fluid-components-fluidsearch--skeleton',
       globals: {
         theme: 'white',
       },
@@ -36,7 +36,7 @@ test.describe('@avt FluidSearch', () => {
   test('@avt-keyboard-nav', async ({ page }) => {
     await visitStory(page, {
       component: 'Search',
-      id: 'experimental-fluid-components-unstable-fluidsearch--default',
+      id: 'components-fluid-components-fluidsearch--default',
       globals: {
         theme: 'white',
       },

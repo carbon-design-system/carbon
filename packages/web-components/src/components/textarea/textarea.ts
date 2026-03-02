@@ -8,14 +8,15 @@
 import { LitElement, html } from 'lit';
 import { property, query } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
-import WarningFilled16 from '@carbon/icons/lib/warning--filled/16.js';
-import WarningAltFilled16 from '@carbon/icons/lib/warning--alt--filled/16.js';
 import { prefix } from '../../globals/settings';
+import WarningFilled16 from '@carbon/icons/es/warning--filled/16.js';
+import WarningAltFilled16 from '@carbon/icons/es/warning--alt--filled/16.js';
 import ifNonEmpty from '../../globals/directives/if-non-empty';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import CDSTextInput from '../text-input/text-input';
 import styles from './textarea.scss?lit';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
+import { iconLoader } from '../../globals/internal/icon-loader';
 
 /**
  * Text area.
@@ -102,6 +103,12 @@ class CDSTextarea extends CDSTextInput {
   cols;
 
   /**
+   * Specify whether the textarea is fluid or not
+   */
+  @property({ type: Boolean })
+  isFluid = false;
+
+  /**
    * Specify the method used for calculating the counter number
    */
   @property({
@@ -155,10 +162,10 @@ class CDSTextarea extends CDSTextInput {
   private _prevCounterMode: 'character' | 'word' = this.counterMode;
 
   /**
-   * The previous cols value. This lets updated() conditionally call _measureWrapper()
-   * if the cols value has changed.
+   * Observes the textarea wrapper’s size to re-measure helper/invalid/warn text width when
+   * cols is updated
    */
-  private _prevCols?: number;
+  private _resizeObserver?: ResizeObserver;
 
   render() {
     const { enableCounter, maxCount } = this;
@@ -166,11 +173,11 @@ class CDSTextarea extends CDSTextInput {
     const textCount = this.value?.length ?? 0;
     const wordCount = this.value?.match(/\p{L}+/gu)?.length || 0;
 
-    const invalidIcon = WarningFilled16({
+    const invalidIcon = iconLoader(WarningFilled16, {
       class: `${prefix}--text-area__invalid-icon`,
     });
 
-    const warnIcon = WarningAltFilled16({
+    const warnIcon = iconLoader(WarningAltFilled16, {
       class: `${prefix}--text-area__invalid-icon ${prefix}--text-area__invalid-icon--warning`,
     });
 
@@ -197,6 +204,7 @@ class CDSTextarea extends CDSTextInput {
     const counterClasses = classMap({
       [`${prefix}--label`]: true,
       [`${prefix}--label--disabled`]: this.disabled,
+      [`${prefix}--text-area__label-counter`]: true,
     });
 
     const helperTextClasses = classMap({
@@ -224,6 +232,29 @@ class CDSTextarea extends CDSTextInput {
       return null;
     };
 
+    const helper = html`
+      <div class="${helperTextClasses}" id="helper-text">
+        <slot name="helper-text">${this.helperText}</slot>
+      </div>
+    `;
+
+    const normalizedProps = {
+      invalid: this.invalid,
+      warn: this.warn,
+      'slot-name': this.invalid ? 'invalid-text' : 'warn-text',
+      'slot-text': this.invalid ? this.invalidText : this.warnText,
+    };
+
+    const validationMessage = html`
+      <div
+        class="${prefix}--form-requirement"
+        ?hidden="${!normalizedProps.invalid && !normalizedProps.warn}">
+        <slot name="${normalizedProps['slot-name']}">
+          ${normalizedProps['slot-text']} ${this.isFluid ? icon() : null}
+        </slot>
+      </div>
+    `;
+
     return html`
       <div class="${prefix}--text-area__label-wrapper">
         <label class="${labelClasses}" for="input">
@@ -232,7 +263,7 @@ class CDSTextarea extends CDSTextInput {
         ${counter}
       </div>
       <div class="${textareaWrapperClasses}" ?data-invalid="${this.invalid}">
-        ${icon()}
+        ${!this.isFluid ? icon() : null}
         <textarea
           autocomplete="${this.autocomplete}"
           ?autofocus="${this.autofocus}"
@@ -256,25 +287,19 @@ class CDSTextarea extends CDSTextInput {
           @input="${this._handleInput}"></textarea>
         <slot name="ai-label" @slotchange="${this._handleSlotChange}"></slot>
         <slot name="slug" @slotchange="${this._handleSlotChange}"></slot>
+        ${this.isFluid
+          ? html`
+              <hr class="${prefix}--text-area__divider" />
+              ${validationMessage}
+            `
+          : null}
       </div>
-      <div class="${helperTextClasses}" ?hidden="${this.invalid || this.warn}">
-        <slot name="helper-text"> ${this.helperText} </slot>
-      </div>
-      <div
-        class="${prefix}--form-requirement"
-        ?hidden="${!this.invalid && !this.warn}">
-        <slot name="${this.invalid ? 'invalid-text' : 'warn-text'}">
-          ${this.invalid ? this.invalidText : this.warnText}
-        </slot>
-      </div>
+      ${/* Non-fluid: validation and helper outside field wrapper */ ''}
+      ${!this.isFluid ? html` ${helper} ${validationMessage} ` : null}
     `;
   }
   updated(): void {
     super.updated?.();
-    if (this.cols !== this._prevCols) {
-      this._prevCols = this.cols;
-      this._measureWrapper();
-    }
     if (this.counterMode !== this._prevCounterMode) {
       const textarea = this._textarea;
       if (textarea) {
@@ -286,6 +311,16 @@ class CDSTextarea extends CDSTextInput {
       }
       this._prevCounterMode = this.counterMode;
     }
+
+    const wrapper = this.shadowRoot?.querySelector<HTMLElement>(
+      `.${prefix}--text-area__wrapper`
+    );
+    if (!wrapper) return;
+
+    this._resizeObserver = new ResizeObserver(() => {
+      this._measureWrapper();
+    });
+    this._resizeObserver.observe(wrapper);
   }
 
   /**
@@ -311,6 +346,11 @@ class CDSTextarea extends CDSTextInput {
         el.style.overflowWrap = 'break-word';
       }
     });
+  }
+
+  disconnectedCallback() {
+    super.disconnectedCallback?.();
+    this._resizeObserver?.disconnect();
   }
 
   static shadowRootOptions = {

@@ -6,7 +6,8 @@
  */
 
 import { LitElement, html } from 'lit';
-import ChevronRight16 from '@carbon/icons/lib/chevron--right/16.js';
+import { iconLoader } from '../../globals/internal/icon-loader';
+import ChevronRight16 from '@carbon/icons/es/chevron--right/16.js';
 import { prefix } from '../../globals/settings';
 import '../skeleton-text/index';
 import styles from './accordion.scss?lit';
@@ -20,7 +21,7 @@ class CDSAccordionItemSkeleton extends LitElement {
   render() {
     return html`
       <span class="${prefix}--accordion__heading">
-        ${ChevronRight16({
+        ${iconLoader(ChevronRight16, {
           part: 'expando-icon',
           class: `${prefix}--accordion__arrow`,
         })}

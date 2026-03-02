@@ -246,10 +246,14 @@ Default.args = {
 };
 
 Default.argTypes = {
-  active: { control: { disable: true } },
-  selected: { control: { disable: true } },
   size: {
     options: ['xs', 'sm'],
     control: { type: 'select' },
+  },
+};
+
+Default.parameters = {
+  controls: {
+    exclude: ['active', 'selected'],
   },
 };

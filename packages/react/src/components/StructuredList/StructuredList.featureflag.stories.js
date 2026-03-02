@@ -30,13 +30,6 @@ export default {
     StructuredListCell,
   },
   tags: ['!autodocs'],
-  argTypes: {
-    children: {
-      table: {
-        disable: true,
-      },
-    },
-  },
   decorators: [
     (Story) => (
       <WithFeatureFlags>
@@ -85,16 +78,9 @@ export const Selection = (args) => {
   );
 };
 
-Selection.argTypes = {
-  isFlush: {
-    table: {
-      disable: true,
-    },
-  },
-  selection: {
-    control: {
-      disable: true,
-    },
+Selection.parameters = {
+  controls: {
+    exclude: ['isFlush', 'selection'],
   },
 };
 

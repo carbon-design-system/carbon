@@ -10,6 +10,11 @@
  */
 export enum MENU_BUTTON_SIZE {
   /**
+   * Extra Small size
+   */
+  EXTRA_SMALL = 'xs',
+
+  /**
    * Small size.
    */
   SMALL = 'sm',

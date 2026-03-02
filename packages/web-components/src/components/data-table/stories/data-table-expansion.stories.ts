@@ -105,10 +105,7 @@ export const Default = {
               ><cds-link disabled>Disabled</cds-link></cds-table-cell
             >
           </cds-table-row>
-          <cds-table-expanded-row>
-            <h6>Expandable row content</h6>
-            <div>Description here</div>
-          </cds-table-expanded-row>
+          
           <cds-table-row>
             <cds-table-cell>Load Balancer 4</cds-table-cell>
             <cds-table-cell>HTTP</cds-table-cell>
@@ -128,11 +125,7 @@ export const Default = {
             <cds-table-cell>DNS delegation</cds-table-cell>
             <cds-table-cell>Ronja's VM Groups</cds-table-cell>
             <cds-table-cell><cds-link>Active</cds-link></cds-table-cell>
-          </cds-table-row>
-          <cds-table-expanded-row>
-            <h6>Expandable row content</h6>
-            <div>Description here</div>
-          </cds-table-expanded-row>`;
+          </cds-table-row>`;
       }
     }, 1);
 
@@ -206,10 +199,6 @@ export const BatchExpansion = {
           <cds-table-cell>Maureen's VM Groups</cds-table-cell>
           <cds-table-cell><cds-link>Starting</cds-link></cds-table-cell>
         </cds-table-row>
-        <cds-table-expanded-row>
-          <h6>Expandable row content</h6>
-          <div>Description here</div>
-        </cds-table-expanded-row>
         <cds-table-row>
           <cds-table-cell>Load Balancer 2</cds-table-cell>
           <cds-table-cell>HTTP</cds-table-cell>
@@ -244,10 +233,6 @@ export const BatchExpansion = {
           <cds-table-cell>Mel's VM Groups</cds-table-cell>
           <cds-table-cell><cds-link>Starting</cds-link></cds-table-cell>
         </cds-table-row>
-        <cds-table-expanded-row>
-          <h6>Expandable row content</h6>
-          <div>Description here</div>
-        </cds-table-expanded-row>
         <cds-table-row>
           <cds-table-cell>Load Balancer 5</cds-table-cell>
           <cds-table-cell>HTTP</cds-table-cell>

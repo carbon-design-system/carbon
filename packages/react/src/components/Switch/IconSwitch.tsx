@@ -11,7 +11,6 @@ import React, {
   useState,
   type KeyboardEvent,
   type MouseEvent,
-  type ReactNode,
 } from 'react';
 import classNames from 'classnames';
 import { IconButton, type IconButtonProps } from '../IconButton';

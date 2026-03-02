@@ -14,7 +14,7 @@ const path = require('path');
 // Remove the "usage" field from icons in icons.yml
 async function migrate() {
   const metadataPath = path.resolve(__dirname, '../../../../icons/icons.yml');
-  const metadata = yaml.safeLoad(await fs.readFile(metadataPath, 'utf8'));
+  const metadata = yaml.load(await fs.readFile(metadataPath, 'utf8'));
 
   for (const icon of metadata) {
     if (icon.usage) {
@@ -24,7 +24,7 @@ async function migrate() {
 
   await fs.writeFile(
     metadataPath,
-    yaml.safeDump(metadata, {
+    yaml.dump(metadata, {
       noRefs: true,
     })
   );

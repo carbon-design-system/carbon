@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -62,6 +62,24 @@ describe('RadioButtonGroup', () => {
       .closest('fieldset');
     expect(fieldset).toContainElement(screen.getByLabelText('test-1'));
     expect(fieldset).toContainElement(screen.getByLabelText('test-2'));
+  });
+
+  it('should render helperText', () => {
+    render(
+      <RadioButtonGroup legendText="test" helperText="Helper text">
+        <RadioButton labelText="test-1" value="test-1" />
+      </RadioButtonGroup>
+    );
+    expect(screen.getByText('Helper text')).toBeInTheDocument();
+  });
+
+  it('should render helperText with value 0', () => {
+    render(
+      <RadioButtonGroup legendText="test" helperText={0}>
+        <RadioButton labelText="test-1" value="test-1" />
+      </RadioButtonGroup>
+    );
+    expect(screen.getByText('0')).toBeInTheDocument();
   });
 
   it('should ignore null children', () => {
@@ -187,6 +205,23 @@ describe('RadioButtonGroup', () => {
         screen.getByRole('radio', {
           checked: true,
         })
+      );
+    });
+
+    it('should keep `defaultSelected` when `valueSelected` is undefined', () => {
+      render(
+        <RadioButtonGroup
+          defaultSelected="test-1"
+          valueSelected={undefined}
+          name="test"
+          legendText="test">
+          <RadioButton labelText="test-1" value="test-1" />
+          <RadioButton labelText="test-2" value="test-2" />
+        </RadioButtonGroup>
+      );
+
+      expect(screen.getByLabelText('test-1')).toEqual(
+        screen.getByRole('radio', { checked: true })
       );
     });
 
@@ -326,6 +361,122 @@ describe('RadioButtonGroup', () => {
 
       expect(screen.getByDisplayValue('option-1')).toBeRequired();
       expect(screen.getByDisplayValue('option-2')).toBeRequired();
+    });
+
+    describe('Invalid and Warning States', () => {
+      it('should apply invalid class when invalid prop is true', () => {
+        const { container } = render(
+          <RadioButtonGroup
+            invalid={true}
+            invalidText="Invalid selection"
+            name="test"
+            legendText="test">
+            <RadioButton labelText="test-1" value="test-1" />
+            <RadioButton labelText="test-2" value="test-2" />
+          </RadioButtonGroup>
+        );
+
+        const fieldset = container.querySelector('fieldset');
+        expect(fieldset).toHaveClass(`${prefix}--radio-button-group--invalid`);
+        expect(screen.getByText('Invalid selection')).toBeInTheDocument();
+      });
+
+      it('should apply warning class when warn prop is true', () => {
+        const { container } = render(
+          <RadioButtonGroup
+            warn={true}
+            warnText="Warning message"
+            name="test"
+            legendText="test">
+            <RadioButton labelText="test-1" value="test-1" />
+            <RadioButton labelText="test-2" value="test-2" />
+          </RadioButtonGroup>
+        );
+
+        const fieldset = container.querySelector('fieldset');
+        expect(fieldset).toHaveClass(`${prefix}--radio-button-group--warning`);
+        expect(screen.getByText('Warning message')).toBeInTheDocument();
+      });
+
+      it('should not apply invalid class or show invalid text when disabled and invalid', () => {
+        const { container } = render(
+          <RadioButtonGroup
+            disabled={true}
+            invalid={true}
+            invalidText="Invalid selection"
+            name="test"
+            legendText="test">
+            <RadioButton labelText="test-1" value="test-1" />
+            <RadioButton labelText="test-2" value="test-2" />
+          </RadioButtonGroup>
+        );
+
+        const fieldset = container.querySelector('fieldset');
+        expect(fieldset).not.toHaveClass(
+          `${prefix}--radio-button-group--invalid`
+        );
+        expect(screen.queryByText('Invalid selection')).not.toBeInTheDocument();
+      });
+
+      it('should not apply warning class or show warning text when disabled and warn', () => {
+        const { container } = render(
+          <RadioButtonGroup
+            disabled={true}
+            warn={true}
+            warnText="Warning message"
+            name="test"
+            legendText="test">
+            <RadioButton labelText="test-1" value="test-1" />
+            <RadioButton labelText="test-2" value="test-2" />
+          </RadioButtonGroup>
+        );
+
+        const fieldset = container.querySelector('fieldset');
+        expect(fieldset).not.toHaveClass(
+          `${prefix}--radio-button-group--warning`
+        );
+        expect(screen.queryByText('Warning message')).not.toBeInTheDocument();
+      });
+
+      it('should not apply invalid class or show invalid text when readOnly and invalid', () => {
+        const { container } = render(
+          <RadioButtonGroup
+            readOnly={true}
+            invalid={true}
+            invalidText="Invalid selection"
+            name="test"
+            legendText="test">
+            <RadioButton labelText="test-1" value="test-1" />
+            <RadioButton labelText="test-2" value="test-2" />
+          </RadioButtonGroup>
+        );
+
+        const fieldset = container.querySelector('fieldset');
+        expect(fieldset).not.toHaveClass(
+          `${prefix}--radio-button-group--invalid`
+        );
+        expect(screen.queryByText('Invalid selection')).not.toBeInTheDocument();
+      });
+
+      it('should not apply warning class or show warning text when readOnly and warn', () => {
+        const { container } = render(
+          <RadioButtonGroup
+            readOnly={true}
+            warn={true}
+            warnText="Warning message"
+            name="test"
+            legendText="test">
+            <RadioButton labelText="test-1" value="test-1" />
+            <RadioButton labelText="test-2" value="test-2" />
+          </RadioButtonGroup>
+        );
+
+        const fieldset = container.querySelector('fieldset');
+        expect(fieldset).not.toHaveClass(
+          `${prefix}--radio-button-group--warning`
+        );
+        expect(screen.queryByText('Warning message')).not.toBeInTheDocument();
+      });
     });
   });
 });

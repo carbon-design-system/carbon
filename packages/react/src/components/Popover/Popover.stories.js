@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -29,32 +29,10 @@ export default {
   parameters: {
     controls: {
       hideNoControlsWarning: true,
+      exclude: ['relative'],
     },
     docs: {
       page: mdx,
-    },
-  },
-};
-
-const sharedArgTypes = {
-  as: {
-    table: {
-      disable: true,
-    },
-  },
-  children: {
-    table: {
-      disable: true,
-    },
-  },
-  className: {
-    table: {
-      disable: true,
-    },
-  },
-  relative: {
-    table: {
-      disable: true,
     },
   },
 };
@@ -91,8 +69,6 @@ const DefaultStory = (props) => {
     </Popover>
   );
 };
-
-DefaultStory.argTypes = { ...sharedArgTypes };
 
 export const TabTip = (args) => {
   const [open, setOpen] = useState(true);
@@ -186,9 +162,26 @@ export const TabTip = (args) => {
 };
 
 TabTip.argTypes = {
-  ...sharedArgTypes,
-  align: { control: false },
-  autoAlign: { control: false },
+  align: {
+    table: {
+      disable: true,
+    },
+  },
+  autoAlign: {
+    table: {
+      disable: true,
+    },
+  },
+  highContrast: {
+    table: {
+      disable: true,
+    },
+  },
+  caret: {
+    table: {
+      disable: true,
+    },
+  },
 };
 
 export const Default = DefaultStory.bind({});
@@ -201,6 +194,11 @@ Default.args = {
 };
 
 Default.argTypes = {
+  isTabTip: {
+    table: {
+      disable: true,
+    },
+  },
   align: {
     options: [
       'top',
@@ -221,6 +219,11 @@ Default.argTypes = {
     ],
     control: {
       type: 'select',
+    },
+  },
+  border: {
+    control: {
+      type: 'boolean',
     },
   },
   caret: {
@@ -249,6 +252,51 @@ Default.story = {
   decorators: [
     (story) => <div className="mt-10 flex justify-center">{story()}</div>,
   ],
+};
+
+const autoAlignArgTypes = {
+  autoAlign: {
+    table: {
+      disable: true,
+    },
+  },
+  highContrast: {
+    table: {
+      disable: true,
+    },
+  },
+  isTabTip: {
+    table: {
+      disable: true,
+    },
+  },
+  caret: {
+    control: {
+      type: 'boolean',
+    },
+  },
+  align: {
+    options: [
+      'top',
+      'top-start',
+      'top-end',
+
+      'bottom',
+      'bottom-start',
+      'bottom-end',
+
+      'left',
+      'left-end',
+      'left-start',
+
+      'right',
+      'right-end',
+      'right-start',
+    ],
+    control: {
+      type: 'select',
+    },
+  },
 };
 
 export const ExperimentalAutoAlign = (args) => {
@@ -301,7 +349,8 @@ export const ExperimentalAutoAlign = (args) => {
   );
 };
 
-export const ExperimentalAutoAlignBoundary = () => {
+ExperimentalAutoAlign.argTypes = autoAlignArgTypes;
+export const ExperimentalAutoAlignBoundary = (args) => {
   const [open, setOpen] = useState(true);
   const ref = useRef();
   const [boundary, setBoundary] = useState();
@@ -338,7 +387,8 @@ export const ExperimentalAutoAlignBoundary = () => {
           autoAlign
           autoAlignBoundary={boundary}
           onRequestClose={() => setOpen(false)}
-          ref={ref}>
+          ref={ref}
+          {...args}>
           <button
             className="playground-trigger"
             aria-label="Checkbox"
@@ -373,67 +423,7 @@ export const ExperimentalAutoAlignBoundary = () => {
   );
 };
 
-export const Test = () => {
-  const [open, setOpen] = useState();
-  const align = document?.dir === 'rtl' ? 'bottom-right' : 'bottom-left';
-  const alignTwo = document?.dir === 'rtl' ? 'bottom-left' : 'bottom-right';
-  return (
-    <div style={{ display: 'flex', gap: '8rem' }}>
-      <OverflowMenu
-        flipped={document?.dir === 'rtl'}
-        aria-label="overflow-menu">
-        <OverflowMenuItem itemText="Stop app" />
-        <OverflowMenuItem itemText="Restart app" />
-        <OverflowMenuItem itemText="Rename app" />
-        <OverflowMenuItem itemText="Clone and move app" disabled requireTitle />
-        <OverflowMenuItem itemText="Edit routes and access" requireTitle />
-        <OverflowMenuItem hasDivider isDelete itemText="Delete app" />
-      </OverflowMenu>
-
-      <Popover
-        align={align}
-        open={open}
-        onKeyDown={(evt) => {
-          if (match(evt, keys.Escape)) {
-            setOpen(false);
-          }
-        }}
-        isTabTip
-        onRequestClose={() => setOpen(false)}>
-        <button
-          aria-label="Settings"
-          type="button"
-          aria-expanded={open}
-          onClick={() => {
-            setOpen(!open);
-          }}>
-          <Settings />
-        </button>
-        <PopoverContent className="p-3">
-          <RadioButtonGroup
-            style={{ alignItems: 'flex-start', flexDirection: 'column' }}
-            legendText="Row height"
-            name="radio-button-group"
-            defaultSelected="small">
-            <RadioButton labelText="Small" value="small" id="radio-small" />
-            <RadioButton labelText="Large" value="large" id="radio-large" />
-          </RadioButtonGroup>
-          <hr />
-          <fieldset className={`cds--fieldset`}>
-            <legend className={`cds--label`}>Edit columns</legend>
-            <Checkbox defaultChecked labelText="Name" id="checkbox-label-1" />
-            <Checkbox defaultChecked labelText="Type" id="checkbox-label-2" />
-            <Checkbox
-              defaultChecked
-              labelText="Location"
-              id="checkbox-label-3"
-            />
-          </fieldset>
-        </PopoverContent>
-      </Popover>
-    </div>
-  );
-};
+ExperimentalAutoAlignBoundary.argTypes = autoAlignArgTypes;
 
 export const TabTipExperimentalAutoAlign = () => {
   const [open, setOpen] = useState(true);

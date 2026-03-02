@@ -117,6 +117,25 @@ describe('OverflowMenu', () => {
       expect(onClose).toHaveBeenCalled();
     });
 
+    it('should call onClose only once when menu is closed', async () => {
+      const onClose = jest.fn();
+      render(
+        <OverflowMenu
+          aria-label="Overflow menu"
+          className="extra-class"
+          onClose={onClose}>
+          <OverflowMenuItem className="test-child" itemText="one" />
+          <OverflowMenuItem className="test-child" itemText="two" />
+        </OverflowMenu>
+      );
+
+      await userEvent.click(screen.getByRole('button'));
+      await userEvent.click(screen.getByText('one'));
+      await waitFor(() => {
+        expect(onClose).toHaveBeenCalledTimes(1);
+      });
+    });
+
     it('should call onFocus', async () => {
       const onFocus = jest.fn();
       render(
@@ -164,19 +183,27 @@ describe('OverflowMenu', () => {
       );
     });
 
-    it('should change size based on size prop', () => {
-      render(
-        <OverflowMenu
-          open
-          aria-label="Overflow menu"
-          className="extra-class"
-          size="lg">
-          <OverflowMenuItem className="test-child" itemText="one" />
-          <OverflowMenuItem className="test-child" itemText="two" />
-        </OverflowMenu>
-      );
+    describe('should change size based on size prop', () => {
+      const sizes = ['xs', 'sm', 'md', 'lg'];
 
-      expect(screen.getByRole('button')).toHaveClass('cds--overflow-menu--lg');
+      sizes.forEach((size) => {
+        it(`size="${size}"`, () => {
+          render(
+            <OverflowMenu
+              open
+              aria-label="Overflow menu"
+              className="extra-class"
+              size={size}>
+              <OverflowMenuItem className="test-child" itemText="one" />
+              <OverflowMenuItem className="test-child" itemText="two" />
+            </OverflowMenu>
+          );
+
+          expect(screen.getByRole('button')).toHaveClass(
+            `cds--overflow-menu--${size}`
+          );
+        });
+      });
     });
 
     it('should open on click', async () => {

@@ -55,7 +55,7 @@ test.describe('@avt Pagination', () => {
     const updatedPageSelector = page.getByRole('combobox', {
       name: 'Page of 3 pages',
     });
-    const nextPageButton = page.getByRole('button', { name: 'Next page' });
+    const nextPageButton = page.getByRole('button', { name: 'Next' });
     const prevPageButton = page.getByRole('button').first();
 
     await expect(itemsPerPage).toBeVisible();

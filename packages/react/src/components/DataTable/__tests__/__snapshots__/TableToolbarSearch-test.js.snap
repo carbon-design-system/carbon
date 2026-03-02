@@ -1,4 +1,4 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
 exports[`TableToolbarSearch renders as expected - Component API should render 1`] = `
 <div>
@@ -39,9 +39,8 @@ exports[`TableToolbarSearch renders as expected - Component API should render 1`
       class="cds--search-input"
       id="custom-id"
       placeholder="Filter table"
-      role="searchbox"
       tabindex="0"
-      type="text"
+      type="search"
       value=""
     />
     <button
@@ -61,7 +60,7 @@ exports[`TableToolbarSearch renders as expected - Component API should render 1`
         xmlns="http://www.w3.org/2000/svg"
       >
         <path
-          d="M17.4141 16L24 9.4141 22.5859 8 16 14.5859 9.4143 8 8 9.4141 14.5859 16 8 22.5859 9.4143 24 16 17.4141 22.5859 24 24 22.5859 17.4141 16z"
+          d="M17.4141 16 24 9.4141 22.5859 8 16 14.5859 9.4143 8 8 9.4141 14.5859 16 8 22.5859 9.4143 24 16 17.4141 22.5859 24 24 22.5859 17.4141 16z"
         />
       </svg>
     </button>

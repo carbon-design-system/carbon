@@ -25,23 +25,8 @@ export default {
     docs: {
       page: mdx,
     },
-  },
-};
-
-const sharedArgTypes = {
-  children: {
-    table: {
-      disable: true,
-    },
-  },
-  className: {
-    table: {
-      disable: true,
-    },
-  },
-  translateWithId: {
-    table: {
-      disable: true,
+    controls: {
+      exclude: ['translateWithId'],
     },
   },
 };
@@ -65,8 +50,6 @@ export const Default = (args) => {
   );
 };
 
-Default.argTypes = { ...sharedArgTypes };
-
 export const ExperimentalAutoAlign = (args) => (
   <div style={{ width: '5000px', height: '5000px' }}>
     <div
@@ -83,8 +66,6 @@ export const ExperimentalAutoAlign = (args) => (
   </div>
 );
 
-ExperimentalAutoAlign.argTypes = { ...sharedArgTypes };
-
 export const WithDanger = (args) => {
   return (
     <ComboButton label="Primary action" {...args}>
@@ -97,8 +78,6 @@ export const WithDanger = (args) => {
   );
 };
 
-WithDanger.argTypes = { ...sharedArgTypes };
-
 export const WithIcons = (args) => {
   return (
     <ComboButton label="Save record" {...args}>
@@ -107,8 +86,6 @@ export const WithIcons = (args) => {
     </ComboButton>
   );
 };
-
-WithIcons.argTypes = { ...sharedArgTypes };
 
 export const WithMenuAlignment = () => {
   return (

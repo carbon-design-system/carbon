@@ -197,7 +197,7 @@ class CDSFileUploaderButton extends HostListenerMixin(LitElement) {
   }
 
   /**
-   * A selector that will return the file `<input>`.
+   * A selector that will return the file `input`.
    */
   static get selectorInput() {
     return `.${prefix}--file-input`;

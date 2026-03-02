@@ -200,6 +200,20 @@ test.describe('@avt DataTable', () => {
         'components-datatable-expansion--batch-expansion'
       );
     });
+    test('@avt-advanced-states batch expansion with multiple tables', async ({
+      page,
+    }) => {
+      await visitStory(page, {
+        component: 'DataTable',
+        id: 'components-datatable-expansion--batch-expansion-multiple-tables',
+        globals: {
+          theme: 'white',
+        },
+      });
+      await expect(page).toHaveNoACViolations(
+        'components-datatable-expansion--batch-expansion-multiple-tables'
+      );
+    });
   });
 
   test.describe('@avt filtering', () => {

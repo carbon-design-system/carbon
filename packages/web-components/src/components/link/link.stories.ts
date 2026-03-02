@@ -7,8 +7,9 @@
 
 import { html } from 'lit';
 import { ifDefined } from 'lit/directives/if-defined.js';
-import ArrowRight16 from '@carbon/icons/lib/arrow--right/16.js';
+import ArrowRight16 from '@carbon/icons/es/arrow--right/16.js';
 import { LINK_SIZE } from './link';
+import { iconLoader } from '../../globals/internal/icon-loader';
 
 const defaultArgs = {
   disabled: false,
@@ -22,6 +23,10 @@ const controls = {
   disabled: {
     control: 'boolean',
     description: `Specify if the control should be disabled, or not`,
+  },
+  inline: {
+    control: 'boolean',
+    description: `Specify whether the link should render inline`,
   },
   href: {
     control: 'text',
@@ -55,8 +60,19 @@ export const Default = {
 };
 
 export const Inline = {
-  render: () => html`
-    <cds-link inline href="#"
+  argTypes: controls,
+  args: {
+    ...defaultArgs,
+    inline: true,
+  },
+  render: ({ disabled, href, inline, size, visited, onClick }) => html`
+    <cds-link
+      ?disabled="${disabled}"
+      .href="${ifDefined(href)}"
+      .size="${ifDefined(size)}"
+      ?inline="${inline}"
+      ?visited="${visited}"
+      @click="${onClick}"
       >Lorem ipsum dolor sit amet, consectetur adipiscing elit.</cds-link
     >
     <p>
@@ -64,7 +80,13 @@ export const Inline = {
       fringilla eros vehicula id. Ut at enim quis libero pharetra ullamcorper.
       Maecenas feugiat sodales arcu ut porttitor. In blandit ultricies est.
       Vivamus risus massa, cursus eu tellus sed, sagittis commodo nunc.
-      <cds-link inline href="#"
+      <cds-link
+        ?disabled="${disabled}"
+        .href="${ifDefined(href)}"
+        .size="${ifDefined(size)}"
+        ?inline="${inline}"
+        ?visited="${visited}"
+        @click="${onClick}"
         >Maecenas nunc mauris, consequat quis mauris sit amet,</cds-link
       >
       finibus suscipit nunc. Phasellus ex quam, placerat quis tempus sit amet,
@@ -79,13 +101,14 @@ export const Inline = {
 export const PairedWithIcon = {
   args: defaultArgs,
   argTypes: controls,
-  render: ({ disabled, href, size, onClick }) => html`
+  render: ({ disabled, href, size, visited, onClick }) => html`
     <cds-link
       ?disabled="${disabled}"
       .href="${ifDefined(href)}"
       .size="${ifDefined(size)}"
+      ?visited="${visited}"
       @click="${onClick}">
-      Carbon Docs ${ArrowRight16({ slot: 'icon' })}
+      Carbon Docs ${iconLoader(ArrowRight16, { slot: 'icon' })}
     </cds-link>
   `,
 };

@@ -230,4 +230,29 @@
     .#{$prefix}--slug::before {
     display: none;
   }
+
+  // Skeleton
+  .#{$prefix}--select--fluid__skeleton {
+    position: relative;
+    background: $skeleton-background;
+    block-size: convert.to-rem(64px);
+    border-block-end: 1px solid $skeleton-element;
+  }
+
+  .#{$prefix}--select--fluid__skeleton .#{$prefix}--skeleton {
+    position: absolute;
+    block-size: convert.to-rem(8px);
+    inline-size: 25%;
+    inset-block-start: $spacing-05;
+    inset-inline-start: $spacing-05;
+  }
+
+  .#{$prefix}--select--fluid__skeleton .#{$prefix}--label {
+    position: absolute;
+    padding: 0;
+    block-size: convert.to-rem(8px);
+    inline-size: 50%;
+    inset-block-start: convert.to-rem(36px);
+    inset-inline-start: $spacing-05;
+  }
 }

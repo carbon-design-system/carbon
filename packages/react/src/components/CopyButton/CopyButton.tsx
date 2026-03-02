@@ -14,7 +14,7 @@ import Copy from '../Copy';
 import { LayoutConstraint } from '../Layout';
 import { usePrefix } from '../../internal/usePrefix';
 import { noopFn } from '../../internal/noopFn';
-import deprecateValuesWithin from '../../prop-types/deprecateValuesWithin';
+import { deprecateValuesWithin } from '../../prop-types/deprecateValuesWithin';
 import { mapPopoverAlign } from '../../tools/mapPopoverAlign';
 import type {
   DeprecatedPopoverAlignment,

@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2020, 2025
+ * Copyright IBM Corp. 2020, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -9,8 +9,9 @@ import { html, LitElement } from 'lit';
 import { property, query } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
-import ChevronDown16 from '@carbon/icons/lib/chevron--down/16.js';
 import { prefix } from '../../globals/settings';
+import { iconLoader } from '../../globals/internal/icon-loader';
+import ChevronDown16 from '@carbon/icons/es/chevron--down/16.js';
 import { filter } from '../../globals/internal/collection-helpers';
 import styles from './time-picker.scss?lit';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
@@ -142,6 +143,7 @@ class CDSTimePickerSelect extends FormMixin(LitElement) {
   }
 
   _handleFormdata(event: Event) {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
     const { formData } = event as any; // TODO: Wait for `FormDataEvent` being available in `lib.dom.d.ts`
     const { disabled, name, value } = this;
     if (!disabled) {
@@ -203,14 +205,14 @@ class CDSTimePickerSelect extends FormMixin(LitElement) {
       <select
         id="${ifDefined(id)}"
         class="${inputClasses}"
-        aria-readonly="${String(Boolean(readOnly))}"
+        aria-readonly="${String(readOnly)}"
         ?disabled="${disabled}"
         aria-label="${ifDefined(ariaLabel)}"
         .value="${ifDefined(value)}"
         @input="${handleInput}">
         ${this._renderItems()}
       </select>
-      ${ChevronDown16({
+      ${iconLoader(ChevronDown16, {
         class: `${prefix}--select__arrow`,
         'aria-hidden': 'true',
       })}

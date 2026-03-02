@@ -9,32 +9,33 @@ import { LitElement, html } from 'lit';
 import { property } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
 import { ICON_INDICATOR_KIND } from './defs';
-import ErrorFilled16 from '@carbon/icons/lib/error--filled/16.js';
-import ErrorFilled20 from '@carbon/icons/lib/error--filled/20.js';
-import WarningAltInvertedFilled16 from '@carbon/icons/lib/warning--alt-inverted--filled/16.js';
-import WarningAltInvertedFilled20 from '@carbon/icons/lib/warning--alt-inverted--filled/20.js';
-import WarningAltFilled16 from '@carbon/icons/lib/warning--alt--filled/16.js';
-import WarningAltFilled20 from '@carbon/icons/lib/warning--alt--filled/20.js';
-import UndefinedFilled16 from '@carbon/icons/lib/undefined--filled/16.js';
-import UndefinedFilled20 from '@carbon/icons/lib/undefined--filled/20.js';
-import CheckmarkFilled16 from '@carbon/icons/lib/checkmark--filled/16.js';
-import CheckmarkFilled20 from '@carbon/icons/lib/checkmark--filled/20.js';
-import CheckmarkOutline16 from '@carbon/icons/lib/checkmark--outline/16.js';
-import CheckmarkOutline20 from '@carbon/icons/lib/checkmark--outline/20.js';
-import InProgress16 from '@carbon/icons/lib/in-progress/16.js';
-import InProgress20 from '@carbon/icons/lib/in-progress/20.js';
-import Incomplete16 from '@carbon/icons/lib/incomplete/16.js';
-import Incomplete20 from '@carbon/icons/lib/incomplete/20.js';
-import CircleDash16 from '@carbon/icons/lib/circle-dash/16.js';
-import CircleDash20 from '@carbon/icons/lib/circle-dash/20.js';
-import Pending16 from '@carbon/icons/lib/pending--filled/16.js';
-import Pending20 from '@carbon/icons/lib/pending--filled/20.js';
-import UnknownFilled16 from '@carbon/icons/lib/unknown--filled/16.js';
-import UnknownFilled20 from '@carbon/icons/lib/unknown--filled/20.js';
-import WarningSquareFilled16 from '@carbon/icons/lib/warning-square--filled/16.js';
-import WarningSquareFilled20 from '@carbon/icons/lib/warning-square--filled/20.js';
+import ErrorFilled16 from '@carbon/icons/es/error--filled/16.js';
+import ErrorFilled20 from '@carbon/icons/es/error--filled/20.js';
+import WarningAltInvertedFilled16 from '@carbon/icons/es/warning--alt-inverted--filled/16.js';
+import WarningAltInvertedFilled20 from '@carbon/icons/es/warning--alt-inverted--filled/20.js';
+import WarningAltFilled16 from '@carbon/icons/es/warning--alt--filled/16.js';
+import WarningAltFilled20 from '@carbon/icons/es/warning--alt--filled/20.js';
+import UndefinedFilled16 from '@carbon/icons/es/undefined--filled/16.js';
+import UndefinedFilled20 from '@carbon/icons/es/undefined--filled/20.js';
+import CheckmarkFilled16 from '@carbon/icons/es/checkmark--filled/16.js';
+import CheckmarkFilled20 from '@carbon/icons/es/checkmark--filled/20.js';
+import CheckmarkOutline16 from '@carbon/icons/es/checkmark--outline/16.js';
+import CheckmarkOutline20 from '@carbon/icons/es/checkmark--outline/20.js';
+import InProgress16 from '@carbon/icons/es/in-progress/16.js';
+import InProgress20 from '@carbon/icons/es/in-progress/20.js';
+import Incomplete16 from '@carbon/icons/es/incomplete/16.js';
+import Incomplete20 from '@carbon/icons/es/incomplete/20.js';
+import CircleDash16 from '@carbon/icons/es/circle-dash/16.js';
+import CircleDash20 from '@carbon/icons/es/circle-dash/20.js';
+import PendingFilled16 from '@carbon/icons/es/pending--filled/16.js';
+import PendingFilled20 from '@carbon/icons/es/pending--filled/20.js';
+import UnknownFilled16 from '@carbon/icons/es/unknown--filled/16.js';
+import UnknownFilled20 from '@carbon/icons/es/unknown--filled/20.js';
+import WarningSquareFilled16 from '@carbon/icons/es/warning-square--filled/16.js';
+import WarningSquareFilled20 from '@carbon/icons/es/warning-square--filled/20.js';
 export { ICON_INDICATOR_KIND };
 
+import { iconLoader } from '../../globals/internal/icon-loader';
 import styles from './icon-indicator.scss?lit';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
@@ -76,8 +77,8 @@ const iconMap = {
     20: CircleDash20,
   },
   [ICON_INDICATOR_KIND.PENDING]: {
-    16: Pending16,
-    20: Pending20,
+    16: PendingFilled16,
+    20: PendingFilled20,
   },
   [ICON_INDICATOR_KIND.UNKNOWN]: {
     16: UnknownFilled16,
@@ -115,8 +116,8 @@ class CDSIconIndicator extends LitElement {
   kind!: ICON_INDICATOR_KIND;
 
   render() {
-    const icon = iconMap[this.kind]?.[this.size];
-    return html`${icon()}${this.label}`;
+    const IconComponent = iconMap[this.kind]?.[this.size];
+    return html`${iconLoader(IconComponent, { size: this.size })}${this.label}`;
   }
 
   static styles = styles;

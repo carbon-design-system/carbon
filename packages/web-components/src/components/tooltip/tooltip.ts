@@ -1,11 +1,11 @@
 /**
- * Copyright IBM Corp. 2019, 2024
+ * Copyright IBM Corp. 2019, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
-import { css } from 'lit';
+import { adoptStyles } from 'lit';
 import { property } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
 import HostListener from '../../globals/decorators/host-listener';
@@ -13,6 +13,7 @@ import HostListenerMixin from '../../globals/mixins/host-listener';
 import CDSPopover from '../popover/popover';
 import '../popover/popover-content';
 import styles from './tooltip.scss?lit';
+import popoverStyles from '../popover/popover.scss?lit';
 import CDSTooltipContent from './tooltip-content';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
@@ -142,6 +143,7 @@ class CDSTooltip extends HostListenerMixin(CDSPopover) {
    * Handles `click` event on this element.
    */
   @HostListener('click')
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20452
   // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
   private _handleClick = async () => {
     this.lastInteractionWasKeyboard = false;
@@ -154,6 +156,7 @@ class CDSTooltip extends HostListenerMixin(CDSPopover) {
    * Handles `keydown` event on this element.
    */
   @HostListener('keydown')
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20452
   // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
   private _handleKeydown = async (event) => {
     // needed for interactive tags for when the tag is focused from tabbing into it
@@ -173,11 +176,9 @@ class CDSTooltip extends HostListenerMixin(CDSPopover) {
    * Handles `slotchange` event.
    */
   protected _handleSlotChange({ target }: Event) {
-    const component = (target as HTMLSlotElement)
-      .assignedNodes()
-      .filter(
-        (node) => node.nodeType !== Node.TEXT_NODE || node!.textContent!.trim()
-      );
+    const component = (target as HTMLSlotElement).assignedNodes().filter(
+      (node) => node.nodeType !== Node.TEXT_NODE || node!.textContent!.trim() // eslint-disable-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
+    );
     if (!component[0]) {
       return;
     }
@@ -210,6 +211,8 @@ class CDSTooltip extends HostListenerMixin(CDSPopover) {
     }
     window.addEventListener('keydown', this._handleKeydown, true);
     super.connectedCallback();
+
+    adoptStyles(this.renderRoot as ShadowRoot, [popoverStyles, styles]);
   }
 
   disconnectedCallback() {
@@ -226,17 +229,23 @@ class CDSTooltip extends HostListenerMixin(CDSPopover) {
     }
 
     if (changedProperties.has('open')) {
-      this.open
-        ? toolTipContent?.setAttribute('open', '')
-        : toolTipContent?.removeAttribute('open');
+      if (this.open) {
+        toolTipContent?.setAttribute('open', '');
+      } else {
+        toolTipContent?.removeAttribute('open');
+      }
     }
 
-    ['align', 'caret', 'autoalign'].forEach((name) => {
+    ['align', 'caret', 'autoalign', 'dropShadow'].forEach((name) => {
       if (changedProperties.has(name)) {
         const { [name as keyof CDSTooltip]: value } = this;
         (toolTipContent as CDSTooltipContent)[name] = value;
       }
     });
+
+    if (this.hasAttribute('highcontrast')) {
+      toolTipContent?.setAttribute('highcontrast', '');
+    }
 
     this.shadowRoot
       ?.querySelector(`.${prefix}--popover-container`)
@@ -250,12 +259,6 @@ class CDSTooltip extends HostListenerMixin(CDSPopover) {
    */
   static get selectorTooltipContent() {
     return `${prefix}-tooltip-content`;
-  }
-
-  static get styles() {
-    return css`
-      ${super.styles}${styles}
-    `;
   }
 }
 

@@ -15,7 +15,7 @@ const cloneDeep = require('lodash.clonedeep');
 
 async function migrate() {
   const metadataPath = path.resolve(__dirname, '../../icons/metadata.yml');
-  const metadata = yaml.safeLoad(await fs.readFile(metadataPath, 'utf8'));
+  const metadata = yaml.load(await fs.readFile(metadataPath, 'utf8'));
   const names = await search(path.resolve(__dirname, '../../icons/svg'));
 
   const data = {};
@@ -54,7 +54,7 @@ async function migrate() {
 
   await fs.writeFile(
     path.resolve(__dirname, '../../icons/icons.yml'),
-    yaml.safeDump(
+    yaml.dump(
       { icons: Object.values(data) },
       {
         noRefs: true,

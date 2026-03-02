@@ -10,11 +10,12 @@ import { property, query } from 'lit/decorators.js';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import { classMap } from 'lit/directives/class-map.js';
 import { prefix } from '../../globals/settings';
-import View16 from '@carbon/icons/lib/view/16.js';
-import ViewOff16 from '@carbon/icons/lib/view--off/16.js';
-import WarningFilled16 from '@carbon/icons/lib/warning--filled/16.js';
-import WarningAltFilled16 from '@carbon/icons/lib/warning--alt--filled/16.js';
+import { iconLoader } from '../../globals/internal/icon-loader';
 import ifNonEmpty from '../../globals/directives/if-non-empty';
+import WarningFilled16 from '@carbon/icons/es/warning--filled/16.js';
+import WarningAltFilled16 from '@carbon/icons/es/warning--alt--filled/16.js';
+import View16 from '@carbon/icons/es/view/16.js';
+import ViewOff16 from '@carbon/icons/es/view--off/16.js';
 import FormMixin from '../../globals/mixins/form';
 import ValidityMixin from '../../globals/mixins/validity';
 import {
@@ -77,13 +78,16 @@ class CDSTextInput extends ValidityMixin(FormMixin(LitElement)) {
   @query('input')
   protected _input!: HTMLInputElement;
 
+  @query('slot[name="helper-text"]')
+  protected _slotHelperTextNode!: HTMLSlotElement;
+
   /**
    * The internal value.
    */
   protected _value = '';
 
   /**
-   * Handles `oninput` event on the `<input>`.
+   * Handles `oninput` event on the `input`.
    *
    * @param event The event.
    * @param event.target The event target.
@@ -98,6 +102,10 @@ class CDSTextInput extends ValidityMixin(FormMixin(LitElement)) {
     if (!disabled) {
       formData.append(name, value);
     }
+  }
+
+  protected _handleHelperTextSlotChange() {
+    this.requestUpdate();
   }
 
   /**
@@ -242,6 +250,9 @@ class CDSTextInput extends ValidityMixin(FormMixin(LitElement)) {
   @property({ reflect: true })
   size = INPUT_SIZE.MEDIUM;
 
+  @property({ type: Boolean })
+  isFluid = false;
+
   /**
    * true to use the inline version.
    */
@@ -317,6 +328,7 @@ class CDSTextInput extends ValidityMixin(FormMixin(LitElement)) {
       helperText,
       hideLabel,
       inline,
+      isFluid,
       invalid,
       invalidText,
       label,
@@ -333,15 +345,22 @@ class CDSTextInput extends ValidityMixin(FormMixin(LitElement)) {
       _handleSlotChange: handleSlotChange,
     } = this;
 
-    const invalidIcon = WarningFilled16({
+    const invalidIcon = iconLoader(WarningFilled16, {
       class: `${prefix}--text-input__invalid-icon`,
     });
 
-    const warnIcon = WarningAltFilled16({
+    const warnIcon = iconLoader(WarningAltFilled16, {
       class: `${prefix}--text-input__invalid-icon ${prefix}--text-input__invalid-icon--warning`,
     });
 
-    const normalizedProps = {
+    const normalizedProps: {
+      disabled: boolean;
+      invalid: boolean;
+      warn: boolean;
+      'slot-name': string;
+      'slot-text': string;
+      icon: ReturnType<typeof iconLoader>;
+    } = {
       disabled: !readonly && disabled,
       invalid: !readonly && invalid,
       warn: !readonly && !invalid && warn,
@@ -381,7 +400,7 @@ class CDSTextInput extends ValidityMixin(FormMixin(LitElement)) {
       [`${prefix}--text-input--warning`]: normalizedProps.warn,
       [`${prefix}--text-input--${size}`]: size,
       [`${prefix}--layout--size-${size}`]: size,
-      [`${prefix}--password-input`]: type === INPUT_TYPE.PASSWORD, //TODO deprecated, remove in v12
+      [`${prefix}--password-input`]: type === INPUT_TYPE.PASSWORD, // TODO: deprecated, remove in v12
       [`${prefix}--text-input__field-wrapper--decorator`]: hasAILabel,
     });
 
@@ -406,13 +425,13 @@ class CDSTextInput extends ValidityMixin(FormMixin(LitElement)) {
       [`${prefix}--form__helper-text--disabled`]: normalizedProps.disabled,
     });
 
-    //TODO deprecated, remove in v12
+    // TODO: deprecated, remove in v12
     const passwordIsVisible = type !== INPUT_TYPE.PASSWORD;
     const passwordVisibilityIcon = passwordIsVisible
-      ? ViewOff16({ class: `${prefix}--icon-visibility-off` })
-      : View16({ class: `${prefix}--icon-visibility-on` });
+      ? iconLoader(ViewOff16, { class: `${prefix}--icon-visibility-off` })
+      : iconLoader(View16, { class: `${prefix}--icon-visibility-on` });
 
-    //TODO deprecated, remove in v12
+    // TODO: deprecated, remove in v12
     const passwordVisibilityToggleClasses = classMap({
       [`${prefix}--text-input--password__visibility__toggle`]: true,
       [`${prefix}--btn`]: true,
@@ -425,14 +444,14 @@ class CDSTextInput extends ValidityMixin(FormMixin(LitElement)) {
         this.tooltipAlignment,
     });
 
-    //TODO deprecated, remove in v12
+    // TODO: deprecated, remove in v12
     const passwordButtonLabel = html`
       <span class="${prefix}--assistive-text">
         ${passwordIsVisible ? this.hidePasswordLabel : this.showPasswordLabel}
       </span>
     `;
 
-    //TODO deprecated, remove in v12
+    // TODO: deprecated, remove in v12
     const passwordVisibilityButton = () => html`
       <button
         type="button"
@@ -454,24 +473,45 @@ class CDSTextInput extends ValidityMixin(FormMixin(LitElement)) {
         : null;
 
     const labelWrapper = html`<div class="${prefix}--text-input__label-wrapper">
-      <label class="${labelClasses}"> ${label} </label> ${counter}
+      <label class="${labelClasses}">
+        <slot name="label-text">${label}</slot>
+      </label>
+      ${counter}
     </div>`;
 
-    const helper = helperText
-      ? html`<div
-          class="${helperTextClasses}"
-          id="helper-text"
-          ?hidden="${normalizedProps.invalid || normalizedProps.warn}">
-          <slot name="helper-text"> ${helperText} </slot>
-        </div>`
-      : null;
+    const hasHelperText =
+      helperText || (this._slotHelperTextNode?.assignedNodes().length ?? 0) > 0;
+
+    const helper = html`<div
+      class="${helperTextClasses}"
+      id="helper-text"
+      ?hidden="${normalizedProps.invalid ||
+      normalizedProps.warn ||
+      !hasHelperText}">
+      <slot
+        name="helper-text"
+        @slotchange="${this._handleHelperTextSlotChange}">
+        ${helperText}
+      </slot>
+    </div>`;
+
+    const validationMessage =
+      normalizedProps.invalid || normalizedProps.warn
+        ? html`<div
+            class="${prefix}--form-requirement"
+            ?hidden="${!normalizedProps.invalid && !normalizedProps.warn}">
+            <slot name="${normalizedProps['slot-name']}">
+              ${normalizedProps['slot-text']}
+            </slot>
+          </div>`
+        : null;
 
     return html`
       <div class="${inputWrapperClasses}">
         ${!inline
           ? labelWrapper
           : html`<div class="${prefix}--text-input__label-helper-wrapper">
-              ${labelWrapper} ${helper}
+              ${labelWrapper} ${!isFluid ? validationMessage || helper : null}
             </div>`}
         <div class="${fieldOuterWrapperClasses}">
           <div class="${fieldWrapperClasses}" ?data-invalid="${invalid}">
@@ -482,7 +522,7 @@ class CDSTextInput extends ValidityMixin(FormMixin(LitElement)) {
               class="${inputClasses}"
               ?data-invalid="${invalid}"
               ?disabled="${disabled}"
-              aria-describedby="helper-text"
+              ?aria-describedby="${hasHelperText ? 'helper-text' : undefined}"
               id="input"
               name="${ifNonEmpty(this.name)}"
               pattern="${ifNonEmpty(this.pattern)}"
@@ -499,15 +539,14 @@ class CDSTextInput extends ValidityMixin(FormMixin(LitElement)) {
             (type === INPUT_TYPE.PASSWORD || type === INPUT_TYPE.TEXT)
               ? passwordVisibilityButton()
               : null}
+            ${isFluid
+              ? html`<hr class="${prefix}--text-input__divider" />`
+              : null}
+            ${isFluid && !inline ? validationMessage : null}
           </div>
-          ${!inline ? helper : null}
-          <div
-            class="${prefix}--form-requirement"
-            ?hidden="${!normalizedProps.invalid && !normalizedProps.warn}">
-            <slot name="${normalizedProps['slot-name']}">
-              ${normalizedProps['slot-text']}
-            </slot>
-          </div>
+
+          ${/* Non-fluid: validation and helper outside field wrapper */ ''}
+          ${!isFluid && !inline ? validationMessage || helper : null}
         </div>
       </div>
     `;

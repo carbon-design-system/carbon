@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -57,7 +57,6 @@ const sharedArgTypes = {
   },
   isSortable: { control: { type: 'boolean' } },
   persistent: { control: { type: 'boolean' } },
-  radio: { table: { disable: true } },
 };
 
 export const Default = (args) => (
@@ -71,6 +70,7 @@ export const Default = (args) => (
       getToolbarProps,
       onInputChange,
       getTableContainerProps,
+      getCellProps,
     }) => (
       <TableContainer
         title="DataTable"
@@ -105,9 +105,11 @@ export const Default = (args) => (
           </TableHead>
           <TableBody>
             {rows.map((row) => (
-              <TableRow key={row.id} {...getRowProps({ row })}>
+              <TableRow {...getRowProps({ row })}>
                 {row.cells.map((cell) => (
-                  <TableCell key={cell.id}>{cell.value}</TableCell>
+                  <TableCell {...getCellProps({ cell })}>
+                    {cell.value}
+                  </TableCell>
                 ))}
               </TableRow>
             ))}
@@ -131,6 +133,7 @@ export const PersistentToolbar = (args) => (
       getToolbarProps,
       onInputChange,
       getTableContainerProps,
+      getCellProps,
     }) => (
       <TableContainer
         title="DataTable"
@@ -165,9 +168,11 @@ export const PersistentToolbar = (args) => (
           </TableHead>
           <TableBody>
             {rows.map((row) => (
-              <TableRow key={row.id} {...getRowProps({ row })}>
+              <TableRow {...getRowProps({ row })}>
                 {row.cells.map((cell) => (
-                  <TableCell key={cell.id}>{cell.value}</TableCell>
+                  <TableCell {...getCellProps({ cell })}>
+                    {cell.value}
+                  </TableCell>
                 ))}
               </TableRow>
             ))}
@@ -191,6 +196,7 @@ export const SmallPersistentToolbar = (args) => (
       getToolbarProps,
       onInputChange,
       getTableContainerProps,
+      getCellProps,
     }) => (
       <TableContainer
         title="DataTable"
@@ -228,9 +234,11 @@ export const SmallPersistentToolbar = (args) => (
           </TableHead>
           <TableBody>
             {rows.map((row) => (
-              <TableRow key={row.id} {...getRowProps({ row })}>
+              <TableRow {...getRowProps({ row })}>
                 {row.cells.map((cell) => (
-                  <TableCell key={cell.id}>{cell.value}</TableCell>
+                  <TableCell {...getCellProps({ cell })}>
+                    {cell.value}
+                  </TableCell>
                 ))}
               </TableRow>
             ))}
@@ -253,6 +261,7 @@ export const WithOverflowMenu = (args) => (
       getTableProps,
       getToolbarProps,
       onInputChange,
+      getCellProps,
     }) => (
       <TableContainer title="DataTable" description="With overflow menu">
         <TableToolbar {...getToolbarProps()} aria-label="data table toolbar">
@@ -285,9 +294,11 @@ export const WithOverflowMenu = (args) => (
           </TableHead>
           <TableBody>
             {rows.map((row) => (
-              <TableRow key={row.id} {...getRowProps({ row })}>
+              <TableRow {...getRowProps({ row })}>
                 {row.cells.map((cell) => (
-                  <TableCell key={cell.id}>{cell.value}</TableCell>
+                  <TableCell {...getCellProps({ cell })}>
+                    {cell.value}
+                  </TableCell>
                 ))}
                 <TableCell className="cds--table-column-menu">
                   <OverflowMenu size="sm" flipped>

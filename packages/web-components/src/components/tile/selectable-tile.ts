@@ -6,16 +6,17 @@
  */
 
 import { classMap } from 'lit/directives/class-map.js';
-import { LitElement, html, svg } from 'lit';
+import { LitElement, html } from 'lit';
 import { property, query } from 'lit/decorators.js';
-import Checkbox16 from '@carbon/icons/lib/checkbox/16.js';
-import CheckboxCheckedFilled16 from '@carbon/icons/lib/checkbox--checked--filled/16.js';
+import Checkbox16 from '@carbon/icons/es/checkbox/16.js';
+import CheckboxCheckedFilled16 from '@carbon/icons/es/checkbox--checked--filled/16.js';
 import { prefix } from '../../globals/settings';
 import FocusMixin from '../../globals/mixins/focus';
 import HostListenerMixin from '../../globals/mixins/host-listener';
 import { TILE_COLOR_SCHEME } from './defs';
 import styles from './tile.scss?lit';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
+import { iconLoader } from '../../globals/internal/icon-loader';
 
 /**
  * Multi-selectable tile.
@@ -87,17 +88,10 @@ class CDSSelectableTile extends HostListenerMixin(FocusMixin(LitElement)) {
   protected _renderIcon() {
     const { selected, checkmarkLabel } = this;
 
-    return html` ${selected
-      ? CheckboxCheckedFilled16({
-          children: !checkmarkLabel
-            ? undefined
-            : svg`<title>${checkmarkLabel}</title>`,
-        })
-      : Checkbox16({
-          children: !checkmarkLabel
-            ? undefined
-            : svg`<title>${checkmarkLabel}</title>`,
-        })}`;
+    return iconLoader(selected ? CheckboxCheckedFilled16 : Checkbox16, {
+      'aria-label': checkmarkLabel || undefined,
+      class: `${prefix}--selectable-tile__icon`,
+    });
   }
 
   /**

@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2020, 2024
+ * Copyright IBM Corp. 2020, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -28,6 +28,7 @@ class CDSTableExpandedRow extends HostListenerMixin(LitElement) {
    */
   @HostListener('mouseover')
   @HostListener('mouseout')
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20452
   // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
   private _handleMouseOverOut(event: MouseEvent) {
     const { selectorRow } = this.constructor as typeof CDSTableExpandedRow;
@@ -80,9 +81,11 @@ class CDSTableExpandedRow extends HostListenerMixin(LitElement) {
   }
 
   updated() {
-    this.previousElementSibling?.hasAttribute('ai-label')
-      ? this.setAttribute('ai-label', '')
-      : this.removeAttribute('ai-label');
+    if (this.previousElementSibling?.hasAttribute('ai-label')) {
+      this.setAttribute('ai-label', '');
+    } else {
+      this.removeAttribute('ai-label');
+    }
   }
 
   /**

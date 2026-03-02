@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -11,7 +11,7 @@ import PropTypes from 'prop-types';
 import { Close } from '@carbon/icons-react';
 import { usePrefix } from '../../internal/usePrefix';
 import { KeyboardEvent, MouseEvent } from 'react';
-import { TranslateWithId } from '../../types/common';
+import type { TFunc, TranslateWithId } from '../../types/common';
 
 export interface ListBoxSelectionProps extends TranslateWithId<TranslationKey> {
   /**
@@ -47,31 +47,30 @@ export interface ListBoxSelectionProps extends TranslateWithId<TranslationKey> {
   selectionCount?: number;
 }
 
-export type ListBoxSelectionComponent = React.FC<ListBoxSelectionProps>;
+export type ListBoxSelectionComponent = typeof ListBoxSelection;
 
-export const translationIds = {
+const translationIds = {
   'clear.all': 'clear.all',
   'clear.selection': 'clear.selection',
 } as const;
 
-/**
- * Message ids that will be passed to translateWithId().
- */
 type TranslationKey = keyof typeof translationIds;
 
-const defaultTranslations = {
+const defaultTranslations: Record<TranslationKey, string> = {
   [translationIds['clear.all']]: 'Clear all selected items',
   [translationIds['clear.selection']]: 'Clear selected item',
 };
 
-const defaultTranslateWithId = (id: string) => defaultTranslations[id];
+const defaultTranslateWithId: TFunc<TranslationKey> = (messageId) => {
+  return defaultTranslations[messageId];
+};
 
 /**
  * `ListBoxSelection` is used to provide controls for clearing a selection, in
  * addition to conditionally rendering a badge if the control has more than one
  * selection.
  */
-const ListBoxSelection: ListBoxSelectionComponent = ({
+const ListBoxSelection = ({
   clearSelection,
   selectionCount,
   translateWithId: t = defaultTranslateWithId,
@@ -165,9 +164,7 @@ ListBoxSelection.propTypes = {
   selectionCount: PropTypes.number,
 
   /**
-   * i18n hook used to provide the appropriate description for the given menu
-   * icon. This function takes in an id defined in `translationIds` and should
-   * return a string message for that given message id.
+   * Translates component strings using your i18n tool.
    */
   translateWithId: PropTypes.func,
 };

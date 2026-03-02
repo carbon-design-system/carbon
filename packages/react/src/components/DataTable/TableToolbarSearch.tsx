@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2025
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -20,22 +20,23 @@ import Search, { SearchProps } from '../Search';
 import { useId } from '../../internal/useId';
 import { usePrefix } from '../../internal/usePrefix';
 import { noopFn } from '../../internal/noopFn';
-import { TranslateWithId } from '../../types/common';
+import type { TFunc, TranslateWithId } from '../../types/common';
 
-/**
- * Message ids that will be passed to translateWithId().
- */
-export type TableToolbarTranslationKey =
-  | 'carbon.table.toolbar.search.label'
-  | 'carbon.table.toolbar.search.placeholder';
+const translationIds = {
+  'carbon.table.toolbar.search.label': 'carbon.table.toolbar.search.label',
+  'carbon.table.toolbar.search.placeholder':
+    'carbon.table.toolbar.search.placeholder',
+} as const;
 
-const translationKeys: Record<TableToolbarTranslationKey, string> = {
-  'carbon.table.toolbar.search.label': 'Filter table',
-  'carbon.table.toolbar.search.placeholder': 'Filter table',
+type TranslationKey = keyof typeof translationIds;
+
+const defaultTranslations: Record<TranslationKey, string> = {
+  [translationIds['carbon.table.toolbar.search.label']]: 'Filter table',
+  [translationIds['carbon.table.toolbar.search.placeholder']]: 'Filter table',
 };
 
-const translateWithId = (id: TableToolbarTranslationKey): string => {
-  return translationKeys[id];
+const defaultTranslateWithId: TFunc<TranslationKey> = (messageId) => {
+  return defaultTranslations[messageId];
 };
 
 type ExcludedInheritedProps =
@@ -52,9 +53,18 @@ export type TableToolbarSearchHandleExpand = (
   newValue?: boolean
 ) => void;
 
+/**
+ * @deprecated Passing `''` as the event sentinel is legacy compatibility
+ * behavior for `DataTable` filtering. In the next major release, this type
+ * should become an optional `ChangeEvent<HTMLInputElement>` instead.
+ */
+export type TableToolbarSearchOnChangeEvent =
+  | ''
+  | ChangeEvent<HTMLInputElement>;
+
 export interface TableToolbarSearchProps
   extends Omit<SearchProps, ExcludedInheritedProps>,
-    TranslateWithId<TableToolbarTranslationKey> {
+    TranslateWithId<TranslationKey> {
   /**
    * Specifies if the search should initially render in an expanded state
    */
@@ -87,11 +97,11 @@ export interface TableToolbarSearchProps
 
   /**
    * Provide an optional hook that is called each time the input is updated
+   *
+   * Note: the `''` event sentinel is legacy compatibility behavior and will be
+   * removed in the next major release.
    */
-  onChange?: (
-    event: '' | ChangeEvent<HTMLInputElement>,
-    value?: string
-  ) => void;
+  onChange?: (event: TableToolbarSearchOnChangeEvent, value?: string) => void;
 
   /**
    * Provide an optional hook that is called each time the input is expanded
@@ -126,7 +136,7 @@ const TableToolbarSearch = ({
   searchContainerClass,
   onChange: onChangeProp,
   onClear = noopFn,
-  translateWithId: t = translateWithId,
+  translateWithId: t = defaultTranslateWithId,
   placeholder,
   labelText,
   expanded: expandedProp,
@@ -165,6 +175,8 @@ const TableToolbarSearch = ({
   useEffect(
     () => {
       if (defaultValue) {
+        // TODO: Remove the `''` event sentinel and pass `undefined` for
+        // value initialization in the next major release.
         onChangeProp?.('', defaultValue);
       }
     },
@@ -172,9 +184,7 @@ const TableToolbarSearch = ({
     []
   );
 
-  const searchClasses = cx(className, {
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    [searchContainerClass!]: searchContainerClass,
+  const searchClasses = cx(className, searchContainerClass, {
     [`${prefix}--toolbar-search-container-active`]: expanded,
     [`${prefix}--toolbar-search-container-disabled`]: disabled,
     [`${prefix}--toolbar-search-container-expandable`]: !persistent,
@@ -322,7 +332,7 @@ TableToolbarSearch.propTypes = {
    */
   tabIndex: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   /**
-   * Provide custom text for the component for each translation id
+   * Translates component strings using your i18n tool.
    */
   translateWithId: PropTypes.func,
 };

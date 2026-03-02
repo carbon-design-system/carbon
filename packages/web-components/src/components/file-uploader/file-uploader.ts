@@ -76,7 +76,7 @@ class CDSFileUploader extends LitElement {
   }
 
   /**
-   * A selector that will return the `<input>` to enter starting date.
+   * A selector that will return the `input` to enter starting date.
    */
   static get selectorUploaderItem() {
     return `${prefix}-file-uploader-button,${prefix}-file-uploader-drop-container`;

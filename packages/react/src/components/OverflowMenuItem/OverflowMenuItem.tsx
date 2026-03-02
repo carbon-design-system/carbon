@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2025
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -12,6 +12,7 @@ import { keys, match } from '../../internal/keyboard';
 import { usePrefix } from '../../internal/usePrefix';
 import { warning } from '../../internal/warning';
 import { Text } from '../Text';
+import { useId } from '../../internal/useId';
 
 export interface OverflowMenuItemProps
   extends React.HTMLAttributes<HTMLElement> {
@@ -24,6 +25,11 @@ export interface OverflowMenuItemProps
    * A callback to tell the parent menu component that the menu should be closed.
    */
   closeMenu?: () => void;
+
+  /**
+   * Specify the message read by screen readers for the danger overflow menu item variant
+   */
+  dangerDescription?: string;
 
   /**
    * `true` to make this menu item disabled.
@@ -84,6 +90,7 @@ const OverflowMenuItem = frFn((props, ref) => {
   const {
     className,
     closeMenu,
+    dangerDescription = 'danger',
     disabled = false,
     handleOverflowMenuItemFocus,
     hasDivider = false,
@@ -145,14 +152,23 @@ const OverflowMenuItem = frFn((props, ref) => {
 
   const TagToUse = href ? 'a' : 'button';
 
+  const assistiveId = useId('danger-description');
+
   const OverflowMenuItemContent = (() => {
     if (typeof itemText !== 'string') {
       return itemText;
     }
     return (
-      <div className={`${prefix}--overflow-menu-options__option-content`}>
-        {itemText}
-      </div>
+      <>
+        <div className={`${prefix}--overflow-menu-options__option-content`}>
+          {itemText}
+        </div>
+        {isDelete && (
+          <span id={assistiveId} className={`${prefix}--visually-hidden`}>
+            {dangerDescription}
+          </span>
+        )}
+      </>
     );
   })();
 
@@ -171,11 +187,13 @@ const OverflowMenuItem = frFn((props, ref) => {
         // ref as any: the type of `ref` is `ForwardedRef<HTMLButtonElement>` in `Button` component
         // but `OverflowMenuItem` can be rendered as `a` tag as well, which is `HTMLAnchorElement`
         // so we have to use `any` here
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
         ref={ref as any}
         tabIndex={-1}
         // itemText as any: itemText may be a ReactNode, but `title` only accepts string
         // to avoid compatibility issue, we use `any` here. Consider to enforce `itemText` to be `string?`
         // in the next major release
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
         title={requireTitle ? title || (itemText as any) : undefined}
         {...rest}>
         {OverflowMenuItemContent}
@@ -194,6 +212,11 @@ OverflowMenuItem.propTypes = {
    * A callback to tell the parent menu component that the menu should be closed.
    */
   closeMenu: PropTypes.func,
+
+  /**
+   * Specify the message read by screen readers for the danger overflow menu item variant
+   */
+  dangerDescription: PropTypes.string,
 
   /**
    * `true` to make this menu item disabled.

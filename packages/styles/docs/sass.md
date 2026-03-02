@@ -539,32 +539,32 @@ $button-tokens: utilities.merge(
 
 **Files**
 
-| Import                                                     | Description                                                                |
-| :--------------------------------------------------------- | :------------------------------------------------------------------------- |
-| `@use '@carbon/styles/scss/utilities/box-shadow';`         | Adds the Carbon defined box-shadow value                                   |
-| `@use '@carbon/styles/scss/utilities/button-reset';`       | Resets Button styles                                                       |
-| `@use '@carbon/styles/scss/utilities/component-reset';`    | Resets default styles                                                      |
-| `@use '@carbon/styles/scss/utilities/component-tokens';`   | Get tokens and inverse values for a given theme                            |
-| `@use '@carbon/styles/scss/utilities/convert';`            | Converts a given px value to a rem unit                                    |
-| `@use '@carbon/styles/scss/utilities/custom-property';`    | Get the var() representation for a given token                             |
-| `@use '@carbon/styles/scss/utilities/focus-outline';`      | Adds the Carbon defined focus styles                                       |
-| `@use '@carbon/styles/scss/utilities/hide-at-breakpoint';` | Hides elements at specific breakpoints only                                |
-| `@use '@carbon/styles/scss/utilities/high-contrast-mode';` | Sets Windows High Contrast Mode styles                                     |
-| `@use '@carbon/styles/scss/utilities/keyframes';`          | Animations for skeleton states, showing + hiding                           |
-| `@use '@carbon/styles/scss/utilities/layout';`             | [_(experimental)_ Use contextual layout tokens](#contextual-layout-tokens) |
-| `@use '@carbon/styles/scss/utilities/placeholder-colors';` | Sets the Carbon defined placeholder styles                                 |
-| `@use '@carbon/styles/scss/utilities/rotate';`             | Adds rotational transformation                                             |
-| `@use '@carbon/styles/scss/utilities/skeleton';`           | Adds Carbon defined skeleton styles                                        |
-| `@use '@carbon/styles/scss/utilities/text-overflow';`      | Adds text overflow styling                                                 |
-| `@use '@carbon/styles/scss/utilities/text-truncate';`      | Truncates text at beginning or end of text                                 |
-| `@use '@carbon/styles/scss/utilities/tooltip';`            | Shared Tooltip styles                                                      |
-| `@use '@carbon/styles/scss/utilities/visually-hidden';`    | Hides elements visually, but available to screen reader/assistive text     |
-| `@use '@carbon/styles/scss/utilities/z-index';`            | The Carbon stack hierarchy                                                 |
+| Import                                                     | Description                                                            |
+| :--------------------------------------------------------- | :--------------------------------------------------------------------- |
+| `@use '@carbon/styles/scss/utilities/box-shadow';`         | Adds the Carbon defined box-shadow value                               |
+| `@use '@carbon/styles/scss/utilities/button-reset';`       | Resets Button styles                                                   |
+| `@use '@carbon/styles/scss/utilities/component-reset';`    | Resets default styles                                                  |
+| `@use '@carbon/styles/scss/utilities/component-tokens';`   | Get tokens and inverse values for a given theme                        |
+| `@use '@carbon/styles/scss/utilities/convert';`            | Converts a given px value to a rem unit                                |
+| `@use '@carbon/styles/scss/utilities/custom-property';`    | Get the var() representation for a given token                         |
+| `@use '@carbon/styles/scss/utilities/focus-outline';`      | Adds the Carbon defined focus styles                                   |
+| `@use '@carbon/styles/scss/utilities/hide-at-breakpoint';` | Hides elements at specific breakpoints only                            |
+| `@use '@carbon/styles/scss/utilities/high-contrast-mode';` | Sets Windows High Contrast Mode styles                                 |
+| `@use '@carbon/styles/scss/utilities/keyframes';`          | Animations for skeleton states, showing + hiding                       |
+| `@use '@carbon/styles/scss/utilities/layout';`             | [_(preview)_ Use contextual layout tokens](#contextual-layout-tokens)  |
+| `@use '@carbon/styles/scss/utilities/placeholder-colors';` | Sets the Carbon defined placeholder styles                             |
+| `@use '@carbon/styles/scss/utilities/rotate';`             | Adds rotational transformation                                         |
+| `@use '@carbon/styles/scss/utilities/skeleton';`           | Adds Carbon defined skeleton styles                                    |
+| `@use '@carbon/styles/scss/utilities/text-overflow';`      | Adds text overflow styling                                             |
+| `@use '@carbon/styles/scss/utilities/text-truncate';`      | Truncates text at beginning or end of text                             |
+| `@use '@carbon/styles/scss/utilities/tooltip';`            | Shared Tooltip styles                                                  |
+| `@use '@carbon/styles/scss/utilities/visually-hidden';`    | Hides elements visually, but available to screen reader/assistive text |
+| `@use '@carbon/styles/scss/utilities/z-index';`            | The Carbon stack hierarchy                                             |
 
 ### Contextual layout tokens
 
-**_Note: This feature is experimental and its API and behaviour may change at
-any time!_**
+**_Note: This feature is in preview. It is intended to be used in production and
+is only subject to change based on consumer feedback._**
 
 #### Concept
 

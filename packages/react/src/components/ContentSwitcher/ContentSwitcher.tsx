@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2025
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -25,7 +25,7 @@ import { LayoutConstraint } from '../Layout';
 import { composeEventHandlers } from '../../tools/events';
 import { getNextIndex, matches, keys } from '../../internal/keyboard';
 import { PrefixContext } from '../../internal/usePrefix';
-import { noopFn } from '../../internal/noopFn';
+import { isComponentElement } from '../../internal';
 import { IconSwitch } from '../Switch';
 import type { SwitchEventHandlersParams } from '../Switch/Switch';
 
@@ -34,6 +34,7 @@ export interface ContentSwitcherProps
   /**
    * Pass in Switch components to be rendered in the ContentSwitcher
    */
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
   children?: ReactElement<any>[];
 
   /**
@@ -63,7 +64,7 @@ export interface ContentSwitcherProps
   /**
    * Specify a selected index for the initially selected content
    */
-  selectedIndex: number;
+  selectedIndex?: number;
 
   /**
    * Choose whether or not to automatically change selection on focus when left/right arrow pressed. Defaults to 'automatic'
@@ -73,7 +74,7 @@ export interface ContentSwitcherProps
   /**
    * Specify the size of the Content Switcher. Currently supports either `sm`, `md` (default) or `lg` as an option.
    */
-  size: 'sm' | 'md' | 'lg';
+  size?: 'sm' | 'md' | 'lg';
 }
 
 export const ContentSwitcher = ({
@@ -84,7 +85,7 @@ export const ContentSwitcher = ({
   selectedIndex: selectedIndexProp = 0,
   selectionMode = 'automatic',
   size,
-  onChange = noopFn,
+  onChange,
   ...other
 }: ContentSwitcherProps) => {
   const prefix = useContext(PrefixContext);
@@ -118,6 +119,7 @@ export const ContentSwitcher = ({
   };
 
   const isKeyboardEvent = (
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
     event: any
   ): event is KeyboardEvent<HTMLButtonElement> | globalThis.KeyboardEvent =>
     event && typeof event === 'object' && 'key' in event;
@@ -154,7 +156,10 @@ export const ContentSwitcher = ({
           });
         }
       }
-    } else if (selectedIndex !== index) {
+    } else if (
+      selectedIndex !== index &&
+      (isKeyboardEvent(event) ? matches(event, [keys.Enter, keys.Space]) : true)
+    ) {
       setSelectedIndex(index);
       focusSwitch(index);
       onChange(event);
@@ -162,7 +167,7 @@ export const ContentSwitcher = ({
   };
 
   const isIconOnly = Children.map(children, (child) => {
-    return isValidElement(child) ? child.type === IconSwitch : null;
+    return isComponentElement(child, IconSwitch);
   })?.every((val) => val === true);
 
   const classes = classNames(`${prefix}--content-switcher`, className, {

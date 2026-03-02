@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2024, 2025
+ * Copyright IBM Corp. 2024, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -264,6 +264,66 @@ describe('Tab', () => {
     const iconTab = screen.getByTestId('icon-tab-with-badge');
     const badgeIndicator = iconTab.querySelector(`.${prefix}--badge-indicator`);
     expect(badgeIndicator).not.toBeNull();
+  });
+
+  it('should apply icon-only 20 class when IconTab child size is 20 as a number', () => {
+    render(
+      <Tabs>
+        <TabList aria-label="List of tabs">
+          <IconTab data-testid="icon-tab-size-number" label="Notifications">
+            <Notification size={20} aria-label="Notification" />
+          </IconTab>
+        </TabList>
+        <TabPanels>
+          <TabPanel>Icon Tab Panel</TabPanel>
+        </TabPanels>
+      </Tabs>
+    );
+
+    const iconTab = screen.getByTestId('icon-tab-size-number');
+
+    expect(iconTab).toHaveClass(`${prefix}--tabs__nav-item--icon-only`);
+    expect(iconTab).toHaveClass(`${prefix}--tabs__nav-item--icon-only__20`);
+  });
+
+  it('should apply icon-only 20 class when IconTab child size is 20 as a string', () => {
+    render(
+      <Tabs>
+        <TabList aria-label="List of tabs">
+          <IconTab data-testid="icon-tab-size-string" label="Notifications">
+            <Notification size="20" aria-label="Notification" />
+          </IconTab>
+        </TabList>
+        <TabPanels>
+          <TabPanel>Icon Tab Panel</TabPanel>
+        </TabPanels>
+      </Tabs>
+    );
+
+    const iconTab = screen.getByTestId('icon-tab-size-string');
+
+    expect(iconTab).toHaveClass(`${prefix}--tabs__nav-item--icon-only`);
+    expect(iconTab).toHaveClass(`${prefix}--tabs__nav-item--icon-only__20`);
+  });
+
+  it('should not apply icon-only 20 class when IconTab child size is not 20', () => {
+    render(
+      <Tabs>
+        <TabList aria-label="List of tabs">
+          <IconTab data-testid="icon-tab-size-non-20" label="Notifications">
+            <Notification size="1.25rem" aria-label="Notification" />
+          </IconTab>
+        </TabList>
+        <TabPanels>
+          <TabPanel>Icon Tab Panel</TabPanel>
+        </TabPanels>
+      </Tabs>
+    );
+
+    const iconTab = screen.getByTestId('icon-tab-size-non-20');
+
+    expect(iconTab).toHaveClass(`${prefix}--tabs__nav-item--icon-only`);
+    expect(iconTab).not.toHaveClass(`${prefix}--tabs__nav-item--icon-only__20`);
   });
 
   it('should call onClick from props if provided', async () => {
@@ -798,87 +858,6 @@ describe('TabPanel', () => {
       </Tabs>
     );
     expect(screen.getByText('Tab Panel 1')).toHaveClass('custom-class');
-  });
-
-  it('should receive focus if there is no interactive content', () => {
-    render(
-      <Tabs>
-        <TabList aria-label="List of tabs">
-          <Tab>Tab Label 1</Tab>
-          <Tab>Tab Label 2</Tab>
-          <Tab>Tab Label 3</Tab>
-        </TabList>
-        <TabPanels>
-          <TabPanel className="custom-class">Tab Panel 1</TabPanel>
-          <TabPanel>Tab Panel 2</TabPanel>
-          <TabPanel>Tab Panel 3</TabPanel>
-        </TabPanels>
-      </Tabs>
-    );
-
-    expect(screen.getByText('Tab Panel 1')).toHaveAttribute('tabIndex', '-1');
-  });
-
-  it('should not receive focus if there is interactive content', () => {
-    render(
-      <Tabs>
-        <TabList aria-label="List of tabs">
-          <Tab>Tab Label 1</Tab>
-          <Tab>Tab Label 2</Tab>
-          <Tab>Tab Label 3</Tab>
-        </TabList>
-        <TabPanels>
-          <TabPanel className="custom-class">
-            Tab Panel 1<button type="button">Submit</button>
-          </TabPanel>
-          <TabPanel>Tab Panel 2</TabPanel>
-          <TabPanel>Tab Panel 3</TabPanel>
-        </TabPanels>
-      </Tabs>
-    );
-
-    expect(screen.getByText('Tab Panel 1')).toHaveAttribute('tabIndex', '-1');
-  });
-
-  it('should update focus appropriately if tab panel content changes', async () => {
-    const { rerender } = render(
-      <Tabs>
-        <TabList aria-label="List of tabs">
-          <Tab>Tab Label 1</Tab>
-          <Tab>Tab Label 2</Tab>
-          <Tab>Tab Label 3</Tab>
-        </TabList>
-        <TabPanels>
-          <TabPanel className="custom-class">
-            Tab Panel 1<button type="button">Submit</button>
-          </TabPanel>
-          <TabPanel>Tab Panel 2</TabPanel>
-          <TabPanel>Tab Panel 3</TabPanel>
-        </TabPanels>
-      </Tabs>
-    );
-
-    expect(screen.getByText('Tab Panel 1')).toHaveAttribute('tabIndex', '-1');
-
-    // eslint-disable-next-line testing-library/no-unnecessary-act
-    await act(async () => {
-      rerender(
-        <Tabs>
-          <TabList aria-label="List of tabs">
-            <Tab>Tab Label 1</Tab>
-            <Tab>Tab Label 2</Tab>
-            <Tab>Tab Label 3</Tab>
-          </TabList>
-          <TabPanels>
-            <TabPanel className="custom-class">Tab Panel 1</TabPanel>
-            <TabPanel>Tab Panel 2</TabPanel>
-            <TabPanel>Tab Panel 3</TabPanel>
-          </TabPanels>
-        </Tabs>
-      );
-    });
-
-    expect(screen.getByText('Tab Panel 1')).toHaveAttribute('tabIndex', '0');
   });
 });
 

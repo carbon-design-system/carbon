@@ -1,0 +1,98 @@
+/**
+ * Copyright IBM Corp. 2025
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+@use '@carbon/styles/scss/motion' as *;
+@use '@carbon/styles/scss/utilities' as *;
+
+$prefix: 'carousel' !default;
+$animateTime: $duration-moderate-02 !default;
+
+/// Shared keyframes (needed in both)
+@mixin keyframes {
+  @keyframes out-to-active {
+    from {
+      transform: translateX(0);
+    }
+
+    to {
+      transform: translateX(-100%);
+    }
+  }
+
+  @keyframes active-to-out {
+    from {
+      transform: translateX(-100%);
+    }
+
+    to {
+      transform: translateX(0);
+    }
+  }
+}
+
+/// Shared view styles for both host and class selectors
+@mixin viewBase($name, $z, $transform: null, $animation: null) {
+  @at-root {
+    :host(.#{$name}),
+    .#{$name} {
+      z-index: $z;
+      overflow: hidden auto;
+      block-size: 100%;
+      inline-size: 100%;
+
+      @if $transform {
+        inset-inline-start: 100%;
+        transform: $transform;
+
+        @media (prefers-reduced-motion: no-preference) {
+          transition: transform $animateTime $standard-easing;
+        }
+      }
+
+      @if $animation {
+        @media (prefers-reduced-motion: no-preference) {
+          animation: #{$animation} $animateTime $standard-easing forwards;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        animation: none;
+        transition: none;
+      }
+    }
+    :host(.#{$name}:focus),
+    .#{$name}:focus {
+      @include focus-outline('outline');
+    }
+  }
+}
+
+/// Wrapper styles
+@mixin wrapperStyles {
+  .#{$prefix}__view-stack .#{$prefix}__itemsWrapper {
+    position: relative;
+    overflow: hidden;
+    block-size: 100%;
+    inline-size: 100%;
+    min-inline-size: 20vh;
+  }
+}
+
+/// Main styles for view states
+@mixin viewStyles {
+  @include keyframes;
+  @include viewBase('#{$prefix}__view', 80, translateX(0));
+  @include viewBase('#{$prefix}__view-active', 100, translateX(-100%));
+  @include viewBase('#{$prefix}__view-in-stack', 90, translateX(-200%));
+  @include viewBase('#{$prefix}__view-recycle-in', 100, null, out-to-active);
+  @include viewBase('#{$prefix}__view-recycle-out', 90, null, active-to-out);
+}
+
+/// Optional: Universal (Lit + React)
+@mixin carousel {
+  @include wrapperStyles;
+  @include viewStyles;
+}

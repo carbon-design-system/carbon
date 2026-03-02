@@ -1,0 +1,55 @@
+/**
+ * Copyright IBM Corp.2025
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+$css--plex: true !default;
+@use '@carbon/styles/scss/config' as *;
+@use '@carbon/styles/scss/components/fluid-search/index';
+@use '@carbon/styles/scss/layout' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/type' as *;
+@use '@carbon/styles/scss/utilities' as *;
+@use '@carbon/styles/scss/components/fluid-text-input' as *;
+@use '@carbon/styles/scss/components/search' as *;
+
+:host(#{$prefix}-fluid-search) {
+  @extend .#{$prefix}--search;
+  @extend .#{$prefix}--search--fluid;
+  @include emit-layout-tokens();
+
+  outline: none;
+}
+
+:host(#{$prefix}-fluid-search-skeleton) {
+  @extend .#{$prefix}--text-input--fluid__skeleton;
+
+  display: block;
+}
+
+:host(#{$prefix}-fluid-search[disabled]) {
+  svg {
+    fill: $icon-on-color-disabled;
+  }
+
+  .#{$prefix}--search-close {
+    outline: none;
+    pointer-events: none;
+
+    &::before {
+      background: none;
+    }
+  }
+
+  .#{$prefix}--label {
+    color: $text-disabled;
+    cursor: not-allowed;
+  }
+
+  .#{$prefix}--search-input[disabled] {
+    border-block-end: 1px solid $border-subtle;
+  }
+}

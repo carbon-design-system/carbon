@@ -7,15 +7,16 @@
 
 import { html } from 'lit';
 import { ifDefined } from 'lit/directives/if-defined.js';
-import View16 from '@carbon/icons/lib/view/16.js';
-import FolderOpen16 from '@carbon/icons/lib/folder--open/16.js';
-import Folders16 from '@carbon/icons/lib/folders/16.js';
-import ArrowRight16 from '@carbon/icons/lib/arrow--right/16.js';
-import Launch16 from '@carbon/icons/lib/launch/16.js';
+import View16 from '@carbon/icons/es/view/16.js';
+import FolderOpen16 from '@carbon/icons/es/folder--open/16.js';
+import Folders16 from '@carbon/icons/es/folders/16.js';
+import ArrowRight16 from '@carbon/icons/es/arrow--right/16.js';
+import Launch16 from '@carbon/icons/es/launch/16.js';
 import './index';
 import '../ai-label';
 import '../icon-button';
 import '../link';
+import { iconLoader } from '../../globals/internal/icon-loader';
 import storyDocs from './tile.mdx';
 import styles from './tile-story.scss?lit';
 import '../../../.storybook/templates/with-layer';
@@ -37,15 +38,15 @@ const content = html`
 
 const actions = html`
   <cds-icon-button kind="ghost" slot="actions" size="lg">
-    ${View16({ slot: 'icon' })}
+    ${iconLoader(View16, { slot: 'icon' })}
     <span slot="tooltip-content"> View </span>
   </cds-icon-button>
   <cds-icon-button kind="ghost" slot="actions" size="lg">
-    ${FolderOpen16({ slot: 'icon' })}
+    ${iconLoader(FolderOpen16, { slot: 'icon' })}
     <span slot="tooltip-content"> Open folder</span>
   </cds-icon-button>
   <cds-icon-button kind="ghost" slot="actions" size="lg">
-    ${Folders16({ slot: 'icon' })}
+    ${iconLoader(Folders16, { slot: 'icon' })}
     <span slot="tooltip-content"> Folders </span>
   </cds-icon-button>
   <cds-ai-label-action-button>View details</cds-ai-label-action-button>
@@ -100,14 +101,11 @@ export const clickable = {
 export const clickableWithCustomIcon = {
   ...defaultControls,
   render: ({ disabled }) => html`
-    <cds-clickable-tile ?disabled=${disabled} href="https://www.carbondesignsystem.com/">
-      Clickable tile
-      ${Launch16({ slot: 'icon' })}
-      </cds-clickable-tile>
-      </cds-clickable-tile>
-    </sb-template-layers>
+    <cds-clickable-tile
+      ?disabled=${disabled}
+      href="https://www.carbondesignsystem.com/">
+      Clickable tile ${iconLoader(Launch16, { slot: 'icon' })}
     </cds-clickable-tile>
-    </sb-template-layers>
   `,
 };
 
@@ -347,7 +345,7 @@ export const WithAILabel = {
           href="https://example.com"
           ai-label
           ?has-rounded-corners="${hasRoundedCorners}">
-          ${ArrowRight16({ slot: 'icon' })}
+          ${iconLoader(ArrowRight16, { slot: 'icon' })}
           <div class="tile-container">
             <h4>Title</h4>
             <p>

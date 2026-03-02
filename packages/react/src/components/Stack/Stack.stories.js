@@ -16,13 +16,6 @@ export default {
       hideNoControlsWarning: true,
     },
   },
-  argTypes: {
-    children: {
-      table: {
-        disable: true,
-      },
-    },
-  },
 };
 
 export const Horizontal = () => {

@@ -1,4 +1,4 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
 exports[`AccordionItem renders as expected - Component API should render and match snapshot 1`] = `
 <div>
@@ -6,7 +6,7 @@ exports[`AccordionItem renders as expected - Component API should render and mat
     class="cds--accordion__item extra-class"
   >
     <button
-      aria-controls="accordion-item-«r1»"
+      aria-controls="accordion-item-_r_1_"
       aria-expanded="false"
       class="cds--accordion__heading"
       type="button"
@@ -23,7 +23,7 @@ exports[`AccordionItem renders as expected - Component API should render and mat
         xmlns="http://www.w3.org/2000/svg"
       >
         <path
-          d="M11 8L6 13 5.3 12.3 9.6 8 5.3 3.7 6 3z"
+          d="M11 8 6 13 5.3 12.3 9.6 8 5.3 3.7 6 3z"
         />
       </svg>
       <div
@@ -38,7 +38,7 @@ exports[`AccordionItem renders as expected - Component API should render and mat
     >
       <div
         class="cds--accordion__content"
-        id="accordion-item-«r1»"
+        id="accordion-item-_r_1_"
       >
         Lorem ipsum.
       </div>

@@ -18,7 +18,7 @@ async function migrate() {
     __dirname,
     '../../../../pictograms/metadata.yml'
   );
-  const metadata = yaml.safeLoad(await fs.readFile(metadataPath, 'utf8'));
+  const metadata = yaml.load(await fs.readFile(metadataPath, 'utf8'));
   const registry = await Registry.create(
     path.resolve(__dirname, '../../../../pictograms/svg')
   );
@@ -60,7 +60,7 @@ async function migrate() {
 
   await fs.writeFile(
     path.resolve(__dirname, '../../../../pictograms/pictograms.yml'),
-    yaml.safeDump(pictograms, { noRefs: true })
+    yaml.dump(pictograms, { noRefs: true })
   );
 }
 

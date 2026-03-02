@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -9,6 +9,32 @@ import { Edit, Notification } from '@carbon/icons-react';
 import React from 'react';
 import { IconButton } from '../IconButton';
 import mdx from './IconButton.mdx';
+
+const alignOptions = [
+  'top',
+  'top-start',
+  'top-end',
+  'bottom',
+  'bottom-start',
+  'bottom-end',
+  'left',
+  'left-start',
+  'left-end',
+  'right',
+  'right-start',
+  'right-end',
+];
+
+const deprecatedAlignOptions = [
+  'top-left',
+  'top-right',
+  'bottom-left',
+  'bottom-right',
+  'left-bottom',
+  'left-top',
+  'right-bottom',
+  'right-top',
+];
 
 export default {
   title: 'Components/IconButton',
@@ -23,24 +49,14 @@ export default {
     },
     layout: 'centered',
   },
-  argTypes: {
-    children: {
-      table: {
-        disable: true,
-      },
-    },
-    className: {
-      table: {
-        disable: true,
-      },
-    },
-  },
 };
 
 export const Default = (args) => {
+  const { align, alignDeprecated, ...rest } = args;
+  const resolvedAlign = alignDeprecated || align;
   return (
     <div style={{ margin: '3rem' }}>
-      <IconButton {...args}>
+      <IconButton align={resolvedAlign} {...rest}>
         <Edit />
       </IconButton>
     </div>
@@ -57,22 +73,19 @@ Default.args = {
 
 Default.argTypes = {
   align: {
-    // TODO:
-    // 1. Should the deprecated options be deleted?
-    // 2. The list doesn't include all of the options available in the
-    //    component. Is it supposed to?
-    options: [
-      'top',
-      'top-left',
-      'top-right',
-      'bottom',
-      'bottom-left',
-      'bottom-right',
-      'left',
-      'right',
-    ],
+    options: alignOptions,
     control: {
       type: 'select',
+    },
+  },
+  alignDeprecated: {
+    name: 'align (deprecated)',
+    options: deprecatedAlignOptions,
+    control: {
+      type: 'select',
+    },
+    table: {
+      category: 'Deprecated',
     },
   },
   disabled: {

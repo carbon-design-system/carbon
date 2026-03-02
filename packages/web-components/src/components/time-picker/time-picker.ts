@@ -8,9 +8,10 @@
 import { LitElement, html } from 'lit';
 import { property, query } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
-import WarningFilled16 from '@carbon/icons/lib/warning--filled/16.js';
-import WarningAltFilled16 from '@carbon/icons/lib/warning--alt--filled/16.js';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
+import { iconLoader } from '../../globals/internal/icon-loader';
+import WarningFilled16 from '@carbon/icons/es/warning--filled/16.js';
+import WarningAltFilled16 from '@carbon/icons/es/warning--alt--filled/16.js';
 import ValidityMixin from '../../globals/mixins/validity';
 import FormMixin from '../../globals/mixins/form';
 import { prefix } from '../../globals/settings';
@@ -58,6 +59,7 @@ class CDSTimePicker extends ValidityMixin(FormMixin(LitElement)) {
   }
 
   _handleFormdata(event: Event) {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
     const { formData } = event as any;
     const { disabled, name, value } = this;
     if (!disabled) {
@@ -205,6 +207,16 @@ class CDSTimePicker extends ValidityMixin(FormMixin(LitElement)) {
       _handleSlotChange: handleSlotChange,
     } = this;
 
+    const normalizedProps: {
+      disabled: boolean;
+      invalid: boolean;
+      warn: boolean;
+    } = {
+      disabled: !readOnly && disabled,
+      invalid: !readOnly && !disabled && invalid,
+      warn: !readOnly && !invalid && !disabled && warning,
+    };
+
     const labelClasses = classMap({
       [`${prefix}--label`]: true,
       [`${prefix}--visually-hidden`]: hideLabel,
@@ -213,8 +225,8 @@ class CDSTimePicker extends ValidityMixin(FormMixin(LitElement)) {
 
     const timePickerClasses = classMap({
       [`${prefix}--time-picker`]: true,
-      [`${prefix}--time-picker--invalid`]: invalid,
-      [`${prefix}--time-picker--warning`]: warning,
+      [`${prefix}--time-picker--invalid`]: normalizedProps.invalid,
+      [`${prefix}--time-picker--warning`]: normalizedProps.warn,
       [`${prefix}--time-picker--readonly`]: readOnly,
       [`${prefix}--time-picker--${size}`]: size,
       ...(className && { [className]: true }),
@@ -223,9 +235,11 @@ class CDSTimePicker extends ValidityMixin(FormMixin(LitElement)) {
     const inputClasses = classMap({
       [`${prefix}--time-picker__input-field`]: true,
       [`${prefix}--text-input`]: true,
-      [`${prefix}--time-picker__input-field-error`]: invalid || warning,
+      [`${prefix}--time-picker__input-field-error`]:
+        normalizedProps.invalid || normalizedProps.warn,
       ...(className && { [className]: true }),
     });
+
     const label = labelText
       ? html`<label class="${labelClasses}">${labelText}</label>`
       : null;
@@ -237,8 +251,8 @@ class CDSTimePicker extends ValidityMixin(FormMixin(LitElement)) {
           <div class="${prefix}--time-picker__input">
             <input
               class="${inputClasses}"
-              ?data-invalid="${invalid}"
-              ?disabled="${disabled}"
+              ?data-invalid="${normalizedProps.invalid}"
+              ?disabled="${normalizedProps.disabled}"
               maxlength="${ifNonEmpty(maxLength)}"
               name="${ifNonEmpty(this.name)}"
               pattern="${ifNonEmpty(pattern)}"
@@ -247,14 +261,14 @@ class CDSTimePicker extends ValidityMixin(FormMixin(LitElement)) {
               type="${ifNonEmpty(type)}"
               .value="${value}"
               @input="${handleInput}" />
-            ${invalid || warning
+            ${normalizedProps.invalid || normalizedProps.warn
               ? html`
                   <div class="${prefix}--time-picker__error__icon">
-                    ${invalid
-                      ? WarningFilled16({
+                    ${normalizedProps.invalid
+                      ? iconLoader(WarningFilled16, {
                           class: `${prefix}--checkbox__invalid-icon`,
                         })
-                      : WarningAltFilled16({
+                      : iconLoader(WarningAltFilled16, {
                           class: `${prefix}--text-input__invalid-icon--warning`,
                         })}
                   </div>
@@ -263,10 +277,10 @@ class CDSTimePicker extends ValidityMixin(FormMixin(LitElement)) {
           </div>
           <slot @slotchange="${handleSlotChange}"></slot>
         </div>
-        ${invalid || warning
+        ${normalizedProps.invalid || normalizedProps.warn
           ? html`
               <div class="${prefix}--form-requirement">
-                ${invalid ? invalidText : warningText}
+                ${normalizedProps.invalid ? invalidText : warningText}
               </div>
             `
           : null}
@@ -284,6 +298,7 @@ class CDSTimePicker extends ValidityMixin(FormMixin(LitElement)) {
       if (changedProperties.has(name)) {
         const { [name as keyof CDSTimePicker]: value } = this;
         // Propagate the property to descendants
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
         timePickerSelects.forEach((elem: any) => {
           elem[name] = value;
         });

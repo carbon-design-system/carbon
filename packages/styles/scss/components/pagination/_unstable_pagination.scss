@@ -30,12 +30,15 @@
     background-color: $layer;
     border-block-end: 1px solid transparent;
     border-block-start: 1px solid $border-subtle;
+    container-name: pagination;
+    container-type: inline-size;
     inline-size: 100%;
     min-block-size: convert.to-rem(40px);
   }
 
   .#{$prefix}--unstable-pagination__text {
-    @include breakpoint('md') {
+    // 42rem = 'md' breakpoint width
+    @container pagination (min-width: 42rem) {
       display: inline-block;
     }
 
@@ -160,7 +163,8 @@
     inset-block-start: 50%;
     transform: translateY(-50%);
 
-    @include breakpoint('md') {
+    // 42rem = 'md' breakpoint width
+    @container pagination (min-width: 42rem) {
       inset-inline-end: $spacing-05;
     }
   }

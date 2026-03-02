@@ -17,7 +17,7 @@ test.describe('IconIndicator', () => {
       test('icon indicator @vrt', async ({ page }) => {
         await snapshotStory(page, {
           component: 'IconIndicator',
-          id: 'experimental-statusindicators-unstable-iconindicator--default',
+          id: 'preview-statusindicators-preview-iconindicator--default',
           theme,
         });
       });
@@ -25,7 +25,7 @@ test.describe('IconIndicator', () => {
       test('icon indicator size 20 @vrt', async ({ page }) => {
         await visitStory(page, {
           component: 'IconIndicator',
-          id: 'experimental-statusindicators-unstable-iconindicator--default',
+          id: 'preview-statusindicators-preview-iconindicator--default',
           theme,
           args: {
             size: '20',
@@ -33,7 +33,7 @@ test.describe('IconIndicator', () => {
         });
         await snapshot(page, {
           component: 'IconIndicator',
-          id: 'experimental-statusindicators-unstable-iconindicator--default',
+          id: 'preview-statusindicators-preview-iconindicator--default',
           theme,
         });
       });

@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -19,6 +19,32 @@ import {
 } from '../Toggletip';
 import mdx from './Toggletip.mdx';
 
+const alignOptions = [
+  'top',
+  'top-start',
+  'top-end',
+  'bottom',
+  'bottom-start',
+  'bottom-end',
+  'left',
+  'left-start',
+  'left-end',
+  'right',
+  'right-start',
+  'right-end',
+];
+
+const deprecatedAlignOptions = [
+  'top-left',
+  'top-right',
+  'bottom-left',
+  'bottom-right',
+  'left-bottom',
+  'left-top',
+  'right-bottom',
+  'right-top',
+];
+
 export default {
   title: 'Components/Toggletip',
   component: Toggletip,
@@ -27,21 +53,6 @@ export default {
     ToggletipButton,
     ToggletipContent,
     ToggletipActions,
-  },
-  argTypes: {
-    as: {
-      table: {
-        disable: true,
-      },
-    },
-    children: {
-      table: { disable: true },
-    },
-    className: {
-      table: {
-        disable: true,
-      },
-    },
   },
   parameters: {
     docs: {
@@ -89,12 +100,14 @@ export const ExperimentalAutoAlign = () => {
 };
 
 // Note: autoAlign is used here only to make tooltips visible in StackBlitz,
-// autoAlign is experimental and not part of the actual implementation.
+// autoAlign is in preview and not part of the actual implementation.
 export const Default = (args) => {
+  const { align, alignDeprecated, ...rest } = args;
+  const resolvedAlign = alignDeprecated || align;
   return (
     <>
       <ToggletipLabel>Toggletip label</ToggletipLabel>
-      <Toggletip autoAlign {...args}>
+      <Toggletip autoAlign align={resolvedAlign} {...rest}>
         <ToggletipButton label="Show information">
           <Information />
         </ToggletipButton>
@@ -115,29 +128,19 @@ export const Default = (args) => {
 
 Default.argTypes = {
   align: {
-    // TODO:
-    // 1. Should the deprecated options be deleted?
-    // 2. The list doesn't include all of the options available in the
-    //    component. Is it supposed to?
-    options: [
-      'top',
-      'top-left',
-      'top-right',
-
-      'bottom',
-      'bottom-left',
-      'bottom-right',
-
-      'left',
-      'left-bottom',
-      'left-top',
-
-      'right',
-      'right-bottom',
-      'right-top',
-    ],
+    options: alignOptions,
     control: {
       type: 'select',
+    },
+  },
+  alignDeprecated: {
+    name: 'align (deprecated)',
+    options: deprecatedAlignOptions,
+    control: {
+      type: 'select',
+    },
+    table: {
+      category: 'Deprecated',
     },
   },
 };
@@ -154,35 +157,4 @@ Default.story = {
       </div>
     ),
   ],
-};
-
-// I need to remove this
-export const OutsideClickTest = () => {
-  const [open, setOpen] = React.useState(false);
-
-  return (
-    <div style={{ padding: '2rem' }}>
-      <Button onClick={() => setOpen(true)}>Launch modal</Button>
-
-      <Modal
-        open={open}
-        onRequestClose={() => setOpen(false)}
-        modalHeading="Test Modal"
-        primaryButtonText="Close">
-        <p>
-          Click the <strong>i</strong> icon to open the Toggletip, then click
-          anywhere in this modal body. The Toggletip should close.
-        </p>
-
-        <Toggletip align="bottom">
-          <ToggletipButton label="Show information">
-            <Information />
-          </ToggletipButton>
-          <ToggletipContent>
-            <p>Toggletip content</p>
-          </ToggletipContent>
-        </Toggletip>
-      </Modal>
-    </div>
-  );
 };

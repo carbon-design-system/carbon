@@ -25,8 +25,8 @@ class CDSSearchSkeleton extends LitElement {
 
   render() {
     return html`
-      <span class="${prefix}--label"></span>
-      <div class="${prefix}--search-input"></div>
+      <span class="${prefix}--label ${prefix}--skeleton"></span>
+      <div class="${prefix}--text-input ${prefix}--skeleton"></div>
     `;
   }
 

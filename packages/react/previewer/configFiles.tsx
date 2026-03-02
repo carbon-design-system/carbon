@@ -75,3 +75,10 @@ export const style: string = `
   $font-path: '@ibm/plex'
 );
 `;
+
+export const flexGridScss: string = `
+@use '@carbon/react' with (
+  $font-path: '@ibm/plex',
+  $use-flexbox-grid: true
+);
+`;

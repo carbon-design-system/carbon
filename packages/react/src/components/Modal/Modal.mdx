@@ -1,4 +1,10 @@
-import { Story, ArgTypes, Canvas, Unstyled, Meta } from '@storybook/addon-docs/blocks';
+import {
+  Story,
+  ArgTypes,
+  Canvas,
+  Unstyled,
+  Meta,
+} from '@storybook/addon-docs/blocks';
 import Modal from '../Modal';
 import { InlineNotification } from '../Notification';
 import CodeSnippet from '../CodeSnippet';
@@ -16,13 +22,15 @@ import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
 &nbsp;|&nbsp;
 [Accessibility](https://www.carbondesignsystem.com/components/modal/accessibility)
 
-{/* <!-- START doctoc generated TOC please keep comment here to allow auto update --> <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE --> */}
+{/* <!-- START doctoc generated TOC please keep comment here to allow auto update --> */}
+{/* <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE --> */}
 
 ## Table of Contents
 
 - [Overview](#overview)
 - [Component API](#component-api)
 - [Opening/closing modal](#openingclosing-modal)
+  - [`preventCloseOnClickOutside`](#preventcloseonclickoutside)
 - [Modal sizes](#modal-sizes)
   - [Alignment](#alignment)
   - [Overflow content](#overflow-content)
@@ -119,33 +127,34 @@ const ModalStateManager = ({
     kind="warning"
     title="Warning"
     className="sb-notification">
-    <CodeSnippet type="inline" hideCopyButton>Modal</CodeSnippet>
+    <CodeSnippet type="inline" hideCopyButton>
+      Modal
+    </CodeSnippet>
     and
-    <CodeSnippet type="inline" hideCopyButton>ComposedModal</CodeSnippet>
+    <CodeSnippet type="inline" hideCopyButton>
+      ComposedModal
+    </CodeSnippet>
     have to be put at the top level in a React tree. The easiest way to ensure
     that is using a React portal, as shown in the example above.
   </InlineNotification>
 </Unstyled>
-<br />
-<Unstyled>
-  <InlineNotification
-    kind="info"
-    title="Outside click behavior"
-    className="sb-notification">
-    Passive modals can be closed by clicking outside by default. Non-passive
-    modals cannot be dismissed this way, even if{' '}
-    <CodeSnippet type="inline" hideCopyButton>
-      preventCloseOnClickOutside
-    </CodeSnippet>{' '}
-    is set to{' '}
-    <CodeSnippet type="inline" hideCopyButton>
-      false
-    </CodeSnippet>
-    .
-  </InlineNotification>
-</Unstyled>
 
 {/* <!-- prettier-ignore-end --> */}
+
+### `preventCloseOnClickOutside`
+
+This prop controls what happens when a user clicks outside the bounds of the
+modal. When true, clicks outside the modal will not trigger close. When false,
+clicks outside the modal will trigger close. When left undefined, the modal type
+determines the default behavior.
+
+Passive modals by default close on outside clicks. For transactional,
+non-passive modals that include `ModalFooter`, the
+[design spec for Modal](https://carbondesignsystem.com/components/modal/usage/#transactional-modal)
+calls for these to not be dissmissable via outside clicks.
+
+Setting `preventCloseOnClickOutside` to `false` to override the default for
+non-passive modals is allowed but not recommended, and will trigger a warning.
 
 ## Modal sizes
 
@@ -254,9 +263,13 @@ With `<ComposedModal>`, you can control the buttons with the following code.
     title="Warning"
     className="sb-notification">
     As the instructions for the three buttons imply,
-    <CodeSnippet type="inline" hideCopyButton>ModalFooter</CodeSnippet>
+    <CodeSnippet type="inline" hideCopyButton>
+      ModalFooter
+    </CodeSnippet>
     is flexible with the buttons you render using
-    <CodeSnippet type="inline" hideCopyButton>Button</CodeSnippet>
+    <CodeSnippet type="inline" hideCopyButton>
+      Button
+    </CodeSnippet>
     components. In this case, your application code is responsible for handling
     button actions, such as closing the modal.
   </InlineNotification>

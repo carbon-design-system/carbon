@@ -39,7 +39,6 @@ Commands:
   cli publish <tag>         publish packages that have different versions from
                             the package registry
   cli release [bump]        run the release step for the given version bump
-  cli sync [target]         sync files across workspaces
 
 Options:
   --help     Show help                                                 [boolean]

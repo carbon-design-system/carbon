@@ -1,11 +1,12 @@
 /**
- * Copyright IBM Corp. 2023, 2025
+ * Copyright IBM Corp. 2023, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
 import React, {
+  forwardRef,
   InputHTMLAttributes,
   ReactNode,
   useContext,
@@ -16,7 +17,7 @@ import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import { View, ViewOff } from '@carbon/icons-react';
 import { useNormalizedInputProps } from '../../internal/useNormalizedInputProps';
-import { textInputProps } from './util';
+import { getTextInputProps } from './util';
 import { FormContext } from '../FluidForm';
 import { Tooltip } from '../Tooltip';
 import { PopoverAlignment } from '../Popover';
@@ -175,239 +176,249 @@ export interface PasswordInputProps
   warnText?: ReactNode;
 }
 
-const PasswordInput = React.forwardRef(function PasswordInput(
-  {
-    className,
-    disabled = false,
-    helperText,
-    hideLabel,
-    hidePasswordLabel = 'Hide password',
-    id,
-    inline,
-    invalid = false,
-    invalidText,
-    labelText,
-    light,
-    onChange = () => {},
-    onClick = () => {},
-    onTogglePasswordVisibility,
-    placeholder,
-    readOnly,
-    size = 'md',
-    showPasswordLabel = 'Show password',
-    tooltipPosition = 'bottom',
-    tooltipAlignment = 'end',
-    type = 'password',
-    warn = false,
-    warnText,
-    ...rest
-  }: PasswordInputProps,
-  ref
-) {
-  const [inputType, setInputType] = useState(type);
-  const prefix = usePrefix();
-  const normalizedProps = useNormalizedInputProps({
-    id,
-    invalid,
-    invalidText,
-    warn,
-    warnText,
-    readOnly,
-    disabled,
-  });
-
-  const { isFluid } = useContext(FormContext);
-
-  const handleTogglePasswordVisibility = (event) => {
-    setInputType(inputType === 'password' ? 'text' : 'password');
-    onTogglePasswordVisibility && onTogglePasswordVisibility(event);
-  };
-  const textInputClasses = classNames(
-    `${prefix}--text-input`,
-    `${prefix}--password-input`,
-    className,
+const PasswordInput = forwardRef<unknown, PasswordInputProps>(
+  (
     {
-      [`${prefix}--text-input--light`]: light,
-      [`${prefix}--text-input--invalid`]: normalizedProps.invalid,
-      [`${prefix}--text-input--warning`]: normalizedProps.warn,
-      [`${prefix}--text-input--${size}`]: size, // TODO: V12 - Remove this class
-      [`${prefix}--layout--size-${size}`]: size,
-    }
-  );
-  const sharedTextInputProps = {
-    id,
-    onChange: (evt) => {
-      if (!disabled) {
-        onChange(evt);
-      }
+      className,
+      disabled = false,
+      helperText,
+      hideLabel,
+      hidePasswordLabel = 'Hide password',
+      id,
+      inline,
+      invalid = false,
+      invalidText,
+      labelText,
+      light,
+      onChange = () => {},
+      onClick = () => {},
+      onTogglePasswordVisibility,
+      placeholder,
+      readOnly,
+      size = 'md',
+      showPasswordLabel = 'Show password',
+      tooltipPosition = 'bottom',
+      tooltipAlignment = 'end',
+      type = 'password',
+      warn = false,
+      warnText,
+      ...rest
     },
-    onClick: (evt) => {
-      if (!disabled) {
-        onClick(evt);
+    ref
+  ) => {
+    const [inputType, setInputType] = useState(type);
+    const prefix = usePrefix();
+    const normalizedProps = useNormalizedInputProps({
+      id,
+      invalid,
+      invalidText,
+      warn,
+      warnText,
+      readOnly,
+      disabled,
+    });
+
+    const { isFluid } = useContext(FormContext);
+
+    const handleTogglePasswordVisibility = (event) => {
+      setInputType(inputType === 'password' ? 'text' : 'password');
+      onTogglePasswordVisibility?.(event);
+    };
+    const textInputClasses = classNames(
+      `${prefix}--text-input`,
+      `${prefix}--password-input`,
+      className,
+      {
+        [`${prefix}--text-input--light`]: light,
+        [`${prefix}--text-input--invalid`]: normalizedProps.invalid,
+        [`${prefix}--text-input--warning`]: normalizedProps.warn,
+        [`${prefix}--text-input--${size}`]: size, // TODO: V12 - Remove this class
+        [`${prefix}--layout--size-${size}`]: size,
       }
-    },
-    placeholder,
-    type: inputType,
-    className: textInputClasses,
-    readOnly,
-    ref,
-    ...rest,
-  };
-  const inputWrapperClasses = classNames(
-    `${prefix}--form-item`,
-    `${prefix}--text-input-wrapper`,
-    `${prefix}--password-input-wrapper`,
-    {
-      [`${prefix}--text-input-wrapper--readonly`]: readOnly,
-      [`${prefix}--text-input-wrapper--light`]: light,
-      [`${prefix}--text-input-wrapper--inline`]: inline,
-      [`${prefix}--text-input--fluid`]: isFluid,
+    );
+    const sharedTextInputProps = {
+      id,
+      onChange: (evt) => {
+        if (!disabled) {
+          onChange(evt);
+        }
+      },
+      onClick: (evt) => {
+        if (!disabled) {
+          onClick(evt);
+        }
+      },
+      placeholder,
+      type: inputType,
+      className: textInputClasses,
+      readOnly,
+      ref,
+      ...rest,
+    };
+    const inputWrapperClasses = classNames(
+      `${prefix}--form-item`,
+      `${prefix}--text-input-wrapper`,
+      `${prefix}--password-input-wrapper`,
+      {
+        [`${prefix}--text-input-wrapper--readonly`]: readOnly,
+        [`${prefix}--text-input-wrapper--light`]: light,
+        [`${prefix}--text-input-wrapper--inline`]: inline,
+        [`${prefix}--text-input--fluid`]: isFluid,
+      }
+    );
+    const labelClasses = classNames(`${prefix}--label`, {
+      [`${prefix}--visually-hidden`]: hideLabel,
+      [`${prefix}--label--disabled`]: disabled,
+      [`${prefix}--label--inline`]: inline,
+      [`${prefix}--label--inline--${size}`]: inline && !!size,
+    });
+    const helperTextClasses = classNames(`${prefix}--form__helper-text`, {
+      [`${prefix}--form__helper-text--disabled`]: disabled,
+      [`${prefix}--form__helper-text--inline`]: inline,
+    });
+    const fieldOuterWrapperClasses = classNames(
+      `${prefix}--text-input__field-outer-wrapper`,
+      {
+        [`${prefix}--text-input__field-outer-wrapper--inline`]: inline,
+      }
+    );
+    const fieldWrapperClasses = classNames(
+      `${prefix}--text-input__field-wrapper`,
+      {
+        [`${prefix}--text-input__field-wrapper--warning`]: normalizedProps.warn,
+      }
+    );
+    const iconClasses = classNames({
+      [`${prefix}--text-input__invalid-icon`]:
+        normalizedProps.invalid || normalizedProps.warn,
+      [`${prefix}--text-input__invalid-icon--warning`]: normalizedProps.warn,
+    });
+
+    const label = typeof labelText !== 'undefined' && labelText !== null && (
+      <label htmlFor={id} className={labelClasses}>
+        {labelText}
+      </label>
+    );
+    const helper = typeof helperText !== 'undefined' && helperText !== null && (
+      <div id={normalizedProps.helperId} className={helperTextClasses}>
+        {helperText}
+      </div>
+    );
+
+    const passwordIsVisible = inputType === 'text';
+    const passwordVisibilityIcon = passwordIsVisible ? (
+      <ViewOff className={`${prefix}--icon-visibility-off`} />
+    ) : (
+      <View className={`${prefix}--icon-visibility-on`} />
+    );
+
+    const passwordVisibilityToggleClasses = classNames(
+      `${prefix}--text-input--password__visibility__toggle`,
+      `${prefix}--btn`,
+      `${prefix}--tooltip__trigger`,
+      `${prefix}--tooltip--a11y`,
+      {
+        [`${prefix}--tooltip--${tooltipPosition}`]: tooltipPosition,
+        [`${prefix}--tooltip--align-${tooltipAlignment}`]: tooltipAlignment,
+      }
+    );
+
+    const tooltipClasses = classNames(
+      `${prefix}--toggle-password-tooltip`,
+      `${prefix}--icon-tooltip`
+    );
+
+    let align: PopoverAlignment | undefined = undefined;
+
+    if (tooltipPosition === 'top' || tooltipPosition === 'bottom') {
+      if (tooltipAlignment === 'center') {
+        align = tooltipPosition;
+      }
+      if (tooltipAlignment === 'end') {
+        align = `${tooltipPosition}-end`;
+      }
+      if (tooltipAlignment === 'start') {
+        align = `${tooltipPosition}-start`;
+      }
     }
-  );
-  const labelClasses = classNames(`${prefix}--label`, {
-    [`${prefix}--visually-hidden`]: hideLabel,
-    [`${prefix}--label--disabled`]: disabled,
-    [`${prefix}--label--inline`]: inline,
-    [`${prefix}--label--inline--${size}`]: inline && !!size,
-  });
-  const helperTextClasses = classNames(`${prefix}--form__helper-text`, {
-    [`${prefix}--form__helper-text--disabled`]: disabled,
-    [`${prefix}--form__helper-text--inline`]: inline,
-  });
-  const fieldOuterWrapperClasses = classNames(
-    `${prefix}--text-input__field-outer-wrapper`,
-    {
-      [`${prefix}--text-input__field-outer-wrapper--inline`]: inline,
-    }
-  );
-  const fieldWrapperClasses = classNames(
-    `${prefix}--text-input__field-wrapper`,
-    {
-      [`${prefix}--text-input__field-wrapper--warning`]: normalizedProps.warn,
-    }
-  );
-  const iconClasses = classNames({
-    [`${prefix}--text-input__invalid-icon`]:
-      normalizedProps.invalid || normalizedProps.warn,
-    [`${prefix}--text-input__invalid-icon--warning`]: normalizedProps.warn,
-  });
 
-  const label = labelText ? (
-    <label htmlFor={id} className={labelClasses}>
-      {labelText}
-    </label>
-  ) : null;
-  const helper = helperText ? (
-    <div id={normalizedProps.helperId} className={helperTextClasses}>
-      {helperText}
-    </div>
-  ) : null;
-
-  const passwordIsVisible = inputType === 'text';
-  const passwordVisibilityIcon = passwordIsVisible ? (
-    <ViewOff className={`${prefix}--icon-visibility-off`} />
-  ) : (
-    <View className={`${prefix}--icon-visibility-on`} />
-  );
-
-  const passwordVisibilityToggleClasses = classNames(
-    `${prefix}--text-input--password__visibility__toggle`,
-    `${prefix}--btn`,
-    `${prefix}--tooltip__trigger`,
-    `${prefix}--tooltip--a11y`,
-    {
-      [`${prefix}--tooltip--${tooltipPosition}`]: tooltipPosition,
-      [`${prefix}--tooltip--align-${tooltipAlignment}`]: tooltipAlignment,
-    }
-  );
-
-  let align: PopoverAlignment | undefined = undefined;
-
-  if (tooltipPosition === 'top' || tooltipPosition === 'bottom') {
-    if (tooltipAlignment === 'center') {
+    if (tooltipPosition === 'right' || tooltipPosition === 'left') {
       align = tooltipPosition;
     }
-    if (tooltipAlignment === 'end') {
-      align = `${tooltipPosition}-end`;
+    if (!hidePasswordLabel || hidePasswordLabel.trim() === '') {
+      // eslint-disable-next-line no-console -- https://github.com/carbon-design-system/carbon/issues/20452
+      console.warn('Warning: The "hidePasswordLabel" should not be blank.');
+    } else if (!showPasswordLabel || showPasswordLabel.trim() === '') {
+      // eslint-disable-next-line no-console -- https://github.com/carbon-design-system/carbon/issues/20452
+      console.warn('Warning: The "showPasswordLabel" should not be blank.');
     }
-    if (tooltipAlignment === 'start') {
-      align = `${tooltipPosition}-start`;
-    }
-  }
+    const input = (
+      <>
+        <input
+          {...getTextInputProps({
+            sharedTextInputProps,
+            invalid: normalizedProps.invalid,
+            invalidId: normalizedProps.invalidId,
+            warn: normalizedProps.warn,
+            warnId: normalizedProps.warnId,
+            hasHelper: Boolean(
+              helperText &&
+                !isFluid &&
+                (inline || (!inline && !normalizedProps.validation))
+            ),
+            helperId: normalizedProps.helperId,
+          })}
+          disabled={disabled}
+          data-toggle-password-visibility={inputType === 'password'}
+        />
+        {isFluid && <hr className={`${prefix}--text-input__divider`} />}
 
-  if (tooltipPosition === 'right' || tooltipPosition === 'left') {
-    align = tooltipPosition;
-  }
-  if (!hidePasswordLabel || hidePasswordLabel.trim() === '') {
-    console.warn('Warning: The "hidePasswordLabel" should not be blank.');
-  } else if (!showPasswordLabel || showPasswordLabel.trim() === '') {
-    console.warn('Warning: The "showPasswordLabel" should not be blank.');
-  }
-  const input = (
-    <>
-      <input
-        {...textInputProps({
-          sharedTextInputProps,
-          invalid: normalizedProps.invalid,
-          invalidId: normalizedProps.invalidId,
-          warn: normalizedProps.warn,
-          warnId: normalizedProps.warnId,
-          hasHelper: Boolean(
-            helperText &&
-              !isFluid &&
-              (inline || (!inline && !normalizedProps.validation))
-          ),
-          helperId: normalizedProps.helperId,
-        })}
-        disabled={disabled}
-        data-toggle-password-visibility={inputType === 'password'}
-      />
-      {isFluid && <hr className={`${prefix}--text-input__divider`} />}
+        <Tooltip
+          align={align}
+          className={tooltipClasses}
+          label={passwordIsVisible ? hidePasswordLabel : showPasswordLabel}>
+          <button
+            type="button"
+            className={passwordVisibilityToggleClasses}
+            disabled={disabled}
+            onClick={handleTogglePasswordVisibility}>
+            {passwordVisibilityIcon}
+          </button>
+        </Tooltip>
+      </>
+    );
 
-      <Tooltip
-        align={align}
-        className={`${prefix}--toggle-password-tooltip`}
-        label={passwordIsVisible ? hidePasswordLabel : showPasswordLabel}>
-        <button
-          type="button"
-          className={passwordVisibilityToggleClasses}
-          disabled={disabled || readOnly}
-          onClick={handleTogglePasswordVisibility}>
-          {passwordVisibilityIcon}
-        </button>
-      </Tooltip>
-    </>
-  );
+    useEffect(() => {
+      setInputType(type);
+    }, [type]);
 
-  useEffect(() => {
-    setInputType(type);
-  }, [type]);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
+    const Icon = normalizedProps.icon as any;
 
-  const Icon = normalizedProps.icon as any;
-
-  return (
-    <div className={inputWrapperClasses}>
-      {!inline ? (
-        label
-      ) : (
-        <div className={`${prefix}--text-input__label-helper-wrapper`}>
-          {label}
-          {!isFluid && helper}
+    return (
+      <div className={inputWrapperClasses}>
+        {!inline ? (
+          label
+        ) : (
+          <div className={`${prefix}--text-input__label-helper-wrapper`}>
+            {label}
+            {!isFluid && helper}
+          </div>
+        )}
+        <div className={fieldOuterWrapperClasses}>
+          <div
+            className={fieldWrapperClasses}
+            data-invalid={normalizedProps.invalid || null}>
+            {Icon && <Icon className={iconClasses} />}
+            {input}
+            {isFluid && !inline && normalizedProps.validation}
+          </div>
+          {!isFluid && !inline && (normalizedProps.validation || helper)}
         </div>
-      )}
-      <div className={fieldOuterWrapperClasses}>
-        <div
-          className={fieldWrapperClasses}
-          data-invalid={normalizedProps.invalid || null}>
-          {Icon && <Icon className={iconClasses} />}
-          {input}
-          {isFluid && !inline && normalizedProps.validation}
-        </div>
-        {!isFluid && !inline && (normalizedProps.validation || helper)}
       </div>
-    </div>
-  );
-});
+    );
+  }
+);
 
 PasswordInput.displayName = 'PasswordInput';
 PasswordInput.propTypes = {

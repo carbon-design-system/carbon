@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -10,6 +10,9 @@ import React from 'react';
 import { Popover, PopoverContent } from '../../Popover';
 import userEvent from '@testing-library/user-event';
 import { waitForPosition } from '../../ListBox/test-helpers';
+import RadioButton from '../../RadioButton';
+import RadioButtonGroup from '../../RadioButtonGroup';
+import { default as Checkbox } from '../../Checkbox';
 
 const prefix = 'cds';
 
@@ -127,6 +130,64 @@ describe('Popover', () => {
         </Popover>
       );
       expect(container.firstChild).toHaveClass(`${prefix}--popover--tab-tip`);
+    });
+
+    it('should respect border prop', () => {
+      const { container } = render(
+        <Popover open border>
+          <button type="button">Settings</button>
+          <PopoverContent>test</PopoverContent>
+        </Popover>
+      );
+      expect(container.firstChild).toHaveClass(`${prefix}--popover--border`);
+    });
+
+    it('should respect dropShadow prop', () => {
+      const { container } = render(
+        <Popover open dropShadow>
+          <button type="button">Settings</button>
+          <PopoverContent>test</PopoverContent>
+        </Popover>
+      );
+      expect(container.firstChild).toHaveClass(
+        `${prefix}--popover--drop-shadow`
+      );
+    });
+
+    it('should respect backgroundToken prop when set to "background" and highContrast is false', () => {
+      const { container } = render(
+        <Popover open backgroundToken="background" highContrast={false}>
+          <button type="button">Settings</button>
+          <PopoverContent>test</PopoverContent>
+        </Popover>
+      );
+      expect(container.firstChild).toHaveClass(
+        `${prefix}--popover--background-token__background`
+      );
+    });
+
+    it('should not add background token class when backgroundToken is "layer"', () => {
+      const { container } = render(
+        <Popover open backgroundToken="layer">
+          <button type="button">Settings</button>
+          <PopoverContent>test</PopoverContent>
+        </Popover>
+      );
+      expect(container.firstChild).not.toHaveClass(
+        `${prefix}--popover--background-token__background`
+      );
+    });
+
+    it('should not add background token class when highContrast is true, even if backgroundToken is "background"', () => {
+      const { container } = render(
+        <Popover open backgroundToken="background" highContrast={true}>
+          <button type="button">Settings</button>
+          <PopoverContent>test</PopoverContent>
+        </Popover>
+      );
+      expect(container.firstChild).not.toHaveClass(
+        `${prefix}--popover--background-token__background`
+      );
     });
 
     it('should not allow other alignments than bottom-start or bottom-end when isTabTip is present', () => {
@@ -311,6 +372,68 @@ describe('Popover', () => {
 
     // Click on input inside popover - should NOT close
     await userEvent.click(screen.getByTestId('inside-input'));
+    expect(onRequestClose).not.toHaveBeenCalled();
+  });
+
+  it('should NOT call onRequestClose when clicking inside the popover content with a popover inside an interactive element', async () => {
+    const onRequestClose = jest.fn();
+    render(
+      <div tabIndex={0}>
+        <Popover open onRequestClose={onRequestClose}>
+          <button type="button">Settings</button>
+          <PopoverContent data-testid="popover-content">
+            <button data-testid="inside-button">Inside Button</button>
+            <input data-testid="inside-input" placeholder="Inside Input" />
+          </PopoverContent>
+        </Popover>
+      </div>
+    );
+
+    // Click on button inside popover - should NOT close
+    await userEvent.click(screen.getByTestId('inside-button'));
+    expect(onRequestClose).not.toHaveBeenCalled();
+
+    // Click on input inside popover - should NOT close
+    await userEvent.click(screen.getByTestId('inside-input'));
+    expect(onRequestClose).not.toHaveBeenCalled();
+  });
+
+  it('should not close TabTip when interacting with form elements inside', async () => {
+    const onRequestClose = jest.fn();
+    render(
+      <Popover open isTabTip onRequestClose={onRequestClose}>
+        <button type="button">Settings</button>
+        <PopoverContent>
+          <RadioButtonGroup legendText="Test options">
+            <RadioButton
+              labelText="Option 1"
+              value="option1"
+              id="tabtip-radio-1"
+              data-testid="tabtip-radio-1"
+            />
+            <RadioButton
+              labelText="Option 2"
+              value="option2"
+              id="tabtip-radio-2"
+              data-testid="tabtip-radio-2"
+            />
+          </RadioButtonGroup>
+          <Checkbox
+            labelText="Test checkbox"
+            id="tabtip-checkbox"
+            data-testid="tabtip-checkbox"
+          />
+        </PopoverContent>
+      </Popover>
+    );
+
+    await userEvent.click(screen.getByTestId('tabtip-radio-1'));
+    expect(onRequestClose).not.toHaveBeenCalled();
+
+    await userEvent.click(screen.getByTestId('tabtip-radio-2'));
+    expect(onRequestClose).not.toHaveBeenCalled();
+
+    await userEvent.click(screen.getByTestId('tabtip-checkbox'));
     expect(onRequestClose).not.toHaveBeenCalled();
   });
 });

@@ -83,7 +83,8 @@ Breadcrumb.propTypes = {
   noTrailingSlash: PropTypes.bool,
 
   /**
-   * Specify the size of the Breadcrumb. Currently supports the following:
+   * Specify the size of the Breadcrumb. Currently
+   * supports the following: `sm` & `md` (default: 'md')
    */
   size: PropTypes.oneOf(['sm', 'md']),
 };

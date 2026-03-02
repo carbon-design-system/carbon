@@ -20,5 +20,4 @@ interface CDSFloatingMenuTrigger extends HTMLElement {
   triggerPosition: ClientRect;
 }
 
-// eslint-disable-next-line no-undef
 export default CDSFloatingMenuTrigger;

@@ -33,6 +33,12 @@ import { View, FolderOpen, Folders } from '@carbon/icons-react';
 import Checkbox from '../Checkbox';
 import CheckboxGroup from '../CheckboxGroup';
 
+const buttons = {
+  'One (1)': '1',
+  'Two (2)': '2',
+  'Three (3)': '3',
+};
+
 export default {
   title: 'Components/Modal',
   component: Modal,
@@ -41,12 +47,85 @@ export default {
       page: mdx,
     },
   },
+  argTypes: {
+    'aria-label': {
+      control: 'text',
+    },
+    modalHeading: {
+      control: 'text',
+    },
+    modalLabel: {
+      control: 'text',
+    },
+    numberOfButtons: {
+      description: 'Count of Footer Buttons',
+      options: Object.keys(buttons),
+      mapping: buttons,
+      control: {
+        type: 'inline-radio',
+        labels: Object.keys(buttons),
+      },
+    },
+    onKeyDown: {
+      action: 'onKeyDown',
+    },
+    onRequestSubmit: {
+      action: 'onRequestSubmit',
+    },
+
+    preventCloseOnClickOutside: {
+      control: 'boolean',
+    },
+    primaryButtonText: {
+      control: 'text',
+    },
+  },
 };
 
-const buttons = {
-  'One (1)': '1',
-  'Two (2)': '2',
-  'Three (3)': '3',
+const modalFooter = (numberOfButtons) => {
+  const secondaryButtons = () => {
+    switch (numberOfButtons) {
+      case '1':
+        return {
+          secondaryButtons: [],
+        };
+      case '2':
+        return {
+          secondaryButtonText: 'Cancel',
+        };
+      case '3':
+        return {
+          secondaryButtons: [
+            {
+              buttonText: 'Keep both',
+              onClick: action('onClick'),
+            },
+            {
+              buttonText: 'Rename',
+              onClick: action('onClick'),
+            },
+          ],
+        };
+      default:
+        return null;
+    }
+  };
+  return {
+    ...secondaryButtons(),
+  };
+};
+
+const sharedParameters = {
+  controls: {
+    exclude: [
+      'id',
+      'launcherButtonRef',
+      'secondaryButtons',
+      'secondaryButtonText',
+      'selectorPrimaryFocus',
+      'selectorsFloatingMenus',
+    ],
+  },
 };
 
 export const Default = ({ numberOfButtons, ...args }) => {
@@ -151,85 +230,15 @@ export const Default = ({ numberOfButtons, ...args }) => {
   );
 };
 
-Default.args = {
-  numberOfButtons: 'Two (2)',
-};
-
 Default.argTypes = {
-  children: {
-    table: {
-      disable: true,
-    },
-  },
-  className: {
-    table: {
-      disable: true,
-    },
-  },
-  id: {
-    table: {
-      disable: true,
-    },
-  },
-  launcherButtonRef: {
-    table: {
-      disable: true,
-    },
-  },
-  modalHeading: {
-    control: 'text',
-  },
-  modalLabel: {
-    control: 'text',
-  },
-  numberOfButtons: {
-    description: 'Count of Footer Buttons',
-    options: Object.keys(buttons),
-    mapping: buttons,
-    control: {
-      type: 'inline-radio',
-      labels: Object.keys(buttons),
-    },
-  },
-  onKeyDown: {
-    action: 'onKeyDown',
-  },
-  onRequestSubmit: {
-    action: 'onRequestSubmit',
-  },
   onSecondarySubmit: {
     action: 'onSecondarySubmit',
-    table: {
-      disable: true,
-    },
-  },
-  primaryButtonText: {
-    control: 'text',
-  },
-  secondaryButtons: {
-    table: {
-      disable: true,
-    },
-  },
-  secondaryButtonText: {
-    control: 'text',
-    table: {
-      disable: true,
-    },
-  },
-  selectorPrimaryFocus: {
-    table: {
-      disable: true,
-    },
-  },
-  selectorsFloatingMenus: {
-    table: {
-      disable: true,
-    },
   },
 };
 
-export const FullWidth = () => {
+Default.parameters = { ...sharedParameters };
+
+export const FullWidth = ({ numberOfButtons, ...args }) => {
   const [open, setOpen] = useState(true);
   return (
     <>
@@ -241,7 +250,9 @@ export const FullWidth = () => {
         modalHeading="Full width modal"
         modalLabel="An example of a modal with no padding"
         primaryButtonText="Add"
-        secondaryButtonText="Cancel">
+        secondaryButtonText="Cancel"
+        {...args}
+        {...modalFooter(numberOfButtons)}>
         <StructuredListWrapper style={{ marginBottom: '48px' }}>
           <StructuredListHead>
             <StructuredListRow head>
@@ -279,7 +290,9 @@ export const FullWidth = () => {
   );
 };
 
-export const DangerModal = () => {
+FullWidth.parameters = { ...sharedParameters };
+
+export const DangerModal = ({ numberOfButtons, ...args }) => {
   const [open, setOpen] = useState(true);
   return (
     <>
@@ -291,7 +304,9 @@ export const DangerModal = () => {
         modalHeading="Are you sure you want to delete this custom domain?"
         modalLabel="Account resources"
         primaryButtonText="Delete"
-        secondaryButtonText="Cancel">
+        secondaryButtonText="Cancel"
+        {...args}
+        {...modalFooter(numberOfButtons)}>
         <p>
           Check for dependencies on the domain before deletion. For instance, if
           the domain is used as a primary domain for users or if it's associated
@@ -303,40 +318,9 @@ export const DangerModal = () => {
   );
 };
 
-const modalFooter = (numberOfButtons) => {
-  const secondaryButtons = () => {
-    switch (numberOfButtons) {
-      case '1':
-        return {
-          secondaryButtons: [],
-        };
-      case '2':
-        return {
-          secondaryButtonText: 'Cancel',
-        };
-      case '3':
-        return {
-          secondaryButtons: [
-            {
-              buttonText: 'Keep both',
-              onClick: action('onClick'),
-            },
-            {
-              buttonText: 'Rename',
-              onClick: action('onClick'),
-            },
-          ],
-        };
-      default:
-        return null;
-    }
-  };
-  return {
-    ...secondaryButtons(),
-  };
-};
+DangerModal.parameters = { ...sharedParameters };
 
-export const WithScrollingContent = () => {
+export const WithScrollingContent = ({ numberOfButtons, ...args }) => {
   const [open, setOpen] = useState(true);
   return (
     <>
@@ -348,7 +332,9 @@ export const WithScrollingContent = () => {
         modalHeading="Add a custom domain"
         modalLabel="Account resources"
         primaryButtonText="Add"
-        secondaryButtonText="Cancel">
+        secondaryButtonText="Cancel"
+        {...args}
+        {...modalFooter(numberOfButtons)}>
         <p style={{ marginBottom: '1rem' }}>
           Custom domains direct requests for your apps in this Cloud Foundry
           organization to a URL that you own. A custom domain can be a shared
@@ -412,7 +398,9 @@ export const WithScrollingContent = () => {
   );
 };
 
-export const WithStateManager = () => {
+WithScrollingContent.parameters = { ...sharedParameters };
+
+export const WithStateManager = ({ numberOfButtons, ...args }) => {
   /**
    * Simple state manager for modals.
    */
@@ -451,7 +439,9 @@ export const WithStateManager = () => {
           primaryButtonText="Add"
           secondaryButtonText="Cancel"
           open={open}
-          onRequestClose={() => setOpen(false)}>
+          onRequestClose={() => setOpen(false)}
+          {...args}
+          {...modalFooter(numberOfButtons)}>
           <p style={{ marginBottom: '1rem' }}>
             Custom domains direct requests for your apps in this Cloud Foundry
             organization to a URL that you own. A custom domain can be a shared
@@ -474,7 +464,9 @@ export const WithStateManager = () => {
   );
 };
 
-export const PassiveModal = () => {
+WithStateManager.parameters = { ...sharedParameters };
+
+export const PassiveModal = ({ numberOfButtons, ...args }) => {
   const [open, setOpen] = useState(true);
   return (
     <>
@@ -484,12 +476,31 @@ export const PassiveModal = () => {
         onRequestClose={() => setOpen(false)}
         passiveModal
         modalHeading="You are now signed out."
+        {...args}
+        {...modalFooter(numberOfButtons)}
       />
     </>
   );
 };
 
-export const WithInlineLoading = () => {
+PassiveModal.parameters = {
+  controls: {
+    include: [
+      'aria-label',
+      'closeButtonLabel',
+      'hasScrollingContent',
+      'isFullWidth',
+      'modalAriaLabel',
+      'modalHeading',
+      'modalLabel',
+      'open',
+      'preventCloseOnClickOutside',
+      'size',
+    ],
+  },
+};
+
+export const WithInlineLoading = (args) => {
   const [status, setStatus] = useState('inactive');
   const [description, setDescription] = useState('Deleting...');
 
@@ -521,19 +532,36 @@ export const WithInlineLoading = () => {
       <Button onClick={() => setOpen(true)}>Launch modal</Button>
       <Modal
         open={open}
-        onRequestClose={() => setOpen(false)}
         danger
         modalHeading="Are you sure you want to delete this custom domain?"
         modalLabel="Account resources"
         primaryButtonText="Delete"
         secondaryButtonText="Cancel"
-        onRequestSubmit={submit}
         loadingStatus={status}
         loadingDescription={description}
+        {...args}
+        onRequestClose={() => setOpen(false)}
+        onRequestSubmit={submit}
         onLoadingSuccess={resetStatus}
       />
     </>
   );
+};
+
+WithInlineLoading.parameters = {
+  controls: {
+    exclude: [
+      'loadingStatus',
+      'loadingDescription',
+      'numberOfButtons',
+      'id',
+      'launcherButtonRef',
+      'secondaryButtons',
+      'secondaryButtonText',
+      'selectorPrimaryFocus',
+      'selectorsFloatingMenus',
+    ],
+  },
 };
 
 const aiLabel = (
@@ -568,7 +596,7 @@ const aiLabel = (
 );
 
 export const withAILabel = {
-  render: () => {
+  render: ({ numberOfButtons, ...args }) => {
     const [open, setOpen] = useState(true); // eslint-disable-line
     return (
       <div className="ai-label-modal">
@@ -583,7 +611,9 @@ export const withAILabel = {
           modalLabel="Account resources"
           primaryButtonText="Add"
           secondaryButtonText="Cancel"
-          decorator={aiLabel}>
+          decorator={aiLabel}
+          {...args}
+          {...modalFooter(numberOfButtons)}>
           <p style={{ marginBottom: '2rem' }}>
             Custom domains direct requests for your apps in this Cloud Foundry
             organization to a URL that you own. A custom domain can be a shared
@@ -608,3 +638,4 @@ export const withAILabel = {
     );
   },
 };
+withAILabel.parameters = { ...sharedParameters };

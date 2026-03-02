@@ -8,6 +8,7 @@
 @use 'sass:list';
 @use '../button';
 @use '../../config' as *;
+@use '../../feature-flags' as *;
 @use '../../breakpoint' as *;
 @use '../../motion' as *;
 @use '../../spacing' as *;
@@ -21,7 +22,7 @@
 /// Dialog styles
 /// @access public
 /// @group dialog
-@mixin dialog {
+@mixin dialog($enable-presence: false) {
   .#{$prefix}--dialog {
     position: fixed;
     padding: 0;
@@ -32,20 +33,6 @@
     inline-size: 48rem;
     inset: 0;
     max-block-size: 100%;
-    opacity: 0;
-    transform: translateY(calc(-1 * #{$spacing-06}));
-    /** opening and closing is used in as allow-discrete is not currently supported wide enough
-     * https://caniuse.com/mdn-css_properties_display_is_transitionable
-     */
-    transition:
-      opacity $duration-moderate-02 motion(exit, expressive),
-      transform $duration-moderate-02 motion(exit, expressive),
-      overlay $duration-moderate-02 motion(exit, expressive) allow-discrete,
-      display $duration-moderate-02 motion(exit, expressive) allow-discrete;
-
-    @media (prefers-reduced-motion) {
-      transition: none;
-    }
 
     @include breakpoint(md) {
       max-inline-size: 84%;
@@ -57,20 +44,85 @@
       max-inline-size: 48%;
     }
 
-    &[open] {
-      opacity: 1;
-      transform: translateY(0);
-
+    @if not(enabled('enable-presence') or $enable-presence) {
+      opacity: 0;
+      transform: translateY(calc(-1 * #{$spacing-06}));
+      /** opening and closing is used in as allow-discrete is not currently supported wide enough
+       * https://caniuse.com/mdn-css_properties_display_is_transitionable
+       */
       transition:
-        opacity $duration-moderate-02 motion(entrance, expressive),
-        transform $duration-moderate-02 motion(entrance, expressive),
-        overlay $duration-moderate-02 motion(entrance, expressive)
-          allow-discrete,
-        display $duration-moderate-02 motion(entrance, expressive)
-          allow-discrete;
+        opacity $duration-moderate-02 motion(exit, expressive),
+        transform $duration-moderate-02 motion(exit, expressive),
+        overlay $duration-moderate-02 motion(exit, expressive) allow-discrete,
+        display $duration-moderate-02 motion(exit, expressive) allow-discrete;
 
       @media (prefers-reduced-motion) {
         transition: none;
+      }
+
+      &[open] {
+        opacity: 1;
+        transform: translateY(0);
+
+        transition:
+          opacity $duration-moderate-02 motion(entrance, expressive),
+          transform $duration-moderate-02 motion(entrance, expressive),
+          overlay
+            $duration-moderate-02
+            motion(entrance, expressive)
+            allow-discrete,
+          display
+            $duration-moderate-02
+            motion(entrance, expressive)
+            allow-discrete;
+
+        @media (prefers-reduced-motion) {
+          transition: none;
+        }
+      }
+    } @else {
+      animation: #{$prefix}--presence-dialog__enter
+        $duration-moderate-02
+        motion(entrance, expressive)
+        forwards;
+
+      @media (prefers-reduced-motion) {
+        animation: none;
+      }
+
+      &[data-exiting] {
+        animation: #{$prefix}--presence-dialog__exit
+          $duration-moderate-02
+          motion(exit, expressive)
+          forwards;
+
+        @media (prefers-reduced-motion) {
+          animation: none;
+        }
+      }
+
+      @keyframes #{$prefix}--presence-dialog__enter {
+        from {
+          opacity: 0;
+          transform: translateY(calc(-1 * #{$spacing-06}));
+        }
+
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes #{$prefix}--presence-dialog__exit {
+        from {
+          opacity: 1;
+          transform: translateY(0);
+        }
+
+        to {
+          opacity: 0;
+          transform: translateY(calc(-1 * #{$spacing-06}));
+        }
       }
     }
 
@@ -99,30 +151,79 @@
     padding-inline: $spacing-05 $spacing-09;
   }
 
-  /* Transition the :backdrop when the dialog modal is promoted to the top layer */
   .#{$prefix}--dialog::backdrop {
     background-color: $overlay;
     opacity: 0;
-    /* opening and closing is used in as allow-discrete is not currently supported wide enough
-     * https://caniuse.com/mdn-css_properties_display_is_transitionable
-     */
-    transition:
-      background-color $duration-moderate-02 motion(entrance, expressive),
-      opacity $duration-moderate-02 motion(entrance, expressive);
-
-    @media (prefers-reduced-motion) {
-      transition: none;
-    }
   }
 
-  .#{$prefix}--dialog[open]::backdrop {
-    opacity: 1;
-    transition:
-      background-color $duration-moderate-02 motion(exit, expressive),
-      opacity $duration-moderate-02 motion(exit, expressive);
+  @if not(enabled('enable-presence') or $enable-presence) {
+    /* Transition the :backdrop when the dialog modal is promoted to the top layer */
+    .#{$prefix}--dialog::backdrop {
+      /* opening and closing is used in as allow-discrete is not currently supported wide enough
+       * https://caniuse.com/mdn-css_properties_display_is_transitionable
+       */
+      transition:
+        background-color $duration-moderate-02 motion(entrance, expressive),
+        opacity $duration-moderate-02 motion(entrance, expressive);
 
-    @media (prefers-reduced-motion) {
-      transition: none;
+      @media (prefers-reduced-motion) {
+        transition: none;
+      }
+    }
+
+    .#{$prefix}--dialog[open]::backdrop {
+      opacity: 1;
+      transition:
+        background-color $duration-moderate-02 motion(exit, expressive),
+        opacity $duration-moderate-02 motion(exit, expressive);
+
+      @media (prefers-reduced-motion) {
+        transition: none;
+      }
+    }
+  } @else {
+    .#{$prefix}--dialog {
+      &::backdrop {
+        animation: #{$prefix}--presence-dialog-backdrop__enter
+          $duration-moderate-02
+          motion(entrance, expressive)
+          forwards;
+
+        @media (prefers-reduced-motion) {
+          animation: none;
+        }
+      }
+
+      &[data-exiting]::backdrop {
+        animation: #{$prefix}--presence-dialog-backdrop__exit
+          $duration-moderate-02
+          motion(exit, expressive)
+          forwards;
+
+        @media (prefers-reduced-motion) {
+          animation: none;
+        }
+      }
+    }
+
+    @keyframes #{$prefix}--presence-dialog-backdrop__enter {
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
+    }
+
+    @keyframes #{$prefix}--presence-dialog-backdrop__exit {
+      from {
+        opacity: 1;
+      }
+
+      to {
+        opacity: 0;
+      }
     }
   }
 
@@ -130,7 +231,7 @@
   * https://caniuse.com/mdn-css_at-rules_starting-style
   */
   /* This starting-style rule cannot be nested inside the above selector
-because the nesting selector cannot represent pseudo-elements. */
+  because the nesting selector cannot represent pseudo-elements. */
 
   @starting-style {
     .#{$prefix}--dialog[open]::backdrop {

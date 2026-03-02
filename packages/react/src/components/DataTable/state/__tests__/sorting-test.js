@@ -1,13 +1,14 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
+import { sortStates } from '../sortStates';
+
 describe('sorting state', () => {
   let sorting;
-  let sortStates;
   let initialSortState;
   let getNextSortDirection;
   let getNextSortState;
@@ -18,7 +19,6 @@ describe('sorting state', () => {
     }));
 
     sorting = require('../sorting');
-    sortStates = sorting.sortStates;
     initialSortState = sorting.initialSortState;
     getNextSortDirection = sorting.getNextSortDirection;
     getNextSortState = sorting.getNextSortState;
@@ -189,6 +189,30 @@ describe('sorting state', () => {
         // Initial row order
         rowIds: ['a', 'b', 'c'],
       });
+    });
+
+    it('should sort without `sortRow` being provided', () => {
+      const state = getNextSortState({ locale: 'en' }, mockState, { key: 'a' });
+
+      expect(state.rowIds).toEqual(['b', 'a', 'c']);
+    });
+
+    it('should reset sort direction when a different header is sorted', () => {
+      const state1 = getNextSortState(mockProps, mockState, { key: 'a' });
+      const state2 = getNextSortState(
+        mockProps,
+        { ...mockState, ...state1 },
+        { key: 'b' }
+      );
+
+      expect(state2.sortDirection).toBe(sortStates.ASC);
+    });
+
+    it('should handle empty `cellsById`', () => {
+      const emptyState = { ...mockState, cellsById: {} };
+      const state = getNextSortState(mockProps, emptyState, { key: 'a' });
+
+      expect(state.rowIds).toEqual(['b', 'a', 'c']);
     });
   });
 });

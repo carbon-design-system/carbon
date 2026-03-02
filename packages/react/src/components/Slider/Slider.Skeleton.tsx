@@ -6,7 +6,7 @@
  */
 
 import PropTypes from 'prop-types';
-import React, { HTMLAttributes, useState } from 'react';
+import React, { HTMLAttributes, ReactNode, useState } from 'react';
 import cx from 'classnames';
 import { usePrefix } from '../../internal/usePrefix';
 import useIsomorphicEffect from '../../internal/useIsomorphicEffect';
@@ -145,5 +145,4 @@ SliderSkeleton.propTypes = {
   twoHandles: PropTypes.bool,
 };
 
-export default SliderSkeleton;
-export { SliderSkeleton };
+export default SliderSkeleton as (props: SliderSkeletonProps) => ReactNode;

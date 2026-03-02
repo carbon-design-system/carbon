@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2025
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -9,6 +9,7 @@ import PropTypes from 'prop-types';
 import React, {
   cloneElement,
   createContext,
+  useEffect,
   useRef,
   useState,
   type ReactElement,
@@ -16,11 +17,11 @@ import React, {
 } from 'react';
 import classNames from 'classnames';
 import type { RadioButtonProps } from '../RadioButton';
-import { Legend } from '../Text';
+import { Legend } from '../Text/createTextComponent';
 import { usePrefix } from '../../internal/usePrefix';
 import { WarningFilled, WarningAltFilled } from '@carbon/icons-react';
 import { deprecate } from '../../prop-types/deprecate';
-import mergeRefs from '../../tools/mergeRefs';
+import { mergeRefs } from '../../tools/mergeRefs';
 import { useId } from '../../internal/useId';
 import { AILabel } from '../AILabel';
 import { isComponentElement } from '../../internal';
@@ -164,18 +165,16 @@ const RadioButtonGroup = React.forwardRef(
     const prefix = usePrefix();
 
     const [selected, setSelected] = useState(valueSelected ?? defaultSelected);
-    const [prevValueSelected, setPrevValueSelected] = useState(valueSelected);
+    const prevValueSelected = useRef(valueSelected);
 
     const radioButtonGroupInstanceId = useId();
 
-    /**
-     * prop + state alignment - getDerivedStateFromProps
-     * only update if selected prop changes
-     */
-    if (valueSelected !== prevValueSelected) {
-      setSelected(valueSelected);
-      setPrevValueSelected(valueSelected);
-    }
+    useEffect(() => {
+      if (valueSelected !== prevValueSelected.current) {
+        setSelected(valueSelected);
+        prevValueSelected.current = valueSelected;
+      }
+    }, [valueSelected]);
 
     function getRadioButtons() {
       const mappedChildren = React.Children.map(
@@ -218,7 +217,7 @@ const RadioButtonGroup = React.forwardRef(
       }
     }
 
-    const showWarning = !readOnly && !invalid && warn;
+    const showWarning = !readOnly && !disabled && !invalid && warn;
     const showHelper = !invalid && !disabled && !warn;
 
     const wrapperClasses = classNames(`${prefix}--form-item`, className);
@@ -228,7 +227,8 @@ const RadioButtonGroup = React.forwardRef(
         orientation === 'vertical',
       [`${prefix}--radio-button-group--label-${labelPosition}`]: labelPosition,
       [`${prefix}--radio-button-group--readonly`]: readOnly,
-      [`${prefix}--radio-button-group--invalid`]: !readOnly && invalid,
+      [`${prefix}--radio-button-group--invalid`]:
+        !readOnly && !disabled && invalid,
       [`${prefix}--radio-button-group--warning`]: showWarning,
       [`${prefix}--radio-button-group--slug`]: slug,
       [`${prefix}--radio-button-group--decorator`]: decorator,
@@ -238,15 +238,16 @@ const RadioButtonGroup = React.forwardRef(
       [`${prefix}--form__helper-text--disabled`]: disabled,
     });
 
-    const helperId = !helperText
+    const hasHelper = typeof helperText !== 'undefined' && helperText !== null;
+    const helperId = !hasHelper
       ? undefined
       : `radio-button-group-helper-text-${radioButtonGroupInstanceId}`;
 
-    const helper = helperText ? (
+    const helper = hasHelper && (
       <div id={helperId} className={helperClasses}>
         {helperText}
       </div>
-    ) : null;
+    );
 
     const divRef = useRef<HTMLDivElement>(null);
 
@@ -255,7 +256,7 @@ const RadioButtonGroup = React.forwardRef(
     const candidateIsAILabel = isComponentElement(candidate, AILabel);
     const normalizedDecorator = candidateIsAILabel
       ? cloneElement(candidate, { size: 'mini', kind: 'default' })
-      : null;
+      : candidate;
 
     return (
       <div className={wrapperClasses} ref={mergeRefs(divRef, ref)}>
@@ -283,7 +284,7 @@ const RadioButtonGroup = React.forwardRef(
           {getRadioButtons()}
         </fieldset>
         <div className={`${prefix}--radio-button__validation-msg`}>
-          {!readOnly && invalid && (
+          {!readOnly && !disabled && invalid && (
             <>
               <WarningFilled
                 className={`${prefix}--radio-button__invalid-icon`}

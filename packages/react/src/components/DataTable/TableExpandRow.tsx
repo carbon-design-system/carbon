@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2025
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -9,7 +9,7 @@ import cx from 'classnames';
 import PropTypes from 'prop-types';
 import React, {
   Children,
-  isValidElement,
+  forwardRef,
   type HTMLAttributes,
   type MouseEventHandler,
   type PropsWithChildren,
@@ -50,6 +50,10 @@ export interface TableRowExpandInteropProps {
    * Specify if the row is selected.
    */
   isSelected?: boolean;
+  /**
+   * The id of the matching th node in the table head. Addresses a11y concerns outlined here: https://www.ibm.com/able/guidelines/ci162/info_and_relationships.html and https://www.w3.org/TR/WCAG20-TECHS/H43
+   */
+  expandHeader?: string;
 }
 
 export interface TableExpandRowProps
@@ -97,7 +101,7 @@ export interface TableExpandRowProps
   onExpand: MouseEventHandler<HTMLButtonElement>;
 }
 
-const TableExpandRow = React.forwardRef(
+const TableExpandRow = forwardRef<HTMLTableCellElement, TableExpandRowProps>(
   (
     {
       ['aria-controls']: ariaControls,
@@ -111,8 +115,8 @@ const TableExpandRow = React.forwardRef(
       isSelected,
       expandHeader = 'expand',
       ...rest
-    }: TableExpandRowProps,
-    ref: React.Ref<HTMLTableCellElement>
+    },
+    ref
   ) => {
     const prefix = usePrefix();
 
@@ -136,9 +140,8 @@ const TableExpandRow = React.forwardRef(
 
     const normalizedChildren = Children.toArray(children).map((child) => {
       if (
-        isValidElement(child) &&
-        child.type !== TableSlugRow &&
-        child.type !== TableDecoratorRow
+        !isComponentElement(child, TableSlugRow) &&
+        !isComponentElement(child, TableDecoratorRow)
       ) {
         return child;
       }
@@ -194,6 +197,7 @@ TableExpandRow.propTypes = {
    * Specify the string read by a voice reader when the expand trigger is
    * focused
    */
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20452
   /**@ts-ignore*/
   'aria-label': PropTypes.string,
 

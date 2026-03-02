@@ -32,7 +32,7 @@ export const registerSwipeEvents = (
   const touchMoveHandler = (e: TouchEvent) => {
     touchEndX = e.touches[0].clientX;
   };
-  const touchEndHandler = (e: TouchEvent) => {
+  const touchEndHandler = () => {
     if (touchStartX !== null && touchEndX !== null) {
       const distance = touchStartX - touchEndX;
       if (Math.abs(distance) > minSwipeDistance) {

@@ -1,5 +1,3 @@
-import { createRequire } from 'node:module';
-import { dirname, join } from 'node:path';
 /**
  * Copyright IBM Corp. 2023, 2024
  *
@@ -8,12 +6,15 @@ import { dirname, join } from 'node:path';
  */
 
 import type { StorybookConfig } from '@storybook/web-components-vite';
+
+import { createRequire } from 'node:module';
+import { dirname, join } from 'node:path';
 import { mergeConfig } from 'vite';
 import { litStyleLoader, litTemplateLoader } from '@mordech/vite-lit-loader';
+import glob from 'fast-glob';
 import remarkGfm from 'remark-gfm';
-import viteSVGResultCarbonIconLoader from '../tools/vite-svg-result-carbon-icon-loader';
+
 const require = createRequire(import.meta.url);
-const glob = require('fast-glob');
 
 const stories = glob.sync(
   [
@@ -30,6 +31,7 @@ const stories = glob.sync(
 const config: StorybookConfig = {
   stories: stories,
   addons: [
+    'storybook-addon-accessibility-checker',
     {
       name: getAbsolutePath('@storybook/addon-docs'),
       options: {
@@ -52,27 +54,22 @@ const config: StorybookConfig = {
   async viteFinal(config) {
     // Merge custom configuration into the default config
     return mergeConfig(config, {
-      plugins: [
-        litStyleLoader(),
-        litTemplateLoader(),
-        viteSVGResultCarbonIconLoader(),
-      ],
-      css: {
-        preprocessorOptions: {
-          // suppress mixed-declarations warnings until resolved in
-          // https://github.com/carbon-design-system/carbon/issues/16962
-          scss: {
-            api: 'modern',
-            silenceDeprecations: ['mixed-decls'],
-          },
-        },
-      },
+      plugins: [litStyleLoader(), litTemplateLoader()],
       optimizeDeps: {
         include: ['@storybook/web-components-vite'],
         exclude: ['lit', 'lit-html'],
       },
       define: {
-        'process.env': process.env,
+        'process.env.NODE_ENV': JSON.stringify(
+          process.env.NODE_ENV || 'development'
+        ),
+        'process.env.STORYBOOK_USE_RTL': JSON.stringify(
+          process.env.STORYBOOK_USE_RTL
+        ),
+        'process.env.CDS_FLAGS_ALL': JSON.stringify(process.env.CDS_FLAGS_ALL),
+        'process.env.CDS_EXPERIEMENTAL_COMPONENT_NAME': JSON.stringify(
+          process.env.CDS_EXPERIEMENTAL_COMPONENT_NAME
+        ),
       },
       sourcemap: true,
     });

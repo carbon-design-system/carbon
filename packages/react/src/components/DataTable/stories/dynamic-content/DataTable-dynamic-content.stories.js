@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -162,10 +162,11 @@ export const Default = (args) => {
         <DataTable
           {...args}
           rows={this.state.rows}
-          headers={this.state.headers}
-          render={({
+          headers={this.state.headers}>
+          {({
             rows,
             headers,
+            getExpandHeaderProps,
             getHeaderProps,
             getSelectionProps,
             getToolbarProps,
@@ -176,6 +177,7 @@ export const Default = (args) => {
             selectedRows,
             getTableProps,
             getTableContainerProps,
+            getCellProps,
           }) => {
             const batchActionProps = getBatchActionProps();
             return (
@@ -237,8 +239,15 @@ export const Default = (args) => {
                 <Table {...getTableProps()} aria-label="sample table">
                   <TableHead>
                     <TableRow>
-                      <TableExpandHeader aria-label="expand row" />
-                      <TableSelectAll {...getSelectionProps()} />
+                      <TableExpandHeader
+                        aria-label="expand row"
+                        {...getExpandHeaderProps()}
+                      />
+                      {args.radio ? (
+                        <th scope="col" />
+                      ) : (
+                        <TableSelectAll {...getSelectionProps()} />
+                      )}
                       {headers.map((header, i) => (
                         <TableHeader key={i} {...getHeaderProps({ header })}>
                           {header.header}
@@ -252,7 +261,9 @@ export const Default = (args) => {
                         <TableExpandRow {...getRowProps({ row })}>
                           <TableSelectRow {...getSelectionProps({ row })} />
                           {row.cells.map((cell) => (
-                            <TableCell key={cell.id}>{cell.value}</TableCell>
+                            <TableCell {...getCellProps({ cell })}>
+                              {cell.value}
+                            </TableCell>
                           ))}
                         </TableExpandRow>
                         <TableExpandedRow
@@ -269,42 +280,44 @@ export const Default = (args) => {
               </TableContainer>
             );
           }}
-        />
+        </DataTable>
       );
     }
   }
   return <DynamicRows />;
 };
 
+Default.args = {
+  size: 'lg',
+  useStaticWidth: false,
+  useZebraStyles: false,
+  isSortable: false,
+  locale: 'en',
+  radio: false,
+};
+
 Default.argTypes = {
-  filterRows: {
-    table: {
-      disable: true,
-    },
+  size: {
+    control: 'select',
+    options: ['xs', 'sm', 'md', 'lg', 'xl'],
+    description: 'Change the row height of table',
   },
-  headers: {
-    table: {
-      disable: true,
-    },
+  useStaticWidth: {
+    control: 'boolean',
+    description: 'If true, will use a width of "auto" instead of 100%',
   },
-  overflowMenuOnHover: {
-    table: {
-      disable: true,
-    },
+  useZebraStyles: {
+    control: 'boolean',
+    description: 'Add zebra striping to rows',
   },
-  rows: {
-    table: {
-      disable: true,
-    },
+  isSortable: {
+    control: 'boolean',
+    description: 'Specify if the rows are sortable',
   },
-  translateWithId: {
-    table: {
-      disable: true,
-    },
+  locale: {
+    description: 'Provide a string for the current locale',
   },
-  sortRow: {
-    table: {
-      disable: true,
-    },
+  radio: {
+    description: 'Use radio-selection instead of multi-selection',
   },
 };

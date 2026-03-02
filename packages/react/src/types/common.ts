@@ -16,8 +16,15 @@ export type PolymorphicProps<Element extends React.ElementType, Props> = Props &
 
 export interface TranslateWithId<MID = string, ARGS = Record<string, unknown>> {
   /**
-   * Supply a method to translate internal strings with your i18n tool of
-   * choice.
+   * Translates component strings using your i18n tool.
+   *
+   * @param messageId - The translation ID for the string to translate.
+   * @param [args] - Arguments for string interpolation.
+   * @returns The translated string.
    */
   translateWithId?(messageId: MID, args?: ARGS): string;
 }
+
+export type TFunc<K, A = Record<string, unknown>> = NonNullable<
+  TranslateWithId<K, A>['translateWithId']
+>;

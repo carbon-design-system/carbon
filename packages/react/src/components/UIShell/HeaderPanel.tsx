@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2025
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -8,13 +8,12 @@
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 import React, {
-  isValidElement,
   useRef,
   useState,
   type ComponentProps,
-  type ForwardedRef,
   type ReactNode,
 } from 'react';
+import { isComponentElement } from '../../internal';
 import { usePrefix } from '../../internal/usePrefix';
 import { keys, match } from '../../internal/keyboard';
 import { useWindowEvent } from '../../internal/useEvent';
@@ -55,8 +54,8 @@ export interface HeaderPanelProps {
   onHeaderPanelFocus?: () => void;
 }
 
-const HeaderPanel: React.FC<HeaderPanelProps> = React.forwardRef(
-  function HeaderPanel(
+const HeaderPanel = React.forwardRef<HTMLDivElement, HeaderPanelProps>(
+  (
     {
       children,
       className: customClassName,
@@ -66,8 +65,8 @@ const HeaderPanel: React.FC<HeaderPanelProps> = React.forwardRef(
       href,
       ...rest
     },
-    ref: ForwardedRef<HTMLDivElement>
-  ) {
+    ref
+  ) => {
     const prefix = usePrefix();
     const headerPanelReference = useRef<HTMLDivElement>(null);
     const headerPanelRef = useMergedRefs([headerPanelReference, ref]);
@@ -77,7 +76,7 @@ const HeaderPanel: React.FC<HeaderPanelProps> = React.forwardRef(
     const expandedProp = controlled ? expanded : expandedState;
 
     const [lastClickedElement, setLastClickedElement] =
-      useState<HTMLElement | null>(null);
+      useState<Element | null>(null);
 
     const className = cx(`${prefix}--header-panel`, {
       [`${prefix}--header-panel--expanded`]: expandedProp,
@@ -115,14 +114,11 @@ const HeaderPanel: React.FC<HeaderPanelProps> = React.forwardRef(
     }
 
     useWindowEvent('click', (event: MouseEvent) => {
-      const target = event.target as HTMLElement | null;
-      if (!(target instanceof HTMLElement)) return;
+      const { target } = event;
+      if (!(target instanceof Element)) return;
       setLastClickedElement(target);
 
-      const isChildASwitcher =
-        isValidElement(children) &&
-        typeof children.type !== 'string' &&
-        children.type === Switcher;
+      const isChildASwitcher = isComponentElement(children, Switcher);
 
       if (
         isChildASwitcher &&

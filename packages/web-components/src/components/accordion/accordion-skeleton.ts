@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2019, 2025
+ * Copyright IBM Corp. 2019, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -11,7 +11,8 @@ import { property } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
 import { ACCORDION_ALIGNMENT } from './accordion';
 import { forEach } from '../../globals/internal/collection-helpers';
-import ChevronRight16 from '@carbon/icons/lib/chevron--right/16.js';
+import ChevronRight16 from '@carbon/icons/es/chevron--right/16.js';
+import { iconLoader } from '../../globals/internal/icon-loader';
 import './accordion-item-skeleton';
 import '../skeleton-text/index';
 import styles from './accordion.scss?lit';
@@ -51,6 +52,7 @@ class CDSAccordionSkeleton extends LitElement {
     if (changedProperties.has('alignment')) {
       // Propagate `alignment` attribute to descendants until `:host-context()` gets supported in all major browsers
       forEach(
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
         this.shadowRoot!.querySelectorAll(
           (this.constructor as typeof CDSAccordionSkeleton)
             .selectorAccordionItemSkeletons
@@ -66,14 +68,17 @@ class CDSAccordionSkeleton extends LitElement {
     ) {
       // Propagate `isFlush` attribute to descendants until `:host-context()` gets supported in all major browsers
       forEach(
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
         this.shadowRoot!.querySelectorAll(
           (this.constructor as typeof CDSAccordionSkeleton)
             .selectorAccordionItemSkeletons
         ),
         (elem) => {
-          this.isFlush && this.alignment !== 'start'
-            ? elem.setAttribute('isFlush', '')
-            : elem.removeAttribute('isFlush');
+          if (this.isFlush && this.alignment !== 'start') {
+            elem.setAttribute('isFlush', '');
+          } else {
+            elem.removeAttribute('isFlush');
+          }
         }
       );
     }
@@ -93,9 +98,9 @@ class CDSAccordionSkeleton extends LitElement {
         ? html`
             <li class="${classes}">
               <span class="${prefix}--accordion__heading">
-                ${ChevronRight16({
-                  part: 'expando-icon',
+                ${iconLoader(ChevronRight16, {
                   class: `${prefix}--accordion__arrow`,
+                  part: 'expando-icon',
                 })}
                 <cds-skeleton-text
                   class="${prefix}--accordion__title"></cds-skeleton-text>

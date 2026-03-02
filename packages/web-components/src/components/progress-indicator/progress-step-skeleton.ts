@@ -9,9 +9,10 @@ import { LitElement, html } from 'lit';
 import { property } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
 import styles from './progress-indicator.scss?lit';
-import CircleDash from '@carbon/icons/lib/circle-dash/16.js';
+import CircleDash from '@carbon/icons/es/circle-dash/16.js';
 import '../skeleton-text';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
+import { iconLoader } from '../../globals/internal/icon-loader';
 
 /**
  * Skeleton of progress step.
@@ -28,7 +29,7 @@ export default class CDSProgressStepSkeleton extends LitElement {
     return html`
       <div
         class="${prefix}--progress-step-button ${prefix}--progress-step-button--unclickable">
-        ${CircleDash()}
+        ${iconLoader(CircleDash)}
         <p class="${prefix}--progress-label">
           <cds-skeleton-text width="40px" linecount="1"></cds-skeleton-text>
         </p>

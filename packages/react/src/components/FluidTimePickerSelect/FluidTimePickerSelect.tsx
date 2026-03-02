@@ -1,11 +1,11 @@
 /**
- * Copyright IBM Corp. 2022
+ * Copyright IBM Corp. 2022, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
+import React, { type SelectHTMLAttributes } from 'react';
 import PropTypes from 'prop-types';
 import FluidSelect from '../FluidSelect';
 
@@ -23,7 +23,7 @@ export interface FluidTimePickerSelectProps {
   /**
    * Optionally provide the default value of the `<select>`
    */
-  defaultValue?: any;
+  defaultValue?: SelectHTMLAttributes<HTMLSelectElement>['defaultValue'];
 
   /**
    * Specify whether the control is disabled
@@ -48,10 +48,11 @@ export interface FluidTimePickerSelectProps {
   onChange?: React.ChangeEventHandler<HTMLSelectElement>;
 }
 
+// eslint-disable-next-line react/display-name -- https://github.com/carbon-design-system/carbon/issues/20452
 const FluidTimePickerSelect = React.forwardRef<
   HTMLSelectElement,
   FluidTimePickerSelectProps
->(function FluidTimePickerSelect({ children, className, ...other }, ref) {
+>(({ children, className, ...other }, ref) => {
   return (
     <FluidSelect className={className} ref={ref} {...other}>
       {children}

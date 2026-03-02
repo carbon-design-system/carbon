@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -11,29 +11,44 @@ import React from 'react';
 import { DefinitionTooltip } from './';
 import mdx from './DefinitionTooltip.mdx';
 
+const alignOptions = [
+  'top',
+  'top-start',
+  'top-end',
+  'bottom',
+  'bottom-start',
+  'bottom-end',
+  'left',
+  'left-start',
+  'left-end',
+  'right',
+  'right-start',
+  'right-end',
+];
+
+const deprecatedAlignOptions = [
+  'top-left',
+  'top-right',
+  'bottom-left',
+  'bottom-right',
+  'left-bottom',
+  'left-top',
+  'right-bottom',
+  'right-top',
+];
+
 export default {
   title: 'Components/DefinitionTooltip',
   component: DefinitionTooltip,
   parameters: {
     controls: {
       hideNoControlsWarning: true,
+      exclude: ['id', 'tooltipText', 'triggerClassName'],
     },
     docs: {
       page: mdx,
     },
     layout: 'centered',
-  },
-  argTypes: {
-    children: {
-      table: {
-        disable: true,
-      },
-    },
-    className: {
-      table: {
-        disable: true,
-      },
-    },
   },
   decorators: [
     (Story) => (
@@ -46,11 +61,17 @@ export default {
 export const Default = (args) => {
   const definition =
     'Uniform Resource Locator; the address of a resource (such as a document or website) on the Internet.';
+  const { align, alignDeprecated, ...rest } = args;
+  const resolvedAlign = alignDeprecated || align;
   return (
     <p>
       Custom domains direct requests for your apps in this Cloud Foundry
       organization to a{' '}
-      <DefinitionTooltip openOnHover definition={definition} {...args}>
+      <DefinitionTooltip
+        openOnHover
+        definition={definition}
+        align={resolvedAlign}
+        {...rest}>
         URL
       </DefinitionTooltip>{' '}
       that you own. A custom domain can be a shared domain, a shared subdomain,
@@ -68,29 +89,75 @@ Default.args = {
 
 Default.argTypes = {
   align: {
-    // TODO:
-    // 1. Should the deprecated options be deleted?
-    // 2. The list doesn't include all of the options available in the
-    //    component. Is it supposed to?
-    options: [
-      'top',
-      'top-left',
-      'top-right',
-
-      'bottom',
-      'bottom-left',
-      'bottom-right',
-
-      'left',
-      'left-bottom',
-      'left-top',
-
-      'right',
-      'right-bottom',
-      'right-top',
-    ],
+    options: alignOptions,
     control: {
       type: 'select',
+    },
+  },
+  alignDeprecated: {
+    name: 'align (deprecated)',
+    options: deprecatedAlignOptions,
+    control: {
+      type: 'select',
+    },
+    table: {
+      category: 'Deprecated',
+    },
+  },
+  definition: {
+    control: {
+      type: 'text',
+    },
+  },
+  openOnHover: {
+    control: {
+      type: 'boolean',
+    },
+  },
+};
+
+export const WithLargeText = (args) => {
+  const definition = 'Example definition';
+  const { align, alignDeprecated, ...rest } = args;
+  const resolvedAlign = alignDeprecated || align;
+  return (
+    <p>
+      Custom domains direct requests for your apps in this Cloud Foundry
+      organization to a{' '}
+      <DefinitionTooltip
+        openOnHover
+        definition={definition}
+        align={resolvedAlign}
+        {...rest}>
+        URL that you own. A custom domain can be a shared domain,
+      </DefinitionTooltip>{' '}
+      a shared subdomain, or a shared domain and host.
+    </p>
+  );
+};
+
+WithLargeText.args = {
+  align: 'bottom-left',
+  defaultOpen: false,
+  definition: 'Example definition',
+  openOnHover: true,
+};
+
+WithLargeText.argTypes = {
+  align: {
+    options: alignOptions,
+    control: {
+      type: 'select',
+    },
+  },
+  alignDeprecated: {
+    name: 'align (deprecated)',
+    options: deprecatedAlignOptions,
+    control: {
+      type: 'select',
+    },
+    table: {
+      category: 'Deprecated',
     },
   },
   definition: {

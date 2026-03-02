@@ -7,7 +7,6 @@
 
 import { html } from 'lit';
 import './ai-skeleton-text';
-import mdx from './ai-skeleton.mdx';
 
 const args = {
   heading: false,

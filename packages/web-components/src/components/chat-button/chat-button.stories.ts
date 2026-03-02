@@ -7,7 +7,8 @@
 
 import { html } from 'lit';
 import './index';
-import Add16 from '@carbon/icons/lib/add/16.js';
+import Add16 from '@carbon/icons/es/add/16.js';
+import { iconLoader } from '../../globals/internal/icon-loader';
 import styles from './chat-button-story.scss?lit';
 
 export const Default = () => {
@@ -20,13 +21,13 @@ export const Default = () => {
         <h3>Sizes</h3>
         <br />
         <cds-chat-button size="sm">
-          Primary ${Add16({ slot: 'icon' })}
+          Primary ${iconLoader(Add16, { slot: 'icon' })}
         </cds-chat-button>
         <cds-chat-button size="md">
-          Primary ${Add16({ slot: 'icon' })}
+          Primary ${iconLoader(Add16, { slot: 'icon' })}
         </cds-chat-button>
         <cds-chat-button size="lg">
-          Primary ${Add16({ slot: 'icon' })}
+          Primary ${iconLoader(Add16, { slot: 'icon' })}
         </cds-chat-button>
         <br />
         <br />
@@ -38,19 +39,19 @@ export const Default = () => {
         <h3>Kinds</h3>
         <br />
         <cds-chat-button kind="primary">
-          Primary ${Add16({ slot: 'icon' })}
+          Primary ${iconLoader(Add16, { slot: 'icon' })}
         </cds-chat-button>
         <cds-chat-button kind="secondary">
-          Secondary ${Add16({ slot: 'icon' })}
+          Secondary ${iconLoader(Add16, { slot: 'icon' })}
         </cds-chat-button>
         <cds-chat-button kind="tertiary">
-          Tertiary ${Add16({ slot: 'icon' })}
+          Tertiary ${iconLoader(Add16, { slot: 'icon' })}
         </cds-chat-button>
         <cds-chat-button kind="ghost">
-          Ghost ${Add16({ slot: 'icon' })}
+          Ghost ${iconLoader(Add16, { slot: 'icon' })}
         </cds-chat-button>
         <cds-chat-button kind="danger">
-          Danger ${Add16({ slot: 'icon' })}
+          Danger ${iconLoader(Add16, { slot: 'icon' })}
         </cds-chat-button>
         <br />
         <br />
@@ -64,16 +65,16 @@ export const Default = () => {
         <h3>Quick action</h3>
         <br />
         <cds-chat-button is-quick-action>
-          Quick action ${Add16({ slot: 'icon' })}
+          Quick action ${iconLoader(Add16, { slot: 'icon' })}
         </cds-chat-button>
         <cds-chat-button is-quick-action is-selected>
-          Selected and Enabled ${Add16({ slot: 'icon' })}
+          Selected and Enabled ${iconLoader(Add16, { slot: 'icon' })}
         </cds-chat-button>
         <cds-chat-button is-quick-action is-selected disabled>
-          Selected and disabled ${Add16({ slot: 'icon' })}
+          Selected and disabled ${iconLoader(Add16, { slot: 'icon' })}
         </cds-chat-button>
         <cds-chat-button is-quick-action disabled>
-          Disabled ${Add16({ slot: 'icon' })}
+          Disabled ${iconLoader(Add16, { slot: 'icon' })}
         </cds-chat-button>
         <br />
         <br />
@@ -98,7 +99,7 @@ export const Default = () => {
 };
 
 const meta = {
-  title: 'Experimental/Chat button',
+  title: 'Preview/Chat button',
 };
 
 export default meta;

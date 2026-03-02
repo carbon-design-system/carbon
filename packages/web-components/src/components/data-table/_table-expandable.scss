@@ -5,6 +5,12 @@
 // LICENSE file in the root directory of this source tree.
 //
 
+@use '@carbon/styles/scss/config' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/motion' as *;
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/utilities/ai-gradient' as *;
+
 :host(#{$prefix}-table-expanded-row) {
   display: table-row;
   block-size: 0;
@@ -112,5 +118,54 @@
 :host(#{$prefix}-table-expanded-row[rows-with-ai-label]) {
   td {
     padding-inline-start: to-rem(88px);
+  }
+}
+
+// Ensure proper styling for the expansion cell in non-expandable rows
+:host(#{$prefix}-table-row) {
+  .#{$prefix}--table-expand {
+    display: table-cell;
+    block-size: 100%;
+    border-block-end: 1px solid $border-subtle;
+    vertical-align: middle;
+
+    // Ensure the inner div takes full height
+    > div {
+      display: flex;
+      align-items: center;
+      block-size: 100%;
+    }
+  }
+
+  &:hover,
+  &[highlighted] {
+    .#{$prefix}--table-expand {
+      background-color: $background-hover;
+      border-block-end-color: $layer-hover;
+      border-block-start-color: $layer-hover;
+    }
+  }
+
+  &[even] {
+    .#{$prefix}--table-expand {
+      background-color: $layer-accent;
+      border-block-end: 1px solid $layer-accent;
+
+      &:hover {
+        background-color: $background-hover;
+        border-block-end: 1px solid $layer-hover;
+      }
+    }
+  }
+
+  &[odd] {
+    .#{$prefix}--table-expand {
+      border-block-end: 1px solid $layer;
+
+      &:hover {
+        background-color: $background-hover;
+        border-block-end: 1px solid $layer-hover;
+      }
+    }
   }
 }

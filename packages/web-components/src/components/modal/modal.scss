@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2019, 2024
+// Copyright IBM Corp. 2019, 2026
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -16,6 +16,7 @@
 @use '@carbon/styles/scss/utilities/ai-gradient' as *;
 @use '@carbon/styles/scss/components/modal' as *;
 @use '@carbon/styles/scss/components/button' as *;
+@use '@carbon/styles/scss/utilities/focus-outline' as *;
 
 :host(#{$prefix}-modal[open]) {
   @extend .#{$prefix}--modal;
@@ -38,6 +39,12 @@
 
 :host(#{$prefix}-modal) {
   @extend .#{$prefix}--modal;
+
+  opacity: 0;
+  transition:
+    opacity $duration-moderate-02 motion(exit, expressive),
+    visibility 0ms linear $duration-moderate-02;
+  visibility: hidden;
 }
 
 :host(#{$prefix}-modal[full-width]) {
@@ -47,9 +54,13 @@
   }
 }
 
-:host(#{$prefix}-modal[has-scrolling-content])
-  ::slotted(#{$prefix}-modal-body) {
+:host(#{$prefix}-modal[has-scrolling-content]) ::slotted(#{$prefix}-modal-body),
+:host(#{$prefix}-modal) ::slotted(#{$prefix}-modal-body[is-scrollable]) {
   @extend .#{$prefix}--modal-scroll-content;
+}
+
+:host(#{$prefix}-modal) ::slotted(#{$prefix}-modal-body[no-fade]) {
+  @extend .#{$prefix}--modal-scroll-content--no-fade;
 }
 
 :host(#{$prefix}-modal-header) {
@@ -60,6 +71,10 @@
   @extend .#{$prefix}--modal-close-button;
 
   outline: none;
+}
+
+:host(#{$prefix}-modal-close-button) #{$prefix}-icon-button::part(button) {
+  border-width: 2px;
 }
 
 :host(#{$prefix}-modal-heading),
@@ -86,10 +101,10 @@
   ::slotted(#{$prefix}-select:last-of-type) {
     padding-block-end: 0;
   }
+}
 
-  ::slotted(*:last-child) {
-    padding-block-end: $spacing-07;
-  }
+:host(#{$prefix}-modal-body:focus) {
+  @include focus-outline('outline');
 }
 
 :host(#{$prefix}-modal-body-content) {
@@ -111,6 +126,10 @@
   @extend .#{$prefix}--modal-footer--three-button;
 
   ::slotted(#{$prefix}-modal-footer-button) {
+    flex: 0 1 25%;
+  }
+
+  ::slotted(#{$prefix}-inline-loading) {
     flex: 0 1 25%;
   }
 }
@@ -145,6 +164,13 @@
   max-inline-size: none;
 }
 
+:host(#{$prefix}-modal-footer) ::slotted(#{$prefix}-inline-loading) {
+  flex: 0 1 50%;
+  cursor: not-allowed;
+  padding-block: $spacing-05 $spacing-07;
+  padding-inline-start: $spacing-05;
+}
+
 // AI Label
 
 :host(#{$prefix}-modal[ai-label]) {
@@ -171,7 +197,7 @@
 }
 
 :host(#{$prefix}-modal[ai-label][has-scrolling-content]) {
-  ::slotted(#{$prefix}-modal-body) {
+  ::slotted(#{$prefix}-modal-body:not([no-fade])) {
     mask-image: linear-gradient(
         to bottom,
         $layer calc(100% - 80px),

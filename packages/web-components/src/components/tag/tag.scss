@@ -179,9 +179,9 @@ $css--plex: true !default;
   @extend .#{$prefix}--tag--cool-gray;
 }
 
-:host(#{$prefix}-operational-tag[type='warn-gray']:not([disabled]))
+:host(#{$prefix}-operational-tag[type='warm-gray']:not([disabled]))
   #{$prefix}-tag,
-:host(#{$prefix}-dismissible-tag[type='warn-gray']:not([disabled])),
+:host(#{$prefix}-dismissible-tag[type='warm-gray']:not([disabled])),
 :host(#{$prefix}-tag[type='warm-gray']:not([disabled])) {
   @extend .#{$prefix}--tag--warm-gray;
 }

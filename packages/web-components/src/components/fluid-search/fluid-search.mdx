@@ -1,0 +1,39 @@
+import { ArgTypes, Canvas, Markdown, Meta } from '@storybook/addon-docs/blocks';
+import { cdnJs } from '../../globals/internal/storybook-cdn';
+import * as FluidSearchStories from './fluid-search.stories';
+
+<Meta of={FluidSearchStories} />
+
+# Search
+
+[Source code](https://github.com/carbon-design-system/carbon/tree/main/packages/web-components/src/components/fluid-search)
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Skeleton](#skeleton)
+- [Component API](#component-api)
+- [CDN](#cdn)
+- [Feedback](#feedback)
+
+## Overview
+
+<Canvas of={FluidSearchStories.Default} />
+
+## Skeleton
+
+<Canvas of={FluidSearchStories.Skeleton} />
+
+## Component API
+
+## `cds-fluid-search`
+
+<ArgTypes of="cds-search" />
+
+<Markdown>{`${cdnJs({ components: ['fluid-search'] })}`}</Markdown>
+
+## Feedback
+
+Help us improve this component by providing feedback, asking questions on Slack,
+or updating this file on
+[GitHub](https://github.com/carbon-design-system/carbon/edit/main/packages/web-components/src/components/fluid-search/fluid-search.mdx).

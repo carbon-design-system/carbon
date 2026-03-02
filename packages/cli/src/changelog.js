@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { default as parse } from '@commitlint/parse';
+import { parse } from '@commitlint/parse';
 import { execa } from 'execa';
 
 // We keep a list of commits that are process-oriented that we never want to
