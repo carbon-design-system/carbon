@@ -263,6 +263,7 @@ export const ClickableTile = React.forwardRef<
       evt?.persist?.();
       if (matches(evt, [keys.Enter, keys.Space])) {
         setIsSelected(!isSelected);
+        onClick(evt as unknown as MouseEvent);
       }
       onKeyDown(evt);
     }
