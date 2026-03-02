@@ -11,8 +11,6 @@ import { fireEvent } from '@testing-library/react';
 function createDraggableElement(options = {}) {
   const el = document.createElement('div');
   el.style.position = 'absolute';
-  el.style.left = '0px';
-  el.style.top = '0px';
 
   const handle = document.createElement('div');
   const focusableHandle = document.createElement('button');
@@ -33,6 +31,23 @@ function createDraggableElement(options = {}) {
 }
 
 describe('makeDraggable', () => {
+  beforeAll(() => {
+    global.DOMMatrix = class {
+      constructor(transform) {
+        if (typeof transform === 'string' && transform.startsWith('matrix')) {
+          const values = transform
+            .match(/matrix.*\((.+)\)/)[1]
+            .split(',')
+            .map(parseFloat);
+          this.m41 = values[4];
+          this.m42 = values[5];
+        } else {
+          this.m41 = 0;
+          this.m42 = 0;
+        }
+      }
+    };
+  });
   it('should set cursor style on handle', () => {
     const { el, handle } = createDraggableElement();
     expect(handle.style.cursor).toBe('move');
@@ -52,8 +67,7 @@ describe('makeDraggable', () => {
     focusableHandle.dispatchEvent(
       new KeyboardEvent('keydown', { key: 'ArrowRight' })
     );
-    expect(el.style.left).toBe('8px');
-    expect(el.style.top).toBe('0px');
+    expect(el.style.transform).toBe('translate(8px, 0px)');
   });
 
   it('should move element with arrowUp with default dragStep value', () => {
@@ -64,8 +78,7 @@ describe('makeDraggable', () => {
     focusableHandle.dispatchEvent(
       new KeyboardEvent('keydown', { key: 'ArrowUp' })
     );
-    expect(el.style.left).toBe('0px');
-    expect(el.style.top).toBe('-8px');
+    expect(el.style.transform).toBe('translate(0px, -8px)');
   });
 
   it('should move element with arrowLeft with default dragStep value', () => {
@@ -76,8 +89,7 @@ describe('makeDraggable', () => {
     focusableHandle.dispatchEvent(
       new KeyboardEvent('keydown', { key: 'ArrowLeft' })
     );
-    expect(el.style.left).toBe('-8px');
-    expect(el.style.top).toBe('0px');
+    expect(el.style.transform).toBe('translate(-8px, 0px)');
   });
 
   it('should move element with arrowDown with default shiftDragStep value', () => {
@@ -88,8 +100,7 @@ describe('makeDraggable', () => {
     focusableHandle.dispatchEvent(
       new KeyboardEvent('keydown', { key: 'ArrowRight', shiftKey: true })
     );
-    expect(el.style.left).toBe('32px');
-    expect(el.style.top).toBe('0px');
+    expect(el.style.transform).toBe('translate(32px, 0px)');
   });
 
   it('should move element with arrow keys(dragStep)', () => {
@@ -100,31 +111,27 @@ describe('makeDraggable', () => {
     focusableHandle.dispatchEvent(
       new KeyboardEvent('keydown', { key: 'ArrowRight' })
     );
-    expect(el.style.left).toBe('10px');
-    expect(el.style.top).toBe('0px');
+    expect(el.style.transform).toBe('translate(10px, 0px)');
 
     setTimeout(() => {
       focusableHandle.dispatchEvent(
         new KeyboardEvent('keydown', { key: 'ArrowLeft' })
       );
-      expect(el.style.left).toBe('0px');
-      expect(el.style.top).toBe('0px');
+      expect(el.style.transform).toBe('translate(0px, 0px)');
     }, 0);
 
     setTimeout(() => {
       focusableHandle.dispatchEvent(
         new KeyboardEvent('keydown', { key: 'ArrowDown' })
       );
-      expect(el.style.top).toBe('10px');
-      expect(el.style.left).toBe('0px');
+      expect(el.style.transform).toBe('translate(0px, 10px)');
     }, 0);
 
     setTimeout(() => {
       focusableHandle.dispatchEvent(
         new KeyboardEvent('keydown', { key: 'ArrowUp' })
       );
-      expect(el.style.top).toBe('0px');
-      expect(el.style.left).toBe('0px');
+      expect(el.style.transform).toBe('translate(0px, 0px)');
     }, 0);
   });
 
@@ -138,31 +145,27 @@ describe('makeDraggable', () => {
     focusableHandle.dispatchEvent(
       new KeyboardEvent('keydown', { key: 'ArrowDown', shiftKey: true })
     );
-    expect(el.style.top).toBe('20px');
-    expect(el.style.left).toBe('0px');
+    expect(el.style.transform).toBe('translate(0px, 20px)');
 
     setTimeout(() => {
       focusableHandle.dispatchEvent(
         new KeyboardEvent('keydown', { key: 'ArrowUp', shiftKey: true })
       );
-      expect(el.style.top).toBe('0px');
-      expect(el.style.left).toBe('0px');
+      expect(el.style.transform).toBe('translate(0px, 0px)');
     }, 0);
 
     setTimeout(() => {
       focusableHandle.dispatchEvent(
         new KeyboardEvent('keydown', { key: 'ArrowRight', shiftKey: true })
       );
-      expect(el.style.top).toBe('0px');
-      expect(el.style.left).toBe('20px');
+      expect(el.style.transform).toBe('translate(20px, 0px)');
     }, 0);
 
     setTimeout(() => {
       focusableHandle.dispatchEvent(
-        new KeyboardEvent('keydown', { key: 'ArrowRight', shiftKey: true })
+        new KeyboardEvent('keydown', { key: 'ArrowLeft', shiftKey: true })
       );
-      expect(el.style.top).toBe('0px');
-      expect(el.style.left).toBe('0px');
+      expect(el.style.transform).toBe('translate(0px, 0px)');
     }, 0);
   });
 
@@ -171,14 +174,13 @@ describe('makeDraggable', () => {
     fireEvent.mouseDown(handle, { clientX: 50, clientY: 50 });
     fireEvent.mouseMove(document, { clientX: 100, clientY: 120 });
 
-    expect(el.style.left).toBe('50px');
-    expect(el.style.top).toBe('70px');
+    const transformAfterMove = el.style.transform;
+    expect(transformAfterMove).toBe('translate(50px, 70px)');
 
     fireEvent.mouseUp(handle);
 
     fireEvent.mouseMove(document, { clientX: 100, clientY: 120 });
 
-    expect(el.style.left).toBe('50px');
-    expect(el.style.top).toBe('70px');
+    expect(transformAfterMove).toBe('translate(50px, 70px)');
   });
 });
