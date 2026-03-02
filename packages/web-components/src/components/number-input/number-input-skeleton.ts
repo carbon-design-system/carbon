@@ -27,7 +27,8 @@ class CDSNumberInputSkeleton extends LitElement {
     return html`
       ${!hideLabel &&
       html` <span class="${prefix}--label ${prefix}--skeleton"></span> `}
-      <div class="${prefix}--number ${prefix}--skeleton"></div>
+      <div
+        class="${prefix}--number ${prefix}--skeleton ${prefix}--number--md"></div>
     `;
   }
 
