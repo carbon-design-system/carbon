@@ -23,7 +23,7 @@ jobs:
           fetch-depth: '0'
 
       - name: Use Node.js version from .nvmrc
-        uses: actions/setup-node@d02c89dce7e1ba9ef629ce0680989b3a1cc72edb
+        uses: actions/setup-node@54045abd5dcd3b0fee9ca02fa24c57545834c9cc
         with:
           node-version-file: '.nvmrc'
 
