@@ -502,6 +502,9 @@ function TabList({
   // VISIBLE IF:
   //   SCROLLABLE
   //   AND SCROLL_LEFT > 0
+  //
+  // TODO: Hoist `buttonWidth` to a module level constant like
+  // `verticalTabHeight`.
   const buttonWidth = 44;
   // Next Button
   // VISIBLE IF:
@@ -640,7 +643,7 @@ function TabList({
       // adding 1 in calculation for firefox support
       setIsScrollable(ref.current.scrollWidth > ref.current.clientWidth + 1);
     }
-  }, [buttonWidth, children, dismissable, scrollLeft]);
+  }, [children, dismissable, scrollLeft]);
 
   useEffect(() => {
     if (tabs.current[selectedIndex]?.disabled) {
