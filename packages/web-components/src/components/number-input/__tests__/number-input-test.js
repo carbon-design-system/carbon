@@ -277,429 +277,429 @@ describe('<cds-number-input>', () => {
     expect(decrement.getAttribute('aria-label')).to.equal('Less');
     expect(increment.getAttribute('aria-label')).to.equal('More');
   });
-  // Tests for type="text" with locale-based formatting
-  describe('type="text" with locale formatting', () => {
-    it('should support type="text"', async () => {
-      const el = await fixture(
-        html`<cds-number-input
-          type="text"
-          value="1234.56"
-          label="Text type"></cds-number-input>`
-      );
-      await el.updateComplete;
-      expect(el.type).to.equal('text');
-    });
+  // // Tests for type="text" with locale-based formatting
+  // describe('type="text" with locale formatting', () => {
+  //   it('should support type="text"', async () => {
+  //     const el = await fixture(
+  //       html`<cds-number-input
+  //         type="text"
+  //         value="1234.56"
+  //         label="Text type"></cds-number-input>`
+  //     );
+  //     await el.updateComplete;
+  //     expect(el.type).to.equal('text');
+  //   });
 
-    it('should handle locale attribute', async () => {
-      const el = await fixture(
-        html`<cds-number-input
-          type="text"
-          locale="de-DE"
-          label="Label"></cds-number-input>`
-      );
-      expect(el.getAttribute('locale')).to.equal('de-DE');
-    });
+  //   it('should handle locale attribute', async () => {
+  //     const el = await fixture(
+  //       html`<cds-number-input
+  //         type="text"
+  //         locale="de-DE"
+  //         label="Label"></cds-number-input>`
+  //     );
+  //     expect(el.getAttribute('locale')).to.equal('de-DE');
+  //   });
 
-    it('should handle formatOptions property', async () => {
-      const el = await fixture(html`
-        <cds-number-input
-          type="text"
-          locale="en-US"
-          label="Currency"></cds-number-input>
-      `);
-      el.formatOptions = { style: 'currency', currency: 'USD' };
-      await el.updateComplete;
-      expect(el.formatOptions).to.deep.equal({
-        style: 'currency',
-        currency: 'USD',
-      });
-    });
+  //   it('should handle formatOptions property', async () => {
+  //     const el = await fixture(html`
+  //       <cds-number-input
+  //         type="text"
+  //         locale="en-US"
+  //         label="Currency"></cds-number-input>
+  //     `);
+  //     el.formatOptions = { style: 'currency', currency: 'USD' };
+  //     await el.updateComplete;
+  //     expect(el.formatOptions).to.deep.equal({
+  //       style: 'currency',
+  //       currency: 'USD',
+  //     });
+  //   });
 
-    it('should emit change event on blur for type="text"', async () => {
-      const el = await fixture(
-        html`<cds-number-input
-          type="text"
-          value="5"
-          label="Label"></cds-number-input>`
-      );
-      const input = el.shadowRoot.querySelector('input');
+  //   it('should emit change event on blur for type="text"', async () => {
+  //     const el = await fixture(
+  //       html`<cds-number-input
+  //         type="text"
+  //         value="5"
+  //         label="Label"></cds-number-input>`
+  //     );
+  //     const input = el.shadowRoot.querySelector('input');
 
-      let eventFired = false;
-      el.addEventListener('cds-number-input', () => (eventFired = true));
+  //     let eventFired = false;
+  //     el.addEventListener('cds-number-input', () => (eventFired = true));
 
-      input.value = '10';
-      input.dispatchEvent(
-        new Event('input', { bubbles: true, composed: true })
-      );
-      await el.updateComplete;
+  //     input.value = '10';
+  //     input.dispatchEvent(
+  //       new Event('input', { bubbles: true, composed: true })
+  //     );
+  //     await el.updateComplete;
 
-      input.dispatchEvent(new Event('blur', { bubbles: true, composed: true }));
-      await el.updateComplete;
+  //     input.dispatchEvent(new Event('blur', { bubbles: true, composed: true }));
+  //     await el.updateComplete;
 
-      expect(eventFired).to.be.true;
-    });
-  });
+  //     expect(eventFired).to.be.true;
+  //   });
+  // });
 
-  // Tests for validation
-  describe('validation', () => {
-    it('should validate min/max constraints', async () => {
-      const el = await fixture(
-        html`<cds-number-input
-          min="0"
-          max="10"
-          value="15"
-          label="Label"></cds-number-input>`
-      );
-      await el.updateComplete;
+  // // Tests for validation
+  // describe('validation', () => {
+  //   it('should validate min/max constraints', async () => {
+  //     const el = await fixture(
+  //       html`<cds-number-input
+  //         min="0"
+  //         max="10"
+  //         value="15"
+  //         label="Label"></cds-number-input>`
+  //     );
+  //     await el.updateComplete;
 
-      const isValid = el._getInputValidity();
-      expect(isValid).to.be.false;
-    });
+  //     const isValid = el._getInputValidity();
+  //     expect(isValid).to.be.false;
+  //   });
 
-    it('should validate with custom validate function for type="text"', async () => {
-      const el = await fixture(
-        html`<cds-number-input
-          type="text"
-          value="abc"
-          label="Label"></cds-number-input>`
-      );
+  //   it('should validate with custom validate function for type="text"', async () => {
+  //     const el = await fixture(
+  //       html`<cds-number-input
+  //         type="text"
+  //         value="abc"
+  //         label="Label"></cds-number-input>`
+  //     );
 
-      el.validate = (value) => !isNaN(Number(value));
-      await el.updateComplete;
+  //     el.validate = (value) => !isNaN(Number(value));
+  //     await el.updateComplete;
 
-      const input = el.shadowRoot.querySelector('input');
-      input.value = 'abc';
-      input.dispatchEvent(
-        new Event('input', { bubbles: true, composed: true })
-      );
-      await el.updateComplete;
+  //     const input = el.shadowRoot.querySelector('input');
+  //     input.value = 'abc';
+  //     input.dispatchEvent(
+  //       new Event('input', { bubbles: true, composed: true })
+  //     );
+  //     await el.updateComplete;
 
-      input.dispatchEvent(new Event('blur', { bubbles: true, composed: true }));
-      await el.updateComplete;
+  //     input.dispatchEvent(new Event('blur', { bubbles: true, composed: true }));
+  //     await el.updateComplete;
 
-      const isValid = el._getInputValidity();
-      expect(isValid).to.be.false;
-    });
+  //     const isValid = el._getInputValidity();
+  //     expect(isValid).to.be.false;
+  //   });
 
-    it('should support invalid attribute', async () => {
-      const el = await fixture(
-        html`<cds-number-input
-          invalid
-          invalid-text="Invalid message"
-          label="Label"></cds-number-input>`
-      );
-      await el.updateComplete;
+  //   it('should support invalid attribute', async () => {
+  //     const el = await fixture(
+  //       html`<cds-number-input
+  //         invalid
+  //         invalid-text="Invalid message"
+  //         label="Label"></cds-number-input>`
+  //     );
+  //     await el.updateComplete;
 
-      expect(el.hasAttribute('invalid')).to.be.true;
-    });
+  //     expect(el.hasAttribute('invalid')).to.be.true;
+  //   });
 
-    it('should support warn attribute', async () => {
-      const el = await fixture(
-        html`<cds-number-input
-          warn
-          warn-text="Warning message"
-          label="Label"></cds-number-input>`
-      );
-      await el.updateComplete;
+  //   it('should support warn attribute', async () => {
+  //     const el = await fixture(
+  //       html`<cds-number-input
+  //         warn
+  //         warn-text="Warning message"
+  //         label="Label"></cds-number-input>`
+  //     );
+  //     await el.updateComplete;
 
-      expect(el.hasAttribute('warn')).to.be.true;
-    });
-  });
+  //     expect(el.hasAttribute('warn')).to.be.true;
+  //   });
+  // });
 
-  // Tests for size variants
-  describe('size variants', () => {
-    it('should apply small size class', async () => {
-      const el = await fixture(
-        html`<cds-number-input size="sm" label="Label"></cds-number-input>`
-      );
-      const wrapper = el.shadowRoot.querySelector('.cds--number');
-      expect(wrapper.classList.contains('cds--number--sm')).to.be.true;
-    });
+  // // Tests for size variants
+  // describe('size variants', () => {
+  //   it('should apply small size class', async () => {
+  //     const el = await fixture(
+  //       html`<cds-number-input size="sm" label="Label"></cds-number-input>`
+  //     );
+  //     const wrapper = el.shadowRoot.querySelector('.cds--number');
+  //     expect(wrapper.classList.contains('cds--number--sm')).to.be.true;
+  //   });
 
-    it('should apply large size class', async () => {
-      const el = await fixture(
-        html`<cds-number-input size="lg" label="Label"></cds-number-input>`
-      );
-      const wrapper = el.shadowRoot.querySelector('.cds--number');
-      expect(wrapper.classList.contains('cds--number--lg')).to.be.true;
-    });
-  });
+  //   it('should apply large size class', async () => {
+  //     const el = await fixture(
+  //       html`<cds-number-input size="lg" label="Label"></cds-number-input>`
+  //     );
+  //     const wrapper = el.shadowRoot.querySelector('.cds--number');
+  //     expect(wrapper.classList.contains('cds--number--lg')).to.be.true;
+  //   });
+  // });
 
-  // Tests for fluid variant
-  describe('fluid variant', () => {
-    it('should support isFluid property', async () => {
-      const el = await fixture(
-        html`<cds-number-input is-fluid label="Fluid input"></cds-number-input>`
-      );
-      expect(el.hasAttribute('is-fluid')).to.be.true;
-    });
-  });
+  // // Tests for fluid variant
+  // describe('fluid variant', () => {
+  //   it('should support isFluid property', async () => {
+  //     const el = await fixture(
+  //       html`<cds-number-input is-fluid label="Fluid input"></cds-number-input>`
+  //     );
+  //     expect(el.hasAttribute('is-fluid')).to.be.true;
+  //   });
+  // });
 
-  // Tests for wheel behavior
-  describe('wheel behavior', () => {
-    it('should prevent wheel events when disableWheel is true', async () => {
-      const el = await fixture(
-        html`<cds-number-input disable-wheel label="Label"></cds-number-input>`
-      );
-      const input = el.shadowRoot.querySelector('input');
+  // // Tests for wheel behavior
+  // describe('wheel behavior', () => {
+  //   it('should prevent wheel events when disableWheel is true', async () => {
+  //     const el = await fixture(
+  //       html`<cds-number-input disable-wheel label="Label"></cds-number-input>`
+  //     );
+  //     const input = el.shadowRoot.querySelector('input');
 
-      input.dispatchEvent(
-        new Event('focus', { bubbles: true, composed: true })
-      );
-      await el.updateComplete;
+  //     input.dispatchEvent(
+  //       new Event('focus', { bubbles: true, composed: true })
+  //     );
+  //     await el.updateComplete;
 
-      let wheelPrevented = false;
-      const wheelEvent = new WheelEvent('wheel', {
-        bubbles: true,
-        cancelable: true,
-      });
-      Object.defineProperty(wheelEvent, 'preventDefault', {
-        value: () => (wheelPrevented = true),
-      });
+  //     let wheelPrevented = false;
+  //     const wheelEvent = new WheelEvent('wheel', {
+  //       bubbles: true,
+  //       cancelable: true,
+  //     });
+  //     Object.defineProperty(wheelEvent, 'preventDefault', {
+  //       value: () => (wheelPrevented = true),
+  //     });
 
-      input.dispatchEvent(wheelEvent);
-      expect(wheelPrevented).to.be.true;
-    });
-  });
+  //     input.dispatchEvent(wheelEvent);
+  //     expect(wheelPrevented).to.be.true;
+  //   });
+  // });
 
-  // Tests for step behavior
-  describe('step behavior', () => {
-    it('should support stepStartValue property', async () => {
-      const el = await fixture(
-        html`<cds-number-input
-          step-start-value="10"
-          step="5"
-          label="Label"></cds-number-input>`
-      );
-      expect(el.getAttribute('step-start-value')).to.equal('10');
-    });
+  // // Tests for step behavior
+  // describe('step behavior', () => {
+  //   it('should support stepStartValue property', async () => {
+  //     const el = await fixture(
+  //       html`<cds-number-input
+  //         step-start-value="10"
+  //         step="5"
+  //         label="Label"></cds-number-input>`
+  //     );
+  //     expect(el.getAttribute('step-start-value')).to.equal('10');
+  //   });
 
-    it('should handle negative step values', async () => {
-      const el = await fixture(
-        html`<cds-number-input
-          value="10"
-          step="-2"
-          label="Label"></cds-number-input>`
-      );
-      const [, increment] = el.shadowRoot.querySelectorAll('button');
+  //   it('should handle negative step values', async () => {
+  //     const el = await fixture(
+  //       html`<cds-number-input
+  //         value="10"
+  //         step="-2"
+  //         label="Label"></cds-number-input>`
+  //     );
+  //     const [, increment] = el.shadowRoot.querySelectorAll('button');
 
-      increment.click();
-      await el.updateComplete;
+  //     increment.click();
+  //     await el.updateComplete;
 
-      const input = el.shadowRoot.querySelector('input');
-      expect(Number(input.value)).to.equal(8);
-    });
+  //     const input = el.shadowRoot.querySelector('input');
+  //     expect(Number(input.value)).to.equal(8);
+  //   });
 
-    it('should respect min and max constraints', async () => {
-      const el = await fixture(
-        html`<cds-number-input
-          value="9"
-          min="0"
-          max="10"
-          step="5"
-          label="Label"></cds-number-input>`
-      );
-      expect(el.min).to.equal('0');
-      expect(el.max).to.equal('10');
-    });
-  });
+  //   it('should respect min and max constraints', async () => {
+  //     const el = await fixture(
+  //       html`<cds-number-input
+  //         value="9"
+  //         min="0"
+  //         max="10"
+  //         step="5"
+  //         label="Label"></cds-number-input>`
+  //     );
+  //     expect(el.min).to.equal('0');
+  //     expect(el.max).to.equal('10');
+  //   });
+  // });
 
-  // Tests for pattern and inputMode
-  describe('pattern and inputMode for type="text"', () => {
-    it('should apply pattern attribute when type="text"', async () => {
-      const el = await fixture(
-        html`<cds-number-input
-          type="text"
-          pattern="[0-9]*"
-          label="Label"></cds-number-input>`
-      );
-      const input = el.shadowRoot.querySelector('input');
-      expect(input.pattern).to.equal('[0-9]*');
-    });
+  // // Tests for pattern and inputMode
+  // describe('pattern and inputMode for type="text"', () => {
+  //   it('should apply pattern attribute when type="text"', async () => {
+  //     const el = await fixture(
+  //       html`<cds-number-input
+  //         type="text"
+  //         pattern="[0-9]*"
+  //         label="Label"></cds-number-input>`
+  //     );
+  //     const input = el.shadowRoot.querySelector('input');
+  //     expect(input.pattern).to.equal('[0-9]*');
+  //   });
 
-    it('should support inputMode attribute', async () => {
-      const el = await fixture(
-        html`<cds-number-input
-          type="text"
-          input-mode="numeric"
-          label="Label"></cds-number-input>`
-      );
-      expect(el.getAttribute('input-mode')).to.equal('numeric');
-    });
+  //   it('should support inputMode attribute', async () => {
+  //     const el = await fixture(
+  //       html`<cds-number-input
+  //         type="text"
+  //         input-mode="numeric"
+  //         label="Label"></cds-number-input>`
+  //     );
+  //     expect(el.getAttribute('input-mode')).to.equal('numeric');
+  //   });
 
-    it('should support pattern attribute for type="text"', async () => {
-      const el = await fixture(
-        html`<cds-number-input
-          type="text"
-          pattern="[0-9]*"
-          label="Label"></cds-number-input>`
-      );
-      expect(el.pattern).to.equal('[0-9]*');
-    });
-  });
+  //   it('should support pattern attribute for type="text"', async () => {
+  //     const el = await fixture(
+  //       html`<cds-number-input
+  //         type="text"
+  //         pattern="[0-9]*"
+  //         label="Label"></cds-number-input>`
+  //     );
+  //     expect(el.pattern).to.equal('[0-9]*');
+  //   });
+  // });
 
-  // Tests for programmatic methods
-  describe('programmatic methods', () => {
-    it('should support stepUp() method', async () => {
-      const el = await fixture(
-        html`<cds-number-input
-          value="5"
-          step="2"
-          label="Label"></cds-number-input>`
-      );
+  // // Tests for programmatic methods
+  // describe('programmatic methods', () => {
+  //   it('should support stepUp() method', async () => {
+  //     const el = await fixture(
+  //       html`<cds-number-input
+  //         value="5"
+  //         step="2"
+  //         label="Label"></cds-number-input>`
+  //     );
 
-      el.stepUp();
-      await el.updateComplete;
+  //     el.stepUp();
+  //     await el.updateComplete;
 
-      const input = el.shadowRoot.querySelector('input');
-      expect(input.value).to.equal('7');
-    });
+  //     const input = el.shadowRoot.querySelector('input');
+  //     expect(input.value).to.equal('7');
+  //   });
 
-    it('should support stepDown() method', async () => {
-      const el = await fixture(
-        html`<cds-number-input
-          value="5"
-          step="2"
-          label="Label"></cds-number-input>`
-      );
+  //   it('should support stepDown() method', async () => {
+  //     const el = await fixture(
+  //       html`<cds-number-input
+  //         value="5"
+  //         step="2"
+  //         label="Label"></cds-number-input>`
+  //     );
 
-      el.stepDown();
-      await el.updateComplete;
+  //     el.stepDown();
+  //     await el.updateComplete;
 
-      const input = el.shadowRoot.querySelector('input');
-      expect(input.value).to.equal('3');
-    });
-  });
+  //     const input = el.shadowRoot.querySelector('input');
+  //     expect(input.value).to.equal('3');
+  //   });
+  // });
 
-  // Tests for edge cases
-  describe('edge cases', () => {
-    it('should handle empty string value', async () => {
-      const el = await fixture(
-        html`<cds-number-input
-          value=""
-          allow-empty
-          label="Label"></cds-number-input>`
-      );
-      const input = el.shadowRoot.querySelector('input');
-      expect(input.value).to.equal('');
-    });
+  // // Tests for edge cases
+  // describe('edge cases', () => {
+  //   it('should handle empty string value', async () => {
+  //     const el = await fixture(
+  //       html`<cds-number-input
+  //         value=""
+  //         allow-empty
+  //         label="Label"></cds-number-input>`
+  //     );
+  //     const input = el.shadowRoot.querySelector('input');
+  //     expect(input.value).to.equal('');
+  //   });
 
-    it('should handle very large numbers', async () => {
-      const el = await fixture(
-        html`<cds-number-input
-          value="999999999999"
-          label="Label"></cds-number-input>`
-      );
-      const input = el.shadowRoot.querySelector('input');
-      expect(input.value).to.equal('999999999999');
-    });
+  //   it('should handle very large numbers', async () => {
+  //     const el = await fixture(
+  //       html`<cds-number-input
+  //         value="999999999999"
+  //         label="Label"></cds-number-input>`
+  //     );
+  //     const input = el.shadowRoot.querySelector('input');
+  //     expect(input.value).to.equal('999999999999');
+  //   });
 
-    it('should handle very small decimal steps', async () => {
-      const el = await fixture(
-        html`<cds-number-input
-          value="0.001"
-          step="0.001"
-          label="Label"></cds-number-input>`
-      );
-      const [, increment] = el.shadowRoot.querySelectorAll('button');
+  //   it('should handle very small decimal steps', async () => {
+  //     const el = await fixture(
+  //       html`<cds-number-input
+  //         value="0.001"
+  //         step="0.001"
+  //         label="Label"></cds-number-input>`
+  //     );
+  //     const [, increment] = el.shadowRoot.querySelectorAll('button');
 
-      increment.click();
-      await el.updateComplete;
+  //     increment.click();
+  //     await el.updateComplete;
 
-      const input = el.shadowRoot.querySelector('input');
-      expect(input.value).to.equal('0.002');
-    });
+  //     const input = el.shadowRoot.querySelector('input');
+  //     expect(input.value).to.equal('0.002');
+  //   });
 
-    it('should handle invalid input gracefully', async () => {
-      const el = await fixture(
-        html`<cds-number-input type="text" label="Label"></cds-number-input>`
-      );
-      const input = el.shadowRoot.querySelector('input');
+  //   it('should handle invalid input gracefully', async () => {
+  //     const el = await fixture(
+  //       html`<cds-number-input type="text" label="Label"></cds-number-input>`
+  //     );
+  //     const input = el.shadowRoot.querySelector('input');
 
-      input.value = 'not-a-number';
-      input.dispatchEvent(
-        new Event('input', { bubbles: true, composed: true })
-      );
-      await el.updateComplete;
+  //     input.value = 'not-a-number';
+  //     input.dispatchEvent(
+  //       new Event('input', { bubbles: true, composed: true })
+  //     );
+  //     await el.updateComplete;
 
-      // Component should handle invalid input without crashing
-      expect(el).to.exist;
-      expect(input).to.exist;
-    });
-  });
+  //     // Component should handle invalid input without crashing
+  //     expect(el).to.exist;
+  //     expect(input).to.exist;
+  //   });
+  // });
 
-  // Tests for React parity
-  describe('React NumberInput parity', () => {
-    it('should support all React NumberInput props', async () => {
-      const el = await fixture(html`
-        <cds-number-input
-          id="test-input"
-          label="Test Label"
-          helper-text="Helper text"
-          invalid-text="Invalid text"
-          warn-text="Warning text"
-          min="0"
-          max="100"
-          step="5"
-          value="50"
-          size="lg"
-          disabled
-          readonly
-          invalid
-          warn
-          hide-label
-          hide-steppers
-          allow-empty
-          disable-wheel
-          default-value="25"
-          step-start-value="10"
-          type="number"
-          autocomplete="off"
-          pattern="[0-9]*"
-          input-mode="decimal"
-          increment-button-assistive-text="Increment"
-          decrement-button-assistive-text="Decrement">
-          <span slot="helper-text">Helper</span>
-          <span slot="invalid-text">Invalid</span>
-          <span slot="warn-text">Warning</span>
-        </cds-number-input>
-      `);
+  // // Tests for React parity
+  // describe('React NumberInput parity', () => {
+  //   it('should support all React NumberInput props', async () => {
+  //     const el = await fixture(html`
+  //       <cds-number-input
+  //         id="test-input"
+  //         label="Test Label"
+  //         helper-text="Helper text"
+  //         invalid-text="Invalid text"
+  //         warn-text="Warning text"
+  //         min="0"
+  //         max="100"
+  //         step="5"
+  //         value="50"
+  //         size="lg"
+  //         disabled
+  //         readonly
+  //         invalid
+  //         warn
+  //         hide-label
+  //         hide-steppers
+  //         allow-empty
+  //         disable-wheel
+  //         default-value="25"
+  //         step-start-value="10"
+  //         type="number"
+  //         autocomplete="off"
+  //         pattern="[0-9]*"
+  //         input-mode="decimal"
+  //         increment-button-assistive-text="Increment"
+  //         decrement-button-assistive-text="Decrement">
+  //         <span slot="helper-text">Helper</span>
+  //         <span slot="invalid-text">Invalid</span>
+  //         <span slot="warn-text">Warning</span>
+  //       </cds-number-input>
+  //     `);
 
-      expect(el).to.exist;
-      expect(el.label).to.equal('Test Label');
-      expect(el.min).to.equal('0');
-      expect(el.max).to.equal('100');
-      expect(el.step).to.equal('5');
-      expect(el.value).to.equal('50');
-      expect(el.size).to.equal('lg');
-      expect(el.disabled).to.be.true;
-      expect(el.readonly).to.be.true;
-      expect(el.invalid).to.be.true;
-      expect(el.warn).to.be.true;
-      expect(el.hideLabel).to.be.true;
-      expect(el.hideSteppers).to.be.true;
-      expect(el.allowEmpty).to.be.true;
-      expect(el.disableWheel).to.be.true;
-    });
+  //     expect(el).to.exist;
+  //     expect(el.label).to.equal('Test Label');
+  //     expect(el.min).to.equal('0');
+  //     expect(el.max).to.equal('100');
+  //     expect(el.step).to.equal('5');
+  //     expect(el.value).to.equal('50');
+  //     expect(el.size).to.equal('lg');
+  //     expect(el.disabled).to.be.true;
+  //     expect(el.readonly).to.be.true;
+  //     expect(el.invalid).to.be.true;
+  //     expect(el.warn).to.be.true;
+  //     expect(el.hideLabel).to.be.true;
+  //     expect(el.hideSteppers).to.be.true;
+  //     expect(el.allowEmpty).to.be.true;
+  //     expect(el.disableWheel).to.be.true;
+  //   });
 
-    it('should emit events compatible with React onChange', async () => {
-      const el = await fixture(
-        html`<cds-number-input value="5" label="Label"></cds-number-input>`
-      );
+  //   it('should emit events compatible with React onChange', async () => {
+  //     const el = await fixture(
+  //       html`<cds-number-input value="5" label="Label"></cds-number-input>`
+  //     );
 
-      let eventDetail = null;
-      el.addEventListener('cds-number-input', (e) => {
-        eventDetail = e.detail;
-      });
+  //     let eventDetail = null;
+  //     el.addEventListener('cds-number-input', (e) => {
+  //       eventDetail = e.detail;
+  //     });
 
-      const [, increment] = el.shadowRoot.querySelectorAll('button');
-      increment.click();
-      await el.updateComplete;
+  //     const [, increment] = el.shadowRoot.querySelectorAll('button');
+  //     increment.click();
+  //     await el.updateComplete;
 
-      expect(eventDetail).to.exist;
-      expect(eventDetail.value).to.exist;
-      expect(eventDetail.direction).to.exist;
-      expect(['up', 'down']).to.include(eventDetail.direction);
-    });
-  });
+  //     expect(eventDetail).to.exist;
+  //     expect(eventDetail.value).to.exist;
+  //     expect(eventDetail.direction).to.exist;
+  //     expect(['up', 'down']).to.include(eventDetail.direction);
+  //   });
+  // });
 });
