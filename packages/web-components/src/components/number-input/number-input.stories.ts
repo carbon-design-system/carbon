@@ -184,7 +184,13 @@ export const Skeleton = {
   args: {
     size: INPUT_SIZE.MEDIUM,
   },
-  argTypes,
+  argTypes: {
+    size: {
+      control: 'select',
+      description: 'Specify the size of the Number Input.',
+      options: sizes,
+    },
+  },
   parameters: {
     percy: {
       skip: true,
