@@ -93,8 +93,7 @@ $inset-transition: inset 110ms motion(standard, productive);
 
     align-items: center;
     padding: $spacing-04 $spacing-05 $spacing-03;
-    border-block-end: var(--#{$prefix}-tab-selected-underline-size, 2px) solid
-      $border-subtle;
+    border-block-end: $tab-underline-color;
     color: $text-secondary;
     inline-size: 100%;
     text-align: start;
@@ -188,8 +187,7 @@ $inset-transition: inset 110ms motion(standard, productive);
   outline: none;
 
   .#{$prefix}--tabs__nav-link {
-    border-block-end: var(--#{$prefix}-tab-selected-underline-size, 2px) solid
-      $border-disabled;
+    border-block-end: $tab-underline-disabled;
     color: $tab-text-disabled;
     outline: none;
     pointer-events: none;
@@ -239,8 +237,7 @@ $inset-transition: inset 110ms motion(standard, productive);
   .#{$prefix}--tabs__nav-link {
     @include type-style('body-short-01');
 
-    border-block-end: var(--#{$prefix}-tab-selected-underline-size, 2px) solid
-      $border-disabled;
+    border-block-end: $tab-underline-disabled;
 
     color: $tab-text-disabled;
 
@@ -323,17 +320,16 @@ $inset-transition: inset 110ms motion(standard, productive);
 
 // In vertical layout, suppress the horizontal selection indicator (blue
 // border-block-end) by overriding it to match the unselected tab border.
-// CSS custom properties inherit across shadow boundaries, so setting
-// --cds-tab-selected-underline-color on cds-tabs[vertical] is picked up
-// inside each cds-tab's shadow root by the rule below.
-:host(#{$prefix}-tabs[vertical]) {
-  --#{$prefix}-tab-selected-underline-color: #{$border-subtle};
-  --#{$prefix}-tab-selected-underline-size: 1px;
+:host(#{$prefix}-tab[vertical]) .#{$prefix}--tabs__nav-link {
+  border-block-end: 1px solid $border-subtle;
 }
 
-:host(#{$prefix}-tab[selected]) .#{$prefix}--tabs__nav-link {
-  border-block-end: var(--#{$prefix}-tab-selected-underline-size, 2px) solid
-    var(--#{$prefix}-tab-selected-underline-color, #{$border-interactive});
+:host(#{$prefix}-tab[vertical][selected]) .#{$prefix}--tabs__nav-link {
+  border-block-end: 1px solid $border-subtle;
+}
+
+:host(#{$prefix}-tab[vertical][disabled]) .#{$prefix}--tabs__nav-link {
+  border-block-end: 1px solid $border-subtle;
 }
 
 //-----------------------------
@@ -432,7 +428,7 @@ $inset-transition: inset 110ms motion(standard, productive);
   }
 }
 
-:host(#{$prefix}-tabs[vertical]) ::slotted(#{$prefix}-tab) {
+:host(#{$prefix}-tab[vertical]) {
   flex: none;
   background-color: $layer-01;
   block-size: $spacing-10;
@@ -441,13 +437,19 @@ $inset-transition: inset 110ms motion(standard, productive);
   inline-size: 100%;
 }
 
-:host(#{$prefix}-tabs[vertical]) ::slotted(#{$prefix}-tab[selected]) {
+:host(#{$prefix}-tab[vertical]:hover),
+:host(#{$prefix}-tab[vertical][disabled]:hover) {
+  .#{$prefix}--tabs__nav-link {
+    border-block-end: 1px solid $border-subtle;
+  }
+}
+
+:host(#{$prefix}-tab[vertical][selected]) {
   border-inline: none;
   box-shadow: inset 3px 0 0 0 $border-interactive;
 }
 
-:host(#{$prefix}-tabs[vertical])
-  ::slotted(#{$prefix}-tab:not([selected]):not([disabled]):hover) {
+:host(#{$prefix}-tab[vertical]:not([selected]):not([disabled]):hover) {
   background-color: $layer-hover;
   box-shadow: inset 3px 0 0 0 $border-strong;
 }

@@ -11,6 +11,7 @@ import styles from './tabs-story.scss?lit';
 import { prefix } from '../../globals/settings';
 import '../button';
 import '../checkbox';
+import '../radio-button';
 import './index';
 import '../text-input';
 
@@ -232,35 +233,31 @@ export const Vertical = {
           value="all"
           @cds-tabs-beingselected="${handleBeforeSelected}">
           <cds-tab id="tab-all" target="panel-all" value="all"
-            >Tab label 1</cds-tab
+            >Dashboard</cds-tab
           >
           <cds-tab
             id="tab-cloudFoundry"
             target="panel-cloudFoundry"
             value="cloudFoundry">
-            Tab label 2
+            Extra long label that will go two lines then truncate when it goes
+            beyond the Tab length
           </cds-tab>
-          <cds-tab
-            id="tab-staging"
-            target="panel-staging"
-            value="staging"
-            disabled>
-            Tab label 3
+          <cds-tab id="tab-staging" target="panel-staging" value="staging">
+            Activity
           </cds-tab>
-          <cds-tab id="tab-dea" target="panel-dea" value="dea"
-            >Tab label 4</cds-tab
-          >
+          <cds-tab id="tab-dea" target="panel-dea" value="dea">Analyze</cds-tab>
           <cds-tab id="tab-router" target="panel-router" value="router"
-            >Tab label 5</cds-tab
+            >Investigate</cds-tab
           >
           <cds-tab id="tab-diego" target="panel-diego" value="diego"
-            >Tab label 6</cds-tab
+            >Learn</cds-tab
           >
           <cds-tab
             id="tab-loggregator"
             target="panel-loggregator"
             value="loggregator"
-            >Tab label 7</cds-tab
+            disabled
+            >Settings</cds-tab
           >
         </cds-tabs>
         <div
@@ -278,20 +275,43 @@ export const Vertical = {
           aria-labelledby="tab-cloudFoundry"
           hidden>
           <form style="margin: 2em">
-            <legend class="${prefix}--label">Validation example</legend>
-            <cds-checkbox
-              id="cb"
-              label-text="Accept privacy policy"></cds-checkbox>
+            <cds-text-input
+              type="text"
+              label="First Name"
+              id="text-input-1"></cds-text-input>
+            <cds-text-input
+              type="text"
+              label="Middle Initial"
+              id="text-input-1"></cds-text-input>
+            <cds-text-input
+              type="text"
+              label="Last Name"
+              id="text-input-1"></cds-text-input>
+            <cds-radio-button-group
+              legend-text="Radio button heading"
+              invalid-text="Invalid selection"
+              label-position="right"
+              orientation="horizontal"
+              name="radio-group"
+              value="radio-2"
+              warn-text="Please notice the warning">
+              <cds-radio-button
+                value="radio-1"
+                label-text="Option 1"></cds-radio-button>
+              <cds-radio-button
+                value="radio-2"
+                label-text="Option 2"></cds-radio-button>
+              <cds-radio-button
+                value="radio-3"
+                label-text="Option 3"></cds-radio-button>
+            </cds-radio-button-group>
+            <cds-checkbox id="cb" label-text="Checkbox one"></cds-checkbox>
+            <cds-checkbox id="cb" label-text="Checkbox two"></cds-checkbox>
             <cds-button
               style="margin-top: 1rem; margin-bottom: 1rem"
               type="submit">
               Submit
             </cds-button>
-            <cds-text-input
-              type="text"
-              label="Text input label"
-              helper-text="Optional help text"
-              id="text-input-1"></cds-text-input>
           </form>
         </div>
         <div

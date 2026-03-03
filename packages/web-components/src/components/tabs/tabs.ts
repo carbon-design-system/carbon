@@ -244,6 +244,21 @@ export default class CDSTabs extends HostListenerMixin(CDSContentSwitcher) {
     if (nextItem) {
       (nextItem as CDSTab).hideDivider = true;
     }
+
+    // Set vertical attribute on all tabs if this tabs component is vertical
+    this._updateTabsVerticalAttribute();
+  }
+
+  /**
+   * Updates the vertical attribute on all child tabs based on the vertical property.
+   */
+  private _updateTabsVerticalAttribute() {
+    if (this.vertical) {
+      const { selectorItem } = this.constructor as typeof CDSTabs;
+      forEach(this.querySelectorAll(selectorItem), (tab) => {
+        (tab as CDSTab).setAttribute('vertical', '');
+      });
+    }
   }
 
   protected _selectionDidChange(
@@ -310,6 +325,13 @@ export default class CDSTabs extends HostListenerMixin(CDSContentSwitcher) {
    */
   @property({ reflect: true })
   type = TABS_TYPE.REGULAR;
+
+  /**
+   * `true` if the tabs are in vertical orientation.
+   * This is automatically set by `cds-tabs-vertical`.
+   */
+  @property({ type: Boolean })
+  vertical = false;
 
   /**
    * `true` if left-hand scroll intersection sentinel intersects with the host element.
