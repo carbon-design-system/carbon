@@ -1067,6 +1067,12 @@ class CDSDropdown extends ValidityMixin(
   value = '';
 
   /**
+   * Specify whether the textarea is fluid or not
+   */
+  @property({ type: Boolean })
+  isFluid = false;
+
+  /**
    * Specify whether the control is currently in warning state
    */
   @property({ type: Boolean, reflect: true })
@@ -1381,6 +1387,9 @@ class CDSDropdown extends ValidityMixin(
             ${iconLoader(ChevronDown16, { 'aria-label': toggleLabel })}
           </div>
         </div>
+        ${this.isFluid && (normalizedProps.invalid || normalizedProps.warn)
+          ? html`<hr class="${prefix}--list-box__divider" />`
+          : null}
         <slot name="ai-label" @slotchange=${handleAILabelSlotChange}></slot>
         <slot name="slug" @slotchange=${handleAILabelSlotChange}></slot>
         ${menuBody}
