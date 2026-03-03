@@ -312,7 +312,7 @@ describe('Pagination', () => {
         <Pagination
           totalItems={40}
           pageSizes={[10, 20]}
-          pageSize={4}
+          pageSize={10}
           page={2}
           pagesUnknown={false}
           pageSelectLabelText={(totalPages) => {
@@ -321,7 +321,7 @@ describe('Pagination', () => {
         />
       );
 
-      expect(screen.getByText('Página de 2 páginas')).toBeInTheDocument();
+      expect(screen.getByText('Página de 4 páginas')).toBeInTheDocument();
     });
 
     it('should respect pageSize prop', () => {

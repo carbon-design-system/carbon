@@ -103,7 +103,7 @@ export interface PaginationProps
   /**
    * A function returning the label for the page select.
    */
-  pageSelectLabelText?: (current: number, total: number) => string;
+  pageSelectLabelText?: (total: number) => string;
 
   /**
    * The number dictating how many items a page contains.
@@ -425,7 +425,7 @@ const Pagination = React.forwardRef(
               <Select
                 id={`${prefix}-pagination-select-${inputId}-right`}
                 className={`${prefix}--select__page-number`}
-                labelText={pageSelectLabelText(page, totalPages)}
+                labelText={pageSelectLabelText(totalPages)}
                 inline
                 hideLabel
                 onChange={handlePageInputChange}
