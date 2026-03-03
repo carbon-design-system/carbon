@@ -31,7 +31,9 @@ function createDraggableElement(options = {}) {
 }
 
 describe('makeDraggable', () => {
+  let originalDOMMatrix;
   beforeAll(() => {
+    originalDOMMatrix = global.DOMMatrix;
     global.DOMMatrix = class {
       constructor(transform) {
         if (typeof transform === 'string' && transform.startsWith('matrix')) {
@@ -47,6 +49,9 @@ describe('makeDraggable', () => {
         }
       }
     };
+  });
+  afterAll(() => {
+    global.DOMMatrix = originalDOMMatrix;
   });
   it('should set cursor style on handle', () => {
     const { el, handle } = createDraggableElement();
@@ -174,13 +179,32 @@ describe('makeDraggable', () => {
     fireEvent.mouseDown(handle, { clientX: 50, clientY: 50 });
     fireEvent.mouseMove(document, { clientX: 100, clientY: 120 });
 
-    const transformAfterMove = el.style.transform;
-    expect(transformAfterMove).toBe('translate(50px, 70px)');
+    expect(el.style.transform).toBe('translate(50px, 70px)');
 
     fireEvent.mouseUp(handle);
 
-    fireEvent.mouseMove(document, { clientX: 100, clientY: 120 });
+    fireEvent.mouseMove(document, { clientX: 150, clientY: 200 });
 
-    expect(transformAfterMove).toBe('translate(50px, 70px)');
+    // After mouseup, the transform should remain unchanged
+    expect(el.style.transform).toBe('translate(50px, 70px)');
+  });
+
+  it('should preserve existing non-translate transforms during drag', () => {
+    const { el, handle } = createDraggableElement();
+
+    // Set an initial transform with scale and rotate
+    el.style.transform = 'scale(1.5) rotate(45deg)';
+
+    // Start dragging
+    fireEvent.mouseDown(handle, { clientX: 0, clientY: 0 });
+    fireEvent.mouseMove(document, { clientX: 50, clientY: 30 });
+
+    // The transform should include translate but preserve scale and rotate
+    const transform = el.style.transform;
+    expect(transform).toContain('translate(50px, 30px)');
+    expect(transform).toContain('scale(1.5)');
+    expect(transform).toContain('rotate(45deg)');
+
+    fireEvent.mouseUp(handle);
   });
 });

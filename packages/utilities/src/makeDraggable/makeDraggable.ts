@@ -57,6 +57,33 @@ export const makeDraggable = ({
   let currentY = 0;
   let initialMouseX = 0;
   let initialMouseY = 0;
+  let otherTransforms = '';
+
+  // Initialize current position from computed style
+  const initialStyle = window.getComputedStyle(el);
+  const initialMatrix = new DOMMatrix(initialStyle.transform);
+  currentX = initialMatrix.m41;
+  currentY = initialMatrix.m42;
+
+  // Helper function to extract non-translate transforms from inline style
+  const extractOtherTransforms = (transformString: string): string => {
+    if (!transformString || transformString === 'none') {
+      return '';
+    }
+    const withoutTranslate = transformString.replace(
+      /translate(3d|X|Y)?\([^)]+\)\s*/g,
+      ''
+    );
+    return withoutTranslate.trim();
+  };
+
+  // Helper function to apply transform with preserved other transforms
+  const applyTransform = (x: number, y: number) => {
+    const translatePart = `translate(${x}px, ${y}px)`;
+    el.style.transform = otherTransforms
+      ? `${translatePart} ${otherTransforms}`
+      : translatePart;
+  };
 
   const dispatch = <T extends keyof EventDetail>(
     type: T,
@@ -73,11 +100,7 @@ export const makeDraggable = ({
     if (e.key === 'Enter') {
       isDragging = !isDragging;
       if (isDragging) {
-        // Get current transform values when starting keyboard drag
-        const style = window.getComputedStyle(el);
-        const matrix = new DOMMatrix(style.transform);
-        currentX = matrix.m41;
-        currentY = matrix.m42;
+        otherTransforms = extractOtherTransforms(el.style.transform);
         dispatch('dragstart', { keyboard: true });
       } else {
         dispatch('dragend', { keyboard: true });
@@ -95,19 +118,19 @@ export const makeDraggable = ({
         break;
       case 'ArrowLeft':
         currentX -= distance;
-        el.style.transform = `translate(${currentX}px, ${currentY}px)`;
+        applyTransform(currentX, currentY);
         break;
       case 'ArrowRight':
         currentX += distance;
-        el.style.transform = `translate(${currentX}px, ${currentY}px)`;
+        applyTransform(currentX, currentY);
         break;
       case 'ArrowUp':
         currentY -= distance;
-        el.style.transform = `translate(${currentX}px, ${currentY}px)`;
+        applyTransform(currentX, currentY);
         break;
       case 'ArrowDown':
         currentY += distance;
-        el.style.transform = `translate(${currentX}px, ${currentY}px)`;
+        applyTransform(currentX, currentY);
         break;
     }
   };
@@ -125,10 +148,9 @@ export const makeDraggable = ({
     if (!isTargetInHandle) {
       return;
     }
-    const style = window.getComputedStyle(el);
-    const matrix = new DOMMatrix(style.transform);
-    currentX = matrix.m41;
-    currentY = matrix.m42;
+
+    // Extract other transforms before starting drag
+    otherTransforms = extractOtherTransforms(el.style.transform);
 
     // Store the mouse position at the start of the drag
     initialMouseX = e.clientX;
@@ -150,13 +172,20 @@ export const makeDraggable = ({
     const dy = e.clientY - initialMouseY;
 
     // Add that change to the element's original translation
-    el.style.transform = `translate(${currentX + dx}px, ${currentY + dy}px)`;
+    applyTransform(currentX + dx, currentY + dy);
   };
 
-  const onMouseUp = () => {
+  const onMouseUp = (e: MouseEvent) => {
     if (!isDragging) {
       return;
     }
+
+    // Update current position to final position after drag
+    const dx = e.clientX - initialMouseX;
+    const dy = e.clientY - initialMouseY;
+    currentX += dx;
+    currentY += dy;
+
     isDragging = false;
     dispatch('dragend', { mouse: true });
 
