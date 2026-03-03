@@ -426,8 +426,8 @@ yarn lerna version patch \
   - NOT include a breaking change (e.g. it should not be v10.14.0 → v11.0.0)
   - NOT include a minor change (e.g. it should not be v10.59.1 -> v10.60.0)
 - Hit `y` to confirm changes
-- [ ] For a quick sound check, run `yarn install --immutable --immutable-cache`
-      to make sure all the versions have been correctly bumped
+- [ ] For a quick sound check, run `yarn install --immutable` to make sure all
+      the versions have been correctly bumped
   - Note: sometimes you will need to update the root `package.json` file
     manually
 - [ ] Run `yarn install`

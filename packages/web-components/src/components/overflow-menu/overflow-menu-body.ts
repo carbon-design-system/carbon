@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2019, 2025
+ * Copyright IBM Corp. 2019, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -7,6 +7,8 @@
 
 import CDSFloatingMenu, {
   FLOATING_MENU_DIRECTION,
+  getMenuOffset,
+  type MenuOffset,
 } from '../floating-menu/floating-menu';
 import { NAVIGATION_DIRECTION, OVERFLOW_MENU_SIZE } from './defs';
 
@@ -68,6 +70,36 @@ class CDSOverflowMenuBody extends CDSFloatingMenu {
    */
   @property({ reflect: true })
   size = OVERFLOW_MENU_SIZE.MEDIUM;
+
+  /**
+   * The adjustment in position applied to the floating menu.
+   */
+  @property({ attribute: false })
+  menuOffset?: MenuOffset;
+
+  /**
+   * The adjustment in position applied to the floating menu when flipped.
+   */
+  @property({ attribute: false })
+  menuOffsetFlip?: MenuOffset;
+
+  /**
+   * Gets the appropriate offset (menuOffset or menuOffsetFlip) based on the flipped state.
+   * If no offset is provided, falls back to the default centering behavior.
+   * Overrides `getOffsetConfig` in `CDSFloatingMenu`.
+   *
+   * @returns The menu offset configuration (object, function, or undefined).
+   */
+  protected getOffsetConfig(): MenuOffset | undefined {
+    const offset = this.flipped ? this.menuOffsetFlip : this.menuOffset;
+
+    if (!offset) {
+      const trigger = this.parent as HTMLElement;
+      return getMenuOffset(this, this.direction, trigger, this.flipped);
+    }
+
+    return offset;
+  }
 
   /**
    * @param currentItem The currently selected item.
