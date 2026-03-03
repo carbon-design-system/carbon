@@ -81,8 +81,33 @@ $animateTime: $duration-moderate-02 !default;
   }
 }
 
+@mixin a11yStyles {
+  .#{$prefix}__live-region {
+    position: absolute;
+    overflow: hidden;
+    padding: 0;
+    border: 0;
+    margin: -1px;
+    block-size: 1px;
+    clip: rect(0 0 0 0);
+    -webkit-clip-path: inset(50%);
+    clip-path: inset(50%);
+    inline-size: 1px;
+    white-space: nowrap;
+  }
+
+  .#{$prefix}__view {
+    visibility: hidden;
+  }
+
+  .#{$prefix}__view-active {
+    visibility: visible;
+  }
+}
+
 /// Main styles for view states
 @mixin viewStyles {
+  @include a11yStyles;
   @include keyframes;
   @include viewBase('#{$prefix}__view', 80, translateX(0));
   @include viewBase('#{$prefix}__view-active', 100, translateX(-100%));
