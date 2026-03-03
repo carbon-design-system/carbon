@@ -2131,7 +2131,6 @@ __metadata:
     "@ibm/telemetry-js": "npm:^1.6.1"
     rimraf: "npm:^6.0.1"
     tsdown: "npm:^0.20.3"
-    typescript: "npm:^5.7.3"
     typescript-config-carbon: "workspace:^0.9.0"
   peerDependencies:
     react: ^16.8.6 || ^17.0.1 || ^18.2.0 || ^19.0.0
@@ -2146,7 +2145,6 @@ __metadata:
     "@internationalized/number": "npm:^3.6.1"
     rimraf: "npm:^6.0.1"
     tsdown: "npm:^0.20.3"
-    typescript: "npm:^5.7.3"
     typescript-config-carbon: "workspace:^0.9.0"
   languageName: unknown
   linkType: soft
