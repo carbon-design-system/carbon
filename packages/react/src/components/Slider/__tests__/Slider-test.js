@@ -8,7 +8,13 @@
 import React from 'react';
 import Slider from '../Slider';
 import userEvent from '@testing-library/user-event';
-import { fireEvent, render, screen } from '@testing-library/react';
+import {
+  fireEvent,
+  render,
+  screen,
+  waitFor,
+  within,
+} from '@testing-library/react';
 
 const prefix = 'cds';
 const inputAriaValue = 'slider-input-aria-label-value';
@@ -662,6 +668,35 @@ describe('Slider', () => {
       );
       expect(lowerInput).toHaveClass(`${prefix}--slider-text-input--lower`);
       expect(upperInput).toHaveClass(`${prefix}--slider-text-input--upper`);
+    });
+
+    it('should swap handle icons for RTL two handle sliders', async () => {
+      const originalDir = document.dir;
+
+      document.dir = 'rtl';
+
+      try {
+        renderTwoHandleSlider();
+
+        const [lowerThumb, upperThumb] = screen.getAllByRole('slider');
+
+        await waitFor(() => {
+          expect(
+            within(lowerThumb).getAllByLabelText(defaultAriaLabelInputUpper)
+          ).toHaveLength(2);
+          expect(
+            within(lowerThumb).queryByLabelText(defaultAriaLabelInput)
+          ).not.toBeInTheDocument();
+          expect(
+            within(upperThumb).getAllByLabelText(defaultAriaLabelInput)
+          ).toHaveLength(2);
+          expect(
+            within(upperThumb).queryByLabelText(defaultAriaLabelInputUpper)
+          ).not.toBeInTheDocument();
+        });
+      } finally {
+        document.dir = originalDir;
+      }
     });
 
     it('should be able to apply a disabled state', () => {
