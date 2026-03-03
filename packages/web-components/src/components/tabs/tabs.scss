@@ -93,7 +93,8 @@ $inset-transition: inset 110ms motion(standard, productive);
 
     align-items: center;
     padding: $spacing-04 $spacing-05 $spacing-03;
-    border-block-end: $tab-underline-color;
+    border-block-end: var(--#{$prefix}-tab-selected-underline-size, 2px) solid
+      $border-subtle;
     color: $text-secondary;
     inline-size: 100%;
     text-align: start;
@@ -187,7 +188,8 @@ $inset-transition: inset 110ms motion(standard, productive);
   outline: none;
 
   .#{$prefix}--tabs__nav-link {
-    border-block-end: $tab-underline-disabled;
+    border-block-end: var(--#{$prefix}-tab-selected-underline-size, 2px) solid
+      $border-disabled;
     color: $tab-text-disabled;
     outline: none;
     pointer-events: none;
@@ -237,7 +239,8 @@ $inset-transition: inset 110ms motion(standard, productive);
   .#{$prefix}--tabs__nav-link {
     @include type-style('body-short-01');
 
-    border-block-end: $tab-underline-disabled;
+    border-block-end: var(--#{$prefix}-tab-selected-underline-size, 2px) solid
+      $border-disabled;
 
     color: $tab-text-disabled;
 
@@ -318,20 +321,82 @@ $inset-transition: inset 110ms motion(standard, productive);
   }
 }
 
+// In vertical layout, suppress the horizontal selection indicator (blue
+// border-block-end) by overriding it to match the unselected tab border.
+// CSS custom properties inherit across shadow boundaries, so setting
+// --cds-tab-selected-underline-color on cds-tabs[vertical] is picked up
+// inside each cds-tab's shadow root by the rule below.
+:host(#{$prefix}-tabs[vertical]) {
+  --#{$prefix}-tab-selected-underline-color: #{$border-subtle};
+  --#{$prefix}-tab-selected-underline-size: 1px;
+}
+
+:host(#{$prefix}-tab[selected]) .#{$prefix}--tabs__nav-link {
+  border-block-end: var(--#{$prefix}-tab-selected-underline-size, 2px) solid
+    var(--#{$prefix}-tab-selected-underline-color, #{$border-interactive});
+}
+
 //-----------------------------
-// Vertical Tabs Orientation
+// Vertical Tabs Wrapper
 //-----------------------------
 
-:host(#{$prefix}-tabs[orientation='vertical']) {
-  background: $layer;
-  box-shadow: inset -1px 0 $border-subtle;
-  grid-column: span 2;
-  max-block-size: none;
+:host(#{$prefix}-tabs-vertical) {
+  @include emit-layout-tokens();
+  @include layout.use('density', $default: 'normal');
 
-  @include breakpoint(lg) {
-    grid-column: span 4;
+  display: grid;
+  block-size: 100%;
+  // tabs slot occupies first 2 columns (lg: 4), panel-container fills the rest
+  grid-template-columns: repeat(16, 1fr);
+
+  // The tabs slot host — positions the cds-tabs nav rail
+  ::slotted(#{$prefix}-tabs) {
+    grid-column: span 2;
+
+    @include breakpoint(lg) {
+      grid-column: span 4;
+    }
   }
 
+  // Shadow-DOM wrapper for the panel slot — styled directly (no ::slotted needed)
+  .#{$prefix}-panel-container {
+    @include update_fields_on_layer;
+
+    background: $layer;
+    grid-column: 3 / -1;
+    overflow-y: auto;
+
+    @include breakpoint(lg) {
+      grid-column: 5 / -1;
+    }
+  }
+}
+
+// Slotted tab panel divs — match React's cds--tab-content styles
+:host(#{$prefix}-tabs-vertical) ::slotted([role='tabpanel']) {
+  // stylelint-disable-next-line declaration-no-important
+  padding: layout.density('padding-inline') !important;
+  block-size: 100%;
+  inline-size: 100%;
+  outline: none;
+}
+
+:host(#{$prefix}-tabs-vertical)
+  .panel-container
+  ::slotted([role='tabpanel']:focus) {
+  @include focus-outline('outline');
+}
+
+// cds-tabs when slotted inside cds-tabs-vertical (slot="tabs")
+:host(#{$prefix}-tabs-vertical) ::slotted(#{$prefix}-tabs) {
+  background: $layer;
+  box-shadow: inset -1px 0 $border-subtle;
+  max-block-size: none;
+}
+
+// Internal styles for cds-tabs when inside cds-tabs-vertical
+// These are applied via a CSS custom property / attribute set by the wrapper
+:host(#{$prefix}-tabs[vertical]) {
   .#{$prefix}--tabs-nav-content-container {
     block-size: 100%;
     overflow-x: hidden;
@@ -355,31 +420,7 @@ $inset-transition: inset 110ms motion(standard, productive);
   .#{$prefix}--tab--overflow-nav-button {
     display: none;
   }
-}
 
-:host(#{$prefix}-tabs[orientation='vertical']) ::slotted(#{$prefix}-tab) {
-  flex: none;
-  background-color: $layer-01;
-  block-size: $spacing-10;
-  border-block-end: 1px solid $border-subtle;
-  border-inline-end: 1px solid $border-subtle;
-  box-shadow: inset 3px 0 0 0 $border-subtle;
-  inline-size: 100%;
-}
-
-:host(#{$prefix}-tabs[orientation='vertical'])
-  ::slotted(#{$prefix}-tab[selected]) {
-  border-inline: none;
-  box-shadow: inset 3px 0 0 0 $border-interactive;
-}
-
-:host(#{$prefix}-tabs[orientation='vertical'])
-  ::slotted(#{$prefix}-tab:not([selected]):not([disabled]):hover) {
-  background-color: $layer-hover;
-  box-shadow: inset 3px 0 0 0 $border-strong;
-}
-
-:host(#{$prefix}-tabs[orientation='vertical']) {
   .#{$prefix}--tabs__nav-item-label {
     display: -webkit-box;
     overflow: hidden;
@@ -391,38 +432,22 @@ $inset-transition: inset 110ms motion(standard, productive);
   }
 }
 
-//-----------------------------
-// Tab Panel
-//-----------------------------
-
-:host(#{$prefix}-tab-panel) {
-  @extend .#{$prefix}--tab-content;
-
-  display: block;
-  padding: layout.density('padding-inline');
-
-  &:focus {
-    @include focus-outline('outline');
-  }
+:host(#{$prefix}-tabs[vertical]) ::slotted(#{$prefix}-tab) {
+  flex: none;
+  background-color: $layer-01;
+  block-size: $spacing-10;
+  border-inline-end: 1px solid $border-subtle;
+  box-shadow: inset 3px 0 0 0 $border-subtle;
+  inline-size: 100%;
 }
 
-:host(#{$prefix}-tab-panel[hidden]) {
-  display: none;
+:host(#{$prefix}-tabs[vertical]) ::slotted(#{$prefix}-tab[selected]) {
+  border-inline: none;
+  box-shadow: inset 3px 0 0 0 $border-interactive;
 }
 
-// Tab panel styles for contained tabs
-:host(#{$prefix}-tabs[type='contained']) ~ :host(#{$prefix}-tab-panel) {
-  background: $layer;
-}
-
-// Tab panel styles for vertical tabs
-:host(#{$prefix}-tabs[orientation='vertical']) ~ :host(#{$prefix}-tab-panel) {
-  @include update_fields_on_layer;
-
-  grid-column: 3/-1;
-  overflow-y: auto;
-
-  @include breakpoint(lg) {
-    grid-column: 5/-1;
-  }
+:host(#{$prefix}-tabs[vertical])
+  ::slotted(#{$prefix}-tab:not([selected]):not([disabled]):hover) {
+  background-color: $layer-hover;
+  box-shadow: inset 3px 0 0 0 $border-strong;
 }

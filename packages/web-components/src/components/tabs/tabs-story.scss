@@ -14,21 +14,3 @@
   align-self: stretch;
   padding: $spacing-05;
 }
-
-// Vertical tabs container for story examples
-.#{$prefix}--vertical-tabs-container {
-  display: grid;
-  block-size: 100%;
-  grid-template-columns: repeat(16, 1fr);
-
-  // Tab panels positioning for vertical layout
-  .#{$prefix}-ce-demo-devenv--tab-panels {
-    padding: $spacing-05;
-    grid-column: 3/-1;
-    overflow-y: auto;
-
-    @media (width >= 1056px) {
-      grid-column: 5/-1;
-    }
-  }
-}

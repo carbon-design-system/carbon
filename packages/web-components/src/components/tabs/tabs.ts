@@ -20,7 +20,6 @@ import CDSContentSwitcher, {
 } from '../content-switcher/content-switcher';
 import {
   TABS_KEYBOARD_ACTION,
-  TABS_ORIENTATION,
   TABS_TYPE,
   VERTICAL_NAVIGATION_DIRECTION,
 } from './defs';
@@ -31,7 +30,6 @@ import { carbonElement as customElement } from '../../globals/decorators/carbon-
 export {
   NAVIGATION_DIRECTION,
   TABS_KEYBOARD_ACTION,
-  TABS_ORIENTATION,
   TABS_TYPE,
   VERTICAL_NAVIGATION_DIRECTION,
 };
@@ -143,7 +141,7 @@ export default class CDSTabs extends HostListenerMixin(CDSContentSwitcher) {
   @HostListener('keydown')
   protected _handleKeydown(event: KeyboardEvent) {
     const { key } = event;
-    const isVertical = this.orientation === TABS_ORIENTATION.VERTICAL;
+    const isVertical = this.closest(`${prefix}-tabs-vertical`) !== null;
     const action = (this.constructor as typeof CDSTabs).getAction(
       key,
       isVertical
@@ -314,19 +312,6 @@ export default class CDSTabs extends HostListenerMixin(CDSContentSwitcher) {
   type = TABS_TYPE.REGULAR;
 
   /**
-   * Tabs orientation. Determines the layout direction of tabs.
-   */
-  @property({ reflect: true })
-  orientation = TABS_ORIENTATION.HORIZONTAL;
-
-  /**
-   * Custom height for vertical tabs. Only applies when orientation is vertical.
-   * Can be any valid CSS height value (e.g., '500px', '50vh', '100%').
-   */
-  @property({ attribute: 'custom-height' })
-  customHeight?: string;
-
-  /**
    * `true` if left-hand scroll intersection sentinel intersects with the host element.
    * In this condition, the left-hand paginator button should be hidden.
    */
@@ -448,18 +433,6 @@ export default class CDSTabs extends HostListenerMixin(CDSContentSwitcher) {
   updated(changedProperties) {
     // Call super to keep selection/value in sync
     super.updated?.(changedProperties);
-
-    // Apply custom height for vertical tabs
-    if (
-      changedProperties.has('orientation') ||
-      changedProperties.has('customHeight')
-    ) {
-      if (this.orientation === TABS_ORIENTATION.VERTICAL && this.customHeight) {
-        this.style.height = this.customHeight;
-      } else {
-        this.style.removeProperty('height');
-      }
-    }
 
     if (changedProperties.has('value')) {
       const tab = this.querySelector(

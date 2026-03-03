@@ -56,21 +56,6 @@ export enum TABS_TYPE {
 }
 
 /**
- * Tabs orientation.
- */
-export enum TABS_ORIENTATION {
-  /**
-   * Horizontal orientation.
-   */
-  HORIZONTAL = 'horizontal',
-
-  /**
-   * Vertical orientation.
-   */
-  VERTICAL = 'vertical',
-}
-
-/**
  * Vertical navigation direction, associated with key symbols.
  */
 export const VERTICAL_NAVIGATION_DIRECTION = {
