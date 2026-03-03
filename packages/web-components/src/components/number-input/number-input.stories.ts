@@ -182,12 +182,18 @@ export const Default = {
 
 export const Skeleton = {
   args: {
+    hideLabel: false,
     size: INPUT_SIZE.MEDIUM,
   },
   argTypes: {
+    hideLabel: {
+      control: 'boolean',
+      description:
+        'Specify whether you want the underlying label to be visually hidden.',
+    },
     size: {
       control: 'select',
-      description: 'Specify the size of the Number Input.',
+      description: 'Specify the size of the Number Input Skeleton.',
       options: sizes,
     },
   },
@@ -196,8 +202,10 @@ export const Skeleton = {
       skip: true,
     },
   },
-  render: ({ size }) => html`
-    <cds-number-input-skeleton size=${size}></cds-number-input-skeleton>
+  render: ({ hideLabel, size }) => html`
+    <cds-number-input-skeleton
+      ?hide-label=${hideLabel}
+      size=${size}></cds-number-input-skeleton>
   `,
 };
 
