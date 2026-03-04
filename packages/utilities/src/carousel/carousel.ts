@@ -64,8 +64,14 @@ export const initCarousel = (
     }
   };
 
+  const syncLiveRegionWithActiveView = () => {
+    updateLiveRegion(viewIndexStack[0] + 1);
+  };
+
   const createLiveRegion = () => {
-    if (getLiveRegion()) {
+    const childCount = getCarouselItems()?.length;
+    // Don't create a live region if one already exists or if no children are present
+    if (getLiveRegion() || !childCount) {
       return;
     }
 
@@ -73,7 +79,7 @@ export const initCarousel = (
     div.setAttribute('aria-live', 'polite');
     div.setAttribute('aria-atomic', 'true');
     div.setAttribute('class', `${prefix}__live-region`);
-    div.innerText = `Item 1 of ${getCarouselItems()?.length}`;
+    div.textContent = `Item 1 of ${childCount}`;
     carouselContainer.appendChild(div);
   };
 
@@ -181,13 +187,14 @@ export const initCarousel = (
     if (viewIndexStack[0] !== sanitizedIndex) {
       handleTransitionStart();
       viewIndexStack = [sanitizedIndex, ...viewIndexStack];
+      syncLiveRegionWithActiveView();
       performAnimation(false);
     }
   };
 
   const transitionComplete = (ref: HTMLElement) => {
     handleTransitionEnd(ref);
-    updateLiveRegion(viewIndexStack[0] + 1);
+    syncLiveRegionWithActiveView();
   };
   /**
    * Attaches class names to an HTMLElement based on given conditions.
@@ -376,6 +383,7 @@ export const initCarousel = (
     if (viewIndexStack.length - 1 >= 1) {
       handleTransitionStart();
       viewIndexStack = viewIndexStack.slice(1);
+      syncLiveRegionWithActiveView();
       performAnimation(false);
     }
   };
@@ -420,7 +428,7 @@ export const initCarousel = (
     previousViewIndexStack = [0];
     viewIndexStack = [0];
     performAnimation(false);
-    updateLiveRegion(1);
+    syncLiveRegionWithActiveView();
   };
 
   /**
@@ -444,13 +452,13 @@ export const initCarousel = (
    * If the container has a 'slot' element, it fetches all elements assigned to that slot.
    * Otherwise, it fetches all direct children of the container.
    *
-   * @returns {HTMLElement[] | undefined} An array of HTMLElements representing the carousel items or nothing if a container is not found.
+   * @returns An array of HTMLElements representing the carousel items or nothing if a container is not found.
    *
    * @example
    * const carouselItems = getCarouselItems();
    * console.log(carouselItems); // Logs the carousel items as HTMLElements
    */
-  const getCarouselItems = (): HTMLElement[] | undefined => {
+  const getCarouselItems = () => {
     const container = getWrapper();
     if (!container) {
       return;
