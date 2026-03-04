@@ -51,16 +51,16 @@ export const initCarousel = (
     refs[index] = ref;
   };
 
-  const getLiveRegion = (): HTMLDivElement | null =>
-    document.querySelector(`.${prefix}__live-region`);
+  const getLiveRegion = () =>
+    carouselContainer.querySelector(`.${prefix}__live-region`);
 
-  const getWrapper = (): HTMLDivElement | null =>
+  const getWrapper = () =>
     carouselContainer.querySelector(`.${prefix}__itemsWrapper`);
 
   const updateLiveRegion = (idx: number) => {
     const div = getLiveRegion();
     if (div) {
-      div.textContent = `Item ${idx} of ${getCarouselItems().length}`;
+      div.textContent = `Item ${idx} of ${getCarouselItems()?.length}`;
     }
   };
 
@@ -73,7 +73,7 @@ export const initCarousel = (
     div.setAttribute('aria-live', 'polite');
     div.setAttribute('aria-atomic', 'true');
     div.setAttribute('class', `${prefix}__live-region`);
-    div.innerText = `Item 1 of ${getCarouselItems().length}`;
+    div.innerText = `Item 1 of ${getCarouselItems()?.length}`;
     carouselContainer.appendChild(div);
   };
 
@@ -81,8 +81,6 @@ export const initCarousel = (
    * Wraps all child elements of a given container into a new div with the specified class.
    * If an element with the specified class already exists as a child of the container, the function does nothing.
    *
-   * @param {HTMLElement} container - The container element to wrap child elements of.
-   * @param {string} wrapperClass - The class name to apply to the new wrapper div.
    * @returns {void}
    */
   const wrapAllItems = () => {
@@ -228,8 +226,10 @@ export const initCarousel = (
 
     if (isActive) {
       viewItem.removeAttribute('aria-hidden');
+      viewItem.setAttribute('inert', '');
     } else {
       viewItem.setAttribute('aria-hidden', 'true');
+      viewItem.removeAttribute('inert');
     }
   };
 
@@ -276,6 +276,9 @@ export const initCarousel = (
    */
   const performAnimation = (isInitial: boolean) => {
     const viewItems = getCarouselItems();
+    if (!viewItems) {
+      return;
+    }
     let itemHeightSmallest = 0;
     let itemHeightMaximum = 0;
 
@@ -405,6 +408,9 @@ export const initCarousel = (
    */
   const reset = () => {
     const viewItems = getCarouselItems();
+    if (!viewItems) {
+      return;
+    }
     // Remove recycle classes from all views before resetting
     Array.from(viewItems).forEach((viewItem: HTMLElement) => {
       removeReCycleClasses(viewItem);
@@ -438,17 +444,18 @@ export const initCarousel = (
    * If the container has a 'slot' element, it fetches all elements assigned to that slot.
    * Otherwise, it fetches all direct children of the container.
    *
-   * @param {HTMLElement} container - The container element from which to extract carousel items.
-   * @returns {HTMLElement[]} An array of HTMLElements representing the carousel items.
+   * @returns {HTMLElement[] | undefined} An array of HTMLElements representing the carousel items or nothing if a container is not found.
    *
    * @example
-   * const carouselContainer = document.querySelector('.carousel-container');
-   * const carouselItems = getCarouselItems(carouselContainer);
+   * const carouselItems = getCarouselItems();
    * console.log(carouselItems); // Logs the carousel items as HTMLElements
    */
-  const getCarouselItems = (): HTMLElement[] => {
-    const container = getWrapper() as HTMLElement;
-    const slot = container.querySelector('slot') as HTMLSlotElement | null;
+  const getCarouselItems = (): HTMLElement[] | undefined => {
+    const container = getWrapper();
+    if (!container) {
+      return;
+    }
+    const slot = container.querySelector('slot');
     return slot
       ? (slot.assignedElements({ flatten: true }) as HTMLElement[])
       : (Array.from(container.children) as HTMLElement[]);

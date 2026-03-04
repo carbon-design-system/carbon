@@ -62,7 +62,8 @@ describe('initCarousel', () => {
     expect(mockOnViewChangeEnd).toHaveBeenCalled();
     expect(active.index).toBe(1);
   });
-  it('should navigate to the previous view', () => {
+
+  test('should navigate to the previous view', () => {
     const carousel = initCarousel(container, {
       onViewChangeStart: mockOnViewChangeStart,
       onViewChangeEnd: mockOnViewChangeEnd,
