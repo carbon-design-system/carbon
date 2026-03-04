@@ -79,8 +79,23 @@ async function build() {
       outputOptions(options) {
         return {
           ...options,
-          chunkFileNames: '[name].js',
-          entryFileNames: '[name].js',
+          // Keep style module filenames aligned with historical rollup output.
+          // Without this, tsdown emits collision suffixes like `*2.js` for
+          // component files that also have a same-basename `.scss?lit` import.
+          chunkFileNames(chunkInfo) {
+            const id = chunkInfo.facadeModuleId ?? '';
+            if (id.endsWith('.scss') || id.endsWith('.scss?lit')) {
+              return '[name].scss.js';
+            }
+            return '[name].js';
+          },
+          entryFileNames(chunkInfo) {
+            const id = chunkInfo.facadeModuleId ?? '';
+            if (id.endsWith('.scss') || id.endsWith('.scss?lit')) {
+              return '[name].scss.js';
+            }
+            return '[name].js';
+          },
           exports: 'named',
           preserveModules: true,
           preserveModulesRoot: path.resolve(packageRoot, 'src'),
