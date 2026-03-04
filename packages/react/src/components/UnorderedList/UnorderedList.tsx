@@ -21,8 +21,8 @@ export type UnorderedListMarkerType =
 export interface UnorderedListProps extends ComponentProps<'ul'> {
   nested?: boolean | undefined;
   isExpressive?: boolean | undefined;
-  type?: UnorderedListMarkerType | undefined;
-  customMarker?: string | undefined;
+  type?: UnorderedListMarkerType;
+  customMarker?: string;
 }
 
 export default function UnorderedList({
