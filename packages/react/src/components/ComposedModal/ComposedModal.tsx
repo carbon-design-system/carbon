@@ -596,6 +596,7 @@ const ComposedModalDialog = React.forwardRef<
       {/* Non-translatable: Focus-wrap code makes this `<button>` not actually read by screen readers */}
       {!focusTrapWithoutSentinels && (
         <button
+          aria-hidden="true"
           type="button"
           ref={startSentinel}
           className={`${prefix}--visually-hidden`}>
@@ -617,6 +618,7 @@ const ComposedModalDialog = React.forwardRef<
       {/* Non-translatable: Focus-wrap code makes this `<button>` not actually read by screen readers */}
       {!focusTrapWithoutSentinels && (
         <button
+          aria-hidden="true"
           type="button"
           ref={endSentinel}
           className={`${prefix}--visually-hidden`}>

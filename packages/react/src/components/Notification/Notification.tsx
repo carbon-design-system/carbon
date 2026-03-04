@@ -1047,6 +1047,7 @@ export function ActionableNotification({
       onKeyDown={focusTrapWithoutSentinels ? handleKeyDown : () => {}}>
       {!focusTrapWithoutSentinels && (
         <span
+          aria-hidden="true"
           ref={startTrap}
           tabIndex={0}
           role="link"
@@ -1112,6 +1113,7 @@ export function ActionableNotification({
       </div>
       {!focusTrapWithoutSentinels && (
         <span
+          aria-hidden="true"
           ref={endTrap}
           tabIndex={0}
           role="link"
