@@ -57,32 +57,67 @@ export const makeDraggable = ({
   let currentY = 0;
   let initialMouseX = 0;
   let initialMouseY = 0;
-  let otherTransforms = '';
 
-  // Initialize current position from computed style
-  const initialStyle = window.getComputedStyle(el);
-  const initialMatrix = new DOMMatrix(initialStyle.transform);
-  currentX = initialMatrix.m41;
-  currentY = initialMatrix.m42;
+  let baseMatrix: DOMMatrix | null = null;
 
-  // Helper function to extract non-translate transforms from inline style
-  const extractOtherTransforms = (transformString: string): string => {
+  /**
+   * Syncs position and extracts base matrix from computed style.
+   * Reads from getComputedStyle() to include all transform sources (inline, classes, etc.).
+   */
+  const syncTransformState = () => {
+    const computedStyle = window.getComputedStyle(el);
+    const transformString = computedStyle.transform;
+
     if (!transformString || transformString === 'none') {
-      return '';
+      currentX = 0;
+      currentY = 0;
+      baseMatrix = null;
+      return;
     }
-    const withoutTranslate = transformString.replace(
-      /translate(3d|X|Y)?\([^)]+\)\s*/g,
-      ''
-    );
-    return withoutTranslate.trim();
+
+    const matrix = new DOMMatrix(transformString);
+
+    currentX = matrix.m41;
+    currentY = matrix.m42;
+
+    const isIdentityMatrix =
+      matrix.a === 1 &&
+      matrix.b === 0 &&
+      matrix.c === 0 &&
+      matrix.d === 1 &&
+      matrix.e === 0 &&
+      matrix.f === 0;
+
+    if (isIdentityMatrix) {
+      baseMatrix = null;
+    } else {
+      baseMatrix = new DOMMatrix([
+        matrix.a,
+        matrix.b,
+        matrix.c,
+        matrix.d,
+        0,
+        0,
+      ]);
+    }
   };
 
-  // Helper function to apply transform with preserved other transforms
+  syncTransformState();
+
+  /**
+   * Applies transform by combining translation with base matrix using matrix multiplication.
+   */
   const applyTransform = (x: number, y: number) => {
-    const translatePart = `translate(${x}px, ${y}px)`;
-    el.style.transform = otherTransforms
-      ? `${translatePart} ${otherTransforms}`
-      : translatePart;
+    if (baseMatrix) {
+      const translationMatrix = new DOMMatrix();
+      translationMatrix.m41 = x;
+      translationMatrix.m42 = y;
+
+      const combined = translationMatrix.multiply(baseMatrix);
+      el.style.transform = combined.toString();
+    } else {
+      el.style.transform = `translate(${x}px, ${y}px)`;
+    }
   };
 
   const dispatch = <T extends keyof EventDetail>(
@@ -100,7 +135,7 @@ export const makeDraggable = ({
     if (e.key === 'Enter') {
       isDragging = !isDragging;
       if (isDragging) {
-        otherTransforms = extractOtherTransforms(el.style.transform);
+        syncTransformState();
         dispatch('dragstart', { keyboard: true });
       } else {
         dispatch('dragend', { keyboard: true });
@@ -149,10 +184,8 @@ export const makeDraggable = ({
       return;
     }
 
-    // Extract other transforms before starting drag
-    otherTransforms = extractOtherTransforms(el.style.transform);
+    syncTransformState();
 
-    // Store the mouse position at the start of the drag
     initialMouseX = e.clientX;
     initialMouseY = e.clientY;
     isDragging = true;
@@ -167,11 +200,9 @@ export const makeDraggable = ({
       return;
     }
 
-    // Calculate the change in mouse position from the start
     const dx = e.clientX - initialMouseX;
     const dy = e.clientY - initialMouseY;
 
-    // Add that change to the element's original translation
     applyTransform(currentX + dx, currentY + dy);
   };
 
@@ -180,7 +211,6 @@ export const makeDraggable = ({
       return;
     }
 
-    // Update current position to final position after drag
     const dx = e.clientX - initialMouseX;
     const dy = e.clientY - initialMouseY;
     currentX += dx;
@@ -208,7 +238,18 @@ export const makeDraggable = ({
     document.removeEventListener('mousemove', onMouseMove);
     document.removeEventListener('mouseup', onMouseUp);
   };
+
+  /**
+   * Re-initialize the draggable position from the element's current computed transform.
+   * Call this if the element has been repositioned externally (e.g., via CSS animation,
+   * class changes, or other scripts) to prevent position jumps on the next drag.
+   */
+  const init = () => {
+    syncTransformState();
+  };
+
   return {
     cleanup: draggableCleanup,
+    init,
   };
 };
