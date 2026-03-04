@@ -23,6 +23,13 @@
     color: $text-secondary;
   }
 
+  .#{$prefix}--shape-indicator__label {
+    overflow: hidden;
+    flex: 1;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
   .#{$prefix}--shape-indicator svg {
     align-self: center;
     margin-inline-end: $spacing-03;
