@@ -35,18 +35,52 @@ describe('makeDraggable', () => {
   beforeAll(() => {
     originalDOMMatrix = global.DOMMatrix;
     global.DOMMatrix = class {
-      constructor(transform) {
-        if (typeof transform === 'string' && transform.startsWith('matrix')) {
-          const values = transform
-            .match(/matrix.*\((.+)\)/)[1]
-            .split(',')
-            .map(parseFloat);
-          this.m41 = values[4];
-          this.m42 = values[5];
-        } else {
-          this.m41 = 0;
-          this.m42 = 0;
-        }
+      constructor(init) {
+        [this.a, this.b, this.c, this.d, this._e, this._f] = Array.isArray(init)
+          ? init
+          : typeof init === 'string' && init.startsWith('matrix')
+            ? init
+                .match(/matrix.*\((.+)\)/)[1]
+                .split(',')
+                .map(parseFloat)
+            : [1, 0, 0, 1, 0, 0];
+      }
+      get e() {
+        return this._e;
+      }
+      set e(v) {
+        this._e = v;
+      }
+      get f() {
+        return this._f;
+      }
+      set f(v) {
+        this._f = v;
+      }
+      get m41() {
+        return this._e;
+      }
+      set m41(v) {
+        this._e = v;
+      }
+      get m42() {
+        return this._f;
+      }
+      set m42(v) {
+        this._f = v;
+      }
+      multiply(m) {
+        const r = new global.DOMMatrix();
+        r.a = this.a * m.a + this.c * m.b;
+        r.b = this.b * m.a + this.d * m.b;
+        r.c = this.a * m.c + this.c * m.d;
+        r.d = this.b * m.c + this.d * m.d;
+        r._e = this.a * m.e + this.c * m.f + this.e;
+        r._f = this.b * m.e + this.d * m.f + this.f;
+        return r;
+      }
+      toString() {
+        return `matrix(${this.a}, ${this.b}, ${this.c}, ${this.d}, ${this.e}, ${this.f})`;
       }
     };
   });
@@ -192,18 +226,20 @@ describe('makeDraggable', () => {
   it('should preserve existing non-translate transforms during drag', () => {
     const { el, handle } = createDraggableElement();
 
-    // Set an initial transform with scale and rotate
-    el.style.transform = 'scale(1.5) rotate(45deg)';
+    // Set an initial transform with scale and rotate (as matrix)
+    // matrix(a, b, c, d, e, f) where scale(1.5) rotate(45deg) =
+    // matrix(1.06066, 1.06066, -1.06066, 1.06066, 0, 0)
+    el.style.transform = 'matrix(1.06066, 1.06066, -1.06066, 1.06066, 0, 0)';
 
     // Start dragging
     fireEvent.mouseDown(handle, { clientX: 0, clientY: 0 });
     fireEvent.mouseMove(document, { clientX: 50, clientY: 30 });
 
-    // The transform should include translate but preserve scale and rotate
-    const transform = el.style.transform;
-    expect(transform).toContain('translate(50px, 30px)');
-    expect(transform).toContain('scale(1.5)');
-    expect(transform).toContain('rotate(45deg)');
+    // The transform should preserve the base matrix (a,b,c,d) and add translation (e,f)
+    // Expected: matrix(1.06066, 1.06066, -1.06066, 1.06066, 50, 30)
+    expect(el.style.transform).toBe(
+      'matrix(1.06066, 1.06066, -1.06066, 1.06066, 50, 30)'
+    );
 
     fireEvent.mouseUp(handle);
   });
