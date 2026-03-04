@@ -384,7 +384,7 @@ export const WithTypeOfTextControlled = {
 export const WithTypeOfCustomValidation = {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   render: (_args: any, { globals: { locale } }: any) => {
-    // Define validateNumberSeparators function inline
+    // Custom user-passed validator
     const validateNumberSeparators = (
       input: string,
       locale: string
@@ -499,6 +499,7 @@ export const WithTypeOfCustomValidation = {
           input-mode="decimal"
           allow-empty
           min="0"
+          invalid-text="Number is not valid. Must be between -100000000 and 100000000"
           max="100000000"
           step="1"
           locale="${locale}"
@@ -586,6 +587,241 @@ export const DisabledWithAILabel = {
       </cds-number-input>
     </div>
   `,
+};
+
+// Hidden Test-Only Story for type="text" test scenarios
+export const TypeTextTestScenarios = {
+  tags: ['!dev', '!autodocs'], // hide story
+
+  render: () => {
+    return html`
+      <div style="display: flex; flex-direction: column; gap: 20px;">
+        <h3>Type="text" Test Scenarios</h3>
+
+        <!-- Basic type="text" -->
+        <cds-form-item>
+          <cds-number-input
+            type="text"
+            input-mode="decimal"
+            value="50"
+            min="0"
+            max="10000000"
+            step="1"
+            label="Basic type=text"
+            invalid-text="Value must be between 0 and 10000000"
+            helper-text="Basic text input with value 50">
+          </cds-number-input>
+        </cds-form-item>
+
+        <!-- Read-only -->
+        <cds-form-item>
+          <cds-number-input
+            type="text"
+            input-mode="decimal"
+            value="50"
+            min="0"
+            max="10000000"
+            step="1"
+            readonly
+            label="Read-only"
+            helper-text="Read-only input, steppers disabled">
+          </cds-number-input>
+        </cds-form-item>
+
+        <!-- Disabled -->
+        <cds-form-item>
+          <cds-number-input
+            type="text"
+            input-mode="decimal"
+            value="50"
+            min="0"
+            max="100"
+            step="1"
+            disabled
+            label="Disabled"
+            helper-text="Disabled input">
+          </cds-number-input>
+        </cds-form-item>
+
+        <!-- Invalid (value < min) -->
+        <cds-form-item>
+          <cds-number-input
+            type="text"
+            input-mode="decimal"
+            value="5"
+            min="10"
+            max="10000000"
+            step="1"
+            invalid
+            invalid-text="Value must be at least 10"
+            label="Invalid (value < min)"
+            helper-text="Value 5 is below minimum 10">
+          </cds-number-input>
+        </cds-form-item>
+
+        <!-- Allow empty -->
+        <cds-form-item>
+          <cds-number-input
+            id="allow-empty-input"
+            type="text"
+            input-mode="decimal"
+            allow-empty
+            min="0"
+            max="10000000"
+            value="50"
+            step="1"
+            label="Allow empty"
+            helper-text="Can be cleared completely">
+          </cds-number-input>
+          <button
+            @click="${() => {
+              const input = document.querySelector(
+                '#allow-empty-input'
+              ) as HTMLElement & { value: string };
+              if (input) input.value = '';
+            }}">
+            Clear
+          </button>
+        </cds-form-item>
+
+        <!-- Decimal precision -->
+        <cds-form-item>
+          <cds-number-input
+            type="text"
+            input-mode="decimal"
+            value="15.01"
+            min="0"
+            max="10000000"
+            step="1"
+            label="Decimal precision"
+            helper-text="Tests floating-point precision (15.01)">
+          </cds-number-input>
+        </cds-form-item>
+
+        <!-- Large numbers with thousand separators -->
+        <cds-form-item>
+          <cds-number-input
+            type="text"
+            input-mode="decimal"
+            value="1000"
+            min="-10000000"
+            max="10000000"
+            step="1000"
+            label="Large numbers"
+            helper-text="Thousand separators (1,000)">
+          </cds-number-input>
+        </cds-form-item>
+
+        <!-- German locale -->
+        <cds-form-item>
+          <cds-number-input
+            type="text"
+            allow-empty
+            locale="de-DE"
+            label="NumberInput label"
+            min="0"
+            step="1"
+            helper-text="German formatting (1.234,56)"
+            max="10000000"></cds-number-input>
+        </cds-form-item>
+
+        <!-- Percentage formatting -->
+        <cds-form-item>
+          <cds-number-input
+            type="text"
+            input-mode="decimal"
+            value="0.15"
+            min="0"
+            max="1"
+            step="0.05"
+            label="Percentage format"
+            helper-text="formatOptions: {style: 'percent'} (15%)"
+            .formatOptions="${{ style: 'percent' as const }}">
+          </cds-number-input>
+        </cds-form-item>
+
+        <!-- currency format -->
+        <cds-form-item>
+          <cds-number-input
+            type="text"
+            label="Currency format test"
+            min="0"
+            step="1"
+            max="10000"
+            value="1234.56"
+            helper-text="formatOptions: {style: 'currency', currency: 'USD'} - Should display as $1,234.56"
+            .formatOptions="${{
+              style: 'currency' as const,
+              currency: 'USD' as const,
+            }}">
+          </cds-number-input>
+        </cds-form-item>
+
+        <!-- At maximum value -->
+        <cds-form-item>
+          <cds-number-input
+            type="text"
+            input-mode="decimal"
+            value="10"
+            min="0"
+            max="10"
+            step="5"
+            label="At maximum"
+            invalid-text="Value must be between 0 and 10"
+            helper-text="Increment button disabled at max">
+          </cds-number-input>
+        </cds-form-item>
+
+        <!-- At minimum value -->
+        <cds-form-item>
+          <cds-number-input
+            type="text"
+            input-mode="decimal"
+            value="0"
+            min="0"
+            max="10"
+            step="5"
+            label="At minimum"
+            invalid-text="Value must be between 0 and 10"
+            helper-text="Decrement button disabled at min">
+          </cds-number-input>
+        </cds-form-item>
+
+        <!-- Helper text -->
+        <cds-form-item>
+          <cds-number-input
+            type="text"
+            input-mode="decimal"
+            value="50"
+            min="0"
+            max="10000000"
+            step="1"
+            label="With helper text"
+            invalid-text="Value must be between 0 and 10000000"
+            helper-text="This is helper text for the input">
+          </cds-number-input>
+        </cds-form-item>
+
+        <!-- With AI Label -->
+        <cds-form-item>
+          <cds-number-input
+            type="text"
+            input-mode="decimal"
+            value="50"
+            min="0"
+            max="10000000"
+            step="1"
+            label="With AI Label"
+            invalid-text="Value must be between 0 and 10000000"
+            helper-text="Has AI decorator">
+            <cds-ai-label alignment="bottom-left">
+              ${content}${actions}
+            </cds-ai-label>
+          </cds-number-input>
+        </cds-form-item>
+      </div>
+    `;
+  },
 };
 
 export default {

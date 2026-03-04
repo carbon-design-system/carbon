@@ -117,6 +117,12 @@ class CDSNumberInput extends CDSTextInput {
 
       this._numberValue = parsedValue;
       this._inputValue = _value;
+
+      // Validate on input when validate function is provided
+      if (this.validate) {
+        const isValid = this.validate(_value, this.locale);
+        this.invalid = !isValid;
+      }
       // onChange is called on blur for type="text"
     }
   }
@@ -236,7 +242,9 @@ class CDSNumberInput extends CDSTextInput {
 
         this._numberValue = parsedFormattedValue;
         this._previousNumberValue = parsedFormattedValue;
+        this.invalid = false;
       } else {
+        this.invalid = true;
         // Keep the invalid input as-is
         this._inputValue = rawValue;
       }
@@ -422,6 +430,45 @@ class CDSNumberInput extends CDSTextInput {
   validate?: (value: string, locale: string) => boolean | undefined;
 
   /**
+   * Override value setter to handle formatting for type="text"
+   */
+  @property({ reflect: true })
+  override get value() {
+    return super.value;
+  }
+
+  override set value(val: string) {
+    const oldValue = this._value;
+
+    if (this.type === NUMBER_INPUT_TYPE.TEXT && val) {
+      // Ensure formatters are initialized before using them
+      if (!this._numberFormatter || !this._numberParser) {
+        this._initializeFormatters();
+      }
+
+      // Parse and format the value for type="text"
+      const parsed = this._numberParser?.parse(val) ?? NaN;
+      this._numberValue = parsed;
+      this._previousNumberValue = parsed;
+      this._inputValue = isNaN(parsed)
+        ? ''
+        : (this._numberFormatter?.format(parsed) ?? '');
+
+      // Set the internal value
+      this._value = val;
+      this.requestUpdate('value', oldValue);
+
+      // Set the formatted value on the input element
+      if (this._input) {
+        this._input.value = this._inputValue;
+      }
+    } else {
+      // For type="number" or empty values, use parent behavior
+      super.value = val;
+    }
+  }
+
+  /**
    * Initialize formatters when component connects
    */
   connectedCallback() {
@@ -461,18 +508,6 @@ class CDSNumberInput extends CDSTextInput {
       if (this.type === NUMBER_INPUT_TYPE.TEXT && !isNaN(this._numberValue)) {
         this._inputValue =
           this._numberFormatter?.format(this._numberValue) ?? '';
-      }
-    }
-
-    // Initialize number value from value attribute changes
-    if (changedProperties.has('value') && this.value) {
-      if (this.type === NUMBER_INPUT_TYPE.TEXT) {
-        const parsed = this._numberParser?.parse(this.value) ?? NaN;
-        this._numberValue = parsed;
-        this._previousNumberValue = parsed;
-        this._inputValue = isNaN(parsed)
-          ? ''
-          : (this._numberFormatter?.format(parsed) ?? '');
       }
     }
   }

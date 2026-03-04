@@ -9,6 +9,14 @@ import '@carbon/web-components/es/components/number-input/index.js';
 import { fixture, html, expect } from '@open-wc/testing';
 
 describe('<cds-number-input-skeleton>', () => {
+  it('should place custom class on host', async () => {
+    const el = await fixture(
+      html`<cds-number-input-skeleton
+        class="custom-class"></cds-number-input-skeleton>`
+    );
+    expect(el.classList.contains('custom-class')).to.be.true;
+  });
+
   it('should render skeleton component', async () => {
     const el = await fixture(
       html`<cds-number-input-skeleton></cds-number-input-skeleton>`
@@ -42,37 +50,28 @@ describe('<cds-number-input-skeleton>', () => {
     expect(inputSkeleton).to.exist;
   });
 
-  it('should apply small size class', async () => {
-    const el = await fixture(
-      html`<cds-number-input-skeleton size="sm"></cds-number-input-skeleton>`
-    );
-    await el.updateComplete;
-    expect(el.getAttribute('size')).to.equal('sm');
-  });
-
-  it('should apply medium size class by default', async () => {
+  it('should render with md size class by default', async () => {
     const el = await fixture(
       html`<cds-number-input-skeleton></cds-number-input-skeleton>`
     );
-    await el.updateComplete;
-    const size = el.getAttribute('size') || 'md';
-    expect(size).to.equal('md');
+    const numberSkeleton = el.shadowRoot.querySelector('.cds--number');
+    expect(numberSkeleton.classList.contains('cds--number--md')).to.be.true;
   });
 
-  it('should apply large size class', async () => {
+  it('should render with sm size class when size is sm', async () => {
+    const el = await fixture(
+      html`<cds-number-input-skeleton size="sm"></cds-number-input-skeleton>`
+    );
+    const numberSkeleton = el.shadowRoot.querySelector('.cds--number');
+    expect(numberSkeleton.classList.contains('cds--number--sm')).to.be.true;
+  });
+
+  it('should render with lg size class when size is lg', async () => {
     const el = await fixture(
       html`<cds-number-input-skeleton size="lg"></cds-number-input-skeleton>`
     );
-    await el.updateComplete;
-    expect(el.getAttribute('size')).to.equal('lg');
-  });
-
-  it('should place custom class on host', async () => {
-    const el = await fixture(
-      html`<cds-number-input-skeleton
-        class="custom-class"></cds-number-input-skeleton>`
-    );
-    expect(el.classList.contains('custom-class')).to.be.true;
+    const numberSkeleton = el.shadowRoot.querySelector('.cds--number');
+    expect(numberSkeleton.classList.contains('cds--number--lg')).to.be.true;
   });
 
   it('should update size dynamically', async () => {
@@ -102,35 +101,5 @@ describe('<cds-number-input-skeleton>', () => {
 
     label = el.shadowRoot.querySelector('.cds--label.cds--skeleton');
     expect(label).to.not.exist;
-  });
-
-  // React parity tests
-  describe('React NumberInput.Skeleton parity', () => {
-    it('should support all React skeleton props', async () => {
-      const el = await fixture(
-        html`<cds-number-input-skeleton
-          hide-label
-          size="lg"></cds-number-input-skeleton>`
-      );
-
-      expect(el.hideLabel).to.be.true;
-      expect(el.getAttribute('size')).to.equal('lg');
-    });
-
-    it('should match React skeleton structure', async () => {
-      const el = await fixture(
-        html`<cds-number-input-skeleton></cds-number-input-skeleton>`
-      );
-
-      // Should have label skeleton
-      const label = el.shadowRoot.querySelector('.cds--label.cds--skeleton');
-      expect(label).to.exist;
-
-      // Should have input skeleton
-      const inputSkeleton = el.shadowRoot.querySelector(
-        '.cds--number.cds--skeleton'
-      );
-      expect(inputSkeleton).to.exist;
-    });
   });
 });
