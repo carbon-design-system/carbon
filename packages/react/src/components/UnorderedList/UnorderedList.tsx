@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -11,7 +11,7 @@ import classnames from 'classnames';
 import { usePrefix } from '../../internal/usePrefix';
 import { warning } from '../../internal/warning';
 
-export type UnorderedListMarkerType =
+type UnorderedListMarkerType =
   | 'disc'
   | 'circle'
   | 'square'
@@ -21,8 +21,27 @@ export type UnorderedListMarkerType =
 export interface UnorderedListProps extends ComponentProps<'ul'> {
   nested?: boolean | undefined;
   isExpressive?: boolean | undefined;
-  type?: UnorderedListMarkerType;
-  customMarker?: string;
+
+  /**
+   * Specify the marker type for the list items.
+   * - `disc`: filled circle (•)
+   * - `circle`: hollow circle (○)
+   * - `square`: filled square (▪)
+   * - `hyphen`: en dash (default for top-level lists) (–)
+   * - `custom`: custom marker (requires `customMarker` prop)
+   *
+   * When not specified:
+   * - Top-level lists default to `hyphen`
+   * - Nested lists default to `square` (deprecated - will inherit parent type in next major release)
+   */
+  type?: UnorderedListMarkerType | undefined;
+
+  /**
+   * Specify a custom marker character/content.
+   * Only used when `type="custom"`.
+   * The value will be used as the CSS content for the marker.
+   */
+  customMarker?: string | undefined;
 }
 
 export default function UnorderedList({
@@ -38,8 +57,8 @@ export default function UnorderedList({
   const hasWarnedRef = useRef(false);
 
   // Determine marker type: use provided type, or default based on nesting
-  const markerType: UnorderedListMarkerType | undefined =
-    type ?? (nested ? 'square' : 'hyphen');
+  const markerType: UnorderedListMarkerType =
+    type || (nested ? 'square' : 'hyphen');
 
   // Show deprecation warning for nested lists without explicit type
   useEffect(() => {
@@ -60,19 +79,19 @@ export default function UnorderedList({
     }
   }, [nested, type]);
 
-  // Build class names
   const classNames = classnames(`${prefix}--list--unordered`, className, {
     [`${prefix}--list--nested`]: nested,
     [`${prefix}--list--expressive`]: isExpressive,
     [`${prefix}--list--marker-${markerType}`]: markerType,
   });
 
-  // Build styles for custom marker
   const customStyles: React.CSSProperties = {
     ...style,
-    ...(markerType === 'custom' && customMarker
+    ...(markerType === 'custom' && typeof customMarker === 'string'
       ? {
-          [`--${prefix}--list--marker-content`]: `'${customMarker}'`,
+          [`--${prefix}--list--marker-content`]: `'${customMarker
+            .replace(/\\/g, '\\\\')
+            .replace(/'/g, "\\'")}'`,
         }
       : {}),
   };

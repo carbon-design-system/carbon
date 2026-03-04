@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2016, 2023
+// Copyright IBM Corp. 2016, 2026
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -91,8 +91,6 @@
     list-style-type: lower-latin;
   }
 
-  // Unordered list marker types
-  // Default behavior (backward compatible): hyphen for top-level, square for nested
   .#{$prefix}--list--unordered > .#{$prefix}--list__item {
     position: relative;
 
@@ -173,12 +171,5 @@
   .#{$prefix}--list--unordered.#{$prefix}--list--nested.#{$prefix}--list--marker-custom
     > .#{$prefix}--list__item::before {
     inset-inline-start: calc(-1 * #{$spacing-05});
-  }
-
-  // For nested lists with disc/circle/square, use smaller offset if needed
-  .#{$prefix}--list--unordered.#{$prefix}--list--nested.#{$prefix}--list--marker-disc,
-  .#{$prefix}--list--unordered.#{$prefix}--list--nested.#{$prefix}--list--marker-circle,
-  .#{$prefix}--list--unordered.#{$prefix}--list--nested.#{$prefix}--list--marker-square {
-    // These use native list-style-type, so no special spacing needed
   }
 }
