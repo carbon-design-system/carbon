@@ -226,10 +226,10 @@ export const initCarousel = (
 
     if (isActive) {
       viewItem.removeAttribute('aria-hidden');
-      viewItem.setAttribute('inert', '');
+      viewItem.removeAttribute('inert');
     } else {
       viewItem.setAttribute('aria-hidden', 'true');
-      viewItem.removeAttribute('inert');
+      viewItem.setAttribute('inert', '');
     }
   };
 

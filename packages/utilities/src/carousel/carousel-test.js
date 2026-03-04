@@ -38,6 +38,31 @@ describe('initCarousel', () => {
     expect(wrapper?.children.length).toBe(3);
   });
 
+  test('initializes carousel with correct a11y attributes', () => {
+    initCarousel(container, {
+      onViewChangeStart: mockOnViewChangeStart,
+      onViewChangeEnd: mockOnViewChangeEnd,
+    });
+
+    const liveRegion = container.querySelector('.carousel__live-region');
+    expect(liveRegion).toBeTruthy();
+    expect(liveRegion.getAttribute('aria-live')).toBe('polite');
+    expect(liveRegion.getAttribute('aria-atomic')).toBeTruthy();
+    expect(liveRegion.innerText).toBe('Item 1 of 3');
+
+    const wrapper = container.querySelector('.carousel__itemsWrapper');
+    const children = [...wrapper.children];
+    children.forEach((child, idx) => {
+      if (idx === 0) {
+        expect(child.getAttribute('aria-hidden')).toBe(null);
+        expect(child.getAttribute('inert')).toBe(null);
+      } else {
+        expect(child.getAttribute('aria-hidden')).toBeTruthy();
+        expect(child.getAttribute('inert')).toBe('');
+      }
+    });
+  });
+
   test('getActiveItem returns correct index and item', () => {
     const carousel = initCarousel(container, {
       onViewChangeStart: mockOnViewChangeStart,
