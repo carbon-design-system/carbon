@@ -39,7 +39,7 @@ export default function UnorderedList({
 
   // Determine marker type: use provided type, or default based on nesting
   const markerType: UnorderedListMarkerType | undefined =
-    type || (nested ? 'square' : 'hyphen');
+    type ?? (nested ? 'square' : 'hyphen');
 
   // Show deprecation warning for nested lists without explicit type
   useEffect(() => {
