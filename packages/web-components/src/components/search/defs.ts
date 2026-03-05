@@ -8,7 +8,7 @@
 /**
  * Input size.
  */
-export enum INPUT_SIZE {
+export enum SEARCH_SIZE {
   /**
    * Extra Small size.
    */

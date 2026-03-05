@@ -7,17 +7,17 @@
 
 import { html } from 'lit';
 import { ifDefined } from 'lit/directives/if-defined.js';
-import { INPUT_SIZE } from './defs';
+import { SEARCH_SIZE } from './defs';
 import './search-skeleton';
 import '../layer';
 import '../../../.storybook/templates/with-layer';
 import './index';
 
 const sizes = {
-  [`Extra Small size (${INPUT_SIZE.EXTRA_SMALL})`]: INPUT_SIZE.EXTRA_SMALL,
-  [`Small size (${INPUT_SIZE.SMALL})`]: INPUT_SIZE.SMALL,
-  [`Medium size (${INPUT_SIZE.MEDIUM})`]: INPUT_SIZE.MEDIUM,
-  [`Large size (${INPUT_SIZE.LARGE})`]: INPUT_SIZE.LARGE,
+  [`Extra Small size (${SEARCH_SIZE.EXTRA_SMALL})`]: SEARCH_SIZE.EXTRA_SMALL,
+  [`Small size (${SEARCH_SIZE.SMALL})`]: SEARCH_SIZE.SMALL,
+  [`Medium size (${SEARCH_SIZE.MEDIUM})`]: SEARCH_SIZE.MEDIUM,
+  [`Large size (${SEARCH_SIZE.LARGE})`]: SEARCH_SIZE.LARGE,
 };
 
 const args = {
@@ -28,7 +28,7 @@ const args = {
   labelText: 'Search',
   placeholder: 'Placeholder text',
   role: 'searchbox',
-  size: INPUT_SIZE.MEDIUM,
+  size: SEARCH_SIZE.MEDIUM,
   type: 'text',
   value: '',
 };

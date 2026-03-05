@@ -14,12 +14,14 @@ import Close16 from '@carbon/icons/es/close/16.js';
 import ifNonEmpty from '../../globals/directives/if-non-empty';
 import FocusMixin from '../../globals/mixins/focus';
 import FormMixin from '../../globals/mixins/form';
-import { INPUT_SIZE } from './defs';
+import { SEARCH_SIZE } from './defs';
 import HostListener from '../../globals/decorators/host-listener';
 import HostListenerMixin from '../../globals/mixins/host-listener';
 import styles from './search.scss?lit';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import { iconLoader } from '../../globals/internal/icon-loader';
+
+export { SEARCH_SIZE };
 
 /**
  * Search box.
@@ -266,7 +268,7 @@ class CDSSearch extends HostListenerMixin(FocusMixin(FormMixin(LitElement))) {
    * The search box size.
    */
   @property({ reflect: true })
-  size = INPUT_SIZE.MEDIUM;
+  size = SEARCH_SIZE.MEDIUM;
 
   /**
    * The `<input>` name.
