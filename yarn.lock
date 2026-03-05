@@ -2111,6 +2111,7 @@ __metadata:
     "@carbon/layout": "npm:^11.49.0"
     "@carbon/motion": "npm:^11.42.0"
     "@carbon/styles": "npm:^1.101.0"
+    "@carbon/utilities": "npm:^0.16.0"
     "@floating-ui/dom": "npm:^1.6.3"
     "@ibm/telemetry-js": "npm:^1.10.2"
     "@juggle/resize-observer": "npm:^3.4.0"
