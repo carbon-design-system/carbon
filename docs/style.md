@@ -65,7 +65,8 @@ row before the </tbody></table> line.
   - [Guidelines](#guidelines)
     - [Writing a component](#writing-a-component)
       - [When to use `React.ForwardRef`](#when-to-use-reactforwardref)
-    - [Class names, `data-testid` attributes, and `...rest`](#class-names-data-testid-attributes-and-rest)
+    - [`className`, `data-testid`, and `...rest`](#classname-data-testid-and-rest)
+      - [Stable selectors](#stable-selectors)
     - [Authoring dynamic/inline styles](#authoring-dynamicinline-styles)
     - [Translating a component](#translating-a-component)
       - [Working with messages that depend on state](#working-with-messages-that-depend-on-state)
@@ -78,7 +79,6 @@ row before the </tbody></table> line.
   - [Testing](#testing)
     - [Strategy](#strategy)
     - [Organization](#organization)
-    - [Stable selectors](#stable-selectors)
     - [Recipes](#recipes)
       - [`ComponentName-test.js`](#componentname-testjs)
       - [`ComponentName-test.a11y.js`](#componentname-testa11yjs)
@@ -87,12 +87,17 @@ row before the </tbody></table> line.
 - [Sass](#sass)
   - [Guidelines](#guidelines-1)
     - [Author component styles using mixins](#author-component-styles-using-mixins)
+    - [Class names](#class-names)
     - [Use design tokens where appropriate](#use-design-tokens-where-appropriate)
+      - [Avoid magic numbers](#avoid-magic-numbers)
+    - [Use CSS logical properties and values](#use-css-logical-properties-and-values)
     - [Avoid nesting selectors](#avoid-nesting-selectors)
     - [Use only as much specificity as needed](#use-only-as-much-specificity-as-needed)
     - [Use the global `$prefix` variable](#use-the-global-prefix-variable)
     - [Annotate relevant Sass values with SassDoc](#annotate-relevant-sass-values-with-sassdoc)
   - [Style](#style-2)
+    - [Start a new `block` or `element`?](#start-a-new-block-or-element)
+    - [Red flags](#red-flags)
     - [Comments](#comments)
   - [Testing](#testing-1)
     - [Recipes](#recipes-1)
@@ -863,6 +868,45 @@ Authoring component styles under a mixin allows the design system to:
 - Could allow developers consuming the design system to control when styles get
   emitted
 
+#### Class names
+
+Prefix all class names with `#{$prefix}--` in SCSS, which is replaced with
+`cds--` by default, and design systems inheriting Carbon can override. This
+prefix prevents potential conflicts with class names from the user.
+
+All selectors should start with the `#{$prefix}` variable.
+
+**HTML**
+
+```html
+<div
+  class="cds--inline-notification cds--inline-notification--error"
+  role="alert">
+  <div class="cds--inline-notification__details">...</div>
+</div>
+```
+
+**SCSS**
+
+```scss
+.#{$prefix}--inline-notification {
+  ...
+}
+
+.#{$prefix}--inline-notification__details {
+  ...
+}
+```
+
+Follow BEM naming convention for classes. Again, the only thing we do
+differently is prefix all classes with `#{$prefix}--`.
+
+```scss
+.#{$prefix}--block
+.#{$prefix}--block__element
+.#{$prefix}--block--modifier
+```
+
 #### Use design tokens where appropriate
 
 We have a number of Sass variables available in the project to be used as design
@@ -910,6 +954,33 @@ especially if they are never reused. Instead:
    be used in the first place).
 3. Decide to either introduce a new constant to meet the need; or rework the
    code in question to use other constants (or perhaps none at all).
+
+#### Use CSS logical properties and values
+
+Use
+[CSS logical properties and values](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_logical_properties_and_values)
+for layout. These are impacted by the writing mode and provide support for
+right-to-left styling out of the box.
+
+```scss
+// Don't do this
+.my-element {
+  padding-top: 2em;
+  padding-bottom: 2em;
+  margin-left: 2em;
+  position: relative;
+  top: 0.2em;
+}
+
+// Do this instead
+.my-element {
+  padding-block-start: 2em;
+  padding-block-end: 2em;
+  margin-inline-start: 2em;
+  position: relative;
+  inset-block-start: 0.2em;
+}
+```
 
 #### Avoid nesting selectors
 
@@ -965,30 +1036,8 @@ contract for accessibility.
 
 #### Use the global `$prefix` variable
 
-When writing selectors, always include the global `$prefix` variable. This value
-is used to namespace all of the selectors that we ship in the design system.
-
-<table>
-<thead><tr><th>Unpreferred</th><th>Preferred</th></tr></thead>
-<tbody>
-<tr><td>
-
-```scss
-.my-component {
-  // ...
-}
-```
-
-</td><td>
-
-```scss
-.#{$prefix}--my-component {
-  // ...
-}
-```
-
-</td></tr>
-</tbody></table>
+For guidance on using the global `$prefix` variable for selectors, see
+[Class names](#class-names).
 
 #### Annotate relevant Sass values with SassDoc
 
@@ -1005,7 +1054,102 @@ information:
 }
 ```
 
+[SassDoc](http://sassdoc.com) is used to document the Carbon Sass source.
+SassDoc annotations start each line with `///`; do not use `///` in non-SassDoc
+comments.
+
+For consistency, capitalize types (used in `@type`, `@param`, `@return`) and
+descriptions (used in `@param`, `@return`, `@deprecated`, `@example`, `@link`).
+
+The following annotations are used:
+
+**Required annotations**
+
+- [Description](http://sassdoc.com/annotations/#description) - can be one line
+  or multiple lines
+- [`@access`](http://sassdoc.com/annotations/#access) - `public` or `private`,
+  where public items make up our public API
+- [`@group`](http://sassdoc.com/annotations/#group) - typically a package or
+  component name
+- [`@type`](http://sassdoc.com/annotations/#type) - allowed on **variables**,
+  (e.g. `Map`, `Color`, `Number`)
+- [`@param`](http://sassdoc.com/annotations/#parameter) - allowed on
+  **functions** and **mixins**, include the type, name, and description, with a
+  default value if there is one (e.g.
+  `@param {Map} $breakpoints [$carbon--grid-breakpoints] - A map of breakpoints where the key is the name`)
+- [`@return`](http://sassdoc.com/annotations/#return) - allowed on
+  **functions**, include the type and description (e.g.
+  `@return {Number} In px`)
+- [`@alias`](http://sassdoc.com/annotations/#alias) - do not include the `$` if
+  aliasing a variable
+- [`@content`](http://sassdoc.com/annotations/#content) - allowed on **mixins**,
+  describe the usage of content
+- [`@deprecated`](http://sassdoc.com/annotations/#deprecated) - context around
+  possible replacements or when the item will no longer be available
+
+  **Optional annotations**
+
+- [`@example`](http://sassdoc.com/annotations/#example) - if the usage isn't
+  straight forward or there are multiple use cases
+- [`@link`](http://sassdoc.com/annotations/#link) - if there's a related link to
+  reference
+
+  **Examples**
+
+```scss
+// Variable example
+
+/// Primary interactive color; Primary buttons
+/// @type Color
+/// @access public
+/// @group @carbon/themes
+$interactive-01: map-get($carbon--theme, interactive-01) !default;
+
+// Mixin example
+
+/// Create the container for a grid. Will cause full-bleed for the grid unless
+/// max-width properties are added with `make-container-max-widths`
+/// @param {Map} $breakpoints [$carbon--grid-breakpoints] - A map of breakpoints where the key is the name
+/// @access private
+/// @group @carbon/grid
+@mixin carbon--make-container($breakpoints: $carbon--grid-breakpoints) {
+}
+
+// Function example
+
+/// Compute the type size for the given type scale step
+/// @param {Number} $step - Type scale step
+/// @return {Number} In px
+/// @access public
+/// @group @carbon/type
+@function carbon--get-type-size($step) {
+}
+```
+
 ### Style
+
+#### Start a new `block` or `element`?
+
+A nested element can use a new block name as long as the styles are independent
+of the parent.
+
+```html
+<div class="cds--component">
+  <button class="cds--component-button">Button</button>
+</div>
+```
+
+:point_up: The `#{$prefix}--component-button` class implies that this button has
+independent styles from its parent. Generally, it's preferred to start a new
+block.
+
+#### Red flags
+
+Avoid names with multiple `__element` names:
+
+- :x: `.#{$prefix}--card__list__item`
+- :white_check_mark: `.#{$prefix}--card-item`
+- :white_check_mark: `.#{$prefix}--card__item`
 
 #### Comments
 
