@@ -12,6 +12,7 @@ import { PAGINATION_SIZE } from './defs';
 import { html } from 'lit';
 
 const sizes = {
+  [`Extra small size (${PAGINATION_SIZE.XS})`]: PAGINATION_SIZE.XS,
   [`Small size (${PAGINATION_SIZE.SMALL})`]: PAGINATION_SIZE.SMALL,
   [`Medium size (${PAGINATION_SIZE.MEDIUM})`]: PAGINATION_SIZE.MEDIUM,
   [`Large size (${PAGINATION_SIZE.LARGE})`]: PAGINATION_SIZE.LARGE,

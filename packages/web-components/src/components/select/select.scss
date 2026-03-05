@@ -102,6 +102,12 @@ $divider-width: 1px;
   }
 }
 
+:host(#{$prefix}-select[pagination][size='xs']) {
+  .#{$prefix}--select-input {
+    block-size: to-rem(24px);
+  }
+}
+
 :host(#{$prefix}-select[warn]),
 :host(#{$prefix}-select[invalid]) {
   ::slotted(#{$prefix}-ai-label),
