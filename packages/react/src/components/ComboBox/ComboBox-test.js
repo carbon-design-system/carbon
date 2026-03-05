@@ -341,6 +341,34 @@ describe('ComboBox', () => {
     expect(findInputNode()).toHaveDisplayValue('Apple');
   });
 
+  it('should not call `onChange` on blur when `allowCustomValue` input is empty with no selection', async () => {
+    render(<ComboBox {...mockProps} allowCustomValue />);
+
+    await userEvent.click(findInputNode());
+    fireEvent.blur(findInputNode());
+
+    expect(mockProps.onChange).not.toHaveBeenCalled();
+  });
+
+  it('should never pass empty string `selectedItem` on `allowCustomValue` blur', async () => {
+    const user = userEvent.setup();
+
+    render(<ComboBox {...mockProps} allowCustomValue />);
+
+    await openMenu();
+    await user.click(screen.getByRole('option', { name: 'Item 0' }));
+    mockProps.onChange.mockClear();
+
+    await user.clear(findInputNode());
+    fireEvent.blur(findInputNode());
+
+    const calls = mockProps.onChange.mock.calls.map(([payload]) => payload);
+
+    expect(calls).not.toContainEqual(
+      expect.objectContaining({ selectedItem: '' })
+    );
+  });
+
   it('should apply onChange value if custom value is entered and `allowCustomValue` is set', async () => {
     render(<ComboBox {...mockProps} allowCustomValue />);
 
