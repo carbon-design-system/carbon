@@ -39,7 +39,6 @@ class CDSLayer extends LitElement {
       this.content = content[0];
     }
   }
-  // Get array of child indices from root to target element
   private _getPathToElement(root: HTMLElement, target: HTMLElement): number[] {
     const path: number[] = [];
     let current = target;
@@ -49,14 +48,13 @@ class CDSLayer extends LitElement {
       if (!parent) break;
 
       const index = Array.from(parent.children).indexOf(current);
-      path.unshift(index); // Add to beginning
+      path.unshift(index);
       current = parent;
     }
 
     return path;
   }
 
-  // Navigate to element using path of indices
   private _getElementByPath(
     root: HTMLElement | null,
     path: number[]
@@ -75,7 +73,6 @@ class CDSLayer extends LitElement {
 
   updated() {
     if (this.content && !this._layer1) {
-      // Initial clone
       this._layer1 = this.content.cloneNode(true) as HTMLElement;
       this._layer2 = this.content.cloneNode(true) as HTMLElement;
       this._layer1.setAttribute('slot', 'layer-1');
@@ -83,7 +80,6 @@ class CDSLayer extends LitElement {
       this.appendChild(this._layer1);
       this.appendChild(this._layer2);
 
-      // Watch for attribute changes on original
       this._observer = new MutationObserver((mutations) => {
         mutations.forEach((mutation) => {
           if (mutation.type === 'attributes') {
@@ -91,10 +87,8 @@ class CDSLayer extends LitElement {
             const attrName = mutation.attributeName!;
             const newValue = target.getAttribute(attrName);
 
-            // Find path from root to target
             const path = this._getPathToElement(this.content, target);
 
-            // Apply to same path in clones
             const clone1Target = this._getElementByPath(this._layer1, path);
             const clone2Target = this._getElementByPath(this._layer2, path);
 
