@@ -48,7 +48,7 @@ describe('initCarousel', () => {
     expect(liveRegion).toBeTruthy();
     expect(liveRegion.getAttribute('aria-live')).toBe('polite');
     expect(liveRegion.getAttribute('aria-atomic')).toBeTruthy();
-    expect(liveRegion.innerText).toBe('Item 1 of 3');
+    expect(liveRegion.textContent).toBe('Item 1 of 3');
 
     const wrapper = container.querySelector('.carousel__itemsWrapper');
     const children = [...wrapper.children];
@@ -57,10 +57,26 @@ describe('initCarousel', () => {
         expect(child.getAttribute('aria-hidden')).toBe(null);
         expect(child.getAttribute('inert')).toBe(null);
       } else {
-        expect(child.getAttribute('aria-hidden')).toBeTruthy();
+        expect(child.getAttribute('aria-hidden')).toBe('true');
         expect(child.getAttribute('inert')).toBe('');
       }
     });
+  });
+
+  test('only generates live region once', () => {
+    initCarousel(container, {
+      onViewChangeStart: mockOnViewChangeStart,
+      onViewChangeEnd: mockOnViewChangeEnd,
+    });
+
+    expect(container.querySelectorAll('.carousel__live-region').length).toBe(1);
+
+    initCarousel(container, {
+      onViewChangeStart: mockOnViewChangeStart,
+      onViewChangeEnd: mockOnViewChangeEnd,
+    });
+
+    expect(container.querySelectorAll('.carousel__live-region').length).toBe(1);
   });
 
   test('getActiveItem returns correct index and item', () => {
@@ -93,8 +109,17 @@ describe('initCarousel', () => {
       onViewChangeStart: mockOnViewChangeStart,
       onViewChangeEnd: mockOnViewChangeEnd,
     });
+    expect(container.querySelector('.carousel__live-region').textContent).toBe(
+      'Item 1 of 3'
+    );
     carousel.next(); // go to index 1
+    expect(container.querySelector('.carousel__live-region').textContent).toBe(
+      'Item 2 of 3'
+    );
     carousel.prev();
+    expect(container.querySelector('.carousel__live-region').textContent).toBe(
+      'Item 1 of 3'
+    );
     const active = carousel.getActiveItem();
     expect(active.index).toBe(0);
   });
@@ -126,6 +151,31 @@ describe('initCarousel', () => {
     expect(active.item?.textContent).toBe('Slide 3');
   });
 
+  test('goToIndex handles out of bounds', () => {
+    const carousel = initCarousel(container, {
+      onViewChangeStart: mockOnViewChangeStart,
+      onViewChangeEnd: mockOnViewChangeEnd,
+    });
+
+    let active;
+
+    carousel.goToIndex(-1);
+    active = carousel.getActiveItem();
+    expect(active.index).toBe(0);
+    expect(active.item?.textContent).toBe('Slide 1');
+    expect(container.querySelector('.carousel__live-region').textContent).toBe(
+      'Item 1 of 3'
+    );
+
+    carousel.goToIndex(999999);
+    active = carousel.getActiveItem();
+    expect(active.index).toBe(2);
+    expect(active.item?.textContent).toBe('Slide 3');
+    expect(container.querySelector('.carousel__live-region').textContent).toBe(
+      'Item 3 of 3'
+    );
+  });
+
   test('reset goes back to first slide', () => {
     const carousel = initCarousel(container, {
       onViewChangeStart: mockOnViewChangeStart,
@@ -137,5 +187,17 @@ describe('initCarousel', () => {
     const active = carousel.getActiveItem();
 
     expect(active.index).toBe(0);
+  });
+
+  test('live region is not created when carousel has no children ', () => {
+    document.body.innerHTML = `<div id="carousel"></div>`;
+    const container = document.getElementById('carousel');
+
+    initCarousel(container, {
+      onViewChangeStart: mockOnViewChangeStart,
+      onViewChangeEnd: mockOnViewChangeEnd,
+    });
+
+    expect(container.querySelector('.carousel__live-region')).toBe(null);
   });
 });
