@@ -39,6 +39,39 @@ class CDSLayer extends LitElement {
       this.content = content[0];
     }
   }
+  // Get array of child indices from root to target element
+  private _getPathToElement(root: HTMLElement, target: HTMLElement): number[] {
+    const path: number[] = [];
+    let current = target;
+
+    while (current && current !== root) {
+      const parent = current.parentElement;
+      if (!parent) break;
+
+      const index = Array.from(parent.children).indexOf(current);
+      path.unshift(index); // Add to beginning
+      current = parent;
+    }
+
+    return path;
+  }
+
+  // Navigate to element using path of indices
+  private _getElementByPath(
+    root: HTMLElement | null,
+    path: number[]
+  ): HTMLElement | null {
+    let current: HTMLElement | Element | null = root;
+
+    for (const index of path) {
+      if (!current || !current.children[index]) {
+        return null;
+      }
+      current = current.children[index];
+    }
+
+    return current as HTMLElement;
+  }
 
   updated() {
     if (this.content && !this._layer1) {
@@ -54,15 +87,23 @@ class CDSLayer extends LitElement {
       this._observer = new MutationObserver((mutations) => {
         mutations.forEach((mutation) => {
           if (mutation.type === 'attributes') {
+            const target = mutation.target as HTMLElement;
             const attrName = mutation.attributeName!;
-            const newValue = this.content.getAttribute(attrName);
+            const newValue = target.getAttribute(attrName);
+
+            // Find path from root to target
+            const path = this._getPathToElement(this.content, target);
+
+            // Apply to same path in clones
+            const clone1Target = this._getElementByPath(this._layer1, path);
+            const clone2Target = this._getElementByPath(this._layer2, path);
 
             if (newValue !== null) {
-              this._layer1?.setAttribute(attrName, newValue);
-              this._layer2?.setAttribute(attrName, newValue);
+              clone1Target?.setAttribute(attrName, newValue);
+              clone2Target?.setAttribute(attrName, newValue);
             } else {
-              this._layer1?.removeAttribute(attrName);
-              this._layer2?.removeAttribute(attrName);
+              clone1Target?.removeAttribute(attrName);
+              clone2Target?.removeAttribute(attrName);
             }
           }
         });
@@ -71,6 +112,7 @@ class CDSLayer extends LitElement {
       this._observer.observe(this.content, {
         attributes: true,
         attributeOldValue: true,
+        subtree: true,
       });
     }
   }
