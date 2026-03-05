@@ -12,15 +12,23 @@ import Layers from '@carbon/icons/es/layers/16.js';
 import { prefix } from '../../src/globals/settings';
 import '../../src/components/layer/index.js';
 import styles from './with-layer.scss?lit';
+import type { TemplateResult } from 'lit';
 
 /**
  * Storybook template layer component, strictly for presentation purposes
  *
  * @element sb-template-layers
- * @slot The elements contained within the component.
+ * @slot The elements contained within the component (legacy mode).
  */
 @customElement(`sb-template-layers`)
 class CDSLayer extends LitElement {
+  /**
+   * Render function that returns the content to display in each layer.
+   * When provided, this takes precedence over slotted content.
+   */
+  @property({ attribute: false })
+  renderContent?: () => TemplateResult;
+
   @property()
   content;
   private _observer: MutationObserver | null = null;
@@ -72,7 +80,7 @@ class CDSLayer extends LitElement {
   }
 
   updated() {
-    if (this.content && !this._layer1) {
+    if (this.content && !this._layer1 && !this.renderContent) {
       this._layer1 = this.content.cloneNode(true) as HTMLElement;
       this._layer2 = this.content.cloneNode(true) as HTMLElement;
       this._layer1.setAttribute('slot', 'layer-1');
@@ -131,6 +139,47 @@ class CDSLayer extends LitElement {
   }
 
   render() {
+    // If renderContent is provided, use it to render three independent instances
+    if (this.renderContent) {
+      console.log('here???');
+
+      return html`
+        <cds-layer with-background>
+          <div class="${prefix}--with-layer">
+            <div class="${prefix}--with-layer__background">
+              <div class="${prefix}--with-layer__label">
+                ${iconLoader(Layers)} $background
+              </div>
+              <div class="${prefix}--with-layer__content">
+                ${this.renderContent()}
+                <cds-layer with-background>
+                  <div class="${prefix}--with-layer__layer">
+                    <div class="${prefix}--with-layer__label">
+                      ${iconLoader(Layers)} $layer-01
+                    </div>
+                    <div class="${prefix}--with-layer__content">
+                      ${this.renderContent()}
+                      <cds-layer with-background>
+                        <div class="${prefix}--with-layer__layer">
+                          <div class="${prefix}--with-layer__label">
+                            ${iconLoader(Layers)} $layer-02
+                          </div>
+                          <div class="${prefix}--with-layer__content">
+                            ${this.renderContent()}
+                          </div>
+                        </div>
+                      </cds-layer>
+                    </div>
+                  </div>
+                </cds-layer>
+              </div>
+            </div>
+          </div>
+        </cds-layer>
+      `;
+    }
+
+    // Legacy mode: use slots with cloning and mutation observer
     return html`
       <cds-layer with-background>
         <div class="${prefix}--with-layer">

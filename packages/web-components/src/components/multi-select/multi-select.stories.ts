@@ -581,45 +581,48 @@ export const FilterableWithLayer = {
       warn,
       warnText,
     } = args ?? {};
+
+    // Create a render function that returns the filterable multi-select component
+    const renderFilterableMultiSelect = () => html`
+      <div style="width:300px">
+        <cds-multi-select
+          direction=${ifDefined(direction)}
+          ?disabled=${disabled}
+          ?invalid=${invalid}
+          invalid-text=${ifDefined(invalidText)}
+          clear-selection-label=${ifDefined(clearSelectionLabel)}
+          helper-text=${ifDefined(helperText)}
+          ?hide-label=${hideLabel}
+          locale=${ifDefined(locale)}
+          ?read-only=${readOnly}
+          title-text=${ifDefined(titleText)}
+          selection-feedback=${ifDefined(selectionFeedback)}
+          size=${ifDefined(size)}
+          ?warn=${warn}
+          warn-text=${ifDefined(warnText)}
+          label=${ifDefined(label)}
+          type=${ifDefined(type)}
+          value="${ifDefined(value)}"
+          filterable="true">
+          <cds-multi-select-item value="example"
+            >An example option that is really long to show what should be done
+            to handle long text</cds-multi-select-item
+          >
+          <cds-multi-select-item value="all">Option 1</cds-multi-select-item>
+          <cds-multi-select-item value="cloudFoundry"
+            >Option 2</cds-multi-select-item
+          >
+          <cds-multi-select-item disabled value="staging"
+            >Option 3 - a disabled item</cds-multi-select-item
+          >
+          <cds-multi-select-item value="dea">Option 4</cds-multi-select-item>
+          <cds-multi-select-item value="router">Option 5</cds-multi-select-item>
+        </cds-multi-select>
+      </div>
+    `;
+
     return html`
-      <sb-template-layers>
-        <div style="width:300px">
-          <cds-multi-select
-            direction=${ifDefined(direction)}
-            ?disabled=${disabled}
-            ?invalid=${invalid}
-            invalid-text=${ifDefined(invalidText)}
-            clear-selection-label=${ifDefined(clearSelectionLabel)}
-            helper-text=${ifDefined(helperText)}
-            ?hide-label=${hideLabel}
-            locale=${ifDefined(locale)}
-            ?read-only=${readOnly}
-            title-text=${ifDefined(titleText)}
-            selection-feedback=${ifDefined(selectionFeedback)}
-            size=${ifDefined(size)}
-            ?warn=${warn}
-            warn-text=${ifDefined(warnText)}
-            label=${ifDefined(label)}
-            type=${ifDefined(type)}
-            value="${ifDefined(value)}"
-            filterable="true">
-            <cds-multi-select-item value="example"
-              >An example option that is really long to show what should be done
-              to handle long text</cds-multi-select-item
-            >
-            <cds-multi-select-item value="all">Option 1</cds-multi-select-item>
-            <cds-multi-select-item value="cloudFoundry"
-              >Option 2</cds-multi-select-item
-            >
-            <cds-multi-select-item disabled value="staging"
-              >Option 3 - a disabled item</cds-multi-select-item
-            >
-            <cds-multi-select-item value="dea">Option 4</cds-multi-select-item>
-            <cds-multi-select-item value="router"
-              >Option 5</cds-multi-select-item
-            >
-          </cds-multi-select>
-        </div>
+      <sb-template-layers .renderContent=${renderFilterableMultiSelect}>
       </sb-template-layers>
     `;
   },
@@ -928,44 +931,46 @@ export const WithLayer = {
       warn,
       warnText,
     } = args ?? {};
+    // Create a render function that returns the multi-select component
+    const renderMultiSelect = () => html`
+      <div style="width:300px">
+        <cds-multi-select
+          direction=${ifDefined(direction)}
+          ?disabled=${disabled}
+          ?invalid=${invalid}
+          invalid-text=${ifDefined(invalidText)}
+          clear-selection-label=${ifDefined(clearSelectionLabel)}
+          helper-text=${ifDefined(helperText)}
+          ?hide-label=${hideLabel}
+          locale=${ifDefined(locale)}
+          ?read-only=${readOnly}
+          title-text=${ifDefined(titleText)}
+          selection-feedback=${ifDefined(selectionFeedback)}
+          size=${ifDefined(size)}
+          ?warn=${warn}
+          warn-text=${ifDefined(warnText)}
+          label=${ifDefined(label)}
+          type=${ifDefined(type)}
+          value="${ifDefined(value)}">
+          <cds-multi-select-item value="example"
+            >An example option that is really long to show what should be done
+            to handle long text</cds-multi-select-item
+          >
+          <cds-multi-select-item value="all">Option 1</cds-multi-select-item>
+          <cds-multi-select-item value="cloudFoundry"
+            >Option 2</cds-multi-select-item
+          >
+          <cds-multi-select-item disabled value="staging"
+            >Option 3 - a disabled item</cds-multi-select-item
+          >
+          <cds-multi-select-item value="dea">Option 4</cds-multi-select-item>
+          <cds-multi-select-item value="router">Option 5</cds-multi-select-item>
+        </cds-multi-select>
+      </div>
+    `;
+
     return html`
-      <sb-template-layers>
-        <div style="width:300px">
-          <cds-multi-select
-            direction=${ifDefined(direction)}
-            ?disabled=${disabled}
-            ?invalid=${invalid}
-            invalid-text=${ifDefined(invalidText)}
-            clear-selection-label=${ifDefined(clearSelectionLabel)}
-            helper-text=${ifDefined(helperText)}
-            ?hide-label=${hideLabel}
-            locale=${ifDefined(locale)}
-            ?read-only=${readOnly}
-            title-text=${ifDefined(titleText)}
-            selection-feedback=${ifDefined(selectionFeedback)}
-            size=${ifDefined(size)}
-            ?warn=${warn}
-            warn-text=${ifDefined(warnText)}
-            label=${ifDefined(label)}
-            type=${ifDefined(type)}
-            value="${ifDefined(value)}">
-            <cds-multi-select-item value="example"
-              >An example option that is really long to show what should be done
-              to handle long text</cds-multi-select-item
-            >
-            <cds-multi-select-item value="all">Option 1</cds-multi-select-item>
-            <cds-multi-select-item value="cloudFoundry"
-              >Option 2</cds-multi-select-item
-            >
-            <cds-multi-select-item disabled value="staging"
-              >Option 3 - a disabled item</cds-multi-select-item
-            >
-            <cds-multi-select-item value="dea">Option 4</cds-multi-select-item>
-            <cds-multi-select-item value="router"
-              >Option 5</cds-multi-select-item
-            >
-          </cds-multi-select>
-        </div>
+      <sb-template-layers .renderContent=${renderMultiSelect}>
       </sb-template-layers>
     `;
   },
