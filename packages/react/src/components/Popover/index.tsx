@@ -200,6 +200,19 @@ export const Popover: PopoverComponent & {
     useFeatureFlag('enable-v12-dynamic-floating-styles') || autoAlign;
   const lastClickWasInsidePopoverContent = useRef(false);
 
+  const isTargetInDatePickerInsidePopover = (target: Node | null) => {
+    if (!target || !popover.current) return false;
+    const calendar =
+      target instanceof Element && target.closest?.('.flatpickr-calendar');
+    if (!calendar) return false;
+    const inputs = popover.current.querySelectorAll('input');
+    for (const input of inputs) {
+      const fp = (input as HTMLInputElement & { _flatpickr?: { calendarContainer: Element } })._flatpickr;
+      if (fp?.calendarContainer === calendar) return true;
+    }
+    return false;
+  };
+
   let align = mapPopoverAlign(initialAlign);
 
   // Tracks clicks inside PopoverContent to prevent it from closing when clicked, this handles an edge
@@ -230,6 +243,10 @@ export const Popover: PopoverComponent & {
 
       onRequestClose?.();
     } else if (relatedTarget && !popover.current?.contains(relatedTarget)) {
+      if (isTargetInDatePickerInsidePopover(relatedTarget)) {
+        return;
+      }
+
       const isOutsideFloating =
         enableFloatingStyles && refs.floating.current
           ? !refs.floating.current.contains(relatedTarget)
@@ -248,7 +265,12 @@ export const Popover: PopoverComponent & {
   });
 
   useWindowEvent('click', ({ target }) => {
-    if (open && target instanceof Node && !popover.current?.contains(target)) {
+    if (
+      open &&
+      target instanceof Node &&
+      !popover.current?.contains(target) &&
+      !isTargetInDatePickerInsidePopover(target)
+    ) {
       onRequestClose?.();
     }
   });

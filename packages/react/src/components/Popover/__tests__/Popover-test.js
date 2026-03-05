@@ -436,4 +436,37 @@ describe('Popover', () => {
     await userEvent.click(screen.getByTestId('tabtip-checkbox'));
     expect(onRequestClose).not.toHaveBeenCalled();
   });
+
+  it('should NOT call onRequestClose when clicking DatePicker calendar rendered in body', async () => {
+    const onRequestClose = jest.fn();
+    render(
+      <Popover open autoAlign onRequestClose={onRequestClose}>
+        <button type="button">Open</button>
+        <PopoverContent>
+          <input
+            id="date-picker-input"
+            aria-label="Date input"
+            readOnly
+          />
+        </PopoverContent>
+      </Popover>
+    );
+
+    const input = screen.getByLabelText('Date input');
+    const calendar = document.createElement('div');
+    calendar.className = 'flatpickr-calendar open';
+    calendar.innerHTML = '<span class="flatpickr-day">26</span>';
+    document.body.appendChild(calendar);
+
+    Object.defineProperty(input, '_flatpickr', {
+      value: { calendarContainer: calendar },
+      configurable: true,
+    });
+
+    await userEvent.click(calendar.querySelector('.flatpickr-day'));
+
+    expect(onRequestClose).not.toHaveBeenCalled();
+
+    document.body.removeChild(calendar);
+  });
 });
