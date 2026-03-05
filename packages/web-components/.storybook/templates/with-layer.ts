@@ -87,6 +87,20 @@ class CDSLayer extends LitElement {
             const attrName = mutation.attributeName!;
             const newValue = target.getAttribute(attrName);
 
+            // Skip attributes that are typically set by user interactions
+            // These should not be synced between layer instances
+            const skipAttributes = [
+              'open',
+              'value',
+              'aria-expanded',
+              'aria-activedescendant',
+              'aria-selected',
+            ];
+
+            if (skipAttributes.includes(attrName)) {
+              return;
+            }
+
             const path = this._getPathToElement(this.content, target);
 
             const clone1Target = this._getElementByPath(this._layer1, path);
