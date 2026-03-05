@@ -95,15 +95,13 @@ $css--plex: true !default;
         }
       }
 
-      border-color: $border-disabled !important; /* stylelint-disable-line declaration-no-important */
       background-color: transparent;
+      border-block-color: $border-inverse !important; /* stylelint-disable-line declaration-no-important */
+      border-inline-color: $border-disabled !important; /* stylelint-disable-line declaration-no-important */
 
       ::slotted(p) {
         color: $text-disabled !important; /* stylelint-disable-line declaration-no-important */
       }
-
-      border-block-end-color: $border-inverse;
-      border-block-start-color: $border-inverse;
     }
   }
 }
