@@ -83,6 +83,16 @@ const config = {
           },
         },
       },
+      server: {
+        watch: {
+          // Watch for changes in the styles package
+          ignored: ['!**/node_modules/@carbon/**'],
+        },
+        fs: {
+          // Allow serving files from the monorepo root
+          allow: ['../..'],
+        },
+      },
       optimizeDeps: {
         esbuildOptions: {
           loader: {
