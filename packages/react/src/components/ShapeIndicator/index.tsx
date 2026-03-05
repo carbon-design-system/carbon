@@ -123,7 +123,7 @@ export const ShapeIndicator = React.forwardRef(
           size={16}
           className={`${prefix}--shape-indicator--${kind}`}
         />
-        {label}
+        <span className={`${prefix}--shape-indicator__label`}>{label}</span>
       </div>
     );
   }
