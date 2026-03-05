@@ -84,7 +84,7 @@ const ButtonSet = forwardRef<HTMLDivElement, ButtonSetProps>((props, ref) => {
     resizeObserver.observe(fluidInnerRef.current);
 
     return () => resizeObserver.disconnect();
-  }, [isStacked, stacked]);
+  }, [fluid, stacked]);
 
   useEffect(() => {
     const newSortedChildren = React.Children.toArray(children);
