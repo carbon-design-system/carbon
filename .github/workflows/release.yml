@@ -11,7 +11,7 @@ on:
 jobs:
   build:
     name: Create Release
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest-larger-disk
     timeout-minutes: 60
     # Needed as recommended by npm docs on publishing with provenance https://docs.npmjs.com/generating-provenance-statements
     permissions:
@@ -57,7 +57,7 @@ jobs:
         run: kill ${{ steps.storybook.outputs.pid }}
       - name: Upload test results
         if: always()
-        uses: actions/upload-artifact@bbbca2ddaa5d8feaa63e36b76fdaad77386f024f #7.0.0
+        uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f #6.0.0
         with:
           name: playwright-avt-report
           path: .playwright
@@ -105,3 +105,4 @@ jobs:
         uses: peter-evans/repository-dispatch@v4
         with:
           event-type: deploy-packages
+

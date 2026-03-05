@@ -1726,6 +1726,7 @@ __metadata:
     replace-in-file: "npm:^8.3.0"
     sass: "npm:^1.77.7"
     tsdown: "npm:^0.20.3"
+    typescript: "npm:^5.7.3"
     yargs: "npm:^17.7.2"
   bin:
     carbon-cli: ./bin/carbon-cli.js
