@@ -42,8 +42,6 @@ $css--plex: true !default;
 
 :host(#{$prefix}-pagination[size='xs']) {
   @extend .#{$prefix}--pagination--xs;
-
-  block-size: to-rem(24px);
 }
 
 :host(#{$prefix}-pagination[size='sm']) {
