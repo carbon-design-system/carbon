@@ -136,8 +136,9 @@ async function generateIndexTypes(outDir) {
   const indexContent = await fs.readFile(indexJsPath, 'utf8');
 
   const bucketExports = [];
-  const esmRegex = /from '\.\/(__generated__\/bucket-\d+)\.js'/g;
-  const cjsRegex = /require\('\.\/(__generated__\/bucket-\d+)\.js'\)/g;
+  // Support both rollup (single-quoted) and tsdown (double-quoted) output.
+  const esmRegex = /from ['"]\.\/(__generated__\/bucket-\d+)\.js['"]/g;
+  const cjsRegex = /require\(['"]\.\/(__generated__\/bucket-\d+)\.js['"]\)/g;
 
   let match;
   while ((match = esmRegex.exec(indexContent)) !== null) {
