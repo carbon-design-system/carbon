@@ -47,7 +47,7 @@ describe('initCarousel', () => {
     const liveRegion = container.querySelector('.carousel__live-region');
     expect(liveRegion).toBeTruthy();
     expect(liveRegion.getAttribute('aria-live')).toBe('polite');
-    expect(liveRegion.getAttribute('aria-atomic')).toBeTruthy();
+    expect(liveRegion.getAttribute('aria-atomic')).toBe('true');
     expect(liveRegion.textContent).toBe('Item 1 of 3');
 
     const wrapper = container.querySelector('.carousel__itemsWrapper');
