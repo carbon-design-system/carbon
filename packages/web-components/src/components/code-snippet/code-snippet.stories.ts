@@ -8,7 +8,7 @@
 import { html } from 'lit';
 import './index';
 import '../layer/index';
-import '../../../.storybook/templates/with-layer';
+import { withLayers } from '../../../.storybook/decorators/with-layers';
 
 const args = {
   copyButtonDescription: 'Copy to clipboard',
@@ -147,6 +147,10 @@ export const Inline = {
 };
 
 export const InlineWithLayer = {
+  decorators: [withLayers],
+  parameters: {
+    layout: 'fullscreen',
+  },
   args: {
     ...args,
     type: 'inline',
@@ -171,25 +175,23 @@ export const InlineWithLayer = {
       wrapText,
     } = args ?? {};
     return html`
-      <sb-template-layers>
-        <cds-code-snippet
-          type="${type}"
-          copy-text="${copyText}"
-          ?disabled="${disabled}"
-          maxCollapsedNumberOfRows="${maxCollapsedNumberOfRows}"
-          maxExpandedNumberOfRows="${maxExpandedNumberOfRows}"
-          minCollapsedNumberOfRows="${minCollapsedNumberOfRows}"
-          minExpandedNumberOfRows="${minExpandedNumberOfRows}"
-          ?hide-copy-button="${hideCopyButton}"
-          show-less-text="${showLessText}"
-          show-more-text="${showMoreText}"
-          ?wrap-text="${wrapText}"
-          feedback=${feedback}
-          feedback-timeout=${feedbackTimeout}
-          tooltip-content="${copyButtonDescription}"
-          >${text}
-        </cds-code-snippet>
-      </sb-template-layers>
+      <cds-code-snippet
+        type="${type}"
+        copy-text="${copyText}"
+        ?disabled="${disabled}"
+        maxCollapsedNumberOfRows="${maxCollapsedNumberOfRows}"
+        maxExpandedNumberOfRows="${maxExpandedNumberOfRows}"
+        minCollapsedNumberOfRows="${minCollapsedNumberOfRows}"
+        minExpandedNumberOfRows="${minExpandedNumberOfRows}"
+        ?hide-copy-button="${hideCopyButton}"
+        show-less-text="${showLessText}"
+        show-more-text="${showMoreText}"
+        ?wrap-text="${wrapText}"
+        feedback=${feedback}
+        feedback-timeout=${feedbackTimeout}
+        tooltip-content="${copyButtonDescription}"
+        >${text}
+      </cds-code-snippet>
     `;
   },
 };
@@ -271,6 +273,10 @@ export const Multiline = {
 };
 
 export const MultilineWithLayer = {
+  decorators: [withLayers],
+  parameters: {
+    layout: 'fullscreen',
+  },
   args: {
     ...args,
     type: 'multi',
@@ -325,25 +331,23 @@ export const MultilineWithLayer = {
     } = args ?? {};
 
     return html`
-      <sb-template-layers>
-        <cds-code-snippet
-          type="${type}"
-          copy-text="${copyText}"
-          ?disabled="${disabled}"
-          maxCollapsedNumberOfRows="${maxCollapsedNumberOfRows}"
-          maxExpandedNumberOfRows="${maxExpandedNumberOfRows}"
-          minCollapsedNumberOfRows="${minCollapsedNumberOfRows}"
-          minExpandedNumberOfRows="${minExpandedNumberOfRows}"
-          ?hide-copy-button="${hideCopyButton}"
-          show-less-text="${showLessText}"
-          show-more-text="${showMoreText}"
-          ?wrap-text="${wrapText}"
-          feedback=${feedback}
-          feedback-timeout=${feedbackTimeout}
-          tooltip-content="${copyButtonDescription}"
-          >${text}
-        </cds-code-snippet>
-      </sb-template-layers>
+      <cds-code-snippet
+        type="${type}"
+        copy-text="${copyText}"
+        ?disabled="${disabled}"
+        maxCollapsedNumberOfRows="${maxCollapsedNumberOfRows}"
+        maxExpandedNumberOfRows="${maxExpandedNumberOfRows}"
+        minCollapsedNumberOfRows="${minCollapsedNumberOfRows}"
+        minExpandedNumberOfRows="${minExpandedNumberOfRows}"
+        ?hide-copy-button="${hideCopyButton}"
+        show-less-text="${showLessText}"
+        show-more-text="${showMoreText}"
+        ?wrap-text="${wrapText}"
+        feedback=${feedback}
+        feedback-timeout=${feedbackTimeout}
+        tooltip-content="${copyButtonDescription}"
+        >${text}
+      </cds-code-snippet>
     `;
   },
 };
@@ -396,6 +400,10 @@ export const Singleline = {
 };
 
 export const SinglelineWithLayer = {
+  decorators: [withLayers],
+  parameters: {
+    layout: 'fullscreen',
+  },
   args: {
     ...args,
     type: 'single',
@@ -421,25 +429,23 @@ export const SinglelineWithLayer = {
       wrapText,
     } = args ?? {};
     return html`
-      <sb-template-layers>
-        <cds-code-snippet
-          type="${type}"
-          copy-text="${copyText}"
-          ?disabled="${disabled}"
-          maxCollapsedNumberOfRows="${maxCollapsedNumberOfRows}"
-          maxExpandedNumberOfRows="${maxExpandedNumberOfRows}"
-          minCollapsedNumberOfRows="${minCollapsedNumberOfRows}"
-          minExpandedNumberOfRows="${minExpandedNumberOfRows}"
-          ?hide-copy-button="${hideCopyButton}"
-          show-less-text="${showLessText}"
-          show-more-text="${showMoreText}"
-          ?wrap-text="${wrapText}"
-          feedback=${feedback}
-          feedback-timeout=${feedbackTimeout}
-          tooltip-content="${copyButtonDescription}"
-          >${text}</cds-code-snippet
-        >
-      </sb-template-layers>
+      <cds-code-snippet
+        type="${type}"
+        copy-text="${copyText}"
+        ?disabled="${disabled}"
+        maxCollapsedNumberOfRows="${maxCollapsedNumberOfRows}"
+        maxExpandedNumberOfRows="${maxExpandedNumberOfRows}"
+        minCollapsedNumberOfRows="${minCollapsedNumberOfRows}"
+        minExpandedNumberOfRows="${minExpandedNumberOfRows}"
+        ?hide-copy-button="${hideCopyButton}"
+        show-less-text="${showLessText}"
+        show-more-text="${showMoreText}"
+        ?wrap-text="${wrapText}"
+        feedback=${feedback}
+        feedback-timeout=${feedbackTimeout}
+        tooltip-content="${copyButtonDescription}"
+        >${text}</cds-code-snippet
+      >
     `;
   },
 };
