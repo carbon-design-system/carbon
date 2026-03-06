@@ -520,3 +520,16 @@ export const withAILabel = {
     </>
   ),
 };
+
+// remove before merging
+export const TestOnClickKeyboardSupport = () => {
+  return (
+    <ClickableTile
+      id="clickable-tile-2"
+      onClick={() =>
+        console.log(`onClick Called at ${new Date().toLocaleTimeString()}`)
+      }>
+      Clickable Tile onClick
+    </ClickableTile>
+  );
+};

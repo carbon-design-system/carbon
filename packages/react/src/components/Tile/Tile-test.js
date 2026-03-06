@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -120,6 +120,35 @@ describe('Tile', () => {
       render(<ClickableTile onKeyDown={onKeyDown}>keytest</ClickableTile>);
       await userEvent.type(screen.getByText('keytest'), 'one');
       expect(onKeyDown).toHaveBeenCalledTimes(3);
+    });
+
+    it('should call onClick when Enter key is pressed', async () => {
+      const onClick = jest.fn();
+      render(<ClickableTile onClick={onClick}>Enter test</ClickableTile>);
+      const tile = screen.getByText('Enter test');
+      tile.focus();
+      await userEvent.keyboard('[Enter]');
+      expect(onClick).toHaveBeenCalledTimes(1);
+    });
+
+    it('should call onClick when Space key is pressed', async () => {
+      const onClick = jest.fn();
+      render(<ClickableTile onClick={onClick}>Space test</ClickableTile>);
+      const tile = screen.getByText('Space test');
+      tile.focus();
+      await userEvent.keyboard('[Space]');
+      expect(onClick).toHaveBeenCalledTimes(1);
+    });
+
+    it('should not call onClick when other keys are pressed', async () => {
+      const onClick = jest.fn();
+      render(<ClickableTile onClick={onClick}>Other keys test</ClickableTile>);
+      const tile = screen.getByText('Other keys test');
+      tile.focus();
+      await userEvent.keyboard('a');
+      await userEvent.keyboard('[Escape]');
+      await userEvent.keyboard('[Tab]');
+      expect(onClick).not.toHaveBeenCalled();
     });
   });
 
