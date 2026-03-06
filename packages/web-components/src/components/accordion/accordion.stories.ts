@@ -10,8 +10,8 @@ import { prefix } from '../../globals/settings';
 import { ACCORDION_SIZE } from './accordion';
 import './index';
 import '../layer/index';
-import '../../../.storybook/templates/with-layer';
 import styles from './accordion.scss?lit';
+import { withLayers } from '../../../.storybook/decorators/with-layers';
 
 const sizes = {
   [`Small size (${ACCORDION_SIZE.SMALL})`]: ACCORDION_SIZE.SMALL,
@@ -259,6 +259,10 @@ export const Skeleton = {
 };
 
 export const WithLayer = {
+  decorators: [withLayers],
+  parameters: {
+    layout: 'fullscreen',
+  },
   args,
   argTypes,
   render: ({
@@ -270,50 +274,48 @@ export const WithLayer = {
     onToggle,
   }) => {
     return html`
-      <sb-template-layers>
-        <cds-accordion
-          alignment="${alignment}"
-          size="${size}"
-          ?isFlush="${isFlush}"
-          ?disabled="${disabled}">
-          <cds-accordion-item
-            title="Section 1 title"
-            @cds-accordion-item-beingtoggled="${onBeforeToggle}"
-            @cds-accordion-item-toggled="${onToggle}">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat.
-          </cds-accordion-item>
-          <cds-accordion-item
-            title="Section 2 title"
-            @cds-accordion-item-beingtoggled="${onBeforeToggle}"
-            @cds-accordion-item-toggled="${onToggle}">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat.
-          </cds-accordion-item>
-          <cds-accordion-item
-            title="Section 3 title"
-            @cds-accordion-item-beingtoggled="${onBeforeToggle}"
-            @cds-accordion-item-toggled="${onToggle}">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat.
-          </cds-accordion-item>
-          <cds-accordion-item
-            title="Section 4 title"
-            @cds-accordion-item-beingtoggled="${onBeforeToggle}"
-            @cds-accordion-item-toggled="${onToggle}">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat.
-          </cds-accordion-item>
-        </cds-accordion>
-      </sb-template-layers>
+      <cds-accordion
+        alignment="${alignment}"
+        size="${size}"
+        ?isFlush="${isFlush}"
+        ?disabled="${disabled}">
+        <cds-accordion-item
+          title="Section 1 title"
+          @cds-accordion-item-beingtoggled="${onBeforeToggle}"
+          @cds-accordion-item-toggled="${onToggle}">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
+          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+          aliquip ex ea commodo consequat.
+        </cds-accordion-item>
+        <cds-accordion-item
+          title="Section 2 title"
+          @cds-accordion-item-beingtoggled="${onBeforeToggle}"
+          @cds-accordion-item-toggled="${onToggle}">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
+          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+          aliquip ex ea commodo consequat.
+        </cds-accordion-item>
+        <cds-accordion-item
+          title="Section 3 title"
+          @cds-accordion-item-beingtoggled="${onBeforeToggle}"
+          @cds-accordion-item-toggled="${onToggle}">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
+          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+          aliquip ex ea commodo consequat.
+        </cds-accordion-item>
+        <cds-accordion-item
+          title="Section 4 title"
+          @cds-accordion-item-beingtoggled="${onBeforeToggle}"
+          @cds-accordion-item-toggled="${onToggle}">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
+          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+          aliquip ex ea commodo consequat.
+        </cds-accordion-item>
+      </cds-accordion>
     `;
   },
 };

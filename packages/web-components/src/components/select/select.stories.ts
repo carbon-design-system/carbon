@@ -21,8 +21,8 @@ import '../form/form-item';
 import '../layer';
 import '../ai-label';
 import '../icon-button';
-import '../../../.storybook/templates/with-layer';
 import { iconLoader } from '../../globals/internal/icon-loader';
+import { withLayers } from '../../../.storybook/decorators/with-layers';
 
 const content = html`
   <div slot="body-text">
@@ -322,6 +322,10 @@ export const WithAILabel = {
 };
 
 export const WithLayer = {
+  decorators: [withLayers],
+  parameters: {
+    layout: 'fullscreen',
+  },
   args,
   argTypes: {
     ...argTypes,
@@ -350,26 +354,24 @@ export const WithLayer = {
     } = args ?? {};
 
     return html`
-      <sb-template-layers>
-        <cds-select
-          ?inline="${false}"
-          ?disabled="${disabled}"
-          helper-text="${ifDefined(helperText)}"
-          ?hide-label="${hideLabel}"
-          ?invalid="${invalid}"
-          invalid-text="${ifDefined(invalidText)}"
-          label-text="${ifDefined(labelText)}"
-          name="${ifDefined(name)}"
-          placeholder="${ifDefined(placeholder)}"
-          size="${ifDefined(size)}"
-          ?readonly="${readOnly}"
-          ?warn="${warn}"
-          warn-text="${ifDefined(warnText)}"
-          value="${ifDefined(value)}"
-          @cds-select-selected="${ifDefined(onInput)}">
-          ${children}
-        </cds-select>
-      </sb-template-layers>
+      <cds-select
+        ?inline="${false}"
+        ?disabled="${disabled}"
+        helper-text="${ifDefined(helperText)}"
+        ?hide-label="${hideLabel}"
+        ?invalid="${invalid}"
+        invalid-text="${ifDefined(invalidText)}"
+        label-text="${ifDefined(labelText)}"
+        name="${ifDefined(name)}"
+        placeholder="${ifDefined(placeholder)}"
+        size="${ifDefined(size)}"
+        ?readonly="${readOnly}"
+        ?warn="${warn}"
+        warn-text="${ifDefined(warnText)}"
+        value="${ifDefined(value)}"
+        @cds-select-selected="${ifDefined(onInput)}">
+        ${children}
+      </cds-select>
     `;
   },
 };
