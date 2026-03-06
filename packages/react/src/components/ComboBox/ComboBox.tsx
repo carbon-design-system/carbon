@@ -603,10 +603,13 @@ const ComboBox = forwardRef(
                 return changes;
               }
               const nextSelectedItem =
-                items.find((item) => itemToString(item) === inputValue) ??
-                inputValue;
+                inputValue === ''
+                  ? null
+                  : (items.find((item) => itemToString(item) === inputValue) ??
+                    inputValue);
               const isCustomSelection =
                 typeof nextSelectedItem === 'string' &&
+                nextSelectedItem !== '' &&
                 !items.some((item) => isEqual(item, nextSelectedItem));
 
               if (!isEqual(currentSelectedItem, nextSelectedItem) && onChange) {
