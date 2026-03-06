@@ -33,7 +33,7 @@ describe('initCarousel', () => {
     });
 
     const wrapper = container.querySelector('.carousel__itemsWrapper');
-    expect(wrapper).toBeTruthy();
+    expect(wrapper).toBeInTheDocument();
     expect(container.classList.contains('carousel__view-stack')).toBe(true);
     expect(wrapper?.children.length).toBe(3);
   });
@@ -45,7 +45,7 @@ describe('initCarousel', () => {
     });
 
     const liveRegion = container.querySelector('.carousel__live-region');
-    expect(liveRegion).toBeTruthy();
+    expect(liveRegion).toBeInTheDocument();
     expect(liveRegion.getAttribute('aria-live')).toBe('polite');
     expect(liveRegion.getAttribute('aria-atomic')).toBe('true');
     expect(liveRegion.textContent).toBe('Item 1 of 3');
@@ -124,18 +124,27 @@ describe('initCarousel', () => {
     expect(active.index).toBe(0);
   });
 
-  test('navigate prev does not go below index 0', () => {
+  test('nav controls handle out of bounds', () => {
     const carousel = initCarousel(container, {
       onViewChangeStart: mockOnViewChangeStart,
       onViewChangeEnd: mockOnViewChangeEnd,
     });
 
-    carousel.prev(); // Should not move
+    // attempt to go below first index
+    carousel.prev();
+    expect(container.querySelector('.carousel__live-region').textContent).toBe(
+      'Item 1 of 3'
+    );
     expect(carousel.getActiveItem().index).toBe(0);
 
-    carousel.next();
-    carousel.prev(); // Should go back to 0
-    expect(carousel.getActiveItem().index).toBe(0);
+    // attempt to go beyond the last index
+    for (let i = 0; i <= 3; i++) {
+      carousel.next();
+    }
+    expect(container.querySelector('.carousel__live-region').textContent).toBe(
+      'Item 3 of 3'
+    );
+    expect(carousel.getActiveItem().index).toBe(2);
   });
 
   test('goToIndex navigates to correct slide', () => {
@@ -198,6 +207,8 @@ describe('initCarousel', () => {
       onViewChangeEnd: mockOnViewChangeEnd,
     });
 
-    expect(container.querySelector('.carousel__live-region')).toBe(null);
+    expect(
+      container.querySelector('.carousel__live-region')
+    ).not.toBeInTheDocument();
   });
 });
