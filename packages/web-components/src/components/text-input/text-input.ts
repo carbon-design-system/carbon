@@ -78,6 +78,9 @@ class CDSTextInput extends ValidityMixin(FormMixin(LitElement)) {
   @query('input')
   protected _input!: HTMLInputElement;
 
+  @query('slot[name="helper-text"]')
+  protected _slotHelperTextNode!: HTMLSlotElement;
+
   /**
    * The internal value.
    */
@@ -99,6 +102,10 @@ class CDSTextInput extends ValidityMixin(FormMixin(LitElement)) {
     if (!disabled) {
       formData.append(name, value);
     }
+  }
+
+  protected _handleHelperTextSlotChange() {
+    this.requestUpdate();
   }
 
   /**
@@ -472,14 +479,21 @@ class CDSTextInput extends ValidityMixin(FormMixin(LitElement)) {
       ${counter}
     </div>`;
 
-    const helper = helperText
-      ? html`<div
-          class="${helperTextClasses}"
-          id="helper-text"
-          ?hidden="${normalizedProps.invalid || normalizedProps.warn}">
-          <slot name="helper-text"> ${helperText} </slot>
-        </div>`
-      : null;
+    const hasHelperText =
+      helperText || (this._slotHelperTextNode?.assignedNodes().length ?? 0) > 0;
+
+    const helper = html`<div
+      class="${helperTextClasses}"
+      id="helper-text"
+      ?hidden="${normalizedProps.invalid ||
+      normalizedProps.warn ||
+      !hasHelperText}">
+      <slot
+        name="helper-text"
+        @slotchange="${this._handleHelperTextSlotChange}">
+        ${helperText}
+      </slot>
+    </div>`;
 
     const validationMessage =
       normalizedProps.invalid || normalizedProps.warn
@@ -508,7 +522,7 @@ class CDSTextInput extends ValidityMixin(FormMixin(LitElement)) {
               class="${inputClasses}"
               ?data-invalid="${invalid}"
               ?disabled="${disabled}"
-              aria-describedby="helper-text"
+              ?aria-describedby="${hasHelperText ? 'helper-text' : undefined}"
               id="input"
               name="${ifNonEmpty(this.name)}"
               pattern="${ifNonEmpty(this.pattern)}"
