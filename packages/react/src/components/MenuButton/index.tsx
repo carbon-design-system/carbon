@@ -16,7 +16,7 @@ import { Menu } from '../Menu';
 import { useAttachedMenu } from '../../internal/useAttachedMenu';
 import { useId } from '../../internal/useId';
 import { usePrefix } from '../../internal/usePrefix';
-import useIsomorphicEffect from '../../internal/useIsomorphicEffect';
+
 import {
   useFloating,
   flip,
@@ -170,7 +170,7 @@ const MenuButton = forwardRef<HTMLDivElement, MenuButtonProps>(
       handleClose,
     } = useAttachedMenu(triggerRef);
 
-    useIsomorphicEffect(() => {
+
       Object.keys(floatingStyles).forEach((style) => {
         if (refs.floating.current) {
           let value = floatingStyles[style];
