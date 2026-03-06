@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2025
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -233,7 +233,7 @@ const TreeView: TreeViewComponent = ({
             `${prefix}--tree-node--hidden`
           )
         ) {
-          nodeIds.push((treeWalker.current.currentNode as Element).id);
+          nodeIds.push(treeWalker.current.currentNode.id);
         }
         while (
           match(event, keys.Home)
@@ -249,7 +249,7 @@ const TreeView: TreeViewComponent = ({
             !nextFocusNode.getAttribute('aria-disabled') &&
             !nextFocusNode.classList.contains(`${prefix}--tree-node--hidden`)
           ) {
-            nodeIds.push((nextFocusNode as Element).id);
+            nodeIds.push(nextFocusNode.id);
           }
         }
       }
@@ -266,7 +266,7 @@ const TreeView: TreeViewComponent = ({
               `${prefix}--tree-node--hidden`
             )
           ) {
-            nodeIds.push((treeWalker.current.currentNode as Element).id);
+            nodeIds.push(treeWalker.current.currentNode.id);
           }
         }
       }

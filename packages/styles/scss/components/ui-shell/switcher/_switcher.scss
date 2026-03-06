@@ -74,7 +74,7 @@
   }
 
   .#{$prefix}--switcher__item-link--selected {
-    //TO-DO: should we add a 3px left border-interactive here too? Doesn't currently have it, but specs have it
+    // TODO: should we add a 3px left border-interactive here too? Doesn't currently have it, but specs have it
     background: $layer-selected;
     color: $text-primary;
   }
