@@ -56,6 +56,37 @@ describe('cds-checkbox-group', function () {
     expect(invalidText.textContent.trim()).to.equal('Invalid text');
   });
 
+  it('should not display invalid-text if invalid attribute is true but readOnly', async () => {
+    const group = html` <cds-checkbox-group
+      invalid
+      readOnly
+      invalid-text="Invalid text"
+      legend-text="Checkbox heading">
+      <cds-checkbox default-checked>Checkbox label</cds-checkbox>
+      <cds-checkbox>Checkbox label</cds-checkbox>
+    </cds-checkbox-group>`;
+    const el = await fixture(group);
+
+    const invalidText = el.shadowRoot.querySelector('.cds--form-requirement');
+
+    expect(invalidText).not.to.exist;
+  });
+
+  it('should not display invalid-text if invalid attribute is true but disabled', async () => {
+    const group = html` <cds-checkbox-group
+      invalid
+      invalid-text="Invalid text"
+      legend-text="Checkbox heading">
+      <cds-checkbox default-checked>Checkbox label</cds-checkbox>
+      <cds-checkbox>Checkbox label</cds-checkbox>
+    </cds-checkbox-group>`;
+    const el = await fixture(group);
+
+    const invalidText = el.shadowRoot.querySelector('.cds--form-requirement');
+
+    expect(invalidText).not.to.exist;
+  });
+
   it('should render legend-text', async () => {
     const group = html`<cds-checkbox-group
       legend-text="Checkbox heading"></cds-checkbox-group>`;
@@ -107,6 +138,38 @@ describe('cds-checkbox-group', function () {
 
     expect(warnText).to.exist;
     expect(warnText.textContent.trim()).to.equal('Warn text');
+  });
+
+  it('should not display warn-text if warn attribute is true but readOnly', async () => {
+    const group = html` <cds-checkbox-group
+      legend-text="Checkbox heading"
+      readOnly
+      warn
+      warn-text="Warn text">
+      <cds-checkbox default-checked>Checkbox label</cds-checkbox>
+      <cds-checkbox>Checkbox label</cds-checkbox>
+    </cds-checkbox-group>`;
+    const el = await fixture(group);
+
+    const warnText = el.shadowRoot.querySelector('.cds--form-requirement');
+
+    expect(warnText).not.to.exist;
+  });
+
+  it('should not display warn-text if warn attribute is true but disabled', async () => {
+    const group = html` <cds-checkbox-group
+      legend-text="Checkbox heading"
+      disabled
+      warn
+      warn-text="Warn text">
+      <cds-checkbox default-checked>Checkbox label</cds-checkbox>
+      <cds-checkbox>Checkbox label</cds-checkbox>
+    </cds-checkbox-group>`;
+    const el = await fixture(group);
+
+    const warnText = el.shadowRoot.querySelector('.cds--form-requirement');
+
+    expect(warnText).not.to.exist;
   });
 
   it('should respect deprecated slug prop', async () => {
