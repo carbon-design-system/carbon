@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2019, 2024
+// Copyright IBM Corp. 2019, 2026
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -10,6 +10,9 @@
 @use '@carbon/styles/scss/theme' as *;
 @use '@carbon/styles/scss/utilities/focus-outline' as *;
 @use '@carbon/styles/scss/utilities/layout';
+@use '@carbon/styles/scss/components/form/form' as form;
+
+@include form.form;
 
 body {
   @include layout.use('density', $default: 'normal');
@@ -31,5 +34,15 @@ body {
 }
 // Contained tabs background for panels (using descendant selector to handle wrapper div)
 #{$prefix}-tabs[type='contained'] ~ * [role='tabpanel'] {
+  background: $layer;
+}
+
+.#{$prefix}--tab-content {
+  @include layout.use('density', $default: 'normal');
+
+  padding: layout.density('padding-inline');
+}
+
+#{$prefix}-tabs[type='contained'] ~ .#{$prefix}--tab-content {
   background: $layer;
 }

@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -15,37 +15,35 @@ export function useNoInteractiveChildren(
   ref,
   message = 'component should have no interactive child nodes'
 ) {
-  if (process.env.NODE_ENV !== 'production') {
-    // eslint-disable-next-line react-hooks/rules-of-hooks
-    useEffect(() => {
-      const node = ref.current ? getInteractiveContent(ref.current) : false;
+  useEffect(() => {
+    if (process.env.NODE_ENV === 'production') return;
 
-      if (node) {
-        const errorMessage = `Error: ${message}.\n\nInstead found: ${node.outerHTML}`;
-        // eslint-disable-next-line no-console
-        console.error(errorMessage);
-        throw new Error(errorMessage);
-      }
-    });
-  }
+    const { current } = ref;
+    const node = current ? getInteractiveContent(current) : null;
+
+    if (node) {
+      const errorMessage = `Error: ${message}.\n\nInstead found: ${node.outerHTML}`;
+      // eslint-disable-next-line no-console
+      console.error(errorMessage);
+      throw new Error(errorMessage);
+    }
+  }, [message, ref]);
 }
 
 export function useInteractiveChildrenNeedDescription(
   ref,
   message = `interactive child node(s) should have an \`aria-describedby\` property`
 ) {
-  if (process.env.NODE_ENV !== 'production') {
-    // eslint-disable-next-line react-hooks/rules-of-hooks
-    useEffect(() => {
-      const node = ref.current ? getInteractiveContent(ref.current) : false;
+  useEffect(() => {
+    if (process.env.NODE_ENV === 'production') return;
 
-      if (node && !node.hasAttribute('aria-describedby')) {
-        throw new Error(
-          `Error: ${message}.\n\nInstead found: ${node.outerHTML}`
-        );
-      }
-    });
-  }
+    const { current } = ref;
+    const node = current ? getInteractiveContent(current) : null;
+
+    if (node && !node.hasAttribute('aria-describedby')) {
+      throw new Error(`Error: ${message}.\n\nInstead found: ${node.outerHTML}`);
+    }
+  }, [message, ref]);
 }
 
 /**
