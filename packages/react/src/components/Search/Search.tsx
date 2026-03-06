@@ -28,6 +28,7 @@ import { deprecate } from '../../prop-types/deprecate';
 import { FormContext } from '../FluidForm';
 import { noopFn } from '../../internal/noopFn';
 import { Tooltip } from '../Tooltip';
+import { isSearchValuePresent } from './utils';
 
 type InputPropsBase = Omit<HTMLAttributes<HTMLInputElement>, 'onChange'>;
 export interface SearchProps extends InputPropsBase {
@@ -151,7 +152,8 @@ const Search = React.forwardRef<HTMLInputElement, SearchProps>(
     },
     forwardRef
   ) => {
-    const hasPropValue = Boolean(value || defaultValue);
+    const hasPropValue =
+      isSearchValuePresent(value) || isSearchValuePresent(defaultValue);
     const prefix = usePrefix();
     const { isFluid } = useContext(FormContext);
     const inputRef = useRef<HTMLInputElement>(null);
@@ -181,7 +183,7 @@ const Search = React.forwardRef<HTMLInputElement, SearchProps>(
     });
 
     if (value !== prevValue) {
-      setHasContent(!!value);
+      setHasContent(isSearchValuePresent(value));
       setPrevValue(value);
     }
 

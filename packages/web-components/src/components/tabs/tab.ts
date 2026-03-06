@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2019, 2024
+ * Copyright IBM Corp. 2019, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -72,7 +72,7 @@ export default class CDSTab extends CDSContentSwitcherItem {
         aria-label="${tabTitle}"
         tabindex="${selected ? 0 : -1}"
         ?disabled="${disabled}"
-        aria-selected="${Boolean(selected)}">
+        aria-selected="${selected}">
         <slot @slotchange="${handleSlotChange}"></slot>
       </a>
     `;
