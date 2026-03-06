@@ -7,36 +7,25 @@
 
 import { featureFlagInfo } from './generated/feature-flags';
 import { FeatureFlagScope, type FeatureFlagRecord } from './FeatureFlagScope';
+export type { FeatureFlagRecord } from './FeatureFlagScope';
 
-const FeatureFlags = createScope();
+export const createScope = (flags?: FeatureFlagRecord) =>
+  new FeatureFlagScope(flags);
 
-for (let i = 0; i < featureFlagInfo.length; i++) {
-  const featureFlag = featureFlagInfo[i];
-  FeatureFlags.add(featureFlag.name, featureFlag.enabled);
-}
+const createDefaultScope = () => {
+  const scope = createScope();
 
-export { FeatureFlags };
+  for (const featureFlag of featureFlagInfo) {
+    scope.add(featureFlag.name, featureFlag.enabled);
+  }
 
-export function createScope(flags?: FeatureFlagRecord): FeatureFlagScope {
-  return new FeatureFlagScope(flags);
-}
+  return scope;
+};
 
-export function add(name: string, enabled: boolean): void {
-  FeatureFlags.add(name, enabled);
-}
+export const FeatureFlags = createDefaultScope();
 
-export function enable(name: string): void {
-  FeatureFlags.enable(name);
-}
-
-export function disable(name: string): void {
-  FeatureFlags.disable(name);
-}
-
-export function enabled(name: string): boolean {
-  return FeatureFlags.enabled(name);
-}
-
-export function merge(flags: FeatureFlagRecord): void {
-  FeatureFlags.merge(flags);
-}
+export const add = FeatureFlags.add.bind(FeatureFlags);
+export const enable = FeatureFlags.enable.bind(FeatureFlags);
+export const disable = FeatureFlags.disable.bind(FeatureFlags);
+export const enabled = FeatureFlags.enabled.bind(FeatureFlags);
+export const merge = FeatureFlags.merge.bind(FeatureFlags);
