@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -7,9 +7,9 @@
 
 import '../../../feature-flags';
 
-import { render, screen } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import React, { useState } from 'react';
+import React, { StrictMode, useState } from 'react';
 import { NumberInput } from '../NumberInput';
 import { validateNumberSeparators } from '../NumberInput';
 import { AILabel } from '../../AILabel';
@@ -1508,6 +1508,84 @@ describe('NumberInput', () => {
 
       await userEvent.click(screen.getByText('set to 50'));
       expect(input).toHaveValue('50');
+    });
+
+    it('should keep empty display when controlled value remains NaN across rerenders', () => {
+      const onChange = jest.fn();
+      const { rerender } = render(
+        <NumberInput
+          type="text"
+          label="NumberInput label"
+          id="number-input"
+          min={10}
+          max={100}
+          value={NaN}
+          onChange={onChange}
+          translateWithId={translateWithId}
+        />
+      );
+
+      const input = screen.getByLabelText('NumberInput label');
+
+      expect(input).toHaveValue('');
+
+      rerender(
+        <NumberInput
+          type="text"
+          label="NumberInput label"
+          id="number-input"
+          min={10}
+          max={100}
+          value={NaN}
+          onChange={onChange}
+          translateWithId={translateWithId}
+        />
+      );
+
+      expect(input).toHaveValue('');
+      expect(onChange).not.toHaveBeenCalled();
+    });
+
+    it('should update controlled value in StrictMode without render-phase warnings', async () => {
+      const onChange = jest.fn();
+      const { rerender } = render(
+        <StrictMode>
+          <NumberInput
+            type="text"
+            label="NumberInput label"
+            id="number-input"
+            min={0}
+            max={100}
+            value={10}
+            onChange={onChange}
+            translateWithId={translateWithId}
+          />
+        </StrictMode>
+      );
+
+      const input = screen.getByLabelText('NumberInput label');
+
+      expect(input).toHaveValue('10');
+
+      rerender(
+        <StrictMode>
+          <NumberInput
+            type="text"
+            label="NumberInput label"
+            id="number-input"
+            min={0}
+            max={100}
+            value={11}
+            onChange={onChange}
+            translateWithId={translateWithId}
+          />
+        </StrictMode>
+      );
+
+      await waitFor(() => {
+        expect(input).toHaveValue('11');
+      });
+      expect(onChange).not.toHaveBeenCalled();
     });
 
     describe('locale parsing and formatting', () => {

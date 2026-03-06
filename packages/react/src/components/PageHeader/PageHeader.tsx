@@ -601,8 +601,7 @@ const PageHeaderTabBar = React.forwardRef<
         ...tag,
         id: tag.id || `tag-${index}-${instanceId}`,
       }));
-      // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20452
-    }, [tags]);
+    }, [instanceId, tags]);
 
     // eslint-disable-next-line  react-hooks/rules-of-hooks -- https://github.com/carbon-design-system/carbon/issues/20452
     const tagsContainerRef = useRef<HTMLDivElement>(null);
