@@ -51,25 +51,55 @@ export const initCarousel = (
     refs[index] = ref;
   };
 
+  const getLiveRegion = () =>
+    carouselContainer.querySelector(`.${prefix}__live-region`);
+
+  const getWrapper = () =>
+    carouselContainer.querySelector(`.${prefix}__itemsWrapper`);
+
+  const updateLiveRegion = (idx: number) => {
+    const div = getLiveRegion();
+    if (div) {
+      div.textContent = `Item ${idx} of ${getCarouselItems()?.length}`;
+    }
+  };
+
+  const syncLiveRegionWithActiveView = () => {
+    updateLiveRegion(viewIndexStack[0] + 1);
+  };
+
+  const createLiveRegion = () => {
+    const childCount = getCarouselItems()?.length;
+    // Don't create a live region if one already exists or if no children are present
+    if (getLiveRegion() || !childCount) {
+      return;
+    }
+
+    const div = document.createElement('div');
+    div.setAttribute('aria-live', 'polite');
+    div.setAttribute('aria-atomic', 'true');
+    div.setAttribute('class', `${prefix}__live-region`);
+    div.textContent = `Item 1 of ${childCount}`;
+    carouselContainer.appendChild(div);
+  };
+
   /**
    * Wraps all child elements of a given container into a new div with the specified class.
    * If an element with the specified class already exists as a child of the container, the function does nothing.
    *
-   * @param {HTMLElement} container - The container element to wrap child elements of.
-   * @param {string} wrapperClass - The class name to apply to the new wrapper div.
    * @returns {void}
    */
-  const wrapAllItems = (container: HTMLElement, wrapperClass: string) => {
-    if (container.querySelector(`.${wrapperClass}`)) {
+  const wrapAllItems = () => {
+    if (getWrapper()) {
       return;
     }
 
     const wrapper = document.createElement('div');
-    wrapper.classList.add(`${wrapperClass}`);
-    while (container.firstChild) {
-      wrapper.appendChild(container.firstChild);
+    wrapper.classList.add(`${prefix}__itemsWrapper`);
+    while (carouselContainer.firstChild) {
+      wrapper.appendChild(carouselContainer.firstChild);
     }
-    container.appendChild(wrapper);
+    carouselContainer.appendChild(wrapper);
   };
 
   const getHistory = () => {
@@ -157,12 +187,14 @@ export const initCarousel = (
     if (viewIndexStack[0] !== sanitizedIndex) {
       handleTransitionStart();
       viewIndexStack = [sanitizedIndex, ...viewIndexStack];
+      syncLiveRegionWithActiveView();
       performAnimation(false);
     }
   };
 
   const transitionComplete = (ref: HTMLElement) => {
     handleTransitionEnd(ref);
+    syncLiveRegionWithActiveView();
   };
   /**
    * Attaches class names to an HTMLElement based on given conditions.
@@ -197,6 +229,14 @@ export const initCarousel = (
     }
     if (!isBeingRecycledIn && isBeingRecycledOut) {
       viewItem.classList.add(`${prefix}__view-recycle-out`);
+    }
+
+    if (isActive) {
+      viewItem.removeAttribute('aria-hidden');
+      viewItem.removeAttribute('inert');
+    } else {
+      viewItem.setAttribute('aria-hidden', 'true');
+      viewItem.setAttribute('inert', '');
     }
   };
 
@@ -242,6 +282,10 @@ export const initCarousel = (
    * @param {boolean} isInitial - A flag indicating if this is the initial animation.
    */
   const performAnimation = (isInitial: boolean) => {
+    const viewItems = getCarouselItems();
+    if (!viewItems) {
+      return;
+    }
     let itemHeightSmallest = 0;
     let itemHeightMaximum = 0;
 
@@ -339,6 +383,7 @@ export const initCarousel = (
     if (viewIndexStack.length - 1 >= 1) {
       handleTransitionStart();
       viewIndexStack = viewIndexStack.slice(1);
+      syncLiveRegionWithActiveView();
       performAnimation(false);
     }
   };
@@ -370,6 +415,10 @@ export const initCarousel = (
    * @returns {void}
    */
   const reset = () => {
+    const viewItems = getCarouselItems();
+    if (!viewItems) {
+      return;
+    }
     // Remove recycle classes from all views before resetting
     Array.from(viewItems).forEach((viewItem: HTMLElement) => {
       removeReCycleClasses(viewItem);
@@ -379,6 +428,7 @@ export const initCarousel = (
     previousViewIndexStack = [0];
     viewIndexStack = [0];
     performAnimation(false);
+    syncLiveRegionWithActiveView();
   };
 
   /**
@@ -402,26 +452,26 @@ export const initCarousel = (
    * If the container has a 'slot' element, it fetches all elements assigned to that slot.
    * Otherwise, it fetches all direct children of the container.
    *
-   * @param {HTMLElement} container - The container element from which to extract carousel items.
-   * @returns {HTMLElement[]} An array of HTMLElements representing the carousel items.
+   * @returns An array of HTMLElements representing the carousel items or nothing if a container is not found.
    *
    * @example
-   * const carouselContainer = document.querySelector('.carousel-container');
-   * const carouselItems = getCarouselItems(carouselContainer);
+   * const carouselItems = getCarouselItems();
    * console.log(carouselItems); // Logs the carousel items as HTMLElements
    */
-  const getCarouselItems = (container: HTMLElement): HTMLElement[] => {
-    const slot = container.querySelector('slot') as HTMLSlotElement | null;
+  const getCarouselItems = () => {
+    const container = getWrapper();
+    if (!container) {
+      return;
+    }
+    const slot = container.querySelector('slot');
     return slot
       ? (slot.assignedElements({ flatten: true }) as HTMLElement[])
       : (Array.from(container.children) as HTMLElement[]);
   };
 
   // initialize
-  wrapAllItems(carouselContainer, `${prefix}__itemsWrapper`);
-  const wrapper = carouselContainer.querySelector(`.${prefix}__itemsWrapper`);
-  const viewItems = getCarouselItems(wrapper as HTMLElement);
-
+  wrapAllItems();
+  createLiveRegion();
   carouselContainer.classList.add(`${prefix}__view-stack`);
   performAnimation(true);
 
