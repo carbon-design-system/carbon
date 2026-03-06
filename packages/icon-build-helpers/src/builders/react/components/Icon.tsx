@@ -10,9 +10,9 @@ import React, { forwardRef, type ReactSVGElement } from 'react';
 
 export interface IconProps
   extends Omit<React.SVGProps<React.ReactSVGElement>, 'ref' | 'tabIndex'> {
+  // TODO: Remove support for string in v12.
   /**
    * @see React.SVGAttributes.tabIndex
-   * @todo remove support for string in v12
    */
   tabIndex?: string | number | undefined;
 

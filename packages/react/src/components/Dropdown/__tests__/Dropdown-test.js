@@ -678,3 +678,44 @@ describe('Test useEffect ', () => {
     });
   });
 });
+
+describe('Validation message ids', () => {
+  const mockProps = {
+    id: 'test-dropdown',
+    items: generateItems(5, generateGenericItem),
+    onChange: jest.fn(),
+    label: 'input',
+    type: 'default',
+    titleText: 'Dropdown label',
+  };
+
+  it('should render a single invalid requirement element with a unique id', async () => {
+    const { container } = render(
+      <Dropdown {...mockProps} invalid invalidText="Error message" />
+    );
+    await waitForPosition();
+
+    expect(container.querySelectorAll('#test-dropdown-error-msg')).toHaveLength(
+      1
+    );
+    expect(screen.getByRole('combobox')).toHaveAttribute(
+      'aria-describedby',
+      'test-dropdown-error-msg'
+    );
+  });
+
+  it('should render a single warning requirement element with a unique id', async () => {
+    const { container } = render(
+      <Dropdown {...mockProps} warn warnText="Warning message" />
+    );
+    await waitForPosition();
+
+    expect(container.querySelectorAll('#test-dropdown-warn-msg')).toHaveLength(
+      1
+    );
+    expect(screen.getByRole('combobox')).toHaveAttribute(
+      'aria-describedby',
+      'test-dropdown-warn-msg'
+    );
+  });
+});

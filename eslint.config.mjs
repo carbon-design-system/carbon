@@ -217,6 +217,8 @@ export default defineConfig(
     files: ['packages/react/code-connect/**/*.figma.tsx'],
     rules: {
       '@typescript-eslint/ban-ts-comment': ['error', { 'ts-nocheck': false }],
+      'react-hooks/rules-of-hooks': 'off',
+      'react/jsx-no-undef': 'off',
     },
   },
   {
