@@ -50,7 +50,7 @@ argTypes: {
   childProp: {
     control: 'text',
     table: {
-      category: 'sub-component',
+      category: 'sub-component-name',
     },
   },
 };
