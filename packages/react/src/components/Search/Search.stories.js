@@ -100,9 +100,10 @@ const expandableParameters = {
 };
 
 export const Disabled = (args) => {
+  const { defaultWidth, disabled, ...searchArgs } = args;
   return (
-    <div style={{ width: args.defaultWidth }}>
-      <Search id="search-disabled-1" {...args} disabled />
+    <div style={{ width: defaultWidth }}>
+      <Search id="search-disabled-1" {...searchArgs} disabled />
     </div>
   );
 };
@@ -113,20 +114,24 @@ Disabled.parameters = {
 };
 
 export const Expandable = (args) => {
+  const { defaultWidth, ...searchArgs } = args;
+
   return (
-    <div style={{ marginTop: '25px', width: args.defaultWidth }}>
-      <ExpandableSearch id="search-expandable-1" {...args} />
+    <div style={{ marginTop: '25px', width: defaultWidth }}>
+      <ExpandableSearch id="search-expandable-1" {...searchArgs} />
     </div>
   );
 };
 Expandable.parameters = { ...expandableParameters };
 
 export const _WithLayer = (args) => {
+  const { defaultWidth, ...searchArgs } = args;
+
   return (
     <WithLayer>
       {(layer) => (
-        <div style={{ width: args.defaultWidth }}>
-          <Search id={`search-${layer}`} {...args} />
+        <div style={{ width: defaultWidth }}>
+          <Search id={`search-${layer}`} {...searchArgs} />
         </div>
       )}
     </WithLayer>
@@ -135,11 +140,13 @@ export const _WithLayer = (args) => {
 _WithLayer.parameters = { ...defaultParameters };
 
 export const ExpandableWithLayer = (args) => {
+  const { defaultWidth, ...searchArgs } = args;
+
   return (
     <WithLayer>
       {(layer) => (
-        <div style={{ marginTop: '25px', width: args.defaultWidth }}>
-          <ExpandableSearch id={`search-expandable-${layer}`} {...args} />
+        <div style={{ marginTop: '25px', width: defaultWidth }}>
+          <ExpandableSearch id={`search-expandable-${layer}`} {...searchArgs} />
         </div>
       )}
     </WithLayer>
@@ -148,9 +155,11 @@ export const ExpandableWithLayer = (args) => {
 ExpandableWithLayer.parameters = { ...expandableParameters };
 
 export const Default = (args) => {
+  const { defaultWidth, ...searchArgs } = args;
+
   return (
-    <div style={{ width: args.defaultWidth }}>
-      <Search id="search-default-1" {...args} />
+    <div style={{ width: defaultWidth }}>
+      <Search id="search-default-1" {...searchArgs} />
     </div>
   );
 };
