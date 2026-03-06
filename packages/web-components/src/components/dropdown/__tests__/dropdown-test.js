@@ -68,6 +68,62 @@ describe('cds-dropdown', function () {
       expect(el.value).to.equal('option-2');
       expect(items[1].selected).to.be.true;
     });
+
+    it('should apply hovered-next-sibling attribute to next item on hover', async () => {
+      const el = await fixture(html`
+        <cds-dropdown title-text="Dropdown Label" open>
+          <cds-dropdown-item value="option-1">Option 1</cds-dropdown-item>
+          <cds-dropdown-item value="option-2">Option 2</cds-dropdown-item>
+        </cds-dropdown>
+      `);
+
+      await el.updateComplete;
+
+      const items = el.querySelectorAll('cds-dropdown-item');
+      items[0].dispatchEvent(new MouseEvent('mouseenter', { bubbles: true }));
+      await el.updateComplete;
+
+      expect(items[1].hasAttribute('hovered-next-sibling')).to.be.true;
+    });
+
+    it('should remove hovered-next-sibling attribute when mouse leaves item', async () => {
+      const el = await fixture(html`
+        <cds-dropdown title-text="Dropdown Label" open>
+          <cds-dropdown-item value="option-1">Option 1</cds-dropdown-item>
+          <cds-dropdown-item value="option-2">Option 2</cds-dropdown-item>
+        </cds-dropdown>
+      `);
+
+      await el.updateComplete;
+
+      const items = el.querySelectorAll('cds-dropdown-item');
+      items[0].dispatchEvent(new MouseEvent('mouseenter', { bubbles: true }));
+      await el.updateComplete;
+
+      items[0].dispatchEvent(new MouseEvent('mouseleave', { bubbles: true }));
+      await el.updateComplete;
+
+      expect(items[1].hasAttribute('hovered-next-sibling')).to.be.false;
+    });
+
+    it('should not apply hover state to next item when hovering disabled item', async () => {
+      const el = await fixture(html`
+        <cds-dropdown title-text="Dropdown Label" open>
+          <cds-dropdown-item value="option-1" disabled
+            >Option 1</cds-dropdown-item
+          >
+          <cds-dropdown-item value="option-2">Option 2</cds-dropdown-item>
+        </cds-dropdown>
+      `);
+
+      await el.updateComplete;
+
+      const items = el.querySelectorAll('cds-dropdown-item');
+      items[0].dispatchEvent(new MouseEvent('mouseenter', { bubbles: true }));
+      await el.updateComplete;
+
+      expect(items[1].hasAttribute('hovered-next-sibling')).to.be.false;
+    });
   });
 
   describe('keyboard interaction', () => {

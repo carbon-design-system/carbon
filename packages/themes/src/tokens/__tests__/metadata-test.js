@@ -1462,6 +1462,10 @@ test('metadata', () => {
           "type": "color",
         },
         {
+          "name": "color-scheme",
+          "type": "color",
+        },
+        {
           "name": "toggle-off",
           "type": "color",
         },

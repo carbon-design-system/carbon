@@ -587,9 +587,7 @@ const PageHeaderTabBar = React.forwardRef<
         ...tag,
         id: tag.id || `tag-${index}-${instanceId}`,
       }));
-      // TODO: Should `instanceId` be included in the dependency array?
-      // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20452
-    }, [tags]);
+    }, [instanceId, tags]);
 
     const tagsContainerRef = useRef<HTMLDivElement>(null);
     const offsetRef = useRef<HTMLDivElement>(null);

@@ -198,6 +198,7 @@ Next you will need to:
   - [ ] #carbon-announcements
   - [ ] #carbon-design-system
   - [ ] #carbon-react
+  - [ ] #carbon-web-components
 
 <details>
   <summary>Click to view slack announcement template</summary>
@@ -425,8 +426,8 @@ yarn lerna version patch \
   - NOT include a breaking change (e.g. it should not be v10.14.0 → v11.0.0)
   - NOT include a minor change (e.g. it should not be v10.59.1 -> v10.60.0)
 - Hit `y` to confirm changes
-- [ ] For a quick sound check, run `yarn install --immutable --immutable-cache`
-      to make sure all the versions have been correctly bumped
+- [ ] For a quick sound check, run `yarn install --immutable` to make sure all
+      the versions have been correctly bumped
   - Note: sometimes you will need to update the root `package.json` file
     manually
 - [ ] Run `yarn install`
@@ -513,6 +514,9 @@ To do this, packages must be versioned manually.
 1. Run `yarn lerna version --no-git-tag-version --no-push`
 1. An interactive prompt will be presented - select the appropriate version bump
    for each package
+   - If you are prompted with a package that does not need a version change,
+     select **Custom Version** and enter the existing version to keep it
+     unchanged
 1. After the interactive prompt is complete, run `yarn install` to update
    `yarn.lock`
 1. Commit `chore(release): v11.23.1`
