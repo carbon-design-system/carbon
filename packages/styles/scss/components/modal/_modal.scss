@@ -155,7 +155,7 @@
     margin-inline: -$spacing-05 - $spacing-05;
   }
 
-  //TO-DO: remove .#{$prefix}--modal-content__regular-content in v11 since hasForm has been deprecated
+  // TODO: remove .#{$prefix}--modal-content__regular-content in v11 since hasForm has been deprecated
   // text/p gets 20% right padding
   .#{$prefix}--modal-content > p,
   .#{$prefix}--modal-content__regular-content {
@@ -164,7 +164,7 @@
     padding-inline-end: calc(20% - $spacing-07);
   }
 
-  //TO-DO: remove .#{$prefix}--modal-content--with-form in v11 since hasForm has been deprecated\
+  // TODO: remove .#{$prefix}--modal-content--with-form in v11 since hasForm has been deprecated\
   // anything besides text/p spans full width, with just 16px padding
   .#{$prefix}--modal-content--with-form {
     padding-inline-end: $spacing-05;

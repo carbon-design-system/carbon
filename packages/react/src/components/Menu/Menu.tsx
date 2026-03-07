@@ -191,11 +191,15 @@ const Menu = forwardRef<HTMLUListElement, MenuProps>(function Menu(
 
   function handleOpen() {
     if (menu.current) {
-      focusReturn.current = document.activeElement as HTMLElement;
+      const { activeElement, dir } = document;
+
+      focusReturn.current =
+        activeElement instanceof HTMLElement ? activeElement : null;
+
       if (legacyAutoalign) {
         const pos = calculatePosition();
         if (
-          (document?.dir === 'rtl' || direction === 'rtl') &&
+          (dir === 'rtl' || direction === 'rtl') &&
           !rest?.id?.includes('MenuButton')
         ) {
           menu.current.style.insetInlineStart = `initial`;

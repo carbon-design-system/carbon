@@ -23,7 +23,7 @@ jobs:
           fetch-depth: '0'
 
       - name: Use Node.js version from .nvmrc
-        uses: actions/setup-node@6044e13b5dc448c55e2357c09f80417699197238
+        uses: actions/setup-node@54045abd5dcd3b0fee9ca02fa24c57545834c9cc
         with:
           node-version-file: '.nvmrc'
 
@@ -43,7 +43,7 @@ jobs:
           path: packages/web-components
 
       - name: Configure IBM Cloud credentials
-        uses: aws-actions/configure-aws-credentials@v5.1.1
+        uses: aws-actions/configure-aws-credentials@v6.0.0
         with:
           aws-access-key-id: ${{ secrets.COMMON_COS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.COMMON_COS_SECRET_ACCESS_KEY }}
