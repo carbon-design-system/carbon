@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2025
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -9,7 +9,6 @@ import PropTypes from 'prop-types';
 import React, {
   Children,
   cloneElement,
-  isValidElement,
   type ComponentProps,
   type ReactNode,
 } from 'react';
@@ -70,15 +69,16 @@ const CheckboxGroup = ({
 
   const checkboxGroupInstanceId = useId();
 
-  const helperId = !helperText
+  const hasHelper = typeof helperText !== 'undefined' && helperText !== null;
+  const helperId = !hasHelper
     ? undefined
     : `checkbox-group-helper-text-${checkboxGroupInstanceId}`;
 
-  const helper = helperText ? (
+  const helper = hasHelper && (
     <div id={helperId} className={`${prefix}--form__helper-text`}>
       {helperText}
     </div>
-  ) : null;
+  );
 
   const fieldsetClasses = cx(`${prefix}--checkbox-group`, className, {
     [`${prefix}--checkbox-group--${orientation}`]: orientation === 'horizontal',
@@ -97,10 +97,7 @@ const CheckboxGroup = ({
     : candidate;
 
   const clonedChildren = Children.map(children, (child) => {
-    if (
-      isValidElement<ComponentProps<typeof Checkbox>>(child) &&
-      child.type === Checkbox
-    ) {
+    if (isComponentElement(child, Checkbox)) {
       const childProps: Pick<
         ComponentProps<typeof Checkbox>,
         'invalid' | 'readOnly' | 'warn'

@@ -8,7 +8,13 @@
 import cx from 'classnames';
 import PropTypes, { WeakValidationMap } from 'prop-types';
 import { deprecateValuesWithin } from '../../prop-types/deprecateValuesWithin';
-import React, { useEffect, useMemo, useRef, type ElementType } from 'react';
+import React, {
+  forwardRef,
+  useEffect,
+  useMemo,
+  useRef,
+  type ElementType,
+} from 'react';
 import useIsomorphicEffect from '../../internal/useIsomorphicEffect';
 import { useMergedRefs } from '../../internal/useMergedRefs';
 import { usePrefix } from '../../internal/usePrefix';
@@ -170,7 +176,7 @@ export const Popover: PopoverComponent & {
     autoAlign = false,
     autoAlignBoundary,
     backgroundToken = 'layer',
-    caret = isTabTip ? false : true,
+    caret = !isTabTip,
     className: customClassName,
     children,
     border = false,
@@ -315,7 +321,8 @@ export const Popover: PopoverComponent & {
                 !isTabTip
                   ? {
                       alignmentAxis: alignmentAxisOffset,
-                      mainAxis: popoverDimensions?.current?.offset,
+                      // Use 4px spacing when no caret, otherwise use the caret offset
+                      mainAxis: caret ? popoverDimensions?.current?.offset : 4,
                     }
                   : 0
               ),
@@ -538,13 +545,11 @@ export const Popover: PopoverComponent & {
     }
   });
 
-  const BaseComponentAsAny = BaseComponent as React.ElementType;
-
   return (
     <PopoverContext.Provider value={value}>
-      <BaseComponentAsAny {...rest} className={className} ref={ref}>
+      <BaseComponent {...rest} className={className} ref={ref}>
         {enableFloatingStyles || isTabTip ? mappedChildren : children}
-      </BaseComponentAsAny>
+      </BaseComponent>
     </PopoverContext.Provider>
   );
 }) as PopoverComponent;
@@ -693,10 +698,11 @@ Popover.propTypes = {
 
 export type PopoverContentProps = React.HTMLAttributes<HTMLSpanElement>;
 
-function PopoverContentRenderFunction(
-  { className, children, ...rest }: PopoverContentProps,
-  forwardRef: React.ForwardedRef<HTMLSpanElement>
-) {
+const frFn = forwardRef<HTMLSpanElement, PopoverContentProps>;
+
+export const PopoverContent = frFn((props, forwardRef) => {
+  const { className, children, ...rest } = props;
+
   const prefix = usePrefix();
   const { setFloating, caretRef, autoAlign } = React.useContext(PopoverContext);
   const ref = useMergedRefs([setFloating, forwardRef]);
@@ -726,9 +732,8 @@ function PopoverContentRenderFunction(
       )}
     </span>
   );
-}
+});
 
-export const PopoverContent = React.forwardRef(PopoverContentRenderFunction);
 PopoverContent.displayName = 'PopoverContent';
 
 PopoverContent.propTypes = {

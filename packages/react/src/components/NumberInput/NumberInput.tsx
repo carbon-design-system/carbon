@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2025
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -641,7 +641,7 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
      * The number value that was previously "committed" to the input on blur
      * Only used when type="text"
      */
-    const [previousNumberValue, setPreviousNumberValue] = useState(numberValue);
+    const previousNumberValue = useRef(numberValue);
     /**
      * The current text value of the input.
      * Only used when type=text
@@ -669,14 +669,17 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
         isNaN(value) || value === null ? '' : numberFormatter.format(value),
       [numberFormatter]
     );
-    if (
-      isControlled &&
-      !(isNaN(previousNumberValue) && isNaN(numberValue)) &&
-      previousNumberValue !== numberValue
-    ) {
-      setInputValue(format(numberValue));
-      setPreviousNumberValue(numberValue);
-    }
+
+    useEffect(() => {
+      if (
+        isControlled &&
+        !(isNaN(previousNumberValue.current) && isNaN(numberValue)) &&
+        previousNumberValue.current !== numberValue
+      ) {
+        setInputValue(format(numberValue));
+        previousNumberValue.current = numberValue;
+      }
+    }, [isControlled, numberValue, format]);
 
     const inputRef = useRef<HTMLInputElement>(null);
     const ref = useMergedRefs([forwardRef, inputRef]);
@@ -782,7 +785,7 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
       if ('type' in evt.target && evt.target.type === 'button') {
         setIsFocused(false);
       } else {
-        setIsFocused(evt.type === 'focus' ? true : false);
+        setIsFocused(evt.type === 'focus');
       }
     };
 
@@ -857,7 +860,7 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
           setNumberValue(parsedFormattedNewValue);
 
           setInputValue(formattedNewValue);
-          setPreviousNumberValue(parsedFormattedNewValue);
+          previousNumberValue.current = parsedFormattedNewValue;
         }
 
         if (onChange) {
@@ -930,10 +933,11 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
               onKeyUp={onKeyUp}
               onKeyDown={(e) => {
                 if (type === 'text') {
-                  // eslint-disable-next-line  @typescript-eslint/no-unused-expressions -- https://github.com/carbon-design-system/carbon/issues/20452
-                  match(e, keys.ArrowUp) && handleStep(e, 'up');
-                  // eslint-disable-next-line  @typescript-eslint/no-unused-expressions -- https://github.com/carbon-design-system/carbon/issues/20452
-                  match(e, keys.ArrowDown) && handleStep(e, 'down');
+                  if (match(e, keys.ArrowUp)) {
+                    handleStep(e, 'up');
+                  } else if (match(e, keys.ArrowDown)) {
+                    handleStep(e, 'down');
+                  }
                 }
 
                 if (rest?.onKeyDown) {
@@ -982,17 +986,17 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
                     const state = {
                       value: parsedFormattedNewValue,
                       direction:
-                        previousNumberValue < parsedFormattedNewValue
+                        previousNumberValue.current < parsedFormattedNewValue
                           ? 'up'
                           : 'down',
                     };
 
                     // If the old and new values are NaN, don't call onChange
-                    // to avoid an unecessary re-render and potential infinite
+                    // to avoid an unnecessary re-render and potential infinite
                     // loop when isControlled.
                     if (
                       !(
-                        isNaN(previousNumberValue) &&
+                        isNaN(previousNumberValue.current) &&
                         isNaN(parsedFormattedNewValue)
                       )
                     ) {
@@ -1001,10 +1005,12 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
                   }
 
                   // If the old and new values are NaN, don't set state to avoid
-                  // an unecessary re-render and potential infinite loop when
+                  // an unnecessary re-render and potential infinite loop when
                   // isControlled.
-                  if (!(isNaN(previousNumberValue) && isNaN(numberValue))) {
-                    setPreviousNumberValue(numberValue);
+                  if (
+                    !(isNaN(previousNumberValue.current) && isNaN(numberValue))
+                  ) {
+                    previousNumberValue.current = numberValue;
                   }
                   if (!(isNaN(numberValue) && isNaN(parsedFormattedNewValue))) {
                     setNumberValue(parsedFormattedNewValue);

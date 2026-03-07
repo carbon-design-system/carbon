@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2025
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -8,10 +8,10 @@
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import React, {
+  forwardRef,
+  useCallback,
   useImperativeHandle,
   useState,
-  useCallback,
-  type ForwardedRef,
   type HTMLAttributes,
 } from 'react';
 import Filename from './Filename';
@@ -165,7 +165,7 @@ export interface FileUploaderHandle {
   getCurrentFiles?: () => FileItem[];
 }
 
-const FileUploader = React.forwardRef(
+const FileUploader = forwardRef<FileUploaderHandle, FileUploaderProps>(
   (
     {
       accept,
@@ -186,8 +186,8 @@ const FileUploader = React.forwardRef(
       onDelete,
       size,
       ...other
-    }: FileUploaderProps,
-    ref: ForwardedRef<FileUploaderHandle>
+    },
+    ref
   ) => {
     const fileUploaderInstanceId = useId('file-uploader');
     const prefix = usePrefix();

@@ -149,4 +149,43 @@ describe('ModalFooter', () => {
     expect(screen.getByText('Keep both')).toBeInTheDocument();
     expect(screen.getByText('Rename')).toBeInTheDocument();
   });
+
+  it('should call close handlers for secondary buttons without `onClick`', async () => {
+    const closeModal = jest.fn();
+    const onRequestClose = jest.fn();
+
+    render(
+      <ModalFooter
+        closeModal={closeModal}
+        onRequestClose={onRequestClose}
+        secondaryButtons={[
+          { buttonText: 'Cancel' },
+          { buttonText: 'Rename', onClick: jest.fn() },
+        ]}
+      />
+    );
+
+    await userEvent.click(screen.getByText('Cancel'));
+
+    expect(closeModal).toHaveBeenCalled();
+    expect(onRequestClose).toHaveBeenCalled();
+  });
+
+  it('should render active loading state for primary button', () => {
+    const { container } = render(
+      <ModalFooter
+        loadingStatus="active"
+        primaryClassName="custom-class"
+        primaryButtonText="Submit"
+        secondaryButtonText="Cancel"
+      />
+    );
+
+    const primaryButton = container.querySelector('button.custom-class');
+
+    expect(primaryButton).toBeTruthy();
+    expect(primaryButton).toHaveClass('cds--btn--loading');
+    expect(screen.getByText('Cancel')).toBeDisabled();
+    expect(container.querySelector('.cds--inline-loading--btn')).toBeTruthy();
+  });
 });

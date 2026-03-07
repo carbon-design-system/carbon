@@ -17,8 +17,8 @@
 **/PublicAPI-test.js        @carbon-design-system/developers-system-admins @carbon-design-system/monorepo-reviewers
 **/PublicAPI-test.js.snap   @carbon-design-system/developers-system-admins @carbon-design-system/monorepo-reviewers
 
-# Admins and leads should be notified of changes to CI/CD workflows
-# codeowners, and any other config present in .github.
+# Admins and leads should be notified of changes to these.
 # This should always be the last entry in this file.
 /.github/           @carbon-design-system/developers-system-admins @carbon-design-system/monorepo-reviewers
 /.github/CODEOWNERS @carbon-design-system/developers-system-admins @carbon-design-system/monorepo-reviewers
+**/AGENTS.md @carbon-design-system/developers-system-admins @carbon-design-system/monorepo-reviewers

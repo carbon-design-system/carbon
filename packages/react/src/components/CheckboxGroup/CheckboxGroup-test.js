@@ -43,6 +43,11 @@ describe('CheckboxGroup', () => {
     expect(screen.getByText('Helper text')).toBeInTheDocument();
   });
 
+  it('should render helperText with value 0', () => {
+    render(<CheckboxGroup legendText="heading" helperText={0} />);
+    expect(screen.getByText('0')).toBeInTheDocument();
+  });
+
   it('should set data-invalid when invalid prop is true', () => {
     const { container } = render(
       <CheckboxGroup

@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2025
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -30,10 +30,9 @@ import { AILabel } from '../AILabel';
 import { isComponentElement } from '../../internal';
 
 export interface TextAreaProps
-  extends React.InputHTMLAttributes<HTMLTextAreaElement> {
+  extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
   /**
-   * Provide a custom className that is applied directly to the underlying
-   * `<textarea>` node
+   * Provide a custom className that is applied to the wrapper node
    */
   className?: string;
 
@@ -180,7 +179,7 @@ const TextArea = frFn((props, forwardRef) => {
     onKeyDown = noopFn,
     invalid = false,
     invalidText = '',
-    helperText = '',
+    helperText,
     light,
     placeholder = '',
     enableCounter = false,
@@ -320,11 +319,7 @@ const TextArea = frFn((props, forwardRef) => {
             setTimeout(() => {
               setTextCount(0);
             }, 0);
-
-            return;
-          }
-
-          if (
+          } else if (
             enableCounter &&
             typeof maxCount !== 'undefined' &&
             textareaRef.current !== null
@@ -385,11 +380,11 @@ const TextArea = frFn((props, forwardRef) => {
     [`${prefix}--form__helper-text--disabled`]: disabled,
   });
 
-  const label = labelText ? (
+  const label = typeof labelText !== 'undefined' && labelText !== null && (
     <Text as="label" htmlFor={id} className={labelClasses}>
       {labelText}
     </Text>
-  ) : null;
+  );
 
   const counter =
     enableCounter &&
@@ -404,11 +399,12 @@ const TextArea = frFn((props, forwardRef) => {
   const counterDescriptionId =
     enableCounter && maxCount ? `${id}-counter-desc` : undefined;
 
-  const helperId = !helperText
+  const hasHelper = typeof helperText !== 'undefined' && helperText !== null;
+  const helperId = !hasHelper
     ? undefined
     : `text-area-helper-text-${textAreaInstanceId}`;
 
-  const helper = helperText ? (
+  const helper = hasHelper && (
     <Text
       as="div"
       id={helperId}
@@ -416,7 +412,7 @@ const TextArea = frFn((props, forwardRef) => {
       ref={helperTextRef}>
       {helperText}
     </Text>
-  ) : null;
+  );
 
   const errorId = id + '-error-msg';
 
@@ -459,7 +455,7 @@ const TextArea = frFn((props, forwardRef) => {
     ariaDescribedBy = warnId;
   } else {
     const ids: string[] = [];
-    if (!isFluid && helperText && helperId) ids.push(helperId);
+    if (!isFluid && hasHelper && helperId) ids.push(helperId);
     if (counterDescriptionId) ids.push(counterDescriptionId);
     ariaDescribedBy = ids.length > 0 ? ids.join(' ') : undefined;
   }
@@ -512,7 +508,7 @@ const TextArea = frFn((props, forwardRef) => {
       {...other}
       {...textareaProps}
       placeholder={placeholder}
-      aria-readonly={other.readOnly ? true : false}
+      aria-readonly={other.readOnly}
       className={textareaClasses}
       aria-invalid={invalid}
       aria-describedby={ariaDescribedBy}
@@ -589,8 +585,7 @@ const TextArea = frFn((props, forwardRef) => {
 TextArea.displayName = 'TextArea';
 TextArea.propTypes = {
   /**
-   * Provide a custom className that is applied directly to the underlying
-   * `<textarea>` node
+   * Provide a custom className that is applied to the wrapper node
    */
   className: PropTypes.string,
 

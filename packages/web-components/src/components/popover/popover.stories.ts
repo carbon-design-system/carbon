@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2019, 2025
+ * Copyright IBM Corp. 2019, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -123,10 +123,11 @@ export const Default = {
     const handleClick = () => {
       const popover = document.querySelector(`${prefix}-popover`);
       const open = popover?.hasAttribute('open');
-      // eslint-disable-next-line  @typescript-eslint/no-unused-expressions -- https://github.com/carbon-design-system/carbon/issues/20452
-      open
-        ? popover?.removeAttribute('open')
-        : popover?.setAttribute('open', '');
+      if (open) {
+        popover?.removeAttribute('open');
+      } else {
+        popover?.setAttribute('open', '');
+      }
     };
 
     return html`
@@ -182,10 +183,11 @@ export const ExperimentalAutoAlign = {
     const handleClick = () => {
       const popover = document.querySelector(`${prefix}-popover`);
       const open = popover?.hasAttribute('open');
-      // eslint-disable-next-line  @typescript-eslint/no-unused-expressions -- https://github.com/carbon-design-system/carbon/issues/20452
-      open
-        ? popover?.removeAttribute('open')
-        : popover?.setAttribute('open', '');
+      if (open) {
+        popover?.removeAttribute('open');
+      } else {
+        popover?.setAttribute('open', '');
+      }
     };
 
     requestAnimationFrame(() => {
@@ -254,10 +256,11 @@ export const ExperimentalAutoAlignWithBoundary = {
     const handleClick = () => {
       const popover = document.querySelector(`${prefix}-popover`);
       const open = popover?.hasAttribute('open');
-      // eslint-disable-next-line  @typescript-eslint/no-unused-expressions -- https://github.com/carbon-design-system/carbon/issues/20452
-      open
-        ? popover?.removeAttribute('open')
-        : popover?.setAttribute('open', '');
+      if (open) {
+        popover?.removeAttribute('open');
+      } else {
+        popover?.setAttribute('open', '');
+      }
     };
 
     requestAnimationFrame(() => {
@@ -319,10 +322,6 @@ const sharedTabTipArgTypes = {
     description:
       'Specify whether a drop shadow should be rendered on the popover',
   },
-  highContrast: {
-    control: 'boolean',
-    description: 'Render the component using the high-contrast variant',
-  },
   open: {
     control: 'boolean',
     description: 'Specify whether the component is currently open or closed',
@@ -332,17 +331,17 @@ export const TabTip = {
   argTypes: sharedTabTipArgTypes,
   args: {
     dropShadow: true,
-    highContrast: false,
     open: true,
   },
   render: (args) => {
     const handleClick = (id) => {
       const popover = document.querySelector(id);
       const open = popover?.hasAttribute('open');
-      // eslint-disable-next-line  @typescript-eslint/no-unused-expressions -- https://github.com/carbon-design-system/carbon/issues/20452
-      open
-        ? popover?.removeAttribute('open')
-        : popover?.setAttribute('open', '');
+      if (open) {
+        popover?.removeAttribute('open');
+      } else {
+        popover?.setAttribute('open', '');
+      }
     };
 
     return html`
@@ -352,7 +351,6 @@ export const TabTip = {
       <div class="popover-tabtip-story" style="display: 'flex'">
         <cds-popover
           ?dropShadow=${args.dropShadow}
-          ?highContrast=${args.highContrast}
           ?open=${args.open}
           tabTip
           align="bottom-left"
@@ -470,10 +468,11 @@ export const TabTipExperimentalAutoAlign = {
     const handleClick = () => {
       const popover = document.querySelector(`${prefix}-popover`);
       const open = popover?.hasAttribute('open');
-      // eslint-disable-next-line  @typescript-eslint/no-unused-expressions -- https://github.com/carbon-design-system/carbon/issues/20452
-      open
-        ? popover?.removeAttribute('open')
-        : popover?.setAttribute('open', '');
+      if (open) {
+        popover?.removeAttribute('open');
+      } else {
+        popover?.setAttribute('open', '');
+      }
     };
 
     requestAnimationFrame(() => {

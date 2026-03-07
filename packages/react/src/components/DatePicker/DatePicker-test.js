@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2025
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -492,6 +492,7 @@ describe('Simple date picker', () => {
     let cleanup;
     let render;
     let screen;
+    let waitForElementToBeRemoved;
     let LazyDatePicker;
     let LazyDatePickerInput;
 
@@ -500,24 +501,17 @@ describe('Simple date picker', () => {
       cleanup = require('@testing-library/react/pure').cleanup;
       render = require('@testing-library/react/pure').render;
       screen = require('@testing-library/react/pure').screen;
+      waitForElementToBeRemoved =
+        require('@testing-library/react/pure').waitForElementToBeRemoved;
     });
 
     afterEach(() => {
       cleanup();
     });
 
-    it.skip('should initialize a calendar when using react.lazy', async () => {
-      LazyDatePicker = React.lazy(() =>
-        import('@carbon/react').then((module) => ({
-          default: module.DatePicker,
-        }))
-      );
-
-      LazyDatePickerInput = React.lazy(() =>
-        import('@carbon/react').then((module) => ({
-          default: module.DatePickerInput,
-        }))
-      );
+    it('should initialize a calendar when using react.lazy', async () => {
+      LazyDatePicker = React.lazy(() => import('./DatePicker'));
+      LazyDatePickerInput = React.lazy(() => import('../DatePickerInput'));
 
       render(
         <React.Suspense fallback="Loading">
@@ -530,6 +524,8 @@ describe('Simple date picker', () => {
           </LazyDatePicker>
         </React.Suspense>
       );
+
+      await waitForElementToBeRemoved(() => screen.queryByText('Loading'));
 
       const labeledElement = await screen.findByLabelText(
         'Date Picker label',
@@ -1169,6 +1165,37 @@ describe('Range date picker', () => {
     );
     expect(consoleWarnSpy).toHaveBeenCalledTimes(1);
     consoleWarnSpy.mockRestore();
+  });
+
+  it('should keep calendar open when click event lands outside after mousedown inside', async () => {
+    render(
+      <DatePicker datePickerType="range">
+        <DatePickerInput
+          id="date-picker-input-id-start"
+          placeholder="mm/dd/yyyy"
+          labelText="Start date"
+        />
+        <DatePickerInput
+          id="date-picker-input-id-finish"
+          placeholder="mm/dd/yyyy"
+          labelText="End date"
+        />
+      </DatePicker>
+    );
+
+    const startDateInput = screen.getByLabelText('Start date');
+    await userEvent.click(startDateInput);
+
+    const calendar = screen.getByRole('application');
+    expect(calendar).toHaveClass('open');
+
+    fireEvent.mouseDown(startDateInput);
+    // Simulate a click event that bubbles from outside after a scroll or blur.
+    document.body.dispatchEvent(
+      new MouseEvent('click', { bubbles: true, cancelable: true })
+    );
+
+    expect(calendar).toHaveClass('open');
   });
 
   describe('rangePlugin', () => {
