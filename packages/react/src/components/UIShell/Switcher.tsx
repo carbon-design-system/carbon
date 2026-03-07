@@ -9,14 +9,13 @@ import React, {
   Children,
   cloneElement,
   forwardRef,
-  isValidElement,
   useRef,
-  type ComponentProps,
   type ReactNode,
 } from 'react';
 import cx from 'classnames';
 import { usePrefix } from '../../internal/usePrefix';
 import { useMergedRefs } from '../../internal/useMergedRefs';
+import { isComponentElement } from '../../internal';
 import PropTypes from 'prop-types';
 import { AriaLabelPropType } from '../../prop-types/AriaPropTypes';
 import SwitcherItem from './SwitcherItem';
@@ -82,8 +81,7 @@ const Switcher = forwardRef<HTMLUListElement, SwitcherProps>(
       const enabledIndices = Children.toArray(children).reduce<number[]>(
         (acc, child, i) => {
           if (
-            isValidElement<ComponentProps<typeof SwitcherItem>>(child) &&
-            child.type === SwitcherItem &&
+            isComponentElement(child, SwitcherItem) &&
             Object.keys(child.props).length
           ) {
             acc.push(i);
@@ -120,10 +118,7 @@ const Switcher = forwardRef<HTMLUListElement, SwitcherProps>(
     };
 
     const childrenWithProps = Children.toArray(children).map((child, index) => {
-      if (
-        isValidElement<ComponentProps<typeof SwitcherItem>>(child) &&
-        child.type === SwitcherItem
-      ) {
+      if (isComponentElement(child, SwitcherItem)) {
         return cloneElement(child, {
           handleSwitcherItemFocus,
           index,
@@ -132,10 +127,7 @@ const Switcher = forwardRef<HTMLUListElement, SwitcherProps>(
         });
       }
 
-      if (
-        isValidElement<ComponentProps<typeof SwitcherDivider>>(child) &&
-        child.type === SwitcherDivider
-      ) {
+      if (isComponentElement(child, SwitcherDivider)) {
         return cloneElement(child, {
           key: index,
         });
