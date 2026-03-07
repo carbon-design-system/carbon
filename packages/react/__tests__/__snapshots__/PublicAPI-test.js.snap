@@ -7832,6 +7832,7 @@ Map {
             "sm",
             "md",
             "lg",
+            "xs",
           ],
         ],
         "type": "oneOf",

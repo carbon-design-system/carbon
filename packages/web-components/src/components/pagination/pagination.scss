@@ -40,6 +40,10 @@ $css--plex: true !default;
   }
 }
 
+:host(#{$prefix}-pagination[size='xs']) {
+  @extend .#{$prefix}--pagination--xs;
+}
+
 :host(#{$prefix}-pagination[size='sm']) {
   @extend .#{$prefix}--pagination--sm;
 }
