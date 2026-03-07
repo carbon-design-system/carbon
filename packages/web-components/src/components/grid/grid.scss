@@ -35,6 +35,14 @@ $css-grid: #{$prefix}--css-grid;
   @extend .#{$css-grid}--full-width;
 }
 
+:host(#{$prefix}-grid[with-row-gap]) [grid] {
+  row-gap: var(--cds-grid-gutter);
+}
+
+:host(#{$prefix}-grid[narrow][with-row-gap]) [grid] {
+  row-gap: calc(var(--cds-grid-gutter) / 2);
+}
+
 /* sub grid styles */
 $sub-grid: #{$prefix}--subgrid;
 :host(#{$prefix}-grid) [subgrid] {

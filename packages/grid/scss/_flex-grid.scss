@@ -318,6 +318,32 @@
     padding-block: $condensed-gutter * 0.5;
   }
 
+  // Add row gap support for Flexbox Grid using gap and margin-block-end
+  .#{$prefix}--grid--with-row-gap {
+    --cds-grid-row-gap: #{$grid-gutter};
+  }
+
+  // Sets the gap between rows and wrapped columns
+  .#{$prefix}--grid--with-row-gap .#{$prefix}--row {
+    gap: var(--cds-grid-row-gap) 0;
+    margin-block-end: var(--cds-grid-row-gap);
+  }
+
+  // Condensed mode has 0 in FlexGrid
+  .#{$prefix}--grid--with-row-gap.#{$prefix}--grid--condensed {
+    --cds-grid-row-gap: 0;
+  }
+
+  // Narrow mode has 0 + 1rem = 1rem total gutter
+  .#{$prefix}--grid--with-row-gap.#{$prefix}--grid--narrow {
+    --cds-grid-row-gap: calc(#{$grid-gutter} / 2);
+  }
+
+  // Remove margin from the last row
+  .#{$prefix}--grid--with-row-gap .#{$prefix}--row:last-child {
+    margin-block-end: 0;
+  }
+
   @include -make-grid-columns($breakpoints, $grid-gutter);
   @include -no-gutter();
   @include -hang($grid-gutter);
