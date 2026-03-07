@@ -12,7 +12,9 @@ import Modal from './Modal';
 import TextInput from '../TextInput';
 import { AILabel } from '../AILabel';
 import { FeatureFlags } from '../FeatureFlags';
-import { ModalPresence } from './ModalPresence';
+import { ModalPresence, withModalPresence } from './ModalPresence';
+import OverflowMenu from '../OverflowMenu';
+import OverflowMenuItem from '../OverflowMenuItem';
 
 const prefix = 'cds';
 
@@ -760,6 +762,27 @@ describe('state with presence context', () => {
   });
 });
 
+const ModalWithPresenceHof = withModalPresence((props) => {
+  return <Modal {...props} />;
+});
+
+describe('state with hof withModalPresence', () => {
+  it('should be present when state is open', () => {
+    render(<ModalWithPresenceHof open data-testid="modal" />);
+    expect(screen.queryByTestId('modal')).toBeInTheDocument();
+  });
+
+  it('should not be present when open is false', () => {
+    render(<ModalWithPresenceHof open={false} data-testid="modal" />);
+    expect(screen.queryByTestId('modal')).not.toBeInTheDocument();
+  });
+
+  it('should not be present when open is undefined', () => {
+    render(<ModalWithPresenceHof data-testid="modal" />);
+    expect(screen.queryByTestId('modal')).not.toBeInTheDocument();
+  });
+});
+
 describe.each([
   {
     title: 'events',
@@ -952,6 +975,30 @@ describe.each([
 
         spy.mockRestore();
       });
+    });
+
+    it('should close overflow menu on outside click without closing modal', async () => {
+      const onRequestClose = jest.fn();
+      render(
+        <Component
+          open
+          modalHeading="Modal with Overflow Menu"
+          primaryButtonText="Primary button"
+          secondaryButtonText="Secondary button"
+          onRequestClose={onRequestClose}>
+          <OverflowMenu iconDescription="More options">
+            <OverflowMenuItem itemText="Download" />
+            <OverflowMenuItem itemText="Share" />
+          </OverflowMenu>
+          <p>Test content</p>
+        </Component>
+      );
+      const button = screen.getByRole('button', { name: /options/i });
+      const innerModal = screen.getByRole('dialog');
+      await userEvent.click(button);
+      expect(button).toHaveAttribute('aria-expanded', 'true');
+      await userEvent.click(innerModal);
+      expect(button).toHaveAttribute('aria-expanded', 'false');
     });
   });
 

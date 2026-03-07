@@ -29,6 +29,7 @@ import { deprecate } from '../../prop-types/deprecate';
 import { FormContext } from '../FluidForm';
 import { noopFn } from '../../internal/noopFn';
 import { Tooltip } from '../Tooltip';
+import { isSearchValuePresent } from './utils';
 
 type InputPropsBase = Omit<HTMLAttributes<HTMLInputElement>, 'onChange'>;
 export interface SearchProps extends InputPropsBase {
@@ -152,7 +153,8 @@ const Search = React.forwardRef<HTMLInputElement, SearchProps>(
     },
     forwardRef
   ) => {
-    const hasPropValue = value || defaultValue ? true : false;
+    const hasPropValue =
+      isSearchValuePresent(value) || isSearchValuePresent(defaultValue);
     const prefix = usePrefix();
     const { isFluid } = useContext(FormContext);
     const inputRef = useRef<HTMLInputElement>(null);
@@ -183,7 +185,7 @@ const Search = React.forwardRef<HTMLInputElement, SearchProps>(
     useEffect(() => {
       // Sync content state when used as a controlled input.
       if (typeof value !== 'undefined') {
-        setHasContent(!!value);
+        setHasContent(isSearchValuePresent(value));
       }
     }, [value]);
 

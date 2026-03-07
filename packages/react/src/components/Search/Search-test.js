@@ -11,6 +11,12 @@ import userEvent from '@testing-library/user-event';
 import { render, screen } from '@testing-library/react';
 
 const prefix = 'cds';
+const contentScenarios = [
+  { label: 'empty string', value: '', hasContent: false },
+  { label: 'zero', value: 0, hasContent: true },
+  { label: 'non-empty string', value: 'hmm', hasContent: true },
+  { label: 'undefined', value: undefined, hasContent: false },
+];
 
 describe('Search', () => {
   describe('renders as expected - Component API', () => {
@@ -51,6 +57,23 @@ describe('Search', () => {
 
       expect(screen.getByRole('searchbox')).toHaveValue('test-value');
     });
+
+    it.each(contentScenarios)(
+      'should treat a defaultValue of $label as content',
+      ({ value, hasContent }) => {
+        render(<Search labelText="test-search" defaultValue={value} />);
+
+        if (hasContent) {
+          expect(screen.getByLabelText('Clear search input')).not.toHaveClass(
+            `${prefix}--search-close--hidden`
+          );
+        } else {
+          expect(screen.getByLabelText('Clear search input')).toHaveClass(
+            `${prefix}--search-close--hidden`
+          );
+        }
+      }
+    );
 
     it('should respect disabled prop', () => {
       render(<Search labelText="test-search" disabled />);
@@ -204,6 +227,23 @@ describe('Search', () => {
 
       expect(screen.getByRole('searchbox')).toHaveValue('test-value');
     });
+
+    it.each(contentScenarios)(
+      'should treat a value of $label as content',
+      ({ value, hasContent }) => {
+        render(<Search labelText="test-search" value={value} />);
+
+        if (hasContent) {
+          expect(screen.getByLabelText('Clear search input')).not.toHaveClass(
+            `${prefix}--search-close--hidden`
+          );
+        } else {
+          expect(screen.getByLabelText('Clear search input')).toHaveClass(
+            `${prefix}--search-close--hidden`
+          );
+        }
+      }
+    );
 
     it('should sync clear button visibility when controlled value changes', () => {
       const { rerender } = render(

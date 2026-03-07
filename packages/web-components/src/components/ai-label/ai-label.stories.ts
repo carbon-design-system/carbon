@@ -20,17 +20,17 @@ import { AI_LABEL_SIZE } from './defs';
 
 const tooltipAlignments = {
   [`top`]: POPOVER_ALIGNMENT.TOP,
-  [`top-left`]: POPOVER_ALIGNMENT.TOP_LEFT,
-  [`top-right`]: POPOVER_ALIGNMENT.TOP_RIGHT,
+  [`top-start`]: POPOVER_ALIGNMENT.TOP_START,
+  [`top-end`]: POPOVER_ALIGNMENT.TOP_END,
   [`bottom`]: POPOVER_ALIGNMENT.BOTTOM,
-  [`bottom-left`]: POPOVER_ALIGNMENT.BOTTOM_LEFT,
-  [`bottom-right`]: POPOVER_ALIGNMENT.BOTTOM_RIGHT,
+  [`bottom-start`]: POPOVER_ALIGNMENT.BOTTOM_START,
+  [`bottom-end`]: POPOVER_ALIGNMENT.BOTTOM_END,
   [`left`]: POPOVER_ALIGNMENT.LEFT,
-  [`left-bottom`]: POPOVER_ALIGNMENT.LEFT_BOTTOM,
-  [`left-top`]: POPOVER_ALIGNMENT.LEFT_TOP,
+  [`left-start`]: POPOVER_ALIGNMENT.LEFT_START,
+  [`left-end`]: POPOVER_ALIGNMENT.LEFT_END,
   [`right`]: POPOVER_ALIGNMENT.RIGHT,
-  [`right-bottom`]: POPOVER_ALIGNMENT.RIGHT_BOTTOM,
-  [`right-top`]: POPOVER_ALIGNMENT.RIGHT_TOP,
+  [`right-start`]: POPOVER_ALIGNMENT.RIGHT_START,
+  [`right-end`]: POPOVER_ALIGNMENT.RIGHT_END,
 };
 
 const sizes = {
@@ -42,6 +42,12 @@ const sizes = {
   [`Medium size (${AI_LABEL_SIZE.MEDIUM})`]: AI_LABEL_SIZE.MEDIUM,
   [`Large size (${AI_LABEL_SIZE.LARGE})`]: AI_LABEL_SIZE.LARGE,
   [`XL size (${AI_LABEL_SIZE.EXTRA_LARGE})`]: AI_LABEL_SIZE.EXTRA_LARGE,
+};
+
+const inlineSizes = {
+  [`Small size (${AI_LABEL_SIZE.SMALL})`]: AI_LABEL_SIZE.SMALL,
+  [`Medium size (${AI_LABEL_SIZE.MEDIUM})`]: AI_LABEL_SIZE.MEDIUM,
+  [`Large size (${AI_LABEL_SIZE.LARGE})`]: AI_LABEL_SIZE.LARGE,
 };
 
 const content = html`
@@ -75,23 +81,32 @@ const actions = html`
   <cds-ai-label-action-button>View details</cds-ai-label-action-button>
 `;
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20452
 const args = {
+  aiText: 'AI',
   aiTextLabel: '',
-  alignment: POPOVER_ALIGNMENT.BOTTOM,
+  alignment: POPOVER_ALIGNMENT.BOTTOM_START,
   autoalign: true,
   kind: 'default',
+  defaultOpen: false,
   revertActive: false,
-  showActions: true,
-  size: AI_LABEL_SIZE.EXTRA_SMALL,
+  buttonLabel: 'Show information',
+  revertLabel: 'Revert to AI input',
+  size: AI_LABEL_SIZE.MEDIUM,
 };
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20452
 const argTypes = {
+  aiText: {
+    control: 'text',
+    description: 'Specify the correct translation of the AI text',
+  },
   aiTextLabel: {
     control: 'text',
     description:
       'Specify additional text to be rendered next to the AI label in the inline variant.',
+    if: { arg: 'kind', eq: 'inline' },
+    table: {
+      category: 'Inline variant',
+    },
   },
   alignment: {
     control: 'select',
@@ -103,129 +118,196 @@ const argTypes = {
     description:
       'Will auto-align the popover. This prop is currently experimental and is subject to future changes.',
   },
+  buttonLabel: {
+    control: 'text',
+    description:
+      'Specify the text that will be provided to the `aria-label` of the `AI Label` button',
+  },
   kind: {
-    control: 'radio',
+    control: 'select',
     description:
       'Specify the type of AI Label, from the following list of types: <code>default</code>, <code>hollow</code>, or <code>inline</code>.',
     options: ['default', 'inline'],
   },
-  showActions: {
+  defaultOpen: {
     control: 'boolean',
     description:
-      'Storybook only - Specify whether to show action items in AI Label callout',
+      'Specify if the toggletip should be open by default.\n\n(For the change to this control to be visible, refresh the page.)',
   },
   size: {
     control: 'select',
     description:
       'Specify the size of the button, from the following list of sizes: <code>mini</code>, <code>2xs</code>, <code>xs</code>, <code>sm</code>, <code>md</code>, <code>lg</code>, <code>xl</code>.',
     options: sizes,
+    if: { arg: 'revertActive', neq: true },
   },
   revertActive: {
     control: 'boolean',
     description: 'Specify whether the revert button should be visible.',
   },
+  revertLabel: {
+    control: 'text',
+    description:
+      'Specify the text that should be shown when the revert button is hovered',
+    if: { arg: 'revertActive', eq: true },
+  },
 };
 
 export const Default = {
-  render: () => {
+  args,
+  argTypes,
+  render: ({
+    aiText,
+    aiTextLabel,
+    alignment,
+    autoalign,
+    buttonLabel,
+    kind,
+    defaultOpen,
+    size,
+    revertActive,
+    revertLabel,
+  }) => {
     return html`
       <style>
         ${styles}
       </style>
       <div class="ai-label-container">
-        <cds-ai-label autoalign size="mini" alignment="bottom-left">
-          ${content}${actions}
-        </cds-ai-label>
-        <cds-ai-label autoalign size="2xs" alignment="bottom-left">
-          ${content}${actions}
-        </cds-ai-label>
-        <cds-ai-label autoalign size="xs" alignment="bottom-left">
-          ${content}${actions}
-        </cds-ai-label>
-        <cds-ai-label autoalign size="sm" alignment="bottom-left">
-          ${content}${actions}
-        </cds-ai-label>
-        <cds-ai-label autoalign size="md" alignment="bottom-left">
-          ${content} ${actions}</cds-ai-label
-        >
-        <cds-ai-label autoalign size="lg" alignment="bottom-left">
-          ${content} ${actions}</cds-ai-label
-        >
-        <cds-ai-label autoalign size="xl" alignment="bottom-left">
-          ${content} ${actions}</cds-ai-label
-        >
-      </div>
-      <div class="ai-label-container">
-        <cds-ai-label autoalign size="sm" kind="inline" alignment="bottom-left">
-          ${content}${actions}
-        </cds-ai-label>
-        <cds-ai-label autoalign size="md" kind="inline" alignment="bottom-left">
-          ${content}${actions}
-        </cds-ai-label>
-        <cds-ai-label autoalign size="lg" kind="inline" alignment="bottom-left">
-          ${content}${actions}
-        </cds-ai-label>
-      </div>
-      <div class="ai-label-container">
         <cds-ai-label
-          autoalign
-          size="sm"
-          kind="inline"
-          ai-text-label="Text goes here"
-          alignment="bottom-left">
-          ${content}${actions}
-        </cds-ai-label>
-        <cds-ai-label
-          autoalign
-          size="md"
-          kind="inline"
-          ai-text-label="Text goes here"
-          alignment="bottom-left">
-          ${content}${actions}
-        </cds-ai-label>
-        <cds-ai-label
-          autoalign
-          size="lg"
-          kind="inline"
-          ai-text-label="Text goes here"
-          alignment="bottom-left">
-          ${content}${actions}
+          ?default-open="${defaultOpen}"
+          ai-text="${aiText}"
+          ai-text-label="${aiTextLabel}"
+          alignment="${alignment}"
+          ?autoalign="${autoalign}"
+          button-label="${buttonLabel}"
+          kind="${kind}"
+          size="${size}"
+          ?revert-active="${revertActive}"
+          revert-label="${revertLabel}">
+          ${content} ${actions}
         </cds-ai-label>
       </div>
     `;
   },
 };
-
-export const ExplainabilityPopover = {
+export const Inline = {
   args: {
-    alignment: tooltipAlignments.bottom,
-    showActions: true,
+    ...args,
+    // `kind` prop is hidden from the controls table, but its value is still used for conditional `aiTextLabel`,
+    // hence the arg value is set even though the prop can’t be updated from controls.
+    kind: 'inline',
   },
   argTypes: {
-    alignment: {
-      control: 'select',
-      description: 'Specify how the popover should align with the button.',
-      options: tooltipAlignments,
+    ...argTypes,
+    kind: {
+      ...argTypes.kind,
+      table: {
+        disable: true,
+      },
     },
-    showActions: {
-      control: 'boolean',
+    defaultOpen: {
+      ...argTypes.kind,
+      table: {
+        disable: true,
+      },
+    },
+    size: {
+      control: 'select',
       description:
-        'Storybook only - Specify whether to show action items in AI Label callout',
+        'Specify the size of the button, from the following list of sizes: <code>sm</code>, <code>md</code>, <code>lg</code>',
+      options: inlineSizes,
+      if: { arg: 'revertActive', neq: true },
     },
   },
-  render: (args) => {
-    const { alignment, showActions } = args ?? {};
-
+  render: ({
+    aiText,
+    aiTextLabel,
+    alignment,
+    autoalign,
+    buttonLabel,
+    kind,
+    size,
+    revertActive,
+    revertLabel,
+  }) => {
     return html`
       <style>
         ${styles}
       </style>
-      <div class="ai-label-container-example ai-label-container centered">
+      <div class="ai-label-container">
         <cds-ai-label
-          open
+          ai-text="${aiText}"
+          ai-text-label="${aiTextLabel}"
           alignment="${alignment}"
-          size="${AI_LABEL_SIZE.EXTRA_SMALL}">
-          ${content} ${showActions ? actions : ''}
+          ?autoalign="${autoalign}"
+          button-label="${buttonLabel}"
+          kind="${kind}"
+          size="${size}"
+          ?revert-active="${revertActive}"
+          revert-label="${revertLabel}">
+          ${content} ${actions}
+        </cds-ai-label>
+      </div>
+    `;
+  },
+};
+export const InlineWithContent = {
+  args: {
+    ...args,
+    // `kind` prop is hidden from the controls table, but its value is still used for conditional `aiTextLabel`,
+    // hence the arg value is set even though the prop can’t be updated from controls.
+    kind: 'inline',
+    aiTextLabel: 'Text goes here',
+  },
+  argTypes: {
+    ...argTypes,
+    kind: {
+      ...argTypes.kind,
+      table: {
+        disable: true,
+      },
+    },
+    defaultOpen: {
+      ...argTypes.kind,
+      table: {
+        disable: true,
+      },
+    },
+    size: {
+      control: 'select',
+      description:
+        'Specify the size of the button, from the following list of sizes: <code>sm</code>, <code>md</code>, <code>lg</code>',
+      options: inlineSizes,
+      if: { arg: 'revertActive', neq: true },
+    },
+  },
+  render: ({
+    aiText,
+    aiTextLabel,
+    alignment,
+    autoalign,
+    buttonLabel,
+    kind,
+    size,
+    revertActive,
+    revertLabel,
+  }) => {
+    return html`
+      <style>
+        ${styles}
+      </style>
+      <div class="ai-label-container">
+        <cds-ai-label
+          ai-text="${aiText}"
+          ai-text-label="${aiTextLabel}"
+          alignment="${alignment}"
+          ?autoalign="${autoalign}"
+          button-label="${buttonLabel}"
+          kind="${kind}"
+          size="${size}"
+          ?revert-active="${revertActive}"
+          revert-label="${revertLabel}">
+          ${content} ${actions}
         </cds-ai-label>
       </div>
     `;
