@@ -156,6 +156,22 @@ describe('ComboButton', () => {
 
       expect(tooltip).toHaveTextContent(t());
     });
+
+    it('supports props.tooltipLabel', () => {
+      const tooltipLabel = 'More actions';
+
+      render(
+        <ComboButton label="Primary action" tooltipLabel={tooltipLabel}>
+          <MenuItem label="Additional action" />
+        </ComboButton>
+      );
+
+      const triggerButton = screen.getAllByRole('button')[1];
+      const tooltipId = triggerButton.getAttribute('aria-labelledby');
+      const tooltip = document.getElementById(tooltipId);
+
+      expect(tooltip).toHaveTextContent(tooltipLabel);
+    });
   });
 
   describe('behaves as expected', () => {

@@ -87,6 +87,19 @@ export const WithIcons = (args) => {
   );
 };
 
+export const WithCustomTooltipLabel = (args) => {
+  return (
+    <ComboButton
+      label="Primary action"
+      tooltipLabel="More actions"
+      {...args}>
+      <MenuItem label="Second action" />
+      <MenuItem label="Third action" />
+      <MenuItem label="Fourth action" disabled />
+    </ComboButton>
+  );
+};
+
 export const WithMenuAlignment = () => {
   return (
     <>

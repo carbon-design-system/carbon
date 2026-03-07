@@ -27,7 +27,8 @@ import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
 A `ComboButton` can be used to offer additional, secondary actions in a
 disclosed list next to the primary action. These additional actions must be
 `MenuItem`s passed as `children`. The primary action's label is passed as
-`props.label`.
+`props.label`. Use `tooltipLabel` to override the tooltip text for the trigger
+button and the menu label used for accessibility.
 
 ```jsx
 <ComboButton label="Primary action">
