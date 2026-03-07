@@ -5,6 +5,7 @@
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 ## Table of Contents
 
+- [Introduction](#introduction)
 - [Getting started](#getting-started)
 - [Common tasks](#common-tasks)
 - [Dependency management](#dependency-management)
@@ -12,6 +13,10 @@
 - [Package architecture and layout](#package-architecture-and-layout)
   - [Packages shipping Sass](#packages-shipping-sass)
     - [Entrypoint behavior](#entrypoint-behavior)
+  - [Files and folders](#files-and-folders)
+  - [Working on JavaScript-framework-specific styles](#working-on-javascript-framework-specific-styles)
+  - [Using `npm link`/`yarn link`](#using-npm-linkyarn-link)
+  - [Pointing NPM dependency of `@carbon/styles` right to the source code](#pointing-npm-dependency-of-carbonstyles-right-to-the-source-code)
 - [Commit conventions](#commit-conventions)
   - [Commit message format](#commit-message-format)
   - [Type](#type)
@@ -24,11 +29,8 @@
   - [Sass documentation](#sass-documentation)
   - [Start a new `block` or `element`?](#start-a-new-block-or-element)
   - [Red flags](#red-flags)
-  - [Files and folders](#files-and-folders)
-  - [Working on JavaScript-framework-specific styles](#working-on-javascript-framework-specific-styles)
-  - [Using `npm link`/`yarn link`](#using-npm-linkyarn-link)
-  - [Pointing NPM dependency of `@carbon/styles` right to the source code](#pointing-npm-dependency-of-carbonstyles-right-to-the-source-code)
 - [Maintainers](#maintainers)
+  - [Public API Snapshot](#public-api-snapshot)
   - [Working with icons and pictograms](#working-with-icons-and-pictograms)
   - [Code Patterns](#code-patterns)
     - [Deprecating a component](#deprecating-a-component)
@@ -41,6 +43,19 @@
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 <!-- prettier-ignore-end -->
+
+## Introduction
+
+This handbook covers how we maintain and operate the Carbon Design System
+repository. As a result, this document will evolve and change over time as our
+tooling, package architecture, and release processes change.
+
+Guidelines or practices outlined in this document are meant to help us as a
+group collaborate effectively on workflows related to development, maintenance,
+and publishing.
+
+There is a separate [coding style guide](./style.md) that contains more detailed
+guidance about authoring code.
 
 ## Getting started
 
@@ -156,6 +171,89 @@ of Sass.
 Using these `mixins.scss` entrypoints allows you as an application developer to
 control when these side-effects are applied in your project.
 
+### Files and folders
+
+All react components belong in `packages/react/src/components` in their own
+folder.
+
+All Component styles belong in `packages/styles/scss/components` in their own
+folder.
+
+### Working on JavaScript-framework-specific styles
+
+JavaScript-framework-specific is _not_ recommended as we strive to create styles
+that are framework-neutral. However, there are some rare cases where
+framework-specific cannot be avoided, and some of those make sense to be in
+maintained by core style library here.
+
+There are a couple ways to work on framework-specific style.
+
+### Using `npm link`/`yarn link`
+
+This is the most straightforward way. When in the directory of your
+`@carbon/styles` folder, run the following command:
+
+```bash
+yarn link
+```
+
+You should see a success message similar to:
+
+```bash
+success Registered "@carbon/styles".
+info You can now run `yarn link "@carbon/styles"` in the projects where you want to use this package and it will be used instead.
+```
+
+Now, go to the folder where `carbon-components-angular` is located and run:
+
+```bash
+yarn link @carbon/styles
+```
+
+You should see a success message similar to:
+
+```bash
+success Using linked package for "@carbon/styles".
+```
+
+The `yarn link` command will allow us to point the `@carbon/styles` package
+under `node_modules` to the folder on our filesystem. So, if we make a change in
+`@carbon/styles` and re-compile the project it will update in the Storybook
+environment for `carbon-components-angular`.
+
+In addition, if you would like to have your changes to styles automatically
+compile and update Storybook you can run the following command in the
+`@carbon/styles` folder on your machine:
+
+```bash
+yarn gulp watch -s
+```
+
+This will run the `watch` command in `gulpfile.js`. As a result, whenever you
+make a change to the project styles it will automatically copy over into the
+`scss` folder which Storybook uses in `carbon-components-angular`.
+
+### Pointing NPM dependency of `@carbon/styles` right to the source code
+
+Though the above approach is the most straightforward, it involves the overhead
+of having to run the build process at `@carbon/styles`, in addition to one at
+the framework variant repo, upon every Sass code change.
+
+To avoid such overhead, you can point NPM dependency of `@carbon/styles` right
+to the source code, though there is a caveat that our future change to the
+directory structure, etc. may make such steps no longer work. Here are the
+steps:
+
+```sh
+> cd /path/to/carbon-components-angular/node_modules/@carbon/styles
+> mv scss scss.orig
+> ln -s /path/to/@carbon/styles/scss scss
+```
+
+Then edits of `.scss` files in `/path/to/@carbon/styles/scss` will be reflected
+to the development environment of your framework variant repository. You don't
+need to do anything in `@carbon/styles` side.
+
 ## Commit conventions
 
 This project follows a structured format for writing commit messages. The main
@@ -267,270 +365,28 @@ considered a chore that we are doing to keep things up-to-date.
 
 ## Coding style
 
+For coding style guidance, see the [style guide](./style.md).
+
 ### Class names
 
-Prefix all class names with `#{$prefix}--` in SCSS, which is replaced with
-`cds--` by default, and design systems inheriting Carbon can override. This
-prefix prevents potential conflicts with class names from the user.
-
-**HTML**
-
-```html
-<div
-  class="cds--inline-notification cds--inline-notification--error"
-  role="alert">
-  <div class="cds--inline-notification__details">...</div>
-</div>
-```
-
-**SCSS**
-
-```scss
-.#{$prefix}--inline-notification {
-  ...
-}
-
-.#{$prefix}--inline-notification__details {
-  ...
-}
-```
-
-Follow BEM naming convention for classes. Again, the only thing we do
-differently is prefix all classes with `#{$prefix}--`.
-
-```scss
-.#{$prefix}--block
-.#{$prefix}--block__element
-.#{$prefix}--block--modifier
-```
-
-Avoid nesting selectors, this will make it easier to maintain in the future.
-
-```scss
-// Don't do this
-.#{$prefix}--inline-notification {
-  .#{$prefix}--btn {
-    &:hover {
-      svg {
-        ...
-      }
-    }
-  }
-}
-
-// Do this instead
-.#{$prefix}--inline-notification .#{$prefix}--btn {
-    &:hover svg {
-      ...
-    }
-  }
-}
-```
-
-Use
-[CSS logical properties and values](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_logical_properties_and_values)
-for layout. These are impacted by the writing mode and provide support for
-right-to-left styling out of the box.
-
-```scss
-// Don't do this
-.my-element {
-  padding-top: 2em;
-  padding-bottom: 2em;
-  margin-left: 2em;
-  position: relative;
-  top: 0.2em;
-}
-
-// Do this instead
-.my-element {
-  padding-block-start: 2em;
-  padding-block-end: 2em;
-  margin-inline-start: 2em;
-  position: relative;
-  inset-block-start: 0.2em;
-}
-```
+The style guide's [Class names](./style.md#class-names) section contains
+guidance on class names.
 
 ### Sass documentation
 
-[SassDoc](http://sassdoc.com) is used to document the Carbon Sass source.
-SassDoc annotations start each line with `///`; do not use `///` in non-SassDoc
-comments.
-
-For consistency, capitalize types (used in `@type`, `@param`, `@return`) and
-descriptions (used in `@param`, `@return`, `@deprecated`, `@example`, `@link`).
-
-The following annotations are used:
-
-**Required annotations**
-
-- [Description](http://sassdoc.com/annotations/#description) - can be one line
-  or multiple lines
-- [`@access`](http://sassdoc.com/annotations/#access) - `public` or `private`,
-  where public items make up our public API
-- [`@group`](http://sassdoc.com/annotations/#group) - typically a package or
-  component name
-- [`@type`](http://sassdoc.com/annotations/#type) - allowed on **variables**,
-  (e.g. `Map`, `Color`, `Number`)
-- [`@param`](http://sassdoc.com/annotations/#parameter) - allowed on
-  **functions** and **mixins**, include the type, name, and description, with a
-  default value if there is one (e.g.
-  `@param {Map} $breakpoints [$carbon--grid-breakpoints] - A map of breakpoints where the key is the name`)
-- [`@return`](http://sassdoc.com/annotations/#return) - allowed on
-  **functions**, include the type and description (e.g.
-  `@return {Number} In px`)
-- [`@alias`](http://sassdoc.com/annotations/#alias) - do not include the `$` if
-  aliasing a variable
-- [`@content`](http://sassdoc.com/annotations/#content) - allowed on **mixins**,
-  describe the usage of content
-- [`@deprecated`](http://sassdoc.com/annotations/#deprecated) - context around
-  possible replacements or when the item will no longer be available
-
-  **Optional annotations**
-
-- [`@example`](http://sassdoc.com/annotations/#example) - if the usage isn't
-  straight forward or there are multiple use cases
-- [`@link`](http://sassdoc.com/annotations/#link) - if there's a related link to
-  reference
-
-  **Examples**
-
-```scss
-// Variable example
-
-/// Primary interactive color; Primary buttons
-/// @type Color
-/// @access public
-/// @group @carbon/themes
-$interactive-01: map-get($carbon--theme, interactive-01) !default;
-
-// Mixin example
-
-/// Create the container for a grid. Will cause full-bleed for the grid unless
-/// max-width properties are added with `make-container-max-widths`
-/// @param {Map} $breakpoints [$carbon--grid-breakpoints] - A map of breakpoints where the key is the name
-/// @access private
-/// @group @carbon/grid
-@mixin carbon--make-container($breakpoints: $carbon--grid-breakpoints) {
-}
-
-// Function example
-
-/// Compute the type size for the given type scale step
-/// @param {Number} $step - Type scale step
-/// @return {Number} In px
-/// @access public
-/// @group @carbon/type
-@function carbon--get-type-size($step) {
-}
-```
+The style guide's
+[Annotate relevant Sass values with SassDoc](./style.md#annotate-relevant-sass-values-with-sassdoc)
+section contains guidance on Sass documentation.
 
 ### Start a new `block` or `element`?
 
-A nested element can use a new block name as long as the styles are independent
-of the parent.
-
-```html
-<div class="cds--component">
-  <button class="cds--component-button">Button</button>
-</div>
-```
-
-:point_up: The `#{$prefix}--component-button` class implies that this button has
-independent styles from its parent. Generally, it's preferred to start a new
-block.
+The style guide's
+[Start a new `block` or `element`?](./style.md#start-a-new-block-or-element)
+section contains guidance on `block`/`element` usage.
 
 ### Red flags
 
-Avoid names with multiple `__element` names:
-
-- :x: `.#{$prefix}--card__list__item`
-- :white_check_mark: `.#{$prefix}--card-item`
-- :white_check_mark: `.#{$prefix}--card__item`
-
-### Files and folders
-
-All react components belong in `packages/react/src/components` in their own
-folder.
-
-All Component styles belong in `packages/styles/scss/components` in their own
-folder.
-
-### Working on JavaScript-framework-specific styles
-
-JavaScript-framework-specific is _not_ recommended as we strive to create styles
-that are framework-neutral. However, there are some rare cases where
-framework-specific cannot be avoided, and some of those make sense to be in
-maintained by core style library here.
-
-There are a couple ways to work on framework-specific style.
-
-### Using `npm link`/`yarn link`
-
-This is the most straightforward way. When in the directory of your
-`@carbon/styles` folder, run the following command:
-
-```bash
-yarn link
-```
-
-You should see a success message similar to:
-
-```bash
-success Registered "@carbon/styles".
-info You can now run `yarn link "@carbon/styles"` in the projects where you want to use this package and it will be used instead.
-```
-
-Now, go to the folder where `carbon-components-angular` is located and run:
-
-```bash
-yarn link @carbon/styles
-```
-
-You should see a success message similar to:
-
-```bash
-success Using linked package for "@carbon/styles".
-```
-
-The `yarn link` command will allow us to point the `@carbon/styles` package
-under `node_modules` to the folder on our filesystem. So, if we make a change in
-`@carbon/styles` and re-compile the project it will update in the Storybook
-environment for `carbon-components-angular`.
-
-In addition, if you would like to have your changes to styles automatically
-compile and update Storybook you can run the following command in the
-`@carbon/styles` folder on your machine:
-
-```bash
-yarn gulp watch -s
-```
-
-This will run the `watch` command in `gulpfile.js`. As a result, whenever you
-make a change to the project styles it will automatically copy over into the
-`scss` folder which Storybook uses in `carbon-components-angular`.
-
-### Pointing NPM dependency of `@carbon/styles` right to the source code
-
-Though the above approach is the most straightforward, it involves the overhead
-of having to run the build process at `@carbon/styles`, in addition to one at
-the framework variant repo, upon every Sass code change.
-
-To avoid such overhead, you can point NPM dependency of `@carbon/styles` right
-to the source code, though there is a caveat that our future change to the
-directory structure, etc. may make such steps no longer work. Here are the
-steps:
-
-```sh
-> cd /path/to/carbon-components-angular/node_modules/@carbon/styles
-> mv scss scss.orig
-> ln -s /path/to/@carbon/styles/scss scss
-```
-
-Then edits of `.scss` files in `/path/to/@carbon/styles/scss` will be reflected
-to the development environment of your framework variant repository. You don't
-need to do anything in `@carbon/styles` side.
+For guidance, see [Red flags](./style.md#red-flags).
 
 ## Maintainers
 
