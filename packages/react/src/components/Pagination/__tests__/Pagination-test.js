@@ -307,6 +307,23 @@ describe('Pagination', () => {
       expect(screen.getByText('2 de 4')).toBeInTheDocument();
     });
 
+    it('should respect pageSelectLabelText prop', () => {
+      render(
+        <Pagination
+          totalItems={40}
+          pageSizes={[10, 20]}
+          pageSize={10}
+          page={2}
+          pagesUnknown={false}
+          pageSelectLabelText={(totalPages) => {
+            return `Página de ${totalPages} ${totalPages === 1 ? 'página' : 'páginas'}`;
+          }}
+        />
+      );
+
+      expect(screen.getByText('Página de 4 páginas')).toBeInTheDocument();
+    });
+
     it('should respect pageSize prop', () => {
       render(
         <Pagination

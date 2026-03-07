@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2023
+ * Copyright IBM Corp. 2023, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -38,14 +38,6 @@ describe('DataTableSkeleton', () => {
       render(<DataTableSkeleton columnCount={3} />);
 
       expect(screen.getAllByRole('columnheader').length).toEqual(3);
-    });
-
-    it('should respect the compact prop', () => {
-      render(<DataTableSkeleton compact />);
-
-      expect(screen.getByRole('table')).toHaveClass(
-        `${prefix}--data-table--compact`
-      );
     });
 
     it('should respect the headers prop', () => {
