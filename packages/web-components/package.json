@@ -92,6 +92,7 @@
     "@web/test-runner": "^0.20.0",
     "@web/test-runner-commands": "^0.9.0",
     "@web/test-runner-playwright": "^0.11.0",
+    "@web/test-runner-puppeteer": "^0.18.0",
     "@webcomponents/webcomponentsjs": "^2.8.0",
     "autoprefixer": "^10.4.0",
     "cssnano": "^7.1.0",
