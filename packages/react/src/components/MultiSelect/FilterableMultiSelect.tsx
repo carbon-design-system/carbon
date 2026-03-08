@@ -736,7 +736,7 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
         };
       case InputChange:
         if (onInputValueChange) {
-          onInputValueChange(changes.inputValue);
+          onInputValueChange(changes);
         }
         setInputValue(changes.inputValue ?? '');
         setIsOpen(true);
