@@ -20,6 +20,7 @@
 @use '@carbon/styles/scss/utilities/layout';
 @use '@carbon/styles/scss/utilities/convert';
 @use '@carbon/styles/scss/utilities/skeleton' as *;
+@use '@carbon/styles/scss/utilities/update_fields_on_layer' as *;
 
 $inset-transition: inset 110ms motion(standard, productive);
 
@@ -328,4 +329,140 @@ $inset-transition: inset 110ms motion(standard, productive);
   @include high-contrast-mode {
     background-color: SelectedItem;
   }
+}
+
+// In vertical layout, suppress the horizontal selection indicator (blue
+// border-block-end) by overriding it to match the unselected tab border.
+:host(#{$prefix}-tab[vertical]) .#{$prefix}--tabs__nav-link {
+  border-block-end: 1px solid $border-subtle;
+}
+
+:host(#{$prefix}-tab[vertical][selected]) .#{$prefix}--tabs__nav-link {
+  border-block-end: 1px solid $border-subtle;
+}
+
+:host(#{$prefix}-tab[vertical][disabled]) .#{$prefix}--tabs__nav-link {
+  border-block-end: 1px solid $border-subtle;
+}
+
+//-----------------------------
+// Vertical Tabs Wrapper
+//-----------------------------
+
+:host(#{$prefix}-tabs-vertical) {
+  @include emit-layout-tokens();
+  @include layout.use('density', $default: 'normal');
+
+  display: grid;
+  block-size: 100%;
+  // tabs slot occupies first 2 columns (lg: 4), panel-container fills the rest
+  grid-template-columns: repeat(16, 1fr);
+
+  // The tabs slot host — positions the cds-tabs nav rail
+  ::slotted(#{$prefix}-tabs) {
+    grid-column: span 2;
+
+    @include breakpoint(lg) {
+      grid-column: span 4;
+    }
+  }
+
+  // Shadow-DOM wrapper for the panel slot — styled directly (no ::slotted needed)
+  .#{$prefix}-panel-container {
+    @include update_fields_on_layer;
+
+    background: $layer;
+    grid-column: 3 / -1;
+    overflow-y: auto;
+
+    @include breakpoint(lg) {
+      grid-column: 5 / -1;
+    }
+  }
+}
+
+// Slotted tab panel divs — match React's cds--tab-content styles
+:host(#{$prefix}-tabs-vertical) ::slotted([role='tabpanel']) {
+  // stylelint-disable-next-line declaration-no-important
+  padding: layout.density('padding-inline') !important;
+  block-size: 100%;
+  inline-size: 100%;
+  outline: none;
+}
+
+:host(#{$prefix}-tabs-vertical)
+  .panel-container
+  ::slotted([role='tabpanel']:focus) {
+  @include focus-outline('outline');
+}
+
+// cds-tabs when slotted inside cds-tabs-vertical (slot="tabs")
+:host(#{$prefix}-tabs-vertical) ::slotted(#{$prefix}-tabs) {
+  background: $layer;
+  box-shadow: inset -1px 0 $border-subtle;
+  max-block-size: none;
+}
+
+// Internal styles for cds-tabs when inside cds-tabs-vertical
+// These are applied via a CSS custom property / attribute set by the wrapper
+:host(#{$prefix}-tabs[vertical]) {
+  .#{$prefix}--tabs-nav-content-container {
+    block-size: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+
+  .#{$prefix}--tabs-nav-content {
+    position: relative;
+    block-size: 100%;
+  }
+
+  .#{$prefix}--tabs-nav {
+    position: relative;
+  }
+
+  .#{$prefix}--tab--list {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .#{$prefix}--tab--overflow-nav-button {
+    display: none;
+  }
+
+  .#{$prefix}--tabs__nav-item-label {
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    line-height: var(--cds-body-compact-01-line-height);
+    text-overflow: ellipsis;
+    white-space: normal;
+  }
+}
+
+:host(#{$prefix}-tab[vertical]) {
+  flex: none;
+  background-color: $layer-01;
+  block-size: $spacing-10;
+  border-inline-end: 1px solid $border-subtle;
+  box-shadow: inset 3px 0 0 0 $border-subtle;
+  inline-size: 100%;
+}
+
+:host(#{$prefix}-tab[vertical]:hover),
+:host(#{$prefix}-tab[vertical][disabled]:hover) {
+  .#{$prefix}--tabs__nav-link {
+    border-block-end: 1px solid $border-subtle;
+  }
+}
+
+:host(#{$prefix}-tab[vertical][selected]) {
+  border-inline: none;
+  box-shadow: inset 3px 0 0 0 $border-interactive;
+}
+
+:host(#{$prefix}-tab[vertical]:not([selected]):not([disabled]):hover) {
+  background-color: $layer-hover;
+  box-shadow: inset 3px 0 0 0 $border-strong;
 }

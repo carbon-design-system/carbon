@@ -18,12 +18,21 @@ import ChevronRight16 from '@carbon/icons/es/chevron--right/16.js';
 import CDSContentSwitcher, {
   NAVIGATION_DIRECTION,
 } from '../content-switcher/content-switcher';
-import { TABS_KEYBOARD_ACTION, TABS_TYPE } from './defs';
+import {
+  TABS_KEYBOARD_ACTION,
+  TABS_TYPE,
+  VERTICAL_NAVIGATION_DIRECTION,
+} from './defs';
 import CDSTab from './tab';
 import styles from './tabs.scss?lit';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
-export { NAVIGATION_DIRECTION, TABS_KEYBOARD_ACTION, TABS_TYPE };
+export {
+  NAVIGATION_DIRECTION,
+  TABS_KEYBOARD_ACTION,
+  TABS_TYPE,
+  VERTICAL_NAVIGATION_DIRECTION,
+};
 
 /**
  * Tabs.
@@ -132,7 +141,11 @@ export default class CDSTabs extends HostListenerMixin(CDSContentSwitcher) {
   @HostListener('keydown')
   protected _handleKeydown(event: KeyboardEvent) {
     const { key } = event;
-    const action = (this.constructor as typeof CDSTabs).getAction(key);
+    const isVertical = this.closest(`${prefix}-tabs-vertical`) !== null;
+    const action = (this.constructor as typeof CDSTabs).getAction(
+      key,
+      isVertical
+    );
     const enabledTabs = this.querySelectorAll(`${prefix}-tab:not([disabled])`);
     switch (action) {
       case TABS_KEYBOARD_ACTION.HOME:
@@ -159,7 +172,10 @@ export default class CDSTabs extends HostListenerMixin(CDSContentSwitcher) {
         break;
       case TABS_KEYBOARD_ACTION.NAVIGATING:
         {
-          const direction = NAVIGATION_DIRECTION[key];
+          // Get direction based on orientation
+          const direction = isVertical
+            ? VERTICAL_NAVIGATION_DIRECTION[key]
+            : NAVIGATION_DIRECTION[key];
           if (direction) {
             this._navigate(direction);
           }
@@ -228,6 +244,21 @@ export default class CDSTabs extends HostListenerMixin(CDSContentSwitcher) {
     if (nextItem) {
       (nextItem as CDSTab).hideDivider = true;
     }
+
+    // Set vertical attribute on all tabs if this tabs component is vertical
+    this._updateTabsVerticalAttribute();
+  }
+
+  /**
+   * Updates the vertical attribute on all child tabs based on the vertical property.
+   */
+  private _updateTabsVerticalAttribute() {
+    if (this.vertical) {
+      const { selectorItem } = this.constructor as typeof CDSTabs;
+      forEach(this.querySelectorAll(selectorItem), (tab) => {
+        (tab as CDSTab).setAttribute('vertical', '');
+      });
+    }
   }
 
   protected _selectionDidChange(
@@ -294,6 +325,13 @@ export default class CDSTabs extends HostListenerMixin(CDSContentSwitcher) {
    */
   @property({ reflect: true })
   type = TABS_TYPE.REGULAR;
+
+  /**
+   * `true` if the tabs are in vertical orientation.
+   * This is automatically set by `cds-tabs-vertical`.
+   */
+  @property({ type: Boolean })
+  vertical = false;
 
   /**
    * `true` if left-hand scroll intersection sentinel intersects with the host element.
@@ -607,16 +645,21 @@ export default class CDSTabs extends HostListenerMixin(CDSContentSwitcher) {
 
   /**
    * @param key The key symbol.
-   * @returns A action for dropdown for the given key symbol.
+   * @param isVertical Whether the tabs are in vertical orientation.
+   * @returns A action for tabs for the given key symbol.
    */
-  static getAction(key: string) {
+  static getAction(key: string, isVertical = false) {
     if (key === 'Home') {
       return TABS_KEYBOARD_ACTION.HOME;
     }
     if (key === 'End') {
       return TABS_KEYBOARD_ACTION.END;
     }
-    if (key in NAVIGATION_DIRECTION) {
+    // Check for navigation keys based on orientation
+    const navigationKeys = isVertical
+      ? VERTICAL_NAVIGATION_DIRECTION
+      : NAVIGATION_DIRECTION;
+    if (key in navigationKeys) {
       return TABS_KEYBOARD_ACTION.NAVIGATING;
     }
     if (key === 'Enter' || key === ' ') {
