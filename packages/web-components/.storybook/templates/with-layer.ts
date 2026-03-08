@@ -12,15 +12,23 @@ import Layers from '@carbon/icons/es/layers/16.js';
 import { prefix } from '../../src/globals/settings';
 import '../../src/components/layer/index.js';
 import styles from './with-layer.scss?lit';
+import type { TemplateResult } from 'lit';
 
 /**
  * Storybook template layer component, strictly for presentation purposes
  *
  * @element sb-template-layers
- * @slot The elements contained within the component.
+ * @slot The elements contained within the component (legacy mode).
  */
 @customElement(`sb-template-layers`)
 class CDSLayer extends LitElement {
+  /**
+   * Render function that returns the content to display in each layer.
+   * When provided, this takes precedence over slotted content.
+   */
+  @property({ attribute: false })
+  renderContent?: () => TemplateResult;
+
   @property()
   content;
   private _observer: MutationObserver | null = null;
@@ -39,10 +47,40 @@ class CDSLayer extends LitElement {
       this.content = content[0];
     }
   }
+  private _getPathToElement(root: HTMLElement, target: HTMLElement): number[] {
+    const path: number[] = [];
+    let current = target;
+
+    while (current && current !== root) {
+      const parent = current.parentElement;
+      if (!parent) break;
+
+      const index = Array.from(parent.children).indexOf(current);
+      path.unshift(index);
+      current = parent;
+    }
+
+    return path;
+  }
+
+  private _getElementByPath(
+    root: HTMLElement | null,
+    path: number[]
+  ): HTMLElement | null {
+    let current: HTMLElement | Element | null = root;
+
+    for (const index of path) {
+      if (!current || !current.children[index]) {
+        return null;
+      }
+      current = current.children[index];
+    }
+
+    return current as HTMLElement;
+  }
 
   updated() {
-    if (this.content && !this._layer1) {
-      // Initial clone
+    if (this.content && !this._layer1 && !this.renderContent) {
       this._layer1 = this.content.cloneNode(true) as HTMLElement;
       this._layer2 = this.content.cloneNode(true) as HTMLElement;
       this._layer1.setAttribute('slot', 'layer-1');
@@ -50,19 +88,38 @@ class CDSLayer extends LitElement {
       this.appendChild(this._layer1);
       this.appendChild(this._layer2);
 
-      // Watch for attribute changes on original
       this._observer = new MutationObserver((mutations) => {
         mutations.forEach((mutation) => {
           if (mutation.type === 'attributes') {
+            const target = mutation.target as HTMLElement;
             const attrName = mutation.attributeName!;
-            const newValue = this.content.getAttribute(attrName);
+            const newValue = target.getAttribute(attrName);
+
+            // Skip attributes that are typically set by user interactions
+            // These should not be synced between layer instances
+            const skipAttributes = [
+              'open',
+              'value',
+              'aria-expanded',
+              'aria-activedescendant',
+              'aria-selected',
+            ];
+
+            if (skipAttributes.includes(attrName)) {
+              return;
+            }
+
+            const path = this._getPathToElement(this.content, target);
+
+            const clone1Target = this._getElementByPath(this._layer1, path);
+            const clone2Target = this._getElementByPath(this._layer2, path);
 
             if (newValue !== null) {
-              this._layer1?.setAttribute(attrName, newValue);
-              this._layer2?.setAttribute(attrName, newValue);
+              clone1Target?.setAttribute(attrName, newValue);
+              clone2Target?.setAttribute(attrName, newValue);
             } else {
-              this._layer1?.removeAttribute(attrName);
-              this._layer2?.removeAttribute(attrName);
+              clone1Target?.removeAttribute(attrName);
+              clone2Target?.removeAttribute(attrName);
             }
           }
         });
@@ -71,6 +128,7 @@ class CDSLayer extends LitElement {
       this._observer.observe(this.content, {
         attributes: true,
         attributeOldValue: true,
+        subtree: true,
       });
     }
   }
@@ -81,6 +139,47 @@ class CDSLayer extends LitElement {
   }
 
   render() {
+    // If renderContent is provided, use it to render three independent instances
+    if (this.renderContent) {
+      console.log('here???');
+
+      return html`
+        <cds-layer with-background>
+          <div class="${prefix}--with-layer">
+            <div class="${prefix}--with-layer__background">
+              <div class="${prefix}--with-layer__label">
+                ${iconLoader(Layers)} $background
+              </div>
+              <div class="${prefix}--with-layer__content">
+                ${this.renderContent()}
+                <cds-layer with-background>
+                  <div class="${prefix}--with-layer__layer">
+                    <div class="${prefix}--with-layer__label">
+                      ${iconLoader(Layers)} $layer-01
+                    </div>
+                    <div class="${prefix}--with-layer__content">
+                      ${this.renderContent()}
+                      <cds-layer with-background>
+                        <div class="${prefix}--with-layer__layer">
+                          <div class="${prefix}--with-layer__label">
+                            ${iconLoader(Layers)} $layer-02
+                          </div>
+                          <div class="${prefix}--with-layer__content">
+                            ${this.renderContent()}
+                          </div>
+                        </div>
+                      </cds-layer>
+                    </div>
+                  </div>
+                </cds-layer>
+              </div>
+            </div>
+          </div>
+        </cds-layer>
+      `;
+    }
+
+    // Legacy mode: use slots with cloning and mutation observer
     return html`
       <cds-layer with-background>
         <div class="${prefix}--with-layer">
