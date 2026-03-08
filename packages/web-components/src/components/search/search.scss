@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2019, 2024
+// Copyright IBM Corp. 2019, 2026
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -39,6 +39,13 @@ $css--plex: true !default;
   outline: none;
 }
 
+:host(#{$prefix}-search[expandable][size='xs']) {
+  .#{$prefix}--search-magnifier {
+    block-size: $spacing-06;
+    inline-size: $spacing-06;
+  }
+}
+
 :host(#{$prefix}-search[expandable][size='sm']) {
   .#{$prefix}--search-magnifier {
     block-size: $spacing-07;
@@ -75,6 +82,12 @@ $css--plex: true !default;
   }
 }
 
+:host(#{$prefix}-search[expandable][expanded][size='xs']) {
+  .#{$prefix}--search-input {
+    padding: 0 $spacing-06;
+  }
+}
+
 :host(#{$prefix}-search[expandable][expanded][size='sm']) {
   .#{$prefix}--search-input {
     padding: 0 $spacing-07;
@@ -99,8 +112,14 @@ $css--plex: true !default;
 }
 
 :host(#{$prefix}-search[disabled]) {
+  @extend .#{$prefix}--search--disabled;
+
   svg {
     fill: $icon-on-color-disabled;
+  }
+
+  .#{$prefix}--search-input {
+    border-block-end: 1px solid transparent;
   }
 
   .#{$prefix}--search-close {
@@ -125,6 +144,11 @@ $css--plex: true !default;
       color: transparent;
     }
   }
+}
+
+:host(#{$prefix}-search[size='xs']),
+:host(#{$prefix}-search-skeleton[size='xs']) {
+  @extend .#{$prefix}--search--xs;
 }
 
 :host(#{$prefix}-search[size='sm']),

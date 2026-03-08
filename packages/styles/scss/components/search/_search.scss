@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2016, 2023
+// Copyright IBM Corp. 2016, 2026
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -95,6 +95,19 @@
 
   .#{$prefix}--search--light .#{$prefix}--search-close::before {
     background: $field-02;
+  }
+
+  // Extra Small styles
+  .#{$prefix}--search--xs .#{$prefix}--search-input,
+  .#{$prefix}--search--xs.#{$prefix}--search--expandable.#{$prefix}--search--expanded
+    .#{$prefix}--search-input {
+    // 4px padding on either side of icon + 16px icon (24px)
+    padding: 0 $spacing-06;
+    block-size: convert.to-rem(24px);
+  }
+
+  .#{$prefix}--search--xs .#{$prefix}--search-magnifier-icon {
+    inset-inline-start: convert.to-rem(4px);
   }
 
   // Small styles
@@ -261,6 +274,21 @@
     @include focus-outline('outline');
   }
 
+  // Extra Small
+  .#{$prefix}--search--xs {
+    .#{$prefix}--search-close,
+    ~ .#{$prefix}--search-button,
+    &.#{$prefix}--search--expandable,
+    &.#{$prefix}--search--expandable .#{$prefix}--search-magnifier {
+      block-size: convert.to-rem(24px);
+      inline-size: convert.to-rem(24px);
+    }
+
+    &.#{$prefix}--search--expandable .#{$prefix}--search-input::placeholder {
+      padding: 0 convert.to-rem(24px);
+    }
+  }
+
   // Small
   .#{$prefix}--search--sm {
     .#{$prefix}--search-close,
@@ -313,7 +341,8 @@
 
   .#{$prefix}--search--lg.#{$prefix}--skeleton .#{$prefix}--search-input,
   .#{$prefix}--search--md.#{$prefix}--skeleton .#{$prefix}--search-input,
-  .#{$prefix}--search--sm.#{$prefix}--skeleton .#{$prefix}--search-input {
+  .#{$prefix}--search--sm.#{$prefix}--skeleton .#{$prefix}--search-input,
+  .#{$prefix}--search--xs.#{$prefix}--skeleton .#{$prefix}--search-input {
     @include skeleton;
 
     inline-size: 100%;

@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2025
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -16,10 +16,61 @@ import mdx from './Search.mdx';
 export default {
   title: 'Components/Search',
   component: Search,
+  args: {
+    closeButtonLabelText: 'Clear search input',
+    disabled: false,
+    defaultWidth: 800,
+    labelText: 'Search',
+    placeholder: 'Placeholder text',
+    size: 'md',
+    type: 'search',
+  },
   argTypes: {
     light: {
       table: {
         disable: true,
+      },
+    },
+    defaultWidth: {
+      control: { type: 'range', min: 300, max: 800, step: 50 },
+    },
+    closeButtonLabelText: {
+      control: {
+        type: 'text',
+      },
+    },
+    disabled: {
+      control: {
+        type: 'boolean',
+      },
+    },
+    defaultValue: {
+      control: {
+        type: 'text',
+      },
+    },
+    labelText: {
+      control: {
+        type: 'text',
+      },
+    },
+    placeholder: {
+      control: {
+        type: 'text',
+      },
+    },
+    renderIcon: {
+      control: false,
+    },
+    size: {
+      options: ['xs', 'sm', 'md', 'lg'],
+      control: {
+        type: 'select',
+      },
+    },
+    value: {
+      control: {
+        type: 'text',
       },
     },
   },
@@ -36,125 +87,81 @@ export default {
   },
 };
 
-export const Disabled = () => {
-  return (
-    <Search
-      disabled
-      size="lg"
-      placeholder="Find your items"
-      labelText="Search"
-      closeButtonLabelText="Clear search input"
-      id="search-1"
-      onChange={() => {}}
-      onKeyDown={() => {}}
-    />
-  );
+const defaultParameters = {
+  controls: {
+    exclude: ['isExpanded', 'renderIcon', 'role'],
+  },
 };
 
-export const Expandable = () => {
+const expandableParameters = {
+  controls: {
+    exclude: ['renderIcon', 'role'],
+  },
+};
+
+export const Disabled = (args) => {
+  const { defaultWidth, disabled, ...searchArgs } = args;
   return (
-    <div style={{ marginTop: '50px' }}>
-      <ExpandableSearch
-        size="lg"
-        labelText="Search"
-        closeButtonLabelText="Clear search input"
-        id="search-expandable-1"
-        onChange={() => {}}
-        onKeyDown={() => {}}
-      />
+    <div style={{ width: defaultWidth }}>
+      <Search id="search-disabled-1" {...searchArgs} disabled />
     </div>
   );
 };
+Disabled.parameters = {
+  controls: {
+    exclude: ['disabled', 'isExpanded', 'renderIcon', 'role'],
+  },
+};
 
-export const _WithLayer = () => {
+export const Expandable = (args) => {
+  const { defaultWidth, ...searchArgs } = args;
+
+  return (
+    <div style={{ marginTop: '25px', width: defaultWidth }}>
+      <ExpandableSearch id="search-expandable-1" {...searchArgs} />
+    </div>
+  );
+};
+Expandable.parameters = { ...expandableParameters };
+
+export const _WithLayer = (args) => {
+  const { defaultWidth, ...searchArgs } = args;
+
   return (
     <WithLayer>
       {(layer) => (
-        <Search
-          size="lg"
-          placeholder="Find your items"
-          labelText="Search"
-          closeButtonLabelText="Clear search input"
-          id={`search-${layer}`}
-          onChange={() => {}}
-          onKeyDown={() => {}}
-        />
+        <div style={{ width: defaultWidth }}>
+          <Search id={`search-${layer}`} {...searchArgs} />
+        </div>
       )}
     </WithLayer>
   );
 };
+_WithLayer.parameters = { ...defaultParameters };
 
-export const ExpandableWithLayer = () => {
+export const ExpandableWithLayer = (args) => {
+  const { defaultWidth, ...searchArgs } = args;
+
   return (
     <WithLayer>
       {(layer) => (
-        <ExpandableSearch
-          size="lg"
-          placeholder="Search"
-          labelText="First Layer"
-          closeButtonLabelText="Clear search input"
-          id={`search-expandable-${layer}`}
-          onChange={() => {}}
-          onKeyDown={() => {}}
-        />
+        <div style={{ marginTop: '25px', width: defaultWidth }}>
+          <ExpandableSearch id={`search-expandable-${layer}`} {...searchArgs} />
+        </div>
       )}
     </WithLayer>
   );
 };
+ExpandableWithLayer.parameters = { ...expandableParameters };
 
 export const Default = (args) => {
+  const { defaultWidth, ...searchArgs } = args;
+
   return (
-    <div style={{ width: args.defaultWidth }}>
-      <Search id="search-default-1" {...args} />
+    <div style={{ width: defaultWidth }}>
+      <Search id="search-default-1" {...searchArgs} />
     </div>
   );
 };
 
-Default.args = {
-  closeButtonLabelText: 'Clear search input',
-  disabled: false,
-  labelText: 'Label text',
-  placeholder: 'Placeholder text',
-  size: 'md',
-  type: 'search',
-};
-
-Default.argTypes = {
-  defaultWidth: {
-    control: { type: 'range', min: 300, max: 800, step: 50 },
-  },
-  closeButtonLabelText: {
-    control: {
-      type: 'text',
-    },
-  },
-  disabled: {
-    control: {
-      type: 'boolean',
-    },
-  },
-  defaultValue: {
-    control: {
-      type: 'text',
-    },
-  },
-  labelText: {
-    control: {
-      type: 'text',
-    },
-  },
-  placeholder: {
-    control: {
-      type: 'text',
-    },
-  },
-  renderIcon: {
-    control: false,
-  },
-  size: {
-    options: ['sm', 'md', 'lg'],
-    control: {
-      type: 'select',
-    },
-  },
-};
+Default.parameters = { ...defaultParameters };
