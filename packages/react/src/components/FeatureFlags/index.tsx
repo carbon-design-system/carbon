@@ -33,18 +33,11 @@ export interface FeatureFlagsProps {
   enablePresence?: boolean;
 }
 
-// TODO: Migrate `packages/feature-flags` to TypeScript and delete this
-// interface.
-interface FeatureFlagScope {
-  enabled: (name: string) => boolean;
-  mergeWithScope: (scope: FeatureFlagScope) => void;
-}
-
 /**
  * Our FeatureFlagContext is used alongside the FeatureFlags component to enable
  * or disable feature flags in a given React tree
  */
-const FeatureFlagContext = createContext<FeatureFlagScope>(GlobalFeatureFlags);
+const FeatureFlagContext = createContext(GlobalFeatureFlags);
 
 /**
  * Supports an object of feature flag values with the `flags` prop, merging them
@@ -83,7 +76,7 @@ export const FeatureFlags = ({
       ...flags,
     };
 
-    const scope = createScope(combinedFlags) as FeatureFlagScope;
+    const scope = createScope(combinedFlags);
     scope.mergeWithScope(parentScope);
     return scope;
   }, [
