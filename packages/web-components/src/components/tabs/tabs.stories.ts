@@ -13,6 +13,7 @@ import '../button';
 import '../checkbox';
 import './index';
 import '../text-input';
+import './stories/tabs-wrapper';
 
 const args = {
   contained: false,
@@ -173,6 +174,59 @@ export const Contained = {
   `,
 };
 
+export const Dismissable = {
+  args: {
+    ...args,
+    dismissable: true,
+  },
+  argTypes: {
+    ...argTypes,
+    dismissable: {
+      control: 'boolean',
+      description: 'Whether the rendered Tab children should be dismissable.',
+    },
+  },
+  render: ({ disabled, contained, selectionMode, dismissable }) => {
+    return html`
+      <style>
+        ${styles}
+      </style>
+      <tabs-story-wrapper
+        ?dismissable="${dismissable}"
+        ?disabled="${disabled}"
+        ?contained="${contained}"
+        selection-mode="${selectionMode}">
+      </tabs-story-wrapper>
+    `;
+  },
+};
+export const DismissableContained = {
+  args: {
+    ...args,
+    contained: true,
+    dismissable: true,
+  },
+  argTypes: {
+    ...argTypes,
+    dismissable: {
+      control: 'boolean',
+      description: 'Whether the rendered Tab children should be dismissable.',
+    },
+  },
+  render: ({ disabled, contained, selectionMode, dismissable }) => {
+    return html`
+      <style>
+        ${styles}
+      </style>
+      <tabs-story-wrapper
+        ?dismissable="${dismissable}"
+        ?disabled="${disabled}"
+        ?contained="${contained}"
+        selection-mode="${selectionMode}">
+      </tabs-story-wrapper>
+    `;
+  },
+};
 export const Manual = {
   render: () => html`
     <style>

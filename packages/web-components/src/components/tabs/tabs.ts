@@ -181,6 +181,38 @@ export default class CDSTabs extends HostListenerMixin(CDSContentSwitcher) {
     }
   }
 
+  @HostListener('cds-tab-closed')
+  protected _handleTabClosed(event: CustomEvent) {
+    const { index } = event.detail;
+    const { selectorItemEnabled } = this.constructor as typeof CDSTabs;
+
+    // Defer focus logic until after the tab is removed from DOM
+    requestAnimationFrame(() => {
+      // Get all enabled (selectable) tabs AFTER removal
+      const enabledTabs = this.querySelectorAll<CDSTab>(selectorItemEnabled);
+      if (enabledTabs.length === 0) {
+        // Clear selection when no enabled tabs remain
+        // Setting value to empty string triggers parent's _updateSelectedItemFromValue
+        // which automatically sets selected=false on all tabs
+        this.value = '';
+        return;
+      }
+      const nextTab =
+        index < enabledTabs.length
+          ? enabledTabs[index]
+          : enabledTabs[index - 1];
+      if (nextTab) {
+        nextTab.highlighted = true;
+        (
+          nextTab.shadowRoot?.querySelector(
+            '.cds--tabs__nav-link--dismissable'
+          ) as HTMLLinkElement
+        )?.focus();
+        nextTab.scrollIntoView({ block: 'nearest', inline: 'nearest' });
+      }
+    });
+  }
+
   /**
    * Handles click on overflow scroll buttons.
    *
@@ -228,6 +260,7 @@ export default class CDSTabs extends HostListenerMixin(CDSContentSwitcher) {
     if (nextItem) {
       (nextItem as CDSTab).hideDivider = true;
     }
+    this._updateTabsState();
   }
 
   protected _selectionDidChange(
@@ -295,6 +328,11 @@ export default class CDSTabs extends HostListenerMixin(CDSContentSwitcher) {
   @property({ reflect: true })
   type = TABS_TYPE.REGULAR;
 
+  /**
+   * Whether the rendered Tab children should be dismissable.
+   */
+  @property({ type: Boolean, reflect: true })
+  dismissable;
   /**
    * `true` if left-hand scroll intersection sentinel intersects with the host element.
    * In this condition, the left-hand paginator button should be hidden.
@@ -458,6 +496,10 @@ export default class CDSTabs extends HostListenerMixin(CDSContentSwitcher) {
         this._contentNode.style.insetInlineStart = `-${this._currentScrollPosition}px`;
       }
     }
+
+    if (changedProperties.has('dismissable')) {
+      this._updateTabsState();
+    }
   }
 
   /**
@@ -546,6 +588,14 @@ export default class CDSTabs extends HostListenerMixin(CDSContentSwitcher) {
         ${assistiveStatusText}
       </div>
     `;
+  }
+
+  protected _updateTabsState() {
+    const tabs = this.querySelectorAll<CDSTab>('cds-tab');
+    tabs.forEach((tab: CDSTab, index: number) => {
+      tab._dismissable = this.dismissable;
+      tab._index = index;
+    });
   }
 
   /**

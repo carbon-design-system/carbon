@@ -6,17 +6,24 @@
  */
 
 import { html } from 'lit';
-import { property } from 'lit/decorators.js';
+import { property, state } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
 import CDSContentSwitcherItem from '../content-switcher/content-switcher-item';
 import { TABS_TYPE } from './tabs';
 import styles from './tabs.scss?lit';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
+import '../button/button';
+import Close16 from '@carbon/icons/es/close/16.js';
+import iconLoader from '../../globals/internal/icon-loader';
+import { classMap } from 'lit/directives/class-map.js';
 
 /**
  * Basic tab.
- *
  * @element cds-tab
+ * @fires cds-tab-beingclosed
+ *   The custom event fired before a tab is closed upon a user gesture.
+ *   Cancellation of this event stops changing the user-initiated action.
+ * @fires cds-tab-closed - The custom event fired after a a tab is closed upon a user gesture.
  */
 @customElement(`${prefix}-tab`)
 export default class CDSTab extends CDSContentSwitcherItem {
@@ -42,6 +49,18 @@ export default class CDSTab extends CDSContentSwitcherItem {
   tabTitle;
 
   /**
+   * Whether this tab should be dismissable.
+   */
+  @state()
+  _dismissable = false;
+
+  /**
+   * The index of the tab component
+   */
+  @state()
+  _index = -1;
+
+  /**
    * Handles `slotchange` event.
    */
   protected _handleSlotChange({ target }: Event) {
@@ -58,16 +77,37 @@ export default class CDSTab extends CDSContentSwitcherItem {
   }
 
   render() {
+    const navlinkClasses = classMap({
+      [`${prefix}--tabs__nav-link`]: true,
+      [`${prefix}--tabs__nav-link--dismissable`]: this._dismissable,
+    });
+    const closeButtonClasses = classMap({
+      [`${prefix}--tabs__nav-item--close`]: this._dismissable,
+      [`${prefix}--tabs__nav-item--close--hidden`]: !this._dismissable,
+    });
     const {
       disabled,
       selected,
       tabTitle,
       _handleSlotChange: handleSlotChange,
+      _handleClick: handleClick,
     } = this;
+
+    const iconButton = html`
+      <cds-button
+        class="${closeButtonClasses}"
+        kind="ghost"
+        size="xs"
+        @click="${handleClick}"
+        ?disabled="${disabled}">
+        ${iconLoader(Close16, { 'aria-label': 'close', slot: 'icon' })}
+      </cds-button>
+    `;
+
     // No `href`/`tabindex` to not to make this `<a>` click-focusable
     return html`
       <a
-        class="${prefix}--tabs__nav-link"
+        class="${navlinkClasses}"
         role="tab"
         aria-label="${tabTitle}"
         tabindex="${selected ? 0 : -1}"
@@ -75,7 +115,47 @@ export default class CDSTab extends CDSContentSwitcherItem {
         aria-selected="${selected}">
         <slot @slotchange="${handleSlotChange}"></slot>
       </a>
+      ${iconButton}
     `;
+  }
+
+  _handleClick(event: Event) {
+    event.stopPropagation();
+    const init = {
+      bubbles: true,
+      cancelable: true,
+      composed: true,
+      detail: {
+        index: this._index,
+      },
+    };
+    if (
+      this.dispatchEvent(
+        new CustomEvent(
+          (this.constructor as typeof CDSTab).eventBeforeClose,
+          init
+        )
+      )
+    ) {
+      this.dispatchEvent(
+        new CustomEvent((this.constructor as typeof CDSTab).eventClose, init)
+      );
+    }
+  }
+
+  /**
+   * The name of the custom event fired before a tab is closed upon a user gesture.
+   * Cancellation of this event stops changing the user-initiated action.
+   */
+  static get eventBeforeClose() {
+    return `${prefix}-tab-beingclosed`;
+  }
+
+  /**
+   * The name of the custom event fired after a a tab is closed upon a user gesture.
+   */
+  static get eventClose() {
+    return `${prefix}-tab-closed`;
   }
 
   static styles = styles;
