@@ -98,8 +98,7 @@ export default class CDSTabs extends HostListenerMixin(CDSContentSwitcher) {
     this._handleUserInitiatedSelectItem(nextItem as CDSTab, 'keyboard');
     if (!immediate) {
       forEach(this.querySelectorAll(selectorItem), (item) => {
-        (item as CDSTab)[immediate ? 'selected' : 'highlighted'] =
-          nextItem === item;
+        (item as CDSTab)['highlighted'] = nextItem === item;
       });
     }
 
@@ -184,30 +183,39 @@ export default class CDSTabs extends HostListenerMixin(CDSContentSwitcher) {
   @HostListener('cds-tab-closed')
   protected _handleTabClosed(event: CustomEvent) {
     const { index } = event.detail;
-    const { selectorItemEnabled } = this.constructor as typeof CDSTabs;
+    const { selectorItemEnabled, selectorItem } = this
+      .constructor as typeof CDSTabs;
+    const activeItem = this.querySelectorAll<CDSTab>(selectorItem)[index];
+    const indexEnabled = Array.from(
+      this.querySelectorAll<CDSTab>(selectorItemEnabled)
+    ).indexOf(activeItem);
+    const activeTabClosed = activeItem.selected;
 
     // Defer focus logic until after the tab is removed from DOM
     requestAnimationFrame(() => {
       // Get all enabled (selectable) tabs AFTER removal
       const enabledTabs = this.querySelectorAll<CDSTab>(selectorItemEnabled);
       if (enabledTabs.length === 0) {
-        // Clear selection when no enabled tabs remain
-        // Setting value to empty string triggers parent's _updateSelectedItemFromValue
-        // which automatically sets selected=false on all tabs
         this.value = '';
         return;
       }
       const nextTab =
-        index < enabledTabs.length
-          ? enabledTabs[index]
-          : enabledTabs[index - 1];
+        indexEnabled < enabledTabs.length
+          ? enabledTabs[indexEnabled]
+          : enabledTabs[indexEnabled - 1];
       if (nextTab) {
-        nextTab.highlighted = true;
-        (
-          nextTab.shadowRoot?.querySelector(
-            '.cds--tabs__nav-link--dismissable'
-          ) as HTMLLinkElement
-        )?.focus();
+        if (activeTabClosed) {
+          nextTab.selected = true;
+          this.value = nextTab.value;
+        } else {
+          nextTab.highlighted = true;
+        }
+
+        nextTab.shadowRoot
+          ?.querySelector<HTMLElement>(
+            `.${prefix}--tabs__nav-link--dismissable`
+          )
+          ?.focus();
         nextTab.scrollIntoView({ block: 'nearest', inline: 'nearest' });
       }
     });
@@ -260,6 +268,7 @@ export default class CDSTabs extends HostListenerMixin(CDSContentSwitcher) {
     if (nextItem) {
       (nextItem as CDSTab).hideDivider = true;
     }
+    this._tabInitialLoad();
     this._updateTabsState();
   }
 
@@ -434,21 +443,7 @@ export default class CDSTabs extends HostListenerMixin(CDSContentSwitcher) {
   firstUpdated() {
     // Call super to run content-switcher init logic (initial selection)
     super.firstUpdated();
-    const { selectorTablist, selectorItemEnabled } = this
-      .constructor as typeof CDSTabs;
-    const { selectionMode, selectedIndex } = this;
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
-    const tablist = this.shadowRoot!.querySelector(selectorTablist)!;
-    this.tablist = tablist;
-    if (selectionMode === 'manual') {
-      const firstItem =
-        this.querySelectorAll<CDSTab>(selectorItemEnabled)[selectedIndex];
-      if (firstItem) {
-        firstItem.highlighted = true;
-        firstItem.selected = true;
-        this.value = firstItem.value;
-      }
-    }
+    this._tabInitialLoad();
     this._cleanAndCreateIntersectionObserverContainer({ create: true });
   }
 
@@ -592,12 +587,28 @@ export default class CDSTabs extends HostListenerMixin(CDSContentSwitcher) {
 
   protected _updateTabsState() {
     const tabs = this.querySelectorAll<CDSTab>('cds-tab');
-    tabs.forEach((tab: CDSTab, index: number) => {
+    tabs.forEach((tab, index) => {
       tab._dismissable = this.dismissable;
       tab._index = index;
     });
   }
 
+  protected _tabInitialLoad() {
+    const { selectorTablist, selectorItemEnabled } = CDSTabs;
+    const { selectionMode, selectedIndex } = this;
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
+    const tablist = this.shadowRoot!.querySelector(selectorTablist)!;
+    this.tablist = tablist;
+    const firstItem =
+      this.querySelectorAll<CDSTab>(selectorItemEnabled)[selectedIndex];
+    if (firstItem) {
+      if (selectionMode === 'manual') {
+        firstItem.highlighted = true;
+      }
+      firstItem.selected = true;
+      this.value = firstItem.value;
+    }
+  }
   /**
    * Symbols of keys that triggers opening/closing menu and selecting/deselecting menu item.
    */
