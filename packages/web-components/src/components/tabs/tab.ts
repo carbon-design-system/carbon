@@ -77,7 +77,7 @@ export default class CDSTab extends CDSContentSwitcherItem {
   }
 
   render() {
-    const navlinkClasses = classMap({
+    const navLinkClasses = classMap({
       [`${prefix}--tabs__nav-link`]: true,
       [`${prefix}--tabs__nav-link--dismissable`]: this._dismissable,
     });
@@ -107,7 +107,7 @@ export default class CDSTab extends CDSContentSwitcherItem {
     // No `href`/`tabindex` to not to make this `<a>` click-focusable
     return html`
       <a
-        class="${navlinkClasses}"
+        class="${navLinkClasses}"
         role="tab"
         aria-label="${tabTitle}"
         tabindex="${selected ? 0 : -1}"
