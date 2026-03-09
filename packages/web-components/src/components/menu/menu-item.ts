@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2019, 2025
+ * Copyright IBM Corp. 2019, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -19,6 +19,7 @@ import HostListener from '../../globals/decorators/host-listener';
 import HostListenerMixin from '../../globals/mixins/host-listener';
 import { MENU_ITEM_KIND, MENU_SIZE } from './defs';
 import { iconLoader } from '../../globals/internal/icon-loader';
+import CDSMenu from './menu';
 
 export { MENU_ITEM_KIND, MENU_SIZE };
 export const MENU_CLOSE_ROOT_EVENT = `${prefix}-menu-close-root-request`;
@@ -35,6 +36,17 @@ class CDSmenuItem extends HostListenerMixin(HostListenerMixin(LitElement)) {
 
   readonly hoverIntentDelay = 150; // in ms
   hoverIntentTimeout;
+
+  /**
+   * The parent cds-menu element
+   */
+  private _parentMenu: CDSMenu | null = null;
+
+  /**
+   * MutationObserver that observes the parent cds-menu element
+   */
+  private _parentMenuObserver?: MutationObserver;
+
   /**
    * Label for the menu item.
    */
@@ -50,6 +62,12 @@ class CDSmenuItem extends HostListenerMixin(HostListenerMixin(LitElement)) {
    */
   @property({ type: Boolean })
   disabled;
+
+  /**
+   * Specify the message read by screen readers for the danger menu item variant
+   */
+  @property({ type: String, attribute: 'danger-description' })
+  dangerDescription = 'danger';
 
   /**
    * Whether the menu submen for an item is open or not.
@@ -104,6 +122,9 @@ class CDSmenuItem extends HostListenerMixin(HostListenerMixin(LitElement)) {
     if (this.disabled && !this.hasSubmenu) {
       this.setAttribute('aria-disabled', this.disabled);
       this.setAttribute('tabindex', '-1');
+    } else if (this._parentMenu && !(this._parentMenu as CDSMenu).open) {
+      this.removeAttribute('aria-disabled');
+      this.setAttribute('tabindex', '-1');
     } else {
       this.removeAttribute('aria-disabled');
       this.setAttribute('tabindex', '0');
@@ -127,6 +148,7 @@ class CDSmenuItem extends HostListenerMixin(HostListenerMixin(LitElement)) {
     this.dispatchIconDetect();
     this.isRtl = document.dir === 'rtl';
     this._registerSubMenuItems();
+    this._parentMenu = this.closest(`${prefix}-menu`);
 
     this._updateAttributes();
 
@@ -134,6 +156,21 @@ class CDSmenuItem extends HostListenerMixin(HostListenerMixin(LitElement)) {
       this.focus();
       this._closeSubmenu();
     });
+
+    if (this._parentMenu) {
+      this._parentMenuObserver = new MutationObserver(() => {
+        this._updateAttributes();
+      });
+
+      this._parentMenuObserver.observe(this._parentMenu, {
+        attributes: true,
+        attributeFilter: ['open'],
+      });
+    }
+  }
+
+  disconnectedCallback() {
+    this._parentMenuObserver?.disconnect();
   }
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20452
@@ -172,7 +209,17 @@ class CDSmenuItem extends HostListenerMixin(HostListenerMixin(LitElement)) {
   }
 
   render() {
-    const { label, shortcut, submenuOpen, boundaries, isRtl } = this;
+    const {
+      label,
+      shortcut,
+      submenuOpen,
+      boundaries,
+      isRtl,
+      kind,
+      dangerDescription,
+    } = this;
+
+    const isDanger = kind === MENU_ITEM_KIND.DANGER && !this.hasSubmenu;
 
     const menuClassName = this.context?.hasSelectableItems
       ? `${prefix}--menu--with-selectable-items`
@@ -187,6 +234,11 @@ class CDSmenuItem extends HostListenerMixin(HostListenerMixin(LitElement)) {
         <slot name="render-icon"></slot>
       </div>
       <div class="${prefix}--menu-item__label">${label}</div>
+      ${isDanger
+        ? html`<span id="danger-description" class="${prefix}--visually-hidden"
+            >${dangerDescription}</span
+          >`
+        : html``}
       ${shortcut && !this.hasSubmenu
         ? html` <div class="${prefix}--menu-item__shortcut">${shortcut}</div> `
         : html``}

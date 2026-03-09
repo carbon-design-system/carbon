@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2020, 2025
+ * Copyright IBM Corp. 2020, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -20,6 +20,7 @@ import { SELECTION_FEEDBACK_OPTION } from './defs';
 import CDSMultiSelectItem from './multi-select-item';
 import styles from './multi-select.scss?lit';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
+import HostListener from '../../globals/decorators/host-listener';
 
 export {
   DROPDOWN_SIZE,
@@ -98,15 +99,23 @@ class CDSMultiSelect extends CDSDropdown {
     menuOpen: boolean;
     isInputTarget: boolean;
   }) {
-    if (!menuOpen) {
-      return true;
-    }
-
     if (!isInputTarget) {
       return false;
     }
 
-    return Boolean(this._filterInputNode?.value);
+    if (menuOpen) {
+      return false;
+    }
+
+    if (!menuOpen) {
+      if (this._selectedItemsCount > 0) {
+        this._handleUserInitiatedSelectItem();
+      }
+
+      return Boolean(this._filterInputNode?.value);
+    }
+
+    return false;
   }
 
   /**
@@ -227,9 +236,43 @@ class CDSMultiSelect extends CDSDropdown {
     ) {
       super._handleClickInner(event);
       if (this.filterable) {
+        if (!this.open && this._filterInputNode) {
+          this._clearInput();
+        }
         this._filterInputNode.focus();
       }
     }
+  }
+
+  /**
+   * Clears selections on Escape click
+   */
+  protected _handleKeydownInner(event: KeyboardEvent) {
+    const { key } = event;
+    if (
+      key === 'Escape' &&
+      !this.filterable &&
+      !this.open &&
+      this._selectedItemsCount > 0
+    ) {
+      this._handleUserInitiatedSelectItem();
+      return;
+    }
+    super._handleKeydownInner(event);
+  }
+
+  @HostListener('focusout')
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20452
+  // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
+  protected _handleFocusOut(event: FocusEvent) {
+    if (
+      this.filterable &&
+      this._filterInputNode &&
+      !this.contains(event.relatedTarget as Node)
+    ) {
+      this._clearInput();
+    }
+    super._handleFocusOut(event);
   }
 
   /**
@@ -437,8 +480,7 @@ class CDSMultiSelect extends CDSDropdown {
         `;
   }
 
-  // eslint-disable-next-line   @typescript-eslint/no-invalid-void-type -- https://github.com/carbon-design-system/carbon/issues/20452
-  protected _renderFollowingLabel(): TemplateResult | void {
+  protected _renderFollowingLabel(): TemplateResult | undefined {
     const { clearSelectionLabel, _filterInputNode: filterInputNode } = this;
     return filterInputNode &&
       filterInputNode.value.length > 0 &&
@@ -448,7 +490,7 @@ class CDSMultiSelect extends CDSDropdown {
             id="clear-button"
             role="button"
             class="${prefix}--list-box__selection"
-            tabindex="0"
+            tabindex="-1"
             title="${clearSelectionLabel}">
             ${iconLoader(Close16, { 'aria-label': clearSelectionLabel })}
           </div>
@@ -466,7 +508,7 @@ class CDSMultiSelect extends CDSDropdown {
     const inputValue = this._filterInputNode.value.toLocaleLowerCase();
     this.toggleAttribute('has-value', inputValue.length > 0);
 
-    if (!this.open) {
+    if (!this.open && inputValue.length > 0) {
       this.open = true;
     }
 
@@ -515,7 +557,7 @@ class CDSMultiSelect extends CDSDropdown {
 
     if (visibleItems.length > 0) {
       visibleItems.forEach((i) => i.removeAttribute('highlighted'));
-      this.setAttribute('item-clicked', '');
+      this.toggleAttribute('item-clicked', inputValue.length > 0);
       const first = visibleItems[0] as HTMLElement;
       first.setAttribute('highlighted', '');
       first.focus();
@@ -545,7 +587,6 @@ class CDSMultiSelect extends CDSDropdown {
     const constructor = this.constructor as typeof CDSMultiSelect;
     const items = this.querySelectorAll(constructor.selectorItemFiltered);
     this._filterInputNode.value = '';
-    this.open = true;
     this._filterInputNode.focus();
     forEach(items, (item) => {
       (item as CDSMultiSelectItem).removeAttribute('filtered');
@@ -611,6 +652,16 @@ class CDSMultiSelect extends CDSDropdown {
     } = this;
     const inline = type === DROPDOWN_TYPE.INLINE;
 
+    const isInteractive = !readOnly && !disabled;
+
+    const normalizedProps: {
+      invalid: boolean;
+      warn: boolean;
+    } = {
+      invalid: isInteractive && invalid,
+      warn: isInteractive && !invalid && warn,
+    };
+
     return classMap({
       [`${prefix}--multi-select`]: true,
       [`${prefix}--list-box`]: true,
@@ -618,8 +669,8 @@ class CDSMultiSelect extends CDSDropdown {
       [`${prefix}--list-box--inline`]: inline,
       [`${prefix}--list-box--expanded`]: open,
       [`${prefix}--list-box--${size}`]: size,
-      [`${prefix}--multi-select--invalid`]: invalid,
-      [`${prefix}--multi-select--warn`]: warn,
+      [`${prefix}--multi-select--invalid`]: normalizedProps.invalid,
+      [`${prefix}--multi-select--warn`]: normalizedProps.warn,
       [`${prefix}--multi-select--inline`]: inline,
       [`${prefix}--multi-select--readonly`]: readOnly,
       [`${prefix}--multi-select--selected`]: selectedItemsCount > 0,
@@ -698,11 +749,11 @@ class CDSMultiSelect extends CDSDropdown {
           locale,
         });
 
-        // eslint-disable-next-line  @typescript-eslint/no-unused-expressions -- https://github.com/carbon-design-system/carbon/issues/20452
-        aiLabel ? sortedMenuItems.unshift(aiLabel as Node) : '';
-        // @todo remove typecast once we've updated to Typescript.
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
-        (this as any).replaceChildren(...sortedMenuItems);
+        if (aiLabel) {
+          sortedMenuItems.unshift(aiLabel);
+        }
+
+        this.replaceChildren(...sortedMenuItems);
       }
     }
     if (changedProperties.has('open')) {
@@ -715,9 +766,9 @@ class CDSMultiSelect extends CDSDropdown {
           locale,
         });
 
-        // eslint-disable-next-line  @typescript-eslint/no-unused-expressions -- https://github.com/carbon-design-system/carbon/issues/20452
-        aiLabel ? sortedMenuItems.unshift(aiLabel as Node) : '';
-        // @todo remove typecast once we've updated to Typescript.
+        if (aiLabel) {
+          sortedMenuItems.unshift(aiLabel);
+        }
         sortedMenuItems.forEach((item) => {
           this.appendChild(item);
         });
@@ -748,10 +799,11 @@ class CDSMultiSelect extends CDSDropdown {
         itemToFocus.focus();
         itemToFocus.setAttribute('highlighted', '');
       } else {
-        // eslint-disable-next-line  @typescript-eslint/no-unused-expressions -- https://github.com/carbon-design-system/carbon/issues/20452
-        this.filterable
-          ? this._filterInputNode.focus()
-          : this._triggerNode.focus();
+        if (this.filterable) {
+          this._filterInputNode.focus();
+        } else {
+          this._triggerNode.focus();
+        }
       }
     }
     // reorder items so that select all is always at the top of the list
@@ -826,6 +878,21 @@ class CDSMultiSelect extends CDSDropdown {
 
     selectAllItem.selected = allSelected;
     selectAllItem.indeterminate = selectedCount > 0 && !allSelected;
+  }
+
+  /**
+   * Clears the filterable input field
+   */
+  private _clearInput() {
+    this._filterInputNode.value = '';
+    this.toggleAttribute('has-value', false);
+
+    const items = this.querySelectorAll(
+      (this.constructor as typeof CDSMultiSelect).selectorItemFiltered
+    );
+    forEach(items, (item) => {
+      (item as CDSMultiSelectItem).removeAttribute('filtered');
+    });
   }
 
   connectedCallback() {

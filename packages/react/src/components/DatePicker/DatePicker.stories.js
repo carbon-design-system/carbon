@@ -119,7 +119,7 @@ const sharedArgTypes = {
 };
 
 export const Default = ({ readOnly, ...args }) => {
-  const locale = useDocumentLang();
+  const locale = useDocumentLang().split('-')[0];
   return (
     <DatePicker
       datePickerType="single"
