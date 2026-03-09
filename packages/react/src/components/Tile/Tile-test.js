@@ -150,6 +150,53 @@ describe('Tile', () => {
       await userEvent.keyboard('[Tab]');
       expect(onClick).not.toHaveBeenCalled();
     });
+
+    it('should call onClick when Enter key is pressed with href', async () => {
+      const onClick = jest.fn();
+      render(
+        <ClickableTile
+          href="https://www.carbondesignsystem.com"
+          onClick={onClick}>
+          Enter test
+        </ClickableTile>
+      );
+      const tile = screen.getByText('Enter test');
+      tile.focus();
+      await userEvent.keyboard('[Enter]');
+      expect(onClick).toHaveBeenCalledTimes(1);
+    });
+
+    it('should not call onClick when Space key is pressed with href', async () => {
+      const onClick = jest.fn();
+      render(
+        <ClickableTile
+          href="https://www.carbondesignsystem.com"
+          onClick={onClick}>
+          Space test
+        </ClickableTile>
+      );
+      const tile = screen.getByText('Space test');
+      tile.focus();
+      await userEvent.keyboard('[Space]');
+      expect(onClick).not.toHaveBeenCalled();
+    });
+
+    it('should not call onClick when other keys are pressed with href', async () => {
+      const onClick = jest.fn();
+      render(
+        <ClickableTile
+          href="https://www.carbondesignsystem.com"
+          onClick={onClick}>
+          Other keys test
+        </ClickableTile>
+      );
+      const tile = screen.getByText('Other keys test');
+      tile.focus();
+      await userEvent.keyboard('a');
+      await userEvent.keyboard('[Escape]');
+      await userEvent.keyboard('[Tab]');
+      expect(onClick).not.toHaveBeenCalled();
+    });
   });
 
   describe('Multi Select', () => {

@@ -263,7 +263,8 @@ export const ClickableTile = React.forwardRef<
 
     function handleOnKeyDown(evt: KeyboardEvent<HTMLAnchorElement>) {
       evt?.persist?.();
-      if (matches(evt, [keys.Enter, keys.Space])) {
+      if (!href && matches(evt, [keys.Enter, keys.Space])) {
+        evt.preventDefault();
         setIsSelected(!isSelected);
         onClick(evt);
       }
