@@ -6,6 +6,7 @@
  */
 
 import { html } from 'lit';
+import { ifDefined } from 'lit/directives/if-defined.js';
 import { property } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
 import CDSContentSwitcherItem from '../content-switcher/content-switcher-item';
@@ -42,12 +43,18 @@ export default class CDSTab extends CDSContentSwitcherItem {
   tabTitle;
 
   /**
+   * `true` to render a badge indicator on the tab.
+   */
+  @property({ type: Boolean, reflect: true, attribute: 'badge-indicator' })
+  badgeIndicator = false;
+
+  /**
    * Handles `slotchange` event.
    */
   protected _handleSlotChange({ target }: Event) {
     // Retrieve content of the slot to use for aria-label.
     const content = (target as HTMLSlotElement).assignedNodes();
-    this.tabTitle = content[0].textContent;
+    this.tabTitle = content[0]?.textContent?.trim() || undefined;
   }
 
   connectedCallback() {
@@ -59,23 +66,42 @@ export default class CDSTab extends CDSContentSwitcherItem {
 
   render() {
     const {
+      badgeIndicator,
       disabled,
       selected,
       tabTitle,
       _handleSlotChange: handleSlotChange,
     } = this;
+    const accessibleLabel = tabTitle || this.getAttribute('aria-label');
+    const isIconOnly = this.classList.contains(
+      `${prefix}--tabs__nav-item--icon-only`
+    );
     // No `href`/`tabindex` to not to make this `<a>` click-focusable
-    return html`
+    const tabLink = html`
       <a
         class="${prefix}--tabs__nav-link"
         role="tab"
-        aria-label="${tabTitle}"
+        aria-label="${ifDefined(accessibleLabel || undefined)}"
         tabindex="${selected ? 0 : -1}"
         ?disabled="${disabled}"
         aria-selected="${selected}">
         <slot @slotchange="${handleSlotChange}"></slot>
+        ${!disabled && badgeIndicator
+          ? html`<cds-badge-indicator></cds-badge-indicator>`
+          : ''}
       </a>
     `;
+
+    if (isIconOnly && accessibleLabel) {
+      return html`
+        <cds-tooltip align="bottom" class="${prefix}--icon-tooltip">
+          ${tabLink}
+          <cds-tooltip-content>${accessibleLabel}</cds-tooltip-content>
+        </cds-tooltip>
+      `;
+    }
+
+    return tabLink;
   }
 
   static styles = styles;
