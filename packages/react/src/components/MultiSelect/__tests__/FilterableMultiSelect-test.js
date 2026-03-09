@@ -429,7 +429,10 @@ describe('FilterableMultiSelect', () => {
     await openMenu();
     await userEvent.type(screen.getByRole('combobox'), 'test');
 
-    expect(onInputValueChange).toHaveBeenCalledWith('test');
+    expect(onInputValueChange).toHaveBeenCalledTimes(4);
+    expect(onInputValueChange).toHaveBeenLastCalledWith(
+      expect.objectContaining({ inputValue: 'test' })
+    );
   });
 
   it('should clear all selections when clicking clear all button', async () => {
