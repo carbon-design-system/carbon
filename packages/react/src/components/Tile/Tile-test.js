@@ -154,9 +154,7 @@ describe('Tile', () => {
     it('should call onClick when Enter key is pressed when using href', async () => {
       const onClick = jest.fn();
       render(
-        <ClickableTile
-          href="https://www.carbondesignsystem.com"
-          onClick={onClick}>
+        <ClickableTile href="/" onClick={onClick}>
           Enter test
         </ClickableTile>
       );
@@ -169,9 +167,7 @@ describe('Tile', () => {
     it('should not call onClick when other keys are pressed when using href', async () => {
       const onClick = jest.fn();
       render(
-        <ClickableTile
-          href="https://www.carbondesignsystem.com"
-          onClick={onClick}>
+        <ClickableTile href="/" onClick={onClick}>
           Other keys test
         </ClickableTile>
       );
