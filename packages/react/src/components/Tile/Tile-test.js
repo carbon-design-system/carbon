@@ -151,7 +151,7 @@ describe('Tile', () => {
       expect(onClick).not.toHaveBeenCalled();
     });
 
-    it('should call onClick when Enter key is pressed with href', async () => {
+    it('should call onClick when Enter key is pressed when using href', async () => {
       const onClick = jest.fn();
       render(
         <ClickableTile
@@ -166,22 +166,7 @@ describe('Tile', () => {
       expect(onClick).toHaveBeenCalledTimes(1);
     });
 
-    it('should not call onClick when Space key is pressed with href', async () => {
-      const onClick = jest.fn();
-      render(
-        <ClickableTile
-          href="https://www.carbondesignsystem.com"
-          onClick={onClick}>
-          Space test
-        </ClickableTile>
-      );
-      const tile = screen.getByText('Space test');
-      tile.focus();
-      await userEvent.keyboard('[Space]');
-      expect(onClick).not.toHaveBeenCalled();
-    });
-
-    it('should not call onClick when other keys are pressed with href', async () => {
+    it('should not call onClick when other keys are pressed when using href', async () => {
       const onClick = jest.fn();
       render(
         <ClickableTile
@@ -193,6 +178,7 @@ describe('Tile', () => {
       const tile = screen.getByText('Other keys test');
       tile.focus();
       await userEvent.keyboard('a');
+      await userEvent.keyboard('[Space]');
       await userEvent.keyboard('[Escape]');
       await userEvent.keyboard('[Tab]');
       expect(onClick).not.toHaveBeenCalled();
