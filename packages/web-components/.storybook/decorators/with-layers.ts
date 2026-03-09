@@ -105,5 +105,3 @@ export const withLayers = (story) => {
     </cds-layer>
   `;
 };
-
-// Made with Bob
