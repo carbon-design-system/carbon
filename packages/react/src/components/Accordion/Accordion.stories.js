@@ -8,6 +8,7 @@
 /* eslint-disable no-console */
 
 import React from 'react';
+import TextInput from '../TextInput';
 import { action } from 'storybook/actions';
 import './story.scss';
 import { default as Accordion, AccordionItem, AccordionSkeleton } from '.';
@@ -16,6 +17,8 @@ import ButtonSet from '../ButtonSet';
 import mdx from './Accordion.mdx';
 import { WithLayer } from '../../../.storybook/templates/WithLayer';
 
+import DatePicker from '../DatePicker';
+import DatePickerInput from '../DatePickerInput';
 export default {
   title: 'Components/Accordion',
   component: Accordion,
@@ -85,12 +88,11 @@ export const Default = (args) => {
   return (
     <Accordion {...restArgs}>
       <AccordionItem title="Section 1 title" onHeadingClick={onHeadingClick}>
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-          aliquip ex ea commodo consequat.
-        </p>
+        <TextInput
+          id="12"
+          labelText="Input field"
+          placeholder="Enter text here"
+        />
       </AccordionItem>
       <AccordionItem title="Section 2 title" onHeadingClick={onHeadingClick}>
         <p>
@@ -108,19 +110,28 @@ export const Default = (args) => {
           aliquip ex ea commodo consequat.
         </p>
       </AccordionItem>
-      <AccordionItem
-        onHeadingClick={onHeadingClick}
-        title={
-          <span>
-            Section 4 title (<em>the title can be a node</em>)
-          </span>
-        }>
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-          aliquip ex ea commodo consequat.
-        </p>
+      <AccordionItem>
+        <DatePicker datePickerType="range">
+          <DatePickerInput
+            id="date-picker-input-id-start"
+            placeholder="mm/dd/yyyy"
+            labelText="Start date"
+            size="md"
+          />
+          <DatePickerInput
+            id="date-picker-input-id-finish"
+            placeholder="mm/dd/yyyy"
+            labelText="End date"
+            size="md"
+          />
+        </DatePicker>
+      </AccordionItem>
+      <AccordionItem>
+        <TextInput
+          id="1233"
+          labelText="Input field"
+          placeholder="Enter text here"
+        />
       </AccordionItem>
     </Accordion>
   );

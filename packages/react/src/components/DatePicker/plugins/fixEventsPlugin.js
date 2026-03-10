@@ -16,6 +16,7 @@ export default (config) => (fp) => {
   // Avoid closing when mousedown starts inside but click lands outside after
   // scroll or blur (e.g., scrollable modal masks).
   let mouseDownInside = false;
+  let isEnterBlur = false;
 
   const getEventPath = (event) =>
     typeof event.composedPath === 'function' ? event.composedPath() : [];
@@ -42,12 +43,10 @@ export default (config) => (fp) => {
       mouseDownInside = false;
       return;
     }
-
     if (!fp.isOpen || isEventInside(event)) {
       mouseDownInside = false;
       return;
     }
-
     mouseDownInside = false;
     fp.close();
   };
@@ -68,12 +67,26 @@ export default (config) => (fp) => {
       if (match(event, keys.Enter)) {
         // Makes sure the hitting enter key picks up pending values of both `<input>`
         // Workaround for: https://github.com/flatpickr/flatpickr/issues/1942
+        mouseDownInside = false;
+        if (inputTo === target) {
+          isEnterBlur = true;
+          inputTo.blur();
+        }
         fp.setDate(
           [inputFrom.value, inputTo && inputTo.value],
           true,
           fp.config.dateFormat
         );
         event.stopPropagation();
+        // After Enter on end date, rangePlugin's onChange refocuses secondInput
+        // via setTimeout(0) which reopens the calendar. We close and refocus
+        // inputFrom in the same timing to win the race and prevent the reopen.
+        if (inputTo === target) {
+          setTimeout(() => {
+            fp.close();
+            inputFrom.focus();
+          }, 0);
+        }
       } else if (
         match(event, keys.ArrowLeft) ||
         match(event, keys.ArrowRight)
@@ -106,6 +119,13 @@ export default (config) => (fp) => {
    * set the date again, triggering the calendar to update.
    */
   const handleBlur = (event) => {
+    // Skip blur handling when it was triggered programmatically by the Enter
+    // key handler to avoid an extra onChange call from fp.setDate()
+    if (isEnterBlur) {
+      isEnterBlur = false;
+      return;
+    }
+
     const { target } = event;
 
     // Only fall into this logic if the event is on the `to` input and there is a
