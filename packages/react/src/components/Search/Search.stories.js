@@ -99,20 +99,6 @@ const expandableParameters = {
   },
 };
 
-export const Disabled = (args) => {
-  const { defaultWidth, disabled, ...searchArgs } = args;
-  return (
-    <div style={{ width: defaultWidth }}>
-      <Search id="search-disabled-1" {...searchArgs} disabled />
-    </div>
-  );
-};
-Disabled.parameters = {
-  controls: {
-    exclude: ['disabled', 'isExpanded', 'renderIcon', 'role'],
-  },
-};
-
 export const Expandable = (args) => {
   const { defaultWidth, ...searchArgs } = args;
 

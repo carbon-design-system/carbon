@@ -123,48 +123,6 @@ export const Default = {
   },
 };
 
-export const Disabled = {
-  args: { ...args, disabled: true },
-  argTypes,
-  parameters: {
-    controls: {
-      exclude: ['disabled'],
-    },
-  },
-  render: (args) => {
-    const {
-      autoComplete,
-      closeButtonLabelText,
-      colorScheme,
-      disabled,
-      labelText,
-      placeholder,
-      defaultWidth,
-      size,
-      role,
-      type,
-      value,
-      onInput,
-    } = args ?? {};
-    return html`
-      <div style="width: ${defaultWidth}px;">
-        <cds-search
-          autocomplete="${autoComplete}"
-          close-button-label-text="${ifDefined(closeButtonLabelText)}"
-          color-scheme="${ifDefined(colorScheme)}"
-          ?disabled="${disabled}"
-          label-text="${ifDefined(labelText)}"
-          placeholder="${ifDefined(placeholder)}"
-          size="${ifDefined(size)}"
-          type="${ifDefined(type)}"
-          role=${role}
-          value="${ifDefined(value)}"
-          @cds-search-input="${onInput}"></cds-search>
-      </div>
-    `;
-  },
-};
-
 export const Expandable = {
   args: { ...args, expanded: false },
   argTypes,
