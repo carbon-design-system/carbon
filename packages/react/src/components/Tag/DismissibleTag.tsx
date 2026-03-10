@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2025
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -9,7 +9,6 @@ import PropTypes from 'prop-types';
 import React, {
   cloneElement,
   forwardRef,
-  useLayoutEffect,
   useRef,
   useState,
   type ForwardedRef,
@@ -29,6 +28,7 @@ import { mergeRefs } from '../../tools/mergeRefs';
 import { AILabel } from '../AILabel';
 import { isComponentElement } from '../../internal';
 import { PopoverAlignment } from '../Popover';
+import useIsomorphicEffect from '../../internal/useIsomorphicEffect';
 
 export interface DismissibleTagBaseProps {
   /**
@@ -133,12 +133,12 @@ const DismissibleTag = forwardRef(
   ) => {
     const prefix = usePrefix();
     const tagLabelRef = useRef<HTMLDivElement>(null);
-    // eslint-disable-next-line  react-hooks/rules-of-hooks -- https://github.com/carbon-design-system/carbon/issues/20452
-    const tagId = id || `tag-${useId()}`;
+    const generatedTagId = useId();
+    const tagId = id ?? `tag-${generatedTagId}`;
     const tagClasses = classNames(`${prefix}--tag--filter`, className);
     const [isEllipsisApplied, setIsEllipsisApplied] = useState(false);
 
-    useLayoutEffect(() => {
+    useIsomorphicEffect(() => {
       const newElement = tagLabelRef.current?.getElementsByClassName(
         `${prefix}--tag__label`
       )[0];

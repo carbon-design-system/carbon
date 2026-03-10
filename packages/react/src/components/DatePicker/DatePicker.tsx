@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2025
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -7,14 +7,14 @@
 
 import PropTypes from 'prop-types';
 import React, {
+  forwardRef,
+  useCallback,
   useContext,
   useEffect,
-  useRef,
   useImperativeHandle,
-  useCallback,
+  useRef,
   useState,
-  ForwardedRef,
-  ReactNode,
+  type ReactNode,
 } from 'react';
 import cx from 'classnames';
 import flatpickr from 'flatpickr';
@@ -25,6 +25,7 @@ import carbonFlatpickrFixEventsPlugin from './plugins/fixEventsPlugin';
 import { rangePlugin } from './plugins/rangePlugin';
 import { deprecate } from '../../prop-types/deprecate';
 import { match, keys } from '../../internal/keyboard';
+import { isComponentElement } from '../../internal';
 import { usePrefix } from '../../internal/usePrefix';
 import { useSavedCallback } from '../../internal/useSavedCallback';
 import { FormContext } from '../FluidForm';
@@ -38,6 +39,7 @@ import {
 import type { Instance } from 'flatpickr/dist/types/instance';
 import { datePartsOrder } from '@carbon/utilities';
 import { SUPPORTED_LOCALES, type SupportedLocale } from './DatePickerLocales';
+import { isEmptyDateValue } from './utils';
 
 // Weekdays shorthand for English locale
 // Ensure localization exists before trying to access it
@@ -206,8 +208,10 @@ export type DatePickerTypes = 'simple' | 'single' | 'range';
 
 export interface DatePickerProps {
   /**
-   * Flatpickr prop passthrough enables direct date input, and when set to false,
-   * we must clear dates manually by resetting the value prop to to a falsy value (such as `""`, `null`, or `undefined`) or an array of all falsy values, making it a controlled input.
+   * Flatpickr prop passthrough enables direct date input, and when set to
+   * false, we must clear dates manually by resetting the value prop to an empty
+   * value (such as `""`, `null`, or `undefined`) or an array of all empty
+   * values, making it a controlled input.
    */
   allowInput?: boolean;
 
@@ -354,8 +358,9 @@ export interface DatePickerProps {
   prevMonthAriaLabel?: string;
 }
 
-const DatePicker = React.forwardRef(function DatePicker(
-  {
+// eslint-disable-next-line react/display-name
+const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>((props, ref) => {
+  const {
     allowInput,
     appendTo,
     children,
@@ -384,9 +389,8 @@ const DatePicker = React.forwardRef(function DatePicker(
     nextMonthAriaLabel = 'Next month',
     prevMonthAriaLabel = 'Previous month',
     ...rest
-  }: DatePickerProps,
-  ref: ForwardedRef<HTMLDivElement>
-) {
+  } = props;
+
   const prefix = usePrefix();
   const { isFluid } = useContext(FormContext);
   const [hasInput, setHasInput] = useState(false);
@@ -431,7 +435,7 @@ const DatePicker = React.forwardRef(function DatePicker(
     // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20452
     [onClose]
   );
-  // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20452
+
   const onCalendarClose = (selectedDates, dateStr, instance, e) => {
     if (e && e.type === 'clickOutside') {
       return;
@@ -453,6 +457,7 @@ const DatePicker = React.forwardRef(function DatePicker(
   const savedOnOpen = useSavedCallback(onOpen);
 
   const effectiveWarn = warn && !invalid;
+  const wrapperRef = useRef<HTMLDivElement>(null);
 
   const datePickerClasses = cx(`${prefix}--date-picker`, {
     [`${prefix}--date-picker--short`]: short,
@@ -471,10 +476,7 @@ const DatePicker = React.forwardRef(function DatePicker(
   const childrenWithProps = React.Children.toArray(children as any).map(
     // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
     (child: any, index) => {
-      if (
-        index === 0 &&
-        child.type === React.createElement(DatePickerInput, child.props).type
-      ) {
+      if (index === 0 && isComponentElement(child, DatePickerInput)) {
         return React.cloneElement(child, {
           datePickerType,
           ref: startInputField,
@@ -483,10 +485,7 @@ const DatePicker = React.forwardRef(function DatePicker(
           warn: effectiveWarn,
         });
       }
-      if (
-        index === 1 &&
-        child.type === React.createElement(DatePickerInput, child.props).type
-      ) {
+      if (index === 1 && isComponentElement(child, DatePickerInput)) {
         return React.cloneElement(child, {
           datePickerType,
           ref: endInputField,
@@ -645,6 +644,7 @@ const DatePicker = React.forwardRef(function DatePicker(
           inputFrom: startInputField.current,
           inputTo: endInputField.current,
           lastStartValue,
+          container: wrapperRef.current,
         }) as unknown as Plugin,
       ],
       clickOpens: !readOnly,
@@ -688,12 +688,15 @@ const DatePicker = React.forwardRef(function DatePicker(
             calendarContainer.querySelector('.selected') && fpSelectedDateElem;
           const todayDateElem =
             calendarContainer.querySelector('.today') && fpTodayDateElem;
-          (
-            (selectedDateElem ||
-              todayDateElem ||
-              calendarContainer.querySelector('.flatpickr-day[tabindex]') ||
-              calendarContainer) as HTMLElement
-          ).focus();
+          const focusTarget =
+            selectedDateElem ||
+            todayDateElem ||
+            calendarContainer.querySelector('.flatpickr-day[tabindex]') ||
+            calendarContainer;
+
+          if (focusTarget instanceof HTMLElement) {
+            focusTarget.focus();
+          }
 
           if (event.target === startInputField.current) {
             lastFocusedField.current = startInputField.current;
@@ -907,10 +910,11 @@ const DatePicker = React.forwardRef(function DatePicker(
   useEffect(() => {
     // when value prop is manually reset, this clears the flatpickr calendar instance and text input
     // run if both:
-    // 1. value prop is set to a falsy value (`""`, `undefined`, `null`, etc) OR an array of all falsy values
+    // 1. value prop is set to an empty value (`""`, `undefined`, `null`, etc) OR an array of all empty values
     // 2. flatpickr instance contains values in its `selectedDates` property so it hasn't already been cleared
     if (
-      (!value || (Array.isArray(value) && value.every((date) => !date))) &&
+      (isEmptyDateValue(value) ||
+        (Array.isArray(value) && value.every(isEmptyDateValue))) &&
       calendarRef.current?.selectedDates.length
     ) {
       calendarRef.current?.clear();
@@ -926,36 +930,6 @@ const DatePicker = React.forwardRef(function DatePicker(
   }, [value, startInputField]);
 
   useEffect(() => {
-    const handleMouseDown = (event) => {
-      if (
-        calendarRef.current &&
-        calendarRef.current.isOpen &&
-        !calendarRef.current.calendarContainer.contains(event.target) &&
-        !startInputField.current.contains(event.target) &&
-        !endInputField.current?.contains(event.target)
-      ) {
-        // Close the calendar immediately on mousedown
-        closeCalendar();
-      }
-    };
-    const closeCalendar = () => {
-      calendarRef.current?.close();
-      // Remove focus from endDate calendar input
-      onCalendarClose(
-        calendarRef.current?.selectedDates,
-        '',
-        calendarRef.current,
-        { type: 'clickOutside' }
-      );
-    };
-    document.addEventListener('mousedown', handleMouseDown, true);
-
-    return () => {
-      document.removeEventListener('mousedown', handleMouseDown, true);
-    };
-  }, [calendarRef, startInputField, endInputField, onCalendarClose]);
-
-  useEffect(() => {
     if (calendarRef.current?.set) {
       if (value !== undefined) {
         // To make up for calendarRef.current.setDate not making provision for an empty string or array
@@ -963,7 +937,7 @@ const DatePicker = React.forwardRef(function DatePicker(
           value === '' ||
           value === null ||
           (Array.isArray(value) &&
-            (value.length === 0 || value.every((element) => !element)))
+            (value.length === 0 || value.every(isEmptyDateValue)))
         ) {
           // only clear if there are selected dates to avoid unnecessary operations
           if (calendarRef.current.selectedDates.length > 0) {
@@ -975,7 +949,11 @@ const DatePicker = React.forwardRef(function DatePicker(
       }
       updateClassNames(calendarRef.current, prefix);
       //for simple date picker w/o calendar; initial mount may not have value
-    } else if (!calendarRef.current && value) {
+    } else if (
+      !calendarRef.current &&
+      typeof value !== 'undefined' &&
+      value !== null
+    ) {
       startInputField.current.value = value;
     }
   }, [value, prefix, startInputField]);
@@ -1007,7 +985,9 @@ const DatePicker = React.forwardRef(function DatePicker(
 
   return (
     <div className={wrapperClasses} ref={ref} {...rest}>
-      <div className={datePickerClasses}>{childrenWithProps}</div>
+      <div className={datePickerClasses} ref={wrapperRef}>
+        {childrenWithProps}
+      </div>
       {fluidError}
     </div>
   );
@@ -1015,8 +995,10 @@ const DatePicker = React.forwardRef(function DatePicker(
 
 DatePicker.propTypes = {
   /**
-   * Flatpickr prop passthrough enables direct date input, and when set to false,
-   * we must clear dates manually by resetting the value prop to a falsy value (such as `""`, `null`, or `undefined`) or an array of all falsy values, making it a controlled input.
+   * Flatpickr prop passthrough enables direct date input, and when set to
+   * false, we must clear dates manually by resetting the value prop to an empty
+   * value (such as `""`, `null`, or `undefined`) or an array of all empty
+   * values, making it a controlled input.
    */
   allowInput: PropTypes.bool,
 

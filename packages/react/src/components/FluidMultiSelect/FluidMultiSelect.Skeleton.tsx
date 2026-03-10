@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -17,10 +17,10 @@ export interface FluidMultiSelectSkeletonProps {
   className?: string;
 }
 
-const FluidMultiSelectSkeleton: React.FC<FluidMultiSelectSkeletonProps> = ({
+const FluidMultiSelectSkeleton = ({
   className,
   ...rest
-}) => {
+}: FluidMultiSelectSkeletonProps) => {
   const prefix = usePrefix();
   const wrapperClasses = cx(className, `${prefix}--list-box__wrapper--fluid`);
 

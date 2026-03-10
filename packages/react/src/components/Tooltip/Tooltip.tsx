@@ -314,7 +314,8 @@ const Tooltip: TooltipComponent = React.forwardRef(
   }
 );
 
-(Tooltip as React.FC).propTypes = {
+// @ts-expect-error - `propTypes` isn't typed.
+Tooltip.propTypes = {
   /**
    * Specify how the trigger should align with the tooltip
    */
