@@ -35,6 +35,13 @@ export const Default = (args) => {
 };
 
 Default.argTypes = {
+  'aria-labelledby': {
+    control: {
+      type: 'text',
+    },
+    description:
+      "Specify another element's id to be used as the label for this toggle",
+  },
   className: {
     control: false,
   },
@@ -45,35 +52,62 @@ Default.argTypes = {
     control: {
       type: 'boolean',
     },
+    description: 'Specify whether the toggle should be disabled',
   },
   hideLabel: {
     control: {
       type: 'boolean',
     },
+    description:
+      'If true, the side labels (labelA and labelB) will be replaced by labelText (if passed), so that the toggle doesn\'t render a top label',
   },
   id: {
     control: false,
   },
   labelA: {
-    control: false,
+    control: {
+      type: 'text',
+    },
+    description: 'Specify the label for the "off" position',
   },
   labelB: {
-    control: false,
+    control: {
+      type: 'text',
+    },
+    description: 'Specify the label for the "on" position',
   },
   labelText: {
-    control: false,
+    control: {
+      type: 'text',
+    },
+    description:
+      'Provide the text that will be read by a screen reader when visiting this control',
   },
   onClick: {
     control: false,
+    action: 'clicked',
   },
   onToggle: {
     control: false,
+    action: 'toggled',
+  },
+  readOnly: {
+    control: {
+      type: 'boolean',
+    },
+    description: 'Specify whether the toggle should be read-only',
   },
   size: {
-    size: {
-      options: ['sm', 'md'],
-      control: { type: 'select' },
+    options: ['sm', 'md'],
+    control: { type: 'select' },
+    description:
+      'Specify the size of the Toggle. Currently supports either sm or md (default)',
+  },
+  toggled: {
+    control: {
+      type: 'boolean',
     },
+    description: 'Specify whether the control is toggled',
   },
 };
 
@@ -89,6 +123,10 @@ export const SmallToggle = (args) => {
       {...args}
     />
   );
+};
+
+SmallToggle.argTypes = {
+  ...Default.argTypes,
 };
 
 export const WithAccessibleLabels = () => {
