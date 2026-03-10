@@ -1121,6 +1121,7 @@ const ComboBox = forwardRef(
                       openMenu();
                   }
                   if (typeahead && event.key === 'Tab') {
+                    if (!isOpen) return;
                     //  event.preventDefault();
                     const matchingItem = items.find((item) =>
                       itemToString(item)
