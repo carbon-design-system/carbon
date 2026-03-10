@@ -108,7 +108,7 @@ class CDSSlider extends HostListenerMixin(FormMixin(FocusMixin(LitElement))) {
   private get _rate() {
     const { max, min, value } = this;
     // Copes with out-of-range value coming programmatically or from `<cds-slider-input>`
-    if (value) {
+    if (value != null) {
       const rate =
         (Math.min(Number(max), Math.max(Number(min), value)) - Number(min)) /
         (Number(max) - Number(min));
@@ -136,7 +136,7 @@ class CDSSlider extends HostListenerMixin(FormMixin(FocusMixin(LitElement))) {
   private get _rateUpper() {
     const { max, min, unstable_valueUpper } = this;
     // Copes with out-of-range value coming programmatically or from `<cds-slider-input>`
-    if (unstable_valueUpper) {
+    if (unstable_valueUpper != null) {
       const rateUpper =
         (Math.min(Number(max), Math.max(Number(min), unstable_valueUpper)) -
           Number(min)) /
