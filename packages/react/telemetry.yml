@@ -112,6 +112,7 @@ collect:
         - isFullWidth
         - isOpen
         - isPassword
+        - isRail
         - isSelected
         - isSideNavExpanded
         - isSortable
@@ -500,6 +501,7 @@ collect:
         - pageInputDisabled
         - pageNumberText
         - pageRangeText
+        - pageSelectLabelText
         - pageSize
         - pageSizeInputDisabled
         - pageSizes
@@ -533,7 +535,6 @@ collect:
         - isChildOfHeader
         - isFixedNav
         - isPersistent
-        - isRail
         - onOverlayClick
         - onSideNavBlur
         # SideNavFooter
