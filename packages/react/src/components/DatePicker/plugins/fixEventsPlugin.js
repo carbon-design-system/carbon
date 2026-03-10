@@ -80,7 +80,6 @@ export default (config) => (fp) => {
         event.stopPropagation();
         // After Enter on end date, rangePlugin's onChange refocuses secondInput
         // via setTimeout(0) which reopens the calendar. We close and refocus
-        // inputFrom in the same timing to win the race and prevent the reopen.
         if (inputTo === target) {
           setTimeout(() => {
             fp.close();
