@@ -8,6 +8,7 @@ lib
 dist
 umd
 css
+docs/generated
 
 # Netlify deploy folder
 /demo/*
@@ -72,7 +73,6 @@ blob-report
 # Yarn
 .yarn/*
 !.yarn/patches/
-!.yarn/plugins/
 !.yarn/releases/
 **/.yarn/cache/
 **/.yarn/build-state.yml

@@ -603,10 +603,13 @@ const ComboBox = forwardRef(
                 return changes;
               }
               const nextSelectedItem =
-                items.find((item) => itemToString(item) === inputValue) ??
-                inputValue;
+                inputValue === ''
+                  ? null
+                  : (items.find((item) => itemToString(item) === inputValue) ??
+                    inputValue);
               const isCustomSelection =
                 typeof nextSelectedItem === 'string' &&
+                nextSelectedItem !== '' &&
                 !items.some((item) => isEqual(item, nextSelectedItem));
 
               if (!isEqual(currentSelectedItem, nextSelectedItem) && onChange) {
@@ -852,8 +855,7 @@ const ComboBox = forwardRef(
         setHighlightedIndex(indexToHighlight(normalizedInput));
       },
       onHighlightedIndexChange: ({ highlightedIndex }) => {
-        // eslint-disable-next-line valid-typeof , no-constant-binary-expression -- https://github.com/carbon-design-system/carbon/issues/20452
-        if (highlightedIndex > -1 && typeof window !== undefined) {
+        if (highlightedIndex > -1) {
           const itemArray = document.querySelectorAll(
             `li.${prefix}--list-box__menu-item[role="option"]`
           );
