@@ -10,8 +10,22 @@ import type {
   CarouselStackHistory,
   Config,
   InitCarousel,
+  TranslationKey,
 } from './types';
+import { translationIds } from './defs';
 import { registerSwipeEvents } from './swipeEvents';
+
+const defaultTranslations: Record<TranslationKey, string> = {
+  [translationIds['carbon.carousel.item']]: 'Item',
+  [translationIds['carbon.carousel.of']]: 'of',
+};
+
+/**
+ * Default translation function
+ */
+const defaultTranslateWithId = (messageId: TranslationKey): string => {
+  return defaultTranslations[messageId];
+};
 
 /**
  * Initializes a carousel with the given configuration.
@@ -36,6 +50,7 @@ export const initCarousel = (
     onViewChangeEnd,
     excludeSwipeSupport,
     useMaxHeight,
+    translateWithId: t = defaultTranslateWithId,
   } = config || {};
 
   /**
@@ -60,7 +75,7 @@ export const initCarousel = (
   const updateLiveRegion = (idx: number) => {
     const div = getLiveRegion();
     if (div) {
-      div.textContent = `Item ${idx} of ${getCarouselItems()?.length}`;
+      div.textContent = `${t('carbon.carousel.item')} ${idx} ${t('carbon.carousel.of')} ${getCarouselItems()?.length}`;
     }
   };
 
@@ -79,15 +94,13 @@ export const initCarousel = (
     div.setAttribute('aria-live', 'polite');
     div.setAttribute('aria-atomic', 'true');
     div.setAttribute('class', `${prefix}__live-region`);
-    div.textContent = `Item 1 of ${childCount}`;
+    div.textContent = `${t('carbon.carousel.item')} 1 ${t('carbon.carousel.of')} ${childCount}`;
     carouselContainer.appendChild(div);
   };
 
   /**
    * Wraps all child elements of a given container into a new div with the specified class.
    * If an element with the specified class already exists as a child of the container, the function does nothing.
-   *
-   * @returns {void}
    */
   const wrapAllItems = () => {
     if (getWrapper()) {
@@ -198,7 +211,6 @@ export const initCarousel = (
 
   const transitionComplete = (ref: HTMLElement) => {
     handleTransitionEnd(ref);
-    syncLiveRegionWithActiveView();
   };
   /**
    * Attaches class names to an HTMLElement based on given conditions.
@@ -303,7 +315,7 @@ export const initCarousel = (
 
       const isBeingRecycledIn =
         previousViewIndexStack.length < viewIndexStack.length &&
-        viewIndexStack[0] === index &&
+        previousViewIndexStack[0] === index &&
         stackIndexInstanceCount > 0;
 
       const isInViewStack = stackIndex > -1;
