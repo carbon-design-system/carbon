@@ -5,13 +5,11 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-// import { property } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
+import { html } from 'lit';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import CDSDatePickerInput from '../date-picker/date-picker-input';
-import { html } from 'lit';
 import styles from './fluid-date-picker.scss?lit';
-// import { classMap } from 'lit/directives/class-map.js';
 
 /**
  * Fluid date picker input.
@@ -20,21 +18,12 @@ import styles from './fluid-date-picker.scss?lit';
  */
 @customElement(`${prefix}-fluid-date-picker-input`)
 class CDSFluidDatePickerInput extends CDSDatePickerInput {
-  connectedCallback() {
-    this.setAttribute('isFluid', 'true');
-    super.connectedCallback();
-  }
-
-  updated() {
-    super.updated();
-  }
-
   render() {
-    //  const wrapperClasses = classMap({
-    //    [`${prefix}--date-picker--fluid`]: true,
-    //  });
+    return html` ${super.render()} `;
+  }
 
-    return html`${super.render()}`;
+  static get selectorParent() {
+    return `${prefix}-fluid-date-picker`;
   }
 
   static styles = [CDSDatePickerInput.styles, styles];

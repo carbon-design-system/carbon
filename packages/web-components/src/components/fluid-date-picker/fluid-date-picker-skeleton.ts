@@ -6,16 +6,12 @@
  */
 
 import { prefix } from '../../globals/settings';
-//import { property } from 'lit/decorators.js';
 import { html, LitElement } from 'lit';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
-// import { DATE_PICKER_INPUT_KIND } from '../date-picker/date-picker-input';
 import styles from './fluid-date-picker.scss?lit';
 
-// import CDSDatePickerInputSkeleton from '../date-picker/date-picker-input-skeleton';
-
 /**
- * Fluid number input.
+ * Fluid date picker
  *
  * @element cds-fluid-date-picker-skeleton
  */
