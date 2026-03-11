@@ -89,12 +89,13 @@ class CDSShapeIndicator extends LitElement {
       return null;
     }
 
-    // Handle custom SVG string vs Carbon icon descriptor
+    const labelEl = html`<span class="${prefix}--shape-indicator__label">${this.label}</span>`;
+
     if (typeof shape === 'string') {
-      return html` ${iconLoader(null, {}, shape)} ${this.label} `;
+      return html`${iconLoader(null, {}, shape)}${labelEl}`;
     }
 
-    return html` ${iconLoader(shape)} ${this.label} `;
+    return html`${iconLoader(shape)}${labelEl}`;
   }
 
   /**

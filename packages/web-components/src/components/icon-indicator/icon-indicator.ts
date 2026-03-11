@@ -117,7 +117,7 @@ class CDSIconIndicator extends LitElement {
 
   render() {
     const IconComponent = iconMap[this.kind]?.[this.size];
-    return html`${iconLoader(IconComponent, { size: this.size })}${this.label}`;
+    return html`${iconLoader(IconComponent, { size: this.size })}<span class="${prefix}--icon-indicator__label">${this.label}</span>`;
   }
 
   static styles = styles;
