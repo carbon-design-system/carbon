@@ -2696,9 +2696,6 @@ Map {
       "columnCount": {
         "type": "number",
       },
-      "compact": {
-        "type": "bool",
-      },
       "headers": {
         "args": [
           {
@@ -3018,7 +3015,9 @@ Map {
       "onClick": {
         "type": "func",
       },
-      "pattern": [Function],
+      "pattern": {
+        "type": "string",
+      },
       "placeholder": {
         "type": "string",
       },
@@ -4344,7 +4343,9 @@ Map {
       "onClick": {
         "type": "func",
       },
-      "pattern": [Function],
+      "pattern": {
+        "type": "string",
+      },
       "placeholder": {
         "type": "string",
       },
@@ -7662,6 +7663,9 @@ Map {
       "closeMenu": {
         "type": "func",
       },
+      "dangerDescription": {
+        "type": "string",
+      },
       "disabled": {
         "type": "bool",
       },
@@ -7776,6 +7780,9 @@ Map {
         "type": "string",
       },
       "pageRangeText": {
+        "type": "func",
+      },
+      "pageSelectLabelText": {
         "type": "func",
       },
       "pageSize": {
@@ -12416,7 +12423,9 @@ Map {
       "onClick": {
         "type": "func",
       },
-      "pattern": [Function],
+      "pattern": {
+        "type": "string",
+      },
       "placeholder": {
         "type": "string",
       },
@@ -14396,7 +14405,9 @@ Map {
       "onClick": {
         "type": "func",
       },
-      "pattern": [Function],
+      "pattern": {
+        "type": "string",
+      },
       "placeholder": {
         "type": "string",
       },
@@ -15813,5 +15824,7 @@ Map {
   "usePrefix" => {},
   "useTheme" => {},
   "validateNumberSeparators" => {},
+  "withComposedModalPresence" => {},
+  "withModalPresence" => {},
 }
 `;

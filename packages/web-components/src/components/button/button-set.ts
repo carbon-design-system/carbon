@@ -97,7 +97,7 @@ class CDSButtonSet extends CDSButtonSetBase {
     };
     const classes = classMap(defaultClasses);
 
-    return html`<slot class="${classes} @slotchange="${this._handleSlotChange}"></slot>`;
+    return html`<slot class="${classes} part="button-set" @slotchange="${this._handleSlotChange}"></slot>`;
   }
   /**
    * A selector that will return the child items.
