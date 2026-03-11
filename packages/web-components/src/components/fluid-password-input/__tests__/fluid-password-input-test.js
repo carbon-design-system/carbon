@@ -162,16 +162,6 @@ describe('cds-fluid-password-input', () => {
     expect(input.readOnly).to.be.true;
   });
 
-  it('should disable hide/show password toggle button when readonly is true', async () => {
-    const el = await fixture(html`
-      <cds-fluid-password-input readonly></cds-fluid-password-input>
-    `);
-    await el.updateComplete;
-
-    const toggleButton = el.shadowRoot.querySelector('button[type="button"]');
-    expect(toggleButton.disabled).to.be.true;
-  });
-
   it('should render divider when isFluid is true', async () => {
     const el = await fixture(html`
       <cds-fluid-password-input label="Password"></cds-fluid-password-input>

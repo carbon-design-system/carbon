@@ -12,8 +12,8 @@ import './index';
 const args = {
   defaultWidth: 300,
   placeholder: 'Placeholder text',
-  showPasswordLabel: 'Show password label',
-  hidePasswordLabel: 'Hide password label',
+  showPasswordLabel: 'Show password',
+  hidePasswordLabel: 'Hide password',
   readonly: false,
   invalid: false,
   invalidText:
