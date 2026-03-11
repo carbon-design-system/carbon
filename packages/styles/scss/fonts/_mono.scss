@@ -7,7 +7,7 @@
 
 @use '../config';
 @use './src';
-@use './unicode';
+@use './unicode/mono' as unicode;
 
 $font-family: 'IBM Plex Mono';
 $name: 'IBM-Plex-Mono';
