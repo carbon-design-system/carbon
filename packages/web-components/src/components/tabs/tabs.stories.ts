@@ -193,91 +193,6 @@ export const Contained = {
   `,
 };
 
-export const Manual = {
-  render: () => html`
-    <style>
-      ${styles}
-    </style>
-    <cds-tabs value="all" selection-mode="manual">
-      <cds-tab id="tab-all" target="panel-all" value="all">Dashboard</cds-tab>
-      <cds-tab
-        id="tab-cloudFoundry"
-        target="panel-cloudFoundry"
-        value="cloudFoundry">
-        Monitoring
-      </cds-tab>
-      <cds-tab
-        id="tab-staging"
-        target="panel-staging"
-        value="staging"
-        title="Tab label 4">
-        Activity
-      </cds-tab>
-      <cds-tab id="tab-dea" target="panel-dea" value="dea">Analyze</cds-tab>
-      <cds-tab id="tab-five" target="panel-five" value="five" disabled>
-        Settings
-      </cds-tab>
-    </cds-tabs>
-    <div class="${prefix}-ce-demo-devenv--tab-panels">
-      <div id="panel-all" role="tabpanel" aria-labelledby="tab-all" hidden>
-        Tab Panel 1
-      </div>
-      <div
-        id="panel-cloudFoundry"
-        role="tabpanel"
-        aria-labelledby="tab-cloudFoundry"
-        hidden>
-        <form style="margin: 2em">
-          <legend class="cds--label">Validation example</legend>
-          <cds-checkbox
-            id="cb"
-            label-text="Accept privacy policy"></cds-checkbox>
-          <cds-button
-            style="margin-top: 1rem; margin-bottom: 1rem"
-            type="submit">
-            Submit
-          </cds-button>
-          <cds-text-input
-            type="text"
-            label="Text input label"
-            helper-text="Optional help text"
-            id="text-input-1"></cds-text-input>
-        </form>
-      </div>
-      <div
-        id="panel-staging"
-        role="tabpanel"
-        aria-labelledby="tab-staging"
-        hidden>
-        Tab Panel 3
-      </div>
-      <div id="panel-dea" role="tabpanel" aria-labelledby="tab-dea" hidden>
-        Tab Panel 4
-      </div>
-      <div id="panel-five" role="tabpanel" aria-labelledby="tab-five" hidden>
-        Tab Panel 5
-      </div>
-    </div>
-  `,
-};
-
-export const skeleton = {
-  parameters: {
-    percy: {
-      skip: true,
-    },
-  },
-  render: () => html`
-    <cds-tabs-skeleton>
-      <cds-tab-skeleton></cds-tab-skeleton>
-      <cds-tab-skeleton></cds-tab-skeleton>
-      <cds-tab-skeleton></cds-tab-skeleton>
-      <cds-tab-skeleton></cds-tab-skeleton>
-      <cds-tab-skeleton></cds-tab-skeleton>
-    </cds-tabs-skeleton>
-  `,
-};
-
 export const Icon20Only = {
   args: iconStoriesArgs,
   argTypes: iconStoriesArgTypes,
@@ -429,6 +344,91 @@ export const IconOnly = {
         Tab Panel 4
       </div>
     </div>
+  `,
+};
+
+export const Manual = {
+  render: () => html`
+    <style>
+      ${styles}
+    </style>
+    <cds-tabs value="all" selection-mode="manual">
+      <cds-tab id="tab-all" target="panel-all" value="all">Dashboard</cds-tab>
+      <cds-tab
+        id="tab-cloudFoundry"
+        target="panel-cloudFoundry"
+        value="cloudFoundry">
+        Monitoring
+      </cds-tab>
+      <cds-tab
+        id="tab-staging"
+        target="panel-staging"
+        value="staging"
+        title="Tab label 4">
+        Activity
+      </cds-tab>
+      <cds-tab id="tab-dea" target="panel-dea" value="dea">Analyze</cds-tab>
+      <cds-tab id="tab-five" target="panel-five" value="five" disabled>
+        Settings
+      </cds-tab>
+    </cds-tabs>
+    <div class="${prefix}-ce-demo-devenv--tab-panels">
+      <div id="panel-all" role="tabpanel" aria-labelledby="tab-all" hidden>
+        Tab Panel 1
+      </div>
+      <div
+        id="panel-cloudFoundry"
+        role="tabpanel"
+        aria-labelledby="tab-cloudFoundry"
+        hidden>
+        <form style="margin: 2em">
+          <legend class="cds--label">Validation example</legend>
+          <cds-checkbox
+            id="cb"
+            label-text="Accept privacy policy"></cds-checkbox>
+          <cds-button
+            style="margin-top: 1rem; margin-bottom: 1rem"
+            type="submit">
+            Submit
+          </cds-button>
+          <cds-text-input
+            type="text"
+            label="Text input label"
+            helper-text="Optional help text"
+            id="text-input-1"></cds-text-input>
+        </form>
+      </div>
+      <div
+        id="panel-staging"
+        role="tabpanel"
+        aria-labelledby="tab-staging"
+        hidden>
+        Tab Panel 3
+      </div>
+      <div id="panel-dea" role="tabpanel" aria-labelledby="tab-dea" hidden>
+        Tab Panel 4
+      </div>
+      <div id="panel-five" role="tabpanel" aria-labelledby="tab-five" hidden>
+        Tab Panel 5
+      </div>
+    </div>
+  `,
+};
+
+export const skeleton = {
+  parameters: {
+    percy: {
+      skip: true,
+    },
+  },
+  render: () => html`
+    <cds-tabs-skeleton>
+      <cds-tab-skeleton></cds-tab-skeleton>
+      <cds-tab-skeleton></cds-tab-skeleton>
+      <cds-tab-skeleton></cds-tab-skeleton>
+      <cds-tab-skeleton></cds-tab-skeleton>
+      <cds-tab-skeleton></cds-tab-skeleton>
+    </cds-tabs-skeleton>
   `,
 };
 

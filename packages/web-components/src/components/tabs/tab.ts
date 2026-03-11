@@ -43,7 +43,7 @@ export default class CDSTab extends CDSContentSwitcherItem {
   tabTitle;
 
   /**
-   * `true` to render a badge indicator on the tab.
+   * **Experimental**: Display an empty dot badge on the Tab.
    */
   @property({ type: Boolean, reflect: true, attribute: 'badge-indicator' })
   badgeIndicator = false;
