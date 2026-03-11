@@ -233,13 +233,16 @@ breakpoint. At the medium breakpoint, it will be offset by two columns.
 
 ## Row gap
 
-The `FlexGrid` component supports an optional `withRowGap` prop that adds vertical spacing between rows. When enabled, the row gap automatically matches the current gutter mode:
+The `FlexGrid` component supports an optional `withRowGap` prop that adds
+vertical spacing between rows. When enabled, the row gap automatically matches
+the current gutter mode:
 
-- **Default (wide)**: 32px row gap
-- **Narrow**: 16px row gap
-- **Condensed**: 1px row gap
+- Default (wide): 32px row gap
+- Narrow: 16px row gap
+- Condensed: 1px row gap
 
-This feature is useful when you want consistent vertical spacing between rows that matches your horizontal gutter spacing.
+This feature is useful when you want consistent vertical spacing between rows
+that matches your horizontal gutter spacing.
 
 ```jsx
 import { FlexGrid, Row, Column } from '@carbon/react';
@@ -265,7 +268,9 @@ function MyComponent() {
 You can combine `withRowGap` with different gutter modes:
 
 ```jsx
-{/* Narrow grid with row gap */}
+{
+  /* Narrow grid with row gap */
+}
 <FlexGrid narrow withRowGap>
   <Row>
     <Column>Content</Column>
@@ -273,9 +278,11 @@ You can combine `withRowGap` with different gutter modes:
   <Row>
     <Column>Content</Column>
   </Row>
-</FlexGrid>
+</FlexGrid>;
 
-{/* Condensed grid with row gap */}
+{
+  /* Condensed grid with row gap */
+}
 <FlexGrid condensed withRowGap>
   <Row>
     <Column>Content</Column>
@@ -283,7 +290,7 @@ You can combine `withRowGap` with different gutter modes:
   <Row>
     <Column>Content</Column>
   </Row>
-</FlexGrid>
+</FlexGrid>;
 ```
 
 <Canvas

@@ -63,5 +63,13 @@ $sub-grid: #{$prefix}--subgrid;
   @extend .#{$sub-grid}--narrow;
 }
 
+:host(#{$prefix}-grid) [subgrid][with-row-gap] {
+  row-gap: var(--cds-grid-gutter);
+}
+
+:host(#{$prefix}-grid) [subgrid][mode='narrow'][with-row-gap] {
+  row-gap: calc(var(--cds-grid-gutter) / 2);
+}
+
 // Column styles
 @include grid-columns(#{$prefix}-grid);

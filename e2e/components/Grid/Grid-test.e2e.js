@@ -20,6 +20,22 @@ test.describe('Grid', () => {
           theme,
         });
       });
+
+      test('grid with row gap @vrt', async ({ page }) => {
+        await snapshotStory(page, {
+          component: 'Grid',
+          id: 'elements-grid--with-row-gap',
+          theme,
+        });
+      });
+
+      test('subgrid with row gap @vrt', async ({ page }) => {
+        await snapshotStory(page, {
+          component: 'Grid',
+          id: 'elements-grid--subgrid-with-row-gap',
+          theme,
+        });
+      });
     });
   });
 });

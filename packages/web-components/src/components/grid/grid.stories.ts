@@ -416,6 +416,40 @@ export const Subgrid = {
       </style>`,
 };
 
+export const SubgridWithRowGap = {
+  args: {
+    ...defaultArgs,
+    withRowGap: true,
+  },
+  argTypes: {
+    ...controls,
+    withRowGap: {
+      control: 'boolean',
+      description:
+        'Add a row gap to the grid that matches the current gutter size',
+    },
+  },
+  render: ({ condensed, narrow, fullWidth, withRowGap }) =>
+    html`<cds-grid class="sb-grid" ?full-width=${fullWidth}>
+        <cds-column class="sb-column" sm="2" md="4" lg="16">
+          <cds-grid
+            class="sb-sub-grid"
+            ?condensed=${condensed}
+            ?narrow=${narrow}
+            ?with-row-gap=${withRowGap}>
+            <!-- Nested subgrid with row gap  -->
+            <cds-column class="sb-column" sm="4" md="4" lg="8"></cds-column>
+            <cds-column class="sb-column" sm="4" md="4" lg="8"></cds-column>
+            <cds-column class="sb-column" sm="4" md="4" lg="8"></cds-column>
+            <cds-column class="sb-column" sm="4" md="4" lg="8"></cds-column>
+          </cds-grid>
+        </cds-column>
+      </cds-grid>
+      <style>
+        ${styles}
+      </style>`,
+};
+
 const meta = {
   title: 'Elements/Grid',
   decorators: [

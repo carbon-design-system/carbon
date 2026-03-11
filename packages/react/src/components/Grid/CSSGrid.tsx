@@ -30,7 +30,7 @@ const CSSGrid = React.forwardRef<
       condensed = false,
       fullWidth = false,
       narrow = false,
-      withRowGap = false,
+      withRowGap,
       ...rest
     },
     ref?
@@ -52,6 +52,7 @@ const CSSGrid = React.forwardRef<
             as={as}
             className={customClassName}
             mode={mode}
+            withRowGap={withRowGap}
             {...rest}>
             {children}
           </Subgrid>
@@ -143,6 +144,12 @@ interface SubgridBaseProps {
    * Specify the gutter mode for the subgrid
    */
   mode?: SubgridMode;
+
+  /**
+   * Add a row gap to the subgrid that matches the current gutter size.
+   * This is useful when you want consistent vertical spacing between rows.
+   */
+  withRowGap?: boolean;
 }
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20452
@@ -155,21 +162,27 @@ const Subgrid = React.forwardRef<
   SubgridBaseProps & {
     as?: React.ElementType;
   } & React.HTMLAttributes<HTMLDivElement>
->(({ as, className: customClassName, children, mode, ...rest }, ref) => {
-  const prefix = usePrefix();
-  const className = cx(customClassName, {
-    [`${prefix}--subgrid`]: true,
-    [`${prefix}--subgrid--condensed`]: mode === 'condensed',
-    [`${prefix}--subgrid--narrow`]: mode === 'narrow',
-    [`${prefix}--subgrid--wide`]: mode === 'wide',
-  });
-  const BaseComponent = as || 'div';
-  return (
-    <BaseComponent {...rest} ref={ref} className={className}>
-      {children}
-    </BaseComponent>
-  );
-});
+>(
+  (
+    { as, className: customClassName, children, mode, withRowGap, ...rest },
+    ref
+  ) => {
+    const prefix = usePrefix();
+    const className = cx(customClassName, {
+      [`${prefix}--subgrid`]: true,
+      [`${prefix}--subgrid--condensed`]: mode === 'condensed',
+      [`${prefix}--subgrid--narrow`]: mode === 'narrow',
+      [`${prefix}--subgrid--wide`]: mode === 'wide',
+      [`${prefix}--subgrid--with-row-gap`]: withRowGap,
+    });
+    const BaseComponent = as || 'div';
+    return (
+      <BaseComponent {...rest} ref={ref} className={className}>
+        {children}
+      </BaseComponent>
+    );
+  }
+);
 
 Subgrid.propTypes = {
   /**
@@ -191,6 +204,12 @@ Subgrid.propTypes = {
    * Specify the gutter mode for the subgrid
    */
   mode: PropTypes.oneOf(['wide', 'narrow', 'condensed'] as SubgridMode[]),
+
+  /**
+   * Add a row gap to the grid that matches the current gutter size.
+   * This is useful when you want consistent vertical spacing between rows.
+   */
+  withRowGap: PropTypes.bool,
 };
 
 const CSSGridComponent: GridComponent = CSSGrid;

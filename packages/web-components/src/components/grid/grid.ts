@@ -73,7 +73,11 @@ class CDSGrid extends LitElement {
       } else if (this.condensed) {
         subMode = SUB_GRID_MODE.CONDENSED;
       }
-      return html`<div subgrid mode=${subMode} part="grid">
+      return html`<div
+        subgrid
+        mode=${subMode}
+        ?with-row-gap=${this.withRowGap}
+        part="grid">
         <slot></slot>
       </div> `;
     } else {

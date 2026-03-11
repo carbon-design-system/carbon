@@ -170,13 +170,17 @@ or the `narrow` prop to enable the narrow grid with a 16px gutter.
 
 ## Row gap
 
-By default, the CSS Grid does not add vertical spacing (row gap) between grid items. You can enable row gap by using the `withRowGap` prop on the `Grid` component. When enabled, the row gap will automatically match the current gutter size:
+By default, the CSS Grid does not add vertical spacing (row gap) between grid
+items. You can enable row gap by using the `withRowGap` prop on the `Grid`
+component. When enabled, the row gap will automatically match the current gutter
+size:
 
-- **Default mode**: 2rem (32px) row gap
-- **Narrow mode**: 1rem (16px) row gap
-- **Condensed mode**: 1px row gap
+- Default mode: 2rem (32px) row gap
+- Narrow mode: 1rem (16px) row gap
+- Condensed mode: 1px row gap
 
-This is useful when you want consistent vertical spacing between rows that matches your horizontal gutter spacing.
+This is useful when you want consistent vertical spacing between rows that
+matches your horizontal gutter spacing.
 
 ```jsx
 import { Grid, Column } from '@carbon/react';
@@ -206,8 +210,6 @@ function MyComponent() {
     },
   ]}
 />
-
-_Note: The `withRowGap` prop only works with CSS Grid. It is not available for FlexGrid as the flexbox grid is structured differently._
 
 ## Subgrid
 

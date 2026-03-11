@@ -208,12 +208,28 @@
   }
 
   .#{$prefix}--subgrid--condensed {
+    --cds-grid-gutter: #{$grid-gutter-condensed};
     --cds-grid-gutter-start: #{math.div($grid-gutter-condensed, 2)};
     --cds-grid-gutter-end: #{math.div($grid-gutter-condensed, 2)};
     --cds-grid-column-hang: #{math.div($grid-gutter, 2) - math.div(
         $grid-gutter-condensed,
         2
       )};
+  }
+
+  // -----------------------------------------------------------------------------
+  // Row gap
+  // -----------------------------------------------------------------------------
+
+  // Add row gap support for CSS subgrids
+  // Row gap should match the total gutter (start + end margins)
+  .#{$prefix}--subgrid--with-row-gap {
+    row-gap: var(--cds-grid-gutter);
+  }
+
+  // Narrow mode has 0 + 1rem = 1rem total gutter
+  .#{$prefix}--subgrid--narrow.#{$prefix}--subgrid--with-row-gap {
+    row-gap: calc(var(--cds-grid-gutter) / 2);
   }
 
   // -----------------------------------------------------------------------------
