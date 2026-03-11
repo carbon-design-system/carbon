@@ -20,12 +20,22 @@
     @include type-style('body-compact-01');
 
     display: flex;
+    align-items: center;
     color: $text-secondary;
+    min-inline-size: 0;
   }
 
   .#{$prefix}--icon-indicator svg {
     align-self: center;
+    flex-shrink: 0;
     margin-inline-end: $spacing-03;
+  }
+
+  .#{$prefix}--icon-indicator__label {
+    min-inline-size: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 
   .#{$prefix}--icon-indicator--20 {
