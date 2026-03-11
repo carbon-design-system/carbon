@@ -622,6 +622,8 @@ collect:
         - word
         # General - direction
         - bottom
+        - left
+        - right
         - top
         # General - kind
         - ""
