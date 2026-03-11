@@ -8,7 +8,13 @@
 import React from 'react';
 import Slider from '../Slider';
 import userEvent from '@testing-library/user-event';
-import { fireEvent, render, screen } from '@testing-library/react';
+import {
+  fireEvent,
+  render,
+  screen,
+  waitFor,
+  within,
+} from '@testing-library/react';
 
 const prefix = 'cds';
 const inputAriaValue = 'slider-input-aria-label-value';
@@ -225,6 +231,16 @@ describe('Slider', () => {
       expect(screen.getByRole('slider').id).toEqual(testId);
     });
 
+    it('should avoid using `Math.random` when auto-generating `id`s', () => {
+      const randomSpy = jest.spyOn(Math, 'random');
+
+      renderSlider();
+
+      expect(randomSpy).not.toHaveBeenCalled();
+
+      randomSpy.mockRestore();
+    });
+
     it('should apply a custom input type', () => {
       const customInputType = 'text';
       renderSlider({
@@ -427,6 +443,19 @@ describe('Slider', () => {
         expect(onChange).toHaveBeenLastCalledWith({
           value: 11,
         });
+      });
+
+      it('should not pass `stepMultiplier` to the root slider element', () => {
+        renderSlider({
+          ariaLabelInput: inputAriaValue,
+          stepMultiplier: 10,
+          'data-forwarded-prop': 'yes',
+        });
+
+        const sliderRoot = screen.getByRole('presentation');
+
+        expect(sliderRoot).toHaveAttribute('data-forwarded-prop', 'yes');
+        expect(sliderRoot).not.toHaveAttribute('stepmultiplier');
       });
 
       it('should gracefully handle non-numeric keys', async () => {
@@ -662,6 +691,35 @@ describe('Slider', () => {
       );
       expect(lowerInput).toHaveClass(`${prefix}--slider-text-input--lower`);
       expect(upperInput).toHaveClass(`${prefix}--slider-text-input--upper`);
+    });
+
+    it('should swap handle icons for RTL two handle sliders', async () => {
+      const originalDir = document.dir;
+
+      document.dir = 'rtl';
+
+      try {
+        renderTwoHandleSlider();
+
+        const [lowerThumb, upperThumb] = screen.getAllByRole('slider');
+
+        await waitFor(() => {
+          expect(
+            within(lowerThumb).getAllByLabelText(defaultAriaLabelInputUpper)
+          ).toHaveLength(2);
+          expect(
+            within(lowerThumb).queryByLabelText(defaultAriaLabelInput)
+          ).not.toBeInTheDocument();
+          expect(
+            within(upperThumb).getAllByLabelText(defaultAriaLabelInput)
+          ).toHaveLength(2);
+          expect(
+            within(upperThumb).queryByLabelText(defaultAriaLabelInputUpper)
+          ).not.toBeInTheDocument();
+        });
+      } finally {
+        document.dir = originalDir;
+      }
     });
 
     it('should be able to apply a disabled state', () => {
