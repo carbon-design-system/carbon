@@ -169,7 +169,7 @@ export interface FluidNumberInputProps
 }
 
 // eslint-disable-next-line react/display-name -- https://github.com/carbon-design-system/carbon/issues/20452
-const FluidNumberInput: React.FC<FluidNumberInputProps> = React.forwardRef<
+const FluidNumberInput = React.forwardRef<
   HTMLInputElement,
   FluidNumberInputProps
 >(({ className, ...other }, ref) => {

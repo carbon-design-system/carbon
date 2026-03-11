@@ -33,11 +33,11 @@ export interface SideNavHeaderProps {
    */
   renderIcon: React.ComponentType;
 }
-const SideNavHeader: React.FC<SideNavHeaderProps> = ({
+const SideNavHeader = ({
   children,
   className: customClassName,
   renderIcon: IconElement,
-}) => {
+}: SideNavHeaderProps) => {
   const prefix = usePrefix();
   const className = cx(`${prefix}--side-nav__header`, customClassName);
   return (

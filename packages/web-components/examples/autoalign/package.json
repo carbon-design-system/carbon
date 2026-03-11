@@ -15,7 +15,7 @@
     "sass": "^1.64.1"
   },
   "devDependencies": {
-    "vite": "^6.3.5",
+    "vite": "^7.1.2",
     "rimraf": "^6.0.1"
   }
 }

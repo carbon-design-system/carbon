@@ -15,8 +15,7 @@ import { FormContext } from '../FluidForm/FormContext';
 
 export interface FluidTextAreaProps {
   /**
-   * Provide a custom className that is applied directly to the underlying
-   * `<textarea>` node
+   * Provide a custom className that is applied to the wrapper node
    */
   className?: string;
 
@@ -125,10 +124,7 @@ export interface FluidTextAreaProps {
   readOnly?: boolean;
 }
 
-const FluidTextArea: React.FC<FluidTextAreaProps> = ({
-  className,
-  ...other
-}) => {
+const FluidTextArea = ({ className, ...other }: FluidTextAreaProps) => {
   const prefix = usePrefix();
   const classNames = classnames(`${prefix}--text-area--fluid`, className);
 
@@ -141,8 +137,7 @@ const FluidTextArea: React.FC<FluidTextAreaProps> = ({
 
 FluidTextArea.propTypes = {
   /**
-   * Provide a custom className that is applied directly to the underlying
-   * `<textarea>` node
+   * Provide a custom className that is applied to the wrapper node
    */
   className: PropTypes.string,
 

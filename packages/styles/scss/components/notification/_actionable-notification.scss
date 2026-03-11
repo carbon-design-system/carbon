@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2016, 2023
+// Copyright IBM Corp. 2016, 2026
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -22,42 +22,185 @@
 @use '../button/mixins' as button-mixins;
 @use '../button/vars' as button-vars;
 
+/// Actionable notification base styles
+/// @access public
+/// @group notification
+@mixin actionable-notification-base {
+  @include reset;
+
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  block-size: auto;
+  color: $text-inverse;
+  inline-size: 100%;
+  max-inline-size: convert.to-rem(288px);
+  min-block-size: convert.to-rem(48px);
+  min-inline-size: convert.to-rem(288px);
+
+  @include breakpoint(md) {
+    flex-wrap: nowrap;
+    max-inline-size: convert.to-rem(608px);
+  }
+
+  @include breakpoint(lg) {
+    max-inline-size: convert.to-rem(736px);
+  }
+
+  @include breakpoint(max) {
+    max-inline-size: convert.to-rem(832px);
+  }
+}
+/// Actionable notification toast variant base styles
+/// @access public
+/// @group notification
+@mixin actionable-notification-toast-base {
+  flex-wrap: wrap;
+  box-shadow: 0 2px 6px 0 rgb(0 0 0 / 20%);
+  max-inline-size: convert.to-rem(288px);
+  min-inline-size: convert.to-rem(288px);
+}
+
+/// Actionable notification low-contrast variant base styles
+/// @access public
+/// @group notification
+@mixin actionable-notification-low-contrast-base {
+  color: $text-primary;
+
+  .#{$prefix}--actionable-notification__subtitle,
+  .#{$prefix}--actionable-notification__caption {
+    color: $text-primary;
+  }
+
+  .#{$prefix}--actionable-notification__close-button
+    .#{$prefix}--actionable-notification__close-icon {
+    fill: $icon-primary;
+  }
+}
+
+/// Actionable notification error variant base styles
+/// @access public
+/// @group notification
+@mixin actionable-notification-error-base {
+  @include notification--experimental(
+    $support-error-inverse,
+    $background-inverse
+  );
+}
+
+/// Actionable notification success variant base styles
+/// @access public
+/// @group notification
+@mixin actionable-notification-success-base {
+  @include notification--experimental(
+    $support-success-inverse,
+    $background-inverse
+  );
+}
+
+/// Actionable notification info variant base styles
+/// @access public
+/// @group notification
+@mixin actionable-notification-info-base {
+  @include notification--experimental(
+    $support-info-inverse,
+    $background-inverse
+  );
+}
+
+/// Actionable notification warning variant base styles
+/// @access public
+/// @group notification
+@mixin actionable-notification-warning-base {
+  @include notification--experimental(
+    $support-warning-inverse,
+    $background-inverse
+  );
+}
+
+/// Actionable notification low-contrast error variant styles
+/// @access public
+/// @group notification
+@mixin actionable-notification-low-contrast-error {
+  @include notification--experimental(
+    $support-error,
+    $notification-background-error
+  );
+
+  &::before {
+    border-color: $support-error;
+  }
+}
+
+/// Actionable notification low-contrast success variant styles
+/// @access public
+/// @group notification
+@mixin actionable-notification-low-contrast-success {
+  @include notification--experimental(
+    $support-success,
+    $notification-background-success
+  );
+
+  &::before {
+    border-color: $support-success;
+  }
+}
+
+/// Actionable notification low-contrast info variant styles
+/// @access public
+/// @group notification
+@mixin actionable-notification-low-contrast-info {
+  @include notification--experimental(
+    $support-info,
+    $notification-background-info
+  );
+
+  &::before {
+    border-color: $support-info;
+  }
+}
+
+/// Actionable notification low-contrast warning variant styles
+/// @access public
+/// @group notification
+@mixin actionable-notification-low-contrast-warning {
+  @include notification--experimental(
+    $support-warning,
+    $notification-background-warning
+  );
+
+  &::before {
+    border-color: $support-warning;
+  }
+}
+
+/// Actionable notification low constrast inline ::before styles
+/// @access public
+/// @group notification
+@mixin actionable-notification-low-contrast-inline-before {
+  position: absolute;
+  box-sizing: border-box;
+  border-width: 1px 1px 1px 0;
+  border-style: solid;
+  block-size: 100%;
+  content: '';
+  filter: opacity(0.4);
+  inline-size: 100%;
+  inset-block-start: 0;
+  inset-inline-start: 0;
+  pointer-events: none;
+}
+
 /// Actionable notification styles
 /// @access public
 /// @group notification
 @mixin actionable-notification {
   .#{$prefix}--actionable-notification {
-    @include reset;
-
-    position: relative;
-    display: flex;
-    flex-wrap: wrap;
-    block-size: auto;
-    color: $text-inverse;
-    inline-size: 100%;
-    max-inline-size: convert.to-rem(288px);
-    min-block-size: convert.to-rem(48px);
-    min-inline-size: convert.to-rem(288px);
-
-    @include breakpoint(md) {
-      flex-wrap: nowrap;
-      max-inline-size: convert.to-rem(608px);
-    }
-
-    @include breakpoint(lg) {
-      max-inline-size: convert.to-rem(736px);
-    }
-
-    @include breakpoint(max) {
-      max-inline-size: convert.to-rem(832px);
-    }
+    @include actionable-notification-base;
   }
 
   .#{$prefix}--actionable-notification--toast {
-    flex-wrap: wrap;
-    box-shadow: 0 2px 6px 0 rgb(0 0 0 / 20%);
-    max-inline-size: convert.to-rem(288px);
-    min-inline-size: convert.to-rem(288px);
+    @include actionable-notification-toast-base;
   }
 
   .#{$prefix}--actionable-notification:not(
@@ -85,99 +228,49 @@
   }
 
   .#{$prefix}--actionable-notification--low-contrast {
-    color: $text-primary;
+    @include actionable-notification-low-contrast-base;
   }
 
   .#{$prefix}--actionable-notification--low-contrast:not(
       .#{$prefix}--actionable-notification--toast
     )::before {
-    position: absolute;
-    box-sizing: border-box;
-    border-width: 1px 1px 1px 0;
-    border-style: solid;
-    block-size: 100%;
-    content: '';
-    filter: opacity(0.4);
-    inline-size: 100%;
-    inset-block-start: 0;
-    inset-inline-start: 0;
-    pointer-events: none;
+    @include actionable-notification-low-contrast-inline-before;
   }
 
   .#{$prefix}--actionable-notification--error {
-    @include notification--experimental(
-      $support-error-inverse,
-      $background-inverse
-    );
+    @include actionable-notification-error-base;
   }
 
   .#{$prefix}--actionable-notification--low-contrast.#{$prefix}--actionable-notification--error {
-    @include notification--experimental(
-      $support-error,
-      $notification-background-error
-    );
-
-    &::before {
-      border-color: $support-error;
-    }
+    @include actionable-notification-low-contrast-error;
   }
 
   .#{$prefix}--actionable-notification--success {
-    @include notification--experimental(
-      $support-success-inverse,
-      $background-inverse
-    );
+    @include actionable-notification-success-base;
   }
 
   .#{$prefix}--actionable-notification--low-contrast.#{$prefix}--actionable-notification--success {
-    @include notification--experimental(
-      $support-success,
-      $notification-background-success
-    );
-
-    &::before {
-      border-color: $support-success;
-    }
+    @include actionable-notification-low-contrast-success;
   }
 
   .#{$prefix}--actionable-notification--info,
   .#{$prefix}--actionable-notification--info-square {
-    @include notification--experimental(
-      $support-info-inverse,
-      $background-inverse
-    );
+    @include actionable-notification-info-base;
   }
 
   .#{$prefix}--actionable-notification--low-contrast.#{$prefix}--actionable-notification--info,
   .#{$prefix}--actionable-notification--low-contrast.#{$prefix}--actionable-notification--info-square {
-    @include notification--experimental(
-      $support-info,
-      $notification-background-info
-    );
-
-    &::before {
-      border-color: $support-info;
-    }
+    @include actionable-notification-low-contrast-info;
   }
 
   .#{$prefix}--actionable-notification--warning,
   .#{$prefix}--actionable-notification--warning-alt {
-    @include notification--experimental(
-      $support-warning-inverse,
-      $background-inverse
-    );
+    @include actionable-notification-warning-base;
   }
 
   .#{$prefix}--actionable-notification--low-contrast.#{$prefix}--actionable-notification--warning,
   .#{$prefix}--actionable-notification--low-contrast.#{$prefix}--actionable-notification--warning-alt {
-    @include notification--experimental(
-      $support-warning,
-      $notification-background-warning
-    );
-
-    &::before {
-      border-color: $support-warning;
-    }
+    @include actionable-notification-low-contrast-warning;
   }
 
   .#{$prefix}--actionable-notification--warning
@@ -233,6 +326,10 @@
     padding: convert.to-rem(15px) 0;
   }
 
+  .#{$prefix}--actionable-notification__focus-wrapper {
+    display: contents;
+  }
+
   .#{$prefix}--actionable-notification__button-wrapper {
     display: flex;
   }
@@ -276,21 +373,11 @@
     word-break: break-word;
   }
 
-  .#{$prefix}--actionable-notification--low-contrast
-    .#{$prefix}--actionable-notification__subtitle {
-    color: $text-primary;
-  }
-
   .#{$prefix}--actionable-notification__caption {
     @include type-style('body-compact-01');
 
     color: $text-inverse;
     padding-block-start: $spacing-06;
-  }
-
-  .#{$prefix}--actionable-notification--low-contrast
-    .#{$prefix}--actionable-notification__caption {
-    color: $text-primary;
   }
 
   /* Ghost action button when inline */
@@ -481,12 +568,6 @@
   .#{$prefix}--actionable-notification--low-contrast
     .#{$prefix}--actionable-notification__close-button:focus {
     @include focus-outline('outline');
-  }
-
-  .#{$prefix}--actionable-notification--low-contrast
-    .#{$prefix}--actionable-notification__close-button
-    .#{$prefix}--actionable-notification__close-icon {
-    fill: $icon-primary;
   }
 
   // Windows HCM fix

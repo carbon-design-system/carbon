@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2019, 2025
+ * Copyright IBM Corp. 2019, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -18,6 +18,7 @@ import '../ai-label';
 import '../toggle-tip';
 import '../link';
 import '../button';
+import '../icon-button';
 
 const directionOptions = {
   [`Top`]: DROPDOWN_DIRECTION.TOP,
@@ -50,7 +51,7 @@ const items = [
   },
   {
     value: 'option-3',
-    text: 'Option 3 - a disabled item',
+    text: 'Option 3',
     disabled: true,
   },
   {
@@ -77,21 +78,22 @@ const items = [
 
 const defaultArgs = {
   ariaLabel: '',
+  autoalign: false,
   direction: DROPDOWN_DIRECTION.BOTTOM,
   disabled: false,
   hideLabel: false,
   helperText: '',
   invalid: false,
-  invalidText: '',
-  label: 'This is an example label',
+  invalidText: 'Error message goes here',
+  label: 'Choose an option',
   open: false,
   readOnly: false,
   size: null,
-  titleText: 'This is an example title',
+  titleText: 'Label',
   type: null,
   value: '',
   warn: false,
-  warnText: '',
+  warnText: 'Warning message goes here',
 };
 
 const controls = {
@@ -99,6 +101,11 @@ const controls = {
     control: 'text',
     description:
       'Specify a label to be read by screen readers on the container node.',
+  },
+  autoalign: {
+    control: 'boolean',
+    description:
+      'Will auto-align the dropdown. This attribute is currently experimental and is subject to future changes.',
   },
   direction: {
     control: 'select',
@@ -169,12 +176,13 @@ export const Default = {
   argTypes: controls,
   args: {
     ...defaultArgs,
-    helperText: 'This is some helper text',
-    invalidText: 'invalid selection',
-    warnText: 'please notice the warning',
+    helperText: 'Helper text',
+    invalidText: 'Error message goes here',
+    warnText: 'Warning message goes here',
   },
   render: ({
     ariaLabel,
+    autoalign,
     open,
     direction,
     disabled,
@@ -193,6 +201,7 @@ export const Default = {
   }) => html`
     <cds-dropdown
       aria-label=${ariaLabel}
+      ?autoalign=${autoalign}
       ?open=${open}
       ?disabled="${disabled}"
       ?hide-label=${hideLabel}
@@ -223,14 +232,20 @@ export const ExperimentalAutoAlign = {
   argTypes: controls,
   args: {
     ...defaultArgs,
+    autoalign: true,
     direction: DROPDOWN_DIRECTION.TOP,
-    helperText: 'This is some helper text',
+    helperText: 'Helper text',
+    invalid: false,
+    invalidText: 'Error message goes here',
     label: 'Option 1',
-    titleText: 'Dropdown label',
+    titleText: 'Label',
     value: 'option-1',
+    warn: false,
+    warnText: 'Warning message goes here',
   },
   render: ({
     ariaLabel,
+    autoalign,
     open,
     direction,
     disabled,
@@ -251,6 +266,7 @@ export const ExperimentalAutoAlign = {
       <div style="height: 300px"></div>
       <cds-dropdown
         aria-label=${ariaLabel}
+        ?autoalign=${autoalign}
         ?open=${open}
         ?disabled="${disabled}"
         ?hide-label=${hideLabel}
@@ -284,12 +300,13 @@ export const Inline = {
   args: {
     ...defaultArgs,
     label: 'Option 1',
-    titleText: 'Inline dropdown label',
+    titleText: 'Label',
     type: DROPDOWN_TYPE.INLINE,
     value: 'option-1',
   },
   render: ({
     ariaLabel,
+    autoalign,
     open,
     direction,
     disabled,
@@ -308,6 +325,7 @@ export const Inline = {
   }) => html`
     <cds-dropdown
       aria-label=${ariaLabel}
+      ?autoalign=${autoalign}
       ?open=${open}
       ?disabled="${disabled}"
       ?hide-label=${hideLabel}
@@ -339,12 +357,13 @@ export const InlineWithLayer = {
   args: {
     ...defaultArgs,
     label: 'Option 1',
-    titleText: 'Inline dropdown label',
+    titleText: 'Label',
     type: DROPDOWN_TYPE.INLINE,
     value: 'option-1',
   },
   render: ({
     ariaLabel,
+    autoalign,
     open,
     direction,
     disabled,
@@ -365,6 +384,7 @@ export const InlineWithLayer = {
       <div style="width:400px">
         <cds-dropdown
           aria-label=${ariaLabel}
+          ?autoalign=${autoalign}
           ?open=${open}
           ?disabled="${disabled}"
           ?hide-label=${hideLabel}
@@ -441,13 +461,18 @@ export const WithAILabel = {
   argTypes: controls,
   args: {
     ...defaultArgs,
-    helperText: 'This is some helper text',
+    helperText: 'Helper text',
+    invalid: false,
+    invalidText: 'Error message goes here',
     label: 'Option 1',
-    titleText: 'Dropdown title',
+    titleText: 'Label',
     value: 'option-1',
+    warn: false,
+    warnText: 'Warning message goes here',
   },
   render: ({
     ariaLabel,
+    autoalign,
     open,
     direction,
     disabled,
@@ -466,6 +491,7 @@ export const WithAILabel = {
   }) => html`
     <cds-dropdown
       aria-label=${ariaLabel}
+      ?autoalign=${autoalign}
       ?open=${open}
       ?disabled="${disabled}"
       ?hide-label=${hideLabel}
@@ -497,13 +523,18 @@ export const WithLayer = {
   argTypes: controls,
   args: {
     ...defaultArgs,
-    helperText: 'This is some helper text',
+    helperText: 'Helper text',
+    invalid: false,
+    invalidText: 'Error message goes here',
     label: 'Option 1',
-    titleText: 'Dropdown label',
+    titleText: 'Label',
     value: 'option-1',
+    warn: false,
+    warnText: 'Warning message goes here',
   },
   render: ({
     ariaLabel,
+    autoalign,
     open,
     direction,
     disabled,
@@ -524,6 +555,7 @@ export const WithLayer = {
       <div style="width:400px">
         <cds-dropdown
           aria-label=${ariaLabel}
+          ?autoalign=${autoalign}
           ?open=${open}
           ?disabled="${disabled}"
           ?hide-label=${hideLabel}
@@ -559,11 +591,12 @@ export const WithToggletipLabel = {
   args: {
     ...defaultArgs,
     label: 'placeholder',
-    titleText: 'Dropdown title',
+    titleText: 'Label',
     value: 'placeholder',
   },
   render: ({
     ariaLabel,
+    autoalign,
     open,
     direction,
     disabled,
@@ -581,6 +614,7 @@ export const WithToggletipLabel = {
   }) => html`
     <cds-dropdown
       aria-label=${ariaLabel}
+      ?autoalign=${autoalign}
       ?open=${open}
       ?disabled="${disabled}"
       ?hide-label=${hideLabel}

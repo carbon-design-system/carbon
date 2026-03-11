@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2025
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -85,6 +85,28 @@ describe('TextArea', () => {
       );
     });
 
+    it('should render helperText with value 0', () => {
+      render(<TextArea id="textarea-1" labelText="label" helperText={0} />);
+      expect(screen.getByText('0')).toBeInTheDocument();
+    });
+
+    it('should not set aria-describedby when helperText is omitted', () => {
+      render(<TextArea id="textarea-1" labelText="TextArea label" />);
+      expect(screen.getByRole('textbox')).not.toHaveAttribute(
+        'aria-describedby'
+      );
+    });
+
+    it('should set aria-describedby when helperText is 0', () => {
+      render(<TextArea id="textarea-1" labelText="label" helperText={0} />);
+
+      const textbox = screen.getByRole('textbox');
+      const helperId = textbox.getAttribute('aria-describedby');
+
+      expect(helperId).toMatch(/^text-area-helper-text-/);
+      expect(document.getElementById(helperId)).toHaveTextContent('0');
+    });
+
     it('should respect hideLabel prop', () => {
       render(<TextArea id="textarea-1" labelText="TextArea label" hideLabel />);
 
@@ -150,6 +172,11 @@ describe('TextArea', () => {
       expect(screen.getByText('TextArea label')).toHaveClass(
         `${prefix}--label`
       );
+    });
+
+    it('should render labelText with value 0', () => {
+      render(<TextArea id="textarea-1" labelText={0} />);
+      expect(screen.getByText('0')).toBeInTheDocument();
     });
 
     it('should respect `placeholder` prop', () => {
@@ -432,6 +459,38 @@ describe('TextArea', () => {
 
       await waitFor(() => {
         expect(screen.getByRole('textbox')).toHaveValue('one two three');
+      });
+    });
+
+    it('should correctly call onChange when no target value', async () => {
+      const onChange = jest.fn();
+      render(
+        <TextArea
+          id="input-1"
+          labelText="TextArea label"
+          enableCounter
+          maxCount={10}
+          counterMode="word"
+          defaultValue="A"
+          onChange={onChange}
+        />
+      );
+
+      // by default should show 1
+      expect(screen.getByText('1/10')).toBeInTheDocument();
+
+      fireEvent.change(screen.getByRole('textbox'), {
+        target: {
+          value: '',
+        },
+      });
+
+      await waitFor(() => {
+        expect(screen.getByText('0/10')).toBeInTheDocument();
+      });
+
+      await waitFor(() => {
+        expect(onChange).toHaveBeenCalledTimes(1);
       });
     });
 

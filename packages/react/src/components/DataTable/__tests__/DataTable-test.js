@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2022, 2025
+ * Copyright IBM Corp. 2022, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -119,13 +119,8 @@ describe('DataTable', () => {
             <Table {...getTableProps()}>
               <TableHead>
                 <TableRow>
-                  {headers.map((header, i) => (
-                    // TODO: `getHeaderProps` returns a `key`. Using it instead
-                    // of overwriting it with the `key` prop may improve test
-                    // coverage.
-                    //
-                    // This comment applies here and elsewhere.
-                    <TableHeader key={i} {...getHeaderProps({ header })}>
+                  {headers.map((header) => (
+                    <TableHeader {...getHeaderProps({ header })}>
                       {header.header}
                     </TableHeader>
                   ))}
@@ -133,10 +128,6 @@ describe('DataTable', () => {
               </TableHead>
               <TableBody>
                 {rows.map((row) => (
-                  // TODO: `getRowProps` returns a `key`. Using it may improve
-                  // test coverage.
-                  //
-                  // This comment applies here and elsewhere.
                   <TableRow {...getRowProps({ row })}>
                     {row.cells.map((cell) => (
                       <TableCell {...getCellProps({ cell })}>
@@ -220,6 +211,57 @@ describe('DataTable', () => {
           'Field 3:A',
           'Field 3:B',
         ]);
+      });
+
+      it('should resolve isSortable from header, override, and table defaults', () => {
+        const headersWithSort = [
+          { key: 'princess', header: 'Princess', isSortable: false },
+          { key: 'peach', header: 'Peach' },
+        ];
+        const { render: _render, ...baseProps } = mockProps;
+
+        render(
+          <DataTable {...baseProps} headers={headersWithSort} isSortable={true}>
+            {({ headers, getHeaderProps }) => {
+              const firstDefault = getHeaderProps({ header: headers[0] });
+              const secondDefault = getHeaderProps({ header: headers[1] });
+              const firstOverride = getHeaderProps({
+                header: headers[0],
+                isSortable: true,
+              });
+
+              return (
+                <div>
+                  <span
+                    data-testid="first-default"
+                    data-issortable={firstDefault.isSortable}
+                  />
+                  <span
+                    data-testid="second-default"
+                    data-issortable={secondDefault.isSortable}
+                  />
+                  <span
+                    data-testid="first-override"
+                    data-issortable={firstOverride.isSortable}
+                  />
+                </div>
+              );
+            }}
+          </DataTable>
+        );
+
+        expect(screen.getByTestId('first-default')).toHaveAttribute(
+          'data-issortable',
+          'false'
+        );
+        expect(screen.getByTestId('second-default')).toHaveAttribute(
+          'data-issortable',
+          'true'
+        );
+        expect(screen.getByTestId('first-override')).toHaveAttribute(
+          'data-issortable',
+          'true'
+        );
       });
 
       it('should re-sort new row props by the current sort state', async () => {
@@ -396,8 +438,8 @@ describe('DataTable', () => {
                   <TableHead>
                     <TableRow>
                       <TableSelectAll {...getSelectionProps()} />
-                      {headers.map((header, i) => (
-                        <TableHeader key={i} {...getHeaderProps({ header })}>
+                      {headers.map((header) => (
+                        <TableHeader {...getHeaderProps({ header })}>
                           {header.header}
                         </TableHeader>
                       ))}
@@ -568,8 +610,8 @@ describe('DataTable', () => {
                   <TableHead>
                     <TableRow>
                       <TableSelectAll {...getSelectionProps()} />
-                      {headers.map((header, i) => (
-                        <TableHeader key={i} {...getHeaderProps({ header })}>
+                      {headers.map((header) => (
+                        <TableHeader {...getHeaderProps({ header })}>
                           {header.header}
                         </TableHeader>
                       ))}
@@ -711,8 +753,8 @@ describe('DataTable', () => {
                 <Table>
                   <TableHead>
                     <TableRow>
-                      {headers.map((header, i) => (
-                        <TableHeader key={i} {...getHeaderProps({ header })}>
+                      {headers.map((header) => (
+                        <TableHeader {...getHeaderProps({ header })}>
                           {header.header}
                         </TableHeader>
                       ))}
@@ -842,8 +884,8 @@ describe('DataTable', () => {
                     <TableRow>
                       <TableExpandHeader {...getExpandHeaderProps()} />
                       <TableSelectAll {...getSelectionProps()} />
-                      {headers.map((header, i) => (
-                        <TableHeader key={i} {...getHeaderProps({ header })}>
+                      {headers.map((header) => (
+                        <TableHeader {...getHeaderProps({ header })}>
                           {header.header}
                         </TableHeader>
                       ))}
@@ -1102,9 +1144,7 @@ describe('DataTable', () => {
                 <TableHead>
                   <TableRow>
                     {headers.map((header) => (
-                      <TableHeader
-                        key={header.key}
-                        {...getHeaderProps({ header })}>
+                      <TableHeader {...getHeaderProps({ header })}>
                         {header.header}
                       </TableHeader>
                     ))}
@@ -1166,9 +1206,7 @@ describe('DataTable', () => {
                 <TableHead>
                   <TableRow>
                     {headers.map((header) => (
-                      <TableHeader
-                        key={header.key}
-                        {...getHeaderProps({ header })}>
+                      <TableHeader {...getHeaderProps({ header })}>
                         {header.header}
                       </TableHeader>
                     ))}
@@ -1252,9 +1290,7 @@ describe('DataTable', () => {
                 <TableHead>
                   <TableRow>
                     {headers.map((header) => (
-                      <TableHeader
-                        key={header.key}
-                        {...getHeaderProps({ header })}>
+                      <TableHeader {...getHeaderProps({ header })}>
                         {header.header}
                       </TableHeader>
                     ))}
@@ -1328,9 +1364,7 @@ describe('DataTable', () => {
                 <TableHead>
                   <TableRow>
                     {headers.map((header) => (
-                      <TableHeader
-                        key={header.key}
-                        {...getHeaderProps({ header })}>
+                      <TableHeader {...getHeaderProps({ header })}>
                         {header.header}
                       </TableHeader>
                     ))}

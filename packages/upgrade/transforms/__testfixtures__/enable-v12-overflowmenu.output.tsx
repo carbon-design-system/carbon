@@ -1,7 +1,6 @@
 //prettier-ignore
 import React from 'react';
 import { FeatureFlags } from '@carbon/feature-flags';
-import type { FC } from 'react';
 import { MenuItem, MenuItemDivider, OverflowMenu, OverflowMenuItem } from '@carbon/react';
 
 interface MenuItem {
@@ -14,7 +13,7 @@ interface Props {
   items: MenuItem[];
 }
 
-const TestComponent: FC<Props> = ({ items }) => {
+const TestComponent = ({ items }: Props) => {
   return (
     (<div>
       {/* Old API usage - mapped items */}

@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2025
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -10,7 +10,6 @@ import { fireEvent, render, screen, act } from '@testing-library/react';
 import { FileUploaderDropContainer } from '../';
 import React from 'react';
 import { getByText } from '@carbon/test-utils/dom';
-import { uploadFiles } from '../test-helpers';
 import userEvent from '@testing-library/user-event';
 
 const requiredProps = { labelText: 'Add file' };
@@ -175,6 +174,32 @@ describe('FileUploaderDropContainer', () => {
     const addedFiles = call[1].addedFiles;
 
     expect(addedFiles.length).toBe(2);
+    expect(addedFiles[0].invalidFileType).toBeFalsy();
+    expect(addedFiles[1].invalidFileType).toBeTruthy();
+  });
+
+  it('should mark files over maxFileSize as invalid', async () => {
+    const onAddFiles = jest.fn();
+    const { container } = render(
+      <FileUploaderDropContainer
+        multiple
+        maxFileSize={1}
+        onAddFiles={onAddFiles}
+        {...requiredProps}
+      />
+    );
+
+    const input = container.querySelector('input');
+    const files = [
+      new File(['a'], 'small.txt', { type: 'text/plain' }), // size 1, at limit
+      new File(['ab'], 'max-filesize.txt', { type: 'text/plain' }), // size 2, over limit
+    ];
+
+    await act(async () => {
+      fireEvent.change(input, { target: { files } });
+    });
+
+    const addedFiles = onAddFiles.mock.calls[0][1].addedFiles;
     expect(addedFiles[0].invalidFileType).toBeFalsy();
     expect(addedFiles[1].invalidFileType).toBeTruthy();
   });
@@ -530,6 +555,33 @@ describe('FileUploaderDropContainer', () => {
 
     expect(onAddFiles).toHaveBeenCalledWith(expect.anything(), {
       addedFiles: [files[0]],
+    });
+  });
+
+  it('should ignore directory items dropped via dataTransfer.items', () => {
+    const onAddFiles = jest.fn();
+    const { container } = render(
+      <FileUploaderDropContainer onAddFiles={onAddFiles} {...requiredProps} />
+    );
+    const dropArea = container.firstChild;
+    const directoryItem = {
+      kind: 'file',
+      getAsFile: jest.fn(() => null),
+      webkitGetAsEntry: jest.fn(() => ({ isDirectory: true })),
+    };
+    const dropEvent = {
+      dataTransfer: {
+        items: [directoryItem],
+        files: [],
+      },
+      preventDefault: jest.fn(),
+      stopPropagation: jest.fn(),
+    };
+
+    fireEvent.drop(dropArea, dropEvent);
+
+    expect(onAddFiles).toHaveBeenCalledWith(expect.anything(), {
+      addedFiles: [],
     });
   });
 });

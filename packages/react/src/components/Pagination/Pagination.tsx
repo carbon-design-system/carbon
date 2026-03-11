@@ -5,16 +5,17 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { CaretRight, CaretLeft } from '@carbon/icons-react';
-import cx from 'classnames';
+import { CaretLeft, CaretRight } from '@carbon/icons-react';
+import React, { useEffect, useRef, useState } from 'react';
+
+import { IconButton } from '../IconButton';
 import PropTypes from 'prop-types';
-import React, { useState, useRef, useEffect } from 'react';
 import Select from '../Select';
 import SelectItem from '../SelectItem';
+import cx from 'classnames';
+import isEqual from 'react-fast-compare';
 import { useFallbackId } from '../../internal/useId';
 import { usePrefix } from '../../internal/usePrefix';
-import { IconButton } from '../IconButton';
-import isEqual from 'react-fast-compare';
 
 type ExcludedAttributes = 'id' | 'onChange';
 
@@ -98,6 +99,11 @@ export interface PaginationProps
    * A function returning PII showing where the current page is.
    */
   pageRangeText?: (current: number, total: number) => string;
+
+  /**
+   * A function returning the label for the page select.
+   */
+  pageSelectLabelText?: (total: number) => string;
 
   /**
    * The number dictating how many items a page contains.
@@ -184,6 +190,8 @@ const Pagination = React.forwardRef(
       pageNumberText: _pageNumberText = 'Page Number',
       pageRangeText = (_current, total) =>
         `of ${total} ${total === 1 ? 'page' : 'pages'}`,
+      pageSelectLabelText = (total) =>
+        `Page of ${total} ${total === 1 ? 'page' : 'pages'}`,
       page: controlledPage = 1,
       pageInputDisabled,
       pageSize: controlledPageSize,
@@ -417,7 +425,7 @@ const Pagination = React.forwardRef(
               <Select
                 id={`${prefix}-pagination-select-${inputId}-right`}
                 className={`${prefix}--select__page-number`}
-                labelText={`Page of ${totalPages} pages`}
+                labelText={pageSelectLabelText(totalPages)}
                 inline
                 hideLabel
                 onChange={handlePageInputChange}
@@ -444,7 +452,7 @@ const Pagination = React.forwardRef(
               <CaretLeft />
             </IconButton>
             <IconButton
-              align="top-end"
+              align="top"
               disabled={forwardButtonDisabled || isLastPage}
               kind="ghost"
               className={forwardButtonClasses}
@@ -530,6 +538,11 @@ Pagination.propTypes = {
    * A function returning PII showing where the current page is.
    */
   pageRangeText: PropTypes.func,
+
+  /**
+   * A function returning the label for the page select.
+   */
+  pageSelectLabelText: PropTypes.func,
 
   /**
    * The number dictating how many items a page contains.

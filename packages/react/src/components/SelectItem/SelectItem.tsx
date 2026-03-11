@@ -1,12 +1,12 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
 import PropTypes from 'prop-types';
-import React, { HTMLAttributes } from 'react';
+import React, { type HTMLAttributes, type OptionHTMLAttributes } from 'react';
 import classNames from 'classnames';
 import { usePrefix } from '../../internal/usePrefix';
 
@@ -34,8 +34,7 @@ export interface SelectItemProps extends HTMLAttributes<HTMLOptionElement> {
   /**
    * Specify the value of the <SelectItem>
    */
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
-  value: any;
+  value: OptionHTMLAttributes<HTMLOptionElement>['value'];
 }
 
 const SelectItem = ({

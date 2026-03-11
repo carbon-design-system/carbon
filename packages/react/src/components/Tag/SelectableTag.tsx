@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2025
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -7,7 +7,6 @@
 
 import PropTypes from 'prop-types';
 import React, {
-  useLayoutEffect,
   useState,
   useRef,
   MouseEvent,
@@ -24,6 +23,8 @@ import { Text } from '../Text';
 import { isEllipsisActive } from './isEllipsisActive';
 import { mergeRefs } from '../../tools/mergeRefs';
 import { useControllableState } from '../../internal/useControllableState';
+import useIsomorphicEffect from '../../internal/useIsomorphicEffect';
+
 export interface SelectableTagBaseProps {
   /**
    * Provide a custom className that is applied to the containing <span>
@@ -102,8 +103,8 @@ const SelectableTag = forwardRef(
   ) => {
     const prefix = usePrefix();
     const tagRef = useRef<HTMLButtonElement>(null);
-    // eslint-disable-next-line  react-hooks/rules-of-hooks -- https://github.com/carbon-design-system/carbon/issues/20452
-    const tagId = id || `tag-${useId()}`;
+    const generatedTagId = useId();
+    const tagId = id ?? `tag-${generatedTagId}`;
     const [selectedTag, setSelectedTag] = useControllableState({
       value: selected,
       onChange: onChange,
@@ -114,7 +115,7 @@ const SelectableTag = forwardRef(
     });
     const [isEllipsisApplied, setIsEllipsisApplied] = useState(false);
 
-    useLayoutEffect(() => {
+    useIsomorphicEffect(() => {
       const newElement = tagRef.current?.getElementsByClassName(
         `${prefix}--tag__label`
       )[0];

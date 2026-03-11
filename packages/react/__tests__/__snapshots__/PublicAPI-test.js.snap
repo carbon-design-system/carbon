@@ -2160,6 +2160,9 @@ Map {
         "className": {
           "type": "string",
         },
+        "decorator": {
+          "type": "node",
+        },
         "description": {
           "type": "node",
         },
@@ -2585,7 +2588,7 @@ Map {
     },
     "propTypes": {
       "children": {
-        "type": "node",
+        "type": "func",
       },
       "experimentalAutoAlign": {
         "type": "bool",
@@ -2601,6 +2604,9 @@ Map {
                 "header": {
                   "isRequired": true,
                   "type": "node",
+                },
+                "isSortable": {
+                  "type": "bool",
                 },
                 "key": {
                   "isRequired": true,
@@ -2690,9 +2696,6 @@ Map {
       "columnCount": {
         "type": "number",
       },
-      "compact": {
-        "type": "bool",
-      },
       "headers": {
         "args": [
           {
@@ -2718,6 +2721,18 @@ Map {
       },
       "showToolbar": {
         "type": "bool",
+      },
+      "size": {
+        "args": [
+          [
+            "xs",
+            "sm",
+            "md",
+            "lg",
+            "xl",
+          ],
+        ],
+        "type": "oneOf",
       },
       "zebra": {
         "type": "bool",
@@ -3000,7 +3015,9 @@ Map {
       "onClick": {
         "type": "func",
       },
-      "pattern": [Function],
+      "pattern": {
+        "type": "string",
+      },
       "placeholder": {
         "type": "string",
       },
@@ -3613,11 +3630,17 @@ Map {
       "labelTitle": {
         "type": "string",
       },
+      "maxFileSize": {
+        "type": "number",
+      },
       "multiple": {
         "type": "bool",
       },
       "name": {
         "type": "string",
+      },
+      "onAddFiles": {
+        "type": "func",
       },
       "onChange": {
         "type": "func",
@@ -3733,6 +3756,9 @@ Map {
       "labelText": {
         "isRequired": true,
         "type": "string",
+      },
+      "maxFileSize": {
+        "type": "number",
       },
       "multiple": {
         "type": "bool",
@@ -4314,7 +4340,9 @@ Map {
       "onClick": {
         "type": "func",
       },
-      "pattern": [Function],
+      "pattern": {
+        "type": "string",
+      },
       "placeholder": {
         "type": "string",
       },
@@ -6367,6 +6395,9 @@ Map {
       "className": {
         "type": "string",
       },
+      "dangerDescription": {
+        "type": "string",
+      },
       "disabled": {
         "type": "bool",
       },
@@ -6759,7 +6790,7 @@ Map {
         "type": "string",
       },
       "label": {
-        "type": "node",
+        "type": "string",
       },
       "labelClassName": {
         "type": "string",
@@ -7317,6 +7348,9 @@ Map {
       "onKeyUp": {
         "type": "func",
       },
+      "onStepperBlur": {
+        "type": "func",
+      },
       "pattern": {
         "type": "string",
       },
@@ -7623,6 +7657,9 @@ Map {
       "closeMenu": {
         "type": "func",
       },
+      "dangerDescription": {
+        "type": "string",
+      },
       "disabled": {
         "type": "bool",
       },
@@ -7737,6 +7774,9 @@ Map {
         "type": "string",
       },
       "pageRangeText": {
+        "type": "func",
+      },
+      "pageSelectLabelText": {
         "type": "func",
       },
       "pageSize": {
@@ -9941,6 +9981,9 @@ Map {
       },
       "className": {
         "type": "string",
+      },
+      "decorator": {
+        "type": "node",
       },
       "description": {
         "type": "node",
@@ -12374,7 +12417,9 @@ Map {
       "onClick": {
         "type": "func",
       },
-      "pattern": [Function],
+      "pattern": {
+        "type": "string",
+      },
       "placeholder": {
         "type": "string",
       },
@@ -14354,7 +14399,9 @@ Map {
       "onClick": {
         "type": "func",
       },
-      "pattern": [Function],
+      "pattern": {
+        "type": "string",
+      },
       "placeholder": {
         "type": "string",
       },
@@ -15771,5 +15818,7 @@ Map {
   "usePrefix" => {},
   "useTheme" => {},
   "validateNumberSeparators" => {},
+  "withComposedModalPresence" => {},
+  "withModalPresence" => {},
 }
 `;

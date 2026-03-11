@@ -11,6 +11,7 @@
 @use 'z-index' as *;
 @use '../config' as *;
 @use '../motion' as *;
+@use '../spacing' as *;
 @use '../theme' as *;
 @use '../type';
 
@@ -36,11 +37,12 @@
   @include box-shadow;
 
   z-index: z('floating');
-  padding: if(
-    $tooltip-type == 'definition',
-    convert.to-rem(8px) convert.to-rem(16px),
-    convert.to-rem(3px) convert.to-rem(16px)
-  );
+  @if $tooltip-type == 'definition' {
+    padding: $spacing-03 $spacing-05;
+  } @else {
+    padding: convert.to-rem(3px) $spacing-05;
+  }
+
   border-radius: convert.to-rem(2px);
   background-color: $background-inverse;
   block-size: auto;
@@ -159,7 +161,7 @@
   }
 
   // content box
-  // @todo Simplify CSS selectors on next major release
+  // TODO: Simplify CSS selectors on next major release
   &::after,
   .#{$prefix}--assistive-text,
   + .#{$prefix}--assistive-text {
@@ -233,11 +235,11 @@
   $align: 'center'
 ) {
   // position and alignment
-  $caret-spacing: if(
-    $tooltip-type == 'definition',
-    convert.to-rem(4px),
-    convert.to-rem(8px)
-  );
+  $caret-spacing: $spacing-03;
+
+  @if $tooltip-type == 'definition' {
+    $caret-spacing: $spacing-02;
+  }
 
   // space between caret and trigger button
   $caret-height: convert.to-rem(5px);
@@ -277,7 +279,7 @@
     }
   }
 
-  // @todo Simplify CSS selectors on next major release
+  // TODO: Simplify CSS selectors on next major release
   &::before,
   &::after,
   .#{$prefix}--assistive-text,
@@ -337,7 +339,7 @@
   }
 
   // alignment options available only for top and bottom tooltip position
-  // @todo Simplify CSS selectors on next major release
+  // TODO: Simplify CSS selectors on next major release
   &::after,
   .#{$prefix}--assistive-text,
   + .#{$prefix}--assistive-text {
@@ -376,7 +378,7 @@
     }
   }
 
-  // @todo simplify on next major release to move the ::before pseudo element within the tooltip instead of the trigger
+  // TODO: simplify on next major release to move the ::before pseudo element within the tooltip instead of the trigger
   @if $tooltip-type == 'definition' {
     &.#{$prefix}--tooltip--a11y + .#{$prefix}--assistive-text {
       @if ($position == 'bottom') {
