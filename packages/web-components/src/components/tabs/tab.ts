@@ -85,14 +85,16 @@ export default class CDSTab extends CDSContentSwitcherItem {
         tabindex="${selected ? 0 : -1}"
         ?disabled="${disabled}"
         aria-selected="${selected}">
-        <slot @slotchange="${handleSlotChange}"></slot>
+        <span class="${prefix}--tabs__nav-item-label-wrapper">
+          <slot @slotchange="${handleSlotChange}"></slot>
+        </span>
         ${!disabled && badgeIndicator
           ? html`<cds-badge-indicator></cds-badge-indicator>`
           : ''}
       </a>
     `;
 
-    if (isIconOnly && accessibleLabel) {
+    if (isIconOnly && accessibleLabel && !disabled) {
       return html`
         <cds-tooltip align="bottom" class="${prefix}--icon-tooltip">
           ${tabLink}

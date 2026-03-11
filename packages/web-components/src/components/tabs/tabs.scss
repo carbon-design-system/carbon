@@ -162,6 +162,10 @@ $inset-transition: inset 110ms motion(standard, productive);
   block-size: $spacing-08;
   inline-size: $spacing-08;
 
+  .#{$prefix}--tabs__nav-item-label-wrapper {
+    display: flex;
+  }
+
   #{$prefix}-tooltip {
     display: block;
     block-size: 100%;
@@ -187,13 +191,18 @@ $inset-transition: inset 110ms motion(standard, productive);
     inline-size: 100%;
   }
 
-  .#{$prefix}--tabs__nav-link:focus:not(:focus-visible) {
-    @include focus-outline('reset');
-  }
-
   ::slotted(svg) {
     display: block;
     fill: currentColor;
+  }
+}
+
+:host(
+    #{$prefix}-tab.#{$prefix}--tabs__nav-item--icon-only:not([type='contained'])
+  ) {
+  .#{$prefix}--tabs__nav-item-label-wrapper {
+    position: relative;
+    inset-block-start: convert.to-rem(1px);
   }
 }
 
@@ -225,7 +234,7 @@ $inset-transition: inset 110ms motion(standard, productive);
   }
 }
 
-:host(#{$prefix}-tab:hover) {
+:host(#{$prefix}-tab:hover:not([selected])) {
   background-color: transparent;
   box-shadow: 0 -1px 0 $background-hover;
 
