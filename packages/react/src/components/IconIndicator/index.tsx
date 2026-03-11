@@ -106,7 +106,7 @@ export const IconIndicator = React.forwardRef(
           size={size}
           className={`${prefix}--icon-indicator--${kind}`}
         />
-        {label}
+        <span className={`${prefix}--icon-indicator__label`}>{label}</span>
       </div>
     );
   }
