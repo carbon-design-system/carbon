@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2018, 2024
+ * Copyright IBM Corp. 2018, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -33,13 +33,7 @@ export default function getAttributes({
     viewBox,
   };
 
-  // TODO: attributes.title assumes that the consumer will implement <title> and
-  // correctly set `aria-labelledby`.
-  if (
-    iconAttributes['aria-label'] ||
-    iconAttributes['aria-labelledby'] ||
-    iconAttributes.title
-  ) {
+  if (iconAttributes['aria-label'] || iconAttributes['aria-labelledby']) {
     iconAttributes.role = 'img';
 
     // Reference:

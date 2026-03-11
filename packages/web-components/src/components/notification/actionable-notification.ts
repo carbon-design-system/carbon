@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2019, 2024
+ * Copyright IBM Corp. 2019, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -20,6 +20,7 @@ import CDSInlineNotification from './inline-notification';
 import styles from './actionable-notification.scss?lit';
 import HostListener from '../../globals/decorators/host-listener';
 import HostListenerMixin from '../../globals/mixins/host-listener';
+import CDSButton from '../button/button';
 
 /**
  * The default icons, keyed by notification kind.
@@ -289,7 +290,13 @@ class CDSActionableNotification extends HostListenerMixin(
     }
     if (changedProperties.has('hasFocus')) {
       if (this.hasFocus) {
-        this.focus();
+        if (button) {
+          (button as CDSButton).updateComplete.then(() => {
+            (button as HTMLElement).focus();
+          });
+        } else {
+          this.focus();
+        }
       }
     }
   }

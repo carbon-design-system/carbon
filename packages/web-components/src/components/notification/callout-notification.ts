@@ -5,12 +5,14 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { html, svg } from 'lit';
+import { html } from 'lit';
 import { property } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
-import CDSActionableNotification from './actionable-notification';
-import { iconsForKinds } from './actionable-notification';
+import { iconLoader } from '../../globals/internal/icon-loader';
+import CDSActionableNotification, {
+  iconsForKinds,
+} from './actionable-notification';
 import { NOTIFICATION_KIND } from './defs';
 import styles from './actionable-notification.scss?lit';
 
@@ -38,15 +40,13 @@ class CDSCalloutNotification extends CDSActionableNotification {
 
   protected _renderIcon() {
     const { statusIconDescription, kind } = this;
-    const { [kind]: icon } = iconsForKinds;
-    return !icon
-      ? undefined
-      : icon({
+    const IconComponent = iconsForKinds[kind];
+    return IconComponent
+      ? iconLoader(IconComponent, {
           class: `${prefix}--inline-notification__icon`,
-          children: !statusIconDescription
-            ? undefined
-            : svg`<title>${statusIconDescription}</title>`,
-        });
+          'aria-label': statusIconDescription || undefined,
+        })
+      : undefined;
   }
 
   protected _renderText() {

@@ -7,7 +7,7 @@
 
 'use strict';
 
-const svg2js = require('svgo/lib/svgo/svg2js');
+const parser = require('svgson');
 const { svgo } = require('./optimizer');
 const { getModuleName } = require('./getModuleName');
 
@@ -147,7 +147,7 @@ const output = (options = defaultOptions) => {
  * @returns {object}
  */
 async function createDescriptor(name, data, size, original) {
-  const info = await parse(data, name);
+  const info = parse(data, name);
   const { attrs } = info;
   const descriptor = {
     ...info,
@@ -181,60 +181,51 @@ async function createDescriptor(name, data, size, original) {
 
 /**
  * Attempt to parse the given svg string to an object-based representation
- * using SVGO's svg2js
+ * using svgson (similar structure to XAST)
  * @param {string} svg - the source svg for the icon
  * @param {string} name - the name of the icon
  * @returns {object}
  */
-async function parse(svg, name) {
-  const root = await svg2jsAsync(svg);
+function parse(svg, name) {
   try {
-    return convert(root.content[0]);
+    const root = parser.parseSync(svg);
+    // svgson returns the root element directly (not wrapped in a 'root' node)
+    // It has type: 'element', name, attributes, children structure similar to XAST
+    if (root.type === 'element') {
+      return convert(root);
+    }
+    throw new Error('Invalid SVG structure: no root element found');
   } catch (error) {
     // eslint-disable-next-line no-console
     console.log(error);
     // eslint-disable-next-line no-console
     console.log(`Error parsing icon with name: ${name}`);
+    throw error;
   }
 }
 
 /**
- * Convert svg2js from a callback style to a Promise
- * @param {any} args
- * @returns {Promise}
- */
-function svg2jsAsync(...args) {
-  return new Promise((resolve, reject) => {
-    svg2js(...args, ({ error, ...rest }) => {
-      if (error) {
-        reject(error);
-        return;
-      }
-      resolve(rest);
-    });
-  });
-}
-
-/**
- * Converts the data structure from svg2js to one that we can use for a
+ * Converts the data structure from XAST to one that we can use for a
  * descriptor
- * @param {object} root
+ * @param {object} node - XAST node (element type)
  * @returns {object}
  */
-function convert(root) {
-  const { elem, attrs = {}, content } = root;
+function convert(node) {
+  // XAST structure: name instead of elem, attributes (plain object) instead of attrs.value, children instead of content
+  if (node.type !== 'element') {
+    throw new Error(`Expected element node, got ${node.type}`);
+  }
+
+  const { name, attributes = {}, children } = node;
   const safeFormat = {
-    elem,
-    attrs: Object.keys(attrs).reduce((acc, attr) => {
-      return {
-        ...acc,
-        [attr]: attrs[attr].value,
-      };
-    }, {}),
+    elem: name,
+    attrs: attributes,
   };
 
-  if (content) {
-    safeFormat.content = content.map(convert);
+  if (children && children.length > 0) {
+    safeFormat.content = children
+      .filter((child) => child.type === 'element') // Only convert element nodes
+      .map(convert);
   }
 
   return safeFormat;

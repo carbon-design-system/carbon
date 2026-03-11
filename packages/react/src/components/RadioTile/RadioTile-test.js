@@ -134,6 +134,77 @@ describe('RadioTile', () => {
       );
       expect(screen.getByRole('radio')).toHaveAttribute('required');
     });
+
+    it('should apply "aria-describedby" to the input element', () => {
+      render(
+        <RadioTile value="standard" aria-describedby="description-id">
+          Option 1
+        </RadioTile>
+      );
+
+      expect(screen.getByRole('radio')).toHaveAttribute(
+        'aria-describedby',
+        'description-id'
+      );
+    });
+
+    it('should apply "aria-labelledby" to the input element', () => {
+      render(
+        <RadioTile value="standard" aria-labelledby="label-id">
+          Option 1
+        </RadioTile>
+      );
+
+      expect(screen.getByRole('radio')).toHaveAttribute(
+        'aria-labelledby',
+        'label-id'
+      );
+    });
+
+    it('should apply both "aria-describedby" and "aria-labelledby" to the input element', () => {
+      render(
+        <RadioTile
+          value="standard"
+          aria-describedby="description-id"
+          aria-labelledby="label-id">
+          Option 1
+        </RadioTile>
+      );
+
+      const input = screen.getByRole('radio');
+      expect(input).toHaveAttribute('aria-describedby', 'description-id');
+      expect(input).toHaveAttribute('aria-labelledby', 'label-id');
+    });
+
+    it('should not apply "aria-describedby" to the label element', () => {
+      render(
+        <RadioTile
+          value="standard"
+          aria-describedby="description-id"
+          data-testid="test-id">
+          Option 1
+        </RadioTile>
+      );
+
+      expect(screen.getByTestId('test-id')).not.toHaveAttribute(
+        'aria-describedby'
+      );
+    });
+
+    it('should not apply "aria-labelledby" to the label element', () => {
+      render(
+        <RadioTile
+          value="standard"
+          aria-labelledby="label-id"
+          data-testid="test-id">
+          Option 1
+        </RadioTile>
+      );
+
+      expect(screen.getByTestId('test-id')).not.toHaveAttribute(
+        'aria-labelledby'
+      );
+    });
   });
 
   it('should check decorator prop and if AILabel exists on radio tile and is xs', async () => {

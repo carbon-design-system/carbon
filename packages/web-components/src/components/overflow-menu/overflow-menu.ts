@@ -1,11 +1,11 @@
 /**
- * Copyright IBM Corp. 2019, 2023
+ * Copyright IBM Corp. 2019, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
-import { html } from 'lit';
+import { adoptStyles, html } from 'lit';
 import { property } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
 import HostListener from '../../globals/decorators/host-listener';
@@ -15,6 +15,8 @@ import { find } from '../../globals/internal/collection-helpers';
 import CDSFloatingMenuTrigger from '../floating-menu/floating-menu-trigger';
 import { OVERFLOW_MENU_SIZE } from './defs';
 import CDSOverflowMenuBody from './overflow-menu-body';
+
+import iconButtonStyles from '../icon-button/icon-button.scss?lit';
 import styles from './overflow-menu.scss?lit';
 import CDSIconButton from '../icon-button/icon-button';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
@@ -139,6 +141,8 @@ class CDSOverflowMenu
       this.attachShadow({ mode: 'open' });
     }
     super.connectedCallback();
+
+    adoptStyles(this.renderRoot as ShadowRoot, [iconButtonStyles, styles]);
   }
 
   updated(changedProperties) {
@@ -161,14 +165,14 @@ class CDSOverflowMenu
       }
       const { _menuBody: menuBody, size } = this;
       if (menuBody) {
-        menuBody.setAttribute('breadcrumb', String(Boolean(this.breadcrumb)));
+        menuBody.setAttribute('breadcrumb', String(this.breadcrumb));
         menuBody.open = open;
         menuBody.size = size;
 
         const tooltipContent = this.querySelector(
           '[slot=tooltip-content]'
         )?.textContent;
-        button?.setAttribute('aria-expanded', String(Boolean(open)));
+        button?.setAttribute('aria-expanded', String(open));
         button?.setAttribute('aria-label', String(tooltipContent));
       }
     }
@@ -202,8 +206,6 @@ class CDSOverflowMenu
   render() {
     return html`${super.render()} `;
   }
-
-  static styles = styles;
 }
 
 export default CDSOverflowMenu;

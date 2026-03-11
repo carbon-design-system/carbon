@@ -77,15 +77,26 @@ test.describe('@avt Button', () => {
     await expect(page).toHaveNoACViolations('Button-secondary');
   });
 
-  test('@avt-advanced-states set-of-buttons', async ({ page }) => {
+  test('@avt-advanced-states set-of-buttons--default', async ({ page }) => {
     await visitStory(page, {
       component: 'Button',
-      id: 'components-button--set-of-buttons',
+      id: 'components-button-set-of-buttons--default',
       globals: {
         theme: 'white',
       },
     });
-    await expect(page).toHaveNoACViolations('Button-set-of-buttons');
+    await expect(page).toHaveNoACViolations('Button-set-of-buttons--default');
+  });
+
+  test('@avt-advanced-states fluid set-of-buttons--fluid', async ({ page }) => {
+    await visitStory(page, {
+      component: 'Button',
+      id: 'components-button-set-of-buttons--fluid',
+      globals: {
+        theme: 'white',
+      },
+    });
+    await expect(page).toHaveNoACViolations('Button-set-of-buttons--fluid');
   });
 
   test('@avt-advanced-states skeleton', async ({ page }) => {

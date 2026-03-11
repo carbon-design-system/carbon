@@ -1,13 +1,12 @@
 /**
- * Copyright IBM Corp. 2019, 2024
+ * Copyright IBM Corp. 2019, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20452
-// @ts-nocheck
-import rangePlugin, { Config } from 'flatpickr/dist/plugins/rangePlugin.js';
+import rangePlugin from 'flatpickr/dist/esm/plugins/rangePlugin.js';
+import type { Config } from 'flatpickr/dist/plugins/rangePlugin';
 import { Instance as FlatpickrInstance } from 'flatpickr/dist/types/instance';
 import { Plugin } from 'flatpickr/dist/types/options';
 import on from '../../globals/mixins/on';

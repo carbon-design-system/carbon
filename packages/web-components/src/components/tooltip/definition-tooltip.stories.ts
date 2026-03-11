@@ -28,8 +28,8 @@ const tooltipAlignments = {
 const defaultArgs = {
   align: POPOVER_ALIGNMENT.BOTTOM_LEFT,
   defaultOpen: false,
-  definition: 'Example defintion',
-  openOnHover: false,
+  definition: 'Example definition',
+  openOnHover: true,
 };
 
 const controls = {
@@ -41,7 +41,7 @@ const controls = {
   openOnHover: {
     control: 'boolean',
     description:
-      'Specifies whether the defintion tooltip should open on hover or not',
+      'Specifies whether the definition tooltip should open on hover or not',
   },
   defaultOpen: {
     control: 'boolean',
@@ -77,7 +77,7 @@ export const Default = {
   `,
 };
 const meta = {
-  title: 'Components/Defintion tooltip',
+  title: 'Components/Definition tooltip',
   decorators: [
     (story) =>
       html` <div class="sb-tooltip-story sb-definition-tooltip">

@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -31,7 +31,7 @@ export interface ButtonSkeletonProps extends React.HTMLAttributes<HTMLElement> {
   small?: boolean;
 }
 
-const ButtonSkeleton: React.FC<ButtonSkeletonProps> = ({
+const ButtonSkeleton = ({
   className,
   small = false,
   href,
@@ -49,6 +49,7 @@ const ButtonSkeleton: React.FC<ButtonSkeletonProps> = ({
     [`${prefix}--btn--lg`]: size === 'lg',
     [`${prefix}--btn--xl`]: size === 'xl',
     [`${prefix}--btn--2xl`]: size === '2xl',
+    [`${prefix}--layout--size-${size}`]: size,
   });
 
   const commonProps = {

@@ -76,6 +76,7 @@ categories:
       - technical-owner
       - telum-ii-chip
       - telum-ii-processor
+      - visual--inspection
   - name: Blockchain
     members:
       - connected--ecosystem
@@ -591,6 +592,7 @@ categories:
       - chart--high-low
       - chart--histogram
       - chart--line
+      - chart--lollipop
       - chart--multi-line
       - chart--multi-type
       - chart--parallel
@@ -797,10 +799,14 @@ categories:
       - console
       - console--wireless
       - desktop
+      - drone--1
+      - drone
       - electric
       - headphones
       - microphone
+      - mouse
       - printer
+      - radio
       - team-radio
       - telephone
       - television
@@ -906,6 +912,7 @@ categories:
       - bee
       - carbon
       - carbon--for-cloud
+      - db2--genius-hub
       - carbon--for-ibm-dotcom
       - carbon--for-ibm-product
       - enterprise--design--thinking--01
@@ -920,6 +927,8 @@ categories:
       - ibm--z-os-package-manager
       - ibm--z--partition
       - progress
+      - selectric-typewriter
+      - silicon--wafer
       - swift-at-ibm
       - world--community--grid
   - name: Industry
@@ -1004,36 +1013,74 @@ categories:
       - bat--hanging
       - birthday--cake
       - blender
+      - burger
+      - cactus--01
+      - cactus--02
+      - cactus--flower
       - cafe
       - candy
+      - cat--01
       - champagne
       - cherries
       - cookie
-      - cowboy--hat
+      - cow
       - cowboy--boot
+      - cowboy--hat
+      - crab
       - crosshairs
       - cupcake
       - dining
+      - dog--01
+      - dog--02
+      - dog--walking
+      - face--melting
+      - half-note
       - hard--ice--cream
       - firecracker
+      - fish
       - flower--01
       - flower--02
+      - food--truck
+      - frozen--pipe
       - gramophone
       - guitar
+      - hiking
+      - horse
       - juice
       - lantern
+      - limes
       - longhorn
+      - mandolin
+      - margarita-glass
+      - martini-glass
+      - melting--ice--cream
       - moon-cake
+      - nachos
+      - northern--mockingbird
+      - octopus
+      - oil--lamp
       - ornament
       - pencil
+      - people--dancing
+      - pepper
       - perfume
+      - person--sweating
+      - piano
+      - pizza
+      - popsicle
+      - popsicle--melting
       - rock-on
+      - salad
       - scale
+      - sea-shell
+      - shrimp
       - snowflake
       - soft--ice--cream
       - spotlight
       - stage
+      - starfish
       - stationary--bicycle
+      - taco
       - tennis
       - tennis--ball
       - tennis--net
@@ -1041,8 +1088,11 @@ categories:
       - tickets
       - tree
       - tree--02
+      - trumpet
+      - vinyl--record
       - waving-hand
       - wedding--cake
+      - whale
       - whistle
       - yoga--01
       - yoga--02
@@ -1051,6 +1101,7 @@ categories:
   - name: Location
     members:
       - americas
+      - austin--texas
       - asia--australia
       - earth
       - europe--africa
@@ -1058,6 +1109,7 @@ categories:
       - globe--locations
       - india--south-asia
       - location
+      - north--america
   - name: Manufacturing
     members:
       - delivery--truck
@@ -1281,6 +1333,12 @@ categories:
       - vault
   - name: Sports
     members:
+      - binocular
+      - cleat
+      - cricket--ball
+      - cricket--bat-and-ball
+      - cricket--field
+      - cricket--helmet
       - f1--car--01
       - f1--car--02
       - f1--grid
@@ -1290,19 +1348,30 @@ categories:
       - football
       - football--field
       - football--goal-post
+      - football--pose
       - golf--bag
       - golf--ball
+      - golf--cart
       - golf--club
       - golf--hole
+      - golf--pose--01
+      - golf--pose--02
       - headset
       - helmet
+      - helmet--football
       - masters-leader-board
+      - mountain--biking
+      - paddleboarding
       - punching-bag--01
       - punching-bag--02
       - punching-bag--03
       - racetrack
+      - road--biking
+      - skiing
       - speed-bag
       - sports
+      - snowboarding
+      - stadium--seats
       - tennis
       - tennis--ball
       - tennis--court
@@ -1442,6 +1511,7 @@ categories:
       - train
       - travel-and-expenses
       - tunnel
+      - waymo-car
   - name: watsonx
     members:
       - alchemy--data--news
@@ -1513,6 +1583,7 @@ categories:
       - rainy
       - rainy--heavy
       - snow
+      - star
       - sunny
       - sunny--hazy
       - temperature--high
@@ -1544,6 +1615,8 @@ categories:
       - no--food
       - no--liquids
       - no--parking
+      - paper-cup
+      - paper-cup-with-metal-can
       - parking
       - person--working
       - plastic-bottle

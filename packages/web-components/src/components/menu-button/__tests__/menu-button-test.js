@@ -280,6 +280,58 @@ describe('cds-menu-button', function () {
     });
   });
 
+  describe('internal close helpers', () => {
+    it('should close the menu and optionally restore focus', async () => {
+      const el = await fixture(menuButton);
+      const originalFocusTrigger = el._focusTrigger;
+      let focused = false;
+
+      el._focusTrigger = () => {
+        focused = true;
+      };
+
+      el._open = true;
+      el._closeMenu({ restoreFocus: true });
+      expect(el._open).to.be.false;
+      expect(focused).to.be.true;
+
+      focused = false;
+      el._open = true;
+      el._closeMenu({ restoreFocus: false });
+      expect(el._open).to.be.false;
+      expect(focused).to.be.false;
+
+      el._focusTrigger = originalFocusTrigger;
+    });
+
+    it('should respect menu closed events', async () => {
+      const el = await fixture(menuButton);
+      const menu = el.querySelector('cds-menu');
+
+      const closeCalls = [];
+      const originalCloseMenu = el._closeMenu;
+      el._closeMenu = (options) => {
+        closeCalls.push(options);
+      };
+
+      el._open = true;
+      el._handleMenuClosed({
+        target: menu,
+        detail: { triggerEventType: 'click' },
+      });
+      expect(closeCalls[0]).to.deep.equal({ restoreFocus: true });
+
+      el._open = true;
+      el._handleMenuClosed({
+        target: menu,
+        detail: { triggerEventType: 'focusout' },
+      });
+      expect(closeCalls[1]).to.deep.equal({ restoreFocus: false });
+
+      el._closeMenu = originalCloseMenu;
+    });
+  });
+
   // Note: Focus management in WC is limited by Shadow DOM, so this suite covers basic trigger behavior only
   describe('Keyboard and focus interaction', () => {
     it('should receive focus and open with Space/Enter', async () => {

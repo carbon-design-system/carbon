@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2019, 2024
+ * Copyright IBM Corp. 2019, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -14,6 +14,7 @@ import FocusMixin from '../../globals/mixins/focus';
 import { iconLoader } from '../../globals/internal/icon-loader';
 import styles from './modal.scss?lit';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
+import '../icon-button';
 
 /**
  * Modal close button.
@@ -37,16 +38,21 @@ class CDSModalCloseButton extends FocusMixin(LitElement) {
   render() {
     const { closeButtonLabel } = this;
     return html`
-      <button
+      <cds-icon-button
         part="button"
+        align="left"
+        enter-delay-ms=""
         aria-label="${ifDefined(closeButtonLabel)}"
-        class="${prefix}--modal-close"
-        title="${ifDefined(closeButtonLabel)}">
+        kind="ghost"
+        size="lg"
+        leave-delay-ms="">
         ${iconLoader(Close20, {
+          slot: 'icon',
           part: 'close-icon',
           class: `${prefix}--modal-close__icon`,
         })}
-      </button>
+        <span slot="tooltip-content">${closeButtonLabel}</span>
+      </cds-icon-button>
     `;
   }
 

@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2025
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -8,7 +8,6 @@
 import PropTypes from 'prop-types';
 import React, {
   MouseEventHandler,
-  useLayoutEffect,
   useState,
   useRef,
   forwardRef,
@@ -23,6 +22,7 @@ import { Tooltip } from '../Tooltip';
 import { Text } from '../Text';
 import { isEllipsisActive } from './isEllipsisActive';
 import { mergeRefs } from '../../tools/mergeRefs';
+import useIsomorphicEffect from '../../internal/useIsomorphicEffect';
 
 const TYPES = {
   red: 'Red',
@@ -98,12 +98,12 @@ const OperationalTag = forwardRef(
   ) => {
     const prefix = usePrefix();
     const tagRef = useRef<HTMLButtonElement>(null);
-    // eslint-disable-next-line  react-hooks/rules-of-hooks -- https://github.com/carbon-design-system/carbon/issues/20452
-    const tagId = id || `tag-${useId()}`;
+    const generatedTagId = useId();
+    const tagId = id ?? `tag-${generatedTagId}`;
     const tagClasses = classNames(`${prefix}--tag--operational`, className);
     const [isEllipsisApplied, setIsEllipsisApplied] = useState(false);
 
-    useLayoutEffect(() => {
+    useIsomorphicEffect(() => {
       const newElement = tagRef.current?.getElementsByClassName(
         `${prefix}--tag__label`
       )[0];

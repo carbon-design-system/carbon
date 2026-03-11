@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -71,7 +71,10 @@ export interface HeaderGlobalActionProps {
  *
  * Note: children passed to this component should be an Icon.
  */
-const HeaderGlobalAction: React.FC<HeaderGlobalActionProps> = React.forwardRef(
+const HeaderGlobalAction = React.forwardRef<
+  HTMLButtonElement,
+  HeaderGlobalActionProps
+>(
   (
     {
       'aria-label': ariaLabel,
@@ -85,7 +88,7 @@ const HeaderGlobalAction: React.FC<HeaderGlobalActionProps> = React.forwardRef(
       tooltipAlignment,
       ...rest
     },
-    ref: React.Ref<HTMLButtonElement>
+    ref
   ) => {
     const prefix = usePrefix();
     const className = cx({

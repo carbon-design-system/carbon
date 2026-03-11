@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2019, 2024
+// Copyright IBM Corp. 2019, 2025
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -10,6 +10,7 @@
 @use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/styles/scss/theme';
 @use '@carbon/styles/scss/type';
+@use '@carbon/styles/scss/utilities/focus-outline';
 
 // This is a utility class to make sure that tooltip stories have a minimum
 // height when used in MDX docs
@@ -27,9 +28,12 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 1px solid theme.$border-subtle;
-  block-size: $spacing-07;
-  inline-size: $spacing-07;
+  block-size: $spacing-05;
+  inline-size: $spacing-05;
+}
+
+.sb-tooltip-trigger:focus {
+  @include focus-outline.focus-outline;
 }
 
 .sb-tooltip-trigger svg {

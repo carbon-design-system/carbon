@@ -6,7 +6,7 @@
  */
 
 import { LitElement, html } from 'lit';
-import { property } from 'lit/decorators.js';
+import { property, query } from 'lit/decorators.js';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import { classMap } from 'lit/directives/class-map.js';
 import { prefix } from '../../globals/settings';
@@ -20,6 +20,7 @@ import '../tooltip';
 import '../tooltip/tooltip-content';
 import styles from './password-input.scss?lit';
 import CDSTextInput from '../text-input/text-input';
+import CDSTooltip from '../tooltip/tooltip';
 
 import {
   INPUT_COLOR_SCHEME,
@@ -46,6 +47,12 @@ export {
  */
 @customElement(`${prefix}-password-input`)
 class CDSPasswordInput extends CDSTextInput {
+  /**
+   * The Show/Hide Password tooltip
+   */
+  @query(`${prefix}-tooltip`)
+  private _passwordTooltip?: HTMLElement;
+
   /**
    * Handles `oninput` event on the `input`.
    *
@@ -114,7 +121,7 @@ class CDSPasswordInput extends CDSTextInput {
    * Handles password visibility toggle button click
    */
   private handleTogglePasswordVisibility() {
-    if (this.disabled || this.readonly) return;
+    if (this.disabled) return;
     this.type =
       this.type === INPUT_TYPE.PASSWORD ? INPUT_TYPE.TEXT : INPUT_TYPE.PASSWORD;
   }
@@ -313,9 +320,10 @@ class CDSPasswordInput extends CDSTextInput {
             <cds-tooltip
               align="${align}"
               class="${passwordVisibilityTooltipClasses}"
-              ?disabled="${normalizedProps.disabled || readonly}">
+              .dropShadow="${false}"
+              ?disabled="${normalizedProps.disabled}">
               <button
-                ?disabled="${normalizedProps.disabled || readonly}"
+                ?disabled="${normalizedProps.disabled}"
                 type="button"
                 role="button"
                 class="${passwordVisibilityButtonClasses}"
@@ -325,7 +333,7 @@ class CDSPasswordInput extends CDSTextInput {
               </button>
               <cds-tooltip-content
                 id="content"
-                ?hidden="${normalizedProps.disabled || readonly}">
+                ?hidden="${normalizedProps.disabled}">
                 ${passwordIsVisible
                   ? this.hidePasswordLabel
                   : this.showPasswordLabel}
@@ -343,6 +351,12 @@ class CDSPasswordInput extends CDSTextInput {
     `;
   }
 
+  async firstUpdated() {
+    await (this._passwordTooltip as CDSTooltip)?.updateComplete;
+    this._passwordTooltip?.shadowRoot
+      ?.querySelector(`.${prefix}--tooltip`)
+      ?.classList.add(`${prefix}--icon-tooltip`);
+  }
   /**
    * A selector that will return the slug item.
    *

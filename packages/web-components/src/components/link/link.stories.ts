@@ -24,6 +24,10 @@ const controls = {
     control: 'boolean',
     description: `Specify if the control should be disabled, or not`,
   },
+  inline: {
+    control: 'boolean',
+    description: `Specify whether the link should render inline`,
+  },
   href: {
     control: 'text',
     description: `Provide the href attribute for the <a> node`,
@@ -56,8 +60,19 @@ export const Default = {
 };
 
 export const Inline = {
-  render: () => html`
-    <cds-link inline href="#"
+  argTypes: controls,
+  args: {
+    ...defaultArgs,
+    inline: true,
+  },
+  render: ({ disabled, href, inline, size, visited, onClick }) => html`
+    <cds-link
+      ?disabled="${disabled}"
+      .href="${ifDefined(href)}"
+      .size="${ifDefined(size)}"
+      ?inline="${inline}"
+      ?visited="${visited}"
+      @click="${onClick}"
       >Lorem ipsum dolor sit amet, consectetur adipiscing elit.</cds-link
     >
     <p>
@@ -65,7 +80,13 @@ export const Inline = {
       fringilla eros vehicula id. Ut at enim quis libero pharetra ullamcorper.
       Maecenas feugiat sodales arcu ut porttitor. In blandit ultricies est.
       Vivamus risus massa, cursus eu tellus sed, sagittis commodo nunc.
-      <cds-link inline href="#"
+      <cds-link
+        ?disabled="${disabled}"
+        .href="${ifDefined(href)}"
+        .size="${ifDefined(size)}"
+        ?inline="${inline}"
+        ?visited="${visited}"
+        @click="${onClick}"
         >Maecenas nunc mauris, consequat quis mauris sit amet,</cds-link
       >
       finibus suscipit nunc. Phasellus ex quam, placerat quis tempus sit amet,
@@ -80,11 +101,12 @@ export const Inline = {
 export const PairedWithIcon = {
   args: defaultArgs,
   argTypes: controls,
-  render: ({ disabled, href, size, onClick }) => html`
+  render: ({ disabled, href, size, visited, onClick }) => html`
     <cds-link
       ?disabled="${disabled}"
       .href="${ifDefined(href)}"
       .size="${ifDefined(size)}"
+      ?visited="${visited}"
       @click="${onClick}">
       Carbon Docs ${iconLoader(ArrowRight16, { slot: 'icon' })}
     </cds-link>

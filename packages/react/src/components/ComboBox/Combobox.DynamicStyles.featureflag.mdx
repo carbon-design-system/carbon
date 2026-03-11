@@ -27,17 +27,14 @@ https://github.com/carbon-design-system/carbon/issues/18714.
 ## Enable dynamic setting of floating styles
 
 ```js
-<FeatureFlags
-  flags={{
-    'enable-v12-dynamic-floating-styles': true,
-  }}>
+<FeatureFlags enableV12DynamicFloatingStyles>
   <ComboBox
     onChange={() => {}}
     id="carbon-combobox"
     items={comboBoxItems}
     itemToString={(item) => (item ? item.text : '')}
-    titleText="ComboBox title"
-    helperText="Combobox helper text"
+    titleText="Label"
+    helperText="Helper text"
     {...args}
   />
 </FeatureFlags>

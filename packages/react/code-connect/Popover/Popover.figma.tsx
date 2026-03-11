@@ -1,11 +1,10 @@
 /**
- * Copyright IBM Corp. 2016, 2024
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20452
 // @ts-nocheck
 import React from 'react';
 import { Popover, PopoverContent } from '@carbon/react';
@@ -39,7 +38,6 @@ figma.connect(
       }),
     },
     example: ({ align, open, popoverItem }) => {
-      // eslint-disable-next-line  react-hooks/rules-of-hooks -- https://github.com/carbon-design-system/carbon/issues/20452
       const [open, setOpen] = React.useState(false);
       return (
         <Popover
@@ -78,7 +76,6 @@ figma.connect(
       }),
     },
     example: ({ align, open, dropShadow, popoverItem }) => {
-      // eslint-disable-next-line  react-hooks/rules-of-hooks -- https://github.com/carbon-design-system/carbon/issues/20452
       const [open, setOpen] = React.useState(false);
       return (
         <Popover isTabTip align={align} open={open} dropShadow={dropShadow}>

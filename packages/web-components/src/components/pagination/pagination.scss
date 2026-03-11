@@ -21,6 +21,10 @@ $css--plex: true !default;
   position: relative;
   outline: none;
 
+  #{$prefix}-select[inline] {
+    --cds-background: $layer;
+  }
+
   .#{$prefix}-ce--pagination__divider {
     background-color: $layer-accent-01;
     block-size: 100%;

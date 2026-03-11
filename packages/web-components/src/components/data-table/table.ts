@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2019, 2024
+ * Copyright IBM Corp. 2019, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -355,8 +355,7 @@ class CDSTable extends HostListenerMixin(LitElement) {
           ?.querySelector(`${prefix}-checkbox`)
           .shadowRoot.querySelector(`.${prefix}--checkbox`);
 
-        headerCheckbox.disabled =
-          unfilteredSelectableLength === 0 ? true : false;
+        headerCheckbox.disabled = unfilteredSelectableLength === 0;
       }
 
       if (this.expandable) {
@@ -551,7 +550,7 @@ class CDSTable extends HostListenerMixin(LitElement) {
       ?.querySelector(`${prefix}-checkbox`)
       .shadowRoot.querySelector(`.${prefix}--checkbox`);
     const allRowsSelected = this._selectedRows.length === totalSelectableRows;
-    headerCheckbox.checked = !this._selectedRows.length ? false : true;
+    headerCheckbox.checked = Boolean(this._selectedRows.length);
     headerCheckbox.indeterminate =
       !allRowsSelected && this._selectedRows.length > 0;
 
@@ -885,10 +884,11 @@ class CDSTable extends HostListenerMixin(LitElement) {
       Array.prototype.slice
         .call((row as HTMLElement).children)
         .forEach((cell, index) => {
-          // eslint-disable-next-line  @typescript-eslint/no-unused-expressions -- https://github.com/carbon-design-system/carbon/issues/20452
-          headersWithAILabel.includes(index)
-            ? cell.setAttribute('ai-label-in-header', '')
-            : cell.removeAttribute('ai-label-in-header');
+          if (headersWithAILabel.includes(index)) {
+            cell.setAttribute('ai-label-in-header', '');
+          } else {
+            cell.removeAttribute('ai-label-in-header');
+          }
         });
     });
   }

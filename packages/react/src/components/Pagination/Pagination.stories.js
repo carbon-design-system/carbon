@@ -5,9 +5,9 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import Pagination from './Pagination';
 import React from 'react';
 import { action } from 'storybook/actions';
-import Pagination from './Pagination';
 import mdx from './Pagination.mdx';
 
 const props = () => ({
@@ -17,8 +17,8 @@ const props = () => ({
   pagesUnknown: false,
   pageInputDisabled: undefined,
   pageSizeInputDisabled: undefined,
-  backwardText: 'Previous page',
-  forwardText: 'Next page',
+  backwardText: 'Previous',
+  forwardText: 'Next',
   pageSize: 10,
   pageSizes: [10, 20, 30, 40, 50],
   itemsPerPageText: 'Items per page:',
@@ -54,8 +54,8 @@ export const Default = (args) => {
 };
 
 Default.args = {
-  backwardText: 'Previous page',
-  forwardText: 'Next page',
+  backwardText: 'Previous',
+  forwardText: 'Next',
   disabled: false,
   isLastPage: false,
   itemsPerPageText: 'Items per page:',

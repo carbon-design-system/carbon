@@ -19,6 +19,7 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/utilities/convert';
 
 :host(#{$prefix}-multi-select) {
+  box-sizing: border-box;
   outline: none;
 
   .#{$prefix}--assistive-text {
@@ -88,7 +89,7 @@ $css--plex: true !default;
   }
 }
 
-:host(#{$prefix}-multi-select[invalid]) {
+:host(#{$prefix}-multi-select[invalid]:not([disabled]):not([read-only])) {
   .#{$prefix}--form__helper-text {
     color: $text-error;
   }
@@ -476,7 +477,7 @@ $css--plex: true !default;
   }
 }
 
-:host(#{$prefix}-multi-select[warn]) {
+:host(#{$prefix}-multi-select[warn]:not([disabled]):not([read-only])) {
   .#{$prefix}--form__helper-text {
     color: $text-primary;
   }

@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2015, 2023
+ * Copyright IBM Corp. 2015, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -15,7 +15,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 const BANNER = `/**
- * Copyright IBM Corp. 2015, 2023
+ * Copyright IBM Corp. 2015, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -25,8 +25,13 @@ const BANNER = `/**
 const baseConfig = {
   external: [],
   plugins: [
-    resolve(),
-    babel({ babelHelpers: 'bundled' }),
+    resolve({
+      extensions: ['.js', '.ts'],
+    }),
+    babel({
+      babelHelpers: 'bundled',
+      extensions: ['.js', '.ts'],
+    }),
     stripBanner(),
     {
       renderChunk(code) {
@@ -39,7 +44,7 @@ const baseConfig = {
 export default [
   {
     ...baseConfig,
-    input: join(__dirname, './src/index.js'),
+    input: join(__dirname, './src/index.ts'),
     output: {
       file: 'es/index.js',
       format: 'esm',
@@ -47,7 +52,7 @@ export default [
   },
   {
     ...baseConfig,
-    input: join(__dirname, './src/index.js'),
+    input: join(__dirname, './src/index.ts'),
     output: {
       file: 'lib/index.js',
       format: 'commonjs',

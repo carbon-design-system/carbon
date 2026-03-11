@@ -70,3 +70,9 @@ deprecated:
   - name: ai-status--rejected
     reason:
       Icon no longer relevant to how we represent AI moments
+  - name: database--redis
+    reason:
+      Icon no longer relevant. IBM Cloud Databases for Redis UI icon is retired. New icon with new name was requested
+  - name: ibm-watsonx--code-assistant-for-z--refactor
+    reason:
+      Icon no longer relevant. watsonx Code Assistant for Z Refactoring Assistant has been merged into an existing product.
