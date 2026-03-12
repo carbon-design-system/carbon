@@ -9,7 +9,7 @@
 
 /// Retrieve the unicode range for a given range name in a given ranges map
 /// @param {String} $name
-/// @param {String} $ranges
+/// @param {Map} $ranges
 /// @returns {List}
 @function get-range($name, $ranges) {
   @if map.has-key($ranges, $name) {
