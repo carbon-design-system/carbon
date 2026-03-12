@@ -376,6 +376,7 @@ exports[`v11 v11 token group 1`] = `
   "chat-button-text-selected",
   "highlight",
   "overlay",
+  "color-scheme",
   "toggle-off",
   "shadow",
   "focus",

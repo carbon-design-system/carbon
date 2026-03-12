@@ -9,7 +9,7 @@ import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import React from 'react';
 import { SideNavMenu, SideNavMenuItem } from '../';
-import { SideNavContext } from '../SideNav';
+import { SideNavContext } from '../SideNavContext';
 
 describe('SideNavMenu', () => {
   it('should be expanded by default if `defaultExpanded` is true', () => {
