@@ -912,6 +912,7 @@ categories:
       - bee
       - carbon
       - carbon--for-cloud
+      - db2--genius-hub
       - carbon--for-ibm-dotcom
       - carbon--for-ibm-product
       - enterprise--design--thinking--01
@@ -1614,6 +1615,8 @@ categories:
       - no--food
       - no--liquids
       - no--parking
+      - paper-cup
+      - paper-cup-with-metal-can
       - parking
       - person--working
       - plastic-bottle
