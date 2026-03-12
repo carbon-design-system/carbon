@@ -101,6 +101,11 @@ export interface PaginationProps
   pageRangeText?: (current: number, total: number) => string;
 
   /**
+   * A function returning the label for the page select.
+   */
+  pageSelectLabelText?: (total: number) => string;
+
+  /**
    * The number dictating how many items a page contains.
    */
   pageSize?: number;
@@ -185,6 +190,8 @@ const Pagination = React.forwardRef(
       pageNumberText: _pageNumberText = 'Page Number',
       pageRangeText = (_current, total) =>
         `of ${total} ${total === 1 ? 'page' : 'pages'}`,
+      pageSelectLabelText = (total) =>
+        `Page of ${total} ${total === 1 ? 'page' : 'pages'}`,
       page: controlledPage = 1,
       pageInputDisabled,
       pageSize: controlledPageSize,
@@ -418,7 +425,7 @@ const Pagination = React.forwardRef(
               <Select
                 id={`${prefix}-pagination-select-${inputId}-right`}
                 className={`${prefix}--select__page-number`}
-                labelText={`Page of ${totalPages} pages`}
+                labelText={pageSelectLabelText(totalPages)}
                 inline
                 hideLabel
                 onChange={handlePageInputChange}
@@ -531,6 +538,11 @@ Pagination.propTypes = {
    * A function returning PII showing where the current page is.
    */
   pageRangeText: PropTypes.func,
+
+  /**
+   * A function returning the label for the page select.
+   */
+  pageSelectLabelText: PropTypes.func,
 
   /**
    * The number dictating how many items a page contains.
