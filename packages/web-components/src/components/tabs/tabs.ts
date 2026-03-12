@@ -182,41 +182,42 @@ export default class CDSTabs extends HostListenerMixin(CDSContentSwitcher) {
 
   @HostListener('cds-tab-closed')
   protected _handleTabClosed(event: CustomEvent) {
-    const { index } = event.detail;
-    const { selectorItemEnabled, selectorItem } = this
+    const { selectorItem, selectorItemEnabled, selectorItemSelected } = this
       .constructor as typeof CDSTabs;
-    const activeItem = this.querySelectorAll<CDSTab>(selectorItem)[index];
-    const indexEnabled = Array.from(
-      this.querySelectorAll<CDSTab>(selectorItemEnabled)
-    ).indexOf(activeItem);
-    const activeTabClosed = activeItem.selected;
+    const { index } = event.detail;
 
-    // Defer focus logic until after the tab is removed from DOM
+    const allTabs = this.querySelectorAll<CDSTab>(selectorItem);
+    const enabledTabsBeforeRemoval =
+      this.querySelectorAll<CDSTab>(selectorItemEnabled);
+    const activeItem = this.querySelector<CDSTab>(selectorItemSelected);
+    const indexInEnabledTabs = Array.from(enabledTabsBeforeRemoval).indexOf(
+      allTabs[index]
+    );
+    const activeTabClosed = activeItem === allTabs[index];
     requestAnimationFrame(() => {
-      // Get all enabled (selectable) tabs AFTER removal
       const enabledTabs = this.querySelectorAll<CDSTab>(selectorItemEnabled);
-      if (enabledTabs.length === 0) {
-        this.value = '';
-        return;
-      }
-      const nextTab =
-        indexEnabled < enabledTabs.length
-          ? enabledTabs[indexEnabled]
-          : enabledTabs[indexEnabled - 1];
-      if (nextTab) {
+      if (enabledTabs.length > 0) {
         if (activeTabClosed) {
-          nextTab.selected = true;
-          this.value = nextTab.value;
-        } else {
-          nextTab.highlighted = true;
+          enabledTabs[0].selected = true;
+          this.value = enabledTabs[0].value;
         }
-
-        nextTab.shadowRoot
+        const nextHighlightedItem =
+          indexInEnabledTabs < enabledTabs.length
+            ? enabledTabs[indexInEnabledTabs]
+            : enabledTabs[indexInEnabledTabs - 1];
+        nextHighlightedItem.highlighted = true;
+        nextHighlightedItem.shadowRoot
           ?.querySelector<HTMLElement>(
             `.${prefix}--tabs__nav-link--dismissable`
           )
           ?.focus();
-        nextTab.scrollIntoView({ block: 'nearest', inline: 'nearest' });
+        nextHighlightedItem.scrollIntoView({
+          block: 'nearest',
+          inline: 'nearest',
+        });
+      } else {
+        this.value = '';
+        return;
       }
     });
   }
@@ -268,7 +269,6 @@ export default class CDSTabs extends HostListenerMixin(CDSContentSwitcher) {
     if (nextItem) {
       (nextItem as CDSTab).hideDivider = true;
     }
-    this._tabInitialLoad();
     this._updateTabsState();
   }
 
@@ -586,7 +586,8 @@ export default class CDSTabs extends HostListenerMixin(CDSContentSwitcher) {
   }
 
   protected _updateTabsState() {
-    const tabs = this.querySelectorAll<CDSTab>('cds-tab');
+    const { selectorItem } = this.constructor as typeof CDSTabs;
+    const tabs = this.querySelectorAll<CDSTab>(selectorItem);
     tabs.forEach((tab, index) => {
       tab._dismissable = this.dismissable;
       tab._index = index;
@@ -594,7 +595,8 @@ export default class CDSTabs extends HostListenerMixin(CDSContentSwitcher) {
   }
 
   protected _tabInitialLoad() {
-    const { selectorTablist, selectorItemEnabled } = CDSTabs;
+    const { selectorTablist, selectorItemEnabled } = this
+      .constructor as typeof CDSTabs;
     const { selectionMode, selectedIndex } = this;
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
     const tablist = this.shadowRoot!.querySelector(selectorTablist)!;
