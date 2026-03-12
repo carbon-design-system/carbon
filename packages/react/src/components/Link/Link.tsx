@@ -145,12 +145,14 @@ const LinkBase = React.forwardRef<
         {...linkProps}
         {...rest}
         onClick={handleOnClick}>
-        {children}
-        {!inline && Icon && (
-          <span className={`${prefix}--link__icon`}>
-            <Icon />
-          </span>
-        )}
+        <span>
+          {children}
+          {!inline && Icon && (
+            <span className={`${prefix}--link__icon`}>
+              <Icon />
+            </span>
+          )}
+        </span>
       </BaseComponentAsAny>
     );
   }

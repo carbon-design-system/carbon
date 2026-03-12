@@ -84,10 +84,12 @@ class CDSLink extends FocusMixin(LitElement) {
   protected _renderInner() {
     const { _hasIcon: hasIcon, _handleSlotChange: handleSlotChange } = this;
     return html`
-      <slot @slotchange="${handleSlotChange}"></slot>
-      <div ?hidden="${!hasIcon}" class="${prefix}--link__icon">
-        <slot name="icon" @slotchange="${handleSlotChange}"></slot>
-      </div>
+      <span>
+        <slot @slotchange="${handleSlotChange}"></slot>
+        <span ?hidden="${!hasIcon}" class="${prefix}--link__icon">
+          <slot name="icon" @slotchange="${handleSlotChange}"></slot>
+        </span>
+      </span>
     `;
   }
 
