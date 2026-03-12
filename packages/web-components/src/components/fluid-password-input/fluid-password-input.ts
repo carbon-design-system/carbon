@@ -12,7 +12,7 @@ import styles from './fluid-password-input.scss?lit';
 import CDSPasswordInput from '../password-input/password-input';
 
 /**
- * Fluid text select.
+ * Fluid password input.
  *
  * @element cds-fluid-password-input
  */
