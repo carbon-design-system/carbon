@@ -322,7 +322,8 @@ export const Popover: PopoverComponent & {
                 !isTabTip
                   ? {
                       alignmentAxis: alignmentAxisOffset,
-                      mainAxis: popoverDimensions?.current?.offset,
+                      // Use 4px spacing when no caret, otherwise use the caret offset
+                      mainAxis: caret ? popoverDimensions?.current?.offset : 4,
                     }
                   : 0
               ),
@@ -543,13 +544,11 @@ export const Popover: PopoverComponent & {
     }
   });
 
-  const BaseComponentAsAny = BaseComponent as React.ElementType;
-
   return (
     <PopoverContext.Provider value={value}>
-      <BaseComponentAsAny {...rest} className={className} ref={ref}>
+      <BaseComponent {...rest} className={className} ref={ref}>
         {enableFloatingStyles || isTabTip ? mappedChildren : children}
-      </BaseComponentAsAny>
+      </BaseComponent>
     </PopoverContext.Provider>
   );
 }) as PopoverComponent;

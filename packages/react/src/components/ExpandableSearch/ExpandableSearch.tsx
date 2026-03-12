@@ -12,6 +12,7 @@ import { usePrefix } from '../../internal/usePrefix';
 import { composeEventHandlers } from '../../tools/events';
 import { match, keys } from '../../internal/keyboard';
 import { mergeRefs } from '../../tools/mergeRefs';
+import { isSearchValuePresent } from '../Search/utils';
 
 const frFn = forwardRef<HTMLInputElement, SearchProps>;
 
@@ -27,7 +28,9 @@ const ExpandableSearch = frFn((props, forwardedRef) => {
   } = props;
 
   const [expanded, setExpanded] = useState(isExpanded || false);
-  const [hasContent, setHasContent] = useState(Boolean(defaultValue));
+  const [hasContent, setHasContent] = useState(
+    isSearchValuePresent(defaultValue)
+  );
   const searchRef = useRef<HTMLInputElement>(null);
   const prefix = usePrefix();
 
