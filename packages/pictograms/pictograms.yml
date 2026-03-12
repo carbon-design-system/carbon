@@ -2849,6 +2849,15 @@
   aliases:
     - DB2
     - cloud
+- name: db2--genius-hub
+  friendly_name: Db2 Genius Hub
+  aliases:
+    - db2
+    - genius
+    - hub
+    - database
+    - admin
+    - console
 - name: decision-velocity
   friendly_name: Decision velocity
   aliases:
@@ -7184,6 +7193,27 @@
     - recycle
     - confidential
     - secure
+- name: paper-cup
+  friendly_name: Paper cup
+  aliases:
+    - workplace
+    - recycling
+    - recycle
+    - paper cup
+    - beverage
+    - drink
+    - drink cup
+- name: paper-cup-with-metal-can
+  friendly_name: Paper cup with metal can
+  aliases:
+    - workplace
+    - recycling
+    - recycle
+    - paper cup
+    - metal
+    - beverage
+    - drink
+    - drink cup
 - name: paris--arc-de-triomphe
   friendly_name: Paris Arc de Triomphe
   aliases:
