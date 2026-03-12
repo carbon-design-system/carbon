@@ -23,6 +23,7 @@ class CDSFluidPasswordInput extends CDSPasswordInput {
     super.connectedCallback();
   }
   updated() {
+    super.updated();
     const formItem = this.shadowRoot?.querySelector(`.${prefix}--form-item`);
     if (formItem) {
       formItem.classList.add(`${prefix}--text-input--fluid`);
