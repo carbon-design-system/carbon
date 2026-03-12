@@ -14,7 +14,7 @@ import CDSPasswordInput from '../password-input/password-input';
 /**
  * Fluid text select.
  *
- * @element cds-fluid-select
+ * @element cds-fluid-password-input
  */
 @customElement(`${prefix}-fluid-password-input`)
 class CDSFluidPasswordInput extends CDSPasswordInput {
