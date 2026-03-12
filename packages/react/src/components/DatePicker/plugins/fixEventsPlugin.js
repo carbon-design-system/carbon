@@ -16,7 +16,6 @@ export default (config) => (fp) => {
   // Avoid closing when mousedown starts inside but click lands outside after
   // scroll or blur (e.g., scrollable modal masks).
   let mouseDownInside = false;
-  let isEnterBlur = false;
 
   const getEventPath = (event) =>
     typeof event.composedPath === 'function' ? event.composedPath() : [];
@@ -109,12 +108,8 @@ export default (config) => (fp) => {
    * set the date again, triggering the calendar to update.
    */
   const handleBlur = (event) => {
-    // Skip blur handling when it was triggered programmatically by the Enter
-    // key handler to avoid an extra onChange call from fp.setDate()
-    if (isEnterBlur) {
-      isEnterBlur = false;
-      return;
-    }
+    // // Skip blur handling when it was triggered programmatically by the Enter
+    // // key handler to avoid an extra onChange call from fp.setDate()
 
     const { target } = event;
 
