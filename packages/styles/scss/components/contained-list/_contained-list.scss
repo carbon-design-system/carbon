@@ -56,6 +56,7 @@
     position: sticky;
     z-index: 1;
     display: flex;
+    box-sizing: border-box;
     align-items: center;
     inset-block-start: 0;
     padding-inline: layout.density('padding-inline');
