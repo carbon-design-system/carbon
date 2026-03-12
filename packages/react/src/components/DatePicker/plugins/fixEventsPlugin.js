@@ -65,25 +65,16 @@ export default (config) => (fp) => {
     const { target } = event;
     if (inputFrom === target || inputTo === target) {
       if (match(event, keys.Enter)) {
-        // Makes sure the hitting enter key picks up pending values of both `<input>`
-        // Workaround for: https://github.com/flatpickr/flatpickr/issues/1942
         mouseDownInside = false;
-        if (inputTo === target) {
-          isEnterBlur = true;
-          inputTo.blur();
-        }
         fp.setDate(
           [inputFrom.value, inputTo && inputTo.value],
           true,
           fp.config.dateFormat
         );
         event.stopPropagation();
-        // After Enter on end date, rangePlugin's onChange refocuses secondInput
-        // via setTimeout(0) which reopens the calendar. We close and refocus
         if (inputTo === target) {
           setTimeout(() => {
             fp.close();
-            inputFrom.focus();
           }, 0);
         }
       } else if (
