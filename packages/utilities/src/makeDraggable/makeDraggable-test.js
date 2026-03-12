@@ -236,8 +236,8 @@ describe('makeDraggable', () => {
     fireEvent.mouseDown(handle, { clientX: 0, clientY: 0 });
     fireEvent.mouseMove(document, { clientX: 50, clientY: 30 });
 
-    // The transform should preserve the base matrix (a,b,c,d) and add translation (e,f)
-    // Expected: matrix(1.06066, 1.06066, -1.06066, 1.06066, 50, 30)
+    // The drag should preserve the existing rotation and scale terms and append
+    // the drag offset.
     expect(el.style.transform).toBe(
       'matrix(1.06066, 1.06066, -1.06066, 1.06066, 50, 30)'
     );
