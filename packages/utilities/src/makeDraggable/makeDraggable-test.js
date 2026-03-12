@@ -226,9 +226,10 @@ describe('makeDraggable', () => {
   it('should preserve existing non-translate transforms during drag', () => {
     const { el, handle } = createDraggableElement();
 
-    // Set an initial transform with scale and rotate (as matrix)
-    // matrix(a, b, c, d, e, f) where scale(1.5) rotate(45deg) =
-    // matrix(1.06066, 1.06066, -1.06066, 1.06066, 0, 0)
+    // Start with a matrix that represents a 45deg rotation with 1.5 scaling.
+    // matrix(a, b, c, d, e, f), where e and f are translation, so `0, 0` means
+    // no offset. Dragging should preserve the existing rotation and scale terms
+    // and only update translation.
     el.style.transform = 'matrix(1.06066, 1.06066, -1.06066, 1.06066, 0, 0)';
 
     // Start dragging
