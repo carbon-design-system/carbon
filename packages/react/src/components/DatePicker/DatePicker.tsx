@@ -39,6 +39,7 @@ import {
 import type { Instance } from 'flatpickr/dist/types/instance';
 import { datePartsOrder } from '@carbon/utilities';
 import { SUPPORTED_LOCALES, type SupportedLocale } from './DatePickerLocales';
+import { isEmptyDateValue } from './utils';
 
 // Weekdays shorthand for English locale
 // Ensure localization exists before trying to access it
@@ -207,8 +208,10 @@ export type DatePickerTypes = 'simple' | 'single' | 'range';
 
 export interface DatePickerProps {
   /**
-   * Flatpickr prop passthrough enables direct date input, and when set to false,
-   * we must clear dates manually by resetting the value prop to to a falsy value (such as `""`, `null`, or `undefined`) or an array of all falsy values, making it a controlled input.
+   * Flatpickr prop passthrough enables direct date input, and when set to
+   * false, we must clear dates manually by resetting the value prop to an empty
+   * value (such as `""`, `null`, or `undefined`) or an array of all empty
+   * values, making it a controlled input.
    */
   allowInput?: boolean;
 
@@ -907,10 +910,11 @@ const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>((props, ref) => {
   useEffect(() => {
     // when value prop is manually reset, this clears the flatpickr calendar instance and text input
     // run if both:
-    // 1. value prop is set to a falsy value (`""`, `undefined`, `null`, etc) OR an array of all falsy values
+    // 1. value prop is set to an empty value (`""`, `undefined`, `null`, etc) OR an array of all empty values
     // 2. flatpickr instance contains values in its `selectedDates` property so it hasn't already been cleared
     if (
-      (!value || (Array.isArray(value) && value.every((date) => !date))) &&
+      (isEmptyDateValue(value) ||
+        (Array.isArray(value) && value.every(isEmptyDateValue))) &&
       calendarRef.current?.selectedDates.length
     ) {
       calendarRef.current?.clear();
@@ -933,7 +937,7 @@ const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>((props, ref) => {
           value === '' ||
           value === null ||
           (Array.isArray(value) &&
-            (value.length === 0 || value.every((element) => !element)))
+            (value.length === 0 || value.every(isEmptyDateValue)))
         ) {
           // only clear if there are selected dates to avoid unnecessary operations
           if (calendarRef.current.selectedDates.length > 0) {
@@ -945,7 +949,11 @@ const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>((props, ref) => {
       }
       updateClassNames(calendarRef.current, prefix);
       //for simple date picker w/o calendar; initial mount may not have value
-    } else if (!calendarRef.current && value) {
+    } else if (
+      !calendarRef.current &&
+      typeof value !== 'undefined' &&
+      value !== null
+    ) {
       startInputField.current.value = value;
     }
   }, [value, prefix, startInputField]);
@@ -987,8 +995,10 @@ const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>((props, ref) => {
 
 DatePicker.propTypes = {
   /**
-   * Flatpickr prop passthrough enables direct date input, and when set to false,
-   * we must clear dates manually by resetting the value prop to a falsy value (such as `""`, `null`, or `undefined`) or an array of all falsy values, making it a controlled input.
+   * Flatpickr prop passthrough enables direct date input, and when set to
+   * false, we must clear dates manually by resetting the value prop to an empty
+   * value (such as `""`, `null`, or `undefined`) or an array of all empty
+   * values, making it a controlled input.
    */
   allowInput: PropTypes.bool,
 

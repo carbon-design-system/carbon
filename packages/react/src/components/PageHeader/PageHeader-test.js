@@ -488,6 +488,27 @@ describe('PageHeader', () => {
       expect(screen.queryByText('Tag 3')).not.toBeInTheDocument();
     });
 
+    it('should support rerendering from no tags to tags and back', () => {
+      mockUseOverflowItems.mockImplementation((items) => ({
+        visibleItems: items,
+        hiddenItems: [],
+        itemRefHandler: jest.fn(),
+      }));
+
+      const { rerender } = render(<PageHeader.TabBar />);
+      expect(screen.queryByText('Tag 1')).not.toBeInTheDocument();
+
+      rerender(<PageHeader.TabBar tags={mockTags} />);
+      expect(screen.getByText('Tag 1')).toBeInTheDocument();
+      expect(screen.getByText('Tag 2')).toBeInTheDocument();
+      expect(screen.getByText('Tag 3')).toBeInTheDocument();
+
+      rerender(<PageHeader.TabBar />);
+      expect(screen.queryByText('Tag 1')).not.toBeInTheDocument();
+      expect(screen.queryByText('Tag 2')).not.toBeInTheDocument();
+      expect(screen.queryByText('Tag 3')).not.toBeInTheDocument();
+    });
+
     it('should render tags alongside tabs', () => {
       mockUseOverflowItems.mockReturnValue({
         visibleItems: mockTags,
