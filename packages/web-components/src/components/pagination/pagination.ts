@@ -221,7 +221,7 @@ class CDSPagination extends FocusMixin(HostListenerMixin(LitElement)) {
       this.start = 0;
       this._handleUserInitiatedPageSizeChange();
     } else {
-      this.page = value;
+      this.page = Number(value);
       const newStart = this._calculateStart(
         value,
         pageSize,

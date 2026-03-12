@@ -25,7 +25,7 @@ import { LayoutConstraint } from '../Layout';
 import { composeEventHandlers } from '../../tools/events';
 import { getNextIndex, matches, keys } from '../../internal/keyboard';
 import { PrefixContext } from '../../internal/usePrefix';
-import { noopFn } from '../../internal/noopFn';
+import { isComponentElement } from '../../internal';
 import { IconSwitch } from '../Switch';
 import type { SwitchEventHandlersParams } from '../Switch/Switch';
 
@@ -64,7 +64,7 @@ export interface ContentSwitcherProps
   /**
    * Specify a selected index for the initially selected content
    */
-  selectedIndex: number;
+  selectedIndex?: number;
 
   /**
    * Choose whether or not to automatically change selection on focus when left/right arrow pressed. Defaults to 'automatic'
@@ -74,7 +74,7 @@ export interface ContentSwitcherProps
   /**
    * Specify the size of the Content Switcher. Currently supports either `sm`, `md` (default) or `lg` as an option.
    */
-  size: 'sm' | 'md' | 'lg';
+  size?: 'sm' | 'md' | 'lg';
 }
 
 export const ContentSwitcher = ({
@@ -85,7 +85,7 @@ export const ContentSwitcher = ({
   selectedIndex: selectedIndexProp = 0,
   selectionMode = 'automatic',
   size,
-  onChange = noopFn,
+  onChange,
   ...other
 }: ContentSwitcherProps) => {
   const prefix = useContext(PrefixContext);
@@ -169,7 +169,7 @@ export const ContentSwitcher = ({
   };
 
   const isIconOnly = Children.map(children, (child) => {
-    return isValidElement(child) ? child.type === IconSwitch : null;
+    return isComponentElement(child, IconSwitch);
   })?.every((val) => val === true);
 
   const classes = classNames(`${prefix}--content-switcher`, className, {

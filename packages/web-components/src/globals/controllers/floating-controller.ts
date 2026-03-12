@@ -134,8 +134,12 @@ export default class FloatingController implements ReactiveController {
 
     const middleware = [
       offset(
-        caret && !isTabTip
-          ? { alignmentAxis: alignmentAxisOffset, mainAxis: offsetPx }
+        !isTabTip
+          ? {
+              alignmentAxis: alignmentAxisOffset,
+              // Use 4px spacing when no caret, otherwise use the caret offset
+              mainAxis: caret ? offsetPx : 4,
+            }
           : 0
       ),
       flip({

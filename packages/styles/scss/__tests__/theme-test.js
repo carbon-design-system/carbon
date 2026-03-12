@@ -261,6 +261,7 @@ describe('@carbon/styles/scss/theme', () => {
         "chat-button-text-selected",
         "highlight",
         "overlay",
+        "color-scheme",
         "toggle-off",
         "shadow",
         "focus",

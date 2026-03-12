@@ -17,6 +17,7 @@ import isEqual from 'react-fast-compare';
 import PropTypes from 'prop-types';
 import React, {
   cloneElement,
+  useEffect,
   isValidElement,
   useCallback,
   useContext,
@@ -36,7 +37,6 @@ import ListBox, {
 } from '../ListBox';
 import {
   MultiSelectSortingProps,
-  SortItemsOptions,
   sortingPropTypes,
 } from './MultiSelectPropTypes';
 import { defaultSortItems, defaultCompareItems } from './tools/sorting';
@@ -306,7 +306,7 @@ export const MultiSelect = React.forwardRef(
       size,
       disabled = false,
       initialSelectedItems = [],
-      sortItems = defaultSortItems as MultiSelectProps<ItemType>['sortItems'],
+      sortItems = defaultSortItems,
       compareItems = defaultCompareItems,
       clearSelectionText = 'To clear selection, press Delete or Backspace',
       clearAnnouncement = 'all items have been cleared',
@@ -350,11 +350,11 @@ export const MultiSelect = React.forwardRef(
     const prefix = usePrefix();
     const { isFluid } = useContext(FormContext);
     const multiSelectInstanceId = useId();
+    const prevOpenPropRef = useRef(open);
     // eslint-disable-next-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20452
     const [isFocused, setIsFocused] = useState(false);
     const [inputFocused, setInputFocused] = useState(false);
     const [isOpen, setIsOpen] = useState(open || false);
-    const [prevOpenProp, setPrevOpenProp] = useState(open);
     const [topItems, setTopItems] = useState<ItemType[]>([]);
     const [itemsCleared, setItemsCleared] = useState(false);
 
@@ -526,13 +526,13 @@ export const MultiSelect = React.forwardRef(
       }
     };
 
-    /**
-     * programmatically control this `open` prop
-     */
-    if (prevOpenProp !== open) {
-      setIsOpenWrapper(open);
-      setPrevOpenProp(open);
-    }
+    useEffect(() => {
+      if (prevOpenPropRef.current !== open) {
+        setIsOpen(open);
+        onMenuChange?.(open);
+        prevOpenPropRef.current = open;
+      }
+    }, [open, onMenuChange]);
 
     const normalizedProps = useNormalizedInputProps({
       id,
@@ -678,7 +678,7 @@ export const MultiSelect = React.forwardRef(
       if (evt.target.classList.contains(`${prefix}--tag__close-icon`)) {
         setIsFocused(false);
       } else {
-        setIsFocused(evt.type === 'focus' ? true : false);
+        setIsFocused(evt.type === 'focus');
       }
     };
 
@@ -723,8 +723,9 @@ export const MultiSelect = React.forwardRef(
       () =>
         getMenuProps({
           ref: enableFloatingStyles ? refs.setFloating : null,
+          hidden: !isOpen,
         }),
-      [enableFloatingStyles, getMenuProps, refs.setFloating]
+      [enableFloatingStyles, getMenuProps, isOpen, refs.setFloating]
     );
 
     const allLabelProps = getLabelProps();
@@ -808,8 +809,7 @@ export const MultiSelect = React.forwardRef(
                   !disabled && !readOnly ? clearSelection : noopFn
                 }
                 selectionCount={selectedItemsLength}
-                // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-                translateWithId={translateWithId!}
+                translateWithId={translateWithId}
                 disabled={disabled}
               />
             )}
@@ -844,11 +844,7 @@ export const MultiSelect = React.forwardRef(
           </div>
           <ListBox.Menu {...menuProps}>
             {isOpen &&
-              // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
-              sortItems!(
-                filteredItems,
-                sortOptions as SortItemsOptions<ItemType>
-              ).map((item, index) => {
+              sortItems(filteredItems, sortOptions).map((item, index) => {
                 const {
                   hasIndividualSelections,
                   nonSelectAllSelectedCount,

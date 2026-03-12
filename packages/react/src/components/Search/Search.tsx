@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2025
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -28,6 +28,7 @@ import { deprecate } from '../../prop-types/deprecate';
 import { FormContext } from '../FluidForm';
 import { noopFn } from '../../internal/noopFn';
 import { Tooltip } from '../Tooltip';
+import { isSearchValuePresent } from './utils';
 
 type InputPropsBase = Omit<HTMLAttributes<HTMLInputElement>, 'onChange'>;
 export interface SearchProps extends InputPropsBase {
@@ -151,7 +152,8 @@ const Search = React.forwardRef<HTMLInputElement, SearchProps>(
     },
     forwardRef
   ) => {
-    const hasPropValue = value || defaultValue ? true : false;
+    const hasPropValue =
+      isSearchValuePresent(value) || isSearchValuePresent(defaultValue);
     const prefix = usePrefix();
     const { isFluid } = useContext(FormContext);
     const inputRef = useRef<HTMLInputElement>(null);
@@ -181,7 +183,7 @@ const Search = React.forwardRef<HTMLInputElement, SearchProps>(
     });
 
     if (value !== prevValue) {
-      setHasContent(!!value);
+      setHasContent(isSearchValuePresent(value));
       setPrevValue(value);
     }
 
