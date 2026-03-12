@@ -29,7 +29,6 @@ type Item = {
  * @param onChange - Optional callback called when hidden items change. Receives array of currently hidden items.
  * @returns Object with `visibleItems` (items to display), `hiddenItems` (items that don't fit), and `itemRefHandler` (function to attach refs to items for width measurement).
  */
-
 const useOverflowItems = <T extends Item>(
   items: T[] | ReactNode,
   containerRef: RefObject<HTMLDivElement>,

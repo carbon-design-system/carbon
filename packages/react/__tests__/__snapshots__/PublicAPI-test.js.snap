@@ -7657,6 +7657,9 @@ Map {
       "closeMenu": {
         "type": "func",
       },
+      "dangerDescription": {
+        "type": "string",
+      },
       "disabled": {
         "type": "bool",
       },
@@ -7771,6 +7774,9 @@ Map {
         "type": "string",
       },
       "pageRangeText": {
+        "type": "func",
+      },
+      "pageSelectLabelText": {
         "type": "func",
       },
       "pageSize": {
@@ -15812,5 +15818,7 @@ Map {
   "usePrefix" => {},
   "useTheme" => {},
   "validateNumberSeparators" => {},
+  "withComposedModalPresence" => {},
+  "withModalPresence" => {},
 }
 `;

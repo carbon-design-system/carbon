@@ -204,22 +204,25 @@ describe('useOverflowItems', () => {
     expect(result.current.hiddenItems).toEqual([]);
   });
 
-  it('should handle rerenders when items changes between array and non-array values', () => {
+  it('should keep hook order when items changes between array and non-array', () => {
     const { result, rerender } = renderHook(
-      ({ currentItems }) =>
-        useOverflowItems(currentItems, containerRef, offsetRef),
-      { initialProps: { currentItems: mockItems } }
+      ({ items }) => useOverflowItems(items, containerRef, offsetRef),
+      { initialProps: { items: mockItems } }
     );
 
-    expect(result.current.visibleItems).toBeDefined();
-    expect(result.current.hiddenItems).toBeDefined();
+    expect(Array.isArray(result.current.visibleItems)).toBe(true);
+    expect(Array.isArray(result.current.hiddenItems)).toBe(true);
 
-    rerender({ currentItems: 'not an array' });
+    expect(() => {
+      rerender({ items: 'not an array' });
+    }).not.toThrow();
     expect(result.current.visibleItems).toEqual([]);
     expect(result.current.hiddenItems).toEqual([]);
 
-    rerender({ currentItems: mockItems });
-    expect(result.current.visibleItems).toBeDefined();
-    expect(result.current.hiddenItems).toBeDefined();
+    expect(() => {
+      rerender({ items: mockItems });
+    }).not.toThrow();
+    expect(Array.isArray(result.current.visibleItems)).toBe(true);
+    expect(Array.isArray(result.current.hiddenItems)).toBe(true);
   });
 });
