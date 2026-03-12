@@ -36,6 +36,10 @@ $css--plex: true !default;
   vertical-align: baseline;
 }
 
+:host(#{$prefix}-contained-list-item:not(:first-of-type)) {
+  margin-block-start: -1px;
+}
+
 :host(#{$prefix}-contained-list-item:not(:last-of-type)) {
   .#{$prefix}--contained-list-item::before {
     position: absolute;
