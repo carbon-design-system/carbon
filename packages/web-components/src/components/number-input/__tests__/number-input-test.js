@@ -272,7 +272,6 @@ describe('<cds-number-input>', () => {
     expect(decrement.getAttribute('aria-label')).to.equal('Less');
     expect(increment.getAttribute('aria-label')).to.equal('More');
   });
-  // new tests for type=text
   describe('with type="text"', () => {
     it('should render an <input> with type="text"', async () => {
       const el = await fixture(
