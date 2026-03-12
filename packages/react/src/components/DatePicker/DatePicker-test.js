@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useState } from 'react';
+import React, { createRef, useState } from 'react';
 import DatePicker from './DatePicker';
 import DatePickerInput from '../DatePickerInput';
 import { render, screen, fireEvent } from '@testing-library/react';
@@ -1244,6 +1244,41 @@ describe('Range date picker', () => {
 
       expect(start.value).toBe('02/01/2025');
       expect(end.value).toBe('02/14/2025');
+    });
+
+    it('should not clear an input when setDate receives timestamp 0', async () => {
+      const ref = createRef();
+
+      render(
+        <DatePicker ref={ref} datePickerType="range" value={undefined}>
+          <DatePickerInput
+            id="start-zero"
+            placeholder="mm/dd/yyyy"
+            labelText="Start date"
+            data-testid="start-input-zero"
+          />
+          <DatePickerInput
+            id="end-zero"
+            placeholder="mm/dd/yyyy"
+            labelText="End date"
+            data-testid="end-input-zero"
+          />
+        </DatePicker>
+      );
+
+      const fp = ref.current.calendar;
+      const start = await screen.findByTestId('start-input-zero');
+      const end = await screen.findByTestId('end-input-zero');
+      const formattedZero = fp.formatDate(new Date(0), 'm/d/Y');
+      const formattedOne = fp.formatDate(new Date(1), 'm/d/Y');
+
+      fp.setDate([0, 1], false, 'm/d/Y');
+      expect(start.value).toBe(formattedZero);
+      expect(end.value).toBe(formattedOne);
+
+      fp.setDate([1, 0], false, 'm/d/Y');
+      expect(start.value).toBe(formattedOne);
+      expect(end.value).toBe(formattedZero);
     });
 
     it('should not write both dates into the first input', async () => {
