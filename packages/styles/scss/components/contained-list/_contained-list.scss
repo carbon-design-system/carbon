@@ -56,7 +56,6 @@
     position: sticky;
     z-index: 1;
     display: flex;
-    box-sizing: border-box;
     align-items: center;
     inset-block-start: 0;
     padding-inline: layout.density('padding-inline');
@@ -121,9 +120,22 @@
   .#{$prefix}--contained-list--on-page .#{$prefix}--contained-list__header {
     @include type-style('heading-compact-01');
 
+    background-color: $background;
     block-size: layout.size('height');
     border-block-end: 1px solid $border-subtle;
     color: $text-primary;
+  }
+
+  .#{$prefix}--layer-two
+    .#{$prefix}--contained-list--on-page
+    .#{$prefix}--contained-list__header {
+    background-color: $layer-01;
+  }
+
+  .#{$prefix}--layer-three
+    .#{$prefix}--contained-list--on-page
+    .#{$prefix}--contained-list__header {
+    background-color: $layer-02;
   }
 
   // "Disclosed" variant
