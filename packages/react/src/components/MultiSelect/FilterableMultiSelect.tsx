@@ -360,7 +360,7 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
     selectionFeedback = 'top-after-reopen',
     selectedItems: selected,
     size,
-    sortItems = defaultSortItems as FilterableMultiSelectProps<ItemType>['sortItems'],
+    sortItems = defaultSortItems,
     translateWithId,
     useTitleInItem,
     warn = false,
@@ -509,8 +509,7 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
     );
 
     // Sort only non-select-all items, select-all item must stay at the top
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
-    const sortedReal = sortItems!(nonSelectAllItems, {
+    const sortedReal = sortItems(nonSelectAllItems, {
       selectedItems: {
         top: controlledSelectedItems,
         fixed: [],
@@ -633,7 +632,10 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
 
   useEffect(() => {
     const handleClickOutside = (event: Event) => {
-      const target = event.target as HTMLElement;
+      const target = event.target;
+
+      if (!(target instanceof Node)) return;
+
       const wrapper = document
         .getElementById(id)
         ?.closest(`.${prefix}--multi-select__wrapper`);
@@ -955,10 +957,11 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
       getMenuProps(
         {
           ref: autoAlign ? refs.setFloating : null,
+          hidden: !isOpen,
         },
         { suppressRefError: true }
       ),
-    [autoAlign, getMenuProps, refs.setFloating]
+    [autoAlign, getMenuProps, isOpen, refs.setFloating]
   );
 
   const handleFocus = (evt: FocusEvent<HTMLDivElement> | undefined) => {
@@ -968,7 +971,7 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
     ) {
       setIsFocused(false);
     } else {
-      setIsFocused(evt?.type === 'focus' ? true : false);
+      setIsFocused(evt?.type === 'focus');
     }
   };
 

@@ -355,8 +355,7 @@ class CDSTable extends HostListenerMixin(LitElement) {
           ?.querySelector(`${prefix}-checkbox`)
           .shadowRoot.querySelector(`.${prefix}--checkbox`);
 
-        headerCheckbox.disabled =
-          unfilteredSelectableLength === 0 ? true : false;
+        headerCheckbox.disabled = unfilteredSelectableLength === 0;
       }
 
       if (this.expandable) {
@@ -551,7 +550,7 @@ class CDSTable extends HostListenerMixin(LitElement) {
       ?.querySelector(`${prefix}-checkbox`)
       .shadowRoot.querySelector(`.${prefix}--checkbox`);
     const allRowsSelected = this._selectedRows.length === totalSelectableRows;
-    headerCheckbox.checked = !this._selectedRows.length ? false : true;
+    headerCheckbox.checked = Boolean(this._selectedRows.length);
     headerCheckbox.indeterminate =
       !allRowsSelected && this._selectedRows.length > 0;
 

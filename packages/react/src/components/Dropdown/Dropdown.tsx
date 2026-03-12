@@ -263,6 +263,7 @@ function stateReducer(state, actionAndChanges) {
 
   switch (type) {
     case ItemMouseMove:
+      return state;
     case MenuMouseLeave:
       if (changes.highlightedIndex === state.highlightedIndex) {
         // Prevent state update if highlightedIndex hasn't changed
@@ -390,12 +391,7 @@ const Dropdown = React.forwardRef(
       (changes: UseSelectStateChange<ItemType>) => {
         const { highlightedIndex } = changes;
 
-        if (
-          highlightedIndex !== undefined &&
-          highlightedIndex > -1 &&
-          // eslint-disable-next-line valid-typeof , no-constant-binary-expression -- https://github.com/carbon-design-system/carbon/issues/20452
-          typeof window !== undefined
-        ) {
+        if (highlightedIndex !== undefined && highlightedIndex > -1) {
           const itemArray = document.querySelectorAll(
             `li.${prefix}--list-box__menu-item[role="option"]`
           );
@@ -518,7 +514,7 @@ const Dropdown = React.forwardRef(
       ) : null;
 
     const handleFocus = (evt: FocusEvent<HTMLDivElement>) => {
-      setIsFocused(evt.type === 'focus' && !selectedItem ? true : false);
+      setIsFocused(evt.type === 'focus' && !selectedItem);
     };
 
     const buttonRef = useRef<HTMLButtonElement>(null);
@@ -636,10 +632,10 @@ const Dropdown = React.forwardRef(
           size={size}
           className={className}
           invalid={normalizedProps.invalid}
-          invalidText={isFluid ? invalidText : undefined}
+          invalidText={invalidText}
           invalidTextId={normalizedProps.invalidId}
           warn={normalizedProps.warn}
-          warnText={isFluid ? warnText : undefined}
+          warnText={warnText}
           warnTextId={normalizedProps.warnId}
           light={light}
           isOpen={isOpen}
@@ -730,7 +726,6 @@ const Dropdown = React.forwardRef(
           </ListBox.Menu>
         </ListBox>
         {!inline && !isFluid && !normalizedProps.validation && helper}
-        {!inline && !isFluid && normalizedProps.validation}
       </div>
     );
   }

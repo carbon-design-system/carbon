@@ -112,6 +112,7 @@ collect:
         - isFullWidth
         - isOpen
         - isPassword
+        - isRail
         - isSelected
         - isSideNavExpanded
         - isSortable
@@ -305,7 +306,6 @@ collect:
         - onAnimationEnd
         # DataTableSkeleton
         - columnCount
-        - compact
         - showHeader
         - showToolbar
         - zebra
@@ -501,6 +501,7 @@ collect:
         - pageInputDisabled
         - pageNumberText
         - pageRangeText
+        - pageSelectLabelText
         - pageSize
         - pageSizeInputDisabled
         - pageSizes
@@ -534,7 +535,6 @@ collect:
         - isChildOfHeader
         - isFixedNav
         - isPersistent
-        - isRail
         - onOverlayClick
         - onSideNavBlur
         # SideNavFooter
