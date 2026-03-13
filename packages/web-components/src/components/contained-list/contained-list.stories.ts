@@ -295,134 +295,68 @@ export const _WithLayer = {
 
 export const UsageExamples = {
   render: () => html`
-    <div>
-      <cds-contained-list label="List title">
-        <cds-icon-button slot="action" kind="primary" align="left" size="lg">
-          ${iconLoader(Add16, { slot: 'icon' })}
-          <span slot="tooltip-content">Add</span>
-        </cds-icon-button>
-        ${[...Array(3)].map(
-          () => html`
-            <cds-contained-list-item>
-              List item
-              <cds-overflow-menu slot="action" size="lg">
-                ${iconLoader(OverflowMenuVertical16, {
-                  class: `${prefix}--overflow-menu__icon`,
-                  slot: 'icon',
-                })}
-                <span slot="tooltip-content">Options</span>
-                <cds-overflow-menu-body flipped>
-                  <cds-overflow-menu-item>View details</cds-overflow-menu-item>
-                  <cds-overflow-menu-item>Edit</cds-overflow-menu-item>
-                  <cds-overflow-menu-item danger>
-                    <div class="${prefix}--overflow-menu-item__divider"></div>
-                    Remove
-                  </cds-overflow-menu-item>
-                </cds-overflow-menu-body>
-              </cds-overflow-menu>
-            </cds-contained-list-item>
-          `
-        )}
-      </cds-contained-list>
+    <cds-contained-list label="List title">
+      <cds-icon-button slot="action" kind="primary" align="left" size="lg">
+        ${iconLoader(Add16, { slot: 'icon' })}
+        <span slot="tooltip-content">Add</span>
+      </cds-icon-button>
+      ${[...Array(3)].map(
+        () => html`
+          <cds-contained-list-item>
+            List item
+            <cds-overflow-menu slot="action" size="lg">
+              ${iconLoader(OverflowMenuVertical16, {
+                class: `${prefix}--overflow-menu__icon`,
+                slot: 'icon',
+              })}
+              <span slot="tooltip-content">Options</span>
+              <cds-overflow-menu-body flipped>
+                <cds-overflow-menu-item>View details</cds-overflow-menu-item>
+                <cds-overflow-menu-item>Edit</cds-overflow-menu-item>
+                <cds-overflow-menu-item danger>
+                  <div class="${prefix}--overflow-menu-item__divider"></div>
+                  Remove
+                </cds-overflow-menu-item>
+              </cds-overflow-menu-body>
+            </cds-overflow-menu>
+          </cds-contained-list-item>
+        `
+      )}
+    </cds-contained-list>
 
-      <cds-contained-list label="List title">
-        <cds-icon-button slot="action" kind="ghost" size="lg" align="left">
-          ${iconLoader(Add16, { slot: 'icon' })}
-          <span slot="tooltip-content">Add</span>
-        </cds-icon-button>
-        ${[...Array(3)].map(
-          () => html`
-            <cds-contained-list-item>
-              <div>
-                List item<br />
-                <cds-contained-list-description>
-                  Description text
-                </cds-contained-list-description>
-              </div>
-            </cds-contained-list-item>
-          `
-        )}
-      </cds-contained-list>
+    <cds-contained-list label="List title">
+      <cds-icon-button slot="action" kind="ghost" size="lg" align="left">
+        ${iconLoader(Add16, { slot: 'icon' })}
+        <span slot="tooltip-content">Add</span>
+      </cds-icon-button>
+      ${[...Array(3)].map(
+        () => html`
+          <cds-contained-list-item>
+            <div>
+              List item<br />
+              <cds-contained-list-description>
+                Description text
+              </cds-contained-list-description>
+            </div>
+          </cds-contained-list-item>
+        `
+      )}
+    </cds-contained-list>
 
-      <cds-contained-list label="List title">
-        ${[...Array(3)].map(
-          () => html`
-            <cds-contained-list-item>
-              <div
-                style="display: grid; grid-template-columns: repeat(3, 1fr); column-gap: 1rem;">
-                <span>List item</span>
-                <span>List item details</span>
-                <span>List item details</span>
-              </div>
-            </cds-contained-list-item>
-          `
-        )}
-      </cds-contained-list>
-    </div>
-    <div>
-      <cds-contained-list label="List title">
-        <cds-icon-button slot="action" kind="primary" align="left" size="lg">
-          ${iconLoader(Add16, { slot: 'icon' })}
-          <span slot="tooltip-content">Add</span>
-        </cds-icon-button>
-        ${[...Array(3)].map(
-          () => html`
-            <cds-contained-list-item>
-              List item
-              <cds-overflow-menu slot="action" size="lg">
-                ${iconLoader(OverflowMenuVertical16, {
-                  class: `${prefix}--overflow-menu__icon`,
-                  slot: 'icon',
-                })}
-                <span slot="tooltip-content">Options</span>
-                <cds-overflow-menu-body flipped>
-                  <cds-overflow-menu-item>View details</cds-overflow-menu-item>
-                  <cds-overflow-menu-item>Edit</cds-overflow-menu-item>
-                  <cds-overflow-menu-item danger>
-                    <div class="${prefix}--overflow-menu-item__divider"></div>
-                    Remove
-                  </cds-overflow-menu-item>
-                </cds-overflow-menu-body>
-              </cds-overflow-menu>
-            </cds-contained-list-item>
-          `
-        )}
-      </cds-contained-list>
-
-      <cds-contained-list label="List title">
-        <cds-icon-button slot="action" kind="ghost" size="lg" align="left">
-          ${iconLoader(Add16, { slot: 'icon' })}
-          <span slot="tooltip-content">Add</span>
-        </cds-icon-button>
-        ${[...Array(3)].map(
-          () => html`
-            <cds-contained-list-item>
-              <div>
-                List item<br />
-                <cds-contained-list-description>
-                  Description text
-                </cds-contained-list-description>
-              </div>
-            </cds-contained-list-item>
-          `
-        )}
-      </cds-contained-list>
-
-      <cds-contained-list label="List title">
-        ${[...Array(3)].map(
-          () => html`
-            <cds-contained-list-item>
-              <div
-                style="display: grid; grid-template-columns: repeat(3, 1fr); column-gap: 1rem;">
-                <span>List item</span>
-                <span>List item details</span>
-                <span>List item details</span>
-              </div>
-            </cds-contained-list-item>
-          `
-        )}
-      </cds-contained-list>
-    </div>
+    <cds-contained-list label="List title">
+      ${[...Array(3)].map(
+        () => html`
+          <cds-contained-list-item>
+            <div
+              style="display: grid; grid-template-columns: repeat(3, 1fr); column-gap: 1rem;">
+              <span>List item</span>
+              <span>List item details</span>
+              <span>List item details</span>
+            </div>
+          </cds-contained-list-item>
+        `
+      )}
+    </cds-contained-list>
   `,
 };
 
