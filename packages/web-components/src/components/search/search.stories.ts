@@ -14,7 +14,7 @@ import '../../../.storybook/templates/with-layer';
 import './index';
 
 const sizes = {
-  [`Extra Small size (${SEARCH_SIZE.EXTRA_SMALL})`]: SEARCH_SIZE.EXTRA_SMALL,
+  [`Extra small size (${SEARCH_SIZE.EXTRA_SMALL})`]: SEARCH_SIZE.EXTRA_SMALL,
   [`Small size (${SEARCH_SIZE.SMALL})`]: SEARCH_SIZE.SMALL,
   [`Medium size (${SEARCH_SIZE.MEDIUM})`]: SEARCH_SIZE.MEDIUM,
   [`Large size (${SEARCH_SIZE.LARGE})`]: SEARCH_SIZE.LARGE,

@@ -6,11 +6,11 @@
  */
 
 /**
- * Input size.
+ * Search size.
  */
 export enum SEARCH_SIZE {
   /**
-   * Extra Small size.
+   * Extra small size.
    */
   EXTRA_SMALL = 'xs',
 
