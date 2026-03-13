@@ -95,6 +95,9 @@ export default class CDSTab extends CDSContentSwitcherItem {
 
     const iconButton = html`
       <cds-button
+        title="${this.textContent?.trim()
+          ? `Remove ${this.textContent.trim()} tab`
+          : 'Remove tab'}"
         class="${closeButtonClasses}"
         kind="ghost"
         size="xs"
