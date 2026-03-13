@@ -46,15 +46,13 @@ snapshots['cds-link should support being disabled'] = `<p
 >
   <slot>
   </slot>
-</p>
-<span
-  class="cds--link__icon"
-  hidden=""
->
-  <slot name="icon">
-  </slot>
-</span>
-<p>
+  <span
+    class="cds--link__icon"
+    hidden=""
+  >
+    <slot name="icon">
+    </slot>
+  </span>
 </p>
 `;
 /* end snapshot cds-link should support being disabled */
