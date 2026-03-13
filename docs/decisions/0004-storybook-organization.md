@@ -57,7 +57,7 @@ argTypes: {
 ```
 
 **Leverage automatic type inference** from TypeScript definitions and JSDoc
-comments. Only add manual argTypes when needed to:
+comments wherever possible. Only add manual argTypes when needed to:
 
 - Hide internal/unwanted controls: `table: { disable: true }`
 - Make controls readonly for variants: `table: { readonly: true }`
