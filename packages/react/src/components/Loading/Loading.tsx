@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2025
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -68,7 +68,11 @@ function Loading({
       aria-atomic="true"
       aria-live={active ? 'assertive' : 'off'}
       className={loadingClassName}>
-      <svg className={`${prefix}--loading__svg`} viewBox="0 0 100 100">
+      <svg
+        className={`${prefix}--loading__svg`}
+        viewBox="0 0 100 100"
+        role="img"
+        aria-label={description}>
         <title>{description}</title>
         {small ? (
           <circle

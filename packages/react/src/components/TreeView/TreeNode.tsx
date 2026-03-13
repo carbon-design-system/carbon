@@ -419,7 +419,7 @@ const TreeNode = React.forwardRef<HTMLElement, TreeNodeProps>(
             return node;
           }
           if (node.classList.contains(`${prefix}--tree-node-link-parent`)) {
-            return node.firstChild as Element | null;
+            return node.firstElementChild;
           }
           if (node.classList.contains(`${prefix}--tree`)) {
             return null;
@@ -443,9 +443,9 @@ const TreeNode = React.forwardRef<HTMLElement, TreeNodeProps>(
            * its parent node (unless its depth is level 1)
            */
           const parentNode = findParentTreeNode(
-            href
-              ? (currentNode.current?.parentElement?.parentElement as Element)
-              : (currentNode.current?.parentElement as Element)
+            (href
+              ? currentNode.current?.parentElement?.parentElement
+              : currentNode.current?.parentElement) ?? null
           );
           if (parentNode instanceof HTMLElement) {
             parentNode.focus();

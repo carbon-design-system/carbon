@@ -11,46 +11,35 @@ export const useNoInteractiveChildren = (
   ref: RefObject<HTMLElement | null>,
   message = 'component should have no interactive child nodes'
 ) => {
-  if (process.env.NODE_ENV !== 'production') {
-    // This hook is intentionally called conditionally because it is
-    // stripped from production builds. In development it runs once
-    // to enforce accessibility constraints.
-    //
-    // eslint-disable-next-line react-hooks/rules-of-hooks
-    useEffect(() => {
-      const node = ref.current ? getInteractiveContent(ref.current) : false;
+  useEffect(() => {
+    if (process.env.NODE_ENV === 'production') return;
 
-      if (node) {
-        const errorMessage = `Error: ${message}.\n\nInstead found: ${node.outerHTML}`;
-        // eslint-disable-next-line no-console -- https://github.com/carbon-design-system/carbon/issues/20452
-        console.error(errorMessage);
-        throw new Error(errorMessage);
-      }
-      // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20452
-    }, []);
-  }
+    const { current } = ref;
+    const node = current ? getInteractiveContent(current) : null;
+
+    if (node) {
+      const errorMessage = `Error: ${message}.\n\nInstead found: ${node.outerHTML}`;
+      // eslint-disable-next-line no-console -- https://github.com/carbon-design-system/carbon/issues/20452
+      console.error(errorMessage);
+      throw new Error(errorMessage);
+    }
+  }, [message, ref]);
 };
 
 export const useInteractiveChildrenNeedDescription = (
   ref: RefObject<HTMLElement | null>,
   message = `interactive child node(s) should have an \`aria-describedby\` property`
 ) => {
-  if (process.env.NODE_ENV !== 'production') {
-    // This hook is intentionally called conditionally because it is
-    // stripped from production builds. In development it runs once
-    // to enforce accessibility constraints.
-    //
-    // eslint-disable-next-line react-hooks/rules-of-hooks
-    useEffect(() => {
-      const node = ref.current ? getInteractiveContent(ref.current) : false;
+  useEffect(() => {
+    if (process.env.NODE_ENV === 'production') return;
 
-      if (node && !node.hasAttribute('aria-describedby')) {
-        throw new Error(
-          `Error: ${message}.\n\nInstead found: ${node.outerHTML}`
-        );
-      }
-    });
-  }
+    const { current } = ref;
+    const node = current ? getInteractiveContent(current) : null;
+
+    if (node && !node.hasAttribute('aria-describedby')) {
+      throw new Error(`Error: ${message}.\n\nInstead found: ${node.outerHTML}`);
+    }
+  }, [message, ref]);
 };
 
 /**
@@ -63,6 +52,7 @@ export const useInteractiveChildrenNeedDescription = (
 export const getInteractiveContent = (
   node: HTMLElement
 ): HTMLElement | null => {
+  // TODO: This check shouldn't be necessary. Investigate deleting it.
   if (!node || !node.childNodes) {
     return null;
   }
@@ -91,6 +81,7 @@ export const getInteractiveContent = (
  * @returns The node with a `role`, or `null` if none is found.
  */
 export const getRoleContent = (node: HTMLElement): HTMLElement | null => {
+  // TODO: This check shouldn't be necessary. Investigate deleting it.
   if (!node || !node.childNodes) {
     return null;
   }
