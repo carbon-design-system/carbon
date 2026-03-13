@@ -20,11 +20,18 @@ $css--plex: true !default;
   // CSS custom properties for slotted search component
   --cds-search-background: #{$background};
   --cds-search-border-bottom: 1px solid #{$border-subtle};
+
+  display: block;
+}
+
+:host(#{$prefix}-contained-list:not(:first-of-type)) {
+  margin-block-start: $spacing-05;
 }
 
 :host(#{$prefix}-contained-list-item) {
   display: block;
 }
+
 :host(#{$prefix}-contained-list-description) {
   @include type-style('label-01');
 
@@ -49,4 +56,9 @@ $css--plex: true !default;
     inset-block-end: 0;
     inset-inline: 0;
   }
+}
+
+:host(#{$prefix}-contained-list-item) ::slotted([slot='icon']) {
+  display: inline-flex;
+  margin-block-start: $spacing-01;
 }

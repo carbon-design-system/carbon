@@ -85,18 +85,8 @@ class CDSContainedListItem extends LitElement {
     const contentClasses = `${prefix}--contained-list-item__content`;
 
     const content = html`
-      ${_hasIcon
-        ? html`
-            <div class="${prefix}--contained-list-item__icon">
-              <slot
-                name="icon"
-                @slotchange="${this._handleIconSlotChange}"></slot>
-            </div>
-          `
-        : html`<slot
-            name="icon"
-            @slotchange="${this._handleIconSlotChange}"></slot>`}
-      <div><slot></slot></div>
+      <slot name="icon" @slotchange="${this._handleIconSlotChange}"></slot>
+      <slot></slot>
     `;
 
     return html`
