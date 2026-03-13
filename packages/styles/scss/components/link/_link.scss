@@ -36,7 +36,7 @@ $link-focus-text-color: custom-property.get-var(
     @include component-reset.reset;
     @include type.type-style('body-compact-01');
 
-    display: inline-flex;
+    display: inline;
     color: $link-text-color;
     outline: none;
     text-decoration: none;
@@ -115,7 +115,9 @@ $link-focus-text-color: custom-property.get-var(
 
   .#{$prefix}--link__icon {
     display: inline-flex;
-    align-self: center;
+    align-items: center;
+    block-size: 1lh;
+    line-height: inherit;
     margin-inline-start: $spacing-03;
     vertical-align: text-bottom;
   }
