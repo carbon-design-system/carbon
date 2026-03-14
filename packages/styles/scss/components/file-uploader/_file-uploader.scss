@@ -237,6 +237,36 @@
     }
   }
 
+  .#{$prefix}--file__selected-file--xs {
+    gap: $spacing-02 $spacing-05;
+    min-block-size: convert.to-rem(24px);
+    margin-block-end: $spacing-02;
+
+    .#{$prefix}--file__state-container {
+      padding-inline-end: $spacing-05;
+      min-inline-size: $spacing-05;
+    }
+
+    .#{$prefix}--file__state-container .#{$prefix}--file-loading {
+      block-size: $spacing-05;
+      inline-size: $spacing-05;
+    }
+
+    .#{$prefix}--file__state-container .#{$prefix}--file-complete {
+      inline-size: $spacing-05;
+    }
+
+    .#{$prefix}--file__state-container .#{$prefix}--file-invalid {
+      block-size: $spacing-05;
+      inline-size: $spacing-05;
+    }
+
+    .#{$prefix}--file__state-container .#{$prefix}--file-close {
+      block-size: $spacing-05;
+      inline-size: $spacing-05;
+    }
+  }
+
   .#{$prefix}--file__selected-file--md {
     gap: $spacing-03 0;
     min-block-size: convert.to-rem(40px);
@@ -263,6 +293,10 @@
     padding: convert.to-rem(12px) 0;
   }
 
+  .#{$prefix}--file__selected-file--invalid.#{$prefix}--file__selected-file--xs {
+    padding: $spacing-02 0;
+  }
+
   .#{$prefix}--file__selected-file--invalid.#{$prefix}--file__selected-file--sm {
     padding: $spacing-02 0;
   }
@@ -274,6 +308,11 @@
   .#{$prefix}--file__selected-file--invalid .#{$prefix}--form-requirement {
     border-block-start: 1px solid $border-subtle;
     padding-block-start: $spacing-05;
+  }
+
+  .#{$prefix}--file__selected-file--invalid.#{$prefix}--file__selected-file--xs
+    .#{$prefix}--form-requirement {
+    padding-block-start: $spacing-02;
   }
 
   .#{$prefix}--file__selected-file--invalid.#{$prefix}--file__selected-file--sm
