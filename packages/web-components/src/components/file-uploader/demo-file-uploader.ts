@@ -233,6 +233,7 @@ export default class CDSCEDemoFileUploader extends LitElement {
             <cds-file-uploader-item
               data-file-id="${id}"
               ?invalid="${invalid}"
+              size="${ifDefined(size)}"
               state="${inputState || ifDefined(state)}"
               icon-description="${ifDefined(iconDescription)}"
               error-subject="${ifDefined(errorSubject)}"
