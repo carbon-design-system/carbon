@@ -93,7 +93,7 @@ export interface FileUploaderButtonProps
    * Specify the size of the FileUploaderButton, from a list of available
    * sizes.
    */
-  size?: 'sm' | 'small' | 'field' | 'md' | 'lg';
+  size?: 'xs' | 'sm' | 'small' | 'field' | 'md' | 'lg';
 
   /**
    * @deprecated The `tabIndex` prop for `FileUploaderButton` has been deprecated since it now renders a button element by default.
@@ -128,6 +128,7 @@ function FileUploaderButton({
     [`${prefix}--btn--${buttonKind}`]: buttonKind,
     [`${prefix}--btn--disabled`]: disabled,
     // V11: remove field, small
+    [`${prefix}--btn--xs`]: size === 'xs',
     [`${prefix}--btn--md`]: size === 'field' || size === 'md',
     [`${prefix}--btn--sm`]: size === 'small' || size === 'sm',
     [`${prefix}--layout--size-${size}`]: size,
@@ -275,7 +276,7 @@ FileUploaderButton.propTypes = {
    * Specify the size of the FileUploaderButton, from a list of available
    * sizes.
    */
-  size: PropTypes.oneOf(['sm', 'md', 'lg']),
+  size: PropTypes.oneOf(['xs', 'sm', 'md', 'lg']),
 
   /**
    * Provide a custom tabIndex value for the `<FileUploaderButton>`
