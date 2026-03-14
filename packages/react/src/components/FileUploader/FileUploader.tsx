@@ -150,7 +150,7 @@ export interface FileUploaderProps extends HTMLAttributes<HTMLSpanElement> {
    * Specify the size of the FileUploaderButton, from a list of available
    * sizes.
    */
-  size?: 'sm' | 'small' | 'md' | 'field' | 'lg';
+  size?: 'xs' | 'sm' | 'small' | 'md' | 'field' | 'lg';
 }
 
 export interface FileUploaderHandle {
@@ -432,6 +432,7 @@ const FileUploader = forwardRef<FileUploaderHandle, FileUploaderProps>(
       });
 
     const selectedFileClasses = classNames(`${prefix}--file__selected-file`, {
+      [`${prefix}--file__selected-file--xs`]: size === 'xs',
       [`${prefix}--file__selected-file--md`]: size === 'field' || size === 'md',
       [`${prefix}--file__selected-file--sm`]: size === 'small' || size === 'sm',
     });
@@ -617,7 +618,7 @@ FileUploader.propTypes = {
    * Specify the size of the FileUploaderButton, from a list of available
    * sizes.
    */
-  size: PropTypes.oneOf(['sm', 'small', 'md', 'field', 'lg']),
+  size: PropTypes.oneOf(['xs', 'sm', 'small', 'md', 'field', 'lg']),
 } as PropTypes.ValidationMap<FileUploaderProps>;
 
 export default FileUploader;
