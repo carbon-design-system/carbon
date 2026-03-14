@@ -30,6 +30,11 @@ export enum FILE_UPLOADER_ITEM_STATE {
  */
 export enum FILE_UPLOADER_ITEM_SIZE {
   /**
+   * Extra small size.
+   */
+  EXTRA_SMALL = 'xs',
+
+  /**
    * Small size.
    */
   SMALL = 'sm',
