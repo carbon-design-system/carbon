@@ -32,6 +32,7 @@ const states = {
 };
 
 const sizes = {
+  [`xs (${BUTTON_SIZE.EXTRA_SMALL})`]: BUTTON_SIZE.EXTRA_SMALL,
   [`sm (${BUTTON_SIZE.SMALL})`]: BUTTON_SIZE.SMALL,
   [`md (${BUTTON_SIZE.MEDIUM})`]: BUTTON_SIZE.MEDIUM,
   [`lg (${BUTTON_SIZE.LARGE})`]: BUTTON_SIZE.LARGE,
