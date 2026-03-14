@@ -69,7 +69,7 @@ _FileUploaderItem.argTypes = {
   },
   name: { control: 'text', description: 'Name of the uploaded file' },
   onDelete: { action: 'onDelete' },
-  size: { control: 'select', options: ['sm', 'md', 'lg'] },
+  size: { control: 'select', options: ['xs', 'sm', 'md', 'lg'] },
   status: {
     control: 'inline-radio',
     options: ['uploading', 'edit', 'complete'],
@@ -193,7 +193,7 @@ Default.argTypes = {
   },
   size: {
     control: { type: 'select' },
-    options: ['sm', 'md', 'lg'],
+    options: ['xs', 'sm', 'md', 'lg'],
   },
 };
 
