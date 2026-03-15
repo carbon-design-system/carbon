@@ -351,8 +351,6 @@ export const MultiSelect = React.forwardRef(
     const { isFluid } = useContext(FormContext);
     const multiSelectInstanceId = useId();
     const prevOpenPropRef = useRef(open);
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20452
-    const [isFocused, setIsFocused] = useState(false);
     const [inputFocused, setInputFocused] = useState(false);
     const [isOpen, setIsOpen] = useState(open || false);
     const [topItems, setTopItems] = useState<ItemType[]>([]);
@@ -495,7 +493,6 @@ export const MultiSelect = React.forwardRef(
           }
           if (match(e, keys.ArrowDown) && selectedItems.length === 0) {
             setInputFocused(false);
-            setIsFocused(false);
           }
           if (match(e, keys.Escape) && isOpen) {
             setInputFocused(true);
@@ -674,14 +671,6 @@ export const MultiSelect = React.forwardRef(
       }
     );
 
-    const handleFocus = (evt: React.FocusEvent<HTMLDivElement>) => {
-      if (evt.target.classList.contains(`${prefix}--tag__close-icon`)) {
-        setIsFocused(false);
-      } else {
-        setIsFocused(evt.type === 'focus');
-      }
-    };
-
     const readOnlyEventHandlers = readOnly
       ? {
           onClick: (evt: React.MouseEvent<HTMLButtonElement>) => {
@@ -778,8 +767,6 @@ export const MultiSelect = React.forwardRef(
           )}
         </label>
         <ListBox
-          onFocus={isFluid ? handleFocus : undefined}
-          onBlur={isFluid ? handleFocus : undefined}
           type={type}
           size={size}
           className={className}
