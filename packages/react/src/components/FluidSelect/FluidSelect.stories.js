@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2022
+ * Copyright IBM Corp. 2022, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -95,9 +95,9 @@ const ToggleTip = (
   </>
 );
 
-export const Default = (args) => (
-  <div style={{ width: args.defaultWidth }}>
-    <FluidSelect {...args} id="select-1">
+export const Default = ({ defaultWidth, ...selectArgs }) => (
+  <div style={{ width: defaultWidth }}>
+    <FluidSelect {...selectArgs} id="select-1">
       <SelectItem value="" text="" />
       <SelectItem value="option-1" text="Option 1" />
       <SelectItem value="option-2" text="Option 2" />
