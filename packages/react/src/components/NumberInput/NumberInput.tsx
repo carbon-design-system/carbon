@@ -604,18 +604,8 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
       if (controlledValue !== undefined) {
         return controlledValue;
       }
-      if (defaultValue !== undefined) {
-        return defaultValue;
-      }
-      if (allowEmpty) {
-        return '';
-      }
-      return 0;
+      return defaultValue;
     });
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20452
-    const [prevControlledValue, setPrevControlledValue] =
-      useState(controlledValue);
-
     const numberParser = useMemo(
       () => new NumberParser(locale, formatOptions),
       [locale, formatOptions]
@@ -732,7 +722,6 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
         } else {
           setValue(controlledValue);
         }
-        setPrevControlledValue(controlledValue);
       }
     }, [controlledValue, type, allowEmpty]);
     let ariaDescribedBy: string | undefined = undefined;
@@ -824,8 +813,6 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
             if (direction === `down`) rawValue = -1;
           } else if ((min && min > 0 && max && max > 0) || min) {
             rawValue = min;
-          } else {
-            rawValue = 0;
           }
         } else if (direction === 'up') {
           rawValue = currentValue + step;
