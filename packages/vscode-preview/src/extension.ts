@@ -18,7 +18,6 @@ export function activate(context: vscode.ExtensionContext) {
       CarbonPreviewPanel.createOrShow(context.extensionUri);
     })
   );
-  vscode.window.showInformationMessage('Activated.');
 }
 
 /**
