@@ -2,11 +2,63 @@
 
 A VS Code extension that renders Carbon Design System components inside a VS
 Code webview panel, so designers can preview how Carbon components look when
-styled with any VS Code color theme — in real time.
+styled with any VS Code color theme.
 
 ---
 
-## ⚡ Quickstart
+## Background
+
+Our team wanted to come up with a way to test how Carbon React components look
+with different colors, font sizes, and spacing values directly in VS Code. I
+forked the [Carbon](https://github.com/carbon-design-system/carbon) git
+repository, and with Bob's help, added some new features to acheieve that goal.
+
+The result is a simple VS Code webview that renders Carbon components in their
+various states. The idea is that we can use Bob to test different colors,
+spacing values, and font sizes and see the results natively inside VS Code.
+
+### Colors
+
+To test new colors, we created a new Carbon theme. Themes define a set of SCSS
+variables, known as tokens, that specify colors and styles for React components.
+Change a token, and you change the appereance of many UI components
+simulatenously.
+
+VS Code webviews automatically receive CSS custom properties like
+`--vscode-button-background` or `--vscode-editor-foreground`. The value of these
+properties update automatically when changing themes (Light, Dark, Red, etc.),
+so these properties would be useful to use a token values in a Carbon theme. The
+tricky part is figuring out what CSS properties from VS Code we should use, and
+creating a mapping from Carbon tokens to those properties. That is where Bob
+comes in.
+
+Rather than import an existing theme and override all of it's tokens, I asked
+Bob to create a completely new Carbon theme for VS Code. He created
+[`vscode.js`](../themes/src/vscode.js), which maps Carbon design tokens to these
+properties. This means Carbon components rendered in a VS Code webview that are
+using the `vscode` theme **automatically adapt** to whatever color theme the
+user has selected in VS Code.
+
+### Spacing
+
+Carbon defines spacing tokens (`$spacing-01` through `$spacing-13`) that
+components reference for things like padding, height, width, etc. This means
+that spacing values cannot vary across themes (i.e., we can't customize the
+spacing tokens for the VS Code theme without impacting all other themes).
+
+These tokens are ultimately used to calculate CSS variables that are used by
+Carbon components. If we override the CSS variables, we can change the spacing
+across components without impacting other themes. This is done in the
+[stylesheet](../vscode-preview/src/webview/styles.scss) definition for the
+Carbon Component Preview.
+
+### Typography
+
+As with colors and spacing, there are tokens for typography styles too.
+
+---
+
+## Setup
 
 ### Step 1 — Install dependencies (one time only)
 
@@ -153,25 +205,6 @@ yarn vscode-preview
 > controlling a specific element. Tokens starting with
 > `--cds-layout-size-height-*` control component heights. Tokens starting with
 > `--cds-layout-density-*` control horizontal padding inside controls.
-
----
-
-## Background
-
-VS Code webviews automatically receive CSS custom properties like
-`--vscode-button-background`, `--vscode-editor-foreground`, etc. — injected
-directly into the webview document by VS Code itself.
-
-The Carbon `vscode` theme maps Carbon design tokens to these properties:
-
-```scss
-// In @carbon/themes/src/vscode.js
-export const buttonPrimary = 'var(--vscode-button-background, #0e639c)';
-```
-
-This means Carbon components rendered in a VS Code webview **automatically
-adapt** to whatever color theme the user has selected in VS Code — no
-configuration needed.
 
 ---
 
