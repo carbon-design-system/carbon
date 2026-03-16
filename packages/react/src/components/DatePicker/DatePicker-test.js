@@ -1313,6 +1313,56 @@ describe('Range date picker', () => {
       expect(start.value).toBe('03/03/2025');
       expect(end.value).toBe('03/09/2025');
     });
+
+    it('should not fire end input blur handlers when Enter is pressed', async () => {
+      const handleBlur = jest.fn();
+
+      render(
+        <DatePicker
+          dateFormat="Y-m-d"
+          onChange={() => {}}
+          datePickerType="range">
+          <DatePickerInput id="start" labelText="Start date" />
+          <DatePickerInput id="end" labelText="End date" onBlur={handleBlur} />
+        </DatePicker>
+      );
+
+      await userEvent.type(
+        screen.getByLabelText('Start date'),
+        '2023-01-05{enter}'
+      );
+      await userEvent.type(
+        screen.getByLabelText('End date'),
+        '2023-01-19{enter}'
+      );
+
+      expect(handleBlur).not.toHaveBeenCalled();
+    });
+
+    it('should not fire end input blur handlers when Enter is pressed', async () => {
+      const handleBlur = jest.fn();
+
+      render(
+        <DatePicker
+          dateFormat="Y-m-d"
+          onChange={() => {}}
+          datePickerType="range">
+          <DatePickerInput id="start" labelText="Start date" />
+          <DatePickerInput id="end" labelText="End date" onBlur={handleBlur} />
+        </DatePicker>
+      );
+
+      await userEvent.type(
+        screen.getByLabelText('Start date'),
+        '2023-01-05{enter}'
+      );
+      await userEvent.type(
+        screen.getByLabelText('End date'),
+        '2023-01-19{enter}'
+      );
+
+      expect(handleBlur).not.toHaveBeenCalled();
+    });
   });
 });
 

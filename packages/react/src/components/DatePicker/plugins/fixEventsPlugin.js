@@ -72,9 +72,9 @@ export default (config) => (fp) => {
         );
         event.stopPropagation();
         if (inputTo === target) {
-          setTimeout(() => {
+          requestAnimationFrame(() => {
             fp.close();
-          }, 0);
+          });
         }
       } else if (
         match(event, keys.ArrowLeft) ||
@@ -108,9 +108,6 @@ export default (config) => (fp) => {
    * set the date again, triggering the calendar to update.
    */
   const handleBlur = (event) => {
-    // // Skip blur handling when it was triggered programmatically by the Enter
-    // // key handler to avoid an extra onChange call from fp.setDate()
-
     const { target } = event;
 
     // Only fall into this logic if the event is on the `to` input and there is a
