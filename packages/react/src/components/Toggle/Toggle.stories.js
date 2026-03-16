@@ -21,15 +21,12 @@ export default {
   },
 };
 
-export const Default = (args) => {
+export const Default = () => {
   return (
     <Toggle
       labelText="Label"
-      labelA="Off"
-      labelB="On"
       defaultToggled
       id="toggle-3"
-      {...args}
     />
   );
 };
@@ -39,8 +36,6 @@ Default.argTypes = {
     control: {
       type: 'text',
     },
-    description:
-      "Specify another element's id to be used as the label for this toggle",
   },
   className: {
     control: false,
@@ -52,14 +47,11 @@ Default.argTypes = {
     control: {
       type: 'boolean',
     },
-    description: 'Specify whether the toggle should be disabled',
   },
   hideLabel: {
     control: {
       type: 'boolean',
     },
-    description:
-      'If true, the side labels (labelA and labelB) will be replaced by labelText (if passed), so that the toggle doesn\'t render a top label',
   },
   id: {
     control: false,
@@ -68,20 +60,16 @@ Default.argTypes = {
     control: {
       type: 'text',
     },
-    description: 'Specify the label for the "off" position',
   },
   labelB: {
     control: {
       type: 'text',
     },
-    description: 'Specify the label for the "on" position',
   },
   labelText: {
     control: {
       type: 'text',
     },
-    description:
-      'Provide the text that will be read by a screen reader when visiting this control',
   },
   onClick: {
     control: false,
@@ -95,38 +83,34 @@ Default.argTypes = {
     control: {
       type: 'boolean',
     },
-    description: 'Specify whether the toggle should be read-only',
   },
   size: {
     options: ['sm', 'md'],
     control: { type: 'select' },
-    description:
-      'Specify the size of the Toggle. Currently supports either sm or md (default)',
   },
   toggled: {
     control: {
       type: 'boolean',
     },
-    description: 'Specify whether the control is toggled',
   },
 };
 
-export const SmallToggle = (args) => {
+export const SmallToggle = () => {
   return (
     <Toggle
       size="sm"
       labelText="Label"
-      labelA="Off"
-      labelB="On"
       defaultToggled
       id="toggle-2"
-      {...args}
     />
   );
 };
 
 SmallToggle.argTypes = {
   ...Default.argTypes,
+  size: {
+    control: false,
+  },
 };
 
 export const WithAccessibleLabels = () => {
