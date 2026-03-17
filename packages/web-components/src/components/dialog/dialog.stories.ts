@@ -30,7 +30,7 @@ const toggleButton = () => {
 
 const defaultArgs = {
   ariaLabel: '',
-  ariaLabelledBy: 'title',
+  ariaLabelledBy: '',
   ariaDescribedBy: '',
   preventCloseOnClickOutside: false,
   role: 'dialog',
@@ -110,7 +110,7 @@ export const DangerDialog = {
       role=${role}>
       <cds-dialog-header>
         <cds-dialog-subtitle>Account resources</cds-dialog-subtitle>
-        <cds-dialog-title id="title">
+        <cds-dialog-title>
           Are you sure you want to delete this custom domain?
         </cds-dialog-title>
         <cds-dialog-controls>
@@ -249,7 +249,7 @@ export const NonModal = {
         <cds-dialog-subtitle
           >Non-modal dialog example Subtitle
         </cds-dialog-subtitle>
-        <cds-dialog-title id="title">Non-Modal Dialog</cds-dialog-title>
+        <cds-dialog-title>Non-Modal Dialog</cds-dialog-title>
         <cds-dialog-controls>
           <cds-dialog-close-button></cds-dialog-close-button>
         </cds-dialog-controls>
@@ -304,7 +304,7 @@ export const PassiveDialog = {
       ?prevent-close-on-click-outside=${preventCloseOnClickOutside}
       role=${role}>
       <cds-dialog-header>
-        <cds-dialog-title id="title">Information Message</cds-dialog-title>
+        <cds-dialog-title>Information Message</cds-dialog-title>
         <cds-dialog-controls>
           <cds-dialog-close-button></cds-dialog-close-button>
         </cds-dialog-controls>
@@ -337,7 +337,7 @@ export const WithScrollingContent = {
       role=${role}>
       <cds-dialog-header>
         <cds-dialog-subtitle>Configure dialog settings</cds-dialog-subtitle>
-        <cds-dialog-title id="title">Modal Dialog Example</cds-dialog-title>
+        <cds-dialog-title>Modal Dialog Example</cds-dialog-title>
         <cds-dialog-controls>
           <cds-dialog-close-button></cds-dialog-close-button>
         </cds-dialog-controls>

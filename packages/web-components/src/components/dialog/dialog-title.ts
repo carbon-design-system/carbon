@@ -22,7 +22,7 @@ class CDSDialogTitle extends LitElement {
    * Specify an optional id for the title element
    */
   @property({ reflect: true })
-  id = 'title';
+  id = `${prefix}--dialog-title--id-${Math.random().toString(16).slice(2)}`;
 
   render() {
     return html` <slot></slot> `;
