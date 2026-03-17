@@ -123,7 +123,7 @@ jobs:
       - name: Run tests
         run: |
           cd packages/web-components
-          yarn test --coverage
+          yarn test --coverage --puppeteer
       - name: Upload web-components coverage reports to Codecov
         uses: codecov/codecov-action@671740ac38dd9b0130fbe1cec585b89eea48d3de # v5.5.2
         with:
@@ -156,7 +156,7 @@ jobs:
         env:
           YARN_ENABLE_HARDENED_MODE: 0
         run: yarn install --immutable
-      - uses: dorny/paths-filter@d1c1ffe0248fe513906c8e24db8ea791d46f8590 # v3.0.3
+      - uses: dorny/paths-filter@fbd0ab8f3e69293af611ebaee6363fc25e6d187d # v4.0.1
         id: filter
         with:
           filters: |
@@ -241,7 +241,7 @@ jobs:
         run: kill ${{ steps.storybook.outputs.pid }}
       - name: Upload blob report to GitHub Actions Artifacts
         if: ${{ !cancelled() }}
-        uses: actions/upload-artifact@bbbca2ddaa5d8feaa63e36b76fdaad77386f024f #7.0.0
+        uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f #6.0.0
         with:
           name: playwright-vrt-blob-report-${{ matrix.shardIndex }}
           path: blob-report
@@ -307,7 +307,7 @@ jobs:
         run: kill ${{ steps.storybook.outputs.pid }}
       - name: Upload blob report to GitHub Actions Artifacts
         if: ${{ !cancelled() }}
-        uses: actions/upload-artifact@bbbca2ddaa5d8feaa63e36b76fdaad77386f024f #7.0.0
+        uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f #6.0.0
         with:
           name: playwright-avt-blob-report-${{ matrix.shardIndex }}
           path: blob-report
@@ -364,7 +364,7 @@ jobs:
           ./all-playwright-vrt-blob-reports
 
       - name: Upload vrt HTML report
-        uses: actions/upload-artifact@v7.0.0
+        uses: actions/upload-artifact@v6.0.0
         with:
           name: html-playwright-vrt-report--attempt-${{ github.run_attempt }}
           path: playwright-vrt-report
@@ -383,7 +383,7 @@ jobs:
           ./all-playwright-avt-blob-reports
 
       - name: Upload avt HTML report
-        uses: actions/upload-artifact@v7.0.0
+        uses: actions/upload-artifact@v6.0.0
         with:
           name: html-playwright-avt-report--attempt-${{ github.run_attempt }}
           path: playwright-avt-report
@@ -428,7 +428,7 @@ jobs:
         run: yarn workspace @carbon/react storybook:build --stats-json
       - id: chromatic
         name: Run Chromatic
-        uses: chromaui/action@5ec258af08deb3e8c36653bd618cb7fe52090031 # v15.2.0
+        uses: chromaui/action@93712e37669f856c4828136f9cb535dbfa60b50c # v15.1.1
         with:
           # 👇 Token is intentionally plaintext
           # https://www.chromatic.com/docs/github-actions/#run-chromatic-on-external-forks-of-open-source-projects
@@ -480,9 +480,12 @@ jobs:
   flag-agents-md-changes:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          fetch-depth: 0
       - name: Detect AGENTS.md changes
         id: changes
-        uses: dorny/paths-filter@d1c1ffe0248fe513906c8e24db8ea791d46f8590 # v3.0.3
+        uses: dorny/paths-filter@fbd0ab8f3e69293af611ebaee6363fc25e6d187d # v4.0.1
         with:
           filters: |
             added_or_modified:
