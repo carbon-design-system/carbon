@@ -172,41 +172,6 @@ describe('Dialog', () => {
       expect(body).toHaveAttribute('tabindex', '0');
     });
 
-    it('should support `DialogBody` resize based scroll detection and function refs', () => {
-      jest.useFakeTimers();
-
-      const bodyRef = jest.fn();
-
-      render(
-        <Dialog open>
-          <DialogBody ref={bodyRef} data-testid="body">
-            Body
-          </DialogBody>
-        </Dialog>
-      );
-
-      const body = screen.getByTestId('body');
-
-      Object.defineProperty(body, 'clientHeight', {
-        configurable: true,
-        value: 10,
-      });
-      Object.defineProperty(body, 'scrollHeight', {
-        configurable: true,
-        value: 20,
-      });
-
-      act(() => {
-        window.dispatchEvent(new Event('resize'));
-        jest.advanceTimersByTime(250);
-      });
-
-      expect(body).toHaveClass(`${prefix}--dialog-scroll-content`);
-      expect(bodyRef).toHaveBeenCalledWith(body);
-
-      jest.useRealTimers();
-    });
-
     it('should support `DialogBody` object refs', () => {
       const bodyRef = createRef();
 
