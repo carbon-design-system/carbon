@@ -34,12 +34,8 @@
     "@ibm/telemetry-js": "^1.5.0"
   },
   "devDependencies": {
-    "@carbon/cli-reporter": "^10.8.0",
     "@carbon/icons": "^11.76.0",
-    "fs-extra": "^11.0.0",
-    "prettier": "^3.3.3",
     "rimraf": "^6.0.1",
-    "rollup": "^4.41.1",
     "vue": "^3.0.0"
   },
   "sideEffects": false
