@@ -84,6 +84,13 @@ class CDSDialog extends CDSModal {
   role: 'dialog' | 'alertdialog' = 'dialog';
 
   /**
+   * Prevent closing on click outside of dialog
+   * Only applies to modal dialogs.
+   */
+  @property({ type: Boolean, attribute: 'prevent-close-on-click-outside' })
+  preventCloseOnClickOutside = false;
+
+  /**
    * Handles `slotchange` event.
    */
   protected _handleSlotChange() {

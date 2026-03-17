@@ -22,6 +22,7 @@ import '../textarea';
 import '../combo-box';
 import '../checkbox';
 import { iconLoader } from '../../globals/internal/icon-loader';
+import { ifDefined } from 'lit/directives/if-defined.js';
 
 const toggleButton = () => {
   document.querySelector('cds-dialog')?.toggleAttribute('open');
@@ -47,14 +48,6 @@ const controls = {
   ariaDescribedBy: {
     control: 'text',
     description: 'Specify the ID of an element that describes this dialog',
-  },
-  modal: {
-    control: 'boolean',
-    description: 'Specifies whether the dialog is modal or non-modal',
-  },
-  open: {
-    control: 'boolean',
-    description: 'Specify whether the dialog is currently open',
   },
   preventCloseOnClickOutside: {
     control: 'boolean',
@@ -109,15 +102,15 @@ export const DangerDialog = {
     role,
   }) => html`
     <cds-dialog
-      aria-label=${ariaLabel}
-      aria-labelledby=${ariaLabelledBy}
-      aria-describedby=${ariaDescribedBy}
+      aria-label=${ifDefined(ariaLabel || undefined)}
+      aria-labelledby=${ifDefined(ariaLabelledBy || undefined)}
+      aria-describedby=${ifDefined(ariaDescribedBy || undefined)}
       .modal=${true}
       ?prevent-close-on-click-outside=${preventCloseOnClickOutside}
       role=${role}>
       <cds-dialog-header>
         <cds-dialog-subtitle>Account resources</cds-dialog-subtitle>
-        <cds-dialog-title>
+        <cds-dialog-title id="title">
           Are you sure you want to delete this custom domain?
         </cds-dialog-title>
         <cds-dialog-controls>
@@ -126,8 +119,12 @@ export const DangerDialog = {
       </cds-dialog-header>
       <cds-dialog-body></cds-dialog-body>
       <cds-dialog-footer danger>
-        <cds-button kind="secondary" data-dialog-close>Cancel</cds-button>
-        <cds-button kind="danger">Delete</cds-button>
+        <cds-dialog-footer-button kind="secondary" data-dialog-close
+          >Cancel</cds-dialog-footer-button
+        >
+        <cds-dialog-footer-button kind="danger" data-dialog-close
+          >Delete</cds-dialog-footer-button
+        >
       </cds-dialog-footer>
     </cds-dialog>
     <cds-button @click="${toggleButton}">Toggle open</cds-button>
@@ -139,20 +136,22 @@ export const Modal = {
   argTypes: controls,
   render: ({
     ariaLabel,
-    modal,
-    open,
+    ariaLabelledBy,
+    ariaDescribedBy,
     preventCloseOnClickOutside,
     role,
   }) => html`
     <cds-dialog
-      aria-label=${ariaLabel}
-      ?modal=${modal}
-      ?open=${open}
+      aria-label=${ifDefined(ariaLabel || undefined)}
+      aria-labelledby=${ifDefined(ariaLabelledBy || undefined)}
+      aria-describedby=${ifDefined(ariaDescribedBy || undefined)}
+      .modal=${true}
+      .open=${true}
       ?prevent-close-on-click-outside=${preventCloseOnClickOutside}
       role=${role}>
       <cds-dialog-header>
         <cds-dialog-subtitle>Configure dialog settings</cds-dialog-subtitle>
-        <cds-dialog-title>Modal Dialog Example</cds-dialog-title>
+        <cds-dialog-title id="title">Modal Dialog Example</cds-dialog-title>
         <cds-dialog-controls>
           <cds-dialog-close-button></cds-dialog-close-button>
           <cds-ai-label alignment="bottom-end">
@@ -173,17 +172,12 @@ export const Modal = {
           ratione officia Voluptate beatae eligendi placeat nemo laborum,
           ratione.
         </p>
-        <div style="margin-bottom: 24px;">
-          <cds-text-input label="Name" placeholder="Enter your name">
-          </cds-text-input>
-        </div>
-        <div style="margin-bottom: 24px;">
-          <cds-select label-text="Region" placeholder="US South">
-            <cds-select-item value="us-south">US South</cds-select-item>
-            <cds-select-item value="us-east">US East</cds-select-item>
-          </cds-select>
-        </div>
-
+        <cds-text-input label="Name" placeholder="Enter your name">
+        </cds-text-input>
+        <cds-select label-text="Region" placeholder="US South">
+          <cds-select-item value="us-south">US South</cds-select-item>
+          <cds-select-item value="us-east">US East</cds-select-item>
+        </cds-select>
         <p>
           Elit hic at labore culpa itaque fugiat. Consequuntur iure autem autem
           officiis dolores facilis nulla earum! Neque quia nemo sequi assumenda
@@ -230,27 +224,32 @@ export const Modal = {
         >
       </cds-dialog-footer>
     </cds-dialog>
-    <cds-button @click="${toggleButton}">Toggle dialog</cds-button>
+    <cds-button @click="${toggleButton}">Toggle open</cds-button>
   `,
 };
 
 export const NonModal = {
-  args: {
-    ...defaultArgs,
-    modal: false,
-  },
+  args: defaultArgs,
   argTypes: controls,
-  render: ({ ariaLabel, open, preventCloseOnClickOutside, role }) => html`
-    <cds-button @click="${toggleButton}">Toggle dialog</cds-button>
+  parameters: {
+    controls: {
+      exclude: ['preventCloseOnClickOutside'],
+    },
+  },
+  render: ({ ariaLabel, ariaLabelledBy, ariaDescribedBy, role }) => html`
+    <cds-button @click="${toggleButton}">Toggle open</cds-button>
     <cds-dialog
-      aria-label=${ariaLabel}
+      aria-label=${ifDefined(ariaLabel || undefined)}
+      aria-labelledby=${ifDefined(ariaLabelledBy || undefined)}
+      aria-describedby=${ifDefined(ariaDescribedBy || undefined)}
       .modal=${false}
-      ?open=${open}
-      ?prevent-close-on-click-outside=${preventCloseOnClickOutside}
+      .open=${true}
       role=${role}>
       <cds-dialog-header>
-        <cds-dialog-subtitle>Non-modal dialog example</cds-dialog-subtitle>
-        <cds-dialog-title>Non-Modal Dialog</cds-dialog-title>
+        <cds-dialog-subtitle
+          >Non-modal dialog example Subtitle
+        </cds-dialog-subtitle>
+        <cds-dialog-title id="title">Non-Modal Dialog</cds-dialog-title>
         <cds-dialog-controls>
           <cds-dialog-close-button></cds-dialog-close-button>
         </cds-dialog-controls>
@@ -262,25 +261,59 @@ export const NonModal = {
           ratione officia Voluptate beatae eligendi placeat nemo laborum,
           ratione.
         </p>
-        <div style="margin-bottom: 24px;">
-          <cds-text-input
-            label="Name"
-            placeholder="Enter your name"
-            data-dialog-primary-focus>
-          </cds-text-input>
-        </div>
-        <div style="margin-bottom: 24px;">
-          <cds-select label-text="Region" placeholder="US South">
-            <cds-select-item value="us-south">US South</cds-select-item>
-            <cds-select-item value="us-east">US East</cds-select-item>
-          </cds-select>
-        </div>
+        <cds-text-input label="Name" placeholder="Enter your name">
+        </cds-text-input>
+        <cds-select label-text="Region" placeholder="US South">
+          <cds-select-item value="us-south">US South</cds-select-item>
+          <cds-select-item value="us-east">US East</cds-select-item>
+        </cds-select>
+        <p>
+          Elit hic at labore culpa itaque fugiat. Consequuntur iure autem autem
+          officiis dolores facilis nulla earum! Neque quia nemo sequi assumenda
+          ratione officia Voluptate beatae eligendi placeat nemo laborum,
+          ratione.
+        </p>
       </cds-dialog-body>
       <cds-dialog-footer>
-        <cds-button kind="secondary" data-dialog-close>Cancel</cds-button>
-        <cds-button kind="primary" data-dialog-close>Submit</cds-button>
+        <cds-dialog-footer-button kind="secondary" data-dialog-close
+          >Cancel</cds-dialog-footer-button
+        >
+        <cds-dialog-footer-button kind="primary" data-dialog-close
+          >Submit</cds-dialog-footer-button
+        >
       </cds-dialog-footer>
     </cds-dialog>
+  `,
+};
+
+export const PassiveDialog = {
+  args: defaultArgs,
+  argTypes: controls,
+  render: ({
+    ariaLabel,
+    ariaLabelledBy,
+    ariaDescribedBy,
+    preventCloseOnClickOutside,
+    role,
+  }) => html`
+    <cds-dialog
+      aria-label=${ifDefined(ariaLabel || undefined)}
+      aria-labelledby=${ifDefined(ariaLabelledBy || undefined)}
+      aria-describedby=${ifDefined(ariaDescribedBy || undefined)}
+      .modal=${true}
+      ?prevent-close-on-click-outside=${preventCloseOnClickOutside}
+      role=${role}>
+      <cds-dialog-header>
+        <cds-dialog-title id="title">Information Message</cds-dialog-title>
+        <cds-dialog-controls>
+          <cds-dialog-close-button></cds-dialog-close-button>
+        </cds-dialog-controls>
+      </cds-dialog-header>
+      <cds-dialog-body>
+        <p>You have been successfully signed out</p>
+      </cds-dialog-body>
+    </cds-dialog>
+    <cds-button @click="${toggleButton}">Toggle open</cds-button>
   `,
 };
 
@@ -289,20 +322,22 @@ export const WithScrollingContent = {
   argTypes: controls,
   render: ({
     ariaLabel,
-    modal,
-    open,
+    ariaLabelledBy,
+    ariaDescribedBy,
     preventCloseOnClickOutside,
     role,
   }) => html`
     <cds-dialog
-      aria-label=${ariaLabel}
-      ?modal=${modal}
-      ?open=${open}
+      aria-label=${ifDefined(ariaLabel || undefined)}
+      aria-labelledby=${ifDefined(ariaLabelledBy || undefined)}
+      aria-describedby=${ifDefined(ariaDescribedBy || undefined)}
+      .modal=${true}
+      .open=${true}
       ?prevent-close-on-click-outside=${preventCloseOnClickOutside}
       role=${role}>
       <cds-dialog-header>
         <cds-dialog-subtitle>Configure dialog settings</cds-dialog-subtitle>
-        <cds-dialog-title>Modal Dialog Example</cds-dialog-title>
+        <cds-dialog-title id="title">Modal Dialog Example</cds-dialog-title>
         <cds-dialog-controls>
           <cds-dialog-close-button></cds-dialog-close-button>
         </cds-dialog-controls>
@@ -314,21 +349,20 @@ export const WithScrollingContent = {
           vitae orci tincidunt auctor eget eget libero. Ut tincidunt ultricies
           fringilla. Aliquam erat volutpat. Aenean arcu odio, elementum vel
           vehicula vitae, porttitor ac lorem. Sed viverra elit ac risus
-          tincidunt fermentum.
+          tincidunt fermentum. Ut sollicitudin nibh id risus ornare ornare.
+          Etiam gravida orci ut lectus dictum, quis ultricies felis mollis.
+          Mauris nec commodo est, nec faucibus nibh. Nunc commodo ante quis
+          pretium consectetur. Ut ac nisl vitae mi mattis vulputate a at elit.
+          Nullam porttitor ex eget mi feugiat mattis. Nunc non sodales magna.
+          Proin ornare tellus quis hendrerit egestas. Donec pharetra leo nec
+          molestie sollicitudin.
         </p>
-        <div style="margin-bottom: 24px;">
-          <cds-text-input
-            label="Name"
-            placeholder="Enter your name"
-            data-dialog-primary-focus>
-          </cds-text-input>
-        </div>
-        <div style="margin-bottom: 24px;">
-          <cds-select label-text="Region" placeholder="US South">
-            <cds-select-item value="us-south">US South</cds-select-item>
-            <cds-select-item value="us-east">US East</cds-select-item>
-          </cds-select>
-        </div>
+        <cds-text-input label="Name" placeholder="Enter your name">
+        </cds-text-input>
+        <cds-select label-text="Region" placeholder="US South">
+          <cds-select-item value="us-south">US South</cds-select-item>
+          <cds-select-item value="us-east">US East</cds-select-item>
+        </cds-select>
         <p>
           Elit hic at labore culpa itaque fugiat. Consequuntur iure autem autem
           officiis dolores facilis nulla earum! Neque quia nemo sequi assumenda
@@ -341,16 +375,13 @@ export const WithScrollingContent = {
           ratione officia Voluptate beatae eligendi placeat nemo laborum,
           ratione.
         </p>
-        <div style="margin-bottom: 24px;">
-          <cds-text-input label="Name" placeholder="Enter your name">
-          </cds-text-input>
-        </div>
-        <div style="margin-bottom: 24px;">
-          <cds-select label-text="Region" placeholder="US South">
-            <cds-select-item value="us-south">US South</cds-select-item>
-            <cds-select-item value="us-east">US East</cds-select-item>
-          </cds-select>
-        </div>
+        <cds-text-input label="Name" placeholder="Enter your name">
+        </cds-text-input>
+
+        <cds-select label-text="Region" placeholder="US South">
+          <cds-select-item value="us-south">US South</cds-select-item>
+          <cds-select-item value="us-east">US East</cds-select-item>
+        </cds-select>
         <p>
           Elit hic at labore culpa itaque fugiat. Consequuntur iure autem autem
           officiis dolores facilis nulla earum! Neque quia nemo sequi assumenda
@@ -359,41 +390,15 @@ export const WithScrollingContent = {
         </p>
       </cds-dialog-body>
       <cds-dialog-footer>
-        <cds-button kind="secondary" data-dialog-close>Close</cds-button>
-        <cds-button kind="primary" data-dialog-close>Save</cds-button>
+        <cds-dialog-footer-button kind="secondary" data-dialog-close
+          >Cancel</cds-dialog-footer-button
+        >
+        <cds-dialog-footer-button kind="primary" data-dialog-close
+          >Save</cds-dialog-footer-button
+        >
       </cds-dialog-footer>
     </cds-dialog>
-    <cds-button @click="${toggleButton}">Toggle dialog</cds-button>
-  `,
-};
-
-export const PassiveDialog = {
-  args: defaultArgs,
-  argTypes: controls,
-  render: ({
-    ariaLabel,
-    modal,
-    open,
-    preventCloseOnClickOutside,
-    role,
-  }) => html`
-    <cds-dialog
-      aria-label=${ariaLabel}
-      ?modal=${modal}
-      ?open=${open}
-      ?prevent-close-on-click-outside=${preventCloseOnClickOutside}
-      role=${role}>
-      <cds-dialog-header>
-        <cds-dialog-title>Information Message</cds-dialog-title>
-        <cds-dialog-controls>
-          <cds-dialog-close-button></cds-dialog-close-button>
-        </cds-dialog-controls>
-      </cds-dialog-header>
-      <cds-dialog-body>
-        <p>You have been successfully signed out</p>
-      </cds-dialog-body>
-    </cds-dialog>
-    <cds-button @click="${toggleButton}">Toggle dialog</cds-button>
+    <cds-button @click="${toggleButton}">Toggle open</cds-button>
   `,
 };
 
