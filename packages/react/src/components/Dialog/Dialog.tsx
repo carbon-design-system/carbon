@@ -28,6 +28,8 @@ import { useId } from '../../internal/useId';
 import { useResizeObserver } from '../../internal/useResizeObserver';
 import { InlineLoadingStatus } from '../InlineLoading/InlineLoading';
 import InlineLoading from '../InlineLoading/InlineLoading';
+import { deprecate } from '../../prop-types/deprecate';
+
 const DialogContext = createContext<{
   titleId?: string;
   subtitleId?: string;
@@ -99,14 +101,32 @@ interface DialogProps extends HTMLAttributes<HTMLDialogElement> {
   /**
    * Specify a label for screen readers
    */
+  'aria-label'?: string;
+
+  /**
+   * Specify the ID of an element that labels this dialog
+   */
+  'aria-labelledby'?: string;
+
+  /**
+   * Specify the ID of an element that describes this dialog
+   */
+  'aria-describedby'?: string;
+
+  /**
+   * @deprecated Use 'aria-label' instead.
+   * Specify a label for screen readers
+   */
   ariaLabel?: string;
 
   /**
+   * @deprecated Use 'aria-labelledby' instead.
    * Specify the ID of an element that labels this dialog
    */
   ariaLabelledBy?: string;
 
   /**
+   * @deprecated Use 'aria-describedby' instead.
    * Specify the ID of an element that describes this dialog
    */
   ariaDescribedBy?: string;
@@ -125,9 +145,12 @@ const Dialog = React.forwardRef(
       onRequestClose = noopFn,
       open = false,
       role,
-      ariaLabel,
-      ariaLabelledBy,
-      ariaDescribedBy,
+      'aria-label': ariaLabel,
+      'aria-labelledby': ariaLabelledBy,
+      'aria-describedby': ariaDescribedBy,
+      ariaLabel: deprecatedAriaLabel,
+      ariaLabelledBy: deprecatedAriaLabelledBy,
+      ariaDescribedBy: deprecatedAriaDescribedBy,
       ...rest
     }: DialogProps,
     forwardRef
@@ -206,7 +229,16 @@ const Dialog = React.forwardRef(
     };
 
     useEffect(() => {
-      if (ref.current && open && !ariaLabel && !ariaLabelledBy) {
+      const effectiveAriaLabel = ariaLabel || deprecatedAriaLabel;
+      const effectiveAriaLabelledBy =
+        ariaLabelledBy || deprecatedAriaLabelledBy;
+
+      if (
+        ref.current &&
+        open &&
+        !effectiveAriaLabel &&
+        !effectiveAriaLabelledBy
+      ) {
         const title = ref.current.querySelector(
           `.${prefix}--dialog-header__heading`
         );
@@ -217,7 +249,14 @@ const Dialog = React.forwardRef(
         }
       }
       // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20452
-    }, [open, ariaLabel, ariaLabelledBy, prefix]);
+    }, [
+      open,
+      ariaLabel,
+      deprecatedAriaLabel,
+      ariaLabelledBy,
+      deprecatedAriaLabelledBy,
+      prefix,
+    ]);
 
     return (
       <DialogContext.Provider value={contextValue}>
@@ -236,9 +275,13 @@ const Dialog = React.forwardRef(
           onClick={handleClick}
           onClose={onClose}
           role={role}
-          aria-label={ariaLabel}
-          aria-labelledby={!ariaLabel ? ariaLabelledBy || titleId : undefined}
-          aria-describedby={ariaDescribedBy}>
+          aria-label={ariaLabel || deprecatedAriaLabel}
+          aria-labelledby={
+            !(ariaLabel || deprecatedAriaLabel)
+              ? ariaLabelledBy || deprecatedAriaLabelledBy || titleId
+              : undefined
+          }
+          aria-describedby={ariaDescribedBy || deprecatedAriaDescribedBy}>
           <div className={containerClasses}>{children}</div>
         </dialog>
       </DialogContext.Provider>
@@ -304,7 +347,31 @@ Dialog.propTypes = {
   /**
    * Specify the ID of an element that describes this dialog
    */
-  ariaDescribedBy: PropTypes.string,
+  'aria-describedby': PropTypes.string,
+
+  /**
+   * Specify a label for screen readers
+   */
+  ariaLabel: deprecate(
+    PropTypes.string,
+    'This prop syntax has been deprecated. Please use the new `aria-label`'
+  ),
+
+  /**
+   * Specify the ID of an element that labels this dialog
+   */
+  ariaLabelledBy: deprecate(
+    PropTypes.string,
+    'This prop syntax has been deprecated. Please use the new `aria-labelledby`'
+  ),
+
+  /**
+   * Specify the ID of an element that describes this dialog
+   */
+  ariaDescribedBy: deprecate(
+    PropTypes.string,
+    'This prop syntax has been deprecated. Please use the new `aria-describedby`'
+  ),
 };
 
 /**
