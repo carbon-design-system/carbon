@@ -175,202 +175,71 @@ Common ones used in Carbon:
 
 ---
 
-## Three types of Carbon tokens: color, layout, and typography
+## Customizing components with Bob
 
-The Token Inspector panel shows all `--cds-*` tokens used by a component. They
-fall into three distinct categories that are changed in different ways:
+The Token Inspector panel shows all `--cds-*` tokens used by a component. You
+can ask Bob to help you customize colors, sizes, and fonts for any component
+you're working on.
 
-### Color tokens (`--cds-button-primary`, `--cds-field-01`, etc.)
+### Changing colors
 
-These come from `@carbon/themes` and change with the active theme. In the VS
-Code theme they map to `--vscode-*` CSS properties. **Edit
-[`packages/themes/src/vscode.js`](../themes/src/vscode.js)** to change them.
+**Example prompts:**
 
-### Layout / sizing tokens (`--cds-layout-size-height-*`, `--cds-layout-density-*`)
+- "Make the primary button background use the VS Code accent color"
+- "Change the text input border to match VS Code's input border color"
+- "Update the checkbox colors to use VS Code's checkbox theme colors"
 
-These come from `@carbon/layout` and are emitted as CSS custom properties at
-`:root` by Carbon's stylesheet. They are **intentionally outside the color theme
-system** — Carbon's design decision is that sizing/spacing is theme-independent.
+Bob will edit [`packages/themes/src/vscode.js`](../themes/src/vscode.js) to map
+Carbon color tokens to the appropriate VS Code CSS properties.
 
-VS Code has no equivalent `--vscode-*` property for component sizing. However,
-because these are plain CSS custom properties, they can be overridden at
-runtime.
+### Adjusting sizes and spacing
 
-**The VS Code compact layout overrides are already applied** in
-[`packages/vscode-preview/src/webview/styles.scss`](src/webview/styles.scss)
-inside the `[data-carbon-theme='vscode']` block. VS Code's native UI is
-significantly more compact than Carbon's defaults:
+**Example prompts:**
 
-| Token                                        | Carbon default | VS Code target  | What it controls                     |
-| -------------------------------------------- | -------------- | --------------- | ------------------------------------ |
-| `--cds-layout-size-height-xs`                | 1.5rem (24px)  | 1.375rem (22px) | Compact icon buttons, tags           |
-| `--cds-layout-size-height-sm`                | 2rem (32px)    | 1.75rem (28px)  | Standard VS Code control height      |
-| `--cds-layout-size-height-md`                | 2.5rem (40px)  | 2rem (32px)     | Medium controls                      |
-| `--cds-layout-size-height-lg`                | 3rem (48px)    | 2.25rem (36px)  | Large controls (default button size) |
-| `--cds-layout-size-height-xl`                | 4rem (64px)    | 2.75rem (44px)  | Extra large                          |
-| `--cds-layout-size-height-2xl`               | 5rem (80px)    | 3.5rem (56px)   | 2XL (expressive / hero buttons)      |
-| `--cds-layout-density-padding-inline-normal` | 1rem (16px)    | 0.75rem (12px)  | Horizontal padding inside controls   |
+- "Make buttons 2px taller"
+- "Reduce the horizontal padding inside text inputs"
+- "Increase the height of dropdown menus to 32px"
 
-### Typography tokens (`--cds-body-01-font-size`, `--cds-heading-03-font-size`, etc.)
+Bob will edit
+[`packages/vscode-preview/src/webview/styles.scss`](src/webview/styles.scss) to
+override the layout tokens (like `--cds-layout-size-height-sm` or
+`--cds-layout-density-padding-inline-normal`).
 
-These come from `@carbon/type` and are also emitted as CSS custom properties.
-Like layout tokens, they are outside the color theme system but can be
-overridden at runtime.
+### Changing fonts and text sizes
 
-VS Code has no equivalent `--vscode-*` property for typography. However, VS Code
-uses significantly smaller, tighter typography than Carbon's defaults to match
-the compact feel of the editor.
+**Example prompts:**
 
-**The VS Code typography overrides are already applied** in
-[`packages/vscode-preview/src/webview/styles.scss`](src/webview/styles.scss)
-inside the `[data-carbon-theme='vscode']` block:
+- "Make body text 1px smaller"
+- "Increase the font size of form labels"
+- "Make headings slightly larger"
 
-| Token category | Carbon default | VS Code target | What it controls           |
-| -------------- | -------------- | -------------- | -------------------------- |
-| Body text      | 14px           | 13px           | Primary content text       |
-| Labels         | 12px           | 11px           | Form labels, tags, badges  |
-| Helper text    | 12px           | 11px           | Form hints, descriptions   |
-| Code           | 12px           | 13px           | Inline code, code snippets |
-| Heading 01-02  | 14-16px        | 14-16px        | Small section headers      |
-| Heading 03     | 20px           | 18px           | Medium section headers     |
-| Heading 04     | 28px           | 24px           | Large section headers      |
-| Heading 05-07  | 32-54px        | 28-48px        | Display / hero headings    |
+Bob will edit
+[`packages/vscode-preview/src/webview/styles.scss`](src/webview/styles.scss) to
+override typography tokens (like `--cds-body-01-font-size` or
+`--cds-heading-03-font-size`).
 
-**To experiment with different typography**, edit the values in
-[`packages/vscode-preview/src/webview/styles.scss`](src/webview/styles.scss) and
-rebuild:
+### Adding new components to preview
 
-```bash
-yarn vscode-preview
-# then press F5
-```
+**Example prompts:**
 
-> **Tip:** Use the Token Inspector panel to find the exact token name
-> controlling a specific element. Tokens starting with `--cds-body-*` control
-> body text, `--cds-heading-*` control headings, `--cds-label-*` control labels,
-> and `--cds-code-*` control code text. Each token has separate properties for
-> `font-size`, `line-height`, `font-weight`, and `letter-spacing`.
+- "Add a DataTable component to the preview so I can test it"
+- "Show me a Modal component with different button configurations"
+- "Add a form with TextInput, Dropdown, and Checkbox components"
 
----
+Bob will edit the preview files to add the component you want to experiment
+with.
 
-## Using Developer Tools to Inspect Components
+### Using the Token Inspector
 
-VS Code's webview panels support Chrome DevTools, making it easy to inspect
-components and find the exact CSS custom properties they use.
+The Token Inspector panel (click the 🔍 icon in the toolbar) shows all tokens
+affecting a component. Use it to:
 
-### Opening Developer Tools
+1. Click on any component in the preview
+2. See which `--cds-*` tokens control its appearance
+3. Copy the token name to use in your prompt to Bob
 
-1. **Launch the preview** (press `F5` and run `Carbon: Open Component Preview`)
-2. **Open DevTools** in the Extension Development Host window:
-   - Mac: `Cmd + Option + I`
-   - Windows/Linux: `Ctrl + Shift + I`
-   - Or: `Help` → `Toggle Developer Tools`
+**Example workflow:**
 
-### Finding CSS Custom Properties
-
-Once DevTools is open:
-
-1. **Click the element picker** (top-left icon in DevTools, or press
-   `Cmd/Ctrl + Shift + C`)
-2. **Hover over a component** in the preview — it highlights in the DOM tree
-3. **Click the component** to select it
-4. **View the Styles panel** (right side of DevTools)
-
-The Styles panel shows all CSS applied to the element, including:
-
-- **Color tokens**: `--cds-button-primary`, `--cds-text-primary`, etc.
-- **Layout tokens**: `--cds-layout-size-height-sm`,
-  `--cds-layout-density-padding-inline-normal`, etc.
-- **Typography tokens**: `--cds-body-01-font-size`,
-  `--cds-heading-03-line-height`, etc.
-
-### Example: Inspecting a Button
-
-1. Click the element picker in DevTools
-2. Click any button in the preview
-3. In the Styles panel, look for properties like:
-
-```css
-.cds--btn--primary {
-  background-color: var(--cds-button-primary);
-  color: var(--cds-text-on-color);
-  height: var(--cds-layout-size-height-lg);
-  padding-inline: var(--cds-layout-density-padding-inline-normal);
-  font-size: var(--cds-body-compact-01-font-size);
-}
-```
-
----
-
-## Adding new components to the preview
-
-1. Create `src/webview/components/MyComponentStories.tsx`:
-
-```tsx
-import React from 'react';
-import { MyComponent } from '@carbon/react';
-
-export const stories = [
-  {
-    name: 'Default',
-    render: () => <MyComponent />,
-  },
-  {
-    name: 'Variant',
-    render: () => <MyComponent variant="something" />,
-  },
-];
-```
-
-2. Register it in `src/webview/components/index.ts`:
-
-```ts
-import { stories as myComponentStories } from './MyComponentStories';
-
-export const componentRegistry = [
-  // ... existing entries
-  {
-    title: 'MyComponent',
-    stories: myComponentStories,
-  },
-];
-```
-
-3. Rebuild: `yarn vscode-preview`
-
----
-
-## How VS Code theme injection works
-
-When VS Code opens a webview panel, it injects CSS custom properties into the
-webview's `document` element. For example:
-
-```css
-/* Injected by VS Code automatically — no code needed */
-:root {
-  --vscode-button-background: #0078d4;
-  --vscode-button-foreground: #ffffff;
-  --vscode-editor-background: #1f1f1f;
-  /* ... hundreds more */
-}
-```
-
-The Carbon `vscode` theme tokens reference these properties with fallbacks:
-
-```js
-// packages/themes/src/vscode.js
-export const buttonPrimary = 'var(--vscode-button-background, #0e639c)';
-```
-
-The Sass theme mixin applies these as CSS custom properties scoped to
-`[data-carbon-theme="vscode"]`:
-
-```scss
-// packages/vscode-preview/src/webview/styles.scss
-[data-carbon-theme='vscode'] {
-  @include styles.theme(styles.$vscode);
-}
-```
-
-The webview HTML sets `data-carbon-theme="vscode"` on the `<html>` element, so
-all Carbon components in the webview automatically use VS Code's colors.
+1. Click a button in the preview
+2. Token Inspector shows `--cds-layout-size-height-lg: 2.25rem`
+3. Ask Bob: "Change `--cds-layout-size-height-lg` to 2.5rem"
