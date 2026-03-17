@@ -151,28 +151,6 @@ Then press `F5` again (or reload the Extension Development Host window with
 VS Code exposes hundreds of color properties. A full reference is available at:
 <https://code.visualstudio.com/api/references/theme-color>
 
-Common ones used in Carbon:
-
-| VS Code property                      | What it controls          |
-| ------------------------------------- | ------------------------- |
-| `--vscode-button-background`          | Primary button fill       |
-| `--vscode-button-foreground`          | Primary button text       |
-| `--vscode-button-hoverBackground`     | Primary button hover fill |
-| `--vscode-button-secondaryBackground` | Secondary button fill     |
-| `--vscode-button-secondaryForeground` | Secondary button text     |
-| `--vscode-editor-background`          | Page / panel background   |
-| `--vscode-editor-foreground`          | Body text                 |
-| `--vscode-input-background`           | Text input fill           |
-| `--vscode-input-foreground`           | Text input text           |
-| `--vscode-input-border`               | Text input border         |
-| `--vscode-focusBorder`                | Focus ring color          |
-| `--vscode-checkbox-background`        | Checkbox fill             |
-| `--vscode-checkbox-foreground`        | Checkbox checkmark        |
-| `--vscode-checkbox-border`            | Checkbox border           |
-| `--vscode-dropdown-background`        | Dropdown fill             |
-| `--vscode-dropdown-foreground`        | Dropdown text             |
-| `--vscode-dropdown-border`            | Dropdown border           |
-
 ---
 
 ## Customizing components with Bob
@@ -243,3 +221,36 @@ affecting a component. Use it to:
 1. Click a button in the preview
 2. Token Inspector shows `--cds-layout-size-height-lg: 2.25rem`
 3. Ask Bob: "Change `--cds-layout-size-height-lg` to 2.5rem"
+
+After Bob makes changes to the code, you need to rebuild and reload the
+extension to see the results:
+
+**Option 1: Quick rebuild (for most changes)**
+
+```bash
+yarn vscode-preview
+```
+
+Then reload the Extension Development Host window:
+
+- Mac: `Cmd + R`
+- Windows/Linux: `Ctrl + R`
+
+**Option 2: Full rebuild (for theme changes)**
+
+If Bob edited [`packages/themes/src/vscode.js`](../themes/src/vscode.js), use
+the full rebuild:
+
+```bash
+yarn vscode-preview:full
+```
+
+Then reload the Extension Development Host window (`Cmd/Ctrl + R`).
+
+**Option 3: Restart from scratch**
+
+If reloading doesn't work, close the Extension Development Host window and press
+`F5` again in your main VS Code window to launch a fresh instance.
+
+> **Tip:** Bob can run these commands for you! Just ask: "Rebuild the extension"
+> or "Run yarn vscode-preview"

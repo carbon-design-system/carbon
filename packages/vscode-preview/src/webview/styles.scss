@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2018, 2023
+// Copyright IBM Corp. 2018, 2025
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -37,24 +37,80 @@
   --cds-layout-density-padding-inline-normal: 1rem;
 }
 
+// Mixin to reset all typography tokens to Carbon's default values.
+// These match the default type scale values from @carbon/type.
+@mixin reset-typography-tokens {
+  // Body text
+  --cds-body-compact-01-font-size: 0.875rem; // 14px
+  --cds-body-compact-01-line-height: 1.28572;
+  --cds-body-compact-02-font-size: 1rem; // 16px
+  --cds-body-compact-02-line-height: 1.375;
+  --cds-body-01-font-size: 0.875rem; // 14px
+  --cds-body-01-line-height: 1.42857;
+  --cds-body-02-font-size: 1rem; // 16px
+  --cds-body-02-line-height: 1.5;
+
+  // Labels
+  --cds-label-01-font-size: 0.75rem; // 12px
+  --cds-label-01-line-height: 1.33333;
+  --cds-label-02-font-size: 0.875rem; // 14px
+  --cds-label-02-line-height: 1.28572;
+
+  // Helper text
+  --cds-helper-text-01-font-size: 0.75rem; // 12px
+  --cds-helper-text-01-line-height: 1.33333;
+  --cds-helper-text-02-font-size: 0.875rem; // 14px
+  --cds-helper-text-02-line-height: 1.28572;
+
+  // Code
+  --cds-code-01-font-size: 0.75rem; // 12px
+  --cds-code-01-line-height: 1.33333;
+  --cds-code-02-font-size: 0.875rem; // 14px
+  --cds-code-02-line-height: 1.42857;
+
+  // Headings
+  --cds-heading-compact-01-font-size: 0.875rem; // 14px
+  --cds-heading-compact-01-line-height: 1.28572;
+  --cds-heading-compact-02-font-size: 1rem; // 16px
+  --cds-heading-compact-02-line-height: 1.375;
+  --cds-heading-01-font-size: 0.875rem; // 14px
+  --cds-heading-01-line-height: 1.42857;
+  --cds-heading-02-font-size: 1rem; // 16px
+  --cds-heading-02-line-height: 1.5;
+  --cds-heading-03-font-size: 1.25rem; // 20px
+  --cds-heading-03-line-height: 1.4;
+  --cds-heading-04-font-size: 1.75rem; // 28px
+  --cds-heading-04-line-height: 1.28572;
+  --cds-heading-05-font-size: 2rem; // 32px
+  --cds-heading-05-line-height: 1.25;
+  --cds-heading-06-font-size: 2.625rem; // 42px
+  --cds-heading-06-line-height: 1.199;
+  --cds-heading-07-font-size: 3.375rem; // 54px
+  --cds-heading-07-line-height: 1.19;
+}
+
 [data-carbon-theme='white'] {
   @include styles.theme(styles.$white);
   @include reset-layout-tokens;
+  @include reset-typography-tokens;
 }
 
 [data-carbon-theme='g10'] {
   @include styles.theme(styles.$g10);
   @include reset-layout-tokens;
+  @include reset-typography-tokens;
 }
 
 [data-carbon-theme='g90'] {
   @include styles.theme(styles.$g90);
   @include reset-layout-tokens;
+  @include reset-typography-tokens;
 }
 
 [data-carbon-theme='g100'] {
   @include styles.theme(styles.$g100);
   @include reset-layout-tokens;
+  @include reset-typography-tokens;
 }
 
 [data-carbon-theme='vscode'] {
@@ -92,6 +148,69 @@
   // Density / padding tokens (control horizontal padding inside controls)
   --cds-layout-density-padding-inline-condensed: 0.5rem; // 8px  — unchanged
   --cds-layout-density-padding-inline-normal: 0.75rem; // 12px — tighter than Carbon's 1rem
+
+  // ---------------------------------------------------------------------------
+  // VS Code typography token overrides
+  //
+  // VS Code uses slightly smaller, tighter typography than Carbon's defaults
+  // to match the compact feel of the editor. These overrides make Carbon
+  // components feel more native to VS Code.
+  //
+  // Philosophy:
+  // - Body text: 13px (VS Code standard) instead of 14px
+  // - Labels/helpers: 11px instead of 12px for tighter UI
+  // - Code: Match VS Code's editor font size (13px)
+  // - Headings: Slightly reduced to maintain hierarchy without overwhelming
+  // - Line heights: Tighter for compact vertical spacing
+  // ---------------------------------------------------------------------------
+
+  // Body text — primary content text
+  --cds-body-compact-01-font-size: 0.8125rem; // 13px — VS Code standard
+  --cds-body-compact-01-line-height: 1.38462; // ~18px line height
+  --cds-body-compact-02-font-size: 0.875rem; // 14px — slightly larger variant
+  --cds-body-compact-02-line-height: 1.42857; // ~20px line height
+  --cds-body-01-font-size: 0.8125rem; // 13px
+  --cds-body-01-line-height: 1.53846; // ~20px line height (more relaxed)
+  --cds-body-02-font-size: 0.875rem; // 14px
+  --cds-body-02-line-height: 1.57143; // ~22px line height
+
+  // Labels — form labels, tags, badges
+  --cds-label-01-font-size: 0.6875rem; // 11px — compact labels
+  --cds-label-01-line-height: 1.45455; // ~16px line height
+  --cds-label-02-font-size: 0.75rem; // 12px — standard labels
+  --cds-label-02-line-height: 1.33333; // ~16px line height
+
+  // Helper text — form hints, descriptions
+  --cds-helper-text-01-font-size: 0.6875rem; // 11px
+  --cds-helper-text-01-line-height: 1.45455; // ~16px line height
+  --cds-helper-text-02-font-size: 0.75rem; // 12px
+  --cds-helper-text-02-line-height: 1.33333; // ~16px line height
+
+  // Code — inline code, code snippets
+  --cds-code-01-font-size: 0.6875rem; // 11px — small code
+  --cds-code-01-line-height: 1.45455; // ~16px line height
+  --cds-code-02-font-size: 0.8125rem; // 13px — matches editor
+  --cds-code-02-line-height: 1.53846; // ~20px line height
+
+  // Headings — section headers, titles
+  --cds-heading-compact-01-font-size: 0.875rem; // 14px — small headings
+  --cds-heading-compact-01-line-height: 1.28572; // ~18px line height
+  --cds-heading-compact-02-font-size: 1rem; // 16px
+  --cds-heading-compact-02-line-height: 1.375; // ~22px line height
+  --cds-heading-01-font-size: 0.875rem; // 14px
+  --cds-heading-01-line-height: 1.42857; // ~20px line height
+  --cds-heading-02-font-size: 1rem; // 16px
+  --cds-heading-02-line-height: 1.5; // 24px line height
+  --cds-heading-03-font-size: 1.125rem; // 18px — reduced from 20px
+  --cds-heading-03-line-height: 1.44444; // ~26px line height
+  --cds-heading-04-font-size: 1.5rem; // 24px — reduced from 28px
+  --cds-heading-04-line-height: 1.33333; // ~32px line height
+  --cds-heading-05-font-size: 1.75rem; // 28px — reduced from 32px
+  --cds-heading-05-line-height: 1.28571; // ~36px line height
+  --cds-heading-06-font-size: 2.25rem; // 36px — reduced from 42px
+  --cds-heading-06-line-height: 1.22222; // ~44px line height
+  --cds-heading-07-font-size: 3rem; // 48px — reduced from 54px
+  --cds-heading-07-line-height: 1.16667; // ~56px line height
 }
 
 // Ensure body inherits VS Code background and text colors for the shell UI
