@@ -1,0 +1,140 @@
+//
+// Copyright IBM Corp. 2026
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use '@carbon/styles/scss/config' as *;
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/motion' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/breakpoint' as *;
+@use '@carbon/styles/scss/layer' as *;
+@use '@carbon/styles/scss/type' as *;
+@use '@carbon/styles/scss/utilities/convert' as *;
+@use '@carbon/styles/scss/components/dialog' as *;
+@use '@carbon/styles/scss/components/button' as *;
+@use '@carbon/styles/scss/utilities/focus-outline' as *;
+
+:host(#{$prefix}-dialog) dialog {
+  @extend .#{$prefix}--dialog;
+}
+
+:host(#{$prefix}-dialog[has-scrolling-content])
+  ::slotted(#{$prefix}-dialog-body),
+:host(#{$prefix}-dialog) ::slotted(#{$prefix}-dialog-body[is-scrollable]) {
+  @extend .#{$prefix}--dialog-scroll-content;
+}
+
+:host(#{$prefix}-dialog-header) {
+  @extend .#{$prefix}--dialog__header;
+}
+
+:host(#{$prefix}-dialog-controls) {
+  @extend .#{$prefix}--dialog__header-controls;
+}
+
+:host(#{$prefix}-dialog-close-button) {
+  @extend .#{$prefix}--dialog__close;
+
+  padding: 0;
+  border: 0;
+}
+
+:host(#{$prefix}-dialog-close-button) #{$prefix}-icon-button::part(button) {
+  border-width: 2px;
+}
+
+:host(#{$prefix}-dialog-title),
+:host(#{$prefix}-dialog-subtitle) {
+  display: block;
+}
+
+:host(#{$prefix}-dialog-title) {
+  @extend .#{$prefix}--dialog-header__heading;
+}
+
+:host(#{$prefix}-dialog-subtitle) {
+  @extend .#{$prefix}--dialog-header__label;
+}
+
+:host(#{$prefix}-dialog-body) {
+  @extend .#{$prefix}--dialog-content;
+  @extend .#{$prefix}--layer-two;
+
+  z-index: 1;
+
+  ::slotted(#{$prefix}-form-item) {
+    margin-block-end: $spacing-05;
+  }
+
+  ::slotted(#{$prefix}-select:last-of-type) {
+    padding-block-end: 0;
+  }
+}
+
+:host(#{$prefix}-dialog-body:focus) {
+  @include focus-outline('outline');
+}
+
+:host(#{$prefix}-dialog-footer) {
+  @extend .#{$prefix}--dialog-footer;
+
+  z-index: 2;
+}
+
+:host(#{$prefix}-dialog-footer[has-three-buttons]) {
+  @extend .#{$prefix}--dialog-footer--three-button;
+
+  ::slotted(#{$prefix}-dialog-footer-button) {
+    flex: 0 1 25%;
+  }
+}
+
+:host(#{$prefix}-dialog-footer-button:first-of-type) .#{$prefix}--btn {
+  box-shadow: inherit;
+}
+
+:host(#{$prefix}-dialog-footer-button) {
+  .#{$prefix}--btn {
+    block-size: 100%;
+    box-shadow: rem(-1px) 0 0 0 $button-separator;
+    inline-size: 100%;
+    max-inline-size: none;
+
+    padding-block: $spacing-05 $spacing-07;
+
+    &:focus {
+      box-shadow:
+        inset 0 0 0 $button-outline-width $focus,
+        inset 0 0 0 $button-border-width $background;
+    }
+  }
+}
+
+:host(#{$prefix}-dialog-footer) ::slotted(#{$prefix}-button),
+:host(#{$prefix}-dialog-footer-button) {
+  flex: 0 1 50%;
+  margin: 0;
+  block-size: $spacing-10;
+  inline-size: 50%;
+  max-inline-size: none;
+}
+
+:host(#{$prefix}-dialog[danger][has-scrolling-content])
+  ::slotted(#{$prefix}-dialog-body:not([no-fade])) {
+  mask-image: linear-gradient(
+      to bottom,
+      $layer calc(100% - $spacing-11),
+      transparent calc(100% - $spacing-09),
+      transparent 100%
+    ),
+    linear-gradient(to left, $layer 0, $spacing-05, transparent $spacing-05),
+    linear-gradient(to right, $layer 0, $spacing-01, transparent $spacing-01),
+    linear-gradient(to top, $layer 0, $spacing-01, transparent $spacing-01);
+}
+
+:host(#{$prefix}-dialog) ::slotted(#{$prefix}-dialog-body[no-fade]) {
+  mask-image: none;
+}
