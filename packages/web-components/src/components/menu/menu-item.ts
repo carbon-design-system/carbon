@@ -189,6 +189,13 @@ class CDSmenuItem extends HostListenerMixin(HostListenerMixin(LitElement)) {
     this._handleClick(event);
   }
 
+  @HostListener('mousedown')
+  handleMouseDown(event: MouseEvent) {
+    if (this.disabled) {
+      event.preventDefault();
+    }
+  }
+
   @HostListener('mouseenter')
   handleMouseEnter() {
     if (this.hasSubmenu) {
