@@ -429,6 +429,7 @@ const ComboBox = forwardRef(
     );
     const referenceElement = refs?.reference?.current;
     const parentWidth =
+      typeof HTMLElement !== 'undefined' &&
       referenceElement instanceof HTMLElement
         ? referenceElement.clientWidth
         : undefined;
@@ -1154,6 +1155,7 @@ const ComboBox = forwardRef(
                       openMenu();
                   }
                   if (typeahead && event.key === 'Tab') {
+                    if (!isOpen) return;
                     //  event.preventDefault();
                     const matchingItem = items.find((item) =>
                       itemToString(item)
