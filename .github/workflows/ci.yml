@@ -34,6 +34,17 @@ jobs:
         uses: actions/setup-node@53b83947a5a98c8d113130e565377fae1a50d02f # v6.3.0
         with:
           node-version-file: '.nvmrc'
+      - uses: actions/cache@cdf6c1fa76f9f475f3d7449005a359c84ca0f306 # v5.0.3
+        if: github.event_name != 'merge_group'
+        with:
+          path: |
+            node_modules
+            */**/node_modules
+          key:
+            ${{ runner.os }}-yarn-${{ hashFiles('yarn.lock',
+            'packages/**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
       - name: Install dependencies
         env:
           YARN_ENABLE_HARDENED_MODE: 0
@@ -49,6 +60,17 @@ jobs:
         uses: actions/setup-node@53b83947a5a98c8d113130e565377fae1a50d02f # v6.3.0
         with:
           node-version-file: '.nvmrc'
+      - uses: actions/cache@cdf6c1fa76f9f475f3d7449005a359c84ca0f306 # v5.0.3
+        if: github.event_name != 'merge_group'
+        with:
+          path: |
+            node_modules
+            */**/node_modules
+          key:
+            ${{ runner.os }}-yarn-${{ hashFiles('yarn.lock',
+            'packages/**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
       - name: Install dependencies
         env:
           YARN_ENABLE_HARDENED_MODE: 0
@@ -76,6 +98,8 @@ jobs:
           key:
             ${{ runner.os }}-yarn-${{ hashFiles('yarn.lock',
             'packages/**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
       - name: Install dependencies
         env:
           YARN_ENABLE_HARDENED_MODE: 0
@@ -112,6 +136,8 @@ jobs:
           key:
             ${{ runner.os }}-yarn-${{ hashFiles('yarn.lock',
             'packages/**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
       - name: Install dependencies
         env:
           YARN_ENABLE_HARDENED_MODE: 0
@@ -152,6 +178,8 @@ jobs:
           key:
             ${{ runner.os }}-yarn-${{ hashFiles('yarn.lock',
             'packages/**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
       - name: Install dependencies
         env:
           YARN_ENABLE_HARDENED_MODE: 0
@@ -198,6 +226,8 @@ jobs:
           key:
             ${{ runner.os }}-yarn-${{ hashFiles('yarn.lock',
             'packages/**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
       - name: Install dependencies
         env:
           YARN_ENABLE_HARDENED_MODE: 0
@@ -265,6 +295,8 @@ jobs:
           key:
             ${{ runner.os }}-yarn-${{ hashFiles('yarn.lock',
             'packages/**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
       - name: Install dependencies
         env:
           YARN_ENABLE_HARDENED_MODE: 0
@@ -318,6 +350,8 @@ jobs:
           key:
             ${{ runner.os }}-yarn-${{ hashFiles('yarn.lock',
             'packages/**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
       - name: Install dependencies
         env:
           YARN_ENABLE_HARDENED_MODE: 0
