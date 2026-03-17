@@ -211,13 +211,16 @@
       margin-inline-start: $spacing-03;
     }
 
-    &:hover,
-    &:active {
-      color: $link-primary-hover;
+    // Apply hover styles only on devices that support hover
+    @media (hover: hover) {
+      &:hover {
+        color: $link-primary-hover;
+      }
     }
 
     &:active {
       background-color: $background-active;
+      color: $link-primary-hover;
     }
 
     &:disabled,
