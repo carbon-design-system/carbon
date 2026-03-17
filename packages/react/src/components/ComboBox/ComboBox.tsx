@@ -429,6 +429,7 @@ const ComboBox = forwardRef(
     );
     const referenceElement = refs?.reference?.current;
     const parentWidth =
+      typeof HTMLElement !== 'undefined' &&
       referenceElement instanceof HTMLElement
         ? referenceElement.clientWidth
         : undefined;
