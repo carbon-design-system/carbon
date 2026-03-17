@@ -15,7 +15,6 @@ import React, {
   type HTMLAttributes,
   type RefObject,
 } from 'react';
-import useIsomorphicEffect from '../../internal/useIsomorphicEffect';
 import { usePrefix } from '../../internal/usePrefix';
 import cx from 'classnames';
 import { Close } from '@carbon/icons-react';
@@ -26,7 +25,7 @@ import { Layer } from '../Layer';
 import ButtonSet from '../ButtonSet';
 import Button from '../Button';
 import { useId } from '../../internal/useId';
-import { debounce } from 'es-toolkit/compat';
+import { useResizeObserver } from '../../internal/useResizeObserver';
 import { InlineLoadingStatus } from '../InlineLoading/InlineLoading';
 import InlineLoading from '../InlineLoading/InlineLoading';
 const DialogContext = createContext<{
@@ -568,38 +567,25 @@ const DialogBody = React.forwardRef<HTMLDivElement, DialogBodyProps>(
   ({ children, className, hasScrollingContent, ...rest }, ref) => {
     const prefix = usePrefix();
     const contentRef = useRef<HTMLDivElement>(null);
-    const [isScrollable, setIsScrollable] = useState(false);
     const dialogId = useId();
     const dialogBodyId = `${prefix}--dialog-body--${dialogId}`;
 
-    useIsomorphicEffect(() => {
-      if (contentRef.current) {
-        setIsScrollable(
-          contentRef.current.scrollHeight > contentRef.current.clientHeight
-        );
-      }
+    const { height } = useResizeObserver({ ref: contentRef });
 
-      function handler() {
-        if (contentRef.current) {
-          setIsScrollable(
-            contentRef.current.scrollHeight > contentRef.current.clientHeight
-          );
-        }
-      }
-
-      const debouncedHandler = debounce(handler, 200);
-      window.addEventListener('resize', debouncedHandler);
-      return () => {
-        debouncedHandler.cancel();
-        window.removeEventListener('resize', debouncedHandler);
-      };
-    }, []);
+    /**
+     * isScrollable is implicitly dependent on height, when height gets updated
+     * via `useResizeObserver`, clientHeight and scrollHeight get updated too
+     */
+    const isScrollable =
+      !!contentRef.current &&
+      contentRef?.current?.scrollHeight > contentRef?.current?.clientHeight;
 
     const contentClasses = cx(
       `${prefix}--dialog-content`,
       {
         [`${prefix}--dialog-scroll-content`]:
           hasScrollingContent || isScrollable,
+        [`${prefix}--dialog-scroll-content--no-fade`]: height <= 300,
       },
       className
     );
