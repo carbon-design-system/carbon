@@ -104,16 +104,16 @@ class CDSDialog extends CDSModal {
 
     const primaryButton =
       this.querySelector<HTMLElement>(
-        `${prefix}-dialog-footer cds-button[kind="primary"]`
+        `${prefix}-dialog-footer-button[kind="primary"]`
       ) ||
       this.querySelector<HTMLElement>(
-        `${prefix}-dialog-footer cds-button[kind="danger"]`
+        `${prefix}-dialog-footer-button[kind="danger"]`
       ) ||
       null;
 
     const secondaryButtons = Array.from(
       this.querySelectorAll<HTMLElement>(
-        `${prefix}-dialog-footer cds-button[kind="secondary"]`
+        `${prefix}-dialog-footer-button[kind="secondary"]`
       )
     );
 
