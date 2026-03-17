@@ -164,8 +164,10 @@
       $button-tertiary-active
     );
 
-    &:hover {
-      color: $text-inverse;
+    @media (hover: hover) {
+      &:hover {
+        color: $text-inverse;
+      }
     }
 
     &:focus {
@@ -350,9 +352,11 @@
         $button-danger-active
       );
 
-      &:hover {
-        border-color: $button-danger-hover;
-        color: $text-on-color;
+      @media (hover: hover) {
+        &:hover {
+          border-color: $button-danger-hover;
+          color: $text-on-color;
+        }
       }
 
       &:focus {
@@ -397,7 +401,12 @@
         margin-inline-start: $spacing-03;
       }
 
-      &:hover,
+      @media (hover: hover) {
+        &:hover {
+          color: $text-on-color;
+        }
+      }
+
       &:active {
         color: $text-on-color;
       }
