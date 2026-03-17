@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2019, 2024
+ * Copyright IBM Corp. 2019, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -176,3 +176,12 @@ export {
 } from './components/heading/heading';
 export { default as CDSMenuButton } from './components/menu-button/menu-button';
 export { default as CDSComboButton } from './components/combo-button/combo-button';
+export { default as preview_CDSDialog } from './components/dialog/dialog';
+export { default as preview_CDSDialogBody } from './components/dialog/dialog-body';
+export { default as preview_CDSDialogCloseButton } from './components/dialog/dialog-close-button';
+export { default as preview_CDSDialogControls } from './components/dialog/dialog-controls';
+export { default as preview_CDSDialogFooter } from './components/dialog/dialog-footer';
+export { default as preview_CDSDialogFooterButton } from './components/dialog/dialog-footer-button';
+export { default as preview_CDSDialogHeader } from './components/dialog/dialog-header';
+export { default as preview_CDSDialogSubtitle } from './components/dialog/dialog-subtitle';
+export { default as preview_CDSDialogTitle } from './components/dialog/dialog-title';
