@@ -64,9 +64,7 @@ yarn storybook
 ```
 
 Once the storybook is loaded, you can run tests against it using the storybook
-test-utils found in `e2e/test-utils/storybook`. A common use-case for testing a
-component is to use Percy to take a snapshot of a component in a particular
-theme from a specific story in storybook.
+test-utils found in `e2e/test-utils/storybook`.
 
 You can do this by writing the following:
 

@@ -229,11 +229,6 @@ export const Controlled = {
 
 export const Skeleton = {
   decorators: [(story) => html`<div style="width: 500px">${story()}</div>`],
-  parameters: {
-    percy: {
-      skip: true,
-    },
-  },
   args: {
     alignment: 'END',
     isFlush: false,
