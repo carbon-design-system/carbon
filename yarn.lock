@@ -4214,15 +4214,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@next/eslint-plugin-next@npm:15.3.3":
-  version: 15.3.3
-  resolution: "@next/eslint-plugin-next@npm:15.3.3"
-  dependencies:
-    fast-glob: "npm:3.3.1"
-  checksum: 10/08b19a39fa01ac69c7b117a29ebdb193353a29cb3d51b2e3f72fabd7f2b014d08e37d819aed8e440a8a0a6e1acd9053dbf939b5f76603e6a87de0042fbf0bd4b
-  languageName: node
-  linkType: hard
-
 "@next/swc-darwin-arm64@npm:15.5.7":
   version: 15.5.7
   resolution: "@next/swc-darwin-arm64@npm:15.5.7"
@@ -5548,13 +5539,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@rushstack/eslint-patch@npm:^1.10.3":
-  version: 1.11.0
-  resolution: "@rushstack/eslint-patch@npm:1.11.0"
-  checksum: 10/9bb3eb4a48a9a55e31d302b8b99f405e0f3e436fc3cda8c869fdd3fefd3ac398f5a353cceaa6c8cc5e5baf03ccd88d7965fbd25eb111f1f334415f95fa0f996d
-  languageName: node
-  linkType: hard
-
 "@sec-ant/readable-stream@npm:^0.4.1":
   version: 0.4.1
   resolution: "@sec-ant/readable-stream@npm:0.4.1"
@@ -6645,7 +6629,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@typescript-eslint/eslint-plugin@npm:8.46.2, @typescript-eslint/eslint-plugin@npm:^5.4.2 || ^6.0.0 || ^7.0.0 || ^8.0.0":
+"@typescript-eslint/eslint-plugin@npm:8.46.2":
   version: 8.46.2
   resolution: "@typescript-eslint/eslint-plugin@npm:8.46.2"
   dependencies:
@@ -6690,7 +6674,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@typescript-eslint/parser@npm:8.46.2, @typescript-eslint/parser@npm:^5.4.2 || ^6.0.0 || ^7.0.0 || ^8.0.0":
+"@typescript-eslint/parser@npm:8.46.2":
   version: 8.46.2
   resolution: "@typescript-eslint/parser@npm:8.46.2"
   dependencies:
@@ -7153,7 +7137,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@vitejs/plugin-react@npm:^5.0.0, @vitejs/plugin-react@npm:^5.1.1":
+"@vitejs/plugin-react@npm:^5.0.0":
   version: 5.1.1
   resolution: "@vitejs/plugin-react@npm:5.1.1"
   dependencies:
@@ -9430,19 +9414,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"class-prefix@workspace:examples/class-prefix":
-  version: 0.0.0-use.local
-  resolution: "class-prefix@workspace:examples/class-prefix"
-  dependencies:
-    "@carbon/react": "npm:^1.103.0"
-    "@vitejs/plugin-react": "npm:^5.1.1"
-    react: "npm:^19.2.3"
-    react-dom: "npm:^19.2.3"
-    sass: "npm:^1.93.2"
-    vite: "npm:^7.2.4"
-  languageName: unknown
-  linkType: soft
-
 "classnames@npm:2.5.1":
   version: 2.5.1
   resolution: "classnames@npm:2.5.1"
@@ -9666,16 +9637,6 @@ __metadata:
   checksum: 10/17d5666611f9b16d64fdf48176d9b7fb1c7d1c1607a189f7e600040a11a6616982876af148230336adb7d8fe728a559f743a4e29db3747e3b1a32fa7f4529681
   languageName: node
   linkType: hard
-
-"codesandbox-styles@workspace:examples/codesandbox-styles":
-  version: 0.0.0-use.local
-  resolution: "codesandbox-styles@workspace:examples/codesandbox-styles"
-  dependencies:
-    "@carbon/styles": "npm:^1.102.0"
-    sass: "npm:^1.93.2"
-    vite: "npm:^7.2.4"
-  languageName: unknown
-  linkType: soft
 
 "collapse-white-space@npm:^1.0.2":
   version: 1.0.6
@@ -10380,19 +10341,6 @@ __metadata:
   checksum: 10/f593cce41ff5ade23f44e77521e3a1bcc2c64107041e1bf6c3c32adc5187d0d60983292fda326154d20b01079e24931aa5b08e4467cc488b60bb1e7f6d478ade
   languageName: node
   linkType: hard
-
-"custom-theme@workspace:examples/custom-theme":
-  version: 0.0.0-use.local
-  resolution: "custom-theme@workspace:examples/custom-theme"
-  dependencies:
-    "@carbon/react": "npm:^1.103.0"
-    "@vitejs/plugin-react": "npm:^5.1.1"
-    react: "npm:^19.2.3"
-    react-dom: "npm:^19.2.3"
-    sass: "npm:^1.93.2"
-    vite: "npm:^7.2.4"
-  languageName: unknown
-  linkType: soft
 
 "damerau-levenshtein@npm:^1.0.8":
   version: 1.0.8
@@ -11259,16 +11207,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"enhanced-resolve@npm:^5.12.0":
-  version: 5.17.1
-  resolution: "enhanced-resolve@npm:5.17.1"
-  dependencies:
-    graceful-fs: "npm:^4.2.4"
-    tapable: "npm:^2.2.0"
-  checksum: 10/e8e03cb7a4bf3c0250a89afbd29e5ec20e90ba5fcd026066232a0754864d7d0a393fa6fc0e5379314a6529165a1834b36731147080714459d98924520410d8f5
-  languageName: node
-  linkType: hard
-
 "enquirer@npm:^2.3.6, enquirer@npm:^2.4.1":
   version: 2.4.1
   resolution: "enquirer@npm:2.4.1"
@@ -11732,30 +11670,6 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"eslint-config-next@npm:15.3.3":
-  version: 15.3.3
-  resolution: "eslint-config-next@npm:15.3.3"
-  dependencies:
-    "@next/eslint-plugin-next": "npm:15.3.3"
-    "@rushstack/eslint-patch": "npm:^1.10.3"
-    "@typescript-eslint/eslint-plugin": "npm:^5.4.2 || ^6.0.0 || ^7.0.0 || ^8.0.0"
-    "@typescript-eslint/parser": "npm:^5.4.2 || ^6.0.0 || ^7.0.0 || ^8.0.0"
-    eslint-import-resolver-node: "npm:^0.3.6"
-    eslint-import-resolver-typescript: "npm:^3.5.2"
-    eslint-plugin-import: "npm:^2.31.0"
-    eslint-plugin-jsx-a11y: "npm:^6.10.0"
-    eslint-plugin-react: "npm:^7.37.0"
-    eslint-plugin-react-hooks: "npm:^5.0.0"
-  peerDependencies:
-    eslint: ^7.23.0 || ^8.0.0 || ^9.0.0
-    typescript: ">=3.3.1"
-  peerDependenciesMeta:
-    typescript:
-      optional: true
-  checksum: 10/63c51a9e4cc3f54073d15aff85b1088459439169721c379af1202df62c3a757c3849a194f46d4ec95a9c202322aa25d1ddab24159addcca290532a09afda3532
-  languageName: node
-  linkType: hard
-
 "eslint-config-prettier@npm:^9.0.0":
   version: 9.0.0
   resolution: "eslint-config-prettier@npm:9.0.0"
@@ -11767,7 +11681,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-import-resolver-node@npm:^0.3.6, eslint-import-resolver-node@npm:^0.3.9":
+"eslint-import-resolver-node@npm:^0.3.9":
   version: 0.3.9
   resolution: "eslint-import-resolver-node@npm:0.3.9"
   dependencies:
@@ -11778,26 +11692,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-import-resolver-typescript@npm:^3.5.2":
-  version: 3.5.5
-  resolution: "eslint-import-resolver-typescript@npm:3.5.5"
-  dependencies:
-    debug: "npm:^4.3.4"
-    enhanced-resolve: "npm:^5.12.0"
-    eslint-module-utils: "npm:^2.7.4"
-    get-tsconfig: "npm:^4.5.0"
-    globby: "npm:^13.1.3"
-    is-core-module: "npm:^2.11.0"
-    is-glob: "npm:^4.0.3"
-    synckit: "npm:^0.8.5"
-  peerDependencies:
-    eslint: "*"
-    eslint-plugin-import: "*"
-  checksum: 10/e739b33203c25ba6968c537a53187b7e254e0d5ad1513cbe6a906c947cf748385ee5b013c10a4c2df3c84ea7c5b5d9d7831bec8ba4337459d5be4504e07335bb
-  languageName: node
-  linkType: hard
-
-"eslint-module-utils@npm:^2.12.0, eslint-module-utils@npm:^2.7.4":
+"eslint-module-utils@npm:^2.12.0":
   version: 2.12.0
   resolution: "eslint-module-utils@npm:2.12.0"
   dependencies:
@@ -11911,7 +11806,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-plugin-jsx-a11y@npm:^6.10.0, eslint-plugin-jsx-a11y@npm:^6.10.2, eslint-plugin-jsx-a11y@npm:^6.7.1":
+"eslint-plugin-jsx-a11y@npm:^6.10.2, eslint-plugin-jsx-a11y@npm:^6.7.1":
   version: 6.10.2
   resolution: "eslint-plugin-jsx-a11y@npm:6.10.2"
   dependencies:
@@ -11966,7 +11861,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-plugin-react-hooks@npm:^5.0.0, eslint-plugin-react-hooks@npm:^5.1.0, eslint-plugin-react-hooks@npm:^5.2.0":
+"eslint-plugin-react-hooks@npm:^5.1.0, eslint-plugin-react-hooks@npm:^5.2.0":
   version: 5.2.0
   resolution: "eslint-plugin-react-hooks@npm:5.2.0"
   peerDependencies:
@@ -11975,7 +11870,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-plugin-react@npm:^7.32.2, eslint-plugin-react@npm:^7.37.0, eslint-plugin-react@npm:^7.37.5":
+"eslint-plugin-react@npm:^7.32.2, eslint-plugin-react@npm:^7.37.5":
   version: 7.37.5
   resolution: "eslint-plugin-react@npm:7.37.5"
   dependencies:
@@ -12240,33 +12135,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"examples-light-dark@workspace:examples/light-dark-mode":
-  version: 0.0.0-use.local
-  resolution: "examples-light-dark@workspace:examples/light-dark-mode"
-  dependencies:
-    "@carbon/react": "npm:^1.103.0"
-    eslint: "npm:8.40.0"
-    next: "npm:15.5.10"
-    react: "npm:^19.2.3"
-    react-dom: "npm:^19.2.3"
-    sass: "npm:^1.93.2"
-  languageName: unknown
-  linkType: soft
-
-"examples-nextjs@workspace:examples/nextjs":
-  version: 0.0.0-use.local
-  resolution: "examples-nextjs@workspace:examples/nextjs"
-  dependencies:
-    "@carbon/react": "npm:^1.103.0"
-    eslint: "npm:8.40.0"
-    eslint-config-next: "npm:15.3.3"
-    next: "npm:15.5.10"
-    react: "npm:^19.2.3"
-    react-dom: "npm:^19.2.3"
-    sass: "npm:^1.93.2"
-  languageName: unknown
-  linkType: soft
-
 "exceljs@npm:^4.3.0":
   version: 4.3.0
   resolution: "exceljs@npm:4.3.0"
@@ -12510,20 +12378,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"fast-glob@npm:3.3.1":
-  version: 3.3.1
-  resolution: "fast-glob@npm:3.3.1"
-  dependencies:
-    "@nodelib/fs.stat": "npm:^2.0.2"
-    "@nodelib/fs.walk": "npm:^1.2.3"
-    glob-parent: "npm:^5.1.2"
-    merge2: "npm:^1.3.0"
-    micromatch: "npm:^4.0.4"
-  checksum: 10/51bcd15472879dfe51d4b01c5b70bbc7652724d39cdd082ba11276dbd7d84db0f6b33757e1938af8b2768a4bf485d9be0c89153beae24ee8331d6dcc7550379f
-  languageName: node
-  linkType: hard
-
-"fast-glob@npm:^3.2.11, fast-glob@npm:^3.2.12, fast-glob@npm:^3.2.2, fast-glob@npm:^3.2.9, fast-glob@npm:^3.3.2, fast-glob@npm:^3.3.3":
+"fast-glob@npm:^3.2.12, fast-glob@npm:^3.2.2, fast-glob@npm:^3.2.9, fast-glob@npm:^3.3.2, fast-glob@npm:^3.3.3":
   version: 3.3.3
   resolution: "fast-glob@npm:3.3.3"
   dependencies:
@@ -13147,7 +13002,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"get-tsconfig@npm:^4.13.1, get-tsconfig@npm:^4.5.0":
+"get-tsconfig@npm:^4.13.1":
   version: 4.13.6
   resolution: "get-tsconfig@npm:4.13.6"
   dependencies:
@@ -13426,19 +13281,6 @@ __metadata:
     merge2: "npm:^1.4.1"
     slash: "npm:^3.0.0"
   checksum: 10/288e95e310227bbe037076ea81b7c2598ccbc3122d87abc6dab39e1eec309aa14f0e366a98cdc45237ffcfcbad3db597778c0068217dcb1950fef6249104e1b1
-  languageName: node
-  linkType: hard
-
-"globby@npm:^13.1.3":
-  version: 13.2.0
-  resolution: "globby@npm:13.2.0"
-  dependencies:
-    dir-glob: "npm:^3.0.1"
-    fast-glob: "npm:^3.2.11"
-    ignore: "npm:^5.2.0"
-    merge2: "npm:^1.4.1"
-    slash: "npm:^4.0.0"
-  checksum: 10/13a8311f010858516605d35f2f3a5793318f910f22ceac768d0a9eb01387d13e99fa55ba98b8424ee377185cb407c345853c8c522fcd46ee9f56b147279fd155
   languageName: node
   linkType: hard
 
@@ -13941,19 +13783,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"id-prefix@workspace:examples/id-prefix":
-  version: 0.0.0-use.local
-  resolution: "id-prefix@workspace:examples/id-prefix"
-  dependencies:
-    "@carbon/react": "npm:^1.103.0"
-    "@vitejs/plugin-react": "npm:^5.1.1"
-    react: "npm:^19.2.3"
-    react-dom: "npm:^19.2.3"
-    sass: "npm:^1.93.2"
-    vite: "npm:^7.2.4"
-  languageName: unknown
-  linkType: soft
-
 "ieee754@npm:^1.1.13":
   version: 1.2.1
   resolution: "ieee754@npm:1.2.1"
@@ -14346,7 +14175,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"is-core-module@npm:^2.11.0, is-core-module@npm:^2.13.0, is-core-module@npm:^2.15.1, is-core-module@npm:^2.16.0, is-core-module@npm:^2.5.0":
+"is-core-module@npm:^2.13.0, is-core-module@npm:^2.15.1, is-core-module@npm:^2.16.0, is-core-module@npm:^2.5.0":
   version: 2.16.1
   resolution: "is-core-module@npm:2.16.1"
   dependencies:
@@ -17407,7 +17236,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"micromatch@npm:^4.0.4, micromatch@npm:^4.0.5, micromatch@npm:^4.0.7, micromatch@npm:^4.0.8":
+"micromatch@npm:^4.0.5, micromatch@npm:^4.0.7, micromatch@npm:^4.0.8":
   version: 4.0.8
   resolution: "micromatch@npm:4.0.8"
   dependencies:
@@ -17833,7 +17662,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"next@npm:15.5.10, next@npm:^15.0.0":
+"next@npm:^15.0.0":
   version: 15.5.10
   resolution: "next@npm:15.5.10"
   dependencies:
@@ -21495,13 +21324,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"slash@npm:^4.0.0":
-  version: 4.0.0
-  resolution: "slash@npm:4.0.0"
-  checksum: 10/da8e4af73712253acd21b7853b7e0dbba776b786e82b010a5bfc8b5051a1db38ed8aba8e1e8f400dd2c9f373be91eb1c42b66e91abb407ff42b10feece5e1d2d
-  languageName: node
-  linkType: hard
-
 "slash@npm:^5.0.0, slash@npm:^5.1.0":
   version: 5.1.0
   resolution: "slash@npm:5.1.0"
@@ -22598,13 +22420,6 @@ __metadata:
     string-width: "npm:^4.2.3"
     strip-ansi: "npm:^6.0.1"
   checksum: 10/2946162eb87a91b9bf4283214d26830db96f09cf517eff18e7501d47a4770c529b432bb54c9394337c3dfd6c8dbf66581f76edb37e9838beb6ec394080af4ac2
-  languageName: node
-  linkType: hard
-
-"tapable@npm:^2.2.0":
-  version: 2.2.1
-  resolution: "tapable@npm:2.2.1"
-  checksum: 10/1769336dd21481ae6347611ca5fca47add0962fd8e80466515032125eca0084a4f0ede11e65341b9c0018ef4e1cf1ad820adbb0fba7cc99865c6005734000b0a
   languageName: node
   linkType: hard
 
@@ -23958,19 +23773,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"v10-token-compat-in-v11@workspace:examples/v10-token-compat-in-v11":
-  version: 0.0.0-use.local
-  resolution: "v10-token-compat-in-v11@workspace:examples/v10-token-compat-in-v11"
-  dependencies:
-    "@carbon/react": "npm:^1.103.0"
-    "@vitejs/plugin-react": "npm:^5.1.1"
-    react: "npm:^19.2.3"
-    react-dom: "npm:^19.2.3"
-    sass: "npm:^1.93.2"
-    vite: "npm:^7.2.4"
-  languageName: unknown
-  linkType: soft
-
 "v8-to-istanbul@npm:^9.0.1":
   version: 9.3.0
   resolution: "v8-to-istanbul@npm:9.3.0"
@@ -24129,19 +23931,6 @@ __metadata:
   checksum: 10/25962e65159e62fa6b643ac5bc79457c61c9b2cec9a1a17763b067b1e5ecac6483ad84247d6d457d81e25c5d1f8c553372bedf71dee09d8c1bd41af6c7b016a5
   languageName: node
   linkType: hard
-
-"vite@workspace:examples/vite":
-  version: 0.0.0-use.local
-  resolution: "vite@workspace:examples/vite"
-  dependencies:
-    "@carbon/react": "npm:^1.103.0"
-    "@vitejs/plugin-react": "npm:^5.1.1"
-    react: "npm:^19.2.3"
-    react-dom: "npm:^19.2.3"
-    sass: "npm:^1.93.2"
-    vite: "npm:^7.2.4"
-  languageName: unknown
-  linkType: soft
 
 "vue@npm:^3.0.0":
   version: 3.5.13
