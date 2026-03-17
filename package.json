@@ -10,7 +10,6 @@
   "workspaces": [
     "actions/*",
     "config/*",
-    "examples/*",
     "packages/*",
     "www"
   ],
