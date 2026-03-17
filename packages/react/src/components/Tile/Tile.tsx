@@ -14,8 +14,6 @@ import React, {
   useRef,
   useState,
   type ButtonHTMLAttributes,
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20452
-  type ChangeEvent,
   type HTMLAttributes,
   type KeyboardEvent,
   type MouseEvent,
@@ -195,12 +193,14 @@ export interface ClickableTileProps extends HTMLAttributes<HTMLAnchorElement> {
   /**
    * Specify the function to run when the ClickableTile is clicked
    */
-  onClick?(event: MouseEvent): void;
+  onClick?(
+    event: MouseEvent<HTMLAnchorElement> | KeyboardEvent<HTMLAnchorElement>
+  ): void;
 
   /**
    * Specify the function to run when the ClickableTile is interacted with via a keyboard
    */
-  onKeyDown?(event: KeyboardEvent): void;
+  onKeyDown?(event: KeyboardEvent<HTMLAnchorElement>): void;
 
   /**
    * The rel property for the link.
@@ -251,18 +251,22 @@ export const ClickableTile = React.forwardRef<
       className
     );
 
+    // TODO: Can this be removed? Or is cds--tile--is-clicked supposed to use this instead of `clicked`?
+    // This state is never used
     const [isSelected, setIsSelected] = useState(clicked);
 
-    function handleOnClick(evt: MouseEvent) {
+    function handleOnClick(evt: MouseEvent<HTMLAnchorElement>) {
       evt?.persist?.();
       setIsSelected(!isSelected);
       onClick(evt);
     }
 
-    function handleOnKeyDown(evt: KeyboardEvent) {
+    function handleOnKeyDown(evt: KeyboardEvent<HTMLAnchorElement>) {
       evt?.persist?.();
-      if (matches(evt, [keys.Enter, keys.Space])) {
+      if (!href && matches(evt, [keys.Enter, keys.Space])) {
+        evt.preventDefault();
         setIsSelected(!isSelected);
+        onClick(evt);
       }
       onKeyDown(evt);
     }
