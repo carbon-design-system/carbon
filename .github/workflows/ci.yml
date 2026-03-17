@@ -235,8 +235,12 @@ jobs:
       - name: Install browsers
         run: yarn playwright install --with-deps
       - name: Build project
+        env:
+          NODE_OPTIONS: --max-old-space-size=6144
         run: yarn build
       - name: Build storybook
+        env:
+          NODE_OPTIONS: --max-old-space-size=6144
         run: yarn workspace @carbon/react storybook:build
       - name: Run storybook
         id: storybook
@@ -415,8 +419,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
-        with:
-          fetch-depth: 0
       - name: Detect AGENTS.md changes
         id: changes
         uses: dorny/paths-filter@fbd0ab8f3e69293af611ebaee6363fc25e6d187d # v4.0.1
