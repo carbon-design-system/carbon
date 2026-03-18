@@ -172,6 +172,41 @@ describe('Dialog', () => {
       expect(body).toHaveAttribute('tabindex', '0');
     });
 
+    it('should support `DialogBody` resize observer based scroll detection and function refs', async () => {
+      const bodyRef = jest.fn();
+
+      const { rerender } = render(
+        <Dialog open>
+          <DialogBody ref={bodyRef} data-testid="body">
+            <div style={{ height: '100px' }}>Content</div>
+          </DialogBody>
+        </Dialog>
+      );
+      const body = screen.getByTestId('body');
+
+      expect(body).not.toHaveClass(`${prefix}--dialog-scroll-content`);
+
+      Object.defineProperty(body, 'clientHeight', {
+        configurable: true,
+        value: 300,
+      });
+      Object.defineProperty(body, 'scrollHeight', {
+        configurable: true,
+        value: 600,
+      });
+
+      rerender(
+        <Dialog open>
+          <DialogBody ref={bodyRef} data-testid="body">
+            <div style={{ height: '800px' }}>Content</div>
+          </DialogBody>
+        </Dialog>
+      );
+
+      expect(body).toHaveClass(`${prefix}--dialog-scroll-content`);
+      expect(bodyRef).toHaveBeenCalledWith(body);
+    });
+
     it('should support `DialogBody` object refs', () => {
       const bodyRef = createRef();
 
