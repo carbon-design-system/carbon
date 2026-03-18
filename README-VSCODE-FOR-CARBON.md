@@ -156,16 +156,12 @@ toolbar. Click any button to select and switch themes:
 When **VS Code** is selected, if you switch your VS Code color theme
 (`Cmd/Ctrl + K`, then `Cmd/Ctrl + T`), the components update in real time.
 
-### Using the Token Inspector
+### Viewing CSS custom properties (tokens)
 
-The Token Inspector panel (click the 🔍 icon in the toolbar) shows all tokens
-used in rendering the component.
+The Carbon Tokens table shows all CSS custom properties (design tokens) used in
+rendering the component.
 
 ## Customizing components with Bob
-
-The Token Inspector panel shows all `--cds-*` tokens used by a component. You
-can ask Bob to help you customize colors, sizes, and fonts for any component
-you're working on.
 
 ### Changing colors
 
