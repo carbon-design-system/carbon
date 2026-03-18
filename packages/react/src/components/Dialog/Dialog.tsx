@@ -658,14 +658,12 @@ const DialogBody = React.forwardRef<HTMLDivElement, DialogBodyProps>(
       className
     );
 
-    const getAriaLabelledBy = subtitleId ? subtitleId : titleId;
-
     const hasScrollingContentProps =
       hasScrollingContent || isScrollable
         ? {
             tabIndex: 0,
             role: 'region',
-            'aria-labelledby': getAriaLabelledBy,
+            'aria-labelledby': subtitleId ? subtitleId : titleId,
           }
         : {};
 
