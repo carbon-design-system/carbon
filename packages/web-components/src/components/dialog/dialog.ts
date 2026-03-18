@@ -133,6 +133,18 @@ class CDSDialog extends CDSModal {
   @HostListener('keydown')
   protected _handleHostKeydown = () => {};
 
+  @HostListener('document:keydown')
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20452
+  // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
+  private _handleKeydown = (event: KeyboardEvent) => {
+    const { key, target } = event;
+
+    if (key === 'Esc' || key === 'Escape') {
+      event.preventDefault();
+      this._handleUserInitiatedClose(target);
+    }
+  };
+
   async updated(changedProperties) {
     if (changedProperties.has('open')) {
       if (this.open) {
@@ -234,6 +246,13 @@ class CDSDialog extends CDSModal {
    */
   static get selectorPrimaryFocus() {
     return `[data-dialog-primary-focus]`;
+  }
+
+  /**
+   * A selector selecting the dialog body component
+   */
+  static get selectorModalBody() {
+    return `${prefix}-dialog-body`;
   }
 
   /**
