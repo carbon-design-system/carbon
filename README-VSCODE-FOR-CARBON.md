@@ -8,12 +8,12 @@ fork of the [Carbon](https://github.com/carbon-design-system/carbon) git
 repository, supercharged with new capabilities (thanks to Bob's help).
 
 Using the commands described in this README, you will be able to display a VS
-Code webview that renders Carbon components in their various states. The idea is
-that we will be able to preview different colors, spacing values, and font sizes
-natively inside VS Code.
+Code webview that renders Carbon components in their various states. This lets
+us preview different colors, spacing values, and font sizes natively inside VS
+Code.
 
-This webview will allow you to switch between different Carbon themes (including
-the new "VS Code" theme) and see how the components look in different themes.
+This webview allows you to switch between different Carbon themes (including the
+new "VS Code" theme) and see how the components look in different themes.
 
 Below, I go over how this repository customizes color, spacing, and typography
 of Carbon components in more detail.
@@ -35,10 +35,10 @@ comes in.
 
 Rather than import an existing theme and override all of it's tokens, I asked
 Bob to create a completely new Carbon theme for VS Code. He created
-[`vscode.js`](../themes/src/vscode.js), which assigns Carbon color tokens to VS
-Code CSS properties. This means Carbon components rendered in a VS Code webview
-that are using the `vscode` theme automatically adapt to whatever color theme
-the user has selected in VS Code.
+[`vscode.js`](../themes/src/vscode.js), which is a new theme that assigns Carbon
+color tokens to VS Code CSS properties. This means Carbon components rendered in
+a VS Code webview that are using the `vscode` theme automatically adapt to
+whatever color theme the user has selected in VS Code.
 
 ### Spacing and layout
 
@@ -48,11 +48,7 @@ colors, spacing tokens remain constant across all themes.
 
 Carbon also provides _layout_ tokens that control component heights and internal
 padding. While these tokens are defined outside the theme system, they're
-implemented as CSS custom properties, which means we can override them at
-runtime without recompiling. This is essential for adapting Carbon components to
-VS Code's interface, which uses significantly more compact dimensions than
-Carbon's defaults (for example, VS Code's standard control height is 28px versus
-Carbon's 32px).
+implemented as CSS custom properties, which means we can override them.
 
 We apply these overrides in the webview stylesheet, scoped specifically to the
 `vscode` theme. When you switch to another Carbon theme, the overrides no longer
@@ -60,21 +56,31 @@ apply, and components revert to their standard dimensions.
 
 ### Typography
 
-Typography tokens work similarly to layout tokens—they're CSS custom properties
-that can be overridden at runtime. VS Code's interface uses tighter typography
-than Carbon's defaults to maintain its compact aesthetic. We've adjusted font
-sizes and line heights to match: body text uses 13px instead of 14px, labels use
-11px instead of 12px, and headings are proportionally reduced.
-
-These typography overrides are applied in the same stylesheet and follow the
-same scoping pattern. They only take effect when using the `vscode` theme,
-allowing other themes to display text at Carbon's standard sizes.
+Typography tokens work similarly to layout tokens -- they're CSS custom
+properties that can be overridden at runtime.These typography overrides are
+applied in the same stylesheet and follow the same scoping pattern. They only
+take effect when using the `vscode` theme, allowing other themes to display text
+at Carbon's standard sizes.
 
 ---
 
 ## Setup
 
 ### Step 1 — Install dependencies (one time only)
+
+**First, ensure you have yarn installed:**
+
+If you don't have yarn installed, you can install it using one of these methods.
+Visit [yarnpkg.com](https://yarnpkg.com/getting-started/install) for
+installation instructions for your system.
+
+To verify yarn is installed, run:
+
+```bash
+yarn --version
+```
+
+**Then, install project dependencies:**
 
 Open a terminal in the root of this repository and run:
 
@@ -101,55 +107,23 @@ This compiles everything needed to run the preview. It takes 10-30 seconds.
 4. Type **`Carbon: Open Component Preview`** and press Enter
 
 The **Carbon Component Preview** panel opens with a **theme switcher** in the
-toolbar. Click any button to instantly switch:
+toolbar. Click any button to select and switch themes:
 
 | Button       | What it shows                                                      |
 | ------------ | ------------------------------------------------------------------ |
 | **VS Code**  | Carbon components using your current VS Code color theme (default) |
-| **White**    | Carbon White theme (light)                                         |
-| **Gray 10**  | Carbon Gray 10 theme (light)                                       |
-| **Gray 90**  | Carbon Gray 90 theme (dark)                                        |
-| **Gray 100** | Carbon Gray 100 theme (darkest)                                    |
+| **White**    | Carbon White theme                                                 |
+| **Gray 10**  | Carbon Gray 10 theme                                               |
+| **Gray 90**  | Carbon Gray 90 theme                                               |
+| **Gray 100** | Carbon Gray 100 theme                                              |
 
-When **VS Code** is selected, also try switching your VS Code color theme
-(`Cmd/Ctrl + K`, then `Cmd/Ctrl + T`) — the components update in real time.
+When **VS Code** is selected, if you switch your VS Code color theme
+(`Cmd/Ctrl + K`, then `Cmd/Ctrl + T`), the components update in real time.
 
----
+### Using the Token Inspector
 
-## Changing how Carbon tokens map to VS Code colors
-
-All the color mappings live in one file:
-[`packages/themes/src/vscode.js`](../themes/src/vscode.js)
-
-Each line maps a Carbon design token to a VS Code CSS property:
-
-```js
-// packages/themes/src/vscode.js
-
-export const buttonPrimary = 'var(--vscode-button-background, #0e639c)';
-//                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^  ^^^^^^^^^
-//                                 VS Code color property      fallback color
-```
-
-To change a mapping, you can find a VS Code color property name in the
-[VS Code reference](https://code.visualstudio.com/api/references/theme-color)
-and manually replace it. Or ask Bob -- if you say something like "I want to
-change the button background color in our VS Code theme to match VS Code button
-color", Bob can find the VS Code property name for you and update the theme
-accordingly.
-
-```bash
-# After editing vscode.js — rebuilds themes + extension in one command:
-yarn vscode-preview:full
-```
-
-Then press `F5` again (or reload the Extension Development Host window with
-`Cmd/Ctrl + R`) to see your changes.
-
-### Finding VS Code color property names
-
-VS Code exposes hundreds of color properties. A full reference is available at:
-<https://code.visualstudio.com/api/references/theme-color>
+The Token Inspector panel (click the 🔍 icon in the toolbar) shows all tokens
+used in rendering the component.
 
 ---
 
@@ -170,6 +144,10 @@ you're working on.
 Bob will edit [`packages/themes/src/vscode.js`](../themes/src/vscode.js) to map
 Carbon color tokens to the appropriate VS Code CSS properties.
 
+VS Code exposes hundreds of color properties. A full reference is available at:
+<https://code.visualstudio.com/api/references/theme-color> if you would like Bob
+to use a specific CSS property.
+
 ### Adjusting sizes and spacing
 
 **Example prompts:**
@@ -182,6 +160,8 @@ Bob will edit
 [`packages/vscode-preview/src/webview/styles.scss`](src/webview/styles.scss) to
 override the layout tokens (like `--cds-layout-size-height-sm` or
 `--cds-layout-density-padding-inline-normal`).
+
+You can also use the Token Inspector to find specific layout token to override.
 
 ### Changing fonts and text sizes
 
@@ -207,25 +187,14 @@ override typography tokens (like `--cds-body-01-font-size` or
 Bob will edit the preview files to add the component you want to experiment
 with.
 
-### Using the Token Inspector
+---
 
-The Token Inspector panel (click the 🔍 icon in the toolbar) shows all tokens
-affecting a component. Use it to:
-
-1. Click on any component in the preview
-2. See which `--cds-*` tokens control its appearance
-3. Copy the token name to use in your prompt to Bob
-
-**Example workflow:**
-
-1. Click a button in the preview
-2. Token Inspector shows `--cds-layout-size-height-lg: 2.25rem`
-3. Ask Bob: "Change `--cds-layout-size-height-lg` to 2.5rem"
+### Rebuilding after changes
 
 After Bob makes changes to the code, you need to rebuild and reload the
 extension to see the results:
 
-**Option 1: Quick rebuild (for most changes)**
+### Option 1: Quick rebuild (for most changes)
 
 ```bash
 yarn vscode-preview
@@ -236,7 +205,7 @@ Then reload the Extension Development Host window:
 - Mac: `Cmd + R`
 - Windows/Linux: `Ctrl + R`
 
-**Option 2: Full rebuild (for theme changes)**
+### Option 2: Full rebuild (for theme changes)
 
 If Bob edited [`packages/themes/src/vscode.js`](../themes/src/vscode.js), use
 the full rebuild:
@@ -247,7 +216,7 @@ yarn vscode-preview:full
 
 Then reload the Extension Development Host window (`Cmd/Ctrl + R`).
 
-**Option 3: Restart from scratch**
+### Option 3: Restart from scratch
 
 If reloading doesn't work, close the Extension Development Host window and press
 `F5` again in your main VS Code window to launch a fresh instance.
