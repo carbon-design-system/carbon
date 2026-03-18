@@ -631,16 +631,7 @@ interface DialogBodyProps extends HTMLAttributes<HTMLDivElement> {
 }
 
 const DialogBody = React.forwardRef<HTMLDivElement, DialogBodyProps>(
-  (
-    {
-      'aria-label': ariaLabel,
-      children,
-      className,
-      hasScrollingContent,
-      ...rest
-    },
-    ref
-  ) => {
+  ({ children, className, hasScrollingContent, ...rest }, ref) => {
     const prefix = usePrefix();
     const contentRef = useRef<HTMLDivElement>(null);
     const dialogId = useId();
