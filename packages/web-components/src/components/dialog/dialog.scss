@@ -123,5 +123,5 @@
 }
 
 :host(#{$prefix}-dialog) ::slotted(#{$prefix}-dialog-body[no-fade]) {
-  mask-image: none;
+  @extend .#{$prefix}--dialog-scroll-content--no-fade;
 }
