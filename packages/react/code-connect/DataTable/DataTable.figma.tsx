@@ -59,7 +59,6 @@ figma.connect(
     example: ({
       headerItem,
       headerRow,
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20452
       headerRowItems,
       rowItems,
       pagination,
@@ -94,7 +93,6 @@ figma.connect(
     example: ({
       headerItem,
       headerRow,
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20452
       headerRowItems,
       rowItems,
       pagination,
@@ -132,7 +130,6 @@ figma.connect(
     example: ({
       headerItem,
       headerRow,
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20452
       headerRowItems,
       rowItems,
       pagination,
@@ -170,7 +167,6 @@ figma.connect(
     example: ({
       headerItem,
       headerRow,
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20452
       headerRowItems,
       rowItems,
       pagination,
@@ -208,7 +204,6 @@ figma.connect(
     example: ({
       headerItem,
       headerRow,
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20452
       headerRowItems,
       rowItems,
       pagination,
