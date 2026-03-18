@@ -122,19 +122,6 @@
   max-inline-size: none;
 }
 
-:host(#{$prefix}-dialog[danger][has-scrolling-content])
-  ::slotted(#{$prefix}-dialog-body:not([no-fade])) {
-  mask-image: linear-gradient(
-      to bottom,
-      $layer calc(100% - $spacing-11),
-      transparent calc(100% - $spacing-09),
-      transparent 100%
-    ),
-    linear-gradient(to left, $layer 0, $spacing-05, transparent $spacing-05),
-    linear-gradient(to right, $layer 0, $spacing-01, transparent $spacing-01),
-    linear-gradient(to top, $layer 0, $spacing-01, transparent $spacing-01);
-}
-
 :host(#{$prefix}-dialog) ::slotted(#{$prefix}-dialog-body[no-fade]) {
   mask-image: none;
 }
