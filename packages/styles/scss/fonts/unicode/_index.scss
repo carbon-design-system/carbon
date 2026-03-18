@@ -10,10 +10,10 @@
 /// @deprecated Use the exported $ranges from the ./sans, ./serif, and ./mono modules instead
 $ranges: sans.$ranges;
 
-/// Retrieve the unicode range for a given range name in a given ranges map
+/// Retrieve the unicode range for a given range name
 /// @param {String} $name
 /// @returns {List}
 /// @deprecated Use the exported get-range function from the ./sans, ./serif, and ./mono modules instead
 @function get-range($name) {
-  @return util.get-range($name, sans.$ranges);
+  @return sans.get-range($name);
 }
