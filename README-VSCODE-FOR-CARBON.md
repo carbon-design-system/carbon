@@ -71,7 +71,38 @@ at Carbon's standard sizes.
 
 ## Setup
 
-### Step 1 — Install dependencies (one time only)
+### Step 1 — Clone the repository (one time only)
+
+**If you don't have the repository yet:**
+
+First, you need to get a copy of this repository on your computer. Open a
+terminal and navigate to where you want to store the project (for example, your
+Documents folder):
+
+```bash
+cd ~/Documents
+```
+
+Then clone the repository and switch to the `theme` branch:
+
+```bash
+git clone https://github.com/benjamin-t-santos/carbon-for-vscode.git
+cd carbon-for-vscode
+git checkout theme
+```
+
+**If you already have the repository:**
+
+Make sure you have the latest changes:
+
+```bash
+git pull origin theme
+```
+
+> **Note:** If you're not sure whether you have the repository, check if there's
+> a folder called `carbon-for-vscode` in your projects directory.
+
+### Step 2 — Install dependencies (one time only)
 
 **First, ensure you have yarn installed:**
 
@@ -93,7 +124,7 @@ Open a terminal in the root of this repository and run:
 yarn install
 ```
 
-### Step 2 — Build the extension
+### Step 3 — Build the extension
 
 ```bash
 yarn vscode-preview
@@ -101,7 +132,7 @@ yarn vscode-preview
 
 This compiles everything needed to run the preview. It takes 10-30 seconds.
 
-### Step 3 — Launch the preview
+### Step 4 — Launch the preview
 
 1. Open this repository folder in **VS Code**
 2. Press **`F5`** — a new VS Code window opens (the "Extension Development
