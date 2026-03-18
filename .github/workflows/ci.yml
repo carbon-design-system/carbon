@@ -3,6 +3,7 @@ on:
   push:
     branches:
       - main
+      - test/gh-workflow-ubuntu-latest-fixes
   pull_request:
     types: [opened, reopened, synchronize, ready_for_review]
     branches:
@@ -259,7 +260,9 @@ jobs:
       - name: Stop storybook
         run: kill ${{ steps.storybook.outputs.pid }}
       - name: Upload blob report to GitHub Actions Artifacts
-        if: ${{ !cancelled() }}
+        if:
+          ${{ !cancelled() && github.repository == 'carbon-design-system/carbon'
+          }}
         uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f #6.0.0
         with:
           name: playwright-avt-blob-report-${{ matrix.shardIndex }}
