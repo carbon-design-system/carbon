@@ -187,8 +187,8 @@ to use a specific CSS property.
 - "Increase the height of dropdown menus to 32px"
 
 Bob will edit
-[`packages/vscode-preview/src/webview/styles.scss`](src/webview/styles.scss) to
-override the layout tokens (like `--cds-layout-size-height-sm` or
+[`packages/vscode-preview/src/webview/styles.scss`](packages/vscode-preview/src/webview/styles.scss)
+to override the layout tokens (like `--cds-layout-size-height-sm` or
 `--cds-layout-density-padding-inline-normal`).
 
 You can also use the Token Inspector to find specific layout token to override.
@@ -202,8 +202,8 @@ You can also use the Token Inspector to find specific layout token to override.
 - "Make headings slightly larger"
 
 Bob will edit
-[`packages/vscode-preview/src/webview/styles.scss`](src/webview/styles.scss) to
-override typography tokens (like `--cds-body-01-font-size` or
+[`packages/vscode-preview/src/webview/styles.scss`](packages/vscode-preview/src/webview/styles.scss)
+to override typography tokens (like `--cds-body-01-font-size` or
 `--cds-heading-03-font-size`).
 
 ### Adding new components to preview
