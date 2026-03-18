@@ -6,10 +6,47 @@
  */
 
 import path from 'path';
+import fs from 'fs/promises';
 import * as sass from 'sass';
-import { createFilter } from '@rollup/pluginutils';
 
 const noop = (s) => s;
+const LIT_QUERY = '?lit';
+
+function normalizeLitPath(id) {
+  return id.endsWith(LIT_QUERY) ? id.slice(0, -LIT_QUERY.length) : id;
+}
+
+function matchesPattern(pattern, id) {
+  if (pattern == null) {
+    return false;
+  }
+
+  if (Array.isArray(pattern)) {
+    return pattern.some((entry) => matchesPattern(entry, id));
+  }
+
+  if (pattern instanceof RegExp) {
+    return pattern.test(id);
+  }
+
+  if (typeof pattern === 'function') {
+    return pattern(id);
+  }
+
+  if (typeof pattern === 'string') {
+    return id.includes(pattern);
+  }
+
+  return false;
+}
+
+function createFilter(include, exclude) {
+  return (id) => {
+    const included = include == null ? true : matchesPattern(include, id);
+    const excluded = exclude == null ? false : matchesPattern(exclude, id);
+    return included && !excluded;
+  };
+}
 
 /**
  * @param {string} css A CSS.
@@ -26,10 +63,10 @@ function transformToTemplate(css) {
  * @param {RegExp} [options.include=/\.scss/] The files to include.
  * @param {RegExp} [options.exclude] The files to exclude.
  * @param {Function} [options.preprocessor] The CSS preprocessor to use.
- * @returns {object} The rollup plugin to transform an `.scss` file to a `lit-html` template.
+ * @returns {object} A plugin that transforms `.scss` to a `lit-html` template.
  */
 export default function LitSCSS({
-  include = /\.scss$/i,
+  include = /\.scss(\?lit)?$/i,
   exclude,
   preprocessor = noop,
   ...options
@@ -38,6 +75,24 @@ export default function LitSCSS({
   return {
     name: 'lit-scss',
 
+    async resolveId(source, importer) {
+      if (!filter(source) || !importer) {
+        return null;
+      }
+
+      const cleanSource = normalizeLitPath(source);
+      const resolved = await this.resolve(cleanSource, importer, {
+        skipSelf: true,
+      });
+      if (!resolved) {
+        return null;
+      }
+
+      return source.endsWith(LIT_QUERY)
+        ? `${resolved.id}${LIT_QUERY}`
+        : resolved;
+    },
+
     /**
      * Enqueues the module contents for loading.
      *
@@ -45,9 +100,13 @@ export default function LitSCSS({
      */
     load(id) {
       if (filter(id)) {
-        this.addWatchFile(path.resolve(id));
+        this.addWatchFile(path.resolve(normalizeLitPath(id)));
       }
-      return null;
+      if (!id.endsWith(LIT_QUERY)) {
+        return null;
+      }
+
+      return fs.readFile(normalizeLitPath(id), 'utf8');
     },
 
     /**
@@ -62,6 +121,7 @@ export default function LitSCSS({
         return null;
       }
 
+      const resolvedId = normalizeLitPath(id);
       const finalContent = `
         $feature-flags: (
           enable-css-custom-properties: true,
@@ -71,7 +131,7 @@ export default function LitSCSS({
       const { includePaths, ...sassOptions } = options;
       const { css } = sass.compileString(finalContent, {
         ...sassOptions,
-        url: `file://${path.resolve(id)}`,
+        url: `file://${path.resolve(resolvedId)}`,
         loadPaths: includePaths || [],
       });
 

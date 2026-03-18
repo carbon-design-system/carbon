@@ -32,7 +32,7 @@
     "provenance": true
   },
   "scripts": {
-    "build": "yarn clean && carbon-cli bundle src/index.ts --name CarbonIconHelpers",
+    "build": "yarn clean && carbon-cli bundle src/index.ts --name CarbonIconHelpers --dts",
     "clean": "rimraf es lib umd",
     "postinstall": "ibmtelemetry --config=telemetry.yml"
   },
