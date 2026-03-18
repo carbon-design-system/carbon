@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { ReactSVGElement, useRef } from 'react';
+import React, { useRef } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { CheckmarkFilled, ErrorFilled } from '@carbon/icons-react';
@@ -114,17 +114,17 @@ function ProgressBar({
   });
 
   let StatusIcon: React.ForwardRefExoticComponent<
-    React.RefAttributes<ReactSVGElement> & { className?: string }
+    React.RefAttributes<SVGSVGElement> & { className?: string }
   > | null = null;
 
   if (isError) {
     // eslint-disable-next-line react/display-name -- https://github.com/carbon-design-system/carbon/issues/20452
-    StatusIcon = React.forwardRef((props, ref: React.Ref<ReactSVGElement>) => {
+    StatusIcon = React.forwardRef((props, ref: React.Ref<SVGSVGElement>) => {
       return <ErrorFilled ref={ref} size={16} {...props} />;
     });
   } else if (isFinished) {
     // eslint-disable-next-line react/display-name -- https://github.com/carbon-design-system/carbon/issues/20452
-    StatusIcon = React.forwardRef((props, ref: React.Ref<ReactSVGElement>) => {
+    StatusIcon = React.forwardRef((props, ref: React.Ref<SVGSVGElement>) => {
       return <CheckmarkFilled ref={ref} size={16} {...props} />;
     });
   }
