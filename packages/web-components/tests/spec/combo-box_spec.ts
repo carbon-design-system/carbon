@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { render } from 'lit';
+import { html, render } from 'lit';
 import EventManager from '../utils/event-manager';
 
 import CDSComboBox from '../../src/components/combo-box/combo-box';
@@ -494,6 +494,35 @@ describe('cds-combo-box', () => {
       expect(itemNodes[2].hasAttribute('selected')).toBe(true);
       expect(itemNodes[3].hasAttribute('selected')).toBe(false);
       expect(itemNodes[4].hasAttribute('selected')).toBe(false);
+    });
+  });
+
+  describe('allow-custom-value', () => {
+    it('should preserve value when opening with default value that differs from display text', async () => {
+      render(
+        html`
+          <cds-combo-box
+            allow-custom-value
+            helper-text="Helper text"
+            title-text="Label"
+            value="item1"
+            should-filter-item>
+            <cds-combo-box-item value="item1">Apple</cds-combo-box-item>
+            <cds-combo-box-item value="item2">Pineapple</cds-combo-box-item>
+          </cds-combo-box>
+        `,
+        document.body
+      );
+      await Promise.resolve();
+      const elem = document.body.querySelector('cds-combo-box');
+      expect((elem as CDSComboBox).value).toBe('item1');
+
+      (elem as CDSComboBox).open = true;
+      await Promise.resolve();
+
+      expect((elem as CDSComboBox).value).toBe('item1');
+      const appleItem = elem?.querySelector('cds-combo-box-item[value="item1"]');
+      expect(appleItem?.hasAttribute('selected')).toBe(true);
     });
   });
 
