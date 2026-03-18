@@ -7,21 +7,9 @@
 
 import { html } from 'lit';
 import './index';
-import '../button';
 import '../text-input';
+import '../button';
 import '../select';
-import View16 from '@carbon/icons/es/view/16.js';
-import FolderOpen16 from '@carbon/icons/es/folder--open/16.js';
-import Folders16 from '@carbon/icons/es/folders/16.js';
-import './index';
-import '../ai-label';
-import '../icon-button';
-import '../form';
-import '../select';
-import '../textarea';
-import '../combo-box';
-import '../checkbox';
-import { iconLoader } from '../../globals/internal/icon-loader';
 import { ifDefined } from 'lit/directives/if-defined.js';
 
 const toggleButton = () => {
@@ -59,37 +47,6 @@ const controls = {
     description: 'Specify the role of the dialog for accessibility',
   },
 };
-
-const content = html`
-  <div slot="body-text">
-    <p class="secondary">AI Explained</p>
-    <h2 class="ai-label-heading">84%</h2>
-    <p class="secondary bold">Confidence score</p>
-    <p class="secondary">
-      Lorem ipsum dolor sit amet, di os consectetur adipiscing elit, sed do
-      eiusmod tempor incididunt ut fsil labore et dolore magna aliqua.
-    </p>
-    <hr />
-    <p class="secondary">Model type</p>
-    <p class="bold">Foundation model</p>
-  </div>
-`;
-
-const actions = html`
-  <cds-icon-button kind="ghost" slot="actions" size="lg">
-    ${iconLoader(View16, { slot: 'icon' })}
-    <span slot="tooltip-content"> View </span>
-  </cds-icon-button>
-  <cds-icon-button kind="ghost" slot="actions" size="lg">
-    ${iconLoader(FolderOpen16, { slot: 'icon' })}
-    <span slot="tooltip-content"> Open folder</span>
-  </cds-icon-button>
-  <cds-icon-button kind="ghost" slot="actions" size="lg">
-    ${iconLoader(Folders16, { slot: 'icon' })}
-    <span slot="tooltip-content"> Folders </span>
-  </cds-icon-button>
-  <cds-ai-label-action-button>View details</cds-ai-label-action-button>
-`;
 
 export const DangerDialog = {
   args: defaultArgs,
@@ -154,9 +111,6 @@ export const Modal = {
         <cds-dialog-title id="title">Modal Dialog Example</cds-dialog-title>
         <cds-dialog-controls>
           <cds-dialog-close-button></cds-dialog-close-button>
-          <cds-ai-label alignment="bottom-end">
-            ${content}${actions}</cds-ai-label
-          >
         </cds-dialog-controls>
       </cds-dialog-header>
       <cds-dialog-body>
