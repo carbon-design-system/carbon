@@ -615,6 +615,11 @@ DialogSubtitle.propTypes = {
  */
 interface DialogBodyProps extends HTMLAttributes<HTMLDivElement> {
   /**
+   * Specify the aria-label for the dialog content
+   */
+  'aria-label'?: string;
+
+  /**
    * Provide the contents of the DialogBody
    */
   children?: React.ReactNode;
@@ -631,12 +636,22 @@ interface DialogBodyProps extends HTMLAttributes<HTMLDivElement> {
 }
 
 const DialogBody = React.forwardRef<HTMLDivElement, DialogBodyProps>(
-  ({ children, className, hasScrollingContent, ...rest }, ref) => {
+  (
+    {
+      'aria-label': ariaLabel,
+      children,
+      className,
+      hasScrollingContent,
+      ...rest
+    },
+    ref
+  ) => {
     const prefix = usePrefix();
     const contentRef = useRef<HTMLDivElement>(null);
     const dialogId = useId();
     const dialogBodyId = `${prefix}--dialog-body--${dialogId}`;
 
+    const { titleId, subtitleId } = useContext(DialogContext);
     const { height } = useResizeObserver({ ref: contentRef });
 
     /**
@@ -657,11 +672,15 @@ const DialogBody = React.forwardRef<HTMLDivElement, DialogBodyProps>(
       className
     );
 
+    const getAriaLabelledBy = subtitleId ? subtitleId : titleId;
+
     const hasScrollingContentProps =
       hasScrollingContent || isScrollable
         ? {
             tabIndex: 0,
             role: 'region',
+            'aria-label': ariaLabel,
+            'aria-labelledby': getAriaLabelledBy,
           }
         : {};
 
@@ -690,6 +709,11 @@ const DialogBody = React.forwardRef<HTMLDivElement, DialogBodyProps>(
 DialogBody.displayName = 'DialogBody';
 
 DialogBody.propTypes = {
+  /**
+   * Specify the aria-label for the dialog content
+   */
+  'aria-label': PropTypes.string,
+
   /**
    * Provide the contents to be rendered inside of this component
    */

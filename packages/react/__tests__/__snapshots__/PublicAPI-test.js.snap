@@ -12119,6 +12119,9 @@ Map {
     "DialogBody": {
       "$$typeof": Symbol(react.forward_ref),
       "propTypes": {
+        "aria-label": {
+          "type": "string",
+        },
         "children": {
           "type": "node",
         },
