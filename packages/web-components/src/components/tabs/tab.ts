@@ -103,6 +103,7 @@ export default class CDSTab extends CDSContentSwitcherItem {
         size="xs"
         @click="${handleClick}"
         tab-index="${-1}"
+        aria-hidden="${this.selected && this._dismissable ? 'false' : 'true'}"
         ?disabled="${disabled}">
         ${iconLoader(Close16, { 'aria-label': 'close', slot: 'icon' })}
       </cds-button>
