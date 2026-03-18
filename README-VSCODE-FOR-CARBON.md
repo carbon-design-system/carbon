@@ -1,5 +1,12 @@
 # @carbon/vscode-preview
 
+## Table of Contents
+
+- [Background](#background)
+- [Setup](#setup)
+- [Customizing components with Bob](#customizing-components-with-bob)
+- [Working with branches](#working-with-branches)
+
 ## Background
 
 This repository enables our team to test how Carbon React components look with
@@ -62,8 +69,6 @@ applied in the same stylesheet and follow the same scoping pattern. They only
 take effect when using the `vscode` theme, allowing other themes to display text
 at Carbon's standard sizes.
 
----
-
 ## Setup
 
 ### Step 1 — Install dependencies (one time only)
@@ -124,8 +129,6 @@ When **VS Code** is selected, if you switch your VS Code color theme
 
 The Token Inspector panel (click the 🔍 icon in the toolbar) shows all tokens
 used in rendering the component.
-
----
 
 ## Customizing components with Bob
 
@@ -223,3 +226,114 @@ If reloading doesn't work, close the Extension Development Host window and press
 
 > **Tip:** Bob can run these commands for you! Just ask: "Rebuild the extension"
 > or "Run yarn vscode-preview"
+
+## Working with branches
+
+If you're experimenting with component styling and want to keep your work
+organized, you should create a new branch based on the `theme` branch. This
+keeps your experiments separate and makes it easy to share your work or discard
+changes if needed.
+
+### Creating a new branch for your work
+
+**Step 1: Make sure you're starting from the theme branch**
+
+Open the VS Code terminal (`` Ctrl + ` `` or `Cmd + ` ` on Mac) and run:
+
+```bash
+git checkout theme
+git pull origin theme
+```
+
+This ensures you have the latest version of the `theme` branch.
+
+**Step 2: Create your new branch**
+
+Create a new branch with a descriptive name. For example, if you're styling
+buttons:
+
+```bash
+git checkout -b theme/button-styling
+```
+
+Or if you're working on input fields:
+
+```bash
+git checkout -b theme/input-styling
+```
+
+### Making and saving your changes
+
+**Step 1: Make your changes**
+
+Work with Bob to customize components as described in the "Customizing
+components with Bob" section above. Bob will help you edit the necessary files.
+
+**Step 2: Check what files changed**
+
+After making changes, see what files were modified:
+
+```bash
+git status
+```
+
+This shows a list of files that have been changed.
+
+**Step 3: Save your changes**
+
+Add all your changes:
+
+```bash
+git add .
+```
+
+Then commit them with a descriptive message:
+
+```bash
+git commit -m "Update button colors to match VS Code theme"
+```
+
+**Step 4: Push your branch to GitHub**
+
+The first time you push your new branch:
+
+```bash
+git push -u origin theme/button-styling
+```
+
+After that, you can simply use:
+
+```bash
+git push
+```
+
+### Switching between branches
+
+To switch back to the main `theme` branch:
+
+```bash
+git checkout theme
+```
+
+To switch to your feature branch:
+
+```bash
+git checkout theme/button-styling
+```
+
+To see all your branches:
+
+```bash
+git branch
+```
+
+### Getting help from Bob
+
+You can ask Bob to help with git commands! For example:
+
+- "Create a new branch called theme/dropdown-styling based on the theme branch"
+- "Commit my changes with the message 'Update dropdown colors'"
+- "Push my branch to GitHub"
+- "Switch to the theme branch"
+
+---
