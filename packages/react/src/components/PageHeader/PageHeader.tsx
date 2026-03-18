@@ -324,7 +324,7 @@ interface PageHeaderContentPageActionsProps {
 }
 const PageHeaderContentPageActions = ({
   className,
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20452
+
   children,
   menuButtonLabel = 'Actions',
   actions,

@@ -166,28 +166,6 @@ const TreeView: TreeViewComponent = ({
     }
   }
 
-  // The logic inside this function is now handled by TreeNode consuming context.
-  // This function is kept to manage focus between nodes, which is a TreeView-level concern.
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20452
-  function handleFocusEvent(event) {
-    if (event.type === 'blur') {
-      const { relatedTarget: currentFocusedNode, target: prevFocusedNode } =
-        event;
-      if (treeRootRef?.current?.contains(currentFocusedNode)) {
-        prevFocusedNode.tabIndex = -1;
-      }
-    }
-    if (event.type === 'focus') {
-      resetNodeTabIndices();
-      const { relatedTarget: prevFocusedNode, target: currentFocusedNode } =
-        event;
-      if (treeRootRef?.current?.contains(prevFocusedNode)) {
-        prevFocusedNode.tabIndex = -1;
-      }
-      currentFocusedNode.tabIndex = 0;
-    }
-  }
-
   // Set the first non-disabled node to be tabbable
   useEffect(() => {
     const firstNode = treeRootRef.current?.querySelector(
