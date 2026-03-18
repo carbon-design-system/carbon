@@ -1,19 +1,19 @@
 //
-// Copyright IBM Corp. 2025
+// Copyright IBM Corp. 2021, 2025
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
 //
 
-@use 'sass:map';
+@use './sans';
+
+/// @deprecated Use the exported $ranges from the ./sans, ./serif, and ./mono modules instead
+$ranges: sans.$ranges;
 
 /// Retrieve the unicode range for a given range name in a given ranges map
 /// @param {String} $name
-/// @param {Map} $ranges
 /// @returns {List}
-@function get-range($name, $ranges) {
-  @if map.has-key($ranges, $name) {
-    @return map.get($ranges, $name);
-  }
-  @error 'Unable to find range with the name: #{$name}';
+/// @deprecated Use the exported get-range function from the ./sans, ./serif, and ./mono modules instead
+@function get-range($name) {
+  @return util.get-range($name, sans.$ranges);
 }
