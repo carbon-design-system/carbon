@@ -175,7 +175,7 @@ const sharedArgs = {
   size: 'md',
   autoAlign: false,
   type: 'default',
-  titleText: 'This is a MultiSelect Title',
+  titleText: 'Label',
   disabled: false,
   hideLabel: false,
   invalid: false,

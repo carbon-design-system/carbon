@@ -103,8 +103,9 @@ $css--plex: true !default;
 :host(#{$prefix}-multi-select[type='inline']) {
   @extend .#{$prefix}--list-box__wrapper--inline;
 
+  grid-gap: 0 $spacing-03;
   .#{$prefix}--form__helper-text {
-    grid-column: 2;
+    grid-column: 3;
   }
 }
 
