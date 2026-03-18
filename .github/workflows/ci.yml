@@ -203,7 +203,47 @@ jobs:
         if: ${{ steps.filter.outputs.e2e == 'true' }}
         run: yarn test:e2e
 
+  avt-build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+      - name: Use Node.js version from .nvmrc
+        uses: actions/setup-node@53b83947a5a98c8d113130e565377fae1a50d02f # v6.3.0
+        with:
+          node-version-file: '.nvmrc'
+      - uses: actions/cache@cdf6c1fa76f9f475f3d7449005a359c84ca0f306 # v5.0.3
+        if: github.event_name != 'merge_group'
+        id: cache
+        with:
+          path: |
+            node_modules
+            */**/node_modules
+          key:
+            ${{ runner.os }}-yarn-${{ hashFiles('yarn.lock',
+            'packages/**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
+      - name: Install dependencies
+        env:
+          YARN_ENABLE_HARDENED_MODE: 0
+        run: yarn install --immutable
+      - name: Build project
+        env:
+          NODE_OPTIONS: --max-old-space-size=6144
+        run: yarn build
+      - name: Build storybook
+        env:
+          NODE_OPTIONS: --max-old-space-size=6144
+        run: yarn workspace @carbon/react storybook:build
+      - name: Upload storybook static files
+        uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f #6.0.0
+        with:
+          name: avt-storybook-static
+          path: packages/react/storybook-static
+          retention-days: 1
+
   avt-runner:
+    needs: avt-build
     strategy:
       fail-fast: false
       matrix:
@@ -234,14 +274,11 @@ jobs:
         run: yarn install --immutable
       - name: Install browsers
         run: yarn playwright install --with-deps
-      - name: Build project
-        env:
-          NODE_OPTIONS: --max-old-space-size=6144
-        run: yarn build
-      - name: Build storybook
-        env:
-          NODE_OPTIONS: --max-old-space-size=6144
-        run: yarn workspace @carbon/react storybook:build
+      - name: Download storybook artifacts
+        uses: actions/download-artifact@v8
+        with:
+          name: avt-storybook-static
+          path: packages/react/storybook-static
       - name: Run storybook
         id: storybook
         run: |
@@ -321,7 +358,7 @@ jobs:
           ./all-playwright-avt-blob-reports
 
       - name: Upload avt HTML report
-        uses: actions/upload-artifact@v6.0.0
+        uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f #6.0.0
         with:
           name: html-playwright-avt-report--attempt-${{ github.run_attempt }}
           path: playwright-avt-report
