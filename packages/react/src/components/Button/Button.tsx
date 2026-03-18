@@ -176,7 +176,6 @@ const Button: ButtonComponent = React.forwardRef(
     const iconOnlyImage = !ButtonImageElement ? null : <ButtonImageElement />;
 
     if (!isIconOnlyButton(hasIconOnly, kind)) {
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const { tooltipAlignment, ...propsWithoutTooltipAlignment } = props;
       return <ButtonBase ref={ref} {...propsWithoutTooltipAlignment} />;
     } else {
