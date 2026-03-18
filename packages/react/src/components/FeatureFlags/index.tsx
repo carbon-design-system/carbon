@@ -33,11 +33,16 @@ export interface FeatureFlagsProps {
   enablePresence?: boolean;
 }
 
+// Reuse the runtime scope shape from `@carbon/feature-flags` directly. A local
+// recursive interface here creates a second incompatible `FeatureFlagScope`
+// during declaration emit.
+type FeatureFlagScope = typeof GlobalFeatureFlags;
+
 /**
  * Our FeatureFlagContext is used alongside the FeatureFlags component to enable
  * or disable feature flags in a given React tree
  */
-const FeatureFlagContext = createContext(GlobalFeatureFlags);
+const FeatureFlagContext = createContext<FeatureFlagScope>(GlobalFeatureFlags);
 
 /**
  * Supports an object of feature flag values with the `flags` prop, merging them
@@ -76,7 +81,7 @@ export const FeatureFlags = ({
       ...flags,
     };
 
-    const scope = createScope(combinedFlags);
+    const scope = createScope(combinedFlags) as FeatureFlagScope;
     scope.mergeWithScope(parentScope);
     return scope;
   }, [
