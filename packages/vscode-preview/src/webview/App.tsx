@@ -222,14 +222,12 @@ export function App() {
       ? selectedGroup.stories.find((s) => s.name === selection.storyName)
       : null;
 
-  // Background color for the preview area — use Carbon token background for
-  // non-vscode themes so the preview looks correct against the theme.
+  // Background color for the preview area — use the selected theme's actual
+  // background token so the preview matches the theme's intended background.
   const previewBackground =
     activeTheme === 'vscode'
       ? 'var(--vscode-editor-background, #1e1e1e)'
-      : activeTheme === 'white' || activeTheme === 'g10'
-        ? '#f4f4f4'
-        : '#161616';
+      : 'var(--cds-background, #ffffff)';
 
   return (
     <div style={styles.app}>
