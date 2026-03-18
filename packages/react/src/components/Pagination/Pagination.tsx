@@ -186,8 +186,7 @@ const Pagination = React.forwardRef(
       itemRangeText = (min, max, total) => `${min}–${max} of ${total} items`,
       itemsPerPageText = 'Items per page:',
       onChange,
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20452
-      pageNumberText: _pageNumberText = 'Page Number',
+      pageNumberText: _pageNumberText,
       pageRangeText = (_current, total) =>
         `of ${total} ${total === 1 ? 'page' : 'pages'}`,
       pageSelectLabelText = (total) =>
