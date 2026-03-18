@@ -58,7 +58,7 @@ jobs:
       - name: Lint styles
         run: yarn lint:styles
 
-  test:
+  build:
     runs-on: ubuntu-latest-larger-disk
     steps:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
@@ -67,24 +67,57 @@ jobs:
         with:
           node-version-file: '.nvmrc'
       - uses: actions/cache@cdf6c1fa76f9f475f3d7449005a359c84ca0f306 # v5.0.3
-        if: github.event_name != 'merge_group'
         id: cache
         with:
           path: |
             node_modules
             */**/node_modules
-          key:
-            ${{ runner.os }}-yarn-${{ hashFiles('yarn.lock',
-            'packages/**/yarn.lock') }}
+          key: ${{ runner.os }}-yarn-${{ hashFiles('yarn.lock', 'packages/**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
       - name: Install dependencies
         env:
           YARN_ENABLE_HARDENED_MODE: 0
         run: yarn install --immutable
       - name: Build project
         run: yarn build
-      - name: Check generated styles
-        run: |
-          yarn carbon-cli check --ignore '**/@(node_modules|examples|components|react|fixtures|compat)/**' 'packages/**/*.scss'
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f #6.0.0
+        with:
+          name: build-output
+          path: |
+            packages/*/lib
+            packages/*/es
+            packages/*/dist
+            packages/*/scss
+          retention-days: 1
+
+  test-unit:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+      - name: Use Node.js version from .nvmrc
+        uses: actions/setup-node@53b83947a5a98c8d113130e565377fae1a50d02f # v6.3.0
+        with:
+          node-version-file: '.nvmrc'
+      - uses: actions/cache@cdf6c1fa76f9f475f3d7449005a359c84ca0f306 # v5.0.3
+        id: cache
+        with:
+          path: |
+            node_modules
+            */**/node_modules
+          key: ${{ runner.os }}-yarn-${{ hashFiles('yarn.lock', 'packages/**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
+      - name: Install dependencies
+        env:
+          YARN_ENABLE_HARDENED_MODE: 0
+        run: yarn install --immutable
+      - name: Download build artifacts
+        uses: actions/download-artifact@fa0a91b85d4f404e444e00e005971372dc801d16 #v4.1.8
+        with:
+          name: build-output
       - name: Run tests
         run: yarn test --ci --collectCoverage
       - name: Upload coverage reports to Codecov with GitHub Action
@@ -93,6 +126,36 @@ jobs:
           flags: main-packages
         env:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+
+  test-styles:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+      - name: Use Node.js version from .nvmrc
+        uses: actions/setup-node@53b83947a5a98c8d113130e565377fae1a50d02f # v6.3.0
+        with:
+          node-version-file: '.nvmrc'
+      - uses: actions/cache@cdf6c1fa76f9f475f3d7449005a359c84ca0f306 # v5.0.3
+        id: cache
+        with:
+          path: |
+            node_modules
+            */**/node_modules
+          key: ${{ runner.os }}-yarn-${{ hashFiles('yarn.lock', 'packages/**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
+      - name: Install dependencies
+        env:
+          YARN_ENABLE_HARDENED_MODE: 0
+        run: yarn install --immutable
+      - name: Download build artifacts
+        uses: actions/download-artifact@fa0a91b85d4f404e444e00e005971372dc801d16 #v4.1.8
+        with:
+          name: build-output
+      - name: Check generated styles
+        run: |
+          yarn carbon-cli check --ignore '**/@(node_modules|examples|components|react|fixtures|compat)/**' 'packages/**/*.scss'
 
   web-components-test:
     runs-on: ubuntu-latest-larger-disk
@@ -103,15 +166,14 @@ jobs:
         with:
           node-version-file: '.nvmrc'
       - uses: actions/cache@cdf6c1fa76f9f475f3d7449005a359c84ca0f306 # v5.0.3
-        if: github.event_name != 'merge_group'
         id: cache
         with:
           path: |
             node_modules
             */**/node_modules
-          key:
-            ${{ runner.os }}-yarn-${{ hashFiles('yarn.lock',
-            'packages/**/yarn.lock') }}
+          key: ${{ runner.os }}-yarn-${{ hashFiles('yarn.lock', 'packages/**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
       - name: Install dependencies
         env:
           YARN_ENABLE_HARDENED_MODE: 0
@@ -143,15 +205,14 @@ jobs:
         with:
           node-version-file: '.nvmrc'
       - uses: actions/cache@cdf6c1fa76f9f475f3d7449005a359c84ca0f306 # v5.0.3
-        if: github.event_name != 'merge_group'
         id: cache
         with:
           path: |
             node_modules
             */**/node_modules
-          key:
-            ${{ runner.os }}-yarn-${{ hashFiles('yarn.lock',
-            'packages/**/yarn.lock') }}
+          key: ${{ runner.os }}-yarn-${{ hashFiles('yarn.lock', 'packages/**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
       - name: Install dependencies
         env:
           YARN_ENABLE_HARDENED_MODE: 0
@@ -175,12 +236,7 @@ jobs:
         if: ${{ steps.filter.outputs.e2e == 'true' }}
         run: yarn test:e2e
 
-  avt-runner:
-    strategy:
-      fail-fast: false
-      matrix:
-        shardIndex: [1, 2, 3, 4]
-        shardTotal: [4]
+  avt-build:
     runs-on: ubuntu-latest-larger-disk
     steps:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
@@ -189,25 +245,63 @@ jobs:
         with:
           node-version-file: '.nvmrc'
       - uses: actions/cache@cdf6c1fa76f9f475f3d7449005a359c84ca0f306 # v5.0.3
-        if: github.event_name != 'merge_group'
         id: cache
         with:
           path: |
             node_modules
             */**/node_modules
-          key:
-            ${{ runner.os }}-yarn-${{ hashFiles('yarn.lock',
-            'packages/**/yarn.lock') }}
+          key: ${{ runner.os }}-yarn-${{ hashFiles('yarn.lock', 'packages/**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
+      - name: Install dependencies
+        env:
+          YARN_ENABLE_HARDENED_MODE: 0
+        run: yarn install --immutable
+      - name: Build project
+        run: yarn build
+      - name: Build storybook
+        run: yarn workspace @carbon/react storybook:build
+      - name: Upload storybook build
+        uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f #6.0.0
+        with:
+          name: storybook-build
+          path: packages/react/storybook-static
+          retention-days: 1
+
+  avt-runner:
+    needs: avt-build
+    strategy:
+      fail-fast: false
+      matrix:
+        shardIndex: [1, 2, 3, 4]
+        shardTotal: [4]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+      - name: Use Node.js version from .nvmrc
+        uses: actions/setup-node@53b83947a5a98c8d113130e565377fae1a50d02f # v6.3.0
+        with:
+          node-version-file: '.nvmrc'
+      - uses: actions/cache@cdf6c1fa76f9f475f3d7449005a359c84ca0f306 # v5.0.3
+        id: cache
+        with:
+          path: |
+            node_modules
+            */**/node_modules
+          key: ${{ runner.os }}-yarn-${{ hashFiles('yarn.lock', 'packages/**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
       - name: Install dependencies
         env:
           YARN_ENABLE_HARDENED_MODE: 0
         run: yarn install --immutable
       - name: Install browsers
         run: yarn playwright install --with-deps
-      - name: Build project
-        run: yarn build
-      - name: Build storybook
-        run: yarn workspace @carbon/react storybook:build
+      - name: Download storybook build
+        uses: actions/download-artifact@fa0a91b85d4f404e444e00e005971372dc801d16 #v4.1.8
+        with:
+          name: storybook-build
+          path: packages/react/storybook-static
       - name: Run storybook
         id: storybook
         run: |
@@ -256,15 +350,14 @@ jobs:
         with:
           node-version-file: '.nvmrc'
       - uses: actions/cache@cdf6c1fa76f9f475f3d7449005a359c84ca0f306 # v5.0.3
-        if: github.event_name != 'merge_group'
         id: cache
         with:
           path: |
             node_modules
             */**/node_modules
-          key:
-            ${{ runner.os }}-yarn-${{ hashFiles('yarn.lock',
-            'packages/**/yarn.lock') }}
+          key: ${{ runner.os }}-yarn-${{ hashFiles('yarn.lock', 'packages/**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
       - name: Install dependencies
         env:
           YARN_ENABLE_HARDENED_MODE: 0
@@ -309,15 +402,14 @@ jobs:
         with:
           node-version-file: '.nvmrc'
       - uses: actions/cache@cdf6c1fa76f9f475f3d7449005a359c84ca0f306 # v5.0.3
-        if: github.event_name != 'merge_group'
         id: cache
         with:
           path: |
             node_modules
             */**/node_modules
-          key:
-            ${{ runner.os }}-yarn-${{ hashFiles('yarn.lock',
-            'packages/**/yarn.lock') }}
+          key: ${{ runner.os }}-yarn-${{ hashFiles('yarn.lock', 'packages/**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
       - name: Install dependencies
         env:
           YARN_ENABLE_HARDENED_MODE: 0
