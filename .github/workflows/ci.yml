@@ -3,7 +3,6 @@ on:
   push:
     branches:
       - main
-      - test/gh-workflow-ubuntu-latest-fixes
   pull_request:
     types: [opened, reopened, synchronize, ready_for_review]
     branches:
