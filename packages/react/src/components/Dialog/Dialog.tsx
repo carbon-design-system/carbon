@@ -663,7 +663,7 @@ const DialogBody = React.forwardRef<HTMLDivElement, DialogBodyProps>(
         ? {
             tabIndex: 0,
             role: 'region',
-            'aria-labelledby': subtitleId ? subtitleId : titleId,
+            'aria-labelledby': subtitleId ?? titleId,
           }
         : {};
 
