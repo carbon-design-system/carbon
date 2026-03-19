@@ -324,7 +324,7 @@
   }
 
   // Sets the gap between rows and wrapped columns
-  .#{$prefix}--grid--with-row-gap .#{$prefix}--row {
+  .#{$prefix}--grid--with-row-gap > .#{$prefix}--row {
     gap: var(--cds-grid-row-gap) 0;
     margin-block-end: var(--cds-grid-row-gap);
   }
@@ -340,7 +340,7 @@
   }
 
   // Remove margin from the last row
-  .#{$prefix}--grid--with-row-gap .#{$prefix}--row:last-child {
+  .#{$prefix}--grid--with-row-gap > .#{$prefix}--row:last-child {
     margin-block-end: 0;
   }
 
