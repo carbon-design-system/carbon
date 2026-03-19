@@ -1298,6 +1298,33 @@ describe('ComboBox', () => {
       expect(mockProps.onChange).not.toHaveBeenCalled();
     });
 
+    it('should skip `disabled` items when completing `typeahead` suggestion on Tab', async () => {
+      const disabledTypeaheadProps = {
+        ...mockProps,
+        items: [
+          { id: 'ibm-cloud', text: 'IBM Cloud', disabled: true },
+          { id: 'ibm-quantum', text: 'IBM Quantum' },
+          { id: 'ibm-z', text: 'IBM Z' },
+        ],
+        onChange: jest.fn(),
+      };
+      const user = userEvent.setup();
+
+      render(<ComboBox {...disabledTypeaheadProps} typeahead />);
+
+      const input = screen.getByRole('combobox');
+
+      user.click(input);
+
+      await user.type(input, 'IBM ');
+      await user.keyboard('[Tab]');
+
+      expect(input).toHaveDisplayValue('IBM Quantum');
+      expect(disabledTypeaheadProps.onChange).toHaveBeenLastCalledWith({
+        selectedItem: disabledTypeaheadProps.items[1],
+      });
+    });
+
     it('should not autocomplete on Tab after backspace', async () => {
       const user = userEvent.setup();
       render(<ComboBox {...mockProps} allowCustomValue typeahead />);
