@@ -139,6 +139,8 @@ class CDSDialog extends CDSModal {
   protected _handleKeydown = (event: KeyboardEvent) => {
     const { key, target } = event;
 
+    if (!this.modal) return;
+
     if (key === 'Esc' || key === 'Escape') {
       event.preventDefault();
       this._handleUserInitiatedClose(target);
