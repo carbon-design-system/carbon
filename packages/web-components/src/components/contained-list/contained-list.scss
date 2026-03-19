@@ -25,6 +25,7 @@ $css--plex: true !default;
 }
 
 :host(#{$prefix}-contained-list[kind='on-page']:not(:first-of-type)) {
+  background-color: #ff000040;
   margin-block-start: $spacing-05;
 }
 

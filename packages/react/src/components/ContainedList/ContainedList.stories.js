@@ -347,3 +347,51 @@ export const UsageExamples = () => {
     </>
   );
 };
+
+export const MultipleOnPageLists = () => {
+  return (
+    <>
+      <h3>Case 1: Multiple consecutive on-page lists (should have spacing)</h3>
+      <ContainedList label="First on-page list" kind="on-page">
+        <ContainedListItem>List item 1</ContainedListItem>
+        <ContainedListItem>List item 2</ContainedListItem>
+      </ContainedList>
+      <ContainedList
+        label="Second on-page list (RED = has spacing)"
+        kind="on-page">
+        <ContainedListItem>List item 1</ContainedListItem>
+        <ContainedListItem>List item 2</ContainedListItem>
+      </ContainedList>
+      <ContainedList
+        label="Third on-page list (RED = has spacing)"
+        kind="on-page">
+        <ContainedListItem>List item 1</ContainedListItem>
+        <ContainedListItem>List item 2</ContainedListItem>
+      </ContainedList>
+
+      <h3 style={{ marginTop: '2rem' }}>
+        Case 2: On-page list after disclosed list
+      </h3>
+      <ContainedList label="Disclosed list" kind="disclosed">
+        <ContainedListItem>List item 1</ContainedListItem>
+        <ContainedListItem>List item 2</ContainedListItem>
+      </ContainedList>
+      <ContainedList
+        label="On-page list after disclosed (RED = has spacing)"
+        kind="on-page">
+        <ContainedListItem>List item 1</ContainedListItem>
+        <ContainedListItem>List item 2</ContainedListItem>
+      </ContainedList>
+
+      <h3 style={{ marginTop: '2rem' }}>
+        Case 3: First on-page list (no spacing)
+      </h3>
+      <ContainedList
+        label="First on-page list (no red = no spacing)"
+        kind="on-page">
+        <ContainedListItem>List item 1</ContainedListItem>
+        <ContainedListItem>List item 2</ContainedListItem>
+      </ContainedList>
+    </>
+  );
+};
