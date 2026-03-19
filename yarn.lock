@@ -1949,7 +1949,7 @@ __metadata:
     "@carbon/test-utils": "npm:^10.40.0"
     "@carbon/themes": "npm:^11.69.0"
     "@carbon/utilities": "npm:^0.17.0"
-    "@figma/code-connect": "npm:^1.3.13"
+    "@figma/code-connect": "npm:^1.4.2"
     "@floating-ui/react": "npm:^0.27.4"
     "@ibm/telemetry-js": "npm:^1.5.0"
     "@stackblitz/sdk": "npm:^1.11.0"
@@ -2871,9 +2871,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@figma/code-connect@npm:^1.3.13":
-  version: 1.3.13
-  resolution: "@figma/code-connect@npm:1.3.13"
+"@figma/code-connect@npm:^1.4.2":
+  version: 1.4.2
+  resolution: "@figma/code-connect@npm:1.4.2"
   dependencies:
     boxen: "npm:5.1.1"
     chalk: "npm:^4.1.2"
@@ -2899,7 +2899,7 @@ __metadata:
     zod-validation-error: "npm:^3.2.0"
   bin:
     figma: bin/figma
-  checksum: 10/8834bf71487cea04caca4993585446fb1dff53c148b62d126bbc7b80bd0c284e36fc001163d88c8ef9c83ba7d3161588015d045f2348ebf61d19018a8686aea5
+  checksum: 10/64ca0233d4ed377461ea87ff0fcae6ed8f7cc983c6398243c167554c6da7cda5b7d7a0983a0e454a0b07c0aa5c82b78868c75ea260ae2930a7d1b20b065ad14e
   languageName: node
   linkType: hard
 
