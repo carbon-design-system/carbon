@@ -64,11 +64,15 @@ $sub-grid: #{$prefix}--subgrid;
 }
 
 :host(#{$prefix}-grid) [subgrid][with-row-gap] {
-  row-gap: var(--cds-grid-gutter);
+  row-gap: calc(var(--cds-grid-gutter-start) + var(--cds-grid-gutter-end));
 }
 
 :host(#{$prefix}-grid) [subgrid][mode='narrow'][with-row-gap] {
-  row-gap: calc(var(--cds-grid-gutter) / 2);
+  row-gap: var(--cds-grid-gutter-end);
+}
+
+:host(#{$prefix}-grid) [subgrid][mode='condensed'][with-row-gap] {
+  row-gap: var(--cds-grid-gutter-condensed);
 }
 
 // Column styles

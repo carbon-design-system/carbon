@@ -121,11 +121,12 @@ export const WithRowGap = {
       skip: true,
     },
   },
-  render: ({ condensed, narrow, withRowGap }) =>
+  render: ({ condensed, narrow, fullWidth, withRowGap }) =>
     html`<cds-grid
         class="sb-grid"
         ?condensed=${condensed}
         ?narrow=${narrow}
+        ?full-width=${fullWidth}
         ?with-row-gap=${withRowGap}>
         <cds-column class="sb-column" sm="4"></cds-column>
         <cds-column class="sb-column" sm="4"></cds-column>
@@ -430,13 +431,32 @@ export const SubgridWithRowGap = {
     },
   },
   render: ({ condensed, narrow, fullWidth, withRowGap }) =>
-    html`<cds-grid class="sb-grid" ?full-width=${fullWidth}>
+    html`<cds-grid
+        class="sb-grid"
+        ?condensed=${condensed}
+        ?narrow=${narrow}
+        ?full-width=${fullWidth}
+        ?with-row-gap=${withRowGap}>
         <cds-column class="sb-column" sm="2" md="4" lg="16">
-          <cds-grid
-            class="sb-sub-grid"
-            ?condensed=${condensed}
-            ?narrow=${narrow}
-            ?with-row-gap=${withRowGap}>
+          <cds-grid class="sb-sub-grid" with-row-gap>
+            <!-- Nested subgrid with row gap  -->
+            <cds-column class="sb-column" sm="4" md="4" lg="8"></cds-column>
+            <cds-column class="sb-column" sm="4" md="4" lg="8"></cds-column>
+            <cds-column class="sb-column" sm="4" md="4" lg="8"></cds-column>
+            <cds-column class="sb-column" sm="4" md="4" lg="8"></cds-column>
+          </cds-grid>
+        </cds-column>
+        <cds-column class="sb-column" sm="2" md="4" lg="16">
+          <cds-grid class="sb-sub-grid" with-row-gap narrow>
+            <!-- Nested subgrid with row gap  -->
+            <cds-column class="sb-column" sm="4" md="4" lg="8"></cds-column>
+            <cds-column class="sb-column" sm="4" md="4" lg="8"></cds-column>
+            <cds-column class="sb-column" sm="4" md="4" lg="8"></cds-column>
+            <cds-column class="sb-column" sm="4" md="4" lg="8"></cds-column>
+          </cds-grid>
+        </cds-column>
+        <cds-column class="sb-column" sm="2" md="4" lg="16">
+          <cds-grid class="sb-sub-grid" with-row-gap condensed>
             <!-- Nested subgrid with row gap  -->
             <cds-column class="sb-column" sm="4" md="4" lg="8"></cds-column>
             <cds-column class="sb-column" sm="4" md="4" lg="8"></cds-column>
