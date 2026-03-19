@@ -414,7 +414,7 @@ jobs:
           workingDir: packages/react
           buildScriptName: storybook:build
           zip: true # Runs Chromatic with the option to compress the build output
-          autoAcceptChanges: 'main' # Option to accept all changes on main
+          autoAcceptChanges: '{main,gh-readonly-queue/main/**}' # Option to accept all changes on main and merge queue
           # 👇 Add debug: true and print dependency trace for changed files to help with debugging:
           traceChanged: 'expanded'
           debug: true
