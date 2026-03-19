@@ -121,11 +121,9 @@ class CDSNumberInput extends CDSTextInput {
       // Validate on input when validate function is provided
       if (this.validate) {
         const isValid = this.validate(_value, this.locale);
-        // Only set invalid if validate explicitly returns false
-        // undefined means defer to built-in validation
-        if (isValid === false) {
-          this.invalid = true;
-        }
+        // Set invalid only if validate explicitly returns false
+        // true or undefined means valid (undefined defers to built-in validation)
+        this.invalid = isValid === false;
       }
     }
   }
