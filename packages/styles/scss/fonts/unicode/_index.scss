@@ -7,13 +7,13 @@
 
 @use './sans';
 
-/// @deprecated Use the exported $ranges from the ./sans, ./serif, and ./mono modules instead
+/// @deprecated Will be removed in Carbon v12. Use the exported $ranges from the ./sans, ./serif, and ./mono modules instead.
 $ranges: sans.$ranges;
 
-/// Retrieve the unicode range for a given range name
+/// Retrieve the unicode range for a given unicode range name
 /// @param {String} $name
 /// @returns {List}
-/// @deprecated Use the exported get-range function from the ./sans, ./serif, and ./mono modules instead
+/// @deprecated Will be removed in Carbon v12. Use the exported get-range function from the ./sans, ./serif, and ./mono modules instead.
 @function get-range($name) {
   @return sans.get-range($name);
 }

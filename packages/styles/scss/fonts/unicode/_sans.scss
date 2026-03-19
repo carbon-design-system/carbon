@@ -129,7 +129,7 @@ $ranges: (
   ),
 );
 
-/// Retrieve the unicode range for a given range name
+/// Retrieve the unicode range for a given unicode range name
 /// @param {String} $name
 /// @returns {List}
 @function get-range($name) {
