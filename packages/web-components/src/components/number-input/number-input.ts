@@ -127,7 +127,6 @@ class CDSNumberInput extends CDSTextInput {
           this.invalid = true;
         }
       }
-      // Note: onChange is called on blur for type="text"
     }
   }
 
@@ -384,7 +383,7 @@ class CDSNumberInput extends CDSTextInput {
 
   /**
    * Specify if the input should be of type text or number.
-   * Use type="text" with locale and formatOptions for locale-based formatting.
+   * Use type="text" with `locale`, `formatOptions`, and guide user input with `pattern` and `inputMode`.
    */
   @property({ reflect: true })
   // @ts-expect-error - Override parent type property with number-specific types
@@ -392,14 +391,14 @@ class CDSNumberInput extends CDSTextInput {
 
   /**
    * Specify a BCP47 language code for parsing and formatting.
-   * Use with type="text".
+   * Use with `type="text"`, has no effect when `type="number"`.
    */
   @property({ reflect: true })
   locale = 'en-US';
 
   /**
-   * Specify Intl.NumberFormat options for formatting.
-   * Use with type="text".
+   * Specify Intl.NumberFormat options applied to internal number parsing and formatting.
+   * Use with `type="text"`, has no effect when `type="number"`.
    */
   @property({ type: Object, attribute: 'format-options' })
   formatOptions: Intl.NumberFormatOptions = {};
