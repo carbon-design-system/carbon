@@ -224,12 +224,16 @@
   // Add row gap support for CSS subgrids
   // Row gap should match the total gutter (start + end margins)
   .#{$prefix}--subgrid--with-row-gap {
-    row-gap: var(--cds-grid-gutter);
+    row-gap: #{$grid-gutter};
   }
 
   // Narrow mode has 0 + 1rem = 1rem total gutter
   .#{$prefix}--subgrid--narrow.#{$prefix}--subgrid--with-row-gap {
-    row-gap: calc(var(--cds-grid-gutter) / 2);
+    row-gap: #{math.div($grid-gutter, 2)};
+  }
+
+  .#{$prefix}--subgrid--condensed.#{$prefix}--subgrid--with-row-gap {
+    row-gap: #{$grid-gutter-condensed};
   }
 
   // -----------------------------------------------------------------------------
