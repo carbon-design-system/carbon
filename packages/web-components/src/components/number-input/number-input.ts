@@ -127,7 +127,7 @@ class CDSNumberInput extends CDSTextInput {
           this.invalid = true;
         }
       }
-      // onChange is called on blur for type="text"
+      // Note: onChange is called on blur for type="text"
     }
   }
 
