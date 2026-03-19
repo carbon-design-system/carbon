@@ -341,6 +341,7 @@ export const WithTypeOfText = {
           step="1"
           locale="${locale}"
           label="NumberInput label"
+          invalid-text="Number is not valid. Must be between 0 and 100000000"
           helper-text="Optional helper text. Uses ${locale} formatting.">
         </cds-number-input>
       </cds-form-item>
@@ -591,7 +592,7 @@ export const DisabledWithAILabel = {
 
 // Hidden Test-Only Story for type="text" test scenarios
 export const TypeTextTestScenarios = {
-  tags: ['!dev', '!autodocs'], // hide story
+  // tags: ['!dev', '!autodocs'], // hide story
 
   render: () => {
     return html`
@@ -817,6 +818,269 @@ export const TypeTextTestScenarios = {
             <cds-ai-label alignment="bottom-left">
               ${content}${actions}
             </cds-ai-label>
+          </cds-number-input>
+        </cds-form-item>
+      </div>
+    `;
+  },
+};
+
+// todo: remove
+export const ControlledInputBugTest = {
+  render: () => {
+    const setupHandlers = () => {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const input = document.getElementById('controlled-input') as any;
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      if (!input || (input as any)._handlersSetup) return;
+
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      (input as any)._handlersSetup = true;
+      const shadowInput = input?.shadowRoot?.querySelector('input');
+
+      // eslint-disable-next-line no-console
+      console.log('=== Initial State ===');
+      // eslint-disable-next-line no-console
+      console.log('Component value:', input?.value);
+      // eslint-disable-next-line no-console
+      console.log('Shadow input value:', shadowInput?.value);
+      // eslint-disable-next-line no-console
+      console.log('Internal _inputValue:', input?._inputValue);
+      // eslint-disable-next-line no-console
+      console.log('Internal _numberValue:', input?._numberValue);
+
+      // Setup button handlers with detailed logging
+      document.getElementById('clear-btn')?.addEventListener('click', () => {
+        // eslint-disable-next-line no-console
+        console.log('\n=== BEFORE Clear (setting value to "") ===');
+        // eslint-disable-next-line no-console
+        console.log('Component value:', input?.value);
+        // eslint-disable-next-line no-console
+        console.log('Shadow input value:', shadowInput?.value);
+        // eslint-disable-next-line no-console
+        console.log('Internal _inputValue:', input?._inputValue);
+        // eslint-disable-next-line no-console
+        console.log('Internal _numberValue:', input?._numberValue);
+
+        input.value = '';
+
+        // eslint-disable-next-line no-console
+        console.log('\n=== AFTER Clear ===');
+        // eslint-disable-next-line no-console
+        console.log('Component value:', input?.value);
+        // eslint-disable-next-line no-console
+        console.log('Shadow input value:', shadowInput?.value);
+        // eslint-disable-next-line no-console
+        console.log('Internal _inputValue:', input?._inputValue);
+        // eslint-disable-next-line no-console
+        console.log('Internal _numberValue:', input?._numberValue);
+      });
+
+      document
+        .getElementById('set-value-btn')
+        ?.addEventListener('click', () => {
+          // eslint-disable-next-line no-console
+          console.log('\n=== BEFORE Set to 1234 ===');
+          // eslint-disable-next-line no-console
+          console.log('Component value:', input?.value);
+          // eslint-disable-next-line no-console
+          console.log('Shadow input value:', shadowInput?.value);
+          // eslint-disable-next-line no-console
+          console.log('Internal _inputValue:', input?._inputValue);
+          // eslint-disable-next-line no-console
+          console.log('Internal _numberValue:', input?._numberValue);
+
+          input.value = '1234';
+
+          // eslint-disable-next-line no-console
+          console.log('\n=== AFTER Set to 1234 ===');
+          // eslint-disable-next-line no-console
+          console.log('Component value:', input?.value);
+          // eslint-disable-next-line no-console
+          console.log('Shadow input value:', shadowInput?.value);
+          // eslint-disable-next-line no-console
+          console.log('Internal _inputValue:', input?._inputValue);
+          // eslint-disable-next-line no-console
+          console.log('Internal _numberValue:', input?._numberValue);
+        });
+
+      document
+        .getElementById('set-empty-then-value-btn')
+        ?.addEventListener('click', () => {
+          // eslint-disable-next-line no-console
+          console.log('\n=== Test: Clear then Set Value ===');
+
+          // eslint-disable-next-line no-console
+          console.log('Step 1: Setting to empty string');
+          // eslint-disable-next-line no-console
+          console.log('\n=== AFTER clearing 1234 ===');
+          input.value = '';
+          // eslint-disable-next-line no-console
+          console.log('Component value:', input?.value);
+          // eslint-disable-next-line no-console
+          console.log('Shadow input value:', shadowInput?.value);
+          // eslint-disable-next-line no-console
+          console.log('Internal _inputValue:', input?._inputValue);
+          // eslint-disable-next-line no-console
+          console.log('Internal _numberValue:', input?._numberValue);
+
+          setTimeout(() => {
+            // eslint-disable-next-line no-console
+            console.log('\nStep 2: Setting to 9999');
+            // eslint-disable-next-line no-console
+            console.log('\n=== AFTER set to 1234 ===');
+            input.value = '9999';
+            // eslint-disable-next-line no-console
+            console.log('Component value:', input?.value);
+            // eslint-disable-next-line no-console
+            console.log('Shadow input value:', shadowInput?.value);
+            // eslint-disable-next-line no-console
+            console.log('Internal _inputValue:', input?._inputValue);
+            // eslint-disable-next-line no-console
+            console.log('Internal _numberValue:', input?._numberValue);
+          }, 100);
+        });
+    };
+
+    // Setup handlers after component is rendered
+    setTimeout(setupHandlers, 100);
+
+    return html`
+      <div>
+        <h3>Controlled Input Test (type="text")</h3>
+        <p>Open browser console to see detailed logs</p>
+        <div style="margin: 20px 0; display: flex; gap: 10px;">
+          <button id="clear-btn" style="padding: 8px 16px;">
+            1. Clear Input (set value="")
+          </button>
+          <button id="set-value-btn" style="padding: 8px 16px;">
+            2. Set to 1234
+          </button>
+          <button id="set-empty-then-value-btn" style="padding: 8px 16px;">
+            3. Clear then Set
+          </button>
+        </div>
+        <cds-form-item>
+          <cds-number-input
+            id="controlled-input"
+            type="text"
+            locale="en-US"
+            label="Controlled Number Input (type=text)"
+            helper-text="Initial value: 5000 (formatted as 5,000)"
+            value="5000"></cds-number-input>
+        </cds-form-item>
+      </div>
+    `;
+  },
+};
+
+// todo: remove
+export const EventDetailTypeInconsistency = {
+  render: () => {
+    return html`
+      <div>
+        <h3>Event Detail Type Test</h3>
+        <p>
+          Open browser console to see event logs. Type a number, use steppers,
+          or blur - all events should emit numeric values (typeof value should
+          be "number").
+        </p>
+        <cds-form-item>
+          <cds-number-input
+            id="event-test-input"
+            type="text"
+            locale="en-US"
+            label="Type 'text' Number Input"
+            helper-text="Check console for event details"
+            value="1000"
+            @cds-number-input="${(e: CustomEvent) => {
+              const { value, direction } = e.detail;
+              const valueType = typeof value;
+              // eslint-disable-next-line no-console
+              console.log(
+                `[Event Detail Type Test] direction=${direction}, value=${JSON.stringify(value)}, typeof value=${valueType}`
+              );
+            }}">
+          </cds-number-input>
+        </cds-form-item>
+      </div>
+    `;
+  },
+};
+
+// todo: remove
+export const ValidationTest = {
+  render: () => {
+    let validationReturnValue: boolean | undefined = true;
+
+    const updateValidation = (returnValue: boolean | undefined) => {
+      validationReturnValue = returnValue;
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const input = document.querySelector('#validation-test-input') as any;
+      if (input) {
+        // Force re-validation by triggering blur
+        const shadowInput = input.shadowRoot?.querySelector('input');
+        if (shadowInput) {
+          shadowInput.dispatchEvent(new Event('blur'));
+        }
+      }
+      // eslint-disable-next-line no-console
+      console.log(`Validation return value set to: ${returnValue}`);
+    };
+
+    return html`
+      <div>
+        <h3>Validation Test</h3>
+        <p>
+          This tests that validate() can return different values (true, false,
+          undefined). The input has min="0" and max="10000". Check browser
+          console for event logs.
+        </p>
+        <div style="margin-bottom: 1rem; display: flex; gap: 0.5rem;">
+          <button
+            @click="${() => updateValidation(true)}"
+            style="padding: 0.5rem 1rem; cursor: pointer;">
+            Return TRUE (always valid)
+          </button>
+          <button
+            @click="${() => updateValidation(false)}"
+            style="padding: 0.5rem 1rem; cursor: pointer;">
+            Return FALSE (always invalid)
+          </button>
+          <button
+            @click="${() => updateValidation(undefined)}"
+            style="padding: 0.5rem 1rem; cursor: pointer;">
+            Return UNDEFINED (defer to built-in)
+          </button>
+        </div>
+        <cds-form-item>
+          <cds-number-input
+            id="validation-test-input"
+            type="text"
+            locale="en-US"
+            min="0"
+            max="10000"
+            value="1234"
+            invalid-text="Invalid: Either you entered 999, or value is outside 0-10000 range"
+            @cds-number-input="${(e: CustomEvent) => {
+              const { value } = e.detail;
+              // eslint-disable-next-line no-console
+              console.log(
+                `(this must be number) @cds-number-input event fired with value ${typeof value}`,
+                value
+              );
+            }}"
+            label="Number Input with Dynamic Validation"
+            helper-text="min=0, max=10000. Use buttons above to change validation behavior!"
+            .validate="${(value: string) => {
+              // eslint-disable-next-line no-console
+              console.log(
+                `(this must be string) validate callback with value ${typeof value}`,
+                value,
+                `returning: ${validationReturnValue}`
+              );
+              return validationReturnValue;
+            }}">
           </cds-number-input>
         </cds-form-item>
       </div>

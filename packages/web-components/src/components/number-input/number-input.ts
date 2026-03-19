@@ -121,7 +121,11 @@ class CDSNumberInput extends CDSTextInput {
       // Validate on input when validate function is provided
       if (this.validate) {
         const isValid = this.validate(_value, this.locale);
-        this.invalid = !isValid;
+        // Only set invalid if validate explicitly returns false
+        // undefined means defer to built-in validation
+        if (isValid === false) {
+          this.invalid = true;
+        }
       }
       // onChange is called on blur for type="text"
     }
@@ -135,7 +139,7 @@ class CDSNumberInput extends CDSTextInput {
     this._handleStep(event, 'down');
 
     const newValue =
-      this.type === NUMBER_INPUT_TYPE.TEXT ? this._inputValue : input.value;
+      this.type === NUMBER_INPUT_TYPE.TEXT ? this._numberValue : input.value;
 
     this.dispatchEvent(
       new CustomEvent((this.constructor as typeof CDSNumberInput).eventInput, {
@@ -158,7 +162,7 @@ class CDSNumberInput extends CDSTextInput {
     this._handleStep(event, 'up');
 
     const newValue =
-      this.type === NUMBER_INPUT_TYPE.TEXT ? this._inputValue : input.value;
+      this.type === NUMBER_INPUT_TYPE.TEXT ? this._numberValue : input.value;
 
     this.dispatchEvent(
       new CustomEvent((this.constructor as typeof CDSNumberInput).eventInput, {
@@ -201,9 +205,12 @@ class CDSNumberInput extends CDSTextInput {
       const rawValue = (event.target as HTMLInputElement).value;
 
       // Validate raw input
-      const isValid = this.validate
+      const validationResult = this.validate
         ? this.validate(rawValue, this.locale)
         : true;
+
+      // undefined means defer to built-in validation (treat as valid for custom validation)
+      const isValid = validationResult !== false;
 
       if (isValid) {
         const formattedValue = isNaN(this._numberValue)
@@ -426,6 +433,7 @@ class CDSNumberInput extends CDSTextInput {
   /**
    * Optional validation function for type="text".
    * Should return false to fail validation, true to pass, or undefined to defer to built-in validation.
+   * Note: the min and max attributes still takes priority if they are defined.
    */
   validate?: (value: string, locale: string) => boolean | undefined;
 
@@ -440,7 +448,7 @@ class CDSNumberInput extends CDSTextInput {
   override set value(val: string) {
     const oldValue = this._value;
 
-    if (this.type === NUMBER_INPUT_TYPE.TEXT && val) {
+    if (this.type === NUMBER_INPUT_TYPE.TEXT) {
       // Ensure formatters are initialized before using them
       if (!this._numberFormatter || !this._numberParser) {
         this._initializeFormatters();

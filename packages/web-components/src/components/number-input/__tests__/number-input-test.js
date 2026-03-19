@@ -422,7 +422,7 @@ describe('<cds-number-input>', () => {
 
       increment.click();
       expect(eventCount).to.equal(1);
-      expect(lastEvent.detail.value).to.equal('11');
+      expect(lastEvent.detail.value).to.equal(11);
       expect(lastEvent.detail.direction).to.equal('up');
 
       decrement.click();
@@ -856,13 +856,13 @@ describe('<cds-number-input>', () => {
         increment.click();
         await el.updateComplete;
         expect(input.value).to.equal('16.02');
-        expect(lastEvent.detail.value).to.equal('16.02');
+        expect(lastEvent.detail.value).to.equal(16.02);
         expect(lastEvent.detail.direction).to.equal('up');
         expect(eventCount).to.equal(2);
 
         decrement.click();
         await el.updateComplete;
-        expect(lastEvent.detail.value).to.equal('15.02');
+        expect(lastEvent.detail.value).to.equal(15.02);
         expect(lastEvent.detail.direction).to.equal('down');
         expect(input.value).to.equal('15.02');
         expect(eventCount).to.equal(3);
@@ -894,6 +894,143 @@ describe('<cds-number-input>', () => {
         increment.click();
         await el.updateComplete;
         expect(input.value).to.equal('20%');
+      });
+
+      // Tests for custom validate() function behavior
+      // Covers: validate() returning undefined/false/true, timing of validation (input vs blur)
+      it('should handle custom validate function with all return values (undefined/false/true)', async () => {
+        const el = await fixture(
+          html`<cds-number-input
+            type="text"
+            label="NumberInput label"
+            min="0"
+            max="100"
+            value="50">
+          </cds-number-input>`
+        );
+
+        const input = el.shadowRoot.querySelector('input');
+
+        // Test validate() receives string value and returns false - should be invalid
+        el.validate = (value) => {
+          expect(typeof value).to.equal('string');
+          return false;
+        };
+        input.dispatchEvent(
+          new Event('input', { bubbles: true, composed: true })
+        );
+        expect(el.invalid).to.be.true;
+
+        // Test validate() returns true - should be valid
+        el.validate = () => true;
+        input.dispatchEvent(
+          new Event('input', { bubbles: true, composed: true })
+        );
+        expect(el.invalid).to.be.false;
+
+        // Test validate() returns undefined - should be valid
+        el.validate = () => undefined;
+        input.dispatchEvent(
+          new Event('input', { bubbles: true, composed: true })
+        );
+        expect(el.invalid).to.be.false;
+      });
+
+      // Tests pattern-based validation combining custom and built-in validation
+      // Covers: validate() with conditional logic, mixing false/true/undefined returns
+      it('should support custom validation with specific pattern rejection', async () => {
+        const el = await fixture(
+          html`<cds-number-input
+            type="text"
+            label="NumberInput label"
+            invalid-text="only support 0-499 and 501-1000. you cannot select 500."
+            min="0"
+            max="1000">
+          </cds-number-input>`
+        );
+
+        const input = el.shadowRoot.querySelector('input');
+
+        // Test with validate returning false for '500' - should be invalid
+        el.validate = (value) => {
+          if (value === '500') {
+            return false;
+          }
+          return true;
+        };
+
+        input.value = '500';
+        input.dispatchEvent(
+          new Event('input', { bubbles: true, composed: true })
+        );
+        expect(el.invalid).to.be.true;
+
+        // Test accepted value '499' - should be valid
+        input.value = '499';
+        input.dispatchEvent(
+          new Event('input', { bubbles: true, composed: true })
+        );
+        expect(el.invalid).to.be.false;
+
+        // Test accepted value '501' - should be valid
+        input.value = '501';
+        input.dispatchEvent(
+          new Event('input', { bubbles: true, composed: true })
+        );
+        expect(el.invalid).to.be.false;
+
+        // Test with validate returning undefined - defers to built-in validation
+        // '500' should now be valid since it's within min/max range
+        el.validate = () => undefined;
+
+        input.value = '500';
+        input.dispatchEvent(
+          new Event('input', { bubbles: true, composed: true })
+        );
+        expect(el.invalid).to.be.false;
+      });
+
+      // Tests event.detail.value type consistency
+      // Covers: event emits numeric values (not strings) for type="text" on stepper clicks and blur
+      it('should emit numeric values in event detail for type="text" (steppers and blur)', async () => {
+        const el = await fixture(
+          html`<cds-number-input
+            type="text"
+            label="NumberInput label"
+            min="0"
+            max="100"
+            value="50">
+          </cds-number-input>`
+        );
+
+        const input = el.shadowRoot.querySelector('input');
+        const [decrement, increment] = el.shadowRoot.querySelectorAll('button');
+
+        let lastEvent;
+        el.addEventListener('cds-number-input', (e) => {
+          lastEvent = e;
+        });
+
+        // Test stepper increment
+        increment.click();
+        expect(typeof lastEvent.detail.value).to.equal('number');
+        expect(lastEvent.detail.value).to.equal(51);
+
+        // Test stepper decrement
+        decrement.click();
+        expect(typeof lastEvent.detail.value).to.equal('number');
+        expect(lastEvent.detail.value).to.equal(50);
+
+        // Test blur event
+        input.value = '75';
+        input.dispatchEvent(
+          new Event('input', { bubbles: true, composed: true })
+        );
+        input.dispatchEvent(
+          new Event('blur', { bubbles: true, composed: true })
+        );
+        expect(typeof lastEvent.detail.value).to.equal('number');
+        expect(lastEvent.detail.value).to.equal(75);
       });
     });
   });
