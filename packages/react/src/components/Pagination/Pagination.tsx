@@ -15,6 +15,7 @@ import SelectItem from '../SelectItem';
 import cx from 'classnames';
 import isEqual from 'react-fast-compare';
 import { useFallbackId } from '../../internal/useId';
+import { usePreviousValue } from '../../internal/usePreviousValue';
 import { usePrefix } from '../../internal/usePrefix';
 
 type ExcludedAttributes = 'id' | 'onChange';
@@ -218,6 +219,7 @@ const Pagination = React.forwardRef(
       () => mapPageSizesToObject(controlledPageSizes),
       [controlledPageSizes]
     );
+    const prevControlledPageSize = usePreviousValue(controlledPageSize);
 
     const [pageSizes, setPageSizes] = useState(normalizedControlledPageSizes);
     const [page, setPage] = useState(controlledPage);
@@ -295,14 +297,19 @@ const Pagination = React.forwardRef(
     }, [normalizedControlledPageSizes, pageSize]);
 
     useEffect(() => {
+      if (controlledPageSize === prevControlledPageSize) return;
+
       const nextPageSize = getPageSize(
         normalizedControlledPageSizes,
         controlledPageSize
       );
 
       setPageSize(nextPageSize);
-      // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [controlledPageSize]);
+    }, [
+      controlledPageSize,
+      normalizedControlledPageSizes,
+      prevControlledPageSize,
+    ]);
 
     function handleSizeChange(event) {
       const pageSize = Number(event.target.value);
