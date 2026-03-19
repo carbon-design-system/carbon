@@ -333,6 +333,52 @@ describe('Dialog', () => {
       raf.mockRestore();
       caf.mockRestore();
     });
+
+    it('prefers aria-label prop over deprecated ariaLabel prop', () => {
+      render(<Dialog open aria-label="label" ariaLabel="deprecated label" />);
+
+      const dialog = screen.getByRole('dialog');
+
+      expect(dialog).toHaveAttribute('aria-label', 'label');
+    });
+
+    it('prefers aria-labelledby and aria-describedby props over deprecated camelCase props', () => {
+      render(
+        <Dialog
+          open
+          aria-labelledby="title"
+          aria-describedby="description"
+          ariaLabelledBy="deprecated-title"
+          ariaDescribedBy="deprecated-description"
+        />
+      );
+
+      const dialog = screen.getByRole('dialog');
+
+      expect(dialog).toHaveAttribute('aria-labelledby', 'title');
+      expect(dialog).toHaveAttribute('aria-describedby', 'description');
+    });
+
+    it.each([
+      ['aria-label', { 'aria-label': 'label' }],
+      ['deprecated ariaLabel', { ariaLabel: 'deprecated label' }],
+      ['aria-labelledby', { 'aria-labelledby': 'label' }],
+      ['deprecated ariaLabelledBy', { ariaLabelledBy: 'deprecated label' }],
+    ])(
+      'does not apply aria-labelledby=title.id fallback when %s is provided',
+      (_, props) => {
+        render(
+          <Dialog open {...props}>
+            <DialogTitle>Title</DialogTitle>
+          </Dialog>
+        );
+
+        const dialog = screen.getByRole('dialog');
+        const title = screen.getByText('Title');
+
+        expect(dialog.getAttribute('aria-labelledby')).not.toBe(title.id);
+      }
+    );
   });
 
   it('should bring focusAfterCloseRef element into focus on close when the ref is defined', async () => {
