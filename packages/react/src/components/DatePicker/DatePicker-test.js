@@ -304,16 +304,13 @@ describe('DatePicker', () => {
   it('should not show any error text when both invalid and warn are false in fluid mode', () => {
     render(
       <FormContext.Provider value={{ isFluid: true }}>
-        <DatePicker
-          datePickerType="single"
-          invalid={false}
-          invalidText="Invalid date"
-          warn={false}
-          warnText="Warning message">
+        <DatePicker datePickerType="single" invalid={false} warn={false}>
           <DatePickerInput
             id="date-picker-input-id-start"
             placeholder="mm/dd/yyyy"
             labelText="Date Picker label"
+            invalidText="Invalid date"
+            warnText="Warning message"
           />
         </DatePicker>
       </FormContext.Provider>

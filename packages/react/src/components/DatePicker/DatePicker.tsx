@@ -267,11 +267,6 @@ export interface DatePickerProps {
   invalid?: boolean;
 
   /**
-   * Provide the text that is displayed when the control is in error state (Fluid Only)
-   */
-  invalidText?: ReactNode;
-
-  /**
    * `true` to use the light version.
    */
   light?: boolean;
@@ -340,11 +335,6 @@ export interface DatePickerProps {
   warn?: boolean;
 
   /**
-   * Provide the text that is displayed when the control is in warning state (Fluid only)
-   */
-  warnText?: ReactNode;
-
-  /**
    * Accessible aria-label for the "next month" arrow icon.
    */
   nextMonthAriaLabel?: string;
@@ -369,9 +359,7 @@ const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>((props, ref) => {
     enable,
     inline,
     invalid,
-    invalidText,
     warn,
-    warnText,
     light = false,
     locale = 'en',
     maxDate,
@@ -1030,11 +1018,6 @@ DatePicker.propTypes = {
   invalid: PropTypes.bool,
 
   /**
-   * Provide the text that is displayed when the control is in error state (Fluid Only)
-   */
-  invalidText: PropTypes.node,
-
-  /**
    * `true` to use the light version.
    */
   light: deprecate(
@@ -1116,11 +1099,6 @@ DatePicker.propTypes = {
    * Specify whether the control is currently in warning state (Fluid only)
    */
   warn: PropTypes.bool,
-
-  /**
-   * Provide the text that is displayed when the control is in warning state (Fluid only)
-   */
-  warnText: PropTypes.node,
 
   /**
    * Accessible aria-label for the "next month" arrow icon.
