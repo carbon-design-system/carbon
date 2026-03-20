@@ -511,6 +511,9 @@ describe('cds-slider', () => {
     expect(el.value).to.equal(0);
     const track = el.shadowRoot.querySelector('#track');
     const slider = el.shadowRoot.querySelector('.cds--slider');
+    const thumbWrapper = el.shadowRoot.querySelector(
+      '.cds--slider__thumb-wrapper'
+    );
     track.getBoundingClientRect = () => ({
       left: 0,
       width: 100,
@@ -526,6 +529,7 @@ describe('cds-slider', () => {
     const thumb = el.shadowRoot.querySelector('#thumb');
     expect(thumb).to.exist;
     expect(thumb.getAttribute('aria-valuenow')).to.equal('0');
+    expect(thumbWrapper.style.left).to.equal('50%');
 
     slider.dispatchEvent(
       new MouseEvent('click', { clientX: 50, bubbles: true })
