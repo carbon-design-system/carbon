@@ -141,12 +141,12 @@ export default class CDSTabs extends HostListenerMixin(CDSContentSwitcher) {
   @HostListener('keydown')
   protected _handleKeydown(event: KeyboardEvent) {
     const { key } = event;
-    const isVertical = this.closest(`${prefix}-tabs-vertical`) !== null;
+    const { selectorItemEnabled } = this.constructor as typeof CDSTabs;
     const action = (this.constructor as typeof CDSTabs).getAction(
       key,
-      isVertical
+      this.vertical
     );
-    const enabledTabs = this.querySelectorAll(`${prefix}-tab:not([disabled])`);
+    const enabledTabs = this.querySelectorAll(selectorItemEnabled);
     switch (action) {
       case TABS_KEYBOARD_ACTION.HOME:
         {
@@ -173,7 +173,7 @@ export default class CDSTabs extends HostListenerMixin(CDSContentSwitcher) {
       case TABS_KEYBOARD_ACTION.NAVIGATING:
         {
           // Get direction based on orientation
-          const direction = isVertical
+          const direction = this.vertical
             ? VERTICAL_NAVIGATION_DIRECTION[key]
             : NAVIGATION_DIRECTION[key];
           if (direction) {
@@ -253,12 +253,14 @@ export default class CDSTabs extends HostListenerMixin(CDSContentSwitcher) {
    * Updates the vertical attribute on all child tabs based on the vertical property.
    */
   private _updateTabsVerticalAttribute() {
-    if (this.vertical) {
-      const { selectorItem } = this.constructor as typeof CDSTabs;
-      forEach(this.querySelectorAll(selectorItem), (tab) => {
+    const { selectorItem } = this.constructor as typeof CDSTabs;
+    forEach(this.querySelectorAll(selectorItem), (tab) => {
+      if (this.vertical) {
         (tab as CDSTab).setAttribute('vertical', '');
-      });
-    }
+      } else {
+        (tab as CDSTab).removeAttribute('vertical');
+      }
+    });
   }
 
   protected _selectionDidChange(
@@ -455,6 +457,10 @@ export default class CDSTabs extends HostListenerMixin(CDSContentSwitcher) {
   updated(changedProperties) {
     // Call super to keep selection/value in sync
     super.updated?.(changedProperties);
+
+    if (changedProperties.has('vertical')) {
+      this._updateTabsVerticalAttribute();
+    }
 
     if (changedProperties.has('value')) {
       const tab = this.querySelector(

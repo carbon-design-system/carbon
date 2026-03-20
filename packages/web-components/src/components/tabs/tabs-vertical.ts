@@ -24,12 +24,36 @@ export default class CDSTabsVertical extends LitElement {
   customHeight?: string;
 
   private _resizeObserver: ResizeObserver | null = null;
+  private _mediaQueryList: MediaQueryList | null = null;
+
+  /**
+   * Handles viewport width changes to toggle the CSS grid class and vertical attribute.
+   * Adds 'cds--css-grid' class and vertical attribute when width >= 673px, removes them when < 673px.
+   */
+  private _handleViewportChange = (e: MediaQueryListEvent | MediaQueryList) => {
+    const tabs = this.querySelector(`${prefix}-tabs`);
+    if (e.matches) {
+      // Viewport is 673px or wider
+      this.classList.add(`${prefix}--css-grid`);
+      if (tabs) {
+        tabs.setAttribute('vertical', '');
+      }
+    } else {
+      // Viewport is 672px or narrower
+      this.classList.remove(`${prefix}--css-grid`);
+      if (tabs) {
+        tabs.removeAttribute('vertical');
+      }
+    }
+  };
 
   firstUpdated() {
-    const tabs = this.querySelector(`${prefix}-tabs`);
-    if (tabs) {
-      tabs.setAttribute('vertical', '');
-    }
+    // Set up media query listener for viewport width
+    this._mediaQueryList = window.matchMedia('(min-width: 673px)');
+    // Set initial state
+    this._handleViewportChange(this._mediaQueryList);
+    // Listen for changes
+    this._mediaQueryList.addEventListener('change', this._handleViewportChange);
 
     requestAnimationFrame(() => {
       this._applyHeight();
@@ -57,11 +81,26 @@ export default class CDSTabsVertical extends LitElement {
     super.disconnectedCallback();
     this._resizeObserver?.disconnect();
     this._resizeObserver = null;
+    // Clean up media query listener
+    this._mediaQueryList?.removeEventListener(
+      'change',
+      this._handleViewportChange
+    );
+    this._mediaQueryList = null;
   }
 
   private _applyHeight() {
+    // Only apply height calculation when in vertical mode (css-grid class present)
+    const isVertical = this.classList.contains(`${prefix}--css-grid`);
+
     if (this.customHeight) {
       this.style.height = this.customHeight;
+      return;
+    }
+
+    // Only calculate height when in vertical mode
+    if (!isVertical) {
+      this.style.removeProperty('height');
       return;
     }
 
@@ -84,13 +123,9 @@ export default class CDSTabsVertical extends LitElement {
       panel.hidden = hiddenStates[index];
     });
 
-    const tabsEl = this.querySelector<HTMLElement>(`${prefix}-tabs`);
-    const tabsScrollHeight = tabsEl?.scrollHeight ?? 0;
-
-    const height = Math.max(tallestPanel, tabsScrollHeight);
-
-    if (height > 0) {
-      this.style.height = `${height}px`;
+    // Match React behavior: only use panel height, not tabs height
+    if (tallestPanel > 0) {
+      this.style.height = `${tallestPanel}px`;
     } else {
       this.style.removeProperty('height');
     }

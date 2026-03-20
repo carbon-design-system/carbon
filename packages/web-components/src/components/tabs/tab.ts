@@ -6,7 +6,7 @@
  */
 
 import { html } from 'lit';
-import { property } from 'lit/decorators.js';
+import { property, state, query } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
 import CDSContentSwitcherItem from '../content-switcher/content-switcher-item';
 import { TABS_TYPE } from './tabs';
@@ -36,10 +36,62 @@ export default class CDSTab extends CDSContentSwitcherItem {
   type = TABS_TYPE.REGULAR;
 
   /**
+   * `true` if the tab is in vertical orientation.
+   * This is automatically set by the parent `<cds-tabs>` when it's in vertical mode.
+   */
+  @property({ type: Boolean, reflect: true })
+  vertical = false;
+
+  /**
    * The tab text content.
    */
   @property()
   tabTitle;
+
+  /**
+   * `true` if the tab text is truncated with ellipsis.
+   * This state is automatically updated when the component renders in vertical mode.
+   */
+  @state()
+  truncated = false;
+
+  /**
+   * Reference to the label span element (only present in vertical mode).
+   * @private
+   */
+  @query(`.${prefix}--tabs__nav-item-label`)
+  private _labelElement?: HTMLElement;
+
+  /**
+   * Checks if the text overflow ellipsis is currently applied to the label.
+   * This is useful for determining if a tooltip should be shown.
+   *
+   * @returns `true` if text is truncated/clamped, `false` otherwise or if not in vertical mode
+   */
+  isTextTruncated(): boolean {
+    if (!this.vertical || !this._labelElement) {
+      return false;
+    }
+
+    // Compare scrollHeight with clientHeight to detect if content is overflowing
+    // When line-clamp is active and text exceeds 2 lines, scrollHeight > clientHeight
+    return this._labelElement.scrollHeight > this._labelElement.clientHeight;
+  }
+
+  /**
+   * Updates the truncated state after the component has rendered.
+   */
+  updated(changedProperties: Map<PropertyKey, unknown>) {
+    super.updated(changedProperties);
+
+    // Check if text is truncated and update state when in vertical mode
+    if (this.vertical && this._labelElement) {
+      const isTruncated = this.isTextTruncated();
+      if (this.truncated !== isTruncated) {
+        this.truncated = isTruncated;
+      }
+    }
+  }
 
   /**
    * Handles `slotchange` event.
@@ -47,7 +99,9 @@ export default class CDSTab extends CDSContentSwitcherItem {
   protected _handleSlotChange({ target }: Event) {
     // Retrieve content of the slot to use for aria-label.
     const content = (target as HTMLSlotElement).assignedNodes();
-    this.tabTitle = content[0].textContent;
+    const textContent = content[0]?.textContent;
+    // Normalize whitespace: trim and replace multiple spaces with single space
+    this.tabTitle = textContent?.trim().replace(/\s+/g, ' ');
   }
 
   connectedCallback() {
@@ -62,8 +116,11 @@ export default class CDSTab extends CDSContentSwitcherItem {
       disabled,
       selected,
       tabTitle,
+      vertical,
+      truncated,
       _handleSlotChange: handleSlotChange,
     } = this;
+
     // No `href`/`tabindex` to not to make this `<a>` click-focusable
     return html`
       <a
@@ -73,7 +130,13 @@ export default class CDSTab extends CDSContentSwitcherItem {
         tabindex="${selected ? 0 : -1}"
         ?disabled="${disabled}"
         aria-selected="${selected}">
-        <slot @slotchange="${handleSlotChange}"></slot>
+        ${vertical
+          ? html`<span
+              class="${prefix}--tabs__nav-item-label"
+              title="${truncated ? tabTitle.trim() : ''}">
+              <slot @slotchange="${handleSlotChange}"></slot>
+            </span>`
+          : html` <slot @slotchange="${handleSlotChange}"></slot> `}
       </a>
     `;
   }
