@@ -129,8 +129,8 @@ $link-focus-text-color: custom-property.get-var(
     inline-size: convert.to-rem(20px);
   }
 
-  // // For large links, set block-size to match icon size to prevent misalignment
-  // .#{$prefix}--link--lg .#{$prefix}--link__icon {
-  //   block-size: convert.to-rem(20px);
-  // }
+  // For large links, set block-size to match icon size to prevent misalignment
+  .#{$prefix}--link--lg .#{$prefix}--link__icon {
+    block-size: convert.to-rem(20px);
+  }
 }
