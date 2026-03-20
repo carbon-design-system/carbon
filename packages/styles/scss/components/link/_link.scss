@@ -123,22 +123,14 @@ $link-focus-text-color: custom-property.get-var(
     vertical-align: text-bottom;
   }
 
-  // Default icon size for sm and md
-  .#{$prefix}--link__icon > svg,
-  .#{$prefix}--link--sm .#{$prefix}--link__icon > svg,
-  .#{$prefix}--link--md .#{$prefix}--link__icon > svg {
-    block-size: convert.to-rem(16px);
-    inline-size: convert.to-rem(16px);
-  }
-
   // Large icon size
   .#{$prefix}--link--lg .#{$prefix}--link__icon > svg {
     block-size: convert.to-rem(20px);
     inline-size: convert.to-rem(20px);
   }
 
-  // For large links, set block-size to match icon size to prevent misalignment
-  .#{$prefix}--link--lg .#{$prefix}--link__icon {
-    block-size: convert.to-rem(20px);
-  }
+  // // For large links, set block-size to match icon size to prevent misalignment
+  // .#{$prefix}--link--lg .#{$prefix}--link__icon {
+  //   block-size: convert.to-rem(20px);
+  // }
 }

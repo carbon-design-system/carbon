@@ -24,15 +24,6 @@ $css--plex: true !default;
     display: none;
   }
 
-  // Icon sizing for slotted content in shadow DOM
-  // Default size for sm and md
-  .#{$prefix}--link__icon ::slotted(svg),
-  .#{$prefix}--link--sm .#{$prefix}--link__icon ::slotted(svg),
-  .#{$prefix}--link--md .#{$prefix}--link__icon ::slotted(svg) {
-    block-size: convert.to-rem(16px);
-    inline-size: convert.to-rem(16px);
-  }
-
   // Large size
   .#{$prefix}--link--lg .#{$prefix}--link__icon ::slotted(svg) {
     block-size: convert.to-rem(20px);
