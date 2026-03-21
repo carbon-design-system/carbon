@@ -200,14 +200,16 @@ export const Popover: PopoverComponent & {
     useFeatureFlag('enable-v12-dynamic-floating-styles') || autoAlign;
   const lastClickWasInsidePopoverContent = useRef(false);
 
-  const isTargetInDatePickerInsidePopover = (target: Node | null) => {
-    if (!target || !popover.current) return false;
+  const isTargetInDatePickerInsidePopover = (target: Node) => {
+    if (!popover.current) return false;
     const calendar =
       target instanceof Element && target.closest?.('.flatpickr-calendar');
     if (!calendar) return false;
     const inputs = popover.current.querySelectorAll('input');
     for (const input of inputs) {
-      const fp = (input as HTMLInputElement & { _flatpickr?: { calendarContainer: Element } })._flatpickr;
+      const fp = (input as Record<string, unknown>)._flatpickr as
+        | { calendarContainer: Element }
+        | undefined;
       if (fp?.calendarContainer === calendar) return true;
     }
     return false;

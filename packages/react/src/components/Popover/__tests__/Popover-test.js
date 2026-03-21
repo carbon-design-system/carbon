@@ -458,15 +458,94 @@ describe('Popover', () => {
     calendar.innerHTML = '<span class="flatpickr-day">26</span>';
     document.body.appendChild(calendar);
 
-    Object.defineProperty(input, '_flatpickr', {
-      value: { calendarContainer: calendar },
-      configurable: true,
-    });
+    try {
+      Object.defineProperty(input, '_flatpickr', {
+        value: { calendarContainer: calendar },
+        configurable: true,
+      });
 
-    await userEvent.click(calendar.querySelector('.flatpickr-day'));
+      await userEvent.click(calendar.querySelector('.flatpickr-day'));
 
-    expect(onRequestClose).not.toHaveBeenCalled();
+      expect(onRequestClose).not.toHaveBeenCalled();
+    } finally {
+      document.body.removeChild(calendar);
+    }
+  });
 
-    document.body.removeChild(calendar);
+  it('should NOT call onRequestClose when focus moves to DatePicker calendar', async () => {
+    const onRequestClose = jest.fn();
+    const { container } = render(
+      <Popover open autoAlign onRequestClose={onRequestClose}>
+        <button type="button">Open</button>
+        <PopoverContent>
+          <input
+            id="date-picker-input"
+            aria-label="Date input"
+            readOnly
+          />
+        </PopoverContent>
+      </Popover>
+    );
+
+    const input = screen.getByLabelText('Date input');
+    const calendar = document.createElement('div');
+    calendar.className = 'flatpickr-calendar open';
+    calendar.innerHTML = '<span class="flatpickr-day" tabindex="0">26</span>';
+    document.body.appendChild(calendar);
+
+    try {
+      Object.defineProperty(input, '_flatpickr', {
+        value: { calendarContainer: calendar },
+        configurable: true,
+      });
+
+      input.focus();
+      const popoverEl = container.firstChild;
+      const focusoutEvent = new FocusEvent('focusout', {
+        bubbles: true,
+        relatedTarget: calendar.querySelector('.flatpickr-day'),
+      });
+      popoverEl.dispatchEvent(focusoutEvent);
+
+      expect(onRequestClose).not.toHaveBeenCalled();
+    } finally {
+      document.body.removeChild(calendar);
+    }
+  });
+
+  it('should call onRequestClose when clicking DatePicker calendar outside popover', async () => {
+    const onRequestClose = jest.fn();
+    render(
+      <Popover open autoAlign onRequestClose={onRequestClose}>
+        <button type="button">Open</button>
+        <PopoverContent>
+          <input id="popover-input" aria-label="Popover input" readOnly />
+        </PopoverContent>
+      </Popover>
+    );
+
+    const outsideInput = document.createElement('input');
+    outsideInput.setAttribute('aria-label', 'Outside input');
+    outsideInput.readOnly = true;
+    document.body.appendChild(outsideInput);
+
+    const calendar = document.createElement('div');
+    calendar.className = 'flatpickr-calendar open';
+    calendar.innerHTML = '<span class="flatpickr-day">26</span>';
+    document.body.appendChild(calendar);
+
+    try {
+      Object.defineProperty(outsideInput, '_flatpickr', {
+        value: { calendarContainer: calendar },
+        configurable: true,
+      });
+
+      await userEvent.click(calendar.querySelector('.flatpickr-day'));
+
+      expect(onRequestClose).toHaveBeenCalled();
+    } finally {
+      document.body.removeChild(calendar);
+      document.body.removeChild(outsideInput);
+    }
   });
 });
