@@ -512,13 +512,15 @@ const PaginationNav = React.forwardRef<HTMLElement, PaginationNavProps>(
 
     function handleKeyDown(e: React.KeyboardEvent<HTMLElement>) {
       if (loop && e.key === 'Tab') {
+        const nav = e.currentTarget;
         const active = document.activeElement;
         if (
+          nav instanceof HTMLElement &&
           active instanceof HTMLElement &&
-          (e.currentTarget as HTMLElement).contains(active)
+          nav.contains(active)
         ) {
           wrapFocusWithoutSentinels({
-            containerNode: e.currentTarget as HTMLElement,
+            containerNode: nav,
             currentActiveNode: active,
             event: e,
           });
