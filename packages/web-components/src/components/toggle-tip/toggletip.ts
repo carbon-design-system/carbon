@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2019, 2025
+ * Copyright IBM Corp. 2019, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -19,6 +19,7 @@ import FloatingUIController from '../../globals/controllers/floating-controller'
 import styles from './toggletip.scss?lit';
 import popoverStyles from '../popover/popover.scss?lit';
 import { iconLoader } from '../../globals/internal/icon-loader';
+import { deepShadowContains } from '../../globals/internal/deep-shadow-contains';
 
 /**
  * Definition tooltip.
@@ -82,10 +83,11 @@ class CDSToggletip extends HostListenerMixin(FocusMixin(LitElement)) {
    */
   private _handleActionsSlotChange({ target }: Event) {
     const hasContent = (target as HTMLSlotElement).assignedNodes();
-    // eslint-disable-next-line  @typescript-eslint/no-unused-expressions -- https://github.com/carbon-design-system/carbon/issues/20452
-    hasContent
-      ? this.setAttribute('has-actions', '')
-      : this.removeAttribute('has-actions');
+    if (hasContent) {
+      this.setAttribute('has-actions', '');
+    } else {
+      this.removeAttribute('has-actions');
+    }
   }
 
   protected _handleClick() {
@@ -117,27 +119,10 @@ class CDSToggletip extends HostListenerMixin(FocusMixin(LitElement)) {
       return;
     }
 
-    if (this._deepShadowContains(this, event.relatedTarget)) {
+    if (deepShadowContains(this, event.relatedTarget)) {
       return;
     }
     this.open = false;
-  }
-
-  private _deepShadowContains(root: Node, el: EventTarget | null): boolean {
-    if (!(el instanceof Node)) {
-      return false;
-    }
-    if (el === root) {
-      return true;
-    }
-
-    return this._deepShadowContains(
-      root,
-      (el as HTMLElement).assignedSlot ||
-        el.parentNode ||
-        (el.getRootNode() as ShadowRoot).host ||
-        null
-    );
   }
 
   protected _renderToggleTipLabel = () => {

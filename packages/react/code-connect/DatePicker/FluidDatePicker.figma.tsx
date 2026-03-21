@@ -47,7 +47,6 @@ figma.connect(
   'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=17544-267399&t=hgJuU7m9Y6EM076g-4',
   {
     variant: { State: 'Skeleton' },
-    /* eslint-disable-next-line react/jsx-no-undef -- https://github.com/carbon-design-system/carbon/issues/20452 */
     example: () => <DatePickerSkeleton type="simple" />,
   }
 );
@@ -58,10 +57,7 @@ figma.connect(
   'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=17544-267989&t=hgJuU7m9Y6EM076g-4',
   {
     props: {
-      labelText: figma.boolean('Show tooltip', {
-        true: figma.string('Label text'), // + figma.children('Tooltip'), //https://github.com/figma/code-connect/issues/92
-        false: figma.string('Label text'),
-      }),
+      labelText: figma.string('Label text'),
       placeholder: figma.string('Date selected'),
       warnText: figma.string('Warning text'),
       invalidText: figma.string('Error text'),
@@ -88,7 +84,6 @@ figma.connect(
   'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=17544-267989&t=hgJuU7m9Y6EM076g-4',
   {
     variant: { State: 'Skeleton' },
-    /* eslint-disable-next-line react/jsx-no-undef -- https://github.com/carbon-design-system/carbon/issues/20452 */
     example: () => <DatePickerSkeleton type="single" />,
   }
 );
@@ -152,7 +147,6 @@ figma.connect(
   'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=17544-268235&t=hgJuU7m9Y6EM076g-4',
   {
     variant: { State: 'Skeleton' },
-    /* eslint-disable-next-line react/jsx-no-undef -- https://github.com/carbon-design-system/carbon/issues/20452 */
     example: () => <DatePickerSkeleton type="range" />,
   }
 );

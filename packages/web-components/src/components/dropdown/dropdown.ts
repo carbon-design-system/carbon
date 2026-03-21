@@ -512,8 +512,6 @@ class CDSDropdown extends ValidityMixin(
       this._clearHighlight();
       return;
     }
-
-    this._setHighlightedItem(item);
   }
 
   protected _handleMouseleaveInner(event: MouseEvent) {
@@ -658,8 +656,9 @@ class CDSDropdown extends ValidityMixin(
   }
 
   // Default dropdowns close after user selection.
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20452
-  protected _shouldCloseAfterSelection(_item?: CDSDropdownItem) {
+  protected _shouldCloseAfterSelection(item?: CDSDropdownItem) {
+    // Keep `item` for subclasses that change close behavior based on selection.
+    void item;
     return true;
   }
 
@@ -1135,10 +1134,11 @@ class CDSDropdown extends ValidityMixin(
   }
 
   updated(changedProperties) {
-    // eslint-disable-next-line  @typescript-eslint/no-unused-expressions -- https://github.com/carbon-design-system/carbon/issues/20452
-    this._hasAILabel
-      ? this.setAttribute('ai-label', '')
-      : this.removeAttribute('ai-label');
+    if (this._hasAILabel) {
+      this.setAttribute('ai-label', '');
+    } else {
+      this.removeAttribute('ai-label');
+    }
 
     const label = this.shadowRoot?.querySelector("slot[name='ai-label']");
     if (label) {
@@ -1270,7 +1270,6 @@ class CDSDropdown extends ValidityMixin(
       toggleLabelClosed,
       toggleLabelOpen,
       type,
-      warn,
       warnText,
       _activeDescendant: activeDescendant,
       _shouldTriggerBeFocusable: shouldTriggerBeFocusable,
@@ -1390,7 +1389,7 @@ class CDSDropdown extends ValidityMixin(
       <div
         part="helper-text"
         class="${helperClasses}"
-        ?hidden="${(inline && !warn && !normalizedProps.invalid) ||
+        ?hidden="${(inline && !this.warn && !normalizedProps.invalid) ||
         !hasHelperText}">
         <slot name="helper-text" @slotchange="${handleSlotchangeHelperText}"
           >${helperMessage}</slot

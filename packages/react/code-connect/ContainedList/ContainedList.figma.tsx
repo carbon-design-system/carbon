@@ -9,7 +9,6 @@
 import React from 'react';
 import { ContainedList } from '@carbon/react';
 import figma from '@figma/code-connect';
-// eslint-disable-next-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20452
 import { title } from 'process';
 
 const sharedContainedListProps = {
@@ -76,8 +75,6 @@ figma.connect(
   }
 );
 
-// eslint-disable-next-line  @typescript-eslint/no-unused-expressions -- https://github.com/carbon-design-system/carbon/issues/20452
-WithPersistentSearch;
 figma.connect(
   ContainedList,
   'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=16193-272726&t=cMvnFTYLPEhzhIpj-4',

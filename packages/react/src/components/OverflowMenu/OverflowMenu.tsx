@@ -105,8 +105,8 @@ export const getMenuOffset: MenuOffset = (
       direction
     );
   }
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20452
-  const { offsetWidth: menuWidth, offsetHeight: menuHeight } = menuBody;
+
+  const { offsetWidth: menuWidth } = menuBody;
 
   switch (triggerButtonPositionProp) {
     case 'top':
@@ -170,6 +170,7 @@ export interface OverflowMenuProps
   flipped?: boolean;
 
   /**
+   * @deprecated Tab key is handled with event handler so no need for focus trap.
    * Enable or disable focus trap behavior
    */
   focusTrap?: boolean;
@@ -201,7 +202,7 @@ export interface OverflowMenuProps
   menuOffset?: MenuOffset;
 
   /**
-   * The adjustment in position applied to the floating menu.
+   * The adjustment in position applied to the floating menu when flipped.
    */
   menuOffsetFlip?: MenuOffset;
 
@@ -265,7 +266,7 @@ export const OverflowMenu = forwardRef<HTMLButtonElement, OverflowMenuProps>(
       className,
       direction = DIRECTION_BOTTOM,
       flipped = false,
-      focusTrap = true,
+      focusTrap = false,
       iconClass,
       iconDescription = 'Options',
       id,
@@ -392,12 +393,15 @@ export const OverflowMenu = forwardRef<HTMLButtonElement, OverflowMenuProps>(
         evt.preventDefault();
       }
 
-      // Close the overflow menu on escape
-      if (keyCodeMatches(evt, [keys.Escape])) {
+      // Close the overflow menu on escape or tab.
+      if (keyCodeMatches(evt, [keys.Escape, keys.Tab])) {
         closeMenuOnEscape();
 
         // Stop the esc keypress from bubbling out and closing something it shouldn't
         evt.stopPropagation();
+
+        // Stop the tab key from making the browser focus somewhere else.
+        evt.preventDefault();
       }
     };
 
@@ -467,7 +471,10 @@ export const OverflowMenu = forwardRef<HTMLButtonElement, OverflowMenuProps>(
         menuBody.ownerDocument,
         focusinEventName,
         (event: Event) => {
-          const target = event.target as HTMLElement;
+          const target = event.target;
+
+          if (!(target instanceof Element)) return;
+
           const triggerEl = triggerRef.current;
           if (typeof target.matches === 'function') {
             if (
@@ -686,6 +693,7 @@ OverflowMenu.propTypes = {
   flipped: PropTypes.bool,
 
   /**
+   * @deprecated Tab key is handled with event handler so no need for focus trap.
    * Enable or disable focus trap behavior
    */
   focusTrap: PropTypes.bool,
@@ -726,7 +734,7 @@ OverflowMenu.propTypes = {
   ]),
 
   /**
-   * The adjustment in position applied to the floating menu.
+   * The adjustment in position applied to the floating menu when flipped.
    */
   menuOffsetFlip: PropTypes.oneOfType([
     PropTypes.shape({

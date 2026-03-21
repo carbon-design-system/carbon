@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2019, 2024
+ * Copyright IBM Corp. 2019, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -24,12 +24,6 @@ class CDSTableSkeleton extends LitElement {
    */
   @property()
   private headers: string[] = [];
-
-  /**
-   * Optionally specify whether you want the Skeleton to be rendered as a compact DataTable
-   */
-  @property({ type: Boolean, reflect: true })
-  compact = false;
 
   /**
    * Specify the number of columns that you want to render in the skeleton state
@@ -111,11 +105,10 @@ class CDSTableSkeleton extends LitElement {
   }
 
   render() {
-    const { compact, columnCount, headers, rowCount, zebra } = this;
+    const { columnCount, headers, rowCount, zebra } = this;
     const classes = classMap({
       [`${prefix}--skeleton`]: true,
       [`${prefix}--data-table`]: true,
-      [`${prefix}--data-table--compact`]: compact,
       [`${prefix}--data-table--zebra`]: zebra,
     });
     return html`

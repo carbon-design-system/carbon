@@ -36,7 +36,7 @@
     - [Publishing older library versions](#publishing-older-library-versions)
 - [FAQ](#faq)
     - [How do I install a dependency?](#how-do-i-install-a-dependency)
-    - [CI is failing saying that it cannot find a dependency in offline mode](#ci-is-failing-saying-that-it-cannot-find-a-dependency-in-offline-mode)
+    - [CI is failing during `yarn install`](#ci-is-failing-during-yarn-install)
     - [How do I fix the repo state if I cancel during a publish?](#how-do-i-fix-the-repo-state-if-i-cancel-during-a-publish)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
@@ -106,30 +106,14 @@ yarn lerna run build
 
 ## Dependency management
 
-In light of potential `npm` security issues
-[[1]](https://blog.npmjs.org/post/175824896885/incident-report-npm-inc-operations-incident-of)
-[[2]](https://eslint.org/blog/2018/07/postmortem-for-malicious-package-publishes),
-we are addressing some of the issues with installing dependencies from a live
-registry by taking advantage of
-[Yarn's offline feature](https://yarnpkg.com/blog/2016/11/24/offline-mirror/).
-The majority of steps taken are inspired by
-[this tweet](https://twitter.com/leeb/status/1017607265115750400) from Lee
-Byron.
+We use `yarn.lock` as the source of truth for dependency resolution and enforce
+it in CI with `yarn install --immutable`.
 
 ### Continuous Integration
 
-We specify a `.yarnc` file in this project that sets the path for Yarn's
-[offline cache](https://yarnpkg.com/features/offline-cache) to the folder
-`.yarn/cache`. This folder contains all the tarballs for the packages that the
-project uses.
-
-> The way it works is simple: each time a package is downloaded from a remote
-> location ... a copy will be stored within the cache. The next time this same
-> package will need to be installed, Yarn will leverage the version stored
-> within cache instead of downloading its original source.
-
-This ensures that packages are available no matter if the network goes down or
-the npm registry is unavailable.
+We specify `.yarnrc.yml` in this project and use a non-committed cache strategy.
+Yarn stores cached packages outside of the repository, and CI restores
+dependencies through the lockfile plus workflow caches.
 
 ## Package architecture and layout
 
@@ -763,16 +747,15 @@ code at that point in time.
 #### How do I install a dependency?
 
 When installing a dependency, you can run `yarn add <dependency-name>` as
-normal. The only difference now is that you also will check in the corresponding
-tarball entry in `.yarn/cache` as well so that we don't have to fetch this
-dependency from the live registry during Continuous Integration builds.
+normal. After adding or updating dependencies, commit the updated lockfile and
+manifest files (for example, `yarn.lock` and the relevant `package.json`
+changes). You do not need to commit any `.yarn/cache` tarballs.
 
-#### CI is failing saying that it cannot find a dependency in offline mode
+#### CI is failing during `yarn install`
 
-Most likely this is due to Yarn mistakenly removing, or forgetting to add, a
-dependency to our offline mirror. Typically, running the following set of
-commands should reset the project back to a valid state and should bring back
-any missing dependencies or fetch new ones.
+Most install failures are caused by lockfile drift or stale local dependency
+state. Running the following commands will reset local dependencies and
+re-generate install state from the lockfile:
 
 ```bash
 yarn clean

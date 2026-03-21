@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -101,6 +101,11 @@ export interface PaginationProps
   pageRangeText?: (current: number, total: number) => string;
 
   /**
+   * A function returning the label for the page select.
+   */
+  pageSelectLabelText?: (total: number) => string;
+
+  /**
    * The number dictating how many items a page contains.
    */
   pageSize?: number;
@@ -181,10 +186,11 @@ const Pagination = React.forwardRef(
       itemRangeText = (min, max, total) => `${min}–${max} of ${total} items`,
       itemsPerPageText = 'Items per page:',
       onChange,
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20452
-      pageNumberText: _pageNumberText = 'Page Number',
+      pageNumberText: _pageNumberText,
       pageRangeText = (_current, total) =>
         `of ${total} ${total === 1 ? 'page' : 'pages'}`,
+      pageSelectLabelText = (total) =>
+        `Page of ${total} ${total === 1 ? 'page' : 'pages'}`,
       page: controlledPage = 1,
       pageInputDisabled,
       pageSize: controlledPageSize,
@@ -418,7 +424,7 @@ const Pagination = React.forwardRef(
               <Select
                 id={`${prefix}-pagination-select-${inputId}-right`}
                 className={`${prefix}--select__page-number`}
-                labelText={`Page of ${totalPages} pages`}
+                labelText={pageSelectLabelText(totalPages)}
                 inline
                 hideLabel
                 onChange={handlePageInputChange}
@@ -531,6 +537,11 @@ Pagination.propTypes = {
    * A function returning PII showing where the current page is.
    */
   pageRangeText: PropTypes.func,
+
+  /**
+   * A function returning the label for the page select.
+   */
+  pageSelectLabelText: PropTypes.func,
 
   /**
    * The number dictating how many items a page contains.

@@ -11,7 +11,7 @@ const { themes } = require('../../test-utils/env');
 // const { snapshot } = require('../../test-utils/snapshot');
 const { snapshotStory } = require('../../test-utils/storybook');
 
-// TODO update once stories are visible
+// TODO: update once stories are visible
 test.describe('PageHeader', () => {
   themes.forEach((theme) => {
     test.describe(theme, () => {

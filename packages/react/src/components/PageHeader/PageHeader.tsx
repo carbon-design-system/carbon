@@ -1,12 +1,11 @@
 /**
- * Copyright IBM Corp. 2025
+ * Copyright IBM Corp. 2025, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 import React, {
   useEffect,
-  useLayoutEffect,
   useState,
   useRef,
   useMemo,
@@ -31,6 +30,7 @@ import useOverflowItems from '../../internal/useOverflowItems';
 import { Popover, PopoverContent } from '../Popover';
 import { useId } from '../../internal/useId';
 import { Grid, Column } from '../Grid';
+import useIsomorphicEffect from '../../internal/useIsomorphicEffect';
 
 /**
  * ----------
@@ -214,9 +214,8 @@ const PageHeaderContent = React.forwardRef<
       return element.offsetHeight < element.scrollHeight;
     };
 
-    useLayoutEffect(() => {
-      // eslint-disable-next-line  @typescript-eslint/no-unused-expressions -- https://github.com/carbon-design-system/carbon/issues/20452
-      titleRef.current && isEllipsisActive(titleRef.current);
+    useIsomorphicEffect(() => {
+      if (titleRef.current) isEllipsisActive(titleRef.current);
     }, [title]);
 
     return (
@@ -325,7 +324,7 @@ interface PageHeaderContentPageActionsProps {
 }
 const PageHeaderContentPageActions = ({
   className,
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20452
+
   children,
   menuButtonLabel = 'Actions',
   actions,
@@ -353,7 +352,7 @@ const PageHeaderContentPageActions = ({
 
   // need to set the grid columns width based on the menu button's width
   // to avoid overlapping when resizing
-  useLayoutEffect(() => {
+  useIsomorphicEffect(() => {
     if (menuButtonVisibility && offsetRef.current) {
       const width = offsetRef.current.offsetWidth;
       document.documentElement.style.setProperty(
@@ -579,38 +578,21 @@ const PageHeaderTabBar = React.forwardRef<
       },
       className
     );
-    // Early return if no tags are provided
-    if (!tags.length) {
-      return (
-        <div className={classNames} ref={ref} {...other}>
-          <Grid>
-            <Column lg={16} md={8} sm={4}>
-              {children}
-            </Column>
-          </Grid>
-        </div>
-      );
-    }
-    // eslint-disable-next-line  react-hooks/rules-of-hooks -- https://github.com/carbon-design-system/carbon/issues/20452
+
     const [openPopover, setOpenPopover] = useState(false);
     const tagSize = tags[0]?.size || 'md';
-    // eslint-disable-next-line  react-hooks/rules-of-hooks -- https://github.com/carbon-design-system/carbon/issues/20452
     const instanceId = useId('PageHeaderTabBar');
-    // eslint-disable-next-line  react-hooks/rules-of-hooks -- https://github.com/carbon-design-system/carbon/issues/20452
     const tagsWithIds = useMemo(() => {
       return tags.map((tag, index) => ({
         ...tag,
         id: tag.id || `tag-${index}-${instanceId}`,
       }));
-      // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20452
-    }, [tags]);
+    }, [instanceId, tags]);
 
-    // eslint-disable-next-line  react-hooks/rules-of-hooks -- https://github.com/carbon-design-system/carbon/issues/20452
     const tagsContainerRef = useRef<HTMLDivElement>(null);
-    // eslint-disable-next-line  react-hooks/rules-of-hooks -- https://github.com/carbon-design-system/carbon/issues/20452
     const offsetRef = useRef<HTMLDivElement>(null);
+
     // To close popover when window resizes
-    // eslint-disable-next-line  react-hooks/rules-of-hooks -- https://github.com/carbon-design-system/carbon/issues/20452
     useEffect(() => {
       const handleResize = () => {
         // Close the popover when window resizes to prevent unwanted opens
@@ -628,7 +610,6 @@ const PageHeaderTabBar = React.forwardRef<
       visibleItems = [],
       hiddenItems = [],
       itemRefHandler = () => {},
-      // eslint-disable-next-line  react-hooks/rules-of-hooks -- https://github.com/carbon-design-system/carbon/issues/20452
     } = useOverflowItems<TagItem>(
       tagsWithIds,
       tagsContainerRef as React.RefObject<HTMLDivElement>,
@@ -639,7 +620,6 @@ const PageHeaderTabBar = React.forwardRef<
       itemRefHandler: () => {},
     };
 
-    // eslint-disable-next-line  react-hooks/rules-of-hooks -- https://github.com/carbon-design-system/carbon/issues/20452
     const handleOverflowClick = useCallback((event: React.MouseEvent) => {
       event.stopPropagation();
       setOpenPopover((prev) => !prev);

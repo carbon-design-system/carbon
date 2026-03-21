@@ -160,7 +160,7 @@ Map {
     "render": [Function],
   },
   "AILabelActions" => {
-    "$$typeof": Symbol(react.forward_ref),
+    "displayName": "AILabelActions",
     "propTypes": {
       "children": {
         "type": "node",
@@ -169,10 +169,9 @@ Map {
         "type": "string",
       },
     },
-    "render": [Function],
   },
   "AILabelContent" => {
-    "$$typeof": Symbol(react.forward_ref),
+    "displayName": "AILabelContent",
     "propTypes": {
       "children": {
         "type": "node",
@@ -181,7 +180,6 @@ Map {
         "type": "string",
       },
     },
-    "render": [Function],
   },
   "AISkeletonIcon" => {
     "propTypes": {
@@ -2605,6 +2603,9 @@ Map {
                   "isRequired": true,
                   "type": "node",
                 },
+                "isSortable": {
+                  "type": "bool",
+                },
                 "key": {
                   "isRequired": true,
                   "type": "string",
@@ -2692,9 +2693,6 @@ Map {
       },
       "columnCount": {
         "type": "number",
-      },
-      "compact": {
-        "type": "bool",
       },
       "headers": {
         "args": [
@@ -3015,7 +3013,9 @@ Map {
       "onClick": {
         "type": "func",
       },
-      "pattern": [Function],
+      "pattern": {
+        "type": "string",
+      },
       "placeholder": {
         "type": "string",
       },
@@ -4338,7 +4338,9 @@ Map {
       "onClick": {
         "type": "func",
       },
-      "pattern": [Function],
+      "pattern": {
+        "type": "string",
+      },
       "placeholder": {
         "type": "string",
       },
@@ -6391,6 +6393,9 @@ Map {
       "className": {
         "type": "string",
       },
+      "dangerDescription": {
+        "type": "string",
+      },
       "disabled": {
         "type": "bool",
       },
@@ -6783,7 +6788,7 @@ Map {
         "type": "string",
       },
       "label": {
-        "type": "node",
+        "type": "string",
       },
       "labelClassName": {
         "type": "string",
@@ -7650,6 +7655,9 @@ Map {
       "closeMenu": {
         "type": "func",
       },
+      "dangerDescription": {
+        "type": "string",
+      },
       "disabled": {
         "type": "bool",
       },
@@ -7764,6 +7772,9 @@ Map {
         "type": "string",
       },
       "pageRangeText": {
+        "type": "func",
+      },
+      "pageSelectLabelText": {
         "type": "func",
       },
       "pageSize": {
@@ -12404,7 +12415,9 @@ Map {
       "onClick": {
         "type": "func",
       },
-      "pattern": [Function],
+      "pattern": {
+        "type": "string",
+      },
       "placeholder": {
         "type": "string",
       },
@@ -13786,7 +13799,7 @@ Map {
     "render": [Function],
   },
   "preview__SlugActions" => {
-    "$$typeof": Symbol(react.forward_ref),
+    "displayName": "AILabelActions",
     "propTypes": {
       "children": {
         "type": "node",
@@ -13795,10 +13808,9 @@ Map {
         "type": "string",
       },
     },
-    "render": [Function],
   },
   "preview__SlugContent" => {
-    "$$typeof": Symbol(react.forward_ref),
+    "displayName": "AILabelContent",
     "propTypes": {
       "children": {
         "type": "node",
@@ -13807,7 +13819,6 @@ Map {
         "type": "string",
       },
     },
-    "render": [Function],
   },
   "preview_useFeatureFlag" => {},
   "preview_useFeatureFlags" => {},
@@ -14384,7 +14395,9 @@ Map {
       "onClick": {
         "type": "func",
       },
-      "pattern": [Function],
+      "pattern": {
+        "type": "string",
+      },
       "placeholder": {
         "type": "string",
       },
@@ -15766,7 +15779,7 @@ Map {
     "render": [Function],
   },
   "unstable__SlugActions" => {
-    "$$typeof": Symbol(react.forward_ref),
+    "displayName": "AILabelActions",
     "propTypes": {
       "children": {
         "type": "node",
@@ -15775,10 +15788,9 @@ Map {
         "type": "string",
       },
     },
-    "render": [Function],
   },
   "unstable__SlugContent" => {
-    "$$typeof": Symbol(react.forward_ref),
+    "displayName": "AILabelContent",
     "propTypes": {
       "children": {
         "type": "node",
@@ -15787,7 +15799,6 @@ Map {
         "type": "string",
       },
     },
-    "render": [Function],
   },
   "unstable_useFeatureFlag" => {},
   "unstable_useFeatureFlags" => {},
@@ -15801,5 +15812,7 @@ Map {
   "usePrefix" => {},
   "useTheme" => {},
   "validateNumberSeparators" => {},
+  "withComposedModalPresence" => {},
+  "withModalPresence" => {},
 }
 `;

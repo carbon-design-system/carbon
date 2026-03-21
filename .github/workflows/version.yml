@@ -32,11 +32,11 @@ jobs:
         with:
           fetch-depth: '0'
       - name: Use Node.js version from .nvmrc
-        uses: actions/setup-node@6044e13b5dc448c55e2357c09f80417699197238 # v6.2.0
+        uses: actions/setup-node@53b83947a5a98c8d113130e565377fae1a50d02f # v6.3.0
         with:
           node-version-file: '.nvmrc'
           registry-url: 'https://registry.npmjs.org'
-      - uses: actions/cache@8b402f58fbc84540c8b491a91e594a4576fec3d7 # v5.0.2
+      - uses: actions/cache@cdf6c1fa76f9f475f3d7449005a359c84ca0f306 # v5.0.3
         id: cache
         with:
           path: |
@@ -44,7 +44,7 @@ jobs:
             */**/node_modules
           key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
       - name: Install dependencies
-        run: yarn install --immutable --immutable-cache --check-cache
+        run: yarn install --immutable --check-cache
       - name: Update telemetry.yml
         run: yarn run telemetry:config
       - name: Create preminor release

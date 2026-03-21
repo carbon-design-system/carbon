@@ -21,13 +21,13 @@ jobs:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
 
       - name: Use Node.js version from .nvmrc
-        uses: actions/setup-node@6044e13b5dc448c55e2357c09f80417699197238 # v6.2.0
+        uses: actions/setup-node@53b83947a5a98c8d113130e565377fae1a50d02f # v6.3.0
         with:
           node-version-file: '.nvmrc'
           registry-url: 'https://registry.npmjs.org'
 
       - name: Install dependencies
-        run: yarn install --immutable --immutable-cache --check-cache
+        run: yarn install --immutable --check-cache
 
       # For generating playwright json report for avt tests
       - name: Install browsers
@@ -87,6 +87,7 @@ jobs:
             })
 
   packages:
+    needs: build
     runs-on: ubuntu-latest
     # only promote the packages to latest if the version is not a release candidate
     if: contains(github.ref_name, '-rc') == false
