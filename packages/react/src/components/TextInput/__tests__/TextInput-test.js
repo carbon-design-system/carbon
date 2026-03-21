@@ -138,6 +138,56 @@ describe('TextInput', () => {
       );
     });
 
+    it('should set aria-errormessage to the invalid message element id', () => {
+      render(
+        <TextInput
+          id="input-1"
+          labelText="TextInput"
+          invalid
+          invalidText="This is invalid text"
+        />
+      );
+
+      const input = screen.getByRole('textbox');
+      expect(input).toHaveAttribute('aria-errormessage', 'input-1-error-msg');
+      expect(input).toHaveAttribute('aria-invalid', 'true');
+      expect(screen.getByText('This is invalid text')).toHaveAttribute(
+        'id',
+        'input-1-error-msg'
+      );
+    });
+
+    it('should use aria-describedby for helper text when not invalid', () => {
+      render(
+        <TextInput
+          id="input-1"
+          labelText="TextInput"
+          helperText="Helper copy"
+        />
+      );
+
+      const helper = screen.getByText('Helper copy');
+      const input = screen.getByRole('textbox');
+      expect(input).toHaveAttribute('aria-describedby', helper.id);
+      expect(input).not.toHaveAttribute('aria-errormessage');
+    });
+
+    it('should not set aria-describedby to helper id when invalid', () => {
+      render(
+        <TextInput
+          id="input-1"
+          labelText="TextInput"
+          invalid
+          invalidText="Error"
+          helperText="Helper copy"
+        />
+      );
+
+      const input = screen.getByRole('textbox');
+      expect(input).toHaveAttribute('aria-errormessage', 'input-1-error-msg');
+      expect(input).not.toHaveAttribute('aria-describedby');
+    });
+
     it('should respect labelText prop', () => {
       render(<TextInput id="input-1" labelText="TextInput label" />);
 

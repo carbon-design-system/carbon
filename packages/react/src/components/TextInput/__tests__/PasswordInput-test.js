@@ -159,6 +159,24 @@ describe('PasswordInput', () => {
       );
     });
 
+    it('should set aria-errormessage to the invalid message element id', () => {
+      render(
+        <PasswordInput
+          id="input-1"
+          labelText="PasswordInput label"
+          invalid
+          invalidText="This is invalid text"
+        />
+      );
+
+      const input = screen.getByLabelText('PasswordInput label');
+      expect(input).toHaveAttribute('aria-errormessage', 'input-1-error-msg');
+      expect(screen.getByText('This is invalid text')).toHaveAttribute(
+        'id',
+        'input-1-error-msg'
+      );
+    });
+
     it('should respect labelText prop', () => {
       render(<PasswordInput id="input-1" labelText="TextInput label" />);
 
