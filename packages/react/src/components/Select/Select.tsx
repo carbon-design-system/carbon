@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2025
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -8,12 +8,13 @@
 import PropTypes from 'prop-types';
 import React, {
   cloneElement,
+  forwardRef,
   useContext,
   useState,
   type ChangeEventHandler,
   type ComponentPropsWithRef,
-  type ForwardedRef,
   type ReactNode,
+  type SelectHTMLAttributes,
 } from 'react';
 import classNames from 'classnames';
 import {
@@ -52,8 +53,7 @@ export interface SelectProps
   /**
    * Optionally provide the default value of the `<select>`
    */
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
-  defaultValue?: any;
+  defaultValue?: SelectHTMLAttributes<HTMLSelectElement>['defaultValue'];
 
   /**
    * Specify whether the control is disabled
@@ -142,7 +142,7 @@ export interface SelectProps
   warnText?: ReactNode;
 }
 
-const Select = React.forwardRef(
+const Select = forwardRef<HTMLSelectElement, SelectProps>(
   (
     {
       className,
@@ -157,7 +157,7 @@ const Select = React.forwardRef(
       hideLabel = false,
       invalid = false,
       invalidText = '',
-      helperText = '',
+      helperText,
       light = false,
       readOnly,
       size,
@@ -166,16 +166,15 @@ const Select = React.forwardRef(
       onChange,
       slug,
       ...other
-    }: SelectProps,
-    ref: ForwardedRef<HTMLSelectElement>
+    },
+    ref
   ) => {
     const prefix = usePrefix();
     const { isFluid } = useContext(FormContext);
     const [isFocused, setIsFocused] = useState(false);
 
     interface SelectItemProps {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
-      value: any;
+      value: SelectHTMLAttributes<HTMLSelectElement>['defaultValue'];
       text: string;
     }
     // Convert children to an array of valid elements once using type narrowing
@@ -233,8 +232,8 @@ const Select = React.forwardRef(
     const helperTextClasses = classNames(`${prefix}--form__helper-text`, {
       [`${prefix}--form__helper-text--disabled`]: normalizedProps.disabled,
     });
-
-    const helper = helperText ? (
+    const hasHelper = typeof helperText !== 'undefined' && helperText !== null;
+    const helper = hasHelper ? (
       <Text
         as="div"
         id={normalizedProps.helperId}
@@ -252,7 +251,7 @@ const Select = React.forwardRef(
     }
 
     const handleFocus = (evt) => {
-      setIsFocused(evt.type === 'focus' ? true : false);
+      setIsFocused(evt.type === 'focus');
     };
 
     const handleChange = (evt) => {

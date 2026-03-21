@@ -6,23 +6,26 @@
  */
 
 if (typeof Element.prototype.closest !== 'function') {
-  Element.prototype.closest = function closestElement(selector: string) {
+  Element.prototype.closest = function closestElement(
+    this: Element,
+    selector: string
+  ) {
     const doc = this.ownerDocument;
-    for (
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20452
-      // @ts-ignore
-      // eslint-disable-next-line @typescript-eslint/no-this-alias
-      let traverse: Node | null = this;
-      traverse && traverse !== doc;
-      traverse = traverse.parentNode
-    ) {
+    const findClosest = (traverse: Node | null): Element | null => {
+      if (!traverse || traverse === doc) {
+        return null;
+      }
+
       if (
         traverse.nodeType === Node.ELEMENT_NODE &&
         (traverse as Element).matches(selector)
       ) {
         return traverse as Element;
       }
-    }
-    return null;
+
+      return findClosest(traverse.parentNode);
+    };
+
+    return findClosest(this);
   };
 }

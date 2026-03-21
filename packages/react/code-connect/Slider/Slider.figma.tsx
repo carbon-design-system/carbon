@@ -1,11 +1,10 @@
 /**
- * Copyright IBM Corp. 2016, 2024
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20452
 // @ts-nocheck
 import React from 'react';
 import { Slider, SliderSkeleton } from '@carbon/react';
@@ -22,16 +21,16 @@ figma.connect(
       }),
       invalidText: figma.string('Error text'),
       warnText: figma.string('Warning text'),
-      disabled: figma.enum('Status', {
+      disabled: figma.enum('State', {
         Disabled: true,
       }),
-      invalid: figma.enum('Status', {
+      invalid: figma.enum('State', {
         Error: true,
       }),
-      readOnly: figma.enum('Status', {
+      readOnly: figma.enum('State', {
         'Read-only': true,
       }),
-      warn: figma.enum('Status', {
+      warn: figma.enum('State', {
         Warning: true,
       }),
       textInput: figma.nestedProps('Text input - Default', {
@@ -87,7 +86,7 @@ figma.connect(
   SliderSkeleton,
   'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=3673-40574&m=dev',
   {
-    variant: { Status: 'Skeleton' },
+    variant: { State: 'Skeleton' },
     example: () => <SliderSkeleton />,
   }
 );

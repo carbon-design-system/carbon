@@ -1,32 +1,30 @@
 /**
- * Copyright IBM Corp. 2016, 2025
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 import React, {
+  forwardRef,
+  useEffect,
   useRef,
-  type ForwardedRef,
   type ComponentProps,
   type FocusEvent,
   type KeyboardEvent,
   type MouseEventHandler,
-  isValidElement,
-  createContext,
-  type JSX,
 } from 'react';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 import { AriaLabelPropType } from '../../prop-types/AriaPropTypes';
-import { CARBON_SIDENAV_ITEMS } from './_utils';
 import { usePrefix } from '../../internal/usePrefix';
 import { keys, match } from '../../internal/keyboard';
 import { useMergedRefs } from '../../internal/useMergedRefs';
 import { useWindowEvent } from '../../internal/useEvent';
 import { useDelayedState } from '../../internal/useDelayedState';
+import { SideNavContextProvider } from './SideNavContext';
 import { breakpoints } from '@carbon/layout';
 import { useMatchMedia } from '../../internal/useMatchMedia';
-// TO-DO: comment back in when footer is added for rails
+// TODO: comment back in when footer is added for rails
 // import SideNavFooter from './SideNavFooter';
 
 export interface SideNavProps {
@@ -36,10 +34,9 @@ export interface SideNavProps {
   onToggle?: (
     event: FocusEvent<HTMLElement> | KeyboardEvent<HTMLElement> | boolean,
     value: boolean
-    // eslint-disable-next-line   @typescript-eslint/no-invalid-void-type -- https://github.com/carbon-design-system/carbon/issues/20452
-  ) => void | undefined;
+  ) => void;
   href?: string | undefined;
-  // TO-DO: comment back in when footer is added for rails
+  // TODO: comment back in when footer is added for rails
   // translateById?: ((id: TranslationId) => Translation) | undefined;
   isFixedNav?: boolean | undefined;
   isRail?: boolean | undefined;
@@ -47,22 +44,14 @@ export interface SideNavProps {
   addFocusListeners?: boolean | undefined;
   addMouseListeners?: boolean | undefined;
   onOverlayClick?: MouseEventHandler<HTMLDivElement> | undefined;
-  // eslint-disable-next-line   @typescript-eslint/no-invalid-void-type -- https://github.com/carbon-design-system/carbon/issues/20452
-  onSideNavBlur?: () => void | undefined;
+  onSideNavBlur?: () => void;
   enterDelayMs?: number;
-  inert?: boolean;
 }
 
-interface SideNavContextData {
-  isRail?: boolean | undefined;
-}
+const frFn = forwardRef<HTMLElement, SideNavProps & ComponentProps<'nav'>>;
 
-export const SideNavContext = createContext<SideNavContextData>(
-  {} as SideNavContextData
-);
-
-function SideNavRenderFunction(
-  {
+const SideNav = frFn((props, ref) => {
+  const {
     expanded: expandedProp,
     defaultExpanded = false,
     isChildOfHeader = true,
@@ -71,7 +60,7 @@ function SideNavRenderFunction(
     children,
     onToggle,
     className: customClassName,
-    // TO-DO: comment back in when footer is added for rails
+    // TODO: comment back in when footer is added for rails
     // translateById: t = (id) => translations[id],
     href,
     isFixedNav = false,
@@ -83,16 +72,15 @@ function SideNavRenderFunction(
     onSideNavBlur,
     enterDelayMs = 100,
     ...other
-  }: SideNavProps & ComponentProps<'nav'>,
-  ref: ForwardedRef<HTMLElement>
-) {
+  } = props;
+
   const prefix = usePrefix();
   const { current: controlled } = useRef(expandedProp !== undefined);
   const [expandedState, setExpandedState] = useDelayedState(defaultExpanded);
   const [expandedViaHoverState, setExpandedViaHoverState] =
     useDelayedState(defaultExpanded);
   const expanded = controlled ? expandedProp : expandedState;
-  const sideNavRef = useRef<HTMLDivElement>(null);
+  const sideNavRef = useRef<HTMLElement>(null);
   const navRef = useMergedRefs([sideNavRef, ref]);
 
   const handleToggle: typeof onToggle = (event, value = !expanded) => {
@@ -112,7 +100,7 @@ function SideNavRenderFunction(
     'aria-labelledby': ariaLabelledBy,
   };
 
-  // TO-DO: comment back in when footer is added for rails
+  // TODO: comment back in when footer is added for rails
   // const assistiveText = expanded
   //   ? t('carbon.sidenav.state.open')
   //   : t('carbon.sidenav.state.closed');
@@ -131,29 +119,10 @@ function SideNavRenderFunction(
     [`${prefix}--side-nav__overlay-active`]: expanded || expandedViaHoverState,
   });
 
-  let childrenToRender = children;
-
-  // Pass the expansion state as a prop, so children can update themselves to match
-  childrenToRender = React.Children.map(children, (child) => {
-    // if we are controlled, check for if we have hovered over or the expanded state, else just use the expanded state (uncontrolled)
-    const currentExpansionState = controlled
-      ? expandedViaHoverState || expanded
-      : expanded;
-    if (isValidElement(child)) {
-      const childJsxElement = child as JSX.Element;
-      // avoid spreading `isSideNavExpanded` to non-Carbon UI Shell children
-      return React.cloneElement(childJsxElement, {
-        ...(CARBON_SIDENAV_ITEMS.includes(
-          childJsxElement.type?.displayName ?? childJsxElement.type?.name
-        )
-          ? {
-              isSideNavExpanded: currentExpansionState,
-            }
-          : {}),
-      });
-    }
-    return child;
-  });
+  // In controlled mode, rail hover can temporarily expand SideNav.
+  const currentExpansionState = controlled
+    ? expandedViaHoverState || expanded
+    : expanded;
 
   const eventHandlers: Partial<
     Pick<
@@ -231,9 +200,24 @@ function SideNavRenderFunction(
 
   const lgMediaQuery = `(min-width: ${breakpoints.lg.width})`;
   const isLg = useMatchMedia(lgMediaQuery);
+  const inertEnabled = !isRail ? !(expanded || isLg) : false;
+
+  useEffect(() => {
+    const node = sideNavRef.current;
+
+    if (!node) return;
+
+    if (inertEnabled) {
+      node.setAttribute('inert', '');
+    } else {
+      node.removeAttribute('inert');
+    }
+  }, [inertEnabled]);
 
   return (
-    <SideNavContext.Provider value={{ isRail }}>
+    <SideNavContextProvider
+      isRail={isRail}
+      isSideNavExpanded={currentExpansionState}>
       {isFixedNav ? null : (
         // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
         <div className={overlayClassName} onClick={onOverlayClick} />
@@ -242,17 +226,14 @@ function SideNavRenderFunction(
         tabIndex={-1}
         ref={navRef}
         className={`${prefix}--side-nav__navigation ${className}`}
-        inert={!isRail ? !(expanded || isLg) : undefined}
         {...accessibilityLabel}
         {...eventHandlers}
         {...other}>
-        {childrenToRender}
+        {children}
       </nav>
-    </SideNavContext.Provider>
+    </SideNavContextProvider>
   );
-}
-
-const SideNav = React.forwardRef(SideNavRenderFunction);
+});
 
 SideNav.displayName = 'SideNav';
 
@@ -351,3 +332,5 @@ SideNav.propTypes = {
 };
 
 export default SideNav;
+
+export { SideNavContext } from './SideNavContext';

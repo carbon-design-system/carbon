@@ -1,11 +1,18 @@
 /**
- * Copyright IBM Corp. 2016, 2025
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useRef, useState, type HTMLAttributes } from 'react';
+import React, {
+  useRef,
+  useState,
+  type ChangeEvent,
+  type DragEvent,
+  type HTMLAttributes,
+  type SyntheticEvent,
+} from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { keys, matches } from '../../internal/keyboard';
@@ -161,19 +168,46 @@ function FileUploaderDropContainer({
     }, []);
   }
 
-  function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
-    const files = [...(event.target.files ?? [])];
-    const filesToValidate = multiple ? files : [files[0]];
-    const addedFiles = validateFiles(filesToValidate);
-    return onAddFiles(event, { addedFiles });
-  }
+  const handleFiles = (event: SyntheticEvent<HTMLElement>, files: File[]) => {
+    if (!files.length) return onAddFiles(event, { addedFiles: [] });
 
-  function handleDrop(event: React.DragEvent<HTMLDivElement>) {
-    const files = [...event.dataTransfer.files];
     const filesToValidate = multiple ? files : [files[0]];
     const addedFiles = validateFiles(filesToValidate);
+
     return onAddFiles(event, { addedFiles });
-  }
+  };
+
+  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const files = [...(event.target.files ?? [])];
+
+    return handleFiles(event, files);
+  };
+
+  const handleDrop = (event: DragEvent<HTMLDivElement>) => {
+    const items = [...(event.dataTransfer.items ?? [])];
+    const files = items.length
+      ? // Normalize dropped items to files. Skip directories and non-file items.
+        items.reduce<File[]>((acc, item) => {
+          if (item.kind !== 'file') {
+            return acc;
+          }
+
+          const entry = item.webkitGetAsEntry();
+          if (entry?.isDirectory) {
+            return acc;
+          }
+
+          const file = item.getAsFile();
+          if (file) {
+            acc.push(file);
+          }
+
+          return acc;
+        }, [])
+      : [...event.dataTransfer.files];
+
+    return handleFiles(event, files);
+  };
 
   const handleClick = () => {
     if (!disabled) {

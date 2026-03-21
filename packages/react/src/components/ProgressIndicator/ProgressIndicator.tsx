@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2025
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -7,7 +7,7 @@
 
 import cx from 'classnames';
 import PropTypes from 'prop-types';
-import React, { useState } from 'react';
+import React from 'react';
 import { keys, matches } from '../../internal/keyboard';
 import {
   CheckmarkOutline,
@@ -82,20 +82,12 @@ function ProgressIndicator({
   ...rest
 }: ProgressIndicatorProps) {
   const prefix = usePrefix();
-  const [currentIndex, setCurrentIndex] = useState(controlledIndex);
-  const [prevControlledIndex, setPrevControlledIndex] =
-    useState(controlledIndex);
   const className = cx({
     [`${prefix}--progress`]: true,
     [`${prefix}--progress--vertical`]: vertical,
     [`${prefix}--progress--space-equal`]: spaceEqually && !vertical,
     [customClassName ?? '']: customClassName,
   });
-
-  if (controlledIndex !== prevControlledIndex) {
-    setCurrentIndex(controlledIndex);
-    setPrevControlledIndex(controlledIndex);
-  }
 
   return (
     <ul className={className} {...rest}>
@@ -106,22 +98,22 @@ function ProgressIndicator({
 
         // only setup click handlers if onChange event is passed
         const onClick = onChange ? () => onChange(index) : undefined;
-        if (index === currentIndex) {
+        if (index === controlledIndex) {
           return React.cloneElement(child, {
             complete: child.props.complete,
-            current: child.props.complete ? false : true,
+            current: !child.props.complete,
             index,
             onClick,
           });
         }
-        if (index < currentIndex) {
+        if (index < controlledIndex) {
           return React.cloneElement(child, {
             complete: true,
             index,
             onClick,
           });
         }
-        if (index > currentIndex) {
+        if (index > controlledIndex) {
           return React.cloneElement(child, {
             complete: child.props.complete || false,
             index,
@@ -327,7 +319,7 @@ function ProgressStep({
         })}
         disabled={disabled}
         aria-disabled={disabled}
-        tabIndex={!current && onClick && !disabled ? 0 : -1}
+        tabIndex={disabled ? -1 : 0}
         onClick={!current ? onClick : undefined}
         onKeyDown={handleKeyDown}
         title={label}
@@ -340,11 +332,11 @@ function ProgressStep({
           prefix={prefix}
         />
         <div className={`${prefix}--progress-text`}>
-          <Text as="p" className={`${prefix}--progress-label`}>
+          <Text as="span" className={`${prefix}--progress-label`}>
             {label}
           </Text>
           {secondaryLabel !== null && secondaryLabel !== undefined ? (
-            <Text as="p" className={`${prefix}--progress-optional`}>
+            <Text as="span" className={`${prefix}--progress-optional`}>
               {secondaryLabel}
             </Text>
           ) : null}

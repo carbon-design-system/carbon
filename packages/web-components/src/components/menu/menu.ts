@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2024, 2025
+ * Copyright IBM Corp. 2024, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -13,7 +13,11 @@ import { carbonElement as customElement } from '../../globals/decorators/carbon-
 import HostListener from '../../globals/decorators/host-listener';
 import HostListenerMixin from '../../globals/mixins/host-listener';
 import { classMap } from 'lit/directives/class-map.js';
-import { MenuContext, menuDefaultState } from './menu-context';
+import {
+  MenuContext,
+  menuDefaultState,
+  type MenuContextUpdate,
+} from './menu-context';
 import CDSmenuItem, { MENU_CLOSE_ROOT_EVENT } from './menu-item';
 import { consume, provide } from '@lit/context';
 import { MENU_BACKGROUND_TOKEN, MENU_SIZE } from './defs';
@@ -38,7 +42,7 @@ class CDSMenu extends HostListenerMixin(LitElement) {
   @consume({ context: MenuContext })
   context = {
     ...menuDefaultState,
-    updateFromChild: (updatedItem) => {
+    updateFromChild: (updatedItem: MenuContextUpdate) => {
       this.context = {
         ...this.context,
         ...updatedItem,
@@ -510,11 +514,12 @@ class CDSMenu extends HostListenerMixin(LitElement) {
   _registerMenuItems = () => {
     let items;
     if (this.isChild) {
-      items = (
-        this.querySelector('slot[name="submenu"]') as HTMLSlotElement
-      ).assignedElements();
+      const submenuSlot = this.querySelector(
+        'slot[name="submenu"]'
+      ) as HTMLSlotElement | null;
+      items = submenuSlot?.assignedElements() ?? [];
     } else {
-      items = this.shadowRoot?.querySelector('slot')?.assignedElements();
+      items = this.shadowRoot?.querySelector('slot')?.assignedElements() ?? [];
     }
     this.items = items?.filter((item) => {
       if (item.tagName === 'CDS-MENU-ITEM') {

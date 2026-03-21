@@ -1,11 +1,12 @@
 /**
- * Copyright IBM Corp. 2025
+ * Copyright IBM Corp. 2025, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
 import { expect, fixture, html, oneEvent } from '@open-wc/testing';
+import { sendKeys } from '@web/test-runner-commands';
 import '@carbon/web-components/es/components/multi-select/index.js';
 
 const generateItems = (count, itemGenerator) => {
@@ -407,6 +408,54 @@ describe('cds-multi-select', function () {
       }
     });
 
+    it('should render the clear button with tabindex="-1"', async () => {
+      const el = await fixture(html`
+        <cds-multi-select label="test-label" filterable>
+          <cds-multi-select-item value="apple">Apple</cds-multi-select-item>
+          <cds-multi-select-item value="banana">Banana</cds-multi-select-item>
+        </cds-multi-select>
+      `);
+
+      const trigger = el.shadowRoot.querySelector('.cds--list-box__field');
+      trigger.click();
+      await el.updateComplete;
+
+      const filterInput = el.shadowRoot.querySelector('input');
+      filterInput.value = 'app';
+      filterInput.dispatchEvent(new Event('input', { bubbles: true }));
+      await el.updateComplete;
+
+      // Clear buttton should render with tabindex="-1"
+      const clearButton = el.shadowRoot.querySelector('#clear-button');
+      expect(clearButton).to.exist;
+      expect(clearButton.getAttribute('tabindex')).to.equal('-1');
+    });
+
+    it('should clear the input on blur', async () => {
+      const el = await fixture(html`
+        <cds-multi-select label="test-label" filterable>
+          <cds-multi-select-item value="apple">Apple</cds-multi-select-item>
+          <cds-multi-select-item value="banana">Banana</cds-multi-select-item>
+        </cds-multi-select>
+      `);
+
+      const trigger = el.shadowRoot.querySelector('.cds--list-box__field');
+      trigger.click();
+      await el.updateComplete;
+
+      const filterInput = el.shadowRoot.querySelector('input');
+      filterInput.value = 'app';
+
+      // Tab away
+      await sendKeys({ press: 'Tab' });
+      await el.updateComplete;
+
+      // Input should be cleared
+      expect(filterInput.value).to.equal('');
+      const clearButton = el.shadowRoot.querySelector('#clear-button');
+      expect(clearButton).to.not.exist;
+    });
+
     it('should open the menu with arrow down and close with escape', async () => {
       const el = await fixture(html`
         <cds-multi-select label="test-label" filterable>
@@ -646,6 +695,68 @@ describe('cds-multi-select', function () {
       expect(el.open).to.be.true;
       const listbox = el.shadowRoot.querySelector('[part="menu-body"]');
       expect(listbox).to.exist;
+    });
+
+    it('should clear input on Escape', async () => {
+      const el = await fixture(html`
+        <cds-multi-select label="test-label" filterable>
+          <cds-multi-select-item value="apple">Apple</cds-multi-select-item>
+          <cds-multi-select-item value="banana">Banana</cds-multi-select-item>
+        </cds-multi-select>
+      `);
+
+      const filterInput = el.shadowRoot.querySelector('input');
+      const escapeClick = new KeyboardEvent('keydown', {
+        key: 'Escape',
+        bubbles: true,
+      });
+
+      // type 'test' in <input>
+      filterInput.value = 'test';
+      filterInput.dispatchEvent(new Event('input', { bubbles: true }));
+      await el.updateComplete;
+      expect(filterInput.value).to.equal('test');
+      expect(el.open).to.be.true;
+
+      // click Escape to close the menu
+      filterInput.dispatchEvent(escapeClick);
+      await el.updateComplete;
+      expect(el.open).to.be.false;
+
+      // click Escape again to clear input
+      filterInput.dispatchEvent(escapeClick);
+      await el.updateComplete;
+      expect(filterInput.value).to.equal('');
+    });
+
+    it('should clear selections on Escape', async () => {
+      const el = await fixture(html`
+        <cds-multi-select label="test-label" filterable value="item-0">
+          <cds-multi-select-item value="item-0" selected
+            >Item 0</cds-multi-select-item
+          >
+        </cds-multi-select>
+      `);
+
+      await el.updateComplete;
+      expect(el.value).to.equal('item-0');
+
+      const escapeClick = new KeyboardEvent('keydown', {
+        key: 'Escape',
+        bubbles: true,
+      });
+
+      const filterInput = el.shadowRoot.querySelector('input');
+
+      // click Escape to close the menu
+      filterInput.dispatchEvent(escapeClick);
+      await el.updateComplete;
+      expect(el.open).to.be.false;
+
+      // click Escape again to clear selections
+      filterInput.dispatchEvent(escapeClick);
+      await el.updateComplete;
+      expect(el.value).to.equal('');
     });
   });
 
@@ -1220,6 +1331,78 @@ describe('cds-multi-select', function () {
         'This field is required'
       );
     });
+
+    it('should not have invalid classname when is disabled', async () => {
+      const el = await fixture(html`
+        <cds-multi-select
+          label="test-label"
+          invalid
+          invalid-text="Invalid message"
+          disabled>
+          <cds-multi-select-item value="item-0">Item 0</cds-multi-select-item>
+        </cds-multi-select>
+      `);
+
+      const multiSelectDropdown =
+        el.shadowRoot.querySelector('.cds--multi-select');
+      expect(multiSelectDropdown.className).not.to.contain(
+        'cds--multi-select--invalid'
+      );
+    });
+
+    it('should not have invalid classname when is readOnly', async () => {
+      const el = await fixture(html`
+        <cds-multi-select
+          label="test-label"
+          invalid
+          invalid-text="Invalid message"
+          read-only>
+          <cds-multi-select-item value="item-0">Item 0</cds-multi-select-item>
+        </cds-multi-select>
+      `);
+
+      const multiSelectDropdown =
+        el.shadowRoot.querySelector('.cds--multi-select');
+      expect(multiSelectDropdown.className).not.to.contain(
+        'cds--multi-select--invalid'
+      );
+    });
+
+    it('should not have warn classname when is disabled', async () => {
+      const el = await fixture(html`
+        <cds-multi-select
+          label="test-label"
+          warn
+          warn-text="Warn message"
+          disabled>
+          <cds-multi-select-item value="item-0">Item 0</cds-multi-select-item>
+        </cds-multi-select>
+      `);
+
+      const multiSelectDropdown =
+        el.shadowRoot.querySelector('.cds--multi-select');
+      expect(multiSelectDropdown.className).not.to.contain(
+        'cds--multi-select--warn'
+      );
+    });
+
+    it('should not have warn classname when is readOnly', async () => {
+      const el = await fixture(html`
+        <cds-multi-select
+          label="test-label"
+          warn
+          warn-text="Warn message"
+          read-only>
+          <cds-multi-select-item value="item-0">Item 0</cds-multi-select-item>
+        </cds-multi-select>
+      `);
+
+      const multiSelectDropdown =
+        el.shadowRoot.querySelector('.cds--multi-select');
+      expect(multiSelectDropdown.className).not.to.contain(
+        'cds--multi-select--warn'
+      );
+    });
   });
 
   describe('Selection Feedback Modes', () => {
@@ -1399,7 +1582,7 @@ describe('cds-multi-select', function () {
   });
 
   describe('Enhanced Keyboard Interactions', () => {
-    it('should clear selection when clear button is focused and Enter is pressed', async () => {
+    it('should clear selection when selection-button is clicked', async () => {
       const el = await fixture(html`
         <cds-multi-select label="test-label" value="item-0">
           <cds-multi-select-item value="item-0" selected
@@ -1414,11 +1597,32 @@ describe('cds-multi-select', function () {
       const clearButton = el.shadowRoot.querySelector('#selection-button');
       expect(clearButton).to.exist;
 
-      const enterEvent = new KeyboardEvent('keypress', {
-        key: 'Enter',
+      clearButton.click();
+      await el.updateComplete;
+
+      expect(el.value).to.equal('');
+    });
+
+    it('should clear selections on Escape', async () => {
+      const el = await fixture(html`
+        <cds-multi-select label="test-label" value="item-0">
+          <cds-multi-select-item value="item-0" selected
+            >Item 0</cds-multi-select-item
+          >
+        </cds-multi-select>
+      `);
+
+      await el.updateComplete;
+      expect(el.value).to.equal('item-0');
+
+      const trigger = el.shadowRoot.querySelector('.cds--list-box__field');
+      expect(trigger).to.exist;
+
+      const escapeClick = new KeyboardEvent('keydown', {
+        key: 'Escape',
         bubbles: true,
       });
-      clearButton.dispatchEvent(enterEvent);
+      trigger.dispatchEvent(escapeClick);
       await el.updateComplete;
 
       expect(el.value).to.equal('');

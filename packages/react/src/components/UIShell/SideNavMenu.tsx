@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2025
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -9,16 +9,18 @@ import { ChevronDown } from '@carbon/icons-react';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 import React, {
-  ForwardedRef,
-  ReactNode,
-  Ref,
+  forwardRef,
+  useEffect,
   useContext,
+  useRef,
   useState,
+  type ReactNode,
+  type Ref,
 } from 'react';
 import SideNavIcon from './SideNavIcon';
 import { keys, match } from '../../internal/keyboard';
 import { usePrefix } from '../../internal/usePrefix';
-import { SideNavContext } from './SideNav';
+import { SideNavContext } from './SideNavContext';
 
 export interface SideNavMenuProps {
   /**
@@ -67,7 +69,7 @@ export interface SideNavMenuProps {
   title: string;
 }
 
-const SideNavMenu = React.forwardRef<HTMLElement, SideNavMenuProps>(
+const SideNavMenu = forwardRef<HTMLElement, SideNavMenuProps>(
   (
     {
       className: customClassName,
@@ -80,12 +82,15 @@ const SideNavMenu = React.forwardRef<HTMLElement, SideNavMenuProps>(
       tabIndex,
       title,
     },
-    ref: ForwardedRef<HTMLElement>
+    ref
   ) => {
-    const { isRail } = useContext(SideNavContext);
+    const { isRail, isSideNavExpanded: contextIsSideNavExpanded } =
+      useContext(SideNavContext);
+    const currentIsSideNavExpanded =
+      isSideNavExpanded ?? contextIsSideNavExpanded;
     const prefix = usePrefix();
     const [isExpanded, setIsExpanded] = useState<boolean>(defaultExpanded);
-    const [prevExpanded, setPrevExpanded] = useState<boolean>(defaultExpanded);
+    const prevExpandedRef = useRef(false);
     const className = cx({
       [`${prefix}--side-nav__item`]: true,
       [`${prefix}--side-nav__item--active`]:
@@ -95,13 +100,17 @@ const SideNavMenu = React.forwardRef<HTMLElement, SideNavMenuProps>(
       [customClassName as string]: !!customClassName,
     });
 
-    if (!isSideNavExpanded && isExpanded && isRail) {
-      setIsExpanded(false);
-      setPrevExpanded(true);
-    } else if (isSideNavExpanded && prevExpanded && isRail) {
-      setIsExpanded(true);
-      setPrevExpanded(false);
-    }
+    useEffect(() => {
+      if (!isRail) return;
+
+      if (!currentIsSideNavExpanded && isExpanded) {
+        setIsExpanded(false);
+        prevExpandedRef.current = true;
+      } else if (currentIsSideNavExpanded && prevExpandedRef.current) {
+        setIsExpanded(true);
+        prevExpandedRef.current = false;
+      }
+    }, [currentIsSideNavExpanded, isExpanded, isRail]);
 
     return (
       // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
@@ -122,7 +131,7 @@ const SideNavMenu = React.forwardRef<HTMLElement, SideNavMenuProps>(
           type="button"
           tabIndex={
             tabIndex === undefined
-              ? !isSideNavExpanded && !isRail
+              ? !currentIsSideNavExpanded && !isRail
                 ? -1
                 : 0
               : tabIndex

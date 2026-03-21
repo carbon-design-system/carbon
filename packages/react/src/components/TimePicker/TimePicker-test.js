@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -123,7 +123,7 @@ describe('TimePicker', () => {
       expect(onBlur).not.toHaveBeenCalled();
     });
 
-    it('should update value and prevValue when value changes', () => {
+    it('should update value when value prop changes', () => {
       const { rerender } = render(
         <TimePicker id="time-picker" value="10:00" />
       );
@@ -148,6 +148,11 @@ describe('TimePicker', () => {
     it('renders a label as expected', () => {
       render(<TimePicker id="time-picker" labelText="🐳" />);
       expect(screen.getByLabelText('🐳')).toBeInTheDocument();
+    });
+
+    it('renders labelText with value 0', () => {
+      render(<TimePicker id="time-picker" labelText={0} />);
+      expect(screen.getByLabelText('0')).toBeInTheDocument();
     });
   });
 

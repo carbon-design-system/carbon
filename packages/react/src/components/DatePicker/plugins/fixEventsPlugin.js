@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -12,21 +12,53 @@ import { match, keys } from '../../../internal/keyboard';
  * @returns {Plugin} A Flatpickr plugin to fix Flatpickr's behavior of certain events.
  */
 export default (config) => (fp) => {
-  const { inputFrom, inputTo, lastStartValue } = config;
+  const { inputFrom, inputTo, lastStartValue, container } = config;
+  // Avoid closing when mousedown starts inside but click lands outside after
+  // scroll or blur (e.g., scrollable modal masks).
+  let mouseDownInside = false;
+
+  const getEventPath = (event) =>
+    typeof event.composedPath === 'function' ? event.composedPath() : [];
+
+  const isEventInside = (event) => {
+    const path = getEventPath(event);
+    return Boolean(
+      (container &&
+        (path.includes(container) || container.contains(event.target))) ||
+        (fp.calendarContainer &&
+          (path.includes(fp.calendarContainer) ||
+            fp.calendarContainer.contains(event.target))) ||
+        (inputFrom &&
+          (path.includes(inputFrom) || inputFrom.contains(event.target))) ||
+        (inputTo && (path.includes(inputTo) || inputTo.contains(event.target)))
+    );
+  };
+
   /**
    * Handles `click` outside to close calendar
    */
   const handleClickOutside = (event) => {
-    if (
-      !fp.isOpen ||
-      fp.calendarContainer.contains(event.target) ||
-      event.target === inputFrom ||
-      event.target === inputTo
-    ) {
+    if (mouseDownInside) {
+      mouseDownInside = false;
       return;
     }
+
+    if (!fp.isOpen || isEventInside(event)) {
+      mouseDownInside = false;
+      return;
+    }
+
+    mouseDownInside = false;
     fp.close();
   };
+
+  /**
+   * Tracks the initial mouse target to avoid closing on click after scroll.
+   */
+  const handleMouseDown = (event) => {
+    mouseDownInside = isEventInside(event);
+  };
+
   /**
    * Handles `keydown` event.
    */
@@ -141,6 +173,7 @@ export default (config) => (fp) => {
       inputTo.removeEventListener('blur', handleBlur, true);
     }
     inputFrom.removeEventListener('keydown', handleKeydown, true);
+    document.removeEventListener('mousedown', handleMouseDown, true);
     document.removeEventListener('click', handleClickOutside, true);
   };
 
@@ -155,6 +188,7 @@ export default (config) => (fp) => {
       inputTo.addEventListener('keydown', handleKeydown, true);
       inputTo.addEventListener('blur', handleBlur, true);
     }
+    document.addEventListener('mousedown', handleMouseDown, true);
     document.addEventListener('click', handleClickOutside, true);
   };
 

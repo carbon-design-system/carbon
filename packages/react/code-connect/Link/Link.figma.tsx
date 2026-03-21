@@ -14,7 +14,9 @@ figma.connect(
   'https://www.figma.com/file/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?type=design&node-id=50111-991&mode=design&t=kyFCPK0tCeufcNP2-4',
   {
     props: {
-      inline: figma.boolean('Inline'),
+      inline: figma.enum('Type', {
+        Inline: true,
+      }),
       linkText: figma.string('Link text'),
       renderIcon: figma.instance('Swap icon'),
       size: figma.enum('Size', {

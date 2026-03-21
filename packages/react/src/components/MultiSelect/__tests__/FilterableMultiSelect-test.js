@@ -1,11 +1,11 @@
 /**
- * Copyright IBM Corp. 2016, 2025
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
+import React, { StrictMode } from 'react';
 import { act, render, screen } from '@testing-library/react';
 import { getByText } from '@carbon/test-utils/dom';
 import userEvent from '@testing-library/user-event';
@@ -86,6 +86,85 @@ describe('FilterableMultiSelect', () => {
       container.querySelector('[aria-expanded="true"][aria-haspopup="listbox"]')
     ).toBeFalsy();
   });
+
+  it('should display helper text instead of warning when disabled', async () => {
+    render(
+      <FilterableMultiSelect
+        {...mockProps}
+        disabled
+        warn
+        warnText="Warning message"
+        helperText="Helper text"
+      />
+    );
+    await waitForPosition();
+
+    const warnMessage = screen.queryByText('Warning message');
+    const helper = screen.queryByText('Helper text');
+    expect(helper).toBeInTheDocument();
+    expect(warnMessage).not.toBeInTheDocument();
+  });
+
+  it('should display helper text instead of warning when readOnly', async () => {
+    render(
+      <FilterableMultiSelect
+        readOnly
+        warn
+        warnText="Warning message"
+        helperText="Helper text"
+        {...mockProps}
+      />
+    );
+    await waitForPosition();
+
+    const warnMessage = screen.queryByText('Warning message');
+    const helper = screen.queryByText('Helper text');
+    expect(warnMessage).not.toBeInTheDocument();
+    expect(helper).toBeInTheDocument();
+  });
+
+  it('should display helper text instead of invalid message when disabled', async () => {
+    const { container } = render(
+      <FilterableMultiSelect
+        {...mockProps}
+        disabled
+        invalid
+        invalidText="Invalid message"
+        helperText="Helper text"
+      />
+    );
+    await waitForPosition();
+
+    const multiselectComponent = container.firstChild;
+    const inputComponent = multiselectComponent.childNodes[1];
+    const invalidMessage = screen.queryByText('Invalid message');
+    const helper = screen.queryByText('Helper text');
+    expect(inputComponent).not.toHaveAttribute('data-invalid', 'true');
+    expect(invalidMessage).not.toBeInTheDocument();
+    expect(helper).toBeInTheDocument();
+  });
+
+  it('should display helper text instead of invalid message when readOnly', async () => {
+    const { container } = render(
+      <FilterableMultiSelect
+        readOnly
+        invalid
+        invalidText="Invalid message"
+        helperText="Helper text"
+        {...mockProps}
+      />
+    );
+    await waitForPosition();
+
+    const multiselectComponent = container.firstChild;
+    const inputComponent = multiselectComponent.childNodes[1];
+    const invalidMessage = screen.queryByText('Invalid message');
+    const helper = screen.queryByText('Helper text');
+    expect(inputComponent).not.toHaveAttribute('data-invalid', 'true');
+    expect(invalidMessage).not.toBeInTheDocument();
+    expect(helper).toBeInTheDocument();
+  });
+
   it('should initially have the menu open when open prop is provided', async () => {
     render(<FilterableMultiSelect {...mockProps} open />);
     await waitForPosition();
@@ -456,6 +535,13 @@ describe('FilterableMultiSelect', () => {
     );
   });
 
+  it('should render helperText with value 0', async () => {
+    render(<FilterableMultiSelect {...mockProps} helperText={0} />);
+    await waitForPosition();
+
+    expect(screen.getByText('0')).toBeInTheDocument();
+  });
+
   it('should handle hideLabel prop', async () => {
     render(
       <FilterableMultiSelect {...mockProps} titleText="Test Title" hideLabel />
@@ -662,6 +748,42 @@ describe('FilterableMultiSelect', () => {
     rerender(<FilterableMultiSelect {...mockProps} open={false} />);
     await waitForPosition();
     assertMenuClosed();
+  });
+
+  it('should not log render phase update warnings for controlled open changes in StrictMode', async () => {
+    const errorSpy = jest.spyOn(console, 'error').mockImplementation(() => {});
+
+    try {
+      const { rerender } = render(
+        <StrictMode>
+          <FilterableMultiSelect {...mockProps} open={false} />
+        </StrictMode>
+      );
+      await waitForPosition();
+
+      rerender(
+        <StrictMode>
+          <FilterableMultiSelect {...mockProps} open />
+        </StrictMode>
+      );
+      await waitForPosition();
+
+      rerender(
+        <StrictMode>
+          <FilterableMultiSelect {...mockProps} open={false} />
+        </StrictMode>
+      );
+      await waitForPosition();
+
+      const errors = errorSpy.mock.calls.flat().join(' ');
+
+      expect(errors).not.toContain(
+        'Cannot update a component while rendering a different component'
+      );
+      expect(errors).not.toContain('Too many re-renders');
+    } finally {
+      errorSpy.mockRestore();
+    }
   });
 
   it('should have proper aria attributes for accessibility', async () => {

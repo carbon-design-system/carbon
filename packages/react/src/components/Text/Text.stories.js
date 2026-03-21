@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -77,7 +77,6 @@ export const SetTextDirection = () => {
         }
         return 'auto';
       }}>
-      {/* // TODO: These radio buttons don't work. */}
       <RadioButtonGroup
         legendText={legendText}
         name="radio-button-group"
@@ -90,13 +89,13 @@ export const SetTextDirection = () => {
         />
         <RadioButton
           labelText="שלום עולם Option 2"
-          value="radio-1"
-          id="radio-1"
+          value="radio-2"
+          id="radio-2"
         />
         <RadioButton
           labelText="שלום עולם Option 3"
-          value="radio-1"
-          id="radio-1"
+          value="radio-3"
+          id="radio-3"
         />
       </RadioButtonGroup>
     </TextDirection>
@@ -124,13 +123,13 @@ export const UsageExamples = () => {
         <Text>{rtlText}</Text>
       </Button>
       <div style={{ width: 400 }}>
-        {/* // TODO: This dropdown doesn't work. */}
         <Dropdown
           id="default"
           titleText="Using <Text> with `itemToElement`"
           helperText="This is some helper text"
           label="Dropdown menu options"
           items={dropdownItems}
+          itemToString={(item) => (item ? item.text : '')}
           itemToElement={(item) => <Text>{item.text}</Text>}
         />
       </div>

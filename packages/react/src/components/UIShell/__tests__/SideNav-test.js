@@ -1,13 +1,14 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
-import { render, screen, fireEvent } from '@testing-library/react';
+import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import React from 'react';
 import SideNav from '../SideNav';
+import SideNavLink from '../SideNavLink';
 
 Object.defineProperty(window, 'matchMedia', {
   writable: true,
@@ -139,21 +140,7 @@ describe('SideNav', () => {
     expect(container).toBeInTheDocument();
   });
 
-  it('should pass isSideNavExpanded to Carbon SideNav children', () => {
-    const TestChild = React.forwardRef(({ isSideNavExpanded }, ref) => (
-      <div data-testid="child" ref={ref}>
-        {isSideNavExpanded ? 'Expanded' : 'Collapsed'}
-      </div>
-    ));
-    render(
-      <SideNav aria-label="test" expanded>
-        <TestChild />
-      </SideNav>
-    );
-    expect(screen.getByTestId('child')).toHaveTextContent('Collapsed');
-  });
-
-  it('should not pass isSideNavExpanded to non-CarbonSideNav children', () => {
+  it('should render non-Carbon children without injecting props', () => {
     const NonCarbonChild = () => <div data-testid="non-carbon-child" />;
     render(
       <SideNav aria-label="test" expanded>
@@ -163,24 +150,28 @@ describe('SideNav', () => {
     expect(screen.getByTestId('non-carbon-child')).toBeInTheDocument();
   });
 
-  it('should pass isSideNavExpanded correctly based on controlled state', () => {
-    const TestChild = React.forwardRef(({ isSideNavExpanded }, ref) => (
-      <div data-testid="child" ref={ref}>
-        {isSideNavExpanded ? 'Expanded' : 'Collapsed'}
-      </div>
-    ));
+  it('should provide expansion state to SideNavLink through context', () => {
     const { rerender } = render(
       <SideNav aria-label="test" expanded>
-        <TestChild />
+        <SideNavLink href="#example">Example</SideNavLink>
       </SideNav>
     );
-    expect(screen.getByTestId('child')).toHaveTextContent('Collapsed');
+
+    expect(screen.getByRole('link', { name: 'Example' })).toHaveAttribute(
+      'tabindex',
+      '0'
+    );
+
     rerender(
-      <SideNav aria-label="test">
-        <TestChild />
+      <SideNav aria-label="test" expanded={false}>
+        <SideNavLink href="#example">Example</SideNavLink>
       </SideNav>
     );
-    expect(screen.getByTestId('child')).toHaveTextContent('Collapsed');
+
+    expect(screen.getByRole('link', { name: 'Example' })).toHaveAttribute(
+      'tabindex',
+      '-1'
+    );
   });
 
   it('should call handleToggle and onSideNavBlur when blurred', () => {
@@ -333,5 +324,52 @@ describe('SideNav', () => {
     mockHeaderMenuButton.focus();
     fireEvent.keyDown(window, { key: 'Tab' });
     expect(document.activeElement).toBe(sideNav);
+  });
+
+  it('should set inert when not rail, not expanded, and below lg', async () => {
+    render(<SideNav aria-label="test" expanded={false} isRail={false} />);
+
+    const nav = screen.getByRole('navigation');
+
+    await waitFor(() => {
+      expect(nav).toHaveAttribute('inert');
+    });
+  });
+
+  it('should remove inert when expanded', async () => {
+    const { rerender } = render(
+      <SideNav aria-label="test" expanded={false} isRail={false} />
+    );
+
+    const nav = screen.getByRole('navigation');
+
+    await waitFor(() => expect(nav).toHaveAttribute('inert'));
+
+    rerender(<SideNav aria-label="test" expanded isRail={false} />);
+
+    await waitFor(() => {
+      expect(nav).not.toHaveAttribute('inert');
+    });
+  });
+
+  it('should not set inert at or above lg breakpoint', async () => {
+    window.matchMedia.mockImplementationOnce((query) => ({
+      matches: true,
+      media: query,
+      onchange: null,
+      addListener: jest.fn(),
+      removeListener: jest.fn(),
+      addEventListener: jest.fn(),
+      removeEventListener: jest.fn(),
+      dispatchEvent: jest.fn(),
+    }));
+
+    render(<SideNav aria-label="test" expanded={false} isRail={false} />);
+
+    const nav = screen.getByRole('navigation');
+
+    await waitFor(() => {
+      expect(nav).not.toHaveAttribute('inert');
+    });
   });
 });

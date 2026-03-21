@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2025
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -23,11 +23,7 @@ export const useOutsideClick = <T extends HTMLElement | null>(
   // treated as a constant as it will be false when executed in a Node.js
   // environment and true when executed in the browser
   if (canUseDOM) {
-    // TODO: https://github.com/carbon-design-system/carbon/issues/19005
-    /*
     // eslint-disable-next-line react-hooks/rules-of-hooks
-    */
-    // eslint-disable-next-line  react-hooks/rules-of-hooks -- https://github.com/carbon-design-system/carbon/issues/20452
     useWindowEvent('click', (event) => {
       const { target } = event;
 
