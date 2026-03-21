@@ -20,7 +20,7 @@ jobs:
     steps:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
       - name: Use Node.js version from .nvmrc
-        uses: actions/setup-node@6044e13b5dc448c55e2357c09f80417699197238 # v6.2.0
+        uses: actions/setup-node@53b83947a5a98c8d113130e565377fae1a50d02f # v6.3.0
         with:
           node-version-file: '.nvmrc'
       - name: Run yarn dedupe
@@ -31,7 +31,7 @@ jobs:
     steps:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
       - name: Use Node.js version from .nvmrc
-        uses: actions/setup-node@6044e13b5dc448c55e2357c09f80417699197238 # v6.2.0
+        uses: actions/setup-node@53b83947a5a98c8d113130e565377fae1a50d02f # v6.3.0
         with:
           node-version-file: '.nvmrc'
       - name: Install dependencies
@@ -46,7 +46,7 @@ jobs:
     steps:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
       - name: Use Node.js version from .nvmrc
-        uses: actions/setup-node@6044e13b5dc448c55e2357c09f80417699197238 # v6.2.0
+        uses: actions/setup-node@53b83947a5a98c8d113130e565377fae1a50d02f # v6.3.0
         with:
           node-version-file: '.nvmrc'
       - name: Install dependencies
@@ -63,7 +63,7 @@ jobs:
     steps:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
       - name: Use Node.js version from .nvmrc
-        uses: actions/setup-node@6044e13b5dc448c55e2357c09f80417699197238 # v6.2.0
+        uses: actions/setup-node@53b83947a5a98c8d113130e565377fae1a50d02f # v6.3.0
         with:
           node-version-file: '.nvmrc'
       - uses: actions/cache@cdf6c1fa76f9f475f3d7449005a359c84ca0f306 # v5.0.3
@@ -99,7 +99,7 @@ jobs:
     steps:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
       - name: Use Node.js version from .nvmrc
-        uses: actions/setup-node@6044e13b5dc448c55e2357c09f80417699197238 # v6.2.0
+        uses: actions/setup-node@53b83947a5a98c8d113130e565377fae1a50d02f # v6.3.0
         with:
           node-version-file: '.nvmrc'
       - uses: actions/cache@cdf6c1fa76f9f475f3d7449005a359c84ca0f306 # v5.0.3
@@ -123,7 +123,7 @@ jobs:
       - name: Run tests
         run: |
           cd packages/web-components
-          yarn test --coverage
+          yarn test --coverage --puppeteer
       - name: Upload web-components coverage reports to Codecov
         uses: codecov/codecov-action@671740ac38dd9b0130fbe1cec585b89eea48d3de # v5.5.2
         with:
@@ -139,7 +139,7 @@ jobs:
     steps:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
       - name: Use Node.js version from .nvmrc
-        uses: actions/setup-node@6044e13b5dc448c55e2357c09f80417699197238 # v6.2.0
+        uses: actions/setup-node@53b83947a5a98c8d113130e565377fae1a50d02f # v6.3.0
         with:
           node-version-file: '.nvmrc'
       - uses: actions/cache@cdf6c1fa76f9f475f3d7449005a359c84ca0f306 # v5.0.3
@@ -156,7 +156,7 @@ jobs:
         env:
           YARN_ENABLE_HARDENED_MODE: 0
         run: yarn install --immutable
-      - uses: dorny/paths-filter@de90cc6fb38fc0963ad72b210f1f284cd68cea36 # v3.0.2
+      - uses: dorny/paths-filter@fbd0ab8f3e69293af611ebaee6363fc25e6d187d # v4.0.1
         id: filter
         with:
           filters: |
@@ -175,87 +175,6 @@ jobs:
         if: ${{ steps.filter.outputs.e2e == 'true' }}
         run: yarn test:e2e
 
-  vrt-runner:
-    strategy:
-      fail-fast: false
-      matrix:
-        shardIndex: [1, 2, 3, 4]
-        shardTotal: [4]
-    runs-on: ubuntu-latest-larger-disk
-    steps:
-      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
-      - name: Use Node.js version from .nvmrc
-        uses: actions/setup-node@6044e13b5dc448c55e2357c09f80417699197238 # v6.2.0
-        with:
-          node-version-file: '.nvmrc'
-      - uses: actions/cache@cdf6c1fa76f9f475f3d7449005a359c84ca0f306 # v5.0.3
-        if: github.event_name != 'merge_group'
-        id: cache
-        with:
-          path: |
-            node_modules
-            */**/node_modules
-          key:
-            ${{ runner.os }}-yarn-${{ hashFiles('yarn.lock',
-            'packages/**/yarn.lock') }}
-      - name: Install dependencies
-        env:
-          YARN_ENABLE_HARDENED_MODE: 0
-        run: yarn install --immutable
-      - name: Install browsers
-        run: yarn playwright install --with-deps
-      - name: Build project
-        run: yarn build
-      - name: Build storybook
-        run: yarn workspace @carbon/react storybook:build
-      - name: Run storybook
-        id: storybook
-        run: |
-          npx serve -l 3000 packages/react/storybook-static &
-          pid=$!
-          echo "pid=$pid" >> $GITHUB_OUTPUT
-      - uses: ./actions/wait-for-it
-        with:
-          URL: 'http://localhost:3000'
-        timeout-minutes: 3
-      - name: Run VRT
-        if:
-          ${{ github.repository == 'carbon-design-system/carbon' &&
-          github.event.pull_request.draft == false }}
-        env:
-          PERCY_TOKEN: c9a21a3fde4fda0a0f822d633426ab26e2ab2c1cba55221d342d4047744c8c24
-          PERCY_PARALLEL_TOTAL: 4
-        run: |
-          yarn percy exec --parallel -- yarn playwright test --project chromium --grep @vrt --shard="${{ matrix.shardIndex }}/${{ matrix.shardTotal }}"
-      - name: Dry run VRT on draft PRs
-        if:
-          ${{ github.repository == 'carbon-design-system/carbon' &&
-          github.event.pull_request.draft == true && github.base_ref != 'main'
-          }}
-        env:
-          PERCY_TOKEN: c9a21a3fde4fda0a0f822d633426ab26e2ab2c1cba55221d342d4047744c8c24
-          PERCY_PARALLEL_TOTAL: 4
-        run: |
-          yarn percy exec --parallel -- yarn playwright test --project chromium --grep @vrt --shard="${{ matrix.shardIndex }}/${{ matrix.shardTotal }}" --dry-run
-      - name: Stop storybook
-        run: kill ${{ steps.storybook.outputs.pid }}
-      - name: Upload blob report to GitHub Actions Artifacts
-        if: ${{ !cancelled() }}
-        uses: actions/upload-artifact@bbbca2ddaa5d8feaa63e36b76fdaad77386f024f #7.0.0
-        with:
-          name: playwright-vrt-blob-report-${{ matrix.shardIndex }}
-          path: blob-report
-          retention-days: 1
-
-  vrt:
-    if: ${{ always() }}
-    runs-on: ubuntu-latest
-    needs: vrt-runner
-    steps:
-      - name: Check VRT Runner job status
-        if: ${{ needs.vrt-runner.result != 'success' }}
-        run: exit 1
-
   avt-runner:
     strategy:
       fail-fast: false
@@ -266,7 +185,7 @@ jobs:
     steps:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
       - name: Use Node.js version from .nvmrc
-        uses: actions/setup-node@6044e13b5dc448c55e2357c09f80417699197238 # v6.2.0
+        uses: actions/setup-node@53b83947a5a98c8d113130e565377fae1a50d02f # v6.3.0
         with:
           node-version-file: '.nvmrc'
       - uses: actions/cache@cdf6c1fa76f9f475f3d7449005a359c84ca0f306 # v5.0.3
@@ -307,7 +226,7 @@ jobs:
         run: kill ${{ steps.storybook.outputs.pid }}
       - name: Upload blob report to GitHub Actions Artifacts
         if: ${{ !cancelled() }}
-        uses: actions/upload-artifact@bbbca2ddaa5d8feaa63e36b76fdaad77386f024f #7.0.0
+        uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f #6.0.0
         with:
           name: playwright-avt-blob-report-${{ matrix.shardIndex }}
           path: blob-report
@@ -323,17 +242,17 @@ jobs:
         run: exit 1
 
   merge-playwright-reports:
-    # Merge reports after *-runner jobs, even if some shards have failed
+    # Merge reports after avt-runner jobs, even if some shards have failed
     if:
       ${{ github.repository == 'carbon-design-system/carbon' && !cancelled() &&
       github.event.pull_request.draft == false }}
-    needs: [vrt-runner, avt-runner]
+    needs: [avt-runner]
 
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
       - name: Use Node.js version from .nvmrc
-        uses: actions/setup-node@6044e13b5dc448c55e2357c09f80417699197238 # v6.2.0
+        uses: actions/setup-node@53b83947a5a98c8d113130e565377fae1a50d02f # v6.3.0
         with:
           node-version-file: '.nvmrc'
       - uses: actions/cache@cdf6c1fa76f9f475f3d7449005a359c84ca0f306 # v5.0.3
@@ -351,25 +270,6 @@ jobs:
           YARN_ENABLE_HARDENED_MODE: 0
         run: yarn install --immutable
 
-      - name: Download vrt blob reports from GitHub Actions Artifacts
-        uses: actions/download-artifact@v8
-        with:
-          path: all-playwright-vrt-blob-reports
-          pattern: playwright-vrt-blob-report-*
-          merge-multiple: true
-
-      - name: Merge vrt reports into HTML Report
-        run:
-          npx playwright merge-reports --reporter html
-          ./all-playwright-vrt-blob-reports
-
-      - name: Upload vrt HTML report
-        uses: actions/upload-artifact@v7.0.0
-        with:
-          name: html-playwright-vrt-report--attempt-${{ github.run_attempt }}
-          path: playwright-vrt-report
-          retention-days: 14
-
       - name: Download avt blob reports from GitHub Actions Artifacts
         uses: actions/download-artifact@v8
         with:
@@ -383,7 +283,7 @@ jobs:
           ./all-playwright-avt-blob-reports
 
       - name: Upload avt HTML report
-        uses: actions/upload-artifact@v7.0.0
+        uses: actions/upload-artifact@v6.0.0
         with:
           name: html-playwright-avt-report--attempt-${{ github.run_attempt }}
           path: playwright-avt-report
@@ -405,7 +305,7 @@ jobs:
           # https://www.chromatic.com/docs/github-actions/#recommended-configuration-for-build-events
           ref: ${{ github.event.pull_request.head.sha }}
       - name: Use Node.js version from .nvmrc
-        uses: actions/setup-node@6044e13b5dc448c55e2357c09f80417699197238 # v6.2.0
+        uses: actions/setup-node@53b83947a5a98c8d113130e565377fae1a50d02f # v6.3.0
         with:
           node-version-file: '.nvmrc'
       - uses: actions/cache@cdf6c1fa76f9f475f3d7449005a359c84ca0f306 # v5.0.3
@@ -428,7 +328,7 @@ jobs:
         run: yarn workspace @carbon/react storybook:build --stats-json
       - id: chromatic
         name: Run Chromatic
-        uses: chromaui/action@5ec258af08deb3e8c36653bd618cb7fe52090031 # v15.2.0
+        uses: chromaui/action@93712e37669f856c4828136f9cb535dbfa60b50c # v15.1.1
         with:
           # 👇 Token is intentionally plaintext
           # https://www.chromatic.com/docs/github-actions/#run-chromatic-on-external-forks-of-open-source-projects
@@ -480,9 +380,12 @@ jobs:
   flag-agents-md-changes:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          fetch-depth: 0
       - name: Detect AGENTS.md changes
         id: changes
-        uses: dorny/paths-filter@de90cc6fb38fc0963ad72b210f1f284cd68cea36 # v3.0.2
+        uses: dorny/paths-filter@fbd0ab8f3e69293af611ebaee6363fc25e6d187d # v4.0.1
         with:
           filters: |
             added_or_modified:
