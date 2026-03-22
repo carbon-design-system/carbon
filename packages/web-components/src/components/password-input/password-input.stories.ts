@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2025
+ * Copyright IBM Corp. 2025, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -8,10 +8,6 @@
 import { html } from 'lit';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import './index';
-import { iconLoader } from '../../globals/internal/icon-loader';
-import View16 from '@carbon/icons/es/view/16.js';
-import FolderOpen16 from '@carbon/icons/es/folder--open/16.js';
-import Folders16 from '@carbon/icons/es/folders/16.js';
 import '../form/form-item';
 import '../icon-button';
 import {
@@ -19,22 +15,6 @@ import {
   INPUT_TOOLTIP_ALIGNMENT,
   INPUT_TOOLTIP_DIRECTION,
 } from './password-input';
-
-// eslint-disable-next-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20452
-const actions = html`
-  <cds-icon-button kind="ghost" slot="actions" size="lg">
-    ${iconLoader(View16, { slot: 'icon' })}
-    <span slot="tooltip-content"> View </span>
-  </cds-icon-button>
-  <cds-icon-button kind="ghost" slot="actions" size="lg">
-    ${iconLoader(FolderOpen16, { slot: 'icon' })}
-    <span slot="tooltip-content"> Open folder</span>
-  </cds-icon-button>
-  <cds-icon-button kind="ghost" slot="actions" size="lg">
-    ${iconLoader(Folders16, { slot: 'icon' })}
-    <span slot="tooltip-content"> Folders </span>
-  </cds-icon-button>
-`;
 
 const sizes = {
   [`Small size (${INPUT_SIZE.SMALL})`]: INPUT_SIZE.SMALL,

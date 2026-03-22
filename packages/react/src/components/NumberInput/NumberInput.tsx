@@ -606,6 +606,7 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
       }
       return defaultValue;
     });
+
     const numberParser = useMemo(
       () => new NumberParser(locale, formatOptions),
       [locale, formatOptions]
