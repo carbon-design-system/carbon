@@ -243,7 +243,7 @@
     fill: $icon-disabled;
   }
 
-  // Disabled takes precedence over readonly
+  // Disabled takes precedence over read-only
   .#{$prefix}--date-picker__input:disabled {
     background-color: $field;
     border-block-end: 1px solid transparent;
