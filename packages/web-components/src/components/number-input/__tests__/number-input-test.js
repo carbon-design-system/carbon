@@ -504,7 +504,7 @@ describe('<cds-number-input>', () => {
         expect(input.value).to.equal('10');
       });
 
-      it('should only increase the value on up arrow click if value is less than max', async () => {
+      it('should clamp values at min/max boundaries and only emit events when value changes', async () => {
         const el = await fixture(
           html`<cds-number-input
             type="text"
@@ -516,42 +516,46 @@ describe('<cds-number-input>', () => {
         el.value = '5';
         await el.updateComplete;
         const input = el.shadowRoot.querySelector('input');
-        const [, increment] = el.shadowRoot.querySelectorAll('button');
+        const [decrement, increment] = el.shadowRoot.querySelectorAll('button');
+
+        let eventCount = 0;
+        el.addEventListener('cds-number-input', () => {
+          eventCount++;
+        });
 
         expect(input.value).to.equal('5');
 
+        // Test incrementing to max boundary
+        // First click: 5 -> 10 (should emit event)
         increment.click();
         await el.updateComplete;
         expect(input.value).to.equal('10');
+        expect(eventCount).to.equal(1);
 
+        // Second click at max: 10 -> 10 (clamped, should NOT emit event)
         increment.click();
         await el.updateComplete;
         expect(input.value).to.equal('10');
-      });
+        expect(eventCount).to.equal(1); // Still 1, no new event
 
-      it('should only decrease the value on down arrow click if value is greater than min', async () => {
-        const el = await fixture(
-          html`<cds-number-input
-            type="text"
-            label="test-label"
-            min="0"
-            max="10"
-            step="5"></cds-number-input>`
-        );
-        el.value = '5';
+        // Test decrementing from max
+        // First click: 10 -> 5 (should emit event)
+        decrement.click();
         await el.updateComplete;
-        const input = el.shadowRoot.querySelector('input');
-        const [decrement] = el.shadowRoot.querySelectorAll('button');
-
         expect(input.value).to.equal('5');
+        expect(eventCount).to.equal(2);
 
+        // Second click: 5 -> 0 (should emit event)
         decrement.click();
         await el.updateComplete;
         expect(input.value).to.equal('0');
+        expect(eventCount).to.equal(3);
 
+        // Third click at min: 0 -> 0 (clamped, should NOT emit event)
         decrement.click();
         await el.updateComplete;
         expect(input.value).to.equal('0');
+        expect(eventCount).to.equal(3); // Still 3, no new event
       });
     });
 
@@ -1176,6 +1180,219 @@ describe('<cds-number-input>', () => {
         // Should display as "15%"
         expect(input.value).to.equal('15%');
       });
+
+      it('should preserve user-edited value when locale changes after editing', async () => {
+        const el = await fixture(
+          html`<cds-number-input
+            type="text"
+            value="1000"
+            locale="en-US"
+            label="Number"></cds-number-input>`
+        );
+        await el.updateComplete;
+        const input = el.shadowRoot.querySelector('input');
+
+        // Initial value should be formatted as "1,000" in en-US locale
+        expect(input.value).to.equal('1,000');
+
+        // User edits the value to 2000
+        input.value = '2000';
+        input.dispatchEvent(
+          new Event('input', { bubbles: true, composed: true })
+        );
+        await el.updateComplete;
+
+        // Blur to finalize the edit
+        input.dispatchEvent(
+          new Event('blur', { bubbles: true, composed: true })
+        );
+        await el.updateComplete;
+
+        // Value should now be formatted as "2,000"
+        expect(input.value).to.equal('2,000');
+
+        // Change locale to de-DE (uses . as thousands separator)
+        el.locale = 'de-DE';
+        await el.updateComplete;
+
+        // The edited value (2000) should be reformatted with new locale as "2.000"
+        // NOT revert to the original value (1000) formatted as "1.000"
+        expect(input.value).to.equal('2.000');
+      });
+
+      it('should preserve user-edited value when formatOptions change after editing', async () => {
+        const el = await fixture(
+          html`<cds-number-input
+            type="text"
+            value="50"
+            label="Number"></cds-number-input>`
+        );
+        await el.updateComplete;
+        const input = el.shadowRoot.querySelector('input');
+
+        // Initial value should be "50"
+        expect(input.value).to.equal('50');
+
+        // User edits the value to 75
+        input.value = '75';
+        input.dispatchEvent(
+          new Event('input', { bubbles: true, composed: true })
+        );
+        await el.updateComplete;
+
+        // Blur to finalize the edit
+        input.dispatchEvent(
+          new Event('blur', { bubbles: true, composed: true })
+        );
+        await el.updateComplete;
+
+        // Value should be "75"
+        expect(input.value).to.equal('75');
+
+        // Change formatOptions to use minimumFractionDigits
+        el.formatOptions = { minimumFractionDigits: 2 };
+        await el.updateComplete;
+
+        // The edited value (75) should be reformatted with new options as "75.00"
+        // NOT revert to the original value (50) formatted as "50.00"
+        expect(input.value).to.equal('75.00');
+      });
+
+      it('should emit cds-number-input event when using keyboard arrows (ArrowUp/ArrowDown)', async () => {
+        const el = await fixture(
+          html`<cds-number-input
+            type="text"
+            value="50"
+            label="Number"></cds-number-input>`
+        );
+        await el.updateComplete;
+        const input = el.shadowRoot.querySelector('input');
+
+        let eventCount = 0;
+        let lastEvent;
+        el.addEventListener('cds-number-input', (e) => {
+          eventCount++;
+          lastEvent = e;
+        });
+
+        // Simulate ArrowUp key press
+        const arrowUpEvent = new KeyboardEvent('keydown', {
+          key: 'ArrowUp',
+          bubbles: true,
+          composed: true,
+        });
+        input.dispatchEvent(arrowUpEvent);
+        await el.updateComplete;
+
+        // Event should be dispatched
+        expect(eventCount).to.equal(1);
+        expect(lastEvent.detail.value).to.equal(51);
+        expect(lastEvent.detail.direction).to.equal('up');
+        expect(input.value).to.equal('51');
+
+        // Simulate ArrowDown key press
+        const arrowDownEvent = new KeyboardEvent('keydown', {
+          key: 'ArrowDown',
+          bubbles: true,
+          composed: true,
+        });
+        input.dispatchEvent(arrowDownEvent);
+        await el.updateComplete;
+
+        // Event should be dispatched again
+        expect(eventCount).to.equal(2);
+        expect(lastEvent.detail.value).to.equal(50);
+        expect(lastEvent.detail.direction).to.equal('down');
+        expect(input.value).to.equal('50');
+      });
+    });
+
+    it('should not revert to defaultValue when deleting characters with type="text"', async () => {
+      const el = await fixture(
+        html`<cds-number-input
+          type="text"
+          default-value="50"
+          allow-empty
+          label="NumberInput label"
+          min="0"
+          max="100"></cds-number-input>`
+      );
+      const input = el.shadowRoot.querySelector('input');
+      await el.updateComplete;
+
+      // Initial value should be 50 from defaultValue
+      expect(input.value).to.equal('50');
+
+      // Simulate user deleting the last character (50 -> 5)
+      input.value = '5';
+      input.dispatchEvent(
+        new Event('input', { bubbles: true, composed: true })
+      );
+      await el.updateComplete;
+      expect(input.value).to.equal('5');
+
+      // Simulate user deleting the remaining character (5 -> empty)
+      input.value = '';
+      input.dispatchEvent(
+        new Event('input', { bubbles: true, composed: true })
+      );
+      await el.updateComplete;
+
+      // Should remain empty, NOT revert to defaultValue of 50
+      expect(input.value).to.equal('');
+
+      // Blur should also keep it empty (not revert to defaultValue)
+      input.dispatchEvent(new Event('blur', { bubbles: true, composed: true }));
+      await el.updateComplete;
+      expect(input.value).to.equal('');
+    });
+  });
+
+  describe('Min/max validation for type="number"', function () {
+    it('should show invalid state when value exceeds max', async function () {
+      const el = await fixture(html`
+        <cds-number-input
+          type="number"
+          value="50"
+          min="0"
+          max="100"></cds-number-input>
+      `);
+      const input = el.shadowRoot.querySelector('input');
+
+      // Initially valid
+      expect(el._getInputValidity()).to.be.true;
+      expect(input.hasAttribute('data-invalid')).to.be.false;
+
+      // Type a value exceeding max
+      input.value = '5023';
+      input.dispatchEvent(new Event('input', { bubbles: true }));
+      await el.updateComplete;
+
+      // Should be invalid
+      expect(el._getInputValidity()).to.be.false;
+      expect(input.hasAttribute('data-invalid')).to.be.true;
+      expect(el.value).to.equal('5023');
+    });
+
+    it('should show invalid state when value is below min', async function () {
+      const el = await fixture(html`
+        <cds-number-input
+          type="number"
+          value="50"
+          min="0"
+          max="100"></cds-number-input>
+      `);
+      const input = el.shadowRoot.querySelector('input');
+
+      // Type a value below min
+      input.value = '-10';
+      input.dispatchEvent(new Event('input', { bubbles: true }));
+      await el.updateComplete;
+
+      // Should be invalid
+      expect(el._getInputValidity()).to.be.false;
+      expect(input.hasAttribute('data-invalid')).to.be.true;
+      expect(el.value).to.equal('-10');
     });
   });
 });

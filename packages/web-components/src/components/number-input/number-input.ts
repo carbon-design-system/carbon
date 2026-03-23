@@ -80,6 +80,13 @@ class CDSNumberInput extends CDSTextInput {
   protected _invalid: boolean = false;
 
   /**
+   * Flag to track if the component has been interacted with by the user
+   * Used to prevent defaultValue from overriding user-cleared input
+   */
+  @state()
+  protected _hasUserInteraction: boolean = false;
+
+  /**
    * NumberFormatter instance for locale-based formatting
    */
   protected _numberFormatter: NumberFormatter | null = null;
@@ -102,27 +109,27 @@ class CDSNumberInput extends CDSTextInput {
           ? 'up'
           : 'down';
 
-      this.dispatchEvent(
-        new CustomEvent(
-          (this.constructor as typeof CDSNumberInput).eventInput,
-          {
-            bubbles: true,
-            composed: true,
-            cancelable: false,
-            detail: {
-              value,
-              direction,
-            },
-          }
-        )
-      );
+      this._dispatchInputEvent(value, direction);
       this._value = value;
+      // Request update to update invalid state
+      this.requestUpdate();
     } else if (this.type === NUMBER_INPUT_TYPE.TEXT) {
       const _value = this.allowEmpty && value === '' ? '' : value;
       const parsedValue = this._numberParser?.parse(_value) ?? NaN;
 
+      // Mark that user has interacted with the input
+      this._hasUserInteraction = true;
+
       this._numberValue = parsedValue;
       this._inputValue = _value;
+
+      // Update _value to keep it synchronized with the current numeric value
+      // This ensures locale/formatOptions changes use the current value, not stale data
+      if (!isNaN(parsedValue)) {
+        this._value = String(parsedValue);
+      } else if (this.allowEmpty && _value === '') {
+        this._value = '';
+      }
 
       // Validate on input when validate function is provided
       if (this.validate) {
@@ -140,47 +147,33 @@ class CDSNumberInput extends CDSTextInput {
   /**
    * Handles `click` event on the down button in the shadow DOM.
    */
-  protected _handleUserInitiatedStepDown(event: Event) {
+  protected _handleUserInitiatedStepDown() {
     const { _input: input } = this;
-    this._handleStep(event, 'down');
+    const valueChanged = this._handleStep('down');
 
-    const newValue =
-      this.type === NUMBER_INPUT_TYPE.TEXT ? this._numberValue : input.value;
+    // Only dispatch event if value actually changed
+    if (valueChanged) {
+      const newValue =
+        this.type === NUMBER_INPUT_TYPE.TEXT ? this._numberValue : input.value;
 
-    this.dispatchEvent(
-      new CustomEvent((this.constructor as typeof CDSNumberInput).eventInput, {
-        bubbles: true,
-        composed: true,
-        cancelable: false,
-        detail: {
-          value: newValue,
-          direction: 'down',
-        },
-      })
-    );
+      this._dispatchInputEvent(newValue, 'down');
+    }
   }
 
   /**
    * Handles `click` event on the up button in the shadow DOM.
    */
-  protected _handleUserInitiatedStepUp(event: Event) {
+  protected _handleUserInitiatedStepUp() {
     const { _input: input } = this;
-    this._handleStep(event, 'up');
+    const valueChanged = this._handleStep('up');
 
-    const newValue =
-      this.type === NUMBER_INPUT_TYPE.TEXT ? this._numberValue : input.value;
+    // Only dispatch event if value actually changed
+    if (valueChanged) {
+      const newValue =
+        this.type === NUMBER_INPUT_TYPE.TEXT ? this._numberValue : input.value;
 
-    this.dispatchEvent(
-      new CustomEvent((this.constructor as typeof CDSNumberInput).eventInput, {
-        bubbles: true,
-        composed: true,
-        cancelable: false,
-        detail: {
-          value: newValue,
-          direction: 'up',
-        },
-      })
-    );
+      this._dispatchInputEvent(newValue, 'up');
+    }
   }
 
   /**
@@ -237,24 +230,12 @@ class CDSNumberInput extends CDSTextInput {
           const direction =
             this._previousNumberValue < parsedFormattedValue ? 'up' : 'down';
 
-          this.dispatchEvent(
-            new CustomEvent(
-              (this.constructor as typeof CDSNumberInput).eventInput,
-              {
-                bubbles: true,
-                composed: true,
-                cancelable: false,
-                detail: {
-                  value: parsedFormattedValue,
-                  direction,
-                },
-              }
-            )
-          );
+          this._dispatchInputEvent(parsedFormattedValue, direction);
         }
 
         this._numberValue = parsedFormattedValue;
         this._previousNumberValue = parsedFormattedValue;
+        this._value = String(parsedFormattedValue);
         this._invalid = false;
       } else {
         this._invalid = true;
@@ -276,10 +257,20 @@ class CDSNumberInput extends CDSTextInput {
     if (this.type === NUMBER_INPUT_TYPE.TEXT) {
       if (event.key === 'ArrowUp') {
         event.preventDefault();
-        this._handleStep(event, 'up');
+        const valueChanged = this._handleStep('up');
+
+        // Only dispatch event if value actually changed
+        if (valueChanged) {
+          this._dispatchInputEvent(this._numberValue, 'up');
+        }
       } else if (event.key === 'ArrowDown') {
         event.preventDefault();
-        this._handleStep(event, 'down');
+        const valueChanged = this._handleStep('down');
+
+        // Only dispatch event if value actually changed
+        if (valueChanged) {
+          this._dispatchInputEvent(this._numberValue, 'down');
+        }
       }
     }
   }
@@ -479,8 +470,7 @@ class CDSNumberInput extends CDSTextInput {
         this._initializeFormatters();
       }
 
-      // - If val is a string, parse it (handles formatted strings and locale-specific input)
-      // - If val is a number, use it directly as the numeric value
+      // Parse the value: string values are parsed, numbers are used directly
       let parsed: number;
       if (typeof val === 'string') {
         parsed = this._numberParser?.parse(val) ?? Number(val);
@@ -488,20 +478,9 @@ class CDSNumberInput extends CDSTextInput {
         parsed = val as number;
       }
 
-      this._numberValue = parsed;
-      this._previousNumberValue = parsed;
-      this._inputValue = isNaN(parsed)
-        ? ''
-        : (this._numberFormatter?.format(parsed) ?? '');
-
-      // Set the internal value
-      this._value = String(val);
+      // Synchronize all text mode state
+      this._syncTextModeState(parsed, true);
       this.requestUpdate('value', oldValue);
-
-      // Set the formatted value on the input element
-      if (this._input) {
-        this._input.value = this._inputValue;
-      }
     } else {
       // For type="number" or empty values, use parent behavior
       super.value = val;
@@ -547,19 +526,37 @@ class CDSNumberInput extends CDSTextInput {
       }
     }
 
+    // Handle locale or formatOptions changes before render
+    if (
+      changedProperties.has('locale') ||
+      changedProperties.has('formatOptions')
+    ) {
+      this._initializeFormatters();
+
+      if (this.type === NUMBER_INPUT_TYPE.TEXT) {
+        // Re-format with new formatters
+        if (this._value) {
+          const parsed = Number(this._value);
+          if (!isNaN(parsed)) {
+            this._syncTextModeState(parsed, false);
+          }
+        } else if (!isNaN(this._numberValue)) {
+          this._syncTextModeState(this._numberValue, false);
+        }
+      }
+    }
+
     // Initialize from defaultValue if no value is set
     // This runs before every render, but only sets _value if it's empty
-    if (!this._value && this.defaultValue) {
+    // AND the user hasn't interacted with the input yet
+    if (!this._value && this.defaultValue && !this._hasUserInteraction) {
       if (this.type === NUMBER_INPUT_TYPE.TEXT) {
         const parsed = this._numberParser?.parse(this.defaultValue) ?? NaN;
-        this._numberValue = parsed;
-        this._previousNumberValue = parsed;
-        this._inputValue = isNaN(parsed)
-          ? ''
-          : (this._numberFormatter?.format(parsed) ?? '');
+        this._syncTextModeState(parsed, false);
+      } else {
+        // Set the internal value to defaultValue for non-text types
+        this._value = this.defaultValue;
       }
-      // Set the internal value to defaultValue
-      this._value = this.defaultValue;
     }
   }
 
@@ -569,36 +566,14 @@ class CDSNumberInput extends CDSTextInput {
   // @ts-expect-error - Override to accept changedProperties parameter
   updated(changedProperties: Map<string, unknown>) {
     super.updated?.();
+    // Update the DOM input element if formatOptions or locale changed
     if (
-      changedProperties.has('locale') ||
-      changedProperties.has('formatOptions')
+      (changedProperties.has('locale') ||
+        changedProperties.has('formatOptions')) &&
+      this.type === NUMBER_INPUT_TYPE.TEXT &&
+      this._input
     ) {
-      this._initializeFormatters();
-
-      if (this.type === NUMBER_INPUT_TYPE.TEXT) {
-        // If we have a value, re-format it with the new formatters
-        // This handles the case where formatOptions is set after value
-        if (this._value) {
-          const parsed = Number(this._value);
-          if (!isNaN(parsed)) {
-            this._numberValue = parsed;
-            this._previousNumberValue = parsed;
-            this._inputValue = this._numberFormatter?.format(parsed) ?? '';
-            if (this._input) {
-              this._input.value = this._inputValue;
-            }
-          }
-        } else if (!isNaN(this._numberValue)) {
-          // Re-format existing _numberValue (for locale/formatOptions changes)
-          this._inputValue =
-            this._numberFormatter?.format(this._numberValue) ?? '';
-
-          // Update the input element directly if it exists
-          if (this._input) {
-            this._input.value = this._inputValue;
-          }
-        }
-      }
+      this._input.value = this._inputValue;
     }
   }
 
@@ -700,8 +675,9 @@ class CDSNumberInput extends CDSTextInput {
 
   /**
    * Handle stepping up or down
+   * @returns true if the value changed, false if it was clamped to the same value
    */
-  protected _handleStep(_event: Event, direction: 'up' | 'down') {
+  protected _handleStep(direction: 'up' | 'down'): boolean {
     const currentValue =
       this.type === NUMBER_INPUT_TYPE.NUMBER
         ? Number(this._input.value)
@@ -754,39 +730,91 @@ class CDSNumberInput extends CDSTextInput {
       this.max !== '' ? Number(this.max) : Infinity
     );
 
+    // Check if value actually changed
+    const valueChanged = currentValue !== newValue;
+
     if (this.type === NUMBER_INPUT_TYPE.NUMBER) {
       this._value = String(newValue);
       this.value = this._value;
     } else if (this.type === NUMBER_INPUT_TYPE.TEXT) {
-      // Calling format() can alter the number (such as rounding it) causing
-      // the numberValue to mismatch the formatted value in the input.
-      // To avoid this, the newValue is re-parsed after formatting.
-      const formattedNewValue =
-        this._numberFormatter?.format(newValue) ?? String(newValue);
-      const parsedFormattedNewValue =
-        this._numberParser?.parse(formattedNewValue) ?? newValue;
-
-      this._numberValue = parsedFormattedNewValue;
-      this._inputValue = formattedNewValue;
-      this._previousNumberValue = parsedFormattedNewValue;
-      // Update the value property to reflect the numeric value
-      this._value = String(parsedFormattedNewValue);
+      // Synchronize text mode state after step operation
+      this._syncTextModeState(newValue, false);
       this.requestUpdate();
     }
+
+    return valueChanged;
   }
 
   /**
    * Handles incrementing the value in the input
    */
   stepUp() {
-    this._handleStep(new Event('step'), 'up');
+    this._handleStep('up');
   }
 
   /**
    * Handles decrementing the value in the input
    */
   stepDown() {
-    this._handleStep(new Event('step'), 'down');
+    this._handleStep('down');
+  }
+
+  protected _getInputValue() {
+    if (this.type === NUMBER_INPUT_TYPE.TEXT) {
+      // For type="text", use _inputValue directly without falling back to defaultValue
+      // defaultValue is only used during initialization (in willUpdate)
+      return this._inputValue;
+    }
+
+    return this._value || this.defaultValue || '';
+  }
+
+  protected _dispatchInputEvent(value: string | number, direction: string) {
+    this.dispatchEvent(
+      new CustomEvent((this.constructor as typeof CDSNumberInput).eventInput, {
+        bubbles: true,
+        composed: true,
+        cancelable: false,
+        detail: {
+          value,
+          direction,
+        },
+      })
+    );
+  }
+
+  /**
+   * Synchronizes text mode state by formatting a numeric value and updating all related state variables.
+   * This centralizes the logic for managing _numberValue, _inputValue, _previousNumberValue, and _value.
+   *
+   * @param numericValue - The numeric value to format and synchronize
+   * @param updateInput - Whether to update the DOM input element (default: false)
+   */
+  protected _syncTextModeState(
+    numericValue: number,
+    updateInput: boolean = false
+  ) {
+    // Format the numeric value
+    const formattedValue = isNaN(numericValue)
+      ? ''
+      : (this._numberFormatter?.format(numericValue) ?? String(numericValue));
+
+    // Parse the formatted value back to ensure consistency
+    // (formatting can alter the number, e.g., rounding)
+    const parsedValue = formattedValue
+      ? (this._numberParser?.parse(formattedValue) ?? numericValue)
+      : numericValue;
+
+    // Update all state variables
+    this._numberValue = parsedValue;
+    this._previousNumberValue = parsedValue;
+    this._inputValue = formattedValue;
+    this._value = String(parsedValue);
+
+    // Update DOM input if requested
+    if (updateInput && this._input) {
+      this._input.value = formattedValue;
+    }
   }
 
   render() {
@@ -815,6 +843,7 @@ class CDSNumberInput extends CDSTextInput {
       'slot-name': string;
       'slot-text': string;
       icon: ReturnType<typeof iconLoader>;
+      buttonsDisabled: boolean;
     } = {
       disabled: this.disabled,
       invalid: !this.readonly && !isValid,
@@ -822,6 +851,7 @@ class CDSNumberInput extends CDSTextInput {
       'slot-name': '',
       'slot-text': '',
       icon: null,
+      buttonsDisabled: this.disabled || this.readonly,
     };
 
     const wrapperClasses = classMap({
@@ -848,17 +878,7 @@ class CDSNumberInput extends CDSTextInput {
       [`${prefix}--form__helper-text--disabled`]: normalizedProps.disabled,
     });
 
-    // Determine the input value based on type
-    let inputValue: string;
-    if (this.type === NUMBER_INPUT_TYPE.TEXT) {
-      // For text type, use _inputValue if available, otherwise use defaultValue
-      inputValue =
-        this._inputValue ||
-        (this.defaultValue && !this._value ? this.defaultValue : '');
-    } else {
-      // For type="number", use _value if set, otherwise use defaultValue
-      inputValue = this._value || this.defaultValue || '';
-    }
+    const inputValue = this._getInputValue();
 
     const incrementButton = html`
       <button
@@ -868,7 +888,7 @@ class CDSNumberInput extends CDSTextInput {
         aria-live="polite"
         aria-atomic="true"
         type="button"
-        ?disabled=${normalizedProps.disabled || this.readonly}
+        ?disabled=${normalizedProps.buttonsDisabled}
         @click=${handleUserInitiatedStepUp}>
         ${iconLoader(Add16)}
       </button>
@@ -883,7 +903,7 @@ class CDSNumberInput extends CDSTextInput {
         aria-live="polite"
         aria-atomic="true"
         type="button"
-        ?disabled=${normalizedProps.disabled || this.readonly}
+        ?disabled=${normalizedProps.buttonsDisabled}
         @click=${handleUserInitiatedStepDown}>
         ${iconLoader(Subtract16)}
       </button>
@@ -973,7 +993,7 @@ class CDSNumberInput extends CDSTextInput {
         ${this.isFluid
           ? html`<hr class="${prefix}--number-input__divider" />`
           : null}
-        ${validationMessage ? validationMessage : helper}
+        ${validationMessage ?? helper}
       </div>
     `;
   }

@@ -7,6 +7,7 @@
 
 import { html } from 'lit';
 import { ifDefined } from 'lit/directives/if-defined.js';
+import { prefix } from '../../globals/settings';
 import { iconLoader } from '../../globals/internal/icon-loader';
 import View16 from '@carbon/icons/es/view/16.js';
 import FolderOpen16 from '@carbon/icons/es/folder--open/16.js';
@@ -163,7 +164,10 @@ const argTypes = {
     options: sizes,
   },
   onInput: {
-    action: 'input',
+    action: `${prefix}-number-input`,
+    table: {
+      disable: true,
+    },
   },
   type: {
     control: 'select',
@@ -263,7 +267,7 @@ export const Default = {
           input-mode="${ifDefined(inputMode)}"
           step-start-value="${ifDefined(stepStartValue)}"
           ?disable-wheel="${disableWheel}"
-          @input="${onInput}">
+          @cds-number-input="${onInput}">
         </cds-number-input>
       </cds-form-item>
     `;
@@ -309,26 +313,35 @@ export const Skeleton = {
 };
 
 export const WithAILabel = {
-  render: () => html`
-    <div style="width: 400px">
-      <cds-number-input
-        value="50"
-        min="0"
-        max="100"
-        step="1"
-        label="Number input"
-        helper-text="Optional helper text.">
-        <cds-ai-label alignment="bottom-left">
-          ${content}${actions}
-        </cds-ai-label>
-      </cds-number-input>
-    </div>
-  `,
+  argTypes,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  render: (args: any) => {
+    const { onInput } = args ?? {};
+    return html`
+      <div style="width: 400px">
+        <cds-number-input
+          value="50"
+          min="0"
+          max="100"
+          step="1"
+          label="Number input"
+          helper-text="Optional helper text."
+          invalid-text="Invalid value"
+          @cds-number-input="${onInput}">
+          <cds-ai-label alignment="bottom-left">
+            ${content}${actions}
+          </cds-ai-label>
+        </cds-number-input>
+      </div>
+    `;
+  },
 };
 
 export const WithTypeOfText = {
+  argTypes,
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  render: (_args: any, { globals: { locale } }: any) => {
+  render: (args: any, { globals: { locale } }: any) => {
+    const { onInput } = args ?? {};
     return html`
       <cds-form-item>
         <cds-number-input
@@ -342,7 +355,8 @@ export const WithTypeOfText = {
           locale="${locale}"
           label="NumberInput label"
           invalid-text="Number is not valid. Must be between 0 and 100000000"
-          helper-text="Optional helper text. Uses ${locale} formatting.">
+          helper-text="Optional helper text. Uses ${locale} formatting."
+          @cds-number-input="${onInput}">
         </cds-number-input>
       </cds-form-item>
     `;
@@ -350,8 +364,10 @@ export const WithTypeOfText = {
 };
 
 export const WithTypeOfTextControlled = {
+  argTypes,
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  render: (_args: any, { globals: { locale } }: any) => {
+  render: (args: any, { globals: { locale } }: any) => {
+    const { onInput } = args ?? {};
     return html`
       <cds-form-item>
         <cds-number-input
@@ -364,7 +380,8 @@ export const WithTypeOfTextControlled = {
           step="1"
           locale="${locale}"
           label="NumberInput label"
-          helper-text="Optional helper text. Uses ${locale} formatting.">
+          helper-text="Optional helper text. Uses ${locale} formatting."
+          @cds-number-input="${onInput}">
         </cds-number-input>
       </cds-form-item>
       <button
@@ -383,8 +400,10 @@ export const WithTypeOfTextControlled = {
 };
 
 export const WithTypeOfCustomValidation = {
+  argTypes,
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  render: (_args: any, { globals: { locale } }: any) => {
+  render: (args: any, { globals: { locale } }: any) => {
+    const { onInput } = args ?? {};
     // Custom user-passed validator
     const validateNumberSeparators = (
       input: string,
@@ -499,14 +518,15 @@ export const WithTypeOfCustomValidation = {
           type="text"
           input-mode="decimal"
           allow-empty
-          min="0"
+          min="-100000000"
           invalid-text="Number is not valid. Must be between -100000000 and 100000000"
           max="100000000"
           step="1"
           locale="${locale}"
           label="NumberInput label"
           helper-text="Optional helper text. Uses ${locale} formatting."
-          .validate="${validateNumberSeparators}">
+          .validate="${validateNumberSeparators}"
+          @cds-number-input="${onInput}">
         </cds-number-input>
       </cds-form-item>
       <button
@@ -527,74 +547,91 @@ export const WithTypeOfCustomValidation = {
 // Hidden Test-Only Story for an issue where invalid with AI-Label had incorrect styling. #20117
 export const InvalidWithAILabel = {
   tags: ['!dev', '!autodocs'], // hide story
-
-  render: () => html`
-    <div style="width: 400px">
-      <cds-number-input
-        value="50"
-        min="0"
-        max="100"
-        step="1"
-        label="Number input"
-        invalid
-        invalid-text="invalid">
-        <cds-ai-label alignment="bottom-left">
-          ${content}${actions}
-        </cds-ai-label>
-      </cds-number-input>
-    </div>
-  `,
+  argTypes,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  render: (args: any) => {
+    const { onInput } = args ?? {};
+    return html`
+      <div style="width: 400px">
+        <cds-number-input
+          value="50"
+          min="0"
+          max="100"
+          step="1"
+          label="Number input"
+          invalid
+          invalid-text="invalid"
+          @cds-number-input="${onInput}">
+          <cds-ai-label alignment="bottom-left">
+            ${content}${actions}
+          </cds-ai-label>
+        </cds-number-input>
+      </div>
+    `;
+  },
 };
 
 // Hidden Test-Only Story for an issue where warn with AI-Label had incorrect styling. #20117
 export const WarnWithAILabel = {
   tags: ['!dev', '!autodocs'], // hide story
-
-  render: () => html`
-    <div style="width: 400px">
-      <cds-number-input
-        value="50"
-        min="0"
-        max="100"
-        step="1"
-        label="Number input"
-        warn
-        warn-text="warning">
-        <cds-ai-label alignment="bottom-left">
-          ${content}${actions}
-        </cds-ai-label>
-      </cds-number-input>
-    </div>
-  `,
+  argTypes,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  render: (args: any) => {
+    const { onInput } = args ?? {};
+    return html`
+      <div style="width: 400px">
+        <cds-number-input
+          value="50"
+          min="0"
+          max="100"
+          step="1"
+          label="Number input"
+          warn
+          warn-text="warning"
+          @cds-number-input="${onInput}">
+          <cds-ai-label alignment="bottom-left">
+            ${content}${actions}
+          </cds-ai-label>
+        </cds-number-input>
+      </div>
+    `;
+  },
 };
 
 // Hidden Test-Only Story for an issue where disabled with AI-Label had incorrect styling. #20117
 export const DisabledWithAILabel = {
   tags: ['!dev', '!autodocs'], // hide story
-
-  render: () => html`
-    <div style="width: 400px">
-      <cds-number-input
-        value="50"
-        min="0"
-        max="100"
-        step="1"
-        label="Number input"
-        helper-text="Optional helper text."
-        disabled>
-        <cds-ai-label alignment="bottom-left">
-          ${content}${actions}
-        </cds-ai-label>
-      </cds-number-input>
-    </div>
-  `,
+  argTypes,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  render: (args: any) => {
+    const { onInput } = args ?? {};
+    return html`
+      <div style="width: 400px">
+        <cds-number-input
+          value="50"
+          min="0"
+          max="100"
+          step="1"
+          label="Number input"
+          helper-text="Optional helper text."
+          disabled
+          @cds-number-input="${onInput}">
+          <cds-ai-label alignment="bottom-left">
+            ${content}${actions}
+          </cds-ai-label>
+        </cds-number-input>
+      </div>
+    `;
+  },
 };
 
 // Hidden Test-Only Story for type="text" test scenarios
 export const TypeTextTestScenarios = {
   tags: ['!dev', '!autodocs'], // hide story
-
-  render: () => {
+  argTypes,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  render: (args: any) => {
+    const { onInput } = args ?? {};
     return html`
       <div style="display: flex; flex-direction: column; gap: 20px;">
         <h3>Type="text" Test Scenarios</h3>
@@ -610,7 +647,8 @@ export const TypeTextTestScenarios = {
             step="1"
             label="Basic type=text"
             invalid-text="Value must be between 0 and 10000000"
-            helper-text="Basic text input with value 50">
+            helper-text="Basic text input with value 50"
+            @cds-number-input="${onInput}">
           </cds-number-input>
         </cds-form-item>
 
@@ -625,7 +663,8 @@ export const TypeTextTestScenarios = {
             step="1"
             readonly
             label="Read-only"
-            helper-text="Read-only input, steppers disabled">
+            helper-text="Read-only input, steppers disabled"
+            @cds-number-input="${onInput}">
           </cds-number-input>
         </cds-form-item>
 
@@ -640,7 +679,8 @@ export const TypeTextTestScenarios = {
             step="1"
             disabled
             label="Disabled"
-            helper-text="Disabled input">
+            helper-text="Disabled input"
+            @cds-number-input="${onInput}">
           </cds-number-input>
         </cds-form-item>
 
@@ -655,7 +695,8 @@ export const TypeTextTestScenarios = {
             step="1"
             invalid-text="Value must be at least 10"
             label="Invalid (value < min)"
-            helper-text="Value 5 is below minimum 10">
+            helper-text="Value 5 is below minimum 10"
+            @cds-number-input="${onInput}">
           </cds-number-input>
         </cds-form-item>
 
@@ -671,7 +712,8 @@ export const TypeTextTestScenarios = {
             value="50"
             step="1"
             label="Allow empty"
-            helper-text="Can be cleared completely">
+            helper-text="Can be cleared completely"
+            @cds-number-input="${onInput}">
           </cds-number-input>
           <button
             @click="${() => {
@@ -694,7 +736,8 @@ export const TypeTextTestScenarios = {
             max="10000000"
             step="1"
             label="Decimal precision"
-            helper-text="Tests floating-point precision (15.01)">
+            helper-text="Tests floating-point precision (15.01)"
+            @cds-number-input="${onInput}">
           </cds-number-input>
         </cds-form-item>
 
@@ -708,7 +751,8 @@ export const TypeTextTestScenarios = {
             max="10000000"
             step="1000"
             label="Large numbers"
-            helper-text="Thousand separators (1,000)">
+            helper-text="Thousand separators (1,000)"
+            @cds-number-input="${onInput}">
           </cds-number-input>
         </cds-form-item>
 
@@ -723,7 +767,8 @@ export const TypeTextTestScenarios = {
             min="0"
             step="1"
             helper-text="German formatting (123.456)"
-            max="10000000"></cds-number-input>
+            max="10000000"
+            @cds-number-input="${onInput}"></cds-number-input>
         </cds-form-item>
 
         <!-- Percentage formatting -->
@@ -738,7 +783,8 @@ export const TypeTextTestScenarios = {
             step="0.05"
             label="Percentage format"
             helper-text="formatOptions: {style: 'percent'} (15%)"
-            .formatOptions="${{ style: 'percent' as const }}">
+            .formatOptions="${{ style: 'percent' as const }}"
+            @cds-number-input="${onInput}">
           </cds-number-input>
         </cds-form-item>
 
@@ -755,7 +801,8 @@ export const TypeTextTestScenarios = {
             .formatOptions="${{
               style: 'currency' as const,
               currency: 'USD' as const,
-            }}">
+            }}"
+            @cds-number-input="${onInput}">
           </cds-number-input>
         </cds-form-item>
 
@@ -770,7 +817,8 @@ export const TypeTextTestScenarios = {
             step="5"
             label="At maximum"
             invalid-text="Value must be between 0 and 10"
-            helper-text="Increment button disabled at max">
+            helper-text="Increment button disabled at max"
+            @cds-number-input="${onInput}">
           </cds-number-input>
         </cds-form-item>
 
@@ -785,7 +833,8 @@ export const TypeTextTestScenarios = {
             step="5"
             label="At minimum"
             invalid-text="Value must be between 0 and 10"
-            helper-text="Decrement button disabled at min">
+            helper-text="Decrement button disabled at min"
+            @cds-number-input="${onInput}">
           </cds-number-input>
         </cds-form-item>
 
@@ -800,7 +849,8 @@ export const TypeTextTestScenarios = {
             step="1"
             label="With helper text"
             invalid-text="Value must be between 0 and 10000000"
-            helper-text="This is helper text for the input">
+            helper-text="This is helper text for the input"
+            @cds-number-input="${onInput}">
           </cds-number-input>
         </cds-form-item>
 
@@ -815,7 +865,8 @@ export const TypeTextTestScenarios = {
             step="1"
             label="With AI Label"
             invalid-text="Value must be between 0 and 10000000"
-            helper-text="Has AI decorator">
+            helper-text="Has AI decorator"
+            @cds-number-input="${onInput}">
             <cds-ai-label alignment="bottom-left">
               ${content}${actions}
             </cds-ai-label>
