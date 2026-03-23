@@ -31,10 +31,12 @@ import InlineLoading from '../InlineLoading/InlineLoading';
 import { deprecate } from '../../prop-types/deprecate';
 
 const DialogContext = createContext<{
-  titleId?: string;
-  subtitleId?: string;
+  titleId?: string | undefined;
+  subtitleId?: string | undefined;
   dialogId?: string;
   isOpen?: boolean;
+  setTitleId?: (id: string | undefined) => void;
+  setSubtitleId?: (id: string | undefined) => void;
 }>({});
 
 /**
@@ -158,8 +160,8 @@ const Dialog = React.forwardRef(
     const prefix = usePrefix();
     const dialogId = useId();
 
-    const titleId = `${prefix}--dialog-header__heading--${dialogId}`;
-    const subtitleId = `${prefix}--dialog-header__label--${dialogId}`;
+    const [titleId, setTitleId] = useState<string | undefined>(undefined);
+    const [subtitleId, setSubtitleId] = useState<string | undefined>(undefined);
 
     // This component needs access to a ref, placed on the dialog, to call the
     // various imperative dialog functions (show(), close(), etc.).
@@ -226,6 +228,8 @@ const Dialog = React.forwardRef(
       titleId,
       subtitleId,
       isOpen: open,
+      setTitleId,
+      setSubtitleId,
     };
 
     useEffect(() => {
@@ -511,9 +515,19 @@ interface DialogTitleProps extends HTMLAttributes<HTMLHeadingElement> {
 const DialogTitle = React.forwardRef<HTMLHeadingElement, DialogTitleProps>(
   ({ children, className, id, ...rest }, ref) => {
     const prefix = usePrefix();
+    const { dialogId, setTitleId } = useContext(DialogContext);
 
-    const { titleId } = useContext(DialogContext);
-    const headingId = id || titleId;
+    // TODO: Add tests to verify scrollable DialogBody is correctly labelled by
+    // titleId/subtitleId custom values, default values, and fallbacks
+
+    // Generate default ID if not provided
+    const defaultTitleId = `${prefix}--dialog-header__heading--${dialogId}`;
+    const headingId = id ?? defaultTitleId;
+
+    useEffect(() => {
+      setTitleId?.(headingId);
+      return () => setTitleId?.(undefined);
+    }, [headingId, setTitleId]);
 
     return (
       <Text
@@ -574,8 +588,19 @@ const DialogSubtitle = React.forwardRef<
   DialogSubtitleProps
 >(({ children, className, id, ...rest }, ref) => {
   const prefix = usePrefix();
-  const { subtitleId } = useContext(DialogContext);
-  const labelId = id || subtitleId;
+  const { dialogId, setSubtitleId } = useContext(DialogContext);
+
+  // TODO: Add tests to verify scrollable DialogBody is correctly labelled by
+  // titleId/subtitleId custom values, default values, and fallbacks
+
+  // Generate default ID if not provided
+  const defaultSubtitleId = `${prefix}--dialog-header__label--${dialogId}`;
+  const labelId = id ?? defaultSubtitleId;
+
+  useEffect(() => {
+    setSubtitleId?.(labelId);
+    return () => setSubtitleId?.(undefined);
+  }, [labelId, setSubtitleId]);
 
   return (
     <Text
