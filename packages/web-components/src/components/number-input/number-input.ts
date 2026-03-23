@@ -389,23 +389,26 @@ class CDSNumberInput extends CDSTextInput {
   size = INPUT_SIZE.MEDIUM;
 
   /**
-   * Specify if the input should be of type text or number.
+   * **Experimental**: Specify if the input should be of type text or number.
    * Use type="text" with `locale`, `formatOptions`, and guide user input with `pattern` and `inputMode`.
+   * @experimental
    */
   @property({ reflect: true })
   // @ts-expect-error - Override parent type property with number-specific types
   type: 'number' | 'text' = NUMBER_INPUT_TYPE.NUMBER;
 
   /**
-   * Specify a BCP47 language code for parsing and formatting.
+   * **Experimental:** Specify a BCP47 language code for parsing and formatting.
    * Use with `type="text"`, has no effect when `type="number"`.
+   * @experimental
    */
   @property({ reflect: true })
   locale = 'en-US';
 
   /**
-   * Specify Intl.NumberFormat options applied to internal number parsing and formatting.
+   * **Experimental:** Specify Intl.NumberFormat options applied to internal number parsing and formatting.
    * Use with `type="text"`, has no effect when `type="number"`.
+   * @experimental
    */
   @property({ type: Object, attribute: 'format-options' })
   formatOptions: Intl.NumberFormatOptions = {};

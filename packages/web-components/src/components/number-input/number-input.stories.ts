@@ -12,7 +12,6 @@ import View16 from '@carbon/icons/es/view/16.js';
 import FolderOpen16 from '@carbon/icons/es/folder--open/16.js';
 import Folders16 from '@carbon/icons/es/folders/16.js';
 import { INPUT_SIZE } from '../text-input/text-input';
-import type CDSNumberInput from './number-input';
 import './number-input';
 import './number-input-skeleton';
 import '../form/form-item';
@@ -525,42 +524,6 @@ export const WithTypeOfCustomValidation = {
   },
 };
 
-export const TypeSwitching = {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  render: (_args: any, { globals: { locale } }: any) => {
-    return html`
-      <cds-form-item>
-        <cds-number-input
-          id="type-switch-input"
-          type="number"
-          value="1234.56"
-          min="0"
-          max="100000000"
-          step="0.01"
-          locale="${locale}"
-          label="Number Input with Type Switching"
-          helper-text="Click the button to switch between number and text types. The value should be preserved and formatted.">
-        </cds-number-input>
-      </cds-form-item>
-      <div style="margin-top: 1rem;">
-        <button
-          @click="${(e: Event) => {
-            const input = document.querySelector('#type-switch-input');
-            if (input) {
-              const currentType = input.getAttribute('type') || 'number';
-              const newType = currentType === 'number' ? 'text' : 'number';
-              input.setAttribute('type', newType);
-              (e.target as HTMLElement).textContent =
-                `Toggle Type (Current: ${newType})`;
-            }
-          }}">
-          Toggle Type (Current: number)
-        </button>
-      </div>
-    `;
-  },
-};
-
 // Hidden Test-Only Story for an issue where invalid with AI-Label had incorrect styling. #20117
 export const InvalidWithAILabel = {
   tags: ['!dev', '!autodocs'], // hide story
@@ -629,7 +592,7 @@ export const DisabledWithAILabel = {
 
 // Hidden Test-Only Story for type="text" test scenarios
 export const TypeTextTestScenarios = {
-  // tags: ['!dev', '!autodocs'], // hide story
+  tags: ['!dev', '!autodocs'], // hide story
 
   render: () => {
     return html`
@@ -858,41 +821,6 @@ export const TypeTextTestScenarios = {
             </cds-ai-label>
           </cds-number-input>
         </cds-form-item>
-      </div>
-    `;
-  },
-};
-export const Percentage = {
-  // tags: ['!dev', '!autodocs'], // hide story
-
-  render: () => {
-    const setToTwenty = (e: Event) => {
-      const root = (e.currentTarget as HTMLElement).closest('div') || document;
-      const input = root.querySelector(
-        'cds-number-input'
-      ) as CDSNumberInput | null;
-      if (input) {
-        input.value = '0.2';
-      }
-    };
-
-    return html`
-      <div>
-        <cds-form-item>
-          <cds-number-input
-            type="text"
-            input-mode="decimal"
-            value="0.15"
-            default-value="0.15"
-            min="0"
-            max="1"
-            step="0.05"
-            label="Percentage format"
-            .formatOptions="${{ style: 'percent' as const }}">
-          </cds-number-input>
-        </cds-form-item>
-
-        <cds-button @click=${setToTwenty}> Set to 20% </cds-button>
       </div>
     `;
   },
