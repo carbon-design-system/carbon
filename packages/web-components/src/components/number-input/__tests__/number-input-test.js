@@ -53,7 +53,7 @@ describe('<cds-number-input>', () => {
   });
 
   // Checks readonly behavior blocks interaction
-  it('should allow value change and emit event even in readonly mode (by current spec)', async () => {
+  it('should not allow value change or emit event in readonly mode', async () => {
     const el = await fixture(
       html`<cds-number-input
         value="5"
@@ -65,9 +65,14 @@ describe('<cds-number-input>', () => {
     let fired = false;
     el.addEventListener('cds-number-input', () => (fired = true));
 
+    // Buttons should be disabled in readonly mode
+    expect(increment.disabled).to.be.true;
+    expect(decrement.disabled).to.be.true;
+
     increment.click();
 
-    expect(fired).to.be.true;
+    // No event should fire since button is disabled
+    expect(fired).to.be.false;
   });
 
   it('should emit cds-number-input event with value and direction', async () => {
@@ -609,16 +614,52 @@ describe('<cds-number-input>', () => {
       // Input should be readonly
       expect(input.readOnly).to.be.true;
 
-      // Steppers should NOT be disabled in readonly mode (they're disabled via normalizedProps.disabled which checks !readonly)
-      // But they should not trigger changes
-      expect(increment.disabled).to.be.false;
-      expect(decrement.disabled).to.be.false;
+      // Steppers should be disabled in readonly mode to prevent value changes
+      expect(increment.disabled).to.be.true;
+      expect(decrement.disabled).to.be.true;
 
       increment.click();
       decrement.click();
 
-      // Events may fire in readonly mode based on current implementation
-      // The key is that the input itself is readonly
+      // No events should fire in readonly mode since buttons are disabled
+      expect(changeCount).to.equal(0);
+    });
+
+    it('should not update value via keyboard arrows when readonly', async () => {
+      const el = await fixture(
+        html`<cds-number-input
+          type="text"
+          value="10"
+          readonly></cds-number-input>`
+      );
+      const input = el.shadowRoot.querySelector('input');
+
+      let changeCount = 0;
+      el.addEventListener('cds-number-input', () => changeCount++);
+
+      // Simulate ArrowUp key press
+      const arrowUpEvent = new KeyboardEvent('keydown', {
+        key: 'ArrowUp',
+        bubbles: true,
+        composed: true,
+      });
+      input.dispatchEvent(arrowUpEvent);
+      await el.updateComplete;
+
+      // Value should remain unchanged
+      expect(input.value).to.equal('10');
+
+      // Simulate ArrowDown key press
+      const arrowDownEvent = new KeyboardEvent('keydown', {
+        key: 'ArrowDown',
+        bubbles: true,
+        composed: true,
+      });
+      input.dispatchEvent(arrowDownEvent);
+      await el.updateComplete;
+
+      // No change events should fire
+      expect(changeCount).to.equal(0);
     });
 
     it('should update value to empty when allow-empty is true & input value becomes empty', async () => {

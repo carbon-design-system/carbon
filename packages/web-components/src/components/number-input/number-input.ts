@@ -270,6 +270,9 @@ class CDSNumberInput extends CDSTextInput {
    * Handles keyboard events for arrow up/down when type="text"
    */
   protected _handleKeyDown(event: KeyboardEvent) {
+    if (this.readonly) {
+      return;
+    }
     if (this.type === NUMBER_INPUT_TYPE.TEXT) {
       if (event.key === 'ArrowUp') {
         event.preventDefault();
@@ -813,7 +816,7 @@ class CDSNumberInput extends CDSTextInput {
       'slot-text': string;
       icon: ReturnType<typeof iconLoader>;
     } = {
-      disabled: !this.readonly && this.disabled,
+      disabled: this.disabled,
       invalid: !this.readonly && !isValid,
       warn: !this.readonly && isValid && this.warn,
       'slot-name': '',
@@ -865,7 +868,7 @@ class CDSNumberInput extends CDSTextInput {
         aria-live="polite"
         aria-atomic="true"
         type="button"
-        ?disabled=${normalizedProps.disabled}
+        ?disabled=${normalizedProps.disabled || this.readonly}
         @click=${handleUserInitiatedStepUp}>
         ${iconLoader(Add16)}
       </button>
@@ -880,7 +883,7 @@ class CDSNumberInput extends CDSTextInput {
         aria-live="polite"
         aria-atomic="true"
         type="button"
-        ?disabled=${normalizedProps.disabled}
+        ?disabled=${normalizedProps.disabled || this.readonly}
         @click=${handleUserInitiatedStepDown}>
         ${iconLoader(Subtract16)}
       </button>
