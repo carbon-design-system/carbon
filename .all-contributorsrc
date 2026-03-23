@@ -2170,6 +2170,15 @@
       "contributions": [
         "doc"
       ]
+    },
+    {
+      "login": "zardai",
+      "name": "zardai",
+      "avatar_url": "https://avatars.githubusercontent.com/u/266987099?v=4",
+      "profile": "https://github.com/zardai",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "commitConvention": "none"
