@@ -237,7 +237,7 @@ class CDSModal extends HostListenerMixin(LitElement) {
    * Specify text for the accessibility label of the header
    */
   @property({ attribute: 'aria-label' })
-  ariaLabel = '';
+  ariaLabel: string | null = null;
 
   /**
    * The additional CSS class names for the container <div> of the element.

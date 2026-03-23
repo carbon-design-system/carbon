@@ -63,19 +63,19 @@ class CDSDialog extends CDSModal {
    * Specify text for the accessibility label of the dialog
    */
   @property({ attribute: 'aria-label' })
-  ariaLabel = '';
+  ariaLabel: string | null = null;
 
   /**
    * Specify the ID of an element that labels this dialog
    */
   @property({ attribute: 'aria-labelledby' })
-  ariaLabelledBy = '';
+  ariaLabelledBy: string | null = null;
 
   /**
    * Specify the ID of an element that describes this dialog
    */
   @property({ attribute: 'aria-describedby' })
-  ariaDescribedBy = '';
+  ariaDescribedBy: string | null = null;
 
   /**
    * Specify the role of the dialog for accessibility
@@ -147,20 +147,24 @@ class CDSDialog extends CDSModal {
     }
   };
 
+  private _ensureAccessibleLabel() {
+    if (this._dialogElement && !this.ariaLabel && !this.ariaLabelledBy) {
+      const title = this.querySelector(`${prefix}-dialog-title`);
+
+      // Set aria-labelledby to the title's ID if it exists
+      if (title && title.id) {
+        this._dialogElement.setAttribute('aria-labelledby', title.id);
+      }
+    }
+  }
+
   async updated(changedProperties) {
     if (changedProperties.has('open')) {
       if (this.open) {
         // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
         this._launcher = this.ownerDocument!.activeElement;
 
-        if (this._dialogElement && !this.ariaLabel && !this.ariaLabelledBy) {
-          const title = this.querySelector(`${prefix}-dialog-title`);
-
-          // Set aria-labelledby to the title's ID if it exists
-          if (title && title.id) {
-            this._dialogElement.setAttribute('aria-labelledby', title.id);
-          }
-        }
+        this._ensureAccessibleLabel();
 
         if (this._dialogElement) {
           if (this.modal) {
@@ -219,6 +223,8 @@ class CDSDialog extends CDSModal {
 
   render() {
     const { ariaLabel, ariaLabelledBy, ariaDescribedBy, role } = this;
+
+    this._ensureAccessibleLabel();
 
     return html`
       <dialog
