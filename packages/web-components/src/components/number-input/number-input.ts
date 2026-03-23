@@ -74,6 +74,12 @@ class CDSNumberInput extends CDSTextInput {
   protected _inputValue: string = '';
 
   /**
+   * Internal validation state (used for type="text")
+   */
+  @state()
+  protected _invalid: boolean = false;
+
+  /**
    * NumberFormatter instance for locale-based formatting
    */
   protected _numberFormatter: NumberFormatter | null = null;
@@ -121,9 +127,12 @@ class CDSNumberInput extends CDSTextInput {
       // Validate on input when validate function is provided
       if (this.validate) {
         const isValid = this.validate(_value, this.locale);
-        // Set invalid only if validate explicitly returns false
+        // Set internal invalid state only if validate explicitly returns false
         // true or undefined means valid (undefined defers to built-in validation)
-        this.invalid = isValid === false;
+        this._invalid = isValid === false;
+      } else {
+        // Clear internal invalid state when no validation function
+        this._invalid = false;
       }
     }
   }
@@ -246,9 +255,9 @@ class CDSNumberInput extends CDSTextInput {
 
         this._numberValue = parsedFormattedValue;
         this._previousNumberValue = parsedFormattedValue;
-        this.invalid = false;
+        this._invalid = false;
       } else {
-        this.invalid = true;
+        this._invalid = true;
         // Keep the invalid input as-is
         this._inputValue = rawValue;
       }
@@ -446,13 +455,33 @@ class CDSNumberInput extends CDSTextInput {
     const oldValue = this._value;
 
     if (this.type === NUMBER_INPUT_TYPE.TEXT) {
+      // Handle empty string
+      if (val === '') {
+        this._numberValue = NaN;
+        this._previousNumberValue = NaN;
+        this._inputValue = '';
+        this._value = '';
+        this.requestUpdate('value', oldValue);
+        if (this._input) {
+          this._input.value = '';
+        }
+        return;
+      }
+
       // Ensure formatters are initialized before using them
       if (!this._numberFormatter || !this._numberParser) {
         this._initializeFormatters();
       }
 
-      // Parse and format the value for type="text"
-      const parsed = this._numberParser?.parse(val) ?? NaN;
+      // - If val is a string, parse it (handles formatted strings and locale-specific input)
+      // - If val is a number, use it directly as the numeric value
+      let parsed: number;
+      if (typeof val === 'string') {
+        parsed = this._numberParser?.parse(val) ?? Number(val);
+      } else {
+        parsed = val as number;
+      }
+
       this._numberValue = parsed;
       this._previousNumberValue = parsed;
       this._inputValue = isNaN(parsed)
@@ -460,7 +489,7 @@ class CDSNumberInput extends CDSTextInput {
         : (this._numberFormatter?.format(parsed) ?? '');
 
       // Set the internal value
-      this._value = val;
+      this._value = String(val);
       this.requestUpdate('value', oldValue);
 
       // Set the formatted value on the input element
@@ -479,19 +508,52 @@ class CDSNumberInput extends CDSTextInput {
   connectedCallback() {
     super.connectedCallback();
     this._initializeFormatters();
+  }
+
+  /**
+   * Called before updates to initialize default value
+   */
+  willUpdate(changedProperties: Map<string, unknown>) {
+    super.willUpdate?.(changedProperties);
+
+    // Handle type switching before render
+    if (changedProperties.has('type')) {
+      this._initializeFormatters();
+      this._invalid = false;
+
+      const currentValue = this._value || this.value;
+      if (currentValue) {
+        const parsed = this._numberParser?.parse(currentValue) ?? NaN;
+
+        if (!isNaN(parsed)) {
+          this._numberValue = parsed;
+          this._previousNumberValue = parsed;
+
+          if (this.type === NUMBER_INPUT_TYPE.TEXT) {
+            this._inputValue = this._numberFormatter?.format(parsed) ?? '';
+            this._value = currentValue;
+          } else {
+            const plainValue = parsed.toString();
+            this._value = plainValue;
+            super.value = plainValue;
+          }
+        }
+      }
+    }
 
     // Initialize from defaultValue if no value is set
-    if (
-      this.type === NUMBER_INPUT_TYPE.TEXT &&
-      !this.value &&
-      this.defaultValue
-    ) {
-      const parsed = this._numberParser?.parse(this.defaultValue) ?? NaN;
-      this._numberValue = parsed;
-      this._previousNumberValue = parsed;
-      this._inputValue = isNaN(parsed)
-        ? ''
-        : (this._numberFormatter?.format(parsed) ?? '');
+    // This runs before every render, but only sets _value if it's empty
+    if (!this._value && this.defaultValue) {
+      if (this.type === NUMBER_INPUT_TYPE.TEXT) {
+        const parsed = this._numberParser?.parse(this.defaultValue) ?? NaN;
+        this._numberValue = parsed;
+        this._previousNumberValue = parsed;
+        this._inputValue = isNaN(parsed)
+          ? ''
+          : (this._numberFormatter?.format(parsed) ?? '');
+      }
+      // Set the internal value to defaultValue
+      this._value = this.defaultValue;
     }
   }
 
@@ -501,18 +563,35 @@ class CDSNumberInput extends CDSTextInput {
   // @ts-expect-error - Override to accept changedProperties parameter
   updated(changedProperties: Map<string, unknown>) {
     super.updated?.();
-
     if (
       changedProperties.has('locale') ||
-      changedProperties.has('formatOptions') ||
-      changedProperties.has('type')
+      changedProperties.has('formatOptions')
     ) {
       this._initializeFormatters();
 
-      // Re-format the current value if type is text
-      if (this.type === NUMBER_INPUT_TYPE.TEXT && !isNaN(this._numberValue)) {
-        this._inputValue =
-          this._numberFormatter?.format(this._numberValue) ?? '';
+      if (this.type === NUMBER_INPUT_TYPE.TEXT) {
+        // If we have a value, re-format it with the new formatters
+        // This handles the case where formatOptions is set after value
+        if (this._value) {
+          const parsed = Number(this._value);
+          if (!isNaN(parsed)) {
+            this._numberValue = parsed;
+            this._previousNumberValue = parsed;
+            this._inputValue = this._numberFormatter?.format(parsed) ?? '';
+            if (this._input) {
+              this._input.value = this._inputValue;
+            }
+          }
+        } else if (!isNaN(this._numberValue)) {
+          // Re-format existing _numberValue (for locale/formatOptions changes)
+          this._inputValue =
+            this._numberFormatter?.format(this._numberValue) ?? '';
+
+          // Update the input element directly if it exists
+          if (this._input) {
+            this._input.value = this._inputValue;
+          }
+        }
       }
     }
   }
@@ -539,7 +618,7 @@ class CDSNumberInput extends CDSTextInput {
    * Get input validity
    */
   _getInputValidity() {
-    if (this.invalid) {
+    if (this.invalid || this._invalid) {
       return false;
     }
 
@@ -624,7 +703,11 @@ class CDSNumberInput extends CDSTextInput {
 
     let rawValue: number;
 
-    if (Number.isNaN(currentValue) || !currentValue) {
+    if (
+      Number.isNaN(currentValue) ||
+      currentValue === null ||
+      currentValue === undefined
+    ) {
       if (typeof this.stepStartValue === 'number' && this.stepStartValue) {
         rawValue = this.stepStartValue;
       } else if (
@@ -669,7 +752,9 @@ class CDSNumberInput extends CDSTextInput {
       this._value = String(newValue);
       this.value = this._value;
     } else if (this.type === NUMBER_INPUT_TYPE.TEXT) {
-      // Format the new value
+      // Calling format() can alter the number (such as rounding it) causing
+      // the numberValue to mismatch the formatted value in the input.
+      // To avoid this, the newValue is re-parsed after formatting.
       const formattedNewValue =
         this._numberFormatter?.format(newValue) ?? String(newValue);
       const parsedFormattedNewValue =
@@ -678,6 +763,8 @@ class CDSNumberInput extends CDSTextInput {
       this._numberValue = parsedFormattedNewValue;
       this._inputValue = formattedNewValue;
       this._previousNumberValue = parsedFormattedNewValue;
+      // Update the value property to reflect the numeric value
+      this._value = String(parsedFormattedNewValue);
       this.requestUpdate();
     }
   }
@@ -758,11 +845,13 @@ class CDSNumberInput extends CDSTextInput {
     // Determine the input value based on type
     let inputValue: string;
     if (this.type === NUMBER_INPUT_TYPE.TEXT) {
-      inputValue = this._inputValue;
+      // For text type, use _inputValue if available, otherwise use defaultValue
+      inputValue =
+        this._inputValue ||
+        (this.defaultValue && !this._value ? this.defaultValue : '');
     } else {
-      inputValue = this.hasAttribute('value')
-        ? this._value
-        : this.defaultValue || this._value;
+      // For type="number", use _value if set, otherwise use defaultValue
+      inputValue = this._value || this.defaultValue || '';
     }
 
     const incrementButton = html`

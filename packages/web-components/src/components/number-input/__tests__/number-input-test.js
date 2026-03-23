@@ -919,21 +919,27 @@ describe('<cds-number-input>', () => {
         input.dispatchEvent(
           new Event('input', { bubbles: true, composed: true })
         );
-        expect(el.invalid).to.be.true;
+        await el.updateComplete;
+        expect(el._getInputValidity()).to.be.false;
+        expect(input.hasAttribute('data-invalid')).to.be.true;
 
         // Test validate() returns true - should be valid
         el.validate = () => true;
         input.dispatchEvent(
           new Event('input', { bubbles: true, composed: true })
         );
-        expect(el.invalid).to.be.false;
+        await el.updateComplete;
+        expect(el._getInputValidity()).to.be.true;
+        expect(input.hasAttribute('data-invalid')).to.be.false;
 
         // Test validate() returns undefined - should be valid
         el.validate = () => undefined;
         input.dispatchEvent(
           new Event('input', { bubbles: true, composed: true })
         );
-        expect(el.invalid).to.be.false;
+        await el.updateComplete;
+        expect(el._getInputValidity()).to.be.true;
+        expect(input.hasAttribute('data-invalid')).to.be.false;
       });
 
       // Tests pattern-based validation combining custom and built-in validation
@@ -963,7 +969,9 @@ describe('<cds-number-input>', () => {
         input.dispatchEvent(
           new Event('input', { bubbles: true, composed: true })
         );
-        expect(el.invalid).to.be.true;
+        await el.updateComplete;
+        expect(el._getInputValidity()).to.be.false;
+        expect(input.hasAttribute('data-invalid')).to.be.true;
 
         // Test accepted value '499' - should be valid
         input.value = '499';
@@ -1031,6 +1039,101 @@ describe('<cds-number-input>', () => {
         );
         expect(typeof lastEvent.detail.value).to.equal('number');
         expect(lastEvent.detail.value).to.equal(75);
+      });
+
+      [
+        { value: '1234', expected: '1,234', description: 'integer value' },
+        {
+          value: '1234.56',
+          expected: '1,234.56',
+          description: 'decimal value',
+        },
+        { value: '', expected: '', description: 'empty value' },
+      ].forEach(({ value, expected, description }) => {
+        it(`should preserve and format ${description} when switching from type="number" to type="text"`, async () => {
+          const el = await fixture(
+            html`<cds-number-input
+              type="number"
+              label="NumberInput label"
+              value="${value}"></cds-number-input>`
+          );
+          const input = el.shadowRoot.querySelector('input');
+
+          // Verify initial state with type="number"
+          expect(input.type).to.equal('number');
+          expect(input.value).to.equal(value);
+
+          // Switch to type="text"
+          el.type = 'text';
+          await el.updateComplete;
+
+          // Verify the value is preserved and formatted
+          expect(input.type).to.equal('text');
+          expect(input.value).to.equal(expected);
+        });
+      });
+
+      it('should handle switching from text back to number type', async function () {
+        const el = await fixture(
+          html`<cds-number-input
+            type="number"
+            value="1234.56"
+            label="Label"></cds-number-input>`
+        );
+        const input = el.shadowRoot.querySelector('input');
+
+        // Initial state: type="number", value should be "1234.56"
+        expect(input.value).to.equal('1234.56');
+
+        // Switch to text type
+        el.type = 'text';
+        await el.updateComplete;
+
+        // Value should be formatted as "1,234.56"
+        expect(input.value).to.equal('1,234.56');
+
+        // Switch back to number type
+        el.type = 'number';
+        await el.updateComplete;
+
+        // Value should be back to plain "1234.56" (not formatted)
+        expect(input.value).to.equal('1234.56');
+        expect(el.value).to.equal('1234.56');
+      });
+
+      it('should correctly format percentage on initial render', async () => {
+        /** @type {Intl.NumberFormatOptions} */
+        const formatOptions = { style: 'percent' };
+        const el = await fixture(
+          html`<cds-number-input
+            type="text"
+            value="0.15"
+            label="Percentage"
+            .formatOptions="${formatOptions}"></cds-number-input>`
+        );
+        await el.updateComplete;
+        const input = el.shadowRoot.querySelector('input');
+
+        // Should display as "15%" not "0.15" or empty
+        expect(input.value).to.equal('15%');
+      });
+
+      it('should correctly format percentage when formatOptions is set after value', async () => {
+        const el = await fixture(
+          html`<cds-number-input
+            type="text"
+            value="0.15"
+            label="Percentage"></cds-number-input>`
+        );
+        await el.updateComplete;
+
+        // Set formatOptions after initial render
+        el.formatOptions = { style: 'percent' };
+        await el.updateComplete;
+
+        const input = el.shadowRoot.querySelector('input');
+        // Should display as "15%"
+        expect(input.value).to.equal('15%');
       });
     });
   });
