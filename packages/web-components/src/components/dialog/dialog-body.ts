@@ -21,7 +21,6 @@ class CDSDialogBody extends CDSModalBody {
     const dialog = this.closest(`${prefix}-dialog`);
     if (!dialog) return null;
 
-    // Prefer dialog-subtitle over dialog-title
     const subTitleEl = dialog.querySelector(`${prefix}-dialog-subtitle`);
     if (subTitleEl?.id) return subTitleEl.id;
 
