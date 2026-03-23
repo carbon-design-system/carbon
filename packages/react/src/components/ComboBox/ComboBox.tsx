@@ -70,6 +70,12 @@ const {
 
 const defaultShouldFilterItem = () => true;
 
+const isDisabledItem = (item: unknown) =>
+  item !== null &&
+  typeof item === 'object' &&
+  'disabled' in item &&
+  Boolean(item.disabled);
+
 const autocompleteCustomFilter = ({
   item,
   inputValue,
@@ -133,6 +139,7 @@ const findHighlightedIndex = <ItemType,>(
 
   for (let i = 0; i < items.length; i++) {
     const item = itemToString(items[i]).toLowerCase();
+    // TODO: Use `isDisabledItem`.
     if (!items[i]['disabled'] && item.indexOf(searchValue) !== -1) {
       return i;
     }
@@ -468,11 +475,13 @@ const ComboBox = forwardRef(
       if (typeahead) {
         if (inputValue.length >= prevInputLengthRef.current) {
           if (inputValue) {
-            const filteredItems = items.filter((item) =>
-              autocompleteCustomFilter({
-                item: itemToString(item),
-                inputValue: inputValue,
-              })
+            const filteredItems = items.filter(
+              (item) =>
+                !isDisabledItem(item) &&
+                autocompleteCustomFilter({
+                  item: itemToString(item),
+                  inputValue: inputValue,
+                })
             );
             if (filteredItems.length > 0) {
               const suggestion = itemToString(filteredItems[0]);
@@ -670,6 +679,7 @@ const ComboBox = forwardRef(
                 );
                 const highlightedItem = filteredList[state.highlightedIndex];
 
+                // TODO: Use `isDisabledItem`.
                 // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
                 if (highlightedItem && !(highlightedItem as any).disabled) {
                   return {
@@ -683,6 +693,7 @@ const ComboBox = forwardRef(
                 if (autoIndex !== -1) {
                   const matchingItem = items[autoIndex];
 
+                  // TODO: Use `isDisabledItem`.
                   // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
                   if (matchingItem && !(matchingItem as any).disabled) {
                     return {
@@ -873,6 +884,7 @@ const ComboBox = forwardRef(
       inputId: id,
       stateReducer,
       isItemDisabled(item) {
+        // TODO: Use `isDisabledItem`.
         // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
         return (item as any)?.disabled;
       },
@@ -1156,10 +1168,12 @@ const ComboBox = forwardRef(
                   if (typeahead && event.key === 'Tab') {
                     if (!isOpen) return;
                     //  event.preventDefault();
-                    const matchingItem = items.find((item) =>
-                      itemToString(item)
-                        .toLowerCase()
-                        .startsWith(inputValue.toLowerCase())
+                    const matchingItem = items.find(
+                      (item) =>
+                        !isDisabledItem(item) &&
+                        itemToString(item)
+                          .toLowerCase()
+                          .startsWith(inputValue.toLowerCase())
                     );
                     if (matchingItem) {
                       const newValue = itemToString(matchingItem);

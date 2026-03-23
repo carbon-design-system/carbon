@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2025
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -169,35 +169,20 @@ const TimePicker = frFn((props, ref) => {
   } = props;
   const prefix = usePrefix();
 
-  const [isValue, setValue] = React.useState(value);
-  const [prevValue, setPrevValue] = React.useState(value);
-
-  if (value !== prevValue) {
-    setValue(value);
-    setPrevValue(value);
-  }
-
   function handleOnClick(evt) {
     if (!disabled) {
-      if (!readOnly) {
-        setValue(isValue);
-      }
       onClick(evt);
     }
   }
 
   function handleOnChange(evt) {
     if (!disabled && !readOnly) {
-      setValue(isValue);
       onChange(evt);
     }
   }
 
   function handleOnBlur(evt) {
     if (!disabled) {
-      if (!readOnly) {
-        setValue(isValue);
-      }
       onBlur(evt);
     }
   }
