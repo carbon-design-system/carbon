@@ -164,7 +164,7 @@
       $button-tertiary-active
     );
 
-    @media (hover: hover) {
+    @media (any-hover: hover) {
       &:hover {
         color: $text-inverse;
       }

@@ -124,7 +124,7 @@ $button-focus-color: custom-property.get-var('button-focus-color', $focus);
   color: $font-color;
 
   // Apply hover styles only on devices that support hover
-  @media (hover: hover) {
+  @media (any-hover: hover) {
     &:hover {
       background-color: $hover-bg-color;
     }
