@@ -35,8 +35,28 @@ class CDSModalBody extends LitElement {
     super.disconnectedCallback?.();
   }
 
+  protected _getAriaLabelledBy() {
+    const modal = this.closest(`${prefix}-modal`);
+    if (!modal) return null;
+
+    const labelEl = modal.querySelector(`${prefix}-modal-label`);
+    if (labelEl?.id) return labelEl.id;
+
+    const headingEl = modal.querySelector(`${prefix}-modal-heading`);
+    if (headingEl?.id) return headingEl.id;
+
+    return null;
+  }
+
+  protected _parentHasScrollingContent() {
+    const modal = this.closest(`${prefix}-modal`);
+    return modal?.hasAttribute('has-scrolling-content') ?? false;
+  }
+
+  // TODO: add test coverage for setting the respective labels, attributes, and roles when the modal body is scrollable
   checkScroll() {
     const hasScroll = this.scrollHeight > this.clientHeight;
+    const hasScrollingContent = this._parentHasScrollingContent();
     const hasAutoAlign = this.querySelector('[autoalign]') !== null;
 
     if (this.clientHeight <= 300 || hasAutoAlign) {
@@ -48,12 +68,20 @@ class CDSModalBody extends LitElement {
     // Respect user-defined tabindex
     if (this.userDefinedTabindex !== null) return;
 
-    if (hasScroll) {
+    if (hasScrollingContent || hasScroll) {
       this.setAttribute('tabindex', '0');
       this.setAttribute('is-scrollable', '');
-    } else {
+      this.setAttribute('role', 'region');
+
+      const ariaLabelledBy = this._getAriaLabelledBy();
+      if (ariaLabelledBy) {
+        this.setAttribute('aria-labelledby', ariaLabelledBy);
+      }
+    } else if (!hasScrollingContent) {
       this.removeAttribute('tabindex');
       this.removeAttribute('is-scrollable');
+      this.removeAttribute('role');
+      this.removeAttribute('aria-labelledby');
     }
   }
 

@@ -5,11 +5,12 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { LitElement, html } from 'lit';
+import { html } from 'lit';
 import { property } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
 import styles from './dialog.scss?lit';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
+import CDSModalHeading from '../modal/modal-heading';
 
 /**
  * Dialog title.
@@ -17,11 +18,11 @@ import { carbonElement as customElement } from '../../globals/decorators/carbon-
  * @element cds-dialog-title
  */
 @customElement(`${prefix}-dialog-title`)
-class CDSDialogTitle extends LitElement {
+class CDSDialogTitle extends CDSModalHeading {
   /**
    * Specify an optional id for the title element
    */
-  @property({ reflect: true })
+  @property({ type: String, reflect: true })
   id = `${prefix}--dialog-title--id-${Math.random().toString(16).slice(2)}`;
 
   render() {

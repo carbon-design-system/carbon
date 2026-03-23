@@ -17,6 +17,24 @@ import CDSModalBody from '../modal/modal-body';
  */
 @customElement(`${prefix}-dialog-body`)
 class CDSDialogBody extends CDSModalBody {
+  protected _getAriaLabelledBy() {
+    const dialog = this.closest(`${prefix}-dialog`);
+    if (!dialog) return null;
+
+    // Prefer dialog-subtitle over dialog-title
+    const subTitleEl = dialog.querySelector(`${prefix}-dialog-subtitle`);
+    if (subTitleEl?.id) return subTitleEl.id;
+
+    const titleEl = dialog.querySelector(`${prefix}-dialog-title`);
+    if (titleEl?.id) return titleEl.id;
+
+    return null;
+  }
+
+  protected _parentHasScrollingContent() {
+    const dialog = this.closest(`${prefix}-dialog`);
+    return dialog?.hasAttribute('has-scrolling-content') ?? false;
+  }
   static styles = styles;
 }
 

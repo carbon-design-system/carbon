@@ -288,7 +288,8 @@ export const WithScrollingContent = {
       .modal=${true}
       .open=${true}
       ?prevent-close-on-click-outside=${preventCloseOnClickOutside}
-      role=${role}>
+      role=${role}
+      has-scrolling-content>
       <cds-dialog-header>
         <cds-dialog-subtitle>Configure dialog settings</cds-dialog-subtitle>
         <cds-dialog-title>Modal Dialog Example</cds-dialog-title>
@@ -296,7 +297,7 @@ export const WithScrollingContent = {
           <cds-dialog-close-button></cds-dialog-close-button>
         </cds-dialog-controls>
       </cds-dialog-header>
-      <cds-dialog-body has-scrolling-content>
+      <cds-dialog-body>
         <p>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus eu
           nibh odio. Nunc a consequat est, id porttitor sapien. Proin vitae leo
