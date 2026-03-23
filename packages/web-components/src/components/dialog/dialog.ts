@@ -147,24 +147,20 @@ class CDSDialog extends CDSModal {
     }
   };
 
-  private _ensureAccessibleLabel() {
-    if (this._dialogElement && !this.ariaLabel && !this.ariaLabelledBy) {
-      const title = this.querySelector(`${prefix}-dialog-title`);
-
-      // Set aria-labelledby to the title's ID if it exists
-      if (title && title.id) {
-        this._dialogElement.setAttribute('aria-labelledby', title.id);
-      }
-    }
-  }
-
   async updated(changedProperties) {
     if (changedProperties.has('open')) {
       if (this.open) {
         // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
         this._launcher = this.ownerDocument!.activeElement;
 
-        this._ensureAccessibleLabel();
+        if (this._dialogElement && !this.ariaLabel && !this.ariaLabelledBy) {
+          const title = this.querySelector(`${prefix}-dialog-title`);
+
+          // Set aria-labelledby to the title's ID if it exists
+          if (title && title.id) {
+            this._dialogElement.setAttribute('aria-labelledby', title.id);
+          }
+        }
 
         if (this._dialogElement) {
           if (this.modal) {
@@ -223,15 +219,16 @@ class CDSDialog extends CDSModal {
 
   render() {
     const { ariaLabel, ariaLabelledBy, ariaDescribedBy, role } = this;
-
-    this._ensureAccessibleLabel();
+    const title = this.querySelector(`${prefix}-dialog-title`);
 
     return html`
       <dialog
         part="dialog"
         role=${role}
         aria-label=${ifDefined(ariaLabel || undefined)}
-        aria-labelledby=${ifDefined(ariaLabelledBy || undefined)}
+        aria-labelledby=${ifDefined(
+          ariaLabelledBy || (!ariaLabel ? title?.id : undefined)
+        )}
         aria-describedby=${ifDefined(ariaDescribedBy || undefined)}>
         <div
           class="${prefix}--dialog-container"
