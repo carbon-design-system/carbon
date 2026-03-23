@@ -69,7 +69,7 @@
     "@carbon/icon-helpers": "10.47.0",
     "@carbon/icons": "^11.77.0-rc.0",
     "@carbon/styles": "^1.103.0-rc.0",
-    "@carbon/utilities": "^0.16.0",
+    "@carbon/utilities": "^0.17.0",
     "@floating-ui/dom": "^1.6.3",
     "@ibm/telemetry-js": "^1.10.2",
     "@lit/context": "^1.1.3",
