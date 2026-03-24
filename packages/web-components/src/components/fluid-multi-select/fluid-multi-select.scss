@@ -14,9 +14,104 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/theme' as *;
 @use '@carbon/styles/scss/components/multiselect' as *;
 @use '@carbon/styles/scss/colors';
-@use '@carbon/styles/scss/utilities/convert' as *;
+@use '@carbon/styles/scss/utilities/convert';
 @use '@carbon/styles/scss/components/list-box/list-box';
+@use '@carbon/styles/scss/components/fluid-list-box';
+@use '@carbon/styles/scss/utilities' as *;
 
 :host(#{$prefix}-fluid-multi-select) {
   @include emit-layout-tokens();
+
+  box-sizing: border-box;
+  outline: none;
+
+  .#{$prefix}--assistive-text {
+    inset-block-start: -100%;
+    inset-inline-start: -100%;
+  }
+
+  .#{$prefix}--list-box__menu {
+    inset-block-start: 100%;
+    margin-block-start: 1px;
+    outline: none;
+  }
+
+  .#{$prefix}--text-input {
+    border: none;
+    outline: none;
+    padding-inline-start: 0;
+  }
+
+  .#{$prefix}--tag--disabled {
+    @extend .#{$prefix}--tag--disabled;
+
+    background-color: transparent;
+    color: $text-disabled;
+  }
+
+  .#{$prefix}--list-box__field:focus {
+    @extend .#{$prefix}--multi-select--filterable--input-focused;
+  }
+}
+
+// Target dropdown items inside fluid dropdown for non-condensed height
+:host(#{$prefix}-fluid-multi-select:not([is-condensed])) {
+  ::slotted(#{$prefix}-multi-select-item) {
+    block-size: $spacing-10;
+  }
+}
+
+:host(#{$prefix}-fluid-multi-select[filterable]) {
+  .#{$prefix}--list-box__field:focus-within {
+    outline: $spacing-01 solid $focus;
+    outline-offset: -#{$spacing-01};
+  }
+  .#{$prefix}--list-box {
+    .#{$prefix}--list-box__field {
+      padding-inline-end: $spacing-01;
+    }
+  }
+}
+:host(#{$prefix}-fluid-multi-select[filterable][has-value])
+  .#{$prefix}--list-box__field
+  ~ ::slotted(#{$prefix}-ai-label) {
+  inset-inline-end: calc($spacing-10 + 18px);
+}
+
+// :host(#{$prefix}-multi-select-item) {
+//   .#{$prefix}--list-box__menu-item {
+//     :host-context(#{$prefix}-fluid-multi-select) & {
+//       block-size: $spacing-10;
+//     }
+//   }
+// }
+
+// Direction top
+:host(#{$prefix}-fluid-multi-select[direction='top']) {
+  @extend .#{$prefix}--list-box--up;
+
+  .#{$prefix}--list-box__menu {
+    inset-block-start: auto;
+  }
+}
+
+// AI Label styles
+:host(#{$prefix}-fluid-multi-select[ai-label]) {
+  @extend .#{$prefix}--list-box__wrapper--slug;
+
+  ::slotted(#{$prefix}-ai-label),
+  ::slotted(#{$prefix}-slug) {
+    position: absolute;
+    inset-block-start: 70%;
+    inset-inline-end: $spacing-09;
+  }
+
+  ::slotted(#{$prefix}-ai-label:not([revert-active])),
+  ::slotted(#{$prefix}-slug:not([revert-active])) {
+    transform: translateY(-70%);
+  }
+
+  .#{$prefix}--list-box__wrapper--decorator {
+    @include ai-gradient;
+  }
 }

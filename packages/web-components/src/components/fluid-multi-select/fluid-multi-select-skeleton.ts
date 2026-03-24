@@ -21,8 +21,8 @@ class CDSFluidMultiSelectSkeleton extends LitElement {
     return html`
       <div class="${prefix}--list-box__wrapper--fluid">
         <div class="${prefix}--skeleton ${prefix}--list-box">
-          <span class="${prefix}--list-box__label" />
-          <div class="${prefix}--list-box__field" />
+          <span class="${prefix}--list-box__label"></span>
+          <div class="${prefix}--list-box__field"></div>
         </div>
       </div>
     `;

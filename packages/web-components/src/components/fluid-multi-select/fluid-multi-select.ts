@@ -19,6 +19,10 @@ import CDSMultiSelect from '../multi-select/multi-select';
  */
 @customElement(`${prefix}-fluid-multi-select`)
 class CDSFluidMultiSelect extends CDSMultiSelect {
+  /**
+   * Specify if the `FluidMultiSelect` should render its menu items in condensed mode
+   */
+  isCondensed?: boolean;
   connectedCallback() {
     this.setAttribute('isFluid', 'true');
     super.connectedCallback();
