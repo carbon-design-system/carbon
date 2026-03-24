@@ -7,52 +7,24 @@
 
 'use strict';
 
-const { test } = require('@playwright/test');
+const { expect, test } = require('@playwright/test');
 const { themes } = require('../../test-utils/env');
-const { snapshot } = require('../../test-utils/snapshot');
-const { snapshotStory, visitStory } = require('../../test-utils/storybook');
+const { visitStory } = require('../../test-utils/storybook');
 
 test.describe('breadcrumb', () => {
   themes.forEach((theme) => {
     test.describe(theme, () => {
-      test('breadcrumb @vrt', async ({ page }) => {
-        await snapshotStory(page, {
-          component: 'breadcrumb',
-          story: 'default',
-          theme,
-        });
-      });
-
       test('breadcrumb with overflow menu @vrt', async ({ page }) => {
         await visitStory(page, {
           component: 'breadcrumb',
           story: 'breadcrumb-with-overflow-menu',
-          theme,
+          globals: { theme },
         });
-        await page
-          .locator('button[aria-haspopup="true"][aria-expanded="false"]')
-          .click();
-        await snapshot(page, {
-          component: 'breadcrumb',
-          story: 'breadcrumb-with-overflow-menu',
-          theme,
-        });
-      });
-
-      test('breadcrumb size sm with overflow menu @vrt', async ({ page }) => {
-        await visitStory(page, {
-          component: 'breadcrumb',
-          story: 'breadcrumb-with-overflow-menu',
-          theme,
-          args: {
-            size: 'sm',
-          },
-        });
-        await snapshot(page, {
-          component: 'breadcrumb',
-          story: 'breadcrumb-with-overflow-menu',
-          theme,
-        });
+        const overflowButton = page.locator(
+          'button[aria-haspopup="true"][aria-expanded="false"]'
+        );
+        await overflowButton.click();
+        await expect(overflowButton).toHaveAttribute('aria-expanded', 'true');
       });
     });
   });

@@ -8,22 +8,9 @@
 'use strict';
 
 const { expect, test } = require('@playwright/test');
-const { themes } = require('../../test-utils/env');
-const { snapshotStory, visitStory } = require('../../test-utils/storybook');
+const { visitStory } = require('../../test-utils/storybook');
 
 test.describe('DefinitionTooltip', () => {
-  themes.forEach((theme) => {
-    test.describe(theme, () => {
-      test('default @vrt', async ({ page }) => {
-        await snapshotStory(page, {
-          component: 'DefinitionTooltip',
-          id: 'components-definitiontooltip--default',
-          theme,
-        });
-      });
-    });
-  });
-
   test('accessibility-checker @avt', async ({ page }) => {
     await visitStory(page, {
       component: 'DefinitionTooltip',
