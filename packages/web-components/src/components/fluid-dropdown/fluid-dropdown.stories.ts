@@ -74,14 +74,19 @@ const items = [
 
 const args = {
   defaultWidth: 400,
+  ariaLabel: '',
+  autoAlign: false,
+  direction: 'bottom',
   disabled: false,
-  helperText: '',
+  isCondensed: false,
   invalid: false,
   invalidText:
     'Error message that is really long can wrap to more lines but should not be excessively long',
   label: 'Choose an option',
+  open: false,
   readOnly: false,
   titleText: 'Label',
+  value: '',
   warn: false,
   warnText:
     'Warning message that is really long can wrap to more lines but should not be excessively long.',
@@ -91,18 +96,34 @@ const argTypes = {
   defaultWidth: {
     control: { type: 'range', min: 300, max: 800, step: 50 },
   },
+  ariaLabel: {
+    control: 'text',
+    description:
+      'Specify a label to be read by screen readers on the container node.',
+  },
+  autoAlign: {
+    control: 'boolean',
+    description:
+      'Will auto-align the dropdown. This attribute is currently experimental and is subject to future changes.',
+  },
+  direction: {
+    control: 'select',
+    options: ['top', 'bottom'],
+    description:
+      "Specify the direction of the dropdown. Can be either 'top' or 'bottom'.",
+  },
   disabled: {
     control: 'boolean',
     description: 'Specify whether the control is disabled.',
   },
-  helperText: {
-    control: 'text',
+  isCondensed: {
+    control: 'boolean',
     description:
-      'Provide helper text that is used alongside the control label for additional help.',
+      'Specify if the dropdown should render its menu items in condensed mode.',
   },
   invalid: {
     control: 'boolean',
-    description: 'Specify if the currently value is invalid.',
+    description: 'Specify if the currently selected value is invalid.',
   },
   invalidText: {
     control: 'text',
@@ -112,6 +133,10 @@ const argTypes = {
     control: 'text',
     description: 'The default content of the trigger button.',
   },
+  open: {
+    control: 'boolean',
+    description: 'Specify if the dropdown should be open, or not.',
+  },
   readOnly: {
     control: 'boolean',
     description: 'Whether or not the Dropdown is readonly.',
@@ -119,7 +144,11 @@ const argTypes = {
   titleText: {
     control: 'text',
     description:
-      'Provide the title text that will be read by a screen reader when visiting this control.',
+      'Text that will be read by a screen reader when visiting this control.',
+  },
+  value: {
+    control: 'text',
+    description: 'The value of the selected item.',
   },
   warn: {
     control: 'boolean',
@@ -137,25 +166,35 @@ export const Default = {
   argTypes,
   render: ({
     defaultWidth,
+    ariaLabel,
+    autoAlign,
+    direction,
     disabled,
-    helperText,
+    isCondensed,
     invalid,
     invalidText,
     label,
+    open,
     readOnly,
     titleText,
+    value,
     warn,
     warnText,
   }) => html`
     <div style="width:${defaultWidth}px;">
       <cds-fluid-dropdown
+        aria-label="${ifDefined(ariaLabel || undefined)}"
+        ?auto-align="${autoAlign}"
+        direction="${ifDefined(direction)}"
         ?disabled="${disabled}"
-        helper-text="${ifDefined(helperText)}"
+        ?is-condensed="${isCondensed}"
         ?invalid="${invalid}"
         invalid-text="${ifDefined(invalidText)}"
         label="${ifDefined(label)}"
+        ?open="${open}"
         ?read-only="${readOnly}"
         title-text="${ifDefined(titleText)}"
+        value="${ifDefined(value || undefined)}"
         ?warn="${warn}"
         warn-text="${ifDefined(warnText)}">
         ${items.map(
@@ -171,30 +210,42 @@ export const Default = {
 };
 
 export const Condensed = {
-  args,
+  args: {
+    ...args,
+    isCondensed: true,
+  },
   argTypes,
   render: ({
     defaultWidth,
+    ariaLabel,
+    autoAlign,
+    direction,
     disabled,
-    helperText,
+    isCondensed,
     invalid,
     invalidText,
     label,
+    open,
     readOnly,
     titleText,
+    value,
     warn,
     warnText,
   }) => html`
     <div style="width:${defaultWidth}px;">
       <cds-fluid-dropdown
-        is-condensed
+        aria-label="${ifDefined(ariaLabel || undefined)}"
+        ?auto-align="${autoAlign}"
+        direction="${ifDefined(direction)}"
         ?disabled="${disabled}"
-        helper-text="${ifDefined(helperText)}"
+        ?is-condensed="${isCondensed}"
         ?invalid="${invalid}"
         invalid-text="${ifDefined(invalidText)}"
         label="${ifDefined(label)}"
+        ?open="${open}"
         ?read-only="${readOnly}"
         title-text="${ifDefined(titleText)}"
+        value="${ifDefined(value || undefined)}"
         ?warn="${warn}"
         warn-text="${ifDefined(warnText)}">
         ${items.map(
@@ -237,25 +288,35 @@ export const WithAILabel = {
   },
   render: ({
     defaultWidth,
+    ariaLabel,
+    autoAlign,
+    direction,
     disabled,
-    helperText,
+    isCondensed,
     invalid,
     invalidText,
     label,
+    open,
     readOnly,
     titleText,
+    value,
     warn,
     warnText,
-  }) => {
-    return html` <div style="width:${defaultWidth}px;">
+  }) => html`
+    <div style="width:${defaultWidth}px;">
       <cds-fluid-dropdown
+        aria-label="${ifDefined(ariaLabel || undefined)}"
+        ?auto-align="${autoAlign}"
+        direction="${ifDefined(direction)}"
         ?disabled="${disabled}"
-        helper-text="${ifDefined(helperText)}"
+        ?is-condensed="${isCondensed}"
         ?invalid="${invalid}"
         invalid-text="${ifDefined(invalidText)}"
         label="${ifDefined(label)}"
+        ?open="${open}"
         ?read-only="${readOnly}"
         title-text="${ifDefined(titleText)}"
+        value="${ifDefined(value || undefined)}"
         ?warn="${warn}"
         warn-text="${ifDefined(warnText)}">
         <cds-ai-label alignment="bottom-left">
@@ -269,8 +330,8 @@ export const WithAILabel = {
           `
         )}
       </cds-fluid-dropdown>
-    </div>`;
-  },
+    </div>
+  `,
 };
 
 const meta = {
