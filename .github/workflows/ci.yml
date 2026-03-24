@@ -231,7 +231,9 @@ jobs:
       - name: Build project
         env:
           NODE_OPTIONS: --max-old-space-size=6144
-        run: yarn build
+        run:
+          yarn lerna run build --scope='@carbon/react'
+          --include-dependencies
       - name: Build storybook
         env:
           NODE_OPTIONS: --max-old-space-size=6144
@@ -363,7 +365,7 @@ jobs:
         with:
           name: html-playwright-avt-report--attempt-${{ github.run_attempt }}
           path: playwright-avt-report
-          retention-days: 14
+          retention-days: 1
 
   chromatic-react:
     if:
