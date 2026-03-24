@@ -80,6 +80,11 @@ class CDSSlider extends HostListenerMixin(FormMixin(FocusMixin(LitElement))) {
   private _stepMultiplier = '4';
 
   /**
+   * The internal value of `value` property.
+   */
+  private _value;
+
+  /**
    * The handle for the throttled listener of `pointermove` event.
    */
   private _throttledHandlePointermoveImpl:
@@ -94,6 +99,36 @@ class CDSSlider extends HostListenerMixin(FormMixin(FocusMixin(LitElement))) {
    * `true` if dragging of thumb upper is in progress.
    */
   private _draggingUpper = false;
+
+  /**
+   * Returns how many decimal places a numeric value has.
+   * Supports standard decimals (e.g. `0.1`) and exponential notation (e.g. `1e-3`).
+   */
+  private _getNumericPrecision(value: string | number) {
+    const valueAsString = String(value).toLowerCase();
+
+    if (valueAsString.includes('e')) {
+      const [mantissa, exponentPart] = valueAsString.split('e');
+      const exponent = Number(exponentPart);
+      const decimalPart = mantissa.split('.')[1] ?? '';
+      return Math.max(0, decimalPart.length - exponent);
+    }
+
+    return valueAsString.split('.')[1]?.length ?? 0;
+  }
+
+  /**
+   * Rounds a number using the slider precision derived from `step`, `min`, and `max`.
+   */
+  private _normalizeValue(value: number) {
+    const step = Number(this.step);
+    const min = Number(this.min);
+
+    const precision = this._getNumericPrecision(step);
+    const snapped = min + Math.round((value - min) / step) * step;
+
+    return Number(snapped.toFixed(precision));
+  }
 
   /**
    * The upper bound when there are two handles..
@@ -121,13 +156,14 @@ class CDSSlider extends HostListenerMixin(FormMixin(FocusMixin(LitElement))) {
 
   private set _rate(rate: number) {
     const { max, min, step } = this;
-    this.value =
+    this.value = this._normalizeValue(
       Number(min) +
-      Math.round(
-        ((Number(max) - Number(min)) * Math.min(1, Math.max(0, rate))) /
+        Math.round(
+          ((Number(max) - Number(min)) * Math.min(1, Math.max(0, rate))) /
+            Number(step)
+        ) *
           Number(step)
-      ) *
-        Number(step);
+    );
   }
   /**
    * The rate of the upper thumb position in the track.
@@ -150,13 +186,14 @@ class CDSSlider extends HostListenerMixin(FormMixin(FocusMixin(LitElement))) {
 
   private set _rateUpper(rateUpper: number) {
     const { max, min, step } = this;
-    this.unstable_valueUpper =
+    this.unstable_valueUpper = this._normalizeValue(
       Number(min) +
-      Math.round(
-        ((Number(max) - Number(min)) * Math.min(1, Math.max(0, rateUpper))) /
+        Math.round(
+          ((Number(max) - Number(min)) * Math.min(1, Math.max(0, rateUpper))) /
+            Number(step)
+        ) *
           Number(step)
-      ) *
-        Number(step);
+    );
   }
 
   /**
@@ -236,8 +273,9 @@ class CDSSlider extends HostListenerMixin(FormMixin(FocusMixin(LitElement))) {
               (diff >= 0 ? Math.floor(stepCount) : Math.ceil(stepCount)) * step
             )
           );
-          if (position >= this.value) {
-            this.unstable_valueUpper = position;
+          const normalizedPosition = this._normalizeValue(position);
+          if (normalizedPosition >= this.value) {
+            this.unstable_valueUpper = normalizedPosition;
           }
           this.dispatchEvent(
             new CustomEvent(
@@ -261,11 +299,12 @@ class CDSSlider extends HostListenerMixin(FormMixin(FocusMixin(LitElement))) {
               (diff >= 0 ? Math.floor(stepCount) : Math.ceil(stepCount)) * step
             )
           );
+          const normalizedPosition = this._normalizeValue(position);
           if (
             !this.unstable_valueUpper ||
-            position <= this.unstable_valueUpper
+            normalizedPosition <= this.unstable_valueUpper
           ) {
-            this.value = position;
+            this.value = normalizedPosition;
           }
           this.dispatchEvent(
             new CustomEvent(
@@ -592,7 +631,7 @@ class CDSSlider extends HostListenerMixin(FormMixin(FocusMixin(LitElement))) {
       : '';
     if (intermediate !== value) {
       if (eventContainer === 'upper') {
-        this.unstable_valueUpper = value;
+        this.unstable_valueUpper = this._normalizeValue(value);
       } else {
         this.value = value;
       }
@@ -776,7 +815,15 @@ class CDSSlider extends HostListenerMixin(FormMixin(FocusMixin(LitElement))) {
    * The value.
    */
   @property({ type: Number })
-  value;
+  get value() {
+    return this._value;
+  }
+
+  set value(value) {
+    const { value: oldValue } = this;
+    this._value = this._normalizeValue(value);
+    this.requestUpdate('value', oldValue);
+  }
 
   /**
    * is slide input valid
@@ -943,6 +990,8 @@ class CDSSlider extends HostListenerMixin(FormMixin(FocusMixin(LitElement))) {
       onDrag,
       _endDrag: endDrag,
     } = this;
+
+    const valueUpper = Number(unstable_valueUpper);
 
     const isInteractive = !readonly && !disabled;
 
@@ -1111,6 +1160,7 @@ class CDSSlider extends HostListenerMixin(FormMixin(FocusMixin(LitElement))) {
                         Number(unstable_valueUpper),
                         undefined
                       )}"
+                      aria-valuetext="${formatLabel(valueUpper, undefined)}"
                       @pointerdown="${onDrag}">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
