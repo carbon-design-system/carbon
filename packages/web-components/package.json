@@ -61,7 +61,6 @@
     "test": "web-test-runner \"src/components/**/__tests__/**/*.js\" --node-resolve --concurrency=1",
     "test:updateSnapshots": "yarn test --update-snapshots",
     "typecheck": "tsc --noEmit -p tsconfig.json",
-    "visual-snapshot": "yarn percy storybook:start ./storybook-static",
     "wca": "web-component-analyzer analyze src --outFile custom-elements.json",
     "telemetry:config": "npx -y @ibm/telemetry-js-config-generator generate --wc --id 8cf8b3b8-a121-47d3-9eec-e4bea0ff23f5 --endpoint https://www-api.ibm.com/ibm-telemetry/v1/metrics --files ./src/components"
   },
