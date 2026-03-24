@@ -1,18 +1,9 @@
-import { fromRollup } from '@web/dev-server-rollup';
-import { nodeResolve } from '@rollup/plugin-node-resolve';
-
-const resolve = fromRollup(nodeResolve);
-
 export default {
   files: 'src/components/**/__tests__/**/*.js',
-  nodeResolve: true,
+  nodeResolve: {
+    extensions: ['.js', '.ts'],
+  },
   concurrency: 1,
-
-  plugins: [
-    resolve({
-      extensions: ['.js', '.ts'],
-    }),
-  ],
 
   rootDir: '.',
 

@@ -1,11 +1,11 @@
 /**
- * Copyright IBM Corp. 2025
+ * Copyright IBM Corp. 2025, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
-import { useCallback, useState, type RefObject } from 'react';
+import { useState, type RefObject } from 'react';
 import { usePrefix } from './usePrefix';
 import useIsomorphicEffect from './useIsomorphicEffect';
 
@@ -20,26 +20,24 @@ export const usePresence = (
 
   const isExiting = exitState === 'active';
 
-  // element is exiting
-  if (!isOpen && exitState === 'idle') {
-    setExitState('active');
-  }
+  useIsomorphicEffect(() => {
+    setExitState((prev) => {
+      // element is exiting
+      if (!isOpen && prev === 'idle') return 'active';
 
-  // element exit was interrupted
-  if (isOpen && exitState !== 'idle') {
-    setExitState('idle');
-  }
+      // element exit was interrupted
+      if (isOpen && prev !== 'idle') return 'idle';
 
-  const handleAnimationEnd = useCallback(() => {
-    setExitState('finished');
-  }, []);
+      return prev;
+    });
+  }, [isOpen]);
 
   useIsomorphicEffect(() => {
     if (!ref.current || !isExiting) return;
 
     // resolve for JSDOM
     if (!('getAnimations' in ref.current)) {
-      handleAnimationEnd();
+      setExitState('finished');
       return;
     }
 
@@ -53,7 +51,7 @@ export const usePresence = (
       );
 
     if (!animations.length) {
-      handleAnimationEnd();
+      setExitState('finished');
       return;
     }
 
@@ -62,14 +60,14 @@ export const usePresence = (
     Promise.all(animations.map((animation) => animation.finished)).finally(
       () => {
         if (cancelled) return;
-        handleAnimationEnd();
+        setExitState('finished');
       }
     );
 
     return () => {
       cancelled = true;
     };
-  }, [ref, isExiting, prefix, handleAnimationEnd]);
+  }, [ref, isExiting, prefix]);
 
   return {
     /**

@@ -1,11 +1,11 @@
 /**
- * Copyright IBM Corp. 2016, 2025
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
+import React, { StrictMode } from 'react';
 import { act, render, screen } from '@testing-library/react';
 import { getByText } from '@carbon/test-utils/dom';
 import userEvent from '@testing-library/user-event';
@@ -748,6 +748,42 @@ describe('FilterableMultiSelect', () => {
     rerender(<FilterableMultiSelect {...mockProps} open={false} />);
     await waitForPosition();
     assertMenuClosed();
+  });
+
+  it('should not log render phase update warnings for controlled open changes in StrictMode', async () => {
+    const errorSpy = jest.spyOn(console, 'error').mockImplementation(() => {});
+
+    try {
+      const { rerender } = render(
+        <StrictMode>
+          <FilterableMultiSelect {...mockProps} open={false} />
+        </StrictMode>
+      );
+      await waitForPosition();
+
+      rerender(
+        <StrictMode>
+          <FilterableMultiSelect {...mockProps} open />
+        </StrictMode>
+      );
+      await waitForPosition();
+
+      rerender(
+        <StrictMode>
+          <FilterableMultiSelect {...mockProps} open={false} />
+        </StrictMode>
+      );
+      await waitForPosition();
+
+      const errors = errorSpy.mock.calls.flat().join(' ');
+
+      expect(errors).not.toContain(
+        'Cannot update a component while rendering a different component'
+      );
+      expect(errors).not.toContain('Too many re-renders');
+    } finally {
+      errorSpy.mockRestore();
+    }
   });
 
   it('should have proper aria attributes for accessibility', async () => {

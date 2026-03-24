@@ -341,6 +341,34 @@ describe('ComboBox', () => {
     expect(findInputNode()).toHaveDisplayValue('Apple');
   });
 
+  it('should not call `onChange` on blur when `allowCustomValue` input is empty with no selection', async () => {
+    render(<ComboBox {...mockProps} allowCustomValue />);
+
+    await userEvent.click(findInputNode());
+    fireEvent.blur(findInputNode());
+
+    expect(mockProps.onChange).not.toHaveBeenCalled();
+  });
+
+  it('should never pass empty string `selectedItem` on `allowCustomValue` blur', async () => {
+    const user = userEvent.setup();
+
+    render(<ComboBox {...mockProps} allowCustomValue />);
+
+    await openMenu();
+    await user.click(screen.getByRole('option', { name: 'Item 0' }));
+    mockProps.onChange.mockClear();
+
+    await user.clear(findInputNode());
+    fireEvent.blur(findInputNode());
+
+    const calls = mockProps.onChange.mock.calls.map(([payload]) => payload);
+
+    expect(calls).not.toContainEqual(
+      expect.objectContaining({ selectedItem: '' })
+    );
+  });
+
   it('should apply onChange value if custom value is entered and `allowCustomValue` is set', async () => {
     render(<ComboBox {...mockProps} allowCustomValue />);
 
@@ -1153,6 +1181,8 @@ describe('ComboBox', () => {
   });
 
   describe('ComboBox autocomplete', () => {
+    let mockProps;
+
     const items = [
       { id: 'option-1', text: 'Option 1' },
       { id: 'option-2', text: 'Option 2' },
@@ -1163,12 +1193,14 @@ describe('ComboBox', () => {
       { id: 'orangeish', text: 'Orangeish' },
     ];
 
-    const mockProps = {
-      id: 'test-combobox',
-      items,
-      itemToString: (item) => (item ? item.text : ''),
-      onChange: jest.fn(),
-    };
+    beforeEach(() => {
+      mockProps = {
+        id: 'test-combobox',
+        items,
+        itemToString: (item) => (item ? item.text : ''),
+        onChange: jest.fn(),
+      };
+    });
 
     it('should respect autocomplete prop', async () => {
       render(<ComboBox {...mockProps} typeahead />);
@@ -1176,23 +1208,20 @@ describe('ComboBox', () => {
       const inputNode = findInputNode();
       expect(inputNode).toHaveAttribute('autocomplete');
     });
+
     it('should use autocompleteCustomFilter when autocomplete prop is true', async () => {
       const user = userEvent.setup();
       render(<ComboBox {...mockProps} typeahead />);
 
-      // Open the dropdown
       const input = screen.getByRole('combobox');
-      user.click(input);
+      await user.click(input);
 
-      // Type 'op' which should match all options
       await user.type(input, 'op');
       expect(screen.getAllByRole('option')).toHaveLength(3);
 
-      // Type 'opt' which should still match all options
       await user.type(input, 't');
       expect(screen.getAllByRole('option')).toHaveLength(3);
 
-      // Type 'opti' which should match only 'Option 1'
       await user.type(input, 'i');
       expect(screen.getAllByRole('option')).toHaveLength(3);
       expect(screen.getByText('Option 1')).toBeInTheDocument();
@@ -1204,7 +1233,7 @@ describe('ComboBox', () => {
 
       // Open the dropdown
       const input = screen.getByRole('combobox');
-      user.click(input);
+      await user.click(input);
 
       // Type 'op' which should match all options
       await user.type(input, 'op');
@@ -1228,34 +1257,80 @@ describe('ComboBox', () => {
       render(<ComboBox {...mockProps} typeahead />);
 
       const input = screen.getByRole('combobox');
-      user.click(input);
+      await user.click(input);
 
       await user.type(input, 'xyz');
       await user.keyboard('[Tab]');
 
       expect(document.activeElement).not.toBe(input);
     });
-    it('should suggest best matching typeahead suggestion and complete it in Tab key press', async () => {
+
+    it('should suggest best matching typeahead suggestion and commit it on Tab', async () => {
       const user = userEvent.setup();
       render(<ComboBox {...mockProps} typeahead />);
 
-      // Open the dropdown
       const input = screen.getByRole('combobox');
-      user.click(input);
+      await user.click(input);
 
-      // Type 'op' which should match all options
       await user.type(input, 'Ap');
-
       await user.keyboard('[Tab]');
 
       expect(findInputNode()).toHaveDisplayValue('Apple');
+
+      expect(mockProps.onChange).toHaveBeenCalledWith({
+        selectedItem: items[3],
+      });
     });
+
+    it('should not commit a typeahead selection on Tab after closing the menu', async () => {
+      render(<ComboBox {...mockProps} typeahead />);
+
+      const input = screen.getByRole('combobox');
+
+      await userEvent.click(input);
+      await userEvent.type(input, 'Ap');
+
+      await userEvent.keyboard('{Escape}');
+      assertMenuClosed();
+
+      fireEvent.keyDown(input, { key: 'Tab', code: 'Tab' });
+
+      expect(mockProps.onChange).not.toHaveBeenCalled();
+    });
+
+    it('should skip `disabled` items when completing `typeahead` suggestion on Tab', async () => {
+      const disabledTypeaheadProps = {
+        ...mockProps,
+        items: [
+          { id: 'ibm-cloud', text: 'IBM Cloud', disabled: true },
+          { id: 'ibm-quantum', text: 'IBM Quantum' },
+          { id: 'ibm-z', text: 'IBM Z' },
+        ],
+        onChange: jest.fn(),
+      };
+      const user = userEvent.setup();
+
+      render(<ComboBox {...disabledTypeaheadProps} typeahead />);
+
+      const input = screen.getByRole('combobox');
+
+      user.click(input);
+
+      await user.type(input, 'IBM ');
+      await user.keyboard('[Tab]');
+
+      expect(input).toHaveDisplayValue('IBM Quantum');
+      expect(disabledTypeaheadProps.onChange).toHaveBeenLastCalledWith({
+        selectedItem: disabledTypeaheadProps.items[1],
+      });
+    });
+
     it('should not autocomplete on Tab after backspace', async () => {
       const user = userEvent.setup();
       render(<ComboBox {...mockProps} allowCustomValue typeahead />);
 
       const input = screen.getByRole('combobox');
-      user.click(input);
+      await user.click(input);
 
       await user.type(input, 'App');
       await user.keyboard('[Backspace]');
@@ -1273,7 +1348,7 @@ describe('ComboBox', () => {
       render(<ComboBox {...multipleMatchProps} allowCustomValue typeahead />);
 
       const input = screen.getByRole('combobox');
-      user.click(input);
+      await user.click(input);
 
       await user.type(input, 'App');
       await user.keyboard('[Tab]');
@@ -1286,7 +1361,7 @@ describe('ComboBox', () => {
       render(<ComboBox {...mockProps} allowCustomValue typeahead />);
 
       const input = screen.getByRole('combobox');
-      user.click(input);
+      await user.click(input);
 
       await user.type(input, 'APpl');
       await user.keyboard('[Tab]');
@@ -1299,7 +1374,7 @@ describe('ComboBox', () => {
       render(<ComboBox {...mockProps} typeahead />);
 
       const input = screen.getByRole('combobox');
-      user.click(input);
+      await user.click(input);
 
       await user.keyboard('[Enter]');
 

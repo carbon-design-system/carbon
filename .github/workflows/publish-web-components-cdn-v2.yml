@@ -23,14 +23,14 @@ jobs:
           fetch-depth: '0'
 
       - name: Use Node.js version from .nvmrc
-        uses: actions/setup-node@d02c89dce7e1ba9ef629ce0680989b3a1cc72edb
+        uses: actions/setup-node@53b83947a5a98c8d113130e565377fae1a50d02f
         with:
           node-version-file: '.nvmrc'
 
       - name: Install dependencies
         run: |
           yarn install
-          yarn build
+          yarn --cwd packages/web-components build:cdn
 
       - name: Check release type
         if: contains(github.ref_name, '-rc.')
@@ -43,7 +43,7 @@ jobs:
           path: packages/web-components
 
       - name: Configure IBM Cloud credentials
-        uses: aws-actions/configure-aws-credentials@v5.1.1
+        uses: aws-actions/configure-aws-credentials@v6.0.0
         with:
           aws-access-key-id: ${{ secrets.COMMON_COS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.COMMON_COS_SECRET_ACCESS_KEY }}

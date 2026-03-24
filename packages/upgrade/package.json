@@ -1,7 +1,7 @@
 {
   "name": "@carbon/upgrade",
   "description": "A tool for upgrading Carbon versions",
-  "version": "11.36.0",
+  "version": "11.37.0-rc.0",
   "license": "Apache-2.0",
   "bin": {
     "carbon-upgrade": "./bin/carbon-upgrade.js"
@@ -33,14 +33,13 @@
     "provenance": true
   },
   "scripts": {
-    "build": "esbuild src/cli.js --bundle --platform=node --outfile=cli.js --target=node14 --external:jscodeshift",
+    "build": "yarn clean && tsdown --config tsdown.config.mts --format cjs --out-dir .",
     "clean": "rimraf cli.js",
-    "watch": "yarn build --watch",
+    "watch": "tsdown --config tsdown.config.mts --format cjs --out-dir . --watch",
     "postinstall": "ibmtelemetry --config=telemetry.yml"
   },
   "devDependencies": {
     "chalk": "^5.4.1",
-    "esbuild": "^0.25.0",
     "execa": "^9.6.0",
     "fast-glob": "^3.3.3",
     "fs-extra": "^11.0.0",
@@ -54,6 +53,7 @@
     "npm-which": "^3.0.1",
     "rimraf": "^6.0.1",
     "semver": "^7.7.2",
+    "tsdown": "^0.20.3",
     "yargs": "^17.0.1"
   },
   "dependencies": {
