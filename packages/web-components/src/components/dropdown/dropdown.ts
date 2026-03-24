@@ -656,8 +656,9 @@ class CDSDropdown extends ValidityMixin(
   }
 
   // Default dropdowns close after user selection.
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20452
-  protected _shouldCloseAfterSelection(_item?: CDSDropdownItem) {
+  protected _shouldCloseAfterSelection(item?: CDSDropdownItem) {
+    // Keep `item` for subclasses that change close behavior based on selection.
+    void item;
     return true;
   }
 
