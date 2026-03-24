@@ -11,7 +11,9 @@ import styles from './tabs-story.scss?lit';
 import { prefix } from '../../globals/settings';
 import '../button';
 import '../checkbox';
+import '../layer';
 import '../radio-button';
+import '../stack';
 import './index';
 import '../text-input';
 
@@ -333,45 +335,53 @@ export const Vertical = {
           role="tabpanel"
           aria-labelledby="tab-cloudFoundry"
           hidden>
-          <form style="margin: 2em">
-            <cds-text-input
-              type="text"
-              label="First Name"
-              id="text-input-1"></cds-text-input>
-            <cds-text-input
-              type="text"
-              label="Middle Initial"
-              id="text-input-1"></cds-text-input>
-            <cds-text-input
-              type="text"
-              label="Last Name"
-              id="text-input-1"></cds-text-input>
-            <cds-radio-button-group
-              legend-text="Radio button heading"
-              invalid-text="Invalid selection"
-              label-position="right"
-              orientation="horizontal"
-              name="radio-group"
-              value="radio-2"
-              warn-text="Please notice the warning">
-              <cds-radio-button
-                value="radio-1"
-                label-text="Option 1"></cds-radio-button>
-              <cds-radio-button
-                value="radio-2"
-                label-text="Option 2"></cds-radio-button>
-              <cds-radio-button
-                value="radio-3"
-                label-text="Option 3"></cds-radio-button>
-            </cds-radio-button-group>
-            <cds-checkbox id="cb" label-text="Checkbox one"></cds-checkbox>
-            <cds-checkbox id="cb" label-text="Checkbox two"></cds-checkbox>
-            <cds-button
-              style="margin-top: 1rem; margin-bottom: 1rem"
-              type="submit">
-              Submit
-            </cds-button>
-          </form>
+          <cds-layer level="1">
+            <form style="margin: 2em">
+              <cds-stack gap="7">
+                <cds-text-input
+                  type="text"
+                  label="First Name"
+                  id="text-input-1"></cds-text-input>
+                <cds-text-input
+                  type="text"
+                  label="Middle Initial"
+                  id="text-input-2"></cds-text-input>
+                <cds-text-input
+                  type="text"
+                  label="Last Name"
+                  id="text-input-3"></cds-text-input>
+                <cds-radio-button-group
+                  legend-text="Radio button heading"
+                  invalid-text="Invalid selection"
+                  label-position="right"
+                  orientation="horizontal"
+                  name="radio-group"
+                  value="radio-2"
+                  warn-text="Please notice the warning">
+                  <cds-radio-button
+                    value="radio-1"
+                    label-text="Option 1"></cds-radio-button>
+                  <cds-radio-button
+                    value="radio-2"
+                    label-text="Option 2"></cds-radio-button>
+                  <cds-radio-button
+                    value="radio-3"
+                    label-text="Option 3"></cds-radio-button>
+                </cds-radio-button-group>
+                <cds-checkbox
+                  id="cb-1"
+                  label-text="Checkbox one"></cds-checkbox>
+                <cds-checkbox
+                  id="cb-2"
+                  label-text="Checkbox two"></cds-checkbox>
+                <cds-button
+                  class="${prefix}-ce-demo-devenv--tab-story-button"
+                  type="submit">
+                  Submit
+                </cds-button>
+              </cds-stack>
+            </form>
+          </cds-layer>
         </div>
         <div
           slot="panel"

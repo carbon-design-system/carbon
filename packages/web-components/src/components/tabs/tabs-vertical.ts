@@ -12,6 +12,12 @@ import styles from './tabs.scss?lit';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
 /**
+ * Breakpoint for switching between horizontal and vertical tab layouts.
+ * Matches Carbon's md breakpoint (673px) - below this, tabs display horizontally.
+ */
+const VERTICAL_TABS_BREAKPOINT = '(min-width: 673px)';
+
+/**
  * Vertical tabs container component.
  *
  * @element cds-tabs-vertical
@@ -20,26 +26,22 @@ import { carbonElement as customElement } from '../../globals/decorators/carbon-
  */
 @customElement(`${prefix}-tabs-vertical`)
 export default class CDSTabsVertical extends LitElement {
+  /**
+   * Option to set a height style only if using vertical variation.
+   */
   @property({ attribute: 'custom-height' })
   customHeight?: string;
 
-  private _resizeObserver: ResizeObserver | null = null;
   private _mediaQueryList: MediaQueryList | null = null;
 
-  /**
-   * Handles viewport width changes to toggle the CSS grid class and vertical attribute.
-   * Adds 'cds--css-grid' class and vertical attribute when width >= 673px, removes them when < 673px.
-   */
   private _handleViewportChange = (e: MediaQueryListEvent | MediaQueryList) => {
     const tabs = this.querySelector(`${prefix}-tabs`);
     if (e.matches) {
-      // Viewport is 673px or wider
       this.classList.add(`${prefix}--css-grid`);
       if (tabs) {
         tabs.setAttribute('vertical', '');
       }
     } else {
-      // Viewport is 672px or narrower
       this.classList.remove(`${prefix}--css-grid`);
       if (tabs) {
         tabs.removeAttribute('vertical');
@@ -48,25 +50,17 @@ export default class CDSTabsVertical extends LitElement {
   };
 
   firstUpdated() {
-    // Set up media query listener for viewport width
-    this._mediaQueryList = window.matchMedia('(min-width: 673px)');
-    // Set initial state
+    this._mediaQueryList = window.matchMedia(VERTICAL_TABS_BREAKPOINT);
     this._handleViewportChange(this._mediaQueryList);
-    // Listen for changes
     this._mediaQueryList.addEventListener('change', this._handleViewportChange);
 
     requestAnimationFrame(() => {
       this._applyHeight();
+    });
 
-      const resizeObserver = new ResizeObserver(() => {
-        if (!this.customHeight) {
-          this._applyHeight();
-        }
-      });
-      this._resizeObserver = resizeObserver;
-      this.querySelectorAll<HTMLElement>('[slot="panel"]').forEach((panel) => {
-        resizeObserver.observe(panel);
-      });
+    const panelSlot = this.shadowRoot?.querySelector('slot[name="panel"]');
+    panelSlot?.addEventListener('slotchange', () => {
+      this._applyHeight();
     });
   }
 
@@ -79,9 +73,6 @@ export default class CDSTabsVertical extends LitElement {
 
   disconnectedCallback() {
     super.disconnectedCallback();
-    this._resizeObserver?.disconnect();
-    this._resizeObserver = null;
-    // Clean up media query listener
     this._mediaQueryList?.removeEventListener(
       'change',
       this._handleViewportChange
@@ -90,7 +81,6 @@ export default class CDSTabsVertical extends LitElement {
   }
 
   private _applyHeight() {
-    // Only apply height calculation when in vertical mode (css-grid class present)
     const isVertical = this.classList.contains(`${prefix}--css-grid`);
 
     if (this.customHeight) {
@@ -98,7 +88,6 @@ export default class CDSTabsVertical extends LitElement {
       return;
     }
 
-    // Only calculate height when in vertical mode
     if (!isVertical) {
       this.style.removeProperty('height');
       return;
@@ -123,9 +112,12 @@ export default class CDSTabsVertical extends LitElement {
       panel.hidden = hiddenStates[index];
     });
 
-    // Match React behavior: only use panel height, not tabs height
-    if (tallestPanel > 0) {
-      this.style.height = `${tallestPanel}px`;
+    const tabsEl = this.querySelector<HTMLElement>(`${prefix}-tabs`);
+    const tabsHeight = tabsEl?.offsetHeight ?? 0;
+
+    const height = Math.max(tallestPanel, tabsHeight);
+    if (height > 0) {
+      this.style.height = `${height}px`;
     } else {
       this.style.removeProperty('height');
     }

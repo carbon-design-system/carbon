@@ -386,8 +386,6 @@ $inset-transition: inset 110ms motion(standard, productive);
 :host(#{$prefix}-tabs-vertical) ::slotted([role='tabpanel']) {
   // stylelint-disable-next-line declaration-no-important
   padding: layout.density('padding-inline') !important;
-  block-size: 100%;
-  inline-size: 100%;
   outline: none;
 }
 
