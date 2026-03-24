@@ -10,6 +10,7 @@ import { html } from 'lit';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import CDSDropdown from '../dropdown/dropdown';
 import styles from './fluid-dropdown.scss?lit';
+import { property } from 'lit/decorators.js';
 
 /**
  * Fluid dropdown.
@@ -18,6 +19,9 @@ import styles from './fluid-dropdown.scss?lit';
  */
 @customElement(`${prefix}-fluid-dropdown`)
 class CDSFluidDropdown extends CDSDropdown {
+  // Specify if the FluidDropdown should render its menu items in condensed mode
+  @property({ type: Boolean, reflect: true, attribute: 'is-condensed' })
+  isCondensed = false;
   connectedCallback() {
     this.setAttribute('isFluid', 'true');
     super.connectedCallback();
