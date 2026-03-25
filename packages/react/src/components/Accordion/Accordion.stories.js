@@ -84,42 +84,36 @@ export const Default = (args) => {
   const { onHeadingClick, ...restArgs } = args;
   return (
     <Accordion {...restArgs}>
-      <AccordionItem title="Section 1 title" onHeadingClick={onHeadingClick}>
+      <AccordionItem title="Choose your plan" onHeadingClick={onHeadingClick}>
         <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-          aliquip ex ea commodo consequat.
+          Compare plan features and select the option that best matches your
+          team&apos;s expected usage.
         </p>
       </AccordionItem>
-      <AccordionItem title="Section 2 title" onHeadingClick={onHeadingClick}>
+      <AccordionItem title="Add team members" onHeadingClick={onHeadingClick}>
         <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-          aliquip ex ea commodo consequat.
+          Invite collaborators by email and assign their workspace roles before
+          launch.
         </p>
       </AccordionItem>
-      <AccordionItem title="Section 3 title" onHeadingClick={onHeadingClick}>
+      <AccordionItem
+        title="Set payment details"
+        onHeadingClick={onHeadingClick}>
         <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-          aliquip ex ea commodo consequat.
+          Add billing information and choose whether to receive invoices by
+          email.
         </p>
       </AccordionItem>
       <AccordionItem
         onHeadingClick={onHeadingClick}
         title={
           <span>
-            Section 4 title (<em>the title can be a node</em>)
+            Review and confirm (<em>title can be a node</em>)
           </span>
         }>
         <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-          aliquip ex ea commodo consequat.
+          Check your setup summary, then confirm to create the workspace for
+          your team.
         </p>
       </AccordionItem>
     </Accordion>
@@ -157,47 +151,39 @@ export const Controlled = (args) => {
 
       <Accordion {...restArgs}>
         <AccordionItem
-          title="Section 1 title"
+          title="Choose your plan"
           open={expandAll}
           onHeadingClick={onHeadingClick}>
           <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat.
+            Compare plan features and select the option that best matches your
+            team&apos;s expected usage.
           </p>
         </AccordionItem>
         <AccordionItem
-          title="Section 2 title"
+          title="Add team members"
           open={expandAll}
           onHeadingClick={onHeadingClick}>
           <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat.
+            Invite collaborators by email and assign their workspace roles
+            before launch.
           </p>
         </AccordionItem>
         <AccordionItem
-          title="Section 3 title"
+          title="Set payment details"
           open={expandAll}
           onHeadingClick={onHeadingClick}>
           <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat.
+            Add billing information and choose whether to receive invoices by
+            email.
           </p>
         </AccordionItem>
         <AccordionItem
-          title="Section 4 title"
+          title="Review and confirm"
           open={expandAll}
           onHeadingClick={onHeadingClick}>
           <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat.
+            Check your setup summary, then confirm to create the workspace for
+            your team.
           </p>
         </AccordionItem>
       </Accordion>
@@ -215,36 +201,32 @@ export const _WithLayer = (args) => {
   return (
     <WithLayer>
       <Accordion {...restArgs}>
-        <AccordionItem title="Section 1 title" onHeadingClick={onHeadingClick}>
+        <AccordionItem title="Choose your plan" onHeadingClick={onHeadingClick}>
           <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat.
+            Compare plan features and select the option that best matches your
+            team&apos;s expected usage.
           </p>
         </AccordionItem>
-        <AccordionItem title="Section 2 title" onHeadingClick={onHeadingClick}>
+        <AccordionItem title="Add team members" onHeadingClick={onHeadingClick}>
           <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat.
+            Invite collaborators by email and assign their workspace roles
+            before launch.
           </p>
         </AccordionItem>
-        <AccordionItem title="Section 3 title" onHeadingClick={onHeadingClick}>
+        <AccordionItem
+          title="Set payment details"
+          onHeadingClick={onHeadingClick}>
           <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat.
+            Add billing information and choose whether to receive invoices by
+            email.
           </p>
         </AccordionItem>
-        <AccordionItem title="Section 4 title" onHeadingClick={onHeadingClick}>
+        <AccordionItem
+          title="Review and confirm"
+          onHeadingClick={onHeadingClick}>
           <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat.
+            Check your setup summary, then confirm to create the workspace for
+            your team.
           </p>
         </AccordionItem>
       </Accordion>
