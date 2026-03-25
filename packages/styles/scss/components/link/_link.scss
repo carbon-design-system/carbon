@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2016, 2023
+// Copyright IBM Corp. 2016, 2026
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -11,6 +11,7 @@
 @use '../../theme' as *;
 @use '../../type';
 @use '../../utilities/component-reset';
+@use '../../utilities/convert';
 @use '../../utilities/custom-property';
 @use '../../utilities/focus-outline' as *;
 
@@ -120,5 +121,16 @@ $link-focus-text-color: custom-property.get-var(
     line-height: inherit;
     margin-inline-start: $spacing-03;
     vertical-align: text-bottom;
+  }
+
+  // Large icon size
+  .#{$prefix}--link--lg .#{$prefix}--link__icon > svg {
+    block-size: convert.to-rem(20px);
+    inline-size: convert.to-rem(20px);
+  }
+
+  // For large links, set block-size to match icon size to prevent misalignment
+  .#{$prefix}--link--lg .#{$prefix}--link__icon {
+    block-size: convert.to-rem(20px);
   }
 }
