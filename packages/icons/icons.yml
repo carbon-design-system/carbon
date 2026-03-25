@@ -414,6 +414,15 @@
     - software
   sizes:
     - 32
+- name: add--server
+  friendly_name: Add server
+  aliases:
+    - add
+    - server
+    - add server
+    - plus
+  sizes:
+    - 32
 - name: add-comment
   friendly_name: Add comment
   aliases:
@@ -2748,6 +2757,20 @@
     - goto
     - workflow
     - outline
+  sizes:
+    - 32
+- name: brainstorm
+  friendly_name: Brainstorm
+  aliases:
+    - brainstorm
+    - sticker
+  sizes:
+    - 32
+- name: brainstorm--filled
+  friendly_name: Brainstorm filled
+  aliases:
+    - brainstorm
+    - sticker
   sizes:
     - 32
 - name: branch
@@ -5629,6 +5652,29 @@
     - collapse
   sizes:
     - 32
+- name: collapse--stripe
+  friendly_name: Collapse stripe
+  aliases:
+    - stripe
+    - collapse
+  sizes:
+    - 32
+- name: collapse--title
+  friendly_name: Collapse title
+  aliases:
+    - title
+    - card
+    - collapse
+  sizes:
+    - 32
+- name: collapse--title-2
+  friendly_name: Collapse title 2
+  aliases:
+    - title
+    - card
+    - collapse
+  sizes:
+    - 32
 - name: color-palette
   friendly_name: Color palette
   aliases:
@@ -7376,6 +7422,16 @@
     - policies
     - timeouts
     - configurations
+  sizes:
+    - 32
+- name: delivery--time
+  friendly_name: Delivery time
+  aliases:
+    - delivery
+    - delivery time
+    - time
+    - duration
+    - expectation
   sizes:
     - 32
 - name: delivery-truck
@@ -18686,6 +18742,14 @@
     - formatting
   sizes:
     - 32
+- name: open--stripe
+  friendly_name: Open stripe
+  aliases:
+    - stripe
+    - open
+    - arrow
+  sizes:
+    - 32
 - name: open-panel--bottom
   friendly_name: Open panel bottom
   sizes:
@@ -18837,6 +18901,32 @@
     - scheduling
     - provisioning
     - deployment
+  sizes:
+    - 32
+- name: order--server
+  friendly_name: Order server
+  aliases:
+    - order
+    - server
+    - shopping cart
+  sizes:
+    - 32
+- name: order--storm
+  friendly_name: Order storm
+  aliases:
+    - order
+    - storm
+    - server
+    - shopping cart
+  sizes:
+    - 32
+- name: order--stratus
+  friendly_name: Order stratus
+  aliases:
+    - order
+    - stratus
+    - server
+    - shopping cart
   sizes:
     - 32
 - name: order-details
@@ -20855,6 +20945,16 @@
     - refresh
     - replay
     - restart
+    - arrow
+  sizes:
+    - 32
+- name: renew--alt
+  friendly_name: Renew alt
+  aliases:
+    - refresh
+    - replay
+    - restart
+    - arrow
   sizes:
     - 32
 - name: repeat
@@ -22230,6 +22330,15 @@
     - clock
   sizes:
     - 32
+- name: server--time--usage
+  friendly_name: Server time usage
+  aliases:
+    - server
+    - time
+    - usage
+    - clock
+  sizes:
+    - 32
 - name: Serverless-Fleet
   friendly_name: Serverless Fleet
   aliases:
@@ -22418,6 +22527,17 @@
     - thinking
     - knowledge
     - exchange
+  sizes:
+    - 32
+- name: shipment--delivery
+  friendly_name: Shipment delivery
+  aliases:
+    - shipment
+    - delivery
+    - truck
+    - time
+    - shipment delivery
+    - time delivery
   sizes:
     - 32
 - name: shopping--bag
@@ -23614,6 +23734,17 @@
     - buy
   sizes:
     - 32
+- name: storm
+  friendly_name: Storm
+  aliases:
+    - storm
+    - order
+    - server
+    - deal
+    - storm order
+    - storm deal
+  sizes:
+    - 32
 - name: storm-tracker
   friendly_name: Storm tracker
   aliases:
@@ -23630,6 +23761,17 @@
     - X
     - O
     - arrows
+  sizes:
+    - 32
+- name: stratus
+  friendly_name: Stratus
+  aliases:
+    - stratus
+    - order
+    - deal
+    - server
+    - stratus order
+    - stratus deal
   sizes:
     - 32
 - name: strawberry
@@ -24021,6 +24163,20 @@
   aliases:
     - switcher
     - selector
+  sizes:
+    - 32
+- name: swot
+  friendly_name: SWOT
+  aliases:
+    - swot
+    - diagram
+  sizes:
+    - 32
+- name: swot--filled
+  friendly_name: SWOT filled
+  aliases:
+    - swot
+    - diagram
   sizes:
     - 32
 - name: sync-settings

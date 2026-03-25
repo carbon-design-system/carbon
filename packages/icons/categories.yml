@@ -9,6 +9,9 @@ categories:
           - bottom-panel--open
           - categorical-palette
           - center-to-fit
+          - collapse--stripe
+          - collapse--title
+          - collapse--title-2
           - color-picker
           - continue
           - continue--filled
@@ -30,6 +33,7 @@ categories:
           - open-panel--left
           - open-panel--right
           - open-panel--top
+          - open--stripe
           - pause
           - pause--filled
           - pause--outline
@@ -352,6 +356,8 @@ categories:
           - bookmark
           - bookmark--add
           - bookmark--filled
+          - brainstorm
+          - brainstorm--filled
           - BPMN-compensation--fill
           - BPMN-compensation--outline
           - BPMN-conditional--fill
@@ -480,6 +486,7 @@ categories:
           - recommend
           - redo
           - renew
+          - renew--alt
           - repeat
           - repeat--one
           - replicate
@@ -626,7 +633,7 @@ categories:
           - view--off--filled
   - name: Brand
     subcategories:
-      - name: Design and development
+      - name: Third-party logos
         members:
           - logo--angular
           - logo--ansible-community
@@ -1015,6 +1022,9 @@ categories:
           - money
           - monster
           - noodle-bowl
+          - order--server
+          - order--storm
+          - order--stratus
           - piggy-bank
           - piggy-bank--slot
           - pricing--consumption
@@ -1025,6 +1035,7 @@ categories:
           - purchase
           - receipt
           - recycle
+          - shipment--delivery
           - shopping--bag
           - shopping--cart
           - shopping--cart--arrow-down
@@ -1038,6 +1049,7 @@ categories:
           - sprout
           - stack-limitation
           - store
+          - storm
           - strawberry
           - sustainability
           - tennis
@@ -1496,6 +1508,8 @@ categories:
           - report--data
           - row--collapse
           - row--expand
+          - swot
+          - swot--filled
           - sankey-diagram
           - sankey-diagram--alt
           - scatter-matrix
@@ -1844,6 +1858,7 @@ categories:
           - accept-action--usage
           - action--definition
           - action--usage
+          - add--server
           - anchor
           - application--mobile
           - application--virtual
@@ -2046,6 +2061,7 @@ categories:
           - server--dns
           - server--proxy
           - server--time
+          - server--time--usage
           - session-border-control
           - shapes
           - slisor
@@ -2065,6 +2081,7 @@ categories:
           - switch-layer-3
           - sysplex--distributor
           - spyre-accelerator
+          - stratus
           - tcp-ip-service
           - terminal--3270
           - top-data-sets
@@ -2206,6 +2223,7 @@ categories:
           - calendar--add--alt
           - calendar--settings
           - calendar--tools
+          - delivery--time
           - event
           - event--schedule
           - hourglass
