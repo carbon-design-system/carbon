@@ -40,11 +40,13 @@ export default class CDSTabsVertical extends LitElement {
       this.classList.add(`${prefix}--css-grid`);
       if (tabs) {
         tabs.setAttribute('vertical', '');
+        tabs.removeAttribute('type');
       }
     } else {
       this.classList.remove(`${prefix}--css-grid`);
       if (tabs) {
         tabs.removeAttribute('vertical');
+        tabs.setAttribute('type', 'contained');
       }
     }
   };

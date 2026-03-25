@@ -113,7 +113,7 @@ $inset-transition: inset 110ms motion(standard, productive);
   outline: none;
 }
 
-:host(#{$prefix}-tab:not([type='contained'])) {
+:host(#{$prefix}-tab:not([type='contained']):not([vertical])) {
   margin-inline-end: convert.to-rem(1px);
 
   .#{$prefix}--tabs__nav-link {
@@ -122,8 +122,14 @@ $inset-transition: inset 110ms motion(standard, productive);
   }
 }
 
-:host(#{$prefix}-tab:not([type='contained']):last-of-type) {
+:host(#{$prefix}-tab:not([type='contained']):not([vertical]):last-of-type) {
   margin-inline-end: 0;
+}
+:host(#{$prefix}-tab[vertical]) {
+  .#{$prefix}--tabs__nav-link {
+    padding-block-end: $spacing-03;
+    padding-block-start: $spacing-03;
+  }
 }
 
 :host(#{$prefix}-tab[selected]) {
