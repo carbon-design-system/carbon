@@ -289,7 +289,6 @@ const DatePickerInput = frFn((props, ref) => {
           ) : (
             ''
           )}
-          {isFluid && <DatePickerIcon datePickerType={datePickerType} />}
           <DatePickerIcon
             datePickerType={datePickerType}
             invalid={normalizedProps.invalid}
