@@ -23,14 +23,14 @@ jobs:
           fetch-depth: '0'
 
       - name: Use Node.js version from .nvmrc
-        uses: actions/setup-node@54045abd5dcd3b0fee9ca02fa24c57545834c9cc
+        uses: actions/setup-node@53b83947a5a98c8d113130e565377fae1a50d02f
         with:
           node-version-file: '.nvmrc'
 
       - name: Install dependencies
         run: |
           yarn install
-          yarn build
+          yarn --cwd packages/web-components build:cdn
 
       - name: Check release type
         if: contains(github.ref_name, '-rc.')

@@ -259,11 +259,6 @@ export const Inline = {
 };
 
 export const Skeleton = {
-  parameters: {
-    percy: {
-      skip: true,
-    },
-  },
   render: () => html` <cds-select-skeleton></cds-select-skeleton> `,
 };
 
