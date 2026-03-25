@@ -411,7 +411,12 @@ const Menu = forwardRef<HTMLUListElement, MenuProps>(function Menu(
   useEffect(() => {
     if (open) {
       const raf = requestAnimationFrame(() => {
-        if (focusableItems.length > 0) {
+        const activeElement = menu.current?.ownerDocument.activeElement;
+        const menuContainsFocus =
+          activeElement instanceof Node &&
+          menu.current?.contains(activeElement);
+
+        if (focusableItems.length > 0 && (!isRoot || menuContainsFocus)) {
           focusItem();
         }
       });
