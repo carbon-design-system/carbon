@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2026
+ * Copyright IBM Corp. 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -27,6 +27,48 @@ $css--plex: true !default;
   border-block-end: 1px solid $border-strong;
   inline-size: fit-content;
   max-inline-size: 100%;
+
+  #floating-menu-container {
+    position: absolute;
+    inline-size: 100%;
+  }
+
+  .#{$prefix}--date-picker__calendar.open {
+    margin-block-start: 0;
+  }
+
+  .flatpickr-next-month,
+  .flatpickr-prev-month {
+    svg {
+      transform: rotate(0) #{'/*rtl:rotate(180deg)*/'};
+    }
+  }
+
+  .#{$prefix}--date-picker__day.flatpickr-disabled,
+  .flatpickr-day.flatpickr-disabled {
+    color: $layer-selected-inverse;
+    cursor: not-allowed;
+    opacity: 0.5;
+
+    &:hover {
+      background: transparent;
+    }
+  }
+
+  .flatpickr-next-month.flatpickr-disabled,
+  .flatpickr-prev-month.flatpickr-disabled {
+    svg {
+      cursor: not-allowed;
+      fill: $layer-selected-inverse;
+      opacity: 0.5;
+    }
+
+    &:hover {
+      svg {
+        fill: $layer-selected-inverse;
+      }
+    }
+  }
 }
 
 :host(#{$prefix}-fluid-date-picker[invalid]) {
@@ -86,8 +128,8 @@ $css--plex: true !default;
   }
 }
 
-:host(#{$prefix}-date-picker-input[kind='from']),
-:host(#{$prefix}-date-picker-input-skeleton[kind='from']) {
+:host(#{$prefix}-fluid-date-picker-input[kind='from']),
+:host(#{$prefix}-fluid-date-picker-input-skeleton[kind='from']) {
   margin-inline-end: convert.to-rem(1px);
 }
 
@@ -100,6 +142,14 @@ $css--plex: true !default;
   .#{$prefix}--date-picker__input {
     inline-size: convert.to-rem(143.5px);
   }
+}
+
+:host(#{$prefix}-fluid-date-picker[range]) {
+  display: flex;
+}
+
+:host(#{$prefix}-fluid-date-picker-input[kind='to']) {
+  border-inline-start: 1px solid $border-strong;
 }
 
 :host(#{$prefix}-fluid-date-picker-input:focus-within) {
@@ -140,6 +190,11 @@ $css--plex: true !default;
   padding-block-end: convert.to-rem(13px);
   padding-block-start: convert.to-rem(32px);
   padding-inline: $spacing-05;
+}
+
+// Push the calendar icon down to account for the floating label above the input value
+:host(#{$prefix}-fluid-date-picker-input) .#{$prefix}--date-picker__icon {
+  inset-block-start: convert.to-rem(43px);
 }
 
 // ── Fluid date picker skeleton ───────────────────────────────────────────────
