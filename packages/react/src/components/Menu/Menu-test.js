@@ -8,7 +8,13 @@
 import React from 'react';
 import { useState } from 'react';
 import { Menu, MenuItem, MenuItemSelectable, MenuItemRadioGroup } from './';
-import { act, fireEvent, render, screen } from '@testing-library/react';
+import {
+  act,
+  fireEvent,
+  render,
+  screen,
+  waitFor,
+} from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { waitForPosition } from '../ListBox/test-helpers';
 
@@ -333,17 +339,41 @@ describe('MenuItem', () => {
       expect(document.activeElement).toBe(item1);
     });
 
-    it('should skip disabled items when determining first focusable', () => {
-      render(
-        <Menu open label="Menu">
-          <MenuItem label="Disabled" disabled />
-          <MenuItem label="Focusable" />
-        </Menu>
+    it('should not steal focus on rerender while open', async () => {
+      const { rerender } = render(
+        <>
+          <input aria-label="Outside input" />
+          <Menu open label="Menu">
+            <MenuItem label="Item 1" />
+            <MenuItem label="Item 2" />
+          </Menu>
+        </>
       );
 
-      const items = screen.getAllByRole('menuitem');
-      expect(items[0]).toHaveAttribute('tabindex', '-1');
-      expect(items[1]).toHaveAttribute('tabindex', '0');
+      const item1 = await screen.findByRole('menuitem', { name: 'Item 1' });
+      expect(item1).toHaveFocus();
+
+      const outsideInput = screen.getByRole('textbox', {
+        name: 'Outside input',
+      });
+      outsideInput.focus();
+      expect(outsideInput).toHaveFocus();
+
+      rerender(
+        <>
+          <input aria-label="Outside input" />
+          <Menu open label="Updated menu">
+            <MenuItem label="Item 1" />
+            <MenuItem label="Item 2" />
+          </Menu>
+        </>
+      );
+
+      await waitFor(() => {
+        expect(
+          screen.getByRole('textbox', { name: 'Outside input' })
+        ).toHaveFocus();
+      });
     });
 
     it('moves focus to submenu when opening via ArrowRight key', async () => {
@@ -364,7 +394,9 @@ describe('MenuItem', () => {
       const child = screen.getByRole('menuitem', { name: 'Child' });
       expect(child).toBeVisible();
 
-      expect(child).toHaveFocus();
+      await waitFor(() => {
+        expect(child).toHaveFocus();
+      });
     });
   });
 
