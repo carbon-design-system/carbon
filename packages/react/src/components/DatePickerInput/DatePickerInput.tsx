@@ -199,8 +199,6 @@ const DatePickerInput = frFn((props, ref) => {
     type,
   };
 
-  const isReadOnly = readOnly && !normalizedProps.disabled;
-
   if (
     process.env.NODE_ENV !== 'production' &&
     'value' in rest &&
@@ -224,7 +222,7 @@ const DatePickerInput = frFn((props, ref) => {
   const labelClasses = cx(`${prefix}--label`, {
     [`${prefix}--visually-hidden`]: hideLabel,
     [`${prefix}--label--disabled`]: normalizedProps.disabled,
-    [`${prefix}--label--readonly`]: isReadOnly,
+    [`${prefix}--label--readonly`]: readOnly && !normalizedProps.disabled,
   });
   const helperTextClasses = cx(`${prefix}--form__helper-text`, {
     [`${prefix}--form__helper-text--disabled`]: normalizedProps.disabled,
@@ -252,10 +250,13 @@ const DatePickerInput = frFn((props, ref) => {
     ...datePickerInputProps,
     className: inputClasses,
     disabled: normalizedProps.disabled,
-    readOnly: isReadOnly,
     ref,
     ['aria-describedby']: helperText ? datePickerInputHelperId : undefined,
   };
+
+  if (readOnly) {
+    inputProps.readOnly = true;
+  }
   if (normalizedProps.invalid) {
     inputProps['data-invalid'] = true;
   }
