@@ -10,7 +10,6 @@
   "workspaces": [
     "actions/*",
     "config/*",
-    "examples/*",
     "packages/*",
     "www"
   ],
@@ -57,8 +56,6 @@
     "@commitlint/config-conventional": "^20.0.0",
     "@eslint/compat": "^2.0.1",
     "@eslint/js": "^9.24.0",
-    "@percy/cli": "^1.30.4",
-    "@percy/playwright": "^1.0.7",
     "@playwright/test": "^1.36.2",
     "@testing-library/dom": "^10.1.0",
     "@testing-library/jest-dom": "^6.0.0",
