@@ -181,11 +181,6 @@ export const Default = {
 };
 
 export const Skeleton = {
-  parameters: {
-    percy: {
-      skip: true,
-    },
-  },
   render: () => html` <cds-number-input-skeleton></cds-number-input-skeleton> `,
 };
 
