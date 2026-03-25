@@ -604,13 +604,7 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
       if (controlledValue !== undefined) {
         return controlledValue;
       }
-      if (defaultValue !== undefined) {
-        return defaultValue;
-      }
-      if (allowEmpty) {
-        return '';
-      }
-      return 0;
+      return defaultValue;
     });
 
     const numberParser = useMemo(
@@ -820,8 +814,6 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
             if (direction === `down`) rawValue = -1;
           } else if ((min && min > 0 && max && max > 0) || min) {
             rawValue = min;
-          } else {
-            rawValue = 0;
           }
         } else if (direction === 'up') {
           rawValue = currentValue + step;
