@@ -231,6 +231,16 @@ describe('Slider', () => {
       expect(screen.getByRole('slider').id).toEqual(testId);
     });
 
+    it('should avoid using `Math.random` when auto-generating `id`s', () => {
+      const randomSpy = jest.spyOn(Math, 'random');
+
+      renderSlider();
+
+      expect(randomSpy).not.toHaveBeenCalled();
+
+      randomSpy.mockRestore();
+    });
+
     it('should apply a custom input type', () => {
       const customInputType = 'text';
       renderSlider({
@@ -433,6 +443,19 @@ describe('Slider', () => {
         expect(onChange).toHaveBeenLastCalledWith({
           value: 11,
         });
+      });
+
+      it('should not pass `stepMultiplier` to the root slider element', () => {
+        renderSlider({
+          ariaLabelInput: inputAriaValue,
+          stepMultiplier: 10,
+          'data-forwarded-prop': 'yes',
+        });
+
+        const sliderRoot = screen.getByRole('presentation');
+
+        expect(sliderRoot).toHaveAttribute('data-forwarded-prop', 'yes');
+        expect(sliderRoot).not.toHaveAttribute('stepmultiplier');
       });
 
       it('should gracefully handle non-numeric keys', async () => {
