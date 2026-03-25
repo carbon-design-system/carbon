@@ -24,11 +24,6 @@ $css--plex: true !default;
   display: block;
 }
 
-:host(#{$prefix}-contained-list[kind='on-page']:not(:first-of-type)) {
-  background-color: #ff000040;
-  margin-block-start: $spacing-05;
-}
-
 :host(#{$prefix}-contained-list-item) {
   display: block;
 }

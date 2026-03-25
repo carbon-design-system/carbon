@@ -404,6 +404,17 @@ export const MultipleOnPageLists = {
 
 const meta = {
   title: 'Components/Contained list',
+  decorators: [
+    (story) => html`
+      <style>
+        cds-contained-list[kind='on-page']
+          + cds-contained-list[kind='on-page'] {
+          margin-block-start: 1rem;
+        }
+      </style>
+      <div>${story()}</div>
+    `,
+  ],
   parameters: {
     docs: {
       page: storyDocs,

@@ -30,6 +30,13 @@ import * as ContainedListStories from './contained-list.stories';
 
 <Canvas of={ContainedListStories.Default} />
 
+> **Note:** When using multiple consecutive `on-page` contained lists, `$spacing-05` can be added to maintain proper spacing between 2 consecutive on-page lists:
+> ```css
+> cds-contained-list[kind='on-page'] + cds-contained-list[kind='on-page'] {
+>   margin-block-start: $spacing-05;
+> }
+> ```
+
 ## Search
 
 ### Expandable Search

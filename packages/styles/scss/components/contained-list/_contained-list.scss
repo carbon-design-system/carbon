@@ -115,7 +115,6 @@
   // "On Page" variant
 
   .#{$prefix}--contained-list--on-page + .#{$prefix}--contained-list--on-page {
-    background-color: #ff000040;
     margin-block-start: $spacing-05;
   }
 
