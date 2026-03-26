@@ -21,8 +21,14 @@ export default {
   },
 };
 
-export const Default = () => {
-  return <Toggle labelText="Label" defaultToggled id="toggle-3" />;
+export const Default = (args) => {
+  return <Toggle {...args} />;
+};
+
+Default.args = {
+  labelText: 'Label',
+  defaultToggled: true,
+  id: 'toggle-3',
 };
 
 Default.argTypes = {
@@ -50,7 +56,9 @@ Default.argTypes = {
     description: 'Whether to hide the label text',
   },
   id: {
-    control: false,
+    control: {
+      type: 'text',
+    },
     description: 'The unique identifier for the toggle',
   },
   labelA: {
@@ -100,8 +108,15 @@ Default.argTypes = {
   },
 };
 
-export const SmallToggle = () => {
-  return <Toggle size="sm" labelText="Label" defaultToggled id="toggle-2" />;
+export const SmallToggle = (args) => {
+  return <Toggle {...args} />;
+};
+
+SmallToggle.args = {
+  size: 'sm',
+  labelText: 'Label',
+  defaultToggled: true,
+  id: 'toggle-2',
 };
 
 SmallToggle.argTypes = {
