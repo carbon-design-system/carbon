@@ -1929,7 +1929,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@carbon/react@npm:^1.104.1-rc.0, @carbon/react@workspace:packages/react":
+"@carbon/react@npm:^1.104.1-rc.1, @carbon/react@workspace:packages/react":
   version: 0.0.0-use.local
   resolution: "@carbon/react@workspace:packages/react"
   dependencies:
@@ -8976,7 +8976,7 @@ __metadata:
     "@babel/plugin-transform-react-constant-elements": "npm:^7.27.1"
     "@babel/preset-env": "npm:^7.27.2"
     "@babel/preset-react": "npm:^7.27.1"
-    "@carbon/react": "npm:^1.104.1-rc.0"
+    "@carbon/react": "npm:^1.104.1-rc.1"
     "@carbon/styles": "npm:^1.103.0"
     "@carbon/test-utils": "npm:^10.40.0"
     "@ibm/telemetry-js": "npm:^1.5.0"
@@ -24372,7 +24372,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "www@workspace:www"
   dependencies:
-    "@carbon/react": "npm:^1.104.1-rc.0"
+    "@carbon/react": "npm:^1.104.1-rc.1"
     "@octokit/core": "npm:^7.0.3"
     "@octokit/plugin-retry": "npm:^3.0.9"
     "@octokit/plugin-throttling": "npm:^4.0.0"
