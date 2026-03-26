@@ -15,7 +15,10 @@ import Subtract16 from '@carbon/icons/es/subtract/16.js';
 import WarningFilled16 from '@carbon/icons/es/warning--filled/16.js';
 import WarningAltFilled16 from '@carbon/icons/es/warning--alt--filled/16.js';
 import ifNonEmpty from '../../globals/directives/if-non-empty';
-import { NUMBER_INPUT_VALIDATION_STATUS } from './defs';
+import {
+  NUMBER_INPUT_VALIDATION_STATUS,
+  NUMBER_INPUT_STEP_DIRECTION,
+} from './defs';
 import styles from './number-input.scss?lit';
 import CDSTextInput, { INPUT_SIZE } from '../text-input/text-input';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
@@ -677,7 +680,7 @@ class CDSNumberInput extends CDSTextInput {
    * Handle stepping up or down
    * @returns true if the value changed, false if it was clamped to the same value
    */
-  protected _handleStep(direction: 'up' | 'down') {
+  protected _handleStep(direction: NUMBER_INPUT_STEP_DIRECTION) {
     const currentValue =
       this.type === NUMBER_INPUT_TYPE.NUMBER
         ? Number(this._input.value)
@@ -771,7 +774,7 @@ class CDSNumberInput extends CDSTextInput {
 
   protected _dispatchInputEvent(
     value: string | number,
-    direction: 'down' | 'up'
+    direction: NUMBER_INPUT_STEP_DIRECTION
   ) {
     this.dispatchEvent(
       new CustomEvent((this.constructor as typeof CDSNumberInput).eventInput, {
