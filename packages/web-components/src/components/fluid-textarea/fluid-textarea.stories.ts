@@ -148,11 +148,6 @@ export const Default = {
 };
 
 export const Skeleton = {
-  parameters: {
-    percy: {
-      skip: true,
-    },
-  },
   render: () =>
     html` <div style="width:300px;">
       <cds-fluid-textarea-skeleton></cds-fluid-textarea-skeleton>

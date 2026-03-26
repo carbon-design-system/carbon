@@ -393,11 +393,6 @@ export const ControlledSliderWithLayer = {
 };
 
 export const Skeleton = {
-  parameters: {
-    percy: {
-      skip: true,
-    },
-  },
   render: () => html`
     <cds-form-item>
       <cds-slider-skeleton>
@@ -541,11 +536,6 @@ export const SliderWithHiddenInputs = {
 export const TwoHandleSkeleton = {
   args,
   argTypes: argTypesSkelton,
-  parameters: {
-    percy: {
-      skip: true,
-    },
-  },
   render: () => html`
     <cds-form-item>
       <cds-slider-skeleton twoHandles> </cds-slider-skeleton>

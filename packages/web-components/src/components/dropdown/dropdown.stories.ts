@@ -419,11 +419,6 @@ export const InlineWithLayer = {
 export const Skeleton = {
   argTypes: controls,
   args: defaultArgs,
-  parameters: {
-    percy: {
-      skip: true,
-    },
-  },
   render: () => html` <cds-dropdown-skeleton></cds-dropdown-skeleton> `,
 };
 

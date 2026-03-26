@@ -481,11 +481,6 @@ export const Skeleton = {
     </cds-date-picker-input-skeleton>
   `,
   decorators: [(story) => html` <div>${story()}</div> `],
-  parameters: {
-    percy: {
-      skip: true,
-    },
-  },
 };
 
 const content = html`

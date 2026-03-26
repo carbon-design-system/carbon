@@ -451,11 +451,6 @@ export const SinglelineWithLayer = {
 };
 
 export const Skeleton = {
-  parameters: {
-    percy: {
-      skip: true,
-    },
-  },
   render: () => html`
     <cds-code-snippet-skeleton
       type="single"
