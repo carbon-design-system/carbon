@@ -209,8 +209,7 @@ const argTypes = {
 export const Default = {
   args,
   argTypes,
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  render: (args: any) => {
+  render: (args) => {
     const {
       allowEmpty,
       decrementButtonDescription,
@@ -299,8 +298,7 @@ export const Skeleton = {
       },
     },
   },
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  render: (args: any) => {
+  render: (args) => {
     const { hideLabel, size } = args ?? {};
 
     return html`
@@ -314,8 +312,7 @@ export const Skeleton = {
 
 export const WithAILabel = {
   argTypes,
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  render: (args: any) => {
+  render: (args) => {
     const { onInput } = args ?? {};
     return html`
       <div style="width: 400px">
@@ -339,8 +336,7 @@ export const WithAILabel = {
 
 export const WithTypeOfText = {
   argTypes,
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  render: (args: any, { globals: { locale } }: any) => {
+  render: (args, { globals: { locale } }) => {
     const { onInput } = args ?? {};
     return html`
       <cds-form-item>
@@ -365,8 +361,7 @@ export const WithTypeOfText = {
 
 export const WithTypeOfTextControlled = {
   argTypes,
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  render: (args: any, { globals: { locale } }: any) => {
+  render: (args, { globals: { locale } }) => {
     const { onInput } = args ?? {};
     return html`
       <cds-form-item>
@@ -401,8 +396,7 @@ export const WithTypeOfTextControlled = {
 
 export const WithTypeOfCustomValidation = {
   argTypes,
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  render: (args: any, { globals: { locale } }: any) => {
+  render: (args, { globals: { locale } }) => {
     const { onInput } = args ?? {};
     // Custom user-passed validator
     const validateNumberSeparators = (
@@ -548,8 +542,7 @@ export const WithTypeOfCustomValidation = {
 export const InvalidWithAILabel = {
   tags: ['!dev', '!autodocs'], // hide story
   argTypes,
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  render: (args: any) => {
+  render: (args) => {
     const { onInput } = args ?? {};
     return html`
       <div style="width: 400px">
@@ -575,8 +568,7 @@ export const InvalidWithAILabel = {
 export const WarnWithAILabel = {
   tags: ['!dev', '!autodocs'], // hide story
   argTypes,
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  render: (args: any) => {
+  render: (args) => {
     const { onInput } = args ?? {};
     return html`
       <div style="width: 400px">
@@ -602,8 +594,7 @@ export const WarnWithAILabel = {
 export const DisabledWithAILabel = {
   tags: ['!dev', '!autodocs'], // hide story
   argTypes,
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  render: (args: any) => {
+  render: (args) => {
     const { onInput } = args ?? {};
     return html`
       <div style="width: 400px">
@@ -629,8 +620,7 @@ export const DisabledWithAILabel = {
 export const TypeTextTestScenarios = {
   tags: ['!dev', '!autodocs'], // hide story
   argTypes,
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  render: (args: any) => {
+  render: (args) => {
     const { onInput } = args ?? {};
     return html`
       <div style="display: flex; flex-direction: column; gap: 20px;">

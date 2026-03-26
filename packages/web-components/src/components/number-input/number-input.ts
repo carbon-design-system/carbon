@@ -538,10 +538,10 @@ class CDSNumberInput extends CDSTextInput {
         if (this._value) {
           const parsed = Number(this._value);
           if (!isNaN(parsed)) {
-            this._syncTextModeState(parsed, false);
+            this._syncTextModeState(parsed);
           }
         } else if (!isNaN(this._numberValue)) {
-          this._syncTextModeState(this._numberValue, false);
+          this._syncTextModeState(this._numberValue);
         }
       }
     }
@@ -552,7 +552,7 @@ class CDSNumberInput extends CDSTextInput {
     if (!this._value && this.defaultValue && !this._hasUserInteraction) {
       if (this.type === NUMBER_INPUT_TYPE.TEXT) {
         const parsed = this._numberParser?.parse(this.defaultValue) ?? NaN;
-        this._syncTextModeState(parsed, false);
+        this._syncTextModeState(parsed);
       } else {
         // Set the internal value to defaultValue for non-text types
         this._value = this.defaultValue;
@@ -677,7 +677,7 @@ class CDSNumberInput extends CDSTextInput {
    * Handle stepping up or down
    * @returns true if the value changed, false if it was clamped to the same value
    */
-  protected _handleStep(direction: 'up' | 'down'): boolean {
+  protected _handleStep(direction: 'up' | 'down') {
     const currentValue =
       this.type === NUMBER_INPUT_TYPE.NUMBER
         ? Number(this._input.value)
@@ -738,7 +738,7 @@ class CDSNumberInput extends CDSTextInput {
       this.value = this._value;
     } else if (this.type === NUMBER_INPUT_TYPE.TEXT) {
       // Synchronize text mode state after step operation
-      this._syncTextModeState(newValue, false);
+      this._syncTextModeState(newValue);
       this.requestUpdate();
     }
 
@@ -769,7 +769,10 @@ class CDSNumberInput extends CDSTextInput {
     return this._value || this.defaultValue || '';
   }
 
-  protected _dispatchInputEvent(value: string | number, direction: string) {
+  protected _dispatchInputEvent(
+    value: string | number,
+    direction: 'down' | 'up'
+  ) {
     this.dispatchEvent(
       new CustomEvent((this.constructor as typeof CDSNumberInput).eventInput, {
         bubbles: true,
