@@ -376,6 +376,19 @@ describe('MenuItem', () => {
       });
     });
 
+    it('should skip disabled items when determining first focusable', () => {
+      render(
+        <Menu open label="Menu">
+          <MenuItem label="Disabled" disabled />
+          <MenuItem label="Focusable" />
+        </Menu>
+      );
+
+      const items = screen.getAllByRole('menuitem');
+      expect(items[0]).toHaveAttribute('tabindex', '-1');
+      expect(items[1]).toHaveAttribute('tabindex', '0');
+    });
+
     it('moves focus to submenu when opening via ArrowRight key', async () => {
       render(
         <Menu open label="Menu">
