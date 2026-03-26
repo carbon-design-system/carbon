@@ -13,22 +13,75 @@ import '../../../.storybook/templates/with-feature-flags';
 
 const previewClassname = 'v12-toggle';
 
+const defaultArgs = {
+  toggled: true,
+  labelText: 'Label',
+  labelA: 'On',
+  labelB: 'Off',
+};
+
+const controls = {
+  disabled: {
+    control: 'boolean',
+    description: 'Whether the toggle should be disabled',
+  },
+  hideLabel: {
+    control: 'boolean',
+    description: 'Whether to hide the label text',
+  },
+  labelA: {
+    control: 'text',
+    description: 'The label for the "on" state',
+  },
+  labelB: {
+    control: 'text',
+    description: 'The label for the "off" state',
+  },
+  labelText: {
+    control: 'text',
+    description: 'The text label for the toggle',
+  },
+  readOnly: {
+    control: 'boolean',
+    description: 'Whether the toggle is read-only',
+  },
+  toggled: {
+    control: 'boolean',
+    description: 'Whether the toggle is currently on',
+  },
+};
+
 export const Default = {
+  argTypes: controls,
+  args: defaultArgs,
   parameters: {
     docs: {
       page: mdx,
     },
   },
   tags: ['!autodocs'],
-  render: () => html`
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
+  render: ({
+    disabled,
+    hideLabel,
+    labelA,
+    labelB,
+    labelText,
+    readOnly,
+    toggled,
+  }) => html`
     <sb-template-feature-flags>
       <div class=${previewClassname}>
         <feature-flags enable-v12-toggle-reduced-label-spacing>
           <cds-toggle
-            label-text="Label"
-            label-a="On"
-            label-b="Off"
-            toggled></cds-toggle>
+            label-text="${labelText}"
+            label-a="${labelA}"
+            label-b="${labelB}"
+            ?disabled="${disabled}"
+            ?hideLabel="${hideLabel}"
+            ?read-only=${readOnly}
+            ?toggled="${toggled}"></cds-toggle>
         </feature-flags>
       </div>
     </sb-template-feature-flags>
