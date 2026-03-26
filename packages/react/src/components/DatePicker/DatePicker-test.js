@@ -811,8 +811,8 @@ describe('Range date picker', () => {
     );
 
     const input = screen.getByLabelText('Date Picker label');
-    expect(input).toHaveAttribute('disabled');
-    expect(input).toHaveAttribute('readOnly');
+    expect(input).toHaveAttribute('disabled', '');
+    expect(input).toHaveAttribute('readOnly', '');
     expect(input.disabled).toBe(true);
   });
 
