@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2025
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -18,7 +18,8 @@ import './styles.scss';
 import '../src/feature-flags';
 
 import { white, g10, g90, g100 } from '@carbon/themes';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import useIsomorphicEffect from '../src/internal/useIsomorphicEffect';
 import { breakpoints } from '@carbon/layout';
 import { GlobalTheme } from '../src/components/Theme';
 import { Layout } from '../src/components/Layout';
@@ -338,13 +339,13 @@ const parameters = {
 const decorators = [
   (Story, context) => {
     const { layoutDensity, layoutSize, locale, dir, theme } = context.globals;
-    const [randomKey, setRandomKey] = React.useState(1);
+    const [randomKey, setRandomKey] = useState(1);
 
-    React.useEffect(() => {
+    useEffect(() => {
       document.documentElement.setAttribute('data-carbon-theme', theme);
     }, [theme]);
 
-    React.useLayoutEffect(() => {
+    useIsomorphicEffect(() => {
       document.documentElement.lang = locale;
       document.documentElement.dir = dir;
       // Need to set random key to recalculate Popover coordinates

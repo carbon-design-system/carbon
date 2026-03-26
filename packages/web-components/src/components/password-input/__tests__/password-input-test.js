@@ -75,6 +75,16 @@ describe('cds-password-input', () => {
     ).to.be.true;
   });
 
+  it('should render divider when isFluid is true', async () => {
+    const el = await fixture(html`
+      <cds-password-input isFluid="true" label="Password"></cds-password-input>
+    `);
+
+    const divider = el.shadowRoot.querySelector('.cds--text-input__divider');
+    expect(divider).to.exist;
+    expect(divider.tagName.toLowerCase()).to.equal('hr');
+  });
+
   it('should apply hide-password-label attribute', async () => {
     const el = await fixture(html`
       <cds-password-input
@@ -179,14 +189,34 @@ describe('cds-password-input', () => {
     expect(input.readOnly).to.be.true;
   });
 
-  it('should disable hide/show password toggle button when readonly is true', async () => {
+  it('should not disable hide/show password toggle button when readonly is true', async () => {
     const el = await fixture(html`
       <cds-password-input readonly></cds-password-input>
     `);
     await el.updateComplete;
 
     const toggleButton = el.shadowRoot.querySelector('button[type="button"]');
-    expect(toggleButton.disabled).to.be.true;
+    expect(toggleButton.disabled).to.be.false;
+  });
+
+  it('should allow toggling password visibility when readonly is true', async () => {
+    const el = await fixture(html`
+      <cds-password-input
+        hide-password-label="Hide Password"
+        show-password-label="Show Password"></cds-password-input>
+    `);
+    const btn = el.shadowRoot.querySelector('button');
+    const tooltipContent = el.shadowRoot.querySelector(
+      'cds-tooltip-content#content'
+    );
+
+    btn.click();
+    await el.updateComplete;
+    expect(tooltipContent.textContent.trim()).to.equal('Hide Password');
+
+    btn.click();
+    await el.updateComplete;
+    expect(tooltipContent.textContent.trim()).to.equal('Show Password');
   });
 
   it('should not allow input change when readOnly is true', async () => {

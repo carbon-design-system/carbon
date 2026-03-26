@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2025
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -10,11 +10,11 @@ import cx from 'classnames';
 import PropTypes from 'prop-types';
 import React, {
   useContext,
+  useEffect,
   useRef,
   useState,
   type ChangeEvent,
-  type ComponentType,
-  type FunctionComponent,
+  type ElementType,
   type HTMLAttributes,
   type KeyboardEvent,
   type MouseEvent,
@@ -29,6 +29,7 @@ import { deprecate } from '../../prop-types/deprecate';
 import { FormContext } from '../FluidForm';
 import { noopFn } from '../../internal/noopFn';
 import { Tooltip } from '../Tooltip';
+import { isSearchValuePresent } from './utils';
 
 type InputPropsBase = Omit<HTMLAttributes<HTMLInputElement>, 'onChange'>;
 export interface SearchProps extends InputPropsBase {
@@ -100,7 +101,7 @@ export interface SearchProps extends InputPropsBase {
   /**
    * A component used to render an icon.
    */
-  renderIcon?: ComponentType | FunctionComponent;
+  renderIcon?: ElementType;
 
   /**
    * @deprecated Specify the role for the underlying `<input>`.
@@ -152,7 +153,8 @@ const Search = React.forwardRef<HTMLInputElement, SearchProps>(
     },
     forwardRef
   ) => {
-    const hasPropValue = value || defaultValue ? true : false;
+    const hasPropValue =
+      isSearchValuePresent(value) || isSearchValuePresent(defaultValue);
     const prefix = usePrefix();
     const { isFluid } = useContext(FormContext);
     const inputRef = useRef<HTMLInputElement>(null);
@@ -162,7 +164,6 @@ const Search = React.forwardRef<HTMLInputElement, SearchProps>(
     const uniqueId = id || inputId;
     const searchId = `${uniqueId}-search`;
     const [hasContent, setHasContent] = useState(hasPropValue || false);
-    const [prevValue, setPrevValue] = useState(value);
     const searchClasses = cx(
       {
         [`${prefix}--search`]: true,
@@ -181,10 +182,12 @@ const Search = React.forwardRef<HTMLInputElement, SearchProps>(
       [`${prefix}--search-close--hidden`]: !hasContent || !isExpanded,
     });
 
-    if (value !== prevValue) {
-      setHasContent(!!value);
-      setPrevValue(value);
-    }
+    useEffect(() => {
+      // Sync content state when used as a controlled input.
+      if (typeof value !== 'undefined') {
+        setHasContent(isSearchValuePresent(value));
+      }
+    }, [value]);
 
     function clearInput() {
       if (!value && inputRef.current) {

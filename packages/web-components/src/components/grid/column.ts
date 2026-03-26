@@ -1,6 +1,4 @@
 /**
- * @license
- *
  * Copyright IBM Corp. 2024, 2024
  *
  * This source code is licensed under the Apache-2.0 license found in the
@@ -29,7 +27,7 @@ export type ColumnSpec =
 class CDSColumn extends LitElement {
   /**
    * Specify column size
-   * Keys sm, md or lg
+   * Keys sm, md, lg, xlg, max
    *
    * Values
    * - N, P, { span:N start:S}, { start: S, end: E}
@@ -46,6 +44,12 @@ class CDSColumn extends LitElement {
 
   @property({ reflect: true })
   lg?: ColumnSpec;
+
+  @property({ reflect: true })
+  xlg?: ColumnSpec;
+
+  @property({ reflect: true })
+  max?: ColumnSpec;
 
   @property({ reflect: true })
   span?: ColumnSpecSimple;

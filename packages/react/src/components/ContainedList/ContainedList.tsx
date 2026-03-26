@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2022, 2025
+ * Copyright IBM Corp. 2022, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -9,18 +9,20 @@ import React, { ReactNode } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { LayoutConstraint } from '../Layout';
+import { isComponentElement } from '../../internal';
 import { useId } from '../../internal/useId';
 import { usePrefix } from '../../internal/usePrefix';
 import ContainedListItem from './ContainedListItem';
+import ExpandableSearch from '../ExpandableSearch';
 import { Search } from '../Search';
 
 const variants = ['on-page', 'disclosed'] as const;
 
-export type ContainedListType = React.FC<ContainedListProps> & {
-  ContainedListItem: typeof ContainedListItem;
-};
-
 export type Variants = (typeof variants)[number];
+
+const isSearchComponent = (node: ReactNode) =>
+  isComponentElement(node, Search) ||
+  isComponentElement(node, ExpandableSearch);
 
 export interface ContainedListProps {
   /**
@@ -59,43 +61,19 @@ export interface ContainedListProps {
   size?: 'sm' | 'md' | 'lg' | 'xl';
 }
 
-function filterChildren(children) {
+const filterChildren = (children: ReactNode) => {
   if (Array.isArray(children)) {
-    return children?.filter(
-      (child) =>
-        !['Search', 'ExpandableSearch'].includes(child?.type?.displayName)
-    );
+    return children.filter((child) => !isSearchComponent(child));
   }
 
-  if (
-    children &&
-    !['Search', 'ExpandableSearch'].includes(children?.type?.displayName)
-  ) {
+  if (children && !isSearchComponent(children)) {
     return children;
   }
 
   return null;
-}
+};
 
-function renderChildren(children) {
-  if (Array.isArray(children)) {
-    children.map((child, index) => {
-      if (index === 0 && child.type === Search) {
-        return child;
-      }
-
-      return child;
-    });
-  }
-
-  if (children && children.type === Search) {
-    return children;
-  }
-
-  return children;
-}
-
-const ContainedList: ContainedListType = ({
+const ContainedList = ({
   action,
   children,
   className,
@@ -104,7 +82,7 @@ const ContainedList: ContainedListType = ({
   label,
   size,
   ...rest
-}) => {
+}: ContainedListProps) => {
   const labelId = `${useId('contained-list')}-header`;
   const prefix = usePrefix();
 
@@ -120,24 +98,7 @@ const ContainedList: ContainedListType = ({
   );
 
   const filteredChildren = filterChildren(children);
-
-  function isSearchAction(action: React.ReactNode): boolean {
-    if (!React.isValidElement(action)) {
-      return false;
-    }
-
-    const actionTypes = ['Search', 'ExpandableSearch'];
-    let actionType = '';
-    if (typeof action.type === 'string') {
-      actionType = action.type;
-    } else {
-      actionType = (action.type as { displayName?: string }).displayName || '';
-    }
-    return actionTypes.includes(actionType);
-  }
-  const isActionSearch = isSearchAction(action);
-
-  const renderedChildren = renderChildren(children);
+  const isActionSearch = isSearchComponent(action);
 
   return (
     <div className={classes} {...rest}>
@@ -163,7 +124,7 @@ const ContainedList: ContainedListType = ({
          */
         // eslint-disable-next-line jsx-a11y/no-redundant-roles
         <ul role="list" aria-labelledby={label ? labelId : undefined}>
-          {isActionSearch ? filteredChildren : renderedChildren}
+          {isActionSearch ? filteredChildren : children}
         </ul>
       )}
     </div>
@@ -207,5 +168,6 @@ ContainedList.propTypes = {
   size: PropTypes.oneOf(['sm', 'md', 'lg', 'xl']),
 };
 
-ContainedList.ContainedListItem = ContainedListItem;
+Object.assign(ContainedList, { ContainedListItem });
+
 export default ContainedList;

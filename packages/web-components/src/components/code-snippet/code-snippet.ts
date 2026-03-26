@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2019, 2025
+ * Copyright IBM Corp. 2019, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -352,20 +352,26 @@ class CDSCodeSnippet extends FocusMixin(LitElement) {
     } = this;
 
     let classes = `${prefix}--snippet`;
-    // eslint-disable-next-line  @typescript-eslint/no-unused-expressions -- https://github.com/carbon-design-system/carbon/issues/20452
-    type ? (classes += ` ${prefix}--snippet--${type}`) : '';
-    // eslint-disable-next-line  @typescript-eslint/no-unused-expressions -- https://github.com/carbon-design-system/carbon/issues/20452
-    type !== 'inline' && disabled
-      ? (classes += ` ${prefix}--snippet--disabled`)
-      : '';
-    // eslint-disable-next-line  @typescript-eslint/no-unused-expressions -- https://github.com/carbon-design-system/carbon/issues/20452
-    hideCopyButton ? (classes += ` ${prefix}--snippet--no-copy`) : '';
-    // eslint-disable-next-line  @typescript-eslint/no-unused-expressions -- https://github.com/carbon-design-system/carbon/issues/20452
-    wrapText ? (classes += ` ${prefix}--snippet--wraptext`) : '';
-    // eslint-disable-next-line  @typescript-eslint/no-unused-expressions -- https://github.com/carbon-design-system/carbon/issues/20452
-    type == 'multi' && hasRightOverflow
-      ? (classes += ` ${prefix}--snippet--has-right-overflow`)
-      : '';
+
+    if (type) {
+      classes += ` ${prefix}--snippet--${type}`;
+    }
+
+    if (type !== 'inline' && disabled) {
+      classes += ` ${prefix}--snippet--disabled`;
+    }
+
+    if (hideCopyButton) {
+      classes += ` ${prefix}--snippet--no-copy`;
+    }
+
+    if (wrapText) {
+      classes += ` ${prefix}--snippet--wraptext`;
+    }
+
+    if (type == 'multi' && hasRightOverflow) {
+      classes += ` ${prefix}--snippet--has-right-overflow`;
+    }
 
     const expandButtonClass = `${prefix}--snippet-btn--expand`;
 

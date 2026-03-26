@@ -15,7 +15,6 @@ import { IconButton } from '../IconButton';
 import { default as TextArea, TextAreaSkeleton } from './';
 import { Tooltip } from '../Tooltip';
 import mdx from './TextArea.mdx';
-
 export default {
   title: 'Components/TextArea',
   component: TextArea,
@@ -28,6 +27,87 @@ export default {
     TextAreaSkeleton,
   },
   argTypes: {
+    className: {
+      control: false,
+    },
+    cols: {
+      control: {
+        type: 'number',
+      },
+    },
+    defaultValue: {
+      control: {
+        type: 'text',
+      },
+    },
+    disabled: {
+      control: {
+        type: 'boolean',
+      },
+    },
+    enableCounter: {
+      control: {
+        type: 'boolean',
+      },
+    },
+    helperText: {
+      control: {
+        type: 'text',
+      },
+    },
+    hideLabel: {
+      control: {
+        type: 'boolean',
+      },
+    },
+    id: {
+      control: false,
+    },
+    invalid: {
+      control: {
+        type: 'boolean',
+      },
+    },
+    invalidText: {
+      control: {
+        type: 'text',
+      },
+    },
+    labelText: {
+      control: {
+        type: 'text',
+      },
+    },
+    maxCount: {
+      control: {
+        type: 'number',
+      },
+    },
+    placeholder: {
+      control: {
+        type: 'text',
+      },
+    },
+    rows: {
+      control: {
+        type: 'number',
+      },
+    },
+    warn: {
+      control: {
+        type: 'boolean',
+      },
+    },
+    warnText: {
+      control: {
+        type: 'text',
+      },
+    },
+    value: {
+      control: {
+        type: 'text',
+      },
+    },
     light: {
       table: {
         disable: true,
@@ -39,89 +119,20 @@ export default {
       },
     },
   },
-};
-
-const sharedArgTypes = {
-  className: {
-    control: false,
-  },
-  cols: {
-    control: {
-      type: 'number',
-    },
-  },
-  defaultValue: {
-    control: {
-      type: 'text',
-    },
-  },
-  disabled: {
-    control: {
-      type: 'boolean',
-    },
-  },
-  enableCounter: {
-    control: {
-      type: 'boolean',
-    },
-  },
-  helperText: {
-    control: {
-      type: 'text',
-    },
-  },
-  hideLabel: {
-    control: {
-      type: 'boolean',
-    },
-  },
-  id: {
-    control: false,
-  },
-  invalid: {
-    control: {
-      type: 'boolean',
-    },
-  },
-  invalidText: {
-    control: {
-      type: 'text',
-    },
-  },
-  labelText: {
-    control: {
-      type: 'text',
-    },
-  },
-  maxCount: {
-    control: {
-      type: 'number',
-    },
-  },
-  placeholder: {
-    control: {
-      type: 'text',
-    },
-  },
-  rows: {
-    control: {
-      type: 'number',
-    },
-  },
-  warn: {
-    control: {
-      type: 'boolean',
-    },
-  },
-  warnText: {
-    control: {
-      type: 'text',
-    },
-  },
-  value: {
-    control: {
-      type: 'text',
-    },
+  args: {
+    enableCounter: false,
+    helperText: 'TextArea helper text',
+    labelText: 'TextArea label',
+    maxCount: 500,
+    disabled: false,
+    hideLabel: false,
+    invalid: false,
+    invalidText:
+      'Error message that is really long can wrap to more lines but should not be excessively long.',
+    placeholder: '',
+    rows: 4,
+    warn: false,
+    warnText: 'This is a warning message.',
   },
 };
 
@@ -129,27 +140,11 @@ export const Default = (args) => {
   return <TextArea {...args} id="text-area-1" />;
 };
 
-Default.argTypes = {
-  ...sharedArgTypes,
-};
-
 Default.args = {
   enableCounter: true,
-  helperText: 'TextArea helper text',
-  labelText: 'TextArea label',
-  maxCount: 500,
-  disabled: false,
-  hideLabel: false,
-  invalid: false,
-  invalidText:
-    'Error message that is really long can wrap to more lines but should not be excessively long.',
-  placeholder: '',
-  rows: 4,
-  warn: false,
-  warnText: 'This is a warning message.',
 };
 
-export const _WithLayer = () => (
+export const _WithLayer = (args) => (
   <WithLayer>
     {(layer) => (
       <TextArea
@@ -157,11 +152,13 @@ export const _WithLayer = () => (
         helperText="Optional helper text"
         rows={4}
         id={`text-area-${layer}`}
+        {...args}
       />
     )}
   </WithLayer>
 );
 
+_WithLayer.args = { helperText: 'Optional helper text' };
 export const withAILabel = (args) => {
   const aiLabel = (
     <AILabel className="ai-label-container">
@@ -206,10 +203,13 @@ export const withAILabel = (args) => {
   );
 };
 
-withAILabel.argTypes = {
-  ...sharedArgTypes,
-};
+withAILabel.args = { helperText: 'Optional helper text' };
 
-export const Skeleton = () => {
-  return <TextAreaSkeleton />;
+export const Skeleton = (args) => {
+  return <TextAreaSkeleton {...args} />;
+};
+Skeleton.parameters = {
+  controls: {
+    include: ['hideLabel'],
+  },
 };

@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2019
+ * Copyright IBM Corp. 2019, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -59,8 +59,8 @@ describe('Grid', () => {
 
   beforeEach(() => {
     jest.resetModules();
-    const FeatureFlags = require('@carbon/feature-flags');
-    FeatureFlags.enable('enable-css-grid');
+    const { enable } = require('@carbon/feature-flags');
+    enable('enable-css-grid');
 
     cleanup = require('@testing-library/react/pure').cleanup;
     render = require('@testing-library/react/pure').render;

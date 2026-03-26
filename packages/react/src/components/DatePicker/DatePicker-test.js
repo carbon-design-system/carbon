@@ -1,11 +1,11 @@
 /**
- * Copyright IBM Corp. 2016, 2025
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useState } from 'react';
+import React, { createRef, useState } from 'react';
 import DatePicker from './DatePicker';
 import DatePickerInput from '../DatePickerInput';
 import { render, screen, fireEvent } from '@testing-library/react';
@@ -301,67 +301,106 @@ describe('DatePicker', () => {
     warn.mockRestore();
   });
 
-  it('should show only invalid text when both invalid and warn are true in fluid mode', () => {
-    render(
-      <FormContext.Provider value={{ isFluid: true }}>
-        <DatePicker
-          datePickerType="single"
-          invalid={true}
-          invalidText="Invalid date"
-          warn={true}
-          warnText="Warning message">
-          <DatePickerInput
-            id="date-picker-input-id-start"
-            placeholder="mm/dd/yyyy"
-            labelText="Date Picker label"
-          />
-        </DatePicker>
-      </FormContext.Provider>
-    );
-    expect(screen.getByText('Invalid date')).toBeInTheDocument();
-    expect(screen.queryByText('Warning message')).not.toBeInTheDocument();
-  });
-
-  it('should show only warning text when warn is true and invalid is false in fluid mode', () => {
-    render(
-      <FormContext.Provider value={{ isFluid: true }}>
-        <DatePicker
-          datePickerType="single"
-          invalid={false}
-          invalidText="Invalid date"
-          warn={true}
-          warnText="Warning message">
-          <DatePickerInput
-            id="date-picker-input-id-start"
-            placeholder="mm/dd/yyyy"
-            labelText="Date Picker label"
-          />
-        </DatePicker>
-      </FormContext.Provider>
-    );
-    expect(screen.getByText('Warning message')).toBeInTheDocument();
-    expect(screen.queryByText('Invalid date')).not.toBeInTheDocument();
-  });
-
   it('should not show any error text when both invalid and warn are false in fluid mode', () => {
     render(
       <FormContext.Provider value={{ isFluid: true }}>
-        <DatePicker
-          datePickerType="single"
-          invalid={false}
-          invalidText="Invalid date"
-          warn={false}
-          warnText="Warning message">
+        <DatePicker datePickerType="single" invalid={false} warn={false}>
           <DatePickerInput
             id="date-picker-input-id-start"
             placeholder="mm/dd/yyyy"
             labelText="Date Picker label"
+            invalidText="Invalid date"
+            warnText="Warning message"
           />
         </DatePicker>
       </FormContext.Provider>
     );
     expect(screen.queryByText('Invalid date')).not.toBeInTheDocument();
     expect(screen.queryByText('Warning message')).not.toBeInTheDocument();
+  });
+
+  describe('Invalid and Warning States with Disabled/ReadOnly', () => {
+    it('should not show invalid state when disabled', () => {
+      render(
+        <DatePicker datePickerType="single">
+          <DatePickerInput
+            id="date-picker-input-id-start"
+            placeholder="mm/dd/yyyy"
+            labelText="Date Picker label"
+            invalid={true}
+            invalidText="Invalid date"
+            disabled={true}
+          />
+        </DatePicker>
+      );
+
+      expect(screen.queryByText('Invalid date')).not.toBeInTheDocument();
+      // eslint-disable-next-line testing-library/no-node-access
+      expect(
+        document.querySelector(`.${prefix}--date-picker__icon--invalid`)
+      ).not.toBeInTheDocument();
+    });
+
+    it('should not show warning state when disabled', () => {
+      render(
+        <DatePicker datePickerType="single">
+          <DatePickerInput
+            id="date-picker-input-id-start"
+            placeholder="mm/dd/yyyy"
+            labelText="Date Picker label"
+            warn={true}
+            warnText="Warning message"
+            disabled={true}
+          />
+        </DatePicker>
+      );
+
+      expect(screen.queryByText('Warning message')).not.toBeInTheDocument();
+      // eslint-disable-next-line testing-library/no-node-access
+      expect(
+        document.querySelector(`.${prefix}--date-picker__icon--warn`)
+      ).not.toBeInTheDocument();
+    });
+
+    it('should not show invalid state when readOnly', () => {
+      render(
+        <DatePicker datePickerType="single" readOnly={true}>
+          <DatePickerInput
+            id="date-picker-input-id-start"
+            placeholder="mm/dd/yyyy"
+            labelText="Date Picker label"
+            invalid={true}
+            invalidText="Invalid date"
+          />
+        </DatePicker>
+      );
+
+      expect(screen.queryByText('Invalid date')).not.toBeInTheDocument();
+      // eslint-disable-next-line testing-library/no-node-access
+      expect(
+        document.querySelector(`.${prefix}--date-picker__icon--invalid`)
+      ).not.toBeInTheDocument();
+    });
+
+    it('should not show warning state when readOnly', () => {
+      render(
+        <DatePicker datePickerType="single" readOnly={true}>
+          <DatePickerInput
+            id="date-picker-input-id-start"
+            placeholder="mm/dd/yyyy"
+            labelText="Date Picker label"
+            warn={true}
+            warnText="Warning message"
+          />
+        </DatePicker>
+      );
+
+      expect(screen.queryByText('Warning message')).not.toBeInTheDocument();
+      // eslint-disable-next-line testing-library/no-node-access
+      expect(
+        document.querySelector(`.${prefix}--date-picker__icon--warn`)
+      ).not.toBeInTheDocument();
+    });
   });
 });
 
@@ -408,6 +447,7 @@ describe('Simple date picker', () => {
     let cleanup;
     let render;
     let screen;
+    let waitForElementToBeRemoved;
     let LazyDatePicker;
     let LazyDatePickerInput;
 
@@ -416,24 +456,17 @@ describe('Simple date picker', () => {
       cleanup = require('@testing-library/react/pure').cleanup;
       render = require('@testing-library/react/pure').render;
       screen = require('@testing-library/react/pure').screen;
+      waitForElementToBeRemoved =
+        require('@testing-library/react/pure').waitForElementToBeRemoved;
     });
 
     afterEach(() => {
       cleanup();
     });
 
-    it.skip('should initialize a calendar when using react.lazy', async () => {
-      LazyDatePicker = React.lazy(() =>
-        import('@carbon/react').then((module) => ({
-          default: module.DatePicker,
-        }))
-      );
-
-      LazyDatePickerInput = React.lazy(() =>
-        import('@carbon/react').then((module) => ({
-          default: module.DatePickerInput,
-        }))
-      );
+    it('should initialize a calendar when using react.lazy', async () => {
+      LazyDatePicker = React.lazy(() => import('./DatePicker'));
+      LazyDatePickerInput = React.lazy(() => import('../DatePickerInput'));
 
       render(
         <React.Suspense fallback="Loading">
@@ -446,6 +479,8 @@ describe('Simple date picker', () => {
           </LazyDatePicker>
         </React.Suspense>
       );
+
+      await waitForElementToBeRemoved(() => screen.queryByText('Loading'));
 
       const labeledElement = await screen.findByLabelText(
         'Date Picker label',
@@ -558,6 +593,43 @@ describe('Single date picker', () => {
       screen.getByLabelText('Date Picker label'),
       '01/20/1989{enter}'
     );
+    expect(screen.getByLabelText('Date Picker label')).toHaveValue(
+      '01/20/1989'
+    );
+
+    await userEvent.click(screen.getByText('clear'));
+    expect(screen.getByLabelText('Date Picker label')).toHaveValue('');
+  });
+
+  it('should clear calendar when value is set to null', async () => {
+    const DatePickerExample = () => {
+      const [date, setDate] = useState('01/20/1989');
+      return (
+        <>
+          <DatePicker
+            datePickerType="single"
+            value={date}
+            onChange={(value) => {
+              setDate(value);
+            }}>
+            <DatePickerInput
+              placeholder="mm/dd/yyyy"
+              labelText="Date Picker label"
+              id="date-picker-simple"
+            />
+          </DatePicker>
+          <button
+            type="button"
+            onClick={() => {
+              setDate(null);
+            }}>
+            clear
+          </button>
+        </>
+      );
+    };
+
+    render(<DatePickerExample />);
     expect(screen.getByLabelText('Date Picker label')).toHaveValue(
       '01/20/1989'
     );
@@ -877,6 +949,125 @@ describe('Range date picker', () => {
     expect(screen.getByLabelText('ToDate')).toHaveValue('');
   });
 
+  it('should clear calendar when value is set to empty array', async () => {
+    const DatePickerExample = () => {
+      const [dateRange, setDateRange] = useState(['01/14/2025', '02/10/2025']);
+      return (
+        <>
+          <DatePicker
+            datePickerType="range"
+            value={dateRange}
+            onChange={(dates) => {
+              setDateRange(dates);
+            }}>
+            <DatePickerInput
+              id="fromDate"
+              placeholder="mm/dd/yyyy"
+              labelText="FromDate"
+            />
+            <DatePickerInput
+              id="toDate"
+              placeholder="mm/dd/yyyy"
+              labelText="ToDate"
+            />
+          </DatePicker>
+          <button type="button" onClick={() => setDateRange([])}>
+            clear
+          </button>
+        </>
+      );
+    };
+    render(<DatePickerExample />);
+
+    expect(screen.getByLabelText('FromDate')).toHaveValue('01/14/2025');
+    expect(screen.getByLabelText('ToDate')).toHaveValue('02/10/2025');
+
+    await userEvent.click(screen.getByText('clear'));
+
+    expect(screen.getByLabelText('FromDate')).toHaveValue('');
+    expect(screen.getByLabelText('ToDate')).toHaveValue('');
+  });
+
+  it('should clear calendar when value is set to array of empty strings', async () => {
+    const DatePickerExample = () => {
+      const [dateRange, setDateRange] = useState(['01/14/2025', '02/10/2025']);
+      return (
+        <>
+          <DatePicker
+            datePickerType="range"
+            value={dateRange}
+            onChange={(dates) => {
+              setDateRange(dates);
+            }}>
+            <DatePickerInput
+              id="fromDate"
+              placeholder="mm/dd/yyyy"
+              labelText="FromDate"
+            />
+            <DatePickerInput
+              id="toDate"
+              placeholder="mm/dd/yyyy"
+              labelText="ToDate"
+            />
+          </DatePicker>
+          <button type="button" onClick={() => setDateRange(['', ''])}>
+            clear
+          </button>
+        </>
+      );
+    };
+    render(<DatePickerExample />);
+
+    expect(screen.getByLabelText('FromDate')).toHaveValue('01/14/2025');
+    expect(screen.getByLabelText('ToDate')).toHaveValue('02/10/2025');
+
+    await userEvent.click(screen.getByText('clear'));
+
+    expect(screen.getByLabelText('FromDate')).toHaveValue('');
+    expect(screen.getByLabelText('ToDate')).toHaveValue('');
+  });
+
+  it('should clear calendar when value is set to array of undefined', async () => {
+    const DatePickerExample = () => {
+      const [dateRange, setDateRange] = useState(['01/14/2025', '02/10/2025']);
+      return (
+        <>
+          <DatePicker
+            datePickerType="range"
+            value={dateRange}
+            onChange={(dates) => {
+              setDateRange(dates);
+            }}>
+            <DatePickerInput
+              id="fromDate"
+              placeholder="mm/dd/yyyy"
+              labelText="FromDate"
+            />
+            <DatePickerInput
+              id="toDate"
+              placeholder="mm/dd/yyyy"
+              labelText="ToDate"
+            />
+          </DatePicker>
+          <button
+            type="button"
+            onClick={() => setDateRange([undefined, undefined])}>
+            clear
+          </button>
+        </>
+      );
+    };
+    render(<DatePickerExample />);
+
+    expect(screen.getByLabelText('FromDate')).toHaveValue('01/14/2025');
+    expect(screen.getByLabelText('ToDate')).toHaveValue('02/10/2025');
+
+    await userEvent.click(screen.getByText('clear'));
+
+    expect(screen.getByLabelText('FromDate')).toHaveValue('');
+    expect(screen.getByLabelText('ToDate')).toHaveValue('');
+  });
+
   it('should close calendar with range type on focus loss', async () => {
     const onClose = jest.fn();
     render(
@@ -931,6 +1122,37 @@ describe('Range date picker', () => {
     consoleWarnSpy.mockRestore();
   });
 
+  it('should keep calendar open when click event lands outside after mousedown inside', async () => {
+    render(
+      <DatePicker datePickerType="range">
+        <DatePickerInput
+          id="date-picker-input-id-start"
+          placeholder="mm/dd/yyyy"
+          labelText="Start date"
+        />
+        <DatePickerInput
+          id="date-picker-input-id-finish"
+          placeholder="mm/dd/yyyy"
+          labelText="End date"
+        />
+      </DatePicker>
+    );
+
+    const startDateInput = screen.getByLabelText('Start date');
+    await userEvent.click(startDateInput);
+
+    const calendar = screen.getByRole('application');
+    expect(calendar).toHaveClass('open');
+
+    fireEvent.mouseDown(startDateInput);
+    // Simulate a click event that bubbles from outside after a scroll or blur.
+    document.body.dispatchEvent(
+      new MouseEvent('click', { bubbles: true, cancelable: true })
+    );
+
+    expect(calendar).toHaveClass('open');
+  });
+
   describe('rangePlugin', () => {
     it('should set start and end input values correctly when calling setDate with triggerChange=false', async () => {
       const ref = React.createRef();
@@ -977,6 +1199,41 @@ describe('Range date picker', () => {
 
       expect(start.value).toBe('02/01/2025');
       expect(end.value).toBe('02/14/2025');
+    });
+
+    it('should not clear an input when setDate receives timestamp 0', async () => {
+      const ref = createRef();
+
+      render(
+        <DatePicker ref={ref} datePickerType="range" value={undefined}>
+          <DatePickerInput
+            id="start-zero"
+            placeholder="mm/dd/yyyy"
+            labelText="Start date"
+            data-testid="start-input-zero"
+          />
+          <DatePickerInput
+            id="end-zero"
+            placeholder="mm/dd/yyyy"
+            labelText="End date"
+            data-testid="end-input-zero"
+          />
+        </DatePicker>
+      );
+
+      const fp = ref.current.calendar;
+      const start = await screen.findByTestId('start-input-zero');
+      const end = await screen.findByTestId('end-input-zero');
+      const formattedZero = fp.formatDate(new Date(0), 'm/d/Y');
+      const formattedOne = fp.formatDate(new Date(1), 'm/d/Y');
+
+      fp.setDate([0, 1], false, 'm/d/Y');
+      expect(start.value).toBe(formattedZero);
+      expect(end.value).toBe(formattedOne);
+
+      fp.setDate([1, 0], false, 'm/d/Y');
+      expect(start.value).toBe(formattedOne);
+      expect(end.value).toBe(formattedZero);
     });
 
     it('should not write both dates into the first input', async () => {

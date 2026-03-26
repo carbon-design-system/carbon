@@ -1,11 +1,18 @@
 /**
- * Copyright IBM Corp. 2016, 2025
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useRef, useState, type HTMLAttributes } from 'react';
+import React, {
+  useRef,
+  useState,
+  type ChangeEvent,
+  type DragEvent,
+  type HTMLAttributes,
+  type SyntheticEvent,
+} from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { keys, matches } from '../../internal/keyboard';
@@ -44,6 +51,11 @@ export interface FileUploaderDropContainerProps
   labelText?: string;
 
   /**
+   * Maximum file size allowed in bytes. Files larger than this will be marked invalid
+   */
+  maxFileSize?: number;
+
+  /**
    * Specify if the component should accept multiple files to upload
    */
   multiple?: boolean;
@@ -58,7 +70,7 @@ export interface FileUploaderDropContainerProps
    */
   onAddFiles?: (
     event: React.SyntheticEvent<HTMLElement>,
-    content: { addedFiles: File[] }
+    content: { addedFiles: AddedFile[] }
   ) => void;
 
   /**
@@ -98,6 +110,7 @@ function FileUploaderDropContainer({
   id,
   disabled,
   labelText = 'Add file',
+  maxFileSize,
   multiple = false,
   name,
   onAddFiles = noopFn,
@@ -109,8 +122,8 @@ function FileUploaderDropContainer({
 }: FileUploaderDropContainerProps) {
   const prefix = usePrefix();
   const inputRef = useRef<HTMLInputElement>(null);
-  // eslint-disable-next-line  react-hooks/rules-of-hooks -- https://github.com/carbon-design-system/carbon/issues/20452
-  const { current: uid } = useRef(id || useId());
+  const generatedId = useId();
+  const { current: uid } = useRef(id || generatedId);
   const [isActive, setActive] = useState(false);
   const dropareaClasses = classNames(
     `${prefix}--file__drop-container`,
@@ -123,17 +136,24 @@ function FileUploaderDropContainer({
   );
 
   /**
-   * Filters the array of added files based on file type restrictions
+   * Filters the array of added files based on file type and size restrictions
    */
   function validateFiles(transferredFiles: AddedFile[]) {
-    if (!accept.length) {
-      return transferredFiles;
-    }
     const acceptedTypes = new Set(accept);
     return transferredFiles.reduce<AddedFile[]>((acc, curr) => {
       const { name, type: mimeType = '' } = curr;
       const fileExtensionRegExp = new RegExp(pattern, 'i');
       const [fileExtension] = name.match(fileExtensionRegExp) ?? [];
+
+      if (maxFileSize && curr.size > maxFileSize) {
+        curr.invalidFileType = true;
+        return acc.concat([curr]);
+      }
+
+      if (!accept.length) {
+        return acc.concat([curr]);
+      }
+
       if (fileExtension === undefined) {
         return acc;
       }
@@ -148,19 +168,46 @@ function FileUploaderDropContainer({
     }, []);
   }
 
-  function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
-    const files = [...(event.target.files ?? [])];
-    const filesToValidate = multiple ? files : [files[0]];
-    const addedFiles = validateFiles(filesToValidate);
-    return onAddFiles(event, { addedFiles });
-  }
+  const handleFiles = (event: SyntheticEvent<HTMLElement>, files: File[]) => {
+    if (!files.length) return onAddFiles(event, { addedFiles: [] });
 
-  function handleDrop(event: React.DragEvent<HTMLDivElement>) {
-    const files = [...event.dataTransfer.files];
     const filesToValidate = multiple ? files : [files[0]];
     const addedFiles = validateFiles(filesToValidate);
+
     return onAddFiles(event, { addedFiles });
-  }
+  };
+
+  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const files = [...(event.target.files ?? [])];
+
+    return handleFiles(event, files);
+  };
+
+  const handleDrop = (event: DragEvent<HTMLDivElement>) => {
+    const items = [...(event.dataTransfer.items ?? [])];
+    const files = items.length
+      ? // Normalize dropped items to files. Skip directories and non-file items.
+        items.reduce<File[]>((acc, item) => {
+          if (item.kind !== 'file') {
+            return acc;
+          }
+
+          const entry = item.webkitGetAsEntry();
+          if (entry?.isDirectory) {
+            return acc;
+          }
+
+          const file = item.getAsFile();
+          if (file) {
+            acc.push(file);
+          }
+
+          return acc;
+        }, [])
+      : [...event.dataTransfer.files];
+
+    return handleFiles(event, files);
+  };
 
   const handleClick = () => {
     if (!disabled) {
@@ -261,6 +308,11 @@ FileUploaderDropContainer.propTypes = {
    * this control
    */
   labelText: PropTypes.string.isRequired,
+
+  /**
+   * Maximum file size allowed in bytes. Files larger than this will be marked invalid
+   */
+  maxFileSize: PropTypes.number,
 
   /**
    * Specify if the component should accept multiple files to upload

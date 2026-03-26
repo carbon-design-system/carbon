@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -15,7 +15,6 @@ import { IconButton } from '../IconButton';
 import mdx from './TextInput.mdx';
 
 import { default as TextInput, TextInputSkeleton } from '../TextInput';
-import { Tooltip } from '../Tooltip';
 
 export default {
   title: 'Components/TextInput',
@@ -28,7 +27,129 @@ export default {
   subcomponents: {
     TextInputSkeleton,
   },
+  args: {
+    className: 'input-test-class',
+    id: 'text-input-1',
+    placeholder: 'Placeholder text',
+    invalid: false,
+    invalidText: 'Error message goes here',
+    disabled: false,
+    labelText: 'Label text',
+    helperText: 'Helper text',
+    warn: false,
+    warnText:
+      'Warning message that is really long can wrap to more lines but should not be excessively long.',
+    size: 'md',
+    readOnly: false,
+    inline: false,
+    hideLabel: false,
+    enableCounter: false,
+    maxCount: 10,
+    type: 'text',
+    defaultWidth: 300,
+    defaultValue: '',
+  },
   argTypes: {
+    className: {
+      control: {
+        type: 'text',
+      },
+    },
+    defaultValue: {
+      control: {
+        type: 'text',
+      },
+    },
+    placeholder: {
+      control: {
+        type: 'text',
+      },
+    },
+    invalid: {
+      control: {
+        type: 'boolean',
+      },
+    },
+    invalidText: {
+      control: {
+        type: 'text',
+      },
+    },
+    disabled: {
+      control: {
+        type: 'boolean',
+      },
+    },
+    labelText: {
+      control: {
+        type: 'text',
+      },
+    },
+    helperText: {
+      control: {
+        type: 'text',
+      },
+    },
+    warn: {
+      control: {
+        type: 'boolean',
+      },
+    },
+    warnText: {
+      control: {
+        type: 'text',
+      },
+    },
+    value: {
+      control: {
+        type: 'text',
+      },
+    },
+    onChange: {
+      action: 'onChange',
+    },
+    onClick: {
+      action: 'onClick',
+    },
+    size: {
+      options: ['sm', 'md', 'lg'],
+      control: {
+        type: 'select',
+      },
+    },
+    type: {
+      control: {
+        type: 'text',
+      },
+    },
+    id: {
+      control: { type: 'text' },
+    },
+    readOnly: {
+      control: {
+        type: 'boolean',
+      },
+    },
+    inline: {
+      control: {
+        type: 'boolean',
+      },
+    },
+    hideLabel: {
+      control: {
+        type: 'boolean',
+      },
+    },
+    enableCounter: {
+      control: {
+        type: 'boolean',
+      },
+    },
+    maxCount: {
+      control: {
+        type: 'number',
+      },
+    },
     light: {
       table: {
         disable: true,
@@ -39,143 +160,87 @@ export default {
         disable: true,
       },
     },
-  },
-};
-
-const sharedArgTypes = {
-  defaultWidth: {
-    control: { type: 'range', min: 300, max: 800, step: 50 },
-  },
-  className: {
-    control: {
-      type: 'text',
-    },
-  },
-  defaultValue: {
-    control: {
-      type: 'text',
-    },
-  },
-  placeholder: {
-    control: {
-      type: 'text',
-    },
-  },
-  invalid: {
-    control: {
-      type: 'boolean',
-    },
-  },
-  invalidText: {
-    control: {
-      type: 'text',
-    },
-  },
-  disabled: {
-    control: {
-      type: 'boolean',
-    },
-  },
-  labelText: {
-    control: {
-      type: 'text',
-    },
-  },
-  helperText: {
-    control: {
-      type: 'text',
-    },
-  },
-  warn: {
-    control: {
-      type: 'boolean',
-    },
-  },
-  warnText: {
-    control: {
-      type: 'text',
-    },
-  },
-  value: {
-    control: {
-      type: 'text',
-    },
-  },
-  onChange: {
-    action: 'onChange',
-  },
-  onClick: {
-    action: 'onClick',
-  },
-  size: {
-    options: ['sm', 'md', 'lg', 'xl'],
-    control: {
-      type: 'select',
+    defaultWidth: {
+      control: { type: 'range', min: 300, max: 800, step: 50 },
     },
   },
 };
 
 export const Default = (args) => {
+  const { defaultWidth, ...textInputArgs } = args;
+
   return (
-    <div style={{ width: args.defaultWidth }}>
-      <TextInput {...args} id="text-input-1" type="text" />
+    <div style={{ width: defaultWidth }}>
+      <TextInput {...textInputArgs} />
     </div>
   );
 };
 
-Default.args = {
-  defaultWidth: 300,
-  className: 'input-test-class',
-  placeholder: 'Placeholder text',
-  invalid: false,
-  invalidText: 'Error message goes here',
-  disabled: false,
-  labelText: 'Label text',
-  helperText: 'Helper text',
-  warn: false,
-  warnText:
-    'Warning message that is really long can wrap to more lines but should not be excessively long.',
-  size: 'md',
-};
+export const Fluid = (args) => {
+  const { defaultWidth, ...textInputArgs } = args;
 
-Default.argTypes = {
-  ...sharedArgTypes,
-};
-
-export const Fluid = () => {
   return (
-    <FluidForm>
-      <TextInput type="text" labelText="Text input label" id="text-input-1" />
-    </FluidForm>
+    <div style={{ width: defaultWidth }}>
+      <FluidForm>
+        <TextInput {...textInputArgs} />
+      </FluidForm>
+    </div>
   );
 };
 
-export const ReadOnly = () => {
+Fluid.parameters = {
+  controls: {
+    exclude: ['helperText'],
+  },
+};
+
+export const ReadOnly = (args) => {
+  const { defaultWidth, ...textInputArgs } = args;
+
   return (
-    <TextInput
-      labelText="Text input label"
-      helperText="Optional help text"
-      value="This is read only, you can't type more."
-      readOnly
-      id="text-input-1"
-    />
+    <div style={{ width: defaultWidth }}>
+      <TextInput {...textInputArgs} />
+    </div>
   );
 };
 
-export const _WithLayer = () => (
-  <WithLayer>
-    {(layer) => (
-      <TextInput
-        type="text"
-        labelText="Text input label"
-        helperText="Optional help text"
-        id={`text-input-${layer}`}
-      />
-    )}
-  </WithLayer>
-);
+ReadOnly.args = {
+  defaultValue: "This is read only, you can't type more.",
+  readOnly: true,
+};
+
+ReadOnly.parameters = {
+  controls: {
+    exclude: [
+      'readOnly',
+      'disabled',
+      'invalid',
+      'invalidText',
+      'warn',
+      'warnText',
+      'enableCounter',
+      'maxCount',
+      'value',
+    ],
+  },
+};
+
+export const _WithLayer = (args) => {
+  const { defaultWidth, ...textInputArgs } = args;
+
+  return (
+    <WithLayer>
+      {(layer) => (
+        <div style={{ width: defaultWidth }}>
+          <TextInput {...textInputArgs} id={`text-input-${layer}`} />
+        </div>
+      )}
+    </WithLayer>
+  );
+};
 
 export const withAILabel = (args) => {
+  const { defaultWidth, ...textInputArgs } = args;
   const aiLabel = (
     <AILabel className="ai-label-container">
       <AILabelContent>
@@ -207,23 +272,29 @@ export const withAILabel = (args) => {
     </AILabel>
   );
   return (
-    <TextInput
-      type="text"
-      labelText="Text input label"
-      helperText="Optional help text"
-      id="text-input-ai-label"
-      decorator={aiLabel}
-      {...args}
-    />
+    <div style={{ width: defaultWidth }}>
+      <TextInput
+        {...textInputArgs}
+        type="text"
+        labelText="Text input label"
+        helperText="Optional help text"
+        id="text-input-ai-label"
+        decorator={aiLabel}
+      />
+    </div>
   );
 };
 
-withAILabel.argTypes = {
-  ...sharedArgTypes,
+export const Skeleton = (args) => <TextInputSkeleton {...args} />;
+
+Skeleton.args = {
+  hideLabel: false,
 };
 
-export const Skeleton = () => {
-  return <TextInputSkeleton />;
+Skeleton.parameters = {
+  controls: {
+    include: ['hideLabel'],
+  },
 };
 
 // Hidden Test-Only Story. This story tests for a bug where the invalid-text would overlap with components below it. #19960

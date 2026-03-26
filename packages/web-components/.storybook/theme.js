@@ -9,8 +9,6 @@ import { create } from 'storybook/theming/create';
 import { version } from '../package.json';
 
 export default create({
-  base: 'light',
-
   // Typography
   fontBase: "'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif",
   fontCode:

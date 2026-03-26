@@ -7,7 +7,9 @@ categories:
           - bottom-panel--close
           - bottom-panel--open--filled
           - bottom-panel--open
+          - categorical-palette
           - center-to-fit
+          - color-picker
           - continue
           - continue--filled
           - dashboard
@@ -56,6 +58,7 @@ categories:
           - settings--edit
           - settings--services
           - settings--view
+          - sequential-palette
           - shrink-screen
           - shrink-screen--filled
           - side-panel--close
@@ -274,6 +277,7 @@ categories:
           - vertical-view
       - name: Navigation
         members:
+          - adapter-notification
           - add
           - add--alt
           - add--filled
@@ -288,6 +292,8 @@ categories:
           - arrow--up
           - arrow--up-left
           - arrow--up-right
+          - BPMN-link--fill
+          - BPMN-link--outline
           - caret--down
           - caret--left
           - caret--right
@@ -321,6 +327,7 @@ categories:
           - subtract--filled
           - subtract--large
           - switcher
+          - unplug
           - up-to-top
           - zoom--area
           - zoom--fit
@@ -345,6 +352,10 @@ categories:
           - bookmark
           - bookmark--add
           - bookmark--filled
+          - BPMN-compensation--fill
+          - BPMN-compensation--outline
+          - BPMN-conditional--fill
+          - BPMN-conditional--outline
           - branch
           - build-tool
           - calls
@@ -368,6 +379,7 @@ categories:
           - choose-item
           - circle-dash
           - clean
+          - cloud--infra-migration
           - collapse-all
           - collapse-categories
           - commit
@@ -396,6 +408,8 @@ categories:
           - exit
           - expand-all
           - expand-categories
+          - expand-screen
+          - expand-screen--filled
           - explore
           - fade
           - filter
@@ -431,6 +445,7 @@ categories:
           - mac--option
           - mac--shift
           - manage-protection
+          - material-request
           - maximize
           - merge
           - migrate
@@ -554,6 +569,8 @@ categories:
           - microphone--filled
           - microphone--off
           - microphone--off--filled
+          - minimap-off
+          - minimap-on
           - notification
           - notification--filled
           - notification--new
@@ -582,6 +599,10 @@ categories:
           - star
           - star--filled
           - star--half
+          - toggle--off--fill
+          - toggle--on--fill
+          - toggle-off
+          - toggle-on
           - thumbnail--1
           - thumbnail--2
           - thumbs-down
@@ -615,6 +636,7 @@ categories:
           - logo--jupyter
           - logo--keybase
           - logo--kubernetes
+          - logo--model-context-protocol
           - logo--npm
           - logo--openshift
           - logo--python
@@ -642,6 +664,7 @@ categories:
           - cloud-app
           - edt-loop
           - ibm-cloud
+          - ibm-partner-plus
           - ibm-security
           - watson
           - watson--machine-learning
@@ -676,8 +699,12 @@ categories:
     subcategories:
       - name: AI
         members:
+          - agent-detached
           - AI
+          - ai-agent-invocation
           - ai-business-impact-assessment
+          - AI-enabled-EDT
+          - AI-enabled-PDLC
           - ai-governance--lifecycle
           - ai-governance--tracked
           - ai-governance--untracked
@@ -685,6 +712,7 @@ categories:
           - ai-label
           - ai-launch
           - ai-recommend
+          - ai--observability
           - business-metrics
           - ibm--granite
           - ibm-watson--discovery
@@ -692,6 +720,7 @@ categories:
           - ibm-watsonx--assistant
           - ibm-watsonx--code-assistant
           - ibm-watsonx--code-assistant-for-z
+          - ibm-watsonx--code-assistant-for-z-understand
           - ibm-watsonx--code-assistant-for-z--refactor
           - ibm-watsonx--orchestrate
           - machine-learning
@@ -701,11 +730,14 @@ categories:
           - model--foundation
           - model--reference
           - model--tuned
+          - logo--model-context-protocol
           - prompt-session
           - prompt-template
           - question-answering
           - RAG
           - tuning
+          - visual-inspection
+          - voice-mode
           - watsonx
           - watsonx-ai
           - watsonx-data
@@ -728,6 +760,7 @@ categories:
           - cloud-satellite--config
           - cloud-satellite--link
           - cloud-satellite--services
+          - cobol-upgrade-advisor
           - content-delivery-network
           - database--datastax
           - database--elastic
@@ -738,6 +771,7 @@ categories:
           - database--postgreSQL
           - database--rabbit
           - database--redis
+          - Db2-Developer-Extension
           - direct-link
           - dns-services
           - flow-logs-vpc
@@ -762,6 +796,7 @@ categories:
           - ibm--db2-warehouse
           - ibm--db2--alt
           - ibm--deployable-architecture
+          - ibm--devops-test
           - ibm--dynamic-route-server
           - ibm--elo--automotive-compliance
           - ibm--elo--engineering-insights
@@ -930,6 +965,7 @@ categories:
           - mysql
           - power-enterprise-pools-metered-capacity-integration
           - power-virtual-server-disaster-recovery-automation
+          - red-hat-ai-instructlab-on-ibm-cloud
           - scis--control-tower
           - scis--transparent-supply
           - virtual-private-cloud--alt
@@ -1237,6 +1273,8 @@ categories:
           - analytics--custom
           - analytics--reference
           - app-connectivity
+          - area-range--dashed
+          - area-range--solid
           - archive
           - bland-altman-plot
           - blockchain
@@ -1247,6 +1285,7 @@ categories:
           - calculation
           - calculation--alt
           - calendar--heat-map
+          - categorical-palette
           - character-patterns
           - chart--3D
           - chart--area
@@ -1269,6 +1308,7 @@ categories:
           - chart--combo
           - chart--combo-stacked
           - chart--custom
+          - chart--donut
           - chart--dual-y-axis
           - chart--error-bar
           - chart--error-bar--alt
@@ -1279,6 +1319,7 @@ categories:
           - chart--line--data
           - chart--line-smooth
           - chart--logistic-regression
+          - chart--lollipop
           - chart--marimekko
           - chart--maximum
           - chart--minimum
@@ -1313,6 +1354,7 @@ categories:
           - circle-packing
           - circle--filled
           - classifier--language
+          - color-picker
           - column-dependency
           - concept
           - container-software
@@ -1320,6 +1362,8 @@ categories:
           - cost--total
           - covariate
           - cross-tab
+          - curved-line--dashed
+          - curved-line--solid
           - data--1
           - data--2
           - data--base
@@ -1342,8 +1386,10 @@ categories:
           - data-class
           - data-collection
           - data-definition
+          - data-dictionary
           - data-enrichment
           - data-enrichment--add
+          - data-glossary
           - data-player
           - data-quality-definition
           - data-refinery
@@ -1362,6 +1408,7 @@ categories:
           - decision-tree
           - diagram
           - diagram--reference
+          - disable-step
           - document-sentiment
           - double-axis-chart--bar
           - double-axis-chart--column
@@ -1369,12 +1416,15 @@ categories:
           - downstream
           - driver-analysis
           - emissions-management
+          - enable-step
+          - execution-history
           - factor
           - flow
           - flow--connection
           - flow--data
           - flow--modeler
           - flow--modeler--reference
+          - flow--sequence
           - flow--stream
           - flow--stream--reference
           - global-loan-and-trial
@@ -1385,7 +1435,10 @@ categories:
           - heat-map--02
           - heat-map--03
           - heat-map--stocks
+          - horizontal-line--dashed
+          - horizontal-line--solid
           - hybrid-networking
+          - if--else
           - improve-relevance
           - interactions
           - increase-level
@@ -1399,15 +1452,22 @@ categories:
           - join--right-outer
           - kubernetes--ip-address
           - kubernetes--pod
+          - line--thick
+          - line--thin
           - linux
           - linux--alt
           - list-tree
           - managed-solutions
+          - mapping--clear
+          - mapping--hide
+          - mapping--show
           - marginal
           - math-curve
           - model-builder
           - model-builder--reference
+          - model--content--doc
           - name-space
+          - naming-conventions
           - network--1
           - network--2
           - network--3
@@ -1440,7 +1500,9 @@ categories:
           - sankey-diagram--alt
           - scatter-matrix
           - schematics
+          - sequential-palette
           - service-levels
+          - shadow
           - share-knowledge
           - show-data--cards
           - skill-level
@@ -1459,8 +1521,10 @@ categories:
           - support-vector-machine
           - surrogate--key-database
           - surrogate--key-flat-file
+          - switch
           - sys-provision
           - table
+          - table--add
           - table--alias
           - table--built
           - table--shortcut
@@ -1472,12 +1536,15 @@ categories:
           - text-mining
           - text-mining--applier
           - time-plot
+          - trace
           - transform--binary
           - transform--code
           - transform--instructions
           - transform--language
+          - transform--pipeline
           - tree-view
           - tree-view--alt
+          - try-catch
           - type-pattern
           - types
           - upstream
@@ -1494,6 +1561,7 @@ categories:
         members:
           - 4K
           - 4K--filled
+          - ASM
           - api
           - api--key
           - API--1
@@ -1503,6 +1571,8 @@ categories:
           - badge
           - base-document-set
           - book
+          - C
+          - CPlusPlus
           - CAD
           - catalog
           - categories
@@ -1511,6 +1581,7 @@ categories:
           - category--and
           - category--new
           - category--new-each
+          - CBL
           - CDA
           - certificate
           - certificate--check
@@ -1562,6 +1633,7 @@ categories:
           - download
           - DVR
           - export
+          - feedback-documentation
           - floorplan
           - folder
           - folder--add
@@ -1590,6 +1662,8 @@ categories:
           - ISO
           - ISO--filled
           - ISO--outline
+          - JAVA
+          - JCL
           - JPG
           - JSON
           - JSON--reference
@@ -1627,6 +1701,7 @@ categories:
           - PDF--reference
           - plan
           - playlist
+          - PLI
           - PNG
           - policy
           - popup
@@ -1638,6 +1713,10 @@ categories:
           - repo--source-code
           - result--draft
           - roadmap
+          - result
+          - result--new
+          - result--old
+          - REXX
           - rule
           - rule--cancelled
           - rule--data-quality
@@ -1646,9 +1725,7 @@ categories:
           - rule--locked
           - rule--partial
           - rule--test
-          - result
-          - result--new
-          - result--old
+          - rule-grouping--data-quality
           - scale
           - script
           - script--reference
@@ -1694,6 +1771,10 @@ categories:
       - name: Status
         members:
           - async
+          - BPMN-error--fill
+          - BPMN-error--outline
+          - BPMN-escalation--fill
+          - BPMN-escalation--outline
           - caution
           - caution-inverted
           - checkmark
@@ -1943,6 +2024,10 @@ categories:
           - point-of-presence
           - port--definition
           - port--usage
+          - pre-prod-environment
+          - private-network
+          - production-environment
+          - production-service
           - property-relationship
           - redefinition
           - requirement--definition
@@ -2114,6 +2199,8 @@ categories:
           - alarm
           - alarm--add
           - alarm--subtract
+          - array--date-time
+          - array--time
           - calendar
           - calendar--add
           - calendar--add--alt
@@ -2437,6 +2524,9 @@ categories:
           - airplay
           - airplay--filled
           - aperture
+          - array-decimal
+          - array-files
+          - array-users
           - array--booleans
           - array--dates
           - array--numbers
@@ -2574,6 +2664,7 @@ categories:
           - transmission-lte
           - trigger
           - USB
+          - vintage-mac
           - voicemail
           - VPN
           - watch

@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2019, 2024
+ * Copyright IBM Corp. 2019, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -62,8 +62,7 @@ class CDSNumberInput extends CDSTextInput {
   /**
    * Handles `click` event on the up button in the shadow DOM.
    */
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  protected _handleUserInitiatedStepDown(_: Event) {
+  protected _handleUserInitiatedStepDown() {
     const { _input: input } = this;
     this.stepDown();
     this.dispatchEvent(
@@ -82,8 +81,7 @@ class CDSNumberInput extends CDSTextInput {
   /**
    * Handles `click` event on the down button in the shadow DOM.
    */
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  protected _handleUserInitiatedStepUp(_: Event) {
+  protected _handleUserInitiatedStepUp() {
     const { _input: input } = this;
     this.stepUp();
     this.dispatchEvent(
@@ -247,6 +245,12 @@ class CDSNumberInput extends CDSTextInput {
   disableWheel = false;
 
   /**
+   * Set to true to use the fluid variant.
+   */
+  @property({ type: Boolean })
+  isFluid = false;
+
+  /**
    * The input box size.
    */
   @property({ reflect: true })
@@ -302,7 +306,6 @@ class CDSNumberInput extends CDSTextInput {
     } = this;
 
     const isValid = this._getInputValidity();
-
     const invalidIcon = iconLoader(WarningFilled16, {
       class: `${prefix}--number__invalid`,
     });
@@ -310,7 +313,6 @@ class CDSNumberInput extends CDSTextInput {
     const warnIcon = iconLoader(WarningAltFilled16, {
       class: `${prefix}--number__invalid ${prefix}--number__invalid--warning`,
     });
-
     const normalizedProps: {
       disabled: boolean;
       invalid: boolean;
@@ -417,6 +419,25 @@ class CDSNumberInput extends CDSTextInput {
       normalizedProps['slot-name'] = 'warn-text';
       normalizedProps['slot-text'] = this.warnText;
     }
+    const validationMessage =
+      normalizedProps.invalid || normalizedProps.warn
+        ? html`<div
+            class="${prefix}--form-requirement"
+            ?hidden="${!normalizedProps.invalid && !normalizedProps.warn}">
+            <slot name="${normalizedProps['slot-name']}">
+              ${normalizedProps['slot-text']}
+            </slot>
+          </div>`
+        : null;
+
+    const helper = this.helperText
+      ? html`<div
+          class="${helperTextClasses}"
+          id="helper-text"
+          ?hidden="${normalizedProps.invalid || normalizedProps.warn}">
+          <slot name="helper-text"> ${this.helperText} </slot>
+        </div>`
+      : null;
 
     return html`
       <div class="${wrapperClasses}" ?data-invalid=${normalizedProps.invalid}>
@@ -433,18 +454,10 @@ class CDSNumberInput extends CDSTextInput {
               : null}
           </div>
         </div>
-        <div
-          class="${helperTextClasses}"
-          ?hidden="${normalizedProps.invalid || normalizedProps.warn}">
-          <slot name="helper-text"> ${this.helperText} </slot>
-        </div>
-        <div
-          class="${prefix}--form-requirement"
-          ?hidden="${!normalizedProps.invalid && !normalizedProps.warn}">
-          <slot name="${normalizedProps['slot-name']}">
-            ${normalizedProps['slot-text']}
-          </slot>
-        </div>
+        ${this.isFluid
+          ? html`<hr class="${prefix}--number-input__divider" />`
+          : null}
+        ${validationMessage ? validationMessage || helper : null}
       </div>
     `;
   }

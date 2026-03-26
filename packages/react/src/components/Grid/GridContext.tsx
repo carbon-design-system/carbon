@@ -49,11 +49,11 @@ export interface GridSettingsProps {
   subgrid?: boolean;
 }
 
-export const GridSettings: React.FC<GridSettingsProps> = ({
+export const GridSettings = ({
   children,
   mode,
   subgrid = false,
-}) => {
+}: GridSettingsProps) => {
   const value = React.useMemo(() => {
     return {
       mode,

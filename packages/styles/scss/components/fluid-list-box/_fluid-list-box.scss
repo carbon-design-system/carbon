@@ -187,6 +187,14 @@
   }
 
   .#{$prefix}--list-box__wrapper--fluid.#{$prefix}--list-box__wrapper--fluid--invalid
+    .#{$prefix}--form-requirement:empty,
+  .#{$prefix}--list-box__wrapper--fluid
+    .#{$prefix}--list-box--warning
+    ~ .#{$prefix}--form-requirement:empty {
+    block-size: convert.to-rem(32px);
+  }
+
+  .#{$prefix}--list-box__wrapper--fluid.#{$prefix}--list-box__wrapper--fluid--invalid
     .#{$prefix}--list-box[data-invalid]
     .#{$prefix}--list-box__invalid-icon,
   .#{$prefix}--list-box__wrapper--fluid
@@ -428,7 +436,7 @@
 
   .#{$prefix}--list-box__wrapper--fluid:has(.#{$prefix}--dropdown)
     .#{$prefix}--list-box__menu-icon {
-    inset-inline-end: $spacing-04;
+    inset-inline-end: $spacing-05;
   }
 
   // remove ai-label divider when element is invalid and fluid
