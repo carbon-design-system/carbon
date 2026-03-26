@@ -244,5 +244,21 @@ describe('Search', () => {
         }
       }
     );
+
+    it('should sync clear button visibility when controlled value changes', () => {
+      const { rerender } = render(
+        <Search labelText="test-search" value="test-value" />
+      );
+
+      expect(screen.getByLabelText('Clear search input')).not.toHaveClass(
+        `${prefix}--search-close--hidden`
+      );
+
+      rerender(<Search labelText="test-search" value="" />);
+
+      expect(screen.getByLabelText('Clear search input')).toHaveClass(
+        `${prefix}--search-close--hidden`
+      );
+    });
   });
 });
