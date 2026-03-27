@@ -81,6 +81,7 @@ categories:
           - skip--forward--outline--filled
           - skip--forward--outline--solid
           - skip--forward--solid--filled
+          - square--slash
           - stop
           - stop--filled
           - stop--filled--alt
@@ -373,7 +374,8 @@ categories:
           - catalog--publish
           - center--circle
           - center--square
-          - change-catalog
+          - change--catalog
+          - change--circle
           - chat
           - chat--launch
           - chat--off
@@ -430,6 +432,7 @@ categories:
           - funnel--sequence
           - funnel--sort
           - gears
+          - git--repo
           - global-filters
           - graph-aggregator
           - image--search
@@ -457,6 +460,7 @@ categories:
           - migrate
           - migrate--alt
           - minimize
+          - minus--plus
           - modified--newest
           - modified--oldest
           - move
@@ -538,6 +542,7 @@ categories:
           - translate
           - transpose
           - undo
+          - unfold--open
           - update-complete
           - update-now
           - upgrade
@@ -982,6 +987,7 @@ categories:
           - apple
           - apple--dash
           - account
+          - bank--vault
           - basketball
           - bat
           - bee-bat
@@ -1648,6 +1654,9 @@ categories:
           - DVR
           - export
           - feedback-documentation
+          - file--change
+          - file--diff
+          - file--x
           - floorplan
           - folder
           - folder--add
@@ -1682,6 +1691,7 @@ categories:
           - JSON
           - JSON--reference
           - KEY
+          - keychain
           - legend
           - license
           - license--draft
@@ -1804,6 +1814,7 @@ categories:
           - condition--wait-point
           - critical
           - critical-severity
+          - decline
           - diamond-fill
           - error
           - error--filled
@@ -1811,6 +1822,7 @@ categories:
           - event--change
           - event--incident
           - event--warning
+          - globe--private
           - js-error
           - low-severity
           - help
@@ -1829,12 +1841,14 @@ categories:
           - information--filled
           - information--square
           - information--square--filled
+          - key--values
           - locked-and-blocked
           - misuse
           - misuse--outline
           - pending
           - pending--filled
           - queued
+          - shield--alert
           - square-fill
           - undefined
           - undefined--filled
@@ -1950,7 +1964,7 @@ categories:
           - feature-membership--filled
           - feature-picker
           - feature-typing
-          - file-storage
+          - file--storage
           - firewall
           - firewall--classic
           - floating-ip
@@ -2674,6 +2688,7 @@ categories:
           - share
           - signal-strength
           - sim-card
+          - socket
           - Serverless-Fleet
           - service-id
           - tablet
