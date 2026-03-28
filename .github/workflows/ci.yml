@@ -34,6 +34,17 @@ jobs:
         uses: actions/setup-node@53b83947a5a98c8d113130e565377fae1a50d02f # v6.3.0
         with:
           node-version-file: '.nvmrc'
+      - uses: actions/cache@cdf6c1fa76f9f475f3d7449005a359c84ca0f306 # v5.0.3
+        if: github.event_name != 'merge_group'
+        with:
+          path: |
+            node_modules
+            */**/node_modules
+          key:
+            ${{ runner.os }}-yarn-${{ hashFiles('yarn.lock',
+            'packages/**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
       - name: Install dependencies
         env:
           YARN_ENABLE_HARDENED_MODE: 0
@@ -49,6 +60,17 @@ jobs:
         uses: actions/setup-node@53b83947a5a98c8d113130e565377fae1a50d02f # v6.3.0
         with:
           node-version-file: '.nvmrc'
+      - uses: actions/cache@cdf6c1fa76f9f475f3d7449005a359c84ca0f306 # v5.0.3
+        if: github.event_name != 'merge_group'
+        with:
+          path: |
+            node_modules
+            */**/node_modules
+          key:
+            ${{ runner.os }}-yarn-${{ hashFiles('yarn.lock',
+            'packages/**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
       - name: Install dependencies
         env:
           YARN_ENABLE_HARDENED_MODE: 0
@@ -59,7 +81,7 @@ jobs:
         run: yarn lint:styles
 
   test:
-    runs-on: ubuntu-latest-larger-disk
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
       - name: Use Node.js version from .nvmrc
@@ -76,6 +98,8 @@ jobs:
           key:
             ${{ runner.os }}-yarn-${{ hashFiles('yarn.lock',
             'packages/**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
       - name: Install dependencies
         env:
           YARN_ENABLE_HARDENED_MODE: 0
@@ -88,14 +112,14 @@ jobs:
       - name: Run tests
         run: yarn test --ci --collectCoverage
       - name: Upload coverage reports to Codecov with GitHub Action
-        uses: codecov/codecov-action@671740ac38dd9b0130fbe1cec585b89eea48d3de # v5.5.2
+        uses: codecov/codecov-action@1af58845a975a7985b0beb0cbe6fbbb71a41dbad # v5.5.3
         with:
           flags: main-packages
         env:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
 
   web-components-test:
-    runs-on: ubuntu-latest-larger-disk
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
       - name: Use Node.js version from .nvmrc
@@ -112,6 +136,8 @@ jobs:
           key:
             ${{ runner.os }}-yarn-${{ hashFiles('yarn.lock',
             'packages/**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
       - name: Install dependencies
         env:
           YARN_ENABLE_HARDENED_MODE: 0
@@ -125,7 +151,7 @@ jobs:
           cd packages/web-components
           yarn test --coverage
       - name: Upload web-components coverage reports to Codecov
-        uses: codecov/codecov-action@671740ac38dd9b0130fbe1cec585b89eea48d3de # v5.5.2
+        uses: codecov/codecov-action@1af58845a975a7985b0beb0cbe6fbbb71a41dbad # v5.5.3
         with:
           files: ./packages/web-components/coverage/lcov.info
           flags: web-components
@@ -135,7 +161,7 @@ jobs:
 
   e2e:
     name: 'test:e2e'
-    runs-on: ubuntu-latest-larger-disk
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
       - name: Use Node.js version from .nvmrc
@@ -152,13 +178,16 @@ jobs:
           key:
             ${{ runner.os }}-yarn-${{ hashFiles('yarn.lock',
             'packages/**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
       - name: Install dependencies
         env:
           YARN_ENABLE_HARDENED_MODE: 0
         run: yarn install --immutable
-      - uses: dorny/paths-filter@de90cc6fb38fc0963ad72b210f1f284cd68cea36 # v3.0.2
+      - uses: dorny/paths-filter@fbd0ab8f3e69293af611ebaee6363fc25e6d187d # v4.0.1
         id: filter
         with:
+          token: ${{ github.token }}
           filters: |
             e2e:
               - 'e2e/**'
@@ -175,13 +204,8 @@ jobs:
         if: ${{ steps.filter.outputs.e2e == 'true' }}
         run: yarn test:e2e
 
-  vrt-runner:
-    strategy:
-      fail-fast: false
-      matrix:
-        shardIndex: [1, 2, 3, 4]
-        shardTotal: [4]
-    runs-on: ubuntu-latest-larger-disk
+  avt-build:
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
       - name: Use Node.js version from .nvmrc
@@ -198,71 +222,37 @@ jobs:
           key:
             ${{ runner.os }}-yarn-${{ hashFiles('yarn.lock',
             'packages/**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
       - name: Install dependencies
         env:
           YARN_ENABLE_HARDENED_MODE: 0
         run: yarn install --immutable
-      - name: Install browsers
-        run: yarn playwright install --with-deps
       - name: Build project
-        run: yarn build
+        env:
+          NODE_OPTIONS: --max-old-space-size=6144
+        run:
+          yarn lerna run build --scope='@carbon/react'
+          --include-dependencies
       - name: Build storybook
+        env:
+          NODE_OPTIONS: --max-old-space-size=6144
         run: yarn workspace @carbon/react storybook:build
-      - name: Run storybook
-        id: storybook
-        run: |
-          npx serve -l 3000 packages/react/storybook-static &
-          pid=$!
-          echo "pid=$pid" >> $GITHUB_OUTPUT
-      - uses: ./actions/wait-for-it
-        with:
-          URL: 'http://localhost:3000'
-        timeout-minutes: 3
-      - name: Run VRT
-        if:
-          ${{ github.repository == 'carbon-design-system/carbon' &&
-          github.event.pull_request.draft == false }}
-        env:
-          PERCY_TOKEN: c9a21a3fde4fda0a0f822d633426ab26e2ab2c1cba55221d342d4047744c8c24
-          PERCY_PARALLEL_TOTAL: 4
-        run: |
-          yarn percy exec --parallel -- yarn playwright test --project chromium --grep @vrt --shard="${{ matrix.shardIndex }}/${{ matrix.shardTotal }}"
-      - name: Dry run VRT on draft PRs
-        if:
-          ${{ github.repository == 'carbon-design-system/carbon' &&
-          github.event.pull_request.draft == true && github.base_ref != 'main'
-          }}
-        env:
-          PERCY_TOKEN: c9a21a3fde4fda0a0f822d633426ab26e2ab2c1cba55221d342d4047744c8c24
-          PERCY_PARALLEL_TOTAL: 4
-        run: |
-          yarn percy exec --parallel -- yarn playwright test --project chromium --grep @vrt --shard="${{ matrix.shardIndex }}/${{ matrix.shardTotal }}" --dry-run
-      - name: Stop storybook
-        run: kill ${{ steps.storybook.outputs.pid }}
-      - name: Upload blob report to GitHub Actions Artifacts
-        if: ${{ !cancelled() }}
+      - name: Upload storybook static files
         uses: actions/upload-artifact@bbbca2ddaa5d8feaa63e36b76fdaad77386f024f #7.0.0
         with:
-          name: playwright-vrt-blob-report-${{ matrix.shardIndex }}
-          path: blob-report
+          name: avt-storybook-static
+          path: packages/react/storybook-static
           retention-days: 1
 
-  vrt:
-    if: ${{ always() }}
-    runs-on: ubuntu-latest
-    needs: vrt-runner
-    steps:
-      - name: Check VRT Runner job status
-        if: ${{ needs.vrt-runner.result != 'success' }}
-        run: exit 1
-
   avt-runner:
+    needs: avt-build
     strategy:
       fail-fast: false
       matrix:
         shardIndex: [1, 2, 3, 4]
         shardTotal: [4]
-    runs-on: ubuntu-latest-larger-disk
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
       - name: Use Node.js version from .nvmrc
@@ -279,16 +269,19 @@ jobs:
           key:
             ${{ runner.os }}-yarn-${{ hashFiles('yarn.lock',
             'packages/**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
       - name: Install dependencies
         env:
           YARN_ENABLE_HARDENED_MODE: 0
         run: yarn install --immutable
       - name: Install browsers
         run: yarn playwright install --with-deps
-      - name: Build project
-        run: yarn build
-      - name: Build storybook
-        run: yarn workspace @carbon/react storybook:build
+      - name: Download storybook artifacts
+        uses: actions/download-artifact@v8
+        with:
+          name: avt-storybook-static
+          path: packages/react/storybook-static
       - name: Run storybook
         id: storybook
         run: |
@@ -306,7 +299,9 @@ jobs:
       - name: Stop storybook
         run: kill ${{ steps.storybook.outputs.pid }}
       - name: Upload blob report to GitHub Actions Artifacts
-        if: ${{ !cancelled() }}
+        if:
+          ${{ !cancelled() && github.repository == 'carbon-design-system/carbon'
+          }}
         uses: actions/upload-artifact@bbbca2ddaa5d8feaa63e36b76fdaad77386f024f #7.0.0
         with:
           name: playwright-avt-blob-report-${{ matrix.shardIndex }}
@@ -323,11 +318,11 @@ jobs:
         run: exit 1
 
   merge-playwright-reports:
-    # Merge reports after *-runner jobs, even if some shards have failed
+    # Merge reports after avt-runner jobs, even if some shards have failed
     if:
       ${{ github.repository == 'carbon-design-system/carbon' && !cancelled() &&
       github.event.pull_request.draft == false }}
-    needs: [vrt-runner, avt-runner]
+    needs: [avt-runner]
 
     runs-on: ubuntu-latest
     steps:
@@ -346,29 +341,12 @@ jobs:
           key:
             ${{ runner.os }}-yarn-${{ hashFiles('yarn.lock',
             'packages/**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
       - name: Install dependencies
         env:
           YARN_ENABLE_HARDENED_MODE: 0
         run: yarn install --immutable
-
-      - name: Download vrt blob reports from GitHub Actions Artifacts
-        uses: actions/download-artifact@v8
-        with:
-          path: all-playwright-vrt-blob-reports
-          pattern: playwright-vrt-blob-report-*
-          merge-multiple: true
-
-      - name: Merge vrt reports into HTML Report
-        run:
-          npx playwright merge-reports --reporter html
-          ./all-playwright-vrt-blob-reports
-
-      - name: Upload vrt HTML report
-        uses: actions/upload-artifact@v7.0.0
-        with:
-          name: html-playwright-vrt-report--attempt-${{ github.run_attempt }}
-          path: playwright-vrt-report
-          retention-days: 14
 
       - name: Download avt blob reports from GitHub Actions Artifacts
         uses: actions/download-artifact@v8
@@ -383,17 +361,17 @@ jobs:
           ./all-playwright-avt-blob-reports
 
       - name: Upload avt HTML report
-        uses: actions/upload-artifact@v7.0.0
+        uses: actions/upload-artifact@bbbca2ddaa5d8feaa63e36b76fdaad77386f024f #7.0.0
         with:
           name: html-playwright-avt-report--attempt-${{ github.run_attempt }}
           path: playwright-avt-report
-          retention-days: 14
+          retention-days: 1
 
   chromatic-react:
     if:
       ${{ github.repository == 'carbon-design-system/carbon' &&
       github.event.pull_request.draft == false }}
-    runs-on: ubuntu-latest-larger-disk
+    runs-on: ubuntu-latest
     outputs:
       buildUrl: ${{ steps.chromatic.outputs.buildUrl }}
       storybookUrl: ${{ steps.chromatic.outputs.storybookUrl }}
@@ -418,6 +396,8 @@ jobs:
           key:
             ${{ runner.os }}-yarn-${{ hashFiles('yarn.lock',
             'packages/**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
       - name: Install dependencies
         env:
           YARN_ENABLE_HARDENED_MODE: 0
@@ -428,7 +408,7 @@ jobs:
         run: yarn workspace @carbon/react storybook:build --stats-json
       - id: chromatic
         name: Run Chromatic
-        uses: chromaui/action@5ec258af08deb3e8c36653bd618cb7fe52090031 # v15.2.0
+        uses: chromaui/action@0794e6939fe40ce46a88963f818092afc427da5b # v15.3.0
         with:
           # 👇 Token is intentionally plaintext
           # https://www.chromatic.com/docs/github-actions/#run-chromatic-on-external-forks-of-open-source-projects
@@ -436,7 +416,7 @@ jobs:
           workingDir: packages/react
           buildScriptName: storybook:build
           zip: true # Runs Chromatic with the option to compress the build output
-          autoAcceptChanges: 'main' # Option to accept all changes on main
+          autoAcceptChanges: '{main,gh-readonly-queue/main/**}' # Option to accept all changes on main and merge queue
           # 👇 Add debug: true and print dependency trace for changed files to help with debugging:
           traceChanged: 'expanded'
           debug: true
@@ -480,9 +460,10 @@ jobs:
   flag-agents-md-changes:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
       - name: Detect AGENTS.md changes
         id: changes
-        uses: dorny/paths-filter@de90cc6fb38fc0963ad72b210f1f284cd68cea36 # v3.0.2
+        uses: dorny/paths-filter@fbd0ab8f3e69293af611ebaee6363fc25e6d187d # v4.0.1
         with:
           filters: |
             added_or_modified:
