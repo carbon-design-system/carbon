@@ -64,6 +64,11 @@ describe('NumberInput', () => {
     expect(screen.getByLabelText('test-label')).toBeDisabled();
   });
 
+  it('should set `readOnly` on the underlying <input>', () => {
+    render(<NumberInput label="test-label" id="test" readOnly />);
+    expect(screen.getByLabelText('test-label')).toHaveAttribute('readonly', '');
+  });
+
   it('should set the defaultValue of the <input> with `defaultValue`', () => {
     render(<NumberInput label="test-label" id="test" defaultValue={5} />);
     expect(screen.getByLabelText('test-label')).toHaveValue(5);
@@ -825,6 +830,28 @@ describe('NumberInput', () => {
       }),
       16
     );
+  });
+
+  it('should not allow arrow key changes when readOnly with type="text"', async () => {
+    render(
+      <NumberInput
+        type="text"
+        label="test-label"
+        id="test"
+        readOnly
+        defaultValue={50}
+      />
+    );
+
+    const input = screen.getByLabelText('test-label');
+    expect(input).toHaveValue('50');
+
+    await userEvent.click(input);
+    await userEvent.keyboard('{ArrowUp}');
+    expect(input).toHaveValue('50'); // Should not change
+
+    await userEvent.keyboard('{ArrowDown}');
+    expect(input).toHaveValue('50'); // Should not change
   });
 
   describe('with type="text"', () => {
