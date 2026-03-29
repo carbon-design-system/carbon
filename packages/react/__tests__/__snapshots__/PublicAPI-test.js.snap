@@ -3643,6 +3643,12 @@ Map {
       "onDelete": {
         "type": "func",
       },
+      "renderFileActions": {
+        "type": "func",
+      },
+      "renderFileName": {
+        "type": "func",
+      },
       "size": {
         "args": [
           [
@@ -3791,6 +3797,12 @@ Map {
       "onDelete": {
         "type": "func",
       },
+      "renderActions": {
+        "type": "func",
+      },
+      "renderName": {
+        "type": "func",
+      },
       "size": {
         "args": [
           [
@@ -3834,9 +3846,6 @@ Map {
       "invalid": {
         "type": "bool",
       },
-      "name": {
-        "type": "string",
-      },
       "status": {
         "args": [
           [
@@ -3846,9 +3855,6 @@ Map {
           ],
         ],
         "type": "oneOf",
-      },
-      "tabIndex": {
-        "type": "number",
       },
     },
   },
