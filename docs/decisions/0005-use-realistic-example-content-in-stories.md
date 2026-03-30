@@ -1,4 +1,4 @@
-# 4. Use realistic example content in stories
+# 5. Use realistic example content in stories
 
 Date: 2026-02-16
 
