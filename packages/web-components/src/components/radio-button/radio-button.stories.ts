@@ -229,11 +229,6 @@ export const Vertical = {
 };
 
 export const Skeleton = {
-  parameters: {
-    percy: {
-      skip: true,
-    },
-  },
   render: () => html`<cds-radio-button-skeleton></cds-radio-button-skeleton>`,
 };
 

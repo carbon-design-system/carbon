@@ -162,11 +162,6 @@ export const WithToggletip = {
 };
 
 export const Skeleton = {
-  parameters: {
-    percy: {
-      skip: true,
-    },
-  },
   render: () =>
     html` <div style="width:400px;">
       <cds-fluid-select-skeleton></cds-fluid-select-skeleton>
