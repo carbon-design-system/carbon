@@ -1860,6 +1860,7 @@ categories:
           - warning--alt-inverted
           - warning--alt-inverted--filled
           - warning--diamond
+          - warning--diamond-fill
           - warning--filled
           - warning--hex
           - warning--hex--filled
