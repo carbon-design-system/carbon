@@ -96,12 +96,9 @@ const defaultTranslateWithId: TFunc<TranslationKey, TranslationArgs> = (
   args
 ) => {
   const template = defaultTranslations[messageId];
+  const correctedValue = args?.correctedValue ?? '';
 
-  if (args?.correctedValue) {
-    return template.replace('{correctedValue}', args.correctedValue);
-  }
-
-  return template;
+  return template.replace('{correctedValue}', correctedValue);
 };
 
 const defaultFormatLabel: NonNullable<SliderProps['formatLabel']> = (
@@ -711,8 +708,8 @@ const Slider = (props: SliderProps) => {
 
   _onDragRef.current = (evt, activeHandle) => {
     activeHandle = activeHandle ?? stateRef.current.activeHandle;
-    // Do nothing if component is disabled, or we have no event.
-    if (propsRef.current.disabled || propsRef.current.readOnly || !evt) {
+    // Do nothing if component is disabled.
+    if (propsRef.current.disabled || propsRef.current.readOnly) {
       return;
     }
 
@@ -827,11 +824,6 @@ const Slider = (props: SliderProps) => {
       return;
     }
 
-    // Do nothing if we have no valid event, target, or value
-    if (!evt || !('target' in evt) || typeof evt.target.value !== 'string') {
-      return;
-    }
-
     // Avoid calling calcValue for invalid numbers, but still update the state.
     const activeHandle =
       (evt.target.dataset.handlePosition as HandlePosition | undefined) ??
@@ -879,11 +871,6 @@ const Slider = (props: SliderProps) => {
    * Handles state change to isValid state.
    */
   const onBlurInput = (evt: FocusEvent<HTMLInputElement>) => {
-    // Do nothing if we have no valid event, target, or value
-    if (!evt || !('target' in evt) || typeof evt.target.value !== 'string') {
-      return;
-    }
-
     const { value: targetValue } = evt.target;
 
     processNewInputValue(evt.target);
@@ -903,11 +890,6 @@ const Slider = (props: SliderProps) => {
       props.readOnly ||
       !(evt.target instanceof HTMLInputElement)
     ) {
-      return;
-    }
-
-    // Do nothing if we have no valid event, target, or value.
-    if (!evt || !('target' in evt) || typeof evt.target.value !== 'string') {
       return;
     }
 
@@ -981,6 +963,7 @@ const Slider = (props: SliderProps) => {
     // TODO: Delete the optional chaining operator after `getBoundingClientRect`.
     const boundingRect = elementRef.current?.getBoundingClientRect?.();
     let width = boundingRect ? boundingRect.right - boundingRect.left : 0;
+    const nextValue = value ?? props.min;
 
     // Enforce a minimum width of at least 1 for calculations
     if (width <= 0) {
@@ -994,16 +977,13 @@ const Slider = (props: SliderProps) => {
         ? (boundingRect?.right ?? 0) - clientX
         : clientX - (boundingRect?.left ?? 0);
       return leftOffset / width;
-    } else if (value !== null && typeof value !== 'undefined') {
-      return calcRawLeftPercent({
-        max: props.max,
-        min: props.min,
-        value,
-      });
     }
-    // We should never end up in this scenario, but in case we do, and to
-    // re-assure Typescript, return 0.
-    return 0;
+
+    return calcRawLeftPercent({
+      max: props.max,
+      min: props.min,
+      value: nextValue,
+    });
   };
 
   /**
@@ -1162,11 +1142,9 @@ const Slider = (props: SliderProps) => {
 
     if (handle === HandlePosition.LOWER) {
       return !valueUpper || newValue <= valueUpper;
-    } else if (handle === HandlePosition.UPPER) {
-      return !value || newValue >= value;
     }
 
-    return false;
+    return !value || newValue >= value;
   };
 
   const isValidValue = ({

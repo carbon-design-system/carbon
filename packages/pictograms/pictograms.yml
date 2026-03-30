@@ -802,6 +802,33 @@
   aliases:
     - big data
     - cloud
+- name: bin--compost
+  friendly_name: Compost bin
+  aliases:
+    - compost
+    - compost bin
+    - recycle
+    - environment
+    - process
+    - workplace
+- name: bin--recycle
+  friendly_name: Recycle bin
+  aliases:
+    - recycle
+    - recycle bin
+    - industry
+    - environment
+    - process
+    - workplace
+- name: bin--sanitary
+  friendly_name: Sanitary bin
+  aliases:
+    - sanitary
+    - sanitary bin
+    - sanitary waste
+    - feminine waste bin
+    - hygiene bin
+    - trash
 - name: binocular
   friendly_name: Binocular
   aliases:
@@ -2237,15 +2264,6 @@
     - organic
     - trash
     - apple core
-- name: compost--bin
-  friendly_name: Compost bin
-  aliases:
-    - compost
-    - compost bin
-    - recycle
-    - environment
-    - process
-    - workplace
 - name: compute
   friendly_name: Compute
   aliases:
@@ -8088,15 +8106,6 @@
   friendly_name: Recycle
   aliases:
     - recycle
-    - industry
-    - environment
-    - process
-    - workplace
-- name: recycle--bin
-  friendly_name: Recycle bin
-  aliases:
-    - recycle
-    - recycle bin
     - industry
     - environment
     - process
