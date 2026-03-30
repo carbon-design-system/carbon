@@ -796,10 +796,7 @@ class CDSNumberInput extends CDSTextInput {
    * @param numericValue - The numeric value to format and synchronize
    * @param updateInput - Whether to update the DOM input element (default: false)
    */
-  protected _syncTextModeState(
-    numericValue: number,
-    updateInput: boolean = false
-  ) {
+  protected _syncTextModeState(numericValue: number, updateInput = false) {
     // Format the numeric value
     const formattedValue = isNaN(numericValue)
       ? ''
