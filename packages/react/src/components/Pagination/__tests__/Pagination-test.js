@@ -473,6 +473,24 @@ describe('Pagination', () => {
       expect(screen.getByText('1–4 of 4 items')).toBeInTheDocument();
     });
 
+    it('should update page size when page size and page sizes change together', () => {
+      const commonProps = {
+        page: 1,
+        totalItems: 200,
+      };
+      const { rerender } = render(
+        <Pagination {...commonProps} pageSizes={[10, 20]} pageSize={10} />
+      );
+      expect(screen.getByText('1–10 of 200 items')).toBeInTheDocument();
+
+      rerender(
+        <Pagination {...commonProps} pageSizes={[25, 50, 100]} pageSize={50} />
+      );
+
+      expect(screen.getByText('1–50 of 200 items')).toBeInTheDocument();
+      expect(screen.getByLabelText('Items per page:')).toHaveValue('50');
+    });
+
     it('should update the page sizes when updated externally', () => {
       const commonProps = {
         page: 1,

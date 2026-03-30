@@ -96,12 +96,9 @@ const defaultTranslateWithId: TFunc<TranslationKey, TranslationArgs> = (
   args
 ) => {
   const template = defaultTranslations[messageId];
+  const correctedValue = args?.correctedValue ?? '';
 
-  if (args?.correctedValue) {
-    return template.replace('{correctedValue}', args.correctedValue);
-  }
-
-  return template;
+  return template.replace('{correctedValue}', correctedValue);
 };
 
 const defaultFormatLabel: NonNullable<SliderProps['formatLabel']> = (
@@ -113,6 +110,22 @@ const defaultFormatLabel: NonNullable<SliderProps['formatLabel']> = (
 
 const hasUpperValue = (valueUpper: State['valueUpper']): valueUpper is number =>
   typeof valueUpper !== 'undefined';
+
+const calcRawLeftPercent = ({
+  max,
+  min,
+  value,
+}: {
+  max: number;
+  min: number;
+  value: number;
+}) => {
+  const range = max - min;
+
+  if (range === 0) return 0;
+
+  return clamp((value - min) / range, 0, 1);
+};
 
 // TODO: Assuming a 16ms throttle corresponds to 60 FPS, should it be halved,
 // since many systems can handle 120 FPS? If it doesn't correspond to 60 FPS,
@@ -322,7 +335,6 @@ export interface SliderProps
 interface CalcLeftPercentProps {
   clientX?: number;
   value?: number;
-  range?: number;
 }
 
 type State = {
@@ -704,8 +716,8 @@ const Slider = (props: SliderProps) => {
 
   _onDragRef.current = (evt, activeHandle) => {
     activeHandle = activeHandle ?? stateRef.current.activeHandle;
-    // Do nothing if component is disabled, or we have no event.
-    if (propsRef.current.disabled || propsRef.current.readOnly || !evt) {
+    // Do nothing if component is disabled.
+    if (propsRef.current.disabled || propsRef.current.readOnly) {
       return;
     }
 
@@ -820,11 +832,6 @@ const Slider = (props: SliderProps) => {
       return;
     }
 
-    // Do nothing if we have no valid event, target, or value
-    if (!evt || !('target' in evt) || typeof evt.target.value !== 'string') {
-      return;
-    }
-
     // Avoid calling calcValue for invalid numbers, but still update the state.
     const activeHandle =
       (evt.target.dataset.handlePosition as HandlePosition | undefined) ??
@@ -872,11 +879,6 @@ const Slider = (props: SliderProps) => {
    * Handles state change to isValid state.
    */
   const onBlurInput = (evt: FocusEvent<HTMLInputElement>) => {
-    // Do nothing if we have no valid event, target, or value
-    if (!evt || !('target' in evt) || typeof evt.target.value !== 'string') {
-      return;
-    }
-
     const { value: targetValue } = evt.target;
 
     processNewInputValue(evt.target);
@@ -896,11 +898,6 @@ const Slider = (props: SliderProps) => {
       props.readOnly ||
       !(evt.target instanceof HTMLInputElement)
     ) {
-      return;
-    }
-
-    // Do nothing if we have no valid event, target, or value.
-    if (!evt || !('target' in evt) || typeof evt.target.value !== 'string') {
       return;
     }
 
@@ -970,10 +967,11 @@ const Slider = (props: SliderProps) => {
     }
   };
 
-  const calcLeftPercent = ({ clientX, value, range }: CalcLeftPercentProps) => {
+  const calcLeftPercent = ({ clientX, value }: CalcLeftPercentProps) => {
     // TODO: Delete the optional chaining operator after `getBoundingClientRect`.
     const boundingRect = elementRef.current?.getBoundingClientRect?.();
     let width = boundingRect ? boundingRect.right - boundingRect.left : 0;
+    const nextValue = value ?? props.min;
 
     // Enforce a minimum width of at least 1 for calculations
     if (width <= 0) {
@@ -987,13 +985,13 @@ const Slider = (props: SliderProps) => {
         ? (boundingRect?.right ?? 0) - clientX
         : clientX - (boundingRect?.left ?? 0);
       return leftOffset / width;
-    } else if (value !== null && typeof value !== 'undefined' && range) {
-      // Prevent NaN calculation if the range is 0.
-      return range === 0 ? 0 : (value - props.min) / range;
     }
-    // We should never end up in this scenario, but in case we do, and to
-    // re-assure Typescript, return 0.
-    return 0;
+
+    return calcRawLeftPercent({
+      max: props.max,
+      min: props.min,
+      value: nextValue,
+    });
   };
 
   /**
@@ -1033,11 +1031,9 @@ const Slider = (props: SliderProps) => {
     /** Whether to bypass the stepping logic and use the raw value. */
     useRawValue?: boolean;
   }) => {
-    const range = props.max - props.min;
     const leftPercentRaw = calcLeftPercent({
       clientX,
       value,
-      range,
     });
     /** `leftPercentRaw` clamped between 0 and 1. */
     const leftPercent = clamp(leftPercentRaw, 0, 1);
@@ -1154,11 +1150,9 @@ const Slider = (props: SliderProps) => {
 
     if (handle === HandlePosition.LOWER) {
       return !valueUpper || newValue <= valueUpper;
-    } else if (handle === HandlePosition.UPPER) {
-      return !value || newValue >= value;
     }
 
-    return false;
+    return !value || newValue >= value;
   };
 
   const isValidValue = ({

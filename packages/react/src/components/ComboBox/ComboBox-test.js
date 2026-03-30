@@ -9,6 +9,7 @@ import React, { useState } from 'react';
 import { render, screen, within, fireEvent, act } from '@testing-library/react';
 import { useCombobox } from 'downshift';
 import userEvent from '@testing-library/user-event';
+import { useFloating } from '@floating-ui/react';
 import {
   findListBoxNode,
   assertMenuOpen,
@@ -21,6 +22,13 @@ import {
 } from '../ListBox/test-helpers';
 import ComboBox from '../ComboBox';
 import { AILabel } from '../AILabel';
+
+jest.mock('@floating-ui/react', () => ({
+  ...jest.requireActual('@floating-ui/react'),
+  useFloating: jest.fn(),
+}));
+
+const actualFloatingUiReact = jest.requireActual('@floating-ui/react');
 
 const findInputNode = () => screen.getByRole('combobox');
 const openMenu = async () => {
@@ -68,6 +76,8 @@ describe('ComboBox', () => {
   let mockProps;
   window.HTMLElement.prototype.scrollIntoView = function () {};
   beforeEach(() => {
+    useFloating.mockReset();
+    useFloating.mockImplementation(actualFloatingUiReact.useFloating);
     mockProps = {
       id: 'test-combobox',
       items: generateItems(5, generateGenericItem),
@@ -1298,6 +1308,33 @@ describe('ComboBox', () => {
       expect(mockProps.onChange).not.toHaveBeenCalled();
     });
 
+    it('should skip `disabled` items when completing `typeahead` suggestion on Tab', async () => {
+      const disabledTypeaheadProps = {
+        ...mockProps,
+        items: [
+          { id: 'ibm-cloud', text: 'IBM Cloud', disabled: true },
+          { id: 'ibm-quantum', text: 'IBM Quantum' },
+          { id: 'ibm-z', text: 'IBM Z' },
+        ],
+        onChange: jest.fn(),
+      };
+      const user = userEvent.setup();
+
+      render(<ComboBox {...disabledTypeaheadProps} typeahead />);
+
+      const input = screen.getByRole('combobox');
+
+      user.click(input);
+
+      await user.type(input, 'IBM ');
+      await user.keyboard('[Tab]');
+
+      expect(input).toHaveDisplayValue('IBM Quantum');
+      expect(disabledTypeaheadProps.onChange).toHaveBeenLastCalledWith({
+        selectedItem: disabledTypeaheadProps.items[1],
+      });
+    });
+
     it('should not autocomplete on Tab after backspace', async () => {
       const user = userEvent.setup();
       render(<ComboBox {...mockProps} allowCustomValue typeahead />);
@@ -1736,5 +1773,125 @@ describe('ComboBox', () => {
 
     expect(listbox).toHaveAttribute('id');
     expect(combobox).toHaveAttribute('aria-controls', listbox.id);
+  });
+
+  it('should apply floating styles when `autoAlign` is enabled', async () => {
+    const referenceNode = document.createElement('div');
+    const floatingNode = document.createElement('div');
+
+    Object.defineProperty(referenceNode, 'clientWidth', {
+      value: 320,
+      configurable: true,
+    });
+
+    useFloating.mockReturnValue({
+      refs: {
+        reference: { current: referenceNode },
+        floating: { current: floatingNode },
+        setReference: jest.fn(),
+        setFloating: jest.fn(),
+      },
+      floatingStyles: {
+        position: 'fixed',
+        top: '12px',
+        left: '8px',
+      },
+      middlewareData: {
+        hide: {
+          referenceHidden: true,
+        },
+      },
+    });
+
+    render(<ComboBox {...mockProps} autoAlign />);
+
+    await waitForPosition();
+
+    expect(floatingNode.style.position).toBe('fixed');
+    expect(floatingNode.style.top).toBe('12px');
+    expect(floatingNode.style.left).toBe('8px');
+    expect(floatingNode.style.visibility).toBe('hidden');
+    expect(floatingNode.style.width).toBe('320px');
+  });
+
+  it('should expose downshift actions through `downshiftActions`', () => {
+    const downshiftActions = { current: undefined };
+
+    render(<ComboBox {...mockProps} downshiftActions={downshiftActions} />);
+
+    expect(downshiftActions.current).toEqual(
+      expect.objectContaining({
+        closeMenu: expect.any(Function),
+        openMenu: expect.any(Function),
+        reset: expect.any(Function),
+        selectItem: expect.any(Function),
+        setHighlightedIndex: expect.any(Function),
+        setInputValue: expect.any(Function),
+        toggleMenu: expect.any(Function),
+      })
+    );
+
+    act(() => {
+      downshiftActions.current.openMenu();
+    });
+
+    expect(findInputNode()).toHaveAttribute('aria-expanded', 'true');
+  });
+
+  it('should keep the current highlight when the menu receives `mouseleave`', async () => {
+    render(<ComboBox {...mockProps} />);
+
+    fireEvent.keyDown(findInputNode(), {
+      key: 'ArrowDown',
+      code: 'ArrowDown',
+    });
+
+    const firstOption = screen.getByRole('option', { name: 'Item 0' });
+    const listbox = screen.getByRole('listbox');
+
+    expect(firstOption).toHaveClass(
+      'cds--list-box__menu-item',
+      'cds--list-box__menu-item--highlighted',
+      { exact: true }
+    );
+
+    fireEvent.mouseLeave(listbox);
+
+    expect(firstOption).toHaveClass(
+      'cds--list-box__menu-item',
+      'cds--list-box__menu-item--highlighted',
+      { exact: true }
+    );
+  });
+
+  it('should move the cursor on `Home` and `End` key presses', async () => {
+    render(<ComboBox {...mockProps} />);
+
+    const input = findInputNode();
+    const setSelectionRange = jest.spyOn(input, 'setSelectionRange');
+
+    await userEvent.type(input, 'Item 1');
+
+    fireEvent.keyDown(input, { key: 'Home', code: 'Home' });
+    fireEvent.keyDown(input, { key: 'End', code: 'End' });
+
+    expect(setSelectionRange).toHaveBeenNthCalledWith(1, 0, 0);
+    expect(setSelectionRange).toHaveBeenNthCalledWith(
+      2,
+      input.value.length,
+      input.value.length
+    );
+  });
+
+  it('should open the menu when `Enter` is pressed with an empty input and no highlighted item', () => {
+    render(<ComboBox {...mockProps} />);
+
+    fireEvent.keyDown(findInputNode(), { key: 'Enter', code: 'Enter' });
+
+    assertMenuOpen(mockProps);
+
+    for (let i = 0; i < mockProps.items.length; i++) {
+      expect(findMenuItemNode(i)).toHaveAttribute('aria-selected', 'false');
+    }
   });
 });
