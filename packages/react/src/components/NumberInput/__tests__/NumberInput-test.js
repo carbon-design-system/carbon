@@ -848,10 +848,10 @@ describe('NumberInput', () => {
 
     await userEvent.click(input);
     await userEvent.keyboard('{ArrowUp}');
-    expect(input).toHaveValue('50'); // Should not change
+    expect(input).toHaveValue('50');
 
     await userEvent.keyboard('{ArrowDown}');
-    expect(input).toHaveValue('50'); // Should not change
+    expect(input).toHaveValue('50');
   });
 
   describe('with type="text"', () => {
