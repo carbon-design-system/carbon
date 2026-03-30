@@ -156,8 +156,10 @@ $css--plex: true !default;
 
 // Disabled state
 :host(#{$prefix}-fluid-dropdown[disabled]) {
+  cursor: not-allowed;
+
   svg {
-    fill: $icon-on-color-disabled;
+    fill: $icon-disabled;
   }
 
   .#{$prefix}--list-box__field,
@@ -178,6 +180,10 @@ $css--plex: true !default;
 
 :host(#{$prefix}-fluid-dropdown[read-only]) {
   @extend .#{$prefix}--dropdown--readonly;
+
+  .#{$prefix}--dropdown {
+    border-block-end-color: $border-subtle;
+  }
   .#{$prefix}--label {
     color: inherit;
   }
