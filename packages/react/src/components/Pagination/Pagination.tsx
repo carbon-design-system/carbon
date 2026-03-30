@@ -6,7 +6,7 @@
  */
 
 import { CaretLeft, CaretRight } from '@carbon/icons-react';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 
 import { IconButton } from '../IconButton';
 import PropTypes from 'prop-types';
@@ -15,6 +15,7 @@ import SelectItem from '../SelectItem';
 import cx from 'classnames';
 import isEqual from 'react-fast-compare';
 import { useFallbackId } from '../../internal/useId';
+import { usePreviousValue } from '../../internal/usePreviousValue';
 import { usePrefix } from '../../internal/usePrefix';
 
 type ExcludedAttributes = 'id' | 'onChange';
@@ -141,11 +142,16 @@ export interface PaginationProps
   totalItems?: number;
 }
 
-function mapPageSizesToObject(sizes) {
-  return typeof sizes[0] === 'object' && sizes[0] !== null
-    ? sizes
-    : sizes.map((size) => ({ text: size, value: size }));
-}
+const isPaginationPageSizeArray = (
+  sizes: PaginationProps['pageSizes']
+): sizes is PaginationPageSize[] =>
+  typeof sizes[0] === 'object' && sizes[0] !== null;
+
+const mapPageSizesToObject = (sizes: PaginationProps['pageSizes']) => {
+  if (isPaginationPageSizeArray(sizes)) return sizes;
+
+  return sizes.map((size) => ({ text: String(size), value: size }));
+};
 
 function renderSelectItems(total) {
   let counter = 1;
@@ -159,7 +165,7 @@ function renderSelectItems(total) {
   return itemArr;
 }
 
-function getPageSize(pageSizes, pageSize) {
+const getPageSize = (pageSizes: PaginationPageSize[], pageSize?: number) => {
   if (pageSize) {
     const hasSize = pageSizes.find((size) => {
       return pageSize === size.value;
@@ -170,7 +176,7 @@ function getPageSize(pageSizes, pageSize) {
     }
   }
   return pageSizes[0].value;
-}
+};
 
 // eslint-disable-next-line react/display-name -- https://github.com/carbon-design-system/carbon/issues/20452
 const Pagination = React.forwardRef(
@@ -208,23 +214,21 @@ const Pagination = React.forwardRef(
     const inputId = useFallbackId(id?.toString());
     const backBtnRef = useRef<HTMLButtonElement>(null);
     const forwardBtnRef = useRef<HTMLButtonElement>(null);
-    const [pageSizes, setPageSizes] = useState(() => {
-      return mapPageSizesToObject(controlledPageSizes);
-    });
-    const [prevPageSizes, setPrevPageSizes] = useState(controlledPageSizes);
 
+    const normalizedControlledPageSizes = useMemo(
+      () => mapPageSizesToObject(controlledPageSizes),
+      [controlledPageSizes]
+    );
+    const prevControlledPageSize = usePreviousValue(controlledPageSize);
+
+    const [pageSizes, setPageSizes] = useState(normalizedControlledPageSizes);
     const [page, setPage] = useState(controlledPage);
-    const [prevControlledPage, setPrevControlledPage] =
-      useState(controlledPage);
     const [focusTarget, setFocusTarget] = useState<
       'backward' | 'forward' | null
     >(null);
-
     const [pageSize, setPageSize] = useState(() => {
       return getPageSize(pageSizes, controlledPageSize);
     });
-    const [prevControlledPageSize, setPrevControlledPageSize] =
-      useState(controlledPageSize);
 
     const className = cx({
       [`${prefix}--pagination`]: true,
@@ -270,21 +274,18 @@ const Pagination = React.forwardRef(
       // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20452
     }, [focusTarget]);
 
-    // Sync state with props
-    if (controlledPage !== prevControlledPage) {
+    useEffect(() => {
       setPage(controlledPage);
-      setPrevControlledPage(controlledPage);
-    }
+    }, [controlledPage]);
 
-    if (controlledPageSize !== prevControlledPageSize) {
-      setPageSize(getPageSize(pageSizes, controlledPageSize));
-      setPrevControlledPageSize(controlledPageSize);
-    }
+    useEffect(() => {
+      setPageSizes((prev) =>
+        isEqual(normalizedControlledPageSizes, prev)
+          ? prev
+          : normalizedControlledPageSizes
+      );
 
-    if (!isEqual(controlledPageSizes, prevPageSizes)) {
-      const pageSizes = mapPageSizesToObject(controlledPageSizes);
-
-      const hasPageSize = pageSizes.find((size) => {
+      const hasPageSize = normalizedControlledPageSizes.find((size) => {
         return size.value === pageSize;
       });
 
@@ -293,10 +294,22 @@ const Pagination = React.forwardRef(
       if (!hasPageSize) {
         setPage(1);
       }
+    }, [normalizedControlledPageSizes, pageSize]);
 
-      setPageSizes(pageSizes);
-      setPrevPageSizes(controlledPageSizes);
-    }
+    useEffect(() => {
+      if (controlledPageSize === prevControlledPageSize) return;
+
+      const nextPageSize = getPageSize(
+        normalizedControlledPageSizes,
+        controlledPageSize
+      );
+
+      setPageSize(nextPageSize);
+    }, [
+      controlledPageSize,
+      normalizedControlledPageSizes,
+      prevControlledPageSize,
+    ]);
 
     function handleSizeChange(event) {
       const pageSize = Number(event.target.value);

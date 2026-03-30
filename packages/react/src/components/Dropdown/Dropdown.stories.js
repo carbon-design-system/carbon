@@ -140,6 +140,9 @@ const sharedArgTypes = {
     control: {
       type: 'text',
     },
+    type: {
+      required: true,
+    },
   },
   size: {
     options: ['sm', 'md', 'lg'],
