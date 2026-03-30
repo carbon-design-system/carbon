@@ -295,7 +295,7 @@ async function patchCjsDefaultInterop(filepath) {
   // makes React components import as module objects in downstream CJS tests.
   // Normalize to `default || module` so consumers receive the component value.
   const updated = contents.replace(
-    /^exports\.(\w+)\s*=\s*(require_\w+);$/gm,
+    /^exports\.(\w+)\s*=\s*(require_[\w$]+);$/gm,
     'exports.$1 = $2.default || $2;'
   );
 
