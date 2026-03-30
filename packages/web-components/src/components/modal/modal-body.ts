@@ -65,11 +65,11 @@ class CDSModalBody extends LitElement {
       this.removeAttribute('no-fade');
     }
 
-    // Respect user-defined tabindex
-    if (this.userDefinedTabindex !== null) return;
-
     if (hasScrollingContent || hasScroll) {
-      this.setAttribute('tabindex', '0');
+      // Respect user-defined tabindex
+      if (this.userDefinedTabindex === null) {
+        this.setAttribute('tabindex', '0');
+      }
       this.setAttribute('is-scrollable', '');
       this.setAttribute('role', 'region');
 
@@ -78,7 +78,10 @@ class CDSModalBody extends LitElement {
         this.setAttribute('aria-labelledby', ariaLabelledBy);
       }
     } else if (!hasScrollingContent) {
-      this.removeAttribute('tabindex');
+      // Respect user-defined tabindex
+      if (this.userDefinedTabindex === null) {
+        this.removeAttribute('tabindex');
+      }
       this.removeAttribute('is-scrollable');
       this.removeAttribute('role');
       this.removeAttribute('aria-labelledby');
