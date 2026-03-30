@@ -17,9 +17,6 @@ export const AISkeletonPlaceholder = {
     docs: {
       page: mdx,
     },
-    percy: {
-      skip: true,
-    },
   },
   render: () => {
     return html`<cds-ai-skeleton-placeholder
