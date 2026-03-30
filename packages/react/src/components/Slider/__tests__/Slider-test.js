@@ -67,6 +67,25 @@ const renderTwoHandleSlider = ({
     ...rest,
   });
 
+const createDOMRect = (options) => {
+  const left = options?.left ?? 0;
+  const top = options?.top ?? 0;
+  const width = options?.width ?? 0;
+  const height = options?.height ?? 0;
+
+  return {
+    x: left,
+    y: top,
+    top,
+    left,
+    width,
+    height,
+    right: left + width,
+    bottom: top + height,
+    toJSON: () => ({}),
+  };
+};
+
 describe('Slider', () => {
   beforeEach(() => {
     jest.clearAllMocks();
@@ -225,6 +244,26 @@ describe('Slider', () => {
       expect(parseInt(inputElement.getAttribute('value'))).toEqual(100);
     });
 
+    it('should auto-correct values below `min` and announce the correction', async () => {
+      renderSlider({
+        ariaLabelInput: inputAriaValue,
+        value: initialValue,
+        min: 10,
+        max: 100,
+      });
+
+      const inputElement = screen.getByLabelText(inputAriaValue);
+
+      await userEvent.clear(inputElement);
+      await userEvent.type(inputElement, '0');
+      await userEvent.tab();
+
+      expect(inputElement).toHaveValue(10);
+      expect(screen.getByRole('alert')).toHaveTextContent(
+        'The inputted value "0" was corrected to the nearest allowed digit.'
+      );
+    });
+
     it('should apply the given id to the element with role of slider', () => {
       const testId = 'slider-test-custom-id';
       renderSlider({ id: testId });
@@ -293,6 +332,23 @@ describe('Slider', () => {
       const theInput = screen.getByRole('spinbutton');
       await type(theInput, '{selectall}3');
       expect(onChange).toHaveBeenCalledTimes(0);
+    });
+
+    it('should ignore direct change events when `readOnly` is `true`', () => {
+      renderSlider({
+        ariaLabelInput: inputAriaValue,
+        value: initialValue,
+        max: 100,
+        onChange,
+        readOnly: true,
+      });
+
+      const inputElement = screen.getByLabelText(inputAriaValue);
+
+      fireEvent.change(inputElement, { target: { value: '75' } });
+
+      expect(onChange).not.toHaveBeenCalled();
+      expect(inputElement).toHaveValue(initialValue);
     });
 
     it('should not have warning if disabled', () => {
@@ -624,6 +680,32 @@ describe('Slider', () => {
         mouseUp(theSlider);
         expect(onChange).toHaveBeenLastCalledWith({
           value: 100,
+        });
+      });
+
+      it('should set state from a touch interaction', async () => {
+        renderSlider({
+          ariaLabelInput: inputAriaValue,
+          value: 0,
+          min: 0,
+          max: 100,
+          onChange,
+        });
+
+        const slider = screen.getByRole('slider');
+        const sliderRoot = screen.getByRole('presentation');
+
+        jest
+          .spyOn(sliderRoot, 'getBoundingClientRect')
+          .mockImplementation(() => createDOMRect({ left: 0, width: 100 }));
+
+        fireEvent.touchStart(slider, { touches: [{ clientX: 75 }] });
+        fireEvent.touchEnd(document);
+
+        await waitFor(() => {
+          expect(onChange).toHaveBeenLastCalledWith({
+            value: 75,
+          });
         });
       });
 
@@ -1208,6 +1290,49 @@ describe('Slider', () => {
       expect(upperInput).not.toHaveAttribute('aria-invalid', 'true');
     });
 
+    it('should clear invalid state when invalid changes to false', async () => {
+      const { rerender } = renderTwoHandleSlider({
+        invalid: true,
+        invalidText: 'Error message',
+        value: initialValueLower,
+        unstable_valueUpper: initialValueUpper,
+        min: 0,
+        max: 100,
+      });
+      const lowerInput = screen.getByLabelText(defaultAriaLabelInput, {
+        selector: 'input',
+      });
+      const upperInput = screen.getByLabelText(defaultAriaLabelInputUpper, {
+        selector: 'input',
+      });
+
+      await waitFor(() => {
+        expect(lowerInput).toHaveAttribute('aria-invalid', 'true');
+        expect(upperInput).toHaveAttribute('aria-invalid', 'true');
+      });
+
+      rerender(
+        <Slider
+          labelText="Slider"
+          value={initialValueLower}
+          unstable_valueUpper={initialValueUpper}
+          min={0}
+          max={100}
+          step={defaultStep}
+          invalid={false}
+          invalidText="Error message"
+          warnText="Warning"
+          ariaLabelInput={defaultAriaLabelInput}
+          unstable_ariaLabelInputUpper={defaultAriaLabelInputUpper}
+        />
+      );
+
+      await waitFor(() => {
+        expect(lowerInput).not.toHaveAttribute('aria-invalid', 'true');
+        expect(upperInput).not.toHaveAttribute('aria-invalid', 'true');
+      });
+    });
+
     describe('Error handling, expected behavior from event handlers', () => {
       it('handles non-number typed into input field', async () => {
         const { type, tab } = userEvent;
@@ -1386,6 +1511,74 @@ describe('Slider', () => {
         expect(onChange).toHaveBeenLastCalledWith({
           value: 90,
           valueUpper: initialValueUpper,
+        });
+      });
+
+      it('should choose the lower handle when dragging from the track nearer to it', async () => {
+        renderTwoHandleSlider({
+          value: 20,
+          unstable_valueUpper: 80,
+          min: 0,
+          max: 100,
+          onChange,
+        });
+
+        const sliderRoot = screen.getByRole('presentation');
+        const [lowerThumb, upperThumb] = screen.getAllByRole('slider');
+
+        jest
+          .spyOn(sliderRoot, 'getBoundingClientRect')
+          .mockImplementation(() => createDOMRect({ left: 0, width: 100 }));
+        jest
+          .spyOn(lowerThumb, 'getBoundingClientRect')
+          .mockImplementation(() => createDOMRect({ left: 20, width: 10 }));
+        jest
+          .spyOn(upperThumb, 'getBoundingClientRect')
+          .mockImplementation(() => createDOMRect({ left: 80, width: 10 }));
+
+        fireEvent.mouseDown(sliderRoot, { clientX: 26 });
+        fireEvent.mouseUp(document);
+
+        expect(lowerThumb).toHaveFocus();
+        await waitFor(() => {
+          expect(onChange).toHaveBeenLastCalledWith({
+            value: 26,
+            valueUpper: 80,
+          });
+        });
+      });
+
+      it('should choose the upper handle when dragging from the track nearer to it', async () => {
+        renderTwoHandleSlider({
+          value: 20,
+          unstable_valueUpper: 80,
+          min: 0,
+          max: 100,
+          onChange,
+        });
+
+        const sliderRoot = screen.getByRole('presentation');
+        const [lowerThumb, upperThumb] = screen.getAllByRole('slider');
+
+        jest
+          .spyOn(sliderRoot, 'getBoundingClientRect')
+          .mockImplementation(() => createDOMRect({ left: 0, width: 100 }));
+        jest
+          .spyOn(lowerThumb, 'getBoundingClientRect')
+          .mockImplementation(() => createDOMRect({ left: 20, width: 10 }));
+        jest
+          .spyOn(upperThumb, 'getBoundingClientRect')
+          .mockImplementation(() => createDOMRect({ left: 80, width: 10 }));
+
+        fireEvent.mouseDown(sliderRoot, { clientX: 84 });
+        fireEvent.mouseUp(document);
+
+        expect(upperThumb).toHaveFocus();
+        await waitFor(() => {
+          expect(onChange).toHaveBeenLastCalledWith({
+            value: 20,
+            valueUpper: 84,
+          });
         });
       });
 
