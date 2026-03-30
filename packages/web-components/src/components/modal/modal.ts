@@ -128,6 +128,8 @@ class CDSModal extends HostListenerMixin(LitElement) {
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20452
   // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
   protected _handleKeydown = ({ key, target }: KeyboardEvent) => {
+    if (!this.open) return;
+
     if (key === 'Esc' || key === 'Escape') {
       this._handleUserInitiatedClose(target);
     }
