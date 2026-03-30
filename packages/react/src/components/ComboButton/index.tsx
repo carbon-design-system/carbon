@@ -17,11 +17,12 @@ import { useId } from '../../internal/useId';
 import { usePrefix } from '../../internal/usePrefix';
 import useIsomorphicEffect from '../../internal/useIsomorphicEffect';
 import {
-  useFloating,
-  flip,
-  hide,
-  size as floatingSize,
   autoUpdate,
+  flip,
+  size as floatingSize,
+  hide,
+  useFloating,
+  type Middleware,
 } from '@floating-ui/react';
 import { useFeatureFlag } from '../FeatureFlags';
 import { mergeRefs } from '../../tools/mergeRefs';
@@ -113,9 +114,7 @@ const ComboButton = React.forwardRef<HTMLDivElement, ComboButtonProps>(
     const id = useId('combobutton');
     const prefix = usePrefix();
     const containerRef = useRef<HTMLDivElement>(null);
-    const middlewares: NonNullable<
-      NonNullable<Parameters<typeof useFloating>[0]>['middleware']
-    > = [];
+    const middlewares: Middleware[] = [];
 
     if (!enableOnlyFloatingStyles) {
       middlewares.push(flip({ crossAxis: false }), hide());
