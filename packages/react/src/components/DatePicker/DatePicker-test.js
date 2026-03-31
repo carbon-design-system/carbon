@@ -820,9 +820,35 @@ describe('Range date picker', () => {
     await userEvent.type(theStart, '2023-01-05{enter}');
     await userEvent.type(theEnd, '2023-01-19{enter}');
     expect(onChange).toHaveBeenCalledTimes(2);
+    expect(screen.getByRole('application')).not.toHaveClass('open');
+    await userEvent.click(theEnd);
     expect(screen.getByRole('application')).toHaveClass('open');
     await userEvent.keyboard('{escape}');
     expect(screen.getByRole('application')).not.toHaveClass('open');
+  });
+
+  it('should move focus on first click outside after Enter on end date input', async () => {
+    render(
+      <>
+        <DatePicker
+          dateFormat="Y-m-d"
+          onChange={() => {}}
+          datePickerType="range">
+          <DatePickerInput id="start-date-input-id" labelText="Start date" />
+          <DatePickerInput id="end-date-input-id" labelText="End date" />
+        </DatePicker>
+        <input id="outside-input-id" aria-label="Outside input" />
+      </>
+    );
+
+    const end = screen.getByLabelText('End date');
+    const outside = screen.getByLabelText('Outside input');
+
+    await userEvent.click(end);
+    await userEvent.type(end, '2026-02-15{enter}');
+    await userEvent.click(outside);
+
+    expect(outside).toHaveFocus();
   });
 
   it('clearing end date should not cause console warnings', async () => {
@@ -1267,31 +1293,6 @@ describe('Range date picker', () => {
 
       expect(start.value).toBe('03/03/2025');
       expect(end.value).toBe('03/09/2025');
-    });
-
-    it('should not fire end input blur handlers when Enter is pressed', async () => {
-      const handleBlur = jest.fn();
-
-      render(
-        <DatePicker
-          dateFormat="Y-m-d"
-          onChange={() => {}}
-          datePickerType="range">
-          <DatePickerInput id="start" labelText="Start date" />
-          <DatePickerInput id="end" labelText="End date" onBlur={handleBlur} />
-        </DatePicker>
-      );
-
-      await userEvent.type(
-        screen.getByLabelText('Start date'),
-        '2023-01-05{enter}'
-      );
-      await userEvent.type(
-        screen.getByLabelText('End date'),
-        '2023-01-19{enter}'
-      );
-
-      expect(handleBlur).not.toHaveBeenCalled();
     });
 
     it('should not fire end input blur handlers when Enter is pressed', async () => {

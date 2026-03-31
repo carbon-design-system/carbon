@@ -8,7 +8,6 @@
 /* eslint-disable no-console */
 
 import React from 'react';
-import TextInput from '../TextInput';
 import { action } from 'storybook/actions';
 import './story.scss';
 import { default as Accordion, AccordionItem, AccordionSkeleton } from '.';
@@ -17,8 +16,6 @@ import ButtonSet from '../ButtonSet';
 import mdx from './Accordion.mdx';
 import { WithLayer } from '../../../.storybook/templates/WithLayer';
 
-import DatePicker from '../DatePicker';
-import DatePickerInput from '../DatePickerInput';
 export default {
   title: 'Components/Accordion',
   component: Accordion,
