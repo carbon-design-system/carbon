@@ -181,7 +181,17 @@ export function Toggletip<E extends ElementType = 'span'>({
     const handleOutsideClick = (event: MouseEvent | PointerEvent) => {
       const node = event.target as Node | null;
 
-      if (open && node && !ref.current?.contains(node)) {
+      let isInside = node && ref.current?.contains(node);
+
+      // In Shadow DOM, event.target is retargeted to the shadow host.
+      // Use composedPath to get the actual click target inside the shadow DOM.
+      if (!isInside && event.composedPath) {
+        const path = event.composedPath();
+        const actualTarget = path[0] as Node;
+        isInside = actualTarget && ref.current?.contains(actualTarget);
+      }
+
+      if (open && !isInside) {
         setOpen(false);
       }
     };
