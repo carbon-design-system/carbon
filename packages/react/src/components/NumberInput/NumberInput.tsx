@@ -920,7 +920,7 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
               onChange={handleOnChange}
               onKeyUp={onKeyUp}
               onKeyDown={(e) => {
-                if (type === 'text') {
+                if (type === 'text' && !readOnly && !disabled) {
                   if (match(e, keys.ArrowUp)) {
                     handleStep(e, 'up');
                   } else if (match(e, keys.ArrowDown)) {
