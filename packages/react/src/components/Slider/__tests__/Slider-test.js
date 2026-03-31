@@ -184,6 +184,60 @@ describe('Slider', () => {
       });
     });
 
+    it('should update controlled slider position when props change after mount', () => {
+      const { container, rerender } = renderSlider({
+        ariaLabelInput: inputAriaValue,
+        value: 50,
+        min: 0,
+        max: 100,
+      });
+      const slider = screen.getByRole('slider');
+      const sliderWrapper = container.querySelector(
+        `.${prefix}--slider__thumb-wrapper`
+      );
+
+      expect(slider).toHaveAttribute('aria-valuenow', '50');
+      expect(sliderWrapper).toHaveStyle({
+        insetInlineStart: '50%',
+      });
+
+      rerender(
+        <Slider
+          labelText="Slider"
+          value={50}
+          min={0}
+          max={200}
+          step={defaultStep}
+          invalidText="Invalid"
+          warnText="Warning"
+          ariaLabelInput={inputAriaValue}
+        />
+      );
+
+      expect(slider).toHaveAttribute('aria-valuenow', '50');
+      expect(sliderWrapper).toHaveStyle({
+        insetInlineStart: '25%',
+      });
+
+      rerender(
+        <Slider
+          labelText="Slider"
+          value={100}
+          min={0}
+          max={200}
+          step={defaultStep}
+          invalidText="Invalid"
+          warnText="Warning"
+          ariaLabelInput={inputAriaValue}
+        />
+      );
+
+      expect(slider).toHaveAttribute('aria-valuenow', '100');
+      expect(sliderWrapper).toHaveStyle({
+        insetInlineStart: '50%',
+      });
+    });
+
     it('marks input field as hidden if hidden via props', () => {
       const { container } = renderSlider({
         ariaLabelInput: inputAriaValue,
@@ -965,6 +1019,57 @@ describe('Slider', () => {
       );
       expect(sliderWrapperLower).toHaveStyle({ insetInlineStart: '50%' });
       expect(sliderWrapperUpper).toHaveStyle({ insetInlineStart: '50%' });
+    });
+
+    it('should update the filled track when switching to two handles after mount', async () => {
+      const { container, rerender } = renderSlider({
+        ariaLabelInput: defaultAriaLabelInput,
+        value: 25,
+        min: 0,
+        max: 100,
+      });
+      const filledTrack = container.querySelector(
+        `.${prefix}--slider__filled-track`
+      );
+
+      expect(filledTrack.style.transform).toBe(
+        'translate(0%, -50%) scaleX(0.25)'
+      );
+
+      rerender(
+        <Slider
+          labelText="Slider"
+          value={25}
+          min={0}
+          max={100}
+          step={defaultStep}
+          invalidText="Invalid"
+          warnText="Warning"
+          ariaLabelInput={defaultAriaLabelInput}
+          unstable_valueUpper={75}
+          unstable_ariaLabelInputUpper={defaultAriaLabelInputUpper}
+        />
+      );
+
+      await waitFor(() => {
+        expect(screen.getAllByRole('slider')).toHaveLength(2);
+        expect(filledTrack.style.transform).toBe(
+          'translate(25%, -50%) scaleX(0.5)'
+        );
+      });
+
+      const [lowerThumb, upperThumb] = screen.getAllByRole('slider');
+      const sliderWrapperLower = container.querySelector(
+        `.${prefix}--slider__thumb-wrapper--lower`
+      );
+      const sliderWrapperUpper = container.querySelector(
+        `.${prefix}--slider__thumb-wrapper--upper`
+      );
+
+      expect(lowerThumb).toHaveAttribute('aria-valuenow', '25');
+      expect(upperThumb).toHaveAttribute('aria-valuenow', '75');
+      expect(sliderWrapperLower).toHaveStyle({ insetInlineStart: '25%' });
+      expect(sliderWrapperUpper).toHaveStyle({ insetInlineStart: '75%' });
     });
 
     it('marks input field as hidden if hidden via props', () => {
