@@ -9,7 +9,6 @@ import PropTypes from 'prop-types';
 import React, {
   forwardRef,
   useCallback,
-  useContext,
   useEffect,
   useImperativeHandle,
   useRef,
@@ -28,8 +27,6 @@ import { match, keys } from '../../internal/keyboard';
 import { isComponentElement } from '../../internal';
 import { usePrefix } from '../../internal/usePrefix';
 import { useSavedCallback } from '../../internal/useSavedCallback';
-import { FormContext } from '../FluidForm';
-import { WarningFilled, WarningAltFilled } from '@carbon/icons-react';
 import {
   DateLimit,
   DateOption,
@@ -270,11 +267,6 @@ export interface DatePickerProps {
   invalid?: boolean;
 
   /**
-   * Provide the text that is displayed when the control is in error state (Fluid Only)
-   */
-  invalidText?: ReactNode;
-
-  /**
    * `true` to use the light version.
    */
   light?: boolean;
@@ -343,11 +335,6 @@ export interface DatePickerProps {
   warn?: boolean;
 
   /**
-   * Provide the text that is displayed when the control is in warning state (Fluid only)
-   */
-  warnText?: ReactNode;
-
-  /**
    * Accessible aria-label for the "next month" arrow icon.
    */
   nextMonthAriaLabel?: string;
@@ -372,9 +359,7 @@ const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>((props, ref) => {
     enable,
     inline,
     invalid,
-    invalidText,
     warn,
-    warnText,
     light = false,
     locale = 'en',
     maxDate,
@@ -392,7 +377,6 @@ const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>((props, ref) => {
   } = props;
 
   const prefix = usePrefix();
-  const { isFluid } = useContext(FormContext);
   const [hasInput, setHasInput] = useState(false);
   // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
   const startInputField: any = useCallback((node) => {
@@ -959,29 +943,6 @@ const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>((props, ref) => {
   }, [value, prefix, startInputField]);
 
   let fluidError;
-  if (isFluid) {
-    if (invalid) {
-      fluidError = (
-        <>
-          <WarningFilled
-            className={`${prefix}--date-picker__icon ${prefix}--date-picker__icon--invalid`}
-          />
-          <hr className={`${prefix}--date-picker__divider`} />
-          <div className={`${prefix}--form-requirement`}>{invalidText}</div>
-        </>
-      );
-    } else if (warn) {
-      fluidError = (
-        <>
-          <WarningAltFilled
-            className={`${prefix}--date-picker__icon ${prefix}--date-picker__icon--warn`}
-          />
-          <hr className={`${prefix}--date-picker__divider`} />
-          <div className={`${prefix}--form-requirement`}>{warnText}</div>
-        </>
-      );
-    }
-  }
 
   return (
     <div className={wrapperClasses} ref={ref} {...rest}>
@@ -1055,11 +1016,6 @@ DatePicker.propTypes = {
    * Specify whether or not the control is invalid (Fluid only)
    */
   invalid: PropTypes.bool,
-
-  /**
-   * Provide the text that is displayed when the control is in error state (Fluid Only)
-   */
-  invalidText: PropTypes.node,
 
   /**
    * `true` to use the light version.
@@ -1143,11 +1099,6 @@ DatePicker.propTypes = {
    * Specify whether the control is currently in warning state (Fluid only)
    */
   warn: PropTypes.bool,
-
-  /**
-   * Provide the text that is displayed when the control is in warning state (Fluid only)
-   */
-  warnText: PropTypes.node,
 
   /**
    * Accessible aria-label for the "next month" arrow icon.

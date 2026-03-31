@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2025
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -102,13 +102,11 @@ export const ExpandableWithLayer = () => {
   );
 };
 
-export const Default = (args) => {
-  return (
-    <div style={{ width: args.defaultWidth }}>
-      <Search id="search-default-1" {...args} />
-    </div>
-  );
-};
+export const Default = ({ defaultWidth, ...searchArgs }) => (
+  <div style={{ width: defaultWidth }}>
+    <Search id="search-default-1" {...searchArgs} />
+  </div>
+);
 
 Default.args = {
   closeButtonLabelText: 'Clear search input',
