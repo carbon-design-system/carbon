@@ -2161,6 +2161,15 @@
       "contributions": [
         "doc"
       ]
+    },
+    {
+      "login": "SebayK",
+      "name": "Sebastian Kamiński",
+      "avatar_url": "https://avatars.githubusercontent.com/u/185592440?v=4",
+      "profile": "https://github.com/SebayK",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "commitConvention": "none"
