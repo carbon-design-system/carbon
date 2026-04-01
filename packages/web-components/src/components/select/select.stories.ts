@@ -68,6 +68,7 @@ const args = {
   inline: false,
   invalid: false,
   invalidText: 'Error message',
+  labelStylesDisable: false,
   labelText: 'Select an option',
   placeholder: '',
   size: INPUT_SIZE.MEDIUM,
@@ -112,6 +113,10 @@ const argTypes = {
   invalidText: {
     control: 'text',
     description: 'Message which is displayed if the value is invalid.',
+  },
+  labelStylesDisable: {
+    control: 'boolean',
+    description: 'Specify if you want to disable the default label styling',
   },
   labelText: {
     control: 'text',
@@ -163,6 +168,7 @@ export const Default = {
       inline,
       invalid,
       invalidText,
+      labelStylesDisable,
       labelText,
       name,
       placeholder,
@@ -183,6 +189,7 @@ export const Default = {
           ?hide-label="${hideLabel}"
           ?invalid="${invalid}"
           invalid-text="${ifDefined(invalidText)}"
+          ?label-styles-disable="${labelStylesDisable}"
           label-text="${ifDefined(labelText)}"
           name="${ifDefined(name)}"
           placeholder="${ifDefined(placeholder)}"
@@ -222,6 +229,7 @@ export const Inline = {
       inline,
       invalid,
       invalidText,
+      labelStylesDisable,
       labelText,
       name,
       placeholder,
@@ -242,6 +250,7 @@ export const Inline = {
           ?hide-label="${hideLabel}"
           ?invalid="${invalid}"
           invalid-text="${ifDefined(invalidText)}"
+          ?label-styles-disable="${labelStylesDisable}"
           label-text="${ifDefined(labelText)}"
           name="${ifDefined(name)}"
           placeholder="${ifDefined(placeholder)}"
@@ -278,6 +287,7 @@ export const WithAILabel = {
       hideLabel,
       invalid,
       invalidText,
+      labelStylesDisable,
       labelText,
       name,
       placeholder,
@@ -298,6 +308,7 @@ export const WithAILabel = {
         ?hide-label="${hideLabel}"
         ?invalid="${invalid}"
         invalid-text="${ifDefined(invalidText)}"
+        ?label-styles-disable="${labelStylesDisable}"
         label-text="${ifDefined(labelText)}"
         name="${ifDefined(name)}"
         placeholder="${ifDefined(placeholder)}"
@@ -332,6 +343,7 @@ export const WithLayer = {
       hideLabel,
       invalid,
       invalidText,
+      labelStylesDisable,
       labelText,
       name,
       placeholder,
@@ -353,6 +365,7 @@ export const WithLayer = {
           ?hide-label="${hideLabel}"
           ?invalid="${invalid}"
           invalid-text="${ifDefined(invalidText)}"
+          ?label-styles-disable="${labelStylesDisable}"
           label-text="${ifDefined(labelText)}"
           name="${ifDefined(name)}"
           placeholder="${ifDefined(placeholder)}"
