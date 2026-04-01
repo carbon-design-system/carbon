@@ -8,6 +8,7 @@
 import React from 'react';
 
 import { AILabel, AILabelContent, AILabelActions } from '.';
+import './AILabelShadowDemo';
 import { action } from 'storybook/actions';
 import { View, FolderOpen, Folders } from '@carbon/icons-react';
 import Button from '../Button';
@@ -314,5 +315,18 @@ InlineWithContent.parameters = {
       'defaultOpen',
       'kind',
     ],
+  },
+};
+
+export const ShadowDOMTest = () => {
+  return React.createElement('ailabel-shadow-demo');
+};
+
+ShadowDOMTest.parameters = {
+  docs: {
+    description: {
+      story:
+        'Tests AILabel Toggletip behavior inside Shadow DOM. Click the AILabel button to open the Toggletip, then click the link inside - the Toggletip should remain open, demonstrating that clicks within Shadow DOM are correctly detected.',
+    },
   },
 };
