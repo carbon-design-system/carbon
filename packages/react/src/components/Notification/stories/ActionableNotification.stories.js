@@ -54,10 +54,10 @@ export const Default = (args) => (
   <ActionableNotification {...args}></ActionableNotification>
 );
 
-export const Inline = (args) => (
-  <ActionableNotification {...args}></ActionableNotification>
-);
-Inline.args = {
-  inline: true,
+export const Inline = {
+  ...Default,
+  args: {
+    inline: true,
+  },
+  tags: ['!dev', '!autodocs'],
 };
-Inline.tags = ['!dev', '!autodocs'];
