@@ -23,6 +23,7 @@ import Strawberry16 from '@carbon/icons/es/strawberry/16.js';
 import Wheat16 from '@carbon/icons/es/wheat/16.js';
 import OverflowMenuVertical16 from '@carbon/icons/es/overflow-menu--vertical/16.js';
 import { prefix } from '../../globals/settings';
+import { withLayers } from '../../../.storybook/decorators/with-layers';
 
 const kinds = ['on-page', 'disclosed'];
 const sizes = ['sm', 'md', 'lg', 'xl'];
@@ -283,13 +284,15 @@ export const WithIcons = {
 };
 
 export const _WithLayer = {
+  decorators: [withLayers],
+  parameters: {
+    layout: 'fullscreen',
+  },
   render: () => html`
-    <sb-template-layers>
-      <cds-contained-list label="List title" kind="on-page">
-        <cds-contained-list-item>List item</cds-contained-list-item>
-        <cds-contained-list-item>List item</cds-contained-list-item>
-      </cds-contained-list>
-    </sb-template-layers>
+    <cds-contained-list label="List title" kind="on-page">
+      <cds-contained-list-item>List item</cds-contained-list-item>
+      <cds-contained-list-item>List item</cds-contained-list-item>
+    </cds-contained-list>
   `,
 };
 
