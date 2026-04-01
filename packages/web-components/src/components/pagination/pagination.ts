@@ -485,9 +485,6 @@ class CDSPagination extends FocusMixin(HostListenerMixin(LitElement)) {
 
     return html`
       <div class="${prefix}--pagination__left">
-        <label for="select" class="${prefix}--pagination__text"
-          ><slot name="label-text">${itemsPerPageText}</slot></label
-        >
         <cds-select
           ?disabled=${disabled || pageSizeInputDisabled}
           id="page-size-select"
@@ -495,7 +492,9 @@ class CDSPagination extends FocusMixin(HostListenerMixin(LitElement)) {
           pagination
           size="${size}"
           inline
-          value="${pageSize}">
+          value="${pageSize}"
+          label-styles-disable>
+          <span slot="label-text"> ${itemsPerPageText} </span>
           <slot @slotchange=${handleSlotChange}></slot>
         </cds-select>
         <span
@@ -504,15 +503,6 @@ class CDSPagination extends FocusMixin(HostListenerMixin(LitElement)) {
         >
       </div>
       <div class="${prefix}--pagination__right">
-        ${!pagesUnknown || totalItems
-          ? html`
-              <label
-                for="select"
-                class="${prefix}--label ${prefix}--visually-hidden">
-                ${formatLabelText({ count: totalPages })}
-              </label>
-            `
-          : null}
         ${pagesUnknown || !totalItems
           ? html`
               <span
@@ -527,7 +517,11 @@ class CDSPagination extends FocusMixin(HostListenerMixin(LitElement)) {
                 pagination
                 size="${size}"
                 inline
-                value="${page}">
+                value="${page}"
+                hide-label>
+                <span slot="label-text">
+                  ${formatLabelText({ count: totalPages })}
+                </span>
                 ${Array.from(new Array(totalPagesSafe)).map(
                   (_item, index) => html`
                     <cds-select-item

@@ -233,7 +233,7 @@ class CDSSelect extends FormMixin(LitElement) {
    * ID to link the `label` and `select`
    */
   @property()
-  id = '';
+  id = 'input';
 
   /**
    * Specify if the currently value is invalid.
@@ -264,6 +264,12 @@ class CDSSelect extends FormMixin(LitElement) {
    */
   @property({ attribute: 'label-text' })
   labelText = '';
+
+  /**
+   * Specify if you want to disable the default label styling
+   */
+  @property({ type: Boolean, attribute: 'label-styles-disable' })
+  labelStylesDisable = false;
 
   /**
    * Specify whether you want the inline version of this control
@@ -404,9 +410,11 @@ class CDSSelect extends FormMixin(LitElement) {
       disabled,
       helperText,
       hideLabel,
+      id,
       inline,
       invalid,
       invalidText,
+      labelStylesDisable,
       labelText,
       placeholder,
       readonly,
@@ -435,7 +443,7 @@ class CDSSelect extends FormMixin(LitElement) {
     });
 
     const labelClasses = classMap({
-      [`${prefix}--label`]: true,
+      [`${prefix}--label`]: !labelStylesDisable,
       [`${prefix}--label--disabled`]: normalizedProps.disabled,
       [`${prefix}--visually-hidden`]: hideLabel,
     });
@@ -469,7 +477,7 @@ class CDSSelect extends FormMixin(LitElement) {
 
     const input = html`
       <select
-        id="input"
+        id=${id}
         class="${inputClasses}"
         ?disabled="${disabled}"
         title="${value}"
@@ -515,7 +523,7 @@ class CDSSelect extends FormMixin(LitElement) {
     `;
 
     return html`
-      <label class="${labelClasses}" for="input">
+      <label class="${labelClasses}" for=${id}>
         <slot name="label-text"> ${labelText} </slot>
       </label>
 
