@@ -44,7 +44,7 @@ describe('cds-combo-box', function () {
     clearButton.click();
     await el.updateComplete;
 
-    const input = el.shadowRoot.querySelector('#trigger-label');
+    const input = el.shadowRoot.querySelector('#trigger-button');
     expect(el.value).to.equal('option-1');
     expect(input.value).to.equal('Option 1');
   });
