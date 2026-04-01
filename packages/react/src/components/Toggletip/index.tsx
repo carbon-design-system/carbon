@@ -184,11 +184,16 @@ export function Toggletip<E extends ElementType = 'span'>({
       let isInside = node && ref.current?.contains(node);
 
       // In Shadow DOM, event.target is retargeted to the shadow host.
-      // Use composedPath to get the actual click target inside the shadow DOM.
+      // Use composedPath to check the actual clicked element and full path.
       if (!isInside && event.composedPath) {
         const path = event.composedPath();
-        const actualTarget = path[0] as Node;
-        isInside = actualTarget && ref.current?.contains(actualTarget);
+        isInside = path.some((element) => {
+          // composedPath can include Window and Document, which aren't Nodes
+          if (element instanceof Node) {
+            return ref.current?.contains(element);
+          }
+          return false;
+        });
       }
 
       if (open && !isInside) {
