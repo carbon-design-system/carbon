@@ -360,48 +360,6 @@ export const UsageExamples = {
   `,
 };
 
-export const MultipleOnPageLists = {
-  render: () => html`
-    <h3>Case 1: Multiple consecutive on-page lists (should have spacing)</h3>
-    <cds-contained-list label="First on-page list" kind="on-page">
-      <cds-contained-list-item>List item 1</cds-contained-list-item>
-      <cds-contained-list-item>List item 2</cds-contained-list-item>
-    </cds-contained-list>
-    <cds-contained-list
-      label="Second on-page list (RED = has spacing)"
-      kind="on-page">
-      <cds-contained-list-item>List item 1</cds-contained-list-item>
-      <cds-contained-list-item>List item 2</cds-contained-list-item>
-    </cds-contained-list>
-    <cds-contained-list
-      label="Third on-page list (RED = has spacing)"
-      kind="on-page">
-      <cds-contained-list-item>List item 1</cds-contained-list-item>
-      <cds-contained-list-item>List item 2</cds-contained-list-item>
-    </cds-contained-list>
-
-    <h3 style="margin-top: 2rem;">Case 2: On-page list after disclosed list</h3>
-    <cds-contained-list label="Disclosed list" kind="disclosed">
-      <cds-contained-list-item>List item 1</cds-contained-list-item>
-      <cds-contained-list-item>List item 2</cds-contained-list-item>
-    </cds-contained-list>
-    <cds-contained-list
-      label="On-page list after disclosed (RED = has spacing)"
-      kind="on-page">
-      <cds-contained-list-item>List item 1</cds-contained-list-item>
-      <cds-contained-list-item>List item 2</cds-contained-list-item>
-    </cds-contained-list>
-
-    <h3 style="margin-top: 2rem;">Case 3: First on-page list (no spacing)</h3>
-    <cds-contained-list
-      label="First on-page list (no red = no spacing)"
-      kind="on-page">
-      <cds-contained-list-item>List item 1</cds-contained-list-item>
-      <cds-contained-list-item>List item 2</cds-contained-list-item>
-    </cds-contained-list>
-  `,
-};
-
 const meta = {
   title: 'Components/Contained list',
   decorators: [
