@@ -8,7 +8,6 @@
 import React from 'react';
 
 import { AILabel, AILabelContent, AILabelActions } from '.';
-import './AILabelShadowDemo';
 import { action } from 'storybook/actions';
 import { View, FolderOpen, Folders } from '@carbon/icons-react';
 import Button from '../Button';
@@ -321,7 +320,7 @@ InlineWithContent.parameters = {
 export const ShadowDOMTest = () => {
   React.useEffect(() => {
     // Dynamically import to ensure custom element is registered
-    import('./AILabelShadowDemo');
+    import('./stories/AILabelShadowDemo');
   }, []);
 
   return React.createElement('ailabel-shadow-demo');

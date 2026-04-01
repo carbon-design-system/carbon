@@ -7,7 +7,7 @@
 
 import React from 'react';
 import { createRoot } from 'react-dom/client';
-import { AILabel, AILabelContent } from '.';
+import { AILabel, AILabelContent } from '../';
 
 class AILabelShadowDemo extends HTMLElement {
   constructor() {
