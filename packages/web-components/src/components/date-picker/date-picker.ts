@@ -75,9 +75,19 @@ flatpickr!.l10ns!.en!.weekdays.shorthand.forEach((_day, index) => {
 @customElement(`${prefix}-date-picker`)
 class CDSDatePicker extends HostListenerMixin(FormMixin(LitElement)) {
   /**
+   * Observes light DOM changes that can affect the effective date picker mode.
+   */
+  private _observerMutation: MutationObserver | null = null;
+
+  /**
    * The slotted `<cds-date-input kind="from">`.
    */
   private _dateInteractNode: CDSDatePickerInput | null = null;
+
+  /**
+   * The last effective date picker mode synchronized with Flatpickr.
+   */
+  private _modeCurrent: DATE_PICKER_MODE | null = null;
 
   /**
    * The element to put calendar dropdown in.
@@ -240,18 +250,58 @@ class CDSDatePicker extends HostListenerMixin(FormMixin(LitElement)) {
    * Handles `slotchange` event in the `<slot>`.
    */
   private _handleSlotChange({ target }: Event) {
-    const { _dateInteractNode: oldDateInteractNode } = this;
-    const dateInteractNode = (target as HTMLSlotElement)
-      .assignedNodes()
-      .find(
-        (node) =>
-          node.nodeType === Node.ELEMENT_NODE &&
-          (node as HTMLElement).matches(
-            (this.constructor as typeof CDSDatePicker).selectorInputFrom
-          )
-      );
-    if (oldDateInteractNode !== dateInteractNode) {
+    this._syncDateInteractNode((target as HTMLSlotElement).assignedNodes());
+  }
+
+  /**
+   * Handles mutations in the light DOM that can affect the effective date picker mode.
+   */
+  private _handleMutation = (mutationsList: MutationRecord[]) => {
+    for (const mutation of mutationsList) {
+      if (
+        mutation.type === 'attributes' &&
+        mutation.target instanceof HTMLElement &&
+        mutation.target.matches(`${prefix}-date-picker-input`)
+      ) {
+        this._syncDateInteractNode();
+        return;
+      }
+
+      if (
+        mutation.type === 'childList' &&
+        ([...mutation.addedNodes, ...mutation.removedNodes] as Node[]).some(
+          (node) =>
+            node instanceof HTMLElement &&
+            node.matches(`${prefix}-date-picker-input`)
+        )
+      ) {
+        this._syncDateInteractNode();
+        return;
+      }
+    }
+  };
+
+  /**
+   * Syncs the date picker state with its slotted date inputs.
+   */
+  private _syncDateInteractNode(nodes: Iterable<Node> = this.childNodes) {
+    const assignedNodes = [...nodes];
+    const mode = this._mode;
+    const dateInteractNode = assignedNodes.find(
+      (node) =>
+        node.nodeType === Node.ELEMENT_NODE &&
+        (node as HTMLElement).matches(
+          (this.constructor as typeof CDSDatePicker).selectorInputFrom
+        )
+    );
+
+    if (
+      this._dateInteractNode !== dateInteractNode ||
+      this._modeCurrent !== mode ||
+      this.calendar
+    ) {
       this._dateInteractNode = dateInteractNode as CDSDatePickerInput;
+      this._modeCurrent = mode;
       this._instantiateDatePicker();
     }
   }
@@ -511,11 +561,24 @@ class CDSDatePicker extends HostListenerMixin(FormMixin(LitElement)) {
 
   connectedCallback() {
     super.connectedCallback();
-    this._instantiateDatePicker();
+    this._observerMutation = new MutationObserver(this._handleMutation);
+    this._observerMutation.observe(this, {
+      attributes: true,
+      attributeFilter: ['kind'],
+      childList: true,
+      subtree: true,
+    });
+    this._syncDateInteractNode();
   }
 
   disconnectedCallback() {
+    if (this._observerMutation) {
+      this._observerMutation.disconnect();
+      this._observerMutation = null;
+    }
     this._releaseDatePicker();
+    this._dateInteractNode = null;
+    this._modeCurrent = null;
     super.disconnectedCallback();
   }
 

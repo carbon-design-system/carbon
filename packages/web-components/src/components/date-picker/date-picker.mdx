@@ -17,6 +17,7 @@ import * as DatePickerStories from './date-picker.stories';
 - [Overview](#overview)
   - [Simple date picker](#simple-datepicker)
   - [Range date picker](#range-datepicker)
+  - [Dynamic kind switching](#dynamic-kind-switching)
   - [Skeleton state](#skeleton-state)
   - [AI label](#ai-label)
 - [Component API](#component-api)
@@ -56,6 +57,15 @@ years, however they work best when used for recent or near future dates.
 
 <Canvas of={DatePickerStories.SingleWithCalendar} />
 <Canvas of={DatePickerStories.RangeWithCalendar} />
+
+### Dynamic kind switching
+
+If your application updates the `kind` of the same `cds-date-picker-input` at
+runtime, the date picker should stay in sync with that change. Use the
+regression story below to verify that switching between `simple` and `single`
+creates and destroys the calendar correctly.
+
+<Canvas of={DatePickerStories.KindSwitchingRegression} />
 
 ### Skeleton state
 
