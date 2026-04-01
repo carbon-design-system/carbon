@@ -17,6 +17,7 @@ import '../form/form-item';
 import '../ai-label';
 import '../icon-button';
 import { INPUT_SIZE } from './text-input';
+import '../layout/index';
 
 const content = html`
   <div slot="body-text">
@@ -182,7 +183,19 @@ const sharedArgTypes = {
     },
   },
 };
+export const WithLayoutContext = {
+  render: () => html`
+    <cds-layout size="sm">
+      <cds-text-input label="Text input sm"></cds-text-input>
+    </cds-layout>
 
+    <br />
+
+    <cds-layout size="lg">
+      <cds-text-input label="Text input xl"></cds-text-input>
+    </cds-layout>
+  `,
+};
 const renderTextInput = (args: TextInputStoryArgs, children?: unknown) => html`
   <cds-text-input
     ?disabled=${args.disabled}

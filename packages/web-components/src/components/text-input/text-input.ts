@@ -244,11 +244,8 @@ class CDSTextInput extends ValidityMixin(FormMixin(LitElement)) {
   })
   showPasswordVisibilityToggle = false;
 
-  /**
-   * The input box size.
-   */
   @property({ reflect: true })
-  size = INPUT_SIZE.MEDIUM;
+  size?: INPUT_SIZE;
 
   @property({ type: Boolean })
   isFluid = false;
@@ -398,8 +395,8 @@ class CDSTextInput extends ValidityMixin(FormMixin(LitElement)) {
       [`${prefix}--text-input`]: true,
       [`${prefix}--text-input--invalid`]: normalizedProps.invalid,
       [`${prefix}--text-input--warning`]: normalizedProps.warn,
-      [`${prefix}--text-input--${size}`]: size,
-      [`${prefix}--layout--size-${size}`]: size,
+      [`${prefix}--text-input--${size}`]: size !== undefined,
+      [`${prefix}--layout--size-${size}`]: size !== undefined,
       [`${prefix}--password-input`]: type === INPUT_TYPE.PASSWORD, // TODO: deprecated, remove in v12
       [`${prefix}--text-input__field-wrapper--decorator`]: hasAILabel,
     });
