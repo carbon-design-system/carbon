@@ -9,6 +9,15 @@ import '@carbon/web-components/es/components/date-picker/index.js';
 import { fixture, html, expect } from '@open-wc/testing';
 
 describe('cds-date-picker', () => {
+  const waitForDatePickerSync = async (callback = () => true, retries = 5) => {
+    for (let i = 0; i < retries; i++) {
+      await new Promise((resolve) => requestAnimationFrame(() => resolve()));
+      if (callback()) {
+        return;
+      }
+    }
+  };
+
   describe('Invalid and Warning States with Disabled/ReadOnly', () => {
     it('should not show invalid state when disabled', async () => {
       const el = await fixture(html`
@@ -112,6 +121,69 @@ describe('cds-date-picker', () => {
   });
 
   describe('Date Picker Functionality', () => {
+    describe('dynamic kind switching', () => {
+      it('should instantiate the calendar when switching from simple to single', async () => {
+        const el = await fixture(html`
+          <cds-date-picker>
+            <cds-date-picker-input
+              kind="simple"
+              label-text="Date"
+              placeholder="mm/dd/yyyy">
+            </cds-date-picker-input>
+          </cds-date-picker>
+        `);
+
+        const input = el.querySelector('cds-date-picker-input');
+        expect(el.calendar).to.be.null;
+
+        input.kind = 'single';
+        await input.updateComplete;
+        await el.updateComplete;
+        await waitForDatePickerSync(() => Boolean(el.calendar));
+
+        const floatingMenuContainer = el.shadowRoot?.querySelector(
+          '#floating-menu-container'
+        );
+
+        expect(el.calendar).to.exist;
+        expect(floatingMenuContainer?.children.length).to.be.greaterThan(0);
+      });
+
+      it('should destroy the calendar when switching back from single to simple', async () => {
+        const el = await fixture(html`
+          <cds-date-picker>
+            <cds-date-picker-input
+              kind="simple"
+              label-text="Date"
+              placeholder="mm/dd/yyyy">
+            </cds-date-picker-input>
+          </cds-date-picker>
+        `);
+
+        const input = el.querySelector('cds-date-picker-input');
+        const floatingMenuContainer = el.shadowRoot?.querySelector(
+          '#floating-menu-container'
+        );
+        expect(el.calendar).to.be.null;
+
+        input.kind = 'single';
+        await input.updateComplete;
+        await el.updateComplete;
+        await waitForDatePickerSync(() => Boolean(el.calendar));
+
+        expect(el.calendar).to.exist;
+        expect(floatingMenuContainer?.children.length).to.be.greaterThan(0);
+
+        input.kind = 'simple';
+        await input.updateComplete;
+        await el.updateComplete;
+        await waitForDatePickerSync(() => !el.calendar);
+
+        expect(el.calendar).to.be.null;
+        expect(floatingMenuContainer?.children.length).to.equal(0);
+      });
+    });
+
     it('should render date picker with calendar', async () => {
       const el = await fixture(html`
         <cds-date-picker>
