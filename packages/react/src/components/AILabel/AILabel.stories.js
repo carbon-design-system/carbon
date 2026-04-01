@@ -319,6 +319,19 @@ InlineWithContent.parameters = {
 };
 
 export const ShadowDOMTest = () => {
+  const [isReady, setIsReady] = React.useState(false);
+
+  React.useEffect(() => {
+    // Wait for custom element to be defined
+    customElements.whenDefined('ailabel-shadow-demo').then(() => {
+      setIsReady(true);
+    });
+  }, []);
+
+  if (!isReady) {
+    return <div>Loading Shadow DOM demo...</div>;
+  }
+
   return React.createElement('ailabel-shadow-demo');
 };
 
