@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -7,12 +7,16 @@
 
 import '../../../feature-flags';
 
-import { render, screen } from '@testing-library/react';
+import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import React, { useState } from 'react';
-import { NumberInput } from '../NumberInput';
-import { validateNumberSeparators } from '../NumberInput';
+import React, { StrictMode, useState } from 'react';
+import {
+  NumberInput,
+  parseNumberWithLocale,
+  validateNumberSeparators,
+} from '../NumberInput';
 import { AILabel } from '../../AILabel';
+import { FormContext } from '../../FluidForm';
 
 function translateWithId(id) {
   if (id === 'increment.number') {
@@ -60,9 +64,19 @@ describe('NumberInput', () => {
     expect(screen.getByLabelText('test-label')).toBeDisabled();
   });
 
+  it('should set `readOnly` on the underlying <input>', () => {
+    render(<NumberInput label="test-label" id="test" readOnly />);
+    expect(screen.getByLabelText('test-label')).toHaveAttribute('readonly', '');
+  });
+
   it('should set the defaultValue of the <input> with `defaultValue`', () => {
     render(<NumberInput label="test-label" id="test" defaultValue={5} />);
     expect(screen.getByLabelText('test-label')).toHaveValue(5);
+  });
+
+  it('should default to `0` when no value is provided', () => {
+    render(<NumberInput label="test-label" id="test" />);
+    expect(screen.getByLabelText('test-label')).toHaveValue(0);
   });
 
   it('should set the given `value` on <input> when value > min', () => {
@@ -87,6 +101,22 @@ describe('NumberInput', () => {
     expect(
       screen.getByRole('button', { name: 'AI Show information' })
     ).toBeInTheDocument();
+    spy.mockRestore();
+  });
+
+  it('should preserve the `defaultValue` when `slug` is rendered', () => {
+    const spy = jest.spyOn(console, 'warn').mockImplementation(() => {});
+
+    render(
+      <NumberInput
+        label="test-label"
+        id="test"
+        defaultValue={12}
+        slug={<AILabel />}
+      />
+    );
+
+    expect(screen.getByLabelText('test-label')).toHaveValue(12);
     spy.mockRestore();
   });
 
@@ -130,12 +160,59 @@ describe('NumberInput', () => {
     expect(screen.getByText('test-invalid-text')).toBeInTheDocument();
   });
 
+  it('should respect the `invalid` prop when the value is otherwise valid', () => {
+    render(
+      <NumberInput
+        label="test-label"
+        id="test"
+        value={5}
+        min={0}
+        invalid
+        invalidText="test-invalid-text"
+      />
+    );
+
+    expect(screen.getByText('test-invalid-text')).toBeInTheDocument();
+    expect(screen.getByRole('spinbutton')).toHaveAttribute('data-invalid');
+  });
+
   it('should describe the <input> through `helperText`', () => {
     render(
       <NumberInput label="test-label" id="test" helperText="test-helper-text" />
     );
     // Note: is aria-describedby correctly set up here?
     expect(screen.getByText('test-helper-text')).toBeInTheDocument();
+  });
+
+  it('should describe the <input> through `warnText` when `warn` is `true`', () => {
+    render(
+      <NumberInput
+        label="test-label"
+        id="test"
+        helperText="test-helper-text"
+        warn
+        warnText="test-warn-text"
+      />
+    );
+
+    const warning = screen.getByText('test-warn-text');
+
+    expect(warning).toHaveAttribute('id');
+    expect(screen.getByLabelText('test-label')).toHaveAttribute(
+      'aria-describedby',
+      warning.getAttribute('id')
+    );
+  });
+
+  it('should render without a label element when `label` is omitted', () => {
+    const { container } = render(
+      <NumberInput id="test" aria-label="test-number-input" />
+    );
+
+    expect(
+      screen.getByRole('spinbutton', { name: 'test-number-input' })
+    ).toBeInTheDocument();
+    expect(container.querySelector('label')).toBeNull();
   });
 
   it('should call `onClick` when the `<input>` is clicked', async () => {
@@ -173,6 +250,27 @@ describe('NumberInput', () => {
     expect(onClick).not.toHaveBeenCalled();
   });
 
+  it('should not call `onChange` for a direct change event when `disabled`', () => {
+    const onChange = jest.fn();
+
+    render(
+      <NumberInput
+        disabled
+        label="test-label"
+        id="test"
+        value={10}
+        onChange={onChange}
+      />
+    );
+
+    fireEvent.change(screen.getByLabelText('test-label'), {
+      target: { value: '11' },
+    });
+
+    expect(onChange).not.toHaveBeenCalled();
+    expect(screen.getByLabelText('test-label')).toHaveValue(10);
+  });
+
   it('should call `onChange` when the value changes', async () => {
     const onChange = jest.fn();
     render(
@@ -203,6 +301,37 @@ describe('NumberInput', () => {
     expect(onChange).toHaveBeenCalledTimes(2);
   });
 
+  it('should update externally to an empty value when `allowEmpty` is `true`', async () => {
+    const ControlledNumberInput = () => {
+      const [value, setValue] = useState(5);
+
+      return (
+        <>
+          <NumberInput
+            allowEmpty
+            label="NumberInput label"
+            id="number-input"
+            value={value}
+            onChange={(_, state) => setValue(state.value)}
+          />
+          <button type="button" onClick={() => setValue('')}>
+            Clear
+          </button>
+        </>
+      );
+    };
+
+    render(<ControlledNumberInput />);
+
+    const input = screen.getByLabelText('NumberInput label');
+
+    expect(input).toHaveValue(5);
+
+    await userEvent.click(screen.getByRole('button', { name: 'Clear' }));
+
+    expect(input).toHaveValue(null);
+  });
+
   it('should update when value prop changes externally with type="number"', async () => {
     const ControlledNumberInput = () => {
       const [value, setValue] = useState(5);
@@ -228,6 +357,75 @@ describe('NumberInput', () => {
 
     await userEvent.click(screen.getByText('set to 10'));
     expect(input).toHaveValue(10);
+  });
+
+  it('should set the fluid focus state from input and stepper focus', () => {
+    const { container } = render(
+      <FormContext.Provider value={{ isFluid: true }}>
+        <NumberInput
+          label="test-label"
+          id="test"
+          translateWithId={translateWithId}
+        />
+      </FormContext.Provider>
+    );
+
+    const wrapper = container.firstChild;
+    const input = screen.getByLabelText('test-label');
+    const increment = screen.getByLabelText('increment');
+
+    fireEvent.focus(input);
+
+    expect(wrapper).toHaveClass(
+      'cds--form-item',
+      'cds--number-input--fluid--focus',
+      { exact: true }
+    );
+
+    fireEvent.focus(increment);
+
+    expect(wrapper).toHaveClass('cds--form-item', { exact: true });
+  });
+
+  it('should attach and remove the wheel handler when `disableWheel` is true', () => {
+    const onFocus = jest.fn();
+
+    render(
+      <NumberInput
+        label="test-label"
+        id="test"
+        disableWheel
+        onFocus={onFocus}
+      />
+    );
+
+    const input = screen.getByLabelText('test-label');
+    const addEventListenerSpy = jest.spyOn(input, 'addEventListener');
+    const removeEventListenerSpy = jest.spyOn(input, 'removeEventListener');
+
+    fireEvent.focus(input);
+
+    expect(addEventListenerSpy).toHaveBeenCalledWith(
+      'wheel',
+      expect.any(Function)
+    );
+    expect(onFocus).toHaveBeenCalledTimes(1);
+
+    const wheelEvent = new WheelEvent('wheel', { cancelable: true });
+
+    input.dispatchEvent(wheelEvent);
+
+    expect(wheelEvent.defaultPrevented).toBe(true);
+
+    fireEvent.blur(input);
+
+    expect(removeEventListenerSpy).toHaveBeenCalledWith(
+      'wheel',
+      expect.any(Function)
+    );
+
+    addEventListenerSpy.mockRestore();
+    removeEventListenerSpy.mockRestore();
   });
 
   describe('steppers', () => {
@@ -634,6 +832,28 @@ describe('NumberInput', () => {
     );
   });
 
+  it('should not allow arrow key changes when readOnly with type="text"', async () => {
+    render(
+      <NumberInput
+        type="text"
+        label="test-label"
+        id="test"
+        readOnly
+        defaultValue={50}
+      />
+    );
+
+    const input = screen.getByLabelText('test-label');
+    expect(input).toHaveValue('50');
+
+    await userEvent.click(input);
+    await userEvent.keyboard('{ArrowUp}');
+    expect(input).toHaveValue('50');
+
+    await userEvent.keyboard('{ArrowDown}');
+    expect(input).toHaveValue('50');
+  });
+
   describe('with type="text"', () => {
     it('should render an <input> with type="text"', () => {
       render(<NumberInput type="text" label="test-label" id="test" />);
@@ -852,6 +1072,54 @@ describe('NumberInput', () => {
 
       await userEvent.click(screen.getByLabelText('decrement'));
       expect(onChange).toHaveBeenCalledTimes(2);
+    });
+
+    it('should handle arrow keys and forward `onKeyDown` in text mode', () => {
+      const onChange = jest.fn();
+      const onKeyDown = jest.fn();
+
+      render(
+        <NumberInput
+          type="text"
+          label="test-label"
+          id="test"
+          defaultValue={10}
+          onChange={onChange}
+          onKeyDown={onKeyDown}
+          translateWithId={translateWithId}
+        />
+      );
+
+      const input = screen.getByLabelText('test-label');
+
+      fireEvent.keyDown(input, { key: 'ArrowUp' });
+
+      expect(input).toHaveValue('11');
+      expect(onChange).toHaveBeenNthCalledWith(
+        1,
+        expect.objectContaining({
+          target: expect.any(Object),
+        }),
+        expect.objectContaining({
+          value: 11,
+          direction: 'up',
+        })
+      );
+
+      fireEvent.keyDown(input, { key: 'ArrowDown' });
+
+      expect(input).toHaveValue('10');
+      expect(onChange).toHaveBeenNthCalledWith(
+        2,
+        expect.objectContaining({
+          target: expect.any(Object),
+        }),
+        expect.objectContaining({
+          value: 10,
+          direction: 'down',
+        })
+      );
+      expect(onKeyDown).toHaveBeenCalledTimes(2);
     });
 
     it('should call `onBlur` when the input is blurred', async () => {
@@ -1262,6 +1530,25 @@ describe('NumberInput', () => {
         expect(screen.getByLabelText('test-label')).toHaveValue('10');
       });
 
+      it('should begin decrementing from `min` when input is empty and only `min` is positive', async () => {
+        render(
+          <NumberInput
+            type="text"
+            label="test-label"
+            id="test"
+            min={10}
+            step={2}
+            translateWithId={translateWithId}
+          />
+        );
+
+        expect(screen.getByLabelText('test-label')).toHaveValue('');
+
+        await userEvent.click(screen.getByLabelText('decrement'));
+
+        expect(screen.getByLabelText('test-label')).toHaveValue('10');
+      });
+
       it('should begin incrementing from 1 when no min is provided and input is empty', async () => {
         render(
           <NumberInput
@@ -1508,6 +1795,84 @@ describe('NumberInput', () => {
 
       await userEvent.click(screen.getByText('set to 50'));
       expect(input).toHaveValue('50');
+    });
+
+    it('should keep empty display when controlled value remains NaN across rerenders', () => {
+      const onChange = jest.fn();
+      const { rerender } = render(
+        <NumberInput
+          type="text"
+          label="NumberInput label"
+          id="number-input"
+          min={10}
+          max={100}
+          value={NaN}
+          onChange={onChange}
+          translateWithId={translateWithId}
+        />
+      );
+
+      const input = screen.getByLabelText('NumberInput label');
+
+      expect(input).toHaveValue('');
+
+      rerender(
+        <NumberInput
+          type="text"
+          label="NumberInput label"
+          id="number-input"
+          min={10}
+          max={100}
+          value={NaN}
+          onChange={onChange}
+          translateWithId={translateWithId}
+        />
+      );
+
+      expect(input).toHaveValue('');
+      expect(onChange).not.toHaveBeenCalled();
+    });
+
+    it('should update controlled value in StrictMode without render-phase warnings', async () => {
+      const onChange = jest.fn();
+      const { rerender } = render(
+        <StrictMode>
+          <NumberInput
+            type="text"
+            label="NumberInput label"
+            id="number-input"
+            min={0}
+            max={100}
+            value={10}
+            onChange={onChange}
+            translateWithId={translateWithId}
+          />
+        </StrictMode>
+      );
+
+      const input = screen.getByLabelText('NumberInput label');
+
+      expect(input).toHaveValue('10');
+
+      rerender(
+        <StrictMode>
+          <NumberInput
+            type="text"
+            label="NumberInput label"
+            id="number-input"
+            min={0}
+            max={100}
+            value={11}
+            onChange={onChange}
+            translateWithId={translateWithId}
+          />
+        </StrictMode>
+      );
+
+      await waitFor(() => {
+        expect(input).toHaveValue('11');
+      });
+      expect(onChange).not.toHaveBeenCalled();
     });
 
     describe('locale parsing and formatting', () => {
@@ -1792,6 +2157,183 @@ describe('NumberInput', () => {
           20.4
         );
       });
+    });
+  });
+
+  describe('validateNumberSeparators', () => {
+    it('should validate properly formatted numbers with grouping', () => {
+      expect(validateNumberSeparators('1,234', 'en-US')).toBe(true);
+      expect(validateNumberSeparators('1,234,567', 'en-US')).toBe(true);
+      expect(validateNumberSeparators('1,234.56', 'en-US')).toBe(true);
+    });
+
+    it('should validate numbers without grouping', () => {
+      expect(validateNumberSeparators('1234', 'en-US')).toBe(true);
+      expect(validateNumberSeparators('1234567', 'en-US')).toBe(true);
+      expect(validateNumberSeparators('1234.56', 'en-US')).toBe(true);
+    });
+
+    it('should reject improperly formatted grouping', () => {
+      expect(validateNumberSeparators('12,34', 'en-US')).toBe(false);
+      expect(validateNumberSeparators('1,23,456', 'en-US')).toBe(false);
+      expect(validateNumberSeparators('1,2345', 'en-US')).toBe(false);
+    });
+
+    it('should validate scientific notation', () => {
+      expect(validateNumberSeparators('1e3', 'en-US')).toBe(true);
+      expect(validateNumberSeparators('1.5e2', 'en-US')).toBe(true);
+      expect(validateNumberSeparators('2e-3', 'en-US')).toBe(true);
+      expect(validateNumberSeparators('1.5e+10', 'en-US')).toBe(true);
+    });
+
+    it('should validate negative numbers', () => {
+      expect(validateNumberSeparators('-1234', 'en-US')).toBe(true);
+      expect(validateNumberSeparators('-1,234', 'en-US')).toBe(true);
+      expect(validateNumberSeparators('-1,234.56', 'en-US')).toBe(true);
+    });
+
+    it('should validate different locale formats', () => {
+      expect(validateNumberSeparators('1.234,56', 'de-DE')).toBe(true);
+      expect(validateNumberSeparators('1 234,56', 'fr-FR')).toBe(true);
+    });
+
+    it('should validate Eastern Arabic numerals', () => {
+      expect(validateNumberSeparators('٢,٣٣٣', 'ar')).toBe(true);
+      expect(validateNumberSeparators('٢٣٣٬٤٥٦', 'ar')).toBe(true);
+    });
+
+    it('should validate Devanagari numerals', () => {
+      expect(validateNumberSeparators('१,२३४', 'hi-IN')).toBe(true);
+    });
+
+    it('should validate Kanji numerals', () => {
+      expect(validateNumberSeparators('一,二三四', 'ja')).toBe(true);
+    });
+
+    it('should allow empty string', () => {
+      expect(validateNumberSeparators('', 'en-US')).toBe(true);
+    });
+
+    it('should handle Arabic separators', () => {
+      expect(validateNumberSeparators('٢,٣٣٣.٣٣', 'ar')).toBe(true);
+    });
+
+    it('should reject invalid separator positions for German locale', () => {
+      expect(validateNumberSeparators('12.34', 'de-DE')).toBe(false);
+      expect(validateNumberSeparators('1.23.456', 'de-DE')).toBe(false);
+    });
+
+    it('should reject invalid separator positions for French locale', () => {
+      expect(validateNumberSeparators('12 34', 'fr-FR')).toBe(false);
+      expect(validateNumberSeparators('1 23 456', 'fr-FR')).toBe(false);
+    });
+
+    it('should validate Arabic numerals with proper grouping', () => {
+      expect(validateNumberSeparators('١١١', 'ar-EG')).toBe(true);
+      expect(validateNumberSeparators('١٬١١١', 'ar-EG')).toBe(true);
+      expect(validateNumberSeparators('١,١١١', 'ar-EG')).toBe(true);
+      expect(validateNumberSeparators('١٬٠٠٤', 'ar-EG')).toBe(true);
+      expect(validateNumberSeparators('١,٠٠٤', 'ar-EG')).toBe(true);
+    });
+
+    it('should reject Arabic numerals with wrong separator positions', () => {
+      expect(validateNumberSeparators('١,١', 'ar-EG')).toBe(false);
+      expect(validateNumberSeparators('١١,١١', 'ar-EG')).toBe(false);
+      expect(validateNumberSeparators('١١,١', 'ar-EG')).toBe(false);
+      expect(validateNumberSeparators('١٬١', 'ar-EG')).toBe(false);
+      expect(validateNumberSeparators('١١٬١١', 'ar-EG')).toBe(false);
+    });
+
+    it('should validate negative numbers across different locales', () => {
+      // English US
+      expect(validateNumberSeparators('-1', 'en-US')).toBe(true);
+      expect(validateNumberSeparators('-12', 'en-US')).toBe(true);
+      expect(validateNumberSeparators('-123', 'en-US')).toBe(true);
+      expect(validateNumberSeparators('-1234', 'en-US')).toBe(true);
+      expect(validateNumberSeparators('-1,234', 'en-US')).toBe(true);
+      expect(validateNumberSeparators('-1,234,567', 'en-US')).toBe(true);
+      expect(validateNumberSeparators('-1.5', 'en-US')).toBe(true);
+      expect(validateNumberSeparators('-1,234.56', 'en-US')).toBe(true);
+
+      // German
+      expect(validateNumberSeparators('-1', 'de-DE')).toBe(true);
+      expect(validateNumberSeparators('-1234', 'de-DE')).toBe(true);
+      expect(validateNumberSeparators('-1.234', 'de-DE')).toBe(true);
+      expect(validateNumberSeparators('-1,5', 'de-DE')).toBe(true);
+      expect(validateNumberSeparators('-1.234,56', 'de-DE')).toBe(true);
+
+      // French
+      expect(validateNumberSeparators('-1', 'fr-FR')).toBe(true);
+      expect(validateNumberSeparators('-1234', 'fr-FR')).toBe(true);
+      expect(validateNumberSeparators('-1 234', 'fr-FR')).toBe(true);
+      expect(validateNumberSeparators('-1,5', 'fr-FR')).toBe(true);
+      expect(validateNumberSeparators('-1 234,56', 'fr-FR')).toBe(true);
+    });
+
+    it('should validate negative Arabic numerals with Western digits', () => {
+      expect(validateNumberSeparators('-1', 'ar-EG')).toBe(true);
+      expect(validateNumberSeparators('-1234', 'ar-EG')).toBe(true);
+      expect(validateNumberSeparators('-1,234', 'ar-EG')).toBe(true);
+      expect(validateNumberSeparators('-1.5', 'ar-EG')).toBe(true);
+      expect(validateNumberSeparators('-1,234.56', 'ar-EG')).toBe(true);
+    });
+
+    it('should handle both Arabic comma (٬) and regular comma (,)', () => {
+      expect(validateNumberSeparators('١٬١١١', 'ar-EG')).toBe(true);
+      expect(validateNumberSeparators('١,١١١', 'ar-EG')).toBe(true);
+      expect(validateNumberSeparators('١٬٠٠٤', 'ar-EG')).toBe(true);
+      expect(validateNumberSeparators('١,٠٠٤', 'ar-EG')).toBe(true);
+    });
+
+    it('should reject numbers with mixed valid and invalid grouping', () => {
+      expect(validateNumberSeparators('1,23,456', 'en-US')).toBe(false);
+      expect(validateNumberSeparators('12,345,6', 'en-US')).toBe(false);
+      expect(validateNumberSeparators('١,٢٣,٤٥٦', 'ar-EG')).toBe(false);
+      expect(validateNumberSeparators('١٢,٣٤٥,٦', 'ar-EG')).toBe(false);
+    });
+
+    it('should fall back to basic number validation when separators cannot be detected', () => {
+      const numberFormatSpy = jest
+        .spyOn(Intl, 'NumberFormat')
+        .mockImplementation(() => ({
+          format: () => '123456789',
+        }));
+
+      expect(validateNumberSeparators('1234', 'en-US')).toBe(true);
+
+      numberFormatSpy.mockRestore();
+    });
+  });
+
+  describe('parseNumberWithLocale', () => {
+    it('should return `NaN` for empty values', () => {
+      expect(parseNumberWithLocale('', 'en-US')).toBeNaN();
+      expect(parseNumberWithLocale(undefined, 'en-US')).toBeNaN();
+      expect(parseNumberWithLocale(null, 'en-US')).toBeNaN();
+    });
+
+    it('should parse scientific notation and localized numerals', () => {
+      expect(parseNumberWithLocale('1.5e+2', 'en-US')).toBe(150);
+      expect(parseNumberWithLocale('一,二三四', 'ja')).toBe(1234);
+      expect(parseNumberWithLocale('1.234,56', 'de-DE')).toBe(1234.56);
+      expect(
+        parseNumberWithLocale(
+          new Intl.NumberFormat('fr-FR').format(1234.56),
+          'fr-FR'
+        )
+      ).toBe(1234.56);
+    });
+
+    it('should fall back when separators cannot be detected', () => {
+      const numberFormatSpy = jest
+        .spyOn(Intl, 'NumberFormat')
+        .mockImplementation(() => ({
+          format: () => '123456789',
+        }));
+
+      expect(parseNumberWithLocale('1234', 'en-US')).toBe(1234);
+
+      numberFormatSpy.mockRestore();
     });
   });
 });

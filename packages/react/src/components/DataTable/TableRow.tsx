@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2025
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -30,13 +30,13 @@ const TableRow = frFn((props, ref) => {
   // Remove unnecessary props if provided to this component, these are
   // only useful in `TableExpandRow`
   const {
-    ariaLabel, // eslint-disable-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20452
-    'aria-label': ariaLabelAlt, // eslint-disable-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20452
-    'aria-controls': ariaControls, // eslint-disable-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20452
-    onExpand, // eslint-disable-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20452
-    isExpanded, // eslint-disable-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20452
+    ariaLabel,
+    'aria-label': ariaLabelAlt,
+    'aria-controls': ariaControls,
+    onExpand,
+    isExpanded,
     isSelected,
-    expandHeader, // eslint-disable-line @typescript-eslint/no-unused-vars
+    expandHeader,
     ...cleanProps
   } = props;
 

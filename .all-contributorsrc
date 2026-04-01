@@ -1969,6 +1969,15 @@
       ]
     },
     {
+      "login": "kadiryazgan",
+      "name": "Kadir Yazgan",
+      "avatar_url": "https://avatars.githubusercontent.com/u/2729020?v=4",
+      "profile": "https://github.com/kadiryazgan",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
       "login": "maradwan26",
       "name": "Mahmoud Radwan",
       "avatar_url": "https://avatars.githubusercontent.com/u/132728978?v=4",
@@ -2141,6 +2150,25 @@
       "avatar_url": "https://avatars.githubusercontent.com/u/186133269?v=4",
       "profile": "https://github.com/suniltc-ibm",
       "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "baadhira",
+      "name": "Badira P P",
+      "avatar_url": "https://avatars.githubusercontent.com/u/69342013?v=4",
+      "profile": "https://github.com/baadhira",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "harishjanardhanan",
+      "name": "Harish",
+      "avatar_url": "https://avatars.githubusercontent.com/u/32760275?v=4",
+      "profile": "https://github.com/harishjanardhanan",
+      "contributions": [
+        "doc",
         "code"
       ]
     }

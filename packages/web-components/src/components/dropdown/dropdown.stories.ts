@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2019, 2025
+ * Copyright IBM Corp. 2019, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -18,6 +18,7 @@ import '../ai-label';
 import '../toggle-tip';
 import '../link';
 import '../button';
+import '../icon-button';
 
 const directionOptions = {
   [`Top`]: DROPDOWN_DIRECTION.TOP,
@@ -50,7 +51,7 @@ const items = [
   },
   {
     value: 'option-3',
-    text: 'Option 3 - a disabled item',
+    text: 'Option 3',
     disabled: true,
   },
   {
@@ -83,16 +84,16 @@ const defaultArgs = {
   hideLabel: false,
   helperText: '',
   invalid: false,
-  invalidText: '',
-  label: 'This is an example label',
+  invalidText: 'Error message goes here',
+  label: 'Choose an option',
   open: false,
   readOnly: false,
   size: null,
-  titleText: 'This is an example title',
+  titleText: 'Label',
   type: null,
   value: '',
   warn: false,
-  warnText: '',
+  warnText: 'Warning message goes here',
 };
 
 const controls = {
@@ -175,9 +176,9 @@ export const Default = {
   argTypes: controls,
   args: {
     ...defaultArgs,
-    helperText: 'This is some helper text',
-    invalidText: 'invalid selection',
-    warnText: 'please notice the warning',
+    helperText: 'Helper text',
+    invalidText: 'Error message goes here',
+    warnText: 'Warning message goes here',
   },
   render: ({
     ariaLabel,
@@ -232,11 +233,15 @@ export const ExperimentalAutoAlign = {
   args: {
     ...defaultArgs,
     autoalign: true,
-    direction: DROPDOWN_DIRECTION.BOTTOM,
-    helperText: 'This is some helper text',
+    direction: DROPDOWN_DIRECTION.TOP,
+    helperText: 'Helper text',
+    invalid: false,
+    invalidText: 'Error message goes here',
     label: 'Option 1',
-    titleText: 'Dropdown label',
+    titleText: 'Label',
     value: 'option-1',
+    warn: false,
+    warnText: 'Warning message goes here',
   },
   render: ({
     ariaLabel,
@@ -295,7 +300,7 @@ export const Inline = {
   args: {
     ...defaultArgs,
     label: 'Option 1',
-    titleText: 'Inline dropdown label',
+    titleText: 'Label',
     type: DROPDOWN_TYPE.INLINE,
     value: 'option-1',
   },
@@ -352,7 +357,7 @@ export const InlineWithLayer = {
   args: {
     ...defaultArgs,
     label: 'Option 1',
-    titleText: 'Inline dropdown label',
+    titleText: 'Label',
     type: DROPDOWN_TYPE.INLINE,
     value: 'option-1',
   },
@@ -413,11 +418,6 @@ export const InlineWithLayer = {
 export const Skeleton = {
   argTypes: controls,
   args: defaultArgs,
-  parameters: {
-    percy: {
-      skip: true,
-    },
-  },
   render: () => html` <cds-dropdown-skeleton></cds-dropdown-skeleton> `,
 };
 
@@ -456,10 +456,14 @@ export const WithAILabel = {
   argTypes: controls,
   args: {
     ...defaultArgs,
-    helperText: 'This is some helper text',
+    helperText: 'Helper text',
+    invalid: false,
+    invalidText: 'Error message goes here',
     label: 'Option 1',
-    titleText: 'Dropdown title',
+    titleText: 'Label',
     value: 'option-1',
+    warn: false,
+    warnText: 'Warning message goes here',
   },
   render: ({
     ariaLabel,
@@ -514,10 +518,14 @@ export const WithLayer = {
   argTypes: controls,
   args: {
     ...defaultArgs,
-    helperText: 'This is some helper text',
+    helperText: 'Helper text',
+    invalid: false,
+    invalidText: 'Error message goes here',
     label: 'Option 1',
-    titleText: 'Dropdown label',
+    titleText: 'Label',
     value: 'option-1',
+    warn: false,
+    warnText: 'Warning message goes here',
   },
   render: ({
     ariaLabel,
@@ -578,7 +586,7 @@ export const WithToggletipLabel = {
   args: {
     ...defaultArgs,
     label: 'placeholder',
-    titleText: 'Dropdown title',
+    titleText: 'Label',
     value: 'placeholder',
   },
   render: ({

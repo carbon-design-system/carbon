@@ -10,6 +10,7 @@ import '../select/index';
 
 import { PAGINATION_SIZE } from './defs';
 import { html } from 'lit';
+import { action } from 'storybook/actions';
 
 const sizes = {
   [`Small size (${PAGINATION_SIZE.SMALL})`]: PAGINATION_SIZE.SMALL,
@@ -119,7 +120,13 @@ export const Default = {
         ?page-size-input-disabled=${pageSizeInputDisabled}
         size=${size}
         ?pages-unknown=${pagesUnknown}
-        total-items=${totalItems}>
+        total-items=${totalItems}
+        @cds-page-sizes-select-changed=${(event: CustomEvent) => {
+          action('cds-page-sizes-select-changed')(event.detail);
+        }}
+        @cds-pagination-changed-current=${(event: CustomEvent) => {
+          action('cds-pagination-changed-current')(event.detail);
+        }}>
         <cds-select-item value="10">10</cds-select-item>
         <cds-select-item value="20">20</cds-select-item>
         <cds-select-item value="30">30</cds-select-item>
@@ -159,7 +166,13 @@ export const MultiplePaginationComponents = {
         ?page-size-input-disabled=${pageSizeInputDisabled}
         size=${size}
         ?pages-unknown=${pagesUnknown}
-        total-items=${totalItems}>
+        total-items=${totalItems}
+        @cds-page-sizes-select-changed=${(event: CustomEvent) => {
+          action('cds-page-sizes-select-changed')(event.detail);
+        }}
+        @cds-pagination-changed-current=${(event: CustomEvent) => {
+          action('cds-pagination-changed-current')(event.detail);
+        }}>
         <cds-select-item value="10">10</cds-select-item>
         <cds-select-item value="20">20</cds-select-item>
         <cds-select-item value="30">30</cds-select-item>
@@ -178,7 +191,13 @@ export const MultiplePaginationComponents = {
         ?page-size-input-disabled=${pageSizeInputDisabled}
         size=${size}
         ?pages-unknown=${pagesUnknown}
-        total-items=${totalItems}>
+        total-items=${totalItems}
+        @cds-page-sizes-select-changed=${(event: CustomEvent) => {
+          action('cds-page-sizes-select-changed')(event.detail);
+        }}
+        @cds-pagination-changed-current=${(event: CustomEvent) => {
+          action('cds-pagination-changed-current')(event.detail);
+        }}>
         <cds-select-item value="10">10</cds-select-item>
         <cds-select-item value="20">20</cds-select-item>
         <cds-select-item value="30">30</cds-select-item>
@@ -224,7 +243,13 @@ export const PaginationUnknownPages = {
         ?page-size-input-disabled=${pageSizeInputDisabled}
         size=${size}
         ?pages-unknown=${pagesUnknown}
-        total-items=${totalItems}>
+        total-items=${totalItems}
+        @cds-page-sizes-select-changed=${(event: CustomEvent) => {
+          action('cds-page-sizes-select-changed')(event.detail);
+        }}
+        @cds-pagination-changed-current=${(event: CustomEvent) => {
+          action('cds-pagination-changed-current')(event.detail);
+        }}>
         <cds-select-item value="10">10</cds-select-item>
         <cds-select-item value="20">20</cds-select-item>
         <cds-select-item value="30">30</cds-select-item>
@@ -264,7 +289,13 @@ export const PaginationWithCustomPageSizesLabel = {
         ?page-size-input-disabled=${pageSizeInputDisabled}
         size=${size}
         ?pages-unknown=${pagesUnknown}
-        total-items=${totalItems}>
+        total-items=${totalItems}
+        @cds-page-sizes-select-changed=${(event: CustomEvent) => {
+          action('cds-page-sizes-select-changed')(event.detail);
+        }}
+        @cds-pagination-changed-current=${(event: CustomEvent) => {
+          action('cds-pagination-changed-current')(event.detail);
+        }}>
         <cds-select-item value="10">Ten</cds-select-item>
         <cds-select-item value="20">Twenty</cds-select-item>
         <cds-select-item value="30">Thirty</cds-select-item>

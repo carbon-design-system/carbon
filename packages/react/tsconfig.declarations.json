@@ -1,0 +1,18 @@
+{
+  "extends": "./tsconfig.json",
+  "include": ["src/**/*"],
+  "exclude": [
+    "**/*.figma.tsx",
+    "**/__tests__/**",
+    "**/__mocks__/**",
+    "**/__story__/**",
+    "**/stories/**",
+    "**/*.stories.*",
+    "**/*.story.*",
+    "**/*-test.*",
+    "**/*.mdx",
+    "**/*.snap",
+    ".storybook/**/*",
+    "icons/**/*"
+  ]
+}

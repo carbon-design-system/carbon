@@ -121,7 +121,7 @@
 
   .#{$prefix}--header__menu-trigger:hover > svg {
     fill: $icon-primary;
-    //TO-DO: ask design if this color changes on hover, missing spec for it
+    // TODO: ask design if this color changes on hover, missing spec for it
   }
 
   .#{$prefix}--header__menu-toggle {
@@ -161,7 +161,7 @@
 
   a.#{$prefix}--header__name:focus {
     border-color: $focus;
-    //TO-DO: follow up with design to see if this is correct, missing focus spec for it
+    // TODO: follow up with design to see if this is correct, missing focus spec for it
   }
 
   .#{$prefix}--header__name--prefix {
@@ -434,7 +434,7 @@
     inline-size: auto;
     inset-block-start: 0;
     inset-inline-start: 0;
-    //TO-DO: double check with design that these tokens are correct, missing spec for it
+    // TODO: double check with design that these tokens are correct, missing spec for it
     outline: none;
   }
 }

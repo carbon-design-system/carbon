@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2019, 2024
+ * Copyright IBM Corp. 2019, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -18,6 +18,7 @@ import styles from './combo-box.scss?lit';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import ifNonEmpty from '../../globals/directives/if-non-empty';
+import spread from '../../globals/directives/spread';
 
 export { DROPDOWN_DIRECTION, DROPDOWN_SIZE } from '../dropdown/dropdown';
 
@@ -95,10 +96,18 @@ class CDSComboBox extends CDSDropdown {
     );
   }
 
+  connectedCallback() {
+    super.connectedCallback();
+    if (this.typeahead) {
+      this.shouldFilterItem = true;
+      this.setAttribute('should-filter-item', '');
+    }
+  }
+
   /**
    * Handles `input` event on the `<input>` for filtering.
    */
-  protected _handleInput() {
+  protected _handleInput(event: InputEvent) {
     const rawQueryText = this._filterInputNode.value;
     const queryText = rawQueryText.trim().toLowerCase();
 
@@ -118,11 +127,68 @@ class CDSComboBox extends CDSDropdown {
       if (highlightedItem) {
         this._scrollItemIntoView(highlightedItem as HTMLElement);
       }
+      if (this.typeahead && event?.inputType?.startsWith('insert')) {
+        const suggestedItem = highlightedItem.textContent?.trim() ?? '';
+        if (
+          suggestedItem.toLowerCase().startsWith(rawQueryText.toLowerCase()) &&
+          suggestedItem.length > rawQueryText.length
+        ) {
+          const suggestionText =
+            rawQueryText + suggestedItem.slice(rawQueryText.length);
+
+          this._filterInputNode.value = suggestionText;
+          this._filterInputNode.setSelectionRange(
+            rawQueryText.length,
+            suggestionText.length
+          );
+
+          this._filterInputValue = suggestionText;
+          this.open = true;
+          this.requestUpdate();
+          return;
+        }
+      }
     }
 
     this._filterInputValue = rawQueryText;
+
+    if (this.allowCustomValue) {
+      const previousValue = this.value;
+      this.value = rawQueryText;
+
+      if (previousValue !== this.value) {
+        this.dispatchEvent(
+          new CustomEvent(
+            (this.constructor as typeof CDSComboBox).eventSelect,
+            {
+              bubbles: true,
+              composed: true,
+              detail: {
+                item: null,
+                value: this.value,
+              },
+            }
+          )
+        );
+      }
+    }
     this.open = true;
     this.requestUpdate();
+  }
+
+  // removes the autocomplete suggestion
+  protected _removeAutoCompleteSuggestion() {
+    if (!this._filterInputNode) return;
+    const { selectionStart, selectionEnd, value } = this._filterInputNode;
+    if (selectionStart && selectionEnd && selectionEnd > selectionStart) {
+      const cleanInput = value.slice(0, selectionStart);
+      this._filterInputNode.value = cleanInput;
+      this._filterInputNode.setSelectionRange(
+        cleanInput.length,
+        cleanInput.length
+      );
+      return;
+    }
   }
 
   // Applies filtering/highlighting to all slotted items.
@@ -141,9 +207,9 @@ class CDSComboBox extends CDSDropdown {
         comboItem.highlighted = false;
         return;
       }
-      const matches = (comboItem.textContent || '')
-        .toLowerCase()
-        .includes(queryText);
+      const matches = this.typeahead
+        ? (comboItem.textContent || '').toLowerCase().startsWith(queryText)
+        : (comboItem.textContent || '').toLowerCase().includes(queryText);
       const filterFunction =
         typeof this.shouldFilterItem === 'function'
           ? this.shouldFilterItem
@@ -208,7 +274,11 @@ class CDSComboBox extends CDSDropdown {
 
   protected _revertInputToSelected(focus = true) {
     const selected = this._getSelectedItem();
-    const text = selected?.textContent ?? '';
+
+    let text = selected?.textContent ?? '';
+    if (this.allowCustomValue && !selected && this.value) {
+      text = this.value as string;
+    }
 
     this._filterInputValue = text;
 
@@ -232,6 +302,13 @@ class CDSComboBox extends CDSDropdown {
   }
 
   protected _handleInputKeydown(event: KeyboardEvent) {
+    // remove the autocomplete suggestion when navigating away from the suggested item
+    if (
+      this.typeahead &&
+      (event.key === 'ArrowDown' || event.key === 'ArrowUp')
+    ) {
+      this._removeAutoCompleteSuggestion();
+    }
     if (event.key !== 'Escape') {
       return;
     }
@@ -239,10 +316,18 @@ class CDSComboBox extends CDSDropdown {
       return;
     }
 
-    if (this.value) {
-      this._revertInputToSelected(true);
-    } else if (this._filterInputNode.value) {
-      this._clearInputWithoutSelecting(true);
+    if (this.open) {
+      this._handleUserInitiatedToggle(false);
+    } else {
+      if (this.value) {
+        this._revertInputToSelected(true);
+      } else if (this._filterInputNode.value) {
+        this._clearInputWithoutSelecting(true);
+      }
+
+      if (this.value || this._filterInputNode.value) {
+        this._handleUserInitiatedClearInput();
+      }
     }
   }
 
@@ -340,6 +425,7 @@ class CDSComboBox extends CDSDropdown {
       open,
       readOnly,
       value,
+      inputProps,
       _activeDescendant: activeDescendant,
       _filterInputValue: filterInputValue,
       _handleInput: handleInput,
@@ -377,12 +463,12 @@ class CDSComboBox extends CDSDropdown {
         )}"
         ?readonly=${readOnly}
         @input=${handleInput}
-        @keydown=${handleInputKeydown} />
+        @keydown=${handleInputKeydown}
+        ...="${spread(this._normalizeInputProps(inputProps))}" />
     `;
   }
 
-  // eslint-disable-next-line   @typescript-eslint/no-invalid-void-type -- https://github.com/carbon-design-system/carbon/issues/20452
-  protected _renderFollowingLabel(): TemplateResult | void {
+  protected _renderFollowingLabel(): TemplateResult | undefined {
     const { clearSelectionLabel, _filterInputValue: filterInputValue } = this;
 
     if (filterInputValue.length != 0) {
@@ -398,7 +484,7 @@ class CDSComboBox extends CDSDropdown {
             id="selection-button"
             role="button"
             class="${prefix}--list-box__selection"
-            tabindex="0"
+            tabindex="-1"
             title="${clearSelectionLabel}">
             ${iconLoader(Close16, { 'aria-label': clearSelectionLabel })}
           </div>
@@ -455,7 +541,8 @@ class CDSComboBox extends CDSDropdown {
   itemMatches!: (item: CDSComboBoxItem, queryText: string) => boolean;
 
   /**
-   * Provide custom filtering behavior.
+   * Provide custom filtering behavior. This attribute will be ignored if
+   * `typeahead` is enabled and will default to `true`
    */
   @property({
     attribute: 'should-filter-item',
@@ -471,14 +558,50 @@ class CDSComboBox extends CDSDropdown {
   @property({ type: Boolean, reflect: true })
   typeahead = false;
 
+  /**
+   * `true` to allow custom values that do not match any item in the list.
+   */
+  @property({ type: Boolean, attribute: 'allow-custom-value' })
+  allowCustomValue = false;
+
+  /**
+   * Additional input attributes to apply to the internal input element.
+   * Allows passing native HTML input attributes like `maxlength`, `pattern`,
+   * `autocomplete`, etc.
+   */
+  @property({ type: Object, attribute: false })
+  inputProps?: Record<string, string | number | boolean>;
+
+  private _normalizeInputProps(
+    inputProps?: Record<string, string | number | boolean>
+  ) {
+    const normalizedInputProps: Record<string, string> = {};
+
+    Object.entries(inputProps ?? {}).forEach(([key, value]) => {
+      if (value === undefined || value === null || value === false) {
+        return;
+      }
+      normalizedInputProps[key] = value === true ? '' : String(value);
+    });
+
+    return normalizedInputProps;
+  }
+
   shouldUpdate(changedProperties) {
     super.shouldUpdate(changedProperties);
-    const { _selectedItemContent: selectedItemContent } = this;
-    if (selectedItemContent && changedProperties.has('value')) {
-      const selectedText = selectedItemContent?.textContent || '';
-      if (!this._filterInputValue || this._filterInputValue === selectedText) {
-        this._filterInputValue = selectedText;
-      }
+    if (!changedProperties.has('value')) {
+      return true;
+    }
+    if (this._selectedItemContent) {
+      this._filterInputValue = this._selectedItemContent.textContent || '';
+      return true;
+    }
+    if (this.allowCustomValue && this.value) {
+      this._filterInputValue = String(this.value);
+      return true;
+    }
+    if (this.value === '') {
+      this._filterInputValue = '';
     }
     return true;
   }
@@ -507,10 +630,14 @@ class CDSComboBox extends CDSDropdown {
     super.updated(changedProperties);
     if (changedProperties.has('open')) {
       if (this.open && this._filterInputNode) {
-        this._handleInput();
+        this._handleInput(changedProperties);
       } else if (!this.open) {
+        // remove the autocomplete suggestion when closing the combobox
+        this._removeAutoCompleteSuggestion();
         this._resetFilteredItems();
-
+        if (this._filterInputNode.value == '') {
+          this.value = '';
+        }
         if (this.value) {
           this._revertInputToSelected(false);
           if (
@@ -521,7 +648,8 @@ class CDSComboBox extends CDSDropdown {
           }
         } else if (
           this._filterInputValue &&
-          this._filterInputValue.length > 0
+          this._filterInputValue.length > 0 &&
+          !this.allowCustomValue
         ) {
           this._clearInputWithoutSelecting(false);
           if (

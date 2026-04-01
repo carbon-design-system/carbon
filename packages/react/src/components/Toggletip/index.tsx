@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2025
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -8,23 +8,18 @@
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 import React, {
-  type ElementType,
+  forwardRef,
   useContext,
+  useEffect,
   useRef,
   useState,
-  useEffect,
-  type ReactNode,
   type ComponentProps,
-  type KeyboardEventHandler,
+  type ElementType,
   type FocusEventHandler,
+  type KeyboardEventHandler,
+  type ReactNode,
 } from 'react';
-import {
-  Popover,
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20452
-  type PopoverAlignment,
-  PopoverBaseProps,
-  PopoverContent,
-} from '../Popover';
+import { Popover, PopoverContent, type PopoverBaseProps } from '../Popover';
 import { match, keys } from '../../internal/keyboard';
 import { useWindowEvent } from '../../internal/useEvent';
 import { useId } from '../../internal/useId';
@@ -185,8 +180,8 @@ export function Toggletip<E extends ElementType = 'span'>({
 
     const handleOutsideClick = (event: MouseEvent | PointerEvent) => {
       const node = event.target as Node | null;
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
-      if (open && node && !ref.current!.contains(node)) {
+
+      if (open && node && !ref.current?.contains(node)) {
         setOpen(false);
       }
     };
@@ -228,7 +223,6 @@ export function Toggletip<E extends ElementType = 'span'>({
 // Get all the properties from Popover except for "open".
 // The Typescript types for PropTypes are really messed up so we need lots of
 // casting.  It will be great when we can finally get rid of PropTypes altogether.
-// eslint-disable-next-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20452
 const { open, ...popoverNonOpenPropTypes } = (Popover.propTypes ??
   {}) as unknown as PopoverBaseProps;
 
@@ -255,8 +249,7 @@ export type ToggleTipButtonProps<T extends React.ElementType> =
  * `ToggletipButton` controls the visibility of the Toggletip through mouse
  * clicks and keyboard interactions.
  */
-
-export const ToggletipButton = React.forwardRef(function ToggletipButton<
+export const ToggletipButton = forwardRef(function ToggletipButton<
   T extends React.ElementType,
 >(
   {
@@ -319,15 +312,16 @@ export interface ToggletipContentProps {
   className?: string;
 }
 
+const frFn = forwardRef<HTMLDivElement, ToggletipContentProps>;
+
 /**
  * `ToggletipContent` is a wrapper around `PopoverContent`. It places the
  * `children` passed in as a prop inside of `PopoverContent` so that they will
  * be rendered inside of the popover for this component.
  */
-const ToggletipContent = React.forwardRef<
-  HTMLDivElement,
-  ToggletipContentProps
->(function ToggletipContent({ children, className: customClassName }, ref) {
+const ToggletipContent = frFn((props, ref) => {
+  const { children, className: customClassName } = props;
+
   const toggletip = useToggletip();
   const prefix = usePrefix();
   return (

@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2025
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -11,8 +11,8 @@ import cx from 'classnames';
 import PropTypes, { ReactElementLike } from 'prop-types';
 import React, {
   cloneElement,
+  forwardRef,
   useContext,
-  type ForwardedRef,
   type HTMLAttributes,
   type ReactNode,
 } from 'react';
@@ -103,16 +103,9 @@ export interface DatePickerInputProps
   onClick?: func;
 
   /**
-   * Provide a regular expression that the input value must match
-   * TODO:need to be rewritten
+   * Provide a regular expression pattern string that the input value must match
    */
-  pattern?: (
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
-    props: { [key: string]: any },
-    propName: string,
-    componentName: string
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
-  ) => null | any | Error;
+  pattern?: string;
 
   /**
    * Specify the placeholder text
@@ -151,10 +144,9 @@ export interface DatePickerInputProps
   warnText?: ReactNodeLike;
 }
 
-const DatePickerInput = React.forwardRef(function DatePickerInput(
-  props: DatePickerInputProps,
-  ref: ForwardedRef<HTMLDivElement>
-) {
+const frFn = forwardRef<HTMLDivElement, DatePickerInputProps>;
+
+const DatePickerInput = frFn((props, ref) => {
   const {
     datePickerType,
     decorator,
@@ -292,7 +284,6 @@ const DatePickerInput = React.forwardRef(function DatePickerInput(
           ) : (
             ''
           )}
-          {isFluid && <DatePickerIcon datePickerType={datePickerType} />}
           <DatePickerIcon
             datePickerType={datePickerType}
             invalid={normalizedProps.invalid}
@@ -378,22 +369,9 @@ DatePickerInput.propTypes = {
   onClick: PropTypes.func,
 
   /**
-   * Provide a regular expression that the input value must match
+   * Provide a regular expression pattern string that the input value must match
    */
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
-  pattern: (props, propName, componentName): null | any | Error => {
-    if (props[propName] === undefined) {
-      return;
-    }
-    try {
-      new RegExp(props[propName]);
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20452
-    } catch (e) {
-      return new Error(
-        `Invalid value of prop '${propName}' supplied to '${componentName}', it should be a valid regular expression`
-      );
-    }
-  },
+  pattern: PropTypes.string,
 
   /**
    * Specify the placeholder text

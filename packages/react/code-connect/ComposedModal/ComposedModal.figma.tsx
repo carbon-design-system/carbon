@@ -1,11 +1,10 @@
 /**
- * Copyright IBM Corp. 2016, 2024
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20452
 // @ts-nocheck
 import React, { useState } from 'react';
 import { ComposedModal } from '@carbon/react';
@@ -38,7 +37,6 @@ figma.connect(
       }),
     },
     example: ({
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20452
       size,
       title,
       label,
@@ -47,13 +45,10 @@ figma.connect(
       descriptionText,
       progress,
     }) => {
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars , react-hooks/rules-of-hooks -- https://github.com/carbon-design-system/carbon/issues/20452
       const [open, setOpen] = useState(true);
       return (
         <ComposedModal open onClose={() => setOpen(false)}>
-          {/* eslint-disable-next-line react/jsx-no-undef -- https://github.com/carbon-design-system/carbon/issues/20452 */}
           <ModalHeader label={label} title={title} />
-          {/* eslint-disable-next-line react/jsx-no-undef -- https://github.com/carbon-design-system/carbon/issues/20452 */}
           <ModalBody>
             {progress}
             {descriptionText}
