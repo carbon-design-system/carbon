@@ -58,10 +58,10 @@ test.describe('@avt Accordion', () => {
     });
 
     const accordion_btn1 = page.getByRole('button', {
-      name: 'Section 1 title',
+      name: 'Choose your plan',
     });
     const accordion_btn2 = page.getByRole('button', {
-      name: 'Section 2 title',
+      name: 'Add team members',
     });
 
     await expect(accordion_btn1).toBeVisible();
@@ -95,7 +95,7 @@ test.describe('@avt Accordion', () => {
       },
     });
     const accordion_btn1 = page.getByRole('button', {
-      name: 'Section 1 title',
+      name: 'Choose your plan',
     });
     await accordion_btn1.click();
     await expect(accordion_btn1).toHaveAttribute('aria-expanded', 'true');
@@ -117,7 +117,7 @@ test.describe('@avt Accordion', () => {
       },
     });
     const accordion_btn1 = page.getByRole('button', {
-      name: 'Section 1 title',
+      name: 'Choose your plan',
     });
     await accordion_btn1.hover();
     await expect(page).toHaveNoACViolations(
@@ -137,7 +137,7 @@ test.describe('@avt Accordion', () => {
       },
     });
     const accordion_btn1 = page.getByRole('button', {
-      name: 'Section 1 title',
+      name: 'Choose your plan',
     });
     await expect(accordion_btn1).toBeDisabled();
     await expect(page).toHaveNoACViolations(
