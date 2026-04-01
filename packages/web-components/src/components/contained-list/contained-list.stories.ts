@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2025
+ * Copyright IBM Corp. 2025, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -267,20 +267,16 @@ export const WithIcons = {
   render: () => html`
     <cds-contained-list label="List title" kind="on-page">
       <cds-contained-list-item>
-        <div slot="icon">${iconLoader(Apple16)}</div>
-        List item
+        ${iconLoader(Apple16, { slot: 'icon' })} List item
       </cds-contained-list-item>
       <cds-contained-list-item>
-        <div slot="icon">${iconLoader(Wheat16)}</div>
-        List item
+        ${iconLoader(Wheat16, { slot: 'icon' })} List item
       </cds-contained-list-item>
       <cds-contained-list-item>
-        <div slot="icon">${iconLoader(Strawberry16)}</div>
-        List item
+        ${iconLoader(Strawberry16, { slot: 'icon' })} List item
       </cds-contained-list-item>
       <cds-contained-list-item>
-        <div slot="icon">${iconLoader(Fish16)}</div>
-        List item
+        ${iconLoader(Fish16, { slot: 'icon' })} List item
       </cds-contained-list-item>
     </cds-contained-list>
   `,
@@ -366,6 +362,17 @@ export const UsageExamples = {
 
 const meta = {
   title: 'Components/Contained list',
+  decorators: [
+    (story) => html`
+      <style>
+        cds-contained-list[kind='on-page']
+          + cds-contained-list[kind='on-page'] {
+          margin-block-start: 1rem;
+        }
+      </style>
+      <div>${story()}</div>
+    `,
+  ],
   parameters: {
     docs: {
       page: storyDocs,
