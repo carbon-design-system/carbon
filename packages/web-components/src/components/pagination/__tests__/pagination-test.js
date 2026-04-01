@@ -148,7 +148,9 @@ describe('cds-pagination', () => {
       </cds-pagination>
     `);
 
-    const label = el.shadowRoot?.querySelector(`.cds--pagination__text`);
+    const label = el.shadowRoot?.querySelector(
+      '.cds--pagination__left span[slot="label-text"]'
+    );
     expect(label?.textContent?.trim()).to.equal('éléments par page');
   });
 
@@ -296,7 +298,7 @@ describe('cds-pagination', () => {
     await el.updateComplete;
 
     const label = el.shadowRoot?.querySelector(
-      '.cds--label.cds--visually-hidden'
+      '.cds--pagination__right span[slot="label-text"]'
     );
     expect(label?.textContent?.trim()).to.equal('Page of 2 total');
   });
