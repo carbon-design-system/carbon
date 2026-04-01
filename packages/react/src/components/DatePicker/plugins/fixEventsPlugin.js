@@ -71,7 +71,7 @@ export default (config) => (fp) => {
           fp.config.dateFormat
         );
         event.stopPropagation();
-        if (inputTo === target) {
+        if (inputTo === target && fp.config.closeOnSelect) {
           requestAnimationFrame(() => {
             fp.close();
           });

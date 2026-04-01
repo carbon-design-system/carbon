@@ -827,6 +827,36 @@ describe('Range date picker', () => {
     expect(screen.getByRole('application')).not.toHaveClass('open');
   });
 
+  it('should respect closeOnSelect prop in range mode when pressing Enter', async () => {
+    const onClose = jest.fn();
+    render(
+      <DatePicker
+        dateFormat="Y-m-d"
+        closeOnSelect={false}
+        onClose={onClose}
+        onChange={() => {}}
+        datePickerType="range">
+        <DatePickerInput
+          id="start-date-input-close-on-select"
+          labelText="Start date"
+        />
+        <DatePickerInput
+          id="end-date-input-close-on-select"
+          labelText="End date"
+        />
+      </DatePicker>
+    );
+
+    const start = screen.getByLabelText('Start date');
+    const end = screen.getByLabelText('End date');
+
+    await userEvent.type(start, '2023-01-05{enter}');
+    await userEvent.type(end, '2023-01-19{enter}');
+
+    expect(screen.getByRole('application')).toHaveClass('open');
+    expect(onClose).not.toHaveBeenCalled();
+  });
+
   it('should move focus on first click outside after Enter on end date input', async () => {
     render(
       <>
