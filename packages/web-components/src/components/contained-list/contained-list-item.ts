@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2022, 2025
+ * Copyright IBM Corp. 2022, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -85,18 +85,8 @@ class CDSContainedListItem extends LitElement {
     const contentClasses = `${prefix}--contained-list-item__content`;
 
     const content = html`
-      ${_hasIcon
-        ? html`
-            <div class="${prefix}--contained-list-item__icon">
-              <slot
-                name="icon"
-                @slotchange="${this._handleIconSlotChange}"></slot>
-            </div>
-          `
-        : html`<slot
-            name="icon"
-            @slotchange="${this._handleIconSlotChange}"></slot>`}
-      <div><slot></slot></div>
+      <slot name="icon" @slotchange="${this._handleIconSlotChange}"></slot>
+      <slot></slot>
     `;
 
     return html`
