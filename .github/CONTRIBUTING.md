@@ -148,20 +148,6 @@ yarn test
 For detailed testing information, see the
 [style guide](../docs/style.md#testing).
 
-#### Add yourself to the contributor list
-
-To ensure you are recognized for your contributions, add yourself to the
-Contributors table in the [README](../README.md#contributors) by running the
-following commands:
-
-```sh
-yarn all-contributors add <your_github_username> <contribution>
-yarn all-contributors generate
-```
-
-Visit https://allcontributors.org/docs/en/cli/usage#all-contributors-add for
-more details.
-
 #### Create a pull request
 
 When you're ready to submit your changes for review, commit and push your
@@ -212,10 +198,13 @@ on GitHub. Sign up on https://github.com.
   practices.
 - **Design:** Contribute visual assets, UX interactions, motion design, Figma
   kit fixes, and more.
-- **Content:** Whether updating docs or adding new
-  [patterns](https://carbondesignsystem.com/patterns/overview/), anyone can
-  contribute to our contributions to our
-  [website content](https://github.com/carbon-design-system/carbon-website).
+- **Content:** If you want to contribute content for
+  [carbondesignsystem.com](https://carbondesignsystem.com), such as
+  [patterns](https://carbondesignsystem.com/patterns/overview/), please
+  contribute in
+  [carbon-design-system/carbon-website](https://github.com/carbon-design-system/carbon-website).
+  Documentation that lives in this repository (e.g., package READMEs, `docs/`,
+  and component `.mdx` files) should still be contributed here.
   - **Research:** If you have findings to improve the Carbon user experience,
     share them — ideally with supporting design and development details in a
     GitHub issue and subsequent PR.
