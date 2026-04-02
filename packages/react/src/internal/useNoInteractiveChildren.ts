@@ -42,65 +42,42 @@ export const useInteractiveChildrenNeedDescription = (
   }, [message, ref]);
 };
 
-/**
- * Determines if a given DOM node has interactive content, or is itself
- * interactive. It returns the interactive node if one is found.
- *
- * @param node - The node to check.
- * @returns The interactive node, or `null` if none is found.
- */
-export const getInteractiveContent = (
-  node: HTMLElement
+const findMatchingContent = (
+  node: HTMLElement,
+  matcher: (element: HTMLElement) => boolean
 ): HTMLElement | null => {
-  // TODO: This check shouldn't be necessary. Investigate deleting it.
-  if (!node || !node.childNodes) {
-    return null;
-  }
+  if (matcher(node)) return node;
 
-  if (isFocusable(node)) {
-    return node;
-  }
-
-  for (const childNode of node.childNodes) {
-    if (childNode instanceof HTMLElement) {
-      const interactiveNode = getInteractiveContent(childNode);
-      if (interactiveNode) {
-        return interactiveNode;
-      }
+  for (const child of node.children) {
+    if (!(child instanceof HTMLElement)) {
+      continue;
     }
+
+    const matchingChild = findMatchingContent(child, matcher);
+
+    if (matchingChild) return matchingChild;
   }
 
   return null;
 };
 
 /**
- * Determines if a given DOM node has a `role`, or has itself a `role`.
- * It returns the node with a `role` if one is found.
- *
- * @param node - The node to check.
- * @returns The node with a `role`, or `null` if none is found.
+ * Finds an interactive node in a given DOM node, including the node itself.
  */
-export const getRoleContent = (node: HTMLElement): HTMLElement | null => {
-  // TODO: This check shouldn't be necessary. Investigate deleting it.
-  if (!node || !node.childNodes) {
-    return null;
-  }
+export const getInteractiveContent = (node: HTMLElement) =>
+  findMatchingContent(node, isFocusable);
 
-  if (node.getAttribute('role') && node.getAttribute('role') !== '') {
-    return node;
-  }
+const hasRole = (element: HTMLElement) => {
+  const role = element.getAttribute('role');
 
-  for (const childNode of node.childNodes) {
-    if (childNode instanceof HTMLElement) {
-      const roleNode = getRoleContent(childNode);
-      if (roleNode) {
-        return roleNode;
-      }
-    }
-  }
-
-  return null;
+  return role !== null && role !== '';
 };
+
+/**
+ * Finds a node with a `role` in a given DOM node, including the node itself.
+ */
+export const getRoleContent = (node: HTMLElement) =>
+  findMatchingContent(node, hasRole);
 
 /**
  * Determines if the given element is focusable.
@@ -110,7 +87,7 @@ export const getRoleContent = (node: HTMLElement): HTMLElement | null => {
  * @see https://github.com/w3c/aria-practices/blob/0553bb51588ffa517506e2a1b2ca1422ed438c5f/examples/js/utils.js#L68
  */
 const isFocusable = (element: HTMLElement) => {
-  if (element.tabIndex === undefined || element.tabIndex < 0) {
+  if (element.tabIndex < 0) {
     return false;
   }
 

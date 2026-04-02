@@ -10,8 +10,8 @@ import { ifDefined } from 'lit/directives/if-defined.js';
 import { INPUT_SIZE } from '../text-input/text-input';
 import './search-skeleton';
 import '../layer';
-import '../../../.storybook/templates/with-layer';
 import './index';
+import { withLayers } from '../../../.storybook/decorators/with-layers';
 
 const sizes = {
   [`Small size (${INPUT_SIZE.SMALL})`]: INPUT_SIZE.SMALL,
@@ -124,21 +124,25 @@ export const Expandable = {
 };
 
 export const ExpandableWithLayer = {
+  decorators: [withLayers],
+  parameters: {
+    layout: 'fullscreen',
+  },
   render: () => {
     return html`
-      <sb-template-layers>
-        <cds-search size="lg" expandable placeholder="Layer two"></cds-search>
-      </sb-template-layers>
+      <cds-search size="lg" expandable placeholder="Layer two"></cds-search>
     `;
   },
 };
 
 export const WithLayer = {
+  decorators: [withLayers],
+  parameters: {
+    layout: 'fullscreen',
+  },
   render: () => {
     return html`
-      <sb-template-layers>
-        <cds-search size="lg" placeholder="Find your items"></cds-search>
-      </sb-template-layers>
+      <cds-search size="lg" placeholder="Find your items"></cds-search>
     `;
   },
 };
