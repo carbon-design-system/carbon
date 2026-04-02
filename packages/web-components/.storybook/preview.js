@@ -14,7 +14,6 @@ import theme from './theme';
 import './templates/with-layer';
 import { html } from 'lit';
 import { ifDefined } from 'lit/directives/if-defined.js';
-
 import './_container.scss';
 
 setCustomElementsManifest(customElements);
