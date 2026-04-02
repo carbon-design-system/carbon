@@ -6,10 +6,8 @@
  */
 
 import Pagination from './Pagination';
-import React from 'react';
 import { action } from 'storybook/actions';
 import mdx from './Pagination.mdx';
-import userEvent from '@testing-library/user-event';
 
 const props = () => ({
   disabled: false,
@@ -149,13 +147,6 @@ Default.argTypes = {
       type: 'number',
     },
   },
-};
-
-Default.play = async ({ canvasElement }) => {
-  const nextButton = canvasElement.querySelector(
-    '.cds--pagination__button--forward'
-  );
-  await userEvent.hover(nextButton);
 };
 
 export const MultiplePaginationComponents = (args) => {
