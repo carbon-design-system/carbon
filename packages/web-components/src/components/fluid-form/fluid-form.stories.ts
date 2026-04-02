@@ -6,6 +6,7 @@
  */
 
 import { html } from 'lit';
+import spread from '../../globals/directives/spread';
 import './index';
 import '../fluid-text-input/index';
 import '../fluid-textarea/index';
@@ -17,9 +18,11 @@ import '../select/index';
 import '../button/index';
 import '../modal/index';
 import '../fluid-search/index';
+import '../fluid-password-input';
 
 const additionalProps = {
   class: 'some-class',
+  'aria-label': 'sample form',
 };
 
 const TextInputProps = {
@@ -36,7 +39,7 @@ const TextAreaProps = {
   placeholder: 'Placeholder text',
 };
 
-const InvalidPasswordProps = {
+const PasswordInputProps = {
   class: 'some-class',
   id: 'test4',
   label: 'Password',
@@ -44,17 +47,24 @@ const InvalidPasswordProps = {
 };
 
 export const Default = {
-  render: () => {
+  render: (args) => {
+    const { disabled, readonly, invalid, invalidText, warn, warnText } = args;
     const toggleButton = () => {
       document.querySelector('cds-modal')?.toggleAttribute('open');
     };
     return html`
-      <cds-fluid-form aria-label="sample form" class="${additionalProps.class}">
+      <cds-fluid-form ...=${spread(additionalProps)}>
         <div style="display: flex;">
           <cds-fluid-time-picker
             id="time-picker-1"
             label-text="Time"
-            placeholder="hh:mm">
+            placeholder="hh:mm"
+            ?disabled="${disabled}"
+            ?readonly="${readonly}"
+            ?invalid="${invalid}"
+            invalid-text="${invalidText}"
+            ?warning="${warn}"
+            warning-text="${warnText}">
             <cds-fluid-time-picker-select
               id="select-01"
               label-text="Clock"
@@ -76,7 +86,13 @@ export const Default = {
           <cds-fluid-select
             id="select-1"
             label-text="Choose an option"
-            placeholder="Choose an option">
+            placeholder="Choose an option"
+            ?disabled="${disabled}"
+            ?readonly="${readonly}"
+            ?invalid="${invalid}"
+            invalid-text="${invalidText}"
+            ?warn="${warn}"
+            warn-text="${warnText}">
             <cds-select-item value="placeholder-item" disabled hidden
               >Choose an option</cds-select-item
             >
@@ -93,10 +109,13 @@ export const Default = {
 
         <div style="display: flex;">
           <cds-fluid-text-input
-            class="${TextInputProps.class}"
-            id="${TextInputProps.id}"
-            label="${TextInputProps.label}"
-            placeholder="${TextInputProps.placeholder}">
+            ...=${spread(TextInputProps)}
+            ?disabled="${disabled}"
+            ?readonly="${readonly}"
+            ?invalid="${invalid}"
+            invalid-text="${invalidText}"
+            ?warn="${warn}"
+            warn-text="${warnText}">
           </cds-fluid-text-input>
           <cds-fluid-number-input
             label="Number Input Label"
@@ -104,56 +123,82 @@ export const Default = {
             step="10"
             min="0"
             max="100"
-            value="50">
+            value="50"
+            ?disabled="${disabled}"
+            ?readonly="${readonly}"
+            ?invalid="${invalid}"
+            invalid-text="${invalidText}"
+            ?warn="${warn}"
+            warn-text="${warnText}">
           </cds-fluid-number-input>
         </div>
 
-        <cds-fluid-text-input
-          type="password"
-          pattern="^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).{6,}$"
-          class="${InvalidPasswordProps.class}"
-          id="${InvalidPasswordProps.id}"
-          label="${InvalidPasswordProps.label}"
-          value="${InvalidPasswordProps.value}">
-        </cds-fluid-text-input>
+        <cds-fluid-password-input
+          ...=${spread(PasswordInputProps)}
+          ?disabled="${disabled}"
+          ?readonly="${readonly}"
+          ?invalid="${invalid}"
+          invalid-text="${invalidText}"
+          ?warn="${warn}"
+          warn-text="${warnText}">
+        </cds-fluid-password-input>
 
         <cds-fluid-textarea
-          class="${TextAreaProps.class}"
-          id="${TextAreaProps.id}"
-          label="${TextAreaProps.label}"
-          placeholder="${TextAreaProps.placeholder}">
+          ...=${spread(TextAreaProps)}
+          ?disabled="${disabled}"
+          ?readonly="${readonly}"
+          ?invalid="${invalid}"
+          invalid-text="${invalidText}"
+          ?warn="${warn}"
+          warn-text="${warnText}">
         </cds-fluid-textarea>
       </cds-fluid-form>
 
       <br />
 
-      <cds-modal size="md">
+      <cds-modal size="md" prevent-close-on-click-outside>
         <cds-modal-header>
           <cds-modal-close-button></cds-modal-close-button>
           <cds-modal-label>Label</cds-modal-label>
           <cds-modal-heading>Modal heading</cds-modal-heading>
         </cds-modal-header>
         <cds-modal-body has-scrolling-content>
-          <cds-fluid-form class="${additionalProps.class}">
+          <cds-fluid-form ...=${spread(additionalProps)}>
             <cds-fluid-text-input
               class="${TextInputProps.class}"
-              id="${TextInputProps.id}"
+              id="modal-test2"
               label="${TextInputProps.label}"
-              placeholder="${TextInputProps.placeholder}">
+              placeholder="${TextInputProps.placeholder}"
+              ?disabled="${disabled}"
+              ?readonly="${readonly}"
+              ?invalid="${invalid}"
+              invalid-text="${invalidText}"
+              ?warn="${warn}"
+              warn-text="${warnText}">
             </cds-fluid-text-input>
-            <cds-fluid-text-input
-              type="password"
-              pattern="^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).{6,}$"
-              class="${InvalidPasswordProps.class}"
-              id="${InvalidPasswordProps.id}"
-              label="${InvalidPasswordProps.label}"
-              value="${InvalidPasswordProps.value}">
-            </cds-fluid-text-input>
+            <cds-fluid-password-input
+              class="${PasswordInputProps.class}"
+              id="modal-test4"
+              label="${PasswordInputProps.label}"
+              value="${PasswordInputProps.value}"
+              ?disabled="${disabled}"
+              ?readonly="${readonly}"
+              ?invalid="${invalid}"
+              invalid-text="${invalidText}"
+              ?warn="${warn}"
+              warn-text="${warnText}">
+            </cds-fluid-password-input>
             <cds-fluid-textarea
               class="${TextAreaProps.class}"
-              id="${TextAreaProps.id}"
+              id="modal-test3"
               label="${TextAreaProps.label}"
-              placeholder="${TextAreaProps.placeholder}">
+              placeholder="${TextAreaProps.placeholder}"
+              ?disabled="${disabled}"
+              ?readonly="${readonly}"
+              ?invalid="${invalid}"
+              invalid-text="${invalidText}"
+              ?warn="${warn}"
+              warn-text="${warnText}">
             </cds-fluid-textarea>
           </cds-fluid-form>
         </cds-modal-body>
@@ -173,6 +218,44 @@ export const Default = {
 
 const meta = {
   title: 'Components/Fluid Components/FluidForm',
+  argTypes: {
+    disabled: {
+      control: 'boolean',
+      description: 'Specify whether the fluid form inputs should be disabled',
+    },
+    readonly: {
+      control: 'boolean',
+      description: 'Specify whether the fluid form inputs should be read-only',
+    },
+    invalid: {
+      control: 'boolean',
+      description:
+        'Specify whether the fluid form inputs are in an invalid state',
+    },
+    invalidText: {
+      control: 'text',
+      description: 'Provide the text for the invalid state',
+    },
+    warn: {
+      control: 'boolean',
+      description:
+        'Specify whether the fluid form inputs should display a warning',
+    },
+    warnText: {
+      control: 'text',
+      description: 'Provide the text for the warning state',
+    },
+  },
+  args: {
+    disabled: false,
+    readonly: false,
+    invalid: false,
+    invalidText:
+      'Error message that is really long can wrap to more lines but should not be excessively long.',
+    warn: false,
+    warnText:
+      'Warning message that is really long can wrap to more lines but should not be excessively long.',
+  },
 };
 
 export default meta;
