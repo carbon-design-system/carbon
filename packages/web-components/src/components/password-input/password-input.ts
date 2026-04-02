@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2025
+ * Copyright IBM Corp. 2025, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -98,7 +98,7 @@ class CDSPasswordInput extends CDSTextInput {
     attribute: 'tooltip-alignment',
     reflect: true,
   })
-  tooltipAlignment = INPUT_TOOLTIP_ALIGNMENT.CENTER;
+  tooltipAlignment = INPUT_TOOLTIP_ALIGNMENT.END;
 
   /**
    * Set to true to use the fluid version.
