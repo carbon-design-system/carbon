@@ -1,12 +1,11 @@
 //
-// Copyright IBM Corp. 2019, 2023
+// Copyright IBM Corp. 2019, 2026
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
 //
 
 @use '@carbon/styles/scss/colors';
-@use '@carbon/styles/scss/theme';
 @use '@carbon/styles/scss/spacing';
 @use '@carbon/styles/scss/type';
 @use '@carbon/styles/scss/components/tag';
@@ -31,7 +30,6 @@
 
 .#{$prefix}--with-layer__background {
   border: 1px dashed colors.$magenta-50;
-  margin: -42px;
   min-block-size: 100vh;
 }
 
