@@ -87,7 +87,6 @@ export const Default = {
 
 const meta = {
   title: 'Preview/preview__Layout',
-  component: 'cds-layout',
 };
 
 export default meta;
