@@ -11,6 +11,7 @@ import { carbonElement as customElement } from '../../globals/decorators/carbon-
 import styles from './fluid-multi-select.scss?lit';
 import { classMap } from 'lit/directives/class-map.js';
 import CDSMultiSelect from '../multi-select/multi-select';
+import { property } from 'lit/decorators.js';
 
 /**
  * Fluid multi select.
@@ -22,10 +23,11 @@ class CDSFluidMultiSelect extends CDSMultiSelect {
   /**
    * Specify if the `FluidMultiSelect` should render its menu items in condensed mode
    */
-  isCondensed?: boolean;
+  @property({ type: Boolean, reflect: true, attribute: 'is-condensed' })
+  isCondensed = false;
   connectedCallback() {
-    this.setAttribute('isFluid', 'true');
     super.connectedCallback();
+    this.isFluid = true;
   }
 
   updated(changedProperties) {
@@ -46,8 +48,6 @@ class CDSFluidMultiSelect extends CDSMultiSelect {
       [`${prefix}--list-box__wrapper`]: true,
       [`${prefix}--list-box__wrapper--fluid`]: true,
       [`${prefix}--list-box__wrapper--fluid--invalid`]: this.invalid,
-      [`${prefix}--select--disabled`]: this.disabled,
-      // [`${prefix}--select--readonly`]: this.readonly,
     });
     return html`<div class="${wrapperClasses}">${super.render()}</div>`;
   }

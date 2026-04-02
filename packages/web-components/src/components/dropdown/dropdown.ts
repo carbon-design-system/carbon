@@ -1073,12 +1073,6 @@ class CDSDropdown extends ValidityMixin(
   value = '';
 
   /**
-   * Specify whether the textarea is fluid or not
-   */
-  @property({ type: Boolean })
-  isFluid = false;
-
-  /**
    * Specify whether the control is currently in warning state
    */
   @property({ type: Boolean, reflect: true })

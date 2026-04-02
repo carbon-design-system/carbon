@@ -19,7 +19,6 @@ import '../select/select-item';
 import '../toggle-tip/toggletip';
 import {
   DROPDOWN_DIRECTION,
-  DROPDOWN_TYPE,
   SELECTION_FEEDBACK_OPTION,
 } from '../multi-select/multi-select';
 import '../multi-select/index';
@@ -60,11 +59,6 @@ const directionOptions = {
   [`Bottom`]: DROPDOWN_DIRECTION.BOTTOM,
 };
 
-const types = {
-  Default: null,
-  [`Inline (${DROPDOWN_TYPE.INLINE})`]: DROPDOWN_TYPE.INLINE,
-};
-
 const selectionFeedbackOptions = {
   [`Top (${SELECTION_FEEDBACK_OPTION.TOP})`]: SELECTION_FEEDBACK_OPTION.TOP,
   [`Fixed (${SELECTION_FEEDBACK_OPTION.FIXED})`]:
@@ -79,17 +73,18 @@ const args = {
   clearSelectionText: 'To clear selection, press Delete or Backspace.',
   disabled: false,
   direction: DROPDOWN_DIRECTION.BOTTOM,
-  hideLabel: false,
   locale: 'en',
   invalid: false,
-  invalidText: 'whoopsie!',
-  titleText: 'This is a MultiSelect Title',
-  label: 'This is a label',
+  invalidText:
+    'Error message that is really long can wrap to more lines but should not be excessively long.',
+  titleText: 'Label',
+  label: 'Choose an option',
   selectionFeedback: SELECTION_FEEDBACK_OPTION.TOP_AFTER_REOPEN,
   readOnly: false,
-  type: null,
+  isCondensed: false,
   warn: false,
-  warnText: 'whoopsie!',
+  warnText:
+    'Warning message that is really long can wrap to more lines but should not be excessively long.',
 };
 
 const filterableArgs = {
@@ -98,17 +93,18 @@ const filterableArgs = {
   clearSelectionText: 'To clear selection, press Delete or Backspace.',
   disabled: false,
   direction: DROPDOWN_DIRECTION.BOTTOM,
-  hideLabel: false,
   locale: 'en',
   invalid: false,
-  invalidText: 'whoopsie!',
-  titleText: 'FilterableMultiSelect title',
+  invalidText:
+    'Error message that is really long can wrap to more lines but should not be excessively long.',
+  titleText: 'Label',
   label: '',
   selectionFeedback: SELECTION_FEEDBACK_OPTION.TOP_AFTER_REOPEN,
   readOnly: false,
-  type: null,
+  isCondensed: false,
   warn: false,
-  warnText: 'whoopsie!',
+  warnText:
+    'Warning message that is really long can wrap to more lines but should not be excessively long.',
 };
 
 const argTypes = {
@@ -131,10 +127,6 @@ const argTypes = {
     description:
       'Specify the direction of the multiselect dropdown. Can be either top or bottom.',
     options: directionOptions,
-  },
-  hideLabel: {
-    control: 'boolean',
-    description: 'Specify whether the title text should be hidden or not.',
   },
   locale: {
     control: 'text',
@@ -169,11 +161,6 @@ const argTypes = {
     control: 'boolean',
     description: 'Whether or not the Dropdown is readonly.',
   },
-  type: {
-    control: 'select',
-    description: "Specify 'inline' to create an inline multi-select.",
-    options: types,
-  },
   warn: {
     control: 'boolean',
     description: 'Specify whether the control is currently in warning state.',
@@ -186,6 +173,11 @@ const argTypes = {
   defaultWidth: {
     control: { type: 'range', min: 300, max: 800, step: 50 },
   },
+  isCondensed: {
+    control: 'boolean',
+    description:
+      'Specify if the multiselect should render its menu items in condensed mode.',
+  },
 };
 
 export const Default = {
@@ -197,16 +189,15 @@ export const Default = {
       defaultWidth,
       direction,
       disabled,
-      hideLabel,
       locale,
       invalid,
       invalidText,
+      isCondensed,
       readOnly,
       titleText,
       selectionFeedback,
       size,
       label,
-      type,
       value,
       warn,
       warnText,
@@ -217,9 +208,9 @@ export const Default = {
           direction=${ifDefined(direction)}
           ?disabled=${disabled}
           ?invalid=${invalid}
+          ?is-condensed=${isCondensed}
           invalid-text=${ifDefined(invalidText)}
           clear-selection-label=${ifDefined(clearSelectionLabel)}
-          ?hide-label=${hideLabel}
           locale=${ifDefined(locale)}
           ?read-only=${readOnly}
           title-text=${ifDefined(titleText)}
@@ -228,7 +219,6 @@ export const Default = {
           ?warn=${warn}
           warn-text=${ifDefined(warnText)}
           label=${ifDefined(label)}
-          type=${ifDefined(type)}
           value="${ifDefined(value)}">
           <cds-multi-select-item value="example"
             >An example option that is really long to show what should be done
@@ -261,17 +251,16 @@ export const Condensed = {
       direction,
       defaultWidth,
       disabled,
-      hideLabel,
       locale,
       invalid,
       invalidText,
+
       readOnly,
       titleText,
       selectionFeedback,
       isCondensed,
       size,
       label,
-      type,
       value,
       warn,
       warnText,
@@ -285,7 +274,6 @@ export const Condensed = {
           ?invalid=${invalid}
           invalid-text=${ifDefined(invalidText)}
           clear-selection-label=${ifDefined(clearSelectionLabel)}
-          ?hide-label=${hideLabel}
           locale=${ifDefined(locale)}
           ?read-only=${readOnly}
           title-text=${ifDefined(titleText)}
@@ -294,7 +282,6 @@ export const Condensed = {
           ?warn=${warn}
           warn-text=${ifDefined(warnText)}
           label=${ifDefined(label)}
-          type=${ifDefined(type)}
           value="${ifDefined(value)}">
           <cds-multi-select-item value="example"
             >An example option that is really long to show what should be done
@@ -316,14 +303,13 @@ export const Condensed = {
 };
 
 export const Filterable = {
-  args,
+  args: filterableArgs,
   argTypes,
   render: (args) => {
     const {
       clearSelectionLabel,
       direction,
       disabled,
-      hideLabel,
       locale,
       invalid,
       invalidText,
@@ -333,7 +319,6 @@ export const Filterable = {
       selectionFeedback,
       size,
       label,
-      type,
       value,
       warn,
       warnText,
@@ -347,7 +332,6 @@ export const Filterable = {
           ?invalid=${invalid}
           invalid-text=${ifDefined(invalidText)}
           clear-selection-label=${ifDefined(clearSelectionLabel)}
-          ?hide-label=${hideLabel}
           locale=${ifDefined(locale)}
           ?read-only=${readOnly}
           title-text=${ifDefined(titleText)}
@@ -356,7 +340,6 @@ export const Filterable = {
           ?warn=${warn}
           warn-text=${ifDefined(warnText)}
           label=${ifDefined(label)}
-          type=${ifDefined(type)}
           value="${ifDefined(value)}">
           <cds-multi-select-item value="example"
             >An example option that is really long to show what should be done
@@ -387,7 +370,6 @@ export const FilterableWithLayer = {
       defaultWidth,
       disabled,
       helperText,
-      hideLabel,
       locale,
       invalid,
       invalidText,
@@ -396,7 +378,6 @@ export const FilterableWithLayer = {
       selectionFeedback,
       size,
       label,
-      type,
       value,
       warn,
       warnText,
@@ -411,7 +392,6 @@ export const FilterableWithLayer = {
             invalid-text=${ifDefined(invalidText)}
             clear-selection-label=${ifDefined(clearSelectionLabel)}
             helper-text=${ifDefined(helperText)}
-            ?hide-label=${hideLabel}
             locale=${ifDefined(locale)}
             ?read-only=${readOnly}
             title-text=${ifDefined(titleText)}
@@ -420,7 +400,6 @@ export const FilterableWithLayer = {
             ?warn=${warn}
             warn-text=${ifDefined(warnText)}
             label=${ifDefined(label)}
-            type=${ifDefined(type)}
             value="${ifDefined(value)}"
             filterable="true">
             <cds-multi-select-item value="example"
@@ -444,28 +423,6 @@ export const FilterableWithLayer = {
     `;
   },
 };
-
-// Default.args = {
-//   defaultWidth: 400,
-//   isCondensed: false,
-//   isFilterable: false,
-//   disabled: false,
-//   invalid: false,
-//   invalidText:
-//     'Error message that is really long can wrap to more lines but should not be excessively long.',
-//   label: 'Choose an option',
-//   titleText: 'Label',
-//   warn: false,
-//   warnText:
-//     'Warning message that is really long can wrap to more lines but should not be excessively long.',
-// };
-
-// Default.argTypes = {
-//   ...sharedArgTypes,
-//   defaultWidth: {
-//     control: { type: 'range', min: 300, max: 800, step: 50 },
-//   },
-// };
 
 export const Skeleton = {
   parameters: {

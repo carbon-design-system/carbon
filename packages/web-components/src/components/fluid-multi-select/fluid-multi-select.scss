@@ -14,7 +14,7 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/theme' as *;
 @use '@carbon/styles/scss/components/multiselect' as *;
 @use '@carbon/styles/scss/colors';
-@use '@carbon/styles/scss/utilities/convert';
+@use '@carbon/styles/scss/utilities/convert' as *;
 @use '@carbon/styles/scss/components/list-box/list-box';
 @use '@carbon/styles/scss/components/fluid-list-box';
 @use '@carbon/styles/scss/utilities' as *;
@@ -52,12 +52,52 @@ $css--plex: true !default;
   .#{$prefix}--list-box__field:focus {
     @extend .#{$prefix}--multi-select--filterable--input-focused;
   }
+
+  .#{$prefix}--list-box__divider {
+    display: block;
+    border: none;
+    margin: 0 1rem;
+    border-block-end: 1px solid $border-subtle;
+  }
 }
 
 // Target dropdown items inside fluid dropdown for non-condensed height
 :host(#{$prefix}-fluid-multi-select:not([is-condensed])) {
   ::slotted(#{$prefix}-multi-select-item) {
     block-size: $spacing-10;
+  }
+}
+
+:host(#{$prefix}-fluid-multi-select[invalid]:not([disabled]):not([read-only])),
+:host(#{$prefix}-fluid-multi-select[warn]:not([disabled]):not([read-only])) {
+  .#{$prefix}--form__helper-text {
+    padding: to-rem(8px) 4rem to-rem(8px) $spacing-05;
+    inline-size: auto;
+    margin-block-start: 0;
+  }
+
+  .#{$prefix}--list-box {
+    border-block-end: 1px solid transparent;
+  }
+
+  .#{$prefix}--list-box.#{$prefix}--list-box--warning
+    .#{$prefix}--list-box__invalid-icon,
+  .#{$prefix}--list-box__invalid-icon--warning {
+    inset-block-start: to-rem(81px);
+    inset-inline-end: $spacing-05;
+    pointer-events: none;
+  }
+}
+
+:host(#{$prefix}-fluid-multi-select[warn]:not([disabled]):not([read-only])) {
+  .#{$prefix}--form__helper-text {
+    color: $text-primary;
+  }
+}
+
+:host(#{$prefix}-fluid-multi-select[invalid]:not([disabled]):not([read-only])) {
+  .#{$prefix}--form__helper-text {
+    color: $text-error;
   }
 }
 
@@ -113,5 +153,31 @@ $css--plex: true !default;
 
   .#{$prefix}--list-box__wrapper--decorator {
     @include ai-gradient;
+  }
+}
+// AI label dividers - always present
+:host(#{$prefix}-fluid-multi-select[ai-label]) ::slotted(#{$prefix}-ai-label) {
+  &::after {
+    position: absolute;
+    background-color: $border-subtle-01;
+    block-size: to-rem(16px);
+    content: '';
+    inline-size: to-rem(1px);
+    inset-inline-start: calc(#{$spacing-06} - to-rem(1px));
+  }
+}
+
+:host(#{$prefix}-fluid-multi-select[ai-label][read-only]),
+:host(#{$prefix}-fluid-multi-select[ai-label][disabled]) {
+  .#{$prefix}--list-box {
+    border-block-end-color: $ai-border-strong;
+  }
+
+  .#{$prefix}--list-box__field {
+    border-block-end: 1px solid $ai-border-strong;
+  }
+
+  ::slotted(#{$prefix}-ai-label)::before {
+    display: none;
   }
 }
