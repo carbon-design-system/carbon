@@ -494,7 +494,9 @@ class CDSPagination extends FocusMixin(HostListenerMixin(LitElement)) {
           inline
           value="${pageSize}"
           label-styles-disable>
-          <span slot="label-text"> ${itemsPerPageText} </span>
+          <span class="${prefix}--pagination__text" slot="label-text"
+            >${itemsPerPageText}</span
+          >
           <slot @slotchange=${handleSlotChange}></slot>
         </cds-select>
         <span

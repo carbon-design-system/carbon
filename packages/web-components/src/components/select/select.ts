@@ -520,7 +520,7 @@ class CDSSelect extends FormMixin(LitElement) {
 
     return html`
       <label class="${labelClasses}" for=${id}>
-        <slot name="label-text"> ${labelText} </slot>
+        <slot name="label-text">${labelText}</slot>
       </label>
 
       ${inline
