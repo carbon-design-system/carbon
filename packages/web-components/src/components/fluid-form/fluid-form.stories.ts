@@ -8,16 +8,15 @@
 import { html } from 'lit';
 import spread from '../../globals/directives/spread';
 import './index';
-import '../fluid-text-input/index';
-import '../fluid-textarea/index';
-import '../fluid-number-input/index';
-import '../fluid-select/index';
-import '../fluid-time-picker/index';
-import '../fluid-password-input/index';
-import '../select/index';
-import '../button/index';
-import '../modal/index';
-import '../fluid-search/index';
+import '../fluid-text-input';
+import '../fluid-textarea';
+import '../fluid-number-input';
+import '../fluid-select';
+import '../fluid-time-picker';
+import '../fluid-password-input';
+import '../button';
+import '../modal';
+import '../fluid-search';
 import '../fluid-password-input';
 
 const additionalProps = {
