@@ -8,6 +8,8 @@
 $css--plex: true !default;
 
 @use '@carbon/styles/scss/config' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/utilities/convert' as *;
 @use '@carbon/styles/scss/layout' as *;
 
 :host(#{$prefix}-layout) {
@@ -16,80 +18,4 @@ $css--plex: true !default;
   display: contents;
 }
 
-slot {
-  display: contents;
-}
-
-:host(#{$prefix}-layout[size='xs']) {
-  @extend .#{$prefix}--layout--size-xs;
-}
-
-:host(#{$prefix}-layout[size='sm']) {
-  @extend .#{$prefix}--layout--size-sm;
-}
-
-:host(#{$prefix}-layout[size='md']) {
-  @extend .#{$prefix}--layout--size-md;
-}
-
-:host(#{$prefix}-layout[size='lg']) {
-  @extend .#{$prefix}--layout--size-lg;
-}
-
-:host(#{$prefix}-layout[size='xl']) {
-  @extend .#{$prefix}--layout--size-xl;
-}
-
-:host(#{$prefix}-layout[size='2xl']) {
-  @extend .#{$prefix}--layout--size-2xl;
-}
-
-:host(#{$prefix}-layout[density='condensed']) {
-  @extend .#{$prefix}--layout--density-condensed;
-}
-
-:host(#{$prefix}-layout[density='normal']) {
-  @extend .#{$prefix}--layout--density-normal;
-}
-
-:host(#{$prefix}-layout-constraint) {
-  @include emit-layout-tokens();
-
-  display: contents;
-}
-
-:host(#{$prefix}-layout-constraint[size-default='xs']) {
-  @extend .#{$prefix}--layout-constraint--size__default-xs;
-}
-
-:host(#{$prefix}-layout-constraint[size-default='sm']) {
-  @extend .#{$prefix}--layout-constraint--size__default-sm;
-}
-
-:host(#{$prefix}-layout-constraint[size-default='md']) {
-  @extend .#{$prefix}--layout-constraint--size__default-md;
-}
-
-:host(#{$prefix}-layout-constraint[size-default='lg']) {
-  @extend .#{$prefix}--layout-constraint--size__default-lg;
-}
-
-:host(#{$prefix}-layout-constraint[size-min='sm']) {
-  @extend .#{$prefix}--layout-constraint--size__min-sm;
-}
-
-:host(#{$prefix}-layout-constraint[size-min='md']) {
-  @extend .#{$prefix}--layout-constraint--size__min-md;
-}
-
-:host(#{$prefix}-layout-constraint[size-max='sm']) {
-  @extend .#{$prefix}--layout-constraint--size__max-sm;
-}
-
-:host(#{$prefix}-layout-constraint[size-max='md']) {
-  @extend .#{$prefix}--layout-constraint--size__max-md;
-}
-
-:host(#{$prefix}-layout-constraint[size-max='lg']) {
-  @extend .#{$prefix}--layout-constraint--size__max-lg;
-}
+@include emit-layout-tokens-to-shadow-host('#{$prefix}-layout');

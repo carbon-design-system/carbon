@@ -12,7 +12,6 @@ import './index';
 import '../layer/index';
 import '../../../.storybook/templates/with-layer';
 import styles from './accordion.scss?lit';
-import '../layout/index';
 
 const sizes = {
   [`Small size (${ACCORDION_SIZE.SMALL})`]: ACCORDION_SIZE.SMALL,
@@ -288,26 +287,6 @@ export const WithLayer = {
       </sb-template-layers>
     `;
   },
-};
-
-export const WithLayoutContext = {
-  render: () => html`
-    <cds-layout size="sm">
-      <cds-accordion>
-        <cds-accordion-item title="Accordion item sm">
-          Inherits sm from layout context.
-        </cds-accordion-item>
-      </cds-accordion>
-    </cds-layout>
-
-    <cds-layout size="lg">
-      <cds-accordion>
-        <cds-accordion-item title="Accordion item lg">
-          Inherits lg from layout context.
-        </cds-accordion-item>
-      </cds-accordion>
-    </cds-layout>
-  `,
 };
 
 const meta = {

@@ -183,19 +183,7 @@ const sharedArgTypes = {
     },
   },
 };
-export const WithLayoutContext = {
-  render: () => html`
-    <cds-layout size="sm">
-      <cds-text-input label="Text input sm"></cds-text-input>
-    </cds-layout>
 
-    <br />
-
-    <cds-layout size="lg">
-      <cds-text-input label="Text input xl"></cds-text-input>
-    </cds-layout>
-  `,
-};
 const renderTextInput = (args: TextInputStoryArgs, children?: unknown) => html`
   <cds-text-input
     ?disabled=${args.disabled}
