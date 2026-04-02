@@ -17,7 +17,6 @@ import '../form/form-item';
 import '../ai-label';
 import '../icon-button';
 import { INPUT_SIZE } from './text-input';
-import '../layout/index';
 
 const content = html`
   <div slot="body-text">

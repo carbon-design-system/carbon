@@ -244,6 +244,9 @@ class CDSTextInput extends ValidityMixin(FormMixin(LitElement)) {
   })
   showPasswordVisibilityToggle = false;
 
+  /**
+   * The input box size.
+   */
   @property({ reflect: true })
   size = INPUT_SIZE.MEDIUM;
 
