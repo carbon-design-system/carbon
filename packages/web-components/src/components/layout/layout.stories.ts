@@ -12,6 +12,7 @@ import '../button/index';
 import '../tag/index';
 import '../text-input/index';
 import '../stack/index';
+import docs from './layout.mdx';
 import { LAYOUT_SIZES, LAYOUT_DENSITIES } from './layout';
 
 const Demo = () => html`
@@ -87,6 +88,19 @@ export const Default = {
 
 const meta = {
   title: 'Preview/preview__Layout',
+  component: 'cds-layout',
+  parameters: {
+    docs: {
+      page: docs,
+    },
+  },
+  argTypes: {
+    styles: {
+      table: {
+        disable: true,
+      },
+    },
+  },
 };
 
 export default meta;

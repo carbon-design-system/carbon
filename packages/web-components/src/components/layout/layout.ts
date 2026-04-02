@@ -19,7 +19,7 @@ export type LayoutDensity = (typeof LAYOUT_DENSITIES)[number];
 /**
  * `<cds-layout>` sets a layout context (size and/or density) for all
  * descendant Carbon components.
- * 
+ *
  * @see This component is in {@link https://web-components.carbondesignsystem.com/?path=/docs/preview-about-preview--about-preview|preview status}
  *
  * @element cds-layout

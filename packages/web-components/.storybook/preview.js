@@ -11,7 +11,6 @@ import container from './container';
 import { white, g10, g90, g100 } from '@carbon/themes';
 import { breakpoints } from '@carbon/layout';
 import theme from './theme';
-import './templates/with-layer';
 import { html } from 'lit';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import './_container.scss';
