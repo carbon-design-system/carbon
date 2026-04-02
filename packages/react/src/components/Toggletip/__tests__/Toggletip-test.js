@@ -516,14 +516,7 @@ describe('Toggletip', () => {
     });
 
     describe('Shadow DOM Support', () => {
-      // In Shadow DOM, event.target gets retargeted to the shadow host at shadow boundaries,
-      // making it unreliable for determining if a click occurred inside or outside a component.
-      // The composedPath() method provides the complete event path through shadow boundaries.
-      // The implementation checks if ref.current exists anywhere in the composed path, which is
-      // more reliable than checking just path[0] for complex nested Shadow trees.
-      // These tests verify the component handles both composedPath (modern browsers) and falls
-      // back to event.target (older browsers).
-
+      // Tests verify handling of event.target retargeting in Shadow DOM using composedPath()
       it('should not close when clicking inside the toggletip in Shadow DOM context', async () => {
         const { container } = render(
           <Toggletip data-testid="toggletip" defaultOpen>
@@ -537,17 +530,14 @@ describe('Toggletip', () => {
         const innerContent = screen.getByTestId('inner-content');
         const toggletip = screen.getByTestId('toggletip');
 
-        // Simulate Shadow DOM: event.target is retargeted to shadow host,
-        // but composedPath() contains the full lineage including the actual click target
         const mockEvent = new MouseEvent('mousedown', { bubbles: true });
         Object.defineProperty(mockEvent, 'composedPath', {
           value: () => [innerContent, toggletip, document.body],
         });
         Object.defineProperty(mockEvent, 'target', {
-          value: toggletip, // Retargeted to shadow host
+          value: toggletip,
         });
 
-        // Dispatch on document to match real-world outside click handler behavior
         fireEvent(document, mockEvent);
 
         expect(screen.getByRole('button')).toHaveAttribute(
@@ -569,7 +559,6 @@ describe('Toggletip', () => {
 
         const toggletip = screen.getByTestId('toggletip');
 
-        // Create a mock event with composedPath that simulates clicking outside
         const outsideElement = document.createElement('div');
         document.body.appendChild(outsideElement);
 
@@ -605,17 +594,14 @@ describe('Toggletip', () => {
         const innerContent = screen.getByTestId('inner-content');
         const toggletip = screen.getByTestId('toggletip');
 
-        // Create a mock event without composedPath to test fallback behavior
         const mockEvent = new MouseEvent('mousedown', { bubbles: true });
         delete mockEvent.composedPath;
         Object.defineProperty(mockEvent, 'target', {
           value: innerContent,
         });
 
-        // Dispatch on document to match real-world handler
         fireEvent(document, mockEvent);
 
-        // Should remain open using fallback contains() check on event.target
         expect(screen.getByRole('button')).toHaveAttribute(
           'aria-expanded',
           'true'

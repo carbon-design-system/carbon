@@ -185,7 +185,6 @@ export function Toggletip<E extends ElementType = 'span'>({
       const isInsideCurrent = (target: EventTarget | null): target is Node =>
         target instanceof Node && current.contains(target);
 
-      // Check target first (perf), then fallback to composedPath (Shadow DOM)
       const isInside =
         isInsideCurrent(event.target) ||
         (typeof event.composedPath === 'function' &&
