@@ -130,7 +130,12 @@ export const Default = (args) => {
               <SelectItem value="pt" text="Pacific Time (PT)" />
             </FluidTimePickerSelect>
           </FluidTimePicker>
-          <FluidDatePicker datePickerType="range" invalid={invalid} warn={warn}>
+          <FluidDatePicker
+            datePickerType="range"
+            invalid={invalid}
+            warn={warn}
+            disabled={disabled}
+            readOnly={readOnly}>
             <FluidDatePickerInput
               id="date-picker-input-id-start"
               placeholder="mm/dd/yyyy"
