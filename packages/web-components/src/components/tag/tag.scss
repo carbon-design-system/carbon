@@ -123,64 +123,147 @@ $css--plex: true !default;
   padding-inline-start: $spacing-03;
 }
 
-:host(#{$prefix}-operational-tag[type='red']:not([disabled])) #{$prefix}-tag,
+// Operational tags - use @include (mixin handles borders via .cds--tag--operational class)
+:host(#{$prefix}-operational-tag[type='red']:not([disabled])) #{$prefix}-tag {
+  @include tag-theme(
+    $tag-background-red,
+    $tag-color-red,
+    $tag-hover-red,
+    $tag-border-red
+  );
+}
+
+// Dismissible and regular tags - use @extend
 :host(#{$prefix}-dismissible-tag[type='red']:not([disabled])),
 :host(#{$prefix}-tag[type='red']:not([disabled])) {
   @extend .#{$prefix}--tag--red;
 }
 
 :host(#{$prefix}-operational-tag[type='magenta']:not([disabled]))
-  #{$prefix}-tag,
+  #{$prefix}-tag {
+  @include tag-theme(
+    $tag-background-magenta,
+    $tag-color-magenta,
+    $tag-hover-magenta,
+    $tag-border-magenta
+  );
+}
+
 :host(#{$prefix}-dismissible-tag[type='magenta']:not([disabled])),
 :host(#{$prefix}-tag[type='magenta']:not([disabled])) {
   @extend .#{$prefix}--tag--magenta;
 }
 
-:host(#{$prefix}-operational-tag[type='purple']:not([disabled])) #{$prefix}-tag,
+:host(#{$prefix}-operational-tag[type='purple']:not([disabled]))
+  #{$prefix}-tag {
+  @include tag-theme(
+    $tag-background-purple,
+    $tag-color-purple,
+    $tag-hover-purple,
+    $tag-border-purple
+  );
+}
+
 :host(#{$prefix}-dismissible-tag[type='purple']:not([disabled])),
 :host(#{$prefix}-tag[type='purple']:not([disabled])) {
   @extend .#{$prefix}--tag--purple;
 }
 
-:host(#{$prefix}-operational-tag[type='blue']:not([disabled])) #{$prefix}-tag,
+:host(#{$prefix}-operational-tag[type='blue']:not([disabled])) #{$prefix}-tag {
+  @include tag-theme(
+    $tag-background-blue,
+    $tag-color-blue,
+    $tag-hover-blue,
+    $tag-border-blue
+  );
+}
+
 :host(#{$prefix}-dismissible-tag[type='blue']:not([disabled])),
 :host(#{$prefix}-tag[type='blue']:not([disabled])) {
   @extend .#{$prefix}--tag--blue;
 }
 
-:host(#{$prefix}-operational-tag[type='cyan']:not([disabled])) #{$prefix}-tag,
+:host(#{$prefix}-operational-tag[type='cyan']:not([disabled])) #{$prefix}-tag {
+  @include tag-theme(
+    $tag-background-cyan,
+    $tag-color-cyan,
+    $tag-hover-cyan,
+    $tag-border-cyan
+  );
+}
+
 :host(#{$prefix}-dismissible-tag[type='cyan']:not([disabled])),
 :host(#{$prefix}-tag[type='cyan']:not([disabled])) {
   @extend .#{$prefix}--tag--cyan;
 }
 
-:host(#{$prefix}-operational-tag[type='teal']:not([disabled])) #{$prefix}-tag,
+:host(#{$prefix}-operational-tag[type='teal']:not([disabled])) #{$prefix}-tag {
+  @include tag-theme(
+    $tag-background-teal,
+    $tag-color-teal,
+    $tag-hover-teal,
+    $tag-border-teal
+  );
+}
+
 :host(#{$prefix}-dismissible-tag[type='teal']:not([disabled])),
 :host(#{$prefix}-tag[type='teal']:not([disabled])) {
   @extend .#{$prefix}--tag--teal;
 }
 
-:host(#{$prefix}-operational-tag[type='green']:not([disabled])) #{$prefix}-tag,
+:host(#{$prefix}-operational-tag[type='green']:not([disabled])) #{$prefix}-tag {
+  @include tag-theme(
+    $tag-background-green,
+    $tag-color-green,
+    $tag-hover-green,
+    $tag-border-green
+  );
+}
+
 :host(#{$prefix}-dismissible-tag[type='green']:not([disabled])),
 :host(#{$prefix}-tag[type='green']:not([disabled])) {
   @extend .#{$prefix}--tag--green;
 }
 
-:host(#{$prefix}-operational-tag[type='gray']:not([disabled])) #{$prefix}-tag,
+:host(#{$prefix}-operational-tag[type='gray']:not([disabled])) #{$prefix}-tag {
+  @include tag-theme(
+    $tag-background-gray,
+    $tag-color-gray,
+    $tag-hover-gray,
+    $tag-border-gray
+  );
+}
+
 :host(#{$prefix}-dismissible-tag[type='gray']:not([disabled])),
 :host(#{$prefix}-tag[type='gray']:not([disabled])) {
   @extend .#{$prefix}--tag--gray;
 }
 
 :host(#{$prefix}-operational-tag[type='cool-gray']:not([disabled]))
-  #{$prefix}-tag,
+  #{$prefix}-tag {
+  @include tag-theme(
+    $tag-background-cool-gray,
+    $tag-color-cool-gray,
+    $tag-hover-cool-gray,
+    $tag-border-cool-gray
+  );
+}
+
 :host(#{$prefix}-dismissible-tag[type='cool-gray']:not([disabled])),
 :host(#{$prefix}-tag[type='cool-gray']:not([disabled])) {
   @extend .#{$prefix}--tag--cool-gray;
 }
 
 :host(#{$prefix}-operational-tag[type='warm-gray']:not([disabled]))
-  #{$prefix}-tag,
+  #{$prefix}-tag {
+  @include tag-theme(
+    $tag-background-warm-gray,
+    $tag-color-warm-gray,
+    $tag-hover-warm-gray,
+    $tag-border-warm-gray
+  );
+}
+
 :host(#{$prefix}-dismissible-tag[type='warm-gray']:not([disabled])),
 :host(#{$prefix}-tag[type='warm-gray']:not([disabled])) {
   @extend .#{$prefix}--tag--warm-gray;

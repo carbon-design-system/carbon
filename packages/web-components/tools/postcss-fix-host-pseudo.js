@@ -69,6 +69,15 @@ export default function fixHostPseudo() {
                   'Found :host() with more than one child or with a non-selector child. Skipping...'
                 );
               } else {
+                // Check if :host() is followed by a combinator (descendant, child, etc.)
+                // If so, skip processing to avoid breaking complex selectors like:
+                // :host(cds-operational-tag) cds-tag
+                const nextNode = pseudo.next();
+                if (nextNode && nextNode.type === 'combinator') {
+                  // Skip this :host() - it's part of a complex selector with descendants
+                  return;
+                }
+
                 const pseudosToMove = [];
                 for (
                   let precedingNode = pseudo.prev();
