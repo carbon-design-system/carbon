@@ -123,7 +123,6 @@ $css--plex: true !default;
   padding-inline-start: $spacing-03;
 }
 
-// Operational tags - use @include (mixin handles borders via .cds--tag--operational class)
 :host(#{$prefix}-operational-tag[type='red']:not([disabled])) #{$prefix}-tag {
   @include tag-theme(
     $tag-background-red,
@@ -133,7 +132,6 @@ $css--plex: true !default;
   );
 }
 
-// Dismissible and regular tags - use @extend
 :host(#{$prefix}-dismissible-tag[type='red']:not([disabled])),
 :host(#{$prefix}-tag[type='red']:not([disabled])) {
   @extend .#{$prefix}--tag--red;
