@@ -222,7 +222,7 @@ export const SmallPersistentToolbar = (args) => (
             <Button onClick={action('Button click')}>Primary Button</Button>
           </TableToolbarContent>
         </TableToolbar>
-        <Table {...getTableProps()} size="sm" aria-label="sample table">
+        <Table {...getTableProps()} size="xs" aria-label="sample table">
           <TableHead>
             <TableRow>
               {headers.map((header) => (

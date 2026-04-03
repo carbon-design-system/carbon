@@ -362,7 +362,7 @@ export const PersistentToolbar = {
 
 export const SmallPersistentToolbar = {
   render: () => html`
-    <cds-table size="sm">
+    <cds-table size="xs">
       <cds-table-header-title slot="title">DataTable</cds-table-header-title>
       <cds-table-header-description slot="description"
         >With toolbar</cds-table-header-description
