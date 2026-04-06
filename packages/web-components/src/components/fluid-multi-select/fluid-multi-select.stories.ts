@@ -123,7 +123,7 @@ const argTypes = {
     description: 'Disable the control.',
   },
   direction: {
-    control: 'select',
+    control: 'radio',
     description:
       'Specify the direction of the multiselect dropdown. Can be either top or bottom.',
     options: directionOptions,
@@ -315,6 +315,7 @@ export const Filterable = {
       invalidText,
       readOnly,
       defaultWidth,
+      isCondensed,
       titleText,
       selectionFeedback,
       size,
@@ -328,6 +329,7 @@ export const Filterable = {
         <cds-fluid-multi-select
           direction=${ifDefined(direction)}
           filterable="true"
+          ?is-condensed="${isCondensed}"
           ?disabled=${disabled}
           ?invalid=${invalid}
           invalid-text=${ifDefined(invalidText)}
@@ -371,6 +373,7 @@ export const FilterableWithLayer = {
       disabled,
       helperText,
       locale,
+      isCondensed,
       invalid,
       invalidText,
       readOnly,
@@ -388,6 +391,7 @@ export const FilterableWithLayer = {
           <cds-fluid-multi-select
             direction=${ifDefined(direction)}
             ?disabled=${disabled}
+            ?is-condensed=${isCondensed}
             ?invalid=${invalid}
             invalid-text=${ifDefined(invalidText)}
             clear-selection-label=${ifDefined(clearSelectionLabel)}
@@ -447,6 +451,7 @@ export const WithAILabel = {
       invalid,
       invalidText,
       titleText,
+      isCondensed,
       label,
       name,
       readOnly,
@@ -458,6 +463,7 @@ export const WithAILabel = {
     return html` <div style="width:${defaultWidth}px;">
       <cds-fluid-multi-select
         ?disabled="${disabled}"
+        ?is-condensed="${isCondensed}"
         title-text=${ifDefined(titleText)}
         ?invalid="${invalid}"
         invalid-text="${ifDefined(invalidText)}"
