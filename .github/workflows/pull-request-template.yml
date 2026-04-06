@@ -1,0 +1,28 @@
+name: Pull request
+on:
+  pull_request_target:
+    types: [opened, reopened, ready_for_review, edited]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+  issues: write
+  pull-requests: read
+
+jobs:
+  follows-pr-template:
+    name: Follows PR template
+    if:
+      ${{ !github.event.pull_request.draft && (github.event.action != 'edited'
+      || github.event.changes.body != null) }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          ref: ${{ github.event.pull_request.base.ref }}
+
+      - name: Validate PR body
+        uses: ./actions/validate-pr-template
