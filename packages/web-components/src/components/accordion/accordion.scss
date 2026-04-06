@@ -195,3 +195,23 @@ $css--plex: true !default;
 .controlled-accordion-btn {
   max-inline-size: 13.25rem;
 }
+.#{$prefix}--accordion--flush {
+  position: relative;
+  border-color: transparent;
+
+  &::before {
+    position: absolute;
+    display: block;
+    background: $layer-hover;
+    block-size: 1px;
+    content: '';
+    inline-size: calc(100% - 2rem);
+    inset-block-start: -1px;
+    inset-inline-start: 0;
+    margin-inline-start: 1rem;
+  }
+
+  &:focus::before {
+    background: none;
+  }
+}
