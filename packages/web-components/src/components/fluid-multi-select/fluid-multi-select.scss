@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp.2025
+ * Copyright IBM Corp.2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -65,7 +65,7 @@ $css--plex: true !default;
   }
 }
 
-// Target dropdown items inside fluid dropdown for non-condensed height
+// Target multiselect items inside fluid multiselect for non-condensed height
 :host(#{$prefix}-fluid-multi-select:not([is-condensed])) {
   ::slotted(#{$prefix}-multi-select-item) {
     block-size: $spacing-10;
@@ -121,14 +121,6 @@ $css--plex: true !default;
   ~ ::slotted(#{$prefix}-ai-label) {
   inset-inline-end: calc($spacing-10 + 18px);
 }
-
-// :host(#{$prefix}-multi-select-item) {
-//   .#{$prefix}--list-box__menu-item {
-//     :host-context(#{$prefix}-fluid-multi-select) & {
-//       block-size: $spacing-10;
-//     }
-//   }
-// }
 
 // Direction top
 :host(#{$prefix}-fluid-multi-select[direction='top']) {
