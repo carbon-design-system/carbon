@@ -194,9 +194,6 @@ export const Skeleton = {
   args,
   argTypes,
   parameters: {
-    percy: {
-      skip: true,
-    },
     controls: {
       include: ['hideLabel'],
     },
