@@ -202,13 +202,18 @@ $css--plex: true !default;
   &::before {
     position: absolute;
     display: block;
-    background: $layer-hover;
+    background: $border-subtle;
     block-size: 1px;
     content: '';
-    inline-size: calc(100% - 2rem);
+    inline-size: calc(100% - #{$spacing-05} - #{$spacing-05});
     inset-block-start: -1px;
     inset-inline-start: 0;
-    margin-inline-start: 1rem;
+    margin-inline-start: $spacing-05;
+    transition: background $duration-fast-02 motion(entrance, productive);
+
+    @media screen and (prefers-reduced-motion: reduce) {
+      transition: none;
+    }
   }
 
   &:focus::before {
