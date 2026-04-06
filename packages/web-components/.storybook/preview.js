@@ -11,7 +11,6 @@ import container from './container';
 import { white, g10, g90, g100 } from '@carbon/themes';
 import { breakpoints } from '@carbon/layout';
 import theme from './theme';
-import './templates/with-layer';
 
 import './_container.scss';
 
