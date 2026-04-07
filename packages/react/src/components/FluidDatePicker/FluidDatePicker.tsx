@@ -47,16 +47,7 @@ const FluidDatePicker = React.forwardRef<
   HTMLInputElement,
   FluidDatePickerProps
 >(function FluidDatePicker(
-  {
-    className,
-    children,
-    invalid,
-    invalidText,
-    readOnly,
-    warn,
-    warnText,
-    ...other
-  },
+  { className, children, invalid, readOnly, warn, ...other },
   ref
 ) {
   const prefix = usePrefix();
@@ -71,10 +62,8 @@ const FluidDatePicker = React.forwardRef<
     <FormContext.Provider value={{ isFluid: true }}>
       <DatePicker
         invalid={invalid}
-        invalidText={invalidText}
         readOnly={readOnly}
         warn={warn}
-        warnText={warnText}
         className={classNames}
         ref={ref}
         {...other}>

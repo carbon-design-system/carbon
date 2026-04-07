@@ -17,6 +17,7 @@ import '../form/form-item';
 import '../ai-label';
 import '../icon-button';
 import { INPUT_SIZE } from './text-input';
+import { withLayers } from '../../../.storybook/decorators/with-layers';
 
 const content = html`
   <div slot="body-text">
@@ -286,14 +287,16 @@ export const WithAILabel = {
 };
 
 export const WithLayer = {
+  decorators: [withLayers],
+  parameters: {
+    layout: 'fullscreen',
+  },
   args: sharedArgs,
   argTypes: sharedArgTypes,
   render: (args: TextInputStoryArgs) => html`
-    <sb-template-layers>
-      <div style=${args.defaultWidth ? `width: ${args.defaultWidth}px;` : ''}>
-        ${renderTextInput(args)}
-      </div>
-    </sb-template-layers>
+    <div style=${args.defaultWidth ? `width: ${args.defaultWidth}px;` : ''}>
+      ${renderTextInput(args)}
+    </div>
   `,
 };
 

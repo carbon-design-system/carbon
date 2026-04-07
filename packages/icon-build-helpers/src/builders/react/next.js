@@ -207,6 +207,10 @@ async function builder(metadata, { output }) {
         return {
           ...options,
           banner: templates.banner,
+          // use .js extension for both entries and chunks so that
+          // CJS chunks (e.g. rolldown runtime helpers) don't get a
+          // .cjs extension which breaks Jest moduleFileExtensions
+          chunkFileNames: '[name]-[hash].js',
           entryFileNames: '[name]',
           exports: 'auto',
         };
