@@ -6,6 +6,7 @@
  */
 
 import { html, nothing } from 'lit';
+import { action } from 'storybook/actions';
 import { TABS_TYPE } from './tabs';
 import styles from './tabs-story.scss?lit';
 import { prefix } from '../../globals/settings';
@@ -258,22 +259,34 @@ export const skeleton = {
 
 export const Vertical = {
   args: {
-    ...args,
+    selectionMode: 'automatic',
+    selectedIndex: 0,
     customHeight: '',
   },
   argTypes: {
-    ...argTypes,
+    selectionMode: {
+      control: 'select',
+      description:
+        'Choose whether or not to automatically change selection on focus when left/right arrow pressed.',
+      options: ['automatic', 'manual'],
+    },
+    selectedIndex: {
+      control: 'number',
+      description: 'Specify a selected index for the initially selected tab.',
+    },
     customHeight: {
       control: 'text',
       description:
         'Optional height for the vertical tabs container. Accepts any valid CSS height value (e.g. "500px", "50vh"). If omitted, the container grows to fit its content.',
     },
   },
-  render: ({ disabled, contained, selectionMode, customHeight }) => {
+  render: ({ selectionMode, selectedIndex, customHeight }) => {
     const handleBeforeSelected = (event: CustomEvent) => {
-      if (disabled) {
-        event.preventDefault();
-      }
+      action('cds-tabs-beingselected')(event.detail);
+    };
+
+    const handleSelected = (event: CustomEvent) => {
+      action('cds-tabs-selected')(event.detail);
     };
 
     return html`
@@ -283,11 +296,11 @@ export const Vertical = {
       <cds-tabs-vertical custom-height="${customHeight || nothing}">
         <cds-tabs
           slot="tabs"
-          disabled="${disabled}"
           selection-mode="${selectionMode}"
-          type="${contained ? TABS_TYPE.CONTAINED : null}"
+          selected-index="${selectedIndex}"
           value="all"
-          @cds-tabs-beingselected="${handleBeforeSelected}">
+          @cds-tabs-beingselected="${handleBeforeSelected}"
+          @cds-tabs-selected="${handleSelected}">
           <cds-tab id="tab-all" target="panel-all" value="all"
             >Dashboard</cds-tab
           >
