@@ -185,3 +185,5 @@ export { default as preview__CDSDialogFooterButton } from './components/dialog/d
 export { default as preview__CDSDialogHeader } from './components/dialog/dialog-header';
 export { default as preview__CDSDialogSubtitle } from './components/dialog/dialog-subtitle';
 export { default as preview__CDSDialogTitle } from './components/dialog/dialog-title';
+export { default as CDSLayout } from './components/layout/layout';
+export { default as CDSLayoutConstraint } from './components/layout/layout-constraint';
