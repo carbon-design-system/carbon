@@ -18,47 +18,49 @@ const sizes = {
 const defaultArgs = {
   toggled: true,
   labelText: 'Label',
+  labelA: 'On',
+  labelB: 'Off',
+  disabled: false,
+  hideLabel: false,
+  readOnly: false,
 };
 
 const smallToggleArgs = {
   toggled: true,
   labelText: 'Label',
+  labelA: 'On',
+  labelB: 'Off',
   size: 'sm',
+  disabled: false,
+  hideLabel: false,
+  readOnly: false,
 };
 
 const controls = {
   disabled: {
     control: 'boolean',
-    description: 'Whether the toggle should be disabled',
   },
   hideLabel: {
     control: 'boolean',
-    description: 'Whether to hide the label text',
   },
   labelA: {
     control: 'text',
-    description: 'The label for the "on" state',
   },
   labelB: {
     control: 'text',
-    description: 'The label for the "off" state',
   },
   labelText: {
     control: 'text',
-    description: 'The text label for the toggle',
   },
   readOnly: {
     control: 'boolean',
-    description: 'Whether the toggle is read-only',
   },
   size: {
     control: 'radio',
     options: sizes,
-    description: 'Specify the size of the toggle',
   },
   toggled: {
     control: 'boolean',
-    description: 'Whether the toggle is currently on',
   },
 };
 
