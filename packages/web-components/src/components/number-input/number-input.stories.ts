@@ -19,6 +19,11 @@ import '../form/form-item';
 import '../ai-label';
 import '../icon-button';
 
+const reusableProps = {
+  min: -100000000,
+  max: 100000000,
+};
+
 const content = html`
   <div slot="body-text">
     <p class="secondary">AI Explained</p>
@@ -65,13 +70,13 @@ const args = {
   hideLabel: false,
   hideSteppers: false,
   invalid: false,
-  invalidText: 'Number is not valid',
-  label: 'number-input label',
+  invalidText: 'Number is not valid. Must be between -100 and 100',
+  label: 'NumberInput label',
   readOnly: false,
   value: 50,
   warn: false,
   warnText: 'Warning text',
-  min: 0,
+  min: -100,
   max: 100,
   step: 1,
   size: INPUT_SIZE.MEDIUM,
@@ -318,78 +323,18 @@ export const WithAILabel = {
       <div style="width: 400px">
         <cds-number-input
           value="50"
-          min="0"
-          max="100"
+          min="${reusableProps.min}"
+          max="${reusableProps.max}"
           step="1"
-          label="Number input"
+          label="NumberInput label"
           helper-text="Optional helper text."
-          invalid-text="Invalid value"
+          invalid-text="Number is not valid"
           @cds-number-input="${onInput}">
           <cds-ai-label alignment="bottom-left">
             ${content}${actions}
           </cds-ai-label>
         </cds-number-input>
       </div>
-    `;
-  },
-};
-
-export const WithTypeOfText = {
-  argTypes,
-  render: (args, { globals: { locale } }) => {
-    const { onInput } = args ?? {};
-    return html`
-      <cds-form-item>
-        <cds-number-input
-          type="text"
-          input-mode="decimal"
-          allow-empty
-          default-value="50"
-          min="0"
-          max="100000000"
-          step="1"
-          locale="${locale}"
-          label="NumberInput label"
-          invalid-text="Number is not valid. Must be between 0 and 100000000"
-          helper-text="Optional helper text. Uses ${locale} formatting."
-          @cds-number-input="${onInput}">
-        </cds-number-input>
-      </cds-form-item>
-    `;
-  },
-};
-
-export const WithTypeOfTextControlled = {
-  argTypes,
-  render: (args, { globals: { locale } }) => {
-    const { onInput } = args ?? {};
-    return html`
-      <cds-form-item>
-        <cds-number-input
-          id="controlled-number-input"
-          type="text"
-          input-mode="decimal"
-          allow-empty
-          min="0"
-          max="100000000"
-          step="1"
-          locale="${locale}"
-          label="NumberInput label"
-          helper-text="Optional helper text. Uses ${locale} formatting."
-          @cds-number-input="${onInput}">
-        </cds-number-input>
-      </cds-form-item>
-      <button
-        @click="${() => {
-          const input = document.querySelector(
-            '#controlled-number-input'
-          ) as HTMLElement & { value: string };
-          if (input) {
-            input.value = '50';
-          }
-        }}">
-        set to 50
-      </button>
     `;
   },
 };
@@ -512,9 +457,9 @@ export const WithTypeOfCustomValidation = {
           type="text"
           input-mode="decimal"
           allow-empty
-          min="-100000000"
-          invalid-text="Number is not valid. Must be between -100000000 and 100000000"
-          max="100000000"
+          min="${reusableProps.min}"
+          invalid-text="Number is not valid. Must be between ${reusableProps.min} and ${reusableProps.max}"
+          max="${reusableProps.max}"
           step="1"
           locale="${locale}"
           label="NumberInput label"
@@ -538,6 +483,66 @@ export const WithTypeOfCustomValidation = {
   },
 };
 
+export const WithTypeOfText = {
+  argTypes,
+  render: (args, { globals: { locale } }) => {
+    const { onInput } = args ?? {};
+    return html`
+      <cds-form-item>
+        <cds-number-input
+          type="text"
+          input-mode="decimal"
+          allow-empty
+          default-value="50"
+          min="${reusableProps.min}"
+          max="${reusableProps.max}"
+          step="1"
+          locale="${locale}"
+          label="NumberInput label"
+          invalid-text="Number is not valid. Must be between ${reusableProps.min} and ${reusableProps.max}"
+          helper-text="Optional helper text. Uses ${locale} formatting."
+          @cds-number-input="${onInput}">
+        </cds-number-input>
+      </cds-form-item>
+    `;
+  },
+};
+
+export const WithTypeOfTextControlled = {
+  argTypes,
+  render: (args, { globals: { locale } }) => {
+    const { onInput } = args ?? {};
+    return html`
+      <cds-form-item>
+        <cds-number-input
+          id="controlled-number-input"
+          type="text"
+          input-mode="decimal"
+          allow-empty
+          min="0"
+          max="100000000"
+          step="1"
+          locale="${locale}"
+          label="NumberInput label"
+          helper-text="Optional helper text. Uses ${locale} formatting."
+          @cds-number-input="${onInput}">
+        </cds-number-input>
+      </cds-form-item>
+      <button
+        @click="${() => {
+          const input = document.querySelector(
+            '#controlled-number-input'
+          ) as HTMLElement & { value: string };
+          if (input) {
+            input.value = '50';
+          }
+        }}">
+        set to 50
+      </button>
+    `;
+  },
+};
+
 // Hidden Test-Only Story for an issue where invalid with AI-Label had incorrect styling. #20117
 export const InvalidWithAILabel = {
   tags: ['!dev', '!autodocs'], // hide story
@@ -551,7 +556,7 @@ export const InvalidWithAILabel = {
           min="0"
           max="100"
           step="1"
-          label="Number input"
+          label="NumberInput label"
           invalid
           invalid-text="invalid"
           @cds-number-input="${onInput}">
@@ -577,7 +582,7 @@ export const WarnWithAILabel = {
           min="0"
           max="100"
           step="1"
-          label="Number input"
+          label="NumberInput label"
           warn
           warn-text="warning"
           @cds-number-input="${onInput}">
