@@ -22,6 +22,7 @@ import {
   SELECTION_FEEDBACK_OPTION,
 } from '../multi-select/multi-select';
 import '../multi-select/index';
+import { withLayers } from '../../../.storybook/decorators/with-layers';
 
 const content = html`
   <div slot="body-text">
@@ -363,6 +364,10 @@ export const Filterable = {
 };
 
 export const FilterableWithLayer = {
+  decorators: [withLayers],
+  parameters: {
+    layout: 'fullscreen',
+  },
   args: filterableArgs,
   argTypes,
   render: (args) => {
@@ -386,44 +391,40 @@ export const FilterableWithLayer = {
       warnText,
     } = args ?? {};
     return html`
-      <sb-template-layers>
-        <div style="width:${defaultWidth}px">
-          <cds-fluid-multi-select
-            direction=${ifDefined(direction)}
-            ?disabled=${disabled}
-            ?is-condensed=${isCondensed}
-            ?invalid=${invalid}
-            invalid-text=${ifDefined(invalidText)}
-            clear-selection-label=${ifDefined(clearSelectionLabel)}
-            helper-text=${ifDefined(helperText)}
-            locale=${ifDefined(locale)}
-            ?read-only=${readOnly}
-            title-text=${ifDefined(titleText)}
-            selection-feedback=${ifDefined(selectionFeedback)}
-            size=${ifDefined(size)}
-            ?warn=${warn}
-            warn-text=${ifDefined(warnText)}
-            label=${ifDefined(label)}
-            value="${ifDefined(value)}"
-            filterable="true">
-            <cds-multi-select-item value="example"
-              >An example option that is really long to show what should be done
-              to handle long text</cds-multi-select-item
-            >
-            <cds-multi-select-item value="all">Option 1</cds-multi-select-item>
-            <cds-multi-select-item value="cloudFoundry"
-              >Option 2</cds-multi-select-item
-            >
-            <cds-multi-select-item disabled value="staging"
-              >Option 3 - a disabled item</cds-multi-select-item
-            >
-            <cds-multi-select-item value="dea">Option 4</cds-multi-select-item>
-            <cds-multi-select-item value="router"
-              >Option 5</cds-multi-select-item
-            >
-          </cds-fluid-multi-select>
-        </div>
-      </sb-template-layers>
+      <div style="width:${defaultWidth}px">
+        <cds-fluid-multi-select
+          direction=${ifDefined(direction)}
+          ?disabled=${disabled}
+          ?is-condensed=${isCondensed}
+          ?invalid=${invalid}
+          invalid-text=${ifDefined(invalidText)}
+          clear-selection-label=${ifDefined(clearSelectionLabel)}
+          helper-text=${ifDefined(helperText)}
+          locale=${ifDefined(locale)}
+          ?read-only=${readOnly}
+          title-text=${ifDefined(titleText)}
+          selection-feedback=${ifDefined(selectionFeedback)}
+          size=${ifDefined(size)}
+          ?warn=${warn}
+          warn-text=${ifDefined(warnText)}
+          label=${ifDefined(label)}
+          value="${ifDefined(value)}"
+          filterable="true">
+          <cds-multi-select-item value="example"
+            >An example option that is really long to show what should be done
+            to handle long text</cds-multi-select-item
+          >
+          <cds-multi-select-item value="all">Option 1</cds-multi-select-item>
+          <cds-multi-select-item value="cloudFoundry"
+            >Option 2</cds-multi-select-item
+          >
+          <cds-multi-select-item disabled value="staging"
+            >Option 3 - a disabled item</cds-multi-select-item
+          >
+          <cds-multi-select-item value="dea">Option 4</cds-multi-select-item>
+          <cds-multi-select-item value="router">Option 5</cds-multi-select-item>
+        </cds-fluid-multi-select>
+      </div>
     `;
   },
 };

@@ -63,6 +63,10 @@ $css--plex: true !default;
   .#{$prefix}--tag.#{$prefix}--tag--filter {
     margin-block-start: 0;
   }
+
+  .#{$prefix}--list-box__selection--multi::after {
+    display: none;
+  }
 }
 
 // Target multiselect items inside fluid multiselect for non-condensed height
@@ -114,6 +118,9 @@ $css--plex: true !default;
     .#{$prefix}--list-box__field {
       padding-inline-end: $spacing-01;
     }
+  }
+  .#{$prefix}--list-box__selection {
+    inset-block-start: 66%;
   }
 }
 :host(#{$prefix}-fluid-multi-select[filterable][has-value])
