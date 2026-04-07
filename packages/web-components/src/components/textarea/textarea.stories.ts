@@ -15,6 +15,7 @@ import './index';
 import '../form/form-item';
 import '../ai-label';
 import '../icon-button';
+import { withLayers } from '../../../.storybook/decorators/with-layers';
 
 const content = html`
   <div slot="body-text">
@@ -194,9 +195,6 @@ export const Skeleton = {
   args,
   argTypes,
   parameters: {
-    percy: {
-      skip: true,
-    },
     controls: {
       include: ['hideLabel'],
     },
@@ -254,6 +252,10 @@ export const WithAILabel = {
 };
 
 export const WithLayer = {
+  decorators: [withLayers],
+  parameters: {
+    layout: 'fullscreen',
+  },
   args: { ...args, helperText: 'Optional helper text', enableCounter: false },
   argTypes,
   render: ({
@@ -275,27 +277,25 @@ export const WithLayer = {
     warn,
     warnText,
   }) => html`
-    <sb-template-layers>
-      <cds-textarea
-        ?enable-counter="${enableCounter}"
-        counter-mode="${ifDefined(counterMode)}"
-        helper-text="${ifDefined(helperText)}"
-        ?hide-label="${hideLabel}"
-        ?invalid="${invalid}"
-        invalid-text="${ifDefined(invalidText)}"
-        label="${ifDefined(label)}"
-        ?readonly="${readonly}"
-        value="${ifDefined(value)}"
-        ?warn="${warn}"
-        warn-text="${ifDefined(warnText)}"
-        ?disabled="${disabled}"
-        max-count="${ifDefined(maxCount)}"
-        placeholder="${ifDefined(placeholder)}"
-        @input="${onInput}"
-        rows="${ifDefined(rows)}"
-        cols="${ifDefined(cols)}">
-      </cds-textarea>
-    </sb-template-layers>
+    <cds-textarea
+      ?enable-counter="${enableCounter}"
+      counter-mode="${ifDefined(counterMode)}"
+      helper-text="${ifDefined(helperText)}"
+      ?hide-label="${hideLabel}"
+      ?invalid="${invalid}"
+      invalid-text="${ifDefined(invalidText)}"
+      label="${ifDefined(label)}"
+      ?readonly="${readonly}"
+      value="${ifDefined(value)}"
+      ?warn="${warn}"
+      warn-text="${ifDefined(warnText)}"
+      ?disabled="${disabled}"
+      max-count="${ifDefined(maxCount)}"
+      placeholder="${ifDefined(placeholder)}"
+      @input="${onInput}"
+      rows="${ifDefined(rows)}"
+      cols="${ifDefined(cols)}">
+    </cds-textarea>
   `,
 };
 

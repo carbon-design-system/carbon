@@ -417,11 +417,6 @@ export const Manual = {
 };
 
 export const skeleton = {
-  parameters: {
-    percy: {
-      skip: true,
-    },
-  },
   render: () => html`
     <cds-tabs-skeleton>
       <cds-tab-skeleton></cds-tab-skeleton>
