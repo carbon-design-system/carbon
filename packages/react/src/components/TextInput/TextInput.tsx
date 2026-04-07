@@ -249,7 +249,9 @@ const TextInput = forwardRef<unknown, TextInputProps>(
       disabled: normalizedProps.disabled,
       readOnly,
       ['aria-describedby']:
-        helperText && !normalizedProps.invalid ? normalizedProps.helperId : undefined,
+        helperText && !normalizedProps.invalid
+          ? normalizedProps.helperId
+          : undefined,
       ...rest,
     };
 
