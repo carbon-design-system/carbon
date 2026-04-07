@@ -40,12 +40,37 @@ describe('cds-combo-box', function () {
       event.preventDefault();
     });
 
+    const initialInput = el.shadowRoot.querySelector('#trigger-button');
+    expect(initialInput.value).to.equal('Option 1');
+
     const clearButton = el.shadowRoot.querySelector('#selection-button');
     clearButton.click();
+    await el.updateComplete;
     await el.updateComplete;
 
     const input = el.shadowRoot.querySelector('#trigger-button');
     expect(el.value).to.equal('option-1');
     expect(input.value).to.equal('Option 1');
+  });
+
+  it('should clear typed input when there is no selected value', async () => {
+    const el = await fixture(html`
+      <cds-combo-box title-text="Combo box Label">
+        <cds-combo-box-item value="option-1">Option 1</cds-combo-box-item>
+        <cds-combo-box-item value="option-2">Option 2</cds-combo-box-item>
+      </cds-combo-box>
+    `);
+
+    const input = el.shadowRoot.querySelector('#trigger-button');
+    input.value = 'Option';
+    input.dispatchEvent(new InputEvent('input', { bubbles: true }));
+    await el.updateComplete;
+
+    const clearButton = el.shadowRoot.querySelector('#selection-button');
+    clearButton.click();
+    await el.updateComplete;
+
+    expect(el.value).to.equal('');
+    expect(input.value).to.equal('');
   });
 });
