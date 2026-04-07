@@ -121,11 +121,6 @@ export const DefaultWithToggletip = {
 };
 
 export const Skeleton = {
-  parameters: {
-    percy: {
-      skip: true,
-    },
-  },
   args: {
     defaultWidth: 300,
   },
