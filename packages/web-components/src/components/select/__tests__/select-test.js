@@ -11,7 +11,10 @@ import { html, fixture, expect } from '@open-wc/testing';
 describe('cds-select', () => {
   const basicSelect = html`
     <cds-form-item>
-      <cds-select label-text="Select label" helper-text="Helper text">
+      <cds-select
+        id="select"
+        label-text="Select label"
+        helper-text="Helper text">
         <cds-select-item value="">Choose an option</cds-select-item>
         <cds-select-item value="option-1">Option 1</cds-select-item>
         <cds-select-item value="option-2" selected>Option 2</cds-select-item>
@@ -43,7 +46,7 @@ describe('cds-select', () => {
 
   it('should support the disabled attribute', async () => {
     const el = await fixture(html`
-      <cds-select disabled label-text="Select label">
+      <cds-select id="select" disabled label-text="Select label">
         <cds-select-item value="option-1">Option 1</cds-select-item>
       </cds-select>
     `);
@@ -53,7 +56,7 @@ describe('cds-select', () => {
 
   it('should support the hide-label attribute', async () => {
     const el = await fixture(html`
-      <cds-select label-text="Hidden label" hide-label>
+      <cds-select id="select" label-text="Hidden label" hide-label>
         <cds-select-item value="option-1">Option 1</cds-select-item>
       </cds-select>
     `);
@@ -64,7 +67,11 @@ describe('cds-select', () => {
 
   it('should render invalid text when invalid attribute is set', async () => {
     const el = await fixture(html`
-      <cds-select label-text="Select" invalid invalid-text="This is an error">
+      <cds-select
+        id="select"
+        label-text="Select"
+        invalid
+        invalid-text="This is an error">
         <cds-select-item value="1">One</cds-select-item>
       </cds-select>
     `);
@@ -75,7 +82,11 @@ describe('cds-select', () => {
 
   it('should render warning text when warn attribute is set', async () => {
     const el = await fixture(html`
-      <cds-select label-text="Select" warn warn-text="This is a warning">
+      <cds-select
+        id="select"
+        label-text="Select"
+        warn
+        warn-text="This is a warning">
         <cds-select-item value="1">One</cds-select-item>
       </cds-select>
     `);
@@ -86,7 +97,7 @@ describe('cds-select', () => {
 
   it('should dispatch cds-select-selected when changed', async () => {
     const el = await fixture(html`
-      <cds-select label-text="Select">
+      <cds-select id="select" label-text="Select">
         <cds-select-item value="a">A</cds-select-item>
         <cds-select-item value="b">B</cds-select-item>
       </cds-select>
@@ -107,7 +118,7 @@ describe('cds-select', () => {
 
   it('should support the inline attribute', async () => {
     const el = await fixture(html`
-      <cds-select label-text="Inline select" inline>
+      <cds-select id="select" label-text="Inline select" inline>
         <cds-select-item value="1">One</cds-select-item>
       </cds-select>
     `);
@@ -121,7 +132,7 @@ describe('cds-select', () => {
 
   it('should support AI label slot and apply slug', async () => {
     const el = await fixture(html`
-      <cds-select label-text="With AI">
+      <cds-select id="select" label-text="With AI">
         <cds-ai-label slot="ai-label">AI Confidence</cds-ai-label>
         <cds-select-item value="1">One</cds-select-item>
       </cds-select>
@@ -134,7 +145,7 @@ describe('cds-select', () => {
 
   it('should support the size attribute', async () => {
     const el = await fixture(html`
-      <cds-select label-text="Sized select" size="sm">
+      <cds-select id="select" label-text="Sized select" size="sm">
         <cds-select-item value="1">One</cds-select-item>
       </cds-select>
     `);
@@ -144,7 +155,7 @@ describe('cds-select', () => {
   it('should receive focus via keyboard', async () => {
     // Simulates focus via tab to match keyboard accessibility behavior from React parity
     const el = await fixture(html`
-      <cds-select label-text="Focusable">
+      <cds-select id="select" label-text="Focusable">
         <cds-select-item value="1">One</cds-select-item>
       </cds-select>
     `);
@@ -158,7 +169,7 @@ describe('cds-select', () => {
   it('should reflect the value attribute when changed via code', async () => {
     // Ensures selection works when value is set via script (React parity)
     const el = await fixture(html`
-      <cds-select label-text="Default value">
+      <cds-select id="select" label-text="Default value">
         <cds-select-item value="a">A</cds-select-item>
         <cds-select-item value="b">B</cds-select-item>
       </cds-select>

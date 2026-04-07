@@ -15,6 +15,7 @@ describe('cds-fluid-select', () => {
     it('should set the fluid mode flag', async () => {
       const el = await fixture(
         html`<cds-fluid-select
+          id="select"
           label-text="Fluid select label"></cds-fluid-select>`
       );
       expect(el.getAttribute('isFluid')).to.equal('true');
@@ -22,7 +23,7 @@ describe('cds-fluid-select', () => {
 
     it('should render the internal select', async () => {
       const el = await fixture(html`
-        <cds-fluid-select label-text="Label">
+        <cds-fluid-select id="select" label-text="Label">
           <cds-select-item value="a">A</cds-select-item>
         </cds-fluid-select>
       `);
@@ -35,6 +36,7 @@ describe('cds-fluid-select', () => {
     it('should support a custom class on the host', async () => {
       const el = await fixture(html`
         <cds-fluid-select
+          id="select"
           class="custom-class"
           label-text="Label"></cds-fluid-select>
       `);
@@ -43,7 +45,10 @@ describe('cds-fluid-select', () => {
 
     it('should render helper text', async () => {
       const el = await fixture(html`
-        <cds-fluid-select label-text="Select label" helper-text="Helper text">
+        <cds-fluid-select
+          id="select"
+          label-text="Select label"
+          helper-text="Helper text">
           <cds-select-item value="a">A</cds-select-item>
         </cds-fluid-select>
       `);
@@ -54,7 +59,7 @@ describe('cds-fluid-select', () => {
 
     it('should support the hide-label attribute', async () => {
       const el = await fixture(html`
-        <cds-fluid-select label-text="Hidden label" hide-label>
+        <cds-fluid-select id="select" label-text="Hidden label" hide-label>
           <cds-select-item value="a">A</cds-select-item>
         </cds-fluid-select>
       `);
@@ -65,7 +70,10 @@ describe('cds-fluid-select', () => {
 
     it('should support the placeholder attribute', async () => {
       const el = await fixture(html`
-        <cds-fluid-select label-text="Select" placeholder="Choose an option">
+        <cds-fluid-select
+          id="select"
+          label-text="Select"
+          placeholder="Choose an option">
           <cds-select-item value="a">A</cds-select-item>
         </cds-fluid-select>
       `);
@@ -80,7 +88,7 @@ describe('cds-fluid-select', () => {
 
     it('should support the size attribute', async () => {
       const el = await fixture(html`
-        <cds-fluid-select label-text="Sized select" size="sm">
+        <cds-fluid-select id="select" label-text="Sized select" size="sm">
           <cds-select-item value="a">A</cds-select-item>
         </cds-fluid-select>
       `);
@@ -90,7 +98,7 @@ describe('cds-fluid-select', () => {
 
     it('should reflect the selected option', async () => {
       const el = await fixture(html`
-        <cds-fluid-select label-text="Select label">
+        <cds-fluid-select id="select" label-text="Select label">
           <cds-select-item value="option-1">Option 1</cds-select-item>
           <cds-select-item value="option-2" selected>Option 2</cds-select-item>
         </cds-fluid-select>
@@ -101,7 +109,7 @@ describe('cds-fluid-select', () => {
 
     it('should reflect the value attribute', async () => {
       const el = await fixture(html`
-        <cds-fluid-select label-text="Select label" value="b">
+        <cds-fluid-select id="select" label-text="Select label" value="b">
           <cds-select-item value="a">A</cds-select-item>
           <cds-select-item value="b">B</cds-select-item>
         </cds-fluid-select>
@@ -112,7 +120,7 @@ describe('cds-fluid-select', () => {
 
     it('should be focusable', async () => {
       const el = await fixture(html`
-        <cds-fluid-select label-text="Focusable">
+        <cds-fluid-select id="select" label-text="Focusable">
           <cds-select-item value="a">A</cds-select-item>
         </cds-fluid-select>
       `);
@@ -126,7 +134,7 @@ describe('cds-fluid-select', () => {
     it('should not apply field focus style when focusing a toggletip in the label', async () => {
       const root = await fixture(html`
         <div>
-          <cds-fluid-select>
+          <cds-fluid-select id="select">
             <span slot="label-text">
               Clock
               <cds-toggletip button-label="Show information"
@@ -161,7 +169,7 @@ describe('cds-fluid-select', () => {
   describe('behaves as expected', () => {
     it('should emit cds-select-selected when changed', async () => {
       const el = await fixture(html`
-        <cds-fluid-select label-text="Select">
+        <cds-fluid-select id="select" label-text="Select">
           <cds-select-item value="a">A</cds-select-item>
           <cds-select-item value="b">B</cds-select-item>
         </cds-fluid-select>
@@ -181,7 +189,7 @@ describe('cds-fluid-select', () => {
 
     it('should render fluid divider', async () => {
       const el = await fixture(html`
-        <cds-fluid-select label-text="Select label">
+        <cds-fluid-select id="select" label-text="Select label">
           <cds-select-item value="a">A</cds-select-item>
         </cds-fluid-select>
       `);
@@ -192,6 +200,7 @@ describe('cds-fluid-select', () => {
     it('should render invalid text inside the fluid wrapper', async () => {
       const el = await fixture(html`
         <cds-fluid-select
+          id="select"
           label-text="Select"
           invalid
           invalid-text="This is an error">
@@ -209,6 +218,7 @@ describe('cds-fluid-select', () => {
     it('should render warn text inside the fluid wrapper', async () => {
       const el = await fixture(html`
         <cds-fluid-select
+          id="select"
           label-text="Select"
           warn
           warn-text="This is a warning">
@@ -224,6 +234,7 @@ describe('cds-fluid-select', () => {
     it('should prioritize invalid over warn', async () => {
       const el = await fixture(html`
         <cds-fluid-select
+          id="select"
           label-text="Select"
           invalid
           invalid-text="Invalid"
@@ -242,6 +253,7 @@ describe('cds-fluid-select', () => {
     it('should not display invalid message if disabled', async () => {
       const el = await fixture(html`
         <cds-fluid-select
+          id="select"
           label-text="Select"
           disabled
           invalid
@@ -260,6 +272,7 @@ describe('cds-fluid-select', () => {
     it('should not display invalid message if readonly', async () => {
       const el = await fixture(html`
         <cds-fluid-select
+          id="select"
           label-text="Select"
           readonly
           invalid
@@ -277,7 +290,7 @@ describe('cds-fluid-select', () => {
 
     it('should reflect required state', async () => {
       const el = await fixture(html`
-        <cds-fluid-select label-text="Select" required>
+        <cds-fluid-select id="select" label-text="Select" required>
           <cds-select-item value="a">A</cds-select-item>
         </cds-fluid-select>
       `);
@@ -287,7 +300,10 @@ describe('cds-fluid-select', () => {
 
     it('should be accessible', async () => {
       const el = await fixture(html`
-        <cds-fluid-select label-text="Select label" helper-text="Helper text">
+        <cds-fluid-select
+          id="select"
+          label-text="Select label"
+          helper-text="Helper text">
           <cds-select-item value="option-1">Option 1</cds-select-item>
         </cds-fluid-select>
       `);
@@ -298,7 +314,7 @@ describe('cds-fluid-select', () => {
   describe('slot support', () => {
     it('should render slotted label-text', async () => {
       const el = await fixture(html`
-        <cds-fluid-select>
+        <cds-fluid-select id="select">
           <span slot="label-text">Slotted Label</span>
           <cds-select-item value="a">A</cds-select-item>
         </cds-fluid-select>
@@ -310,7 +326,7 @@ describe('cds-fluid-select', () => {
 
     it('should render slotted helper-text', async () => {
       const el = await fixture(html`
-        <cds-fluid-select helper-text="Helper text">
+        <cds-fluid-select id="select" helper-text="Helper text">
           <span slot="helper-text">Slotted Helper</span>
           <cds-select-item value="a">A</cds-select-item>
         </cds-fluid-select>
@@ -322,7 +338,7 @@ describe('cds-fluid-select', () => {
 
     it('should support AI label slot and apply slug', async () => {
       const el = await fixture(html`
-        <cds-fluid-select label-text="With AI">
+        <cds-fluid-select id="select" label-text="With AI">
           <cds-ai-label slot="ai-label">AI Confidence</cds-ai-label>
           <cds-select-item value="1">One</cds-select-item>
         </cds-fluid-select>
@@ -340,7 +356,11 @@ describe('cds-fluid-select', () => {
     it('should participate in form data', async () => {
       const form = await fixture(html`
         <form>
-          <cds-fluid-select name="test-select" value="b" label-text="Select">
+          <cds-fluid-select
+            id="select"
+            name="test-select"
+            value="b"
+            label-text="Select">
             <cds-select-item value="a">A</cds-select-item>
             <cds-select-item value="b">B</cds-select-item>
           </cds-fluid-select>
@@ -355,6 +375,7 @@ describe('cds-fluid-select', () => {
       const form = await fixture(html`
         <form>
           <cds-fluid-select
+            id="select"
             name="test-select"
             value="b"
             label-text="Select"

@@ -149,7 +149,7 @@ describe('cds-pagination', () => {
     `);
 
     const label = el.shadowRoot?.querySelector(
-      '.cds--pagination__left span[slot="label-text"]'
+      '.cds--pagination__left div[slot="label-text"]'
     );
     expect(label?.textContent?.trim()).to.equal('éléments par page');
   });
