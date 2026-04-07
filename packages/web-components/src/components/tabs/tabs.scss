@@ -77,18 +77,23 @@ $inset-transition: inset 110ms motion(standard, productive);
   }
 }
 
+:host(#{$prefix}-tabs[icon-size='default'])
+  .#{$prefix}--tabs-nav-content-container,
 :host(#{$prefix}-tabs.#{$prefix}--tabs__icon--default)
   .#{$prefix}--tabs-nav-content-container {
   overflow: visible;
   block-size: $spacing-08;
 }
 
+:host(#{$prefix}-tabs[icon-size='lg']) .#{$prefix}--tabs-nav-content-container,
 :host(#{$prefix}-tabs.#{$prefix}--tabs__icon--lg)
   .#{$prefix}--tabs-nav-content-container {
   overflow: visible;
   block-size: $spacing-09;
 }
 
+:host(#{$prefix}-tabs[icon-size='default']),
+:host(#{$prefix}-tabs[icon-size='lg']),
 :host(#{$prefix}-tabs.#{$prefix}--tabs__icon--default),
 :host(#{$prefix}-tabs.#{$prefix}--tabs__icon--lg) {
   overflow: visible;
@@ -147,6 +152,8 @@ $inset-transition: inset 110ms motion(standard, productive);
   margin-inline-end: 0;
 }
 
+:host(#{$prefix}-tab[badge-indicator][icon-only]:not([icon-size='lg']))
+  #{$prefix}-badge-indicator,
 :host(
     #{$prefix}-tab[badge-indicator].#{$prefix}--tabs__nav-item--icon-only:not(
         .#{$prefix}--tabs__nav-item--icon-only__20
@@ -157,6 +164,7 @@ $inset-transition: inset 110ms motion(standard, productive);
   margin-inline-end: $spacing-02;
 }
 
+:host(#{$prefix}-tab[icon-only]),
 :host(#{$prefix}-tab.#{$prefix}--tabs__nav-item--icon-only) {
   flex: 0 0 auto;
   block-size: $spacing-08;
@@ -197,6 +205,7 @@ $inset-transition: inset 110ms motion(standard, productive);
   }
 }
 
+:host(#{$prefix}-tab[icon-only]:not([type='contained'])),
 :host(
     #{$prefix}-tab.#{$prefix}--tabs__nav-item--icon-only:not([type='contained'])
   ) {
@@ -206,6 +215,7 @@ $inset-transition: inset 110ms motion(standard, productive);
   }
 }
 
+:host(#{$prefix}-tab[icon-only][icon-size='lg']),
 :host(#{$prefix}-tab.#{$prefix}--tabs__nav-item--icon-only__20) {
   block-size: $spacing-09;
   inline-size: $spacing-09;
@@ -244,6 +254,7 @@ $inset-transition: inset 110ms motion(standard, productive);
   }
 }
 
+:host(#{$prefix}-tab[icon-only]:hover),
 :host(#{$prefix}-tab.#{$prefix}--tabs__nav-item--icon-only:hover) {
   box-shadow: none;
 }

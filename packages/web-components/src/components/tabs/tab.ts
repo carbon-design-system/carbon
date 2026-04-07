@@ -10,7 +10,7 @@ import { ifDefined } from 'lit/directives/if-defined.js';
 import { property } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
 import CDSContentSwitcherItem from '../content-switcher/content-switcher-item';
-import { TABS_TYPE } from './tabs';
+import { TABS_ICON_SIZE, TABS_TYPE } from './defs';
 import styles from './tabs.scss?lit';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
@@ -35,6 +35,18 @@ export default class CDSTab extends CDSContentSwitcherItem {
    */
   @property({ reflect: true })
   type = TABS_TYPE.REGULAR;
+
+  /**
+   * `true` if this tab is icon-only.
+   */
+  @property({ type: Boolean, reflect: true, attribute: 'icon-only' })
+  iconOnly = false;
+
+  /**
+   * Specify the icon size used by icon-only tabs.
+   */
+  @property({ attribute: 'icon-size', reflect: true })
+  iconSize?: TABS_ICON_SIZE;
 
   /**
    * The tab text content.
@@ -73,9 +85,9 @@ export default class CDSTab extends CDSContentSwitcherItem {
       _handleSlotChange: handleSlotChange,
     } = this;
     const accessibleLabel = tabTitle || this.getAttribute('aria-label');
-    const isIconOnly = this.classList.contains(
-      `${prefix}--tabs__nav-item--icon-only`
-    );
+    const isIconOnly =
+      this.iconOnly ||
+      this.classList.contains(`${prefix}--tabs__nav-item--icon-only`);
     // No `href`/`tabindex` to not to make this `<a>` click-focusable
     const tabLink = html`
       <a

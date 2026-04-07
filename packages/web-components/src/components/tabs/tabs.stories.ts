@@ -6,7 +6,7 @@
  */
 
 import { html } from 'lit';
-import { TABS_TYPE } from './tabs';
+import { TABS_ICON_SIZE, TABS_TYPE } from './tabs';
 import styles from './tabs-story.scss?lit';
 import { prefix } from '../../globals/settings';
 import { iconLoader } from '../../globals/internal/icon-loader';
@@ -202,12 +202,13 @@ export const Icon20Only = {
     </style>
     <cds-tabs
       value="icon20-tab-2"
-      class="cds--tabs__icon--lg cds--layout--size-lg">
+      icon-size="${TABS_ICON_SIZE.LARGE}"
+      class="cds--layout--size-lg">
       <cds-tab
         id="icon20-tab-1"
         target="icon20-panel-1"
         value="icon20-tab-1"
-        class="cds--tabs__nav-item--icon-only cds--tabs__nav-item--icon-only__20"
+        icon-only
         disabled
         aria-label="Analyze">
         ${iconLoader(IbmWatsonDiscovery20)}
@@ -216,7 +217,7 @@ export const Icon20Only = {
         id="icon20-tab-2"
         target="icon20-panel-2"
         value="icon20-tab-2"
-        class="cds--tabs__nav-item--icon-only cds--tabs__nav-item--icon-only__20"
+        icon-only
         aria-label="Activity">
         ${iconLoader(Activity20)}
       </cds-tab>
@@ -224,7 +225,7 @@ export const Icon20Only = {
         id="icon20-tab-3"
         target="icon20-panel-3"
         value="icon20-tab-3"
-        class="cds--tabs__nav-item--icon-only cds--tabs__nav-item--icon-only__20"
+        icon-only
         ?badge-indicator="${badgeIndicator}"
         aria-label="New Notifications">
         ${iconLoader(Notification20)}
@@ -233,7 +234,7 @@ export const Icon20Only = {
         id="icon20-tab-4"
         target="icon20-panel-4"
         value="icon20-tab-4"
-        class="cds--tabs__nav-item--icon-only cds--tabs__nav-item--icon-only__20"
+        icon-only
         aria-label="Chat">
         ${iconLoader(Chat20)}
       </cds-tab>
@@ -278,12 +279,12 @@ export const IconOnly = {
     <style>
       ${styles}
     </style>
-    <cds-tabs value="icon-tab-2" class="cds--tabs__icon--default">
+    <cds-tabs value="icon-tab-2" icon-size="${TABS_ICON_SIZE.DEFAULT}">
       <cds-tab
         id="icon-tab-1"
         target="icon-panel-1"
         value="icon-tab-1"
-        class="cds--tabs__nav-item--icon-only"
+        icon-only
         disabled
         aria-label="Analyze">
         ${iconLoader(IbmWatsonDiscovery16)}
@@ -292,7 +293,7 @@ export const IconOnly = {
         id="icon-tab-2"
         target="icon-panel-2"
         value="icon-tab-2"
-        class="cds--tabs__nav-item--icon-only"
+        icon-only
         aria-label="Activity">
         ${iconLoader(Activity16)}
       </cds-tab>
@@ -300,7 +301,7 @@ export const IconOnly = {
         id="icon-tab-3"
         target="icon-panel-3"
         value="icon-tab-3"
-        class="cds--tabs__nav-item--icon-only"
+        icon-only
         ?badge-indicator="${badgeIndicator}"
         aria-label="New Notifications">
         ${iconLoader(Notification16)}
@@ -309,7 +310,7 @@ export const IconOnly = {
         id="icon-tab-4"
         target="icon-panel-4"
         value="icon-tab-4"
-        class="cds--tabs__nav-item--icon-only"
+        icon-only
         aria-label="Chat">
         ${iconLoader(Chat16)}
       </cds-tab>
