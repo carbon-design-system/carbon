@@ -139,7 +139,7 @@ class CDSCheckbox extends FocusMixin(FormMixin(LitElement)) {
   /**
    * Specify whether the Checkbox is currently invalid
    */
-  @property({ type: Boolean })
+  @property({ type: Boolean, reflect: true })
   invalid = false;
 
   /**
@@ -163,7 +163,7 @@ class CDSCheckbox extends FocusMixin(FormMixin(LitElement)) {
   /**
    * Specify whether the Checkbox is in a warn state
    */
-  @property({ type: Boolean })
+  @property({ type: Boolean, reflect: true })
   warn = false;
 
   /**

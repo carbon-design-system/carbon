@@ -322,6 +322,8 @@ collect:
         - error-subject
         - oncds-file-uploader-item-beingdeleted
         - oncds-file-uploader-item-deleted
+        # cds-fluid-dropdown
+        - is-condensed
         # cds-fluid-time-picker-skeleton
         - is-only-two
         # cds-form-group
