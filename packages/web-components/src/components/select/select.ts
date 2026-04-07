@@ -227,7 +227,7 @@ class CDSSelect extends FormMixin(LitElement) {
    * ID to link the `label` and `select`
    */
   @property()
-  id = 'input';
+  id = '';
 
   /**
    * Specify if the currently value is invalid.

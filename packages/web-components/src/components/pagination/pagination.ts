@@ -286,7 +286,7 @@ class CDSPagination extends FocusMixin(HostListenerMixin(LitElement)) {
    * The translatable text indicating the number of items per page.
    */
   @property({ attribute: 'items-per-page-text' })
-  itemsPerPageText = 'Items per page:';
+  itemsPerPageText = '';
 
   /**
    * `true` if the pagination UI should be disabled.
@@ -494,9 +494,13 @@ class CDSPagination extends FocusMixin(HostListenerMixin(LitElement)) {
           inline
           value="${pageSize}"
           label-styles-disable>
-          <span class="${prefix}--pagination__text" slot="label-text"
-            >${itemsPerPageText}</span
-          >
+          <div slot="label-text">
+            ${itemsPerPageText &&
+            html`<span class="${prefix}--pagination__text"
+              >${itemsPerPageText}</span
+            >`}
+            <slot name="label-text"></slot>
+          </div>
           <slot @slotchange=${handleSlotChange}></slot>
         </cds-select>
         <span
