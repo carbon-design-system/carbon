@@ -113,6 +113,81 @@ describe('Checkbox', () => {
     expect(screen.getByText('Invalid text')).toBeInTheDocument();
   });
 
+  it('should not respect invalid prop if disabled', () => {
+    const { container } = render(
+      <Checkbox
+        defaultChecked
+        labelText="Checkbox label"
+        id="checkbox-label-1"
+        invalid
+        disabled
+      />
+    );
+
+    // eslint-disable-next-line testing-library/no-node-access, testing-library/no-container
+    const invalidIcon = container.querySelector(
+      `svg.${prefix}--checkbox__invalid-icon`
+    );
+
+    expect(screen.getByRole('checkbox')).not.toHaveAttribute('data-invalid');
+    expect(container.firstChild).not.toHaveClass(
+      `${prefix}--checkbox-wrapper--invalid`
+    );
+    expect(invalidIcon).not.toBeInTheDocument();
+  });
+
+  it('should not respect invalid prop if readOnly', () => {
+    const { container } = render(
+      <Checkbox
+        defaultChecked
+        labelText="Checkbox label"
+        id="checkbox-label-1"
+        invalid
+        readOnly
+      />
+    );
+
+    // eslint-disable-next-line testing-library/no-node-access, testing-library/no-container
+    const invalidIcon = container.querySelector(
+      `svg.${prefix}--checkbox__invalid-icon`
+    );
+
+    expect(screen.getByRole('checkbox')).not.toHaveAttribute('data-invalid');
+    expect(container.firstChild).not.toHaveClass(
+      `${prefix}--checkbox-wrapper--invalid`
+    );
+    expect(invalidIcon).not.toBeInTheDocument();
+  });
+
+  it('should remain disabled when readOnly and disabled are both true', () => {
+    render(
+      <Checkbox
+        defaultChecked
+        labelText="Checkbox label"
+        id="checkbox-label-1"
+        readOnly
+        disabled
+      />
+    );
+
+    expect(screen.getByRole('checkbox')).toBeDisabled();
+  });
+
+  it('should display helperText when invalid is true but disabled', () => {
+    render(
+      <Checkbox
+        defaultChecked
+        labelText="Checkbox label"
+        id="checkbox-label-1"
+        invalid
+        disabled
+        helperText="Helper text"
+      />
+    );
+
+    expect(screen.getByText('Helper text')).toBeInTheDocument();
+  });
+
   it('should respect readOnly prop', () => {
     const { container } = render(
       <Checkbox
