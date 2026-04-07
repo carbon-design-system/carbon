@@ -132,10 +132,15 @@ class CDSCheckboxGroup extends LitElement {
         });
       }
     });
-    if (changedProperties.has('invalid')) {
-      const { invalid } = this;
+    if (
+      changedProperties.has('invalid') ||
+      changedProperties.has('disabled') ||
+      changedProperties.has('readonly')
+    ) {
+      const { invalid, disabled, readonly } = this;
+      const hasInvalidState = invalid && !disabled && !readonly;
       checkboxes.forEach((elem) => {
-        if (invalid && !this.disabled) {
+        if (hasInvalidState) {
           (elem as CDSCheckbox).setAttribute('invalid-group', '');
         } else {
           (elem as CDSCheckbox).removeAttribute('invalid-group');
@@ -161,8 +166,14 @@ class CDSCheckboxGroup extends LitElement {
       _handleSlotChange: handleSlotChange,
     } = this;
 
-    const showWarning = !readonly && !disabled && !invalid && warn;
-    const showHelper = !invalid && !warn;
+    const normalizedProps: {
+      invalid: boolean;
+      warn: boolean;
+    } = {
+      invalid: !readonly && !disabled && invalid,
+      warn: !readonly && !invalid && !disabled && warn,
+    };
+    const showHelper = !normalizedProps.invalid && !normalizedProps.warn;
 
     const checkboxGroupInstanceId = Math.random().toString(16).slice(2);
 
@@ -179,8 +190,8 @@ class CDSCheckboxGroup extends LitElement {
     const fieldsetClasses = classMap({
       [`${prefix}--checkbox-group`]: true,
       [`${prefix}--checkbox-group--readonly`]: readonly,
-      [`${prefix}--checkbox-group--invalid`]: !readonly && !disabled && invalid,
-      [`${prefix}--checkbox-group--warning`]: showWarning,
+      [`${prefix}--checkbox-group--invalid`]: normalizedProps.invalid,
+      [`${prefix}--checkbox-group--warning`]: normalizedProps.warn,
       [`${prefix}--checkbox-group--slug`]: hasAILabel,
       [`${prefix}--checkbox-group--${orientation}`]:
         orientation === 'horizontal',
@@ -189,11 +200,15 @@ class CDSCheckboxGroup extends LitElement {
     return html`
       <fieldset
         class="${fieldsetClasses}"
-        ?data-invalid=${invalid && !disabled}
+        ?data-invalid=${normalizedProps.invalid}
         ?disabled=${disabled}
         aria-disabled=${readonly || disabled}
         ?aria-labelledby=${ariaLabelledBy || legendId}
-        ?aria-describedby=${!invalid && !warn && helper ? helperId : undefined}
+        ?aria-describedby=${!normalizedProps.invalid &&
+        !normalizedProps.warn &&
+        helper
+          ? helperId
+          : undefined}
         orientation=${orientation}>
         <legend class="${prefix}--label" id=${legendId || ariaLabelledBy}>
           ${legendText}
@@ -203,7 +218,7 @@ class CDSCheckboxGroup extends LitElement {
         </legend>
         <slot></slot>
         <div class="${prefix}--checkbox-group__validation-msg">
-          ${!readonly && !disabled && invalid
+          ${normalizedProps.invalid
             ? html`
                 ${iconLoader(WarningFilled16, {
                   class: `${prefix}--checkbox__invalid-icon`,
@@ -211,7 +226,7 @@ class CDSCheckboxGroup extends LitElement {
                 <div class="${prefix}--form-requirement">${invalidText}</div>
               `
             : null}
-          ${showWarning
+          ${normalizedProps.warn
             ? html`
                 ${iconLoader(WarningAltFilled16, {
                   class: `${prefix}--checkbox__invalid-icon ${prefix}--checkbox__invalid-icon--warning`,
