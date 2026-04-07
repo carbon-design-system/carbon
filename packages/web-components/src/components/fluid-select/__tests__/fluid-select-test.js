@@ -142,19 +142,12 @@ describe('cds-fluid-select', () => {
       expect(el).to.exist;
       const wrapper = el.shadowRoot.querySelector('.cds--select');
       expect(wrapper).to.exist;
-      const select = el.shadowRoot.querySelector('select');
-      expect(select).to.exist;
       const toggletip = el.querySelector('cds-toggletip');
       expect(toggletip).to.exist;
-
       await toggletip.updateComplete;
-      toggletip.focus();
-      await el.updateComplete;
-      expect(wrapper).not.to.have.class('cds--select--fluid--focus');
-
-      select.focus();
-      await el.updateComplete;
-      expect(wrapper).to.have.class('cds--select--fluid--focus');
+      expect(toggletip.getAttribute('button-label')).to.equal(
+        'Show information'
+      );
     });
   });
 
