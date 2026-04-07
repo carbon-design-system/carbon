@@ -17,6 +17,7 @@ import { deprecate } from '../../prop-types/deprecate';
 import { usePrefix } from '../../internal/usePrefix';
 import { WarningFilled, WarningAltFilled } from '@carbon/icons-react';
 import { useId } from '../../internal/useId';
+import { useNormalizedInputProps } from '../../internal/useNormalizedInputProps';
 import { AILabel } from '../AILabel';
 import { isComponentElement } from '../../internal';
 import { Checkbox } from '../Checkbox';
@@ -65,11 +66,19 @@ const CheckboxGroup = ({
   ...rest
 }: CheckboxGroupProps) => {
   const prefix = usePrefix();
-
-  const showWarning = !readOnly && !disabled && !invalid && warn;
-  const showHelper = !invalid && !warn;
-
   const checkboxGroupInstanceId = useId();
+  const normalizedProps = useNormalizedInputProps({
+    id: `checkbox-group-${checkboxGroupInstanceId}`,
+    readOnly,
+    disabled: disabled ?? false,
+    invalid: invalid ?? false,
+    invalidText,
+    warn: warn ?? false,
+    warnText,
+  });
+
+  const showWarning = normalizedProps.warn;
+  const showHelper = !normalizedProps.invalid && !normalizedProps.warn;
 
   const hasHelper = typeof helperText !== 'undefined' && helperText !== null;
   const helperId = !hasHelper
@@ -85,9 +94,8 @@ const CheckboxGroup = ({
   const fieldsetClasses = cx(`${prefix}--checkbox-group`, className, {
     [`${prefix}--checkbox-group--${orientation}`]: orientation === 'horizontal',
     [`${prefix}--checkbox-group--readonly`]: readOnly,
-    [`${prefix}--checkbox-group--invalid`]: !readOnly && !disabled && invalid,
-    [`${prefix}--checkbox-group--warning`]:
-      !readOnly && !disabled && showWarning,
+    [`${prefix}--checkbox-group--invalid`]: normalizedProps.invalid,
+    [`${prefix}--checkbox-group--warning`]: showWarning,
     [`${prefix}--checkbox-group--slug`]: slug,
     [`${prefix}--checkbox-group--decorator`]: decorator,
   });
@@ -107,7 +115,7 @@ const CheckboxGroup = ({
       > = {
         ...(typeof invalid !== 'undefined' &&
         typeof child.props.invalid === 'undefined'
-          ? { invalid }
+          ? { invalid: normalizedProps.invalid }
           : {}),
         ...(typeof readOnly !== 'undefined' &&
         typeof child.props.readOnly === 'undefined'
@@ -115,7 +123,7 @@ const CheckboxGroup = ({
           : {}),
         ...(typeof warn !== 'undefined' &&
         typeof child.props.warn === 'undefined'
-          ? { warn }
+          ? { warn: normalizedProps.warn }
           : {}),
         ...(typeof disabled !== 'undefined' &&
         typeof child.props.disabled === 'undefined'
@@ -134,11 +142,16 @@ const CheckboxGroup = ({
   return (
     <fieldset
       className={fieldsetClasses}
-      data-invalid={invalid && !disabled && !readOnly ? true : undefined}
+      disabled={disabled}
+      data-invalid={normalizedProps.invalid ? true : undefined}
       aria-labelledby={rest['aria-labelledby'] || legendId}
       aria-readonly={readOnly}
       aria-disabled={disabled}
-      aria-describedby={!invalid && !warn && helper ? helperId : undefined}
+      aria-describedby={
+        !normalizedProps.invalid && !normalizedProps.warn && helper
+          ? helperId
+          : undefined
+      }
       {...rest}>
       <legend
         className={`${prefix}--label`}
@@ -156,7 +169,7 @@ const CheckboxGroup = ({
       </legend>
       {clonedChildren}
       <div className={`${prefix}--checkbox-group__validation-msg`}>
-        {!readOnly && invalid && (
+        {normalizedProps.invalid && (
           <>
             <WarningFilled className={`${prefix}--checkbox__invalid-icon`} />
             <div className={`${prefix}--form-requirement`}>{invalidText}</div>

@@ -14,6 +14,7 @@ import { usePrefix } from '../../internal/usePrefix';
 import { WarningFilled, WarningAltFilled } from '@carbon/icons-react';
 import { useId } from '../../internal/useId';
 import { noopFn } from '../../internal/noopFn';
+import { useNormalizedInputProps } from '../../internal/useNormalizedInputProps';
 import { AILabel } from '../AILabel';
 import { isComponentElement } from '../../internal';
 
@@ -133,8 +134,18 @@ const Checkbox = React.forwardRef(
   ) => {
     const prefix = usePrefix();
 
-    const showWarning = !readOnly && !disabled && !invalid && warn;
-    const showHelper = !invalid && !warn;
+    const normalizedProps = useNormalizedInputProps({
+      id,
+      readOnly,
+      disabled: disabled ?? false,
+      invalid: invalid ?? false,
+      invalidText,
+      warn: warn ?? false,
+      warnText,
+    });
+
+    const showWarning = normalizedProps.warn;
+    const showHelper = !normalizedProps.invalid && !normalizedProps.warn;
 
     const checkboxGroupInstanceId = useId();
 
@@ -155,10 +166,8 @@ const Checkbox = React.forwardRef(
       className,
       {
         [`${prefix}--checkbox-wrapper--readonly`]: readOnly,
-        [`${prefix}--checkbox-wrapper--invalid`]:
-          !readOnly && !disabled && invalid,
-        [`${prefix}--checkbox-wrapper--warning`]:
-          !readOnly && !disabled && showWarning,
+        [`${prefix}--checkbox-wrapper--invalid`]: normalizedProps.invalid,
+        [`${prefix}--checkbox-wrapper--warning`]: showWarning,
         [`${prefix}--checkbox-wrapper--slug`]: slug,
         [`${prefix}--checkbox-wrapper--decorator`]: decorator,
       }
@@ -181,7 +190,7 @@ const Checkbox = React.forwardRef(
           {...other}
           disabled={disabled}
           type="checkbox"
-          data-invalid={invalid ? true : undefined}
+          data-invalid={normalizedProps.invalid ? true : undefined}
           onChange={(evt) => {
             if (!readOnly && onChange) {
               onChange(evt, { checked: evt.target.checked, id });
@@ -231,7 +240,7 @@ const Checkbox = React.forwardRef(
           </Text>
         </label>
         <div className={`${prefix}--checkbox__validation-msg`}>
-          {!readOnly && !disabled && invalid && (
+          {normalizedProps.invalid && (
             <>
               <WarningFilled className={`${prefix}--checkbox__invalid-icon`} />
               <div className={`${prefix}--form-requirement`}>{invalidText}</div>
