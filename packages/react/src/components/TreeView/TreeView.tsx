@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2025
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -166,28 +166,6 @@ const TreeView: TreeViewComponent = ({
     }
   }
 
-  // The logic inside this function is now handled by TreeNode consuming context.
-  // This function is kept to manage focus between nodes, which is a TreeView-level concern.
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20452
-  function handleFocusEvent(event) {
-    if (event.type === 'blur') {
-      const { relatedTarget: currentFocusedNode, target: prevFocusedNode } =
-        event;
-      if (treeRootRef?.current?.contains(currentFocusedNode)) {
-        prevFocusedNode.tabIndex = -1;
-      }
-    }
-    if (event.type === 'focus') {
-      resetNodeTabIndices();
-      const { relatedTarget: prevFocusedNode, target: currentFocusedNode } =
-        event;
-      if (treeRootRef?.current?.contains(prevFocusedNode)) {
-        prevFocusedNode.tabIndex = -1;
-      }
-      currentFocusedNode.tabIndex = 0;
-    }
-  }
-
   // Set the first non-disabled node to be tabbable
   useEffect(() => {
     const firstNode = treeRootRef.current?.querySelector(
@@ -233,7 +211,7 @@ const TreeView: TreeViewComponent = ({
             `${prefix}--tree-node--hidden`
           )
         ) {
-          nodeIds.push((treeWalker.current.currentNode as Element).id);
+          nodeIds.push(treeWalker.current.currentNode.id);
         }
         while (
           match(event, keys.Home)
@@ -249,7 +227,7 @@ const TreeView: TreeViewComponent = ({
             !nextFocusNode.getAttribute('aria-disabled') &&
             !nextFocusNode.classList.contains(`${prefix}--tree-node--hidden`)
           ) {
-            nodeIds.push((nextFocusNode as Element).id);
+            nodeIds.push(nextFocusNode.id);
           }
         }
       }
@@ -266,7 +244,7 @@ const TreeView: TreeViewComponent = ({
               `${prefix}--tree-node--hidden`
             )
           ) {
-            nodeIds.push((treeWalker.current.currentNode as Element).id);
+            nodeIds.push(treeWalker.current.currentNode.id);
           }
         }
       }

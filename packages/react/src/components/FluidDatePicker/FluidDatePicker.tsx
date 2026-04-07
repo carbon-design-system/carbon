@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2022
+ * Copyright IBM Corp. 2022, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -43,20 +43,11 @@ export interface FluidDatePickerProps {
   warnText?: React.ReactNode;
 }
 
-const FluidDatePicker: React.FC<FluidDatePickerProps> = React.forwardRef<
+const FluidDatePicker = React.forwardRef<
   HTMLInputElement,
   FluidDatePickerProps
 >(function FluidDatePicker(
-  {
-    className,
-    children,
-    invalid,
-    invalidText,
-    readOnly,
-    warn,
-    warnText,
-    ...other
-  },
+  { className, children, invalid, readOnly, warn, ...other },
   ref
 ) {
   const prefix = usePrefix();
@@ -71,10 +62,8 @@ const FluidDatePicker: React.FC<FluidDatePickerProps> = React.forwardRef<
     <FormContext.Provider value={{ isFluid: true }}>
       <DatePicker
         invalid={invalid}
-        invalidText={invalidText}
         readOnly={readOnly}
         warn={warn}
-        warnText={warnText}
         className={classNames}
         ref={ref}
         {...other}>

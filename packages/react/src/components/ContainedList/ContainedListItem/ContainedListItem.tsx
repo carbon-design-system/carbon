@@ -5,11 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, {
-  type ComponentType,
-  type FunctionComponent,
-  ReactNode,
-} from 'react';
+import React, { type ElementType, type ReactNode } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { LayoutConstraint } from '../../Layout';
@@ -44,10 +40,10 @@ interface ContainedListItemProps {
   /**
    * A component used to render an icon.
    */
-  renderIcon?: ComponentType | FunctionComponent;
+  renderIcon?: ElementType;
 }
 
-const ContainedListItem: React.FC<ContainedListItemProps> = ({
+const ContainedListItem = ({
   action,
   children,
   className,
@@ -55,7 +51,7 @@ const ContainedListItem: React.FC<ContainedListItemProps> = ({
   onClick,
   renderIcon: IconElement,
   ...rest
-}) => {
+}: ContainedListItemProps) => {
   const prefix = usePrefix();
 
   const isClickable = onClick !== undefined;

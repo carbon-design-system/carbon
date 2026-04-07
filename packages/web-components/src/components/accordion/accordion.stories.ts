@@ -10,8 +10,8 @@ import { prefix } from '../../globals/settings';
 import { ACCORDION_SIZE } from './accordion';
 import './index';
 import '../layer/index';
-import '../../../.storybook/templates/with-layer';
 import styles from './accordion.scss?lit';
+import { withLayers } from '../../../.storybook/decorators/with-layers';
 
 const sizes = {
   [`Small size (${ACCORDION_SIZE.SMALL})`]: ACCORDION_SIZE.SMALL,
@@ -20,11 +20,10 @@ const sizes = {
 };
 
 const args = {
-  alignment: 'end',
+  alignment: 'END',
   disabled: false,
   isFlush: false,
   size: ACCORDION_SIZE.MEDIUM,
-  disableToggle: false,
 };
 
 const argTypes = {
@@ -32,7 +31,7 @@ const argTypes = {
     control: 'select',
     description:
       'Specify the alignment of the accordion heading title and chevron.',
-    options: ['start', 'end'],
+    options: ['start', 'END'],
   },
   disabled: {
     control: 'boolean',
@@ -49,65 +48,71 @@ const argTypes = {
     description: 'Specify the size of the Accordion.',
     options: sizes,
   },
-  disableToggle: {
-    control: 'boolean',
-    description: `Disable user-initiated toggle action (Call event.preventDefault() in ${prefix}-accordion-beingtoggled event).`,
-  },
   onBeforeToggle: {
     action: `${prefix}-accordion-item-beingtoggled`,
+    table: {
+      disable: true,
+    },
   },
   onToggle: {
     action: `${prefix}-accordion-item-toggled`,
+    table: {
+      disable: true,
+    },
   },
 };
 
 export const Default = {
-  args: {
-    alignment: 'end',
-    disabled: false,
-    isFlush: false,
-    size: 'md',
-    disableToggle: false,
-  },
+  args,
   argTypes,
-  render: ({ alignment, isFlush, size, disabled, disableToggle }) => {
+  render: ({
+    alignment,
+    isFlush,
+    size,
+    disabled,
+    onBeforeToggle,
+    onToggle,
+  }) => {
     return html`
       <cds-accordion
         alignment="${alignment}"
         size="${size}"
         ?isFlush="${isFlush}"
-        ?disable-toggle="${disableToggle}"
         ?disabled="${disabled}">
-        <cds-accordion-item title="Section 1 title">
+        <cds-accordion-item
+          title="Choose your plan"
+          @cds-accordion-item-beingtoggled="${onBeforeToggle}"
+          @cds-accordion-item-toggled="${onToggle}">
           <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat.
+            Compare plan features and select the option that best matches your
+            team's expected usage.
           </p>
         </cds-accordion-item>
-        <cds-accordion-item title="Section 2 title">
+        <cds-accordion-item
+          title="Add team members"
+          @cds-accordion-item-beingtoggled="${onBeforeToggle}"
+          @cds-accordion-item-toggled="${onToggle}">
           <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat.
+            Invite collaborators by email and assign their workspace roles
+            before launch.
           </p>
         </cds-accordion-item>
-        <cds-accordion-item title="Section 3 title">
+        <cds-accordion-item
+          title="Set payment details"
+          @cds-accordion-item-beingtoggled="${onBeforeToggle}"
+          @cds-accordion-item-toggled="${onToggle}">
           <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat.
+            Add billing information and choose whether to receive invoices by
+            email.
           </p>
         </cds-accordion-item>
-        <cds-accordion-item title="Section 4 title">
+        <cds-accordion-item
+          title="Review and confirm"
+          @cds-accordion-item-beingtoggled="${onBeforeToggle}"
+          @cds-accordion-item-toggled="${onToggle}">
           <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat.
+            Check your setup summary, then confirm to create the workspace for
+            your team.
           </p>
         </cds-accordion-item>
       </cds-accordion>
@@ -117,9 +122,16 @@ export const Default = {
 
 export const Controlled = {
   // This story doesn't accept any args.
-  args: {},
-  argTypes: {},
-  render: () => {
+  args,
+  argTypes,
+  render: ({
+    alignment,
+    isFlush,
+    size,
+    disabled,
+    onBeforeToggle,
+    onToggle,
+  }) => {
     const toggleItems = (isOpen: boolean) => {
       document
         .querySelectorAll('cds-accordion-item[controlled]')
@@ -149,37 +161,49 @@ export const Controlled = {
         </cds-button>
       </cds-button-set>
 
-      <cds-accordion>
-        <cds-accordion-item controlled title="Section 1 title">
+      <cds-accordion
+        alignment="${alignment}"
+        size="${size}"
+        ?isFlush="${isFlush}"
+        ?disabled="${disabled}">
+        <cds-accordion-item
+          controlled
+          title="Choose your plan"
+          @cds-accordion-item-beingtoggled="${onBeforeToggle}"
+          @cds-accordion-item-toggled="${onToggle}">
           <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat.
+            Compare plan features and select the option that best matches your
+            team's expected usage.
           </p>
         </cds-accordion-item>
-        <cds-accordion-item controlled title="Section 2 title">
+        <cds-accordion-item
+          controlled
+          title="Add team members"
+          @cds-accordion-item-beingtoggled="${onBeforeToggle}"
+          @cds-accordion-item-toggled="${onToggle}">
           <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat.
+            Invite collaborators by email and assign their workspace roles
+            before launch.
           </p>
         </cds-accordion-item>
-        <cds-accordion-item controlled title="Section 3 title">
+        <cds-accordion-item
+          controlled
+          title="Set payment details"
+          @cds-accordion-item-beingtoggled="${onBeforeToggle}"
+          @cds-accordion-item-toggled="${onToggle}">
           <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat.
+            Add billing information and choose whether to receive invoices by
+            email.
           </p>
         </cds-accordion-item>
-        <cds-accordion-item controlled title="Section 4 title">
+        <cds-accordion-item
+          controlled
+          title="Review and confirm"
+          @cds-accordion-item-beingtoggled="${onBeforeToggle}"
+          @cds-accordion-item-toggled="${onToggle}">
           <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat.
+            Check your setup summary, then confirm to create the workspace for
+            your team.
           </p>
         </cds-accordion-item>
       </cds-accordion>
@@ -189,49 +213,80 @@ export const Controlled = {
 
 export const Skeleton = {
   decorators: [(story) => html`<div style="width: 500px">${story()}</div>`],
-  parameters: {
-    percy: {
-      skip: true,
+  args: {
+    alignment: 'END',
+    isFlush: false,
+  },
+  argTypes: {
+    alignment: {
+      control: 'select',
+      description:
+        'Specify the alignment of the accordion heading title and chevron.',
+      options: ['start', 'END'],
+    },
+    isFlush: {
+      control: 'boolean',
+      description:
+        'Specify whether Accordion text should be flush, default is false, does not work with align="start".',
     },
   },
-  render: () => {
-    return html`<cds-accordion-skeleton></cds-accordion-skeleton>`;
+  render: ({ alignment, isFlush }) => {
+    return html`<cds-accordion-skeleton
+      alignment="${alignment}"
+      ?isFlush="${isFlush}"></cds-accordion-skeleton>`;
   },
 };
 
 export const WithLayer = {
+  decorators: [withLayers],
+  parameters: {
+    layout: 'fullscreen',
+  },
   args,
   argTypes,
-  render: () => {
+  render: ({
+    alignment,
+    isFlush,
+    size,
+    disabled,
+    onBeforeToggle,
+    onToggle,
+  }) => {
     return html`
-      <sb-template-layers>
-        <cds-accordion>
-          <cds-accordion-item title="Section 1 title">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat.
-          </cds-accordion-item>
-          <cds-accordion-item title="Section 2 title">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat.
-          </cds-accordion-item>
-          <cds-accordion-item title="Section 3 title">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat.
-          </cds-accordion-item>
-          <cds-accordion-item title="Section 4 title">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat.
-          </cds-accordion-item>
-        </cds-accordion>
-      </sb-template-layers>
+      <cds-accordion
+        alignment="${alignment}"
+        size="${size}"
+        ?isFlush="${isFlush}"
+        ?disabled="${disabled}">
+        <cds-accordion-item
+          title="Choose your plan"
+          @cds-accordion-item-beingtoggled="${onBeforeToggle}"
+          @cds-accordion-item-toggled="${onToggle}">
+          Compare plan features and select the option that best matches your
+          team's expected usage.
+        </cds-accordion-item>
+        <cds-accordion-item
+          title="Add team members"
+          @cds-accordion-item-beingtoggled="${onBeforeToggle}"
+          @cds-accordion-item-toggled="${onToggle}">
+          Invite collaborators by email and assign their workspace roles before
+          launch.
+        </cds-accordion-item>
+        <cds-accordion-item
+          title="Set payment details"
+          @cds-accordion-item-beingtoggled="${onBeforeToggle}"
+          @cds-accordion-item-toggled="${onToggle}">
+          Add billing information and choose whether to receive invoices by
+          email.
+        </cds-accordion-item>
+        <cds-accordion-item
+          title="Review and confirm"
+          @cds-accordion-item-beingtoggled="${onBeforeToggle}"
+          @cds-accordion-item-toggled="${onToggle}">
+          Check your setup summary, then confirm to create the workspace for
+          your team.
+        </cds-accordion-item>
+      </cds-accordion>
     `;
   },
 };

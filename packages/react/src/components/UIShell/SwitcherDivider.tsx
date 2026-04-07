@@ -17,10 +17,10 @@ export interface SwitcherDividerProps {
   className?: string;
 }
 
-const SwitcherDivider: React.FC<SwitcherDividerProps> = ({
+const SwitcherDivider = ({
   className: customClassName,
   ...other
-}) => {
+}: SwitcherDividerProps) => {
   const prefix = usePrefix();
   const classNames = cx(`${prefix}--switcher__item--divider`, {
     [customClassName || '']: !!customClassName,

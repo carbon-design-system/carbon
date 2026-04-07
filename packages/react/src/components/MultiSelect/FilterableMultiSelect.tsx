@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2025
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -24,13 +24,10 @@ import React, {
   useCallback,
   useContext,
   useEffect,
-  useLayoutEffect,
   useMemo,
   useRef,
   useState,
-  type FocusEvent,
   type ForwardedRef,
-  type FunctionComponent,
   type KeyboardEvent,
   type MouseEvent,
   type ReactElement,
@@ -69,6 +66,8 @@ import {
 import type { TranslateWithId } from '../../types/common';
 import { AILabel } from '../AILabel';
 import { defaultItemToString, isComponentElement } from '../../internal';
+import { useNormalizedInputProps } from '../../internal/useNormalizedInputProps';
+import useIsomorphicEffect from '../../internal/useIsomorphicEffect';
 
 const {
   InputBlur,
@@ -204,7 +203,7 @@ export interface FilterableMultiSelectProps<ItemType>
    * Function to render items as custom components instead of strings.
    * Defaults to null and is overridden by a getter
    */
-  itemToElement?: FunctionComponent<ItemType>;
+  itemToElement?: (item: ItemType) => ReactNode;
 
   /**
    * Helper function passed to downshift that allows the library to render
@@ -342,7 +341,7 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
     hideLabel,
     id,
     initialSelectedItems = [],
-    invalid,
+    invalid = false,
     invalidText,
     items,
     itemToElement: ItemToElement, // needs to be capitalized for react to render it correctly
@@ -360,10 +359,10 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
     selectionFeedback = 'top-after-reopen',
     selectedItems: selected,
     size,
-    sortItems = defaultSortItems as FilterableMultiSelectProps<ItemType>['sortItems'],
+    sortItems = defaultSortItems,
     translateWithId,
     useTitleInItem,
-    warn,
+    warn = false,
     warnText,
     slug,
     inputProps,
@@ -372,10 +371,7 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
 ) {
   const { isFluid } = useContext(FormContext);
   const isFirstRender = useRef(true);
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20452
-  const [isFocused, setIsFocused] = useState<boolean>(false);
   const [isOpen, setIsOpen] = useState<boolean>(!!open);
-  const [prevOpen, setPrevOpen] = useState<boolean>(!!open);
   const [inputValue, setInputValue] = useState<string>('');
   const [topItems, setTopItems] = useState<ItemType[]>(
     initialSelectedItems ?? []
@@ -476,7 +472,7 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
       : {}
   );
 
-  useLayoutEffect(() => {
+  useIsomorphicEffect(() => {
     if (autoAlign) {
       const updatedFloatingStyles = {
         ...floatingStyles,
@@ -495,10 +491,9 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
 
   const prefix = usePrefix();
 
-  if (prevOpen !== open) {
+  useEffect(() => {
     setIsOpen(open);
-    setPrevOpen(open);
-  }
+  }, [open]);
 
   // memoize sorted items to reduce unnecessary expensive sort on rerender
   const sortedItems = useMemo(() => {
@@ -511,8 +506,7 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
     );
 
     // Sort only non-select-all items, select-all item must stay at the top
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
-    const sortedReal = sortItems!(nonSelectAllItems, {
+    const sortedReal = sortItems(nonSelectAllItems, {
       selectedItems: {
         top: controlledSelectedItems,
         fixed: [],
@@ -542,8 +536,17 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
     nonSelectAllItems,
   ]);
 
+  const normalizedProps = useNormalizedInputProps({
+    id,
+    disabled,
+    readOnly,
+    invalid,
+    warn,
+  });
+
   const inline = type === 'inline';
-  const showWarning = !invalid && warn;
+  const showWarning = normalizedProps.warn;
+  const showHelperText = !normalizedProps.warn && !normalizedProps.invalid;
 
   const wrapperClasses = cx(
     `${prefix}--multi-select__wrapper`,
@@ -553,16 +556,20 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
     {
       [`${prefix}--multi-select__wrapper--inline`]: inline,
       [`${prefix}--list-box__wrapper--inline`]: inline,
-      [`${prefix}--multi-select__wrapper--inline--invalid`]: inline && invalid,
-      [`${prefix}--list-box__wrapper--inline--invalid`]: inline && invalid,
+      [`${prefix}--multi-select__wrapper--inline--invalid`]:
+        inline && normalizedProps.invalid,
+      [`${prefix}--list-box__wrapper--inline--invalid`]:
+        inline && normalizedProps.invalid,
       [`${prefix}--list-box--up`]: direction === 'top',
-      [`${prefix}--list-box__wrapper--fluid--invalid`]: isFluid && invalid,
+      [`${prefix}--list-box__wrapper--fluid--invalid`]:
+        isFluid && normalizedProps.invalid,
       [`${prefix}--list-box__wrapper--slug`]: slug,
       [`${prefix}--list-box__wrapper--decorator`]: decorator,
       [`${prefix}--autoalign`]: autoAlign,
     }
   );
-  const helperId = !helperText
+  const hasHelper = typeof helperText !== 'undefined' && helperText !== null;
+  const helperId = !hasHelper
     ? undefined
     : `filterablemultiselect-helper-text-${filterableMultiSelectInstanceId}`;
   const labelId = `${id}-label`;
@@ -580,11 +587,11 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
     [`${prefix}--text-input--empty`]: !inputValue,
     [`${prefix}--text-input--light`]: light,
   });
-  const helper = helperText ? (
+  const helper = hasHelper && (
     <div id={helperId} className={helperClasses}>
       {helperText}
     </div>
-  ) : null;
+  );
   const menuId = `${id}__menu`;
   const inputId = `${id}-input`;
 
@@ -622,7 +629,10 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
 
   useEffect(() => {
     const handleClickOutside = (event: Event) => {
-      const target = event.target as HTMLElement;
+      const target = event.target;
+
+      if (!(target instanceof Node)) return;
+
       const wrapper = document
         .getElementById(id)
         ?.closest(`.${prefix}--multi-select__wrapper`);
@@ -668,8 +678,7 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
     inputId,
     inputValue,
     stateReducer,
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20452
-    isItemDisabled(item, _index) {
+    isItemDisabled(item) {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
       return (item as any)?.disabled;
     },
@@ -721,7 +730,7 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
         };
       case InputChange:
         if (onInputValueChange) {
-          onInputValueChange(changes.inputValue);
+          onInputValueChange(changes);
         }
         setInputValue(changes.inputValue ?? '');
         setIsOpen(true);
@@ -841,8 +850,9 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
     `${prefix}--combo-box`,
     `${prefix}--multi-select--filterable`,
     {
-      [`${prefix}--multi-select--invalid`]: invalid,
-      [`${prefix}--multi-select--invalid--focused`]: invalid && inputFocused,
+      [`${prefix}--multi-select--invalid`]: normalizedProps.invalid,
+      [`${prefix}--multi-select--invalid--focused`]:
+        inputFocused && normalizedProps.invalid,
       [`${prefix}--multi-select--open`]: isOpen,
       [`${prefix}--multi-select--inline`]: inline,
       [`${prefix}--multi-select--selected`]:
@@ -880,8 +890,7 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
   const inputProp = getInputProps(
     getDropdownProps({
       'aria-controls': isOpen ? menuId : undefined,
-      'aria-describedby':
-        helperText && !invalid && !warn ? helperId : undefined,
+      'aria-describedby': helperText && showHelperText ? helperId : undefined,
       'aria-haspopup': 'listbox',
       // Remove excess aria `aria-labelledby`. HTML <label for>
       // provides this aria information.
@@ -944,22 +953,12 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
       getMenuProps(
         {
           ref: autoAlign ? refs.setFloating : null,
+          hidden: !isOpen,
         },
         { suppressRefError: true }
       ),
-    [autoAlign, getMenuProps, refs.setFloating]
+    [autoAlign, getMenuProps, isOpen, refs.setFloating]
   );
-
-  const handleFocus = (evt: FocusEvent<HTMLDivElement> | undefined) => {
-    if (
-      evt?.target.classList.contains(`${prefix}--tag__close-icon`) ||
-      evt?.target.classList.contains(`${prefix}--list-box__selection`)
-    ) {
-      setIsFocused(false);
-    } else {
-      setIsFocused(evt?.type === 'focus' ? true : false);
-    }
-  };
 
   const mergedRef = mergeRefs(textInput, inputProp.ref);
 
@@ -999,16 +998,14 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
         </label>
       ) : null}
       <ListBox
-        onFocus={isFluid ? handleFocus : undefined}
-        onBlur={isFluid ? handleFocus : undefined}
         className={className}
         disabled={disabled}
         light={light}
         ref={ref}
         id={id}
-        invalid={invalid}
+        invalid={normalizedProps.invalid}
         invalidText={invalidText}
-        warn={warn}
+        warn={normalizedProps.warn}
         warnText={warnText}
         isOpen={!readOnly && isOpen}
         size={size}>
@@ -1036,7 +1033,7 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
             {...readOnlyEventHandlers}
             readOnly={readOnly}
           />
-          {invalid && (
+          {normalizedProps.invalid && (
             <WarningFilled className={`${prefix}--list-box__invalid-icon`} />
           )}
           {showWarning && (
@@ -1107,7 +1104,7 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
                 // instead match the old behavior of placing the disabled attribute.
                 const disabled = itemProps['aria-disabled'];
                 const {
-                  'aria-disabled': unusedAriaDisabled, // eslint-disable-line @typescript-eslint/no-unused-vars
+                  'aria-disabled': unusedAriaDisabled,
                   ...modifiedItemProps
                 } = itemProps;
 
@@ -1144,7 +1141,7 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
             : null}
         </ListBox.Menu>
       </ListBox>
-      {!inline && !invalid && !warn ? helper : null}
+      {!inline && showHelperText ? helper : null}
     </div>
   );
 }) as {

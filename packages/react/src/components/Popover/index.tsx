@@ -8,8 +8,15 @@
 import cx from 'classnames';
 import PropTypes, { WeakValidationMap } from 'prop-types';
 import { deprecateValuesWithin } from '../../prop-types/deprecateValuesWithin';
-import React, { useEffect, useMemo, useRef, type ElementType } from 'react';
+import React, {
+  forwardRef,
+  useEffect,
+  useMemo,
+  useRef,
+  type ElementType,
+} from 'react';
 import useIsomorphicEffect from '../../internal/useIsomorphicEffect';
+import { isComponentElement } from '../../internal';
 import { useMergedRefs } from '../../internal/useMergedRefs';
 import { usePrefix } from '../../internal/usePrefix';
 import { useWindowEvent, useEvent } from '../../internal/useEvent';
@@ -170,7 +177,7 @@ export const Popover: PopoverComponent & {
     autoAlign = false,
     autoAlignBoundary,
     backgroundToken = 'layer',
-    caret = isTabTip ? false : true,
+    caret = !isTabTip,
     className: customClassName,
     children,
     border = false,
@@ -297,79 +304,88 @@ export const Popover: PopoverComponent & {
       }
     }
   });
-  const { refs, floatingStyles, placement, middlewareData } = useFloating(
-    enableFloatingStyles
-      ? {
-          placement: align,
+  const { refs, floatingStyles, placement, middlewareData, elements, update } =
+    useFloating(
+      enableFloatingStyles
+        ? {
+            placement: align,
 
-          // The floating element is positioned relative to its nearest
-          // containing block (usually the viewport). It will in many cases also
-          // “break” the floating element out of a clipping ancestor.
-          // https://floating-ui.com/docs/misc#clipping
-          strategy: 'fixed',
+            // The floating element is positioned relative to its nearest
+            // containing block (usually the viewport). It will in many cases also
+            // “break” the floating element out of a clipping ancestor.
+            // https://floating-ui.com/docs/misc#clipping
+            strategy: 'fixed',
 
-          // Middleware order matters, arrow should be last
-          middleware: [
-            offset(
-              !isTabTip
-                ? {
-                    alignmentAxis: alignmentAxisOffset,
-                    mainAxis: popoverDimensions?.current?.offset,
-                  }
-                : 0
-            ),
-            autoAlign &&
-              flip({
-                fallbackPlacements: isTabTip
-                  ? align.includes('bottom')
-                    ? ['bottom-start', 'bottom-end', 'top-start', 'top-end']
-                    : ['top-start', 'top-end', 'bottom-start', 'bottom-end']
-                  : align.includes('bottom')
-                    ? [
-                        'bottom',
-                        'bottom-start',
-                        'bottom-end',
-                        'right',
-                        'right-start',
-                        'right-end',
-                        'left',
-                        'left-start',
-                        'left-end',
-                        'top',
-                        'top-start',
-                        'top-end',
-                      ]
-                    : [
-                        'top',
-                        'top-start',
-                        'top-end',
-                        'left',
-                        'left-start',
-                        'left-end',
-                        'right',
-                        'right-start',
-                        'right-end',
-                        'bottom',
-                        'bottom-start',
-                        'bottom-end',
-                      ],
+            // Middleware order matters, arrow should be last
+            middleware: [
+              offset(
+                !isTabTip
+                  ? {
+                      alignmentAxis: alignmentAxisOffset,
+                      // Use 4px spacing when no caret, otherwise use the caret offset
+                      mainAxis: caret ? popoverDimensions?.current?.offset : 4,
+                    }
+                  : 0
+              ),
+              autoAlign &&
+                flip({
+                  fallbackPlacements: isTabTip
+                    ? align.includes('bottom')
+                      ? ['bottom-start', 'bottom-end', 'top-start', 'top-end']
+                      : ['top-start', 'top-end', 'bottom-start', 'bottom-end']
+                    : align.includes('bottom')
+                      ? [
+                          'bottom',
+                          'bottom-start',
+                          'bottom-end',
+                          'right',
+                          'right-start',
+                          'right-end',
+                          'left',
+                          'left-start',
+                          'left-end',
+                          'top',
+                          'top-start',
+                          'top-end',
+                        ]
+                      : [
+                          'top',
+                          'top-start',
+                          'top-end',
+                          'left',
+                          'left-start',
+                          'left-end',
+                          'right',
+                          'right-start',
+                          'right-end',
+                          'bottom',
+                          'bottom-start',
+                          'bottom-end',
+                        ],
 
-                fallbackStrategy: 'initialPlacement',
-                fallbackAxisSideDirection: 'start',
-                boundary: autoAlignBoundary,
+                  fallbackStrategy: 'initialPlacement',
+                  fallbackAxisSideDirection: 'start',
+                  boundary: autoAlignBoundary,
+                }),
+              arrow({
+                element: caretRef,
+                padding: 16,
               }),
-            arrow({
-              element: caretRef,
-              padding: 16,
-            }),
-            autoAlign && hide(),
-          ],
-          whileElementsMounted: autoUpdate,
-        }
-      : {}
-    // When autoAlign is turned off & the `enable-v12-dynamic-floating-styles` feature flag is not
-    // enabled, floating-ui will not be used
-  );
+              autoAlign && hide(),
+            ],
+          }
+        : {}
+      // When autoAlign is turned off & the `enable-v12-dynamic-floating-styles` feature flag is not
+      // enabled, floating-ui will not be used
+    );
+
+  useEffect(() => {
+    if (!enableFloatingStyles) return;
+    if (open && elements.reference && elements.floating) {
+      const cleanup = autoUpdate(elements.reference, elements.floating, update);
+      return cleanup;
+    }
+  }, [enableFloatingStyles, open, elements, update]);
 
   const value = useMemo(() => {
     return {
@@ -460,7 +476,13 @@ export const Popover: PopoverComponent & {
   const mappedChildren = React.Children.map(children, (child) => {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
     const item = child as any;
-    const displayName = item?.type?.displayName;
+    // TODO: Stop relying on `displayName` checks by moving `Toggletip`
+    // subcomponents into their own files that avoid the `Popover` <->
+    // `Toggletip` circular dependency. Then replace these `displayName` checks
+    // with `isComponentElement(item, ...)` checks.
+    const isToggletipButton = item?.type?.displayName === 'ToggletipButton';
+    const isToggletipContent = item?.type?.displayName === 'ToggletipContent';
+    const isPopoverContent = isComponentElement(item, PopoverContent);
 
     /**
      * Only trigger elements (button) or trigger components (ToggletipButton) should be
@@ -470,13 +492,9 @@ export const Popover: PopoverComponent & {
      * is on, even if they are a trigger element.
      */
     const isTriggerElement = item?.type === 'button';
-    const isTriggerComponent =
-      enableFloatingStyles &&
-      displayName &&
-      ['ToggletipButton'].includes(displayName);
+    const isTriggerComponent = enableFloatingStyles && isToggletipButton;
     const isAllowedTriggerComponent =
-      enableFloatingStyles &&
-      !['ToggletipContent', 'PopoverContent'].includes(displayName);
+      enableFloatingStyles && !isToggletipContent && !isPopoverContent;
 
     if (
       React.isValidElement(item) &&
@@ -508,11 +526,7 @@ export const Popover: PopoverComponent & {
           // For a toggletip there is a specific trigger component, ToggletipButton.
           // In either of these cases we want to set this as the reference node for floating-ui autoAlign
           // positioning.
-          if (
-            (enableFloatingStyles && item?.type !== PopoverContent) ||
-            (enableFloatingStyles &&
-              item?.type['displayName'] === 'ToggletipButton')
-          ) {
+          if (enableFloatingStyles && !isPopoverContent) {
             // Set the reference element for floating-ui
             refs.setReference(node);
           }
@@ -530,13 +544,11 @@ export const Popover: PopoverComponent & {
     }
   });
 
-  const BaseComponentAsAny = BaseComponent as React.ElementType;
-
   return (
     <PopoverContext.Provider value={value}>
-      <BaseComponentAsAny {...rest} className={className} ref={ref}>
+      <BaseComponent {...rest} className={className} ref={ref}>
         {enableFloatingStyles || isTabTip ? mappedChildren : children}
-      </BaseComponentAsAny>
+      </BaseComponent>
     </PopoverContext.Provider>
   );
 }) as PopoverComponent;
@@ -685,10 +697,11 @@ Popover.propTypes = {
 
 export type PopoverContentProps = React.HTMLAttributes<HTMLSpanElement>;
 
-function PopoverContentRenderFunction(
-  { className, children, ...rest }: PopoverContentProps,
-  forwardRef: React.ForwardedRef<HTMLSpanElement>
-) {
+const frFn = forwardRef<HTMLSpanElement, PopoverContentProps>;
+
+export const PopoverContent = frFn((props, forwardRef) => {
+  const { className, children, ...rest } = props;
+
   const prefix = usePrefix();
   const { setFloating, caretRef, autoAlign } = React.useContext(PopoverContext);
   const ref = useMergedRefs([setFloating, forwardRef]);
@@ -718,9 +731,8 @@ function PopoverContentRenderFunction(
       )}
     </span>
   );
-}
+});
 
-export const PopoverContent = React.forwardRef(PopoverContentRenderFunction);
 PopoverContent.displayName = 'PopoverContent';
 
 PopoverContent.propTypes = {

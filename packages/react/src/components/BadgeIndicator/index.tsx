@@ -1,12 +1,12 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { forwardRef } from 'react';
 import cx from 'classnames';
 import { usePrefix } from '../../internal/usePrefix';
 
@@ -27,10 +27,11 @@ interface BadgeIndicatorProps {
   id?: string;
 }
 
-export const BadgeIndicator = React.forwardRef(function BadgeIndicatorContent(
-  { className: customClassName, count, ...rest }: BadgeIndicatorProps,
-  ref: React.Ref<HTMLDivElement>
-) {
+const frFn = forwardRef<HTMLDivElement, BadgeIndicatorProps>;
+
+export const BadgeIndicator = frFn((props, ref) => {
+  const { className: customClassName, count, ...rest } = props;
+
   const prefix = usePrefix();
   const classNames = cx(`${prefix}--badge-indicator`, customClassName, {
     [`${prefix}--badge-indicator--count`]: count,

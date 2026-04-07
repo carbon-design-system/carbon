@@ -17,13 +17,13 @@ snapshots['cds-menu-button should render and match snapshot'] =
     <cds-menu-item
       label="First action"
       role="menuitem"
-      tabindex="0"
+      tabindex="-1"
     >
     </cds-menu-item>
     <cds-menu-item
       label="Second action"
       role="menuitem"
-      tabindex="0"
+      tabindex="-1"
     >
     </cds-menu-item>
     <cds-menu-item
@@ -56,7 +56,7 @@ snapshots[
     <cds-menu-item
       label="First action"
       role="menuitem"
-      tabindex="0"
+      tabindex="-1"
     >
     </cds-menu-item>
     <cds-menu-item-divider role="separator">
@@ -66,7 +66,7 @@ snapshots[
       kind="danger"
       label="Danger"
       role="menuitem"
-      tabindex="0"
+      tabindex="-1"
     >
     </cds-menu-item>
   </cds-menu>
@@ -93,13 +93,13 @@ snapshots[
       aria-haspopup="true"
       label="Export as"
       role="menuitem"
-      tabindex="0"
+      tabindex="-1"
     >
       <cds-menu-item-group slot="submenu">
         <cds-menu-item
           label="PDF"
           role="menuitem"
-          tabindex="0"
+          tabindex="-1"
         >
         </cds-menu-item>
       </cds-menu-item-group>
@@ -110,6 +110,22 @@ snapshots[
 /* end snapshot cds-menu-button Children/slots and special menu content Snapshot variants should render with nested menu and match snapshot */
 
 snapshots['cds-menu-button should support xs size'] = `<cds-button
+  has-main-content=""
+  kind="primary"
+  size="xs"
+  tab-index="0"
+  tooltip-alignment=""
+  tooltip-position="top"
+  type="button"
+>
+  Actions
+</cds-button>
+<slot>
+</slot>
+`;
+/* end snapshot cds-menu-button should support xs size */
+snapshots['cds-menu-button should support xs size'] = `<cds-button
+  danger-description="danger"
   has-main-content=""
   kind="primary"
   size="xs"

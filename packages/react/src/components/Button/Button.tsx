@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2025
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -40,7 +40,7 @@ export type ButtonTooltipPosition = (typeof ButtonTooltipPositions)[number];
 export interface ButtonBaseProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   /**
-   * Specify the message read by screen readers for the danger button variant
+   * Specify the message read by screen readers for the danger button variants
    */
   dangerDescription?: string;
 
@@ -66,7 +66,7 @@ export interface ButtonBaseProps
   isExpressive?: boolean;
 
   /**
-   * Specify whether the Button is currently selected. Only applies to the Ghost variant.
+   * Specify whether the Button is currently selected. Only applies to the icon only Ghost variant.
    */
   isSelected?: boolean;
 
@@ -99,7 +99,7 @@ export interface ButtonBaseProps
 
   /**
    * Specify the alignment of the tooltip to the icon-only button.
-   * Can be one of: start, center, or end.
+   * Can be one of: `start`, `center`, or `end`.
    */
   tooltipAlignment?: ButtonTooltipAlignment;
 
@@ -116,7 +116,7 @@ export interface ButtonBaseProps
 
   /**
    * Specify the direction of the tooltip for icon-only buttons.
-   * Can be either top, right, bottom, or left.
+   * Can be either `top`, `right`, `bottom`, or `left`.
    */
   tooltipPosition?: ButtonTooltipPosition;
 }
@@ -142,7 +142,6 @@ function isIconOnlyButton(
   return false;
 }
 
-// eslint-disable-next-line react/display-name -- https://github.com/carbon-design-system/carbon/issues/20452
 const Button: ButtonComponent = React.forwardRef(
   <T extends React.ElementType = 'button'>(
     props: ButtonProps<T>,
@@ -180,7 +179,6 @@ const Button: ButtonComponent = React.forwardRef(
     const iconOnlyImage = !ButtonImageElement ? null : <ButtonImageElement />;
 
     if (!isIconOnlyButton(hasIconOnly, kind)) {
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const { tooltipAlignment, ...propsWithoutTooltipAlignment } = props;
       return <ButtonBase ref={ref} {...propsWithoutTooltipAlignment} />;
     } else {
@@ -236,8 +234,10 @@ const Button: ButtonComponent = React.forwardRef(
   }
 );
 
-(Button as React.FC).displayName = 'Button';
-(Button as React.FC).propTypes = {
+// @ts-expect-error - `displayName` isn't typed.
+Button.displayName = 'Button';
+// @ts-expect-error - `propTypes` isn't typed.
+Button.propTypes = {
   /**
    * Specify how the button itself should be rendered.
    * Make sure to apply all props to the root node and render children appropriately
@@ -266,7 +266,7 @@ const Button: ButtonComponent = React.forwardRef(
   className: PropTypes.string,
 
   /**
-   * Specify the message read by screen readers for the danger button variant
+   * Specify the message read by screen readers for the danger button variants
    */
   dangerDescription: PropTypes.string,
 
@@ -304,7 +304,7 @@ const Button: ButtonComponent = React.forwardRef(
   isExpressive: PropTypes.bool,
 
   /**
-   * Specify whether the Button is currently selected. Only applies to the Ghost variant.
+   * Specify whether the Button is currently selected. Only applies to the icon only Ghost variant.
    */
   isSelected: PropTypes.bool,
 
@@ -392,7 +392,7 @@ const Button: ButtonComponent = React.forwardRef(
 
   /**
    * Specify the alignment of the tooltip to the icon-only button.
-   * Can be one of: start, center, or end.
+   * Can be one of: `start`, `center`, or `end`.
    */
   tooltipAlignment: PropTypes.oneOf(['start', 'center', 'end']),
 
@@ -409,7 +409,7 @@ const Button: ButtonComponent = React.forwardRef(
 
   /**
    * Specify the direction of the tooltip for icon-only buttons.
-   * Can be either top, right, bottom, or left.
+   * Can be either `top`, `right`, `bottom`, or `left`.
    */
   tooltipPosition: PropTypes.oneOf(['top', 'right', 'bottom', 'left']),
 

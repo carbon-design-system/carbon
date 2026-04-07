@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2018, 2023
+ * Copyright IBM Corp. 2018, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -27,7 +27,7 @@ describe('getAttributes', () => {
   // currently is that if we are provided a tabindex in addition to an aria
   // label then we can set focusable and tabindex on the result attribute set.
   // However, if we get ONLY tabindex then we do not pass it along as the SVG
-  // should have an aria label (or title) available.
+  // should have an aria label available.
   test.each([
     [
       'false',
@@ -66,21 +66,6 @@ describe('getAttributes', () => {
         'aria-labelledby': 'id',
       },
     ],
-    [
-      'true',
-      'title and tabindex',
-      {
-        title: 'title',
-        tabindex: 0,
-      },
-    ],
-    [
-      'false',
-      'only title',
-      {
-        title: 'title',
-      },
-    ],
   ])(
     'should set `focusable="%s"` when using %s',
     (focusable, _, attributes) => {
@@ -94,7 +79,7 @@ describe('getAttributes', () => {
     }
   );
 
-  test.each(['aria-label', 'aria-labelledby', 'title'])(
+  test.each(['aria-label', 'aria-labelledby'])(
     'should set role and remove aria-hidden if `%s` is set',
     (attr) => {
       const attrs = getAttributes({

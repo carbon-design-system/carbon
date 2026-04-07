@@ -8,6 +8,7 @@
 /* eslint-disable no-console */
 
 import React from 'react';
+import { action } from 'storybook/actions';
 import './story.scss';
 import { default as Accordion, AccordionItem, AccordionSkeleton } from '.';
 import Button from '../Button';
@@ -45,6 +46,11 @@ const sharedArgTypes = {
       type: 'boolean',
     },
   },
+  ordered: {
+    control: {
+      type: 'boolean',
+    },
+  },
   isFlush: {
     control: {
       type: 'boolean',
@@ -54,59 +60,74 @@ const sharedArgTypes = {
     options: ['sm', 'md', 'lg'],
     control: { type: 'select' },
   },
+  onHeadingClick: {
+    action: 'onHeadingClick',
+    control: false,
+  },
 };
 
-export const Default = (args) => (
-  <Accordion {...args}>
-    <AccordionItem title="Section 1 title">
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-        commodo consequat.
-      </p>
-    </AccordionItem>
-    <AccordionItem title="Section 2 title">
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-        commodo consequat.
-      </p>
-    </AccordionItem>
-    <AccordionItem title="Section 3 title">
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-        commodo consequat.
-      </p>
-    </AccordionItem>
-    <AccordionItem
-      title={
-        <span>
-          Section 4 title (<em>the title can be a node</em>)
-        </span>
-      }>
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-        commodo consequat.
-      </p>
-    </AccordionItem>
-  </Accordion>
-);
-
-Default.args = {
+const sharedArgs = {
+  align: 'end',
   disabled: false,
   isFlush: false,
+  ordered: false,
+  size: 'md',
+  onHeadingClick: ({ isOpen, event }) => {
+    action('onHeadingClick')({
+      isOpen,
+      type: event.type,
+    });
+  },
 };
+
+export const Default = (args) => {
+  const { onHeadingClick, ...restArgs } = args;
+  return (
+    <Accordion {...restArgs}>
+      <AccordionItem title="Choose your plan" onHeadingClick={onHeadingClick}>
+        <p>
+          Compare plan features and select the option that best matches your
+          team&apos;s expected usage.
+        </p>
+      </AccordionItem>
+      <AccordionItem title="Add team members" onHeadingClick={onHeadingClick}>
+        <p>
+          Invite collaborators by email and assign their workspace roles before
+          launch.
+        </p>
+      </AccordionItem>
+      <AccordionItem
+        title="Set payment details"
+        onHeadingClick={onHeadingClick}>
+        <p>
+          Add billing information and choose whether to receive invoices by
+          email.
+        </p>
+      </AccordionItem>
+      <AccordionItem
+        onHeadingClick={onHeadingClick}
+        title={
+          <span>
+            Review and confirm (<em>title can be a node</em>)
+          </span>
+        }>
+        <p>
+          Check your setup summary, then confirm to create the workspace for
+          your team.
+        </p>
+      </AccordionItem>
+    </Accordion>
+  );
+};
+
+Default.args = { ...sharedArgs };
 
 Default.argTypes = { ...sharedArgTypes };
 
 export const Controlled = (args) => {
   const [expandAll, setExpandAll] = React.useState(false);
+  const { onHeadingClick, ...restArgs } = args;
+
   return (
     <>
       <ButtonSet className={'controlled-accordion-btnset'}>
@@ -128,37 +149,41 @@ export const Controlled = (args) => {
         </Button>
       </ButtonSet>
 
-      <Accordion {...args}>
-        <AccordionItem title="Section 1 title" open={expandAll}>
+      <Accordion {...restArgs}>
+        <AccordionItem
+          title="Choose your plan"
+          open={expandAll}
+          onHeadingClick={onHeadingClick}>
           <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat.
+            Compare plan features and select the option that best matches your
+            team&apos;s expected usage.
           </p>
         </AccordionItem>
-        <AccordionItem title="Section 2 title" open={expandAll}>
+        <AccordionItem
+          title="Add team members"
+          open={expandAll}
+          onHeadingClick={onHeadingClick}>
           <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat.
+            Invite collaborators by email and assign their workspace roles
+            before launch.
           </p>
         </AccordionItem>
-        <AccordionItem title="Section 3 title" open={expandAll}>
+        <AccordionItem
+          title="Set payment details"
+          open={expandAll}
+          onHeadingClick={onHeadingClick}>
           <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat.
+            Add billing information and choose whether to receive invoices by
+            email.
           </p>
         </AccordionItem>
-        <AccordionItem title="Section 4 title" open={expandAll}>
+        <AccordionItem
+          title="Review and confirm"
+          open={expandAll}
+          onHeadingClick={onHeadingClick}>
           <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat.
+            Check your setup summary, then confirm to create the workspace for
+            your team.
           </p>
         </AccordionItem>
       </Accordion>
@@ -166,47 +191,42 @@ export const Controlled = (args) => {
   );
 };
 
-Controlled.args = {
-  disabled: false,
-  isFlush: false,
-};
+Controlled.args = { ...sharedArgs };
 
 Controlled.argTypes = { ...sharedArgTypes };
 
 export const _WithLayer = (args) => {
+  const { onHeadingClick, ...restArgs } = args;
+
   return (
-    <WithLayer {...args}>
-      <Accordion>
-        <AccordionItem title="Section 1 title">
+    <WithLayer>
+      <Accordion {...restArgs}>
+        <AccordionItem title="Choose your plan" onHeadingClick={onHeadingClick}>
           <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat.
+            Compare plan features and select the option that best matches your
+            team&apos;s expected usage.
           </p>
         </AccordionItem>
-        <AccordionItem title="Section 2 title">
+        <AccordionItem title="Add team members" onHeadingClick={onHeadingClick}>
           <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat.
+            Invite collaborators by email and assign their workspace roles
+            before launch.
           </p>
         </AccordionItem>
-        <AccordionItem title="Section 3 title">
+        <AccordionItem
+          title="Set payment details"
+          onHeadingClick={onHeadingClick}>
           <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat.
+            Add billing information and choose whether to receive invoices by
+            email.
           </p>
         </AccordionItem>
-        <AccordionItem title="Section 4 title">
+        <AccordionItem
+          title="Review and confirm"
+          onHeadingClick={onHeadingClick}>
           <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat.
+            Check your setup summary, then confirm to create the workspace for
+            your team.
           </p>
         </AccordionItem>
       </Accordion>
@@ -214,12 +234,9 @@ export const _WithLayer = (args) => {
   );
 };
 
-WithLayer.args = {
-  disabled: false,
-  isFlush: false,
-};
+_WithLayer.args = { ...sharedArgs };
 
-WithLayer.argTypes = { ...sharedArgTypes };
+_WithLayer.argTypes = { ...sharedArgTypes };
 
 export const Skeleton = (args) => (
   <AccordionSkeleton open count={4} {...args} />
@@ -230,7 +247,9 @@ Skeleton.decorators = [
 ];
 
 Skeleton.args = {
+  align: 'end',
   isFlush: false,
+  ordered: false,
 };
 
 Skeleton.argTypes = {
@@ -245,7 +264,9 @@ Skeleton.argTypes = {
     control: false,
   },
   disabled: {
-    control: false,
+    table: {
+      disable: true,
+    },
   },
   isFlush: {
     control: {
@@ -253,6 +274,8 @@ Skeleton.argTypes = {
     },
   },
   size: {
-    control: false,
+    table: {
+      disable: true,
+    },
   },
 };

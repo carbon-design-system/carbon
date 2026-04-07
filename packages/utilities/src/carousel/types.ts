@@ -1,15 +1,17 @@
 /**
- * @license
- *
- * Copyright IBM Corp. 2025
+ * Copyright IBM Corp. 2025, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
+import { translationIds } from './defs';
+
+export type TranslationKey = keyof typeof translationIds;
+
 interface CarouselStackHistory {
   id: number;
-  elem: HTMLLIElement;
+  elem: HTMLElement;
 }
 
 type CarouselResponse = {
@@ -28,6 +30,8 @@ export type Config = {
   onViewChangeStart?: (args: CarouselResponse) => void;
   onViewChangeEnd?: (args: CarouselResponse) => void;
   excludeSwipeSupport?: boolean;
+  useMaxHeight?: boolean;
+  translateWithId?: (messageId: TranslationKey) => string;
 };
 
 interface InitCarousel {

@@ -7,7 +7,7 @@
 
 'use strict';
 
-const { pascalCase } = require('change-case');
+const { pascalCase } = require('change-case-all');
 const path = require('path');
 const parser = require('svgson');
 const { svgo } = require('./output/optimizer');

@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2022, 2025
+ * Copyright IBM Corp. 2022, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -15,7 +15,7 @@ import {
 } from '../MultiSelect';
 import { usePrefix } from '../../internal/usePrefix';
 import { FormContext } from '../FluidForm/FormContext';
-import { UseSelectProps } from 'downshift';
+import { UseComboboxProps, UseSelectProps } from 'downshift';
 
 interface OnChangeData<ItemType> {
   selectedItems: ItemType[] | null;
@@ -80,11 +80,6 @@ export interface FluidMultiSelectProps<ItemType>
    */
   isFilterable?: boolean;
   /**
-   * Function to render items as custom components instead of strings.
-   * Defaults to null and is overridden by a getter
-   */
-  itemToElement?: React.JSXElementConstructor<ItemType>;
-  /**
    * Helper function passed to downshift that allows the library to render a
    * given item to a string label. By default, it extracts the `label` field
    * from a given item to serve as the item label in the list. Consider
@@ -115,7 +110,7 @@ export interface FluidMultiSelectProps<ItemType>
    * **Filterable variant only** - `onInputValueChange` is a utility for this controlled component to communicate to
    * the currently typed input.
    */
-  onInputValueChange?: (inputValue: string) => void;
+  onInputValueChange?: UseComboboxProps<ItemType>['onInputValueChange'];
   /**
    * `onMenuChange` is a utility for this controlled component to communicate to a
    * consuming component that the menu was open(`true`)/closed(`false`).
@@ -266,8 +261,7 @@ FluidMultiSelect.propTypes = {
   isFilterable: PropTypes.bool,
 
   /**
-   * Function to render items as custom components instead of strings.
-   * Defaults to null and is overridden by a getter
+   * Renders an item as a custom React node instead of a string.
    */
   itemToElement: PropTypes.func,
 
