@@ -2780,9 +2780,6 @@ Map {
       "invalid": {
         "type": "bool",
       },
-      "invalidText": {
-        "type": "node",
-      },
       "light": [Function],
       "locale": {
         "args": [
@@ -2961,9 +2958,6 @@ Map {
       },
       "warn": {
         "type": "bool",
-      },
-      "warnText": {
-        "type": "node",
       },
     },
     "render": [Function],

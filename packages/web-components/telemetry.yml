@@ -85,6 +85,7 @@ collect:
         - hide-close-button
         - hide-divider
         - hide-label
+        - hide-password-label
         - hide-steppers
         - hidePasswordLabel
         - highContrast
@@ -191,6 +192,7 @@ collect:
         - selection-value
         - selector-initial-focus
         - shortcut
+        - show-password-label
         - show-password-visibility-toggle
         - showPasswordLabel
         - size
@@ -320,6 +322,8 @@ collect:
         - error-subject
         - oncds-file-uploader-item-beingdeleted
         - oncds-file-uploader-item-deleted
+        # cds-fluid-dropdown
+        - is-condensed
         # cds-fluid-time-picker-skeleton
         - is-only-two
         # cds-form-group
@@ -424,9 +428,6 @@ collect:
         - items-shown
         - loop
         - oncds-page-changed
-        # cds-password-input
-        - hide-password-label
-        - show-password-label
         # cds-progress-indicator
         - current-index
         - ononChange

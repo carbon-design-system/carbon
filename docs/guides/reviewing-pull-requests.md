@@ -4,9 +4,8 @@
 - **Contributors**: use this as a guide for what to include in your PRs so
   they'll sail through review ⛵
 
-> [!IMPORTANT]  
-> This just serves as a starting point. It will not include every small nit and
-> detail that might end up in a PR review.
+> [!IMPORTANT] This just serves as a starting point. It will not include every
+> small nit and detail that might end up in a PR review.
 >
 > This document should remain as small as possible! The longer this gets, the
 > more difficult it will be to read and absorb.
@@ -70,20 +69,7 @@
       label.
     - If you suspect a false positive, re-run or restart the check.
 
-### 4. Visual Regression & Merge Conflicts
-
-- **Percy VRT:**
-  - Manually review and approve Percy’s visual regression test results (noting
-    that false positives can occur).
-- **Merge Conflicts:**
-  - If conflicts exist:
-    - Comment on the PR to alert the author.
-    - Add the
-      https://github.com/carbon-design-system/carbon/labels/status%3A%20merge%20conflict%20%F0%9F%9A%AB
-      label.
-    - Optionally, resolve conflicts locally if you can.
-
-### 5. Final Review & Merge Preparation
+### 4. Final Review & Merge Preparation
 
 - **Submit Review on Files Changed:**
   - Use the review options:

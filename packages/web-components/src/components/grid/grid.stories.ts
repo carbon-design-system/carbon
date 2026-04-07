@@ -45,11 +45,6 @@ const controls = {
 export const Default = {
   args: defaultArgs,
   argTypes: controls,
-  parameters: {
-    percy: {
-      skip: true,
-    },
-  },
   render: ({ align, condensed, narrow, fullWidth }) =>
     html`<cds-grid
         align=${align}
@@ -68,11 +63,6 @@ export const Default = {
 };
 
 export const Condensed = {
-  parameters: {
-    percy: {
-      skip: true,
-    },
-  },
   render: () =>
     html`<cds-grid class="sb-grid" condensed>
         <cds-column class="sb-column" sm="4"></cds-column>
@@ -86,11 +76,6 @@ export const Condensed = {
 };
 
 export const FullWidth = {
-  parameters: {
-    percy: {
-      skip: true,
-    },
-  },
   render: () =>
     html`<cds-grid class="sb-grid" full-width>
         <cds-column class="sb-column" sm="4"></cds-column>
@@ -143,11 +128,6 @@ export const WithRowGap = {
 };
 
 export const MixedGutterModes = {
-  parameters: {
-    percy: {
-      skip: true,
-    },
-  },
   render: () =>
     html`<cds-grid class="sb-grid">
         <cds-column class="sb-column" span="8">
@@ -216,11 +196,6 @@ export const MixedGutterModes = {
 };
 
 export const Narrow = {
-  parameters: {
-    percy: {
-      skip: true,
-    },
-  },
   render: () =>
     html`<cds-grid class="sb-grid" narrow>
         <cds-column class="sb-column" sm="4"></cds-column>
@@ -234,11 +209,6 @@ export const Narrow = {
 };
 
 export const GridStartEnd = {
-  parameters: {
-    percy: {
-      skip: true,
-    },
-  },
   render: () =>
     html`<cds-grid class="sb-grid">
         <cds-column
@@ -269,11 +239,6 @@ export const GridStartEnd = {
 };
 
 export const Offset = {
-  parameters: {
-    percy: {
-      skip: true,
-    },
-  },
   render: () =>
     html`<cds-grid class="sb-grid">
         <cds-column
@@ -308,11 +273,6 @@ export const Offset = {
 };
 
 export const Responsive = {
-  parameters: {
-    percy: {
-      skip: true,
-    },
-  },
   render: () =>
     html`<cds-grid class="sb-grid">
         <cds-column class="sb-column" sm="2" md="4" lg="6">
