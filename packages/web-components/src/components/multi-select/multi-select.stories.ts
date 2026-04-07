@@ -110,7 +110,8 @@ const filterableArgs = {
   hideLabel: false,
   locale: 'en',
   invalid: false,
-  invalidText: 'whoopsie!',
+  invalidText: 'Error message goes here',
+  warnText: 'Warning message goes here',
   titleText: 'FilterableMultiSelect title',
   label: '',
   size: DROPDOWN_SIZE.MEDIUM,
@@ -118,7 +119,6 @@ const filterableArgs = {
   readOnly: false,
   type: null,
   warn: false,
-  warnText: 'whoopsie!',
 };
 
 const argTypes = {

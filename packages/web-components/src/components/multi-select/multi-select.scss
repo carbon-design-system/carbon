@@ -478,10 +478,22 @@ $css--plex: true !default;
   }
 }
 
-:host(#{$prefix}-multi-select[warn]:not([disabled]):not([read-only])) {
+:host(
+    #{$prefix}-multi-select[warn]:not([invalid]):not([disabled]):not(
+        [read-only]
+      )
+  ) {
   .#{$prefix}--form__helper-text {
     color: $text-primary;
   }
+  .#{$prefix}--list-box {
+    .#{$prefix}--list-box__field {
+      padding-inline-end: $spacing-10;
+    }
+  }
+}
+
+:host(#{$prefix}-multi-select[warn][invalid]:not([disabled]):not([read-only])) {
   .#{$prefix}--list-box {
     .#{$prefix}--list-box__field {
       padding-inline-end: $spacing-10;
