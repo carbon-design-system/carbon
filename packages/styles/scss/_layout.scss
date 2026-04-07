@@ -103,6 +103,29 @@ $layout-tokens: (
   }
 }
 
+/// Emits layout context tokens for shadow host elements.
+@mixin emit-layout-tokens-to-shadow-host($host-selector) {
+  @each $group, $properties in $layout-tokens {
+    @each $property, $steps in $properties {
+      @each $step, $value in $steps {
+        :host(#{$host-selector}[#{$group}='#{$step}']) {
+          @include custom-property.declaration(
+            'layout-#{$group}-#{$property}-context',
+            custom-property.get-var(
+              'layout-#{$group}-#{$property}-#{$step}',
+              $value
+            )
+          );
+          @include custom-property.declaration(
+            'layout-#{$group}-#{$property}',
+            custom-property.get-var('layout-#{$group}-#{$property}-context')
+          );
+        }
+      }
+    }
+  }
+}
+
 :root {
   @include emit-layout-tokens();
 }
