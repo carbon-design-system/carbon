@@ -72,7 +72,7 @@ $sub-grid: #{$prefix}--subgrid;
 }
 
 :host(#{$prefix}-grid) [subgrid][mode='condensed'][with-row-gap] {
-  row-gap: var(--cds-grid-gutter-condensed);
+  row-gap: var(--cds-grid-gutter-start);
 }
 
 // Column styles
