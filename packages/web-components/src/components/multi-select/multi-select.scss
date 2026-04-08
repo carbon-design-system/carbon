@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2019, 2025
+// Copyright IBM Corp. 2026
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -479,9 +479,9 @@ $css--plex: true !default;
 }
 
 :host(
-    #{$prefix}-multi-select[warn]:not([invalid]):not([disabled]):not(
-        [read-only]
-      )
+    #{$prefix}-multi-select[warn]:not([invalid]):not([ai-label]):not(
+        [disabled]
+      ):not([read-only])
   ) {
   .#{$prefix}--form__helper-text {
     color: $text-primary;
@@ -493,7 +493,11 @@ $css--plex: true !default;
   }
 }
 
-:host(#{$prefix}-multi-select[warn][invalid]:not([disabled]):not([read-only])) {
+:host(
+    #{$prefix}-multi-select[warn][invalid]:not([ai-label]):not([disabled]):not(
+        [read-only]
+      )
+  ) {
   .#{$prefix}--list-box {
     .#{$prefix}--list-box__field {
       padding-inline-end: $spacing-10;
