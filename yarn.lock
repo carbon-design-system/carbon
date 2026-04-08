@@ -2141,6 +2141,16 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@carbon/utilities@npm:^0.17.0":
+  version: 0.17.0
+  resolution: "@carbon/utilities@npm:0.17.0"
+  dependencies:
+    "@ibm/telemetry-js": "npm:^1.6.1"
+    "@internationalized/number": "npm:^3.6.1"
+  checksum: 10/7fe07d465f3b042f1c424d15bbfd41293b59142aea439fd7798fa14403ea7e34a4d871c02c4a7902f0e13f5ae4c47ef5b562e19f27f536e22058f140c0cd87c4
+  languageName: node
+  linkType: hard
+
 "@carbon/utilities@npm:^0.18.0, @carbon/utilities@workspace:packages/utilities":
   version: 0.0.0-use.local
   resolution: "@carbon/utilities@workspace:packages/utilities"
@@ -2162,6 +2172,7 @@ __metadata:
     "@carbon/layout": "npm:^11.51.0"
     "@carbon/motion": "npm:^11.44.0"
     "@carbon/styles": "npm:^1.104.0"
+    "@carbon/utilities": "npm:^0.17.0"
     "@floating-ui/dom": "npm:^1.6.3"
     "@ibm/telemetry-js": "npm:^1.10.2"
     "@juggle/resize-observer": "npm:^3.4.0"
