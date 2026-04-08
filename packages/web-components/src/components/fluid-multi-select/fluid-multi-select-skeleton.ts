@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp.2026
+ * Copyright IBM Corp. 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -11,7 +11,7 @@ import { carbonElement as customElement } from '../../globals/decorators/carbon-
 import styles from './fluid-multi-select.scss?lit';
 
 /**
- * Fluid multi select.
+ * Fluid multi select skeleton.
  *
  * @element cds-fluid-multi-select-skeleton
  */

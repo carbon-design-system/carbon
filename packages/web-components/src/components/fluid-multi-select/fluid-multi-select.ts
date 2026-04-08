@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp.2026
+ * Copyright IBM Corp. 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -16,7 +16,7 @@ import { property } from 'lit/decorators.js';
 /**
  * Fluid multi select.
  *
- * @element cds-fluid-select
+ * @element cds-fluid-multi-select
  */
 @customElement(`${prefix}-fluid-multi-select`)
 class CDSFluidMultiSelect extends CDSMultiSelect {
