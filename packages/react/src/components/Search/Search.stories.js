@@ -99,9 +99,7 @@ const expandableParameters = {
   },
 };
 
-export const Expandable = (args) => {
-  const { defaultWidth, ...searchArgs } = args;
-
+export const Expandable = ({ defaultWidth, ...searchArgs }) => {
   return (
     <div style={{ marginTop: '25px', width: defaultWidth }}>
       <ExpandableSearch id="search-expandable-1" {...searchArgs} />
@@ -110,9 +108,7 @@ export const Expandable = (args) => {
 };
 Expandable.parameters = { ...expandableParameters };
 
-export const _WithLayer = (args) => {
-  const { defaultWidth, ...searchArgs } = args;
-
+export const _WithLayer = ({ defaultWidth, ...searchArgs }) => {
   return (
     <WithLayer>
       {(layer) => (
@@ -125,9 +121,7 @@ export const _WithLayer = (args) => {
 };
 _WithLayer.parameters = { ...defaultParameters };
 
-export const ExpandableWithLayer = (args) => {
-  const { defaultWidth, ...searchArgs } = args;
-
+export const ExpandableWithLayer = ({ defaultWidth, ...searchArgs }) => {
   return (
     <WithLayer>
       {(layer) => (
@@ -140,9 +134,7 @@ export const ExpandableWithLayer = (args) => {
 };
 ExpandableWithLayer.parameters = { ...expandableParameters };
 
-export const Default = (args) => {
-  const { defaultWidth, ...searchArgs } = args;
-
+export const Default = ({ defaultWidth, ...searchArgs }) => {
   return (
     <div style={{ width: defaultWidth }}>
       <Search id="search-default-1" {...searchArgs} />
