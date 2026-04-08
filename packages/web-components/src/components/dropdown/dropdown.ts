@@ -1020,6 +1020,11 @@ class CDSDropdown extends ValidityMixin(
   required = false;
 
   /**
+   * Specify whether the dropdown is fluid or not
+   */
+  @property({ type: Boolean })
+  isFluid = false;
+  /**
    * The special validity message for `required`.
    */
   @property({ attribute: 'required-validity-message' })
@@ -1382,6 +1387,9 @@ class CDSDropdown extends ValidityMixin(
             ${iconLoader(ChevronDown16, { 'aria-label': toggleLabel })}
           </div>
         </div>
+        ${this.isFluid && (normalizedProps.invalid || normalizedProps.warn)
+          ? html`<hr class="${prefix}--list-box__divider" />`
+          : null}
         <slot name="ai-label" @slotchange=${handleAILabelSlotChange}></slot>
         <slot name="slug" @slotchange=${handleAILabelSlotChange}></slot>
         ${menuBody}
