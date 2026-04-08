@@ -176,3 +176,5 @@ export {
 } from './components/heading/heading';
 export { default as CDSMenuButton } from './components/menu-button/menu-button';
 export { default as CDSComboButton } from './components/combo-button/combo-button';
+export { default as CDSLayout } from './components/layout/layout';
+export { default as CDSLayoutConstraint } from './components/layout/layout-constraint';
