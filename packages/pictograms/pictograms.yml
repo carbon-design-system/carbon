@@ -802,6 +802,33 @@
   aliases:
     - big data
     - cloud
+- name: bin--compost
+  friendly_name: Compost bin
+  aliases:
+    - compost
+    - compost bin
+    - recycle
+    - environment
+    - process
+    - workplace
+- name: bin--recycle
+  friendly_name: Recycle bin
+  aliases:
+    - recycle
+    - recycle bin
+    - industry
+    - environment
+    - process
+    - workplace
+- name: bin--sanitary
+  friendly_name: Sanitary bin
+  aliases:
+    - sanitary
+    - sanitary bin
+    - sanitary waste
+    - feminine waste bin
+    - hygiene bin
+    - trash
 - name: binocular
   friendly_name: Binocular
   aliases:
@@ -2237,15 +2264,6 @@
     - organic
     - trash
     - apple core
-- name: compost--bin
-  friendly_name: Compost bin
-  aliases:
-    - compost
-    - compost bin
-    - recycle
-    - environment
-    - process
-    - workplace
 - name: compute
   friendly_name: Compute
   aliases:
@@ -2849,6 +2867,15 @@
   aliases:
     - DB2
     - cloud
+- name: db2--genius-hub
+  friendly_name: Db2 Genius Hub
+  aliases:
+    - db2
+    - genius
+    - hub
+    - database
+    - admin
+    - console
 - name: decision-velocity
   friendly_name: Decision velocity
   aliases:
@@ -7184,6 +7211,27 @@
     - recycle
     - confidential
     - secure
+- name: paper-cup
+  friendly_name: Paper cup
+  aliases:
+    - workplace
+    - recycling
+    - recycle
+    - paper cup
+    - beverage
+    - drink
+    - drink cup
+- name: paper-cup-with-metal-can
+  friendly_name: Paper cup with metal can
+  aliases:
+    - workplace
+    - recycling
+    - recycle
+    - paper cup
+    - metal
+    - beverage
+    - drink
+    - drink cup
 - name: paris--arc-de-triomphe
   friendly_name: Paris Arc de Triomphe
   aliases:
@@ -8058,15 +8106,6 @@
   friendly_name: Recycle
   aliases:
     - recycle
-    - industry
-    - environment
-    - process
-    - workplace
-- name: recycle--bin
-  friendly_name: Recycle bin
-  aliases:
-    - recycle
-    - recycle bin
     - industry
     - environment
     - process

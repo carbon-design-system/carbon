@@ -10,8 +10,8 @@ import { ifDefined } from 'lit/directives/if-defined.js';
 import { SEARCH_SIZE } from './defs';
 import './search-skeleton';
 import '../layer';
-import '../../../.storybook/templates/with-layer';
 import './index';
+import { withLayers } from '../../../.storybook/decorators/with-layers';
 
 const sizes = {
   [`Extra small size (${SEARCH_SIZE.EXTRA_SMALL})`]: SEARCH_SIZE.EXTRA_SMALL,
@@ -166,6 +166,10 @@ export const Expandable = {
 export const ExpandableWithLayer = {
   args: { ...args, expanded: false },
   argTypes,
+  decorators: [withLayers],
+  parameters: {
+    layout: 'fullscreen',
+  },
   render: (args) => {
     const {
       autoComplete,
@@ -183,24 +187,22 @@ export const ExpandableWithLayer = {
       onInput,
     } = args ?? {};
     return html`
-      <sb-template-layers>
-        <div style="width: ${defaultWidth}px;">
-          <cds-search
-            autocomplete="${autoComplete}"
-            close-button-label-text="${ifDefined(closeButtonLabelText)}"
-            color-scheme="${ifDefined(colorScheme)}"
-            ?disabled="${disabled}"
-            label-text="${ifDefined(labelText)}"
-            placeholder="${ifDefined(placeholder)}"
-            size="${ifDefined(size)}"
-            type="${ifDefined(type)}"
-            role=${role}
-            value="${ifDefined(value)}"
-            @cds-search-input="${onInput}"
-            expandable
-            ?expanded=${expanded}></cds-search>
-        </div>
-      </sb-template-layers>
+      <div style="width: ${defaultWidth}px;">
+        <cds-search
+          autocomplete="${autoComplete}"
+          close-button-label-text="${ifDefined(closeButtonLabelText)}"
+          color-scheme="${ifDefined(colorScheme)}"
+          ?disabled="${disabled}"
+          label-text="${ifDefined(labelText)}"
+          placeholder="${ifDefined(placeholder)}"
+          size="${ifDefined(size)}"
+          type="${ifDefined(type)}"
+          role=${role}
+          value="${ifDefined(value)}"
+          @cds-search-input="${onInput}"
+          expandable
+          ?expanded=${expanded}></cds-search>
+      </div>
     `;
   },
 };
@@ -208,6 +210,10 @@ export const ExpandableWithLayer = {
 export const WithLayer = {
   args,
   argTypes,
+  decorators: [withLayers],
+  parameters: {
+    layout: 'fullscreen',
+  },
   render: (args) => {
     const {
       autoComplete,
@@ -224,22 +230,20 @@ export const WithLayer = {
       onInput,
     } = args ?? {};
     return html`
-      <sb-template-layers>
-        <div style="width: ${defaultWidth}px;">
-          <cds-search
-            autocomplete="${autoComplete}"
-            close-button-label-text="${ifDefined(closeButtonLabelText)}"
-            color-scheme="${ifDefined(colorScheme)}"
-            ?disabled="${disabled}"
-            label-text="${ifDefined(labelText)}"
-            placeholder="${ifDefined(placeholder)}"
-            size="${ifDefined(size)}"
-            type="${ifDefined(type)}"
-            role=${role}
-            value="${ifDefined(value)}"
-            @cds-search-input="${onInput}"></cds-search>
-        </div>
-      </sb-template-layers>
+      <div style="width: ${defaultWidth}px;">
+        <cds-search
+          autocomplete="${autoComplete}"
+          close-button-label-text="${ifDefined(closeButtonLabelText)}"
+          color-scheme="${ifDefined(colorScheme)}"
+          ?disabled="${disabled}"
+          label-text="${ifDefined(labelText)}"
+          placeholder="${ifDefined(placeholder)}"
+          size="${ifDefined(size)}"
+          type="${ifDefined(type)}"
+          role=${role}
+          value="${ifDefined(value)}"
+          @cds-search-input="${onInput}"></cds-search>
+      </div>
     `;
   },
 };

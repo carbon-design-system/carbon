@@ -33,12 +33,10 @@ export interface FeatureFlagsProps {
   enablePresence?: boolean;
 }
 
-// TODO: Migrate `packages/feature-flags` to TypeScript and delete this
-// interface.
-interface FeatureFlagScope {
-  enabled: (name: string) => boolean;
-  mergeWithScope: (scope: FeatureFlagScope) => void;
-}
+// Reuse the runtime scope shape from `@carbon/feature-flags` directly. A local
+// recursive interface here creates a second incompatible `FeatureFlagScope`
+// during declaration emit.
+type FeatureFlagScope = typeof GlobalFeatureFlags;
 
 /**
  * Our FeatureFlagContext is used alongside the FeatureFlags component to enable
