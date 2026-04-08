@@ -99,47 +99,38 @@ const expandableParameters = {
   },
 };
 
-export const Expandable = ({ defaultWidth, ...searchArgs }) => {
-  return (
-    <div style={{ marginTop: '25px', width: defaultWidth }}>
-      <ExpandableSearch id="search-expandable-1" {...searchArgs} />
-    </div>
-  );
-};
+export const Expandable = ({ defaultWidth, ...searchArgs }) => (
+  <div style={{ marginTop: '25px', width: defaultWidth }}>
+    <ExpandableSearch id="search-expandable-1" {...searchArgs} />
+  </div>
+);
 Expandable.parameters = { ...expandableParameters };
 
-export const _WithLayer = ({ defaultWidth, ...searchArgs }) => {
-  return (
-    <WithLayer>
-      {(layer) => (
-        <div style={{ width: defaultWidth }}>
-          <Search id={`search-${layer}`} {...searchArgs} />
-        </div>
-      )}
-    </WithLayer>
-  );
-};
+export const _WithLayer = ({ defaultWidth, ...searchArgs }) => (
+  <WithLayer>
+    {(layer) => (
+      <div style={{ width: defaultWidth }}>
+        <Search id={`search-${layer}`} {...searchArgs} />
+      </div>
+    )}
+  </WithLayer>
+);
 _WithLayer.parameters = { ...defaultParameters };
 
-export const ExpandableWithLayer = ({ defaultWidth, ...searchArgs }) => {
-  return (
-    <WithLayer>
-      {(layer) => (
-        <div style={{ marginTop: '25px', width: defaultWidth }}>
-          <ExpandableSearch id={`search-expandable-${layer}`} {...searchArgs} />
-        </div>
-      )}
-    </WithLayer>
-  );
-};
+export const ExpandableWithLayer = ({ defaultWidth, ...searchArgs }) => (
+  <WithLayer>
+    {(layer) => (
+      <div style={{ marginTop: '25px', width: defaultWidth }}>
+        <ExpandableSearch id={`search-expandable-${layer}`} {...searchArgs} />
+      </div>
+    )}
+  </WithLayer>
+);
 ExpandableWithLayer.parameters = { ...expandableParameters };
 
-export const Default = ({ defaultWidth, ...searchArgs }) => {
-  return (
-    <div style={{ width: defaultWidth }}>
-      <Search id="search-default-1" {...searchArgs} />
-    </div>
-  );
-};
-
+export const Default = ({ defaultWidth, ...searchArgs }) => (
+  <div style={{ width: defaultWidth }}>
+    <Search id="search-default-1" {...searchArgs} />
+  </div>
+);
 Default.parameters = { ...defaultParameters };
