@@ -169,8 +169,12 @@ const Menu = forwardRef<HTMLUListElement, MenuProps>(function Menu(
   const ref = useMergedRefs([forwardRef, menu]);
 
   const [position, setPosition] = useState([-1, -1]);
-  const focusableItems = childContext.state.items.filter(
-    (item) => !item.disabled && item.ref.current
+  const focusableItems = useMemo(
+    () =>
+      childContext.state.items.filter(
+        (item) => !item.disabled && item.ref.current
+      ),
+    [childContext.state.items]
   );
 
   // Getting the width from the parent container element - controlled
@@ -414,7 +418,12 @@ const Menu = forwardRef<HTMLUListElement, MenuProps>(function Menu(
   useEffect(() => {
     if (open) {
       const raf = requestAnimationFrame(() => {
-        if (focusableItems.length > 0) {
+        const activeElement = menu.current?.ownerDocument.activeElement;
+        const menuContainsFocus =
+          activeElement instanceof Node &&
+          menu.current?.contains(activeElement);
+
+        if (focusableItems.length > 0 && (!isRoot || menuContainsFocus)) {
           focusItem();
         }
       });
@@ -422,7 +431,7 @@ const Menu = forwardRef<HTMLUListElement, MenuProps>(function Menu(
       return () => cancelAnimationFrame(raf);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [open, focusableItems]);
+  }, [open, focusableItems, isRoot, position]);
 
   useEffect(() => {
     if (open) {
