@@ -16,7 +16,7 @@ import './date-picker';
 import './date-picker-input-skeleton';
 import '../layer/index';
 import '../ai-label';
-import '../../../.storybook/templates/with-layer';
+import { withLayers } from '../../../.storybook/decorators/with-layers';
 
 const sizes = {
   [`Small (${INPUT_SIZE.SMALL})`]: INPUT_SIZE.SMALL,
@@ -231,6 +231,10 @@ export const RangeWithCalendar = {
 };
 
 export const RangeWithCalendarWithLayer = {
+  decorators: [withLayers],
+  parameters: {
+    layout: 'fullscreen',
+  },
   args: defaultArgs,
   argTypes: controls,
   render: ({
@@ -249,37 +253,35 @@ export const RangeWithCalendarWithLayer = {
     warnText,
   }) => {
     return html`
-      <sb-template-layers>
-        <cds-date-picker
-          allow-input="${allowInput}"
-          close-on-select="${closeOnSelect}"
-          date-format="${dateFormat}"
-          ?disabled="${disabled}"
-          max-date="${maxDate}"
-          min-date="${minDate}"
-          ?readonly="${readonly}">
-          <cds-date-picker-input
-            kind="from"
-            label-text="Start date"
-            placeholder="${placeholder}"
-            size="${size}"
-            ?invalid="${invalid}"
-            invalid-text="${invalidText}"
-            ?warn="${warn}"
-            warn-text="${warnText}">
-          </cds-date-picker-input>
-          <cds-date-picker-input
-            kind="to"
-            label-text="End date"
-            placeholder="${placeholder}"
-            size="${size}"
-            ?invalid="${invalid}"
-            invalid-text="${invalidText}"
-            ?warn="${warn}"
-            warn-text="${warnText}">
-          </cds-date-picker-input>
-        </cds-date-picker>
-      </sb-template-layers>
+      <cds-date-picker
+        allow-input="${allowInput}"
+        close-on-select="${closeOnSelect}"
+        date-format="${dateFormat}"
+        ?disabled="${disabled}"
+        max-date="${maxDate}"
+        min-date="${minDate}"
+        ?readonly="${readonly}">
+        <cds-date-picker-input
+          kind="from"
+          label-text="Start date"
+          placeholder="${placeholder}"
+          size="${size}"
+          ?invalid="${invalid}"
+          invalid-text="${invalidText}"
+          ?warn="${warn}"
+          warn-text="${warnText}">
+        </cds-date-picker-input>
+        <cds-date-picker-input
+          kind="to"
+          label-text="End date"
+          placeholder="${placeholder}"
+          size="${size}"
+          ?invalid="${invalid}"
+          invalid-text="${invalidText}"
+          ?warn="${warn}"
+          warn-text="${warnText}">
+        </cds-date-picker-input>
+      </cds-date-picker>
     `;
   },
 };
@@ -326,6 +328,10 @@ export const Simple = {
 };
 
 export const SimpleWithLayer = {
+  decorators: [withLayers],
+  parameters: {
+    layout: 'fullscreen',
+  },
   args: defaultArgs,
   argTypes: controls,
   render: ({
@@ -344,13 +350,12 @@ export const SimpleWithLayer = {
     warnText,
   }) => {
     return html`
-      <sb-template-layers>
-        <cds-date-picker
-          allow-input="${allowInput}"
-          close-on-select="${closeOnSelect}"
-          date-format="${dateFormat}"
-          max-date="${maxDate}"
-          min-date="${minDate}">
+      <cds-date-picker
+        allow-input="${allowInput}"
+        close-on-select="${closeOnSelect}"
+        date-format="${dateFormat}"
+        max-date="${maxDate}"
+        min-date="${minDate}">
         <cds-date-picker-input
           ?disabled="${disabled}"
           label-text="Date Picker label"
@@ -362,8 +367,8 @@ export const SimpleWithLayer = {
           ?warn="${warn}"
           warn-text="${warnText}">
         </cds-date-picker-input>
-      </sb-template-layers>
-  `;
+      </cds-date-picker>
+    `;
   },
 };
 
@@ -410,6 +415,10 @@ export const SingleWithCalendar = {
 };
 
 export const SingleWithCalendarWithLayer = {
+  decorators: [withLayers],
+  parameters: {
+    layout: 'fullscreen',
+  },
   args: defaultArgs,
   argTypes: controls,
   render: ({
@@ -428,27 +437,25 @@ export const SingleWithCalendarWithLayer = {
     warnText,
   }) => {
     return html`
-      <sb-template-layers>
-        <cds-date-picker
-          allow-input="${allowInput}"
-          close-on-select="${closeOnSelect}"
-          date-format="${dateFormat}"
-          ?disabled="${disabled}"
-          max-date="${maxDate}"
-          min-date="${minDate}"
-          ?readonly="${readonly}">
-          <cds-date-picker-input
-            kind="single"
-            label-text="Date Picker label"
-            placeholder="${placeholder}"
-            size="${size}"
-            ?invalid="${invalid}"
-            invalid-text="${invalidText}"
-            ?warn="${warn}"
-            warn-text="${warnText}">
-          </cds-date-picker-input>
-        </cds-date-picker>
-      </sb-template-layers>
+      <cds-date-picker
+        allow-input="${allowInput}"
+        close-on-select="${closeOnSelect}"
+        date-format="${dateFormat}"
+        ?disabled="${disabled}"
+        max-date="${maxDate}"
+        min-date="${minDate}"
+        ?readonly="${readonly}">
+        <cds-date-picker-input
+          kind="single"
+          label-text="Date Picker label"
+          placeholder="${placeholder}"
+          size="${size}"
+          ?invalid="${invalid}"
+          invalid-text="${invalidText}"
+          ?warn="${warn}"
+          warn-text="${warnText}">
+        </cds-date-picker-input>
+      </cds-date-picker>
     `;
   },
 };
@@ -474,11 +481,6 @@ export const Skeleton = {
     </cds-date-picker-input-skeleton>
   `,
   decorators: [(story) => html` <div>${story()}</div> `],
-  parameters: {
-    percy: {
-      skip: true,
-    },
-  },
 };
 
 const content = html`

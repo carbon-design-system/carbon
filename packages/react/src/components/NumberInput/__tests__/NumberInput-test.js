@@ -7,12 +7,16 @@
 
 import '../../../feature-flags';
 
-import { render, screen, waitFor } from '@testing-library/react';
+import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import React, { StrictMode, useState } from 'react';
-import { NumberInput } from '../NumberInput';
-import { validateNumberSeparators } from '../NumberInput';
+import {
+  NumberInput,
+  parseNumberWithLocale,
+  validateNumberSeparators,
+} from '../NumberInput';
 import { AILabel } from '../../AILabel';
+import { FormContext } from '../../FluidForm';
 
 function translateWithId(id) {
   if (id === 'increment.number') {
@@ -60,9 +64,19 @@ describe('NumberInput', () => {
     expect(screen.getByLabelText('test-label')).toBeDisabled();
   });
 
+  it('should set `readOnly` on the underlying <input>', () => {
+    render(<NumberInput label="test-label" id="test" readOnly />);
+    expect(screen.getByLabelText('test-label')).toHaveAttribute('readonly', '');
+  });
+
   it('should set the defaultValue of the <input> with `defaultValue`', () => {
     render(<NumberInput label="test-label" id="test" defaultValue={5} />);
     expect(screen.getByLabelText('test-label')).toHaveValue(5);
+  });
+
+  it('should default to `0` when no value is provided', () => {
+    render(<NumberInput label="test-label" id="test" />);
+    expect(screen.getByLabelText('test-label')).toHaveValue(0);
   });
 
   it('should set the given `value` on <input> when value > min', () => {
@@ -87,6 +101,22 @@ describe('NumberInput', () => {
     expect(
       screen.getByRole('button', { name: 'AI Show information' })
     ).toBeInTheDocument();
+    spy.mockRestore();
+  });
+
+  it('should preserve the `defaultValue` when `slug` is rendered', () => {
+    const spy = jest.spyOn(console, 'warn').mockImplementation(() => {});
+
+    render(
+      <NumberInput
+        label="test-label"
+        id="test"
+        defaultValue={12}
+        slug={<AILabel />}
+      />
+    );
+
+    expect(screen.getByLabelText('test-label')).toHaveValue(12);
     spy.mockRestore();
   });
 
@@ -130,12 +160,59 @@ describe('NumberInput', () => {
     expect(screen.getByText('test-invalid-text')).toBeInTheDocument();
   });
 
+  it('should respect the `invalid` prop when the value is otherwise valid', () => {
+    render(
+      <NumberInput
+        label="test-label"
+        id="test"
+        value={5}
+        min={0}
+        invalid
+        invalidText="test-invalid-text"
+      />
+    );
+
+    expect(screen.getByText('test-invalid-text')).toBeInTheDocument();
+    expect(screen.getByRole('spinbutton')).toHaveAttribute('data-invalid');
+  });
+
   it('should describe the <input> through `helperText`', () => {
     render(
       <NumberInput label="test-label" id="test" helperText="test-helper-text" />
     );
     // Note: is aria-describedby correctly set up here?
     expect(screen.getByText('test-helper-text')).toBeInTheDocument();
+  });
+
+  it('should describe the <input> through `warnText` when `warn` is `true`', () => {
+    render(
+      <NumberInput
+        label="test-label"
+        id="test"
+        helperText="test-helper-text"
+        warn
+        warnText="test-warn-text"
+      />
+    );
+
+    const warning = screen.getByText('test-warn-text');
+
+    expect(warning).toHaveAttribute('id');
+    expect(screen.getByLabelText('test-label')).toHaveAttribute(
+      'aria-describedby',
+      warning.getAttribute('id')
+    );
+  });
+
+  it('should render without a label element when `label` is omitted', () => {
+    const { container } = render(
+      <NumberInput id="test" aria-label="test-number-input" />
+    );
+
+    expect(
+      screen.getByRole('spinbutton', { name: 'test-number-input' })
+    ).toBeInTheDocument();
+    expect(container.querySelector('label')).toBeNull();
   });
 
   it('should call `onClick` when the `<input>` is clicked', async () => {
@@ -173,6 +250,27 @@ describe('NumberInput', () => {
     expect(onClick).not.toHaveBeenCalled();
   });
 
+  it('should not call `onChange` for a direct change event when `disabled`', () => {
+    const onChange = jest.fn();
+
+    render(
+      <NumberInput
+        disabled
+        label="test-label"
+        id="test"
+        value={10}
+        onChange={onChange}
+      />
+    );
+
+    fireEvent.change(screen.getByLabelText('test-label'), {
+      target: { value: '11' },
+    });
+
+    expect(onChange).not.toHaveBeenCalled();
+    expect(screen.getByLabelText('test-label')).toHaveValue(10);
+  });
+
   it('should call `onChange` when the value changes', async () => {
     const onChange = jest.fn();
     render(
@@ -203,6 +301,37 @@ describe('NumberInput', () => {
     expect(onChange).toHaveBeenCalledTimes(2);
   });
 
+  it('should update externally to an empty value when `allowEmpty` is `true`', async () => {
+    const ControlledNumberInput = () => {
+      const [value, setValue] = useState(5);
+
+      return (
+        <>
+          <NumberInput
+            allowEmpty
+            label="NumberInput label"
+            id="number-input"
+            value={value}
+            onChange={(_, state) => setValue(state.value)}
+          />
+          <button type="button" onClick={() => setValue('')}>
+            Clear
+          </button>
+        </>
+      );
+    };
+
+    render(<ControlledNumberInput />);
+
+    const input = screen.getByLabelText('NumberInput label');
+
+    expect(input).toHaveValue(5);
+
+    await userEvent.click(screen.getByRole('button', { name: 'Clear' }));
+
+    expect(input).toHaveValue(null);
+  });
+
   it('should update when value prop changes externally with type="number"', async () => {
     const ControlledNumberInput = () => {
       const [value, setValue] = useState(5);
@@ -228,6 +357,75 @@ describe('NumberInput', () => {
 
     await userEvent.click(screen.getByText('set to 10'));
     expect(input).toHaveValue(10);
+  });
+
+  it('should set the fluid focus state from input and stepper focus', () => {
+    const { container } = render(
+      <FormContext.Provider value={{ isFluid: true }}>
+        <NumberInput
+          label="test-label"
+          id="test"
+          translateWithId={translateWithId}
+        />
+      </FormContext.Provider>
+    );
+
+    const wrapper = container.firstChild;
+    const input = screen.getByLabelText('test-label');
+    const increment = screen.getByLabelText('increment');
+
+    fireEvent.focus(input);
+
+    expect(wrapper).toHaveClass(
+      'cds--form-item',
+      'cds--number-input--fluid--focus',
+      { exact: true }
+    );
+
+    fireEvent.focus(increment);
+
+    expect(wrapper).toHaveClass('cds--form-item', { exact: true });
+  });
+
+  it('should attach and remove the wheel handler when `disableWheel` is true', () => {
+    const onFocus = jest.fn();
+
+    render(
+      <NumberInput
+        label="test-label"
+        id="test"
+        disableWheel
+        onFocus={onFocus}
+      />
+    );
+
+    const input = screen.getByLabelText('test-label');
+    const addEventListenerSpy = jest.spyOn(input, 'addEventListener');
+    const removeEventListenerSpy = jest.spyOn(input, 'removeEventListener');
+
+    fireEvent.focus(input);
+
+    expect(addEventListenerSpy).toHaveBeenCalledWith(
+      'wheel',
+      expect.any(Function)
+    );
+    expect(onFocus).toHaveBeenCalledTimes(1);
+
+    const wheelEvent = new WheelEvent('wheel', { cancelable: true });
+
+    input.dispatchEvent(wheelEvent);
+
+    expect(wheelEvent.defaultPrevented).toBe(true);
+
+    fireEvent.blur(input);
+
+    expect(removeEventListenerSpy).toHaveBeenCalledWith(
+      'wheel',
+      expect.any(Function)
+    );
+
+    addEventListenerSpy.mockRestore();
+    removeEventListenerSpy.mockRestore();
   });
 
   describe('steppers', () => {
@@ -634,6 +832,28 @@ describe('NumberInput', () => {
     );
   });
 
+  it('should not allow arrow key changes when readOnly with type="text"', async () => {
+    render(
+      <NumberInput
+        type="text"
+        label="test-label"
+        id="test"
+        readOnly
+        defaultValue={50}
+      />
+    );
+
+    const input = screen.getByLabelText('test-label');
+    expect(input).toHaveValue('50');
+
+    await userEvent.click(input);
+    await userEvent.keyboard('{ArrowUp}');
+    expect(input).toHaveValue('50');
+
+    await userEvent.keyboard('{ArrowDown}');
+    expect(input).toHaveValue('50');
+  });
+
   describe('with type="text"', () => {
     it('should render an <input> with type="text"', () => {
       render(<NumberInput type="text" label="test-label" id="test" />);
@@ -852,6 +1072,54 @@ describe('NumberInput', () => {
 
       await userEvent.click(screen.getByLabelText('decrement'));
       expect(onChange).toHaveBeenCalledTimes(2);
+    });
+
+    it('should handle arrow keys and forward `onKeyDown` in text mode', () => {
+      const onChange = jest.fn();
+      const onKeyDown = jest.fn();
+
+      render(
+        <NumberInput
+          type="text"
+          label="test-label"
+          id="test"
+          defaultValue={10}
+          onChange={onChange}
+          onKeyDown={onKeyDown}
+          translateWithId={translateWithId}
+        />
+      );
+
+      const input = screen.getByLabelText('test-label');
+
+      fireEvent.keyDown(input, { key: 'ArrowUp' });
+
+      expect(input).toHaveValue('11');
+      expect(onChange).toHaveBeenNthCalledWith(
+        1,
+        expect.objectContaining({
+          target: expect.any(Object),
+        }),
+        expect.objectContaining({
+          value: 11,
+          direction: 'up',
+        })
+      );
+
+      fireEvent.keyDown(input, { key: 'ArrowDown' });
+
+      expect(input).toHaveValue('10');
+      expect(onChange).toHaveBeenNthCalledWith(
+        2,
+        expect.objectContaining({
+          target: expect.any(Object),
+        }),
+        expect.objectContaining({
+          value: 10,
+          direction: 'down',
+        })
+      );
+      expect(onKeyDown).toHaveBeenCalledTimes(2);
     });
 
     it('should call `onBlur` when the input is blurred', async () => {
@@ -1259,6 +1527,25 @@ describe('NumberInput', () => {
         );
         expect(screen.getByLabelText('test-label')).toHaveValue('');
         await userEvent.click(screen.getByLabelText('decrement'));
+        expect(screen.getByLabelText('test-label')).toHaveValue('10');
+      });
+
+      it('should begin decrementing from `min` when input is empty and only `min` is positive', async () => {
+        render(
+          <NumberInput
+            type="text"
+            label="test-label"
+            id="test"
+            min={10}
+            step={2}
+            translateWithId={translateWithId}
+          />
+        );
+
+        expect(screen.getByLabelText('test-label')).toHaveValue('');
+
+        await userEvent.click(screen.getByLabelText('decrement'));
+
         expect(screen.getByLabelText('test-label')).toHaveValue('10');
       });
 
@@ -2003,6 +2290,50 @@ describe('NumberInput', () => {
       expect(validateNumberSeparators('12,345,6', 'en-US')).toBe(false);
       expect(validateNumberSeparators('١,٢٣,٤٥٦', 'ar-EG')).toBe(false);
       expect(validateNumberSeparators('١٢,٣٤٥,٦', 'ar-EG')).toBe(false);
+    });
+
+    it('should fall back to basic number validation when separators cannot be detected', () => {
+      const numberFormatSpy = jest
+        .spyOn(Intl, 'NumberFormat')
+        .mockImplementation(() => ({
+          format: () => '123456789',
+        }));
+
+      expect(validateNumberSeparators('1234', 'en-US')).toBe(true);
+
+      numberFormatSpy.mockRestore();
+    });
+  });
+
+  describe('parseNumberWithLocale', () => {
+    it('should return `NaN` for empty values', () => {
+      expect(parseNumberWithLocale('', 'en-US')).toBeNaN();
+      expect(parseNumberWithLocale(undefined, 'en-US')).toBeNaN();
+      expect(parseNumberWithLocale(null, 'en-US')).toBeNaN();
+    });
+
+    it('should parse scientific notation and localized numerals', () => {
+      expect(parseNumberWithLocale('1.5e+2', 'en-US')).toBe(150);
+      expect(parseNumberWithLocale('一,二三四', 'ja')).toBe(1234);
+      expect(parseNumberWithLocale('1.234,56', 'de-DE')).toBe(1234.56);
+      expect(
+        parseNumberWithLocale(
+          new Intl.NumberFormat('fr-FR').format(1234.56),
+          'fr-FR'
+        )
+      ).toBe(1234.56);
+    });
+
+    it('should fall back when separators cannot be detected', () => {
+      const numberFormatSpy = jest
+        .spyOn(Intl, 'NumberFormat')
+        .mockImplementation(() => ({
+          format: () => '123456789',
+        }));
+
+      expect(parseNumberWithLocale('1234', 'en-US')).toBe(1234);
+
+      numberFormatSpy.mockRestore();
     });
   });
 });
