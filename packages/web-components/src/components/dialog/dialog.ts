@@ -17,6 +17,8 @@ import CDSModal from '../modal/modal';
 /**
  * Dialog.
  *
+ * @see This component is in {@link https://web-components.carbondesignsystem.com/?path=/docs/preview-about-preview--about-preview|preview status}
+ *
  * @element cds-dialog
  * @fires cds-dialog-beingclosed
  *   The custom event fired before this dialog is being closed upon a user gesture.
