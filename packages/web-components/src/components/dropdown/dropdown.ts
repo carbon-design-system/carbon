@@ -1020,7 +1020,7 @@ class CDSDropdown extends ValidityMixin(
   required = false;
 
   /**
-   * Specify whether the textarea is fluid or not
+   * Specify whether the dropdown is fluid or not
    */
   @property({ type: Boolean })
   isFluid = false;
