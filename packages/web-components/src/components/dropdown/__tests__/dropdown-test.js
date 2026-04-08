@@ -503,6 +503,22 @@ describe('cds-dropdown', function () {
   });
 
   describe('events', () => {
+    it('should not commit selection when beingselected is prevented', async () => {
+      const el = await fixture(dropdown);
+      const items = el.querySelectorAll('cds-dropdown-item');
+
+      el.addEventListener('cds-dropdown-beingselected', (event) => {
+        event.preventDefault();
+      });
+
+      items[1].click();
+      await el.updateComplete;
+
+      expect(el.value).to.equal('');
+      expect(items[0].selected).to.be.false;
+      expect(items[1].selected).to.be.false;
+    });
+
     it('should fire cds-dropdown-selected event when item is selected', async () => {
       const el = await fixture(dropdown);
       let eventFired = false;
