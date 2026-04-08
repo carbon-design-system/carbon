@@ -105,6 +105,7 @@ export const Default = {
     const {
       defaultWidth,
       disabled,
+      id,
       invalid,
       invalidText,
       labelText,
@@ -116,6 +117,7 @@ export const Default = {
     return html`
       <div style="width:${defaultWidth}px;">
         <cds-fluid-select
+          id="${id}"
           ?disabled="${disabled}"
           ?invalid="${invalid}"
           invalid-text="${ifDefined(invalidText)}"
@@ -140,7 +142,7 @@ export const WithToggletip = {
   render: () => {
     return html`
       <div style="width:400px;">
-        <cds-fluid-select>
+        <cds-fluid-select id="select">
           <cds-toggletip autoAlign="true" slot="label-text">
             Label
             <p slot="body-text">Additional field information here.</p>
@@ -177,6 +179,7 @@ export const WithAILabel = {
   render: (args) => {
     const {
       disabled,
+      id,
       invalid,
       invalidText,
       labelText,
@@ -189,6 +192,7 @@ export const WithAILabel = {
 
     return html` <div style="width:${defaultWidth}px;">
       <cds-fluid-select
+        id="${id}"
         ?disabled="${disabled}"
         ?invalid="${invalid}"
         invalid-text="${ifDefined(invalidText)}"

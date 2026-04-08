@@ -65,6 +65,16 @@ describe('cds-select', () => {
     expect(label.classList.contains('cds--visually-hidden')).to.be.true;
   });
 
+  it.only('should support no id', async () => {
+    const el = await fixture(html`
+      <cds-select label-text="Select label">
+        <cds-select-item value="option-1">Option 1</cds-select-item>
+      </cds-select>
+    `);
+    const label = el.shadowRoot.querySelector('label');
+    expect(label.getAttribute('for')).to.be.empty;
+  });
+
   it('should render invalid text when invalid attribute is set', async () => {
     const el = await fixture(html`
       <cds-select

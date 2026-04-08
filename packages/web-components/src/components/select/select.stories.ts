@@ -65,6 +65,7 @@ const args = {
   disabled: false,
   helperText: 'Optional helper text',
   hideLabel: false,
+  id: 'select',
   inline: false,
   invalid: false,
   invalidText: 'Error message',
@@ -105,6 +106,10 @@ const argTypes = {
   inline: {
     control: 'boolean',
     description: 'Specify whether you want the inline version of this control.',
+  },
+  id: {
+    control: 'text',
+    description: 'Specify the id for the label.',
   },
   invalid: {
     control: 'boolean',
@@ -165,6 +170,7 @@ export const Default = {
       disabled,
       helperText,
       hideLabel,
+      id,
       inline,
       invalid,
       invalidText,
@@ -183,6 +189,7 @@ export const Default = {
     return html`
       <cds-form-item>
         <cds-select
+          id="${id}"
           ?inline="${inline}"
           ?disabled="${disabled}"
           helper-text="${ifDefined(helperText)}"
@@ -226,6 +233,7 @@ export const Inline = {
       disabled,
       helperText,
       hideLabel,
+      id,
       inline,
       invalid,
       invalidText,
@@ -244,6 +252,7 @@ export const Inline = {
     return html`
       <cds-form-item>
         <cds-select
+          id="${id}"
           ?inline="${inline}"
           ?disabled="${disabled}"
           helper-text="${ifDefined(helperText)}"
@@ -285,6 +294,7 @@ export const WithAILabel = {
       disabled,
       helperText,
       hideLabel,
+      id,
       invalid,
       invalidText,
       labelStylesDisable,
@@ -302,6 +312,7 @@ export const WithAILabel = {
 
     return html` <div style="width: 400px">
       <cds-select
+        id="${id}"
         ?inline="${false}"
         ?disabled="${disabled}"
         helper-text="${ifDefined(helperText)}"
@@ -345,6 +356,7 @@ export const WithLayer = {
       disabled,
       helperText,
       hideLabel,
+      id,
       invalid,
       invalidText,
       labelStylesDisable,
@@ -362,6 +374,7 @@ export const WithLayer = {
 
     return html`
       <cds-select
+        id="${id}"
         ?inline="${false}"
         ?disabled="${disabled}"
         helper-text="${ifDefined(helperText)}"

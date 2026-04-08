@@ -191,7 +191,7 @@ export const Default = {
           </cds-text-input>
         </div>
         <div style="margin-bottom: 24px;">
-          <cds-select placeholder="US South" label-text="Region">
+          <cds-select id="select" placeholder="US South" label-text="Region">
             <cds-select-item value="us-south">US South</cds-select-item>
             <cds-select-item value="us-east">US East</cds-select-item>
           </cds-select>
@@ -588,7 +588,7 @@ export const WithAILabel = {
           </cds-text-input>
         </div>
         <div style="margin-bottom: 24px">
-          <cds-select placeholder="US South" label-text="Region">
+          <cds-select id="select" placeholder="US South" label-text="Region">
             <cds-select-item value="us-south">US South</cds-select-item>
             <cds-select-item value="us-east">US East</cds-select-item>
           </cds-select>
@@ -797,7 +797,10 @@ export const WithScrollingContent = {
             </cds-text-input>
           </div>
           <div style="margin-bottom: 24px;">
-            <cds-select label-text="Domain name" placeholder="US South">
+            <cds-select
+              id="select"
+              label-text="Domain name"
+              placeholder="US South">
               <cds-select-item value="us-south">Option 1</cds-select-item>
               <cds-select-item value="us-east">Option 2</cds-select-item>
             </cds-select>
@@ -919,7 +922,10 @@ export const WithStateManager = {
               label="Domain name">
             </cds-text-input>
           </div>
-          <cds-select label-text="Domain name" placeholder="US South">
+          <cds-select
+            id="select"
+            label-text="Domain name"
+            placeholder="US South">
             <cds-select-item value="us-south">Option 1</cds-select-item>
             <cds-select-item value="us-east">Option 2</cds-select-item>
           </cds-select>
