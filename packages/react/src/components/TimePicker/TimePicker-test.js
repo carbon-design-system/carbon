@@ -289,5 +289,14 @@ describe('TimePicker', () => {
         container.querySelector('.cds--time-picker__input-field-error')
       ).not.toBeInTheDocument();
     });
+
+    it('should prioritize disabled over readOnly when both are true', () => {
+      render(<TimePicker id="timepicker" disabled={true} readOnly={true} />);
+
+      const input = screen.getByRole('textbox');
+      expect(input).toHaveAttribute('disabled', '');
+      expect(input).toHaveAttribute('readOnly', '');
+      expect(input.disabled).toBe(true);
+    });
   });
 });

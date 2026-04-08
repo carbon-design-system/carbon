@@ -247,7 +247,7 @@ const TextInput = forwardRef<unknown, TextInputProps>(
       className: textInputClasses,
       title: placeholder,
       disabled: normalizedProps.disabled,
-      readOnly,
+      ...(readOnly ? { readOnly: true } : {}),
       ['aria-describedby']: helperText && normalizedProps.helperId,
       ...rest,
     };
@@ -270,6 +270,7 @@ const TextInput = forwardRef<unknown, TextInputProps>(
     const labelClasses = classNames(`${prefix}--label`, {
       [`${prefix}--visually-hidden`]: hideLabel,
       [`${prefix}--label--disabled`]: normalizedProps.disabled,
+      [`${prefix}--label--readonly`]: readOnly,
       [`${prefix}--label--inline`]: inline,
       [`${prefix}--label--inline--${size}`]: inline && !!size,
     });

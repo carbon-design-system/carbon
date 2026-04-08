@@ -221,6 +221,7 @@ const TimePicker = frFn((props, ref) => {
   const labelClasses = cx(`${prefix}--label`, {
     [`${prefix}--visually-hidden`]: hideLabel,
     [`${prefix}--label--disabled`]: disabled,
+    [`${prefix}--label--readonly`]: readOnly,
   });
 
   const label = typeof labelText !== 'undefined' && labelText !== null && (
@@ -256,7 +257,7 @@ const TimePicker = frFn((props, ref) => {
         return React.cloneElement(item, {
           ...item.props,
           disabled: item.props.disabled ?? disabled,
-          readOnly: readOnly,
+          ...(readOnly ? { readOnly: true } : {}),
           ...readOnlyEventHandlers,
         });
       }
@@ -264,10 +265,7 @@ const TimePicker = frFn((props, ref) => {
 
     return mappedChildren;
   }
-
-  const readOnlyProps = {
-    readOnly: readOnly,
-  };
+  const readOnlyProps = readOnly ? { readOnly: true } : {};
 
   return (
     <div className={cx(`${prefix}--form-item`, className)}>

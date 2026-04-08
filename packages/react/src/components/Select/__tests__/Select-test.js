@@ -570,5 +570,17 @@ describe('Select', () => {
 
       expect(screen.getByRole('combobox')).not.toHaveAttribute('aria-invalid');
     });
+
+    it('should prioritize disabled over readOnly when both are true', () => {
+      render(
+        <Select id="select" labelText="Select" disabled={true} readOnly={true}>
+          <option value="option-1">Option 1</option>
+        </Select>
+      );
+
+      const select = screen.getByRole('combobox');
+      expect(select).toHaveAttribute('disabled', '');
+      expect(select.disabled).toBe(true);
+    });
   });
 });

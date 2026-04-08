@@ -251,7 +251,7 @@ const PasswordInput = forwardRef<unknown, PasswordInputProps>(
       placeholder,
       type: inputType,
       className: textInputClasses,
-      readOnly,
+      ...(readOnly ? { readOnly: true } : {}),
       ref,
       ...rest,
     };
@@ -269,6 +269,7 @@ const PasswordInput = forwardRef<unknown, PasswordInputProps>(
     const labelClasses = classNames(`${prefix}--label`, {
       [`${prefix}--visually-hidden`]: hideLabel,
       [`${prefix}--label--disabled`]: disabled,
+      [`${prefix}--label--readonly`]: readOnly,
       [`${prefix}--label--inline`]: inline,
       [`${prefix}--label--inline--${size}`]: inline && !!size,
     });
