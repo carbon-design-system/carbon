@@ -13,11 +13,13 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/utilities' as *;
 @use '@carbon/styles/scss/components/form';
 @use '@carbon/styles/scss/components/search' as *;
+@use '@carbon/styles/scss/layout' as *;
 
 // https://github.com/carbon-design-system/carbon/issues/11408
 @include search;
 
 :host(#{$prefix}-search) {
+  @include emit-layout-tokens();
   @extend .#{$prefix}--search;
 
   outline: none;
@@ -39,34 +41,6 @@ $css--plex: true !default;
   outline: none;
 }
 
-:host(#{$prefix}-search[expandable][size='xs']) {
-  .#{$prefix}--search-magnifier {
-    block-size: $spacing-06;
-    inline-size: $spacing-06;
-  }
-}
-
-:host(#{$prefix}-search[expandable][size='sm']) {
-  .#{$prefix}--search-magnifier {
-    block-size: $spacing-07;
-    inline-size: $spacing-07;
-  }
-}
-
-:host(#{$prefix}-search[expandable][size='md']) {
-  .#{$prefix}--search-magnifier {
-    block-size: $spacing-08;
-    inline-size: $spacing-08;
-  }
-}
-
-:host(#{$prefix}-search[expandable][size='lg']) {
-  .#{$prefix}--search-magnifier {
-    block-size: $spacing-09;
-    inline-size: $spacing-09;
-  }
-}
-
 :host(#{$prefix}-search[expandable][expanded]) {
   @extend .#{$prefix}--search--expanded;
 
@@ -79,35 +53,6 @@ $css--plex: true !default;
   }
   .#{$prefix}--search-magnifier {
     pointer-events: none;
-  }
-}
-
-:host(#{$prefix}-search[expandable][expanded][size='xs']) {
-  .#{$prefix}--search-input {
-    padding: 0 $spacing-06;
-  }
-}
-
-:host(#{$prefix}-search[expandable][expanded][size='sm']) {
-  .#{$prefix}--search-input {
-    padding: 0 $spacing-07;
-  }
-}
-
-:host(#{$prefix}-search[expandable][expanded][size='md']) {
-  .#{$prefix}--search-input {
-    padding: 0 $spacing-08;
-  }
-}
-
-:host(#{$prefix}-search[expandable][expanded][size='lg']) {
-  .#{$prefix}--search-input {
-    padding: 0 $spacing-09;
-  }
-
-  ::slotted(.#{$prefix}--search-magnifier) {
-    block-size: rem(48px);
-    inline-size: rem(48px);
   }
 }
 
@@ -133,6 +78,8 @@ $css--plex: true !default;
 }
 
 :host(#{$prefix}-search-skeleton) {
+  @include emit-layout-tokens();
+
   inline-size: 100%;
 
   .#{$prefix}--search-input {
@@ -148,22 +95,22 @@ $css--plex: true !default;
 
 :host(#{$prefix}-search[size='xs']),
 :host(#{$prefix}-search-skeleton[size='xs']) {
-  @extend .#{$prefix}--search--xs;
+  @extend .#{$prefix}--layout--size-xs;
 }
 
 :host(#{$prefix}-search[size='sm']),
 :host(#{$prefix}-search-skeleton[size='sm']) {
-  @extend .#{$prefix}--search--sm;
+  @extend .#{$prefix}--layout--size-sm;
 }
 
 :host(#{$prefix}-search[size='md']),
 :host(#{$prefix}-search-skeleton[size='md']) {
-  @extend .#{$prefix}--search--md;
+  @extend .#{$prefix}--layout--size-md;
 }
 
 :host(#{$prefix}-search[size='lg']),
 :host(#{$prefix}-search-skeleton[size='lg']) {
-  @extend .#{$prefix}--search--lg;
+  @extend .#{$prefix}--layout--size-lg;
 }
 :host(#{$prefix}-search) {
   .#{$prefix}--search-input {

@@ -213,7 +213,10 @@ describe('Search', () => {
     it('should respect size prop', () => {
       render(<Search labelText="test-search" size="sm" />);
 
-      expect(screen.getByRole('search')).toHaveClass(`${prefix}--search--sm`);
+      expect(screen.getByRole('search')).toHaveClass(`${prefix}--search--sm`); // TODO: V12 - Remove this check
+      expect(screen.getByRole('search')).toHaveClass(
+        `${prefix}--layout--size-sm`
+      );
     });
 
     it('should respect type prop', () => {

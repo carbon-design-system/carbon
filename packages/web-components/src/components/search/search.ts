@@ -268,7 +268,7 @@ class CDSSearch extends HostListenerMixin(FocusMixin(FormMixin(LitElement))) {
    * The search box size.
    */
   @property({ reflect: true })
-  size = SEARCH_SIZE.MEDIUM;
+  size?: SEARCH_SIZE;
 
   /**
    * The `<input>` name.

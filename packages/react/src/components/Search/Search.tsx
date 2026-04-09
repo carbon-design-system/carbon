@@ -146,7 +146,7 @@ const Search = React.forwardRef<HTMLInputElement, SearchProps>(
       placeholder = 'Search',
       renderIcon,
       role,
-      size = 'md',
+      size,
       type = 'search',
       value,
       ...rest
@@ -167,7 +167,8 @@ const Search = React.forwardRef<HTMLInputElement, SearchProps>(
     const searchClasses = cx(
       {
         [`${prefix}--search`]: true,
-        [`${prefix}--search--${size}`]: size,
+        [`${prefix}--search--${size}`]: size, // TODO: V12 - Remove this class
+        [`${prefix}--layout--size-${size}`]: size,
         [`${prefix}--search--light`]: light,
         [`${prefix}--search--disabled`]: disabled,
         [`${prefix}--search--fluid`]: isFluid,
