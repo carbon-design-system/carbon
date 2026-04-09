@@ -60,9 +60,6 @@ export default {
         type: 'text',
       },
     },
-    renderIcon: {
-      control: false,
-    },
     size: {
       options: ['xs', 'sm', 'md', 'lg'],
       control: {
