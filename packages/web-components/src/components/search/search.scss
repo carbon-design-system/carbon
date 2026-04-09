@@ -93,23 +93,19 @@ $css--plex: true !default;
   }
 }
 
-:host(#{$prefix}-search[size='xs']),
-:host(#{$prefix}-search-skeleton[size='xs']) {
+:host(#{$prefix}-search[size='xs']) {
   @extend .#{$prefix}--layout--size-xs;
 }
 
-:host(#{$prefix}-search[size='sm']),
-:host(#{$prefix}-search-skeleton[size='sm']) {
+:host(#{$prefix}-search[size='sm']) {
   @extend .#{$prefix}--layout--size-sm;
 }
 
-:host(#{$prefix}-search[size='md']),
-:host(#{$prefix}-search-skeleton[size='md']) {
+:host(#{$prefix}-search[size='md']) {
   @extend .#{$prefix}--layout--size-md;
 }
 
-:host(#{$prefix}-search[size='lg']),
-:host(#{$prefix}-search-skeleton[size='lg']) {
+:host(#{$prefix}-search[size='lg']) {
   @extend .#{$prefix}--layout--size-lg;
 }
 :host(#{$prefix}-search) {
