@@ -1566,7 +1566,7 @@ categories:
       - watsonx--code-assistant-for-z-refactor
       - watsonx--data
       - watsonx--governance
-      - watasonx--orchestrate
+      - watsonx--orchestrate
       - watsonx
   - name: Weather
     members:
