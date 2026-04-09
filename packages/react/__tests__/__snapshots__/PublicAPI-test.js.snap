@@ -8662,9 +8662,18 @@ Map {
       "className": {
         "type": "string",
       },
-      "small": {
-        "type": "bool",
+      "size": {
+        "args": [
+          [
+            "xs",
+            "sm",
+            "md",
+            "lg",
+          ],
+        ],
+        "type": "oneOf",
       },
+      "small": [Function],
     },
   },
   "SecondaryButton" => {},
