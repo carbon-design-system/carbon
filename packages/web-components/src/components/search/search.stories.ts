@@ -207,6 +207,28 @@ export const ExpandableWithLayer = {
   },
 };
 
+export const Skeleton = {
+  args,
+  argTypes: {
+    ...argTypes,
+    size: {
+      ...argTypes.size,
+      description: 'Specify the size of the Search Skeleton.',
+    },
+  },
+  parameters: {
+    controls: {
+      include: ['size', 'defaultWidth'],
+    },
+  },
+  render: (args) => {
+    const { size, defaultWidth } = args ?? {};
+    return html` <div style="width: ${defaultWidth}px;">
+      <cds-search-skeleton size="${size}"></cds-search-skeleton>
+    </div>`;
+  },
+};
+
 export const WithLayer = {
   args,
   argTypes,

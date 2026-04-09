@@ -5,12 +5,13 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useState, useCallback } from 'react';
+import React from 'react';
 
 import { WithLayer } from '../../../.storybook/templates/WithLayer';
 
 import ExpandableSearch from '../ExpandableSearch';
 import Search from '.';
+import SearchSkeleton from './Search.Skeleton';
 import mdx from './Search.mdx';
 
 export default {
@@ -76,6 +77,7 @@ export default {
   },
   subcomponents: {
     ExpandableSearch,
+    SearchSkeleton,
   },
   parameters: {
     docs: {
@@ -134,3 +136,19 @@ export const Default = ({ defaultWidth, ...searchArgs }) => (
   </div>
 );
 Default.parameters = { ...defaultParameters };
+
+export const Skeleton = ({ size, defaultWidth }) => (
+  <div style={{ width: defaultWidth }}>
+    <SearchSkeleton size={size} />
+  </div>
+);
+Skeleton.argTypes = {
+  size: {
+    description: 'Specify the size of the SearchSkeleton',
+  },
+};
+Skeleton.parameters = {
+  controls: {
+    include: ['size', 'defaultWidth'],
+  },
+};
