@@ -7,6 +7,7 @@
 
 import PropTypes from 'prop-types';
 import React from 'react';
+import { deprecate } from '../../prop-types/deprecate';
 import cx from 'classnames';
 import { usePrefix } from '../../internal/usePrefix';
 
@@ -62,9 +63,11 @@ SearchSkeleton.propTypes = {
 
   /**
    * Specify whether the Search should be a small variant
-   * @deprecated Use `size` prop instead. This prop will be removed in the next major release.
    */
-  small: PropTypes.bool,
+  small: deprecate(
+    PropTypes.bool,
+    'The `small` prop has been deprecated and will be removed in the next major release. Please use the `size` prop instead.'
+  ),
 };
 
 export default SearchSkeleton;
