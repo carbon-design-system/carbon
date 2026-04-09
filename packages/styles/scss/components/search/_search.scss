@@ -29,10 +29,24 @@
 /// @group search
 @mixin search {
   .#{$prefix}--search {
+    @include layout.use('size', $default: 'md', $min: 'xs', $max: 'lg');
+
     position: relative;
     display: flex;
     align-items: center;
     inline-size: 100%;
+
+    .#{$prefix}--search-close,
+    ~ .#{$prefix}--search-button {
+      block-size: layout.size('height');
+      inline-size: layout.size('height');
+    }
+
+    &.#{$prefix}--search--expandable,
+    &.#{$prefix}--search--expandable .#{$prefix}--search-magnifier {
+      block-size: layout.size('height');
+      inline-size: layout.size('height');
+    }
   }
 
   .#{$prefix}--search .#{$prefix}--label {
@@ -284,12 +298,8 @@
   }
 
   .#{$prefix}--search--expandable .#{$prefix}--search-magnifier {
-    @include layout.use('size', $default: 'md', $min: 'xs', $max: 'lg');
-
     position: absolute;
-    block-size: layout.size('height');
     cursor: pointer;
-    inline-size: layout.size('height');
 
     &:focus {
       outline: 2px solid $focus;
