@@ -35,7 +35,7 @@ class CDSModal extends HostListenerMixin(LitElement) {
   /**
    * The element that had focus before this modal gets open.
    */
-  private _launcher: Element | null = null;
+  protected _launcher: Element | null = null;
 
   /**
    * The inline loading element that renders when `loading-status` is not `inactive`
@@ -65,7 +65,7 @@ class CDSModal extends HostListenerMixin(LitElement) {
   @HostListener('click')
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20452
   // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
-  private _handleClick = (event: MouseEvent) => {
+  protected _handleClick = (event: MouseEvent) => {
     if (
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
       event.composedPath().indexOf(this.shadowRoot!) < 0 &&
@@ -127,7 +127,9 @@ class CDSModal extends HostListenerMixin(LitElement) {
   @HostListener('document:keydown')
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20452
   // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
-  private _handleKeydown = ({ key, target }: KeyboardEvent) => {
+  protected _handleKeydown = ({ key, target }: KeyboardEvent) => {
+    if (!this.open) return;
+
     if (key === 'Esc' || key === 'Escape') {
       this._handleUserInitiatedClose(target);
     }
@@ -140,7 +142,7 @@ class CDSModal extends HostListenerMixin(LitElement) {
    *
    * @returns {{first: HTMLElement, last: HTMLElement, all: HTMLElement[]}} Returns an object with various elements.
    */
-  private getFocusable(): {
+  protected getFocusable(): {
     first: HTMLElement | undefined;
     last: HTMLElement | undefined;
     all: HTMLElement[];
@@ -170,7 +172,7 @@ class CDSModal extends HostListenerMixin(LitElement) {
    *
    * @param event The event.
    */
-  private _handleClickContainer(event: MouseEvent) {
+  protected _handleClickContainer(event: MouseEvent) {
     if (
       (event.target as Element).matches(
         (this.constructor as typeof CDSModal).selectorCloseButton
@@ -186,7 +188,7 @@ class CDSModal extends HostListenerMixin(LitElement) {
    *
    * @param triggeredBy The element that triggered this close request.
    */
-  private _handleUserInitiatedClose(triggeredBy: EventTarget | null) {
+  protected _handleUserInitiatedClose(triggeredBy: EventTarget | null) {
     if (this.open) {
       const init = {
         bubbles: true,
@@ -218,7 +220,7 @@ class CDSModal extends HostListenerMixin(LitElement) {
   /**
    * Handles `slotchange` event.
    */
-  private _handleSlotChange() {
+  protected _handleSlotChange() {
     if (this.querySelector(`${prefix}-modal-footer`)) {
       this.setAttribute('has-footer', '');
     } else {
@@ -237,7 +239,7 @@ class CDSModal extends HostListenerMixin(LitElement) {
    * Specify text for the accessibility label of the header
    */
   @property({ attribute: 'aria-label' })
-  ariaLabel = '';
+  ariaLabel: string | null = null;
 
   /**
    * The additional CSS class names for the container <div> of the element.
@@ -336,7 +338,7 @@ class CDSModal extends HostListenerMixin(LitElement) {
     return this._loadingEl;
   }
 
-  private _getFooterElements() {
+  protected _getFooterElements() {
     const footer = this.querySelector(`${prefix}-modal-footer`);
 
     const primaryButton =
@@ -572,7 +574,7 @@ class CDSModal extends HostListenerMixin(LitElement) {
    * @param ms The number of milliseconds.
    * @returns A promise that is resolves after the given milliseconds.
    */
-  private static _delay(ms = 0) {
+  protected static _delay(ms = 0) {
     return new Promise((resolve) => {
       setTimeout(resolve, ms);
     });

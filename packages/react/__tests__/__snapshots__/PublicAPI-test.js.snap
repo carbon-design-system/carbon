@@ -6238,6 +6238,9 @@ Map {
       "label": {
         "type": "string",
       },
+      "legacyAutoalign": {
+        "type": "bool",
+      },
       "menuAlignment": {
         "type": "string",
       },
@@ -12062,15 +12065,18 @@ Map {
     "Dialog": {
       "$$typeof": Symbol(react.forward_ref),
       "propTypes": {
+        "aria-describedby": {
+          "type": "string",
+        },
         "aria-label": {
           "type": "string",
         },
         "aria-labelledby": {
           "type": "string",
         },
-        "ariaDescribedBy": {
-          "type": "string",
-        },
+        "ariaDescribedBy": [Function],
+        "ariaLabel": [Function],
+        "ariaLabelledBy": [Function],
         "children": {
           "type": "node",
         },
