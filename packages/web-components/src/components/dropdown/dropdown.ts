@@ -1020,6 +1020,11 @@ class CDSDropdown extends ValidityMixin(
   required = false;
 
   /**
+   * Specify whether the dropdown is fluid or not
+   */
+  @property({ type: Boolean })
+  isFluid = false;
+  /**
    * The special validity message for `required`.
    */
   @property({ attribute: 'required-validity-message' })
@@ -1066,12 +1071,6 @@ class CDSDropdown extends ValidityMixin(
    */
   @property({ reflect: true })
   value = '';
-
-  /**
-   * Specify whether the textarea is fluid or not
-   */
-  @property({ type: Boolean })
-  isFluid = false;
 
   /**
    * Specify whether the control is currently in warning state

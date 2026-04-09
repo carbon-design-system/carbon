@@ -9,6 +9,7 @@ import { html } from 'lit';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import './index';
 import '../toggle-tip/toggletip';
+import { withLayers } from '../../../.storybook/decorators/with-layers';
 
 const args = {
   cols: 0,
@@ -154,14 +155,16 @@ export const Skeleton = {
 };
 
 export const WithLayer = {
+  decorators: [withLayers],
+  parameters: {
+    layout: 'fullscreen',
+  },
   render: () => html`
-    <sb-template-layers>
-      <cds-fluid-textarea
-        placeholder="Placeholder text"
-        label="Text Area label"
-        helper-text="Optional helper text">
-      </cds-fluid-textarea>
-    </sb-template-layers>
+    <cds-fluid-textarea
+      placeholder="Placeholder text"
+      label="Text Area label"
+      helper-text="Optional helper text">
+    </cds-fluid-textarea>
   `,
 };
 
