@@ -51,7 +51,7 @@ const ExampleDropContainerApp = (props) => {
     }
 
     // file type validation
-    if (isArray(fileToUpload) && fileToUpload[0].invalidFileType) {
+    if (Array.isArray(fileToUpload) && fileToUpload[0].invalidFileType) {
       const updatedFile = {
         ...fileToUpload[0],
         status: 'edit',
