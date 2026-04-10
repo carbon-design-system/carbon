@@ -35,7 +35,7 @@ describe('Select', () => {
     });
 
     it('should spread extra props on the outermost element', () => {
-      render(<Select id="select" data-testid="test-id" labelText="Select" />);
+      render(<Select data-testid="test-id" id="select" labelText="Select" />);
 
       expect(screen.getByRole('combobox')).toHaveAttribute(
         'data-testid',
@@ -180,12 +180,7 @@ describe('Select', () => {
       'should render helper wrapper based on helperText value: $label',
       ({ label, value, shouldRender }) => {
         const { container } = render(
-          <Select
-            id="select"
-            id={`select-${label}`}
-            labelText={label}
-            helperText={value}
-          />
+          <Select id={`select-${label}`} labelText={label} helperText={value} />
         );
         const helper = container.querySelector(`.${prefix}--form__helper-text`);
 
@@ -276,7 +271,6 @@ describe('Select', () => {
 
       render(
         <Select
-          id="select"
           id="select-1"
           labelText="Select label"
           readOnly={true}
