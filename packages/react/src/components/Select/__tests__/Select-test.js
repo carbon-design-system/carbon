@@ -18,7 +18,7 @@ const prefix = 'cds';
 describe('Select', () => {
   describe('renders as expected - Component API', () => {
     it('should render the correct elements by default', () => {
-      render(<Select labelText="Select" />);
+      render(<Select id="select" labelText="Select" />);
 
       expect(screen.getByText('Select')).toBeInTheDocument();
       expect(screen.getByText('Select')).not.toHaveClass(
@@ -27,7 +27,7 @@ describe('Select', () => {
     });
 
     it('should render the correct classname', () => {
-      render(<Select labelText="Select" />);
+      render(<Select id="select" labelText="Select" />);
 
       expect(screen.getByRole('combobox')).toHaveClass(
         `${prefix}--select-input`
@@ -35,7 +35,7 @@ describe('Select', () => {
     });
 
     it('should spread extra props on the outermost element', () => {
-      render(<Select data-testid="test-id" labelText="Select" />);
+      render(<Select id="select" data-testid="test-id" labelText="Select" />);
 
       expect(screen.getByRole('combobox')).toHaveAttribute(
         'data-testid',
@@ -45,7 +45,7 @@ describe('Select', () => {
 
     it('should render children as expected', () => {
       render(
-        <Select labelText="Select">
+        <Select id="select" labelText="Select">
           <SelectItem value="option-1" text="Option 1" />
         </Select>
       );
@@ -58,7 +58,7 @@ describe('Select', () => {
 
     it('should support a custom `className` prop on the outermost element', () => {
       const { container } = render(
-        <Select labelText="Select" className="custom-class" />
+        <Select id="select" labelText="Select" className="custom-class" />
       );
 
       expect(container.firstChild).toHaveClass('custom-class');
@@ -66,7 +66,7 @@ describe('Select', () => {
 
     it('should respect defaultValue prop', () => {
       render(
-        <Select labelText="Select" defaultValue="option-2">
+        <Select id="select" labelText="Select" defaultValue="option-2">
           <SelectItem value="option-1" text="Option 1" />
           <SelectItem value="option-2" text="Option 2" />
         </Select>
@@ -77,7 +77,7 @@ describe('Select', () => {
 
     it('should show SelectItem text as title', () => {
       render(
-        <Select labelText="Select">
+        <Select id="select" labelText="Select">
           <SelectItem text="Option 1" value="option-1" />
           <SelectItem text="Option 2" value="option-2" />
         </Select>
@@ -87,7 +87,7 @@ describe('Select', () => {
 
     it('should show selected option text as title when defaultValue is provided', () => {
       render(
-        <Select labelText="Select" defaultValue="option-2">
+        <Select id="select" labelText="Select" defaultValue="option-2">
           <SelectItem text="Option 1" value="option-1" />
           <SelectItem text="Option 2" value="option-2" />
         </Select>
@@ -97,7 +97,7 @@ describe('Select', () => {
 
     it('should show selected option text as title when value is provided', () => {
       render(
-        <Select labelText="Select" value="option-2">
+        <Select id="select" labelText="Select" value="option-2">
           <SelectItem text="Option 1" value="option-1" />
           <SelectItem text="Option 2" value="option-2" />
         </Select>
@@ -107,7 +107,11 @@ describe('Select', () => {
 
     it('should prioritize title prop over value or defaultValue', () => {
       render(
-        <Select labelText="Select" value="option-2" title="Custom Title">
+        <Select
+          id="select"
+          labelText="Select"
+          value="option-2"
+          title="Custom Title">
           <SelectItem text="Option 1" value="option-1" />
           <SelectItem text="Option 2" value="option-2" />
         </Select>
@@ -117,7 +121,7 @@ describe('Select', () => {
 
     it('should respect title prop when provided', () => {
       render(
-        <Select labelText="Select" title="Custom Title">
+        <Select id="select" labelText="Select" title="Custom Title">
           <SelectItem text="Option 1" value="option-1" />
           <SelectItem text="Option 2" value="option-2" />
         </Select>
@@ -127,7 +131,7 @@ describe('Select', () => {
 
     it('should update title when selection changes', async () => {
       render(
-        <Select labelText="Select">
+        <Select id="select" labelText="Select">
           <SelectItem text="Option 1" value="option-1" />
           <SelectItem text="Option 2" value="option-2" />
         </Select>
@@ -147,13 +151,13 @@ describe('Select', () => {
     });
 
     it('should respect disabled prop', () => {
-      render(<Select labelText="Select" disabled />);
+      render(<Select id="select" labelText="Select" disabled />);
 
       expect(screen.getByRole('combobox')).toBeDisabled();
     });
 
     it('should not render helper text when helperText is not provided', () => {
-      const { container } = render(<Select labelText="Select" />);
+      const { container } = render(<Select id="select" labelText="Select" />);
 
       expect(
         container.querySelector(`.${prefix}--form__helper-text`)
@@ -176,7 +180,12 @@ describe('Select', () => {
       'should render helper wrapper based on helperText value: $label',
       ({ label, value, shouldRender }) => {
         const { container } = render(
-          <Select id={`select-${label}`} labelText={label} helperText={value} />
+          <Select
+            id="select"
+            id={`select-${label}`}
+            labelText={label}
+            helperText={value}
+          />
         );
         const helper = container.querySelector(`.${prefix}--form__helper-text`);
 
@@ -189,7 +198,7 @@ describe('Select', () => {
     );
 
     it('should respect hideLabel prop', () => {
-      render(<Select labelText="Select" hideLabel />);
+      render(<Select id="select" labelText="Select" hideLabel />);
 
       expect(screen.getByText('Select')).toBeInTheDocument();
       expect(screen.getByText('Select')).toHaveClass(
@@ -198,13 +207,15 @@ describe('Select', () => {
     });
 
     it('should respect id prop', () => {
-      render(<Select labelText="Select" />);
+      render(<Select id="select" labelText="Select" />);
 
       expect(screen.getByRole('combobox')).toHaveAttribute('id', 'select');
     });
 
     it('should respect inline prop', () => {
-      const { container } = render(<Select labelText="Select" inline />);
+      const { container } = render(
+        <Select id="select" labelText="Select" inline />
+      );
 
       // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
       const selectWrapper = container.querySelector(`.${prefix}--select`);
@@ -212,7 +223,9 @@ describe('Select', () => {
     });
 
     it('should respect invalid prop', () => {
-      const { container } = render(<Select labelText="Select" invalid />);
+      const { container } = render(
+        <Select id="select" labelText="Select" invalid />
+      );
 
       // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
       const selectWrapper = container.querySelector(`.${prefix}--select`);
@@ -226,6 +239,7 @@ describe('Select', () => {
     it('should respect invalidText prop', () => {
       render(
         <Select
+          id="select"
           labelText="Select"
           invalid
           invalidText="This is an error message"
@@ -239,14 +253,16 @@ describe('Select', () => {
     });
 
     it('should respect labelText prop', () => {
-      render(<Select labelText="Select" />);
+      render(<Select id="select" labelText="Select" />);
 
       expect(screen.getByText('Select')).toBeInTheDocument();
       expect(screen.getByText('Select')).toHaveClass(`${prefix}--label`);
     });
 
     it('should respect noLabel prop', () => {
-      const { container } = render(<Select labelText="Select" noLabel />);
+      const { container } = render(
+        <Select id="select" labelText="Select" noLabel />
+      );
 
       // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
       const selectWrapper = container.querySelector('label');
@@ -260,6 +276,7 @@ describe('Select', () => {
 
       render(
         <Select
+          id="select"
           id="select-1"
           labelText="Select label"
           readOnly={true}
@@ -285,7 +302,7 @@ describe('Select', () => {
     });
 
     it('should respect size prop', () => {
-      render(<Select labelText="Select" size="sm" />);
+      render(<Select id="select" labelText="Select" size="sm" />);
 
       expect(screen.getByRole('combobox')).toHaveClass(
         `${prefix}--select-input--sm`
@@ -294,7 +311,7 @@ describe('Select', () => {
 
     it('should respect warn prop', () => {
       const { container } = render(
-        <Select labelText="Select" warn warnText="Warning" />
+        <Select id="select" labelText="Select" warn warnText="Warning" />
       );
 
       // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
@@ -305,7 +322,12 @@ describe('Select', () => {
 
     it('should respect warnText prop', () => {
       render(
-        <Select labelText="Select" warn warnText="This is a warning message" />
+        <Select
+          id="select"
+          labelText="Select"
+          warn
+          warnText="This is a warning message"
+        />
       );
 
       expect(screen.getByText('This is a warning message')).toBeInTheDocument();
@@ -317,7 +339,7 @@ describe('Select', () => {
     it('should respect slug prop', () => {
       const spy = jest.spyOn(console, 'warn').mockImplementation(() => {});
       const { container } = render(
-        <Select labelText="Select" slug={<AILabel />} />
+        <Select id="select" labelText="Select" slug={<AILabel />} />
       );
 
       expect(container.firstChild.firstChild).toHaveClass(
@@ -328,7 +350,7 @@ describe('Select', () => {
 
     it('should respect decorator prop', () => {
       const { container } = render(
-        <Select labelText="Select" decorator={<AILabel />} />
+        <Select id="select" labelText="Select" decorator={<AILabel />} />
       );
 
       expect(container.firstChild.firstChild).toHaveClass(
@@ -339,6 +361,7 @@ describe('Select', () => {
     it('should not display invalid message if disabled', () => {
       render(
         <Select
+          id="select"
           labelText="Select"
           disabled
           invalid
@@ -354,6 +377,7 @@ describe('Select', () => {
     it('should not display invalid message if readOnly', () => {
       render(
         <Select
+          id="select"
           labelText="Select"
           readOnly
           invalid
@@ -369,6 +393,7 @@ describe('Select', () => {
     it('should not display warning message if disabled', () => {
       render(
         <Select
+          id="select"
           labelText="Select"
           disabled
           warn
@@ -384,6 +409,7 @@ describe('Select', () => {
     it('should not display warning message if readOnly', () => {
       render(
         <Select
+          id="select"
           labelText="Select"
           readOnly
           warn
@@ -397,7 +423,9 @@ describe('Select', () => {
     });
 
     it('should not display warning styles if disabled', () => {
-      const { container } = render(<Select labelText="Select" disabled warn />);
+      const { container } = render(
+        <Select id="select" labelText="Select" disabled warn />
+      );
 
       // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
       const selectWrapper = container.querySelector(`.${prefix}--select`);
@@ -406,7 +434,9 @@ describe('Select', () => {
     });
 
     it('should not display warning styles if readOnly', () => {
-      const { container } = render(<Select labelText="Select" readOnly warn />);
+      const { container } = render(
+        <Select id="select" labelText="Select" readOnly warn />
+      );
 
       // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
       const selectWrapper = container.querySelector(`.${prefix}--select`);
@@ -420,7 +450,7 @@ describe('Select', () => {
     it('should call onChange when expected', async () => {
       const onChange = jest.fn();
       render(
-        <Select labelText="Select" onChange={onChange}>
+        <Select id="select" labelText="Select" onChange={onChange}>
           <SelectItem value="option-1" text="Option 1" />
           <SelectItem value="option-2" text="Option 2" />
         </Select>
@@ -436,7 +466,7 @@ describe('Select', () => {
     it('should call onClick when expected', async () => {
       const onClick = jest.fn();
       render(
-        <Select labelText="Select" onClick={onClick}>
+        <Select id="select" labelText="Select" onClick={onClick}>
           <SelectItem value="option-1" text="Option 1" />
           <SelectItem value="option-2" text="Option 2" />
         </Select>
@@ -450,7 +480,7 @@ describe('Select', () => {
     it('should not call onClick when disabled', async () => {
       const onClick = jest.fn();
       render(
-        <Select labelText="Select" onClick={onClick} disabled>
+        <Select id="select" labelText="Select" onClick={onClick} disabled>
           <SelectItem value="option-1" text="Option 1" />
           <SelectItem value="option-2" text="Option 2" />
         </Select>
@@ -463,7 +493,7 @@ describe('Select', () => {
 
     it('should receive focus when tab is pressed', async () => {
       render(
-        <Select labelText="Select">
+        <Select id="select" labelText="Select">
           <SelectItem value="option-1" text="Option 1" />
           <SelectItem value="option-2" text="Option 2" />
         </Select>
@@ -476,7 +506,7 @@ describe('Select', () => {
 
     it('should not receive focus when disabled', async () => {
       render(
-        <Select labelText="Select" disabled>
+        <Select id="select" labelText="Select" disabled>
           <SelectItem value="option-1" text="Option 1" />
           <SelectItem value="option-2" text="Option 2" />
         </Select>
@@ -490,7 +520,7 @@ describe('Select', () => {
     it('should render with a ref', () => {
       const ref = React.createRef();
       render(
-        <Select labelText="Select" ref={ref}>
+        <Select id="select" labelText="Select" ref={ref}>
           <SelectItem value="option-1" text="Option 1" />
           <SelectItem value="option-2" text="Option 2" />
         </Select>
@@ -512,7 +542,7 @@ describe('Select', () => {
   describe('automated verification testing', () => {
     it('should have no aXe violations', async () => {
       const { container } = render(
-        <Select labelText="Select">
+        <Select id="select" labelText="Select">
           <SelectItem value="option-1" text="Option 1" />
           <SelectItem value="option-2" text="Option 2" />
         </Select>
@@ -523,7 +553,10 @@ describe('Select', () => {
     it('should have no Accessibility Checker violations', async () => {
       const { container } = render(
         <main>
-          <Select labelText="Select an option" aria-label="Select an option">
+          <Select
+            id="select"
+            labelText="Select an option"
+            aria-label="Select an option">
             <SelectItem value="option-1" text="Option 1" />
             <SelectItem value="option-2" text="Option 2" />
           </Select>
@@ -533,13 +566,13 @@ describe('Select', () => {
     });
 
     it('should not set aria-invalid if disabled', () => {
-      render(<Select labelText="Select" disabled invalid />);
+      render(<Select id="select" labelText="Select" disabled invalid />);
 
       expect(screen.getByRole('combobox')).not.toHaveAttribute('aria-invalid');
     });
 
     it('should not set aria-invalid if readOnly', () => {
-      render(<Select labelText="Select" readOnly invalid />);
+      render(<Select id="select" labelText="Select" readOnly invalid />);
 
       expect(screen.getByRole('combobox')).not.toHaveAttribute('aria-invalid');
     });
