@@ -13,6 +13,7 @@
 @use '../../type' as *;
 @use '../../utilities/ai-gradient' as *;
 @use '../../utilities/convert';
+@use '../../utilities/custom-property';
 @use '../toggletip';
 @use '../popover';
 
@@ -1061,6 +1062,13 @@ $sizes: (
     // This sets the max size to the size of the action bar with 3 buttons
     padding-block: convert.to-rem(24px) convert.to-rem(80px);
     padding-inline: convert.to-rem(24px);
+
+    // Reset the custom properties of the link styles to initial for AI-label and slug. as the AI-label uses gradient backgrounds.
+    @include custom-property.declaration('button-focus-color', initial);
+    @include custom-property.declaration('link-text-color', initial);
+    @include custom-property.declaration('link-hover-text-color', initial);
+    @include custom-property.declaration('link-visited-text-color', initial);
+    @include custom-property.declaration('link-focus-text-color', initial);
   }
 
   .#{$prefix}--ai-label
