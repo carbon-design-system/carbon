@@ -137,7 +137,8 @@ export const Default = (args) => {
       <hr />
       <p className="secondary">Model type</p>
       <p className="bold">Foundation model</p>
-      <Link>test</Link>
+      <a href="#">normal link</a>
+      <Link href="#">cds link</Link>
     </div>
   );
 
