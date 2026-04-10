@@ -142,10 +142,7 @@ export const Default = {
               label-text="Search"></cds-search>
           </cds-form-group>
 
-          <cds-select
-            id="select"
-            label-text="Select"
-            placeholder="Choose an Option">
+          <cds-select label-text="Select" placeholder="Choose an Option">
             <cds-select-item value="option-1">Option 1</cds-select-item>
             <cds-select-item value="option-2">Option 2</cds-select-item>
             <cds-select-item value="option-3">Option 3</cds-select-item>

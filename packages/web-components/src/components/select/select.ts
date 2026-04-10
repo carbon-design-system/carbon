@@ -227,7 +227,7 @@ class CDSSelect extends FormMixin(LitElement) {
    * ID to link the `label` and `select`
    */
   @property()
-  id = '';
+  id = 'select';
 
   /**
    * Specify if the currently value is invalid.
@@ -473,7 +473,7 @@ class CDSSelect extends FormMixin(LitElement) {
 
     const input = html`
       <select
-        id=${id}
+        id="${id}"
         class="${inputClasses}"
         ?disabled="${disabled}"
         title="${value}"

@@ -142,7 +142,7 @@ export const WithToggletip = {
   render: () => {
     return html`
       <div style="width:400px;">
-        <cds-fluid-select id="select">
+        <cds-fluid-select>
           <cds-toggletip autoAlign="true" slot="label-text">
             Label
             <p slot="body-text">Additional field information here.</p>
