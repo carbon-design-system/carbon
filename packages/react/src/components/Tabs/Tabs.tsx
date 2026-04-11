@@ -512,8 +512,7 @@ function TabList({
   //   AND SCROLL_LEFT + CLIENT_WIDTH < SCROLL_WIDTH
   const [isNextButtonVisible, setIsNextButtonVisible] = useState(
     ref.current
-      ? scrollLeft + buttonWidth + ref.current.clientWidth <
-          ref.current.scrollWidth
+      ? scrollLeft + ref.current.clientWidth < ref.current.scrollWidth
       : false
   );
 
@@ -634,8 +633,7 @@ function TabList({
     // adding 1 in calculation for firefox support
     setIsNextButtonVisible(
       ref.current
-        ? scrollLeft + buttonWidth + ref.current.clientWidth + 1 <
-            ref.current.scrollWidth
+        ? scrollLeft + ref.current.clientWidth + 1 < ref.current.scrollWidth
         : false
     );
 
