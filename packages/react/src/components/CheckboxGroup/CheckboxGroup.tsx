@@ -17,6 +17,7 @@ import { deprecate } from '../../prop-types/deprecate';
 import { usePrefix } from '../../internal/usePrefix';
 import { WarningFilled, WarningAltFilled } from '@carbon/icons-react';
 import { useId } from '../../internal/useId';
+import { hasHelperText } from '../../internal/hasHelperText';
 import { AILabel } from '../AILabel';
 import { isComponentElement } from '../../internal';
 import { Checkbox } from '../Checkbox';
@@ -69,7 +70,7 @@ const CheckboxGroup = ({
 
   const checkboxGroupInstanceId = useId();
 
-  const hasHelper = typeof helperText !== 'undefined' && helperText !== null;
+  const hasHelper = hasHelperText(helperText);
   const helperId = !hasHelper
     ? undefined
     : `checkbox-group-helper-text-${checkboxGroupInstanceId}`;

@@ -23,6 +23,7 @@ import { Tooltip } from '../Tooltip';
 import { PopoverAlignment } from '../Popover';
 import { deprecate } from '../../prop-types/deprecate';
 import { usePrefix } from '../../internal/usePrefix';
+import { hasHelperText } from '../../internal/hasHelperText';
 
 type ExcludedAttributes = 'size';
 
@@ -299,7 +300,7 @@ const PasswordInput = forwardRef<unknown, PasswordInputProps>(
         {labelText}
       </label>
     );
-    const helper = typeof helperText !== 'undefined' && helperText !== null && (
+    const helper = hasHelperText(helperText) && (
       <div id={normalizedProps.helperId} className={helperTextClasses}>
         {helperText}
       </div>
@@ -361,11 +362,10 @@ const PasswordInput = forwardRef<unknown, PasswordInputProps>(
             invalidId: normalizedProps.invalidId,
             warn: normalizedProps.warn,
             warnId: normalizedProps.warnId,
-            hasHelper: Boolean(
-              helperText &&
-                !isFluid &&
-                (inline || (!inline && !normalizedProps.validation))
-            ),
+            hasHelper:
+              hasHelperText(helperText) &&
+              !isFluid &&
+              (inline || (!inline && !normalizedProps.validation)),
             helperId: normalizedProps.helperId,
           })}
           disabled={disabled}
