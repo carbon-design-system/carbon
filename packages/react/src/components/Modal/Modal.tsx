@@ -463,16 +463,6 @@ const ModalDialog = React.forwardRef(function ModalDialog(
       return;
     }
 
-    // Check if the focused element is a button - buttons should never auto-scroll
-    // as clicking them is an explicit user action that shouldn't be interrupted
-    const isButton = currentActiveNode.matches(
-      'button, [role="button"], input[type="button"], input[type="submit"]'
-    );
-
-    if (isButton) {
-      return; // Never auto-scroll buttons
-    }
-
     const modalRect = modalContent.getBoundingClientRect();
     const elementRect = currentActiveNode.getBoundingClientRect();
 
