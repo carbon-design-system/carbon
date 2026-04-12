@@ -202,6 +202,30 @@ describe('ComboBox', () => {
     });
   });
 
+  it('should call `onChange` when a highlighted item is committed on Tab', async () => {
+    const user = userEvent.setup();
+
+    render(
+      <>
+        <ComboBox {...mockProps} />
+        <button type="button">Next focus target</button>
+      </>
+    );
+
+    await user.click(findInputNode());
+    await user.type(findInputNode(), 'Item');
+    await user.keyboard('[ArrowDown]');
+    await user.keyboard('[Tab]');
+
+    expect(mockProps.onChange).toHaveBeenCalledTimes(1);
+    expect(mockProps.onChange).toHaveBeenCalledWith({
+      selectedItem: mockProps.items[1],
+    });
+    expect(
+      screen.getByRole('button', { name: 'Next focus target' })
+    ).toHaveFocus();
+  });
+
   describe('onInputChange', () => {
     let onInputChange;
     beforeEach(() => {

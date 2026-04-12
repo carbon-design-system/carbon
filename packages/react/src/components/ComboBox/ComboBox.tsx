@@ -900,9 +900,10 @@ const ComboBox = forwardRef(
         if (
           (type === ItemClick ||
             type === FunctionSelectItem ||
-            type === InputKeyDownEnter) &&
+            type === InputKeyDownEnter ||
+            (!allowCustomValue && type === InputBlur)) &&
           typeof newSelectedItem !== 'undefined' &&
-          !isEqual(selectedItemProp, newSelectedItem)
+          !isEqual(currentSelectedItem, newSelectedItem)
         ) {
           if (items.some((item) => isEqual(item, newSelectedItem))) {
             committedCustomValueRef.current = '';
