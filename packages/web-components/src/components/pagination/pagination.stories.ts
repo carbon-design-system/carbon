@@ -211,8 +211,18 @@ export const MultiplePaginationComponents = {
 export const PaginationUnknownPages = {
   name: 'Unknown pages and items',
   args: {
-    pagesUnknown: true,
     totalItems: undefined,
+  },
+  argTypes: {
+    pageInputDisabled: {
+      control: false,
+    },
+    pagesUnknown: {
+      control: false,
+    },
+    totalItems: {
+      control: false,
+    },
   },
   render: (args) => {
     const {
@@ -222,12 +232,9 @@ export const PaginationUnknownPages = {
       isLastPage,
       itemsPerPageText,
       page,
-      pageInputDisabled,
       pageSize,
       pageSizeInputDisabled,
-      pagesUnknown,
       size,
-      totalItems,
     } = args ?? {};
 
     return html`
@@ -239,11 +246,11 @@ export const PaginationUnknownPages = {
         items-per-page-text=${itemsPerPageText}
         page=${page}
         page-size=${pageSize}
-        ?page-input-disabled=${pageInputDisabled}
+        ?page-input-disabled=${false}
         ?page-size-input-disabled=${pageSizeInputDisabled}
         size=${size}
-        ?pages-unknown=${pagesUnknown}
-        total-items=${totalItems}
+        ?pages-unknown=${true}
+        .totalItems=${undefined}
         @cds-page-sizes-select-changed=${(event: CustomEvent) => {
           action('cds-page-sizes-select-changed')(event.detail);
         }}

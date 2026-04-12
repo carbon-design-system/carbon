@@ -183,17 +183,30 @@ PaginationWithCustomPageSizesLabel.storyName =
   'Pagination with custom page sizes label';
 
 export const PaginationUnknownPages = (args) => {
+  const { pageInputDisabled, pagesUnknown, totalItems, ...rest } = args ?? {};
+
   return (
     <div>
       <Pagination
         {...props()}
-        pagesUnknown={true}
-        totalItems={undefined}
         page={1}
-        {...args}
+        {...rest}
+        pagesUnknown
+        totalItems={undefined}
       />
     </div>
   );
 };
 
 PaginationUnknownPages.storyName = 'Unknown pages and items';
+PaginationUnknownPages.argTypes = {
+  pageInputDisabled: {
+    control: false,
+  },
+  pagesUnknown: {
+    control: false,
+  },
+  totalItems: {
+    control: false,
+  },
+};
