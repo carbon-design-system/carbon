@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2024
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -23,6 +23,13 @@ const AISkeletonPlaceholder = ({
   ...other
 }: AISkeletonPlaceholderProps) => {
   const prefix = usePrefix();
+  // TODO: Fix the `classnames` call. It adds a literal `className` class when
+  // `className` is truthy.
+  /*
+  const AISkeletonPlaceholderClasses = classNames(className, {
+    [`${prefix}--skeleton__placeholder--ai`]: true,
+  });
+  */
   const AISkeletonPlaceholderClasses = classNames(
     { className, [`${prefix}--skeleton__placeholder--ai`]: true },
     className
