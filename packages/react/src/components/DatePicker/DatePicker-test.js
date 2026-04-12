@@ -401,6 +401,26 @@ describe('DatePicker', () => {
         document.querySelector(`.${prefix}--date-picker__icon--warn`)
       ).not.toBeInTheDocument();
     });
+
+    it('should preserve invalid state from DatePickerInput when DatePicker is not invalid', () => {
+      render(
+        <DatePicker datePickerType="single">
+          <DatePickerInput
+            id="date-picker-input-id-start"
+            placeholder="mm/dd/yyyy"
+            labelText="Date Picker label"
+            invalid
+            invalidText="Invalid date"
+          />
+        </DatePicker>
+      );
+
+      expect(screen.getByText('Invalid date')).toBeInTheDocument();
+      expect(screen.getByLabelText('Date Picker label')).toHaveAttribute(
+        'data-invalid',
+        'true'
+      );
+    });
   });
 });
 
