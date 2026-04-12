@@ -493,6 +493,33 @@ describe('ComboBox', () => {
     expect(screen.getByTestId('selected-item').textContent).toBe('Item 0');
   });
 
+  it('should skip disabled matches when pressing Enter with a partial input value', async () => {
+    const onChange = jest.fn();
+    const disabledItems = [
+      { id: 'ibm-cloud', text: 'IBM Cloud', disabled: true },
+      { id: 'ibm-quantum', text: 'IBM Quantum' },
+      { id: 'ibm-z', text: 'IBM Z' },
+    ];
+
+    render(
+      <ComboBox
+        id="test-combobox"
+        items={disabledItems}
+        itemToString={(item) => (item ? item.text : '')}
+        onChange={onChange}
+      />
+    );
+
+    await userEvent.click(findInputNode());
+    await userEvent.type(findInputNode(), 'IBM ');
+    await userEvent.keyboard('{Enter}');
+
+    expect(findInputNode()).toHaveDisplayValue('IBM Quantum');
+    expect(onChange).toHaveBeenLastCalledWith({
+      selectedItem: disabledItems[1],
+    });
+  });
+
   it('should restore selected item label on blur when input does not match any item and a selection exists', async () => {
     render(
       <ComboBox
