@@ -1145,8 +1145,7 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
     </div>
   );
 }) as {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
-  <ItemType>(props: FilterableMultiSelectProps<ItemType>): ReactElement<any>;
+  <ItemType>(props: FilterableMultiSelectProps<ItemType>): ReactElement;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
   propTypes?: any;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452

@@ -1533,8 +1533,7 @@ type ComboboxComponentProps<ItemType> = PropsWithChildren<
   RefAttributes<HTMLInputElement>;
 
 export interface ComboBoxComponent {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
-  <ItemType>(props: ComboboxComponentProps<ItemType>): ReactElement<any> | null;
+  <ItemType>(props: ComboboxComponentProps<ItemType>): ReactElement | null;
 }
 
 export default ComboBox as ComboBoxComponent;

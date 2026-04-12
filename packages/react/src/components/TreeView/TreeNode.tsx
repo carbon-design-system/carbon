@@ -9,14 +9,16 @@ import { CaretDown } from '@carbon/icons-react';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import React, {
+  isValidElement,
+  useCallback,
+  useContext,
   useEffect,
   useRef,
   useState,
-  useCallback,
-  useContext,
   type ElementType,
   type FocusEvent,
   type MouseEvent,
+  type ReactNode,
 } from 'react';
 import { keys, match, matches } from '../../internal/keyboard';
 import { deprecate } from '../../prop-types/deprecate';
@@ -165,9 +167,8 @@ const extractTextContent = (node: React.ReactNode): string => {
     return node.map(extractTextContent).join('');
   }
 
-  if (React.isValidElement(node)) {
-    const element = node as React.ReactElement<{ children?: React.ReactNode }>;
-    const children = element.props.children;
+  if (isValidElement<{ children?: ReactNode }>(node)) {
+    const children = node.props.children;
     return extractTextContent(children);
   }
 
