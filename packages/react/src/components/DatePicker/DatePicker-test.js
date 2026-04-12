@@ -709,6 +709,32 @@ describe('Single date picker', () => {
     expect(document.body).toHaveFocus();
     expect(onClose).toHaveBeenCalledTimes(2);
   });
+
+  it('should keep native tab navigation when `readOnly` is true', async () => {
+    render(
+      <>
+        <DatePicker datePickerType="single" readOnly>
+          <DatePickerInput id="readonly-input-id" labelText="Read only input" />
+        </DatePicker>
+        <button data-testid="next-focus-target" type="button">
+          Next focus target
+        </button>
+      </>
+    );
+
+    const dateInput = screen.getByLabelText('Read only input');
+    const nextFocusTarget = screen.getByTestId('next-focus-target');
+    const calendar = screen.getByRole('application');
+
+    expect(calendar).not.toHaveClass('open');
+    expect(document.body).toHaveFocus();
+    await userEvent.tab();
+    expect(dateInput).toHaveFocus();
+    expect(calendar).not.toHaveClass('open');
+    await userEvent.tab();
+    expect(nextFocusTarget).toHaveFocus();
+    expect(calendar).not.toHaveClass('open');
+  });
 });
 
 describe('Range date picker', () => {
