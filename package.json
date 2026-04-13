@@ -10,7 +10,6 @@
   "workspaces": [
     "actions/*",
     "config/*",
-    "examples/*",
     "packages/*",
     "www"
   ],
@@ -38,9 +37,9 @@
     "react-dom": "~19.2.3",
     "react-is": "~19.2.0",
     "flatpickr@4.6.13": "patch:flatpickr@npm%3A4.6.13#./.yarn/patches/flatpickr-npm-4.6.13-06399933fc.patch",
-    "brace-expansion": "^2.0.2",
+    "brace-expansion": "^2.0.3",
     "@octokit/rest": "^22.0.0",
-    "eslint": "9.39.3",
+    "eslint": "9.39.4",
     "typescript-eslint": "8.46.2"
   },
   "devDependencies": {
@@ -57,8 +56,6 @@
     "@commitlint/config-conventional": "^20.0.0",
     "@eslint/compat": "^2.0.1",
     "@eslint/js": "^9.24.0",
-    "@percy/cli": "^1.30.4",
-    "@percy/playwright": "^1.0.7",
     "@playwright/test": "^1.36.2",
     "@testing-library/dom": "^10.1.0",
     "@testing-library/jest-dom": "^6.0.0",

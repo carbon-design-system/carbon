@@ -1969,6 +1969,15 @@
       ]
     },
     {
+      "login": "kadiryazgan",
+      "name": "Kadir Yazgan",
+      "avatar_url": "https://avatars.githubusercontent.com/u/2729020?v=4",
+      "profile": "https://github.com/kadiryazgan",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
       "login": "maradwan26",
       "name": "Mahmoud Radwan",
       "avatar_url": "https://avatars.githubusercontent.com/u/132728978?v=4",
@@ -2159,7 +2168,8 @@
       "avatar_url": "https://avatars.githubusercontent.com/u/32760275?v=4",
       "profile": "https://github.com/harishjanardhanan",
       "contributions": [
-        "doc"
+        "doc",
+        "code"
       ]
     }
   ],

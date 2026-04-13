@@ -9,7 +9,6 @@ import PropTypes from 'prop-types';
 import React, {
   forwardRef,
   useCallback,
-  useContext,
   useEffect,
   useImperativeHandle,
   useRef,
@@ -28,8 +27,6 @@ import { match, keys } from '../../internal/keyboard';
 import { isComponentElement } from '../../internal';
 import { usePrefix } from '../../internal/usePrefix';
 import { useSavedCallback } from '../../internal/useSavedCallback';
-import { FormContext } from '../FluidForm';
-import { WarningFilled, WarningAltFilled } from '@carbon/icons-react';
 import {
   DateLimit,
   DateOption,
@@ -39,6 +36,7 @@ import {
 import type { Instance } from 'flatpickr/dist/types/instance';
 import { datePartsOrder } from '@carbon/utilities';
 import { SUPPORTED_LOCALES, type SupportedLocale } from './DatePickerLocales';
+import { isEmptyDateValue } from './utils';
 
 // Weekdays shorthand for English locale
 // Ensure localization exists before trying to access it
@@ -207,8 +205,10 @@ export type DatePickerTypes = 'simple' | 'single' | 'range';
 
 export interface DatePickerProps {
   /**
-   * Flatpickr prop passthrough enables direct date input, and when set to false,
-   * we must clear dates manually by resetting the value prop to to a falsy value (such as `""`, `null`, or `undefined`) or an array of all falsy values, making it a controlled input.
+   * Flatpickr prop passthrough enables direct date input, and when set to
+   * false, we must clear dates manually by resetting the value prop to an empty
+   * value (such as `""`, `null`, or `undefined`) or an array of all empty
+   * values, making it a controlled input.
    */
   allowInput?: boolean;
 
@@ -265,11 +265,6 @@ export interface DatePickerProps {
    * Specify whether or not the control is invalid (Fluid only)
    */
   invalid?: boolean;
-
-  /**
-   * Provide the text that is displayed when the control is in error state (Fluid Only)
-   */
-  invalidText?: ReactNode;
 
   /**
    * `true` to use the light version.
@@ -340,11 +335,6 @@ export interface DatePickerProps {
   warn?: boolean;
 
   /**
-   * Provide the text that is displayed when the control is in warning state (Fluid only)
-   */
-  warnText?: ReactNode;
-
-  /**
    * Accessible aria-label for the "next month" arrow icon.
    */
   nextMonthAriaLabel?: string;
@@ -369,9 +359,7 @@ const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>((props, ref) => {
     enable,
     inline,
     invalid,
-    invalidText,
     warn,
-    warnText,
     light = false,
     locale = 'en',
     maxDate,
@@ -389,7 +377,6 @@ const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>((props, ref) => {
   } = props;
 
   const prefix = usePrefix();
-  const { isFluid } = useContext(FormContext);
   const [hasInput, setHasInput] = useState(false);
   // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
   const startInputField: any = useCallback((node) => {
@@ -907,10 +894,11 @@ const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>((props, ref) => {
   useEffect(() => {
     // when value prop is manually reset, this clears the flatpickr calendar instance and text input
     // run if both:
-    // 1. value prop is set to a falsy value (`""`, `undefined`, `null`, etc) OR an array of all falsy values
+    // 1. value prop is set to an empty value (`""`, `undefined`, `null`, etc) OR an array of all empty values
     // 2. flatpickr instance contains values in its `selectedDates` property so it hasn't already been cleared
     if (
-      (!value || (Array.isArray(value) && value.every((date) => !date))) &&
+      (isEmptyDateValue(value) ||
+        (Array.isArray(value) && value.every(isEmptyDateValue))) &&
       calendarRef.current?.selectedDates.length
     ) {
       calendarRef.current?.clear();
@@ -933,7 +921,7 @@ const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>((props, ref) => {
           value === '' ||
           value === null ||
           (Array.isArray(value) &&
-            (value.length === 0 || value.every((element) => !element)))
+            (value.length === 0 || value.every(isEmptyDateValue)))
         ) {
           // only clear if there are selected dates to avoid unnecessary operations
           if (calendarRef.current.selectedDates.length > 0) {
@@ -945,35 +933,16 @@ const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>((props, ref) => {
       }
       updateClassNames(calendarRef.current, prefix);
       //for simple date picker w/o calendar; initial mount may not have value
-    } else if (!calendarRef.current && value) {
+    } else if (
+      !calendarRef.current &&
+      typeof value !== 'undefined' &&
+      value !== null
+    ) {
       startInputField.current.value = value;
     }
   }, [value, prefix, startInputField]);
 
   let fluidError;
-  if (isFluid) {
-    if (invalid) {
-      fluidError = (
-        <>
-          <WarningFilled
-            className={`${prefix}--date-picker__icon ${prefix}--date-picker__icon--invalid`}
-          />
-          <hr className={`${prefix}--date-picker__divider`} />
-          <div className={`${prefix}--form-requirement`}>{invalidText}</div>
-        </>
-      );
-    } else if (warn) {
-      fluidError = (
-        <>
-          <WarningAltFilled
-            className={`${prefix}--date-picker__icon ${prefix}--date-picker__icon--warn`}
-          />
-          <hr className={`${prefix}--date-picker__divider`} />
-          <div className={`${prefix}--form-requirement`}>{warnText}</div>
-        </>
-      );
-    }
-  }
 
   return (
     <div className={wrapperClasses} ref={ref} {...rest}>
@@ -987,8 +956,10 @@ const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>((props, ref) => {
 
 DatePicker.propTypes = {
   /**
-   * Flatpickr prop passthrough enables direct date input, and when set to false,
-   * we must clear dates manually by resetting the value prop to a falsy value (such as `""`, `null`, or `undefined`) or an array of all falsy values, making it a controlled input.
+   * Flatpickr prop passthrough enables direct date input, and when set to
+   * false, we must clear dates manually by resetting the value prop to an empty
+   * value (such as `""`, `null`, or `undefined`) or an array of all empty
+   * values, making it a controlled input.
    */
   allowInput: PropTypes.bool,
 
@@ -1045,11 +1016,6 @@ DatePicker.propTypes = {
    * Specify whether or not the control is invalid (Fluid only)
    */
   invalid: PropTypes.bool,
-
-  /**
-   * Provide the text that is displayed when the control is in error state (Fluid Only)
-   */
-  invalidText: PropTypes.node,
 
   /**
    * `true` to use the light version.
@@ -1133,11 +1099,6 @@ DatePicker.propTypes = {
    * Specify whether the control is currently in warning state (Fluid only)
    */
   warn: PropTypes.bool,
-
-  /**
-   * Provide the text that is displayed when the control is in warning state (Fluid only)
-   */
-  warnText: PropTypes.node,
 
   /**
    * Accessible aria-label for the "next month" arrow icon.

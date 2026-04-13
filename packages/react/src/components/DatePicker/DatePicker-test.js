@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useState } from 'react';
+import React, { createRef, useState } from 'react';
 import DatePicker from './DatePicker';
 import DatePickerInput from '../DatePickerInput';
 import { render, screen, fireEvent } from '@testing-library/react';
@@ -301,61 +301,16 @@ describe('DatePicker', () => {
     warn.mockRestore();
   });
 
-  it('should show only invalid text when both invalid and warn are true in fluid mode', () => {
-    render(
-      <FormContext.Provider value={{ isFluid: true }}>
-        <DatePicker
-          datePickerType="single"
-          invalid={true}
-          invalidText="Invalid date"
-          warn={true}
-          warnText="Warning message">
-          <DatePickerInput
-            id="date-picker-input-id-start"
-            placeholder="mm/dd/yyyy"
-            labelText="Date Picker label"
-          />
-        </DatePicker>
-      </FormContext.Provider>
-    );
-    expect(screen.getByText('Invalid date')).toBeInTheDocument();
-    expect(screen.queryByText('Warning message')).not.toBeInTheDocument();
-  });
-
-  it('should show only warning text when warn is true and invalid is false in fluid mode', () => {
-    render(
-      <FormContext.Provider value={{ isFluid: true }}>
-        <DatePicker
-          datePickerType="single"
-          invalid={false}
-          invalidText="Invalid date"
-          warn={true}
-          warnText="Warning message">
-          <DatePickerInput
-            id="date-picker-input-id-start"
-            placeholder="mm/dd/yyyy"
-            labelText="Date Picker label"
-          />
-        </DatePicker>
-      </FormContext.Provider>
-    );
-    expect(screen.getByText('Warning message')).toBeInTheDocument();
-    expect(screen.queryByText('Invalid date')).not.toBeInTheDocument();
-  });
-
   it('should not show any error text when both invalid and warn are false in fluid mode', () => {
     render(
       <FormContext.Provider value={{ isFluid: true }}>
-        <DatePicker
-          datePickerType="single"
-          invalid={false}
-          invalidText="Invalid date"
-          warn={false}
-          warnText="Warning message">
+        <DatePicker datePickerType="single" invalid={false} warn={false}>
           <DatePickerInput
             id="date-picker-input-id-start"
             placeholder="mm/dd/yyyy"
             labelText="Date Picker label"
+            invalidText="Invalid date"
+            warnText="Warning message"
           />
         </DatePicker>
       </FormContext.Provider>
@@ -865,9 +820,65 @@ describe('Range date picker', () => {
     await userEvent.type(theStart, '2023-01-05{enter}');
     await userEvent.type(theEnd, '2023-01-19{enter}');
     expect(onChange).toHaveBeenCalledTimes(2);
+    expect(screen.getByRole('application')).not.toHaveClass('open');
+    await userEvent.click(theEnd);
     expect(screen.getByRole('application')).toHaveClass('open');
     await userEvent.keyboard('{escape}');
     expect(screen.getByRole('application')).not.toHaveClass('open');
+  });
+
+  it('should respect closeOnSelect prop in range mode when pressing Enter', async () => {
+    const onClose = jest.fn();
+    render(
+      <DatePicker
+        dateFormat="Y-m-d"
+        closeOnSelect={false}
+        onClose={onClose}
+        onChange={() => {}}
+        datePickerType="range">
+        <DatePickerInput
+          id="start-date-input-close-on-select"
+          labelText="Start date"
+        />
+        <DatePickerInput
+          id="end-date-input-close-on-select"
+          labelText="End date"
+        />
+      </DatePicker>
+    );
+
+    const start = screen.getByLabelText('Start date');
+    const end = screen.getByLabelText('End date');
+
+    await userEvent.type(start, '2023-01-05{enter}');
+    await userEvent.type(end, '2023-01-19{enter}');
+
+    expect(screen.getByRole('application')).toHaveClass('open');
+    expect(onClose).not.toHaveBeenCalled();
+  });
+
+  it('should move focus on first click outside after Enter on end date input', async () => {
+    render(
+      <>
+        <DatePicker
+          dateFormat="Y-m-d"
+          onChange={() => {}}
+          datePickerType="range">
+          <DatePickerInput id="start-date-input-id" labelText="Start date" />
+          <DatePickerInput id="end-date-input-id" labelText="End date" />
+        </DatePicker>
+        <input id="outside-input-id" aria-label="Outside input" />
+      </>
+    );
+
+    const end = screen.getByLabelText('End date');
+    const outside = screen.getByLabelText('Outside input');
+
+    await userEvent.click(end);
+    await userEvent.type(end, '2026-02-15{enter}');
+    await userEvent.click(outside);
+
+    expect(outside).toHaveFocus();
   });
 
   it('clearing end date should not cause console warnings', async () => {
@@ -1246,6 +1257,41 @@ describe('Range date picker', () => {
       expect(end.value).toBe('02/14/2025');
     });
 
+    it('should not clear an input when setDate receives timestamp 0', async () => {
+      const ref = createRef();
+
+      render(
+        <DatePicker ref={ref} datePickerType="range" value={undefined}>
+          <DatePickerInput
+            id="start-zero"
+            placeholder="mm/dd/yyyy"
+            labelText="Start date"
+            data-testid="start-input-zero"
+          />
+          <DatePickerInput
+            id="end-zero"
+            placeholder="mm/dd/yyyy"
+            labelText="End date"
+            data-testid="end-input-zero"
+          />
+        </DatePicker>
+      );
+
+      const fp = ref.current.calendar;
+      const start = await screen.findByTestId('start-input-zero');
+      const end = await screen.findByTestId('end-input-zero');
+      const formattedZero = fp.formatDate(new Date(0), 'm/d/Y');
+      const formattedOne = fp.formatDate(new Date(1), 'm/d/Y');
+
+      fp.setDate([0, 1], false, 'm/d/Y');
+      expect(start.value).toBe(formattedZero);
+      expect(end.value).toBe(formattedOne);
+
+      fp.setDate([1, 0], false, 'm/d/Y');
+      expect(start.value).toBe(formattedOne);
+      expect(end.value).toBe(formattedZero);
+    });
+
     it('should not write both dates into the first input', async () => {
       const ref = React.createRef();
 
@@ -1277,6 +1323,31 @@ describe('Range date picker', () => {
 
       expect(start.value).toBe('03/03/2025');
       expect(end.value).toBe('03/09/2025');
+    });
+
+    it('should not fire end input blur handlers when Enter is pressed', async () => {
+      const handleBlur = jest.fn();
+
+      render(
+        <DatePicker
+          dateFormat="Y-m-d"
+          onChange={() => {}}
+          datePickerType="range">
+          <DatePickerInput id="start" labelText="Start date" />
+          <DatePickerInput id="end" labelText="End date" onBlur={handleBlur} />
+        </DatePicker>
+      );
+
+      await userEvent.type(
+        screen.getByLabelText('Start date'),
+        '2023-01-05{enter}'
+      );
+      await userEvent.type(
+        screen.getByLabelText('End date'),
+        '2023-01-19{enter}'
+      );
+
+      expect(handleBlur).not.toHaveBeenCalled();
     });
   });
 });
