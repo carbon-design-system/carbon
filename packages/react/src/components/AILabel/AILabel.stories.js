@@ -316,21 +316,3 @@ InlineWithContent.parameters = {
     ],
   },
 };
-
-export const ShadowDOMTest = () => {
-  React.useEffect(() => {
-    // Dynamically import to ensure custom element is registered
-    import('./stories/AILabelShadowDemo');
-  }, []);
-
-  return React.createElement('ailabel-shadow-demo');
-};
-
-ShadowDOMTest.parameters = {
-  docs: {
-    description: {
-      story:
-        'Tests AILabel Toggletip behavior inside Shadow DOM. Click the AILabel button to open the Toggletip, then click the link inside - the Toggletip should remain open, demonstrating that clicks within Shadow DOM are correctly detected.',
-    },
-  },
-};
