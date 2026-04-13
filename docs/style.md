@@ -164,7 +164,7 @@ const add = (a, b) => a + b;
 ```
 
 We've found that, while this style is terse and compact, it can be at odds with
-the fact that code is revisited often and that developers need to peak inside
+the fact that code is revisited often and that developers need to peek inside
 sometimes to see what is going on. For example, if we needed to debug a specific
 value in the function above then we would go through the following steps:
 
@@ -246,7 +246,7 @@ slots that you can fill if you need this functionality in a component._
 
 ##### When to use `React.ForwardRef`
 
-From the [react docs](https://reactjs.org/docs/forwarding-refs.html),
+From the [React docs](https://reactjs.org/docs/forwarding-refs.html),
 
 > Ref forwarding is an opt-in feature that lets some components take a ref they
 > receive, and pass it further down (in other words, “forward” it) to a child.
@@ -303,7 +303,7 @@ between versions. This can be accomplished by explicitly placing this prop on
 the outermost element, or it can be accomplished by having `...rest` spread on
 the outermost element.
 
-In some cases `...rest` can not be spread on the outermost element and needs to
+In some cases `...rest` cannot be spread on the outermost element and needs to
 be spread on other key interior elements, such as inputs. For these cases we
 cannot rely on `data-testid` being included in `...rest` and it must explicitly
 be applied to the outermost element.
@@ -330,7 +330,7 @@ or HTML5 and ARIA semantics for selecting elements for testing.**
 It's increasingly common for applications to use a Content Security Policy (CSP)
 header with a
 [`style-src` directive](https://content-security-policy.com/style-src/). When
-this is configured, inline styles are blocked. Due to this, `style={{}}` can not
+this is configured, inline styles are blocked. Due to this, `style={{}}` cannot
 be used on any element within the codebase. The `react/forbid-component-props`
 eslint rule is configured to flag invalid usages of the `style` attribute/prop.
 
@@ -437,7 +437,9 @@ const MyComponent = ({
           ? t('carbon.component-name.sort.ascending')
           : t('carbon.component-name.sort.descending')}
       </span>
-      <button onClick={onClick}>t('carbon.component-name.toggle-sort')</button>
+      <button onClick={onClick}>
+        {t('carbon.component-name.toggle-sort')}
+      </button>
     </>
   );
 };
@@ -650,7 +652,7 @@ the function as `handleOnClick`.
 
 #### Naming preview code
 
-See [preview Code](./preview-code.md#naming-preview-code);
+See [preview code](./preview-code.md#naming-preview-code).
 
 ### Testing
 
@@ -664,12 +666,10 @@ suites.
 
 #### Organization
 
-Every component should have tests covering a series of Categories
+Every component should have tests covering a series of categories:
 
 - General component functionality/API
-- Accessibility
 - End to end tests
-- Server side rendering
 
 Each of these are separated into individual files. In some cases the syntax may
 be slightly different and separate files make this easier to understand.
@@ -679,9 +679,7 @@ tests in certain environments (local, CI, Pre-release checks, etc).
 | File name                    | Category                        |
 | ---------------------------- | ------------------------------- |
 | `ComponentName-test.js`      | General component functionality |
-| `ComponentName-test.a11y.js` | Accessibility testing           |
 | `ComponentName-test.e2e.js`  | End to end tests                |
-| `ComponentName-test.ssr.js`  | Server side rendering           |
 
 There are corresponding commands to run all categories, individual categories,
 or a combination. Depending on your shell, modifiers can be used to run two
@@ -731,7 +729,7 @@ describe('ComponentName', () => {
     });
 
     it('should place extra props on the outermost DOM node', () => {
-      const { container } = render(<ComponentName data-testid="test" />);
+      const { container } = render(<ComponentName id="test" />);
       expect(container.firstChild).toHaveAttribute('data-testid', 'test');
     });
 
@@ -757,7 +755,7 @@ describe('ComponentName', () => {
     // it can be helpful to make assertions about when these
     // props are called and what they are called with in order
     // to test the Public API of the component.
-    // To make assertions on a function, such as whether its
+    // To make assertions on a function, such as whether it has
     // been called or what it has been called with, we can make
     // use of Jest's `jest.fn()` method to create mock
     // functions. We can then make assertions on these mock
@@ -775,7 +773,7 @@ describe('ComponentName', () => {
     // Optional ref tests
     // A component that accepts a ref falls in one of three scenarios:
     // 1. A class component
-    // 2. A component that uses React.forwardRef and placed
+    // 2. A component that uses React.forwardRef and places
     //    it on an HTML element
     // 3. A component that uses React.forwardRef and uses
     //    useImperativeHandle to decorate the ref (this is
@@ -915,7 +913,7 @@ these instead of hard coding values for colors, type, or even spacing. You can
 visit the following SassDoc links to view all of the design tokens relevant to
 this project:
 
-- [Color](../packages/theme/docs/sass.md)
+- [Color](../packages/themes/docs/sass.md)
 - [Layout](../packages/layout/docs/sass.md)
 - [Motion](../packages/motion/docs/sass.md)
 - [Type](../packages/type/docs/sass.md)
@@ -1090,7 +1088,7 @@ The following annotations are used:
   **Optional annotations**
 
 - [`@example`](http://sassdoc.com/annotations/#example) - if the usage isn't
-  straight forward or there are multiple use cases
+  straightforward or there are multiple use cases
 - [`@link`](http://sassdoc.com/annotations/#link) - if there's a related link to
   reference
 
@@ -1235,7 +1233,7 @@ describe('@carbon/styles/scss/config', () => {
     `);
 
     // get('<key>') gives you both the JavaScript representation of a value
-    // along with the `nativeValue` which comes from Dart sass. Use `.value`
+    // along with the `nativeValue` which comes from Dart Sass. Use `.value`
     // to get the JavaScript value and make assertions
     expect(get('test').value).toBe(true);
   });
@@ -1265,11 +1263,11 @@ test('Public API', async () => {
     $_: get('variables', meta.module-functions('module'));
 
     // Verify that a mixin exists, optionally within a module
-    $_: get('mixin-name', meta.mixin-exists('mixin-name', 'module');
+    $_: get('mixin-name', meta.mixin-exists('mixin-name', 'module'));
   `);
 });
 ```
 
 You can run `yarn test -u` from the root to update the snapshot and include it
-in your pull request for review. This helps core reviewers to determine if api
+in your pull request for review. This helps core reviewers to determine if API
 changes are being made in a backwards compatible way to avoid breaking changes.

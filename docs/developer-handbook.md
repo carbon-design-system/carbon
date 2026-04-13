@@ -190,48 +190,31 @@ There are a couple ways to work on framework-specific styles.
 
 ### Using `npm link`/`yarn link`
 
-This is the most straightforward way. When in the directory of your
-`@carbon/styles` folder, run the following command:
+This is the most straightforward way. In the project where you want to consume
+your local `@carbon/styles` changes, run:
 
 ```bash
-yarn link
+yarn link /path/to/carbon/packages/styles
 ```
 
-You should see a success message similar to:
+The `yarn link` command will add a `resolutions` entry in the consuming
+project's manifest and point `@carbon/styles` to the workspace on your
+filesystem. So, if we make a change in `@carbon/styles` and rebuild the package
+it will update in the Storybook environment for `carbon-components-angular`.
+
+After making changes in `@carbon/styles`, rebuild the package by running one of
+the following commands:
 
 ```bash
-success Registered "@carbon/styles".
-info You can now run `yarn link "@carbon/styles"` in the projects where you want to use this package and it will be used instead.
+yarn build
 ```
 
-Now, go to the folder where `carbon-components-angular` is located and run:
+Run the command above from the `packages/styles` directory, or run the
+following from the repository root:
 
 ```bash
-yarn link @carbon/styles
+yarn lerna run build --scope='@carbon/styles'
 ```
-
-You should see a success message similar to:
-
-```bash
-success Using linked package for "@carbon/styles".
-```
-
-The `yarn link` command will allow us to point the `@carbon/styles` package
-under `node_modules` to the folder on our filesystem. So, if we make a change in
-`@carbon/styles` and re-compile the project it will update in the Storybook
-environment for `carbon-components-angular`.
-
-In addition, if you would like to have your changes to styles automatically
-compile and update Storybook you can run the following command in the
-`@carbon/styles` folder on your machine:
-
-```bash
-yarn gulp watch -s
-```
-
-This will run the `watch` command in `gulpfile.js`. As a result, whenever you
-make a change to the project styles it will automatically copy over into the
-`scss` folder which Storybook uses in `carbon-components-angular`.
 
 ### Pointing NPM dependency of `@carbon/styles` right to the source code
 
@@ -392,16 +375,16 @@ For guidance, see [Red flags](./style.md#red-flags).
 
 ### Public API Snapshot
 
-The entire public api of `@carbon/react` is tracked in one file by iterating
+The entire public API of `@carbon/react` is tracked in one file by iterating
 over all PropTypes and storing the output in a snapshot file. When adding,
 removing, or updating PropTypes, run `yarn test -u` from the root to update the
 snapshot and include it in your pull request for review. This helps core
-reviewers to determine if api changes are being made in a backwards compatible
+reviewers to determine if API changes are being made in a backward-compatible
 way to avoid breaking changes.
 
 Snapshots for web components can be found in their respective component
 directories. To test or update snapshots, run `yarn test` or
-`yarn test:updateSnaphots`. These commands must be run from the
+`yarn test:updateSnapshots`. These commands must be run from the
 `packages/web-components` directory.
 
 ### Working with icons and pictograms
@@ -537,7 +520,7 @@ warning(
 
 #### Publishing older library versions
 
-We offer ad-hoc backwards-support for older version of the system. This work is
+We offer ad-hoc backwards-support for older versions of the system. This work is
 primarily driven by external contributors who may still need these older
 versions for legacy code. When updates are received and merged into the
 codebase, the release process will be a bit different than the one described
