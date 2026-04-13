@@ -516,7 +516,6 @@ describe('Toggletip', () => {
     });
 
     describe('Shadow DOM Support', () => {
-      // Tests verify handling of event.target retargeting in Shadow DOM using composedPath()
       it('should not close when clicking inside the toggletip in Shadow DOM context', async () => {
         const shadowHost = document.createElement('div');
         document.body.appendChild(shadowHost);
