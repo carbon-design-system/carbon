@@ -874,7 +874,7 @@ Prefix all class names with `#{$prefix}--` in SCSS, which is replaced with
 `cds--` by default, and design systems inheriting Carbon can override. This
 prefix prevents potential conflicts with class names from the user.
 
-All selectors should start with the `#{$prefix}` variable.
+All Carbon class selectors should start with the `#{$prefix}` variable.
 
 **HTML**
 

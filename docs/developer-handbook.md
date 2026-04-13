@@ -173,20 +173,20 @@ control when these side-effects are applied in your project.
 
 ### Files and folders
 
-All react components belong in `packages/react/src/components` in their own
+All React components belong in `packages/react/src/components` in their own
 folder.
 
-All Component styles belong in `packages/styles/scss/components` in their own
+All component styles belong in `packages/styles/scss/components` in their own
 folder.
 
 ### Working on JavaScript-framework-specific styles
 
 JavaScript-framework-specific is _not_ recommended as we strive to create styles
 that are framework-neutral. However, there are some rare cases where
-framework-specific cannot be avoided, and some of those make sense to be in
+framework-specific cannot be avoided, and some of those make sense to be
 maintained by core style library here.
 
-There are a couple ways to work on framework-specific style.
+There are a couple ways to work on framework-specific styles.
 
 ### Using `npm link`/`yarn link`
 
@@ -252,7 +252,7 @@ steps:
 
 Then edits of `.scss` files in `/path/to/@carbon/styles/scss` will be reflected
 to the development environment of your framework variant repository. You don't
-need to do anything in `@carbon/styles` side.
+need to do anything on the `@carbon/styles` side.
 
 ## Commit conventions
 
