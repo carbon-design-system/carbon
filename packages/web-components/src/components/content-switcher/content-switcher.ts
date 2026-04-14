@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2019, 2025
+ * Copyright IBM Corp. 2019, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -153,7 +153,7 @@ class CDSContentSwitcher extends LitElement {
         interactionType === 'keyboard' &&
         !item.disabled)
     ) {
-      if (this.selectionMode !== 'manual' || interactionType === 'activation') {
+      if (this.selectionMode !== 'manual' || interactionType !== 'keyboard') {
         const init = {
           bubbles: true,
           composed: true,
@@ -318,7 +318,7 @@ class CDSContentSwitcher extends LitElement {
       const itemToSelect = items[this.selectedIndex] as CDSContentSwitcherItem;
       this._selectionDidChange(
         itemToSelect,
-        this.selectionMode === 'manual' ? 'keyboard' : 'mouse'
+        this.selectionMode === 'manual' ? 'activation' : 'mouse'
       );
     }
   }
