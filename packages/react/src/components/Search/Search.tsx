@@ -273,7 +273,7 @@ const Search = React.forwardRef<HTMLInputElement, SearchProps>(
     const magnifierWithTooltip =
       onExpand && !isExpanded ? (
         <Tooltip
-          className={`${prefix}--search-tooltip ${prefix}--search-magnifier-tooltip`}
+          className={`${prefix}--search-tooltip ${prefix}--search-magnifier-tooltip ${prefix}--icon-tooltip`}
           align="top"
           label="Search">
           {magnifierButton}

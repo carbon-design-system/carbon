@@ -154,29 +154,8 @@
     inset-block-start: 0;
     inset-inline-end: 0;
 
-    &::before {
-      position: absolute;
-      display: block;
-      background-color: $field;
-      block-size: calc(100% - 2px);
-      content: '';
-      inline-size: 2px;
-      inset-block-start: convert.to-rem(1px);
-      inset-inline-start: 0;
-      transition: background-color $duration-fast-02
-        motion(standard, productive);
-
-      @media screen and (prefers-reduced-motion: reduce) {
-        transition: none;
-      }
-    }
-
     &:hover {
       border-block-end: 1px solid $border-strong;
-
-      &::before {
-        background-color: $field-hover;
-      }
     }
   }
 
@@ -191,7 +170,10 @@
     }
   }
 
+  // Keep the clear icon above the hover fill overlay.
   .#{$prefix}--search-close svg {
+    position: relative;
+    z-index: 1;
     fill: inherit;
   }
 
@@ -200,7 +182,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    border-width: 1px 0;
+    border-width: 0 0 1px;
     border-style: solid;
     border-color: transparent;
     block-size: convert.to-rem(40px);
@@ -208,11 +190,6 @@
     fill: $icon-primary;
     inline-size: convert.to-rem(40px);
     opacity: 1;
-    transition:
-      opacity $duration-fast-02 motion(standard, productive),
-      background-color $duration-fast-02 motion(standard, productive),
-      outline $duration-fast-02 motion(standard, productive),
-      border $duration-fast-02 motion(standard, productive);
     visibility: inherit;
 
     &:hover {
@@ -227,6 +204,22 @@
       @include focus-outline('outline');
 
       background-color: $background-selected;
+    }
+  }
+
+  // Preserve the field focus outline while the clear button is hovered.
+  .#{$prefix}--search-input:focus ~ .#{$prefix}--search-close:hover {
+    background-color: transparent;
+    border-block-end-color: transparent;
+    outline: none;
+
+    &::after {
+      position: absolute;
+      background-color: $field-hover;
+      content: '';
+      inset-block: $spacing-01;
+      inset-inline: 0 $spacing-01;
+      pointer-events: none;
     }
   }
 
@@ -248,17 +241,6 @@
 
   .#{$prefix}--search--disabled svg {
     fill: $icon-on-color-disabled;
-  }
-
-  .#{$prefix}--search-close:focus,
-  .#{$prefix}--search-close:active {
-    &::before {
-      background-color: $focus;
-    }
-  }
-
-  .#{$prefix}--search-input:focus ~ .#{$prefix}--search-close:hover {
-    @include focus-outline('outline');
   }
 
   // Small
