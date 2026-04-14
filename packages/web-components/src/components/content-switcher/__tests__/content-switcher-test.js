@@ -7,7 +7,7 @@
 
 import { expect, fixture, html, oneEvent } from '@open-wc/testing';
 import { sendKeys } from '@web/test-runner-commands';
-import '../../../../es/components/content-switcher/index.js';
+import '@carbon/web-components/es/components/content-switcher/index.js';
 
 describe('cds-content-switcher', function () {
   it('should apply selectedIndex correctly', async () => {
