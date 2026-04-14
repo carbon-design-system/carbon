@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2024
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -43,23 +43,34 @@ const devTools = {
   },
 };
 
+// always use full locale code strings for values
 export const globalTypes = {
   locale: {
     name: 'Locale',
     description: 'Set the localization for the storybook',
-    defaultValue: 'en',
+    defaultValue: 'en-US',
     toolbar: {
       icon: 'globe',
       items: [
         {
           right: '🇺🇸',
           title: 'English',
-          value: 'en',
+          value: 'en-US',
+        },
+        {
+          right: '🇩🇪',
+          title: 'German',
+          value: 'de-DE',
         },
         {
           right: '🇵🇸',
           title: 'Arabic',
-          value: 'ar',
+          value: 'ar-SA',
+        },
+        {
+          right: '🇯🇵',
+          title: 'Japanese',
+          value: 'ja-JP',
         },
       ],
     },

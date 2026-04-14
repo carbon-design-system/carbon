@@ -56,12 +56,10 @@ const fixEventsPlugin: FixEventsPlugin = (config) => (fp) => {
       mouseDownInside = false;
       return;
     }
-
     if (!fp.isOpen || isEventInside(event)) {
       mouseDownInside = false;
       return;
     }
-
     mouseDownInside = false;
     fp.close();
   };
@@ -80,17 +78,18 @@ const fixEventsPlugin: FixEventsPlugin = (config) => (fp) => {
     const { target } = event;
     if (inputFrom === target || inputTo === target) {
       if (match(event, keys.Enter)) {
-        // Makes sure the hitting enter key picks up pending values of both `<input>`
-        // Workaround for: https://github.com/flatpickr/flatpickr/issues/1942
-        //
-        // TODO: https://github.com/flatpickr/flatpickr/issues/1942 has been
-        // addressed. Can the workaround be deleted?
+        mouseDownInside = false;
         fp.setDate(
           inputTo ? [inputFrom.value, inputTo.value] : [inputFrom.value],
           true,
           fp.config.dateFormat
         );
         event.stopPropagation();
+        if (inputTo === target && fp.config.closeOnSelect) {
+          requestAnimationFrame(() => {
+            fp.close();
+          });
+        }
       } else if (
         match(event, keys.ArrowLeft) ||
         match(event, keys.ArrowRight)
