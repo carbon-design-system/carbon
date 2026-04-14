@@ -23,17 +23,9 @@ const AISkeletonPlaceholder = ({
   ...other
 }: AISkeletonPlaceholderProps) => {
   const prefix = usePrefix();
-  // TODO: Fix the `classnames` call. It adds a literal `className` class when
-  // `className` is truthy.
-  /*
   const AISkeletonPlaceholderClasses = classNames(className, {
     [`${prefix}--skeleton__placeholder--ai`]: true,
   });
-  */
-  const AISkeletonPlaceholderClasses = classNames(
-    { className, [`${prefix}--skeleton__placeholder--ai`]: true },
-    className
-  );
 
   return (
     <SkeletonPlaceholder className={AISkeletonPlaceholderClasses} {...other} />
