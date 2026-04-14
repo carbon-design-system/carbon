@@ -290,10 +290,8 @@ const TreeNode = React.forwardRef<HTMLElement, TreeNodeProps>(
     const enableTreeviewControllable = useFeatureFlag(
       'enable-treeview-controllable'
     );
-
-    // eslint-disable-next-line  react-hooks/rules-of-hooks -- https://github.com/carbon-design-system/carbon/issues/20452
-    const { current: id } = useRef(nodeId || useId());
-
+    const generatedId = useId();
+    const { current: id } = useRef(nodeId ?? generatedId);
     const controllableExpandedState = useControllableState({
       value: isExpanded,
       onChange: onToggle as ControlledOnToggle,
