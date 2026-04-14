@@ -267,6 +267,7 @@
 
   .#{$prefix}--dialog-container {
     display: grid;
+    box-sizing: border-box;
     border: 1px solid $border-subtle-01;
     background-color: $layer;
     grid-template-areas:
