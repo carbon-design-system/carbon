@@ -64,11 +64,12 @@ const devTools = {
   },
 };
 
+// always use full locale code strings for values
 const globalTypes = {
   locale: {
     name: 'Locale',
     description: 'Set the localization for the storybook',
-    defaultValue: 'en',
+    defaultValue: 'en-US',
     toolbar: {
       icon: 'globe',
       title: 'Locale',
@@ -86,7 +87,7 @@ const globalTypes = {
         {
           right: '🇵🇸',
           title: 'Arabic',
-          value: 'ar',
+          value: 'ar-SA',
         },
         {
           right: '🇯🇵',
