@@ -495,7 +495,7 @@ describe('ComboBox', () => {
 
   it('should skip disabled matches when pressing Enter with a partial input value', async () => {
     const onChange = jest.fn();
-    const disabledItems = [
+    const items = [
       { id: 'ibm-cloud', text: 'IBM Cloud', disabled: true },
       { id: 'ibm-quantum', text: 'IBM Quantum' },
       { id: 'ibm-z', text: 'IBM Z' },
@@ -504,7 +504,7 @@ describe('ComboBox', () => {
     render(
       <ComboBox
         id="test-combobox"
-        items={disabledItems}
+        items={items}
         itemToString={(item) => (item ? item.text : '')}
         onChange={onChange}
       />
@@ -516,7 +516,7 @@ describe('ComboBox', () => {
 
     expect(findInputNode()).toHaveDisplayValue('IBM Quantum');
     expect(onChange).toHaveBeenLastCalledWith({
-      selectedItem: disabledItems[1],
+      selectedItem: items[1],
     });
   });
 
