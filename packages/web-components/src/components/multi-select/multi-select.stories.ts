@@ -90,15 +90,15 @@ const args = {
   hideLabel: false,
   locale: 'en',
   invalid: false,
-  invalidText: 'whoopsie!',
-  titleText: 'This is a MultiSelect Title',
+  invalidText: 'Error message goes here',
+  warnText: 'Warning message goes here',
+  titleText: 'Label',
   label: 'This is a label',
   size: DROPDOWN_SIZE.MEDIUM,
   selectionFeedback: SELECTION_FEEDBACK_OPTION.TOP_AFTER_REOPEN,
   readOnly: false,
   type: null,
   warn: false,
-  warnText: 'whoopsie!',
 };
 
 const filterableArgs = {
@@ -110,7 +110,8 @@ const filterableArgs = {
   hideLabel: false,
   locale: 'en',
   invalid: false,
-  invalidText: 'whoopsie!',
+  invalidText: 'Error message goes here',
+  warnText: 'Warning message goes here',
   titleText: 'FilterableMultiSelect title',
   label: '',
   size: DROPDOWN_SIZE.MEDIUM,
@@ -118,7 +119,6 @@ const filterableArgs = {
   readOnly: false,
   type: null,
   warn: false,
-  warnText: 'whoopsie!',
 };
 
 const argTypes = {
