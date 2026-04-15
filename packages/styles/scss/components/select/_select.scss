@@ -26,8 +26,6 @@
 @mixin select {
   .#{$prefix}--select {
     @include component-reset.reset;
-    // layout.use() on the wrapper — when size prop is passed, cds--layout--size-*
-    // class is added here, setting --cds-layout-size-height which the input reads
     @include layout.use('size', $default: 'md', $min: 'xs', $max: 'lg');
 
     position: relative;
@@ -47,7 +45,6 @@
   .#{$prefix}--select-input {
     @include type-style('body-compact-01');
     @include focus-outline('reset');
-    // layout.use() on the input — reads context from parent wrapper or cds-layout
     @include layout.use('size', $default: 'md', $min: 'xs', $max: 'lg');
     @include layout.use('density', $default: 'normal');
 
@@ -108,12 +105,6 @@
       cursor: not-allowed;
     }
   }
-
-  // NOTE: .cds--select-input--sm, --md, --lg modifier classes have been removed.
-  // Size is now controlled via layout.use() — when an explicit size is passed,
-  // cds--layout--size-* is added to .cds--select wrapper which sets
-  // --cds-layout-size-height, and layout.size('height') on the input reads it.
-  // This mirrors how Search handles sizing and supports xs without hardcoded values.
 
   .#{$prefix}--select--disabled .#{$prefix}--label,
   .#{$prefix}--select--disabled .#{$prefix}--form__helper-text {
