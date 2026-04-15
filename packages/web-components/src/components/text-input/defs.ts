@@ -12,6 +12,11 @@ export { FORM_ELEMENT_COLOR_SCHEME as INPUT_COLOR_SCHEME } from '../../globals/s
  */
 export enum INPUT_SIZE {
   /**
+   * Extra small size.
+   */
+  EXTRA_SMALL = 'xs',
+
+  /**
    * Small size.
    */
   SMALL = 'sm',

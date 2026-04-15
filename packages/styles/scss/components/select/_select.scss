@@ -17,6 +17,7 @@
 @use '../../utilities/component-reset';
 @use '../../utilities/convert';
 @use '../../utilities/focus-outline' as *;
+@use '../../utilities/layout';
 @use '../../utilities/skeleton' as *;
 
 /// Select styles
@@ -25,6 +26,9 @@
 @mixin select {
   .#{$prefix}--select {
     @include component-reset.reset;
+    // layout.use() on the wrapper — when size prop is passed, cds--layout--size-*
+    // class is added here, setting --cds-layout-size-height which the input reads
+    @include layout.use('size', $default: 'md', $min: 'xs', $max: 'lg');
 
     position: relative;
     display: flex;
@@ -43,13 +47,16 @@
   .#{$prefix}--select-input {
     @include type-style('body-compact-01');
     @include focus-outline('reset');
+    // layout.use() on the input — reads context from parent wrapper or cds-layout
+    @include layout.use('size', $default: 'md', $min: 'xs', $max: 'lg');
+    @include layout.use('density', $default: 'normal');
 
     display: block;
     border: none;
     border-radius: 0;
     appearance: none;
     background-color: $field;
-    block-size: convert.to-rem(40px);
+    block-size: layout.size('height');
     border-block-end: 1px solid $border-strong;
     color: $text-primary;
     cursor: pointer;
@@ -102,15 +109,11 @@
     }
   }
 
-  .#{$prefix}--select-input--sm {
-    block-size: convert.to-rem(32px);
-    max-block-size: convert.to-rem(32px);
-  }
-
-  .#{$prefix}--select-input--lg {
-    block-size: convert.to-rem(48px);
-    max-block-size: convert.to-rem(48px);
-  }
+  // NOTE: .cds--select-input--sm, --md, --lg modifier classes have been removed.
+  // Size is now controlled via layout.use() — when an explicit size is passed,
+  // cds--layout--size-* is added to .cds--select wrapper which sets
+  // --cds-layout-size-height, and layout.size('height') on the input reads it.
+  // This mirrors how Search handles sizing and supports xs without hardcoded values.
 
   .#{$prefix}--select--disabled .#{$prefix}--label,
   .#{$prefix}--select--disabled .#{$prefix}--form__helper-text {
@@ -371,6 +374,21 @@
   }
 
   .#{$prefix}--select--decorator
+    .#{$prefix}--select-input__wrapper
+    .#{$prefix}--select-input
+    ~ .#{$prefix}--select__invalid-icon,
+  .#{$prefix}--select--slug
+    .#{$prefix}--select-input__wrapper[data-invalid]
+    .#{$prefix}--select-input
+    ~ .#{$prefix}--select__invalid-icon,
+  .#{$prefix}--select--slug
+    .#{$prefix}--select-input__wrapper
+    .#{$prefix}--select-input
+    ~ .#{$prefix}--select__invalid-icon {
+    inset-inline-end: $spacing-11;
+  }
+
+  .#{$prefix}--select--decorator
     .#{$prefix}--select-input:has(
       ~ .#{$prefix}--select__inner-wrapper--decorator
     ),
@@ -420,20 +438,5 @@
   .#{$prefix}--select--slug:has(.#{$prefix}--select__invalid-icon)
     .#{$prefix}--slug::before {
     display: block;
-  }
-
-  .#{$prefix}--select--decorator
-    .#{$prefix}--select-input__wrapper
-    .#{$prefix}--select-input
-    ~ .#{$prefix}--select__invalid-icon,
-  .#{$prefix}--select--slug
-    .#{$prefix}--select-input__wrapper[data-invalid]
-    .#{$prefix}--select-input
-    ~ .#{$prefix}--select__invalid-icon,
-  .#{$prefix}--select--slug
-    .#{$prefix}--select-input__wrapper
-    .#{$prefix}--select-input
-    ~ .#{$prefix}--select__invalid-icon {
-    inset-inline-end: $spacing-11;
   }
 }

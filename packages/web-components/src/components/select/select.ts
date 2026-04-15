@@ -332,7 +332,7 @@ class CDSSelect extends FormMixin(LitElement) {
    * The input box size.
    */
   @property({ reflect: true })
-  size = INPUT_SIZE.MEDIUM;
+  size?: INPUT_SIZE;
 
   /**
    * The value of the text area.
@@ -431,7 +431,7 @@ class CDSSelect extends FormMixin(LitElement) {
 
     const inputClasses = classMap({
       [`${prefix}--select-input`]: true,
-      [`${prefix}--select-input--${size}`]: size,
+      [`${prefix}--select-input--${size}`]: size !== undefined,
     });
 
     const labelClasses = classMap({

@@ -123,7 +123,7 @@ export interface SelectProps
   /**
    * Specify the size of the Select Input.
    */
-  size?: 'sm' | 'md' | 'lg';
+  size?: 'xs' | 'sm' | 'md' | 'lg';
 
   /**
    * @deprecated please use decorator instead.
@@ -207,6 +207,7 @@ const Select = forwardRef<HTMLSelectElement, SelectProps>(
       warn,
       warnText,
     });
+
     const selectClasses = classNames({
       [`${prefix}--select`]: true,
       [`${prefix}--select--inline`]: inline,
@@ -219,14 +220,16 @@ const Select = forwardRef<HTMLSelectElement, SelectProps>(
       [`${prefix}--select--fluid--focus`]: isFluid && isFocused,
       [`${prefix}--select--slug`]: slug,
       [`${prefix}--select--decorator`]: decorator,
+      [`${prefix}--select--${size}`]: size,
+      [`${prefix}--layout--size-${size}`]: size,
     });
+
     const labelClasses = classNames(`${prefix}--label`, {
       [`${prefix}--visually-hidden`]: hideLabel,
       [`${prefix}--label--disabled`]: normalizedProps.disabled,
     });
     const inputClasses = classNames({
       [`${prefix}--select-input`]: true,
-      [`${prefix}--select-input--${size}`]: size,
     });
     const error = normalizedProps.validation;
     const helperTextClasses = classNames(`${prefix}--form__helper-text`, {
@@ -452,7 +455,7 @@ Select.propTypes = {
   /**
    * Specify the size of the Select Input.
    */
-  size: PropTypes.oneOf(['sm', 'md', 'lg']),
+  size: PropTypes.oneOf(['xs', 'sm', 'md', 'lg']),
 
   slug: deprecate(
     PropTypes.node,

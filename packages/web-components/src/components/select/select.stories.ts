@@ -23,6 +23,7 @@ import '../ai-label';
 import '../icon-button';
 import { iconLoader } from '../../globals/internal/icon-loader';
 import { withLayers } from '../../../.storybook/decorators/with-layers';
+import '../layout/index';
 
 const content = html`
   <div slot="body-text">
@@ -56,6 +57,7 @@ const actions = html`
 `;
 
 const sizes = {
+  [`Extra small size (${INPUT_SIZE.EXTRA_SMALL})`]: INPUT_SIZE.EXTRA_SMALL,
   [`Small size (${INPUT_SIZE.SMALL})`]: INPUT_SIZE.SMALL,
   [`Medium size (${INPUT_SIZE.MEDIUM})`]: INPUT_SIZE.MEDIUM,
   [`Large size (${INPUT_SIZE.LARGE})`]: INPUT_SIZE.LARGE,
@@ -369,6 +371,62 @@ export const WithLayer = {
       </cds-select>
     `;
   },
+};
+
+export const WithLayoutContext = {
+  render: () => html`
+    <div style="display:flex; flex-direction:column; gap:1rem;">
+      <div>
+        <p style="margin-block-end:0.5rem">xs (via layout context)</p>
+        <cds-layout size="xs">
+          <cds-form-item>
+            <cds-select label-text="Select xs">
+              <cds-select-item value="option-1">Option 1</cds-select-item>
+              <cds-select-item value="option-2">Option 2</cds-select-item>
+            </cds-select>
+          </cds-form-item>
+        </cds-layout>
+      </div>
+
+      <div>
+        <p style="margin-block-end:0.5rem">sm (via layout context)</p>
+        <cds-layout size="sm">
+          <cds-form-item>
+            <cds-select label-text="Select sm">
+              <cds-select-item value="option-1">Option 1</cds-select-item>
+              <cds-select-item value="option-2">Option 2</cds-select-item>
+            </cds-select>
+          </cds-form-item>
+        </cds-layout>
+      </div>
+
+      <div>
+        <p style="margin-block-end:0.5rem">lg (via layout context)</p>
+        <cds-layout size="lg">
+          <cds-form-item>
+            <cds-select label-text="Select lg">
+              <cds-select-item value="option-1">Option 1</cds-select-item>
+              <cds-select-item value="option-2">Option 2</cds-select-item>
+            </cds-select>
+          </cds-form-item>
+        </cds-layout>
+      </div>
+
+      <div>
+        <p style="margin-block-end:0.5rem">
+          explicit size="xs" overrides lg context
+        </p>
+        <cds-layout size="lg">
+          <cds-form-item>
+            <cds-select label-text="Explicit xs" size="xs">
+              <cds-select-item value="option-1">Option 1</cds-select-item>
+              <cds-select-item value="option-2">Option 2</cds-select-item>
+            </cds-select>
+          </cds-form-item>
+        </cds-layout>
+      </div>
+    </div>
+  `,
 };
 
 const meta = {
