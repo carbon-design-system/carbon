@@ -10760,6 +10760,17 @@ Map {
       "hideLabel": {
         "type": "bool",
       },
+      "size": {
+        "args": [
+          [
+            "xs",
+            "sm",
+            "md",
+            "lg",
+          ],
+        ],
+        "type": "oneOf",
+      },
     },
   },
   "Theme" => {

@@ -274,13 +274,17 @@ export const ReadOnly = {
 };
 
 export const Skeleton = {
-  args: { hideLabel: false },
-  argTypes: {
-    hideLabel: { control: 'boolean', description: 'Hide label (hide-label)' },
+  args: sharedArgs,
+  argTypes: sharedArgTypes,
+  parameters: {
+    controls: {
+      include: ['hideLabel', 'size'],
+    },
   },
-  render: ({ hideLabel }) =>
+  render: ({ hideLabel, size }) =>
     html`<cds-text-input-skeleton
-      ?hide-label=${hideLabel}></cds-text-input-skeleton>`,
+      ?hide-label=${hideLabel}
+      size="${size}"></cds-text-input-skeleton>`,
 };
 
 export const WithAILabel = {

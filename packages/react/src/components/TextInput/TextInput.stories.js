@@ -306,15 +306,13 @@ export const withAILabel = (args) => {
   );
 };
 
-export const Skeleton = (args) => <TextInputSkeleton {...args} />;
-
-Skeleton.args = {
-  hideLabel: false,
-};
+export const Skeleton = ({ hideLabel, size }) => (
+  <TextInputSkeleton hideLabel={hideLabel} size={size} />
+);
 
 Skeleton.parameters = {
   controls: {
-    include: ['hideLabel'],
+    include: ['hideLabel', 'size'],
   },
 };
 
