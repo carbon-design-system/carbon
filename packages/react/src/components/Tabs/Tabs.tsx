@@ -52,6 +52,7 @@ import { Text } from '../Text';
 import BadgeIndicator from '../BadgeIndicator';
 import { isComponentElement } from '../../internal';
 
+const buttonWidth = 44;
 const verticalTabHeight = 64;
 
 // Used to manage the overall state of the Tabs
@@ -503,9 +504,6 @@ function TabList({
   //   SCROLLABLE
   //   AND SCROLL_LEFT > 0
   //
-  // TODO: Hoist `buttonWidth` to a module level constant like
-  // `verticalTabHeight`.
-  const buttonWidth = 44;
   // Next Button
   // VISIBLE IF:
   //   SCROLLABLE
