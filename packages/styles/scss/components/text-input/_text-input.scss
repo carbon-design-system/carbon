@@ -363,7 +363,7 @@
   //-----------------------------
 
   .#{$prefix}--text-input-wrapper.#{$prefix}--text-input-wrapper--inline {
-    flex-flow: row wrap;
+    flex-flow: row nowrap;
     align-items: center;
   }
 
