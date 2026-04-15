@@ -798,7 +798,7 @@ categories:
           - ibm-consulting-advantage--agent
           - ibm-consulting-advantage--application
           - ibm-consulting-advantage--assistant
-          - ibm--content-services
+          - ibm--content-cortex-repository
           - ibm--databand
           - ibm--data-power
           - ibm--data-product-exchange

@@ -11526,11 +11526,14 @@
     - storage
   sizes:
     - 32
-- name: ibm--content-services
-  friendly_name: IBM® Content Services
+- name: ibm--content-cortex-repository
+  friendly_name: IBM Content Cortex Repository
   aliases:
-    - content management
-    - SaaS
+    - object store
+    - content services
+    - library
+    - document storage
+    - object storage
   sizes:
     - 32
 - name: ibm--data-power
