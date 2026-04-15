@@ -1733,18 +1733,20 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@carbon/colors@npm:^11.50.0-rc.0, @carbon/colors@workspace:packages/colors":
+"@carbon/colors@npm:^11.50.0, @carbon/colors@workspace:packages/colors":
   version: 0.0.0-use.local
   resolution: "@carbon/colors@workspace:packages/colors"
   dependencies:
     "@carbon/cli": "npm:^11.42.0"
     "@carbon/cli-reporter": "npm:^10.8.0"
     "@carbon/scss-generator": "npm:^10.20.0"
-    "@carbon/test-utils": "npm:^10.41.0-rc.0"
+    "@carbon/test-utils": "npm:^10.41.0"
     "@ibm/telemetry-js": "npm:^1.5.0"
     change-case-all: "npm:^2.1.0"
     fs-extra: "npm:^11.0.0"
     rimraf: "npm:^6.0.1"
+    typescript: "npm:^5.7.3"
+    typescript-config-carbon: "workspace:^0.9.0"
   languageName: unknown
   linkType: soft
 
@@ -1753,13 +1755,13 @@ __metadata:
   resolution: "@carbon/elements@workspace:packages/elements"
   dependencies:
     "@carbon/cli": "npm:^11.42.0"
-    "@carbon/colors": "npm:^11.50.0-rc.0"
-    "@carbon/grid": "npm:^11.53.0-rc.0"
-    "@carbon/icons": "npm:^11.78.0-rc.0"
-    "@carbon/layout": "npm:^11.51.0-rc.0"
-    "@carbon/motion": "npm:^11.44.0-rc.0"
-    "@carbon/themes": "npm:^11.71.0-rc.0"
-    "@carbon/type": "npm:^11.57.0-rc.0"
+    "@carbon/colors": "npm:^11.50.0"
+    "@carbon/grid": "npm:^11.53.0"
+    "@carbon/icons": "npm:^11.78.0"
+    "@carbon/layout": "npm:^11.51.0"
+    "@carbon/motion": "npm:^11.44.0"
+    "@carbon/themes": "npm:^11.71.0"
+    "@carbon/type": "npm:^11.57.0"
     "@ibm/telemetry-js": "npm:^1.5.0"
     fs-extra: "npm:^11.0.0"
     klaw-sync: "npm:^6.0.0"
@@ -1787,18 +1789,18 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@carbon/grid@npm:^11.53.0-rc.0, @carbon/grid@workspace:packages/grid":
+"@carbon/grid@npm:^11.53.0, @carbon/grid@workspace:packages/grid":
   version: 0.0.0-use.local
   resolution: "@carbon/grid@workspace:packages/grid"
   dependencies:
     "@carbon/cli": "npm:^11.42.0"
-    "@carbon/layout": "npm:^11.51.0-rc.0"
+    "@carbon/layout": "npm:^11.51.0"
     "@ibm/telemetry-js": "npm:^1.5.0"
     rimraf: "npm:^6.0.1"
   languageName: unknown
   linkType: soft
 
-"@carbon/icon-build-helpers@npm:^1.56.0-rc.0, @carbon/icon-build-helpers@workspace:packages/icon-build-helpers":
+"@carbon/icon-build-helpers@npm:^1.56.0, @carbon/icon-build-helpers@workspace:packages/icon-build-helpers":
   version: 0.0.0-use.local
   resolution: "@carbon/icon-build-helpers@workspace:packages/icon-build-helpers"
   dependencies:
@@ -1842,13 +1844,13 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@carbon/icons-react@npm:^11.78.0-rc.0, @carbon/icons-react@workspace:packages/icons-react":
+"@carbon/icons-react@npm:^11.78.0, @carbon/icons-react@workspace:packages/icons-react":
   version: 0.0.0-use.local
   resolution: "@carbon/icons-react@workspace:packages/icons-react"
   dependencies:
-    "@carbon/icon-build-helpers": "npm:^1.56.0-rc.0"
+    "@carbon/icon-build-helpers": "npm:^1.56.0"
     "@carbon/icon-helpers": "npm:^10.74.0"
-    "@carbon/icons": "npm:^11.78.0-rc.0"
+    "@carbon/icons": "npm:^11.78.0"
     "@ibm/telemetry-js": "npm:^1.5.0"
     prop-types: "npm:^15.8.1"
     rimraf: "npm:^6.0.1"
@@ -1862,39 +1864,39 @@ __metadata:
   resolution: "@carbon/icons-vue@workspace:packages/icons-vue"
   dependencies:
     "@carbon/icon-helpers": "npm:^10.74.0"
-    "@carbon/icons": "npm:^11.78.0-rc.0"
+    "@carbon/icons": "npm:^11.78.0"
     "@ibm/telemetry-js": "npm:^1.5.0"
     rimraf: "npm:^6.0.1"
     vue: "npm:^3.0.0"
   languageName: unknown
   linkType: soft
 
-"@carbon/icons@npm:^11.78.0-rc.0, @carbon/icons@workspace:packages/icons":
+"@carbon/icons@npm:^11.78.0, @carbon/icons@workspace:packages/icons":
   version: 0.0.0-use.local
   resolution: "@carbon/icons@workspace:packages/icons"
   dependencies:
     "@carbon/cli": "npm:^11.42.0"
-    "@carbon/icon-build-helpers": "npm:^1.56.0-rc.0"
+    "@carbon/icon-build-helpers": "npm:^1.56.0"
     "@ibm/telemetry-js": "npm:^1.5.0"
     rimraf: "npm:^6.0.1"
   languageName: unknown
   linkType: soft
 
-"@carbon/layout@npm:^11.51.0-rc.0, @carbon/layout@workspace:packages/layout":
+"@carbon/layout@npm:^11.51.0, @carbon/layout@workspace:packages/layout":
   version: 0.0.0-use.local
   resolution: "@carbon/layout@workspace:packages/layout"
   dependencies:
     "@carbon/cli": "npm:^11.42.0"
     "@carbon/cli-reporter": "npm:^10.8.0"
     "@carbon/scss-generator": "npm:^10.20.0"
-    "@carbon/test-utils": "npm:^10.41.0-rc.0"
+    "@carbon/test-utils": "npm:^10.41.0"
     "@ibm/telemetry-js": "npm:^1.5.0"
     core-js: "npm:^3.16.0"
     rimraf: "npm:^6.0.1"
   languageName: unknown
   linkType: soft
 
-"@carbon/motion@npm:^11.44.0-rc.0, @carbon/motion@workspace:packages/motion":
+"@carbon/motion@npm:^11.44.0, @carbon/motion@workspace:packages/motion":
   version: 0.0.0-use.local
   resolution: "@carbon/motion@workspace:packages/motion"
   dependencies:
@@ -1910,9 +1912,9 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@carbon/pictograms-react@workspace:packages/pictograms-react"
   dependencies:
-    "@carbon/icon-build-helpers": "npm:^1.56.0-rc.0"
+    "@carbon/icon-build-helpers": "npm:^1.56.0"
     "@carbon/icon-helpers": "npm:^10.74.0"
-    "@carbon/pictograms": "npm:^12.73.0-rc.0"
+    "@carbon/pictograms": "npm:^12.73.0"
     "@ibm/telemetry-js": "npm:^1.5.0"
     prop-types: "npm:^15.8.1"
     rimraf: "npm:^6.0.1"
@@ -1921,17 +1923,17 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@carbon/pictograms@npm:^12.73.0-rc.0, @carbon/pictograms@workspace:packages/pictograms":
+"@carbon/pictograms@npm:^12.73.0, @carbon/pictograms@workspace:packages/pictograms":
   version: 0.0.0-use.local
   resolution: "@carbon/pictograms@workspace:packages/pictograms"
   dependencies:
-    "@carbon/icon-build-helpers": "npm:^1.56.0-rc.0"
+    "@carbon/icon-build-helpers": "npm:^1.56.0"
     "@ibm/telemetry-js": "npm:^1.5.0"
     rimraf: "npm:^6.0.1"
   languageName: unknown
   linkType: soft
 
-"@carbon/react@npm:^1.105.0-rc.0, @carbon/react@workspace:packages/react":
+"@carbon/react@npm:^1.105.0, @carbon/react@workspace:packages/react":
   version: 0.0.0-use.local
   resolution: "@carbon/react@workspace:packages/react"
   dependencies:
@@ -1945,11 +1947,11 @@ __metadata:
     "@babel/preset-typescript": "npm:^7.27.1"
     "@babel/runtime": "npm:^7.27.3"
     "@carbon/feature-flags": "npm:^1.2.0"
-    "@carbon/icons-react": "npm:^11.78.0-rc.0"
-    "@carbon/layout": "npm:^11.51.0-rc.0"
-    "@carbon/styles": "npm:^1.104.0-rc.0"
-    "@carbon/test-utils": "npm:^10.41.0-rc.0"
-    "@carbon/themes": "npm:^11.71.0-rc.0"
+    "@carbon/icons-react": "npm:^11.78.0"
+    "@carbon/layout": "npm:^11.51.0"
+    "@carbon/styles": "npm:^1.104.0"
+    "@carbon/test-utils": "npm:^10.41.0"
+    "@carbon/themes": "npm:^11.71.0"
     "@carbon/utilities": "npm:^0.18.0"
     "@figma/code-connect": "npm:^1.4.2"
     "@floating-ui/react": "npm:^0.27.4"
@@ -2010,19 +2012,19 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@carbon/styles@npm:^1.104.0-rc.0, @carbon/styles@workspace:packages/styles":
+"@carbon/styles@npm:^1.104.0, @carbon/styles@workspace:packages/styles":
   version: 0.0.0-use.local
   resolution: "@carbon/styles@workspace:packages/styles"
   dependencies:
-    "@carbon/colors": "npm:^11.50.0-rc.0"
+    "@carbon/colors": "npm:^11.50.0"
     "@carbon/feature-flags": "npm:^1.2.0"
-    "@carbon/grid": "npm:^11.53.0-rc.0"
-    "@carbon/layout": "npm:^11.51.0-rc.0"
-    "@carbon/motion": "npm:^11.44.0-rc.0"
-    "@carbon/test-utils": "npm:^10.41.0-rc.0"
-    "@carbon/themes": "npm:^11.71.0-rc.0"
-    "@carbon/type": "npm:^11.57.0-rc.0"
-    "@ibm/plex": "npm:6.0.0-next.6"
+    "@carbon/grid": "npm:^11.53.0"
+    "@carbon/layout": "npm:^11.51.0"
+    "@carbon/motion": "npm:^11.44.0"
+    "@carbon/test-utils": "npm:^10.41.0"
+    "@carbon/themes": "npm:^11.71.0"
+    "@carbon/type": "npm:^11.57.0"
+    "@ibm/plex": "npm:6.4.1"
     "@ibm/plex-mono": "npm:1.1.0"
     "@ibm/plex-sans": "npm:1.1.0"
     "@ibm/plex-sans-arabic": "npm:1.1.0"
@@ -2048,7 +2050,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@carbon/test-utils@npm:^10.41.0-rc.0, @carbon/test-utils@workspace:packages/test-utils":
+"@carbon/test-utils@npm:^10.41.0, @carbon/test-utils@workspace:packages/test-utils":
   version: 0.0.0-use.local
   resolution: "@carbon/test-utils@workspace:packages/test-utils"
   dependencies:
@@ -2062,7 +2064,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@carbon/themes@npm:^11.71.0-rc.0, @carbon/themes@workspace:packages/themes":
+"@carbon/themes@npm:^11.71.0, @carbon/themes@workspace:packages/themes":
   version: 0.0.0-use.local
   resolution: "@carbon/themes@workspace:packages/themes"
   dependencies:
@@ -2070,11 +2072,11 @@ __metadata:
     "@babel/preset-env": "npm:^7.27.2"
     "@carbon/cli": "npm:^11.42.0"
     "@carbon/cli-reporter": "npm:^10.8.0"
-    "@carbon/colors": "npm:^11.50.0-rc.0"
-    "@carbon/layout": "npm:^11.51.0-rc.0"
+    "@carbon/colors": "npm:^11.50.0"
+    "@carbon/layout": "npm:^11.51.0"
     "@carbon/scss-generator": "npm:^10.20.0"
-    "@carbon/test-utils": "npm:^10.41.0-rc.0"
-    "@carbon/type": "npm:^11.57.0-rc.0"
+    "@carbon/test-utils": "npm:^10.41.0"
+    "@carbon/type": "npm:^11.57.0"
     "@ibm/telemetry-js": "npm:^1.5.0"
     change-case-all: "npm:^2.1.0"
     color: "npm:^4.0.0"
@@ -2085,14 +2087,14 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@carbon/type@npm:^11.57.0-rc.0, @carbon/type@workspace:packages/type":
+"@carbon/type@npm:^11.57.0, @carbon/type@workspace:packages/type":
   version: 0.0.0-use.local
   resolution: "@carbon/type@workspace:packages/type"
   dependencies:
     "@carbon/cli": "npm:^11.42.0"
-    "@carbon/grid": "npm:^11.53.0-rc.0"
-    "@carbon/layout": "npm:^11.51.0-rc.0"
-    "@carbon/test-utils": "npm:^10.41.0-rc.0"
+    "@carbon/grid": "npm:^11.53.0"
+    "@carbon/layout": "npm:^11.51.0"
+    "@carbon/test-utils": "npm:^10.41.0"
     "@ibm/telemetry-js": "npm:^1.5.0"
     change-case-all: "npm:^2.1.0"
     css: "npm:^3.0.0"
@@ -2141,6 +2143,16 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@carbon/utilities@npm:^0.17.0":
+  version: 0.17.0
+  resolution: "@carbon/utilities@npm:0.17.0"
+  dependencies:
+    "@ibm/telemetry-js": "npm:^1.6.1"
+    "@internationalized/number": "npm:^3.6.1"
+  checksum: 10/7fe07d465f3b042f1c424d15bbfd41293b59142aea439fd7798fa14403ea7e34a4d871c02c4a7902f0e13f5ae4c47ef5b562e19f27f536e22058f140c0cd87c4
+  languageName: node
+  linkType: hard
+
 "@carbon/utilities@npm:^0.18.0, @carbon/utilities@workspace:packages/utilities":
   version: 0.0.0-use.local
   resolution: "@carbon/utilities@workspace:packages/utilities"
@@ -2158,10 +2170,11 @@ __metadata:
   resolution: "@carbon/web-components@workspace:packages/web-components"
   dependencies:
     "@carbon/icon-helpers": "npm:10.47.0"
-    "@carbon/icons": "npm:^11.78.0-rc.0"
-    "@carbon/layout": "npm:^11.51.0-rc.0"
-    "@carbon/motion": "npm:^11.44.0-rc.0"
-    "@carbon/styles": "npm:^1.104.0-rc.0"
+    "@carbon/icons": "npm:^11.78.0"
+    "@carbon/layout": "npm:^11.51.0"
+    "@carbon/motion": "npm:^11.44.0"
+    "@carbon/styles": "npm:^1.104.0"
+    "@carbon/utilities": "npm:^0.17.0"
     "@floating-ui/dom": "npm:^1.6.3"
     "@ibm/telemetry-js": "npm:^1.10.2"
     "@juggle/resize-observer": "npm:^3.4.0"
@@ -2538,9 +2551,23 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@esbuild/aix-ppc64@npm:0.27.7":
+  version: 0.27.7
+  resolution: "@esbuild/aix-ppc64@npm:0.27.7"
+  conditions: os=aix & cpu=ppc64
+  languageName: node
+  linkType: hard
+
 "@esbuild/android-arm64@npm:0.25.5":
   version: 0.25.5
   resolution: "@esbuild/android-arm64@npm:0.25.5"
+  conditions: os=android & cpu=arm64
+  languageName: node
+  linkType: hard
+
+"@esbuild/android-arm64@npm:0.27.7":
+  version: 0.27.7
+  resolution: "@esbuild/android-arm64@npm:0.27.7"
   conditions: os=android & cpu=arm64
   languageName: node
   linkType: hard
@@ -2552,9 +2579,23 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@esbuild/android-arm@npm:0.27.7":
+  version: 0.27.7
+  resolution: "@esbuild/android-arm@npm:0.27.7"
+  conditions: os=android & cpu=arm
+  languageName: node
+  linkType: hard
+
 "@esbuild/android-x64@npm:0.25.5":
   version: 0.25.5
   resolution: "@esbuild/android-x64@npm:0.25.5"
+  conditions: os=android & cpu=x64
+  languageName: node
+  linkType: hard
+
+"@esbuild/android-x64@npm:0.27.7":
+  version: 0.27.7
+  resolution: "@esbuild/android-x64@npm:0.27.7"
   conditions: os=android & cpu=x64
   languageName: node
   linkType: hard
@@ -2566,9 +2607,23 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@esbuild/darwin-arm64@npm:0.27.7":
+  version: 0.27.7
+  resolution: "@esbuild/darwin-arm64@npm:0.27.7"
+  conditions: os=darwin & cpu=arm64
+  languageName: node
+  linkType: hard
+
 "@esbuild/darwin-x64@npm:0.25.5":
   version: 0.25.5
   resolution: "@esbuild/darwin-x64@npm:0.25.5"
+  conditions: os=darwin & cpu=x64
+  languageName: node
+  linkType: hard
+
+"@esbuild/darwin-x64@npm:0.27.7":
+  version: 0.27.7
+  resolution: "@esbuild/darwin-x64@npm:0.27.7"
   conditions: os=darwin & cpu=x64
   languageName: node
   linkType: hard
@@ -2580,9 +2635,23 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@esbuild/freebsd-arm64@npm:0.27.7":
+  version: 0.27.7
+  resolution: "@esbuild/freebsd-arm64@npm:0.27.7"
+  conditions: os=freebsd & cpu=arm64
+  languageName: node
+  linkType: hard
+
 "@esbuild/freebsd-x64@npm:0.25.5":
   version: 0.25.5
   resolution: "@esbuild/freebsd-x64@npm:0.25.5"
+  conditions: os=freebsd & cpu=x64
+  languageName: node
+  linkType: hard
+
+"@esbuild/freebsd-x64@npm:0.27.7":
+  version: 0.27.7
+  resolution: "@esbuild/freebsd-x64@npm:0.27.7"
   conditions: os=freebsd & cpu=x64
   languageName: node
   linkType: hard
@@ -2594,9 +2663,23 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@esbuild/linux-arm64@npm:0.27.7":
+  version: 0.27.7
+  resolution: "@esbuild/linux-arm64@npm:0.27.7"
+  conditions: os=linux & cpu=arm64
+  languageName: node
+  linkType: hard
+
 "@esbuild/linux-arm@npm:0.25.5":
   version: 0.25.5
   resolution: "@esbuild/linux-arm@npm:0.25.5"
+  conditions: os=linux & cpu=arm
+  languageName: node
+  linkType: hard
+
+"@esbuild/linux-arm@npm:0.27.7":
+  version: 0.27.7
+  resolution: "@esbuild/linux-arm@npm:0.27.7"
   conditions: os=linux & cpu=arm
   languageName: node
   linkType: hard
@@ -2608,9 +2691,23 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@esbuild/linux-ia32@npm:0.27.7":
+  version: 0.27.7
+  resolution: "@esbuild/linux-ia32@npm:0.27.7"
+  conditions: os=linux & cpu=ia32
+  languageName: node
+  linkType: hard
+
 "@esbuild/linux-loong64@npm:0.25.5":
   version: 0.25.5
   resolution: "@esbuild/linux-loong64@npm:0.25.5"
+  conditions: os=linux & cpu=loong64
+  languageName: node
+  linkType: hard
+
+"@esbuild/linux-loong64@npm:0.27.7":
+  version: 0.27.7
+  resolution: "@esbuild/linux-loong64@npm:0.27.7"
   conditions: os=linux & cpu=loong64
   languageName: node
   linkType: hard
@@ -2622,9 +2719,23 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@esbuild/linux-mips64el@npm:0.27.7":
+  version: 0.27.7
+  resolution: "@esbuild/linux-mips64el@npm:0.27.7"
+  conditions: os=linux & cpu=mips64el
+  languageName: node
+  linkType: hard
+
 "@esbuild/linux-ppc64@npm:0.25.5":
   version: 0.25.5
   resolution: "@esbuild/linux-ppc64@npm:0.25.5"
+  conditions: os=linux & cpu=ppc64
+  languageName: node
+  linkType: hard
+
+"@esbuild/linux-ppc64@npm:0.27.7":
+  version: 0.27.7
+  resolution: "@esbuild/linux-ppc64@npm:0.27.7"
   conditions: os=linux & cpu=ppc64
   languageName: node
   linkType: hard
@@ -2636,9 +2747,23 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@esbuild/linux-riscv64@npm:0.27.7":
+  version: 0.27.7
+  resolution: "@esbuild/linux-riscv64@npm:0.27.7"
+  conditions: os=linux & cpu=riscv64
+  languageName: node
+  linkType: hard
+
 "@esbuild/linux-s390x@npm:0.25.5":
   version: 0.25.5
   resolution: "@esbuild/linux-s390x@npm:0.25.5"
+  conditions: os=linux & cpu=s390x
+  languageName: node
+  linkType: hard
+
+"@esbuild/linux-s390x@npm:0.27.7":
+  version: 0.27.7
+  resolution: "@esbuild/linux-s390x@npm:0.27.7"
   conditions: os=linux & cpu=s390x
   languageName: node
   linkType: hard
@@ -2650,9 +2775,23 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@esbuild/linux-x64@npm:0.27.7":
+  version: 0.27.7
+  resolution: "@esbuild/linux-x64@npm:0.27.7"
+  conditions: os=linux & cpu=x64
+  languageName: node
+  linkType: hard
+
 "@esbuild/netbsd-arm64@npm:0.25.5":
   version: 0.25.5
   resolution: "@esbuild/netbsd-arm64@npm:0.25.5"
+  conditions: os=netbsd & cpu=arm64
+  languageName: node
+  linkType: hard
+
+"@esbuild/netbsd-arm64@npm:0.27.7":
+  version: 0.27.7
+  resolution: "@esbuild/netbsd-arm64@npm:0.27.7"
   conditions: os=netbsd & cpu=arm64
   languageName: node
   linkType: hard
@@ -2664,9 +2803,23 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@esbuild/netbsd-x64@npm:0.27.7":
+  version: 0.27.7
+  resolution: "@esbuild/netbsd-x64@npm:0.27.7"
+  conditions: os=netbsd & cpu=x64
+  languageName: node
+  linkType: hard
+
 "@esbuild/openbsd-arm64@npm:0.25.5":
   version: 0.25.5
   resolution: "@esbuild/openbsd-arm64@npm:0.25.5"
+  conditions: os=openbsd & cpu=arm64
+  languageName: node
+  linkType: hard
+
+"@esbuild/openbsd-arm64@npm:0.27.7":
+  version: 0.27.7
+  resolution: "@esbuild/openbsd-arm64@npm:0.27.7"
   conditions: os=openbsd & cpu=arm64
   languageName: node
   linkType: hard
@@ -2678,9 +2831,30 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@esbuild/openbsd-x64@npm:0.27.7":
+  version: 0.27.7
+  resolution: "@esbuild/openbsd-x64@npm:0.27.7"
+  conditions: os=openbsd & cpu=x64
+  languageName: node
+  linkType: hard
+
+"@esbuild/openharmony-arm64@npm:0.27.7":
+  version: 0.27.7
+  resolution: "@esbuild/openharmony-arm64@npm:0.27.7"
+  conditions: os=openharmony & cpu=arm64
+  languageName: node
+  linkType: hard
+
 "@esbuild/sunos-x64@npm:0.25.5":
   version: 0.25.5
   resolution: "@esbuild/sunos-x64@npm:0.25.5"
+  conditions: os=sunos & cpu=x64
+  languageName: node
+  linkType: hard
+
+"@esbuild/sunos-x64@npm:0.27.7":
+  version: 0.27.7
+  resolution: "@esbuild/sunos-x64@npm:0.27.7"
   conditions: os=sunos & cpu=x64
   languageName: node
   linkType: hard
@@ -2692,6 +2866,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@esbuild/win32-arm64@npm:0.27.7":
+  version: 0.27.7
+  resolution: "@esbuild/win32-arm64@npm:0.27.7"
+  conditions: os=win32 & cpu=arm64
+  languageName: node
+  linkType: hard
+
 "@esbuild/win32-ia32@npm:0.25.5":
   version: 0.25.5
   resolution: "@esbuild/win32-ia32@npm:0.25.5"
@@ -2699,9 +2880,23 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@esbuild/win32-ia32@npm:0.27.7":
+  version: 0.27.7
+  resolution: "@esbuild/win32-ia32@npm:0.27.7"
+  conditions: os=win32 & cpu=ia32
+  languageName: node
+  linkType: hard
+
 "@esbuild/win32-x64@npm:0.25.5":
   version: 0.25.5
   resolution: "@esbuild/win32-x64@npm:0.25.5"
+  conditions: os=win32 & cpu=x64
+  languageName: node
+  linkType: hard
+
+"@esbuild/win32-x64@npm:0.27.7":
+  version: 0.27.7
+  resolution: "@esbuild/win32-x64@npm:0.27.7"
   conditions: os=win32 & cpu=x64
   languageName: node
   linkType: hard
@@ -3122,19 +3317,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@ibm/plex@npm:6.0.0-next.6":
-  version: 6.0.0-next.6
-  resolution: "@ibm/plex@npm:6.0.0-next.6"
-  checksum: 10/1a814759646855a01aa0e76fd3bb76ff3ce67e6eee3173a89faeb9ab2df9147319cf2f6e4e711ffd7e2b253e1e1046a0fc4dd54c4cf11c91addc8a25f00509de
+"@ibm/plex@npm:6.4.1":
+  version: 6.4.1
+  resolution: "@ibm/plex@npm:6.4.1"
+  dependencies:
+    "@ibm/telemetry-js": "npm:^1.5.1"
+  checksum: 10/0562cd920df59d6b70ec40dafebf0c5c6e6d2e5fd103e63d08039af31e0e6109b24b61cbc3f942e2ddfb9d6da9e23b964ba2524853086220159917331bcd2298
   languageName: node
   linkType: hard
 
-"@ibm/telemetry-js@npm:^1.10.2, @ibm/telemetry-js@npm:^1.2.1, @ibm/telemetry-js@npm:^1.5.0, @ibm/telemetry-js@npm:^1.6.1":
-  version: 1.10.2
-  resolution: "@ibm/telemetry-js@npm:1.10.2"
+"@ibm/telemetry-js@npm:^1.10.2, @ibm/telemetry-js@npm:^1.2.1, @ibm/telemetry-js@npm:^1.5.0, @ibm/telemetry-js@npm:^1.5.1, @ibm/telemetry-js@npm:^1.6.1":
+  version: 1.11.0
+  resolution: "@ibm/telemetry-js@npm:1.11.0"
   bin:
     ibmtelemetry: dist/collect.js
-  checksum: 10/bc1802cf691b0bb9df8cc19c8f4ab03b8022b5a53df778a9e99c817f708c51a02f440ea395ceb3656f057c8aa6356d5271f54eb3af3bcbb5c0b536fea9af2e36
+  checksum: 10/0b7731df898daf97bcc67d28fa48debcac87be1fa8565b79adda1c6ce93c3bacfef2e455be75e0d351489fb8b9c1ee9d6b33806819fd7dc7184558c5b197576f
   languageName: node
   linkType: hard
 
@@ -8543,9 +8740,9 @@ __metadata:
   linkType: hard
 
 "basic-ftp@npm:^5.0.2":
-  version: 5.0.5
-  resolution: "basic-ftp@npm:5.0.5"
-  checksum: 10/3dc56b2092b10d67e84621f5b9bbb0430469499178e857869194184d46fbdd367a9aa9fad660084388744b074b5f540e6ac8c22c0826ebba4fcc86a9d1c324e2
+  version: 5.2.2
+  resolution: "basic-ftp@npm:5.2.2"
+  checksum: 10/2bb208276bafbc3549992734b67247d78bfe6546e2eb1e9513c2761364c47e88b94171666359200279a738b36b152d2bbba0953d4f83f4677f1fd5b68aea3e29
   languageName: node
   linkType: hard
 
@@ -8978,9 +9175,9 @@ __metadata:
     "@babel/plugin-transform-react-constant-elements": "npm:^7.27.1"
     "@babel/preset-env": "npm:^7.27.2"
     "@babel/preset-react": "npm:^7.27.1"
-    "@carbon/react": "npm:^1.105.0-rc.0"
-    "@carbon/styles": "npm:^1.104.0-rc.0"
-    "@carbon/test-utils": "npm:^10.41.0-rc.0"
+    "@carbon/react": "npm:^1.105.0"
+    "@carbon/styles": "npm:^1.104.0"
+    "@carbon/test-utils": "npm:^10.41.0"
     "@ibm/telemetry-js": "npm:^1.5.0"
     babel-plugin-dev-expression: "npm:^0.2.3"
     babel-preset-carbon: "npm:^0.8.0"
@@ -9002,8 +9199,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "carbon-components@workspace:packages/carbon-components"
   dependencies:
-    "@carbon/styles": "npm:^1.104.0-rc.0"
-    "@carbon/test-utils": "npm:^10.41.0-rc.0"
+    "@carbon/styles": "npm:^1.104.0"
+    "@carbon/test-utils": "npm:^10.41.0"
     "@ibm/telemetry-js": "npm:^1.5.0"
     chalk: "npm:1.1.3"
     fs-extra: "npm:^11.0.0"
@@ -11466,7 +11663,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"esbuild@npm:^0.18.0 || ^0.19.0 || ^0.20.0 || ^0.21.0 || ^0.22.0 || ^0.23.0 || ^0.24.0 || ^0.25.0, esbuild@npm:^0.25.0":
+"esbuild@npm:^0.18.0 || ^0.19.0 || ^0.20.0 || ^0.21.0 || ^0.22.0 || ^0.23.0 || ^0.24.0 || ^0.25.0":
   version: 0.25.5
   resolution: "esbuild@npm:0.25.5"
   dependencies:
@@ -11549,6 +11746,95 @@ __metadata:
   bin:
     esbuild: bin/esbuild
   checksum: 10/0fa4c3b42c6ddf1a008e75a4bb3dcab08ce22ac0b31dd59dc01f7fe8e21380bfaec07a2fe3730a7cf430da5a30142d016714b358666325a4733547afa42be405
+  languageName: node
+  linkType: hard
+
+"esbuild@npm:^0.27.0":
+  version: 0.27.7
+  resolution: "esbuild@npm:0.27.7"
+  dependencies:
+    "@esbuild/aix-ppc64": "npm:0.27.7"
+    "@esbuild/android-arm": "npm:0.27.7"
+    "@esbuild/android-arm64": "npm:0.27.7"
+    "@esbuild/android-x64": "npm:0.27.7"
+    "@esbuild/darwin-arm64": "npm:0.27.7"
+    "@esbuild/darwin-x64": "npm:0.27.7"
+    "@esbuild/freebsd-arm64": "npm:0.27.7"
+    "@esbuild/freebsd-x64": "npm:0.27.7"
+    "@esbuild/linux-arm": "npm:0.27.7"
+    "@esbuild/linux-arm64": "npm:0.27.7"
+    "@esbuild/linux-ia32": "npm:0.27.7"
+    "@esbuild/linux-loong64": "npm:0.27.7"
+    "@esbuild/linux-mips64el": "npm:0.27.7"
+    "@esbuild/linux-ppc64": "npm:0.27.7"
+    "@esbuild/linux-riscv64": "npm:0.27.7"
+    "@esbuild/linux-s390x": "npm:0.27.7"
+    "@esbuild/linux-x64": "npm:0.27.7"
+    "@esbuild/netbsd-arm64": "npm:0.27.7"
+    "@esbuild/netbsd-x64": "npm:0.27.7"
+    "@esbuild/openbsd-arm64": "npm:0.27.7"
+    "@esbuild/openbsd-x64": "npm:0.27.7"
+    "@esbuild/openharmony-arm64": "npm:0.27.7"
+    "@esbuild/sunos-x64": "npm:0.27.7"
+    "@esbuild/win32-arm64": "npm:0.27.7"
+    "@esbuild/win32-ia32": "npm:0.27.7"
+    "@esbuild/win32-x64": "npm:0.27.7"
+  dependenciesMeta:
+    "@esbuild/aix-ppc64":
+      optional: true
+    "@esbuild/android-arm":
+      optional: true
+    "@esbuild/android-arm64":
+      optional: true
+    "@esbuild/android-x64":
+      optional: true
+    "@esbuild/darwin-arm64":
+      optional: true
+    "@esbuild/darwin-x64":
+      optional: true
+    "@esbuild/freebsd-arm64":
+      optional: true
+    "@esbuild/freebsd-x64":
+      optional: true
+    "@esbuild/linux-arm":
+      optional: true
+    "@esbuild/linux-arm64":
+      optional: true
+    "@esbuild/linux-ia32":
+      optional: true
+    "@esbuild/linux-loong64":
+      optional: true
+    "@esbuild/linux-mips64el":
+      optional: true
+    "@esbuild/linux-ppc64":
+      optional: true
+    "@esbuild/linux-riscv64":
+      optional: true
+    "@esbuild/linux-s390x":
+      optional: true
+    "@esbuild/linux-x64":
+      optional: true
+    "@esbuild/netbsd-arm64":
+      optional: true
+    "@esbuild/netbsd-x64":
+      optional: true
+    "@esbuild/openbsd-arm64":
+      optional: true
+    "@esbuild/openbsd-x64":
+      optional: true
+    "@esbuild/openharmony-arm64":
+      optional: true
+    "@esbuild/sunos-x64":
+      optional: true
+    "@esbuild/win32-arm64":
+      optional: true
+    "@esbuild/win32-ia32":
+      optional: true
+    "@esbuild/win32-x64":
+      optional: true
+  bin:
+    esbuild: bin/esbuild
+  checksum: 10/262b16c4a33cb70e9f054759a7ce420541649315eef7b064172c795021ccce322e56c3f5fd52e8842873f1c23745f3ab62311a24860950bd5406ba77b36b8529
   languageName: node
   linkType: hard
 
@@ -12650,12 +12936,12 @@ __metadata:
   linkType: hard
 
 "follow-redirects@npm:^1.10.0, follow-redirects@npm:^1.15.6":
-  version: 1.15.9
-  resolution: "follow-redirects@npm:1.15.9"
+  version: 1.16.0
+  resolution: "follow-redirects@npm:1.16.0"
   peerDependenciesMeta:
     debug:
       optional: true
-  checksum: 10/e3ab42d1097e90d28b913903841e6779eb969b62a64706a3eb983e894a5db000fbd89296f45f08885a0e54cd558ef62e81be1165da9be25a6c44920da10f424c
+  checksum: 10/3fbe3d80b3b544c22705d837aa5d4a0d07a740d913534a2620b0a004c610af4148e3b58723536dd099aaa1c9d3a155964bde9665d6e5cb331460809a1fc572fd
   languageName: node
   linkType: hard
 
@@ -23887,10 +24173,10 @@ __metadata:
   linkType: hard
 
 "vite@npm:^7.1.2, vite@npm:^7.2.4":
-  version: 7.2.4
-  resolution: "vite@npm:7.2.4"
+  version: 7.3.2
+  resolution: "vite@npm:7.3.2"
   dependencies:
-    esbuild: "npm:^0.25.0"
+    esbuild: "npm:^0.27.0"
     fdir: "npm:^6.5.0"
     fsevents: "npm:~2.3.3"
     picomatch: "npm:^4.0.3"
@@ -23937,7 +24223,7 @@ __metadata:
       optional: true
   bin:
     vite: bin/vite.js
-  checksum: 10/25962e65159e62fa6b643ac5bc79457c61c9b2cec9a1a17763b067b1e5ecac6483ad84247d6d457d81e25c5d1f8c553372bedf71dee09d8c1bd41af6c7b016a5
+  checksum: 10/c5f7a9a60011c41c836cedf31c8ee7624102aff9b6a7f3aab2ff47639721bba0916f81994c3a3ea6577a16c4f0dfee1e7dbd244e0da8edd5954e3c6d48daaaa2
   languageName: node
   linkType: hard
 
@@ -24381,7 +24667,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "www@workspace:www"
   dependencies:
-    "@carbon/react": "npm:^1.105.0-rc.0"
+    "@carbon/react": "npm:^1.105.0"
     "@octokit/core": "npm:^7.0.3"
     "@octokit/plugin-retry": "npm:^3.0.9"
     "@octokit/plugin-throttling": "npm:^4.0.0"
