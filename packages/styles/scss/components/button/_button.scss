@@ -164,8 +164,10 @@
       $button-tertiary-active
     );
 
-    &:hover {
-      color: $text-inverse;
+    @media (any-hover: hover) {
+      &:hover {
+        color: $text-inverse;
+      }
     }
 
     &:focus {
@@ -211,13 +213,16 @@
       margin-inline-start: $spacing-03;
     }
 
-    &:hover,
-    &:active {
-      color: $link-primary-hover;
+    // Apply hover styles only on devices that support hover
+    @media (hover: hover) {
+      &:hover {
+        color: $link-primary-hover;
+      }
     }
 
     &:active {
       background-color: $background-active;
+      color: $link-primary-hover;
     }
 
     &:disabled,
@@ -347,9 +352,11 @@
         $button-danger-active
       );
 
-      &:hover {
-        border-color: $button-danger-hover;
-        color: $text-on-color;
+      @media (hover: hover) {
+        &:hover {
+          border-color: $button-danger-hover;
+          color: $text-on-color;
+        }
       }
 
       &:focus {
@@ -394,7 +401,12 @@
         margin-inline-start: $spacing-03;
       }
 
-      &:hover,
+      @media (hover: hover) {
+        &:hover {
+          color: $text-on-color;
+        }
+      }
+
       &:active {
         color: $text-on-color;
       }
