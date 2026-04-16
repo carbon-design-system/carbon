@@ -201,12 +201,18 @@ export const PaginationUnknownPages = (args) => {
 PaginationUnknownPages.storyName = 'Unknown pages and items';
 PaginationUnknownPages.argTypes = {
   pageInputDisabled: {
-    control: false,
+    table: {
+      disable: true,
+    },
   },
   pagesUnknown: {
-    control: false,
+    table: {
+      disable: true,
+    },
   },
   totalItems: {
-    control: false,
+    table: {
+      disable: true,
+    },
   },
 };

@@ -215,13 +215,19 @@ export const PaginationUnknownPages = {
   },
   argTypes: {
     pageInputDisabled: {
-      control: false,
+      table: {
+        disable: true,
+      },
     },
     pagesUnknown: {
-      control: false,
+      table: {
+        disable: true,
+      },
     },
     totalItems: {
-      control: false,
+      table: {
+        disable: true,
+      },
     },
   },
   render: (args) => {
