@@ -676,10 +676,10 @@ be slightly different and separate files make this easier to understand.
 Additionally separate file types can be more easily globbed to only run certain
 tests in certain environments (local, CI, Pre-release checks, etc).
 
-| File name                    | Category                        |
-| ---------------------------- | ------------------------------- |
-| `ComponentName-test.js`      | General component functionality |
-| `ComponentName-test.e2e.js`  | End to end tests                |
+| File name                   | Category                        |
+| --------------------------- | ------------------------------- |
+| `ComponentName-test.js`     | General component functionality |
+| `ComponentName-test.e2e.js` | End to end tests                |
 
 There are corresponding commands to run all categories, individual categories,
 or a combination. Depending on your shell, modifiers can be used to run two

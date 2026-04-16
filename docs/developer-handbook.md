@@ -209,8 +209,8 @@ the following commands:
 yarn build
 ```
 
-Run the command above from the `packages/styles` directory, or run the
-following from the repository root:
+Run the command above from the `packages/styles` directory, or run the following
+from the repository root:
 
 ```bash
 yarn lerna run build --scope='@carbon/styles'
