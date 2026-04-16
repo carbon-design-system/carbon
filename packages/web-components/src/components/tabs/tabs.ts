@@ -142,7 +142,10 @@ export default class CDSTabs extends HostListenerMixin(CDSContentSwitcher) {
             block: 'nearest',
             inline: 'nearest',
           });
-          this._handleUserInitiatedSelectItem(firstEnabledTab as CDSTab);
+          this._handleUserInitiatedSelectItem(
+            firstEnabledTab as CDSTab,
+            this.selectionMode !== 'manual' ? 'activation' : 'keyboard'
+          );
           this.requestUpdate();
         }
         break;
@@ -153,7 +156,10 @@ export default class CDSTabs extends HostListenerMixin(CDSContentSwitcher) {
             block: 'nearest',
             inline: 'nearest',
           });
-          this._handleUserInitiatedSelectItem(lastEnabledTab as CDSTab);
+          this._handleUserInitiatedSelectItem(
+            lastEnabledTab as CDSTab,
+            this.selectionMode !== 'manual' ? 'activation' : 'keyboard'
+          );
           this.requestUpdate();
         }
         break;
