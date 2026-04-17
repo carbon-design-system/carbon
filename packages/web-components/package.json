@@ -81,7 +81,7 @@
     "@carbon/layout": "^11.51.0",
     "@carbon/motion": "^11.44.0",
     "@juggle/resize-observer": "^3.4.0",
-    "@mordech/vite-lit-loader": "^0.37.0",
+    "@mordech/vite-lit-loader": "^0.40.0",
     "@open-wc/testing": "^4.0.0",
     "@playwright/test": "^1.36.2",
     "@storybook/addon-docs": "^9.1.8",
