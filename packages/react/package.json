@@ -89,7 +89,7 @@
     "@storybook/react-vite": "^9.1.8",
     "@types/react-is": "^19.0.0",
     "@types/use-sync-external-store": "^1",
-    "@vitejs/plugin-react": "^5.0.0",
+    "@vitejs/plugin-react": "^6.0.0",
     "babel-plugin-dev-expression": "^0.2.3",
     "babel-preset-carbon": "^0.8.0",
     "browserify-zlib": "^0.2.0",
