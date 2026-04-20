@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2019, 2024
+ * Copyright IBM Corp. 2019, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -19,9 +19,10 @@ import CDSContentSwitcher, {
   NAVIGATION_DIRECTION,
 } from '../content-switcher/content-switcher';
 import {
+  VERTICAL_NAVIGATION_DIRECTION,
+  TABS_ICON_SIZE,
   TABS_KEYBOARD_ACTION,
   TABS_TYPE,
-  VERTICAL_NAVIGATION_DIRECTION,
 } from './defs';
 import CDSTab from './tab';
 import styles from './tabs.scss?lit';
@@ -29,9 +30,10 @@ import { carbonElement as customElement } from '../../globals/decorators/carbon-
 
 export {
   NAVIGATION_DIRECTION,
+  VERTICAL_NAVIGATION_DIRECTION,
+  TABS_ICON_SIZE,
   TABS_KEYBOARD_ACTION,
   TABS_TYPE,
-  VERTICAL_NAVIGATION_DIRECTION,
 };
 
 /**
@@ -336,6 +338,12 @@ export default class CDSTabs extends HostListenerMixin(CDSContentSwitcher) {
   vertical = false;
 
   /**
+   * Specify the icon size used by icon-only tabs.
+   */
+  @property({ attribute: 'icon-size', reflect: true })
+  iconSize?: TABS_ICON_SIZE;
+
+  /**
    * `true` if left-hand scroll intersection sentinel intersects with the host element.
    * In this condition, the left-hand paginator button should be hidden.
    */
@@ -424,10 +432,12 @@ export default class CDSTabs extends HostListenerMixin(CDSContentSwitcher) {
       this._isScrollable = scrollWidth > clientWidth;
     }
     const { selectorItem } = this.constructor as typeof CDSTabs;
-    if (changedProperties.has('type')) {
+    if (changedProperties.has('type') || changedProperties.has('iconSize')) {
+      this._totalTabs = 0;
       forEach(this.querySelectorAll(selectorItem), (elem) => {
         this._totalTabs++;
         (elem as CDSTab).type = this.type;
+        (elem as CDSTab).iconSize = this.iconSize;
       });
     }
     return true;

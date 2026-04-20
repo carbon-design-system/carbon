@@ -6,10 +6,11 @@
  */
 
 import { html } from 'lit';
+import { ifDefined } from 'lit/directives/if-defined.js';
 import { property, state, query } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
 import CDSContentSwitcherItem from '../content-switcher/content-switcher-item';
-import { TABS_TYPE } from './tabs';
+import { TABS_ICON_SIZE, TABS_TYPE } from './defs';
 import styles from './tabs.scss?lit';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
@@ -43,10 +44,27 @@ export default class CDSTab extends CDSContentSwitcherItem {
   vertical = false;
 
   /**
+   * `true` if this tab is icon-only.
+   */
+  @property({ type: Boolean, reflect: true, attribute: 'icon-only' })
+  iconOnly = false;
+
+  /**
+   * Specify the icon size used by icon-only tabs.
+   */
+  @property({ attribute: 'icon-size', reflect: true })
+  iconSize?: TABS_ICON_SIZE;
+
+  /**
    * The tab text content.
    */
   @property()
   tabTitle;
+  /**
+   * **Experimental**: Display an empty dot badge on the Tab.
+   */
+  @property({ type: Boolean, reflect: true, attribute: 'badge-indicator' })
+  badgeIndicator = false;
 
   /**
    * `true` if the tab text is truncated with ellipsis.
@@ -101,7 +119,7 @@ export default class CDSTab extends CDSContentSwitcherItem {
     const content = (target as HTMLSlotElement).assignedNodes();
     const textContent = content[0]?.textContent;
     // Normalize whitespace: trim and replace multiple spaces with single space
-    this.tabTitle = textContent?.trim().replace(/\s+/g, ' ');
+    this.tabTitle = textContent?.trim().replace(/\s+/g, ' ') || undefined;
   }
 
   connectedCallback() {
@@ -113,6 +131,7 @@ export default class CDSTab extends CDSContentSwitcherItem {
 
   render() {
     const {
+      badgeIndicator,
       disabled,
       selected,
       tabTitle,
@@ -120,13 +139,16 @@ export default class CDSTab extends CDSContentSwitcherItem {
       truncated,
       _handleSlotChange: handleSlotChange,
     } = this;
-
+    const accessibleLabel = tabTitle || this.getAttribute('aria-label');
+    const isIconOnly =
+      this.iconOnly ||
+      this.classList.contains(`${prefix}--tabs__nav-item--icon-only`);
     // No `href`/`tabindex` to not to make this `<a>` click-focusable
-    return html`
+    const tabLink = html`
       <a
         class="${prefix}--tabs__nav-link"
         role="tab"
-        aria-label="${tabTitle}"
+        aria-label="${ifDefined(accessibleLabel || undefined)}"
         tabindex="${selected ? 0 : -1}"
         ?disabled="${disabled}"
         aria-selected="${selected}">
@@ -136,9 +158,27 @@ export default class CDSTab extends CDSContentSwitcherItem {
               title="${truncated ? tabTitle.trim() : ''}">
               <slot @slotchange="${handleSlotChange}"></slot>
             </span>`
-          : html` <slot @slotchange="${handleSlotChange}"></slot> `}
+          : html`
+              <span class="${prefix}--tabs__nav-item-label-wrapper">
+                <slot @slotchange="${handleSlotChange}"></slot>
+              </span>
+            `}
+        ${!disabled && badgeIndicator
+          ? html`<cds-badge-indicator></cds-badge-indicator>`
+          : ''}
       </a>
     `;
+
+    if (isIconOnly && accessibleLabel && !disabled) {
+      return html`
+        <cds-tooltip align="bottom" class="${prefix}--icon-tooltip">
+          ${tabLink}
+          <cds-tooltip-content>${accessibleLabel}</cds-tooltip-content>
+        </cds-tooltip>
+      `;
+    }
+
+    return tabLink;
   }
 
   static styles = styles;
