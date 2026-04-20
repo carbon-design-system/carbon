@@ -4,6 +4,7 @@
   "version": "11.51.0",
   "license": "Apache-2.0",
   "main": "lib/index.js",
+  "types": "lib/index.d.ts",
   "module": "es/index.js",
   "sass": "index.scss",
   "repository": {
@@ -26,7 +27,8 @@
     "provenance": true
   },
   "scripts": {
-    "build": "yarn clean && carbon-cli bundle src/index.js --name CarbonLayout && node tasks/build.js",
+    "build:types": "tsc -p tsconfig.types.json",
+    "build": "yarn clean && carbon-cli bundle src/index.ts --name CarbonLayout && node tasks/build.js && yarn build:types",
     "clean": "rimraf es lib umd scss/generated",
     "postinstall": "ibmtelemetry --config=telemetry.yml"
   },
@@ -36,7 +38,9 @@
     "@carbon/scss-generator": "^10.20.0",
     "@carbon/test-utils": "^10.41.0",
     "core-js": "^3.16.0",
-    "rimraf": "^6.0.1"
+    "rimraf": "^6.0.1",
+    "typescript": "^5.7.3",
+    "typescript-config-carbon": "workspace:^0.9.0"
   },
   "dependencies": {
     "@ibm/telemetry-js": "^1.5.0"
