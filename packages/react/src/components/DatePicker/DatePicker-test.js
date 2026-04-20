@@ -1428,9 +1428,41 @@ describe('Date picker with locale', () => {
     await userEvent.click(screen.getByTestId('input'));
     const year = screen.getByDisplayValue('2022');
     const month = screen.getByText('1月');
+    const monthYearContainer = year.closest('.flatpickr-current-month');
     expect(year).toBeInTheDocument();
     expect(month).toBeInTheDocument();
     expect(month.compareDocumentPosition(year)).toBe(2);
+    expect(monthYearContainer).toContainElement(month);
+  });
+
+  it('should update month label on navigation for year-month locales', async () => {
+    render(
+      <DatePicker
+        onChange={() => {}}
+        datePickerType="single"
+        locale="lv"
+        value="01/01/2022">
+        <DatePickerInput
+          id="date-picker-input-id"
+          placeholder="mm/dd/yyyy"
+          labelText="Date picker label"
+          data-testid="input"
+        />
+      </DatePicker>
+    );
+
+    await userEvent.click(screen.getByTestId('input'));
+    const year = screen.getByDisplayValue('2022');
+    const monthYearContainer = year.closest('.flatpickr-current-month');
+    // eslint-disable-next-line testing-library/no-node-access
+    const monthElement = monthYearContainer.querySelector('.cur-month');
+    const initialMonthLabel = monthElement.textContent;
+    // eslint-disable-next-line testing-library/no-node-access
+    const nextMonthButton = document.querySelector('.flatpickr-next-month');
+
+    await userEvent.click(nextMonthButton);
+
+    expect(monthElement.textContent).not.toBe(initialMonthLabel);
   });
 });
 
