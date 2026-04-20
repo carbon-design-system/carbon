@@ -60,7 +60,7 @@ jobs:
         run: |
           yarn lerna version minor --no-git-tag-version --no-push --yes
       - name: Generate token
-        uses: actions/create-github-app-token@v1
+        uses: actions/create-github-app-token@1b10c78c7865c340bc4f6099eb2f838309f1e8c3 # v3.1.1
         id: generate_token
         with:
           app-id: ${{ secrets.APP_ID }}
