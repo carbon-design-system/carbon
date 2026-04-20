@@ -6,9 +6,18 @@
  */
 
 import { html } from 'lit';
-import { TABS_TYPE } from './tabs';
+import { TABS_ICON_SIZE, TABS_TYPE } from './tabs';
 import styles from './tabs-story.scss?lit';
 import { prefix } from '../../globals/settings';
+import { iconLoader } from '../../globals/internal/icon-loader';
+import Activity16 from '@carbon/icons/es/activity/16.js';
+import Activity20 from '@carbon/icons/es/activity/20.js';
+import Notification16 from '@carbon/icons/es/notification/16.js';
+import Notification20 from '@carbon/icons/es/notification/20.js';
+import Chat16 from '@carbon/icons/es/chat/16.js';
+import Chat20 from '@carbon/icons/es/chat/20.js';
+import IbmWatsonDiscovery16 from '@carbon/icons/es/ibm-watson--discovery/16.js';
+import IbmWatsonDiscovery20 from '@carbon/icons/es/ibm-watson--discovery/20.js';
 import '../button';
 import '../checkbox';
 import './index';
@@ -35,6 +44,17 @@ const argTypes = {
     description:
       'Choose whether or not to automatically change selection on focus when left/right arrow pressed.',
     options: ['automatic', 'manual'],
+  },
+};
+
+const iconStoriesArgs = {
+  badgeIndicator: false,
+};
+
+const iconStoriesArgTypes = {
+  badgeIndicator: {
+    description: '**Experimental**: Display an empty dot badge on the Tab.',
+    control: 'boolean',
   },
 };
 
@@ -227,6 +247,162 @@ export const DismissableContained = {
     `;
   },
 };
+
+export const Icon20Only = {
+  args: iconStoriesArgs,
+  argTypes: iconStoriesArgTypes,
+  render: ({ badgeIndicator }) => html`
+    <style>
+      ${styles}
+    </style>
+    <cds-tabs
+      value="icon20-tab-2"
+      icon-size="${TABS_ICON_SIZE.LARGE}"
+      class="cds--layout--size-lg">
+      <cds-tab
+        id="icon20-tab-1"
+        target="icon20-panel-1"
+        value="icon20-tab-1"
+        icon-only
+        disabled
+        aria-label="Analyze">
+        ${iconLoader(IbmWatsonDiscovery20)}
+      </cds-tab>
+      <cds-tab
+        id="icon20-tab-2"
+        target="icon20-panel-2"
+        value="icon20-tab-2"
+        icon-only
+        aria-label="Activity">
+        ${iconLoader(Activity20)}
+      </cds-tab>
+      <cds-tab
+        id="icon20-tab-3"
+        target="icon20-panel-3"
+        value="icon20-tab-3"
+        icon-only
+        ?badge-indicator="${badgeIndicator}"
+        aria-label="New Notifications">
+        ${iconLoader(Notification20)}
+      </cds-tab>
+      <cds-tab
+        id="icon20-tab-4"
+        target="icon20-panel-4"
+        value="icon20-tab-4"
+        icon-only
+        aria-label="Chat">
+        ${iconLoader(Chat20)}
+      </cds-tab>
+    </cds-tabs>
+    <div class="${prefix}-ce-demo-devenv--tab-panels">
+      <div
+        id="icon20-panel-1"
+        role="tabpanel"
+        aria-labelledby="icon20-tab-1"
+        hidden>
+        Tab Panel 1
+      </div>
+      <div
+        id="icon20-panel-2"
+        role="tabpanel"
+        aria-labelledby="icon20-tab-2"
+        hidden>
+        Tab Panel 2
+      </div>
+      <div
+        id="icon20-panel-3"
+        role="tabpanel"
+        aria-labelledby="icon20-tab-3"
+        hidden>
+        Tab Panel 3
+      </div>
+      <div
+        id="icon20-panel-4"
+        role="tabpanel"
+        aria-labelledby="icon20-tab-4"
+        hidden>
+        Tab Panel 4
+      </div>
+    </div>
+  `,
+};
+
+export const IconOnly = {
+  args: iconStoriesArgs,
+  argTypes: iconStoriesArgTypes,
+  render: ({ badgeIndicator }) => html`
+    <style>
+      ${styles}
+    </style>
+    <cds-tabs value="icon-tab-2" icon-size="${TABS_ICON_SIZE.DEFAULT}">
+      <cds-tab
+        id="icon-tab-1"
+        target="icon-panel-1"
+        value="icon-tab-1"
+        icon-only
+        disabled
+        aria-label="Analyze">
+        ${iconLoader(IbmWatsonDiscovery16)}
+      </cds-tab>
+      <cds-tab
+        id="icon-tab-2"
+        target="icon-panel-2"
+        value="icon-tab-2"
+        icon-only
+        aria-label="Activity">
+        ${iconLoader(Activity16)}
+      </cds-tab>
+      <cds-tab
+        id="icon-tab-3"
+        target="icon-panel-3"
+        value="icon-tab-3"
+        icon-only
+        ?badge-indicator="${badgeIndicator}"
+        aria-label="New Notifications">
+        ${iconLoader(Notification16)}
+      </cds-tab>
+      <cds-tab
+        id="icon-tab-4"
+        target="icon-panel-4"
+        value="icon-tab-4"
+        icon-only
+        aria-label="Chat">
+        ${iconLoader(Chat16)}
+      </cds-tab>
+    </cds-tabs>
+    <div class="${prefix}-ce-demo-devenv--tab-panels">
+      <div
+        id="icon-panel-1"
+        role="tabpanel"
+        aria-labelledby="icon-tab-1"
+        hidden>
+        Tab Panel 1
+      </div>
+      <div
+        id="icon-panel-2"
+        role="tabpanel"
+        aria-labelledby="icon-tab-2"
+        hidden>
+        Tab Panel 2
+      </div>
+      <div
+        id="icon-panel-3"
+        role="tabpanel"
+        aria-labelledby="icon-tab-3"
+        hidden>
+        Tab Panel 3
+      </div>
+      <div
+        id="icon-panel-4"
+        role="tabpanel"
+        aria-labelledby="icon-tab-4"
+        hidden>
+        Tab Panel 4
+      </div>
+    </div>
+  `,
+};
+
 export const Manual = {
   render: () => html`
     <style>

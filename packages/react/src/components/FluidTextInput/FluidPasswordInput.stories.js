@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2025
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -24,10 +24,10 @@ export default {
   },
 };
 
-export const Default = (args) => (
-  <div style={{ width: args.defaultWidth }}>
+export const Default = ({ defaultWidth, ...passwordInputArgs }) => (
+  <div style={{ width: defaultWidth }}>
     <FluidPasswordInput
-      {...args}
+      {...passwordInputArgs}
       id="input-1"
       labelText="Label"
       placeholder="Placeholder text"

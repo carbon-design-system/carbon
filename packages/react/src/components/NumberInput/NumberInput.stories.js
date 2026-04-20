@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -275,6 +275,24 @@ WithTypeOfCustomValidation.argTypes = {
   ...sharedArgTypes,
 };
 
-export const Skeleton = () => {
-  return <NumberInputSkeleton />;
+export const Skeleton = (args) => {
+  return <NumberInputSkeleton {...args} />;
+};
+
+Skeleton.argTypes = {
+  size: {
+    table: {
+      defaultValue: { summary: '"md"' },
+    },
+  },
+};
+
+Skeleton.args = {
+  size: 'md',
+};
+
+Skeleton.parameters = {
+  controls: {
+    include: ['size', 'hideLabel'],
+  },
 };

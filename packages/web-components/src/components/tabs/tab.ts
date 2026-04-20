@@ -6,10 +6,11 @@
  */
 
 import { html } from 'lit';
+import { ifDefined } from 'lit/directives/if-defined.js';
 import { property, state } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
 import CDSContentSwitcherItem from '../content-switcher/content-switcher-item';
-import { TABS_TYPE } from './tabs';
+import { TABS_ICON_SIZE, TABS_TYPE } from './defs';
 import styles from './tabs.scss?lit';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import '../button/button';
@@ -19,6 +20,7 @@ import { classMap } from 'lit/directives/class-map.js';
 
 /**
  * Basic tab.
+ *
  * @element cds-tab
  * @fires cds-tab-beingclosed
  *   The custom event fired before a tab is closed upon a user gesture.
@@ -43,10 +45,28 @@ export default class CDSTab extends CDSContentSwitcherItem {
   type = TABS_TYPE.REGULAR;
 
   /**
+   * `true` if this tab is icon-only.
+   */
+  @property({ type: Boolean, reflect: true, attribute: 'icon-only' })
+  iconOnly = false;
+
+  /**
+   * Specify the icon size used by icon-only tabs.
+   */
+  @property({ attribute: 'icon-size', reflect: true })
+  iconSize?: TABS_ICON_SIZE;
+
+  /**
    * The tab text content.
    */
   @property()
   tabTitle;
+
+  /**
+   * **Experimental**: Display an empty dot badge on the Tab.
+   */
+  @property({ type: Boolean, reflect: true, attribute: 'badge-indicator' })
+  badgeIndicator = false;
 
   /**
    * Whether this tab should be dismissable.
@@ -66,7 +86,7 @@ export default class CDSTab extends CDSContentSwitcherItem {
   protected _handleSlotChange({ target }: Event) {
     // Retrieve content of the slot to use for aria-label.
     const content = (target as HTMLSlotElement).assignedNodes();
-    this.tabTitle = content[0].textContent;
+    this.tabTitle = content[0]?.textContent?.trim() || undefined;
   }
 
   connectedCallback() {
@@ -86,6 +106,7 @@ export default class CDSTab extends CDSContentSwitcherItem {
       [`${prefix}--tabs__nav-item--close--hidden`]: !this._dismissable,
     });
     const {
+      badgeIndicator,
       disabled,
       selected,
       tabTitle,
@@ -109,19 +130,39 @@ export default class CDSTab extends CDSContentSwitcherItem {
       </cds-button>
     `;
 
+    const accessibleLabel = tabTitle || this.getAttribute('aria-label');
+    const isIconOnly =
+      this.iconOnly ||
+      this.classList.contains(`${prefix}--tabs__nav-item--icon-only`);
     // No `href`/`tabindex` to not to make this `<a>` click-focusable
-    return html`
+    const tabLink = html`
       <a
         class="${navLinkClasses}"
         role="tab"
-        aria-label="${tabTitle}"
+        aria-label="${ifDefined(accessibleLabel || undefined)}"
         tabindex="${selected ? 0 : -1}"
         ?disabled="${disabled}"
         aria-selected="${selected}">
-        <slot @slotchange="${handleSlotChange}"></slot>
+        <span class="${prefix}--tabs__nav-item-label-wrapper">
+          <slot @slotchange="${handleSlotChange}"></slot>
+        </span>
+        ${!disabled && badgeIndicator
+          ? html`<cds-badge-indicator></cds-badge-indicator>`
+          : ''}
       </a>
       ${iconButton}
     `;
+
+    if (isIconOnly && accessibleLabel && !disabled) {
+      return html`
+        <cds-tooltip align="bottom" class="${prefix}--icon-tooltip">
+          ${tabLink}
+          <cds-tooltip-content>${accessibleLabel}</cds-tooltip-content>
+        </cds-tooltip>
+      `;
+    }
+
+    return tabLink;
   }
 
   _handleClick(event: Event) {
