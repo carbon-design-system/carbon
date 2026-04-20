@@ -5,7 +5,6 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const { snapshot } = require('./snapshot');
 const { expect } = require('@playwright/test');
 
 async function visitStory(page, options) {
@@ -54,25 +53,6 @@ function getStoryUrl({ component, story, id }) {
   return `/iframe.html?id=${normalized}&viewMode=story`;
 }
 
-async function snapshotStory(page, storyOptions) {
-  const { component, story, id, theme } = storyOptions;
-  await visitStory(page, {
-    component,
-    story,
-    id,
-    globals: {
-      theme,
-    },
-  });
-  await snapshot(page, {
-    theme,
-    component,
-    story,
-    id,
-  });
-}
-
 module.exports = {
-  snapshotStory,
   visitStory,
 };

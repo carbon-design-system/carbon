@@ -76,14 +76,14 @@ jobs:
           fetch-tags: true
           ref: ${{ github.event.inputs.existing-tag }}
       - name: Use Node.js version from .nvmrc
-        uses: actions/setup-node@6044e13b5dc448c55e2357c09f80417699197238 # v6.2.0
+        uses: actions/setup-node@53b83947a5a98c8d113130e565377fae1a50d02f # v6.3.0
         with:
           node-version-file: '.nvmrc'
           registry-url: 'https://registry.npmjs.org'
       - name: Create new release branch
         run: |
           git checkout -b release/${{ github.event.inputs.tag }}
-      - uses: actions/cache@cdf6c1fa76f9f475f3d7449005a359c84ca0f306 # v5.0.3
+      - uses: actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae # v5.0.5
         id: cache
         with:
           path: |

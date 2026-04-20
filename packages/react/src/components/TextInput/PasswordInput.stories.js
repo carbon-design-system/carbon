@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -20,19 +20,17 @@ export default {
   },
 };
 
-export const Default = (args) => {
-  return (
-    <div style={{ width: args.defaultWidth }}>
-      <PasswordInput
-        {...args}
-        id="text-input-1"
-        labelText="Text input label"
-        helperText="Optional help text"
-        autoComplete="true"
-      />
-    </div>
-  );
-};
+export const Default = ({ defaultWidth, ...passwordInputArgs }) => (
+  <div style={{ width: defaultWidth }}>
+    <PasswordInput
+      {...passwordInputArgs}
+      id="text-input-1"
+      labelText="Text input label"
+      helperText="Optional help text"
+      autoComplete="true"
+    />
+  </div>
+);
 
 Default.args = {
   defaultWidth: 300,
