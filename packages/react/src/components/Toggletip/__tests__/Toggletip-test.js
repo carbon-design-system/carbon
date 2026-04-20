@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2025
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -512,6 +512,132 @@ describe('Toggletip', () => {
 
         await keyboard('{Escape}');
         expect(onKeyDown).toHaveBeenCalledTimes(1);
+      });
+    });
+
+    describe('Shadow DOM Support', () => {
+      it('should not close when clicking inside the toggletip in Shadow DOM context', async () => {
+        const shadowHost = document.createElement('div');
+        document.body.appendChild(shadowHost);
+
+        const shadowRoot = shadowHost.attachShadow({ mode: 'open' });
+
+        const shadowContainer = document.createElement('div');
+        shadowRoot.appendChild(shadowContainer);
+
+        const { container, getByTestId, getByRole } = render(
+          <Toggletip data-testid="toggletip" defaultOpen>
+            <ToggletipButton label="Show information">test</ToggletipButton>
+            <ToggletipContent>
+              <div data-testid="inner-content">Content</div>
+            </ToggletipContent>
+          </Toggletip>,
+          { container: shadowContainer }
+        );
+
+        const innerContent = getByTestId('inner-content');
+        const toggletip = getByTestId('toggletip');
+
+        const mockEvent = new MouseEvent('mousedown', { bubbles: true });
+        Object.defineProperty(mockEvent, 'composedPath', {
+          value: () => [
+            innerContent,
+            toggletip,
+            shadowContainer,
+            shadowRoot,
+            shadowHost,
+            document.body,
+          ],
+        });
+        Object.defineProperty(mockEvent, 'target', {
+          value: shadowHost,
+        });
+
+        fireEvent(document, mockEvent);
+
+        expect(getByRole('button')).toHaveAttribute('aria-expanded', 'true');
+        expect(toggletip).toHaveClass(`${prefix}--toggletip--open`);
+
+        document.body.removeChild(shadowHost);
+      });
+
+      it('should close when clicking outside the toggletip in Shadow DOM context', async () => {
+        const shadowHost = document.createElement('div');
+        document.body.appendChild(shadowHost);
+
+        const shadowRoot = shadowHost.attachShadow({ mode: 'open' });
+
+        const shadowContainer = document.createElement('div');
+        shadowRoot.appendChild(shadowContainer);
+
+        const { getByTestId, getByRole } = render(
+          <Toggletip data-testid="toggletip" defaultOpen>
+            <ToggletipButton label="Show information">test</ToggletipButton>
+            <ToggletipContent>
+              <div data-testid="inner-content">Content</div>
+            </ToggletipContent>
+          </Toggletip>,
+          { container: shadowContainer }
+        );
+
+        const toggletip = getByTestId('toggletip');
+
+        const outsideElement = document.createElement('div');
+        document.body.appendChild(outsideElement);
+
+        const mockEvent = new MouseEvent('mousedown', { bubbles: true });
+        Object.defineProperty(mockEvent, 'composedPath', {
+          value: () => [outsideElement, document.body],
+        });
+        Object.defineProperty(mockEvent, 'target', {
+          value: outsideElement,
+        });
+
+        fireEvent(document, mockEvent);
+
+        expect(getByRole('button')).toHaveAttribute('aria-expanded', 'false');
+        expect(toggletip).not.toHaveClass(`${prefix}--toggletip--open`);
+
+        document.body.removeChild(outsideElement);
+        document.body.removeChild(shadowHost);
+      });
+
+      it('should handle clicks when composedPath is not available (fallback to event.target)', async () => {
+        const shadowHost = document.createElement('div');
+        document.body.appendChild(shadowHost);
+
+        const shadowRoot = shadowHost.attachShadow({ mode: 'open' });
+
+        const shadowContainer = document.createElement('div');
+        shadowRoot.appendChild(shadowContainer);
+
+        const { getByTestId, getByRole } = render(
+          <Toggletip data-testid="toggletip" defaultOpen>
+            <ToggletipButton label="Show information">test</ToggletipButton>
+            <ToggletipContent>
+              <div data-testid="inner-content">Content</div>
+            </ToggletipContent>
+          </Toggletip>,
+          { container: shadowContainer }
+        );
+
+        const innerContent = getByTestId('inner-content');
+        const toggletip = getByTestId('toggletip');
+
+        const mockEvent = new MouseEvent('mousedown', { bubbles: true });
+        Object.defineProperty(mockEvent, 'composedPath', {
+          value: undefined,
+        });
+        Object.defineProperty(mockEvent, 'target', {
+          value: innerContent,
+        });
+
+        fireEvent(document, mockEvent);
+
+        expect(getByRole('button')).toHaveAttribute('aria-expanded', 'true');
+        expect(toggletip).toHaveClass(`${prefix}--toggletip--open`);
+
+        document.body.removeChild(shadowHost);
       });
     });
   });

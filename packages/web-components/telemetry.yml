@@ -85,6 +85,7 @@ collect:
         - hide-close-button
         - hide-divider
         - hide-label
+        - hide-password-label
         - hide-steppers
         - hidePasswordLabel
         - highContrast
@@ -191,6 +192,7 @@ collect:
         - selection-value
         - selector-initial-focus
         - shortcut
+        - show-password-label
         - show-password-visibility-toggle
         - showPasswordLabel
         - size
@@ -320,6 +322,8 @@ collect:
         - error-subject
         - oncds-file-uploader-item-beingdeleted
         - oncds-file-uploader-item-deleted
+        # cds-fluid-dropdown
+        - is-condensed
         # cds-fluid-time-picker-skeleton
         - is-only-two
         # cds-form-group
@@ -347,6 +351,12 @@ collect:
         - level
         - oncds-use-layer
         - with-background
+        # cds-layout
+        - density
+        # cds-layout-constraint
+        - size-default
+        - size-max
+        - size-min
         # cds-loading
         - inactive
         - overlay
@@ -424,9 +434,6 @@ collect:
         - items-shown
         - loop
         - oncds-page-changed
-        # cds-password-input
-        - hide-password-label
-        - show-password-label
         # cds-progress-indicator
         - current-index
         - ononChange
@@ -786,6 +793,30 @@ collect:
         - primary
         - secondary
         - tertiary
+        # cds-layout - density
+        - condensed
+        - normal
+        # cds-layout-constraint - size-default
+        - 2xl
+        - lg
+        - md
+        - sm
+        - xl
+        - xs
+        # cds-layout-constraint - size-max
+        - 2xl
+        - lg
+        - md
+        - sm
+        - xl
+        - xs
+        # cds-layout-constraint - size-min
+        - 2xl
+        - lg
+        - md
+        - sm
+        - xl
+        - xs
         # cds-menu-button - menu-background-token
         - background
         - layer
