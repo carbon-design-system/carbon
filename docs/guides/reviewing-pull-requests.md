@@ -90,9 +90,10 @@
   - Add the
     https://github.com/carbon-design-system/carbon/labels/status%3A%20one%20more%20review%20%F0%9F%91%80
     label if applicable.
-  - If design review is required, remove `status: visual review` only after the
-    designer has approved (designer preferred; developers can remove it after
-    design approval).
+  - If design review is required, remove
+    https://github.com/carbon-design-system/carbon/labels/status%3A%20visual%20review%20%F0%9F%94%8D
+    only after the designer has approved (designer preferred; developers can
+    remove it after design approval).
   - Approval requirements:
     - PRs requiring design review: 2 developer approvals and 1 design approval.
     - PRs not requiring design review: 2 developer approvals.
