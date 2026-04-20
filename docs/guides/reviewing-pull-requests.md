@@ -83,7 +83,9 @@
     determine if design review is required and apply the same rules.
   - If design review is required:
     - Assign a designer reviewer.
-    - Add the `status: visual review` label.
+    - Add the
+      https://github.com/carbon-design-system/carbon/labels/status%3A%20visual%20review%20%F0%9F%94%8D
+      label.
 - **Post-Review Actions:**
   - Add the
     https://github.com/carbon-design-system/carbon/labels/status%3A%20one%20more%20review%20%F0%9F%91%80
