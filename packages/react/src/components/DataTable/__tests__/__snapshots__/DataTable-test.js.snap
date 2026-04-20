@@ -585,7 +585,6 @@ exports[`DataTable behaves as expected selection should render and match snapsho
                 aria-haspopup="true"
                 aria-labelledby="tooltip-_r_2t_"
                 class="cds--toolbar-action cds--overflow-menu cds--overflow-menu cds--overflow-menu--md cds--btn cds--btn--md cds--layout--size-md cds--btn--ghost cds--btn--icon-only"
-                title="Settings"
                 type="button"
               >
                 <svg
@@ -1022,7 +1021,6 @@ exports[`DataTable renders as expected - Component API should render and match s
                 aria-haspopup="true"
                 aria-labelledby="tooltip-_r_m_"
                 class="cds--toolbar-action cds--overflow-menu cds--overflow-menu cds--overflow-menu--md cds--btn cds--btn--md cds--layout--size-md cds--btn--ghost cds--btn--icon-only"
-                title="Settings"
                 type="button"
               >
                 <svg
