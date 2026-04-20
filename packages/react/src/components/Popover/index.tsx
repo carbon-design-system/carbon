@@ -207,10 +207,16 @@ export const Popover: PopoverComponent & {
     if (!calendar) return false;
     const inputs = popover.current.querySelectorAll('input');
     for (const input of inputs) {
-      const fp = (input as Record<string, unknown>)._flatpickr as
-        | { calendarContainer: Element }
-        | undefined;
-      if (fp?.calendarContainer === calendar) return true;
+      if (!('_flatpickr' in input)) continue;
+      const fp = input._flatpickr;
+      if (
+        fp &&
+        typeof fp === 'object' &&
+        'calendarContainer' in fp &&
+        fp.calendarContainer === calendar
+      ) {
+        return true;
+      }
     }
     return false;
   };

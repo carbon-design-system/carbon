@@ -443,11 +443,7 @@ describe('Popover', () => {
       <Popover open autoAlign onRequestClose={onRequestClose}>
         <button type="button">Open</button>
         <PopoverContent>
-          <input
-            id="date-picker-input"
-            aria-label="Date input"
-            readOnly
-          />
+          <input id="date-picker-input" aria-label="Date input" readOnly />
         </PopoverContent>
       </Popover>
     );
@@ -478,11 +474,7 @@ describe('Popover', () => {
       <Popover open autoAlign onRequestClose={onRequestClose}>
         <button type="button">Open</button>
         <PopoverContent>
-          <input
-            id="date-picker-input"
-            aria-label="Date input"
-            readOnly
-          />
+          <input id="date-picker-input" aria-label="Date input" readOnly />
         </PopoverContent>
       </Popover>
     );
