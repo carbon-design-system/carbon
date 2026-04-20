@@ -241,10 +241,10 @@ to render an icon-only button, please refer to the section on the
 <Unstyled>
   <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
     <Button renderIcon={Add} iconDescription="Add">
-      Add
+      {'Add'}
     </Button>
     <Button renderIcon={TrashCan} kind="danger" iconDescription="TrashCan">
-      Delete
+      {'Delete'}
     </Button>
   </div>
 </Unstyled>
@@ -262,13 +262,13 @@ the Icon to ensure the proper classes are applied:
     <Button
       renderIcon={(props) => <Add size={24} {...props} />}
       iconDescription="Add">
-      Add
+      {'Add'}
     </Button>
     <Button
       renderIcon={(props) => <TrashCan size={24} {...props} />}
       kind="danger"
       iconDescription="TrashCan">
-      Delete
+      {'Delete'}
     </Button>
   </div>
 </Unstyled>
