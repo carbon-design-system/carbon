@@ -184,8 +184,8 @@ Before a PR is merged, make sure the required reviews are complete:
     https://github.com/carbon-design-system/carbon/labels/status%3A%20visual%20review%20%F0%9F%94%8D
     label.
   - After design approval, remove the
-    https://github.com/carbon-design-system/carbon/labels/status%3A%20visual%20review%20%F0%9F%94%8D label
-    (preferably by the designer; developers can remove it after approval).
+    https://github.com/carbon-design-system/carbon/labels/status%3A%20visual%20review%20%F0%9F%94%8D
+    label (preferably by the designer; developers can remove it after approval).
 - If your PR does not require design review, it needs 2 developer approvals.
 - If your PR requires design review, it needs 2 developer approvals and 1 design
   approval.
