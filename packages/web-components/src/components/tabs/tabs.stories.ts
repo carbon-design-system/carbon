@@ -6,6 +6,7 @@
  */
 
 import { html } from 'lit';
+import { ifDefined } from 'lit/directives/if-defined.js';
 import { TABS_ICON_SIZE, TABS_TYPE } from './tabs';
 import styles from './tabs-story.scss?lit';
 import { prefix } from '../../globals/settings';
@@ -77,7 +78,7 @@ export const Default = {
       <cds-tabs
         disabled="${disabled}"
         selection-mode="${selectionMode}"
-        type="${contained ? TABS_TYPE.CONTAINED : null}"
+        type="${ifDefined(contained && TABS_TYPE.CONTAINED)}"
         value="dashboard"
         @cds-tabs-beingselected="${handleBeforeSelected}">
         <cds-tab id="tab-dashboard" target="panel-dashboard" value="dashboard">
@@ -432,86 +433,100 @@ export const skeleton = {
 };
 
 export const WithIcons = {
-  args: iconStoriesArgs,
-  argTypes: iconStoriesArgTypes,
-  render: () => html`
-    <style>
-      ${styles}
-    </style>
-    <cds-tabs value="icon-tab-1" icon-size="${TABS_ICON_SIZE.DEFAULT}">
-      <cds-tab id="icon-tab-1" target="icon-panel-1" value="icon-tab-1">
-        Dashboard ${iconLoader(Dashboard16)}
-      </cds-tab>
-      <cds-tab id="icon-tab-2" target="icon-panel-2" value="icon-tab-2">
-        Monitoring ${iconLoader(CloudMonitoring16)}
-      </cds-tab>
-      <cds-tab id="icon-tab-3" target="icon-panel-3" value="icon-tab-3">
-        Activity ${iconLoader(Activity16)}
-      </cds-tab>
-      <cds-tab id="icon-tab-4" target="icon-panel-4" value="icon-tab-4">
-        Analyze ${iconLoader(IbmWatsonDiscovery16)}
-      </cds-tab>
-      <cds-tab
-        id="icon-tab-5"
-        target="icon-panel-5"
-        value="icon-tab-5"
-        disabled>
-        Settings ${iconLoader(Settings16)}
-      </cds-tab>
-    </cds-tabs>
-    <div class="${prefix}-ce-demo-devenv--tab-panels">
-      <div
-        id="icon-panel-1"
-        role="tabpanel"
-        aria-labelledby="icon-tab-1"
-        hidden>
-        Tab Panel 1
+  args,
+  argTypes,
+  render: ({ disabled, contained, selectionMode }) => {
+    const handleBeforeSelected = (event: CustomEvent) => {
+      if (disabled) {
+        event.preventDefault();
+      }
+    };
+
+    return html`
+      <style>
+        ${styles}
+      </style>
+      <cds-tabs
+        disabled="${disabled}"
+        selection-mode="${selectionMode}"
+        type="${ifDefined(contained && TABS_TYPE.CONTAINED)}"
+        value="icon-tab-1"
+        icon-size="${TABS_ICON_SIZE.DEFAULT}"
+        @cds-tabs-beingselected="${handleBeforeSelected}">
+        <cds-tab id="icon-tab-1" target="icon-panel-1" value="icon-tab-1">
+          Dashboard ${iconLoader(Dashboard16)}
+        </cds-tab>
+        <cds-tab id="icon-tab-2" target="icon-panel-2" value="icon-tab-2">
+          Monitoring ${iconLoader(CloudMonitoring16)}
+        </cds-tab>
+        <cds-tab id="icon-tab-3" target="icon-panel-3" value="icon-tab-3">
+          Activity ${iconLoader(Activity16)}
+        </cds-tab>
+        <cds-tab id="icon-tab-4" target="icon-panel-4" value="icon-tab-4">
+          Analyze ${iconLoader(IbmWatsonDiscovery16)}
+        </cds-tab>
+        <cds-tab
+          id="icon-tab-5"
+          target="icon-panel-5"
+          value="icon-tab-5"
+          disabled>
+          Settings ${iconLoader(Settings16)}
+        </cds-tab>
+      </cds-tabs>
+      <div class="${prefix}-ce-demo-devenv--tab-panels">
+        <div
+          id="icon-panel-1"
+          role="tabpanel"
+          aria-labelledby="icon-tab-1"
+          hidden>
+          Tab Panel 1
+        </div>
+        <div
+          id="icon-panel-2"
+          role="tabpanel"
+          aria-labelledby="icon-tab-2"
+          hidden>
+          <form style="margin: 2em;">
+            <legend class="${prefix}--label">Validation example</legend>
+            <cds-checkbox
+              id="cb"
+              label-text="Accept privacy policy"></cds-checkbox>
+            <cds-button
+              style="margin-top: 1rem; margin-bottom: 1rem;"
+              type="submit">
+              Submit
+            </cds-button>
+            <cds-text-input
+              label="Text input label"
+              helper-text="Optional help text"
+              id="text-input-1">
+            </cds-text-input>
+          </form>
+        </div>
+        <div
+          id="icon-panel-3"
+          role="tabpanel"
+          aria-labelledby="icon-tab-3"
+          hidden>
+          Tab Panel 3
+        </div>
+        <div
+          id="icon-panel-4"
+          role="tabpanel"
+          aria-labelledby="icon-tab-4"
+          hidden>
+          Tab Panel 4
+        </div>
+        <div
+          id="icon-panel-5"
+          role="tabpanel"
+          aria-labelledby="icon-tab-5"
+          hidden>
+          Tab Panel 5
+        </div>
       </div>
-      <div
-        id="icon-panel-2"
-        role="tabpanel"
-        aria-labelledby="icon-tab-2"
-        hidden>
-        <form style="margin: 2em;">
-          <legend class="${prefix}--label">Validation example</legend>
-          <cds-checkbox
-            id="cb"
-            label-text="Accept privacy policy"></cds-checkbox>
-          <cds-button
-            style="margin-top: 1rem; margin-bottom: 1rem;"
-            type="submit">
-            Submit
-          </cds-button>
-          <cds-text-input
-            label="Text input label"
-            helper-text="Optional help text"
-            id="text-input-1">
-          </cds-text-input>
-        </form>
-      </div>
-      <div
-        id="icon-panel-3"
-        role="tabpanel"
-        aria-labelledby="icon-tab-3"
-        hidden>
-        Tab Panel 3
-      </div>
-      <div
-        id="icon-panel-4"
-        role="tabpanel"
-        aria-labelledby="icon-tab-4"
-        hidden>
-        Tab Panel 4
-      </div>
-      <div
-        id="icon-panel-5"
-        role="tabpanel"
-        aria-labelledby="icon-tab-5"
-        hidden>
-        Tab Panel 5
-      </div>
-    </div>
-  `,
+    `;
+  },
 };
 
 export default {
