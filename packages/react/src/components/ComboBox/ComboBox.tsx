@@ -656,10 +656,12 @@ const ComboBox = forwardRef(
                 items.some((item) => itemToString(item) === currentInput);
 
               if (!hasExactMatch) {
+                const selectedItem =
+                  typeof selectedItemProp !== 'undefined'
+                    ? selectedItemProp
+                    : state.selectedItem;
                 const restoredInput =
-                  state.selectedItem !== null
-                    ? itemToString(state.selectedItem)
-                    : '';
+                  selectedItem !== null ? itemToString(selectedItem) : '';
 
                 return { ...changes, inputValue: restoredInput };
               }
@@ -724,10 +726,12 @@ const ComboBox = forwardRef(
                 items.some((item) => itemToString(item) === currentInput);
 
               if (!hasExactMatch) {
+                const selectedItem =
+                  typeof selectedItemProp !== 'undefined'
+                    ? selectedItemProp
+                    : state.selectedItem;
                 const restoredInput =
-                  state.selectedItem !== null
-                    ? itemToString(state.selectedItem)
-                    : '';
+                  selectedItem !== null ? itemToString(selectedItem) : '';
 
                 return { ...changes, inputValue: restoredInput };
               }

@@ -176,7 +176,10 @@ class CDSContentSwitcher extends LitElement {
           const items = this.querySelectorAll(constructor.selectorItem);
           const index = Array.from(items).indexOf(item);
           const name = item.getAttribute('name') ?? undefined;
-          const text = item.textContent?.trim() ?? undefined;
+          const text =
+            item.textContent?.trim() ||
+            item.getAttribute('aria-label')?.trim() ||
+            undefined;
 
           const afterSelectEvent = new CustomEvent(constructor.eventSelect, {
             bubbles: true,

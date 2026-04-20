@@ -538,6 +538,24 @@ describe('ComboBox', () => {
     expect(findInputNode()).toHaveDisplayValue('Item 1');
   });
 
+  it('should restore controlled selected item label on blur when input does not match any item on initial load', async () => {
+    render(
+      <ComboBox
+        {...mockProps}
+        selectedItem={mockProps.items[1]}
+        allowCustomValue={false}
+      />
+    );
+
+    expect(findInputNode()).toHaveDisplayValue('Item 1');
+
+    await userEvent.clear(findInputNode());
+    await userEvent.type(findInputNode(), 'no-match');
+    await userEvent.keyboard('[Tab]');
+
+    expect(findInputNode()).toHaveDisplayValue('Item 1');
+  });
+
   it('should keep exact match input on blur when it matches an item label', async () => {
     render(<ComboBox {...mockProps} allowCustomValue={false} />);
 

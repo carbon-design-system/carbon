@@ -441,6 +441,8 @@ export const syntaxHighlight = TokenGroup.create({
     'syntax-standard',
     'syntax-local',
     'syntax-special',
+    'syntax-inserted',
+    'syntax-deleted',
   ],
 });
 

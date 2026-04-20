@@ -73,6 +73,32 @@ describe('cds-content-switcher', function () {
     expect(detail.text).to.equal('Second section');
   });
 
+  it('should emit event text from aria-label when item has no text content', async () => {
+    const el = await fixture(html`
+      <cds-content-switcher>
+        <cds-content-switcher-item name="one" value="all">
+          First section
+        </cds-content-switcher-item>
+        <cds-content-switcher-item
+          name="two"
+          value="notifications"
+          aria-label="New Notifications">
+          <svg aria-hidden="true" viewBox="0 0 16 16"></svg>
+        </cds-content-switcher-item>
+      </cds-content-switcher>
+    `);
+
+    const second = el.querySelectorAll('cds-content-switcher-item')[1];
+    const eventPromise = oneEvent(el, 'cds-content-switcher-selected');
+
+    second.click();
+    const { detail } = await eventPromise;
+
+    expect(detail.item).to.equal(second);
+    expect(detail.name).to.equal('two');
+    expect(detail.text).to.equal('New Notifications');
+  });
+
   it('should emit event on keydown (ArrowRight/ArrowLeft)', async () => {
     const el = await fixture(html`
       <cds-content-switcher>
