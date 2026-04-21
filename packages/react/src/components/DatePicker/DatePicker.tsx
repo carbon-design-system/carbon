@@ -110,7 +110,7 @@ const carbonFlatpickrMonthSelectPlugin = (config) => (fp) => {
         } else {
           fp.yearElements[0]
             .closest(config.selectorFlatpickrMonthYearContainer)
-            .insertAdjacentElement('afterend', monthElement);
+            .insertAdjacentElement('beforeend', monthElement);
         }
 
         return monthElement;
@@ -657,6 +657,8 @@ const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>((props, ref) => {
     calendarRef.current = calendar;
 
     const handleInputFieldKeyDown = (event: KeyboardEvent) => {
+      if (readOnly && match(event, keys.Tab)) return;
+
       const {
         calendarContainer,
         selectedDateElem: fpSelectedDateElem,
