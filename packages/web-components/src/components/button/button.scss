@@ -264,3 +264,63 @@ $css--plex: true !default;
     }
   }
 }
+
+:host(#{$prefix}-button:dir(rtl)) {
+  $popover-offset: var(--cds-popover-offset, 0.625rem);
+
+  // Top / Bottom: re-center horizontally (translate uses 50% instead of -50%)
+  .#{$prefix}--popover--top > .#{$prefix}--popover {
+    > .#{$prefix}--popover-content {
+      transform: translate(50%, calc(-100% - #{$popover-offset}));
+    }
+
+    > .#{$prefix}--popover-caret {
+      transform: translate(50%, calc(-1 * #{$popover-offset}));
+    }
+  }
+
+  .#{$prefix}--popover--bottom > .#{$prefix}--popover {
+    > .#{$prefix}--popover-content {
+      transform: translate(50%, calc(100% + #{$popover-offset}));
+    }
+
+    > .#{$prefix}--popover-caret {
+      transform: translate(50%, #{$popover-offset});
+    }
+  }
+
+  // Top/bottom alignment variants: swap which inline edge is anchored
+  .#{$prefix}--popover--top-left,
+  .#{$prefix}--popover--bottom-left {
+    > .#{$prefix}--popover > .#{$prefix}--popover-content {
+      inset-inline-end: calc(50% - #{$popover-offset});
+      inset-inline-start: initial;
+    }
+  }
+
+  .#{$prefix}--popover--top-right,
+  .#{$prefix}--popover--bottom-right {
+    > .#{$prefix}--popover > .#{$prefix}--popover-content {
+      inset-inline-end: initial;
+      inset-inline-start: calc(50% - #{$popover-offset});
+    }
+  }
+
+  // Right -> visually anchors on the left
+  .#{$prefix}--popover--right > .#{$prefix}--popover {
+    > .#{$prefix}--popover-content,
+    > .#{$prefix}--popover-caret {
+      inset-inline-end: 100%;
+      inset-inline-start: initial;
+    }
+  }
+
+  // Left -> visually anchors on the right
+  .#{$prefix}--popover--left > .#{$prefix}--popover {
+    > .#{$prefix}--popover-content,
+    > .#{$prefix}--popover-caret {
+      inset-inline-end: initial;
+      inset-inline-start: 100%;
+    }
+  }
+}
