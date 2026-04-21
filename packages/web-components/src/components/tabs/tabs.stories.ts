@@ -464,7 +464,7 @@ export const WithIcons = {
       </style>
       <cds-tabs
         disabled="${disabled}"
-        selection-mode="${selectionMode}"
+        selection-mode="manual"
         type="${ifDefined(contained && TABS_TYPE.CONTAINED)}"
         value="icon-tab-1"
         icon-size="${TABS_ICON_SIZE.DEFAULT}"
