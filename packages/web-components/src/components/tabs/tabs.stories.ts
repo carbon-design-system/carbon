@@ -449,26 +449,15 @@ export const skeleton = {
 };
 
 export const WithIcons = {
-  args,
-  argTypes,
-  render: ({ disabled, contained, selectionMode }) => {
-    const handleBeforeSelected = (event: CustomEvent) => {
-      if (disabled) {
-        event.preventDefault();
-      }
-    };
-
+  render: () => {
     return html`
       <style>
         ${styles}
       </style>
       <cds-tabs
-        disabled="${disabled}"
         selection-mode="manual"
-        type="${ifDefined(contained && TABS_TYPE.CONTAINED)}"
         value="icon-tab-1"
-        icon-size="${TABS_ICON_SIZE.DEFAULT}"
-        @cds-tabs-beingselected="${handleBeforeSelected}">
+        icon-size="${TABS_ICON_SIZE.DEFAULT}">
         <cds-tab id="icon-tab-1" target="icon-panel-1" value="icon-tab-1">
           Dashboard ${iconLoader(Dashboard16)}
         </cds-tab>
