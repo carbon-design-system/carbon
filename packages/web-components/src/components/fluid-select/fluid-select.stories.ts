@@ -105,6 +105,7 @@ export const Default = {
     const {
       defaultWidth,
       disabled,
+      id,
       invalid,
       invalidText,
       labelText,
@@ -116,6 +117,7 @@ export const Default = {
     return html`
       <div style="width:${defaultWidth}px;">
         <cds-fluid-select
+          id="${id}"
           ?disabled="${disabled}"
           ?invalid="${invalid}"
           invalid-text="${ifDefined(invalidText)}"
@@ -177,6 +179,7 @@ export const WithAILabel = {
   render: (args) => {
     const {
       disabled,
+      id,
       invalid,
       invalidText,
       labelText,
@@ -189,6 +192,7 @@ export const WithAILabel = {
 
     return html` <div style="width:${defaultWidth}px;">
       <cds-fluid-select
+        id="${id}"
         ?disabled="${disabled}"
         ?invalid="${invalid}"
         invalid-text="${ifDefined(invalidText)}"
