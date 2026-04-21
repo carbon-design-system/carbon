@@ -206,53 +206,58 @@ export const Contained = {
 
 export const Dismissable = {
   args: {
-    ...args,
     dismissable: true,
+    selectedIndex: 2,
   },
   argTypes: {
-    ...argTypes,
     dismissable: {
       control: 'boolean',
       description: 'Whether the rendered Tab children should be dismissable.',
     },
+    selectedIndex: {
+      control: 'number',
+      description:
+        'Specify a selected index for the initially selected content.',
+    },
   },
-  render: ({ disabled, contained, selectionMode, dismissable }) => {
+  render: ({ dismissable, selectedIndex }) => {
     return html`
       <style>
         ${styles}
       </style>
       <tabs-story-wrapper
         ?dismissable="${dismissable}"
-        ?disabled="${disabled}"
-        ?contained="${contained}"
-        selection-mode="${selectionMode}">
+        selected-index="${selectedIndex}">
       </tabs-story-wrapper>
     `;
   },
 };
 export const DismissableContained = {
   args: {
-    ...args,
     contained: true,
     dismissable: true,
+    selectedIndex: 0,
   },
   argTypes: {
-    ...argTypes,
     dismissable: {
       control: 'boolean',
       description: 'Whether the rendered Tab children should be dismissable.',
     },
+    selectedIndex: {
+      control: 'number',
+      description:
+        'Specify a selected index for the initially selected content.',
+    },
   },
-  render: ({ disabled, contained, selectionMode, dismissable }) => {
+  render: ({ contained, dismissable, selectedIndex }) => {
     return html`
       <style>
         ${styles}
       </style>
       <tabs-story-wrapper
         ?dismissable="${dismissable}"
-        ?disabled="${disabled}"
         ?contained="${contained}"
-        selection-mode="${selectionMode}">
+        selected-index="${selectedIndex}">
       </tabs-story-wrapper>
     `;
   },

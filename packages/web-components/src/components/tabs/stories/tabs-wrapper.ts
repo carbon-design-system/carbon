@@ -51,6 +51,12 @@ export class DismissableTabsWrapper extends LitElement {
   selectionMode = 'automatic';
 
   /**
+   * Selected index for the initially selected content
+   */
+  @property({ attribute: 'selected-index' })
+  selectedIndex = 0;
+
+  /**
    * Handle tab dismissed event
    */
   private _handleDismissed(event: CustomEvent) {
@@ -80,6 +86,7 @@ export class DismissableTabsWrapper extends LitElement {
       <cds-tabs
         ?disabled="${this.disabled}"
         selection-mode="${this.selectionMode}"
+        selected-index="${this.selectedIndex}"
         type="${this.contained ? TABS_TYPE.CONTAINED : TABS_TYPE.REGULAR}"
         ?dismissable="${this.dismissable}"
         value="all"
