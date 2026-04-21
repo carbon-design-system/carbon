@@ -6240,6 +6240,9 @@ Map {
       "label": {
         "type": "string",
       },
+      "legacyAutoalign": {
+        "type": "bool",
+      },
       "menuAlignment": {
         "type": "string",
       },
