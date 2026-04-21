@@ -25,7 +25,7 @@
     "provenance": true
   },
   "peerDependencies": {
-    "stylelint": "^16.0.0"
+    "stylelint": "^17.0.0"
   },
   "dependencies": {
     "@double-great/stylelint-a11y": "^3.0.2",
@@ -41,6 +41,6 @@
   },
   "devDependencies": {
     "prettier": "^3.3.3",
-    "stylelint": "^16.0.0"
+    "stylelint": "^17.0.0"
   }
 }
