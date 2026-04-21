@@ -9,6 +9,7 @@ import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
 import { action } from 'storybook/actions';
 import Modal from './Modal';
+import { ModalStackProvider } from './ModalStackContext';
 import Button from '../Button';
 import Select from '../Select';
 import { MultiSelect } from '../MultiSelect';
@@ -1154,5 +1155,57 @@ export const WithPopover = ({ numberOfButtons, ...args }) => {
   );
 };
 
+export const NestedModals = ({ numberOfButtons, ...args }) => {
+  const [outerOpen, setOuterOpen] = useState(true);
+  const [innerOpen, setInnerOpen] = useState(false);
+  return (
+    <ModalStackProvider>
+      <Button onClick={() => setOuterOpen(true)}>Launch outer modal</Button>
+      <Modal
+        open={outerOpen}
+        onRequestClose={() => setOuterOpen(false)}
+        modalHeading="Outer Modal"
+        modalLabel="Parent Modal"
+        primaryButtonText="Close Outer"
+        secondaryButtonText="Cancel"
+        {...args}
+        {...modalFooter(numberOfButtons)}>
+        <p style={{ marginBottom: '1.5rem' }}>
+          This is the outer modal. Click the button below to open a nested modal
+          inside this one. Test ESC key behavior - it should close the inner
+          modal first, then the outer modal.
+        </p>
+        <TextInput
+          id="outer-input"
+          labelText="Outer modal input"
+          placeholder="Enter some text"
+          style={{ marginBottom: '1.5rem' }}
+        />
+        <Button onClick={() => setInnerOpen(true)}>Open nested modal</Button>
+
+        <Modal
+          open={innerOpen}
+          onRequestClose={() => setInnerOpen(false)}
+          modalHeading="Inner Modal"
+          modalLabel="Child Modal"
+          primaryButtonText="Close Inner"
+          secondaryButtonText="Cancel"
+          size="sm">
+          <p style={{ marginBottom: '1.5rem' }}>
+            This is a nested modal inside the outer modal. Press ESC to close
+            only this modal, leaving the outer modal open.
+          </p>
+          <TextInput
+            id="inner-input"
+            labelText="Inner modal input"
+            placeholder="Enter some text"
+          />
+        </Modal>
+      </Modal>
+    </ModalStackProvider>
+  );
+};
+
+NestedModals.parameters = { ...sharedParameters };
 WithPopover.parameters = { ...sharedParameters };
 withAILabel.parameters = { ...sharedParameters };
