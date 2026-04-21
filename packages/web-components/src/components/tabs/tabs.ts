@@ -175,7 +175,10 @@ export default class CDSTabs extends HostListenerMixin(CDSContentSwitcher) {
             `${prefix}-tab[highlighted]`
           );
           if (focusedTab) {
-            this._selectionDidChange(focusedTab);
+            this._handleUserInitiatedSelectItem(
+              focusedTab as CDSTab,
+              'activation'
+            );
             this.requestUpdate();
           }
         }
