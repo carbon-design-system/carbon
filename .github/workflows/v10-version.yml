@@ -21,7 +21,7 @@ jobs:
           fetch-tags: true
           token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
       - name: Use Node.js version from .nvmrc
-        uses: actions/setup-node@53b83947a5a98c8d113130e565377fae1a50d02f # v6.3.0
+        uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6.4.0
         with:
           node-version-file: '.nvmrc'
           registry-url: 'https://registry.npmjs.org'
@@ -105,7 +105,7 @@ jobs:
       - name: Create Pull Request
         # Do not create PR for release commits
         if: steps.check-commit.outputs.is_release_commit != 'true'
-        uses: peter-evans/create-pull-request@c0f553fe549906ede9cf27b5156039d195d2ece0 # v8.1.0
+        uses: peter-evans/create-pull-request@5f6978faf089d4d20b00c7766989d076bb2fc7f1 # v8.1.1
         with:
           branch: 'release/${{ steps.calculate-tag.outputs.nextTag }}'
           commit-message:
