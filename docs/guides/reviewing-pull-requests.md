@@ -19,7 +19,7 @@
   - [1. Initial Review](#1-initial-review)
   - [2. Functional Testing](#2-functional-testing)
   - [3. Code & CI Verification](#3-code--ci-verification)
-  - [4. Final Review & Merge Preparation](#5-final-review--merge-preparation)
+  - [4. Final Review & Merge Preparation](#4-final-review--merge-preparation)
 - [Items to Review by Change-Type](#items-to-review-by-change-type)
   - [PublicAPI (semver) Changes](#publicapi-semver-changes)
   - [React Changes](#react-changes)
