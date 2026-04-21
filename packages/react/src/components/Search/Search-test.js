@@ -7,6 +7,7 @@
 
 import React from 'react';
 import Search from './Search';
+import SearchSkeleton from './Search.Skeleton';
 import userEvent from '@testing-library/user-event';
 import { render, screen } from '@testing-library/react';
 
@@ -262,6 +263,15 @@ describe('Search', () => {
       expect(screen.getByLabelText('Clear search input')).toHaveClass(
         `${prefix}--search-close--hidden`
       );
+    });
+  });
+
+  describe('SearchSkeleton', () => {
+    it('should apply the small layout size class when small is true', () => {
+      const { container } = render(<SearchSkeleton small />);
+
+      expect(container.firstChild).toHaveClass(`${prefix}--search--sm`);
+      expect(container.firstChild).toHaveClass(`${prefix}--layout--size-sm`);
     });
   });
 });

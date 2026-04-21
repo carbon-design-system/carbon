@@ -37,10 +37,12 @@ const SearchSkeleton = ({
   ...rest
 }: SearchSkeletonProps) => {
   const prefix = usePrefix();
+  const normalizedSize = small ? 'sm' : size;
+
   const searchClasses = cx(className, {
     [`${prefix}--skeleton`]: true,
     [`${prefix}--search--sm`]: small, // TODO: V12 - Remove this class
-    [`${prefix}--layout--size-${size}`]: size,
+    [`${prefix}--layout--size-${normalizedSize}`]: normalizedSize,
   });
 
   return (
