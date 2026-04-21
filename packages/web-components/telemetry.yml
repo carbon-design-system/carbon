@@ -14,6 +14,7 @@ collect:
         - active
         - ai-text
         - ai-text-label
+        - alert
         - align
         - alignment
         - alignment-axis-offset
@@ -39,8 +40,11 @@ collect:
         - caret
         - checked
         - checkmark-label
+        - clear-selection-description
         - clear-selection-label
+        - clear-selection-text
         - clickable
+        - close-button-label
         - close-button-label-text
         - close-icon-description
         - close-on-activation
@@ -49,6 +53,7 @@ collect:
         - color-scheme
         - cols
         - condensed
+        - container-class
         - counter-mode
         - danger-description
         - data-table
@@ -71,13 +76,17 @@ collect:
         - feedback
         - feedback-timeout
         - filter
+        - filterable
         - filtered
         - flipped
+        - format-options
         - full-width
         - has-custom-icon
         - has-focus
         - has-main-content
         - has-rounded-corners
+        - has-scrolling-content
+        - has-three-buttons
         - hasCustomIcon
         - heading
         - helper-text
@@ -94,14 +103,17 @@ collect:
         - hreflang
         - icon
         - icon-description
+        - icon-size
         - id
         - increment-button-assistive-text
         - indeterminate
         - index
         - inline
+        - input-mode
         - invalid
         - invalid-text
         - is-active
+        - is-condensed
         - is-expressive
         - is-not-child-of-header
         - is-selectable
@@ -119,6 +131,10 @@ collect:
         - legend-text
         - lineCount
         - link-role
+        - loading-description
+        - loading-icon-description
+        - loading-status
+        - loading-success-delay
         - locale
         - low-contrast
         - max
@@ -138,6 +154,12 @@ collect:
         - oncds-dropdown-selected
         - oncds-dropdown-toggled
         - oncds-header-menu-button-toggled
+        - oncds-modal-beingclosed
+        - oncds-modal-closed
+        - oncds-multi-select-beingselected
+        - oncds-multi-select-beingtoggled
+        - oncds-multi-select-selected
+        - oncds-multi-select-toggled
         - oncds-notification-beingclosed
         - oncds-notification-closed
         - oncds-number-input
@@ -170,6 +192,7 @@ collect:
         - pattern
         - ping
         - placeholder
+        - prevent-close
         - prevent-close-on-click-outside
         - previousValue
         - radio
@@ -183,15 +206,18 @@ collect:
         - revert-label
         - role
         - rows
+        - select-all
         - selected
         - selected-index
         - selectedIndex
+        - selection-feedback
         - selection-label
         - selection-mode
         - selection-name
         - selection-value
         - selector-initial-focus
         - shortcut
+        - should-submit-on-enter
         - show-password-label
         - show-password-visibility-toggle
         - showPasswordLabel
@@ -201,6 +227,7 @@ collect:
         - status
         - status-icon-description
         - step
+        - step-start-value
         - subtitle
         - tab-index
         - tabTip
@@ -299,6 +326,11 @@ collect:
         - short
         # cds-definition-tooltip
         - open-on-hover
+        # cds-dialog
+        - aria-describedby
+        - modal
+        - oncds-dialog-beingclosed
+        - oncds-dialog-closed
         # cds-dismissible-tag
         - dismiss-tooltip-alignment
         - dismiss-tooltip-label
@@ -322,8 +354,6 @@ collect:
         - error-subject
         - oncds-file-uploader-item-beingdeleted
         - oncds-file-uploader-item-deleted
-        # cds-fluid-dropdown
-        - is-condensed
         # cds-fluid-time-picker-skeleton
         - is-only-two
         # cds-form-group
@@ -351,6 +381,12 @@ collect:
         - level
         - oncds-use-layer
         - with-background
+        # cds-layout
+        - density
+        # cds-layout-constraint
+        - size-default
+        - size-max
+        - size-min
         # cds-loading
         - inactive
         - overlay
@@ -369,32 +405,6 @@ collect:
         - selectedItem
         # cds-menu-item-selectable
         - renderIcon
-        # cds-modal
-        - alert
-        - container-class
-        - has-scrolling-content
-        - loading-description
-        - loading-icon-description
-        - loading-status
-        - loading-success-delay
-        - oncds-modal-beingclosed
-        - oncds-modal-closed
-        - prevent-close
-        - should-submit-on-enter
-        # cds-modal-close-button
-        - close-button-label
-        # cds-modal-footer
-        - has-three-buttons
-        # cds-multi-select
-        - clear-selection-description
-        - clear-selection-text
-        - filterable
-        - oncds-multi-select-beingselected
-        - oncds-multi-select-beingtoggled
-        - oncds-multi-select-selected
-        - oncds-multi-select-toggled
-        - select-all
-        - selection-feedback
         # cds-multi-select-item
         - is-select-all
         # cds-operational-tag
@@ -491,6 +501,8 @@ collect:
         # cds-structured-list-row
         - selection-icon-title
         # cds-tab
+        - badge-indicator
+        - icon-only
         - tabTitle
         # cds-table
         - filterRows
@@ -626,6 +638,15 @@ collect:
         - left
         - right
         - top
+        # General - input-mode
+        - decimal
+        - email
+        - none
+        - numeric
+        - search
+        - tel
+        - text
+        - url
         # General - kind
         - ""
         - caution-major
@@ -672,6 +693,11 @@ collect:
         # General - label-position
         - left
         - right
+        # General - loading-status
+        - active
+        - error
+        - finished
+        - inactive
         # General - menu-alignment
         - bottom
         - bottom-end
@@ -696,6 +722,13 @@ collect:
         # General - orientation
         - horizontal
         - vertical
+        # General - role
+        - alertdialog
+        - dialog
+        # General - selection-feedback
+        - fixed
+        - top
+        - top-after-reopen
         # General - size
         - ""
         - 2xl
@@ -764,6 +797,7 @@ collect:
         - inline
         - magenta
         - multi
+        - number
         - password
         - purple
         - red
@@ -787,18 +821,33 @@ collect:
         - primary
         - secondary
         - tertiary
+        # cds-layout - density
+        - condensed
+        - normal
+        # cds-layout-constraint - size-default
+        - 2xl
+        - lg
+        - md
+        - sm
+        - xl
+        - xs
+        # cds-layout-constraint - size-max
+        - 2xl
+        - lg
+        - md
+        - sm
+        - xl
+        - xs
+        # cds-layout-constraint - size-min
+        - 2xl
+        - lg
+        - md
+        - sm
+        - xl
+        - xs
         # cds-menu-button - menu-background-token
         - background
         - layer
-        # cds-modal - loading-status
-        - active
-        - error
-        - finished
-        - inactive
-        # cds-multi-select - selection-feedback
-        - fixed
-        - top
-        - top-after-reopen
         # cds-side-panel - placement
         - left
         - right

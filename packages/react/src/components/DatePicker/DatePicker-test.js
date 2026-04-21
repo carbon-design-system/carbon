@@ -709,6 +709,32 @@ describe('Single date picker', () => {
     expect(document.body).toHaveFocus();
     expect(onClose).toHaveBeenCalledTimes(2);
   });
+
+  it('should keep native tab navigation when `readOnly` is true', async () => {
+    render(
+      <>
+        <DatePicker datePickerType="single" readOnly>
+          <DatePickerInput id="readonly-input-id" labelText="Read only input" />
+        </DatePicker>
+        <button data-testid="next-focus-target" type="button">
+          Next focus target
+        </button>
+      </>
+    );
+
+    const dateInput = screen.getByLabelText('Read only input');
+    const nextFocusTarget = screen.getByTestId('next-focus-target');
+    const calendar = screen.getByRole('application');
+
+    expect(calendar).not.toHaveClass('open');
+    expect(document.body).toHaveFocus();
+    await userEvent.tab();
+    expect(dateInput).toHaveFocus();
+    expect(calendar).not.toHaveClass('open');
+    await userEvent.tab();
+    expect(nextFocusTarget).toHaveFocus();
+    expect(calendar).not.toHaveClass('open');
+  });
 });
 
 describe('Range date picker', () => {
@@ -820,9 +846,65 @@ describe('Range date picker', () => {
     await userEvent.type(theStart, '2023-01-05{enter}');
     await userEvent.type(theEnd, '2023-01-19{enter}');
     expect(onChange).toHaveBeenCalledTimes(2);
+    expect(screen.getByRole('application')).not.toHaveClass('open');
+    await userEvent.click(theEnd);
     expect(screen.getByRole('application')).toHaveClass('open');
     await userEvent.keyboard('{escape}');
     expect(screen.getByRole('application')).not.toHaveClass('open');
+  });
+
+  it('should respect closeOnSelect prop in range mode when pressing Enter', async () => {
+    const onClose = jest.fn();
+    render(
+      <DatePicker
+        dateFormat="Y-m-d"
+        closeOnSelect={false}
+        onClose={onClose}
+        onChange={() => {}}
+        datePickerType="range">
+        <DatePickerInput
+          id="start-date-input-close-on-select"
+          labelText="Start date"
+        />
+        <DatePickerInput
+          id="end-date-input-close-on-select"
+          labelText="End date"
+        />
+      </DatePicker>
+    );
+
+    const start = screen.getByLabelText('Start date');
+    const end = screen.getByLabelText('End date');
+
+    await userEvent.type(start, '2023-01-05{enter}');
+    await userEvent.type(end, '2023-01-19{enter}');
+
+    expect(screen.getByRole('application')).toHaveClass('open');
+    expect(onClose).not.toHaveBeenCalled();
+  });
+
+  it('should move focus on first click outside after Enter on end date input', async () => {
+    render(
+      <>
+        <DatePicker
+          dateFormat="Y-m-d"
+          onChange={() => {}}
+          datePickerType="range">
+          <DatePickerInput id="start-date-input-id" labelText="Start date" />
+          <DatePickerInput id="end-date-input-id" labelText="End date" />
+        </DatePicker>
+        <input id="outside-input-id" aria-label="Outside input" />
+      </>
+    );
+
+    const end = screen.getByLabelText('End date');
+    const outside = screen.getByLabelText('Outside input');
+
+    await userEvent.click(end);
+    await userEvent.type(end, '2026-02-15{enter}');
+    await userEvent.click(outside);
+
+    expect(outside).toHaveFocus();
   });
 
   it('clearing end date should not cause console warnings', async () => {
@@ -1268,6 +1350,31 @@ describe('Range date picker', () => {
       expect(start.value).toBe('03/03/2025');
       expect(end.value).toBe('03/09/2025');
     });
+
+    it('should not fire end input blur handlers when Enter is pressed', async () => {
+      const handleBlur = jest.fn();
+
+      render(
+        <DatePicker
+          dateFormat="Y-m-d"
+          onChange={() => {}}
+          datePickerType="range">
+          <DatePickerInput id="start" labelText="Start date" />
+          <DatePickerInput id="end" labelText="End date" onBlur={handleBlur} />
+        </DatePicker>
+      );
+
+      await userEvent.type(
+        screen.getByLabelText('Start date'),
+        '2023-01-05{enter}'
+      );
+      await userEvent.type(
+        screen.getByLabelText('End date'),
+        '2023-01-19{enter}'
+      );
+
+      expect(handleBlur).not.toHaveBeenCalled();
+    });
   });
 });
 
@@ -1347,9 +1454,41 @@ describe('Date picker with locale', () => {
     await userEvent.click(screen.getByTestId('input'));
     const year = screen.getByDisplayValue('2022');
     const month = screen.getByText('1月');
+    const monthYearContainer = year.closest('.flatpickr-current-month');
     expect(year).toBeInTheDocument();
     expect(month).toBeInTheDocument();
     expect(month.compareDocumentPosition(year)).toBe(2);
+    expect(monthYearContainer).toContainElement(month);
+  });
+
+  it('should update month label on navigation for year-month locales', async () => {
+    render(
+      <DatePicker
+        onChange={() => {}}
+        datePickerType="single"
+        locale="lv"
+        value="01/01/2022">
+        <DatePickerInput
+          id="date-picker-input-id"
+          placeholder="mm/dd/yyyy"
+          labelText="Date picker label"
+          data-testid="input"
+        />
+      </DatePicker>
+    );
+
+    await userEvent.click(screen.getByTestId('input'));
+    const year = screen.getByDisplayValue('2022');
+    const monthYearContainer = year.closest('.flatpickr-current-month');
+    // eslint-disable-next-line testing-library/no-node-access
+    const monthElement = monthYearContainer.querySelector('.cur-month');
+    const initialMonthLabel = monthElement.textContent;
+    // eslint-disable-next-line testing-library/no-node-access
+    const nextMonthButton = document.querySelector('.flatpickr-next-month');
+
+    await userEvent.click(nextMonthButton);
+
+    expect(monthElement.textContent).not.toBe(initialMonthLabel);
   });
 });
 
