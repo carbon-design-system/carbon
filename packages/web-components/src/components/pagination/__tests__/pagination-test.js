@@ -148,8 +148,23 @@ describe('cds-pagination', () => {
       </cds-pagination>
     `);
 
-    const label = el.shadowRoot?.querySelector(`.cds--pagination__text`);
+    const label = el.shadowRoot?.querySelector(
+      '.cds--pagination__left div[slot="label-text"]'
+    );
     expect(label?.textContent?.trim()).to.equal('éléments par page');
+  });
+
+  it('should respect items-per-page-text attribute when not supplied', async () => {
+    const el = await fixture(html`
+      <cds-pagination total-items="20">
+        <cds-select-item value="10">10</cds-select-item>
+      </cds-pagination>
+    `);
+
+    const label = el.shadowRoot?.querySelector(
+      '.cds--pagination__left div[slot="label-text"]'
+    );
+    expect(label?.textContent?.trim()).to.be.empty;
   });
 
   it('should disable page and pageSize selects with attributes', async () => {
@@ -296,7 +311,7 @@ describe('cds-pagination', () => {
     await el.updateComplete;
 
     const label = el.shadowRoot?.querySelector(
-      '.cds--label.cds--visually-hidden'
+      '.cds--pagination__right span[slot="label-text"]'
     );
     expect(label?.textContent?.trim()).to.equal('Page of 2 total');
   });
