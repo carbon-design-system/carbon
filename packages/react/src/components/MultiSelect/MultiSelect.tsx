@@ -562,6 +562,7 @@ export const MultiSelect = React.forwardRef(
     );
     const titleClasses = cx(`${prefix}--label`, {
       [`${prefix}--label--disabled`]: disabled,
+      [`${prefix}--label--readonly`]: readOnly,
       [`${prefix}--visually-hidden`]: hideLabel,
     });
     const helperId = !helperText
@@ -803,7 +804,7 @@ export const MultiSelect = React.forwardRef(
               type="button"
               className={`${prefix}--list-box__field`}
               disabled={disabled}
-              aria-disabled={disabled || readOnly}
+              aria-disabled={readOnly ? true : undefined}
               aria-describedby={
                 !inline && showHelperText ? helperId : undefined
               }

@@ -1744,5 +1744,24 @@ describe('Slider', () => {
         expect(lastCall.value).toBe(0.4);
       });
     });
+
+    it('should prioritize disabled over readOnly when both are true', () => {
+      const { container } = render(
+        <Slider
+          id="slider"
+          labelText="Slider label"
+          value={50}
+          min={0}
+          max={100}
+          disabled={true}
+          readOnly={true}
+        />
+      );
+
+      // Check that the wrapper has the disabled class indicating disabled state takes precedence
+      expect(
+        container.querySelector('.cds--slider--disabled')
+      ).toBeInTheDocument();
+    });
   });
 });

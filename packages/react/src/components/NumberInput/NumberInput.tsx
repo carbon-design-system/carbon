@@ -900,6 +900,7 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
           data-invalid={normalizedProps.invalid ? true : undefined}>
           <Label
             disabled={normalizedProps.disabled}
+            readOnly={readOnly}
             hideLabel={hideLabel}
             id={id}
             label={label}
@@ -1021,7 +1022,7 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
               }}
               pattern={pattern}
               inputMode={inputMode}
-              readOnly={readOnly}
+              {...(readOnly ? { readOnly: true } : {})}
               step={step}
               type={type}
               value={type === 'number' ? value : inputValue}
@@ -1315,16 +1316,18 @@ NumberInput.propTypes = {
 
 interface LabelProps {
   disabled?: boolean;
+  readOnly?: boolean;
   hideLabel?: boolean;
   id?: string;
   label?: ReactNode;
 }
 
-const Label = ({ disabled, id, hideLabel, label }: LabelProps) => {
+const Label = ({ disabled, readOnly, id, hideLabel, label }: LabelProps) => {
   const prefix = usePrefix();
   const className = cx({
     [`${prefix}--label`]: true,
     [`${prefix}--label--disabled`]: disabled,
+    [`${prefix}--label--readonly`]: readOnly,
     [`${prefix}--visually-hidden`]: hideLabel,
   });
 

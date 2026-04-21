@@ -1484,4 +1484,23 @@ describe('FilterableMultiSelect', () => {
       .slice(1)
       .forEach((opt) => expect(opt).toHaveAttribute('aria-selected', 'false'));
   });
+
+  it('should prioritize disabled over readOnly when both are true', () => {
+    const items = generateItems(5, generateGenericItem);
+    render(
+      <FilterableMultiSelect
+        id="filterable-multiselect"
+        items={items}
+        itemToString={(item) => (item ? item.label : '')}
+        titleText="FilterableMultiSelect label"
+        disabled={true}
+        readOnly={true}
+      />
+    );
+
+    const input = screen.getByRole('combobox');
+    expect(input).toHaveAttribute('disabled', '');
+    expect(input).toHaveAttribute('readOnly', '');
+    expect(input.disabled).toBe(true);
+  });
 });

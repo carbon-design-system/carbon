@@ -431,5 +431,21 @@ describe('PasswordInput', () => {
       userEvent.type(inputElement, 'newpassword');
       expect(inputElement.value).toBe('');
     });
+
+    it('should prioritize disabled over readOnly when both are true', () => {
+      render(
+        <PasswordInput
+          id="input-1"
+          labelText="PasswordInput label"
+          disabled={true}
+          readOnly={true}
+        />
+      );
+
+      const input = screen.getByLabelText('PasswordInput label');
+      expect(input).toHaveAttribute('disabled', '');
+      expect(input).toHaveAttribute('readOnly', '');
+      expect(input.disabled).toBe(true);
+    });
   });
 });

@@ -824,6 +824,23 @@ describe('Range date picker', () => {
 
     expect(onChange).toHaveBeenCalledTimes(0);
   });
+  it('should prioritize disabled over readOnly when both are true', () => {
+    render(
+      <DatePicker datePickerType="single" readOnly={true}>
+        <DatePickerInput
+          id="date-picker-input-id"
+          placeholder="mm/dd/yyyy"
+          labelText="Date Picker label"
+          disabled={true}
+        />
+      </DatePicker>
+    );
+
+    const input = screen.getByLabelText('Date Picker label');
+    expect(input).toHaveAttribute('disabled', '');
+    expect(input).toHaveAttribute('readOnly', '');
+    expect(input.disabled).toBe(true);
+  });
 
   it('should work with ISO 8601 format or others', async () => {
     const onChange = jest.fn();

@@ -1939,4 +1939,23 @@ describe('ComboBox', () => {
       expect(findMenuItemNode(i)).toHaveAttribute('aria-selected', 'false');
     }
   });
+
+  it('should prioritize disabled over readOnly when both are true', () => {
+    render(
+      <ComboBox
+        id="combobox"
+        items={mockProps.items}
+        itemToString={(item) => (item ? item.text : '')}
+        titleText="ComboBox label"
+        disabled={true}
+        readOnly={true}
+      />
+    );
+
+    const input = screen.getByRole('combobox');
+    expect(input).toHaveAttribute('disabled', '');
+    expect(input).not.toHaveAttribute('readOnly');
+    expect(input.disabled).toBe(true);
+    expect(input.readOnly).toBe(false);
+  });
 });
