@@ -49,7 +49,6 @@ import {
 } from './ComposedModalPresence';
 import { useId } from '../../internal/useId';
 import { useComposedModalState } from './useComposedModalState';
-import { useModalStack } from '../Modal/ModalStackContext';
 
 export interface ModalBodyProps extends HTMLAttributes<HTMLDivElement> {
   /** Specify the content to be placed in the ModalBody. */
@@ -295,8 +294,6 @@ const ComposedModalDialog = React.forwardRef<
   const startSentinel = useRef<HTMLButtonElement>(null);
   const endSentinel = useRef<HTMLButtonElement>(null);
   const onMouseDownTarget = useRef<Node | null>(null);
-  const modalIdRef = useRef<string>(Math.random().toString());
-  const { register, unregister, isTopmost } = useModalStack();
 
   const presenceContext = useContext(ComposedModalPresenceContext);
   const mergedRefs = useMergeRefs([ref, presenceContext?.presenceRef]);
@@ -488,30 +485,19 @@ const ComposedModalDialog = React.forwardRef<
   useEffect(() => {
     if (!open) return;
 
-    // Copy ref value to variable for cleanup function
-    const modalId = modalIdRef.current;
-
-    // Register this modal in the stack
-    register(modalId);
-
     const handleEscapeKey = (event) => {
       if (match(event, keys.Escape)) {
-        // Only handle ESC if this is the topmost modal
-        if (isTopmost(modalId)) {
-          event.preventDefault();
-          closeModal(event);
-        }
+        event.preventDefault();
+        closeModal(event);
       }
     };
     document.addEventListener('keydown', handleEscapeKey);
 
     return () => {
       document.removeEventListener('keydown', handleEscapeKey);
-      // Unregister this modal from the stack
-      unregister(modalId);
     };
     // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20452
-  }, [open, register, unregister, isTopmost]);
+  }, [open]);
 
   useEffect(() => {
     if (!enableDialogElement && !enablePresence && !open && launcherButtonRef) {

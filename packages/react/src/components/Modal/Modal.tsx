@@ -51,7 +51,6 @@ import {
   ModalPresenceContext,
   useExclusiveModalPresenceContext,
 } from './ModalPresence';
-import { useModalStack } from './ModalStackContext';
 
 export const ModalSizes = ['xs', 'sm', 'md', 'lg'] as const;
 const invalidOutsideClickMessage =
@@ -323,7 +322,6 @@ const ModalDialog = React.forwardRef(function ModalDialog(
   const endTrap = useRef<HTMLSpanElement>(null);
   const wrapFocusTimeout = useRef<NodeJS.Timeout>(null);
   const modalInstanceId = `modal-${useId()}`;
-  const { register, unregister, isTopmost } = useModalStack();
   const modalLabelId = `${prefix}--modal-header__label--${modalInstanceId}`;
   const modalHeadingId = `${prefix}--modal-header__heading--${modalInstanceId}`;
   const modalBodyId = `${prefix}--modal-body--${modalInstanceId}`;
@@ -542,27 +540,20 @@ const ModalDialog = React.forwardRef(function ModalDialog(
   useEffect(() => {
     if (!open) return;
 
-    // Register this modal in the stack
-    register(modalInstanceId);
-
     const handleEscapeKey = (event) => {
       if (match(event, keys.Escape)) {
         // Only handle ESC if this is the topmost modal
-        if (isTopmost(modalInstanceId)) {
-          event.preventDefault();
-          onRequestClose(event);
-        }
+        event.preventDefault();
+        onRequestClose(event);
       }
     };
     document.addEventListener('keydown', handleEscapeKey);
 
     return () => {
       document.removeEventListener('keydown', handleEscapeKey);
-      // Unregister this modal from the stack
-      unregister(modalInstanceId);
     };
     // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20452
-  }, [open, modalInstanceId, register, unregister, isTopmost]);
+  }, [open]);
 
   useEffect(() => {
     return () => {
