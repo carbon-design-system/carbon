@@ -180,6 +180,56 @@ describe('DatePicker', () => {
     spy.mockRestore();
   });
 
+  describe('accessibility', () => {
+    it('associates helper text with the input using aria-describedby', () => {
+      render(
+        <DatePickerInput
+          id="date-picker-input-helper"
+          labelText="Date Picker label"
+          helperText="Helpful text"
+        />
+      );
+
+      const input = screen.getByLabelText('Date Picker label');
+      const helperText = screen.getByText('Helpful text');
+
+      expect(input).toHaveAttribute('aria-describedby', helperText.id);
+    });
+
+    it('associates invalid text with the input and marks input as invalid', () => {
+      render(
+        <DatePickerInput
+          id="date-picker-input-invalid"
+          labelText="Date Picker label"
+          invalid
+          invalidText="Invalid date"
+        />
+      );
+
+      const input = screen.getByLabelText('Date Picker label');
+      const invalidText = screen.getByText('Invalid date');
+
+      expect(input).toHaveAttribute('aria-describedby', invalidText.id);
+      expect(input).toHaveAttribute('aria-invalid', 'true');
+    });
+
+    it('associates warning text with the input using aria-describedby', () => {
+      render(
+        <DatePickerInput
+          id="date-picker-input-warn"
+          labelText="Date Picker label"
+          warn
+          warnText="Warning message"
+        />
+      );
+
+      const input = screen.getByLabelText('Date Picker label');
+      const warnText = screen.getByText('Warning message');
+
+      expect(input).toHaveAttribute('aria-describedby', warnText.id);
+    });
+  });
+
   it('should respect parseDate prop', async () => {
     const parseDate = jest.fn();
     parseDate.mockReturnValueOnce(new Date('1989/01/20'));
