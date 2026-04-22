@@ -460,6 +460,74 @@ export const SingleWithCalendarWithLayer = {
   },
 };
 
+const setDatePickerKind =
+  (kind: 'simple' | 'single') =>
+  (event: Event & { currentTarget: Element }) => {
+    const container = event.currentTarget.closest(
+      '[data-date-picker-kind-switching]'
+    );
+    const input = container?.querySelector(
+      `${prefix}-date-picker-input`
+    ) as HTMLElement | null;
+    const status = container?.querySelector(
+      '[data-date-picker-kind-status]'
+    ) as HTMLElement | null;
+
+    input?.setAttribute('kind', kind);
+
+    if (status) {
+      status.textContent = `Current kind: ${kind}`;
+    }
+  };
+
+export const KindSwitchingRegression = {
+  args: { ...defaultArgs, placeholder: 'mm/dd/yyyy', size: INPUT_SIZE.MEDIUM },
+  argTypes: {
+    placeholder: controls.placeholder,
+    size: controls.size,
+  },
+  render: ({ placeholder, size }) => {
+    const switchToSimple = setDatePickerKind('simple');
+    const switchToSingle = setDatePickerKind('single');
+
+    return html`
+      <div
+        data-date-picker-kind-switching
+        style="display:grid;gap:1rem;max-width:20rem;">
+        <div style="display:flex;gap:0.75rem;align-items:center;">
+          <cds-button size="sm" kind="secondary" @click="${switchToSimple}">
+            Switch to simple
+          </cds-button>
+          <cds-button size="sm" @click="${switchToSingle}">
+            Switch to single
+          </cds-button>
+        </div>
+        <p
+          data-date-picker-kind-status
+          style="margin:0;color:#525252;font-size:0.875rem;">
+          Current kind: simple
+        </p>
+        <cds-date-picker>
+          <cds-date-picker-input
+            kind="simple"
+            label-text="Date Picker label"
+            placeholder="${placeholder}"
+            size="${size}">
+          </cds-date-picker-input>
+        </cds-date-picker>
+      </div>
+    `;
+  },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Manual regression case for dynamic `kind` switching. Toggle the same input between `simple` and `single` to verify that the calendar is created and destroyed correctly.',
+      },
+    },
+  },
+};
+
 const skeletonControls = {
   hideLabel: {
     control: 'boolean',

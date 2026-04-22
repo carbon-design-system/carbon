@@ -346,7 +346,7 @@ class CDSDatePickerInput extends FocusMixin(LitElement) {
     `;
   }
 
-  updated() {
+  updated(changedProperties) {
     this.toggleAttribute('ai-label', this._hasAILabel);
     const label = this.shadowRoot?.querySelector("slot[name='ai-label']");
 
@@ -362,6 +362,22 @@ class CDSDatePickerInput extends FocusMixin(LitElement) {
           `${prefix}--slug--revert`,
           this.querySelector(`${prefix}-slug`)?.hasAttribute('revert-active')
         );
+    }
+
+    // Notify parent date-picker when kind changes so it can reinitialize the calendar
+    if (changedProperties.has('kind')) {
+      this.dispatchEvent(
+        new CustomEvent(
+          (this.constructor as typeof CDSDatePickerInput).eventKindChanged,
+          {
+            bubbles: true,
+            composed: true,
+            detail: {
+              kind: this.kind,
+            },
+          }
+        )
+      );
     }
   }
 
@@ -396,6 +412,13 @@ class CDSDatePickerInput extends FocusMixin(LitElement) {
    */
   static get aiLabelItem() {
     return `${prefix}-ai-label`;
+  }
+
+  /**
+   * The name of the custom event fired when the kind attribute changes.
+   */
+  static get eventKindChanged() {
+    return `${prefix}-date-picker-input-kind-changed`;
   }
 
   static shadowRootOptions = {

@@ -228,6 +228,18 @@ class CDSDatePicker extends HostListenerMixin(FormMixin(LitElement)) {
       .join('/');
   };
 
+  /**
+   * Handles `${prefix}-date-picker-input-kind-changed` event on child input elements.
+   * Reinitializes the calendar when the kind attribute changes.
+   */
+  @HostListener('eventKindChanged')
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20452
+  // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
+  private _handleKindChanged = () => {
+    // Reinitialize the date picker when kind changes
+    this._instantiateDatePicker();
+  };
+
   _handleFormdata(event: FormDataEvent) {
     const { formData } = event;
     const { disabled, name, value } = this;
@@ -699,6 +711,13 @@ class CDSDatePicker extends HostListenerMixin(FormMixin(LitElement)) {
    */
   static get eventChange() {
     return `${prefix}-date-picker-changed`;
+  }
+
+  /**
+   * The name of the custom event fired when a child input's kind attribute changes.
+   */
+  static get eventKindChanged() {
+    return `${prefix}-date-picker-input-kind-changed`;
   }
 
   static styles = styles;
