@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -21,16 +21,26 @@ export interface TextInputSkeletonProps
    * Specify whether the label should be hidden or not.
    */
   hideLabel?: boolean;
+
+  /**
+   * Specify the size of the TextInputSkeleton
+   */
+  size?: 'xs' | 'sm' | 'md' | 'lg';
 }
 
 const TextInputSkeleton = ({
   hideLabel,
   className,
+  size,
   ...rest
 }: TextInputSkeletonProps) => {
   const prefix = usePrefix();
   return (
-    <div className={cx(`${prefix}--form-item`, className)} {...rest}>
+    <div
+      className={cx(`${prefix}--form-item`, className, {
+        [`${prefix}--layout--size-${size}`]: size,
+      })}
+      {...rest}>
       {!hideLabel && (
         <span className={`${prefix}--label ${prefix}--skeleton`} />
       )}
@@ -49,6 +59,11 @@ TextInputSkeleton.propTypes = {
    * Specify whether the label should be hidden, or not
    */
   hideLabel: PropTypes.bool,
+
+  /**
+   * Specify the size of the TextInputSkeleton
+   */
+  size: PropTypes.oneOf(['xs', 'sm', 'md', 'lg']),
 };
 
 export default TextInputSkeleton;
