@@ -9437,7 +9437,7 @@ __metadata:
     eslint-plugin-react-hooks: "npm:^5.2.0"
     eslint-plugin-testing-library: "npm:^7.6.6"
     fs-extra: "npm:^11.0.0"
-    glob: "npm:^11.0.0"
+    glob: "npm:^13.0.0"
     globals: "npm:17.5.0"
     husky: "npm:^9.0.0"
     jest: "npm:^30.0.5"
