@@ -10,15 +10,12 @@ import {
   withModalPresence,
   type ModalPresenceProps,
 } from './ModalPresence';
-import { ModalStackProvider, useModalStack } from './ModalStackContext';
 
 export default Modal;
 export {
   Modal,
   ModalPresence,
-  ModalStackProvider,
   withModalPresence,
-  useModalStack,
   type ModalProps,
   type ModalPresenceProps,
 };
