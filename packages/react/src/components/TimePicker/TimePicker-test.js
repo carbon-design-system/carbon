@@ -177,6 +177,15 @@ describe('TimePicker', () => {
       expect(
         container.querySelector('.cds--form-requirement')
       ).toHaveTextContent('Invalid time');
+      const invalidText = screen.getByText('Invalid time');
+      expect(screen.getByRole('textbox')).toHaveAttribute(
+        'aria-describedby',
+        invalidText.id
+      );
+      expect(screen.getByRole('textbox')).toHaveAttribute(
+        'aria-invalid',
+        'true'
+      );
     });
 
     it('should show warning state when warning is true', () => {
@@ -192,6 +201,12 @@ describe('TimePicker', () => {
       expect(
         container.querySelector('.cds--form-requirement')
       ).toHaveTextContent('Warning message');
+      const warningText = screen.getByText('Warning message');
+      expect(screen.getByRole('textbox')).toHaveAttribute(
+        'aria-describedby',
+        warningText.id
+      );
+      expect(screen.getByRole('textbox')).not.toHaveAttribute('aria-invalid');
     });
 
     it('should not show invalid state when disabled', () => {
@@ -288,6 +303,35 @@ describe('TimePicker', () => {
       expect(
         container.querySelector('.cds--time-picker__input-field-error')
       ).not.toBeInTheDocument();
+    });
+
+    it('should preserve provided aria-describedby when not invalid or warning', () => {
+      render(<TimePicker id="time-picker" aria-describedby="custom-hint" />);
+      expect(screen.getByRole('textbox')).toHaveAttribute(
+        'aria-describedby',
+        'custom-hint'
+      );
+    });
+
+    it('should apply invalid aria attributes over conflicting consumer props', () => {
+      render(
+        <TimePicker
+          id="time-picker"
+          invalid
+          invalidText="Invalid time"
+          aria-describedby="custom-hint"
+          aria-invalid={false}
+        />
+      );
+      const invalidText = screen.getByText('Invalid time');
+      expect(screen.getByRole('textbox')).toHaveAttribute(
+        'aria-describedby',
+        invalidText.id
+      );
+      expect(screen.getByRole('textbox')).toHaveAttribute(
+        'aria-invalid',
+        'true'
+      );
     });
   });
 });
