@@ -241,7 +241,8 @@ class CDSPasswordInput extends CDSTextInput {
 
     const passwordVisibilityButtonClasses = classMap({
       [`${prefix}--text-input--password__visibility__toggle`]: true,
-      [`${prefix}--btn`]: true,
+      [`${prefix}--btn`]: !isFluid,
+      [`${prefix}--btn--icon-only`]: isFluid,
       [`${prefix}--tooltip__trigger`]: true,
       [`${prefix}--tooltip--a11y`]: true,
       [`${prefix}--btn--disabled`]: normalizedProps.disabled || readonly,
