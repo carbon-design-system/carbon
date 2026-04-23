@@ -195,7 +195,6 @@ class CDSPasswordInput extends CDSTextInput {
       [`${prefix}--text-input--invalid`]: normalizedProps.invalid,
       [`${prefix}--text-input--warning`]: normalizedProps.warn,
       [`${prefix}--text-input--${size}`]: size !== undefined, // TODO v12 - remove this class
-      [`${prefix}--layout--size-${size}`]: size !== undefined,
       [`${prefix}--password-input`]: true,
     });
 
@@ -207,6 +206,7 @@ class CDSPasswordInput extends CDSTextInput {
     const fieldWrapperClasses = classMap({
       [`${prefix}--text-input__field-wrapper`]: true,
       [`${prefix}--text-input__field-wrapper--warning`]: normalizedProps.warn,
+      [`${prefix}--layout--size-${size}`]: size !== undefined,
     });
 
     const labelClasses = classMap({
@@ -241,10 +241,9 @@ class CDSPasswordInput extends CDSTextInput {
 
     const passwordVisibilityButtonClasses = classMap({
       [`${prefix}--text-input--password__visibility__toggle`]: true,
-      [`${prefix}--btn--icon-only`]: true,
+      [`${prefix}--btn`]: true,
       [`${prefix}--tooltip__trigger`]: true,
       [`${prefix}--tooltip--a11y`]: true,
-      [`${prefix}--toggle-password-tooltip`]: true,
       [`${prefix}--btn--disabled`]: normalizedProps.disabled || readonly,
     });
 
