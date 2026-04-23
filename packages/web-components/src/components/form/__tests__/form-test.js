@@ -9,56 +9,58 @@ import { expect, fixture, html } from '@open-wc/testing';
 import '@carbon/web-components/es/components/form/index.js';
 
 describe('cds-form', function () {
-  it('should render a form element with the Carbon form class', async () => {
-    const el = await fixture(html`<cds-form></cds-form>`);
-    const form = el.shadowRoot.querySelector('form');
+  describe('renders as expected', () => {
+    it('should render children as expected', async () => {
+      const el = await fixture(html`
+        <cds-form>
+          <div data-testid="field">Field</div>
+        </cds-form>
+      `);
+      const form = el.shadowRoot.querySelector('form');
+      const slot = el.shadowRoot.querySelector('slot');
 
-    expect(form).to.exist;
-    expect(form.classList.contains('cds--form')).to.be.true;
-  });
+      expect(form).to.exist;
+      expect(form).to.have.class('cds--form');
+      expect(slot.assignedElements()).to.have.lengthOf(1);
+      expect(el.querySelector('[data-testid="field"]')).to.exist;
+    });
 
-  it('should project slotted content and keep it queryable from the host', async () => {
-    const el = await fixture(html`
-      <cds-form>
-        <div data-testid="field">Field</div>
-        <label for="i">Label</label>
-        <input id="i" type="text" />
-      </cds-form>
-    `);
+    it('should support a custom class on the outermost element', async () => {
+      const el = await fixture(html`<cds-form class="test"></cds-form>`);
 
-    const slot = el.shadowRoot.querySelector('slot');
-    const assigned = slot.assignedNodes({ flatten: true });
-    const field = assigned.find(
-      (node) =>
-        node.nodeType === Node.ELEMENT_NODE &&
-        node.matches('[data-testid="field"]')
-    );
+      expect(el).to.have.class('test');
+    });
 
-    expect(field).to.exist;
-    expect(field.textContent.trim()).to.equal('Field');
-    expect(el.querySelector('label[for="i"]')).to.exist;
-    expect(el.querySelector('input#i')).to.exist;
-  });
+    it('should spread extra props onto outermost element', async () => {
+      const el = await fixture(html`
+        <cds-form data-testid="test"></cds-form>
+      `);
 
-  it('should render with no slotted children', async () => {
-    const el = await fixture(html`<cds-form></cds-form>`);
-    const slot = el.shadowRoot.querySelector('slot');
-    const assigned = slot.assignedNodes({ flatten: true }).filter(
-      (node) => node.nodeType === Node.ELEMENT_NODE
-    );
+      expect(el).to.have.attribute('data-testid', 'test');
+    });
 
-    expect(assigned.length).to.equal(0);
-    expect(el.shadowRoot.querySelector('form')).to.exist;
-  });
+    it('should render a form element with the Carbon form class', async () => {
+      const el = await fixture(html`<cds-form></cds-form>`);
+      const form = el.shadowRoot.querySelector('form');
+      const slot = el.shadowRoot.querySelector('slot');
 
-  it('should preserve a class on the host element', async () => {
-    const el = await fixture(html`
-      <cds-form class="custom-form-class">
-        <span>Content</span>
-      </cds-form>
-    `);
+      expect(form).to.exist;
+      expect(form).to.have.class('cds--form');
+      expect(slot).to.exist;
+    });
 
-    expect(el.classList.contains('custom-form-class')).to.be.true;
+    it('should render a slot inside the form element for projected content', async () => {
+      const el = await fixture(html`
+        <cds-form>
+          <input id="name" type="text" />
+        </cds-form>
+      `);
+      const form = el.shadowRoot.querySelector('form');
+      const slot = el.shadowRoot.querySelector('slot');
+
+      expect(form.contains(slot)).to.be.true;
+      expect(slot.assignedElements()[0]).to.equal(el.querySelector('#name'));
+    });
   });
 
   describe('automated verification testing', () => {
