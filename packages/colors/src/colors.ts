@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2018, 2023
+ * Copyright IBM Corp. 2018, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -566,7 +566,11 @@ export const warmGrayHover = {
   100: warmGray100Hover,
 };
 
-export const colors = {
+export type ColorScale = Record<number, string>;
+export type ColorGroup = Record<string, ColorScale>;
+export type HoverColorGroup = Record<string, string | ColorScale>;
+
+export const colors: ColorGroup = {
   black: {
     100: black,
   },
@@ -587,7 +591,7 @@ export const colors = {
   yellow,
 };
 
-export const hoverColors = {
+export const hoverColors: HoverColorGroup = {
   whiteHover,
   blackHover,
   blueHover,

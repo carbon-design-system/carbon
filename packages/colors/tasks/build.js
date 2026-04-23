@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2015, 2023
+ * Copyright IBM Corp. 2015, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -7,7 +7,7 @@
 
 'use strict';
 
-const { colors, hoverColors } = require('@carbon/colors');
+const { colors, hoverColors } = require('../lib/index.js');
 const { types: t, generate } = require('@carbon/scss-generator');
 const { paramCase } = require('change-case-all');
 const fs = require('fs-extra');
