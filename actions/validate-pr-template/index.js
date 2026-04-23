@@ -148,10 +148,15 @@ module.exports = async ({ github, context, core }) => {
   const commentMarker = '<!-- pr-template-check -->';
   const owner = context.repo.owner;
   const repo = context.repo.repo;
+  const base = context.payload.pull_request.base;
+  const baseRepo = base.repo;
+  const baseOwner = baseRepo.owner.login;
+  const baseRepoName = baseRepo.name;
+  const baseRef = base.ref ?? context.payload.repository.default_branch;
   const issueNumber = context.issue.number;
   const body = context.payload.pull_request.body || '';
   const templateUrl =
-    'https://github.com/carbon-design-system/carbon/blob/main/.github/PULL_REQUEST_TEMPLATE.md';
+    `https://github.com/${baseOwner}/${baseRepoName}/blob/${baseRef}/${templatePath}`;
   const runUrl = `https://github.com/${owner}/${repo}/actions/runs/${context.runId}?pr=${issueNumber}`;
   const jobUrl = await getJobUrl({
     github,
@@ -222,10 +227,10 @@ module.exports = async ({ github, context, core }) => {
   }
 
   const { data: templateFile } = await github.rest.repos.getContent({
-    owner: upstreamOwner,
-    repo: upstreamRepo,
+    owner: baseOwner ?? upstreamOwner,
+    repo: baseRepoName ?? upstreamRepo,
     path: templatePath,
-    ref: 'main',
+    ref: baseRef,
   });
 
   const templateBody = Buffer.from(templateFile.content, templateFile.encoding)

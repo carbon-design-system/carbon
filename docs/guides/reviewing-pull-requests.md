@@ -37,7 +37,7 @@
 
 ### 1. Initial Review
 
-> [!IMPORTANT] Pull requests must use the pull request
+> [!IMPORTANT] Pull requests must use and fill out the pull request
 > [template](https://github.com/carbon-design-system/carbon/blob/main/.github/PULL_REQUEST_TEMPLATE.md).
 
 - **PR Body & Issue Context:**
