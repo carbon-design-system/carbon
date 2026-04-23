@@ -254,16 +254,13 @@ test.describe('@avt Tabs', () => {
       state: 'visible',
     });
 
-    // Right scroll button should disappear after manually scrolling horizontally to end of tabs
+    // Right scroll button should remain visible when the last tab is only
+    // partially visible.
     const tabList = page.locator('.cds--tab--list');
     const lastElement = page.getByText('Settings').nth(1);
     const nextButton = page.getByLabel('Scroll right');
     await tabList.hover();
     await lastElement.scrollIntoViewIfNeeded();
-    await page.waitForSelector('.cds--tab--overflow-nav-button--next', {
-      state: 'hidden',
-      timeout: 1000,
-    });
-    await expect(nextButton).toBeHidden();
+    await expect(nextButton).toBeVisible();
   });
 });
