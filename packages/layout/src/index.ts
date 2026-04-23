@@ -1,48 +1,47 @@
 /**
- * Copyright IBM Corp. 2018, 2023
+ * Copyright IBM Corp. 2018, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
-import { unstable_tokens } from './tokens.js';
+import { unstable_tokens } from './tokens';
 
 export { unstable_tokens };
+
+export type BreakpointName = 'sm' | 'md' | 'lg' | 'xlg' | 'max';
+export type Breakpoint = {
+  width: string;
+  columns: number;
+  margin: string;
+};
+export type SizeName =
+  | 'XSmall'
+  | 'Small'
+  | 'Medium'
+  | 'Large'
+  | 'XLarge'
+  | '2XLarge';
 
 // Convert
 // Default, Use with em() and rem() functions
 export const baseFontSize = 16;
 
-/**
- * Convert a given px unit to a rem unit
- * @param {number} px
- * @returns {string}
- */
-export function rem(px) {
+export const rem = (px: number) => {
   return `${px / baseFontSize}rem`;
-}
+};
 
-/**
- * Convert a given px unit to a em unit
- * @param {number} px
- * @returns {string}
- */
-export function em(px) {
+export const em = (px: number) => {
   return `${px / baseFontSize}em`;
-}
+};
 
-/**
- * Convert a given px unit to its string representation
- * @param {number} value - number of pixels
- * @returns {string}
- */
-export function px(value) {
+export const px = (value: number) => {
   return `${value}px`;
-}
+};
 
 // Breakpoint
 // Initial map of our breakpoints and their values
-export const breakpoints = {
+export const breakpoints: Record<BreakpointName, Breakpoint> = {
   sm: {
     width: rem(320),
     columns: 4,
@@ -70,24 +69,22 @@ export const breakpoints = {
   },
 };
 
-export function breakpointUp(name) {
+export const breakpointUp = (name: BreakpointName) => {
   return `@media (min-width: ${breakpoints[name].width})`;
-}
+};
 
-export function breakpointDown(name) {
+export const breakpointDown = (name: BreakpointName) => {
   return `@media (max-width: ${breakpoints[name].width})`;
-}
+};
 
-export function breakpoint(...args) {
-  return breakpointUp(...args);
-}
+export const breakpoint = breakpointUp;
 
 // Mini-unit
 export const miniUnit = 8;
 
-export function miniUnits(count) {
+export const miniUnits = (count: number) => {
   return rem(miniUnit * count);
-}
+};
 
 // Spacing
 export const spacing01 = miniUnits(0.25);
@@ -169,7 +166,7 @@ export const sizeMedium = rem(40);
 export const sizeLarge = rem(48);
 export const sizeXLarge = rem(64);
 export const size2XLarge = rem(80);
-export const sizes = {
+export const sizes: Record<SizeName, string> = {
   XSmall: sizeXSmall,
   Small: sizeSmall,
   Medium: sizeMedium,

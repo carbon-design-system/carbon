@@ -4,7 +4,6 @@ on:
   workflow_run:
     workflows:
       [
-        Add To Project,
         Version,
         Release,
         Deploy React storybook to GitHub Pages,

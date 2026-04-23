@@ -77,17 +77,50 @@ $inset-transition: inset 110ms motion(standard, productive);
   }
 }
 
+:host(#{$prefix}-tabs[icon-size='default'])
+  .#{$prefix}--tabs-nav-content-container,
+:host(#{$prefix}-tabs.#{$prefix}--tabs__icon--default)
+  .#{$prefix}--tabs-nav-content-container {
+  overflow: visible;
+  block-size: $spacing-08;
+}
+
+:host(#{$prefix}-tabs[icon-size='lg']) .#{$prefix}--tabs-nav-content-container,
+:host(#{$prefix}-tabs.#{$prefix}--tabs__icon--lg)
+  .#{$prefix}--tabs-nav-content-container {
+  overflow: visible;
+  block-size: $spacing-09;
+}
+
+:host(#{$prefix}-tabs[icon-size='default']),
+:host(#{$prefix}-tabs[icon-size='lg']),
+:host(#{$prefix}-tabs.#{$prefix}--tabs__icon--default),
+:host(#{$prefix}-tabs.#{$prefix}--tabs__icon--lg) {
+  overflow: visible;
+
+  .#{$prefix}--tab--list {
+    overflow: visible;
+  }
+}
+
 :host(#{$prefix}-tab),
 :host(#{$prefix}-tab-skeleton) {
   display: flex;
   background: transparent;
   inline-size: 100%;
 
+  .#{$prefix}--tabs__nav-item-label-wrapper {
+    display: flex;
+    align-items: center;
+    gap: $spacing-03;
+  }
+
   .#{$prefix}--tabs__nav-link {
     @include button-reset.reset($width: false);
     @include focus-outline('reset');
     @include type-style('body-compact-01');
 
+    position: relative;
     overflow: hidden;
 
     align-items: center;
@@ -125,6 +158,75 @@ $inset-transition: inset 110ms motion(standard, productive);
   margin-inline-end: 0;
 }
 
+:host(#{$prefix}-tab[badge-indicator][icon-only]:not([icon-size='lg']))
+  #{$prefix}-badge-indicator,
+:host(
+    #{$prefix}-tab[badge-indicator].#{$prefix}--tabs__nav-item--icon-only:not(
+        .#{$prefix}--tabs__nav-item--icon-only__20
+      )
+  )
+  #{$prefix}-badge-indicator {
+  margin-block-start: $spacing-02;
+  margin-inline-end: $spacing-02;
+}
+
+:host(#{$prefix}-tab[icon-only]),
+:host(#{$prefix}-tab.#{$prefix}--tabs__nav-item--icon-only) {
+  flex: 0 0 auto;
+  block-size: $spacing-08;
+  inline-size: $spacing-08;
+
+  .#{$prefix}--tabs__nav-item-label-wrapper {
+    display: flex;
+  }
+
+  #{$prefix}-tooltip {
+    display: block;
+    block-size: 100%;
+    inline-size: 100%;
+    --#{$prefix}-tooltip-padding-block: #{convert.to-rem(2px)};
+    --#{$prefix}-popover-caret-width: #{convert.to-rem(8px)};
+    --#{$prefix}-popover-caret-height: #{convert.to-rem(4px)};
+    --#{$prefix}-popover-offset: #{convert.to-rem(8px)};
+  }
+
+  #{$prefix}-tooltip::part(popover-container) {
+    display: block;
+    block-size: 100%;
+    inline-size: 100%;
+  }
+
+  .#{$prefix}--tabs__nav-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    block-size: 100%;
+    inline-size: 100%;
+  }
+
+  ::slotted(svg) {
+    display: block;
+    fill: currentColor;
+  }
+}
+
+:host(#{$prefix}-tab[icon-only]:not([type='contained'])),
+:host(
+    #{$prefix}-tab.#{$prefix}--tabs__nav-item--icon-only:not([type='contained'])
+  ) {
+  .#{$prefix}--tabs__nav-item-label-wrapper {
+    position: relative;
+    inset-block-start: convert.to-rem(1px);
+  }
+}
+
+:host(#{$prefix}-tab[icon-only][icon-size='lg']),
+:host(#{$prefix}-tab.#{$prefix}--tabs__nav-item--icon-only__20) {
+  block-size: $spacing-09;
+  inline-size: $spacing-09;
+}
+
 :host(#{$prefix}-tab[selected]) {
   .#{$prefix}--tabs__nav-link {
     @include type-style('heading-compact-01');
@@ -148,14 +250,18 @@ $inset-transition: inset 110ms motion(standard, productive);
   }
 }
 
-:host(#{$prefix}-tab:hover) {
+:host(#{$prefix}-tab:hover:not([selected])) {
   background-color: transparent;
-  box-shadow: 0 -1px 0 $background-hover;
 
   a.#{$prefix}--tabs__nav-link {
     border-block-end: $tab-underline-color-hover;
     color: $text-primary;
   }
+}
+
+:host(#{$prefix}-tab[icon-only]:hover),
+:host(#{$prefix}-tab.#{$prefix}--tabs__nav-item--icon-only:hover) {
+  box-shadow: none;
 }
 
 :host(#{$prefix}-tabs[type='contained'])
