@@ -149,17 +149,15 @@
     padding-inline-end: $spacing-08;
   }
 
-  .#{$prefix}--text-input--invalid.#{$prefix}--password-input {
-    padding-inline-end: convert.to-rem(64px);
-  }
-
-  .#{$prefix}--text-input--invalid
-    + .#{$prefix}--text-input--password__visibility__toggle {
-    inset-inline-end: $spacing-05;
+  .#{$prefix}--text-input--invalid.#{$prefix}--password-input,
+  .#{$prefix}--text-input--warning.#{$prefix}--password-input {
+    padding-inline-end: calc(layout.size('height') + 1.5rem);
   }
 
   .#{$prefix}--password-input-wrapper .#{$prefix}--text-input__invalid-icon {
-    inset-inline-end: $spacing-08;
+    @include layout.use('size', $default: 'md', $min: 'xs', $max: 'lg');
+
+    inset-inline-end: layout.size('height');
   }
 
   .#{$prefix}--text-input:disabled
@@ -236,10 +234,6 @@
     @include focus-outline('invalid');
 
     box-shadow: none;
-
-    .#{$prefix}--text-input--password__visibility__toggle {
-      inset-inline-end: $spacing-08;
-    }
   }
 
   //-----------------------------
