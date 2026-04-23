@@ -102,6 +102,7 @@ const args = {
 };
 
 const filterableArgs = {
+  autocomplete: 'off',
   clearSelectionDescription: 'Total items selected: ',
   clearSelectionText: 'To clear selection, press Delete or Backspace.',
   disabled: false,
@@ -122,6 +123,11 @@ const filterableArgs = {
 };
 
 const argTypes = {
+  autocomplete: {
+    control: 'text',
+    description:
+      'The autocomplete attribute for the filterable input. Prevents inconsistent browser autocomplete behavior. Defaults to "off".',
+  },
   clearSelectionDescription: {
     control: 'text',
     description:
@@ -378,6 +384,7 @@ export const Filterable = {
   decorators: [(story) => html` <div style="width:300px">${story()}</div> `],
   render: (args) => {
     const {
+      autocomplete,
       clearSelectionLabel,
       direction,
       disabled,
@@ -398,6 +405,7 @@ export const Filterable = {
     } = args ?? {};
     return html`
       <cds-multi-select
+        autocomplete=${ifDefined(autocomplete)}
         direction=${ifDefined(direction)}
         ?disabled=${disabled}
         ?invalid=${invalid}
@@ -440,6 +448,7 @@ export const FilterableWithSelectAll = {
   decorators: [(story) => html` <div style="width:300px">${story()}</div> `],
   render: (args) => {
     const {
+      autocomplete,
       clearSelectionLabel,
       direction,
       disabled,
@@ -460,6 +469,7 @@ export const FilterableWithSelectAll = {
     } = args ?? {};
     return html`
       <cds-multi-select
+        autocomplete=${ifDefined(autocomplete)}
         direction=${ifDefined(direction)}
         ?disabled=${disabled}
         ?invalid=${invalid}
@@ -497,6 +507,7 @@ export const FilterableWithAILabel = {
   argTypes,
   render: (args) => {
     const {
+      autocomplete,
       clearSelectionLabel,
       direction,
       disabled,
@@ -518,6 +529,7 @@ export const FilterableWithAILabel = {
     return html`
       <div style="width: 400px">
         <cds-multi-select
+          autocomplete=${ifDefined(autocomplete)}
           direction=${ifDefined(direction)}
           ?disabled=${disabled}
           ?invalid=${invalid}
@@ -567,6 +579,7 @@ export const FilterableWithLayer = {
   argTypes,
   render: (args) => {
     const {
+      autocomplete,
       clearSelectionLabel,
       direction,
       disabled,
@@ -588,6 +601,7 @@ export const FilterableWithLayer = {
     return html`
       <div style="width:300px">
         <cds-multi-select
+          autocomplete=${ifDefined(autocomplete)}
           direction=${ifDefined(direction)}
           ?disabled=${disabled}
           ?invalid=${invalid}
