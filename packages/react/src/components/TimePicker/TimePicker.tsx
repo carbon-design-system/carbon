@@ -142,6 +142,7 @@ const frFn = forwardRef<HTMLInputElement, TimePickerProps>;
 
 const TimePicker = frFn((props, ref) => {
   const {
+    ['aria-describedby']: ariaDescribedBy,
     children,
     className,
     inputClassName,
@@ -268,6 +269,11 @@ const TimePicker = frFn((props, ref) => {
   const readOnlyProps = {
     readOnly: readOnly,
   };
+  const describedBy = normalizedProps.invalid
+    ? normalizedProps.invalidId
+    : normalizedProps.warn
+      ? normalizedProps.warnId
+      : ariaDescribedBy;
 
   return (
     <div className={cx(`${prefix}--form-item`, className)}>
@@ -290,6 +296,8 @@ const TimePicker = frFn((props, ref) => {
             value={value}
             {...rest}
             {...readOnlyProps}
+            aria-describedby={describedBy}
+            aria-invalid={normalizedProps.invalid ? true : undefined}
           />
           {(normalizedProps.invalid || normalizedProps.warn) &&
             normalizedProps.icon && (
