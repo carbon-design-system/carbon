@@ -202,8 +202,11 @@ export const Popover: PopoverComponent & {
 
   const isTargetInDatePickerInsidePopover = (target: Node) => {
     if (!popover.current) return false;
+    // TODO: Revisit this DatePicker/Popover integration to avoid relying on
+    // Flatpickr internals (`_flatpickr`) and DOM traversal (`closest`) if we
+    // can introduce a more stable shared marker or ref between the components.
     const calendar =
-      target instanceof Element && target.closest?.('.flatpickr-calendar');
+      target instanceof Element && target.closest('.flatpickr-calendar');
     if (!calendar) return false;
     const inputs = popover.current.querySelectorAll('input');
     for (const input of inputs) {
