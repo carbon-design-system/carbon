@@ -59,7 +59,7 @@ argTypes: {
 **Leverage automatic type inference** from TypeScript definitions and JSDoc
 comments wherever possible. Only add manual argTypes when needed to:
 
-- Hide internal/unwanted controls: `table: { disable: true }`
+- Hide internal/unwanted controls: `parameters: { controls: { exclude/include: [''] }}`
 - Make controls readonly for variants: `table: { readonly: true }`
 - Specify action handlers: `action: 'onClick'`
 - Provide default values if not auto-inferred
