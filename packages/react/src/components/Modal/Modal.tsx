@@ -100,6 +100,12 @@ export interface ModalProps extends HTMLAttributes<HTMLDivElement> {
   danger?: boolean;
 
   /**
+   * Specify the message read by screen readers for the danger primary button.
+   * Defaults to an empty string; provide localized text to opt in.
+   */
+  dangerDescription?: string;
+
+  /**
    * **Experimental**: Provide a decorator component to be rendered inside the `Modal` component
    */
   decorator?: ReactNode;
@@ -293,6 +299,7 @@ const ModalDialog = React.forwardRef(function ModalDialog(
     onSecondarySubmit,
     primaryButtonDisabled = false,
     danger,
+    dangerDescription = '',
     alert,
     secondaryButtons,
     selectorPrimaryFocus = '[data-modal-primary-focus]',
@@ -746,6 +753,7 @@ const ModalDialog = React.forwardRef(function ModalDialog(
           <Button
             className={primaryButtonClass}
             kind={danger ? 'danger' : 'primary'}
+            dangerDescription={dangerDescription}
             disabled={loadingActive || primaryButtonDisabled}
             onClick={onRequestSubmit}
             ref={button}>
@@ -843,6 +851,7 @@ const ModalDialog = React.forwardRef(function ModalDialog(
             <Button
               className={primaryButtonClass}
               kind={danger ? 'danger' : 'primary'}
+              dangerDescription={dangerDescription}
               disabled={loadingActive || primaryButtonDisabled}
               onClick={onRequestSubmit}
               ref={button}>
@@ -924,6 +933,12 @@ Modal.propTypes = {
    * Specify whether the Modal is for dangerous actions
    */
   danger: PropTypes.bool,
+
+  /**
+   * Specify the message read by screen readers for the danger primary button.
+   * Defaults to an empty string; provide localized text to opt in.
+   */
+  dangerDescription: PropTypes.string,
 
   /**
    * **Experimental**: Provide a decorator component to be rendered inside the `Modal` component

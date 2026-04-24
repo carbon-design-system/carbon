@@ -145,7 +145,7 @@ class CDSButton extends HostListenerMixin(FocusMixin(LitElement)) {
    * Specify the message read by screen readers for the danger button variants
    */
   @property({ type: String, reflect: true, attribute: 'danger-description' })
-  dangerDescription = 'danger';
+  dangerDescription = '';
 
   /**
    * Specify whether the Button should be disabled, or not
@@ -317,6 +317,7 @@ class CDSButton extends HostListenerMixin(FocusMixin(LitElement)) {
     const classes = classMap(defaultClasses);
 
     const isDanger = kind?.includes('danger');
+    const hasDangerDescription = isDanger && Boolean(dangerDescription);
 
     if (href) {
       return disabled
@@ -404,7 +405,7 @@ class CDSButton extends HostListenerMixin(FocusMixin(LitElement)) {
             type="${ifDefined(type)}"
             aria-label="${ifDefined(tooltipText)}"
             aria-describedby="badge-indicator">
-            ${isDanger
+            ${hasDangerDescription
               ? html`<span class="${prefix}--visually-hidden"
                   >${dangerDescription}</span
                 >`

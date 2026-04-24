@@ -190,7 +190,7 @@ describe('cds-overflow-menu', () => {
       expect(dangerSpan).to.not.exist;
     });
 
-    it('should use default danger description', async () => {
+    it('should not render default danger description when none is provided', async () => {
       const el = await fixture(html`
         <cds-overflow-menu-item danger>Delete</cds-overflow-menu-item>
       `);
@@ -198,8 +198,7 @@ describe('cds-overflow-menu', () => {
       await el.updateComplete;
 
       const dangerSpan = el.shadowRoot?.querySelector('#danger-description');
-      expect(dangerSpan).to.exist;
-      expect(dangerSpan?.textContent).to.equal('danger');
+      expect(dangerSpan).to.not.exist;
     });
   });
 });

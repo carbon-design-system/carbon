@@ -67,7 +67,7 @@ class CDSmenuItem extends HostListenerMixin(HostListenerMixin(LitElement)) {
    * Specify the message read by screen readers for the danger menu item variant
    */
   @property({ type: String, attribute: 'danger-description' })
-  dangerDescription = 'danger';
+  dangerDescription = '';
 
   /**
    * Whether the menu submen for an item is open or not.
@@ -219,6 +219,7 @@ class CDSmenuItem extends HostListenerMixin(HostListenerMixin(LitElement)) {
     } = this;
 
     const isDanger = kind === MENU_ITEM_KIND.DANGER && !this.hasSubmenu;
+    const hasDangerDescription = isDanger && Boolean(dangerDescription);
 
     const menuClassName = this.context?.hasSelectableItems
       ? `${prefix}--menu--with-selectable-items`
@@ -233,7 +234,7 @@ class CDSmenuItem extends HostListenerMixin(HostListenerMixin(LitElement)) {
         <slot name="render-icon"></slot>
       </div>
       <div class="${prefix}--menu-item__label">${label}</div>
-      ${isDanger
+      ${hasDangerDescription
         ? html`<span id="danger-description" class="${prefix}--visually-hidden"
             >${dangerDescription}</span
           >`

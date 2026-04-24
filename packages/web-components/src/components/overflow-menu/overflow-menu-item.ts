@@ -49,7 +49,7 @@ class CDSOverflowMenuItem extends FocusMixin(LitElement) {
    * Specify the message read by screen readers for the danger over flow menu item variant
    */
   @property({ type: String, attribute: 'danger-description' })
-  dangerDescription = 'danger';
+  dangerDescription = '';
 
   /**
    * `true` if the overflow menu item should be disabled.
@@ -84,6 +84,7 @@ class CDSOverflowMenuItem extends FocusMixin(LitElement) {
 
   render() {
     const { _handleClick: handleClick } = this;
+    const hasDangerDescription = this.danger && Boolean(this.dangerDescription);
     return this.href
       ? html`
           <a
@@ -94,7 +95,7 @@ class CDSOverflowMenuItem extends FocusMixin(LitElement) {
             @click="${handleClick}">
             <div class="${prefix}--overflow-menu-options__option-content">
               <slot></slot>
-              ${this.danger
+              ${hasDangerDescription
                 ? html`<span
                     id="danger-description"
                     class="${prefix}--visually-hidden"
@@ -113,7 +114,7 @@ class CDSOverflowMenuItem extends FocusMixin(LitElement) {
             @click="${handleClick}">
             <div class="${prefix}--overflow-menu-options__option-content">
               <slot></slot>
-              ${this.danger
+              ${hasDangerDescription
                 ? html`<span
                     id="danger-description"
                     class="${prefix}--visually-hidden"

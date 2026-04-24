@@ -373,6 +373,38 @@ describe.each([
     );
   });
 
+  it('does not add a default danger description to the primary action', () => {
+    render(
+      <Component
+        danger
+        primaryButtonText="Delete"
+        data-testid="modal-danger-default"
+      />
+    );
+
+    expect(screen.getByRole('button', { name: 'Delete' })).not.toHaveAttribute(
+      'aria-describedby'
+    );
+  });
+
+  it('allows a localized danger description to be provided', () => {
+    render(
+      <Component
+        danger
+        dangerDescription="gefahr"
+        primaryButtonText="Delete"
+        data-testid="modal-danger-localized"
+      />
+    );
+
+    const button = screen.getByRole('button', { name: 'gefahr Delete' });
+
+    expect(button).toHaveAttribute('aria-describedby');
+    expect(screen.getByText('gefahr')).toHaveClass(
+      `${prefix}--visually-hidden`
+    );
+  });
+
   it('disables buttons when inline loading status is active', () => {
     render(
       <Component
