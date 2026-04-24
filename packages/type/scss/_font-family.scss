@@ -60,13 +60,14 @@ $font-families: (
     ),
 ) !default;
 
-/// Get the font-family for an IBM Plex font
+/// Get the user provided font-family or the font-family for an IBM Plex font as a fallback
 /// @param {String} $name
 /// @return {String}
 /// @access public
 /// @group @carbon/type
 @function font-family($name) {
-  @return map.get($font-families, $name);
+  $stack: map.get($font-families, $name);
+  @return string.unquote('var(--cds-font-family-#{$name}, #{$stack})');
 }
 
 /// Include the `font-family` definition for the given name in your selector
