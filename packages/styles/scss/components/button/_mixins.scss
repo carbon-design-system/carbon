@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2016, 2023
+// Copyright IBM Corp. 2016, 2026
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -123,8 +123,11 @@ $button-focus-color: custom-property.get-var('button-focus-color', $focus);
   background-color: $bg-color;
   color: $font-color;
 
-  &:hover {
-    background-color: $hover-bg-color;
+  // Apply hover styles only on devices that support hover
+  @media (any-hover: hover) {
+    &:hover {
+      background-color: $hover-bg-color;
+    }
   }
 
   &:focus {
