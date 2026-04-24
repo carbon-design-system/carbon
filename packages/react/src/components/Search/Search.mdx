@@ -17,7 +17,6 @@ import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
 ## Table of Contents
 
 - [Overview](#overview)
-- [Disabled](#disabled)
 - [Expandable](#expandable)
 - [Component API](#component-api)
 - [Feedback](#feedback)
@@ -32,18 +31,6 @@ import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
     {
       title: 'Open in Stackblitz',
       onClick: () => stackblitzPrefillConfig(SearchStories.Default),
-    },
-  ]}
-/>
-
-## Disabled
-
-<Canvas
-  of={SearchStories.Disabled}
-  additionalActions={[
-    {
-      title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(SearchStories.Disabled),
     },
   ]}
 />
