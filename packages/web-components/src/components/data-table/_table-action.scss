@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2019, 2024
+// Copyright IBM Corp. 2019, 2026
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -98,6 +98,9 @@
     }
 
     .#{$prefix}--search-close {
+      block-size: $spacing-09;
+      inline-size: $spacing-09;
+
       &::before {
         background-color: $background-hover;
         inline-size: 0;
@@ -120,6 +123,11 @@
 
 :host(#{$prefix}-table-toolbar-search[size='xs']),
 :host(#{$prefix}-table-toolbar-search[size='sm']) {
+  .#{$prefix}--search-close {
+    block-size: rem(32px);
+    inline-size: rem(32px);
+  }
+
   svg {
     padding: 0;
     inset-inline-start: $spacing-03;
