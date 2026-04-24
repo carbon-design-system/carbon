@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2025, 2025
+ * Copyright IBM Corp. 2025, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -81,12 +81,47 @@ describe('cds-checkbox', function () {
     expect(helper.textContent.trim()).to.equal('Helper text');
   });
 
+  it('should display helper-text when invalid is true but disabled', async () => {
+    const checkbox = html`<cds-checkbox
+      disabled
+      invalid
+      helper-text="Helper text"
+      >Checkbox Label</cds-checkbox
+    >`;
+    const el = await fixture(checkbox);
+
+    const helper = el.shadowRoot.querySelector('.cds--form__helper-text');
+
+    expect(helper).to.exist;
+    expect(helper.textContent.trim()).to.equal('Helper text');
+  });
+
   it('should set data-invalid when invalid attribute is true', async () => {
     const checkbox = html`<cds-checkbox invalid>Checkbox Label</cds-checkbox>`;
     const el = await fixture(checkbox);
 
     const inputElement = el.shadowRoot.querySelector('input');
     expect(inputElement.hasAttribute('data-invalid')).to.be.true;
+  });
+
+  it('should not set data-invalid when invalid attribute is true but readOnly', async () => {
+    const checkbox = html`<cds-checkbox readOnly invalid
+      >Checkbox Label</cds-checkbox
+    >`;
+    const el = await fixture(checkbox);
+
+    const inputElement = el.shadowRoot.querySelector('input');
+    expect(inputElement.hasAttribute('data-invalid')).to.be.false;
+  });
+
+  it('should not set data-invalid when invalid attribute is true but disabled', async () => {
+    const checkbox = html`<cds-checkbox disabled invalid
+      >Checkbox Label</cds-checkbox
+    >`;
+    const el = await fixture(checkbox);
+
+    const inputElement = el.shadowRoot.querySelector('input');
+    expect(inputElement.hasAttribute('data-invalid')).to.be.false;
   });
 
   it('should display invalid-text if invalid prop is true', async () => {
@@ -101,12 +136,50 @@ describe('cds-checkbox', function () {
     expect(invalidText.textContent.trim()).to.equal('Invalid text');
   });
 
+  it('should not display invalid-text if invalid prop is true but readOnly', async () => {
+    const checkbox = html`<cds-checkbox
+      readOnly
+      invalid
+      invalid-text="Invalid text"
+      >Checkbox Label</cds-checkbox
+    >`;
+    const el = await fixture(checkbox);
+
+    const invalidText = el.shadowRoot.querySelector('.cds--form-requirement');
+
+    expect(invalidText).not.to.exist;
+  });
+
+  it('should not display invalid-text if invalid prop is true but disabled', async () => {
+    const checkbox = html`<cds-checkbox
+      disabled
+      invalid
+      invalid-text="Invalid text"
+      >Checkbox Label</cds-checkbox
+    >`;
+    const el = await fixture(checkbox);
+
+    const invalidText = el.shadowRoot.querySelector('.cds--form-requirement');
+
+    expect(invalidText).not.to.exist;
+  });
+
   it('should respect readOnly prop', async () => {
     const checkbox = html`<cds-checkbox readOnly>Checkbox Label</cds-checkbox>`;
     const el = await fixture(checkbox);
 
     const inputElement = el.shadowRoot.querySelector('input');
     expect(inputElement.hasAttribute('aria-readonly')).to.be.true;
+  });
+
+  it('should remain disabled when readOnly and disabled are both true', async () => {
+    const checkbox = html`<cds-checkbox readOnly disabled
+      >Checkbox Label</cds-checkbox
+    >`;
+    const el = await fixture(checkbox);
+
+    const inputElement = el.shadowRoot.querySelector('input');
+    expect(inputElement.hasAttribute('disabled')).to.be.true;
   });
 
   it('should respect warn prop', async () => {
@@ -129,6 +202,28 @@ describe('cds-checkbox', function () {
 
     expect(warnText).to.exist;
     expect(warnText.textContent.trim()).to.equal('Warn text');
+  });
+
+  it('should not display warn-text if warn prop is true but readOnly', async () => {
+    const checkbox = html`<cds-checkbox readOnly warn warn-text="Warn text"
+      >Checkbox Label</cds-checkbox
+    >`;
+    const el = await fixture(checkbox);
+
+    const warnText = el.shadowRoot.querySelector('.cds--form-requirement');
+
+    expect(warnText).not.to.exist;
+  });
+
+  it('should not display warn-text if warn prop is true but disabled', async () => {
+    const checkbox = html`<cds-checkbox disabled warn warn-text="Warn text"
+      >Checkbox Label</cds-checkbox
+    >`;
+    const el = await fixture(checkbox);
+
+    const warnText = el.shadowRoot.querySelector('.cds--form-requirement');
+
+    expect(warnText).not.to.exist;
   });
 
   it('should fire cds-checkbox-changed event when checkbox is changed', async () => {

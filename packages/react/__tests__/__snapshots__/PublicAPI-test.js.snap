@@ -3456,6 +3456,7 @@ Map {
       "size": {
         "args": [
           [
+            "xs",
             "sm",
             "md",
             "lg",
@@ -6237,6 +6238,9 @@ Map {
       "label": {
         "type": "string",
       },
+      "legacyAutoalign": {
+        "type": "bool",
+      },
       "menuAlignment": {
         "type": "string",
       },
@@ -8629,6 +8633,7 @@ Map {
       "size": {
         "args": [
           [
+            "xs",
             "sm",
             "md",
             "lg",
@@ -8660,9 +8665,18 @@ Map {
       "className": {
         "type": "string",
       },
-      "small": {
-        "type": "bool",
+      "size": {
+        "args": [
+          [
+            "xs",
+            "sm",
+            "md",
+            "lg",
+          ],
+        ],
+        "type": "oneOf",
       },
+      "small": [Function],
     },
   },
   "SecondaryButton" => {},
@@ -10718,6 +10732,7 @@ Map {
       "size": {
         "args": [
           [
+            "xs",
             "sm",
             "md",
             "lg",
@@ -10758,6 +10773,17 @@ Map {
       },
       "hideLabel": {
         "type": "bool",
+      },
+      "size": {
+        "args": [
+          [
+            "xs",
+            "sm",
+            "md",
+            "lg",
+          ],
+        ],
+        "type": "oneOf",
       },
     },
   },
@@ -12051,15 +12077,18 @@ Map {
     "Dialog": {
       "$$typeof": Symbol(react.forward_ref),
       "propTypes": {
+        "aria-describedby": {
+          "type": "string",
+        },
         "aria-label": {
           "type": "string",
         },
         "aria-labelledby": {
           "type": "string",
         },
-        "ariaDescribedBy": {
-          "type": "string",
-        },
+        "ariaDescribedBy": [Function],
+        "ariaLabel": [Function],
+        "ariaLabelledBy": [Function],
         "children": {
           "type": "node",
         },
