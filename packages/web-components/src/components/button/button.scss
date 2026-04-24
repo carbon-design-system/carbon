@@ -14,6 +14,7 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/components/button' as *;
 @use '@carbon/styles/scss/components/code-snippet/code-snippet' as *;
 @use '@carbon/styles/scss/components/chat-button' as *;
+@use '@carbon/styles/scss/components/popover' as *;
 @use '@carbon/styles/scss/layout' as *;
 @use '@carbon/styles/scss/motion' as *;
 @use '@carbon/styles/scss/components/button/tokens' as button-tokens;
@@ -251,6 +252,85 @@ $css--plex: true !default;
 
     &::before {
       inset-block-start: rem(15px);
+    }
+  }
+}
+
+// popover in RTL
+:host(#{$prefix}-button:dir(rtl)),
+:host(#{$prefix}-modal-footer-button:dir(rtl)) {
+  .#{$prefix}--popover--left {
+    .#{$prefix}--popover-caret {
+      inset-inline-end: initial;
+      inset-inline-start: 100%;
+
+      &::after {
+        inset-inline-start: 1px;
+      }
+    }
+
+    .#{$prefix}--popover-content {
+      inset-inline-end: initial;
+      inset-inline-start: 100%;
+    }
+  }
+
+  .#{$prefix}--popover--right {
+    .#{$prefix}--popover-caret {
+      inset-inline-end: 100%;
+      inset-inline-start: initial;
+
+      &::after {
+        inset-inline-start: -1px;
+      }
+    }
+
+    .#{$prefix}--popover-content {
+      inset-inline-end: 100%;
+      inset-inline-start: initial;
+    }
+  }
+
+  .#{$prefix}--popover--top,
+  .#{$prefix}--popover--top-start,
+  .#{$prefix}--popover--top-end {
+    .#{$prefix}--popover-caret {
+      transform: translate(50%, calc(-1 * $popover-offset));
+    }
+  }
+
+  .#{$prefix}--popover--bottom,
+  .#{$prefix}--popover--bottom-start,
+  .#{$prefix}--popover--bottom-end {
+    .#{$prefix}--popover-caret {
+      transform: translate(50%, $popover-offset);
+    }
+  }
+
+  .#{$prefix}--popover--top {
+    .#{$prefix}--popover-content {
+      transform: translate(50%, calc(-100% - $popover-offset));
+    }
+  }
+
+  .#{$prefix}--popover--bottom {
+    .#{$prefix}--popover-content {
+      transform: translate(50%, calc(100% + $popover-offset));
+    }
+  }
+
+  .#{$prefix}--popover--top-start,
+  .#{$prefix}--popover--bottom-start {
+    .#{$prefix}--popover-content {
+      inset-inline-end: calc(50% - $popover-offset);
+      inset-inline-start: initial;
+    }
+  }
+
+  .#{$prefix}--popover--top-end,
+  .#{$prefix}--popover--bottom-end {
+    .#{$prefix}--popover-content {
+      inset-inline-start: calc(50% - $popover-offset);
     }
   }
 }
