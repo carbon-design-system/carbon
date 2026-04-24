@@ -110,7 +110,7 @@ const carbonFlatpickrMonthSelectPlugin = (config) => (fp) => {
         } else {
           fp.yearElements[0]
             .closest(config.selectorFlatpickrMonthYearContainer)
-            .insertAdjacentElement('afterend', monthElement);
+            .insertAdjacentElement('beforeend', monthElement);
         }
 
         return monthElement;
@@ -440,7 +440,6 @@ const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>((props, ref) => {
 
   const savedOnOpen = useSavedCallback(onOpen);
 
-  const effectiveWarn = warn && !invalid;
   const wrapperRef = useRef<HTMLDivElement>(null);
 
   const datePickerClasses = cx(`${prefix}--date-picker`, {
@@ -460,13 +459,18 @@ const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>((props, ref) => {
   const childrenWithProps = React.Children.toArray(children as any).map(
     // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
     (child: any, index) => {
+      const childInvalid = child.props?.invalid;
+      const childWarn = child.props?.warn;
+      const mergedInvalid = invalid ?? childInvalid;
+      const mergedWarn = mergedInvalid ? false : (warn ?? childWarn);
+
       if (index === 0 && isComponentElement(child, DatePickerInput)) {
         return React.cloneElement(child, {
           datePickerType,
           ref: startInputField,
           readOnly,
-          invalid,
-          warn: effectiveWarn,
+          invalid: mergedInvalid,
+          warn: mergedWarn,
         });
       }
       if (index === 1 && isComponentElement(child, DatePickerInput)) {
@@ -474,24 +478,24 @@ const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>((props, ref) => {
           datePickerType,
           ref: endInputField,
           readOnly,
-          invalid,
-          warn: effectiveWarn,
+          invalid: mergedInvalid,
+          warn: mergedWarn,
         });
       }
       if (index === 0) {
         return React.cloneElement(child, {
           ref: startInputField,
           readOnly,
-          invalid,
-          warn: effectiveWarn,
+          invalid: mergedInvalid,
+          warn: mergedWarn,
         });
       }
       if (index === 1) {
         return React.cloneElement(child, {
           ref: endInputField,
           readOnly,
-          invalid,
-          warn: effectiveWarn,
+          invalid: mergedInvalid,
+          warn: mergedWarn,
         });
       }
     }
@@ -654,6 +658,8 @@ const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>((props, ref) => {
     calendarRef.current = calendar;
 
     const handleInputFieldKeyDown = (event: KeyboardEvent) => {
+      if (readOnly && match(event, keys.Tab)) return;
+
       const {
         calendarContainer,
         selectedDateElem: fpSelectedDateElem,
