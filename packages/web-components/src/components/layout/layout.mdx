@@ -1,0 +1,95 @@
+import { ArgTypes, Meta, Canvas } from '@storybook/addon-docs/blocks';
+import { cdnJs } from '../../globals/internal/storybook-cdn';
+import { Markdown } from '@storybook/addon-docs/blocks';
+import * as LayoutStories from './layout.stories';
+
+<Meta isTemplate />
+
+# Layout
+
+[Source code](https://github.com/carbon-design-system/carbon/tree/main/packages/web-components/src/components/layout)
+
+{/* <!-- START doctoc generated TOC please keep comment here to allow auto update --> <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE --> */}
+
+## Table of Contents
+
+- [Overview](#overview)
+  - [cds-layout-constraint](#cds-layout-constraint)
+- [Component API](#component-api)
+- [Feedback](#feedback)
+
+{/* <!-- END doctoc generated TOC please keep comment here to allow auto update --> */}
+
+## Overview
+
+The `cds-layout` component provides a way to set layout contexts for specific
+parts of a web application. It uses Carbon's experimental `layout` sass module
+(exported from `@carbon/styles`) to control layout-related settings like size
+and density of all components within a layout context.
+
+All children components that support it will react to the `size` and `density`
+attributes you pass to `cds-layout`. Note that not all components support the
+entire spectrum of options available. In these cases, a component will typically
+cap out at the maximum or minimum size it supports in order to still best suit
+the layout context's intent.
+
+If a component is outside a layout context or `size` / `density` is not set, it
+will fall back to its default rendering.
+
+Components that are explicitly passed a `size` attribute are unaffected by the
+layout context. Example:
+```html
+<div>
+  <!-- This text input is always lg -->
+  <cds-text-input size="lg" label="Text input"></cds-text-input>
+
+  <!-- This text input will render with its default size (md) -->
+  <cds-text-input label="Text input"></cds-text-input>
+
+  <cds-layout size="sm">
+    <!-- This text input will still be lg -->
+    <cds-text-input size="lg" label="Text input"></cds-text-input>
+
+    <!-- This text input will be sm -->
+    <cds-text-input label="Text input"></cds-text-input>
+  </cds-layout>
+</div>
+```
+
+<Canvas of={LayoutStories.Default} />
+
+### cds-layout-constraint
+
+In order to apply specific constraints to children components that might differ
+from their own preference, the `cds-layout-constraint` utility component can be
+used.
+
+An example of this use case is the icon-only content switcher. It uses
+`cds-icon-button` under the hood which supports all sizes and defaults to `lg`.
+The `cds-content-switcher` though only supports `sm`->`lg` and defaults to `md`.
+```html
+<div>
+  <cds-layout-constraint size-default="md" size-min="sm" size-max="lg">
+    <!-- cds-icon-button is now locked to the sizes sm->lg and defaults to md -->
+    <cds-icon-button></cds-icon-button>
+  </cds-layout-constraint>
+</div>
+```
+
+The constraints for size must be passed as separate attributes:
+
+- `size-min`
+- `size-default`
+- `size-max`
+
+Example: `size-min="sm" size-max="lg"`
+
+## Component API
+
+<ArgTypes />
+
+## Feedback
+
+Help us improve this component by providing feedback, asking questions on Slack,
+or updating this file on
+[GitHub](https://github.com/carbon-design-system/carbon/edit/main/packages/web-components/src/components/layout/layout.mdx).

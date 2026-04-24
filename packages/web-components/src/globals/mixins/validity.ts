@@ -24,7 +24,22 @@ export enum VALIDATION_STATUS {
  * @param Base The base class.
  * @returns A mix-in implementing `.setCustomValidity()` method.
  */
-const ValidityMixin = <T extends Constructor<HTMLElement>>(Base: T) => {
+const ValidityMixin = <T extends Constructor<HTMLElement>>(
+  Base: T
+): {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  new (...args: any[]): {
+    _getValidityMessage(state: string): string | undefined;
+    _testValidity(): string;
+    invalid: boolean;
+    required: boolean;
+    requiredValidityMessage: string;
+    validityMessage: string;
+    value: string;
+    checkValidity(): boolean;
+    setCustomValidity(validityMessage: string): void;
+  };
+} & T => {
   abstract class ValidityMixinImpl extends Base {
     // Not using TypeScript `protected` due to: microsoft/TypeScript#17744
     // Using `string` instead of `VALIDATION_STATUS` until we can require TypeScript 3.8
@@ -118,7 +133,8 @@ const ValidityMixin = <T extends Constructor<HTMLElement>>(Base: T) => {
       this.validityMessage = validityMessage;
     }
   }
-  return ValidityMixinImpl;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  return ValidityMixinImpl as any;
 };
 
 export default ValidityMixin;
