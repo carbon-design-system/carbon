@@ -1,6 +1,6 @@
-# 4. Storybook Organization Standards
+# 6. Storybook Organization Standards
 
-Date: 2026-02-12
+Date: 2026-04-24
 
 ## Status
 
