@@ -370,17 +370,16 @@
   }
 
   // RTL overrides
-  [dir='rtl'] .#{$prefix}--checkbox-label::after {
+  .#{$prefix}--checkbox-label:dir(rtl)::after {
     margin-block-start: 0;
     margin-inline-start: convert.to-rem(-1px);
     transform-origin: center;
   }
 
-  [dir='rtl']
-    .#{$prefix}--checkbox:checked
-    + .#{$prefix}--checkbox-label::after,
-  [dir='rtl']
-    .#{$prefix}--checkbox-label[data-contained-checkbox-state='true']::after {
+  .#{$prefix}--checkbox:checked + .#{$prefix}--checkbox-label:dir(rtl)::after,
+  .#{$prefix}--checkbox-label[data-contained-checkbox-state='true']:dir(
+      rtl
+    )::after {
     transform: scale(1.2) rotate3d(0.5, 1, 0, 158deg);
   }
 

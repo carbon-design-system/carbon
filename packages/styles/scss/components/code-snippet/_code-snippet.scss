@@ -235,8 +235,9 @@ $copy-btn-feedback: $background-inverse !default;
     padding-inline-end: 0;
   }
 
-  [dir='rtl']
-    .#{$prefix}--snippet--multi.#{$prefix}--snippet--has-right-overflow::after {
+  .#{$prefix}--snippet--multi.#{$prefix}--snippet--has-right-overflow:dir(
+      rtl
+    )::after {
     background-image: linear-gradient(to left, transparent, $layer);
   }
 
@@ -456,7 +457,7 @@ $copy-btn-feedback: $background-inverse !default;
     pointer-events: auto;
   }
 
-  [dir='rtl'] .#{$prefix}--snippet--single .#{$prefix}--snippet-container {
+  .#{$prefix}--snippet--single .#{$prefix}--snippet-container:dir(rtl) {
     mask-image: linear-gradient(
       to left,
       #000000 calc(100% - #{$spacing-07}),
@@ -464,7 +465,7 @@ $copy-btn-feedback: $background-inverse !default;
     );
   }
 
-  [dir='rtl'] .#{$prefix}--snippet--multi .#{$prefix}--snippet-container {
+  .#{$prefix}--snippet--multi .#{$prefix}--snippet-container:dir(rtl) {
     mask-image: linear-gradient(
         to left,
         #000000 calc(100% - #{$spacing-07}),

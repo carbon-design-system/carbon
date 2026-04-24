@@ -162,6 +162,11 @@ $css--plex: true !default;
     box-shadow: to-rem(-1px) 0 0 0 button-tokens.$button-separator;
   }
 
+  // RTL overrides
+  :dir(rtl)::slotted(#{$prefix}-button:not(:first-of-type)) {
+    box-shadow: to-rem(1px) 0 0 0 button-tokens.$button-separator;
+  }
+
   ::slotted(#{$prefix}-button:focus-within) {
     box-shadow: inherit;
   }

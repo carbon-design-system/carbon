@@ -83,7 +83,8 @@ $divider-width: 1px;
   }
 
   .#{$prefix}--select-input {
-    padding: 0 2.25rem 0 $spacing-05;
+    padding-block: 0;
+    padding-inline: $spacing-05 2.25rem;
 
     &:focus {
       background-color: transparent;

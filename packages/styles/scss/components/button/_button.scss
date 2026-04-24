@@ -530,7 +530,7 @@
   }
 
   // RTL overrides
-  [dir='rtl'] .#{$prefix}--btn-set .#{$prefix}--btn:not(:focus) {
+  .#{$prefix}--btn-set .#{$prefix}--btn:not(:focus):dir(rtl) {
     box-shadow: convert.to-rem(1px) 0 0 0 $button-separator;
   }
 

@@ -196,8 +196,9 @@
     inset-inline-start: $caret-size * 2;
   }
 
-  [dir='rtl']
-    .#{$prefix}--breadcrumb-menu-options.#{$prefix}--overflow-menu-options::after {
+  .#{$prefix}--breadcrumb-menu-options.#{$prefix}--overflow-menu-options:dir(
+      rtl
+    )::after {
     inset-inline-end: $caret-size * 2;
     inset-inline-start: initial;
   }

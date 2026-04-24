@@ -177,7 +177,7 @@
   }
 
   // RTL overrides
-  [dir='rtl'] .#{$prefix}--pagination-nav__list-item svg {
+  .#{$prefix}--pagination-nav__list-item:dir(rtl) svg {
     transform: rotate(0.5turn);
   }
 }

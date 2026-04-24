@@ -20,10 +20,3 @@ $css--plex: true !default;
     fill: $icon-disabled;
   }
 }
-
-// rtl
-:host(#{$prefix}-pagination-nav:dir(rtl)) {
-  .#{$prefix}--pagination-nav__list-item svg {
-    transform: rotate(0.5turn);
-  }
-}

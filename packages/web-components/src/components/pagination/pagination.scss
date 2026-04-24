@@ -35,8 +35,14 @@ $css--plex: true !default;
     block-size: 100%;
   }
 
+  // todo: this doesn't work for pagination rtl. need to fix
   .#{$prefix}--pagination__button svg {
     transform: rotate(0) #{'/*rtl:rotate(180deg)*/'};
+  }
+
+  // todo: styles couldn't be applied to cds-select svg arrow. need to fix
+  .cds--select:dir(rtl) svg {
+    transform: translate(0.5rem, -50%);
   }
 }
 

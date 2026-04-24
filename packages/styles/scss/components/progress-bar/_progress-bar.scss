@@ -67,7 +67,7 @@
     transition: transform $duration-fast-02 motion(standard, productive);
   }
 
-  [dir='rtl'] .#{$prefix}--progress-bar__bar {
+  .#{$prefix}--progress-bar__bar:dir(rtl) {
     transform-origin: 100% center;
   }
 
@@ -89,8 +89,7 @@
     inset: 0;
   }
 
-  [dir='rtl']
-    .#{$prefix}--progress-bar--indeterminate
+  .#{$prefix}--progress-bar--indeterminate:dir(rtl)
     .#{$prefix}--progress-bar__track::after {
     animation-name: #{$prefix}--progress-bar-indeterminate-rtl;
   }
