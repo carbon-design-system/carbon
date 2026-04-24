@@ -112,6 +112,36 @@ export const upgrades = [
     ],
   },
   {
+    name: 'ibm-products-update-page-header',
+    description: 'Rewrites PageHeader imports to IBM Products packages',
+    migrate: async (options) => {
+      const transform = path.join(
+        TRANSFORM_DIR,
+        'ibm-products-update-page-header.js'
+      );
+      const paths =
+        Array.isArray(options.paths) && options.paths.length > 0
+          ? options.paths
+          : await glob(['**/*.js', '**/*.jsx', '**/*.ts', '**/*.tsx'], {
+              cwd: options.workspaceDir,
+              ignore: [
+                '**/es/**',
+                '**/lib/**',
+                '**/umd/**',
+                '**/node_modules/**',
+                '**/storybook-static/**',
+              ],
+            });
+
+      await run({
+        dry: !options.write,
+        transform,
+        paths,
+        verbose: options.verbose,
+      });
+    },
+  },
+  {
     name: 'v11: default update',
     description:
       'changes carbon-components, carbon-components-react, and carbon-icons to @carbon/react',
