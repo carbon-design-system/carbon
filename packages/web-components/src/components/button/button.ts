@@ -404,7 +404,7 @@ class CDSButton extends HostListenerMixin(FocusMixin(LitElement)) {
             tabindex="${tabIndex}"
             type="${ifDefined(type)}"
             aria-label="${ifDefined(tooltipText)}"
-            aria-describedby="${hasDangerDescription ? "badge-indicator" : ""}">
+            aria-describedby="${hasDangerDescription ? 'badge-indicator' : ''}">
             ${hasDangerDescription
               ? html`<span class="${prefix}--visually-hidden"
                   >${dangerDescription}</span
