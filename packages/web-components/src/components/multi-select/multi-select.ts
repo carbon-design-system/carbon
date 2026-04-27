@@ -789,38 +789,53 @@ class CDSMultiSelect extends CDSDropdown {
           values.indexOf((elem as CDSMultiSelectItem).value) >= 0 &&
           !(elem as CDSMultiSelectItem).isSelectAll
       ).length;
-
-      if (this.selectionFeedback === SELECTION_FEEDBACK_OPTION.TOP) {
-        const sortedMenuItems = this.sortItems(items, {
-          values,
-          compareItems: this.compareItems,
-          locale,
-        });
-
-        if (aiLabel) {
-          sortedMenuItems.unshift(aiLabel);
-        }
-
-        this.replaceChildren(...sortedMenuItems);
-      }
     }
-    if (changedProperties.has('open')) {
-      if (
-        this.selectionFeedback === SELECTION_FEEDBACK_OPTION.TOP_AFTER_REOPEN
-      ) {
-        const sortedMenuItems = this.sortItems(items, {
-          values,
-          compareItems: this.compareItems,
-          locale,
-        });
 
-        if (aiLabel) {
-          sortedMenuItems.unshift(aiLabel);
-        }
-        sortedMenuItems.forEach((item) => {
-          this.appendChild(item);
-        });
+    const shouldSortItems =
+      changedProperties.has('value') ||
+      changedProperties.has('compareItems') ||
+      changedProperties.has('sortItems') ||
+      changedProperties.has('locale');
+
+    if (
+      shouldSortItems &&
+      this.selectionFeedback === SELECTION_FEEDBACK_OPTION.TOP
+    ) {
+      const sortedMenuItems = this.sortItems(items, {
+        values,
+        compareItems: this.compareItems,
+        locale,
+      });
+
+      if (aiLabel) {
+        sortedMenuItems.unshift(aiLabel);
       }
+
+      this.replaceChildren(...sortedMenuItems);
+    }
+
+    const shouldSortItemsAfterReopen =
+      changedProperties.has('open') ||
+      changedProperties.has('compareItems') ||
+      changedProperties.has('sortItems') ||
+      changedProperties.has('locale');
+
+    if (
+      shouldSortItemsAfterReopen &&
+      this.selectionFeedback === SELECTION_FEEDBACK_OPTION.TOP_AFTER_REOPEN
+    ) {
+      const sortedMenuItems = this.sortItems(items, {
+        values,
+        compareItems: this.compareItems,
+        locale,
+      });
+
+      if (aiLabel) {
+        sortedMenuItems.unshift(aiLabel);
+      }
+      sortedMenuItems.forEach((item) => {
+        this.appendChild(item);
+      });
     }
     return true;
   }
