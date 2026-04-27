@@ -116,9 +116,10 @@ alphabetically by default.
 ### `compareItems` property
 
 The `compareItems` property allows you to customize how items are compared
-during sorting. Items are sorted alphabetically by default. The custom function
-should return a number whose sign indicates the relative order of the two
-elements: negative if a is less than b, positive if a is greater than b, and
+during sorting when `selection-feedback` is set to `top` or `top-after-reopen`.
+Items are sorted alphabetically by default with either setting. The custom
+function should return a number whose sign indicates the relative order of the
+two elements: negative if a is less than b, positive if a is greater than b, and
 zero if they are equal.
 
 #### Example: Sort items in reverse alphabetical order
