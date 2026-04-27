@@ -74,10 +74,25 @@
     min-block-size: convert.to-rem(48px);
   }
 
-  .#{$prefix}--pagination .#{$prefix}--number input[type='number'] {
-    border: none;
-    min-inline-size: auto;
-    padding-inline-end: 0;
+  .#{$prefix}--pagination .#{$prefix}--number-input__page-number:focus {
+    @include focus-outline('outline');
+  }
+
+  .#{$prefix}--pagination .#{$prefix}--number-input__page-number {
+    @include component-reset.reset;
+
+    background-color: $layer;
+    block-size: $spacing-08;
+    padding-inline-end: $spacing-01;
+    padding-inline-start: $spacing-03;
+
+    &--sm {
+      block-size: $spacing-07;
+    }
+
+    &--lg {
+      block-size: $spacing-09;
+    }
   }
 
   // Extra specificity is needed to preserve padding

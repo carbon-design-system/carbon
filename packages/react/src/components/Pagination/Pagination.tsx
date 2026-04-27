@@ -9,7 +9,6 @@ import { CaretLeft, CaretRight } from '@carbon/icons-react';
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 
 import { IconButton } from '../IconButton';
-import { NumberInput } from '../NumberInput';
 import PropTypes from 'prop-types';
 import Select from '../Select';
 import SelectItem from '../SelectItem';
@@ -376,19 +375,13 @@ const Pagination = React.forwardRef(
       }
     }
 
-    function handlePageInputChange(event) {
-      const inputValue = Number(event.target.value);
-      const page = Math.max(1, Math.min(inputValue, totalPages));
-
-      if (page > 0 && page <= totalPages) {
-        setPage(page);
-
-        if (onChange) {
-          onChange({
-            page,
-            pageSize,
-          });
-        }
+    function handlePageInputChange(e) {
+      if (e.target.value > totalPages) {
+        setPage(totalPages);
+      } else if (e.target.value < 1) {
+        setPage(1);
+      } else {
+        setPage(e.target.value);
       }
     }
 
@@ -484,30 +477,18 @@ const Pagination = React.forwardRef(
           ) : (
             <>
               {totalPages > PAGINATION_PAGE_NUMBER_THRESHOLD ? (
-                <NumberInput
+                <input
                   id={`${prefix}-pagination-input-${inputId}`}
-                  className={`${prefix}--number-input__page-number`}
-                  label={pageSelectLabelText(totalPages)}
-                  hideLabel
-                  allowEmpty
-                  placeholder="1"
-                  hideSteppers
+                  className={cx(`${prefix}--number-input__page-number`, {
+                    [`${prefix}--number-input__page-number--${size}`]: size,
+                  })}
                   min={1}
                   max={totalPages}
                   value={page}
-                  onKeyDown={(e) => {
-                    if (e.code.startsWith('Digit')) {
-                      if (Number(page + e.key) > totalPages) {
-                        setPage(totalPages);
-                        e.preventDefault();
-                      }
-                    }
-                  }}
-                  size={size}
+                  type="number"
                   style={{
-                    inlineSize: `calc(${String(page).length}ch + 2rem)`,
+                    inlineSize: `calc(${String(page).length}ch + 1.8rem)`,
                   }}
-                  validate={() => true}
                   onChange={handlePageInputChange}
                   disabled={pageInputDisabled || disabled}
                 />
