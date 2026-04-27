@@ -74,32 +74,11 @@
     min-block-size: convert.to-rem(48px);
   }
 
-  .#{$prefix}--pagination .#{$prefix}--select {
-    align-items: center;
-    block-size: 100%;
-  }
-
-  .#{$prefix}--pagination .#{$prefix}--select-input--inline__wrapper {
-    display: flex;
-    block-size: 100%;
-  }
-
-  .#{$prefix}--pagination .#{$prefix}--select-input {
-    @include type-style('body-compact-01');
-
-    block-size: 100%;
-
-    inline-size: auto;
-    line-height: convert.to-rem(40px);
-
+  // Number input for page selection (when > 100 pages)
+  .#{$prefix}--pagination .#{$prefix}--number input[type='number'] {
+    border: none;
     min-inline-size: auto;
-
-    // Firefox-specific fix for three-digit numbers
-    // stylelint-disable-next-line at-rule-no-vendor-prefix
-    @-moz-document url-prefix() {
-      padding-inline-end: $spacing-05;
-      text-overflow: clip;
-    }
+    padding-inline-end: 0;
   }
 
   // Extra specificity is needed to preserve padding
@@ -107,32 +86,6 @@
     .#{$prefix}--select--inline
     .#{$prefix}--select-input {
     padding-inline: $spacing-05 2.25rem;
-  }
-
-  .#{$prefix}--pagination--sm .#{$prefix}--select-input {
-    line-height: convert.to-rem(32px);
-  }
-
-  .#{$prefix}--pagination--lg .#{$prefix}--select-input {
-    line-height: convert.to-rem(48px);
-  }
-
-  .#{$prefix}--pagination .#{$prefix}--select-input:hover {
-    background: $layer-hover;
-  }
-
-  .#{$prefix}--pagination
-    .#{$prefix}--select--inline
-    .#{$prefix}--select-input:focus,
-  .#{$prefix}--pagination
-    .#{$prefix}--select--inline
-    .#{$prefix}--select-input:focus
-    option,
-  .#{$prefix}--pagination
-    .#{$prefix}--select--inline
-    .#{$prefix}--select-input:focus
-    optgroup {
-    background-color: $layer;
   }
 
   .#{$prefix}--pagination .#{$prefix}--select__arrow {
@@ -217,26 +170,7 @@
   .#{$prefix}--btn--ghost.#{$prefix}--pagination__button {
     @include component-reset.reset;
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: none;
-    margin: 0;
-    background: none;
-    block-size: convert.to-rem(40px);
     border-inline-start: 1px solid $border-subtle;
-    cursor: pointer;
-    fill: $icon-primary;
-    inline-size: convert.to-rem(40px);
-    min-block-size: convert.to-rem(32px);
-    transition:
-      outline $duration-fast-02 motion(standard, productive),
-      background-color $duration-fast-02 motion(standard, productive);
-  }
-
-  .#{$prefix}--pagination__button > svg,
-  .#{$prefix}--btn--ghost.#{$prefix}--pagination__button > svg {
-    margin-block-start: 0;
   }
 
   [dir='rtl'] .#{$prefix}--pagination__button > svg,
@@ -244,46 +178,11 @@
     transform: rotate(0.5turn);
   }
 
-  .#{$prefix}--pagination--sm .#{$prefix}--pagination__button,
-  .#{$prefix}--pagination--sm
-    .#{$prefix}--btn--ghost.#{$prefix}--pagination__button {
-    block-size: convert.to-rem(32px);
-    inline-size: convert.to-rem(32px);
-  }
-
-  .#{$prefix}--pagination--lg .#{$prefix}--pagination__button,
-  .#{$prefix}--pagination--lg
-    .#{$prefix}--btn--ghost.#{$prefix}--pagination__button {
-    block-size: convert.to-rem(48px);
-    inline-size: convert.to-rem(48px);
-  }
-
   .#{$prefix}--pagination__button:focus,
   .#{$prefix}--btn--ghost:focus.#{$prefix}--pagination__button {
     @include focus-outline('outline');
 
     border-inline-start: 0;
-  }
-
-  .#{$prefix}--pagination__button:hover,
-  .#{$prefix}--btn--ghost:hover.#{$prefix}--pagination__button {
-    background: $layer-hover;
-  }
-
-  .#{$prefix}--pagination__button--no-index,
-  .#{$prefix}--btn--ghost.#{$prefix}--pagination__button--no-index {
-    cursor: not-allowed;
-    fill: $icon-disabled;
-  }
-
-  .#{$prefix}--pagination__button:disabled:hover,
-  .#{$prefix}--pagination__button--no-index:hover,
-  .#{$prefix}--btn--ghost:disabled:hover.#{$prefix}--pagination__button,
-  .#{$prefix}--btn--ghost:hover.#{$prefix}--pagination__button--no-index {
-    border-color: $border-subtle;
-    background: $layer;
-    cursor: not-allowed;
-    fill: $icon-disabled;
   }
 
   // Skeleton state

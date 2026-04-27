@@ -9,6 +9,7 @@ import { CaretLeft, CaretRight } from '@carbon/icons-react';
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 
 import { IconButton } from '../IconButton';
+import { NumberInput } from '../NumberInput';
 import PropTypes from 'prop-types';
 import Select from '../Select';
 import SelectItem from '../SelectItem';
@@ -17,6 +18,8 @@ import isEqual from 'react-fast-compare';
 import { useFallbackId } from '../../internal/useId';
 import { usePreviousValue } from '../../internal/usePreviousValue';
 import { usePrefix } from '../../internal/usePrefix';
+
+export const PAGINATION_PAGE_NUMBER_THRESHOLD = 30;
 
 type ExcludedAttributes = 'id' | 'onChange';
 
@@ -244,19 +247,12 @@ const Pagination = React.forwardRef(
       ? Math.max(Math.ceil(totalItems / pageSize), 1)
       : 1;
     const backButtonDisabled = disabled || page === 1;
-    const backButtonClasses = cx({
-      [`${prefix}--pagination__button`]: true,
-      [`${prefix}--pagination__button--backward`]: true,
-      [`${prefix}--pagination__button--no-index`]: backButtonDisabled,
-    });
     const forwardButtonDisabled =
       disabled || (page === totalPages && !pagesUnknown);
-    const forwardButtonClasses = cx({
-      [`${prefix}--pagination__button`]: true,
-      [`${prefix}--pagination__button--forward`]: true,
-      [`${prefix}--pagination__button--no-index`]: forwardButtonDisabled,
-    });
-    const selectItems = renderSelectItems(totalPages);
+    const selectItems =
+      totalPages <= PAGINATION_PAGE_NUMBER_THRESHOLD
+        ? renderSelectItems(totalPages)
+        : [];
 
     const focusMap = {
       backward: backBtnRef,
@@ -381,12 +377,10 @@ const Pagination = React.forwardRef(
     }
 
     function handlePageInputChange(event) {
-      const page = Number(event.target.value);
-      if (
-        page > 0 &&
-        totalItems &&
-        page <= Math.max(Math.ceil(totalItems / pageSize), 1)
-      ) {
+      const inputValue = Number(event.target.value);
+      const page = Math.max(1, Math.min(inputValue, totalPages));
+
+      if (page > 0 && page <= totalPages) {
         setPage(page);
 
         if (onChange) {
@@ -454,6 +448,7 @@ const Pagination = React.forwardRef(
             className={`${prefix}--select__item-count`}
             labelText=""
             hideLabel
+            size={size}
             noLabel
             inline
             onChange={handleSizeChange}
@@ -488,18 +483,49 @@ const Pagination = React.forwardRef(
             </span>
           ) : (
             <>
-              <Select
-                id={`${prefix}-pagination-select-${inputId}-right`}
-                className={`${prefix}--select__page-number`}
-                labelText={pageSelectLabelText(totalPages)}
-                inline
-                hideLabel
-                onChange={handlePageInputChange}
-                value={page}
-                key={page}
-                disabled={pageInputDisabled || disabled}>
-                {selectItems}
-              </Select>
+              {totalPages > PAGINATION_PAGE_NUMBER_THRESHOLD ? (
+                <NumberInput
+                  id={`${prefix}-pagination-input-${inputId}`}
+                  className={`${prefix}--number-input__page-number`}
+                  label={pageSelectLabelText(totalPages)}
+                  hideLabel
+                  allowEmpty
+                  placeholder="1"
+                  hideSteppers
+                  min={1}
+                  max={totalPages}
+                  value={page}
+                  onKeyDown={(e) => {
+                    if (e.code.startsWith('Digit')) {
+                      if (Number(page + e.key) > totalPages) {
+                        setPage(totalPages);
+                        e.preventDefault();
+                      }
+                    }
+                  }}
+                  size={size}
+                  style={{
+                    inlineSize: `calc(${String(page).length}ch + 2rem)`,
+                  }}
+                  validate={() => true}
+                  onChange={handlePageInputChange}
+                  disabled={pageInputDisabled || disabled}
+                />
+              ) : (
+                <Select
+                  id={`${prefix}-pagination-select-${inputId}-right`}
+                  className={`${prefix}--select__page-number`}
+                  labelText={pageSelectLabelText(totalPages)}
+                  inline
+                  hideLabel
+                  size={size}
+                  onChange={handlePageInputChange}
+                  value={page}
+                  key={page}
+                  disabled={pageInputDisabled || disabled}>
+                  {selectItems}
+                </Select>
+              )}
               <span className={`${prefix}--pagination__text`}>
                 {pageRangeText(page, totalPages)}
               </span>
@@ -510,9 +536,10 @@ const Pagination = React.forwardRef(
               align="top"
               disabled={backButtonDisabled}
               kind="ghost"
-              className={backButtonClasses}
+              className={`${prefix}--pagination__button`}
               label={backwardText}
               aria-label={backwardText}
+              size={size}
               onClick={decrementPage}
               ref={backBtnRef}>
               <CaretLeft />
@@ -521,9 +548,10 @@ const Pagination = React.forwardRef(
               align="top"
               disabled={forwardButtonDisabled || isLastPage}
               kind="ghost"
-              className={forwardButtonClasses}
+              className={`${prefix}--pagination__button`}
               label={forwardText}
               aria-label={forwardText}
+              size={size}
               onClick={incrementPage}
               ref={forwardBtnRef}>
               <CaretRight />

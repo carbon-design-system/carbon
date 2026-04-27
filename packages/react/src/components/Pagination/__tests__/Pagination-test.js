@@ -592,5 +592,104 @@ describe('Pagination', () => {
         expect.objectContaining({ page: 1, pageSize: 3 })
       );
     });
+
+    it('should render a number input when there are more than 100 pages', () => {
+      render(
+        <Pagination totalItems={1010} pageSizes={[10]} pageSize={10} page={1} />
+      );
+
+      // Should render number input instead of select
+      expect(
+        document.querySelector('.cds--number-input__page-number')
+      ).toBeInTheDocument();
+      expect(
+        document.querySelector('.cds--select__page-number')
+      ).not.toBeInTheDocument();
+    });
+
+    it('should render a select when there are 100 or fewer pages', () => {
+      render(
+        <Pagination totalItems={1000} pageSizes={[10]} pageSize={10} page={1} />
+      );
+
+      // Should render select instead of number input
+      expect(
+        document.querySelector('.cds--select__page-number')
+      ).toBeInTheDocument();
+      expect(
+        document.querySelector('.cds--number-input__page-number')
+      ).not.toBeInTheDocument();
+    });
+
+    it('should call onChange when changing page using number input', async () => {
+      const onChange = jest.fn();
+      render(
+        <Pagination
+          totalItems={1010}
+          pageSizes={[10]}
+          pageSize={10}
+          page={1}
+          onChange={onChange}
+        />
+      );
+
+      const numberInput = document.querySelector(
+        '.cds--number-input__page-number input'
+      );
+      await userEvent.clear(numberInput);
+      await userEvent.type(numberInput, '50');
+
+      expect(onChange).toHaveBeenCalledWith(
+        expect.objectContaining({ page: 50 })
+      );
+    });
+
+    it('should not allow page numbers greater than total pages in number input', async () => {
+      const onChange = jest.fn();
+      render(
+        <Pagination
+          totalItems={1010}
+          pageSizes={[10]}
+          pageSize={10}
+          page={1}
+          onChange={onChange}
+        />
+      );
+
+      const numberInput = document.querySelector(
+        '.cds--number-input__page-number input'
+      );
+      await userEvent.clear(numberInput);
+      await userEvent.type(numberInput, '200');
+
+      // Should not call onChange for invalid page number (200 > 101 total pages)
+      expect(onChange).not.toHaveBeenCalledWith(
+        expect.objectContaining({ page: 200 })
+      );
+    });
+
+    it('should not allow page numbers less than 1 in number input', async () => {
+      const onChange = jest.fn();
+      render(
+        <Pagination
+          totalItems={1010}
+          pageSizes={[10]}
+          pageSize={10}
+          page={5}
+          onChange={onChange}
+        />
+      );
+
+      const numberInput = document.querySelector(
+        '.cds--number-input__page-number input'
+      );
+      await userEvent.clear(numberInput);
+      await userEvent.type(numberInput, '0');
+
+      // Should not call onChange for invalid page number (0 < 1)
+      expect(onChange).not.toHaveBeenCalledWith(
+        expect.objectContaining({ page: 0 })
+      );
+    });
   });
 });
