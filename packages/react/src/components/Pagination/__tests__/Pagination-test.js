@@ -607,9 +607,9 @@ describe('Pagination', () => {
       ).not.toBeInTheDocument();
     });
 
-    it('should render a select when there are 100 or fewer pages', () => {
+    it('should render a select when there are 30 or fewer pages', () => {
       render(
-        <Pagination totalItems={1000} pageSizes={[10]} pageSize={10} page={1} />
+        <Pagination totalItems={300} pageSizes={[10]} pageSize={10} page={1} />
       );
 
       // Should render select instead of number input
