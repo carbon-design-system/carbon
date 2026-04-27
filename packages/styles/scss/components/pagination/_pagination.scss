@@ -74,7 +74,6 @@
     min-block-size: convert.to-rem(48px);
   }
 
-  // Number input for page selection (when > 100 pages)
   .#{$prefix}--pagination .#{$prefix}--number input[type='number'] {
     border: none;
     min-inline-size: auto;
