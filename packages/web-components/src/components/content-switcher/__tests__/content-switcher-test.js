@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2025
+ * Copyright IBM Corp. 2025, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -136,6 +136,130 @@ describe('cds-content-switcher', function () {
     await eventLeft.detail.item.updateComplete;
     expect(eventLeft.detail.item.getAttribute('name')).to.equal('one');
     expect(eventLeft.detail.item.getAttribute('value')).to.equal('all');
+  });
+
+  it('should NOT emit event on keydown (ArrowRight/ArrowLeft) when selectionMode is set to manual', async () => {
+    const el = await fixture(html`
+      <cds-content-switcher selection-mode="manual">
+        <cds-content-switcher-item name="one" value="all">
+          First section
+        </cds-content-switcher-item>
+        <cds-content-switcher-item name="two" value="cloudFoundry">
+          Second section
+        </cds-content-switcher-item>
+        <cds-content-switcher-item name="three" value="staging">
+          Third section
+        </cds-content-switcher-item>
+      </cds-content-switcher>
+    `);
+
+    await el.updateComplete;
+    const items = el.querySelectorAll('cds-content-switcher-item');
+    const button = items[0].shadowRoot.querySelector('button');
+    button.focus();
+    let eventFired = false;
+    const eventHandler = () => {
+      eventFired = true;
+    };
+    el.addEventListener('cds-content-switcher-selected', eventHandler);
+    await sendKeys({ press: 'ArrowRight' });
+    await el.updateComplete;
+    expect(eventFired).to.be.false;
+    await sendKeys({ press: 'ArrowLeft' });
+    await el.updateComplete;
+    expect(eventFired).to.be.false;
+    el.removeEventListener('cds-content-switcher-selected', eventHandler);
+  });
+
+  it('should emit event on click when selectionMode is manual', async () => {
+    const el = await fixture(html`
+      <cds-content-switcher selection-mode="manual">
+        <cds-content-switcher-item name="one" value="all">
+          First section
+        </cds-content-switcher-item>
+        <cds-content-switcher-item name="two" value="cloudFoundry">
+          Second section
+        </cds-content-switcher-item>
+        <cds-content-switcher-item name="three" value="staging">
+          Third section
+        </cds-content-switcher-item>
+      </cds-content-switcher>
+    `);
+
+    await el.updateComplete;
+
+    const items = el.querySelectorAll('cds-content-switcher-item');
+    const second = items[1];
+    await second.updateComplete;
+
+    const eventPromise = oneEvent(el, 'cds-content-switcher-selected');
+    const button = second.shadowRoot.querySelector('button');
+    button.click();
+
+    const { detail } = await eventPromise;
+
+    expect(detail.item).to.equal(second);
+    expect(detail.item.getAttribute('name')).to.equal('two');
+    expect(detail.item.getAttribute('value')).to.equal('cloudFoundry');
+    expect(detail.item.textContent.trim()).to.equal('Second section');
+
+    expect(detail.index).to.equal(1);
+    expect(detail.name).to.equal('two');
+    expect(detail.text).to.equal('Second section');
+  });
+
+  it('should emit event on Enter/Space key when selectionMode is manual', async () => {
+    const el = await fixture(html`
+      <cds-content-switcher selection-mode="manual">
+        <cds-content-switcher-item name="one" value="all">
+          First section
+        </cds-content-switcher-item>
+        <cds-content-switcher-item name="two" value="cloudFoundry">
+          Second section
+        </cds-content-switcher-item>
+        <cds-content-switcher-item name="three" value="staging">
+          Third section
+        </cds-content-switcher-item>
+      </cds-content-switcher>
+    `);
+
+    await el.updateComplete;
+
+    const items = el.querySelectorAll('cds-content-switcher-item');
+    const button = items[0].shadowRoot.querySelector('button');
+    button.focus();
+
+    await sendKeys({ press: 'ArrowRight' });
+    await el.updateComplete;
+    await items[1].updateComplete;
+
+    let eventPromise = oneEvent(el, 'cds-content-switcher-selected');
+    await sendKeys({ press: 'Enter' });
+    let { detail } = await eventPromise;
+
+    expect(detail.item).to.equal(items[1]);
+    expect(detail.item.getAttribute('name')).to.equal('two');
+    expect(detail.item.getAttribute('value')).to.equal('cloudFoundry');
+    expect(detail.item.textContent.trim()).to.equal('Second section');
+    expect(detail.index).to.equal(1);
+    expect(detail.name).to.equal('two');
+    expect(detail.text).to.equal('Second section');
+
+    await sendKeys({ press: 'ArrowRight' });
+    await el.updateComplete;
+    await items[2].updateComplete;
+
+    eventPromise = oneEvent(el, 'cds-content-switcher-selected');
+    await sendKeys({ press: ' ' });
+    ({ detail } = await eventPromise);
+
+    expect(detail.item).to.equal(items[2]);
+    expect(detail.item.getAttribute('name')).to.equal('three');
+    expect(detail.item.getAttribute('value')).to.equal('staging');
+    expect(detail.item.textContent.trim()).to.equal('Third section');
+    expect(detail.index).to.equal(2);
+    expect(detail.name).to.equal('three');
+    expect(detail.text).to.equal('Third section');
   });
 
   it('should support size attribute', async () => {
