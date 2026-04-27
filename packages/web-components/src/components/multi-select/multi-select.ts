@@ -682,7 +682,7 @@ class CDSMultiSelect extends CDSDropdown {
   protected defaultCompareItems = (
     itemA: string,
     itemB: string,
-    { locale }
+    { locale }: { locale: string }
   ) => {
     return itemA.localeCompare(itemB, locale, { numeric: true });
   };
@@ -694,7 +694,7 @@ class CDSMultiSelect extends CDSDropdown {
    * positive if a is greater than b, and zero if they are equal. See 'sortItems'
    * for more control.
    *
-   * (itemA: string, itemB: string, { locale: string }) => number
+   * (itemA: string, itemB: string, { locale }: { locale: string }) => number
    */
   @property({ attribute: false })
   compareItems: (
@@ -743,7 +743,7 @@ class CDSMultiSelect extends CDSDropdown {
    * sortItems :
    * (menuItems: NodeList, {
    *   values: string[],
-   *   compareItems: (itemA: string, itemB: string, { locale: string }) => number,
+   *   compareItems: (itemA: string, itemB: string, { locale }: { locale: string }) => number
    *   locale: string,
    * }) => Node[]
    *

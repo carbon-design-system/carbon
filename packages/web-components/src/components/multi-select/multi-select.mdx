@@ -124,7 +124,11 @@ zero if they are equal.
 #### Example: Sort items in reverse alphabetical order
 
 ```typescript
-const reverseCompare = (itemA: string, itemB: string, { locale }) => {
+const reverseCompare = (
+  itemA: string,
+  itemB: string,
+  { locale }: { locale: string }
+) => {
   return itemB.localeCompare(itemA, locale, { numeric: true });
 };
 
