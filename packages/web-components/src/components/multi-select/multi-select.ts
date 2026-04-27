@@ -723,8 +723,8 @@ class CDSMultiSelect extends CDSDropdown {
       }
 
       return compareItems(
-        (itemA as HTMLElement).innerText.trim(),
-        (itemB as HTMLElement).innerText.trim(),
+        itemA.textContent?.trim() ?? '',
+        itemB.textContent?.trim() ?? '',
         {
           locale,
         }
