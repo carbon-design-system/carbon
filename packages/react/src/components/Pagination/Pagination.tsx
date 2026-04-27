@@ -486,8 +486,9 @@ const Pagination = React.forwardRef(
                   max={totalPages}
                   value={page}
                   type="number"
+                  inputMode="numeric"
                   style={{
-                    inlineSize: `calc(${String(page).length}ch + 1.8rem)`,
+                    inlineSize: `calc(${String(page).length}ch + 2.2rem)`,
                   }}
                   onChange={handlePageInputChange}
                   disabled={pageInputDisabled || disabled}
