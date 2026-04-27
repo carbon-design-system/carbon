@@ -743,7 +743,7 @@ class CDSMultiSelect extends CDSDropdown {
    * sortItems :
    * (menuItems: NodeList, {
    *   values: string[],
-   *   compareItems: (itemA: string, itemB: string, { locale }: { locale: string }) => number
+   *   compareItems: (itemA: string, itemB: string, { locale }: { locale: string }) => number,
    *   locale: string,
    * }) => Node[]
    *
