@@ -228,12 +228,7 @@ class CDSPasswordInput extends CDSTextInput {
       : iconLoader(View16, { class: `${prefix}--icon-visibility-on` });
 
     const passwordVisibilityTooltipClasses = classMap({
-      [`${prefix}--text-input--password__visibility__toggle`]: true,
-      [`${prefix}--btn`]: true,
-      [`${prefix}--tooltip__trigger`]: true,
-      [`${prefix}--tooltip--a11y`]: true,
       [`${prefix}--toggle-password-tooltip`]: true,
-      [`${prefix}--btn--disabled`]: normalizedProps.disabled || readonly,
       [`${prefix}--tooltip--${this.tooltipDirection}`]: this.tooltipDirection,
       [`${prefix}--tooltip--align-${this.tooltipAlignment}`]:
         this.tooltipAlignment,
@@ -241,8 +236,7 @@ class CDSPasswordInput extends CDSTextInput {
 
     const passwordVisibilityButtonClasses = classMap({
       [`${prefix}--text-input--password__visibility__toggle`]: true,
-      [`${prefix}--btn`]: !isFluid,
-      [`${prefix}--btn--icon-only`]: isFluid,
+      [`${prefix}--btn`]: true,
       [`${prefix}--tooltip__trigger`]: true,
       [`${prefix}--tooltip--a11y`]: true,
       [`${prefix}--btn--disabled`]: normalizedProps.disabled || readonly,
@@ -335,6 +329,7 @@ class CDSPasswordInput extends CDSTextInput {
               </button>
               <cds-tooltip-content
                 id="content"
+                ?password-toggle-tooltip-content="${!isFluid}"
                 ?hidden="${normalizedProps.disabled}">
                 ${passwordIsVisible
                   ? this.hidePasswordLabel
