@@ -329,7 +329,7 @@ class CDSPasswordInput extends CDSTextInput {
               </button>
               <cds-tooltip-content
                 id="content"
-                ?password-toggle-tooltip-content="${!isFluid}"
+                ?toggle-password-tooltip-content="${!isFluid}"
                 ?hidden="${normalizedProps.disabled}">
                 ${passwordIsVisible
                   ? this.hidePasswordLabel

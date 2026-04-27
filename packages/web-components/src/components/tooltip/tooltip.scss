@@ -52,7 +52,7 @@
 }
 
 // Password input "Show/Hide Password" tooltip
-:host(#{$prefix}-tooltip-content[password-toggle-tooltip-content]) {
+:host(#{$prefix}-tooltip-content[toggle-password-tooltip-content]) {
   .#{$prefix}--popover {
     @include layout.use('size', $default: 'md', $min: 'xs', $max: 'lg');
 
