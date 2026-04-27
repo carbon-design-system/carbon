@@ -12,6 +12,7 @@ import { action } from 'storybook/actions';
 import { View, FolderOpen, Folders } from '@carbon/icons-react';
 import Button from '../Button';
 import { IconButton } from '../IconButton';
+import { Link } from '../Link';
 import mdx from './AILabel.mdx';
 import './ailabel-story.scss';
 
@@ -136,6 +137,8 @@ export const Default = (args) => {
       <hr />
       <p className="secondary">Model type</p>
       <p className="bold">Foundation model</p>
+      <a href="#">normal link</a>
+      <Link href="#">cds link</Link>
     </div>
   );
 
