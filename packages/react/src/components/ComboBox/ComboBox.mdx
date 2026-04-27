@@ -281,28 +281,6 @@ string. If you would like to hide items that do not match what the user is
 typing, you can pass in your own filtering function to the `shouldFilterItem`
 prop.
 
-{/* prettier-ignore-start */}
-
-{/*
-TODO: Is the `ComboBox` below supposed to be here, or should there just be the
-code snippet? If it is supposed to be here, it doesn't look right in
-Storybook. The options are bulleted, and the background doesn't match the
-theme.
-*/}
-
-{/* prettier-ignore-end */}
-
-<ComboBox
-  id="carbon-combobox"
-  items={['Apple', 'Orange', 'Banana']}
-  titleText="Label"
-  helperText="Helper text"
-  shouldFilterItem={(menu) =>
-    menu?.item?.toLowerCase().includes(menu?.inputValue?.toLowerCase())
-  }
-  onChange={() => {}}
-/>
-
 ```jsx
 const filterItems = (menu) => {
   return menu?.item?.toLowerCase().includes(menu?.inputValue?.toLowerCase());
