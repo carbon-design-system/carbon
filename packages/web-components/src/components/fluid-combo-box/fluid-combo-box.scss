@@ -96,13 +96,13 @@ $css--plex: true !default;
   ::slotted(#{$prefix}-ai-label),
   ::slotted(#{$prefix}-slug) {
     position: absolute;
-    inset-block-start: 70%;
+    inset-block-start: 73%;
     inset-inline-end: $spacing-09;
   }
 
   ::slotted(#{$prefix}-ai-label:not([revert-active])),
   ::slotted(#{$prefix}-slug:not([revert-active])) {
-    transform: translateY(-70%);
+    transform: translateY(-73%);
   }
 
   .#{$prefix}--list-box__wrapper--decorator {
@@ -149,12 +149,13 @@ $css--plex: true !default;
   .#{$prefix}--list-box__wrapper--decorator {
     @include ai-gradient;
   }
+}
 
-  .#{$prefix}--list-box.#{$prefix}--list-box--warning
-    .#{$prefix}--list-box__invalid-icon,
-  .#{$prefix}--list-box__invalid-icon--warning,
-  .#{$prefix}--list-box__invalid-icon {
-    inset-inline-end: $spacing-09;
+// AI label - adjust position when clear button is visible
+:host(#{$prefix}-fluid-combo-box[ai-label][isClosable]) {
+  ::slotted(#{$prefix}-ai-label),
+  ::slotted(#{$prefix}-slug) {
+    inset-inline-end: calc($spacing-10 + 18px);
   }
 }
 
