@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: none;
+      }
+    </style>
+  </defs>
+  <path id="loan--cycle" d="M19.707,29.707l-1.4141-1.4141,3.293-3.293H2V8h2v15h17.5859l-3.293-3.293,1.4141-1.4141,5.707,5.707-5.707,5.707ZM30,24h-2v-15H10.4141l3.293,3.293-1.4141,1.4141-5.707-5.707,5.707-5.707,1.4141,1.4141-3.293,3.293h19.5859v17Z"/>
+  <rect id="Transparent_Rectangle" data-name="Transparent Rectangle" class="cls-1" width="32" height="32"/>
+</svg>
