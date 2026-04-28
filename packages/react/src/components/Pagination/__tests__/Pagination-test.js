@@ -593,9 +593,9 @@ describe('Pagination', () => {
       );
     });
 
-    it('should render a number input when there are more than 100 pages', () => {
+    it('should render a number input when there are more than 30 pages', () => {
       render(
-        <Pagination totalItems={1010} pageSizes={[10]} pageSize={10} page={1} />
+        <Pagination totalItems={310} pageSizes={[10]} pageSize={10} page={1} />
       );
 
       // Should render number input instead of select
@@ -633,15 +633,13 @@ describe('Pagination', () => {
         />
       );
 
-      const numberInput = document.querySelector(
-        '.cds--number-input__page-number input'
-      );
-      await userEvent.clear(numberInput);
-      await userEvent.type(numberInput, '50');
+      const numberInput = screen.getByRole('spinbutton');
+      await userEvent.type(numberInput, '5');
 
-      expect(onChange).toHaveBeenCalledWith(
-        expect.objectContaining({ page: 50 })
+      expect(onChange).toHaveBeenLastCalledWith(
+        expect.objectContaining({ page: 15, pageSize: 10 })
       );
+      expect(onChange).toHaveBeenCalledTimes(1);
     });
 
     it('should not allow page numbers greater than total pages in number input', async () => {
@@ -656,9 +654,7 @@ describe('Pagination', () => {
         />
       );
 
-      const numberInput = document.querySelector(
-        '.cds--number-input__page-number input'
-      );
+      const numberInput = screen.getByRole('spinbutton');
       await userEvent.clear(numberInput);
       await userEvent.type(numberInput, '200');
 
@@ -680,9 +676,7 @@ describe('Pagination', () => {
         />
       );
 
-      const numberInput = document.querySelector(
-        '.cds--number-input__page-number input'
-      );
+      const numberInput = screen.getByRole('spinbutton');
       await userEvent.clear(numberInput);
       await userEvent.type(numberInput, '0');
 

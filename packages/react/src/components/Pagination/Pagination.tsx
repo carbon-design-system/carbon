@@ -379,9 +379,9 @@ const Pagination = React.forwardRef(
       const nextPage = Math.min(Math.max(e.target.value, 1), totalPages);
       setPage(nextPage);
 
-      if (onChange && nextPage !== 1) {
+      if (onChange) {
         onChange({
-          page,
+          page: nextPage,
           pageSize,
         });
       }
