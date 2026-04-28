@@ -66,9 +66,11 @@ const args = {
   disabled: false,
   helperText: 'Optional helper text',
   hideLabel: false,
+  id: 'select',
   inline: false,
   invalid: false,
   invalidText: 'Error message',
+  labelStylesDisable: false,
   labelText: 'Select an option',
   placeholder: '',
   size: INPUT_SIZE.MEDIUM,
@@ -106,6 +108,10 @@ const argTypes = {
     control: 'boolean',
     description: 'Specify whether you want the inline version of this control.',
   },
+  id: {
+    control: 'text',
+    description: 'Specify the id for the label.',
+  },
   invalid: {
     control: 'boolean',
     description: 'Specify if the currently value is invalid.',
@@ -113,6 +119,10 @@ const argTypes = {
   invalidText: {
     control: 'text',
     description: 'Message which is displayed if the value is invalid.',
+  },
+  labelStylesDisable: {
+    control: 'boolean',
+    description: 'Specify if you want to disable the default label styling',
   },
   labelText: {
     control: 'text',
@@ -161,9 +171,11 @@ export const Default = {
       disabled,
       helperText,
       hideLabel,
+      id,
       inline,
       invalid,
       invalidText,
+      labelStylesDisable,
       labelText,
       name,
       placeholder,
@@ -178,12 +190,14 @@ export const Default = {
     return html`
       <cds-form-item>
         <cds-select
+          id="${id}"
           ?inline="${inline}"
           ?disabled="${disabled}"
           helper-text="${ifDefined(helperText)}"
           ?hide-label="${hideLabel}"
           ?invalid="${invalid}"
           invalid-text="${ifDefined(invalidText)}"
+          ?label-styles-disable="${labelStylesDisable}"
           label-text="${ifDefined(labelText)}"
           name="${ifDefined(name)}"
           placeholder="${ifDefined(placeholder)}"
@@ -220,9 +234,11 @@ export const Inline = {
       disabled,
       helperText,
       hideLabel,
+      id,
       inline,
       invalid,
       invalidText,
+      labelStylesDisable,
       labelText,
       name,
       placeholder,
@@ -237,12 +253,14 @@ export const Inline = {
     return html`
       <cds-form-item>
         <cds-select
+          id="${id}"
           ?inline="${inline}"
           ?disabled="${disabled}"
           helper-text="${ifDefined(helperText)}"
           ?hide-label="${hideLabel}"
           ?invalid="${invalid}"
           invalid-text="${ifDefined(invalidText)}"
+          ?label-styles-disable="${labelStylesDisable}"
           label-text="${ifDefined(labelText)}"
           name="${ifDefined(name)}"
           placeholder="${ifDefined(placeholder)}"
@@ -277,8 +295,10 @@ export const WithAILabel = {
       disabled,
       helperText,
       hideLabel,
+      id,
       invalid,
       invalidText,
+      labelStylesDisable,
       labelText,
       name,
       placeholder,
@@ -293,12 +313,14 @@ export const WithAILabel = {
 
     return html` <div style="width: 400px">
       <cds-select
+        id="${id}"
         ?inline="${false}"
         ?disabled="${disabled}"
         helper-text="${ifDefined(helperText)}"
         ?hide-label="${hideLabel}"
         ?invalid="${invalid}"
         invalid-text="${ifDefined(invalidText)}"
+        ?label-styles-disable="${labelStylesDisable}"
         label-text="${ifDefined(labelText)}"
         name="${ifDefined(name)}"
         placeholder="${ifDefined(placeholder)}"
@@ -335,8 +357,10 @@ export const WithLayer = {
       disabled,
       helperText,
       hideLabel,
+      id,
       invalid,
       invalidText,
+      labelStylesDisable,
       labelText,
       name,
       placeholder,
@@ -351,12 +375,14 @@ export const WithLayer = {
 
     return html`
       <cds-select
+        id="${id}"
         ?inline="${false}"
         ?disabled="${disabled}"
         helper-text="${ifDefined(helperText)}"
         ?hide-label="${hideLabel}"
         ?invalid="${invalid}"
         invalid-text="${ifDefined(invalidText)}"
+        ?label-styles-disable="${labelStylesDisable}"
         label-text="${ifDefined(labelText)}"
         name="${ifDefined(name)}"
         placeholder="${ifDefined(placeholder)}"

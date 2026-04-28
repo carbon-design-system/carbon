@@ -5,26 +5,76 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useState, useCallback } from 'react';
+import React from 'react';
 
 import { WithLayer } from '../../../.storybook/templates/WithLayer';
 
 import ExpandableSearch from '../ExpandableSearch';
 import Search from '.';
+import SearchSkeleton from './Search.Skeleton';
 import mdx from './Search.mdx';
 
 export default {
   title: 'Components/Search',
   component: Search,
+  args: {
+    closeButtonLabelText: 'Clear search input',
+    disabled: false,
+    defaultWidth: 800,
+    labelText: 'Search',
+    placeholder: 'Placeholder text',
+    size: 'md',
+    type: 'search',
+  },
   argTypes: {
     light: {
       table: {
         disable: true,
       },
     },
+    defaultWidth: {
+      control: { type: 'range', min: 300, max: 800, step: 50 },
+    },
+    closeButtonLabelText: {
+      control: {
+        type: 'text',
+      },
+    },
+    disabled: {
+      control: {
+        type: 'boolean',
+      },
+    },
+    defaultValue: {
+      control: {
+        type: 'text',
+      },
+    },
+    labelText: {
+      control: {
+        type: 'text',
+      },
+    },
+    placeholder: {
+      control: {
+        type: 'text',
+      },
+    },
+    size: {
+      options: ['xs', 'sm', 'md', 'lg'],
+      control: {
+        type: 'select',
+      },
+    },
+    value: {
+      control: {
+        type: 'text',
+      },
+    },
   },
   subcomponents: {
     ExpandableSearch,
+    SearchSkeleton,
   },
   parameters: {
     docs: {
@@ -36,123 +86,66 @@ export default {
   },
 };
 
-export const Disabled = () => {
-  return (
-    <Search
-      disabled
-      size="lg"
-      placeholder="Find your items"
-      labelText="Search"
-      closeButtonLabelText="Clear search input"
-      id="search-1"
-      onChange={() => {}}
-      onKeyDown={() => {}}
-    />
-  );
+const defaultParameters = {
+  controls: {
+    exclude: ['isExpanded', 'renderIcon', 'role'],
+  },
 };
 
-export const Expandable = () => {
-  return (
-    <div style={{ marginTop: '50px' }}>
-      <ExpandableSearch
-        size="lg"
-        labelText="Search"
-        closeButtonLabelText="Clear search input"
-        id="search-expandable-1"
-        onChange={() => {}}
-        onKeyDown={() => {}}
-      />
-    </div>
-  );
+const expandableParameters = {
+  controls: {
+    exclude: ['renderIcon', 'role'],
+  },
 };
 
-export const _WithLayer = () => {
-  return (
-    <WithLayer>
-      {(layer) => (
-        <Search
-          size="lg"
-          placeholder="Find your items"
-          labelText="Search"
-          closeButtonLabelText="Clear search input"
-          id={`search-${layer}`}
-          onChange={() => {}}
-          onKeyDown={() => {}}
-        />
-      )}
-    </WithLayer>
-  );
-};
+export const Expandable = ({ defaultWidth, ...searchArgs }) => (
+  <div style={{ marginTop: '25px', width: defaultWidth }}>
+    <ExpandableSearch id="search-expandable-1" {...searchArgs} />
+  </div>
+);
+Expandable.parameters = { ...expandableParameters };
 
-export const ExpandableWithLayer = () => {
-  return (
-    <WithLayer>
-      {(layer) => (
-        <ExpandableSearch
-          size="lg"
-          placeholder="Search"
-          labelText="First Layer"
-          closeButtonLabelText="Clear search input"
-          id={`search-expandable-${layer}`}
-          onChange={() => {}}
-          onKeyDown={() => {}}
-        />
-      )}
-    </WithLayer>
-  );
-};
+export const _WithLayer = ({ defaultWidth, ...searchArgs }) => (
+  <WithLayer>
+    {(layer) => (
+      <div style={{ width: defaultWidth }}>
+        <Search id={`search-${layer}`} {...searchArgs} />
+      </div>
+    )}
+  </WithLayer>
+);
+_WithLayer.parameters = { ...defaultParameters };
+
+export const ExpandableWithLayer = ({ defaultWidth, ...searchArgs }) => (
+  <WithLayer>
+    {(layer) => (
+      <div style={{ marginTop: '25px', width: defaultWidth }}>
+        <ExpandableSearch id={`search-expandable-${layer}`} {...searchArgs} />
+      </div>
+    )}
+  </WithLayer>
+);
+ExpandableWithLayer.parameters = { ...expandableParameters };
 
 export const Default = ({ defaultWidth, ...searchArgs }) => (
   <div style={{ width: defaultWidth }}>
     <Search id="search-default-1" {...searchArgs} />
   </div>
 );
+Default.parameters = { ...defaultParameters };
 
-Default.args = {
-  closeButtonLabelText: 'Clear search input',
-  disabled: false,
-  labelText: 'Label text',
-  placeholder: 'Placeholder text',
-  size: 'md',
-  type: 'search',
-};
-
-Default.argTypes = {
-  defaultWidth: {
-    control: { type: 'range', min: 300, max: 800, step: 50 },
-  },
-  closeButtonLabelText: {
-    control: {
-      type: 'text',
-    },
-  },
-  disabled: {
-    control: {
-      type: 'boolean',
-    },
-  },
-  defaultValue: {
-    control: {
-      type: 'text',
-    },
-  },
-  labelText: {
-    control: {
-      type: 'text',
-    },
-  },
-  placeholder: {
-    control: {
-      type: 'text',
-    },
-  },
-  renderIcon: {
-    control: false,
-  },
+export const Skeleton = ({ size, defaultWidth }) => (
+  <div style={{ width: defaultWidth }}>
+    <SearchSkeleton size={size} />
+  </div>
+);
+Skeleton.argTypes = {
   size: {
-    options: ['sm', 'md', 'lg'],
-    control: {
-      type: 'select',
-    },
+    description: 'Specify the size of the SearchSkeleton',
+  },
+};
+Skeleton.parameters = {
+  controls: {
+    include: ['size', 'defaultWidth'],
   },
 };
