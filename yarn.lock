@@ -2510,14 +2510,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@double-great/stylelint-a11y@npm:^3.0.2":
-  version: 3.0.2
-  resolution: "@double-great/stylelint-a11y@npm:3.0.2"
+"@double-great/stylelint-a11y@npm:^3.4.10":
+  version: 3.4.10
+  resolution: "@double-great/stylelint-a11y@npm:3.4.10"
   dependencies:
-    postcss: "npm:^8.4.33"
+    postcss: "npm:^8.5.10"
   peerDependencies:
     stylelint: ">=16.0.0"
-  checksum: 10/5abfe4f251e67eb9ef9d8e96a1fe9ae9c620e3f8279d5aab79269bd4d2ce86c578185072822346dd118e9cd915b3a11ada0980e26b6b6c4547111be2152f7fdb
+  checksum: 10/ac0635a0980d1b0737c510a52e6ca5466e814964c9ad5a83a6568b3c41bab1d8187377bccefab9e78ccbd1145133f2909694aea63fc69a9abd0993f79c27bb56
   languageName: node
   linkType: hard
 
@@ -20299,14 +20299,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"postcss@npm:^8.4.32, postcss@npm:^8.4.33, postcss@npm:^8.4.47, postcss@npm:^8.4.48, postcss@npm:^8.5.6, postcss@npm:^8.5.9":
-  version: 8.5.10
-  resolution: "postcss@npm:8.5.10"
+"postcss@npm:^8.4.32, postcss@npm:^8.4.47, postcss@npm:^8.4.48, postcss@npm:^8.5.10, postcss@npm:^8.5.6, postcss@npm:^8.5.9":
+  version: 8.5.12
+  resolution: "postcss@npm:8.5.12"
   dependencies:
     nanoid: "npm:^3.3.11"
     picocolors: "npm:^1.1.1"
     source-map-js: "npm:^1.2.1"
-  checksum: 10/7eac6169e535b63c8412e94d4f6047fc23efa3e9dde804b541940043c831b25f1cd867d83cd2c4371ad2450c8abcb42c208aa25668c1f0f3650d7f72faf711a8
+  checksum: 10/ec6b79b68c363eca3c8ffceb134a4ab637274aee6ac0857614bf7c18d40ce4ce5f9036edec57b7e0be99895724d2599d0ec7328dbd7f407204e7548697b322f1
   languageName: node
   linkType: hard
 
@@ -22816,7 +22816,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "stylelint-config-carbon@workspace:config/stylelint-config-carbon"
   dependencies:
-    "@double-great/stylelint-a11y": "npm:^3.0.2"
+    "@double-great/stylelint-a11y": "npm:^3.4.10"
     prettier: "npm:^3.3.3"
     stylelint: "npm:^17.0.0"
     stylelint-config-idiomatic-order: "npm:^10.0.0"

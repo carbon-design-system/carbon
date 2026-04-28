@@ -28,7 +28,7 @@
     "stylelint": "^17.0.0"
   },
   "dependencies": {
-    "@double-great/stylelint-a11y": "^3.0.2",
+    "@double-great/stylelint-a11y": "^3.4.10",
     "stylelint-config-idiomatic-order": "^10.0.0",
     "stylelint-config-prettier": "^9.0.3",
     "stylelint-config-standard": "^36.0.0",

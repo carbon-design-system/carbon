@@ -152,7 +152,7 @@
   },
   "stylelint": {
     "extends": [
-      "./config/stylelint-config-carbon"
+      "./config/stylelint-config-carbon/index.js"
     ]
   },
   "packageManager": "yarn@4.10.3"
