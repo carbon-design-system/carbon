@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2019, 2023
+ * Copyright IBM Corp. 2019, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -11,7 +11,7 @@ import { property, query } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
 import HostListenerMixin from '../../globals/mixins/host-listener';
 import HostListener from '../../globals/decorators/host-listener';
-import { INPUT_SIZE } from '../text-input/text-input';
+import { SEARCH_SIZE } from '../search/search';
 import CDSSearch from '../search/search';
 import styles from './data-table.scss?lit';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
@@ -86,7 +86,7 @@ class CDSTableToolbarSearch extends HostListenerMixin(CDSSearch) {
    * The search box size.
    */
   @property({ reflect: true })
-  size = INPUT_SIZE.LARGE;
+  size = SEARCH_SIZE.LARGE;
 
   connectedCallback() {
     if (!this.hasAttribute('role')) {
