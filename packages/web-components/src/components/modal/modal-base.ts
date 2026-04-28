@@ -9,7 +9,6 @@ import { LitElement } from 'lit';
 import { property } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
 import HostListenerMixin from '../../globals/mixins/host-listener';
-import HostListener from '../../globals/decorators/host-listener';
 import { selectorTabbable } from '../../globals/settings';
 
 /**
@@ -71,17 +70,6 @@ export class CDSModalBase extends HostListenerMixin(LitElement) {
       this._handleUserInitiatedClose(event.target);
     }
   }
-
-  @HostListener('document:keydown')
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20452
-  // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
-  protected _handleKeydown = ({ key, target }: KeyboardEvent) => {
-    if (!this.open) return;
-
-    if (key === 'Esc' || key === 'Escape') {
-      this._handleUserInitiatedClose(target);
-    }
-  };
 
   /**
    * Handles user-initiated close request of this modal.

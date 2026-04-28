@@ -80,6 +80,18 @@ class CDSModal extends CDSModalBase {
     }
   };
 
+  @HostListener('document:keydown')
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20452
+  // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
+  protected _handleKeydown = ({ key, target }: KeyboardEvent) => {
+    // let the Dialog handle the event if using `enable-dialog-element` feature flag
+    if (!this.open || this.enableDialogElement) return;
+
+    if (key === 'Esc' || key === 'Escape') {
+      this._handleUserInitiatedClose(target);
+    }
+  };
+
   /**
    * Handle the keydown event.
    * Trap the focus inside the side-panel by tracking keydown.key == `Tab`
@@ -126,6 +138,54 @@ class CDSModal extends CDSModalBase {
 
         _firstElement?.focus();
       }
+    }
+  };
+
+  /**
+   * `enable-dialog-element`
+   *
+   * Handles `cds-dialog-closed` event from the nested dialog element.
+   * Syncs the open state when the dialog closes, and stops the propagation of the
+   * event in favour of `cds-modal-closed`
+   */
+  protected _handleDialogClosed = (event: CustomEvent) => {
+    event.stopPropagation();
+
+    this.open = false;
+
+    // fire modal closed event
+    this.dispatchEvent(
+      new CustomEvent((this.constructor as typeof CDSModal).eventClose, {
+        bubbles: true,
+        cancelable: true,
+        composed: true,
+        detail: event.detail,
+      })
+    );
+  };
+
+  /**
+   * `enable-dialog-element`
+   *
+   * Handles `cds-dialog-beingclosed` event from the nested dialog element.
+   * Stops the propagation of the event in favour of `cds-modal-beingclosed`
+   */
+  protected _handleDialogBeingClosed = (event: CustomEvent) => {
+    event.stopPropagation();
+
+    const modalEvent = new CustomEvent(
+      (this.constructor as typeof CDSModal).eventBeforeClose,
+      {
+        bubbles: true,
+        cancelable: true,
+        composed: true,
+        detail: event.detail,
+      }
+    );
+
+    // allow the user to cancel the beingclosed event
+    if (!this.dispatchEvent(modalEvent)) {
+      event.preventDefault();
     }
   };
 
@@ -405,7 +465,10 @@ class CDSModal extends CDSModalBase {
           .preventCloseOnClickOutside=${this.preventCloseOnClickOutside}
           .preventClose=${this.preventClose}
           role=${role}
-          aria-label=${ariaLabel}>
+          aria-label=${ariaLabel}
+          modal-controlled
+          @cds-dialog-closed=${this._handleDialogClosed}
+          @cds-dialog-beingclosed=${this._handleDialogBeingClosed}>
           <slot @slotchange="${this._handleSlotChange}"></slot>
           ${hasScrollingContent
             ? html` <div class="cds--modal-content--overflow-indicator"></div> `

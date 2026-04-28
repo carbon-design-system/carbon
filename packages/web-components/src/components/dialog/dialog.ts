@@ -163,34 +163,42 @@ class CDSDialog extends CDSModalBase {
           }
         }
 
-        const primaryFocusNode = this.querySelector(
-          (this.constructor as typeof CDSDialog).selectorPrimaryFocus
-        );
-        await (this.constructor as typeof CDSDialog)._delay();
+        // If inside of a modal with `enable-dialog-element` feature
+        // flag enabled, let the modal handle the focus management
+        const inEnableDialogElementFeatureFlag =
+          this.hasAttribute('modal-controlled');
 
-        if (primaryFocusNode) {
-          // For cases where a `carbon-web-components` component (e.g. `<cds-button>`) being `primaryFocusNode`,
-          // where its first update/render cycle that makes it focusable happens after `<cds-dialog>`'s first update/render cycle
-          (primaryFocusNode as HTMLElement).focus();
-        } else {
-          const { primaryButton, secondaryButtons } = this._getFooterElements();
+        if (!inEnableDialogElementFeatureFlag) {
+          const primaryFocusNode = this.querySelector(
+            (this.constructor as typeof CDSDialog).selectorPrimaryFocus
+          );
+          await (this.constructor as typeof CDSDialog)._delay();
 
-          if (
-            primaryButton &&
-            primaryButton?.getAttribute('kind') === 'danger' &&
-            secondaryButtons[0]
-          ) {
-            secondaryButtons[0].focus();
+          if (primaryFocusNode) {
+            // For cases where a `carbon-web-components` component (e.g. `<cds-button>`) being `primaryFocusNode`,
+            // where its first update/render cycle that makes it focusable happens after `<cds-dialog>`'s first update/render cycle
+            (primaryFocusNode as HTMLElement).focus();
           } else {
-            const closeButton = this.querySelector(
-              (this.constructor as typeof CDSDialog).selectorCloseButton
-            ) as HTMLElement;
+            const { primaryButton, secondaryButtons } =
+              this._getFooterElements();
 
-            if (closeButton) {
-              closeButton.focus();
+            if (
+              primaryButton &&
+              primaryButton?.getAttribute('kind') === 'danger' &&
+              secondaryButtons[0]
+            ) {
+              secondaryButtons[0].focus();
             } else {
-              const { first } = this.getFocusable();
-              first?.focus();
+              const closeButton = this.querySelector(
+                (this.constructor as typeof CDSDialog).selectorCloseButton
+              ) as HTMLElement;
+
+              if (closeButton) {
+                closeButton.focus();
+              } else {
+                const { first } = this.getFocusable();
+                first?.focus();
+              }
             }
           }
         }
