@@ -593,9 +593,9 @@ describe('Pagination', () => {
       );
     });
 
-    it('should render a number input when there are more than 100 pages', () => {
+    it('should render a number input when there are more than 30 pages', () => {
       render(
-        <Pagination totalItems={1010} pageSizes={[10]} pageSize={10} page={1} />
+        <Pagination totalItems={310} pageSizes={[10]} pageSize={10} page={1} />
       );
 
       // Should render number input instead of select
