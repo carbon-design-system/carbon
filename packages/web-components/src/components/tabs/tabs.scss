@@ -109,6 +109,12 @@ $inset-transition: inset 110ms motion(standard, productive);
   background: transparent;
   inline-size: 100%;
 
+  .#{$prefix}--tabs__nav-item-label-wrapper {
+    display: flex;
+    align-items: center;
+    gap: $spacing-03;
+  }
+
   .#{$prefix}--tabs__nav-link {
     @include button-reset.reset($width: false);
     @include focus-outline('reset');
@@ -245,7 +251,6 @@ $inset-transition: inset 110ms motion(standard, productive);
 
 :host(#{$prefix}-tab:hover:not([selected])) {
   background-color: transparent;
-  box-shadow: 0 -1px 0 $background-hover;
 
   a.#{$prefix}--tabs__nav-link {
     border-block-end: $tab-underline-color-hover;
