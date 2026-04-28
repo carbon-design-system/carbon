@@ -155,8 +155,7 @@ module.exports = async ({ github, context, core }) => {
   const baseRef = base.ref ?? context.payload.repository.default_branch;
   const issueNumber = context.issue.number;
   const body = context.payload.pull_request.body || '';
-  const templateUrl =
-    `https://github.com/${baseOwner}/${baseRepoName}/blob/${baseRef}/${templatePath}`;
+  const templateUrl = `https://github.com/${baseOwner}/${baseRepoName}/blob/${baseRef}/${templatePath}`;
   const runUrl = `https://github.com/${owner}/${repo}/actions/runs/${context.runId}?pr=${issueNumber}`;
   const jobUrl = await getJobUrl({
     github,
