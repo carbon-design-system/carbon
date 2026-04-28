@@ -95,7 +95,7 @@ export default class CDSTabs extends HostListenerMixin(CDSContentSwitcher) {
    */
   protected _navigate(direction: number) {
     const immediate = this.selectionMode === 'automatic';
-    const { selectorItem, selectorItemHighlighted, selectorItemSelected } = this
+    const { selectorItemHighlighted, selectorItemSelected } = this
       .constructor as typeof CDSTabs;
     const nextItem = this._getNextItem(
       this.querySelector(
@@ -108,10 +108,7 @@ export default class CDSTabs extends HostListenerMixin(CDSContentSwitcher) {
     }
     this._handleUserInitiatedSelectItem(nextItem as CDSTab, 'keyboard');
     if (!immediate) {
-      forEach(this.querySelectorAll(selectorItem), (item) => {
-        (item as CDSTab)[immediate ? 'selected' : 'highlighted'] =
-          nextItem === item;
-      });
+      this.resetHighlighted(nextItem as CDSTab);
     }
 
     // Using `{ block: 'nearest' }` to prevent scrolling unless scrolling is absolutely necessary.
@@ -127,16 +124,25 @@ export default class CDSTabs extends HostListenerMixin(CDSContentSwitcher) {
     this.requestUpdate();
   }
 
+  /**
+   * Resets the highlighted state of all tabs, setting only the specified tab as highlighted.
+   *
+   * @param nextItem The tab item to be highlighted. If provided, only this item will be highlighted.
+   *   If null or undefined, all tabs will have their highlighted state set to false.
+   */
+  protected resetHighlighted(nextItem?: CDSTab | null) {
+    const { selectorItem } = this.constructor as typeof CDSTabs;
+    forEach(this.querySelectorAll(selectorItem), (item) => {
+      (item as CDSTab)['highlighted'] = nextItem === item;
+    });
+  }
+
   @HostListener('click')
   protected _handleClick(event: MouseEvent) {
     super._handleClick(event);
-    const { selectorItem } = this.constructor as typeof CDSTabs;
     const currentItem = this._getCurrentItem(event.target as HTMLElement);
     if (currentItem) {
-      forEach(this.querySelectorAll(selectorItem), (item) => {
-        (item as CDSTab).highlighted = false;
-      });
-      (currentItem as CDSTab).highlighted = true;
+      this.resetHighlighted(currentItem as CDSTab);
     }
   }
 
@@ -157,7 +163,13 @@ export default class CDSTabs extends HostListenerMixin(CDSContentSwitcher) {
             block: 'nearest',
             inline: 'nearest',
           });
-          this._handleUserInitiatedSelectItem(firstEnabledTab as CDSTab);
+          if (this.selectionMode === 'manual') {
+            this.resetHighlighted(firstEnabledTab as CDSTab);
+          }
+          this._handleUserInitiatedSelectItem(
+            firstEnabledTab as CDSTab,
+            this.selectionMode !== 'manual' ? 'activation' : 'keyboard'
+          );
           this.requestUpdate();
         }
         break;
@@ -168,7 +180,13 @@ export default class CDSTabs extends HostListenerMixin(CDSContentSwitcher) {
             block: 'nearest',
             inline: 'nearest',
           });
-          this._handleUserInitiatedSelectItem(lastEnabledTab as CDSTab);
+          if (this.selectionMode === 'manual') {
+            this.resetHighlighted(lastEnabledTab as CDSTab);
+          }
+          this._handleUserInitiatedSelectItem(
+            lastEnabledTab as CDSTab,
+            this.selectionMode !== 'manual' ? 'activation' : 'keyboard'
+          );
           this.requestUpdate();
         }
         break;

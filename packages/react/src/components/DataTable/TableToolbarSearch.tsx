@@ -46,7 +46,8 @@ type ExcludedInheritedProps =
   | 'onChange'
   | 'onExpand'
   | 'onFocus'
-  | 'tabIndex';
+  | 'tabIndex'
+  | 'size'; // TODO: remove this exclusion once 'xs' is implemented for TableToolbar #21345
 
 export type TableToolbarSearchHandleExpand = (
   event: FocusEvent<HTMLInputElement>,
@@ -127,6 +128,12 @@ export interface TableToolbarSearchProps
    * Provide an optional className for the overall container of the Search
    */
   searchContainerClass?: string;
+
+  // TODO: remove once 'xs' is implemented for TableToolbar #21345, since TableToolbarSearch and Search will then have the same available sizes
+  /**
+   * Specify the size of the Search
+   */
+  size?: 'sm' | 'md' | 'lg';
 
   tabIndex?: number | string;
 }
