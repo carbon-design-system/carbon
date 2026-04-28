@@ -440,7 +440,6 @@ const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>((props, ref) => {
 
   const savedOnOpen = useSavedCallback(onOpen);
 
-  const effectiveWarn = warn && !invalid;
   const wrapperRef = useRef<HTMLDivElement>(null);
 
   const datePickerClasses = cx(`${prefix}--date-picker`, {
@@ -460,13 +459,18 @@ const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>((props, ref) => {
   const childrenWithProps = React.Children.toArray(children as any).map(
     // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
     (child: any, index) => {
+      const childInvalid = child.props?.invalid;
+      const childWarn = child.props?.warn;
+      const mergedInvalid = invalid ?? childInvalid;
+      const mergedWarn = mergedInvalid ? false : (warn ?? childWarn);
+
       if (index === 0 && isComponentElement(child, DatePickerInput)) {
         return React.cloneElement(child, {
           datePickerType,
           ref: startInputField,
           readOnly,
-          invalid,
-          warn: effectiveWarn,
+          invalid: mergedInvalid,
+          warn: mergedWarn,
         });
       }
       if (index === 1 && isComponentElement(child, DatePickerInput)) {
@@ -474,24 +478,27 @@ const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>((props, ref) => {
           datePickerType,
           ref: endInputField,
           readOnly,
-          invalid,
-          warn: effectiveWarn,
+          invalid: mergedInvalid,
+          warn: mergedWarn,
         });
       }
+      // TODO: The docs say this component expects `DatePickerInput` children.
+      // Can these non-`DatePickerInput` fallbacks be deleted?
+      // https://github.com/carbon-design-system/carbon/blob/b4297c52b50edf2fbc6c439c38edc8ee860c77fc/packages/react/src/components/DatePicker/DatePicker.mdx?plain=1#L49-L50
       if (index === 0) {
         return React.cloneElement(child, {
           ref: startInputField,
           readOnly,
-          invalid,
-          warn: effectiveWarn,
+          invalid: mergedInvalid,
+          warn: mergedWarn,
         });
       }
       if (index === 1) {
         return React.cloneElement(child, {
           ref: endInputField,
           readOnly,
-          invalid,
-          warn: effectiveWarn,
+          invalid: mergedInvalid,
+          warn: mergedWarn,
         });
       }
     }
@@ -742,10 +749,6 @@ const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>((props, ref) => {
         return;
       }
 
-      if (!calendar.selectedDates) {
-        return;
-      }
-
       if (calendar.selectedDates.length === 0) {
         return;
       }
@@ -917,21 +920,12 @@ const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>((props, ref) => {
 
   useEffect(() => {
     if (calendarRef.current?.set) {
-      if (value !== undefined) {
-        // To make up for calendarRef.current.setDate not making provision for an empty string or array
-        if (
-          value === '' ||
-          value === null ||
-          (Array.isArray(value) &&
-            (value.length === 0 || value.every(isEmptyDateValue)))
-        ) {
-          // only clear if there are selected dates to avoid unnecessary operations
-          if (calendarRef.current.selectedDates.length > 0) {
-            calendarRef.current.clear();
-          }
-        } else {
-          calendarRef.current.setDate(value);
-        }
+      if (
+        !isEmptyDateValue(value) &&
+        (!Array.isArray(value) ||
+          (value.length > 0 && !value.every(isEmptyDateValue)))
+      ) {
+        calendarRef.current.setDate(value);
       }
       updateClassNames(calendarRef.current, prefix);
       //for simple date picker w/o calendar; initial mount may not have value

@@ -48,6 +48,17 @@ describe('CheckboxGroup', () => {
     expect(screen.getByText('0')).toBeInTheDocument();
   });
 
+  it('should not render helperText when helperText is an empty string', () => {
+    const { container } = render(
+      <CheckboxGroup legendText="Checkbox heading" helperText="" />
+    );
+
+    expect(
+      container.querySelector(`.${prefix}--form__helper-text`)
+    ).not.toBeInTheDocument();
+    expect(container.firstChild).not.toHaveAttribute('aria-describedby');
+  });
+
   it('should set data-invalid when invalid prop is true', () => {
     const { container } = render(
       <CheckboxGroup
