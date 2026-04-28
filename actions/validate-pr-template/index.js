@@ -165,7 +165,7 @@ module.exports = async ({ github, context, core }) => {
     runId: context.runId,
     runAttempt: context.runAttempt,
     issueNumber,
-    jobName: 'Follows PR template',
+    jobName: 'follows template',
     fallbackUrl: runUrl,
   });
 
@@ -262,6 +262,7 @@ module.exports = async ({ github, context, core }) => {
     const failureComment = [
       commentMarker,
       '> [!IMPORTANT]',
+      '>',
       `> Pull requests must use the pull request [template](${templateUrl}). Please edit the description above to resolve this [error](${jobUrl}).`,
       '',
       '<details><summary>View the template</summary>',
@@ -295,7 +296,10 @@ module.exports = async ({ github, context, core }) => {
 
   if (existingComment) {
     await upsertComment(
-      'Thanks for using the pull request description template! 👍'
+      [
+        commentMarker,
+        'Thanks for using the pull request description template! 👍',
+      ].join('\n')
     );
   }
 };
