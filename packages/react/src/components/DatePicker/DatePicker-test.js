@@ -180,6 +180,56 @@ describe('DatePicker', () => {
     spy.mockRestore();
   });
 
+  describe('accessibility', () => {
+    it('associates helper text with the input using aria-describedby', () => {
+      render(
+        <DatePickerInput
+          id="date-picker-input-helper"
+          labelText="Date Picker label"
+          helperText="Helpful text"
+        />
+      );
+
+      const input = screen.getByLabelText('Date Picker label');
+      const helperText = screen.getByText('Helpful text');
+
+      expect(input).toHaveAttribute('aria-describedby', helperText.id);
+    });
+
+    it('associates invalid text with the input and marks input as invalid', () => {
+      render(
+        <DatePickerInput
+          id="date-picker-input-invalid"
+          labelText="Date Picker label"
+          invalid
+          invalidText="Invalid date"
+        />
+      );
+
+      const input = screen.getByLabelText('Date Picker label');
+      const invalidText = screen.getByText('Invalid date');
+
+      expect(input).toHaveAttribute('aria-describedby', invalidText.id);
+      expect(input).toHaveAttribute('aria-invalid', 'true');
+    });
+
+    it('associates warning text with the input using aria-describedby', () => {
+      render(
+        <DatePickerInput
+          id="date-picker-input-warn"
+          labelText="Date Picker label"
+          warn
+          warnText="Warning message"
+        />
+      );
+
+      const input = screen.getByLabelText('Date Picker label');
+      const warnText = screen.getByText('Warning message');
+
+      expect(input).toHaveAttribute('aria-describedby', warnText.id);
+    });
+  });
+
   it('should respect parseDate prop', async () => {
     const parseDate = jest.fn();
     parseDate.mockReturnValueOnce(new Date('1989/01/20'));
@@ -400,6 +450,26 @@ describe('DatePicker', () => {
       expect(
         document.querySelector(`.${prefix}--date-picker__icon--warn`)
       ).not.toBeInTheDocument();
+    });
+
+    it('should preserve invalid state from DatePickerInput when DatePicker is not invalid', () => {
+      render(
+        <DatePicker datePickerType="single">
+          <DatePickerInput
+            id="date-picker-input-id-start"
+            placeholder="mm/dd/yyyy"
+            labelText="Date Picker label"
+            invalid
+            invalidText="Invalid date"
+          />
+        </DatePicker>
+      );
+
+      expect(screen.getByText('Invalid date')).toBeInTheDocument();
+      expect(screen.getByLabelText('Date Picker label')).toHaveAttribute(
+        'data-invalid',
+        'true'
+      );
     });
   });
 });
