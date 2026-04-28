@@ -441,9 +441,12 @@ $css--plex: true !default;
 // treatment
 :host(#{$prefix}-multi-select-item[is-select-all]) {
   .#{$prefix}--list-box__menu-item__option {
-    padding: 0.6875rem $spacing-05;
+    display: flex;
+    align-items: center;
     margin: 0;
     border-block-end: 1px solid $border-subtle-01;
+    padding-block: 0;
+    padding-inline: $spacing-05;
   }
 }
 

@@ -42,7 +42,7 @@
     transform: translate3d(0, 0, 0);
     transition:
       transform $duration-fast-02 motion(standard, productive),
-      clip-path $duration-fast-02 motion(standard, productive);
+      opacity $duration-fast-02 motion(standard, productive);
   }
 
   .#{$prefix}--toolbar-content .#{$prefix}--search .#{$prefix}--search-input {
@@ -377,11 +377,12 @@
 
   .#{$prefix}--batch-actions--active ~ .#{$prefix}--toolbar-search-container,
   .#{$prefix}--batch-actions--active ~ .#{$prefix}--toolbar-content {
-    clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+    opacity: 0;
+    pointer-events: none;
     transform: translate3d(0, 48px, 0);
     transition:
       transform $duration-fast-02 motion(standard, productive),
-      clip-path $duration-fast-02 motion(standard, productive);
+      opacity $duration-fast-02 motion(standard, productive);
   }
 
   //-------------------------------------------------
