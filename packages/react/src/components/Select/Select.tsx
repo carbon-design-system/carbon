@@ -30,6 +30,7 @@ import { Text } from '../Text';
 import { AILabel } from '../AILabel';
 import { isComponentElement } from '../../internal';
 import { useNormalizedInputProps } from '../../internal/useNormalizedInputProps';
+import { hasHelperText } from '../../internal/hasHelperText';
 
 type ExcludedAttributes = 'size';
 
@@ -232,7 +233,7 @@ const Select = forwardRef<HTMLSelectElement, SelectProps>(
     const helperTextClasses = classNames(`${prefix}--form__helper-text`, {
       [`${prefix}--form__helper-text--disabled`]: normalizedProps.disabled,
     });
-    const hasHelper = typeof helperText !== 'undefined' && helperText !== null;
+    const hasHelper = hasHelperText(helperText);
     const helper = hasHelper ? (
       <Text
         as="div"
