@@ -146,6 +146,44 @@ describe('DatePicker', () => {
     expect(ref).toHaveBeenCalledWith(container.firstChild);
   });
 
+  it('should update the flatpickr instance when `disable`, `enable`, and `inline` props change', () => {
+    const ref = createRef();
+    const disable = ['01/20/2025'];
+    const enable = ['01/21/2025'];
+    const { rerender } = render(
+      <DatePicker ref={ref} datePickerType="single">
+        <DatePickerInput
+          id="date-picker-input-id-start"
+          placeholder="mm/dd/yyyy"
+          labelText="Date Picker label"
+        />
+      </DatePicker>
+    );
+
+    const setSpy = jest.spyOn(ref.current.calendar, 'set');
+
+    setSpy.mockClear();
+
+    rerender(
+      <DatePicker
+        ref={ref}
+        datePickerType="single"
+        disable={disable}
+        enable={enable}
+        inline>
+        <DatePickerInput
+          id="date-picker-input-id-start"
+          placeholder="mm/dd/yyyy"
+          labelText="Date Picker label"
+        />
+      </DatePicker>
+    );
+
+    expect(setSpy).toHaveBeenCalledWith('disable', disable);
+    expect(setSpy).toHaveBeenCalledWith('enable', enable);
+    expect(setSpy).toHaveBeenCalledWith('inline', true);
+  });
+
   it('should respect decorator prop', () => {
     render(
       <DatePickerInput
@@ -492,6 +530,30 @@ describe('Simple date picker', () => {
     expect(screen.queryByRole('application')).not.toBeInTheDocument();
   });
 
+  it('should update the input value when a controlled simple date value changes', () => {
+    const { rerender } = render(
+      <DatePicker datePickerType="simple" value="01/14/2025">
+        <DatePickerInput
+          id="date-picker-input-id-start"
+          labelText="Start date"
+        />
+      </DatePicker>
+    );
+
+    expect(screen.getByLabelText('Start date')).toHaveValue('01/14/2025');
+
+    rerender(
+      <DatePicker datePickerType="simple" value="02/14/2025">
+        <DatePickerInput
+          id="date-picker-input-id-start"
+          labelText="Start date"
+        />
+      </DatePicker>
+    );
+
+    expect(screen.getByLabelText('Start date')).toHaveValue('02/14/2025');
+  });
+
   it('should remove the calendar if changed from another type to simple', () => {
     const { rerender } = render(
       <DatePicker datePickerType="single">
@@ -569,6 +631,12 @@ describe('Simple date picker', () => {
 });
 
 describe('Single date picker', () => {
+  it('should not initialize a calendar without an input', () => {
+    render(<DatePicker datePickerType="single" />);
+
+    expect(screen.queryByRole('application')).not.toBeInTheDocument();
+  });
+
   it('should initialize a calendar', () => {
     render(
       <DatePicker
@@ -804,6 +872,28 @@ describe('Single date picker', () => {
     await userEvent.tab();
     expect(nextFocusTarget).toHaveFocus();
     expect(calendar).not.toHaveClass('open');
+  });
+
+  it('should remove the calendar keydown listener on unmount', () => {
+    const ref = createRef();
+    const { unmount } = render(
+      <DatePicker ref={ref} datePickerType="single">
+        <DatePickerInput id="input-id" labelText="Date input" />
+      </DatePicker>
+    );
+
+    const removeEventListenerSpy = jest.spyOn(
+      ref.current.calendar.calendarContainer,
+      'removeEventListener'
+    );
+
+    unmount();
+
+    expect(removeEventListenerSpy).toHaveBeenCalledWith(
+      'keydown',
+      expect.any(Function),
+      undefined
+    );
   });
 });
 
@@ -1466,6 +1556,23 @@ describe('Date picker with locale', () => {
     expect(screen.getByText('Enero')).toBeInTheDocument();
   });
 
+  it('should support locale objects with a `locale` key', () => {
+    render(
+      <DatePicker
+        onChange={() => {}}
+        datePickerType="single"
+        locale={{ locale: 'es' }}
+        value="01/01/2022">
+        <DatePickerInput
+          id="date-picker-input-id"
+          placeholder="mm/dd/yyyy"
+          labelText="Date picker label"
+        />
+      </DatePicker>
+    );
+    expect(screen.getByText('Enero')).toBeInTheDocument();
+  });
+
   it('should use default locale if one is not passed as a prop', () => {
     render(
       <DatePicker
@@ -1563,6 +1670,62 @@ describe('Date picker with locale', () => {
 });
 
 describe('Date picker with minDate and maxDate', () => {
+  it('should respect `disable` prop', async () => {
+    render(
+      <DatePicker
+        onChange={() => {}}
+        datePickerType="single"
+        disable={['01/02/2018']}
+        value="01/01/2018">
+        <DatePickerInput
+          id="date-picker-input-id"
+          placeholder="mm/dd/yyyy"
+          labelText="Date picker label"
+          data-testid="input"
+        />
+      </DatePicker>
+    );
+
+    await userEvent.click(screen.getByTestId('input'));
+
+    const disabledDate = document.querySelector(
+      '[aria-label="January 2, 2018"]'
+    );
+
+    expect(disabledDate).toHaveClass('flatpickr-disabled');
+  });
+
+  it('should respect `enable` prop', async () => {
+    const ref = createRef();
+    const enable = ['01/02/2018'];
+
+    render(
+      <DatePicker
+        ref={ref}
+        onChange={() => {}}
+        datePickerType="single"
+        enable={enable}
+        value="01/01/2018">
+        <DatePickerInput
+          id="date-picker-input-id"
+          placeholder="mm/dd/yyyy"
+          labelText="Date picker label"
+          data-testid="input"
+        />
+      </DatePicker>
+    );
+
+    await userEvent.click(screen.getByTestId('input'));
+
+    expect(ref.current.calendar.config.enable).toHaveLength(1);
+    expect(
+      ref.current.calendar.formatDate(
+        ref.current.calendar.config.enable[0],
+        'm/d/Y'
+      )
+    ).toBe('01/02/2018');
+  });
+
   it('should respect minDate', async () => {
     render(
       <DatePicker
