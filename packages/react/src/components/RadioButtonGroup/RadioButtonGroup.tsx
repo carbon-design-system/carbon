@@ -23,6 +23,7 @@ import { WarningFilled, WarningAltFilled } from '@carbon/icons-react';
 import { deprecate } from '../../prop-types/deprecate';
 import { mergeRefs } from '../../tools/mergeRefs';
 import { useId } from '../../internal/useId';
+import { hasHelperText } from '../../internal/hasHelperText';
 import { AILabel } from '../AILabel';
 import { isComponentElement } from '../../internal';
 
@@ -238,7 +239,7 @@ const RadioButtonGroup = React.forwardRef(
       [`${prefix}--form__helper-text--disabled`]: disabled,
     });
 
-    const hasHelper = typeof helperText !== 'undefined' && helperText !== null;
+    const hasHelper = hasHelperText(helperText);
     const helperId = !hasHelper
       ? undefined
       : `radio-button-group-helper-text-${radioButtonGroupInstanceId}`;
@@ -264,7 +265,7 @@ const RadioButtonGroup = React.forwardRef(
           className={fieldsetClasses}
           disabled={disabled}
           data-invalid={invalid ? true : undefined}
-          aria-describedby={showHelper && helperText ? helperId : undefined}
+          aria-describedby={showHelper && hasHelper ? helperId : undefined}
           {...rest}>
           {legendText && (
             <Legend className={`${prefix}--label`}>
