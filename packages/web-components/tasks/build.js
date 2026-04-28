@@ -148,7 +148,10 @@ function getExternalPatterns() {
     ...Object.keys(packageJson.default.devDependencies),
   ];
 
-  return deps.map((name) => {
+  // Filter out flatpickr so it gets bundled with the patched version
+  const filteredDeps = deps.filter((name) => name !== 'flatpickr');
+
+  return filteredDeps.map((name) => {
     const escapedName = name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
     return new RegExp(`^${escapedName}(/.*)?`);
   });
