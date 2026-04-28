@@ -18,8 +18,8 @@
     "ci-check": "carbon-cli ci-check",
     "clean": "lerna run clean && lerna clean --yes && rimraf node_modules",
     "doctoc": "doctoc --title '## Table of Contents'",
-    "format": "prettier --cache --write '**/*.{js,md,scss,ts,tsx}' '!**/{build,es,lib,storybook,ts,umd}/**'",
-    "format:diff": "prettier --list-different '**/*.{js,md,scss,ts,tsx}' '!**/{build,es,lib,storybook,ts,umd}/**' '!packages/components/**'",
+    "format": "prettier --cache --write '**/*.{js,md,mdx,scss,ts,tsx}' '!**/{build,es,lib,storybook,ts,umd}/**'",
+    "format:diff": "prettier --list-different '**/*.{js,md,mdx,scss,ts,tsx}' '!**/{build,es,lib,storybook,ts,umd}/**' '!packages/components/**'",
     "lint": "eslint actions config packages www",
     "lint:fix": "eslint --cache --fix --max-warnings 0 actions config packages www",
     "lint:styles": "stylelint '**/*.scss' --report-needless-disables --report-invalid-scope-disables",
@@ -139,6 +139,9 @@
       "stylelint --cache --report-needless-disables --report-invalid-scope-disables --allow-empty-input"
     ],
     "!(*sass).md": [
+      "prettier --cache --write"
+    ],
+    "!(*sass).mdx": [
       "prettier --cache --write"
     ],
     "{README.md,.all-contributorsrc}": [
