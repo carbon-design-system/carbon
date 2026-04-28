@@ -2177,6 +2177,7 @@ __metadata:
     sass: "npm:^1.93.2"
     storybook: "npm:^9.1.8"
     storybook-addon-accessibility-checker: "npm:^9.2.0-rc.3"
+    stylelint: "npm:^16.0.0"
     tsdown: "npm:^0.21.0"
     tslib: "npm:^2.6.3"
     typescript-config-carbon: "workspace:^0.9.0"

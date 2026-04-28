@@ -35,6 +35,7 @@ $colorMap: (
 
 :host(#{$prefix}-ai-label) {
   @extend .#{$prefix}--slug;
+  --cds-button-focus-color: var(--cds-focus);
 
   .#{$prefix}--slug__text {
     @include font-family('sans');
@@ -71,7 +72,6 @@ $colorMap: (
     // This sets the max size to the size of the action bar with 3 buttons
     padding-block: $spacing-06 $spacing-11;
     padding-inline: $spacing-06;
-    --cds-button-focus-color: var(--cds-focus);
   }
 
   .#{$prefix}--slug__button.#{$prefix}--slug__button--mini:focus,
