@@ -39,6 +39,7 @@ figma.connect(
   ProgressBar,
   'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=9506-402924&t=j280IIQF1o3iLkV2-4',
   {
+    variant: { Status: 'Active' },
     props: sharedProgressBarProps,
     example: ({ label, value, helperText, status, type, size }) => (
       <ProgressBar
