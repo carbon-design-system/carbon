@@ -400,7 +400,6 @@ const ModalDialog = React.forwardRef(function ModalDialog(
 
   function handleOnClick(evt: React.MouseEvent<HTMLDivElement>) {
     const { target } = evt;
-    evt.stopPropagation();
 
     const shouldCloseOnOutsideClick =
       // Passive modals can close on clicks outside the modal when
@@ -462,6 +461,18 @@ const ModalDialog = React.forwardRef(function ModalDialog(
       !modalContent.contains(currentActiveNode)
     ) {
       return;
+    }
+
+    const modalRect = modalContent.getBoundingClientRect();
+    const elementRect = currentActiveNode.getBoundingClientRect();
+
+    // Check if element is fully visible within the modal viewport
+    const isFullyVisible =
+      elementRect.top >= modalRect.top &&
+      elementRect.bottom <= modalRect.bottom;
+
+    if (isFullyVisible) {
+      return; // Don't scroll if already fully visible
     }
 
     currentActiveNode.scrollIntoView({ block: 'center' });

@@ -27,7 +27,6 @@ import React, {
   useMemo,
   useRef,
   useState,
-  type FocusEvent,
   type ForwardedRef,
   type KeyboardEvent,
   type MouseEvent,
@@ -67,6 +66,7 @@ import {
 import type { TranslateWithId } from '../../types/common';
 import { AILabel } from '../AILabel';
 import { defaultItemToString, isComponentElement } from '../../internal';
+import { hasHelperText } from '../../internal/hasHelperText';
 import { useNormalizedInputProps } from '../../internal/useNormalizedInputProps';
 import useIsomorphicEffect from '../../internal/useIsomorphicEffect';
 
@@ -372,10 +372,7 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
 ) {
   const { isFluid } = useContext(FormContext);
   const isFirstRender = useRef(true);
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20452
-  const [isFocused, setIsFocused] = useState<boolean>(false);
   const [isOpen, setIsOpen] = useState<boolean>(!!open);
-  const [prevOpen, setPrevOpen] = useState<boolean>(!!open);
   const [inputValue, setInputValue] = useState<string>('');
   const [topItems, setTopItems] = useState<ItemType[]>(
     initialSelectedItems ?? []
@@ -495,10 +492,9 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
 
   const prefix = usePrefix();
 
-  if (prevOpen !== open) {
+  useEffect(() => {
     setIsOpen(open);
-    setPrevOpen(open);
-  }
+  }, [open]);
 
   // memoize sorted items to reduce unnecessary expensive sort on rerender
   const sortedItems = useMemo(() => {
@@ -511,8 +507,7 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
     );
 
     // Sort only non-select-all items, select-all item must stay at the top
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
-    const sortedReal = sortItems!(nonSelectAllItems, {
+    const sortedReal = sortItems(nonSelectAllItems, {
       selectedItems: {
         top: controlledSelectedItems,
         fixed: [],
@@ -574,7 +569,7 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
       [`${prefix}--autoalign`]: autoAlign,
     }
   );
-  const hasHelper = typeof helperText !== 'undefined' && helperText !== null;
+  const hasHelper = hasHelperText(helperText);
   const helperId = !hasHelper
     ? undefined
     : `filterablemultiselect-helper-text-${filterableMultiSelectInstanceId}`;
@@ -684,8 +679,7 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
     inputId,
     inputValue,
     stateReducer,
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20452
-    isItemDisabled(item, _index) {
+    isItemDisabled(item) {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
       return (item as any)?.disabled;
     },
@@ -737,7 +731,7 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
         };
       case InputChange:
         if (onInputValueChange) {
-          onInputValueChange(changes.inputValue);
+          onInputValueChange(changes);
         }
         setInputValue(changes.inputValue ?? '');
         setIsOpen(true);
@@ -897,7 +891,7 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
   const inputProp = getInputProps(
     getDropdownProps({
       'aria-controls': isOpen ? menuId : undefined,
-      'aria-describedby': helperText && showHelperText ? helperId : undefined,
+      'aria-describedby': hasHelper && showHelperText ? helperId : undefined,
       'aria-haspopup': 'listbox',
       // Remove excess aria `aria-labelledby`. HTML <label for>
       // provides this aria information.
@@ -967,17 +961,6 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
     [autoAlign, getMenuProps, isOpen, refs.setFloating]
   );
 
-  const handleFocus = (evt: FocusEvent<HTMLDivElement> | undefined) => {
-    if (
-      evt?.target.classList.contains(`${prefix}--tag__close-icon`) ||
-      evt?.target.classList.contains(`${prefix}--list-box__selection`)
-    ) {
-      setIsFocused(false);
-    } else {
-      setIsFocused(evt?.type === 'focus');
-    }
-  };
-
   const mergedRef = mergeRefs(textInput, inputProp.ref);
 
   const readOnlyEventHandlers = readOnly
@@ -1016,8 +999,6 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
         </label>
       ) : null}
       <ListBox
-        onFocus={isFluid ? handleFocus : undefined}
-        onBlur={isFluid ? handleFocus : undefined}
         className={className}
         disabled={disabled}
         light={light}
@@ -1124,7 +1105,7 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
                 // instead match the old behavior of placing the disabled attribute.
                 const disabled = itemProps['aria-disabled'];
                 const {
-                  'aria-disabled': unusedAriaDisabled, // eslint-disable-line @typescript-eslint/no-unused-vars
+                  'aria-disabled': unusedAriaDisabled,
                   ...modifiedItemProps
                 } = itemProps;
 

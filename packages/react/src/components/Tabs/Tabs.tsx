@@ -52,6 +52,7 @@ import { Text } from '../Text';
 import BadgeIndicator from '../BadgeIndicator';
 import { isComponentElement } from '../../internal';
 
+const buttonWidth = 44;
 const verticalTabHeight = 64;
 
 // Used to manage the overall state of the Tabs
@@ -502,15 +503,14 @@ function TabList({
   // VISIBLE IF:
   //   SCROLLABLE
   //   AND SCROLL_LEFT > 0
-  const buttonWidth = 44;
+  //
   // Next Button
   // VISIBLE IF:
   //   SCROLLABLE
   //   AND SCROLL_LEFT + CLIENT_WIDTH < SCROLL_WIDTH
   const [isNextButtonVisible, setIsNextButtonVisible] = useState(
     ref.current
-      ? scrollLeft + buttonWidth + ref.current.clientWidth <
-          ref.current.scrollWidth
+      ? scrollLeft + ref.current.clientWidth < ref.current.scrollWidth
       : false
   );
 
@@ -628,20 +628,18 @@ function TabList({
   }, []);
 
   useEffect(() => {
-    //adding 1 in calculation for firefox support
+    // adding 1 in calculation for firefox support
     setIsNextButtonVisible(
       ref.current
-        ? scrollLeft + buttonWidth + ref.current.clientWidth + 1 <
-            ref.current.scrollWidth
+        ? scrollLeft + ref.current.clientWidth + 1 < ref.current.scrollWidth
         : false
     );
 
-    if (dismissable) {
-      if (ref.current) {
-        setIsScrollable(ref.current.scrollWidth > ref.current.clientWidth);
-      }
+    if (dismissable && ref.current) {
+      // adding 1 in calculation for firefox support
+      setIsScrollable(ref.current.scrollWidth > ref.current.clientWidth + 1);
     }
-  }, [scrollLeft, children, dismissable, isScrollable]);
+  }, [children, dismissable, scrollLeft]);
 
   useEffect(() => {
     if (tabs.current[selectedIndex]?.disabled) {
@@ -1607,10 +1605,7 @@ const IconTab = React.forwardRef<HTMLDivElement, IconTabProps>(
 
     const hasSize20 =
       isValidElement<ComponentProps<CarbonIconType>>(children) &&
-      // TODO: The interface allows `size` to be a string. Should this case be
-      // handled here, or should the prop type be restricted to `number`
-      // instead?
-      children.props.size === 20;
+      (children.props.size === 20 || children.props.size === '20');
 
     const classNames = cx(
       `${prefix}--tabs__nav-item--icon-only`,

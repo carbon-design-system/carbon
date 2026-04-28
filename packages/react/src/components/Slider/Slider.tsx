@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2025
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -28,7 +28,7 @@ import { throttle } from 'es-toolkit/compat';
 
 import * as keys from '../../internal/keyboard/keys';
 import { matches } from '../../internal/keyboard';
-import { PrefixContext } from '../../internal/usePrefix';
+import { usePrefix } from '../../internal/usePrefix';
 import { deprecate } from '../../prop-types/deprecate';
 import { WarningFilled, WarningAltFilled } from '@carbon/icons-react';
 import { Text } from '../Text';
@@ -42,6 +42,7 @@ import {
 import type { TFunc, TranslateWithId } from '../../types/common';
 import { clamp } from '../../internal/clamp';
 import { useNormalizedInputProps } from '../../internal/useNormalizedInputProps';
+import { useId } from '../../internal/useId';
 
 interface ThumbWrapperProps
   extends Omit<
@@ -95,12 +96,9 @@ const defaultTranslateWithId: TFunc<TranslationKey, TranslationArgs> = (
   args
 ) => {
   const template = defaultTranslations[messageId];
+  const correctedValue = args?.correctedValue ?? '';
 
-  if (args?.correctedValue) {
-    return template.replace('{correctedValue}', args.correctedValue);
-  }
-
-  return template;
+  return template.replace('{correctedValue}', correctedValue);
 };
 
 const defaultFormatLabel: NonNullable<SliderProps['formatLabel']> = (
@@ -108,6 +106,25 @@ const defaultFormatLabel: NonNullable<SliderProps['formatLabel']> = (
   label
 ) => {
   return `${value}${label ?? ''}`;
+};
+
+const hasUpperValue = (valueUpper: State['valueUpper']): valueUpper is number =>
+  typeof valueUpper !== 'undefined';
+
+const calcRawLeftPercent = ({
+  max,
+  min,
+  value,
+}: {
+  max: number;
+  min: number;
+  value: number;
+}) => {
+  const range = max - min;
+
+  if (range === 0) return 0;
+
+  return clamp((value - min) / range, 0, 1);
 };
 
 // TODO: Assuming a 16ms throttle corresponds to 60 FPS, should it be halved,
@@ -318,7 +335,6 @@ export interface SliderProps
 interface CalcLeftPercentProps {
   clientX?: number;
   value?: number;
-  range?: number;
 }
 
 type State = {
@@ -336,11 +352,45 @@ type State = {
 };
 
 const Slider = (props: SliderProps) => {
-  // TODO: Move destructured `props` from the IIFE to here.
+  const {
+    ariaLabelInput,
+    unstable_ariaLabelInputUpper: ariaLabelInputUpper,
+    className,
+    hideTextInput = false,
+    id: idProp,
+    min,
+    minLabel,
+    max,
+    maxLabel,
+    formatLabel = defaultFormatLabel,
+    labelText,
+    hideLabel,
+    step = 1,
+    inputType = 'number',
+    invalidText,
+    required,
+    disabled = false,
+    name,
+    unstable_nameUpper: nameUpper,
+    light,
+    readOnly = false,
+    value: controlledValue,
+    unstable_valueUpper: controlledValueUpper,
+    invalid,
+    onBlur,
+    onChange,
+    onInputKeyUp,
+    onRelease,
+    stepMultiplier = 4,
+    warn = false,
+    warnText,
+    translateWithId: t = defaultTranslateWithId,
+    ...other
+  } = props;
 
   const initialState: State = {
-    value: props.value,
-    valueUpper: props.unstable_valueUpper,
+    value: controlledValue,
+    valueUpper: controlledValueUpper,
     left: 0,
     leftUpper: 0,
     needsOnRelease: false,
@@ -365,26 +415,14 @@ const Slider = (props: SliderProps) => {
     stateRef.current = state;
   }, [state]);
 
-  const propsRef = useRef(props);
-
-  useEffect(() => {
-    propsRef.current = props;
-  }, [props]);
-
   const thumbRef = useRef<HTMLDivElement>(null);
   const thumbRefUpper = useRef<HTMLDivElement>(null);
   const filledTrackRef = useRef<HTMLDivElement>(null);
   const elementRef = useRef<HTMLDivElement>(null);
-  const trackRef = useRef<HTMLDivElement>(null);
-  const inputIdRef = useRef('');
+  const generatedId = useId();
+  const prefix = usePrefix();
 
-  // TODO: Delete this function and set its return value as the value of
-  // `twoHandles`.
-  const hasTwoHandles = () => {
-    return typeof state.valueUpper !== 'undefined';
-  };
-
-  const twoHandles = hasTwoHandles();
+  const twoHandles = hasUpperValue(state.valueUpper);
 
   /**
    * Sets up initial slider position and value in response to component mount.
@@ -392,7 +430,7 @@ const Slider = (props: SliderProps) => {
   useEffect(() => {
     if (elementRef.current) {
       const isRtl = document?.dir === 'rtl';
-      if (hasTwoHandles()) {
+      if (twoHandles) {
         const { value, left } = calcValue({
           value: stateRef.current.value,
           useRawValue: true,
@@ -430,35 +468,26 @@ const Slider = (props: SliderProps) => {
   }, []);
 
   useEffect(() => {
-    // TODO: Uncomment this code and delete all of the `filledTrackRef.current`
-    // checks.
-    // const el = filledTrackRef.current;
-    //
-    // if (!el) return;
+    const el = filledTrackRef.current;
+
+    if (!el) return;
 
     // Fire onChange event handler if present, if there's a usable value, and
     // if the value is different from the last one
-    if (hasTwoHandles()) {
-      if (filledTrackRef.current) {
-        filledTrackRef.current.style.transform = state.isRtl
-          ? `translate(${100 - state.leftUpper}%, -50%) scaleX(${
-              (state.leftUpper - state.left) / 100
-            })`
-          : `translate(${state.left}%, -50%) scaleX(${
-              (state.leftUpper - state.left) / 100
-            })`;
-      }
+    if (twoHandles) {
+      el.style.transform = state.isRtl
+        ? `translate(${100 - state.leftUpper}%, -50%) scaleX(${
+            (state.leftUpper - state.left) / 100
+          })`
+        : `translate(${state.left}%, -50%) scaleX(${
+            (state.leftUpper - state.left) / 100
+          })`;
     } else {
-      if (filledTrackRef.current) {
-        filledTrackRef.current.style.transform = state.isRtl
-          ? `translate(100%, -50%) scaleX(-${state.left / 100})`
-          : `translate(0%, -50%) scaleX(${state.left / 100})`;
-      }
+      el.style.transform = state.isRtl
+        ? `translate(100%, -50%) scaleX(-${state.left / 100})`
+        : `translate(0%, -50%) scaleX(${state.left / 100})`;
     }
-    // TODO: Investigate whether the missing dependency should be added.
-    //
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [state.left, state.leftUpper, state.isRtl]);
+  }, [state.isRtl, state.left, state.leftUpper, twoHandles]);
 
   // Fire onChange when value(s) change
   const prevValsRef = useRef<{
@@ -472,34 +501,28 @@ const Slider = (props: SliderProps) => {
     if (
       prev &&
       (prev.value !== state.value || prev.valueUpper !== state.valueUpper) &&
-      typeof props.onChange === 'function'
+      typeof onChange === 'function'
     ) {
-      props.onChange({
+      onChange({
         value: state.value,
         valueUpper: state.valueUpper,
       });
     }
 
     prevValsRef.current = { value: state.value, valueUpper: state.valueUpper };
-    // TODO: Investigate whether the missing dependency should be added.
-    //
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [state.value, state.valueUpper, props.onChange]);
+  }, [state.value, state.valueUpper, onChange]);
 
   useEffect(() => {
     // Fire onRelease event handler if present and if needed
-    if (state.needsOnRelease && typeof props.onRelease === 'function') {
-      props.onRelease({
+    if (state.needsOnRelease && typeof onRelease === 'function') {
+      onRelease({
         value: state.value,
         valueUpper: state.valueUpper,
       });
       // Reset the flag
       setState({ needsOnRelease: false });
     }
-    // TODO: Investigate whether the missing dependency should be added.
-    //
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [state.needsOnRelease, state.value, state.valueUpper, props.onRelease]);
+  }, [onRelease, state.needsOnRelease, state.value, state.valueUpper]);
 
   const prevSyncKeysRef = useRef<
     [number, number | undefined, number, number] | null
@@ -508,10 +531,10 @@ const Slider = (props: SliderProps) => {
   useEffect(() => {
     const prev = prevSyncKeysRef.current;
     const next: [number, number | undefined, number, number] = [
-      props.value,
-      props.unstable_valueUpper,
-      props.max,
-      props.min,
+      controlledValue,
+      controlledValueUpper,
+      max,
+      min,
     ];
 
     // If value from props does not change, do nothing here.
@@ -523,20 +546,24 @@ const Slider = (props: SliderProps) => {
       prev[2] !== next[2] ||
       prev[3] !== next[3]
     ) {
-      setState(
-        calcValue({
-          value: props.value,
-          useRawValue: true,
-        })
-      );
-      if (typeof props.unstable_valueUpper !== 'undefined') {
-        const { value: valueUpper, left: leftUpper } = calcValue({
-          value: props.unstable_valueUpper,
-          useRawValue: true,
-        });
+      setState({
+        value: controlledValue,
+        left:
+          calcRawLeftPercent({
+            max,
+            min,
+            value: controlledValue,
+          }) * 100,
+      });
+      if (typeof controlledValueUpper !== 'undefined') {
         setState({
-          valueUpper,
-          leftUpper,
+          valueUpper: controlledValueUpper,
+          leftUpper:
+            calcRawLeftPercent({
+              max,
+              min,
+              value: controlledValueUpper,
+            }) * 100,
         });
       } else {
         setState({ valueUpper: undefined, leftUpper: undefined });
@@ -544,10 +571,7 @@ const Slider = (props: SliderProps) => {
 
       prevSyncKeysRef.current = next;
     }
-    // TODO: Investigate whether the missing dependency should be added.
-    //
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [props.value, props.unstable_valueUpper, props.max, props.min]);
+  }, [controlledValue, controlledValueUpper, max, min]);
 
   /**
    * Rounds a given value to the nearest step defined by the slider's `step`
@@ -557,8 +581,7 @@ const Slider = (props: SliderProps) => {
    * @returns The value rounded to the precision determined by the step.
    */
   const nearestStepValue = (value = 0) => {
-    // TODO: Use a nullish coalescing operator.
-    const decimals = (props.step?.toString().split('.')[1] || '').length;
+    const decimals = (step.toString().split('.')[1] ?? '').length;
 
     return Number(value.toFixed(decimals));
   };
@@ -580,8 +603,8 @@ const Slider = (props: SliderProps) => {
   const onDragStart = (
     evt: MouseEvent<HTMLDivElement> | TouchEvent<HTMLDivElement>
   ) => {
-    // Do nothing if component is disabled
-    if (props.disabled || props.readOnly) {
+    // Do nothing if component is disabled or read-only.
+    if (disabled || readOnly) {
       return;
     }
 
@@ -607,7 +630,7 @@ const Slider = (props: SliderProps) => {
     const clientX = getClientXFromEvent(evt.nativeEvent);
 
     let activeHandle: HandlePosition | undefined;
-    if (hasTwoHandles()) {
+    if (twoHandles) {
       if (evt.target == thumbRef.current) {
         activeHandle = HandlePosition.LOWER;
       } else if (evt.target == thumbRefUpper.current) {
@@ -633,7 +656,7 @@ const Slider = (props: SliderProps) => {
     const focusOptions = {
       preventScroll: true,
     };
-    if (hasTwoHandles()) {
+    if (twoHandles) {
       if (thumbRef.current && activeHandle === HandlePosition.LOWER) {
         thumbRef.current.focus(focusOptions);
       } else if (
@@ -657,8 +680,8 @@ const Slider = (props: SliderProps) => {
    * indicating that the `onRelease` callback should be called.
    */
   const onDragStop = () => {
-    // Do nothing if component is disabled
-    if (props.disabled || props.readOnly) {
+    // Do nothing if component is disabled or read-only.
+    if (disabled || readOnly) {
       return;
     }
 
@@ -706,8 +729,8 @@ const Slider = (props: SliderProps) => {
 
   _onDragRef.current = (evt, activeHandle) => {
     activeHandle = activeHandle ?? stateRef.current.activeHandle;
-    // Do nothing if component is disabled, or we have no event.
-    if (propsRef.current.disabled || propsRef.current.readOnly || !evt) {
+    // Do nothing if component is disabled or read-only.
+    if (disabled || readOnly) {
       return;
     }
 
@@ -719,7 +742,7 @@ const Slider = (props: SliderProps) => {
     });
     // If we're set to two handles, negotiate which drag handle is closest to
     // the users' interaction.
-    if (hasTwoHandles() && activeHandle) {
+    if (twoHandles && activeHandle) {
       setValueLeftForHandle(activeHandle, {
         value: nearestStepValue(value),
         left,
@@ -760,12 +783,10 @@ const Slider = (props: SliderProps) => {
    * state accordingly.
    */
   const onKeyDown = (evt: KeyboardEvent<HTMLDivElement>) => {
-    // Do nothing if component is disabled, or we don't have a valid event
-    if (props.disabled || props.readOnly) {
+    // Do nothing if component is disabled or read-only.
+    if (disabled || readOnly) {
       return;
     }
-
-    const { step = 1, stepMultiplier = 4 } = props;
 
     let delta = 0;
     if (matches(evt, [keys.ArrowDown, keys.ArrowLeft])) {
@@ -782,13 +803,13 @@ const Slider = (props: SliderProps) => {
       delta *= stepMultiplier;
     }
 
-    if (hasTwoHandles() && state.activeHandle) {
+    if (twoHandles && state.activeHandle) {
       const currentValue =
         state.activeHandle === HandlePosition.LOWER
           ? state.value
           : state.valueUpper;
       const { value, left } = calcValue({
-        value: calcValueForDelta(currentValue ?? props.min, delta, props.step),
+        value: calcValueForDelta(currentValue ?? min, delta, step),
       });
       setValueLeftForHandle(state.activeHandle, {
         value: nearestStepValue(value),
@@ -800,7 +821,7 @@ const Slider = (props: SliderProps) => {
         // point with right arrow key, e.g. Typing 51 in `<input>`, moving focus
         // onto the thumb and the hitting right arrow key should yield 52 instead
         // of 54.
-        value: calcValueForDelta(state.value, delta, props.step),
+        value: calcValueForDelta(state.value, delta, step),
       });
       setState({
         value: nearestStepValue(value),
@@ -817,13 +838,8 @@ const Slider = (props: SliderProps) => {
    * setting state accordingly.
    */
   const onChangeInput = (evt: ChangeEvent<HTMLInputElement>) => {
-    // Do nothing if component is disabled
-    if (props.disabled || props.readOnly) {
-      return;
-    }
-
-    // Do nothing if we have no valid event, target, or value
-    if (!evt || !('target' in evt) || typeof evt.target.value !== 'string') {
+    // Do nothing if component is disabled or read-only.
+    if (disabled || readOnly) {
       return;
     }
 
@@ -833,15 +849,15 @@ const Slider = (props: SliderProps) => {
       HandlePosition.LOWER;
     const targetValue = Number.parseFloat(evt.target.value);
 
-    if (hasTwoHandles()) {
+    if (twoHandles) {
       if (isNaN(targetValue)) {
         setValueForHandle(activeHandle, evt.target.value);
       } else if (
         isValidValueForPosition({
           handle: activeHandle,
           value: targetValue,
-          min: props.min,
-          max: props.max,
+          min,
+          max,
         })
       ) {
         processNewInputValue(evt.target);
@@ -858,8 +874,8 @@ const Slider = (props: SliderProps) => {
       } else if (
         isValidValue({
           value: targetValue,
-          min: props.min,
-          max: props.max,
+          min,
+          max,
         })
       ) {
         processNewInputValue(evt.target);
@@ -874,16 +890,11 @@ const Slider = (props: SliderProps) => {
    * Handles state change to isValid state.
    */
   const onBlurInput = (evt: FocusEvent<HTMLInputElement>) => {
-    // Do nothing if we have no valid event, target, or value
-    if (!evt || !('target' in evt) || typeof evt.target.value !== 'string') {
-      return;
-    }
-
     const { value: targetValue } = evt.target;
 
     processNewInputValue(evt.target);
 
-    props.onBlur?.({
+    onBlur?.({
       value: targetValue,
       handlePosition: evt.target.dataset.handlePosition as
         | HandlePosition
@@ -892,17 +903,8 @@ const Slider = (props: SliderProps) => {
   };
 
   const onInputKeyDown = (evt: KeyboardEvent<HTMLInputElement>) => {
-    // Do nothing if component is disabled, or we don't have a valid event.
-    if (
-      props.disabled ||
-      props.readOnly ||
-      !(evt.target instanceof HTMLInputElement)
-    ) {
-      return;
-    }
-
-    // Do nothing if we have no valid event, target, or value.
-    if (!evt || !('target' in evt) || typeof evt.target.value !== 'string') {
+    // Do nothing if component is disabled, read-only, or missing a valid input target.
+    if (disabled || readOnly || !(evt.target instanceof HTMLInputElement)) {
       return;
     }
 
@@ -935,13 +937,13 @@ const Slider = (props: SliderProps) => {
         ? getAdjustedValueForPosition({
             handle: handlePosition,
             value: targetValue,
-            min: props.min,
-            max: props.max,
+            min,
+            max,
           })
         : getAdjustedValue({
             value: targetValue,
-            min: props.min,
-            max: props.max,
+            min,
+            max,
           });
 
       if (adjustedValue !== targetValue) {
@@ -972,10 +974,11 @@ const Slider = (props: SliderProps) => {
     }
   };
 
-  const calcLeftPercent = ({ clientX, value, range }: CalcLeftPercentProps) => {
+  const calcLeftPercent = ({ clientX, value }: CalcLeftPercentProps) => {
     // TODO: Delete the optional chaining operator after `getBoundingClientRect`.
     const boundingRect = elementRef.current?.getBoundingClientRect?.();
     let width = boundingRect ? boundingRect.right - boundingRect.left : 0;
+    const nextValue = value ?? min;
 
     // Enforce a minimum width of at least 1 for calculations
     if (width <= 0) {
@@ -989,13 +992,13 @@ const Slider = (props: SliderProps) => {
         ? (boundingRect?.right ?? 0) - clientX
         : clientX - (boundingRect?.left ?? 0);
       return leftOffset / width;
-    } else if (value !== null && typeof value !== 'undefined' && range) {
-      // Prevent NaN calculation if the range is 0.
-      return range === 0 ? 0 : (value - props.min) / range;
     }
-    // We should never end up in this scenario, but in case we do, and to
-    // re-assure Typescript, return 0.
-    return 0;
+
+    return calcRawLeftPercent({
+      max,
+      min,
+      value: nextValue,
+    });
   };
 
   /**
@@ -1007,7 +1010,6 @@ const Slider = (props: SliderProps) => {
   }: {
     leftPercent: number;
   }) => {
-    const { step = 1, min, max } = props;
     const numSteps = Math.floor((max - min) / step) + 1;
     /** Index of the step that corresponds to `leftPercent`. */
     const stepIndex = Math.round(leftPercent * (numSteps - 1));
@@ -1035,11 +1037,9 @@ const Slider = (props: SliderProps) => {
     /** Whether to bypass the stepping logic and use the raw value. */
     useRawValue?: boolean;
   }) => {
-    const range = props.max - props.min;
     const leftPercentRaw = calcLeftPercent({
       clientX,
       value,
-      range,
     });
     /** `leftPercentRaw` clamped between 0 and 1. */
     const leftPercent = clamp(leftPercentRaw, 0, 1);
@@ -1156,11 +1156,9 @@ const Slider = (props: SliderProps) => {
 
     if (handle === HandlePosition.LOWER) {
       return !valueUpper || newValue <= valueUpper;
-    } else if (handle === HandlePosition.UPPER) {
-      return !value || newValue >= value;
     }
 
-    return false;
+    return !value || newValue >= value;
   };
 
   const isValidValue = ({
@@ -1254,10 +1252,10 @@ const Slider = (props: SliderProps) => {
     const derivedState: Partial<State> = {};
 
     // Will override state in favor of invalid prop
-    if (props.invalid === true) {
+    if (invalid === true) {
       if (isValid === true) derivedState.isValid = false;
       if (isValidUpper === true) derivedState.isValidUpper = false;
-    } else if (props.invalid === false) {
+    } else if (invalid === false) {
       if (isValid === false) derivedState.isValid = true;
       if (isValidUpper === false) derivedState.isValidUpper = true;
     }
@@ -1265,45 +1263,9 @@ const Slider = (props: SliderProps) => {
     if (Object.keys(derivedState).length) {
       setState(derivedState);
     }
-  }, [props.invalid]);
+  }, [invalid]);
 
-  const {
-    ariaLabelInput,
-    unstable_ariaLabelInputUpper: ariaLabelInputUpper,
-    className,
-    hideTextInput = false,
-    id = (inputIdRef.current =
-      inputIdRef.current ||
-      // TODO:
-      // 1. Why isn't `inputId` just set to this value instead of an empty
-      //    string?
-      // 2. Why this value instead of something else, like
-      //    `crypto.randomUUID()` or `useId()`?
-      `__carbon-slider_${Math.random().toString(36).substr(2)}`),
-    min,
-    minLabel,
-    max,
-    maxLabel,
-    formatLabel = defaultFormatLabel,
-    labelText,
-    hideLabel,
-    step = 1,
-    // TODO: Other properties are deleted below. Why isn't this one?
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20452
-    stepMultiplier: _stepMultiplier,
-    inputType = 'number',
-    invalidText,
-    required,
-    disabled = false,
-    name,
-    unstable_nameUpper: nameUpper,
-    light,
-    readOnly = false,
-    warn = false,
-    warnText,
-    translateWithId: t = defaultTranslateWithId,
-    ...other
-  } = props;
+  const id = idProp ?? generatedId;
 
   const {
     value,
@@ -1331,384 +1293,353 @@ const Slider = (props: SliderProps) => {
     warn,
   });
 
-  // TODO: Delete this IIFE. It was added to maintain whitespace and to make it clear
-  // what exactly has changed.
-  return (() => {
-    delete other.onRelease;
-    delete other.invalid;
-    delete other.unstable_valueUpper;
+  const passthroughProps = {
+    ...other,
+    onBlur,
+    onChange,
+    value: controlledValue,
+  };
 
-    const showWarning =
-      normalizedProps.warn ||
-      // TODO: https://github.com/carbon-design-system/carbon/issues/18991#issuecomment-2795709637
-      // eslint-disable-next-line valid-typeof , no-constant-binary-expression -- https://github.com/carbon-design-system/carbon/issues/20452
-      (typeof correctedValue !== null &&
-        correctedPosition === HandlePosition.LOWER &&
-        isValid);
-    const showWarningUpper =
-      normalizedUpperProps.warn ||
-      // TODO: https://github.com/carbon-design-system/carbon/issues/18991#issuecomment-2795709637
-      // eslint-disable-next-line valid-typeof, no-constant-binary-expression -- https://github.com/carbon-design-system/carbon/issues/20452
-      (typeof correctedValue !== null &&
-        correctedPosition ===
-          (twoHandles ? HandlePosition.UPPER : HandlePosition.LOWER) &&
-        (twoHandles ? isValidUpper : isValid));
+  const showWarning =
+    normalizedProps.warn ||
+    (correctedPosition === HandlePosition.LOWER && isValid);
+  const showWarningUpper =
+    normalizedUpperProps.warn ||
+    (correctedPosition ===
+      (twoHandles ? HandlePosition.UPPER : HandlePosition.LOWER) &&
+      (twoHandles ? isValidUpper : isValid));
 
-    return (
-      <PrefixContext.Consumer>
-        {(prefix) => {
-          const labelId = `${id}-label`;
-          const labelClasses = classNames(`${prefix}--label`, {
-            [`${prefix}--visually-hidden`]: hideLabel,
-            [`${prefix}--label--disabled`]: disabled,
-          });
+  const labelId = `${id}-label`;
+  const labelClasses = classNames(`${prefix}--label`, {
+    [`${prefix}--visually-hidden`]: hideLabel,
+    [`${prefix}--label--disabled`]: disabled,
+  });
 
-          const containerClasses = classNames(`${prefix}--slider-container`, {
-            [`${prefix}--slider-container--two-handles`]: twoHandles,
-            [`${prefix}--slider-container--disabled`]: disabled,
-            [`${prefix}--slider-container--readonly`]: readOnly,
-            [`${prefix}--slider-container--rtl`]: isRtl,
-          });
-          const sliderClasses = classNames(`${prefix}--slider`, {
-            [`${prefix}--slider--disabled`]: disabled,
-            [`${prefix}--slider--readonly`]: readOnly,
-          });
+  const containerClasses = classNames(`${prefix}--slider-container`, {
+    [`${prefix}--slider-container--two-handles`]: twoHandles,
+    [`${prefix}--slider-container--disabled`]: disabled,
+    [`${prefix}--slider-container--readonly`]: readOnly,
+    [`${prefix}--slider-container--rtl`]: isRtl,
+  });
+  const sliderClasses = classNames(`${prefix}--slider`, {
+    [`${prefix}--slider--disabled`]: disabled,
+    [`${prefix}--slider--readonly`]: readOnly,
+  });
 
-          const fixedInputClasses = [
-            `${prefix}--text-input`,
-            `${prefix}--slider-text-input`,
-          ];
-          const conditionalInputClasses = {
-            [`${prefix}--text-input--light`]: light,
-          };
-          const lowerInputClasses = classNames([
-            ...fixedInputClasses,
-            `${prefix}--slider-text-input--lower`,
-            conditionalInputClasses,
-            {
-              [`${prefix}--text-input--invalid`]: normalizedProps.invalid,
-              [`${prefix}--slider-text-input--warn`]: showWarning,
-            },
-          ]);
-          const upperInputClasses = classNames([
-            ...fixedInputClasses,
-            `${prefix}--slider-text-input--upper`,
-            conditionalInputClasses,
-            {
-              [`${prefix}--text-input--invalid`]: twoHandles
-                ? normalizedUpperProps.invalid
-                : normalizedProps.invalid,
-              [`${prefix}--slider-text-input--warn`]: showWarningUpper,
-            },
-          ]);
-          const lowerInputWrapperClasses = classNames([
-            `${prefix}--text-input-wrapper`,
-            `${prefix}--slider-text-input-wrapper`,
-            `${prefix}--slider-text-input-wrapper--lower`,
-            {
-              [`${prefix}--text-input-wrapper--readonly`]: readOnly,
-              [`${prefix}--slider-text-input-wrapper--hidden`]: hideTextInput,
-            },
-          ]);
-          const upperInputWrapperClasses = classNames([
-            `${prefix}--text-input-wrapper`,
-            `${prefix}--slider-text-input-wrapper`,
-            `${prefix}--slider-text-input-wrapper--upper`,
-            {
-              [`${prefix}--text-input-wrapper--readonly`]: readOnly,
-              [`${prefix}--slider-text-input-wrapper--hidden`]: hideTextInput,
-            },
-          ]);
-          const lowerThumbClasses = classNames(`${prefix}--slider__thumb`, {
-            [`${prefix}--slider__thumb--lower`]: twoHandles,
-          });
-          const upperThumbClasses = classNames(`${prefix}--slider__thumb`, {
-            [`${prefix}--slider__thumb--upper`]: twoHandles,
-          });
-          const lowerThumbWrapperClasses = classNames([
-            `${prefix}--icon-tooltip`,
-            `${prefix}--slider__thumb-wrapper`,
-            {
-              [`${prefix}--slider__thumb-wrapper--lower`]: twoHandles,
-            },
-          ]);
-          const upperThumbWrapperClasses = classNames([
-            `${prefix}--icon-tooltip`,
-            `${prefix}--slider__thumb-wrapper`,
-            {
-              [`${prefix}--slider__thumb-wrapper--upper`]: twoHandles,
-            },
-          ]);
-          const lowerThumbWrapperProps = {
-            style: {
-              insetInlineStart: `${state.left}%`,
-            },
-          };
-          const upperThumbWrapperProps = {
-            style: { insetInlineStart: `${state.leftUpper}%` },
-          };
+  const fixedInputClasses = [
+    `${prefix}--text-input`,
+    `${prefix}--slider-text-input`,
+  ];
+  const conditionalInputClasses = {
+    [`${prefix}--text-input--light`]: light,
+  };
+  const lowerInputClasses = classNames([
+    ...fixedInputClasses,
+    `${prefix}--slider-text-input--lower`,
+    conditionalInputClasses,
+    {
+      [`${prefix}--text-input--invalid`]: normalizedProps.invalid,
+      [`${prefix}--slider-text-input--warn`]: showWarning,
+    },
+  ]);
+  const upperInputClasses = classNames([
+    ...fixedInputClasses,
+    `${prefix}--slider-text-input--upper`,
+    conditionalInputClasses,
+    {
+      [`${prefix}--text-input--invalid`]: twoHandles
+        ? normalizedUpperProps.invalid
+        : normalizedProps.invalid,
+      [`${prefix}--slider-text-input--warn`]: showWarningUpper,
+    },
+  ]);
+  const lowerInputWrapperClasses = classNames([
+    `${prefix}--text-input-wrapper`,
+    `${prefix}--slider-text-input-wrapper`,
+    `${prefix}--slider-text-input-wrapper--lower`,
+    {
+      [`${prefix}--text-input-wrapper--readonly`]: readOnly,
+      [`${prefix}--slider-text-input-wrapper--hidden`]: hideTextInput,
+    },
+  ]);
+  const upperInputWrapperClasses = classNames([
+    `${prefix}--text-input-wrapper`,
+    `${prefix}--slider-text-input-wrapper`,
+    `${prefix}--slider-text-input-wrapper--upper`,
+    {
+      [`${prefix}--text-input-wrapper--readonly`]: readOnly,
+      [`${prefix}--slider-text-input-wrapper--hidden`]: hideTextInput,
+    },
+  ]);
+  const lowerThumbClasses = classNames(`${prefix}--slider__thumb`, {
+    [`${prefix}--slider__thumb--lower`]: twoHandles,
+  });
+  const upperThumbClasses = classNames(`${prefix}--slider__thumb`, {
+    [`${prefix}--slider__thumb--upper`]: twoHandles,
+  });
+  const lowerThumbWrapperClasses = classNames([
+    `${prefix}--icon-tooltip`,
+    `${prefix}--slider__thumb-wrapper`,
+    {
+      [`${prefix}--slider__thumb-wrapper--lower`]: twoHandles,
+    },
+  ]);
+  const upperThumbWrapperClasses = classNames([
+    `${prefix}--icon-tooltip`,
+    `${prefix}--slider__thumb-wrapper`,
+    {
+      [`${prefix}--slider__thumb-wrapper--upper`]: twoHandles,
+    },
+  ]);
+  const lowerThumbWrapperProps = {
+    style: {
+      insetInlineStart: `${state.left}%`,
+    },
+  };
+  const upperThumbWrapperProps = {
+    style: { insetInlineStart: `${state.leftUpper}%` },
+  };
 
-          return (
-            <div className={classNames(`${prefix}--form-item`, className)}>
-              <Text
-                as="label"
-                htmlFor={twoHandles ? undefined : id}
-                className={labelClasses}
-                id={labelId}>
-                {labelText}
-              </Text>
-              <div className={containerClasses}>
-                {twoHandles ? (
-                  <div className={lowerInputWrapperClasses}>
-                    <input
-                      type={hideTextInput ? 'hidden' : inputType}
-                      id={`${id}-lower-input-for-slider`}
-                      name={name}
-                      className={lowerInputClasses}
-                      value={value}
-                      aria-label={ariaLabelInput}
-                      disabled={disabled}
-                      required={required}
-                      min={min}
-                      max={max}
-                      step={step}
-                      onChange={onChangeInput}
-                      onBlur={onBlurInput}
-                      onKeyUp={props.onInputKeyUp}
-                      onKeyDown={onInputKeyDown}
-                      data-invalid={normalizedProps.invalid ? true : null}
-                      data-handle-position={HandlePosition.LOWER}
-                      aria-invalid={normalizedProps.invalid ? true : undefined}
-                      readOnly={readOnly}
-                    />
-                    {normalizedProps.invalid && (
-                      <WarningFilled
-                        className={`${prefix}--slider__invalid-icon`}
-                      />
-                    )}
+  return (
+    <div className={classNames(`${prefix}--form-item`, className)}>
+      <Text
+        as="label"
+        htmlFor={twoHandles ? undefined : id}
+        className={labelClasses}
+        id={labelId}>
+        {labelText}
+      </Text>
+      <div className={containerClasses}>
+        {twoHandles ? (
+          <div className={lowerInputWrapperClasses}>
+            <input
+              type={hideTextInput ? 'hidden' : inputType}
+              id={`${id}-lower-input-for-slider`}
+              name={name}
+              className={lowerInputClasses}
+              value={value}
+              aria-label={ariaLabelInput}
+              disabled={disabled}
+              required={required}
+              min={min}
+              max={max}
+              step={step}
+              onChange={onChangeInput}
+              onBlur={onBlurInput}
+              onKeyUp={onInputKeyUp}
+              onKeyDown={onInputKeyDown}
+              data-invalid={normalizedProps.invalid ? true : null}
+              data-handle-position={HandlePosition.LOWER}
+              aria-invalid={normalizedProps.invalid ? true : undefined}
+              readOnly={readOnly}
+            />
+            {normalizedProps.invalid && (
+              <WarningFilled className={`${prefix}--slider__invalid-icon`} />
+            )}
 
-                    {showWarning && (
-                      <WarningAltFilled
-                        className={`${prefix}--slider__invalid-icon ${prefix}--slider__invalid-icon--warning`}
-                      />
-                    )}
-                  </div>
-                ) : null}
-                <Text className={`${prefix}--slider__range-label`}>
-                  {formatLabel(min, minLabel)}
-                </Text>
-                {/*eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20452 */
-                /* @ts-ignore onBlur + onChange types are incompatible*/}
-                <div
-                  className={sliderClasses}
-                  ref={(node) => {
-                    elementRef.current = node;
-                  }}
-                  onMouseDown={onDragStart}
-                  onTouchStart={onDragStart}
-                  onKeyDown={onKeyDown}
-                  role="presentation"
-                  tabIndex={-1}
-                  data-invalid={
-                    (
-                      twoHandles
-                        ? normalizedProps.invalid ||
-                          normalizedUpperProps.invalid
-                        : normalizedProps.invalid
-                    )
-                      ? true
-                      : null
-                  }
-                  {...other}>
-                  <ThumbWrapper
-                    hasTooltip={hideTextInput}
-                    className={lowerThumbWrapperClasses}
-                    label={formatLabel(value, undefined)}
-                    align="top"
-                    {...lowerThumbWrapperProps}>
-                    <div
-                      className={lowerThumbClasses}
-                      role="slider"
-                      id={twoHandles ? undefined : id}
-                      tabIndex={readOnly || disabled ? undefined : 0}
-                      aria-valuetext={formatLabel(value, undefined)}
-                      aria-valuemax={twoHandles ? valueUpper : max}
-                      aria-valuemin={min}
-                      aria-valuenow={value}
-                      aria-labelledby={twoHandles ? undefined : labelId}
-                      aria-label={twoHandles ? ariaLabelInput : undefined}
-                      ref={thumbRef}
-                      onFocus={() =>
-                        setState({ activeHandle: HandlePosition.LOWER })
-                      }>
-                      {twoHandles && !isRtl ? (
-                        <>
-                          <LowerHandle aria-label={ariaLabelInput} />
-                          <LowerHandleFocus aria-label={ariaLabelInput} />
-                        </>
-                      ) : twoHandles && isRtl ? (
-                        <>
-                          <UpperHandle aria-label={ariaLabelInputUpper} />
-                          <UpperHandleFocus aria-label={ariaLabelInputUpper} />
-                        </>
-                      ) : undefined}
-                    </div>
-                  </ThumbWrapper>
-                  {twoHandles ? (
-                    <ThumbWrapper
-                      hasTooltip={hideTextInput}
-                      className={upperThumbWrapperClasses}
-                      label={formatLabel(valueUpper ?? 0, undefined)}
-                      align="top"
-                      {...upperThumbWrapperProps}>
-                      <div
-                        className={upperThumbClasses}
-                        role="slider"
-                        tabIndex={readOnly || disabled ? undefined : 0}
-                        aria-valuemax={max}
-                        aria-valuemin={value}
-                        aria-valuenow={valueUpper}
-                        aria-label={ariaLabelInputUpper}
-                        ref={thumbRefUpper}
-                        onFocus={() =>
-                          setState({ activeHandle: HandlePosition.UPPER })
-                        }>
-                        {twoHandles && !isRtl ? (
-                          <>
-                            <UpperHandle aria-label={ariaLabelInputUpper} />
-                            <UpperHandleFocus
-                              aria-label={ariaLabelInputUpper}
-                            />
-                          </>
-                        ) : twoHandles && isRtl ? (
-                          <>
-                            <LowerHandle aria-label={ariaLabelInput} />
-                            <LowerHandleFocus aria-label={ariaLabelInput} />
-                          </>
-                        ) : undefined}
-                      </div>
-                    </ThumbWrapper>
-                  ) : null}
-                  <div
-                    className={`${prefix}--slider__track`}
-                    ref={(node) => {
-                      trackRef.current = node;
-                    }}
-                  />
-                  <div
-                    className={`${prefix}--slider__filled-track`}
-                    ref={filledTrackRef}
-                  />
-                </div>
-                <Text className={`${prefix}--slider__range-label`}>
-                  {formatLabel(max, maxLabel)}
-                </Text>
-
-                <div className={upperInputWrapperClasses}>
-                  <input
-                    type={hideTextInput ? 'hidden' : inputType}
-                    id={`${id}-${twoHandles ? 'upper-' : ''}input-for-slider`}
-                    name={twoHandles ? nameUpper : name}
-                    className={upperInputClasses}
-                    value={twoHandles ? valueUpper : value}
-                    aria-labelledby={
-                      !ariaLabelInput && !twoHandles ? labelId : undefined
-                    }
-                    aria-label={
-                      twoHandles
-                        ? ariaLabelInputUpper
-                        : ariaLabelInput
-                          ? ariaLabelInput
-                          : undefined
-                    }
-                    disabled={disabled}
-                    required={required}
-                    min={min}
-                    max={max}
-                    step={step}
-                    onChange={onChangeInput}
-                    onBlur={onBlurInput}
-                    onKeyDown={onInputKeyDown}
-                    onKeyUp={props.onInputKeyUp}
-                    data-invalid={
-                      (
-                        twoHandles
-                          ? normalizedUpperProps.invalid
-                          : normalizedProps.invalid
-                      )
-                        ? true
-                        : null
-                    }
-                    data-handle-position={
-                      twoHandles ? HandlePosition.UPPER : null
-                    }
-                    aria-invalid={
-                      (
-                        twoHandles
-                          ? normalizedUpperProps.invalid
-                          : normalizedProps.invalid
-                      )
-                        ? true
-                        : undefined
-                    }
-                    readOnly={readOnly}
-                  />
-                  {(twoHandles
-                    ? normalizedUpperProps.invalid
-                    : normalizedProps.invalid) && (
-                    <WarningFilled
-                      className={`${prefix}--slider__invalid-icon`}
-                    />
-                  )}
-
-                  {showWarningUpper && (
-                    <WarningAltFilled
-                      className={`${prefix}--slider__invalid-icon ${prefix}--slider__invalid-icon--warning`}
-                    />
-                  )}
-                </div>
-              </div>
-              {(normalizedProps.invalid || normalizedUpperProps.invalid) && (
-                <Text
-                  as="div"
-                  className={classNames(
-                    `${prefix}--slider__validation-msg`,
-                    `${prefix}--slider__validation-msg--invalid`,
-                    `${prefix}--form-requirement`
-                  )}>
-                  {invalidText}
-                </Text>
-              )}
-              {(normalizedProps.warn || normalizedUpperProps.warn) && (
-                <Text
-                  as="div"
-                  className={classNames(
-                    `${prefix}--slider__validation-msg`,
-                    `${prefix}--form-requirement`
-                  )}>
-                  {warnText}
-                </Text>
-              )}
-              {correctedValue && (
-                <Text
-                  as="div"
-                  role="alert"
-                  className={classNames(
-                    `${prefix}--slider__status-msg`,
-                    `${prefix}--form-requirement`
-                  )}>
-                  {t(
-                    translationIds['carbon.slider.auto-correct-announcement'],
-                    { correctedValue }
-                  )}
-                </Text>
-              )}
+            {showWarning && (
+              <WarningAltFilled
+                className={`${prefix}--slider__invalid-icon ${prefix}--slider__invalid-icon--warning`}
+              />
+            )}
+          </div>
+        ) : null}
+        <Text className={`${prefix}--slider__range-label`}>
+          {formatLabel(min, minLabel)}
+        </Text>
+        {/*eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20452 */
+        /* @ts-ignore onBlur + onChange types are incompatible*/}
+        <div
+          className={sliderClasses}
+          ref={(node) => {
+            elementRef.current = node;
+          }}
+          onMouseDown={onDragStart}
+          onTouchStart={onDragStart}
+          onKeyDown={onKeyDown}
+          role="presentation"
+          tabIndex={-1}
+          data-invalid={
+            (
+              twoHandles
+                ? normalizedProps.invalid || normalizedUpperProps.invalid
+                : normalizedProps.invalid
+            )
+              ? true
+              : null
+          }
+          {...passthroughProps}>
+          <ThumbWrapper
+            hasTooltip={hideTextInput}
+            className={lowerThumbWrapperClasses}
+            label={formatLabel(value, undefined)}
+            align="top"
+            {...lowerThumbWrapperProps}>
+            <div
+              className={lowerThumbClasses}
+              role="slider"
+              id={twoHandles ? undefined : id}
+              tabIndex={readOnly || disabled ? undefined : 0}
+              aria-valuetext={formatLabel(value, undefined)}
+              aria-valuemax={twoHandles ? valueUpper : max}
+              aria-valuemin={min}
+              aria-valuenow={value}
+              aria-labelledby={twoHandles ? undefined : labelId}
+              aria-label={twoHandles ? ariaLabelInput : undefined}
+              ref={thumbRef}
+              onFocus={() => setState({ activeHandle: HandlePosition.LOWER })}>
+              {twoHandles && !isRtl ? (
+                <>
+                  <LowerHandle aria-label={ariaLabelInput} />
+                  <LowerHandleFocus aria-label={ariaLabelInput} />
+                </>
+              ) : twoHandles && isRtl ? (
+                <>
+                  <UpperHandle aria-label={ariaLabelInputUpper} />
+                  <UpperHandleFocus aria-label={ariaLabelInputUpper} />
+                </>
+              ) : undefined}
             </div>
-          );
-        }}
-      </PrefixContext.Consumer>
-    );
-  })();
+          </ThumbWrapper>
+          {hasUpperValue(valueUpper) ? (
+            <ThumbWrapper
+              hasTooltip={hideTextInput}
+              className={upperThumbWrapperClasses}
+              label={formatLabel(valueUpper, undefined)}
+              align="top"
+              {...upperThumbWrapperProps}>
+              <div
+                className={upperThumbClasses}
+                role="slider"
+                tabIndex={readOnly || disabled ? undefined : 0}
+                aria-valuemax={max}
+                aria-valuemin={value}
+                aria-valuenow={valueUpper}
+                aria-label={ariaLabelInputUpper}
+                ref={thumbRefUpper}
+                onFocus={() =>
+                  setState({ activeHandle: HandlePosition.UPPER })
+                }>
+                {!isRtl ? (
+                  <>
+                    <UpperHandle aria-label={ariaLabelInputUpper} />
+                    <UpperHandleFocus aria-label={ariaLabelInputUpper} />
+                  </>
+                ) : (
+                  <>
+                    <LowerHandle aria-label={ariaLabelInput} />
+                    <LowerHandleFocus aria-label={ariaLabelInput} />
+                  </>
+                )}
+              </div>
+            </ThumbWrapper>
+          ) : null}
+          <div className={`${prefix}--slider__track`} />
+          <div
+            className={`${prefix}--slider__filled-track`}
+            ref={filledTrackRef}
+          />
+        </div>
+        <Text className={`${prefix}--slider__range-label`}>
+          {formatLabel(max, maxLabel)}
+        </Text>
+
+        <div className={upperInputWrapperClasses}>
+          <input
+            type={hideTextInput ? 'hidden' : inputType}
+            id={`${id}-${twoHandles ? 'upper-' : ''}input-for-slider`}
+            name={twoHandles ? nameUpper : name}
+            className={upperInputClasses}
+            value={twoHandles ? valueUpper : value}
+            aria-labelledby={
+              !ariaLabelInput && !twoHandles ? labelId : undefined
+            }
+            aria-label={
+              twoHandles
+                ? ariaLabelInputUpper
+                : ariaLabelInput
+                  ? ariaLabelInput
+                  : undefined
+            }
+            disabled={disabled}
+            required={required}
+            min={min}
+            max={max}
+            step={step}
+            onChange={onChangeInput}
+            onBlur={onBlurInput}
+            onKeyDown={onInputKeyDown}
+            onKeyUp={onInputKeyUp}
+            data-invalid={
+              (
+                twoHandles
+                  ? normalizedUpperProps.invalid
+                  : normalizedProps.invalid
+              )
+                ? true
+                : null
+            }
+            data-handle-position={twoHandles ? HandlePosition.UPPER : null}
+            aria-invalid={
+              (
+                twoHandles
+                  ? normalizedUpperProps.invalid
+                  : normalizedProps.invalid
+              )
+                ? true
+                : undefined
+            }
+            readOnly={readOnly}
+          />
+          {(twoHandles
+            ? normalizedUpperProps.invalid
+            : normalizedProps.invalid) && (
+            <WarningFilled className={`${prefix}--slider__invalid-icon`} />
+          )}
+
+          {showWarningUpper && (
+            <WarningAltFilled
+              className={`${prefix}--slider__invalid-icon ${prefix}--slider__invalid-icon--warning`}
+            />
+          )}
+        </div>
+      </div>
+      {(normalizedProps.invalid || normalizedUpperProps.invalid) && (
+        <Text
+          as="div"
+          className={classNames(
+            `${prefix}--slider__validation-msg`,
+            `${prefix}--slider__validation-msg--invalid`,
+            `${prefix}--form-requirement`
+          )}>
+          {invalidText}
+        </Text>
+      )}
+      {(normalizedProps.warn || normalizedUpperProps.warn) && (
+        <Text
+          as="div"
+          className={classNames(
+            `${prefix}--slider__validation-msg`,
+            `${prefix}--form-requirement`
+          )}>
+          {warnText}
+        </Text>
+      )}
+      {correctedValue && (
+        <Text
+          as="div"
+          role="alert"
+          className={classNames(
+            `${prefix}--slider__status-msg`,
+            `${prefix}--form-requirement`
+          )}>
+          {t(translationIds['carbon.slider.auto-correct-announcement'], {
+            correctedValue,
+          })}
+        </Text>
+      )}
+    </div>
+  );
 };
 
 Slider.propTypes = {

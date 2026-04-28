@@ -156,24 +156,48 @@ describe('Select', () => {
       expect(screen.getByRole('combobox')).toBeDisabled();
     });
 
-    it('should respect helperText prop', () => {
-      render(
-        <Select
-          id="select"
-          labelText="Select"
-          helperText="This is some helper text"
-        />
-      );
+    it('should not render helper text when helperText is not provided', () => {
+      const { container } = render(<Select id="select" labelText="Select" />);
 
-      expect(screen.getByText('This is some helper text')).toBeInTheDocument();
-      expect(screen.getByText('This is some helper text')).toHaveClass(
-        `${prefix}--form__helper-text`
+      expect(
+        container.querySelector(`.${prefix}--form__helper-text`)
+      ).toBeNull();
+      expect(screen.getByRole('combobox')).not.toHaveAttribute(
+        'aria-describedby'
       );
     });
 
-    it('should render helperText with value 0', () => {
-      render(<Select id="select" labelText="label" helperText={0} />);
-      expect(screen.getByText('0')).toBeInTheDocument();
+    it.each([
+      { label: 'string', value: 'Some helper text', shouldRender: true },
+      { label: 'true', value: true, shouldRender: true },
+      { label: 'false', value: false, shouldRender: true },
+      { label: 'component', value: <span>hmm</span>, shouldRender: true },
+      { label: 'empty string', value: '', shouldRender: false },
+      { label: 'null', value: null, shouldRender: false },
+      { label: 'undefined', value: undefined, shouldRender: false },
+      { label: 'zero', value: '0', shouldRender: true },
+    ])(
+      'should render helper wrapper based on helperText value: $label',
+      ({ label, value, shouldRender }) => {
+        const { container } = render(
+          <Select id={`select-${label}`} labelText={label} helperText={value} />
+        );
+        const helper = container.querySelector(`.${prefix}--form__helper-text`);
+
+        if (shouldRender) {
+          expect(helper).toBeInTheDocument();
+        } else {
+          expect(helper).toBeNull();
+        }
+      }
+    );
+
+    it('should not set aria-describedby when helperText is an empty string', () => {
+      render(<Select id="select-empty" labelText="Select" helperText="" />);
+
+      expect(screen.getByRole('combobox')).not.toHaveAttribute(
+        'aria-describedby'
+      );
     });
 
     it('should respect hideLabel prop', () => {
@@ -280,11 +304,12 @@ describe('Select', () => {
     });
 
     it('should respect size prop', () => {
-      render(<Select id="select" labelText="Select" size="sm" />);
-
-      expect(screen.getByRole('combobox')).toHaveClass(
-        `${prefix}--select-input--sm`
+      const { container } = render(
+        <Select id="select" labelText="Select" size="sm" />
       );
+      const selectWrapper = container.querySelector(`.${prefix}--select`);
+      expect(selectWrapper).toHaveClass(`${prefix}--select--sm`);
+      expect(selectWrapper).toHaveClass(`${prefix}--layout--size-sm`);
     });
 
     it('should respect warn prop', () => {

@@ -83,7 +83,8 @@ Over time it becomes apparent a preview API has stabilized and suits the needs
 of most users. If it isn't a breaking change, and there hasn't been much
 movement, it can be moved from "preview" status to be "stable".
 
-> [!IMPORTANT]  
+> [!IMPORTANT]
+>
 > To initiate a move to stable:
 >
 > 1. [Open a new issue](https://github.com/carbon-design-system/carbon/issues/new?template=Blank+issue)

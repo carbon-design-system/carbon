@@ -41,7 +41,6 @@ figma.connect(
   'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=31420-317548&t=KXgYpEhuz2XzSITV-4',
   {
     props: sharedMenuButtonProps,
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20452
     example: ({ size, children, menuAlignment, button }) => (
       <MenuButton
         size={size}
@@ -49,7 +48,6 @@ figma.connect(
         label="Actions"
         kind={button.kind}
         disabled={button.disabled}>
-        {/* eslint-disable-next-line react/jsx-no-undef -- https://github.com/carbon-design-system/carbon/issues/20452 */}
         Open Menu button to view <MenuItem /> props and code
       </MenuButton>
     ),
@@ -62,7 +60,6 @@ figma.connect(
   {
     variant: { Open: 'True' },
     props: sharedMenuButtonProps,
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20452
     example: ({ size, children, menuAlignment, button, menu }) => (
       <MenuButton
         size={size}

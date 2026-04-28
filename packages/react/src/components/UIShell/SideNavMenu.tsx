@@ -10,7 +10,9 @@ import cx from 'classnames';
 import PropTypes from 'prop-types';
 import React, {
   forwardRef,
+  useEffect,
   useContext,
+  useRef,
   useState,
   type ReactNode,
   type Ref,
@@ -18,7 +20,7 @@ import React, {
 import SideNavIcon from './SideNavIcon';
 import { keys, match } from '../../internal/keyboard';
 import { usePrefix } from '../../internal/usePrefix';
-import { SideNavContext } from './SideNav';
+import { SideNavContext } from './SideNavContext';
 
 export interface SideNavMenuProps {
   /**
@@ -82,10 +84,13 @@ const SideNavMenu = forwardRef<HTMLElement, SideNavMenuProps>(
     },
     ref
   ) => {
-    const { isRail } = useContext(SideNavContext);
+    const { isRail, isSideNavExpanded: contextIsSideNavExpanded } =
+      useContext(SideNavContext);
+    const currentIsSideNavExpanded =
+      isSideNavExpanded ?? contextIsSideNavExpanded;
     const prefix = usePrefix();
     const [isExpanded, setIsExpanded] = useState<boolean>(defaultExpanded);
-    const [prevExpanded, setPrevExpanded] = useState<boolean>(defaultExpanded);
+    const prevExpandedRef = useRef(false);
     const className = cx({
       [`${prefix}--side-nav__item`]: true,
       [`${prefix}--side-nav__item--active`]:
@@ -95,13 +100,17 @@ const SideNavMenu = forwardRef<HTMLElement, SideNavMenuProps>(
       [customClassName as string]: !!customClassName,
     });
 
-    if (!isSideNavExpanded && isExpanded && isRail) {
-      setIsExpanded(false);
-      setPrevExpanded(true);
-    } else if (isSideNavExpanded && prevExpanded && isRail) {
-      setIsExpanded(true);
-      setPrevExpanded(false);
-    }
+    useEffect(() => {
+      if (!isRail) return;
+
+      if (!currentIsSideNavExpanded && isExpanded) {
+        setIsExpanded(false);
+        prevExpandedRef.current = true;
+      } else if (currentIsSideNavExpanded && prevExpandedRef.current) {
+        setIsExpanded(true);
+        prevExpandedRef.current = false;
+      }
+    }, [currentIsSideNavExpanded, isExpanded, isRail]);
 
     return (
       // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
@@ -122,7 +131,7 @@ const SideNavMenu = forwardRef<HTMLElement, SideNavMenuProps>(
           type="button"
           tabIndex={
             tabIndex === undefined
-              ? !isSideNavExpanded && !isRail
+              ? !currentIsSideNavExpanded && !isRail
                 ? -1
                 : 0
               : tabIndex

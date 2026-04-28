@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2019, 2025
+ * Copyright IBM Corp. 2019, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -10,6 +10,7 @@ import '../select/index';
 
 import { PAGINATION_SIZE } from './defs';
 import { html } from 'lit';
+import { action } from 'storybook/actions';
 
 const sizes = {
   [`Small size (${PAGINATION_SIZE.SMALL})`]: PAGINATION_SIZE.SMALL,
@@ -119,7 +120,13 @@ export const Default = {
         ?page-size-input-disabled=${pageSizeInputDisabled}
         size=${size}
         ?pages-unknown=${pagesUnknown}
-        total-items=${totalItems}>
+        total-items=${totalItems}
+        @cds-page-sizes-select-changed=${(event: CustomEvent) => {
+          action('cds-page-sizes-select-changed')(event.detail);
+        }}
+        @cds-pagination-changed-current=${(event: CustomEvent) => {
+          action('cds-pagination-changed-current')(event.detail);
+        }}>
         <cds-select-item value="10">10</cds-select-item>
         <cds-select-item value="20">20</cds-select-item>
         <cds-select-item value="30">30</cds-select-item>
@@ -159,7 +166,13 @@ export const MultiplePaginationComponents = {
         ?page-size-input-disabled=${pageSizeInputDisabled}
         size=${size}
         ?pages-unknown=${pagesUnknown}
-        total-items=${totalItems}>
+        total-items=${totalItems}
+        @cds-page-sizes-select-changed=${(event: CustomEvent) => {
+          action('cds-page-sizes-select-changed')(event.detail);
+        }}
+        @cds-pagination-changed-current=${(event: CustomEvent) => {
+          action('cds-pagination-changed-current')(event.detail);
+        }}>
         <cds-select-item value="10">10</cds-select-item>
         <cds-select-item value="20">20</cds-select-item>
         <cds-select-item value="30">30</cds-select-item>
@@ -178,7 +191,13 @@ export const MultiplePaginationComponents = {
         ?page-size-input-disabled=${pageSizeInputDisabled}
         size=${size}
         ?pages-unknown=${pagesUnknown}
-        total-items=${totalItems}>
+        total-items=${totalItems}
+        @cds-page-sizes-select-changed=${(event: CustomEvent) => {
+          action('cds-page-sizes-select-changed')(event.detail);
+        }}
+        @cds-pagination-changed-current=${(event: CustomEvent) => {
+          action('cds-pagination-changed-current')(event.detail);
+        }}>
         <cds-select-item value="10">10</cds-select-item>
         <cds-select-item value="20">20</cds-select-item>
         <cds-select-item value="30">30</cds-select-item>
@@ -192,8 +211,12 @@ export const MultiplePaginationComponents = {
 export const PaginationUnknownPages = {
   name: 'Unknown pages and items',
   args: {
-    pagesUnknown: true,
     totalItems: undefined,
+  },
+  parameters: {
+    controls: {
+      exclude: ['pageInputDisabled', 'pagesUnknown', 'totalItems'],
+    },
   },
   render: (args) => {
     const {
@@ -203,12 +226,9 @@ export const PaginationUnknownPages = {
       isLastPage,
       itemsPerPageText,
       page,
-      pageInputDisabled,
       pageSize,
       pageSizeInputDisabled,
-      pagesUnknown,
       size,
-      totalItems,
     } = args ?? {};
 
     return html`
@@ -220,11 +240,17 @@ export const PaginationUnknownPages = {
         items-per-page-text=${itemsPerPageText}
         page=${page}
         page-size=${pageSize}
-        ?page-input-disabled=${pageInputDisabled}
+        ?page-input-disabled=${false}
         ?page-size-input-disabled=${pageSizeInputDisabled}
         size=${size}
-        ?pages-unknown=${pagesUnknown}
-        total-items=${totalItems}>
+        ?pages-unknown=${true}
+        .totalItems=${undefined}
+        @cds-page-sizes-select-changed=${(event: CustomEvent) => {
+          action('cds-page-sizes-select-changed')(event.detail);
+        }}
+        @cds-pagination-changed-current=${(event: CustomEvent) => {
+          action('cds-pagination-changed-current')(event.detail);
+        }}>
         <cds-select-item value="10">10</cds-select-item>
         <cds-select-item value="20">20</cds-select-item>
         <cds-select-item value="30">30</cds-select-item>
@@ -264,7 +290,13 @@ export const PaginationWithCustomPageSizesLabel = {
         ?page-size-input-disabled=${pageSizeInputDisabled}
         size=${size}
         ?pages-unknown=${pagesUnknown}
-        total-items=${totalItems}>
+        total-items=${totalItems}
+        @cds-page-sizes-select-changed=${(event: CustomEvent) => {
+          action('cds-page-sizes-select-changed')(event.detail);
+        }}
+        @cds-pagination-changed-current=${(event: CustomEvent) => {
+          action('cds-pagination-changed-current')(event.detail);
+        }}>
         <cds-select-item value="10">Ten</cds-select-item>
         <cds-select-item value="20">Twenty</cds-select-item>
         <cds-select-item value="30">Thirty</cds-select-item>

@@ -9,18 +9,22 @@ FileUploader component, including richer callback data and expanded trigger
 events for `onChange` and `onDelete`.
 
 When this flag is enabled, the `onChange` callback is consistently triggered for
-all file list modifications (additions, deletions, programmatic clears), and both
-`onChange` and `onDelete` events are augmented with detailed file information
-like `deletedFile`, `addedFiles`, and `currentFiles` on `event.target`.
+all file list modifications (additions, deletions, programmatic clears), and
+both `onChange` and `onDelete` events are augmented with detailed file
+information like `deletedFile`, `addedFiles`, and `currentFiles` on
+`event.target`.
 
 ## Enable enhanced FileUploader callbacks
 
 ```js
-<FeatureFlags enableEnhancedFileUploader={true}>
+<FeatureFlags enableEnhancedFileUploader>
   <FileUploader
     multiple
     filenameStatus="edit"
-    onChange={(evt) => console.log('onChange', evt.target.action, evt.target.currentFiles)}
+    onChange={(evt) =>
+      console.log('onChange', evt.target.action, evt.target.currentFiles)
+    }
     onDelete={(evt) => console.log('onDelete', evt.target.deletedFile)}
   />
 </FeatureFlags>
+```

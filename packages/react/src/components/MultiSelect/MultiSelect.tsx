@@ -17,6 +17,7 @@ import isEqual from 'react-fast-compare';
 import PropTypes from 'prop-types';
 import React, {
   cloneElement,
+  useEffect,
   isValidElement,
   useCallback,
   useContext,
@@ -349,11 +350,9 @@ export const MultiSelect = React.forwardRef(
     const prefix = usePrefix();
     const { isFluid } = useContext(FormContext);
     const multiSelectInstanceId = useId();
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20452
-    const [isFocused, setIsFocused] = useState(false);
+    const prevOpenPropRef = useRef(open);
     const [inputFocused, setInputFocused] = useState(false);
     const [isOpen, setIsOpen] = useState(open || false);
-    const [prevOpenProp, setPrevOpenProp] = useState(open);
     const [topItems, setTopItems] = useState<ItemType[]>([]);
     const [itemsCleared, setItemsCleared] = useState(false);
 
@@ -446,8 +445,7 @@ export const MultiSelect = React.forwardRef(
       },
       selectedItem: controlledSelectedItems as ItemType,
       items: filteredItems,
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20452
-      isItemDisabled(item, _index) {
+      isItemDisabled(item) {
         // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
         return (item as any)?.disabled;
       },
@@ -494,7 +492,6 @@ export const MultiSelect = React.forwardRef(
           }
           if (match(e, keys.ArrowDown) && selectedItems.length === 0) {
             setInputFocused(false);
-            setIsFocused(false);
           }
           if (match(e, keys.Escape) && isOpen) {
             setInputFocused(true);
@@ -525,13 +522,13 @@ export const MultiSelect = React.forwardRef(
       }
     };
 
-    /**
-     * programmatically control this `open` prop
-     */
-    if (prevOpenProp !== open) {
-      setIsOpenWrapper(open);
-      setPrevOpenProp(open);
-    }
+    useEffect(() => {
+      if (prevOpenPropRef.current !== open) {
+        setIsOpen(open);
+        onMenuChange?.(open);
+        prevOpenPropRef.current = open;
+      }
+    }, [open, onMenuChange]);
 
     const normalizedProps = useNormalizedInputProps({
       id,
@@ -673,14 +670,6 @@ export const MultiSelect = React.forwardRef(
       }
     );
 
-    const handleFocus = (evt: React.FocusEvent<HTMLDivElement>) => {
-      if (evt.target.classList.contains(`${prefix}--tag__close-icon`)) {
-        setIsFocused(false);
-      } else {
-        setIsFocused(evt.type === 'focus');
-      }
-    };
-
     const readOnlyEventHandlers = readOnly
       ? {
           onClick: (evt: React.MouseEvent<HTMLButtonElement>) => {
@@ -777,8 +766,6 @@ export const MultiSelect = React.forwardRef(
           )}
         </label>
         <ListBox
-          onFocus={isFluid ? handleFocus : undefined}
-          onBlur={isFluid ? handleFocus : undefined}
           type={type}
           size={size}
           className={className}
@@ -808,8 +795,7 @@ export const MultiSelect = React.forwardRef(
                   !disabled && !readOnly ? clearSelection : noopFn
                 }
                 selectionCount={selectedItemsLength}
-                // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-                translateWithId={translateWithId!}
+                translateWithId={translateWithId}
                 disabled={disabled}
               />
             )}
@@ -844,8 +830,7 @@ export const MultiSelect = React.forwardRef(
           </div>
           <ListBox.Menu {...menuProps}>
             {isOpen &&
-              // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
-              sortItems!(filteredItems, sortOptions).map((item, index) => {
+              sortItems(filteredItems, sortOptions).map((item, index) => {
                 const {
                   hasIndividualSelections,
                   nonSelectAllSelectedCount,

@@ -10,24 +10,23 @@
   "workspaces": [
     "actions/*",
     "config/*",
-    "examples/*",
     "packages/*",
     "www"
   ],
   "scripts": {
-    "build": "lerna run build --stream --prefix",
+    "build": "lerna run build --stream --prefix && node tasks/generate-repo-structure.js",
     "ci-check": "carbon-cli ci-check",
     "clean": "lerna run clean && lerna clean --yes && rimraf node_modules",
     "doctoc": "doctoc --title '## Table of Contents'",
-    "format": "prettier --cache --write '**/*.{js,md,scss,ts,tsx}' '!**/{build,es,lib,storybook,ts,umd}/**'",
-    "format:diff": "prettier --list-different '**/*.{js,md,scss,ts,tsx}' '!**/{build,es,lib,storybook,ts,umd}/**' '!packages/components/**'",
+    "format": "prettier --cache --write '**/*.{js,md,mdx,scss,ts,tsx}' '!**/{build,es,lib,storybook,ts,umd}/**'",
+    "format:diff": "prettier --list-different '**/*.{js,md,mdx,scss,ts,tsx}' '!**/{build,es,lib,storybook,ts,umd}/**' '!packages/components/**'",
     "lint": "eslint actions config packages www",
     "lint:fix": "eslint --cache --fix --max-warnings 0 actions config packages www",
     "lint:styles": "stylelint '**/*.scss' --report-needless-disables --report-invalid-scope-disables",
+    "postinstall": "husky",
     "telemetry:config": "lerna run telemetry:config",
     "test": "cross-env BABEL_ENV=test jest",
-    "test:e2e": "cross-env BABEL_ENV=test jest -c jest.e2e.config.js",
-    "postinstall": "husky"
+    "test:e2e": "cross-env BABEL_ENV=test jest -c jest.e2e.config.js"
   },
   "resolutions": {
     "@types/react": "~19.2.0",
@@ -38,9 +37,9 @@
     "react-dom": "~19.2.3",
     "react-is": "~19.2.0",
     "flatpickr@4.6.13": "patch:flatpickr@npm%3A4.6.13#./.yarn/patches/flatpickr-npm-4.6.13-06399933fc.patch",
-    "brace-expansion": "^2.0.2",
+    "brace-expansion": "^2.0.3",
     "@octokit/rest": "^22.0.0",
-    "eslint": "9.39.1",
+    "eslint": "9.39.4",
     "typescript-eslint": "8.46.2"
   },
   "devDependencies": {
@@ -57,8 +56,6 @@
     "@commitlint/config-conventional": "^20.0.0",
     "@eslint/compat": "^2.0.1",
     "@eslint/js": "^9.24.0",
-    "@percy/cli": "^1.30.4",
-    "@percy/playwright": "^1.0.7",
     "@playwright/test": "^1.36.2",
     "@testing-library/dom": "^10.1.0",
     "@testing-library/jest-dom": "^6.0.0",
@@ -79,8 +76,8 @@
     "eslint-plugin-react-hooks": "^5.2.0",
     "eslint-plugin-testing-library": "^7.6.6",
     "fs-extra": "^11.0.0",
-    "glob": "^11.0.0",
-    "globals": "16.5.0",
+    "glob": "^13.0.0",
+    "globals": "17.5.0",
     "husky": "^9.0.0",
     "jest": "^30.0.5",
     "jest-junit": "^16.0.0",
@@ -134,20 +131,20 @@
   },
   "lint-staged": {
     "**/*.{cjs,js,jsx,mjs,ts,tsx}": [
-      "yarn prettier --cache --write",
+      "prettier --cache --write",
       "eslint --cache --fix --max-warnings 0 --no-warn-ignored"
     ],
     "**/*.scss": [
-      "yarn prettier --cache --write",
-      "stylelint --report-needless-disables --report-invalid-scope-disables --allow-empty-input"
+      "prettier --cache --write",
+      "stylelint --cache --report-needless-disables --report-invalid-scope-disables --allow-empty-input"
     ],
     "!(*sass).md": [
-      "yarn prettier --cache --write"
+      "prettier --cache --write"
     ],
-    "README.md": [
-      "all-contributors generate"
+    "!(*sass).mdx": [
+      "prettier --cache --write"
     ],
-    ".all-contributorsrc": [
+    "{README.md,.all-contributorsrc}": [
       "all-contributors generate"
     ]
   },

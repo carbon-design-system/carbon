@@ -1,15 +1,16 @@
 /**
- * Copyright IBM Corp. 2019, 2024
+ * Copyright IBM Corp. 2019, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
 import { html } from 'lit';
+import { ifDefined } from 'lit/directives/if-defined.js';
 import { property } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
 import CDSContentSwitcherItem from '../content-switcher/content-switcher-item';
-import { TABS_TYPE } from './tabs';
+import { TABS_ICON_SIZE, TABS_TYPE } from './defs';
 import styles from './tabs.scss?lit';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
@@ -36,10 +37,28 @@ export default class CDSTab extends CDSContentSwitcherItem {
   type = TABS_TYPE.REGULAR;
 
   /**
+   * `true` if this tab is icon-only.
+   */
+  @property({ type: Boolean, reflect: true, attribute: 'icon-only' })
+  iconOnly = false;
+
+  /**
+   * Specify the icon size used by icon-only tabs.
+   */
+  @property({ attribute: 'icon-size', reflect: true })
+  iconSize?: TABS_ICON_SIZE;
+
+  /**
    * The tab text content.
    */
   @property()
   tabTitle;
+
+  /**
+   * **Experimental**: Display an empty dot badge on the Tab.
+   */
+  @property({ type: Boolean, reflect: true, attribute: 'badge-indicator' })
+  badgeIndicator = false;
 
   /**
    * Handles `slotchange` event.
@@ -47,7 +66,7 @@ export default class CDSTab extends CDSContentSwitcherItem {
   protected _handleSlotChange({ target }: Event) {
     // Retrieve content of the slot to use for aria-label.
     const content = (target as HTMLSlotElement).assignedNodes();
-    this.tabTitle = content[0].textContent;
+    this.tabTitle = content[0]?.textContent?.trim() || undefined;
   }
 
   connectedCallback() {
@@ -59,23 +78,44 @@ export default class CDSTab extends CDSContentSwitcherItem {
 
   render() {
     const {
+      badgeIndicator,
       disabled,
       selected,
       tabTitle,
       _handleSlotChange: handleSlotChange,
     } = this;
+    const accessibleLabel = tabTitle || this.getAttribute('aria-label');
+    const isIconOnly =
+      this.iconOnly ||
+      this.classList.contains(`${prefix}--tabs__nav-item--icon-only`);
     // No `href`/`tabindex` to not to make this `<a>` click-focusable
-    return html`
+    const tabLink = html`
       <a
         class="${prefix}--tabs__nav-link"
         role="tab"
-        aria-label="${tabTitle}"
+        aria-label="${ifDefined(accessibleLabel || undefined)}"
         tabindex="${selected ? 0 : -1}"
         ?disabled="${disabled}"
-        aria-selected="${Boolean(selected)}">
-        <slot @slotchange="${handleSlotChange}"></slot>
+        aria-selected="${selected}">
+        <span class="${prefix}--tabs__nav-item-label-wrapper">
+          <slot @slotchange="${handleSlotChange}"></slot>
+        </span>
+        ${!disabled && badgeIndicator
+          ? html`<cds-badge-indicator></cds-badge-indicator>`
+          : ''}
       </a>
     `;
+
+    if (isIconOnly && accessibleLabel && !disabled) {
+      return html`
+        <cds-tooltip align="bottom" class="${prefix}--icon-tooltip">
+          ${tabLink}
+          <cds-tooltip-content>${accessibleLabel}</cds-tooltip-content>
+        </cds-tooltip>
+      `;
+    }
+
+    return tabLink;
   }
 
   static styles = styles;

@@ -249,6 +249,100 @@ describe('MultiSelect', () => {
     ).toBeFalsy();
   });
 
+  it('should not call `onMenuChange` on mount when `open` remains unchanged', async () => {
+    const onMenuChange = jest.fn();
+    const items = generateItems(4, generateGenericItem);
+    const { rerender } = render(
+      <MultiSelect
+        id="test"
+        label="test-label"
+        items={items}
+        open={false}
+        onMenuChange={onMenuChange}
+      />
+    );
+    await waitForPosition();
+
+    expect(onMenuChange).not.toHaveBeenCalled();
+
+    rerender(
+      <MultiSelect
+        id="test"
+        label="test-label"
+        items={items}
+        open={false}
+        onMenuChange={onMenuChange}
+      />
+    );
+    await waitForPosition();
+
+    expect(onMenuChange).not.toHaveBeenCalled();
+  });
+
+  it('should call `onMenuChange` when the controlled `open` prop changes', async () => {
+    const onMenuChange = jest.fn();
+    const items = generateItems(4, generateGenericItem);
+    const { rerender } = render(
+      <MultiSelect
+        id="test"
+        label="test-label"
+        items={items}
+        open={false}
+        onMenuChange={onMenuChange}
+      />
+    );
+    await waitForPosition();
+
+    rerender(
+      <MultiSelect
+        id="test"
+        label="test-label"
+        items={items}
+        open={true}
+        onMenuChange={onMenuChange}
+      />
+    );
+    await waitForPosition();
+    expect(onMenuChange).toHaveBeenCalledTimes(1);
+    expect(onMenuChange).toHaveBeenLastCalledWith(true);
+
+    rerender(
+      <MultiSelect
+        id="test"
+        label="test-label"
+        items={items}
+        open={false}
+        onMenuChange={onMenuChange}
+      />
+    );
+    await waitForPosition();
+    expect(onMenuChange).toHaveBeenCalledTimes(2);
+    expect(onMenuChange).toHaveBeenLastCalledWith(false);
+  });
+
+  it('should call `onMenuChange` when user interaction toggles the menu', async () => {
+    const onMenuChange = jest.fn();
+    const items = generateItems(4, generateGenericItem);
+
+    render(
+      <MultiSelect
+        id="test"
+        label="test-label"
+        items={items}
+        onMenuChange={onMenuChange}
+      />
+    );
+    await waitForPosition();
+
+    const combobox = screen.getByRole('combobox');
+
+    await userEvent.click(combobox);
+    expect(onMenuChange).toHaveBeenNthCalledWith(1, true);
+
+    await userEvent.keyboard('[Escape]');
+    expect(onMenuChange).toHaveBeenNthCalledWith(2, false);
+  });
+
   it('should toggle selection with enter', async () => {
     const items = generateItems(4, generateGenericItem);
     const label = 'test-label';
@@ -309,6 +403,33 @@ describe('MultiSelect', () => {
       // eslint-disable-next-line testing-library/no-node-access
       document.querySelector('[aria-label="Clear all selected items"]')
     ).toBeFalsy();
+  });
+
+  it('should clear selected items and announce it when Delete is pressed', async () => {
+    const items = generateItems(4, generateGenericItem);
+    render(
+      <MultiSelect
+        id="test"
+        label="test-label"
+        items={items}
+        initialSelectedItems={[items[0]]}
+      />
+    );
+    await waitForPosition();
+
+    const combobox = screen.getByRole('combobox');
+    expect(
+      screen.getByRole('button', { name: 'Clear all selected items' })
+    ).toBeInTheDocument();
+
+    await userEvent.click(combobox);
+    await userEvent.keyboard('[Escape]');
+    await userEvent.keyboard('[Delete]');
+
+    expect(
+      screen.queryByRole('button', { name: 'Clear all selected items' })
+    ).not.toBeInTheDocument();
+    expect(screen.getByLabelText('all items have been cleared')).toBeVisible();
   });
 
   it('should not be interactive if disabled', async () => {
@@ -599,6 +720,65 @@ describe('MultiSelect', () => {
 
       // the first option in the list to the the former third option in the list
       expect(optionsArray[0]).toHaveAttribute('aria-label', 'Item 2');
+    });
+
+    it('should keep item order when `selectionFeedback` is `fixed`', async () => {
+      const items = generateItems(4, generateGenericItem);
+      const label = 'test-label';
+      const thirdItem = items[2];
+      const { container } = render(
+        <MultiSelect
+          id="custom-id"
+          selectionFeedback="fixed"
+          label={label}
+          items={items}
+        />
+      );
+
+      await waitForPosition();
+
+      const labelNode = getByText(container, label);
+      await userEvent.click(labelNode);
+
+      const itemNode = getByText(container, thirdItem.label);
+      await userEvent.click(itemNode);
+
+      const optionsArray = screen.getAllByRole('option');
+
+      expect(optionsArray[0]).toHaveAttribute('aria-label', 'Item 0');
+      expect(optionsArray[2]).toHaveAttribute('aria-label', 'Item 2');
+    });
+
+    it('should apply floating styles when `autoAlign` is enabled', async () => {
+      const items = generateItems(4, generateGenericItem);
+
+      render(
+        <MultiSelect
+          autoAlign
+          open
+          id="test"
+          label="test-label"
+          items={items}
+        />
+      );
+      await waitForPosition();
+
+      const combobox = screen.getByRole('combobox');
+      const listbox = screen.getByRole('listbox', { hidden: true });
+      const multiSelect = combobox.closest(`.${prefix}--multi-select`);
+
+      expect(multiSelect).toHaveClass(
+        `${prefix}--multi-select`,
+        `${prefix}--autoalign`,
+        `${prefix}--list-box`,
+        `${prefix}--list-box--expanded`,
+        { exact: true }
+      );
+
+      await waitFor(() => {
+        expect(listbox.style.visibility).toBe('hidden');
+        expect(listbox.style.width).toBe('0px');
+      });
     });
 
     it('should accept a `ref` for the underlying button element', async () => {
