@@ -376,12 +376,14 @@ const Pagination = React.forwardRef(
     }
 
     function handlePageInputChange(e) {
-      if (e.target.value > totalPages) {
-        setPage(totalPages);
-      } else if (e.target.value < 1) {
-        setPage(1);
-      } else {
-        setPage(e.target.value);
+      const nextPage = Math.min(Math.max(e.target.value, 1), totalPages);
+      setPage(nextPage);
+
+      if (onChange && nextPage !== 1) {
+        onChange({
+          page,
+          pageSize,
+        });
       }
     }
 
