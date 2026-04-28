@@ -23,7 +23,6 @@ import '../ai-label';
 import '../icon-button';
 import { iconLoader } from '../../globals/internal/icon-loader';
 import { withLayers } from '../../../.storybook/decorators/with-layers';
-import '../layout/index';
 
 const content = html`
   <div slot="body-text">
