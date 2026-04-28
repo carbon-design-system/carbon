@@ -208,7 +208,7 @@ snapshots[
 snapshots[
   'cds-button should render as an element with the role of `link` when the `href` prop is used'
 ] = `<a
-  aria-describedby=""
+  aria-describedby="badge-indicator"
   class="cds--btn cds--btn--lg cds--btn--primary cds--layout--size-lg"
   href="/"
   id="button"
