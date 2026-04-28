@@ -33,15 +33,9 @@ export interface ExtendedFlatpickrInstanceRangePlugin
  * @returns
  *   An extension of Flatpickr `rangePlugin` that does the following:
  *
- *   Better ensures the calendar dropdown is always aligned to the `<input>` for the starting date.
+ *   Positions the calendar dropdown relative to the `<input>` for the starting date.
  *     Workaround for: https://github.com/flatpickr/flatpickr/issues/1944
- *   Disables the logic in Flatpickr `rangePlugin` that calculates the new range with the old selected date
- *     when user selects a date from calendar dropdown.
- *     We'd like to reset the selection when user re-opens calendar dropdown and re-selects a date.
- *     Workaround for: https://github.com/flatpickr/flatpickr/issues/1958
- *   Disables the logic in Flatpickr `rangePlugin` that closes the calendar dropdown
- *     when it's launched from the `<input>` for the end date and user selects a date.
- *     Workaround for: https://github.com/flatpickr/flatpickr/issues/1958
+ *   Commits manual range input values on blur for both inputs when `allowInput` is enabled.
  *   Ensures that the `<input>` in shadow DOM is treated as part of Flatpickr UI,
  *     by ensuring such `<input>` hits `.contains()` search from `fp.config.ignoredFocusElements`.
  *     Without that, Flatpickr clears the `<input>` when end date hasn't been selected yet (which we don't want).
