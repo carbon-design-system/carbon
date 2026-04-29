@@ -211,7 +211,7 @@ export const Contained = {
 export const Dismissable = {
   args: {
     dismissable: true,
-    selectedIndex: 2,
+    selectedIndex: 0,
   },
   argTypes: {
     dismissable: {
