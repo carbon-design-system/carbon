@@ -160,7 +160,7 @@ Map {
     "render": [Function],
   },
   "AILabelActions" => {
-    "$$typeof": Symbol(react.forward_ref),
+    "displayName": "AILabelActions",
     "propTypes": {
       "children": {
         "type": "node",
@@ -169,10 +169,9 @@ Map {
         "type": "string",
       },
     },
-    "render": [Function],
   },
   "AILabelContent" => {
-    "$$typeof": Symbol(react.forward_ref),
+    "displayName": "AILabelContent",
     "propTypes": {
       "children": {
         "type": "node",
@@ -181,7 +180,6 @@ Map {
         "type": "string",
       },
     },
-    "render": [Function],
   },
   "AISkeletonIcon" => {
     "propTypes": {
@@ -2782,9 +2780,6 @@ Map {
       "invalid": {
         "type": "bool",
       },
-      "invalidText": {
-        "type": "node",
-      },
       "light": [Function],
       "locale": {
         "args": [
@@ -2963,9 +2958,6 @@ Map {
       },
       "warn": {
         "type": "bool",
-      },
-      "warnText": {
-        "type": "node",
       },
     },
     "render": [Function],
@@ -3464,6 +3456,7 @@ Map {
       "size": {
         "args": [
           [
+            "xs",
             "sm",
             "md",
             "lg",
@@ -6245,6 +6238,9 @@ Map {
       "label": {
         "type": "string",
       },
+      "legacyAutoalign": {
+        "type": "bool",
+      },
       "menuAlignment": {
         "type": "string",
       },
@@ -8637,6 +8633,7 @@ Map {
       "size": {
         "args": [
           [
+            "xs",
             "sm",
             "md",
             "lg",
@@ -8668,9 +8665,18 @@ Map {
       "className": {
         "type": "string",
       },
-      "small": {
-        "type": "bool",
+      "size": {
+        "args": [
+          [
+            "xs",
+            "sm",
+            "md",
+            "lg",
+          ],
+        ],
+        "type": "oneOf",
       },
+      "small": [Function],
     },
   },
   "SecondaryButton" => {},
@@ -8745,6 +8751,7 @@ Map {
       "size": {
         "args": [
           [
+            "xs",
             "sm",
             "md",
             "lg",
@@ -10726,6 +10733,7 @@ Map {
       "size": {
         "args": [
           [
+            "xs",
             "sm",
             "md",
             "lg",
@@ -10766,6 +10774,17 @@ Map {
       },
       "hideLabel": {
         "type": "bool",
+      },
+      "size": {
+        "args": [
+          [
+            "xs",
+            "sm",
+            "md",
+            "lg",
+          ],
+        ],
+        "type": "oneOf",
       },
     },
   },
@@ -12059,15 +12078,18 @@ Map {
     "Dialog": {
       "$$typeof": Symbol(react.forward_ref),
       "propTypes": {
+        "aria-describedby": {
+          "type": "string",
+        },
         "aria-label": {
           "type": "string",
         },
         "aria-labelledby": {
           "type": "string",
         },
-        "ariaDescribedBy": {
-          "type": "string",
-        },
+        "ariaDescribedBy": [Function],
+        "ariaLabel": [Function],
+        "ariaLabelledBy": [Function],
         "children": {
           "type": "node",
         },
@@ -13801,7 +13823,7 @@ Map {
     "render": [Function],
   },
   "preview__SlugActions" => {
-    "$$typeof": Symbol(react.forward_ref),
+    "displayName": "AILabelActions",
     "propTypes": {
       "children": {
         "type": "node",
@@ -13810,10 +13832,9 @@ Map {
         "type": "string",
       },
     },
-    "render": [Function],
   },
   "preview__SlugContent" => {
-    "$$typeof": Symbol(react.forward_ref),
+    "displayName": "AILabelContent",
     "propTypes": {
       "children": {
         "type": "node",
@@ -13822,7 +13843,6 @@ Map {
         "type": "string",
       },
     },
-    "render": [Function],
   },
   "preview_useFeatureFlag" => {},
   "preview_useFeatureFlags" => {},
@@ -15783,7 +15803,7 @@ Map {
     "render": [Function],
   },
   "unstable__SlugActions" => {
-    "$$typeof": Symbol(react.forward_ref),
+    "displayName": "AILabelActions",
     "propTypes": {
       "children": {
         "type": "node",
@@ -15792,10 +15812,9 @@ Map {
         "type": "string",
       },
     },
-    "render": [Function],
   },
   "unstable__SlugContent" => {
-    "$$typeof": Symbol(react.forward_ref),
+    "displayName": "AILabelContent",
     "propTypes": {
       "children": {
         "type": "node",
@@ -15804,7 +15823,6 @@ Map {
         "type": "string",
       },
     },
-    "render": [Function],
   },
   "unstable_useFeatureFlag" => {},
   "unstable_useFeatureFlags" => {},

@@ -9,7 +9,6 @@ import PropTypes from 'prop-types';
 import React, {
   forwardRef,
   useCallback,
-  useContext,
   useEffect,
   useImperativeHandle,
   useRef,
@@ -28,8 +27,6 @@ import { match, keys } from '../../internal/keyboard';
 import { isComponentElement } from '../../internal';
 import { usePrefix } from '../../internal/usePrefix';
 import { useSavedCallback } from '../../internal/useSavedCallback';
-import { FormContext } from '../FluidForm';
-import { WarningFilled, WarningAltFilled } from '@carbon/icons-react';
 import {
   DateLimit,
   DateOption,
@@ -113,7 +110,7 @@ const carbonFlatpickrMonthSelectPlugin = (config) => (fp) => {
         } else {
           fp.yearElements[0]
             .closest(config.selectorFlatpickrMonthYearContainer)
-            .insertAdjacentElement('afterend', monthElement);
+            .insertAdjacentElement('beforeend', monthElement);
         }
 
         return monthElement;
@@ -270,11 +267,6 @@ export interface DatePickerProps {
   invalid?: boolean;
 
   /**
-   * Provide the text that is displayed when the control is in error state (Fluid Only)
-   */
-  invalidText?: ReactNode;
-
-  /**
    * `true` to use the light version.
    */
   light?: boolean;
@@ -343,11 +335,6 @@ export interface DatePickerProps {
   warn?: boolean;
 
   /**
-   * Provide the text that is displayed when the control is in warning state (Fluid only)
-   */
-  warnText?: ReactNode;
-
-  /**
    * Accessible aria-label for the "next month" arrow icon.
    */
   nextMonthAriaLabel?: string;
@@ -372,9 +359,7 @@ const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>((props, ref) => {
     enable,
     inline,
     invalid,
-    invalidText,
     warn,
-    warnText,
     light = false,
     locale = 'en',
     maxDate,
@@ -392,7 +377,6 @@ const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>((props, ref) => {
   } = props;
 
   const prefix = usePrefix();
-  const { isFluid } = useContext(FormContext);
   const [hasInput, setHasInput] = useState(false);
   // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
   const startInputField: any = useCallback((node) => {
@@ -456,7 +440,6 @@ const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>((props, ref) => {
 
   const savedOnOpen = useSavedCallback(onOpen);
 
-  const effectiveWarn = warn && !invalid;
   const wrapperRef = useRef<HTMLDivElement>(null);
 
   const datePickerClasses = cx(`${prefix}--date-picker`, {
@@ -476,13 +459,18 @@ const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>((props, ref) => {
   const childrenWithProps = React.Children.toArray(children as any).map(
     // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
     (child: any, index) => {
+      const childInvalid = child.props?.invalid;
+      const childWarn = child.props?.warn;
+      const mergedInvalid = invalid ?? childInvalid;
+      const mergedWarn = mergedInvalid ? false : (warn ?? childWarn);
+
       if (index === 0 && isComponentElement(child, DatePickerInput)) {
         return React.cloneElement(child, {
           datePickerType,
           ref: startInputField,
           readOnly,
-          invalid,
-          warn: effectiveWarn,
+          invalid: mergedInvalid,
+          warn: mergedWarn,
         });
       }
       if (index === 1 && isComponentElement(child, DatePickerInput)) {
@@ -490,24 +478,27 @@ const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>((props, ref) => {
           datePickerType,
           ref: endInputField,
           readOnly,
-          invalid,
-          warn: effectiveWarn,
+          invalid: mergedInvalid,
+          warn: mergedWarn,
         });
       }
+      // TODO: The docs say this component expects `DatePickerInput` children.
+      // Can these non-`DatePickerInput` fallbacks be deleted?
+      // https://github.com/carbon-design-system/carbon/blob/b4297c52b50edf2fbc6c439c38edc8ee860c77fc/packages/react/src/components/DatePicker/DatePicker.mdx?plain=1#L49-L50
       if (index === 0) {
         return React.cloneElement(child, {
           ref: startInputField,
           readOnly,
-          invalid,
-          warn: effectiveWarn,
+          invalid: mergedInvalid,
+          warn: mergedWarn,
         });
       }
       if (index === 1) {
         return React.cloneElement(child, {
           ref: endInputField,
           readOnly,
-          invalid,
-          warn: effectiveWarn,
+          invalid: mergedInvalid,
+          warn: mergedWarn,
         });
       }
     }
@@ -670,6 +661,8 @@ const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>((props, ref) => {
     calendarRef.current = calendar;
 
     const handleInputFieldKeyDown = (event: KeyboardEvent) => {
+      if (readOnly && match(event, keys.Tab)) return;
+
       const {
         calendarContainer,
         selectedDateElem: fpSelectedDateElem,
@@ -753,10 +746,6 @@ const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>((props, ref) => {
       }
 
       if (start.value !== '') {
-        return;
-      }
-
-      if (!calendar.selectedDates) {
         return;
       }
 
@@ -931,21 +920,12 @@ const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>((props, ref) => {
 
   useEffect(() => {
     if (calendarRef.current?.set) {
-      if (value !== undefined) {
-        // To make up for calendarRef.current.setDate not making provision for an empty string or array
-        if (
-          value === '' ||
-          value === null ||
-          (Array.isArray(value) &&
-            (value.length === 0 || value.every(isEmptyDateValue)))
-        ) {
-          // only clear if there are selected dates to avoid unnecessary operations
-          if (calendarRef.current.selectedDates.length > 0) {
-            calendarRef.current.clear();
-          }
-        } else {
-          calendarRef.current.setDate(value);
-        }
+      if (
+        !isEmptyDateValue(value) &&
+        (!Array.isArray(value) ||
+          (value.length > 0 && !value.every(isEmptyDateValue)))
+      ) {
+        calendarRef.current.setDate(value);
       }
       updateClassNames(calendarRef.current, prefix);
       //for simple date picker w/o calendar; initial mount may not have value
@@ -959,29 +939,6 @@ const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>((props, ref) => {
   }, [value, prefix, startInputField]);
 
   let fluidError;
-  if (isFluid) {
-    if (invalid) {
-      fluidError = (
-        <>
-          <WarningFilled
-            className={`${prefix}--date-picker__icon ${prefix}--date-picker__icon--invalid`}
-          />
-          <hr className={`${prefix}--date-picker__divider`} />
-          <div className={`${prefix}--form-requirement`}>{invalidText}</div>
-        </>
-      );
-    } else if (warn) {
-      fluidError = (
-        <>
-          <WarningAltFilled
-            className={`${prefix}--date-picker__icon ${prefix}--date-picker__icon--warn`}
-          />
-          <hr className={`${prefix}--date-picker__divider`} />
-          <div className={`${prefix}--form-requirement`}>{warnText}</div>
-        </>
-      );
-    }
-  }
 
   return (
     <div className={wrapperClasses} ref={ref} {...rest}>
@@ -1055,11 +1012,6 @@ DatePicker.propTypes = {
    * Specify whether or not the control is invalid (Fluid only)
    */
   invalid: PropTypes.bool,
-
-  /**
-   * Provide the text that is displayed when the control is in error state (Fluid Only)
-   */
-  invalidText: PropTypes.node,
 
   /**
    * `true` to use the light version.
@@ -1143,11 +1095,6 @@ DatePicker.propTypes = {
    * Specify whether the control is currently in warning state (Fluid only)
    */
   warn: PropTypes.bool,
-
-  /**
-   * Provide the text that is displayed when the control is in warning state (Fluid only)
-   */
-  warnText: PropTypes.node,
 
   /**
    * Accessible aria-label for the "next month" arrow icon.
