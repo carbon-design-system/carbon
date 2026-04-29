@@ -458,7 +458,6 @@ class CDSModal extends CDSModalBase {
     });
 
     const ariaLabel = this._computeAriaLabel();
-    const role = alert ? 'alertdialog' : 'dialog';
 
     if (enableDialogElement) {
       return html`
@@ -467,7 +466,7 @@ class CDSModal extends CDSModalBase {
           .alert=${this.alert}
           .preventCloseOnClickOutside=${this.preventCloseOnClickOutside}
           .preventClose=${this.preventClose}
-          role=${role}
+          role="${alert ? 'alertdialog' : 'dialog'}"
           aria-label=${ariaLabel}
           modal-controlled
           @cds-dialog-closed=${this._handleDialogClosed}
@@ -485,7 +484,7 @@ class CDSModal extends CDSModalBase {
           part="dialog"
           class=${containerClasses}
           aria-modal=${true}
-          role=${role}
+          role="${alert ? 'alert' : 'dialog'}"
           tabindex="-1"
           @click=${this._handleClickContainer}>
           <slot @slotchange="${this._handleSlotChange}"></slot>
