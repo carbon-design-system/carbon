@@ -1107,8 +1107,8 @@ export const WithCustomSorting = {
         }
 
         return compareItems(
-          (itemA as HTMLElement).innerText.trim(),
-          (itemB as HTMLElement).innerText.trim(),
+          itemA.textContent?.trim() ?? '',
+          itemB.textContent?.trim() ?? '',
           { locale }
         );
       });
