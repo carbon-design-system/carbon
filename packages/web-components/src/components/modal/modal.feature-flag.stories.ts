@@ -13,7 +13,6 @@ import '../../../.storybook/templates/with-feature-flags';
 import '../button';
 import '../text-input';
 import '../select';
-import '../textarea';
 import { MODAL_SIZE } from './modal';
 
 /**
