@@ -429,7 +429,7 @@ describe('NumberInput', () => {
   });
 
   describe('steppers', () => {
-    it('should call `onClick` when up or down arrows are clicked', async () => {
+    it('should call `onClick` when up or down arrows are clicked (uncontrolled)', async () => {
       const onClick = jest.fn();
 
       render(
@@ -438,7 +438,7 @@ describe('NumberInput', () => {
           id="test"
           onClick={onClick}
           min={0}
-          value={10}
+          defaultValue={10}
           max={100}
           translateWithId={translateWithId}
         />
@@ -495,13 +495,13 @@ describe('NumberInput', () => {
       expect(screen.getByLabelText('test-label')).toHaveValue(10);
     });
 
-    it('should only increase the value on up arrow click if value is less than max', async () => {
+    it('should only increase the value on up arrow click if value is less than max (uncontrolled)', async () => {
       render(
         <NumberInput
           label="test-label"
           id="test"
           min={0}
-          value={5}
+          defaultValue={5}
           max={10}
           step={5}
           translateWithId={translateWithId}
@@ -517,13 +517,13 @@ describe('NumberInput', () => {
       expect(screen.getByLabelText('test-label')).toHaveValue(10);
     });
 
-    it('should only decrease the value on down arrow click if value is greater than min', async () => {
+    it('should only decrease the value on down arrow click if value is greater than min (uncontrolled)', async () => {
       render(
         <NumberInput
           label="test-label"
           id="test"
           min={0}
-          value={5}
+          defaultValue={5}
           max={10}
           step={5}
           translateWithId={translateWithId}
@@ -539,13 +539,13 @@ describe('NumberInput', () => {
       expect(screen.getByLabelText('test-label')).toHaveValue(0);
     });
 
-    it('should increase by the value of step', async () => {
+    it('should increase by the value of step (uncontrolled)', async () => {
       render(
         <NumberInput
           label="test-label"
           id="test"
           min={0}
-          value={5}
+          defaultValue={5}
           max={10}
           step={5}
           translateWithId={translateWithId}
@@ -558,13 +558,13 @@ describe('NumberInput', () => {
       expect(screen.getByLabelText('test-label')).toHaveValue(10);
     });
 
-    it('should decrease by the value of step', async () => {
+    it('should decrease by the value of step (uncontrolled)', async () => {
       render(
         <NumberInput
           label="test-label"
           id="test"
           min={0}
-          value={5}
+          defaultValue={5}
           max={10}
           step={5}
           translateWithId={translateWithId}
@@ -601,14 +601,196 @@ describe('NumberInput', () => {
       expect(onStepperBlur).toHaveBeenCalledTimes(1);
       expect(onBlur).not.toHaveBeenCalled();
     });
+
+    describe('steppers (controlled)', () => {
+      it('should call onChange but not update value when controlled without onChange handler', async () => {
+        const onChange = jest.fn();
+
+        render(
+          <NumberInput
+            label="test-label"
+            id="test"
+            min={0}
+            value={10}
+            max={100}
+            onChange={onChange}
+            translateWithId={translateWithId}
+          />
+        );
+
+        expect(screen.getByLabelText('test-label')).toHaveValue(10);
+
+        await userEvent.click(screen.getByLabelText('increment'));
+
+        // onChange should be called with new value
+        expect(onChange).toHaveBeenCalledWith(
+          expect.anything(),
+          expect.objectContaining({
+            value: 11,
+            direction: 'up',
+          })
+        );
+
+        // But value should not change because parent didn't update it
+        expect(screen.getByLabelText('test-label')).toHaveValue(10);
+      });
+
+      it('should update value when controlled with proper onChange handler', async () => {
+        const ControlledNumberInput = () => {
+          const [value, setValue] = React.useState(10);
+          return (
+            <NumberInput
+              label="test-label"
+              id="test"
+              min={0}
+              value={value}
+              max={100}
+              onChange={(e, state) => setValue(state.value)}
+              translateWithId={translateWithId}
+            />
+          );
+        };
+
+        render(<ControlledNumberInput />);
+
+        expect(screen.getByLabelText('test-label')).toHaveValue(10);
+
+        await userEvent.click(screen.getByLabelText('increment'));
+        expect(screen.getByLabelText('test-label')).toHaveValue(11);
+
+        await userEvent.click(screen.getByLabelText('decrement'));
+        expect(screen.getByLabelText('test-label')).toHaveValue(10);
+      });
+
+      it('should allow parent to reject value changes in controlled mode', async () => {
+        const ControlledNumberInput = () => {
+          const [value, setValue] = React.useState(10);
+          return (
+            <NumberInput
+              label="test-label"
+              id="test"
+              min={0}
+              value={value}
+              max={100}
+              onChange={(e, state) => {
+                // Only allow even numbers
+                if (state.value % 2 === 0) {
+                  setValue(state.value);
+                }
+              }}
+              translateWithId={translateWithId}
+            />
+          );
+        };
+
+        render(<ControlledNumberInput />);
+
+        expect(screen.getByLabelText('test-label')).toHaveValue(10);
+
+        // Try to increment to 11 (odd) - should be rejected
+        await userEvent.click(screen.getByLabelText('increment'));
+        expect(screen.getByLabelText('test-label')).toHaveValue(10);
+
+        // Decrement to 9 (odd) - should be rejected
+        await userEvent.click(screen.getByLabelText('decrement'));
+        expect(screen.getByLabelText('test-label')).toHaveValue(10);
+      });
+
+      it('should respect max value in controlled mode', async () => {
+        const ControlledNumberInput = () => {
+          const [value, setValue] = React.useState(9);
+          return (
+            <NumberInput
+              label="test-label"
+              id="test"
+              min={0}
+              value={value}
+              max={10}
+              onChange={(e, state) => setValue(state.value)}
+              translateWithId={translateWithId}
+            />
+          );
+        };
+
+        render(<ControlledNumberInput />);
+
+        expect(screen.getByLabelText('test-label')).toHaveValue(9);
+
+        await userEvent.click(screen.getByLabelText('increment'));
+        expect(screen.getByLabelText('test-label')).toHaveValue(10);
+
+        // Should not go above max
+        await userEvent.click(screen.getByLabelText('increment'));
+        expect(screen.getByLabelText('test-label')).toHaveValue(10);
+      });
+
+      it('should respect min value in controlled mode', async () => {
+        const ControlledNumberInput = () => {
+          const [value, setValue] = React.useState(1);
+          return (
+            <NumberInput
+              label="test-label"
+              id="test"
+              min={0}
+              value={value}
+              max={10}
+              onChange={(e, state) => setValue(state.value)}
+              translateWithId={translateWithId}
+            />
+          );
+        };
+
+        render(<ControlledNumberInput />);
+
+        expect(screen.getByLabelText('test-label')).toHaveValue(1);
+
+        await userEvent.click(screen.getByLabelText('decrement'));
+        expect(screen.getByLabelText('test-label')).toHaveValue(0);
+
+        // Should not go below min
+        await userEvent.click(screen.getByLabelText('decrement'));
+        expect(screen.getByLabelText('test-label')).toHaveValue(0);
+      });
+
+      it('should handle step increments correctly in controlled mode', async () => {
+        const ControlledNumberInput = () => {
+          const [value, setValue] = React.useState(5);
+          return (
+            <NumberInput
+              label="test-label"
+              id="test"
+              min={0}
+              value={value}
+              max={20}
+              step={5}
+              onChange={(e, state) => setValue(state.value)}
+              translateWithId={translateWithId}
+            />
+          );
+        };
+
+        render(<ControlledNumberInput />);
+
+        expect(screen.getByLabelText('test-label')).toHaveValue(5);
+
+        await userEvent.click(screen.getByLabelText('increment'));
+        expect(screen.getByLabelText('test-label')).toHaveValue(10);
+
+        await userEvent.click(screen.getByLabelText('increment'));
+        expect(screen.getByLabelText('test-label')).toHaveValue(15);
+
+        await userEvent.click(screen.getByLabelText('decrement'));
+        expect(screen.getByLabelText('test-label')).toHaveValue(10);
+      });
+    });
   });
-  it('should increase by the value of large step', async () => {
+  it('should increase by the value of large step (uncontrolled)', async () => {
     render(
       <NumberInput
         label="test-label"
         id="test"
         min={-9999}
-        value={1000}
+        defaultValue={1000}
         max={10000}
         step={1000}
         translateWithId={translateWithId}
@@ -618,13 +800,13 @@ describe('NumberInput', () => {
     await userEvent.click(screen.getByLabelText('increment'));
     expect(screen.getByLabelText('test-label')).toHaveValue(2000);
   });
-  it('should decrease by the value of large step', async () => {
+  it('should decrease by the value of large step (uncontrolled)', async () => {
     render(
       <NumberInput
         label="test-label"
         id="test"
         min={-9999}
-        value={1000}
+        defaultValue={1000}
         max={10000}
         step={1000}
         translateWithId={translateWithId}
@@ -671,14 +853,14 @@ describe('NumberInput', () => {
     expect(onChange).toHaveBeenCalledTimes(0);
   });
 
-  it('should update value to empty when allowEmpty is true & input value becomes empty', async () => {
+  it('should update value to empty when allowEmpty is true & input value becomes empty (uncontrolled)', async () => {
     const onChange = jest.fn();
     render(
       <NumberInput
         id="carbon-number"
         min={-100}
         max={100}
-        value={50}
+        defaultValue={50}
         label="NumberInput label"
         helperText="Optional helper text."
         invalidText="Number is not valid"
@@ -703,13 +885,13 @@ describe('NumberInput', () => {
     );
   });
 
-  it('should increment and decrement decimal numbers without floating-point precision errors', async () => {
+  it('should increment and decrement decimal numbers without floating-point precision errors (uncontrolled)', async () => {
     render(
       <NumberInput
         label="NumberInput label"
         id="number-input"
         min={0}
-        value={15.01}
+        defaultValue={15.01}
         step={1}
         max={100}
         translateWithId={translateWithId}
