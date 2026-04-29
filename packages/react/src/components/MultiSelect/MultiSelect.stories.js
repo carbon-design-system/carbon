@@ -175,15 +175,15 @@ const sharedArgs = {
   size: 'md',
   autoAlign: false,
   type: 'default',
-  titleText: 'This is a MultiSelect Title',
+  titleText: 'Label',
   disabled: false,
   hideLabel: false,
   invalid: false,
   warn: false,
   open: false,
   helperText: 'This is helper text',
-  warnText: 'whoopsie!',
-  invalidText: 'whoopsie!',
+  warnText: 'Warning message goes here',
+  invalidText: 'Error message goes here',
   label: 'This is a label',
   clearSelectionDescription: 'Total items selected: ',
   useTitleInItem: false,
@@ -354,6 +354,8 @@ export const Filterable = (args) => {
   );
 };
 
+Filterable.args = { ...sharedArgs };
+
 export const FilterableWithSelectAll = (args) => {
   return (
     <div
@@ -372,6 +374,8 @@ export const FilterableWithSelectAll = (args) => {
     </div>
   );
 };
+
+FilterableWithSelectAll.args = { ...sharedArgs };
 
 FilterableWithSelectAll.argTypes = {
   ...filterableArgTypes,
@@ -422,6 +426,8 @@ export const _FilterableWithLayer = (args) => (
     )}
   </WithLayer>
 );
+
+_FilterableWithLayer.args = { ...sharedArgs };
 
 _FilterableWithLayer.argTypes = {
   ...filterableArgTypes,
@@ -525,6 +531,8 @@ export const SelectAll = (args) => {
   );
 };
 
+SelectAll.args = { ...sharedArgs };
+
 const aiLabel = (
   <AILabel className="ai-label-container">
     <AILabelContent>
@@ -589,6 +597,7 @@ export const FilterableWithAILabel = (args) => (
   </div>
 );
 
+FilterableWithAILabel.args = { ...sharedArgs };
 FilterableWithAILabel.argTypes = {
   ...filterableArgTypes,
 };
@@ -667,6 +676,8 @@ export const withToggletipLabel = (args) => {
   );
 };
 
+withToggletipLabel.args = { ...sharedArgs };
+
 export const SelectAllWithDynamicItems = (args) => {
   const [label, setLabel] = useState('Choose options');
   const [items, setItems] = useState(itemsWithSelectAll);
@@ -715,3 +726,5 @@ export const SelectAllWithDynamicItems = (args) => {
     </div>
   );
 };
+
+SelectAllWithDynamicItems.args = { ...sharedArgs };

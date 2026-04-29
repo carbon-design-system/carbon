@@ -90,17 +90,6 @@ const fixEventsPlugin: FixEventsPlugin = (config) => (fp) => {
             fp.close();
           });
         }
-      } else if (
-        match(event, keys.ArrowLeft) ||
-        match(event, keys.ArrowRight)
-      ) {
-        // Prevents Flatpickr code from canceling the event if left/right arrow keys are hit on `<input>`,
-        // so user can move the keyboard cursor for editing dates
-        // Workaround for: https://github.com/flatpickr/flatpickr/issues/1943
-        //
-        // TODO: https://github.com/flatpickr/flatpickr/issues/1943 has been
-        // addressed. Can the workaround be deleted?
-        event.stopPropagation();
       } else if (match(event, keys.ArrowDown)) {
         event.preventDefault();
         fp.open();

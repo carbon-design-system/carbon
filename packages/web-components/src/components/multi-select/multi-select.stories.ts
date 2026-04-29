@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2019, 2025
+ * Copyright IBM Corp. 2019, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -90,15 +90,15 @@ const args = {
   hideLabel: false,
   locale: 'en',
   invalid: false,
-  invalidText: 'whoopsie!',
-  titleText: 'This is a MultiSelect Title',
+  invalidText: 'Error message goes here',
+  warnText: 'Warning message goes here',
+  titleText: 'Label',
   label: 'This is a label',
   size: DROPDOWN_SIZE.MEDIUM,
   selectionFeedback: SELECTION_FEEDBACK_OPTION.TOP_AFTER_REOPEN,
   readOnly: false,
   type: null,
   warn: false,
-  warnText: 'whoopsie!',
 };
 
 const filterableArgs = {
@@ -110,7 +110,8 @@ const filterableArgs = {
   hideLabel: false,
   locale: 'en',
   invalid: false,
-  invalidText: 'whoopsie!',
+  invalidText: 'Error message goes here',
+  warnText: 'Warning message goes here',
   titleText: 'FilterableMultiSelect title',
   label: '',
   size: DROPDOWN_SIZE.MEDIUM,
@@ -118,7 +119,6 @@ const filterableArgs = {
   readOnly: false,
   type: null,
   warn: false,
-  warnText: 'whoopsie!',
 };
 
 const argTypes = {
@@ -1044,6 +1044,102 @@ export const WithToggletipLabel = {
           <cds-multi-select-item value="router">Option 5</cds-multi-select-item>
         </cds-multi-select>
       </div>
+    `;
+  },
+};
+
+export const WithCustomSorting = {
+  args: {
+    ...args,
+    titleText: 'With Custom Sorting',
+    helperText: 'Selected items appear at the bottom',
+  },
+  argTypes,
+  decorators: [(story) => html` <div style="width:300px">${story()}</div> `],
+  render: (args) => {
+    const {
+      clearSelectionLabel,
+      direction,
+      disabled,
+      helperText,
+      hideLabel,
+      locale,
+      invalid,
+      invalidText,
+      readOnly,
+      titleText,
+      selectionFeedback,
+      size,
+      label,
+      type,
+      value,
+      warn,
+      warnText,
+    } = args ?? {};
+
+    const customSortItems = (
+      menuItems: NodeList,
+      {
+        values,
+        compareItems,
+        locale,
+      }: {
+        values: string[];
+        compareItems: (
+          itemA: string,
+          itemB: string,
+          options: { locale: string }
+        ) => number;
+        locale: string;
+      }
+    ) => {
+      const menuItemsArray = Array.from(menuItems);
+
+      return menuItemsArray.sort((itemA, itemB) => {
+        const hasItemA = values.includes((itemA as HTMLInputElement).value);
+        const hasItemB = values.includes((itemB as HTMLInputElement).value);
+
+        if (hasItemA && !hasItemB) {
+          return 1;
+        }
+        if (hasItemB && !hasItemA) {
+          return -1;
+        }
+
+        return compareItems(
+          (itemA as HTMLElement).innerText.trim(),
+          (itemB as HTMLElement).innerText.trim(),
+          { locale }
+        );
+      });
+    };
+
+    return html`
+      <cds-multi-select
+        direction=${ifDefined(direction)}
+        ?disabled=${disabled}
+        ?invalid=${invalid}
+        invalid-text=${ifDefined(invalidText)}
+        clear-selection-label=${ifDefined(clearSelectionLabel)}
+        helper-text=${ifDefined(helperText)}
+        ?hide-label=${hideLabel}
+        locale=${ifDefined(locale)}
+        ?read-only=${readOnly}
+        title-text=${ifDefined(titleText)}
+        selection-feedback=${ifDefined(selectionFeedback)}
+        size=${ifDefined(size)}
+        ?warn=${warn}
+        warn-text=${ifDefined(warnText)}
+        label=${ifDefined(label)}
+        type=${ifDefined(type)}
+        value="${ifDefined(value)}"
+        .sortItems=${customSortItems}>
+        <cds-multi-select-item value="5">Option 5</cds-multi-select-item>
+        <cds-multi-select-item value="2">Option 2</cds-multi-select-item>
+        <cds-multi-select-item value="1">Option 1</cds-multi-select-item>
+        <cds-multi-select-item value="4">Option 4</cds-multi-select-item>
+        <cds-multi-select-item value="3">Option 3</cds-multi-select-item>
+      </cds-multi-select>
     `;
   },
 };

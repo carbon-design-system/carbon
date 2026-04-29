@@ -34,6 +34,7 @@ body:
         - '@carbon/themes'
         - '@carbon/type'
         - '@carbon/upgrade'
+        - '@carbon/utilities'
     validations:
       required: true
   - type: dropdown
@@ -129,4 +130,5 @@ body:
     attributes:
       value: |
         > [!TIP]
+        >
         > You do not need to apply labels. Labels are applied automatically and by the Carbon team when your issue is triaged.
