@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2025
+ * Copyright IBM Corp. 2025, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -194,8 +194,8 @@ class CDSPasswordInput extends CDSTextInput {
       [`${prefix}--text-input`]: true,
       [`${prefix}--text-input--invalid`]: normalizedProps.invalid,
       [`${prefix}--text-input--warning`]: normalizedProps.warn,
-      [`${prefix}--text-input--${size}`]: size,
-      [`${prefix}--layout--size-${size}`]: size,
+      [`${prefix}--text-input--${size}`]: size !== undefined, // TODO v12 - remove this class
+      [`${prefix}--layout--size-${size}`]: size !== undefined,
       [`${prefix}--password-input`]: true,
     });
 
@@ -213,11 +213,13 @@ class CDSPasswordInput extends CDSTextInput {
       [`${prefix}--label`]: true,
       [`${prefix}--visually-hidden`]: hideLabel,
       [`${prefix}--label--disabled`]: normalizedProps.disabled,
+      [`${prefix}--label--inline`]: inline,
     });
 
     const helperTextClasses = classMap({
       [`${prefix}--form__helper-text`]: true,
       [`${prefix}--form__helper-text--disabled`]: normalizedProps.disabled,
+      [`${prefix}--form__helper-text--inline`]: inline,
     });
 
     const passwordIsVisible = type !== INPUT_TYPE.PASSWORD;
@@ -296,7 +298,7 @@ class CDSPasswordInput extends CDSTextInput {
         ${!inline
           ? labelWrapper
           : html`<div class="${prefix}--text-input__label-helper-wrapper">
-              ${labelWrapper} ${helper}
+              ${labelWrapper}
             </div>`}
         <div class="${fieldOuterWrapperClasses}">
           <div class="${fieldWrapperClasses}" ?data-invalid="${invalid}">
@@ -347,6 +349,11 @@ class CDSPasswordInput extends CDSTextInput {
           ${/* Non-fluid: validation and helper outside field wrapper */ ''}
           ${!isFluid && !inline ? validationMessage || helper : null}
         </div>
+        ${inline && !isFluid
+          ? html`<div class="${prefix}--text-input__label-helper-wrapper">
+              ${!isFluid ? validationMessage || helper : null}
+            </div>`
+          : null}
       </div>
     `;
   }

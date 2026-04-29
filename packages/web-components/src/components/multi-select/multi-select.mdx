@@ -18,6 +18,7 @@ import * as MultiSelectStories from './multi-select.stories';
 - [With initial selected items](#with-initial-selected-items)
 - [Filtering](#filtering)
 - [With layer](#with-layer)
+- [Custom sorting](#custom-sorting)
 - [Component API](#component-api)
 - [Feedback](#feedback)
 
@@ -50,6 +51,114 @@ selectable items to a subset.
 ## With select all
 
 <Canvas of={MultiSelectStories.SelectAll} />
+
+## Custom sorting
+
+The `cds-multi-select` component provides two properties to customize how items
+are sorted:
+
+### `sortItems` property
+
+The `sortItems` property allows you to override the sorting behavior used when
+`selection-feedback` is set to `top` or `top-after-reopen`. With either setting,
+selected items are moved to the top of the list and remaining items are sorted
+alphabetically by default.
+
+#### Example: Move selected items to the bottom of the list
+
+<Canvas of={MultiSelectStories.WithCustomSorting} />
+
+```typescript
+ const customSortItems = (
+      menuItems: NodeList,
+      {
+        values,
+        compareItems,
+        locale,
+      }: {
+        values: string[];
+        compareItems: (
+          itemA: string,
+          itemB: string,
+          options: { locale: string }
+        ) => number;
+        locale: string;
+      }
+    ) => {
+      const menuItemsArray = Array.from(menuItems);
+
+      return menuItemsArray.sort((itemA, itemB) => {
+        const hasItemA = values.includes((itemA as HTMLInputElement).value);
+        const hasItemB = values.includes((itemB as HTMLInputElement).value);
+
+        if (hasItemA && !hasItemB) {
+          return 1;
+        }
+        if (hasItemB && !hasItemA) {
+          return -1;
+        }
+
+        return compareItems(
+          (itemA as HTMLElement).innerText.trim(),
+          (itemB as HTMLElement).innerText.trim(),
+          { locale }
+        );
+      });
+    };
+
+...
+
+<cds-multi-select .sortItems=${customSortItems}>
+  <!-- items -->
+</cds-multi-select>
+```
+
+### `compareItems` property
+
+The `compareItems` property allows you to customize how items are compared
+during sorting when `selection-feedback` is set to `top` or `top-after-reopen`.
+Items are sorted alphabetically by default with either setting. The custom
+function should return a number whose sign indicates the relative order of the
+two elements: negative if a is less than b, positive if a is greater than b, and
+zero if they are equal.
+
+#### Example: Sort items in reverse alphabetical order
+
+```typescript
+const reverseCompare = (
+  itemA: string,
+  itemB: string,
+  { locale }: { locale: string }
+) => {
+  return itemB.localeCompare(itemA, locale, { numeric: true });
+};
+
+...
+
+<cds-multi-select .compareItems=${reverseCompare}>
+  <!-- items -->
+</cds-multi-select>
+```
+
+### Migration from legacy behavior
+
+In older versions of `@carbon/web-components`, the default `compareItems`
+function implicitly returned `undefined`, which resulted in items being sorted
+according to their order in the DOM.
+
+This has since been fixed. However, if your code relies on the legacy behavior
+(where no sorting is applied and items remain in their original DOM order), you
+can override `compareItems` to return `NaN`, which produces the same effect:
+
+```typescript
+<cds-multi-select .compareItems=${() => NaN}>
+...
+</cds-multi-select>
+```
+
+**Note:** This behavior is not recommended, as items will not be sorted and
+selected items will not return to their original position after being
+deselected.
 
 ## Component API
 

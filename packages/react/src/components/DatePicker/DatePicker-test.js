@@ -146,6 +146,44 @@ describe('DatePicker', () => {
     expect(ref).toHaveBeenCalledWith(container.firstChild);
   });
 
+  it('should update the flatpickr instance when `disable`, `enable`, and `inline` props change', () => {
+    const ref = createRef();
+    const disable = ['01/20/2025'];
+    const enable = ['01/21/2025'];
+    const { rerender } = render(
+      <DatePicker ref={ref} datePickerType="single">
+        <DatePickerInput
+          id="date-picker-input-id-start"
+          placeholder="mm/dd/yyyy"
+          labelText="Date Picker label"
+        />
+      </DatePicker>
+    );
+
+    const setSpy = jest.spyOn(ref.current.calendar, 'set');
+
+    setSpy.mockClear();
+
+    rerender(
+      <DatePicker
+        ref={ref}
+        datePickerType="single"
+        disable={disable}
+        enable={enable}
+        inline>
+        <DatePickerInput
+          id="date-picker-input-id-start"
+          placeholder="mm/dd/yyyy"
+          labelText="Date Picker label"
+        />
+      </DatePicker>
+    );
+
+    expect(setSpy).toHaveBeenCalledWith('disable', disable);
+    expect(setSpy).toHaveBeenCalledWith('enable', enable);
+    expect(setSpy).toHaveBeenCalledWith('inline', true);
+  });
+
   it('should respect decorator prop', () => {
     render(
       <DatePickerInput
@@ -178,6 +216,56 @@ describe('DatePicker', () => {
       `${prefix}--ai-label__button`
     );
     spy.mockRestore();
+  });
+
+  describe('accessibility', () => {
+    it('associates helper text with the input using aria-describedby', () => {
+      render(
+        <DatePickerInput
+          id="date-picker-input-helper"
+          labelText="Date Picker label"
+          helperText="Helpful text"
+        />
+      );
+
+      const input = screen.getByLabelText('Date Picker label');
+      const helperText = screen.getByText('Helpful text');
+
+      expect(input).toHaveAttribute('aria-describedby', helperText.id);
+    });
+
+    it('associates invalid text with the input and marks input as invalid', () => {
+      render(
+        <DatePickerInput
+          id="date-picker-input-invalid"
+          labelText="Date Picker label"
+          invalid
+          invalidText="Invalid date"
+        />
+      );
+
+      const input = screen.getByLabelText('Date Picker label');
+      const invalidText = screen.getByText('Invalid date');
+
+      expect(input).toHaveAttribute('aria-describedby', invalidText.id);
+      expect(input).toHaveAttribute('aria-invalid', 'true');
+    });
+
+    it('associates warning text with the input using aria-describedby', () => {
+      render(
+        <DatePickerInput
+          id="date-picker-input-warn"
+          labelText="Date Picker label"
+          warn
+          warnText="Warning message"
+        />
+      );
+
+      const input = screen.getByLabelText('Date Picker label');
+      const warnText = screen.getByText('Warning message');
+
+      expect(input).toHaveAttribute('aria-describedby', warnText.id);
+    });
   });
 
   it('should respect parseDate prop', async () => {
@@ -401,6 +489,26 @@ describe('DatePicker', () => {
         document.querySelector(`.${prefix}--date-picker__icon--warn`)
       ).not.toBeInTheDocument();
     });
+
+    it('should preserve invalid state from DatePickerInput when DatePicker is not invalid', () => {
+      render(
+        <DatePicker datePickerType="single">
+          <DatePickerInput
+            id="date-picker-input-id-start"
+            placeholder="mm/dd/yyyy"
+            labelText="Date Picker label"
+            invalid
+            invalidText="Invalid date"
+          />
+        </DatePicker>
+      );
+
+      expect(screen.getByText('Invalid date')).toBeInTheDocument();
+      expect(screen.getByLabelText('Date Picker label')).toHaveAttribute(
+        'data-invalid',
+        'true'
+      );
+    });
   });
 });
 
@@ -420,6 +528,30 @@ describe('Simple date picker', () => {
     );
 
     expect(screen.queryByRole('application')).not.toBeInTheDocument();
+  });
+
+  it('should update the input value when a controlled simple date value changes', () => {
+    const { rerender } = render(
+      <DatePicker datePickerType="simple" value="01/14/2025">
+        <DatePickerInput
+          id="date-picker-input-id-start"
+          labelText="Start date"
+        />
+      </DatePicker>
+    );
+
+    expect(screen.getByLabelText('Start date')).toHaveValue('01/14/2025');
+
+    rerender(
+      <DatePicker datePickerType="simple" value="02/14/2025">
+        <DatePickerInput
+          id="date-picker-input-id-start"
+          labelText="Start date"
+        />
+      </DatePicker>
+    );
+
+    expect(screen.getByLabelText('Start date')).toHaveValue('02/14/2025');
   });
 
   it('should remove the calendar if changed from another type to simple', () => {
@@ -499,6 +631,12 @@ describe('Simple date picker', () => {
 });
 
 describe('Single date picker', () => {
+  it('should not initialize a calendar without an input', () => {
+    render(<DatePicker datePickerType="single" />);
+
+    expect(screen.queryByRole('application')).not.toBeInTheDocument();
+  });
+
   it('should initialize a calendar', () => {
     render(
       <DatePicker
@@ -709,6 +847,54 @@ describe('Single date picker', () => {
     expect(document.body).toHaveFocus();
     expect(onClose).toHaveBeenCalledTimes(2);
   });
+
+  it('should keep native tab navigation when `readOnly` is true', async () => {
+    render(
+      <>
+        <DatePicker datePickerType="single" readOnly>
+          <DatePickerInput id="readonly-input-id" labelText="Read only input" />
+        </DatePicker>
+        <button data-testid="next-focus-target" type="button">
+          Next focus target
+        </button>
+      </>
+    );
+
+    const dateInput = screen.getByLabelText('Read only input');
+    const nextFocusTarget = screen.getByTestId('next-focus-target');
+    const calendar = screen.getByRole('application');
+
+    expect(calendar).not.toHaveClass('open');
+    expect(document.body).toHaveFocus();
+    await userEvent.tab();
+    expect(dateInput).toHaveFocus();
+    expect(calendar).not.toHaveClass('open');
+    await userEvent.tab();
+    expect(nextFocusTarget).toHaveFocus();
+    expect(calendar).not.toHaveClass('open');
+  });
+
+  it('should remove the calendar keydown listener on unmount', () => {
+    const ref = createRef();
+    const { unmount } = render(
+      <DatePicker ref={ref} datePickerType="single">
+        <DatePickerInput id="input-id" labelText="Date input" />
+      </DatePicker>
+    );
+
+    const removeEventListenerSpy = jest.spyOn(
+      ref.current.calendar.calendarContainer,
+      'removeEventListener'
+    );
+
+    unmount();
+
+    expect(removeEventListenerSpy).toHaveBeenCalledWith(
+      'keydown',
+      expect.any(Function),
+      undefined
+    );
+  });
 });
 
 describe('Range date picker', () => {
@@ -820,9 +1006,65 @@ describe('Range date picker', () => {
     await userEvent.type(theStart, '2023-01-05{enter}');
     await userEvent.type(theEnd, '2023-01-19{enter}');
     expect(onChange).toHaveBeenCalledTimes(2);
+    expect(screen.getByRole('application')).not.toHaveClass('open');
+    await userEvent.click(theEnd);
     expect(screen.getByRole('application')).toHaveClass('open');
     await userEvent.keyboard('{escape}');
     expect(screen.getByRole('application')).not.toHaveClass('open');
+  });
+
+  it('should respect closeOnSelect prop in range mode when pressing Enter', async () => {
+    const onClose = jest.fn();
+    render(
+      <DatePicker
+        dateFormat="Y-m-d"
+        closeOnSelect={false}
+        onClose={onClose}
+        onChange={() => {}}
+        datePickerType="range">
+        <DatePickerInput
+          id="start-date-input-close-on-select"
+          labelText="Start date"
+        />
+        <DatePickerInput
+          id="end-date-input-close-on-select"
+          labelText="End date"
+        />
+      </DatePicker>
+    );
+
+    const start = screen.getByLabelText('Start date');
+    const end = screen.getByLabelText('End date');
+
+    await userEvent.type(start, '2023-01-05{enter}');
+    await userEvent.type(end, '2023-01-19{enter}');
+
+    expect(screen.getByRole('application')).toHaveClass('open');
+    expect(onClose).not.toHaveBeenCalled();
+  });
+
+  it('should move focus on first click outside after Enter on end date input', async () => {
+    render(
+      <>
+        <DatePicker
+          dateFormat="Y-m-d"
+          onChange={() => {}}
+          datePickerType="range">
+          <DatePickerInput id="start-date-input-id" labelText="Start date" />
+          <DatePickerInput id="end-date-input-id" labelText="End date" />
+        </DatePicker>
+        <input id="outside-input-id" aria-label="Outside input" />
+      </>
+    );
+
+    const end = screen.getByLabelText('End date');
+    const outside = screen.getByLabelText('Outside input');
+
+    await userEvent.click(end);
+    await userEvent.type(end, '2026-02-15{enter}');
+    await userEvent.click(outside);
+
+    expect(outside).toHaveFocus();
   });
 
   it('clearing end date should not cause console warnings', async () => {
@@ -1268,6 +1510,31 @@ describe('Range date picker', () => {
       expect(start.value).toBe('03/03/2025');
       expect(end.value).toBe('03/09/2025');
     });
+
+    it('should not fire end input blur handlers when Enter is pressed', async () => {
+      const handleBlur = jest.fn();
+
+      render(
+        <DatePicker
+          dateFormat="Y-m-d"
+          onChange={() => {}}
+          datePickerType="range">
+          <DatePickerInput id="start" labelText="Start date" />
+          <DatePickerInput id="end" labelText="End date" onBlur={handleBlur} />
+        </DatePicker>
+      );
+
+      await userEvent.type(
+        screen.getByLabelText('Start date'),
+        '2023-01-05{enter}'
+      );
+      await userEvent.type(
+        screen.getByLabelText('End date'),
+        '2023-01-19{enter}'
+      );
+
+      expect(handleBlur).not.toHaveBeenCalled();
+    });
   });
 });
 
@@ -1278,6 +1545,23 @@ describe('Date picker with locale', () => {
         onChange={() => {}}
         datePickerType="single"
         locale="es"
+        value="01/01/2022">
+        <DatePickerInput
+          id="date-picker-input-id"
+          placeholder="mm/dd/yyyy"
+          labelText="Date picker label"
+        />
+      </DatePicker>
+    );
+    expect(screen.getByText('Enero')).toBeInTheDocument();
+  });
+
+  it('should support locale objects with a `locale` key', () => {
+    render(
+      <DatePicker
+        onChange={() => {}}
+        datePickerType="single"
+        locale={{ locale: 'es' }}
         value="01/01/2022">
         <DatePickerInput
           id="date-picker-input-id"
@@ -1347,13 +1631,101 @@ describe('Date picker with locale', () => {
     await userEvent.click(screen.getByTestId('input'));
     const year = screen.getByDisplayValue('2022');
     const month = screen.getByText('1月');
+    const monthYearContainer = year.closest('.flatpickr-current-month');
     expect(year).toBeInTheDocument();
     expect(month).toBeInTheDocument();
     expect(month.compareDocumentPosition(year)).toBe(2);
+    expect(monthYearContainer).toContainElement(month);
+  });
+
+  it('should update month label on navigation for year-month locales', async () => {
+    render(
+      <DatePicker
+        onChange={() => {}}
+        datePickerType="single"
+        locale="lv"
+        value="01/01/2022">
+        <DatePickerInput
+          id="date-picker-input-id"
+          placeholder="mm/dd/yyyy"
+          labelText="Date picker label"
+          data-testid="input"
+        />
+      </DatePicker>
+    );
+
+    await userEvent.click(screen.getByTestId('input'));
+    const year = screen.getByDisplayValue('2022');
+    const monthYearContainer = year.closest('.flatpickr-current-month');
+    // eslint-disable-next-line testing-library/no-node-access
+    const monthElement = monthYearContainer.querySelector('.cur-month');
+    const initialMonthLabel = monthElement.textContent;
+    // eslint-disable-next-line testing-library/no-node-access
+    const nextMonthButton = document.querySelector('.flatpickr-next-month');
+
+    await userEvent.click(nextMonthButton);
+
+    expect(monthElement.textContent).not.toBe(initialMonthLabel);
   });
 });
 
 describe('Date picker with minDate and maxDate', () => {
+  it('should respect `disable` prop', async () => {
+    render(
+      <DatePicker
+        onChange={() => {}}
+        datePickerType="single"
+        disable={['01/02/2018']}
+        value="01/01/2018">
+        <DatePickerInput
+          id="date-picker-input-id"
+          placeholder="mm/dd/yyyy"
+          labelText="Date picker label"
+          data-testid="input"
+        />
+      </DatePicker>
+    );
+
+    await userEvent.click(screen.getByTestId('input'));
+
+    const disabledDate = document.querySelector(
+      '[aria-label="January 2, 2018"]'
+    );
+
+    expect(disabledDate).toHaveClass('flatpickr-disabled');
+  });
+
+  it('should respect `enable` prop', async () => {
+    const ref = createRef();
+    const enable = ['01/02/2018'];
+
+    render(
+      <DatePicker
+        ref={ref}
+        onChange={() => {}}
+        datePickerType="single"
+        enable={enable}
+        value="01/01/2018">
+        <DatePickerInput
+          id="date-picker-input-id"
+          placeholder="mm/dd/yyyy"
+          labelText="Date picker label"
+          data-testid="input"
+        />
+      </DatePicker>
+    );
+
+    await userEvent.click(screen.getByTestId('input'));
+
+    expect(ref.current.calendar.config.enable).toHaveLength(1);
+    expect(
+      ref.current.calendar.formatDate(
+        ref.current.calendar.config.enable[0],
+        'm/d/Y'
+      )
+    ).toBe('01/02/2018');
+  });
+
   it('should respect minDate', async () => {
     render(
       <DatePicker
