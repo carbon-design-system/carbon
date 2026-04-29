@@ -4,6 +4,7 @@ packages/*/build/
 packages/*/examples/*/build/
 es
 es-custom
+scoped-elements
 lib
 dist
 umd

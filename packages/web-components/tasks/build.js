@@ -15,6 +15,7 @@ import fs from 'fs-extra';
 import litSCSS from '../tools/lit-scss-plugin.js';
 import path from 'path';
 import postcss from 'postcss';
+import { scopedElementsDecoratorStripPlugin } from '../tools/scoped-elements-decorator-strip-plugin.js';
 import ts from 'typescript';
 
 import * as packageJson from '../package.json' with { type: 'json' };
@@ -34,34 +35,50 @@ async function build() {
   const { build: tsdown } = await import('tsdown');
   const tsconfigPath = path.resolve(packageRoot, 'tsconfig.json');
   const external = getExternalPatterns();
+  const sourceRoot = path.resolve(packageRoot, 'src');
 
-  const esInputs = await globby([
-    'src/**/*.ts',
-    '!src/**/*.stories.ts',
-    '!src/**/*.d.ts',
-    '!src/globals/internal/storybook-cdn.ts',
-    '!src/polyfills',
-  ]);
+  const esInputs = await globby(
+    [
+      'src/**/*.ts',
+      '!src/**/*.stories.ts',
+      '!src/**/*.d.ts',
+      '!src/globals/internal/storybook-cdn.ts',
+      '!src/polyfills',
+    ],
+    { cwd: packageRoot }
+  );
 
-  const libInputs = await globby([
-    'src/components/**/defs.ts',
-    'src/globals/**/*.ts',
-    '!src/globals/decorators/**/*.ts',
-    '!src/globals/directives/**/*.ts',
-    '!src/globals/internal/**/*.ts',
-    '!src/globals/mixins/**/*.ts',
-  ]);
+  const libInputs = await globby(
+    [
+      'src/components/**/defs.ts',
+      'src/globals/**/*.ts',
+      '!src/globals/decorators/**/*.ts',
+      '!src/globals/directives/**/*.ts',
+      '!src/globals/internal/**/*.ts',
+      '!src/globals/mixins/**/*.ts',
+    ],
+    { cwd: packageRoot }
+  );
 
   const formats = [
     {
       type: 'esm',
       directory: 'es',
-      inputs: esInputs,
+      inputs: esInputs.map((input) => path.resolve(packageRoot, input)),
+      preserveModulesRoot: sourceRoot,
+    },
+    {
+      type: 'esm',
+      directory: 'scoped-elements',
+      inputs: esInputs.map((input) => path.resolve(packageRoot, input)),
+      preserveModulesRoot: sourceRoot,
+      scopedElements: true,
     },
     {
       type: 'cjs',
       directory: 'lib',
-      inputs: libInputs,
+      inputs: libInputs.map((input) => path.resolve(packageRoot, input)),
+      preserveModulesRoot: sourceRoot,
     },
   ];
 
@@ -74,11 +91,13 @@ async function build() {
       // (e.g. HostListenerMixin) — it strips the generic base class type,
       // breaking downstream consumers
       dts: false,
-      entry: format.inputs.map((input) => path.resolve(packageRoot, input)),
+      entry: format.inputs,
       external,
       failOnWarn: false,
       format: format.type,
-      inputOptions: withInputCompatibilityAndPlugins,
+      inputOptions: withInputCompatibilityAndPlugins({
+        scopedElements: !!format.scopedElements,
+      }),
       logLevel: 'warn',
       outDir: path.resolve(packageRoot, format.directory),
       outputOptions(options) {
@@ -103,7 +122,7 @@ async function build() {
           },
           exports: 'named',
           preserveModules: true,
-          preserveModulesRoot: path.resolve(packageRoot, 'src'),
+          preserveModulesRoot: format.preserveModulesRoot,
           sourcemap: true,
         };
       },
@@ -119,27 +138,30 @@ async function build() {
   await postBuild();
 }
 
-function withInputCompatibilityAndPlugins(inputOptions) {
-  const options = { ...inputOptions };
+function withInputCompatibilityAndPlugins({ scopedElements }) {
+  return (inputOptions) => {
+    const options = { ...inputOptions };
 
-  options.plugins = [
-    ...(options.plugins || []),
-    litSCSS({
-      includePaths: [
-        path.resolve(packageRoot, './node_modules'),
-        path.resolve(packageRoot, '../../node_modules'),
-      ],
-      async preprocessor(contents, id) {
-        return (
-          await postcss([autoprefixer(), cssnano()]).process(contents, {
-            from: id,
-          })
-        ).css;
-      },
-    }),
-  ];
+    options.plugins = [
+      ...(options.plugins || []),
+      ...(scopedElements ? [scopedElementsDecoratorStripPlugin()] : []),
+      litSCSS({
+        includePaths: [
+          path.resolve(packageRoot, './node_modules'),
+          path.resolve(packageRoot, '../../node_modules'),
+        ],
+        async preprocessor(contents, id) {
+          return (
+            await postcss([autoprefixer(), cssnano()]).process(contents, {
+              from: id,
+            })
+          ).css;
+        },
+      }),
+    ];
 
-  return options;
+    return options;
+  };
 }
 
 function getExternalPatterns() {
@@ -158,7 +180,9 @@ function getExternalPatterns() {
 }
 
 async function copyScssSources() {
-  const files = await globby(['src/components/**/*.scss']);
+  const files = await globby(['src/components/**/*.scss'], {
+    cwd: packageRoot,
+  });
 
   await Promise.all(
     files.map(async (file) => {
@@ -210,6 +234,10 @@ async function generateDeclarations() {
   await copyDeclarations(
     path.join(packageRoot, 'es'),
     path.join(packageRoot, 'lib')
+  );
+  await copyDeclarations(
+    path.join(packageRoot, 'es'),
+    path.join(packageRoot, 'scoped-elements')
   );
 }
 

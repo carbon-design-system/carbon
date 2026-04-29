@@ -14,6 +14,7 @@
   "files": [
     "custom-elements.json",
     "es/**/*",
+    "scoped-elements/**/*",
     "es-custom/**/*",
     "lib/**/*",
     "scss/**/*",
@@ -38,8 +39,16 @@
     "./es/globals/*": {
       "default": "./es/globals/*"
     },
+    "./scoped-elements/components/*": {
+      "default": "./scoped-elements/components/*"
+    },
+    "./scoped-elements/globals/*": {
+      "default": "./scoped-elements/globals/*"
+    },
     "./es": "./es/index.js",
     "./es/": "./es/",
+    "./scoped-elements": "./scoped-elements/index.js",
+    "./scoped-elements/": "./scoped-elements/",
     "./es-custom/*": "./es-custom/*",
     "./lib/": "./lib/",
     "./scss/": "./scss/",
@@ -52,7 +61,7 @@
     "build:dist": "node tasks/build-dist.js",
     "build:cdn": "yarn clean && yarn build:dist",
     "ci-check": "yarn wca && yarn typecheck",
-    "clean": "rimraf es es-custom lib scss dist storybook-static",
+    "clean": "rimraf es scoped-elements es-custom lib scss dist storybook-static",
     "postinstall": "ibmtelemetry --config=telemetry.yml",
     "serve": "node tasks/build.js --serve",
     "start": "yarn storybook",
