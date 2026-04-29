@@ -40,7 +40,7 @@
   /// Properties, including the overall grid gutter, grid column count, and grid
   /// margin
   :root {
-    --cds-grid-gutter: #{$grid-gutter};
+    --#{$prefix}-grid-gutter: #{$grid-gutter};
 
     // Iterate through the grid breakpoints and only emit the grid-columns and
     // grid-margin CSS Custom Properties if they've changed from the previous
@@ -48,8 +48,8 @@
     // :root selector
     @each $key, $value in $breakpoints {
       @if is-smallest-breakpoint($key, $breakpoints) {
-        --cds-grid-columns: #{get-column-count($breakpoints, $key)};
-        --cds-grid-margin: #{get-margin($breakpoints, $key)};
+        --#{$prefix}-grid-columns: #{get-column-count($breakpoints, $key)};
+        --#{$prefix}-grid-margin: #{get-margin($breakpoints, $key)};
       } @else {
         $previous-breakpoint: breakpoint-prev($key, $breakpoints);
         $changes: ();
@@ -76,7 +76,7 @@
 
         @include breakpoint($key) {
           @each $name, $value in $changes {
-            --cds-#{$name}: #{$value};
+            --#{$prefix}-#{$name}: #{$value};
           }
         }
       }
@@ -87,21 +87,24 @@
   // Base CSS Grid
   // -----------------------------------------------------------------------------
   .#{$prefix}--css-grid {
-    --cds-grid-gutter-start: calc(var(--cds-grid-gutter) / 2);
-    --cds-grid-gutter-end: calc(var(--cds-grid-gutter) / 2);
+    --#{$prefix}-grid-gutter-start: calc(var(--#{$prefix}-grid-gutter) / 2);
+    --#{$prefix}-grid-gutter-end: calc(var(--#{$prefix}-grid-gutter) / 2);
     // We split out a separate "column hang" since "gutter-start" is set
     // dynamically and could be 0
-    --cds-grid-column-hang: calc(var(--cds-grid-gutter) / 2);
+    --#{$prefix}-grid-column-hang: calc(var(--#{$prefix}-grid-gutter) / 2);
 
     display: grid;
-    grid-template-columns: repeat(var(--cds-grid-columns), minmax(0, 1fr));
+    grid-template-columns: repeat(
+      var(--#{$prefix}-grid-columns),
+      minmax(0, 1fr)
+    );
     inline-size: 100%;
     margin-inline: auto;
     max-inline-size: get-grid-width(
       $breakpoints,
       largest-breakpoint-name($breakpoints)
     );
-    padding-inline: var(--cds-grid-margin);
+    padding-inline: var(--#{$prefix}-grid-margin);
   }
 
   // -----------------------------------------------------------------------------
@@ -122,13 +125,15 @@
     // grid-mode-start, grid-mode-end are meant to capture the "grid settings"
     // so that subgrids can correctly fit in parent grids by reverting the
     // grid's outer padding
-    --cds-grid-mode-start: var(--cds-grid-gutter-start);
-    --cds-grid-mode-end: var(--cds-grid-gutter-end);
+    --#{$prefix}-grid-mode-start: var(--#{$prefix}-grid-gutter-start);
+    --#{$prefix}-grid-mode-end: var(--#{$prefix}-grid-gutter-end);
 
-    margin-inline: var(--cds-grid-gutter-start) var(--cds-grid-gutter-end);
+    margin-inline: var(--#{$prefix}-grid-gutter-start)
+      var(--#{$prefix}-grid-gutter-end);
 
     [dir='rtl'] & {
-      margin-inline: var(--cds-grid-gutter-end) var(--cds-grid-gutter-start);
+      margin-inline: var(--#{$prefix}-grid-gutter-end)
+        var(--#{$prefix}-grid-gutter-start);
     }
   }
 
@@ -138,13 +143,13 @@
 
   // Narrow
   .#{$prefix}--css-grid--narrow {
-    --cds-grid-gutter-start: 0rem; /* stylelint-disable-line length-zero-no-unit */
+    --#{$prefix}-grid-gutter-start: 0rem; /* stylelint-disable-line length-zero-no-unit */
   }
 
   // Condensed
   .#{$prefix}--css-grid--condensed {
-    --cds-grid-gutter: #{$grid-gutter-condensed};
-    --cds-grid-column-hang: #{math.div($grid-gutter, 2) - math.div(
+    --#{$prefix}-grid-gutter: #{$grid-gutter-condensed};
+    --#{$prefix}-grid-column-hang: #{math.div($grid-gutter, 2) - math.div(
         $grid-gutter-condensed,
         2
       )};
@@ -169,33 +174,36 @@
   // -----------------------------------------------------------------------------
   .#{$prefix}--subgrid {
     display: grid;
-    grid-template-columns: repeat(var(--cds-grid-columns), minmax(0, 1fr));
-    margin-inline: calc(var(--cds-grid-mode-start) * -1)
-      calc(var(--cds-grid-mode-end) * -1);
+    grid-template-columns: repeat(
+      var(--#{$prefix}-grid-columns),
+      minmax(0, 1fr)
+    );
+    margin-inline: calc(var(--#{$prefix}-grid-mode-start) * -1)
+      calc(var(--#{$prefix}-grid-mode-end) * -1);
 
     [dir='rtl'] & {
-      margin-inline: calc(var(--cds-grid-mode-end) * -1)
-        calc(var(--cds-grid-mode-start) * -1);
+      margin-inline: calc(var(--#{$prefix}-grid-mode-end) * -1)
+        calc(var(--#{$prefix}-grid-mode-start) * -1);
     }
   }
 
   // Support the gutter modes in subgrids
   .#{$prefix}--subgrid--wide {
-    --cds-grid-gutter-start: #{math.div($grid-gutter, 2)};
-    --cds-grid-gutter-end: #{math.div($grid-gutter, 2)};
-    --cds-grid-column-hang: 0;
+    --#{$prefix}-grid-gutter-start: #{math.div($grid-gutter, 2)};
+    --#{$prefix}-grid-gutter-end: #{math.div($grid-gutter, 2)};
+    --#{$prefix}-grid-column-hang: 0;
   }
 
   .#{$prefix}--subgrid--narrow {
-    --cds-grid-gutter-start: 0rem; /* stylelint-disable-line length-zero-no-unit */
-    --cds-grid-gutter-end: #{math.div($grid-gutter, 2)};
-    --cds-grid-column-hang: #{math.div($grid-gutter, 2)};
+    --#{$prefix}-grid-gutter-start: 0rem; /* stylelint-disable-line length-zero-no-unit */
+    --#{$prefix}-grid-gutter-end: #{math.div($grid-gutter, 2)};
+    --#{$prefix}-grid-column-hang: #{math.div($grid-gutter, 2)};
   }
 
   .#{$prefix}--subgrid--condensed {
-    --cds-grid-gutter-start: #{math.div($grid-gutter-condensed, 2)};
-    --cds-grid-gutter-end: #{math.div($grid-gutter-condensed, 2)};
-    --cds-grid-column-hang: #{math.div($grid-gutter, 2) - math.div(
+    --#{$prefix}-grid-gutter-start: #{math.div($grid-gutter-condensed, 2)};
+    --#{$prefix}-grid-gutter-end: #{math.div($grid-gutter-condensed, 2)};
+    --#{$prefix}-grid-column-hang: #{math.div($grid-gutter, 2) - math.div(
         $grid-gutter-condensed,
         2
       )};
@@ -208,10 +216,10 @@
   // Helper class to allow for text alignment in columns where the leading
   // gutter is missing (like narrow) or is reduced (like in condensed).
   .#{$prefix}--grid-column-hang {
-    margin-inline-start: var(--cds-grid-column-hang);
+    margin-inline-start: var(--#{$prefix}-grid-column-hang);
 
     [dir='rtl'] & {
-      margin-inline: initial var(--cds-grid-column-hang);
+      margin-inline: initial var(--#{$prefix}-grid-column-hang);
     }
   }
 
@@ -258,21 +266,21 @@
 
       .#{$prefix}--#{$name}\:col-span-75 {
         $span: $columns * 0.75;
-        --cds-grid-columns: #{$span};
+        --#{$prefix}-grid-columns: #{$span};
 
         grid-column: span list.slash($span, span) #{$span};
       }
 
       .#{$prefix}--#{$name}\:col-span-50 {
         $span: $columns * 0.5;
-        --cds-grid-columns: #{$span};
+        --#{$prefix}-grid-columns: #{$span};
 
         grid-column: span list.slash($span, span) #{$span};
       }
 
       .#{$prefix}--#{$name}\:col-span-25 {
         $span: $columns * 0.25;
-        --cds-grid-columns: #{$span};
+        --#{$prefix}-grid-columns: #{$span};
 
         grid-column: span list.slash($span, span) #{$span};
       }
@@ -290,21 +298,21 @@
 
         .#{$prefix}--#{$name}\:col-span-75 {
           $span: $columns * 0.75;
-          --cds-grid-columns: #{$span};
+          --#{$prefix}-grid-columns: #{$span};
 
           grid-column: span list.slash($span, span) #{$span};
         }
 
         .#{$prefix}--#{$name}\:col-span-50 {
           $span: $columns * 0.5;
-          --cds-grid-columns: #{$span};
+          --#{$prefix}-grid-columns: #{$span};
 
           grid-column: span list.slash($span, span) #{$span};
         }
 
         .#{$prefix}--#{$name}\:col-span-25 {
           $span: $columns * 0.25;
-          --cds-grid-columns: #{$span};
+          --#{$prefix}-grid-columns: #{$span};
 
           grid-column: span list.slash($span, span) #{$span};
         }
@@ -422,7 +430,7 @@
   @if $i == 0 {
     display: none;
   } @else {
-    --cds-grid-columns: #{$i};
+    --#{$prefix}-grid-columns: #{$i};
 
     display: block;
     grid-column: span $i / span $i;
@@ -437,7 +445,7 @@
     $span: $columns * $percent;
 
     @if is-smallest-breakpoint($key, $breakpoints) {
-      --cds-grid-columns: #{$span};
+      --#{$prefix}-grid-columns: #{$span};
 
       grid-column: span list.slash($span, span) #{$span};
     } @else {
@@ -450,7 +458,7 @@
 
       @if $span != $previous-span {
         @include breakpoint($key) {
-          --cds-grid-columns: #{$span};
+          --#{$prefix}-grid-columns: #{$span};
 
           grid-column: span list.slash($span, span) #{$span};
         }
