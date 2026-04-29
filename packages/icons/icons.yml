@@ -18226,7 +18226,7 @@
     - vor
   sizes:
     - 32
-- name: navaid--vordme
+- name: navaid--vor-dme
   friendly_name: NAVAID VOR/DME
   aliases:
     - travel
@@ -18235,7 +18235,7 @@
     - vordme
   sizes:
     - 32
-- name: navaid--vortac
+- name: navaid--vor-tac
   friendly_name: NAVAID VOR/TAC
   aliases:
     - travel

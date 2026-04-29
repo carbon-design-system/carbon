@@ -2370,8 +2370,8 @@ categories:
           - navaid--tacan
           - navaid--vhfor
           - navaid--vor
-          - navaid--vordme
-          - navaid--vortac
+          - navaid--vor-dme
+          - navaid--vor-tac
           - palm-tree
           - passenger--drinks
           - passenger--plus
