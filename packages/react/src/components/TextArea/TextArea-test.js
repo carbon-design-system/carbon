@@ -90,6 +90,19 @@ describe('TextArea', () => {
       expect(screen.getByText('0')).toBeInTheDocument();
     });
 
+    it('should not render helperText when helperText is an empty string', () => {
+      const { container } = render(
+        <TextArea id="textarea-1" labelText="TextArea label" helperText="" />
+      );
+
+      expect(
+        container.querySelector(`.${prefix}--form__helper-text`)
+      ).not.toBeInTheDocument();
+      expect(screen.getByRole('textbox')).not.toHaveAttribute(
+        'aria-describedby'
+      );
+    });
+
     it('should not set aria-describedby when helperText is omitted', () => {
       render(<TextArea id="textarea-1" labelText="TextArea label" />);
       expect(screen.getByRole('textbox')).not.toHaveAttribute(

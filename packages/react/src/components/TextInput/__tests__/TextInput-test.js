@@ -80,6 +80,19 @@ describe('TextInput', () => {
       expect(screen.getByText('0')).toBeInTheDocument();
     });
 
+    it('should not render helperText when helperText is an empty string', () => {
+      const { container } = render(
+        <TextInput id="input-1" labelText="TextInput label" helperText="" />
+      );
+
+      expect(
+        container.querySelector(`.${prefix}--form__helper-text`)
+      ).not.toBeInTheDocument();
+      expect(screen.getByRole('textbox')).not.toHaveAttribute(
+        'aria-describedby'
+      );
+    });
+
     it('should respect hideLabel prop', () => {
       render(<TextInput id="input-1" labelText="TextInput label" hideLabel />);
 

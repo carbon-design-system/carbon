@@ -52,6 +52,7 @@ import { Text } from '../Text';
 import BadgeIndicator from '../BadgeIndicator';
 import { isComponentElement } from '../../internal';
 
+const buttonWidth = 44;
 const verticalTabHeight = 64;
 
 // Used to manage the overall state of the Tabs
@@ -503,17 +504,13 @@ function TabList({
   //   SCROLLABLE
   //   AND SCROLL_LEFT > 0
   //
-  // TODO: Hoist `buttonWidth` to a module level constant like
-  // `verticalTabHeight`.
-  const buttonWidth = 44;
   // Next Button
   // VISIBLE IF:
   //   SCROLLABLE
   //   AND SCROLL_LEFT + CLIENT_WIDTH < SCROLL_WIDTH
   const [isNextButtonVisible, setIsNextButtonVisible] = useState(
     ref.current
-      ? scrollLeft + buttonWidth + ref.current.clientWidth <
-          ref.current.scrollWidth
+      ? scrollLeft + ref.current.clientWidth < ref.current.scrollWidth
       : false
   );
 
@@ -634,8 +631,7 @@ function TabList({
     // adding 1 in calculation for firefox support
     setIsNextButtonVisible(
       ref.current
-        ? scrollLeft + buttonWidth + ref.current.clientWidth + 1 <
-            ref.current.scrollWidth
+        ? scrollLeft + ref.current.clientWidth + 1 < ref.current.scrollWidth
         : false
     );
 

@@ -4,7 +4,6 @@ import * as AISkeletonPlaceholderStories from './AISkeletonPlaceholder.stories';
 import * as AISkeletonTextStories from './AISkeletonText.stories';
 import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
 
-
 <Meta isTemplate />
 
 # AI Skeleton
@@ -16,9 +15,9 @@ import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
 ## Table of Contents
 
 - [Overview](#overview)
-    - [AI Skeleton Icon](#ai-skeleton-icon)
-    - [AI Skeleton Placeholder](#ai-skeleton-placeholder)
-    - [AI Skeleton Text](#ai-skeleton-text)
+  - [AI Skeleton Icon](#ai-skeleton-icon)
+  - [AI Skeleton Placeholder](#ai-skeleton-placeholder)
+  - [AI Skeleton Text](#ai-skeleton-text)
 - [Component API](#component-api)
 - [Feedback](#feedback)
 
@@ -45,7 +44,10 @@ import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
   additionalActions={[
     {
       title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(AISkeletonPlaceholderStories._AISkeletonPlaceholder),
+      onClick: () =>
+        stackblitzPrefillConfig(
+          AISkeletonPlaceholderStories._AISkeletonPlaceholder
+        ),
     },
   ]}
 />
@@ -57,7 +59,8 @@ import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
   additionalActions={[
     {
       title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(AISkeletonTextStories._AISkeletonText),
+      onClick: () =>
+        stackblitzPrefillConfig(AISkeletonTextStories._AISkeletonText),
     },
   ]}
 />

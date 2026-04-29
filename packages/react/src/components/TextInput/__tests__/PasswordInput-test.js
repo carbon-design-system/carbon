@@ -78,6 +78,23 @@ describe('PasswordInput', () => {
       expect(screen.getByText('0')).toBeInTheDocument();
     });
 
+    it('should not render helperText when helperText is an empty string', () => {
+      const { container } = render(
+        <PasswordInput
+          id="input-1"
+          labelText="PasswordInput label"
+          helperText=""
+        />
+      );
+
+      expect(
+        container.querySelector(`.${prefix}--form__helper-text`)
+      ).not.toBeInTheDocument();
+      expect(screen.getByLabelText('PasswordInput label')).not.toHaveAttribute(
+        'aria-describedby'
+      );
+    });
+
     it('should respect hideLabel prop', () => {
       render(
         <PasswordInput id="input-1" labelText="TextInput label" hideLabel />

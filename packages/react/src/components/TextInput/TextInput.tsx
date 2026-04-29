@@ -23,6 +23,7 @@ import { FormContext } from '../FluidForm';
 import { useMergedRefs } from '../../internal/useMergedRefs';
 import { usePrefix } from '../../internal/usePrefix';
 import { getAnnouncement } from '../../internal/getAnnouncement';
+import { hasHelperText } from '../../internal/hasHelperText';
 import { Text } from '../Text';
 import { AILabel } from '../AILabel';
 import { isComponentElement } from '../../internal';
@@ -133,7 +134,7 @@ export interface TextInputProps
   /**
    * Specify the size of the Text Input. Currently supports the following:
    */
-  size?: 'sm' | 'md' | 'lg' | 'xl';
+  size?: 'xs' | 'sm' | 'md' | 'lg';
 
   /**
    * @deprecated please use `decorator` instead.
@@ -248,10 +249,9 @@ const TextInput = forwardRef<unknown, TextInputProps>(
       title: placeholder,
       disabled: normalizedProps.disabled,
       readOnly,
-      ['aria-describedby']:
-        helperText && !normalizedProps.invalid
-          ? normalizedProps.helperId
-          : undefined,
+      ['aria-describedby']: hasHelperText(helperText)
+        ? normalizedProps.helperId
+        : undefined,
       ...rest,
     };
 
@@ -274,7 +274,7 @@ const TextInput = forwardRef<unknown, TextInputProps>(
       [`${prefix}--visually-hidden`]: hideLabel,
       [`${prefix}--label--disabled`]: normalizedProps.disabled,
       [`${prefix}--label--inline`]: inline,
-      [`${prefix}--label--inline--${size}`]: inline && !!size,
+      [`${prefix}--label--inline--${size}`]: inline && !!size, // TODO v12 - remove this class
     });
     const helperTextClasses = classNames(`${prefix}--form__helper-text`, {
       [`${prefix}--form__helper-text--disabled`]: normalizedProps.disabled,
@@ -325,7 +325,7 @@ const TextInput = forwardRef<unknown, TextInputProps>(
       </div>
     );
 
-    const helper = typeof helperText !== 'undefined' && helperText !== null && (
+    const helper = hasHelperText(helperText) && (
       <Text
         as="div"
         id={normalizedProps.helperId}
@@ -389,15 +389,14 @@ const TextInput = forwardRef<unknown, TextInputProps>(
         ) : (
           <div className={`${prefix}--text-input__label-helper-wrapper`}>
             {labelWrapper}
-            {!isFluid && (normalizedProps.validation || helper)}
           </div>
         )}
         <div className={fieldOuterWrapperClasses}>
           <div
             className={fieldWrapperClasses}
             data-invalid={normalizedProps.invalid || null}>
-            {Icon && <Icon className={iconClasses} />}
             {input}
+            {Icon && <Icon className={iconClasses} />}
             {slug ? (
               normalizedDecorator
             ) : decorator ? (
@@ -421,6 +420,11 @@ const TextInput = forwardRef<unknown, TextInputProps>(
           </div>
           {!isFluid && !inline && (normalizedProps.validation || helper)}
         </div>
+        {inline && !isFluid && (
+          <div className={`${prefix}--text-input__label-helper-wrapper`}>
+            {normalizedProps.validation || helper}
+          </div>
+        )}
       </div>
     );
   }
@@ -529,7 +533,7 @@ TextInput.propTypes = {
   /**
    * Specify the size of the Text Input. Currently supports the following:
    */
-  size: PropTypes.oneOf(['sm', 'md', 'lg']),
+  size: PropTypes.oneOf(['xs', 'sm', 'md', 'lg']),
 
   /**
    * **Experimental**: Provide a `Slug` component to be rendered inside the `TextInput` component

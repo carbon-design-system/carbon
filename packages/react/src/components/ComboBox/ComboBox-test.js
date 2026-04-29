@@ -493,11 +493,56 @@ describe('ComboBox', () => {
     expect(screen.getByTestId('selected-item').textContent).toBe('Item 0');
   });
 
+  it('should skip disabled matches when pressing Enter with a partial input value', async () => {
+    const onChange = jest.fn();
+    const items = [
+      { id: 'ibm-cloud', text: 'IBM Cloud', disabled: true },
+      { id: 'ibm-quantum', text: 'IBM Quantum' },
+      { id: 'ibm-z', text: 'IBM Z' },
+    ];
+
+    render(
+      <ComboBox
+        id="test-combobox"
+        items={items}
+        itemToString={(item) => (item ? item.text : '')}
+        onChange={onChange}
+      />
+    );
+
+    await userEvent.click(findInputNode());
+    await userEvent.type(findInputNode(), 'IBM ');
+    await userEvent.keyboard('{Enter}');
+
+    expect(findInputNode()).toHaveDisplayValue('IBM Quantum');
+    expect(onChange).toHaveBeenLastCalledWith({
+      selectedItem: items[1],
+    });
+  });
+
   it('should restore selected item label on blur when input does not match any item and a selection exists', async () => {
     render(
       <ComboBox
         {...mockProps}
         initialSelectedItem={mockProps.items[1]}
+        allowCustomValue={false}
+      />
+    );
+
+    expect(findInputNode()).toHaveDisplayValue('Item 1');
+
+    await userEvent.clear(findInputNode());
+    await userEvent.type(findInputNode(), 'no-match');
+    await userEvent.keyboard('[Tab]');
+
+    expect(findInputNode()).toHaveDisplayValue('Item 1');
+  });
+
+  it('should restore controlled selected item label on blur when input does not match any item on initial load', async () => {
+    render(
+      <ComboBox
+        {...mockProps}
+        selectedItem={mockProps.items[1]}
         allowCustomValue={false}
       />
     );
