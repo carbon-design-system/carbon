@@ -7831,10 +7831,10 @@ Map {
       "size": {
         "args": [
           [
+            "xs",
             "sm",
             "md",
             "lg",
-            "xs",
           ],
         ],
         "type": "oneOf",
