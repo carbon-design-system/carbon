@@ -23,7 +23,8 @@
 The `@carbon/styles` package ships all of the styles for the Carbon Design
 System.
 
-> [!IMPORTANT]  
+> [!IMPORTANT]
+>
 > You probably don't need to install this package. Framework variant packages
 > such as `@carbon/react` re-export all of `@carbon/styles`. For the examples
 > below `@carbon/styles` paths can be switched out for `@carbon/react` without
@@ -120,7 +121,8 @@ To use only a specific module, include the full path.
 @use '@carbon/styles/scss/<path-to-file>';
 ```
 
-> [!NOTE]  
+> [!NOTE]
+>
 > Sass modules can only ever be configured once. Bringing in this module and
 > configuring it should be one of the first things you do in your project.
 >
