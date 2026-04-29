@@ -1,6 +1,7 @@
 # Figma Code Connect for @carbon/react
 
-> [!WARNING]  
+> [!WARNING]
+>
 > Figma [Code Connect](https://github.com/figma/code-connect) for Carbon React
 > is in an exploratory phase.
 

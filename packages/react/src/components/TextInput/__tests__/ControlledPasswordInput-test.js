@@ -10,6 +10,8 @@ import { fireEvent, render, screen } from '@testing-library/react';
 import ControlledPasswordInput from '../ControlledPasswordInput';
 import React from 'react';
 
+const prefix = 'cds';
+
 describe('ControlledPasswordInput Component', () => {
   beforeEach(() => {
     // Mock console.warn before each test
@@ -272,6 +274,23 @@ describe('ControlledPasswordInput Component', () => {
       />
     );
     expect(screen.getByText('0')).toBeInTheDocument();
+  });
+
+  it('should not render helperText when helperText is an empty string', () => {
+    const { container } = render(
+      <ControlledPasswordInput
+        id="password-input"
+        labelText="Password"
+        helperText=""
+      />
+    );
+
+    expect(
+      container.querySelector(`.${prefix}--form__helper-text`)
+    ).not.toBeInTheDocument();
+    expect(screen.getByLabelText('Password')).not.toHaveAttribute(
+      'aria-describedby'
+    );
   });
 
   it('should not set `aria-describedby` when `helperText` is omitted', () => {
