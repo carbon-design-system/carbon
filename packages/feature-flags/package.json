@@ -1,10 +1,11 @@
 {
   "name": "@carbon/feature-flags",
   "description": "Build with feature flags in Carbon",
-  "version": "1.0.0",
+  "version": "1.3.0",
   "license": "Apache-2.0",
   "main": "lib/index.js",
   "module": "es/index.js",
+  "types": "types/index.d.ts",
   "sass": "index.scss",
   "repository": {
     "type": "git",
@@ -15,6 +16,7 @@
   "files": [
     "es",
     "lib",
+    "types",
     "scss",
     "index.scss",
     "telemetry.yml"
@@ -31,31 +33,30 @@
     "provenance": true
   },
   "scripts": {
-    "build": "yarn clean && node tasks/build.js && rollup -c",
+    "build": "yarn clean && node tasks/build.mjs && tsdown --config tsdown.config.mts",
     "clean": "rimraf es lib scss/generated src/generated",
-    "watch": "yarn clean && node tasks/build.js && rollup -c -w",
+    "watch": "node tasks/build.mjs && tsdown --config tsdown.config.mts --watch",
     "postinstall": "ibmtelemetry --config=telemetry.yml"
   },
   "devDependencies": {
     "@babel/core": "^7.27.3",
     "@babel/generator": "^7.27.3",
     "@babel/preset-env": "^7.27.2",
+    "@babel/preset-typescript": "^7.27.1",
     "@babel/template": "^7.27.2",
     "@babel/types": "^7.27.3",
     "@carbon/scss-generator": "^10.20.0",
-    "@rollup/plugin-babel": "^6.0.0",
-    "@rollup/plugin-node-resolve": "^15.0.0",
     "change-case-all": "^2.1.0",
     "fs-extra": "^11.0.0",
     "js-yaml": "^4.1.0",
     "rimraf": "^6.0.1",
-    "rollup": "^4.41.1",
-    "rollup-plugin-strip-banner": "^3.0.0"
+    "tsdown": "^0.21.0"
   },
   "sideEffects": false,
   "babel": {
     "presets": [
-      "@babel/env"
+      "@babel/env",
+      "@babel/preset-typescript"
     ]
   },
   "dependencies": {

@@ -212,11 +212,11 @@
 
   span.#{$prefix}--pagination__text {
     color: $text-primary;
-    margin-inline-start: $spacing-05;
   }
 
   span.#{$prefix}--pagination__text.#{$prefix}--pagination__items-count {
     color: $text-secondary;
+    margin-inline-start: $spacing-05;
   }
 
   .#{$prefix}--pagination__button,

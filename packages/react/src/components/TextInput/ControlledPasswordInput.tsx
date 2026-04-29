@@ -13,6 +13,7 @@ import { getTextInputProps } from './util';
 import { deprecate } from '../../prop-types/deprecate';
 import { usePrefix } from '../../internal/usePrefix';
 import { useId } from '../../internal/useId';
+import { hasHelperText } from '../../internal/hasHelperText';
 import { noopFn } from '../../internal/noopFn';
 
 export interface ControlledPasswordInputProps
@@ -217,7 +218,7 @@ const ControlledPasswordInput = forwardRef<
       }
     );
 
-    const hasHelper = typeof helperText !== 'undefined' && helperText !== null;
+    const hasHelper = hasHelperText(helperText);
     const helperId = !hasHelper
       ? undefined
       : `controlled-password-helper-text-${controlledPasswordInstanceId}`;

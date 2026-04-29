@@ -33,16 +33,18 @@ import {
   // Support
   blue30,
   blue50,
-  green30,
   cyan40,
+  green30,
   green40,
   green50,
+  green60,
   yellow30,
   orange40,
   red30,
   red40,
   red50,
   red60,
+  red70,
   purple40,
   purple50,
   purple60,
@@ -309,6 +311,8 @@ export const syntaxFunction = yellow30;
 export const syntaxStandard = blue50;
 export const syntaxLocal = blue30;
 export const syntaxSpecial = blue50;
+export const syntaxInserted = green60;
+export const syntaxDeleted = red70;
 
 //// AI - Experimental (Use at your own risk)
 //// Phase 2 - new \\\\

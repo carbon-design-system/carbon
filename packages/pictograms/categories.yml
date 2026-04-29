@@ -90,9 +90,11 @@ categories:
     members:
       - alarm
       - apartment
+      - bin--compost
+      - bin--recycle
+      - bin--sanitary
       - broom
       - building
-      - compost--bin
       - elevator
       - emergency--exit
       - escalator--down
@@ -104,7 +106,6 @@ categories:
       - intelligent-infrastructure
       - no--smoking
       - office
-      - recycle--bin
       - stairs
       - stairs--down
       - stairs--plan--view
@@ -912,12 +913,18 @@ categories:
       - bee
       - carbon
       - carbon--for-cloud
+      - db2--genius-hub
       - carbon--for-ibm-dotcom
       - carbon--for-ibm-product
       - enterprise--design--thinking--01
       - enterprise--design--thinking--02
       - eye
+      - hashicorp--terraform
+      - ibm--aptio
+      - ibm--bob
+      - ibm--concert
       - ibm--ibv
+      - ibm--instana
       - ibm--ix
       - ibm--z
       - ibm--z-and-cloud-modernization-stack-provisioning
@@ -926,6 +933,7 @@ categories:
       - ibm--z-os-package-manager
       - ibm--z--partition
       - progress
+      - red-hat--ansible
       - selectric-typewriter
       - silicon--wafer
       - swift-at-ibm
@@ -1490,6 +1498,7 @@ categories:
       - speedometer
       - time
       - time--lapse
+      - timesheet
   - name: Transportation
     members:
       - airplane
@@ -1557,6 +1566,7 @@ categories:
       - watsonx--code-assistant-for-z-refactor
       - watsonx--data
       - watsonx--governance
+      - watsonx--orchestrate
       - watsonx
   - name: Weather
     members:
@@ -1614,6 +1624,8 @@ categories:
       - no--food
       - no--liquids
       - no--parking
+      - paper-cup
+      - paper-cup-with-metal-can
       - parking
       - person--working
       - plastic-bottle
