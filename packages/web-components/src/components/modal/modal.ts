@@ -122,6 +122,9 @@ class CDSModal extends CDSModalBase {
         return;
       }
     }
+
+    if (this.enableDialogElement) return;
+
     if (event.key === 'Tab') {
       const { first: _firstElement, last: _lastElement } = this.getFocusable();
 
