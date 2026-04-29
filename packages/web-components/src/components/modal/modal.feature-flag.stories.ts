@@ -16,6 +16,13 @@ import '../select';
 import '../textarea';
 import { MODAL_SIZE } from './modal';
 
+/**
+ * TODO:
+ * Once the other feature flags are implemented, please remember to update
+ * meta to { title: 'Components/Modal/Feature Flags',} in this file,
+ * and <Meta title="Components/Modal/Feature Flags" ... > in the mdx file
+ */
+
 const toggleButton = () => {
   document.querySelector('cds-modal')?.toggleAttribute('open');
 };
