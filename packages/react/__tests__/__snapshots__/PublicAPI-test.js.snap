@@ -5347,6 +5347,9 @@ Map {
       "onChange": {
         "type": "func",
       },
+      "readOnly": {
+        "type": "bool",
+      },
     },
     "render": [Function],
   },
@@ -13364,6 +13367,9 @@ Map {
       "onChange": {
         "type": "func",
       },
+      "readOnly": {
+        "type": "bool",
+      },
     },
     "render": [Function],
   },
@@ -15343,6 +15349,9 @@ Map {
       },
       "onChange": {
         "type": "func",
+      },
+      "readOnly": {
+        "type": "bool",
       },
     },
     "render": [Function],
