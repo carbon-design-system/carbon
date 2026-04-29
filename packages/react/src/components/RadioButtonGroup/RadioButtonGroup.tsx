@@ -7,16 +7,16 @@
 
 import PropTypes from 'prop-types';
 import React, {
+  Children,
   cloneElement,
   createContext,
   useEffect,
   useRef,
   useState,
-  type ReactElement,
   type ReactNode,
 } from 'react';
 import classNames from 'classnames';
-import type { RadioButtonProps } from '../RadioButton';
+import RadioButton, { type RadioButtonProps } from '../RadioButton';
 import { Legend } from '../Text/createTextComponent';
 import { usePrefix } from '../../internal/usePrefix';
 import { WarningFilled, WarningAltFilled } from '@carbon/icons-react';
@@ -178,29 +178,26 @@ const RadioButtonGroup = React.forwardRef(
     }, [valueSelected]);
 
     function getRadioButtons() {
-      const mappedChildren = React.Children.map(
-        children as ReactElement<RadioButtonProps>,
-        (radioButton) => {
-          if (!radioButton) {
-            return;
-          }
-
-          const newProps = {
-            name: name,
-            key: radioButton.props.value,
-            value: radioButton.props.value,
-            onChange: handleOnChange,
-            checked: radioButton.props.value === selected,
-            required: required,
-          };
-
-          if (!selected && radioButton.props.checked) {
-            newProps.checked = true;
-          }
-
-          return React.cloneElement(radioButton, newProps);
+      const mappedChildren = Children.map(children, (radioButton) => {
+        if (!isComponentElement(radioButton, RadioButton)) {
+          return radioButton;
         }
-      );
+
+        const newProps = {
+          name: name,
+          key: radioButton.props.value,
+          value: radioButton.props.value,
+          onChange: handleOnChange,
+          checked: radioButton.props.value === selected,
+          required: required,
+        };
+
+        if (!selected && radioButton.props.checked) {
+          newProps.checked = true;
+        }
+
+        return cloneElement(radioButton, newProps);
+      });
 
       return mappedChildren;
     }
