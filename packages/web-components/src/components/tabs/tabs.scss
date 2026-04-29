@@ -337,7 +337,12 @@ $inset-transition: inset 110ms motion(standard, productive);
 }
 
 :host(#{$prefix}-tab[type='contained']:hover) {
-  background-color: $layer-accent-hover;
+  background-color: $layer-accent-01;
+}
+:host(#{$prefix}-tab[type='contained']) {
+  .#{$prefix}--tabs__nav-link:hover {
+    background-color: $layer-accent-hover;
+  }
 }
 
 // Disabled tab never gets selected, but we guard for manual addition of `selected` attribute
