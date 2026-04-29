@@ -18,8 +18,8 @@
     "ci-check": "carbon-cli ci-check",
     "clean": "lerna run clean && lerna clean --yes && rimraf node_modules",
     "doctoc": "doctoc --title '## Table of Contents'",
-    "format": "prettier --cache --write '**/*.{js,md,scss,ts,tsx}' '!**/{build,es,lib,storybook,ts,umd}/**'",
-    "format:diff": "prettier --list-different '**/*.{js,md,scss,ts,tsx}' '!**/{build,es,lib,storybook,ts,umd}/**' '!packages/components/**'",
+    "format": "prettier --cache --write '**/*.{js,md,mdx,scss,ts,tsx}' '!**/{build,es,lib,storybook,ts,umd}/**'",
+    "format:diff": "prettier --list-different '**/*.{js,md,mdx,scss,ts,tsx}' '!**/{build,es,lib,storybook,ts,umd}/**' '!packages/components/**'",
     "lint": "eslint actions config packages www",
     "lint:fix": "eslint --cache --fix --max-warnings 0 actions config packages www",
     "lint:styles": "stylelint '**/*.scss' --report-needless-disables --report-invalid-scope-disables",
@@ -87,7 +87,7 @@
     "react": "^19.2.3",
     "react-dom": "^19.2.3",
     "rimraf": "^6.0.1",
-    "stylelint": "^16.0.0",
+    "stylelint": "^17.0.0",
     "typescript-eslint": "^8.34.0"
   },
   "commitlint": {
@@ -141,6 +141,9 @@
     "!(*sass).md": [
       "prettier --cache --write"
     ],
+    "!(*sass).mdx": [
+      "prettier --cache --write"
+    ],
     "{README.md,.all-contributorsrc}": [
       "all-contributors generate"
     ]
@@ -152,7 +155,7 @@
   },
   "stylelint": {
     "extends": [
-      "./config/stylelint-config-carbon"
+      "./config/stylelint-config-carbon/index.js"
     ]
   },
   "packageManager": "yarn@4.10.3"
