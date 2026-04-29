@@ -46,6 +46,11 @@ export async function main({ argv, cwd }) {
       default: true,
       describe: 'wrap the migration with a feature flag',
       type: 'boolean',
+    })
+    .option('decoratorsBeforeExport', {
+      default: false,
+      describe: 'parse decorators before export declarations',
+      type: 'boolean',
     });
 
   // $0: the default command
@@ -80,19 +85,23 @@ export async function main({ argv, cwd }) {
       );
     },
     run(async (args) => {
-      const { verbose, migration, write, paths, wrapWithFeatureFlag } = args;
+      const {
+        verbose,
+        decoratorsBeforeExport,
+        migration,
+        write,
+        paths,
+        wrapWithFeatureFlag,
+      } = args;
       const options = {
         cwd: cwd(),
         verbose,
+        decoratorsBeforeExport,
         write,
         migration,
         paths,
         wrapWithFeatureFlag,
       };
-      console.log(
-        'CLI options wrapWithFeatureFlag:',
-        options.wrapWithFeatureFlag
-      );
       await migrate(options, upgrades);
     })
   );
