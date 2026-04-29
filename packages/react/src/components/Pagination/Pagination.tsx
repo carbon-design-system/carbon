@@ -238,6 +238,7 @@ const Pagination = React.forwardRef(
     const className = cx({
       [`${prefix}--pagination`]: true,
       [`${prefix}--pagination--${size}`]: size,
+      [`${prefix}--layout--size-${size}`]: size,
       [customClassName]: !!customClassName,
     });
     const totalPages = totalItems
@@ -646,7 +647,7 @@ Pagination.propTypes = {
   /**
    * Specify the size of the Pagination.
    */
-  size: PropTypes.oneOf(['sm', 'md', 'lg', 'xs']),
+  size: PropTypes.oneOf(['xs', 'sm', 'md', 'lg']),
 
   /**
    * The total number of items.
