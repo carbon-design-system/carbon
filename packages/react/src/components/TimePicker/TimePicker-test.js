@@ -313,7 +313,7 @@ describe('TimePicker', () => {
       );
     });
 
-    it('should apply invalid aria attributes over conflicting consumer props', () => {
+    it('should merge invalid aria attributes with consumer-provided aria-describedby', () => {
       render(
         <TimePicker
           id="time-picker"
@@ -326,12 +326,29 @@ describe('TimePicker', () => {
       const invalidText = screen.getByText('Invalid time');
       expect(screen.getByRole('textbox')).toHaveAttribute(
         'aria-describedby',
-        invalidText.id
+        `${invalidText.id} custom-hint`
       );
       expect(screen.getByRole('textbox')).toHaveAttribute(
         'aria-invalid',
         'true'
       );
+    });
+
+    it('should merge warning aria attributes with consumer-provided aria-describedby', () => {
+      render(
+        <TimePicker
+          id="time-picker"
+          warning
+          warningText="Warning message"
+          aria-describedby="custom-hint"
+        />
+      );
+      const warningText = screen.getByText('Warning message');
+      expect(screen.getByRole('textbox')).toHaveAttribute(
+        'aria-describedby',
+        `${warningText.id} custom-hint`
+      );
+      expect(screen.getByRole('textbox')).not.toHaveAttribute('aria-invalid');
     });
   });
 });

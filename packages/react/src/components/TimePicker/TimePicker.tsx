@@ -269,11 +269,17 @@ const TimePicker = frFn((props, ref) => {
   const readOnlyProps = {
     readOnly: readOnly,
   };
-  const describedBy = normalizedProps.invalid
-    ? normalizedProps.invalidId
-    : normalizedProps.warn
-      ? normalizedProps.warnId
-      : ariaDescribedBy;
+  const describedBy =
+    [
+      normalizedProps.invalid
+        ? normalizedProps.invalidId
+        : normalizedProps.warn
+          ? normalizedProps.warnId
+          : null,
+      ariaDescribedBy,
+    ]
+      .filter(Boolean)
+      .join(' ') || undefined;
 
   return (
     <div className={cx(`${prefix}--form-item`, className)}>
