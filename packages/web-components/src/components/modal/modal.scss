@@ -253,3 +253,8 @@
   #{$prefix}-dialog::part(dialog) {
   @extend .#{$prefix}--modal-container--lg;
 }
+
+:host(#{$prefix}-modal[enable-dialog-element]:not([open]))
+  #{$prefix}-dialog::part(dialog) {
+  display: none;
+}
