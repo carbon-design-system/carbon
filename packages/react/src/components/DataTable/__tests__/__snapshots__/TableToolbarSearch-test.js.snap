@@ -4,7 +4,7 @@ exports[`TableToolbarSearch renders as expected - Component API should render 1`
 <div>
   <div
     aria-label="Filter table"
-    class="cds--search cds--search--lg custom-class cds--toolbar-search-container-expandable"
+    class="cds--search cds--search--lg cds--layout--size-lg custom-class cds--toolbar-search-container-expandable"
     role="search"
   >
     <div

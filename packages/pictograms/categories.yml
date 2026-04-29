@@ -919,7 +919,12 @@ categories:
       - enterprise--design--thinking--01
       - enterprise--design--thinking--02
       - eye
+      - hashicorp--terraform
+      - ibm--aptio
+      - ibm--bob
+      - ibm--concert
       - ibm--ibv
+      - ibm--instana
       - ibm--ix
       - ibm--z
       - ibm--z-and-cloud-modernization-stack-provisioning
@@ -928,6 +933,7 @@ categories:
       - ibm--z-os-package-manager
       - ibm--z--partition
       - progress
+      - red-hat--ansible
       - selectric-typewriter
       - silicon--wafer
       - swift-at-ibm
@@ -1492,6 +1498,7 @@ categories:
       - speedometer
       - time
       - time--lapse
+      - timesheet
   - name: Transportation
     members:
       - airplane
@@ -1559,6 +1566,7 @@ categories:
       - watsonx--code-assistant-for-z-refactor
       - watsonx--data
       - watsonx--governance
+      - watsonx--orchestrate
       - watsonx
   - name: Weather
     members:

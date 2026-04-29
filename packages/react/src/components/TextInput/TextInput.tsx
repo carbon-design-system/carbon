@@ -23,6 +23,7 @@ import { FormContext } from '../FluidForm';
 import { useMergedRefs } from '../../internal/useMergedRefs';
 import { usePrefix } from '../../internal/usePrefix';
 import { getAnnouncement } from '../../internal/getAnnouncement';
+import { hasHelperText } from '../../internal/hasHelperText';
 import { Text } from '../Text';
 import { AILabel } from '../AILabel';
 import { isComponentElement } from '../../internal';
@@ -248,7 +249,9 @@ const TextInput = forwardRef<unknown, TextInputProps>(
       title: placeholder,
       disabled: normalizedProps.disabled,
       readOnly,
-      ['aria-describedby']: helperText && normalizedProps.helperId,
+      ['aria-describedby']: hasHelperText(helperText)
+        ? normalizedProps.helperId
+        : undefined,
       ...rest,
     };
 
@@ -322,7 +325,7 @@ const TextInput = forwardRef<unknown, TextInputProps>(
       </div>
     );
 
-    const helper = typeof helperText !== 'undefined' && helperText !== null && (
+    const helper = hasHelperText(helperText) && (
       <Text
         as="div"
         id={normalizedProps.helperId}
