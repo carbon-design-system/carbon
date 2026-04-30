@@ -83,6 +83,16 @@ describe('Checkbox', () => {
     expect(screen.getByText('0')).toBeInTheDocument();
   });
 
+  it('should not render helperText when helperText is an empty string', () => {
+    const { container } = render(
+      <Checkbox id="test" labelText="Checkbox label" helperText="" />
+    );
+
+    expect(
+      container.querySelector(`.${prefix}--form__helper-text`)
+    ).not.toBeInTheDocument();
+  });
+
   it('should set data-invalid when invalid prop is true', () => {
     render(
       <Checkbox
