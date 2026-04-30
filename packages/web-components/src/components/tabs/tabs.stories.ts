@@ -29,6 +29,7 @@ import '../button';
 import '../checkbox';
 import './index';
 import '../text-input';
+import './stories/tabs-wrapper';
 
 const args = {
   contained: false,
@@ -627,6 +628,65 @@ export const ContainedWithSecondaryLabelsAndIcons = {
       Tab Panel 5
     </div>
   `,
+};
+
+export const Dismissable = {
+  args: {
+    dismissable: true,
+    selectedIndex: 0,
+  },
+  argTypes: {
+    dismissable: {
+      control: 'boolean',
+      description: 'Whether the rendered Tab children should be dismissable.',
+    },
+    selectedIndex: {
+      control: 'number',
+      description:
+        'Specify a selected index for the initially selected content.',
+    },
+  },
+  render: ({ dismissable, selectedIndex }) => {
+    return html`
+      <style>
+        ${styles}
+      </style>
+      <tabs-story-wrapper
+        ?dismissable="${dismissable}"
+        selected-index="${selectedIndex}">
+      </tabs-story-wrapper>
+    `;
+  },
+};
+export const DismissableContained = {
+  args: {
+    contained: true,
+    dismissable: true,
+    selectedIndex: 0,
+  },
+  argTypes: {
+    dismissable: {
+      control: 'boolean',
+      description: 'Whether the rendered Tab children should be dismissable.',
+    },
+    selectedIndex: {
+      control: 'number',
+      description:
+        'Specify a selected index for the initially selected content.',
+    },
+  },
+  render: ({ contained, dismissable, selectedIndex }) => {
+    return html`
+      <style>
+        ${styles}
+      </style>
+      <tabs-story-wrapper
+        ?dismissable="${dismissable}"
+        ?contained="${contained}"
+        selected-index="${selectedIndex}">
+      </tabs-story-wrapper>
+    `;
+  },
 };
 
 export const Icon20Only = {

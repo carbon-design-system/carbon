@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2022
+ * Copyright IBM Corp. 2022, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -222,13 +222,18 @@ describe('PasswordInput', () => {
     });
 
     it('should respect size prop', () => {
-      render(
+      const { container } = render(
         <PasswordInput id="input-1" labelText="PasswordInput label" size="sm" />
       );
 
       expect(screen.getByLabelText('PasswordInput label')).toHaveClass(
         `${prefix}--text-input--sm`
       );
+
+      const fieldWrapper = container.querySelector(
+        `.${prefix}--text-input__field-wrapper`
+      );
+      expect(fieldWrapper).toHaveClass(`${prefix}--layout--size-sm`);
     });
 
     it('should respect type prop', () => {
