@@ -17,6 +17,8 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/theme' as *;
 @use '@carbon/styles/scss/components/button/tokens' as button-tokens;
 
+@include emit-layout-classes();
+
 :host(#{$prefix}-accordion),
 :host(#{$prefix}-accordion-skeleton) {
   @extend .#{$prefix}--accordion;

@@ -22,6 +22,7 @@ describe('@carbon/styles/scss/layout', () => {
 
       $_: get('api', (
         mixins: (
+          emit-layout-classes: meta.mixin-exists('emit-layout-classes', 'layout'),
           emit-layout-tokens: meta.mixin-exists('emit-layout-tokens', 'layout'),
           emit-layout-tokens-to-shadow-host: meta.mixin-exists('emit-layout-tokens-to-shadow-host', 'layout'),
         ),
@@ -31,6 +32,7 @@ describe('@carbon/styles/scss/layout', () => {
     const { value: api } = get('api');
     expect(api).toEqual({
       mixins: {
+        'emit-layout-classes': true,
         'emit-layout-tokens': true,
         'emit-layout-tokens-to-shadow-host': true,
       },
@@ -85,6 +87,7 @@ describe('@carbon/styles/scss/layout', () => {
   test('layout size classes set size context token', async () => {
     const { result } = await render(`
       @use '../layout';
+      @include layout.emit-layout-classes();
     `);
 
     const { stylesheet } = css.parse(result.css.toString());
@@ -115,6 +118,7 @@ describe('@carbon/styles/scss/layout', () => {
   test('layout density classes set density context token', async () => {
     const { result } = await render(`
       @use '../layout';
+      @include layout.emit-layout-classes();
     `);
 
     const { stylesheet } = css.parse(result.css.toString());
@@ -145,6 +149,7 @@ describe('@carbon/styles/scss/layout', () => {
   test('layout constraint classes are generated for default, min and max', async () => {
     const { result } = await render(`
       @use '../layout';
+      @include layout.emit-layout-classes();
     `);
 
     const output = result.css.toString();
@@ -189,6 +194,9 @@ describe('@carbon/styles/scss/layout', () => {
   test(':root emits layout tokens globally', async () => {
     const { result } = await render(`
       @use '../layout';
+      :root {
+        @include layout.emit-layout-tokens();
+      }
     `);
 
     const { stylesheet } = css.parse(result.css.toString());
@@ -202,5 +210,13 @@ describe('@carbon/styles/scss/layout', () => {
         d.property.includes('--cds-layout-size-height-xs')
       )
     ).toBe(true);
+  });
+
+  test('should not emit CSS when only using the module', async () => {
+    const { result } = await render(`
+      @use '../layout';
+    `);
+
+    expect(result.css.toString().trim()).toBe('');
   });
 });
