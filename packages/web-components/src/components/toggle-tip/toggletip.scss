@@ -26,7 +26,22 @@
   justify-content: center;
 
   outline: none;
+}
 
+:host(#{$prefix}-toggletip[open]:not([autoalign])) {
+  // Keep the caret fill on `::after` so the container does not render as a
+  // block.
+  .#{$prefix}--popover-caret {
+    background: transparent;
+
+    &::after {
+      background-color: $background-inverse;
+    }
+  }
+}
+
+:host(#{$prefix}-toggletip[open][autoalign]) {
+  // `autoalign` uses the rotated caret container as the visible shape.
   .#{$prefix}--popover-caret {
     background-color: $background-inverse;
   }

@@ -190,4 +190,137 @@ describe('cds-button', () => {
       await expect(el).shadowDom.to.equalSnapshot();
     });
   });
+
+  describe('Tooltip popover position classes', () => {
+    const positions = ['top', 'bottom', 'left', 'right'];
+    const alignments = ['start', 'center', 'end'];
+
+    positions.forEach((position) => {
+      alignments.forEach((alignment) => {
+        const expectedClass =
+          position === 'top' || position === 'bottom'
+            ? `cds--popover--${position}-${alignment}`
+            : `cds--popover--${position}`;
+
+        it(`uses "${expectedClass}" for tooltip-position="${position}" tooltip-alignment="${alignment}"`, async () => {
+          const el = await fixture(html`
+            <cds-button
+              has-icon-only
+              tooltip-text="tip"
+              tooltip-position="${position}"
+              tooltip-alignment="${alignment}">
+              <svg slot="icon" data-testid="svg"></svg>
+            </cds-button>
+          `);
+          await el.updateComplete;
+
+          const container = el.shadowRoot?.querySelector(
+            '.cds--popover-container'
+          );
+          expect(container).to.exist;
+          expect(container).to.have.class(expectedClass);
+          expect(container).to.have.class('cds--tooltip');
+          expect(container).to.have.class('cds--icon-tooltip');
+        });
+      });
+    });
+  });
+
+  describe('Tooltip popover RTL alignment', () => {
+    const renderTooltip = async ({ dir, position, alignment = '' }) => {
+      const el = await fixture(html`
+        <cds-button
+          dir="${dir}"
+          has-icon-only
+          tooltip-text="tip"
+          tooltip-position="${position}"
+          tooltip-alignment="${alignment}">
+          <svg slot="icon" data-testid="svg"></svg>
+        </cds-button>
+      `);
+      el.openTooltip = true;
+      await el.updateComplete;
+      await new Promise((resolve) => requestAnimationFrame(resolve));
+      const root = el.shadowRoot;
+      return {
+        el,
+        content: root?.querySelector('.cds--popover-content'),
+        caret: root?.querySelector('.cds--popover-caret'),
+      };
+    };
+
+    const horizontalCenter = (rect) => rect.left + rect.width / 2;
+
+    ['top', 'bottom'].forEach((position) => {
+      it(`renders centered "${position}" tooltip horizontally aligned with the button in RTL`, async () => {
+        const { el, content } = await renderTooltip({
+          dir: 'rtl',
+          position,
+          alignment: '',
+        });
+        const buttonRect = el.getBoundingClientRect();
+        const contentRect = content.getBoundingClientRect();
+
+        const buttonCenter = horizontalCenter(buttonRect);
+        const contentCenter = horizontalCenter(contentRect);
+        const offset = Math.abs(contentCenter - buttonCenter);
+
+        expect(
+          offset,
+          `popover center (${contentCenter.toFixed(1)}) should align with button center (${buttonCenter.toFixed(1)})`
+        ).to.be.lessThan(2);
+      });
+    });
+
+    [
+      { position: 'top', alignment: 'left', expectedAnchor: 'start' },
+      { position: 'top', alignment: 'right', expectedAnchor: 'end' },
+      { position: 'bottom', alignment: 'left', expectedAnchor: 'start' },
+      { position: 'bottom', alignment: 'right', expectedAnchor: 'end' },
+    ].forEach(({ position, alignment, expectedAnchor }) => {
+      it(`anchors "${position}-${alignment}" tooltip toward the button's inline-${expectedAnchor} edge in RTL`, async () => {
+        const { el, content } = await renderTooltip({
+          dir: 'rtl',
+          position,
+          alignment,
+        });
+        const buttonRect = el.getBoundingClientRect();
+        const contentRect = content.getBoundingClientRect();
+
+        expect(contentRect.width).to.be.greaterThan(0);
+
+        if (expectedAnchor === 'start') {
+          expect(contentRect.right).to.be.greaterThan(buttonRect.right - 4);
+        } else {
+          expect(contentRect.left).to.be.lessThan(buttonRect.left + 4);
+        }
+      });
+    });
+
+    ['right', 'left'].forEach((position) => {
+      it(`keeps "${position}" tooltip on the same physical side of the button in RTL as in LTR`, async () => {
+        const ltr = await renderTooltip({ dir: 'ltr', position });
+        const rtl = await renderTooltip({ dir: 'rtl', position });
+
+        const ltrButton = ltr.el.getBoundingClientRect();
+        const rtlButton = rtl.el.getBoundingClientRect();
+        const ltrPopover = ltr.content.getBoundingClientRect();
+        const rtlPopover = rtl.content.getBoundingClientRect();
+        const ltrCaret = ltr.caret.getBoundingClientRect();
+        const rtlCaret = rtl.caret.getBoundingClientRect();
+
+        if (position === 'right') {
+          expect(ltrPopover.left).to.be.greaterThanOrEqual(ltrButton.right - 1);
+          expect(ltrCaret.left).to.be.greaterThanOrEqual(ltrButton.right - 1);
+          expect(rtlPopover.left).to.be.greaterThanOrEqual(rtlButton.right - 1);
+          expect(rtlCaret.left).to.be.greaterThanOrEqual(rtlButton.right - 1);
+        } else {
+          expect(ltrPopover.right).to.be.lessThanOrEqual(ltrButton.left + 1);
+          expect(ltrCaret.right).to.be.lessThanOrEqual(ltrButton.left + 1);
+          expect(rtlPopover.right).to.be.lessThanOrEqual(rtlButton.left + 1);
+          expect(rtlCaret.right).to.be.lessThanOrEqual(rtlButton.left + 1);
+        }
+      });
+    });
+  });
 });
