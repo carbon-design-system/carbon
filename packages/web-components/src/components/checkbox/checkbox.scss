@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2019, 2024
+// Copyright IBM Corp. 2019, 2026
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -34,7 +34,7 @@ $css--plex: true !default;
   @extend .#{$prefix}--checkbox-wrapper--readonly;
 }
 
-:host(#{$prefix}-checkbox:not([readonly])[invalid]) {
+:host(#{$prefix}-checkbox:not([readonly]):not([disabled])[invalid]) {
   @extend .#{$prefix}--checkbox-wrapper--invalid;
 }
 
@@ -42,7 +42,9 @@ $css--plex: true !default;
   border-color: $support-error;
 }
 
-:host(#{$prefix}-checkbox:not([readonly]):not([invalid])[warn]) {
+:host(
+    #{$prefix}-checkbox:not([readonly]):not([disabled]):not([invalid])[warn]
+  ) {
   @extend .#{$prefix}--checkbox-wrapper--warning;
 }
 

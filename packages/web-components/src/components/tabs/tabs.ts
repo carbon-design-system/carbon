@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2019, 2024
+ * Copyright IBM Corp. 2019, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -18,12 +18,17 @@ import ChevronRight16 from '@carbon/icons/es/chevron--right/16.js';
 import CDSContentSwitcher, {
   NAVIGATION_DIRECTION,
 } from '../content-switcher/content-switcher';
-import { TABS_KEYBOARD_ACTION, TABS_TYPE } from './defs';
+import { TABS_ICON_SIZE, TABS_KEYBOARD_ACTION, TABS_TYPE } from './defs';
 import CDSTab from './tab';
 import styles from './tabs.scss?lit';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
-export { NAVIGATION_DIRECTION, TABS_KEYBOARD_ACTION, TABS_TYPE };
+export {
+  NAVIGATION_DIRECTION,
+  TABS_ICON_SIZE,
+  TABS_KEYBOARD_ACTION,
+  TABS_TYPE,
+};
 
 /**
  * Tabs.
@@ -84,7 +89,7 @@ export default class CDSTabs extends HostListenerMixin(CDSContentSwitcher) {
    */
   protected _navigate(direction: number) {
     const immediate = this.selectionMode === 'automatic';
-    const { selectorItem, selectorItemHighlighted, selectorItemSelected } = this
+    const { selectorItemHighlighted, selectorItemSelected } = this
       .constructor as typeof CDSTabs;
     const nextItem = this._getNextItem(
       this.querySelector(
@@ -97,10 +102,7 @@ export default class CDSTabs extends HostListenerMixin(CDSContentSwitcher) {
     }
     this._handleUserInitiatedSelectItem(nextItem as CDSTab, 'keyboard');
     if (!immediate) {
-      forEach(this.querySelectorAll(selectorItem), (item) => {
-        (item as CDSTab)[immediate ? 'selected' : 'highlighted'] =
-          nextItem === item;
-      });
+      this.resetHighlighted(nextItem as CDSTab);
     }
 
     // Using `{ block: 'nearest' }` to prevent scrolling unless scrolling is absolutely necessary.
@@ -116,16 +118,25 @@ export default class CDSTabs extends HostListenerMixin(CDSContentSwitcher) {
     this.requestUpdate();
   }
 
+  /**
+   * Resets the highlighted state of all tabs, setting only the specified tab as highlighted.
+   *
+   * @param nextItem The tab item to be highlighted. If provided, only this item will be highlighted.
+   *   If null or undefined, all tabs will have their highlighted state set to false.
+   */
+  protected resetHighlighted(nextItem?: CDSTab | null) {
+    const { selectorItem } = this.constructor as typeof CDSTabs;
+    forEach(this.querySelectorAll(selectorItem), (item) => {
+      (item as CDSTab)['highlighted'] = nextItem === item;
+    });
+  }
+
   @HostListener('click')
   protected _handleClick(event: MouseEvent) {
     super._handleClick(event);
-    const { selectorItem } = this.constructor as typeof CDSTabs;
     const currentItem = this._getCurrentItem(event.target as HTMLElement);
     if (currentItem) {
-      forEach(this.querySelectorAll(selectorItem), (item) => {
-        (item as CDSTab).highlighted = false;
-      });
-      (currentItem as CDSTab).highlighted = true;
+      this.resetHighlighted(currentItem as CDSTab);
     }
   }
 
@@ -142,7 +153,13 @@ export default class CDSTabs extends HostListenerMixin(CDSContentSwitcher) {
             block: 'nearest',
             inline: 'nearest',
           });
-          this._handleUserInitiatedSelectItem(firstEnabledTab as CDSTab);
+          if (this.selectionMode === 'manual') {
+            this.resetHighlighted(firstEnabledTab as CDSTab);
+          }
+          this._handleUserInitiatedSelectItem(
+            firstEnabledTab as CDSTab,
+            this.selectionMode !== 'manual' ? 'activation' : 'keyboard'
+          );
           this.requestUpdate();
         }
         break;
@@ -153,7 +170,13 @@ export default class CDSTabs extends HostListenerMixin(CDSContentSwitcher) {
             block: 'nearest',
             inline: 'nearest',
           });
-          this._handleUserInitiatedSelectItem(lastEnabledTab as CDSTab);
+          if (this.selectionMode === 'manual') {
+            this.resetHighlighted(lastEnabledTab as CDSTab);
+          }
+          this._handleUserInitiatedSelectItem(
+            lastEnabledTab as CDSTab,
+            this.selectionMode !== 'manual' ? 'activation' : 'keyboard'
+          );
           this.requestUpdate();
         }
         break;
@@ -171,7 +194,10 @@ export default class CDSTabs extends HostListenerMixin(CDSContentSwitcher) {
             `${prefix}-tab[highlighted]`
           );
           if (focusedTab) {
-            this._selectionDidChange(focusedTab);
+            this._handleUserInitiatedSelectItem(
+              focusedTab as CDSTab,
+              'activation'
+            );
             this.requestUpdate();
           }
         }
@@ -296,6 +322,12 @@ export default class CDSTabs extends HostListenerMixin(CDSContentSwitcher) {
   type = TABS_TYPE.REGULAR;
 
   /**
+   * Specify the icon size used by icon-only tabs.
+   */
+  @property({ attribute: 'icon-size', reflect: true })
+  iconSize?: TABS_ICON_SIZE;
+
+  /**
    * `true` if left-hand scroll intersection sentinel intersects with the host element.
    * In this condition, the left-hand paginator button should be hidden.
    */
@@ -384,10 +416,12 @@ export default class CDSTabs extends HostListenerMixin(CDSContentSwitcher) {
       this._isScrollable = scrollWidth > clientWidth;
     }
     const { selectorItem } = this.constructor as typeof CDSTabs;
-    if (changedProperties.has('type')) {
+    if (changedProperties.has('type') || changedProperties.has('iconSize')) {
+      this._totalTabs = 0;
       forEach(this.querySelectorAll(selectorItem), (elem) => {
         this._totalTabs++;
         (elem as CDSTab).type = this.type;
+        (elem as CDSTab).iconSize = this.iconSize;
       });
     }
     return true;
