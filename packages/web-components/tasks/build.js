@@ -35,50 +35,40 @@ async function build() {
   const { build: tsdown } = await import('tsdown');
   const tsconfigPath = path.resolve(packageRoot, 'tsconfig.json');
   const external = getExternalPatterns();
-  const sourceRoot = path.resolve(packageRoot, 'src');
 
-  const esInputs = await globby(
-    [
-      'src/**/*.ts',
-      '!src/**/*.stories.ts',
-      '!src/**/*.d.ts',
-      '!src/globals/internal/storybook-cdn.ts',
-      '!src/polyfills',
-    ],
-    { cwd: packageRoot }
-  );
+  const esInputs = await globby([
+    'src/**/*.ts',
+    '!src/**/*.stories.ts',
+    '!src/**/*.d.ts',
+    '!src/globals/internal/storybook-cdn.ts',
+    '!src/polyfills',
+  ]);
 
-  const libInputs = await globby(
-    [
-      'src/components/**/defs.ts',
-      'src/globals/**/*.ts',
-      '!src/globals/decorators/**/*.ts',
-      '!src/globals/directives/**/*.ts',
-      '!src/globals/internal/**/*.ts',
-      '!src/globals/mixins/**/*.ts',
-    ],
-    { cwd: packageRoot }
-  );
+  const libInputs = await globby([
+    'src/components/**/defs.ts',
+    'src/globals/**/*.ts',
+    '!src/globals/decorators/**/*.ts',
+    '!src/globals/directives/**/*.ts',
+    '!src/globals/internal/**/*.ts',
+    '!src/globals/mixins/**/*.ts',
+  ]);
 
   const formats = [
     {
       type: 'esm',
       directory: 'es',
-      inputs: esInputs.map((input) => path.resolve(packageRoot, input)),
-      preserveModulesRoot: sourceRoot,
+      inputs: esInputs,
     },
     {
       type: 'esm',
       directory: 'scoped-elements',
-      inputs: esInputs.map((input) => path.resolve(packageRoot, input)),
-      preserveModulesRoot: sourceRoot,
+      inputs: esInputs,
       scopedElements: true,
     },
     {
       type: 'cjs',
       directory: 'lib',
-      inputs: libInputs.map((input) => path.resolve(packageRoot, input)),
-      preserveModulesRoot: sourceRoot,
+      inputs: libInputs,
     },
   ];
 
@@ -91,7 +81,7 @@ async function build() {
       // (e.g. HostListenerMixin) — it strips the generic base class type,
       // breaking downstream consumers
       dts: false,
-      entry: format.inputs,
+      entry: format.inputs.map((input) => path.resolve(packageRoot, input)),
       external,
       failOnWarn: false,
       format: format.type,
@@ -122,7 +112,7 @@ async function build() {
           },
           exports: 'named',
           preserveModules: true,
-          preserveModulesRoot: format.preserveModulesRoot,
+          preserveModulesRoot: path.resolve(packageRoot, 'src'),
           sourcemap: true,
         };
       },
@@ -180,9 +170,7 @@ function getExternalPatterns() {
 }
 
 async function copyScssSources() {
-  const files = await globby(['src/components/**/*.scss'], {
-    cwd: packageRoot,
-  });
+  const files = await globby(['src/components/**/*.scss']);
 
   await Promise.all(
     files.map(async (file) => {

@@ -39,16 +39,9 @@
     "./es/globals/*": {
       "default": "./es/globals/*"
     },
-    "./scoped-elements/components/*": {
-      "default": "./scoped-elements/components/*"
-    },
-    "./scoped-elements/globals/*": {
-      "default": "./scoped-elements/globals/*"
-    },
     "./es": "./es/index.js",
     "./es/": "./es/",
-    "./scoped-elements": "./scoped-elements/index.js",
-    "./scoped-elements/": "./scoped-elements/",
+    "./scoped-elements/*": "./scoped-elements/*",
     "./es-custom/*": "./es-custom/*",
     "./lib/": "./lib/",
     "./scss/": "./scss/",
