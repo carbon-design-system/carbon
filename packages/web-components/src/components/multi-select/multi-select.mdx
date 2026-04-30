@@ -69,42 +69,45 @@ alphabetically by default.
 <Canvas of={MultiSelectStories.WithCustomSorting} />
 
 ```typescript
- const customSortItems = (
-      menuItems: NodeList,
-      {
-        values,
-        compareItems,
-        locale,
-      }: {
-        values: string[];
-        compareItems: (
-          itemA: string,
-          itemB: string,
-          options: { locale: string }
-        ) => number;
-        locale: string;
-      }
-    ) => {
-      const menuItemsArray = Array.from(menuItems);
+const getItemValue = (item: Node) =>
+  item instanceof Element ? (item.getAttribute('value') ?? '') : '';
 
-      return menuItemsArray.sort((itemA, itemB) => {
-        const hasItemA = values.includes((itemA as HTMLInputElement).value);
-        const hasItemB = values.includes((itemB as HTMLInputElement).value);
+const customSortItems = (
+  menuItems: NodeList,
+  {
+    values,
+    compareItems,
+    locale,
+  }: {
+    values: string[];
+    compareItems: (
+      itemA: string,
+      itemB: string,
+      options: { locale: string }
+    ) => number;
+    locale: string;
+  }
+) => {
+  const menuItemsArray = Array.from(menuItems);
 
-        if (hasItemA && !hasItemB) {
-          return 1;
-        }
-        if (hasItemB && !hasItemA) {
-          return -1;
-        }
+  return menuItemsArray.sort((itemA, itemB) => {
+    const hasItemA = values.includes(getItemValue(itemA));
+    const hasItemB = values.includes(getItemValue(itemB));
 
-        return compareItems(
-          itemA.textContent?.trim() ?? '',
-          itemB.textContent?.trim() ?? '',
-          { locale }
-        );
-      });
-    };
+    if (hasItemA && !hasItemB) {
+      return 1;
+    }
+    if (hasItemB && !hasItemA) {
+      return -1;
+    }
+
+    return compareItems(
+      itemA.textContent?.trim() ?? '',
+      itemB.textContent?.trim() ?? '',
+      { locale }
+    );
+  });
+};
 
 ...
 

@@ -1077,6 +1077,9 @@ export const WithCustomSorting = {
       warnText,
     } = args ?? {};
 
+    const getItemValue = (item: Node) =>
+      item instanceof Element ? (item.getAttribute('value') ?? '') : '';
+
     const customSortItems = (
       menuItems: NodeList,
       {
@@ -1096,8 +1099,8 @@ export const WithCustomSorting = {
       const menuItemsArray = Array.from(menuItems);
 
       return menuItemsArray.sort((itemA, itemB) => {
-        const hasItemA = values.includes((itemA as HTMLInputElement).value);
-        const hasItemB = values.includes((itemB as HTMLInputElement).value);
+        const hasItemA = values.includes(getItemValue(itemA));
+        const hasItemB = values.includes(getItemValue(itemB));
 
         if (hasItemA && !hasItemB) {
           return 1;
