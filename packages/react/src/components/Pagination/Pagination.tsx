@@ -376,19 +376,16 @@ const Pagination = React.forwardRef(
       }
     }
 
-    function handlePageInputChange(event) {
-      const inputValue = Number(event.target.value);
-      const page = Math.max(1, Math.min(inputValue, totalPages));
+    function handlePageInputChange(event, { value }) {
+      const newPage = Math.max(1, Math.min(value, totalPages));
 
-      if (page > 0 && page <= totalPages) {
-        setPage(page);
+      setPage(newPage);
 
-        if (onChange) {
-          onChange({
-            page,
-            pageSize,
-          });
-        }
+      if (onChange) {
+        onChange({
+          page: newPage,
+          pageSize,
+        });
       }
     }
 
@@ -495,14 +492,6 @@ const Pagination = React.forwardRef(
                   min={1}
                   max={totalPages}
                   value={page}
-                  onKeyDown={(e) => {
-                    if (e.code.startsWith('Digit')) {
-                      if (Number(page + e.key) > totalPages) {
-                        setPage(totalPages);
-                        e.preventDefault();
-                      }
-                    }
-                  }}
                   size={size}
                   style={{
                     inlineSize: `calc(${String(page).length}ch + 2rem)`,
