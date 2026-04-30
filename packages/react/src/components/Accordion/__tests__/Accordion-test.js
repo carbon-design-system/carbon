@@ -198,10 +198,6 @@ describe('Accordion', () => {
   });
 
   describe('Expand/Collapse All', () => {
-    // TODO: This component contains bugs.
-    // 1. Collapse uses `null` via a boolean cast instead of a stable controlled
-    //    state.
-    // 2. Re-expanding does not re-sync items after a manual toggle.
     const ControlledAccordion = () => {
       const [expandAll, setExpandAll] = React.useState(false);
       return (
