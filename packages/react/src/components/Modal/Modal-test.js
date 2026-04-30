@@ -10,7 +10,7 @@ import { render, screen, waitFor, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import Modal from './Modal';
 import TextInput from '../TextInput';
-import { AILabel } from '../AILabel';
+import { AILabel, AILabelContent } from '../AILabel';
 import { FeatureFlags } from '../FeatureFlags';
 import { ModalPresence, withModalPresence } from './ModalPresence';
 import OverflowMenu from '../OverflowMenu';
@@ -1228,6 +1228,58 @@ describe.each([
     expect(screen.getByLabelText('Domain name')).toHaveFocus();
     await userEvent.click(screen.getByTestId('outside-area'));
     expect(screen.getByLabelText('Domain name')).not.toHaveFocus();
+    await userEvent.keyboard('{Escape}');
+    expect(onRequestClose).toHaveBeenCalled();
+  });
+
+  it('should handle ESC key with AILabel - first ESC closes popover, second ESC closes modal', async () => {
+    const onRequestClose = jest.fn();
+    const aiLabel = (
+      <AILabel className="ai-label-container">
+        <AILabelContent>
+          <div>
+            <p>AI Explained</p>
+            <p>Test content</p>
+          </div>
+        </AILabelContent>
+      </AILabel>
+    );
+
+    render(
+      <Component
+        open
+        primaryButtonText="Primary button"
+        secondaryButtonText="Secondary button"
+        onRequestClose={onRequestClose}
+        decorator={aiLabel}>
+        <p>Modal content</p>
+        <TextInput
+          data-modal-primary-focus
+          id="text-input-1"
+          labelText="Domain name"
+        />
+      </Component>
+    );
+
+    expect(screen.getByRole('presentation')).toHaveClass('is-visible');
+
+    const aiLabelButton = screen.getByRole('button', {
+      name: /AI Show information/i,
+    });
+    await userEvent.click(aiLabelButton);
+
+    await waitFor(() => {
+      expect(aiLabelButton).toHaveAttribute('aria-expanded', 'true');
+    });
+
+    await userEvent.keyboard('{Escape}');
+    await waitFor(() => {
+      expect(aiLabelButton).toHaveAttribute('aria-expanded', 'false');
+    });
+
+    expect(onRequestClose).not.toHaveBeenCalled();
+    expect(screen.getByRole('presentation')).toHaveClass('is-visible');
+
     await userEvent.keyboard('{Escape}');
     expect(onRequestClose).toHaveBeenCalled();
   });
