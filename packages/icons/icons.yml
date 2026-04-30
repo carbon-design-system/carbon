@@ -6678,6 +6678,19 @@
     - headset
   sizes:
     - 32
+- name: customer-service--filled
+  friendly_name: Customer service filled
+  aliases:
+    - customer
+    - inquiry
+    - phone
+    - support
+    - chat
+    - client
+    - person
+    - headset
+  sizes:
+    - 32
 - name: cut
   friendly_name: Cut
   aliases:
