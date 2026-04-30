@@ -17,6 +17,7 @@
 @use '../../utilities/component-reset';
 @use '../../utilities/convert';
 @use '../../utilities/focus-outline' as *;
+@use '../../utilities/layout';
 @use '../../utilities/skeleton' as *;
 
 /// Select styles
@@ -25,6 +26,7 @@
 @mixin select {
   .#{$prefix}--select {
     @include component-reset.reset;
+    @include layout.use('size', $default: 'md', $min: 'xs', $max: 'lg');
 
     position: relative;
     display: flex;
@@ -43,13 +45,15 @@
   .#{$prefix}--select-input {
     @include type-style('body-compact-01');
     @include focus-outline('reset');
+    @include layout.use('size', $default: 'md', $min: 'xs', $max: 'lg');
+    @include layout.use('density', $default: 'normal');
 
     display: block;
     border: none;
     border-radius: 0;
     appearance: none;
     background-color: $field;
-    block-size: convert.to-rem(40px);
+    block-size: layout.size('height');
     border-block-end: 1px solid $border-strong;
     color: $text-primary;
     cursor: pointer;
@@ -100,16 +104,6 @@
       color: $text-disabled;
       cursor: not-allowed;
     }
-  }
-
-  .#{$prefix}--select-input--sm {
-    block-size: convert.to-rem(32px);
-    max-block-size: convert.to-rem(32px);
-  }
-
-  .#{$prefix}--select-input--lg {
-    block-size: convert.to-rem(48px);
-    max-block-size: convert.to-rem(48px);
   }
 
   .#{$prefix}--select--disabled .#{$prefix}--label,
@@ -371,6 +365,21 @@
   }
 
   .#{$prefix}--select--decorator
+    .#{$prefix}--select-input__wrapper
+    .#{$prefix}--select-input
+    ~ .#{$prefix}--select__invalid-icon,
+  .#{$prefix}--select--slug
+    .#{$prefix}--select-input__wrapper[data-invalid]
+    .#{$prefix}--select-input
+    ~ .#{$prefix}--select__invalid-icon,
+  .#{$prefix}--select--slug
+    .#{$prefix}--select-input__wrapper
+    .#{$prefix}--select-input
+    ~ .#{$prefix}--select__invalid-icon {
+    inset-inline-end: $spacing-11;
+  }
+
+  .#{$prefix}--select--decorator
     .#{$prefix}--select-input:has(
       ~ .#{$prefix}--select__inner-wrapper--decorator
     ),
@@ -420,20 +429,5 @@
   .#{$prefix}--select--slug:has(.#{$prefix}--select__invalid-icon)
     .#{$prefix}--slug::before {
     display: block;
-  }
-
-  .#{$prefix}--select--decorator
-    .#{$prefix}--select-input__wrapper
-    .#{$prefix}--select-input
-    ~ .#{$prefix}--select__invalid-icon,
-  .#{$prefix}--select--slug
-    .#{$prefix}--select-input__wrapper[data-invalid]
-    .#{$prefix}--select-input
-    ~ .#{$prefix}--select__invalid-icon,
-  .#{$prefix}--select--slug
-    .#{$prefix}--select-input__wrapper
-    .#{$prefix}--select-input
-    ~ .#{$prefix}--select__invalid-icon {
-    inset-inline-end: $spacing-11;
   }
 }

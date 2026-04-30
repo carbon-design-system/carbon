@@ -18,11 +18,11 @@ import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
 
 - [Overview](#overview)
 - [Drag And Drop](#drag-and-drop)
-    - [Drag And Drop Upload Container Example Application](#drag-and-drop-upload-container-example-application)
-    - [Drag And Drop Upload Single Container Example Application](#drag-and-drop-upload-single-container-example-application)
+  - [Drag And Drop Upload Container Example Application](#drag-and-drop-upload-container-example-application)
+  - [Drag And Drop Upload Single Container Example Application](#drag-and-drop-upload-single-container-example-application)
 - [File](#file)
-    - [File Uploader Drop Container](#file-uploader-drop-container)
-    - [File Uploader Item](#file-uploader-item)
+  - [File Uploader Drop Container](#file-uploader-drop-container)
+  - [File Uploader Item](#file-uploader-item)
 - [Skeleton state](#skeleton-state)
 - [Component API](#component-api)
 - [Feedback](#feedback)
@@ -50,23 +50,30 @@ import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
   additionalActions={[
     {
       title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(FileUploaderStories.DragAndDropUploadContainerExampleApplication),
+      onClick: () =>
+        stackblitzPrefillConfig(
+          FileUploaderStories.DragAndDropUploadContainerExampleApplication
+        ),
     },
   ]}
 />
 
 #### Drag And Drop Upload Single Container Example Application
+
 <Canvas
   of={FileUploaderStories.DragAndDropUploadSingleContainerExampleApplication}
   additionalActions={[
     {
       title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(FileUploaderStories.DragAndDropUploadSingleContainerExampleApplication),
+      onClick: () =>
+        stackblitzPrefillConfig(
+          FileUploaderStories.DragAndDropUploadSingleContainerExampleApplication
+        ),
     },
   ]}
 />
 
-## File 
+## File
 
 #### File Uploader Drop Container
 
@@ -75,7 +82,8 @@ import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
   additionalActions={[
     {
       title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(FileUploaderStories._FileUploaderDropContainer),
+      onClick: () =>
+        stackblitzPrefillConfig(FileUploaderStories._FileUploaderDropContainer),
     },
   ]}
 />
@@ -87,12 +95,14 @@ import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
   additionalActions={[
     {
       title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(FileUploaderStories._FileUploaderItem),
+      onClick: () =>
+        stackblitzPrefillConfig(FileUploaderStories._FileUploaderItem),
     },
   ]}
 />
 
 ## Skeleton state
+
 <Canvas
   of={FileUploaderStories.Skeleton}
   additionalActions={[

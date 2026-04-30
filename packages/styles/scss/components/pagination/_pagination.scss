@@ -18,6 +18,7 @@
 @use '../../utilities/convert';
 @use '../../utilities/focus-outline' as *;
 @use '../../utilities/high-contrast-mode' as *;
+@use '../../utilities/layout';
 
 /// Pagination styles
 /// @access public
@@ -30,6 +31,7 @@
   .#{$prefix}--pagination {
     @include component-reset.reset;
     @include type-style('body-compact-01');
+    @include layout.use('size', $default: 'md', $min: 'xs', $max: 'lg');
 
     display: flex;
     overflow: initial;
@@ -40,7 +42,7 @@
     container-name: pagination;
     container-type: inline-size;
     inline-size: calc(100% - 1px);
-    min-block-size: convert.to-rem(40px);
+    min-block-size: layout.size('height');
 
     // 42rem = 'md' breakpoint
     @container pagination (min-width: 42rem) {
