@@ -242,6 +242,17 @@ export default class CDSTabs extends HostListenerMixin(CDSContentSwitcher) {
     }
   }
 
+  private _syncSecondaryLabels() {
+    const hasSecondaryLabels = Array.from(
+      this.querySelectorAll(`${prefix}-tab`)
+    ).some((tab) => tab.hasAttribute('secondary-label'));
+    if (hasSecondaryLabels) {
+      this.setAttribute('has-secondary-labels', '');
+    } else {
+      this.removeAttribute('has-secondary-labels');
+    }
+  }
+
   _handleSlotchange() {
     // Call super to preserve content-switcher slot handling
     super._handleSlotchange?.();
@@ -254,6 +265,8 @@ export default class CDSTabs extends HostListenerMixin(CDSContentSwitcher) {
     if (nextItem) {
       (nextItem as CDSTab).hideDivider = true;
     }
+
+    this._syncSecondaryLabels();
   }
 
   protected _selectionDidChange(
@@ -326,6 +339,12 @@ export default class CDSTabs extends HostListenerMixin(CDSContentSwitcher) {
    */
   @property({ attribute: 'icon-size', reflect: true })
   iconSize?: TABS_ICON_SIZE;
+
+  /**
+   * Used for tabs within a grid, this makes it so tabs span the full container width and have the same width. Only available on contained tabs with <9 children
+   */
+  @property({ type: Boolean, attribute: 'full-width', reflect: true })
+  fullWidth = false;
 
   /**
    * `true` if left-hand scroll intersection sentinel intersects with the host element.
@@ -446,6 +465,7 @@ export default class CDSTabs extends HostListenerMixin(CDSContentSwitcher) {
       }
     }
     this._cleanAndCreateIntersectionObserverContainer({ create: true });
+    this._syncSecondaryLabels();
   }
 
   updated(changedProperties) {
