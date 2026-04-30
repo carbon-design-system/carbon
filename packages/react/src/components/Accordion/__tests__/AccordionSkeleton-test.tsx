@@ -7,9 +7,9 @@
 
 import { describe, expect, it } from '@jest/globals';
 import '@testing-library/jest-dom/jest-globals';
-import { render, screen } from '@testing-library/react';
 import React from 'react';
 import AccordionSkeleton from '../Accordion.Skeleton';
+import { render, screen } from '@testing-library/react';
 
 describe('AccordionSkeleton', () => {
   describe('renders as expected - Component API', () => {

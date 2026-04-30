@@ -7,11 +7,11 @@
 
 import { describe, expect, it } from '@jest/globals';
 import '@testing-library/jest-dom/jest-globals';
-import { render, screen } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
+import Button from '../../Button';
 import React from 'react';
 import { Accordion, AccordionItem } from '../';
-import Button from '../../Button';
+import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 
 describe('Accordion', () => {
   it('should render', () => {
@@ -200,10 +200,9 @@ describe('Accordion', () => {
   });
 
   describe('Expand/Collapse All', () => {
-    // TODO: This component contains bugs.
-    // 1. Collapse uses `null` via a boolean cast instead of a stable controlled
-    //    state.
-    // 2. Re-expanding does not re-sync items after a manual toggle.
+    // TODO: This component doesn't model a controlled `Accordion` correctly. It
+    // uses `null` to force `open` prop changes, and it does not update parent
+    // state when an item is toggled manually.
     const ControlledAccordion = () => {
       const [expandAll, setExpandAll] = React.useState(false);
       return (

@@ -7,11 +7,11 @@
 
 import { describe, expect, it, jest } from '@jest/globals';
 import '@testing-library/jest-dom/jest-globals';
-import { render, screen } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
 import React from 'react';
 import type { AccordionToggleProps } from '../AccordionItem';
 import AccordionItem from '../AccordionItem';
+import userEvent from '@testing-library/user-event';
+import { render, screen } from '@testing-library/react';
 
 describe('AccordionItem', () => {
   describe('renders as expected - Component API', () => {
