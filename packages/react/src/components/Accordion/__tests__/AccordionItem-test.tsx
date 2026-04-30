@@ -5,10 +5,13 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
-import AccordionItem from '../AccordionItem';
-import userEvent from '@testing-library/user-event';
+import { describe, expect, it, jest } from '@jest/globals';
+import '@testing-library/jest-dom/jest-globals';
 import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+import React from 'react';
+import type { AccordionToggleProps } from '../AccordionItem';
+import AccordionItem from '../AccordionItem';
 
 describe('AccordionItem', () => {
   describe('renders as expected - Component API', () => {
@@ -95,10 +98,8 @@ describe('AccordionItem', () => {
     });
 
     it('should respect renderToggle prop', () => {
-      const renderToggle = jest.fn((props) => (
-        <svg {...props} data-testid="icon">
-          <circle cx="16" cy="16" r="8" />
-        </svg>
+      const renderToggle = jest.fn((props: AccordionToggleProps) => (
+        <button {...props} data-testid="icon" />
       ));
       render(<AccordionItem renderToggle={renderToggle} />);
 

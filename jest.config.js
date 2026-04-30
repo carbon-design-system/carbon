@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2018, 2025
+ * Copyright IBM Corp. 2018, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -8,8 +8,14 @@
 export default {
   preset: 'jest-config-carbon',
   testEnvironment: 'jsdom',
+  testMatch: [
+    '<rootDir>/**/__tests__/**/*.@(js|jsx|ts|tsx)',
+    '<rootDir>/**/*.(spec|test).@(js|jsx|ts|tsx)',
+    '<rootDir>/**/*-(spec|test).@(js|jsx|ts|tsx)',
+  ],
   collectCoverageFrom: [
     'packages/**/src/**/*.js',
+    'packages/**/src/**/*.ts',
     'packages/**/src/**/*.tsx',
     '!packages/{cli,components}/**',
     '!packages/**/{examples,stories}/**',
