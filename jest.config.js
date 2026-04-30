@@ -15,7 +15,6 @@ export default {
   ],
   collectCoverageFrom: [
     'packages/**/src/**/*.js',
-    'packages/**/src/**/*.ts',
     'packages/**/src/**/*.tsx',
     '!packages/{cli,components}/**',
     '!packages/**/{examples,stories}/**',
