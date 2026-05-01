@@ -4,8 +4,10 @@
 - **Contributors**: use this as a guide for what to include in your PRs so
   they'll sail through review ⛵
 
-> [!IMPORTANT] This just serves as a starting point. It will not include every
-> small nit and detail that might end up in a PR review.
+> [!IMPORTANT]
+>
+> This just serves as a starting point. It will not include every small nit and
+> detail that might end up in a PR review.
 >
 > This document should remain as small as possible! The longer this gets, the
 > more difficult it will be to read and absorb.
@@ -35,6 +37,10 @@
 ## Review Process
 
 ### 1. Initial Review
+
+> [!IMPORTANT] Pull requests must use and fill out the pull request
+>
+> [template](https://github.com/carbon-design-system/carbon/blob/main/.github/PULL_REQUEST_TEMPLATE.md).
 
 - **PR Body & Issue Context:**
   - Read the PR description to understand the overall scope.
