@@ -703,6 +703,9 @@ class CDSMultiSelect extends CDSDropdown {
     options: { locale: string }
   ) => number = this.defaultCompareItems;
 
+  private getItemValue = (item: Node) =>
+    item instanceof Element ? (item.getAttribute('value') ?? '') : '';
+
   protected defaultSortItems = (
     menuItems: NodeList,
     { values, compareItems, locale = 'en' }
@@ -710,8 +713,8 @@ class CDSMultiSelect extends CDSDropdown {
     const menuItemsArray = Array.from(menuItems);
 
     const sortedArray = menuItemsArray.sort((itemA, itemB) => {
-      const hasItemA = values.includes((itemA as HTMLInputElement).value);
-      const hasItemB = values.includes((itemB as HTMLInputElement).value);
+      const hasItemA = values.includes(this.getItemValue(itemA));
+      const hasItemB = values.includes(this.getItemValue(itemB));
 
       // Prefer whichever item is in the `value` array first
       if (hasItemA && !hasItemB) {
