@@ -49,13 +49,15 @@ import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
   ]}
 />
 
-## Initial Row Selection 
+## Initial Row Selection
+
 <Canvas
   of={StructuredListStories.InitialSelection}
   additionalActions={[
     {
       title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(StructuredListStories.InitialSelection),
+      onClick: () =>
+        stackblitzPrefillConfig(StructuredListStories.InitialSelection),
     },
   ]}
 />

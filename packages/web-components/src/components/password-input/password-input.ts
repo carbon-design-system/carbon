@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2025
+ * Copyright IBM Corp. 2025, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -194,8 +194,7 @@ class CDSPasswordInput extends CDSTextInput {
       [`${prefix}--text-input`]: true,
       [`${prefix}--text-input--invalid`]: normalizedProps.invalid,
       [`${prefix}--text-input--warning`]: normalizedProps.warn,
-      [`${prefix}--text-input--${size}`]: size,
-      [`${prefix}--layout--size-${size}`]: size,
+      [`${prefix}--text-input--${size}`]: size !== undefined, // TODO v12 - remove this class
       [`${prefix}--password-input`]: true,
     });
 
@@ -207,17 +206,20 @@ class CDSPasswordInput extends CDSTextInput {
     const fieldWrapperClasses = classMap({
       [`${prefix}--text-input__field-wrapper`]: true,
       [`${prefix}--text-input__field-wrapper--warning`]: normalizedProps.warn,
+      [`${prefix}--layout--size-${size}`]: size !== undefined,
     });
 
     const labelClasses = classMap({
       [`${prefix}--label`]: true,
       [`${prefix}--visually-hidden`]: hideLabel,
       [`${prefix}--label--disabled`]: normalizedProps.disabled,
+      [`${prefix}--label--inline`]: inline,
     });
 
     const helperTextClasses = classMap({
       [`${prefix}--form__helper-text`]: true,
       [`${prefix}--form__helper-text--disabled`]: normalizedProps.disabled,
+      [`${prefix}--form__helper-text--inline`]: inline,
     });
 
     const passwordIsVisible = type !== INPUT_TYPE.PASSWORD;
@@ -226,12 +228,7 @@ class CDSPasswordInput extends CDSTextInput {
       : iconLoader(View16, { class: `${prefix}--icon-visibility-on` });
 
     const passwordVisibilityTooltipClasses = classMap({
-      [`${prefix}--text-input--password__visibility__toggle`]: true,
-      [`${prefix}--btn`]: true,
-      [`${prefix}--tooltip__trigger`]: true,
-      [`${prefix}--tooltip--a11y`]: true,
       [`${prefix}--toggle-password-tooltip`]: true,
-      [`${prefix}--btn--disabled`]: normalizedProps.disabled || readonly,
       [`${prefix}--tooltip--${this.tooltipDirection}`]: this.tooltipDirection,
       [`${prefix}--tooltip--align-${this.tooltipAlignment}`]:
         this.tooltipAlignment,
@@ -239,10 +236,9 @@ class CDSPasswordInput extends CDSTextInput {
 
     const passwordVisibilityButtonClasses = classMap({
       [`${prefix}--text-input--password__visibility__toggle`]: true,
-      [`${prefix}--btn--icon-only`]: true,
+      [`${prefix}--btn`]: true,
       [`${prefix}--tooltip__trigger`]: true,
       [`${prefix}--tooltip--a11y`]: true,
-      [`${prefix}--toggle-password-tooltip`]: true,
       [`${prefix}--btn--disabled`]: normalizedProps.disabled || readonly,
     });
 
@@ -296,7 +292,7 @@ class CDSPasswordInput extends CDSTextInput {
         ${!inline
           ? labelWrapper
           : html`<div class="${prefix}--text-input__label-helper-wrapper">
-              ${labelWrapper} ${helper}
+              ${labelWrapper}
             </div>`}
         <div class="${fieldOuterWrapperClasses}">
           <div class="${fieldWrapperClasses}" ?data-invalid="${invalid}">
@@ -333,6 +329,7 @@ class CDSPasswordInput extends CDSTextInput {
               </button>
               <cds-tooltip-content
                 id="content"
+                ?toggle-password-tooltip-content="${!isFluid}"
                 ?hidden="${normalizedProps.disabled}">
                 ${passwordIsVisible
                   ? this.hidePasswordLabel
@@ -347,6 +344,11 @@ class CDSPasswordInput extends CDSTextInput {
           ${/* Non-fluid: validation and helper outside field wrapper */ ''}
           ${!isFluid && !inline ? validationMessage || helper : null}
         </div>
+        ${inline && !isFluid
+          ? html`<div class="${prefix}--text-input__label-helper-wrapper">
+              ${!isFluid ? validationMessage || helper : null}
+            </div>`
+          : null}
       </div>
     `;
   }

@@ -62,6 +62,8 @@ const content = html`
     <hr />
     <p class="secondary">Model type</p>
     <p class="bold">Foundation model</p>
+    <a href="#">normal link</a>
+    <cds-link href="#">cds link</cds-link>
   </div>
 `;
 

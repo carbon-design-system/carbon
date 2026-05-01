@@ -463,6 +463,18 @@ const ModalDialog = React.forwardRef(function ModalDialog(
       return;
     }
 
+    const modalRect = modalContent.getBoundingClientRect();
+    const elementRect = currentActiveNode.getBoundingClientRect();
+
+    // Check if element is fully visible within the modal viewport
+    const isFullyVisible =
+      elementRect.top >= modalRect.top &&
+      elementRect.bottom <= modalRect.bottom;
+
+    if (isFullyVisible) {
+      return; // Don't scroll if already fully visible
+    }
+
     currentActiveNode.scrollIntoView({ block: 'center' });
   }
 

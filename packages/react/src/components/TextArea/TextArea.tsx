@@ -24,6 +24,7 @@ import { getAnnouncement } from '../../internal/getAnnouncement';
 import useIsomorphicEffect from '../../internal/useIsomorphicEffect';
 import { useMergedRefs } from '../../internal/useMergedRefs';
 import { useId } from '../../internal/useId';
+import { hasHelperText } from '../../internal/hasHelperText';
 import { noopFn } from '../../internal/noopFn';
 import { Text } from '../Text';
 import { AILabel } from '../AILabel';
@@ -399,7 +400,7 @@ const TextArea = frFn((props, forwardRef) => {
   const counterDescriptionId =
     enableCounter && maxCount ? `${id}-counter-desc` : undefined;
 
-  const hasHelper = typeof helperText !== 'undefined' && helperText !== null;
+  const hasHelper = hasHelperText(helperText);
   const helperId = !hasHelper
     ? undefined
     : `text-area-helper-text-${textAreaInstanceId}`;

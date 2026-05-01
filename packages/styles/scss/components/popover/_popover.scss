@@ -401,8 +401,7 @@ $popover-caret-height: custom-property.get-var(
     inset-inline-end: calc(100% + $spacing-02);
   }
 
-  [dir='rtl']
-    .#{$prefix}--popover--bottom:not(.#{$prefix}--popover--auto-align)
+  .#{$prefix}--popover--bottom:not(.#{$prefix}--popover--auto-align):dir(rtl)
     > .#{$prefix}--popover
     > .#{$prefix}--popover-content {
     transform: translate(50%, calc(100% + $popover-offset));
@@ -422,12 +421,14 @@ $popover-caret-height: custom-property.get-var(
     );
   }
 
-  [dir='rtl']
-    .#{$prefix}--popover--bottom-left:not(.#{$prefix}--popover--auto-align)
+  .#{$prefix}--popover--bottom-left:not(.#{$prefix}--popover--auto-align):dir(
+      rtl
+    )
     > .#{$prefix}--popover
     > .#{$prefix}--popover-content,
-  [dir='rtl']
-    .#{$prefix}--popover--bottom-start:not(.#{$prefix}--popover--auto-align)
+  .#{$prefix}--popover--bottom-start:not(.#{$prefix}--popover--auto-align):dir(
+      rtl
+    )
     > .#{$prefix}--popover
     > .#{$prefix}--popover-content {
     inset-inline-end: calc(50% - $popover-offset);
@@ -445,12 +446,14 @@ $popover-caret-height: custom-property.get-var(
     transform: translate($popover-offset, calc(100% + $popover-offset));
   }
 
-  [dir='rtl']
-    .#{$prefix}--popover--bottom-right:not(.#{$prefix}--popover--auto-align)
+  .#{$prefix}--popover--bottom-right:not(.#{$prefix}--popover--auto-align):dir(
+      rtl
+    )
     > .#{$prefix}--popover
     > .#{$prefix}--popover-content,
-  [dir='rtl']
-    .#{$prefix}--popover--bottom-end:not(.#{$prefix}--popover--auto-align)
+  .#{$prefix}--popover--bottom-end:not(.#{$prefix}--popover--auto-align):dir(
+      rtl
+    )
     > .#{$prefix}--popover
     > .#{$prefix}--popover-content {
     inset-inline-start: calc(50% - $popover-offset);
@@ -536,24 +539,19 @@ $popover-caret-height: custom-property.get-var(
     }
   }
 
-  [dir='rtl']
-    .#{$prefix}--popover--bottom
+  .#{$prefix}--popover--bottom:dir(rtl)
     > .#{$prefix}--popover
     > .#{$prefix}--popover-caret,
-  [dir='rtl']
-    .#{$prefix}--popover--bottom-left
+  .#{$prefix}--popover--bottom-left:dir(rtl)
     > .#{$prefix}--popover
     > .#{$prefix}--popover-caret,
-  [dir='rtl']
-    .#{$prefix}--popover--bottom-start
+  .#{$prefix}--popover--bottom-start:dir(rtl)
     > .#{$prefix}--popover
     > .#{$prefix}--popover-caret,
-  [dir='rtl']
-    .#{$prefix}--popover--bottom-right
+  .#{$prefix}--popover--bottom-right:dir(rtl)
     > .#{$prefix}--popover
     > .#{$prefix}--popover-caret,
-  [dir='rtl']
-    .#{$prefix}--popover--bottom-end
+  .#{$prefix}--popover--bottom-end:dir(rtl)
     > .#{$prefix}--popover
     > .#{$prefix}--popover-caret {
     transform: translate(50%, $popover-offset);
@@ -637,8 +635,7 @@ $popover-caret-height: custom-property.get-var(
     transform: translate(-50%, calc(-100% - $popover-offset));
   }
 
-  [dir='rtl']
-    .#{$prefix}--popover--top:not(.#{$prefix}--popover--auto-align)
+  .#{$prefix}--popover--top:not(.#{$prefix}--popover--auto-align):dir(rtl)
     > .#{$prefix}--popover
     > .#{$prefix}--popover-content {
     transform: translate(50%, calc(-100% - $popover-offset));
@@ -658,12 +655,10 @@ $popover-caret-height: custom-property.get-var(
     );
   }
 
-  [dir='rtl']
-    .#{$prefix}--popover--top-left:not(.#{$prefix}--popover--auto-align)
+  .#{$prefix}--popover--top-left:not(.#{$prefix}--popover--auto-align):dir(rtl)
     > .#{$prefix}--popover
     > .#{$prefix}--popover-content,
-  [dir='rtl']
-    .#{$prefix}--popover--top-start:not(.#{$prefix}--popover--auto-align)
+  .#{$prefix}--popover--top-start:not(.#{$prefix}--popover--auto-align):dir(rtl)
     > .#{$prefix}--popover
     > .#{$prefix}--popover-content {
     inset-inline-end: calc(50% - $popover-offset);
@@ -681,12 +676,10 @@ $popover-caret-height: custom-property.get-var(
     transform: translate($popover-offset, calc(-100% - $popover-offset));
   }
 
-  [dir='rtl']
-    .#{$prefix}--popover--top-right:not(.#{$prefix}--popover--auto-align)
+  .#{$prefix}--popover--top-right:not(.#{$prefix}--popover--auto-align):dir(rtl)
     > .#{$prefix}--popover
     > .#{$prefix}--popover-content,
-  [dir='rtl']
-    .#{$prefix}--popover--top-end:not(.#{$prefix}--popover--auto-align)
+  .#{$prefix}--popover--top-end:not(.#{$prefix}--popover--auto-align):dir(rtl)
     > .#{$prefix}--popover
     > .#{$prefix}--popover-content {
     inset-inline-start: calc(50% - $popover-offset);
@@ -770,24 +763,19 @@ $popover-caret-height: custom-property.get-var(
     }
   }
 
-  [dir='rtl']
-    .#{$prefix}--popover--top:not(.#{$prefix}--popover--auto-align)
+  .#{$prefix}--popover--top:not(.#{$prefix}--popover--auto-align):dir(rtl)
     > .#{$prefix}--popover
     > .#{$prefix}--popover-caret,
-  [dir='rtl']
-    .#{$prefix}--popover--top-left:not(.#{$prefix}--popover--auto-align)
+  .#{$prefix}--popover--top-left:not(.#{$prefix}--popover--auto-align):dir(rtl)
     > .#{$prefix}--popover
     > .#{$prefix}--popover-caret,
-  [dir='rtl']
-    .#{$prefix}--popover--top-start:not(.#{$prefix}--popover--auto-align)
+  .#{$prefix}--popover--top-start:not(.#{$prefix}--popover--auto-align):dir(rtl)
     > .#{$prefix}--popover
     > .#{$prefix}--popover-caret,
-  [dir='rtl']
-    .#{$prefix}--popover--top-right:not(.#{$prefix}--popover--auto-align)
+  .#{$prefix}--popover--top-right:not(.#{$prefix}--popover--auto-align):dir(rtl)
     > .#{$prefix}--popover
     > .#{$prefix}--popover-caret,
-  [dir='rtl']
-    .#{$prefix}--popover--top-end:not(.#{$prefix}--popover--auto-align)
+  .#{$prefix}--popover--top-end:not(.#{$prefix}--popover--auto-align):dir(rtl)
     > .#{$prefix}--popover
     > .#{$prefix}--popover-caret {
     transform: translate(50%, calc(-1 * $popover-offset));
@@ -898,24 +886,23 @@ $popover-caret-height: custom-property.get-var(
     transform: translate($popover-offset, calc(0.5 * $popover-offset + 16px));
   }
 
-  [dir='rtl']
-    .#{$prefix}--popover--right:not(.#{$prefix}--popover--auto-align)
+  .#{$prefix}--popover--right:not(.#{$prefix}--popover--auto-align):dir(rtl)
     > .#{$prefix}--popover
     > .#{$prefix}--popover-content,
-  [dir='rtl']
-    .#{$prefix}--popover--right-bottom:not(.#{$prefix}--popover--auto-align)
+  .#{$prefix}--popover--right-bottom:not(.#{$prefix}--popover--auto-align):dir(
+      rtl
+    )
     > .#{$prefix}--popover
     > .#{$prefix}--popover-content,
-  [dir='rtl']
-    .#{$prefix}--popover--right-end:not(.#{$prefix}--popover--auto-align)
+  .#{$prefix}--popover--right-end:not(.#{$prefix}--popover--auto-align):dir(rtl)
     > .#{$prefix}--popover
     > .#{$prefix}--popover-content,
-  [dir='rtl']
-    .#{$prefix}--popover--right-top:not(.#{$prefix}--popover--auto-align)
+  .#{$prefix}--popover--right-top:not(.#{$prefix}--popover--auto-align):dir(rtl)
     > .#{$prefix}--popover
     > .#{$prefix}--popover-content,
-  [dir='rtl']
-    .#{$prefix}--popover--right-start:not(.#{$prefix}--popover--auto-align)
+  .#{$prefix}--popover--right-start:not(.#{$prefix}--popover--auto-align):dir(
+      rtl
+    )
     > .#{$prefix}--popover
     > .#{$prefix}--popover-content {
     inset-inline-end: 100%;
@@ -973,24 +960,23 @@ $popover-caret-height: custom-property.get-var(
     }
   }
 
-  [dir='rtl']
-    .#{$prefix}--popover--right:not(.#{$prefix}--popover--auto-align)
+  .#{$prefix}--popover--right:not(.#{$prefix}--popover--auto-align):dir(rtl)
     > .#{$prefix}--popover
     > .#{$prefix}--popover-caret,
-  [dir='rtl']
-    .#{$prefix}--popover--right-top:not(.#{$prefix}--popover--auto-align)
+  .#{$prefix}--popover--right-top:not(.#{$prefix}--popover--auto-align):dir(rtl)
     > .#{$prefix}--popover
     > .#{$prefix}--popover-caret,
-  [dir='rtl']
-    .#{$prefix}--popover--right-start:not(.#{$prefix}--popover--auto-align)
+  .#{$prefix}--popover--right-start:not(.#{$prefix}--popover--auto-align):dir(
+      rtl
+    )
     > .#{$prefix}--popover
     > .#{$prefix}--popover-caret,
-  [dir='rtl']
-    .#{$prefix}--popover--right-bottom:not(.#{$prefix}--popover--auto-align)
+  .#{$prefix}--popover--right-bottom:not(.#{$prefix}--popover--auto-align):dir(
+      rtl
+    )
     > .#{$prefix}--popover
     > .#{$prefix}--popover-caret,
-  [dir='rtl']
-    .#{$prefix}--popover--right-end:not(.#{$prefix}--popover--auto-align)
+  .#{$prefix}--popover--right-end:not(.#{$prefix}--popover--auto-align):dir(rtl)
     > .#{$prefix}--popover
     > .#{$prefix}--popover-caret {
     inset-inline-end: 100%;
@@ -1034,34 +1020,29 @@ $popover-caret-height: custom-property.get-var(
     }
   }
 
-  [dir='rtl']
-    .#{$prefix}--popover--border.#{$prefix}--popover--right:not(
+  .#{$prefix}--popover--border.#{$prefix}--popover--right:not(
       .#{$prefix}--popover--auto-align
-    )
+    ):dir(rtl)
     > .#{$prefix}--popover
     > .#{$prefix}--popover-caret,
-  [dir='rtl']
-    .#{$prefix}--popover--border.#{$prefix}--popover--right-top:not(
+  .#{$prefix}--popover--border.#{$prefix}--popover--right-top:not(
       .#{$prefix}--popover--auto-align
-    )
+    ):dir(rtl)
     > .#{$prefix}--popover
     > .#{$prefix}--popover-caret,
-  [dir='rtl']
-    .#{$prefix}--popover--border.#{$prefix}--popover--right-start:not(
+  .#{$prefix}--popover--border.#{$prefix}--popover--right-start:not(
       .#{$prefix}--popover--auto-align
-    )
+    ):dir(rtl)
     > .#{$prefix}--popover
     > .#{$prefix}--popover-caret,
-  [dir='rtl']
-    .#{$prefix}--popover--border.#{$prefix}--popover--right-bottom:not(
+  .#{$prefix}--popover--border.#{$prefix}--popover--right-bottom:not(
       .#{$prefix}--popover--auto-align
-    )
+    ):dir(rtl)
     > .#{$prefix}--popover
     > .#{$prefix}--popover-caret,
-  [dir='rtl']
-    .#{$prefix}--popover--border.#{$prefix}--popover--right-end:not(
+  .#{$prefix}--popover--border.#{$prefix}--popover--right-end:not(
       .#{$prefix}--popover--auto-align
-    )
+    ):dir(rtl)
     > .#{$prefix}--popover
     > .#{$prefix}--popover-caret {
     &::after {
@@ -1134,28 +1115,33 @@ $popover-caret-height: custom-property.get-var(
     }
   }
 
-  [dir='rtl']
-    .#{$prefix}--popover--border.#{$prefix}--popover--right.#{$prefix}--popover--auto-align
+  .#{$prefix}--popover--border.#{$prefix}--popover--right.#{$prefix}--popover--auto-align:dir(
+      rtl
+    )
     > .#{$prefix}--popover
     > .#{$prefix}--popover-content
     > .#{$prefix}--popover-caret,
-  [dir='rtl']
-    .#{$prefix}--popover--border.#{$prefix}--popover--right-top.#{$prefix}--popover--auto-align
+  .#{$prefix}--popover--border.#{$prefix}--popover--right-top.#{$prefix}--popover--auto-align:dir(
+      rtl
+    )
     > .#{$prefix}--popover
     > .#{$prefix}--popover-content
     > .#{$prefix}--popover-caret,
-  [dir='rtl']
-    .#{$prefix}--popover--border.#{$prefix}--popover--right-start.#{$prefix}--popover--auto-align
+  .#{$prefix}--popover--border.#{$prefix}--popover--right-start.#{$prefix}--popover--auto-align:dir(
+      rtl
+    )
     > .#{$prefix}--popover
     > .#{$prefix}--popover-content
     > .#{$prefix}--popover-caret,
-  [dir='rtl']
-    .#{$prefix}--popover--border.#{$prefix}--popover--right-bottom.#{$prefix}--popover--auto-align
+  .#{$prefix}--popover--border.#{$prefix}--popover--right-bottom.#{$prefix}--popover--auto-align:dir(
+      rtl
+    )
     > .#{$prefix}--popover
     > .#{$prefix}--popover-content
     > .#{$prefix}--popover-caret,
-  [dir='rtl']
-    .#{$prefix}--popover--border.#{$prefix}--popover--right-end.#{$prefix}--popover--auto-align
+  .#{$prefix}--popover--border.#{$prefix}--popover--right-end.#{$prefix}--popover--auto-align:dir(
+      rtl
+    )
     > .#{$prefix}--popover
     > .#{$prefix}--popover-content
     > .#{$prefix}--popover-caret {
@@ -1215,24 +1201,23 @@ $popover-caret-height: custom-property.get-var(
     );
   }
 
-  [dir='rtl']
-    .#{$prefix}--popover--left:not(.#{$prefix}--popover--auto-align)
+  .#{$prefix}--popover--left:not(.#{$prefix}--popover--auto-align):dir(rtl)
     > .#{$prefix}--popover
     > .#{$prefix}--popover-content,
-  [dir='rtl']
-    .#{$prefix}--popover--left-bottom:not(.#{$prefix}--popover--auto-align)
+  .#{$prefix}--popover--left-bottom:not(.#{$prefix}--popover--auto-align):dir(
+      rtl
+    )
     > .#{$prefix}--popover
     > .#{$prefix}--popover-content,
-  [dir='rtl']
-    .#{$prefix}--popover--left-end:not(.#{$prefix}--popover--auto-align)
+  .#{$prefix}--popover--left-end:not(.#{$prefix}--popover--auto-align):dir(rtl)
     > .#{$prefix}--popover
     > .#{$prefix}--popover-content,
-  [dir='rtl']
-    .#{$prefix}--popover--left-top:not(.#{$prefix}--popover--auto-align)
+  .#{$prefix}--popover--left-top:not(.#{$prefix}--popover--auto-align):dir(rtl)
     > .#{$prefix}--popover
     > .#{$prefix}--popover-content,
-  [dir='rtl']
-    .#{$prefix}--popover--left-start:not(.#{$prefix}--popover--auto-align)
+  .#{$prefix}--popover--left-start:not(.#{$prefix}--popover--auto-align):dir(
+      rtl
+    )
     > .#{$prefix}--popover
     > .#{$prefix}--popover-content {
     inset-inline-end: initial;
@@ -1290,24 +1275,23 @@ $popover-caret-height: custom-property.get-var(
     }
   }
 
-  [dir='rtl']
-    .#{$prefix}--popover--left:not(.#{$prefix}--popover--auto-align)
+  .#{$prefix}--popover--left:not(.#{$prefix}--popover--auto-align):dir(rtl)
     > .#{$prefix}--popover
     > .#{$prefix}--popover-caret,
-  [dir='rtl']
-    .#{$prefix}--popover--left-top:not(.#{$prefix}--popover--auto-align)
+  .#{$prefix}--popover--left-top:not(.#{$prefix}--popover--auto-align):dir(rtl)
     > .#{$prefix}--popover
     > .#{$prefix}--popover-caret,
-  [dir='rtl']
-    .#{$prefix}--popover--left-start:not(.#{$prefix}--popover--auto-align)
+  .#{$prefix}--popover--left-start:not(.#{$prefix}--popover--auto-align):dir(
+      rtl
+    )
     > .#{$prefix}--popover
     > .#{$prefix}--popover-caret,
-  [dir='rtl']
-    .#{$prefix}--popover--left-bottom:not(.#{$prefix}--popover--auto-align)
+  .#{$prefix}--popover--left-bottom:not(.#{$prefix}--popover--auto-align):dir(
+      rtl
+    )
     > .#{$prefix}--popover
     > .#{$prefix}--popover-caret,
-  [dir='rtl']
-    .#{$prefix}--popover--left-end:not(.#{$prefix}--popover--auto-align)
+  .#{$prefix}--popover--left-end:not(.#{$prefix}--popover--auto-align):dir(rtl)
     > .#{$prefix}--popover
     > .#{$prefix}--popover-caret {
     inset-inline-end: initial;
@@ -1351,34 +1335,29 @@ $popover-caret-height: custom-property.get-var(
     }
   }
 
-  [dir='rtl']
-    .#{$prefix}--popover--border.#{$prefix}--popover--left:not(
+  .#{$prefix}--popover--border.#{$prefix}--popover--left:not(
       .#{$prefix}--popover--auto-align
-    )
+    ):dir(rtl)
     > .#{$prefix}--popover
     > .#{$prefix}--popover-caret,
-  [dir='rtl']
-    .#{$prefix}--popover--border.#{$prefix}--popover--left-top:not(
+  .#{$prefix}--popover--border.#{$prefix}--popover--left-top:not(
       .#{$prefix}--popover--auto-align
-    )
+    ):dir(rtl)
     > .#{$prefix}--popover
     > .#{$prefix}--popover-caret,
-  [dir='rtl']
-    .#{$prefix}--popover--border.#{$prefix}--popover--left-start:not(
+  .#{$prefix}--popover--border.#{$prefix}--popover--left-start:not(
       .#{$prefix}--popover--auto-align
-    )
+    ):dir(rtl)
     > .#{$prefix}--popover
     > .#{$prefix}--popover-caret,
-  [dir='rtl']
-    .#{$prefix}--popover--border.#{$prefix}--popover--left-bottom:not(
+  .#{$prefix}--popover--border.#{$prefix}--popover--left-bottom:not(
       .#{$prefix}--popover--auto-align
-    )
+    ):dir(rtl)
     > .#{$prefix}--popover
     > .#{$prefix}--popover-caret,
-  [dir='rtl']
-    .#{$prefix}--popover--border.#{$prefix}--popover--left-end:not(
+  .#{$prefix}--popover--border.#{$prefix}--popover--left-end:not(
       .#{$prefix}--popover--auto-align
-    )
+    ):dir(rtl)
     > .#{$prefix}--popover
     > .#{$prefix}--popover-caret {
     &::after {
@@ -1449,28 +1428,33 @@ $popover-caret-height: custom-property.get-var(
     }
   }
 
-  [dir='rtl']
-    .#{$prefix}--popover--border.#{$prefix}--popover--left.#{$prefix}--popover--auto-align
+  .#{$prefix}--popover--border.#{$prefix}--popover--left.#{$prefix}--popover--auto-align:dir(
+      rtl
+    )
     > .#{$prefix}--popover
     > .#{$prefix}--popover-content
     > .#{$prefix}--popover-caret,
-  [dir='rtl']
-    .#{$prefix}--popover--border.#{$prefix}--popover--left-top.#{$prefix}--popover--auto-align
+  .#{$prefix}--popover--border.#{$prefix}--popover--left-top.#{$prefix}--popover--auto-align:dir(
+      rtl
+    )
     > .#{$prefix}--popover
     > .#{$prefix}--popover-content
     > .#{$prefix}--popover-caret,
-  [dir='rtl']
-    .#{$prefix}--popover--border.#{$prefix}--popover--left-start.#{$prefix}--popover--auto-align
+  .#{$prefix}--popover--border.#{$prefix}--popover--left-start.#{$prefix}--popover--auto-align:dir(
+      rtl
+    )
     > .#{$prefix}--popover
     > .#{$prefix}--popover-content
     > .#{$prefix}--popover-caret,
-  [dir='rtl']
-    .#{$prefix}--popover--border.#{$prefix}--popover--left-bottom.#{$prefix}--popover--auto-align
+  .#{$prefix}--popover--border.#{$prefix}--popover--left-bottom.#{$prefix}--popover--auto-align:dir(
+      rtl
+    )
     > .#{$prefix}--popover
     > .#{$prefix}--popover-content
     > .#{$prefix}--popover-caret,
-  [dir='rtl']
-    .#{$prefix}--popover--border.#{$prefix}--popover--left-end.#{$prefix}--popover--auto-align
+  .#{$prefix}--popover--border.#{$prefix}--popover--left-end.#{$prefix}--popover--auto-align:dir(
+      rtl
+    )
     > .#{$prefix}--popover
     > .#{$prefix}--popover-content
     > .#{$prefix}--popover-caret {
@@ -1502,16 +1486,14 @@ $popover-caret-height: custom-property.get-var(
     )
     > .#{$prefix}--popover
     > .#{$prefix}--popover-content,
-  [dir='rtl']
-    .#{$prefix}--popover--tab-tip.#{$prefix}--popover--top-end:not(
+  .#{$prefix}--popover--tab-tip.#{$prefix}--popover--top-end:not(
       .#{$prefix}--popover--auto-align
-    )
+    ):dir(rtl)
     > .#{$prefix}--popover
     > .#{$prefix}--popover-content,
-  [dir='rtl']
-    .#{$prefix}--popover--tab-tip.#{$prefix}--popover--bottom-end:not(
+  .#{$prefix}--popover--tab-tip.#{$prefix}--popover--bottom-end:not(
       .#{$prefix}--popover--auto-align
-    )
+    ):dir(rtl)
     > .#{$prefix}--popover
     > .#{$prefix}--popover-content {
     inset-inline-start: 0;
@@ -1527,16 +1509,14 @@ $popover-caret-height: custom-property.get-var(
     )
     > .#{$prefix}--popover
     > .#{$prefix}--popover-content,
-  [dir='rtl']
-    .#{$prefix}--popover--tab-tip.#{$prefix}--popover--top-start:not(
+  .#{$prefix}--popover--tab-tip.#{$prefix}--popover--top-start:not(
       .#{$prefix}--popover--auto-align
-    )
+    ):dir(rtl)
     > .#{$prefix}--popover
     > .#{$prefix}--popover-content,
-  [dir='rtl']
-    .#{$prefix}--popover--tab-tip.#{$prefix}--popover--bottom-start:not(
+  .#{$prefix}--popover--tab-tip.#{$prefix}--popover--bottom-start:not(
       .#{$prefix}--popover--auto-align
-    )
+    ):dir(rtl)
     > .#{$prefix}--popover
     > .#{$prefix}--popover-content {
     inset-inline-end: 0;

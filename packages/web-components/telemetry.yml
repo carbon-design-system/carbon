@@ -124,6 +124,7 @@ collect:
         - kind
         - label
         - label-position
+        - label-styles-disable
         - label-text
         - large
         - leave-delay-ms

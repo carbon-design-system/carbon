@@ -908,8 +908,7 @@ interface MultiSelectComponent {
   displayName: string;
   <ItemType>(
     props: MultiSelectComponentProps<ItemType>
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
-  ): React.ReactElement<any> | null;
+  ): React.ReactElement | null;
 }
 
 MultiSelect.displayName = 'MultiSelect';

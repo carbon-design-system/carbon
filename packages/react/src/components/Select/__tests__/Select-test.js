@@ -172,7 +172,7 @@ describe('Select', () => {
       { label: 'true', value: true, shouldRender: true },
       { label: 'false', value: false, shouldRender: true },
       { label: 'component', value: <span>hmm</span>, shouldRender: true },
-      { label: 'empty string', value: '', shouldRender: true },
+      { label: 'empty string', value: '', shouldRender: false },
       { label: 'null', value: null, shouldRender: false },
       { label: 'undefined', value: undefined, shouldRender: false },
       { label: 'zero', value: '0', shouldRender: true },
@@ -191,6 +191,14 @@ describe('Select', () => {
         }
       }
     );
+
+    it('should not set aria-describedby when helperText is an empty string', () => {
+      render(<Select id="select-empty" labelText="Select" helperText="" />);
+
+      expect(screen.getByRole('combobox')).not.toHaveAttribute(
+        'aria-describedby'
+      );
+    });
 
     it('should respect hideLabel prop', () => {
       render(<Select id="select" labelText="Select" hideLabel />);
@@ -296,11 +304,12 @@ describe('Select', () => {
     });
 
     it('should respect size prop', () => {
-      render(<Select id="select" labelText="Select" size="sm" />);
-
-      expect(screen.getByRole('combobox')).toHaveClass(
-        `${prefix}--select-input--sm`
+      const { container } = render(
+        <Select id="select" labelText="Select" size="sm" />
       );
+      const selectWrapper = container.querySelector(`.${prefix}--select`);
+      expect(selectWrapper).toHaveClass(`${prefix}--select--sm`);
+      expect(selectWrapper).toHaveClass(`${prefix}--layout--size-sm`);
     });
 
     it('should respect warn prop', () => {

@@ -9,6 +9,9 @@ categories:
           - bottom-panel--open
           - categorical-palette
           - center-to-fit
+          - collapse--stripe
+          - collapse--title
+          - collapse--title-2
           - color-picker
           - continue
           - continue--filled
@@ -30,6 +33,7 @@ categories:
           - open-panel--left
           - open-panel--right
           - open-panel--top
+          - open--stripe
           - pause
           - pause--filled
           - pause--outline
@@ -77,6 +81,7 @@ categories:
           - skip--forward--outline--filled
           - skip--forward--outline--solid
           - skip--forward--solid--filled
+          - square--slash
           - stop
           - stop--filled
           - stop--filled--alt
@@ -352,6 +357,8 @@ categories:
           - bookmark
           - bookmark--add
           - bookmark--filled
+          - brainstorm
+          - brainstorm--filled
           - BPMN-compensation--fill
           - BPMN-compensation--outline
           - BPMN-conditional--fill
@@ -367,7 +374,8 @@ categories:
           - catalog--publish
           - center--circle
           - center--square
-          - change-catalog
+          - change--catalog
+          - change--circle
           - chat
           - chat--launch
           - chat--off
@@ -424,6 +432,7 @@ categories:
           - funnel--sequence
           - funnel--sort
           - gears
+          - git--repo
           - global-filters
           - graph-aggregator
           - image--search
@@ -451,6 +460,7 @@ categories:
           - migrate
           - migrate--alt
           - minimize
+          - minus--plus
           - modified--newest
           - modified--oldest
           - move
@@ -480,6 +490,7 @@ categories:
           - recommend
           - redo
           - renew
+          - renew--alt
           - repeat
           - repeat--one
           - replicate
@@ -531,6 +542,7 @@ categories:
           - translate
           - transpose
           - undo
+          - unfold--open
           - update-complete
           - update-now
           - upgrade
@@ -626,7 +638,7 @@ categories:
           - view--off--filled
   - name: Brand
     subcategories:
-      - name: Design and development
+      - name: Third-party logos
         members:
           - logo--angular
           - logo--ansible-community
@@ -786,7 +798,7 @@ categories:
           - ibm-consulting-advantage--agent
           - ibm-consulting-advantage--application
           - ibm-consulting-advantage--assistant
-          - ibm--content-services
+          - ibm--content-cortex-repository
           - ibm--databand
           - ibm--data-power
           - ibm--data-product-exchange
@@ -975,6 +987,7 @@ categories:
           - apple
           - apple--dash
           - account
+          - bank--vault
           - basketball
           - bat
           - bee-bat
@@ -1015,6 +1028,9 @@ categories:
           - money
           - monster
           - noodle-bowl
+          - order--server
+          - order--storm
+          - order--stratus
           - piggy-bank
           - piggy-bank--slot
           - pricing--consumption
@@ -1025,6 +1041,7 @@ categories:
           - purchase
           - receipt
           - recycle
+          - shipment--delivery
           - shopping--bag
           - shopping--cart
           - shopping--cart--arrow-down
@@ -1038,6 +1055,7 @@ categories:
           - sprout
           - stack-limitation
           - store
+          - storm
           - strawberry
           - sustainability
           - tennis
@@ -1496,6 +1514,8 @@ categories:
           - report--data
           - row--collapse
           - row--expand
+          - swot
+          - swot--filled
           - sankey-diagram
           - sankey-diagram--alt
           - scatter-matrix
@@ -1634,6 +1654,9 @@ categories:
           - DVR
           - export
           - feedback-documentation
+          - file--change
+          - file--diff
+          - file--x
           - floorplan
           - folder
           - folder--add
@@ -1668,6 +1691,7 @@ categories:
           - JSON
           - JSON--reference
           - KEY
+          - keychain
           - legend
           - license
           - license--draft
@@ -1790,6 +1814,7 @@ categories:
           - condition--wait-point
           - critical
           - critical-severity
+          - decline
           - diamond-fill
           - error
           - error--filled
@@ -1797,6 +1822,7 @@ categories:
           - event--change
           - event--incident
           - event--warning
+          - globe--private
           - js-error
           - low-severity
           - help
@@ -1815,12 +1841,14 @@ categories:
           - information--filled
           - information--square
           - information--square--filled
+          - key--values
           - locked-and-blocked
           - misuse
           - misuse--outline
           - pending
           - pending--filled
           - queued
+          - shield--alert
           - square-fill
           - undefined
           - undefined--filled
@@ -1832,6 +1860,7 @@ categories:
           - warning--alt-inverted
           - warning--alt-inverted--filled
           - warning--diamond
+          - warning--diamond-fill
           - warning--filled
           - warning--hex
           - warning--hex--filled
@@ -1844,6 +1873,7 @@ categories:
           - accept-action--usage
           - action--definition
           - action--usage
+          - add--server
           - anchor
           - application--mobile
           - application--virtual
@@ -1935,7 +1965,7 @@ categories:
           - feature-membership--filled
           - feature-picker
           - feature-typing
-          - file-storage
+          - file--storage
           - firewall
           - firewall--classic
           - floating-ip
@@ -2046,6 +2076,7 @@ categories:
           - server--dns
           - server--proxy
           - server--time
+          - server--time--usage
           - session-border-control
           - shapes
           - slisor
@@ -2065,6 +2096,7 @@ categories:
           - switch-layer-3
           - sysplex--distributor
           - spyre-accelerator
+          - stratus
           - tcp-ip-service
           - terminal--3270
           - top-data-sets
@@ -2206,6 +2238,7 @@ categories:
           - calendar--add--alt
           - calendar--settings
           - calendar--tools
+          - delivery--time
           - event
           - event--schedule
           - hourglass
@@ -2656,6 +2689,7 @@ categories:
           - share
           - signal-strength
           - sim-card
+          - socket
           - Serverless-Fleet
           - service-id
           - tablet

@@ -202,6 +202,8 @@ class CDSDatePicker extends HostListenerMixin(FormMixin(LitElement)) {
       : enabledRange.split('/');
     return {
       allowInput: this.allowInput,
+      ariaDateFormat: (this.constructor as typeof CDSDatePicker)
+        .defaultAriaDateFormat,
       closeOnSelect: this.closeOnSelect,
       dateFormat:
         this.dateFormat ??
@@ -662,6 +664,11 @@ class CDSDatePicker extends HostListenerMixin(FormMixin(LitElement)) {
    * The CSS class applied to the "today" highlight if there are any dates selected.
    */
   static classNoBorder = 'no-border';
+
+  /**
+   * The default aria date format.
+   */
+  static defaultAriaDateFormat = 'l, F j, Y';
 
   /**
    * The default date format.

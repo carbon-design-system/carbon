@@ -607,7 +607,52 @@ describe('Tab', () => {
     expect(onTabCloseRequest).toHaveBeenCalledTimes(1);
   });
 
-  it('should hide next overflow button when only 1px remains in the overflow threshold', async () => {
+  it('should keep next overflow button visible when the last tab is partially visible', () => {
+    jest.useFakeTimers();
+    const clientWidthSpy = jest
+      .spyOn(HTMLElement.prototype, 'clientWidth', 'get')
+      .mockImplementation(function () {
+        return this.getAttribute?.('role') === 'tablist' ? 100 : 0;
+      });
+    const scrollWidthSpy = jest
+      .spyOn(HTMLElement.prototype, 'scrollWidth', 'get')
+      .mockImplementation(function () {
+        return this.getAttribute?.('role') === 'tablist' ? 200 : 0;
+      });
+
+    try {
+      render(
+        <Tabs>
+          <TabList aria-label="List of tabs" />
+        </Tabs>
+      );
+
+      const tablist = screen.getByRole('tablist');
+      Object.defineProperty(tablist, 'scrollLeft', {
+        configurable: true,
+        writable: true,
+        value: 55,
+      });
+
+      fireEvent.scroll(tablist);
+      act(() => {
+        jest.advanceTimersByTime(250);
+      });
+
+      expect(screen.getByLabelText('Scroll right')).toHaveClass(
+        `${prefix}--tab--overflow-nav-button`,
+        `${prefix}--tab--overflow-nav-button--next`,
+        { exact: true }
+      );
+    } finally {
+      clientWidthSpy.mockRestore();
+      scrollWidthSpy.mockRestore();
+      jest.useRealTimers();
+    }
+  });
+
+  it('should hide next overflow button when only 1px remains in the overflow threshold', () => {
+    jest.useFakeTimers();
     const clientWidthSpy = jest
       .spyOn(HTMLElement.prototype, 'clientWidth', 'get')
       .mockImplementation(function () {
@@ -626,14 +671,28 @@ describe('Tab', () => {
         </Tabs>
       );
 
-      await waitFor(() => {
-        expect(screen.getByLabelText('Scroll right')).toHaveClass(
-          `${prefix}--tab--overflow-nav-button--hidden`
-        );
+      const tablist = screen.getByRole('tablist');
+      Object.defineProperty(tablist, 'scrollLeft', {
+        configurable: true,
+        writable: true,
+        value: 44,
       });
+
+      fireEvent.scroll(tablist);
+      act(() => {
+        jest.advanceTimersByTime(250);
+      });
+
+      expect(screen.getByLabelText('Scroll right')).toHaveClass(
+        `${prefix}--tab--overflow-nav-button`,
+        `${prefix}--tab--overflow-nav-button--next`,
+        `${prefix}--tab--overflow-nav-button--hidden`,
+        { exact: true }
+      );
     } finally {
       clientWidthSpy.mockRestore();
       scrollWidthSpy.mockRestore();
+      jest.useRealTimers();
     }
   });
 
