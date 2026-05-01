@@ -113,7 +113,7 @@
   "typings": "es/index.d.ts",
   "stylelint": {
     "extends": [
-      "../../config/stylelint-config-carbon"
+      "../../config/stylelint-config-carbon/index.js"
     ],
     "overrides": [
       {

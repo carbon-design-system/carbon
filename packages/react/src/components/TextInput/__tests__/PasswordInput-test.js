@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2022
+ * Copyright IBM Corp. 2022, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -76,6 +76,23 @@ describe('PasswordInput', () => {
     it('should render helperText with value 0', () => {
       render(<PasswordInput id="input-1" labelText="label" helperText={0} />);
       expect(screen.getByText('0')).toBeInTheDocument();
+    });
+
+    it('should not render helperText when helperText is an empty string', () => {
+      const { container } = render(
+        <PasswordInput
+          id="input-1"
+          labelText="PasswordInput label"
+          helperText=""
+        />
+      );
+
+      expect(
+        container.querySelector(`.${prefix}--form__helper-text`)
+      ).not.toBeInTheDocument();
+      expect(screen.getByLabelText('PasswordInput label')).not.toHaveAttribute(
+        'aria-describedby'
+      );
     });
 
     it('should respect hideLabel prop', () => {
@@ -164,6 +181,24 @@ describe('PasswordInput', () => {
       );
     });
 
+    it('should set aria-errormessage to the invalid message element id', () => {
+      render(
+        <PasswordInput
+          id="input-1"
+          labelText="PasswordInput label"
+          invalid
+          invalidText="This is invalid text"
+        />
+      );
+
+      const input = screen.getByLabelText('PasswordInput label');
+      expect(input).toHaveAttribute('aria-errormessage', 'input-1-error-msg');
+      expect(screen.getByText('This is invalid text')).toHaveAttribute(
+        'id',
+        'input-1-error-msg'
+      );
+    });
+
     it('should respect labelText prop', () => {
       render(<PasswordInput id="input-1" labelText="TextInput label" />);
 
@@ -205,13 +240,18 @@ describe('PasswordInput', () => {
     });
 
     it('should respect size prop', () => {
-      render(
+      const { container } = render(
         <PasswordInput id="input-1" labelText="PasswordInput label" size="sm" />
       );
 
       expect(screen.getByLabelText('PasswordInput label')).toHaveClass(
         `${prefix}--text-input--sm`
       );
+
+      const fieldWrapper = container.querySelector(
+        `.${prefix}--text-input__field-wrapper`
+      );
+      expect(fieldWrapper).toHaveClass(`${prefix}--layout--size-sm`);
     });
 
     it('should respect type prop', () => {
