@@ -30,7 +30,7 @@ export default {
   component: Pagination,
   argTypes: {
     size: {
-      options: ['sm', 'md', 'lg'],
+      options: ['xs', 'sm', 'md', 'lg'],
       control: { type: 'select' },
     },
   },
@@ -140,7 +140,7 @@ Default.argTypes = {
     },
   },
   size: {
-    options: ['sm', 'md', 'lg'],
+    options: ['xs', 'sm', 'md', 'lg'],
     control: { type: 'select' },
   },
   totalItems: {

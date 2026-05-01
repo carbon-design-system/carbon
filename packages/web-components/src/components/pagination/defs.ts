@@ -10,6 +10,10 @@
  */
 export enum PAGINATION_SIZE {
   /**
+   * Extra small size.
+   */
+  XS = 'xs',
+  /**
    * Small size.
    */
   SMALL = 'sm',
