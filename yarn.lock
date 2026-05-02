@@ -2095,6 +2095,8 @@ __metadata:
     change-case-all: "npm:^2.1.0"
     css: "npm:^3.0.0"
     rimraf: "npm:^6.0.1"
+    typescript: "npm:^5.7.3"
+    typescript-config-carbon: "workspace:^0.9.0"
   languageName: unknown
   linkType: soft
 

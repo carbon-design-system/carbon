@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2018, 2023
+ * Copyright IBM Corp. 2018, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -8,8 +8,9 @@
 import { baseFontSize, px } from '@carbon/layout';
 import { fontFamilies } from './fontFamily';
 import { fontWeights } from './fontWeight';
+import type { TypeStyle } from './types';
 
-export const reset = {
+export const reset: Record<'body' | 'code' | 'html' | 'strong', TypeStyle> = {
   html: {
     fontSize: px(baseFontSize),
   },
