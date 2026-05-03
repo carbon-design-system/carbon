@@ -9,6 +9,7 @@ import { stories as buttonStories } from './ButtonStories';
 import { stories as textInputStories } from './TextInputStories';
 import { stories as checkboxStories } from './CheckboxStories';
 import { stories as dropdownStories } from './DropdownStories';
+import { stories as radioButtonStories } from './RadioButtonStories';
 import { stories as toggleStories } from './ToggleStories';
 import type { ReactNode } from 'react';
 
@@ -42,6 +43,10 @@ export const componentRegistry: ComponentGroup[] = [
   {
     title: 'Dropdown',
     stories: dropdownStories,
+  },
+  {
+    title: 'RadioButton',
+    stories: radioButtonStories,
   },
   {
     title: 'Toggle',
