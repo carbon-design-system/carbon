@@ -1,13 +1,15 @@
 /**
- * Copyright IBM Corp. 2022
+ * Copyright IBM Corp. 2022, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
-import React from 'react';
+import React, { cloneElement } from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import FluidTextInput, { FluidTextInputProps } from '../FluidTextInput';
+import FluidTimePickerSelect from '../FluidTimePickerSelect';
+import { isComponentElement } from '../../internal';
 import { usePrefix } from '../../internal/usePrefix';
 import { WarningFilled, WarningAltFilled } from '@carbon/icons-react';
 
@@ -102,18 +104,20 @@ const FluidTimePicker = React.forwardRef<
     const childrenWithProps = () => {
       if (disabled) {
         return React.Children.toArray(children).map((child) =>
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
-          React.cloneElement(child as React.ReactElement<any>, {
-            disabled: true,
-          })
+          isComponentElement(child, FluidTimePickerSelect)
+            ? cloneElement(child, {
+                disabled: true,
+              })
+            : child
         );
       }
       if (readOnly) {
         return React.Children.toArray(children).map((child) =>
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
-          React.cloneElement(child as React.ReactElement<any>, {
-            readOnly: true,
-          })
+          isComponentElement(child, FluidTimePickerSelect)
+            ? cloneElement(child, {
+                readOnly: true,
+              })
+            : child
         );
       }
       return children;

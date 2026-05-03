@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2022
+ * Copyright IBM Corp. 2022, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -108,8 +108,8 @@ const sharedArgTypes = {
   },
 };
 
-export const Default = (args) => (
-  <div style={{ width: args.defaultWidth }}>
+export const Default = ({ defaultWidth, ...comboBoxArgs }) => (
+  <div style={{ width: defaultWidth }}>
     <FluidComboBox
       onChange={() => {}}
       id="default"
@@ -117,7 +117,7 @@ export const Default = (args) => (
       label="Choose an option"
       items={items}
       itemToString={(item) => (item ? item.text : '')}
-      {...args}
+      {...comboBoxArgs}
     />
   </div>
 );

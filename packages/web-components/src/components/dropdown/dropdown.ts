@@ -656,8 +656,9 @@ class CDSDropdown extends ValidityMixin(
   }
 
   // Default dropdowns close after user selection.
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20452
-  protected _shouldCloseAfterSelection(_item?: CDSDropdownItem) {
+  protected _shouldCloseAfterSelection(item?: CDSDropdownItem) {
+    // Keep `item` for subclasses that change close behavior based on selection.
+    void item;
     return true;
   }
 
@@ -1019,6 +1020,11 @@ class CDSDropdown extends ValidityMixin(
   required = false;
 
   /**
+   * Specify whether the dropdown is fluid or not
+   */
+  @property({ type: Boolean })
+  isFluid = false;
+  /**
    * The special validity message for `required`.
    */
   @property({ attribute: 'required-validity-message' })
@@ -1263,6 +1269,7 @@ class CDSDropdown extends ValidityMixin(
     const {
       ariaLabel,
       _classes: classes,
+      disabled,
       helperText,
       invalidText,
       open,
@@ -1352,7 +1359,9 @@ class CDSDropdown extends ValidityMixin(
           )}"
           class="${prefix}--list-box__field"
           part="trigger-button"
-          tabindex="${ifDefined(!shouldTriggerBeFocusable ? undefined : '0')}"
+          tabindex="${ifDefined(
+            !shouldTriggerBeFocusable ? undefined : disabled ? undefined : '0'
+          )}"
           role="${ifDefined(
             !shouldTriggerBeFocusable ? undefined : 'combobox'
           )}"
@@ -1381,6 +1390,9 @@ class CDSDropdown extends ValidityMixin(
             ${iconLoader(ChevronDown16, { 'aria-label': toggleLabel })}
           </div>
         </div>
+        ${this.isFluid && (normalizedProps.invalid || normalizedProps.warn)
+          ? html`<hr class="${prefix}--list-box__divider" />`
+          : null}
         <slot name="ai-label" @slotchange=${handleAILabelSlotChange}></slot>
         <slot name="slug" @slotchange=${handleAILabelSlotChange}></slot>
         ${menuBody}

@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2019, 2025
+ * Copyright IBM Corp. 2019, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -8,11 +8,12 @@
 import './index';
 import '../select/index';
 
-import { PAGINATION_SIZE } from './defs';
+import { PAGINATION_SIZE, PAGINATION_TOOLTIP_POSITION } from './defs';
 import { html } from 'lit';
 import { action } from 'storybook/actions';
 
 const sizes = {
+  [`Extra small size (${PAGINATION_SIZE.XS})`]: PAGINATION_SIZE.XS,
   [`Small size (${PAGINATION_SIZE.SMALL})`]: PAGINATION_SIZE.SMALL,
   [`Medium size (${PAGINATION_SIZE.MEDIUM})`]: PAGINATION_SIZE.MEDIUM,
   [`Large size (${PAGINATION_SIZE.LARGE})`]: PAGINATION_SIZE.LARGE,
@@ -20,8 +21,10 @@ const sizes = {
 
 const args = {
   backwardText: 'Previous',
+  backwardTextTooltipPosition: PAGINATION_TOOLTIP_POSITION.TOP,
   disabled: false,
   forwardText: 'Next',
+  forwardTextTooltipPosition: PAGINATION_TOOLTIP_POSITION.TOP,
   isLastPage: false,
   itemsPerPageText: 'Items per page:',
   page: 1,
@@ -38,6 +41,17 @@ const argTypes = {
     control: 'text',
     description: 'The description for the backward icon.',
   },
+  backwardTextTooltipPosition: {
+    control: 'radio',
+    description:
+      'Specify the position of the tooltip for the backward button. Can be one of: top, right, bottom, or left.',
+    options: [
+      PAGINATION_TOOLTIP_POSITION.TOP,
+      PAGINATION_TOOLTIP_POSITION.RIGHT,
+      PAGINATION_TOOLTIP_POSITION.BOTTOM,
+      PAGINATION_TOOLTIP_POSITION.LEFT,
+    ],
+  },
   disabled: {
     control: 'boolean',
     description:
@@ -46,6 +60,17 @@ const argTypes = {
   forwardText: {
     control: 'text',
     description: 'The description for the forward icon.',
+  },
+  forwardTextTooltipPosition: {
+    control: 'radio',
+    description:
+      'Specify the position of the tooltip for the forward button. Can be one of: top, right, bottom, or left.',
+    options: [
+      PAGINATION_TOOLTIP_POSITION.TOP,
+      PAGINATION_TOOLTIP_POSITION.RIGHT,
+      PAGINATION_TOOLTIP_POSITION.BOTTOM,
+      PAGINATION_TOOLTIP_POSITION.LEFT,
+    ],
   },
   isLastPage: {
     control: 'boolean',
@@ -95,8 +120,10 @@ export const Default = {
   render: (args) => {
     const {
       backwardText,
+      backwardTextTooltipPosition,
       disabled,
       forwardText,
+      forwardTextTooltipPosition,
       isLastPage,
       itemsPerPageText,
       page,
@@ -110,8 +137,10 @@ export const Default = {
     return html`
       <cds-pagination
         backward-text=${backwardText}
+        backward-text-tooltip-position=${backwardTextTooltipPosition}
         ?disabled=${disabled}
         forward-text=${forwardText}
+        forward-text-tooltip-position=${forwardTextTooltipPosition}
         ?is-last-page=${isLastPage}
         items-per-page-text=${itemsPerPageText}
         page=${page}
@@ -141,8 +170,10 @@ export const MultiplePaginationComponents = {
   render: (args) => {
     const {
       backwardText,
+      backwardTextTooltipPosition,
       disabled,
       forwardText,
+      forwardTextTooltipPosition,
       isLastPage,
       itemsPerPageText,
       page,
@@ -156,8 +187,10 @@ export const MultiplePaginationComponents = {
     return html`
       <cds-pagination
         backward-text=${backwardText}
+        backward-text-tooltip-position=${backwardTextTooltipPosition}
         ?disabled=${disabled}
         forward-text=${forwardText}
+        forward-text-tooltip-position=${forwardTextTooltipPosition}
         ?is-last-page=${isLastPage}
         items-per-page-text=${itemsPerPageText}
         page=${page}
@@ -181,8 +214,10 @@ export const MultiplePaginationComponents = {
       </cds-pagination>
       <cds-pagination
         backward-text=${backwardText}
+        backward-text-tooltip-position=${backwardTextTooltipPosition}
         ?disabled=${disabled}
         forward-text=${forwardText}
+        forward-text-tooltip-position=${forwardTextTooltipPosition}
         ?is-last-page=${isLastPage}
         items-per-page-text=${itemsPerPageText}
         page=${page}
@@ -211,39 +246,44 @@ export const MultiplePaginationComponents = {
 export const PaginationUnknownPages = {
   name: 'Unknown pages and items',
   args: {
-    pagesUnknown: true,
     totalItems: undefined,
+  },
+  parameters: {
+    controls: {
+      exclude: ['pageInputDisabled', 'pagesUnknown', 'totalItems'],
+    },
   },
   render: (args) => {
     const {
       backwardText,
+      backwardTextTooltipPosition,
       disabled,
       forwardText,
+      forwardTextTooltipPosition,
       isLastPage,
       itemsPerPageText,
       page,
-      pageInputDisabled,
       pageSize,
       pageSizeInputDisabled,
-      pagesUnknown,
       size,
-      totalItems,
     } = args ?? {};
 
     return html`
       <cds-pagination
         backward-text=${backwardText}
+        backward-text-tooltip-position=${backwardTextTooltipPosition}
         ?disabled=${disabled}
         forward-text=${forwardText}
+        forward-text-tooltip-position=${forwardTextTooltipPosition}
         ?is-last-page=${isLastPage}
         items-per-page-text=${itemsPerPageText}
         page=${page}
         page-size=${pageSize}
-        ?page-input-disabled=${pageInputDisabled}
+        ?page-input-disabled=${false}
         ?page-size-input-disabled=${pageSizeInputDisabled}
         size=${size}
-        ?pages-unknown=${pagesUnknown}
-        total-items=${totalItems}
+        ?pages-unknown=${true}
+        .totalItems=${undefined}
         @cds-page-sizes-select-changed=${(event: CustomEvent) => {
           action('cds-page-sizes-select-changed')(event.detail);
         }}
@@ -264,8 +304,10 @@ export const PaginationWithCustomPageSizesLabel = {
   render: (args) => {
     const {
       backwardText,
+      backwardTextTooltipPosition,
       disabled,
       forwardText,
+      forwardTextTooltipPosition,
       isLastPage,
       itemsPerPageText,
       page,
@@ -279,8 +321,10 @@ export const PaginationWithCustomPageSizesLabel = {
     return html`
       <cds-pagination
         backward-text=${backwardText}
+        backward-text-tooltip-position=${backwardTextTooltipPosition}
         ?disabled=${disabled}
         forward-text=${forwardText}
+        forward-text-tooltip-position=${forwardTextTooltipPosition}
         ?is-last-page=${isLastPage}
         items-per-page-text=${itemsPerPageText}
         page=${page}

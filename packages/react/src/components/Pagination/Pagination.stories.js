@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -30,7 +30,7 @@ export default {
   component: Pagination,
   argTypes: {
     size: {
-      options: ['sm', 'md', 'lg'],
+      options: ['xs', 'sm', 'md', 'lg'],
       control: { type: 'select' },
     },
   },
@@ -140,7 +140,7 @@ Default.argTypes = {
     },
   },
   size: {
-    options: ['sm', 'md', 'lg'],
+    options: ['xs', 'sm', 'md', 'lg'],
     control: { type: 'select' },
   },
   totalItems: {
@@ -183,17 +183,24 @@ PaginationWithCustomPageSizesLabel.storyName =
   'Pagination with custom page sizes label';
 
 export const PaginationUnknownPages = (args) => {
+  const { pageInputDisabled, pagesUnknown, totalItems, ...rest } = args ?? {};
+
   return (
     <div>
       <Pagination
         {...props()}
-        pagesUnknown={true}
-        totalItems={undefined}
         page={1}
-        {...args}
+        {...rest}
+        pagesUnknown
+        totalItems={undefined}
       />
     </div>
   );
 };
 
 PaginationUnknownPages.storyName = 'Unknown pages and items';
+PaginationUnknownPages.parameters = {
+  controls: {
+    exclude: ['pageInputDisabled', 'pagesUnknown', 'totalItems'],
+  },
+};

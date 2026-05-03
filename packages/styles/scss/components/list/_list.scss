@@ -91,7 +91,7 @@
   .#{$prefix}--list--unordered.#{$prefix}--list--nested
     > .#{$prefix}--list__item::before {
     // ▪ square
-    content: '\0025AA';
+    content: '\0025AA\00FE0E';
     // offset to account for smaller ▪ vs –
     inset-inline-start: calc(-1 * #{$spacing-04});
   }

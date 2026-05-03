@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -123,7 +123,7 @@ describe('TimePicker', () => {
       expect(onBlur).not.toHaveBeenCalled();
     });
 
-    it('should update value and prevValue when value changes', () => {
+    it('should update value when value prop changes', () => {
       const { rerender } = render(
         <TimePicker id="time-picker" value="10:00" />
       );
@@ -177,6 +177,15 @@ describe('TimePicker', () => {
       expect(
         container.querySelector('.cds--form-requirement')
       ).toHaveTextContent('Invalid time');
+      const invalidText = screen.getByText('Invalid time');
+      expect(screen.getByRole('textbox')).toHaveAttribute(
+        'aria-describedby',
+        invalidText.id
+      );
+      expect(screen.getByRole('textbox')).toHaveAttribute(
+        'aria-invalid',
+        'true'
+      );
     });
 
     it('should show warning state when warning is true', () => {
@@ -192,6 +201,12 @@ describe('TimePicker', () => {
       expect(
         container.querySelector('.cds--form-requirement')
       ).toHaveTextContent('Warning message');
+      const warningText = screen.getByText('Warning message');
+      expect(screen.getByRole('textbox')).toHaveAttribute(
+        'aria-describedby',
+        warningText.id
+      );
+      expect(screen.getByRole('textbox')).not.toHaveAttribute('aria-invalid');
     });
 
     it('should not show invalid state when disabled', () => {
@@ -288,6 +303,52 @@ describe('TimePicker', () => {
       expect(
         container.querySelector('.cds--time-picker__input-field-error')
       ).not.toBeInTheDocument();
+    });
+
+    it('should preserve provided aria-describedby when not invalid or warning', () => {
+      render(<TimePicker id="time-picker" aria-describedby="custom-hint" />);
+      expect(screen.getByRole('textbox')).toHaveAttribute(
+        'aria-describedby',
+        'custom-hint'
+      );
+    });
+
+    it('should merge invalid aria attributes with consumer-provided aria-describedby', () => {
+      render(
+        <TimePicker
+          id="time-picker"
+          invalid
+          invalidText="Invalid time"
+          aria-describedby="custom-hint"
+          aria-invalid={false}
+        />
+      );
+      const invalidText = screen.getByText('Invalid time');
+      expect(screen.getByRole('textbox')).toHaveAttribute(
+        'aria-describedby',
+        `${invalidText.id} custom-hint`
+      );
+      expect(screen.getByRole('textbox')).toHaveAttribute(
+        'aria-invalid',
+        'true'
+      );
+    });
+
+    it('should merge warning aria attributes with consumer-provided aria-describedby', () => {
+      render(
+        <TimePicker
+          id="time-picker"
+          warning
+          warningText="Warning message"
+          aria-describedby="custom-hint"
+        />
+      );
+      const warningText = screen.getByText('Warning message');
+      expect(screen.getByRole('textbox')).toHaveAttribute(
+        'aria-describedby',
+        `${warningText.id} custom-hint`
+      );
+      expect(screen.getByRole('textbox')).not.toHaveAttribute('aria-invalid');
     });
   });
 });

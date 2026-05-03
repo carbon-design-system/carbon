@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2024
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -11,29 +11,66 @@ import container from './container';
 import { white, g10, g90, g100 } from '@carbon/themes';
 import { breakpoints } from '@carbon/layout';
 import theme from './theme';
-import './templates/with-layer';
-
+import { html } from 'lit';
+import { ifDefined } from 'lit/directives/if-defined.js';
 import './_container.scss';
 
 setCustomElementsManifest(customElements);
+const devTools = {
+  layoutSize: {
+    description: "Set the layout context's size",
+    defaultValue: false,
+    toolbar: {
+      title: 'dev :: preview__Layout size',
+      items: [
+        { value: false, title: 'None' },
+        'xs',
+        'sm',
+        'md',
+        'lg',
+        'xl',
+        '2xl',
+      ],
+    },
+  },
+  layoutDensity: {
+    description: "Set the layout context's density",
+    defaultValue: false,
+    toolbar: {
+      title: 'dev :: preview__Layout density',
+      items: [{ value: false, title: 'None' }, 'condensed', 'normal'],
+    },
+  },
+};
 
+// always use full locale code strings for values
 export const globalTypes = {
   locale: {
     name: 'Locale',
     description: 'Set the localization for the storybook',
-    defaultValue: 'en',
+    defaultValue: 'en-US',
     toolbar: {
       icon: 'globe',
       items: [
         {
           right: '🇺🇸',
           title: 'English',
-          value: 'en',
+          value: 'en-US',
+        },
+        {
+          right: '🇩🇪',
+          title: 'German',
+          value: 'de-DE',
         },
         {
           right: '🇵🇸',
           title: 'Arabic',
-          value: 'ar',
+          value: 'ar-SA',
+        },
+        {
+          right: '🇯🇵',
+          title: 'Japanese',
+          value: 'ja-JP',
         },
       ],
     },
@@ -74,6 +111,7 @@ export const globalTypes = {
       items: ['white', 'g10', 'g90', 'g100'],
     },
   },
+  ...(process.env.NODE_ENV === 'development' ? devTools : {}),
 };
 
 export const parameters = {
@@ -198,18 +236,30 @@ export const decorators = [
   function decoratorContainer(story, context) {
     const result = story();
     const { hasMainTag } = result;
-    const { locale, dir, theme } = context.globals;
+    const { locale, dir, theme, layoutSize, layoutDensity } = context.globals;
 
     if (process.env.STORYBOOK_USE_RTL === 'true') {
       document.documentElement.setAttribute('dir', 'rtl');
     }
 
     document.documentElement.setAttribute('storybook-carbon-theme', theme);
-
     document.documentElement.lang = locale;
     document.documentElement.dir = dir;
 
-    return container({ hasMainTag, children: result });
+    const containerResult = container({ hasMainTag, children: result });
+
+    // Wrap in cds-layout when layout globals are set in dev mode
+    if (layoutSize || layoutDensity) {
+      return html`
+        <cds-layout
+          size=${ifDefined(layoutSize || undefined)}
+          density=${ifDefined(layoutDensity || undefined)}>
+          ${containerResult}
+        </cds-layout>
+      `;
+    }
+
+    return containerResult;
   },
 ];
 
