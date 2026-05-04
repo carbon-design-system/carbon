@@ -2780,9 +2780,6 @@ Map {
       "invalid": {
         "type": "bool",
       },
-      "invalidText": {
-        "type": "node",
-      },
       "light": [Function],
       "locale": {
         "args": [
@@ -2961,9 +2958,6 @@ Map {
       },
       "warn": {
         "type": "bool",
-      },
-      "warnText": {
-        "type": "node",
       },
     },
     "render": [Function],
@@ -3462,6 +3456,7 @@ Map {
       "size": {
         "args": [
           [
+            "xs",
             "sm",
             "md",
             "lg",
@@ -4158,6 +4153,9 @@ Map {
         "type": "bool",
       },
       "narrow": {
+        "type": "bool",
+      },
+      "withRowGap": {
         "type": "bool",
       },
     },
@@ -5352,6 +5350,9 @@ Map {
       "onChange": {
         "type": "func",
       },
+      "readOnly": {
+        "type": "bool",
+      },
     },
     "render": [Function],
   },
@@ -5490,6 +5491,9 @@ Map {
         "type": "bool",
       },
       "narrow": {
+        "type": "bool",
+      },
+      "withRowGap": {
         "type": "bool",
       },
     },
@@ -6242,6 +6246,9 @@ Map {
       },
       "label": {
         "type": "string",
+      },
+      "legacyAutoalign": {
+        "type": "bool",
       },
       "menuAlignment": {
         "type": "string",
@@ -7830,6 +7837,7 @@ Map {
       "size": {
         "args": [
           [
+            "xs",
             "sm",
             "md",
             "lg",
@@ -7981,6 +7989,7 @@ Map {
       "size": {
         "args": [
           [
+            "xs",
             "sm",
             "md",
             "lg",
@@ -8635,6 +8644,7 @@ Map {
       "size": {
         "args": [
           [
+            "xs",
             "sm",
             "md",
             "lg",
@@ -8666,9 +8676,18 @@ Map {
       "className": {
         "type": "string",
       },
-      "small": {
-        "type": "bool",
+      "size": {
+        "args": [
+          [
+            "xs",
+            "sm",
+            "md",
+            "lg",
+          ],
+        ],
+        "type": "oneOf",
       },
+      "small": [Function],
     },
   },
   "SecondaryButton" => {},
@@ -8743,6 +8762,7 @@ Map {
       "size": {
         "args": [
           [
+            "xs",
             "sm",
             "md",
             "lg",
@@ -10724,6 +10744,7 @@ Map {
       "size": {
         "args": [
           [
+            "xs",
             "sm",
             "md",
             "lg",
@@ -10764,6 +10785,17 @@ Map {
       },
       "hideLabel": {
         "type": "bool",
+      },
+      "size": {
+        "args": [
+          [
+            "xs",
+            "sm",
+            "md",
+            "lg",
+          ],
+        ],
+        "type": "oneOf",
       },
     },
   },
@@ -12057,15 +12089,18 @@ Map {
     "Dialog": {
       "$$typeof": Symbol(react.forward_ref),
       "propTypes": {
+        "aria-describedby": {
+          "type": "string",
+        },
         "aria-label": {
           "type": "string",
         },
         "aria-labelledby": {
           "type": "string",
         },
-        "ariaDescribedBy": {
-          "type": "string",
-        },
+        "ariaDescribedBy": [Function],
+        "ariaLabel": [Function],
+        "ariaLabelledBy": [Function],
         "children": {
           "type": "node",
         },
@@ -13338,6 +13373,9 @@ Map {
       },
       "onChange": {
         "type": "func",
+      },
+      "readOnly": {
+        "type": "bool",
       },
     },
     "render": [Function],
@@ -15318,6 +15356,9 @@ Map {
       },
       "onChange": {
         "type": "func",
+      },
+      "readOnly": {
+        "type": "bool",
       },
     },
     "render": [Function],

@@ -429,7 +429,10 @@ describe('FilterableMultiSelect', () => {
     await openMenu();
     await userEvent.type(screen.getByRole('combobox'), 'test');
 
-    expect(onInputValueChange).toHaveBeenCalledWith('test');
+    expect(onInputValueChange).toHaveBeenCalledTimes(4);
+    expect(onInputValueChange).toHaveBeenLastCalledWith(
+      expect.objectContaining({ inputValue: 'test' })
+    );
   });
 
   it('should clear all selections when clicking clear all button', async () => {
@@ -540,6 +543,20 @@ describe('FilterableMultiSelect', () => {
     await waitForPosition();
 
     expect(screen.getByText('0')).toBeInTheDocument();
+  });
+
+  it('should not render helperText when helperText is an empty string', async () => {
+    const { container } = render(
+      <FilterableMultiSelect {...mockProps} helperText="" />
+    );
+    await waitForPosition();
+
+    expect(
+      container.querySelector(`.${prefix}--form__helper-text`)
+    ).not.toBeInTheDocument();
+    expect(screen.getByRole('combobox')).not.toHaveAttribute(
+      'aria-describedby'
+    );
   });
 
   it('should handle hideLabel prop', async () => {

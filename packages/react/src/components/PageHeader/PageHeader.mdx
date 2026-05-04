@@ -29,7 +29,8 @@ import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
 
 ## Overview
 
-The `PageHeader` is a large family of components, composed of three zones; the Breadcrumb, Content, and Tabs.
+The `PageHeader` is a large family of components, composed of three zones; the
+Breadcrumb, Content, and Tabs.
 
 <Canvas
   of={PageHeaderStories.Default}
@@ -43,10 +44,11 @@ The `PageHeader` is a large family of components, composed of three zones; the B
 
 ## PageHeader.BreadcrumbBar
 
-The `PageHeader.BreadcrumbBar` component is used to render the breadcrumb navigation area within the `PageHeader`.
-It accepts `Breadcrumb` and `BreadcrumbItem` components as children to define the breadcrumb trail. Additionally, it accepts
-`contentActions` and` pageActions` props, allowing for actions, such as `Button` or `IconButton` — alongside
-the breadcrumb content.
+The `PageHeader.BreadcrumbBar` component is used to render the breadcrumb
+navigation area within the `PageHeader`. It accepts `Breadcrumb` and
+`BreadcrumbItem` components as children to define the breadcrumb trail.
+Additionally, it accepts `contentActions` and` pageActions` props, allowing for
+actions, such as `Button` or `IconButton` — alongside the breadcrumb content.
 
 ```jsx
 import { Bee, Activity } from '@carbon/icons-react';
@@ -63,9 +65,7 @@ const pageActions = (
   />
 );
 
-const contentActions = (
-  <Button size="md">Button</Button>
-)
+const contentActions = <Button size="md">Button</Button>;
 
 return (
   <PageHeader.Root>
@@ -80,7 +80,7 @@ return (
     </PageHeader.BreadcrumbBar>
     ...
   </PageHeader.Root>
-)
+);
 ```
 
 ## PageHeader.Content
@@ -90,19 +90,28 @@ return (
   additionalActions={[
     {
       title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(PageHeaderStories.ContentWithContextualActionsAndPageActions),
+      onClick: () =>
+        stackblitzPrefillConfig(
+          PageHeaderStories.ContentWithContextualActionsAndPageActions
+        ),
     },
   ]}
 />
 
-The `PageHeader.Content` component defines the primary content area of the `PageHeader`, including the title, subtitle, and
-any supporting text or contextual actions. It accepts a `title` prop to display the main heading and can optionally include a `renderIcon` prop
-to show an icon adjacent to the title. Child components such as `PageHeader.ContentText` can be used to provide additional descriptive text.
-To support use cases such as tags, `contextualActions` can be passed as a prop to render components beside the content.
-`pageActions` allows integration of action buttons aligned with the content section.
+The `PageHeader.Content` component defines the primary content area of the
+`PageHeader`, including the title, subtitle, and any supporting text or
+contextual actions. It accepts a `title` prop to display the main heading and
+can optionally include a `renderIcon` prop to show an icon adjacent to the
+title. Child components such as `PageHeader.ContentText` can be used to provide
+additional descriptive text. To support use cases such as tags,
+`contextualActions` can be passed as a prop to render components beside the
+content. `pageActions` allows integration of action buttons aligned with the
+content section.
 
-The `PageHeader.ContentPageActions` component provides responsive behavior by collapsing actions into a `MenuButton` when the viewport
-width is reduced. To enable this functionality, it expects an array of action objects with a specific API shape, as demonstrated below:
+The `PageHeader.ContentPageActions` component provides responsive behavior by
+collapsing actions into a `MenuButton` when the viewport width is reduced. To
+enable this functionality, it expects an array of action objects with a specific
+API shape, as demonstrated below:
 
 ```jsx
 
@@ -163,13 +172,14 @@ return (
   additionalActions={[
     {
       title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(PageHeaderStories.ContentWithHeroImage),
+      onClick: () =>
+        stackblitzPrefillConfig(PageHeaderStories.ContentWithHeroImage),
     },
   ]}
 />
 
-When including a hero image within the `PageHeader`, the `Grid` and `Column` components will need to be utilized in order
-to define the layout correctly.
+When including a hero image within the `PageHeader`, the `Grid` and `Column`
+components will need to be utilized in order to define the layout correctly.
 
 ```jsx
 import { Grid, Column } from '@carbon/react';
@@ -208,9 +218,11 @@ return (
 
 ## PageHeader.TabsBar
 
-To render the Tabs zone, utilitize the `PageHeader.TabBar` component, passing in the `TabList` and `Tab` components
-as its children. Then set up the `TabPanels` and `TabPanel` components outside of the `PageHeader`, making sure to
-wrap all components within the `Tabs` component to ensures proper linkage of tab and its associated panel.
+To render the Tabs zone, utilitize the `PageHeader.TabBar` component, passing in
+the `TabList` and `Tab` components as its children. Then set up the `TabPanels`
+and `TabPanel` components outside of the `PageHeader`, making sure to wrap all
+components within the `Tabs` component to ensures proper linkage of tab and its
+associated panel.
 
 ```jsx
 <Tabs>
@@ -241,13 +253,15 @@ wrap all components within the `Tabs` component to ensures proper linkage of tab
   additionalActions={[
     {
       title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(PageHeaderStories.TabBarWithTabsAndTags),
+      onClick: () =>
+        stackblitzPrefillConfig(PageHeaderStories.TabBarWithTabsAndTags),
     },
   ]}
 />
 
-The `PageHeader.TabsBar` component accepts a `tags` prop expecting an array of objects as shown below. When the viewport
-width is reduced, these tags automatically collapse into a `Popover` for responsive display.
+The `PageHeader.TabsBar` component accepts a `tags` prop expecting an array of
+objects as shown below. When the viewport width is reduced, these tags
+automatically collapse into a `Popover` for responsive display.
 
 ```jsx
 const tags = [
@@ -264,20 +278,20 @@ const tags = [
 ];
 
 return (
-<Tabs>
-  <PageHeader.Root>
-    <PageHeader.TabBar tags={tags}>
-      <TabList>
-        <Tab>Tab 1</Tab>
-        ...
-      </TabList>
-    </PageHeader.TabBar>
-  </PageHeader.Root>
-  <TabPanels>
-    <TabPanel>Tab Panel 1</TabPanel>
-    ...
-  </TabPanels>
-</Tabs>
+  <Tabs>
+    <PageHeader.Root>
+      <PageHeader.TabBar tags={tags}>
+        <TabList>
+          <Tab>Tab 1</Tab>
+          ...
+        </TabList>
+      </PageHeader.TabBar>
+    </PageHeader.Root>
+    <TabPanels>
+      <TabPanel>Tab Panel 1</TabPanel>
+      ...
+    </TabPanels>
+  </Tabs>
 );
 ```
 

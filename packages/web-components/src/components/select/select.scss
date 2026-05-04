@@ -15,11 +15,13 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/utilities/convert' as *;
 @use '@carbon/styles/scss/components/fluid-select' as *;
 @use '@carbon/styles/scss/utilities/visually-hidden' as *;
+@use '@carbon/styles/scss/layout' as *;
 
 $divider-width: 1px;
 
 :host(#{$prefix}-select) {
   @extend .#{$prefix}--select;
+  @include emit-layout-tokens();
 
   outline: none;
 
@@ -109,3 +111,5 @@ $divider-width: 1px;
     inset-inline-end: $spacing-09;
   }
 }
+
+@include emit-layout-tokens-to-shadow-host('#{$prefix}-select');

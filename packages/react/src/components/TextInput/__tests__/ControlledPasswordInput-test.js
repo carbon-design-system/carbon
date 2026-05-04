@@ -10,6 +10,8 @@ import { fireEvent, render, screen } from '@testing-library/react';
 import ControlledPasswordInput from '../ControlledPasswordInput';
 import React from 'react';
 
+const prefix = 'cds';
+
 describe('ControlledPasswordInput Component', () => {
   beforeEach(() => {
     // Mock console.warn before each test
@@ -274,6 +276,23 @@ describe('ControlledPasswordInput Component', () => {
     expect(screen.getByText('0')).toBeInTheDocument();
   });
 
+  it('should not render helperText when helperText is an empty string', () => {
+    const { container } = render(
+      <ControlledPasswordInput
+        id="password-input"
+        labelText="Password"
+        helperText=""
+      />
+    );
+
+    expect(
+      container.querySelector(`.${prefix}--form__helper-text`)
+    ).not.toBeInTheDocument();
+    expect(screen.getByLabelText('Password')).not.toHaveAttribute(
+      'aria-describedby'
+    );
+  });
+
   it('should not set `aria-describedby` when `helperText` is omitted', () => {
     render(
       <ControlledPasswordInput id="password-input" labelText="Password" />
@@ -298,6 +317,62 @@ describe('ControlledPasswordInput Component', () => {
 
     expect(helperId).toMatch(/^controlled-password-helper-text-/);
     expect(document.getElementById(helperId)).toHaveTextContent('0');
+  });
+
+  it('should set `aria-errormessage` to the invalid message element id', () => {
+    render(
+      <ControlledPasswordInput
+        id="password-input"
+        labelText="Password"
+        invalid
+        invalidText="This is invalid text"
+      />
+    );
+
+    const input = screen.getByLabelText('Password');
+    expect(input).toHaveAttribute(
+      'aria-errormessage',
+      'password-input-error-msg'
+    );
+    expect(input).toHaveAttribute('aria-invalid', 'true');
+    expect(screen.getByText('This is invalid text')).toHaveAttribute(
+      'id',
+      'password-input-error-msg'
+    );
+  });
+
+  it('should use `aria-describedby` for helper text when not invalid', () => {
+    render(
+      <ControlledPasswordInput
+        id="password-input"
+        labelText="Password"
+        helperText="Helper copy"
+      />
+    );
+
+    const helper = screen.getByText('Helper copy');
+    const input = screen.getByLabelText('Password');
+    expect(input).toHaveAttribute('aria-describedby', helper.id);
+    expect(input).not.toHaveAttribute('aria-errormessage');
+  });
+
+  it('should not set `aria-describedby` to helper id when invalid', () => {
+    render(
+      <ControlledPasswordInput
+        id="password-input"
+        labelText="Password"
+        invalid
+        invalidText="Error"
+        helperText="Helper copy"
+      />
+    );
+
+    const input = screen.getByLabelText('Password');
+    expect(input).toHaveAttribute(
+      'aria-errormessage',
+      'password-input-error-msg'
+    );
+    expect(input).not.toHaveAttribute('aria-describedby');
   });
 
   it('should render labelText with value 0', () => {

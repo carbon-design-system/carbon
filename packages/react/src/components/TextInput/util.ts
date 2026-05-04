@@ -8,7 +8,7 @@
 const invalidProps = (invalidId: string) => ({
   'data-invalid': true,
   'aria-invalid': true,
-  'aria-describedby': invalidId,
+  'aria-errormessage': invalidId,
 });
 
 const warnProps = (warnId: string | undefined) => ({

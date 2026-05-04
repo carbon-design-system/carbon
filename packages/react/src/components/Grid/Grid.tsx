@@ -57,6 +57,12 @@ Grid.propTypes = {
    * typographic alignment with and without containers.
    */
   narrow: PropTypes.bool,
+
+  /**
+   * Add a row gap to the grid that matches the current gutter size.
+   * This is useful when you want consistent vertical spacing between rows.
+   */
+  withRowGap: PropTypes.bool,
 };
 
 const GridAsGridComponent = Grid as GridComponent;

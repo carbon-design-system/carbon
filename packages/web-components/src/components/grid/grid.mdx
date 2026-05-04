@@ -17,6 +17,8 @@ import * as GridStories from './grid.stories';
 - [Gutter modes](#gutter-modes)
   - [Wide grid](#wide-grid)
   - [Condensed grid](#condensed-grid)
+  - [Narrow grid](#narrow-grid)
+- [Row gap](#row-gap)
 - [Subgrid](#subgrid)
 - [Mixed gutter modes](#mixed-gutter-modes)
 - [Auto columns](#auto-columns)
@@ -31,7 +33,8 @@ import * as GridStories from './grid.stories';
 Carbon's grid components help developers use the
 [2x Grid](https://carbondesignsystem.com/elements/2x-grid/overview/). The
 project provides `grid` and `column` components which can be used to build a
-variety of layouts. You can import these components from `@carbon/web-components`:
+variety of layouts. You can import these components from
+`@carbon/web-components`:
 
 ```js
 import '@carbon/web-components/es/components/grid/index';
@@ -51,8 +54,8 @@ Next, you will use a combination of `column` and `grid`. You can have multiple
 don't span more columns than the total number of columns in the grid.
 
 To specify how many columns the `column` component should span, you can use the
-`sm`, `md`, `lg` attributes. These props are shorthand versions of
-the names given to each of the breakpoints defined by the
+`sm`, `md`, `lg` attributes. These props are shorthand versions of the names
+given to each of the breakpoints defined by the
 [2x Grid](https://carbondesignsystem.com/elements/2x-grid/overview/#breakpoints).
 In the example below, we will use the `lg` prop for the large breakpoint and the
 number `4` to specify that each `column` component should span 4 columns at that
@@ -63,10 +66,10 @@ import '@carbon/web-components/es/components/grid/index';
 
 return (
   <cds-grid>
-    <cds-column lg='4'>Span 4 of 16</cds-column>
-    <cds-column lg='4'>Span 4 of 16</cds-column>
-    <cds-column lg='4'>Span 4 of 16</cds-column>
-    <cds-column lg='4'>Span 4 of 16</cds-column>
+    <cds-column lg="4">Span 4 of 16</cds-column>
+    <cds-column lg="4">Span 4 of 16</cds-column>
+    <cds-column lg="4">Span 4 of 16</cds-column>
+    <cds-column lg="4">Span 4 of 16</cds-column>
   </cds-grid>
 );
 ```
@@ -116,6 +119,35 @@ or the `narrow` prop to enable the narrow grid with a 16px gutter.
 
 <Canvas of={GridStories.Narrow} />
 
+## Row gap
+
+By default, the CSS Grid does not add vertical spacing (row gap) between grid
+items. You can enable row gap by using the `with-row-gap` attribute on the
+`cds-grid` component. When enabled, the row gap will automatically match the
+current gutter size:
+
+- **Default mode**: 2rem (32px) row gap
+- **Narrow mode**: 1rem (16px) row gap
+- **Condensed mode**: 1px row gap
+
+This is useful when you want consistent vertical spacing between rows that
+matches your horizontal gutter spacing.
+
+```html
+<cds-grid with-row-gap>
+  <cds-column lg="4">Row 1, Column 1</cds-column>
+  <cds-column lg="4">Row 1, Column 2</cds-column>
+  <cds-column lg="4">Row 1, Column 3</cds-column>
+  <cds-column lg="4">Row 1, Column 4</cds-column>
+  <cds-column lg="4">Row 2, Column 1</cds-column>
+  <cds-column lg="4">Row 2, Column 2</cds-column>
+  <cds-column lg="4">Row 2, Column 3</cds-column>
+  <cds-column lg="4">Row 2, Column 4</cds-column>
+</cds-grid>
+```
+
+<Canvas of={GridStories.WithRowGap} />
+
 ## Subgrid
 
 `grid` components can be nested within one another to achieve more advanced
@@ -127,7 +159,6 @@ in a `column` enables you to define responsive parameters for the column (`sm`,
 `md`, etc) that the subgrid will inherit and be bound to.
 
 <Canvas of={GridStories.Subgrid} />
-
 
 ## Mixed gutter modes
 
@@ -168,7 +199,7 @@ span two columns at the small breakpoint and then four columns at the medium
 breakpoint. At the medium breakpoint, it will be offset by two columns.
 
 ```html
-<cds-column sm='2' md='span:4 start:2'></cds-column>
+<cds-column sm="2" md="span:4 start:2"></cds-column>
 ```
 
 <Canvas of={GridStories.Offset} />
@@ -195,8 +226,7 @@ two forms for specifying column span and pass in 0 to either to hide the column
 at the small breakpoint.
 
 ```html
-<cds-column sm='0'></cds-column>
-<cds-column sm='span:0'></cds-column>
+<cds-column sm="0"></cds-column> <cds-column sm="span:0"></cds-column>
 ```
 
 ### Can I nest grid components?
