@@ -154,6 +154,9 @@ Default.argTypes = {
 export const TooltipHover = {
   ...Default,
   tags: ['!autodocs', '!dev'],
+  parameters: {
+    chromatic: { delay: 100 },
+  },
   play: async ({ canvasElement }) => {
     const nextButton = canvasElement.querySelector(
       '.cds--pagination__button--forward'
