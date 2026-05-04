@@ -4,6 +4,7 @@ const nextConfig = {
   sassOptions: {
     quietDeps: true,
   },
+  transpilePackages: ['@carbon/react'],
 };
 
 module.exports = nextConfig;

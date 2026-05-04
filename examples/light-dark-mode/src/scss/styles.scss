@@ -1,4 +1,6 @@
-@use '@carbon/react';
+@use '@carbon/react' with (
+  $font-path: '@ibm/plex'
+);
 
 body {
   background: react.$background;

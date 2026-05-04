@@ -9,7 +9,7 @@
 
 const { PHASE_PRODUCTION_BUILD } = require('next/constants');
 
-module.exports = (phase, { defaultConfig }) => {
+module.exports = (phase) => {
   if (phase === PHASE_PRODUCTION_BUILD) {
     return {
       basePath: '/themes/examples/preview',
@@ -18,5 +18,5 @@ module.exports = (phase, { defaultConfig }) => {
     };
   }
 
-  return defaultConfig;
+  return {};
 };
