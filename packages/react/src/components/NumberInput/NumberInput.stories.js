@@ -55,6 +55,7 @@ const reusableProps = {
   max: 100000000,
 };
 
+// TODO: Potential opportunity to differentiate between controlled and uncontrolled stories
 export const Default = (args) => {
   const [value, setValue] = React.useState(50);
 
