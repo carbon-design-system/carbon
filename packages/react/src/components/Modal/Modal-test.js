@@ -760,6 +760,57 @@ describe('state with presence context', () => {
     expect(siblingModal).not.toBeInTheDocument();
     expect(screen.queryByTestId('modal')).toBeInTheDocument();
   });
+
+  it('should close only the topmost modal when Escape is pressed', async () => {
+    const ModalExample = () => {
+      const [isSiblingOpen, setIsSiblingOpen] = useState(false);
+      const [isChildOpen, setIsChildOpen] = useState(false);
+
+      return (
+        <ModalPresence open>
+          <Modal data-testid="modal">
+            <button
+              type="button"
+              data-testid="launch-sibling-modal"
+              onClick={() => setIsSiblingOpen(true)}>
+              Launch sibling modal
+            </button>
+          </Modal>
+          <Modal
+            data-testid="sibling-modal"
+            open={isSiblingOpen}
+            onRequestClose={() => setIsSiblingOpen(false)}>
+            <button
+              type="button"
+              data-testid="launch-child-modal"
+              onClick={() => setIsChildOpen(true)}>
+              Launch child modal
+            </button>
+            <Modal
+              data-testid="child-modal"
+              open={isChildOpen}
+              onRequestClose={() => setIsChildOpen(false)}
+            />
+          </Modal>
+        </ModalPresence>
+      );
+    };
+
+    render(<ModalExample />);
+
+    await userEvent.click(screen.getByTestId('launch-sibling-modal'));
+    await userEvent.click(screen.getByTestId('launch-child-modal'));
+
+    expect(screen.queryByTestId('modal')).toBeInTheDocument();
+    expect(screen.queryByTestId('sibling-modal')).toBeInTheDocument();
+    expect(screen.queryByTestId('child-modal')).toBeInTheDocument();
+
+    await userEvent.keyboard('{Escape}');
+
+    expect(screen.queryByTestId('modal')).toBeInTheDocument();
+    expect(screen.queryByTestId('sibling-modal')).toBeInTheDocument();
+    expect(screen.queryByTestId('child-modal')).not.toBeInTheDocument();
+  });
 });
 
 const ModalWithPresenceHof = withModalPresence((props) => {

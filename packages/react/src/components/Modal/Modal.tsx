@@ -51,6 +51,7 @@ import {
   ModalPresenceContext,
   useExclusiveModalPresenceContext,
 } from './ModalPresence';
+import { isTopmostVisibleModal } from './isTopmostVisibleModal';
 
 export const ModalSizes = ['xs', 'sm', 'md', 'lg'] as const;
 const invalidOutsideClickMessage =
@@ -318,6 +319,7 @@ const ModalDialog = React.forwardRef(function ModalDialog(
   const secondaryButton = useRef<HTMLButtonElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
   const innerModal = useRef<HTMLDivElement>(null);
+  const modalRef = useRef<HTMLDivElement>(null);
   const startTrap = useRef<HTMLSpanElement>(null);
   const endTrap = useRef<HTMLSpanElement>(null);
   const wrapFocusTimeout = useRef<NodeJS.Timeout>(null);
@@ -332,7 +334,11 @@ const ModalDialog = React.forwardRef(function ModalDialog(
   const loadingActive = loadingStatus !== 'inactive';
 
   const presenceContext = useContext(ModalPresenceContext);
-  const mergedRefs = useMergedRefs([ref, presenceContext?.presenceRef]);
+  const mergedRefs = useMergedRefs([
+    modalRef,
+    ref,
+    presenceContext?.presenceRef,
+  ]);
   const enablePresence =
     useFeatureFlag('enable-presence') || presenceContext?.autoEnablePresence;
 
@@ -553,7 +559,10 @@ const ModalDialog = React.forwardRef(function ModalDialog(
     if (!open) return;
 
     const handleEscapeKey = (event) => {
-      if (match(event, keys.Escape)) {
+      if (
+        match(event, keys.Escape) &&
+        isTopmostVisibleModal(modalRef.current, prefix)
+      ) {
         event.preventDefault();
         event.stopPropagation();
         onRequestClose(event);
