@@ -16829,6 +16829,19 @@
     - avatar
     - tag
     - identification
+- name: logo--twitter
+  friendly_name: Logo Twitter
+  sizes:
+    - 32
+  aliases:
+    - brand
+    - emblem
+    - logotype
+    - symbol
+    - id
+    - avatar
+    - tag
+    - identification
 - name: logo--vmware
   friendly_name: Logo VMware
   sizes:
