@@ -1,20 +1,23 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
-/* eslint-disable no-console */
-
-import React from 'react';
+import React, { useState } from 'react';
 import { action } from 'storybook/actions';
 import './story.scss';
 import { default as Accordion, AccordionItem, AccordionSkeleton } from '.';
+import type { AccordionItemProps } from './AccordionItem';
 import Button from '../Button';
 import ButtonSet from '../ButtonSet';
 import mdx from './Accordion.mdx';
 import { WithLayer } from '../../../.storybook/templates/WithLayer';
+
+type OnHeadingClickPayload = Parameters<
+  NonNullable<AccordionItemProps['onHeadingClick']>
+>[0];
 
 export default {
   title: 'Components/Accordion',
@@ -72,7 +75,7 @@ const sharedArgs = {
   isFlush: false,
   ordered: false,
   size: 'md',
-  onHeadingClick: ({ isOpen, event }) => {
+  onHeadingClick: ({ isOpen, event }: OnHeadingClickPayload) => {
     action('onHeadingClick')({
       isOpen,
       type: event.type,
@@ -125,8 +128,31 @@ Default.args = { ...sharedArgs };
 Default.argTypes = { ...sharedArgTypes };
 
 export const Controlled = (args) => {
-  const [expandAll, setExpandAll] = React.useState(false);
   const { onHeadingClick, ...restArgs } = args;
+  const accordionItemIds = ['plan', 'members', 'payment', 'review'] as const;
+  type AccordionItemId = (typeof accordionItemIds)[number];
+
+  const [openItems, setOpenItems] = useState(() => new Set<AccordionItemId>());
+
+  const handleHeadingClick =
+    (id: AccordionItemId) =>
+    ({ isOpen, event }: OnHeadingClickPayload) => {
+      setOpenItems((prev) => {
+        const nextOpenItems = new Set(prev);
+
+        if (isOpen) {
+          nextOpenItems.add(id);
+        } else {
+          nextOpenItems.delete(id);
+        }
+
+        return nextOpenItems;
+      });
+
+      if (onHeadingClick) {
+        onHeadingClick({ isOpen, event });
+      }
+    };
 
   return (
     <>
@@ -134,26 +160,24 @@ export const Controlled = (args) => {
         <Button
           className={'controlled-accordion-btn'}
           onClick={() => {
-            expandAll === true ? setExpandAll(1) : setExpandAll(true);
+            setOpenItems(new Set(accordionItemIds));
           }}>
-          Click to expand all
+          Open all
         </Button>
         <Button
           className={'controlled-accordion-btn'}
           onClick={() => {
-            expandAll || expandAll === null
-              ? setExpandAll(false)
-              : setExpandAll(null);
+            setOpenItems(new Set());
           }}>
-          Click to collapse all
+          Close all
         </Button>
       </ButtonSet>
 
       <Accordion {...restArgs}>
         <AccordionItem
           title="Choose your plan"
-          open={expandAll}
-          onHeadingClick={onHeadingClick}>
+          open={openItems.has('plan')}
+          onHeadingClick={handleHeadingClick('plan')}>
           <p>
             Compare plan features and select the option that best matches your
             team&apos;s expected usage.
@@ -161,8 +185,8 @@ export const Controlled = (args) => {
         </AccordionItem>
         <AccordionItem
           title="Add team members"
-          open={expandAll}
-          onHeadingClick={onHeadingClick}>
+          open={openItems.has('members')}
+          onHeadingClick={handleHeadingClick('members')}>
           <p>
             Invite collaborators by email and assign their workspace roles
             before launch.
@@ -170,8 +194,8 @@ export const Controlled = (args) => {
         </AccordionItem>
         <AccordionItem
           title="Set payment details"
-          open={expandAll}
-          onHeadingClick={onHeadingClick}>
+          open={openItems.has('payment')}
+          onHeadingClick={handleHeadingClick('payment')}>
           <p>
             Add billing information and choose whether to receive invoices by
             email.
@@ -179,8 +203,8 @@ export const Controlled = (args) => {
         </AccordionItem>
         <AccordionItem
           title="Review and confirm"
-          open={expandAll}
-          onHeadingClick={onHeadingClick}>
+          open={openItems.has('review')}
+          onHeadingClick={handleHeadingClick('review')}>
           <p>
             Check your setup summary, then confirm to create the workspace for
             your team.
