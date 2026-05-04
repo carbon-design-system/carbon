@@ -369,7 +369,7 @@ const Pagination = React.forwardRef(
         pageSize,
         page: 1,
       };
-
+      setPageInputValue(changes.page);
       setPage(changes.page);
       setPageSize(changes.pageSize);
 
