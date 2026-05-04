@@ -13,7 +13,7 @@ exports[`DataTable behaves as expected selection -- radio buttons should not hav
       >
         <h2
           class="cds--data-table-header__title"
-          id="tc-_r_7g_-title"
+          id="tc-_r_80_-title"
         >
           DataTable with selection
         </h2>
@@ -23,12 +23,13 @@ exports[`DataTable behaves as expected selection -- radio buttons should not hav
       class="cds--data-table-content"
     >
       <table
-        aria-labelledby="tc-_r_7g_-title"
+        aria-labelledby="tc-_r_80_-title"
         class="cds--data-table cds--data-table--lg"
       >
         <thead>
           <tr>
             <th
+              id="data-table-20__header-fieldA"
               scope="col"
             >
               <div
@@ -41,6 +42,7 @@ exports[`DataTable behaves as expected selection -- radio buttons should not hav
               </div>
             </th>
             <th
+              id="data-table-20__header-fieldB"
               scope="col"
             >
               <div
@@ -67,14 +69,14 @@ exports[`DataTable behaves as expected selection -- radio buttons should not hav
               >
                 <input
                   class="cds--radio-button"
-                  id="data-table-18__select-row-b"
-                  name="select-row-18"
+                  id="data-table-20__select-row-b"
+                  name="select-row-20"
                   type="radio"
                   value=""
                 />
                 <label
                   class="cds--radio-button__label"
-                  for="data-table-18__select-row-b"
+                  for="data-table-20__select-row-b"
                 >
                   <span
                     class="cds--radio-button__appearance"
@@ -88,10 +90,14 @@ exports[`DataTable behaves as expected selection -- radio buttons should not hav
                 </label>
               </div>
             </td>
-            <td>
+            <td
+              headers="data-table-20__header-fieldA"
+            >
               Field 2:A
             </td>
-            <td>
+            <td
+              headers="data-table-20__header-fieldB"
+            >
               Field 2:B
             </td>
           </tr>
@@ -105,14 +111,14 @@ exports[`DataTable behaves as expected selection -- radio buttons should not hav
               >
                 <input
                   class="cds--radio-button"
-                  id="data-table-18__select-row-a"
-                  name="select-row-18"
+                  id="data-table-20__select-row-a"
+                  name="select-row-20"
                   type="radio"
                   value=""
                 />
                 <label
                   class="cds--radio-button__label"
-                  for="data-table-18__select-row-a"
+                  for="data-table-20__select-row-a"
                 >
                   <span
                     class="cds--radio-button__appearance"
@@ -126,10 +132,14 @@ exports[`DataTable behaves as expected selection -- radio buttons should not hav
                 </label>
               </div>
             </td>
-            <td>
+            <td
+              headers="data-table-20__header-fieldA"
+            >
               Field 1:A
             </td>
-            <td>
+            <td
+              headers="data-table-20__header-fieldB"
+            >
               Field 1:B
             </td>
           </tr>
@@ -143,14 +153,14 @@ exports[`DataTable behaves as expected selection -- radio buttons should not hav
               >
                 <input
                   class="cds--radio-button"
-                  id="data-table-18__select-row-c"
-                  name="select-row-18"
+                  id="data-table-20__select-row-c"
+                  name="select-row-20"
                   type="radio"
                   value=""
                 />
                 <label
                   class="cds--radio-button__label"
-                  for="data-table-18__select-row-c"
+                  for="data-table-20__select-row-c"
                 >
                   <span
                     class="cds--radio-button__appearance"
@@ -164,10 +174,14 @@ exports[`DataTable behaves as expected selection -- radio buttons should not hav
                 </label>
               </div>
             </td>
-            <td>
+            <td
+              headers="data-table-20__header-fieldA"
+            >
               Field 3:A
             </td>
-            <td>
+            <td
+              headers="data-table-20__header-fieldB"
+            >
               Field 3:B
             </td>
           </tr>
@@ -191,7 +205,7 @@ exports[`DataTable behaves as expected selection -- radio buttons should render 
       >
         <h2
           class="cds--data-table-header__title"
-          id="tc-_r_77_-title"
+          id="tc-_r_7n_-title"
         >
           DataTable with selection
         </h2>
@@ -201,12 +215,13 @@ exports[`DataTable behaves as expected selection -- radio buttons should render 
       class="cds--data-table-content"
     >
       <table
-        aria-labelledby="tc-_r_77_-title"
+        aria-labelledby="tc-_r_7n_-title"
         class="cds--data-table cds--data-table--lg"
       >
         <thead>
           <tr>
             <th
+              id="data-table-19__header-fieldA"
               scope="col"
             >
               <div
@@ -219,6 +234,7 @@ exports[`DataTable behaves as expected selection -- radio buttons should render 
               </div>
             </th>
             <th
+              id="data-table-19__header-fieldB"
               scope="col"
             >
               <div
@@ -245,14 +261,14 @@ exports[`DataTable behaves as expected selection -- radio buttons should render 
               >
                 <input
                   class="cds--radio-button"
-                  id="data-table-17__select-row-b"
-                  name="select-row-17"
+                  id="data-table-19__select-row-b"
+                  name="select-row-19"
                   type="radio"
                   value=""
                 />
                 <label
                   class="cds--radio-button__label"
-                  for="data-table-17__select-row-b"
+                  for="data-table-19__select-row-b"
                 >
                   <span
                     class="cds--radio-button__appearance"
@@ -266,10 +282,14 @@ exports[`DataTable behaves as expected selection -- radio buttons should render 
                 </label>
               </div>
             </td>
-            <td>
+            <td
+              headers="data-table-19__header-fieldA"
+            >
               Field 2:A
             </td>
-            <td>
+            <td
+              headers="data-table-19__header-fieldB"
+            >
               Field 2:B
             </td>
           </tr>
@@ -283,14 +303,14 @@ exports[`DataTable behaves as expected selection -- radio buttons should render 
               >
                 <input
                   class="cds--radio-button"
-                  id="data-table-17__select-row-a"
-                  name="select-row-17"
+                  id="data-table-19__select-row-a"
+                  name="select-row-19"
                   type="radio"
                   value=""
                 />
                 <label
                   class="cds--radio-button__label"
-                  for="data-table-17__select-row-a"
+                  for="data-table-19__select-row-a"
                 >
                   <span
                     class="cds--radio-button__appearance"
@@ -304,10 +324,14 @@ exports[`DataTable behaves as expected selection -- radio buttons should render 
                 </label>
               </div>
             </td>
-            <td>
+            <td
+              headers="data-table-19__header-fieldA"
+            >
               Field 1:A
             </td>
-            <td>
+            <td
+              headers="data-table-19__header-fieldB"
+            >
               Field 1:B
             </td>
           </tr>
@@ -321,14 +345,14 @@ exports[`DataTable behaves as expected selection -- radio buttons should render 
               >
                 <input
                   class="cds--radio-button"
-                  id="data-table-17__select-row-c"
-                  name="select-row-17"
+                  id="data-table-19__select-row-c"
+                  name="select-row-19"
                   type="radio"
                   value=""
                 />
                 <label
                   class="cds--radio-button__label"
-                  for="data-table-17__select-row-c"
+                  for="data-table-19__select-row-c"
                 >
                   <span
                     class="cds--radio-button__appearance"
@@ -342,10 +366,14 @@ exports[`DataTable behaves as expected selection -- radio buttons should render 
                 </label>
               </div>
             </td>
-            <td>
+            <td
+              headers="data-table-19__header-fieldA"
+            >
               Field 3:A
             </td>
-            <td>
+            <td
+              headers="data-table-19__header-fieldB"
+            >
               Field 3:B
             </td>
           </tr>
@@ -369,7 +397,7 @@ exports[`DataTable behaves as expected selection should render and match snapsho
       >
         <h2
           class="cds--data-table-header__title"
-          id="tc-_r_2k_-title"
+          id="tc-_r_34_-title"
         >
           DataTable with selection
         </h2>
@@ -583,7 +611,7 @@ exports[`DataTable behaves as expected selection should render and match snapsho
               <button
                 aria-expanded="false"
                 aria-haspopup="true"
-                aria-labelledby="tooltip-_r_2t_"
+                aria-labelledby="tooltip-_r_3d_"
                 class="cds--toolbar-action cds--overflow-menu cds--overflow-menu cds--overflow-menu--md cds--btn cds--btn--md cds--layout--size-md cds--btn--ghost cds--btn--icon-only"
                 type="button"
               >
@@ -611,7 +639,7 @@ exports[`DataTable behaves as expected selection should render and match snapsho
             <span
               aria-hidden="true"
               class="cds--popover"
-              id="tooltip-_r_2t_"
+              id="tooltip-_r_3d_"
               role="tooltip"
             >
               <span
@@ -637,7 +665,7 @@ exports[`DataTable behaves as expected selection should render and match snapsho
       class="cds--data-table-content"
     >
       <table
-        aria-labelledby="tc-_r_2k_-title"
+        aria-labelledby="tc-_r_34_-title"
         class="cds--data-table cds--data-table--lg"
       >
         <thead>
@@ -652,13 +680,13 @@ exports[`DataTable behaves as expected selection should render and match snapsho
               >
                 <input
                   class="cds--checkbox"
-                  id="data-table-8__select-all"
-                  name="select-all-8"
+                  id="data-table-10__select-all"
+                  name="select-all-10"
                   type="checkbox"
                 />
                 <label
                   class="cds--checkbox-label"
-                  for="data-table-8__select-all"
+                  for="data-table-10__select-all"
                 >
                   <span
                     class="cds--visually-hidden"
@@ -669,6 +697,7 @@ exports[`DataTable behaves as expected selection should render and match snapsho
               </div>
             </th>
             <th
+              id="data-table-10__header-fieldA"
               scope="col"
             >
               <div
@@ -681,6 +710,7 @@ exports[`DataTable behaves as expected selection should render and match snapsho
               </div>
             </th>
             <th
+              id="data-table-10__header-fieldB"
               scope="col"
             >
               <div
@@ -707,13 +737,13 @@ exports[`DataTable behaves as expected selection should render and match snapsho
               >
                 <input
                   class="cds--checkbox"
-                  id="data-table-8__select-row-b"
-                  name="select-row-8"
+                  id="data-table-10__select-row-b"
+                  name="select-row-10"
                   type="checkbox"
                 />
                 <label
                   class="cds--checkbox-label"
-                  for="data-table-8__select-row-b"
+                  for="data-table-10__select-row-b"
                 >
                   <span
                     class="cds--visually-hidden"
@@ -723,10 +753,14 @@ exports[`DataTable behaves as expected selection should render and match snapsho
                 </label>
               </div>
             </td>
-            <td>
+            <td
+              headers="data-table-10__header-fieldA"
+            >
               Field 2:A
             </td>
-            <td>
+            <td
+              headers="data-table-10__header-fieldB"
+            >
               Field 2:B
             </td>
           </tr>
@@ -740,13 +774,13 @@ exports[`DataTable behaves as expected selection should render and match snapsho
               >
                 <input
                   class="cds--checkbox"
-                  id="data-table-8__select-row-a"
-                  name="select-row-8"
+                  id="data-table-10__select-row-a"
+                  name="select-row-10"
                   type="checkbox"
                 />
                 <label
                   class="cds--checkbox-label"
-                  for="data-table-8__select-row-a"
+                  for="data-table-10__select-row-a"
                 >
                   <span
                     class="cds--visually-hidden"
@@ -756,10 +790,14 @@ exports[`DataTable behaves as expected selection should render and match snapsho
                 </label>
               </div>
             </td>
-            <td>
+            <td
+              headers="data-table-10__header-fieldA"
+            >
               Field 1:A
             </td>
-            <td>
+            <td
+              headers="data-table-10__header-fieldB"
+            >
               Field 1:B
             </td>
           </tr>
@@ -773,13 +811,13 @@ exports[`DataTable behaves as expected selection should render and match snapsho
               >
                 <input
                   class="cds--checkbox"
-                  id="data-table-8__select-row-c"
-                  name="select-row-8"
+                  id="data-table-10__select-row-c"
+                  name="select-row-10"
                   type="checkbox"
                 />
                 <label
                   class="cds--checkbox-label"
-                  for="data-table-8__select-row-c"
+                  for="data-table-10__select-row-c"
                 >
                   <span
                     class="cds--visually-hidden"
@@ -789,10 +827,14 @@ exports[`DataTable behaves as expected selection should render and match snapsho
                 </label>
               </div>
             </td>
-            <td>
+            <td
+              headers="data-table-10__header-fieldA"
+            >
               Field 3:A
             </td>
-            <td>
+            <td
+              headers="data-table-10__header-fieldB"
+            >
               Field 3:B
             </td>
           </tr>
@@ -1079,6 +1121,7 @@ exports[`DataTable renders as expected - Component API should render and match s
         <thead>
           <tr>
             <th
+              id="data-table-2__header-fieldA"
               scope="col"
             >
               <div
@@ -1091,6 +1134,7 @@ exports[`DataTable renders as expected - Component API should render and match s
               </div>
             </th>
             <th
+              id="data-table-2__header-fieldB"
               scope="col"
             >
               <div
@@ -1108,26 +1152,38 @@ exports[`DataTable renders as expected - Component API should render and match s
           aria-live="polite"
         >
           <tr>
-            <td>
+            <td
+              headers="data-table-2__header-fieldA"
+            >
               Field 2:A
             </td>
-            <td>
+            <td
+              headers="data-table-2__header-fieldB"
+            >
               Field 2:B
             </td>
           </tr>
           <tr>
-            <td>
+            <td
+              headers="data-table-2__header-fieldA"
+            >
               Field 1:A
             </td>
-            <td>
+            <td
+              headers="data-table-2__header-fieldB"
+            >
               Field 1:B
             </td>
           </tr>
           <tr>
-            <td>
+            <td
+              headers="data-table-2__header-fieldA"
+            >
               Field 3:A
             </td>
-            <td>
+            <td
+              headers="data-table-2__header-fieldB"
+            >
               Field 3:B
             </td>
           </tr>
