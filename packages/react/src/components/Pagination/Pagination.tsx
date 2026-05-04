@@ -391,8 +391,8 @@ const Pagination = React.forwardRef(
       }
     }
 
-    function handlePageInputChange(event) {
-      const newPage = Math.max(0, Math.min(event.target.value, totalPages));
+    function handlePageInputChange(event, state) {
+      const newPage = Math.max(0, Math.min(state.value, totalPages));
       setPageInputValue(newPage);
     }
 
@@ -402,6 +402,13 @@ const Pagination = React.forwardRef(
         const newPage = pageInputValue === 0 ? 1 : Number(pageInputValue);
         setPage(newPage);
         setPageInputValue(newPage);
+
+        if (onChange) {
+          onChange({
+            page: newPage,
+            pageSize,
+          });
+        }
       }
     }
 
