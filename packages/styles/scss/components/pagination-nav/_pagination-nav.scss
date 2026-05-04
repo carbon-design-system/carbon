@@ -97,6 +97,10 @@
       color: $text-primary;
     }
 
+    &:active {
+      background-color: $background-active;
+    }
+
     &:focus {
       @include focus-outline('outline');
     }
