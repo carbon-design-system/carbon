@@ -191,9 +191,6 @@ const sharedArgs = {
 };
 
 const filterableArgTypes = {
-  label: {
-    control: false,
-  },
   placeholder: {
     control: {
       type: 'text',

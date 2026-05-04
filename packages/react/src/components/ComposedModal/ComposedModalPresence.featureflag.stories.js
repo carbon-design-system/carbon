@@ -99,8 +99,6 @@ EnablePresence.storyName = 'enable-presence';
 EnablePresence.parameters = {
   controls: {
     exclude: [
-      'children',
-      'className',
       'containerClassName',
       'launcherButtonRef',
       'selectorPrimaryFocus',
