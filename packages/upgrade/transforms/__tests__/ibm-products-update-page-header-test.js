@@ -22,3 +22,9 @@ defineTest(
   null,
   'ibm-products-update-page-header3'
 );
+defineTest(
+  __dirname,
+  'ibm-products-update-page-header',
+  null,
+  'ibm-products-update-page-header4'
+);

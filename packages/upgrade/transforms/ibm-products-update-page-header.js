@@ -85,9 +85,62 @@ const dedupeSpecifiers = (specifiers) => {
   });
 };
 
+const createPageHeaderSpecifier = (j, specifier) => {
+  if (
+    specifier.type !== 'ImportSpecifier' ||
+    !REACT_PAGE_HEADER_IMPORTS.has(specifier.imported.name)
+  ) {
+    return specifier;
+  }
+
+  const importedName = normalizeReactImportName(specifier.imported.name);
+  const localName = specifier.local?.name;
+
+  return localName && localName !== importedName
+    ? j.importSpecifier(j.identifier(importedName), j.identifier(localName))
+    : j.importSpecifier(j.identifier(importedName));
+};
+
 function transformer(file, api) {
   const j = api.jscodeshift;
   const root = j(file.source);
+
+  function findProductsReactImport(excludePath) {
+    let productsReactImport = null;
+
+    root
+      .find(j.ImportDeclaration, {
+        source: {
+          value: PRODUCTS_REACT_PATH,
+        },
+      })
+      .forEach((path) => {
+        if (!productsReactImport && path !== excludePath) {
+          productsReactImport = path;
+        }
+      });
+
+    return productsReactImport;
+  }
+
+  function addProductsReactSpecifiers(specifiers, insertAfterPath) {
+    const productsReactImport = findProductsReactImport();
+
+    if (productsReactImport) {
+      productsReactImport.node.specifiers = dedupeSpecifiers([
+        ...productsReactImport.node.specifiers,
+        ...specifiers,
+      ]);
+      return;
+    }
+
+    const newImportDeclaration = j.importDeclaration(
+      dedupeSpecifiers(specifiers),
+      j.literal(PRODUCTS_REACT_PATH)
+    );
+
+    j(insertAfterPath).insertAfter(newImportDeclaration);
+  }
 
   root
     .find(j.ImportDeclaration, {
@@ -104,19 +157,7 @@ function transformer(file, api) {
           specifier.type === 'ImportSpecifier' &&
           REACT_PAGE_HEADER_IMPORTS.has(specifier.imported.name)
         ) {
-          const importedName = normalizeReactImportName(
-            specifier.imported.name
-          );
-          const localName = specifier.local?.name;
-
-          movedSpecifiers.push(
-            localName && localName !== importedName
-              ? j.importSpecifier(
-                  j.identifier(importedName),
-                  j.identifier(localName)
-                )
-              : j.importSpecifier(j.identifier(importedName))
-          );
+          movedSpecifiers.push(createPageHeaderSpecifier(j, specifier));
           return;
         }
 
@@ -127,18 +168,29 @@ function transformer(file, api) {
         return;
       }
 
-      const newImportDeclaration = j.importDeclaration(
-        dedupeSpecifiers(movedSpecifiers),
-        j.literal(PRODUCTS_REACT_PATH)
-      );
-
       if (remainingSpecifiers.length === 0) {
-        j(path).replaceWith(newImportDeclaration);
+        const productsReactImport = findProductsReactImport(path);
+
+        if (productsReactImport) {
+          productsReactImport.node.specifiers = dedupeSpecifiers([
+            ...productsReactImport.node.specifiers,
+            ...movedSpecifiers,
+          ]);
+          j(path).remove();
+        } else {
+          const newImportDeclaration = j.importDeclaration(
+            dedupeSpecifiers(movedSpecifiers),
+            j.literal(PRODUCTS_REACT_PATH)
+          );
+
+          j(path).replaceWith(newImportDeclaration);
+        }
+
         return;
       }
 
       path.node.specifiers = remainingSpecifiers;
-      j(path).insertAfter(newImportDeclaration);
+      addProductsReactSpecifiers(movedSpecifiers, path);
     });
 
   root.find(j.ImportDeclaration).forEach((path) => {
@@ -149,30 +201,21 @@ function transformer(file, api) {
     }
 
     if (isReactPageHeaderPath(sourceValue)) {
-      path.node.source = j.literal(PRODUCTS_REACT_PATH);
-
-      path.node.specifiers = dedupeSpecifiers(
-        path.node.specifiers.map((specifier) => {
-          if (
-            specifier.type !== 'ImportSpecifier' ||
-            !REACT_PAGE_HEADER_IMPORTS.has(specifier.imported.name)
-          ) {
-            return specifier;
-          }
-
-          const importedName = normalizeReactImportName(
-            specifier.imported.name
-          );
-          const localName = specifier.local?.name;
-
-          return localName && localName !== importedName
-            ? j.importSpecifier(
-                j.identifier(importedName),
-                j.identifier(localName)
-              )
-            : j.importSpecifier(j.identifier(importedName));
-        })
+      const specifiers = path.node.specifiers.map((specifier) =>
+        createPageHeaderSpecifier(j, specifier)
       );
+      const productsReactImport = findProductsReactImport(path);
+
+      if (productsReactImport) {
+        productsReactImport.node.specifiers = dedupeSpecifiers([
+          ...productsReactImport.node.specifiers,
+          ...specifiers,
+        ]);
+        j(path).remove();
+      } else {
+        path.node.source = j.literal(PRODUCTS_REACT_PATH);
+        path.node.specifiers = dedupeSpecifiers(specifiers);
+      }
 
       return;
     }

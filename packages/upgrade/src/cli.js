@@ -59,11 +59,14 @@ export async function main({ argv, cwd }) {
     'upgrade your project',
     {},
     run(async (args) => {
-      const { verbose, write } = args;
+      const { decoratorsBeforeExport, verbose, write, wrapWithFeatureFlag } =
+        args;
       const options = {
         cwd: cwd(),
+        decoratorsBeforeExport,
         verbose,
         write,
+        wrapWithFeatureFlag,
       };
       await upgrade(options, upgrades);
     })

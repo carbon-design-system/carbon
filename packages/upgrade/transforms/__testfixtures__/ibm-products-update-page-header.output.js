@@ -1,6 +1,5 @@
 import { Button } from '@carbon/react';
-import { PageHeader } from "@carbon/ibm-products";
-import { PageHeaderBreadcrumbBar, PageHeaderContent, PageHeaderTabBar } from "@carbon/ibm-products";
+import { PageHeader, PageHeaderBreadcrumbBar, PageHeaderContent, PageHeaderTabBar } from "@carbon/ibm-products";
 
 const Example = () => (
   <>
