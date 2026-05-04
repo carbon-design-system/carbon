@@ -23,6 +23,7 @@ import { Tooltip } from '../Tooltip';
 import { PopoverAlignment } from '../Popover';
 import { deprecate } from '../../prop-types/deprecate';
 import { usePrefix } from '../../internal/usePrefix';
+import { hasHelperText } from '../../internal/hasHelperText';
 
 type ExcludedAttributes = 'size';
 
@@ -139,9 +140,9 @@ export interface PasswordInputProps
   showPasswordLabel?: string;
 
   /**
-   * Specify the size of the Text Input. Supports `sm`, `md`, or `lg`.
+   * Specify the size of the Text Input. Supports `xs`, `sm`, `md`, or `lg`.
    */
-  size?: 'sm' | 'md' | 'lg';
+  size?: 'xs' | 'sm' | 'md' | 'lg';
 
   /**
    * Specify the alignment of the tooltip to the icon-only button.
@@ -195,7 +196,7 @@ const PasswordInput = forwardRef<unknown, PasswordInputProps>(
       onTogglePasswordVisibility,
       placeholder,
       readOnly,
-      size = 'md',
+      size,
       showPasswordLabel = 'Show password',
       tooltipPosition = 'bottom',
       tooltipAlignment = 'end',
@@ -233,7 +234,6 @@ const PasswordInput = forwardRef<unknown, PasswordInputProps>(
         [`${prefix}--text-input--invalid`]: normalizedProps.invalid,
         [`${prefix}--text-input--warning`]: normalizedProps.warn,
         [`${prefix}--text-input--${size}`]: size, // TODO: V12 - Remove this class
-        [`${prefix}--layout--size-${size}`]: size,
       }
     );
     const sharedTextInputProps = {
@@ -288,6 +288,7 @@ const PasswordInput = forwardRef<unknown, PasswordInputProps>(
       `${prefix}--text-input__field-wrapper`,
       {
         [`${prefix}--text-input__field-wrapper--warning`]: normalizedProps.warn,
+        [`${prefix}--layout--size-${size}`]: size,
       }
     );
     const iconClasses = classNames({
@@ -301,7 +302,7 @@ const PasswordInput = forwardRef<unknown, PasswordInputProps>(
         {labelText}
       </label>
     );
-    const helper = typeof helperText !== 'undefined' && helperText !== null && (
+    const helper = hasHelperText(helperText) && (
       <div id={normalizedProps.helperId} className={helperTextClasses}>
         {helperText}
       </div>
@@ -363,11 +364,10 @@ const PasswordInput = forwardRef<unknown, PasswordInputProps>(
             invalidId: normalizedProps.invalidId,
             warn: normalizedProps.warn,
             warnId: normalizedProps.warnId,
-            hasHelper: Boolean(
-              helperText &&
-                !isFluid &&
-                (inline || (!inline && !normalizedProps.validation))
-            ),
+            hasHelper:
+              hasHelperText(helperText) &&
+              !isFluid &&
+              (inline || (!inline && !normalizedProps.validation)),
             helperId: normalizedProps.helperId,
           })}
           disabled={disabled}
@@ -529,9 +529,9 @@ PasswordInput.propTypes = {
   showPasswordLabel: PropTypes.string,
 
   /**
-   * Specify the size of the Text Input. Supports `sm`, `md`, or `lg`.
+   * Specify the size of the Text Input. Supports `xs`, `sm`, `md`, or `lg`.
    */
-  size: PropTypes.oneOf(['sm', 'md', 'lg']),
+  size: PropTypes.oneOf(['xs', 'sm', 'md', 'lg']),
 
   /**
    * Specify the alignment of the tooltip to the icon-only button.

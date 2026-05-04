@@ -188,6 +188,13 @@ class CDSmenuItem extends HostListenerMixin(HostListenerMixin(LitElement)) {
     this._handleClick(event);
   }
 
+  @HostListener('mousedown')
+  handleMouseDown(event: MouseEvent) {
+    if (this.disabled) {
+      event.preventDefault();
+    }
+  }
+
   @HostListener('mouseenter')
   handleMouseEnter() {
     if (this.hasSubmenu) {
@@ -263,6 +270,10 @@ class CDSmenuItem extends HostListenerMixin(HostListenerMixin(LitElement)) {
   }
 
   _handleClick = (e: MouseEvent | KeyboardEvent): void => {
+    if (this.disabled) {
+      return;
+    }
+
     if (this.hasSubmenu) {
       this._openSubmenu();
       return;

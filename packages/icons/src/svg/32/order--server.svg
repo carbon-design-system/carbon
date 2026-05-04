@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 32 32">
+  <!-- Generator: Adobe Illustrator 30.2.1, SVG Export Plug-In . SVG Version: 2.1.1 Build 1)  -->
+  <defs>
+    <style>
+      .st0 {
+        fill: none;
+      }
+    </style>
+  </defs>
+  <path d="M13,6c-.5,0-1,.5-1,1s.5,1,1,1,1-.5,1-1-.5-1-1-1ZM13,6c-.5,0-1,.5-1,1s.5,1,1,1,1-.5,1-1-.5-1-1-1ZM23,3h-13c-1.1,0-2,.9-2,2v4c0,1.1.9,2,2,2h13c1.1,0,2-.9,2-2v-4c0-1.1-.9-2-2-2ZM23,9h-13v-4h13v4ZM13,8c.5,0,1-.5,1-1s-.5-1-1-1-1,.5-1,1,.5,1,1,1ZM24,26c-1.1,0-2,.9-2,2s.9,2,2,2,2-.9,2-2-.9-2-2-2ZM10,26c-1.1,0-2,.9-2,2s.9,2,2,2,2-.9,2-2-.9-2-2-2ZM29.2,7l-2.3,10.2c-.1.5-.5.8-1,.8H8l.8,4h17.2v2H8c-.5,0-.9-.3-1-.8L3.2,4H0v-2h4c.5,0,.9.3,1,.8l2.6,13.2h17.6l2-9h2Z"/>
+  <rect id="Transparent_Rectangle" class="st0" width="32" height="32"/>
+</svg>
