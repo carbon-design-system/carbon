@@ -31,575 +31,144 @@ function translateWithId(id) {
 }
 
 describe('NumberInput', () => {
-  it('should render an <input> with type="number"', () => {
-    render(<NumberInput label="test-label" id="test" />);
-    // Note: an input with type="number" is considered a `spinbutton`
-    expect(screen.getByRole('spinbutton')).toBeInTheDocument();
-  });
+  // Controlled tests - tests where component state is managed externally via useState/value prop
+  describe('Controlled', () => {
+    it('should update externally to an empty value when `allowEmpty` is `true`', async () => {
+      const ControlledNumberInput = () => {
+        const [value, setValue] = useState(5);
 
-  it('should place className on the outermost element', () => {
-    const { container } = render(
-      <NumberInput className="custom-class" label="test-label" id="test" />
-    );
-    expect(container.firstChild).toHaveClass('custom-class');
-  });
+        return (
+          <>
+            <NumberInput
+              allowEmpty
+              label="NumberInput label"
+              id="number-input"
+              value={value}
+              onChange={(_, state) => setValue(state.value)}
+            />
+            <button type="button" onClick={() => setValue('')}>
+              Clear
+            </button>
+          </>
+        );
+      };
 
-  it('should set `min` on the underlying <input>', () => {
-    render(<NumberInput label="test-label" id="test" min={0} />);
-    expect(screen.getByLabelText('test-label')).toHaveAttribute('min', '0');
-  });
+      render(<ControlledNumberInput />);
 
-  it('should set `max` on the underlying <input>', () => {
-    render(<NumberInput label="test-label" id="test" max={10} />);
-    expect(screen.getByLabelText('test-label')).toHaveAttribute('max', '10');
-  });
+      const input = screen.getByLabelText('NumberInput label');
 
-  it('should set `step` on the underlying <input>', () => {
-    render(<NumberInput label="test-label" id="test" step={5} />);
-    expect(screen.getByLabelText('test-label')).toHaveAttribute('step', '5');
-  });
+      expect(input).toHaveValue(5);
 
-  it('should set `disabled` on the underlying <input>', () => {
-    render(<NumberInput label="test-label" id="test" disabled />);
-    expect(screen.getByLabelText('test-label')).toBeDisabled();
-  });
+      await userEvent.click(screen.getByRole('button', { name: 'Clear' }));
 
-  it('should set `readOnly` on the underlying <input>', () => {
-    render(<NumberInput label="test-label" id="test" readOnly />);
-    expect(screen.getByLabelText('test-label')).toHaveAttribute('readonly', '');
-  });
-
-  it('should set the defaultValue of the <input> with `defaultValue`', () => {
-    render(<NumberInput label="test-label" id="test" defaultValue={5} />);
-    expect(screen.getByLabelText('test-label')).toHaveValue(5);
-  });
-
-  it('should default to `0` when no value is provided', () => {
-    render(<NumberInput label="test-label" id="test" />);
-    expect(screen.getByLabelText('test-label')).toHaveValue(0);
-  });
-
-  it('should set the given `value` on <input> when value > min', () => {
-    render(<NumberInput label="test-label" id="test" min={0} value={5} />);
-    expect(screen.getByLabelText('test-label')).toHaveValue(5);
-  });
-
-  it('should respect decorator prop', () => {
-    render(
-      <NumberInput label="test-label" id="test" decorator={<AILabel />} />
-    );
-
-    expect(
-      screen.getByRole('button', { name: 'AI Show information' })
-    ).toBeInTheDocument();
-  });
-
-  it('should respect the deprecated slug prop', () => {
-    const spy = jest.spyOn(console, 'warn').mockImplementation(() => {});
-    render(<NumberInput label="test-label" id="test" slug={<AILabel />} />);
-
-    expect(
-      screen.getByRole('button', { name: 'AI Show information' })
-    ).toBeInTheDocument();
-    spy.mockRestore();
-  });
-
-  it('should preserve the `defaultValue` when `slug` is rendered', () => {
-    const spy = jest.spyOn(console, 'warn').mockImplementation(() => {});
-
-    render(
-      <NumberInput
-        label="test-label"
-        id="test"
-        defaultValue={12}
-        slug={<AILabel />}
-      />
-    );
-
-    expect(screen.getByLabelText('test-label')).toHaveValue(12);
-    spy.mockRestore();
-  });
-
-  it('should allow an empty string as input to the underlying <input>', () => {
-    render(
-      <NumberInput
-        label="test-label"
-        id="test"
-        value=""
-        invalidText="test-invalid-text"
-      />
-    );
-    expect(screen.getByLabelText('test-label')).toHaveValue(null);
-  });
-
-  it('should set the input as invalid when value < min', () => {
-    render(
-      <NumberInput
-        label="test-label"
-        id="test"
-        value={5}
-        min={10}
-        invalidText="test-invalid-text"
-      />
-    );
-    expect(screen.getByLabelText('test-label')).toHaveValue(5);
-    expect(screen.getByText('test-invalid-text')).toBeInTheDocument();
-    expect(screen.getByRole('spinbutton')).toHaveAttribute('data-invalid');
-  });
-
-  it('should render invalidText when value is empty string', () => {
-    render(
-      <NumberInput
-        label="test-label"
-        id="test"
-        value=""
-        invalidText="test-invalid-text"
-      />
-    );
-    expect(screen.getByLabelText('test-label')).toHaveValue(null);
-    expect(screen.getByText('test-invalid-text')).toBeInTheDocument();
-  });
-
-  it('should respect the `invalid` prop when the value is otherwise valid', () => {
-    render(
-      <NumberInput
-        label="test-label"
-        id="test"
-        value={5}
-        min={0}
-        invalid
-        invalidText="test-invalid-text"
-      />
-    );
-
-    expect(screen.getByText('test-invalid-text')).toBeInTheDocument();
-    expect(screen.getByRole('spinbutton')).toHaveAttribute('data-invalid');
-  });
-
-  it('should describe the <input> through `helperText`', () => {
-    render(
-      <NumberInput label="test-label" id="test" helperText="test-helper-text" />
-    );
-    // Note: is aria-describedby correctly set up here?
-    expect(screen.getByText('test-helper-text')).toBeInTheDocument();
-  });
-
-  it('should describe the <input> through `warnText` when `warn` is `true`', () => {
-    render(
-      <NumberInput
-        label="test-label"
-        id="test"
-        helperText="test-helper-text"
-        warn
-        warnText="test-warn-text"
-      />
-    );
-
-    const warning = screen.getByText('test-warn-text');
-
-    expect(warning).toHaveAttribute('id');
-    expect(screen.getByLabelText('test-label')).toHaveAttribute(
-      'aria-describedby',
-      warning.getAttribute('id')
-    );
-  });
-
-  it('should render without a label element when `label` is omitted', () => {
-    const { container } = render(
-      <NumberInput id="test" aria-label="test-number-input" />
-    );
-
-    expect(
-      screen.getByRole('spinbutton', { name: 'test-number-input' })
-    ).toBeInTheDocument();
-    expect(container.querySelector('label')).toBeNull();
-  });
-
-  it('should call `onClick` when the `<input>` is clicked', async () => {
-    const onClick = jest.fn();
-    render(
-      <NumberInput
-        label="test-label"
-        id="test"
-        onClick={onClick}
-        min={0}
-        value={10}
-        max={100}
-      />
-    );
-
-    await userEvent.click(screen.getByLabelText('test-label'));
-    expect(onClick).toHaveBeenCalled();
-  });
-
-  it('should not call `onClick` when the `<input>` is clicked but disabled', async () => {
-    const onClick = jest.fn();
-    render(
-      <NumberInput
-        disabled
-        label="test-label"
-        id="test"
-        onClick={onClick}
-        min={0}
-        value={10}
-        max={100}
-      />
-    );
-
-    await userEvent.click(screen.getByLabelText('test-label'));
-    expect(onClick).not.toHaveBeenCalled();
-  });
-
-  it('should not call `onChange` for a direct change event when `disabled`', () => {
-    const onChange = jest.fn();
-
-    render(
-      <NumberInput
-        disabled
-        label="test-label"
-        id="test"
-        value={10}
-        onChange={onChange}
-      />
-    );
-
-    fireEvent.change(screen.getByLabelText('test-label'), {
-      target: { value: '11' },
+      expect(input).toHaveValue(null);
     });
 
-    expect(onChange).not.toHaveBeenCalled();
-    expect(screen.getByLabelText('test-label')).toHaveValue(10);
-  });
+    it('should update when value prop changes externally with type="number"', async () => {
+      const ControlledNumberInput = () => {
+        const [value, setValue] = useState(5);
+        return (
+          <>
+            <NumberInput
+              type="number"
+              label="NumberInput label"
+              id="number-input"
+              value={value}
+              onChange={(e, state) => setValue(state.value)}
+              translateWithId={translateWithId}
+            />
+            <button onClick={() => setValue(10)}>set to 10</button>
+          </>
+        );
+      };
 
-  it('should call `onChange` when the value changes', async () => {
-    const onChange = jest.fn();
-    render(
-      <NumberInput
-        label="test-label"
-        id="test"
-        onChange={onChange}
-        min={0}
-        value={10}
-        max={100}
-        translateWithId={translateWithId}
-      />
-    );
+      render(<ControlledNumberInput />);
 
-    await userEvent.click(screen.getByLabelText('increment'));
-    expect(onChange).toHaveBeenCalledTimes(1);
-    expect(onChange).toHaveBeenCalledWith(
-      expect.objectContaining({
-        target: expect.any(Object),
-      }),
-      expect.objectContaining({
-        value: 11,
-        direction: 'up',
-      })
-    );
+      const input = screen.getByLabelText('NumberInput label');
+      expect(input).toHaveValue(5);
 
-    await userEvent.click(screen.getByLabelText('decrement'));
-    expect(onChange).toHaveBeenCalledTimes(2);
-  });
-
-  it('should update externally to an empty value when `allowEmpty` is `true`', async () => {
-    const ControlledNumberInput = () => {
-      const [value, setValue] = useState(5);
-
-      return (
-        <>
-          <NumberInput
-            allowEmpty
-            label="NumberInput label"
-            id="number-input"
-            value={value}
-            onChange={(_, state) => setValue(state.value)}
-          />
-          <button type="button" onClick={() => setValue('')}>
-            Clear
-          </button>
-        </>
-      );
-    };
-
-    render(<ControlledNumberInput />);
-
-    const input = screen.getByLabelText('NumberInput label');
-
-    expect(input).toHaveValue(5);
-
-    await userEvent.click(screen.getByRole('button', { name: 'Clear' }));
-
-    expect(input).toHaveValue(null);
-  });
-
-  it('should update when value prop changes externally with type="number"', async () => {
-    const ControlledNumberInput = () => {
-      const [value, setValue] = useState(5);
-      return (
-        <>
-          <NumberInput
-            type="number"
-            label="NumberInput label"
-            id="number-input"
-            value={value}
-            onChange={(e, state) => setValue(state.value)}
-            translateWithId={translateWithId}
-          />
-          <button onClick={() => setValue(10)}>set to 10</button>
-        </>
-      );
-    };
-
-    render(<ControlledNumberInput />);
-
-    const input = screen.getByLabelText('NumberInput label');
-    expect(input).toHaveValue(5);
-
-    await userEvent.click(screen.getByText('set to 10'));
-    expect(input).toHaveValue(10);
-  });
-
-  it('should set the fluid focus state from input and stepper focus', () => {
-    const { container } = render(
-      <FormContext.Provider value={{ isFluid: true }}>
-        <NumberInput
-          label="test-label"
-          id="test"
-          translateWithId={translateWithId}
-        />
-      </FormContext.Provider>
-    );
-
-    const wrapper = container.firstChild;
-    const input = screen.getByLabelText('test-label');
-    const increment = screen.getByLabelText('increment');
-
-    fireEvent.focus(input);
-
-    expect(wrapper).toHaveClass(
-      'cds--form-item',
-      'cds--number-input--fluid--focus',
-      { exact: true }
-    );
-
-    fireEvent.focus(increment);
-
-    expect(wrapper).toHaveClass('cds--form-item', { exact: true });
-  });
-
-  it('should attach and remove the wheel handler when `disableWheel` is true', () => {
-    const onFocus = jest.fn();
-
-    render(
-      <NumberInput
-        label="test-label"
-        id="test"
-        disableWheel
-        onFocus={onFocus}
-      />
-    );
-
-    const input = screen.getByLabelText('test-label');
-    const addEventListenerSpy = jest.spyOn(input, 'addEventListener');
-    const removeEventListenerSpy = jest.spyOn(input, 'removeEventListener');
-
-    fireEvent.focus(input);
-
-    expect(addEventListenerSpy).toHaveBeenCalledWith(
-      'wheel',
-      expect.any(Function)
-    );
-    expect(onFocus).toHaveBeenCalledTimes(1);
-
-    const wheelEvent = new WheelEvent('wheel', { cancelable: true });
-
-    input.dispatchEvent(wheelEvent);
-
-    expect(wheelEvent.defaultPrevented).toBe(true);
-
-    fireEvent.blur(input);
-
-    expect(removeEventListenerSpy).toHaveBeenCalledWith(
-      'wheel',
-      expect.any(Function)
-    );
-
-    addEventListenerSpy.mockRestore();
-    removeEventListenerSpy.mockRestore();
-  });
-
-  describe('steppers', () => {
-    it('should call `onClick` when up or down arrows are clicked (uncontrolled)', async () => {
-      const onClick = jest.fn();
-
-      render(
-        <NumberInput
-          label="test-label"
-          id="test"
-          onClick={onClick}
-          min={0}
-          defaultValue={10}
-          max={100}
-          translateWithId={translateWithId}
-        />
-      );
-
-      await userEvent.click(screen.getByLabelText('increment'));
-      expect(onClick).toHaveBeenCalledTimes(1);
-      expect(screen.getByLabelText('test-label')).toHaveValue(11);
-
-      await userEvent.click(screen.getByLabelText('decrement'));
-      expect(onClick).toHaveBeenCalledTimes(2);
-      expect(screen.getByLabelText('test-label')).toHaveValue(10);
+      await userEvent.click(screen.getByText('set to 10'));
+      expect(input).toHaveValue(10);
     });
 
-    it('should set up and down arrows as disabled if `disabled` is true', () => {
-      render(
-        <NumberInput
-          label="test-label"
-          id="test"
-          min={0}
-          value={10}
-          max={100}
-          disabled
-          translateWithId={translateWithId}
-        />
-      );
-
-      expect(screen.getByLabelText('increment')).toBeDisabled();
-      expect(screen.getByLabelText('decrement')).toBeDisabled();
-    });
-
-    it('should not call `onClick` when up or down arrows are clicked but the <input> is disabled', async () => {
-      const onClick = jest.fn();
-
-      render(
-        <NumberInput
-          label="test-label"
-          id="test"
-          onClick={onClick}
-          min={0}
-          value={10}
-          max={100}
-          disabled
-          translateWithId={translateWithId}
-        />
-      );
-
-      await userEvent.click(screen.getByLabelText('increment'));
-      expect(onClick).not.toHaveBeenCalled();
-      expect(screen.getByLabelText('test-label')).toHaveValue(10);
-
-      await userEvent.click(screen.getByLabelText('decrement'));
-      expect(onClick).not.toHaveBeenCalled();
-      expect(screen.getByLabelText('test-label')).toHaveValue(10);
-    });
-
-    it('should only increase the value on up arrow click if value is less than max (uncontrolled)', async () => {
-      render(
-        <NumberInput
-          label="test-label"
-          id="test"
-          min={0}
-          defaultValue={5}
-          max={10}
-          step={5}
-          translateWithId={translateWithId}
-        />
-      );
-
-      expect(screen.getByLabelText('test-label')).toHaveValue(5);
-
-      await userEvent.click(screen.getByLabelText('increment'));
-      expect(screen.getByLabelText('test-label')).toHaveValue(10);
-
-      await userEvent.click(screen.getByLabelText('increment'));
-      expect(screen.getByLabelText('test-label')).toHaveValue(10);
-    });
-
-    it('should only decrease the value on down arrow click if value is greater than min (uncontrolled)', async () => {
-      render(
-        <NumberInput
-          label="test-label"
-          id="test"
-          min={0}
-          defaultValue={5}
-          max={10}
-          step={5}
-          translateWithId={translateWithId}
-        />
-      );
-
-      expect(screen.getByLabelText('test-label')).toHaveValue(5);
-
-      await userEvent.click(screen.getByLabelText('decrement'));
-      expect(screen.getByLabelText('test-label')).toHaveValue(0);
-
-      await userEvent.click(screen.getByLabelText('decrement'));
-      expect(screen.getByLabelText('test-label')).toHaveValue(0);
-    });
-
-    it('should increase by the value of step (uncontrolled)', async () => {
-      render(
-        <NumberInput
-          label="test-label"
-          id="test"
-          min={0}
-          defaultValue={5}
-          max={10}
-          step={5}
-          translateWithId={translateWithId}
-        />
-      );
-
-      expect(screen.getByLabelText('test-label')).toHaveValue(5);
-
-      await userEvent.click(screen.getByLabelText('increment'));
-      expect(screen.getByLabelText('test-label')).toHaveValue(10);
-    });
-
-    it('should decrease by the value of step (uncontrolled)', async () => {
-      render(
-        <NumberInput
-          label="test-label"
-          id="test"
-          min={0}
-          defaultValue={5}
-          max={10}
-          step={5}
-          translateWithId={translateWithId}
-        />
-      );
-      expect(screen.getByLabelText('test-label')).toHaveValue(5);
-      await userEvent.click(screen.getByLabelText('decrement'));
-      expect(screen.getByLabelText('test-label')).toHaveValue(0);
-    });
-
-    it('should call `onStepperBlur` when a stepper button loses focus', async () => {
+    it('formats decimals with formatOptions={{ maximumFractionDigits: 0 }} and passes the formatted number to onBlur (controlled, type="text")', async () => {
       const onBlur = jest.fn();
-      const onStepperBlur = jest.fn();
+
+      function ControlledWrapper(props) {
+        const { defaultValue } = props;
+        const [value, setValue] = React.useState(defaultValue);
+
+        const handleChange = (e, state) => {
+          setValue(state?.value);
+        };
+
+        return (
+          <NumberInput
+            {...props}
+            value={value}
+            onChange={handleChange}
+            onBlur={onBlur}
+          />
+        );
+      }
 
       render(
-        <NumberInput
+        <ControlledWrapper
           label="test-label"
           id="test"
-          onBlur={onBlur}
-          onStepperBlur={onStepperBlur}
-          min={0}
-          defaultValue={10}
-          max={100}
+          defaultValue={25}
+          type="text"
+          formatOptions={{ maximumFractionDigits: 0 }}
           translateWithId={translateWithId}
         />
       );
 
-      const decrement = screen.getByLabelText('decrement');
-      await userEvent.click(decrement);
-      expect(decrement).toHaveFocus();
+      const input = screen.getByLabelText('test-label');
 
+      await userEvent.clear(input);
+      await userEvent.type(input, '25.7');
       await userEvent.tab();
 
-      expect(onStepperBlur).toHaveBeenCalledTimes(1);
-      expect(onBlur).not.toHaveBeenCalled();
+      expect(onBlur).toHaveBeenCalledTimes(1);
+      expect(onBlur).toHaveBeenCalledWith(
+        expect.objectContaining({ target: expect.any(Object) }),
+        26 // Intl rounding -> 25.7 -> 26
+      );
+    });
+
+    it('should call `onBlur` with parsed value in controlled mode (type="number")', async () => {
+      const onBlur = jest.fn();
+      const ControlledNumberInput = () => {
+        const [value, setValue] = useState(15);
+        return (
+          <NumberInput
+            label="test-label"
+            id="test"
+            onBlur={onBlur}
+            value={value}
+            onChange={(e, state) => setValue(state.value)}
+            min={0}
+            max={100}
+            translateWithId={translateWithId}
+          />
+        );
+      };
+
+      render(<ControlledNumberInput />);
+
+      const input = screen.getByLabelText('test-label');
+      await userEvent.click(input);
+      await userEvent.click(screen.getByLabelText('increment'));
+      expect(input).toHaveValue(16);
+
+      await userEvent.click(input);
+      await userEvent.tab();
+      expect(onBlur).toHaveBeenCalledWith(
+        expect.objectContaining({
+          target: expect.any(Object),
+        }),
+        16
+      );
     });
 
     describe('steppers (controlled)', () => {
@@ -783,1147 +352,8 @@ describe('NumberInput', () => {
         expect(screen.getByLabelText('test-label')).toHaveValue(10);
       });
     });
-  });
-  it('should increase by the value of large step (uncontrolled)', async () => {
-    render(
-      <NumberInput
-        label="test-label"
-        id="test"
-        min={-9999}
-        defaultValue={1000}
-        max={10000}
-        step={1000}
-        translateWithId={translateWithId}
-      />
-    );
-    expect(screen.getByLabelText('test-label')).toHaveValue(1000);
-    await userEvent.click(screen.getByLabelText('increment'));
-    expect(screen.getByLabelText('test-label')).toHaveValue(2000);
-  });
-  it('should decrease by the value of large step (uncontrolled)', async () => {
-    render(
-      <NumberInput
-        label="test-label"
-        id="test"
-        min={-9999}
-        defaultValue={1000}
-        max={10000}
-        step={1000}
-        translateWithId={translateWithId}
-      />
-    );
 
-    expect(screen.getByLabelText('test-label')).toHaveValue(1000);
-
-    await userEvent.click(screen.getByLabelText('decrement'));
-    expect(screen.getByLabelText('test-label')).toHaveValue(0);
-  });
-
-  it('should respect readOnly prop', async () => {
-    const onChange = jest.fn();
-    const onClick = jest.fn();
-
-    render(
-      <NumberInput
-        id="input-1"
-        label="Number label"
-        onClick={onClick}
-        onChange={onChange}
-        readOnly
-        translateWithId={translateWithId}
-      />
-    );
-
-    const input = screen.getByRole('spinbutton');
-
-    // Click events should fire
-    await userEvent.click(input);
-    expect(onClick).toHaveBeenCalledTimes(1);
-
-    // Change events should *not* fire
-    await userEvent.type(input, '3');
-    expect(input).not.toHaveValue('3');
-
-    expect(screen.getByLabelText('increment')).toBeDisabled();
-    expect(screen.getByLabelText('decrement')).toBeDisabled();
-
-    await userEvent.click(screen.getByLabelText('increment'));
-    await userEvent.click(screen.getByLabelText('decrement'));
-
-    expect(onChange).toHaveBeenCalledTimes(0);
-  });
-
-  it('should update value to empty when allowEmpty is true & input value becomes empty (uncontrolled)', async () => {
-    const onChange = jest.fn();
-    render(
-      <NumberInput
-        id="carbon-number"
-        min={-100}
-        max={100}
-        defaultValue={50}
-        label="NumberInput label"
-        helperText="Optional helper text."
-        invalidText="Number is not valid"
-        allowEmpty={true}
-        onChange={onChange}
-      />
-    );
-
-    const input = screen.getByLabelText('NumberInput label');
-
-    await userEvent.clear(input);
-
-    userEvent.type(input, '{backspace}');
-    expect(input.value).toBe('');
-    expect(onChange).toHaveBeenCalledWith(
-      expect.objectContaining({
-        target: expect.any(Object),
-      }),
-      expect.objectContaining({
-        value: '',
-      })
-    );
-  });
-
-  it('should increment and decrement decimal numbers without floating-point precision errors (uncontrolled)', async () => {
-    render(
-      <NumberInput
-        label="NumberInput label"
-        id="number-input"
-        min={0}
-        defaultValue={15.01}
-        step={1}
-        max={100}
-        translateWithId={translateWithId}
-      />
-    );
-
-    const input = screen.getByLabelText('NumberInput label');
-
-    expect(input).toHaveValue(15.01);
-
-    await userEvent.click(screen.getByLabelText('increment'));
-    expect(input).toHaveValue(16.01);
-
-    await userEvent.click(screen.getByLabelText('decrement'));
-    expect(input).toHaveValue(15.01);
-  });
-
-  it('should call `onBlur` with value parameter when input is blurred (type="number")', async () => {
-    const onBlur = jest.fn();
-    render(
-      <NumberInput
-        label="test-label"
-        id="test"
-        onBlur={onBlur}
-        min={0}
-        defaultValue={25}
-        max={100}
-        translateWithId={translateWithId}
-      />
-    );
-
-    await userEvent.click(screen.getByLabelText('test-label'));
-    await userEvent.tab();
-    expect(onBlur).toHaveBeenCalledTimes(1);
-    expect(onBlur).toHaveBeenCalledWith(
-      expect.objectContaining({
-        target: expect.any(Object),
-      }),
-      25
-    );
-  });
-
-  it('formats decimals with formatOptions={{ maximumFractionDigits: 0 }} and passes the formatted number to onBlur (controlled, type="text")', async () => {
-    const onBlur = jest.fn();
-
-    function ControlledWrapper(props) {
-      const { defaultValue } = props;
-      const [value, setValue] = React.useState(defaultValue);
-
-      const handleChange = (e, state) => {
-        setValue(state?.value);
-      };
-
-      return (
-        <NumberInput
-          {...props}
-          value={value}
-          onChange={handleChange}
-          onBlur={onBlur}
-        />
-      );
-    }
-
-    render(
-      <ControlledWrapper
-        label="test-label"
-        id="test"
-        defaultValue={25}
-        type="text"
-        formatOptions={{ maximumFractionDigits: 0 }}
-        translateWithId={translateWithId}
-      />
-    );
-
-    const input = screen.getByLabelText('test-label');
-
-    await userEvent.clear(input);
-    await userEvent.type(input, '25.7');
-    await userEvent.tab();
-
-    expect(onBlur).toHaveBeenCalledTimes(1);
-    expect(onBlur).toHaveBeenCalledWith(
-      expect.objectContaining({ target: expect.any(Object) }),
-      26 // Intl rounding -> 25.7 -> 26
-    );
-  });
-
-  it('should call `onBlur` with parsed value in controlled mode (type="number")', async () => {
-    const onBlur = jest.fn();
-    const ControlledNumberInput = () => {
-      const [value, setValue] = useState(15);
-      return (
-        <NumberInput
-          label="test-label"
-          id="test"
-          onBlur={onBlur}
-          value={value}
-          onChange={(e, state) => setValue(state.value)}
-          min={0}
-          max={100}
-          translateWithId={translateWithId}
-        />
-      );
-    };
-
-    render(<ControlledNumberInput />);
-
-    const input = screen.getByLabelText('test-label');
-    await userEvent.click(input);
-    await userEvent.click(screen.getByLabelText('increment'));
-    expect(input).toHaveValue(16);
-
-    await userEvent.click(input);
-    await userEvent.tab();
-    expect(onBlur).toHaveBeenCalledWith(
-      expect.objectContaining({
-        target: expect.any(Object),
-      }),
-      16
-    );
-  });
-
-  it('should not allow arrow key changes when readOnly with type="text"', async () => {
-    render(
-      <NumberInput
-        type="text"
-        label="test-label"
-        id="test"
-        readOnly
-        defaultValue={50}
-      />
-    );
-
-    const input = screen.getByLabelText('test-label');
-    expect(input).toHaveValue('50');
-
-    await userEvent.click(input);
-    await userEvent.keyboard('{ArrowUp}');
-    expect(input).toHaveValue('50');
-
-    await userEvent.keyboard('{ArrowDown}');
-    expect(input).toHaveValue('50');
-  });
-
-  describe('with type="text"', () => {
-    it('should render an <input> with type="text"', () => {
-      render(<NumberInput type="text" label="test-label" id="test" />);
-      // Note: an input with type="text" is considered a `textbox`
-      expect(screen.getByRole('textbox')).toBeInTheDocument();
-    });
-
-    it('should place className on the outermost element', () => {
-      const { container } = render(
-        <NumberInput
-          type="text"
-          className="custom-class"
-          label="test-label"
-          id="test"
-        />
-      );
-      expect(container.firstChild).toHaveClass('custom-class');
-    });
-
-    it('should set `min` on the underlying <input>', () => {
-      render(<NumberInput type="text" label="test-label" id="test" min={0} />);
-      expect(screen.getByLabelText('test-label')).toHaveAttribute('min', '0');
-    });
-
-    it('should set `max` on the underlying <input>', () => {
-      render(<NumberInput type="text" label="test-label" id="test" max={10} />);
-      expect(screen.getByLabelText('test-label')).toHaveAttribute('max', '10');
-    });
-
-    it('should set `step` on the underlying <input>', () => {
-      render(<NumberInput type="text" label="test-label" id="test" step={5} />);
-      expect(screen.getByLabelText('test-label')).toHaveAttribute('step', '5');
-    });
-
-    it('should set `disabled` on the underlying <input>', () => {
-      render(<NumberInput type="text" label="test-label" id="test" disabled />);
-      expect(screen.getByLabelText('test-label')).toBeDisabled();
-    });
-
-    it('should set the defaultValue of the <input> with `defaultValue`', () => {
-      render(
-        <NumberInput
-          type="text"
-          label="test-label"
-          id="test"
-          defaultValue={5}
-        />
-      );
-      expect(screen.getByLabelText('test-label')).toHaveValue('5');
-    });
-
-    it('should set the given `value` on <input> when value > min', () => {
-      render(
-        <NumberInput
-          type="text"
-          label="test-label"
-          id="test"
-          min={0}
-          value={5}
-        />
-      );
-      expect(screen.getByLabelText('test-label')).toHaveValue('5');
-    });
-
-    it('should respect decorator prop', () => {
-      render(
-        <NumberInput
-          type="text"
-          label="test-label"
-          id="test"
-          decorator={<AILabel />}
-        />
-      );
-
-      expect(
-        screen.getByRole('button', { name: 'AI Show information' })
-      ).toBeInTheDocument();
-    });
-
-    it('should respect the deprecated slug prop', () => {
-      const spy = jest.spyOn(console, 'warn').mockImplementation(() => {});
-      render(
-        <NumberInput
-          type="text"
-          label="test-label"
-          id="test"
-          slug={<AILabel />}
-        />
-      );
-
-      expect(
-        screen.getByRole('button', { name: 'AI Show information' })
-      ).toBeInTheDocument();
-      spy.mockRestore();
-    });
-
-    it('should allow an empty string as input to the underlying <input>', () => {
-      render(
-        <NumberInput
-          type="text"
-          label="test-label"
-          id="test"
-          value=""
-          invalidText="test-invalid-text"
-        />
-      );
-      expect(screen.getByLabelText('test-label')).toHaveValue('');
-    });
-
-    it('should set the input as invalid when value < min', () => {
-      render(
-        <NumberInput
-          type="text"
-          label="test-label"
-          id="test"
-          value={5}
-          min={10}
-          invalidText="test-invalid-text"
-        />
-      );
-      expect(screen.getByLabelText('test-label')).toHaveValue('5');
-      expect(screen.getByText('test-invalid-text')).toBeInTheDocument();
-      expect(screen.getByRole('textbox')).toHaveAttribute('data-invalid');
-    });
-
-    it('should not render invalidText when value is empty string', () => {
-      render(
-        <NumberInput
-          type="text"
-          label="test-label"
-          id="test"
-          value=""
-          invalidText="test-invalid-text"
-        />
-      );
-      expect(screen.getByLabelText('test-label')).toHaveValue('');
-      expect(screen.queryByText('test-invalid-text')).not.toBeInTheDocument();
-    });
-
-    it('should describe the <input> through `helperText`', () => {
-      render(
-        <NumberInput
-          type="text"
-          label="test-label"
-          id="test"
-          helperText="test-helper-text"
-        />
-      );
-      // Note: is aria-describedby correctly set up here?
-      expect(screen.getByText('test-helper-text')).toBeInTheDocument();
-    });
-
-    it('should call `onClick` when the `<input>` is clicked', async () => {
-      const onClick = jest.fn();
-      render(
-        <NumberInput
-          type="text"
-          label="test-label"
-          id="test"
-          onClick={onClick}
-          min={0}
-          value={10}
-          max={100}
-        />
-      );
-
-      await userEvent.click(screen.getByLabelText('test-label'));
-      expect(onClick).toHaveBeenCalled();
-    });
-
-    it('should not call `onClick` when the `<input>` is clicked but disabled', async () => {
-      const onClick = jest.fn();
-      render(
-        <NumberInput
-          type="text"
-          disabled
-          label="test-label"
-          id="test"
-          onClick={onClick}
-          min={0}
-          value={10}
-          max={100}
-        />
-      );
-
-      await userEvent.click(screen.getByLabelText('test-label'));
-      expect(onClick).not.toHaveBeenCalled();
-    });
-
-    it('should call `onChange` when the value changes', async () => {
-      const onChange = jest.fn();
-      render(
-        <NumberInput
-          type="text"
-          label="test-label"
-          id="test"
-          onChange={onChange}
-          min={0}
-          value={10}
-          max={100}
-          translateWithId={translateWithId}
-        />
-      );
-
-      await userEvent.click(screen.getByLabelText('increment'));
-      expect(onChange).toHaveBeenCalledTimes(1);
-      expect(onChange).toHaveBeenCalledWith(
-        expect.objectContaining({
-          target: expect.any(Object),
-        }),
-        expect.objectContaining({
-          value: 11,
-          direction: 'up',
-        })
-      );
-
-      await userEvent.click(screen.getByLabelText('decrement'));
-      expect(onChange).toHaveBeenCalledTimes(2);
-    });
-
-    it('should handle arrow keys and forward `onKeyDown` in text mode', () => {
-      const onChange = jest.fn();
-      const onKeyDown = jest.fn();
-
-      render(
-        <NumberInput
-          type="text"
-          label="test-label"
-          id="test"
-          defaultValue={10}
-          onChange={onChange}
-          onKeyDown={onKeyDown}
-          translateWithId={translateWithId}
-        />
-      );
-
-      const input = screen.getByLabelText('test-label');
-
-      fireEvent.keyDown(input, { key: 'ArrowUp' });
-
-      expect(input).toHaveValue('11');
-      expect(onChange).toHaveBeenNthCalledWith(
-        1,
-        expect.objectContaining({
-          target: expect.any(Object),
-        }),
-        expect.objectContaining({
-          value: 11,
-          direction: 'up',
-        })
-      );
-
-      fireEvent.keyDown(input, { key: 'ArrowDown' });
-
-      expect(input).toHaveValue('10');
-      expect(onChange).toHaveBeenNthCalledWith(
-        2,
-        expect.objectContaining({
-          target: expect.any(Object),
-        }),
-        expect.objectContaining({
-          value: 10,
-          direction: 'down',
-        })
-      );
-      expect(onKeyDown).toHaveBeenCalledTimes(2);
-    });
-
-    it('should call `onBlur` when the input is blurred', async () => {
-      const onBlur = jest.fn();
-      render(
-        <NumberInput
-          type="text"
-          label="test-label"
-          id="test"
-          onBlur={onBlur}
-          min={0}
-          value={10}
-          max={100}
-          translateWithId={translateWithId}
-        />
-      );
-
-      await userEvent.click(screen.getByLabelText('test-label'));
-      await userEvent.tab();
-      expect(onBlur).toHaveBeenCalledTimes(1);
-      expect(onBlur).toHaveBeenCalledWith(
-        expect.objectContaining({
-          target: expect.any(Object),
-        }),
-        10
-      );
-    });
-
-    it('should call `onBlur` with value parameter in uncontrolled mode', async () => {
-      const onBlur = jest.fn();
-      render(
-        <NumberInput
-          type="text"
-          label="test-label"
-          id="test"
-          onBlur={onBlur}
-          min={0}
-          defaultValue={42}
-          max={100}
-          translateWithId={translateWithId}
-        />
-      );
-
-      await userEvent.click(screen.getByLabelText('test-label'));
-      await userEvent.tab();
-      expect(onBlur).toHaveBeenCalledTimes(1);
-      expect(onBlur).toHaveBeenCalledWith(
-        expect.objectContaining({
-          target: expect.any(Object),
-        }),
-        42
-      );
-    });
-
-    it('should call `onBlur` with updated value after user types', async () => {
-      const onBlur = jest.fn();
-      render(
-        <NumberInput
-          type="text"
-          label="test-label"
-          id="test"
-          onBlur={onBlur}
-          min={0}
-          defaultValue={10}
-          max={100}
-          translateWithId={translateWithId}
-        />
-      );
-
-      const input = screen.getByLabelText('test-label');
-      await userEvent.clear(input);
-      await userEvent.type(input, '75');
-      await userEvent.tab();
-
-      expect(onBlur).toHaveBeenCalledTimes(1);
-      expect(onBlur).toHaveBeenCalledWith(
-        expect.objectContaining({
-          target: expect.any(Object),
-        }),
-        75
-      );
-    });
-
-    it('should call `onBlur` with NaN when value is empty and allowEmpty is true', async () => {
-      const onBlur = jest.fn();
-      render(
-        <NumberInput
-          type="text"
-          label="test-label"
-          id="test"
-          onBlur={onBlur}
-          allowEmpty
-          min={0}
-          max={100}
-          translateWithId={translateWithId}
-        />
-      );
-
-      const input = screen.getByLabelText('test-label');
-      await userEvent.click(input);
-      await userEvent.tab();
-
-      expect(onBlur).toHaveBeenCalledTimes(1);
-      expect(onBlur).toHaveBeenCalledWith(
-        expect.objectContaining({
-          target: expect.any(Object),
-        }),
-        NaN
-      );
-    });
-
-    it('should call `onBlur` with the formatted value when formatting alters the number', async () => {
-      const onBlur = jest.fn();
-      render(
-        <NumberInput
-          type="text"
-          label="test-label"
-          id="test"
-          onBlur={onBlur}
-          defaultValue={2}
-          formatOptions={{ maximumFractionDigits: 0 }}
-          translateWithId={translateWithId}
-        />
-      );
-
-      const input = screen.getByLabelText('test-label');
-      await userEvent.click(input);
-      await userEvent.clear(input);
-      await userEvent.type(input, '2.7');
-      await userEvent.tab();
-
-      expect(onBlur).toHaveBeenCalledTimes(1);
-      expect(onBlur).toHaveBeenCalledWith(
-        expect.objectContaining({
-          target: expect.any(Object),
-        }),
-        3
-      );
-    });
-
-    describe('steppers', () => {
-      it('should call `onClick` when up or down arrows are clicked', async () => {
-        const onClick = jest.fn();
-
-        render(
-          <NumberInput
-            type="text"
-            label="test-label"
-            id="test"
-            onClick={onClick}
-            min={0}
-            defaultValue={10}
-            max={100}
-            translateWithId={translateWithId}
-          />
-        );
-
-        await userEvent.click(screen.getByLabelText('increment'));
-        expect(onClick).toHaveBeenCalledTimes(1);
-        expect(screen.getByLabelText('test-label')).toHaveValue('11');
-
-        await userEvent.click(screen.getByLabelText('decrement'));
-        expect(onClick).toHaveBeenCalledTimes(2);
-        expect(screen.getByLabelText('test-label')).toHaveValue('10');
-      });
-
-      it('should call `onBlur` when focus leaves the input with the values set by decrement button, or increment button', async () => {
-        const onBlur = jest.fn();
-
-        render(
-          <NumberInput
-            type="text"
-            label="test-label"
-            id="test"
-            onBlur={onBlur}
-            min={0}
-            defaultValue={10}
-            max={100}
-            translateWithId={translateWithId}
-          />
-        );
-
-        const input = screen.getByLabelText('test-label');
-        await userEvent.click(input);
-        expect(input).toHaveFocus();
-
-        await userEvent.click(screen.getByLabelText('decrement'));
-        expect(screen.getByLabelText('decrement')).toHaveFocus();
-
-        await userEvent.click(input);
-        await userEvent.tab();
-
-        expect(onBlur).toHaveBeenCalledWith(
-          expect.objectContaining({
-            target: expect.any(Object),
-          }),
-          9
-        );
-
-        await userEvent.click(screen.getByLabelText('increment'));
-        expect(screen.getByLabelText('increment')).toHaveFocus();
-
-        await userEvent.click(input);
-        await userEvent.tab();
-
-        expect(onBlur).toHaveBeenCalledWith(
-          expect.objectContaining({
-            target: expect.any(Object),
-          }),
-          10
-        );
-      });
-
-      it('should set up and down arrows as disabled if `disabled` is true', () => {
-        render(
-          <NumberInput
-            type="text"
-            label="test-label"
-            id="test"
-            min={0}
-            defaultValue={10}
-            max={100}
-            disabled
-            translateWithId={translateWithId}
-          />
-        );
-
-        expect(screen.getByLabelText('increment')).toBeDisabled();
-        expect(screen.getByLabelText('decrement')).toBeDisabled();
-      });
-
-      it('should not call `onClick` when up or down arrows are clicked but the <input> is disabled', async () => {
-        const onClick = jest.fn();
-
-        render(
-          <NumberInput
-            type="text"
-            label="test-label"
-            id="test"
-            onClick={onClick}
-            min={0}
-            defaultValue={10}
-            max={100}
-            disabled
-            translateWithId={translateWithId}
-          />
-        );
-
-        await userEvent.click(screen.getByLabelText('increment'));
-        expect(onClick).not.toHaveBeenCalled();
-        expect(screen.getByLabelText('test-label')).toHaveValue('10');
-
-        await userEvent.click(screen.getByLabelText('decrement'));
-        expect(onClick).not.toHaveBeenCalled();
-        expect(screen.getByLabelText('test-label')).toHaveValue('10');
-      });
-
-      it('should only increase the value on up arrow click if value is less than max', async () => {
-        render(
-          <NumberInput
-            type="text"
-            label="test-label"
-            id="test"
-            min={0}
-            defaultValue={5}
-            max={10}
-            step={5}
-            translateWithId={translateWithId}
-          />
-        );
-
-        expect(screen.getByLabelText('test-label')).toHaveValue('5');
-
-        await userEvent.click(screen.getByLabelText('increment'));
-        expect(screen.getByLabelText('test-label')).toHaveValue('10');
-
-        await userEvent.click(screen.getByLabelText('increment'));
-        expect(screen.getByLabelText('test-label')).toHaveValue('10');
-      });
-
-      it('should only decrease the value on down arrow click if value is greater than min', async () => {
-        render(
-          <NumberInput
-            type="text"
-            label="test-label"
-            id="test"
-            min={0}
-            defaultValue={5}
-            max={10}
-            step={5}
-            translateWithId={translateWithId}
-          />
-        );
-
-        expect(screen.getByLabelText('test-label')).toHaveValue('5');
-
-        await userEvent.click(screen.getByLabelText('decrement'));
-        expect(screen.getByLabelText('test-label')).toHaveValue('0');
-
-        await userEvent.click(screen.getByLabelText('decrement'));
-        expect(screen.getByLabelText('test-label')).toHaveValue('0');
-      });
-
-      it('should increase by the value of step', async () => {
-        render(
-          <NumberInput
-            type="text"
-            label="test-label"
-            id="test"
-            min={0}
-            defaultValue={5}
-            max={10}
-            step={5}
-            translateWithId={translateWithId}
-          />
-        );
-
-        expect(screen.getByLabelText('test-label')).toHaveValue('5');
-
-        await userEvent.click(screen.getByLabelText('increment'));
-        expect(screen.getByLabelText('test-label')).toHaveValue('10');
-      });
-
-      it('should decrease by the value of step', async () => {
-        render(
-          <NumberInput
-            type="text"
-            label="test-label"
-            id="test"
-            min={0}
-            defaultValue={5}
-            max={10}
-            step={5}
-            translateWithId={translateWithId}
-          />
-        );
-        expect(screen.getByLabelText('test-label')).toHaveValue('5');
-        await userEvent.click(screen.getByLabelText('decrement'));
-        expect(screen.getByLabelText('test-label')).toHaveValue('0');
-      });
-
-      it('should begin incrementing from 1 when input is empty and 0 is in between of min and max', async () => {
-        render(
-          <NumberInput
-            type="text"
-            label="test-label"
-            id="test"
-            allowEmpty
-            min={-100}
-            max={100}
-            step={2}
-            translateWithId={translateWithId}
-          />
-        );
-        expect(screen.getByLabelText('test-label')).toHaveValue('');
-        await userEvent.click(screen.getByLabelText('increment'));
-        expect(screen.getByLabelText('test-label')).toHaveValue('1');
-      });
-
-      it('should begin incrementing from min when input is empty and min is positive', async () => {
-        render(
-          <NumberInput
-            type="text"
-            label="test-label"
-            id="test"
-            allowEmpty
-            min={10}
-            max={100}
-            step={2}
-            translateWithId={translateWithId}
-          />
-        );
-        expect(screen.getByLabelText('test-label')).toHaveValue('');
-        await userEvent.click(screen.getByLabelText('increment'));
-        expect(screen.getByLabelText('test-label')).toHaveValue('10');
-      });
-      it('should begin decrementing from max when input is empty and when min is negative', async () => {
-        render(
-          <NumberInput
-            type="text"
-            label="test-label"
-            id="test"
-            min={-100}
-            max={100}
-            step={2}
-            translateWithId={translateWithId}
-          />
-        );
-        expect(screen.getByLabelText('test-label')).toHaveValue('');
-        await userEvent.click(screen.getByLabelText('decrement'));
-        expect(screen.getByLabelText('test-label')).toHaveValue('-1');
-      });
-
-      it('should begin decrementing from min when input is empty and when min and max is greater than 0', async () => {
-        render(
-          <NumberInput
-            type="text"
-            label="test-label"
-            id="test"
-            min={10}
-            max={100}
-            step={2}
-            translateWithId={translateWithId}
-          />
-        );
-        expect(screen.getByLabelText('test-label')).toHaveValue('');
-        await userEvent.click(screen.getByLabelText('decrement'));
-        expect(screen.getByLabelText('test-label')).toHaveValue('10');
-      });
-
-      it('should begin decrementing from `min` when input is empty and only `min` is positive', async () => {
-        render(
-          <NumberInput
-            type="text"
-            label="test-label"
-            id="test"
-            min={10}
-            step={2}
-            translateWithId={translateWithId}
-          />
-        );
-
-        expect(screen.getByLabelText('test-label')).toHaveValue('');
-
-        await userEvent.click(screen.getByLabelText('decrement'));
-
-        expect(screen.getByLabelText('test-label')).toHaveValue('10');
-      });
-
-      it('should begin incrementing from 1 when no min is provided and input is empty', async () => {
-        render(
-          <NumberInput
-            type="text"
-            label="test-label"
-            id="test"
-            step={2}
-            translateWithId={translateWithId}
-          />
-        );
-        expect(screen.getByLabelText('test-label')).toHaveValue('');
-        await userEvent.click(screen.getByLabelText('increment'));
-        expect(screen.getByLabelText('test-label')).toHaveValue('1');
-      });
-      it('should begin decrementing from -1 when no max is provided and input is empty', async () => {
-        render(
-          <NumberInput
-            type="text"
-            label="test-label"
-            id="test"
-            step={2}
-            translateWithId={translateWithId}
-          />
-        );
-        expect(screen.getByLabelText('test-label')).toHaveValue('');
-        await userEvent.click(screen.getByLabelText('decrement'));
-        expect(screen.getByLabelText('test-label')).toHaveValue('-1');
-      });
-
-      it('should begin incrementing from stepStartValue when input is empty and stepStartValue is provided', async () => {
-        render(
-          <NumberInput
-            type="text"
-            label="test-label"
-            id="test"
-            step={2}
-            stepStartValue={10}
-            translateWithId={translateWithId}
-          />
-        );
-        expect(screen.getByLabelText('test-label')).toHaveValue('');
-        await userEvent.click(screen.getByLabelText('increment'));
-        expect(screen.getByLabelText('test-label')).toHaveValue('10');
-      });
-
-      it('should begin decrementing from stepStartValue when input is empty and stepStartValue is provided', async () => {
-        render(
-          <NumberInput
-            type="text"
-            label="test-label"
-            id="test"
-            step={2}
-            stepStartValue={10}
-            translateWithId={translateWithId}
-          />
-        );
-        expect(screen.getByLabelText('test-label')).toHaveValue('');
-        await userEvent.click(screen.getByLabelText('decrement'));
-        expect(screen.getByLabelText('test-label')).toHaveValue('10');
-      });
-    });
-    it('should increase by the value of large step and format to the default locale', async () => {
-      render(
-        <NumberInput
-          type="text"
-          label="test-label"
-          id="test"
-          min={-9999}
-          defaultValue={1000}
-          max={10000}
-          step={1000}
-          translateWithId={translateWithId}
-        />
-      );
-      expect(screen.getByLabelText('test-label')).toHaveValue('1,000');
-      await userEvent.click(screen.getByLabelText('increment'));
-      expect(screen.getByLabelText('test-label')).toHaveValue('2,000');
-    });
-    it('should decrease by the value of large step and format to the default locale', async () => {
-      render(
-        <NumberInput
-          type="text"
-          label="test-label"
-          id="test"
-          min={-9999}
-          defaultValue={1000}
-          max={10000}
-          step={1000}
-          translateWithId={translateWithId}
-        />
-      );
-
-      expect(screen.getByLabelText('test-label')).toHaveValue('1,000');
-
-      await userEvent.click(screen.getByLabelText('decrement'));
-      expect(screen.getByLabelText('test-label')).toHaveValue('0');
-    });
-
-    it('should respect readOnly prop', async () => {
-      const onChange = jest.fn();
-      const onClick = jest.fn();
-
-      render(
-        <NumberInput
-          type="text"
-          id="input-1"
-          label="Number label"
-          onClick={onClick}
-          onChange={onChange}
-          readOnly
-          translateWithId={translateWithId}
-        />
-      );
-
-      const input = screen.getByRole('textbox');
-
-      // Click events should fire
-      await userEvent.click(input);
-      expect(onClick).toHaveBeenCalledTimes(1);
-
-      // Change events should *not* fire
-      await userEvent.type(input, '3');
-      expect(input).not.toHaveValue('3');
-
-      expect(screen.getByLabelText('increment')).toBeDisabled();
-      expect(screen.getByLabelText('decrement')).toBeDisabled();
-
-      await userEvent.click(screen.getByLabelText('increment'));
-      await userEvent.click(screen.getByLabelText('decrement'));
-
-      expect(onChange).toHaveBeenCalledTimes(0);
-    });
-
-    it('should update value to empty when allowEmpty is true & input value becomes empty', async () => {
-      const onChange = jest.fn();
-      render(
-        <NumberInput
-          type="text"
-          id="carbon-number"
-          min={-100}
-          max={100}
-          defaultValue={50}
-          label="NumberInput label"
-          helperText="Optional helper text."
-          invalidText="Number is not valid"
-          allowEmpty={true}
-          onChange={onChange}
-        />
-      );
-
-      const input = screen.getByLabelText('NumberInput label');
-
-      await userEvent.clear(input);
-
-      await userEvent.type(input, '{backspace}');
-      expect(input.value).toBe('');
-      await userEvent.tab();
-      expect(onChange).toHaveBeenCalledWith(
-        expect.objectContaining({
-          target: expect.any(Object),
-        }),
-        expect.objectContaining({
-          value: NaN,
-        })
-      );
-    });
-
-    it('should increment and decrement decimal numbers without floating-point precision errors', async () => {
-      render(
-        <NumberInput
-          type="text"
-          label="NumberInput label"
-          id="number-input"
-          min={0}
-          defaultValue={15.01}
-          step={1}
-          max={100}
-          translateWithId={translateWithId}
-        />
-      );
-
-      const input = screen.getByLabelText('NumberInput label');
-
-      expect(input).toHaveValue('15.01');
-
-      await userEvent.click(screen.getByLabelText('increment'));
-      expect(input).toHaveValue('16.01');
-
-      await userEvent.click(screen.getByLabelText('decrement'));
-      expect(input).toHaveValue('15.01');
-    });
-
-    it('should support fully controlled api via value prop', async () => {
+    it('should support fully controlled api via value prop (type="text")', async () => {
       const ControlledNumberInput = () => {
         const [value, setValue] = useState(NaN);
         return (
@@ -1978,87 +408,1762 @@ describe('NumberInput', () => {
       await userEvent.click(screen.getByText('set to 50'));
       expect(input).toHaveValue('50');
     });
+  });
 
-    it('should keep empty display when controlled value remains NaN across rerenders', () => {
-      const onChange = jest.fn();
-      const { rerender } = render(
-        <NumberInput
-          type="text"
-          label="NumberInput label"
-          id="number-input"
-          min={10}
-          max={100}
-          value={NaN}
-          onChange={onChange}
-          translateWithId={translateWithId}
-        />
-      );
-
-      const input = screen.getByLabelText('NumberInput label');
-
-      expect(input).toHaveValue('');
-
-      rerender(
-        <NumberInput
-          type="text"
-          label="NumberInput label"
-          id="number-input"
-          min={10}
-          max={100}
-          value={NaN}
-          onChange={onChange}
-          translateWithId={translateWithId}
-        />
-      );
-
-      expect(input).toHaveValue('');
-      expect(onChange).not.toHaveBeenCalled();
+  // Uncontrolled tests - tests where internal component logic manages state via defaultValue
+  // These tests verify the design system's opinionated behaviors and internal state management
+  describe('Uncontrolled', () => {
+    it('should render an <input> with type="number"', () => {
+      render(<NumberInput label="test-label" id="test" />);
+      // Note: an input with type="number" is considered a `spinbutton`
+      expect(screen.getByRole('spinbutton')).toBeInTheDocument();
     });
 
-    it('should update controlled value in StrictMode without render-phase warnings', async () => {
+    it('should place className on the outermost element', () => {
+      const { container } = render(
+        <NumberInput className="custom-class" label="test-label" id="test" />
+      );
+      expect(container.firstChild).toHaveClass('custom-class');
+    });
+
+    it('should set `min` on the underlying <input>', () => {
+      render(<NumberInput label="test-label" id="test" min={0} />);
+      expect(screen.getByLabelText('test-label')).toHaveAttribute('min', '0');
+    });
+
+    it('should set `max` on the underlying <input>', () => {
+      render(<NumberInput label="test-label" id="test" max={10} />);
+      expect(screen.getByLabelText('test-label')).toHaveAttribute('max', '10');
+    });
+
+    it('should set `step` on the underlying <input>', () => {
+      render(<NumberInput label="test-label" id="test" step={5} />);
+      expect(screen.getByLabelText('test-label')).toHaveAttribute('step', '5');
+    });
+
+    it('should set `disabled` on the underlying <input>', () => {
+      render(<NumberInput label="test-label" id="test" disabled />);
+      expect(screen.getByLabelText('test-label')).toBeDisabled();
+    });
+
+    it('should set `readOnly` on the underlying <input>', () => {
+      render(<NumberInput label="test-label" id="test" readOnly />);
+      expect(screen.getByLabelText('test-label')).toHaveAttribute(
+        'readonly',
+        ''
+      );
+    });
+
+    it('should set the defaultValue of the <input> with `defaultValue`', () => {
+      render(<NumberInput label="test-label" id="test" defaultValue={5} />);
+      expect(screen.getByLabelText('test-label')).toHaveValue(5);
+    });
+
+    it('should default to `0` when no value is provided', () => {
+      render(<NumberInput label="test-label" id="test" />);
+      expect(screen.getByLabelText('test-label')).toHaveValue(0);
+    });
+
+    it('should set the given `value` on <input> when value > min', () => {
+      render(<NumberInput label="test-label" id="test" min={0} value={5} />);
+      expect(screen.getByLabelText('test-label')).toHaveValue(5);
+    });
+
+    it('should respect decorator prop', () => {
+      render(
+        <NumberInput label="test-label" id="test" decorator={<AILabel />} />
+      );
+
+      expect(
+        screen.getByRole('button', { name: 'AI Show information' })
+      ).toBeInTheDocument();
+    });
+
+    it('should respect the deprecated slug prop', () => {
+      const spy = jest.spyOn(console, 'warn').mockImplementation(() => {});
+      render(<NumberInput label="test-label" id="test" slug={<AILabel />} />);
+
+      expect(
+        screen.getByRole('button', { name: 'AI Show information' })
+      ).toBeInTheDocument();
+      spy.mockRestore();
+    });
+
+    it('should preserve the `defaultValue` when `slug` is rendered', () => {
+      const spy = jest.spyOn(console, 'warn').mockImplementation(() => {});
+
+      render(
+        <NumberInput
+          label="test-label"
+          id="test"
+          defaultValue={12}
+          slug={<AILabel />}
+        />
+      );
+
+      expect(screen.getByLabelText('test-label')).toHaveValue(12);
+      spy.mockRestore();
+    });
+
+    it('should allow an empty string as input to the underlying <input>', () => {
+      render(
+        <NumberInput
+          label="test-label"
+          id="test"
+          value=""
+          invalidText="test-invalid-text"
+        />
+      );
+      expect(screen.getByLabelText('test-label')).toHaveValue(null);
+    });
+
+    it('should set the input as invalid when value < min', () => {
+      render(
+        <NumberInput
+          label="test-label"
+          id="test"
+          value={5}
+          min={10}
+          invalidText="test-invalid-text"
+        />
+      );
+      expect(screen.getByLabelText('test-label')).toHaveValue(5);
+      expect(screen.getByText('test-invalid-text')).toBeInTheDocument();
+      expect(screen.getByRole('spinbutton')).toHaveAttribute('data-invalid');
+    });
+
+    it('should render invalidText when value is empty string', () => {
+      render(
+        <NumberInput
+          label="test-label"
+          id="test"
+          value=""
+          invalidText="test-invalid-text"
+        />
+      );
+      expect(screen.getByLabelText('test-label')).toHaveValue(null);
+      expect(screen.getByText('test-invalid-text')).toBeInTheDocument();
+    });
+
+    it('should respect the `invalid` prop when the value is otherwise valid', () => {
+      render(
+        <NumberInput
+          label="test-label"
+          id="test"
+          value={5}
+          min={0}
+          invalid
+          invalidText="test-invalid-text"
+        />
+      );
+
+      expect(screen.getByText('test-invalid-text')).toBeInTheDocument();
+      expect(screen.getByRole('spinbutton')).toHaveAttribute('data-invalid');
+    });
+
+    it('should describe the <input> through `helperText`', () => {
+      render(
+        <NumberInput
+          label="test-label"
+          id="test"
+          helperText="test-helper-text"
+        />
+      );
+      // Note: is aria-describedby correctly set up here?
+      expect(screen.getByText('test-helper-text')).toBeInTheDocument();
+    });
+
+    it('should describe the <input> through `warnText` when `warn` is `true`', () => {
+      render(
+        <NumberInput
+          label="test-label"
+          id="test"
+          helperText="test-helper-text"
+          warn
+          warnText="test-warn-text"
+        />
+      );
+
+      const warning = screen.getByText('test-warn-text');
+
+      expect(warning).toHaveAttribute('id');
+      expect(screen.getByLabelText('test-label')).toHaveAttribute(
+        'aria-describedby',
+        warning.getAttribute('id')
+      );
+    });
+
+    it('should render without a label element when `label` is omitted', () => {
+      const { container } = render(
+        <NumberInput id="test" aria-label="test-number-input" />
+      );
+
+      expect(
+        screen.getByRole('spinbutton', { name: 'test-number-input' })
+      ).toBeInTheDocument();
+      expect(container.querySelector('label')).toBeNull();
+    });
+
+    it('should call `onClick` when the `<input>` is clicked', async () => {
+      const onClick = jest.fn();
+      render(
+        <NumberInput
+          label="test-label"
+          id="test"
+          onClick={onClick}
+          min={0}
+          value={10}
+          max={100}
+        />
+      );
+
+      await userEvent.click(screen.getByLabelText('test-label'));
+      expect(onClick).toHaveBeenCalled();
+    });
+
+    it('should not call `onClick` when the `<input>` is clicked but disabled', async () => {
+      const onClick = jest.fn();
+      render(
+        <NumberInput
+          disabled
+          label="test-label"
+          id="test"
+          onClick={onClick}
+          min={0}
+          value={10}
+          max={100}
+        />
+      );
+
+      await userEvent.click(screen.getByLabelText('test-label'));
+      expect(onClick).not.toHaveBeenCalled();
+    });
+
+    it('should not call `onChange` for a direct change event when `disabled`', () => {
       const onChange = jest.fn();
-      const { rerender } = render(
-        <StrictMode>
-          <NumberInput
-            type="text"
-            label="NumberInput label"
-            id="number-input"
-            min={0}
-            max={100}
-            value={10}
-            onChange={onChange}
-            translateWithId={translateWithId}
-          />
-        </StrictMode>
+
+      render(
+        <NumberInput
+          disabled
+          label="test-label"
+          id="test"
+          value={10}
+          onChange={onChange}
+        />
       );
 
-      const input = screen.getByLabelText('NumberInput label');
-
-      expect(input).toHaveValue('10');
-
-      rerender(
-        <StrictMode>
-          <NumberInput
-            type="text"
-            label="NumberInput label"
-            id="number-input"
-            min={0}
-            max={100}
-            value={11}
-            onChange={onChange}
-            translateWithId={translateWithId}
-          />
-        </StrictMode>
-      );
-
-      await waitFor(() => {
-        expect(input).toHaveValue('11');
+      fireEvent.change(screen.getByLabelText('test-label'), {
+        target: { value: '11' },
       });
+
       expect(onChange).not.toHaveBeenCalled();
+      expect(screen.getByLabelText('test-label')).toHaveValue(10);
     });
 
-    describe('locale parsing and formatting', () => {
-      it('should parse and format numbers based on the default locale', async () => {
+    it('should call `onChange` when the value changes', async () => {
+      const onChange = jest.fn();
+      render(
+        <NumberInput
+          label="test-label"
+          id="test"
+          onChange={onChange}
+          min={0}
+          value={10}
+          max={100}
+          translateWithId={translateWithId}
+        />
+      );
+
+      await userEvent.click(screen.getByLabelText('increment'));
+      expect(onChange).toHaveBeenCalledTimes(1);
+      expect(onChange).toHaveBeenCalledWith(
+        expect.objectContaining({
+          target: expect.any(Object),
+        }),
+        expect.objectContaining({
+          value: 11,
+          direction: 'up',
+        })
+      );
+
+      await userEvent.click(screen.getByLabelText('decrement'));
+      expect(onChange).toHaveBeenCalledTimes(2);
+    });
+
+    it('should set the fluid focus state from input and stepper focus', () => {
+      const { container } = render(
+        <FormContext.Provider value={{ isFluid: true }}>
+          <NumberInput
+            label="test-label"
+            id="test"
+            translateWithId={translateWithId}
+          />
+        </FormContext.Provider>
+      );
+
+      const wrapper = container.firstChild;
+      const input = screen.getByLabelText('test-label');
+      const increment = screen.getByLabelText('increment');
+
+      fireEvent.focus(input);
+
+      expect(wrapper).toHaveClass(
+        'cds--form-item',
+        'cds--number-input--fluid--focus',
+        { exact: true }
+      );
+
+      fireEvent.focus(increment);
+
+      expect(wrapper).toHaveClass('cds--form-item', { exact: true });
+    });
+
+    it('should attach and remove the wheel handler when `disableWheel` is true', () => {
+      const onFocus = jest.fn();
+
+      render(
+        <NumberInput
+          label="test-label"
+          id="test"
+          disableWheel
+          onFocus={onFocus}
+        />
+      );
+
+      const input = screen.getByLabelText('test-label');
+      const addEventListenerSpy = jest.spyOn(input, 'addEventListener');
+      const removeEventListenerSpy = jest.spyOn(input, 'removeEventListener');
+
+      fireEvent.focus(input);
+
+      expect(addEventListenerSpy).toHaveBeenCalledWith(
+        'wheel',
+        expect.any(Function)
+      );
+      expect(onFocus).toHaveBeenCalledTimes(1);
+
+      const wheelEvent = new WheelEvent('wheel', { cancelable: true });
+
+      input.dispatchEvent(wheelEvent);
+
+      expect(wheelEvent.defaultPrevented).toBe(true);
+
+      fireEvent.blur(input);
+
+      expect(removeEventListenerSpy).toHaveBeenCalledWith(
+        'wheel',
+        expect.any(Function)
+      );
+
+      addEventListenerSpy.mockRestore();
+      removeEventListenerSpy.mockRestore();
+    });
+
+    describe('steppers', () => {
+      it('should call `onClick` when up or down arrows are clicked (uncontrolled)', async () => {
+        const onClick = jest.fn();
+
+        render(
+          <NumberInput
+            label="test-label"
+            id="test"
+            onClick={onClick}
+            min={0}
+            defaultValue={10}
+            max={100}
+            translateWithId={translateWithId}
+          />
+        );
+
+        await userEvent.click(screen.getByLabelText('increment'));
+        expect(onClick).toHaveBeenCalledTimes(1);
+        expect(screen.getByLabelText('test-label')).toHaveValue(11);
+
+        await userEvent.click(screen.getByLabelText('decrement'));
+        expect(onClick).toHaveBeenCalledTimes(2);
+        expect(screen.getByLabelText('test-label')).toHaveValue(10);
+      });
+
+      it('should set up and down arrows as disabled if `disabled` is true', () => {
+        render(
+          <NumberInput
+            label="test-label"
+            id="test"
+            min={0}
+            value={10}
+            max={100}
+            disabled
+            translateWithId={translateWithId}
+          />
+        );
+
+        expect(screen.getByLabelText('increment')).toBeDisabled();
+        expect(screen.getByLabelText('decrement')).toBeDisabled();
+      });
+
+      it('should not call `onClick` when up or down arrows are clicked but the <input> is disabled', async () => {
+        const onClick = jest.fn();
+
+        render(
+          <NumberInput
+            label="test-label"
+            id="test"
+            onClick={onClick}
+            min={0}
+            value={10}
+            max={100}
+            disabled
+            translateWithId={translateWithId}
+          />
+        );
+
+        await userEvent.click(screen.getByLabelText('increment'));
+        expect(onClick).not.toHaveBeenCalled();
+        expect(screen.getByLabelText('test-label')).toHaveValue(10);
+
+        await userEvent.click(screen.getByLabelText('decrement'));
+        expect(onClick).not.toHaveBeenCalled();
+        expect(screen.getByLabelText('test-label')).toHaveValue(10);
+      });
+
+      it('should only increase the value on up arrow click if value is less than max (uncontrolled)', async () => {
+        render(
+          <NumberInput
+            label="test-label"
+            id="test"
+            min={0}
+            defaultValue={5}
+            max={10}
+            step={5}
+            translateWithId={translateWithId}
+          />
+        );
+
+        expect(screen.getByLabelText('test-label')).toHaveValue(5);
+
+        await userEvent.click(screen.getByLabelText('increment'));
+        expect(screen.getByLabelText('test-label')).toHaveValue(10);
+
+        await userEvent.click(screen.getByLabelText('increment'));
+        expect(screen.getByLabelText('test-label')).toHaveValue(10);
+      });
+
+      it('should only decrease the value on down arrow click if value is greater than min (uncontrolled)', async () => {
+        render(
+          <NumberInput
+            label="test-label"
+            id="test"
+            min={0}
+            defaultValue={5}
+            max={10}
+            step={5}
+            translateWithId={translateWithId}
+          />
+        );
+
+        expect(screen.getByLabelText('test-label')).toHaveValue(5);
+
+        await userEvent.click(screen.getByLabelText('decrement'));
+        expect(screen.getByLabelText('test-label')).toHaveValue(0);
+
+        await userEvent.click(screen.getByLabelText('decrement'));
+        expect(screen.getByLabelText('test-label')).toHaveValue(0);
+      });
+
+      it('should increase by the value of step (uncontrolled)', async () => {
+        render(
+          <NumberInput
+            label="test-label"
+            id="test"
+            min={0}
+            defaultValue={5}
+            max={10}
+            step={5}
+            translateWithId={translateWithId}
+          />
+        );
+
+        expect(screen.getByLabelText('test-label')).toHaveValue(5);
+
+        await userEvent.click(screen.getByLabelText('increment'));
+        expect(screen.getByLabelText('test-label')).toHaveValue(10);
+      });
+
+      it('should decrease by the value of step (uncontrolled)', async () => {
+        render(
+          <NumberInput
+            label="test-label"
+            id="test"
+            min={0}
+            defaultValue={5}
+            max={10}
+            step={5}
+            translateWithId={translateWithId}
+          />
+        );
+        expect(screen.getByLabelText('test-label')).toHaveValue(5);
+        await userEvent.click(screen.getByLabelText('decrement'));
+        expect(screen.getByLabelText('test-label')).toHaveValue(0);
+      });
+
+      it('should call `onStepperBlur` when a stepper button loses focus', async () => {
+        const onBlur = jest.fn();
+        const onStepperBlur = jest.fn();
+
+        render(
+          <NumberInput
+            label="test-label"
+            id="test"
+            onBlur={onBlur}
+            onStepperBlur={onStepperBlur}
+            min={0}
+            defaultValue={10}
+            max={100}
+            translateWithId={translateWithId}
+          />
+        );
+
+        const decrement = screen.getByLabelText('decrement');
+        await userEvent.click(decrement);
+        expect(decrement).toHaveFocus();
+
+        await userEvent.tab();
+
+        expect(onStepperBlur).toHaveBeenCalledTimes(1);
+        expect(onBlur).not.toHaveBeenCalled();
+      });
+
+      describe('steppers (controlled)', () => {
+        it('should call onChange but not update value when controlled without onChange handler', async () => {
+          const onChange = jest.fn();
+
+          render(
+            <NumberInput
+              label="test-label"
+              id="test"
+              min={0}
+              value={10}
+              max={100}
+              onChange={onChange}
+              translateWithId={translateWithId}
+            />
+          );
+
+          expect(screen.getByLabelText('test-label')).toHaveValue(10);
+
+          await userEvent.click(screen.getByLabelText('increment'));
+
+          // onChange should be called with new value
+          expect(onChange).toHaveBeenCalledWith(
+            expect.anything(),
+            expect.objectContaining({
+              value: 11,
+              direction: 'up',
+            })
+          );
+
+          // But value should not change because parent didn't update it
+          expect(screen.getByLabelText('test-label')).toHaveValue(10);
+        });
+
+        it('should update value when controlled with proper onChange handler', async () => {
+          const ControlledNumberInput = () => {
+            const [value, setValue] = React.useState(10);
+            return (
+              <NumberInput
+                label="test-label"
+                id="test"
+                min={0}
+                value={value}
+                max={100}
+                onChange={(e, state) => setValue(state.value)}
+                translateWithId={translateWithId}
+              />
+            );
+          };
+
+          render(<ControlledNumberInput />);
+
+          expect(screen.getByLabelText('test-label')).toHaveValue(10);
+
+          await userEvent.click(screen.getByLabelText('increment'));
+          expect(screen.getByLabelText('test-label')).toHaveValue(11);
+
+          await userEvent.click(screen.getByLabelText('decrement'));
+          expect(screen.getByLabelText('test-label')).toHaveValue(10);
+        });
+
+        it('should allow parent to reject value changes in controlled mode', async () => {
+          const ControlledNumberInput = () => {
+            const [value, setValue] = React.useState(10);
+            return (
+              <NumberInput
+                label="test-label"
+                id="test"
+                min={0}
+                value={value}
+                max={100}
+                onChange={(e, state) => {
+                  // Only allow even numbers
+                  if (state.value % 2 === 0) {
+                    setValue(state.value);
+                  }
+                }}
+                translateWithId={translateWithId}
+              />
+            );
+          };
+
+          render(<ControlledNumberInput />);
+
+          expect(screen.getByLabelText('test-label')).toHaveValue(10);
+
+          // Try to increment to 11 (odd) - should be rejected
+          await userEvent.click(screen.getByLabelText('increment'));
+          expect(screen.getByLabelText('test-label')).toHaveValue(10);
+
+          // Decrement to 9 (odd) - should be rejected
+          await userEvent.click(screen.getByLabelText('decrement'));
+          expect(screen.getByLabelText('test-label')).toHaveValue(10);
+        });
+
+        it('should respect max value in controlled mode', async () => {
+          const ControlledNumberInput = () => {
+            const [value, setValue] = React.useState(9);
+            return (
+              <NumberInput
+                label="test-label"
+                id="test"
+                min={0}
+                value={value}
+                max={10}
+                onChange={(e, state) => setValue(state.value)}
+                translateWithId={translateWithId}
+              />
+            );
+          };
+
+          render(<ControlledNumberInput />);
+
+          expect(screen.getByLabelText('test-label')).toHaveValue(9);
+
+          await userEvent.click(screen.getByLabelText('increment'));
+          expect(screen.getByLabelText('test-label')).toHaveValue(10);
+
+          // Should not go above max
+          await userEvent.click(screen.getByLabelText('increment'));
+          expect(screen.getByLabelText('test-label')).toHaveValue(10);
+        });
+
+        it('should respect min value in controlled mode', async () => {
+          const ControlledNumberInput = () => {
+            const [value, setValue] = React.useState(1);
+            return (
+              <NumberInput
+                label="test-label"
+                id="test"
+                min={0}
+                value={value}
+                max={10}
+                onChange={(e, state) => setValue(state.value)}
+                translateWithId={translateWithId}
+              />
+            );
+          };
+
+          render(<ControlledNumberInput />);
+
+          expect(screen.getByLabelText('test-label')).toHaveValue(1);
+
+          await userEvent.click(screen.getByLabelText('decrement'));
+          expect(screen.getByLabelText('test-label')).toHaveValue(0);
+
+          // Should not go below min
+          await userEvent.click(screen.getByLabelText('decrement'));
+          expect(screen.getByLabelText('test-label')).toHaveValue(0);
+        });
+
+        it('should handle step increments correctly in controlled mode', async () => {
+          const ControlledNumberInput = () => {
+            const [value, setValue] = React.useState(5);
+            return (
+              <NumberInput
+                label="test-label"
+                id="test"
+                min={0}
+                value={value}
+                max={20}
+                step={5}
+                onChange={(e, state) => setValue(state.value)}
+                translateWithId={translateWithId}
+              />
+            );
+          };
+
+          render(<ControlledNumberInput />);
+
+          expect(screen.getByLabelText('test-label')).toHaveValue(5);
+
+          await userEvent.click(screen.getByLabelText('increment'));
+          expect(screen.getByLabelText('test-label')).toHaveValue(10);
+
+          await userEvent.click(screen.getByLabelText('increment'));
+          expect(screen.getByLabelText('test-label')).toHaveValue(15);
+
+          await userEvent.click(screen.getByLabelText('decrement'));
+          expect(screen.getByLabelText('test-label')).toHaveValue(10);
+        });
+      });
+    });
+    it('should increase by the value of large step (uncontrolled)', async () => {
+      render(
+        <NumberInput
+          label="test-label"
+          id="test"
+          min={-9999}
+          defaultValue={1000}
+          max={10000}
+          step={1000}
+          translateWithId={translateWithId}
+        />
+      );
+      expect(screen.getByLabelText('test-label')).toHaveValue(1000);
+      await userEvent.click(screen.getByLabelText('increment'));
+      expect(screen.getByLabelText('test-label')).toHaveValue(2000);
+    });
+    it('should decrease by the value of large step (uncontrolled)', async () => {
+      render(
+        <NumberInput
+          label="test-label"
+          id="test"
+          min={-9999}
+          defaultValue={1000}
+          max={10000}
+          step={1000}
+          translateWithId={translateWithId}
+        />
+      );
+
+      expect(screen.getByLabelText('test-label')).toHaveValue(1000);
+
+      await userEvent.click(screen.getByLabelText('decrement'));
+      expect(screen.getByLabelText('test-label')).toHaveValue(0);
+    });
+
+    it('should respect readOnly prop', async () => {
+      const onChange = jest.fn();
+      const onClick = jest.fn();
+
+      render(
+        <NumberInput
+          id="input-1"
+          label="Number label"
+          onClick={onClick}
+          onChange={onChange}
+          readOnly
+          translateWithId={translateWithId}
+        />
+      );
+
+      const input = screen.getByRole('spinbutton');
+
+      // Click events should fire
+      await userEvent.click(input);
+      expect(onClick).toHaveBeenCalledTimes(1);
+
+      // Change events should *not* fire
+      await userEvent.type(input, '3');
+      expect(input).not.toHaveValue('3');
+
+      expect(screen.getByLabelText('increment')).toBeDisabled();
+      expect(screen.getByLabelText('decrement')).toBeDisabled();
+
+      await userEvent.click(screen.getByLabelText('increment'));
+      await userEvent.click(screen.getByLabelText('decrement'));
+
+      expect(onChange).toHaveBeenCalledTimes(0);
+    });
+
+    it('should update value to empty when allowEmpty is true & input value becomes empty (uncontrolled)', async () => {
+      const onChange = jest.fn();
+      render(
+        <NumberInput
+          id="carbon-number"
+          min={-100}
+          max={100}
+          defaultValue={50}
+          label="NumberInput label"
+          helperText="Optional helper text."
+          invalidText="Number is not valid"
+          allowEmpty={true}
+          onChange={onChange}
+        />
+      );
+
+      const input = screen.getByLabelText('NumberInput label');
+
+      await userEvent.clear(input);
+
+      userEvent.type(input, '{backspace}');
+      expect(input.value).toBe('');
+      expect(onChange).toHaveBeenCalledWith(
+        expect.objectContaining({
+          target: expect.any(Object),
+        }),
+        expect.objectContaining({
+          value: '',
+        })
+      );
+    });
+
+    it('should increment and decrement decimal numbers without floating-point precision errors (uncontrolled)', async () => {
+      render(
+        <NumberInput
+          label="NumberInput label"
+          id="number-input"
+          min={0}
+          defaultValue={15.01}
+          step={1}
+          max={100}
+          translateWithId={translateWithId}
+        />
+      );
+
+      const input = screen.getByLabelText('NumberInput label');
+
+      expect(input).toHaveValue(15.01);
+
+      await userEvent.click(screen.getByLabelText('increment'));
+      expect(input).toHaveValue(16.01);
+
+      await userEvent.click(screen.getByLabelText('decrement'));
+      expect(input).toHaveValue(15.01);
+    });
+
+    it('should call `onBlur` with value parameter when input is blurred (type="number")', async () => {
+      const onBlur = jest.fn();
+      render(
+        <NumberInput
+          label="test-label"
+          id="test"
+          onBlur={onBlur}
+          min={0}
+          defaultValue={25}
+          max={100}
+          translateWithId={translateWithId}
+        />
+      );
+
+      await userEvent.click(screen.getByLabelText('test-label'));
+      await userEvent.tab();
+      expect(onBlur).toHaveBeenCalledTimes(1);
+      expect(onBlur).toHaveBeenCalledWith(
+        expect.objectContaining({
+          target: expect.any(Object),
+        }),
+        25
+      );
+    });
+
+    it('should not allow arrow key changes when readOnly with type="text"', async () => {
+      render(
+        <NumberInput
+          type="text"
+          label="test-label"
+          id="test"
+          readOnly
+          defaultValue={50}
+        />
+      );
+
+      const input = screen.getByLabelText('test-label');
+      expect(input).toHaveValue('50');
+
+      await userEvent.click(input);
+      await userEvent.keyboard('{ArrowUp}');
+      expect(input).toHaveValue('50');
+
+      await userEvent.keyboard('{ArrowDown}');
+      expect(input).toHaveValue('50');
+    });
+
+    describe('with type="text"', () => {
+      it('should render an <input> with type="text"', () => {
+        render(<NumberInput type="text" label="test-label" id="test" />);
+        // Note: an input with type="text" is considered a `textbox`
+        expect(screen.getByRole('textbox')).toBeInTheDocument();
+      });
+
+      it('should place className on the outermost element', () => {
+        const { container } = render(
+          <NumberInput
+            type="text"
+            className="custom-class"
+            label="test-label"
+            id="test"
+          />
+        );
+        expect(container.firstChild).toHaveClass('custom-class');
+      });
+
+      it('should set `min` on the underlying <input>', () => {
+        render(
+          <NumberInput type="text" label="test-label" id="test" min={0} />
+        );
+        expect(screen.getByLabelText('test-label')).toHaveAttribute('min', '0');
+      });
+
+      it('should set `max` on the underlying <input>', () => {
+        render(
+          <NumberInput type="text" label="test-label" id="test" max={10} />
+        );
+        expect(screen.getByLabelText('test-label')).toHaveAttribute(
+          'max',
+          '10'
+        );
+      });
+
+      it('should set `step` on the underlying <input>', () => {
+        render(
+          <NumberInput type="text" label="test-label" id="test" step={5} />
+        );
+        expect(screen.getByLabelText('test-label')).toHaveAttribute(
+          'step',
+          '5'
+        );
+      });
+
+      it('should set `disabled` on the underlying <input>', () => {
+        render(
+          <NumberInput type="text" label="test-label" id="test" disabled />
+        );
+        expect(screen.getByLabelText('test-label')).toBeDisabled();
+      });
+
+      it('should set the defaultValue of the <input> with `defaultValue`', () => {
+        render(
+          <NumberInput
+            type="text"
+            label="test-label"
+            id="test"
+            defaultValue={5}
+          />
+        );
+        expect(screen.getByLabelText('test-label')).toHaveValue('5');
+      });
+
+      it('should set the given `value` on <input> when value > min', () => {
+        render(
+          <NumberInput
+            type="text"
+            label="test-label"
+            id="test"
+            min={0}
+            value={5}
+          />
+        );
+        expect(screen.getByLabelText('test-label')).toHaveValue('5');
+      });
+
+      it('should respect decorator prop', () => {
+        render(
+          <NumberInput
+            type="text"
+            label="test-label"
+            id="test"
+            decorator={<AILabel />}
+          />
+        );
+
+        expect(
+          screen.getByRole('button', { name: 'AI Show information' })
+        ).toBeInTheDocument();
+      });
+
+      it('should respect the deprecated slug prop', () => {
+        const spy = jest.spyOn(console, 'warn').mockImplementation(() => {});
+        render(
+          <NumberInput
+            type="text"
+            label="test-label"
+            id="test"
+            slug={<AILabel />}
+          />
+        );
+
+        expect(
+          screen.getByRole('button', { name: 'AI Show information' })
+        ).toBeInTheDocument();
+        spy.mockRestore();
+      });
+
+      it('should allow an empty string as input to the underlying <input>', () => {
+        render(
+          <NumberInput
+            type="text"
+            label="test-label"
+            id="test"
+            value=""
+            invalidText="test-invalid-text"
+          />
+        );
+        expect(screen.getByLabelText('test-label')).toHaveValue('');
+      });
+
+      it('should set the input as invalid when value < min', () => {
+        render(
+          <NumberInput
+            type="text"
+            label="test-label"
+            id="test"
+            value={5}
+            min={10}
+            invalidText="test-invalid-text"
+          />
+        );
+        expect(screen.getByLabelText('test-label')).toHaveValue('5');
+        expect(screen.getByText('test-invalid-text')).toBeInTheDocument();
+        expect(screen.getByRole('textbox')).toHaveAttribute('data-invalid');
+      });
+
+      it('should not render invalidText when value is empty string', () => {
+        render(
+          <NumberInput
+            type="text"
+            label="test-label"
+            id="test"
+            value=""
+            invalidText="test-invalid-text"
+          />
+        );
+        expect(screen.getByLabelText('test-label')).toHaveValue('');
+        expect(screen.queryByText('test-invalid-text')).not.toBeInTheDocument();
+      });
+
+      it('should describe the <input> through `helperText`', () => {
+        render(
+          <NumberInput
+            type="text"
+            label="test-label"
+            id="test"
+            helperText="test-helper-text"
+          />
+        );
+        // Note: is aria-describedby correctly set up here?
+        expect(screen.getByText('test-helper-text')).toBeInTheDocument();
+      });
+
+      it('should call `onClick` when the `<input>` is clicked', async () => {
+        const onClick = jest.fn();
+        render(
+          <NumberInput
+            type="text"
+            label="test-label"
+            id="test"
+            onClick={onClick}
+            min={0}
+            value={10}
+            max={100}
+          />
+        );
+
+        await userEvent.click(screen.getByLabelText('test-label'));
+        expect(onClick).toHaveBeenCalled();
+      });
+
+      it('should not call `onClick` when the `<input>` is clicked but disabled', async () => {
+        const onClick = jest.fn();
+        render(
+          <NumberInput
+            type="text"
+            disabled
+            label="test-label"
+            id="test"
+            onClick={onClick}
+            min={0}
+            value={10}
+            max={100}
+          />
+        );
+
+        await userEvent.click(screen.getByLabelText('test-label'));
+        expect(onClick).not.toHaveBeenCalled();
+      });
+
+      it('should call `onChange` when the value changes', async () => {
+        const onChange = jest.fn();
+        render(
+          <NumberInput
+            type="text"
+            label="test-label"
+            id="test"
+            onChange={onChange}
+            min={0}
+            value={10}
+            max={100}
+            translateWithId={translateWithId}
+          />
+        );
+
+        await userEvent.click(screen.getByLabelText('increment'));
+        expect(onChange).toHaveBeenCalledTimes(1);
+        expect(onChange).toHaveBeenCalledWith(
+          expect.objectContaining({
+            target: expect.any(Object),
+          }),
+          expect.objectContaining({
+            value: 11,
+            direction: 'up',
+          })
+        );
+
+        await userEvent.click(screen.getByLabelText('decrement'));
+        expect(onChange).toHaveBeenCalledTimes(2);
+      });
+
+      it('should handle arrow keys and forward `onKeyDown` in text mode', () => {
+        const onChange = jest.fn();
+        const onKeyDown = jest.fn();
+
+        render(
+          <NumberInput
+            type="text"
+            label="test-label"
+            id="test"
+            defaultValue={10}
+            onChange={onChange}
+            onKeyDown={onKeyDown}
+            translateWithId={translateWithId}
+          />
+        );
+
+        const input = screen.getByLabelText('test-label');
+
+        fireEvent.keyDown(input, { key: 'ArrowUp' });
+
+        expect(input).toHaveValue('11');
+        expect(onChange).toHaveBeenNthCalledWith(
+          1,
+          expect.objectContaining({
+            target: expect.any(Object),
+          }),
+          expect.objectContaining({
+            value: 11,
+            direction: 'up',
+          })
+        );
+
+        fireEvent.keyDown(input, { key: 'ArrowDown' });
+
+        expect(input).toHaveValue('10');
+        expect(onChange).toHaveBeenNthCalledWith(
+          2,
+          expect.objectContaining({
+            target: expect.any(Object),
+          }),
+          expect.objectContaining({
+            value: 10,
+            direction: 'down',
+          })
+        );
+        expect(onKeyDown).toHaveBeenCalledTimes(2);
+      });
+
+      it('should call `onBlur` when the input is blurred', async () => {
+        const onBlur = jest.fn();
+        render(
+          <NumberInput
+            type="text"
+            label="test-label"
+            id="test"
+            onBlur={onBlur}
+            min={0}
+            value={10}
+            max={100}
+            translateWithId={translateWithId}
+          />
+        );
+
+        await userEvent.click(screen.getByLabelText('test-label'));
+        await userEvent.tab();
+        expect(onBlur).toHaveBeenCalledTimes(1);
+        expect(onBlur).toHaveBeenCalledWith(
+          expect.objectContaining({
+            target: expect.any(Object),
+          }),
+          10
+        );
+      });
+
+      it('should call `onBlur` with value parameter in uncontrolled mode', async () => {
+        const onBlur = jest.fn();
+        render(
+          <NumberInput
+            type="text"
+            label="test-label"
+            id="test"
+            onBlur={onBlur}
+            min={0}
+            defaultValue={42}
+            max={100}
+            translateWithId={translateWithId}
+          />
+        );
+
+        await userEvent.click(screen.getByLabelText('test-label'));
+        await userEvent.tab();
+        expect(onBlur).toHaveBeenCalledTimes(1);
+        expect(onBlur).toHaveBeenCalledWith(
+          expect.objectContaining({
+            target: expect.any(Object),
+          }),
+          42
+        );
+      });
+
+      it('should call `onBlur` with updated value after user types', async () => {
+        const onBlur = jest.fn();
+        render(
+          <NumberInput
+            type="text"
+            label="test-label"
+            id="test"
+            onBlur={onBlur}
+            min={0}
+            defaultValue={10}
+            max={100}
+            translateWithId={translateWithId}
+          />
+        );
+
+        const input = screen.getByLabelText('test-label');
+        await userEvent.clear(input);
+        await userEvent.type(input, '75');
+        await userEvent.tab();
+
+        expect(onBlur).toHaveBeenCalledTimes(1);
+        expect(onBlur).toHaveBeenCalledWith(
+          expect.objectContaining({
+            target: expect.any(Object),
+          }),
+          75
+        );
+      });
+
+      it('should call `onBlur` with NaN when value is empty and allowEmpty is true', async () => {
+        const onBlur = jest.fn();
+        render(
+          <NumberInput
+            type="text"
+            label="test-label"
+            id="test"
+            onBlur={onBlur}
+            allowEmpty
+            min={0}
+            max={100}
+            translateWithId={translateWithId}
+          />
+        );
+
+        const input = screen.getByLabelText('test-label');
+        await userEvent.click(input);
+        await userEvent.tab();
+
+        expect(onBlur).toHaveBeenCalledTimes(1);
+        expect(onBlur).toHaveBeenCalledWith(
+          expect.objectContaining({
+            target: expect.any(Object),
+          }),
+          NaN
+        );
+      });
+
+      it('should call `onBlur` with the formatted value when formatting alters the number', async () => {
+        const onBlur = jest.fn();
+        render(
+          <NumberInput
+            type="text"
+            label="test-label"
+            id="test"
+            onBlur={onBlur}
+            defaultValue={2}
+            formatOptions={{ maximumFractionDigits: 0 }}
+            translateWithId={translateWithId}
+          />
+        );
+
+        const input = screen.getByLabelText('test-label');
+        await userEvent.click(input);
+        await userEvent.clear(input);
+        await userEvent.type(input, '2.7');
+        await userEvent.tab();
+
+        expect(onBlur).toHaveBeenCalledTimes(1);
+        expect(onBlur).toHaveBeenCalledWith(
+          expect.objectContaining({
+            target: expect.any(Object),
+          }),
+          3
+        );
+      });
+
+      describe('steppers', () => {
+        it('should call `onClick` when up or down arrows are clicked', async () => {
+          const onClick = jest.fn();
+
+          render(
+            <NumberInput
+              type="text"
+              label="test-label"
+              id="test"
+              onClick={onClick}
+              min={0}
+              defaultValue={10}
+              max={100}
+              translateWithId={translateWithId}
+            />
+          );
+
+          await userEvent.click(screen.getByLabelText('increment'));
+          expect(onClick).toHaveBeenCalledTimes(1);
+          expect(screen.getByLabelText('test-label')).toHaveValue('11');
+
+          await userEvent.click(screen.getByLabelText('decrement'));
+          expect(onClick).toHaveBeenCalledTimes(2);
+          expect(screen.getByLabelText('test-label')).toHaveValue('10');
+        });
+
+        it('should call `onBlur` when focus leaves the input with the values set by decrement button, or increment button', async () => {
+          const onBlur = jest.fn();
+
+          render(
+            <NumberInput
+              type="text"
+              label="test-label"
+              id="test"
+              onBlur={onBlur}
+              min={0}
+              defaultValue={10}
+              max={100}
+              translateWithId={translateWithId}
+            />
+          );
+
+          const input = screen.getByLabelText('test-label');
+          await userEvent.click(input);
+          expect(input).toHaveFocus();
+
+          await userEvent.click(screen.getByLabelText('decrement'));
+          expect(screen.getByLabelText('decrement')).toHaveFocus();
+
+          await userEvent.click(input);
+          await userEvent.tab();
+
+          expect(onBlur).toHaveBeenCalledWith(
+            expect.objectContaining({
+              target: expect.any(Object),
+            }),
+            9
+          );
+
+          await userEvent.click(screen.getByLabelText('increment'));
+          expect(screen.getByLabelText('increment')).toHaveFocus();
+
+          await userEvent.click(input);
+          await userEvent.tab();
+
+          expect(onBlur).toHaveBeenCalledWith(
+            expect.objectContaining({
+              target: expect.any(Object),
+            }),
+            10
+          );
+        });
+
+        it('should set up and down arrows as disabled if `disabled` is true', () => {
+          render(
+            <NumberInput
+              type="text"
+              label="test-label"
+              id="test"
+              min={0}
+              defaultValue={10}
+              max={100}
+              disabled
+              translateWithId={translateWithId}
+            />
+          );
+
+          expect(screen.getByLabelText('increment')).toBeDisabled();
+          expect(screen.getByLabelText('decrement')).toBeDisabled();
+        });
+
+        it('should not call `onClick` when up or down arrows are clicked but the <input> is disabled', async () => {
+          const onClick = jest.fn();
+
+          render(
+            <NumberInput
+              type="text"
+              label="test-label"
+              id="test"
+              onClick={onClick}
+              min={0}
+              defaultValue={10}
+              max={100}
+              disabled
+              translateWithId={translateWithId}
+            />
+          );
+
+          await userEvent.click(screen.getByLabelText('increment'));
+          expect(onClick).not.toHaveBeenCalled();
+          expect(screen.getByLabelText('test-label')).toHaveValue('10');
+
+          await userEvent.click(screen.getByLabelText('decrement'));
+          expect(onClick).not.toHaveBeenCalled();
+          expect(screen.getByLabelText('test-label')).toHaveValue('10');
+        });
+
+        it('should only increase the value on up arrow click if value is less than max', async () => {
+          render(
+            <NumberInput
+              type="text"
+              label="test-label"
+              id="test"
+              min={0}
+              defaultValue={5}
+              max={10}
+              step={5}
+              translateWithId={translateWithId}
+            />
+          );
+
+          expect(screen.getByLabelText('test-label')).toHaveValue('5');
+
+          await userEvent.click(screen.getByLabelText('increment'));
+          expect(screen.getByLabelText('test-label')).toHaveValue('10');
+
+          await userEvent.click(screen.getByLabelText('increment'));
+          expect(screen.getByLabelText('test-label')).toHaveValue('10');
+        });
+
+        it('should only decrease the value on down arrow click if value is greater than min', async () => {
+          render(
+            <NumberInput
+              type="text"
+              label="test-label"
+              id="test"
+              min={0}
+              defaultValue={5}
+              max={10}
+              step={5}
+              translateWithId={translateWithId}
+            />
+          );
+
+          expect(screen.getByLabelText('test-label')).toHaveValue('5');
+
+          await userEvent.click(screen.getByLabelText('decrement'));
+          expect(screen.getByLabelText('test-label')).toHaveValue('0');
+
+          await userEvent.click(screen.getByLabelText('decrement'));
+          expect(screen.getByLabelText('test-label')).toHaveValue('0');
+        });
+
+        it('should increase by the value of step', async () => {
+          render(
+            <NumberInput
+              type="text"
+              label="test-label"
+              id="test"
+              min={0}
+              defaultValue={5}
+              max={10}
+              step={5}
+              translateWithId={translateWithId}
+            />
+          );
+
+          expect(screen.getByLabelText('test-label')).toHaveValue('5');
+
+          await userEvent.click(screen.getByLabelText('increment'));
+          expect(screen.getByLabelText('test-label')).toHaveValue('10');
+        });
+
+        it('should decrease by the value of step', async () => {
+          render(
+            <NumberInput
+              type="text"
+              label="test-label"
+              id="test"
+              min={0}
+              defaultValue={5}
+              max={10}
+              step={5}
+              translateWithId={translateWithId}
+            />
+          );
+          expect(screen.getByLabelText('test-label')).toHaveValue('5');
+          await userEvent.click(screen.getByLabelText('decrement'));
+          expect(screen.getByLabelText('test-label')).toHaveValue('0');
+        });
+
+        it('should begin incrementing from 1 when input is empty and 0 is in between of min and max', async () => {
+          render(
+            <NumberInput
+              type="text"
+              label="test-label"
+              id="test"
+              allowEmpty
+              min={-100}
+              max={100}
+              step={2}
+              translateWithId={translateWithId}
+            />
+          );
+          expect(screen.getByLabelText('test-label')).toHaveValue('');
+          await userEvent.click(screen.getByLabelText('increment'));
+          expect(screen.getByLabelText('test-label')).toHaveValue('1');
+        });
+
+        it('should begin incrementing from min when input is empty and min is positive', async () => {
+          render(
+            <NumberInput
+              type="text"
+              label="test-label"
+              id="test"
+              allowEmpty
+              min={10}
+              max={100}
+              step={2}
+              translateWithId={translateWithId}
+            />
+          );
+          expect(screen.getByLabelText('test-label')).toHaveValue('');
+          await userEvent.click(screen.getByLabelText('increment'));
+          expect(screen.getByLabelText('test-label')).toHaveValue('10');
+        });
+        it('should begin decrementing from max when input is empty and when min is negative', async () => {
+          render(
+            <NumberInput
+              type="text"
+              label="test-label"
+              id="test"
+              min={-100}
+              max={100}
+              step={2}
+              translateWithId={translateWithId}
+            />
+          );
+          expect(screen.getByLabelText('test-label')).toHaveValue('');
+          await userEvent.click(screen.getByLabelText('decrement'));
+          expect(screen.getByLabelText('test-label')).toHaveValue('-1');
+        });
+
+        it('should begin decrementing from min when input is empty and when min and max is greater than 0', async () => {
+          render(
+            <NumberInput
+              type="text"
+              label="test-label"
+              id="test"
+              min={10}
+              max={100}
+              step={2}
+              translateWithId={translateWithId}
+            />
+          );
+          expect(screen.getByLabelText('test-label')).toHaveValue('');
+          await userEvent.click(screen.getByLabelText('decrement'));
+          expect(screen.getByLabelText('test-label')).toHaveValue('10');
+        });
+
+        it('should begin decrementing from `min` when input is empty and only `min` is positive', async () => {
+          render(
+            <NumberInput
+              type="text"
+              label="test-label"
+              id="test"
+              min={10}
+              step={2}
+              translateWithId={translateWithId}
+            />
+          );
+
+          expect(screen.getByLabelText('test-label')).toHaveValue('');
+
+          await userEvent.click(screen.getByLabelText('decrement'));
+
+          expect(screen.getByLabelText('test-label')).toHaveValue('10');
+        });
+
+        it('should begin incrementing from 1 when no min is provided and input is empty', async () => {
+          render(
+            <NumberInput
+              type="text"
+              label="test-label"
+              id="test"
+              step={2}
+              translateWithId={translateWithId}
+            />
+          );
+          expect(screen.getByLabelText('test-label')).toHaveValue('');
+          await userEvent.click(screen.getByLabelText('increment'));
+          expect(screen.getByLabelText('test-label')).toHaveValue('1');
+        });
+        it('should begin decrementing from -1 when no max is provided and input is empty', async () => {
+          render(
+            <NumberInput
+              type="text"
+              label="test-label"
+              id="test"
+              step={2}
+              translateWithId={translateWithId}
+            />
+          );
+          expect(screen.getByLabelText('test-label')).toHaveValue('');
+          await userEvent.click(screen.getByLabelText('decrement'));
+          expect(screen.getByLabelText('test-label')).toHaveValue('-1');
+        });
+
+        it('should begin incrementing from stepStartValue when input is empty and stepStartValue is provided', async () => {
+          render(
+            <NumberInput
+              type="text"
+              label="test-label"
+              id="test"
+              step={2}
+              stepStartValue={10}
+              translateWithId={translateWithId}
+            />
+          );
+          expect(screen.getByLabelText('test-label')).toHaveValue('');
+          await userEvent.click(screen.getByLabelText('increment'));
+          expect(screen.getByLabelText('test-label')).toHaveValue('10');
+        });
+
+        it('should begin decrementing from stepStartValue when input is empty and stepStartValue is provided', async () => {
+          render(
+            <NumberInput
+              type="text"
+              label="test-label"
+              id="test"
+              step={2}
+              stepStartValue={10}
+              translateWithId={translateWithId}
+            />
+          );
+          expect(screen.getByLabelText('test-label')).toHaveValue('');
+          await userEvent.click(screen.getByLabelText('decrement'));
+          expect(screen.getByLabelText('test-label')).toHaveValue('10');
+        });
+      });
+      it('should increase by the value of large step and format to the default locale', async () => {
+        render(
+          <NumberInput
+            type="text"
+            label="test-label"
+            id="test"
+            min={-9999}
+            defaultValue={1000}
+            max={10000}
+            step={1000}
+            translateWithId={translateWithId}
+          />
+        );
+        expect(screen.getByLabelText('test-label')).toHaveValue('1,000');
+        await userEvent.click(screen.getByLabelText('increment'));
+        expect(screen.getByLabelText('test-label')).toHaveValue('2,000');
+      });
+      it('should decrease by the value of large step and format to the default locale', async () => {
+        render(
+          <NumberInput
+            type="text"
+            label="test-label"
+            id="test"
+            min={-9999}
+            defaultValue={1000}
+            max={10000}
+            step={1000}
+            translateWithId={translateWithId}
+          />
+        );
+
+        expect(screen.getByLabelText('test-label')).toHaveValue('1,000');
+
+        await userEvent.click(screen.getByLabelText('decrement'));
+        expect(screen.getByLabelText('test-label')).toHaveValue('0');
+      });
+
+      it('should respect readOnly prop', async () => {
+        const onChange = jest.fn();
+        const onClick = jest.fn();
+
+        render(
+          <NumberInput
+            type="text"
+            id="input-1"
+            label="Number label"
+            onClick={onClick}
+            onChange={onChange}
+            readOnly
+            translateWithId={translateWithId}
+          />
+        );
+
+        const input = screen.getByRole('textbox');
+
+        // Click events should fire
+        await userEvent.click(input);
+        expect(onClick).toHaveBeenCalledTimes(1);
+
+        // Change events should *not* fire
+        await userEvent.type(input, '3');
+        expect(input).not.toHaveValue('3');
+
+        expect(screen.getByLabelText('increment')).toBeDisabled();
+        expect(screen.getByLabelText('decrement')).toBeDisabled();
+
+        await userEvent.click(screen.getByLabelText('increment'));
+        await userEvent.click(screen.getByLabelText('decrement'));
+
+        expect(onChange).toHaveBeenCalledTimes(0);
+      });
+
+      it('should update value to empty when allowEmpty is true & input value becomes empty', async () => {
+        const onChange = jest.fn();
+        render(
+          <NumberInput
+            type="text"
+            id="carbon-number"
+            min={-100}
+            max={100}
+            defaultValue={50}
+            label="NumberInput label"
+            helperText="Optional helper text."
+            invalidText="Number is not valid"
+            allowEmpty={true}
+            onChange={onChange}
+          />
+        );
+
+        const input = screen.getByLabelText('NumberInput label');
+
+        await userEvent.clear(input);
+
+        await userEvent.type(input, '{backspace}');
+        expect(input.value).toBe('');
+        await userEvent.tab();
+        expect(onChange).toHaveBeenCalledWith(
+          expect.objectContaining({
+            target: expect.any(Object),
+          }),
+          expect.objectContaining({
+            value: NaN,
+          })
+        );
+      });
+
+      it('should increment and decrement decimal numbers without floating-point precision errors', async () => {
         render(
           <NumberInput
             type="text"
@@ -2081,114 +2186,18 @@ describe('NumberInput', () => {
 
         await userEvent.click(screen.getByLabelText('decrement'));
         expect(input).toHaveValue('15.01');
-
-        await userEvent.clear(input);
-
-        await userEvent.type(input, '3');
-        expect(input).toHaveValue('3');
-
-        await userEvent.type(input, '4');
-        expect(input).toHaveValue('34');
-
-        await userEvent.type(input, ',');
-        expect(input).toHaveValue('34,');
-
-        await userEvent.type(input, '8');
-        expect(input).toHaveValue('34,8');
-
-        await userEvent.type(input, '9');
-        expect(input).toHaveValue('34,89');
-
-        await userEvent.tab();
-        expect(input).toHaveValue('3,489');
-
-        await userEvent.clear(input);
-        await userEvent.type(input, '1234,567');
-        await userEvent.tab();
-        expect(input).toHaveValue('1,234,567');
-
-        await userEvent.clear(input);
-        await userEvent.type(input, '34.56');
-        await userEvent.tab();
-        expect(input).toHaveValue('34.56');
-
-        await userEvent.type(input, '99999');
-        await userEvent.tab();
-        expect(input).toHaveValue('34.57');
       });
-      it('should parse and format numbers based on the given locale', async () => {
-        render(
-          <NumberInput
-            type="text"
-            locale="DE"
-            label="NumberInput label"
-            id="number-input"
-            min={0}
-            defaultValue={15.01}
-            step={1}
-            max={100}
-            translateWithId={translateWithId}
-          />
-        );
 
-        const input = screen.getByLabelText('NumberInput label');
-
-        expect(input).toHaveValue('15,01');
-
-        await userEvent.click(screen.getByLabelText('increment'));
-        expect(input).toHaveValue('16,01');
-
-        await userEvent.click(screen.getByLabelText('decrement'));
-        expect(input).toHaveValue('15,01');
-
-        await userEvent.clear(input);
-
-        await userEvent.type(input, '3');
-        expect(input).toHaveValue('3');
-
-        await userEvent.type(input, '4');
-        expect(input).toHaveValue('34');
-
-        await userEvent.type(input, ',');
-        expect(input).toHaveValue('34,');
-
-        await userEvent.type(input, '8');
-        expect(input).toHaveValue('34,8');
-
-        await userEvent.type(input, '9');
-        expect(input).toHaveValue('34,89');
-
-        await userEvent.tab();
-
-        expect(input).toHaveValue('34,89');
-
-        await userEvent.clear(input);
-
-        await userEvent.type(input, '1234,567');
-
-        await userEvent.tab();
-
-        expect(input).toHaveValue('1.234,567');
-
-        await userEvent.clear(input);
-
-        await userEvent.type(input, '34.56');
-
-        await userEvent.tab();
-
-        expect(input).toHaveValue('3.456');
-      });
-      it('should not call onChange until onBlur when input is parsed and formatted ', async () => {
+      it('should keep empty display when controlled value remains NaN across rerenders', () => {
         const onChange = jest.fn();
-        render(
+        const { rerender } = render(
           <NumberInput
             type="text"
             label="NumberInput label"
             id="number-input"
-            min={0}
-            defaultValue={15.01}
-            step={1}
+            min={10}
             max={100}
+            value={NaN}
             onChange={onChange}
             translateWithId={translateWithId}
           />
@@ -2196,294 +2205,495 @@ describe('NumberInput', () => {
 
         const input = screen.getByLabelText('NumberInput label');
 
-        expect(input).toHaveValue('15.01');
-        await userEvent.type(input, '9');
-        expect(onChange).not.toHaveBeenCalled();
-        await userEvent.type(input, '9');
-        expect(onChange).not.toHaveBeenCalled();
+        expect(input).toHaveValue('');
 
-        await userEvent.tab();
-        expect(input).toHaveValue('15.02');
-        expect(onChange).toHaveBeenCalledWith(
-          expect.objectContaining({
-            target: expect.any(Object),
-          }),
-          expect.objectContaining({
-            value: 15.02,
-            direction: 'up',
-          })
-        );
-        expect(onChange).toHaveBeenCalledTimes(1);
-
-        await userEvent.click(screen.getByLabelText('increment'));
-        expect(input).toHaveValue('16.02');
-        expect(onChange).toHaveBeenCalledWith(
-          expect.objectContaining({
-            target: expect.any(Object),
-          }),
-          expect.objectContaining({
-            value: 16.02,
-            direction: 'up',
-          })
-        );
-        expect(onChange).toHaveBeenCalledTimes(2);
-
-        await userEvent.click(screen.getByLabelText('decrement'));
-        expect(onChange).toHaveBeenCalledWith(
-          expect.objectContaining({
-            target: expect.any(Object),
-          }),
-          expect.objectContaining({
-            value: 15.02,
-            direction: 'down',
-          })
-        );
-        expect(input).toHaveValue('15.02');
-        expect(onChange).toHaveBeenCalledTimes(3);
-      });
-      it('supports formatOptions prop', async () => {
-        render(
+        rerender(
           <NumberInput
             type="text"
             label="NumberInput label"
             id="number-input"
-            min={0}
-            defaultValue={0.15}
-            step={0.05}
+            min={10}
             max={100}
-            formatOptions={{ style: 'percent' }}
+            value={NaN}
+            onChange={onChange}
             translateWithId={translateWithId}
           />
         );
 
-        const input = screen.getByLabelText('NumberInput label');
-
-        expect(input).toHaveValue('15%');
-
-        await userEvent.click(screen.getByLabelText('increment'));
-        expect(input).toHaveValue('20%');
-      });
-      it('should throw an error if group seperator is in wrong position', async () => {
-        render(
-          <NumberInput
-            type="text"
-            label="NumberInput label"
-            id="number-input"
-            value=""
-            step={1}
-            validate={validateNumberSeparators}
-            translateWithId={translateWithId}
-            invalidText="test-invalid-text"
-          />
-        );
-        const input = screen.getByLabelText('NumberInput label');
-        await userEvent.type(input, '1,1');
-        await userEvent.tab();
-        expect(screen.getByText('test-invalid-text')).toBeInTheDocument();
-        expect(screen.getByRole('textbox')).toHaveAttribute('data-invalid');
+        expect(input).toHaveValue('');
+        expect(onChange).not.toHaveBeenCalled();
       });
 
-      it('should throw an error if group seperator is in wrong position for given locale', async () => {
-        render(
-          <NumberInput
-            type="text"
-            label="NumberInput label"
-            id="number-input"
-            locale="DE"
-            value=""
-            step={1}
-            validate={validateNumberSeparators}
-            translateWithId={translateWithId}
-            invalidText="test-invalid-text"
-          />
-        );
-        const input = screen.getByLabelText('NumberInput label');
-        await userEvent.type(input, '1.1');
-        await userEvent.tab();
-        expect(screen.getByText('test-invalid-text')).toBeInTheDocument();
-        expect(screen.getByRole('textbox')).toHaveAttribute('data-invalid');
-      });
-
-      it('should call `onBlur` with parsed value in controlled mode', async () => {
-        const onBlur = jest.fn();
-        const ControlledNumberInput = () => {
-          const [value, setValue] = useState(20.4);
-          return (
+      it('should update controlled value in StrictMode without render-phase warnings', async () => {
+        const onChange = jest.fn();
+        const { rerender } = render(
+          <StrictMode>
             <NumberInput
               type="text"
-              label="test-label"
-              id="test"
-              onBlur={onBlur}
-              value={value}
-              onChange={(e, state) => setValue(state.value)}
+              label="NumberInput label"
+              id="number-input"
               min={0}
               max={100}
+              value={10}
+              onChange={onChange}
+              translateWithId={translateWithId}
+            />
+          </StrictMode>
+        );
+
+        const input = screen.getByLabelText('NumberInput label');
+
+        expect(input).toHaveValue('10');
+
+        rerender(
+          <StrictMode>
+            <NumberInput
+              type="text"
+              label="NumberInput label"
+              id="number-input"
+              min={0}
+              max={100}
+              value={11}
+              onChange={onChange}
+              translateWithId={translateWithId}
+            />
+          </StrictMode>
+        );
+
+        await waitFor(() => {
+          expect(input).toHaveValue('11');
+        });
+        expect(onChange).not.toHaveBeenCalled();
+      });
+
+      describe('locale parsing and formatting', () => {
+        it('should parse and format numbers based on the default locale', async () => {
+          render(
+            <NumberInput
+              type="text"
+              label="NumberInput label"
+              id="number-input"
+              min={0}
+              defaultValue={15.01}
               step={1}
+              max={100}
               translateWithId={translateWithId}
             />
           );
-        };
 
-        render(<ControlledNumberInput />);
+          const input = screen.getByLabelText('NumberInput label');
 
-        const input = screen.getByLabelText('test-label');
-        await userEvent.click(input);
-        expect(input).toHaveValue('20.4');
+          expect(input).toHaveValue('15.01');
 
-        await userEvent.tab();
-        expect(onBlur).toHaveBeenCalledTimes(1);
-        expect(onBlur).toHaveBeenCalledWith(
-          expect.objectContaining({
-            target: expect.any(Object),
-          }),
-          20.4
-        );
+          await userEvent.click(screen.getByLabelText('increment'));
+          expect(input).toHaveValue('16.01');
+
+          await userEvent.click(screen.getByLabelText('decrement'));
+          expect(input).toHaveValue('15.01');
+
+          await userEvent.clear(input);
+
+          await userEvent.type(input, '3');
+          expect(input).toHaveValue('3');
+
+          await userEvent.type(input, '4');
+          expect(input).toHaveValue('34');
+
+          await userEvent.type(input, ',');
+          expect(input).toHaveValue('34,');
+
+          await userEvent.type(input, '8');
+          expect(input).toHaveValue('34,8');
+
+          await userEvent.type(input, '9');
+          expect(input).toHaveValue('34,89');
+
+          await userEvent.tab();
+          expect(input).toHaveValue('3,489');
+
+          await userEvent.clear(input);
+          await userEvent.type(input, '1234,567');
+          await userEvent.tab();
+          expect(input).toHaveValue('1,234,567');
+
+          await userEvent.clear(input);
+          await userEvent.type(input, '34.56');
+          await userEvent.tab();
+          expect(input).toHaveValue('34.56');
+
+          await userEvent.type(input, '99999');
+          await userEvent.tab();
+          expect(input).toHaveValue('34.57');
+        });
+        it('should parse and format numbers based on the given locale', async () => {
+          render(
+            <NumberInput
+              type="text"
+              locale="DE"
+              label="NumberInput label"
+              id="number-input"
+              min={0}
+              defaultValue={15.01}
+              step={1}
+              max={100}
+              translateWithId={translateWithId}
+            />
+          );
+
+          const input = screen.getByLabelText('NumberInput label');
+
+          expect(input).toHaveValue('15,01');
+
+          await userEvent.click(screen.getByLabelText('increment'));
+          expect(input).toHaveValue('16,01');
+
+          await userEvent.click(screen.getByLabelText('decrement'));
+          expect(input).toHaveValue('15,01');
+
+          await userEvent.clear(input);
+
+          await userEvent.type(input, '3');
+          expect(input).toHaveValue('3');
+
+          await userEvent.type(input, '4');
+          expect(input).toHaveValue('34');
+
+          await userEvent.type(input, ',');
+          expect(input).toHaveValue('34,');
+
+          await userEvent.type(input, '8');
+          expect(input).toHaveValue('34,8');
+
+          await userEvent.type(input, '9');
+          expect(input).toHaveValue('34,89');
+
+          await userEvent.tab();
+
+          expect(input).toHaveValue('34,89');
+
+          await userEvent.clear(input);
+
+          await userEvent.type(input, '1234,567');
+
+          await userEvent.tab();
+
+          expect(input).toHaveValue('1.234,567');
+
+          await userEvent.clear(input);
+
+          await userEvent.type(input, '34.56');
+
+          await userEvent.tab();
+
+          expect(input).toHaveValue('3.456');
+        });
+        it('should not call onChange until onBlur when input is parsed and formatted ', async () => {
+          const onChange = jest.fn();
+          render(
+            <NumberInput
+              type="text"
+              label="NumberInput label"
+              id="number-input"
+              min={0}
+              defaultValue={15.01}
+              step={1}
+              max={100}
+              onChange={onChange}
+              translateWithId={translateWithId}
+            />
+          );
+
+          const input = screen.getByLabelText('NumberInput label');
+
+          expect(input).toHaveValue('15.01');
+          await userEvent.type(input, '9');
+          expect(onChange).not.toHaveBeenCalled();
+          await userEvent.type(input, '9');
+          expect(onChange).not.toHaveBeenCalled();
+
+          await userEvent.tab();
+          expect(input).toHaveValue('15.02');
+          expect(onChange).toHaveBeenCalledWith(
+            expect.objectContaining({
+              target: expect.any(Object),
+            }),
+            expect.objectContaining({
+              value: 15.02,
+              direction: 'up',
+            })
+          );
+          expect(onChange).toHaveBeenCalledTimes(1);
+
+          await userEvent.click(screen.getByLabelText('increment'));
+          expect(input).toHaveValue('16.02');
+          expect(onChange).toHaveBeenCalledWith(
+            expect.objectContaining({
+              target: expect.any(Object),
+            }),
+            expect.objectContaining({
+              value: 16.02,
+              direction: 'up',
+            })
+          );
+          expect(onChange).toHaveBeenCalledTimes(2);
+
+          await userEvent.click(screen.getByLabelText('decrement'));
+          expect(onChange).toHaveBeenCalledWith(
+            expect.objectContaining({
+              target: expect.any(Object),
+            }),
+            expect.objectContaining({
+              value: 15.02,
+              direction: 'down',
+            })
+          );
+          expect(input).toHaveValue('15.02');
+          expect(onChange).toHaveBeenCalledTimes(3);
+        });
+        it('supports formatOptions prop', async () => {
+          render(
+            <NumberInput
+              type="text"
+              label="NumberInput label"
+              id="number-input"
+              min={0}
+              defaultValue={0.15}
+              step={0.05}
+              max={100}
+              formatOptions={{ style: 'percent' }}
+              translateWithId={translateWithId}
+            />
+          );
+
+          const input = screen.getByLabelText('NumberInput label');
+
+          expect(input).toHaveValue('15%');
+
+          await userEvent.click(screen.getByLabelText('increment'));
+          expect(input).toHaveValue('20%');
+        });
+        it('should throw an error if group seperator is in wrong position', async () => {
+          render(
+            <NumberInput
+              type="text"
+              label="NumberInput label"
+              id="number-input"
+              value=""
+              step={1}
+              validate={validateNumberSeparators}
+              translateWithId={translateWithId}
+              invalidText="test-invalid-text"
+            />
+          );
+          const input = screen.getByLabelText('NumberInput label');
+          await userEvent.type(input, '1,1');
+          await userEvent.tab();
+          expect(screen.getByText('test-invalid-text')).toBeInTheDocument();
+          expect(screen.getByRole('textbox')).toHaveAttribute('data-invalid');
+        });
+
+        it('should throw an error if group seperator is in wrong position for given locale', async () => {
+          render(
+            <NumberInput
+              type="text"
+              label="NumberInput label"
+              id="number-input"
+              locale="DE"
+              value=""
+              step={1}
+              validate={validateNumberSeparators}
+              translateWithId={translateWithId}
+              invalidText="test-invalid-text"
+            />
+          );
+          const input = screen.getByLabelText('NumberInput label');
+          await userEvent.type(input, '1.1');
+          await userEvent.tab();
+          expect(screen.getByText('test-invalid-text')).toBeInTheDocument();
+          expect(screen.getByRole('textbox')).toHaveAttribute('data-invalid');
+        });
+
+        it('should call `onBlur` with parsed value in controlled mode', async () => {
+          const onBlur = jest.fn();
+          const ControlledNumberInput = () => {
+            const [value, setValue] = useState(20.4);
+            return (
+              <NumberInput
+                type="text"
+                label="test-label"
+                id="test"
+                onBlur={onBlur}
+                value={value}
+                onChange={(e, state) => setValue(state.value)}
+                min={0}
+                max={100}
+                step={1}
+                translateWithId={translateWithId}
+              />
+            );
+          };
+
+          render(<ControlledNumberInput />);
+
+          const input = screen.getByLabelText('test-label');
+          await userEvent.click(input);
+          expect(input).toHaveValue('20.4');
+
+          await userEvent.tab();
+          expect(onBlur).toHaveBeenCalledTimes(1);
+          expect(onBlur).toHaveBeenCalledWith(
+            expect.objectContaining({
+              target: expect.any(Object),
+            }),
+            20.4
+          );
+        });
       });
     });
-  });
 
-  describe('validateNumberSeparators', () => {
-    it('should validate properly formatted numbers with grouping', () => {
-      expect(validateNumberSeparators('1,234', 'en-US')).toBe(true);
-      expect(validateNumberSeparators('1,234,567', 'en-US')).toBe(true);
-      expect(validateNumberSeparators('1,234.56', 'en-US')).toBe(true);
-    });
+    describe('validateNumberSeparators', () => {
+      it('should validate properly formatted numbers with grouping', () => {
+        expect(validateNumberSeparators('1,234', 'en-US')).toBe(true);
+        expect(validateNumberSeparators('1,234,567', 'en-US')).toBe(true);
+        expect(validateNumberSeparators('1,234.56', 'en-US')).toBe(true);
+      });
 
-    it('should validate numbers without grouping', () => {
-      expect(validateNumberSeparators('1234', 'en-US')).toBe(true);
-      expect(validateNumberSeparators('1234567', 'en-US')).toBe(true);
-      expect(validateNumberSeparators('1234.56', 'en-US')).toBe(true);
-    });
+      it('should validate numbers without grouping', () => {
+        expect(validateNumberSeparators('1234', 'en-US')).toBe(true);
+        expect(validateNumberSeparators('1234567', 'en-US')).toBe(true);
+        expect(validateNumberSeparators('1234.56', 'en-US')).toBe(true);
+      });
 
-    it('should reject improperly formatted grouping', () => {
-      expect(validateNumberSeparators('12,34', 'en-US')).toBe(false);
-      expect(validateNumberSeparators('1,23,456', 'en-US')).toBe(false);
-      expect(validateNumberSeparators('1,2345', 'en-US')).toBe(false);
-    });
+      it('should reject improperly formatted grouping', () => {
+        expect(validateNumberSeparators('12,34', 'en-US')).toBe(false);
+        expect(validateNumberSeparators('1,23,456', 'en-US')).toBe(false);
+        expect(validateNumberSeparators('1,2345', 'en-US')).toBe(false);
+      });
 
-    it('should validate scientific notation', () => {
-      expect(validateNumberSeparators('1e3', 'en-US')).toBe(true);
-      expect(validateNumberSeparators('1.5e2', 'en-US')).toBe(true);
-      expect(validateNumberSeparators('2e-3', 'en-US')).toBe(true);
-      expect(validateNumberSeparators('1.5e+10', 'en-US')).toBe(true);
-    });
+      it('should validate scientific notation', () => {
+        expect(validateNumberSeparators('1e3', 'en-US')).toBe(true);
+        expect(validateNumberSeparators('1.5e2', 'en-US')).toBe(true);
+        expect(validateNumberSeparators('2e-3', 'en-US')).toBe(true);
+        expect(validateNumberSeparators('1.5e+10', 'en-US')).toBe(true);
+      });
 
-    it('should validate negative numbers', () => {
-      expect(validateNumberSeparators('-1234', 'en-US')).toBe(true);
-      expect(validateNumberSeparators('-1,234', 'en-US')).toBe(true);
-      expect(validateNumberSeparators('-1,234.56', 'en-US')).toBe(true);
-    });
+      it('should validate negative numbers', () => {
+        expect(validateNumberSeparators('-1234', 'en-US')).toBe(true);
+        expect(validateNumberSeparators('-1,234', 'en-US')).toBe(true);
+        expect(validateNumberSeparators('-1,234.56', 'en-US')).toBe(true);
+      });
 
-    it('should validate different locale formats', () => {
-      expect(validateNumberSeparators('1.234,56', 'de-DE')).toBe(true);
-      expect(validateNumberSeparators('1 234,56', 'fr-FR')).toBe(true);
-    });
+      it('should validate different locale formats', () => {
+        expect(validateNumberSeparators('1.234,56', 'de-DE')).toBe(true);
+        expect(validateNumberSeparators('1 234,56', 'fr-FR')).toBe(true);
+      });
 
-    it('should validate Eastern Arabic numerals', () => {
-      expect(validateNumberSeparators('٢,٣٣٣', 'ar')).toBe(true);
-      expect(validateNumberSeparators('٢٣٣٬٤٥٦', 'ar')).toBe(true);
-    });
+      it('should validate Eastern Arabic numerals', () => {
+        expect(validateNumberSeparators('٢,٣٣٣', 'ar')).toBe(true);
+        expect(validateNumberSeparators('٢٣٣٬٤٥٦', 'ar')).toBe(true);
+      });
 
-    it('should validate Devanagari numerals', () => {
-      expect(validateNumberSeparators('१,२३४', 'hi-IN')).toBe(true);
-    });
+      it('should validate Devanagari numerals', () => {
+        expect(validateNumberSeparators('१,२३४', 'hi-IN')).toBe(true);
+      });
 
-    it('should validate Kanji numerals', () => {
-      expect(validateNumberSeparators('一,二三四', 'ja')).toBe(true);
-    });
+      it('should validate Kanji numerals', () => {
+        expect(validateNumberSeparators('一,二三四', 'ja')).toBe(true);
+      });
 
-    it('should allow empty string', () => {
-      expect(validateNumberSeparators('', 'en-US')).toBe(true);
-    });
+      it('should allow empty string', () => {
+        expect(validateNumberSeparators('', 'en-US')).toBe(true);
+      });
 
-    it('should handle Arabic separators', () => {
-      expect(validateNumberSeparators('٢,٣٣٣.٣٣', 'ar')).toBe(true);
-    });
+      it('should handle Arabic separators', () => {
+        expect(validateNumberSeparators('٢,٣٣٣.٣٣', 'ar')).toBe(true);
+      });
 
-    it('should reject invalid separator positions for German locale', () => {
-      expect(validateNumberSeparators('12.34', 'de-DE')).toBe(false);
-      expect(validateNumberSeparators('1.23.456', 'de-DE')).toBe(false);
-    });
+      it('should reject invalid separator positions for German locale', () => {
+        expect(validateNumberSeparators('12.34', 'de-DE')).toBe(false);
+        expect(validateNumberSeparators('1.23.456', 'de-DE')).toBe(false);
+      });
 
-    it('should reject invalid separator positions for French locale', () => {
-      expect(validateNumberSeparators('12 34', 'fr-FR')).toBe(false);
-      expect(validateNumberSeparators('1 23 456', 'fr-FR')).toBe(false);
-    });
+      it('should reject invalid separator positions for French locale', () => {
+        expect(validateNumberSeparators('12 34', 'fr-FR')).toBe(false);
+        expect(validateNumberSeparators('1 23 456', 'fr-FR')).toBe(false);
+      });
 
-    it('should validate Arabic numerals with proper grouping', () => {
-      expect(validateNumberSeparators('١١١', 'ar-EG')).toBe(true);
-      expect(validateNumberSeparators('١٬١١١', 'ar-EG')).toBe(true);
-      expect(validateNumberSeparators('١,١١١', 'ar-EG')).toBe(true);
-      expect(validateNumberSeparators('١٬٠٠٤', 'ar-EG')).toBe(true);
-      expect(validateNumberSeparators('١,٠٠٤', 'ar-EG')).toBe(true);
-    });
+      it('should validate Arabic numerals with proper grouping', () => {
+        expect(validateNumberSeparators('١١١', 'ar-EG')).toBe(true);
+        expect(validateNumberSeparators('١٬١١١', 'ar-EG')).toBe(true);
+        expect(validateNumberSeparators('١,١١١', 'ar-EG')).toBe(true);
+        expect(validateNumberSeparators('١٬٠٠٤', 'ar-EG')).toBe(true);
+        expect(validateNumberSeparators('١,٠٠٤', 'ar-EG')).toBe(true);
+      });
 
-    it('should reject Arabic numerals with wrong separator positions', () => {
-      expect(validateNumberSeparators('١,١', 'ar-EG')).toBe(false);
-      expect(validateNumberSeparators('١١,١١', 'ar-EG')).toBe(false);
-      expect(validateNumberSeparators('١١,١', 'ar-EG')).toBe(false);
-      expect(validateNumberSeparators('١٬١', 'ar-EG')).toBe(false);
-      expect(validateNumberSeparators('١١٬١١', 'ar-EG')).toBe(false);
-    });
+      it('should reject Arabic numerals with wrong separator positions', () => {
+        expect(validateNumberSeparators('١,١', 'ar-EG')).toBe(false);
+        expect(validateNumberSeparators('١١,١١', 'ar-EG')).toBe(false);
+        expect(validateNumberSeparators('١١,١', 'ar-EG')).toBe(false);
+        expect(validateNumberSeparators('١٬١', 'ar-EG')).toBe(false);
+        expect(validateNumberSeparators('١١٬١١', 'ar-EG')).toBe(false);
+      });
 
-    it('should validate negative numbers across different locales', () => {
-      // English US
-      expect(validateNumberSeparators('-1', 'en-US')).toBe(true);
-      expect(validateNumberSeparators('-12', 'en-US')).toBe(true);
-      expect(validateNumberSeparators('-123', 'en-US')).toBe(true);
-      expect(validateNumberSeparators('-1234', 'en-US')).toBe(true);
-      expect(validateNumberSeparators('-1,234', 'en-US')).toBe(true);
-      expect(validateNumberSeparators('-1,234,567', 'en-US')).toBe(true);
-      expect(validateNumberSeparators('-1.5', 'en-US')).toBe(true);
-      expect(validateNumberSeparators('-1,234.56', 'en-US')).toBe(true);
+      it('should validate negative numbers across different locales', () => {
+        // English US
+        expect(validateNumberSeparators('-1', 'en-US')).toBe(true);
+        expect(validateNumberSeparators('-12', 'en-US')).toBe(true);
+        expect(validateNumberSeparators('-123', 'en-US')).toBe(true);
+        expect(validateNumberSeparators('-1234', 'en-US')).toBe(true);
+        expect(validateNumberSeparators('-1,234', 'en-US')).toBe(true);
+        expect(validateNumberSeparators('-1,234,567', 'en-US')).toBe(true);
+        expect(validateNumberSeparators('-1.5', 'en-US')).toBe(true);
+        expect(validateNumberSeparators('-1,234.56', 'en-US')).toBe(true);
 
-      // German
-      expect(validateNumberSeparators('-1', 'de-DE')).toBe(true);
-      expect(validateNumberSeparators('-1234', 'de-DE')).toBe(true);
-      expect(validateNumberSeparators('-1.234', 'de-DE')).toBe(true);
-      expect(validateNumberSeparators('-1,5', 'de-DE')).toBe(true);
-      expect(validateNumberSeparators('-1.234,56', 'de-DE')).toBe(true);
+        // German
+        expect(validateNumberSeparators('-1', 'de-DE')).toBe(true);
+        expect(validateNumberSeparators('-1234', 'de-DE')).toBe(true);
+        expect(validateNumberSeparators('-1.234', 'de-DE')).toBe(true);
+        expect(validateNumberSeparators('-1,5', 'de-DE')).toBe(true);
+        expect(validateNumberSeparators('-1.234,56', 'de-DE')).toBe(true);
 
-      // French
-      expect(validateNumberSeparators('-1', 'fr-FR')).toBe(true);
-      expect(validateNumberSeparators('-1234', 'fr-FR')).toBe(true);
-      expect(validateNumberSeparators('-1 234', 'fr-FR')).toBe(true);
-      expect(validateNumberSeparators('-1,5', 'fr-FR')).toBe(true);
-      expect(validateNumberSeparators('-1 234,56', 'fr-FR')).toBe(true);
-    });
+        // French
+        expect(validateNumberSeparators('-1', 'fr-FR')).toBe(true);
+        expect(validateNumberSeparators('-1234', 'fr-FR')).toBe(true);
+        expect(validateNumberSeparators('-1 234', 'fr-FR')).toBe(true);
+        expect(validateNumberSeparators('-1,5', 'fr-FR')).toBe(true);
+        expect(validateNumberSeparators('-1 234,56', 'fr-FR')).toBe(true);
+      });
 
-    it('should validate negative Arabic numerals with Western digits', () => {
-      expect(validateNumberSeparators('-1', 'ar-EG')).toBe(true);
-      expect(validateNumberSeparators('-1234', 'ar-EG')).toBe(true);
-      expect(validateNumberSeparators('-1,234', 'ar-EG')).toBe(true);
-      expect(validateNumberSeparators('-1.5', 'ar-EG')).toBe(true);
-      expect(validateNumberSeparators('-1,234.56', 'ar-EG')).toBe(true);
-    });
+      it('should validate negative Arabic numerals with Western digits', () => {
+        expect(validateNumberSeparators('-1', 'ar-EG')).toBe(true);
+        expect(validateNumberSeparators('-1234', 'ar-EG')).toBe(true);
+        expect(validateNumberSeparators('-1,234', 'ar-EG')).toBe(true);
+        expect(validateNumberSeparators('-1.5', 'ar-EG')).toBe(true);
+        expect(validateNumberSeparators('-1,234.56', 'ar-EG')).toBe(true);
+      });
 
-    it('should handle both Arabic comma (٬) and regular comma (,)', () => {
-      expect(validateNumberSeparators('١٬١١١', 'ar-EG')).toBe(true);
-      expect(validateNumberSeparators('١,١١١', 'ar-EG')).toBe(true);
-      expect(validateNumberSeparators('١٬٠٠٤', 'ar-EG')).toBe(true);
-      expect(validateNumberSeparators('١,٠٠٤', 'ar-EG')).toBe(true);
-    });
+      it('should handle both Arabic comma (٬) and regular comma (,)', () => {
+        expect(validateNumberSeparators('١٬١١١', 'ar-EG')).toBe(true);
+        expect(validateNumberSeparators('١,١١١', 'ar-EG')).toBe(true);
+        expect(validateNumberSeparators('١٬٠٠٤', 'ar-EG')).toBe(true);
+        expect(validateNumberSeparators('١,٠٠٤', 'ar-EG')).toBe(true);
+      });
 
-    it('should reject numbers with mixed valid and invalid grouping', () => {
-      expect(validateNumberSeparators('1,23,456', 'en-US')).toBe(false);
-      expect(validateNumberSeparators('12,345,6', 'en-US')).toBe(false);
-      expect(validateNumberSeparators('١,٢٣,٤٥٦', 'ar-EG')).toBe(false);
-      expect(validateNumberSeparators('١٢,٣٤٥,٦', 'ar-EG')).toBe(false);
-    });
+      it('should reject numbers with mixed valid and invalid grouping', () => {
+        expect(validateNumberSeparators('1,23,456', 'en-US')).toBe(false);
+        expect(validateNumberSeparators('12,345,6', 'en-US')).toBe(false);
+        expect(validateNumberSeparators('١,٢٣,٤٥٦', 'ar-EG')).toBe(false);
+        expect(validateNumberSeparators('١٢,٣٤٥,٦', 'ar-EG')).toBe(false);
+      });
 
-    it('should fall back to basic number validation when separators cannot be detected', () => {
-      const numberFormatSpy = jest
-        .spyOn(Intl, 'NumberFormat')
-        .mockImplementation(() => ({
-          format: () => '123456789',
-        }));
+      it('should fall back to basic number validation when separators cannot be detected', () => {
+        const numberFormatSpy = jest
+          .spyOn(Intl, 'NumberFormat')
+          .mockImplementation(() => ({
+            format: () => '123456789',
+          }));
 
-      expect(validateNumberSeparators('1234', 'en-US')).toBe(true);
+        expect(validateNumberSeparators('1234', 'en-US')).toBe(true);
 
-      numberFormatSpy.mockRestore();
+        numberFormatSpy.mockRestore();
+      });
     });
   });
 
