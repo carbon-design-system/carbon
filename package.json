@@ -39,7 +39,7 @@
     "flatpickr@4.6.13": "patch:flatpickr@npm%3A4.6.13#./.yarn/patches/flatpickr-npm-4.6.13-06399933fc.patch",
     "@octokit/rest": "^22.0.0",
     "eslint": "9.39.4",
-    "typescript-eslint": "8.46.2"
+    "typescript-eslint": "8.58.2"
   },
   "devDependencies": {
     "@babel/core": "^7.27.3",
