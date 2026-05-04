@@ -66,6 +66,24 @@
         display: flex;
       }
     }
+
+    .#{$prefix}--number-input-wrapper {
+      position: relative;
+      display: flex;
+    }
+
+    // TODO: remove this class after xs support on NumberInput
+    .#{$prefix}--number-input-wrapper input {
+      block-size: layout.size('height');
+    }
+
+    .#{$prefix}--number-input-wrapper__icon {
+      position: absolute;
+      inset-block-start: 50%;
+      inset-inline-end: calc((layout.size('height') - $spacing-05) / 2);
+      pointer-events: none;
+      transform: translateY(-50%);
+    }
   }
 
   .#{$prefix}--pagination--sm {

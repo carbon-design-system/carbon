@@ -31,6 +31,7 @@ export interface FeatureFlagsProps {
   enableV12DynamicFloatingStyles?: boolean;
   enableEnhancedFileUploader?: boolean;
   enablePresence?: boolean;
+  enableV12Pagination?: boolean;
 }
 
 // Reuse the runtime scope shape from `@carbon/feature-flags` directly. A local
@@ -62,6 +63,7 @@ export const FeatureFlags = ({
   enableV12DynamicFloatingStyles = false,
   enableEnhancedFileUploader = false,
   enablePresence = false,
+  enableV12Pagination = false,
 }: FeatureFlagsProps) => {
   const parentScope = useContext(FeatureFlagContext);
 
@@ -78,6 +80,7 @@ export const FeatureFlags = ({
       'enable-v12-dynamic-floating-styles': enableV12DynamicFloatingStyles,
       'enable-enhanced-file-uploader': enableEnhancedFileUploader,
       'enable-presence': enablePresence,
+      'enable-v12-pagination': enableV12Pagination,
       ...flags,
     };
 
@@ -95,6 +98,7 @@ export const FeatureFlags = ({
     enableV12DynamicFloatingStyles,
     enableEnhancedFileUploader,
     enablePresence,
+    enableV12Pagination,
     flags,
     parentScope,
   ]);
@@ -127,6 +131,7 @@ FeatureFlags.propTypes = {
   enableV12DynamicFloatingStyles: PropTypes.bool,
   enableEnhancedFileUploader: PropTypes.bool,
   enablePresence: PropTypes.bool,
+  enableV12Pagination: PropTypes.bool,
 };
 
 /**

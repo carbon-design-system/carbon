@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { CaretLeft, CaretRight } from '@carbon/icons-react';
+import { CaretLeft, CaretRight, Edit, Save } from '@carbon/icons-react';
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 
 import { IconButton } from '../IconButton';
@@ -15,11 +15,10 @@ import Select from '../Select';
 import SelectItem from '../SelectItem';
 import cx from 'classnames';
 import isEqual from 'react-fast-compare';
+import { useFeatureFlag } from '../FeatureFlags';
 import { useFallbackId } from '../../internal/useId';
 import { usePreviousValue } from '../../internal/usePreviousValue';
 import { usePrefix } from '../../internal/usePrefix';
-
-export const PAGINATION_PAGE_NUMBER_THRESHOLD = 30;
 
 type ExcludedAttributes = 'id' | 'onChange';
 
@@ -214,6 +213,7 @@ const Pagination = React.forwardRef(
     ref: React.Ref<HTMLDivElement>
   ) => {
     const prefix = usePrefix();
+    const enableV12Pagination = useFeatureFlag('enable-v12-pagination');
     const inputId = useFallbackId(id?.toString());
     const backBtnRef = useRef<HTMLButtonElement>(null);
     const forwardBtnRef = useRef<HTMLButtonElement>(null);
@@ -231,6 +231,7 @@ const Pagination = React.forwardRef(
 
     const [pageSizes, setPageSizes] = useState(normalizedControlledPageSizes);
     const [page, setPage] = useState(controlledPage);
+    const [pageInputValue, setPageInputValue] = useState(page);
     const [focusTarget, setFocusTarget] = useState<
       'backward' | 'forward' | null
     >(null);
@@ -250,10 +251,10 @@ const Pagination = React.forwardRef(
     const backButtonDisabled = disabled || page === 1;
     const forwardButtonDisabled =
       disabled || (page === totalPages && !pagesUnknown);
-    const selectItems =
-      totalPages <= PAGINATION_PAGE_NUMBER_THRESHOLD
-        ? renderSelectItems(totalPages)
-        : [];
+    // TODO: V12 - Remove
+    const selectItems = enableV12Pagination
+      ? undefined
+      : renderSelectItems(totalPages);
 
     const focusMap = {
       backward: backBtnRef,
@@ -377,9 +378,9 @@ const Pagination = React.forwardRef(
       }
     }
 
-    function handlePageInputChange(event, { value }) {
-      const newPage = Math.max(1, Math.min(value, totalPages));
-
+    // TODO: V12 - Remove
+    function handlePageSelectChange(event) {
+      const newPage = event.target.value;
       setPage(newPage);
 
       if (onChange) {
@@ -390,9 +391,24 @@ const Pagination = React.forwardRef(
       }
     }
 
+    function handlePageInputChange(event) {
+      const newPage = Math.max(0, Math.min(event.target.value, totalPages));
+      setPageInputValue(newPage);
+    }
+
+    function handlePageInputKeydown(event) {
+      const { key } = event;
+      if (key === 'Enter') {
+        const newPage = pageInputValue === 0 ? 1 : Number(pageInputValue);
+        setPage(newPage);
+        setPageInputValue(newPage);
+      }
+    }
+
     function incrementPage() {
       const nextPage = page + 1;
       setPage(nextPage);
+      setPageInputValue(nextPage);
 
       // when the increment button reaches the last page,
       // the icon button becomes disabled and the focus shifts to `main`
@@ -414,6 +430,7 @@ const Pagination = React.forwardRef(
     function decrementPage() {
       const nextPage = page - 1;
       setPage(nextPage);
+      setPageInputValue(nextPage);
 
       // when the decrement button reaches the first page,
       // the icon button becomes disabled and the focus shifts to `main`
@@ -481,27 +498,39 @@ const Pagination = React.forwardRef(
             </span>
           ) : (
             <>
-              {totalPages > PAGINATION_PAGE_NUMBER_THRESHOLD ? (
-                <NumberInput
-                  id={`${prefix}-pagination-input-${inputId}`}
-                  className={`${prefix}--number-input__page-number`}
-                  label={pageSelectLabelText(totalPages)}
-                  hideLabel
-                  allowEmpty
-                  placeholder="1"
-                  hideSteppers
-                  min={1}
-                  max={totalPages}
-                  value={page}
-                  size={size}
-                  style={{
-                    inlineSize: `calc(${String(page).length}ch + 2rem)`,
-                  }}
-                  validate={() => true}
-                  onChange={handlePageInputChange}
-                  disabled={pageInputDisabled || disabled}
-                />
+              {enableV12Pagination ? (
+                <div className={`${prefix}--number-input-wrapper`}>
+                  <NumberInput
+                    id={`${prefix}-pagination-input-${inputId}`}
+                    className={`${prefix}--number-input__page-number`}
+                    label={pageSelectLabelText(totalPages)}
+                    hideLabel
+                    inputMode="text"
+                    allowEmpty
+                    hideSteppers
+                    placeholder="#"
+                    min={0}
+                    max={totalPages}
+                    value={pageInputValue === 0 ? '' : pageInputValue}
+                    size={size} // Number input doesn't have xs support yet
+                    style={{
+                      inlineSize: `calc(${String(pageInputValue).length}ch + 1rem + var(--cds-layout-size-height-local))`,
+                    }}
+                    onChange={handlePageInputChange}
+                    onKeyDown={handlePageInputKeydown}
+                    onBlur={() => {
+                      setPageInputValue(page);
+                    }}
+                    disabled={pageInputDisabled || disabled}
+                  />
+                  {page !== pageInputValue ? (
+                    <Save className={`${prefix}--number-input-wrapper__icon`} />
+                  ) : (
+                    <Edit className={`${prefix}--number-input-wrapper__icon`} />
+                  )}
+                </div>
               ) : (
+                // TODO: V12 - Remove
                 <Select
                   id={`${prefix}-pagination-select-${inputId}-right`}
                   className={`${prefix}--select__page-number`}
@@ -509,7 +538,7 @@ const Pagination = React.forwardRef(
                   inline
                   hideLabel
                   size={size}
-                  onChange={handlePageInputChange}
+                  onChange={handlePageSelectChange}
                   value={page}
                   key={page}
                   disabled={pageInputDisabled || disabled}>

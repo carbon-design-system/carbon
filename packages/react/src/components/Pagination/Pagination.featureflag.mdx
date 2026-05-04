@@ -1,0 +1,65 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+# Pagination Feature Flags
+
+<Meta title="Components/Pagination/Feature Flag" name="Flag details" />
+
+[Feature flags](/docs/getting-started-feature-flags--overview) have been added
+to Pagination to enable improved performance for handling large numbers of
+pages.
+
+## Enable v12 Pagination
+
+The `enable-v12-pagination` flag switches the page selection control from a
+dropdown select to a number input field in the Pagination component.
+
+### Current behavior (flag disabled)
+
+By default, the Pagination component uses a dropdown select for page navigation.
+This dropdown renders a `SelectItem` for every page, which can cause performance
+issues when there are many pages (e.g., hundreds or thousands of pages).
+
+### New behavior (flag enabled)
+
+When the `enable-v12-pagination` flag is enabled, the page select dropdown is
+replaced with a number input field. This provides better performance by avoiding
+the need to render potentially hundreds or thousands of select items in the DOM.
+After inputting the value in the page number input field, pressing Enter updates
+the page. Blur reverts to the previous value. If Enter is pressed with an empty
+value, the page sets to 1.
+
+### Usage
+
+To enable this feature flag, wrap your application or component with the
+`FeatureFlags` component:
+
+```jsx
+import { FeatureFlags } from '@carbon/react';
+
+<FeatureFlags enableV12Pagination>
+  <App />
+</FeatureFlags>;
+```
+
+Or use it for a specific Pagination instance:
+
+```jsx
+import { FeatureFlags, Pagination } from '@carbon/react';
+
+<FeatureFlags enableV12Pagination>
+  <Pagination
+    pageSizes={[10, 20, 30, 40, 50]}
+    totalItems={1000}
+    pageSize={10}
+  />
+</FeatureFlags>;
+```
+
+### Benefits
+
+- **Improved performance**: Avoids rendering large numbers of DOM elements when
+  dealing with many pages
+- **Better scalability**: Number input handles any number of pages efficiently
+  without performance degradation
+- **Reduced memory footprint**: Eliminates the overhead of maintaining hundreds
+  or thousands of select items in memory
