@@ -5,7 +5,6 @@
  * LICENSE file in the root directory of this source tree.
  */
 import React from 'react';
-import { action } from 'storybook/actions';
 import Link from '../../Link';
 
 export const rows = [
@@ -100,5 +99,7 @@ export const headers = [
   },
 ];
 
-export const batchActionClick = (selectedRows) => () =>
-  action('Batch action click')(selectedRows);
+export const batchActionClick =
+  (selectedRows, onClick = () => {}) =>
+  () =>
+    onClick(selectedRows);
