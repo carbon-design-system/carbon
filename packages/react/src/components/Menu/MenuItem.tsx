@@ -133,9 +133,7 @@ export const MenuItem = forwardRef<HTMLLIElement, MenuItemProps>(
           }
 
           setSubmenuOpen(false);
-          if (refs.floating.current?.contains(document.activeElement)) {
-            menuItem.current?.focus();
-          }
+          menuItem.current?.focus();
         }
       },
       placement: rtl ? 'left-start' : 'right-start',
