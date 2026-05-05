@@ -4,6 +4,7 @@ on:
   schedule:
     # Run every Tuesday at 09:00AM CT, 02:00PM UTC
     - cron: '0 14 * * TUE'
+      timezone: 'America/New_York'
 
 jobs:
   post-reminder-to-carbon-react:
@@ -12,7 +13,7 @@ jobs:
     steps:
       - name: Send custom JSON data to Slack workflow
         id: slack
-        uses: slackapi/slack-github-action@91efab103c0de0a537f72a35f6b8cda0ee76bf0a # v2.1.1
+        uses: slackapi/slack-github-action@45a88b9581bfab2566dc881e2cd66d334e621e2c # v3.0.3
         with:
           webhook: ${{ secrets.SLACK_WEBHOOK_URL }}
           webhook-type: incoming-webhook
@@ -50,7 +51,7 @@ jobs:
                   "type": "section",
                   "text": {
                     "type": "mrkdwn",
-                    "text": "*Carbon Developer Office Hours (Americas)* is a bi-weekly opportunity on Tuesdays at 10:00 am ET to discuss topics like these and get help from the team, scheduled for American time zones (ET, CT, MT, PT, UTC). Developers from the Carbon team will be available to help and answer questions. While it's very informal, please be prepared to share your screen and show your issue!"
+                    "text": "*Carbon Developer Office Hours (Americas)* is a bi-weekly opportunity on Tuesdays at 11:30 am ET to discuss topics like these and get help from the team, scheduled for American time zones (ET, CT, MT, PT, UTC). Developers from the Carbon team will be available to help and answer questions. While it's very informal, please be prepared to share your screen and show your issue!"
                   }
                 },
                 {
@@ -104,7 +105,7 @@ jobs:
     steps:
       - name: Send custom JSON data to Slack workflow
         id: slack
-        uses: slackapi/slack-github-action@91efab103c0de0a537f72a35f6b8cda0ee76bf0a # v2.1.1
+        uses: slackapi/slack-github-action@45a88b9581bfab2566dc881e2cd66d334e621e2c # v3.0.3
         with:
           webhook: ${{ secrets.SLACK_WEBHOOK_URL }}
           webhook-type: incoming-webhook
@@ -142,7 +143,7 @@ jobs:
                   "type": "section",
                   "text": {
                     "type": "mrkdwn",
-                    "text": "*Carbon Developer Office Hours (Americas)* is a bi-weekly opportunity on Tuesdays at 10:00 am ET to discuss topics like these and get help from the team, scheduled for American time zones (ET, CT, MT, PT, UTC). Developers from the Carbon team will be available to help and answer questions. While it's very informal, please be prepared to share your screen and show your issue!"
+                    "text": "*Carbon Developer Office Hours (Americas)* is a bi-weekly opportunity on Tuesdays at 11:30 am ET to discuss topics like these and get help from the team, scheduled for American time zones (ET, CT, MT, PT, UTC). Developers from the Carbon team will be available to help and answer questions. While it's very informal, please be prepared to share your screen and show your issue!"
                   }
                 },
                 {
@@ -196,7 +197,7 @@ jobs:
     steps:
       - name: Send custom JSON data to Slack workflow
         id: slack
-        uses: slackapi/slack-github-action@91efab103c0de0a537f72a35f6b8cda0ee76bf0a # v2.1.1
+        uses: slackapi/slack-github-action@45a88b9581bfab2566dc881e2cd66d334e621e2c # v3.0.3
         with:
           webhook: ${{ secrets.SLACK_WEBHOOK_URL }}
           webhook-type: incoming-webhook
@@ -234,7 +235,7 @@ jobs:
                   "type": "section",
                   "text": {
                     "type": "mrkdwn",
-                    "text": "*Carbon Developer Office Hours (Americas)* is a bi-weekly opportunity on Tuesdays at 10:00 am ET to discuss topics like these and get help from the team, scheduled for American time zones (ET, CT, MT, PT, UTC). Developers from the Carbon team will be available to help and answer questions. While it's very informal, please be prepared to share your screen and show your issue!"
+                    "text": "*Carbon Developer Office Hours (Americas)* is a bi-weekly opportunity on Tuesdays at 11:30 am ET to discuss topics like these and get help from the team, scheduled for American time zones (ET, CT, MT, PT, UTC). Developers from the Carbon team will be available to help and answer questions. While it's very informal, please be prepared to share your screen and show your issue!"
                   }
                 },
                 {

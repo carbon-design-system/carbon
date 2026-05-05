@@ -1,0 +1,12 @@
+name: Validate PR template
+description: Validate that a pull request body follows the repository PR template
+runs:
+  using: composite
+  steps:
+    - uses: actions/github-script@ed597411d8f924073f98dfc5c65a23a2325f34cd # v8.0.0
+      env:
+        ACTION_PATH: ${{ github.action_path }}
+      with:
+        script: |
+          const validatePRTemplate = require(`${process.env.ACTION_PATH}/index.js`);
+          await validatePRTemplate({ github, context, core });

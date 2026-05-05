@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2025
+ * Copyright IBM Corp. 2025, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -75,6 +75,16 @@ describe('cds-password-input', () => {
     ).to.be.true;
   });
 
+  it('should render divider when isFluid is true', async () => {
+    const el = await fixture(html`
+      <cds-password-input isFluid="true" label="Password"></cds-password-input>
+    `);
+
+    const divider = el.shadowRoot.querySelector('.cds--text-input__divider');
+    expect(divider).to.exist;
+    expect(divider.tagName.toLowerCase()).to.equal('hr');
+  });
+
   it('should apply hide-password-label attribute', async () => {
     const el = await fixture(html`
       <cds-password-input
@@ -136,6 +146,16 @@ describe('cds-password-input', () => {
     const classList = input?.classList || [];
     expect(
       Array.from(classList).some((cls) => cls.includes('--text-input--sm'))
+    ).to.be.true;
+
+    const fieldWrapper = el.shadowRoot.querySelector(
+      '.cds--text-input__field-wrapper'
+    );
+    const fieldWrapperClassList = fieldWrapper?.classList || [];
+    expect(
+      Array.from(fieldWrapperClassList).some((cls) =>
+        cls.includes('--layout--size-sm')
+      )
     ).to.be.true;
   });
 

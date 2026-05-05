@@ -14,9 +14,11 @@ collect:
         - active
         - ai-text
         - ai-text-label
+        - alert
         - align
         - alignment
         - alignment-axis-offset
+        - allow-custom-value
         - allow-empty
         - aria-current
         - aria-label
@@ -39,8 +41,11 @@ collect:
         - caret
         - checked
         - checkmark-label
+        - clear-selection-description
         - clear-selection-label
+        - clear-selection-text
         - clickable
+        - close-button-label
         - close-button-label-text
         - close-icon-description
         - close-on-activation
@@ -49,6 +54,8 @@ collect:
         - color-scheme
         - cols
         - condensed
+        - contained
+        - container-class
         - counter-mode
         - danger-description
         - data-table
@@ -61,6 +68,7 @@ collect:
         - direction
         - disable-wheel
         - disabled
+        - dismissable
         - download
         - dropShadow
         - enable-counter
@@ -71,13 +79,17 @@ collect:
         - feedback
         - feedback-timeout
         - filter
+        - filterable
         - filtered
         - flipped
+        - format-options
         - full-width
         - has-custom-icon
         - has-focus
         - has-main-content
         - has-rounded-corners
+        - has-scrolling-content
+        - has-three-buttons
         - hasCustomIcon
         - heading
         - helper-text
@@ -85,6 +97,7 @@ collect:
         - hide-close-button
         - hide-divider
         - hide-label
+        - hide-password-label
         - hide-steppers
         - hidePasswordLabel
         - highContrast
@@ -93,14 +106,18 @@ collect:
         - hreflang
         - icon
         - icon-description
+        - icon-size
         - id
         - increment-button-assistive-text
         - indeterminate
         - index
         - inline
+        - input-label
+        - input-mode
         - invalid
         - invalid-text
         - is-active
+        - is-condensed
         - is-expressive
         - is-not-child-of-header
         - is-selectable
@@ -111,6 +128,7 @@ collect:
         - kind
         - label
         - label-position
+        - label-styles-disable
         - label-text
         - large
         - leave-delay-ms
@@ -118,6 +136,10 @@ collect:
         - legend-text
         - lineCount
         - link-role
+        - loading-description
+        - loading-icon-description
+        - loading-status
+        - loading-success-delay
         - locale
         - low-contrast
         - max
@@ -130,6 +152,10 @@ collect:
         - nested
         - odd
         - oncds-checkbox-changed
+        - oncds-combo-box-beingselected
+        - oncds-combo-box-beingtoggled
+        - oncds-combo-box-selected
+        - oncds-combo-box-toggled
         - oncds-content-switcher-beingselected
         - oncds-content-switcher-selected
         - oncds-dropdown-beingselected
@@ -137,6 +163,12 @@ collect:
         - oncds-dropdown-selected
         - oncds-dropdown-toggled
         - oncds-header-menu-button-toggled
+        - oncds-modal-beingclosed
+        - oncds-modal-closed
+        - oncds-multi-select-beingselected
+        - oncds-multi-select-beingtoggled
+        - oncds-multi-select-selected
+        - oncds-multi-select-toggled
         - oncds-notification-beingclosed
         - oncds-notification-closed
         - oncds-number-input
@@ -169,6 +201,7 @@ collect:
         - pattern
         - ping
         - placeholder
+        - prevent-close
         - prevent-close-on-click-outside
         - previousValue
         - radio
@@ -182,15 +215,20 @@ collect:
         - revert-label
         - role
         - rows
+        - select-all
         - selected
         - selected-index
         - selectedIndex
+        - selection-feedback
         - selection-label
         - selection-mode
         - selection-name
         - selection-value
         - selector-initial-focus
         - shortcut
+        - should-filter-item
+        - should-submit-on-enter
+        - show-password-label
         - show-password-visibility-toggle
         - showPasswordLabel
         - size
@@ -199,6 +237,7 @@ collect:
         - status
         - status-icon-description
         - step
+        - step-start-value
         - subtitle
         - tab-index
         - tabTip
@@ -219,6 +258,7 @@ collect:
         - total-items
         - trigger-content
         - type
+        - typeahead
         - use-zebra-styles
         - validity-message
         - value
@@ -269,15 +309,6 @@ collect:
         - sm
         - span
         - xlg
-        # cds-combo-box
-        - allow-custom-value
-        - input-label
-        - oncds-combo-box-beingselected
-        - oncds-combo-box-beingtoggled
-        - oncds-combo-box-selected
-        - oncds-combo-box-toggled
-        - should-filter-item
-        - typeahead
         # cds-contained-list
         - is-inset
         # cds-contained-list-item
@@ -297,6 +328,11 @@ collect:
         - short
         # cds-definition-tooltip
         - open-on-hover
+        # cds-dialog
+        - aria-describedby
+        - modal
+        - oncds-dialog-beingclosed
+        - oncds-dialog-closed
         # cds-dismissible-tag
         - dismiss-tooltip-alignment
         - dismiss-tooltip-label
@@ -327,6 +363,7 @@ collect:
         - message-text
         # cds-grid
         - narrow
+        - with-row-gap
         # cds-header-global-action
         - panel-id
         # cds-header-menu
@@ -347,6 +384,12 @@ collect:
         - level
         - oncds-use-layer
         - with-background
+        # cds-layout
+        - density
+        # cds-layout-constraint
+        - size-default
+        - size-max
+        - size-min
         # cds-loading
         - inactive
         - overlay
@@ -365,32 +408,6 @@ collect:
         - selectedItem
         # cds-menu-item-selectable
         - renderIcon
-        # cds-modal
-        - alert
-        - container-class
-        - has-scrolling-content
-        - loading-description
-        - loading-icon-description
-        - loading-status
-        - loading-success-delay
-        - oncds-modal-beingclosed
-        - oncds-modal-closed
-        - prevent-close
-        - should-submit-on-enter
-        # cds-modal-close-button
-        - close-button-label
-        # cds-modal-footer
-        - has-three-buttons
-        # cds-multi-select
-        - clear-selection-description
-        - clear-selection-text
-        - filterable
-        - oncds-multi-select-beingselected
-        - oncds-multi-select-beingtoggled
-        - oncds-multi-select-selected
-        - oncds-multi-select-toggled
-        - select-all
-        - selection-feedback
         # cds-multi-select-item
         - is-select-all
         # cds-operational-tag
@@ -407,7 +424,9 @@ collect:
         - page-actions-flush
         # cds-pagination
         - backward-text
+        - backward-text-tooltip-position
         - forward-text
+        - forward-text-tooltip-position
         - is-last-page
         - items-per-page-text
         - oncds-page-sizes-select-changed
@@ -424,9 +443,6 @@ collect:
         - items-shown
         - loop
         - oncds-page-changed
-        # cds-password-input
-        - hide-password-label
-        - show-password-label
         # cds-progress-indicator
         - current-index
         - ononChange
@@ -490,6 +506,10 @@ collect:
         # cds-structured-list-row
         - selection-icon-title
         # cds-tab
+        - badge-indicator
+        - icon-only
+        - oncds-tab-beingclosed
+        - oncds-tab-closed
         - tabTitle
         # cds-table
         - filterRows
@@ -529,8 +549,6 @@ collect:
         - oncds-tabs-selected
         - selected-item-assistive-text
         - selecting-items-assistive-text
-        # cds-tabs-skeleton
-        - contained
         # cds-tearsheet
         - has-close-icon
         - influencer-placement
@@ -625,6 +643,15 @@ collect:
         - left
         - right
         - top
+        # General - input-mode
+        - decimal
+        - email
+        - none
+        - numeric
+        - search
+        - tel
+        - text
+        - url
         # General - kind
         - ""
         - caution-major
@@ -671,6 +698,11 @@ collect:
         # General - label-position
         - left
         - right
+        # General - loading-status
+        - active
+        - error
+        - finished
+        - inactive
         # General - menu-alignment
         - bottom
         - bottom-end
@@ -695,6 +727,13 @@ collect:
         # General - orientation
         - horizontal
         - vertical
+        # General - role
+        - alertdialog
+        - dialog
+        # General - selection-feedback
+        - fixed
+        - top
+        - top-after-reopen
         # General - size
         - ""
         - 2xl
@@ -763,6 +802,7 @@ collect:
         - inline
         - magenta
         - multi
+        - number
         - password
         - purple
         - red
@@ -786,18 +826,43 @@ collect:
         - primary
         - secondary
         - tertiary
+        # cds-layout - density
+        - condensed
+        - normal
+        # cds-layout-constraint - size-default
+        - 2xl
+        - lg
+        - md
+        - sm
+        - xl
+        - xs
+        # cds-layout-constraint - size-max
+        - 2xl
+        - lg
+        - md
+        - sm
+        - xl
+        - xs
+        # cds-layout-constraint - size-min
+        - 2xl
+        - lg
+        - md
+        - sm
+        - xl
+        - xs
         # cds-menu-button - menu-background-token
         - background
         - layer
-        # cds-modal - loading-status
-        - active
-        - error
-        - finished
-        - inactive
-        # cds-multi-select - selection-feedback
-        - fixed
+        # cds-pagination - backward-text-tooltip-position
+        - bottom
+        - left
+        - right
         - top
-        - top-after-reopen
+        # cds-pagination - forward-text-tooltip-position
+        - bottom
+        - left
+        - right
+        - top
         # cds-side-panel - placement
         - left
         - right

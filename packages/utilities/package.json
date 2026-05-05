@@ -1,11 +1,11 @@
 {
   "name": "@carbon/utilities",
   "description": "Utilities and helpers to drive consistency across software products using the Carbon Design System",
-  "version": "0.17.0-rc.0",
+  "version": "0.19.0",
   "license": "Apache-2.0",
   "main": "lib/index.js",
   "module": "es/index.js",
-  "types": "types/index.d.ts",
+  "types": "es/index.d.ts",
   "repository": {
     "type": "git",
     "url": "https://github.com/carbon-design-system/carbon.git",
@@ -15,11 +15,32 @@
   "files": [
     "es",
     "lib",
-    "types",
     "telemetry.yml",
     "scss",
     "index.scss"
   ],
+  "sideEffects": [
+    "*.scss",
+    "./index.scss",
+    "./scss/**"
+  ],
+  "exports": {
+    ".": {
+      "types": "./es/index.d.ts",
+      "import": "./es/index.js",
+      "require": "./lib/index.js",
+      "default": "./es/index.js"
+    },
+    "./index.scss": "./index.scss",
+    "./scss/*": "./scss/*",
+    "./*": {
+      "types": "./es/*/index.d.ts",
+      "import": "./es/*/index.js",
+      "require": "./lib/*/index.js",
+      "default": "./es/*/index.js"
+    },
+    "./package.json": "./package.json"
+  },
   "keywords": [
     "ibm",
     "carbon",
@@ -31,18 +52,14 @@
     "provenance": true
   },
   "scripts": {
-    "build:es": "esbuild ./src/**/!(*-test).{js,ts} --minify --outdir=es --target=es2020 --format=esm",
-    "build:cjs": "esbuild ./src/**/!(*-test).{js,ts} --minify --outdir=lib --target=es2020 --format=cjs",
-    "build:types": "tsc",
-    "build": "yarn build:es & yarn build:cjs & yarn build:types",
-    "watch": "yarn build:es --watch & yarn build:cjs --watch",
-    "clean": "rimraf es lib",
+    "build": "yarn clean && tsdown --config tsdown.config.mts",
+    "watch": "tsdown --config tsdown.config.mts --watch",
+    "clean": "rimraf es lib types",
     "postinstall": "ibmtelemetry --config=telemetry.yml"
   },
   "devDependencies": {
-    "esbuild": "^0.25.0",
     "rimraf": "^6.0.1",
-    "typescript": "^5.7.3",
+    "tsdown": "^0.21.0",
     "typescript-config-carbon": "workspace:^0.9.0"
   },
   "dependencies": {

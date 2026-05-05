@@ -190,6 +190,12 @@ export const MenuItem = forwardRef<HTMLLIElement, MenuItemProps>(
     const keyboardClickEvent = (e: KeyboardEvent) =>
       match(e, keys.Enter) || match(e, keys.Space);
 
+    function handleMouseDown(e: MouseEvent<HTMLLIElement>) {
+      if (isDisabled) {
+        e.preventDefault();
+      }
+    }
+
     function handleKeyDown(e: KeyboardEvent<HTMLLIElement>) {
       if (hasChildren && match(e, keys.ArrowRight)) {
         openSubmenu();
@@ -268,6 +274,7 @@ export const MenuItem = forwardRef<HTMLLIElement, MenuItemProps>(
           aria-disabled={isDisabled ?? undefined}
           aria-haspopup={hasChildren ?? undefined}
           aria-expanded={hasChildren ? submenuOpen : undefined}
+          onMouseDown={handleMouseDown}
           onClick={handleClick}
           onKeyDown={handleKeyDown}
           onKeyUp={handleKeyUp}
@@ -557,8 +564,8 @@ export const MenuItemRadioGroup = forwardRef(function MenuItemRadioGroup<Item>(
     onChange,
     defaultValue: defaultSelectedItem ?? ({} as Item),
   });
-  //eslint-disable-next-line  @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20452
-  function handleClick(item, e) {
+
+  function handleClick(item) {
     setSelection(item);
   }
 
@@ -580,8 +587,8 @@ export const MenuItemRadioGroup = forwardRef(function MenuItemRadioGroup<Item>(
             label={itemToString(item)}
             role="menuitemradio"
             aria-checked={item === selection}
-            onClick={(e) => {
-              handleClick(item, e);
+            onClick={() => {
+              handleClick(item);
             }}
           />
         ))}
