@@ -9,7 +9,6 @@ import React, {
   Children,
   cloneElement,
   forwardRef,
-  isValidElement,
   RefObject,
   useCallback,
   useContext,
@@ -19,7 +18,6 @@ import React, {
   type ElementType,
   type KeyboardEvent,
   type MouseEvent,
-  type ReactElement,
   type ReactNode,
   type Ref,
 } from 'react';
@@ -41,10 +39,13 @@ import { deprecate } from '../../prop-types/deprecate';
 import { mergeRefs } from '../../tools/mergeRefs';
 import { setupGetInstanceId } from '../../tools/setupGetInstanceId';
 import { IconButton, IconButtonProps } from '../IconButton';
-import { OverflowMenuItemProps } from '../OverflowMenuItem/OverflowMenuItem';
+import OverflowMenuItem, {
+  OverflowMenuItemProps,
+} from '../OverflowMenuItem/OverflowMenuItem';
 import { useOutsideClick } from '../../internal/useOutsideClick';
 import { deprecateValuesWithin } from '../../prop-types/deprecateValuesWithin';
 import { mapPopoverAlign } from '../../tools/mapPopoverAlign';
+import { isComponentElement } from '../../internal';
 
 const getInstanceId = setupGetInstanceId();
 
@@ -105,8 +106,8 @@ export const getMenuOffset: MenuOffset = (
       direction
     );
   }
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20452
-  const { offsetWidth: menuWidth, offsetHeight: menuHeight } = menuBody;
+
+  const { offsetWidth: menuWidth } = menuBody;
 
   switch (triggerButtonPositionProp) {
     case 'top':
@@ -202,7 +203,7 @@ export interface OverflowMenuProps
   menuOffset?: MenuOffset;
 
   /**
-   * The adjustment in position applied to the floating menu.
+   * The adjustment in position applied to the floating menu when flipped.
    */
   menuOffsetFlip?: MenuOffset;
 
@@ -531,10 +532,9 @@ export const OverflowMenu = forwardRef<HTMLButtonElement, OverflowMenuProps>(
     );
 
     const childrenWithProps = Children.toArray(children).map((child, index) => {
-      if (isValidElement(child)) {
-        const childElement = child as ReactElement<OverflowMenuItemProps>;
-        return cloneElement(childElement, {
-          closeMenu: childElement.props.closeMenu || closeMenuAndFocus,
+      if (isComponentElement(child, OverflowMenuItem)) {
+        return cloneElement(child, {
+          closeMenu: child.props.closeMenu || closeMenuAndFocus,
           handleOverflowMenuItemFocus,
           ref: (el: HTMLElement) => {
             menuItemRefs.current[index] = el;
@@ -734,7 +734,7 @@ OverflowMenu.propTypes = {
   ]),
 
   /**
-   * The adjustment in position applied to the floating menu.
+   * The adjustment in position applied to the floating menu when flipped.
    */
   menuOffsetFlip: PropTypes.oneOfType([
     PropTypes.shape({

@@ -20,6 +20,7 @@ import { SELECTION_FEEDBACK_OPTION } from './defs';
 import CDSMultiSelectItem from './multi-select-item';
 import styles from './multi-select.scss?lit';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
+import HostListener from '../../globals/decorators/host-listener';
 
 export {
   DROPDOWN_SIZE,
@@ -98,15 +99,23 @@ class CDSMultiSelect extends CDSDropdown {
     menuOpen: boolean;
     isInputTarget: boolean;
   }) {
-    if (!menuOpen) {
-      return true;
-    }
-
     if (!isInputTarget) {
       return false;
     }
 
-    return Boolean(this._filterInputNode?.value);
+    if (menuOpen) {
+      return false;
+    }
+
+    if (!menuOpen) {
+      if (this._selectedItemsCount > 0) {
+        this._handleUserInitiatedSelectItem();
+      }
+
+      return Boolean(this._filterInputNode?.value);
+    }
+
+    return false;
   }
 
   /**
@@ -227,9 +236,43 @@ class CDSMultiSelect extends CDSDropdown {
     ) {
       super._handleClickInner(event);
       if (this.filterable) {
+        if (!this.open && this._filterInputNode) {
+          this._clearInput();
+        }
         this._filterInputNode.focus();
       }
     }
+  }
+
+  /**
+   * Clears selections on Escape click
+   */
+  protected _handleKeydownInner(event: KeyboardEvent) {
+    const { key } = event;
+    if (
+      key === 'Escape' &&
+      !this.filterable &&
+      !this.open &&
+      this._selectedItemsCount > 0
+    ) {
+      this._handleUserInitiatedSelectItem();
+      return;
+    }
+    super._handleKeydownInner(event);
+  }
+
+  @HostListener('focusout')
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20452
+  // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
+  protected _handleFocusOut(event: FocusEvent) {
+    if (
+      this.filterable &&
+      this._filterInputNode &&
+      !this.contains(event.relatedTarget as Node)
+    ) {
+      this._clearInput();
+    }
+    super._handleFocusOut(event);
   }
 
   /**
@@ -447,7 +490,7 @@ class CDSMultiSelect extends CDSDropdown {
             id="clear-button"
             role="button"
             class="${prefix}--list-box__selection"
-            tabindex="0"
+            tabindex="-1"
             title="${clearSelectionLabel}">
             ${iconLoader(Close16, { 'aria-label': clearSelectionLabel })}
           </div>
@@ -465,7 +508,7 @@ class CDSMultiSelect extends CDSDropdown {
     const inputValue = this._filterInputNode.value.toLocaleLowerCase();
     this.toggleAttribute('has-value', inputValue.length > 0);
 
-    if (!this.open) {
+    if (!this.open && inputValue.length > 0) {
       this.open = true;
     }
 
@@ -514,7 +557,7 @@ class CDSMultiSelect extends CDSDropdown {
 
     if (visibleItems.length > 0) {
       visibleItems.forEach((i) => i.removeAttribute('highlighted'));
-      this.setAttribute('item-clicked', '');
+      this.toggleAttribute('item-clicked', inputValue.length > 0);
       const first = visibleItems[0] as HTMLElement;
       first.setAttribute('highlighted', '');
       first.focus();
@@ -544,7 +587,6 @@ class CDSMultiSelect extends CDSDropdown {
     const constructor = this.constructor as typeof CDSMultiSelect;
     const items = this.querySelectorAll(constructor.selectorItemFiltered);
     this._filterInputNode.value = '';
-    this.open = true;
     this._filterInputNode.focus();
     forEach(items, (item) => {
       (item as CDSMultiSelectItem).removeAttribute('filtered');
@@ -637,19 +679,42 @@ class CDSMultiSelect extends CDSDropdown {
     });
   }
 
-  protected compareItems = (itemA, itemB, { locale }) => {
-    itemA.localeCompare(itemB, locale, { numeric: true });
+  protected defaultCompareItems = (
+    itemA: string,
+    itemB: string,
+    { locale }: { locale: string }
+  ) => {
+    return itemA.localeCompare(itemB, locale, { numeric: true });
   };
 
-  protected sortItems = (
+  /**
+   * Provide a custom function that is used to determine the ordering of
+   * options. The compare function should return a number whose sign indicates
+   * the relative order of the two elements: negative if a is less than b,
+   * positive if a is greater than b, and zero if they are equal. See 'sortItems'
+   * for more control.
+   *
+   * (itemA: string, itemB: string, { locale }: { locale: string }) => number
+   */
+  @property({ attribute: false })
+  compareItems: (
+    itemA: string,
+    itemB: string,
+    options: { locale: string }
+  ) => number = this.defaultCompareItems;
+
+  private getItemValue = (item: Node) =>
+    item instanceof Element ? (item.getAttribute('value') ?? '') : '';
+
+  protected defaultSortItems = (
     menuItems: NodeList,
     { values, compareItems, locale = 'en' }
-  ) => {
+  ): Node[] => {
     const menuItemsArray = Array.from(menuItems);
 
     const sortedArray = menuItemsArray.sort((itemA, itemB) => {
-      const hasItemA = values.includes((itemA as HTMLInputElement).value);
-      const hasItemB = values.includes((itemB as HTMLInputElement).value);
+      const hasItemA = values.includes(this.getItemValue(itemA));
+      const hasItemB = values.includes(this.getItemValue(itemB));
 
       // Prefer whichever item is in the `value` array first
       if (hasItemA && !hasItemB) {
@@ -661,8 +726,8 @@ class CDSMultiSelect extends CDSDropdown {
       }
 
       return compareItems(
-        (itemA as HTMLInputElement).value,
-        (itemB as HTMLInputElement).value,
+        itemA.textContent?.trim() ?? '',
+        itemB.textContent?.trim() ?? '',
         {
           locale,
         }
@@ -671,6 +736,34 @@ class CDSMultiSelect extends CDSDropdown {
 
     return sortedArray;
   };
+
+  /**
+   * Provide a method that sorts all options in the control. Overriding this
+   * prop means that you also have to handle the sort logic for selected versus
+   * un-selected items. If you just want to control ordering, consider the
+   * `compareItems` prop instead.
+   *
+   * sortItems :
+   * (menuItems: NodeList, {
+   *   values: string[],
+   *   compareItems: (itemA: string, itemB: string, { locale }: { locale: string }) => number,
+   *   locale: string,
+   * }) => Node[]
+   *
+   */
+  @property({ attribute: false })
+  sortItems: (
+    menuItems: NodeList,
+    options: {
+      values: string[];
+      compareItems: (
+        itemA: string,
+        itemB: string,
+        options: { locale: string }
+      ) => number;
+      locale: string;
+    }
+  ) => Node[] = this.defaultSortItems;
 
   shouldUpdate(changedProperties) {
     const { selectorItem, aiLabelItem, slugItem } = this
@@ -699,38 +792,53 @@ class CDSMultiSelect extends CDSDropdown {
           values.indexOf((elem as CDSMultiSelectItem).value) >= 0 &&
           !(elem as CDSMultiSelectItem).isSelectAll
       ).length;
-
-      if (this.selectionFeedback === SELECTION_FEEDBACK_OPTION.TOP) {
-        const sortedMenuItems = this.sortItems(items, {
-          values,
-          compareItems: this.compareItems,
-          locale,
-        });
-
-        if (aiLabel) {
-          sortedMenuItems.unshift(aiLabel);
-        }
-
-        this.replaceChildren(...sortedMenuItems);
-      }
     }
-    if (changedProperties.has('open')) {
-      if (
-        this.selectionFeedback === SELECTION_FEEDBACK_OPTION.TOP_AFTER_REOPEN
-      ) {
-        const sortedMenuItems = this.sortItems(items, {
-          values,
-          compareItems: this.compareItems,
-          locale,
-        });
 
-        if (aiLabel) {
-          sortedMenuItems.unshift(aiLabel);
-        }
-        sortedMenuItems.forEach((item) => {
-          this.appendChild(item);
-        });
+    const shouldSortItems =
+      changedProperties.has('value') ||
+      changedProperties.has('compareItems') ||
+      changedProperties.has('sortItems') ||
+      changedProperties.has('locale');
+
+    if (
+      shouldSortItems &&
+      this.selectionFeedback === SELECTION_FEEDBACK_OPTION.TOP
+    ) {
+      const sortedMenuItems = this.sortItems(items, {
+        values,
+        compareItems: this.compareItems,
+        locale,
+      });
+
+      if (aiLabel) {
+        sortedMenuItems.unshift(aiLabel);
       }
+
+      this.replaceChildren(...sortedMenuItems);
+    }
+
+    const shouldSortItemsAfterReopen =
+      changedProperties.has('open') ||
+      changedProperties.has('compareItems') ||
+      changedProperties.has('sortItems') ||
+      changedProperties.has('locale');
+
+    if (
+      shouldSortItemsAfterReopen &&
+      this.selectionFeedback === SELECTION_FEEDBACK_OPTION.TOP_AFTER_REOPEN
+    ) {
+      const sortedMenuItems = this.sortItems(items, {
+        values,
+        compareItems: this.compareItems,
+        locale,
+      });
+
+      if (aiLabel) {
+        sortedMenuItems.unshift(aiLabel);
+      }
+      sortedMenuItems.forEach((item) => {
+        this.appendChild(item);
+      });
     }
     return true;
   }
@@ -836,6 +944,21 @@ class CDSMultiSelect extends CDSDropdown {
 
     selectAllItem.selected = allSelected;
     selectAllItem.indeterminate = selectedCount > 0 && !allSelected;
+  }
+
+  /**
+   * Clears the filterable input field
+   */
+  private _clearInput() {
+    this._filterInputNode.value = '';
+    this.toggleAttribute('has-value', false);
+
+    const items = this.querySelectorAll(
+      (this.constructor as typeof CDSMultiSelect).selectorItemFiltered
+    );
+    forEach(items, (item) => {
+      (item as CDSMultiSelectItem).removeAttribute('filtered');
+    });
   }
 
   connectedCallback() {

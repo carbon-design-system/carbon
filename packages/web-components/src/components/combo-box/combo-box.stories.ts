@@ -15,6 +15,7 @@ import Folders16 from '@carbon/icons/es/folders/16.js';
 import '../ai-label/index';
 import '../button/index';
 import { iconLoader } from '../../globals/internal/icon-loader';
+import { withLayers } from '../../../.storybook/decorators/with-layers';
 
 const items = [
   {
@@ -71,6 +72,7 @@ const defaultArgs = {
   value: '',
   warn: false,
   warnText: 'Warning message goes here',
+  inputProps: undefined,
 };
 
 const controls = {
@@ -103,6 +105,10 @@ const controls = {
   invalidText: {
     control: 'text',
     description: `Message which is displayed if the value is invalid.`,
+  },
+  inputProps: {
+    control: 'object',
+    description: `Specify native input attributes to place on the internal input, for example \`{ maxlength: 5, autocomplete: 'off'}\`.`,
   },
   label: {
     control: 'text',
@@ -145,6 +151,7 @@ export const Default = {
     ...defaultArgs,
     helperText: 'Helper text',
     titleText: 'Label',
+    inputProps: {},
   },
   render: (args) => {
     const {
@@ -164,9 +171,11 @@ export const Default = {
       invalidText,
       value,
       typeahead,
+      inputProps,
     } = args ?? {};
     return html`
       <cds-combo-box
+        .inputProps=${inputProps}
         ?disabled=${disabled}
         ?autoalign=${autoalign}
         helper-text=${ifDefined(helperText)}
@@ -253,10 +262,11 @@ export const AllowCustomValue = {
       invalidText,
       value,
       typeahead,
+      inputProps,
     } = args ?? {};
     return html`
       <cds-combo-box
-        allow-custom-value="true"
+        .inputProps=${inputProps}
         direction=${ifDefined(direction)}
         ?disabled=${disabled}
         ?autoalign=${autoalign}
@@ -313,9 +323,11 @@ export const AutocompleteWithTypeahead = {
       invalidText,
       value,
       typeahead,
+      inputProps,
     } = args ?? {};
     return html`
       <cds-combo-box
+        .inputProps=${inputProps}
         direction=${ifDefined(direction)}
         ?disabled=${disabled}
         ?autoalign=${autoalign}
@@ -373,11 +385,13 @@ export const ExperimentalAutoAlign = {
       invalidText,
       value,
       typeahead,
+      inputProps,
     } = args ?? {};
     return html`
       <div style="width:400px">
         <div style="height: 300px"></div>
         <cds-combo-box
+          .inputProps=${inputProps}
           ?autoalign=${autoalign}
           direction=${ifDefined(direction)}
           ?disabled=${disabled}
@@ -434,6 +448,7 @@ export const Controlled = {
       titleText,
       type,
       typeahead,
+      inputProps,
       value,
       warn,
       warnText,
@@ -476,6 +491,7 @@ export const Controlled = {
 
     return html`
       <cds-combo-box
+        .inputProps=${inputProps}
         controlled
         direction=${ifDefined(direction)}
         ?autoalign=${autoalign}
@@ -537,9 +553,11 @@ export const WithAILabel = {
       invalidText,
       value,
       typeahead,
+      inputProps,
     } = args ?? {};
     return html`
       <cds-combo-box
+        .inputProps=${inputProps}
         ?disabled=${disabled}
         ?autoalign=${autoalign}
         ?hide-label=${hideLabel}
@@ -574,6 +592,10 @@ export const WithAILabel = {
 };
 
 export const WithLayer = {
+  decorators: [withLayers],
+  parameters: {
+    layout: 'fullscreen',
+  },
   argTypes: controls,
   args: {
     ...defaultArgs,
@@ -599,40 +621,40 @@ export const WithLayer = {
       invalidText,
       value,
       typeahead,
+      inputProps,
     } = args ?? {};
     return html`
-      <sb-template-layers>
-        <div style="width:300px">
-          <cds-combo-box
-            direction=${ifDefined(direction)}
-            ?autoalign=${autoalign}
-            ?disabled=${disabled}
-            helper-text=${ifDefined(helperText)}
-            ?hide-label=${hideLabel}
-            ?invalid=${invalid}
-            invalid-text=${ifDefined(invalidText)}
-            ?read-only=${readOnly}
-            ?allow-custom-value=${allowCustomValue}
-            title-text=${ifDefined(titleText)}
-            size=${ifDefined(size)}
-            type=${ifDefined(type)}
-            value=${ifDefined(value)}
-            label=${ifDefined(label)}
-            ?warn=${warn}
-            warn-text=${ifDefined(warnText)}
-            ?typeahead=${typeahead}>
-            ${items.map(
-              (elem) => html`
-                <cds-combo-box-item
-                  ?disabled=${elem.disabled}
-                  value="${elem.value}"
-                  >${elem.text}</cds-combo-box-item
-                >
-              `
-            )}
-          </cds-combo-box>
-        </div>
-      </sb-template-layers>
+      <div style="width:300px">
+        <cds-combo-box
+          .inputProps=${inputProps}
+          direction=${ifDefined(direction)}
+          ?autoalign=${autoalign}
+          ?disabled=${disabled}
+          helper-text=${ifDefined(helperText)}
+          ?hide-label=${hideLabel}
+          ?invalid=${invalid}
+          invalid-text=${ifDefined(invalidText)}
+          ?read-only=${readOnly}
+          ?allow-custom-value=${allowCustomValue}
+          title-text=${ifDefined(titleText)}
+          size=${ifDefined(size)}
+          type=${ifDefined(type)}
+          value=${ifDefined(value)}
+          label=${ifDefined(label)}
+          ?warn=${warn}
+          warn-text=${ifDefined(warnText)}
+          ?typeahead=${typeahead}>
+          ${items.map(
+            (elem) => html`
+              <cds-combo-box-item
+                ?disabled=${elem.disabled}
+                value="${elem.value}"
+                >${elem.text}</cds-combo-box-item
+              >
+            `
+          )}
+        </cds-combo-box>
+      </div>
     `;
   },
 };

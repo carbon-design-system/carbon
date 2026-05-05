@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2025
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -40,7 +40,7 @@ export type ButtonTooltipPosition = (typeof ButtonTooltipPositions)[number];
 export interface ButtonBaseProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   /**
-   * Specify the message read by screen readers for the danger button variant
+   * Specify the message read by screen readers for the danger button variants
    */
   dangerDescription?: string;
 
@@ -66,7 +66,7 @@ export interface ButtonBaseProps
   isExpressive?: boolean;
 
   /**
-   * Specify whether the Button is currently selected. Only applies to the Ghost variant.
+   * Specify whether the Button is currently selected. Only applies to the icon only Ghost variant.
    */
   isSelected?: boolean;
 
@@ -99,7 +99,7 @@ export interface ButtonBaseProps
 
   /**
    * Specify the alignment of the tooltip to the icon-only button.
-   * Can be one of: start, center, or end.
+   * Can be one of: `start`, `center`, or `end`.
    */
   tooltipAlignment?: ButtonTooltipAlignment;
 
@@ -116,7 +116,7 @@ export interface ButtonBaseProps
 
   /**
    * Specify the direction of the tooltip for icon-only buttons.
-   * Can be either top, right, bottom, or left.
+   * Can be either `top`, `right`, `bottom`, or `left`.
    */
   tooltipPosition?: ButtonTooltipPosition;
 }
@@ -133,8 +133,9 @@ export type ButtonComponent = <T extends React.ElementType = 'button'>(
 
 function isIconOnlyButton(
   hasIconOnly: ButtonBaseProps['hasIconOnly'],
-  _kind: ButtonBaseProps['kind']
-): _kind is IconButtonKind {
+  kind: ButtonBaseProps['kind']
+): kind is IconButtonKind;
+function isIconOnlyButton(hasIconOnly: ButtonBaseProps['hasIconOnly']) {
   if (hasIconOnly === true) {
     return true;
   }
@@ -179,7 +180,6 @@ const Button: ButtonComponent = React.forwardRef(
     const iconOnlyImage = !ButtonImageElement ? null : <ButtonImageElement />;
 
     if (!isIconOnlyButton(hasIconOnly, kind)) {
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const { tooltipAlignment, ...propsWithoutTooltipAlignment } = props;
       return <ButtonBase ref={ref} {...propsWithoutTooltipAlignment} />;
     } else {
@@ -267,7 +267,7 @@ Button.propTypes = {
   className: PropTypes.string,
 
   /**
-   * Specify the message read by screen readers for the danger button variant
+   * Specify the message read by screen readers for the danger button variants
    */
   dangerDescription: PropTypes.string,
 
@@ -305,7 +305,7 @@ Button.propTypes = {
   isExpressive: PropTypes.bool,
 
   /**
-   * Specify whether the Button is currently selected. Only applies to the Ghost variant.
+   * Specify whether the Button is currently selected. Only applies to the icon only Ghost variant.
    */
   isSelected: PropTypes.bool,
 
@@ -393,7 +393,7 @@ Button.propTypes = {
 
   /**
    * Specify the alignment of the tooltip to the icon-only button.
-   * Can be one of: start, center, or end.
+   * Can be one of: `start`, `center`, or `end`.
    */
   tooltipAlignment: PropTypes.oneOf(['start', 'center', 'end']),
 
@@ -410,7 +410,7 @@ Button.propTypes = {
 
   /**
    * Specify the direction of the tooltip for icon-only buttons.
-   * Can be either top, right, bottom, or left.
+   * Can be either `top`, `right`, `bottom`, or `left`.
    */
   tooltipPosition: PropTypes.oneOf(['top', 'right', 'bottom', 'left']),
 

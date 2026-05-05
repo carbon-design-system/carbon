@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2019, 2024
+// Copyright IBM Corp. 2019, 2026
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -21,7 +21,8 @@ $css--plex: true !default;
 @include code-snippet;
 
 :host(#{$prefix}-button),
-:host(#{$prefix}-modal-footer-button) {
+:host(#{$prefix}-modal-footer-button),
+:host(#{$prefix}-dialog-footer-button) {
   @include emit-layout-tokens();
 
   display: inline-flex;
@@ -38,16 +39,20 @@ $css--plex: true !default;
 
 :host(#{$prefix}-button-skeleton) {
   @include emit-layout-tokens();
+
+  display: inline-flex;
 }
 
 :host(#{$prefix}-button[isExpressive]) ::slotted([slot='icon']),
-:host(#{$prefix}-modal-footer-button[isExpressive]) ::slotted([slot='icon']) {
+:host(#{$prefix}-modal-footer-button[isExpressive]) ::slotted([slot='icon']),
+:host(#{$prefix}-dialog-footer-button[isExpressive]) ::slotted([slot='icon']) {
   block-size: rem(20px);
   inline-size: rem(20px);
 }
 
 :host(#{$prefix}-button[pagination]),
-:host(#{$prefix}-modal-footer-button[pagination]) {
+:host(#{$prefix}-modal-footer-button[pagination]),
+:host(#{$prefix}-dialog-footer-button[pagination]) {
   .#{$prefix}--btn {
     padding: 0;
     border: none;
@@ -64,7 +69,8 @@ $css--plex: true !default;
 }
 
 :host(#{$prefix}-button[pagination]:not([disabled])),
-:host(#{$prefix}-modal-footer-button[pagination]:not([disabled])) {
+:host(#{$prefix}-modal-footer-button[pagination]:not([disabled])),
+:host(#{$prefix}-dialog-footer-button[pagination]:not([disabled])) {
   .#{$prefix}--btn {
     color: $icon-primary;
 
@@ -75,8 +81,9 @@ $css--plex: true !default;
 }
 
 :host(#{$prefix}-button[pagination][batch-action]:not([disabled])),
+:host(#{$prefix}-modal-footer-button[pagination][batch-action]:not([disabled])),
 :host(
-    #{$prefix}-modal-footer-button[pagination][batch-action]:not([disabled])
+    #{$prefix}-dialog-footer-button[pagination][batch-action]:not([disabled])
   ) {
   .#{$prefix}--btn {
     padding: $button-padding-ghost;
@@ -90,6 +97,11 @@ $css--plex: true !default;
   :host(#{$prefix}-button[pagination][has-main-content]:not([disabled])),
   :host(
       #{$prefix}-modal-footer-button[pagination][has-main-content]:not(
+          [disabled]
+        )
+    ),
+  :host(
+      #{$prefix}-dialog-footer-button[pagination][has-main-content]:not(
           [disabled]
         )
     ) {

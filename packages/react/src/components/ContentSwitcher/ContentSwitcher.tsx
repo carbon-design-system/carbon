@@ -9,23 +9,20 @@ import PropTypes from 'prop-types';
 import React, {
   Children,
   cloneElement,
-  isValidElement,
   useContext,
   useEffect,
   useRef,
   useState,
   type HTMLAttributes,
-  type KeyboardEvent,
-  type MouseEvent,
   type ReactElement,
 } from 'react';
 import classNames from 'classnames';
 import { deprecate } from '../../prop-types/deprecate';
 import { LayoutConstraint } from '../Layout';
-import { composeEventHandlers } from '../../tools/events';
-import { getNextIndex, matches, keys } from '../../internal/keyboard';
+import { getNextIndex, match, keys } from '../../internal/keyboard';
 import { PrefixContext } from '../../internal/usePrefix';
-import { IconSwitch } from '../Switch';
+import { isComponentElement } from '../../internal';
+import { IconSwitch, Switch } from '../Switch';
 import type { SwitchEventHandlersParams } from '../Switch/Switch';
 
 export interface ContentSwitcherProps
@@ -33,8 +30,7 @@ export interface ContentSwitcherProps
   /**
    * Pass in Switch components to be rendered in the ContentSwitcher
    */
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
-  children?: ReactElement<any>[];
+  children?: ReactElement | ReactElement[];
 
   /**
    * Specify an optional className to be added to the container node
@@ -117,23 +113,19 @@ export const ContentSwitcher = ({
     }
   };
 
-  const isKeyboardEvent = (
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
-    event: any
-  ): event is KeyboardEvent<HTMLButtonElement> | globalThis.KeyboardEvent =>
-    event && typeof event === 'object' && 'key' in event;
+  const hasKey = (
+    event: SwitchEventHandlersParams
+  ): event is SwitchEventHandlersParams & { key: string | number } =>
+    typeof event === 'object' && event !== null && 'key' in event;
 
-  const handleChildChange = (
-    event: SwitchEventHandlersParams &
-      (KeyboardEvent<HTMLButtonElement> | MouseEvent<HTMLButtonElement>)
-  ) => {
+  const handleChildChange = (event: SwitchEventHandlersParams) => {
     if (typeof event.index === 'undefined') return;
 
     const { index } = event;
 
     if (
-      isKeyboardEvent(event) &&
-      matches(event, [keys.ArrowRight, keys.ArrowLeft])
+      hasKey(event) &&
+      (match(event.key, keys.ArrowRight) || match(event.key, keys.ArrowLeft))
     ) {
       const nextIndex = getNextIndex(event.key, index, childrenArray.length);
 
@@ -146,7 +138,10 @@ export const ContentSwitcher = ({
 
         setSelectedIndex(nextIndex);
 
-        if (isValidElement<SwitchEventHandlersParams>(child)) {
+        if (
+          isComponentElement(child, Switch) ||
+          isComponentElement(child, IconSwitch)
+        ) {
           onChange({
             ...event,
             index: nextIndex,
@@ -157,7 +152,9 @@ export const ContentSwitcher = ({
       }
     } else if (
       selectedIndex !== index &&
-      (isKeyboardEvent(event) ? matches(event, [keys.Enter, keys.Space]) : true)
+      (hasKey(event)
+        ? match(event.key, keys.Enter) || match(event.key, keys.Space)
+        : true)
     ) {
       setSelectedIndex(index);
       focusSwitch(index);
@@ -166,7 +163,7 @@ export const ContentSwitcher = ({
   };
 
   const isIconOnly = Children.map(children, (child) => {
-    return isValidElement(child) ? child.type === IconSwitch : null;
+    return isComponentElement(child, IconSwitch);
   })?.every((val) => val === true);
 
   const classes = classNames(`${prefix}--content-switcher`, className, {
@@ -184,23 +181,32 @@ export const ContentSwitcher = ({
       className={classes}
       role="tablist"
       onChange={undefined}>
-      {children &&
-        Children.map(children, (child, index) =>
-          cloneElement(child, {
-            index,
-            onClick: composeEventHandlers([
-              handleChildChange,
-              child.props.onClick,
-            ]),
-            onKeyDown: composeEventHandlers([
-              handleChildChange,
-              child.props.onKeyDown,
-            ]),
-            selected: index === selectedIndex,
-            ref: handleItemRef(index),
-            size,
-          })
-        )}
+      {Children.map(children, (child, index) => {
+        if (
+          !isComponentElement(child, Switch) &&
+          !isComponentElement(child, IconSwitch)
+        )
+          return child;
+
+        const sharedProps = {
+          index,
+          onClick: (event: SwitchEventHandlersParams) => {
+            handleChildChange(event);
+            child.props.onClick?.(event);
+          },
+          onKeyDown: (event: SwitchEventHandlersParams) => {
+            handleChildChange(event);
+            child.props.onKeyDown?.(event);
+          },
+          selected: index === selectedIndex,
+          ref: handleItemRef(index),
+        };
+
+        return cloneElement(child, {
+          ...sharedProps,
+          ...(isComponentElement(child, IconSwitch) ? { size } : {}),
+        });
+      })}
     </LayoutConstraint>
   );
 };

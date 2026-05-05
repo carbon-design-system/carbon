@@ -21,6 +21,7 @@ collect:
         - allowEmpty
         - aria-controls
         - aria-current
+        - aria-describedby
         - aria-label
         - aria-labelledby
         - ariaLabel
@@ -112,6 +113,7 @@ collect:
         - isFullWidth
         - isOpen
         - isPassword
+        - isRail
         - isSelected
         - isSideNavExpanded
         - isSortable
@@ -250,6 +252,7 @@ collect:
         - warn
         - warnText
         - width
+        - withRowGap
         # AccordionItem
         - handleAnimationEnd
         - onHeadingClick
@@ -305,7 +308,6 @@ collect:
         - onAnimationEnd
         # DataTableSkeleton
         - columnCount
-        - compact
         - showHeader
         - showToolbar
         - zebra
@@ -359,8 +361,6 @@ collect:
         - enableV12TileDefaultIcons
         - enableV12TileRadioIcons
         - flags
-        # Filename
-        - aria-describedby
         # FileUploader
         - buttonLabel
         - filenameStatus
@@ -501,6 +501,7 @@ collect:
         - pageInputDisabled
         - pageNumberText
         - pageRangeText
+        - pageSelectLabelText
         - pageSize
         - pageSizeInputDisabled
         - pageSizes
@@ -534,7 +535,6 @@ collect:
         - isChildOfHeader
         - isFixedNav
         - isPersistent
-        - isRail
         - onOverlayClick
         - onSideNavBlur
         # SideNavFooter

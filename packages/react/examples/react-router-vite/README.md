@@ -1,7 +1,7 @@
 # `examples/react-router-vite`
 
 > See how to integrate `@carbon/react` with React Router into a
-> project bootstrapped with `create-react-app`
+> project bootstrapped with `Vite`
 
 ## Usage
 

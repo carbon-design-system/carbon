@@ -22,13 +22,14 @@ jobs:
         with:
           fetch-depth: '0'
       - name: Use Node.js version from .nvmrc
-        uses: actions/setup-node@d02c89dce7e1ba9ef629ce0680989b3a1cc72edb
+        uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e
         with:
           node-version-file: '.nvmrc'
       - name: Install dependencies
         run: |
           yarn install
-          yarn build
+          yarn lerna run build --scope '@carbon/feature-flags' --scope '@carbon/layout' --scope '@carbon/themes' --scope '@carbon/icons' --stream
+          yarn --cwd packages/web-components build:cdn
       - name: Check release type
         if: contains(github.ref_name, '-rc.')
         run: echo "PRE_RELEASE=true" >> $GITHUB_ENV

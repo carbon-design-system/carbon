@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2019, 2025
+ * Copyright IBM Corp. 2019, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -62,6 +62,8 @@ const content = html`
     <hr />
     <p class="secondary">Model type</p>
     <p class="bold">Foundation model</p>
+    <a href="#">normal link</a>
+    <cds-link href="#">cds link</cds-link>
   </div>
 `;
 

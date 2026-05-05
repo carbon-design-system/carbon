@@ -94,11 +94,6 @@ export const Default = {
 };
 
 export const Skeleton = {
-  parameters: {
-    percy: {
-      skip: true,
-    },
-  },
   args: {
     defaultWidth: 400,
   },

@@ -18,6 +18,7 @@ import styles from './combo-box.scss?lit';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import ifNonEmpty from '../../globals/directives/if-non-empty';
+import spread from '../../globals/directives/spread';
 
 export { DROPDOWN_DIRECTION, DROPDOWN_SIZE } from '../dropdown/dropdown';
 
@@ -315,10 +316,18 @@ class CDSComboBox extends CDSDropdown {
       return;
     }
 
-    if (this.value) {
-      this._revertInputToSelected(true);
-    } else if (this._filterInputNode.value) {
-      this._clearInputWithoutSelecting(true);
+    if (this.open) {
+      this._handleUserInitiatedToggle(false);
+    } else {
+      if (this.value) {
+        this._revertInputToSelected(true);
+      } else if (this._filterInputNode.value) {
+        this._clearInputWithoutSelecting(true);
+      }
+
+      if (this.value || this._filterInputNode.value) {
+        this._handleUserInitiatedClearInput();
+      }
     }
   }
 
@@ -351,14 +360,12 @@ class CDSComboBox extends CDSDropdown {
    * Handles user-initiated clearing the `<input>` for filtering.
    */
   protected _handleUserInitiatedClearInput() {
-    this._resetFilteredItems();
-    this._filterInputValue = '';
-    if (this._filterInputNode) {
-      this._filterInputNode.value = '';
-      this._filterInputNode.focus();
-    }
-
     this._handleUserInitiatedSelectItem();
+    if (this.value) {
+      this._revertInputToSelected(true);
+    } else {
+      this._clearInputWithoutSelecting(true);
+    }
     this.requestUpdate();
   }
 
@@ -416,6 +423,7 @@ class CDSComboBox extends CDSDropdown {
       open,
       readOnly,
       value,
+      inputProps,
       _activeDescendant: activeDescendant,
       _filterInputValue: filterInputValue,
       _handleInput: handleInput,
@@ -453,7 +461,8 @@ class CDSComboBox extends CDSDropdown {
         )}"
         ?readonly=${readOnly}
         @input=${handleInput}
-        @keydown=${handleInputKeydown} />
+        @keydown=${handleInputKeydown}
+        ...="${spread(this._normalizeInputProps(inputProps))}" />
     `;
   }
 
@@ -473,7 +482,7 @@ class CDSComboBox extends CDSDropdown {
             id="selection-button"
             role="button"
             class="${prefix}--list-box__selection"
-            tabindex="0"
+            tabindex="-1"
             title="${clearSelectionLabel}">
             ${iconLoader(Close16, { 'aria-label': clearSelectionLabel })}
           </div>
@@ -552,6 +561,29 @@ class CDSComboBox extends CDSDropdown {
    */
   @property({ type: Boolean, attribute: 'allow-custom-value' })
   allowCustomValue = false;
+
+  /**
+   * Additional input attributes to apply to the internal input element.
+   * Allows passing native HTML input attributes like `maxlength`, `pattern`,
+   * `autocomplete`, etc.
+   */
+  @property({ type: Object, attribute: false })
+  inputProps?: Record<string, string | number | boolean>;
+
+  private _normalizeInputProps(
+    inputProps?: Record<string, string | number | boolean>
+  ) {
+    const normalizedInputProps: Record<string, string> = {};
+
+    Object.entries(inputProps ?? {}).forEach(([key, value]) => {
+      if (value === undefined || value === null || value === false) {
+        return;
+      }
+      normalizedInputProps[key] = value === true ? '' : String(value);
+    });
+
+    return normalizedInputProps;
+  }
 
   shouldUpdate(changedProperties) {
     super.shouldUpdate(changedProperties);
