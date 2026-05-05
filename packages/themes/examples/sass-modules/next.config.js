@@ -1,11 +1,9 @@
 /** @type {import('next').NextConfig} */
+const path = require('path');
+
 const nextConfig = {
-  reactStrictMode: true,
   turbopack: {
-    root: __dirname,
-  },
-  sassOptions: {
-    quietDeps: true,
+    root: path.resolve(__dirname, '../../../..'),
   },
 };
 
