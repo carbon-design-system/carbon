@@ -827,6 +827,55 @@ describe.each([
     await userEvent.keyboard('{Escape}');
     expect(onClose).toHaveBeenCalled();
   });
+
+  it('should handle ESC key with OverflowMenu - first ESC closes menu, second closes modal', async () => {
+    const onClose = jest.fn();
+
+    render(
+      <Component open onClose={onClose}>
+        <ModalHeader>Modal with Overflow Menu</ModalHeader>
+        <ModalBody>
+          <OverflowMenu iconDescription="More options">
+            <OverflowMenuItem itemText="Download" />
+            <OverflowMenuItem itemText="Share" />
+          </OverflowMenu>
+          <p>Modal content</p>
+          <TextInput
+            data-modal-primary-focus
+            id="text-input-1"
+            labelText="Domain name"
+          />
+        </ModalBody>
+        <ModalFooter primaryButtonText="Add" secondaryButtonText="Cancel" />
+      </Component>
+    );
+
+    expect(screen.getByRole('presentation', { hidden: true })).toHaveClass(
+      'is-visible'
+    );
+
+    const overflowMenuButton = screen.getByRole('button', {
+      name: /options/i,
+    });
+    await userEvent.click(overflowMenuButton);
+
+    expect(overflowMenuButton).toHaveAttribute('aria-expanded', 'true');
+
+    fireEvent.keyDown(
+      // eslint-disable-next-line testing-library/no-node-access
+      document.getElementById(overflowMenuButton.getAttribute('aria-controls')),
+      {
+        key: 'Escape',
+        code: 'Escape',
+        keyCode: 27,
+      }
+    );
+    expect(overflowMenuButton).toHaveAttribute('aria-expanded', 'false');
+    expect(onClose).not.toHaveBeenCalled();
+
+    fireEvent.keyDown(document, { key: 'Escape', code: 'Escape', keyCode: 27 });
+    expect(onClose).toHaveBeenCalled();
+  });
 });
 
 describe('state', () => {

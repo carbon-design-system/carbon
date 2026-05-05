@@ -6,7 +6,13 @@
  */
 
 import React, { useRef, useState } from 'react';
-import { render, screen, waitFor, within } from '@testing-library/react';
+import {
+  fireEvent,
+  render,
+  screen,
+  waitFor,
+  within,
+} from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import Modal from './Modal';
 import TextInput from '../TextInput';
@@ -1050,6 +1056,61 @@ describe.each([
     );
 
     await userEvent.keyboard('{Escape}');
+    expect(onRequestClose).toHaveBeenCalled();
+  });
+
+  it('should handle ESC key with OverflowMenu - first ESC closes menu, second closes modal', async () => {
+    const onRequestClose = jest.fn();
+
+    render(
+      <Component
+        open
+        modalHeading="Modal with Overflow Menu"
+        primaryButtonText="Primary button"
+        secondaryButtonText="Secondary button"
+        onRequestClose={onRequestClose}>
+        <OverflowMenu iconDescription="More options">
+          <OverflowMenuItem itemText="Download" />
+          <OverflowMenuItem itemText="Share" />
+        </OverflowMenu>
+        <p>Modal content</p>
+        <TextInput
+          data-modal-primary-focus
+          id="text-input-overflow-menu"
+          labelText="Domain name"
+        />
+      </Component>
+    );
+
+    expect(screen.getByRole('presentation', { hidden: true })).toHaveClass(
+      'is-visible'
+    );
+
+    const overflowMenuButton = screen.getByRole('button', {
+      name: /options/i,
+    });
+
+    await userEvent.click(overflowMenuButton);
+
+    expect(overflowMenuButton).toHaveAttribute('aria-expanded', 'true');
+
+    fireEvent.keyDown(
+      // eslint-disable-next-line testing-library/no-node-access
+      document.getElementById(overflowMenuButton.getAttribute('aria-controls')),
+      {
+        key: 'Escape',
+        code: 'Escape',
+        keyCode: 27,
+      }
+    );
+    expect(overflowMenuButton).toHaveAttribute('aria-expanded', 'false');
+    expect(onRequestClose).not.toHaveBeenCalled();
+
+    fireEvent.keyDown(document, {
+      key: 'Escape',
+      code: 'Escape',
+      keyCode: 27,
+    });
     expect(onRequestClose).toHaveBeenCalled();
   });
 
