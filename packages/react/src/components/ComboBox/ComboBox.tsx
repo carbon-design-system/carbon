@@ -70,6 +70,12 @@ const {
 
 const defaultShouldFilterItem = () => true;
 
+const isDisabledItem = (item: unknown) =>
+  item !== null &&
+  typeof item === 'object' &&
+  'disabled' in item &&
+  Boolean(item.disabled);
+
 const autocompleteCustomFilter = ({
   item,
   inputValue,
@@ -133,7 +139,7 @@ const findHighlightedIndex = <ItemType,>(
 
   for (let i = 0; i < items.length; i++) {
     const item = itemToString(items[i]).toLowerCase();
-    if (!items[i]['disabled'] && item.indexOf(searchValue) !== -1) {
+    if (!isDisabledItem(items[i]) && item.indexOf(searchValue) !== -1) {
       return i;
     }
   }
@@ -468,11 +474,13 @@ const ComboBox = forwardRef(
       if (typeahead) {
         if (inputValue.length >= prevInputLengthRef.current) {
           if (inputValue) {
-            const filteredItems = items.filter((item) =>
-              autocompleteCustomFilter({
-                item: itemToString(item),
-                inputValue: inputValue,
-              })
+            const filteredItems = items.filter(
+              (item) =>
+                !isDisabledItem(item) &&
+                autocompleteCustomFilter({
+                  item: itemToString(item),
+                  inputValue: inputValue,
+                })
             );
             if (filteredItems.length > 0) {
               const suggestion = itemToString(filteredItems[0]);
@@ -648,10 +656,12 @@ const ComboBox = forwardRef(
                 items.some((item) => itemToString(item) === currentInput);
 
               if (!hasExactMatch) {
+                const selectedItem =
+                  typeof selectedItemProp !== 'undefined'
+                    ? selectedItemProp
+                    : state.selectedItem;
                 const restoredInput =
-                  state.selectedItem !== null
-                    ? itemToString(state.selectedItem)
-                    : '';
+                  selectedItem !== null ? itemToString(selectedItem) : '';
 
                 return { ...changes, inputValue: restoredInput };
               }
@@ -670,8 +680,7 @@ const ComboBox = forwardRef(
                 );
                 const highlightedItem = filteredList[state.highlightedIndex];
 
-                // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
-                if (highlightedItem && !(highlightedItem as any).disabled) {
+                if (highlightedItem && !isDisabledItem(highlightedItem)) {
                   return {
                     ...changes,
                     selectedItem: highlightedItem,
@@ -683,8 +692,7 @@ const ComboBox = forwardRef(
                 if (autoIndex !== -1) {
                   const matchingItem = items[autoIndex];
 
-                  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
-                  if (matchingItem && !(matchingItem as any).disabled) {
+                  if (matchingItem && !isDisabledItem(matchingItem)) {
                     return {
                       ...changes,
                       selectedItem: matchingItem,
@@ -718,10 +726,12 @@ const ComboBox = forwardRef(
                 items.some((item) => itemToString(item) === currentInput);
 
               if (!hasExactMatch) {
+                const selectedItem =
+                  typeof selectedItemProp !== 'undefined'
+                    ? selectedItemProp
+                    : state.selectedItem;
                 const restoredInput =
-                  state.selectedItem !== null
-                    ? itemToString(state.selectedItem)
-                    : '';
+                  selectedItem !== null ? itemToString(selectedItem) : '';
 
                 return { ...changes, inputValue: restoredInput };
               }
@@ -872,10 +882,7 @@ const ComboBox = forwardRef(
       initialSelectedItem: initialSelectedItem,
       inputId: id,
       stateReducer,
-      isItemDisabled(item) {
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
-        return (item as any)?.disabled;
-      },
+      isItemDisabled: isDisabledItem,
       ...downshiftProps,
       onStateChange: ({ type, selectedItem: newSelectedItem }) => {
         downshiftProps?.onStateChange?.({
@@ -888,9 +895,10 @@ const ComboBox = forwardRef(
         if (
           (type === ItemClick ||
             type === FunctionSelectItem ||
-            type === InputKeyDownEnter) &&
+            type === InputKeyDownEnter ||
+            (!allowCustomValue && type === InputBlur)) &&
           typeof newSelectedItem !== 'undefined' &&
-          !isEqual(selectedItemProp, newSelectedItem)
+          !isEqual(currentSelectedItem, newSelectedItem)
         ) {
           if (items.some((item) => isEqual(item, newSelectedItem))) {
             committedCustomValueRef.current = '';
@@ -1156,10 +1164,12 @@ const ComboBox = forwardRef(
                   if (typeahead && event.key === 'Tab') {
                     if (!isOpen) return;
                     //  event.preventDefault();
-                    const matchingItem = items.find((item) =>
-                      itemToString(item)
-                        .toLowerCase()
-                        .startsWith(inputValue.toLowerCase())
+                    const matchingItem = items.find(
+                      (item) =>
+                        !isDisabledItem(item) &&
+                        itemToString(item)
+                          .toLowerCase()
+                          .startsWith(inputValue.toLowerCase())
                     );
                     if (matchingItem) {
                       const newValue = itemToString(matchingItem);
@@ -1519,8 +1529,7 @@ type ComboboxComponentProps<ItemType> = PropsWithChildren<
   RefAttributes<HTMLInputElement>;
 
 export interface ComboBoxComponent {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
-  <ItemType>(props: ComboboxComponentProps<ItemType>): ReactElement<any> | null;
+  <ItemType>(props: ComboboxComponentProps<ItemType>): ReactElement | null;
 }
 
 export default ComboBox as ComboBoxComponent;

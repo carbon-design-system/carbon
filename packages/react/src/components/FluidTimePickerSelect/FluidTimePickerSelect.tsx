@@ -46,6 +46,11 @@ export interface FluidTimePickerSelectProps {
    * the underlying `<input>` changes
    */
   onChange?: React.ChangeEventHandler<HTMLSelectElement>;
+
+  /**
+   * Whether the component is read-only.
+   */
+  readOnly?: boolean;
 }
 
 // eslint-disable-next-line react/display-name -- https://github.com/carbon-design-system/carbon/issues/20452
@@ -97,6 +102,11 @@ FluidTimePickerSelect.propTypes = {
    * the underlying `<input>` changes
    */
   onChange: PropTypes.func,
+
+  /**
+   * Whether the component is read-only.
+   */
+  readOnly: PropTypes.bool,
 };
 
 export default FluidTimePickerSelect;

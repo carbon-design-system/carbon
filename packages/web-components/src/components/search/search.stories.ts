@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2019, 2024
+ * Copyright IBM Corp. 2019, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -7,29 +7,30 @@
 
 import { html } from 'lit';
 import { ifDefined } from 'lit/directives/if-defined.js';
-import { INPUT_SIZE } from '../text-input/text-input';
+import { SEARCH_SIZE } from './defs';
 import './search-skeleton';
 import '../layer';
-import '../../../.storybook/templates/with-layer';
 import './index';
+import { withLayers } from '../../../.storybook/decorators/with-layers';
 
 const sizes = {
-  [`Small size (${INPUT_SIZE.SMALL})`]: INPUT_SIZE.SMALL,
-  [`Medium size (${INPUT_SIZE.MEDIUM})`]: INPUT_SIZE.MEDIUM,
-  [`Large size (${INPUT_SIZE.LARGE})`]: INPUT_SIZE.LARGE,
+  [`Extra small size (${SEARCH_SIZE.EXTRA_SMALL})`]: SEARCH_SIZE.EXTRA_SMALL,
+  [`Small size (${SEARCH_SIZE.SMALL})`]: SEARCH_SIZE.SMALL,
+  [`Medium size (${SEARCH_SIZE.MEDIUM})`]: SEARCH_SIZE.MEDIUM,
+  [`Large size (${SEARCH_SIZE.LARGE})`]: SEARCH_SIZE.LARGE,
 };
 
 const args = {
   autoComplete: 'off',
   closeButtonLabelText: 'Clear search input',
+  defaultWidth: 800,
   disabled: false,
   labelText: 'Search',
   placeholder: 'Placeholder text',
-  playgroundWidth: 300,
   role: 'searchbox',
-  size: null,
+  size: SEARCH_SIZE.MEDIUM,
   type: 'text',
-  value: 'Default value',
+  value: '',
 };
 
 const argTypes = {
@@ -43,10 +44,17 @@ const argTypes = {
     description:
       'Specify a label to be read by screen readers on the "close" button.',
   },
+  defaultWidth: {
+    control: { type: 'range', min: 300, max: 800, step: 50 },
+  },
   disabled: {
     control: 'boolean',
     description:
       'Specify whether the <code>&lt;input&gt;</code> should be disabled.',
+  },
+  expanded: {
+    control: 'boolean',
+    description: 'Specify whether the Expandable Search should be expanded',
   },
   labelText: {
     control: 'text',
@@ -56,10 +64,6 @@ const argTypes = {
     control: 'text',
     description:
       'Provide an optional placeholder text for the Search. Note: if the label and placeholder differ, VoiceOver on Mac will read both.',
-  },
-  playgroundWidth: {
-    control: { type: 'range', min: 300, max: 800, step: 50 },
-    description: 'Playground width',
   },
   role: {
     control: 'text',
@@ -83,67 +87,6 @@ const argTypes = {
 };
 
 export const Default = {
-  render: () => {
-    return html`
-      <cds-search
-        size="lg"
-        close-button-label-text="Clear search input"
-        label-text="Search"
-        placeholder="Find your items"
-        type="text"></cds-search>
-    `;
-  },
-};
-
-export const Disabled = {
-  render: () => {
-    return html`
-      <cds-search
-        size="lg"
-        disabled
-        close-button-label-text="Clear search input"
-        label-text="Search"
-        placeholder="Find your items"
-        type="text"></cds-search>
-    `;
-  },
-};
-
-export const Expandable = {
-  render: () => {
-    return html`
-      <cds-search
-        size="lg"
-        expandable
-        close-button-label-text="Clear search input"
-        label-text="Search"
-        placeholder="Find your items"
-        type="text"></cds-search>
-    `;
-  },
-};
-
-export const ExpandableWithLayer = {
-  render: () => {
-    return html`
-      <sb-template-layers>
-        <cds-search size="lg" expandable placeholder="Layer two"></cds-search>
-      </sb-template-layers>
-    `;
-  },
-};
-
-export const WithLayer = {
-  render: () => {
-    return html`
-      <sb-template-layers>
-        <cds-search size="lg" placeholder="Find your items"></cds-search>
-      </sb-template-layers>
-    `;
-  },
-};
-
-export const Playground = {
   args,
   argTypes,
   render: (args) => {
@@ -154,34 +97,175 @@ export const Playground = {
       disabled,
       labelText,
       placeholder,
-      playgroundWidth,
+      defaultWidth,
       size,
       role,
       type,
       value,
       onInput,
     } = args ?? {};
-
-    const mainDiv = document.querySelector('#main-content');
-
-    if (mainDiv) {
-      (mainDiv as HTMLElement).style.width = `${playgroundWidth}px`;
-    }
-
     return html`
-      <cds-search
-        autocomplete="${autoComplete}"
-        close-button-label-text="${ifDefined(closeButtonLabelText)}"
-        color-scheme="${ifDefined(colorScheme)}"
-        ?disabled="${disabled}"
-        label-text="${ifDefined(labelText)}"
-        placeholder="${ifDefined(placeholder)}"
-        size="${ifDefined(size)}"
-        type="${ifDefined(type)}"
-        role=${role}
-        value="${ifDefined(value)}"
-        @cds-search-input="${onInput}">
-      </cds-search>
+      <div style="width: ${defaultWidth}px;">
+        <cds-search
+          autocomplete="${autoComplete}"
+          close-button-label-text="${ifDefined(closeButtonLabelText)}"
+          color-scheme="${ifDefined(colorScheme)}"
+          ?disabled="${disabled}"
+          label-text="${ifDefined(labelText)}"
+          placeholder="${ifDefined(placeholder)}"
+          size="${ifDefined(size)}"
+          type="${ifDefined(type)}"
+          role=${role}
+          value="${ifDefined(value)}"
+          @cds-search-input="${onInput}"></cds-search>
+      </div>
+    `;
+  },
+};
+
+export const Expandable = {
+  args: { ...args, expanded: false },
+  argTypes,
+  render: (args) => {
+    const {
+      autoComplete,
+      closeButtonLabelText,
+      colorScheme,
+      disabled,
+      labelText,
+      placeholder,
+      defaultWidth,
+      expanded,
+      size,
+      role,
+      type,
+      value,
+      onInput,
+    } = args ?? {};
+    return html`
+      <div style="width: ${defaultWidth}px;">
+        <cds-search
+          autocomplete="${autoComplete}"
+          close-button-label-text="${ifDefined(closeButtonLabelText)}"
+          color-scheme="${ifDefined(colorScheme)}"
+          ?disabled="${disabled}"
+          label-text="${ifDefined(labelText)}"
+          placeholder="${ifDefined(placeholder)}"
+          size="${ifDefined(size)}"
+          type="${ifDefined(type)}"
+          role=${role}
+          value="${ifDefined(value)}"
+          @cds-search-input="${onInput}"
+          expandable
+          ?expanded=${expanded}></cds-search>
+      </div>
+    `;
+  },
+};
+
+export const ExpandableWithLayer = {
+  args: { ...args, expanded: false },
+  argTypes,
+  decorators: [withLayers],
+  parameters: {
+    layout: 'fullscreen',
+  },
+  render: (args) => {
+    const {
+      autoComplete,
+      closeButtonLabelText,
+      colorScheme,
+      disabled,
+      labelText,
+      placeholder,
+      defaultWidth,
+      expanded,
+      size,
+      role,
+      type,
+      value,
+      onInput,
+    } = args ?? {};
+    return html`
+      <div style="width: ${defaultWidth}px;">
+        <cds-search
+          autocomplete="${autoComplete}"
+          close-button-label-text="${ifDefined(closeButtonLabelText)}"
+          color-scheme="${ifDefined(colorScheme)}"
+          ?disabled="${disabled}"
+          label-text="${ifDefined(labelText)}"
+          placeholder="${ifDefined(placeholder)}"
+          size="${ifDefined(size)}"
+          type="${ifDefined(type)}"
+          role=${role}
+          value="${ifDefined(value)}"
+          @cds-search-input="${onInput}"
+          expandable
+          ?expanded=${expanded}></cds-search>
+      </div>
+    `;
+  },
+};
+
+export const Skeleton = {
+  args,
+  argTypes: {
+    ...argTypes,
+    size: {
+      ...argTypes.size,
+      description: 'Specify the size of the Search Skeleton.',
+    },
+  },
+  parameters: {
+    controls: {
+      include: ['size', 'defaultWidth'],
+    },
+  },
+  render: (args) => {
+    const { size, defaultWidth } = args ?? {};
+    return html` <div style="width: ${defaultWidth}px;">
+      <cds-search-skeleton size="${size}"></cds-search-skeleton>
+    </div>`;
+  },
+};
+
+export const WithLayer = {
+  args,
+  argTypes,
+  decorators: [withLayers],
+  parameters: {
+    layout: 'fullscreen',
+  },
+  render: (args) => {
+    const {
+      autoComplete,
+      closeButtonLabelText,
+      colorScheme,
+      disabled,
+      labelText,
+      placeholder,
+      defaultWidth,
+      size,
+      role,
+      type,
+      value,
+      onInput,
+    } = args ?? {};
+    return html`
+      <div style="width: ${defaultWidth}px;">
+        <cds-search
+          autocomplete="${autoComplete}"
+          close-button-label-text="${ifDefined(closeButtonLabelText)}"
+          color-scheme="${ifDefined(colorScheme)}"
+          ?disabled="${disabled}"
+          label-text="${ifDefined(labelText)}"
+          placeholder="${ifDefined(placeholder)}"
+          size="${ifDefined(size)}"
+          type="${ifDefined(type)}"
+          role=${role}
+          value="${ifDefined(value)}"
+          @cds-search-input="${onInput}"></cds-search>
+      </div>
     `;
   },
 };
