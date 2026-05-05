@@ -4881,16 +4881,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@octokit/auth-action@npm:^6.0.1":
-  version: 6.0.1
-  resolution: "@octokit/auth-action@npm:6.0.1"
-  dependencies:
-    "@octokit/auth-token": "npm:^6.0.0"
-    "@octokit/types": "npm:^14.0.0"
-  checksum: 10/ad8503ff1ca03fda8767da7eb8afc55e4bc200f44d538dacf708ac83f041eb9c24bf112bd6959323c9b0bc4ecc1169cc298663c3d92dd6dc5b99d61b4255236c
-  languageName: node
-  linkType: hard
-
 "@octokit/auth-token@npm:^6.0.0":
   version: 6.0.0
   resolution: "@octokit/auth-token@npm:6.0.0"
@@ -5079,7 +5069,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@octokit/types@npm:^14.0.0, @octokit/types@npm:^14.1.0":
+"@octokit/types@npm:^14.1.0":
   version: 14.1.0
   resolution: "@octokit/types@npm:14.1.0"
   dependencies:
@@ -20609,7 +20599,6 @@ __metadata:
   dependencies:
     "@actions/core": "npm:^1.11.1"
     "@actions/github": "npm:9.1.1"
-    "@octokit/auth-action": "npm:^6.0.1"
   languageName: unknown
   linkType: soft
 
