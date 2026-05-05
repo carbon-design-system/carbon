@@ -1020,6 +1020,11 @@ class CDSDropdown extends ValidityMixin(
   required = false;
 
   /**
+   * Specify whether the dropdown is fluid or not
+   */
+  @property({ type: Boolean })
+  isFluid = false;
+  /**
    * The special validity message for `required`.
    */
   @property({ attribute: 'required-validity-message' })
@@ -1066,12 +1071,6 @@ class CDSDropdown extends ValidityMixin(
    */
   @property({ reflect: true })
   value = '';
-
-  /**
-   * Specify whether the textarea is fluid or not
-   */
-  @property({ type: Boolean })
-  isFluid = false;
 
   /**
    * Specify whether the control is currently in warning state
@@ -1270,6 +1269,7 @@ class CDSDropdown extends ValidityMixin(
     const {
       ariaLabel,
       _classes: classes,
+      disabled,
       helperText,
       invalidText,
       open,
@@ -1359,7 +1359,9 @@ class CDSDropdown extends ValidityMixin(
           )}"
           class="${prefix}--list-box__field"
           part="trigger-button"
-          tabindex="${ifDefined(!shouldTriggerBeFocusable ? undefined : '0')}"
+          tabindex="${ifDefined(
+            !shouldTriggerBeFocusable ? undefined : disabled ? undefined : '0'
+          )}"
           role="${ifDefined(
             !shouldTriggerBeFocusable ? undefined : 'combobox'
           )}"

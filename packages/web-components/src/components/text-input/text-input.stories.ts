@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2019, 2025
+ * Copyright IBM Corp. 2019, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -51,6 +51,7 @@ const actions = html`
 `;
 
 const sizes = {
+  [`Extra small size (${INPUT_SIZE.EXTRA_SMALL})`]: INPUT_SIZE.EXTRA_SMALL,
   [`Small size (${INPUT_SIZE.SMALL})`]: INPUT_SIZE.SMALL,
   [`Medium size (${INPUT_SIZE.MEDIUM})`]: INPUT_SIZE.MEDIUM,
   [`Large size (${INPUT_SIZE.LARGE})`]: INPUT_SIZE.LARGE,
@@ -215,6 +216,22 @@ export const Default = {
     <div style="width: ${args.defaultWidth}px;">${renderTextInput(args)}</div>
   `,
 };
+export const Inline = {
+  args: {
+    ...sharedArgs,
+    defaultWidth: 450,
+    inline: true,
+  },
+  argTypes: sharedArgTypes,
+  parameters: {
+    controls: {
+      exclude: ['inline'],
+    },
+  },
+  render: (args: TextInputStoryArgs) => html`
+    <div style="width: ${args.defaultWidth}px;">${renderTextInput(args)}</div>
+  `,
+};
 
 export const ReadOnly = {
   args: {
@@ -257,13 +274,17 @@ export const ReadOnly = {
 };
 
 export const Skeleton = {
-  args: { hideLabel: false },
-  argTypes: {
-    hideLabel: { control: 'boolean', description: 'Hide label (hide-label)' },
+  args: sharedArgs,
+  argTypes: sharedArgTypes,
+  parameters: {
+    controls: {
+      include: ['hideLabel', 'size'],
+    },
   },
-  render: ({ hideLabel }) =>
+  render: ({ hideLabel, size }) =>
     html`<cds-text-input-skeleton
-      ?hide-label=${hideLabel}></cds-text-input-skeleton>`,
+      ?hide-label=${hideLabel}
+      size="${size}"></cds-text-input-skeleton>`,
 };
 
 export const WithAILabel = {

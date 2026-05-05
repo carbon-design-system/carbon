@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -83,6 +83,16 @@ describe('Checkbox', () => {
     expect(screen.getByText('0')).toBeInTheDocument();
   });
 
+  it('should not render helperText when helperText is an empty string', () => {
+    const { container } = render(
+      <Checkbox id="test" labelText="Checkbox label" helperText="" />
+    );
+
+    expect(
+      container.querySelector(`.${prefix}--form__helper-text`)
+    ).not.toBeInTheDocument();
+  });
+
   it('should set data-invalid when invalid prop is true', () => {
     render(
       <Checkbox
@@ -111,6 +121,81 @@ describe('Checkbox', () => {
     );
 
     expect(screen.getByText('Invalid text')).toBeInTheDocument();
+  });
+
+  it('should not respect invalid prop if disabled', () => {
+    const { container } = render(
+      <Checkbox
+        defaultChecked
+        labelText="Checkbox label"
+        id="checkbox-label-1"
+        invalid
+        disabled
+      />
+    );
+
+    // eslint-disable-next-line testing-library/no-node-access, testing-library/no-container
+    const invalidIcon = container.querySelector(
+      `svg.${prefix}--checkbox__invalid-icon`
+    );
+
+    expect(screen.getByRole('checkbox')).not.toHaveAttribute('data-invalid');
+    expect(container.firstChild).not.toHaveClass(
+      `${prefix}--checkbox-wrapper--invalid`
+    );
+    expect(invalidIcon).not.toBeInTheDocument();
+  });
+
+  it('should not respect invalid prop if readOnly', () => {
+    const { container } = render(
+      <Checkbox
+        defaultChecked
+        labelText="Checkbox label"
+        id="checkbox-label-1"
+        invalid
+        readOnly
+      />
+    );
+
+    // eslint-disable-next-line testing-library/no-node-access, testing-library/no-container
+    const invalidIcon = container.querySelector(
+      `svg.${prefix}--checkbox__invalid-icon`
+    );
+
+    expect(screen.getByRole('checkbox')).not.toHaveAttribute('data-invalid');
+    expect(container.firstChild).not.toHaveClass(
+      `${prefix}--checkbox-wrapper--invalid`
+    );
+    expect(invalidIcon).not.toBeInTheDocument();
+  });
+
+  it('should remain disabled when readOnly and disabled are both true', () => {
+    render(
+      <Checkbox
+        defaultChecked
+        labelText="Checkbox label"
+        id="checkbox-label-1"
+        readOnly
+        disabled
+      />
+    );
+
+    expect(screen.getByRole('checkbox')).toBeDisabled();
+  });
+
+  it('should display helperText when invalid is true but disabled', () => {
+    render(
+      <Checkbox
+        defaultChecked
+        labelText="Checkbox label"
+        id="checkbox-label-1"
+        invalid
+        disabled
+        helperText="Helper text"
+      />
+    );
+
+    expect(screen.getByText('Helper text')).toBeInTheDocument();
   });
 
   it('should respect readOnly prop', () => {
@@ -147,6 +232,50 @@ describe('Checkbox', () => {
       `${prefix}--checkbox-wrapper--warning`
     );
     expect(warnIcon).toBeInTheDocument();
+  });
+
+  it('should not respect warn prop if disabled', () => {
+    const { container } = render(
+      <Checkbox
+        defaultChecked
+        labelText="Checkbox label"
+        id="checkbox-label-1"
+        warn
+        disabled
+      />
+    );
+
+    // eslint-disable-next-line testing-library/no-node-access, testing-library/no-container
+    const warnIcon = container.querySelector(
+      `svg.${prefix}--checkbox__invalid-icon--warning`
+    );
+
+    expect(container.firstChild).not.toHaveClass(
+      `${prefix}--checkbox-wrapper--warning`
+    );
+    expect(warnIcon).not.toBeInTheDocument();
+  });
+
+  it('should not respect warn prop if readOnly', () => {
+    const { container } = render(
+      <Checkbox
+        defaultChecked
+        labelText="Checkbox label"
+        id="checkbox-label-1"
+        warn
+        readOnly
+      />
+    );
+
+    // eslint-disable-next-line testing-library/no-node-access, testing-library/no-container
+    const warnIcon = container.querySelector(
+      `svg.${prefix}--checkbox__invalid-icon--warning`
+    );
+
+    expect(container.firstChild).not.toHaveClass(
+      `${prefix}--checkbox-wrapper--warning`
+    );
+    expect(warnIcon).not.toBeInTheDocument();
   });
 
   it('should display warnText if warn prop is true', () => {

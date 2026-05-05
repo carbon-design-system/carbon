@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
+import React, { useState } from 'react';
 import Slider from '../Slider';
 import userEvent from '@testing-library/user-event';
 import {
@@ -265,6 +265,153 @@ describe('Slider', () => {
       await type(inputElement, '999');
       expect(parseInt(slider.getAttribute('aria-valuenow'))).toEqual(999);
       expect(onChange).toHaveBeenLastCalledWith({ value: 999 });
+    });
+
+    it('should keep controlled invalid state after dragging to another invalid value', async () => {
+      const ControlledSlider = () => {
+        const [value, setValue] = useState(20);
+
+        return (
+          <Slider
+            labelText="Slider"
+            value={value}
+            min={0}
+            max={100}
+            ariaLabelInput={inputAriaValue}
+            invalid={value > 25}
+            invalidText="Error message"
+            onChange={({ value }) => setValue(value)}
+          />
+        );
+      };
+
+      render(<ControlledSlider />);
+
+      const inputElement = screen.getByLabelText(inputAriaValue);
+      const slider = screen.getByRole('slider');
+      const sliderRoot = screen.getByRole('presentation');
+
+      jest
+        .spyOn(sliderRoot, 'getBoundingClientRect')
+        .mockImplementation(() => createDOMRect({ left: 0, width: 100 }));
+
+      await userEvent.clear(inputElement);
+      await userEvent.type(inputElement, '30');
+
+      expect(inputElement).toHaveAttribute('aria-invalid', 'true');
+      expect(screen.getByText('Error message')).toBeInTheDocument();
+
+      fireEvent.mouseDown(slider, { clientX: 35 });
+      fireEvent.mouseUp(document);
+
+      await waitFor(() => {
+        expect(slider).toHaveAttribute('aria-valuenow', '35');
+      });
+
+      expect(screen.getByLabelText(inputAriaValue)).toHaveAttribute(
+        'aria-invalid',
+        'true'
+      );
+      expect(screen.getByText('Error message')).toBeInTheDocument();
+    });
+
+    it('should keep controlled invalid state after keyboard interaction changes to another invalid value', async () => {
+      const ControlledSlider = () => {
+        const [value, setValue] = useState(20);
+
+        return (
+          <Slider
+            labelText="Slider"
+            value={value}
+            min={0}
+            max={100}
+            ariaLabelInput={inputAriaValue}
+            invalid={value > 25}
+            invalidText="Error message"
+            onChange={({ value }) => setValue(value)}
+          />
+        );
+      };
+
+      render(<ControlledSlider />);
+
+      const inputElement = screen.getByLabelText(inputAriaValue);
+      const slider = screen.getByRole('slider');
+
+      await userEvent.clear(inputElement);
+      await userEvent.type(inputElement, '30');
+
+      expect(inputElement).toHaveAttribute('aria-invalid', 'true');
+      expect(screen.getByText('Error message')).toBeInTheDocument();
+
+      await userEvent.click(slider);
+      await userEvent.keyboard('{ArrowRight}');
+
+      await waitFor(() => {
+        expect(slider).toHaveAttribute('aria-valuenow', '31');
+      });
+
+      expect(screen.getByLabelText(inputAriaValue)).toHaveAttribute(
+        'aria-invalid',
+        'true'
+      );
+      expect(screen.getByText('Error message')).toBeInTheDocument();
+    });
+
+    it('should keep controlled invalid state for the upper handle after dragging to another invalid value', async () => {
+      const ControlledRangeSlider = () => {
+        const [value, setValue] = useState(20);
+        const [valueUpper, setValueUpper] = useState(70);
+
+        return (
+          <Slider
+            labelText="Slider"
+            value={value}
+            unstable_valueUpper={valueUpper}
+            min={0}
+            max={100}
+            ariaLabelInput={defaultAriaLabelInput}
+            unstable_ariaLabelInputUpper={defaultAriaLabelInputUpper}
+            invalid={valueUpper > 75}
+            invalidText="Error message"
+            onChange={({ value, valueUpper }) => {
+              setValue(value);
+              if (typeof valueUpper !== 'undefined') {
+                setValueUpper(valueUpper);
+              }
+            }}
+          />
+        );
+      };
+
+      render(<ControlledRangeSlider />);
+
+      const upperInput = screen.getByLabelText(defaultAriaLabelInputUpper, {
+        selector: 'input',
+      });
+      const sliderRoot = screen.getByRole('presentation');
+      const [lowerThumb, upperThumb] = screen.getAllByRole('slider');
+
+      jest
+        .spyOn(sliderRoot, 'getBoundingClientRect')
+        .mockImplementation(() => createDOMRect({ left: 0, width: 100 }));
+
+      await userEvent.clear(upperInput);
+      await userEvent.type(upperInput, '80');
+
+      expect(upperInput).toHaveAttribute('aria-invalid', 'true');
+      expect(screen.getByText('Error message')).toBeInTheDocument();
+
+      fireEvent.mouseDown(upperThumb, { clientX: 84 });
+      fireEvent.mouseUp(document);
+
+      await waitFor(() => {
+        expect(upperThumb).toHaveAttribute('aria-valuenow', '84');
+      });
+
+      expect(lowerThumb).toHaveAttribute('aria-valuenow', '20');
+      expect(upperInput).toHaveAttribute('aria-invalid', 'true');
+      expect(screen.getByText('Error message')).toBeInTheDocument();
     });
 
     it('sets correct state when typing a valid value in input field', async () => {
@@ -1462,7 +1609,7 @@ describe('Slider', () => {
         expect(onChange).not.toHaveBeenCalled();
       });
 
-      it.skip('gracefully tolerates empty event passed to _onDrag', () => {
+      it('gracefully tolerates empty event passed to _onDrag', () => {
         const { mouseDown, mouseUp, mouseMove } = fireEvent;
         const { container } = renderTwoHandleSlider({
           value: initialValueLower,
