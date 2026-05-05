@@ -16,7 +16,7 @@ import CaretRight16 from '@carbon/icons/es/caret--right/16.js';
 import FocusMixin from '../../globals/mixins/focus';
 import HostListener from '../../globals/decorators/host-listener';
 import HostListenerMixin from '../../globals/mixins/host-listener';
-import { PAGINATION_SIZE } from './defs';
+import { PAGINATION_SIZE, PAGINATION_TOOLTIP_POSITION } from './defs';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import { iconLoader } from '../../globals/internal/icon-loader';
 import { prefix } from '../../globals/settings';
@@ -239,6 +239,12 @@ class CDSPagination extends FocusMixin(HostListenerMixin(LitElement)) {
   backwardText = 'Previous page';
 
   /**
+   * Specify the position of the tooltip for the backward button. Can be one of: top, right, bottom, or left.
+   */
+  @property({ attribute: 'backward-text-tooltip-position' })
+  backwardTextTooltipPosition = PAGINATION_TOOLTIP_POSITION.TOP;
+
+  /**
    * The current page
    */
   @property({ type: Number, reflect: true })
@@ -299,6 +305,12 @@ class CDSPagination extends FocusMixin(HostListenerMixin(LitElement)) {
    */
   @property({ attribute: 'forward-text' })
   forwardText = 'Next page';
+
+  /**
+   * Specify the position of the tooltip for the forward button. Can be one of: top, right, bottom, or left.
+   */
+  @property({ attribute: 'forward-text-tooltip-position' })
+  forwardTextTooltipPosition = PAGINATION_TOOLTIP_POSITION.TOP;
 
   /**
    * true if the select box to change the page should be disabled.
@@ -429,7 +441,9 @@ class CDSPagination extends FocusMixin(HostListenerMixin(LitElement)) {
       page,
       disabled,
       forwardText,
+      forwardTextTooltipPosition,
       backwardText,
+      backwardTextTooltipPosition,
       itemsPerPageText,
       pageInputDisabled,
       pageSize,
@@ -545,6 +559,7 @@ class CDSPagination extends FocusMixin(HostListenerMixin(LitElement)) {
 
         <div class="${prefix}--pagination__control-buttons">
           <cds-button
+            tooltip-position=${backwardTextTooltipPosition}
             pagination
             size="${size}"
             ?disabled="${prevButtonDisabled}"
@@ -554,7 +569,7 @@ class CDSPagination extends FocusMixin(HostListenerMixin(LitElement)) {
             ${iconLoader(CaretLeft16, { slot: 'icon' })}
           </cds-button>
           <cds-button
-            tooltip-position="top"
+            tooltip-position=${forwardTextTooltipPosition}
             pagination
             size="${size}"
             ?disabled="${nextButtonDisabled}"
