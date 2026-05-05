@@ -117,10 +117,21 @@ export const MenuItem = forwardRef<HTMLLIElement, MenuItemProps>(
       context: floatingContext,
     } = useFloating({
       open: submenuOpen,
-      onOpenChange: (open) => {
+      onOpenChange: (open, event) => {
         if (open) {
           setSubmenuOpen(true);
         } else {
+          const relatedTarget =
+            event && 'relatedTarget' in event ? event.relatedTarget : null;
+
+          // Do not close submenu if hovering back to its parent
+          if (
+            relatedTarget instanceof Node &&
+            menuItem.current?.contains(relatedTarget)
+          ) {
+            return;
+          }
+
           setSubmenuOpen(false);
           if (refs.floating.current?.contains(document.activeElement)) {
             menuItem.current?.focus();
