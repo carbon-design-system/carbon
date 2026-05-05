@@ -554,7 +554,6 @@ const ModalDialog = React.forwardRef(function ModalDialog(
 
     const handleEscapeKey = (event) => {
       if (match(event, keys.Escape)) {
-        // Only handle ESC if this is the topmost modal
         event.preventDefault();
         onRequestClose(event);
       }
