@@ -133,7 +133,16 @@ export const MenuItem = forwardRef<HTMLLIElement, MenuItemProps>(
           }
 
           setSubmenuOpen(false);
-          menuItem.current?.focus();
+
+          const movingToSubmenu =
+            relatedTarget instanceof HTMLElement &&
+            relatedTarget
+              .closest('[role="menuitem"]')
+              ?.querySelector('[role="menu"]');
+
+          if (!movingToSubmenu) {
+            menuItem.current?.focus();
+          }
         }
       },
       placement: rtl ? 'left-start' : 'right-start',
