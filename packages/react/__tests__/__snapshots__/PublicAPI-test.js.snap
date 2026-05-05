@@ -4155,6 +4155,9 @@ Map {
       "narrow": {
         "type": "bool",
       },
+      "withRowGap": {
+        "type": "bool",
+      },
     },
     "render": [Function],
   },
@@ -5488,6 +5491,9 @@ Map {
         "type": "bool",
       },
       "narrow": {
+        "type": "bool",
+      },
+      "withRowGap": {
         "type": "bool",
       },
     },
@@ -7831,6 +7837,7 @@ Map {
       "size": {
         "args": [
           [
+            "xs",
             "sm",
             "md",
             "lg",
@@ -7982,6 +7989,7 @@ Map {
       "size": {
         "args": [
           [
+            "xs",
             "sm",
             "md",
             "lg",

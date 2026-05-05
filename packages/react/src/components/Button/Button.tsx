@@ -133,8 +133,9 @@ export type ButtonComponent = <T extends React.ElementType = 'button'>(
 
 function isIconOnlyButton(
   hasIconOnly: ButtonBaseProps['hasIconOnly'],
-  _kind: ButtonBaseProps['kind']
-): _kind is IconButtonKind {
+  kind: ButtonBaseProps['kind']
+): kind is IconButtonKind;
+function isIconOnlyButton(hasIconOnly: ButtonBaseProps['hasIconOnly']) {
   if (hasIconOnly === true) {
     return true;
   }
