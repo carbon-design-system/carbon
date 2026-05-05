@@ -126,7 +126,7 @@ const argTypes = {
   autocomplete: {
     control: 'text',
     description:
-      'The autocomplete attribute for the filterable input. Prevents inconsistent browser autocomplete behavior. Defaults to "off".',
+      'Specify the autocomplete behavior of the filterable input. Defaults to "off".',
   },
   clearSelectionDescription: {
     control: 'text',
