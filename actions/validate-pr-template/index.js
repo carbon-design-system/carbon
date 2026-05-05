@@ -50,9 +50,10 @@ function getTemplateHeadings(templateBody) {
 
 function getChecklistItemsFromTemplate(templateBody) {
   const lines = getLines(templateBody);
-  const checklistHeadingIndex = lines.findIndex(
-    (line) => line === '## PR Checklist'
-  );
+  // Find any heading containing "checklist" (case-insensitive)
+  const checklistHeadingIndex = lines.findIndex((line) => {
+    return isHeading(line) && line.toLowerCase().includes('checklist');
+  });
 
   if (checklistHeadingIndex === -1) {
     return [];
@@ -103,203 +104,122 @@ function getMissingChecklistItems(templateChecklistItems, prBody) {
   });
 }
 
-async function getJobUrl({
-  github,
-  core,
-  owner,
-  repo,
-  runId,
-  runAttempt,
-  issueNumber,
-  jobName,
-  fallbackUrl,
-}) {
-  try {
-    const jobs = await github.paginate(
-      github.rest.actions.listJobsForWorkflowRunAttempt,
-      {
-        owner,
-        repo,
-        run_id: runId,
-        attempt_number: runAttempt,
-        per_page: 100,
-      }
-    );
-
-    const currentJob = jobs.find((job) => {
-      return job.name === jobName;
-    });
-
-    if (currentJob) {
-      return `https://github.com/${owner}/${repo}/actions/runs/${runId}/job/${currentJob.id}?pr=${issueNumber}`;
-    }
-  } catch (error) {
-    core.warning(`Unable to resolve workflow job URL: ${error.message}`);
-  }
-
-  return fallbackUrl;
-}
-
-module.exports = async ({ github, context, core }) => {
+async function collectValidationData({ github, context, core }) {
   const upstreamOwner = 'carbon-design-system';
   const upstreamRepo = 'carbon';
   const templatePath = '.github/PULL_REQUEST_TEMPLATE.md';
-  const labelName = 'status: invalid description';
-  const commentMarker = '<!-- pr-template-check -->';
-  const owner = context.repo.owner;
-  const repo = context.repo.repo;
   const base = context.payload.pull_request.base;
   const baseRepo = base.repo;
   const baseOwner = baseRepo.owner.login;
   const baseRepoName = baseRepo.name;
   const baseRef = base.ref ?? context.payload.repository.default_branch;
-  const issueNumber = context.issue.number;
   const body = context.payload.pull_request.body || '';
   const templateUrl = `https://github.com/${baseOwner}/${baseRepoName}/blob/${baseRef}/${templatePath}`;
-  const runUrl = `https://github.com/${owner}/${repo}/actions/runs/${context.runId}?pr=${issueNumber}`;
-  const jobUrl = await getJobUrl({
-    github,
-    core,
-    owner,
-    repo,
-    runId: context.runId,
-    runAttempt: context.runAttempt,
-    issueNumber,
-    jobName: 'follows template',
-    fallbackUrl: runUrl,
-  });
 
-  const comments = await github.paginate(github.rest.issues.listComments, {
-    owner,
-    repo,
-    issue_number: issueNumber,
-    per_page: 100,
-  });
-
-  const existingComment = comments.find((comment) => {
-    return (
-      comment.user?.type === 'Bot' && comment.body?.includes(commentMarker)
-    );
-  });
-
-  async function addLabel() {
-    await github.rest.issues.addLabels({
-      owner,
-      repo,
-      issue_number: issueNumber,
-      labels: [labelName],
+  try {
+    const { data: templateFile } = await github.rest.repos.getContent({
+      owner: baseOwner ?? upstreamOwner,
+      repo: baseRepoName ?? upstreamRepo,
+      path: templatePath,
+      ref: baseRef,
     });
-  }
 
-  async function removeLabel() {
-    try {
-      await github.rest.issues.removeLabel({
-        owner,
-        repo,
-        issue_number: issueNumber,
-        name: labelName,
-      });
-    } catch (error) {
-      if (error.status !== 404) {
-        throw error;
-      }
-    }
-  }
+    const templateBody = Buffer.from(
+      templateFile.content,
+      templateFile.encoding
+    )
+      .toString('utf8')
+      .trim();
 
-  async function upsertComment(commentBody) {
-    if (existingComment) {
-      await github.rest.issues.updateComment({
-        owner,
-        repo,
-        comment_id: existingComment.id,
-        body: commentBody,
-      });
+    const templateHeadings = getTemplateHeadings(templateBody);
+    const templateChecklistItems = getChecklistItemsFromTemplate(templateBody);
+    const missingHeadings = getMissingHeadings(templateHeadings, body);
+    const missingChecklistItems = getMissingChecklistItems(
+      templateChecklistItems,
+      body
+    );
+
+    return {
+      templateUrl,
+      missingHeadings,
+      missingChecklistItems,
+    };
+  } catch (error) {
+    core.setFailed(
+      `Unable to validate PR template: ${error.message}\n\nPlease ensure the PR template exists at ${templateUrl}`
+    );
+    throw error;
+  }
+}
+
+async function validateHeadings({ core }) {
+  try {
+    const validationData = JSON.parse(process.env.VALIDATION_DATA || '{}');
+
+    if (!validationData.templateUrl) {
+      core.setFailed(
+        'Unable to validate PR template: validation data is missing or malformed'
+      );
       return;
     }
 
-    await github.rest.issues.createComment({
-      owner,
-      repo,
-      issue_number: issueNumber,
-      body: commentBody,
-    });
-  }
+    const { templateUrl, missingHeadings } = validationData;
 
-  const { data: templateFile } = await github.rest.repos.getContent({
-    owner: baseOwner ?? upstreamOwner,
-    repo: baseRepoName ?? upstreamRepo,
-    path: templatePath,
-    ref: baseRef,
-  });
-
-  const templateBody = Buffer.from(templateFile.content, templateFile.encoding)
-    .toString('utf8')
-    .trim();
-
-  const templateHeadings = getTemplateHeadings(templateBody);
-  const templateChecklistItems = getChecklistItemsFromTemplate(templateBody);
-  const missingHeadings = getMissingHeadings(templateHeadings, body);
-  const missingChecklistItems = getMissingChecklistItems(
-    templateChecklistItems,
-    body
-  );
-  const isValid =
-    missingHeadings.length === 0 && missingChecklistItems.length === 0;
-
-  if (!isValid) {
-    const failureDetails = [];
-
-    if (missingHeadings.length > 0) {
-      failureDetails.push(`Missing headings: ${missingHeadings.join(', ')}`);
-    }
-
-    if (missingChecklistItems.length > 0) {
-      failureDetails.push(
-        `Missing checklist items: ${missingChecklistItems.join(', ')}`
+    if (missingHeadings && missingHeadings.length > 0) {
+      core.setFailed(
+        [
+          `Pull request body is missing required PR template headings: ${missingHeadings.join(', ')}`,
+          '',
+          `Please edit the PR description to include all required headings from the template: ${templateUrl}`,
+        ].join('\n')
       );
     }
+  } catch (error) {
+    core.setFailed(`Unable to validate PR template headings: ${error.message}`);
+  }
+}
 
-    const failureComment = [
-      commentMarker,
-      '> [!IMPORTANT]',
-      '>',
-      `> Pull requests must use the pull request [template](${templateUrl}). Please edit the description above to resolve this [error](${jobUrl}).`,
-      '',
-      '<details><summary>View the template</summary>',
-      '<p>',
-      '',
-      '```markdown',
-      templateBody,
-      '```',
-      '',
-      '</p>',
-      '</details>',
-    ].join('\n');
+async function validateChecklistItems({ core }) {
+  try {
+    const validationData = JSON.parse(process.env.VALIDATION_DATA || '{}');
 
-    await addLabel();
-    await upsertComment(failureComment);
+    if (!validationData.templateUrl) {
+      core.setFailed(
+        'Unable to validate PR template: validation data is missing or malformed'
+      );
+      return;
+    }
 
+    const { templateUrl, missingChecklistItems } = validationData;
+
+    if (missingChecklistItems && missingChecklistItems.length > 0) {
+      core.setFailed(
+        [
+          `Pull request body is missing required PR checklist items: ${missingChecklistItems.join(', ')}`,
+          '',
+          `Please edit the PR description to include all required checklist items from the template: ${templateUrl}`,
+        ].join('\n')
+      );
+    }
+  } catch (error) {
     core.setFailed(
-      [
-        'Pull request body is missing required content from the PR template.',
-        ...failureDetails.map((detail) => `- ${detail}`),
-        `Template: ${templateUrl}`,
-        `Workflow run: ${jobUrl}`,
-        'Edit the PR description to restore the missing headings and checklist item text, then save the PR to rerun this check.',
-      ].join('\n')
-    );
-
-    return;
-  }
-
-  await removeLabel();
-
-  if (existingComment) {
-    await upsertComment(
-      [
-        commentMarker,
-        'Thanks for using the pull request description template! 👍',
-      ].join('\n')
+      `Unable to validate PR template checklist items: ${error.message}`
     );
   }
+}
+
+// Export functions for testing and action steps
+module.exports = {
+  collectValidationData,
+  validateHeadings,
+  validateChecklistItems,
+  // Export helper functions for testing
+  getLines,
+  isHeading,
+  isHtmlComment,
+  normalizeChecklistLine,
+  getTemplateHeadings,
+  getChecklistItemsFromTemplate,
+  getMissingHeadings,
+  getMissingChecklistItems,
 };
