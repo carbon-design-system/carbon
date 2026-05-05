@@ -12,6 +12,12 @@ const githubtoken = core.getInput('GITHUB_TOKEN', { required: true });
 const octokit = github.getOctokit(githubtoken);
 
 async function run() {
+  const enabled = core.getInput('enabled');
+  if (enabled === 'false') {
+    core.info('Action is not enabled. Exiting');
+    return;
+  }
+
   let owner = core.getInput('OWNER', { required: true });
   let repo = core.getInput('REPO_NAME', { required: true });
 
