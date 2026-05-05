@@ -10,12 +10,15 @@ import path from 'path';
 import ts from 'typescript';
 
 /**
- * Creates the tsdown/Rolldown plugin used by the scoped-elements build to strip
- * global registration and add scoped child registration where needed.
+ * Creates the build helper that updates component files before they are bundled.
  */
 export function scopedElementsDecoratorStripPlugin() {
   return {
     name: 'scoped-elements-decorator-strip',
+    /**
+     * Checks one file during the build and rewrites it only if it is a
+     * TypeScript component file that needs scoped child component registration.
+     */
     transform(code, id) {
       const filePath = id.split('?')[0];
       const isTsSource = filePath.endsWith('.ts');
@@ -48,8 +51,8 @@ export function scopedElementsDecoratorStripPlugin() {
 }
 
 /**
- * Builds the child-registration metadata for a component by resolving its
- * side-effect imports to decorated child component classes.
+ * Makes a checklist of child components this component needs to register
+ * privately inside itself.
  */
 function createScopedChildrenMapping(sourceText, filePath) {
   const currentComponent = getCustomElementMetadata(sourceText, filePath);
@@ -140,8 +143,8 @@ function createScopedChildrenMapping(sourceText, filePath) {
 }
 
 /**
- * Finds default imports already present in a source file so generated child
- * registration can reuse them instead of adding duplicate import declarations.
+ * Checks which component classes are already imported so the plugin does not
+ * add the same import twice.
  */
 function getExistingImportsByFilePath(sourceFile, filePath) {
   const importsByFilePath = new Map();
@@ -170,8 +173,8 @@ function getExistingImportsByFilePath(sourceFile, filePath) {
 }
 
 /**
- * Returns whether an import only exists for module side effects, which is how
- * child custom elements are commonly registered in the standard build.
+ * Detects imports that are used only to make another file run, such as
+ * `import './child';`.
  */
 function isSideEffectImportDeclaration(statement) {
   return (
@@ -183,8 +186,8 @@ function isSideEffectImportDeclaration(statement) {
 }
 
 /**
- * Resolves a side-effect import to one or more decorated child components,
- * following simple barrel files recursively.
+ * Follows one of those "run this file" imports and finds the real child
+ * component or components behind it.
  */
 function resolveScopedChildComponents(
   filePath,
@@ -234,7 +237,7 @@ function resolveScopedChildComponents(
 }
 
 /**
- * Resolves a relative TypeScript import specifier to an actual source file.
+ * Turns a relative import path into the real TypeScript file on disk.
  */
 function resolveImportPath(filePath, importSpecifier) {
   const basePath = path.resolve(path.dirname(filePath), importSpecifier);
@@ -254,7 +257,7 @@ function resolveImportPath(filePath, importSpecifier) {
 }
 
 /**
- * Creates a source import path from one TypeScript file to another.
+ * Builds the import path one file should use to import another file.
  */
 function getImportPath(fromFilePath, toFilePath) {
   const relativePath = path
@@ -266,7 +269,8 @@ function getImportPath(fromFilePath, toFilePath) {
 }
 
 /**
- * Extracts the class name and tag name from a decorated custom element class.
+ * Finds a component's class name and HTML tag name from its `@customElement()`
+ * line.
  */
 function getCustomElementMetadata(sourceText, filePath) {
   const sourceFile = ts.createSourceFile(
@@ -278,6 +282,7 @@ function getCustomElementMetadata(sourceText, filePath) {
   );
 
   let metadata;
+  // Walks through the file until it finds the component class.
   const visit = (node) => {
     if (metadata || !ts.isClassDeclaration(node) || !node.name) {
       ts.forEachChild(node, visit);
@@ -316,8 +321,7 @@ function getCustomElementMetadata(sourceText, filePath) {
 }
 
 /**
- * Converts the supported `@customElement()` tag-name argument shapes into a
- * concrete tag name for scoped registry definitions.
+ * Turns the value inside `@customElement()` into the final HTML tag name.
  */
 function getCustomElementTagName(node, sourceFile) {
   if (!node) {
@@ -338,8 +342,8 @@ function getCustomElementTagName(node, sourceFile) {
 }
 
 /**
- * Applies child import rewrites and injects scoped registry setup into a
- * component source file.
+ * Applies the main rewrite: replaces child imports, adds a Lit helper import,
+ * and inserts private child registration code into the component class.
  */
 function applyScopedChildComponentTransforms(
   sourceText,
@@ -364,8 +368,7 @@ function applyScopedChildComponentTransforms(
 }
 
 /**
- * Adds Lit's `adoptStyles` helper import so injected render-root code can
- * preserve static styles after creating a registry-backed shadow root.
+ * Adds Lit's style helper import if the file does not already have it.
  */
 function addAdoptStylesImport(sourceText) {
   const adoptStylesImport =
@@ -382,8 +385,8 @@ function addAdoptStylesImport(sourceText) {
 }
 
 /**
- * Generates the class members that create a scoped child registry and attach it
- * to this component's shadow root.
+ * Writes the new class code that gives this component its own private child
+ * component registry.
  */
 function createScopedRegistryInjection({ className, scopedChildDefinitions }) {
   const scopedChildDefinitionEntries = scopedChildDefinitions
@@ -402,6 +405,7 @@ ${scopedChildDefinitionEntries}
 
   private static scopedChildRegistry: CustomElementRegistry | null | undefined;
 
+  // Creates and remembers this component's private child component registry.
   private static getScopedChildRegistry(): CustomElementRegistry | null {
     if (this.scopedChildRegistry !== undefined) {
       return this.scopedChildRegistry;
@@ -430,6 +434,7 @@ ${scopedChildDefinitionEntries}
     return this.scopedChildRegistry;
   }
 
+  // Creates this component's shadow root using the private child registry.
   createRenderRoot() {
     const registry = (this.constructor as typeof ${className})
       .getScopedChildRegistry();
@@ -455,8 +460,8 @@ ${scopedChildDefinitionEntries}
 }
 
 /**
- * Removes global custom-element self-registration from component modules while
- * preserving all other decorators and exports.
+ * Removes the parts that register a component globally while leaving the rest
+ * of the file alone.
  */
 export function removeCustomElementRegistration(sourceText, filePath) {
   let didChange = false;
@@ -468,7 +473,9 @@ export function removeCustomElementRegistration(sourceText, filePath) {
     ts.ScriptKind.TS
   );
 
+  // Tells TypeScript how to rewrite the file.
   const transformer = (context) => {
+    // Looks at each piece of the file and removes only global registration code.
     const visit = (node) => {
       if (
         ts.isImportDeclaration(node) &&
