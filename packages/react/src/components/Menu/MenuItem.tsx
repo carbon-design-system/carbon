@@ -117,7 +117,16 @@ export const MenuItem = forwardRef<HTMLLIElement, MenuItemProps>(
       context: floatingContext,
     } = useFloating({
       open: submenuOpen,
-      onOpenChange: setSubmenuOpen,
+      onOpenChange: (open) => {
+        if (open) {
+          setSubmenuOpen(true);
+        } else {
+          setSubmenuOpen(false);
+          if (refs.floating.current?.contains(document.activeElement)) {
+            menuItem.current?.focus();
+          }
+        }
+      },
       placement: rtl ? 'left-start' : 'right-start',
       whileElementsMounted: autoUpdate,
       middleware: [offset({ mainAxis: -6, crossAxis: -6 })],
