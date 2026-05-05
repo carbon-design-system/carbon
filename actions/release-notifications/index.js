@@ -4,11 +4,11 @@
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
-'use strict';
-const core = require('@actions/core');
-const github = require('@actions/github');
-const { request } = require('@octokit/request');
-let githubtoken = core.getInput('GITHUB_TOKEN', { required: true });
+
+import * as core from '@actions/core';
+import * as github from '@actions/github';
+
+const githubtoken = core.getInput('GITHUB_TOKEN', { required: true });
 const octokit = github.getOctokit(githubtoken);
 
 async function run() {
@@ -78,12 +78,9 @@ function sendComments(orgName, repoName, issue_number, message) {
 }
 
 async function getReleases(owner, repo) {
-  const result = await request(`GET /repos/${owner}/${repo}/releases`, {
+  const result = await octokit.request(`GET /repos/${owner}/${repo}/releases`, {
     owner: owner,
     repo: repo,
-    headers: {
-      authorization: `token ${githubtoken}`,
-    },
   });
 
   let releasesArray = result.data.map((x) => x.tag_name);
@@ -96,13 +93,8 @@ async function getReleases(owner, repo) {
 }
 
 async function getCommitsBetweenTwoTags(startCommit, endCommit, owner, repo) {
-  const result = await request(
-    `GET /repos/${owner}/${repo}/compare/${startCommit}...${endCommit}`,
-    {
-      headers: {
-        authorization: `token ${githubtoken}`,
-      },
-    }
+  const result = await octokit.request(
+    `GET /repos/${owner}/${repo}/compare/${startCommit}...${endCommit}`
   );
 
   console.log(
@@ -113,7 +105,7 @@ async function getCommitsBetweenTwoTags(startCommit, endCommit, owner, repo) {
 }
 
 async function getPullRequestForCommit(owner, repo, commit) {
-  const result = await request(
+  const result = await octokit.request(
     `GET /repos/${owner}/${repo}/commits/${commit}/pulls`
   );
 

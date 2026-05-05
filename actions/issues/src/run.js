@@ -5,11 +5,9 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-'use strict';
-
-const github = require('@actions/github');
-const core = require('@actions/core');
-const { plugins } = require('./plugins');
+import * as github from '@actions/github';
+import * as core from '@actions/core';
+import { plugins } from './plugins/index.js';
 
 async function run() {
   const enabled = core.getInput('enabled') || true;
@@ -22,7 +20,7 @@ async function run() {
   const token = core.getInput('GITHUB_TOKEN', {
     required: true,
   });
-  const octokit = new github.getOctokit(token);
+  const octokit = github.getOctokit(token);
   const { issue } = context.payload;
 
   if (issue.pull_request) {

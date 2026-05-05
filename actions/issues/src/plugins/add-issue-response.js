@@ -5,10 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-'use strict';
-
-const { events, states, or } = require('../conditions');
-const labels = require('../labels');
+import { events, states, or } from '../conditions.js';
+import labels from '../labels.js';
 
 const {
   needsTriage,
@@ -44,7 +42,7 @@ const plugin = {
       // Check if the `comment.body` contains a mention to another team member
       const members = await Promise.all(
         teams.map(async (slug) => {
-          const { data } = await octokit.teams.listMembersInOrg({
+          const { data } = await octokit.rest.teams.listMembersInOrg({
             org: 'carbon-design-system',
             team_slug: slug,
           });
@@ -58,7 +56,7 @@ const plugin = {
         return Array.from(members);
       });
       const doesNotMentionAnotherMember = members.every((member) => {
-        return !comment.body.includes(`@${member.slug}`);
+        return !comment.body.includes(`@${member}`);
       });
 
       if (hasMaintainerLabel && doesNotMentionAnotherMember) {
@@ -114,4 +112,4 @@ const plugin = {
   },
 };
 
-module.exports = plugin;
+export default plugin;
