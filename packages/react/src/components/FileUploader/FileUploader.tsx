@@ -190,6 +190,7 @@ const FileUploader = forwardRef<FileUploaderHandle, FileUploaderProps>(
     ref
   ) => {
     const fileUploaderInstanceId = useId('file-uploader');
+    const announcementId = useId('file-uploader-announcement');
     const prefix = usePrefix();
 
     const enhancedFileUploaderEnabled = useFeatureFlag(
@@ -200,6 +201,7 @@ const FileUploader = forwardRef<FileUploaderHandle, FileUploaderProps>(
     const [legacyFileNames, setLegacyFileNames] = useState<
       (string | undefined)[]
     >([]);
+    const [announcement, setAnnouncement] = useState<string>('');
 
     const uploaderButton = React.createRef<HTMLLabelElement>();
     const nodes: HTMLElement[] = [];
@@ -278,6 +280,21 @@ const FileUploader = forwardRef<FileUploaderHandle, FileUploaderProps>(
 
           setFileItems(updatedFileItems);
 
+          // Set accessibility announcement for added files
+          const addedCount = multiple
+            ? newFileItems.filter(
+                (item) =>
+                  !fileItems.some((existing) => existing.name === item.name)
+              ).length
+            : newFileItems.length;
+          if (addedCount > 0) {
+            setAnnouncement(
+              addedCount === 1
+                ? `File ${newFileItems[0].name} added successfully`
+                : `${addedCount} files added successfully`
+            );
+          }
+
           if (onChange) {
             const allFiles = updatedFileItems.map((item) => item.file);
             const enhancedEvent = {
@@ -302,6 +319,18 @@ const FileUploader = forwardRef<FileUploaderHandle, FileUploaderProps>(
             : filenames;
 
           setLegacyFileNames(updatedFileNames);
+
+          // Set accessibility announcement for added files (legacy mode)
+          const addedCount = multiple
+            ? filenames.filter((name) => !legacyFileNames.includes(name)).length
+            : filenames.length;
+          if (addedCount > 0) {
+            setAnnouncement(
+              addedCount === 1
+                ? `File ${filenames[0]} added successfully`
+                : `${addedCount} files added successfully`
+            );
+          }
 
           if (onChange) {
             onChange(evt);
@@ -331,6 +360,9 @@ const FileUploader = forwardRef<FileUploaderHandle, FileUploaderProps>(
 
             const remainingItems = fileItems.filter((_, i) => i !== index);
             setFileItems(remainingItems);
+
+            // Set accessibility announcement for deleted file
+            setAnnouncement(`File ${deletedItem.name} removed successfully`);
 
             const remainingFiles = remainingItems.map((item) => item.file);
 
@@ -364,6 +396,9 @@ const FileUploader = forwardRef<FileUploaderHandle, FileUploaderProps>(
 
             setLegacyFileNames(filteredArray);
 
+            // Set accessibility announcement for deleted file (legacy mode)
+            setAnnouncement(`File ${deletedFileName} removed successfully`);
+
             if (onDelete) {
               onDelete(evt);
             }
@@ -395,6 +430,15 @@ const FileUploader = forwardRef<FileUploaderHandle, FileUploaderProps>(
             const previousItems = [...fileItems];
             setFileItems([]);
 
+            // Set accessibility announcement for cleared files
+            if (previousItems.length > 0) {
+              setAnnouncement(
+                previousItems.length === 1
+                  ? 'File removed successfully'
+                  : `${previousItems.length} files removed successfully`
+              );
+            }
+
             if (onChange && previousItems.length > 0) {
               const enhancedEvent = {
                 target: {
@@ -409,7 +453,17 @@ const FileUploader = forwardRef<FileUploaderHandle, FileUploaderProps>(
               onChange(enhancedEvent);
             }
           } else {
+            const previousCount = legacyFileNames.length;
             setLegacyFileNames([]);
+
+            // Set accessibility announcement for cleared files (legacy mode)
+            if (previousCount > 0) {
+              setAnnouncement(
+                previousCount === 1
+                  ? 'File removed successfully'
+                  : `${previousCount} files removed successfully`
+              );
+            }
           }
         },
 
@@ -419,7 +473,7 @@ const FileUploader = forwardRef<FileUploaderHandle, FileUploaderProps>(
           },
         }),
       }),
-      [enhancedFileUploaderEnabled, fileItems, onChange]
+      [enhancedFileUploaderEnabled, fileItems, legacyFileNames, onChange]
     );
 
     const classes = classNames({
@@ -471,7 +525,16 @@ const FileUploader = forwardRef<FileUploaderHandle, FileUploaderProps>(
           name={name}
           size={size}
           aria-describedby={fileUploaderInstanceId}
+          // aria-labelledby={fileUploaderInstanceId}
         />
+        <div
+          id={announcementId}
+          role="status"
+          aria-live="polite"
+          aria-atomic="true"
+          className={`${prefix}--visually-hidden`}>
+          {announcement}
+        </div>
         <div className={`${prefix}--file-container`}>
           {displayFiles.length === 0
             ? null
