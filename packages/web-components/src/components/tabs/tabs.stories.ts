@@ -226,90 +226,6 @@ export const Contained = {
   `,
 };
 
-export const ContainedWithIcons = {
-  render: () => html`
-    <style>
-      ${styles}
-    </style>
-    <cds-tabs
-      value="dashboard"
-      type="${TABS_TYPE.CONTAINED}"
-      @cds-tabs-beingselected="${onTabsBeingSelected}"
-      @cds-tabs-selected="${onTabsSelected}">
-      <cds-tab id="tab-dashboard" target="panel-dashboard" value="dashboard">
-        Dashboard ${iconLoader(Dashboard16)}
-      </cds-tab>
-      <cds-tab id="tab-monitoring" target="panel-monitoring" value="monitoring">
-        Monitoring ${iconLoader(CloudMonitoring16)}
-      </cds-tab>
-      <cds-tab id="tab-activity" target="panel-activity" value="activity">
-        Activity ${iconLoader(Activity16)}
-      </cds-tab>
-      <cds-tab id="tab-analyze" target="panel-analyze" value="analyze">
-        Analyze ${iconLoader(IbmWatsonDiscovery16)}
-      </cds-tab>
-      <cds-tab
-        id="tab-settings"
-        target="panel-settings"
-        value="settings"
-        disabled>
-        Settings ${iconLoader(Settings16)}
-      </cds-tab>
-    </cds-tabs>
-    <div
-      id="panel-dashboard"
-      class="${prefix}--tab-content"
-      role="tabpanel"
-      aria-labelledby="tab-dashboard"
-      hidden>
-      Tab Panel 1
-    </div>
-    <div
-      id="panel-monitoring"
-      class="${prefix}--tab-content"
-      role="tabpanel"
-      aria-labelledby="tab-monitoring"
-      hidden>
-      <form style="margin: 2em">
-        <legend class="${prefix}--label">Validation example</legend>
-        <cds-checkbox id="cb" label-text="Accept privacy policy"></cds-checkbox>
-        <cds-button style="margin-top: 1rem; margin-bottom: 1rem" type="submit">
-          Submit
-        </cds-button>
-        <cds-text-input
-          type="text"
-          label="Text input label"
-          helper-text="Optional help text"
-          id="text-input-1"></cds-text-input>
-      </form>
-    </div>
-    <div
-      id="panel-activity"
-      class="${prefix}--tab-content"
-      role="tabpanel"
-      aria-labelledby="tab-activity"
-      hidden>
-      Tab Panel 3
-    </div>
-    <div
-      id="panel-analyze"
-      class="${prefix}--tab-content"
-      role="tabpanel"
-      aria-labelledby="tab-analyze"
-      hidden>
-      Tab Panel 4
-    </div>
-    <div
-      id="panel-settings"
-      class="${prefix}--tab-content"
-      role="tabpanel"
-      aria-labelledby="tab-settings"
-      hidden>
-      Tab Panel 5
-    </div>
-  `,
-};
-
 export const ContainedFullWidth = {
   render: () => html`
     <style>
@@ -424,6 +340,90 @@ export const ContainedFullWidth = {
       aria-labelledby="tab-mutual-tls"
       hidden>
       Tab Panel 8
+    </div>
+  `,
+};
+
+export const ContainedWithIcons = {
+  render: () => html`
+    <style>
+      ${styles}
+    </style>
+    <cds-tabs
+      value="dashboard"
+      type="${TABS_TYPE.CONTAINED}"
+      @cds-tabs-beingselected="${onTabsBeingSelected}"
+      @cds-tabs-selected="${onTabsSelected}">
+      <cds-tab id="tab-dashboard" target="panel-dashboard" value="dashboard">
+        Dashboard ${iconLoader(Dashboard16)}
+      </cds-tab>
+      <cds-tab id="tab-monitoring" target="panel-monitoring" value="monitoring">
+        Monitoring ${iconLoader(CloudMonitoring16)}
+      </cds-tab>
+      <cds-tab id="tab-activity" target="panel-activity" value="activity">
+        Activity ${iconLoader(Activity16)}
+      </cds-tab>
+      <cds-tab id="tab-analyze" target="panel-analyze" value="analyze">
+        Analyze ${iconLoader(IbmWatsonDiscovery16)}
+      </cds-tab>
+      <cds-tab
+        id="tab-settings"
+        target="panel-settings"
+        value="settings"
+        disabled>
+        Settings ${iconLoader(Settings16)}
+      </cds-tab>
+    </cds-tabs>
+    <div
+      id="panel-dashboard"
+      class="${prefix}--tab-content"
+      role="tabpanel"
+      aria-labelledby="tab-dashboard"
+      hidden>
+      Tab Panel 1
+    </div>
+    <div
+      id="panel-monitoring"
+      class="${prefix}--tab-content"
+      role="tabpanel"
+      aria-labelledby="tab-monitoring"
+      hidden>
+      <form style="margin: 2em">
+        <legend class="${prefix}--label">Validation example</legend>
+        <cds-checkbox id="cb" label-text="Accept privacy policy"></cds-checkbox>
+        <cds-button style="margin-top: 1rem; margin-bottom: 1rem" type="submit">
+          Submit
+        </cds-button>
+        <cds-text-input
+          type="text"
+          label="Text input label"
+          helper-text="Optional help text"
+          id="text-input-1"></cds-text-input>
+      </form>
+    </div>
+    <div
+      id="panel-activity"
+      class="${prefix}--tab-content"
+      role="tabpanel"
+      aria-labelledby="tab-activity"
+      hidden>
+      Tab Panel 3
+    </div>
+    <div
+      id="panel-analyze"
+      class="${prefix}--tab-content"
+      role="tabpanel"
+      aria-labelledby="tab-analyze"
+      hidden>
+      Tab Panel 4
+    </div>
+    <div
+      id="panel-settings"
+      class="${prefix}--tab-content"
+      role="tabpanel"
+      aria-labelledby="tab-settings"
+      hidden>
+      Tab Panel 5
     </div>
   `,
 };
