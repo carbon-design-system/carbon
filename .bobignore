@@ -1,0 +1,16 @@
+node_modules/
+.nx/
+.playwright/
+coverage/
+blob-report/
+
+.eslintcache
+.stylelintcache
+junit.xml
+lerna-debug.log
+
+.yarn/cache/
+.yarn/unplugged/
+
+**/{es,lib,storybook,ts,umd}/
+
