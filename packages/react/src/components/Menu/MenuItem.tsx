@@ -134,6 +134,8 @@ export const MenuItem = forwardRef<HTMLLIElement, MenuItemProps>(
 
           setSubmenuOpen(false);
 
+          // do not focus parent menu if moving to another submenu,
+          // focus should instead move to that submenu
           const movingToSubmenu =
             relatedTarget instanceof HTMLElement &&
             relatedTarget
