@@ -153,23 +153,30 @@ class CDSComboBox extends CDSDropdown {
     this._filterInputValue = rawQueryText;
 
     if (this.allowCustomValue) {
-      const previousValue = this.value;
-      this.value = rawQueryText;
+      const selected = this._getSelectedItem();
+      const selectedDisplayText = (selected?.textContent ?? '').trim();
+      const isDisplayingSelectedItem =
+        selected !== null && selectedDisplayText === rawQueryText.trim();
 
-      if (previousValue !== this.value) {
-        this.dispatchEvent(
-          new CustomEvent(
-            (this.constructor as typeof CDSComboBox).eventSelect,
-            {
-              bubbles: true,
-              composed: true,
-              detail: {
-                item: null,
-                value: this.value,
-              },
-            }
-          )
-        );
+      if (!isDisplayingSelectedItem) {
+        const previousValue = this.value;
+        this.value = rawQueryText;
+
+        if (previousValue !== this.value) {
+          this.dispatchEvent(
+            new CustomEvent(
+              (this.constructor as typeof CDSComboBox).eventSelect,
+              {
+                bubbles: true,
+                composed: true,
+                detail: {
+                  item: null,
+                  value: this.value,
+                },
+              }
+            )
+          );
+        }
       }
     }
     this.open = true;
