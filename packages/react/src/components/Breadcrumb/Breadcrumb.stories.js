@@ -27,6 +27,12 @@ export default {
   },
 };
 
+const sharedArgs = {
+  noTrailingSlash: true,
+  'aria-label': 'Breadcrumb container',
+  size: 'md',
+};
+
 const sharedArgTypes = {
   size: {
     options: ['sm', 'md'],
@@ -53,6 +59,8 @@ export const Default = (args) => (
   </Breadcrumb>
 );
 
+Default.args = { ...sharedArgs };
+
 Default.argTypes = {
   ...sharedArgTypes,
 };
@@ -73,6 +81,8 @@ export const BreadcrumbWithOverflowMenu = (args) => (
     <BreadcrumbItem isCurrentPage>Breadcrumb 6</BreadcrumbItem>
   </Breadcrumb>
 );
+
+BreadcrumbWithOverflowMenu.args = { ...sharedArgs };
 
 BreadcrumbWithOverflowMenu.argTypes = {
   ...sharedArgTypes,
