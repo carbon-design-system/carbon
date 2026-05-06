@@ -10,8 +10,7 @@
   "workspaces": [
     "actions/*",
     "config/*",
-    "packages/*",
-    "www"
+    "packages/*"
   ],
   "scripts": {
     "build": "lerna run build --stream --prefix && node tasks/generate-repo-structure.js",
@@ -20,8 +19,8 @@
     "doctoc": "doctoc --title '## Table of Contents'",
     "format": "prettier --cache --write '**/*.{js,md,mdx,scss,ts,tsx}' '!**/{build,es,lib,storybook,ts,umd}/**'",
     "format:diff": "prettier --list-different '**/*.{js,md,mdx,scss,ts,tsx}' '!**/{build,es,lib,storybook,ts,umd}/**' '!packages/components/**'",
-    "lint": "eslint actions config packages www",
-    "lint:fix": "eslint --cache --fix --max-warnings 0 actions config packages www",
+    "lint": "eslint actions config packages",
+    "lint:fix": "eslint --cache --fix --max-warnings 0 actions config packages",
     "lint:styles": "stylelint '**/*.scss' --report-needless-disables --report-invalid-scope-disables",
     "postinstall": "husky",
     "telemetry:config": "lerna run telemetry:config",
