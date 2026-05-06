@@ -177,6 +177,31 @@ This reset sets some top-level properties on `html` and `body`, namely
 `font-size`, `font-family`, and some `text-rendering` options. We also map the
 `strong` tag to the semibold font weight.
 
+### Override
+
+In rare cases, you may want to override the font family for a specific font
+stack. You can do this by setting the `--cds-font-family-<type-style>` CSS
+variable. For example, to override the `sans` font family in order to use
+`Inter` as the font family, you can do the following:
+
+```scss
+:root {
+  --cds-font-family-sans: 'Inter', system-ui, sans-serif;
+}
+
+.my-selector {
+  @include type.font-family('sans');
+}
+```
+
+The function provides a fallback to the default Plex font family if the variable
+is not set or if the font family is not found in the system.
+
+**Use at your own risk:** overriding the Carbon typeface has broad design and
+accessibility implications. Please use this feature with caution and consider
+the impact on the overall design and readability of your application before
+using.
+
 ### Type scale
 
 A type scale is provided through the `$type-scale` variable and corresponding

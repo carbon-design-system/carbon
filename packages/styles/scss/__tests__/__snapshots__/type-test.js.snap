@@ -1,4 +1,4 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
 exports[`@carbon/styles/scss/type type-classes mixin 1`] = `
 {
@@ -1348,7 +1348,7 @@ exports[`@carbon/styles/scss/type type-classes mixin 1`] = `
         {
           "position": Position {
             "end": {
-              "column": 141,
+              "column": 170,
               "line": 131,
             },
             "source": undefined,
@@ -1359,7 +1359,7 @@ exports[`@carbon/styles/scss/type type-classes mixin 1`] = `
           },
           "property": "font-family",
           "type": "declaration",
-          "value": "var(--cds-code-01-font-family, 'IBM Plex Mono', system-ui, -apple-system, BlinkMacSystemFont, '.SFNSText-Regular', monospace)",
+          "value": "var(--cds-code-01-font-family, var(--cds-font-family-mono, 'IBM Plex Mono', system-ui, -apple-system, BlinkMacSystemFont, '.SFNSText-Regular', monospace))",
         },
         {
           "position": Position {
@@ -1447,7 +1447,7 @@ exports[`@carbon/styles/scss/type type-classes mixin 1`] = `
         {
           "position": Position {
             "end": {
-              "column": 141,
+              "column": 170,
               "line": 139,
             },
             "source": undefined,
@@ -1458,7 +1458,7 @@ exports[`@carbon/styles/scss/type type-classes mixin 1`] = `
           },
           "property": "font-family",
           "type": "declaration",
-          "value": "var(--cds-code-02-font-family, 'IBM Plex Mono', system-ui, -apple-system, BlinkMacSystemFont, '.SFNSText-Regular', monospace)",
+          "value": "var(--cds-code-02-font-family, var(--cds-font-family-mono, 'IBM Plex Mono', system-ui, -apple-system, BlinkMacSystemFont, '.SFNSText-Regular', monospace))",
         },
         {
           "position": Position {
@@ -4130,7 +4130,7 @@ exports[`@carbon/styles/scss/type type-classes mixin 1`] = `
         {
           "position": Position {
             "end": {
-              "column": 106,
+              "column": 136,
               "line": 362,
             },
             "source": undefined,
@@ -4141,7 +4141,7 @@ exports[`@carbon/styles/scss/type type-classes mixin 1`] = `
           },
           "property": "font-family",
           "type": "declaration",
-          "value": "'IBM Plex Serif', system-ui, -apple-system, BlinkMacSystemFont, '.SFNSText-Regular', serif",
+          "value": "var(--cds-font-family-serif, 'IBM Plex Serif', system-ui, -apple-system, BlinkMacSystemFont, '.SFNSText-Regular', serif)",
         },
         {
           "position": Position {
@@ -4565,7 +4565,7 @@ exports[`@carbon/styles/scss/type type-classes mixin 1`] = `
         {
           "position": Position {
             "end": {
-              "column": 106,
+              "column": 136,
               "line": 398,
             },
             "source": undefined,
@@ -4576,7 +4576,7 @@ exports[`@carbon/styles/scss/type type-classes mixin 1`] = `
           },
           "property": "font-family",
           "type": "declaration",
-          "value": "'IBM Plex Serif', system-ui, -apple-system, BlinkMacSystemFont, '.SFNSText-Regular', serif",
+          "value": "var(--cds-font-family-serif, 'IBM Plex Serif', system-ui, -apple-system, BlinkMacSystemFont, '.SFNSText-Regular', serif)",
         },
         {
           "position": Position {
@@ -9522,7 +9522,7 @@ exports[`@carbon/styles/scss/type type-classes mixin 1`] = `
         {
           "position": Position {
             "end": {
-              "column": 106,
+              "column": 136,
               "line": 809,
             },
             "source": undefined,
@@ -9533,7 +9533,7 @@ exports[`@carbon/styles/scss/type type-classes mixin 1`] = `
           },
           "property": "font-family",
           "type": "declaration",
-          "value": "'IBM Plex Serif', system-ui, -apple-system, BlinkMacSystemFont, '.SFNSText-Regular', serif",
+          "value": "var(--cds-font-family-serif, 'IBM Plex Serif', system-ui, -apple-system, BlinkMacSystemFont, '.SFNSText-Regular', serif)",
         },
         {
           "position": Position {
@@ -9957,7 +9957,7 @@ exports[`@carbon/styles/scss/type type-classes mixin 1`] = `
         {
           "position": Position {
             "end": {
-              "column": 106,
+              "column": 136,
               "line": 845,
             },
             "source": undefined,
@@ -9968,7 +9968,7 @@ exports[`@carbon/styles/scss/type type-classes mixin 1`] = `
           },
           "property": "font-family",
           "type": "declaration",
-          "value": "'IBM Plex Serif', system-ui, -apple-system, BlinkMacSystemFont, '.SFNSText-Regular', serif",
+          "value": "var(--cds-font-family-serif, 'IBM Plex Serif', system-ui, -apple-system, BlinkMacSystemFont, '.SFNSText-Regular', serif)",
         },
         {
           "position": Position {
