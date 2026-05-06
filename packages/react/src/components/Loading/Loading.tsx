@@ -76,22 +76,31 @@ function Loading({
     };
   }, [trapActive]);
 
-  function handleKeyDown(e: React.KeyboardEvent<HTMLDivElement>) {
-    if (e.key !== 'Tab' || !overlayRef.current) return;
+  useEffect(() => {
+    if (!trapActive) return;
 
-    const tabbables = tabbable(overlayRef.current);
+    function handleKeyDown(e: KeyboardEvent) {
+      if (e.key !== 'Tab' || !overlayRef.current) return;
 
-    if (tabbables.length === 0) {
-      e.preventDefault();
-      return;
+      const tabbables = tabbable(overlayRef.current);
+
+      if (tabbables.length === 0) {
+        e.preventDefault();
+        return;
+      }
+
+      wrapFocusWithoutSentinels({
+        containerNode: overlayRef.current,
+        currentActiveNode: document.activeElement as HTMLElement,
+        event: e as unknown as React.KeyboardEvent<HTMLDivElement>,
+      });
     }
 
-    wrapFocusWithoutSentinels({
-      containerNode: overlayRef.current,
-      currentActiveNode: document.activeElement as HTMLElement,
-      event: e,
-    });
-  }
+    document.addEventListener('keydown', handleKeyDown, true);
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown, true);
+    };
+  }, [trapActive]);
 
   const loadingClassName = cx(customClassName, {
     [`${prefix}--loading`]: true,
@@ -134,10 +143,7 @@ function Loading({
   );
 
   return withOverlay ? (
-    <div
-      className={overlayClassName}
-      role="presentation"
-      onKeyDown={handleKeyDown}>
+    <div className={overlayClassName} role="presentation">
       <div
         ref={overlayRef}
         role="dialog"
