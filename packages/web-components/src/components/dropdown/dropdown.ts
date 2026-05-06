@@ -1269,6 +1269,7 @@ class CDSDropdown extends ValidityMixin(
     const {
       ariaLabel,
       _classes: classes,
+      disabled,
       helperText,
       invalidText,
       open,
@@ -1358,7 +1359,9 @@ class CDSDropdown extends ValidityMixin(
           )}"
           class="${prefix}--list-box__field"
           part="trigger-button"
-          tabindex="${ifDefined(!shouldTriggerBeFocusable ? undefined : '0')}"
+          tabindex="${ifDefined(
+            !shouldTriggerBeFocusable ? undefined : disabled ? undefined : '0'
+          )}"
           role="${ifDefined(
             !shouldTriggerBeFocusable ? undefined : 'combobox'
           )}"

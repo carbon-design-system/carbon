@@ -62,6 +62,8 @@ const content = html`
     <hr />
     <p class="secondary">Model type</p>
     <p class="bold">Foundation model</p>
+    <a href="#">normal link</a>
+    <cds-link href="#">cds link</cds-link>
   </div>
 `;
 
@@ -197,20 +199,13 @@ export const Inline = {
     // hence the arg value is set even though the prop can’t be updated from controls.
     kind: 'inline',
   },
+  parameters: {
+    controls: {
+      exclude: ['defaultOpen', 'kind'],
+    },
+  },
   argTypes: {
     ...argTypes,
-    kind: {
-      ...argTypes.kind,
-      table: {
-        disable: true,
-      },
-    },
-    defaultOpen: {
-      ...argTypes.kind,
-      table: {
-        disable: true,
-      },
-    },
     size: {
       control: 'select',
       description:
@@ -259,20 +254,13 @@ export const InlineWithContent = {
     kind: 'inline',
     aiTextLabel: 'Text goes here',
   },
+  parameters: {
+    controls: {
+      exclude: ['defaultOpen', 'kind'],
+    },
+  },
   argTypes: {
     ...argTypes,
-    kind: {
-      ...argTypes.kind,
-      table: {
-        disable: true,
-      },
-    },
-    defaultOpen: {
-      ...argTypes.kind,
-      table: {
-        disable: true,
-      },
-    },
     size: {
       control: 'select',
       description:

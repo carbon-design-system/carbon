@@ -4,8 +4,10 @@
 - **Contributors**: use this as a guide for what to include in your PRs so
   they'll sail through review ⛵
 
-> [!IMPORTANT] This just serves as a starting point. It will not include every
-> small nit and detail that might end up in a PR review.
+> [!IMPORTANT]
+>
+> This just serves as a starting point. It will not include every small nit and
+> detail that might end up in a PR review.
 >
 > This document should remain as small as possible! The longer this gets, the
 > more difficult it will be to read and absorb.
@@ -19,8 +21,7 @@
   - [1. Initial Review](#1-initial-review)
   - [2. Functional Testing](#2-functional-testing)
   - [3. Code & CI Verification](#3-code--ci-verification)
-  - [4. Visual Regression & Merge Conflicts](#4-visual-regression--merge-conflicts)
-  - [5. Final Review & Merge Preparation](#5-final-review--merge-preparation)
+  - [4. Final Review & Merge Preparation](#4-final-review--merge-preparation)
 - [Items to Review by Change-Type](#items-to-review-by-change-type)
   - [PublicAPI (semver) Changes](#publicapi-semver-changes)
   - [React Changes](#react-changes)
@@ -36,6 +37,10 @@
 ## Review Process
 
 ### 1. Initial Review
+
+> [!IMPORTANT] Pull requests must use and fill out the pull request
+>
+> [template](https://github.com/carbon-design-system/carbon/blob/main/.github/PULL_REQUEST_TEMPLATE.md).
 
 - **PR Body & Issue Context:**
   - Read the PR description to understand the overall scope.
@@ -76,16 +81,36 @@
     - **Comment:** Group feedback or ask clarification questions.
     - **Approve:** Mark the PR as approved.
     - **Changes Requested:** Block merging until required updates are made.
+- **Determine if Design Review Is Required:**
+  - A PR requires design review when changes impact the UI or visuals (for
+    example: layout, styles, components, or user interaction).
+  - For PRs from external contributors, developers from Carbon team should
+    determine if design review is required and apply the same rules.
+  - If design review is required:
+    - Assign a designer reviewer.
+    - Add the
+      https://github.com/carbon-design-system/carbon/labels/status%3A%20visual%20review%20%F0%9F%94%8D
+      label.
 - **Post-Review Actions:**
   - Add the
     https://github.com/carbon-design-system/carbon/labels/status%3A%20one%20more%20review%20%F0%9F%91%80
     label if applicable.
-  - After the second review:
+  - If design review is required, remove
+    https://github.com/carbon-design-system/carbon/labels/status%3A%20visual%20review%20%F0%9F%94%8D
+    only after the designer has approved (designer preferred; developers can
+    remove it after design approval).
+  - Approval requirements:
+    - PRs requiring design review: 2 developer approvals and 1 design approval.
+    - PRs not requiring design review: 2 developer approvals.
+  - After all required approvals are complete:
     - Remove all `status` labels.
     - Add the
       https://github.com/carbon-design-system/carbon/labels/status%3A%20ready%20to%20merge%20%F0%9F%8E%89
       label and queue the PR for merging.
     - [Enable auto-merge](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/incorporating-changes-from-a-pull-request/automatically-merging-a-pull-request#enabling-auto-merge)
+      only when all required approvals are present.
+  - Do not use **Enable auto-merge** or **Merge when ready** when the button
+    turns green unless all required approvals are complete.
 
 ## Items to Review by Change-Type
 

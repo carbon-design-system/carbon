@@ -199,6 +199,7 @@ describe('cds-dropdown', function () {
       triggerButton.click();
       await el.updateComplete;
       expect(el.open).to.be.false;
+      expect(el.getAttribute('tabindex')).to.be.null;
     });
 
     it('should respect the readOnly property', async () => {
