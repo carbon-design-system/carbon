@@ -33,6 +33,11 @@ export interface PaginationProps
   backwardText?: string;
 
   /**
+   * Specify the position of the tooltip for the backward button. Can be one of: top, right, bottom, or left.
+   */
+  backwardTextTooltipPosition?: 'top' | 'right' | 'bottom' | 'left';
+
+  /**
    * The CSS class names.
    */
   className?: string;
@@ -46,6 +51,11 @@ export interface PaginationProps
    * The description for the forward icon.
    */
   forwardText?: string;
+
+  /**
+   * Specify the position of the tooltip for the forward button. Can be one of: top, right, bottom, or left.
+   */
+  forwardTextTooltipPosition?: 'top' | 'right' | 'bottom' | 'left';
 
   /**
    * The unique ID of this component instance.
@@ -183,9 +193,11 @@ const Pagination = React.forwardRef(
   (
     {
       backwardText = 'Previous page',
+      backwardTextTooltipPosition = 'top',
       className: customClassName = '',
       disabled = false,
       forwardText = 'Next page',
+      forwardTextTooltipPosition = 'top',
       id,
       isLastPage = false,
       itemText = (min, max) => `${min}–${max} items`,
@@ -508,7 +520,7 @@ const Pagination = React.forwardRef(
           )}
           <div className={`${prefix}--pagination__control-buttons`}>
             <IconButton
-              align="top"
+              align={backwardTextTooltipPosition}
               disabled={backButtonDisabled}
               kind="ghost"
               className={backButtonClasses}
@@ -519,7 +531,7 @@ const Pagination = React.forwardRef(
               <CaretLeft />
             </IconButton>
             <IconButton
-              align="top"
+              align={forwardTextTooltipPosition}
               disabled={forwardButtonDisabled || isLastPage}
               kind="ghost"
               className={forwardButtonClasses}
@@ -543,6 +555,16 @@ Pagination.propTypes = {
   backwardText: PropTypes.string,
 
   /**
+   * Specify the position of the tooltip for the backward button. Can be one of: top, right, bottom, or left.
+   */
+  backwardTextTooltipPosition: PropTypes.oneOf([
+    'top',
+    'right',
+    'bottom',
+    'left',
+  ]),
+
+  /**
    * The CSS class names.
    */
   className: PropTypes.string,
@@ -556,6 +578,16 @@ Pagination.propTypes = {
    * The description for the forward icon.
    */
   forwardText: PropTypes.string,
+
+  /**
+   * Specify the position of the tooltip for the forward button. Can be one of: top, right, bottom, or left.
+   */
+  forwardTextTooltipPosition: PropTypes.oneOf([
+    'top',
+    'right',
+    'bottom',
+    'left',
+  ]),
 
   /**
    * The unique ID of this component instance.
