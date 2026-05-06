@@ -1,6 +1,6 @@
 import {useState} from "react";
 import * as CarbonLayout from "@carbon/layout";
-import { paramCase } from "change-case";
+import { paramCase } from "change-case-all";
 
 export default function IndexPage() {
   return (
