@@ -190,7 +190,10 @@ export const Default = (args) => {
                     <TableBatchAction
                       renderIcon={TrashCan}
                       iconDescription="Delete the selected rows"
-                      onClick={batchActionClick(selectedRows)}
+                      onClick={batchActionClick(
+                        selectedRows,
+                        action('Batch action click')
+                      )}
                       tabIndex={
                         batchActionProps.shouldShowBatchActions ? 0 : -1
                       }>
@@ -199,7 +202,10 @@ export const Default = (args) => {
                     <TableBatchAction
                       renderIcon={Save}
                       iconDescription="Save the selected rows"
-                      onClick={batchActionClick(selectedRows)}
+                      onClick={batchActionClick(
+                        selectedRows,
+                        action('Batch action click')
+                      )}
                       tabIndex={
                         batchActionProps.shouldShowBatchActions ? 0 : -1
                       }>
@@ -208,7 +214,10 @@ export const Default = (args) => {
                     <TableBatchAction
                       renderIcon={Download}
                       iconDescription="Download the selected rows"
-                      onClick={batchActionClick(selectedRows)}
+                      onClick={batchActionClick(
+                        selectedRows,
+                        action('Batch action click')
+                      )}
                       tabIndex={
                         batchActionProps.shouldShowBatchActions ? 0 : -1
                       }>
