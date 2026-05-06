@@ -15,6 +15,8 @@ import { FeatureFlags } from '../FeatureFlags';
 import { ModalPresence, withModalPresence } from './ModalPresence';
 import OverflowMenu from '../OverflowMenu';
 import OverflowMenuItem from '../OverflowMenuItem';
+import { MenuButton } from '../MenuButton';
+import { MenuItem } from '../Menu';
 
 const prefix = 'cds';
 
@@ -49,7 +51,7 @@ describe.each([
     Component: ModalWithPresenceContext,
     isPresence: true,
   },
-])('$title', ({ Component, isPresence }) => {
+])('$title', ({ Component, isPresence, title }) => {
   it('should add extra classes that are passed via className', () => {
     render(
       <Component data-testid="modal-1" className="custom-class">
@@ -580,6 +582,58 @@ describe.each([
     }
 
     expect(button).toHaveFocus();
+  });
+
+  it('should focus `MenuButton` trigger on close when `launcherButtonRef` is `MenuButton`', async () => {
+    const ModalExample = () => {
+      const launcherButtonRef = useRef(null);
+      const [isOpen, setIsOpen] = useState(false);
+
+      return (
+        <>
+          <MenuButton label="Actions" ref={launcherButtonRef}>
+            <MenuItem label="Open modal" onClick={() => setIsOpen(true)} />
+          </MenuButton>
+          <Component
+            data-testid="modal"
+            launcherButtonRef={launcherButtonRef}
+            open={isOpen}
+            onRequestClose={() => setIsOpen(false)}
+          />
+        </>
+      );
+    };
+
+    render(<ModalExample />);
+
+    await userEvent.click(screen.getByRole('button', { name: 'Actions' }));
+    await userEvent.click(screen.getByRole('menuitem', { name: 'Open modal' }));
+
+    expect(screen.getByTestId('modal')).toHaveClass(
+      'cds--layer-one',
+      'cds--modal',
+      'cds--modal-tall',
+      'is-visible',
+      ...(title === 'Modal with presence context'
+        ? ['cds--modal--enable-presence']
+        : []),
+      { exact: true }
+    );
+
+    await userEvent.click(screen.getByRole('button', { name: 'Close' }));
+
+    if (isPresence) {
+      expect(screen.queryByTestId('modal')).not.toBeInTheDocument();
+    } else {
+      expect(screen.getByTestId('modal')).toHaveClass(
+        'cds--layer-one',
+        'cds--modal',
+        'cds--modal-tall',
+        { exact: true }
+      );
+    }
+
+    expect(screen.getByRole('button', { name: 'Actions' })).toHaveFocus();
   });
 
   describe('enable-dialog-element feature flag', () => {
