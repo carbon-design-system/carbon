@@ -285,19 +285,6 @@ export default defineConfig(
       'packages/react/src/components/Pagination/experimental/Pagination-story.js',
       'packages/react/src/components/Pagination/experimental/Pagination.js',
       'packages/react/src/components/Switch/IconSwitch.js',
-
-      // TODO: Delete these ignores.
-      // https://github.com/carbon-design-system/carbon/issues/19012
-      'www/src/components/Flex/index.js',
-      'www/src/components/Header/index.js',
-      'www/src/components/Text/index.js',
-      'www/src/components/WorkspaceList/index.js',
-      'www/src/pages/_app.js',
-      'www/src/pages/index.js',
-      'www/src/pages/insights/\\[owner\\]/\\[repo\\].js',
-      'www/src/pages/insights/index.js',
-      'www/src/pages/packages/\\[package\\]/index.js',
-      'www/src/pages/packages/index.js',
     ],
   }
 );

@@ -54,11 +54,9 @@ const argTypes = {
   },
   onInput: {
     action: `input`,
-    table: { disable: true },
   },
   onClick: {
     action: `click`,
-    table: { disable: true },
   },
   maxCount: {
     control: 'text',
@@ -77,6 +75,11 @@ const argTypes = {
 export const Default = {
   args,
   argTypes,
+  parameters: {
+    controls: {
+      exclude: ['onClick', 'onInput'],
+    },
+  },
   render: ({
     defaultWidth,
     placeholder,

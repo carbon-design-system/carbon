@@ -517,7 +517,7 @@
 
     &.#{$prefix}--tabs--vertical:not(.#{$prefix}--tabs--tall)
       .#{$prefix}--tabs__nav-item-label {
-      line-height: var(--cds-body-compact-01-line-height);
+      line-height: custom-property.get-var('body-compact-01-line-height');
     }
 
     //-----------------------------
