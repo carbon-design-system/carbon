@@ -8,7 +8,7 @@ import metadata from '../../../../metadata.json';
 const GITHUB_PICTOGRAM_URL =
   'https://github.com/carbon-design-system/carbon/tree/master/packages/pictograms/src/svg';
 
-export default function IndexPage() {
+export default function IndexPage({ lastBuiltOn }) {
   const headers = ['Name', 'Preview', 'GitHub', 'Issues'];
 
   const isBrowser = () => typeof window !== 'undefined';
@@ -19,6 +19,7 @@ export default function IndexPage() {
         <div className="cds--row">
           <div className="cds--col">
             <h1>Pictograms</h1>
+            <p>Last built on {lastBuiltOn}</p>
           </div>
         </div>
         <div className="cds--row">
@@ -101,6 +102,14 @@ export default function IndexPage() {
       </section>
     </>
   );
+}
+
+export async function getStaticProps() {
+  return {
+    props: {
+      lastBuiltOn: new Date().toISOString(),
+    },
+  };
 }
 
 function Table({ children, headers }) {

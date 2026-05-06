@@ -2,10 +2,11 @@ import {useState} from "react";
 import * as CarbonLayout from "@carbon/layout";
 import { paramCase } from "change-case-all";
 
-export default function IndexPage() {
+export default function IndexPage({ lastBuiltOn }) {
   return (
     <>
       <h1>Layout package basic examples</h1>
+      <p>Last built on {lastBuiltOn}</p>
 
       <article>
         <header>
@@ -48,4 +49,12 @@ export default function IndexPage() {
       </article>
     </>
   );
+}
+
+export async function getStaticProps() {
+  return {
+    props: {
+      lastBuiltOn: new Date().toISOString(),
+    },
+  };
 }

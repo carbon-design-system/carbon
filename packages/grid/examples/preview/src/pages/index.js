@@ -3,15 +3,16 @@ import Prism from 'prismjs';
 import React from 'react';
 import ReactDOM from 'react-dom/server';
 
-export default function IndexPage() {
+export default function IndexPage({ lastBuiltOn }) {
   return (
     <main>
       <div className="cds--grid">
         <div className="cds--row">
-          <div className="cds--col">
-            <h1>Grid</h1>
-          </div>
-        </div>
+              <div className="cds--col">
+                <h1>Grid</h1>
+                <p>Last built on {lastBuiltOn}</p>
+              </div>
+            </div>
         <div className="cds--row">
           <div className="cds--col">
             <ul>
@@ -78,6 +79,14 @@ export default function IndexPage() {
       ))}
     </main>
   );
+}
+
+export async function getStaticProps() {
+  return {
+    props: {
+      lastBuiltOn: new Date().toISOString(),
+    },
+  };
 }
 
 const sections = [

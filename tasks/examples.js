@@ -41,6 +41,8 @@ const IGNORE_EXAMPLE_DIRS = new Set([
 async function main() {
   reporter.info('Building examples...');
 
+  const lastBuiltOn = new Date().toISOString();
+
   await fs.remove(BUILD_DIR);
   await fs.ensureDir(BUILD_DIR);
 
@@ -193,7 +195,7 @@ async function main() {
   <title>Carbon Elements</title>
   <style>body { font-family: 'IBM Plex Mono', monospaces; }</style>
 </head>
-<body>${links}</body>
+<body>${links}<footer>Last built on ${lastBuiltOn}</footer></body>
 </html>
 `;
 
