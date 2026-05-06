@@ -49,6 +49,7 @@ import {
 } from './ComposedModalPresence';
 import { useId } from '../../internal/useId';
 import { useComposedModalState } from './useComposedModalState';
+import { isTopmostVisibleModal } from '../Modal/isTopmostVisibleModal';
 
 export interface ModalBodyProps extends HTMLAttributes<HTMLDivElement> {
   /** Specify the content to be placed in the ModalBody. */
@@ -293,10 +294,15 @@ const ComposedModalDialog = React.forwardRef<
   const button = useRef<HTMLButtonElement>(null);
   const startSentinel = useRef<HTMLButtonElement>(null);
   const endSentinel = useRef<HTMLButtonElement>(null);
+  const modalRef = useRef<HTMLDivElement>(null);
   const onMouseDownTarget = useRef<Node | null>(null);
 
   const presenceContext = useContext(ComposedModalPresenceContext);
-  const mergedRefs = useMergeRefs([ref, presenceContext?.presenceRef]);
+  const mergedRefs = useMergeRefs([
+    modalRef,
+    ref,
+    presenceContext?.presenceRef,
+  ]);
   const enablePresence =
     useFeatureFlag('enable-presence') || presenceContext?.autoEnablePresence;
 
@@ -486,7 +492,10 @@ const ComposedModalDialog = React.forwardRef<
     if (!open) return;
 
     const handleEscapeKey = (event) => {
-      if (match(event, keys.Escape)) {
+      if (
+        match(event, keys.Escape) &&
+        isTopmostVisibleModal(modalRef.current, prefix)
+      ) {
         event.preventDefault();
         event.stopPropagation();
         closeModal(event);
