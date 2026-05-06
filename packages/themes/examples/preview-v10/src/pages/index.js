@@ -34,6 +34,7 @@ export default function IndexPage({ lastBuiltOn }) {
             <h1>
               <code>v10 @carbon/themes</code>
             </h1>
+            <p>Last built on {lastBuiltOn}</p>
           </div>
         </div>
         <div className="bx--row">
@@ -236,7 +237,6 @@ $custom-theme: map-merge(
       <section id="custom-properties">
         <ThemeSwitcher />
       </section>
-      <footer>Last built on {lastBuiltOn}</footer>
     </React.Fragment>
   );
 }

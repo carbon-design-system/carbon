@@ -2,13 +2,13 @@ export default function IndexPage({ lastBuiltOn }) {
   return (
     <>
       <h1>CSS Grid</h1>
+      <p>Last built on {lastBuiltOn}</p>
       <GridExamples />
       <hr style={{ margin: '6rem 0' }}/>
       <div dir="rtl">
         <p>RTL layout</p>
         <GridExamples />
       </div>
-      <footer>Last built on {lastBuiltOn}</footer>
     </>
   );
 }

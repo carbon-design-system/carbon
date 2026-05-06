@@ -6,6 +6,7 @@ export default function IndexPage({ lastBuiltOn }) {
   return (
     <>
       <h1>Layout package basic examples</h1>
+      <p>Last built on {lastBuiltOn}</p>
 
       <article>
         <header>
@@ -46,7 +47,6 @@ export default function IndexPage({ lastBuiltOn }) {
           </ol>
         </div>
       </article>
-      <footer>Last built on {lastBuiltOn}</footer>
     </>
   );
 }

@@ -44,6 +44,7 @@ export default function App({ lastBuiltOn }) {
   return (
     <main>
       <h1>Preview</h1>
+      <p>Last built on {lastBuiltOn}</p>
       <section>
         <header>
           <h1>Colors</h1>
@@ -95,7 +96,6 @@ export default function App({ lastBuiltOn }) {
           })}
         </Table>
       </section>
-      <footer>Last built on {lastBuiltOn}</footer>
     </main>
   );
   return 'App!';

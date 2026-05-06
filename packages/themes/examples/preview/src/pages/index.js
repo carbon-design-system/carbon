@@ -95,7 +95,10 @@ export default function IndexPage({ lastBuiltOn }) {
     <main>
       <section>
         <header className="flex items-center justify-between header">
-          <h1 id="table-title">Tokens ({tokens.length})</h1>
+          <div>
+            <h1 id="table-title">Tokens ({tokens.length})</h1>
+            <p>Last built on {lastBuiltOn}</p>
+          </div>
           <ul className="grid grid-columns-4 gap">
             {activeGroup !== 'All' ||
             activeProperty !== 'All' ||
@@ -299,7 +302,6 @@ export default function IndexPage({ lastBuiltOn }) {
           </table>
         </div>
       </section>
-      <footer>Last built on {lastBuiltOn}</footer>
     </main>
   );
 }

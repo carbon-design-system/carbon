@@ -8,10 +8,11 @@ export default function IndexPage({ lastBuiltOn }) {
     <main>
       <div className="cds--grid">
         <div className="cds--row">
-          <div className="cds--col">
-            <h1>Grid</h1>
-          </div>
-        </div>
+              <div className="cds--col">
+                <h1>Grid</h1>
+                <p>Last built on {lastBuiltOn}</p>
+              </div>
+            </div>
         <div className="cds--row">
           <div className="cds--col">
             <ul>
@@ -76,7 +77,6 @@ export default function IndexPage({ lastBuiltOn }) {
           ))}
         </section>
       ))}
-      <footer>Last built on {lastBuiltOn}</footer>
     </main>
   );
 }

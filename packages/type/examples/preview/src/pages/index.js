@@ -5,11 +5,11 @@ import { paramCase } from "change-case-all";
 export default function IndexPage({ lastBuiltOn }) {
   return (
     <>
+      <p>Last built on {lastBuiltOn}</p>
       <TableOfContents />
       <FontFaces />
       <TypeStyles />
       <TypeScale />
-      <footer>Last built on {lastBuiltOn}</footer>
     </>
   );
 }
