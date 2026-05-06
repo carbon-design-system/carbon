@@ -10,18 +10,17 @@
   "workspaces": [
     "actions/*",
     "config/*",
-    "packages/*",
-    "www"
+    "packages/*"
   ],
   "scripts": {
     "build": "lerna run build --stream --prefix && node tasks/generate-repo-structure.js",
     "ci-check": "carbon-cli ci-check",
     "clean": "lerna run clean && lerna clean --yes && rimraf node_modules",
     "doctoc": "doctoc --title '## Table of Contents'",
-    "format": "prettier --cache --write '**/*.{js,md,scss,ts,tsx}' '!**/{build,es,lib,storybook,ts,umd}/**'",
-    "format:diff": "prettier --list-different '**/*.{js,md,scss,ts,tsx}' '!**/{build,es,lib,storybook,ts,umd}/**' '!packages/components/**'",
-    "lint": "eslint actions config packages www",
-    "lint:fix": "eslint --cache --fix --max-warnings 0 actions config packages www",
+    "format": "prettier --cache --write '**/*.{js,md,mdx,scss,ts,tsx}' '!**/{build,es,lib,storybook,ts,umd}/**'",
+    "format:diff": "prettier --list-different '**/*.{js,md,mdx,scss,ts,tsx}' '!**/{build,es,lib,storybook,ts,umd}/**' '!packages/components/**'",
+    "lint": "eslint actions config packages",
+    "lint:fix": "eslint --cache --fix --max-warnings 0 actions config packages",
     "lint:styles": "stylelint '**/*.scss' --report-needless-disables --report-invalid-scope-disables",
     "postinstall": "husky",
     "telemetry:config": "lerna run telemetry:config",
@@ -37,10 +36,9 @@
     "react-dom": "~19.2.3",
     "react-is": "~19.2.0",
     "flatpickr@4.6.13": "patch:flatpickr@npm%3A4.6.13#./.yarn/patches/flatpickr-npm-4.6.13-06399933fc.patch",
-    "brace-expansion": "^2.0.3",
     "@octokit/rest": "^22.0.0",
     "eslint": "9.39.4",
-    "typescript-eslint": "8.46.2"
+    "typescript-eslint": "8.58.2"
   },
   "devDependencies": {
     "@babel/core": "^7.27.3",
@@ -87,7 +85,7 @@
     "react": "^19.2.3",
     "react-dom": "^19.2.3",
     "rimraf": "^6.0.1",
-    "stylelint": "^16.0.0",
+    "stylelint": "^17.0.0",
     "typescript-eslint": "^8.34.0"
   },
   "commitlint": {
@@ -141,6 +139,9 @@
     "!(*sass).md": [
       "prettier --cache --write"
     ],
+    "!(*sass).mdx": [
+      "prettier --cache --write"
+    ],
     "{README.md,.all-contributorsrc}": [
       "all-contributors generate"
     ]
@@ -152,7 +153,7 @@
   },
   "stylelint": {
     "extends": [
-      "./config/stylelint-config-carbon"
+      "./config/stylelint-config-carbon/index.js"
     ]
   },
   "packageManager": "yarn@4.10.3"
