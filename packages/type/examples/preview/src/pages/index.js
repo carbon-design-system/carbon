@@ -2,15 +2,24 @@ import {useState} from "react";
 import * as CarbonType from "@carbon/type";
 import { paramCase } from "change-case-all";
 
-export default function IndexPage() {
+export default function IndexPage({ lastBuiltOn }) {
   return (
     <>
       <TableOfContents />
       <FontFaces />
       <TypeStyles />
       <TypeScale />
+      <footer>Last built on {lastBuiltOn}</footer>
     </>
   );
+}
+
+export async function getStaticProps() {
+  return {
+    props: {
+      lastBuiltOn: new Date().toISOString(),
+    },
+  };
 }
 
 function TableOfContents() {

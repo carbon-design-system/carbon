@@ -25,7 +25,7 @@ const colorNameLookup = Object.keys(colors).reduce(
 
 const tokens = meta.colors.flatMap((color) => color.tokens);
 
-export default function IndexPage() {
+export default function IndexPage({ lastBuiltOn }) {
   return (
     <React.Fragment>
       <div className="bx--grid">
@@ -236,8 +236,17 @@ $custom-theme: map-merge(
       <section id="custom-properties">
         <ThemeSwitcher />
       </section>
+      <footer>Last built on {lastBuiltOn}</footer>
     </React.Fragment>
   );
+}
+
+export async function getStaticProps() {
+  return {
+    props: {
+      lastBuiltOn: new Date().toISOString(),
+    },
+  };
 }
 
 function ThemeSwitcher() {

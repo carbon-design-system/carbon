@@ -86,7 +86,7 @@ function getColorName(hex) {
   return '—';
 }
 
-export default function IndexPage() {
+export default function IndexPage({ lastBuiltOn }) {
   const [activeGroup, setActiveGroup] = React.useState('All');
   const [activeProperty, setActiveProperty] = React.useState('All');
   const [activeSet, setActiveSet] = React.useState('All');
@@ -299,6 +299,15 @@ export default function IndexPage() {
           </table>
         </div>
       </section>
+      <footer>Last built on {lastBuiltOn}</footer>
     </main>
   );
+}
+
+export async function getStaticProps() {
+  return {
+    props: {
+      lastBuiltOn: new Date().toISOString(),
+    },
+  };
 }

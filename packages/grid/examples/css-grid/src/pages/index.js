@@ -1,4 +1,4 @@
-export default function IndexPage() {
+export default function IndexPage({ lastBuiltOn }) {
   return (
     <>
       <h1>CSS Grid</h1>
@@ -8,8 +8,17 @@ export default function IndexPage() {
         <p>RTL layout</p>
         <GridExamples />
       </div>
+      <footer>Last built on {lastBuiltOn}</footer>
     </>
   );
+}
+
+export async function getStaticProps() {
+  return {
+    props: {
+      lastBuiltOn: new Date().toISOString(),
+    },
+  };
 }
 
 function GridExamples() {
@@ -460,4 +469,3 @@ function GridExamples() {
     </>
   );
 }
-
