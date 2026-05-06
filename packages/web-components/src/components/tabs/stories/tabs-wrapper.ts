@@ -8,7 +8,7 @@
 import { LitElement, html } from 'lit';
 import { property, state } from 'lit/decorators.js';
 import { prefix } from '../../../globals/settings';
-import { TABS_TYPE, TABS_ICON_SIZE } from '../tabs';
+import { TABS_TYPE } from '../tabs';
 import { iconLoader } from '../../../globals/internal/icon-loader';
 import Dashboard16 from '@carbon/icons/es/dashboard/16.js';
 import CloudMonitoring16 from '@carbon/icons/es/cloud--monitoring/16.js';
@@ -111,7 +111,6 @@ export class DismissableTabsWrapper extends LitElement {
         selected-index="${this.selectedIndex}"
         type="${this.contained ? TABS_TYPE.CONTAINED : TABS_TYPE.REGULAR}"
         ?dismissable="${this.dismissable}"
-        icon-size="${this.withIcons ? TABS_ICON_SIZE.DEFAULT : ''}"
         value="all"
         @cds-tab-closed="${this._handleDismissed}"
         @cds-tabs-beingselected="${this._handleBeforeSelected}">

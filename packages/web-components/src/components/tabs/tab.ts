@@ -13,6 +13,7 @@ import CDSContentSwitcherItem from '../content-switcher/content-switcher-item';
 import { TABS_ICON_SIZE, TABS_TYPE } from './defs';
 import styles from './tabs.scss?lit';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
+import HostListener from '../../globals/decorators/host-listener';
 import '../button/button';
 import Close16 from '@carbon/icons/es/close/16.js';
 import iconLoader from '../../globals/internal/icon-loader';
@@ -87,6 +88,20 @@ export default class CDSTab extends CDSContentSwitcherItem {
     // Retrieve content of the slot to use for aria-label.
     const content = (target as HTMLSlotElement).assignedNodes();
     this.tabTitle = content[0]?.textContent?.trim() || undefined;
+  }
+
+  /**
+   * Handles `keydown` event on the tab.
+   * Triggers tab close when Delete key is pressed on a dismissable tab.
+   */
+  @HostListener('keydown')
+  protected _handleKeydown(event: KeyboardEvent) {
+    const { key } = event;
+
+    if (this._dismissable && !this.disabled && key === 'Delete') {
+      event.preventDefault();
+      this._handleClose(event);
+    }
   }
 
   connectedCallback() {
@@ -165,7 +180,11 @@ export default class CDSTab extends CDSContentSwitcherItem {
     return tabLink;
   }
 
-  _handleClick(event: Event) {
+  /**
+   * Handles the close action for the tab.
+   * Dispatches before-close and close events.
+   */
+  protected _handleClose(event: Event) {
     event.stopPropagation();
     const init = {
       bubbles: true,
@@ -187,6 +206,13 @@ export default class CDSTab extends CDSContentSwitcherItem {
         new CustomEvent((this.constructor as typeof CDSTab).eventClose, init)
       );
     }
+  }
+
+  /**
+   * Handles click event on the close button.
+   */
+  _handleClick(event: Event) {
+    this._handleClose(event);
   }
 
   /**
