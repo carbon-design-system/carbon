@@ -2076,12 +2076,15 @@ __metadata:
     "@carbon/test-utils": "npm:^10.41.0"
     "@carbon/type": "npm:^11.59.0-rc.0"
     "@ibm/telemetry-js": "npm:^1.5.0"
+    "@types/color": "npm:^4.2.1"
     change-case-all: "npm:^2.1.0"
     color: "npm:^4.0.0"
     core-js: "npm:^3.16.0"
     fs-extra: "npm:^11.0.0"
     js-yaml: "npm:^4.1.0"
     rimraf: "npm:^6.0.1"
+    typescript: "npm:^5.7.3"
+    typescript-config-carbon: "workspace:^0.9.0"
   languageName: unknown
   linkType: soft
 
@@ -6116,6 +6119,31 @@ __metadata:
     "@types/node": "npm:*"
     "@types/qs": "npm:*"
   checksum: 10/e93fdc177f69ee0535cf401783258e4255f5eb8235c58b5a2a5a8958cf341fadf3d0bf2c75907ed6b7d188ce2c2f2cf9593a71d4eef12900beba54ebbbdd5cc1
+  languageName: node
+  linkType: hard
+
+"@types/color-convert@npm:2":
+  version: 2.0.4
+  resolution: "@types/color-convert@npm:2.0.4"
+  dependencies:
+    "@types/color-name": "npm:^1.1.0"
+  checksum: 10/08385948a3baf0c1dcb021791c3980d948423e92d1f1f400d7d50d089f4d26cf3a6ef1fdc402bd5bbccc325c44d2884834e66cde242c794483950e99967b9c8d
+  languageName: node
+  linkType: hard
+
+"@types/color-name@npm:^1.1.0":
+  version: 1.1.5
+  resolution: "@types/color-name@npm:1.1.5"
+  checksum: 10/47600afcd1dbd7c668103ccaed912acd97760336dbb9fb08bdb34be004daa1f06a336183b51d44852e4460fe8b336347c7f5af330160c755f6a8fb4fa19e6bc0
+  languageName: node
+  linkType: hard
+
+"@types/color@npm:^4.2.1":
+  version: 4.2.1
+  resolution: "@types/color@npm:4.2.1"
+  dependencies:
+    "@types/color-convert": "npm:2"
+  checksum: 10/61c9d8484073a363e0a462a20a98a3d4346a55194299e584e89cd95613478aa117e1560146e9c4ceafd16897ae1039cd637cb6ddde066ff430399c1e5bd42ce9
   languageName: node
   linkType: hard
 
