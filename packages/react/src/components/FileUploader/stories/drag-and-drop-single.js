@@ -37,7 +37,7 @@ const ExampleDropContainerApp = (props) => {
 
   const uploadFile = async (fileToUpload) => {
     // file size validation
-    if (fileToUpload[0].filesize > 512000) {
+    if (Array.isArray(fileToUpload) && fileToUpload[0].filesize > 512000) {
       const updatedFile = {
         ...fileToUpload[0],
         status: 'edit',
@@ -51,7 +51,7 @@ const ExampleDropContainerApp = (props) => {
     }
 
     // file type validation
-    if (fileToUpload.invalidFileType) {
+    if (Array.isArray(fileToUpload) && fileToUpload[0].invalidFileType) {
       const updatedFile = {
         ...fileToUpload[0],
         status: 'edit',
@@ -139,6 +139,7 @@ const ExampleDropContainerApp = (props) => {
         )}>
         {file !== undefined && (
           <FileUploaderItem
+            disabled={props.disabled}
             key={file.uuid}
             uuid={file.uuid}
             name={file.name}

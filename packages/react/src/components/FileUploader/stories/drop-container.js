@@ -171,6 +171,7 @@ const ExampleDropContainerApp = (props) => {
             ...rest
           }) => (
             <FileUploaderItem
+              disabled={props.disabled} // or add per file disabled state as needed in files array
               key={uuid}
               uuid={uuid}
               name={name}
