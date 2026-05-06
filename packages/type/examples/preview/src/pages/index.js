@@ -1,6 +1,6 @@
 import {useState} from "react";
 import * as CarbonType from "@carbon/type";
-import { paramCase } from "change-case";
+import { paramCase } from "change-case-all";
 
 export default function IndexPage() {
   return (
