@@ -59,6 +59,7 @@
     "storybook": "storybook dev -p 6006",
     "storybook:build": "storybook build",
     "test": "web-test-runner \"src/components/**/__tests__/**/*.js\" --node-resolve --concurrency=1",
+    "test:stylelint-plugin": "node --test ./tools/stylelint/web-component-best-practices.test.js",
     "test:updateSnapshots": "yarn test --update-snapshots",
     "typecheck": "tsc --noEmit -p tsconfig.json",
     "wca": "web-component-analyzer analyze src --outFile custom-elements.json",
@@ -102,6 +103,7 @@
     "sass": "^1.93.2",
     "storybook": "^10.3.5",
     "storybook-addon-accessibility-checker": "^9.2.0-rc.3",
+    "stylelint": "^16.0.0",
     "tsdown": "^0.21.0",
     "typescript-config-carbon": "workspace:^0.9.0",
     "vite": "^7.2.4",
@@ -115,13 +117,25 @@
     "extends": [
       "../../config/stylelint-config-carbon/index.js"
     ],
+    "plugins": [
+      "./tools/stylelint/web-component-best-practices.js"
+    ],
     "overrides": [
       {
         "files": [
           "src/components/**/*.scss"
         ],
         "rules": {
-          "max-nesting-depth": null
+          "max-nesting-depth": null,
+          "carbon/web-component-best-practices": [
+            true,
+            {
+              "sharedCustomPropertyPrefixes": [
+                "--cds-",
+                "--tabs-"
+              ]
+            }
+          ]
         }
       }
     ]

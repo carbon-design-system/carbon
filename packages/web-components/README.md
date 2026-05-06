@@ -81,6 +81,7 @@ at version `v1.16.0`):
 
 - [Using components in a form](./docs/form.md)
 - [Using custom styles in components](./docs/styling.md)
+- [Stylelint best practices for web components](./docs/stylelint-best-practices.md)
 
 ## 📖 API Documentation
 
