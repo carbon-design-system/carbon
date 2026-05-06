@@ -7,7 +7,9 @@
 
 import cx from 'classnames';
 import PropTypes from 'prop-types';
-import React, { type HTMLAttributes } from 'react';
+import React, { type HTMLAttributes, useEffect, useRef } from 'react';
+import { tabbable } from 'tabbable';
+import { wrapFocusWithoutSentinels } from '../../internal/wrapFocus';
 import { usePrefix } from '../../internal/usePrefix';
 import { deprecate } from '../../prop-types/deprecate';
 
@@ -52,6 +54,45 @@ function Loading({
   ...rest
 }: LoadingProps) {
   const prefix = usePrefix();
+  const overlayRef = useRef<HTMLDivElement>(null);
+  const savedFocusRef = useRef<Element | null>(null);
+
+  const trapActive = !!(withOverlay && active);
+
+  useEffect(() => {
+    if (!trapActive) return;
+
+    savedFocusRef.current = document.activeElement;
+    overlayRef.current?.focus();
+
+    return () => {
+      if (
+        savedFocusRef.current &&
+        typeof (savedFocusRef.current as HTMLElement).focus === 'function'
+      ) {
+        (savedFocusRef.current as HTMLElement).focus();
+      }
+      savedFocusRef.current = null;
+    };
+  }, [trapActive]);
+
+  function handleKeyDown(e: React.KeyboardEvent<HTMLDivElement>) {
+    if (e.key !== 'Tab' || !overlayRef.current) return;
+
+    const tabbables = tabbable(overlayRef.current);
+
+    if (tabbables.length === 0) {
+      e.preventDefault();
+      return;
+    }
+
+    wrapFocusWithoutSentinels({
+      containerNode: overlayRef.current,
+      currentActiveNode: document.activeElement as HTMLElement,
+      event: e,
+    });
+  }
+
   const loadingClassName = cx(customClassName, {
     [`${prefix}--loading`]: true,
     [`${prefix}--loading--small`]: small,
@@ -93,7 +134,17 @@ function Loading({
   );
 
   return withOverlay ? (
-    <div className={overlayClassName}>{loading}</div>
+    // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
+    <div
+      ref={overlayRef}
+      className={overlayClassName}
+      role="dialog"
+      aria-modal="true"
+      aria-label={description}
+      tabIndex={-1}
+      onKeyDown={handleKeyDown}>
+      {loading}
+    </div>
   ) : (
     loading
   );
