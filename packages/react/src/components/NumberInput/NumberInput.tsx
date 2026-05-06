@@ -749,10 +749,7 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
               : Number(event.target.value),
           direction: value < event.target.value ? 'up' : 'down',
         };
-        // Only update internal state if component is uncontrolled
-        if (controlledValue === undefined) {
-          setValue(state.value);
-        }
+        setValue(state.value);
 
         if (onChange) {
           onChange(event, state);
@@ -836,10 +833,7 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
         };
 
         if (type === 'number') {
-          // Only update internal state if component is uncontrolled
-          if (controlledValue === undefined) {
-            setValue(state.value);
-          }
+          setValue(state.value);
         }
 
         if (type === 'text') {
