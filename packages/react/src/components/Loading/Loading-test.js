@@ -7,7 +7,8 @@
 
 import React from 'react';
 import Loading from './Loading';
-import { render, screen } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 
 describe('Loading', () => {
   describe('renders as expected - Component API', () => {
@@ -114,6 +115,53 @@ describe('Loading', () => {
 
       const dialog = screen.getByRole('dialog');
       expect(dialog).toHaveAttribute('aria-label', 'Loading content');
+    });
+  });
+
+  describe('focus trap', () => {
+    it('should prevent Tab from moving focus outside overlay', async () => {
+      const user = userEvent.setup();
+
+      render(
+        <div>
+          <button data-testid="before">Before</button>
+          <Loading withOverlay active />
+          <button data-testid="after">After</button>
+        </div>
+      );
+
+      const dialog = screen.getByRole('dialog');
+
+      await waitFor(() => {
+        expect(document.activeElement).toBe(dialog);
+      });
+
+      await user.tab();
+      expect(document.activeElement).toBe(dialog);
+
+      await user.tab({ shift: true });
+      expect(document.activeElement).toBe(dialog);
+    });
+
+    it('should restore focus when overlay deactivates', () => {
+      const { rerender } = render(
+        <div>
+          <button data-testid="trigger">Trigger</button>
+          <Loading withOverlay active />
+        </div>
+      );
+
+      const trigger = screen.getByTestId('trigger');
+      trigger.focus();
+
+      rerender(
+        <div>
+          <button data-testid="trigger">Trigger</button>
+          <Loading withOverlay active={false} />
+        </div>
+      );
+
+      expect(document.activeElement).toBe(trigger);
     });
   });
 });
