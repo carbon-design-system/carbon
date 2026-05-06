@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -16,6 +16,38 @@ export default {
   parameters: {
     docs: {
       page: mdx,
+    },
+  },
+};
+
+const sharedArgTypes = {
+  description: {
+    control: {
+      type: 'text',
+    },
+  },
+  iconDescription: {
+    control: {
+      type: 'text',
+    },
+  },
+  successDelay: {
+    control: {
+      type: 'number',
+    },
+  },
+  status: {
+    options: ['inactive', 'active', 'error', 'finished'],
+    control: {
+      type: 'select',
+    },
+  },
+  onSuccess: {
+    action: 'onSuccess',
+  },
+  'aria-live': {
+    control: {
+      type: 'text',
     },
   },
 };
@@ -82,6 +114,9 @@ export const Default = (args) => <InlineLoading {...args} />;
 Default.args = {
   description: 'Loading',
   iconDescription: 'Loading data...',
+  status: 'active',
+  onSuccess: () => console.log('Success!'),
+  'aria-live': 'assertive',
 };
 
 Default.parameters = {
@@ -90,15 +125,4 @@ Default.parameters = {
   },
 };
 
-Default.argTypes = {
-  description: {
-    control: {
-      type: 'text',
-    },
-  },
-  iconDescription: {
-    control: {
-      type: 'text',
-    },
-  },
-};
+Default.argTypes = { ...sharedArgTypes };
