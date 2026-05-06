@@ -117,7 +117,36 @@ export const MenuItem = forwardRef<HTMLLIElement, MenuItemProps>(
       context: floatingContext,
     } = useFloating({
       open: submenuOpen,
-      onOpenChange: setSubmenuOpen,
+      onOpenChange: (open, event) => {
+        if (open) {
+          setSubmenuOpen(true);
+        } else {
+          const relatedTarget =
+            event && 'relatedTarget' in event ? event.relatedTarget : null;
+
+          // Do not close submenu if hovering back to its parent
+          if (
+            relatedTarget instanceof Node &&
+            menuItem.current?.contains(relatedTarget)
+          ) {
+            return;
+          }
+
+          setSubmenuOpen(false);
+
+          // do not focus parent menu if moving to another submenu,
+          // focus should instead move to that submenu
+          const movingToSubmenu =
+            relatedTarget instanceof HTMLElement &&
+            relatedTarget
+              .closest('[role="menuitem"]')
+              ?.querySelector('[role="menu"]');
+
+          if (!movingToSubmenu) {
+            menuItem.current?.focus();
+          }
+        }
+      },
       placement: rtl ? 'left-start' : 'right-start',
       whileElementsMounted: autoUpdate,
       middleware: [offset({ mainAxis: -6, crossAxis: -6 })],
