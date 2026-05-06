@@ -170,9 +170,6 @@ const argTypes = {
   },
   onInput: {
     action: `${prefix}-number-input`,
-    table: {
-      disable: true,
-    },
   },
   type: {
     control: 'select',
@@ -214,6 +211,11 @@ const argTypes = {
 export const Default = {
   args,
   argTypes,
+  parameters: {
+    controls: {
+      exclude: ['onInput'],
+    },
+  },
   render: (args) => {
     const {
       allowEmpty,
