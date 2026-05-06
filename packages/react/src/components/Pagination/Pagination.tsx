@@ -5,15 +5,17 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { CaretLeft, CaretRight } from '@carbon/icons-react';
+import { CaretLeft, CaretRight, Edit, Save } from '@carbon/icons-react';
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 
 import { IconButton } from '../IconButton';
+import { NumberInput } from '../NumberInput';
 import PropTypes from 'prop-types';
 import Select from '../Select';
 import SelectItem from '../SelectItem';
 import cx from 'classnames';
 import isEqual from 'react-fast-compare';
+import { useFeatureFlag } from '../FeatureFlags';
 import { useFallbackId } from '../../internal/useId';
 import { usePreviousValue } from '../../internal/usePreviousValue';
 import { usePrefix } from '../../internal/usePrefix';
@@ -211,6 +213,7 @@ const Pagination = React.forwardRef(
     ref: React.Ref<HTMLDivElement>
   ) => {
     const prefix = usePrefix();
+    const enableV12Pagination = useFeatureFlag('enable-v12-pagination');
     const inputId = useFallbackId(id?.toString());
     const backBtnRef = useRef<HTMLButtonElement>(null);
     const forwardBtnRef = useRef<HTMLButtonElement>(null);
@@ -228,6 +231,7 @@ const Pagination = React.forwardRef(
 
     const [pageSizes, setPageSizes] = useState(normalizedControlledPageSizes);
     const [page, setPage] = useState(controlledPage);
+    const [pageInputValue, setPageInputValue] = useState(page);
     const [focusTarget, setFocusTarget] = useState<
       'backward' | 'forward' | null
     >(null);
@@ -245,19 +249,12 @@ const Pagination = React.forwardRef(
       ? Math.max(Math.ceil(totalItems / pageSize), 1)
       : 1;
     const backButtonDisabled = disabled || page === 1;
-    const backButtonClasses = cx({
-      [`${prefix}--pagination__button`]: true,
-      [`${prefix}--pagination__button--backward`]: true,
-      [`${prefix}--pagination__button--no-index`]: backButtonDisabled,
-    });
     const forwardButtonDisabled =
       disabled || (page === totalPages && !pagesUnknown);
-    const forwardButtonClasses = cx({
-      [`${prefix}--pagination__button`]: true,
-      [`${prefix}--pagination__button--forward`]: true,
-      [`${prefix}--pagination__button--no-index`]: forwardButtonDisabled,
-    });
-    const selectItems = renderSelectItems(totalPages);
+    // TODO: V12 - Remove
+    const selectItems = enableV12Pagination
+      ? undefined
+      : renderSelectItems(totalPages);
 
     const focusMap = {
       backward: backBtnRef,
@@ -372,7 +369,7 @@ const Pagination = React.forwardRef(
         pageSize,
         page: 1,
       };
-
+      setPageInputValue(changes.page);
       setPage(changes.page);
       setPageSize(changes.pageSize);
 
@@ -381,18 +378,34 @@ const Pagination = React.forwardRef(
       }
     }
 
-    function handlePageInputChange(event) {
-      const page = Number(event.target.value);
-      if (
-        page > 0 &&
-        totalItems &&
-        page <= Math.max(Math.ceil(totalItems / pageSize), 1)
-      ) {
-        setPage(page);
+    // TODO: V12 - Remove
+    function handlePageSelectChange(event) {
+      const newPage = event.target.value;
+      setPage(newPage);
+
+      if (onChange) {
+        onChange({
+          page: newPage,
+          pageSize,
+        });
+      }
+    }
+
+    function handlePageInputChange(event, state) {
+      const newPage = Math.max(0, Math.min(state.value, totalPages));
+      setPageInputValue(newPage);
+    }
+
+    function handlePageInputKeydown(event) {
+      const { key } = event;
+      if (key === 'Enter') {
+        const newPage = pageInputValue === 0 ? 1 : Number(pageInputValue);
+        setPage(newPage);
+        setPageInputValue(newPage);
 
         if (onChange) {
           onChange({
-            page,
+            page: newPage,
             pageSize,
           });
         }
@@ -402,6 +415,7 @@ const Pagination = React.forwardRef(
     function incrementPage() {
       const nextPage = page + 1;
       setPage(nextPage);
+      setPageInputValue(nextPage);
 
       // when the increment button reaches the last page,
       // the icon button becomes disabled and the focus shifts to `main`
@@ -423,6 +437,7 @@ const Pagination = React.forwardRef(
     function decrementPage() {
       const nextPage = page - 1;
       setPage(nextPage);
+      setPageInputValue(nextPage);
 
       // when the decrement button reaches the first page,
       // the icon button becomes disabled and the focus shifts to `main`
@@ -455,6 +470,7 @@ const Pagination = React.forwardRef(
             className={`${prefix}--select__item-count`}
             labelText=""
             hideLabel
+            size={size}
             noLabel
             inline
             onChange={handleSizeChange}
@@ -489,18 +505,53 @@ const Pagination = React.forwardRef(
             </span>
           ) : (
             <>
-              <Select
-                id={`${prefix}-pagination-select-${inputId}-right`}
-                className={`${prefix}--select__page-number`}
-                labelText={pageSelectLabelText(totalPages)}
-                inline
-                hideLabel
-                onChange={handlePageInputChange}
-                value={page}
-                key={page}
-                disabled={pageInputDisabled || disabled}>
-                {selectItems}
-              </Select>
+              {enableV12Pagination ? (
+                <div className={`${prefix}--number-input-wrapper`}>
+                  <NumberInput
+                    id={`${prefix}-pagination-input-${inputId}`}
+                    className={`${prefix}--number-input__page-number`}
+                    label={pageSelectLabelText(totalPages)}
+                    hideLabel
+                    inputMode="text"
+                    allowEmpty
+                    hideSteppers
+                    placeholder="#"
+                    min={0}
+                    max={totalPages}
+                    value={pageInputValue === 0 ? '' : pageInputValue}
+                    size={size} // Number input doesn't have xs support yet
+                    style={{
+                      inlineSize: `calc(${String(pageInputValue).length}ch + 1rem + var(--cds-layout-size-height-local))`,
+                    }}
+                    onChange={handlePageInputChange}
+                    onKeyDown={handlePageInputKeydown}
+                    onBlur={() => {
+                      setPageInputValue(page);
+                    }}
+                    disabled={pageInputDisabled || disabled}
+                  />
+                  {page !== pageInputValue ? (
+                    <Save className={`${prefix}--number-input-wrapper__icon`} />
+                  ) : (
+                    <Edit className={`${prefix}--number-input-wrapper__icon`} />
+                  )}
+                </div>
+              ) : (
+                // TODO: V12 - Remove
+                <Select
+                  id={`${prefix}-pagination-select-${inputId}-right`}
+                  className={`${prefix}--select__page-number`}
+                  labelText={pageSelectLabelText(totalPages)}
+                  inline
+                  hideLabel
+                  size={size}
+                  onChange={handlePageSelectChange}
+                  value={page}
+                  key={page}
+                  disabled={pageInputDisabled || disabled}>
+                  {selectItems}
+                </Select>
+              )}
               <span className={`${prefix}--pagination__text`}>
                 {pageRangeText(page, totalPages)}
               </span>
@@ -511,9 +562,10 @@ const Pagination = React.forwardRef(
               align="top"
               disabled={backButtonDisabled}
               kind="ghost"
-              className={backButtonClasses}
+              className={`${prefix}--pagination__button`}
               label={backwardText}
               aria-label={backwardText}
+              size={size}
               onClick={decrementPage}
               ref={backBtnRef}>
               <CaretLeft />
@@ -522,9 +574,10 @@ const Pagination = React.forwardRef(
               align="top"
               disabled={forwardButtonDisabled || isLastPage}
               kind="ghost"
-              className={forwardButtonClasses}
+              className={`${prefix}--pagination__button`}
               label={forwardText}
               aria-label={forwardText}
+              size={size}
               onClick={incrementPage}
               ref={forwardBtnRef}>
               <CaretRight />

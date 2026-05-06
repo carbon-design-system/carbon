@@ -66,32 +66,38 @@
         display: flex;
       }
     }
-  }
 
-  .#{$prefix}--pagination .#{$prefix}--select {
-    align-items: center;
-    block-size: 100%;
-  }
-
-  .#{$prefix}--pagination .#{$prefix}--select-input--inline__wrapper {
-    display: flex;
-    block-size: 100%;
-  }
-
-  .#{$prefix}--pagination .#{$prefix}--select-input {
-    @include type-style('body-compact-01');
-
-    block-size: 100%;
-    inline-size: auto;
-    line-height: layout.size('height');
-    min-inline-size: auto;
-
-    // Firefox-specific fix for three-digit numbers
-    // stylelint-disable-next-line at-rule-no-vendor-prefix
-    @-moz-document url-prefix() {
-      padding-inline-end: $spacing-05;
-      text-overflow: clip;
+    .#{$prefix}--number-input-wrapper {
+      position: relative;
+      display: flex;
     }
+
+    // TODO: remove this class after xs support on NumberInput
+    .#{$prefix}--number-input-wrapper input {
+      block-size: layout.size('height');
+    }
+
+    .#{$prefix}--number-input-wrapper__icon {
+      position: absolute;
+      inset-block-start: 50%;
+      inset-inline-end: calc((layout.size('height') - $spacing-05) / 2);
+      pointer-events: none;
+      transform: translateY(-50%);
+    }
+  }
+
+  .#{$prefix}--pagination--sm {
+    min-block-size: convert.to-rem(32px);
+  }
+
+  .#{$prefix}--pagination--lg {
+    min-block-size: convert.to-rem(48px);
+  }
+
+  .#{$prefix}--pagination .#{$prefix}--number input[type='number'] {
+    border: none;
+    min-inline-size: auto;
+    padding-inline-end: 0;
   }
 
   // Extra specificity is needed to preserve padding
@@ -99,24 +105,6 @@
     .#{$prefix}--select--inline
     .#{$prefix}--select-input {
     padding-inline: $spacing-05 2.25rem;
-  }
-
-  .#{$prefix}--pagination .#{$prefix}--select-input:hover {
-    background: $layer-hover;
-  }
-
-  .#{$prefix}--pagination
-    .#{$prefix}--select--inline
-    .#{$prefix}--select-input:focus,
-  .#{$prefix}--pagination
-    .#{$prefix}--select--inline
-    .#{$prefix}--select-input:focus
-    option,
-  .#{$prefix}--pagination
-    .#{$prefix}--select--inline
-    .#{$prefix}--select-input:focus
-    optgroup {
-    background-color: $layer;
   }
 
   .#{$prefix}--pagination .#{$prefix}--select__arrow {
@@ -201,26 +189,7 @@
   .#{$prefix}--btn--ghost.#{$prefix}--pagination__button {
     @include component-reset.reset;
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: none;
-    margin: 0;
-    background: none;
-    block-size: layout.size('height');
     border-inline-start: 1px solid $border-subtle;
-    cursor: pointer;
-    fill: $icon-primary;
-    inline-size: layout.size('height');
-    min-block-size: convert.to-rem(24px);
-    transition:
-      outline $duration-fast-02 motion(standard, productive),
-      background-color $duration-fast-02 motion(standard, productive);
-  }
-
-  .#{$prefix}--pagination__button > svg,
-  .#{$prefix}--btn--ghost.#{$prefix}--pagination__button > svg {
-    margin-block-start: 0;
   }
 
   [dir='rtl'] .#{$prefix}--pagination__button > svg,
@@ -233,27 +202,6 @@
     @include focus-outline('outline');
 
     border-inline-start: 0;
-  }
-
-  .#{$prefix}--pagination__button:hover,
-  .#{$prefix}--btn--ghost:hover.#{$prefix}--pagination__button {
-    background: $layer-hover;
-  }
-
-  .#{$prefix}--pagination__button--no-index,
-  .#{$prefix}--btn--ghost.#{$prefix}--pagination__button--no-index {
-    cursor: not-allowed;
-    fill: $icon-disabled;
-  }
-
-  .#{$prefix}--pagination__button:disabled:hover,
-  .#{$prefix}--pagination__button--no-index:hover,
-  .#{$prefix}--btn--ghost:disabled:hover.#{$prefix}--pagination__button,
-  .#{$prefix}--btn--ghost:hover.#{$prefix}--pagination__button--no-index {
-    border-color: $border-subtle;
-    background: $layer;
-    cursor: not-allowed;
-    fill: $icon-disabled;
   }
 
   // Skeleton state
