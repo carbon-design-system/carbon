@@ -102,6 +102,18 @@ describe('Button', () => {
     }
   );
 
+  it('does not render danger assistive text when dangerDescription is empty', () => {
+    render(
+      <Button kind="danger" dangerDescription="">
+        Delete
+      </Button>
+    );
+
+    expect(screen.getByRole('button', { name: 'Delete' })).not.toHaveAttribute(
+      'aria-describedby'
+    );
+  });
+
   it.each([
     ['xs', 'cds--btn--xs'],
     ['sm', 'cds--btn--sm'],

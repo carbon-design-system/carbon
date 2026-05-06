@@ -794,6 +794,12 @@ interface DialogFooterProps extends HTMLAttributes<HTMLDivElement> {
   danger?: boolean;
 
   /**
+   * Specify the message read by screen readers for the danger primary button.
+   * Defaults to an empty string; provide localized text to opt in.
+   */
+  dangerDescription?: string;
+
+  /**
    * Specify loading status
    */
   loadingStatus?: InlineLoadingStatus;
@@ -832,6 +838,7 @@ const DialogFooter = React.forwardRef<HTMLDivElement, DialogFooterProps>(
       loadingIconDescription,
       onLoadingSuccess = noopFn,
       danger = false,
+      dangerDescription = '',
       ...rest
     },
     ref
@@ -906,6 +913,7 @@ const DialogFooter = React.forwardRef<HTMLDivElement, DialogFooterProps>(
         <Button
           className={primaryButtonClass}
           kind={danger ? 'danger' : 'primary'}
+          dangerDescription={dangerDescription}
           disabled={loadingActive || primaryButtonDisabled}
           onClick={onRequestSubmit}
           ref={button}>
@@ -1005,6 +1013,12 @@ DialogFooter.propTypes = {
    * Specify whether the Dialog is for dangerous actions
    */
   danger: PropTypes.bool,
+
+  /**
+   * Specify the message read by screen readers for the danger primary button.
+   * Defaults to an empty string; provide localized text to opt in.
+   */
+  dangerDescription: PropTypes.string,
 
   /**
    * Specify loading status

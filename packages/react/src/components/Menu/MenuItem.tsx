@@ -97,7 +97,7 @@ export const MenuItem = forwardRef<HTMLLIElement, MenuItemProps>(
     {
       children,
       className,
-      dangerDescription = 'danger',
+      dangerDescription = '',
       disabled,
       kind = 'default',
       label,
@@ -143,6 +143,7 @@ export const MenuItem = forwardRef<HTMLLIElement, MenuItemProps>(
 
     const isDisabled = disabled && !hasChildren;
     const isDanger = kind === 'danger' && !hasChildren;
+    const hasDangerDescription = isDanger && Boolean(dangerDescription);
 
     function registerItem() {
       context.dispatch({
@@ -289,7 +290,7 @@ export const MenuItem = forwardRef<HTMLLIElement, MenuItemProps>(
           <Text as="div" className={`${prefix}--menu-item__label`}>
             {label}
           </Text>
-          {isDanger && (
+          {hasDangerDescription && (
             <span id={assistiveId} className={`${prefix}--visually-hidden`}>
               {dangerDescription}
             </span>

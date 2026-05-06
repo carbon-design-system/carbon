@@ -49,6 +49,30 @@ describe('cds-menu-item', () => {
     expect(el).to.have.class('cds--menu-item--danger');
   });
 
+  it('should not render default danger description when none is provided', async () => {
+    const el = await fixture(
+      html`<cds-menu-item label="Test Item" kind="danger"></cds-menu-item>`
+    );
+    await el.updateComplete;
+
+    const dangerSpan = el.shadowRoot.querySelector('#danger-description');
+    expect(dangerSpan).to.not.exist;
+  });
+
+  it('should render provided danger description', async () => {
+    const el = await fixture(html`
+      <cds-menu-item
+        label="Test Item"
+        kind="danger"
+        danger-description="gefahr"></cds-menu-item>
+    `);
+    await el.updateComplete;
+
+    const dangerSpan = el.shadowRoot.querySelector('#danger-description');
+    expect(dangerSpan).to.exist;
+    expect(dangerSpan.textContent).to.equal('gefahr');
+  });
+
   describe('firstUpdated', () => {
     it('should detect submenu', async () => {
       const el = await fixture(html`
