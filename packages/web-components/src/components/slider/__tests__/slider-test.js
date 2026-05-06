@@ -494,6 +494,126 @@ describe('cds-slider', () => {
     expect(tooltip?.open).to.equal(false);
   });
 
+  it('should normalize decimal values for hidden-input tooltip content', async () => {
+    const el = await fixture(
+      html` <cds-slider
+        label-text="Slider Label"
+        max="10"
+        min="0"
+        step="0.1"
+        value="0"
+        hide-text-input>
+        <cds-slider-input
+          aria-label="Slider value"
+          type="number"></cds-slider-input>
+      </cds-slider>`
+    );
+    await el.updateComplete;
+
+    const slider = el?.shadowRoot?.querySelector('.cds--slider');
+    const track = el?.shadowRoot?.querySelector('#track');
+    track.getBoundingClientRect = () => ({
+      left: 0,
+      width: 100,
+      top: 0,
+      right: 100,
+      bottom: 0,
+      height: 0,
+      x: 0,
+      y: 0,
+      toJSON: () => {},
+    });
+
+    slider?.dispatchEvent(
+      new MouseEvent('click', { clientX: 87, bubbles: true })
+    );
+    await el.updateComplete;
+
+    const tooltipContent = el?.shadowRoot?.querySelector('cds-tooltip-content');
+    const displayedValue = Number(tooltipContent?.textContent.trim());
+    expect(displayedValue).to.equal(8.7);
+  });
+
+  it('should normalize decimal values for hidden-input tooltip content with step 0.7384', async () => {
+    const el = await fixture(
+      html` <cds-slider
+        label-text="Slider Label"
+        max="10"
+        min="0"
+        step="0.7384"
+        value="0"
+        hide-text-input>
+        <cds-slider-input
+          aria-label="Slider value"
+          type="number"></cds-slider-input>
+      </cds-slider>`
+    );
+    await el.updateComplete;
+
+    const slider = el?.shadowRoot?.querySelector('.cds--slider');
+    const track = el?.shadowRoot?.querySelector('#track');
+    track.getBoundingClientRect = () => ({
+      left: 0,
+      width: 100,
+      top: 0,
+      right: 100,
+      bottom: 0,
+      height: 0,
+      x: 0,
+      y: 0,
+      toJSON: () => {},
+    });
+
+    slider?.dispatchEvent(
+      new MouseEvent('click', { clientX: 87, bubbles: true })
+    );
+    await el.updateComplete;
+
+    const tooltipContent = el?.shadowRoot?.querySelector('cds-tooltip-content');
+    const displayedValue = Number(tooltipContent?.textContent.trim());
+    expect(displayedValue).to.equal(8.8608);
+  });
+
+  it('should normalize decimal values for negative hidden-input tooltip content', async () => {
+    const el = await fixture(
+      html` <cds-slider
+        label-text="Slider Label"
+        max="10"
+        min="-10"
+        step="0.1"
+        value="0"
+        hide-text-input>
+        <cds-slider-input
+          aria-label="Slider value"
+          type="number"></cds-slider-input>
+      </cds-slider>`
+    );
+    await el.updateComplete;
+
+    const slider = el?.shadowRoot?.querySelector('.cds--slider');
+    const track = el?.shadowRoot?.querySelector('#track');
+    track.getBoundingClientRect = () => ({
+      left: 0,
+      width: 200,
+      top: 0,
+      right: 200,
+      bottom: 0,
+      height: 0,
+      x: 0,
+      y: 0,
+      toJSON: () => {},
+    });
+
+    slider?.dispatchEvent(
+      new MouseEvent('click', { clientX: 13, bubbles: true })
+    );
+    await el.updateComplete;
+
+    const tooltipContent = el?.shadowRoot?.querySelector('cds-tooltip-content');
+    const displayedValue = Number(tooltipContent?.textContent.trim());
+    expect(displayedValue).to.equal(-8.7);
+  });
+
   it('should correctly initialize with value 0 and respond to track click', async () => {
     const el = await fixture(html`
       <cds-slider
