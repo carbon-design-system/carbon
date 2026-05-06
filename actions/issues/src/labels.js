@@ -5,9 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-'use strict';
-
-module.exports = {
+export default {
   status: {
     // Reviews
     oneMoreReview: 'status: one more review 👀',

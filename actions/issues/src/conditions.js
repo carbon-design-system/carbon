@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const events = {
+export const events = {
   issues: {
     opened: {
       key: 'issue_opened',
@@ -20,7 +20,7 @@ const events = {
   },
 };
 
-const states = {
+export const states = {
   issues: {
     from_non_collaborator: {
       key: 'from_non_collaborator',
@@ -58,7 +58,7 @@ const states = {
   },
 };
 
-function or(...conditions) {
+export function or(...conditions) {
   const key = conditions
     .map((condition) => {
       return condition.key;
@@ -82,9 +82,3 @@ function or(...conditions) {
 function action(name) {
   return (context) => context.payload.action === name;
 }
-
-module.exports = {
-  events,
-  states,
-  or,
-};

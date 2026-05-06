@@ -5,8 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-'use strict';
+import addTriageLabel from './add-triage-label.js';
+import addIssueResponse from './add-issue-response.js';
 
-module.exports = {
-  plugins: [require('./add-triage-label'), require('./add-issue-response')],
-};
+export const plugins = [addTriageLabel, addIssueResponse];
