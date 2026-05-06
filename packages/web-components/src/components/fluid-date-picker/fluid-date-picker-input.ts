@@ -8,7 +8,6 @@
 import { prefix } from '../../globals/settings';
 import { html } from 'lit';
 import { property } from 'lit/decorators.js';
-import { classMap } from 'lit/directives/class-map.js';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import CDSDatePickerInput from '../date-picker/date-picker-input';
 import styles from './fluid-date-picker.scss?lit';
@@ -44,20 +43,14 @@ class CDSFluidDatePickerInput extends CDSDatePickerInput {
   @property({ attribute: 'invalid-text' })
   declare invalidText: string;
 
+  /**
+   * Specify whether this is a fluid variant
+   */
+  @property({ type: Boolean, reflect: true, attribute: 'is-fluid' })
+  isFluid = true;
+
   render() {
-    const isInvalid = this.invalid && !this.disabled && !this.readonly;
-    const isWarn =
-      this.warn && !this.disabled && !this.readonly && !this.invalid;
-
-    const wrapperClasses = classMap({
-      [`${prefix}--date-picker-input--fluid`]: true,
-      [`${prefix}--date-picker-input--fluid--invalid`]: isInvalid,
-      [`${prefix}--date-picker-input--fluid--warning`]: isWarn,
-      [`${prefix}--date-picker-input--fluid--disabled`]: this.disabled,
-      [`${prefix}--date-picker-input--fluid--readonly`]: this.readonly,
-    });
-
-    return html`<div class="${wrapperClasses}">${super.render()}</div>`;
+    return html`${super.render()}`;
   }
 
   static styles = [CDSDatePickerInput.styles, styles];

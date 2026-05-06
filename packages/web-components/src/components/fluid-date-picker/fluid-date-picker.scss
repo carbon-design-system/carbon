@@ -23,8 +23,8 @@ $css--plex: true !default;
   @extend .#{$prefix}--date-picker--fluid;
   @include emit-layout-tokens();
 
-  display: block;
-  border-block-end: 1px solid $border-strong;
+  display: inline-flex;
+
   inline-size: fit-content;
   max-inline-size: 100%;
 
@@ -88,7 +88,10 @@ $css--plex: true !default;
 :host(#{$prefix}-fluid-date-picker-input) {
   position: relative;
   display: block;
+  box-sizing: border-box;
   background: $field;
+  block-size: convert.to-rem(64px);
+  border-block-end: 1px solid $border-strong;
   inline-size: 100%;
   max-inline-size: 100%;
   outline: none;
