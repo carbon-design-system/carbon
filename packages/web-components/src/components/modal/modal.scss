@@ -28,6 +28,7 @@
   visibility: inherit;
 
   .#{$prefix}--modal-container {
+    overflow: hidden;
     transform: translate3d(0, 0, 0);
     transition: transform $duration-moderate-02 motion(entrance, expressive);
   }
