@@ -25,7 +25,7 @@ import { FeatureFlags, useFeatureFlag } from '../FeatureFlags';
 import { ModalHeader } from './ModalHeader';
 import { ModalFooter } from './ModalFooter';
 import { TextInput, OverflowMenu, OverflowMenuItem } from '../../';
-import { AILabel } from '../AILabel';
+import { AILabel, AILabelContent } from '../AILabel';
 
 const prefix = 'cds';
 
@@ -769,6 +769,110 @@ describe.each([
 
     const inputField = screen.getByLabelText('Domain name');
     expect(inputField).not.toHaveFocus();
+    fireEvent.keyDown(document, { key: 'Escape', code: 'Escape', keyCode: 27 });
+    expect(onClose).toHaveBeenCalled();
+  });
+
+  it('should handle ESC key with AILabel - first ESC closes popover, second ESC closes modal', async () => {
+    const onClose = jest.fn();
+    const aiLabel = (
+      <AILabel className="ai-label-container">
+        <AILabelContent>
+          <div>
+            <p>AI Explained</p>
+            <p>Test content</p>
+          </div>
+        </AILabelContent>
+      </AILabel>
+    );
+
+    render(
+      <ComposedModal open onClose={onClose} decorator={aiLabel}>
+        <ModalHeader>Modal header</ModalHeader>
+        <ModalBody>
+          <p>Modal content</p>
+          <TextInput
+            data-modal-primary-focus
+            id="text-input-1"
+            labelText="Domain name"
+          />
+        </ModalBody>
+        <ModalFooter primaryButtonText="Add" secondaryButtonText="Cancel" />
+      </ComposedModal>
+    );
+
+    expect(screen.getByRole('presentation', { hidden: true })).toHaveClass(
+      'is-visible'
+    );
+
+    const aiLabelButton = screen.getByRole('button', {
+      name: /AI Show information/i,
+    });
+    await userEvent.click(aiLabelButton);
+
+    await waitFor(() => {
+      expect(aiLabelButton).toHaveAttribute('aria-expanded', 'true');
+    });
+
+    await userEvent.keyboard('{Escape}');
+    await waitFor(() => {
+      expect(aiLabelButton).toHaveAttribute('aria-expanded', 'false');
+    });
+
+    expect(onClose).not.toHaveBeenCalled();
+    expect(screen.getByRole('presentation', { hidden: true })).toHaveClass(
+      'is-visible'
+    );
+
+    await userEvent.keyboard('{Escape}');
+    expect(onClose).toHaveBeenCalled();
+  });
+
+  it('should handle ESC key with OverflowMenu - first ESC closes menu, second closes modal', async () => {
+    const onClose = jest.fn();
+
+    render(
+      <Component open onClose={onClose}>
+        <ModalHeader>Modal with Overflow Menu</ModalHeader>
+        <ModalBody>
+          <OverflowMenu iconDescription="More options">
+            <OverflowMenuItem itemText="Download" />
+            <OverflowMenuItem itemText="Share" />
+          </OverflowMenu>
+          <p>Modal content</p>
+          <TextInput
+            data-modal-primary-focus
+            id="text-input-1"
+            labelText="Domain name"
+          />
+        </ModalBody>
+        <ModalFooter primaryButtonText="Add" secondaryButtonText="Cancel" />
+      </Component>
+    );
+
+    expect(screen.getByRole('presentation', { hidden: true })).toHaveClass(
+      'is-visible'
+    );
+
+    const overflowMenuButton = screen.getByRole('button', {
+      name: /options/i,
+    });
+    await userEvent.click(overflowMenuButton);
+
+    expect(overflowMenuButton).toHaveAttribute('aria-expanded', 'true');
+
+    fireEvent.keyDown(
+      // eslint-disable-next-line testing-library/no-node-access
+      document.getElementById(overflowMenuButton.getAttribute('aria-controls')),
+      {
+        key: 'Escape',
+        code: 'Escape',
+        keyCode: 27,
+      }
+    );
+    expect(overflowMenuButton).toHaveAttribute('aria-expanded', 'false');
+    expect(onClose).not.toHaveBeenCalled();
+
     fireEvent.keyDown(document, { key: 'Escape', code: 'Escape', keyCode: 27 });
     expect(onClose).toHaveBeenCalled();
   });

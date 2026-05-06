@@ -373,8 +373,6 @@ const ModalDialog = React.forwardRef(function ModalDialog(
   function handleKeyDown(evt: React.KeyboardEvent<HTMLDivElement>) {
     const { target } = evt;
 
-    evt.stopPropagation();
-
     if (open && target instanceof HTMLElement) {
       if (
         match(evt, keys.Enter) &&
@@ -382,6 +380,7 @@ const ModalDialog = React.forwardRef(function ModalDialog(
         !isCloseButton(target) &&
         document.activeElement !== button.current
       ) {
+        evt.stopPropagation();
         onRequestSubmit(evt);
       }
 
@@ -391,6 +390,7 @@ const ModalDialog = React.forwardRef(function ModalDialog(
         match(evt, keys.Tab) &&
         innerModal.current
       ) {
+        evt.stopPropagation();
         wrapFocusWithoutSentinels({
           containerNode: innerModal.current,
           currentActiveNode: target,
@@ -557,14 +557,13 @@ const ModalDialog = React.forwardRef(function ModalDialog(
     const handleEscapeKey = (event) => {
       if (match(event, keys.Escape)) {
         event.preventDefault();
-        event.stopPropagation();
         onRequestClose(event);
       }
     };
-    document.addEventListener('keydown', handleEscapeKey, true);
+    document.addEventListener('keydown', handleEscapeKey);
 
     return () => {
-      document.removeEventListener('keydown', handleEscapeKey, true);
+      document.removeEventListener('keydown', handleEscapeKey);
     };
     // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20452
   }, [open]);
