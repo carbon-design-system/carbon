@@ -1987,7 +1987,7 @@ __metadata:
     rimraf: "npm:^6.0.1"
     sass: "npm:^1.93.2"
     storybook: "npm:^10.3.5"
-    storybook-addon-accessibility-checker: "npm:>=9.2.0-rc.3"
+    storybook-addon-accessibility-checker: "npm:>=9.2.0-rc.4"
     stream-browserify: "npm:^3.0.0"
     tabbable: "npm:^6.2.0"
     tsdown: "npm:^0.21.0"
@@ -2200,7 +2200,7 @@ __metadata:
     rimraf: "npm:^6.0.1"
     sass: "npm:^1.93.2"
     storybook: "npm:^10.3.5"
-    storybook-addon-accessibility-checker: "npm:^9.2.0-rc.3"
+    storybook-addon-accessibility-checker: "npm:^9.2.0-rc.4"
     tsdown: "npm:^0.21.0"
     tslib: "npm:^2.6.3"
     typescript-config-carbon: "workspace:^0.9.0"
@@ -3350,7 +3350,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@ibm/telemetry-js@npm:^1.10.2, @ibm/telemetry-js@npm:^1.2.1, @ibm/telemetry-js@npm:^1.5.0, @ibm/telemetry-js@npm:^1.5.1, @ibm/telemetry-js@npm:^1.6.1":
+"@ibm/telemetry-js@npm:^1.10.2, @ibm/telemetry-js@npm:^1.2.1, @ibm/telemetry-js@npm:^1.5.0, @ibm/telemetry-js@npm:^1.5.1, @ibm/telemetry-js@npm:^1.6.1, @ibm/telemetry-js@npm:^1.9.1":
   version: 1.11.0
   resolution: "@ibm/telemetry-js@npm:1.11.0"
   bin:
@@ -7847,26 +7847,27 @@ __metadata:
   languageName: node
   linkType: hard
 
-"accessibility-checker-engine@npm:^4.0.8":
-  version: 4.0.10
-  resolution: "accessibility-checker-engine@npm:4.0.10"
-  checksum: 10/84098393894031412a17eeeff65489ad7dff9534d728b6fa8267cab92f56dc4e44ce9538d24c6e900c6c182d7b8d1ba1844b5c7936cea79ec295f5f7db8a6c41
+"accessibility-checker-engine@npm:^4.0.10":
+  version: 4.0.17
+  resolution: "accessibility-checker-engine@npm:4.0.17"
+  checksum: 10/83eaa6b127e18508a3566a221eda4a4a6fa3538eda1791612c32ddd52f2a0e227a9935c55f4897f91ef9fdf7cb2cbc7a7e6ce7a760e5474f3fd70f1b6d8ba15c
   languageName: node
   linkType: hard
 
-"accessibility-checker@npm:^4.0.7":
-  version: 4.0.7
-  resolution: "accessibility-checker@npm:4.0.7"
+"accessibility-checker@npm:^4.0.17":
+  version: 4.0.17
+  resolution: "accessibility-checker@npm:4.0.17"
   dependencies:
+    "@ibm/telemetry-js": "npm:^1.9.1"
     chromedriver: "npm:*"
-    deep-diff: "npm:^1.0.2"
     exceljs: "npm:^4.3.0"
     js-yaml: "npm:^4.1.0"
+    microdiff: "npm:^1.4.0"
     puppeteer: "npm:^22.14.0"
     string-hash: "npm:^1.1.3"
   bin:
     achecker: bin/achecker.js
-  checksum: 10/d5397240fc2b7312d88636769f922e7783e33f73a289f3bb045dddfce5d20ed4d823dd642b272dd3144121d8ed712b8f9a704320eb2c8abe955e23d9a5960b65
+  checksum: 10/2ae10c94f61f61c45ce831584b0fb9b2dae4c47734e6e163801f97cc8bd7b5d5b97a21fb70be883df88e5ca769b88ed7b65e291c5851c8ef79760ef455847dd8
   languageName: node
   linkType: hard
 
@@ -9305,7 +9306,7 @@ __metadata:
     "@testing-library/user-event": "npm:^14.4.3"
     "@types/prop-types": "npm:^15.7.13"
     "@types/react-is": "npm:^19.0.0"
-    accessibility-checker: "npm:^4.0.7"
+    accessibility-checker: "npm:^4.0.17"
     all-contributors-cli: "npm:^6.19.0"
     cross-env: "npm:^10.0.0"
     cross-spawn: "npm:^7.0.0"
@@ -10823,13 +10824,6 @@ __metadata:
     babel-plugin-macros:
       optional: true
   checksum: 10/f100cb11001309f2185c4334c6f29e5323c1e73b7b75e3b1893bc71ef53cd13fb80534efc8fa7163a891ede633e310a9c600ba38c363cc9d14a72f238fe47078
-  languageName: node
-  linkType: hard
-
-"deep-diff@npm:^1.0.2":
-  version: 1.0.2
-  resolution: "deep-diff@npm:1.0.2"
-  checksum: 10/3e496111b5506e7399e8a5441b713b033ade3b9d60faff96a4c47189e460a889de50dab99afdb1dcddebf701a0b6a6bb7743f5090b7a620da12e3391c940f8f3
   languageName: node
   linkType: hard
 
@@ -15305,7 +15299,7 @@ __metadata:
     "@babel/preset-env": "npm:^7.27.2"
     "@babel/preset-react": "npm:^7.27.1"
     "@babel/runtime": "npm:^7.27.3"
-    accessibility-checker: "npm:^4.0.7"
+    accessibility-checker: "npm:^4.0.17"
     axe-core: "npm:^4.10.3"
     babel-jest: "npm:^30.0.5"
     chalk: "npm:^5.4.1"
@@ -17295,6 +17289,13 @@ __metadata:
   version: 1.4.1
   resolution: "merge2@npm:1.4.1"
   checksum: 10/7268db63ed5169466540b6fb947aec313200bcf6d40c5ab722c22e242f651994619bcd85601602972d3c85bd2cc45a358a4c61937e9f11a061919a1da569b0c2
+  languageName: node
+  linkType: hard
+
+"microdiff@npm:^1.4.0":
+  version: 1.5.0
+  resolution: "microdiff@npm:1.5.0"
+  checksum: 10/ec1ee39b744e0f5140c9d1bcc05e25d2b2c6f6777bda2cbe59627af8aa0da5d8c98cfa5bbd610571b72b6db9e6cf3d120e24782a9870be611ea4fed69ca7bfbf
   languageName: node
   linkType: hard
 
@@ -22051,16 +22052,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"storybook-addon-accessibility-checker@npm:>=9.2.0-rc.3, storybook-addon-accessibility-checker@npm:^9.2.0-rc.3":
-  version: 9.2.0-rc.3
-  resolution: "storybook-addon-accessibility-checker@npm:9.2.0-rc.3"
+"storybook-addon-accessibility-checker@npm:>=9.2.0-rc.4, storybook-addon-accessibility-checker@npm:^9.2.0-rc.4":
+  version: 9.2.0-rc.4
+  resolution: "storybook-addon-accessibility-checker@npm:9.2.0-rc.4"
   dependencies:
     "@storybook/global": "npm:^5.0.0"
-    accessibility-checker-engine: "npm:^4.0.8"
+    accessibility-checker-engine: "npm:^4.0.10"
     axe-core: "npm:^4.2.0"
   peerDependencies:
-    storybook: "workspace:^"
-  checksum: 10/05944d120cfc0c3afff6468ead71ce3776c0dadcaa8125010d3d1800c00e23451ae33d0e4e9325062b897b3519ef3d0c7406bcac533c2e024214e8b6a89e6769
+    storybook: ^9.2.0
+  checksum: 10/a6619ce06c29186200e8e91823c6c915c4bed3a5310417ef5b850b8847937bce67a6201440ab4aae6e194d549eb61d9abf4c6087c6a35e4cd3112a1f2bb1c57b
   languageName: node
   linkType: hard
 
