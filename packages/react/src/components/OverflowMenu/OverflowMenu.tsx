@@ -9,6 +9,7 @@ import React, {
   Children,
   cloneElement,
   forwardRef,
+  isValidElement,
   RefObject,
   useCallback,
   useContext,
@@ -18,6 +19,7 @@ import React, {
   type ElementType,
   type KeyboardEvent,
   type MouseEvent,
+  type ReactElement,
   type ReactNode,
   type Ref,
 } from 'react';
@@ -39,13 +41,10 @@ import { deprecate } from '../../prop-types/deprecate';
 import { mergeRefs } from '../../tools/mergeRefs';
 import { setupGetInstanceId } from '../../tools/setupGetInstanceId';
 import { IconButton, IconButtonProps } from '../IconButton';
-import OverflowMenuItem, {
-  OverflowMenuItemProps,
-} from '../OverflowMenuItem/OverflowMenuItem';
+import { OverflowMenuItemProps } from '../OverflowMenuItem/OverflowMenuItem';
 import { useOutsideClick } from '../../internal/useOutsideClick';
 import { deprecateValuesWithin } from '../../prop-types/deprecateValuesWithin';
 import { mapPopoverAlign } from '../../tools/mapPopoverAlign';
-import { isComponentElement } from '../../internal';
 
 const getInstanceId = setupGetInstanceId();
 
@@ -532,9 +531,10 @@ export const OverflowMenu = forwardRef<HTMLButtonElement, OverflowMenuProps>(
     );
 
     const childrenWithProps = Children.toArray(children).map((child, index) => {
-      if (isComponentElement(child, OverflowMenuItem)) {
-        return cloneElement(child, {
-          closeMenu: child.props.closeMenu || closeMenuAndFocus,
+      if (isValidElement(child)) {
+        const childElement = child as ReactElement<OverflowMenuItemProps>;
+        return cloneElement(childElement, {
+          closeMenu: childElement.props.closeMenu || closeMenuAndFocus,
           handleOverflowMenuItemFocus,
           ref: (el: HTMLElement) => {
             menuItemRefs.current[index] = el;
