@@ -231,3 +231,31 @@
   inset-block-start: to-rem(10px);
   inset-inline-end: to-rem(48px);
 }
+
+// `enable-dialog-element` feature flag styles
+:host(#{$prefix}-modal[enable-dialog-element]) #{$prefix}-dialog::part(dialog) {
+  @extend .#{$prefix}--modal-container;
+
+  // Prevent a 2px border when using `enable-dialog-element` feature flag
+  border: none;
+}
+
+:host(#{$prefix}-modal[enable-dialog-element][size='xs'])
+  #{$prefix}-dialog::part(dialog) {
+  @extend .#{$prefix}--modal-container--xs;
+}
+
+:host(#{$prefix}-modal[enable-dialog-element][size='sm'])
+  #{$prefix}-dialog::part(dialog) {
+  @extend .#{$prefix}--modal-container--sm;
+}
+
+:host(#{$prefix}-modal[enable-dialog-element][size='lg'])
+  #{$prefix}-dialog::part(dialog) {
+  @extend .#{$prefix}--modal-container--lg;
+}
+
+:host(#{$prefix}-modal[enable-dialog-element]:not([open]))
+  #{$prefix}-dialog::part(dialog) {
+  display: none;
+}

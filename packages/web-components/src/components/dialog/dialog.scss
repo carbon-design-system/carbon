@@ -17,10 +17,6 @@
 @use '@carbon/styles/scss/components/button' as *;
 @use '@carbon/styles/scss/utilities/focus-outline' as *;
 
-:host(#{$prefix}-dialog) dialog {
-  @extend .#{$prefix}--dialog;
-}
-
 :host(#{$prefix}-dialog[has-scrolling-content])
   ::slotted(#{$prefix}-dialog-body),
 :host(#{$prefix}-dialog) ::slotted(#{$prefix}-dialog-body[is-scrollable]) {

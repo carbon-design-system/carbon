@@ -12,7 +12,7 @@ import { prefix } from '../../globals/settings';
 import HostListener from '../../globals/decorators/host-listener';
 import styles from './dialog.scss?lit';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
-import CDSModal from '../modal/modal';
+import CDSModalBase from '../modal/modal-base';
 
 /**
  * Dialog.
@@ -26,7 +26,7 @@ import CDSModal from '../modal/modal';
  * @fires cds-dialog-closed - The custom event fired after this dialog is closed upon a user gesture.
  */
 @customElement(`${prefix}-dialog`)
-class CDSDialog extends CDSModal {
+class CDSDialog extends CDSModalBase {
   /**
    * Reference to the native dialog element
    */
@@ -51,9 +51,6 @@ class CDSDialog extends CDSModal {
       this._handleUserInitiatedClose(event.target);
     }
   };
-
-  @property({ attribute: false })
-  loadingStatus: 'inactive' | 'active' | 'finished' | 'error' = 'inactive';
 
   /**
    * Specifies whether the dialog is modal or non-modal
@@ -129,12 +126,6 @@ class CDSDialog extends CDSModal {
     return { footer, primaryButton, secondaryButtons };
   }
 
-  /**
-   * Do not inherit hostKeyDown handling from modal
-   */
-  @HostListener('keydown')
-  protected _handleHostKeydown = () => {};
-
   @HostListener('document:keydown')
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20452
   // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
@@ -172,34 +163,42 @@ class CDSDialog extends CDSModal {
           }
         }
 
-        const primaryFocusNode = this.querySelector(
-          (this.constructor as typeof CDSDialog).selectorPrimaryFocus
-        );
-        await (this.constructor as typeof CDSDialog)._delay();
+        // If inside of a modal with `enable-dialog-element` feature
+        // flag enabled, let the modal handle the focus management
+        const inEnableDialogElementFeatureFlag =
+          this.hasAttribute('modal-controlled');
 
-        if (primaryFocusNode) {
-          // For cases where a `carbon-web-components` component (e.g. `<cds-button>`) being `primaryFocusNode`,
-          // where its first update/render cycle that makes it focusable happens after `<cds-dialog>`'s first update/render cycle
-          (primaryFocusNode as HTMLElement).focus();
-        } else {
-          const { primaryButton, secondaryButtons } = this._getFooterElements();
+        if (!inEnableDialogElementFeatureFlag) {
+          const primaryFocusNode = this.querySelector(
+            (this.constructor as typeof CDSDialog).selectorPrimaryFocus
+          );
+          await (this.constructor as typeof CDSDialog)._delay();
 
-          if (
-            primaryButton &&
-            primaryButton?.getAttribute('kind') === 'danger' &&
-            secondaryButtons[0]
-          ) {
-            secondaryButtons[0].focus();
+          if (primaryFocusNode) {
+            // For cases where a `carbon-web-components` component (e.g. `<cds-button>`) being `primaryFocusNode`,
+            // where its first update/render cycle that makes it focusable happens after `<cds-dialog>`'s first update/render cycle
+            (primaryFocusNode as HTMLElement).focus();
           } else {
-            const closeButton = this.querySelector(
-              (this.constructor as typeof CDSDialog).selectorCloseButton
-            ) as HTMLElement;
+            const { primaryButton, secondaryButtons } =
+              this._getFooterElements();
 
-            if (closeButton) {
-              closeButton.focus();
+            if (
+              primaryButton &&
+              primaryButton?.getAttribute('kind') === 'danger' &&
+              secondaryButtons[0]
+            ) {
+              secondaryButtons[0].focus();
             } else {
-              const { first } = this.getFocusable();
-              first?.focus();
+              const closeButton = this.querySelector(
+                (this.constructor as typeof CDSDialog).selectorCloseButton
+              ) as HTMLElement;
+
+              if (closeButton) {
+                closeButton.focus();
+              } else {
+                const { first } = this.getFocusable();
+                first?.focus();
+              }
             }
           }
         }
@@ -226,6 +225,7 @@ class CDSDialog extends CDSModal {
     return html`
       <dialog
         part="dialog"
+        class="${prefix}--dialog"
         role=${role}
         aria-label=${ifDefined(ariaLabel || undefined)}
         aria-labelledby=${ifDefined(
@@ -245,7 +245,7 @@ class CDSDialog extends CDSModal {
    * A selector selecting buttons that should close this dialog.
    */
   static get selectorCloseButton() {
-    return `[data-dialog-close],${prefix}-dialog-close-button`;
+    return `[data-dialog-close],${prefix}-dialog-close-button,[data-modal-close],${prefix}-modal-close-button`;
   }
 
   /**

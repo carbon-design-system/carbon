@@ -6,16 +6,16 @@
  */
 
 import { classMap } from 'lit/directives/class-map.js';
-import { LitElement, html } from 'lit';
+import { html } from 'lit';
 import { property } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
 import HostListener from '../../globals/decorators/host-listener';
-import HostListenerMixin from '../../globals/mixins/host-listener';
 import { MODAL_SIZE } from './defs';
 import styles from './modal.scss?lit';
-import { selectorTabbable } from '../../globals/settings';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
+import CDSModalBase from './modal-base';
 import '../inline-loading';
+import '../dialog/dialog';
 import CDSModalFooter from './modal-footer';
 
 export { MODAL_SIZE };
@@ -31,11 +31,16 @@ export { MODAL_SIZE };
  * @fires cds-modal-closed - The custom event fired after this modal is closed upon a user gesture.
  */
 @customElement(`${prefix}-modal`)
-class CDSModal extends HostListenerMixin(LitElement) {
+class CDSModal extends CDSModalBase {
   /**
-   * The element that had focus before this modal gets open.
+   * Enable the use of native dialog element instead of div with role="dialog"
    */
-  protected _launcher: Element | null = null;
+  @property({
+    type: Boolean,
+    reflect: true,
+    attribute: 'enable-dialog-element',
+  })
+  enableDialogElement = false;
 
   /**
    * The inline loading element that renders when `loading-status` is not `inactive`
@@ -75,6 +80,18 @@ class CDSModal extends HostListenerMixin(LitElement) {
     }
   };
 
+  @HostListener('document:keydown')
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20452
+  // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
+  protected _handleKeydown = ({ key, target }: KeyboardEvent) => {
+    // let the Dialog handle the event if using `enable-dialog-element` feature flag
+    if (!this.open || this.enableDialogElement) return;
+
+    if (key === 'Esc' || key === 'Escape') {
+      this._handleUserInitiatedClose(target);
+    }
+  };
+
   /**
    * Handle the keydown event.
    * Trap the focus inside the side-panel by tracking keydown.key == `Tab`
@@ -105,6 +122,9 @@ class CDSModal extends HostListenerMixin(LitElement) {
         return;
       }
     }
+
+    if (this.enableDialogElement) return;
+
     if (event.key === 'Tab') {
       const { first: _firstElement, last: _lastElement } = this.getFocusable();
 
@@ -124,109 +144,53 @@ class CDSModal extends HostListenerMixin(LitElement) {
     }
   };
 
-  @HostListener('document:keydown')
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20452
-  // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
-  protected _handleKeydown = ({ key, target }: KeyboardEvent) => {
-    if (!this.open) return;
-
-    if (key === 'Esc' || key === 'Escape') {
-      this._handleUserInitiatedClose(target);
-    }
-  };
-
   /**
-   * Get focusable elements.
+   * `enable-dialog-element`
    *
-   * Querying all tabbable items.
-   *
-   * @returns {{first: HTMLElement, last: HTMLElement, all: HTMLElement[]}} Returns an object with various elements.
+   * Handles `cds-dialog-closed` event from the nested dialog element.
+   * Syncs the open state when the dialog closes, and stops the propagation of the
+   * event in favour of `cds-modal-closed`
    */
-  protected getFocusable(): {
-    first: HTMLElement | undefined;
-    last: HTMLElement | undefined;
-    all: HTMLElement[];
-  } {
-    const elements: HTMLElement[] = [];
+  protected _handleDialogClosed = (event: CustomEvent) => {
+    event.stopPropagation();
 
-    // Add tabbable elements inside light DOM
-    const tabbableItems = this.querySelectorAll<HTMLElement>(selectorTabbable);
-    if (tabbableItems?.length) {
-      elements.push(...tabbableItems);
-    }
+    this.open = false;
 
-    // Flatten NodeList arrays and filter for focusable items
-    const all = elements?.filter(
-      (el): el is HTMLElement => typeof el?.focus === 'function'
-    );
-
-    return {
-      first: all[0],
-      last: all[all.length - 1],
-      all,
-    };
-  }
-
-  /**
-   * Handles `click` event on the modal container.
-   *
-   * @param event The event.
-   */
-  protected _handleClickContainer(event: MouseEvent) {
-    if (
-      (event.target as Element).matches(
-        (this.constructor as typeof CDSModal).selectorCloseButton
-      ) &&
-      !this.preventClose
-    ) {
-      this._handleUserInitiatedClose(event.target);
-    }
-  }
-
-  /**
-   * Handles user-initiated close request of this modal.
-   *
-   * @param triggeredBy The element that triggered this close request.
-   */
-  protected _handleUserInitiatedClose(triggeredBy: EventTarget | null) {
-    if (this.open) {
-      const init = {
+    // fire modal closed event
+    this.dispatchEvent(
+      new CustomEvent((this.constructor as typeof CDSModal).eventClose, {
         bubbles: true,
         cancelable: true,
         composed: true,
-        detail: {
-          triggeredBy,
-        },
-      };
-      if (
-        this.dispatchEvent(
-          new CustomEvent(
-            (this.constructor as typeof CDSModal).eventBeforeClose,
-            init
-          )
-        )
-      ) {
-        this.open = false;
-        this.dispatchEvent(
-          new CustomEvent(
-            (this.constructor as typeof CDSModal).eventClose,
-            init
-          )
-        );
-      }
-    }
-  }
+        detail: event.detail,
+      })
+    );
+  };
 
   /**
-   * Handles `slotchange` event.
+   * `enable-dialog-element`
+   *
+   * Handles `cds-dialog-beingclosed` event from the nested dialog element.
+   * Stops the propagation of the event in favour of `cds-modal-beingclosed`
    */
-  protected _handleSlotChange() {
-    if (this.querySelector(`${prefix}-modal-footer`)) {
-      this.setAttribute('has-footer', '');
-    } else {
-      this.removeAttribute('has-footer');
+  protected _handleDialogBeingClosed = (event: CustomEvent) => {
+    event.stopPropagation();
+
+    const modalEvent = new CustomEvent(
+      (this.constructor as typeof CDSModal).eventBeforeClose,
+      {
+        bubbles: true,
+        cancelable: true,
+        composed: true,
+        detail: event.detail,
+      }
+    );
+
+    // allow the user to cancel the beingclosed event
+    if (!this.dispatchEvent(modalEvent)) {
+      event.preventDefault();
     }
-  }
+  };
 
   /**
    * Specify whether the Modal is displaying an alert, error or warning.
@@ -276,12 +240,6 @@ class CDSModal extends HostListenerMixin(LitElement) {
   size = MODAL_SIZE.MEDIUM;
 
   /**
-   * Prevent closing on click outside of modal
-   */
-  @property({ type: Boolean, attribute: 'prevent-close-on-click-outside' })
-  preventCloseOnClickOutside = false;
-
-  /**
    * Specify the loading status
    */
   @property({ reflect: true, attribute: 'loading-status' })
@@ -314,12 +272,6 @@ class CDSModal extends HostListenerMixin(LitElement) {
     attribute: 'should-submit-on-enter',
   })
   shouldSubmitOnEnter = false;
-
-  /**
-   * Prevent the modal from closing after clicking the close button
-   */
-  @property({ type: Boolean, attribute: 'prevent-close' })
-  preventClose = false;
 
   // Initializes the inline-loading element
   private _initializeLoadingEl(footer: CDSModalFooter) {
@@ -494,7 +446,7 @@ class CDSModal extends HostListenerMixin(LitElement) {
   }
 
   render() {
-    const { alert, size, hasScrollingContent } = this;
+    const { alert, size, hasScrollingContent, enableDialogElement } = this;
     const containerClass = this.containerClass
       .split(' ')
       .filter(Boolean)
@@ -504,21 +456,44 @@ class CDSModal extends HostListenerMixin(LitElement) {
       [`${prefix}--modal-container--${size}`]: size,
       ...containerClass,
     });
-    return html`
-      <div
-        aria-label=${this._computeAriaLabel()}
-        part="dialog"
-        class=${containerClasses}
-        aria-modal=${true}
-        role="${alert ? 'alert' : 'dialog'}"
-        tabindex="-1"
-        @click=${this._handleClickContainer}>
-        <slot @slotchange="${this._handleSlotChange}"></slot>
-        ${hasScrollingContent
-          ? html` <div class="cds--modal-content--overflow-indicator"></div> `
-          : ``}
-      </div>
-    `;
+
+    const ariaLabel = this._computeAriaLabel();
+
+    if (enableDialogElement) {
+      return html`
+        <cds-dialog
+          .open=${this.open}
+          .alert=${this.alert}
+          .preventCloseOnClickOutside=${this.preventCloseOnClickOutside}
+          .preventClose=${this.preventClose}
+          role="${alert ? 'alertdialog' : 'dialog'}"
+          aria-label=${ariaLabel}
+          modal-controlled
+          @cds-dialog-closed=${this._handleDialogClosed}
+          @cds-dialog-beingclosed=${this._handleDialogBeingClosed}>
+          <slot @slotchange="${this._handleSlotChange}"></slot>
+          ${hasScrollingContent
+            ? html` <div class="cds--modal-content--overflow-indicator"></div> `
+            : ``}
+        </cds-dialog>
+      `;
+    } else {
+      return html`
+        <div
+          aria-label=${ariaLabel}
+          part="dialog"
+          class=${containerClasses}
+          aria-modal=${true}
+          role="${alert ? 'alert' : 'dialog'}"
+          tabindex="-1"
+          @click=${this._handleClickContainer}>
+          <slot @slotchange="${this._handleSlotChange}"></slot>
+          ${hasScrollingContent
+            ? html` <div class="cds--modal-content--overflow-indicator"></div> `
+            : ``}
+        </div>
+      `;
+    }
   }
 
   async updated(changedProperties) {
@@ -585,13 +560,6 @@ class CDSModal extends HostListenerMixin(LitElement) {
    */
   static get selectorCloseButton() {
     return `[data-modal-close],${prefix}-modal-close-button`;
-  }
-
-  /**
-   * A selector selecting tabbable nodes.
-   */
-  static get selectorTabbable() {
-    return selectorTabbable;
   }
 
   /**
