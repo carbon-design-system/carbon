@@ -15,6 +15,7 @@ import fs from 'fs-extra';
 import litSCSS from '../tools/lit-scss-plugin.js';
 import path from 'path';
 import postcss from 'postcss';
+import { scopedElementsDecoratorStripPlugin } from '../tools/scoped-elements-decorator-strip-plugin.js';
 import ts from 'typescript';
 
 import * as packageJson from '../package.json' with { type: 'json' };
@@ -59,6 +60,12 @@ async function build() {
       inputs: esInputs,
     },
     {
+      type: 'esm',
+      directory: 'scoped-elements',
+      inputs: esInputs,
+      scopedElements: true,
+    },
+    {
       type: 'cjs',
       directory: 'lib',
       inputs: libInputs,
@@ -78,7 +85,9 @@ async function build() {
       external,
       failOnWarn: false,
       format: format.type,
-      inputOptions: withInputCompatibilityAndPlugins,
+      inputOptions: withInputCompatibilityAndPlugins({
+        scopedElements: !!format.scopedElements,
+      }),
       logLevel: 'warn',
       outDir: path.resolve(packageRoot, format.directory),
       outputOptions(options) {
@@ -119,27 +128,30 @@ async function build() {
   await postBuild();
 }
 
-function withInputCompatibilityAndPlugins(inputOptions) {
-  const options = { ...inputOptions };
+function withInputCompatibilityAndPlugins({ scopedElements }) {
+  return (inputOptions) => {
+    const options = { ...inputOptions };
 
-  options.plugins = [
-    ...(options.plugins || []),
-    litSCSS({
-      includePaths: [
-        path.resolve(packageRoot, './node_modules'),
-        path.resolve(packageRoot, '../../node_modules'),
-      ],
-      async preprocessor(contents, id) {
-        return (
-          await postcss([autoprefixer(), cssnano()]).process(contents, {
-            from: id,
-          })
-        ).css;
-      },
-    }),
-  ];
+    options.plugins = [
+      ...(options.plugins || []),
+      ...(scopedElements ? [scopedElementsDecoratorStripPlugin()] : []),
+      litSCSS({
+        includePaths: [
+          path.resolve(packageRoot, './node_modules'),
+          path.resolve(packageRoot, '../../node_modules'),
+        ],
+        async preprocessor(contents, id) {
+          return (
+            await postcss([autoprefixer(), cssnano()]).process(contents, {
+              from: id,
+            })
+          ).css;
+        },
+      }),
+    ];
 
-  return options;
+    return options;
+  };
 }
 
 function getExternalPatterns() {
@@ -210,6 +222,10 @@ async function generateDeclarations() {
   await copyDeclarations(
     path.join(packageRoot, 'es'),
     path.join(packageRoot, 'lib')
+  );
+  await copyDeclarations(
+    path.join(packageRoot, 'es'),
+    path.join(packageRoot, 'scoped-elements')
   );
 }
 
