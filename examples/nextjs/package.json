@@ -6,18 +6,15 @@
   "scripts": {
     "build": "next build",
     "dev": "next dev",
-    "lint": "next lint",
     "start": "next start"
   },
   "dependencies": {
     "@carbon/react": "^1.104.0-rc.0",
-    "next": "15.5.10",
-    "react": "^19.2.3",
-    "react-dom": "^19.2.3"
+    "next": "16.2.4",
+    "react": "^19.2.5",
+    "react-dom": "^19.2.5"
   },
   "devDependencies": {
-    "eslint": "8.40.0",
-    "eslint-config-next": "15.3.3",
     "sass": "^1.93.2"
   }
 }
