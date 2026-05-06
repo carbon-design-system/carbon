@@ -147,6 +147,20 @@ $popover-caret-height: custom-property.get-var(
   // High contrast modifier
   .#{$prefix}--popover--high-contrast .#{$prefix}--popover {
     @include popover-highcontrast-base;
+
+    .#{$prefix}--skeleton,
+    .#{$prefix}--skeleton__text,
+    .#{$prefix}--skeleton__placeholder,
+    .#{$prefix}--icon--skeleton {
+      background: theme.$background-inverse-hover;
+    }
+
+    .#{$prefix}--skeleton::before,
+    .#{$prefix}--skeleton__text::before,
+    .#{$prefix}--skeleton__placeholder::before,
+    .#{$prefix}--icon--skeleton::before {
+      background: theme.$background-inverse;
+    }
   }
 
   // Drop shadow modifier
