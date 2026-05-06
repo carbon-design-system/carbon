@@ -10,8 +10,8 @@ import * as core from '@actions/core';
 import { plugins } from './plugins/index.js';
 
 async function run() {
-  const enabled = core.getInput('enabled') || true;
-  if (!enabled) {
+  const enabled = core.getInput('enabled');
+  if (enabled === 'false') {
     core.info('Action is not enabled. Exiting');
     return;
   }
