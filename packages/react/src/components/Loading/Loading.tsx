@@ -134,16 +134,18 @@ function Loading({
   );
 
   return withOverlay ? (
-    // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
     <div
-      ref={overlayRef}
       className={overlayClassName}
-      role="dialog"
-      aria-modal="true"
-      aria-label={description}
-      tabIndex={-1}
+      role="presentation"
       onKeyDown={handleKeyDown}>
-      {loading}
+      <div
+        ref={overlayRef}
+        role="dialog"
+        aria-modal="true"
+        aria-label={description}
+        tabIndex={-1}>
+        {loading}
+      </div>
     </div>
   ) : (
     loading
