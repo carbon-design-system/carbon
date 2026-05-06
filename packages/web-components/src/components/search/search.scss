@@ -17,6 +17,7 @@ $css--plex: true !default;
 
 // https://github.com/carbon-design-system/carbon/issues/11408
 @include search;
+@include emit-layout-classes();
 
 :host(#{$prefix}-search) {
   @include emit-layout-tokens();

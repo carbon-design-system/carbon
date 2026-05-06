@@ -17,6 +17,8 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/components/tag/mixins' as *;
 @use '@carbon/styles/scss/layout' as *;
 
+@include emit-layout-classes();
+
 :host(#{$prefix}-tag),
 :host(#{$prefix}-dismissible-tag) {
   @extend .#{$prefix}--tag;

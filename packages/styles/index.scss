@@ -13,6 +13,7 @@
 @forward 'scss/themes';
 @forward 'scss/theme';
 
+@use 'scss/layout';
 @use 'scss/reset';
 @forward 'scss/fonts';
 @forward 'scss/grid';
@@ -20,3 +21,9 @@
 @forward 'scss/layout';
 @forward 'scss/zone';
 @use 'scss/components';
+
+:root {
+  @include layout.emit-layout-tokens();
+}
+
+@include layout.emit-layout-classes();

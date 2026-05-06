@@ -17,6 +17,7 @@ $css--plex: true !default;
 
 // https://github.com/carbon-design-system/carbon/issues/11408
 @include content-switcher;
+@include emit-layout-classes();
 
 :host(#{$prefix}-content-switcher) {
   @extend .#{$prefix}--content-switcher;

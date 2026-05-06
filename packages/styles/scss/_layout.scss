@@ -58,45 +58,47 @@ $layout-tokens: (
   }
 }
 
-@each $group, $properties in $layout-tokens {
-  @each $property, $steps in $properties {
-    @each $step, $value in $steps {
-      .#{$prefix}--layout--#{$group}-#{$step} {
-        @include custom-property.declaration(
-          'layout-#{$group}-#{$property}-context',
-          custom-property.get-var(
-            'layout-#{$group}-#{$property}-#{$step}',
-            $value
-          )
-        );
-        @include custom-property.declaration(
-          'layout-#{$group}-#{$property}',
-          custom-property.get-var('layout-#{$group}-#{$property}-context')
-        );
-      }
-
-      .#{$prefix}--layout-constraint--#{$group}__default-#{$step} {
-        @include custom-property.declaration(
-          'layout-#{$group}-#{$property}',
-          custom-property.get-var(
+@mixin emit-layout-classes {
+  @each $group, $properties in $layout-tokens {
+    @each $property, $steps in $properties {
+      @each $step, $value in $steps {
+        .#{$prefix}--layout--#{$group}-#{$step} {
+          @include custom-property.declaration(
             'layout-#{$group}-#{$property}-context',
             custom-property.get-var(
               'layout-#{$group}-#{$property}-#{$step}',
               $value
             )
-          )
-        );
-      }
-
-      @each $constraint in ('min', 'max') {
-        .#{$prefix}--layout-constraint--#{$group}__#{$constraint}-#{$step} {
+          );
           @include custom-property.declaration(
-            'layout-#{$group}-#{$property}-#{$constraint}',
+            'layout-#{$group}-#{$property}',
+            custom-property.get-var('layout-#{$group}-#{$property}-context')
+          );
+        }
+
+        .#{$prefix}--layout-constraint--#{$group}__default-#{$step} {
+          @include custom-property.declaration(
+            'layout-#{$group}-#{$property}',
             custom-property.get-var(
-              'layout-#{$group}-#{$property}-#{$step}',
-              $value
+              'layout-#{$group}-#{$property}-context',
+              custom-property.get-var(
+                'layout-#{$group}-#{$property}-#{$step}',
+                $value
+              )
             )
           );
+        }
+
+        @each $constraint in ('min', 'max') {
+          .#{$prefix}--layout-constraint--#{$group}__#{$constraint}-#{$step} {
+            @include custom-property.declaration(
+              'layout-#{$group}-#{$property}-#{$constraint}',
+              custom-property.get-var(
+                'layout-#{$group}-#{$property}-#{$step}',
+                $value
+              )
+            );
+          }
         }
       }
     }
@@ -124,8 +126,4 @@ $layout-tokens: (
       }
     }
   }
-}
-
-:root {
-  @include emit-layout-tokens();
 }
