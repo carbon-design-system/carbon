@@ -75,8 +75,6 @@ export const UXExample = () => {
   );
 };
 
-UXExample.story = {
-  name: 'UX Example',
-};
+UXExample.storyName = 'UX Example';
 
 UXExample.argTypes = { ...sharedArgTypes };

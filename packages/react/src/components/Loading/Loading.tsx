@@ -8,8 +8,6 @@
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 import React, { type HTMLAttributes, useEffect, useRef } from 'react';
-import { tabbable } from 'tabbable';
-import { wrapFocusWithoutSentinels } from '../../internal/wrapFocus';
 import { usePrefix } from '../../internal/usePrefix';
 import { deprecate } from '../../prop-types/deprecate';
 
@@ -80,20 +78,9 @@ function Loading({
     if (!trapActive) return;
 
     function handleKeyDown(e: KeyboardEvent) {
-      if (e.key !== 'Tab' || !overlayRef.current) return;
-
-      const tabbables = tabbable(overlayRef.current);
-
-      if (tabbables.length === 0) {
-        e.preventDefault();
-        return;
-      }
-
-      wrapFocusWithoutSentinels({
-        containerNode: overlayRef.current,
-        currentActiveNode: document.activeElement as HTMLElement,
-        event: e as unknown as React.KeyboardEvent<HTMLDivElement>,
-      });
+      if (e.key !== 'Tab') return;
+      // Dialog has no tabbable children; keep focus on the dialog itself.
+      e.preventDefault();
     }
 
     document.addEventListener('keydown', handleKeyDown, true);

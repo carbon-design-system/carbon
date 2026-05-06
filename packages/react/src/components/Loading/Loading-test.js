@@ -147,12 +147,19 @@ describe('Loading', () => {
       const { rerender } = render(
         <div>
           <button data-testid="trigger">Trigger</button>
-          <Loading withOverlay active />
+          <Loading withOverlay active={false} />
         </div>
       );
 
       const trigger = screen.getByTestId('trigger');
       trigger.focus();
+
+      rerender(
+        <div>
+          <button data-testid="trigger">Trigger</button>
+          <Loading withOverlay active />
+        </div>
+      );
 
       rerender(
         <div>
