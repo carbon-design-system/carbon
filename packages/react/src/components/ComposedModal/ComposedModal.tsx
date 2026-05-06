@@ -151,6 +151,12 @@ ModalBody.propTypes = {
 
 export interface ComposedModalProps extends HTMLAttributes<HTMLDivElement> {
   /**
+   * Specify whether the Modal is displaying an alert, error or warning.
+   * Should go hand in hand with the danger prop.
+   */
+  alert?: boolean;
+
+  /**
    * Specify the aria-label for cds--modal-container
    */
   'aria-label'?: string;
@@ -266,6 +272,7 @@ const ComposedModalDialog = React.forwardRef<
   ComposedModalProps
 >(function ComposedModalDialog(
   {
+    alert,
     ['aria-labelledby']: ariaLabelledBy,
     ['aria-label']: ariaLabel,
     children,
@@ -454,6 +461,7 @@ const ComposedModalDialog = React.forwardRef<
 
   // Generate aria-label based on Modal Header label if one is not provided (L253)
   let generatedAriaLabel: ComponentProps<typeof ModalHeader>['label'];
+  let modalBodyId = `${prefix}--modal-body--${useId()}`;
   const childrenWithProps = React.Children.toArray(children).map((child) => {
     if (isComponentElement(child, ModalHeader)) {
       generatedAriaLabel = child.props.label;
@@ -463,6 +471,11 @@ const ComposedModalDialog = React.forwardRef<
 
     if (isComponentElement(child, ModalFooter)) {
       return cloneElement(child, { closeModal, inputref: button, danger });
+    }
+
+    if (alert && isComponentElement(child, ModalBody)) {
+      modalBodyId = child.props.id || modalBodyId;
+      return cloneElement(child, { id: modalBodyId });
     }
 
     return child;
@@ -569,6 +582,8 @@ const ComposedModalDialog = React.forwardRef<
       open={open}
       focusAfterCloseRef={launcherButtonRef}
       modal
+      role={alert ? 'alertdialog' : undefined}
+      aria-describedby={alert ? modalBodyId : undefined}
       className={containerClass}
       aria-label={ariaLabel ? ariaLabel : generatedAriaLabel}
       aria-labelledby={ariaLabelledBy}
@@ -589,8 +604,9 @@ const ComposedModalDialog = React.forwardRef<
   ) : (
     <div
       className={containerClass}
-      role="dialog"
+      role={alert ? 'alertdialog' : 'dialog'}
       aria-modal="true"
+      aria-describedby={alert ? modalBodyId : undefined}
       aria-label={ariaLabel ? ariaLabel : generatedAriaLabel}
       aria-labelledby={ariaLabelledBy}>
       {/* Non-translatable: Focus-wrap code makes this `<button>` not actually read by screen readers */}
@@ -645,6 +661,12 @@ const ComposedModalDialog = React.forwardRef<
 });
 
 ComposedModal.propTypes = {
+  /**
+   * Specify whether the Modal is displaying an alert, error or warning.
+   * Should go hand in hand with the danger prop.
+   */
+  alert: PropTypes.bool,
+
   /**
    * Specify the aria-label for cds--modal-container
    */

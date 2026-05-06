@@ -381,6 +381,40 @@ describe.each([
       );
     });
 
+    it('should have the expected attributes when alert prop is passed', () => {
+      render(
+        <Component alert open>
+          <ModalHeader title="Test modal" />
+          <ModalBody data-testid="modal-body">
+            <p>Modal body content</p>
+          </ModalBody>
+          <ModalFooter primaryButtonText="OK" secondaryButtonText="Cancel" />
+        </Component>
+      );
+
+      const alertDialog = screen.getByRole('alertdialog');
+      expect(alertDialog).toHaveAttribute('aria-describedby');
+
+      const describedById = alertDialog.getAttribute('aria-describedby');
+      const modalBody = screen.getByTestId('modal-body');
+      expect(modalBody).toHaveAttribute('id', describedById);
+    });
+
+    it('should use the provided ModalBody id for aria-describedby when alert prop is passed', () => {
+      render(
+        <Component alert open>
+          <ModalHeader title="Test modal" />
+          <ModalBody id="custom-body-id">
+            <p>Modal body content</p>
+          </ModalBody>
+          <ModalFooter primaryButtonText="OK" secondaryButtonText="Cancel" />
+        </Component>
+      );
+
+      const alertDialog = screen.getByRole('alertdialog');
+      expect(alertDialog).toHaveAttribute('aria-describedby', 'custom-body-id');
+    });
+
     it('disables buttons when inline loading status is active', () => {
       render(
         <Component open>
