@@ -14,7 +14,7 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/utilities/convert';
 @use '@carbon/styles/scss/utilities/skeleton' as *;
 @use '@carbon/styles/scss/components/fluid-date-picker' as *;
-@use '@carbon/styles/scss/components/fluid-date-picker/index';
+@use '@carbon/styles/scss/components/date-picker/index';
 @use '@carbon/styles/scss/utilities/focus-outline' as *;
 
 // ── Fluid date picker (wrapper) ──────────────────────────────────────────────
@@ -24,7 +24,6 @@ $css--plex: true !default;
   @include emit-layout-tokens();
 
   display: inline-flex;
-
   inline-size: fit-content;
   max-inline-size: 100%;
 
@@ -97,6 +96,32 @@ $css--plex: true !default;
   outline: none;
 }
 
+// When invalid or warn, allow host to grow beyond 64px for error message
+:host(#{$prefix}-fluid-date-picker-input[invalid]),
+:host(#{$prefix}-fluid-date-picker-input[warn]:not([invalid])) {
+  block-size: auto;
+  border-block-end: none;
+  min-block-size: convert.to-rem(64px);
+}
+
+// Divider between input area and error/warn message
+:host(#{$prefix}-fluid-date-picker-input) .#{$prefix}--date-picker__divider {
+  border-style: solid;
+  border-color: $border-subtle;
+  margin: 0 1rem;
+  border-block-end: none;
+  inline-size: calc(100% - 2rem);
+}
+
+// Error / warn message padding
+:host(#{$prefix}-fluid-date-picker-input[invalid])
+  .#{$prefix}--form-requirement,
+:host(#{$prefix}-fluid-date-picker-input[warn]:not([invalid]))
+  .#{$prefix}--form-requirement {
+  padding: $spacing-03 convert.to-rem(40px) $spacing-03 $spacing-05;
+  margin: 0;
+}
+
 :host(#{$prefix}-fluid-date-picker-input[warn]:not([invalid])) {
   .#{$prefix}--form-requirement {
     color: $text-primary;
@@ -156,11 +181,13 @@ $css--plex: true !default;
 }
 
 :host(#{$prefix}-fluid-date-picker-input:focus-within) {
-  @include focus-outline('outline');
+  outline: 2px solid $focus;
+  outline-offset: -2px;
 }
 
 :host(#{$prefix}-fluid-date-picker-input[invalid]) {
   @extend .#{$prefix}--date-picker--fluid--invalid;
+  @include focus-outline('invalid');
 }
 
 :host(#{$prefix}-fluid-date-picker-input[warn]:not([invalid])) {
@@ -186,9 +213,9 @@ $css--plex: true !default;
 :host(#{$prefix}-fluid-date-picker-input) .#{$prefix}--date-picker__input {
   border: none;
   background: transparent;
+  block-size: calc(100% - #{convert.to-rem(1px)});
   inline-size: 100%;
   max-inline-size: 100%;
-  min-block-size: convert.to-rem(64px);
   outline: none;
   padding-block-end: convert.to-rem(13px);
   padding-block-start: convert.to-rem(32px);
@@ -198,6 +225,27 @@ $css--plex: true !default;
 // Push the calendar icon down to account for the floating label above the input value
 :host(#{$prefix}-fluid-date-picker-input) .#{$prefix}--date-picker__icon {
   inset-block-start: convert.to-rem(43px);
+}
+
+:host(#{$prefix}-fluid-date-picker-input[invalid])
+  .#{$prefix}--date-picker__icon--invalid,
+:host(#{$prefix}-fluid-date-picker-input[warn]:not([invalid]))
+  .#{$prefix}--date-picker__icon--warn {
+  inset-block-start: convert.to-rem(80px);
+}
+
+:host(#{$prefix}-fluid-date-picker-input[invalid])
+  .#{$prefix}--date-picker__icon:not(.#{$prefix}--date-picker__icon--invalid),
+:host(#{$prefix}-fluid-date-picker-input[warn]:not([invalid]))
+  .#{$prefix}--date-picker__icon:not(.#{$prefix}--date-picker__icon--warn) {
+  display: block;
+}
+
+:host(#{$prefix}-fluid-date-picker-input[kind='simple'][invalid])
+  .#{$prefix}--date-picker__icon--invalid,
+:host(#{$prefix}-fluid-date-picker-input[kind='simple'][warn]:not([invalid]))
+  .#{$prefix}--date-picker__icon--warn {
+  display: block;
 }
 
 // ── Fluid date picker skeleton ───────────────────────────────────────────────
