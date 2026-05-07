@@ -13,6 +13,10 @@ import OverflowMenuItem from '../OverflowMenuItem';
 import React from 'react';
 import userEvent from '@testing-library/user-event';
 
+const MenuDivider = React.forwardRef(function MenuDivider(_props, ref) {
+  return <li ref={ref} data-testid="menu-divider" role="separator" />;
+});
+
 describe('OverflowMenu', () => {
   describe('Renders as expected', () => {
     const closeMenuMock = jest.fn();
@@ -249,6 +253,18 @@ describe('OverflowMenu', () => {
 
       // Check that the click handler was called only once
       expect(handleClick).toHaveBeenCalledTimes(1);
+    });
+
+    it('should render custom child components alongside OverflowMenuItem children', () => {
+      render(
+        <OverflowMenu open aria-label="Overflow menu" className="extra-class">
+          <OverflowMenuItem itemText="one" />
+          <MenuDivider />
+          <OverflowMenuItem itemText="two" />
+        </OverflowMenu>
+      );
+
+      expect(screen.getByTestId('menu-divider')).toBeInTheDocument();
     });
   });
   it('should not open menu when disabled', async () => {
