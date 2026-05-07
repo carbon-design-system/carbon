@@ -76,12 +76,3 @@ deprecated:
   - name: ibm-watsonx--code-assistant-for-z--refactor
     reason:
       Icon no longer relevant. watsonx Code Assistant for Z Refactoring Assistant has been merged into an existing product.
-  - name: logo--twitter
-    reason:
-      Icon no longer relevant. New product is called "X".
-  - name: incomplete
-    reason:
-      Icon should not be used. Available in Carbon Design System under various components.
-  - name: ibm--turbonomic
-    reason:
-      Icon no longer relevant to how we represent IBM Turbonomic. Updated graphics to match current IBM Turbonomic app icon.
