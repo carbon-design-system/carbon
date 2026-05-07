@@ -59,4 +59,39 @@ describe('isComponentElement', () => {
     expect(isComponentElement(ComponentB, ComponentB)).toBe(false);
     expect(isComponentElement(ComponentA, ComponentB)).toBe(false);
   });
+
+  it('should return `false` when `displayName` matches without fallback enabled', () => {
+    const WrappedComponent = () => <div>wrapped</div>;
+
+    TestComponent.displayName = 'TestComponent';
+    WrappedComponent.displayName = 'TestComponent';
+
+    const element = <WrappedComponent />;
+
+    expect(isComponentElement(element, TestComponent)).toBe(false);
+  });
+
+  it('should return `true` when `displayName` matches and fallback is enabled', () => {
+    const WrappedComponent = () => <div>wrapped</div>;
+
+    TestComponent.displayName = 'TestComponent';
+    WrappedComponent.displayName = 'TestComponent';
+
+    const element = <WrappedComponent />;
+
+    expect(
+      isComponentElement(element, TestComponent, {
+        allowDisplayNameFallback: true,
+      })
+    ).toBe(true);
+  });
+
+  it('should return `false` when only the compared component has `displayName`', () => {
+    TestComponent.displayName = 'TestComponent';
+
+    const OtherComponent = () => <div>other</div>;
+    const element = <OtherComponent />;
+
+    expect(isComponentElement(element, TestComponent)).toBe(false);
+  });
 });

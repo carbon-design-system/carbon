@@ -43,13 +43,21 @@ const TableRow = frFn((props, ref) => {
   const prefix = usePrefix();
 
   const rowHasAILabel = Children.toArray(props.children).some((child) => {
-    if (isComponentElement(child, TableSlugRow)) {
+    if (
+      isComponentElement(child, TableSlugRow, {
+        allowDisplayNameFallback: true,
+      })
+    ) {
       return !!child.props.slug;
     }
 
     return (
-      isComponentElement(child, TableDecoratorRow) &&
-      isComponentElement(child.props.decorator, AILabel)
+      isComponentElement(child, TableDecoratorRow, {
+        allowDisplayNameFallback: true,
+      }) &&
+      isComponentElement(child.props.decorator, AILabel, {
+        allowDisplayNameFallback: true,
+      })
     );
   });
 

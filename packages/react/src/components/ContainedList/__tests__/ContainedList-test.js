@@ -172,7 +172,7 @@ describe('ContainedList', () => {
     ).not.toBeInTheDocument();
   });
 
-  it('should not treat components with `displayName` "Search" as `Search`', () => {
+  it('should treat components with `displayName` "Search" as `Search`', () => {
     const FauxSearch = () => (
       <button data-testid="faux-search-action">Action</button>
     );
@@ -185,7 +185,7 @@ describe('ContainedList', () => {
     );
 
     expect(screen.getByTestId('faux-search-action')).toBeInTheDocument();
-    expect(screen.getByTestId('search-child-id')).toBeInTheDocument();
+    expect(screen.queryByTestId('search-child-id')).not.toBeInTheDocument();
   });
 
   it('should render Search as the first child', () => {

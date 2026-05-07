@@ -251,7 +251,9 @@ const RadioButtonGroup = React.forwardRef(
 
     // AILabel is always size `mini`
     const candidate = slug ?? decorator;
-    const candidateIsAILabel = isComponentElement(candidate, AILabel);
+    const candidateIsAILabel = isComponentElement(candidate, AILabel, {
+      allowDisplayNameFallback: true,
+    });
     const normalizedDecorator = candidateIsAILabel
       ? cloneElement(candidate, { size: 'mini', kind: 'default' })
       : candidate;

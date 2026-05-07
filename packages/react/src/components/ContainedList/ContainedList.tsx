@@ -21,8 +21,12 @@ const variants = ['on-page', 'disclosed'] as const;
 export type Variants = (typeof variants)[number];
 
 const isSearchComponent = (node: ReactNode) =>
-  isComponentElement(node, Search) ||
-  isComponentElement(node, ExpandableSearch);
+  isComponentElement(node, Search, {
+    allowDisplayNameFallback: true,
+  }) ||
+  isComponentElement(node, ExpandableSearch, {
+    allowDisplayNameFallback: true,
+  });
 
 export interface ContainedListProps {
   /**

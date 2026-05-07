@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2025
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -197,7 +197,9 @@ const RadioButton = React.forwardRef<HTMLInputElement, RadioButtonProps>(
     const inputRef = useRef<HTMLInputElement>(null);
 
     const candidate = slug ?? decorator;
-    const candidateIsAILabel = isComponentElement(candidate, AILabel);
+    const candidateIsAILabel = isComponentElement(candidate, AILabel, {
+      allowDisplayNameFallback: true,
+    });
     const normalizedDecorator = candidateIsAILabel
       ? cloneElement(candidate, {
           size: candidate.props?.['kind'] === 'inline' ? 'md' : 'mini',
