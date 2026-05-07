@@ -55,6 +55,7 @@ const reusableProps = {
   max: 100000000,
 };
 
+// TODO: Potential opportunity to differentiate between controlled and uncontrolled stories
 export const Default = (args) => {
   const [value, setValue] = React.useState(50);
 
@@ -127,7 +128,7 @@ export const withAILabel = (args) => {
       <NumberInput
         min={reusableProps.min}
         max={reusableProps.max}
-        value={50}
+        defaultValue={50}
         label="NumberInput label"
         helperText="Optional helper text."
         invalidText="Number is not valid"
