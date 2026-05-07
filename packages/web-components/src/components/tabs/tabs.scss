@@ -148,7 +148,8 @@ $inset-transition: inset 110ms motion(standard, productive);
 
 :host(#{$prefix}-tab:not([type='contained']):not([vertical])) {
   margin-inline-end: convert.to-rem(1px);
-
+}
+:host(#{$prefix}-tab:not([type='contained'])) {
   .#{$prefix}--tabs__nav-link {
     padding-block-end: calc(#{$spacing-03} + #{convert.to-rem(1px)});
     padding-block-start: calc(#{$spacing-04} - #{convert.to-rem(1px)});
@@ -157,6 +158,10 @@ $inset-transition: inset 110ms motion(standard, productive);
 
 :host(#{$prefix}-tab:not([type='contained']):not([vertical]):last-of-type) {
   margin-inline-end: 0;
+}
+:host(#{$prefix}-tab:not([type='contained']))
+  + :host(#{$prefix}-tab:not([type='contained'])) {
+  margin-inline-start: convert.to-rem(1px);
 }
 :host(#{$prefix}-tab[vertical]) {
   .#{$prefix}--tabs__nav-link {
@@ -345,7 +350,12 @@ $inset-transition: inset 110ms motion(standard, productive);
 }
 
 :host(#{$prefix}-tab[type='contained']:hover) {
-  background-color: $layer-accent-hover;
+  background-color: $layer-accent-01;
+}
+:host(#{$prefix}-tab[type='contained']) {
+  .#{$prefix}--tabs__nav-link:hover {
+    background-color: $layer-accent-hover;
+  }
 }
 
 // Disabled tab never gets selected, but we guard for manual addition of `selected` attribute
@@ -591,4 +601,62 @@ $inset-transition: inset 110ms motion(standard, productive);
 :host(#{$prefix}-tab[vertical]:not([selected]):not([disabled]):hover) {
   background-color: $layer-hover;
   box-shadow: inset 3px 0 0 0 $border-strong;
+}
+:host(#{$prefix}-tab) {
+  .#{$prefix}--tabs__nav-link--dismissable {
+    display: flex;
+    padding-inline-end: $spacing-08;
+  }
+  .#{$prefix}--tabs--dismissable.#{$prefix}--tabs--contained {
+    padding-inline-end: calc($spacing-09 - 1px);
+  }
+}
+:host(#{$prefix}-tab[type='contained']) {
+  .#{$prefix}--tabs__nav-link.#{$prefix}--tabs__nav-link--dismissable {
+    padding-inline-end: calc($spacing-09 - 1px);
+  }
+}
+:host(#{$prefix}-tab) {
+  .#{$prefix}--tabs__nav-item--close {
+    position: relative;
+    display: flex;
+    align-items: center;
+    inset-inline-start: calc(-#{$spacing-04} - 1px);
+    margin-inline-start: calc(-#{$spacing-06} + 1px);
+
+    &[disabled] {
+      pointer-events: none;
+    }
+  }
+  .#{$prefix}--tabs__nav-item--close--hidden {
+    display: none;
+  }
+  .#{$prefix}--tabs__nav-item--close::part(button) {
+    @include button-reset.reset();
+
+    block-size: convert.to-rem(24px);
+    inline-size: convert.to-rem(24px);
+    padding-block: $spacing-02;
+    padding-inline: $spacing-02;
+    pointer-events: inherit;
+
+    svg {
+      block-size: convert.to-rem(16px);
+      fill: $text-secondary;
+      inline-size: convert.to-rem(16px);
+    }
+
+    svg:hover {
+      fill: $icon-primary;
+    }
+
+    &:hover {
+      background-color: $layer-hover;
+    }
+
+    &:focus,
+    &:active {
+      @include focus-outline('outline');
+    }
+  }
 }
