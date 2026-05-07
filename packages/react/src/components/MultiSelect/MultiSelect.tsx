@@ -60,7 +60,11 @@ import {
 } from '@floating-ui/react';
 import { useFeatureFlag } from '../FeatureFlags';
 import { AILabel } from '../AILabel';
-import { defaultItemToString, isComponentElement } from '../../internal';
+import {
+  defaultItemToString,
+  isComponentElement,
+  isItemDisabled,
+} from '../../internal';
 import { useNormalizedInputProps } from '../../internal/useNormalizedInputProps';
 import useIsomorphicEffect from '../../internal/useIsomorphicEffect';
 
@@ -445,10 +449,7 @@ export const MultiSelect = React.forwardRef(
       },
       selectedItem: controlledSelectedItems as ItemType,
       items: filteredItems,
-      isItemDisabled(item) {
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
-        return (item as any)?.disabled;
-      },
+      isItemDisabled,
       ...downshiftProps,
     };
 
@@ -741,7 +742,7 @@ export const MultiSelect = React.forwardRef(
         ).length;
 
         const totalSelectableCount = filteredItems.filter(
-          (item) => !item.isSelectAll && !item.disabled
+          (item) => !item.isSelectAll && !isItemDisabled(item)
         ).length;
 
         return {
