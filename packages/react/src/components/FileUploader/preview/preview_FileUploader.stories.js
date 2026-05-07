@@ -46,6 +46,7 @@ export default {
     'FileUploader.Item name': 'example-file.jpg',
     'FileUploader.Item status': 'edit',
     'FileUploader.Item size': 'md',
+    'FileUploader.Item disabled': false,
   },
   argTypes: {
     // Container props
@@ -198,6 +199,13 @@ export default {
         category: 'FileUploader.Item',
       },
     },
+    'FileUploader.Item disabled': {
+      control: 'boolean',
+      description: 'Disable all file items',
+      table: {
+        category: 'FileUploader.Item',
+      },
+    },
   },
 };
 
@@ -236,6 +244,7 @@ const renderFileItem = (file, args, handleDelete) => (
     }
     iconDescription={args['FileUploader.Item iconDescription'] || 'Delete file'}
     size={args['FileUploader.Item size']}
+    disabled={args['FileUploader.Item disabled']}
     onDelete={handleDelete}
   />
 );
@@ -404,6 +413,7 @@ export const WithUploadingState = (args) => {
               args['FileUploader.Item iconDescription'] || 'Delete file'
             }
             size={args['FileUploader.Item size']}
+            disabled={args['FileUploader.Item disabled']}
             onDelete={handleDelete}
           />
         ))}
@@ -467,53 +477,57 @@ Disabled.args = {
 export const _FileUploaderItem = (args) => {
   return (
     <FileUploader.Item
-      errorBody={args.errorBody}
-      errorSubject={args.errorSubject}
-      iconDescription={args.iconDescription}
-      invalid={args.invalid}
-      name={args.name}
-      status={args.status}
-      size={args.size}
-      uuid={args.uuid}
-      onDelete={args.onDelete}
+      errorBody={args['FileUploaderItem errorBody']}
+      errorSubject={args['FileUploaderItem errorSubject']}
+      iconDescription={args['FileUploaderItem iconDescription']}
+      invalid={args['FileUploaderItem invalid']}
+      name={args['FileUploaderItem name']}
+      status={args['FileUploaderItem status']}
+      size={args['FileUploaderItem size']}
+      disabled={args['FileUploaderItem disabled']}
+      uuid={args['FileUploaderItem uuid']}
+      onDelete={args['FileUploaderItem onDelete']}
     />
   );
 };
 
 _FileUploaderItem.args = {
-  errorBody: '1 MB max file size. Select a new file and try again.',
-  errorSubject: 'File size exceeds limit',
-  iconDescription: 'Delete file',
-  invalid: false,
-  name: 'THIS IS A VERY LONG FILENAME WHICH WILL BE TRUNCATED',
-  status: 'edit',
-  size: 'md',
-  uuid: 'file-1',
+  'FileUploaderItem errorBody':
+    '1 MB max file size. Select a new file and try again.',
+  'FileUploaderItem errorSubject': 'File size exceeds limit',
+  'FileUploaderItem iconDescription': 'Delete file',
+  'FileUploaderItem invalid': false,
+  'FileUploaderItem name':
+    'THIS IS A VERY LONG FILENAME WHICH WILL BE TRUNCATED',
+  'FileUploaderItem status': 'edit',
+  'FileUploaderItem size': 'md',
+  'FileUploaderItem disabled': false,
+  'FileUploaderItem uuid': 'file-1',
 };
 
 _FileUploaderItem.argTypes = {
-  errorBody: {
+  'FileUploaderItem errorBody': {
     control: 'text',
     description: 'Error message body for an invalid file upload',
   },
-  errorSubject: {
+  'FileUploaderItem errorSubject': {
     control: 'text',
     description: 'Error message subject for an invalid file upload',
   },
-  iconDescription: {
+  'FileUploaderItem iconDescription': {
     control: 'text',
     description: 'Icon description for delete button',
   },
-  invalid: {
+  'FileUploaderItem invalid': {
     control: 'boolean',
     description: 'Specify if the currently uploaded file is invalid',
   },
-  name: {
+  'FileUploaderItem name': {
     control: 'text',
     description: 'Name of the uploaded file',
   },
-  onDelete: { action: 'onDelete' },
-  size: {
+  'FileUploaderItem onDelete': { action: 'onDelete' },
+  'FileUploaderItem size': {
     control: 'select',
     options: ['sm', 'md', 'lg'],
     description: 'Size of the file item',
@@ -521,12 +535,19 @@ _FileUploaderItem.argTypes = {
       category: null, // Explicitly remove category
     },
   },
-  status: {
+  'FileUploaderItem disabled': {
+    control: 'boolean',
+    description: 'Disable the file item',
+    table: {
+      category: null, // Explicitly remove category
+    },
+  },
+  'FileUploaderItem status': {
     control: 'inline-radio',
     options: ['uploading', 'edit', 'complete'],
     description: 'Status of the file upload',
   },
-  uuid: {
+  'FileUploaderItem uuid': {
     control: 'text',
     description: 'Unique identifier for the file object',
   },
@@ -560,6 +581,7 @@ _FileUploaderItem.parameters = {
       'FileUploader.Item name',
       'FileUploader.Item status',
       'FileUploader.Item size',
+      'FileUploader.Item disabled',
     ],
   },
 };

@@ -13,7 +13,12 @@ import FileUploaderItem, {
 import { useFileUploaderContext } from './preview_FileUploader';
 
 export interface FileUploaderItemComposableProps
-  extends Omit<FileUploaderItemProps, 'size'> {
+  extends Omit<FileUploaderItemProps, 'size' | 'disabled'> {
+  /**
+   * Override the disabled state from context
+   */
+  disabled?: boolean;
+
   /**
    * Override the size from context
    */
@@ -40,12 +45,15 @@ export interface FileUploaderItemComposableProps
  * ```
  */
 function FileUploaderItemComposable({
+  disabled: disabledProp,
   size: sizeProp,
   ...other
 }: FileUploaderItemComposableProps) {
   const context = useFileUploaderContext();
 
   // Use prop value if provided, otherwise fall back to context
+  const disabled = disabledProp !== undefined ? disabledProp : context.disabled;
+
   // Map context size to FileUploaderItem size (which doesn't support 'small' or 'field')
   let size = sizeProp;
   if (!size && context.size) {
@@ -58,10 +66,15 @@ function FileUploaderItemComposable({
     }
   }
 
-  return <FileUploaderItem size={size} {...other} />;
+  return <FileUploaderItem disabled={disabled} size={size} {...other} />;
 }
 
 FileUploaderItemComposable.propTypes = {
+  /**
+   * Specify whether file uploader item is disabled
+   */
+  disabled: PropTypes.bool,
+
   /**
    * Error message body for an invalid file upload
    */
