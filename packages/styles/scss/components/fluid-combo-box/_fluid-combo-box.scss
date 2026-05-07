@@ -50,12 +50,18 @@
     inset-block-end: convert.to-rem(14px);
   }
 
-  .#{$prefix}--list-box__wrapper--fluid
+  .#{$prefix}--list-box__wrapper--fluid:not(
+      .#{$prefix}--list-box__wrapper--slug,
+      .#{$prefix}--list-box__wrapper--decorator
+    )
     .#{$prefix}--list-box[data-invalid]
     .#{$prefix}--list-box__field
     .#{$prefix}--text-input
     + .#{$prefix}--list-box__invalid-icon,
-  .#{$prefix}--list-box__wrapper--fluid
+  .#{$prefix}--list-box__wrapper--fluid:not(
+      .#{$prefix}--list-box__wrapper--slug,
+      .#{$prefix}--list-box__wrapper--decorator
+    )
     .#{$prefix}--list-box--warning
     .#{$prefix}--list-box__field
     .#{$prefix}--text-input
