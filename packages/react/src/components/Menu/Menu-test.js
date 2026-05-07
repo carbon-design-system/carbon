@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2023, 2025
+ * Copyright IBM Corp. 2023, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -87,6 +87,21 @@ describe('Menu', () => {
       expect(onClose).toHaveBeenCalled();
     });
 
+    it('should call onClose when clicking outside of the Menu', async () => {
+      const onClose = jest.fn();
+      render(
+        <div data-testid="container">
+          <Menu open onClose={onClose}>
+            <MenuItem label="item" />
+          </Menu>
+        </div>
+      );
+
+      await userEvent.click(screen.getByTestId('container'));
+
+      expect(onClose).toHaveBeenCalled();
+    });
+
     it('should be open if open is supplied', () => {
       render(<Menu open />);
 
@@ -130,20 +145,6 @@ describe('Menu', () => {
       // eslint-disable-next-line testing-library/no-node-access
       expect(document.querySelector('.custom-class')).toBeInTheDocument();
       document.body.removeChild(el);
-    });
-
-    it('should not call onClose when relatedTarget is null on blur', () => {
-      const onClose = jest.fn();
-      render(
-        <Menu open onClose={onClose} label="Test Menu">
-          <MenuItem label="item" />
-        </Menu>
-      );
-
-      const menu = screen.getByRole('menu');
-      fireEvent.blur(menu, { relatedTarget: null });
-
-      expect(onClose).not.toHaveBeenCalled();
     });
   });
 

@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2025
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -191,12 +191,6 @@ const sharedArgs = {
 };
 
 const filterableArgTypes = {
-  label: {
-    control: false,
-    table: {
-      disable: true,
-    },
-  },
   placeholder: {
     control: {
       type: 'text',
@@ -380,6 +374,11 @@ FilterableWithSelectAll.args = { ...sharedArgs };
 FilterableWithSelectAll.argTypes = {
   ...filterableArgTypes,
 };
+FilterableWithSelectAll.parameters = {
+  controls: {
+    exclude: ['label'],
+  },
+};
 Filterable.argTypes = {
   ...filterableArgTypes,
   onChange: {
@@ -387,6 +386,11 @@ Filterable.argTypes = {
   },
   onMenuChange: {
     action: 'onMenuChange',
+  },
+};
+Filterable.parameters = {
+  controls: {
+    exclude: ['label'],
   },
 };
 
@@ -431,6 +435,11 @@ _FilterableWithLayer.args = { ...sharedArgs };
 
 _FilterableWithLayer.argTypes = {
   ...filterableArgTypes,
+};
+_FilterableWithLayer.parameters = {
+  controls: {
+    exclude: ['label'],
+  },
 };
 export const _Controlled = (args) => {
   const [selectedItems, setSelectedItems] = useState(
@@ -600,6 +609,11 @@ export const FilterableWithAILabel = (args) => (
 FilterableWithAILabel.args = { ...sharedArgs };
 FilterableWithAILabel.argTypes = {
   ...filterableArgTypes,
+};
+FilterableWithAILabel.parameters = {
+  controls: {
+    exclude: ['label'],
+  },
 };
 export const ExperimentalAutoAlign = (args) => {
   const ref = useRef();
