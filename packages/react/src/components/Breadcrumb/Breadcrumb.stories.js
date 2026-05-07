@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2025
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -27,10 +27,24 @@ export default {
   },
 };
 
+const sharedArgs = {
+  noTrailingSlash: true,
+  'aria-label': 'Breadcrumb container',
+  size: 'md',
+};
+
 const sharedArgTypes = {
   size: {
     options: ['sm', 'md'],
     control: { type: 'select' },
+  },
+  noTrailingSlash: {
+    control: { type: 'boolean' },
+    description: 'Removes the trailing slash from the breadcrumb',
+  },
+  'aria-label': {
+    control: { type: 'text' },
+    description: 'Specifies the label for the breadcrumb container',
   },
 };
 
@@ -44,6 +58,8 @@ export const Default = (args) => (
     <BreadcrumbItem href="#">Breadcrumb 4</BreadcrumbItem>
   </Breadcrumb>
 );
+
+Default.args = { ...sharedArgs };
 
 Default.argTypes = {
   ...sharedArgTypes,
@@ -65,6 +81,8 @@ export const BreadcrumbWithOverflowMenu = (args) => (
     <BreadcrumbItem isCurrentPage>Breadcrumb 6</BreadcrumbItem>
   </Breadcrumb>
 );
+
+BreadcrumbWithOverflowMenu.args = { ...sharedArgs };
 
 BreadcrumbWithOverflowMenu.argTypes = {
   ...sharedArgTypes,
