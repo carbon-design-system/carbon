@@ -99,8 +99,9 @@ export default class CDSTab extends HostListenerMixin(CDSContentSwitcherItem) {
   protected _handleKeydown(event: KeyboardEvent) {
     const { key } = event;
     if (
-      (this._dismissable && !this.disabled && key === 'Delete') ||
-      key === 'Backspace'
+      this._dismissable &&
+      !this.disabled &&
+      (key === 'Delete' || key === 'Backspace')
     ) {
       event.preventDefault();
       this._handleClose(event);
