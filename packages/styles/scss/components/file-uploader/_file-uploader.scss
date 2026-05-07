@@ -257,6 +257,11 @@
     outline-width: 1px;
   }
 
+  .#{$prefix}--file__selected-file--disabled {
+    color: $text-disabled;
+    cursor: not-allowed;
+  }
+
   .#{$prefix}--file__selected-file--invalid {
     @include focus-outline('invalid');
 
@@ -377,16 +382,23 @@
     background-color: transparent;
     block-size: $spacing-06;
     cursor: pointer;
-    fill: $icon-primary;
     inline-size: $spacing-06;
+
+    svg {
+      fill: $icon-primary;
+    }
+
+    &[disabled] {
+      cursor: not-allowed;
+
+      svg {
+        fill: $icon-disabled;
+      }
+    }
 
     &:focus {
       @include focus-outline('outline');
     }
-  }
-
-  .#{$prefix}--file__state-container .#{$prefix}--file-close svg path {
-    fill: $icon-primary;
   }
 
   .#{$prefix}--file__state-container .#{$prefix}--inline-loading__animation {

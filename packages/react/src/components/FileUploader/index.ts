@@ -14,3 +14,4 @@ export { default as FileUploaderSkeleton } from './FileUploader.Skeleton';
 export { default as FileUploaderButton } from './FileUploaderButton';
 export { default as FileUploaderDropContainer } from './FileUploaderDropContainer';
 export { default as FileUploaderItem } from './FileUploaderItem';
+export { preview_FileUploader } from './preview';
