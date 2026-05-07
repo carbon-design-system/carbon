@@ -251,12 +251,9 @@ export default defineConfig(
 
       // Upgrade
       '**/__testfixtures__/**',
-      'packages/upgrade/fixtures/sample-project/example-imports-to-unified-package.js',
 
       // React
       '**/storybook-static/**',
-
-      // Icons React
 
       // Templates
       'packages/cli/src/component/templates/**',
