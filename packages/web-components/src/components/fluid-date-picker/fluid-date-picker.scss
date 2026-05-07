@@ -1,0 +1,278 @@
+/**
+ * Copyright IBM Corp. 2025
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+$css--plex: true !default;
+
+@use '@carbon/styles/scss/config' as *;
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/layout' as *;
+@use '@carbon/styles/scss/utilities/convert';
+@use '@carbon/styles/scss/utilities/skeleton' as *;
+@use '@carbon/styles/scss/components/fluid-date-picker' as *;
+@use '@carbon/styles/scss/components/date-picker/index';
+@use '@carbon/styles/scss/utilities/focus-outline' as *;
+
+// ── Fluid date picker (wrapper) ──────────────────────────────────────────────
+
+:host(#{$prefix}-fluid-date-picker) {
+  @extend .#{$prefix}--date-picker--fluid;
+  @include emit-layout-tokens();
+
+  display: inline-flex;
+  inline-size: fit-content;
+  max-inline-size: 100%;
+
+  #floating-menu-container {
+    position: absolute;
+    inline-size: 100%;
+  }
+
+  .#{$prefix}--date-picker__calendar.open {
+    margin-block-start: 0;
+  }
+
+  .flatpickr-next-month,
+  .flatpickr-prev-month {
+    svg {
+      transform: rotate(0) #{'/*rtl:rotate(180deg)*/'};
+    }
+  }
+
+  .#{$prefix}--date-picker__day.flatpickr-disabled,
+  .flatpickr-day.flatpickr-disabled {
+    color: $layer-selected-inverse;
+    cursor: not-allowed;
+    opacity: 0.5;
+
+    &:hover {
+      background: transparent;
+    }
+  }
+
+  .flatpickr-next-month.flatpickr-disabled,
+  .flatpickr-prev-month.flatpickr-disabled {
+    svg {
+      cursor: not-allowed;
+      fill: $layer-selected-inverse;
+      opacity: 0.5;
+    }
+
+    &:hover {
+      svg {
+        fill: $layer-selected-inverse;
+      }
+    }
+  }
+}
+
+:host(#{$prefix}-fluid-date-picker[invalid]) {
+  @extend .#{$prefix}--date-picker--fluid--invalid;
+}
+
+:host(#{$prefix}-fluid-date-picker[warn]:not([invalid])) {
+  @extend .#{$prefix}--date-picker--fluid--warn;
+}
+
+:host(#{$prefix}-fluid-date-picker[readonly]) {
+  @extend .#{$prefix}--date-picker--fluid--readonly;
+}
+
+// ── Fluid date picker input ──────────────────────────────────────────────────
+
+:host(#{$prefix}-fluid-date-picker-input) {
+  position: relative;
+  display: block;
+  box-sizing: border-box;
+  background: $field;
+  block-size: convert.to-rem(64px);
+  border-block-end: 1px solid $border-strong;
+  inline-size: 100%;
+  max-inline-size: 100%;
+  outline: none;
+}
+
+// When invalid or warn, allow host to grow beyond 64px for error message
+:host(#{$prefix}-fluid-date-picker-input[invalid]),
+:host(#{$prefix}-fluid-date-picker-input[warn]:not([invalid])) {
+  block-size: auto;
+  border-block-end: none;
+  min-block-size: convert.to-rem(64px);
+}
+
+// Divider between input area and error/warn message
+:host(#{$prefix}-fluid-date-picker-input) .#{$prefix}--date-picker__divider {
+  border-style: solid;
+  border-color: $border-subtle;
+  margin: 0 1rem;
+  border-block-end: none;
+  inline-size: calc(100% - 2rem);
+}
+
+// Error / warn message padding
+:host(#{$prefix}-fluid-date-picker-input[invalid])
+  .#{$prefix}--form-requirement,
+:host(#{$prefix}-fluid-date-picker-input[warn]:not([invalid]))
+  .#{$prefix}--form-requirement {
+  padding: $spacing-03 convert.to-rem(40px) $spacing-03 $spacing-05;
+  margin: 0;
+}
+
+:host(#{$prefix}-fluid-date-picker-input[warn]:not([invalid])) {
+  .#{$prefix}--form-requirement {
+    color: $text-primary;
+  }
+}
+
+:host(#{$prefix}-fluid-date-picker-input[kind='simple']),
+:host(#{$prefix}-fluid-date-picker-input-skeleton[kind='simple']) {
+  .#{$prefix}--date-picker__input {
+    inline-size: convert.to-rem(120px);
+  }
+
+  .#{$prefix}--date-picker__input--invalid,
+  .#{$prefix}--date-picker__input--warn {
+    inline-size: convert.to-rem(152px);
+  }
+}
+
+:host(#{$prefix}-fluid-date-picker-input[kind='simple'][short]),
+:host(#{$prefix}-fluid-date-picker-input-skeleton[kind='simple'][short]) {
+  .#{$prefix}--date-picker__input {
+    inline-size: convert.to-rem(90px);
+  }
+}
+
+:host(#{$prefix}-fluid-date-picker-input[kind='single']),
+:host(#{$prefix}-fluid-date-picker-input-skeleton[kind='single']) {
+  max-inline-size: convert.to-rem(288px);
+
+  .#{$prefix}--date-picker__input {
+    inline-size: convert.to-rem(288px);
+  }
+}
+
+:host(#{$prefix}-fluid-date-picker-input[kind='from']),
+:host(#{$prefix}-fluid-date-picker-input-skeleton[kind='from']) {
+  margin-inline-end: convert.to-rem(1px);
+}
+
+:host(#{$prefix}-fluid-date-picker-input[kind='from']),
+:host(#{$prefix}-fluid-date-picker-input[kind='to']),
+:host(#{$prefix}-fluid-date-picker-input-skeleton[kind='from']),
+:host(#{$prefix}-fluid-date-picker-input-skeleton[kind='to']) {
+  inline-size: convert.to-rem(143.5px);
+
+  .#{$prefix}--date-picker__input {
+    inline-size: convert.to-rem(143.5px);
+  }
+}
+
+:host(#{$prefix}-fluid-date-picker[range]) {
+  display: flex;
+}
+
+:host(#{$prefix}-fluid-date-picker-input[kind='to']) {
+  border-inline-start: 1px solid $border-strong;
+}
+
+:host(#{$prefix}-fluid-date-picker-input:focus-within) {
+  outline: 2px solid $focus;
+  outline-offset: -2px;
+}
+
+:host(#{$prefix}-fluid-date-picker-input[invalid]) {
+  @extend .#{$prefix}--date-picker--fluid--invalid;
+  @include focus-outline('invalid');
+}
+
+:host(#{$prefix}-fluid-date-picker-input[warn]:not([invalid])) {
+  @extend .#{$prefix}--date-picker--fluid--warn;
+}
+
+:host(#{$prefix}-fluid-date-picker-input[readonly]) {
+  @extend .#{$prefix}--date-picker--fluid--readonly;
+}
+
+:host(#{$prefix}-fluid-date-picker-input) .#{$prefix}--label {
+  position: absolute;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  margin: 0;
+  block-size: convert.to-rem(16px);
+  inline-size: calc(100% - 2rem);
+  inset-block-start: convert.to-rem(13px);
+  inset-inline-start: $spacing-05;
+}
+
+:host(#{$prefix}-fluid-date-picker-input) .#{$prefix}--date-picker__input {
+  border: none;
+  background: transparent;
+  block-size: calc(100% - #{convert.to-rem(1px)});
+  inline-size: 100%;
+  max-inline-size: 100%;
+  outline: none;
+  padding-block-end: convert.to-rem(13px);
+  padding-block-start: convert.to-rem(32px);
+  padding-inline: $spacing-05;
+}
+
+// Push the calendar icon down to account for the floating label above the input value
+:host(#{$prefix}-fluid-date-picker-input) .#{$prefix}--date-picker__icon {
+  inset-block-start: convert.to-rem(43px);
+}
+
+:host(#{$prefix}-fluid-date-picker-input[invalid])
+  .#{$prefix}--date-picker__icon--invalid,
+:host(#{$prefix}-fluid-date-picker-input[warn]:not([invalid]))
+  .#{$prefix}--date-picker__icon--warn {
+  inset-block-start: convert.to-rem(80px);
+}
+
+:host(#{$prefix}-fluid-date-picker-input[invalid])
+  .#{$prefix}--date-picker__icon:not(.#{$prefix}--date-picker__icon--invalid),
+:host(#{$prefix}-fluid-date-picker-input[warn]:not([invalid]))
+  .#{$prefix}--date-picker__icon:not(.#{$prefix}--date-picker__icon--warn) {
+  display: block;
+}
+
+:host(#{$prefix}-fluid-date-picker-input[kind='simple'][invalid])
+  .#{$prefix}--date-picker__icon--invalid,
+:host(#{$prefix}-fluid-date-picker-input[kind='simple'][warn]:not([invalid]))
+  .#{$prefix}--date-picker__icon--warn {
+  display: block;
+}
+
+// ── Fluid date picker skeleton ───────────────────────────────────────────────
+
+:host(#{$prefix}-fluid-date-picker-skeleton) {
+  @extend .#{$prefix}--date-picker--fluid__skeleton;
+
+  display: block;
+}
+
+:host(#{$prefix}-fluid-date-picker-skeleton[range]) {
+  @extend .#{$prefix}--date-picker--fluid__skeleton--range;
+}
+
+.#{$prefix}--skeleton {
+  &::before {
+    position: absolute;
+    animation: 3000ms ease-in-out #{$prefix}--skeleton infinite;
+    background: $skeleton-element;
+    block-size: 100%;
+    content: '';
+    inline-size: 100%;
+    inset-inline-start: 0;
+    will-change: transform-origin, transform, opacity;
+
+    @media (prefers-reduced-motion: reduce) {
+      animation: none;
+    }
+  }
+}

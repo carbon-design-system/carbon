@@ -32,7 +32,7 @@
       outline $duration-fast-01 motion(standard, productive);
   }
 
-  .#{$prefix}--date-picker--fluid .#{$prefix}--label {
+  :host(#{$prefix}-fluid-date-picker-input) .#{$prefix}--label {
     position: absolute;
     z-index: 1;
     display: flex;
