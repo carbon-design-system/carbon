@@ -1,0 +1,235 @@
+import { ArgTypes, Canvas, Meta } from '@storybook/blocks';
+import * as FileUploaderComposableStories from './preview/preview_FileUploader.stories';
+
+<Meta of={FileUploaderComposableStories} />
+
+# FileUploader (Composable)
+
+[Source code](https://github.com/carbon-design-system/carbon/tree/main/packages/react/src/components/FileUploader)
+
+{/* <!-- START doctoc generated TOC please keep comment here to allow auto update --> <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE --> */}
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Component API](#component-api)
+- [Architecture](#architecture)
+- [Usage](#usage)
+- [Feedback](#feedback)
+
+{/* <!-- END doctoc generated TOC please keep comment here to allow auto update --> */}
+
+## Overview
+
+The Composable FileUploader is a flexible, user-controlled alternative to the
+monolithic FileUploader component. It follows the compound component pattern,
+providing better alignment with the Web Components implementation and greater
+flexibility for developers.
+
+### Key Features
+
+- **User-controlled state**: You manage the file list, giving you full control
+- **Composable**: Mix and match Button, DropContainer, List, and Item components
+- **Better error handling**: Display custom error messages for invalid files
+- **No feature flags**: All functionality is available without experimental
+  flags
+- **Web Components parity**: Matches the architecture of `cds-file-uploader`
+
+### When to Use
+
+Use the Composable FileUploader when you need:
+
+- Custom file validation logic
+- Custom error message display
+- Multiple input methods (button + drag-and-drop)
+- Full control over file list rendering
+- Integration with external state management
+
+## Component API
+
+### FileUploader (Container)
+
+<ArgTypes of={FileUploaderComposableStories} />
+
+### FileUploader.Button
+
+Renders a button for selecting files via the native file picker.
+
+| Prop         | Type        | Default      | Description                                                  |
+| ------------ | ----------- | ------------ | ------------------------------------------------------------ |
+| `accept`     | `string[]`  | -            | File types to accept (e.g., `['.jpg', '.png']`)              |
+| `buttonKind` | `string`    | `'primary'`  | Button style variant                                         |
+| `disabled`   | `boolean`   | `false`      | Disable the button (inherits from container)                 |
+| `labelText`  | `ReactNode` | `'Add file'` | Button label text                                            |
+| `multiple`   | `boolean`   | `false`      | Allow multiple file selection                                |
+| `onAddFiles` | `function`  | -            | Called when files are added: `(evt, { addedFiles }) => void` |
+| `size`       | `string`    | `'md'`       | Button size (inherits from container)                        |
+
+### FileUploader.DropContainer
+
+Renders a drag-and-drop area for file selection.
+
+| Prop          | Type       | Default      | Description                                                  |
+| ------------- | ---------- | ------------ | ------------------------------------------------------------ |
+| `accept`      | `string[]` | -            | File types to accept                                         |
+| `disabled`    | `boolean`  | `false`      | Disable the drop container (inherits from container)         |
+| `labelText`   | `string`   | `'Add file'` | Label text for the drop area                                 |
+| `maxFileSize` | `number`   | -            | Maximum file size in bytes                                   |
+| `multiple`    | `boolean`  | `false`      | Allow multiple file selection                                |
+| `onAddFiles`  | `function` | -            | Called when files are added: `(evt, { addedFiles }) => void` |
+
+### FileUploader.List
+
+Container for rendering file items.
+
+| Prop       | Type        | Default | Description                  |
+| ---------- | ----------- | ------- | ---------------------------- |
+| `children` | `ReactNode` | -       | FileUploader.Item components |
+
+### FileUploader.Item
+
+Renders an individual file item with status and delete functionality.
+
+| Prop              | Type       | Default       | Description                                              |
+| ----------------- | ---------- | ------------- | -------------------------------------------------------- |
+| `errorBody`       | `string`   | -             | Detailed error message for invalid files                 |
+| `errorSubject`    | `string`   | -             | Error title for invalid files                            |
+| `iconDescription` | `string`   | -             | Accessible description for status icon                   |
+| `invalid`         | `boolean`  | `false`       | Mark file as invalid                                     |
+| `name`            | `string`   | -             | File name to display                                     |
+| `onDelete`        | `function` | -             | Called when delete is clicked: `(evt, { uuid }) => void` |
+| `size`            | `string`   | `'md'`        | Item size (inherits from container)                      |
+| `status`          | `string`   | `'uploading'` | File status: `'uploading'`, `'edit'`, or `'complete'`    |
+| `uuid`            | `string`   | -             | Unique identifier for the file                           |
+
+## Architecture
+
+### Comparison with Monolithic FileUploader
+
+| Feature                | Monolithic                     | Composable                     |
+| ---------------------- | ------------------------------ | ------------------------------ |
+| State management       | Internal                       | User-controlled                |
+| File list rendering    | Fixed                          | Customizable                   |
+| Invalid file handling  | Filtered out                   | User displays                  |
+| Input methods          | Button only                    | Button, DropContainer, or both |
+| Web Components parity  | ❌ No                          | ✅ Yes                         |
+| Feature flags required | ✅ Yes (for enhanced features) | ❌ No                          |
+
+### Pattern
+
+The Composable FileUploader follows the compound component pattern:
+
+```jsx
+<FileUploader>
+  {' '}
+  {/* Container with context */}
+  <FileUploader.Button /> {/* Input method */}
+  <FileUploader.List>
+    {' '}
+    {/* File list container */}
+    <FileUploader.Item /> {/* Individual file */}
+  </FileUploader.List>
+</FileUploader>
+```
+
+This matches the Web Components architecture:
+
+```html
+<cds-file-uploader>
+  <cds-file-uploader-button slot="drop-container" />
+  <cds-file-uploader-item />
+</cds-file-uploader>
+```
+
+## Usage
+
+### Basic Example with Button
+
+<Canvas of={FileUploaderComposableStories.WithButton} />
+
+```jsx
+import { FileUploader } from '@carbon/react/lib/components/FileUploader/index.composable';
+import { useState } from 'react';
+
+function MyComponent() {
+  const [files, setFiles] = useState([]);
+
+  const handleAddFiles = (evt, { addedFiles }) => {
+    const newFiles = addedFiles.map((file) => ({
+      uuid: generateUuid(),
+      name: file.name,
+      status: 'edit',
+      invalid: file.size > 500000,
+    }));
+    setFiles((prev) => [...prev, ...newFiles]);
+  };
+
+  const handleDelete = (evt, { uuid }) => {
+    setFiles((prev) => prev.filter((f) => f.uuid !== uuid));
+  };
+
+  return (
+    <FileUploader labelTitle="Upload files" labelDescription="Max 500kb">
+      <FileUploader.Button onAddFiles={handleAddFiles} multiple>
+        Add files
+      </FileUploader.Button>
+      <FileUploader.List>
+        {files.map((file) => (
+          <FileUploader.Item
+            key={file.uuid}
+            {...file}
+            onDelete={handleDelete}
+          />
+        ))}
+      </FileUploader.List>
+    </FileUploader>
+  );
+}
+```
+
+### With Drag and Drop
+
+<Canvas of={FileUploaderComposableStories.WithDropContainer} />
+
+### With Both Input Methods
+
+<Canvas of={FileUploaderComposableStories.WithBothInputMethods} />
+
+### With Upload Progress
+
+<Canvas of={FileUploaderComposableStories.WithUploadingState} />
+
+### Custom Validation
+
+```jsx
+const handleAddFiles = (evt, { addedFiles }) => {
+  const newFiles = addedFiles.map((file) => {
+    const errors = [];
+
+    // Custom validation
+    if (file.size > 500000) {
+      errors.push('File size exceeds 500kb');
+    }
+    if (!file.name.match(/\.(jpg|png)$/i)) {
+      errors.push('Only JPG and PNG files are allowed');
+    }
+
+    return {
+      uuid: generateUuid(),
+      name: file.name,
+      status: 'edit',
+      invalid: errors.length > 0,
+      errorSubject: errors.length > 0 ? 'Invalid file' : undefined,
+      errorBody: errors.join('. '),
+    };
+  });
+
+  setFiles((prev) => [...prev, ...newFiles]);
+};
+```
+
+## Feedback
+
+Help us improve this component by providing feedback, asking questions on Slack,
+or updating this file on
+[GitHub](https://github.com/carbon-design-system/carbon/edit/main/packages/react/src/components/FileUploader/FileUploader.Composable.mdx).
