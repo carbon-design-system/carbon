@@ -7,7 +7,7 @@
 
 import { html } from 'lit';
 import { ifDefined } from 'lit/directives/if-defined.js';
-import { property, state } from 'lit/decorators.js';
+import { property, state, query } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
 import CDSContentSwitcherItem from '../content-switcher/content-switcher-item';
 import { TABS_ICON_SIZE, TABS_TYPE } from './defs';
@@ -45,6 +45,13 @@ export default class CDSTab extends CDSContentSwitcherItem {
   type = TABS_TYPE.REGULAR;
 
   /**
+   * `true` if the tab is in vertical orientation.
+   * This is automatically set by the parent `<cds-tabs>` when it's in vertical mode.
+   */
+  @property({ type: Boolean, reflect: true })
+  vertical = false;
+
+  /**
    * `true` if this tab is icon-only.
    */
   @property({ type: Boolean, reflect: true, attribute: 'icon-only' })
@@ -69,6 +76,13 @@ export default class CDSTab extends CDSContentSwitcherItem {
   badgeIndicator = false;
 
   /**
+   * `true` if the tab text is truncated with ellipsis.
+   * This state is automatically updated when the component renders in vertical mode.
+   */
+  @state()
+  truncated = false;
+
+  /**
    * Whether this tab should be dismissable.
    */
   @state()
@@ -81,12 +95,52 @@ export default class CDSTab extends CDSContentSwitcherItem {
   _index = -1;
 
   /**
+   * Reference to the label span element (only present in vertical mode).
+   * @private
+   */
+  @query(`.${prefix}--tabs__nav-item-label`)
+  private _labelElement?: HTMLElement;
+
+  /**
+   * Checks if the text overflow ellipsis is currently applied to the label.
+   * This is useful for determining if a tooltip should be shown.
+   *
+   * @returns `true` if text is truncated/clamped, `false` otherwise or if not in vertical mode
+   */
+  isTextTruncated(): boolean {
+    if (!this.vertical || !this._labelElement) {
+      return false;
+    }
+
+    // Compare scrollHeight with clientHeight to detect if content is overflowing
+    // When line-clamp is active and text exceeds 2 lines, scrollHeight > clientHeight
+    return this._labelElement.scrollHeight > this._labelElement.clientHeight;
+  }
+
+  /**
+   * Updates the truncated state after the component has rendered.
+   */
+  updated(changedProperties: Map<PropertyKey, unknown>) {
+    super.updated(changedProperties);
+
+    // Check if text is truncated and update state when in vertical mode
+    if (this.vertical && this._labelElement) {
+      const isTruncated = this.isTextTruncated();
+      if (this.truncated !== isTruncated) {
+        this.truncated = isTruncated;
+      }
+    }
+  }
+
+  /**
    * Handles `slotchange` event.
    */
   protected _handleSlotChange({ target }: Event) {
     // Retrieve content of the slot to use for aria-label.
     const content = (target as HTMLSlotElement).assignedNodes();
-    this.tabTitle = content[0]?.textContent?.trim() || undefined;
+    const textContent = content[0]?.textContent;
+    // Normalize whitespace: trim and replace multiple spaces with single space
+    this.tabTitle = textContent?.trim().replace(/\s+/g, ' ') || undefined;
   }
 
   connectedCallback() {
@@ -110,6 +164,8 @@ export default class CDSTab extends CDSContentSwitcherItem {
       disabled,
       selected,
       tabTitle,
+      vertical,
+      truncated,
       _handleSlotChange: handleSlotChange,
       _handleClick: handleClick,
     } = this;
@@ -143,9 +199,17 @@ export default class CDSTab extends CDSContentSwitcherItem {
         tabindex="${selected ? 0 : -1}"
         ?disabled="${disabled}"
         aria-selected="${selected}">
-        <span class="${prefix}--tabs__nav-item-label-wrapper">
-          <slot @slotchange="${handleSlotChange}"></slot>
-        </span>
+        ${vertical
+          ? html`<span
+              class="${prefix}--tabs__nav-item-label"
+              title="${truncated ? tabTitle.trim() : ''}">
+              <slot @slotchange="${handleSlotChange}"></slot>
+            </span>`
+          : html`
+              <span class="${prefix}--tabs__nav-item-label-wrapper">
+                <slot @slotchange="${handleSlotChange}"></slot>
+              </span>
+            `}
         ${!disabled && badgeIndicator
           ? html`<cds-badge-indicator></cds-badge-indicator>`
           : ''}
