@@ -43,7 +43,7 @@ export default {
     'FileUploader.Item errorSubject': 'File size exceeds limit',
     'FileUploader.Item iconDescription': 'Delete file',
     'FileUploader.Item invalid': false,
-    'FileUploader.Item name': 'example-file.jpg',
+    'FileUploader.Item name': '',
     'FileUploader.Item status': 'edit',
     'FileUploader.Item size': 'md',
     'FileUploader.Item disabled': false,
