@@ -53,7 +53,11 @@ import { autoUpdate, flip, hide, useFloating } from '@floating-ui/react';
 import type { TranslateWithId } from '../../types/common';
 import { useFeatureFlag } from '../FeatureFlags';
 import { AILabel } from '../AILabel';
-import { defaultItemToString, isComponentElement } from '../../internal';
+import {
+  defaultItemToString,
+  isComponentElement,
+  isItemDisabled,
+} from '../../internal';
 
 const {
   InputBlur,
@@ -69,12 +73,6 @@ const {
 } = useCombobox.stateChangeTypes;
 
 const defaultShouldFilterItem = () => true;
-
-const isDisabledItem = (item: unknown) =>
-  item !== null &&
-  typeof item === 'object' &&
-  'disabled' in item &&
-  Boolean(item.disabled);
 
 const autocompleteCustomFilter = ({
   item,
@@ -139,7 +137,7 @@ const findHighlightedIndex = <ItemType,>(
 
   for (let i = 0; i < items.length; i++) {
     const item = itemToString(items[i]).toLowerCase();
-    if (!isDisabledItem(items[i]) && item.indexOf(searchValue) !== -1) {
+    if (!isItemDisabled(items[i]) && item.indexOf(searchValue) !== -1) {
       return i;
     }
   }
@@ -476,7 +474,7 @@ const ComboBox = forwardRef(
           if (inputValue) {
             const filteredItems = items.filter(
               (item) =>
-                !isDisabledItem(item) &&
+                !isItemDisabled(item) &&
                 autocompleteCustomFilter({
                   item: itemToString(item),
                   inputValue: inputValue,
@@ -680,7 +678,7 @@ const ComboBox = forwardRef(
                 );
                 const highlightedItem = filteredList[state.highlightedIndex];
 
-                if (highlightedItem && !isDisabledItem(highlightedItem)) {
+                if (highlightedItem && !isItemDisabled(highlightedItem)) {
                   return {
                     ...changes,
                     selectedItem: highlightedItem,
@@ -692,7 +690,7 @@ const ComboBox = forwardRef(
                 if (autoIndex !== -1) {
                   const matchingItem = items[autoIndex];
 
-                  if (matchingItem && !isDisabledItem(matchingItem)) {
+                  if (matchingItem && !isItemDisabled(matchingItem)) {
                     return {
                       ...changes,
                       selectedItem: matchingItem,
@@ -882,7 +880,7 @@ const ComboBox = forwardRef(
       initialSelectedItem: initialSelectedItem,
       inputId: id,
       stateReducer,
-      isItemDisabled: isDisabledItem,
+      isItemDisabled,
       ...downshiftProps,
       onStateChange: ({ type, selectedItem: newSelectedItem }) => {
         downshiftProps?.onStateChange?.({
@@ -1166,7 +1164,7 @@ const ComboBox = forwardRef(
                     //  event.preventDefault();
                     const matchingItem = items.find(
                       (item) =>
-                        !isDisabledItem(item) &&
+                        !isItemDisabled(item) &&
                         itemToString(item)
                           .toLowerCase()
                           .startsWith(inputValue.toLowerCase())
