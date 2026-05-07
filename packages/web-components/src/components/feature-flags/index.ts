@@ -80,7 +80,7 @@ class FeatureFlagsElement extends LitElement {
     _oldVal: string | null,
     newVal: string | null
   ) {
-    const value = newVal !== null;
+    const value = newVal !== null && newVal !== 'false';
     this.flags[name] = value;
 
     // Set feature flag to top component level
@@ -119,6 +119,9 @@ class FeatureFlagsElement extends LitElement {
   }
 
   public isFeatureFlagEnabled(flag: string) {
+    if (Object.prototype.hasOwnProperty.call(this.flags, flag)) {
+      return this.flags[flag];
+    }
     return this.scope.enabled(flag);
   }
 
@@ -135,8 +138,12 @@ export default FeatureFlagsElement;
 export function findParentFeatureFlags(
   el: HTMLElement
 ): FeatureFlagsElement | null {
-  let parent = el.parentNode;
+  let parent: Node | null = el.parentNode;
   while (parent) {
+    if (parent instanceof ShadowRoot) {
+      parent = parent.host;
+      continue;
+    }
     if (parent instanceof FeatureFlagsElement) {
       return parent;
     }
