@@ -7,6 +7,7 @@
 
 import React, { useState } from 'react';
 import FileUploader from './index';
+import { useId } from '../../../internal/useId';
 
 export default {
   title: 'Preview/preview__FileUploader',
@@ -203,14 +204,9 @@ export default {
 // Constants
 const DEFAULT_MAX_FILE_SIZE = 500000; // 500kb
 
-// Helper to generate unique IDs
-const generateUuid = () => {
-  return `${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
-};
-
 // Helper to create file objects with validation
-const createFileObject = (file, maxSize = DEFAULT_MAX_FILE_SIZE) => ({
-  uuid: generateUuid(),
+const createFileObject = (file, uniqueId, maxSize = DEFAULT_MAX_FILE_SIZE) => ({
+  uuid: uniqueId + file.name + file.size,
   name: file.name,
   invalid: file.size > maxSize,
   file,
@@ -246,9 +242,10 @@ const renderFileItem = (file, args, handleDelete) => (
 
 export const Default = (args) => {
   const [files, setFiles] = useState([]);
+  const uniqueId = useId();
 
   const handleAddFiles = (evt, { addedFiles }) => {
-    const newFiles = addedFiles.map((file) => createFileObject(file));
+    const newFiles = addedFiles.map((file) => createFileObject(file, uniqueId));
     setFiles((prev) => [...prev, ...newFiles]);
   };
 
@@ -289,11 +286,14 @@ Default.args = {
 
 export const WithDropContainer = (args) => {
   const [files, setFiles] = useState([]);
+  const uniqueId = useId();
 
   const handleAddFiles = (evt, { addedFiles }) => {
     const maxSize =
       args['FileUploader.DropContainer maxFileSize'] || DEFAULT_MAX_FILE_SIZE;
-    const newFiles = addedFiles.map((file) => createFileObject(file, maxSize));
+    const newFiles = addedFiles.map((file) =>
+      createFileObject(file, uniqueId, maxSize)
+    );
     setFiles((prev) => [...prev, ...newFiles]);
   };
 
@@ -340,10 +340,11 @@ WithDropContainer.args = {
 
 export const WithUploadingState = (args) => {
   const [files, setFiles] = useState([]);
+  const uniqueId = useId();
 
   const handleAddFiles = (evt, { addedFiles }) => {
     const newFiles = addedFiles.map((file) => ({
-      uuid: generateUuid(),
+      uuid: uniqueId + file.name + file.size,
       name: file.name,
       status: 'uploading',
       invalid: false,
