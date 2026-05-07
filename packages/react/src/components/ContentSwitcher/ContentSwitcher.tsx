@@ -140,7 +140,9 @@ export const ContentSwitcher = ({
 
         if (
           isComponentElement(child, Switch) ||
-          isComponentElement(child, IconSwitch)
+          isComponentElement(child, IconSwitch, {
+            allowDisplayNameFallback: true,
+          })
         ) {
           onChange({
             ...event,
@@ -163,7 +165,9 @@ export const ContentSwitcher = ({
   };
 
   const isIconOnly = Children.map(children, (child) => {
-    return isComponentElement(child, IconSwitch);
+    return isComponentElement(child, IconSwitch, {
+      allowDisplayNameFallback: true,
+    });
   })?.every((val) => val === true);
 
   const classes = classNames(`${prefix}--content-switcher`, className, {
@@ -184,7 +188,9 @@ export const ContentSwitcher = ({
       {Children.map(children, (child, index) => {
         if (
           !isComponentElement(child, Switch) &&
-          !isComponentElement(child, IconSwitch)
+          !isComponentElement(child, IconSwitch, {
+            allowDisplayNameFallback: true,
+          })
         )
           return child;
 
@@ -204,7 +210,11 @@ export const ContentSwitcher = ({
 
         return cloneElement(child, {
           ...sharedProps,
-          ...(isComponentElement(child, IconSwitch) ? { size } : {}),
+          ...(isComponentElement(child, IconSwitch, {
+            allowDisplayNameFallback: true,
+          })
+            ? { size }
+            : {}),
         });
       })}
     </LayoutConstraint>

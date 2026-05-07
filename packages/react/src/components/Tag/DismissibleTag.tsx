@@ -153,7 +153,9 @@ const DismissibleTag = forwardRef(
     };
 
     const candidate = slug ?? decorator;
-    const candidateIsAILabel = isComponentElement(candidate, AILabel);
+    const candidateIsAILabel = isComponentElement(candidate, AILabel, {
+      allowDisplayNameFallback: true,
+    });
     const normalizedDecorator = candidateIsAILabel
       ? cloneElement(candidate, { size: 'sm', kind: 'inline' })
       : candidate;

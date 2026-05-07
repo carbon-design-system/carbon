@@ -532,7 +532,11 @@ export const OverflowMenu = forwardRef<HTMLButtonElement, OverflowMenuProps>(
     );
 
     const childrenWithProps = Children.toArray(children).map((child, index) => {
-      if (isComponentElement(child, OverflowMenuItem)) {
+      if (
+        isComponentElement(child, OverflowMenuItem, {
+          allowDisplayNameFallback: true,
+        })
+      ) {
         return cloneElement(child, {
           closeMenu: child.props.closeMenu || closeMenuAndFocus,
           handleOverflowMenuItemFocus,

@@ -171,7 +171,9 @@ const TableHeader = frFn((props, ref) => {
   const AILableRef = useRef<HTMLInputElement>(null);
 
   const candidate = slug ?? decorator;
-  const candidateIsAILabel = isComponentElement(candidate, AILabel);
+  const candidateIsAILabel = isComponentElement(candidate, AILabel, {
+    allowDisplayNameFallback: true,
+  });
   const colHasAILabel = candidateIsAILabel;
   const normalizedDecorator = candidateIsAILabel
     ? cloneElement(candidate, { size: 'mini', ref: AILableRef })

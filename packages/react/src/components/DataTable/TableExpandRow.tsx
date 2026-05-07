@@ -123,14 +123,26 @@ const TableExpandRow = forwardRef<HTMLTableCellElement, TableExpandRowProps>(
     // We need to put the AILabel and Decorator before the expansion arrow and all other table cells after the arrow.
     let rowHasAILabel;
     const decorator = Children.toArray(children).map((child) => {
-      if (isComponentElement(child, TableSlugRow)) {
+      if (
+        isComponentElement(child, TableSlugRow, {
+          allowDisplayNameFallback: true,
+        })
+      ) {
         if (child.props.slug) {
           rowHasAILabel = true;
         }
 
         return child;
-      } else if (isComponentElement(child, TableDecoratorRow)) {
-        if (isComponentElement(child.props.decorator, AILabel)) {
+      } else if (
+        isComponentElement(child, TableDecoratorRow, {
+          allowDisplayNameFallback: true,
+        })
+      ) {
+        if (
+          isComponentElement(child.props.decorator, AILabel, {
+            allowDisplayNameFallback: true,
+          })
+        ) {
           rowHasAILabel = true;
         }
 
@@ -140,8 +152,12 @@ const TableExpandRow = forwardRef<HTMLTableCellElement, TableExpandRowProps>(
 
     const normalizedChildren = Children.toArray(children).map((child) => {
       if (
-        !isComponentElement(child, TableSlugRow) &&
-        !isComponentElement(child, TableDecoratorRow)
+        !isComponentElement(child, TableSlugRow, {
+          allowDisplayNameFallback: true,
+        }) &&
+        !isComponentElement(child, TableDecoratorRow, {
+          allowDisplayNameFallback: true,
+        })
       ) {
         return child;
       }

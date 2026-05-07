@@ -551,7 +551,9 @@ export const SelectableTile = React.forwardRef<
     // AILabel is always size `xs`
     const decoratorRef = useRef<HTMLInputElement>(null);
     const candidate = slug ?? decorator;
-    const candidateIsAILabel = isComponentElement(candidate, AILabel);
+    const candidateIsAILabel = isComponentElement(candidate, AILabel, {
+      allowDisplayNameFallback: true,
+    });
     const normalizedDecorator = candidateIsAILabel
       ? cloneElement(candidate, { size: 'xs', ref: decoratorRef })
       : candidate;
@@ -912,7 +914,9 @@ export const ExpandableTile = forwardRef<HTMLElement, ExpandableTileProps>(
 
     // AILabel is always size `xs`
     const candidate = slug ?? decorator;
-    const candidateIsAILabel = isComponentElement(candidate, AILabel);
+    const candidateIsAILabel = isComponentElement(candidate, AILabel, {
+      allowDisplayNameFallback: true,
+    });
     const normalizedDecorator = candidateIsAILabel
       ? cloneElement(candidate, { size: 'xs' })
       : candidate;

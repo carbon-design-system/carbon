@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2025
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -667,7 +667,9 @@ const ModalDialog = React.forwardRef(function ModalDialog(
 
   // AILabel always size `sm`
   const candidate = slug ?? decorator;
-  const candidateIsAILabel = isComponentElement(candidate, AILabel);
+  const candidateIsAILabel = isComponentElement(candidate, AILabel, {
+    allowDisplayNameFallback: true,
+  });
   const normalizedDecorator = candidateIsAILabel
     ? cloneElement(candidate, { size: 'sm' })
     : candidate;

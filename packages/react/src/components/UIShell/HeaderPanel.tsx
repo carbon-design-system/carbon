@@ -118,7 +118,9 @@ const HeaderPanel = React.forwardRef<HTMLDivElement, HeaderPanelProps>(
       if (!(target instanceof Element)) return;
       setLastClickedElement(target);
 
-      const isChildASwitcher = isComponentElement(children, Switcher);
+      const isChildASwitcher = isComponentElement(children, Switcher, {
+        allowDisplayNameFallback: true,
+      });
 
       if (
         isChildASwitcher &&

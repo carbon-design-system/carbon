@@ -881,13 +881,17 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
 
     // AILabel always size `mini`
     const candidate = slug ?? decorator;
-    const candidateIsAILabel = isComponentElement(candidate, AILabel);
+    const candidateIsAILabel = isComponentElement(candidate, AILabel, {
+      allowDisplayNameFallback: true,
+    });
     const normalizedDecorator = candidateIsAILabel
       ? cloneElement(candidate, { size: 'mini' })
       : candidate;
 
     // Need to update the internal value when the revert button is clicked
-    const isRevertActive = isComponentElement(normalizedDecorator, AILabel)
+    const isRevertActive = isComponentElement(normalizedDecorator, AILabel, {
+      allowDisplayNameFallback: true,
+    })
       ? normalizedDecorator.props.revertActive
       : undefined;
 

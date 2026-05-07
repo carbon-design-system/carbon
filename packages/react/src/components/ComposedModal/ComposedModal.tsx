@@ -559,7 +559,9 @@ const ComposedModalDialog = React.forwardRef<
 
   // AILabel is always size `sm`
   const candidate = slug ?? decorator;
-  const candidateIsAILabel = isComponentElement(candidate, AILabel);
+  const candidateIsAILabel = isComponentElement(candidate, AILabel, {
+    allowDisplayNameFallback: true,
+  });
   const normalizedDecorator = candidateIsAILabel
     ? cloneElement(candidate, { size: 'sm' })
     : candidate;

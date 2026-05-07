@@ -211,7 +211,9 @@ const TagBase = React.forwardRef<
 
     // AILabel is always size `sm` and `inline`
     const candidate = slug ?? decorator;
-    const candidateIsAILabel = isComponentElement(candidate, AILabel);
+    const candidateIsAILabel = isComponentElement(candidate, AILabel, {
+      allowDisplayNameFallback: true,
+    });
     const normalizedDecorator =
       candidateIsAILabel && !isInteractiveTag
         ? cloneElement(candidate, { size: 'sm', kind: 'inline' })
