@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2023, 2024
+ * Copyright IBM Corp. 2023, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -405,7 +405,7 @@ class CDSTearsheet extends HostListenerMixin(LitElement) {
 
     if (actionsCount > this._maxActions) {
       this._actionsCount = this._maxActions;
-      // eslint-disable-next-line no-console -- https://github.com/carbon-design-system/carbon/issues/20452
+      // eslint-disable-next-line no-console
       console.error(`Too many tearsheet actions, max ${this._maxActions}.`);
     } else {
       this._actionsCount = actionsCount;
@@ -676,17 +676,17 @@ class CDSTearsheet extends HostListenerMixin(LitElement) {
     ) {
       if (this.width === 'narrow') {
         if (this._hasHeaderNavigation) {
-          // eslint-disable-next-line no-console -- https://github.com/carbon-design-system/carbon/issues/20452
+          // eslint-disable-next-line no-console
           console.error(
             `Header navigation is not permitted in narrow Tearsheet.`
           );
         }
         if (this._hasInfluencerLeft || this._hasInfluencerRight) {
-          // eslint-disable-next-line no-console -- https://github.com/carbon-design-system/carbon/issues/20452
+          // eslint-disable-next-line no-console
           console.error(`Influencer is not permitted in narrow Tearsheet.`);
         }
         if (this._hasHeaderActions) {
-          // eslint-disable-next-line no-console -- https://github.com/carbon-design-system/carbon/issues/20452
+          // eslint-disable-next-line no-console
           console.error(
             `Header actions are not permitted in narrow Tearsheet.`
           );

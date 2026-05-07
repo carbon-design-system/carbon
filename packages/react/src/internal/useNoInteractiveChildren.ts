@@ -19,7 +19,7 @@ export const useNoInteractiveChildren = (
 
     if (node) {
       const errorMessage = `Error: ${message}.\n\nInstead found: ${node.outerHTML}`;
-      // eslint-disable-next-line no-console -- https://github.com/carbon-design-system/carbon/issues/20452
+      // eslint-disable-next-line no-console
       console.error(errorMessage);
       throw new Error(errorMessage);
     }
