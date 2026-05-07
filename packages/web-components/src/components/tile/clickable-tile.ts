@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2019, 2024
+ * Copyright IBM Corp. 2019, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -14,7 +14,11 @@ import { TILE_COLOR_SCHEME } from './defs';
 import styles from './tile.scss?lit';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import AILabel24 from '@carbon/icons/es/ai-label/24.js';
+import ArrowRight16 from '@carbon/icons/es/arrow--right/16.js';
+import Error16 from '@carbon/icons/es/error/16.js';
 import { iconLoader } from '../../globals/internal/icon-loader';
+import { isFeatureFlagEnabled } from '../feature-flags';
+
 /**
  * Clickable tile.
  *
@@ -83,12 +87,24 @@ class CDSClickableTile extends CDSLink {
    * @returns The inner content.
    */
   protected _renderInner() {
+    const v12DefaultIcons = isFeatureFlagEnabled(
+      'enable-v12-tile-default-icons',
+      this
+    );
+
+    const defaultIcon = v12DefaultIcons
+      ? this.disabled
+        ? iconLoader(Error16, { class: `${prefix}--tile--disabled-icon` })
+        : iconLoader(ArrowRight16, { class: `${prefix}--tile--icon` })
+      : '';
+
     return html`
       ${super._renderInner()}
       ${this.aiLabel || this.slug
         ? iconLoader(AILabel24, { class: `${prefix}--tile--ai-label-icon` })
         : ''}
       <slot name="decorator"></slot>
+      ${defaultIcon}
     `;
   }
 
