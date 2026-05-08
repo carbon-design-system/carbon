@@ -9,6 +9,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import cx from 'classnames';
 import { usePrefix } from '../../internal/usePrefix';
+import { Tooltip } from '../Tooltip';
 import {
   ErrorFilled,
   CheckmarkFilled,
@@ -63,6 +64,11 @@ export interface IconIndicatorProps {
   className?: string;
 
   /**
+   * When true, displays only the icon with the label in a tooltip
+   */
+  compact?: boolean;
+
+  /**
    * Specify the kind of icon to be used
    */
   kind: IconIndicatorKind;
@@ -81,7 +87,13 @@ export interface IconIndicatorProps {
 // eslint-disable-next-line react/display-name -- https://github.com/carbon-design-system/carbon/issues/20452
 export const IconIndicator = React.forwardRef(
   (
-    { className: customClassName, kind, label, size = 16 }: IconIndicatorProps,
+    {
+      className: customClassName,
+      compact = false,
+      kind,
+      label,
+      size = 16,
+    }: IconIndicatorProps,
     ref: React.Ref<HTMLDivElement>
   ) => {
     const prefix = usePrefix();
@@ -93,12 +105,34 @@ export const IconIndicator = React.forwardRef(
     if (!IconForKind) {
       return null;
     }
+
+    const iconElement = (
+      <IconForKind
+        size={size}
+        className={`${prefix}--icon-indicator--${kind}`}
+      />
+    );
+
+    if (compact) {
+      return (
+        <div className={classNames} ref={ref}>
+          <Tooltip
+            label={label}
+            align="right"
+            autoAlign
+            className="cds--icon-tooltip">
+            {/* The spec shows that the tooltip must appear on hover and focus. To make it appear on focus, it can only be achieved by adding `tabIndex={0}` and using `role="button"`, which may itself be an accessibility violation for screen readers. If we remove it, keyboard users lose that affordance. */}
+            <span tabIndex={0} role="button" aria-label={label}>
+              {iconElement}
+            </span>
+          </Tooltip>
+        </div>
+      );
+    }
+
     return (
       <div className={classNames} ref={ref}>
-        <IconForKind
-          size={size}
-          className={`${prefix}--icon-indicator--${kind}`}
-        />
+        {iconElement}
         {label}
       </div>
     );
@@ -110,6 +144,11 @@ IconIndicator.propTypes = {
    * Specify an optional className to add.
    */
   className: PropTypes.string,
+
+  /**
+   * When true, displays only the icon with the label in a tooltip
+   */
+  compact: PropTypes.bool,
 
   /**
    * Specify the kind of the Icon Indicator

@@ -10,6 +10,7 @@
 @use '../../config' as *;
 @use '../../spacing' as *;
 @use '../../colors' as *;
+@use '../../utilities/focus-outline';
 @use './tokens' as *;
 
 /// icon-indicator styles
@@ -20,16 +21,28 @@
     @include type-style('body-compact-01');
 
     display: flex;
+    align-items: center;
     color: $text-secondary;
+    gap: $spacing-03;
+    line-height: unset;
+  }
+
+  span {
+    display: flex;
+
+    &:focus {
+      @include focus-outline.focus-outline;
+    }
   }
 
   .#{$prefix}--icon-indicator svg {
     align-self: center;
-    margin-inline-end: $spacing-03;
   }
 
   .#{$prefix}--icon-indicator--20 {
     @include type-style('body-compact-02');
+
+    line-height: unset;
   }
 
   .#{$prefix}--icon-indicator--failed {

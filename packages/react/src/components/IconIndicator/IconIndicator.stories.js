@@ -21,6 +21,11 @@ export default {
 };
 
 const sharedArgTypes = {
+  compact: {
+    control: {
+      type: 'boolean',
+    },
+  },
   label: {
     control: {
       type: 'text',
@@ -41,7 +46,7 @@ export const Default = (props) => {
   return (
     <div
       style={{
-        display: 'flex',
+        display: 'inline-flex',
         flexFlow: 'column',
         rowGap: '.5rem',
       }}>
@@ -62,6 +67,7 @@ export const Default = (props) => {
 };
 
 Default.args = {
+  compact: false,
   size: 16,
 };
 Default.argTypes = sharedArgTypes;
@@ -70,7 +76,7 @@ export const DefaultWithSize20 = (props) => {
   return (
     <div
       style={{
-        display: 'flex',
+        display: 'inline-flex',
         flexFlow: 'column',
         rowGap: '.5rem',
       }}>
@@ -91,6 +97,7 @@ export const DefaultWithSize20 = (props) => {
 };
 
 DefaultWithSize20.args = {
+  compact: false,
   size: 20,
 };
 
@@ -102,3 +109,58 @@ DefaultWithSize20.args = {
  */
 DefaultWithSize20.tags = ['!dev', '!autodocs'];
 DefaultWithSize20.argTypes = sharedArgTypes;
+
+export const Compact = (props) => {
+  return (
+    <div
+      style={{
+        display: 'flex',
+        flexFlow: 'row',
+        gap: '1rem',
+        alignItems: 'center',
+      }}>
+      <IconIndicator kind="failed" label="Failed" compact {...props} />
+      <IconIndicator
+        kind="caution-major"
+        label="Caution major"
+        compact
+        {...props}
+      />
+      <IconIndicator
+        kind="caution-minor"
+        label="Caution minor"
+        compact
+        {...props}
+      />
+      <IconIndicator kind="undefined" label="Undefined" compact {...props} />
+      <IconIndicator kind="succeeded" label="Succeeded" compact {...props} />
+      <IconIndicator kind="normal" label="Normal" compact {...props} />
+      <IconIndicator
+        kind="in-progress"
+        label="In progress"
+        compact
+        {...props}
+      />
+      <IconIndicator kind="incomplete" label="Incomplete" compact {...props} />
+      <IconIndicator
+        kind="not-started"
+        label="Not started"
+        compact
+        {...props}
+      />
+      <IconIndicator kind="pending" label="Pending" compact {...props} />
+      <IconIndicator kind="unknown" label="Unknown" compact {...props} />
+      <IconIndicator
+        kind="informative"
+        label="Informative"
+        compact
+        {...props}
+      />
+    </div>
+  );
+};
+
+Compact.args = {
+  size: 16,
+};
+Compact.argTypes = sharedArgTypes;
