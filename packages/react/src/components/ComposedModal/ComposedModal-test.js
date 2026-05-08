@@ -919,6 +919,64 @@ describe('state with presence context', () => {
     expect(siblingModal).not.toBeInTheDocument();
     expect(screen.queryByTestId('modal')).toBeInTheDocument();
   });
+
+  it('should close only the topmost modal when Escape is pressed', async () => {
+    const ModalExample = () => {
+      const [isSiblingOpen, setIsSiblingOpen] = useState(false);
+      const [isChildOpen, setIsChildOpen] = useState(false);
+
+      return (
+        <ComposedModalPresence open>
+          <ComposedModal data-testid="modal">
+            <ModalHeader>Modal Header</ModalHeader>
+            <ModalBody>
+              <button
+                type="button"
+                data-testid="launch-sibling-modal"
+                onClick={() => setIsSiblingOpen(true)}>
+                Launch sibling modal
+              </button>
+            </ModalBody>
+          </ComposedModal>
+          <ComposedModal
+            data-testid="sibling-modal"
+            open={isSiblingOpen}
+            onClose={() => setIsSiblingOpen(false)}>
+            <ModalHeader>Modal Header</ModalHeader>
+            <ModalBody>
+              <button
+                type="button"
+                data-testid="launch-child-modal"
+                onClick={() => setIsChildOpen(true)}>
+                Launch child modal
+              </button>
+              <ComposedModal
+                data-testid="child-modal"
+                open={isChildOpen}
+                onClose={() => setIsChildOpen(false)}>
+                <ModalHeader>Modal Header</ModalHeader>
+              </ComposedModal>
+            </ModalBody>
+          </ComposedModal>
+        </ComposedModalPresence>
+      );
+    };
+
+    render(<ModalExample />);
+
+    await userEvent.click(screen.getByTestId('launch-sibling-modal'));
+    await userEvent.click(screen.getByTestId('launch-child-modal'));
+
+    expect(screen.queryByTestId('modal')).toBeInTheDocument();
+    expect(screen.queryByTestId('sibling-modal')).toBeInTheDocument();
+    expect(screen.queryByTestId('child-modal')).toBeInTheDocument();
+
+    await userEvent.keyboard('{Escape}');
+
+    expect(screen.queryByTestId('modal')).toBeInTheDocument();
+    expect(screen.queryByTestId('sibling-modal')).toBeInTheDocument();
+    expect(screen.queryByTestId('child-modal')).not.toBeInTheDocument();
+  });
 });
 
 const ComposedModalWithPresenceHof = withComposedModalPresence((props) => {
