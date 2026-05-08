@@ -15,6 +15,8 @@ import { FeatureFlags } from '../FeatureFlags';
 import { ModalPresence, withModalPresence } from './ModalPresence';
 import OverflowMenu from '../OverflowMenu';
 import OverflowMenuItem from '../OverflowMenuItem';
+import { MenuButton } from '../MenuButton';
+import { MenuItem } from '../Menu';
 
 const prefix = 'cds';
 
@@ -49,7 +51,7 @@ describe.each([
     Component: ModalWithPresenceContext,
     isPresence: true,
   },
-])('$title', ({ Component, isPresence }) => {
+])('$title', ({ Component, isPresence, title }) => {
   it('should add extra classes that are passed via className', () => {
     render(
       <Component data-testid="modal-1" className="custom-class">
@@ -582,6 +584,58 @@ describe.each([
     expect(button).toHaveFocus();
   });
 
+  it('should focus `MenuButton` trigger on close when `launcherButtonRef` is `MenuButton`', async () => {
+    const ModalExample = () => {
+      const launcherButtonRef = useRef(null);
+      const [isOpen, setIsOpen] = useState(false);
+
+      return (
+        <>
+          <MenuButton label="Actions" ref={launcherButtonRef}>
+            <MenuItem label="Open modal" onClick={() => setIsOpen(true)} />
+          </MenuButton>
+          <Component
+            data-testid="modal"
+            launcherButtonRef={launcherButtonRef}
+            open={isOpen}
+            onRequestClose={() => setIsOpen(false)}
+          />
+        </>
+      );
+    };
+
+    render(<ModalExample />);
+
+    await userEvent.click(screen.getByRole('button', { name: 'Actions' }));
+    await userEvent.click(screen.getByRole('menuitem', { name: 'Open modal' }));
+
+    expect(screen.getByTestId('modal')).toHaveClass(
+      'cds--layer-one',
+      'cds--modal',
+      'cds--modal-tall',
+      'is-visible',
+      ...(title === 'Modal with presence context'
+        ? ['cds--modal--enable-presence']
+        : []),
+      { exact: true }
+    );
+
+    await userEvent.click(screen.getByRole('button', { name: 'Close' }));
+
+    if (isPresence) {
+      expect(screen.queryByTestId('modal')).not.toBeInTheDocument();
+    } else {
+      expect(screen.getByTestId('modal')).toHaveClass(
+        'cds--layer-one',
+        'cds--modal',
+        'cds--modal-tall',
+        { exact: true }
+      );
+    }
+
+    expect(screen.getByRole('button', { name: 'Actions' })).toHaveFocus();
+  });
+
   describe('enable-dialog-element feature flag', () => {
     it('should bring launcherButtonRef element into focus on close when the ref is defined', async () => {
       const ModalExample = () => {
@@ -759,6 +813,57 @@ describe('state with presence context', () => {
     expect(childModal).not.toBeInTheDocument();
     expect(siblingModal).not.toBeInTheDocument();
     expect(screen.queryByTestId('modal')).toBeInTheDocument();
+  });
+
+  it('should close only the topmost modal when Escape is pressed', async () => {
+    const ModalExample = () => {
+      const [isSiblingOpen, setIsSiblingOpen] = useState(false);
+      const [isChildOpen, setIsChildOpen] = useState(false);
+
+      return (
+        <ModalPresence open>
+          <Modal data-testid="modal">
+            <button
+              type="button"
+              data-testid="launch-sibling-modal"
+              onClick={() => setIsSiblingOpen(true)}>
+              Launch sibling modal
+            </button>
+          </Modal>
+          <Modal
+            data-testid="sibling-modal"
+            open={isSiblingOpen}
+            onRequestClose={() => setIsSiblingOpen(false)}>
+            <button
+              type="button"
+              data-testid="launch-child-modal"
+              onClick={() => setIsChildOpen(true)}>
+              Launch child modal
+            </button>
+            <Modal
+              data-testid="child-modal"
+              open={isChildOpen}
+              onRequestClose={() => setIsChildOpen(false)}
+            />
+          </Modal>
+        </ModalPresence>
+      );
+    };
+
+    render(<ModalExample />);
+
+    await userEvent.click(screen.getByTestId('launch-sibling-modal'));
+    await userEvent.click(screen.getByTestId('launch-child-modal'));
+
+    expect(screen.queryByTestId('modal')).toBeInTheDocument();
+    expect(screen.queryByTestId('sibling-modal')).toBeInTheDocument();
+    expect(screen.queryByTestId('child-modal')).toBeInTheDocument();
+
+    await userEvent.keyboard('{Escape}');
+
+    expect(screen.queryByTestId('modal')).toBeInTheDocument();
+    expect(screen.queryByTestId('sibling-modal')).toBeInTheDocument();
+    expect(screen.queryByTestId('child-modal')).not.toBeInTheDocument();
   });
 });
 
