@@ -368,7 +368,14 @@ renders as `lg`.
 The `badgeCount` prop is used to display a badge with a number on icon-only
 buttons. setting this prop without passing any number shows a red dot.
 
-<Canvas>
+<Unstyled
+  style={{
+    padding: '1rem',
+    background: 'var(--cds-background)',
+    flexWrap: 'wrap',
+    display: 'flex',
+    gap: '1rem',
+  }}>
   <Button
     hasIconOnly
     kind="ghost"
@@ -383,7 +390,7 @@ buttons. setting this prop without passing any number shows a red dot.
     iconDescription="Add to selection"
     badgeCount={0}
   />
-</Canvas>
+</Unstyled>
 
 ```jsx
 <Button hasIconOnly kind="ghost" renderIcon={Add} iconDescription="Add to selection" badgeCount={5} />
