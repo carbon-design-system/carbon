@@ -30,32 +30,42 @@ import * as ContainedListStories from './contained-list.stories';
 
 <Canvas of={ContainedListStories.Default} />
 
+> **Note:** When using multiple consecutive `on-page` contained lists,
+> `$spacing-05` can be added to maintain proper spacing between 2 consecutive
+> on-page lists:
+>
+> ```css
+> cds-contained-list[kind='on-page'] + cds-contained-list[kind='on-page'] {
+>   margin-block-start: 1rem;
+> }
+> ```
+
 ## Search
 
 ### Expandable Search
 
-Within the Contained List you can pass in a `cds-search` component with the `expandable` attribute within
-the `action` slot. The expandable search will give you the
-capability to expand and collapse the search bar within the title. However, we
-do not support passing in the expandable `cds-search` within the title action slot
-while passing in a regular `cds-search` component as a child at the same time. If this
-happens, the expandable search in the title will override any other `cds-search`
-passed in as a child. To prevent this potential conflict, we have added
-functionality to support both designs and both use cases. Please see
-[Persistent Search](#persistent-search) docs below.
+Within the Contained List you can pass in a `cds-search` component with the
+`expandable` attribute within the `action` slot. The expandable search will give
+you the capability to expand and collapse the search bar within the title.
+However, we do not support passing in the expandable `cds-search` within the
+title action slot while passing in a regular `cds-search` component as a child
+at the same time. If this happens, the expandable search in the title will
+override any other `cds-search` passed in as a child. To prevent this potential
+conflict, we have added functionality to support both designs and both use
+cases. Please see [Persistent Search](#persistent-search) docs below.
 
 <Canvas of={ContainedListStories.WithExpandableSearch} />
 
 ### Persistent Search
 
-We have added in the capability to pass down the `cds-search` component as a child
-of `cds-contained-list`. The `cds-search` component itself is not a slot but does render
-with specific styling such that the search bar appears below the Contained
-List title as opposed to rendering inline. If you would like the Search to
-render inline to the Contained List title, please see the
-[Expandable Search](#expandable-search) docs above. The `cds-search` component will
-also remain persistent under the title, so that it remains visible on scroll,
-when there are many list items passed in.
+We have added in the capability to pass down the `cds-search` component as a
+child of `cds-contained-list`. The `cds-search` component itself is not a slot
+but does render with specific styling such that the search bar appears below the
+Contained List title as opposed to rendering inline. If you would like the
+Search to render inline to the Contained List title, please see the
+[Expandable Search](#expandable-search) docs above. The `cds-search` component
+will also remain persistent under the title, so that it remains visible on
+scroll, when there are many list items passed in.
 
 <Canvas of={ContainedListStories.WithPersistentSearch} />
 

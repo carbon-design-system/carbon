@@ -201,6 +201,8 @@ export const ExperimentalAutoAlign = (args) => (
     <ComboBox
       onChange={() => {}}
       id="carbon-combobox"
+      invalidText="Error message goes here"
+      warnText="Warning message goes here"
       items={items}
       itemToString={(item) => (item ? item.text : '')}
       titleText="Label"
@@ -219,6 +221,8 @@ export const _WithLayer = (args) => (
     {(layer) => (
       <div style={{ width: 300 }}>
         <ComboBox
+          invalidText="Error message goes here"
+          warnText="Warning message goes here"
           onChange={() => {}}
           id={`carbon-combobox-${layer}`}
           items={items}
@@ -295,6 +299,8 @@ export const withAILabel = (args) => {
   return (
     <div style={{ width: 300 }}>
       <ComboBox
+        invalidText="Error message goes here"
+        warnText="Warning message goes here"
         onChange={action('onChange')}
         id="carbon-combobox"
         items={items}
@@ -334,6 +340,8 @@ export const Controlled = (args) => {
     <div>
       <ComboBox
         {...args}
+        invalidText="Error message goes here"
+        warnText="Warning message goes here"
         onChange={onChange}
         id="carbon-combobox"
         items={options}

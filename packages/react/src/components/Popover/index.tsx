@@ -16,6 +16,7 @@ import React, {
   type ElementType,
 } from 'react';
 import useIsomorphicEffect from '../../internal/useIsomorphicEffect';
+import { isComponentElement } from '../../internal';
 import { useMergedRefs } from '../../internal/useMergedRefs';
 import { usePrefix } from '../../internal/usePrefix';
 import { useWindowEvent, useEvent } from '../../internal/useEvent';
@@ -200,6 +201,30 @@ export const Popover: PopoverComponent & {
     useFeatureFlag('enable-v12-dynamic-floating-styles') || autoAlign;
   const lastClickWasInsidePopoverContent = useRef(false);
 
+  const isTargetInDatePickerInsidePopover = (target: Node) => {
+    if (!popover.current) return false;
+    // TODO: Revisit this DatePicker/Popover integration to avoid relying on
+    // Flatpickr internals (`_flatpickr`) and DOM traversal (`closest`) if we
+    // can introduce a more stable shared marker or ref between the components.
+    const calendar =
+      target instanceof Element && target.closest('.flatpickr-calendar');
+    if (!calendar) return false;
+    const inputs = popover.current.querySelectorAll('input');
+    for (const input of inputs) {
+      if (!('_flatpickr' in input)) continue;
+      const fp = input._flatpickr;
+      if (
+        fp &&
+        typeof fp === 'object' &&
+        'calendarContainer' in fp &&
+        fp.calendarContainer === calendar
+      ) {
+        return true;
+      }
+    }
+    return false;
+  };
+
   let align = mapPopoverAlign(initialAlign);
 
   // Tracks clicks inside PopoverContent to prevent it from closing when clicked, this handles an edge
@@ -230,6 +255,10 @@ export const Popover: PopoverComponent & {
 
       onRequestClose?.();
     } else if (relatedTarget && !popover.current?.contains(relatedTarget)) {
+      if (isTargetInDatePickerInsidePopover(relatedTarget)) {
+        return;
+      }
+
       const isOutsideFloating =
         enableFloatingStyles && refs.floating.current
           ? !refs.floating.current.contains(relatedTarget)
@@ -248,7 +277,12 @@ export const Popover: PopoverComponent & {
   });
 
   useWindowEvent('click', ({ target }) => {
-    if (open && target instanceof Node && !popover.current?.contains(target)) {
+    if (
+      open &&
+      target instanceof Node &&
+      !popover.current?.contains(target) &&
+      !isTargetInDatePickerInsidePopover(target)
+    ) {
       onRequestClose?.();
     }
   });
@@ -475,7 +509,13 @@ export const Popover: PopoverComponent & {
   const mappedChildren = React.Children.map(children, (child) => {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
     const item = child as any;
-    const displayName = item?.type?.displayName;
+    // TODO: Stop relying on `displayName` checks by moving `Toggletip`
+    // subcomponents into their own files that avoid the `Popover` <->
+    // `Toggletip` circular dependency. Then replace these `displayName` checks
+    // with `isComponentElement(item, ...)` checks.
+    const isToggletipButton = item?.type?.displayName === 'ToggletipButton';
+    const isToggletipContent = item?.type?.displayName === 'ToggletipContent';
+    const isPopoverContent = isComponentElement(item, PopoverContent);
 
     /**
      * Only trigger elements (button) or trigger components (ToggletipButton) should be
@@ -485,13 +525,9 @@ export const Popover: PopoverComponent & {
      * is on, even if they are a trigger element.
      */
     const isTriggerElement = item?.type === 'button';
-    const isTriggerComponent =
-      enableFloatingStyles &&
-      displayName &&
-      ['ToggletipButton'].includes(displayName);
+    const isTriggerComponent = enableFloatingStyles && isToggletipButton;
     const isAllowedTriggerComponent =
-      enableFloatingStyles &&
-      !['ToggletipContent', 'PopoverContent'].includes(displayName);
+      enableFloatingStyles && !isToggletipContent && !isPopoverContent;
 
     if (
       React.isValidElement(item) &&
@@ -523,11 +559,7 @@ export const Popover: PopoverComponent & {
           // For a toggletip there is a specific trigger component, ToggletipButton.
           // In either of these cases we want to set this as the reference node for floating-ui autoAlign
           // positioning.
-          if (
-            (enableFloatingStyles && item?.type !== PopoverContent) ||
-            (enableFloatingStyles &&
-              item?.type['displayName'] === 'ToggletipButton')
-          ) {
+          if (enableFloatingStyles && !isPopoverContent) {
             // Set the reference element for floating-ui
             refs.setReference(node);
           }

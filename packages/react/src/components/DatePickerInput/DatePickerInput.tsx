@@ -243,6 +243,15 @@ const DatePickerInput = frFn((props, ref) => {
     ? undefined
     : `datepicker-input-helper-text-${datePickerInputInstanceId}`;
 
+  let ariaDescribedBy: string | undefined;
+  if (normalizedProps.invalid) {
+    ariaDescribedBy = normalizedProps.invalidId;
+  } else if (normalizedProps.warn) {
+    ariaDescribedBy = normalizedProps.warnId;
+  } else {
+    ariaDescribedBy = helperText ? datePickerInputHelperId : undefined;
+  }
+
   // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
   const inputProps: any = {
     ...rest,
@@ -250,10 +259,11 @@ const DatePickerInput = frFn((props, ref) => {
     className: inputClasses,
     disabled: normalizedProps.disabled,
     ref,
-    ['aria-describedby']: helperText ? datePickerInputHelperId : undefined,
+    ['aria-describedby']: ariaDescribedBy,
   };
   if (normalizedProps.invalid) {
     inputProps['data-invalid'] = true;
+    inputProps['aria-invalid'] = true;
   }
   const input = <input {...inputProps} />;
 

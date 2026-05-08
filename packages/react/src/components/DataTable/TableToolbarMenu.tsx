@@ -37,7 +37,6 @@ const TableToolbarMenu = ({
     <OverflowMenu
       renderIcon={renderIcon}
       className={toolbarActionClasses}
-      title={iconDescription}
       iconDescription={iconDescription}
       menuOptionsClass={menuOptionsClasses}
       flipped

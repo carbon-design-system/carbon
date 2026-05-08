@@ -175,6 +175,24 @@ See
 [How to write the perfect pull request](https://github.com/blog/1943-how-to-write-the-perfect-pull-request)
 for tips on writing a good PR description.
 
+Before a PR is merged, make sure the required reviews are complete:
+
+- If your PR changes anything visual (layout, styles, components, or user
+  interaction), it requires design review.
+  - Assign a designer reviewer.
+  - Add the
+    https://github.com/carbon-design-system/carbon/labels/status%3A%20visual%20review%20%F0%9F%94%8D
+    label.
+  - After design approval, remove the
+    https://github.com/carbon-design-system/carbon/labels/status%3A%20visual%20review%20%F0%9F%94%8D
+    label (preferably by the designer; developers can remove it after approval).
+- If your PR does not require design review, it needs 2 developer approvals.
+- If your PR requires design review, it needs 2 developer approvals and 1 design
+  approval.
+- After all required approvals are in place, add `status: ready to merge`.
+- Do not use **Enable auto-merge** or **Merge when ready** when the button turns
+  green unless all required approvals are complete.
+
 #### Sign the DCO
 
 All contributors must sign our

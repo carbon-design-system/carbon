@@ -217,6 +217,8 @@ describe('@carbon/styles/scss/theme', () => {
         "syntax-standard",
         "syntax-local",
         "syntax-special",
+        "syntax-inserted",
+        "syntax-deleted",
         "ai-popover-background",
         "ai-popover-shadow-outer-01",
         "ai-popover-shadow-outer-02",

@@ -89,19 +89,28 @@ export const Default = (args) => (
               <TableBatchAction
                 tabIndex={batchActionProps.shouldShowBatchActions ? 0 : -1}
                 renderIcon={TrashCan}
-                onClick={batchActionClick(selectedRows)}>
+                onClick={batchActionClick(
+                  selectedRows,
+                  action('Batch action click')
+                )}>
                 Delete
               </TableBatchAction>
               <TableBatchAction
                 tabIndex={batchActionProps.shouldShowBatchActions ? 0 : -1}
                 renderIcon={Save}
-                onClick={batchActionClick(selectedRows)}>
+                onClick={batchActionClick(
+                  selectedRows,
+                  action('Batch action click')
+                )}>
                 Save
               </TableBatchAction>
               <TableBatchAction
                 tabIndex={batchActionProps.shouldShowBatchActions ? 0 : -1}
                 renderIcon={Download}
-                onClick={batchActionClick(selectedRows)}>
+                onClick={batchActionClick(
+                  selectedRows,
+                  action('Batch action click')
+                )}>
                 Download
               </TableBatchAction>
             </TableBatchActions>

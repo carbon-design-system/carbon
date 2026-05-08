@@ -11,8 +11,7 @@ import { iconLoader } from '../../globals/internal/icon-loader';
 import TableOfContents16 from '@carbon/icons/es/table-of-contents/16.js';
 import Workspace16 from '@carbon/icons/es/workspace/16.js';
 import ViewMode2_16 from '@carbon/icons/es/view--mode-2/16.js';
-import '../layer/index';
-import '../../../.storybook/templates/with-layer';
+import { withLayers } from '../../../.storybook/decorators/with-layers';
 
 import { CONTENT_SWITCHER_SIZE } from './content-switcher';
 import { html } from 'lit';
@@ -168,6 +167,10 @@ export const IconOnly = {
 export const IconOnlyWithLayer = {
   args,
   argTypes,
+  decorators: [withLayers],
+  parameters: {
+    layout: 'fullscreen',
+  },
   render: ({
     onBeforeSelect,
     onChange,
@@ -177,42 +180,40 @@ export const IconOnlyWithLayer = {
     lowContrast,
     disabled,
   }) => html`
-    <sb-template-layers>
-      <cds-content-switcher
-        size="${size}"
-        selection-mode="${selectionMode}"
-        selected-index="${selectedIndex}"
-        ?low-contrast="${lowContrast}"
-        @cds-content-switcher-beingselected="${forwardEventDetail(
-          onBeforeSelect
-        )}"
-        @cds-content-switcher-selected="${forwardEventDetail(onChange)}">
-        <cds-content-switcher-item
-          icon
-          value="all"
-          ?disabled="${disabled}"
-          ?low-contrast="${lowContrast}">
-          ${iconLoader(TableOfContents16)}
-          <span slot="tooltip-content">Table of Contents</span>
-        </cds-content-switcher-item>
-        <cds-content-switcher-item
-          icon
-          value="cloudFoundry"
-          ?disabled="${disabled}"
-          ?low-contrast="${lowContrast}">
-          ${iconLoader(Workspace16)}
-          <span slot="tooltip-content">Workspace Test</span>
-        </cds-content-switcher-item>
-        <cds-content-switcher-item
-          icon
-          value="staging"
-          ?disabled="${disabled}"
-          ?low-contrast="${lowContrast}">
-          ${iconLoader(ViewMode2_16)}
-          <span slot="tooltip-content">View Mode</span>
-        </cds-content-switcher-item>
-      </cds-content-switcher>
-    </sb-template-layers>
+    <cds-content-switcher
+      size="${size}"
+      selection-mode="${selectionMode}"
+      selected-index="${selectedIndex}"
+      ?low-contrast="${lowContrast}"
+      @cds-content-switcher-beingselected="${forwardEventDetail(
+        onBeforeSelect
+      )}"
+      @cds-content-switcher-selected="${forwardEventDetail(onChange)}">
+      <cds-content-switcher-item
+        icon
+        value="all"
+        ?disabled="${disabled}"
+        ?low-contrast="${lowContrast}">
+        ${iconLoader(TableOfContents16)}
+        <span slot="tooltip-content">Table of Contents</span>
+      </cds-content-switcher-item>
+      <cds-content-switcher-item
+        icon
+        value="cloudFoundry"
+        ?disabled="${disabled}"
+        ?low-contrast="${lowContrast}">
+        ${iconLoader(Workspace16)}
+        <span slot="tooltip-content">Workspace Test</span>
+      </cds-content-switcher-item>
+      <cds-content-switcher-item
+        icon
+        value="staging"
+        ?disabled="${disabled}"
+        ?low-contrast="${lowContrast}">
+        ${iconLoader(ViewMode2_16)}
+        <span slot="tooltip-content">View Mode</span>
+      </cds-content-switcher-item>
+    </cds-content-switcher>
   `,
 };
 
@@ -322,6 +323,10 @@ export const lowContrastIconOnly = {
 export const WithLayer = {
   args,
   argTypes,
+  decorators: [withLayers],
+  parameters: {
+    layout: 'fullscreen',
+  },
   render: ({
     onBeforeSelect,
     onChange,
@@ -331,39 +336,37 @@ export const WithLayer = {
     lowContrast,
     disabled,
   }) => html`
-    <sb-template-layers>
-      <cds-content-switcher
-        size="${size}"
-        selection-mode="${selectionMode}"
-        selected-index="${selectedIndex}"
+    <cds-content-switcher
+      size="${size}"
+      selection-mode="${selectionMode}"
+      selected-index="${selectedIndex}"
+      ?low-contrast="${lowContrast}"
+      @cds-content-switcher-beingselected="${forwardEventDetail(
+        onBeforeSelect
+      )}"
+      @cds-content-switcher-selected="${forwardEventDetail(onChange)}">
+      <cds-content-switcher-item
+        ?disabled="${disabled}"
         ?low-contrast="${lowContrast}"
-        @cds-content-switcher-beingselected="${forwardEventDetail(
-          onBeforeSelect
-        )}"
-        @cds-content-switcher-selected="${forwardEventDetail(onChange)}">
-        <cds-content-switcher-item
-          ?disabled="${disabled}"
-          ?low-contrast="${lowContrast}"
-          value="all"
-          name="one">
-          First section
-        </cds-content-switcher-item>
-        <cds-content-switcher-item
-          ?disabled="${disabled}"
-          ?low-contrast="${lowContrast}"
-          value="cloudFoundry"
-          name="two">
-          Second section
-        </cds-content-switcher-item>
-        <cds-content-switcher-item
-          ?disabled="${disabled}"
-          ?low-contrast="${lowContrast}"
-          value="staging"
-          name="three">
-          Third section
-        </cds-content-switcher-item>
-      </cds-content-switcher>
-    </sb-template-layers>
+        value="all"
+        name="one">
+        First section
+      </cds-content-switcher-item>
+      <cds-content-switcher-item
+        ?disabled="${disabled}"
+        ?low-contrast="${lowContrast}"
+        value="cloudFoundry"
+        name="two">
+        Second section
+      </cds-content-switcher-item>
+      <cds-content-switcher-item
+        ?disabled="${disabled}"
+        ?low-contrast="${lowContrast}"
+        value="staging"
+        name="three">
+        Third section
+      </cds-content-switcher-item>
+    </cds-content-switcher>
   `,
 };
 

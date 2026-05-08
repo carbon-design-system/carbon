@@ -19,7 +19,7 @@ import '../link';
 import { iconLoader } from '../../globals/internal/icon-loader';
 import storyDocs from './tile.mdx';
 import styles from './tile-story.scss?lit';
-import '../../../.storybook/templates/with-layer';
+import { withLayers } from '../../../.storybook/decorators/with-layers';
 
 const content = html`
   <div slot="body-text">
@@ -75,15 +75,17 @@ export const Default = {
 };
 
 export const DefaultWithLayer = {
+  decorators: [withLayers],
+  parameters: {
+    layout: 'fullscreen',
+  },
   render: () => html`
-    <sb-template-layers>
-      <cds-tile>
-        Default layer
-        <br />
-        <br />
-        <cds-link href="https://carbondesignsystem.com">Link</cds-link>
-      </cds-tile>
-    </sb-template-layers>
+    <cds-tile>
+      Default layer
+      <br />
+      <br />
+      <cds-link href="https://carbondesignsystem.com">Link</cds-link>
+    </cds-tile>
   `,
 };
 
@@ -110,12 +112,14 @@ export const clickableWithCustomIcon = {
 };
 
 export const ClickableWithLayer = {
+  decorators: [withLayers],
+  parameters: {
+    layout: 'fullscreen',
+  },
   render: () => html`
-    <sb-template-layers>
-      <cds-clickable-tile href="https://www.carbondesignsystem.com/">
-        Clickable tile
-      </cds-clickable-tile>
-    </sb-template-layers>
+    <cds-clickable-tile href="https://www.carbondesignsystem.com/">
+      Clickable tile
+    </cds-clickable-tile>
   `,
 };
 
@@ -181,6 +185,10 @@ export const ExpandableWithInteractive = {
 };
 
 export const ExpandableWithLayer = {
+  decorators: [withLayers],
+  parameters: {
+    layout: 'fullscreen',
+  },
   render: ({ expanded, disableChange, onBeforeChange, onChange }) => {
     const handleBeforeChanged = (event: CustomEvent) => {
       onBeforeChange(event);
@@ -189,22 +197,20 @@ export const ExpandableWithLayer = {
       }
     };
     return html`
-      <sb-template-layers>
-        <cds-expandable-tile
-          style="width:400px"
-          ?expanded="${expanded}"
-          @cds-expandable-tile-beingchanged=${handleBeforeChanged}
-          @cds-expandable-tile-changed=${onChange}>
-          <cds-tile-above-the-fold-content
-            slot="above-the-fold-content"
-            style="height: 100px">
-            Above the fold content here
-          </cds-tile-above-the-fold-content>
-          <cds-tile-below-the-fold-content style="height: 200px">
-            Below the fold content here
-          </cds-tile-below-the-fold-content>
-        </cds-expandable-tile>
-      </sb-template-layers>
+      <cds-expandable-tile
+        style="width:400px"
+        ?expanded="${expanded}"
+        @cds-expandable-tile-beingchanged=${handleBeforeChanged}
+        @cds-expandable-tile-changed=${onChange}>
+        <cds-tile-above-the-fold-content
+          slot="above-the-fold-content"
+          style="height: 100px">
+          Above the fold content here
+        </cds-tile-above-the-fold-content>
+        <cds-tile-below-the-fold-content style="height: 200px">
+          Below the fold content here
+        </cds-tile-below-the-fold-content>
+      </cds-expandable-tile>
     `;
   },
 };
@@ -286,14 +292,16 @@ export const Radio = {
 };
 
 export const RadioWithLayer = {
+  decorators: [withLayers],
+  parameters: {
+    layout: 'fullscreen',
+  },
   render: () => html`
-    <sb-template-layers>
-      <cds-tile-group>
-        <legend slot="legend">Radio tile group</legend>
-        <cds-radio-tile name="options"> Option 1 </cds-radio-tile>
-        <cds-radio-tile name="options" selected> Option 2 </cds-radio-tile>
-      </cds-tile-group>
-    </sb-template-layers>
+    <cds-tile-group>
+      <legend slot="legend">Radio tile group</legend>
+      <cds-radio-tile name="options"> Option 1 </cds-radio-tile>
+      <cds-radio-tile name="options" selected> Option 2 </cds-radio-tile>
+    </cds-tile-group>
   `,
 };
 
