@@ -405,10 +405,12 @@ class CDSButton extends HostListenerMixin(FocusMixin(LitElement)) {
             type="${ifDefined(type)}"
             aria-label="${ifDefined(tooltipText)}"
             aria-describedby="${ifDefined(
-              hasDangerDescription ? 'badge-indicator' : undefined
+              hasDangerDescription ? 'danger-description' : undefined
             )}">
             ${hasDangerDescription
-              ? html`<span class="${prefix}--visually-hidden"
+              ? html`<span
+                  id="danger-description"
+                  class="${prefix}--visually-hidden"
                   >${dangerDescription}</span
                 >`
               : ``}

@@ -112,9 +112,12 @@ describe('cds-button', () => {
     const el = await fixture(html`
       <cds-button kind="danger" danger-description="gefahr">test</cds-button>
     `);
+    const button = el.shadowRoot?.querySelector('button');
     const hiddenText = el.shadowRoot?.querySelector('.cds--visually-hidden');
 
+    expect(button).to.have.attribute('aria-describedby', 'danger-description');
     expect(hiddenText).to.exist;
+    expect(hiddenText).to.have.attribute('id', 'danger-description');
     expect(hiddenText?.textContent).to.equal('gefahr');
   });
   describe('supports props.size', () => {
