@@ -38,6 +38,10 @@
 
 ### 1. Initial Review
 
+> [!IMPORTANT] Pull requests must use and fill out the pull request
+>
+> [template](https://github.com/carbon-design-system/carbon/blob/main/.github/PULL_REQUEST_TEMPLATE.md).
+
 - **PR Body & Issue Context:**
   - Read the PR description to understand the overall scope.
   - Review the related issue (or design spec) to grasp the root problem and

@@ -190,6 +190,12 @@ export const MenuItem = forwardRef<HTMLLIElement, MenuItemProps>(
     const keyboardClickEvent = (e: KeyboardEvent) =>
       match(e, keys.Enter) || match(e, keys.Space);
 
+    function handleMouseDown(e: MouseEvent<HTMLLIElement>) {
+      if (isDisabled) {
+        e.preventDefault();
+      }
+    }
+
     function handleKeyDown(e: KeyboardEvent<HTMLLIElement>) {
       if (hasChildren && match(e, keys.ArrowRight)) {
         openSubmenu();
@@ -268,6 +274,7 @@ export const MenuItem = forwardRef<HTMLLIElement, MenuItemProps>(
           aria-disabled={isDisabled ?? undefined}
           aria-haspopup={hasChildren ?? undefined}
           aria-expanded={hasChildren ? submenuOpen : undefined}
+          onMouseDown={handleMouseDown}
           onClick={handleClick}
           onKeyDown={handleKeyDown}
           onKeyUp={handleKeyUp}

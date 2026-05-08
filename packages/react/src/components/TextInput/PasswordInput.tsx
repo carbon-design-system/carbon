@@ -140,9 +140,9 @@ export interface PasswordInputProps
   showPasswordLabel?: string;
 
   /**
-   * Specify the size of the Text Input. Supports `sm`, `md`, or `lg`.
+   * Specify the size of the Text Input. Supports `xs`, `sm`, `md`, or `lg`.
    */
-  size?: 'sm' | 'md' | 'lg';
+  size?: 'xs' | 'sm' | 'md' | 'lg';
 
   /**
    * Specify the alignment of the tooltip to the icon-only button.
@@ -196,7 +196,7 @@ const PasswordInput = forwardRef<unknown, PasswordInputProps>(
       onTogglePasswordVisibility,
       placeholder,
       readOnly,
-      size = 'md',
+      size,
       showPasswordLabel = 'Show password',
       tooltipPosition = 'bottom',
       tooltipAlignment = 'end',
@@ -234,7 +234,6 @@ const PasswordInput = forwardRef<unknown, PasswordInputProps>(
         [`${prefix}--text-input--invalid`]: normalizedProps.invalid,
         [`${prefix}--text-input--warning`]: normalizedProps.warn,
         [`${prefix}--text-input--${size}`]: size, // TODO: V12 - Remove this class
-        [`${prefix}--layout--size-${size}`]: size,
       }
     );
     const sharedTextInputProps = {
@@ -289,6 +288,7 @@ const PasswordInput = forwardRef<unknown, PasswordInputProps>(
       `${prefix}--text-input__field-wrapper`,
       {
         [`${prefix}--text-input__field-wrapper--warning`]: normalizedProps.warn,
+        [`${prefix}--layout--size-${size}`]: size,
       }
     );
     const iconClasses = classNames({
@@ -529,9 +529,9 @@ PasswordInput.propTypes = {
   showPasswordLabel: PropTypes.string,
 
   /**
-   * Specify the size of the Text Input. Supports `sm`, `md`, or `lg`.
+   * Specify the size of the Text Input. Supports `xs`, `sm`, `md`, or `lg`.
    */
-  size: PropTypes.oneOf(['sm', 'md', 'lg']),
+  size: PropTypes.oneOf(['xs', 'sm', 'md', 'lg']),
 
   /**
    * Specify the alignment of the tooltip to the icon-only button.
