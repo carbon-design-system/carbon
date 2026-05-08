@@ -7,7 +7,7 @@
 
 import React from 'react';
 
-import { WithLayer } from '../../../.storybook/templates/WithLayer';
+import { withLayers } from '../../../.storybook/decorators/withLayers';
 
 import { default as CodeSnippet, CodeSnippetSkeleton } from '.';
 import mdx from './CodeSnippet.mdx';
@@ -81,21 +81,26 @@ export const Singleline = (args) => {
   );
 };
 
-export const InlineWithLayer = (args) => {
-  return (
-    <WithLayer>
-      <CodeSnippet type="inline" feedback="Copied to clipboard" {...args}>
-        {'node -v'}
-      </CodeSnippet>
-    </WithLayer>
-  );
+export const InlineWithLayer = {
+  decorators: [withLayers],
+  parameters: {
+    layout: 'fullscreen',
+  },
+  render: (args) => (
+    <CodeSnippet type="inline" feedback="Copied to clipboard" {...args}>
+      {'node -v'}
+    </CodeSnippet>
+  ),
 };
 
-export const MultilineWithLayer = (args) => {
-  return (
-    <WithLayer>
-      <CodeSnippet type="multi" feedback="Copied to clipboard" {...args}>
-        {`  "scripts": {
+export const MultilineWithLayer = {
+  decorators: [withLayers],
+  parameters: {
+    layout: 'fullscreen',
+  },
+  render: (args) => (
+    <CodeSnippet type="multi" feedback="Copied to clipboard" {...args}>
+      {`  "scripts": {
       "build": "lerna run build --stream --prefix --npm-client yarn",
       "ci-check": "carbon-cli ci-check",
       "clean": "lerna run clean && lerna clean --yes && rimraf node_modules",
@@ -123,20 +128,21 @@ export const MultilineWithLayer = (args) => {
         "@babel/preset-react": "^7.10.0",
         "@babel/runtime": "^7.10.0",
         "@commitlint/cli": "^8.3.5",`}
-      </CodeSnippet>
-    </WithLayer>
-  );
+    </CodeSnippet>
+  ),
 };
 
-export const SinglelineWithLayer = (args) => {
-  return (
-    <WithLayer>
-      <CodeSnippet type="single" feedback="Copied to clipboard" {...args}>
-        yarn add carbon-components@latest carbon-components-react@latest
-        @carbon/icons-react@latest carbon-icons@latest
-      </CodeSnippet>
-    </WithLayer>
-  );
+export const SinglelineWithLayer = {
+  decorators: [withLayers],
+  parameters: {
+    layout: 'fullscreen',
+  },
+  render: (args) => (
+    <CodeSnippet type="single" feedback="Copied to clipboard" {...args}>
+      yarn add carbon-components@latest carbon-components-react@latest
+      @carbon/icons-react@latest carbon-icons@latest
+    </CodeSnippet>
+  ),
 };
 
 export const Skeleton = () => {

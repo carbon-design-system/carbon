@@ -6,7 +6,7 @@
  */
 
 import React from 'react';
-import { WithLayer } from '../../../.storybook/templates/WithLayer';
+import { withLayers } from '../../../.storybook/decorators/withLayers';
 import FluidForm from '../FluidForm';
 import { View, FolderOpen, Folders, Information } from '@carbon/icons-react';
 import Button from '../Button';
@@ -246,18 +246,19 @@ ReadOnly.parameters = {
   },
 };
 
-export const _WithLayer = (args) => {
-  const { defaultWidth, ...textInputArgs } = args;
-
-  return (
-    <WithLayer>
-      {(layer) => (
-        <div style={{ width: defaultWidth }}>
-          <TextInput {...textInputArgs} id={`text-input-${layer}`} />
-        </div>
-      )}
-    </WithLayer>
-  );
+export const _WithLayer = {
+  decorators: [withLayers],
+  parameters: {
+    layout: 'fullscreen',
+  },
+  render: (args) => {
+    const { defaultWidth, ...textInputArgs } = args;
+    return (
+      <div style={{ width: defaultWidth }}>
+        <TextInput {...textInputArgs} id="text-input" />
+      </div>
+    );
+  },
 };
 
 export const withAILabel = (args) => {

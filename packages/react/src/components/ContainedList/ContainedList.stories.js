@@ -17,7 +17,7 @@ import {
   Wheat,
 } from '@carbon/icons-react';
 
-import { WithLayer } from '../../../.storybook/templates/WithLayer';
+import { withLayers } from '../../../.storybook/decorators/withLayers';
 
 import Button from '../Button';
 import Search from '../Search';
@@ -267,15 +267,17 @@ export const WithIcons = () => {
   );
 };
 
-export const _WithLayer = () => {
-  return (
-    <WithLayer>
-      <ContainedList label="List title" kind="on-page">
-        <ContainedListItem>List item</ContainedListItem>
-        <ContainedListItem>List item</ContainedListItem>
-      </ContainedList>
-    </WithLayer>
-  );
+export const _WithLayer = {
+  decorators: [withLayers],
+  parameters: {
+    layout: 'fullscreen',
+  },
+  render: () => (
+    <ContainedList label="List title" kind="on-page">
+      <ContainedListItem>List item</ContainedListItem>
+      <ContainedListItem>List item</ContainedListItem>
+    </ContainedList>
+  ),
 };
 
 export const UsageExamples = () => {

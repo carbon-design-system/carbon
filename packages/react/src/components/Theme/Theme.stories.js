@@ -8,7 +8,7 @@
 import './Theme-story.scss';
 import React, { useEffect } from 'react';
 
-import { WithLayer } from '../../../.storybook/templates/WithLayer';
+import { withLayers } from '../../../.storybook/decorators/withLayers';
 import { VStack } from '../Stack';
 
 import { GlobalTheme, Theme, usePrefersDarkScheme, useTheme } from '../Theme';
@@ -127,21 +127,10 @@ export const UsePrefersDarkScheme = () => {
 };
 UsePrefersDarkScheme.storyName = 'usePrefersDarkScheme';
 
-export const _WithLayer = () => {
-  const themes = ['white', 'g10', 'g90', 'g100'];
-
-  return (
-    <VStack gap={7}>
-      {themes.map((theme) => (
-        <Theme key={theme} theme={theme}>
-          <article className="theme-layer-example">
-            <header className="theme-layer-header">{theme} theme</header>
-            <WithLayer>
-              <div className="theme-with-layer">Content</div>
-            </WithLayer>
-          </article>
-        </Theme>
-      ))}
-    </VStack>
-  );
+export const _WithLayer = {
+  decorators: [withLayers],
+  parameters: {
+    layout: 'fullscreen',
+  },
+  render: () => <div className="theme-with-layer">Content</div>,
 };

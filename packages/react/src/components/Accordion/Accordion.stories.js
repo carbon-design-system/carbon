@@ -14,7 +14,7 @@ import { default as Accordion, AccordionItem, AccordionSkeleton } from '.';
 import Button from '../Button';
 import ButtonSet from '../ButtonSet';
 import mdx from './Accordion.mdx';
-import { WithLayer } from '../../../.storybook/templates/WithLayer';
+import { withLayers } from '../../../.storybook/decorators/withLayers';
 
 export default {
   title: 'Components/Accordion',
@@ -195,11 +195,16 @@ Controlled.args = { ...sharedArgs };
 
 Controlled.argTypes = { ...sharedArgTypes };
 
-export const _WithLayer = (args) => {
-  const { onHeadingClick, ...restArgs } = args;
-
-  return (
-    <WithLayer>
+export const _WithLayer = {
+  decorators: [withLayers],
+  parameters: {
+    layout: 'fullscreen',
+  },
+  args: { ...sharedArgs },
+  argTypes: { ...sharedArgTypes },
+  render: (args) => {
+    const { onHeadingClick, ...restArgs } = args;
+    return (
       <Accordion {...restArgs}>
         <AccordionItem title="Choose your plan" onHeadingClick={onHeadingClick}>
           <p>
@@ -230,13 +235,9 @@ export const _WithLayer = (args) => {
           </p>
         </AccordionItem>
       </Accordion>
-    </WithLayer>
-  );
+    );
+  },
 };
-
-_WithLayer.args = { ...sharedArgs };
-
-_WithLayer.argTypes = { ...sharedArgTypes };
 
 export const Skeleton = (args) => (
   <AccordionSkeleton open count={4} {...args} />

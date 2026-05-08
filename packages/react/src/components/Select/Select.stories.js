@@ -7,7 +7,7 @@
 
 import React from 'react';
 
-import { WithLayer } from '../../../.storybook/templates/WithLayer';
+import { withLayers } from '../../../.storybook/decorators/withLayers';
 import { default as Select, SelectSkeleton } from '../Select';
 import SelectItem from '../SelectItem';
 import SelectItemGroup from '../SelectItemGroup';
@@ -79,29 +79,30 @@ export const Skeleton = () => {
   return <SelectSkeleton />;
 };
 
-export const _WithLayer = (args) => (
-  <WithLayer>
-    {(layer) => (
-      <Select
-        id={`select-${layer}`}
-        labelText=""
-        helperText="Optional helper text"
-        {...args}>
-        <SelectItem value="" text="" />
-        <SelectItem
-          value="An example option that is really long to show what should be done to handle long text"
-          text="An example option that is really long to show what should be done to handle long text"
-        />
-        <SelectItem value="option-2" text="Option 2" />
-      </Select>
-    )}
-  </WithLayer>
-);
-
-_WithLayer.argTypes = {
-  inline: {
-    control: false,
+export const _WithLayer = {
+  decorators: [withLayers],
+  parameters: {
+    layout: 'fullscreen',
   },
+  argTypes: {
+    inline: {
+      control: false,
+    },
+  },
+  render: (args) => (
+    <Select
+      id="select"
+      labelText=""
+      helperText="Optional helper text"
+      {...args}>
+      <SelectItem value="" text="" />
+      <SelectItem
+        value="An example option that is really long to show what should be done to handle long text"
+        text="An example option that is really long to show what should be done to handle long text"
+      />
+      <SelectItem value="option-2" text="Option 2" />
+    </Select>
+  ),
 };
 
 export const withAILabel = (args) => {

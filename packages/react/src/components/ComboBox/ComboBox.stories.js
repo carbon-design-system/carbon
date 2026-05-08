@@ -6,7 +6,7 @@
  */
 
 import React from 'react';
-import { WithLayer } from '../../../.storybook/templates/WithLayer';
+import { withLayers } from '../../../.storybook/decorators/withLayers';
 import ComboBox from '../ComboBox';
 import Button from '../Button';
 import { AILabel, AILabelContent, AILabelActions } from '../AILabel';
@@ -216,27 +216,28 @@ export const ExperimentalAutoAlign = (args) => (
 
 ExperimentalAutoAlign.argTypes = { ...sharedArgTypes };
 
-export const _WithLayer = (args) => (
-  <WithLayer>
-    {(layer) => (
-      <div style={{ width: 300 }}>
-        <ComboBox
-          invalidText="Error message goes here"
-          warnText="Warning message goes here"
-          onChange={() => {}}
-          id={`carbon-combobox-${layer}`}
-          items={items}
-          itemToString={(item) => (item ? item.text : '')}
-          titleText="Label"
-          helperText="Helper text"
-          {...args}
-        />
-      </div>
-    )}
-  </WithLayer>
-);
-
-_WithLayer.argTypes = { ...sharedArgTypes };
+export const _WithLayer = {
+  decorators: [withLayers],
+  parameters: {
+    layout: 'fullscreen',
+  },
+  argTypes: { ...sharedArgTypes },
+  render: (args) => (
+    <div style={{ width: 300 }}>
+      <ComboBox
+        invalidText="Error message goes here"
+        warnText="Warning message goes here"
+        onChange={() => {}}
+        id="carbon-combobox"
+        items={items}
+        itemToString={(item) => (item ? item.text : '')}
+        titleText="Label"
+        helperText="Helper text"
+        {...args}
+      />
+    </div>
+  ),
+};
 
 export const withAILabel = (args) => {
   const aiLabel = (

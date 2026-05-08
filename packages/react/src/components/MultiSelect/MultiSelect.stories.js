@@ -8,7 +8,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { View, FolderOpen, Folders, Information } from '@carbon/icons-react';
 import { action } from 'storybook/actions';
-import { WithLayer } from '../../../.storybook/templates/WithLayer';
+import { withLayers } from '../../../.storybook/decorators/withLayers';
 import mdx from './MultiSelect.mdx';
 
 import { FilterableMultiSelect, MultiSelect } from '.';
@@ -394,44 +394,48 @@ Filterable.parameters = {
   },
 };
 
-export const WithLayerMultiSelect = (args) => (
-  <WithLayer>
-    {(layer) => (
-      <div style={{ width: 300 }}>
-        <MultiSelect
-          label="Multiselect Label"
-          id={`carbon-multiselect-example-${layer}`}
-          titleText="Multiselect title"
-          helperText="This is helper text"
-          items={items}
-          itemToString={(item) => (item ? item.text : '')}
-          selectionFeedback="top-after-reopen"
-          {...args}
-        />
-      </div>
-    )}
-  </WithLayer>
-);
-WithLayerMultiSelect.args = { ...sharedArgs };
-export const _FilterableWithLayer = (args) => (
-  <WithLayer>
-    {(layer) => (
-      <div style={{ width: 300 }}>
-        <FilterableMultiSelect
-          id={`carbon-multiselect-example-${layer}`}
-          titleText="Multiselect title"
-          helperText="This is helper text"
-          items={items}
-          itemToString={(item) => (item ? item.text : '')}
-          selectionFeedback="top-after-reopen"
-          {...args}
-        />
-      </div>
-    )}
-  </WithLayer>
-);
+export const WithLayerMultiSelect = {
+  decorators: [withLayers],
+  parameters: {
+    layout: 'fullscreen',
+  },
+  args: { ...sharedArgs },
+  render: (args) => (
+    <div style={{ width: 300 }}>
+      <MultiSelect
+        label="Multiselect Label"
+        id="carbon-multiselect-example"
+        titleText="Multiselect title"
+        helperText="This is helper text"
+        items={items}
+        itemToString={(item) => (item ? item.text : '')}
+        selectionFeedback="top-after-reopen"
+        {...args}
+      />
+    </div>
+  ),
+};
 
-_FilterableWithLayer.args = { ...sharedArgs };
+export const _FilterableWithLayer = {
+  decorators: [withLayers],
+  parameters: {
+    layout: 'fullscreen',
+  },
+  args: { ...sharedArgs },
+  render: (args) => (
+    <div style={{ width: 300 }}>
+      <FilterableMultiSelect
+        id="carbon-multiselect-example"
+        titleText="Multiselect title"
+        helperText="This is helper text"
+        items={items}
+        itemToString={(item) => (item ? item.text : '')}
+        selectionFeedback="top-after-reopen"
+        {...args}
+      />
+    </div>
+  ),
+};
 
 _FilterableWithLayer.argTypes = {
   ...filterableArgTypes,

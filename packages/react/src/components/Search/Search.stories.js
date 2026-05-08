@@ -7,7 +7,7 @@
 
 import React from 'react';
 
-import { WithLayer } from '../../../.storybook/templates/WithLayer';
+import { withLayers } from '../../../.storybook/decorators/withLayers';
 
 import ExpandableSearch from '../ExpandableSearch';
 import Search from '.';
@@ -105,27 +105,25 @@ export const Expandable = ({ defaultWidth, ...searchArgs }) => (
 );
 Expandable.parameters = { ...expandableParameters };
 
-export const _WithLayer = ({ defaultWidth, ...searchArgs }) => (
-  <WithLayer>
-    {(layer) => (
-      <div style={{ width: defaultWidth }}>
-        <Search id={`search-${layer}`} {...searchArgs} />
-      </div>
-    )}
-  </WithLayer>
-);
-_WithLayer.parameters = { ...defaultParameters };
+export const _WithLayer = {
+  decorators: [withLayers],
+  parameters: { ...defaultParameters, layout: 'fullscreen' },
+  render: ({ defaultWidth, ...searchArgs }) => (
+    <div style={{ width: defaultWidth }}>
+      <Search id="search" {...searchArgs} />
+    </div>
+  ),
+};
 
-export const ExpandableWithLayer = ({ defaultWidth, ...searchArgs }) => (
-  <WithLayer>
-    {(layer) => (
-      <div style={{ marginTop: '25px', width: defaultWidth }}>
-        <ExpandableSearch id={`search-expandable-${layer}`} {...searchArgs} />
-      </div>
-    )}
-  </WithLayer>
-);
-ExpandableWithLayer.parameters = { ...expandableParameters };
+export const ExpandableWithLayer = {
+  decorators: [withLayers],
+  parameters: { ...expandableParameters, layout: 'fullscreen' },
+  render: ({ defaultWidth, ...searchArgs }) => (
+    <div style={{ marginTop: '25px', width: defaultWidth }}>
+      <ExpandableSearch id="search-expandable" {...searchArgs} />
+    </div>
+  ),
+};
 
 export const Default = ({ defaultWidth, ...searchArgs }) => (
   <div style={{ width: defaultWidth }}>

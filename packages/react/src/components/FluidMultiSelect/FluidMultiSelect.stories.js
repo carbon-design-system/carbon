@@ -7,7 +7,7 @@
 
 import React from 'react';
 
-import { WithLayer } from '../../../.storybook/templates/WithLayer';
+import { withLayers } from '../../../.storybook/decorators/withLayers';
 import {
   FluidMultiSelect,
   FluidMultiSelectSkeleton,
@@ -184,22 +184,24 @@ export const Filterable = () => (
   </div>
 );
 
-export const _FilterableWithLayer = () => (
-  <WithLayer>
-    {(layer) => (
-      <div style={{ width: 300 }}>
-        <FluidMultiSelect
-          isFilterable
-          id={`carbon-multiselect-example-${layer}`}
-          titleText="Multiselect title"
-          items={items}
-          itemToString={(item) => (item ? item.text : '')}
-          selectionFeedback="top-after-reopen"
-        />
-      </div>
-    )}
-  </WithLayer>
-);
+export const _FilterableWithLayer = {
+  decorators: [withLayers],
+  parameters: {
+    layout: 'fullscreen',
+  },
+  render: () => (
+    <div style={{ width: 300 }}>
+      <FluidMultiSelect
+        isFilterable
+        id="carbon-multiselect-example"
+        titleText="Multiselect title"
+        items={items}
+        itemToString={(item) => (item ? item.text : '')}
+        selectionFeedback="top-after-reopen"
+      />
+    </div>
+  ),
+};
 
 export const Condensed = () => (
   <div style={{ width: '400px' }}>

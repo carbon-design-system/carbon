@@ -31,7 +31,7 @@ import {
 import { AILabel, AILabelContent, AILabelActions } from '../AILabel';
 import { IconButton } from '../IconButton';
 
-import { WithLayer } from '../../../.storybook/templates/WithLayer';
+import { withLayers } from '../../../.storybook/decorators/withLayers';
 import { WithFeatureFlags } from '../../../.storybook/templates/WithFeatureFlags';
 
 export default {
@@ -90,20 +90,20 @@ Clickable.argTypes = {
   },
 };
 
-export const ClickableWithLayer = () => {
-  return (
-    <WithLayer>
-      {(layer) => (
-        <div className={previewClassname}>
-          <ClickableTile
-            id={`clickable-tile-${layer}`}
-            href="https://www.carbondesignsystem.com/">
-            Clickable Tile
-          </ClickableTile>
-        </div>
-      )}
-    </WithLayer>
-  );
+export const ClickableWithLayer = {
+  decorators: [withLayers],
+  parameters: {
+    layout: 'fullscreen',
+  },
+  render: () => (
+    <div className={previewClassname}>
+      <ClickableTile
+        id="clickable-tile"
+        href="https://www.carbondesignsystem.com/">
+        Clickable Tile
+      </ClickableTile>
+    </div>
+  ),
 };
 
 export const Selectable = (args) => {
@@ -201,30 +201,26 @@ Radio.argTypes = {
   },
 };
 
-export const RadioWithLayer = () => {
-  return (
-    <WithLayer>
-      {(layer) => (
-        <div className={previewClassname}>
-          <TileGroup
-            legend="Radio Tile Group"
-            name={`radio-tile-group-${layer}`}>
-            <RadioTile
-              id={`radio-tile-${layer}-1`}
-              value={`radio-tile-${layer}-1`}
-              style={{ marginBottom: '.5rem' }}>
-              Option 1
-            </RadioTile>
-            <RadioTile
-              id={`radio-tile-${layer}-2`}
-              value={`radio-tile-${layer}-2`}>
-              Option 2
-            </RadioTile>
-          </TileGroup>
-        </div>
-      )}
-    </WithLayer>
-  );
+export const RadioWithLayer = {
+  decorators: [withLayers],
+  parameters: {
+    layout: 'fullscreen',
+  },
+  render: () => (
+    <div className={previewClassname}>
+      <TileGroup legend="Radio Tile Group" name="radio-tile-group">
+        <RadioTile
+          id="radio-tile-1"
+          value="radio-tile-1"
+          style={{ marginBottom: '.5rem' }}>
+          Option 1
+        </RadioTile>
+        <RadioTile id="radio-tile-2" value="radio-tile-2">
+          Option 2
+        </RadioTile>
+      </TileGroup>
+    </div>
+  ),
 };
 
 export const Expandable = () => (
@@ -267,36 +263,36 @@ export const ExpandableWithInteractive = () => (
   </div>
 );
 
-export const ExpandableWithLayer = () => {
-  return (
-    <WithLayer>
-      {(layer) => (
-        <div style={{ width: '400px' }} className={previewClassname}>
-          <ExpandableTile
-            id={`expandable-tile-${layer}`}
-            tileCollapsedIconText="Interact to Expand tile"
-            tileExpandedIconText="Interact to Collapse tile">
-            <TileAboveTheFoldContent>
-              <div style={{ height: '100px', width: '200px' }}>
-                Above the fold content here
-              </div>
-            </TileAboveTheFoldContent>
-            <TileBelowTheFoldContent>
-              <div style={{ height: '200px', width: '200px' }}>
-                Below the fold content here
-                <Layer>
-                  <TextInput
-                    id={`expandable-tile-${layer}-input`}
-                    invalidText="A valid value is required"
-                  />
-                </Layer>
-              </div>
-            </TileBelowTheFoldContent>
-          </ExpandableTile>
-        </div>
-      )}
-    </WithLayer>
-  );
+export const ExpandableWithLayer = {
+  decorators: [withLayers],
+  parameters: {
+    layout: 'fullscreen',
+  },
+  render: () => (
+    <div style={{ width: '400px' }} className={previewClassname}>
+      <ExpandableTile
+        id="expandable-tile"
+        tileCollapsedIconText="Interact to Expand tile"
+        tileExpandedIconText="Interact to Collapse tile">
+        <TileAboveTheFoldContent>
+          <div style={{ height: '100px', width: '200px' }}>
+            Above the fold content here
+          </div>
+        </TileAboveTheFoldContent>
+        <TileBelowTheFoldContent>
+          <div style={{ height: '200px', width: '200px' }}>
+            Below the fold content here
+            <Layer>
+              <TextInput
+                id="expandable-tile-input"
+                invalidText="A valid value is required"
+              />
+            </Layer>
+          </div>
+        </TileBelowTheFoldContent>
+      </ExpandableTile>
+    </div>
+  ),
 };
 
 const aiLabel = (

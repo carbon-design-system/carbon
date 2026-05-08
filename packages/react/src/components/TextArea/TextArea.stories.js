@@ -7,7 +7,7 @@
 
 import React from 'react';
 
-import { WithLayer } from '../../../.storybook/templates/WithLayer';
+import { withLayers } from '../../../.storybook/decorators/withLayers';
 import { View, FolderOpen, Folders, Information } from '@carbon/icons-react';
 import Button from '../Button';
 import { AILabel, AILabelContent, AILabelActions } from '../AILabel';
@@ -144,21 +144,22 @@ Default.args = {
   enableCounter: true,
 };
 
-export const _WithLayer = (args) => (
-  <WithLayer>
-    {(layer) => (
-      <TextArea
-        labelText="Text Area label"
-        helperText="Optional helper text"
-        rows={4}
-        id={`text-area-${layer}`}
-        {...args}
-      />
-    )}
-  </WithLayer>
-);
-
-_WithLayer.args = { helperText: 'Optional helper text' };
+export const _WithLayer = {
+  decorators: [withLayers],
+  parameters: {
+    layout: 'fullscreen',
+  },
+  args: { helperText: 'Optional helper text' },
+  render: (args) => (
+    <TextArea
+      labelText="Text Area label"
+      helperText="Optional helper text"
+      rows={4}
+      id="text-area"
+      {...args}
+    />
+  ),
+};
 export const withAILabel = (args) => {
   const aiLabel = (
     <AILabel className="ai-label-container">

@@ -9,7 +9,7 @@ import './tile-story.scss';
 import '../AILabel/ailabel-story.scss';
 import React from 'react';
 
-import { WithLayer } from '../../../.storybook/templates/WithLayer';
+import { withLayers } from '../../../.storybook/decorators/withLayers';
 
 import Link from '../Link';
 import Button from '../Button';
@@ -120,18 +120,20 @@ Default.args = {
   title: '',
 };
 
-export const DefaultWithLayer = (args) => (
-  <WithLayer>
-    {(layer) => (
-      <Tile id={`tile-${layer}`} {...args}>
-        Default tile
-        <br />
-        <br />
-        <Link href="https://www.carbondesignsystem.com">Link</Link>
-      </Tile>
-    )}
-  </WithLayer>
-);
+export const DefaultWithLayer = {
+  decorators: [withLayers],
+  parameters: {
+    layout: 'fullscreen',
+  },
+  render: (args) => (
+    <Tile id="tile" {...args}>
+      Default tile
+      <br />
+      <br />
+      <Link href="https://www.carbondesignsystem.com">Link</Link>
+    </Tile>
+  ),
+};
 
 DefaultWithLayer.args = {
   ...Default.args,
@@ -164,18 +166,19 @@ ClickableWithCustomIcon.args = {
   ...Clickable.args,
 };
 
-export const ClickableWithLayer = (args) => (
-  <WithLayer>
-    {(layer) => (
-      <ClickableTile id={`clickable-tile-${layer}`} {...args}>
-        Clickable tile
-      </ClickableTile>
-    )}
-  </WithLayer>
-);
-
-ClickableWithLayer.args = {
-  ...Clickable.args,
+export const ClickableWithLayer = {
+  decorators: [withLayers],
+  parameters: {
+    layout: 'fullscreen',
+  },
+  args: {
+    ...Clickable.args,
+  },
+  render: (args) => (
+    <ClickableTile id="clickable-tile" {...args}>
+      Clickable tile
+    </ClickableTile>
+  ),
 };
 
 export const Selectable = (args) => {
@@ -251,27 +254,29 @@ Radio.argTypes = {
   },
 };
 
-export const RadioWithLayer = (args) => (
-  <WithLayer>
-    {(layer) => (
-      <TileGroup
-        defaultSelected="default-selected"
-        legend="Radio Tile Group"
-        name={`radio tile group ${layer}`}
-        {...args}>
-        <RadioTile
-          id={`radio-tile-${layer}-1`}
-          value="standard"
-          style={{ marginBottom: '.5rem' }}>
-          Option 1
-        </RadioTile>
-        <RadioTile id={`radio-tile-${layer}-2`} value="default-selected">
-          Option 2
-        </RadioTile>
-      </TileGroup>
-    )}
-  </WithLayer>
-);
+export const RadioWithLayer = {
+  decorators: [withLayers],
+  parameters: {
+    layout: 'fullscreen',
+  },
+  render: (args) => (
+    <TileGroup
+      defaultSelected="default-selected"
+      legend="Radio Tile Group"
+      name="radio tile group"
+      {...args}>
+      <RadioTile
+        id="radio-tile-1"
+        value="standard"
+        style={{ marginBottom: '.5rem' }}>
+        Option 1
+      </RadioTile>
+      <RadioTile id="radio-tile-2" value="default-selected">
+        Option 2
+      </RadioTile>
+    </TileGroup>
+  ),
+};
 
 RadioWithLayer.args = {
   disabled: false,
@@ -339,23 +344,23 @@ ExpandableWithInteractive.argTypes = {
   ...Expandable.argTypes,
 };
 
-export const ExpandableWithLayer = (args) => {
-  return (
-    <WithLayer>
-      {(layer) => (
-        <div style={{ width: '400px' }}>
-          <ExpandableTile id={`expandable-tile-${layer}`} {...args}>
-            <TileAboveTheFoldContent>
-              <div style={{ height: '100px' }}>Above the fold content here</div>
-            </TileAboveTheFoldContent>
-            <TileBelowTheFoldContent>
-              <div style={{ height: '200px' }}>Below the fold content here</div>
-            </TileBelowTheFoldContent>
-          </ExpandableTile>
-        </div>
-      )}
-    </WithLayer>
-  );
+export const ExpandableWithLayer = {
+  decorators: [withLayers],
+  parameters: {
+    layout: 'fullscreen',
+  },
+  render: (args) => (
+    <div style={{ width: '400px' }}>
+      <ExpandableTile id="expandable-tile" {...args}>
+        <TileAboveTheFoldContent>
+          <div style={{ height: '100px' }}>Above the fold content here</div>
+        </TileAboveTheFoldContent>
+        <TileBelowTheFoldContent>
+          <div style={{ height: '200px' }}>Below the fold content here</div>
+        </TileBelowTheFoldContent>
+      </ExpandableTile>
+    </div>
+  ),
 };
 
 ExpandableWithLayer.args = {

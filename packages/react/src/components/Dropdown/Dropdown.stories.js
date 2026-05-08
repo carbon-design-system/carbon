@@ -8,7 +8,7 @@
 import React from 'react';
 import { FolderOpen, Folders, Information, View } from '@carbon/icons-react';
 
-import { WithLayer } from '../../../.storybook/templates/WithLayer';
+import { withLayers } from '../../../.storybook/decorators/withLayers';
 
 import { default as Dropdown, DropdownSkeleton } from './';
 import Button from '../Button';
@@ -329,64 +329,64 @@ Inline.args = {
   warnText: 'Warning message goes here',
 };
 
-export const _WithLayer = (args) => (
-  <WithLayer>
-    {(layer) => (
-      <div style={{ width: 400 }}>
-        <Dropdown
-          id={`default-${layer}`}
-          titleText="Label"
-          helperText="Helper text"
-          initialSelectedItem={items[1]}
-          label="Option 1"
-          items={items}
-          itemToString={(item) => (item ? item.text : '')}
-          {...args}
-        />
-      </div>
-    )}
-  </WithLayer>
-);
-
-_WithLayer.argTypes = {
-  ...sharedArgTypes,
+export const _WithLayer = {
+  decorators: [withLayers],
+  parameters: {
+    layout: 'fullscreen',
+  },
+  argTypes: {
+    ...sharedArgTypes,
+  },
+  args: {
+    invalid: false,
+    invalidText: 'Error message goes here',
+    warn: false,
+    warnText: 'Warning message goes here',
+  },
+  render: (args) => (
+    <div style={{ width: 400 }}>
+      <Dropdown
+        id="default"
+        titleText="Label"
+        helperText="Helper text"
+        initialSelectedItem={items[1]}
+        label="Option 1"
+        items={items}
+        itemToString={(item) => (item ? item.text : '')}
+        {...args}
+      />
+    </div>
+  ),
 };
 
-_WithLayer.args = {
-  invalid: false,
-  invalidText: 'Error message goes here',
-  warn: false,
-  warnText: 'Warning message goes here',
-};
-
-export const InlineWithLayer = (args) => (
-  <WithLayer>
-    {(layer) => (
-      <div style={{ width: 600 }}>
-        <Dropdown
-          id={`inline-${layer}`}
-          titleText="Label"
-          initialSelectedItem={items[1]}
-          label="Option 1"
-          type="inline"
-          items={items}
-          itemToString={(item) => (item ? item.text : '')}
-          {...args}
-        />
-      </div>
-    )}
-  </WithLayer>
-);
-
-InlineWithLayer.argTypes = {
-  ...sharedArgTypes,
-};
-
-InlineWithLayer.args = {
-  invalid: false,
-  invalidText: 'Error message goes here',
-  warn: false,
-  warnText: 'Warning message goes here',
+export const InlineWithLayer = {
+  decorators: [withLayers],
+  parameters: {
+    layout: 'fullscreen',
+  },
+  argTypes: {
+    ...sharedArgTypes,
+  },
+  args: {
+    invalid: false,
+    invalidText: 'Error message goes here',
+    warn: false,
+    warnText: 'Warning message goes here',
+  },
+  render: (args) => (
+    <div style={{ width: 600 }}>
+      <Dropdown
+        id="inline"
+        titleText="Label"
+        initialSelectedItem={items[1]}
+        label="Option 1"
+        type="inline"
+        items={items}
+        itemToString={(item) => (item ? item.text : '')}
+        {...args}
+      />
+    </div>
+  ),
 };
 
 export const Skeleton = () => {

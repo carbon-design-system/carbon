@@ -7,7 +7,7 @@
 
 import React from 'react';
 
-import { WithLayer } from '../../../.storybook/templates/WithLayer';
+import { withLayers } from '../../../.storybook/decorators/withLayers';
 
 import FluidTextArea from '../FluidTextArea';
 import FluidTextAreaSkeleton from './FluidTextArea.Skeleton';
@@ -134,17 +134,19 @@ Default.argTypes = {
   },
 };
 
-export const DefaultWithLayers = () => (
-  <WithLayer>
-    {(layer) => (
-      <FluidTextArea
-        labelText="Text Area label"
-        placeholder="Placeholder text"
-        id={`text-area-${layer}`}
-      />
-    )}
-  </WithLayer>
-);
+export const DefaultWithLayers = {
+  decorators: [withLayers],
+  parameters: {
+    layout: 'fullscreen',
+  },
+  render: () => (
+    <FluidTextArea
+      labelText="Text Area label"
+      placeholder="Placeholder text"
+      id="text-area"
+    />
+  ),
+};
 
 const ToggleTip = (
   <>
