@@ -16,6 +16,8 @@ import './date-picker';
 import './date-picker-input-skeleton';
 import '../layer/index';
 import '../ai-label';
+import '../modal';
+import '../button';
 import { withLayers } from '../../../.storybook/decorators/with-layers';
 
 const sizes = {
@@ -555,6 +557,75 @@ export const WithAILabel = {
           >
         </cds-date-picker-input>
       </cds-date-picker>
+    `;
+  },
+};
+
+const toggleModal = () => {
+  document.querySelector('cds-modal')?.toggleAttribute('open');
+};
+
+export const InsideModal = {
+  args: defaultArgs,
+  argTypes: controls,
+  render: ({
+    allowInput,
+    closeOnSelect,
+    dateFormat,
+    disabled,
+    invalid,
+    invalidText,
+    maxDate,
+    minDate,
+    placeholder,
+    readonly,
+    size,
+    warn,
+    warnText,
+  }) => {
+    return html`
+      <cds-modal open size="md">
+        <cds-modal-header>
+          <cds-modal-close-button></cds-modal-close-button>
+          <cds-modal-label>Schedule</cds-modal-label>
+          <cds-modal-heading>Select a date</cds-modal-heading>
+        </cds-modal-header>
+        <cds-modal-body>
+          <cds-modal-body-content description>
+            Choose a date for your appointment or event.
+          </cds-modal-body-content>
+          <div style="margin-top: 1rem;">
+            <cds-date-picker
+              allow-input="${allowInput}"
+              close-on-select="${closeOnSelect}"
+              date-format="${dateFormat}"
+              ?disabled="${disabled}"
+              max-date="${maxDate}"
+              min-date="${minDate}"
+              ?readonly="${readonly}">
+              <cds-date-picker-input
+                kind="single"
+                label-text="Date Picker label"
+                placeholder="${placeholder}"
+                size="${size}"
+                ?invalid="${invalid}"
+                invalid-text="${invalidText}"
+                ?warn="${warn}"
+                warn-text="${warnText}">
+              </cds-date-picker-input>
+            </cds-date-picker>
+          </div>
+        </cds-modal-body>
+        <cds-modal-footer>
+          <cds-modal-footer-button kind="secondary" data-modal-close>
+            Cancel
+          </cds-modal-footer-button>
+          <cds-modal-footer-button kind="primary">
+            Confirm
+          </cds-modal-footer-button>
+        </cds-modal-footer>
+      </cds-modal>
+      <cds-button @click="${toggleModal}">Launch modal</cds-button>
     `;
   },
 };
