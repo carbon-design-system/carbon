@@ -49,7 +49,7 @@ const argTypes = {
   role: {
     control: 'text',
     description:
-      'Specify the role for the underlying `<input>`, defaults to <code>searchbox</code>.',
+      'Specify the role for the underlying <code>&lt;input&gt;</code>, defaults to <code>searchbox</code>.',
   },
   type: {
     control: 'text',
