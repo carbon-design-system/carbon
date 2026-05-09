@@ -88,7 +88,9 @@ test.describe('@avt Tile', () => {
         disabled: 'true',
       },
     });
-    await expect(page.locator('a#clickable-tile-1')).toBeDisabled();
+    await expect(
+      page.getByRole('link', { name: 'Clickable Tile' })
+    ).toBeDisabled();
     await expect(page).toHaveNoACViolations('ClickableTile-Disabled');
   });
 
@@ -103,14 +105,15 @@ test.describe('@avt Tile', () => {
     await expect(page.locator('body')).toBeFocused();
 
     // Pause to ensure the initial animation finishes before we interact
-    await expect(
-      page.getByRole('button', { name: 'Above the fold content here' })
-    ).toBeVisible();
+    const expandButton = page.getByRole('button', {
+      name: 'Above the fold content here',
+    });
+    await expect(expandButton).toBeVisible();
 
     await page.keyboard.press('Tab');
-    await expect(page.locator('#expandable-tile-1')).toBeFocused();
+    await expect(expandButton).toBeFocused();
     await page.keyboard.press('Enter');
-    await expect(page.locator('#expandable-tile-1')).toHaveClass(
+    await expect(expandButton).toHaveClass(
       'cds--tile cds--tile--expandable cds--tile--is-expanded'
     );
   });
@@ -128,14 +131,16 @@ test.describe('@avt Tile', () => {
     await expect(page.locator('body')).toBeFocused();
 
     // Pause to ensure the initial animation finishes before we interact
-    await expect(page.getByLabel('Interact to Expand tile')).toBeVisible();
+    const expandButton = page.getByLabel('Interact to Expand tile');
+    await expect(expandButton).toBeVisible();
 
     await page.keyboard.press('Tab');
     await page.keyboard.press('Tab');
 
-    await expect(page.getByLabel('Interact to Expand tile')).toBeFocused();
+    await expect(expandButton).toBeFocused();
     await page.keyboard.press('Space');
-    await expect(page.locator('#expandable-tile-1')).toHaveClass(
+    // Check the parent tile element for the expanded class
+    await expect(page.locator('.cds--tile--expandable').first()).toHaveClass(
       'cds--tile cds--tile--expandable cds--tile--is-expanded cds--tile--expandable--interactive'
     );
   });

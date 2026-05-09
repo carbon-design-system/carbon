@@ -42,7 +42,7 @@ test.describe('@avt TimePicker', () => {
       },
     });
 
-    const inputTime = page.locator('#time-picker');
+    const inputTime = page.getByRole('textbox', { name: 'Select a time' });
     await expect(inputTime).toBeVisible();
     await page.keyboard.press('Tab');
 
@@ -53,14 +53,14 @@ test.describe('@avt TimePicker', () => {
 
     // Checking select time interaction
     await page.keyboard.press('Tab');
-    const selectTime = page.locator('#time-picker-select-1');
+    const selectTime = page.getByRole('combobox').first();
     await page.keyboard.press('Space');
     await selectTime.selectOption('PM');
     await expect(selectTime).toHaveValue('PM');
 
     // Checking select time zone interaction
     await page.keyboard.press('Tab');
-    const selectTimeZone = page.locator('#time-picker-select-2');
+    const selectTimeZone = page.getByRole('combobox').nth(1);
     await page.keyboard.press('Space');
     await selectTimeZone.selectOption('Time zone 1');
     await expect(selectTimeZone).toHaveValue('Time zone 1');
@@ -75,23 +75,28 @@ test.describe('@avt TimePicker', () => {
       },
     });
 
-    // Testing focus on each layer
-    await expect(page.locator('#time-picker-0')).toBeVisible();
+    // Testing focus on each layer - get all time picker inputs
+    const timeInputs = page.getByRole('textbox', { name: 'Select a time' });
+
+    // First layer
+    await expect(timeInputs.nth(0)).toBeVisible();
     await page.keyboard.press('Tab');
-    await expect(page.locator('#time-picker-0')).toBeFocused();
+    await expect(timeInputs.nth(0)).toBeFocused();
 
     await page.keyboard.press('Tab');
     await page.keyboard.press('Tab');
     await page.keyboard.press('Tab');
 
-    await expect(page.locator('#time-picker-1')).toBeVisible();
-    await expect(page.locator('#time-picker-1')).toBeFocused();
+    // Second layer
+    await expect(timeInputs.nth(1)).toBeVisible();
+    await expect(timeInputs.nth(1)).toBeFocused();
 
     await page.keyboard.press('Tab');
     await page.keyboard.press('Tab');
     await page.keyboard.press('Tab');
 
-    await expect(page.locator('#time-picker-2')).toBeVisible();
-    await expect(page.locator('#time-picker-2')).toBeFocused();
+    // Third layer
+    await expect(timeInputs.nth(2)).toBeVisible();
+    await expect(timeInputs.nth(2)).toBeFocused();
   });
 });
