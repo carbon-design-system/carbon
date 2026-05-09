@@ -189,18 +189,9 @@ export const _FilterableWithLayer = {
   parameters: {
     layout: 'fullscreen',
   },
-  render: () => (
-    <div style={{ width: 300 }}>
-      <FluidMultiSelect
-        isFilterable
-        id="carbon-multiselect-example"
-        titleText="Multiselect title"
-        items={items}
-        itemToString={(item) => (item ? item.text : '')}
-        selectionFeedback="top-after-reopen"
-      />
-    </div>
-  ),
+  args: Filterable.args,
+  argTypes: Filterable.argTypes,
+  render: Filterable,
 };
 
 export const Condensed = () => (

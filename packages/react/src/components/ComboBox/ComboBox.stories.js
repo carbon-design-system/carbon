@@ -221,22 +221,8 @@ export const _WithLayer = {
   parameters: {
     layout: 'fullscreen',
   },
-  argTypes: { ...sharedArgTypes },
-  render: (args) => (
-    <div style={{ width: 300 }}>
-      <ComboBox
-        invalidText="Error message goes here"
-        warnText="Warning message goes here"
-        onChange={() => {}}
-        id="carbon-combobox"
-        items={items}
-        itemToString={(item) => (item ? item.text : '')}
-        titleText="Label"
-        helperText="Helper text"
-        {...args}
-      />
-    </div>
-  ),
+  argTypes: Default.argTypes,
+  render: Default,
 };
 
 export const withAILabel = (args) => {

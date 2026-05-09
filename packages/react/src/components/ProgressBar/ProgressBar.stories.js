@@ -93,11 +93,6 @@ export const _WithLayer = {
   parameters: {
     layout: 'fullscreen',
   },
-  render: () => (
-    <ProgressBar
-      label="Progress bar label"
-      helperText="Optional helper text"
-      value={42}
-    />
-  ),
+  argTypes: Default.argTypes,
+  render: Default,
 };

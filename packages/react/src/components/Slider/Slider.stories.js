@@ -199,17 +199,9 @@ export const _WithLayer = {
   parameters: {
     layout: 'fullscreen',
   },
-  render: () => (
-    <Slider
-      labelText="Slider label"
-      value={50}
-      min={0}
-      max={100}
-      step={1}
-      stepMultiplier={10}
-      noValidate
-    />
-  ),
+  argTypes: Default.argTypes,
+  args: Default.args,
+  render: Default,
 };
 
 export const ControlledSliderWithLayer = {
@@ -217,26 +209,7 @@ export const ControlledSliderWithLayer = {
   parameters: {
     layout: 'fullscreen',
   },
-  render: () => {
-    const [val, setVal] = useState(87);
-    return (
-      <>
-        <button
-          type="button"
-          onClick={() => setVal(Math.round(Math.random() * 100))}>
-          randomize value
-        </button>
-        <Slider
-          labelText="Slider label"
-          max={100}
-          min={0}
-          value={val}
-          onChange={({ value }) => setVal(value)}
-        />
-        <h1>{val}</h1>
-      </>
-    );
-  },
+  render: ControlledSlider,
 };
 
 export const TwoHandleSlider = () => {

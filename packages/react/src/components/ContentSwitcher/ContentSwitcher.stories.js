@@ -74,16 +74,8 @@ export const _WithLayer = {
   parameters: {
     layout: 'fullscreen',
   },
-  argTypes: {
-    ...sharedArgTypes,
-  },
-  render: (args) => (
-    <ContentSwitcher onChange={() => {}} {...args}>
-      <Switch name="one" text="First section" disabled={args.disabled} />
-      <Switch name="two" text="Second section" disabled={args.disabled} />
-      <Switch name="three" text="Third section" disabled={args.disabled} />
-    </ContentSwitcher>
-  ),
+  argTypes: Default.argTypes,
+  render: Default,
 };
 
 export const IconOnly = (args) => (
@@ -109,19 +101,8 @@ export const IconOnlyWithLayer = {
   parameters: {
     layout: 'fullscreen',
   },
-  render: (args) => (
-    <ContentSwitcher onChange={() => {}} {...args}>
-      <IconSwitch name="one" text="Table of Contents" disabled={args.disabled}>
-        <TableOfContents />
-      </IconSwitch>
-      <IconSwitch name="two" text="Workspace Test" disabled={args.disabled}>
-        <Workspace />
-      </IconSwitch>
-      <IconSwitch name="three" text="View Mode" disabled={args.disabled}>
-        <ViewMode_2 />
-      </IconSwitch>
-    </ContentSwitcher>
-  ),
+  argTypes: IconOnly.argTypes,
+  render: IconOnly,
 };
 
 export const lowContrast = (args) => (

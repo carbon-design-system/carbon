@@ -334,29 +334,9 @@ export const _WithLayer = {
   parameters: {
     layout: 'fullscreen',
   },
-  argTypes: {
-    ...sharedArgTypes,
-  },
-  args: {
-    invalid: false,
-    invalidText: 'Error message goes here',
-    warn: false,
-    warnText: 'Warning message goes here',
-  },
-  render: (args) => (
-    <div style={{ width: 400 }}>
-      <Dropdown
-        id="default"
-        titleText="Label"
-        helperText="Helper text"
-        initialSelectedItem={items[1]}
-        label="Option 1"
-        items={items}
-        itemToString={(item) => (item ? item.text : '')}
-        {...args}
-      />
-    </div>
-  ),
+  argTypes: Default.argTypes,
+  args: Default.args,
+  render: Default,
 };
 
 export const InlineWithLayer = {
@@ -364,29 +344,9 @@ export const InlineWithLayer = {
   parameters: {
     layout: 'fullscreen',
   },
-  argTypes: {
-    ...sharedArgTypes,
-  },
-  args: {
-    invalid: false,
-    invalidText: 'Error message goes here',
-    warn: false,
-    warnText: 'Warning message goes here',
-  },
-  render: (args) => (
-    <div style={{ width: 600 }}>
-      <Dropdown
-        id="inline"
-        titleText="Label"
-        initialSelectedItem={items[1]}
-        label="Option 1"
-        type="inline"
-        items={items}
-        itemToString={(item) => (item ? item.text : '')}
-        {...args}
-      />
-    </div>
-  ),
+  argTypes: Inline.argTypes,
+  args: Inline.args,
+  render: Inline,
 };
 
 export const Skeleton = () => {

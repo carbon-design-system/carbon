@@ -85,24 +85,12 @@ export const _WithLayer = {
     layout: 'fullscreen',
   },
   argTypes: {
+    ...Default.argTypes,
     inline: {
       control: false,
     },
   },
-  render: (args) => (
-    <Select
-      id="select"
-      labelText=""
-      helperText="Optional helper text"
-      {...args}>
-      <SelectItem value="" text="" />
-      <SelectItem
-        value="An example option that is really long to show what should be done to handle long text"
-        text="An example option that is really long to show what should be done to handle long text"
-      />
-      <SelectItem value="option-2" text="Option 2" />
-    </Select>
-  ),
+  render: Default,
 };
 
 export const withAILabel = (args) => {

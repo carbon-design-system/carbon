@@ -174,20 +174,9 @@ export const WithBackgroundLayer = {
   parameters: {
     layout: 'fullscreen',
   },
-  render: () => (
-    <StructuredListWrapper selection>
-      <StructuredListHead>
-        <StructuredListRow head>
-          <StructuredListCell head>ColumnA</StructuredListCell>
-          <StructuredListCell head>ColumnB</StructuredListCell>
-          <StructuredListCell head>ColumnC</StructuredListCell>
-        </StructuredListRow>
-      </StructuredListHead>
-      <StructuredListBody>
-        {structuredListBodyRowGenerator(4)}
-      </StructuredListBody>
-    </StructuredListWrapper>
-  ),
+  args: Selection.args,
+  argTypes: Selection.argTypes,
+  render: Selection,
 };
 
 WithBackgroundLayer.parameters = { ...sharedParameters };

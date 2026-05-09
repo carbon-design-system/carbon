@@ -139,13 +139,9 @@ export const DefaultWithLayers = {
   parameters: {
     layout: 'fullscreen',
   },
-  render: () => (
-    <FluidTextArea
-      labelText="Text Area label"
-      placeholder="Placeholder text"
-      id="text-area"
-    />
-  ),
+  args: Default.args,
+  argTypes: Default.argTypes,
+  render: Default,
 };
 
 const ToggleTip = (

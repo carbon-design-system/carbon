@@ -149,16 +149,7 @@ export const _WithLayer = {
   parameters: {
     layout: 'fullscreen',
   },
-  args: { helperText: 'Optional helper text' },
-  render: (args) => (
-    <TextArea
-      labelText="Text Area label"
-      helperText="Optional helper text"
-      rows={4}
-      id="text-area"
-      {...args}
-    />
-  ),
+  render: Default,
 };
 export const withAILabel = (args) => {
   const aiLabel = (

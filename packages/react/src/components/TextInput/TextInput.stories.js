@@ -251,14 +251,7 @@ export const _WithLayer = {
   parameters: {
     layout: 'fullscreen',
   },
-  render: (args) => {
-    const { defaultWidth, ...textInputArgs } = args;
-    return (
-      <div style={{ width: defaultWidth }}>
-        <TextInput {...textInputArgs} id="text-input" />
-      </div>
-    );
-  },
+  render: Default,
 };
 
 export const withAILabel = (args) => {

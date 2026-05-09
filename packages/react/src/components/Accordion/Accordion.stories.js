@@ -87,7 +87,7 @@ export const Default = (args) => {
       <AccordionItem title="Choose your plan" onHeadingClick={onHeadingClick}>
         <p>
           Compare plan features and select the option that best matches your
-          team&apos;s expected usage.
+          team's expected usage.
         </p>
       </AccordionItem>
       <AccordionItem title="Add team members" onHeadingClick={onHeadingClick}>
@@ -156,7 +156,7 @@ export const Controlled = (args) => {
           onHeadingClick={onHeadingClick}>
           <p>
             Compare plan features and select the option that best matches your
-            team&apos;s expected usage.
+            team's expected usage.
           </p>
         </AccordionItem>
         <AccordionItem
@@ -202,41 +202,7 @@ export const _WithLayer = {
   },
   args: { ...sharedArgs },
   argTypes: { ...sharedArgTypes },
-  render: (args) => {
-    const { onHeadingClick, ...restArgs } = args;
-    return (
-      <Accordion {...restArgs}>
-        <AccordionItem title="Choose your plan" onHeadingClick={onHeadingClick}>
-          <p>
-            Compare plan features and select the option that best matches your
-            team&apos;s expected usage.
-          </p>
-        </AccordionItem>
-        <AccordionItem title="Add team members" onHeadingClick={onHeadingClick}>
-          <p>
-            Invite collaborators by email and assign their workspace roles
-            before launch.
-          </p>
-        </AccordionItem>
-        <AccordionItem
-          title="Set payment details"
-          onHeadingClick={onHeadingClick}>
-          <p>
-            Add billing information and choose whether to receive invoices by
-            email.
-          </p>
-        </AccordionItem>
-        <AccordionItem
-          title="Review and confirm"
-          onHeadingClick={onHeadingClick}>
-          <p>
-            Check your setup summary, then confirm to create the workspace for
-            your team.
-          </p>
-        </AccordionItem>
-      </Accordion>
-    );
-  },
+  render: Default,
 };
 
 export const Skeleton = (args) => (

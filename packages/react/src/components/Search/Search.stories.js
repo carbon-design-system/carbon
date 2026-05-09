@@ -108,21 +108,13 @@ Expandable.parameters = { ...expandableParameters };
 export const _WithLayer = {
   decorators: [withLayers],
   parameters: { ...defaultParameters, layout: 'fullscreen' },
-  render: ({ defaultWidth, ...searchArgs }) => (
-    <div style={{ width: defaultWidth }}>
-      <Search id="search" {...searchArgs} />
-    </div>
-  ),
+  render: Default,
 };
 
 export const ExpandableWithLayer = {
   decorators: [withLayers],
   parameters: { ...expandableParameters, layout: 'fullscreen' },
-  render: ({ defaultWidth, ...searchArgs }) => (
-    <div style={{ marginTop: '25px', width: defaultWidth }}>
-      <ExpandableSearch id="search-expandable" {...searchArgs} />
-    </div>
-  ),
+  render: Expandable,
 };
 
 export const Default = ({ defaultWidth, ...searchArgs }) => (

@@ -95,15 +95,9 @@ export const ClickableWithLayer = {
   parameters: {
     layout: 'fullscreen',
   },
-  render: () => (
-    <div className={previewClassname}>
-      <ClickableTile
-        id="clickable-tile"
-        href="https://www.carbondesignsystem.com/">
-        Clickable Tile
-      </ClickableTile>
-    </div>
-  ),
+  args: Clickable.args,
+  argTypes: Clickable.argTypes,
+  render: Clickable,
 };
 
 export const Selectable = (args) => {
@@ -206,21 +200,9 @@ export const RadioWithLayer = {
   parameters: {
     layout: 'fullscreen',
   },
-  render: () => (
-    <div className={previewClassname}>
-      <TileGroup legend="Radio Tile Group" name="radio-tile-group">
-        <RadioTile
-          id="radio-tile-1"
-          value="radio-tile-1"
-          style={{ marginBottom: '.5rem' }}>
-          Option 1
-        </RadioTile>
-        <RadioTile id="radio-tile-2" value="radio-tile-2">
-          Option 2
-        </RadioTile>
-      </TileGroup>
-    </div>
-  ),
+  args: Radio.args,
+  argTypes: Radio.argTypes,
+  render: Radio,
 };
 
 export const Expandable = () => (
@@ -268,31 +250,9 @@ export const ExpandableWithLayer = {
   parameters: {
     layout: 'fullscreen',
   },
-  render: () => (
-    <div style={{ width: '400px' }} className={previewClassname}>
-      <ExpandableTile
-        id="expandable-tile"
-        tileCollapsedIconText="Interact to Expand tile"
-        tileExpandedIconText="Interact to Collapse tile">
-        <TileAboveTheFoldContent>
-          <div style={{ height: '100px', width: '200px' }}>
-            Above the fold content here
-          </div>
-        </TileAboveTheFoldContent>
-        <TileBelowTheFoldContent>
-          <div style={{ height: '200px', width: '200px' }}>
-            Below the fold content here
-            <Layer>
-              <TextInput
-                id="expandable-tile-input"
-                invalidText="A valid value is required"
-              />
-            </Layer>
-          </div>
-        </TileBelowTheFoldContent>
-      </ExpandableTile>
-    </div>
-  ),
+  args: Expandable.args,
+  argTypes: Expandable.argTypes,
+  render: Expandable,
 };
 
 const aiLabel = (

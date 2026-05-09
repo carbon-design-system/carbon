@@ -132,5 +132,5 @@ export const _WithLayer = {
   parameters: {
     layout: 'fullscreen',
   },
-  render: () => <div className="theme-with-layer">Content</div>,
+  render: Default,
 };

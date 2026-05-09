@@ -399,51 +399,22 @@ export const WithLayerMultiSelect = {
   parameters: {
     layout: 'fullscreen',
   },
-  args: { ...sharedArgs },
-  render: (args) => (
-    <div style={{ width: 300 }}>
-      <MultiSelect
-        label="Multiselect Label"
-        id="carbon-multiselect-example"
-        titleText="Multiselect title"
-        helperText="This is helper text"
-        items={items}
-        itemToString={(item) => (item ? item.text : '')}
-        selectionFeedback="top-after-reopen"
-        {...args}
-      />
-    </div>
-  ),
+  args: Default.args,
+  argTypes: Default.argTypes,
+  render: Default,
 };
 
 export const _FilterableWithLayer = {
   decorators: [withLayers],
   parameters: {
     layout: 'fullscreen',
+    controls: {
+      exclude: ['label'],
+    },
   },
-  args: { ...sharedArgs },
-  render: (args) => (
-    <div style={{ width: 300 }}>
-      <FilterableMultiSelect
-        id="carbon-multiselect-example"
-        titleText="Multiselect title"
-        helperText="This is helper text"
-        items={items}
-        itemToString={(item) => (item ? item.text : '')}
-        selectionFeedback="top-after-reopen"
-        {...args}
-      />
-    </div>
-  ),
-};
-
-_FilterableWithLayer.argTypes = {
-  ...filterableArgTypes,
-};
-_FilterableWithLayer.parameters = {
-  controls: {
-    exclude: ['label'],
-  },
+  args: Filterable.args,
+  argTypes: Filterable.argTypes,
+  render: Filterable,
 };
 export const _Controlled = (args) => {
   const [selectedItems, setSelectedItems] = useState(
