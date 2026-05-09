@@ -14,6 +14,7 @@ import { IconButton } from '../IconButton';
 import { View, FolderOpen, Folders } from '@carbon/icons-react';
 import { action } from 'storybook/actions';
 import mdx from './ComboBox.mdx';
+import { useId } from '../../internal/useId';
 
 const items = [
   {
@@ -96,6 +97,7 @@ const sharedArgTypes = {
 };
 
 export const Default = (args) => {
+  const id = useId('combobox'); // required for unique id generation when cloning this story in layers stories
   const items = [
     {
       id: 'option-0',
@@ -126,7 +128,7 @@ export const Default = (args) => {
   return (
     <div style={{ width: 300 }}>
       <ComboBox
-        id="carbon-combobox"
+        id={id}
         items={items}
         itemToString={(item) => (item ? item.text : '')}
         titleText="Label"

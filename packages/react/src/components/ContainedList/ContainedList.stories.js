@@ -272,9 +272,14 @@ export const _WithLayer = {
   parameters: {
     layout: 'fullscreen',
   },
-  args: WithIcons.args,
-  argTypes: WithIcons.argTypes,
-  render: WithIcons,
+  args: Default.args,
+  argTypes: Default.argTypes,
+  render: (args) => (
+    <ContainedList {...args}>
+      <ContainedListItem>List item</ContainedListItem>
+      <ContainedListItem>List item</ContainedListItem>
+    </ContainedList>
+  ),
 };
 
 export const UsageExamples = () => {

@@ -23,6 +23,7 @@ import { IconButton } from '../IconButton';
 import { Button } from '../Button';
 import { Information, View, FolderOpen, Folders } from '@carbon/icons-react';
 import mdx from './FluidMultiSelect.mdx';
+import { useId } from '../../internal/useId';
 
 export default {
   title: 'Components/Fluid Components/FluidMultiSelect',
@@ -169,20 +170,23 @@ const ToggleTip = (
   </>
 );
 
-export const Filterable = () => (
-  <div style={{ width: '400px' }}>
-    <FluidMultiSelect
-      isFilterable
-      onChange={() => {}}
-      initialSelectedItem={items[2]}
-      id="default"
-      titleText="Label"
-      label="Choose an option"
-      items={items}
-      itemToString={(item) => (item ? item.text : '')}
-    />
-  </div>
-);
+export const Filterable = () => {
+  const id = useId('fluid-multiselect-filterable');
+  return (
+    <div style={{ width: '400px' }}>
+      <FluidMultiSelect
+        isFilterable
+        onChange={() => {}}
+        initialSelectedItem={items[2]}
+        id={id}
+        titleText="Label"
+        label="Choose an option"
+        items={items}
+        itemToString={(item) => (item ? item.text : '')}
+      />
+    </div>
+  );
+};
 
 export const _FilterableWithLayer = {
   decorators: [withLayers],

@@ -172,14 +172,13 @@ InitialSelection.parameters = { ...sharedParameters };
 export const WithBackgroundLayer = {
   decorators: [withLayers],
   parameters: {
+    ...Selection.parameters,
     layout: 'fullscreen',
   },
   args: Selection.args,
   argTypes: Selection.argTypes,
   render: Selection,
 };
-
-WithBackgroundLayer.parameters = { ...sharedParameters };
 
 export const Skeleton = (args) => (
   <div style={{ width: '800px' }}>

@@ -13,6 +13,7 @@ import ExpandableSearch from '../ExpandableSearch';
 import Search from '.';
 import SearchSkeleton from './Search.Skeleton';
 import mdx from './Search.mdx';
+import { useId } from '../../internal/useId';
 
 export default {
   title: 'Components/Search',
@@ -98,11 +99,24 @@ const expandableParameters = {
   },
 };
 
-export const Expandable = ({ defaultWidth, ...searchArgs }) => (
-  <div style={{ marginTop: '25px', width: defaultWidth }}>
-    <ExpandableSearch id="search-expandable-1" {...searchArgs} />
-  </div>
-);
+export const Default = ({ defaultWidth, ...searchArgs }) => {
+  const id = useId('search'); // required for unique id generation when cloning this story in layers stories
+  return (
+    <div style={{ width: defaultWidth }}>
+      <Search id={id} {...searchArgs} />
+    </div>
+  );
+};
+Default.parameters = { ...defaultParameters };
+
+export const Expandable = ({ defaultWidth, ...searchArgs }) => {
+  const id = useId('search-expandable'); // required for unique id generation when cloning this story in layers stories
+  return (
+    <div style={{ marginTop: '25px', width: defaultWidth }}>
+      <ExpandableSearch id={id} {...searchArgs} />
+    </div>
+  );
+};
 Expandable.parameters = { ...expandableParameters };
 
 export const _WithLayer = {
@@ -116,13 +130,6 @@ export const ExpandableWithLayer = {
   parameters: { ...expandableParameters, layout: 'fullscreen' },
   render: Expandable,
 };
-
-export const Default = ({ defaultWidth, ...searchArgs }) => (
-  <div style={{ width: defaultWidth }}>
-    <Search id="search-default-1" {...searchArgs} />
-  </div>
-);
-Default.parameters = { ...defaultParameters };
 
 export const Skeleton = ({ size, defaultWidth }) => (
   <div style={{ width: defaultWidth }}>

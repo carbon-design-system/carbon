@@ -35,6 +35,7 @@ import {
 import { AILabel, AILabelContent, AILabelActions } from '../AILabel';
 import { IconButton } from '../IconButton';
 import { Tooltip } from '../Tooltip';
+import { useId } from '../../internal/useId';
 
 import mdx from './Tile.mdx';
 
@@ -100,8 +101,9 @@ export default {
 };
 
 export const Default = (args) => {
+  const id = useId('tile'); // required for unique id generation when cloning this story in layers stories
   return (
-    <Tile id="tile-1" {...args}>
+    <Tile id={id} {...args}>
       Default tile
       <br />
       <br />
@@ -131,8 +133,9 @@ export const DefaultWithLayer = {
 };
 
 export const Clickable = (args) => {
+  const id = useId('tile-clickable'); // required for unique id generation when cloning this story in layers stories
   return (
-    <ClickableTile id="clickable-tile-1" {...args}>
+    <ClickableTile id={id} {...args}>
       Clickable Tile
     </ClickableTile>
   );
@@ -203,25 +206,26 @@ MultiSelect.args = {
 };
 
 export const Radio = (args) => {
+  const id = useId('tile-radio'); // required for unique id generation when cloning this story in layers stories
   return (
     <TileGroup
       defaultSelected="default-selected"
       legend="Radio Tile Group"
-      name="radio tile group"
+      name={`radio tile group ${id}`}
       {...args}>
       <RadioTile
-        id="radio-tile-1"
+        id={`${id}-1`}
         value="standard"
         style={{ marginBottom: '.5rem' }}>
         Option 1
       </RadioTile>
       <RadioTile
-        id="radio-tile-2"
+        id={`${id}-2`}
         value="default-selected"
         style={{ marginBottom: '.5rem' }}>
         Option 2
       </RadioTile>
-      <RadioTile id="radio-tile-3" value="selected">
+      <RadioTile id={`${id}-3`} value="selected">
         Option 3
       </RadioTile>
     </TileGroup>
@@ -251,9 +255,10 @@ export const RadioWithLayer = {
 };
 
 export const Expandable = (args) => {
+  const id = useId('tile-expandable'); // required for unique id generation when cloning this story in layers stories
   return (
     <div style={{ width: '400px' }}>
-      <ExpandableTile id="expandable-tile-1" {...args}>
+      <ExpandableTile id={id} {...args}>
         <TileAboveTheFoldContent>
           <div style={{ height: '200px' }}>Above the fold content here</div>
         </TileAboveTheFoldContent>

@@ -23,6 +23,7 @@ import {
 import { IconButton } from '../IconButton';
 import mdx from './Dropdown.mdx';
 import Link from '../Link';
+import { useId } from '../../internal/useId';
 
 export default {
   title: 'Components/Dropdown',
@@ -155,6 +156,7 @@ const sharedArgTypes = {
 };
 
 export const Default = (args) => {
+  const id = useId('dropdown'); // required for unique id generation when cloning this story in layers stories
   const items = [
     {
       text: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit.',
@@ -189,7 +191,7 @@ export const Default = (args) => {
   return (
     <div style={{ width: 400 }}>
       <Dropdown
-        id="default"
+        id={id}
         titleText="Label"
         helperText="Helper text"
         label="Choose an option"
@@ -272,6 +274,7 @@ ExperimentalAutoAlign.args = {
 };
 
 export const Inline = (args) => {
+  const id = useId('dropdown-inline'); // required for unique id generation when cloning this story in layers stories
   const items = [
     {
       text: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit.',
@@ -305,7 +308,7 @@ export const Inline = (args) => {
   return (
     <div style={{ width: 600 }}>
       <Dropdown
-        id="inline"
+        id={id}
         titleText="Label"
         initialSelectedItem={items[1]}
         label="Option 1"

@@ -13,6 +13,7 @@ import Button from '../Button';
 import { AILabel, AILabelContent, AILabelActions } from '../AILabel';
 import { IconButton } from '../IconButton';
 import mdx from './TextInput.mdx';
+import { useId } from '../../internal/useId';
 
 import { default as TextInput, TextInputSkeleton } from '../TextInput';
 
@@ -168,10 +169,11 @@ export default {
 
 export const Default = (args) => {
   const { defaultWidth, ...textInputArgs } = args;
+  const id = useId('text-input'); // required for unique id generation when cloning this story in layers stories
 
   return (
     <div style={{ width: defaultWidth }}>
-      <TextInput {...textInputArgs} />
+      <TextInput {...textInputArgs} id={id} />
     </div>
   );
 };

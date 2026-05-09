@@ -72,8 +72,19 @@ $types: (
   padding: spacing.$spacing-05;
 }
 
-.#{$prefix}--annotation--background {
+#storybook-root:not([hidden])
+  .#{$prefix}--annotation--background:not(
+    .#{$prefix}--annotation-unset-block-size
+  ) {
   min-block-size: 100vh;
+}
+
+#storybook-root:not([hidden])
+  .#{$prefix}--annotation--feature-flags
+  .#{$prefix}--annotation--background:not(
+    .#{$prefix}--annotation-unset-block-size
+  ) {
+  min-block-size: calc(100vh - 58px);
 }
 
 @each $type, $colors in $types {

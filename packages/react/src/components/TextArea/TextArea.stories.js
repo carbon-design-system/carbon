@@ -15,6 +15,7 @@ import { IconButton } from '../IconButton';
 import { default as TextArea, TextAreaSkeleton } from './';
 import { Tooltip } from '../Tooltip';
 import mdx from './TextArea.mdx';
+import { useId } from '../../internal/useId';
 export default {
   title: 'Components/TextArea',
   component: TextArea,
@@ -137,7 +138,8 @@ export default {
 };
 
 export const Default = (args) => {
-  return <TextArea {...args} id="text-area-1" />;
+  const id = useId('textarea'); // required for unique id generation when cloning this story in layers stories
+  return <TextArea {...args} id={id} />;
 };
 
 Default.args = {

@@ -8,7 +8,8 @@
 import './Theme-story.scss';
 import React, { useEffect } from 'react';
 
-import { withLayers } from '../../../.storybook/decorators/withLayers';
+import { Annotation } from '../../../.storybook/templates/Annotation';
+import { Layer } from '../Layer';
 import { VStack } from '../Stack';
 
 import { GlobalTheme, Theme, usePrefersDarkScheme, useTheme } from '../Theme';
@@ -128,9 +129,46 @@ export const UsePrefersDarkScheme = () => {
 UsePrefersDarkScheme.storyName = 'usePrefersDarkScheme';
 
 export const _WithLayer = {
-  decorators: [withLayers],
-  parameters: {
-    layout: 'fullscreen',
+  // We cannot use `withLayers` decorator here. this is the only exception.
+  render: () => {
+    const themes = ['white', 'g10', 'g90', 'g100'];
+
+    const WithLayer = ({ children }) => {
+      return <div className="layer">{children}</div>;
+    };
+
+    return (
+      <VStack gap={7}>
+        {themes.map((theme) => (
+          <Theme key={theme} theme={theme}>
+            <article className="theme-layer-example">
+              <header className="theme-layer-header">{theme} theme</header>
+              <Annotation
+                type="background"
+                text="$background"
+                className="carbon-storybook-template--annotation-unset-block-size">
+                <WithLayer>
+                  <div className="theme-with-layer">Content</div>
+                </WithLayer>
+                <Layer withBackground>
+                  <Annotation type="layer" text="$layer-01">
+                    <WithLayer>
+                      <div className="theme-with-layer">Content</div>
+                    </WithLayer>
+                    <Layer withBackground>
+                      <Annotation type="layer" text="$layer-02">
+                        <WithLayer>
+                          <div className="theme-with-layer">Content</div>
+                        </WithLayer>
+                      </Annotation>
+                    </Layer>
+                  </Annotation>
+                </Layer>
+              </Annotation>
+            </article>
+          </Theme>
+        ))}
+      </VStack>
+    );
   },
-  render: Default,
 };

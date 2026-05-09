@@ -19,6 +19,7 @@ import {
 } from '../Toggletip';
 import { Information } from '@carbon/icons-react';
 import mdx from './FluidTextArea.mdx';
+import { useId } from '../../internal/useId';
 
 export default {
   title: 'Components/Fluid Components/FluidTextArea',
@@ -106,11 +107,14 @@ const sharedArgTypes = {
   },
 };
 
-export const Default = ({ defaultWidth, ...textAreaArgs }) => (
-  <div style={{ width: defaultWidth }}>
-    <FluidTextArea {...textAreaArgs} />
-  </div>
-);
+export const Default = ({ defaultWidth, ...textAreaArgs }) => {
+  const id = useId('fluid-textarea'); // required for unique id generation when cloning this story in layers stories
+  return (
+    <div style={{ width: defaultWidth }}>
+      <FluidTextArea {...textAreaArgs} id={id} />
+    </div>
+  );
+};
 
 Default.args = {
   defaultWidth: 300,
