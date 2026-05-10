@@ -267,6 +267,36 @@ export const DismissableContained = {
   },
 };
 
+export const DismissableWithIcons = {
+  args: {
+    dismissable: true,
+    selectedIndex: 0,
+  },
+  argTypes: {
+    dismissable: {
+      control: 'boolean',
+      description: 'Whether the rendered Tab children should be dismissable.',
+    },
+    selectedIndex: {
+      control: 'number',
+      description:
+        'Specify a selected index for the initially selected content.',
+    },
+  },
+  render: ({ dismissable, selectedIndex }) => {
+    return html`
+      <style>
+        ${styles}
+      </style>
+      <tabs-story-wrapper
+        ?dismissable="${dismissable}"
+        selected-index="${selectedIndex}"
+        with-icons>
+      </tabs-story-wrapper>
+    `;
+  },
+};
+
 export const Icon20Only = {
   args: iconStoriesArgs,
   argTypes: iconStoriesArgTypes,
