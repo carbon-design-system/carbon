@@ -1,2 +1,0 @@
-{"id":"728bd4d3-5987-463a-8206-a96efc5ad41f","ts":"2026-05-11T19:01:32.801Z","path":"/Users/taylorjones/.codex/worktrees/4a69/monorepo/packages/web-components/src/components/file-uploader/__tests__/file-uploader-test.js","version":"1.0.0","taskID":"34164fdf-cda3-4107-8790-fec110a7184d"}
-{"id":"8cb8d9a9-2fa1-4006-b6f7-2e377f7bb039","ts":"2026-05-11T19:01:49.789Z","path":"/Users/taylorjones/.codex/worktrees/4a69/monorepo/packages/web-components/src/components/file-uploader/__tests__/file-uploader-test.js","version":"1.0.0","taskID":"34164fdf-cda3-4107-8790-fec110a7184d"}
