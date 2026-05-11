@@ -64,7 +64,8 @@ export interface IconIndicatorProps {
   className?: string;
 
   /**
-   * When true, displays only the icon with the label in a tooltip
+   * When true, displays only the icon with the label in a tooltip.
+   * Use this when there is no enough space to display the label.
    */
   compact?: boolean;
 
@@ -147,6 +148,7 @@ IconIndicator.propTypes = {
 
   /**
    * When true, displays only the icon with the label in a tooltip
+   * Use this when there is no enough space to display the label.
    */
   compact: PropTypes.bool,
 
