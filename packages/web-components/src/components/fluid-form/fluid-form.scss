@@ -1,0 +1,24 @@
+//
+// Copyright IBM Corp. 2026
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+$css--plex: true !default;
+
+@use '@carbon/styles/scss/config' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/components/form';
+
+:host(#{$prefix}-fluid-form) {
+  @include form.form;
+}
+
+:host(#{$prefix}-fluid-form[in-modal]) {
+  --cds-field: var(--cds-field-01);
+
+  .#{$prefix}--form--fluid {
+    margin-inline: -$spacing-05 - $spacing-05;
+  }
+}
