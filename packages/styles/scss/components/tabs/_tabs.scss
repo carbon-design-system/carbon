@@ -824,3 +824,14 @@
     }
   }
 }
+
+//-----------------------------
+// Popover tooltip
+//-----------------------------
+.#{$prefix}--tabs .#{$prefix}--icon-tooltip .#{$prefix}--popover-content {
+  @include custom-property.declaration('popover-offset', convert.to-rem(8px));
+}
+
+.#{$prefix}--tabs .#{$prefix}--icon-tooltip .#{$prefix}--popover-caret {
+  @include custom-property.declaration('popover-offset', convert.to-rem(8px));
+}

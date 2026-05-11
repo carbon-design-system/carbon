@@ -459,16 +459,16 @@ export const IconOnly = (args) => {
   return (
     <Tabs>
       <TabList iconSize="default">
-        <IconTab label="Analyze" disabled>
+        <IconTab label="Analyze" disabled leaveDelayMs={0}>
           <IbmWatsonDiscovery aria-label="Analyze" />
         </IconTab>
-        <IconTab label="Activity">
+        <IconTab label="Activity" leaveDelayMs={0}>
           <Activity aria-label="Activity" />
         </IconTab>
-        <IconTab label="New Notifications" {...args}>
+        <IconTab label="New Notifications" leaveDelayMs={0} {...args}>
           <Notification aria-label="Notification" />
         </IconTab>
-        <IconTab label="Chat">
+        <IconTab label="Chat" leaveDelayMs={0}>
           <Chat aria-label="Chat" />
         </IconTab>
       </TabList>
