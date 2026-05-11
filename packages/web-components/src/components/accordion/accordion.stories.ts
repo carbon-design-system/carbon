@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2019, 2025
+ * Copyright IBM Corp. 2019, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -50,21 +50,20 @@ const argTypes = {
   },
   onBeforeToggle: {
     action: `${prefix}-accordion-item-beingtoggled`,
-    table: {
-      disable: true,
-    },
   },
   onToggle: {
     action: `${prefix}-accordion-item-toggled`,
-    table: {
-      disable: true,
-    },
   },
 };
 
 export const Default = {
   args,
   argTypes,
+  parameters: {
+    controls: {
+      exclude: ['onBeforeToggle', 'onToggle'],
+    },
+  },
   render: ({
     alignment,
     isFlush,
