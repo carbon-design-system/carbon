@@ -10,6 +10,8 @@ import { property } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
 import HostListenerMixin from '../../globals/mixins/host-listener';
 import { selectorTabbable } from '../../globals/settings';
+import CDSModalFooter from './modal-footer';
+import '../inline-loading';
 
 /**
  * Base class for Modal and Dialog components.
@@ -19,6 +21,40 @@ export class CDSModalBase extends HostListenerMixin(LitElement) {
    * The element that had focus before this modal gets open.
    */
   protected _launcher: Element | null = null;
+
+  /**
+   * The inline loading element that renders when `loading-status` is not `inactive`
+   */
+  protected _loadingEl: HTMLElement | null = null;
+
+  /**
+   * Loading statuses that are not `inactive`
+   */
+  protected WORKING_LOADING_STATUSES = ['active', 'finished', 'error'];
+
+  /**
+   * Specify the loading status
+   */
+  @property({ reflect: true, attribute: 'loading-status' })
+  loadingStatus: 'inactive' | 'active' | 'finished' | 'error' = 'inactive';
+
+  /**
+   * Specify the description for the loading text
+   */
+  @property({ type: String, attribute: 'loading-description' })
+  loadingDescription = '';
+
+  /**
+   * Provide a delay for the setTimeout for success
+   */
+  @property({ type: Number, attribute: 'loading-success-delay' })
+  loadingSuccessDelay = 1500;
+
+  /**
+   * Specify the description for the loading icon
+   */
+  @property({ type: String, attribute: 'loading-icon-description' })
+  loadingIconDescription = 'Loading';
 
   /**
    * `true` if the modal should be open.
@@ -137,6 +173,96 @@ export class CDSModalBase extends HostListenerMixin(LitElement) {
     };
   }
 
+  protected _getFooterElements() {
+    const footer = this.querySelector(`${prefix}-modal-footer`);
+
+    const primaryButton =
+      this.querySelector<HTMLElement>(
+        `${prefix}-modal-footer-button[kind="primary"]`
+      ) ||
+      this.querySelector<HTMLElement>(
+        `${prefix}-modal-footer-button[kind="danger"]`
+      ) ||
+      null;
+
+    const secondaryButtons = Array.from(
+      this.querySelectorAll<HTMLElement>(
+        `${prefix}-modal-footer-button[kind="secondary"]`
+      )
+    );
+
+    return { footer, primaryButton, secondaryButtons };
+  }
+
+  // Initializes the inline-loading element
+  protected _initializeLoadingEl(footer: CDSModalFooter) {
+    if (!footer) return null;
+
+    if (
+      !this._loadingEl &&
+      this.WORKING_LOADING_STATUSES.includes(this.loadingStatus)
+    ) {
+      const el = document.createElement(`${prefix}-inline-loading`);
+      el.setAttribute('controlled', '');
+      el.setAttribute('aria-live', 'off');
+      footer.appendChild(el);
+      this._loadingEl = el as HTMLElement;
+    }
+    return this._loadingEl;
+  }
+
+  // Updates the inline loading element in the modal footer
+  protected _updateLoadingElement() {
+    const { footer, primaryButton, secondaryButtons } =
+      this._getFooterElements();
+
+    const loader = this._initializeLoadingEl(footer as CDSModalFooter);
+    if (!footer || !loader || !primaryButton) return;
+
+    if (this.WORKING_LOADING_STATUSES.includes(this.loadingStatus)) {
+      loader.style.display = 'inline-flex';
+      loader.setAttribute('status', String(this.loadingStatus));
+      loader.setAttribute('aria-live', 'assertive');
+      loader.setAttribute(
+        'icon-description',
+        String(this.loadingIconDescription)
+      );
+      loader.textContent = this.loadingDescription;
+      primaryButton.style.display = 'none';
+
+      if (secondaryButtons[0]) {
+        if (!footer.hasAttribute('has-three-buttons')) {
+          secondaryButtons[0].setAttribute('disabled', '');
+        } else {
+          secondaryButtons.forEach((b) => b.removeAttribute('disabled'));
+        }
+      }
+
+      if (this.loadingStatus === 'finished') {
+        // fire event for successful load
+        setTimeout(() => {
+          this.dispatchEvent(
+            new CustomEvent(
+              (this.constructor as typeof CDSModalBase).eventOnLoadingSuccess,
+              {
+                bubbles: true,
+                cancelable: true,
+                composed: true,
+              }
+            )
+          );
+        }, this.loadingSuccessDelay);
+      }
+    } else if (this.loadingStatus === 'inactive') {
+      loader.style.display = 'none';
+      loader.setAttribute('aria-live', 'off');
+
+      if (primaryButton) primaryButton.style.display = '';
+      if (secondaryButtons)
+        secondaryButtons.forEach((b) => b.removeAttribute('disabled'));
+    }
+  }
+
   /**
    * @param ms The number of milliseconds.
    * @returns A promise that is resolves after the given milliseconds.
@@ -188,6 +314,13 @@ export class CDSModalBase extends HostListenerMixin(LitElement) {
    */
   static get eventClose() {
     return `${prefix}-modal-closed`;
+  }
+
+  /**
+   * The name of the custom event fired when this modal reaches a `finished` loading state
+   */
+  static get eventOnLoadingSuccess() {
+    return `${prefix}-modal-on-loadingsuccess`;
   }
 }
 

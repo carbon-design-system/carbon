@@ -34,6 +34,11 @@ class CDSDialog extends CDSModalBase {
   private _dialogElement?: HTMLDialogElement;
 
   /**
+   * MutationObserver that observes the modal-footer
+   */
+  private _footerObserver?: MutationObserver;
+
+  /**
    * Handles `click` event on this element.
    *
    * @param event The event.
@@ -100,6 +105,35 @@ class CDSDialog extends CDSModalBase {
     }
 
     this.requestUpdate();
+  }
+
+  /**
+   * Observes the dialog footer's `has-three-buttons` attribute to account for cases
+   * where the loading status and the amount of footer-buttons
+   * are being changed dynamically
+   */
+  private _observeFooter() {
+    const footer = this.querySelector(`${prefix}-dialog-footer`);
+    if (!footer) return;
+
+    this._footerObserver = new MutationObserver(() => {
+      this._updateLoadingElement();
+    });
+    this._footerObserver.observe(footer, {
+      attributes: true,
+      childList: true,
+      attributeFilter: ['has-three-buttons'],
+    });
+  }
+
+  connectedCallback() {
+    super.connectedCallback?.();
+    this._observeFooter();
+  }
+
+  disconnectedCallback() {
+    this._footerObserver?.disconnect();
+    super.disconnectedCallback?.();
   }
 
   /**
@@ -216,6 +250,15 @@ class CDSDialog extends CDSModalBase {
         }
       }
     }
+    if (
+      changedProperties.has('loadingStatus') ||
+      changedProperties.has('loadingDescription') ||
+      changedProperties.has('loadingSuccessDelay') ||
+      changedProperties.has('loadingIconDescription')
+    ) {
+      await (this.constructor as typeof CDSDialog)._delay();
+      this._updateLoadingElement();
+    }
   }
 
   render() {
@@ -275,6 +318,13 @@ class CDSDialog extends CDSModalBase {
    */
   static get eventClose() {
     return `${prefix}-dialog-closed`;
+  }
+
+  /**
+   * The name of the custom event fired when this modal reaches a `finished` loading state
+   */
+  static get eventOnLoadingSuccess() {
+    return `${prefix}-dialog-on-loadingsuccess`;
   }
 
   static styles = styles;
