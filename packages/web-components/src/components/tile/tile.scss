@@ -292,3 +292,47 @@ $css--plex: true !default;
     border-end-end-radius: $spacing-03;
   }
 }
+
+:host(#{$prefix}-clickable-tile[enable-experimental-tile-contrast]) {
+  .#{$prefix}--tile--clickable {
+    border: 1px solid $border-tile;
+  }
+
+  .#{$prefix}--link--disabled {
+    border: 1px solid $border-disabled;
+  }
+}
+
+:host(#{$prefix}-selectable-tile[enable-experimental-tile-contrast]) {
+  .#{$prefix}--tile--selectable {
+    border: 1px solid $border-tile;
+  }
+
+  .#{$prefix}--tile--is-selected {
+    border: 1px solid $layer-selected-inverse;
+  }
+
+  .#{$prefix}--tile--disabled {
+    border: 1px solid $border-disabled;
+  }
+}
+
+:host(#{$prefix}-expandable-tile[enable-experimental-tile-contrast]) {
+  .#{$prefix}--tile__chevron--interactive {
+    border: 1px solid $border-disabled;
+  }
+}
+
+:host(#{$prefix}-radio-tile[enable-experimental-tile-contrast]) {
+  .#{$prefix}--tile--selectable {
+    border: 1px solid $border-tile;
+  }
+
+  .#{$prefix}--tile--is-selected {
+    border: 1px solid $layer-selected-inverse;
+  }
+
+  .#{$prefix}--tile--disabled {
+    border: 1px solid $border-disabled;
+  }
+}
