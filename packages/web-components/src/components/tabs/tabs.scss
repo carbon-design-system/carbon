@@ -157,6 +157,11 @@ $inset-transition: inset 110ms motion(standard, productive);
   }
 }
 
+:host(#{$prefix}-tab:not([type='contained']))
+  + :host(#{$prefix}-tab:not([type='contained'])) {
+  margin-inline-start: convert.to-rem(1px);
+}
+
 :host(#{$prefix}-tab[badge-indicator][icon-only]:not([icon-size='lg']))
   #{$prefix}-badge-indicator,
 :host(
