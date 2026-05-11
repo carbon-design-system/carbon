@@ -1075,11 +1075,19 @@ describe('state with presence context', () => {
     expect(screen.queryByTestId('sibling-modal')).toBeInTheDocument();
     expect(screen.queryByTestId('child-modal')).toBeInTheDocument();
 
+    // First ESC closes the tooltip in the child modal
     await userEvent.keyboard('{Escape}');
+
+    // Second ESC closes the child modal
+    await userEvent.keyboard('{Escape}');
+
+    // Wait for child modal to be removed
+    await waitFor(() => {
+      expect(screen.queryByTestId('child-modal')).not.toBeInTheDocument();
+    });
 
     expect(screen.queryByTestId('modal')).toBeInTheDocument();
     expect(screen.queryByTestId('sibling-modal')).toBeInTheDocument();
-    expect(screen.queryByTestId('child-modal')).not.toBeInTheDocument();
   });
 });
 
