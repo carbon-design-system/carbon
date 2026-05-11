@@ -217,7 +217,7 @@ const RadioButton = React.forwardRef<HTMLInputElement, RadioButtonProps>(
           value={value}
           name={name}
           required={required}
-          readOnly={readOnly}
+          {...(readOnly ? { readOnly: true } : {})}
         />
         <label htmlFor={uniqueId} className={`${prefix}--radio-button__label`}>
           <span className={`${prefix}--radio-button__appearance`} />

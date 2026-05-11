@@ -194,4 +194,21 @@ describe('RadioButton', () => {
     );
     expect(screen.getByRole('radio')).toHaveAttribute('required');
   });
+
+  it('should prioritize disabled over readOnly when both are true', () => {
+    render(
+      <RadioButton
+        name="test-name"
+        value="test-value"
+        labelText="test-label"
+        disabled={true}
+        readOnly={true}
+      />
+    );
+
+    const radio = screen.getByRole('radio');
+    expect(radio).toHaveAttribute('disabled', '');
+    expect(radio).toHaveAttribute('readOnly', '');
+    expect(radio.disabled).toBe(true);
+  });
 });

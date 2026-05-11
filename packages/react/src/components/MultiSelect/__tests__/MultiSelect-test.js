@@ -1646,4 +1646,21 @@ describe('MultiSelect', () => {
       );
     });
   });
+
+  it('should prioritize disabled over readOnly when both are true', () => {
+    render(
+      <MultiSelect
+        id="multiselect"
+        items={mockProps.items}
+        itemToString={(item) => (item ? item.text : '')}
+        titleText="MultiSelect label"
+        disabled={true}
+        readOnly={true}
+      />
+    );
+
+    const button = screen.getByRole('combobox');
+    expect(button).toHaveAttribute('disabled', '');
+    expect(button.disabled).toBe(true);
+  });
 });

@@ -222,7 +222,7 @@ const DatePickerInput = frFn((props, ref) => {
   const labelClasses = cx(`${prefix}--label`, {
     [`${prefix}--visually-hidden`]: hideLabel,
     [`${prefix}--label--disabled`]: normalizedProps.disabled,
-    [`${prefix}--label--readonly`]: readOnly && !normalizedProps.disabled,
+    [`${prefix}--label--readonly`]: readOnly,
   });
   const helperTextClasses = cx(`${prefix}--form__helper-text`, {
     [`${prefix}--form__helper-text--disabled`]: normalizedProps.disabled,
