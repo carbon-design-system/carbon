@@ -2767,6 +2767,22 @@ describe('NumberInput', () => {
 
       numberFormatSpy.mockRestore();
     });
+
+    it('should prioritize disabled over readOnly when both are true', () => {
+      render(
+        <NumberInput
+          id="input-1"
+          label="NumberInput label"
+          disabled={true}
+          readOnly={true}
+        />
+      );
+
+      const input = screen.getByRole('spinbutton');
+      expect(input).toHaveAttribute('disabled', '');
+      expect(input).toHaveAttribute('readOnly', '');
+      expect(input.disabled).toBe(true);
+    });
   });
 
   describe('validateNumberSeparators - Indian locale', () => {

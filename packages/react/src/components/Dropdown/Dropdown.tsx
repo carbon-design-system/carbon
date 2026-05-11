@@ -467,7 +467,7 @@ const Dropdown = React.forwardRef(
       [`${prefix}--dropdown--inline`]: inline,
       [`${prefix}--dropdown--disabled`]: normalizedProps.disabled,
       [`${prefix}--dropdown--light`]: light,
-      [`${prefix}--dropdown--readonly`]: readOnly,
+      [`${prefix}--dropdown--readonly`]: readOnly && !normalizedProps.disabled,
       [`${prefix}--dropdown--${size}`]: size,
       [`${prefix}--list-box--up`]: direction === 'top',
       [`${prefix}--autoalign`]: autoAlign,
@@ -475,6 +475,7 @@ const Dropdown = React.forwardRef(
 
     const titleClasses = cx(`${prefix}--label`, {
       [`${prefix}--label--disabled`]: normalizedProps.disabled,
+      [`${prefix}--label--readonly`]: readOnly && !normalizedProps.disabled,
       [`${prefix}--visually-hidden`]: hideLabel,
     });
 

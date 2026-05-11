@@ -579,6 +579,7 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
   const titleClasses = cx({
     [`${prefix}--label`]: true,
     [`${prefix}--label--disabled`]: disabled,
+    [`${prefix}--label--readonly`]: readOnly && !disabled,
     [`${prefix}--visually-hidden`]: hideLabel,
   });
   const helperClasses = cx({
@@ -1035,7 +1036,7 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
             {...inputProp}
             ref={mergedRef}
             {...readOnlyEventHandlers}
-            readOnly={readOnly}
+            {...(readOnly ? { readOnly: true } : {})}
           />
           {normalizedProps.invalid && (
             <WarningFilled className={`${prefix}--list-box__invalid-icon`} />
