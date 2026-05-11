@@ -1,0 +1,158 @@
+#!/bin/bash
+
+# BEGIN Bob Shell POST-COMMIT HOOK
+# Bob Shell post-commit hook
+# Automatically attaches git notes from .bob/notes/pending-notes.txt
+# Only includes notes for files that were actually committed
+# Validates that Bob's changes are still present (at least partially)
+# Syncs notes with remote for multi-user collaboration
+
+NOTES_REF="refs/notes/bob"
+NOTES_FILE=".bob/notes/pending-notes.txt"
+
+# Function to sync notes with remote
+sync_notes_with_remote() {
+    # Detect the appropriate remote to use for notes sync
+    # Priority: 1) upstream/origin with write access, 2) fork remote, 3) skip if no suitable remote
+    NOTES_REMOTE=""
+    
+    # Try to find a remote with write access
+    for remote in origin upstream ibm fork; do
+        if git remote get-url "$remote" >/dev/null 2>&1; then
+            # Test if we can push to this remote (check permissions)
+            if timeout 5 git ls-remote --exit-code "$remote" "$NOTES_REF" >/dev/null 2>&1 ||                timeout 5 git push --dry-run "$remote" "$NOTES_REF" >/dev/null 2>&1; then
+                NOTES_REMOTE="$remote"
+                break
+            fi
+        fi
+    done
+    
+    # If no suitable remote found, skip sync silently
+    if [ -z "$NOTES_REMOTE" ]; then
+        return 0
+    fi
+    
+    # CRITICAL: Clean up any stuck merge state before attempting operations
+    # This prevents hangs from previous failed merge attempts
+    if [ -d ".git/NOTES_MERGE_WORKTREE" ] || [ -f ".git/NOTES_MERGE_REF" ]; then
+        rm -rf .git/NOTES_MERGE_* 2>/dev/null || true
+        git notes --ref "$NOTES_REF" merge --abort 2>/dev/null || true
+    fi
+    
+    # Fetch remote notes with timeout (ignore errors if notes don't exist on remote yet)
+    timeout 10 git fetch "$NOTES_REMOTE" "$NOTES_REF:$NOTES_REF" 2>/dev/null || true
+    
+    # Try to push notes to remote with timeout
+    if ! timeout 10 git push "$NOTES_REMOTE" "$NOTES_REF" 2>/dev/null; then
+        # Push failed, likely due to conflicts - try to merge
+        
+        # Merge remote notes using cat_sort_uniq strategy (combines and deduplicates)
+        # Use timeout to prevent hanging on merge conflicts
+        if timeout 10 git notes --ref "$NOTES_REF" merge -s cat_sort_uniq "$NOTES_REMOTE/${NOTES_REF#refs/notes/}" 2>/dev/null; then
+            # Retry push after successful merge with timeout
+            if timeout 10 git push "$NOTES_REMOTE" "$NOTES_REF" 2>/dev/null; then
+                echo "✓ Notes synced with $NOTES_REMOTE after merge"
+            else
+                # Clean up merge state to prevent future hangs
+                rm -rf .git/NOTES_MERGE_* 2>/dev/null || true
+            fi
+        else
+            # CRITICAL: Always clean up failed merge state to prevent hangs
+            rm -rf .git/NOTES_MERGE_* 2>/dev/null || true
+            git notes --ref "$NOTES_REF" merge --abort 2>/dev/null || true
+        fi
+    else
+        echo "✓ Notes synced with $NOTES_REMOTE"
+    fi
+}
+
+# Get the commit hash
+COMMIT=$(git rev-parse HEAD)
+
+# Check if notes file exists and has content
+if [ -f "$NOTES_FILE" ] && [ -s "$NOTES_FILE" ]; then
+    # Get repository root for path normalization
+    REPO_ROOT=$(git rev-parse --show-toplevel)
+    
+    # Get list of files in this commit
+    COMMITTED_FILES=$(git diff-tree --no-commit-id --name-only -r "$COMMIT")
+    
+    # Filter notes to only include committed files with Bob's changes still present
+    FILTERED_NOTES=$(mktemp)
+    REMAINING_NOTES=$(mktemp)
+    while IFS= read -r line; do
+        # Extract path and bobDiff from JSONL
+        # Note: This uses basic text processing. For production, consider generating
+        # hook content via Node.js with proper JSON escaping (see issue #9)
+        FILE_PATH=$(echo "$line" | grep -o '"path":"[^"]*"' | cut -d'"' -f4)
+        
+        # Convert absolute path to relative path (strip repo root)
+        RELATIVE_PATH="${FILE_PATH#$REPO_ROOT/}"
+        
+        # Check if this file was committed
+        if echo "$COMMITTED_FILES" | grep -qF "$RELATIVE_PATH"; then
+            # Extract Bob's diff from the note (if present)
+            BOB_DIFF=$(echo "$line" | grep -o '"bobDiff":"[^"]*"' | cut -d'"' -f4 | tr '\n' '
+')
+            
+            # Get the actual diff in this commit for this file
+            COMMIT_DIFF=$(git show "$COMMIT" -- "$FILE_PATH" 2>/dev/null || echo "")
+            
+            # Validate: Check if Bob's changes are still present
+            # If bobDiff is empty (new file) or if any part of Bob's diff is in commit diff
+            SHOULD_ATTACH=false
+            
+            if [ -z "$BOB_DIFF" ]; then
+                # No stored diff (new file or old note format), attach by default
+                SHOULD_ATTACH=true
+            elif [ -n "$COMMIT_DIFF" ]; then
+                # Check if any added lines from Bob's diff are in the commit diff
+                # Extract added lines (starting with +) from Bob's diff
+                BOB_ADDED=$(echo "$BOB_DIFF" | grep "^+" | grep -v "^+++" || echo "")
+                
+                if [ -n "$BOB_ADDED" ]; then
+                    # Check if any of Bob's added lines are in the commit
+                    while IFS= read -r bob_line; do
+                        if echo "$COMMIT_DIFF" | grep -qF "$bob_line"; then
+                            SHOULD_ATTACH=true
+                            break
+                        fi
+                    done <<< "$BOB_ADDED"
+                else
+                    # No added lines to check, attach by default
+                    SHOULD_ATTACH=true
+                fi
+            fi
+            
+            if [ "$SHOULD_ATTACH" = true ]; then
+                echo "$line" >> "$FILTERED_NOTES"
+            else
+                echo "⚠ Skipping note for $FILE_PATH (Bob's changes not found in commit)"
+            fi
+        else
+            # Keep notes for files that weren't committed
+            echo "$line" >> "$REMAINING_NOTES"
+        fi
+    done < "$NOTES_FILE"
+    
+    # Only add note if there are matching entries
+    if [ -s "$FILTERED_NOTES" ]; then
+        git notes --ref "$NOTES_REF" add -f -F "$FILTERED_NOTES" "$COMMIT" 2>/dev/null || true
+        echo "✓ Added Bob notes for committed files to commit $COMMIT"
+    fi
+    
+    # Replace notes file with remaining uncommitted notes
+    if [ -s "$REMAINING_NOTES" ]; then
+        mv "$REMAINING_NOTES" "$NOTES_FILE"
+    else
+        > "$NOTES_FILE"
+        rm -f "$REMAINING_NOTES"
+    fi
+    
+    # Clean up
+    rm -f "$FILTERED_NOTES"
+    
+    # Sync notes with remote for multi-user collaboration
+    sync_notes_with_remote
+fi
+# END Bob Shell POST-COMMIT HOOK

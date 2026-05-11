@@ -1,0 +1,59 @@
+#!/bin/bash
+
+# BEGIN Bob Shell PRE-COMMIT HOOK
+# Bob Shell pre-commit hook
+# Cleans up stale notes before commit
+# This handles git reset scenarios (no post-reset hook exists)
+
+
+# Shared function to filter notes based on modified files
+filter_notes_by_modified_files() {
+    local NOTES_FILE="$1"
+    local ALL_MODIFIED="$2"
+    
+    if [ ! -f "$NOTES_FILE" ] || [ ! -s "$NOTES_FILE" ]; then
+        return
+    fi
+    
+    # Get repository root for path normalization
+    REPO_ROOT=$(git rev-parse --show-toplevel)
+    
+    # Filter notes to only keep entries for files that still have changes
+    FILTERED_NOTES=$(mktemp)
+    while IFS= read -r line; do
+        # Extract path from JSONL
+        FILE_PATH=$(echo "$line" | grep -o '"path":"[^"]*"' | cut -d'"' -f4)
+        
+        # Convert absolute path to relative path (strip repo root)
+        RELATIVE_PATH="${FILE_PATH#$REPO_ROOT/}"
+        
+        # Keep note only if file still has uncommitted changes
+        if echo "$ALL_MODIFIED" | grep -qF "$RELATIVE_PATH"; then
+            echo "$line" >> "$FILTERED_NOTES"
+        fi
+    done < "$NOTES_FILE"
+    
+    # Replace notes file with filtered content
+    if [ -s "$FILTERED_NOTES" ]; then
+        mv "$FILTERED_NOTES" "$NOTES_FILE"
+    else
+        > "$NOTES_FILE"
+        rm -f "$FILTERED_NOTES"
+    fi
+}
+
+
+NOTES_FILE=".bob/notes/pending-notes.txt"
+
+# Get list of files with uncommitted changes (staged + unstaged)
+STAGED_FILES=$(git diff --cached --name-only 2>/dev/null)
+UNSTAGED_FILES=$(git diff --name-only 2>/dev/null)
+UNTRACKED_FILES=$(git ls-files --others --exclude-standard 2>/dev/null)
+
+# Combine all modified files
+ALL_MODIFIED=$(printf '%s
+' "$STAGED_FILES" "$UNSTAGED_FILES" "$UNTRACKED_FILES" | sort -u)
+
+# Filter notes using shared function
+filter_notes_by_modified_files "$NOTES_FILE" "$ALL_MODIFIED"
+# END Bob Shell PRE-COMMIT HOOK
