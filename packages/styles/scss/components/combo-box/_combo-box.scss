@@ -91,4 +91,15 @@
   .#{$prefix}--combo-box--readonly .#{$prefix}--list-box__selection svg {
     fill: $icon-disabled;
   }
+
+  // Disabled takes precedence over read-only
+  .#{$prefix}--combo-box.#{$prefix}--list-box--disabled,
+  .#{$prefix}--combo-box.#{$prefix}--list-box--disabled:hover {
+    background-color: $field;
+  }
+
+  .#{$prefix}--combo-box.#{$prefix}--list-box--disabled
+    .#{$prefix}--text-input {
+    border-block-end: 1px solid transparent;
+  }
 }
