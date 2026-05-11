@@ -1070,7 +1070,7 @@ class CDSDropdown extends ValidityMixin(
    * The value of the selected item.
    */
   @property({ reflect: true })
-  value = '';
+  accessor value = '';
 
   /**
    * Specify whether the control is currently in warning state

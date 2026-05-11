@@ -98,7 +98,7 @@ class CDSPasswordInput extends CDSTextInput {
     attribute: 'tooltip-alignment',
     reflect: true,
   })
-  tooltipAlignment = INPUT_TOOLTIP_ALIGNMENT.CENTER;
+  tooltipAlignment = INPUT_TOOLTIP_ALIGNMENT.END;
 
   /**
    * Set to true to use the fluid version.
