@@ -86,8 +86,6 @@ $popover-border-color: custom-property.get-var(
 
 :host(#{$prefix}-tooltip-content),
 :host(#{$prefix}-popover-content) {
-  --cds-popover-offset: 0.25rem;
-
   @include popover-base;
 }
 
