@@ -6,7 +6,7 @@
  */
 
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { type ReactNode } from 'react';
 import { IconButton, IconButtonKind, IconButtonKinds } from '../IconButton';
 import { PopoverAlignment } from '../Popover';
 import ButtonBase from './ButtonBase';
@@ -125,11 +125,8 @@ export type ButtonProps<T extends React.ElementType> =
   PolymorphicComponentPropWithRef<T, ButtonBaseProps>;
 
 export type ButtonComponent = <T extends React.ElementType = 'button'>(
-  props: ButtonProps<T>,
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
-  context?: any
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
-) => React.ReactElement | any;
+  props: ButtonProps<T>
+) => ReactNode;
 
 function isIconOnlyButton(
   hasIconOnly: ButtonBaseProps['hasIconOnly'],

@@ -1,0 +1,48 @@
+import { ArgTypes, Canvas, Markdown, Meta } from '@storybook/addon-docs/blocks';
+import { cdnJs } from '../../globals/internal/storybook-cdn';
+import * as FluidFormStories from './fluid-form.stories';
+
+<Meta of={FluidFormStories} component="cds-fluid-form" />
+
+# Fluid Form
+
+[Source code](https://github.com/carbon-design-system/carbon/tree/main/packages/web-components/src/components/fluid-form)
+&nbsp;|&nbsp;
+[Usage guidelines](https://www.carbondesignsystem.com/components/form/usage)
+&nbsp;|&nbsp;
+[Accessibility](https://www.carbondesignsystem.com/components/form/accessibility)
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Accessibility Considerations](#accessibility-considerations)
+  - [Accessible Name](#accessible-name)
+- [Component API](#component-api)
+- [Feedback](#feedback)
+
+## Overview
+
+<Canvas of={FluidFormStories.Default} />
+
+## Accessibility Considerations
+
+### Accessible Name
+
+To comply with accessibility requirements, make sure to supply the component
+with an accessible name by providing either the `aria-label`, `aria-labelledby`
+or `title` attribute. Read more on the accessible naming rule
+[here](https://able.ibm.com/rules/archives/latest/doc/en-US/aria_accessiblename_exists.html).
+
+## Component API
+
+## `cds-fluid-form`
+
+<ArgTypes of="cds-fluid-form" />
+
+<Markdown>{`${cdnJs({ components: ['fluid-form'] })}`}</Markdown>
+
+## Feedback
+
+Help us improve this component by providing feedback, asking questions on Slack,
+or updating this file on
+[GitHub](https://github.com/carbon-design-system/carbon/edit/main/packages/web-components/src/components/fluid-form/fluid-form.mdx).
