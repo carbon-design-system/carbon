@@ -718,4 +718,21 @@ describe('Validation message ids', () => {
       'test-dropdown-warn-msg'
     );
   });
+
+  it('should prioritize disabled over readOnly when both are true', () => {
+    render(
+      <Dropdown
+        id="dropdown"
+        items={mockProps.items}
+        itemToString={(item) => (item ? item.text : '')}
+        titleText="Dropdown label"
+        disabled={true}
+        readOnly={true}
+      />
+    );
+
+    const button = screen.getByRole('combobox');
+    expect(button).toHaveAttribute('disabled', '');
+    expect(button.disabled).toBe(true);
+  });
 });
