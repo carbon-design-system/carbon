@@ -28,6 +28,9 @@ icons, pictograms, layout, motion, themes, type), and tooling.
 - Linting, formatting, build and tests should all pass before committing
 - Before opening or reviewing a pull request (PR), follow the instructions:
   `docs/guides/reviewing-pull-requests.md`
+- When opening a PR, always use and fill out the pull request template:
+  `.github/PULL_REQUEST_TEMPLATE.md`
+- When opening an issue, always use a template: `.github/ISSUE_TEMPLATE/*.yaml`
 
 ## Package relationships
 

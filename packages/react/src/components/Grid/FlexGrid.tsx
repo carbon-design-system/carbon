@@ -26,6 +26,7 @@ const FlexGrid = React.forwardRef<
       condensed = false,
       narrow = false,
       fullWidth = false,
+      withRowGap = false,
       className: containerClassName,
       children,
       ...rest
@@ -38,6 +39,7 @@ const FlexGrid = React.forwardRef<
       [`${prefix}--grid--condensed`]: condensed,
       [`${prefix}--grid--narrow`]: narrow,
       [`${prefix}--grid--full-width`]: fullWidth,
+      [`${prefix}--grid--with-row-gap`]: withRowGap,
     });
     // cast as any to let TypeScript allow passing in attributes to base component
     const BaseComponent = as || 'div';
@@ -83,6 +85,12 @@ FlexGrid.propTypes = {
    * typographic alignment with and without containers.
    */
   narrow: PropTypes.bool,
+
+  /**
+   * Add a row gap to the grid that matches the current gutter size.
+   * This is useful when you want consistent vertical spacing between rows.
+   */
+  withRowGap: PropTypes.bool,
 };
 
 const FlexGridComponent = FlexGrid as GridComponent;
