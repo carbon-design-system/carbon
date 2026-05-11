@@ -45,6 +45,22 @@ default text input is for short, one-line content.
   ]}
 />
 
+### Inline
+
+Use the `inline` variant when a text field needs to sit in flow with nearby
+content. Inline text inputs use a transparent field background so they align
+visually with other inline field inputs.
+
+<Canvas
+  of={TextInputStories.Inline}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(TextInputStories.Inline),
+    },
+  ]}
+/>
+
 ### Fluid
 
 <Canvas

@@ -353,6 +353,14 @@
     word-break: break-word;
   }
 
+  .#{$prefix}--text-input-wrapper--inline .#{$prefix}--text-input {
+    background-color: transparent;
+  }
+
+  .#{$prefix}--text-input-wrapper--inline .#{$prefix}--text-input:disabled {
+    background-color: transparent;
+  }
+
   .#{$prefix}--text-input__label-helper-wrapper {
     flex: 0 1 auto;
     flex-direction: column;
