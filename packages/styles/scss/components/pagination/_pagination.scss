@@ -18,6 +18,7 @@
 @use '../../utilities/convert';
 @use '../../utilities/focus-outline' as *;
 @use '../../utilities/high-contrast-mode' as *;
+@use '../../utilities/layout';
 
 /// Pagination styles
 /// @access public
@@ -30,6 +31,7 @@
   .#{$prefix}--pagination {
     @include component-reset.reset;
     @include type-style('body-compact-01');
+    @include layout.use('size', $default: 'md', $min: 'xs', $max: 'lg');
 
     display: flex;
     overflow: initial;
@@ -40,7 +42,7 @@
     container-name: pagination;
     container-type: inline-size;
     inline-size: calc(100% - 1px);
-    min-block-size: convert.to-rem(40px);
+    min-block-size: layout.size('height');
 
     // 42rem = 'md' breakpoint
     @container pagination (min-width: 42rem) {
@@ -66,14 +68,6 @@
     }
   }
 
-  .#{$prefix}--pagination--sm {
-    min-block-size: convert.to-rem(32px);
-  }
-
-  .#{$prefix}--pagination--lg {
-    min-block-size: convert.to-rem(48px);
-  }
-
   .#{$prefix}--pagination .#{$prefix}--select {
     align-items: center;
     block-size: 100%;
@@ -88,10 +82,8 @@
     @include type-style('body-compact-01');
 
     block-size: 100%;
-
     inline-size: auto;
-    line-height: convert.to-rem(40px);
-
+    line-height: layout.size('height');
     min-inline-size: auto;
 
     // Firefox-specific fix for three-digit numbers
@@ -107,14 +99,6 @@
     .#{$prefix}--select--inline
     .#{$prefix}--select-input {
     padding-inline: $spacing-05 2.25rem;
-  }
-
-  .#{$prefix}--pagination--sm .#{$prefix}--select-input {
-    line-height: convert.to-rem(32px);
-  }
-
-  .#{$prefix}--pagination--lg .#{$prefix}--select-input {
-    line-height: convert.to-rem(48px);
   }
 
   .#{$prefix}--pagination .#{$prefix}--select-input:hover {
@@ -223,12 +207,12 @@
     border: none;
     margin: 0;
     background: none;
-    block-size: convert.to-rem(40px);
+    block-size: layout.size('height');
     border-inline-start: 1px solid $border-subtle;
     cursor: pointer;
     fill: $icon-primary;
-    inline-size: convert.to-rem(40px);
-    min-block-size: convert.to-rem(32px);
+    inline-size: layout.size('height');
+    min-block-size: convert.to-rem(24px);
     transition:
       outline $duration-fast-02 motion(standard, productive),
       background-color $duration-fast-02 motion(standard, productive);
@@ -242,20 +226,6 @@
   [dir='rtl'] .#{$prefix}--pagination__button > svg,
   [dir='rtl'] .#{$prefix}--btn--ghost.#{$prefix}--pagination__button > svg {
     transform: rotate(0.5turn);
-  }
-
-  .#{$prefix}--pagination--sm .#{$prefix}--pagination__button,
-  .#{$prefix}--pagination--sm
-    .#{$prefix}--btn--ghost.#{$prefix}--pagination__button {
-    block-size: convert.to-rem(32px);
-    inline-size: convert.to-rem(32px);
-  }
-
-  .#{$prefix}--pagination--lg .#{$prefix}--pagination__button,
-  .#{$prefix}--pagination--lg
-    .#{$prefix}--btn--ghost.#{$prefix}--pagination__button {
-    block-size: convert.to-rem(48px);
-    inline-size: convert.to-rem(48px);
   }
 
   .#{$prefix}--pagination__button:focus,

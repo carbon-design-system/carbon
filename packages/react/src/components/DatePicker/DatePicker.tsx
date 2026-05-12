@@ -54,6 +54,7 @@ function initializeWeekdayShorthand() {
 }
 
 const forEach = Array.prototype.forEach;
+const defaultAriaDateFormat = 'l, F j, Y';
 
 /**
  * @param {number} monthNumber The month number.
@@ -603,6 +604,7 @@ const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>((props, ref) => {
       inline: inline ?? false,
       onClose: onCalendarClose,
       disableMobile: true,
+      ariaDateFormat: defaultAriaDateFormat,
       defaultDate: value,
       closeOnSelect: closeOnSelect,
       mode: datePickerType,

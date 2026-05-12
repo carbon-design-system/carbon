@@ -653,6 +653,28 @@ describe('Single date picker', () => {
     expect(screen.getByRole('application')).toBeInTheDocument();
   });
 
+  it('should include the weekday in the calendar day aria-label', async () => {
+    render(
+      <DatePicker
+        onChange={() => {}}
+        datePickerType="single"
+        value="04/15/2026">
+        <DatePickerInput
+          id="date-picker-input-id-start"
+          placeholder="mm/dd/yyyy"
+          labelText="Start date"
+          data-testid="input"
+        />
+      </DatePicker>
+    );
+
+    await userEvent.click(screen.getByTestId('input'));
+
+    expect(
+      screen.getByLabelText('Wednesday, April 15, 2026')
+    ).toBeInTheDocument();
+  });
+
   it('should update the calendar classnames when open', async () => {
     render(
       <DatePicker
@@ -806,7 +828,7 @@ describe('Single date picker', () => {
 
     // eslint-disable-next-line testing-library/no-node-access
     const belowMinDate = document.querySelector(
-      '[aria-label="November 26, 2023"]'
+      '[aria-label="Sunday, November 26, 2023"]'
     );
     await userEvent.click(belowMinDate);
 
@@ -1689,7 +1711,7 @@ describe('Date picker with minDate and maxDate', () => {
     await userEvent.click(screen.getByTestId('input'));
 
     const disabledDate = document.querySelector(
-      '[aria-label="January 2, 2018"]'
+      '[aria-label="Tuesday, January 2, 2018"]'
     );
 
     expect(disabledDate).toHaveClass('flatpickr-disabled');
@@ -1744,7 +1766,7 @@ describe('Date picker with minDate and maxDate', () => {
     );
     // eslint-disable-next-line testing-library/no-node-access
     const belowMinDate = document.querySelector(
-      '[aria-label="December 31, 2017"]'
+      '[aria-label="Sunday, December 31, 2017"]'
     );
     await userEvent.click(screen.getByTestId('input-min-max'));
     await userEvent.click(belowMinDate);
@@ -1772,7 +1794,7 @@ describe('Date picker with minDate and maxDate', () => {
 
     // eslint-disable-next-line testing-library/no-node-access
     const aboveMaxDate = document.querySelector(
-      '[aria-label="January 4, 2018"]'
+      '[aria-label="Thursday, January 4, 2018"]'
     );
 
     await userEvent.click(screen.getByTestId('input-min-max-2'));

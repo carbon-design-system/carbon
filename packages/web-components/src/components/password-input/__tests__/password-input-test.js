@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2025
+ * Copyright IBM Corp. 2025, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -146,6 +146,16 @@ describe('cds-password-input', () => {
     const classList = input?.classList || [];
     expect(
       Array.from(classList).some((cls) => cls.includes('--text-input--sm'))
+    ).to.be.true;
+
+    const fieldWrapper = el.shadowRoot.querySelector(
+      '.cds--text-input__field-wrapper'
+    );
+    const fieldWrapperClassList = fieldWrapper?.classList || [];
+    expect(
+      Array.from(fieldWrapperClassList).some((cls) =>
+        cls.includes('--layout--size-sm')
+      )
     ).to.be.true;
   });
 
