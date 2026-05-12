@@ -8,6 +8,7 @@
 // TODO: Investigate whether migrating `config/jest-config-carbon` to
 // TypeScript, or another similar change, would eliminate the need for these
 // types.
+// https://github.com/carbon-design-system/carbon/pull/22150#discussion_r3228269366
 declare module '@jest/expect' {
   interface Matchers<R extends void | Promise<void>, T = unknown> {
     toHaveNoAxeViolations(): R;
