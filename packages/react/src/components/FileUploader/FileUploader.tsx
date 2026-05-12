@@ -11,6 +11,8 @@ import React, {
   forwardRef,
   useCallback,
   useImperativeHandle,
+  useLayoutEffect,
+  useMemo,
   useState,
   type HTMLAttributes,
 } from 'react';
@@ -190,7 +192,6 @@ const FileUploader = forwardRef<FileUploaderHandle, FileUploaderProps>(
     ref
   ) => {
     const fileUploaderInstanceId = useId('file-uploader');
-    const announcementId = useId('file-uploader-announcement');
     const prefix = usePrefix();
 
     const enhancedFileUploaderEnabled = useFeatureFlag(
@@ -201,10 +202,24 @@ const FileUploader = forwardRef<FileUploaderHandle, FileUploaderProps>(
     const [legacyFileNames, setLegacyFileNames] = useState<
       (string | undefined)[]
     >([]);
-    const [announcement, setAnnouncement] = useState<string>('');
+    const [fileCountText, setFileCountText] = useState('');
+    const [deletionAnnouncement, setDeletionAnnouncement] = useState('');
 
     const uploaderButton = React.createRef<HTMLLabelElement>();
-    const nodes: HTMLElement[] = [];
+    const nodes: HTMLElement[] = useMemo(() => [], []);
+
+    // Update file count text for screen readers
+    useLayoutEffect(() => {
+      const count = fileItems.length || legacyFileNames.length;
+
+      if (count === 0) {
+        setFileCountText('');
+      } else if (count === 1) {
+        setFileCountText(' 1 file selected.');
+      } else {
+        setFileCountText(` ${count} files selected.`);
+      }
+    }, [fileItems, legacyFileNames]);
 
     const createFileItem = useCallback(
       (file: File & { invalidFileType?: boolean }): FileItem => ({
@@ -280,21 +295,6 @@ const FileUploader = forwardRef<FileUploaderHandle, FileUploaderProps>(
 
           setFileItems(updatedFileItems);
 
-          // Set accessibility announcement for added files
-          const addedCount = multiple
-            ? newFileItems.filter(
-                (item) =>
-                  !fileItems.some((existing) => existing.name === item.name)
-              ).length
-            : newFileItems.length;
-          if (addedCount > 0) {
-            setAnnouncement(
-              addedCount === 1
-                ? `File ${newFileItems[0].name} added successfully`
-                : `${addedCount} files added successfully`
-            );
-          }
-
           if (onChange) {
             const allFiles = updatedFileItems.map((item) => item.file);
             const enhancedEvent = {
@@ -320,18 +320,6 @@ const FileUploader = forwardRef<FileUploaderHandle, FileUploaderProps>(
 
           setLegacyFileNames(updatedFileNames);
 
-          // Set accessibility announcement for added files (legacy mode)
-          const addedCount = multiple
-            ? filenames.filter((name) => !legacyFileNames.includes(name)).length
-            : filenames.length;
-          if (addedCount > 0) {
-            setAnnouncement(
-              addedCount === 1
-                ? `File ${filenames[0]} added successfully`
-                : `${addedCount} files added successfully`
-            );
-          }
-
           if (onChange) {
             onChange(evt);
           }
@@ -349,76 +337,142 @@ const FileUploader = forwardRef<FileUploaderHandle, FileUploaderProps>(
       ]
     );
 
+    const announceFileDeletion = useCallback((fileName: string) => {
+      setDeletionAnnouncement(`Deleted ${fileName}`);
+      setTimeout(() => setDeletionAnnouncement(''), 0);
+    }, []);
+
+    const focusLastDeleteButton = useCallback(
+      (remainingCount: number) => {
+        const lastItemNode = nodes[remainingCount - 1];
+        const deleteButton = lastItemNode?.querySelector(
+          'button'
+        ) as HTMLButtonElement;
+        if (deleteButton) {
+          setTimeout(() => {
+            deleteButton.focus();
+          }, 0);
+        }
+      },
+      [nodes]
+    );
+
+    const focusUploaderButton = useCallback(() => {
+      const buttonElement = uploaderButton.current
+        ?.previousElementSibling as HTMLButtonElement;
+      if (buttonElement && buttonElement.tagName === 'BUTTON') {
+        buttonElement.focus();
+      }
+    }, [uploaderButton]);
+
+    const handleEnhancedFileDeletion = useCallback(
+      (evt, index: number, deletedItem: FileItem) => {
+        const remainingItems = fileItems.filter((_, i) => i !== index);
+        setFileItems(remainingItems);
+
+        const remainingFiles = remainingItems.map((item) => item.file);
+        const enhancedEvent = {
+          ...evt,
+          target: {
+            ...evt.target,
+            files: Object.assign(remainingFiles, {
+              item: (index: number) => remainingFiles[index] || null,
+            }),
+            deletedFile: deletedItem,
+            deletedFileName: deletedItem.name,
+            remainingFiles: remainingItems,
+            currentFiles: remainingItems,
+            action: 'remove',
+          },
+        };
+
+        if (onDelete) {
+          onDelete(enhancedEvent);
+        }
+
+        if (onChange) {
+          onChange(enhancedEvent);
+        }
+
+        return remainingItems.length;
+      },
+      [fileItems, onDelete, onChange]
+    );
+
+    const handleLegacyFileDeletion = useCallback(
+      (evt, filteredArray: (string | undefined)[]) => {
+        setLegacyFileNames(filteredArray);
+
+        if (onDelete) {
+          onDelete(evt);
+        }
+
+        return filteredArray.length;
+      },
+      [onDelete]
+    );
+
+    const manageFocusAfterDeletion = useCallback(
+      (wasLastItem: boolean, remainingCount: number) => {
+        if (remainingCount === 0) {
+          focusUploaderButton();
+        } else if (wasLastItem) {
+          focusLastDeleteButton(remainingCount);
+        }
+      },
+      [focusUploaderButton, focusLastDeleteButton]
+    );
+
     const handleClick = useCallback(
       (evt, { index, filenameStatus }) => {
-        if (filenameStatus === 'edit') {
-          evt.stopPropagation();
-
-          if (enhancedFileUploaderEnabled) {
-            const deletedItem = fileItems[index];
-            if (!deletedItem) return;
-
-            const remainingItems = fileItems.filter((_, i) => i !== index);
-            setFileItems(remainingItems);
-
-            // Set accessibility announcement for deleted file
-            setAnnouncement(`File ${deletedItem.name} removed successfully`);
-
-            const remainingFiles = remainingItems.map((item) => item.file);
-
-            const enhancedEvent = {
-              ...evt,
-              target: {
-                ...evt.target,
-                files: Object.assign(remainingFiles, {
-                  item: (index: number) => remainingFiles[index] || null,
-                }),
-                deletedFile: deletedItem,
-                deletedFileName: deletedItem.name,
-                remainingFiles: remainingItems,
-                currentFiles: remainingItems,
-                action: 'remove',
-              },
-            };
-
-            if (onDelete) {
-              onDelete(enhancedEvent);
-            }
-
-            if (onChange) {
-              onChange(enhancedEvent);
-            }
-          } else {
-            const deletedFileName = legacyFileNames[index];
-            const filteredArray = legacyFileNames.filter(
-              (filename) => filename !== deletedFileName
-            );
-
-            setLegacyFileNames(filteredArray);
-
-            // Set accessibility announcement for deleted file (legacy mode)
-            setAnnouncement(`File ${deletedFileName} removed successfully`);
-
-            if (onDelete) {
-              onDelete(evt);
-            }
-          }
-
-          if (onClick) {
-            onClick(evt);
-          }
-
-          uploaderButton.current?.focus?.();
+        if (filenameStatus !== 'edit') {
+          return;
         }
+
+        evt.stopPropagation();
+
+        let remainingCount: number;
+        let wasLastItem: boolean;
+
+        if (enhancedFileUploaderEnabled) {
+          const deletedItem = fileItems[index];
+          if (!deletedItem) {
+            return;
+          }
+
+          announceFileDeletion(deletedItem.name);
+          wasLastItem = index === fileItems.length - 1;
+          remainingCount = handleEnhancedFileDeletion(evt, index, deletedItem);
+        } else {
+          const deletedFileName = legacyFileNames[index];
+          if (!deletedFileName) {
+            return;
+          }
+
+          const filteredArray = legacyFileNames.filter(
+            (filename) => filename !== deletedFileName
+          );
+
+          announceFileDeletion(deletedFileName);
+          wasLastItem = index === legacyFileNames.length - 1;
+          remainingCount = handleLegacyFileDeletion(evt, filteredArray);
+        }
+
+        if (onClick) {
+          onClick(evt);
+        }
+
+        manageFocusAfterDeletion(wasLastItem, remainingCount);
       },
       [
         enhancedFileUploaderEnabled,
         fileItems,
         legacyFileNames,
-        onDelete,
-        onChange,
         onClick,
-        uploaderButton,
+        announceFileDeletion,
+        handleEnhancedFileDeletion,
+        handleLegacyFileDeletion,
+        manageFocusAfterDeletion,
       ]
     );
 
@@ -429,15 +483,6 @@ const FileUploader = forwardRef<FileUploaderHandle, FileUploaderProps>(
           if (enhancedFileUploaderEnabled) {
             const previousItems = [...fileItems];
             setFileItems([]);
-
-            // Set accessibility announcement for cleared files
-            if (previousItems.length > 0) {
-              setAnnouncement(
-                previousItems.length === 1
-                  ? 'File removed successfully'
-                  : `${previousItems.length} files removed successfully`
-              );
-            }
 
             if (onChange && previousItems.length > 0) {
               const enhancedEvent = {
@@ -453,17 +498,7 @@ const FileUploader = forwardRef<FileUploaderHandle, FileUploaderProps>(
               onChange(enhancedEvent);
             }
           } else {
-            const previousCount = legacyFileNames.length;
             setLegacyFileNames([]);
-
-            // Set accessibility announcement for cleared files (legacy mode)
-            if (previousCount > 0) {
-              setAnnouncement(
-                previousCount === 1
-                  ? 'File removed successfully'
-                  : `${previousCount} files removed successfully`
-              );
-            }
           }
         },
 
@@ -473,7 +508,7 @@ const FileUploader = forwardRef<FileUploaderHandle, FileUploaderProps>(
           },
         }),
       }),
-      [enhancedFileUploaderEnabled, fileItems, legacyFileNames, onChange]
+      [enhancedFileUploaderEnabled, fileItems, onChange]
     );
 
     const classes = classNames({
@@ -511,8 +546,16 @@ const FileUploader = forwardRef<FileUploaderHandle, FileUploaderProps>(
           as="p"
           className={getHelperLabelClasses(`${prefix}--label-description`)}
           id={fileUploaderInstanceId}>
+          <span className={`${prefix}--visually-hidden`}>{fileCountText}</span>
           {labelDescription}
         </Text>
+        <div
+          role="alert"
+          aria-live="assertive"
+          aria-atomic="true"
+          className={`${prefix}--visually-hidden`}>
+          {deletionAnnouncement}
+        </div>
         <FileUploaderButton
           innerRef={uploaderButton}
           disabled={disabled}
@@ -525,16 +568,7 @@ const FileUploader = forwardRef<FileUploaderHandle, FileUploaderProps>(
           name={name}
           size={size}
           aria-describedby={fileUploaderInstanceId}
-          // aria-labelledby={fileUploaderInstanceId}
         />
-        <div
-          id={announcementId}
-          role="status"
-          aria-live="polite"
-          aria-atomic="true"
-          className={`${prefix}--visually-hidden`}>
-          {announcement}
-        </div>
         <div className={`${prefix}--file-container`}>
           {displayFiles.length === 0
             ? null
@@ -563,6 +597,7 @@ const FileUploader = forwardRef<FileUploaderHandle, FileUploaderProps>(
                       status={filenameStatus}
                       onKeyDown={(evt) => {
                         if (matches(evt, [keys.Enter, keys.Space])) {
+                          evt.preventDefault();
                           handleClick(evt, {
                             index: file.index,
                             filenameStatus,
