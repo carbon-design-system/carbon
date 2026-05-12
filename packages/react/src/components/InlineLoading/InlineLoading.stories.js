@@ -115,7 +115,7 @@ Default.args = {
   description: 'Loading',
   iconDescription: 'Loading data...',
   status: 'active',
-  onSuccess: () => console.log('Success!'),
+  onSuccess: action('onSuccess'),
   'aria-live': 'assertive',
 };
 
