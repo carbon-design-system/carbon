@@ -6,11 +6,17 @@
  */
 
 import React, { useRef, useState } from 'react';
-import { render, screen, waitFor, within } from '@testing-library/react';
+import {
+  fireEvent,
+  render,
+  screen,
+  waitFor,
+  within,
+} from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import Modal from './Modal';
 import TextInput from '../TextInput';
-import { AILabel } from '../AILabel';
+import { AILabel, AILabelContent } from '../AILabel';
 import { FeatureFlags } from '../FeatureFlags';
 import { ModalPresence, withModalPresence } from './ModalPresence';
 import OverflowMenu from '../OverflowMenu';
@@ -814,6 +820,57 @@ describe('state with presence context', () => {
     expect(siblingModal).not.toBeInTheDocument();
     expect(screen.queryByTestId('modal')).toBeInTheDocument();
   });
+
+  it('should close only the topmost modal when Escape is pressed', async () => {
+    const ModalExample = () => {
+      const [isSiblingOpen, setIsSiblingOpen] = useState(false);
+      const [isChildOpen, setIsChildOpen] = useState(false);
+
+      return (
+        <ModalPresence open>
+          <Modal data-testid="modal">
+            <button
+              type="button"
+              data-testid="launch-sibling-modal"
+              onClick={() => setIsSiblingOpen(true)}>
+              Launch sibling modal
+            </button>
+          </Modal>
+          <Modal
+            data-testid="sibling-modal"
+            open={isSiblingOpen}
+            onRequestClose={() => setIsSiblingOpen(false)}>
+            <button
+              type="button"
+              data-testid="launch-child-modal"
+              onClick={() => setIsChildOpen(true)}>
+              Launch child modal
+            </button>
+            <Modal
+              data-testid="child-modal"
+              open={isChildOpen}
+              onRequestClose={() => setIsChildOpen(false)}
+            />
+          </Modal>
+        </ModalPresence>
+      );
+    };
+
+    render(<ModalExample />);
+
+    await userEvent.click(screen.getByTestId('launch-sibling-modal'));
+    await userEvent.click(screen.getByTestId('launch-child-modal'));
+
+    expect(screen.queryByTestId('modal')).toBeInTheDocument();
+    expect(screen.queryByTestId('sibling-modal')).toBeInTheDocument();
+    expect(screen.queryByTestId('child-modal')).toBeInTheDocument();
+
+    await userEvent.keyboard('{Escape}');
+
+    expect(screen.queryByTestId('modal')).toBeInTheDocument();
+    expect(screen.queryByTestId('sibling-modal')).toBeInTheDocument();
+    expect(screen.queryByTestId('child-modal')).not.toBeInTheDocument();
+  });
 });
 
 const ModalWithPresenceHof = withModalPresence((props) => {
@@ -1107,6 +1164,61 @@ describe.each([
     expect(onRequestClose).toHaveBeenCalled();
   });
 
+  it('should handle ESC key with OverflowMenu - first ESC closes menu, second closes modal', async () => {
+    const onRequestClose = jest.fn();
+
+    render(
+      <Component
+        open
+        modalHeading="Modal with Overflow Menu"
+        primaryButtonText="Primary button"
+        secondaryButtonText="Secondary button"
+        onRequestClose={onRequestClose}>
+        <OverflowMenu iconDescription="More options">
+          <OverflowMenuItem itemText="Download" />
+          <OverflowMenuItem itemText="Share" />
+        </OverflowMenu>
+        <p>Modal content</p>
+        <TextInput
+          data-modal-primary-focus
+          id="text-input-overflow-menu"
+          labelText="Domain name"
+        />
+      </Component>
+    );
+
+    expect(screen.getByRole('presentation', { hidden: true })).toHaveClass(
+      'is-visible'
+    );
+
+    const overflowMenuButton = screen.getByRole('button', {
+      name: /options/i,
+    });
+
+    await userEvent.click(overflowMenuButton);
+
+    expect(overflowMenuButton).toHaveAttribute('aria-expanded', 'true');
+
+    fireEvent.keyDown(
+      // eslint-disable-next-line testing-library/no-node-access
+      document.getElementById(overflowMenuButton.getAttribute('aria-controls')),
+      {
+        key: 'Escape',
+        code: 'Escape',
+        keyCode: 27,
+      }
+    );
+    expect(overflowMenuButton).toHaveAttribute('aria-expanded', 'false');
+    expect(onRequestClose).not.toHaveBeenCalled();
+
+    fireEvent.keyDown(document, {
+      key: 'Escape',
+      code: 'Escape',
+      keyCode: 27,
+    });
+    expect(onRequestClose).toHaveBeenCalled();
+  });
+
   it('should handle onClick events', async () => {
     const onClick = jest.fn();
     render(
@@ -1282,6 +1394,58 @@ describe.each([
     expect(screen.getByLabelText('Domain name')).toHaveFocus();
     await userEvent.click(screen.getByTestId('outside-area'));
     expect(screen.getByLabelText('Domain name')).not.toHaveFocus();
+    await userEvent.keyboard('{Escape}');
+    expect(onRequestClose).toHaveBeenCalled();
+  });
+
+  it('should handle ESC key with AILabel - first ESC closes popover, second ESC closes modal', async () => {
+    const onRequestClose = jest.fn();
+    const aiLabel = (
+      <AILabel className="ai-label-container">
+        <AILabelContent>
+          <div>
+            <p>AI Explained</p>
+            <p>Test content</p>
+          </div>
+        </AILabelContent>
+      </AILabel>
+    );
+
+    render(
+      <Component
+        open
+        primaryButtonText="Primary button"
+        secondaryButtonText="Secondary button"
+        onRequestClose={onRequestClose}
+        decorator={aiLabel}>
+        <p>Modal content</p>
+        <TextInput
+          data-modal-primary-focus
+          id="text-input-1"
+          labelText="Domain name"
+        />
+      </Component>
+    );
+
+    expect(screen.getByRole('presentation')).toHaveClass('is-visible');
+
+    const aiLabelButton = screen.getByRole('button', {
+      name: /AI Show information/i,
+    });
+    await userEvent.click(aiLabelButton);
+
+    await waitFor(() => {
+      expect(aiLabelButton).toHaveAttribute('aria-expanded', 'true');
+    });
+
+    await userEvent.keyboard('{Escape}');
+    await waitFor(() => {
+      expect(aiLabelButton).toHaveAttribute('aria-expanded', 'false');
+    });
+
+    expect(onRequestClose).not.toHaveBeenCalled();
+    expect(screen.getByRole('presentation')).toHaveClass('is-visible');
+
     await userEvent.keyboard('{Escape}');
     expect(onRequestClose).toHaveBeenCalled();
   });
