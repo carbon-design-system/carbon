@@ -36,7 +36,6 @@
     @include custom-property.declaration('icon-on-color', SelectedItemText);
 
     // Some components currently set these values for fill, although unclear if that's valid.
-    @include custom-property.declaration('button-disabled', GrayText);
     @include custom-property.declaration('interactive', ButtonText);
     @include custom-property.declaration('link-primary', LinkText);
     @include custom-property.declaration('link-primary-hover', LinkText);
@@ -63,6 +62,8 @@
       'layer-selected-inverse',
       SelectedItem
     );
+    // Set focus color to system Highlight for better visibility in high contrast mode
+    @include custom-property.declaration('focus', Highlight);
   }
 
   // Note: we need to re-emit the contextual layer tokens as part of the theme
