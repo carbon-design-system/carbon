@@ -48,6 +48,8 @@ Options:
                                                       [boolean] [default: false]
   -v, --verbose  optionally include additional logs, useful for debugging
                                                       [boolean] [default: false]
+      --decoratorsBeforeExport  parse decorators before export declarations
+                                                      [boolean] [default: false]
 ```
 
 ### Migrations
