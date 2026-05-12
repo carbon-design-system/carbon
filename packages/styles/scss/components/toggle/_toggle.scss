@@ -104,6 +104,12 @@
     }
   }
 
+  @media screen and (-ms-high-contrast: active), (forced-colors: active) {
+    .#{$prefix}--toggle__switch--checked {
+      background-color: Highlight;
+    }
+  }
+
   .#{$prefix}--toggle__text {
     @include type-style('body-01');
 
