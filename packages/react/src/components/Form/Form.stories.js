@@ -113,7 +113,7 @@ export const Default = () => {
           label="Number Input"
           min={0}
           max={100}
-          value={50}
+          defaultValue={50}
           step={10}
           iconDescription="Add/decrement number"
         />
