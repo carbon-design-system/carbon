@@ -29,6 +29,7 @@ import {
   autoUpdate,
   offset,
   FloatingFocusManager,
+  flip,
 } from '@floating-ui/react';
 import { CaretRight, CaretLeft, Checkmark } from '@carbon/icons-react';
 import { keys, match } from '../../internal/keyboard';
@@ -120,7 +121,13 @@ export const MenuItem = forwardRef<HTMLLIElement, MenuItemProps>(
       onOpenChange: setSubmenuOpen,
       placement: rtl ? 'left-start' : 'right-start',
       whileElementsMounted: autoUpdate,
-      middleware: [offset({ mainAxis: -6, crossAxis: -6 })],
+      middleware: [
+        flip(),
+        offset(({ placement }) => ({
+          mainAxis: placement.startsWith('left') ? 10 : -6,
+          crossAxis: -6,
+        })),
+      ],
       strategy: 'fixed',
     });
     const { getReferenceProps, getFloatingProps } = useInteractions([
