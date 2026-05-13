@@ -131,6 +131,19 @@ export default class CDSTabs extends HostListenerMixin(CDSContentSwitcher) {
     });
   }
 
+  /**
+   * Resets the selected state of all tabs, setting only the specified tab as selected.
+   *
+   * @param nextItem The tab item to be selected. If provided, only this item will be selected.
+   *   If null or undefined, all tabs will have their selected state set to false.
+   */
+  protected resetSelected(nextItem?: CDSTab | null) {
+    const { selectorItem } = this.constructor as typeof CDSTabs;
+    forEach(this.querySelectorAll(selectorItem), (item) => {
+      (item as CDSTab)['selected'] = nextItem === item;
+    });
+  }
+
   @HostListener('click')
   protected _handleClick(event: MouseEvent) {
     super._handleClick(event);
@@ -209,14 +222,26 @@ export default class CDSTabs extends HostListenerMixin(CDSContentSwitcher) {
 
   @HostListener('cds-tab-closed')
   protected _handleTabClosed(event: CustomEvent) {
-    const { selectorItem, selectorItemEnabled, selectorItemSelected } = this
-      .constructor as typeof CDSTabs;
+    const {
+      selectorItem,
+      selectorItemEnabled,
+      selectorItemSelected,
+      selectorItemHighlighted,
+    } = this.constructor as typeof CDSTabs;
     const { index } = event.detail;
 
     const allTabs = this.querySelectorAll<CDSTab>(selectorItem);
     const enabledTabsBeforeRemoval =
       this.querySelectorAll<CDSTab>(selectorItemEnabled);
     const activeItem = this.querySelector<CDSTab>(selectorItemSelected);
+    const highlightedItem = this.querySelector<CDSTab>(selectorItemHighlighted);
+    const selectedItemIndexInEnabledTabs = activeItem
+      ? Array.from(enabledTabsBeforeRemoval).indexOf(activeItem)
+      : -1;
+    const highlightedItemIndexInEnabledTabs = highlightedItem
+      ? Array.from(enabledTabsBeforeRemoval).indexOf(highlightedItem)
+      : -1;
+
     const indexInEnabledTabs = Array.from(enabledTabsBeforeRemoval).indexOf(
       allTabs[index]
     );
@@ -224,15 +249,32 @@ export default class CDSTabs extends HostListenerMixin(CDSContentSwitcher) {
     requestAnimationFrame(() => {
       const enabledTabs = this.querySelectorAll<CDSTab>(selectorItemEnabled);
       if (enabledTabs.length > 0) {
+        let nextHighlightedItem: CDSTab;
+        let nextSelectedItem: CDSTab;
+
         if (activeTabClosed) {
-          enabledTabs[0].selected = true;
-          this.value = enabledTabs[0].value;
+          nextSelectedItem = enabledTabs[0];
+          nextHighlightedItem = enabledTabs[0];
+        } else {
+          if (indexInEnabledTabs < selectedItemIndexInEnabledTabs) {
+            nextSelectedItem = enabledTabs[selectedItemIndexInEnabledTabs - 1];
+          } else {
+            nextSelectedItem = enabledTabs[selectedItemIndexInEnabledTabs];
+          }
+
+          if (indexInEnabledTabs < highlightedItemIndexInEnabledTabs) {
+            nextHighlightedItem =
+              enabledTabs[highlightedItemIndexInEnabledTabs - 1];
+          } else {
+            nextHighlightedItem =
+              enabledTabs[highlightedItemIndexInEnabledTabs];
+          }
         }
-        const nextHighlightedItem =
-          indexInEnabledTabs < enabledTabs.length
-            ? enabledTabs[indexInEnabledTabs]
-            : enabledTabs[indexInEnabledTabs - 1];
-        nextHighlightedItem.highlighted = true;
+
+        this.resetSelected(nextSelectedItem);
+        this.resetHighlighted(nextHighlightedItem);
+        this.value = nextSelectedItem.value;
+
         nextHighlightedItem.shadowRoot
           ?.querySelector<HTMLElement>(
             `.${prefix}--tabs__nav-link--dismissable`
