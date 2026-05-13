@@ -122,7 +122,6 @@ $css--plex: true !default;
   }
 }
 
-// When enable-v12-tile-radio-icons feature flag is enabled, always show the radio button icon
 :host(#{$prefix}-radio-tile[enable-v12-tile-radio-icons]) {
   .#{$prefix}--tile__checkmark {
     opacity: 1;
@@ -332,7 +331,6 @@ $css--plex: true !default;
 }
 
 :host(#{$prefix}-expandable-tile[enable-tile-contrast]) {
-  // border: 1px solid $border-tile;
   .#{$prefix}--tile__chevron--interactive {
     border: 1px solid $border-disabled;
   }
@@ -343,10 +341,6 @@ $css--plex: true !default;
   ) {
   border: 1px solid $border-tile;
 }
-
-// :host(#{$prefix}-expandable-tile[enable-tile-contrast][with-interactive]) {
-//   border: none;
-// }
 
 :host(#{$prefix}-radio-tile[enable-tile-contrast]) {
   .#{$prefix}--tile--selectable {
