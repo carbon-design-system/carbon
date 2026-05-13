@@ -134,7 +134,7 @@ export interface PaginationProps
   /**
    * Specify the size of the Pagination.
    */
-  size?: 'sm' | 'md' | 'lg';
+  size?: 'xs' | 'sm' | 'md' | 'lg';
 
   /**
    * The total number of items.
@@ -237,7 +237,8 @@ const Pagination = React.forwardRef(
 
     const className = cx({
       [`${prefix}--pagination`]: true,
-      [`${prefix}--pagination--${size}`]: size,
+      [`${prefix}--pagination--${size}`]: size, // TODO: V12 - Remove this class
+      [`${prefix}--layout--size-${size}`]: size,
       [customClassName]: !!customClassName,
     });
     const totalPages = totalItems
@@ -646,7 +647,7 @@ Pagination.propTypes = {
   /**
    * Specify the size of the Pagination.
    */
-  size: PropTypes.oneOf(['sm', 'md', 'lg']),
+  size: PropTypes.oneOf(['xs', 'sm', 'md', 'lg']),
 
   /**
    * The total number of items.

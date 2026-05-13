@@ -4793,6 +4793,21 @@
     - engineered
     - prompt
     - AI
+- name: hashicorp--terraform
+  friendly_name: HashiCorp® Terraform
+  aliases:
+    - hashicorp
+    - terraform
+    - code
+    - tool
+    - build
+    - change
+    - version
+    - infrastructure
+    - safety
+    - safely
+    - efficiency
+    - efficiently
 - name: hazy
   friendly_name: Hazy
   aliases:
@@ -5115,15 +5130,52 @@
     - hyper protect
     - virtual servers
     - cloud
+- name: ibm--aptio
+  friendly_name: IBM® Aptio®
+  aliases:
+    - aptio
+    - saas
+    - investment
+    - investments
+    - financial
+    - insights
 - name: ibm--automation-platform
   friendly_name: IBM Automation platform
   aliases:
     - IBM automation platform
     - automation
+- name: ibm--bob
+  friendly_name: IBM® Bob
+  aliases:
+    - bob
+    - ibm bob
+    - ai
+    - ai-powered
+    - integration
+    - development
+    - environment
+    - ide
+    - modernization
+    - assistant
 - name: ibm--cloud
   friendly_name: IBM Cloud
   aliases:
     - IBM cloud
+- name: ibm--concert
+  friendly_name: IBM® Concert®
+  aliases:
+    - concert
+    - ibm concert
+    - generative
+    - ai
+    - ai-driven
+    - insights
+    - automation
+    - platform
+    - streamline
+    - application
+    - management
+    - application management
 - name: ibm--elm
   friendly_name: IBM® Engineering Lifecycle Management
   aliases:
@@ -5206,6 +5258,20 @@
     - Institute for Business Value
     - Thought Leadership
     - IBV study
+- name: ibm--instana
+  friendly_name: IBM® Instana®
+  aliases:
+    - instana
+    - ibm instana
+    - observability
+    - platform
+    - analyze
+    - troubleshoot
+    - services
+    - microservices
+    - applications
+    - containerized
+    - containerized applications
 - name: ibm--ix
   friendly_name: IBM iX®
   aliases:
@@ -8110,6 +8176,18 @@
     - environment
     - process
     - workplace
+- name: red-hat--ansible
+  friendly_name: Red Hat® Ansible®
+  aliases:
+    - red hat
+    - ansible
+    - red hat ansible
+    - automation
+    - circle
+    - round
+    - scaling
+    - ai
+    - generative ai
 - name: red-hat--applications
   friendly_name: Red Hat applications
   aliases:
@@ -9922,6 +10000,14 @@
     - data analytics
     - data
     - analytics
+- name: timesheet
+  friendly_name: Timesheet
+  aliases:
+    - timesheet
+    - time
+    - clock
+    - calendar
+    - document
 - name: tire
   friendly_name: Tire
   aliases:
@@ -10825,6 +10911,16 @@
     - responsible workflow
     - transparent workflow
     - explainability
+- name: watsonx--orchestrate
+  friendly_name: IBM® watsonx Orchestrate™
+  aliases:
+    - IBM watsonx
+    - orchestrate
+    - circle
+    - enterprise
+    - platform
+    - AI
+    - data
 - name: waving-hand
   friendly_name: Waving hand
   aliases:

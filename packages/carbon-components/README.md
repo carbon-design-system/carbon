@@ -2,7 +2,8 @@
 
 > Styles for the Carbon Design System
 
-> [!CAUTION]  
+> [!CAUTION]
+>
 > `carbon-components` is deprecated and will not receive any more updates.
 >
 > More information is available on our

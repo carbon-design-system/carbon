@@ -95,6 +95,7 @@ class CDSMenuButton extends HostListenerMixin(LitElement) {
       return;
     }
 
+    // Handle clicks on trigger only, other listeners handle clicks on menu items
     const path = event.composedPath();
     if (path.includes(trigger)) {
       if (this._open) {
@@ -102,8 +103,6 @@ class CDSMenuButton extends HostListenerMixin(LitElement) {
       } else {
         this._open = true;
       }
-    } else if (this._open) {
-      this._closeMenu();
     }
   };
 
