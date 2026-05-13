@@ -275,6 +275,11 @@ Skeleton.args = {
   isFlush: false,
   ordered: false,
 };
+Skeleton.parameters = {
+  controls: {
+    exclude: ['disabled', 'size'],
+  },
+};
 
 Skeleton.argTypes = {
   align: {
@@ -287,19 +292,9 @@ Skeleton.argTypes = {
   className: {
     control: false,
   },
-  disabled: {
-    table: {
-      disable: true,
-    },
-  },
   isFlush: {
     control: {
       type: 'boolean',
-    },
-  },
-  size: {
-    table: {
-      disable: true,
     },
   },
 };

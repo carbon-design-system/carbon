@@ -252,6 +252,7 @@ collect:
         - warn
         - warnText
         - width
+        - withRowGap
         # AccordionItem
         - handleAnimationEnd
         - onHeadingClick

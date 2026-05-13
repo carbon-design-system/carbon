@@ -2,7 +2,7 @@
   "compilerOptions": {
     "target": "es2017",
     "module": "esnext",
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
     "lib": ["es2017", "esnext.array", "dom", "dom.iterable"],
     "typeRoots": [
       "src/typings",
