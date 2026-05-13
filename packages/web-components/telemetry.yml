@@ -18,6 +18,7 @@ collect:
         - align
         - alignment
         - alignment-axis-offset
+        - allow-custom-value
         - allow-empty
         - aria-current
         - aria-label
@@ -53,6 +54,7 @@ collect:
         - color-scheme
         - cols
         - condensed
+        - contained
         - container-class
         - counter-mode
         - danger-description
@@ -66,6 +68,7 @@ collect:
         - direction
         - disable-wheel
         - disabled
+        - dismissable
         - download
         - dropShadow
         - enable-counter
@@ -109,6 +112,7 @@ collect:
         - indeterminate
         - index
         - inline
+        - input-label
         - input-mode
         - invalid
         - invalid-text
@@ -148,6 +152,10 @@ collect:
         - nested
         - odd
         - oncds-checkbox-changed
+        - oncds-combo-box-beingselected
+        - oncds-combo-box-beingtoggled
+        - oncds-combo-box-selected
+        - oncds-combo-box-toggled
         - oncds-content-switcher-beingselected
         - oncds-content-switcher-selected
         - oncds-dropdown-beingselected
@@ -218,6 +226,7 @@ collect:
         - selection-value
         - selector-initial-focus
         - shortcut
+        - should-filter-item
         - should-submit-on-enter
         - show-password-label
         - show-password-visibility-toggle
@@ -249,6 +258,7 @@ collect:
         - total-items
         - trigger-content
         - type
+        - typeahead
         - use-zebra-styles
         - validity-message
         - value
@@ -299,15 +309,6 @@ collect:
         - sm
         - span
         - xlg
-        # cds-combo-box
-        - allow-custom-value
-        - input-label
-        - oncds-combo-box-beingselected
-        - oncds-combo-box-beingtoggled
-        - oncds-combo-box-selected
-        - oncds-combo-box-toggled
-        - should-filter-item
-        - typeahead
         # cds-contained-list
         - is-inset
         # cds-contained-list-item
@@ -362,6 +363,7 @@ collect:
         - message-text
         # cds-grid
         - narrow
+        - with-row-gap
         # cds-header-global-action
         - panel-id
         # cds-header-menu
@@ -422,7 +424,9 @@ collect:
         - page-actions-flush
         # cds-pagination
         - backward-text
+        - backward-text-tooltip-position
         - forward-text
+        - forward-text-tooltip-position
         - is-last-page
         - items-per-page-text
         - oncds-page-sizes-select-changed
@@ -504,6 +508,8 @@ collect:
         # cds-tab
         - badge-indicator
         - icon-only
+        - oncds-tab-beingclosed
+        - oncds-tab-closed
         - tabTitle
         # cds-table
         - filterRows
@@ -543,8 +549,6 @@ collect:
         - oncds-tabs-selected
         - selected-item-assistive-text
         - selecting-items-assistive-text
-        # cds-tabs-skeleton
-        - contained
         # cds-tearsheet
         - has-close-icon
         - influencer-placement
@@ -849,6 +853,16 @@ collect:
         # cds-menu-button - menu-background-token
         - background
         - layer
+        # cds-pagination - backward-text-tooltip-position
+        - bottom
+        - left
+        - right
+        - top
+        # cds-pagination - forward-text-tooltip-position
+        - bottom
+        - left
+        - right
+        - top
         # cds-side-panel - placement
         - left
         - right
