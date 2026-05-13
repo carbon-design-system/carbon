@@ -448,7 +448,7 @@
   sizes:
     - 32
 - name: aggregator--count-rows
-  friendly_name: aggregator count rows
+  friendly_name: Aggregator count rows
   aliases:
     - DataStage
     - Transform
@@ -460,7 +460,7 @@
   sizes:
     - 32
 - name: aggregator--recalculation
-  friendly_name: aggregator recalculation
+  friendly_name: Aggregator recalculation
   aliases:
     - DataStage
     - Transform
@@ -1817,7 +1817,7 @@
   sizes:
     - 32
 - name: async
-  friendly_name: async
+  friendly_name: Async
   aliases:
     - asynchrononous
     - arrows
@@ -2617,7 +2617,7 @@
   sizes:
     - 32
 - name: box--large
-  friendly_name: Box extra large
+  friendly_name: Box large
   aliases:
     - systems
     - box
@@ -4068,7 +4068,7 @@
     - bubble chart
     - chart
 - name: chart--bubble-packed
-  friendly_name: Chart Bubble-packed
+  friendly_name: Chart bubble packed
   aliases:
     - graph
     - bar
@@ -10396,7 +10396,7 @@
   sizes:
     - 32
 - name: friendship
-  friendly_name: friendship
+  friendly_name: Friendship
   aliases:
     - people
     - friends
@@ -10447,7 +10447,7 @@
   sizes:
     - 32
 - name: funnel--sequence
-  friendly_name: funnel sequence
+  friendly_name: Funnel sequence
   aliases:
     - funnel
     - sequence
@@ -10459,7 +10459,7 @@
   sizes:
     - 32
 - name: funnel--sort
-  friendly_name: funnel sort
+  friendly_name: Funnel sort
   aliases:
     - funnel
     - sort
@@ -10663,8 +10663,8 @@
     - user
   sizes:
     - 32
-- name: generate-pdf
-  friendly_name: Generate pdf
+- name: generate--pdf
+  friendly_name: Generate PDF
   aliases:
     - generate pdf
     - create pdf
@@ -11509,10 +11509,13 @@
     - Data migration
   sizes:
     - 32
-- name: ibm--bluepay
-  friendly_name: Unassigned
+- name: payment--methods
+  friendly_name: Payment methods
   aliases:
-    - IBM Bluepay
+    - pay
+    - payment
+    - methods
+    - payment methods
   sizes:
     - 32
 - name: ibm--cloudant
@@ -12319,10 +12322,12 @@
     - remote
   sizes:
     - 32
-- name: ibm--tenet
-  friendly_name: Unassigned
+- name: portfolio--management
+  friendly_name: Portfolio management
   aliases:
-    - IBM Tenet
+    - portfolio
+    - management
+    - portfolio management
   sizes:
     - 32
 - name: ibm--test-accelerator-for-z
@@ -14201,7 +14206,7 @@
   sizes:
     - 32
 - name: iD
-  friendly_name: ID
+  friendly_name: iD
   aliases:
     - identification
     - identity
@@ -17949,7 +17954,7 @@
   sizes:
     - 32
 - name: moonset
-  friendly_name: moonset
+  friendly_name: Moonset
   aliases:
     - moonset
     - phase
@@ -18125,7 +18130,7 @@
   sizes:
     - 32
 - name: navaid--civil
-  friendly_name: Navaid civil
+  friendly_name: NAVAID civil
   aliases:
     - travel
     - navigation
@@ -18134,7 +18139,7 @@
   sizes:
     - 32
 - name: navaid--dme
-  friendly_name: Navaid dme
+  friendly_name: NAVAID DME
   aliases:
     - travel
     - navigation
@@ -18143,7 +18148,7 @@
   sizes:
     - 32
 - name: navaid--helipad
-  friendly_name: Navaid helipad
+  friendly_name: NAVAID helipad
   aliases:
     - travel
     - navigation
@@ -18152,7 +18157,7 @@
   sizes:
     - 32
 - name: navaid--military
-  friendly_name: Navaid military
+  friendly_name: NAVAID military
   aliases:
     - travel
     - navigation
@@ -18161,7 +18166,7 @@
   sizes:
     - 32
 - name: navaid--military-civil
-  friendly_name: Navaid military civil
+  friendly_name: NAVAID military civil
   aliases:
     - travel
     - navigation
@@ -18171,7 +18176,7 @@
   sizes:
     - 32
 - name: navaid--ndb
-  friendly_name: Navaid ndb
+  friendly_name: NAVAID NDB
   aliases:
     - travel
     - navigation
@@ -18180,7 +18185,7 @@
   sizes:
     - 32
 - name: navaid--ndb-dme
-  friendly_name: Navaid ndb dme
+  friendly_name: NAVAID NDB/DME
   aliases:
     - travel
     - navigation
@@ -18190,7 +18195,7 @@
   sizes:
     - 32
 - name: navaid--private
-  friendly_name: Navaid private
+  friendly_name: NAVAID private
   aliases:
     - travel
     - navigation
@@ -18199,7 +18204,7 @@
   sizes:
     - 32
 - name: navaid--seaplane
-  friendly_name: Navaid seaplane
+  friendly_name: NAVAID seaplane
   aliases:
     - travel
     - navigation
@@ -18217,7 +18222,7 @@
   sizes:
     - 32
 - name: navaid--vhfor
-  friendly_name: Navaid vhfor
+  friendly_name: NAVAID VHFOR
   aliases:
     - travel
     - navigation
@@ -18226,7 +18231,7 @@
   sizes:
     - 32
 - name: navaid--vor
-  friendly_name: Navaid vor
+  friendly_name: NAVAID VOR
   aliases:
     - travel
     - navigation
@@ -18234,8 +18239,8 @@
     - vor
   sizes:
     - 32
-- name: navaid--vordme
-  friendly_name: Navaid vordme
+- name: navaid--vor-dme
+  friendly_name: NAVAID VOR/DME
   aliases:
     - travel
     - navigation
@@ -18243,8 +18248,8 @@
     - vordme
   sizes:
     - 32
-- name: navaid--vortac
-  friendly_name: Navaid vortac
+- name: navaid--vor-tac
+  friendly_name: NAVAID VOR/TAC
   aliases:
     - travel
     - navigation
@@ -20064,7 +20069,7 @@
   sizes:
     - 32
 - name: pivot--horizontal
-  friendly_name: pivot horizontal
+  friendly_name: Pivot horizontal
   aliases:
     - pivot
     - horizontal
@@ -20076,7 +20081,7 @@
   sizes:
     - 32
 - name: pivot--vertical
-  friendly_name: pivot vertical
+  friendly_name: Pivot vertical
   aliases:
     - pivot
     - vertical
@@ -21011,7 +21016,7 @@
   sizes:
     - 32
 - name: ref-evapotranspiration
-  friendly_name: Ref evapotranspiration
+  friendly_name: Reference evapotranspiration
   aliases:
     - weather
     - ref
@@ -23195,7 +23200,7 @@
   sizes:
     - 32
 - name: slisor
-  friendly_name: slicestor
+  friendly_name: Slicestor
   aliases:
     - analysis
     - slisor
@@ -23339,7 +23344,7 @@
     - cluster
   sizes:
     - 32
-- name: software-resource--resource
+- name: software-resource--reference
   friendly_name: Software resource reference
   aliases:
     - software
@@ -24262,7 +24267,7 @@
   sizes:
     - 32
 - name: surrogate--key-database
-  friendly_name: surrogate key database
+  friendly_name: Surrogate key database
   aliases:
     - surrogate
     - key database
@@ -24274,7 +24279,7 @@
   sizes:
     - 32
 - name: surrogate--key-flat-file
-  friendly_name: surrogate key flat file
+  friendly_name: Surrogate key flat file
   aliases:
     - surrogate
     - key flat file
@@ -26100,7 +26105,7 @@
   sizes:
     - 32
 - name: tropical-storm--tracks
-  friendly_name: tropical-storm--tracks
+  friendly_name: Tropical storm tracks
   aliases:
     - tropical storm
     - precipitation
@@ -26814,7 +26819,7 @@
   sizes:
     - 32
 - name: user--x-ray
-  friendly_name: User x-ray
+  friendly_name: User X-ray
   sizes:
     - 32
   aliases:

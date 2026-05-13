@@ -1,5 +1,7 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32">
-  <rect width="24" height="24" x="4" y="4" rx="2" ry="2"/>
-  <path fill="none" d="M0 32V0h32v32z" data-name="&amp;lt;Square Solid&amp;gt;"/>
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- Generator: Adobe Illustrator 30.3.0, SVG Export Plug-In . SVG Version: 9.03 Build 0)  -->
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 32 32" style="enable-background:new 0 0 32 32;" xml:space="preserve">
+<path d="M6,4h20c1.105,0,2,0.895,2,2v20c0,1.105-0.895,2-2,2H6c-1.105,0-2-0.895-2-2V6C4,4.895,4.895,4,6,4z"/>
+<path id="Transparent_Rectangle" style="fill:none;" d="M0,32V0h32v32H0z"/>
 </svg>
