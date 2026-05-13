@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2025
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -72,9 +72,6 @@ const argTypes = {
   },
   onInput: {
     action: `input`,
-    table: {
-      disable: true,
-    },
   },
   placeholder: {
     control: 'text',
@@ -105,6 +102,11 @@ const argTypes = {
 export const Default = {
   args,
   argTypes,
+  parameters: {
+    controls: {
+      exclude: ['onInput'],
+    },
+  },
   render: ({
     cols,
     counterMode,

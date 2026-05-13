@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2021
+// Copyright IBM Corp. 2021, 2026
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -42,7 +42,7 @@
 
   .#{$prefix}--progress-bar__track {
     position: relative;
-    background-color: $layer;
+    background-color: $border-subtle;
     block-size: convert.to-rem(8px);
     inline-size: 100%;
     min-inline-size: convert.to-rem(48px);
