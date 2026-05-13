@@ -18,6 +18,7 @@ import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
 
 - [Overview](#overview)
 - [Expandable](#expandable)
+- [Inline](#inline)
 - [Component API](#component-api)
 - [Feedback](#feedback)
 
@@ -43,6 +44,20 @@ import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
     {
       title: 'Open in Stackblitz',
       onClick: () => stackblitzPrefillConfig(SearchStories.Expandable),
+    },
+  ]}
+/>
+
+## Inline
+
+Use the `inline` variant for dense layouts where Search should align visually with ghost controls or similar inline UI.
+
+<Canvas
+  of={SearchStories.Inline}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(SearchStories.Inline),
     },
   ]}
 />

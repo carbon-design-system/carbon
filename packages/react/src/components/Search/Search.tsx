@@ -116,6 +116,12 @@ export interface SearchProps extends InputPropsBase {
   size?: 'xs' | 'sm' | 'md' | 'lg';
 
   /**
+   * Specify the visual variant of the Search.
+   * Use `inline` for dense layouts where the control should align with ghost buttons or similar inline UI.
+   */
+  variant?: 'default' | 'inline';
+
+  /**
    * Specify the type of the `<input>`
    */
   type?: string;
@@ -148,6 +154,7 @@ const Search = React.forwardRef<HTMLInputElement, SearchProps>(
       role,
       size,
       type = 'search',
+      variant = 'default',
       value,
       ...rest
     },
@@ -172,6 +179,7 @@ const Search = React.forwardRef<HTMLInputElement, SearchProps>(
         [`${prefix}--search--light`]: light,
         [`${prefix}--search--disabled`]: disabled,
         [`${prefix}--search--fluid`]: isFluid,
+        [`${prefix}--search--inline`]: variant === 'inline',
       },
       className
     );
@@ -418,6 +426,11 @@ Search.propTypes = {
    * Specify the size of the Search
    */
   size: PropTypes.oneOf(['xs', 'sm', 'md', 'lg']),
+
+  /**
+   * Specify the visual variant of the Search
+   */
+  variant: PropTypes.oneOf(['default', 'inline']),
 
   /**
    * Specify the type of the `<input>`

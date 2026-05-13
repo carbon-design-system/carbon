@@ -115,6 +115,59 @@
     background: $field-02;
   }
 
+  .#{$prefix}--search--inline:not(.#{$prefix}--search--fluid) {
+    border-inline-end: 1px solid $border-subtle;
+
+    .#{$prefix}--search-input {
+      background-color: transparent;
+      border-block-end: 1px solid $border-subtle;
+
+      &:hover:not(:disabled) {
+        background-color: transparent;
+      }
+
+      &:focus {
+        @include focus-outline('reset');
+
+        border-block-end: 2px solid $focus;
+        outline: none;
+
+        @media screen and (prefers-contrast) {
+          border-block-end-style: dotted;
+        }
+      }
+    }
+
+    &.#{$prefix}--search--light .#{$prefix}--search-input {
+      background-color: transparent;
+    }
+
+    .#{$prefix}--search-input[disabled] {
+      background-color: transparent;
+      border-block-end-color: transparent;
+    }
+
+    .#{$prefix}--search--light .#{$prefix}--search-close::before {
+      background-color: transparent;
+    }
+
+    .#{$prefix}--search-close {
+      &:hover:not(:disabled) {
+        background-color: $background-hover;
+        border-block-end-color: transparent;
+      }
+
+      &:focus {
+        @include focus-outline('outline');
+      }
+    }
+
+    .#{$prefix}--search--disabled .#{$prefix}--search-close:hover {
+      background-color: transparent;
+      border-block-end-color: transparent;
+    }
+  }
+
   .#{$prefix}--search-magnifier-icon {
     @include layout.use('size', $default: 'md', $min: 'xs', $max: 'lg');
     @include reset;

@@ -220,6 +220,12 @@ describe('Search', () => {
       );
     });
 
+    it('should respect variant prop', () => {
+      render(<Search labelText="test-search" variant="inline" />);
+
+      expect(screen.getByRole('search')).toHaveClass(`${prefix}--search--inline`);
+    });
+
     it('should respect type prop', () => {
       render(<Search labelText="test-search" type="search" />);
 

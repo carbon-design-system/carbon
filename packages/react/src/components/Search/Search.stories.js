@@ -6,10 +6,12 @@
  */
 
 import React from 'react';
+import { Filter, Maximize } from '@carbon/icons-react';
 
 import { WithLayer } from '../../../.storybook/templates/WithLayer';
 
 import ExpandableSearch from '../ExpandableSearch';
+import { IconButton } from '../IconButton';
 import Search from '.';
 import SearchSkeleton from './Search.Skeleton';
 import mdx from './Search.mdx';
@@ -25,6 +27,7 @@ export default {
     placeholder: 'Placeholder text',
     size: 'md',
     type: 'search',
+    variant: 'default',
   },
   argTypes: {
     light: {
@@ -62,6 +65,12 @@ export default {
     },
     size: {
       options: ['xs', 'sm', 'md', 'lg'],
+      control: {
+        type: 'select',
+      },
+    },
+    variant: {
+      options: ['default', 'inline'],
       control: {
         type: 'select',
       },
@@ -133,6 +142,26 @@ export const Default = ({ defaultWidth, ...searchArgs }) => (
   </div>
 );
 Default.parameters = { ...defaultParameters };
+
+export const Inline = ({ defaultWidth, ...searchArgs }) => (
+  <div
+    style={{
+      display: 'flex',
+      alignItems: 'stretch',
+      inlineSize: defaultWidth,
+    }}>
+    <div style={{ flex: 1, minInlineSize: 0 }}>
+      <Search id="search-inline-1" {...searchArgs} variant="inline" />
+    </div>
+    <IconButton kind="ghost" label="Filter">
+      <Filter />
+    </IconButton>
+    <IconButton kind="ghost" label="Expand">
+      <Maximize />
+    </IconButton>
+  </div>
+);
+Inline.parameters = { ...defaultParameters };
 
 export const Skeleton = ({ size, defaultWidth }) => (
   <div style={{ width: defaultWidth }}>
