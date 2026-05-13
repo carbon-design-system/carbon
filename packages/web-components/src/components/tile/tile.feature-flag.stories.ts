@@ -17,6 +17,8 @@ import '../link';
 import { iconLoader } from '../../globals/internal/icon-loader';
 import styles from './tile-story.scss?lit';
 import { withLayers } from '../../../.storybook/decorators/with-layers';
+import '../../../.storybook/templates/with-feature-flags';
+import storyDocs from './tile.featureflag.mdx';
 
 const previewClassname = 'preview-tile';
 const content = html`
@@ -67,7 +69,7 @@ export const Clickable = {
     <div class=${previewClassname}>
       <feature-flags enable-v12-tile-default-icons>
         <cds-clickable-tile
-          enable-experimental-tile-contrast
+          enable-tile-contrast
           ?disabled="${disabled}"
           href="https://www.carbondesignsystem.com/">
           Clickable Tile
@@ -86,7 +88,7 @@ export const ClickableWithLayer = {
     <div class=${previewClassname}>
       <feature-flags enable-v12-tile-default-icons>
         <cds-clickable-tile
-          enable-experimental-tile-contrast
+          enable-tile-contrast
           href="https://www.carbondesignsystem.com/">
           Clickable Tile
         </cds-clickable-tile>
@@ -106,7 +108,7 @@ export const Expandable = {
     return html`
       <div style="width: 400px" class=${previewClassname}>
         <cds-expandable-tile
-          enable-experimental-tile-contrast
+          enable-tile-contrast
           ?expanded="${expanded}"
           @cds-expandable-tile-beingchanged=${handleBeforeChanged}
           @cds-expandable-tile-changed=${onChange}>
@@ -136,7 +138,7 @@ export const ExpandableWithInteractive = {
       <div style="width: 400px" class=${previewClassname}>
         <cds-expandable-tile
           with-interactive
-          enable-experimental-tile-contrast
+          enable-tile-contrast
           ?expanded="${expanded}"
           @cds-expandable-tile-beingchanged=${handleBeforeChanged}
           @cds-expandable-tile-changed=${onChange}>
@@ -174,7 +176,7 @@ export const ExpandableWithLayer = {
       <div class=${previewClassname}>
         <cds-expandable-tile
           style="width:400px"
-          enable-experimental-tile-contrast
+          enable-tile-contrast
           ?expanded="${expanded}"
           @cds-expandable-tile-beingchanged=${handleBeforeChanged}
           @cds-expandable-tile-changed=${onChange}>
@@ -190,19 +192,6 @@ export const ExpandableWithLayer = {
       </div>
     `;
   },
-};
-
-export const Selectable = {
-  ...defaultControls,
-  render: ({ disabled }) => html`
-    <div class=${previewClassname}>
-      <cds-selectable-tile
-        enable-experimental-tile-contrast
-        ?disabled="${disabled}">
-        Selectable
-      </cds-selectable-tile>
-    </div>
-  `,
 };
 
 export const MultiSelect = {
@@ -222,7 +211,7 @@ export const MultiSelect = {
       <cds-tile-group>
         <cds-selectable-tile
           checkmark-label="${ifDefined(checkmarkLabel)}"
-          enable-experimental-tile-contrast
+          enable-tile-contrast
           name="${ifDefined(name)}"
           ?selected="${selected}"
           value="${ifDefined(value)}"
@@ -232,7 +221,7 @@ export const MultiSelect = {
         </cds-selectable-tile>
         <cds-selectable-tile
           checkmark-label="${ifDefined(checkmarkLabel)}"
-          enable-experimental-tile-contrast
+          enable-tile-contrast
           name="${ifDefined(name)}"
           ?selected="${selected}"
           value="${ifDefined(value)}"
@@ -242,7 +231,7 @@ export const MultiSelect = {
         </cds-selectable-tile>
         <cds-selectable-tile
           checkmark-label="${ifDefined(checkmarkLabel)}"
-          enable-experimental-tile-contrast
+          enable-tile-contrast
           name="${ifDefined(name)}"
           ?selected="${selected}"
           value="${ifDefined(value)}"
@@ -259,34 +248,36 @@ export const Radio = {
   ...defaultControls,
   render: ({ checkmarkLabel, disabled, name, value }) => html`
     <div class=${previewClassname}>
-      <cds-tile-group>
-        <legend slot="legend">Radio tile group</legend>
-        <cds-radio-tile
-          enable-experimental-tile-contrast
-          checkmark-label="${ifDefined(checkmarkLabel)}"
-          name="${ifDefined(name)}"
-          value="${ifDefined(value)}"
-          ?disabled=${disabled}>
-          Option 1
-        </cds-radio-tile>
-        <cds-radio-tile
-          enable-experimental-tile-contrast
-          checkmark-label="${ifDefined(checkmarkLabel)}"
-          name="${ifDefined(name)}"
-          value="${ifDefined(value)}"
-          ?disabled=${disabled}
-          selected>
-          Option 2
-        </cds-radio-tile>
-        <cds-radio-tile
-          enable-experimental-tile-contrast
-          checkmark-label="${ifDefined(checkmarkLabel)}"
-          name="${ifDefined(name)}"
-          value="${ifDefined(value)}"
-          ?disabled=${disabled}>
-          Option 3
-        </cds-radio-tile>
-      </cds-tile-group>
+      <feature-flags enable-v12-tile-radio-icons>
+        <cds-tile-group>
+          <legend slot="legend">Radio tile group</legend>
+          <cds-radio-tile
+            enable-tile-contrast
+            checkmark-label="${ifDefined(checkmarkLabel)}"
+            name="${ifDefined(name)}"
+            value="${ifDefined(value)}"
+            ?disabled=${disabled}>
+            Option 1
+          </cds-radio-tile>
+          <cds-radio-tile
+            enable-tile-contrast
+            checkmark-label="${ifDefined(checkmarkLabel)}"
+            name="${ifDefined(name)}"
+            value="${ifDefined(value)}"
+            ?disabled=${disabled}
+            selected>
+            Option 2
+          </cds-radio-tile>
+          <cds-radio-tile
+            enable-tile-contrast
+            checkmark-label="${ifDefined(checkmarkLabel)}"
+            name="${ifDefined(name)}"
+            value="${ifDefined(value)}"
+            ?disabled=${disabled}>
+            Option 3
+          </cds-radio-tile>
+        </cds-tile-group>
+      </feature-flags>
     </div>
   `,
 };
@@ -298,18 +289,28 @@ export const RadioWithLayer = {
   },
   render: () => html`
     <div class=${previewClassname}>
-      <cds-tile-group>
-        <legend slot="legend">Radio tile group</legend>
-        <cds-radio-tile enable-experimental-tile-contrast name="options">
-          Option 1
-        </cds-radio-tile>
-        <cds-radio-tile
-          enable-experimental-tile-contrast
-          name="options"
-          selected>
-          Option 2
-        </cds-radio-tile>
-      </cds-tile-group>
+      <feature-flags enable-v12-tile-radio-icons="true">
+        <cds-tile-group>
+          <legend slot="legend">Radio tile group</legend>
+          <cds-radio-tile enable-tile-contrast name="options">
+            Option 1
+          </cds-radio-tile>
+          <cds-radio-tile enable-tile-contrast name="options" selected>
+            Option 2
+          </cds-radio-tile>
+        </cds-tile-group>
+      </feature-flags>
+    </div>
+  `,
+};
+
+export const Selectable = {
+  ...defaultControls,
+  render: ({ disabled }) => html`
+    <div class=${previewClassname}>
+      <cds-selectable-tile enable-tile-contrast ?disabled="${disabled}">
+        Selectable
+      </cds-selectable-tile>
     </div>
   `,
 };
@@ -326,46 +327,53 @@ export const WithAILabel = {
         ${styles}
       </style>
       <div class=${previewClassname}>
-        <div class="ai-label-selectable-tile-container">
-          <cds-tile-group>
-            <legend slot="legend">Radio tile group</legend>
-            <div>
-              <cds-radio-tile
-                name="options"
-                ?has-rounded-corners="${hasRoundedCorners}">
-                <span>Option 1</span>
-                <cds-ai-label alignment="bottom-left">
-                  ${content}${actions}</cds-ai-label
-                >
-              </cds-radio-tile>
+        <feature-flags enable-v12-tile-radio-icons="true">
+          <div class="ai-label-selectable-tile-container">
+            <cds-tile-group>
+              <legend slot="legend">Radio tile group</legend>
+              <div>
+                <cds-radio-tile
+                  name="options"
+                  ?has-rounded-corners="${hasRoundedCorners}">
+                  <span>Option 1</span>
+                  <cds-ai-label alignment="bottom-left">
+                    ${content}${actions}</cds-ai-label
+                  >
+                </cds-radio-tile>
 
-              <cds-radio-tile
-                name="options"
-                selected
-                ?has-rounded-corners="${hasRoundedCorners}">
-                <span>Option 2</span>
-                <cds-ai-label alignment="bottom-left">
-                  ${content}${actions}</cds-ai-label
-                >
-              </cds-radio-tile>
+                <cds-radio-tile
+                  name="options"
+                  selected
+                  ?has-rounded-corners="${hasRoundedCorners}">
+                  <span>Option 2</span>
+                  <cds-ai-label alignment="bottom-left">
+                    ${content}${actions}</cds-ai-label
+                  >
+                </cds-radio-tile>
 
-              <cds-radio-tile
-                name="options"
-                ?has-rounded-corners="${hasRoundedCorners}">
-                <span>Option 3</span>
-                <cds-ai-label alignment="bottom-left">
-                  ${content}${actions}</cds-ai-label
-                >
-              </cds-radio-tile>
-            </div>
-          </cds-tile-group>
-        </div>
+                <cds-radio-tile
+                  name="options"
+                  ?has-rounded-corners="${hasRoundedCorners}">
+                  <span>Option 3</span>
+                  <cds-ai-label alignment="bottom-left">
+                    ${content}${actions}</cds-ai-label
+                  >
+                </cds-radio-tile>
+              </div>
+            </cds-tile-group>
+          </div>
+        </feature-flags>
       </div> `;
   },
 };
 const meta = {
   title: 'Components/Tile/Feature Flag',
   tags: ['!autodocs'],
+  parameters: {
+    docs: {
+      page: storyDocs,
+    },
+  },
   decorators: [
     (story) => html`
       <sb-template-feature-flags> ${story()} </sb-template-feature-flags>
