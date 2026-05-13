@@ -7,15 +7,18 @@
 
 import { LitElement, html } from 'lit';
 import { property } from 'lit/decorators.js';
+import { breakpoints } from '@carbon/layout';
 import { prefix } from '../../globals/settings';
 import styles from './tabs.scss?lit';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
 /**
  * Breakpoint for switching between horizontal and vertical tab layouts.
- * Matches Carbon's md breakpoint (673px) - below this, tabs display horizontally.
+ * Uses Carbon's md breakpoint (42rem/672px) + 0.01rem offset to avoid overlap
+ * with max-width queries. This mirrors the Sass breakpoint behavior.
+ * Below this breakpoint, tabs display horizontally.
  */
-const VERTICAL_TABS_BREAKPOINT = '(min-width: 673px)';
+const VERTICAL_TABS_BREAKPOINT = `(min-width: calc(${breakpoints.md.width} + 0.01rem))`;
 
 /**
  * Vertical tabs container component.
