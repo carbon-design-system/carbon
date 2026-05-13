@@ -9,6 +9,7 @@ import React, { useState } from 'react';
 import Button from '../Button';
 import InlineLoading from '.';
 import mdx from './InlineLoading.mdx';
+import { action } from 'storybook/actions';
 
 export default {
   title: 'Components/InlineLoading',

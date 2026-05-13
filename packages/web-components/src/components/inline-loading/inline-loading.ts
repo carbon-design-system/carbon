@@ -28,6 +28,16 @@ export { INLINE_LOADING_STATE };
 @customElement(`${prefix}-inline-loading`)
 class CDSInlineLoading extends LitElement {
   /**
+   * @deprecated The 'assistive-text' property will be deprecated in the next major release. Please use `icon-description` instead.
+   */
+  @property({ attribute: 'assistive-text' })
+  get assistiveText() {
+    return this.iconDescription;
+  }
+  set assistiveText(value) {
+    this.iconDescription = value;
+  }
+  /**
    * The assistive text for the spinner icon.
    */
   @property({ attribute: 'icon-description' })
