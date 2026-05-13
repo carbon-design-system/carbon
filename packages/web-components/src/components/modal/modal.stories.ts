@@ -20,9 +20,6 @@ import '../select';
 import '../textarea';
 import '../combo-box';
 import '../checkbox';
-import '../fluid-form';
-import '../fluid-text-input';
-import '../fluid-textarea';
 const toggleButton = () => {
   document.querySelector('cds-modal')?.toggleAttribute('open');
 };
@@ -987,127 +984,6 @@ const actions = html`
   </cds-icon-button>
   <cds-ai-label-action-button>View details</cds-ai-label-action-button>
 `;
-
-export const WithFluidForm = {
-  args: {
-    ...defaultArgs,
-    modalHeading: 'Modal with Fluid Form',
-    modalLabel: 'Test overflow behavior',
-  },
-  argTypes: controls,
-  render: ({
-    alert,
-    ariaLabel,
-    danger,
-    open,
-    closeButtonLabel,
-    hasScrollingContent,
-    fullWidth,
-    modalHeading,
-    modalLabel,
-    numberOfButtons,
-    passiveModal,
-    preventCloseOnClickOutside,
-    primaryButtonDisabled,
-    size,
-    loadingDescription,
-    loadingStatus,
-    loadingIconDescription,
-    shouldSubmitOnEnter,
-  }) => {
-    return html`
-      <cds-modal
-        aria-label=${ariaLabel}
-        ?prevent-close-on-click-outside=${preventCloseOnClickOutside}
-        ?alert=${alert}
-        size="${size}"
-        ?open=${open}
-        ?full-width=${fullWidth}
-        ?has-scrolling-content="${hasScrollingContent}"
-        loading-description="${loadingDescription}"
-        loading-status="${loadingStatus}"
-        loading-icon-description="${loadingIconDescription}"
-        ?should-submit-on-enter="${shouldSubmitOnEnter}">
-        <cds-modal-header>
-          <cds-modal-close-button
-            close-button-label=${closeButtonLabel}></cds-modal-close-button>
-          ${modalLabel &&
-          html`<cds-modal-label>${modalLabel}</cds-modal-label>`}
-          <cds-modal-heading>${modalHeading}</cds-modal-heading>
-        </cds-modal-header>
-        <cds-modal-body>
-          <cds-modal-body-content description>
-            This story tests that fluid-form does not overflow past the modal
-            border. The original overflow: hidden was added to fix this issue.
-          </cds-modal-body-content>
-          <cds-fluid-form>
-            <cds-fluid-text-input
-              label="Text input label"
-              placeholder="Placeholder text">
-            </cds-fluid-text-input>
-            <cds-fluid-text-input
-              label="Text input label"
-              placeholder="Placeholder text">
-            </cds-fluid-text-input>
-            <cds-fluid-text-area
-              label="Text area label"
-              placeholder="Placeholder text">
-            </cds-fluid-text-area>
-            <cds-fluid-text-input
-              label="Text input label"
-              placeholder="Placeholder text">
-            </cds-fluid-text-input>
-            <cds-fluid-text-input
-              label="Text input label"
-              placeholder="Placeholder text">
-            </cds-fluid-text-input>
-            <cds-fluid-text-area
-              label="Text area label"
-              placeholder="Placeholder text">
-            </cds-fluid-text-area>
-            <cds-fluid-text-input
-              label="Text input label"
-              placeholder="Placeholder text">
-            </cds-fluid-text-input>
-            <cds-fluid-text-input
-              label="Text input label"
-              placeholder="Placeholder text">
-            </cds-fluid-text-input>
-            <cds-fluid-text-area
-              label="Text area label"
-              placeholder="Placeholder text">
-            </cds-fluid-text-area>
-          </cds-fluid-form>
-        </cds-modal-body>
-        ${passiveModal
-          ? ``
-          : html` <cds-modal-footer>
-              ${numberOfButtons > 2
-                ? html` <cds-modal-footer-button kind="secondary"
-                    >Keep both</cds-modal-footer-button
-                  >`
-                : ``}
-              ${numberOfButtons >= 2
-                ? html` <cds-modal-footer-button
-                    kind="secondary"
-                    ?data-modal-close=${numberOfButtons === 2}
-                    >${numberOfButtons === 2
-                      ? html`Cancel`
-                      : 'Rename'}</cds-modal-footer-button
-                  >`
-                : ``}
-
-              <cds-modal-footer-button
-                ?disabled=${primaryButtonDisabled}
-                kind="${danger ? 'danger' : 'primary'}"
-                >Submit</cds-modal-footer-button
-              >
-            </cds-modal-footer>`}
-      </cds-modal>
-      <cds-button @click="${toggleButton}">Launch modal</cds-button>
-    `;
-  },
-};
 
 const meta = {
   title: 'Components/Modal',
