@@ -443,10 +443,6 @@
     padding-inline-start: $spacing-03;
   }
 
-  //-------------------------------------------------
-  // SMALL BATCH ACTIONS
-  //-------------------------------------------------
-
   .#{$prefix}--table-toolbar .#{$prefix}--batch-actions {
     block-size: layout.size('height');
   }
