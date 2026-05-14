@@ -254,6 +254,34 @@ describe('Menu', () => {
       expect(menus[0]).toHaveClass('cds--menu--open');
       expect(menus[1]).not.toHaveClass('cds--menu--open');
     });
+
+    it('should not close submenu when hovering back to parent menu item', async () => {
+      const menus = screen.getAllByRole('menu');
+
+      const submenu = screen.getByRole('menuitem', {
+        name: 'Submenu Submenu',
+      });
+
+      // hover over submenu to open it
+      await act(() => {
+        fireEvent.mouseEnter(submenu);
+        jest.runOnlyPendingTimers();
+      });
+      expect(menus[0]).toHaveClass('cds--menu--open');
+      expect(menus[1]).toHaveClass('cds--menu--open');
+
+      // simulate mouse leaving child and entering parent
+      const childMenuItem = screen.getByRole('menuitem', { name: 'Item' });
+      await act(() => {
+        fireEvent.mouseLeave(childMenuItem, {
+          relatedTarget: submenu,
+        });
+        jest.runOnlyPendingTimers();
+      });
+
+      expect(menus[0]).toHaveClass('cds--menu--open');
+      expect(menus[1]).toHaveClass('cds--menu--open');
+    });
   });
 });
 
