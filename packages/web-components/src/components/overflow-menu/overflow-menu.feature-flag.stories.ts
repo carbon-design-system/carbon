@@ -153,16 +153,13 @@ export const AutoAlign = {
       });
     });
 
-    return renderStory(
-      html`
-        <div style="width: 4900px; height: 4900px; position: relative;">
-          <div style="position: absolute; top: 2450px; left: 2450px;">
-            ${renderOverflowMenu({ autoAlign: true })}
-          </div>
+    return renderStory(html`
+      <div style="width: 4900px; height: 4900px; position: relative;">
+        <div style="position: absolute; top: 2450px; left: 2450px;">
+          ${renderOverflowMenu({ autoAlign: true })}
         </div>
-      `,
-      { enableDynamicFloatingStyles: true }
-    );
+      </div>
+    `);
   },
 };
 
