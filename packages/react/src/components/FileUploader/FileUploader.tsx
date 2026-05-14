@@ -349,9 +349,9 @@ const FileUploader = forwardRef<FileUploaderHandle, FileUploaderProps>(
           'button'
         ) as HTMLButtonElement;
         if (deleteButton) {
-          setTimeout(() => {
+          requestAnimationFrame(() => {
             deleteButton.focus();
-          }, 0);
+          });
         }
       },
       [nodes]
