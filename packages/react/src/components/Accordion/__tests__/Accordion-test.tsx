@@ -1,13 +1,15 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
+import { describe, expect, it } from '@jest/globals';
+import '@testing-library/jest-dom/jest-globals';
 import Button from '../../Button';
 import React from 'react';
-import { default as Accordion, AccordionItem } from '../';
+import { Accordion, AccordionItem } from '../';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
@@ -198,6 +200,9 @@ describe('Accordion', () => {
   });
 
   describe('Expand/Collapse All', () => {
+    // TODO: This component doesn't model a controlled `Accordion` correctly. It
+    // uses `null` to force `open` prop changes, and it does not update parent
+    // state when an item is toggled manually.
     const ControlledAccordion = () => {
       const [expandAll, setExpandAll] = React.useState(false);
       return (
@@ -209,7 +214,7 @@ describe('Accordion', () => {
             onClick={() => {
               expandAll || expandAll === null
                 ? setExpandAll(false)
-                : setExpandAll(null);
+                : setExpandAll(null as unknown as boolean);
             }}>
             Click to collapse all
           </Button>
