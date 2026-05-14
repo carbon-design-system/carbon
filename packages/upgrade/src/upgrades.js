@@ -11,6 +11,13 @@ import { run } from './jscodeshift';
 
 const TRANSFORM_DIR = path.join(__dirname, 'transforms');
 
+async function runCodemod(options, config) {
+  await run({
+    ...config,
+    decoratorsBeforeExport: options.decoratorsBeforeExport,
+  });
+}
+
 /**
  * @typedef Upgrade
  * @property {string} name
@@ -167,7 +174,7 @@ export const upgrades = [
                   ],
                 });
 
-          await run({
+          await runCodemod(options, {
             dry: !options.write,
             transform,
             paths,
@@ -194,7 +201,7 @@ export const upgrades = [
                   ],
                 });
 
-          await run({
+          await runCodemod(options, {
             dry: !options.write,
             transform,
             paths,
@@ -221,7 +228,7 @@ export const upgrades = [
                   ],
                 });
 
-          await run({
+          await runCodemod(options, {
             dry: !options.write,
             transform,
             paths,
@@ -252,7 +259,7 @@ export const upgrades = [
                   ],
                 });
 
-          await run({
+          await runCodemod(options, {
             dry: !options.write,
             transform,
             paths,
@@ -283,7 +290,7 @@ export const upgrades = [
                   ],
                 });
 
-          await run({
+          await runCodemod(options, {
             dry: !options.write,
             transform,
             paths,
@@ -323,7 +330,7 @@ export const upgrades = [
                   ],
                 });
 
-          await run({
+          await runCodemod(options, {
             dry: !options.write,
             transform,
             paths,
@@ -364,7 +371,7 @@ export const upgrades = [
                   ],
                 });
 
-          await run({
+          await runCodemod(options, {
             dry: !options.write,
             transform,
             paths,
@@ -411,7 +418,7 @@ export const upgrades = [
                   ],
                 });
 
-          await run({
+          await runCodemod(options, {
             dry: !options.write,
             transform,
             paths,
@@ -449,7 +456,7 @@ export const upgrades = [
                   ],
                 });
 
-          await run({
+          await runCodemod(options, {
             dry: !options.write,
             transform,
             paths,
@@ -508,7 +515,7 @@ export const upgrades = [
                   ],
                 });
 
-          await run({
+          await runCodemod(options, {
             dry: !options.write,
             transform,
             paths,
@@ -537,7 +544,7 @@ export const upgrades = [
                   ],
                 });
 
-          await run({
+          await runCodemod(options, {
             dry: !options.write,
             transform,
             paths,
@@ -594,7 +601,7 @@ export const upgrades = [
                   ],
                 });
 
-          await run({
+          await runCodemod(options, {
             dry: !options.write,
             transform,
             paths,
@@ -626,11 +633,42 @@ export const upgrades = [
                   ],
                 });
 
-          await run({
+          await runCodemod(options, {
             dry: !options.write,
             transform,
             paths,
             verbose: options.verbose,
+          });
+        },
+      },
+      {
+        name: 'ibm-products-update-page-header',
+        description: 'Rewrites PageHeader imports to IBM Products packages',
+        migrate: async (options) => {
+          const transform = path.join(
+            TRANSFORM_DIR,
+            'ibm-products-update-page-header.js'
+          );
+          const paths =
+            Array.isArray(options.paths) && options.paths.length > 0
+              ? options.paths
+              : await glob(['**/*.js', '**/*.jsx', '**/*.ts', '**/*.tsx'], {
+                  cwd: options.workspaceDir,
+                  ignore: [
+                    '**/es/**',
+                    '**/lib/**',
+                    '**/umd/**',
+                    '**/node_modules/**',
+                    '**/storybook-static/**',
+                  ],
+                });
+
+          await runCodemod(options, {
+            dry: !options.write,
+            transform,
+            paths,
+            verbose: options.verbose,
+            parser: 'tsx',
           });
         },
       },
@@ -656,7 +694,7 @@ export const upgrades = [
                   ],
                 });
 
-          await run({
+          await runCodemod(options, {
             dry: !options.write,
             transform,
             paths,
@@ -686,7 +724,7 @@ export const upgrades = [
                   ],
                 });
 
-          await run({
+          await runCodemod(options, {
             dry: !options.write,
             transform,
             paths,
@@ -716,7 +754,7 @@ export const upgrades = [
                   ],
                 });
 
-          await run({
+          await runCodemod(options, {
             dry: !options.write,
             transform,
             paths,
@@ -747,7 +785,7 @@ export const upgrades = [
                   ],
                 });
 
-          await run({
+          await runCodemod(options, {
             dry: !options.write,
             transform,
             paths,
@@ -819,7 +857,7 @@ export const upgrades = [
                   ],
                 });
 
-          await run({
+          await runCodemod(options, {
             dry: !options.write,
             transform,
             paths,

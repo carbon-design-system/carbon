@@ -38,7 +38,7 @@
     "flatpickr@4.6.13": "patch:flatpickr@npm%3A4.6.13#./.yarn/patches/flatpickr-npm-4.6.13-06399933fc.patch",
     "@octokit/rest": "^22.0.0",
     "eslint": "9.39.4",
-    "typescript-eslint": "8.58.2"
+    "typescript-eslint": "8.59.2"
   },
   "devDependencies": {
     "@babel/core": "^7.27.3",
@@ -50,8 +50,8 @@
     "@babel/preset-react": "^7.27.1",
     "@babel/runtime": "^7.27.3",
     "@carbon/cli": "workspace:packages/cli",
-    "@commitlint/cli": "^20.0.0",
-    "@commitlint/config-conventional": "^20.0.0",
+    "@commitlint/cli": "^21.0.0",
+    "@commitlint/config-conventional": "^21.0.0",
     "@eslint/compat": "^2.0.1",
     "@eslint/js": "^9.24.0",
     "@playwright/test": "^1.36.2",
@@ -61,7 +61,7 @@
     "@testing-library/user-event": "^14.4.3",
     "@types/prop-types": "^15.7.13",
     "@types/react-is": "^19.0.0",
-    "accessibility-checker": "^4.0.7",
+    "accessibility-checker": "^4.0.17",
     "all-contributors-cli": "^6.19.0",
     "cross-env": "^10.0.0",
     "cross-spawn": "^7.0.0",
@@ -75,7 +75,7 @@
     "eslint-plugin-testing-library": "^7.6.6",
     "fs-extra": "^11.0.0",
     "glob": "^13.0.0",
-    "globals": "17.5.0",
+    "globals": "17.6.0",
     "husky": "^9.0.0",
     "jest": "^30.0.5",
     "jest-junit": "^16.0.0",
