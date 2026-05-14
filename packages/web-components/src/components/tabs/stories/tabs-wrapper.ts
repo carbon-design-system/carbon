@@ -7,6 +7,7 @@
 
 import { LitElement, html } from 'lit';
 import { property, state } from 'lit/decorators.js';
+import { carbonElement as customElement } from '../../../globals/decorators/carbon-element';
 import { prefix } from '../../../globals/settings';
 import { TABS_TYPE } from '../tabs';
 import { iconLoader } from '../../../globals/internal/icon-loader';
@@ -19,6 +20,7 @@ import '../../button';
 /**
  * Wrapper component for dismissable tabs story with state management
  */
+@customElement('tabs-story-wrapper')
 export class DismissableTabsWrapper extends LitElement {
   /**
    * Whether to render tabs with icons
@@ -149,5 +151,3 @@ export class DismissableTabsWrapper extends LitElement {
     return this;
   }
 }
-
-customElements.define('tabs-story-wrapper', DismissableTabsWrapper);

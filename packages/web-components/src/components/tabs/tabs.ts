@@ -251,7 +251,9 @@ export default class CDSTabs extends HostListenerMixin(CDSContentSwitcher) {
         (tab) => tab.id === highlightedItemId
       );
       const nextHighlightedIndex =
-        !tabWithActiveId && !tabWithHighlightedId ? indexInEnabledTabs - 1 : 0;
+        !tabWithActiveId && !tabWithHighlightedId && indexInEnabledTabs - 1 >= 0
+          ? indexInEnabledTabs - 1
+          : 0;
       if (enabledTabs.length > 0) {
         const nextSelectedItem = tabWithActiveId || enabledTabs[0];
         const nextHighlightedItem =
