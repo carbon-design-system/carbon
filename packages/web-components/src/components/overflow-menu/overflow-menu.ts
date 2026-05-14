@@ -28,13 +28,7 @@ import { carbonElement as customElement } from '../../globals/decorators/carbon-
 
 export { OVERFLOW_MENU_SIZE };
 
-const menuItemTagNames = new Set([
-  `${prefix}-menu-item`.toUpperCase(),
-  `${prefix}-menu-item-divider`.toUpperCase(),
-  `${prefix}-menu-item-group`.toUpperCase(),
-  `${prefix}-menu-item-radio-group`.toUpperCase(),
-  `${prefix}-menu-item-selectable`.toUpperCase(),
-]);
+const menuItemTagPrefix = `${prefix}-menu-item`.toUpperCase();
 
 // Migration support for existing child structure.
 const deprecatedOverflowMenuTagNames = new Set([
@@ -55,6 +49,12 @@ const topFirstFallbackPlacements = [
   'bottom-start',
   'bottom-end',
 ] as const;
+
+const warnInDev = (message: string) => {
+  if (process.env.NODE_ENV === 'development') {
+    globalThis.console?.warn(message);
+  }
+};
 
 /**
  * Overflow menu.
@@ -362,7 +362,7 @@ class CDSOverflowMenu
 
     if (changedProperties.has('dataTable')) {
       const tooltip = this.shadowRoot?.querySelector(`${prefix}-tooltip`);
-      tooltip?.setAttribute('data-table', '');
+      tooltip?.toggleAttribute('data-table', this.dataTable);
     }
 
     if (changedProperties.has('size')) {
@@ -477,20 +477,17 @@ class CDSOverflowMenu
   }
 
   private _warnDeprecatedChildren() {
-    if (
-      this._didWarnDeprecatedChildren ||
-      process.env.NODE_ENV !== 'development'
-    ) {
+    if (this._didWarnDeprecatedChildren) {
       return;
     }
 
+    // Migration guard for flagged usage of deprecated overflow-menu children.
     const hasDeprecatedChildren = Array.from(this.children).some((child) => {
       return deprecatedOverflowMenuTagNames.has(child.tagName);
     });
 
     if (hasDeprecatedChildren) {
-      // eslint-disable-next-line no-console -- https://github.com/carbon-design-system/carbon/issues/20452
-      console.warn(
+      warnInDev(
         '`cds-overflow-menu` with `enable-v12-overflowmenu` expects a direct `cds-menu` child instead of the deprecated `cds-overflow-menu-body` structure.'
       );
       this._didWarnDeprecatedChildren = true;
@@ -498,21 +495,17 @@ class CDSOverflowMenu
   }
 
   private _warnInvalidMenuComposition() {
-    if (
-      this._didWarnInvalidComposition ||
-      process.env.NODE_ENV !== 'development'
-    ) {
+    if (this._didWarnInvalidComposition) {
       return;
     }
 
-    const hasDirectMenuItems = Array.from(this.children).some((child) => {
-      return menuItemTagNames.has(child.tagName);
-    });
+    const hasDirectMenuItems = Array.from(this.children).some((child) =>
+      child.tagName.startsWith(menuItemTagPrefix)
+    );
     const hasMenuChild = !!this._getMenuChild();
 
     if (!hasMenuChild || hasDirectMenuItems) {
-      // eslint-disable-next-line no-console -- https://github.com/carbon-design-system/carbon/issues/20452
-      console.warn(
+      warnInDev(
         '`cds-overflow-menu` with `enable-v12-overflowmenu` expects a direct `cds-menu` child. Place `cds-menu-item*` descendants inside that `cds-menu`.'
       );
       this._didWarnInvalidComposition = true;
@@ -642,8 +635,9 @@ class CDSOverflowMenu
 
     const enabledItems = menu.activeitems
       .map(({ item }) => item)
-      .filter((item): item is HTMLElement => !!item)
-      .filter((item) => !item.hasAttribute('disabled'));
+      .filter(
+        (item) => item instanceof HTMLElement && !item.hasAttribute('disabled')
+      );
     const focusTarget = enabledItems[index - 1] ?? enabledItems[0];
 
     focusTarget?.focus();
