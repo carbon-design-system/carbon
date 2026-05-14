@@ -362,7 +362,8 @@
   .#{$prefix}--number-input--fluid--disabled:not(
       .#{$prefix}--number-input--fluid--invalid
     )
-    .#{$prefix}--number {
+    .#{$prefix}--number
+    input[type='number']:disabled {
     border-block-end: 1px solid $border-subtle;
   }
 
