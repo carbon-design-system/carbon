@@ -186,20 +186,6 @@ describe('FileUploader', () => {
   });
 
   describe('Enhanced FileUploader (with feature flag)', () => {
-    beforeAll(() => {
-      Object.defineProperty(global, 'crypto', {
-        value: {
-          getRandomValues: (arr) => {
-            for (let i = 0; i < arr.length; i++) {
-              arr[i] = Math.floor(Math.random() * 256);
-            }
-            return arr;
-          },
-        },
-        writable: true,
-      });
-    });
-
     it('should handle multiple file uploads with duplicate prevention', async () => {
       const onChange = jest.fn();
 
@@ -563,20 +549,6 @@ describe('FileUploader', () => {
   });
 
   describe('Accessibility features with enhanced FileUploader', () => {
-    beforeAll(() => {
-      Object.defineProperty(global, 'crypto', {
-        value: {
-          getRandomValues: (arr) => {
-            for (let i = 0; i < arr.length; i++) {
-              arr[i] = Math.floor(Math.random() * 256);
-            }
-            return arr;
-          },
-        },
-        writable: true,
-      });
-    });
-
     describe('Screen reader announcements', () => {
       it('should announce file count in enhanced mode', async () => {
         const { container } = render(
