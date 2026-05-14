@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2023, 2024
+ * Copyright IBM Corp. 2023, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -452,7 +452,7 @@ class CDSSidePanel extends HostListenerMixin(LitElement) {
     if (actionsCount > this._maxActions) {
       this._actionsCount = this._maxActions;
       if (process.env.NODE_ENV === 'development') {
-        // eslint-disable-next-line no-console -- https://github.com/carbon-design-system/carbon/issues/20452
+        // eslint-disable-next-line no-console
         console.error(`Too many side-panel actions, max ${this._maxActions}.`);
       }
     } else {

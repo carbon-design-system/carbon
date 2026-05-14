@@ -179,9 +179,6 @@ const sharedArgTypes = {
   },
   onInput: {
     action: `${prefix}-select-selected`,
-    table: {
-      disable: true,
-    },
   },
 };
 
@@ -324,4 +321,9 @@ export const WithLayer = {
 export default {
   title: 'Components/Text Input',
   actions: { argTypesRegex: '^on.*' },
+  parameters: {
+    controls: {
+      exclude: ['onInput'],
+    },
+  },
 };
