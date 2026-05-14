@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { render, act, screen, waitFor } from '@testing-library/react';
+import { render, act, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import FileUploader from '../';
@@ -483,9 +483,7 @@ describe('FileUploader', () => {
 
         const uploadButton = screen.getByRole('button', { name: 'Add files' });
 
-        await waitFor(() => {
-          expect(uploadButton).toHaveFocus();
-        });
+        expect(uploadButton).toHaveFocus();
       });
 
       it('should maintain focus on delete buttons when middle file is removed', async () => {
@@ -559,9 +557,7 @@ describe('FileUploader', () => {
           name: /test description - first\.png/i,
         });
 
-        await waitFor(() => {
-          expect(remainingDeleteButton).toHaveFocus();
-        });
+        expect(remainingDeleteButton).toHaveFocus();
       });
     });
   });
@@ -631,13 +627,11 @@ describe('FileUploader', () => {
         });
         await userEvent.click(deleteButton);
 
-        await waitFor(() => {
-          expect(
-            screen.getByText('2 files selected.', {
-              selector: '.cds--visually-hidden',
-            })
-          ).toBeInTheDocument();
-        });
+        expect(
+          screen.getByText('2 files selected.', {
+            selector: '.cds--visually-hidden',
+          })
+        ).toBeInTheDocument();
       });
     });
 
@@ -667,9 +661,7 @@ describe('FileUploader', () => {
 
         const uploadButton = screen.getByRole('button', { name: 'Add files' });
 
-        await waitFor(() => {
-          expect(uploadButton).toHaveFocus();
-        });
+        expect(uploadButton).toHaveFocus();
       });
 
       it('should move focus to previous delete button when last file is removed', async () => {
@@ -697,9 +689,7 @@ describe('FileUploader', () => {
           name: /test description - second\.png/i,
         });
 
-        await waitFor(() => {
-          expect(newLastDeleteButton).toHaveFocus();
-        });
+        expect(newLastDeleteButton).toHaveFocus();
       });
     });
   });
