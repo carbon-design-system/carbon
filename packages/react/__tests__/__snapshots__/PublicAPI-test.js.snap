@@ -2444,6 +2444,7 @@ Map {
         "size": {
           "args": [
             [
+              "xs",
               "sm",
               "lg",
             ],
@@ -2504,6 +2505,17 @@ Map {
           ],
           "type": "oneOfType",
         },
+        "size": {
+          "args": [
+            [
+              "xs",
+              "sm",
+              "md",
+              "lg",
+            ],
+          ],
+          "type": "oneOf",
+        },
       },
     },
     "TableToolbarSearch": {
@@ -2559,6 +2571,7 @@ Map {
         "size": {
           "args": [
             [
+              "xs",
               "sm",
               "md",
               "lg",
@@ -10286,6 +10299,7 @@ Map {
       "size": {
         "args": [
           [
+            "xs",
             "sm",
             "lg",
           ],
@@ -10346,6 +10360,17 @@ Map {
         ],
         "type": "oneOfType",
       },
+      "size": {
+        "args": [
+          [
+            "xs",
+            "sm",
+            "md",
+            "lg",
+          ],
+        ],
+        "type": "oneOf",
+      },
     },
   },
   "TableToolbarSearch" => {
@@ -10401,6 +10426,7 @@ Map {
       "size": {
         "args": [
           [
+            "xs",
             "sm",
             "md",
             "lg",
