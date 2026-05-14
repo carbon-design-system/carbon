@@ -151,5 +151,3 @@ export class DismissableTabsWrapper extends LitElement {
 }
 
 customElements.define('tabs-story-wrapper', DismissableTabsWrapper);
-
-// Made with Bob

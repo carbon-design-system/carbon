@@ -229,48 +229,33 @@ export default class CDSTabs extends HostListenerMixin(CDSContentSwitcher) {
       selectorItemHighlighted,
     } = this.constructor as typeof CDSTabs;
     const { index } = event.detail;
-
     const allTabs = this.querySelectorAll<CDSTab>(selectorItem);
     const enabledTabsBeforeRemoval =
       this.querySelectorAll<CDSTab>(selectorItemEnabled);
-    const activeItem = this.querySelector<CDSTab>(selectorItemSelected);
-    const highlightedItem = this.querySelector<CDSTab>(selectorItemHighlighted);
-    const selectedItemIndexInEnabledTabs = activeItem
-      ? Array.from(enabledTabsBeforeRemoval).indexOf(activeItem)
-      : -1;
-    const highlightedItemIndexInEnabledTabs = highlightedItem
-      ? Array.from(enabledTabsBeforeRemoval).indexOf(highlightedItem)
-      : -1;
-
     const indexInEnabledTabs = Array.from(enabledTabsBeforeRemoval).indexOf(
       allTabs[index]
     );
-    const activeTabClosed = activeItem === allTabs[index];
+    const activeItem = this.querySelector<CDSTab>(selectorItemSelected);
+    const activeItemId = activeItem?.id;
+    const highlightedItem = this.querySelector<CDSTab>(selectorItemHighlighted);
+    const highlightedItemId = highlightedItem?.id;
     requestAnimationFrame(() => {
-      const enabledTabs = this.querySelectorAll<CDSTab>(selectorItemEnabled);
+      const enabledTabs = Array.from(
+        this.querySelectorAll<CDSTab>(selectorItemEnabled)
+      );
+
+      const tabWithActiveId = enabledTabs.find(
+        (tab) => tab.id === activeItemId
+      );
+      const tabWithHighlightedId = enabledTabs.find(
+        (tab) => tab.id === highlightedItemId
+      );
+      const nextHighlightedIndex =
+        !tabWithActiveId && !tabWithHighlightedId ? indexInEnabledTabs - 1 : 0;
       if (enabledTabs.length > 0) {
-        let nextHighlightedItem: CDSTab;
-        let nextSelectedItem: CDSTab;
-
-        if (activeTabClosed) {
-          nextSelectedItem = enabledTabs[0];
-          nextHighlightedItem = enabledTabs[0];
-        } else {
-          if (indexInEnabledTabs < selectedItemIndexInEnabledTabs) {
-            nextSelectedItem = enabledTabs[selectedItemIndexInEnabledTabs - 1];
-          } else {
-            nextSelectedItem = enabledTabs[selectedItemIndexInEnabledTabs];
-          }
-
-          if (indexInEnabledTabs < highlightedItemIndexInEnabledTabs) {
-            nextHighlightedItem =
-              enabledTabs[highlightedItemIndexInEnabledTabs - 1];
-          } else {
-            nextHighlightedItem =
-              enabledTabs[highlightedItemIndexInEnabledTabs];
-          }
-        }
-
+        const nextSelectedItem = tabWithActiveId || enabledTabs[0];
+        const nextHighlightedItem =
+          tabWithHighlightedId || enabledTabs[nextHighlightedIndex];
         this.resetSelected(nextSelectedItem);
         this.resetHighlighted(nextHighlightedItem);
         this.value = nextSelectedItem.value;
