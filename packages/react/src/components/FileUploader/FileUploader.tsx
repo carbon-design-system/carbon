@@ -421,11 +421,7 @@ const FileUploader = forwardRef<FileUploaderHandle, FileUploaderProps>(
     );
 
     const handleClick = useCallback(
-      (evt, { index, filenameStatus }) => {
-        if (filenameStatus !== 'edit') {
-          return;
-        }
-
+      (evt, { index }) => {
         evt.stopPropagation();
 
         let remainingCount: number;
@@ -433,18 +429,12 @@ const FileUploader = forwardRef<FileUploaderHandle, FileUploaderProps>(
 
         if (enhancedFileUploaderEnabled) {
           const deletedItem = fileItems[index];
-          if (!deletedItem) {
-            return;
-          }
 
           announceFileDeletion(deletedItem.name);
           wasLastItem = index === fileItems.length - 1;
           remainingCount = handleEnhancedFileDeletion(evt, index, deletedItem);
         } else {
-          const deletedFileName = legacyFileNames[index];
-          if (!deletedFileName) {
-            return;
-          }
+          const deletedFileName = legacyFileNames[index] as string;
 
           const filteredArray = legacyFileNames.filter(
             (filename) => filename !== deletedFileName
@@ -597,13 +587,10 @@ const FileUploader = forwardRef<FileUploaderHandle, FileUploaderProps>(
                           evt.preventDefault();
                           handleClick(evt, {
                             index: file.index,
-                            filenameStatus,
                           });
                         }
                       }}
-                      onClick={(evt) =>
-                        handleClick(evt, { index: file.index, filenameStatus })
-                      }
+                      onClick={(evt) => handleClick(evt, { index: file.index })}
                     />
                   </span>
                 </span>
