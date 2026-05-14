@@ -146,7 +146,7 @@ function Tabs({
 }: TabsProps) {
   const baseId = useId('ccs');
   if (dismissable && !onTabCloseRequest) {
-    // eslint-disable-next-line no-console -- https://github.com/carbon-design-system/carbon/issues/20452
+    // eslint-disable-next-line no-console
     console.error(
       'dismissable property specified without also providing an onTabCloseRequest property.'
     );
