@@ -12,7 +12,7 @@ import React, {
   useCallback,
   useImperativeHandle,
   useLayoutEffect,
-  useMemo,
+  useRef,
   useState,
   type HTMLAttributes,
 } from 'react';
@@ -205,8 +205,8 @@ const FileUploader = forwardRef<FileUploaderHandle, FileUploaderProps>(
     const [fileCountText, setFileCountText] = useState('');
     const [deletionAnnouncement, setDeletionAnnouncement] = useState('');
 
-    const uploaderButton = React.createRef<HTMLLabelElement>();
-    const nodes: HTMLElement[] = useMemo(() => [], []);
+    const uploaderButton = useRef<HTMLLabelElement>(null);
+    const nodesRef = useRef<HTMLElement[]>([]);
 
     // Update file count text for screen readers
     useLayoutEffect(() => {
@@ -342,20 +342,17 @@ const FileUploader = forwardRef<FileUploaderHandle, FileUploaderProps>(
       setTimeout(() => setDeletionAnnouncement(''), 0);
     }, []);
 
-    const focusLastDeleteButton = useCallback(
-      (remainingCount: number) => {
-        const lastItemNode = nodes[remainingCount - 1];
-        const deleteButton = lastItemNode?.querySelector(
-          'button'
-        ) as HTMLButtonElement;
-        if (deleteButton) {
-          requestAnimationFrame(() => {
-            deleteButton.focus();
-          });
-        }
-      },
-      [nodes]
-    );
+    const focusLastDeleteButton = useCallback((remainingCount: number) => {
+      const lastItemNode = nodesRef.current[remainingCount - 1];
+      const deleteButton = lastItemNode?.querySelector(
+        'button'
+      ) as HTMLButtonElement;
+      if (deleteButton) {
+        requestAnimationFrame(() => {
+          deleteButton.focus();
+        });
+      }
+    }, []);
 
     const focusUploaderButton = useCallback(() => {
       const buttonElement = uploaderButton.current
@@ -577,7 +574,7 @@ const FileUploader = forwardRef<FileUploaderHandle, FileUploaderProps>(
                   key={file.key}
                   className={selectedFileClasses}
                   ref={(node) => {
-                    nodes[file.index] = node as HTMLSpanElement;
+                    nodesRef.current[file.index] = node as HTMLSpanElement;
                   }}
                   {...other}>
                   <Text
