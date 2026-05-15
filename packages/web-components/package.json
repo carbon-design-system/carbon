@@ -94,7 +94,7 @@
     "@web/test-runner-puppeteer": "^0.18.0",
     "@webcomponents/webcomponentsjs": "^2.8.0",
     "autoprefixer": "^10.4.0",
-    "cssnano": "^7.1.0",
+    "cssnano": "^8.0.0",
     "flatpickr": "4.6.13",
     "globby": "^16.0.0",
     "remark-gfm": "^4.0.0",
