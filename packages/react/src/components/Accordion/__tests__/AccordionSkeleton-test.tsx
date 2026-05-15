@@ -1,10 +1,12 @@
 /**
- * Copyright IBM Corp. 2022
+ * Copyright IBM Corp. 2022, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
+import { describe, expect, it } from '@jest/globals';
+import '@testing-library/jest-dom/jest-globals';
 import React from 'react';
 import AccordionSkeleton from '../Accordion.Skeleton';
 import { render, screen } from '@testing-library/react';

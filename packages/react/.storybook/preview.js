@@ -328,9 +328,11 @@ const parameters = {
     },
   },
   chromatic: {
+    // g90 is intentionally excluded from global Chromatic coverage to reduce
+    // snapshot volume. Individual stories can opt into g90 coverage by setting
+    // parameters.chromatic.modes to include allModes.g90
     modes: {
       g10: allModes['g10'],
-      g90: allModes['g90'],
       g100: allModes['g100'],
       'breakpoint-sm': allModes['breakpoint-sm'],
     },
