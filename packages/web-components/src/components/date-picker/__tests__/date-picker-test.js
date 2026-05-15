@@ -126,6 +126,25 @@ describe('cds-date-picker', () => {
       expect(el).to.exist;
     });
 
+    it('should include the weekday in the calendar day aria-label', async () => {
+      const el = await fixture(html`
+        <cds-date-picker value="2026-04-15">
+          <cds-date-picker-input
+            kind="single"
+            label-text="Date"
+            placeholder="mm/dd/yyyy">
+          </cds-date-picker-input>
+        </cds-date-picker>
+      `);
+      await el.updateComplete;
+
+      const day = el.calendar?.calendarContainer?.querySelector(
+        '[aria-label="Wednesday, April 15, 2026"]'
+      );
+
+      expect(day).to.exist;
+    });
+
     it('should handle value changes', async () => {
       const el = await fixture(html`
         <cds-date-picker value="2024-01-15">

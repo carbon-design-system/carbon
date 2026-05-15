@@ -167,7 +167,7 @@ const availableProjects = [
       gitCloneEstimate: 180 * 1000,
       commands: [
         {
-          command: 'yarn install --offline',
+          command: 'yarn install --immutable',
           estimate: 150 * 1000,
           reason: `to install the project's dependencies`,
         },
@@ -187,7 +187,7 @@ const availableProjects = [
       gitCloneEstimate: 180 * 1000,
       commands: [
         {
-          command: 'yarn install --offline',
+          command: 'yarn install --immutable',
           estimate: 45 * 1000,
           reason: "to install the project's dependencies",
         },

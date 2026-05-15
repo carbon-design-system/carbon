@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2019, 2024
+ * Copyright IBM Corp. 2019, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -11,7 +11,7 @@ import './index';
 import '../form/form-item';
 import '../layer';
 import { prefix } from '../../globals/settings';
-import '../../../.storybook/templates/with-layer';
+import { withLayers } from '../../../.storybook/decorators/with-layers';
 
 const args = {
   ariaLabelInput: 'Lower bound',
@@ -159,9 +159,6 @@ const argTypes = {
   },
   onAfterChange: {
     action: `${prefix}-slider-changed`,
-    table: {
-      disable: true,
-    },
   },
 };
 const argTypesSkelton = {
@@ -251,6 +248,11 @@ const argTypesSkelton = {
 
 export const Default = {
   args,
+  parameters: {
+    controls: {
+      exclude: ['onAfterChange'],
+    },
+  },
   argTypes: {
     ...argTypes,
     formatLabel: {
@@ -350,6 +352,10 @@ export const ControlledSlider = {
 };
 
 export const ControlledSliderWithLayer = {
+  decorators: [withLayers],
+  parameters: {
+    layout: 'fullscreen',
+  },
   args,
   argTypes,
   render: () => {
@@ -368,34 +374,27 @@ export const ControlledSliderWithLayer = {
     }
 
     return html`
-      <sb-template-layers>
-        <div>
-          <button type="button" @click="${onClick}">randomize value</button>
-          <cds-form-item>
-            <cds-slider
-              label-text="Slider label"
-              max="100"
-              min="0"
-              step="1"
-              value="${ifDefined(value)}">
-              <cds-slider-input
-                aria-label="Slider value"
-                type="number"></cds-slider-input>
-            </cds-slider>
-          </cds-form-item>
-          <h1 class="slider-headers">${value}</h1>
-        </div>
-      </sb-template-layers>
+      <div>
+        <button type="button" @click="${onClick}">randomize value</button>
+        <cds-form-item>
+          <cds-slider
+            label-text="Slider label"
+            max="100"
+            min="0"
+            step="1"
+            value="${ifDefined(value)}">
+            <cds-slider-input
+              aria-label="Slider value"
+              type="number"></cds-slider-input>
+          </cds-slider>
+        </cds-form-item>
+        <h1 class="slider-headers">${value}</h1>
+      </div>
     `;
   },
 };
 
 export const Skeleton = {
-  parameters: {
-    percy: {
-      skip: true,
-    },
-  },
   render: () => html`
     <cds-form-item>
       <cds-slider-skeleton>
@@ -539,11 +538,6 @@ export const SliderWithHiddenInputs = {
 export const TwoHandleSkeleton = {
   args,
   argTypes: argTypesSkelton,
-  parameters: {
-    percy: {
-      skip: true,
-    },
-  },
   render: () => html`
     <cds-form-item>
       <cds-slider-skeleton twoHandles> </cds-slider-skeleton>
@@ -678,24 +672,26 @@ export const TwoHandleSliderWithHiddenInputs = {
 };
 
 export const WithLayer = {
+  decorators: [withLayers],
+  parameters: {
+    layout: 'fullscreen',
+  },
   args,
   argTypes,
   render: () => {
     return html`
-      <sb-template-layers>
-        <cds-form-item>
-          <cds-slider
-            label-text="Slider label"
-            max="100"
-            min="0"
-            step="1"
-            value="50">
-            <cds-slider-input
-              aria-label="Slider value"
-              type="number"></cds-slider-input>
-          </cds-slider>
-        </cds-form-item>
-      </sb-template-layers>
+      <cds-form-item>
+        <cds-slider
+          label-text="Slider label"
+          max="100"
+          min="0"
+          step="1"
+          value="50">
+          <cds-slider-input
+            aria-label="Slider value"
+            type="number"></cds-slider-input>
+        </cds-slider>
+      </cds-form-item>
     `;
   },
 };

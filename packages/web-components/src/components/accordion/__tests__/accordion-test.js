@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2025
+ * Copyright IBM Corp. 2025, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -59,7 +59,7 @@ describe('cds-accordion', function () {
       await triggerFocusFor(firstItem);
       await sendKeys({ press: 'Enter' });
 
-      expect(firstItem.hasAttribute('open'));
+      expect(firstItem.hasAttribute('open')).to.be.true;
     });
 
     it('should open with spacebar', async () => {
@@ -69,7 +69,7 @@ describe('cds-accordion', function () {
       await triggerFocusFor(firstItem);
       await sendKeys({ press: 'Space' });
 
-      expect(firstItem.hasAttribute('open'));
+      expect(firstItem.hasAttribute('open')).to.be.true;
     });
   });
 
@@ -89,7 +89,7 @@ describe('cds-accordion', function () {
         </cds-accordion>`
       );
 
-      expect(el.hasAttribute('isFlush'));
+      expect(el.hasAttribute('isFlush')).to.be.true;
     });
 
     it('should not align to left if alignment="start"', async () => {
@@ -112,36 +112,31 @@ describe('cds-accordion', function () {
     });
   });
 
-  describe('Expand/Collapse All', async () => {
-    const el = await fixture(accordion);
-    const elItems = el.querySelectorAll('cds-accordion-item');
-    const expandAllButton = document.createElement('cds-button');
-    const collapseAllButton = document.createElement('cds-button');
+  describe('Expand/Collapse All', () => {
+    it('should expand and collapse All on click to button', async () => {
+      const el = await fixture(accordion);
+      const elItems = el.querySelectorAll('cds-accordion-item');
+      const expandAllButton = document.createElement('cds-button');
+      const collapseAllButton = document.createElement('cds-button');
 
-    expandAllButton.addEventListener('click', () => {
-      elItems.forEach((item) => {
-        item.setAttribute('open', '');
+      expandAllButton.addEventListener('click', () => {
+        elItems.forEach((item) => {
+          item.setAttribute('open', '');
+        });
       });
-    });
 
-    collapseAllButton.addEventListener('click', () => {
-      elItems.forEach((item) => {
-        item.removeAttribute('open');
+      collapseAllButton.addEventListener('click', () => {
+        elItems.forEach((item) => {
+          item.removeAttribute('open');
+        });
       });
-    });
 
-    it('should expand All on click to button', async () => {
       await expandAllButton.click();
-
       elItems.forEach((item) => {
-        expect(item.hasAttribute('open'));
+        expect(item.hasAttribute('open')).to.be.true;
       });
-    });
 
-    it('should collapse All on click to button', async () => {
-      await expandAllButton.click();
       await collapseAllButton.click();
-
       elItems.forEach((item) => {
         expect(item.hasAttribute('open')).to.be.false;
       });

@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -31,9 +31,9 @@ export const Skeleton = () => (
   </div>
 );
 
-export const Default = (args) => (
-  <div style={{ width: args.defaultWidth }}>
-    <FluidSearch {...args} />
+export const Default = ({ defaultWidth, ...searchArgs }) => (
+  <div style={{ width: defaultWidth }}>
+    <FluidSearch {...searchArgs} />
   </div>
 );
 

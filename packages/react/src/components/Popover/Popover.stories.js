@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2025
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -161,9 +161,10 @@ export const TabTip = (args) => {
   );
 };
 
-TabTip.argTypes = {
-  align: { control: false },
-  autoAlign: { control: false },
+TabTip.parameters = {
+  controls: {
+    exclude: ['align', 'autoAlign', 'caret', 'highContrast'],
+  },
 };
 
 export const Default = DefaultStory.bind({});
@@ -173,6 +174,11 @@ Default.args = {
   dropShadow: true,
   highContrast: false,
   open: true,
+};
+Default.parameters = {
+  controls: {
+    exclude: ['isTabTip'],
+  },
 };
 
 Default.argTypes = {
@@ -231,6 +237,36 @@ Default.story = {
   ],
 };
 
+const autoAlignArgTypes = {
+  caret: {
+    control: {
+      type: 'boolean',
+    },
+  },
+  align: {
+    options: [
+      'top',
+      'top-start',
+      'top-end',
+
+      'bottom',
+      'bottom-start',
+      'bottom-end',
+
+      'left',
+      'left-end',
+      'left-start',
+
+      'right',
+      'right-end',
+      'right-start',
+    ],
+    control: {
+      type: 'select',
+    },
+  },
+};
+
 export const ExperimentalAutoAlign = (args) => {
   const [open, setOpen] = useState(true);
   const ref = useRef();
@@ -281,7 +317,13 @@ export const ExperimentalAutoAlign = (args) => {
   );
 };
 
-export const ExperimentalAutoAlignBoundary = () => {
+ExperimentalAutoAlign.argTypes = autoAlignArgTypes;
+ExperimentalAutoAlign.parameters = {
+  controls: {
+    exclude: ['autoAlign', 'highContrast', 'isTabTip'],
+  },
+};
+export const ExperimentalAutoAlignBoundary = (args) => {
   const [open, setOpen] = useState(true);
   const ref = useRef();
   const [boundary, setBoundary] = useState();
@@ -318,7 +360,8 @@ export const ExperimentalAutoAlignBoundary = () => {
           autoAlign
           autoAlignBoundary={boundary}
           onRequestClose={() => setOpen(false)}
-          ref={ref}>
+          ref={ref}
+          {...args}>
           <button
             className="playground-trigger"
             aria-label="Checkbox"
@@ -351,6 +394,13 @@ export const ExperimentalAutoAlignBoundary = () => {
       </div>
     </div>
   );
+};
+
+ExperimentalAutoAlignBoundary.argTypes = autoAlignArgTypes;
+ExperimentalAutoAlignBoundary.parameters = {
+  controls: {
+    exclude: ['autoAlign', 'highContrast', 'isTabTip'],
+  },
 };
 
 export const TabTipExperimentalAutoAlign = () => {

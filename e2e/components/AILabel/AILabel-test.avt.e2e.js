@@ -48,53 +48,25 @@ test.describe('@avt AILabel', () => {
     await expect(page).toHaveNoACViolations('AILabel-form');
   });
 
-  test('@avt-keyboard-nav - slug', async ({ page }) => {
+  test('@avt-default-state inline', async ({ page }) => {
     await visitStory(page, {
-      component: 'Search',
-      id: 'components-ailabel--explainability-popover',
+      component: 'AILabel',
+      id: 'components-ailabel--inline',
       globals: {
         theme: 'white',
       },
     });
-    const slug = page.getByRole('button', {
-      name: 'AI Show information',
+    await expect(page).toHaveNoACViolations('AILabel-inline');
+  });
+
+  test('@avt-default-state inline with content', async ({ page }) => {
+    await visitStory(page, {
+      component: 'AILabel',
+      id: 'components-ailabel--inline-with-content',
+      globals: {
+        theme: 'white',
+      },
     });
-    const callout = page.locator('.cds--popover--open');
-    await expect(slug).toBeVisible();
-    await expect(callout).toBeVisible();
-
-    // Tab to the AILabel
-    await page.keyboard.press('Tab');
-    await expect(slug).toBeFocused();
-
-    // Close the slug (example is open by default)
-    await page.keyboard.press('Enter');
-    await expect(callout).toBeHidden();
-
-    // Should also be able to open with space
-    await page.keyboard.press('Space');
-    await expect(callout).toBeVisible();
-
-    // Tab should go to buttons, and then close after last button
-    await page.keyboard.press('Tab');
-    await page.keyboard.press('Tab');
-    await page.keyboard.press('Tab');
-    await page.keyboard.press('Tab');
-    await expect(
-      page.getByRole('button', {
-        name: 'View details',
-      })
-    ).toBeFocused();
-    await page.keyboard.press('Tab');
-    await expect(callout).toBeHidden();
-
-    // Should also close on escape
-    await page.keyboard.press('Shift+Tab');
-    await page.keyboard.press('Shift+Tab');
-    await expect(callout).toBeHidden();
-    await slug.click();
-    await expect(callout).toBeVisible();
-    await page.keyboard.press('Escape');
-    await expect(callout).toBeHidden();
+    await expect(page).toHaveNoACViolations('AILabel-inline-with-content');
   });
 });

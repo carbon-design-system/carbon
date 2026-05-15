@@ -44,9 +44,8 @@ type CustomElementClass = Omit<typeof HTMLElement, 'new'>;
 const legacyCustomElement = (tagName: string, clazz: CustomElementClass) => {
   try {
     customElements.define(tagName, clazz as CustomElementConstructor);
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20452
-  } catch (error) {
-    // eslint-disable-next-line no-console -- https://github.com/carbon-design-system/carbon/issues/20452
+  } catch {
+    // eslint-disable-next-line no-console
     console.warn(`Attempting to re-define ${tagName}`);
   }
   // Cast as any because TS doesn't recognize the return type as being a
@@ -70,9 +69,8 @@ const standardCustomElement = (
     finisher(clazz: Constructor<HTMLElement>) {
       try {
         customElements.define(tagName, clazz);
-        // eslint-disable-next-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20452
-      } catch (error) {
-        // eslint-disable-next-line no-console -- https://github.com/carbon-design-system/carbon/issues/20452
+      } catch {
+        // eslint-disable-next-line no-console
         console.warn(`Attempting to re-define ${tagName}`);
       }
     },

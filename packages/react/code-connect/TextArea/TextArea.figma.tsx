@@ -43,7 +43,6 @@ figma.connect(
         'Read-only': true,
       }),
     },
-    /* eslint-disable-next-line react/jsx-no-undef -- https://github.com/carbon-design-system/carbon/issues/20452 */
     example: ({ ...props }) => <TextAreaDefault {...props} />,
   }
 );

@@ -149,12 +149,17 @@ export default defineConfig(
       },
     },
     rules: {
-      // All of these rules have directives in the codebase that disable them,
+      // These rules have directives in the codebase that disable them,
       // which implies that they were set previously.
       'no-console': 'error',
       'no-template-curly-in-string': 'error',
       'prefer-arrow-callback': ['error', { allowNamedFunctions: true }],
       'require-atomic-updates': 'error',
+
+      '@typescript-eslint/no-unused-vars': [
+        'error',
+        { ignoreRestSiblings: true },
+      ],
     },
   },
   {
@@ -217,6 +222,9 @@ export default defineConfig(
     files: ['packages/react/code-connect/**/*.figma.tsx'],
     rules: {
       '@typescript-eslint/ban-ts-comment': ['error', { 'ts-nocheck': false }],
+      '@typescript-eslint/no-unused-vars': 'off',
+      'react-hooks/rules-of-hooks': 'off',
+      'react/jsx-no-undef': 'off',
     },
   },
   {
@@ -277,19 +285,6 @@ export default defineConfig(
       'packages/react/src/components/Pagination/experimental/Pagination-story.js',
       'packages/react/src/components/Pagination/experimental/Pagination.js',
       'packages/react/src/components/Switch/IconSwitch.js',
-
-      // TODO: Delete these ignores.
-      // https://github.com/carbon-design-system/carbon/issues/19012
-      'www/src/components/Flex/index.js',
-      'www/src/components/Header/index.js',
-      'www/src/components/Text/index.js',
-      'www/src/components/WorkspaceList/index.js',
-      'www/src/pages/_app.js',
-      'www/src/pages/index.js',
-      'www/src/pages/insights/\\[owner\\]/\\[repo\\].js',
-      'www/src/pages/insights/index.js',
-      'www/src/pages/packages/\\[package\\]/index.js',
-      'www/src/pages/packages/index.js',
     ],
   }
 );

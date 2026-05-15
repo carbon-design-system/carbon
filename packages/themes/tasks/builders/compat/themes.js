@@ -20,6 +20,7 @@ function buildCompatFile() {
     g90,
     g100,
   };
+  const imports = [t.SassModule('sass:string')];
   const variables = Object.entries(themes).flatMap(([key, theme]) => {
     return [
       t.Newline(),
@@ -47,6 +48,7 @@ function buildCompatFile() {
   return t.StyleSheet([
     // Preamble
     FILE_BANNER,
+    ...imports,
     ...variables,
   ]);
 }

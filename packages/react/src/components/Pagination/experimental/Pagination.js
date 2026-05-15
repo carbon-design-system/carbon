@@ -81,9 +81,16 @@ function Pagination({
               hideLabel
               noLabel
               inline
-              onChange={(event) =>
-                setCurrentPageSize(Number(event.target.value))
-              }
+              onChange={(event) => {
+                const pageSize = Number(event.target.value);
+                const page = 1;
+                setCurrentPage(page);
+                setCurrentPageSize(pageSize);
+
+                if (onChange) {
+                  onChange({ page, pageSize });
+                }
+              }}
               value={currentPageSize}>
               {pageSizes.map((size) => (
                 <SelectItem key={size} value={size} text={String(size)} />

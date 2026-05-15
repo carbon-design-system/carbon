@@ -1,26 +1,19 @@
 {
   extends: [
-    // https://docs.renovatebot.com/presets-config/#configjs-lib
-    'config:js-lib',
-
-    // https://docs.renovatebot.com/presets-default/#maintainlockfilesweekly
-    ':maintainLockFilesWeekly',
-
-    // https://docs.renovatebot.com/presets-default/#preservesemverranges
-    ':preserveSemverRanges',
-
-    // https://docs.renovatebot.com/presets-npm/#npmunpublishsafe
-    'npm:unpublishSafe',
+    "config:js-lib",
+    ":maintainLockFilesWeekly",
+    ":preserveSemverRanges",
+    "security:minimumReleaseAgeNpm",
   ],
   schedule: [
-    'after 10pm every weekday',
-    'before 5am every weekday',
-    'every weekend',
+    "after 10pm every weekday",
+    "before 5am every weekday",
+    "every weekend",
   ],
   vulnerabilityAlerts: {
     enabled: true,
   },
-  rebaseWhen: 'never',
+  rebaseWhen: "never",
   lockFileMaintenance: {
     enabled: false,
   },

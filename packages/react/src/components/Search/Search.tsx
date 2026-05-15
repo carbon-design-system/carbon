@@ -10,6 +10,7 @@ import cx from 'classnames';
 import PropTypes from 'prop-types';
 import React, {
   useContext,
+  useEffect,
   useRef,
   useState,
   type ChangeEvent,
@@ -28,6 +29,7 @@ import { deprecate } from '../../prop-types/deprecate';
 import { FormContext } from '../FluidForm';
 import { noopFn } from '../../internal/noopFn';
 import { Tooltip } from '../Tooltip';
+import { isSearchValuePresent } from './utils';
 
 type InputPropsBase = Omit<HTMLAttributes<HTMLInputElement>, 'onChange'>;
 export interface SearchProps extends InputPropsBase {
@@ -111,7 +113,7 @@ export interface SearchProps extends InputPropsBase {
   /**
    * Specify the size of the Search
    */
-  size?: 'sm' | 'md' | 'lg';
+  size?: 'xs' | 'sm' | 'md' | 'lg';
 
   /**
    * Specify the type of the `<input>`
@@ -144,14 +146,15 @@ const Search = React.forwardRef<HTMLInputElement, SearchProps>(
       placeholder = 'Search',
       renderIcon,
       role,
-      size = 'md',
+      size,
       type = 'search',
       value,
       ...rest
     },
     forwardRef
   ) => {
-    const hasPropValue = Boolean(value || defaultValue);
+    const hasPropValue =
+      isSearchValuePresent(value) || isSearchValuePresent(defaultValue);
     const prefix = usePrefix();
     const { isFluid } = useContext(FormContext);
     const inputRef = useRef<HTMLInputElement>(null);
@@ -161,13 +164,11 @@ const Search = React.forwardRef<HTMLInputElement, SearchProps>(
     const uniqueId = id || inputId;
     const searchId = `${uniqueId}-search`;
     const [hasContent, setHasContent] = useState(hasPropValue || false);
-    const [prevValue, setPrevValue] = useState(value);
     const searchClasses = cx(
       {
         [`${prefix}--search`]: true,
-        [`${prefix}--search--sm`]: size === 'sm',
-        [`${prefix}--search--md`]: size === 'md',
-        [`${prefix}--search--lg`]: size === 'lg',
+        [`${prefix}--search--${size}`]: size, // TODO: V12 - Remove this class
+        [`${prefix}--layout--size-${size}`]: size,
         [`${prefix}--search--light`]: light,
         [`${prefix}--search--disabled`]: disabled,
         [`${prefix}--search--fluid`]: isFluid,
@@ -180,10 +181,12 @@ const Search = React.forwardRef<HTMLInputElement, SearchProps>(
       [`${prefix}--search-close--hidden`]: !hasContent || !isExpanded,
     });
 
-    if (value !== prevValue) {
-      setHasContent(!!value);
-      setPrevValue(value);
-    }
+    useEffect(() => {
+      // Sync content state when used as a controlled input.
+      if (typeof value !== 'undefined') {
+        setHasContent(isSearchValuePresent(value));
+      }
+    }, [value]);
 
     function clearInput() {
       if (!value && inputRef.current) {
@@ -269,7 +272,7 @@ const Search = React.forwardRef<HTMLInputElement, SearchProps>(
     const magnifierWithTooltip =
       onExpand && !isExpanded ? (
         <Tooltip
-          className={`${prefix}--search-tooltip ${prefix}--search-magnifier-tooltip`}
+          className={`${prefix}--search-tooltip ${prefix}--search-magnifier-tooltip ${prefix}--icon-tooltip`}
           align="top"
           label="Search">
           {magnifierButton}
@@ -414,7 +417,7 @@ Search.propTypes = {
   /**
    * Specify the size of the Search
    */
-  size: PropTypes.oneOf(['sm', 'md', 'lg']),
+  size: PropTypes.oneOf(['xs', 'sm', 'md', 'lg']),
 
   /**
    * Specify the type of the `<input>`

@@ -103,16 +103,9 @@ export interface DatePickerInputProps
   onClick?: func;
 
   /**
-   * Provide a regular expression that the input value must match
-   * TODO:need to be rewritten
+   * Provide a regular expression pattern string that the input value must match
    */
-  pattern?: (
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
-    props: { [key: string]: any },
-    propName: string,
-    componentName: string
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
-  ) => null | any | Error;
+  pattern?: string;
 
   /**
    * Specify the placeholder text
@@ -250,6 +243,15 @@ const DatePickerInput = frFn((props, ref) => {
     ? undefined
     : `datepicker-input-helper-text-${datePickerInputInstanceId}`;
 
+  let ariaDescribedBy: string | undefined;
+  if (normalizedProps.invalid) {
+    ariaDescribedBy = normalizedProps.invalidId;
+  } else if (normalizedProps.warn) {
+    ariaDescribedBy = normalizedProps.warnId;
+  } else {
+    ariaDescribedBy = helperText ? datePickerInputHelperId : undefined;
+  }
+
   // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
   const inputProps: any = {
     ...rest,
@@ -257,10 +259,11 @@ const DatePickerInput = frFn((props, ref) => {
     className: inputClasses,
     disabled: normalizedProps.disabled,
     ref,
-    ['aria-describedby']: helperText ? datePickerInputHelperId : undefined,
+    ['aria-describedby']: ariaDescribedBy,
   };
   if (normalizedProps.invalid) {
     inputProps['data-invalid'] = true;
+    inputProps['aria-invalid'] = true;
   }
   const input = <input {...inputProps} />;
 
@@ -291,7 +294,6 @@ const DatePickerInput = frFn((props, ref) => {
           ) : (
             ''
           )}
-          {isFluid && <DatePickerIcon datePickerType={datePickerType} />}
           <DatePickerIcon
             datePickerType={datePickerType}
             invalid={normalizedProps.invalid}
@@ -377,22 +379,9 @@ DatePickerInput.propTypes = {
   onClick: PropTypes.func,
 
   /**
-   * Provide a regular expression that the input value must match
+   * Provide a regular expression pattern string that the input value must match
    */
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
-  pattern: (props, propName, componentName): null | any | Error => {
-    if (props[propName] === undefined) {
-      return;
-    }
-    try {
-      new RegExp(props[propName]);
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20452
-    } catch (e) {
-      return new Error(
-        `Invalid value of prop '${propName}' supplied to '${componentName}', it should be a valid regular expression`
-      );
-    }
-  },
+  pattern: PropTypes.string,
 
   /**
    * Specify the placeholder text

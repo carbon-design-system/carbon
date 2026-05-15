@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2025
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -7,21 +7,23 @@
 
 import PropTypes from 'prop-types';
 import React, {
+  Children,
   cloneElement,
   createContext,
+  useEffect,
   useRef,
   useState,
-  type ReactElement,
   type ReactNode,
 } from 'react';
 import classNames from 'classnames';
-import type { RadioButtonProps } from '../RadioButton';
+import RadioButton, { type RadioButtonProps } from '../RadioButton';
 import { Legend } from '../Text/createTextComponent';
 import { usePrefix } from '../../internal/usePrefix';
 import { WarningFilled, WarningAltFilled } from '@carbon/icons-react';
 import { deprecate } from '../../prop-types/deprecate';
 import { mergeRefs } from '../../tools/mergeRefs';
 import { useId } from '../../internal/useId';
+import { hasHelperText } from '../../internal/hasHelperText';
 import { AILabel } from '../AILabel';
 import { isComponentElement } from '../../internal';
 
@@ -164,43 +166,38 @@ const RadioButtonGroup = React.forwardRef(
     const prefix = usePrefix();
 
     const [selected, setSelected] = useState(valueSelected ?? defaultSelected);
-    const [prevValueSelected, setPrevValueSelected] = useState(valueSelected);
+    const prevValueSelected = useRef(valueSelected);
 
     const radioButtonGroupInstanceId = useId();
 
-    /**
-     * prop + state alignment - getDerivedStateFromProps
-     * only update if selected prop changes
-     */
-    if (valueSelected !== prevValueSelected) {
-      setSelected(valueSelected);
-      setPrevValueSelected(valueSelected);
-    }
+    useEffect(() => {
+      if (valueSelected !== prevValueSelected.current) {
+        setSelected(valueSelected);
+        prevValueSelected.current = valueSelected;
+      }
+    }, [valueSelected]);
 
     function getRadioButtons() {
-      const mappedChildren = React.Children.map(
-        children as ReactElement<RadioButtonProps>,
-        (radioButton) => {
-          if (!radioButton) {
-            return;
-          }
-
-          const newProps = {
-            name: name,
-            key: radioButton.props.value,
-            value: radioButton.props.value,
-            onChange: handleOnChange,
-            checked: radioButton.props.value === selected,
-            required: required,
-          };
-
-          if (!selected && radioButton.props.checked) {
-            newProps.checked = true;
-          }
-
-          return React.cloneElement(radioButton, newProps);
+      const mappedChildren = Children.map(children, (radioButton) => {
+        if (!isComponentElement(radioButton, RadioButton)) {
+          return radioButton;
         }
-      );
+
+        const newProps = {
+          name: name,
+          key: radioButton.props.value,
+          value: radioButton.props.value,
+          onChange: handleOnChange,
+          checked: radioButton.props.value === selected,
+          required: required,
+        };
+
+        if (!selected && radioButton.props.checked) {
+          newProps.checked = true;
+        }
+
+        return cloneElement(radioButton, newProps);
+      });
 
       return mappedChildren;
     }
@@ -239,7 +236,7 @@ const RadioButtonGroup = React.forwardRef(
       [`${prefix}--form__helper-text--disabled`]: disabled,
     });
 
-    const hasHelper = typeof helperText !== 'undefined' && helperText !== null;
+    const hasHelper = hasHelperText(helperText);
     const helperId = !hasHelper
       ? undefined
       : `radio-button-group-helper-text-${radioButtonGroupInstanceId}`;
@@ -265,7 +262,7 @@ const RadioButtonGroup = React.forwardRef(
           className={fieldsetClasses}
           disabled={disabled}
           data-invalid={invalid ? true : undefined}
-          aria-describedby={showHelper && helperText ? helperId : undefined}
+          aria-describedby={showHelper && hasHelper ? helperId : undefined}
           {...rest}>
           {legendText && (
             <Legend className={`${prefix}--label`}>

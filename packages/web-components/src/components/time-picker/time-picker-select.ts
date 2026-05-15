@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2020, 2025
+ * Copyright IBM Corp. 2020, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -205,7 +205,7 @@ class CDSTimePickerSelect extends FormMixin(LitElement) {
       <select
         id="${ifDefined(id)}"
         class="${inputClasses}"
-        aria-readonly="${String(Boolean(readOnly))}"
+        aria-readonly="${String(readOnly)}"
         ?disabled="${disabled}"
         aria-label="${ifDefined(ariaLabel)}"
         .value="${ifDefined(value)}"

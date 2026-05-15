@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2019, 2023
+ * Copyright IBM Corp. 2019, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -19,7 +19,6 @@ const headers = [
 ];
 
 const defaultArgs = {
-  compact: false,
   columnCount: 5,
   rowCount: 5,
   showHeader: true,
@@ -28,10 +27,6 @@ const defaultArgs = {
 };
 
 const controls = {
-  compact: {
-    control: 'boolean',
-    description: 'Compact',
-  },
   columnCount: {
     control: 'number',
     description: 'Column count',
@@ -57,19 +52,11 @@ const controls = {
 export const Default = {
   args: defaultArgs,
   argTypes: controls,
-  render: ({
-    compact,
-    columnCount,
-    rowCount,
-    showHeader,
-    showToolbar,
-    zebra,
-  }) => {
+  render: ({ columnCount, rowCount, showHeader, showToolbar, zebra }) => {
     const dynamicHeaders = headers.slice(0, columnCount);
     return html`
       <cds-table-skeleton
         .headers=${dynamicHeaders}
-        .compact=${compact}
         column-count=${columnCount}
         row-count=${rowCount}
         ?show-header=${showHeader}

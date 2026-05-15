@@ -13,6 +13,7 @@ export {
 } from './ComposedModal';
 export {
   ComposedModalPresence,
+  withComposedModalPresence,
   type ComposedModalPresenceProps,
 } from './ComposedModalPresence';
 

@@ -52,6 +52,7 @@ import { Text } from '../Text';
 import BadgeIndicator from '../BadgeIndicator';
 import { isComponentElement } from '../../internal';
 
+const buttonWidth = 44;
 const verticalTabHeight = 64;
 
 // Used to manage the overall state of the Tabs
@@ -145,7 +146,7 @@ function Tabs({
 }: TabsProps) {
   const baseId = useId('ccs');
   if (dismissable && !onTabCloseRequest) {
-    // eslint-disable-next-line no-console -- https://github.com/carbon-design-system/carbon/issues/20452
+    // eslint-disable-next-line no-console
     console.error(
       'dismissable property specified without also providing an onTabCloseRequest property.'
     );
@@ -502,15 +503,14 @@ function TabList({
   // VISIBLE IF:
   //   SCROLLABLE
   //   AND SCROLL_LEFT > 0
-  const buttonWidth = 44;
+  //
   // Next Button
   // VISIBLE IF:
   //   SCROLLABLE
   //   AND SCROLL_LEFT + CLIENT_WIDTH < SCROLL_WIDTH
   const [isNextButtonVisible, setIsNextButtonVisible] = useState(
     ref.current
-      ? scrollLeft + buttonWidth + ref.current.clientWidth <
-          ref.current.scrollWidth
+      ? scrollLeft + ref.current.clientWidth < ref.current.scrollWidth
       : false
   );
 
@@ -628,20 +628,18 @@ function TabList({
   }, []);
 
   useEffect(() => {
-    //adding 1 in calculation for firefox support
+    // adding 1 in calculation for firefox support
     setIsNextButtonVisible(
       ref.current
-        ? scrollLeft + buttonWidth + ref.current.clientWidth + 1 <
-            ref.current.scrollWidth
+        ? scrollLeft + ref.current.clientWidth + 1 < ref.current.scrollWidth
         : false
     );
 
-    if (dismissable) {
-      if (ref.current) {
-        setIsScrollable(ref.current.scrollWidth > ref.current.clientWidth);
-      }
+    if (dismissable && ref.current) {
+      // adding 1 in calculation for firefox support
+      setIsScrollable(ref.current.scrollWidth > ref.current.clientWidth + 1);
     }
-  }, [scrollLeft, children, dismissable, isScrollable]);
+  }, [children, dismissable, scrollLeft]);
 
   useEffect(() => {
     if (tabs.current[selectedIndex]?.disabled) {
@@ -1263,7 +1261,7 @@ const Tab = forwardRef<HTMLElement, TabProps>(
       customClassName
     );
 
-    const BaseComponent = as as ElementType;
+    const BaseComponent: ElementType = as;
 
     const onDismissIconMouseEnter = (evt) => {
       if (contained && tabRef.current) {
@@ -1310,10 +1308,11 @@ const Tab = forwardRef<HTMLElement, TabProps>(
         const tabCount = Array.from(
           tabRef.current.parentElement.childNodes
         ).filter((node) => {
-          const element = node as HTMLElement;
+          if (!(node instanceof HTMLElement)) return false;
+
           return (
-            element.classList.contains(`${prefix}--tabs__nav-link`) &&
-            !element.classList.contains(`${prefix}--tabs__nav-item--disabled`)
+            node.classList.contains(`${prefix}--tabs__nav-link`) &&
+            !node.classList.contains(`${prefix}--tabs__nav-item--disabled`)
           );
         }).length;
 
@@ -1324,9 +1323,12 @@ const Tab = forwardRef<HTMLElement, TabProps>(
         // if removing last tab focus on previous tab
         else {
           const prevTabIndex = (tabCount - 2) * 2;
-          (
-            tabRef.current.parentElement.childNodes[prevTabIndex] as HTMLElement
-          )?.focus();
+          const previousTab =
+            tabRef.current.parentElement.childNodes[prevTabIndex];
+
+          if (previousTab instanceof HTMLElement) {
+            previousTab.focus();
+          }
         }
       }
     };
@@ -1603,10 +1605,7 @@ const IconTab = React.forwardRef<HTMLDivElement, IconTabProps>(
 
     const hasSize20 =
       isValidElement<ComponentProps<CarbonIconType>>(children) &&
-      // TODO: The interface allows `size` to be a string. Should this case be
-      // handled here, or should the prop type be restricted to `number`
-      // instead?
-      children.props.size === 20;
+      (children.props.size === 20 || children.props.size === '20');
 
     const classNames = cx(
       `${prefix}--tabs__nav-item--icon-only`,
@@ -1762,7 +1761,9 @@ function TabPanels({ children }: TabPanelsProps) {
       // set max height to TabList
       const heights = refs.current.map((ref) => ref?.offsetHeight || 0);
       const max = Math.max(...heights);
-      (tabContainer as HTMLElement).style.height = max + 'px';
+      if (tabContainer instanceof HTMLElement) {
+        tabContainer.style.height = max + 'px';
+      }
 
       // re-hide hidden Tab Panels
       refs.current.forEach((ref, index) => {

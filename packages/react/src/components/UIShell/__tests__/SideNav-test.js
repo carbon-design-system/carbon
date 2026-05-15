@@ -8,6 +8,7 @@
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import React from 'react';
 import SideNav from '../SideNav';
+import SideNavLink from '../SideNavLink';
 
 Object.defineProperty(window, 'matchMedia', {
   writable: true,
@@ -139,21 +140,7 @@ describe('SideNav', () => {
     expect(container).toBeInTheDocument();
   });
 
-  it('should pass isSideNavExpanded to Carbon SideNav children', () => {
-    const TestChild = React.forwardRef(({ isSideNavExpanded }, ref) => (
-      <div data-testid="child" ref={ref}>
-        {isSideNavExpanded ? 'Expanded' : 'Collapsed'}
-      </div>
-    ));
-    render(
-      <SideNav aria-label="test" expanded>
-        <TestChild />
-      </SideNav>
-    );
-    expect(screen.getByTestId('child')).toHaveTextContent('Collapsed');
-  });
-
-  it('should not pass isSideNavExpanded to non-CarbonSideNav children', () => {
+  it('should render non-Carbon children without injecting props', () => {
     const NonCarbonChild = () => <div data-testid="non-carbon-child" />;
     render(
       <SideNav aria-label="test" expanded>
@@ -163,24 +150,28 @@ describe('SideNav', () => {
     expect(screen.getByTestId('non-carbon-child')).toBeInTheDocument();
   });
 
-  it('should pass isSideNavExpanded correctly based on controlled state', () => {
-    const TestChild = React.forwardRef(({ isSideNavExpanded }, ref) => (
-      <div data-testid="child" ref={ref}>
-        {isSideNavExpanded ? 'Expanded' : 'Collapsed'}
-      </div>
-    ));
+  it('should provide expansion state to SideNavLink through context', () => {
     const { rerender } = render(
       <SideNav aria-label="test" expanded>
-        <TestChild />
+        <SideNavLink href="#example">Example</SideNavLink>
       </SideNav>
     );
-    expect(screen.getByTestId('child')).toHaveTextContent('Collapsed');
+
+    expect(screen.getByRole('link', { name: 'Example' })).toHaveAttribute(
+      'tabindex',
+      '0'
+    );
+
     rerender(
-      <SideNav aria-label="test">
-        <TestChild />
+      <SideNav aria-label="test" expanded={false}>
+        <SideNavLink href="#example">Example</SideNavLink>
       </SideNav>
     );
-    expect(screen.getByTestId('child')).toHaveTextContent('Collapsed');
+
+    expect(screen.getByRole('link', { name: 'Example' })).toHaveAttribute(
+      'tabindex',
+      '-1'
+    );
   });
 
   it('should call handleToggle and onSideNavBlur when blurred', () => {

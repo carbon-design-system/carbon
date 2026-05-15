@@ -14,6 +14,7 @@ import React, {
   type ChangeEventHandler,
   type ComponentPropsWithRef,
   type ReactNode,
+  type SelectHTMLAttributes,
 } from 'react';
 import classNames from 'classnames';
 import {
@@ -29,6 +30,7 @@ import { Text } from '../Text';
 import { AILabel } from '../AILabel';
 import { isComponentElement } from '../../internal';
 import { useNormalizedInputProps } from '../../internal/useNormalizedInputProps';
+import { hasHelperText } from '../../internal/hasHelperText';
 
 type ExcludedAttributes = 'size';
 
@@ -52,8 +54,7 @@ export interface SelectProps
   /**
    * Optionally provide the default value of the `<select>`
    */
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
-  defaultValue?: any;
+  defaultValue?: SelectHTMLAttributes<HTMLSelectElement>['defaultValue'];
 
   /**
    * Specify whether the control is disabled
@@ -123,7 +124,7 @@ export interface SelectProps
   /**
    * Specify the size of the Select Input.
    */
-  size?: 'sm' | 'md' | 'lg';
+  size?: 'xs' | 'sm' | 'md' | 'lg';
 
   /**
    * @deprecated please use decorator instead.
@@ -157,7 +158,7 @@ const Select = forwardRef<HTMLSelectElement, SelectProps>(
       hideLabel = false,
       invalid = false,
       invalidText = '',
-      helperText = '',
+      helperText,
       light = false,
       readOnly,
       size,
@@ -174,8 +175,7 @@ const Select = forwardRef<HTMLSelectElement, SelectProps>(
     const [isFocused, setIsFocused] = useState(false);
 
     interface SelectItemProps {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
-      value: any;
+      value: SelectHTMLAttributes<HTMLSelectElement>['defaultValue'];
       text: string;
     }
     // Convert children to an array of valid elements once using type narrowing
@@ -208,6 +208,7 @@ const Select = forwardRef<HTMLSelectElement, SelectProps>(
       warn,
       warnText,
     });
+
     const selectClasses = classNames({
       [`${prefix}--select`]: true,
       [`${prefix}--select--inline`]: inline,
@@ -220,20 +221,22 @@ const Select = forwardRef<HTMLSelectElement, SelectProps>(
       [`${prefix}--select--fluid--focus`]: isFluid && isFocused,
       [`${prefix}--select--slug`]: slug,
       [`${prefix}--select--decorator`]: decorator,
+      [`${prefix}--select--${size}`]: size,
+      [`${prefix}--layout--size-${size}`]: size,
     });
+
     const labelClasses = classNames(`${prefix}--label`, {
       [`${prefix}--visually-hidden`]: hideLabel,
       [`${prefix}--label--disabled`]: normalizedProps.disabled,
     });
     const inputClasses = classNames({
       [`${prefix}--select-input`]: true,
-      [`${prefix}--select-input--${size}`]: size,
     });
     const error = normalizedProps.validation;
     const helperTextClasses = classNames(`${prefix}--form__helper-text`, {
       [`${prefix}--form__helper-text--disabled`]: normalizedProps.disabled,
     });
-    const hasHelper = typeof helperText !== 'undefined' && helperText !== null;
+    const hasHelper = hasHelperText(helperText);
     const helper = hasHelper ? (
       <Text
         as="div"
@@ -453,7 +456,7 @@ Select.propTypes = {
   /**
    * Specify the size of the Select Input.
    */
-  size: PropTypes.oneOf(['sm', 'md', 'lg']),
+  size: PropTypes.oneOf(['xs', 'sm', 'md', 'lg']),
 
   slug: deprecate(
     PropTypes.node,

@@ -1286,6 +1286,14 @@ test('metadata', () => {
           "type": "color",
         },
         {
+          "name": "syntax-inserted",
+          "type": "color",
+        },
+        {
+          "name": "syntax-deleted",
+          "type": "color",
+        },
+        {
           "name": "ai-popover-background",
           "type": "color",
         },
@@ -1459,6 +1467,10 @@ test('metadata', () => {
         },
         {
           "name": "overlay",
+          "type": "color",
+        },
+        {
+          "name": "color-scheme",
           "type": "color",
         },
         {

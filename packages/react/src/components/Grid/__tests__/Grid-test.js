@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2019
+ * Copyright IBM Corp. 2019, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -49,6 +49,27 @@ describe('FlexGrid', () => {
       expect.stringContaining('grid--full-width')
     );
   });
+
+  it('should support setting the with-row-gap class through the `withRowGap` prop', () => {
+    const { container } = render(<FlexGrid withRowGap />);
+    expect(container.firstChild.className).toEqual(
+      expect.stringContaining('grid--with-row-gap')
+    );
+  });
+
+  it('should not set the with-row-gap class when `withRowGap` is false', () => {
+    const { container } = render(<FlexGrid withRowGap={false} />);
+    expect(container.firstChild.className).not.toEqual(
+      expect.stringContaining('grid--with-row-gap')
+    );
+  });
+
+  it('should not set the with-row-gap class when `withRowGap` is not set', () => {
+    const { container } = render(<FlexGrid />);
+    expect(container.firstChild.className).not.toEqual(
+      expect.stringContaining('grid--with-row-gap')
+    );
+  });
 });
 
 describe('Grid', () => {
@@ -59,8 +80,8 @@ describe('Grid', () => {
 
   beforeEach(() => {
     jest.resetModules();
-    const FeatureFlags = require('@carbon/feature-flags');
-    FeatureFlags.enable('enable-css-grid');
+    const { enable } = require('@carbon/feature-flags');
+    enable('enable-css-grid');
 
     cleanup = require('@testing-library/react/pure').cleanup;
     render = require('@testing-library/react/pure').render;
@@ -123,6 +144,41 @@ describe('Grid', () => {
     const { container } = render(<Grid align="end" />);
     expect(container.firstChild.className).toEqual(
       expect.stringContaining('grid--end')
+    );
+  });
+
+  it('should support setting the with-row-gap class through the `withRowGap` prop', () => {
+    const { container } = render(<Grid withRowGap />);
+    expect(container.firstChild.className).toEqual(
+      expect.stringContaining('css-grid--with-row-gap')
+    );
+  });
+
+  it('should not set the with-row-gap class when `withRowGap` is false', () => {
+    const { container } = render(<Grid withRowGap={false} />);
+    expect(container.firstChild.className).not.toEqual(
+      expect.stringContaining('css-grid--with-row-gap')
+    );
+  });
+
+  it('should not set the with-row-gap class when `withRowGap` is not set', () => {
+    const { container } = render(<Grid />);
+    expect(container.firstChild.className).not.toEqual(
+      expect.stringContaining('css-grid--with-row-gap')
+    );
+  });
+
+  // Add subgrid tests:
+  it('should support setting the with-row-gap class on subgrid through the `withRowGap` prop', () => {
+    const { container } = render(
+      <Grid>
+        <Grid withRowGap />
+      </Grid>
+    );
+    // Query for nested grid with subgrid class
+    const subgrid = container.querySelector('.cds--subgrid');
+    expect(subgrid.className).toEqual(
+      expect.stringContaining('subgrid--with-row-gap')
     );
   });
 });

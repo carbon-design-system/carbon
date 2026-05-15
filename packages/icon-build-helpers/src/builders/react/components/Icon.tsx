@@ -6,20 +6,20 @@
  */
 import { getAttributes } from '@carbon/icon-helpers';
 import PropTypes from 'prop-types';
-import React, { forwardRef, type ReactSVGElement } from 'react';
+import React, { forwardRef } from 'react';
 
 export interface IconProps
-  extends Omit<React.SVGProps<React.ReactSVGElement>, 'ref' | 'tabIndex'> {
+  extends Omit<React.SVGProps<SVGSVGElement>, 'ref' | 'tabIndex'> {
+  // TODO: Remove support for string in v12.
   /**
    * @see React.SVGAttributes.tabIndex
-   * @todo remove support for string in v12
    */
   tabIndex?: string | number | undefined;
 
   title?: string | undefined;
 }
 
-const Icon = forwardRef<ReactSVGElement, IconProps>(function Icon(
+const Icon = forwardRef<SVGSVGElement, IconProps>(function Icon(
   {
     className,
     children,
@@ -30,11 +30,14 @@ const Icon = forwardRef<ReactSVGElement, IconProps>(function Icon(
   },
   ref
 ) {
-  const { tabindex, ...attrs } = getAttributes({
+  const iconAttributes = getAttributes as (
+    attributes?: Record<string, unknown>
+  ) => Record<string, unknown>;
+  const { tabindex, ...attrs } = iconAttributes({
     ...rest,
     tabindex: tabIndex,
   });
-  const props: React.SVGProps<React.ReactSVGElement> = attrs;
+  const props = attrs as React.SVGProps<SVGSVGElement>;
 
   if (className) {
     props.className = className;

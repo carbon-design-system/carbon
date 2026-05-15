@@ -1,18 +1,22 @@
-import { fromRollup } from '@web/dev-server-rollup';
-import { nodeResolve } from '@rollup/plugin-node-resolve';
+import { puppeteerLauncher } from '@web/test-runner-puppeteer';
 
-const resolve = fromRollup(nodeResolve);
+const chromeLaunchArgs = process.env.CI
+  ? ['--no-sandbox', '--disable-setuid-sandbox']
+  : [];
 
 export default {
-  files: 'src/components/**/__tests__/**/*.js',
-  nodeResolve: true,
-  concurrency: 1,
-
-  plugins: [
-    resolve({
-      extensions: ['.js', '.ts'],
+  browsers: [
+    puppeteerLauncher({
+      launchOptions: {
+        args: chromeLaunchArgs,
+      },
     }),
   ],
+  files: 'src/components/**/__tests__/**/*.js',
+  nodeResolve: {
+    extensions: ['.js', '.ts'],
+  },
+  concurrency: 1,
 
   rootDir: '.',
 

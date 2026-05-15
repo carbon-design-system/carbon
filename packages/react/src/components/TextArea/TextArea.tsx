@@ -24,6 +24,7 @@ import { getAnnouncement } from '../../internal/getAnnouncement';
 import useIsomorphicEffect from '../../internal/useIsomorphicEffect';
 import { useMergedRefs } from '../../internal/useMergedRefs';
 import { useId } from '../../internal/useId';
+import { hasHelperText } from '../../internal/hasHelperText';
 import { noopFn } from '../../internal/noopFn';
 import { Text } from '../Text';
 import { AILabel } from '../AILabel';
@@ -32,8 +33,7 @@ import { isComponentElement } from '../../internal';
 export interface TextAreaProps
   extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
   /**
-   * Provide a custom className that is applied directly to the underlying
-   * `<textarea>` node
+   * Provide a custom className that is applied to the wrapper node
    */
   className?: string;
 
@@ -180,7 +180,7 @@ const TextArea = frFn((props, forwardRef) => {
     onKeyDown = noopFn,
     invalid = false,
     invalidText = '',
-    helperText = '',
+    helperText,
     light,
     placeholder = '',
     enableCounter = false,
@@ -400,7 +400,7 @@ const TextArea = frFn((props, forwardRef) => {
   const counterDescriptionId =
     enableCounter && maxCount ? `${id}-counter-desc` : undefined;
 
-  const hasHelper = typeof helperText !== 'undefined' && helperText !== null;
+  const hasHelper = hasHelperText(helperText);
   const helperId = !hasHelper
     ? undefined
     : `text-area-helper-text-${textAreaInstanceId}`;
@@ -450,13 +450,14 @@ const TextArea = frFn((props, forwardRef) => {
   ) : null;
 
   let ariaDescribedBy;
+  let ariaErrorMessage;
   if (invalid) {
-    ariaDescribedBy = errorId;
+    ariaErrorMessage = errorId;
   } else if (warn && !isFluid) {
     ariaDescribedBy = warnId;
   } else {
     const ids: string[] = [];
-    if (!isFluid && helperText && helperId) ids.push(helperId);
+    if (!isFluid && hasHelper && helperId) ids.push(helperId);
     if (counterDescriptionId) ids.push(counterDescriptionId);
     ariaDescribedBy = ids.length > 0 ? ids.join(' ') : undefined;
   }
@@ -509,10 +510,11 @@ const TextArea = frFn((props, forwardRef) => {
       {...other}
       {...textareaProps}
       placeholder={placeholder}
-      aria-readonly={Boolean(other.readOnly)}
+      aria-readonly={other.readOnly}
       className={textareaClasses}
       aria-invalid={invalid}
       aria-describedby={ariaDescribedBy}
+      aria-errormessage={ariaErrorMessage}
       disabled={disabled}
       rows={rows}
       readOnly={other.readOnly}
@@ -586,8 +588,7 @@ const TextArea = frFn((props, forwardRef) => {
 TextArea.displayName = 'TextArea';
 TextArea.propTypes = {
   /**
-   * Provide a custom className that is applied directly to the underlying
-   * `<textarea>` node
+   * Provide a custom className that is applied to the wrapper node
    */
   className: PropTypes.string,
 

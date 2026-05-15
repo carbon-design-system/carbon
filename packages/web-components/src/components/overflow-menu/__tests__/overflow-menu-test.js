@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2025
+ * Copyright IBM Corp. 2025, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -96,5 +96,110 @@ describe('cds-overflow-menu', () => {
 
     expect(el.open).to.be.false;
     expect(menuBody.open).to.be.false;
+  });
+
+  it('should render icon slot in menu item', async () => {
+    const el = await fixture(html`
+      <cds-overflow-menu>
+        <span slot="tooltip-content">Options</span>
+        <cds-overflow-menu-body>
+          <cds-overflow-menu-item>
+            Filter A
+            <svg slot="icon" width="16" height="16" data-testid="icon">
+              <rect width="16" height="16" />
+            </svg>
+          </cds-overflow-menu-item>
+        </cds-overflow-menu-body>
+      </cds-overflow-menu>
+    `);
+
+    const menuItem = el.querySelector('cds-overflow-menu-item');
+    const icon = menuItem.querySelector('[slot="icon"]');
+
+    expect(icon).to.exist;
+    expect(icon.getAttribute('slot')).to.equal('icon');
+    expect(icon.getAttribute('data-testid')).to.equal('icon');
+  });
+
+  it('should render icon slot in menu item with href', async () => {
+    const el = await fixture(html`
+      <cds-overflow-menu>
+        <span slot="tooltip-content">Options</span>
+        <cds-overflow-menu-body>
+          <cds-overflow-menu-item href="https://example.com">
+            Filter A
+            <svg slot="icon" width="16" height="16" data-testid="icon-link">
+              <rect width="16" height="16" />
+            </svg>
+          </cds-overflow-menu-item>
+        </cds-overflow-menu-body>
+      </cds-overflow-menu>
+    `);
+
+    const menuItem = el.querySelector('cds-overflow-menu-item');
+    const icon = menuItem.querySelector('[slot="icon"]');
+
+    expect(icon).to.exist;
+    expect(icon.getAttribute('slot')).to.equal('icon');
+    expect(icon.getAttribute('data-testid')).to.equal('icon-link');
+    expect(menuItem.href).to.equal('https://example.com');
+  });
+
+  describe('cds-overflow-menu-item', () => {
+    it('should render danger description for button variant', async () => {
+      const el = await fixture(html`
+        <cds-overflow-menu-item danger danger-description="Delete action">
+          Delete
+        </cds-overflow-menu-item>
+      `);
+
+      await el.updateComplete;
+
+      const dangerSpan = el.shadowRoot?.querySelector('#danger-description');
+      expect(dangerSpan).to.exist;
+      expect(dangerSpan).to.have.class('cds--visually-hidden');
+      expect(dangerSpan?.textContent).to.equal('Delete action');
+    });
+
+    it('should render danger description for href variant', async () => {
+      const el = await fixture(html`
+        <cds-overflow-menu-item
+          danger
+          danger-description="Delete action"
+          href="#delete">
+          Delete
+        </cds-overflow-menu-item>
+      `);
+
+      await el.updateComplete;
+
+      const dangerSpan = el.shadowRoot?.querySelector('#danger-description');
+      expect(dangerSpan).to.exist;
+      expect(dangerSpan).to.have.class('cds--visually-hidden');
+      expect(dangerSpan?.textContent).to.equal('Delete action');
+    });
+
+    it('should not render danger description when danger is false', async () => {
+      const el = await fixture(html`
+        <cds-overflow-menu-item>Normal action</cds-overflow-menu-item>
+      `);
+
+      await el.updateComplete;
+
+      const dangerSpan = el.shadowRoot?.querySelector('#danger-description');
+      expect(dangerSpan).to.not.exist;
+    });
+
+    it('should use default danger description', async () => {
+      const el = await fixture(html`
+        <cds-overflow-menu-item danger>Delete</cds-overflow-menu-item>
+      `);
+
+      await el.updateComplete;
+
+      const dangerSpan = el.shadowRoot?.querySelector('#danger-description');
+      expect(dangerSpan).to.exist;
+      expect(dangerSpan?.textContent).to.equal('danger');
+    });
   });
 });

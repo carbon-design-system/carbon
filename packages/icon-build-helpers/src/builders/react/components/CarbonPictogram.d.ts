@@ -11,5 +11,5 @@ export interface CarbonPictogramProps extends IconProps {
 }
 
 export type CarbonPictogramType = React.ForwardRefExoticComponent<
-  CarbonPictogramProps & React.RefAttributes<React.ReactSVGElement>
+  CarbonPictogramProps & React.RefAttributes<SVGSVGElement>
 >;

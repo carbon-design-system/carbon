@@ -7,5 +7,11 @@
 
 export * from '@carbon/utilities';
 
-export * from './useNoInteractiveChildren';
-export * from './StepFlow';
+export {
+  getInteractiveContent,
+  getRoleContent,
+  useInteractiveChildrenNeedDescription,
+  useNoInteractiveChildren,
+} from './useNoInteractiveChildren';
+export { StepGroup, StepProvider, useStepContext } from './StepFlow';
+export type { StepContextType } from './StepFlow';

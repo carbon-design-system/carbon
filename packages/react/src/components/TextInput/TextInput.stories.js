@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2025
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -112,7 +112,7 @@ export default {
       action: 'onClick',
     },
     size: {
-      options: ['sm', 'md', 'lg'],
+      options: ['xs', 'sm', 'md', 'lg'],
       control: {
         type: 'select',
       },
@@ -174,6 +174,27 @@ export const Default = (args) => {
       <TextInput {...textInputArgs} />
     </div>
   );
+};
+
+export const Inline = (args) => {
+  const { defaultWidth, ...textInputArgs } = args;
+
+  return (
+    <div style={{ width: defaultWidth }}>
+      <TextInput inline {...textInputArgs} />
+    </div>
+  );
+};
+
+Inline.args = {
+  defaultWidth: 450,
+  inline: true,
+};
+
+Inline.parameters = {
+  controls: {
+    exclude: ['inline'],
+  },
 };
 
 export const Fluid = (args) => {
@@ -285,15 +306,13 @@ export const withAILabel = (args) => {
   );
 };
 
-export const Skeleton = (args) => <TextInputSkeleton {...args} />;
-
-Skeleton.args = {
-  hideLabel: false,
-};
+export const Skeleton = ({ hideLabel, size }) => (
+  <TextInputSkeleton hideLabel={hideLabel} size={size} />
+);
 
 Skeleton.parameters = {
   controls: {
-    include: ['hideLabel'],
+    include: ['hideLabel', 'size'],
   },
 };
 

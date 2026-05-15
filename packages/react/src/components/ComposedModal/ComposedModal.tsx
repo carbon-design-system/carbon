@@ -49,6 +49,7 @@ import {
 } from './ComposedModalPresence';
 import { useId } from '../../internal/useId';
 import { useComposedModalState } from './useComposedModalState';
+import { isTopmostVisibleModal } from '../Modal/isTopmostVisibleModal';
 
 export interface ModalBodyProps extends HTMLAttributes<HTMLDivElement> {
   /** Specify the content to be placed in the ModalBody. */
@@ -293,10 +294,15 @@ const ComposedModalDialog = React.forwardRef<
   const button = useRef<HTMLButtonElement>(null);
   const startSentinel = useRef<HTMLButtonElement>(null);
   const endSentinel = useRef<HTMLButtonElement>(null);
+  const modalRef = useRef<HTMLDivElement>(null);
   const onMouseDownTarget = useRef<Node | null>(null);
 
   const presenceContext = useContext(ComposedModalPresenceContext);
-  const mergedRefs = useMergeRefs([ref, presenceContext?.presenceRef]);
+  const mergedRefs = useMergeRefs([
+    modalRef,
+    ref,
+    presenceContext?.presenceRef,
+  ]);
   const enablePresence =
     useFeatureFlag('enable-presence') || presenceContext?.autoEnablePresence;
 
@@ -365,8 +371,6 @@ const ComposedModalDialog = React.forwardRef<
   function handleOnClick(evt: React.MouseEvent<HTMLDivElement>) {
     const { target } = evt;
     const mouseDownTarget = onMouseDownTarget.current;
-    evt.stopPropagation();
-
     const shouldCloseOnOutsideClick =
       // Passive modals can close on clicks outside the modal when
       // preventCloseOnClickOutside is undefined or explicitly set to false.
@@ -455,9 +459,6 @@ const ComposedModalDialog = React.forwardRef<
   );
 
   // Generate aria-label based on Modal Header label if one is not provided (L253)
-  //
-  // TODO: Confirm whether `ModalHeader` `label` should allow `ReactNode`. If
-  // so, define how to derive a string for `aria-label`.
   let generatedAriaLabel: ComponentProps<typeof ModalHeader>['label'];
   const childrenWithProps = React.Children.toArray(children).map((child) => {
     if (isComponentElement(child, ModalHeader)) {
@@ -491,16 +492,18 @@ const ComposedModalDialog = React.forwardRef<
     if (!open) return;
 
     const handleEscapeKey = (event) => {
-      if (match(event, keys.Escape)) {
+      if (
+        match(event, keys.Escape) &&
+        isTopmostVisibleModal(modalRef.current, prefix)
+      ) {
         event.preventDefault();
-        event.stopPropagation();
         closeModal(event);
       }
     };
-    document.addEventListener('keydown', handleEscapeKey, true);
+    document.addEventListener('keydown', handleEscapeKey);
 
     return () => {
-      document.removeEventListener('keydown', handleEscapeKey, true);
+      document.removeEventListener('keydown', handleEscapeKey);
     };
     // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20452
   }, [open]);

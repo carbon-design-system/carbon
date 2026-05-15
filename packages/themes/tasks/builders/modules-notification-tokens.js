@@ -16,7 +16,7 @@ const { FILE_BANNER, primitive } = require('./shared');
 const { paramCase } = require('change-case-all');
 
 function buildThemesFile() {
-  const imports = [t.SassModule('sass:map')];
+  const imports = [t.SassModule('sass:map'), t.SassModule('sass:string')];
 
   const variables = Object.entries(notificationTokens).flatMap(
     ([key, notificationToken]) => {

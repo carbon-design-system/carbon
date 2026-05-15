@@ -5,6 +5,7 @@
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 ## Table of Contents
 
+- [Introduction](#introduction)
 - [Getting started](#getting-started)
 - [Common tasks](#common-tasks)
 - [Dependency management](#dependency-management)
@@ -12,6 +13,10 @@
 - [Package architecture and layout](#package-architecture-and-layout)
   - [Packages shipping Sass](#packages-shipping-sass)
     - [Entrypoint behavior](#entrypoint-behavior)
+  - [Files and folders](#files-and-folders)
+  - [Working on JavaScript-framework-specific styles](#working-on-javascript-framework-specific-styles)
+  - [Using `npm link`/`yarn link`](#using-npm-linkyarn-link)
+  - [Pointing NPM dependency of `@carbon/styles` right to the source code](#pointing-npm-dependency-of-carbonstyles-right-to-the-source-code)
 - [Commit conventions](#commit-conventions)
   - [Commit message format](#commit-message-format)
   - [Type](#type)
@@ -24,11 +29,8 @@
   - [Sass documentation](#sass-documentation)
   - [Start a new `block` or `element`?](#start-a-new-block-or-element)
   - [Red flags](#red-flags)
-  - [Files and folders](#files-and-folders)
-  - [Working on JavaScript-framework-specific styles](#working-on-javascript-framework-specific-styles)
-  - [Using `npm link`/`yarn link`](#using-npm-linkyarn-link)
-  - [Pointing NPM dependency of `@carbon/styles` right to the source code](#pointing-npm-dependency-of-carbonstyles-right-to-the-source-code)
 - [Maintainers](#maintainers)
+  - [Public API Snapshot](#public-api-snapshot)
   - [Working with icons and pictograms](#working-with-icons-and-pictograms)
   - [Code Patterns](#code-patterns)
     - [Deprecating a component](#deprecating-a-component)
@@ -36,11 +38,24 @@
     - [Publishing older library versions](#publishing-older-library-versions)
 - [FAQ](#faq)
     - [How do I install a dependency?](#how-do-i-install-a-dependency)
-    - [CI is failing saying that it cannot find a dependency in offline mode](#ci-is-failing-saying-that-it-cannot-find-a-dependency-in-offline-mode)
+    - [CI is failing during `yarn install`](#ci-is-failing-during-yarn-install)
     - [How do I fix the repo state if I cancel during a publish?](#how-do-i-fix-the-repo-state-if-i-cancel-during-a-publish)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 <!-- prettier-ignore-end -->
+
+## Introduction
+
+This handbook covers how we maintain and operate the Carbon Design System
+repository. As a result, this document will evolve and change over time as our
+tooling, package architecture, and release processes change.
+
+Guidelines or practices outlined in this document are meant to help us as a
+group collaborate effectively on workflows related to development, maintenance,
+and publishing.
+
+There is a separate [coding style guide](./style.md) that contains more detailed
+guidance about authoring code.
 
 ## Getting started
 
@@ -106,30 +121,14 @@ yarn lerna run build
 
 ## Dependency management
 
-In light of potential `npm` security issues
-[[1]](https://blog.npmjs.org/post/175824896885/incident-report-npm-inc-operations-incident-of)
-[[2]](https://eslint.org/blog/2018/07/postmortem-for-malicious-package-publishes),
-we are addressing some of the issues with installing dependencies from a live
-registry by taking advantage of
-[Yarn's offline feature](https://yarnpkg.com/blog/2016/11/24/offline-mirror/).
-The majority of steps taken are inspired by
-[this tweet](https://twitter.com/leeb/status/1017607265115750400) from Lee
-Byron.
+We use `yarn.lock` as the source of truth for dependency resolution and enforce
+it in CI with `yarn install --immutable`.
 
 ### Continuous Integration
 
-We specify a `.yarnc` file in this project that sets the path for Yarn's
-[offline cache](https://yarnpkg.com/features/offline-cache) to the folder
-`.yarn/cache`. This folder contains all the tarballs for the packages that the
-project uses.
-
-> The way it works is simple: each time a package is downloaded from a remote
-> location ... a copy will be stored within the cache. The next time this same
-> package will need to be installed, Yarn will leverage the version stored
-> within cache instead of downloading its original source.
-
-This ensures that packages are available no matter if the network goes down or
-the npm registry is unavailable.
+We specify `.yarnrc.yml` in this project and use a non-committed cache strategy.
+Yarn stores cached packages outside of the repository, and CI restores
+dependencies through the lockfile plus workflow caches.
 
 ## Package architecture and layout
 
@@ -171,6 +170,72 @@ of Sass.
 
 Using these `mixins.scss` entrypoints allows you as an application developer to
 control when these side-effects are applied in your project.
+
+### Files and folders
+
+All React components belong in `packages/react/src/components` in their own
+folder.
+
+All component styles belong in `packages/styles/scss/components` in their own
+folder.
+
+### Working on JavaScript-framework-specific styles
+
+JavaScript-framework-specific is _not_ recommended as we strive to create styles
+that are framework-neutral. However, there are some rare cases where
+framework-specific cannot be avoided, and some of those make sense to be
+maintained by core style library here.
+
+There are a couple ways to work on framework-specific styles.
+
+### Using `npm link`/`yarn link`
+
+This is the most straightforward way. In the project where you want to consume
+your local `@carbon/styles` changes, run:
+
+```bash
+yarn link /path/to/carbon/packages/styles
+```
+
+The `yarn link` command will add a `resolutions` entry in the consuming
+project's manifest and point `@carbon/styles` to the workspace on your
+filesystem. So, if we make a change in `@carbon/styles` and rebuild the package
+it will update in the Storybook environment for `carbon-components-angular`.
+
+After making changes in `@carbon/styles`, rebuild the package by running one of
+the following commands:
+
+```bash
+yarn build
+```
+
+Run the command above from the `packages/styles` directory, or run the following
+from the repository root:
+
+```bash
+yarn lerna run build --scope='@carbon/styles'
+```
+
+### Pointing NPM dependency of `@carbon/styles` right to the source code
+
+Though the above approach is the most straightforward, it involves the overhead
+of having to run the build process at `@carbon/styles`, in addition to one at
+the framework variant repo, upon every Sass code change.
+
+To avoid such overhead, you can point NPM dependency of `@carbon/styles` right
+to the source code, though there is a caveat that our future change to the
+directory structure, etc. may make such steps no longer work. Here are the
+steps:
+
+```sh
+> cd /path/to/carbon-components-angular/node_modules/@carbon/styles
+> mv scss scss.orig
+> ln -s /path/to/@carbon/styles/scss scss
+```
+
+Then edits of `.scss` files in `/path/to/@carbon/styles/scss` will be reflected
+to the development environment of your framework variant repository. You don't
+need to do anything on the `@carbon/styles` side.
 
 ## Commit conventions
 
@@ -283,285 +348,43 @@ considered a chore that we are doing to keep things up-to-date.
 
 ## Coding style
 
+For coding style guidance, see the [style guide](./style.md).
+
 ### Class names
 
-Prefix all class names with `#{$prefix}--` in SCSS, which is replaced with
-`cds--` by default, and design systems inheriting Carbon can override. This
-prefix prevents potential conflicts with class names from the user.
-
-**HTML**
-
-```html
-<div
-  class="cds--inline-notification cds--inline-notification--error"
-  role="alert">
-  <div class="cds--inline-notification__details">...</div>
-</div>
-```
-
-**SCSS**
-
-```scss
-.#{$prefix}--inline-notification {
-  ...
-}
-
-.#{$prefix}--inline-notification__details {
-  ...
-}
-```
-
-Follow BEM naming convention for classes. Again, the only thing we do
-differently is prefix all classes with `#{$prefix}--`.
-
-```scss
-.#{$prefix}--block
-.#{$prefix}--block__element
-.#{$prefix}--block--modifier
-```
-
-Avoid nesting selectors, this will make it easier to maintain in the future.
-
-```scss
-// Don't do this
-.#{$prefix}--inline-notification {
-  .#{$prefix}--btn {
-    &:hover {
-      svg {
-        ...
-      }
-    }
-  }
-}
-
-// Do this instead
-.#{$prefix}--inline-notification .#{$prefix}--btn {
-    &:hover svg {
-      ...
-    }
-  }
-}
-```
-
-Use
-[CSS logical properties and values](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_logical_properties_and_values)
-for layout. These are impacted by the writing mode and provide support for
-right-to-left styling out of the box.
-
-```scss
-// Don't do this
-.my-element {
-  padding-top: 2em;
-  padding-bottom: 2em;
-  margin-left: 2em;
-  position: relative;
-  top: 0.2em;
-}
-
-// Do this instead
-.my-element {
-  padding-block-start: 2em;
-  padding-block-end: 2em;
-  margin-inline-start: 2em;
-  position: relative;
-  inset-block-start: 0.2em;
-}
-```
+The style guide's [Class names](./style.md#class-names) section contains
+guidance on class names.
 
 ### Sass documentation
 
-[SassDoc](http://sassdoc.com) is used to document the Carbon Sass source.
-SassDoc annotations start each line with `///`; do not use `///` in non-SassDoc
-comments.
-
-For consistency, capitalize types (used in `@type`, `@param`, `@return`) and
-descriptions (used in `@param`, `@return`, `@deprecated`, `@example`, `@link`).
-
-The following annotations are used:
-
-**Required annotations**
-
-- [Description](http://sassdoc.com/annotations/#description) - can be one line
-  or multiple lines
-- [`@access`](http://sassdoc.com/annotations/#access) - `public` or `private`,
-  where public items make up our public API
-- [`@group`](http://sassdoc.com/annotations/#group) - typically a package or
-  component name
-- [`@type`](http://sassdoc.com/annotations/#type) - allowed on **variables**,
-  (e.g. `Map`, `Color`, `Number`)
-- [`@param`](http://sassdoc.com/annotations/#parameter) - allowed on
-  **functions** and **mixins**, include the type, name, and description, with a
-  default value if there is one (e.g.
-  `@param {Map} $breakpoints [$carbon--grid-breakpoints] - A map of breakpoints where the key is the name`)
-- [`@return`](http://sassdoc.com/annotations/#return) - allowed on
-  **functions**, include the type and description (e.g.
-  `@return {Number} In px`)
-- [`@alias`](http://sassdoc.com/annotations/#alias) - do not include the `$` if
-  aliasing a variable
-- [`@content`](http://sassdoc.com/annotations/#content) - allowed on **mixins**,
-  describe the usage of content
-- [`@deprecated`](http://sassdoc.com/annotations/#deprecated) - context around
-  possible replacements or when the item will no longer be available
-
-  **Optional annotations**
-
-- [`@example`](http://sassdoc.com/annotations/#example) - if the usage isn't
-  straight forward or there are multiple use cases
-- [`@link`](http://sassdoc.com/annotations/#link) - if there's a related link to
-  reference
-
-  **Examples**
-
-```scss
-// Variable example
-
-/// Primary interactive color; Primary buttons
-/// @type Color
-/// @access public
-/// @group @carbon/themes
-$interactive-01: map-get($carbon--theme, interactive-01) !default;
-
-// Mixin example
-
-/// Create the container for a grid. Will cause full-bleed for the grid unless
-/// max-width properties are added with `make-container-max-widths`
-/// @param {Map} $breakpoints [$carbon--grid-breakpoints] - A map of breakpoints where the key is the name
-/// @access private
-/// @group @carbon/grid
-@mixin carbon--make-container($breakpoints: $carbon--grid-breakpoints) {
-}
-
-// Function example
-
-/// Compute the type size for the given type scale step
-/// @param {Number} $step - Type scale step
-/// @return {Number} In px
-/// @access public
-/// @group @carbon/type
-@function carbon--get-type-size($step) {
-}
-```
+The style guide's
+[Annotate relevant Sass values with SassDoc](./style.md#annotate-relevant-sass-values-with-sassdoc)
+section contains guidance on Sass documentation.
 
 ### Start a new `block` or `element`?
 
-A nested element can use a new block name as long as the styles are independent
-of the parent.
-
-```html
-<div class="cds--component">
-  <button class="cds--component-button">Button</button>
-</div>
-```
-
-:point_up: The `#{$prefix}--component-button` class implies that this button has
-independent styles from its parent. Generally, it's preferred to start a new
-block.
+The style guide's
+[Start a new `block` or `element`?](./style.md#start-a-new-block-or-element)
+section contains guidance on `block`/`element` usage.
 
 ### Red flags
 
-Avoid names with multiple `__element` names:
-
-- :x: `.#{$prefix}--card__list__item`
-- :white_check_mark: `.#{$prefix}--card-item`
-- :white_check_mark: `.#{$prefix}--card__item`
-
-### Files and folders
-
-All react components belong in `packages/react/src/components` in their own
-folder.
-
-All Component styles belong in `packages/styles/scss/components` in their own
-folder.
-
-### Working on JavaScript-framework-specific styles
-
-JavaScript-framework-specific is _not_ recommended as we strive to create styles
-that are framework-neutral. However, there are some rare cases where
-framework-specific cannot be avoided, and some of those make sense to be in
-maintained by core style library here.
-
-There are a couple ways to work on framework-specific style.
-
-### Using `npm link`/`yarn link`
-
-This is the most straightforward way. When in the directory of your
-`@carbon/styles` folder, run the following command:
-
-```bash
-yarn link
-```
-
-You should see a success message similar to:
-
-```bash
-success Registered "@carbon/styles".
-info You can now run `yarn link "@carbon/styles"` in the projects where you want to use this package and it will be used instead.
-```
-
-Now, go to the folder where `carbon-components-angular` is located and run:
-
-```bash
-yarn link @carbon/styles
-```
-
-You should see a success message similar to:
-
-```bash
-success Using linked package for "@carbon/styles".
-```
-
-The `yarn link` command will allow us to point the `@carbon/styles` package
-under `node_modules` to the folder on our filesystem. So, if we make a change in
-`@carbon/styles` and re-compile the project it will update in the Storybook
-environment for `carbon-components-angular`.
-
-In addition, if you would like to have your changes to styles automatically
-compile and update Storybook you can run the following command in the
-`@carbon/styles` folder on your machine:
-
-```bash
-yarn gulp watch -s
-```
-
-This will run the `watch` command in `gulpfile.js`. As a result, whenever you
-make a change to the project styles it will automatically copy over into the
-`scss` folder which Storybook uses in `carbon-components-angular`.
-
-### Pointing NPM dependency of `@carbon/styles` right to the source code
-
-Though the above approach is the most straightforward, it involves the overhead
-of having to run the build process at `@carbon/styles`, in addition to one at
-the framework variant repo, upon every Sass code change.
-
-To avoid such overhead, you can point NPM dependency of `@carbon/styles` right
-to the source code, though there is a caveat that our future change to the
-directory structure, etc. may make such steps no longer work. Here are the
-steps:
-
-```sh
-> cd /path/to/carbon-components-angular/node_modules/@carbon/styles
-> mv scss scss.orig
-> ln -s /path/to/@carbon/styles/scss scss
-```
-
-Then edits of `.scss` files in `/path/to/@carbon/styles/scss` will be reflected
-to the development environment of your framework variant repository. You don't
-need to do anything in `@carbon/styles` side.
+For guidance, see [Red flags](./style.md#red-flags).
 
 ## Maintainers
 
 ### Public API Snapshot
 
-The entire public api of `@carbon/react` is tracked in one file by iterating
+The entire public API of `@carbon/react` is tracked in one file by iterating
 over all PropTypes and storing the output in a snapshot file. When adding,
 removing, or updating PropTypes, run `yarn test -u` from the root to update the
 snapshot and include it in your pull request for review. This helps core
-reviewers to determine if api changes are being made in a backwards compatible
+reviewers to determine if API changes are being made in a backward-compatible
 way to avoid breaking changes.
 
 Snapshots for web components can be found in their respective component
 directories. To test or update snapshots, run `yarn test` or
-`yarn test:updateSnaphots`. These commands must be run from the
+`yarn test:updateSnapshots`. These commands must be run from the
 `packages/web-components` directory.
 
 ### Working with icons and pictograms
@@ -697,7 +520,7 @@ warning(
 
 #### Publishing older library versions
 
-We offer ad-hoc backwards-support for older version of the system. This work is
+We offer ad-hoc backwards-support for older versions of the system. This work is
 primarily driven by external contributors who may still need these older
 versions for legacy code. When updates are received and merged into the
 codebase, the release process will be a bit different than the one described
@@ -763,16 +586,15 @@ code at that point in time.
 #### How do I install a dependency?
 
 When installing a dependency, you can run `yarn add <dependency-name>` as
-normal. The only difference now is that you also will check in the corresponding
-tarball entry in `.yarn/cache` as well so that we don't have to fetch this
-dependency from the live registry during Continuous Integration builds.
+normal. After adding or updating dependencies, commit the updated lockfile and
+manifest files (for example, `yarn.lock` and the relevant `package.json`
+changes). You do not need to commit any `.yarn/cache` tarballs.
 
-#### CI is failing saying that it cannot find a dependency in offline mode
+#### CI is failing during `yarn install`
 
-Most likely this is due to Yarn mistakenly removing, or forgetting to add, a
-dependency to our offline mirror. Typically, running the following set of
-commands should reset the project back to a valid state and should bring back
-any missing dependencies or fetch new ones.
+Most install failures are caused by lockfile drift or stale local dependency
+state. Running the following commands will reset local dependencies and
+re-generate install state from the lockfile:
 
 ```bash
 yarn clean

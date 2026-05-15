@@ -19,6 +19,43 @@ instead:
 yarn add @carbon/utilities
 ```
 
+## Maintainer information
+
+This package uses a convention-based multi-entry build. The supported public API
+consists of two parts.
+
+1. The root entrypoint
+
+```js
+import { utility } from '@carbon/utilities';
+```
+
+2. Any top-level module with a `src/<name>/index.ts` file
+
+```js
+import { utility } from '@carbon/utilities/utility';
+```
+
+Review the
+[architecture decision record (ADR)](../../docs/decisions/0004-adopt-explicit-package-entrypoints-for-utilities.md)
+for more detail on how and why this approach is used.
+
+### Adding a utility
+
+1. Create a new top-level directory under `src/`
+2. Export the public API for that utility from `src/<name>/index.ts`
+3. Re-export it from `src/index.ts` if it should also be available from the
+   package root
+4. Build the package and verify the generated outputs under `es/<name>/index.*`
+   and `lib/<name>/index.js`
+
+```text
+src/
+  someUtility/
+    index.ts
+    someUtility.ts
+```
+
 ## 🙌 Contributing
 
 We're always looking for contributors to help us fix bugs, build new features,

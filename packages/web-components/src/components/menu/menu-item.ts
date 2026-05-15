@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { LitElement, PropertyValues, html } from 'lit';
+import { LitElement, html } from 'lit';
 import { property, state } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
 import styles from './menu-item.scss?lit';
@@ -173,8 +173,7 @@ class CDSmenuItem extends HostListenerMixin(HostListenerMixin(LitElement)) {
     this._parentMenuObserver?.disconnect();
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20452
-  updated(_changedProperties: PropertyValues): void {
+  updated(): void {
     if (this.hasSubmenu) {
       this.setAttribute('aria-expanded', this.hasSubmenu + '');
     } else {
@@ -187,6 +186,13 @@ class CDSmenuItem extends HostListenerMixin(HostListenerMixin(LitElement)) {
   @HostListener('click', { capture: true })
   handleClick(event: MouseEvent) {
     this._handleClick(event);
+  }
+
+  @HostListener('mousedown')
+  handleMouseDown(event: MouseEvent) {
+    if (this.disabled) {
+      event.preventDefault();
+    }
   }
 
   @HostListener('mouseenter')
@@ -264,6 +270,10 @@ class CDSmenuItem extends HostListenerMixin(HostListenerMixin(LitElement)) {
   }
 
   _handleClick = (e: MouseEvent | KeyboardEvent): void => {
+    if (this.disabled) {
+      return;
+    }
+
     if (this.hasSubmenu) {
       this._openSubmenu();
       return;

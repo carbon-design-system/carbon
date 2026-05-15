@@ -68,6 +68,62 @@ describe('cds-dropdown', function () {
       expect(el.value).to.equal('option-2');
       expect(items[1].selected).to.be.true;
     });
+
+    it('should apply hovered-next-sibling attribute to next item on hover', async () => {
+      const el = await fixture(html`
+        <cds-dropdown title-text="Dropdown Label" open>
+          <cds-dropdown-item value="option-1">Option 1</cds-dropdown-item>
+          <cds-dropdown-item value="option-2">Option 2</cds-dropdown-item>
+        </cds-dropdown>
+      `);
+
+      await el.updateComplete;
+
+      const items = el.querySelectorAll('cds-dropdown-item');
+      items[0].dispatchEvent(new MouseEvent('mouseenter', { bubbles: true }));
+      await el.updateComplete;
+
+      expect(items[1].hasAttribute('hovered-next-sibling')).to.be.true;
+    });
+
+    it('should remove hovered-next-sibling attribute when mouse leaves item', async () => {
+      const el = await fixture(html`
+        <cds-dropdown title-text="Dropdown Label" open>
+          <cds-dropdown-item value="option-1">Option 1</cds-dropdown-item>
+          <cds-dropdown-item value="option-2">Option 2</cds-dropdown-item>
+        </cds-dropdown>
+      `);
+
+      await el.updateComplete;
+
+      const items = el.querySelectorAll('cds-dropdown-item');
+      items[0].dispatchEvent(new MouseEvent('mouseenter', { bubbles: true }));
+      await el.updateComplete;
+
+      items[0].dispatchEvent(new MouseEvent('mouseleave', { bubbles: true }));
+      await el.updateComplete;
+
+      expect(items[1].hasAttribute('hovered-next-sibling')).to.be.false;
+    });
+
+    it('should not apply hover state to next item when hovering disabled item', async () => {
+      const el = await fixture(html`
+        <cds-dropdown title-text="Dropdown Label" open>
+          <cds-dropdown-item value="option-1" disabled
+            >Option 1</cds-dropdown-item
+          >
+          <cds-dropdown-item value="option-2">Option 2</cds-dropdown-item>
+        </cds-dropdown>
+      `);
+
+      await el.updateComplete;
+
+      const items = el.querySelectorAll('cds-dropdown-item');
+      items[0].dispatchEvent(new MouseEvent('mouseenter', { bubbles: true }));
+      await el.updateComplete;
+
+      expect(items[1].hasAttribute('hovered-next-sibling')).to.be.false;
+    });
   });
 
   describe('keyboard interaction', () => {
@@ -143,6 +199,7 @@ describe('cds-dropdown', function () {
       triggerButton.click();
       await el.updateComplete;
       expect(el.open).to.be.false;
+      expect(el.getAttribute('tabindex')).to.be.null;
     });
 
     it('should respect the readOnly property', async () => {
@@ -447,6 +504,22 @@ describe('cds-dropdown', function () {
   });
 
   describe('events', () => {
+    it('should not commit selection when beingselected is prevented', async () => {
+      const el = await fixture(dropdown);
+      const items = el.querySelectorAll('cds-dropdown-item');
+
+      el.addEventListener('cds-dropdown-beingselected', (event) => {
+        event.preventDefault();
+      });
+
+      items[1].click();
+      await el.updateComplete;
+
+      expect(el.value).to.equal('');
+      expect(items[0].selected).to.be.false;
+      expect(items[1].selected).to.be.false;
+    });
+
     it('should fire cds-dropdown-selected event when item is selected', async () => {
       const el = await fixture(dropdown);
       let eventFired = false;
