@@ -12,7 +12,7 @@ import { unsafeSVG } from 'lit/directives/unsafe-svg.js';
 export interface CarbonIconElement {
   elem: string;
   attrs: Record<string, string | number>;
-  content: (CarbonIconElement | string)[];
+  content?: (CarbonIconElement | string)[];
 }
 
 // Carbon icon descriptor types
