@@ -37,7 +37,7 @@ class CDSLink extends FocusMixin(LitElement) {
   /**
    * `true` if there is an icon.
    */
-  private _hasIcon = false;
+  protected _hasIcon = false;
 
   /**
    * Handles `slotchange` event.

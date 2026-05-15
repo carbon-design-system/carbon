@@ -287,6 +287,11 @@
     }
   }
 
+  // Prevent a 2px border when using `enable-dialog-element` feature flag
+  .#{$prefix}--dialog.#{$prefix}--modal-container {
+    border: none;
+  }
+
   .#{$prefix}--dialog-content {
     position: relative;
     grid-area: content;

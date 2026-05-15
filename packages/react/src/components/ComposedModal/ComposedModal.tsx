@@ -497,14 +497,13 @@ const ComposedModalDialog = React.forwardRef<
         isTopmostVisibleModal(modalRef.current, prefix)
       ) {
         event.preventDefault();
-        event.stopPropagation();
         closeModal(event);
       }
     };
-    document.addEventListener('keydown', handleEscapeKey, true);
+    document.addEventListener('keydown', handleEscapeKey);
 
     return () => {
-      document.removeEventListener('keydown', handleEscapeKey, true);
+      document.removeEventListener('keydown', handleEscapeKey);
     };
     // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20452
   }, [open]);
