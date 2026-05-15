@@ -72,6 +72,13 @@ export default class CDSTab extends HostListenerMixin(CDSContentSwitcherItem) {
   tabTitle;
 
   /**
+   * An optional label to render under the primary tab label.
+   * Only useful for contained tabs.
+   */
+  @property({ attribute: 'secondary-label', reflect: true })
+  secondaryLabel?: string;
+
+  /**
    * **Experimental**: Display an empty dot badge on the Tab.
    */
   @property({ type: Boolean, reflect: true, attribute: 'badge-indicator' })
@@ -181,6 +188,7 @@ export default class CDSTab extends HostListenerMixin(CDSContentSwitcherItem) {
     const {
       badgeIndicator,
       disabled,
+      secondaryLabel,
       selected,
       tabTitle,
       vertical,
@@ -229,6 +237,13 @@ export default class CDSTab extends HostListenerMixin(CDSContentSwitcherItem) {
                 <slot @slotchange="${handleSlotChange}"></slot>
               </span>
             `}
+        ${secondaryLabel
+          ? html`<span
+              class="${prefix}--tabs__nav-item-secondary-label"
+              title="${secondaryLabel}"
+              >${secondaryLabel}</span
+            >`
+          : ''}
         ${!disabled && badgeIndicator
           ? html`<cds-badge-indicator></cds-badge-indicator>`
           : ''}
