@@ -92,11 +92,12 @@ class CDSClickableTile extends CDSLink {
       this
     );
 
-    const defaultIcon = v12DefaultIcons
-      ? this.disabled
-        ? iconLoader(Error16, { class: `${prefix}--tile--disabled-icon` })
-        : iconLoader(ArrowRight16, { class: `${prefix}--tile--icon` })
-      : '';
+    const defaultIcon =
+      v12DefaultIcons && !this._hasIcon
+        ? this.disabled
+          ? iconLoader(Error16, { class: `${prefix}--tile--disabled-icon` })
+          : iconLoader(ArrowRight16, { class: `${prefix}--tile--icon` })
+        : '';
 
     return html`
       ${super._renderInner()}
