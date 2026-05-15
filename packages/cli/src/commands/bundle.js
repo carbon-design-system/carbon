@@ -11,7 +11,7 @@ import bundlers from './bundle/bundlers.js';
 
 const logger = createLogger('bundle');
 
-async function bundle({ entrypoint, name, globals }) {
+async function bundle({ entrypoint, name, globals, dts }) {
   logger.start('bundle');
 
   const cwd = process.cwd();
@@ -29,6 +29,7 @@ async function bundle({ entrypoint, name, globals }) {
     await bundle(path.join(cwd, entrypoint), {
       name,
       globals,
+      dts,
     });
   } catch (error) {
     logger.info(`Unexpected error occurred while bundling ${entrypoint}:`);
@@ -55,6 +56,11 @@ export const builder = (yargs) => {
       alias: 'globals',
       describe: 'global module names',
       type: 'string',
+    },
+    dts: {
+      describe: 'emit TypeScript declaration files',
+      type: 'boolean',
+      default: false,
     },
   });
 };

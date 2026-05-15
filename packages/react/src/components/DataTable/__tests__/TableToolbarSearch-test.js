@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -113,6 +113,15 @@ describe('TableToolbarSearch', () => {
       );
       await userEvent.tab();
       expect(onChange).toHaveBeenCalled();
+    });
+
+    it('should call onChange on mount with empty string event sentinel when defaultValue is provided', () => {
+      const onChange = jest.fn();
+
+      render(<TableToolbarSearch onChange={onChange} defaultValue="preset" />);
+
+      expect(onChange).toHaveBeenCalledWith('', 'preset');
+      expect(onChange).toHaveBeenCalledTimes(1);
     });
 
     it('should expand/contract as normal when no onBlur/onFocus provided', async () => {

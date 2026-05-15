@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2019, 2023
+ * Copyright IBM Corp. 2019, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -61,7 +61,7 @@ class CDSTag extends HostListenerMixin(FocusMixin(LitElement)) {
   protected _handleIconSlotChange({ target }: Event) {
     const hasIcon = (target as HTMLSlotElement).assignedNodes();
 
-    this.hasCustomIcon = Boolean(hasIcon.length > 0);
+    this.hasCustomIcon = hasIcon.length > 0;
     this.requestUpdate();
   }
 

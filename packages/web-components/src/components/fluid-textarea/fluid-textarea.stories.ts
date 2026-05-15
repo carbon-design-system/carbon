@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2025
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -9,6 +9,7 @@ import { html } from 'lit';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import './index';
 import '../toggle-tip/toggletip';
+import { withLayers } from '../../../.storybook/decorators/with-layers';
 
 const args = {
   cols: 0,
@@ -71,9 +72,6 @@ const argTypes = {
   },
   onInput: {
     action: `input`,
-    table: {
-      disable: true,
-    },
   },
   placeholder: {
     control: 'text',
@@ -104,6 +102,11 @@ const argTypes = {
 export const Default = {
   args,
   argTypes,
+  parameters: {
+    controls: {
+      exclude: ['onInput'],
+    },
+  },
   render: ({
     cols,
     counterMode,
@@ -147,11 +150,6 @@ export const Default = {
 };
 
 export const Skeleton = {
-  parameters: {
-    percy: {
-      skip: true,
-    },
-  },
   render: () =>
     html` <div style="width:300px;">
       <cds-fluid-textarea-skeleton></cds-fluid-textarea-skeleton>
@@ -159,14 +157,16 @@ export const Skeleton = {
 };
 
 export const WithLayer = {
+  decorators: [withLayers],
+  parameters: {
+    layout: 'fullscreen',
+  },
   render: () => html`
-    <sb-template-layers>
-      <cds-fluid-textarea
-        placeholder="Placeholder text"
-        label="Text Area label"
-        helper-text="Optional helper text">
-      </cds-fluid-textarea>
-    </sb-template-layers>
+    <cds-fluid-textarea
+      placeholder="Placeholder text"
+      label="Text Area label"
+      helper-text="Optional helper text">
+    </cds-fluid-textarea>
   `,
 };
 

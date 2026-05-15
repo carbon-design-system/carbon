@@ -32,13 +32,15 @@ function SynchronizedTreeView() {
   const [active, setActive] = useState(null);
 
   return (
-    <TreeView
-      selected={selected}
-      onSelect={setSelected}
-      active={active}
-      onActivate={setActive}>
-      ...
-    </TreeView>
+    <FeatureFlags enableTreeViewControllable>
+      <TreeView
+        selected={selected}
+        onSelect={setSelected}
+        active={active}
+        onActivate={setActive}>
+        ...
+      </TreeView>
+    </FeatureFlags>
   );
 }
 ```

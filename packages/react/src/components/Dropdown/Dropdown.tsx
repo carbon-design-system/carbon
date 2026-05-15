@@ -263,6 +263,7 @@ function stateReducer(state, actionAndChanges) {
 
   switch (type) {
     case ItemMouseMove:
+      return state;
     case MenuMouseLeave:
       if (changes.highlightedIndex === state.highlightedIndex) {
         // Prevent state update if highlightedIndex hasn't changed
@@ -380,8 +381,7 @@ const Dropdown = React.forwardRef(
       [onChange]
     );
 
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20452
-    const isItemDisabled = useCallback((item, _index) => {
+    const isItemDisabled = useCallback((item) => {
       const isObject = item !== null && typeof item === 'object';
       return isObject && 'disabled' in item && item.disabled === true;
     }, []);
@@ -390,12 +390,7 @@ const Dropdown = React.forwardRef(
       (changes: UseSelectStateChange<ItemType>) => {
         const { highlightedIndex } = changes;
 
-        if (
-          highlightedIndex !== undefined &&
-          highlightedIndex > -1 &&
-          // eslint-disable-next-line valid-typeof , no-constant-binary-expression -- https://github.com/carbon-design-system/carbon/issues/20452
-          typeof window !== undefined
-        ) {
+        if (highlightedIndex !== undefined && highlightedIndex > -1) {
           const itemArray = document.querySelectorAll(
             `li.${prefix}--list-box__menu-item[role="option"]`
           );
@@ -740,8 +735,7 @@ const Dropdown = React.forwardRef(
 interface DropdownComponent {
   <ItemType>(
     props: DropdownProps<ItemType> & { ref?: Ref<HTMLButtonElement> }
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
-  ): React.ReactElement<any> | null;
+  ): React.ReactElement | null;
 }
 
 Dropdown.displayName = 'Dropdown';

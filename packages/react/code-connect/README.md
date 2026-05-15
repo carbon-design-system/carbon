@@ -1,6 +1,7 @@
 # Figma Code Connect for @carbon/react
 
-> [!WARNING]  
+> [!WARNING]
+>
 > Figma [Code Connect](https://github.com/figma/code-connect) for Carbon React
 > is in an exploratory phase.
 
@@ -20,9 +21,8 @@ promoting consistency across both design and engineering.
 To work on Code Connect within Carbon, you’ll need a Figma editor license. If
 you only need to view code snippets, you’ll just need a Dev Mode license.
 
-Follow the
-[documentation](https://github.com/figma/code-connect/blob/main/cli/README.md#basic-setup)
-to connect a new component, or edit an existing config.
+Follow the [documentation](https://developers.figma.com/docs/code-connect/) to
+connect a new component, or edit an existing config.
 
 Config files for each component currently live within the react package inside
 the code-connect folder. Eventually these will live alongside the component code
@@ -44,7 +44,7 @@ Connect:
 Figma code connect is set up to automatically publish when PRs are merged into
 the `main` branch. If you need to test publishing while working locally you will
 need to follow the
-[documentation](https://github.com/figma/code-connect/blob/main/cli/README.md#publishing)
+[documentation](https://developers.figma.com/docs/code-connect/quickstart-guide/)
 and create your own `FIGMA_ACCESS_TOKEN` variable.
 
 ```sh

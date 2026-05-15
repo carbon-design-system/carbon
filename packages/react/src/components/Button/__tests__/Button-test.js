@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -193,6 +193,42 @@ describe('Button', () => {
       );
       expect(screen.getByTestId('custom-component')).toBeInTheDocument();
       expect(screen.getByLabelText('test')).toHaveClass('cds--btn--icon-only');
+    });
+
+    it.each([
+      ['bottom', 'end', 'bottom-end'],
+      ['top', 'start', 'top-start'],
+      ['right', 'center', 'right'],
+    ])(
+      'should map tooltipPosition=%s and tooltipAlignment=%s to IconButton align=%s',
+      (tooltipPosition, tooltipAlignment, expectedAlign) => {
+        const result = Button.render(
+          {
+            hasIconOnly: true,
+            iconDescription: 'test',
+            renderIcon: Add,
+            tooltipAlignment,
+            tooltipPosition,
+          },
+          null
+        );
+
+        expect(result.props.align).toBe(expectedAlign);
+      }
+    );
+
+    it('should pass children through to IconButton when `hasIconOnly` is true without `renderIcon`', () => {
+      const result = Button.render(
+        {
+          children: '🧪',
+          hasIconOnly: true,
+          iconDescription: 'test',
+        },
+        null
+      );
+
+      expect(result.props.renderIcon).toBeUndefined();
+      expect(result.props.children).toBe('🧪');
     });
   });
 });

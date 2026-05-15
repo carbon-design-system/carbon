@@ -10,6 +10,10 @@
  */
 export enum PAGINATION_SIZE {
   /**
+   * Extra small size.
+   */
+  XS = 'xs',
+  /**
    * Small size.
    */
   SMALL = 'sm',
@@ -23,4 +27,29 @@ export enum PAGINATION_SIZE {
    * Large size.
    */
   LARGE = 'lg',
+}
+
+/**
+ * Backward/Forward button tooltip position.
+ */
+export enum PAGINATION_TOOLTIP_POSITION {
+  /**
+   * Positioned on the top.
+   */
+  TOP = 'top',
+
+  /**
+   * Positioned on the right.
+   */
+  RIGHT = 'right',
+
+  /**
+   * Positioned on the bottom.
+   */
+  BOTTOM = 'bottom',
+
+  /**
+   * Positioned on the left.
+   */
+  LEFT = 'left',
 }

@@ -1,18 +1,31 @@
 /**
- * Copyright IBM Corp. 2025
+ * Copyright IBM Corp. 2025, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
-import {
-  InitCarousel,
+import type {
   CarouselResponse,
   CarouselStackHistory,
   Config,
-  CarouselHTMLElement,
+  InitCarousel,
+  TranslationKey,
 } from './types';
+import { translationIds } from './defs';
 import { registerSwipeEvents } from './swipeEvents';
+
+const defaultTranslations: Record<TranslationKey, string> = {
+  [translationIds['carbon.carousel.item']]: 'Item',
+  [translationIds['carbon.carousel.of']]: 'of',
+};
+
+/**
+ * Default translation function
+ */
+const defaultTranslateWithId = (messageId: TranslationKey): string => {
+  return defaultTranslations[messageId];
+};
 
 /**
  * Initializes a carousel with the given configuration.
@@ -27,7 +40,8 @@ export const initCarousel = (
   const prefix = 'carousel';
   let viewIndexStack = [0];
   let previousViewIndexStack = [0];
-  const refs: Record<number, CarouselHTMLElement | null> = {};
+  const refs: Record<number, HTMLElement | null> = {};
+  const carouselListeners = new WeakMap<HTMLElement, EventListener>();
 
   const minHeight = 4; // 4 rem
 
@@ -36,13 +50,14 @@ export const initCarousel = (
     onViewChangeEnd,
     excludeSwipeSupport,
     useMaxHeight,
+    translateWithId: t = defaultTranslateWithId,
   } = config || {};
 
   /**
    * Registers an HTMLElement at a specific index in the refs array.
    *
-   * @param {number} index - The index at which to register the HTMLElement.
-   * @param {HTMLElement} ref - The HTMLElement to register.
+   * @param index - The index at which to register the HTMLElement.
+   * @param ref - The HTMLElement to register.
    *
    * @example
    * registerRef(0, document.getElementById('myElement'));
@@ -51,32 +66,65 @@ export const initCarousel = (
     refs[index] = ref;
   };
 
+  const getLiveRegion = () =>
+    carouselContainer.querySelector<HTMLElement>(`.${prefix}__live-region`);
+
+  const getWrapper = () =>
+    carouselContainer.querySelector<HTMLElement>(`.${prefix}__itemsWrapper`);
+
+  const updateLiveRegion = (idx: number) => {
+    const div = getLiveRegion();
+    if (div) {
+      div.textContent = `${t('carbon.carousel.item')} ${idx} ${t('carbon.carousel.of')} ${getCarouselItems()?.length}`;
+    }
+  };
+
+  const syncLiveRegionWithActiveView = () => {
+    updateLiveRegion(viewIndexStack[0] + 1);
+  };
+
+  const createLiveRegion = () => {
+    const childCount = getCarouselItems()?.length;
+    // Don't create a live region if one already exists or if no children are present
+    if (getLiveRegion() || !childCount) {
+      return;
+    }
+
+    const div = document.createElement('div');
+    div.setAttribute('aria-live', 'polite');
+    div.setAttribute('aria-atomic', 'true');
+    div.setAttribute('class', `${prefix}__live-region`);
+    div.textContent = `${t('carbon.carousel.item')} 1 ${t('carbon.carousel.of')} ${childCount}`;
+    carouselContainer.appendChild(div);
+  };
+
   /**
    * Wraps all child elements of a given container into a new div with the specified class.
    * If an element with the specified class already exists as a child of the container, the function does nothing.
-   *
-   * @param {HTMLElement} container - The container element to wrap child elements of.
-   * @param {string} wrapperClass - The class name to apply to the new wrapper div.
-   * @returns {void}
    */
-  const wrapAllItems = (container: HTMLElement, wrapperClass: string) => {
-    if (container.querySelector(`.${wrapperClass}`)) {
+  const wrapAllItems = () => {
+    if (getWrapper()) {
       return;
     }
 
     const wrapper = document.createElement('div');
-    wrapper.classList.add(`${wrapperClass}`);
-    while (container.firstChild) {
-      wrapper.appendChild(container.firstChild);
+    wrapper.classList.add(`${prefix}__itemsWrapper`);
+    while (carouselContainer.firstChild) {
+      wrapper.appendChild(carouselContainer.firstChild);
     }
-    container.appendChild(wrapper);
+    carouselContainer.appendChild(wrapper);
   };
 
   const getHistory = () => {
-    return viewIndexStack.map((id) => ({
-      id,
-      elem: refs[id] as HTMLLIElement,
-    }));
+    return viewIndexStack.reduce<CarouselStackHistory[]>((history, id) => {
+      const elem = refs[id];
+
+      if (elem) {
+        history.push({ id, elem });
+      }
+
+      return history;
+    }, []);
   };
   /**
    * Retrieves the current carousel response based on the view index stack and reference objects.
@@ -93,7 +141,7 @@ export const initCarousel = (
         10
       ),
       totalViews: totalRefs,
-      historyStack: historicalData as CarouselStackHistory[],
+      historyStack: historicalData,
     };
   };
 
@@ -116,8 +164,7 @@ export const initCarousel = (
    * This function checks if the element has a 'data-index' attribute and if its value matches the current view index.
    * If both conditions are met, it calls the 'onViewChangeEnd' callback with the response from 'getCallbackResponse'.
    *
-   * @param {HTMLElement | null} el - The element to handle the 'transitionend' event for.
-   * @returns {void}
+   * @param el - The element to handle the 'transitionend' event for.
    */
   const handleTransitionEnd = (el?: HTMLElement | null) => {
     if (!el) {
@@ -137,8 +184,8 @@ export const initCarousel = (
    * A utility function to sanitize an index value.
    * This function ensures the index stays within the bounds of the refs array.
    *
-   * @param {number} idx - The index to be sanitized.
-   * @returns {number} - The sanitized index.
+   * @param idx - The index to be sanitized.
+   * @returns - The sanitized index.
    */
   const sanitizeIndex = (idx: number) => {
     const floorVal = 0;
@@ -157,6 +204,7 @@ export const initCarousel = (
     if (viewIndexStack[0] !== sanitizedIndex) {
       handleTransitionStart();
       viewIndexStack = [sanitizedIndex, ...viewIndexStack];
+      syncLiveRegionWithActiveView();
       performAnimation(false);
     }
   };
@@ -167,12 +215,11 @@ export const initCarousel = (
   /**
    * Attaches class names to an HTMLElement based on given conditions.
    *
-   * @param {HTMLElement} viewItem - The HTML element to which class names will be added.
-   * @param {boolean} isInViewStack - Indicates if the view item is in the view stack.
-   * @param {boolean} isActive - Indicates if the view item is active.
-   * @param {boolean} isBeingRecycledOut - Indicates if the view item is being recycled out.
-   * @param {boolean} isBeingRecycledIn - Indicates if the view item is being recycled in.
-   * @returns {void}
+   * @param viewItem - The HTML element to which class names will be added.
+   * @param isInViewStack - Indicates if the view item is in the view stack.
+   * @param isActive - Indicates if the view item is active.
+   * @param isBeingRecycledOut - Indicates if the view item is being recycled out.
+   * @param isBeingRecycledIn - Indicates if the view item is being recycled in.
    */
   const attachClassNames = (
     viewItem: HTMLElement,
@@ -198,6 +245,14 @@ export const initCarousel = (
     if (!isBeingRecycledIn && isBeingRecycledOut) {
       viewItem.classList.add(`${prefix}__view-recycle-out`);
     }
+
+    if (isActive) {
+      viewItem.removeAttribute('aria-hidden');
+      viewItem.removeAttribute('inert');
+    } else {
+      viewItem.setAttribute('aria-hidden', 'true');
+      viewItem.setAttribute('inert', '');
+    }
   };
 
   const removeReCycleClasses = (viewItem: HTMLElement) => {
@@ -217,7 +272,7 @@ export const initCarousel = (
    * Updates the height of the items wrapper in a carousel based on the smallest item height and a threshold height.
    * This function ensures that the items wrapper does not have a height smaller than the threshold, adjusting the item height if necessary.
    *
-   * @param {number} itemHeightSmallest - The smallest height of an item in pixels.
+   * @param itemHeightSmallest - The smallest height of an item in pixels.
    */
   const updateHeightForWrapper = (itemHeightSmallest: number) => {
     const thresholdHeight = remToPx(minHeight);
@@ -228,9 +283,7 @@ export const initCarousel = (
         itemHeightSmallest = thresholdHeight;
       }
 
-      const itemsWrapper = carouselContainer.querySelector(
-        `.${prefix}__itemsWrapper`
-      ) as HTMLElement;
+      const itemsWrapper = getWrapper();
       if (itemsWrapper) {
         itemsWrapper.style.blockSize = `${itemHeightSmallest}px`;
       }
@@ -239,9 +292,13 @@ export const initCarousel = (
 
   /**
    * Performs animation on view items based on their state in the view index stack.
-   * @param {boolean} isInitial - A flag indicating if this is the initial animation.
+   * @param isInitial - A flag indicating if this is the initial animation.
    */
   const performAnimation = (isInitial: boolean) => {
+    const viewItems = getCarouselItems();
+    if (!viewItems) {
+      return;
+    }
     let itemHeightSmallest = 0;
     let itemHeightMaximum = 0;
 
@@ -258,7 +315,7 @@ export const initCarousel = (
 
       const isBeingRecycledIn =
         previousViewIndexStack.length < viewIndexStack.length &&
-        viewIndexStack[0] === index &&
+        previousViewIndexStack[0] === index &&
         stackIndexInstanceCount > 0;
 
       const isInViewStack = stackIndex > -1;
@@ -304,8 +361,7 @@ export const initCarousel = (
             transitionComplete(viewItem);
           }
         };
-        // store reference on the element for later removal
-        (viewItem as CarouselHTMLElement)._carouselListener = listener;
+        carouselListeners.set(viewItem, listener);
 
         viewItem.addEventListener('animationend', listener);
         viewItem.addEventListener('transitionend', listener);
@@ -339,6 +395,7 @@ export const initCarousel = (
     if (viewIndexStack.length - 1 >= 1) {
       handleTransitionStart();
       viewIndexStack = viewIndexStack.slice(1);
+      syncLiveRegionWithActiveView();
       performAnimation(false);
     }
   };
@@ -346,8 +403,8 @@ export const initCarousel = (
   /**
    * A function that transitions the view to a specified index.
    *
-   * @param {number} index - The index to transition to.
-   * @returns {void} - This function does not return a value.
+   * @param index - The index to transition to.
+   * @returns - This function does not return a value.
    */
   const goToIndex = (index: number) => {
     transitionToViewIndex(index);
@@ -370,6 +427,10 @@ export const initCarousel = (
    * @returns {void}
    */
   const reset = () => {
+    const viewItems = getCarouselItems();
+    if (!viewItems) {
+      return;
+    }
     // Remove recycle classes from all views before resetting
     Array.from(viewItems).forEach((viewItem: HTMLElement) => {
       removeReCycleClasses(viewItem);
@@ -379,6 +440,7 @@ export const initCarousel = (
     previousViewIndexStack = [0];
     viewIndexStack = [0];
     performAnimation(false);
+    syncLiveRegionWithActiveView();
   };
 
   /**
@@ -387,12 +449,18 @@ export const initCarousel = (
    */
   const destroyEvents = () => {
     Object.values(refs).forEach((el) => {
-      const carouselEl = el as CarouselHTMLElement;
-      if (el && carouselEl._carouselListener) {
-        el.removeEventListener('animationend', carouselEl._carouselListener);
-        el.removeEventListener('transitionend', carouselEl._carouselListener);
+      if (!el) return;
+
+      const listener = carouselListeners.get(el);
+
+      if (listener) {
+        el.removeEventListener('animationend', listener);
+        el.removeEventListener('transitionend', listener);
       }
+
+      carouselListeners.delete(el);
     });
+
     if (!excludeSwipeSupport) {
       registerSwipeEvents(carouselContainer, navigateNext, navigatePrev, true);
     }
@@ -402,26 +470,33 @@ export const initCarousel = (
    * If the container has a 'slot' element, it fetches all elements assigned to that slot.
    * Otherwise, it fetches all direct children of the container.
    *
-   * @param {HTMLElement} container - The container element from which to extract carousel items.
-   * @returns {HTMLElement[]} An array of HTMLElements representing the carousel items.
+   * @returns An array of HTMLElements representing the carousel items or nothing if a container is not found.
    *
    * @example
-   * const carouselContainer = document.querySelector('.carousel-container');
-   * const carouselItems = getCarouselItems(carouselContainer);
+   * const carouselItems = getCarouselItems();
    * console.log(carouselItems); // Logs the carousel items as HTMLElements
    */
-  const getCarouselItems = (container: HTMLElement): HTMLElement[] => {
-    const slot = container.querySelector('slot') as HTMLSlotElement | null;
-    return slot
-      ? (slot.assignedElements({ flatten: true }) as HTMLElement[])
-      : (Array.from(container.children) as HTMLElement[]);
+  const getCarouselItems = () => {
+    const container = getWrapper();
+    if (!container) {
+      return;
+    }
+
+    const slot = container.querySelector('slot');
+    if (slot instanceof HTMLSlotElement) {
+      return slot
+        .assignedElements({ flatten: true })
+        .filter((item): item is HTMLElement => item instanceof HTMLElement);
+    }
+
+    return Array.from(container.children).filter(
+      (item): item is HTMLElement => item instanceof HTMLElement
+    );
   };
 
   // initialize
-  wrapAllItems(carouselContainer, `${prefix}__itemsWrapper`);
-  const wrapper = carouselContainer.querySelector(`.${prefix}__itemsWrapper`);
-  const viewItems = getCarouselItems(wrapper as HTMLElement);
-
+  wrapAllItems();
+  createLiveRegion();
   carouselContainer.classList.add(`${prefix}__view-stack`);
   performAnimation(true);
 

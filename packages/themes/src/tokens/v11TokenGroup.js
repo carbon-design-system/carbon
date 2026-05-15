@@ -441,6 +441,8 @@ export const syntaxHighlight = TokenGroup.create({
     'syntax-standard',
     'syntax-local',
     'syntax-special',
+    'syntax-inserted',
+    'syntax-deleted',
   ],
 });
 
@@ -526,6 +528,10 @@ export const group = TokenGroup.create({
     {
       name: 'overlay',
       properties: ['background'],
+    },
+    {
+      name: 'color-scheme',
+      properties: ['color-scheme'],
     },
     {
       name: 'toggle-off',

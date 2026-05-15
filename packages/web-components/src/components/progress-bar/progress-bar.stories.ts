@@ -13,7 +13,7 @@ import {
   PROGRESS_BAR_TYPE,
 } from '../progress-bar/progress-bar';
 import './progress-bar';
-import '../../../.storybook/templates/with-layer';
+import { withLayers } from '../../../.storybook/decorators/with-layers';
 
 const sizes = {
   [`Small size (${PROGRESS_BAR_SIZE.SMALL})`]: PROGRESS_BAR_SIZE.SMALL,
@@ -155,15 +155,17 @@ export const Indeterminate = {
 };
 
 export const WithLayer = {
+  decorators: [withLayers],
+  parameters: {
+    layout: 'fullscreen',
+  },
   render: () => {
     return html`
-      <sb-template-layers>
-        <cds-progress-bar
-          label="Progress bar label"
-          helper-text="Optional helper text"
-          value="42">
-        </cds-progress-bar>
-      </sb-template-layers>
+      <cds-progress-bar
+        label="Progress bar label"
+        helper-text="Optional helper text"
+        value="42">
+      </cds-progress-bar>
     `;
   },
 };

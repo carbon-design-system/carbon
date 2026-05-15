@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2022
+ * Copyright IBM Corp. 2022, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -7,10 +7,17 @@
 
 import React from 'react';
 import Search from './Search';
+import SearchSkeleton from './Search.Skeleton';
 import userEvent from '@testing-library/user-event';
 import { render, screen } from '@testing-library/react';
 
 const prefix = 'cds';
+const contentScenarios = [
+  { label: 'empty string', value: '', hasContent: false },
+  { label: 'zero', value: 0, hasContent: true },
+  { label: 'non-empty string', value: 'hmm', hasContent: true },
+  { label: 'undefined', value: undefined, hasContent: false },
+];
 
 describe('Search', () => {
   describe('renders as expected - Component API', () => {
@@ -51,6 +58,23 @@ describe('Search', () => {
 
       expect(screen.getByRole('searchbox')).toHaveValue('test-value');
     });
+
+    it.each(contentScenarios)(
+      'should treat a defaultValue of $label as content',
+      ({ value, hasContent }) => {
+        render(<Search labelText="test-search" defaultValue={value} />);
+
+        if (hasContent) {
+          expect(screen.getByLabelText('Clear search input')).not.toHaveClass(
+            `${prefix}--search-close--hidden`
+          );
+        } else {
+          expect(screen.getByLabelText('Clear search input')).toHaveClass(
+            `${prefix}--search-close--hidden`
+          );
+        }
+      }
+    );
 
     it('should respect disabled prop', () => {
       render(<Search labelText="test-search" disabled />);
@@ -190,7 +214,10 @@ describe('Search', () => {
     it('should respect size prop', () => {
       render(<Search labelText="test-search" size="sm" />);
 
-      expect(screen.getByRole('search')).toHaveClass(`${prefix}--search--sm`);
+      expect(screen.getByRole('search')).toHaveClass(`${prefix}--search--sm`); // TODO: V12 - Remove this check
+      expect(screen.getByRole('search')).toHaveClass(
+        `${prefix}--layout--size-sm`
+      );
     });
 
     it('should respect type prop', () => {
@@ -203,6 +230,48 @@ describe('Search', () => {
       render(<Search labelText="test-search" value="test-value" />);
 
       expect(screen.getByRole('searchbox')).toHaveValue('test-value');
+    });
+
+    it.each(contentScenarios)(
+      'should treat a value of $label as content',
+      ({ value, hasContent }) => {
+        render(<Search labelText="test-search" value={value} />);
+
+        if (hasContent) {
+          expect(screen.getByLabelText('Clear search input')).not.toHaveClass(
+            `${prefix}--search-close--hidden`
+          );
+        } else {
+          expect(screen.getByLabelText('Clear search input')).toHaveClass(
+            `${prefix}--search-close--hidden`
+          );
+        }
+      }
+    );
+
+    it('should sync clear button visibility when controlled value changes', () => {
+      const { rerender } = render(
+        <Search labelText="test-search" value="test-value" />
+      );
+
+      expect(screen.getByLabelText('Clear search input')).not.toHaveClass(
+        `${prefix}--search-close--hidden`
+      );
+
+      rerender(<Search labelText="test-search" value="" />);
+
+      expect(screen.getByLabelText('Clear search input')).toHaveClass(
+        `${prefix}--search-close--hidden`
+      );
+    });
+  });
+
+  describe('SearchSkeleton', () => {
+    it('should apply the small layout size class when small is true', () => {
+      const { container } = render(<SearchSkeleton small />);
+
+      expect(container.firstChild).toHaveClass(`${prefix}--search--sm`);
+      expect(container.firstChild).toHaveClass(`${prefix}--layout--size-sm`);
     });
   });
 });

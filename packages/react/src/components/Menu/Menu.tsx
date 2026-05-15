@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2023, 2025
+ * Copyright IBM Corp. 2023, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -113,6 +113,9 @@ export interface MenuProps extends React.HTMLAttributes<HTMLUListElement> {
    */
   y?: number | [number, number];
 
+  /**
+   * @deprecated Internal compatibility flag. Use `false` to enable auto-alignment behavior.
+   */
   legacyAutoalign?: boolean;
 }
 
@@ -129,7 +132,7 @@ const Menu = forwardRef<HTMLUListElement, MenuProps>(function Menu(
     onOpen,
     open,
     size = 'sm',
-    legacyAutoalign = 'true',
+    legacyAutoalign = true,
     target = canUseDOM && document.body,
     x = 0,
     y = 0,
@@ -166,8 +169,12 @@ const Menu = forwardRef<HTMLUListElement, MenuProps>(function Menu(
   const ref = useMergedRefs([forwardRef, menu]);
 
   const [position, setPosition] = useState([-1, -1]);
-  const focusableItems = childContext.state.items.filter(
-    (item) => !item.disabled && item.ref.current
+  const focusableItems = useMemo(
+    () =>
+      childContext.state.items.filter(
+        (item) => !item.disabled && item.ref.current
+      ),
+    [childContext.state.items]
   );
 
   // Getting the width from the parent container element - controlled
@@ -188,11 +195,15 @@ const Menu = forwardRef<HTMLUListElement, MenuProps>(function Menu(
 
   function handleOpen() {
     if (menu.current) {
-      focusReturn.current = document.activeElement as HTMLElement;
+      const { activeElement, dir } = document;
+
+      focusReturn.current =
+        activeElement instanceof HTMLElement ? activeElement : null;
+
       if (legacyAutoalign) {
         const pos = calculatePosition();
         if (
-          (document?.dir === 'rtl' || direction === 'rtl') &&
+          (dir === 'rtl' || direction === 'rtl') &&
           !rest?.id?.includes('MenuButton')
         ) {
           menu.current.style.insetInlineStart = `initial`;
@@ -276,13 +287,7 @@ const Menu = forwardRef<HTMLUListElement, MenuProps>(function Menu(
   }
 
   function handleBlur(e: React.FocusEvent<HTMLUListElement>) {
-    if (
-      open &&
-      onClose &&
-      isRoot &&
-      e.relatedTarget &&
-      !menu.current?.contains(e.relatedTarget)
-    ) {
+    if (open && onClose && isRoot && !menu.current?.contains(e.relatedTarget)) {
       handleClose();
     }
   }
@@ -407,7 +412,12 @@ const Menu = forwardRef<HTMLUListElement, MenuProps>(function Menu(
   useEffect(() => {
     if (open) {
       const raf = requestAnimationFrame(() => {
-        if (focusableItems.length > 0) {
+        const activeElement = menu.current?.ownerDocument.activeElement;
+        const menuContainsFocus =
+          activeElement instanceof Node &&
+          menu.current?.contains(activeElement);
+
+        if (focusableItems.length > 0 && (!isRoot || menuContainsFocus)) {
           focusItem();
         }
       });
@@ -415,7 +425,7 @@ const Menu = forwardRef<HTMLUListElement, MenuProps>(function Menu(
       return () => cancelAnimationFrame(raf);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [open, focusableItems]);
+  }, [open, focusableItems, isRoot, position]);
 
   useEffect(() => {
     if (open) {
@@ -561,6 +571,11 @@ Menu.propTypes = {
     PropTypes.number,
     PropTypes.arrayOf(PropTypes.number),
   ]),
+
+  /**
+   * @deprecated Internal compatibility flag. Use `false` to enable auto-alignment behavior.
+   */
+  legacyAutoalign: PropTypes.bool,
 };
 
 export { Menu };

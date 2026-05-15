@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2019, 2024
+ * Copyright IBM Corp. 2019, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -165,7 +165,7 @@ class CDSSideNavMenu extends FocusMixin(LitElement) {
         type="button"
         part="expando"
         aria-haspopup="true"
-        aria-expanded="${String(Boolean(expanded && !forceCollapsed))}"
+        aria-expanded="${String(expanded && !forceCollapsed)}"
         class="${prefix}--side-nav__submenu"
         @click=${handleClickExpando}>
         <div

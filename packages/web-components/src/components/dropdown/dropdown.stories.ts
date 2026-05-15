@@ -19,6 +19,7 @@ import '../toggle-tip';
 import '../link';
 import '../button';
 import '../icon-button';
+import { withLayers } from '../../../.storybook/decorators/with-layers';
 
 const directionOptions = {
   [`Top`]: DROPDOWN_DIRECTION.TOP,
@@ -353,6 +354,10 @@ export const Inline = {
 };
 
 export const InlineWithLayer = {
+  decorators: [withLayers],
+  parameters: {
+    layout: 'fullscreen',
+  },
   argTypes: controls,
   args: {
     ...defaultArgs,
@@ -380,49 +385,40 @@ export const InlineWithLayer = {
     warn,
     warnText,
   }) => html`
-    <sb-template-layers>
-      <div style="width:400px">
-        <cds-dropdown
-          aria-label=${ariaLabel}
-          ?autoalign=${autoalign}
-          ?open=${open}
-          ?disabled="${disabled}"
-          ?hide-label=${hideLabel}
-          helper-text=${helperText}
-          ?invalid=${invalid}
-          ?read-only=${readOnly}
-          invalid-text=${invalidText}
-          direction="${direction}"
-          title-text=${ifDefined(titleText)}
-          size="${ifDefined(size)}"
-          type="${ifDefined(type)}"
-          value=${ifDefined(value)}
-          label=${ifDefined(label)}
-          ?warn=${warn}
-          warn-text=${warnText}>
-          ${items.map(
-            (elem) => html`
-              <cds-dropdown-item
-                ?disabled=${elem.disabled}
-                value="${elem.value}"
-                >${elem.text}</cds-dropdown-item
-              >
-            `
-          )}
-        </cds-dropdown>
-      </div>
-    </sb-template-layers>
+    <div style="width:400px">
+      <cds-dropdown
+        aria-label=${ariaLabel}
+        ?autoalign=${autoalign}
+        ?open=${open}
+        ?disabled="${disabled}"
+        ?hide-label=${hideLabel}
+        helper-text=${helperText}
+        ?invalid=${invalid}
+        ?read-only=${readOnly}
+        invalid-text=${invalidText}
+        direction="${direction}"
+        title-text=${ifDefined(titleText)}
+        size="${ifDefined(size)}"
+        type="${ifDefined(type)}"
+        value=${ifDefined(value)}
+        label=${ifDefined(label)}
+        ?warn=${warn}
+        warn-text=${warnText}>
+        ${items.map(
+          (elem) => html`
+            <cds-dropdown-item ?disabled=${elem.disabled} value="${elem.value}"
+              >${elem.text}</cds-dropdown-item
+            >
+          `
+        )}
+      </cds-dropdown>
+    </div>
   `,
 };
 
 export const Skeleton = {
   argTypes: controls,
   args: defaultArgs,
-  parameters: {
-    percy: {
-      skip: true,
-    },
-  },
   render: () => html` <cds-dropdown-skeleton></cds-dropdown-skeleton> `,
 };
 
@@ -520,6 +516,10 @@ export const WithAILabel = {
 };
 
 export const WithLayer = {
+  decorators: [withLayers],
+  parameters: {
+    layout: 'fullscreen',
+  },
   argTypes: controls,
   args: {
     ...defaultArgs,
@@ -551,38 +551,34 @@ export const WithLayer = {
     warn,
     warnText,
   }) => html`
-    <sb-template-layers>
-      <div style="width:400px">
-        <cds-dropdown
-          aria-label=${ariaLabel}
-          ?autoalign=${autoalign}
-          ?open=${open}
-          ?disabled="${disabled}"
-          ?hide-label=${hideLabel}
-          helper-text=${helperText}
-          ?invalid=${invalid}
-          ?read-only=${readOnly}
-          invalid-text=${invalidText}
-          direction="${direction}"
-          title-text=${ifDefined(titleText)}
-          size="${ifDefined(size)}"
-          type="${ifDefined(type)}"
-          value=${ifDefined(value)}
-          label=${ifDefined(label)}
-          ?warn=${warn}
-          warn-text=${warnText}>
-          ${items.map(
-            (elem) => html`
-              <cds-dropdown-item
-                ?disabled=${elem.disabled}
-                value="${elem.value}"
-                >${elem.text}</cds-dropdown-item
-              >
-            `
-          )}
-        </cds-dropdown>
-      </div>
-    </sb-template-layers>
+    <div style="width:400px">
+      <cds-dropdown
+        aria-label=${ariaLabel}
+        ?autoalign=${autoalign}
+        ?open=${open}
+        ?disabled="${disabled}"
+        ?hide-label=${hideLabel}
+        helper-text=${helperText}
+        ?invalid=${invalid}
+        ?read-only=${readOnly}
+        invalid-text=${invalidText}
+        direction="${direction}"
+        title-text=${ifDefined(titleText)}
+        size="${ifDefined(size)}"
+        type="${ifDefined(type)}"
+        value=${ifDefined(value)}
+        label=${ifDefined(label)}
+        ?warn=${warn}
+        warn-text=${warnText}>
+        ${items.map(
+          (elem) => html`
+            <cds-dropdown-item ?disabled=${elem.disabled} value="${elem.value}"
+              >${elem.text}</cds-dropdown-item
+            >
+          `
+        )}
+      </cds-dropdown>
+    </div>
   `,
 };
 

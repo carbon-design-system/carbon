@@ -36,11 +36,13 @@ import {
   green30,
   green40,
   green50,
+  green60,
   yellow30,
   orange40,
   red40,
   red50,
   red60,
+  red70,
   purple40,
   purple50,
   purple60,
@@ -55,6 +57,9 @@ import {
   rgba,
 } from '@carbon/colors';
 import { adjustLightness, adjustAlpha } from './tools';
+
+// Color scheme
+export const colorScheme = 'dark';
 
 // Background
 export const background = gray100;
@@ -304,6 +309,8 @@ export const syntaxFunction = yellow30;
 export const syntaxStandard = blue50;
 export const syntaxLocal = blue30;
 export const syntaxSpecial = blue50;
+export const syntaxInserted = green60;
+export const syntaxDeleted = red70;
 
 //// AI - Experimental (Use at your own risk)
 //// Phase 2 - new \\\\

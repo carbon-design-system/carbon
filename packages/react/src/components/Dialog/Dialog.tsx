@@ -15,7 +15,6 @@ import React, {
   type HTMLAttributes,
   type RefObject,
 } from 'react';
-import useIsomorphicEffect from '../../internal/useIsomorphicEffect';
 import { usePrefix } from '../../internal/usePrefix';
 import cx from 'classnames';
 import { Close } from '@carbon/icons-react';
@@ -26,14 +25,18 @@ import { Layer } from '../Layer';
 import ButtonSet from '../ButtonSet';
 import Button from '../Button';
 import { useId } from '../../internal/useId';
-import { debounce } from 'es-toolkit/compat';
+import { useResizeObserver } from '../../internal/useResizeObserver';
 import { InlineLoadingStatus } from '../InlineLoading/InlineLoading';
 import InlineLoading from '../InlineLoading/InlineLoading';
+import { deprecate } from '../../prop-types/deprecate';
+
 const DialogContext = createContext<{
-  titleId?: string;
-  subtitleId?: string;
+  titleId?: string | undefined;
+  subtitleId?: string | undefined;
   dialogId?: string;
   isOpen?: boolean;
+  setTitleId?: (id: string | undefined) => void;
+  setSubtitleId?: (id: string | undefined) => void;
 }>({});
 
 /**
@@ -100,14 +103,32 @@ interface DialogProps extends HTMLAttributes<HTMLDialogElement> {
   /**
    * Specify a label for screen readers
    */
+  'aria-label'?: string;
+
+  /**
+   * Specify the ID of an element that labels this dialog
+   */
+  'aria-labelledby'?: string;
+
+  /**
+   * Specify the ID of an element that describes this dialog
+   */
+  'aria-describedby'?: string;
+
+  /**
+   * @deprecated Use 'aria-label' instead.
+   * Specify a label for screen readers
+   */
   ariaLabel?: string;
 
   /**
+   * @deprecated Use 'aria-labelledby' instead.
    * Specify the ID of an element that labels this dialog
    */
   ariaLabelledBy?: string;
 
   /**
+   * @deprecated Use 'aria-describedby' instead.
    * Specify the ID of an element that describes this dialog
    */
   ariaDescribedBy?: string;
@@ -126,9 +147,12 @@ const Dialog = React.forwardRef(
       onRequestClose = noopFn,
       open = false,
       role,
-      ariaLabel,
-      ariaLabelledBy,
-      ariaDescribedBy,
+      'aria-label': ariaLabel,
+      'aria-labelledby': ariaLabelledBy,
+      'aria-describedby': ariaDescribedBy,
+      ariaLabel: deprecatedAriaLabel,
+      ariaLabelledBy: deprecatedAriaLabelledBy,
+      ariaDescribedBy: deprecatedAriaDescribedBy,
       ...rest
     }: DialogProps,
     forwardRef
@@ -136,8 +160,8 @@ const Dialog = React.forwardRef(
     const prefix = usePrefix();
     const dialogId = useId();
 
-    const titleId = `${prefix}--dialog-header__heading--${dialogId}`;
-    const subtitleId = `${prefix}--dialog-header__label--${dialogId}`;
+    const [titleId, setTitleId] = useState<string | undefined>(undefined);
+    const [subtitleId, setSubtitleId] = useState<string | undefined>(undefined);
 
     // This component needs access to a ref, placed on the dialog, to call the
     // various imperative dialog functions (show(), close(), etc.).
@@ -204,10 +228,21 @@ const Dialog = React.forwardRef(
       titleId,
       subtitleId,
       isOpen: open,
+      setTitleId,
+      setSubtitleId,
     };
 
     useEffect(() => {
-      if (ref.current && open && !ariaLabel && !ariaLabelledBy) {
+      const effectiveAriaLabel = ariaLabel || deprecatedAriaLabel;
+      const effectiveAriaLabelledBy =
+        ariaLabelledBy || deprecatedAriaLabelledBy;
+
+      if (
+        ref.current &&
+        open &&
+        !effectiveAriaLabel &&
+        !effectiveAriaLabelledBy
+      ) {
         const title = ref.current.querySelector(
           `.${prefix}--dialog-header__heading`
         );
@@ -218,7 +253,14 @@ const Dialog = React.forwardRef(
         }
       }
       // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20452
-    }, [open, ariaLabel, ariaLabelledBy, prefix]);
+    }, [
+      open,
+      ariaLabel,
+      deprecatedAriaLabel,
+      ariaLabelledBy,
+      deprecatedAriaLabelledBy,
+      prefix,
+    ]);
 
     return (
       <DialogContext.Provider value={contextValue}>
@@ -237,9 +279,13 @@ const Dialog = React.forwardRef(
           onClick={handleClick}
           onClose={onClose}
           role={role}
-          aria-label={ariaLabel}
-          aria-labelledby={!ariaLabel ? ariaLabelledBy || titleId : undefined}
-          aria-describedby={ariaDescribedBy}>
+          aria-label={ariaLabel || deprecatedAriaLabel}
+          aria-labelledby={
+            !(ariaLabel || deprecatedAriaLabel)
+              ? ariaLabelledBy || deprecatedAriaLabelledBy || titleId
+              : undefined
+          }
+          aria-describedby={ariaDescribedBy || deprecatedAriaDescribedBy}>
           <div className={containerClasses}>{children}</div>
         </dialog>
       </DialogContext.Provider>
@@ -305,7 +351,31 @@ Dialog.propTypes = {
   /**
    * Specify the ID of an element that describes this dialog
    */
-  ariaDescribedBy: PropTypes.string,
+  'aria-describedby': PropTypes.string,
+
+  /**
+   * Specify a label for screen readers
+   */
+  ariaLabel: deprecate(
+    PropTypes.string,
+    'This prop syntax has been deprecated. Please use the new `aria-label`'
+  ),
+
+  /**
+   * Specify the ID of an element that labels this dialog
+   */
+  ariaLabelledBy: deprecate(
+    PropTypes.string,
+    'This prop syntax has been deprecated. Please use the new `aria-labelledby`'
+  ),
+
+  /**
+   * Specify the ID of an element that describes this dialog
+   */
+  ariaDescribedBy: deprecate(
+    PropTypes.string,
+    'This prop syntax has been deprecated. Please use the new `aria-describedby`'
+  ),
 };
 
 /**
@@ -445,9 +515,19 @@ interface DialogTitleProps extends HTMLAttributes<HTMLHeadingElement> {
 const DialogTitle = React.forwardRef<HTMLHeadingElement, DialogTitleProps>(
   ({ children, className, id, ...rest }, ref) => {
     const prefix = usePrefix();
+    const { dialogId, setTitleId } = useContext(DialogContext);
 
-    const { titleId } = useContext(DialogContext);
-    const headingId = id || titleId;
+    // TODO: Add tests to verify scrollable DialogBody is correctly labelled by
+    // titleId/subtitleId custom values, default values, and fallbacks
+
+    // Generate default ID if not provided
+    const defaultTitleId = `${prefix}--dialog-header__heading--${dialogId}`;
+    const headingId = id ?? defaultTitleId;
+
+    useEffect(() => {
+      setTitleId?.(headingId);
+      return () => setTitleId?.(undefined);
+    }, [headingId, setTitleId]);
 
     return (
       <Text
@@ -508,8 +588,19 @@ const DialogSubtitle = React.forwardRef<
   DialogSubtitleProps
 >(({ children, className, id, ...rest }, ref) => {
   const prefix = usePrefix();
-  const { subtitleId } = useContext(DialogContext);
-  const labelId = id || subtitleId;
+  const { dialogId, setSubtitleId } = useContext(DialogContext);
+
+  // TODO: Add tests to verify scrollable DialogBody is correctly labelled by
+  // titleId/subtitleId custom values, default values, and fallbacks
+
+  // Generate default ID if not provided
+  const defaultSubtitleId = `${prefix}--dialog-header__label--${dialogId}`;
+  const labelId = id ?? defaultSubtitleId;
+
+  useEffect(() => {
+    setSubtitleId?.(labelId);
+    return () => setSubtitleId?.(undefined);
+  }, [labelId, setSubtitleId]);
 
   return (
     <Text
@@ -568,38 +659,26 @@ const DialogBody = React.forwardRef<HTMLDivElement, DialogBodyProps>(
   ({ children, className, hasScrollingContent, ...rest }, ref) => {
     const prefix = usePrefix();
     const contentRef = useRef<HTMLDivElement>(null);
-    const [isScrollable, setIsScrollable] = useState(false);
     const dialogId = useId();
     const dialogBodyId = `${prefix}--dialog-body--${dialogId}`;
 
-    useIsomorphicEffect(() => {
-      if (contentRef.current) {
-        setIsScrollable(
-          contentRef.current.scrollHeight > contentRef.current.clientHeight
-        );
-      }
+    const { titleId, subtitleId } = useContext(DialogContext);
+    const { height } = useResizeObserver({ ref: contentRef });
 
-      function handler() {
-        if (contentRef.current) {
-          setIsScrollable(
-            contentRef.current.scrollHeight > contentRef.current.clientHeight
-          );
-        }
-      }
-
-      const debouncedHandler = debounce(handler, 200);
-      window.addEventListener('resize', debouncedHandler);
-      return () => {
-        debouncedHandler.cancel();
-        window.removeEventListener('resize', debouncedHandler);
-      };
-    }, []);
+    /**
+     * isScrollable is implicitly dependent on height, when height gets updated
+     * via `useResizeObserver`, clientHeight and scrollHeight get updated too
+     */
+    const isScrollable =
+      !!contentRef.current &&
+      contentRef?.current?.scrollHeight > contentRef?.current?.clientHeight;
 
     const contentClasses = cx(
       `${prefix}--dialog-content`,
       {
         [`${prefix}--dialog-scroll-content`]:
           hasScrollingContent || isScrollable,
+        [`${prefix}--dialog-scroll-content--no-fade`]: height <= 300,
       },
       className
     );
@@ -609,6 +688,7 @@ const DialogBody = React.forwardRef<HTMLDivElement, DialogBodyProps>(
         ? {
             tabIndex: 0,
             role: 'region',
+            'aria-labelledby': subtitleId ?? titleId,
           }
         : {};
 

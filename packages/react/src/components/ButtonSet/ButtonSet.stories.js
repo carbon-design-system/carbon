@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2025
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -13,39 +13,21 @@ import {
   fluidButtonMapping,
   fluidButtonOptions,
 } from '../Button/__story__/fluid-button-set-args';
-import { background } from 'storybook/internal/theming';
+import { action } from 'storybook/actions';
 
 export default {
   title: 'Components/Button/Set Of Buttons',
   component: ButtonSet,
-};
+  subcomponents: { Button },
 
-export const Default = (args) => {
-  return (
-    <ButtonSet>
-      <Button kind="secondary" {...args}>
-        Secondary button
-      </Button>
-      <Button kind="primary" {...args}>
-        Primary button
-      </Button>
-    </ButtonSet>
-  );
-};
-
-export const Fluid = {
-  parameters: {
-    controls: {
-      include: [
-        'Container width',
-        'Container visible',
-        'Fluid Buttons',
-        'Stacked',
-      ],
-    },
+  args: {
+    Buttons: 4,
+    'Container width': 600,
+    'Container visible': false,
   },
+
   argTypes: {
-    'Fluid Buttons': {
+    Buttons: {
       control: {
         type: 'select',
         labels: fluidButtonLabels,
@@ -53,44 +35,89 @@ export const Fluid = {
       options: fluidButtonOptions,
       mapping: fluidButtonMapping,
       description: 'Sets the number and type of buttons in the set',
+      table: { category: 'story controls' },
     },
+
     'Container width': {
       control: {
         type: 'range',
-        min: '280',
-        max: '1200',
-        step: '1',
+        min: 280,
+        max: 1200,
+        step: 1,
       },
       description: 'Sets the width of the ButtonSet container',
+      if: { arg: 'fluid', truthy: true },
+      table: { category: 'story controls' },
     },
+
     'Container visible': {
       control: {
         type: 'boolean',
       },
+      if: { arg: 'fluid', truthy: true },
       description: 'Show the ButtonSet container using Carbon layer styling',
+      table: { category: 'story controls' },
     },
   },
+};
 
-  render: ({ ...rest }) => {
-    const buttons = rest['Fluid Buttons'];
+export const Default = {
+  render: (args) => {
+    const buttons = args.Buttons;
     const containerStyle = {
-      inlineSize: rest['Container width'] + 'px',
+      inlineSize: args['Container width']
+        ? `${args['Container width']}px`
+        : undefined,
       maxInlineSize: '100%',
     };
-    if (rest['Container visible']) {
+
+    if (args['Container visible']) {
       // 42px is the padding around the story
       containerStyle.boxShadow = '0 0 0 42px var(--cds-layer-01)';
     }
 
-    if (!buttons || buttons === 0) {
+    if (!buttons || buttons.length === 0) {
       return <div>Select one or more buttons.</div>;
     }
 
     return (
       <div style={containerStyle}>
-        <ButtonSet fluid>
+        <ButtonSet fluid={args.fluid} stacked={args.stacked}>
           {buttons.map(({ label, kind, key }) => (
-            <Button key={key} kind={kind}>
+            <Button key={key} kind={kind} onClick={action('onClick')}>
+              {label}
+            </Button>
+          ))}
+        </ButtonSet>
+      </div>
+    );
+  },
+};
+
+export const Fluid = {
+  render: (args) => {
+    const buttons = args.Buttons;
+    const containerStyle = {
+      inlineSize: args['Container width']
+        ? `${args['Container width']}px`
+        : undefined,
+      maxInlineSize: '100%',
+    };
+
+    if (args['Container visible']) {
+      // 42px is the padding around the story
+      containerStyle.boxShadow = '0 0 0 42px var(--cds-layer-01)';
+    }
+
+    if (!buttons || buttons.length === 0) {
+      return <div>Select one or more buttons.</div>;
+    }
+
+    return (
+      <div style={containerStyle}>
+        <ButtonSet fluid={true} stacked={args.stacked}>
+          {buttons.map(({ label, kind, key }) => (
+            <Button key={key} kind={kind} onClick={action('onClick')}>
               {label}
             </Button>
           ))}
@@ -101,7 +128,128 @@ export const Fluid = {
 };
 
 Fluid.args = {
-  'Fluid Buttons': 8,
-  'Container width': 600,
-  'Container visible': false,
+  fluid: true,
+  Buttons: 8,
+};
+
+// ButtonSet Fluid hidden stories for Chromatic VRT
+
+export const FluidOneWide = {
+  ...Fluid,
+  args: {
+    ...Fluid.args,
+    Buttons: 1, // One button
+    'Container width': 800,
+  },
+  tags: ['!dev', '!autodocs'],
+};
+
+export const FluidOneWideGhost = {
+  ...Fluid,
+  args: {
+    ...Fluid.args,
+    Buttons: 3, // A ghost button
+    'Container width': 800,
+  },
+  tags: ['!dev', '!autodocs'],
+};
+
+export const FluidOneNarrow = {
+  ...Fluid,
+  args: {
+    ...Fluid.args,
+    Buttons: 1, // One button
+    'Container width': 280,
+  },
+  tags: ['!dev', '!autodocs'],
+};
+
+export const FluidTwoWide = {
+  ...Fluid,
+  args: {
+    ...Fluid.args,
+    Buttons: 4, // Two buttons
+    'Container width': 800,
+  },
+  tags: ['!dev', '!autodocs'],
+};
+
+export const FluidTwoWideGhost = {
+  ...Fluid,
+  args: {
+    ...Fluid.args,
+    Buttons: 5, // Two buttons with one ghost
+    'Container width': 800,
+  },
+  tags: ['!dev', '!autodocs'],
+};
+
+export const FluidTwoNarrow = {
+  ...Fluid,
+  args: {
+    ...Fluid.args,
+    Buttons: 4, // Two buttons
+    'Container width': 320,
+  },
+  tags: ['!dev', '!autodocs'],
+};
+
+export const FluidThreeWide = {
+  ...Fluid,
+  args: {
+    ...Fluid.args,
+    Buttons: 6, // Three buttons
+    'Container width': 800,
+  },
+  tags: ['!dev', '!autodocs'],
+};
+
+export const FluidThreeWideGhost = {
+  ...Fluid,
+  args: {
+    ...Fluid.args,
+    Buttons: 7, // Three buttons with one ghost
+    'Container width': 800,
+  },
+  tags: ['!dev', '!autodocs'],
+};
+
+export const FluidThreeNarrow = {
+  ...Fluid,
+  args: {
+    ...Fluid.args,
+    Buttons: 6, // Three buttons
+    'Container width': 500,
+  },
+  tags: ['!dev', '!autodocs'],
+};
+
+export const FluidFourWide = {
+  ...Fluid,
+  args: {
+    ...Fluid.args,
+    Buttons: 9, // Four buttons
+    'Container width': 1000,
+  },
+  tags: ['!dev', '!autodocs'],
+};
+
+export const FluidFourWideGhost = {
+  ...Fluid,
+  args: {
+    ...Fluid.args,
+    Buttons: 10, // Four buttons with one ghost
+    'Container width': 1000,
+  },
+  tags: ['!dev', '!autodocs'],
+};
+
+export const FluidFourNarrow = {
+  ...Fluid,
+  args: {
+    ...Fluid.args,
+    Buttons: 9, // Four buttons
+    'Container width': 600,
+  },
+  tags: ['!dev', '!autodocs'],
 };

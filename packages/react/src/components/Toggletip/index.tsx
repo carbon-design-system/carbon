@@ -19,13 +19,7 @@ import React, {
   type KeyboardEventHandler,
   type ReactNode,
 } from 'react';
-import {
-  Popover,
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20452
-  type PopoverAlignment,
-  PopoverBaseProps,
-  PopoverContent,
-} from '../Popover';
+import { Popover, PopoverContent, type PopoverBaseProps } from '../Popover';
 import { match, keys } from '../../internal/keyboard';
 import { useWindowEvent } from '../../internal/useEvent';
 import { useId } from '../../internal/useId';
@@ -178,16 +172,25 @@ export function Toggletip<E extends ElementType = 'span'>({
   });
 
   useEffect(() => {
-    if (!ref.current) return;
+    if (!open || !ref.current) return;
 
     const targetDocument = ref.current.ownerDocument || document;
     const eventType: 'pointerdown' | 'mousedown' =
       'PointerEvent' in window ? 'pointerdown' : 'mousedown';
 
     const handleOutsideClick = (event: MouseEvent | PointerEvent) => {
-      const node = event.target as Node | null;
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
-      if (open && node && !ref.current!.contains(node)) {
+      const { current } = ref;
+      if (!current) return;
+
+      const isInsideCurrent = (target: EventTarget | null): target is Node =>
+        target instanceof Node && current.contains(target);
+
+      const isInside =
+        isInsideCurrent(event.target) ||
+        (typeof event.composedPath === 'function' &&
+          event.composedPath().some(isInsideCurrent));
+
+      if (!isInside) {
         setOpen(false);
       }
     };
@@ -229,7 +232,6 @@ export function Toggletip<E extends ElementType = 'span'>({
 // Get all the properties from Popover except for "open".
 // The Typescript types for PropTypes are really messed up so we need lots of
 // casting.  It will be great when we can finally get rid of PropTypes altogether.
-// eslint-disable-next-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20452
 const { open, ...popoverNonOpenPropTypes } = (Popover.propTypes ??
   {}) as unknown as PopoverBaseProps;
 

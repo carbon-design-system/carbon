@@ -14,7 +14,7 @@ const path = require('path');
 const ts = require('typescript');
 
 const BANNER = `/**
- * Copyright IBM Corp. 2019, 2023
+ * Copyright IBM Corp. 2019, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -136,8 +136,9 @@ async function generateIndexTypes(outDir) {
   const indexContent = await fs.readFile(indexJsPath, 'utf8');
 
   const bucketExports = [];
-  const esmRegex = /from '\.\/(__generated__\/bucket-\d+)\.js'/g;
-  const cjsRegex = /require\('\.\/(__generated__\/bucket-\d+)\.js'\)/g;
+  // Support both rollup (single-quoted) and tsdown (double-quoted) output.
+  const esmRegex = /from ['"]\.\/(__generated__\/bucket-\d+)\.js['"]/g;
+  const cjsRegex = /require\(['"]\.\/(__generated__\/bucket-\d+)\.js['"]\)/g;
 
   let match;
   while ((match = esmRegex.exec(indexContent)) !== null) {

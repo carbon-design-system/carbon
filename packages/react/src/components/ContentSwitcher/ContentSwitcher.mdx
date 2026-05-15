@@ -90,17 +90,19 @@ specifying a custom class name for layout.
 ### ContentSwitcher `light`
 
 In certain circumstances, a `ContentSwitcher` will exist on a container element
-with the same background color. To improve contrast, you can use the `light`
-property to toggle the light variant of the `ContentSwitcher`.
+with the same background color. To improve contrast, set the `light` property to
+toggle the light variant of the `ContentSwitcher`.
 
 ```jsx
-<ContentSwitcher light>...</ContentSwitcher>
+<ContentSwitcher light onChange={() => {}}>
+  ...
+</ContentSwitcher>
 ```
 
 ### ContentSwitcher `onChange`
 
-This is a required prop. You will need to specify a function to run when the
-selection of the `ContentSwitcher` is changed.
+This required prop specifies a function to run when the selection of the
+`ContentSwitcher` changes.
 
 ```jsx
 <ContentSwitcher
@@ -113,8 +115,9 @@ selection of the `ContentSwitcher` is changed.
 
 ### ContentSwitcher `selectedIndex`
 
-This prop allows you to specify which `ContentSwitcher` index you would like to
-be selected on initial render. This number defaults to `0`.
+This prop specifies which `ContentSwitcher` index should be selected. This
+number defaults to `0`, and updates to this prop will update the selected
+switch.
 
 <ContentSwitcher selectedIndex={2} onChange={() => {}}>
   <Switch name="one" text="First section" />
@@ -133,10 +136,10 @@ be selected on initial render. This number defaults to `0`.
 ### ContentSwitcher `selectionMode`
 
 By default, when a `ContentSwitcher` is focused and an arrow key is pressed, the
-selection is updated immediately and the `onChange` is fired. However, sometimes
-you may want to only change the `selectedIndex` once a selection has been made.
-To do this, you can set the `selectionMode` to `manual`, and the `onChange` will
-only fire when a selection is made.
+selection is updated immediately and the `onChange` is fired. In some cases, it
+is preferable to change `selectedIndex` only once a selection has been made. To
+do this, set `selectionMode` to `manual`, and the `onChange` will only fire when
+a selection is made.
 
 <ContentSwitcher
   selectionMode="manual"
@@ -166,7 +169,7 @@ The className prop passed into `Switch` will be forwarded along to the
 underlying wrapper `button` element.
 
 ```jsx
-<ContentSwitcher>
+<ContentSwitcher onChange={() => {}}>
   <Switch className="switch-one" />
   <Switch className="switch-two " />
 </ContentSwitcher>
@@ -174,17 +177,17 @@ underlying wrapper `button` element.
 
 ### Switch `disabled`
 
-You can disable the `ContentSwitcher` by passing in `disabled` to the `Switch`
+The `ContentSwitcher` can be disabled by passing `disabled` to the `Switch`
 elements directly.
 
-<ContentSwitcher>
+<ContentSwitcher onChange={() => {}}>
   <Switch disabled name="one" text="First section" />
   <Switch disabled name="two" text="Second section" />
   <Switch disabled name="three" text="Third section" />
 </ContentSwitcher>
 
 ```jsx
-<ContentSwitcher>
+<ContentSwitcher onChange={() => {}}>
   <Switch disabled name="one" text="First section" />
   <Switch disabled name="two" text="Second section" />
   <Switch disabled name="three" text="Third section" />

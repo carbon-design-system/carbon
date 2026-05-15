@@ -9,6 +9,7 @@ import React, {
   createContext,
   useContext,
   useMemo,
+  type ComponentType,
   type PropsWithChildren,
 } from 'react';
 import {
@@ -72,4 +73,26 @@ export const ModalPresenceContext = createContext<
 export const useExclusiveModalPresenceContext = (id: string) => {
   const ctx = useContext(ModalPresenceContext);
   return ctx?.isPresenceExclusive(id) ? ctx : undefined;
+};
+
+type WithModalPresenceProps = Pick<ModalPresenceProps, 'open'>;
+
+/**
+ * Higher-order function that wraps a component with ModalPresence
+ */
+export const withModalPresence = <TProps extends object>(
+  Component: ComponentType<TProps>
+) => {
+  const WithModalPresence = ({
+    open,
+    ...componentProps
+  }: TProps & WithModalPresenceProps) => (
+    <ModalPresence open={open}>
+      <Component {...(componentProps as TProps)} />
+    </ModalPresence>
+  );
+
+  WithModalPresence.displayName = `withModalPresence(${Component.displayName || Component.name || 'Component'})`;
+
+  return WithModalPresence;
 };

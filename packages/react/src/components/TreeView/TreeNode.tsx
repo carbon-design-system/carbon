@@ -9,14 +9,16 @@ import { CaretDown } from '@carbon/icons-react';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import React, {
+  isValidElement,
+  useCallback,
+  useContext,
   useEffect,
   useRef,
   useState,
-  useCallback,
-  useContext,
   type ElementType,
   type FocusEvent,
   type MouseEvent,
+  type ReactNode,
 } from 'react';
 import { keys, match, matches } from '../../internal/keyboard';
 import { deprecate } from '../../prop-types/deprecate';
@@ -165,9 +167,8 @@ const extractTextContent = (node: React.ReactNode): string => {
     return node.map(extractTextContent).join('');
   }
 
-  if (React.isValidElement(node)) {
-    const element = node as React.ReactElement<{ children?: React.ReactNode }>;
-    const children = element.props.children;
+  if (isValidElement<{ children?: ReactNode }>(node)) {
+    const children = node.props.children;
     return extractTextContent(children);
   }
 
@@ -290,10 +291,8 @@ const TreeNode = React.forwardRef<HTMLElement, TreeNodeProps>(
     const enableTreeviewControllable = useFeatureFlag(
       'enable-treeview-controllable'
     );
-
-    // eslint-disable-next-line  react-hooks/rules-of-hooks -- https://github.com/carbon-design-system/carbon/issues/20452
-    const { current: id } = useRef(nodeId || useId());
-
+    const generatedId = useId();
+    const { current: id } = useRef(nodeId ?? generatedId);
     const controllableExpandedState = useControllableState({
       value: isExpanded,
       onChange: onToggle as ControlledOnToggle,
@@ -419,7 +418,7 @@ const TreeNode = React.forwardRef<HTMLElement, TreeNodeProps>(
             return node;
           }
           if (node.classList.contains(`${prefix}--tree-node-link-parent`)) {
-            return node.firstChild as Element | null;
+            return node.firstElementChild;
           }
           if (node.classList.contains(`${prefix}--tree`)) {
             return null;
@@ -443,9 +442,9 @@ const TreeNode = React.forwardRef<HTMLElement, TreeNodeProps>(
            * its parent node (unless its depth is level 1)
            */
           const parentNode = findParentTreeNode(
-            href
-              ? (currentNode.current?.parentElement?.parentElement as Element)
-              : (currentNode.current?.parentElement as Element)
+            (href
+              ? currentNode.current?.parentElement?.parentElement
+              : currentNode.current?.parentElement) ?? null
           );
           if (parentNode instanceof HTMLElement) {
             parentNode.focus();

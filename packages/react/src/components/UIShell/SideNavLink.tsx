@@ -19,8 +19,8 @@ import Link, { LinkProps, LinkPropTypes } from './Link';
 import SideNavIcon from './SideNavIcon';
 import SideNavItem from './SideNavItem';
 import SideNavLinkText from './SideNavLinkText';
+import { SideNavContext } from './SideNavContext';
 import { usePrefix } from '../../internal/usePrefix';
-import { SideNavContext } from './SideNav';
 
 export type SideNavLinkProps<E extends ElementType> = LinkProps<E> & {
   /**
@@ -91,7 +91,10 @@ const SideNavLink = frFn((props, ref) => {
     tabIndex,
     ...rest
   } = props;
-  const isRail = useContext(SideNavContext);
+  const { isRail, isSideNavExpanded: contextIsSideNavExpanded } =
+    useContext(SideNavContext);
+  const currentIsSideNavExpanded =
+    isSideNavExpanded ?? contextIsSideNavExpanded;
 
   const prefix = usePrefix();
   const className = cx({
@@ -108,7 +111,7 @@ const SideNavLink = frFn((props, ref) => {
         ref={ref}
         tabIndex={
           tabIndex === undefined
-            ? !isSideNavExpanded && !isRail
+            ? !currentIsSideNavExpanded && !isRail
               ? -1
               : 0
             : tabIndex

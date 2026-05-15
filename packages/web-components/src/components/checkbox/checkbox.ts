@@ -139,7 +139,7 @@ class CDSCheckbox extends FocusMixin(FormMixin(LitElement)) {
   /**
    * Specify whether the Checkbox is currently invalid
    */
-  @property({ type: Boolean })
+  @property({ type: Boolean, reflect: true })
   invalid = false;
 
   /**
@@ -163,7 +163,7 @@ class CDSCheckbox extends FocusMixin(FormMixin(LitElement)) {
   /**
    * Specify whether the Checkbox is in a warn state
    */
-  @property({ type: Boolean })
+  @property({ type: Boolean, reflect: true })
   warn = false;
 
   /**
@@ -247,8 +247,14 @@ class CDSCheckbox extends FocusMixin(FormMixin(LitElement)) {
       _handleClick: handleClick,
     } = this;
 
-    const showWarning = !readonly && !invalid && warn;
-    const showHelper = !invalid && !warn;
+    const normalizedProps: {
+      invalid: boolean;
+      warn: boolean;
+    } = {
+      invalid: !readonly && !disabled && invalid,
+      warn: !readonly && !invalid && !disabled && warn,
+    };
+    const showHelper = !normalizedProps.invalid && !normalizedProps.warn;
 
     const helper = helperText
       ? html` <div class="${prefix}--form__helper-text">${helperText}</div>`
@@ -267,9 +273,9 @@ class CDSCheckbox extends FocusMixin(FormMixin(LitElement)) {
         type="checkbox"
         part="input"
         class="${`${prefix}--checkbox`}"
-        aria-readonly="${String(Boolean(readonly))}"
+        aria-readonly="${String(readonly)}"
         .checked="${checked}"
-        ?data-invalid="${invalid}"
+        ?data-invalid="${normalizedProps.invalid}"
         ?disabled="${disabled}"
         ?defaultChecked="${defaultChecked}"
         .indeterminate="${indeterminate}"
@@ -290,7 +296,7 @@ class CDSCheckbox extends FocusMixin(FormMixin(LitElement)) {
       <slot name="decorator" @slotchange="${this._handleSlotChange}"></slot>
       <slot name="slug" @slotchange="${this._handleSlotChange}"></slot>
       <div class="${prefix}--checkbox__validation-msg">
-        ${!readonly && invalid
+        ${normalizedProps.invalid
           ? html`
               ${iconLoader(WarningFilled16, {
                 class: `${prefix}--checkbox__invalid-icon`,
@@ -298,7 +304,7 @@ class CDSCheckbox extends FocusMixin(FormMixin(LitElement)) {
               <div class="${prefix}--form-requirement">${invalidText}</div>
             `
           : null}
-        ${showWarning
+        ${normalizedProps.warn
           ? html`
               ${iconLoader(WarningAltFilled16, {
                 class: `${prefix}--checkbox__invalid-icon ${prefix}--checkbox__invalid-icon--warning`,

@@ -50,9 +50,6 @@ const getControls = ({ disableControl }) => {
 export const Default = {
   args: defaultArgs,
   argTypes: getControls({ disableControl: false }),
-  parameters: {
-    percy: { skip: true },
-  },
   render: ({ assistiveText, description, status, iconDescription }) => {
     return html`
       <cds-inline-loading
@@ -73,10 +70,6 @@ export const UxExample = {
   decorators: [
     (story) => html`<div style="display:flex;width:300px">${story()}</div>`,
   ],
-
-  parameters: {
-    percy: { skip: true },
-  },
   render: ({ onSuccess = noop }) => {
     const onSubmit = () => {
       const submit = document.querySelector('#submit');

@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -201,6 +201,8 @@ export const ExperimentalAutoAlign = (args) => (
     <ComboBox
       onChange={() => {}}
       id="carbon-combobox"
+      invalidText="Error message goes here"
+      warnText="Warning message goes here"
       items={items}
       itemToString={(item) => (item ? item.text : '')}
       titleText="Label"
@@ -219,6 +221,8 @@ export const _WithLayer = (args) => (
     {(layer) => (
       <div style={{ width: 300 }}>
         <ComboBox
+          invalidText="Error message goes here"
+          warnText="Warning message goes here"
           onChange={() => {}}
           id={`carbon-combobox-${layer}`}
           items={items}
@@ -295,6 +299,8 @@ export const withAILabel = (args) => {
   return (
     <div style={{ width: 300 }}>
       <ComboBox
+        invalidText="Error message goes here"
+        warnText="Warning message goes here"
         onChange={action('onChange')}
         id="carbon-combobox"
         items={items}
@@ -310,7 +316,7 @@ export const withAILabel = (args) => {
 
 withAILabel.argTypes = { ...sharedArgTypes };
 
-export const _fullyControlled = (args) => {
+export const Controlled = (args) => {
   const options = [
     {
       id: 'option-1',
@@ -334,6 +340,8 @@ export const _fullyControlled = (args) => {
     <div>
       <ComboBox
         {...args}
+        invalidText="Error message goes here"
+        warnText="Warning message goes here"
         onChange={onChange}
         id="carbon-combobox"
         items={options}
@@ -348,7 +356,7 @@ export const _fullyControlled = (args) => {
           alignItems: 'center',
           justifyContent: 'space-between',
         }}>
-        <Button onClick={() => setValue(null)}>Reset</Button>
+        <Button onClick={() => setValue(null)}>Clear</Button>
         <Button onClick={() => setValue(options[0])}>Option 1</Button>
         <Button onClick={() => setValue(options[1])}>Option 2</Button>
         <Button onClick={() => setValue(options[2])}>Option 3</Button>
@@ -357,4 +365,4 @@ export const _fullyControlled = (args) => {
   );
 };
 
-_fullyControlled.argTypes = { ...sharedArgTypes };
+Controlled.argTypes = { ...sharedArgTypes };

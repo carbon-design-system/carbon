@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2019, 2024
+ * Copyright IBM Corp. 2019, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -11,8 +11,11 @@ import { ifDefined } from 'lit/directives/if-defined.js';
 import { prefix } from '../../globals/settings';
 import SelectableTile from './selectable-tile';
 import CheckmarkFilled16 from '@carbon/icons/es/checkmark--filled/16.js';
+import RadioButton16 from '@carbon/icons/es/radio-button/16.js';
+import RadioButtonChecked16 from '@carbon/icons/es/radio-button--checked/16.js';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import { iconLoader } from '../../globals/internal/icon-loader';
+import { isFeatureFlagEnabled } from '../feature-flags';
 
 /**
  * Radio tile.
@@ -23,6 +26,22 @@ import { iconLoader } from '../../globals/internal/icon-loader';
  */
 @customElement(`${prefix}-radio-tile`)
 class CDSRadioTile extends SelectableTile {
+  private _hasRadioButtonIcons = false;
+
+  connectedCallback() {
+    super.connectedCallback();
+    this._hasRadioButtonIcons = isFeatureFlagEnabled(
+      'enable-v12-tile-radio-icons',
+      this
+    );
+
+    if (this._hasRadioButtonIcons) {
+      this.setAttribute('enable-v12-tile-radio-icons', '');
+    } else {
+      this.removeAttribute('enable-v12-tile-radio-icons');
+    }
+  }
+
   /**
    * Handles `change` event on the `<input>` in the shadow DOM.
    */
@@ -48,10 +67,25 @@ class CDSRadioTile extends SelectableTile {
     }
   };
 
+  protected _renderIcon() {
+    const { selected, checkmarkLabel, _hasRadioButtonIcons } = this;
+
+    let icon;
+    if (_hasRadioButtonIcons) {
+      icon = selected ? RadioButtonChecked16 : RadioButton16;
+    } else {
+      icon = CheckmarkFilled16;
+    }
+
+    return iconLoader(icon, {
+      class: `${prefix}--tile__checkmark`,
+      title: checkmarkLabel,
+    });
+  }
+
   render() {
     const {
       colorScheme,
-      checkmarkLabel,
       disabled,
       hasRoundedCorners,
       name,
@@ -84,10 +118,7 @@ class CDSRadioTile extends SelectableTile {
         @change=${!disabled ? handleChange : undefined}
         @keydown="${!disabled ? handleKeydown : undefined}" />
       <label part="label" for="input" class="${classes}">
-        ${iconLoader(CheckmarkFilled16, {
-          class: `${prefix}--tile__checkmark`,
-          title: checkmarkLabel,
-        })}
+        ${this._renderIcon()}
         <div class="${prefix}--tile-content"><slot></slot></div>
       </label>
       <slot name="decorator"></slot>

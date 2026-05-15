@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2025
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -90,6 +90,36 @@ describe('TextArea', () => {
       expect(screen.getByText('0')).toBeInTheDocument();
     });
 
+    it('should not render helperText when helperText is an empty string', () => {
+      const { container } = render(
+        <TextArea id="textarea-1" labelText="TextArea label" helperText="" />
+      );
+
+      expect(
+        container.querySelector(`.${prefix}--form__helper-text`)
+      ).not.toBeInTheDocument();
+      expect(screen.getByRole('textbox')).not.toHaveAttribute(
+        'aria-describedby'
+      );
+    });
+
+    it('should not set aria-describedby when helperText is omitted', () => {
+      render(<TextArea id="textarea-1" labelText="TextArea label" />);
+      expect(screen.getByRole('textbox')).not.toHaveAttribute(
+        'aria-describedby'
+      );
+    });
+
+    it('should set aria-describedby when helperText is 0', () => {
+      render(<TextArea id="textarea-1" labelText="label" helperText={0} />);
+
+      const textbox = screen.getByRole('textbox');
+      const helperId = textbox.getAttribute('aria-describedby');
+
+      expect(helperId).toMatch(/^text-area-helper-text-/);
+      expect(document.getElementById(helperId)).toHaveTextContent('0');
+    });
+
     it('should respect hideLabel prop', () => {
       render(<TextArea id="textarea-1" labelText="TextArea label" hideLabel />);
 
@@ -130,6 +160,42 @@ describe('TextArea', () => {
         />
       );
       expect(screen.getByRole('textbox')).toHaveAttribute('aria-invalid');
+    });
+
+    it('should set aria-errormessage to the invalid message element id', () => {
+      render(
+        <TextArea
+          id="textarea-1"
+          labelText="TextArea"
+          invalid
+          invalidText="Some error"
+        />
+      );
+
+      const input = screen.getByRole('textbox');
+      expect(input).toHaveAttribute(
+        'aria-errormessage',
+        'textarea-1-error-msg'
+      );
+      expect(screen.getByText('Some error')).toHaveAttribute(
+        'id',
+        'textarea-1-error-msg'
+      );
+    });
+
+    it('should use aria-describedby for helper text when not invalid', () => {
+      render(
+        <TextArea
+          id="textarea-1"
+          labelText="TextArea"
+          helperText="Helper copy"
+        />
+      );
+
+      const helper = screen.getByText('Helper copy');
+      const input = screen.getByRole('textbox');
+      expect(input).toHaveAttribute('aria-describedby', helper.id);
+      expect(input).not.toHaveAttribute('aria-errormessage');
     });
 
     it('should respect `invalidText` prop', () => {

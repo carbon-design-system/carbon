@@ -13,7 +13,7 @@ import { usePrefix } from '../../internal/usePrefix';
 
 export type FilenameStatus = 'edit' | 'complete' | 'uploading';
 
-type SVGAttr = React.SVGAttributes<React.ReactSVGElement>;
+type SVGAttr = React.SVGAttributes<SVGSVGElement>;
 
 export interface FilenameProps
   extends Omit<HTMLAttributes<HTMLElement> & SVGAttr, 'tabIndex' | 'type'> {

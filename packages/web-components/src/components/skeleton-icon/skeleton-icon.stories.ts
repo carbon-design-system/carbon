@@ -9,11 +9,6 @@ import { html } from 'lit';
 import './skeleton-icon';
 
 export const Default = {
-  parameters: {
-    percy: {
-      skip: true,
-    },
-  },
   render: () =>
     html`<cds-skeleton-icon style="margin: 50px"></cds-skeleton-icon
       ><cds-skeleton-icon

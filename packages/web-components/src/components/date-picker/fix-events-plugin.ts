@@ -67,15 +67,6 @@ export default (config: DatePickerFixEventsPluginConfig): Plugin =>
             );
             event.stopPropagation();
             break;
-          case 'ArrowLeft':
-          case 'Left':
-          case 'ArrowRight':
-          case 'Right':
-            // Prevents Flatpickr code from canceling the event if left/right arrow keys are hit on `<input>`,
-            // so user can move the keyboard cursor for editing dates
-            // Workaround for: https://github.com/flatpickr/flatpickr/issues/1943
-            event.stopPropagation();
-            break;
           default:
             break;
         }

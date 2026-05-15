@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2019, 2023
+ * Copyright IBM Corp. 2019, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -171,7 +171,7 @@ class CDSExpandableTile extends HostListenerMixin(FocusMixin(LitElement)) {
         aria-controls="below-the-fold-content"
         tabindex="0"
         @click="${withInteractive ? this._handleExpand : ''}"
-        aria-expanded="${String(Boolean(expanded))}">
+        aria-expanded="${String(expanded)}">
         ${iconLoader(ChevronDown16, { id: 'icon' })}
       </button>
       <slot name="ai-label" @slotchange="${this._handleSlotChange}"></slot>

@@ -41,7 +41,21 @@ describe('TableToolbarMenu', () => {
         </TableToolbarMenu>
       );
 
-      expect(screen.getByText('Icon description')).toBeInTheDocument();
+      expect(
+        screen.getByRole('button', { name: 'Icon description' })
+      ).not.toHaveAttribute('title');
+    });
+
+    it('should not render a native title attribute', () => {
+      render(
+        <TableToolbarMenu>
+          <span>test</span>
+        </TableToolbarMenu>
+      );
+
+      expect(
+        screen.getByRole('button', { name: 'Settings' })
+      ).not.toHaveAttribute('title');
     });
 
     it('should respect renderIcon prop', () => {

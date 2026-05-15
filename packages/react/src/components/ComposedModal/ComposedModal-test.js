@@ -17,12 +17,15 @@ import {
 } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import ComposedModal, { ModalBody } from './ComposedModal';
-import { ComposedModalPresence } from './ComposedModalPresence';
+import {
+  ComposedModalPresence,
+  withComposedModalPresence,
+} from './ComposedModalPresence';
 import { FeatureFlags, useFeatureFlag } from '../FeatureFlags';
 import { ModalHeader } from './ModalHeader';
 import { ModalFooter } from './ModalFooter';
-import { TextInput } from '../../';
-import { AILabel } from '../AILabel';
+import { TextInput, OverflowMenu, OverflowMenuItem } from '../../';
+import { AILabel, AILabelContent } from '../AILabel';
 
 const prefix = 'cds';
 
@@ -668,8 +671,37 @@ describe.each([
         expect(spy).toHaveBeenCalledWith(
           'Warning: `<ComposedModal>` prop `preventCloseOnClickOutside` should not be `false` when `<ModalFooter>` is present. Transactional, non-passive Modals should not be dissmissable by clicking outside. See: https://carbondesignsystem.com/components/modal/usage/#transactional-modal'
         );
-
         spy.mockRestore();
+      });
+      it('should close overflow menu on outside click without closing modal', async () => {
+        const onClose = jest.fn();
+        render(
+          <Component open onClose={onClose}>
+            <ModalHeader>Modal with Overflow Menu</ModalHeader>
+            <ModalBody>
+              <OverflowMenu iconDescription="More options">
+                <OverflowMenuItem itemText="Download" />
+                <OverflowMenuItem itemText="Share" />
+              </OverflowMenu>
+              <p>Test content</p>
+            </ModalBody>
+            <ModalFooter
+              primaryButtonText="Primary button"
+              secondaryButtonText="Secondary button"
+            />
+          </Component>
+        );
+        const button = screen.getByRole('button', { name: /options/i });
+
+        const backgroundLayer = screen.getByRole('presentation', {
+          hidden: true,
+        });
+        expect(backgroundLayer).toHaveClass('is-visible');
+
+        await userEvent.click(button);
+        expect(button).toHaveAttribute('aria-expanded', 'true');
+        await userEvent.click(backgroundLayer);
+        expect(button).toHaveAttribute('aria-expanded', 'false');
       });
     });
   });
@@ -737,6 +769,110 @@ describe.each([
 
     const inputField = screen.getByLabelText('Domain name');
     expect(inputField).not.toHaveFocus();
+    fireEvent.keyDown(document, { key: 'Escape', code: 'Escape', keyCode: 27 });
+    expect(onClose).toHaveBeenCalled();
+  });
+
+  it('should handle ESC key with AILabel - first ESC closes popover, second ESC closes modal', async () => {
+    const onClose = jest.fn();
+    const aiLabel = (
+      <AILabel className="ai-label-container">
+        <AILabelContent>
+          <div>
+            <p>AI Explained</p>
+            <p>Test content</p>
+          </div>
+        </AILabelContent>
+      </AILabel>
+    );
+
+    render(
+      <ComposedModal open onClose={onClose} decorator={aiLabel}>
+        <ModalHeader>Modal header</ModalHeader>
+        <ModalBody>
+          <p>Modal content</p>
+          <TextInput
+            data-modal-primary-focus
+            id="text-input-1"
+            labelText="Domain name"
+          />
+        </ModalBody>
+        <ModalFooter primaryButtonText="Add" secondaryButtonText="Cancel" />
+      </ComposedModal>
+    );
+
+    expect(screen.getByRole('presentation', { hidden: true })).toHaveClass(
+      'is-visible'
+    );
+
+    const aiLabelButton = screen.getByRole('button', {
+      name: /AI Show information/i,
+    });
+    await userEvent.click(aiLabelButton);
+
+    await waitFor(() => {
+      expect(aiLabelButton).toHaveAttribute('aria-expanded', 'true');
+    });
+
+    await userEvent.keyboard('{Escape}');
+    await waitFor(() => {
+      expect(aiLabelButton).toHaveAttribute('aria-expanded', 'false');
+    });
+
+    expect(onClose).not.toHaveBeenCalled();
+    expect(screen.getByRole('presentation', { hidden: true })).toHaveClass(
+      'is-visible'
+    );
+
+    await userEvent.keyboard('{Escape}');
+    expect(onClose).toHaveBeenCalled();
+  });
+
+  it('should handle ESC key with OverflowMenu - first ESC closes menu, second closes modal', async () => {
+    const onClose = jest.fn();
+
+    render(
+      <Component open onClose={onClose}>
+        <ModalHeader>Modal with Overflow Menu</ModalHeader>
+        <ModalBody>
+          <OverflowMenu iconDescription="More options">
+            <OverflowMenuItem itemText="Download" />
+            <OverflowMenuItem itemText="Share" />
+          </OverflowMenu>
+          <p>Modal content</p>
+          <TextInput
+            data-modal-primary-focus
+            id="text-input-1"
+            labelText="Domain name"
+          />
+        </ModalBody>
+        <ModalFooter primaryButtonText="Add" secondaryButtonText="Cancel" />
+      </Component>
+    );
+
+    expect(screen.getByRole('presentation', { hidden: true })).toHaveClass(
+      'is-visible'
+    );
+
+    const overflowMenuButton = screen.getByRole('button', {
+      name: /options/i,
+    });
+    await userEvent.click(overflowMenuButton);
+
+    expect(overflowMenuButton).toHaveAttribute('aria-expanded', 'true');
+
+    fireEvent.keyDown(
+      // eslint-disable-next-line testing-library/no-node-access
+      document.getElementById(overflowMenuButton.getAttribute('aria-controls')),
+      {
+        key: 'Escape',
+        code: 'Escape',
+        keyCode: 27,
+      }
+    );
+    expect(overflowMenuButton).toHaveAttribute('aria-expanded', 'false');
+    expect(onClose).not.toHaveBeenCalled();
+
     fireEvent.keyDown(document, { key: 'Escape', code: 'Escape', keyCode: 27 });
     expect(onClose).toHaveBeenCalled();
   });
@@ -886,5 +1022,92 @@ describe('state with presence context', () => {
     expect(childModal).not.toBeInTheDocument();
     expect(siblingModal).not.toBeInTheDocument();
     expect(screen.queryByTestId('modal')).toBeInTheDocument();
+  });
+
+  it('should close only the topmost modal when Escape is pressed', async () => {
+    const ModalExample = () => {
+      const [isSiblingOpen, setIsSiblingOpen] = useState(false);
+      const [isChildOpen, setIsChildOpen] = useState(false);
+
+      return (
+        <ComposedModalPresence open>
+          <ComposedModal data-testid="modal">
+            <ModalHeader>Modal Header</ModalHeader>
+            <ModalBody>
+              <button
+                type="button"
+                data-testid="launch-sibling-modal"
+                onClick={() => setIsSiblingOpen(true)}>
+                Launch sibling modal
+              </button>
+            </ModalBody>
+          </ComposedModal>
+          <ComposedModal
+            data-testid="sibling-modal"
+            open={isSiblingOpen}
+            onClose={() => setIsSiblingOpen(false)}>
+            <ModalHeader>Modal Header</ModalHeader>
+            <ModalBody>
+              <button
+                type="button"
+                data-testid="launch-child-modal"
+                onClick={() => setIsChildOpen(true)}>
+                Launch child modal
+              </button>
+              <ComposedModal
+                data-testid="child-modal"
+                open={isChildOpen}
+                onClose={() => setIsChildOpen(false)}>
+                <ModalHeader>Modal Header</ModalHeader>
+              </ComposedModal>
+            </ModalBody>
+          </ComposedModal>
+        </ComposedModalPresence>
+      );
+    };
+
+    render(<ModalExample />);
+
+    await userEvent.click(screen.getByTestId('launch-sibling-modal'));
+    await userEvent.click(screen.getByTestId('launch-child-modal'));
+
+    expect(screen.queryByTestId('modal')).toBeInTheDocument();
+    expect(screen.queryByTestId('sibling-modal')).toBeInTheDocument();
+    expect(screen.queryByTestId('child-modal')).toBeInTheDocument();
+
+    // First ESC closes the tooltip in the child modal
+    await userEvent.keyboard('{Escape}');
+
+    // Second ESC closes the child modal
+    await userEvent.keyboard('{Escape}');
+
+    // Wait for child modal to be removed
+    await waitFor(() => {
+      expect(screen.queryByTestId('child-modal')).not.toBeInTheDocument();
+    });
+
+    expect(screen.queryByTestId('modal')).toBeInTheDocument();
+    expect(screen.queryByTestId('sibling-modal')).toBeInTheDocument();
+  });
+});
+
+const ComposedModalWithPresenceHof = withComposedModalPresence((props) => {
+  return <ComposedModal {...props} />;
+});
+
+describe('state with hof withModalPresence', () => {
+  it('should be present when state is open', () => {
+    render(<ComposedModalWithPresenceHof open data-testid="modal" />);
+    expect(screen.queryByTestId('modal')).toBeInTheDocument();
+  });
+
+  it('should not be present when open is false', () => {
+    render(<ComposedModalWithPresenceHof open={false} data-testid="modal" />);
+    expect(screen.queryByTestId('modal')).not.toBeInTheDocument();
+  });
+
+  it('should not be present when open is undefined', () => {
+    render(<ComposedModalWithPresenceHof data-testid="modal" />);
+    expect(screen.queryByTestId('modal')).not.toBeInTheDocument();
   });
 });
