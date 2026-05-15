@@ -34,6 +34,9 @@ const sharedArgs = {
 };
 
 const sharedArgTypes = {
+  className: {
+    control: false,
+  },
   size: {
     options: ['sm', 'md'],
     control: { type: 'select' },
