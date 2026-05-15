@@ -37,9 +37,12 @@ const sharedArgTypes = {
   className: {
     control: false,
   },
+  children: {
+    control: false,
+  },
   size: {
-    options: ['sm', 'md'],
     control: { type: 'select' },
+    options: ['sm', 'md'],
   },
   noTrailingSlash: {
     control: { type: 'boolean' },
