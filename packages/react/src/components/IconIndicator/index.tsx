@@ -9,7 +9,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import cx from 'classnames';
 import { usePrefix } from '../../internal/usePrefix';
-import { Tooltip } from '../Tooltip';
+import { DefinitionTooltip } from '../Tooltip';
 import {
   ErrorFilled,
   CheckmarkFilled,
@@ -117,16 +117,15 @@ export const IconIndicator = React.forwardRef(
     if (compact) {
       return (
         <div className={classNames} ref={ref}>
-          <Tooltip
-            label={label}
+          <DefinitionTooltip
             align="right"
             autoAlign
-            className="cds--icon-tooltip">
-            {/* The spec shows that the tooltip must appear on hover and focus. To make it appear on focus, it can only be achieved by adding `tabIndex={0}` and using `role="button"`, which may itself be an accessibility violation for screen readers. If we remove it, keyboard users lose that affordance. */}
-            <span tabIndex={0} role="button" aria-label={label}>
-              {iconElement}
-            </span>
-          </Tooltip>
+            definition={label}
+            openOnHover
+            triggerClassName={`${prefix}--icon-indicator--trigger`}
+            aria-label={`Icon`}>
+            {iconElement}
+          </DefinitionTooltip>
         </div>
       );
     }

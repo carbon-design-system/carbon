@@ -11,6 +11,7 @@
 @use '../../spacing' as *;
 @use '../../colors' as *;
 @use '../../utilities/focus-outline';
+@use '../../utilities/button-reset';
 @use './tokens' as *;
 
 /// icon-indicator styles
@@ -27,12 +28,14 @@
     line-height: unset;
   }
 
-  span {
-    display: flex;
+  .#{$prefix}--icon-indicator--trigger {
+    @include button-reset.reset($width: false);
 
-    &:focus {
-      @include focus-outline.focus-outline;
-    }
+    display: flex;
+  }
+
+  .#{$prefix}--definition-tooltip {
+    padding-block: $spacing-01;
   }
 
   .#{$prefix}--icon-indicator svg {
