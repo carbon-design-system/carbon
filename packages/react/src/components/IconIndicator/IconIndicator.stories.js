@@ -100,3 +100,12 @@ DefaultWithSize20.args = {
   compact: false,
   size: 20,
 };
+
+/*
+ * This story will:
+ * - Be excluded from the docs page
+ * - Removed from the sidebar navigation
+ * - Still be a tested variant
+ */
+DefaultWithSize20.tags = ['!dev', '!autodocs'];
+DefaultWithSize20.argTypes = sharedArgTypes;
