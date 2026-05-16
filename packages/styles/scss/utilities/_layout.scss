@@ -71,11 +71,14 @@
           $value
         );
 
+        $token: custom-property.get-var(
+          'layout-#{$group}-#{$property}-#{$step}'
+        );
+
         &.#{config.$prefix}--layout--#{$group}-#{$step},
-        .#{config.$prefix}--layout--#{$group}-#{$step} :where(&) {
-          $token: custom-property.get-var(
-            'layout-#{$group}-#{$property}-#{$step}'
-          );
+        .#{config.$prefix}--layout--#{$group}-#{$step} :where(&),
+        :host-context(#{config.$prefix}-layout[#{$group}='#{$step}'])
+          :where(&) {
           @include custom-property.declaration(
             'layout-#{$group}-#{$property}',
             $token
