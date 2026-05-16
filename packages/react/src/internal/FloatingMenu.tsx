@@ -257,6 +257,18 @@ export const FloatingMenu = ({
   const endSentinelRef = useRef<HTMLSpanElement>(null);
   const placeInProgressRef = useRef(false);
 
+  const targetRef = useRef(target);
+  const menuOffsetRef = useRef(menuOffset);
+  const menuDirectionRef = useRef(menuDirection);
+  const flippedRef = useRef(flipped);
+  const updateOrientationRef = useRef(updateOrientation);
+
+  targetRef.current = target;
+  menuOffsetRef.current = menuOffset;
+  menuDirectionRef.current = menuDirection;
+  flippedRef.current = flipped;
+  updateOrientationRef.current = updateOrientation;
+
   const updateMenuPosition = useCallback(
     (isAdjustment?: true) => {
       const menuBody = menuBodyRef.current;
@@ -275,26 +287,38 @@ export const FloatingMenu = ({
       const refPosition = triggerEl
         ? triggerEl.getBoundingClientRect()
         : undefined;
+      const currentMenuDirection = menuDirectionRef.current;
+      const currentFlipped = flippedRef.current;
+      const currentMenuOffset = menuOffsetRef.current;
+      const currentTarget = targetRef.current;
+      const currentUpdateOrientation = updateOrientationRef.current;
       const offsetValue =
-        typeof menuOffset === 'function'
-          ? menuOffset(menuBody, menuDirection, triggerEl, flipped)
-          : menuOffset;
+        typeof currentMenuOffset === 'function'
+          ? currentMenuOffset(
+              menuBody,
+              currentMenuDirection,
+              triggerEl,
+              currentFlipped
+            )
+          : currentMenuOffset;
 
       const scrollX = globalThis.scrollX ?? 0;
       const scrollY = globalThis.scrollY ?? 0;
+      const portalTarget = currentTarget();
+      const container = {
+        rect: portalTarget.getBoundingClientRect(),
+        position: getComputedStyle(portalTarget).position,
+      };
 
-      if (updateOrientation) {
-        updateOrientation({
+      if (currentUpdateOrientation) {
+        currentUpdateOrientation({
           menuSize,
           refPosition,
-          direction: menuDirection,
+          direction: currentMenuDirection,
           offset: offsetValue,
           scrollX,
           scrollY,
-          container: {
-            rect: target().getBoundingClientRect(),
-            position: getComputedStyle(target()).position,
-          },
+          container,
         });
       }
 
@@ -304,23 +328,23 @@ export const FloatingMenu = ({
           menuSize,
           refPosition: refPosition ?? { left: 0, top: 0, right: 0, bottom: 0 },
           offset: offsetValue,
-          direction: menuDirection,
+          direction: currentMenuDirection,
           scrollX,
           scrollY,
-          container: {
-            rect: target().getBoundingClientRect(),
-            position: getComputedStyle(target()).position,
-          },
+          container,
         });
 
-        // Only update if the position has actually changed.
-        if (
-          !floatingPosition ||
-          floatingPosition.left !== newFloatingPosition.left ||
-          floatingPosition.top !== newFloatingPosition.top
-        ) {
-          setFloatingPosition(newFloatingPosition);
-        }
+        setFloatingPosition((prev) => {
+          if (
+            prev &&
+            prev.left === newFloatingPosition.left &&
+            prev.top === newFloatingPosition.top
+          ) {
+            return prev;
+          }
+
+          return newFloatingPosition;
+        });
 
         // Re-check after setting the position if not already adjusting.
         if (!isAdjustment) {
@@ -334,15 +358,7 @@ export const FloatingMenu = ({
         }
       }
     },
-    [
-      triggerRef,
-      menuOffset,
-      menuDirection,
-      flipped,
-      target,
-      updateOrientation,
-      floatingPosition,
-    ]
+    [triggerRef]
   );
 
   const focusMenuContent = (menuBody: HTMLElement) => {
@@ -406,28 +422,12 @@ export const FloatingMenu = ({
     return () => {
       resizeHandler.remove();
     };
-    // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20452
-  }, [
-    triggerRef,
-    menuOffset,
-    menuDirection,
-    flipped,
-    target,
-    updateOrientation,
-  ]);
+  }, [updateMenuPosition]);
 
-  // Update menu position when key props change.
+  // Update menu position when placement-related props change.
   useEffect(() => {
     updateMenuPosition();
-    // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20452
-  }, [
-    menuOffset,
-    menuDirection,
-    flipped,
-    triggerRef,
-    target,
-    updateOrientation,
-  ]);
+  }, [updateMenuPosition, menuDirection, flipped, menuOffset]);
 
   /**
    * Clones the child element to add a `ref` and positioning styles.

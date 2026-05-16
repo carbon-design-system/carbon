@@ -5,13 +5,20 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { fireEvent, render, screen, waitFor } from '@testing-library/react';
+import {
+  act,
+  fireEvent,
+  render,
+  screen,
+  waitFor,
+} from '@testing-library/react';
 
 import { Filter } from '@carbon/icons-react';
 import OverflowMenu from './OverflowMenu';
 import OverflowMenuItem from '../OverflowMenuItem';
 import React from 'react';
 import userEvent from '@testing-library/user-event';
+import { OptimizedResize } from '../../internal/OptimizedResize';
 
 const MenuDivider = React.forwardRef(function MenuDivider(_props, ref) {
   return <li ref={ref} data-testid="menu-divider" role="separator" />;
@@ -497,5 +504,38 @@ describe('OverflowMenu', () => {
     await waitFor(() => {
       expect(onOpen).toHaveBeenCalledTimes(1);
     });
+  });
+
+  it('should stay open through repeated window resize while menu is open', async () => {
+    let resizeCallback;
+
+    jest.spyOn(OptimizedResize, 'add').mockImplementation((callback) => {
+      resizeCallback = callback;
+      return { remove: jest.fn() };
+    });
+
+    render(
+      <OverflowMenu aria-label="Overflow menu">
+        <OverflowMenuItem itemText="one" />
+        <OverflowMenuItem itemText="two" />
+      </OverflowMenu>
+    );
+
+    await userEvent.click(screen.getByRole('button'));
+
+    const button = screen.getByRole('button');
+
+    await waitFor(() => {
+      expect(button).toHaveClass('cds--overflow-menu--open');
+    });
+
+    act(() => {
+      for (let i = 0; i < 50; i++) {
+        resizeCallback();
+      }
+    });
+
+    expect(button).toHaveClass('cds--overflow-menu--open');
+    expect(screen.getByRole('menu', { hidden: true })).toBeInTheDocument();
   });
 });

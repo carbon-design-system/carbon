@@ -461,38 +461,41 @@ export const OverflowMenu = forwardRef<HTMLButtonElement, OverflowMenuProps>(
       }
     };
 
-    const handlePlace = (menuBody: HTMLElement) => {
-      if (!menuBody) return;
+    const handlePlace = useCallback(
+      (menuBody: HTMLElement) => {
+        if (!menuBody) return;
 
-      menuBodyRef.current = menuBody;
-      const hasFocusin = 'onfocusin' in window;
-      const focusinEventName = hasFocusin ? 'focusin' : 'focus';
-      hFocusIn.current = on(
-        menuBody.ownerDocument,
-        focusinEventName,
-        (event: Event) => {
-          const target = event.target;
+        menuBodyRef.current = menuBody;
+        const hasFocusin = 'onfocusin' in window;
+        const focusinEventName = hasFocusin ? 'focusin' : 'focus';
+        hFocusIn.current = on(
+          menuBody.ownerDocument,
+          focusinEventName,
+          (event: Event) => {
+            const target = event.target;
 
-          if (!(target instanceof Element)) return;
+            if (!(target instanceof Element)) return;
 
-          const triggerEl = triggerRef.current;
-          if (typeof target.matches === 'function') {
-            if (
-              !menuBody.contains(target) &&
-              triggerEl &&
-              !target.matches(
-                `.${prefix}--overflow-menu:first-child, .${prefix}--overflow-menu-options:first-child`
-              )
-            ) {
-              closeMenuAndFocus();
+            const triggerEl = triggerRef.current;
+            if (typeof target.matches === 'function') {
+              if (
+                !menuBody.contains(target) &&
+                triggerEl &&
+                !target.matches(
+                  `.${prefix}--overflow-menu:first-child, .${prefix}--overflow-menu-options:first-child`
+                )
+              ) {
+                closeMenuAndFocus();
+              }
             }
-          }
-        },
-        !hasFocusin
-      );
-    };
+          },
+          !hasFocusin
+        );
+      },
+      [closeMenuAndFocus, prefix]
+    );
 
-    const getTarget = () => {
+    const getTarget = useCallback(() => {
       const triggerEl = triggerRef.current;
       if (triggerEl instanceof Element) {
         return (
@@ -500,7 +503,7 @@ export const OverflowMenu = forwardRef<HTMLButtonElement, OverflowMenuProps>(
         );
       }
       return document.body;
-    };
+    }, []);
 
     const menuBodyId = `overflow-menu-${instanceId.current}__menu-body`;
 
