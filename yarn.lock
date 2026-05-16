@@ -9085,7 +9085,7 @@ __metadata:
     globals: "npm:17.6.0"
     husky: "npm:^9.0.0"
     jest: "npm:^30.0.5"
-    jest-junit: "npm:^16.0.0"
+    jest-junit: "npm:^17.0.0"
     lerna: "npm:^9.0.1"
     lint-staged: "npm:^16.0.0"
     prettier: "npm:^3.3.3"
@@ -15128,15 +15128,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"jest-junit@npm:^16.0.0":
-  version: 16.0.0
-  resolution: "jest-junit@npm:16.0.0"
+"jest-junit@npm:^17.0.0":
+  version: 17.0.0
+  resolution: "jest-junit@npm:17.0.0"
   dependencies:
     mkdirp: "npm:^1.0.4"
     strip-ansi: "npm:^6.0.1"
-    uuid: "npm:^8.3.2"
+    uuid: "npm:^14.0.0"
     xml: "npm:^1.0.1"
-  checksum: 10/2c33ee8bfd0c83b9aa1f8ba5905084890d5f519d294ccc2829d778ac860d5adffffec75d930f44f1d498aa8370c783e0aa6a632d947fb7e81205f0e7b926669d
+  checksum: 10/707e96d591c310c9bdbbb8713a43ca57a87b6d226c856b1336ed6f4874a1921116130b7fcf41d99c234208305b2161976c03a95f4459c1e35ca2b0bdb489cd5d
   languageName: node
   linkType: hard
 
@@ -23626,6 +23626,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"uuid@npm:^14.0.0":
+  version: 14.0.0
+  resolution: "uuid@npm:14.0.0"
+  bin:
+    uuid: dist-node/bin/uuid
+  checksum: 10/8ee9b98f9650e25555515f7a28d3c3ae9364e72f7bb19b9e08b681bc135338beba5509b2830f6ae1cfaba4d45401da0d16d4d109b977097bc3d6ba0c5583341b
+  languageName: node
+  linkType: hard
+
 "uuid@npm:^3.3.2":
   version: 3.4.0
   resolution: "uuid@npm:3.4.0"
@@ -23635,7 +23644,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"uuid@npm:^8.3.0, uuid@npm:^8.3.2":
+"uuid@npm:^8.3.0":
   version: 8.3.2
   resolution: "uuid@npm:8.3.2"
   bin:
