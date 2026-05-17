@@ -16,7 +16,8 @@
 /// @group menu-button
 @mixin menu-button {
   .#{$prefix}--menu-button__container {
-    display: contents;
+    display: inline-flex;
+    inline-size: fit-content;
   }
 
   .#{$prefix}--menu-button__trigger:not(.#{$prefix}--btn--ghost) {
