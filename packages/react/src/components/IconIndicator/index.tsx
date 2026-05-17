@@ -10,6 +10,7 @@ import React from 'react';
 import cx from 'classnames';
 import { usePrefix } from '../../internal/usePrefix';
 import { DefinitionTooltip } from '../Tooltip';
+import { PopoverAlignment } from '../Popover';
 import {
   ErrorFilled,
   CheckmarkFilled,
@@ -59,6 +60,24 @@ export type IconIndicatorKind = (typeof IconIndicatorKinds)[number];
 
 export interface IconIndicatorProps {
   /**
+   * Specify how the tooltip should align with the icon in compact mode.
+   * Only applies when compact is true.
+   */
+  align?: PopoverAlignment;
+
+  /**
+   * Specify the aria-label for the tooltip trigger in compact mode.
+   * Only applies when compact is true.
+   */
+  ariaLabel?: string;
+
+  /**
+   * Will auto-align the tooltip in compact mode.
+   * Only applies when compact is true.
+   */
+  autoAlign?: boolean;
+
+  /**
    * Specify an optional className to add.
    */
   className?: string;
@@ -89,6 +108,9 @@ export interface IconIndicatorProps {
 export const IconIndicator = React.forwardRef(
   (
     {
+      align = 'right',
+      ariaLabel = 'Icon',
+      autoAlign = true,
       className: customClassName,
       compact = false,
       kind,
@@ -118,12 +140,12 @@ export const IconIndicator = React.forwardRef(
       return (
         <div className={classNames} ref={ref}>
           <DefinitionTooltip
-            align="right"
-            autoAlign
+            align={align}
+            aria-label={ariaLabel}
+            autoAlign={autoAlign}
             definition={label}
             openOnHover
-            triggerClassName={`${prefix}--icon-indicator--trigger`}
-            aria-label={`Icon`}>
+            triggerClassName={`${prefix}--icon-indicator--trigger`}>
             {iconElement}
           </DefinitionTooltip>
         </div>
@@ -140,6 +162,38 @@ export const IconIndicator = React.forwardRef(
 );
 
 IconIndicator.propTypes = {
+  /**
+   * Specify how the tooltip should align with the icon in compact mode.
+   * Only applies when compact is true.
+   */
+  align: PropTypes.oneOf([
+    'top',
+    'top-start',
+    'top-end',
+    'bottom',
+    'bottom-start',
+    'bottom-end',
+    'left',
+    'left-start',
+    'left-end',
+    'right',
+    'right-start',
+    'right-end',
+  ]),
+
+  /**
+   * Specify the aria-label for the tooltip trigger in compact mode.
+   * Only applies when compact is true.
+   */
+  ariaLabel: PropTypes.string,
+
+  /**
+   * Will auto-align the tooltip in compact mode. This prop is currently experimental
+   * and is subject to future changes.
+   * Only applies when compact is true.
+   */
+  autoAlign: PropTypes.bool,
+
   /**
    * Specify an optional className to add.
    */

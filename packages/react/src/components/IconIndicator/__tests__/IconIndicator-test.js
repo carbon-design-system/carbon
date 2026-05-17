@@ -112,6 +112,55 @@ describe('IconIndicator', () => {
       );
       expect(ref).toHaveBeenCalledWith(container.firstChild);
     });
+
+    it('should support custom ariaLabel prop in compact mode', () => {
+      render(
+        <IconIndicator
+          kind="succeeded"
+          label="Success"
+          compact
+          ariaLabel="Custom Icon Label"
+        />
+      );
+      const trigger = document.querySelector('.cds--icon-indicator--trigger');
+      expect(trigger).toHaveAttribute('aria-label', 'Custom Icon Label');
+    });
+
+    it('should use default ariaLabel when not provided in compact mode', () => {
+      render(<IconIndicator kind="succeeded" label="Success" compact />);
+      const trigger = document.querySelector('.cds--icon-indicator--trigger');
+      expect(trigger).toHaveAttribute('aria-label', 'Icon');
+    });
+
+    it('should accept align prop without errors', () => {
+      // This test verifies the prop is accepted by the component
+      // The actual alignment behavior is tested in DefinitionTooltip tests
+      expect(() => {
+        render(
+          <IconIndicator
+            kind="succeeded"
+            label="Success"
+            compact
+            align="bottom"
+          />
+        );
+      }).not.toThrow();
+    });
+
+    it('should accept autoAlign prop without errors', () => {
+      // This test verifies the prop is accepted by the component
+      // The actual autoAlign behavior is tested in DefinitionTooltip tests
+      expect(() => {
+        render(
+          <IconIndicator
+            kind="succeeded"
+            label="Success"
+            compact
+            autoAlign={false}
+          />
+        );
+      }).not.toThrow();
+    });
   });
 
   describe('icon kinds', () => {
