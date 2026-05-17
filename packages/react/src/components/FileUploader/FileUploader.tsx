@@ -14,10 +14,9 @@ import React, {
   useState,
   type HTMLAttributes,
 } from 'react';
-import Filename from './Filename';
 import FileUploaderButton from './FileUploaderButton';
+import FileUploaderItem from './FileUploaderItem';
 import { ButtonKinds } from '../Button/Button';
-import { keys, matches } from '../../internal/keyboard';
 import { usePrefix } from '../../internal/usePrefix';
 import { Text } from '../Text';
 import { useId } from '../../internal/useId';
@@ -151,6 +150,19 @@ export interface FileUploaderProps extends HTMLAttributes<HTMLSpanElement> {
    * sizes.
    */
   size?: 'sm' | 'small' | 'md' | 'field' | 'lg';
+
+  /**
+   * A function used to render a custom name for each file object.
+   */
+  renderFileName?: (props: { name: string | undefined }) => React.ReactNode;
+
+  /**
+   * A function used to render custom actions for each file object.
+   */
+  renderFileActions?: (props: {
+    name: string | undefined;
+    status: string;
+  }) => React.ReactNode;
 }
 
 export interface FileUploaderHandle {
@@ -185,6 +197,8 @@ const FileUploader = forwardRef<FileUploaderHandle, FileUploaderProps>(
       onClick,
       onDelete,
       size,
+      renderFileName,
+      renderFileActions,
       ...other
     },
     ref
@@ -202,7 +216,6 @@ const FileUploader = forwardRef<FileUploaderHandle, FileUploaderProps>(
     >([]);
 
     const uploaderButton = React.createRef<HTMLLabelElement>();
-    const nodes: HTMLElement[] = [];
 
     const createFileItem = useCallback(
       (file: File & { invalidFileType?: boolean }): FileItem => ({
@@ -357,10 +370,7 @@ const FileUploader = forwardRef<FileUploaderHandle, FileUploaderProps>(
               onChange(enhancedEvent);
             }
           } else {
-            const deletedFileName = legacyFileNames[index];
-            const filteredArray = legacyFileNames.filter(
-              (filename) => filename !== deletedFileName
-            );
+            const filteredArray = legacyFileNames.filter((_, i) => i !== index);
 
             setLegacyFileNames(filteredArray);
 
@@ -431,11 +441,6 @@ const FileUploader = forwardRef<FileUploaderHandle, FileUploaderProps>(
         [`${prefix}--label-description--disabled`]: disabled,
       });
 
-    const selectedFileClasses = classNames(`${prefix}--file__selected-file`, {
-      [`${prefix}--file__selected-file--md`]: size === 'field' || size === 'md',
-      [`${prefix}--file__selected-file--sm`]: size === 'small' || size === 'sm',
-    });
-
     const displayFiles = enhancedFileUploaderEnabled
       ? fileItems.map((item, index) => ({
           name: item.name,
@@ -476,42 +481,24 @@ const FileUploader = forwardRef<FileUploaderHandle, FileUploaderProps>(
           {displayFiles.length === 0
             ? null
             : displayFiles.map((file) => (
-                <span
+                <FileUploaderItem
                   key={file.key}
-                  className={selectedFileClasses}
-                  ref={(node) => {
-                    nodes[file.index] = node as HTMLSpanElement;
-                  }}
-                  {...other}>
-                  <Text
-                    as="p"
-                    className={`${prefix}--file-filename`}
-                    id={
-                      enhancedFileUploaderEnabled
-                        ? `${fileUploaderInstanceId}-file-${fileItems[file.index]?.uuid || file.index}`
-                        : `${fileUploaderInstanceId}-file-${file.index}`
-                    }>
-                    {file.name}
-                  </Text>
-                  <span className={`${prefix}--file__state-container`}>
-                    <Filename
-                      name={file.name}
-                      iconDescription={iconDescription}
-                      status={filenameStatus}
-                      onKeyDown={(evt) => {
-                        if (matches(evt, [keys.Enter, keys.Space])) {
-                          handleClick(evt, {
-                            index: file.index,
-                            filenameStatus,
-                          });
-                        }
-                      }}
-                      onClick={(evt) =>
-                        handleClick(evt, { index: file.index, filenameStatus })
-                      }
-                    />
-                  </span>
-                </span>
+                  className={classNames({
+                    [`${prefix}--file__selected-file--md`]:
+                      size === 'field' || size === 'md',
+                    [`${prefix}--file__selected-file--sm`]:
+                      size === 'small' || size === 'sm',
+                  })}
+                  name={file.name}
+                  iconDescription={iconDescription}
+                  status={filenameStatus}
+                  onDelete={(evt) =>
+                    handleClick(evt, { index: file.index, filenameStatus })
+                  }
+                  renderName={renderFileName}
+                  renderActions={renderFileActions}
+                  {...other}
+                />
               ))}
         </div>
       </div>
@@ -618,6 +605,16 @@ FileUploader.propTypes = {
    * sizes.
    */
   size: PropTypes.oneOf(['sm', 'small', 'md', 'field', 'lg']),
+
+  /**
+   * A function used to render a custom name for each file object.
+   */
+  renderFileName: PropTypes.func,
+
+  /**
+   * A function used to render custom actions for each file object.
+   */
+  renderFileActions: PropTypes.func,
 } as PropTypes.ValidationMap<FileUploaderProps>;
 
 export default FileUploader;

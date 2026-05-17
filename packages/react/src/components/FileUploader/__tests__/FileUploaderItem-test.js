@@ -5,10 +5,11 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { render, fireEvent } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 import { getByLabel, getByText } from '@carbon/test-utils/dom';
 import React from 'react';
 import { FileUploaderItem } from '../';
+import Link from '../../Link';
 import { keys } from '../../../internal/keyboard';
 
 const statuses = ['uploading', 'edit', 'complete'];
@@ -73,5 +74,37 @@ describe('FileUploaderItem', () => {
 
     fireEvent.keyDown(removeFile, keys.Space);
     expect(onDelete).not.toHaveBeenCalled();
+  });
+
+  it('should render custom name and actions when provided', () => {
+    render(
+      <FileUploaderItem
+        uuid="custom"
+        name="custom-file.png"
+        status="edit"
+        renderName={({ name }) => (
+          <Link data-testid="custom-name" href="#">
+            {name}
+          </Link>
+        )}
+        renderActions={({ name, status }) => (
+          <>
+            <button data-testid="custom-download" type="button">
+              Download
+            </button>
+            <button data-testid="custom-remove" type="button">
+              {`${status}-${name}`}
+            </button>
+          </>
+        )}
+      />
+    );
+
+    expect(screen.getByTestId('custom-name')).toHaveTextContent(
+      'custom-file.png'
+    );
+    expect(screen.getByTestId('custom-download')).toBeInTheDocument();
+    expect(screen.getByTestId('custom-remove')).toBeInTheDocument();
+    expect(screen.queryByLabelText(/custom-file\.png/)).not.toBeInTheDocument();
   });
 });

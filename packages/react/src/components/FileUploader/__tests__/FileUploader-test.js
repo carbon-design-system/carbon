@@ -5,11 +5,12 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { render, act, screen } from '@testing-library/react';
+import { act, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import FileUploader from '../';
 import { FeatureFlags } from '../../FeatureFlags';
+import Link from '../../Link';
 import React from 'react';
 
 const iconDescription = 'test description';
@@ -21,6 +22,11 @@ const requiredProps = {
 };
 
 describe('FileUploader', () => {
+  it('should have no aXe violations', async () => {
+    const { container } = render(<FileUploader {...requiredProps} />);
+    await expect(container).toHaveNoAxeViolations();
+  });
+
   it('should support a custom class name on the root element', () => {
     const { container } = render(
       <FileUploader {...requiredProps} className="test" />
@@ -183,6 +189,45 @@ describe('FileUploader', () => {
     // Both files should be in the document (onAddFiles cannot filter)
     expect(screen.getByText('a.txt')).toBeInTheDocument();
     expect(screen.getByText('b.txt')).toBeInTheDocument();
+  });
+
+  it('should render custom file name and actions when provided via render props', async () => {
+    const renderFileActions = () => (
+      <>
+        <button data-testid="custom-download-icon" type="button">
+          Download
+        </button>
+        <button data-testid="custom-remove-icon" type="button">
+          Remove
+        </button>
+      </>
+    );
+
+    const renderFileName = ({ name }) => (
+      <Link data-testid="custom-file-link" title={name} href="#">
+        {name}
+      </Link>
+    );
+
+    const { container } = render(
+      <FileUploader
+        {...requiredProps}
+        filenameStatus="edit"
+        renderFileName={renderFileName}
+        renderFileActions={renderFileActions}
+      />
+    );
+
+    const input = container.querySelector('input');
+    const file = new File(['test'], 'test.png', { type: 'image/png' });
+
+    await userEvent.upload(input, file);
+
+    expect(screen.getByTestId('custom-download-icon')).toBeInTheDocument();
+    expect(screen.getByTestId('custom-remove-icon')).toBeInTheDocument();
+    expect(screen.getByTestId('custom-file-link')).toHaveTextContent(
+      'test.png'
+    );
   });
 
   describe('Enhanced FileUploader (with feature flag)', () => {
