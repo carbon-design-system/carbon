@@ -90,15 +90,7 @@ const controls = {
 export const Default = {
   argTypes: controls,
   args: defaultArgs,
-  render: ({
-    align,
-    iconDescription,
-    autoalign,
-    compact,
-    label,
-    size,
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  }: any) => html`
+  render: ({ align, iconDescription, autoalign, compact, label, size }) => html`
     <div style="display: inline-flex; flex-flow: column; row-gap: .5rem;">
       <cds-icon-indicator
         kind="failed"

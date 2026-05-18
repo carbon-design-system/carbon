@@ -93,8 +93,7 @@ export const Default = {
     compact,
     label,
     textSize,
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  }: any) => html`
+  }) => html`
     <div style="display: inline-flex; flex-flow: column; row-gap: .5rem;">
       <cds-shape-indicator
         kind="failed"
