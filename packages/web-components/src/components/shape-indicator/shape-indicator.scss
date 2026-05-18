@@ -8,6 +8,7 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/config' as *;
 @use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/styles/scss/components/shape-indicator/index' as *;
+@use '@carbon/styles/scss/utilities/custom-property';
 @use '@carbon/styles/scss/utilities/visually-hidden' as *;
 
 :host(#{$prefix}-shape-indicator) {
@@ -64,7 +65,7 @@ $css--plex: true !default;
 
 :host(#{$prefix}-shape-indicator[compact]) {
   #{$prefix}-definition-tooltip {
-    --cds-definition-tooltip-padding-block: #{$spacing-01};
+    @include custom-property.declaration('tooltip-padding-block', $spacing-01);
   }
 
   #{$prefix}-definition-tooltip::part(definition-term) {
