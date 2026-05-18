@@ -316,10 +316,18 @@ class CDSComboBox extends CDSDropdown {
       return;
     }
 
-    if (this.value) {
-      this._revertInputToSelected(true);
-    } else if (this._filterInputNode.value) {
-      this._clearInputWithoutSelecting(true);
+    if (this.open) {
+      this._handleUserInitiatedToggle(false);
+    } else {
+      if (this.value) {
+        this._revertInputToSelected(true);
+      } else if (this._filterInputNode.value) {
+        this._clearInputWithoutSelecting(true);
+      }
+
+      if (this.value || this._filterInputNode.value) {
+        this._handleUserInitiatedClearInput();
+      }
     }
   }
 
@@ -352,14 +360,12 @@ class CDSComboBox extends CDSDropdown {
    * Handles user-initiated clearing the `<input>` for filtering.
    */
   protected _handleUserInitiatedClearInput() {
-    this._resetFilteredItems();
-    this._filterInputValue = '';
-    if (this._filterInputNode) {
-      this._filterInputNode.value = '';
-      this._filterInputNode.focus();
-    }
-
     this._handleUserInitiatedSelectItem();
+    if (this.value) {
+      this._revertInputToSelected(true);
+    } else {
+      this._clearInputWithoutSelecting(true);
+    }
     this.requestUpdate();
   }
 
@@ -476,7 +482,7 @@ class CDSComboBox extends CDSDropdown {
             id="selection-button"
             role="button"
             class="${prefix}--list-box__selection"
-            tabindex="0"
+            tabindex="-1"
             title="${clearSelectionLabel}">
             ${iconLoader(Close16, { 'aria-label': clearSelectionLabel })}
           </div>

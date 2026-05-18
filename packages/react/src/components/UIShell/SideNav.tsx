@@ -5,26 +5,23 @@
  * LICENSE file in the root directory of this source tree.
  */
 import React, {
-  createContext,
   forwardRef,
-  isValidElement,
   useEffect,
   useRef,
   type ComponentProps,
   type FocusEvent,
-  type JSX,
   type KeyboardEvent,
   type MouseEventHandler,
 } from 'react';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 import { AriaLabelPropType } from '../../prop-types/AriaPropTypes';
-import { CARBON_SIDENAV_ITEMS } from './_utils';
 import { usePrefix } from '../../internal/usePrefix';
 import { keys, match } from '../../internal/keyboard';
 import { useMergedRefs } from '../../internal/useMergedRefs';
 import { useWindowEvent } from '../../internal/useEvent';
 import { useDelayedState } from '../../internal/useDelayedState';
+import { SideNavContextProvider } from './SideNavContext';
 import { breakpoints } from '@carbon/layout';
 import { useMatchMedia } from '../../internal/useMatchMedia';
 // TODO: comment back in when footer is added for rails
@@ -50,14 +47,6 @@ export interface SideNavProps {
   onSideNavBlur?: () => void;
   enterDelayMs?: number;
 }
-
-interface SideNavContextData {
-  isRail?: boolean | undefined;
-}
-
-export const SideNavContext = createContext<SideNavContextData>(
-  {} as SideNavContextData
-);
 
 const frFn = forwardRef<HTMLElement, SideNavProps & ComponentProps<'nav'>>;
 
@@ -130,29 +119,10 @@ const SideNav = frFn((props, ref) => {
     [`${prefix}--side-nav__overlay-active`]: expanded || expandedViaHoverState,
   });
 
-  let childrenToRender = children;
-
-  // Pass the expansion state as a prop, so children can update themselves to match
-  childrenToRender = React.Children.map(children, (child) => {
-    // if we are controlled, check for if we have hovered over or the expanded state, else just use the expanded state (uncontrolled)
-    const currentExpansionState = controlled
-      ? expandedViaHoverState || expanded
-      : expanded;
-    if (isValidElement(child)) {
-      const childJsxElement = child as JSX.Element;
-      // avoid spreading `isSideNavExpanded` to non-Carbon UI Shell children
-      return React.cloneElement(childJsxElement, {
-        ...(CARBON_SIDENAV_ITEMS.includes(
-          childJsxElement.type?.displayName ?? childJsxElement.type?.name
-        )
-          ? {
-              isSideNavExpanded: currentExpansionState,
-            }
-          : {}),
-      });
-    }
-    return child;
-  });
+  // In controlled mode, rail hover can temporarily expand SideNav.
+  const currentExpansionState = controlled
+    ? expandedViaHoverState || expanded
+    : expanded;
 
   const eventHandlers: Partial<
     Pick<
@@ -245,7 +215,9 @@ const SideNav = frFn((props, ref) => {
   }, [inertEnabled]);
 
   return (
-    <SideNavContext.Provider value={{ isRail }}>
+    <SideNavContextProvider
+      isRail={isRail}
+      isSideNavExpanded={currentExpansionState}>
       {isFixedNav ? null : (
         // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
         <div className={overlayClassName} onClick={onOverlayClick} />
@@ -257,9 +229,9 @@ const SideNav = frFn((props, ref) => {
         {...accessibilityLabel}
         {...eventHandlers}
         {...other}>
-        {childrenToRender}
+        {children}
       </nav>
-    </SideNavContext.Provider>
+    </SideNavContextProvider>
   );
 });
 
@@ -360,3 +332,5 @@ SideNav.propTypes = {
 };
 
 export default SideNav;
+
+export { SideNavContext } from './SideNavContext';

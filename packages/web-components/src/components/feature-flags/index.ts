@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2025, 2025
+ * Copyright IBM Corp. 2025, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -36,8 +36,10 @@ import { LitElement, html } from 'lit';
  *
  * @element feature-flags
  */
-
 type FeatureFlags = Record<string, boolean>;
+
+const hasOwn = <T extends object>(obj: T, key: PropertyKey): key is keyof T =>
+  Object.prototype.hasOwnProperty.call(obj, key);
 
 @customElement('feature-flags')
 class FeatureFlagsElement extends LitElement {
@@ -47,17 +49,17 @@ class FeatureFlagsElement extends LitElement {
   /**
    * Mapping of feature flag attributes to their related component names.
    */
-  private static readonly flagComponentMap: Record<string, string> = {
-    'enable-v12-tile-default-icons': 'CDS-TILE',
+  private static readonly flagComponentMap = {
+    'enable-v12-tile-default-icons': 'CDS-CLICKABLE-TILE',
     'enable-v12-tile-radio-icons': 'CDS-TILE',
     'enable-v12-overflowmenu': 'CDS-OVERFLOW-MENU',
     'enable-treeview-controllable': 'CDS-TREEVIEW',
     'enable-experimental-focus-wrap-without-sentinels': 'CDS-FOCUS-WRAP',
     'enable-focus-wrap-without-sentinels': 'CDS-FOCUS-WRAP',
-    'enable-dialog-element': 'CDS-DIALOG',
+    'enable-dialog-element': 'CDS-MODAL',
     'enable-v12-dynamic-floating-styles': 'CDS-FLOATING',
     'enable-v12-toggle-reduced-label-spacing': 'CDS-TOGGLE',
-  };
+  } as const;
 
   static get observedAttributes() {
     return Object.keys(FeatureFlagsElement.flagComponentMap);
@@ -78,12 +80,13 @@ class FeatureFlagsElement extends LitElement {
     _oldVal: string | null,
     newVal: string | null
   ) {
-    const value = newVal === 'true';
+    const value = newVal !== null && newVal !== 'false';
     this.flags[name] = value;
 
     // Set feature flag to top component level
-    const relatedComponent =
-      FeatureFlagsElement.flagComponentMap[name] || 'unknown';
+    const relatedComponent = hasOwn(FeatureFlagsElement.flagComponentMap, name)
+      ? FeatureFlagsElement.flagComponentMap[name]
+      : 'unknown';
     if (this.firstElementChild?.tagName === relatedComponent) {
       this.firstElementChild.setAttribute(name, '');
     }
@@ -91,7 +94,7 @@ class FeatureFlagsElement extends LitElement {
     this.updateScope();
   }
 
-  private getParentScope(): FeatureFlagsElement | null {
+  private getParentScope() {
     let parent = this.parentNode;
     while (parent) {
       if (parent instanceof FeatureFlagsElement) {
@@ -115,7 +118,10 @@ class FeatureFlagsElement extends LitElement {
     return html` <slot></slot> `;
   }
 
-  public isFeatureFlagEnabled(flag: string): boolean {
+  public isFeatureFlagEnabled(flag: string) {
+    if (Object.prototype.hasOwnProperty.call(this.flags, flag)) {
+      return this.flags[flag];
+    }
     return this.scope.enabled(flag);
   }
 
@@ -132,8 +138,12 @@ export default FeatureFlagsElement;
 export function findParentFeatureFlags(
   el: HTMLElement
 ): FeatureFlagsElement | null {
-  let parent = el.parentNode;
+  let parent: Node | null = el.parentNode;
   while (parent) {
+    if (parent instanceof ShadowRoot) {
+      parent = parent.host;
+      continue;
+    }
     if (parent instanceof FeatureFlagsElement) {
       return parent;
     }

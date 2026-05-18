@@ -3,6 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "license": "Apache-2.0",
+  "type": "module",
   "main": "index.js",
   "repository": {
     "type": "git",
@@ -19,6 +20,6 @@
   ],
   "dependencies": {
     "@actions/core": "^1.11.1",
-    "@actions/github": "6.0.1"
+    "@actions/github": "9.1.1"
   }
 }

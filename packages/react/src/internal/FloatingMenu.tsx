@@ -7,7 +7,6 @@
 
 import React, {
   cloneElement,
-  JSXElementConstructor,
   useCallback,
   useContext,
   useEffect,
@@ -59,6 +58,11 @@ interface FloatingPosition {
   top: number;
 }
 
+type FloatingMenuChildProps = {
+  ref?: (node: HTMLElement | null) => void;
+  style?: CSSProperties;
+};
+
 export type MenuDirection =
   | typeof DIRECTION_LEFT
   | typeof DIRECTION_TOP
@@ -78,7 +82,7 @@ interface FloatingMenuProps {
   /**
    * Contents of the floating menu.
    */
-  children: ReactElement;
+  children: ReactElement<FloatingMenuChildProps>;
 
   /**
    * Whether the menu alignment should be flipped.
@@ -440,13 +444,7 @@ export const FloatingMenu = ({
           visibility: 'hidden',
           top: '0px',
         };
-    const child = children as ReactElement<
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
-      any,
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
-      string | JSXElementConstructor<any>
-    >;
-    return cloneElement(child, {
+    return cloneElement(children, {
       ref: handleMenuRef,
       style: {
         ...styles,

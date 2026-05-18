@@ -10,14 +10,12 @@
 const t = require('@babel/types');
 const { default: generate } = require('@babel/generator');
 const { default: template } = require('@babel/template');
-const { babel } = require('@rollup/plugin-babel');
 const fs = require('fs-extra');
 const path = require('path');
-const { rollup } = require('rollup');
 const ts = require('typescript');
 const virtual = require('../plugins/virtual');
-const { babelConfig } = require('./next/babel');
 const { svgToJSX, jsToAST } = require('./next/convert');
+const { annotateAsPure } = require('./next/pure');
 const templates = require('./next/templates');
 const { writeTsDefinitions } = require('./next/typescript');
 
@@ -28,6 +26,7 @@ const { writeTsDefinitions } = require('./next/typescript');
 // Each CommonJS module includes an icon component. For more information on the
 // structure of each module, checkout `createIconEntrypoint`
 async function builder(metadata, { output }) {
+  const { build: tsdown } = await import('tsdown');
   const modules = metadata.icons.map((icon) => {
     const { moduleInfo } = icon;
     const localPreamble = [];
@@ -81,8 +80,8 @@ async function builder(metadata, { output }) {
     };
   });
 
-  // Rollup allows us to define multiple "entrypoints" instead of only one when
-  // creating a bundle. This allows us to map different input paths in the
+  // The bundler allows us to define multiple entrypoints instead of only one
+  // when creating a bundle. This allows us to map different input paths in the
   // `input` object to files that we're generating for each icon component in
   // the `files` object
   const files = {
@@ -164,20 +163,7 @@ async function builder(metadata, { output }) {
   `,
   };
 
-  const bundle = await rollup({
-    input,
-    external: ['@carbon/icon-helpers', 'react', 'prop-types'],
-    plugins: [
-      // We use a "virtual" plugin to pass all of our components that we
-      // created from our metadata to rollup instead of rollup trying to read
-      // these files from disk
-      virtual({
-        ...defaultVirtualOptions,
-        ...files,
-      }),
-      babel(babelConfig),
-    ],
-  });
+  const external = ['@carbon/icon-helpers', 'react', 'prop-types'];
   const targets = [
     {
       directory: path.join(output, 'es'),
@@ -192,12 +178,46 @@ async function builder(metadata, { output }) {
   ];
 
   for (const target of targets) {
-    await bundle.write({
-      dir: target.directory,
-      format: target.format,
-      entryFileNames: '[name]',
-      banner: templates.banner,
-      exports: 'auto',
+    await tsdown({
+      clean: false,
+      dts: false,
+      entry: input,
+      external,
+      failOnWarn: false,
+      format: target.format === 'commonjs' ? 'cjs' : 'esm',
+      logLevel: 'warn',
+      inputOptions(inputOptions) {
+        const options = { ...inputOptions };
+        options.plugins = [
+          ...(options.plugins || []),
+          // We use a "virtual" plugin to pass all generated components in-memory.
+          virtual({
+            ...defaultVirtualOptions,
+            ...files,
+          }),
+        ];
+        return options;
+      },
+      loader: {
+        '.js': 'jsx',
+        '.ts': 'ts',
+        '.tsx': 'tsx',
+      },
+      outDir: target.directory,
+      outputOptions(options) {
+        return {
+          ...options,
+          banner: templates.banner,
+          // use .js extension for both entries and chunks so that
+          // CJS chunks (e.g. rolldown runtime helpers) don't get a
+          // .cjs extension which breaks Jest moduleFileExtensions
+          chunkFileNames: '[name]-[hash].js',
+          entryFileNames: '[name]',
+          exports: 'auto',
+        };
+      },
+      report: false,
+      target: 'es2022',
     });
 
     // write TypeScript definition files
@@ -353,7 +373,9 @@ function createIconSource(moduleName, sizes, preamble = []) {
     ].filter(Boolean),
   });
 
-  return source;
+  // Mark `forwardRef` calls as pure so the bundler can drop unused icon
+  // exports.
+  return annotateAsPure(source);
 }
 
 /**

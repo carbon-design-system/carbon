@@ -82,6 +82,21 @@ describe('RadioButtonGroup', () => {
     expect(screen.getByText('0')).toBeInTheDocument();
   });
 
+  it('should not render helperText when helperText is an empty string', () => {
+    const { container } = render(
+      <RadioButtonGroup legendText="test" helperText="">
+        <RadioButton labelText="test-1" value="test-1" />
+      </RadioButtonGroup>
+    );
+
+    const fieldset = container.querySelector('fieldset');
+
+    expect(
+      container.querySelector(`.${prefix}--form__helper-text`)
+    ).not.toBeInTheDocument();
+    expect(fieldset).not.toHaveAttribute('aria-describedby');
+  });
+
   it('should ignore null children', () => {
     render(
       <RadioButtonGroup defaultSelected="test-1" name="test" legendText="test">

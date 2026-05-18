@@ -29,6 +29,7 @@ import {
   autoUpdate,
   offset,
   FloatingFocusManager,
+  flip,
 } from '@floating-ui/react';
 import { CaretRight, CaretLeft, Checkmark } from '@carbon/icons-react';
 import { keys, match } from '../../internal/keyboard';
@@ -117,10 +118,45 @@ export const MenuItem = forwardRef<HTMLLIElement, MenuItemProps>(
       context: floatingContext,
     } = useFloating({
       open: submenuOpen,
-      onOpenChange: setSubmenuOpen,
+      onOpenChange: (open, event) => {
+        if (open) {
+          setSubmenuOpen(true);
+        } else {
+          const relatedTarget =
+            event && 'relatedTarget' in event ? event.relatedTarget : null;
+
+          // Do not close submenu if hovering back to its parent
+          if (
+            relatedTarget instanceof Node &&
+            menuItem.current?.contains(relatedTarget)
+          ) {
+            return;
+          }
+
+          setSubmenuOpen(false);
+
+          // do not focus parent menu if moving to another submenu,
+          // focus should instead move to that submenu
+          const movingToSubmenu =
+            relatedTarget instanceof HTMLElement &&
+            relatedTarget
+              .closest('[role="menuitem"]')
+              ?.querySelector('[role="menu"]');
+
+          if (!movingToSubmenu) {
+            menuItem.current?.focus();
+          }
+        }
+      },
       placement: rtl ? 'left-start' : 'right-start',
       whileElementsMounted: autoUpdate,
-      middleware: [offset({ mainAxis: -6, crossAxis: -6 })],
+      middleware: [
+        flip(),
+        offset(({ placement }) => ({
+          mainAxis: placement.startsWith('left') ? 10 : -6,
+          crossAxis: -6,
+        })),
+      ],
       strategy: 'fixed',
     });
     const { getReferenceProps, getFloatingProps } = useInteractions([
@@ -189,6 +225,12 @@ export const MenuItem = forwardRef<HTMLLIElement, MenuItemProps>(
 
     const keyboardClickEvent = (e: KeyboardEvent) =>
       match(e, keys.Enter) || match(e, keys.Space);
+
+    function handleMouseDown(e: MouseEvent<HTMLLIElement>) {
+      if (isDisabled) {
+        e.preventDefault();
+      }
+    }
 
     function handleKeyDown(e: KeyboardEvent<HTMLLIElement>) {
       if (hasChildren && match(e, keys.ArrowRight)) {
@@ -268,6 +310,7 @@ export const MenuItem = forwardRef<HTMLLIElement, MenuItemProps>(
           aria-disabled={isDisabled ?? undefined}
           aria-haspopup={hasChildren ?? undefined}
           aria-expanded={hasChildren ? submenuOpen : undefined}
+          onMouseDown={handleMouseDown}
           onClick={handleClick}
           onKeyDown={handleKeyDown}
           onKeyUp={handleKeyUp}
@@ -557,8 +600,8 @@ export const MenuItemRadioGroup = forwardRef(function MenuItemRadioGroup<Item>(
     onChange,
     defaultValue: defaultSelectedItem ?? ({} as Item),
   });
-  //eslint-disable-next-line  @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20452
-  function handleClick(item, e) {
+
+  function handleClick(item) {
     setSelection(item);
   }
 
@@ -580,8 +623,8 @@ export const MenuItemRadioGroup = forwardRef(function MenuItemRadioGroup<Item>(
             label={itemToString(item)}
             role="menuitemradio"
             aria-checked={item === selection}
-            onClick={(e) => {
-              handleClick(item, e);
+            onClick={() => {
+              handleClick(item);
             }}
           />
         ))}

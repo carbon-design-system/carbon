@@ -54,6 +54,7 @@ describe('@carbon/styles/scss/fonts', () => {
           weights: new Set(),
           styles: new Set(),
           src: new Set(),
+          unicodeRange: new Set(),
         });
       }
 
@@ -70,6 +71,10 @@ describe('@carbon/styles/scss/fonts', () => {
 
         if (declaration.property === 'src') {
           entry.src.add(declaration.value);
+        }
+
+        if (declaration.property === 'unicode-range') {
+          entry.unicodeRange.add(declaration.value);
         }
       }
     }

@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2019, 2024
+ * Copyright IBM Corp. 2019, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -45,11 +45,6 @@ const controls = {
 export const Default = {
   args: defaultArgs,
   argTypes: controls,
-  parameters: {
-    percy: {
-      skip: true,
-    },
-  },
   render: ({ align, condensed, narrow, fullWidth }) =>
     html`<cds-grid
         align=${align}
@@ -68,11 +63,6 @@ export const Default = {
 };
 
 export const Condensed = {
-  parameters: {
-    percy: {
-      skip: true,
-    },
-  },
   render: () =>
     html`<cds-grid class="sb-grid" condensed>
         <cds-column class="sb-column" sm="4"></cds-column>
@@ -86,11 +76,6 @@ export const Condensed = {
 };
 
 export const FullWidth = {
-  parameters: {
-    percy: {
-      skip: true,
-    },
-  },
   render: () =>
     html`<cds-grid class="sb-grid" full-width>
         <cds-column class="sb-column" sm="4"></cds-column>
@@ -103,12 +88,46 @@ export const FullWidth = {
       </style>`,
 };
 
-export const MixedGutterModes = {
+export const WithRowGap = {
+  args: {
+    ...defaultArgs,
+    withRowGap: true,
+  },
+  argTypes: {
+    ...controls,
+    withRowGap: {
+      control: 'boolean',
+      description:
+        'Add a row gap to the grid that matches the current gutter size',
+    },
+  },
   parameters: {
     percy: {
       skip: true,
     },
   },
+  render: ({ condensed, narrow, fullWidth, withRowGap }) =>
+    html`<cds-grid
+        class="sb-grid"
+        ?condensed=${condensed}
+        ?narrow=${narrow}
+        ?full-width=${fullWidth}
+        ?with-row-gap=${withRowGap}>
+        <cds-column class="sb-column" sm="4"></cds-column>
+        <cds-column class="sb-column" sm="4"></cds-column>
+        <cds-column class="sb-column" sm="4"></cds-column>
+        <cds-column class="sb-column" sm="4"></cds-column>
+        <cds-column class="sb-column" sm="4"></cds-column>
+        <cds-column class="sb-column" sm="4"></cds-column>
+        <cds-column class="sb-column" sm="4"></cds-column>
+        <cds-column class="sb-column" sm="4"></cds-column>
+      </cds-grid>
+      <style>
+        ${styles}
+      </style>`,
+};
+
+export const MixedGutterModes = {
   render: () =>
     html`<cds-grid class="sb-grid">
         <cds-column class="sb-column" span="8">
@@ -177,11 +196,6 @@ export const MixedGutterModes = {
 };
 
 export const Narrow = {
-  parameters: {
-    percy: {
-      skip: true,
-    },
-  },
   render: () =>
     html`<cds-grid class="sb-grid" narrow>
         <cds-column class="sb-column" sm="4"></cds-column>
@@ -195,11 +209,6 @@ export const Narrow = {
 };
 
 export const GridStartEnd = {
-  parameters: {
-    percy: {
-      skip: true,
-    },
-  },
   render: () =>
     html`<cds-grid class="sb-grid">
         <cds-column
@@ -230,11 +239,6 @@ export const GridStartEnd = {
 };
 
 export const Offset = {
-  parameters: {
-    percy: {
-      skip: true,
-    },
-  },
   render: () =>
     html`<cds-grid class="sb-grid">
         <cds-column
@@ -269,11 +273,6 @@ export const Offset = {
 };
 
 export const Responsive = {
-  parameters: {
-    percy: {
-      skip: true,
-    },
-  },
   render: () =>
     html`<cds-grid class="sb-grid">
         <cds-column class="sb-column" sm="2" md="4" lg="6">
@@ -378,12 +377,63 @@ export const Subgrid = {
       </style>`,
 };
 
+export const SubgridWithRowGap = {
+  args: {
+    ...defaultArgs,
+    withRowGap: true,
+  },
+  argTypes: {
+    ...controls,
+    withRowGap: {
+      control: 'boolean',
+      description:
+        'Add a row gap to the grid that matches the current gutter size',
+    },
+  },
+  render: ({ condensed, narrow, fullWidth, withRowGap }) =>
+    html`<cds-grid
+        class="sb-grid"
+        ?condensed=${condensed}
+        ?narrow=${narrow}
+        ?full-width=${fullWidth}
+        ?with-row-gap=${withRowGap}>
+        <cds-column class="sb-column" sm="2" md="4" lg="16">
+          <cds-grid class="sb-sub-grid" with-row-gap>
+            <!-- Nested subgrid with row gap  -->
+            <cds-column class="sb-column" sm="4" md="4" lg="8"></cds-column>
+            <cds-column class="sb-column" sm="4" md="4" lg="8"></cds-column>
+            <cds-column class="sb-column" sm="4" md="4" lg="8"></cds-column>
+            <cds-column class="sb-column" sm="4" md="4" lg="8"></cds-column>
+          </cds-grid>
+        </cds-column>
+        <cds-column class="sb-column" sm="2" md="4" lg="16">
+          <cds-grid class="sb-sub-grid" with-row-gap narrow>
+            <!-- Nested subgrid with row gap  -->
+            <cds-column class="sb-column" sm="4" md="4" lg="8"></cds-column>
+            <cds-column class="sb-column" sm="4" md="4" lg="8"></cds-column>
+            <cds-column class="sb-column" sm="4" md="4" lg="8"></cds-column>
+            <cds-column class="sb-column" sm="4" md="4" lg="8"></cds-column>
+          </cds-grid>
+        </cds-column>
+        <cds-column class="sb-column" sm="2" md="4" lg="16">
+          <cds-grid class="sb-sub-grid" with-row-gap condensed>
+            <!-- Nested subgrid with row gap  -->
+            <cds-column class="sb-column" sm="4" md="4" lg="8"></cds-column>
+            <cds-column class="sb-column" sm="4" md="4" lg="8"></cds-column>
+            <cds-column class="sb-column" sm="4" md="4" lg="8"></cds-column>
+            <cds-column class="sb-column" sm="4" md="4" lg="8"></cds-column>
+          </cds-grid>
+        </cds-column>
+      </cds-grid>
+      <style>
+        ${styles}
+      </style>`,
+};
+
 const meta = {
   title: 'Elements/Grid',
   decorators: [
-    (story, { name }) => {
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20452
-      const width = !name.toLowerCase().includes('layer') ? `width:300px` : ``;
+    (story) => {
       return html` <div class="sb-css-grid-container">${story()}</div> `;
     },
   ],

@@ -12,19 +12,20 @@ import '../form/form-item';
 import './time-picker-select';
 import '../select/select-item';
 import './time-picker';
+import { withLayers } from '../../../.storybook/decorators/with-layers';
 
 const args = {
   disabled: false,
   hideLabel: false,
   invalid: false,
-  invalidText: 'Invalid time format',
+  invalidText: 'Error message goes here',
+  warningText: 'Warning message goes here',
   labelText: 'Select a time',
   placeholder: 'hh:mm',
   readOnly: false,
   size: 'md',
   value: '',
   warning: false,
-  warningText: 'This is a warning message.',
   maxLength: 5,
   type: 'text',
 };
@@ -143,32 +144,34 @@ export const Default = {
 };
 
 export const WithLayer = {
+  decorators: [withLayers],
+  parameters: {
+    layout: 'fullscreen',
+  },
   render: () => html`
-    <sb-template-layers>
-      <cds-time-picker
-        id="time-picker"
-        labelText="Select a time"
-        placeholder="hh:mm">
-        <cds-time-picker-select
-          id="time-picker-select-1"
-          default-value="AM"
-          aria-label="Select AM/PM">
-          <cds-select-item value="AM">AM</cds-select-item>
-          <cds-select-item value="PM" selected>PM</cds-select-item>
-        </cds-time-picker-select>
-        <cds-time-picker-select
-          id="time-picker-select-2"
-          aria-label="Select timezone"
-          default-value="Time zone 1">
-          <cds-select-item value="Time zone 1" text="Time zone 1"
-            >Time zone 1</cds-select-item
-          >
-          <cds-select-item value="Time zone 2" text="Time zone 2" selected
-            >Time zone 2</cds-select-item
-          >
-        </cds-time-picker-select>
-      </cds-time-picker>
-    </sb-template-layers>
+    <cds-time-picker
+      id="time-picker"
+      labelText="Select a time"
+      placeholder="hh:mm">
+      <cds-time-picker-select
+        id="time-picker-select-1"
+        default-value="AM"
+        aria-label="Select AM/PM">
+        <cds-select-item value="AM">AM</cds-select-item>
+        <cds-select-item value="PM" selected>PM</cds-select-item>
+      </cds-time-picker-select>
+      <cds-time-picker-select
+        id="time-picker-select-2"
+        aria-label="Select timezone"
+        default-value="Time zone 1">
+        <cds-select-item value="Time zone 1" text="Time zone 1"
+          >Time zone 1</cds-select-item
+        >
+        <cds-select-item value="Time zone 2" text="Time zone 2" selected
+          >Time zone 2</cds-select-item
+        >
+      </cds-time-picker-select>
+    </cds-time-picker>
   `,
 };
 

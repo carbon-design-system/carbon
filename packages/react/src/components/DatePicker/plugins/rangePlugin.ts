@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2019, 2025
+ * Copyright IBM Corp. 2019, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -9,6 +9,7 @@ import baseRangePlugin, {
   type Config,
 } from 'flatpickr/dist/plugins/rangePlugin';
 import { Instance } from 'flatpickr/dist/types/instance';
+import { isEmptyDateValue } from '../utils';
 
 /**
  * @param config Plugin configuration.
@@ -37,7 +38,7 @@ export const rangePlugin = (config: Config = {}) => {
 
           [inputFrom, inputToElement].forEach((input, i) => {
             if (input && input instanceof HTMLInputElement) {
-              input.value = !dates[i]
+              input.value = isEmptyDateValue(dates[i])
                 ? ''
                 : formatDate(new Date(dates[i]), fp.config.dateFormat);
             }

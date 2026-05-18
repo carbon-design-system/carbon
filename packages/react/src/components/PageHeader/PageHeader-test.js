@@ -4,6 +4,10 @@
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
+/**
+ * @deprecated PageHeader has moved to Carbon for IBM Products.
+ * See https://github.com/carbon-design-system/carbon/issues/21926
+ */
 
 import { render, screen, act, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
@@ -14,6 +18,8 @@ import {
   PageHeaderBreadcrumbBar as PageHeaderBreadcrumbBarDirect,
   PageHeaderContent as PageHeaderContentDirect,
   PageHeaderContentPageActions as PageHeaderContentPageActionsDirect,
+  PageHeaderContentText as PageHeaderContentTextDirect,
+  PageHeaderHeroImage as PageHeaderHeroImageDirect,
   PageHeaderTabBar as PageHeaderTabBarDirect,
 } from '../PageHeader';
 import * as hooks from '../../internal/useMatchMedia';
@@ -39,12 +45,67 @@ jest.mock('@carbon/utilities', () => ({
 }));
 
 describe('PageHeader', () => {
+  let consoleWarn;
+
   beforeEach(() => {
     mockUseOverflowItems.mockReset();
     mockUseOverflowItems.mockReturnValue({
       visibleItems: [],
       hiddenItems: [],
       itemRefHandler: jest.fn(),
+    });
+    consoleWarn = jest.spyOn(console, 'warn').mockImplementation(() => {});
+  });
+
+  afterEach(() => {
+    consoleWarn.mockRestore();
+  });
+
+  describe('deprecation warnings', () => {
+    it('should warn once for each deprecated surface', () => {
+      window.matchMedia = jest.fn().mockImplementation(() => ({
+        matches: false,
+        addEventListener: jest.fn(),
+        removeEventListener: jest.fn(),
+      }));
+
+      render(
+        <>
+          <PageHeaderDirect />
+          <PageHeaderBreadcrumbBarDirect />
+          <PageHeaderContentDirect title="title" />
+          <PageHeaderContentPageActionsDirect
+            actions={[]}
+            menuButtonLabel="Actions"
+          />
+          <PageHeaderContentTextDirect subtitle="subtitle" />
+          <PageHeaderHeroImageDirect />
+          <PageHeaderTabBarDirect />
+        </>
+      );
+
+      expect(consoleWarn).toHaveBeenCalledTimes(7);
+      expect(consoleWarn).toHaveBeenCalledWith(
+        'Warning: The `PageHeader` component in `@carbon/react` has been deprecated and moved to `@carbon/ibm-products`. See https://github.com/carbon-design-system/carbon/issues/21926'
+      );
+      expect(consoleWarn).toHaveBeenCalledWith(
+        'Warning: The `PageHeaderBreadcrumbBar` component in `@carbon/react` has been deprecated and moved to `@carbon/ibm-products`. See https://github.com/carbon-design-system/carbon/issues/21926'
+      );
+      expect(consoleWarn).toHaveBeenCalledWith(
+        'Warning: The `PageHeaderContent` component in `@carbon/react` has been deprecated and moved to `@carbon/ibm-products`. See https://github.com/carbon-design-system/carbon/issues/21926'
+      );
+      expect(consoleWarn).toHaveBeenCalledWith(
+        'Warning: The `PageHeaderContentPageActions` component in `@carbon/react` has been deprecated and moved to `@carbon/ibm-products`. See https://github.com/carbon-design-system/carbon/issues/21926'
+      );
+      expect(consoleWarn).toHaveBeenCalledWith(
+        'Warning: The `PageHeaderContentText` component in `@carbon/react` has been deprecated and moved to `@carbon/ibm-products`. See https://github.com/carbon-design-system/carbon/issues/21926'
+      );
+      expect(consoleWarn).toHaveBeenCalledWith(
+        'Warning: The `PageHeaderHeroImage` component in `@carbon/react` has been deprecated and moved to `@carbon/ibm-products`. See https://github.com/carbon-design-system/carbon/issues/21926'
+      );
+      expect(consoleWarn).toHaveBeenCalledWith(
+        'Warning: The `PageHeaderTabBar` component in `@carbon/react` has been deprecated and moved to `@carbon/ibm-products`. See https://github.com/carbon-design-system/carbon/issues/21926'
+      );
     });
   });
 
@@ -483,6 +544,27 @@ describe('PageHeader', () => {
     it('should not render tags when not provided', () => {
       render(<PageHeader.TabBar />);
 
+      expect(screen.queryByText('Tag 1')).not.toBeInTheDocument();
+      expect(screen.queryByText('Tag 2')).not.toBeInTheDocument();
+      expect(screen.queryByText('Tag 3')).not.toBeInTheDocument();
+    });
+
+    it('should support rerendering from no tags to tags and back', () => {
+      mockUseOverflowItems.mockImplementation((items) => ({
+        visibleItems: items,
+        hiddenItems: [],
+        itemRefHandler: jest.fn(),
+      }));
+
+      const { rerender } = render(<PageHeader.TabBar />);
+      expect(screen.queryByText('Tag 1')).not.toBeInTheDocument();
+
+      rerender(<PageHeader.TabBar tags={mockTags} />);
+      expect(screen.getByText('Tag 1')).toBeInTheDocument();
+      expect(screen.getByText('Tag 2')).toBeInTheDocument();
+      expect(screen.getByText('Tag 3')).toBeInTheDocument();
+
+      rerender(<PageHeader.TabBar />);
       expect(screen.queryByText('Tag 1')).not.toBeInTheDocument();
       expect(screen.queryByText('Tag 2')).not.toBeInTheDocument();
       expect(screen.queryByText('Tag 3')).not.toBeInTheDocument();

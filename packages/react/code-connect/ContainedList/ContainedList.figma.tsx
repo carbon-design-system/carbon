@@ -9,7 +9,6 @@
 import React from 'react';
 import { ContainedList } from '@carbon/react';
 import figma from '@figma/code-connect';
-// eslint-disable-next-line @typescript-eslint/no-unused-vars -- https://github.com/carbon-design-system/carbon/issues/20452
 import { title } from 'process';
 
 const sharedContainedListProps = {

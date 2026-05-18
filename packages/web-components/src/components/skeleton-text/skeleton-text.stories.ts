@@ -37,11 +37,6 @@ const argTypes = {
 export const Default = {
   args,
   argTypes,
-  parameters: {
-    percy: {
-      skip: true,
-    },
-  },
   render: (args) => {
     const { heading, paragraph, lineCount, width } = args ?? {};
     return html`
@@ -57,11 +52,6 @@ export const Default = {
 
 const meta = {
   title: 'Components/Skeleton/Skeleton Text',
-  parameters: {
-    percy: {
-      skip: true,
-    },
-  },
 };
 
 export default meta;

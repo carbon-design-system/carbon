@@ -1,0 +1,8 @@
+{
+  "extends": "typescript-config-carbon/tsconfig.base.json",
+  "compilerOptions": {
+    "declarationDir": "./types"
+  },
+  "include": ["src/**/*"],
+  "exclude": ["src/**/*-test.js", "src/**/__tests__/**"]
+}

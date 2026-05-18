@@ -1286,6 +1286,14 @@ test('metadata', () => {
           "type": "color",
         },
         {
+          "name": "syntax-inserted",
+          "type": "color",
+        },
+        {
+          "name": "syntax-deleted",
+          "type": "color",
+        },
+        {
           "name": "ai-popover-background",
           "type": "color",
         },

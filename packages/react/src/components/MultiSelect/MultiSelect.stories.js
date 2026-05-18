@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2025
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -175,15 +175,15 @@ const sharedArgs = {
   size: 'md',
   autoAlign: false,
   type: 'default',
-  titleText: 'This is a MultiSelect Title',
+  titleText: 'Label',
   disabled: false,
   hideLabel: false,
   invalid: false,
   warn: false,
   open: false,
   helperText: 'This is helper text',
-  warnText: 'whoopsie!',
-  invalidText: 'whoopsie!',
+  warnText: 'Warning message goes here',
+  invalidText: 'Error message goes here',
   label: 'This is a label',
   clearSelectionDescription: 'Total items selected: ',
   useTitleInItem: false,
@@ -191,12 +191,6 @@ const sharedArgs = {
 };
 
 const filterableArgTypes = {
-  label: {
-    control: false,
-    table: {
-      disable: true,
-    },
-  },
   placeholder: {
     control: {
       type: 'text',
@@ -354,6 +348,8 @@ export const Filterable = (args) => {
   );
 };
 
+Filterable.args = { ...sharedArgs };
+
 export const FilterableWithSelectAll = (args) => {
   return (
     <div
@@ -373,8 +369,15 @@ export const FilterableWithSelectAll = (args) => {
   );
 };
 
+FilterableWithSelectAll.args = { ...sharedArgs };
+
 FilterableWithSelectAll.argTypes = {
   ...filterableArgTypes,
+};
+FilterableWithSelectAll.parameters = {
+  controls: {
+    exclude: ['label'],
+  },
 };
 Filterable.argTypes = {
   ...filterableArgTypes,
@@ -383,6 +386,11 @@ Filterable.argTypes = {
   },
   onMenuChange: {
     action: 'onMenuChange',
+  },
+};
+Filterable.parameters = {
+  controls: {
+    exclude: ['label'],
   },
 };
 
@@ -423,8 +431,15 @@ export const _FilterableWithLayer = (args) => (
   </WithLayer>
 );
 
+_FilterableWithLayer.args = { ...sharedArgs };
+
 _FilterableWithLayer.argTypes = {
   ...filterableArgTypes,
+};
+_FilterableWithLayer.parameters = {
+  controls: {
+    exclude: ['label'],
+  },
 };
 export const _Controlled = (args) => {
   const [selectedItems, setSelectedItems] = useState(
@@ -525,6 +540,8 @@ export const SelectAll = (args) => {
   );
 };
 
+SelectAll.args = { ...sharedArgs };
+
 const aiLabel = (
   <AILabel className="ai-label-container">
     <AILabelContent>
@@ -589,8 +606,14 @@ export const FilterableWithAILabel = (args) => (
   </div>
 );
 
+FilterableWithAILabel.args = { ...sharedArgs };
 FilterableWithAILabel.argTypes = {
   ...filterableArgTypes,
+};
+FilterableWithAILabel.parameters = {
+  controls: {
+    exclude: ['label'],
+  },
 };
 export const ExperimentalAutoAlign = (args) => {
   const ref = useRef();
@@ -667,6 +690,8 @@ export const withToggletipLabel = (args) => {
   );
 };
 
+withToggletipLabel.args = { ...sharedArgs };
+
 export const SelectAllWithDynamicItems = (args) => {
   const [label, setLabel] = useState('Choose options');
   const [items, setItems] = useState(itemsWithSelectAll);
@@ -715,3 +740,5 @@ export const SelectAllWithDynamicItems = (args) => {
     </div>
   );
 };
+
+SelectAllWithDynamicItems.args = { ...sharedArgs };

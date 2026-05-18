@@ -164,7 +164,6 @@ const DismissibleTag = forwardRef(
     );
 
     // Removing onClick from the spread operator
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { onClick, ...otherProps } = other;
 
     const dismissActionLabel = isEllipsisApplied ? dismissTooltipLabel : title;

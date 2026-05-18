@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -12,13 +12,15 @@ import { usePrefix } from '../../internal/usePrefix';
 
 export interface DatePickerSkeletonProps
   extends HTMLAttributes<HTMLDivElement> {
-  // Specify whether the skeleton should be of range date picker.
-  range?: boolean;
-
   /**
-   * Specify whether the label should be hidden, or not
+   * Specify whether to hide the label.
    */
   hideLabel?: boolean;
+
+  /**
+   * Specify whether to render the range skeleton variant.
+   */
+  range?: boolean;
 }
 
 const DatePickerSkeleton = ({
@@ -78,7 +80,7 @@ DatePickerSkeleton.propTypes = {
   className: PropTypes.string,
 
   /**
-   * Specify whether the label should be hidden, or not
+   * Specify whether to hide the label.
    */
   hideLabel: PropTypes.bool,
 
@@ -88,7 +90,7 @@ DatePickerSkeleton.propTypes = {
   id: PropTypes.string,
 
   /**
-   * Specify whether the skeleton should be of range date picker.
+   * Specify whether to render the range skeleton variant.
    */
   range: PropTypes.bool,
 };

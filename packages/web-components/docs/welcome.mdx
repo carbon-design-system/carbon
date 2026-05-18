@@ -2,11 +2,16 @@ import { Meta } from '@storybook/addon-docs/blocks';
 
 <Meta title="Introduction/Welcome" />
 
-A Carbon Design System variant that's as easy to use as native HTML elements, with no framework tax, no framework silo.
+A Carbon Design System variant that's as easy to use as native HTML elements,
+with no framework tax, no framework silo.
 
 <p align="center">
   <a href="https://www.carbondesignsystem.com">
-    <img alt="Carbon Design System" src="https://user-images.githubusercontent.com/3901764/57545698-ce5f2380-7320-11e9-8682-903df232d7b0.png" width="100%" />
+    <img
+      alt="Carbon Design System"
+      src="https://user-images.githubusercontent.com/3901764/57545698-ce5f2380-7320-11e9-8682-903df232d7b0.png"
+      width="100%"
+    />
   </a>
 </p>
 
@@ -17,15 +22,20 @@ A Carbon Design System variant that's as easy to use as native HTML elements, wi
 
 <p align="center">
   <a href="https://github.com/carbon-design-system/carbon-for-ibm-dotcom/blob/main/packages/carbon-web-components/LICENSE">
-    <img src="https://img.shields.io/badge/license-Apache--2.0-blue.svg" alt="Carbon is released under the Apache-2.0 license" />
+    <img
+      src="https://img.shields.io/badge/license-Apache--2.0-blue.svg"
+      alt="Carbon is released under the Apache-2.0 license"
+    />
   </a>
 </p>
 
 # `@carbon/web-components`
 
-`@carbon/web-components` is a variant of Carbon Design System with Custom Elements v1 and Shadow DOM v1 specs.
+`@carbon/web-components` is a variant of Carbon Design System with Custom
+Elements v1 and Shadow DOM v1 specs.
 
-The effort stems from https://github.com/carbon-design-system/issue-tracking/issues/121.
+The effort stems from
+https://github.com/carbon-design-system/issue-tracking/issues/121.
 
 ## Getting started
 
@@ -45,18 +55,24 @@ yarn add @carbon/web-components
 
 ### Basic usage
 
-Our example at [Stackblitz](https://stackblitz.com/github/carbon-design-system/carbon/tree/main/packages/web-components/examples/components/dropdown) shows the most basic usage:
+Our example at
+[Stackblitz](https://stackblitz.com/github/carbon-design-system/carbon/tree/main/packages/web-components/examples/components/dropdown)
+shows the most basic usage:
 
-The first thing you need is **setting up a module bundler** to resolve ECMAScript `import`s. The above example uses [Vite JS](https://vite.dev/), but you can use other bundlers like [Rollup](https://rollupjs.org/) or [Webpack](https://webpack.js.org) too.
+The first thing you need is **setting up a module bundler** to resolve
+ECMAScript `import`s. The above example uses [Vite JS](https://vite.dev/), but
+you can use any modern ESM-capable bundler.
 
-Once you set up a module bundler, you can start importing our component modules, for example:
+Once you set up a module bundler, you can start importing our component modules,
+for example:
 
 ```javascript
 import '@carbon/web-components/es/components/dropdown/dropdown.js';
 import '@carbon/web-components/es/components/dropdown/dropdown-item.js';
 ```
 
-Once you've imported the component modules, you can use our components in the same manner as native HTML tags, for example:
+Once you've imported the component modules, you can use our components in the
+same manner as native HTML tags, for example:
 
 ```html
 <cds-dropdown trigger-content="Select an item">
@@ -68,13 +84,17 @@ Once you've imported the component modules, you can use our components in the sa
 </cds-dropdown>
 ```
 
-An alternative to using a bundler are CDN artifacts which can be added client side in your html files. With CDNs, you can import the components in `<script type="module">`:
+An alternative to using a bundler are CDN artifacts which can be added client
+side in your html files. With CDNs, you can import the components in
+`<script type="module">`:
 
 ```html
-<!DOCTYPE html>
+<!doctype html>
 <html>
   <head>
-    <script type="module" src="https://1.www.s81c.com/common/carbon/web-components/tag/v2/latest/dropdown.min.js"></script>
+    <script
+      type="module"
+      src="https://1.www.s81c.com/common/carbon/web-components/tag/v2/latest/dropdown.min.js"></script>
     <style type="text/css">
       #app {
         font-family: 'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif;
@@ -104,10 +124,11 @@ An alternative to using a bundler are CDN artifacts which can be added client si
 
 ### JavaScript framework integration
 
-This package can also be used within other JavaScript frameworks such as Angular and
-Vue. This is achievable since web components are the modern browser standard, and
-work well with other front-end frameworks that exist in the application. In
-turn, this also comes with the benefits of encapsulation within the Shadow DOM:
+This package can also be used within other JavaScript frameworks such as Angular
+and Vue. This is achievable since web components are the modern browser
+standard, and work well with other front-end frameworks that exist in the
+application. In turn, this also comes with the benefits of encapsulation within
+the Shadow DOM:
 
 ### Other usage guides
 

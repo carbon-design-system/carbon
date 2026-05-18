@@ -16,7 +16,6 @@ exports[`TableToolbarMenu renders as expected - Component API should render 1`] 
           aria-haspopup="true"
           aria-labelledby="tooltip-_r_1_"
           class="custom-class cds--toolbar-action cds--overflow-menu cds--overflow-menu cds--overflow-menu--md cds--btn cds--btn--md cds--layout--size-md cds--btn--ghost cds--btn--icon-only"
-          title="Add"
           type="button"
         >
           <svg
