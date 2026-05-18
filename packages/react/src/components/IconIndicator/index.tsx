@@ -9,8 +9,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import cx from 'classnames';
 import { usePrefix } from '../../internal/usePrefix';
-import { DefinitionTooltip } from '../Tooltip';
-import { PopoverAlignment } from '../Popover';
+import { Tooltip } from '../Tooltip';
 import {
   ErrorFilled,
   CheckmarkFilled,
@@ -60,31 +59,12 @@ export type IconIndicatorKind = (typeof IconIndicatorKinds)[number];
 
 export interface IconIndicatorProps {
   /**
-   * Specify how the tooltip should align with the icon in compact mode.
-   * Only applies when compact is true.
-   */
-  align?: PopoverAlignment;
-
-  /**
-   * Specify the aria-label for the tooltip trigger in compact mode.
-   * Only applies when compact is true.
-   */
-  ariaLabel?: string;
-
-  /**
-   * Will auto-align the tooltip in compact mode.
-   * Only applies when compact is true.
-   */
-  autoAlign?: boolean;
-
-  /**
    * Specify an optional className to add.
    */
   className?: string;
 
   /**
-   * When true, displays only the icon with the label in a tooltip.
-   * Use this when there is no enough space to display the label.
+   * When true, displays only the icon with the label in a tooltip
    */
   compact?: boolean;
 
@@ -108,9 +88,6 @@ export interface IconIndicatorProps {
 export const IconIndicator = React.forwardRef(
   (
     {
-      align = 'right',
-      ariaLabel = 'Icon',
-      autoAlign = true,
       className: customClassName,
       compact = false,
       kind,
@@ -139,15 +116,16 @@ export const IconIndicator = React.forwardRef(
     if (compact) {
       return (
         <div className={classNames} ref={ref}>
-          <DefinitionTooltip
-            align={align}
-            aria-label={ariaLabel}
-            autoAlign={autoAlign}
-            definition={label}
-            openOnHover
-            triggerClassName={`${prefix}--icon-indicator--trigger`}>
-            {iconElement}
-          </DefinitionTooltip>
+          <Tooltip
+            label={label}
+            align="right"
+            autoAlign
+            className="cds--icon-tooltip">
+            {/* The spec shows that the tooltip must appear on hover and focus. To make it appear on focus, it can only be achieved by adding `tabIndex={0}` and using `role="button"`, which may itself be an accessibility violation for screen readers. If we remove it, keyboard users lose that affordance. */}
+            <span tabIndex={0} role="button" aria-label={label}>
+              {iconElement}
+            </span>
+          </Tooltip>
         </div>
       );
     }
@@ -163,45 +141,12 @@ export const IconIndicator = React.forwardRef(
 
 IconIndicator.propTypes = {
   /**
-   * Specify how the tooltip should align with the icon in compact mode.
-   * Only applies when compact is true.
-   */
-  align: PropTypes.oneOf([
-    'top',
-    'top-start',
-    'top-end',
-    'bottom',
-    'bottom-start',
-    'bottom-end',
-    'left',
-    'left-start',
-    'left-end',
-    'right',
-    'right-start',
-    'right-end',
-  ]),
-
-  /**
-   * Specify the aria-label for the tooltip trigger in compact mode.
-   * Only applies when compact is true.
-   */
-  ariaLabel: PropTypes.string,
-
-  /**
-   * Will auto-align the tooltip in compact mode. This prop is currently experimental
-   * and is subject to future changes.
-   * Only applies when compact is true.
-   */
-  autoAlign: PropTypes.bool,
-
-  /**
    * Specify an optional className to add.
    */
   className: PropTypes.string,
 
   /**
    * When true, displays only the icon with the label in a tooltip
-   * Use this when there is no enough space to display the label.
    */
   compact: PropTypes.bool,
 
