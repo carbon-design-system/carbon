@@ -48,16 +48,10 @@
 }
 
 // Definition tooltip
-:host(#{$prefix}-definition-tooltip) {
-  #{$prefix}-popover {
-    display: flex;
-  }
+:host(#{$prefix}-definition-tooltip) #{$prefix}-popover-content::part(content) {
+  @extend .#{$prefix}--definition-tooltip;
 
-  #{$prefix}-popover-content::part(content) {
-    @extend .#{$prefix}--definition-tooltip;
-
-    padding-block: var(--cds-definition-tooltip-padding-block, to-rem(8px));
-  }
+  padding-block: var(--tooltip-padding-block, to-rem(8px));
 }
 
 // Password input "Show/Hide Password" tooltip

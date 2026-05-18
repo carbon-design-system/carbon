@@ -63,9 +63,7 @@ $css--plex: true !default;
 }
 
 :host(#{$prefix}-shape-indicator[compact]) {
-  #{$prefix}-definition-tooltip {
-    --cds-definition-tooltip-padding-block: #{$spacing-01};
-  }
+  --tooltip-padding-block: #{$spacing-01};
 
   #{$prefix}-definition-tooltip::part(definition-term) {
     display: flex;
