@@ -24,6 +24,24 @@ describe('cds-pagination', () => {
     expect(buttons?.[1]?.getAttribute('tooltip-text')).to.equal('Next');
   });
 
+  it('should respect backward-text-tooltip-position and forward-text-tooltip-position attributes', async () => {
+    const el = await fixture(html`
+      <cds-pagination
+        total-items="20"
+        backward-text="Back"
+        backward-text-tooltip-position="bottom"
+        forward-text="Next"
+        forward-text-tooltip-position="left">
+        <cds-select-item value="10">10</cds-select-item>
+      </cds-pagination>
+    `);
+    await el.updateComplete;
+
+    const buttons = el.shadowRoot?.querySelectorAll('cds-button');
+    expect(buttons?.[0]?.getAttribute('tooltip-position')).to.equal('bottom');
+    expect(buttons?.[1]?.getAttribute('tooltip-position')).to.equal('left');
+  });
+
   it('should disable navigation buttons when disabled', async () => {
     const el = await fixture(html`
       <cds-pagination disabled total-items="20">
