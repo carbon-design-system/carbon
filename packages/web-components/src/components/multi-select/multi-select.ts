@@ -50,8 +50,7 @@ class CDSMultiSelect extends CDSDropdown {
   filterable;
 
   /**
-   * The autocomplete attribute for the filterable input.
-   * Prevents inconsistent browser autocomplete behavior.
+   * The native `autocomplete` attribute for the filterable input.
    */
   @property({ type: String })
   autocomplete = 'off';
