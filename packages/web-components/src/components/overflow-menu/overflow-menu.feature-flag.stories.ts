@@ -6,7 +6,6 @@
  */
 
 import { html } from 'lit';
-import { ifDefined } from 'lit/directives/if-defined.js';
 import { prefix } from '../../globals/settings';
 import { iconLoader } from '../../globals/internal/icon-loader';
 import OverflowMenuVertical16 from '@carbon/icons/es/overflow-menu--vertical/16.js';
@@ -113,21 +112,6 @@ const renderOverflowMenu = ({
   </cds-overflow-menu>
 `;
 
-const renderStory = (
-  content,
-  { enableDynamicFloatingStyles = false } = {}
-) => html`
-  <sb-template-feature-flags>
-    <feature-flags
-      enable-v12-overflowmenu="true"
-      enable-v12-dynamic-floating-styles=${ifDefined(
-        enableDynamicFloatingStyles ? 'true' : undefined
-      )}>
-      ${content}
-    </feature-flags>
-  </sb-template-feature-flags>
-`;
-
 export const Default = {
   args,
   argTypes,
@@ -138,9 +122,13 @@ export const Default = {
   },
   render: (args) => {
     const { align, label, menuAlignment, open, size } = args ?? {};
-    return renderStory(
-      renderOverflowMenu({ align, label, menuAlignment, open, size })
-    );
+    return html`
+      <sb-template-feature-flags>
+        <feature-flags enable-v12-overflowmenu="true">
+          ${renderOverflowMenu({ align, label, menuAlignment, open, size })}
+        </feature-flags>
+      </sb-template-feature-flags>
+    `;
   },
 };
 
@@ -153,70 +141,93 @@ export const AutoAlign = {
       });
     });
 
-    return renderStory(html`
-      <div style="width: 4900px; height: 4900px; position: relative;">
-        <div style="position: absolute; top: 2450px; left: 2450px;">
-          ${renderOverflowMenu({ autoAlign: true })}
-        </div>
-      </div>
-    `);
+    return html`
+      <sb-template-feature-flags>
+        <feature-flags enable-v12-overflowmenu="true">
+          <div style="width: 4900px; height: 4900px; position: relative;">
+            <div style="position: absolute; top: 2450px; left: 2450px;">
+              ${renderOverflowMenu({ autoAlign: true })}
+            </div>
+          </div>
+        </feature-flags>
+      </sb-template-feature-flags>
+    `;
   },
 };
 
 export const FloatingStyles = {
   render: () => {
-    return renderStory(renderOverflowMenu(), {
-      enableDynamicFloatingStyles: true,
-    });
+    return html`
+      <sb-template-feature-flags>
+        <feature-flags
+          enable-v12-overflowmenu="true"
+          enable-v12-dynamic-floating-styles="true">
+          ${renderOverflowMenu()}
+        </feature-flags>
+      </sb-template-feature-flags>
+    `;
   },
 };
 
 export const Nested = {
   render: () => {
-    return renderStory(
-      renderOverflowMenu({
-        menu: html`
-          <cds-menu>
-            <cds-menu-item label="Level 1"></cds-menu-item>
-            <cds-menu-item label="Level 1"></cds-menu-item>
-            <cds-menu-item label="Level 1">
-              <cds-menu-item-group slot="submenu">
-                <cds-menu-item label="Level 2">
+    return html`
+      <sb-template-feature-flags>
+        <feature-flags enable-v12-overflowmenu="true">
+          ${renderOverflowMenu({
+            menu: html`
+              <cds-menu>
+                <cds-menu-item label="Level 1"></cds-menu-item>
+                <cds-menu-item label="Level 1"></cds-menu-item>
+                <cds-menu-item label="Level 1">
                   <cds-menu-item-group slot="submenu">
-                    <cds-menu-item label="Level 3"></cds-menu-item>
-                    <cds-menu-item label="Level 3">
+                    <cds-menu-item label="Level 2">
                       <cds-menu-item-group slot="submenu">
-                        <cds-menu-item label="Level 4"></cds-menu-item>
+                        <cds-menu-item label="Level 3"></cds-menu-item>
+                        <cds-menu-item label="Level 3">
+                          <cds-menu-item-group slot="submenu">
+                            <cds-menu-item label="Level 4"></cds-menu-item>
+                          </cds-menu-item-group>
+                        </cds-menu-item>
                       </cds-menu-item-group>
                     </cds-menu-item>
+                    <cds-menu-item label="Level 2"></cds-menu-item>
+                    <cds-menu-item label="Level 2"></cds-menu-item>
                   </cds-menu-item-group>
                 </cds-menu-item>
-                <cds-menu-item label="Level 2"></cds-menu-item>
-                <cds-menu-item label="Level 2"></cds-menu-item>
-              </cds-menu-item-group>
-            </cds-menu-item>
-            <cds-menu-item label="Level 1"></cds-menu-item>
-          </cds-menu>
-        `,
-      })
-    );
+                <cds-menu-item label="Level 1"></cds-menu-item>
+              </cds-menu>
+            `,
+          })}
+        </feature-flags>
+      </sb-template-feature-flags>
+    `;
   },
 };
 
 export const WithMenuAlignment = {
   render: () => {
-    return renderStory(html`
-      <div style="display: flex; justify-content: space-between;">
-        ${renderOverflowMenu({ menuAlignment: 'bottom-start' })}
-        ${renderOverflowMenu({ menuAlignment: 'bottom-end' })}
-      </div>
+    return html`
+      <sb-template-feature-flags>
+        <feature-flags
+          enable-v12-overflowmenu="true"
+          enable-v12-dynamic-floating-styles="true">
+          <div style="display: flex; justify-content: space-between;">
+            ${renderOverflowMenu({ menuAlignment: 'bottom-start' })}
+            ${renderOverflowMenu({ menuAlignment: 'bottom-end' })}
+          </div>
 
-      <div
-        style="display: flex; justify-content: space-between; margin-top: 15rem;">
-        ${renderOverflowMenu({ menuAlignment: 'top-start', align: 'bottom' })}
-        ${renderOverflowMenu({ menuAlignment: 'top-end', align: 'bottom' })}
-      </div>
-    `);
+          <div
+            style="display: flex; justify-content: space-between; margin-top: 15rem;">
+            ${renderOverflowMenu({
+              menuAlignment: 'top-start',
+              align: 'bottom',
+            })}
+            ${renderOverflowMenu({ menuAlignment: 'top-end', align: 'bottom' })}
+          </div>
+        </feature-flags>
+      </sb-template-feature-flags>
+    `;
   },
 };
 
