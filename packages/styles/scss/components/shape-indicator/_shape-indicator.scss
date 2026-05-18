@@ -25,6 +25,7 @@
     align-items: center;
     color: $text-secondary;
     gap: $spacing-03;
+    line-height: unset;
   }
 
   .#{$prefix}--shape-indicator svg {
@@ -33,6 +34,8 @@
 
   .#{$prefix}--shape-indicator--14 {
     @include type-style('body-compact-01');
+
+    line-height: unset;
   }
 
   .#{$prefix}--shape-indicator--failed {
