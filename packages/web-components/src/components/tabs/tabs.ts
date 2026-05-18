@@ -131,6 +131,19 @@ export default class CDSTabs extends HostListenerMixin(CDSContentSwitcher) {
     });
   }
 
+  /**
+   * Resets the selected state of all tabs, setting only the specified tab as selected.
+   *
+   * @param nextItem The tab item to be selected. If provided, only this item will be selected.
+   *   If null or undefined, all tabs will have their selected state set to false.
+   */
+  protected resetSelected(nextItem?: CDSTab | null) {
+    const { selectorItem } = this.constructor as typeof CDSTabs;
+    forEach(this.querySelectorAll(selectorItem), (item) => {
+      (item as CDSTab)['selected'] = nextItem === item;
+    });
+  }
+
   @HostListener('click')
   protected _handleClick(event: MouseEvent) {
     super._handleClick(event);
@@ -209,30 +222,46 @@ export default class CDSTabs extends HostListenerMixin(CDSContentSwitcher) {
 
   @HostListener('cds-tab-closed')
   protected _handleTabClosed(event: CustomEvent) {
-    const { selectorItem, selectorItemEnabled, selectorItemSelected } = this
-      .constructor as typeof CDSTabs;
+    const {
+      selectorItem,
+      selectorItemEnabled,
+      selectorItemSelected,
+      selectorItemHighlighted,
+    } = this.constructor as typeof CDSTabs;
     const { index } = event.detail;
-
     const allTabs = this.querySelectorAll<CDSTab>(selectorItem);
     const enabledTabsBeforeRemoval =
       this.querySelectorAll<CDSTab>(selectorItemEnabled);
-    const activeItem = this.querySelector<CDSTab>(selectorItemSelected);
     const indexInEnabledTabs = Array.from(enabledTabsBeforeRemoval).indexOf(
       allTabs[index]
     );
-    const activeTabClosed = activeItem === allTabs[index];
+    const activeItem = this.querySelector<CDSTab>(selectorItemSelected);
+    const activeItemId = activeItem?.id;
+    const highlightedItem = this.querySelector<CDSTab>(selectorItemHighlighted);
+    const highlightedItemId = highlightedItem?.id;
     requestAnimationFrame(() => {
-      const enabledTabs = this.querySelectorAll<CDSTab>(selectorItemEnabled);
+      const enabledTabs = Array.from(
+        this.querySelectorAll<CDSTab>(selectorItemEnabled)
+      );
+
+      const tabWithActiveId = enabledTabs.find(
+        (tab) => tab.id === activeItemId
+      );
+      const tabWithHighlightedId = enabledTabs.find(
+        (tab) => tab.id === highlightedItemId
+      );
+      const nextHighlightedIndex =
+        !tabWithActiveId && !tabWithHighlightedId && indexInEnabledTabs - 1 >= 0
+          ? indexInEnabledTabs - 1
+          : 0;
       if (enabledTabs.length > 0) {
-        if (activeTabClosed) {
-          enabledTabs[0].selected = true;
-          this.value = enabledTabs[0].value;
-        }
+        const nextSelectedItem = tabWithActiveId || enabledTabs[0];
         const nextHighlightedItem =
-          indexInEnabledTabs < enabledTabs.length
-            ? enabledTabs[indexInEnabledTabs]
-            : enabledTabs[indexInEnabledTabs - 1];
-        nextHighlightedItem.highlighted = true;
+          tabWithHighlightedId || enabledTabs[nextHighlightedIndex];
+        this.resetSelected(nextSelectedItem);
+        this.resetHighlighted(nextHighlightedItem);
+        this.value = nextSelectedItem.value;
+
         nextHighlightedItem.shadowRoot
           ?.querySelector<HTMLElement>(
             `.${prefix}--tabs__nav-link--dismissable`
@@ -284,6 +313,17 @@ export default class CDSTabs extends HostListenerMixin(CDSContentSwitcher) {
     }
   }
 
+  private _syncSecondaryLabels() {
+    const hasSecondaryLabels = Array.from(
+      this.querySelectorAll(`${prefix}-tab`)
+    ).some((tab) => tab.hasAttribute('secondary-label'));
+    if (hasSecondaryLabels) {
+      this.setAttribute('has-secondary-labels', '');
+    } else {
+      this.removeAttribute('has-secondary-labels');
+    }
+  }
+
   _handleSlotchange() {
     // Call super to preserve content-switcher slot handling
     super._handleSlotchange?.();
@@ -296,6 +336,8 @@ export default class CDSTabs extends HostListenerMixin(CDSContentSwitcher) {
     if (nextItem) {
       (nextItem as CDSTab).hideDivider = true;
     }
+
+    this._syncSecondaryLabels();
     this._updateTabsState();
   }
 
@@ -375,6 +417,12 @@ export default class CDSTabs extends HostListenerMixin(CDSContentSwitcher) {
    */
   @property({ attribute: 'icon-size', reflect: true })
   iconSize?: TABS_ICON_SIZE;
+
+  /**
+   * Used for tabs within a grid, this makes it so tabs span the full container width and have the same width. Only available on contained tabs with <9 children
+   */
+  @property({ type: Boolean, attribute: 'full-width', reflect: true })
+  fullWidth = false;
 
   /**
    * `true` if left-hand scroll intersection sentinel intersects with the host element.
@@ -481,6 +529,7 @@ export default class CDSTabs extends HostListenerMixin(CDSContentSwitcher) {
     super.firstUpdated();
     this._tabInitialLoad();
     this._cleanAndCreateIntersectionObserverContainer({ create: true });
+    this._syncSecondaryLabels();
   }
 
   updated(changedProperties) {

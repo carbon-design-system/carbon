@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2024, 2025
+ * Copyright IBM Corp. 2024, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -87,7 +87,7 @@ const ChatButton = React.forwardRef<HTMLButtonElement, ChatButtonProps>(
     } else {
       // Check if size is valid and warn if not
       if (size && !allowedSizes.includes(size as ChatButtonSize)) {
-        // eslint-disable-next-line no-console -- https://github.com/carbon-design-system/carbon/issues/20452
+        // eslint-disable-next-line no-console
         console.error(
           `Invalid size "${size}" provided to ChatButton. Size must be one of: ${allowedSizes.join(
             ', '
