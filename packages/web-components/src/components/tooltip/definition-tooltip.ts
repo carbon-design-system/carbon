@@ -102,6 +102,7 @@ class CDSDefinitionTooltip extends LitElement {
         @mouseenter=${this._handleHover}
         @mouseleave=${this._handleHover}
         highContrast
+        ?autoalign=${this.autoalign}
         ?dropShadow=${false}
         align=${align}
         .open=${open}>

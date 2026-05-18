@@ -40,7 +40,7 @@ const alignments = {
 const defaultArgs = {
   align: POPOVER_ALIGNMENT.RIGHT,
   shapeDescription: 'Shape',
-  autoalign: false,
+  autoAlign: false,
   compact: false,
   textSize: 12,
 };
@@ -52,7 +52,7 @@ const controls = {
       'Specify how the tooltip should align with the shape in compact mode',
     options: alignments,
   },
-  autoalign: {
+  autoAlign: {
     control: 'boolean',
     description: 'Will auto-align the tooltip in compact mode',
   },
@@ -89,7 +89,7 @@ export const Default = {
   render: ({
     align,
     shapeDescription,
-    autoalign,
+    autoAlign,
     compact,
     label,
     textSize,
@@ -102,7 +102,7 @@ export const Default = {
         text-size=${textSize}
         align=${align}
         shape-description=${shapeDescription}
-        ?autoalign=${autoalign}
+        ?autoalign=${autoAlign}
         ?compact=${compact}></cds-shape-indicator>
       <cds-shape-indicator
         kind="critical"
@@ -110,7 +110,7 @@ export const Default = {
         text-size=${textSize}
         align=${align}
         shape-description=${shapeDescription}
-        ?autoalign=${autoalign}
+        ?autoalign=${autoAlign}
         ?compact=${compact}></cds-shape-indicator>
       <cds-shape-indicator
         kind="high"
@@ -118,7 +118,7 @@ export const Default = {
         text-size=${textSize}
         align=${align}
         shape-description=${shapeDescription}
-        ?autoalign=${autoalign}
+        ?autoalign=${autoAlign}
         ?compact=${compact}></cds-shape-indicator>
       <cds-shape-indicator
         kind="medium"
@@ -126,7 +126,7 @@ export const Default = {
         text-size=${textSize}
         align=${align}
         shape-description=${shapeDescription}
-        ?autoalign=${autoalign}
+        ?autoalign=${autoAlign}
         ?compact=${compact}></cds-shape-indicator>
       <cds-shape-indicator
         kind="low"
@@ -134,7 +134,7 @@ export const Default = {
         text-size=${textSize}
         align=${align}
         shape-description=${shapeDescription}
-        ?autoalign=${autoalign}
+        ?autoalign=${autoAlign}
         ?compact=${compact}></cds-shape-indicator>
       <cds-shape-indicator
         kind="cautious"
@@ -142,7 +142,7 @@ export const Default = {
         text-size=${textSize}
         align=${align}
         shape-description=${shapeDescription}
-        ?autoalign=${autoalign}
+        ?autoalign=${autoAlign}
         ?compact=${compact}></cds-shape-indicator>
       <cds-shape-indicator
         kind="undefined"
@@ -150,7 +150,7 @@ export const Default = {
         text-size=${textSize}
         align=${align}
         shape-description=${shapeDescription}
-        ?autoalign=${autoalign}
+        ?autoalign=${autoAlign}
         ?compact=${compact}></cds-shape-indicator>
       <cds-shape-indicator
         kind="stable"
@@ -158,7 +158,7 @@ export const Default = {
         text-size=${textSize}
         align=${align}
         shape-description=${shapeDescription}
-        ?autoalign=${autoalign}
+        ?autoalign=${autoAlign}
         ?compact=${compact}></cds-shape-indicator>
       <cds-shape-indicator
         kind="informative"
@@ -166,7 +166,7 @@ export const Default = {
         text-size=${textSize}
         align=${align}
         shape-description=${shapeDescription}
-        ?autoalign=${autoalign}
+        ?autoalign=${autoAlign}
         ?compact=${compact}></cds-shape-indicator>
       <cds-shape-indicator
         kind="incomplete"
@@ -174,7 +174,7 @@ export const Default = {
         text-size=${textSize}
         align=${align}
         shape-description=${shapeDescription}
-        ?autoalign=${autoalign}
+        ?autoalign=${autoAlign}
         ?compact=${compact}></cds-shape-indicator>
       <cds-shape-indicator
         kind="draft"
@@ -182,7 +182,7 @@ export const Default = {
         text-size=${textSize}
         align=${align}
         shape-description=${shapeDescription}
-        ?autoalign=${autoalign}
+        ?autoalign=${autoAlign}
         ?compact=${compact}></cds-shape-indicator>
     </div>
   `,

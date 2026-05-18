@@ -27,6 +27,7 @@ const tooltipAlignments = {
 
 const defaultArgs = {
   align: POPOVER_ALIGNMENT.BOTTOM_LEFT,
+  autoAlign: false,
   defaultOpen: false,
   definition: 'Example definition',
   openOnHover: true,
@@ -37,6 +38,11 @@ const controls = {
     control: 'select',
     description: 'Specify how the trigger should align with the tooltip',
     options: tooltipAlignments,
+  },
+  autoAlign: {
+    control: 'boolean',
+    description:
+      'Will auto-align Definition Tooltip. This prop is currently experimental and is subject to future changes.',
   },
   openOnHover: {
     control: 'boolean',
@@ -58,13 +64,14 @@ const controls = {
 export const Default = {
   argTypes: controls,
   args: defaultArgs,
-  render: ({ align, defaultOpen, definition, openOnHover }) => html`
+  render: ({ align, autoAlign, defaultOpen, definition, openOnHover }) => html`
     <p>
       Custom domains direct requests for your apps in this Cloud Foundry
       organization to a
       <span style="display: inline-block;">
         <cds-definition-tooltip
           align=${align}
+          ?autoalign=${autoAlign}
           ?open-on-hover=${openOnHover}
           ?default-open=${defaultOpen}>
           <span slot="definition">${definition}</span>
