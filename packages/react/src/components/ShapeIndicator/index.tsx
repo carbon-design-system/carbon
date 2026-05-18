@@ -35,7 +35,7 @@ export const ShapeIndicatorKinds = [
   'draft',
 ];
 
-// TODO: update to import '@carbon/icons-react'
+// TODO: update to import '@carbon/icons-react' https://github.com/carbon-design-system/carbon/issues/18630
 const incompleteIcon = (props) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"

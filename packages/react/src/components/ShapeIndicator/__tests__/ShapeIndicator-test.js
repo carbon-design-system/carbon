@@ -21,9 +21,9 @@ describe('ShapeIndicator', () => {
   });
 
   it('should update with kind prop', () => {
-    render(<ShapeIndicator kind="critical" label="label" size={14} />);
+    render(<ShapeIndicator kind="incomplete" label="label" size={14} />);
     expect(document.querySelector('svg')).toHaveClass(
-      'cds--shape-indicator--critical'
+      'cds--shape-indicator--incomplete'
     );
   });
 
@@ -40,5 +40,17 @@ describe('ShapeIndicator', () => {
       <ShapeIndicator kind="failed" label="label" ref={ref} />
     );
     expect(ref).toHaveBeenCalledWith(container.firstChild);
+  });
+
+  it('should render compact mode with tooltip', () => {
+    render(<ShapeIndicator kind="failed" label="label" compact />);
+    expect(screen.getByText('Shape')).toBeInTheDocument();
+  });
+
+  it('should return null for invalid kind', () => {
+    const { container } = render(
+      <ShapeIndicator kind="invalid-kind" label="label" />
+    );
+    expect(container.firstChild).toBeNull();
   });
 });
