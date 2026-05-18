@@ -20,6 +20,35 @@ export default {
 };
 
 const sharedArgTypes = {
+  align: {
+    control: {
+      type: 'select',
+    },
+    options: [
+      'top',
+      'top-start',
+      'top-end',
+      'bottom',
+      'bottom-start',
+      'bottom-end',
+      'left',
+      'left-start',
+      'left-end',
+      'right',
+      'right-start',
+      'right-end',
+    ],
+  },
+  autoAlign: {
+    control: {
+      type: 'boolean',
+    },
+  },
+  compact: {
+    control: {
+      type: 'boolean',
+    },
+  },
   label: {
     control: {
       type: 'text',
@@ -27,6 +56,11 @@ const sharedArgTypes = {
   },
   kind: {
     control: false,
+  },
+  shapeDescription: {
+    control: {
+      type: 'text',
+    },
   },
   textSize: {
     control: {
@@ -40,7 +74,7 @@ export const Default = (props) => {
   return (
     <div
       style={{
-        display: 'flex',
+        display: 'inline-flex',
         flexFlow: 'column',
         rowGap: '.5rem',
       }}>
@@ -60,6 +94,10 @@ export const Default = (props) => {
 };
 
 Default.args = {
+  align: 'right',
+  autoAlign: false,
+  compact: false,
+  shapeDescription: 'Shape',
   textSize: 12,
 };
 
@@ -89,6 +127,10 @@ export const DefaultWithTextSize14 = (props) => {
 };
 
 DefaultWithTextSize14.args = {
+  align: 'right',
+  autoAlign: false,
+  compact: false,
+  shapeDescription: 'Shape',
   textSize: 14,
 };
 

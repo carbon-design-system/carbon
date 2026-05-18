@@ -10,6 +10,8 @@
 @use '../../config' as *;
 @use '../../spacing' as *;
 @use '../../colors' as *;
+@use '../../utilities/focus-outline';
+@use '../../utilities/button-reset';
 @use '../icon-indicator/tokens' as *;
 
 /// shape-indicator styles
@@ -20,12 +22,22 @@
     @include type-style('helper-text-01');
 
     display: flex;
+    align-items: center;
     color: $text-secondary;
+    gap: $spacing-03;
+    // line-height: unset;
+  }
+
+  span {
+    display: flex;
+
+    &:focus {
+      @include focus-outline.focus-outline;
+    }
   }
 
   .#{$prefix}--shape-indicator svg {
     align-self: center;
-    margin-inline-end: $spacing-03;
   }
 
   .#{$prefix}--shape-indicator--14 {
@@ -88,5 +100,19 @@
 
   .#{$prefix}--shape-indicator--draft {
     fill: $status-gray;
+  }
+
+  .#{$prefix}--shape-indicator__button {
+    @include button-reset.reset($width: false);
+
+    display: flex;
+
+    &:focus {
+      @include focus-outline.focus-outline;
+    }
+  }
+
+  .#{$prefix}--shape-indicator .#{$prefix}--definition-tooltip {
+    padding-block: $spacing-01;
   }
 }

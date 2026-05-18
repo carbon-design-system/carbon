@@ -9,6 +9,8 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import cx from 'classnames';
 import { usePrefix } from '../../internal/usePrefix';
+import { DefinitionTooltip } from '../Tooltip';
+import { PopoverAlignment } from '../Popover';
 import {
   Critical,
   CriticalSeverity,
@@ -75,9 +77,24 @@ export type ShapeIndicatorKind = (typeof ShapeIndicatorKinds)[number];
 
 export interface ShapeIndicatorProps {
   /**
+   * Specify how the tooltip should align with the shape in compact mode
+   */
+  align?: PopoverAlignment;
+
+  /**
+   * Will auto-align the tooltip in compact mode.
+   */
+  autoAlign?: boolean;
+
+  /**
    * Specify an optional className to add.
    */
   className?: string;
+
+  /**
+   * When true, displays only the shape with the label in a tooltip
+   */
+  compact?: boolean;
 
   /**
    * Specify the kind of shape to be used
@@ -90,6 +107,11 @@ export interface ShapeIndicatorProps {
   label: string;
 
   /**
+   * Additional Description for the shape, used for screen readers
+   */
+  shapeDescription?: string;
+
+  /**
    * Specify the text size of the Shape Indicator. Defaults to 12.
    */
   textSize?: 12 | 14;
@@ -99,9 +121,13 @@ export interface ShapeIndicatorProps {
 export const ShapeIndicator = React.forwardRef(
   (
     {
+      align = 'right',
+      autoAlign = false,
       className: customClassName,
+      compact = false,
       kind,
       label,
+      shapeDescription = 'Shape',
       textSize = 12,
     }: ShapeIndicatorProps,
     ref: React.Ref<HTMLDivElement>
@@ -115,13 +141,34 @@ export const ShapeIndicator = React.forwardRef(
     if (!ShapeForKind) {
       return null;
     }
+
+    const shapeElement = (
+      <ShapeForKind
+        size={16}
+        className={`${prefix}--shape-indicator--${kind}`}
+      />
+    );
+
+    const content = compact ? (
+      <DefinitionTooltip
+        align={align}
+        autoAlign={autoAlign}
+        openOnHover
+        definition={label}
+        triggerClassName={`${prefix}--shape-indicator__button`}>
+        {shapeElement}
+        <span className={`${prefix}--visually-hidden`}>{shapeDescription}</span>
+      </DefinitionTooltip>
+    ) : (
+      <>
+        {shapeElement}
+        {label}
+      </>
+    );
+
     return (
       <div className={classNames} ref={ref}>
-        <ShapeForKind
-          size={16}
-          className={`${prefix}--shape-indicator--${kind}`}
-        />
-        {label}
+        {content}
       </div>
     );
   }
@@ -129,9 +176,37 @@ export const ShapeIndicator = React.forwardRef(
 
 ShapeIndicator.propTypes = {
   /**
+   * Specify how the tooltip should align with the shape in compact mode
+   */
+  align: PropTypes.oneOf([
+    'top',
+    'top-start',
+    'top-end',
+    'bottom',
+    'bottom-start',
+    'bottom-end',
+    'left',
+    'left-start',
+    'left-end',
+    'right',
+    'right-start',
+    'right-end',
+  ]),
+
+  /**
+   * Will auto-align the tooltip in compact mode
+   */
+  autoAlign: PropTypes.bool,
+
+  /**
    * Specify an optional className to add.
    */
   className: PropTypes.string,
+
+  /**
+   * When true, displays only the shape with the label in a tooltip
+   */
+  compact: PropTypes.bool,
 
   /**
    * Specify the kind of the Shape Indicator
@@ -142,6 +217,11 @@ ShapeIndicator.propTypes = {
    * Label next to the shape.
    */
   label: PropTypes.string.isRequired,
+
+  /**
+   * Description for the shape, used for accessibility
+   */
+  shapeDescription: PropTypes.string,
 
   /**
    * Specify the text size of the Shape Indicator. Defaults to 12.
