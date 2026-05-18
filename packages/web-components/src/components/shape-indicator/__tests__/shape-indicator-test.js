@@ -130,6 +130,19 @@ describe('cds-shape-indicator', function () {
     expect(hiddenText.textContent).to.equal('Custom description');
   });
 
+  it('should render incomplete kind with custom SVG string', async () => {
+    const el = await fixture(
+      html`<cds-shape-indicator
+        kind="incomplete"
+        label="test label"></cds-shape-indicator>`
+    );
+    await el.updateComplete;
+
+    expect(el.kind).to.equal('incomplete');
+    const svgElement = el.shadowRoot.querySelector('svg');
+    expect(svgElement).to.exist;
+  });
+
   it('should return null for invalid kind', async () => {
     const el = await fixture(
       html`<cds-shape-indicator

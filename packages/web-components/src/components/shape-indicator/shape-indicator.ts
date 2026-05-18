@@ -25,7 +25,8 @@ import CircleStroke from '@carbon/icons/es/circle-stroke/index.js';
 import { SHAPE_INDICATOR_KIND } from './defs';
 
 /**
- * Custom incomplete icon implementation
+ * Custom incomplete icon implementation.
+ * TODO: update to import '@carbon/icons' https://github.com/carbon-design-system/carbon/issues/18630
  */
 const IncompleteIcon = `<svg
   xmlns="http://www.w3.org/2000/svg"
