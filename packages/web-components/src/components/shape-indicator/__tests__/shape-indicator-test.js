@@ -99,4 +99,47 @@ describe('cds-shape-indicator', function () {
       expect(svgElement).to.exist;
     }
   });
+
+  it('should render compact mode with tooltip', async () => {
+    const el = await fixture(
+      html`<cds-shape-indicator
+        kind="failed"
+        label="test label"
+        compact></cds-shape-indicator>`
+    );
+    await el.updateComplete;
+
+    expect(el.compact).to.be.true;
+    const tooltip = el.shadowRoot.querySelector('cds-definition-tooltip');
+    expect(tooltip).to.exist;
+  });
+
+  it('should use custom shapeDescription in compact mode', async () => {
+    const el = await fixture(
+      html`<cds-shape-indicator
+        kind="failed"
+        label="test label"
+        compact
+        shape-description="Custom description"></cds-shape-indicator>`
+    );
+    await el.updateComplete;
+
+    expect(el.shapeDescription).to.equal('Custom description');
+    const hiddenText = el.shadowRoot.querySelector('.cds--visually-hidden');
+    expect(hiddenText).to.exist;
+    expect(hiddenText.textContent).to.equal('Custom description');
+  });
+
+  it('should return null for invalid kind', async () => {
+    const el = await fixture(
+      html`<cds-shape-indicator
+        kind="invalid-kind"
+        label="test label"></cds-shape-indicator>`
+    );
+    await el.updateComplete;
+
+    // When kind is invalid, render should return null
+    const svgElement = el.shadowRoot.querySelector('svg');
+    expect(svgElement).to.not.exist;
+  });
 });

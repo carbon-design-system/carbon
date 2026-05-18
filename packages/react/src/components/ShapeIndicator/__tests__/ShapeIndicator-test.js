@@ -47,6 +47,18 @@ describe('ShapeIndicator', () => {
     expect(screen.getByText('Shape')).toBeInTheDocument();
   });
 
+  it('should use custom shapeDescription in compact mode', () => {
+    render(
+      <ShapeIndicator
+        kind="failed"
+        label="label"
+        compact
+        shapeDescription="Custom description"
+      />
+    );
+    expect(screen.getByText('Custom description')).toBeInTheDocument();
+  });
+
   it('should return null for invalid kind', () => {
     const { container } = render(
       <ShapeIndicator kind="invalid-kind" label="label" />

@@ -33,7 +33,7 @@ describe('DefinitionTooltip', () => {
   });
 
   describe('Component API', () => {
-    it('should open onKeyDown', async () => {
+    it('should open onKeyDown with Tab', async () => {
       const user = userEvent.setup();
       const definition = 'Uniform Resource Locator';
       render(
@@ -52,6 +52,46 @@ describe('DefinitionTooltip', () => {
 
       await user.keyboard('[Escape]');
       expect(button).toHaveAttribute('aria-expanded', 'false');
+    });
+
+    it('should toggle on Enter key', async () => {
+      const user = userEvent.setup();
+      const definition = 'Uniform Resource Locator';
+      render(
+        <DefinitionTooltip definition={definition}>URL</DefinitionTooltip>
+      );
+
+      const button = screen.getByRole('button');
+
+      expect(button).toHaveAttribute('aria-expanded', 'false');
+      await user.click(button);
+      expect(button).toHaveAttribute('aria-expanded', 'true');
+
+      await user.keyboard('{Enter}');
+      expect(button).toHaveAttribute('aria-expanded', 'false');
+
+      await user.keyboard('{Enter}');
+      expect(button).toHaveAttribute('aria-expanded', 'true');
+    });
+
+    it('should toggle on Space key', async () => {
+      const user = userEvent.setup();
+      const definition = 'Uniform Resource Locator';
+      render(
+        <DefinitionTooltip definition={definition}>URL</DefinitionTooltip>
+      );
+
+      const button = screen.getByRole('button');
+
+      expect(button).toHaveAttribute('aria-expanded', 'false');
+      await user.click(button);
+      expect(button).toHaveAttribute('aria-expanded', 'true');
+
+      await user.keyboard(' ');
+      expect(button).toHaveAttribute('aria-expanded', 'false');
+
+      await user.keyboard(' ');
+      expect(button).toHaveAttribute('aria-expanded', 'true');
     });
     it('should close when trigger is blurred', async () => {
       const user = userEvent.setup();
