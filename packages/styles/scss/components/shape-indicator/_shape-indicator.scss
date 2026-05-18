@@ -25,15 +25,6 @@
     align-items: center;
     color: $text-secondary;
     gap: $spacing-03;
-    // line-height: unset;
-  }
-
-  span {
-    display: flex;
-
-    &:focus {
-      @include focus-outline.focus-outline;
-    }
   }
 
   .#{$prefix}--shape-indicator svg {

@@ -28,14 +28,6 @@
     line-height: unset;
   }
 
-  span {
-    display: flex;
-
-    &:focus {
-      @include focus-outline.focus-outline;
-    }
-  }
-
   .#{$prefix}--icon-indicator svg {
     align-self: center;
   }
