@@ -82,10 +82,14 @@ class CDSDefinitionTooltip extends LitElement {
     }
   }
 
-  protected _handleHover() {
-    if (this.openOnHover && !this.open) {
+  protected _handleMouseEnter() {
+    if (this.openOnHover) {
       this.open = true;
-    } else {
+    }
+  }
+
+  protected _handleMouseLeave() {
+    if (this.openOnHover) {
       this.open = false;
     }
   }
@@ -99,8 +103,8 @@ class CDSDefinitionTooltip extends LitElement {
 
     return html`
       <cds-popover
-        @mouseenter=${this._handleHover}
-        @mouseleave=${this._handleHover}
+        @mouseenter=${this._handleMouseEnter}
+        @mouseleave=${this._handleMouseLeave}
         highContrast
         ?autoalign=${this.autoalign}
         ?dropShadow=${false}
