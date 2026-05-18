@@ -89,9 +89,7 @@ class CDSDefinitionTooltip extends LitElement {
   }
 
   protected _handleMouseLeave() {
-    if (this.openOnHover) {
-      this.open = false;
-    }
+    this.open = false;
   }
 
   protected _handleFocus() {
