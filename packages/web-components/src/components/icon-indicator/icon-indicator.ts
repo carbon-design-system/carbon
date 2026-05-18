@@ -118,7 +118,7 @@ class CDSIconIndicator extends LitElement {
   compact = false;
 
   /**
-   * Additional Description for the icon, used for screen readers
+   * Additional Description for the icon, used for screen readers in compact mode
    */
   @property({ attribute: 'icon-description' })
   iconDescription = 'Icon';

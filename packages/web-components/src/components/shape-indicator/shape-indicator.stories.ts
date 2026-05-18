@@ -64,7 +64,7 @@ const controls = {
   shapeDescription: {
     control: 'text',
     description:
-      'Additional Description for the shape, used for screen readers',
+      'Additional Description for the shape, used for screen readers in compact mode',
   },
   textSize: {
     control: 'select',

@@ -86,7 +86,7 @@ class CDSShapeIndicator extends LitElement {
   compact = false;
 
   /**
-   * Additional Description for the shape, used for screen readers
+   * Additional Description for the shape, used for screen readers in compact mode
    */
   @property({ attribute: 'shape-description' })
   shapeDescription = 'Shape';

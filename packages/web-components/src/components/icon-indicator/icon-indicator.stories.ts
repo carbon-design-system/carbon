@@ -67,7 +67,8 @@ const controls = {
   },
   iconDescription: {
     control: 'text',
-    description: 'Additional Description for the icon, used for screen readers',
+    description:
+      'Additional Description for the icon, used for screen readers in compact mode.',
   },
   size: {
     control: 'select',

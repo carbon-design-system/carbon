@@ -69,7 +69,7 @@ export interface IconIndicatorProps {
   compact?: boolean;
 
   /**
-   * Additional Description for the icon, used for screen readers
+   * Additional Description for the icon, used for screen readers in compact mode.
    */
   iconDescription?: string;
 

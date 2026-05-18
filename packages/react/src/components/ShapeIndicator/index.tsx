@@ -107,7 +107,7 @@ export interface ShapeIndicatorProps {
   label: string;
 
   /**
-   * Additional Description for the shape, used for screen readers
+   * Additional Description for the shape, used for screen readers in compact mode
    */
   shapeDescription?: string;
 
