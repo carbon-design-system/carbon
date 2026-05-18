@@ -294,11 +294,11 @@
 
   .#{$prefix}--list-box__wrapper--fluid.#{$prefix}--list-box__wrapper--decorator
     .#{$prefix}--list-box--warning
-    .#{$prefix}--list-box__wrapper--decorator-inner
+    .#{$prefix}--list-box__inner-wrapper--decorator
     > *,
   .#{$prefix}--list-box__wrapper--fluid.#{$prefix}--list-box__wrapper--decorator
     .#{$prefix}--list-box--invalid
-    .#{$prefix}--list-box__wrapper--decorator-inner
+    .#{$prefix}--list-box__inner-wrapper--decorator
     > *,
   .#{$prefix}--list-box__wrapper--fluid.#{$prefix}--list-box__wrapper--slug
     .#{$prefix}--list-box--warning
@@ -356,14 +356,14 @@
     .#{$prefix}--list-box__field:has(
       .#{$prefix}--text-input:not(.#{$prefix}--text-input--empty)
     )
-    ~ .#{$prefix}--list-box__wrapper--decorator-inner
+    ~ .#{$prefix}--list-box__inner-wrapper--decorator
     > *,
   .#{$prefix}--list-box__wrapper--fluid.#{$prefix}--list-box__wrapper--decorator
     .#{$prefix}--list-box--invalid
     .#{$prefix}--list-box__field:has(
       .#{$prefix}--text-input:not(.#{$prefix}--text-input--empty)
     )
-    ~ .#{$prefix}--list-box__wrapper--decorator-inner
+    ~ .#{$prefix}--list-box__inner-wrapper--decorator
     > *,
   .#{$prefix}--list-box__wrapper--fluid.#{$prefix}--list-box__wrapper--slug
     .#{$prefix}--list-box--warning
@@ -442,11 +442,11 @@
   // remove ai-label divider when element is invalid and fluid
   .#{$prefix}--list-box__wrapper--fluid.#{$prefix}--list-box__wrapper--decorator
     .#{$prefix}--list-box--invalid[data-invalid]
-    .#{$prefix}--list-box__wrapper--decorator-inner
+    .#{$prefix}--list-box__inner-wrapper--decorator
     > *::before,
   .#{$prefix}--list-box__wrapper--decorator
     .#{$prefix}--list-box--warning
-    .#{$prefix}--list-box__wrapper--decorator-inner
+    .#{$prefix}--list-box__inner-wrapper--decorator
     > *::before,
   .#{$prefix}--list-box__wrapper--fluid.#{$prefix}--list-box__wrapper--slug
     .#{$prefix}--list-box--invalid[data-invalid]

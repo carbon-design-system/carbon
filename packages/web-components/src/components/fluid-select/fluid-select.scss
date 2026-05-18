@@ -30,14 +30,8 @@ $divider-width: 1px;
   ::slotted(#{$prefix}-ai-label),
   ::slotted(#{$prefix}-slug) {
     position: absolute;
-    inset-block-start: 70%;
+    inset-block-start: to-rem(42px);
     inset-inline-end: $spacing-09;
-  }
-
-  // Transform for non-revert-active elements
-  ::slotted(#{$prefix}-ai-label:not([revert-active])),
-  ::slotted(#{$prefix}-slug:not([revert-active])) {
-    transform: translateY(-70%);
   }
 
   // AI label pseudo-elements for dividers
