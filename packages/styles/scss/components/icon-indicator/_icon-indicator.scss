@@ -11,6 +11,7 @@
 @use '../../spacing' as *;
 @use '../../colors' as *;
 @use '../../utilities/focus-outline';
+@use '../../utilities/button-reset';
 @use './tokens' as *;
 
 /// icon-indicator styles
@@ -99,5 +100,19 @@
 
   .#{$prefix}--icon-indicator--informative {
     fill: $status-blue;
+  }
+
+  .#{$prefix}--icon-indicator__button {
+    @include button-reset.reset($width: false);
+
+    display: flex;
+
+    &:focus {
+      @include focus-outline.focus-outline;
+    }
+  }
+
+  .#{$prefix}--icon-indicator .#{$prefix}--definition-tooltip {
+    padding-block: $spacing-01;
   }
 }

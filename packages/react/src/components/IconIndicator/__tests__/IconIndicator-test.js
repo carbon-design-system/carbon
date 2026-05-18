@@ -48,30 +48,35 @@ describe('IconIndicator', () => {
       render(<IconIndicator kind="failed" label="Test Label" compact />);
       // Icon should be present
       expect(document.querySelector('svg')).toBeInTheDocument();
-      // Trigger element should be present with aria-label
-      const trigger = screen.getByLabelText('Test Label');
+      // DefinitionTooltip trigger element should be present
+      const trigger = screen.getByRole('button');
       expect(trigger).toBeInTheDocument();
+      expect(trigger).toHaveClass('cds--definition-term');
     });
 
     it('should render with tooltip trigger when compact is true', () => {
       const { container } = render(
         <IconIndicator kind="succeeded" label="Success" compact />
       );
-      const trigger = screen.getByLabelText('Success');
+      const trigger = screen.getByRole('button');
       expect(trigger).toBeInTheDocument();
+      expect(trigger).toHaveClass('cds--definition-term');
       expect(container.firstChild).toHaveClass('cds--icon-indicator');
     });
 
     it('should show label in tooltip on hover when compact is true', async () => {
       const user = userEvent.setup();
       render(<IconIndicator kind="pending" label="Pending Status" compact />);
-      const trigger = screen.getByLabelText('Pending Status');
+      const trigger = screen.getByRole('button');
 
-      // Hover over the trigger
+      // Hover over the trigger to open the tooltip
       await user.hover(trigger);
 
-      // The tooltip trigger should have aria-label
-      expect(trigger).toHaveAttribute('aria-label', 'Pending Status');
+      // The DefinitionTooltip should have aria-describedby
+      expect(trigger).toHaveAttribute('aria-describedby');
+      const describedById = trigger.getAttribute('aria-describedby');
+      const tooltipContent = document.getElementById(describedById);
+      expect(tooltipContent).toHaveTextContent('Pending Status');
     });
 
     it('should render normally when compact is false', () => {

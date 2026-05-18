@@ -10,6 +10,7 @@
 @use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/styles/scss/utilities/layout';
 @use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/utilities/convert' as *;
 
 // For some reason `#{prefix}-tooltip` doesn't work here, will need to investigate
 :host(#{$prefix}-tooltip[data-table]) {
@@ -47,8 +48,16 @@
 }
 
 // Definition tooltip
-:host(#{$prefix}-definition-tooltip) #{$prefix}-popover-content::part(content) {
-  @extend .#{$prefix}--definition-tooltip;
+:host(#{$prefix}-definition-tooltip) {
+  #{$prefix}-popover {
+    display: flex;
+  }
+
+  #{$prefix}-popover-content::part(content) {
+    @extend .#{$prefix}--definition-tooltip;
+
+    padding-block: var(--cds-definition-tooltip-padding-block, to-rem(8px));
+  }
 }
 
 // Password input "Show/Hide Password" tooltip

@@ -9,7 +9,8 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import cx from 'classnames';
 import { usePrefix } from '../../internal/usePrefix';
-import { Tooltip } from '../Tooltip';
+import { DefinitionTooltip } from '../Tooltip';
+import { PopoverAlignment } from '../Popover';
 import {
   ErrorFilled,
   CheckmarkFilled,
@@ -25,39 +26,38 @@ import {
   PendingFilled,
 } from '@carbon/icons-react';
 
-export const IconIndicatorKinds = [
-  'failed',
-  'caution-major',
-  'caution-minor',
-  'undefined',
-  'succeeded',
-  'normal',
-  'in-progress',
-  'incomplete',
-  'not-started',
-  'pending',
-  'unknown',
-  'informative',
-];
-
 const iconTypes = {
   failed: ErrorFilled,
-  ['caution-major']: WarningAltInvertedFilled,
-  ['caution-minor']: WarningAltFilled,
+  'caution-major': WarningAltInvertedFilled,
+  'caution-minor': WarningAltFilled,
   undefined: UndefinedFilled,
   succeeded: CheckmarkFilled,
   normal: CheckmarkOutline,
-  ['in-progress']: InProgress,
+  'in-progress': InProgress,
   incomplete: Incomplete,
-  ['not-started']: CircleDash,
+  'not-started': CircleDash,
   pending: PendingFilled,
   unknown: UnknownFilled,
   informative: WarningSquareFilled,
-};
+} as const;
+
+export const IconIndicatorKinds = Object.keys(
+  iconTypes
+) as (keyof typeof iconTypes)[];
 
 export type IconIndicatorKind = (typeof IconIndicatorKinds)[number];
 
 export interface IconIndicatorProps {
+  /**
+   * Specify how the tooltip should align with the icon in compact mode
+   */
+  align?: PopoverAlignment;
+
+  /**
+   * Will auto-align the tooltip in compact mode.
+   */
+  autoAlign?: boolean;
+
   /**
    * Specify an optional className to add.
    */
@@ -67,6 +67,11 @@ export interface IconIndicatorProps {
    * When true, displays only the icon with the label in a tooltip
    */
   compact?: boolean;
+
+  /**
+   * Additional Description for the icon, used for screen readers
+   */
+  iconDescription?: string;
 
   /**
    * Specify the kind of icon to be used
@@ -88,8 +93,11 @@ export interface IconIndicatorProps {
 export const IconIndicator = React.forwardRef(
   (
     {
+      align = 'right',
+      autoAlign = false,
       className: customClassName,
       compact = false,
+      iconDescription = 'Icon',
       kind,
       label,
       size = 16,
@@ -98,7 +106,7 @@ export const IconIndicator = React.forwardRef(
   ) => {
     const prefix = usePrefix();
     const classNames = cx(`${prefix}--icon-indicator`, customClassName, {
-      [`${prefix}--icon-indicator--20`]: size == 20,
+      [`${prefix}--icon-indicator--20`]: size === 20,
     });
 
     const IconForKind = iconTypes[kind];
@@ -113,33 +121,55 @@ export const IconIndicator = React.forwardRef(
       />
     );
 
-    if (compact) {
-      return (
-        <div className={classNames} ref={ref}>
-          <Tooltip
-            label={label}
-            align="right"
-            autoAlign
-            className="cds--icon-tooltip">
-            {/* The spec shows that the tooltip must appear on hover and focus. To make it appear on focus, it can only be achieved by adding `tabIndex={0}` and using `role="button"`, which may itself be an accessibility violation for screen readers. If we remove it, keyboard users lose that affordance. */}
-            <span tabIndex={0} role="button" aria-label={label}>
-              {iconElement}
-            </span>
-          </Tooltip>
-        </div>
-      );
-    }
+    const content = compact ? (
+      <DefinitionTooltip
+        align={align}
+        autoAlign={autoAlign}
+        openOnHover
+        definition={label}
+        triggerClassName={`${prefix}--icon-indicator__button`}>
+        {iconElement}
+        <span className={`${prefix}--visually-hidden`}>{iconDescription}</span>
+      </DefinitionTooltip>
+    ) : (
+      <>
+        {iconElement}
+        {label}
+      </>
+    );
 
     return (
       <div className={classNames} ref={ref}>
-        {iconElement}
-        {label}
+        {content}
       </div>
     );
   }
 );
 
 IconIndicator.propTypes = {
+  /**
+   * Specify how the tooltip should align with the icon in compact mode
+   */
+  align: PropTypes.oneOf([
+    'top',
+    'top-start',
+    'top-end',
+    'bottom',
+    'bottom-start',
+    'bottom-end',
+    'left',
+    'left-start',
+    'left-end',
+    'right',
+    'right-start',
+    'right-end',
+  ]),
+
+  /**
+   * Will auto-align the tooltip in compact mode
+   */
+  autoAlign: PropTypes.bool,
+
   /**
    * Specify an optional className to add.
    */
@@ -149,6 +179,11 @@ IconIndicator.propTypes = {
    * When true, displays only the icon with the label in a tooltip
    */
   compact: PropTypes.bool,
+
+  /**
+   * Description for the icon, used for accessibility
+   */
+  iconDescription: PropTypes.string,
 
   /**
    * Specify the kind of the Icon Indicator
