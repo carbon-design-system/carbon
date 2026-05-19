@@ -204,3 +204,73 @@ describe('@carbon/styles/scss/layout', () => {
     ).toBe(true);
   });
 });
+
+describe('@carbon/styles/scss/utilities/layout', () => {
+  test('Public API', async () => {
+    const { get } = await render(`
+      @use 'sass:meta';
+      @use '../utilities/layout';
+
+      $_: get('api', (
+        functions: (
+          size: meta.function-exists('size', 'layout'),
+          density: meta.function-exists('density', 'layout'),
+        ),
+        mixins: (
+          emit-layout-tokens: meta.mixin-exists('emit-layout-tokens', 'layout'),
+          emit-layout-tokens-to-shadow-host: meta.mixin-exists('emit-layout-tokens-to-shadow-host', 'layout'),
+          redefine-tokens: meta.mixin-exists('redefine-tokens', 'layout'),
+          use: meta.mixin-exists('use', 'layout'),
+        ),
+      ));
+    `);
+
+    const { value: api } = get('api');
+    expect(api).toEqual({
+      functions: {
+        size: true,
+        density: true,
+      },
+      mixins: {
+        'emit-layout-tokens': true,
+        'emit-layout-tokens-to-shadow-host': true,
+        'redefine-tokens': true,
+        use: true,
+      },
+    });
+  });
+
+  test('does not emit layout styles when used', async () => {
+    const { result } = await render(`
+      @use '../utilities/layout';
+    `);
+
+    const output = result.css.toString();
+    expect(output).not.toContain(':root');
+    expect(output).not.toContain('.cds--layout--size-sm');
+    expect(output).not.toContain('.cds--layout-constraint--size__default-md');
+  });
+
+  test('utility mixins and functions compile without emitting layout classes', async () => {
+    const { result } = await render(`
+      @use '../utilities/layout';
+
+      .test {
+        @include layout.use('size', $default: 'md', $min: 'sm', $max: 'lg');
+        @include layout.use('density', $default: 'normal');
+        block-size: layout.size('height');
+        padding-inline: layout.density('padding-inline');
+      }
+    `);
+
+    const output = result.css.toString();
+    expect(output).toContain('--cds-layout-size-height-local');
+    expect(output).toContain('--cds-layout-density-padding-inline-local');
+    expect(output).toContain('block-size: var(--cds-layout-size-height-local)');
+    expect(output).toContain(
+      'padding-inline: var(--cds-layout-density-padding-inline-local)'
+    );
+    expect(output).not.toContain('.cds--layout--size-sm');
+    expect(output).not.toContain('.cds--layout-constraint--size__default-md');
+  });
+});
