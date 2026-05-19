@@ -8,7 +8,6 @@
 import { adoptStyles, html } from 'lit';
 import { property } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
-import HostListener from '../../globals/decorators/host-listener';
 import FocusMixin from '../../globals/mixins/focus';
 import HostListenerMixin from '../../globals/mixins/host-listener';
 import { find } from '../../globals/internal/collection-helpers';
@@ -125,9 +124,6 @@ class CDSOverflowMenu
   /**
    * Handles `click` event on the trigger button.
    */
-  @HostListener('click')
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20452
-  // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
   private _handleClickTrigger = async (event: MouseEvent) => {
     if (this._isTriggerEvent(event)) {
       this._handleUserInitiatedToggle();
@@ -145,9 +141,6 @@ class CDSOverflowMenu
   /**
    * Handles `keydown` event on the trigger button.
    */
-  @HostListener('keydown')
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20452
-  // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
   private _handleKeydownTrigger = async (event: KeyboardEvent) => {
     if (!this._isTriggerEvent(event)) {
       return;
@@ -162,9 +155,6 @@ class CDSOverflowMenu
   /**
    * Prevents the trigger click from immediately re-opening the menu after blur.
    */
-  @HostListener('mousedown')
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20452
-  // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
   private _handleMousedownTrigger = (event: MouseEvent) => {
     if (this._isMenuCompositionEnabled() && this._isTriggerEvent(event)) {
       event.preventDefault();
@@ -294,6 +284,9 @@ class CDSOverflowMenu
       CDSMenu.eventOnClose,
       this._handleManagedMenuClose as EventListener
     );
+    this.addEventListener('click', this._handleClickTrigger);
+    this.addEventListener('keydown', this._handleKeydownTrigger);
+    this.addEventListener('mousedown', this._handleMousedownTrigger);
   }
 
   disconnectedCallback() {
@@ -301,6 +294,9 @@ class CDSOverflowMenu
       CDSMenu.eventOnClose,
       this._handleManagedMenuClose as EventListener
     );
+    this.removeEventListener('click', this._handleClickTrigger);
+    this.removeEventListener('keydown', this._handleKeydownTrigger);
+    this.removeEventListener('mousedown', this._handleMousedownTrigger);
     super.disconnectedCallback();
   }
 
@@ -385,7 +381,7 @@ class CDSOverflowMenu
 
     const labelText = this._getLabelText();
     const popupId = menuCompositionEnabled
-      ? this._getMenuChild()?.id ?? this._menuId
+      ? (this._getMenuChild()?.id ?? this._menuId)
       : this._menuBody?.id;
 
     button?.setAttribute('aria-haspopup', 'menu');
