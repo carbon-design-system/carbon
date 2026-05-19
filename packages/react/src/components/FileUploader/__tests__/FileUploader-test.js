@@ -312,7 +312,7 @@ describe('FileUploader', () => {
       expect(screen.queryByText('util2.png')).not.toBeInTheDocument();
     });
 
-    it('should call onChange when clearFiles is called in enhanced mode', async () => {
+    it('should trigger onChange when clearFiles is called with files present', async () => {
       const ref = React.createRef();
       const onChange = jest.fn();
 
@@ -328,26 +328,180 @@ describe('FileUploader', () => {
       );
 
       const input = document.querySelector('input[type="file"]');
-      const files = [
-        new File(['content1'], 'file1.png', { type: 'image/png' }),
-        new File(['content2'], 'file2.png', { type: 'image/png' }),
-      ];
+      const file = new File(['content'], 'clear-test.png', {
+        type: 'image/png',
+      });
 
-      await userEvent.upload(input, files);
+      await userEvent.upload(input, file);
       onChange.mockClear();
 
       await act(async () => {
         ref.current.clearFiles();
       });
 
-      // onChange should be called with action: 'clear'
       expect(onChange).toHaveBeenCalledTimes(1);
       const clearEvent = onChange.mock.calls[0][0];
       expect(clearEvent.target.action).toBe('clear');
       expect(clearEvent.target.currentFiles).toHaveLength(0);
-      expect(clearEvent.target.clearedFiles).toHaveLength(2);
+      expect(clearEvent.target.clearedFiles).toHaveLength(1);
+    });
+
+    it('should allow setting files programmatically via setCurrentFiles', async () => {
+      const ref = React.createRef();
+
+      render(
+        <FeatureFlags enableEnhancedFileUploader>
+          <FileUploader {...requiredProps} ref={ref} multiple={true} />
+        </FeatureFlags>
+      );
+
+      const mockFile = new File(['mock'], 'programmatic.png', {
+        type: 'image/png',
+      });
+      const mockFileItem = {
+        name: 'programmatic.png',
+        uuid: 'test-uuid-123',
+        file: mockFile,
+      };
+
+      await act(async () => {
+        ref.current.setCurrentFiles([mockFileItem]);
+      });
+
+      expect(screen.getByText('programmatic.png')).toBeInTheDocument();
+
+      const currentFiles = ref.current.getCurrentFiles();
+      expect(currentFiles).toHaveLength(1);
+      expect(currentFiles[0].name).toBe('programmatic.png');
+    });
+
+    it('should call onClick when a file is removed', async () => {
+      const onClick = jest.fn();
+
+      render(
+        <FeatureFlags enableEnhancedFileUploader>
+          <FileUploader
+            {...requiredProps}
+            filenameStatus="edit"
+            onClick={onClick}
+          />
+        </FeatureFlags>
+      );
+
+      const input = document.querySelector('input[type="file"]');
+      const file = new File(['test'], 'click-test.png', { type: 'image/png' });
+
+      await userEvent.upload(input, file);
+
+      const removeButton = screen.getByLabelText(
+        'test description - click-test.png'
+      );
+      await userEvent.click(removeButton);
+
+      expect(onClick).toHaveBeenCalledTimes(1);
+    });
+
+    it('should support keyboard interaction for file deletion', async () => {
+      const onDelete = jest.fn();
+
+      render(
+        <FeatureFlags enableEnhancedFileUploader>
+          <FileUploader
+            {...requiredProps}
+            filenameStatus="edit"
+            onDelete={onDelete}
+          />
+        </FeatureFlags>
+      );
+
+      const input = document.querySelector('input[type="file"]');
+      const file = new File(['test'], 'keyboard-test.png', {
+        type: 'image/png',
+      });
+
+      await userEvent.upload(input, file);
+
+      const removeButton = screen.getByLabelText(
+        'test description - keyboard-test.png'
+      );
+
+      // Test Enter key
+      removeButton.focus();
+      await userEvent.keyboard('{Enter}');
+
+      expect(onDelete).toHaveBeenCalledTimes(1);
+    });
+
+    it('should provide files.item() function in delete event', async () => {
+      const onDelete = jest.fn();
+
+      render(
+        <FeatureFlags enableEnhancedFileUploader>
+          <FileUploader
+            {...requiredProps}
+            filenameStatus="edit"
+            multiple={true}
+            onDelete={onDelete}
+          />
+        </FeatureFlags>
+      );
+
+      const input = document.querySelector('input[type="file"]');
+      const files = [
+        new File(['content1'], 'file1.png', { type: 'image/png' }),
+        new File(['content2'], 'file2.png', { type: 'image/png' }),
+      ];
+
+      await userEvent.upload(input, files);
+
+      const removeButton = screen.getByLabelText(
+        'test description - file1.png'
+      );
+      await userEvent.click(removeButton);
+
+      expect(onDelete).toHaveBeenCalledTimes(1);
+      const deleteEvent = onDelete.mock.calls[0][0];
+
+      // Test the item() function
+      expect(typeof deleteEvent.target.files.item).toBe('function');
+      expect(deleteEvent.target.files.item(0)).toBeDefined();
+      expect(deleteEvent.target.files.item(0).name).toBe('file2.png');
+      expect(deleteEvent.target.files.item(99)).toBe(null);
+    });
+
+    it('should provide files.item() function in clearFiles event', async () => {
+      const ref = React.createRef();
+      const onChange = jest.fn();
+
+      render(
+        <FeatureFlags enableEnhancedFileUploader>
+          <FileUploader
+            {...requiredProps}
+            ref={ref}
+            multiple={true}
+            onChange={onChange}
+          />
+        </FeatureFlags>
+      );
+
+      const input = document.querySelector('input[type="file"]');
+      const file = new File(['content'], 'clear-item-test.png', {
+        type: 'image/png',
+      });
+
+      await userEvent.upload(input, file);
+      onChange.mockClear();
+
+      await act(async () => {
+        ref.current.clearFiles();
+      });
+
+      expect(onChange).toHaveBeenCalledTimes(1);
+      const clearEvent = onChange.mock.calls[0][0];
+
+      // Test the item() function returns null for cleared files
       expect(typeof clearEvent.target.files.item).toBe('function');
-      expect(clearEvent.target.files.item(0)).toBeNull();
+      expect(clearEvent.target.files.item(0)).toBe(null);
     });
   });
 
@@ -701,66 +855,6 @@ describe('FileUploader', () => {
 
         expect(newLastDeleteButton).toHaveFocus();
       });
-    });
-  });
-
-  describe('Edge cases and error handling', () => {
-    it('should call onClick callback when provided and file is deleted', async () => {
-      const onClick = jest.fn();
-      const { container } = render(
-        <FileUploader
-          {...requiredProps}
-          filenameStatus="edit"
-          onClick={onClick}
-        />
-      );
-
-      const input = container.querySelector('input');
-      const file = new File(['test'], 'test.png', { type: 'image/png' });
-
-      await userEvent.upload(input, file);
-
-      const deleteButton = screen.getByLabelText('test description - test.png');
-      await userEvent.click(deleteButton);
-
-      expect(onClick).toHaveBeenCalledTimes(1);
-    });
-
-    it('should return null when accessing out-of-bounds index via files.item() in enhanced mode', async () => {
-      const onChange = jest.fn();
-
-      render(
-        <FeatureFlags enableEnhancedFileUploader>
-          <FileUploader
-            {...requiredProps}
-            multiple={true}
-            onChange={onChange}
-            filenameStatus="edit"
-          />
-        </FeatureFlags>
-      );
-
-      const input = document.querySelector('input[type="file"]');
-      const file = new File(['content'], 'test.png', { type: 'image/png' });
-      await userEvent.upload(input, file);
-
-      // Get the onChange event and verify files.item() behavior
-      const addEvent = onChange.mock.calls[0][0];
-      expect(addEvent.target.files.item(0)).toBeDefined();
-      expect(addEvent.target.files.item(0).name).toBe('test.png');
-
-      // Test out-of-bounds access
-      expect(addEvent.target.files.item(999)).toBeNull();
-      expect(addEvent.target.files.item(-1)).toBeNull();
-
-      // Now delete the file and check the delete event
-      onChange.mockClear();
-      const deleteButton = screen.getByLabelText('test description - test.png');
-      await userEvent.click(deleteButton);
-
-      const deleteEvent = onChange.mock.calls[0][0];
-      expect(deleteEvent.target.action).toBe('remove');
-      expect(deleteEvent.target.files.item(0)).toBeNull();
     });
   });
 });

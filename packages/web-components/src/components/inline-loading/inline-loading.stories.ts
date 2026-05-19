@@ -18,10 +18,8 @@ const states = {
 const noop = () => {};
 const defaultArgs = {
   description: 'Loading data...',
-  assistiveText: 'Loading',
   iconDescription: 'Loading',
   status: INLINE_LOADING_STATE.ACTIVE,
-  successDelay: 2000,
 };
 
 const getControls = ({ disableControl }) => {
@@ -40,22 +38,17 @@ const getControls = ({ disableControl }) => {
       description: 'Specify the loading status.',
       options: states,
     },
-    successDelay: {
-      control: disableControl,
-      description: 'Provide a delay for the setTimeout for success',
-    },
   };
 };
 
 export const Default = {
   args: defaultArgs,
   argTypes: getControls({ disableControl: false }),
-  render: ({ assistiveText, description, status, iconDescription }) => {
+  render: ({ description, status, iconDescription }) => {
     return html`
       <cds-inline-loading
         status="${status}"
         success-delay=${2000}
-        assistive-text=${assistiveText}
         icon-description=${iconDescription}
         }>
         ${description}

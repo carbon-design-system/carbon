@@ -573,6 +573,7 @@ exports[`@carbon/icons-react should not update exports without a semver change 1
   "CurvedLineSolid",
   "Customer",
   "CustomerService",
+  "CustomerServiceFilled",
   "Cut",
   "CutOut",
   "Cyclist",
