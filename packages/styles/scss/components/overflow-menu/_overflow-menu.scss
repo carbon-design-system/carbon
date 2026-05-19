@@ -46,6 +46,7 @@
 
     &:focus {
       @include focus-outline('outline');
+      background-color: $background-active;
     }
 
     &:hover {
