@@ -572,6 +572,7 @@ export default class CDSTabs extends HostListenerMixin(CDSContentSwitcher) {
     super.firstUpdated();
     this._tabInitialLoad();
     this._cleanAndCreateIntersectionObserverContainer({ create: true });
+    this._syncSecondaryLabels();
     this._syncSizeToTabs();
   }
 
