@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2024
+ * Copyright IBM Corp. 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -20,7 +20,7 @@
  * Into:
  *
  * <Theme theme={g90}>
- *   <Coachmark align='bottom' position={{ x: 0, y: 0 }} open={isOpen}>
+ *   <Coachmark align='bottom' position={{ x: 0, y: 0 }}>
  *     <CoachmarkBeacon label="Show information" buttonProps={{ onClick: handleBeaconClick, id: 'CoachmarkBtn', ref: beaconButtonRef }} />
  *     <Coachmark.Content>
  *       <Coachmark.Content.Header closeIconDescription="Close" />
@@ -41,6 +41,7 @@ const transform = (fileInfo, api) => {
   const root = j(fileInfo.source);
   let shouldImportTheme = false;
   let shouldImportButton = false;
+  let shouldImportUseState = false;
 
   // Helper to ensure imports for @carbon/react
   const ensureReactImport = (identifierName) => {
@@ -58,6 +59,44 @@ const transform = (fileInfo, api) => {
 
     if (existingImport.size() === 0) {
       // Check if there's already a @carbon/react import to add to
+      const reactImport = root.find(j.ImportDeclaration, {
+        source: { value: source },
+      });
+
+      if (reactImport.size() > 0) {
+        // Add to existing import
+        reactImport.forEach((path) => {
+          path.node.specifiers.push(
+            j.importSpecifier(j.identifier(identifierName))
+          );
+        });
+      } else {
+        // Create new import
+        const importDeclaration = j.importDeclaration(
+          [j.importSpecifier(j.identifier(identifierName))],
+          j.literal(source)
+        );
+        root.find(j.Program).get('body', 0).insertBefore(importDeclaration);
+      }
+    }
+  };
+
+  // Helper to ensure imports from 'react' package
+  const ensureReactPackageImport = (identifierName) => {
+    const source = 'react';
+    const existingImport = root
+      .find(j.ImportDeclaration, {
+        source: { value: source },
+      })
+      .filter((path) => {
+        return path.node.specifiers.some(
+          (specifier) =>
+            specifier.imported && specifier.imported.name === identifierName
+        );
+      });
+
+    if (existingImport.size() === 0) {
+      // Check if there's already a react import to add to
       const reactImport = root.find(j.ImportDeclaration, {
         source: { value: source },
       });
@@ -359,13 +398,19 @@ const transform = (fileInfo, api) => {
       if (themeValue) {
         const themeAttr = j.jsxAttribute(
           j.jsxIdentifier('theme'),
-          j.jsxExpressionContainer(j.identifier(themeValue))
+          j.literal(themeValue)
+        );
+
+        const cleanCoachmarkNode = j.jsxElement(
+          path.node.openingElement,
+          path.node.closingElement,
+          path.node.children
         );
 
         const themeElement = j.jsxElement(
           j.jsxOpeningElement(j.jsxIdentifier('Theme'), [themeAttr]),
           j.jsxClosingElement(j.jsxIdentifier('Theme')),
-          [path.node]
+          [cleanCoachmarkNode]
         );
 
         j(path).replaceWith(themeElement);
@@ -383,6 +428,7 @@ const transform = (fileInfo, api) => {
         if (elementName === 'CoachmarkBeacon') {
           // Transform CoachmarkBeacon
           let label = null;
+          shouldImportUseState = true;
 
           expression.openingElement.attributes.forEach((attr) => {
             if (attr.name && attr.name.name === 'label') {
@@ -397,11 +443,6 @@ const transform = (fileInfo, api) => {
               j.identifier('handleBeaconClick')
             ),
             j.property('init', j.identifier('id'), j.literal('CoachmarkBtn')),
-            j.property(
-              'init',
-              j.identifier('ref'),
-              j.identifier('beaconButtonRef')
-            ),
           ]);
 
           const newAttributes = [
@@ -448,10 +489,6 @@ const transform = (fileInfo, api) => {
               j.jsxIdentifier('onClick'),
               j.jsxExpressionContainer(j.identifier('handleButtonClick'))
             ),
-            j.jsxAttribute(
-              j.jsxIdentifier('ref'),
-              j.jsxExpressionContainer(j.identifier('triggerButtonRef'))
-            ),
           ];
 
           if (kind) {
@@ -473,6 +510,7 @@ const transform = (fileInfo, api) => {
           }
 
           shouldImportButton = true;
+          shouldImportUseState = true;
           return createJSXElement('Button', buttonAttributes, children);
         }
       }
@@ -537,6 +575,115 @@ const transform = (fileInfo, api) => {
   if (shouldImportButton) {
     ensureReactImport('Button');
   }
+
+  if (shouldImportUseState) {
+    ensureReactPackageImport('useState');
+  }
+
+  root.find(j.VariableDeclarator).forEach((path) => {
+    const init = path.node.init;
+
+    if (
+      !init ||
+      init.type !== 'ArrowFunctionExpression' ||
+      init.body.type !== 'JSXElement'
+    ) {
+      return;
+    }
+
+    const jsx = init.body;
+
+    const containsTheme =
+      jsx.openingElement &&
+      jsx.openingElement.name &&
+      jsx.openingElement.name.name === 'Theme';
+
+    const containsCoachmark =
+      jsx.openingElement &&
+      jsx.openingElement.name &&
+      jsx.openingElement.name.name === 'Coachmark';
+
+    if (!containsTheme && !containsCoachmark) {
+      return;
+    }
+
+    const jsxSource = j(jsx).toSource();
+
+    const usesBeaconHandler = jsxSource.includes('handleBeaconClick');
+    const usesButtonHandler = jsxSource.includes('handleButtonClick');
+
+    // Skip if neither handler is used
+    if (!usesBeaconHandler && !usesButtonHandler) {
+      return;
+    }
+
+    shouldImportUseState = true;
+
+    const bodyStatements = [];
+
+    // const [isOpen, setIsOpen] = useState(true);
+    bodyStatements.push(
+      j.variableDeclaration('const', [
+        j.variableDeclarator(
+          j.arrayPattern([j.identifier('isOpen'), j.identifier('setIsOpen')]),
+          j.callExpression(j.identifier('useState'), [j.literal(true)])
+        ),
+      ])
+    );
+
+    // const handleBeaconClick = () => { ... }
+    if (usesBeaconHandler) {
+      bodyStatements.push(
+        j.variableDeclaration('const', [
+          j.variableDeclarator(
+            j.identifier('handleBeaconClick'),
+            j.arrowFunctionExpression(
+              [],
+              j.blockStatement([
+                j.expressionStatement(
+                  j.callExpression(j.identifier('setIsOpen'), [
+                    j.arrowFunctionExpression(
+                      [j.identifier('isOpen')],
+                      j.unaryExpression('!', j.identifier('isOpen'))
+                    ),
+                  ])
+                ),
+              ])
+            )
+          ),
+        ])
+      );
+    }
+
+    // const handleButtonClick = () => { ... }
+    if (usesButtonHandler) {
+      bodyStatements.push(
+        j.variableDeclaration('const', [
+          j.variableDeclarator(
+            j.identifier('handleButtonClick'),
+            j.arrowFunctionExpression(
+              [],
+              j.blockStatement([
+                j.expressionStatement(
+                  j.callExpression(j.identifier('setIsOpen'), [
+                    j.arrowFunctionExpression(
+                      [j.identifier('isOpen')],
+                      j.unaryExpression('!', j.identifier('isOpen'))
+                    ),
+                  ])
+                ),
+              ])
+            )
+          ),
+        ])
+      );
+    }
+
+    // return (...)
+    bodyStatements.push(j.returnStatement(jsx));
+
+    init.body = j.blockStatement(bodyStatements);
+  });
 
   return root.toSource();
 };
