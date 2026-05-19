@@ -385,7 +385,7 @@ class CDSOverflowMenu
 
     const labelText = this._getLabelText();
     const popupId = menuCompositionEnabled
-      ? this._getMenuChild()?.id
+      ? this._getMenuChild()?.id ?? this._menuId
       : this._menuBody?.id;
 
     button?.setAttribute('aria-haspopup', 'menu');
