@@ -205,6 +205,7 @@ export default class CDSTabs extends HostListenerMixin(CDSContentSwitcher) {
         break;
       case TABS_KEYBOARD_ACTION.NAVIGATING:
         {
+          event.preventDefault();
           // Get direction based on orientation
           const direction = this.vertical
             ? VERTICAL_NAVIGATION_DIRECTION[key]
