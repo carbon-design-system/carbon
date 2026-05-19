@@ -389,4 +389,47 @@ describe('FloatingMenu', () => {
       expect(menu.style.top).toBe('60px');
     });
   });
+
+  it('should not call onPlace again when target callback identity changes on resize', async () => {
+    let resizeCallback;
+    const onPlace = jest.fn();
+
+    jest.spyOn(OptimizedResize, 'add').mockImplementation((callback) => {
+      resizeCallback = callback;
+      return { remove: jest.fn() };
+    });
+
+    const { rerender } = renderFloatingMenu({
+      onPlace,
+      target: () => document.body,
+    });
+
+    await waitFor(() => {
+      expect(onPlace).toHaveBeenCalledTimes(1);
+    });
+
+    act(() => {
+      for (let i = 0; i < 25; i++) {
+        triggerRect = createRect({
+          left: 10 + i,
+          top: 20,
+          right: 30 + i,
+          bottom: 60,
+          width: 20,
+          height: 40,
+        });
+        resizeCallback();
+        rerender(
+          <FloatingMenu
+            triggerRef={{ current: screen.getByTestId('trigger') }}
+            onPlace={onPlace}
+            target={() => document.body}>
+            {defaultMenuChildren}
+          </FloatingMenu>
+        );
+      }
+    });
+
+    expect(onPlace).toHaveBeenCalledTimes(1);
+  });
 });
