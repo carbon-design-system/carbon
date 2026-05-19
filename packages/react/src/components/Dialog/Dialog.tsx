@@ -424,8 +424,6 @@ const DialogControls = React.forwardRef<HTMLDivElement, DialogControlsProps>(
   ({ children, ...rest }, ref) => {
     const prefix = usePrefix();
     return (
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20452
-      // @ts-ignore
       <div className={`${prefix}--dialog__header-controls`} ref={ref} {...rest}>
         {children}
       </div>
