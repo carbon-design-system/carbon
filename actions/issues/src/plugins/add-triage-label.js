@@ -5,11 +5,9 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-'use strict';
-
-const core = require('@actions/core');
-const { events } = require('../conditions');
-const labels = require('../labels');
+import * as core from '@actions/core';
+import { events } from '../conditions.js';
+import labels from '../labels.js';
 
 const plugin = {
   name: 'Add triage label',
@@ -39,4 +37,4 @@ const plugin = {
   },
 };
 
-module.exports = plugin;
+export default plugin;
