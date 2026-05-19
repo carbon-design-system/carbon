@@ -13,6 +13,8 @@ import CDSContentSwitcherItem from '../content-switcher/content-switcher-item';
 import { TABS_ICON_SIZE, TABS_TYPE } from './defs';
 import styles from './tabs.scss?lit';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
+import HostListenerMixin from '../../globals/mixins/host-listener';
+import HostListener from '../../globals/decorators/host-listener';
 import '../button/button';
 import Close16 from '@carbon/icons/es/close/16.js';
 import iconLoader from '../../globals/internal/icon-loader';
@@ -28,7 +30,7 @@ import { classMap } from 'lit/directives/class-map.js';
  * @fires cds-tab-closed - The custom event fired after a a tab is closed upon a user gesture.
  */
 @customElement(`${prefix}-tab`)
-export default class CDSTab extends CDSContentSwitcherItem {
+export default class CDSTab extends HostListenerMixin(CDSContentSwitcherItem) {
   /**
    * `true` if this tab should be highlighted.
    * If `true`, parent `<cds-tabs>` selects/deselects this tab upon keyboard interaction.
@@ -63,6 +65,13 @@ export default class CDSTab extends CDSContentSwitcherItem {
   tabTitle;
 
   /**
+   * An optional label to render under the primary tab label.
+   * Only useful for contained tabs.
+   */
+  @property({ attribute: 'secondary-label', reflect: true })
+  secondaryLabel?: string;
+
+  /**
    * **Experimental**: Display an empty dot badge on the Tab.
    */
   @property({ type: Boolean, reflect: true, attribute: 'badge-indicator' })
@@ -89,6 +98,23 @@ export default class CDSTab extends CDSContentSwitcherItem {
     this.tabTitle = content[0]?.textContent?.trim() || undefined;
   }
 
+  /**
+   * Handles `keydown` event on the tab.
+   * Triggers tab close when Delete key is pressed on a dismissable tab.
+   */
+  @HostListener('keydown')
+  protected _handleKeydown(event: KeyboardEvent) {
+    const { key } = event;
+    if (
+      this._dismissable &&
+      !this.disabled &&
+      (key === 'Delete' || key === 'Backspace')
+    ) {
+      event.preventDefault();
+      this._handleClose(event);
+    }
+  }
+
   connectedCallback() {
     if (!this.hasAttribute('role')) {
       this.setAttribute('role', 'listitem');
@@ -108,6 +134,7 @@ export default class CDSTab extends CDSContentSwitcherItem {
     const {
       badgeIndicator,
       disabled,
+      secondaryLabel,
       selected,
       tabTitle,
       _handleSlotChange: handleSlotChange,
@@ -146,6 +173,13 @@ export default class CDSTab extends CDSContentSwitcherItem {
         <span class="${prefix}--tabs__nav-item-label-wrapper">
           <slot @slotchange="${handleSlotChange}"></slot>
         </span>
+        ${secondaryLabel
+          ? html`<span
+              class="${prefix}--tabs__nav-item-secondary-label"
+              title="${secondaryLabel}"
+              >${secondaryLabel}</span
+            >`
+          : ''}
         ${!disabled && badgeIndicator
           ? html`<cds-badge-indicator></cds-badge-indicator>`
           : ''}
@@ -165,7 +199,11 @@ export default class CDSTab extends CDSContentSwitcherItem {
     return tabLink;
   }
 
-  _handleClick(event: Event) {
+  /**
+   * Handles the close action for the tab.
+   * Dispatches before-close and close events.
+   */
+  protected _handleClose(event: Event) {
     event.stopPropagation();
     const init = {
       bubbles: true,
@@ -187,6 +225,13 @@ export default class CDSTab extends CDSContentSwitcherItem {
         new CustomEvent((this.constructor as typeof CDSTab).eventClose, init)
       );
     }
+  }
+
+  /**
+   * Handles click event on the close button.
+   */
+  _handleClick(event: Event) {
+    this._handleClose(event);
   }
 
   /**

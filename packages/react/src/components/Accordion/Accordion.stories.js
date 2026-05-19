@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -251,6 +251,11 @@ Skeleton.args = {
   isFlush: false,
   ordered: false,
 };
+Skeleton.parameters = {
+  controls: {
+    exclude: ['disabled', 'size'],
+  },
+};
 
 Skeleton.argTypes = {
   align: {
@@ -263,19 +268,9 @@ Skeleton.argTypes = {
   className: {
     control: false,
   },
-  disabled: {
-    table: {
-      disable: true,
-    },
-  },
   isFlush: {
     control: {
       type: 'boolean',
-    },
-  },
-  size: {
-    table: {
-      disable: true,
     },
   },
 };

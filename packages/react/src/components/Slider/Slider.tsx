@@ -705,9 +705,18 @@ const Slider = (props: SliderProps) => {
     // Set needsOnRelease flag so event fires on next update.
     setState({
       needsOnRelease: true,
-      isValid: true,
-      isValidUpper: true,
     });
+  };
+
+  const getValidityUpdateForHandle = (
+    handle: HandlePosition,
+    validity: boolean
+  ) => {
+    if (typeof invalid !== 'undefined') return {};
+
+    return handle === HandlePosition.UPPER
+      ? { isValidUpper: validity }
+      : { isValid: validity };
   };
 
   // TODO: Rename this reference.
@@ -751,7 +760,7 @@ const Slider = (props: SliderProps) => {
       setState({
         value: nearestStepValue(value),
         left,
-        isValid: true,
+        ...getValidityUpdateForHandle(HandlePosition.LOWER, true),
       });
     }
     // TODO: Investigate if it would be better to not call `setState`
@@ -826,7 +835,7 @@ const Slider = (props: SliderProps) => {
       setState({
         value: nearestStepValue(value),
         left,
-        isValid: true,
+        ...getValidityUpdateForHandle(HandlePosition.LOWER, true),
       });
     }
     setState({ correctedValue: null, correctedPosition: null });
@@ -925,12 +934,12 @@ const Slider = (props: SliderProps) => {
       | HandlePosition
       | undefined;
 
-    if (handlePosition === HandlePosition.LOWER) {
-      setState({ isValid: validity });
-    } else if (handlePosition === HandlePosition.UPPER) {
-      setState({ isValidUpper: validity });
-    }
-    setState({ isValid: validity });
+    setState(
+      getValidityUpdateForHandle(
+        handlePosition ?? HandlePosition.LOWER,
+        validity
+      )
+    );
 
     if (validity) {
       const adjustedValue = handlePosition
@@ -1101,13 +1110,13 @@ const Slider = (props: SliderProps) => {
       setState({
         value: valueUpper && newValue > valueUpper ? valueUpper : newValue,
         left: valueUpper && newValue > valueUpper ? leftUpper : newLeft,
-        isValid: true,
+        ...getValidityUpdateForHandle(handle, true),
       });
     } else {
       setState({
         valueUpper: value && newValue < value ? value : newValue,
         leftUpper: value && newValue < value ? left : newLeft,
-        isValidUpper: true,
+        ...getValidityUpdateForHandle(handle, true),
       });
     }
   };
@@ -1123,7 +1132,7 @@ const Slider = (props: SliderProps) => {
         // @ts-expect-error - Passing a string to something that expects a
         // number.
         value,
-        isValid: true,
+        ...getValidityUpdateForHandle(handle, true),
       });
     } else {
       setState({
@@ -1132,7 +1141,7 @@ const Slider = (props: SliderProps) => {
         // @ts-expect-error - Passing a string to something that expects a
         // number.
         valueUpper: value,
-        isValidUpper: true,
+        ...getValidityUpdateForHandle(handle, true),
       });
     }
   };

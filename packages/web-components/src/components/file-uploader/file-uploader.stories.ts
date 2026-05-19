@@ -110,6 +110,14 @@ const argTypes = {
   },
 };
 
+const fileUploaderItemArgTypes = {
+  // more will be added in https://github.com/carbon-design-system/carbon/issues/20911
+  disabled: {
+    control: 'boolean',
+    description: 'Controls the disabled state of this file uploader item.',
+  },
+};
+
 export const Default = {
   args,
   argTypes,
@@ -196,9 +204,13 @@ export const FileUploaderDropContainer = {
 };
 
 export const FileUploaderItem = {
-  render: () => {
+  argTypes: { ...fileUploaderItemArgTypes },
+  render: (args) => {
+    const { disabled } = args ?? {};
     return html`
-      <cds-file-uploader-item state="${FILE_UPLOADER_ITEM_STATE.EDIT}">
+      <cds-file-uploader-item
+        state="${FILE_UPLOADER_ITEM_STATE.EDIT}"
+        ?disabled=${disabled}>
         README.md
       </cds-file-uploader-item>
     `;
