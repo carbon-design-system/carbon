@@ -11,7 +11,6 @@ import React, {
   forwardRef,
   useCallback,
   useImperativeHandle,
-  useLayoutEffect,
   useRef,
   useState,
   type HTMLAttributes,
@@ -202,24 +201,18 @@ const FileUploader = forwardRef<FileUploaderHandle, FileUploaderProps>(
     const [legacyFileNames, setLegacyFileNames] = useState<
       (string | undefined)[]
     >([]);
-    const [fileCountText, setFileCountText] = useState('');
     const [deletionAnnouncement, setDeletionAnnouncement] = useState('');
 
     const uploaderButton = useRef<HTMLLabelElement>(null);
     const nodesRef = useRef<HTMLElement[]>([]);
 
-    // Update file count text for screen readers
-    useLayoutEffect(() => {
-      const count = fileItems.length || legacyFileNames.length;
-
-      if (count === 0) {
-        setFileCountText('');
-      } else if (count === 1) {
-        setFileCountText(' 1 file selected.');
-      } else {
-        setFileCountText(` ${count} files selected.`);
-      }
-    }, [fileItems, legacyFileNames]);
+    const count = fileItems.length || legacyFileNames.length;
+    const fileCountText =
+      count === 0
+        ? ''
+        : count === 1
+          ? ' 1 file selected.'
+          : ` ${count} files selected.`;
 
     const createFileItem = useCallback(
       (file: File & { invalidFileType?: boolean }): FileItem => ({
