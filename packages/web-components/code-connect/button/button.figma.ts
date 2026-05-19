@@ -1,32 +1,32 @@
 /**
- * Copyright IBM Corp. 2016, 2026
+ * Copyright IBM Corp. 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
-// @ts-nocheck
-import React from 'react';
-import { Button, ButtonSkeleton } from '@carbon/react';
-import figma from '@figma/code-connect';
+import figma, { html } from '@figma/code-connect/html';
 
 figma.connect(
-  Button,
   'https://www.figma.com/file/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?type=design&node-id=1854-1776&mode=dev',
   {
     props: {
       disabled: figma.enum('State', {
         Disabled: true,
       }),
-      buttonText: figma.string('Button text'),
+      buttonText: figma.enum('Type', {
+        // Conditionally show the buttonText in the Code Connect only if the type is 'Text + Icon'
+        'Icon only': '',
+        'Text + Icon': figma.string('Button text'),
+      }),
       kind: figma.enum('Style', {
         Primary: 'primary',
         Secondary: 'secondary',
         Tertiary: 'tertiary',
         Ghost: 'ghost',
         'Danger primary': 'danger',
-        'Danger tertiary': 'danger--tertiary',
-        'Danger ghost': 'danger--ghost',
+        'Danger tertiary': 'danger-tertiary',
+        'Danger ghost': 'danger-ghost',
       }),
       size: figma.enum('Size', {
         Large: 'lg',
@@ -44,14 +44,19 @@ figma.connect(
       }),
       renderIcon: figma.instance('Swap icon'),
     },
-    example: ({ ...props, buttonText }) => {
-      return <Button {...props}>{buttonText}</Button>;
-    },
+    example: (props) =>
+      html`<cds-button
+        disabled=${props.disabled}
+        kind=${props.kind}
+        size=${props.size}
+        isExpressive=${props.isExpressive}>
+        ${props.buttonText} ${props.renderIcon}
+      </cds-button>`,
+    imports: ["import '@carbon/web-components/es/components/button/button.js'"],
   }
 );
 
 figma.connect(
-  ButtonSkeleton,
   'https://www.figma.com/file/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?type=design&node-id=1854-1776&mode=dev',
   {
     variant: { State: 'Skeleton' },
@@ -65,8 +70,8 @@ figma.connect(
         '2X large': '2xl',
       }),
     },
-    example: ({ size }) => {
-      return <ButtonSkeleton size={size} />;
-    },
+    example: (props) =>
+      html`<cds-button-skeleton size=${props.size}></cds-button-skeleton>`,
+    imports: ["import '@carbon/web-components/es/components/button/button.js'"],
   }
 );
