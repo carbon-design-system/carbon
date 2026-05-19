@@ -216,12 +216,11 @@ describe('ModalWrapper', () => {
 
     const triggerBtn = screen.getByText('Launch modal');
     const submitBtn = screen.getByText('Save');
+
+    await userEvent.click(triggerBtn);
+    expect(submitBtn).toHaveFocus();
     await userEvent.click(submitBtn);
-
+    expect(triggerBtn).toHaveFocus();
     expect(handleSubmit).toHaveBeenCalled();
-
-    await waitFor(() => {
-      expect(triggerBtn).toHaveFocus();
-    });
   });
 });
