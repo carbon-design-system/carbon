@@ -43,120 +43,72 @@ const transform = (fileInfo, api) => {
   let shouldImportButton = false;
   let shouldImportUseState = false;
 
-  // Helper to ensure imports for @carbon/react
-  const ensureReactImport = (identifierName) => {
-    const source = '@carbon/react';
+  // Helper to add imports to existing or create new import declarations
+  const ensureImport = (source, identifierName) => {
     const existingImport = root
-      .find(j.ImportDeclaration, {
-        source: { value: source },
-      })
-      .filter((path) => {
-        return path.node.specifiers.some(
-          (specifier) =>
-            specifier.imported && specifier.imported.name === identifierName
-        );
-      });
+      .find(j.ImportDeclaration, { source: { value: source } })
+      .filter((path) =>
+        path.node.specifiers.some((s) => s.imported?.name === identifierName)
+      );
 
     if (existingImport.size() === 0) {
-      // Check if there's already a @carbon/react import to add to
       const reactImport = root.find(j.ImportDeclaration, {
         source: { value: source },
       });
-
       if (reactImport.size() > 0) {
-        // Add to existing import
-        reactImport.forEach((path) => {
+        reactImport.forEach((path) =>
           path.node.specifiers.push(
             j.importSpecifier(j.identifier(identifierName))
-          );
-        });
-      } else {
-        // Create new import
-        const importDeclaration = j.importDeclaration(
-          [j.importSpecifier(j.identifier(identifierName))],
-          j.literal(source)
+          )
         );
-        root.find(j.Program).get('body', 0).insertBefore(importDeclaration);
+      } else {
+        root
+          .find(j.Program)
+          .get('body', 0)
+          .insertBefore(
+            j.importDeclaration(
+              [j.importSpecifier(j.identifier(identifierName))],
+              j.literal(source)
+            )
+          );
       }
     }
   };
 
-  // Helper to ensure imports from 'react' package
-  const ensureReactPackageImport = (identifierName) => {
-    const source = 'react';
-    const existingImport = root
-      .find(j.ImportDeclaration, {
-        source: { value: source },
-      })
-      .filter((path) => {
-        return path.node.specifiers.some(
-          (specifier) =>
-            specifier.imported && specifier.imported.name === identifierName
-        );
-      });
-
-    if (existingImport.size() === 0) {
-      // Check if there's already a react import to add to
-      const reactImport = root.find(j.ImportDeclaration, {
-        source: { value: source },
-      });
-
-      if (reactImport.size() > 0) {
-        // Add to existing import
-        reactImport.forEach((path) => {
-          path.node.specifiers.push(
-            j.importSpecifier(j.identifier(identifierName))
-          );
-        });
-      } else {
-        // Create new import
-        const importDeclaration = j.importDeclaration(
-          [j.importSpecifier(j.identifier(identifierName))],
-          j.literal(source)
-        );
-        root.find(j.Program).get('body', 0).insertBefore(importDeclaration);
-      }
-    }
-  };
-
-  // Helper to create JSX element
   const createJSXElement = (name, attributes, children) => {
     const openingElement = j.jsxOpeningElement(
       j.jsxIdentifier(name),
       attributes,
       children.length === 0
     );
-
-    if (children.length === 0) {
-      return j.jsxElement(openingElement, null, []);
-    }
-
-    const closingElement = j.jsxClosingElement(j.jsxIdentifier(name));
-    return j.jsxElement(openingElement, closingElement, children);
+    return children.length === 0
+      ? j.jsxElement(openingElement, null, [])
+      : j.jsxElement(
+          openingElement,
+          j.jsxClosingElement(j.jsxIdentifier(name)),
+          children
+        );
   };
 
-  // Helper to create member expression JSX element (e.g., Coachmark.Content)
   const createMemberJSXElement = (object, property, attributes, children) => {
     const memberExpression = j.jsxMemberExpression(
       j.jsxIdentifier(object),
       j.jsxIdentifier(property)
     );
-
     const openingElement = j.jsxOpeningElement(
       memberExpression,
       attributes,
       children.length === 0
     );
-
-    if (children.length === 0) {
-      return j.jsxElement(openingElement, null, []);
-    }
-
-    const closingElement = j.jsxClosingElement(memberExpression);
-    return j.jsxElement(openingElement, closingElement, children);
+    return children.length === 0
+      ? j.jsxElement(openingElement, null, [])
+      : j.jsxElement(
+          openingElement,
+          j.jsxClosingElement(memberExpression),
+          children
+        );
   };
 
-  // Helper to create nested member expression JSX element (e.g., Coachmark.Content.Header)
   const createNestedMemberJSXElement = (
     obj1,
     obj2,
@@ -164,91 +116,143 @@ const transform = (fileInfo, api) => {
     attributes,
     children
   ) => {
-    const innerMember = j.jsxMemberExpression(
-      j.jsxIdentifier(obj1),
-      j.jsxIdentifier(obj2)
-    );
     const outerMember = j.jsxMemberExpression(
-      innerMember,
+      j.jsxMemberExpression(j.jsxIdentifier(obj1), j.jsxIdentifier(obj2)),
       j.jsxIdentifier(property)
     );
-
     const openingElement = j.jsxOpeningElement(
       outerMember,
       attributes,
       children.length === 0
     );
+    return children.length === 0
+      ? j.jsxElement(openingElement, null, [])
+      : j.jsxElement(
+          openingElement,
+          j.jsxClosingElement(outerMember),
+          children
+        );
+  };
 
-    if (children.length === 0) {
-      return j.jsxElement(openingElement, null, []);
+  // Transform target elements (CoachmarkBeacon or CoachmarkButton)
+  const processTargetElement = (targetValue) => {
+    if (
+      targetValue.type !== 'JSXExpressionContainer' ||
+      targetValue.expression.type !== 'JSXElement'
+    )
+      return null;
+
+    const expression = targetValue.expression;
+    const elementName = expression.openingElement.name.name;
+
+    // Transform CoachmarkBeacon with buttonProps
+    if (elementName === 'CoachmarkBeacon') {
+      shouldImportUseState = true;
+      const label = expression.openingElement.attributes.find(
+        (a) => a.name?.name === 'label'
+      )?.value;
+      const newAttributes = [
+        j.jsxAttribute(
+          j.jsxIdentifier('buttonProps'),
+          j.jsxExpressionContainer(
+            j.objectExpression([
+              j.property(
+                'init',
+                j.identifier('onClick'),
+                j.identifier('handleBeaconClick')
+              ),
+              j.property('init', j.identifier('id'), j.literal('CoachmarkBtn')),
+            ])
+          )
+        ),
+      ];
+      if (label)
+        newAttributes.unshift(j.jsxAttribute(j.jsxIdentifier('label'), label));
+      return createJSXElement('CoachmarkBeacon', newAttributes, []);
     }
 
-    const closingElement = j.jsxClosingElement(outerMember);
-    return j.jsxElement(openingElement, closingElement, children);
+    // Transform CoachmarkButton to regular Button
+    if (elementName === 'CoachmarkButton') {
+      shouldImportButton = true;
+      shouldImportUseState = true;
+      const attrs = expression.openingElement.attributes;
+      const buttonAttributes = [
+        j.jsxAttribute(
+          j.jsxIdentifier('id'),
+          j.literal('CoachmarkTriggerRefBtn')
+        ),
+        j.jsxAttribute(
+          j.jsxIdentifier('onClick'),
+          j.jsxExpressionContainer(j.identifier('handleButtonClick'))
+        ),
+      ];
+      ['kind', 'size', 'renderIcon'].forEach((name) => {
+        const attr = attrs.find((a) => a.name?.name === name);
+        if (attr)
+          buttonAttributes.push(
+            j.jsxAttribute(j.jsxIdentifier(name), attr.value)
+          );
+      });
+      return createJSXElement(
+        'Button',
+        buttonAttributes,
+        expression.children || []
+      );
+    }
+    return null;
   };
 
   // Transform Coachmark components
   root
-    .find(j.JSXElement, {
-      openingElement: { name: { name: 'Coachmark' } },
-    })
+    .find(j.JSXElement, { openingElement: { name: { name: 'Coachmark' } } })
     .forEach((path) => {
       const attributes = path.node.openingElement.attributes;
       const newAttributes = [];
-      let themeValue = null;
-      let closeIconDescription = null;
-      let targetElement = null;
-      let overlayKind = null;
-      let closeButtonLabel = null;
-      let overlayElements = [];
+      let themeValue = null,
+        closeIconDescription = null,
+        targetElement = null,
+        overlayKind = null;
+      let closeButtonLabel = null,
+        overlayElements = [];
 
-      // Process attributes
+      // Process and transform attributes
       attributes.forEach((attr) => {
         if (attr.type !== 'JSXAttribute') {
           newAttributes.push(attr);
           return;
         }
-
         const attrName = attr.name.name;
 
         if (attrName === 'theme') {
-          // Map theme values
           if (attr.value.type === 'Literal') {
-            const oldTheme = attr.value.value;
-            if (oldTheme === 'dark') {
-              themeValue = 'g90'; // or g100, defaulting to g90
-            } else if (oldTheme === 'light') {
-              themeValue = 'white'; // or g10, defaulting to white
-            }
+            themeValue =
+              attr.value.value === 'dark'
+                ? 'g90'
+                : attr.value.value === 'light'
+                  ? 'white'
+                  : null;
           }
           shouldImportTheme = true;
         } else if (attrName === 'positionTune') {
-          // Rename positionTune to position
           attr.name.name = 'position';
           newAttributes.push(attr);
         } else if (attrName === 'closeIconDescription') {
-          // Store for later use in Coachmark.Content.Header
           closeIconDescription = attr.value;
         } else if (attrName === 'target') {
-          // Store target element for processing
           targetElement = attr.value;
         } else if (attrName === 'overlayKind') {
-          // Check if it's FLOATING
           overlayKind = attr.value;
         } else {
           newAttributes.push(attr);
         }
       });
 
-      // Add open prop with state management placeholder
       newAttributes.push(
         j.jsxAttribute(
           j.jsxIdentifier('open'),
           j.jsxExpressionContainer(j.identifier('isOpen'))
         )
       );
-
-      // Add floating prop if overlayKind was FLOATING
       if (overlayKind) {
         newAttributes.push(
           j.jsxAttribute(
@@ -258,32 +262,22 @@ const transform = (fileInfo, api) => {
         );
       }
 
-      // Process children to find CoachmarkOverlayElements
       const newChildren = [];
-
-      // Process target element first
       if (targetElement) {
-        const targetChild = processTargetElement(targetElement, j);
-        if (targetChild) {
-          newChildren.push(targetChild);
-        }
+        const targetChild = processTargetElement(targetElement);
+        if (targetChild) newChildren.push(targetChild);
       }
 
-      // Process existing children
       if (path.node.children) {
         path.node.children.forEach((child) => {
           if (
             child.type === 'JSXElement' &&
             child.openingElement.name.name === 'CoachmarkOverlayElements'
           ) {
-            // Extract closeButtonLabel
             child.openingElement.attributes.forEach((attr) => {
-              if (attr.name && attr.name.name === 'closeButtonLabel') {
+              if (attr.name?.name === 'closeButtonLabel')
                 closeButtonLabel = attr.value;
-              }
             });
-
-            // Extract overlay elements
             child.children.forEach((overlayChild) => {
               if (
                 overlayChild.type === 'JSXElement' &&
@@ -297,63 +291,53 @@ const transform = (fileInfo, api) => {
         });
       }
 
-      // Create Coachmark.Content structure
+      // Build content body from overlay elements
       const contentBodyChildren = [];
-
-      // Process overlay elements
       overlayElements.forEach((element) => {
-        let title = null;
-        let description = null;
+        const attrs = element.openingElement.attributes;
+        const title = attrs.find((a) => a.name?.name === 'title')?.value;
+        const description = attrs.find(
+          (a) => a.name?.name === 'description'
+        )?.value;
 
-        element.openingElement.attributes.forEach((attr) => {
-          if (attr.name && attr.name.name === 'title') {
-            title = attr.value;
-          } else if (attr.name && attr.name.name === 'description') {
-            description = attr.value;
-          }
-        });
-
-        // Add title as h2
         if (title) {
           const titleValue = title.type === 'Literal' ? title.value : title;
-          const h2Element = j.jsxElement(
-            j.jsxOpeningElement(j.jsxIdentifier('h2'), []),
-            j.jsxClosingElement(j.jsxIdentifier('h2')),
-            [j.jsxText(typeof titleValue === 'string' ? titleValue : '')]
+          contentBodyChildren.push(
+            j.jsxElement(
+              j.jsxOpeningElement(j.jsxIdentifier('h2'), []),
+              j.jsxClosingElement(j.jsxIdentifier('h2')),
+              [j.jsxText(typeof titleValue === 'string' ? titleValue : '')]
+            )
           );
-          contentBodyChildren.push(h2Element);
         }
-
-        // Add description as p
         if (description) {
           const descValue =
             description.type === 'Literal' ? description.value : description;
-          const pElement = j.jsxElement(
-            j.jsxOpeningElement(j.jsxIdentifier('p'), []),
-            j.jsxClosingElement(j.jsxIdentifier('p')),
-            [j.jsxText(typeof descValue === 'string' ? descValue : '')]
+          contentBodyChildren.push(
+            j.jsxElement(
+              j.jsxOpeningElement(j.jsxIdentifier('p'), []),
+              j.jsxClosingElement(j.jsxIdentifier('p')),
+              [j.jsxText(typeof descValue === 'string' ? descValue : '')]
+            )
           );
-          contentBodyChildren.push(pElement);
         }
       });
 
-      // Add Button if closeButtonLabel exists
       if (closeButtonLabel) {
         shouldImportButton = true;
         const buttonLabel =
           closeButtonLabel.type === 'Literal' ? closeButtonLabel.value : 'Done';
-
-        const buttonElement = j.jsxElement(
-          j.jsxOpeningElement(j.jsxIdentifier('Button'), [
-            j.jsxAttribute(j.jsxIdentifier('size'), j.literal('sm')),
-          ]),
-          j.jsxClosingElement(j.jsxIdentifier('Button')),
-          [j.jsxText(buttonLabel)]
+        contentBodyChildren.push(
+          j.jsxElement(
+            j.jsxOpeningElement(j.jsxIdentifier('Button'), [
+              j.jsxAttribute(j.jsxIdentifier('size'), j.literal('sm')),
+            ]),
+            j.jsxClosingElement(j.jsxIdentifier('Button')),
+            [j.jsxText(buttonLabel)]
+          )
         );
-        contentBodyChildren.push(buttonElement);
       }
 
-      // Create Coachmark.Content.Body
       const contentBody = createNestedMemberJSXElement(
         'Coachmark',
         'Content',
@@ -361,17 +345,14 @@ const transform = (fileInfo, api) => {
         [],
         contentBodyChildren
       );
-
-      // Create Coachmark.Content.Header
-      const headerAttributes = [];
-      if (closeIconDescription) {
-        headerAttributes.push(
-          j.jsxAttribute(
-            j.jsxIdentifier('closeIconDescription'),
-            closeIconDescription
-          )
-        );
-      }
+      const headerAttributes = closeIconDescription
+        ? [
+            j.jsxAttribute(
+              j.jsxIdentifier('closeIconDescription'),
+              closeIconDescription
+            ),
+          ]
+        : [];
       const contentHeader = createNestedMemberJSXElement(
         'Coachmark',
         'Content',
@@ -379,8 +360,6 @@ const transform = (fileInfo, api) => {
         headerAttributes,
         []
       );
-
-      // Create Coachmark.Content
       const content = createMemberJSXElement(
         'Coachmark',
         'Content',
@@ -389,175 +368,64 @@ const transform = (fileInfo, api) => {
       );
 
       newChildren.push(content);
-
-      // Update the Coachmark element
       path.node.openingElement.attributes = newAttributes;
       path.node.children = newChildren;
 
-      // Wrap with Theme if needed
       if (themeValue) {
-        const themeAttr = j.jsxAttribute(
-          j.jsxIdentifier('theme'),
-          j.literal(themeValue)
-        );
-
-        const cleanCoachmarkNode = j.jsxElement(
-          path.node.openingElement,
-          path.node.closingElement,
-          path.node.children
-        );
-
         const themeElement = j.jsxElement(
-          j.jsxOpeningElement(j.jsxIdentifier('Theme'), [themeAttr]),
+          j.jsxOpeningElement(j.jsxIdentifier('Theme'), [
+            j.jsxAttribute(j.jsxIdentifier('theme'), j.literal(themeValue)),
+          ]),
           j.jsxClosingElement(j.jsxIdentifier('Theme')),
-          [cleanCoachmarkNode]
+          [
+            j.jsxElement(
+              path.node.openingElement,
+              path.node.closingElement,
+              path.node.children
+            ),
+          ]
         );
-
         j(path).replaceWith(themeElement);
       }
     });
 
-  // Helper function to process target element
-  function processTargetElement(targetValue, j) {
-    if (targetValue.type === 'JSXExpressionContainer') {
-      const expression = targetValue.expression;
-
-      if (expression.type === 'JSXElement') {
-        const elementName = expression.openingElement.name.name;
-
-        if (elementName === 'CoachmarkBeacon') {
-          // Transform CoachmarkBeacon
-          let label = null;
-          shouldImportUseState = true;
-
-          expression.openingElement.attributes.forEach((attr) => {
-            if (attr.name && attr.name.name === 'label') {
-              label = attr.value;
-            }
-          });
-
-          const buttonPropsValue = j.objectExpression([
-            j.property(
-              'init',
-              j.identifier('onClick'),
-              j.identifier('handleBeaconClick')
-            ),
-            j.property('init', j.identifier('id'), j.literal('CoachmarkBtn')),
-          ]);
-
-          const newAttributes = [
-            j.jsxAttribute(
-              j.jsxIdentifier('buttonProps'),
-              j.jsxExpressionContainer(buttonPropsValue)
-            ),
-          ];
-
-          if (label) {
-            newAttributes.unshift(
-              j.jsxAttribute(j.jsxIdentifier('label'), label)
-            );
-          }
-
-          return createJSXElement('CoachmarkBeacon', newAttributes, []);
-        } else if (elementName === 'CoachmarkButton') {
-          // Transform CoachmarkButton to Button
-          let kind = null;
-          let size = null;
-          let renderIcon = null;
-          let children = [];
-
-          expression.openingElement.attributes.forEach((attr) => {
-            if (attr.name && attr.name.name === 'kind') {
-              kind = attr.value;
-            } else if (attr.name && attr.name.name === 'size') {
-              size = attr.value;
-            } else if (attr.name && attr.name.name === 'renderIcon') {
-              renderIcon = attr.value;
-            }
-          });
-
-          if (expression.children) {
-            children = expression.children;
-          }
-
-          const buttonAttributes = [
-            j.jsxAttribute(
-              j.jsxIdentifier('id'),
-              j.literal('CoachmarkTriggerRefBtn')
-            ),
-            j.jsxAttribute(
-              j.jsxIdentifier('onClick'),
-              j.jsxExpressionContainer(j.identifier('handleButtonClick'))
-            ),
-          ];
-
-          if (kind) {
-            buttonAttributes.push(
-              j.jsxAttribute(j.jsxIdentifier('kind'), kind)
-            );
-          }
-
-          if (size) {
-            buttonAttributes.push(
-              j.jsxAttribute(j.jsxIdentifier('size'), size)
-            );
-          }
-
-          if (renderIcon) {
-            buttonAttributes.push(
-              j.jsxAttribute(j.jsxIdentifier('renderIcon'), renderIcon)
-            );
-          }
-
-          shouldImportButton = true;
-          shouldImportUseState = true;
-          return createJSXElement('Button', buttonAttributes, children);
-        }
-      }
-    }
-    return null;
-  }
-
-  // Update import statements for @carbon/ibm-products
+  // Update @carbon/ibm-products imports to preview versions
   root
     .find(j.ImportDeclaration)
     .filter((path) => path.node.source.value === '@carbon/ibm-products')
     .forEach((path) => {
+      const removedImports = [
+        'CoachmarkOverlayElements',
+        'CoachmarkOverlayElement',
+        'CoachmarkButton',
+        'BEACON_KIND',
+        'COACHMARK_OVERLAY_KIND',
+      ];
       const newSpecifiers = [];
 
       path.node.specifiers.forEach((specifier) => {
-        if (specifier.imported) {
-          const importedName = specifier.imported.name;
+        if (!specifier.imported) {
+          newSpecifiers.push(specifier);
+          return;
+        }
 
-          // Remove old imports that are no longer needed
-          if (
-            importedName === 'CoachmarkOverlayElements' ||
-            importedName === 'CoachmarkOverlayElement' ||
-            importedName === 'CoachmarkButton' ||
-            importedName === 'BEACON_KIND' ||
-            importedName === 'COACHMARK_OVERLAY_KIND'
-          ) {
-            return; // Skip these imports
-          }
+        const importedName = specifier.imported.name;
+        if (removedImports.includes(importedName)) return;
 
-          // Transform Coachmark imports to preview versions with aliases
-          if (importedName === 'Coachmark') {
-            newSpecifiers.push(
-              j.importSpecifier(
-                j.identifier('preview__Coachmark'),
-                j.identifier('Coachmark')
-              )
-            );
-          } else if (importedName === 'CoachmarkBeacon') {
-            newSpecifiers.push(
-              j.importSpecifier(
-                j.identifier('preview__CoachmarkBeacon'),
-                j.identifier('CoachmarkBeacon')
-              )
-            );
-          } else {
-            newSpecifiers.push(specifier);
-          }
+        if (importedName === 'Coachmark') {
+          newSpecifiers.push(
+            j.importSpecifier(
+              j.identifier('preview__Coachmark'),
+              j.identifier('Coachmark')
+            )
+          );
+        } else if (importedName === 'CoachmarkBeacon') {
+          newSpecifiers.push(
+            j.importSpecifier(
+              j.identifier('preview__CoachmarkBeacon'),
+              j.identifier('CoachmarkBeacon')
+            )
+          );
         } else {
           newSpecifiers.push(specifier);
         }
@@ -566,120 +434,65 @@ const transform = (fileInfo, api) => {
       path.node.specifiers = newSpecifiers;
     });
 
-  // Add Theme import if needed
-  if (shouldImportTheme) {
-    ensureReactImport('Theme');
-  }
+  // Add required imports
+  if (shouldImportTheme) ensureImport('@carbon/react', 'Theme');
+  if (shouldImportButton) ensureImport('@carbon/react', 'Button');
+  if (shouldImportUseState) ensureImport('react', 'useState');
 
-  // Add Button import if needed
-  if (shouldImportButton) {
-    ensureReactImport('Button');
-  }
-
-  if (shouldImportUseState) {
-    ensureReactPackageImport('useState');
-  }
-
+  // Inject state management into component functions
   root.find(j.VariableDeclarator).forEach((path) => {
     const init = path.node.init;
-
     if (
       !init ||
       init.type !== 'ArrowFunctionExpression' ||
       init.body.type !== 'JSXElement'
-    ) {
+    )
       return;
-    }
 
     const jsx = init.body;
-
-    const containsTheme =
-      jsx.openingElement &&
-      jsx.openingElement.name &&
-      jsx.openingElement.name.name === 'Theme';
-
-    const containsCoachmark =
-      jsx.openingElement &&
-      jsx.openingElement.name &&
-      jsx.openingElement.name.name === 'Coachmark';
-
-    if (!containsTheme && !containsCoachmark) {
-      return;
-    }
+    const containsTheme = jsx.openingElement?.name?.name === 'Theme';
+    const containsCoachmark = jsx.openingElement?.name?.name === 'Coachmark';
+    if (!containsTheme && !containsCoachmark) return;
 
     const jsxSource = j(jsx).toSource();
-
     const usesBeaconHandler = jsxSource.includes('handleBeaconClick');
     const usesButtonHandler = jsxSource.includes('handleButtonClick');
-
-    // Skip if neither handler is used
-    if (!usesBeaconHandler && !usesButtonHandler) {
-      return;
-    }
+    if (!usesBeaconHandler && !usesButtonHandler) return;
 
     shouldImportUseState = true;
-
-    const bodyStatements = [];
-
-    // const [isOpen, setIsOpen] = useState(true);
-    bodyStatements.push(
+    const bodyStatements = [
       j.variableDeclaration('const', [
         j.variableDeclarator(
           j.arrayPattern([j.identifier('isOpen'), j.identifier('setIsOpen')]),
           j.callExpression(j.identifier('useState'), [j.literal(true)])
         ),
-      ])
-    );
+      ]),
+    ];
 
-    // const handleBeaconClick = () => { ... }
-    if (usesBeaconHandler) {
-      bodyStatements.push(
-        j.variableDeclaration('const', [
-          j.variableDeclarator(
-            j.identifier('handleBeaconClick'),
-            j.arrowFunctionExpression(
-              [],
-              j.blockStatement([
-                j.expressionStatement(
-                  j.callExpression(j.identifier('setIsOpen'), [
-                    j.arrowFunctionExpression(
-                      [j.identifier('isOpen')],
-                      j.unaryExpression('!', j.identifier('isOpen'))
-                    ),
-                  ])
-                ),
-              ])
-            )
-          ),
-        ])
-      );
-    }
+    const createHandler = (name) =>
+      j.variableDeclaration('const', [
+        j.variableDeclarator(
+          j.identifier(name),
+          j.arrowFunctionExpression(
+            [],
+            j.blockStatement([
+              j.expressionStatement(
+                j.callExpression(j.identifier('setIsOpen'), [
+                  j.arrowFunctionExpression(
+                    [j.identifier('isOpen')],
+                    j.unaryExpression('!', j.identifier('isOpen'))
+                  ),
+                ])
+              ),
+            ])
+          )
+        ),
+      ]);
 
-    // const handleButtonClick = () => { ... }
-    if (usesButtonHandler) {
-      bodyStatements.push(
-        j.variableDeclaration('const', [
-          j.variableDeclarator(
-            j.identifier('handleButtonClick'),
-            j.arrowFunctionExpression(
-              [],
-              j.blockStatement([
-                j.expressionStatement(
-                  j.callExpression(j.identifier('setIsOpen'), [
-                    j.arrowFunctionExpression(
-                      [j.identifier('isOpen')],
-                      j.unaryExpression('!', j.identifier('isOpen'))
-                    ),
-                  ])
-                ),
-              ])
-            )
-          ),
-        ])
-      );
-    }
-
-    // return (...)
+    if (usesBeaconHandler)
+      bodyStatements.push(createHandler('handleBeaconClick'));
+    if (usesButtonHandler)
+      bodyStatements.push(createHandler('handleButtonClick'));
     bodyStatements.push(j.returnStatement(jsx));
 
     init.body = j.blockStatement(bodyStatements);

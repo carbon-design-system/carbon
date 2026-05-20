@@ -19,7 +19,7 @@ export const Example1 = () => (
     target={
       <CoachmarkBeacon label="Show information" kind={BEACON_KIND.DEFAULT} />
     }
-    theme="dark">
+    theme="light">
     <CoachmarkOverlayElements closeButtonLabel="Done">
       <CoachmarkOverlayElement
         title="Hello World"
@@ -67,23 +67,6 @@ export const Example3 = () => (
       <CoachmarkOverlayElement
         title="New Feature"
         description="Check out this new feature"
-      />
-    </CoachmarkOverlayElements>
-  </Coachmark>
-);
-
-// Example 4: Coachmark without closeButtonLabel
-export const Example4 = () => (
-  <Coachmark
-    align="right"
-    closeIconDescription="Close"
-    positionTune={{ x: 0, y: 0 }}
-    target={<CoachmarkBeacon label="Info" kind={BEACON_KIND.DEFAULT} />}
-    theme="light">
-    <CoachmarkOverlayElements>
-      <CoachmarkOverlayElement
-        title="Information"
-        description="Important details here"
       />
     </CoachmarkOverlayElements>
   </Coachmark>
