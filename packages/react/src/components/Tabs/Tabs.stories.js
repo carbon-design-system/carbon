@@ -40,6 +40,18 @@ import {
   Icon,
 } from '@carbon/icons-react';
 
+const containedTabsSizeArgType = {
+  size: {
+    control: { type: 'select' },
+    options: ['sm', 'md', 'lg'],
+    description: 'Specify the size of the contained tabs',
+  },
+};
+
+const containedTabsSizeArgs = {
+  size: 'lg',
+};
+
 export default {
   title: 'Components/Tabs',
   component: Tabs,
@@ -199,7 +211,7 @@ export const Dismissable = () => {
     </>
   );
 };
-export const DismissableContained = () => {
+export const DismissableContained = (args) => {
   const tabs = [
     {
       label: 'Dashboard',
@@ -257,7 +269,7 @@ export const DismissableContained = () => {
         onChange={handleTabChange}
         dismissable
         onTabCloseRequest={handleCloseTabRequest}>
-        <TabList contained>
+        <TabList contained size={args.size}>
           {renderedTabs.map((tab, index) => (
             <Tab key={index} disabled={tab.disabled}>
               {tab.label}
@@ -269,6 +281,9 @@ export const DismissableContained = () => {
     </>
   );
 };
+
+DismissableContained.argTypes = containedTabsSizeArgType;
+DismissableContained.args = containedTabsSizeArgs;
 
 export const DismissableWithIcons = ({ contained }) => {
   const tabs = [
@@ -491,10 +506,10 @@ IconOnly.argTypes = {
   },
 };
 
-export const Contained = () => {
+export const Contained = (args) => {
   return (
     <Tabs>
-      <TabList contained>
+      <TabList contained size={args.size}>
         <Tab>Dashboard</Tab>
         <Tab>Monitoring</Tab>
         <Tab>Activity</Tab>
@@ -529,10 +544,13 @@ export const Contained = () => {
   );
 };
 
-export const ContainedWithIcons = () => {
+Contained.argTypes = containedTabsSizeArgType;
+Contained.args = containedTabsSizeArgs;
+
+export const ContainedWithIcons = (args) => {
   return (
     <Tabs>
-      <TabList contained>
+      <TabList contained size={args.size}>
         <Tab renderIcon={Dashboard}>Dashboard</Tab>
         <Tab renderIcon={CloudMonitoring}>Monitoring</Tab>
         <Tab renderIcon={Activity}>Activity</Tab>
@@ -568,6 +586,9 @@ export const ContainedWithIcons = () => {
     </Tabs>
   );
 };
+
+ContainedWithIcons.argTypes = containedTabsSizeArgType;
+ContainedWithIcons.args = containedTabsSizeArgs;
 
 export const ContainedWithSecondaryLabels = () => {
   return (
@@ -613,7 +634,7 @@ export const ContainedWithSecondaryLabelsAndIcons = () => {
   return (
     <Tabs>
       <TabList contained>
-        <Tab renderIcon={Task} secondaryLabel="(21/25">
+        <Tab renderIcon={Task} secondaryLabel="(21/25)">
           Engage
         </Tab>
         <Tab renderIcon={IbmWatsonDiscovery} secondaryLabel="(12/16)">
@@ -657,12 +678,12 @@ export const ContainedWithSecondaryLabelsAndIcons = () => {
   );
 };
 
-export const ContainedFullWidth = () => {
+export const ContainedFullWidth = (args) => {
   return (
     <Grid condensed>
       <Column lg={16} md={8} sm={4}>
         <Tabs>
-          <TabList contained fullWidth>
+          <TabList contained fullWidth size={args.size}>
             <Tab>TLS</Tab>
             <Tab>Origin</Tab>
             <Tab disabled>Rate limiting</Tab>
@@ -875,3 +896,6 @@ IconOnlyVisualSnapshots.play = async ({ userEvent }) => {
 };
 
 IconOnlyVisualSnapshots.tags = ['!dev', '!autodocs'];
+
+ContainedFullWidth.argTypes = containedTabsSizeArgType;
+ContainedFullWidth.args = containedTabsSizeArgs;

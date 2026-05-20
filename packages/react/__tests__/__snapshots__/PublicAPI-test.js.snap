@@ -6535,6 +6535,9 @@ Map {
       "danger": {
         "type": "bool",
       },
+      "dangerDescription": {
+        "type": "string",
+      },
       "decorator": {
         "type": "node",
       },
@@ -6704,6 +6707,9 @@ Map {
       },
       "danger": {
         "type": "bool",
+      },
+      "dangerDescription": {
+        "type": "string",
       },
       "inputref": {
         "args": [
@@ -12192,6 +12198,9 @@ Map {
         },
         "danger": {
           "type": "bool",
+        },
+        "dangerDescription": {
+          "type": "string",
         },
         "loadingDescription": {
           "type": "string",

@@ -393,7 +393,7 @@ $inset-transition: inset 110ms motion(standard, productive);
 
 :host(#{$prefix}-tabs[type='contained'])
   .#{$prefix}--tabs-nav-content-container {
-  block-size: $spacing-09;
+  block-size: layout.size('height');
 }
 
 :host(#{$prefix}-tab[type='contained']) {
@@ -401,9 +401,9 @@ $inset-transition: inset 110ms motion(standard, productive);
 
   a.#{$prefix}--tabs__nav-link {
     padding: $spacing-03 $spacing-05;
-    block-size: $spacing-09;
+    block-size: layout.size('height');
     // height - vertical padding
-    line-height: calc(#{$spacing-09} - (#{$spacing-03} * 2));
+    line-height: calc(#{layout.size('height')} - (#{$spacing-03} * 2));
   }
 }
 
@@ -455,7 +455,7 @@ $inset-transition: inset 110ms motion(standard, productive);
     // Draws the border without affecting the inner-content
     box-shadow: inset 0 $spacing-01 0 0 $interactive;
     // height - vertical padding
-    line-height: calc(#{$spacing-09} - (#{$spacing-03} * 2));
+    line-height: calc(#{layout.size('height')} - (#{$spacing-03} * 2));
   }
 
   .#{$prefix}--tabs__nav-link:focus,
