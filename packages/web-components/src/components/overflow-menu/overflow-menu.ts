@@ -416,6 +416,19 @@ class CDSOverflowMenu
     return html`${super.render()} `;
   }
 
+  /**
+   * Focuses the trigger button when focus is set on the host element.
+   */
+  focus() {
+    const triggerButton = this._getTriggerButton();
+    if (triggerButton) {
+      triggerButton.focus();
+      return;
+    }
+
+    super.focus();
+  }
+
   private _getLabelText() {
     const tooltipContent = this.querySelector(
       '[slot=tooltip-content]'

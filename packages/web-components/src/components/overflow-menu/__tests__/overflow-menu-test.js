@@ -99,6 +99,15 @@ describe('cds-overflow-menu', () => {
     expect(menuBody.open).to.be.false;
   });
 
+  it('should focus the trigger button when focused programmatically', async () => {
+    const el = await fixture(basicOverflowMenu);
+    const triggerButton = el.shadowRoot?.querySelector('button');
+
+    el.focus();
+
+    expect(el.shadowRoot?.activeElement).to.equal(triggerButton);
+  });
+
   it('should render icon slot in menu item', async () => {
     const el = await fixture(html`
       <cds-overflow-menu>
@@ -443,6 +452,25 @@ describe('cds-overflow-menu', () => {
 
       const firstItem = menu.querySelector('cds-menu-item');
       expect(document.activeElement).to.equal(firstItem);
+    });
+
+    it('should focus the trigger button when focused programmatically', async () => {
+      const featureFlag = await fixture(html`
+        <feature-flags enable-v12-overflowmenu="true">
+          <cds-overflow-menu label="Actions">
+            <cds-menu>
+              <cds-menu-item label="Stop app"></cds-menu-item>
+              <cds-menu-item label="Delete app" kind="danger"></cds-menu-item>
+            </cds-menu>
+          </cds-overflow-menu>
+        </feature-flags>
+      `);
+      const el = featureFlag.querySelector('cds-overflow-menu');
+      const triggerButton = el.shadowRoot?.querySelector('button');
+
+      el.focus();
+
+      expect(el.shadowRoot?.activeElement).to.equal(triggerButton);
     });
 
     it('should focus selectable composition when it is the first active item', async () => {
