@@ -45,6 +45,10 @@
   }
 }
 
+:host(#{$prefix}-file-uploader-item[disabled]) {
+  @extend .#{$prefix}--file__selected-file--disabled;
+}
+
 :host(#{$prefix}-file-uploader-item[size='md']) {
   @extend .#{$prefix}--file__selected-file--md;
 }
