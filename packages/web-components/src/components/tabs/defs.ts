@@ -69,3 +69,23 @@ export enum TABS_ICON_SIZE {
    */
   LARGE = 'lg',
 }
+
+/**
+ * Tabs size.
+ */
+export enum TABS_SIZE {
+  /**
+   * Small size.
+   */
+  SMALL = 'sm',
+
+  /**
+   * Medium size.
+   */
+  MEDIUM = 'md',
+
+  /**
+   * Large size.
+   */
+  LARGE = 'lg',
+}
