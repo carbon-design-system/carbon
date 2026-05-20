@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2026
+ * Copyright IBM Corp. 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -44,7 +44,8 @@ class CDSFluidDatePickerInput extends CDSDatePickerInput {
   declare invalidText: string;
 
   /**
-   * Specify whether this is a fluid variant
+   * Fluid variant is always true for this component.
+   * Overrides the base class default of false.
    */
   @property({ type: Boolean, reflect: true, attribute: 'is-fluid' })
   isFluid = true;

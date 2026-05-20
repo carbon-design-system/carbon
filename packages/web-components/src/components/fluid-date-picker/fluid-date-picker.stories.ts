@@ -14,9 +14,11 @@ const defaultArgs = {
   disabled: false,
   readonly: false,
   invalid: false,
-  invalidText: 'Invalid date format.',
+  invalidText:
+    'Error message that is really long can wrap to more lines but should not be excessively long.',
   warn: false,
-  warnText: 'Warning message.',
+  warnText:
+    'Warning message that is really long can wrap to more lines but should not be excessively long.',
   placeholder: 'mm/dd/yyyy',
 };
 

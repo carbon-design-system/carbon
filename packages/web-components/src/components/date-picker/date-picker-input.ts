@@ -314,20 +314,23 @@ class CDSDatePickerInput extends FocusMixin(LitElement) {
       [`${prefix}--form__helper-text--disabled`]: disabled,
     });
 
-    const errorText =
-      normalizedProps.invalid || normalizedProps.warn
-        ? html` <div id="error-text" class="${prefix}--form-requirement">
-            <slot name="${normalizedProps['slot-name']}">
-              ${normalizedProps['slot-text']}
-            </slot>
-          </div>`
-        : null;
-
     const inputIcon = this._renderIcon();
     const renderedIcons =
       isFluid && (normalizedProps.invalid || normalizedProps.warn)
         ? html`${inputIcon}${normalizedProps.icon}`
         : normalizedProps.icon || inputIcon;
+
+    const formRequirement = html`
+      <div
+        class="${prefix}--form-requirement"
+        ?hidden="${!normalizedProps.invalid &&
+        !normalizedProps.warn &&
+        !normalizedProps.disabled}">
+        <slot name="${normalizedProps['slot-name']}">
+          ${normalizedProps['slot-text']}
+        </slot>
+      </div>
+    `;
 
     return html`
       <label for="input" class="${labelClasses}">
@@ -355,13 +358,14 @@ class CDSDatePickerInput extends FocusMixin(LitElement) {
             @slotchange="${this._handleAILabelSlotChange}"></slot>
         </span>
       </div>
-      ${isFluid && errorText
+      ${isFluid
         ? html`
-            <hr class="${prefix}--date-picker__divider" />
-            ${errorText ? errorText : null}
+            <hr
+              class="${prefix}--date-picker__divider"
+              ?hidden="${!normalizedProps.invalid && !normalizedProps.warn}" />
+            ${formRequirement}
           `
-        : null}
-      ${!isFluid && errorText ? errorText : null}
+        : formRequirement}
       ${!isFluid
         ? html`
             <div ?hidden="${hasHelperText}" class="${helperTextClasses}">

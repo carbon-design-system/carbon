@@ -157,11 +157,6 @@ $css--plex: true !default;
 }
 
 :host(#{$prefix}-fluid-date-picker-input[kind='from']),
-:host(#{$prefix}-fluid-date-picker-input-skeleton[kind='from']) {
-  margin-inline-end: convert.to-rem(1px);
-}
-
-:host(#{$prefix}-fluid-date-picker-input[kind='from']),
 :host(#{$prefix}-fluid-date-picker-input[kind='to']),
 :host(#{$prefix}-fluid-date-picker-input-skeleton[kind='from']),
 :host(#{$prefix}-fluid-date-picker-input-skeleton[kind='to']) {
@@ -180,12 +175,9 @@ $css--plex: true !default;
   border-inline-start: 1px solid $border-strong;
 }
 
-:host(#{$prefix}-fluid-date-picker-input:focus-within) {
-  outline: 2px solid $focus;
-  outline-offset: -2px;
-}
-
-:host(#{$prefix}-fluid-date-picker-input[invalid]) {
+:host(
+    #{$prefix}-fluid-date-picker-input[invalid]:not([disabled]):not([readonly])
+  ) {
   @extend .#{$prefix}--date-picker--fluid--invalid;
   @include focus-outline('invalid');
 }
@@ -220,6 +212,10 @@ $css--plex: true !default;
   padding-block-end: convert.to-rem(13px);
   padding-block-start: convert.to-rem(32px);
   padding-inline: $spacing-05;
+
+  &:focus {
+    @include focus-outline('outline');
+  }
 }
 
 // Push the calendar icon down to account for the floating label above the input value
