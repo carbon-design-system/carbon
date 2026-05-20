@@ -50,6 +50,12 @@ class CDSMultiSelect extends CDSDropdown {
   filterable;
 
   /**
+   * The native `autocomplete` attribute for the filterable input.
+   */
+  @property({ type: String })
+  autocomplete = 'off';
+
+  /**
    * The count of selected items.
    */
   private _selectedItemsCount = 0;
@@ -454,7 +460,12 @@ class CDSMultiSelect extends CDSDropdown {
     @returns The main content of the trigger button.
    */
   protected _renderLabel(): TemplateResult {
-    const { label, value, _selectedItemContent: selectedItemContent } = this;
+    const {
+      label,
+      value,
+      autocomplete,
+      _selectedItemContent: selectedItemContent,
+    } = this;
 
     const inputClasses = classMap({
       [`${prefix}--text-input`]: true,
@@ -476,6 +487,7 @@ class CDSMultiSelect extends CDSDropdown {
             aria-controls="menu-body"
             aria-expanded="${String(this.open)}"
             aria-autocomplete="list"
+            autocomplete="${autocomplete}"
             @input="${this._handleInput}" />
         `;
   }
