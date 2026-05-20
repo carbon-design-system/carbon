@@ -146,7 +146,7 @@ function Tabs({
 }: TabsProps) {
   const baseId = useId('ccs');
   if (dismissable && !onTabCloseRequest) {
-    // eslint-disable-next-line no-console -- https://github.com/carbon-design-system/carbon/issues/20452
+    // eslint-disable-next-line no-console
     console.error(
       'dismissable property specified without also providing an onTabCloseRequest property.'
     );
@@ -436,6 +436,11 @@ export interface TabListProps extends DivAttributes {
    * on component rerender
    */
   scrollIntoView?: boolean;
+
+  /**
+   * Specify the size of the tabs.
+   */
+  size?: 'sm' | 'md' | 'lg';
 }
 type TabElement = HTMLElement & { disabled?: boolean };
 
@@ -452,6 +457,7 @@ function TabList({
   rightOverflowButtonProps,
   scrollDebounceWait = 200,
   scrollIntoView,
+  size,
   ...rest
 }: TabListProps) {
   const {
@@ -492,6 +498,8 @@ function TabList({
       [`${prefix}--tabs__icon--default`]: iconSize === 'default',
       [`${prefix}--tabs__icon--lg`]: iconSize === 'lg', // TODO: V12 - Remove this class
       [`${prefix}--layout--size-lg`]: iconSize === 'lg',
+      [`${prefix}--layout--size-${size}`]:
+        size && contained && !hasSecondaryLabelTabs,
       [`${prefix}--tabs--tall`]: hasSecondaryLabelTabs,
       [`${prefix}--tabs--full-width`]: distributeWidth,
       [`${prefix}--tabs--dismissable`]: dismissable,
@@ -510,8 +518,7 @@ function TabList({
   //   AND SCROLL_LEFT + CLIENT_WIDTH < SCROLL_WIDTH
   const [isNextButtonVisible, setIsNextButtonVisible] = useState(
     ref.current
-      ? scrollLeft + buttonWidth + ref.current.clientWidth <
-          ref.current.scrollWidth
+      ? scrollLeft + ref.current.clientWidth < ref.current.scrollWidth
       : false
   );
 
@@ -632,8 +639,7 @@ function TabList({
     // adding 1 in calculation for firefox support
     setIsNextButtonVisible(
       ref.current
-        ? scrollLeft + buttonWidth + ref.current.clientWidth + 1 <
-            ref.current.scrollWidth
+        ? scrollLeft + ref.current.clientWidth + 1 < ref.current.scrollWidth
         : false
     );
 

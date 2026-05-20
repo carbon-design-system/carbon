@@ -3456,6 +3456,7 @@ Map {
       "size": {
         "args": [
           [
+            "xs",
             "sm",
             "md",
             "lg",
@@ -4152,6 +4153,9 @@ Map {
         "type": "bool",
       },
       "narrow": {
+        "type": "bool",
+      },
+      "withRowGap": {
         "type": "bool",
       },
     },
@@ -5346,6 +5350,9 @@ Map {
       "onChange": {
         "type": "func",
       },
+      "readOnly": {
+        "type": "bool",
+      },
     },
     "render": [Function],
   },
@@ -5484,6 +5491,9 @@ Map {
         "type": "bool",
       },
       "narrow": {
+        "type": "bool",
+      },
+      "withRowGap": {
         "type": "bool",
       },
     },
@@ -6525,6 +6535,9 @@ Map {
       "danger": {
         "type": "bool",
       },
+      "dangerDescription": {
+        "type": "string",
+      },
       "decorator": {
         "type": "node",
       },
@@ -6694,6 +6707,9 @@ Map {
       },
       "danger": {
         "type": "bool",
+      },
+      "dangerDescription": {
+        "type": "string",
       },
       "inputref": {
         "args": [
@@ -7827,6 +7843,7 @@ Map {
       "size": {
         "args": [
           [
+            "xs",
             "sm",
             "md",
             "lg",
@@ -7978,6 +7995,7 @@ Map {
       "size": {
         "args": [
           [
+            "xs",
             "sm",
             "md",
             "lg",
@@ -8632,6 +8650,7 @@ Map {
       "size": {
         "args": [
           [
+            "xs",
             "sm",
             "md",
             "lg",
@@ -8663,9 +8682,18 @@ Map {
       "className": {
         "type": "string",
       },
-      "small": {
-        "type": "bool",
+      "size": {
+        "args": [
+          [
+            "xs",
+            "sm",
+            "md",
+            "lg",
+          ],
+        ],
+        "type": "oneOf",
       },
+      "small": [Function],
     },
   },
   "SecondaryButton" => {},
@@ -8740,6 +8768,7 @@ Map {
       "size": {
         "args": [
           [
+            "xs",
             "sm",
             "md",
             "lg",
@@ -10721,6 +10750,7 @@ Map {
       "size": {
         "args": [
           [
+            "xs",
             "sm",
             "md",
             "lg",
@@ -10761,6 +10791,17 @@ Map {
       },
       "hideLabel": {
         "type": "bool",
+      },
+      "size": {
+        "args": [
+          [
+            "xs",
+            "sm",
+            "md",
+            "lg",
+          ],
+        ],
+        "type": "oneOf",
       },
     },
   },
@@ -12158,6 +12199,9 @@ Map {
         "danger": {
           "type": "bool",
         },
+        "dangerDescription": {
+          "type": "string",
+        },
         "loadingDescription": {
           "type": "string",
         },
@@ -13338,6 +13382,9 @@ Map {
       },
       "onChange": {
         "type": "func",
+      },
+      "readOnly": {
+        "type": "bool",
       },
     },
     "render": [Function],
@@ -15318,6 +15365,9 @@ Map {
       },
       "onChange": {
         "type": "func",
+      },
+      "readOnly": {
+        "type": "bool",
       },
     },
     "render": [Function],

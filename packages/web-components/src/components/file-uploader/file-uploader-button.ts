@@ -84,7 +84,7 @@ class CDSFileUploaderButton extends HostListenerMixin(LitElement) {
     if (!accept || !/^(change|drop)$/.test(event.type)) {
       return Array.from(files ?? []);
     }
-    const acceptedTypes = new Set(accept.split(' '));
+    const acceptedTypes = new Set(accept.split(/[\s,]+/).filter(Boolean));
     return Array.prototype.filter.call(
       files,
       ({ name, type: mimeType = '' }) => {
@@ -155,6 +155,12 @@ class CDSFileUploaderButton extends HostListenerMixin(LitElement) {
       size,
       _handleChange: handleChange,
     } = this;
+    const acceptForInput = accept
+      ? accept
+          .split(/[\s,]+/)
+          .filter(Boolean)
+          .join(',')
+      : '';
 
     const labelClasses = classMap({
       [`${prefix}--file-browse-btn`]: true,
@@ -181,7 +187,7 @@ class CDSFileUploaderButton extends HostListenerMixin(LitElement) {
         type="file"
         class="${prefix}--file-input"
         tabindex="-1"
-        accept="${ifNonEmpty(accept)}"
+        accept="${ifNonEmpty(acceptForInput)}"
         ?disabled="${disabled}"
         ?multiple="${multiple}"
         name="${ifNonEmpty(name)}"

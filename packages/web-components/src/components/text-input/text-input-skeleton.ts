@@ -8,8 +8,10 @@
 import { LitElement, html } from 'lit';
 import { property } from 'lit/decorators.js';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
+import { classMap } from 'lit/directives/class-map.js';
 import { prefix } from '../../globals/settings';
 import styles from './text-input.scss?lit';
+import { INPUT_SIZE } from './defs';
 
 /**
  * @element cds-text-input-skeleton
@@ -24,13 +26,27 @@ class CDSTextInputSkeleton extends LitElement {
   @property({ type: Boolean, reflect: true, attribute: 'hide-label' })
   hideLabel = false;
 
+  /**
+   * The text-input-skeleton size.
+   */
+  @property({ reflect: true })
+  size?: INPUT_SIZE;
+
   render() {
-    const { hideLabel } = this;
+    const { hideLabel, size } = this;
+
+    const skeletonClasses = classMap({
+      [`${prefix}--form-item`]: true,
+      [`${prefix}--layout--size-${size}`]: size !== undefined,
+    });
+
     return html`
-      ${hideLabel
-        ? ''
-        : html`<span class="${prefix}--label ${prefix}--skeleton"></span>`}
-      <div class="${prefix}--text-input ${prefix}--skeleton"></div>
+      <div class=${skeletonClasses}>
+        ${hideLabel
+          ? ''
+          : html`<span class="${prefix}--label ${prefix}--skeleton"></span>`}
+        <div class="${prefix}--text-input ${prefix}--skeleton"></div>
+      </div>
     `;
   }
 

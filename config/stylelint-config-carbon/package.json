@@ -1,7 +1,7 @@
 {
   "name": "stylelint-config-carbon",
   "description": "Stylelint configuration for Carbon",
-  "version": "1.21.0",
+  "version": "1.22.0",
   "license": "Apache-2.0",
   "type": "module",
   "main": "index.js",
@@ -25,10 +25,10 @@
     "provenance": true
   },
   "peerDependencies": {
-    "stylelint": "^16.0.0"
+    "stylelint": "^17.0.0"
   },
   "dependencies": {
-    "@double-great/stylelint-a11y": "^3.0.2",
+    "@double-great/stylelint-a11y": "^3.4.10",
     "stylelint-config-idiomatic-order": "^10.0.0",
     "stylelint-config-prettier": "^9.0.3",
     "stylelint-config-standard": "^36.0.0",
@@ -41,6 +41,6 @@
   },
   "devDependencies": {
     "prettier": "^3.3.3",
-    "stylelint": "^16.0.0"
+    "stylelint": "^17.0.0"
   }
 }

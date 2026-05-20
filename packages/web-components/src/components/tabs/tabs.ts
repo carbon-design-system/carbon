@@ -18,7 +18,12 @@ import ChevronRight16 from '@carbon/icons/es/chevron--right/16.js';
 import CDSContentSwitcher, {
   NAVIGATION_DIRECTION,
 } from '../content-switcher/content-switcher';
-import { TABS_ICON_SIZE, TABS_KEYBOARD_ACTION, TABS_TYPE } from './defs';
+import {
+  TABS_ICON_SIZE,
+  TABS_KEYBOARD_ACTION,
+  TABS_TYPE,
+  TABS_SIZE,
+} from './defs';
 import CDSTab from './tab';
 import styles from './tabs.scss?lit';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
@@ -28,6 +33,7 @@ export {
   TABS_ICON_SIZE,
   TABS_KEYBOARD_ACTION,
   TABS_TYPE,
+  TABS_SIZE,
 };
 
 /**
@@ -76,6 +82,32 @@ export default class CDSTabs extends HostListenerMixin(CDSContentSwitcher) {
   private BUTTON_WIDTH = 44;
 
   /**
+   * Propagates the layout size token to the host and all child tabs.
+   */
+  private _syncSizeToTabs() {
+    if (this.type === TABS_TYPE.CONTAINED) {
+      const size = this.getAttribute('size');
+      if (size) {
+        const value = `var(--${prefix}-layout-size-height-${size})`;
+        this.style.setProperty(`--${prefix}-layout-size-height`, value);
+        this.querySelectorAll(`${prefix}-tab`).forEach((tab) => {
+          (tab as HTMLElement).style.setProperty(
+            `--${prefix}-layout-size-height`,
+            value
+          );
+        });
+      } else {
+        this.style.removeProperty(`--${prefix}-layout-size-height`);
+        this.querySelectorAll(`${prefix}-tab`).forEach((tab) => {
+          (tab as HTMLElement).style.removeProperty(
+            `--${prefix}-layout-size-height`
+          );
+        });
+      }
+    }
+  }
+
+  /**
    * Navigates through tabs.
    *
    * @param direction `-1` to navigate backward, `1` to navigate forward.
@@ -89,7 +121,7 @@ export default class CDSTabs extends HostListenerMixin(CDSContentSwitcher) {
    */
   protected _navigate(direction: number) {
     const immediate = this.selectionMode === 'automatic';
-    const { selectorItem, selectorItemHighlighted, selectorItemSelected } = this
+    const { selectorItemHighlighted, selectorItemSelected } = this
       .constructor as typeof CDSTabs;
     const nextItem = this._getNextItem(
       this.querySelector(
@@ -102,10 +134,7 @@ export default class CDSTabs extends HostListenerMixin(CDSContentSwitcher) {
     }
     this._handleUserInitiatedSelectItem(nextItem as CDSTab, 'keyboard');
     if (!immediate) {
-      forEach(this.querySelectorAll(selectorItem), (item) => {
-        (item as CDSTab)[immediate ? 'selected' : 'highlighted'] =
-          nextItem === item;
-      });
+      this.resetHighlighted(nextItem as CDSTab);
     }
 
     // Using `{ block: 'nearest' }` to prevent scrolling unless scrolling is absolutely necessary.
@@ -121,16 +150,38 @@ export default class CDSTabs extends HostListenerMixin(CDSContentSwitcher) {
     this.requestUpdate();
   }
 
+  /**
+   * Resets the highlighted state of all tabs, setting only the specified tab as highlighted.
+   *
+   * @param nextItem The tab item to be highlighted. If provided, only this item will be highlighted.
+   *   If null or undefined, all tabs will have their highlighted state set to false.
+   */
+  protected resetHighlighted(nextItem?: CDSTab | null) {
+    const { selectorItem } = this.constructor as typeof CDSTabs;
+    forEach(this.querySelectorAll(selectorItem), (item) => {
+      (item as CDSTab)['highlighted'] = nextItem === item;
+    });
+  }
+
+  /**
+   * Resets the selected state of all tabs, setting only the specified tab as selected.
+   *
+   * @param nextItem The tab item to be selected. If provided, only this item will be selected.
+   *   If null or undefined, all tabs will have their selected state set to false.
+   */
+  protected resetSelected(nextItem?: CDSTab | null) {
+    const { selectorItem } = this.constructor as typeof CDSTabs;
+    forEach(this.querySelectorAll(selectorItem), (item) => {
+      (item as CDSTab)['selected'] = nextItem === item;
+    });
+  }
+
   @HostListener('click')
   protected _handleClick(event: MouseEvent) {
     super._handleClick(event);
-    const { selectorItem } = this.constructor as typeof CDSTabs;
     const currentItem = this._getCurrentItem(event.target as HTMLElement);
     if (currentItem) {
-      forEach(this.querySelectorAll(selectorItem), (item) => {
-        (item as CDSTab).highlighted = false;
-      });
-      (currentItem as CDSTab).highlighted = true;
+      this.resetHighlighted(currentItem as CDSTab);
     }
   }
 
@@ -147,7 +198,13 @@ export default class CDSTabs extends HostListenerMixin(CDSContentSwitcher) {
             block: 'nearest',
             inline: 'nearest',
           });
-          this._handleUserInitiatedSelectItem(firstEnabledTab as CDSTab);
+          if (this.selectionMode === 'manual') {
+            this.resetHighlighted(firstEnabledTab as CDSTab);
+          }
+          this._handleUserInitiatedSelectItem(
+            firstEnabledTab as CDSTab,
+            this.selectionMode !== 'manual' ? 'activation' : 'keyboard'
+          );
           this.requestUpdate();
         }
         break;
@@ -158,7 +215,13 @@ export default class CDSTabs extends HostListenerMixin(CDSContentSwitcher) {
             block: 'nearest',
             inline: 'nearest',
           });
-          this._handleUserInitiatedSelectItem(lastEnabledTab as CDSTab);
+          if (this.selectionMode === 'manual') {
+            this.resetHighlighted(lastEnabledTab as CDSTab);
+          }
+          this._handleUserInitiatedSelectItem(
+            lastEnabledTab as CDSTab,
+            this.selectionMode !== 'manual' ? 'activation' : 'keyboard'
+          );
           this.requestUpdate();
         }
         break;
@@ -176,7 +239,10 @@ export default class CDSTabs extends HostListenerMixin(CDSContentSwitcher) {
             `${prefix}-tab[highlighted]`
           );
           if (focusedTab) {
-            this._selectionDidChange(focusedTab);
+            this._handleUserInitiatedSelectItem(
+              focusedTab as CDSTab,
+              'activation'
+            );
             this.requestUpdate();
           }
         }
@@ -184,6 +250,64 @@ export default class CDSTabs extends HostListenerMixin(CDSContentSwitcher) {
       default:
         break;
     }
+  }
+
+  @HostListener('cds-tab-closed')
+  protected _handleTabClosed(event: CustomEvent) {
+    const {
+      selectorItem,
+      selectorItemEnabled,
+      selectorItemSelected,
+      selectorItemHighlighted,
+    } = this.constructor as typeof CDSTabs;
+    const { index } = event.detail;
+    const allTabs = this.querySelectorAll<CDSTab>(selectorItem);
+    const enabledTabsBeforeRemoval =
+      this.querySelectorAll<CDSTab>(selectorItemEnabled);
+    const indexInEnabledTabs = Array.from(enabledTabsBeforeRemoval).indexOf(
+      allTabs[index]
+    );
+    const activeItem = this.querySelector<CDSTab>(selectorItemSelected);
+    const activeItemId = activeItem?.id;
+    const highlightedItem = this.querySelector<CDSTab>(selectorItemHighlighted);
+    const highlightedItemId = highlightedItem?.id;
+    requestAnimationFrame(() => {
+      const enabledTabs = Array.from(
+        this.querySelectorAll<CDSTab>(selectorItemEnabled)
+      );
+
+      const tabWithActiveId = enabledTabs.find(
+        (tab) => tab.id === activeItemId
+      );
+      const tabWithHighlightedId = enabledTabs.find(
+        (tab) => tab.id === highlightedItemId
+      );
+      const nextHighlightedIndex =
+        !tabWithActiveId && !tabWithHighlightedId && indexInEnabledTabs - 1 >= 0
+          ? indexInEnabledTabs - 1
+          : 0;
+      if (enabledTabs.length > 0) {
+        const nextSelectedItem = tabWithActiveId || enabledTabs[0];
+        const nextHighlightedItem =
+          tabWithHighlightedId || enabledTabs[nextHighlightedIndex];
+        this.resetSelected(nextSelectedItem);
+        this.resetHighlighted(nextHighlightedItem);
+        this.value = nextSelectedItem.value;
+
+        nextHighlightedItem.shadowRoot
+          ?.querySelector<HTMLElement>(
+            `.${prefix}--tabs__nav-link--dismissable`
+          )
+          ?.focus();
+        nextHighlightedItem.scrollIntoView({
+          block: 'nearest',
+          inline: 'nearest',
+        });
+      } else {
+        this.value = '';
+        return;
+      }
+    });
   }
 
   /**
@@ -221,6 +345,17 @@ export default class CDSTabs extends HostListenerMixin(CDSContentSwitcher) {
     }
   }
 
+  private _syncSecondaryLabels() {
+    const hasSecondaryLabels = Array.from(
+      this.querySelectorAll(`${prefix}-tab`)
+    ).some((tab) => tab.hasAttribute('secondary-label'));
+    if (hasSecondaryLabels) {
+      this.setAttribute('has-secondary-labels', '');
+    } else {
+      this.removeAttribute('has-secondary-labels');
+    }
+  }
+
   _handleSlotchange() {
     // Call super to preserve content-switcher slot handling
     super._handleSlotchange?.();
@@ -233,6 +368,10 @@ export default class CDSTabs extends HostListenerMixin(CDSContentSwitcher) {
     if (nextItem) {
       (nextItem as CDSTab).hideDivider = true;
     }
+
+    this._syncSecondaryLabels();
+    this._updateTabsState();
+    this._syncSizeToTabs();
   }
 
   protected _selectionDidChange(
@@ -301,10 +440,28 @@ export default class CDSTabs extends HostListenerMixin(CDSContentSwitcher) {
   type = TABS_TYPE.REGULAR;
 
   /**
+   * Whether the rendered Tab children should be dismissable.
+   */
+  @property({ type: Boolean, reflect: true })
+  dismissable;
+
+  /**
+   * Specify the size of contained tabs.
+   */
+  @property({ reflect: true })
+  size?: TABS_SIZE;
+
+  /**
    * Specify the icon size used by icon-only tabs.
    */
   @property({ attribute: 'icon-size', reflect: true })
   iconSize?: TABS_ICON_SIZE;
+
+  /**
+   * Used for tabs within a grid, this makes it so tabs span the full container width and have the same width. Only available on contained tabs with <9 children
+   */
+  @property({ type: Boolean, attribute: 'full-width', reflect: true })
+  fullWidth = false;
 
   /**
    * `true` if left-hand scroll intersection sentinel intersects with the host element.
@@ -395,7 +552,11 @@ export default class CDSTabs extends HostListenerMixin(CDSContentSwitcher) {
       this._isScrollable = scrollWidth > clientWidth;
     }
     const { selectorItem } = this.constructor as typeof CDSTabs;
-    if (changedProperties.has('type') || changedProperties.has('iconSize')) {
+    if (
+      changedProperties.has('type') ||
+      changedProperties.has('iconSize') ||
+      changedProperties.has('size')
+    ) {
       this._totalTabs = 0;
       forEach(this.querySelectorAll(selectorItem), (elem) => {
         this._totalTabs++;
@@ -409,27 +570,18 @@ export default class CDSTabs extends HostListenerMixin(CDSContentSwitcher) {
   firstUpdated() {
     // Call super to run content-switcher init logic (initial selection)
     super.firstUpdated();
-    const { selectorTablist, selectorItemEnabled } = this
-      .constructor as typeof CDSTabs;
-    const { selectionMode, selectedIndex } = this;
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
-    const tablist = this.shadowRoot!.querySelector(selectorTablist)!;
-    this.tablist = tablist;
-    if (selectionMode === 'manual') {
-      const firstItem =
-        this.querySelectorAll<CDSTab>(selectorItemEnabled)[selectedIndex];
-      if (firstItem) {
-        firstItem.highlighted = true;
-        firstItem.selected = true;
-        this.value = firstItem.value;
-      }
-    }
+    this._tabInitialLoad();
     this._cleanAndCreateIntersectionObserverContainer({ create: true });
+    this._syncSecondaryLabels();
+    this._syncSizeToTabs();
   }
 
   updated(changedProperties) {
     // Call super to keep selection/value in sync
     super.updated?.(changedProperties);
+    if (changedProperties.has('size') || changedProperties.has('type')) {
+      this._syncSizeToTabs();
+    }
 
     if (changedProperties.has('value')) {
       const tab = this.querySelector(
@@ -470,6 +622,10 @@ export default class CDSTabs extends HostListenerMixin(CDSContentSwitcher) {
       if (this._contentNode) {
         this._contentNode.style.insetInlineStart = `-${this._currentScrollPosition}px`;
       }
+    }
+
+    if (changedProperties.has('dismissable')) {
+      this._updateTabsState();
     }
   }
 
@@ -561,6 +717,32 @@ export default class CDSTabs extends HostListenerMixin(CDSContentSwitcher) {
     `;
   }
 
+  protected _updateTabsState() {
+    const { selectorItem } = this.constructor as typeof CDSTabs;
+    const tabs = this.querySelectorAll<CDSTab>(selectorItem);
+    tabs.forEach((tab, index) => {
+      tab._dismissable = this.dismissable;
+      tab._index = index;
+    });
+  }
+
+  protected _tabInitialLoad() {
+    const { selectorTablist, selectorItemEnabled } = this
+      .constructor as typeof CDSTabs;
+    const { selectionMode, selectedIndex } = this;
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
+    const tablist = this.shadowRoot!.querySelector(selectorTablist)!;
+    this.tablist = tablist;
+    const firstItem =
+      this.querySelectorAll<CDSTab>(selectorItemEnabled)[selectedIndex];
+    if (firstItem) {
+      if (selectionMode === 'manual') {
+        firstItem.highlighted = true;
+      }
+      firstItem.selected = true;
+      this.value = firstItem.value;
+    }
+  }
   /**
    * Symbols of keys that triggers opening/closing menu and selecting/deselecting menu item.
    */

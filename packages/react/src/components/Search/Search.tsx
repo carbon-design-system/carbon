@@ -113,7 +113,7 @@ export interface SearchProps extends InputPropsBase {
   /**
    * Specify the size of the Search
    */
-  size?: 'sm' | 'md' | 'lg';
+  size?: 'xs' | 'sm' | 'md' | 'lg';
 
   /**
    * Specify the type of the `<input>`
@@ -146,7 +146,7 @@ const Search = React.forwardRef<HTMLInputElement, SearchProps>(
       placeholder = 'Search',
       renderIcon,
       role,
-      size = 'md',
+      size,
       type = 'search',
       value,
       ...rest
@@ -167,9 +167,8 @@ const Search = React.forwardRef<HTMLInputElement, SearchProps>(
     const searchClasses = cx(
       {
         [`${prefix}--search`]: true,
-        [`${prefix}--search--sm`]: size === 'sm',
-        [`${prefix}--search--md`]: size === 'md',
-        [`${prefix}--search--lg`]: size === 'lg',
+        [`${prefix}--search--${size}`]: size, // TODO: V12 - Remove this class
+        [`${prefix}--layout--size-${size}`]: size,
         [`${prefix}--search--light`]: light,
         [`${prefix}--search--disabled`]: disabled,
         [`${prefix}--search--fluid`]: isFluid,
@@ -418,7 +417,7 @@ Search.propTypes = {
   /**
    * Specify the size of the Search
    */
-  size: PropTypes.oneOf(['sm', 'md', 'lg']),
+  size: PropTypes.oneOf(['xs', 'sm', 'md', 'lg']),
 
   /**
    * Specify the type of the `<input>`

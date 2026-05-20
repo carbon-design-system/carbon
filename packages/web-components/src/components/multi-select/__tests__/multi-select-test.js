@@ -697,6 +697,30 @@ describe('cds-multi-select', function () {
       expect(listbox).to.exist;
     });
 
+    it('should set autocomplete attribute on filterable input', async () => {
+      const el = await fixture(html`
+        <cds-multi-select label="test-label" filterable>
+          <cds-multi-select-item value="apple">Apple</cds-multi-select-item>
+        </cds-multi-select>
+      `);
+
+      const input = el.shadowRoot.querySelector('input');
+      expect(input).to.exist;
+      expect(input.getAttribute('autocomplete')).to.equal('off');
+    });
+
+    it('should allow custom autocomplete value', async () => {
+      const el = await fixture(html`
+        <cds-multi-select label="test-label" filterable autocomplete="on">
+          <cds-multi-select-item value="apple">Apple</cds-multi-select-item>
+        </cds-multi-select>
+      `);
+
+      const input = el.shadowRoot.querySelector('input');
+      expect(input).to.exist;
+      expect(input.getAttribute('autocomplete')).to.equal('on');
+    });
+
     it('should clear input on Escape', async () => {
       const el = await fixture(html`
         <cds-multi-select label="test-label" filterable>
@@ -1955,6 +1979,64 @@ describe('cds-multi-select', function () {
       // only some visible items are selected: indeterminate
       expect(selectAllItem.hasAttribute('selected')).to.be.false;
       expect(selectAllItem.hasAttribute('indeterminate')).to.be.true;
+    });
+
+    describe('Default sorting behavior', function () {
+      it('should sort items by default on render', async () => {
+        const el = await fixture(html`
+          <cds-multi-select open>
+            <cds-multi-select-item value="zebra">Zebra</cds-multi-select-item>
+            <cds-multi-select-item value="apple">Apple</cds-multi-select-item>
+            <cds-multi-select-item value="mango">Mango</cds-multi-select-item>
+            <cds-multi-select-item value="banana">Banana</cds-multi-select-item>
+          </cds-multi-select>
+        `);
+
+        const items = el.querySelectorAll('cds-multi-select-item');
+        const itemTexts = Array.from(items).map((item) =>
+          item.textContent.trim()
+        );
+
+        expect(itemTexts).to.deep.equal(['Apple', 'Banana', 'Mango', 'Zebra']);
+      });
+
+      it('should return items to original order after deselection', async () => {
+        const el = await fixture(html`
+          <cds-multi-select open selection-feedback="top">
+            <cds-multi-select-item value="zebra">Zebra</cds-multi-select-item>
+            <cds-multi-select-item value="apple">Apple</cds-multi-select-item>
+            <cds-multi-select-item value="mango">Mango</cds-multi-select-item>
+            <cds-multi-select-item value="banana">Banana</cds-multi-select-item>
+          </cds-multi-select>
+        `);
+
+        let items = el.querySelectorAll('cds-multi-select-item');
+        let itemTexts = Array.from(items).map((item) =>
+          item.textContent.trim()
+        );
+        expect(itemTexts).to.deep.equal(['Apple', 'Banana', 'Mango', 'Zebra']);
+
+        // Select "Mango"
+        const mangoItem = el.querySelector(
+          'cds-multi-select-item[value="mango"]'
+        );
+        mangoItem.click();
+        await el.updateComplete;
+
+        items = el.querySelectorAll('cds-multi-select-item');
+        itemTexts = Array.from(items).map((item) => item.textContent.trim());
+        // Mango should move to top
+        expect(itemTexts).to.deep.equal(['Mango', 'Apple', 'Banana', 'Zebra']);
+
+        // Deselect "Mango"
+        mangoItem.click();
+        await el.updateComplete;
+
+        items = el.querySelectorAll('cds-multi-select-item');
+        itemTexts = Array.from(items).map((item) => item.textContent.trim());
+        // Mango should move back to original position
+        expect(itemTexts).to.deep.equal(['Apple', 'Banana', 'Mango', 'Zebra']);
+      });
     });
   });
 });

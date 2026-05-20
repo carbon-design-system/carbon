@@ -8,6 +8,7 @@
 import PropTypes, { type Validator } from 'prop-types';
 import React, {
   cloneElement,
+  useCallback,
   useContext,
   useEffect,
   useRef,
@@ -34,6 +35,7 @@ import { useMergedRefs } from '../../internal/useMergedRefs';
 import { usePrefix } from '../../internal/usePrefix';
 import { usePreviousValue } from '../../internal/usePreviousValue';
 import { keys, match } from '../../internal/keyboard';
+import { selectorTabbable } from '../../internal/keyboard/navigation';
 import { IconButton } from '../IconButton';
 import { noopFn } from '../../internal/noopFn';
 import { Text } from '../Text';
@@ -51,6 +53,7 @@ import {
   ModalPresenceContext,
   useExclusiveModalPresenceContext,
 } from './ModalPresence';
+import { isTopmostVisibleModal } from './isTopmostVisibleModal';
 
 export const ModalSizes = ['xs', 'sm', 'md', 'lg'] as const;
 const invalidOutsideClickMessage =
@@ -100,6 +103,12 @@ export interface ModalProps extends HTMLAttributes<HTMLDivElement> {
   danger?: boolean;
 
   /**
+   * Specify the message read by screen readers for the danger primary button.
+   * Defaults to an empty string; provide localized text to opt in.
+   */
+  dangerDescription?: string;
+
+  /**
    * **Experimental**: Provide a decorator component to be rendered inside the `Modal` component
    */
   decorator?: ReactNode;
@@ -122,7 +131,7 @@ export interface ModalProps extends HTMLAttributes<HTMLDivElement> {
   /**
    * Provide a ref to return focus to once the modal is closed.
    */
-  launcherButtonRef?: RefObject<HTMLButtonElement | null>;
+  launcherButtonRef?: RefObject<HTMLElement | null>;
 
   /**
    * Specify the description for the loading text
@@ -293,6 +302,7 @@ const ModalDialog = React.forwardRef(function ModalDialog(
     onSecondarySubmit,
     primaryButtonDisabled = false,
     danger,
+    dangerDescription = '',
     alert,
     secondaryButtons,
     selectorPrimaryFocus = '[data-modal-primary-focus]',
@@ -318,6 +328,7 @@ const ModalDialog = React.forwardRef(function ModalDialog(
   const secondaryButton = useRef<HTMLButtonElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
   const innerModal = useRef<HTMLDivElement>(null);
+  const modalRef = useRef<HTMLDivElement>(null);
   const startTrap = useRef<HTMLSpanElement>(null);
   const endTrap = useRef<HTMLSpanElement>(null);
   const wrapFocusTimeout = useRef<NodeJS.Timeout>(null);
@@ -332,7 +343,11 @@ const ModalDialog = React.forwardRef(function ModalDialog(
   const loadingActive = loadingStatus !== 'inactive';
 
   const presenceContext = useContext(ModalPresenceContext);
-  const mergedRefs = useMergedRefs([ref, presenceContext?.presenceRef]);
+  const mergedRefs = useMergedRefs([
+    modalRef,
+    ref,
+    presenceContext?.presenceRef,
+  ]);
   const enablePresence =
     useFeatureFlag('enable-presence') || presenceContext?.autoEnablePresence;
 
@@ -371,8 +386,6 @@ const ModalDialog = React.forwardRef(function ModalDialog(
   function handleKeyDown(evt: React.KeyboardEvent<HTMLDivElement>) {
     const { target } = evt;
 
-    evt.stopPropagation();
-
     if (open && target instanceof HTMLElement) {
       if (
         match(evt, keys.Enter) &&
@@ -380,6 +393,7 @@ const ModalDialog = React.forwardRef(function ModalDialog(
         !isCloseButton(target) &&
         document.activeElement !== button.current
       ) {
+        evt.stopPropagation();
         onRequestSubmit(evt);
       }
 
@@ -389,6 +403,7 @@ const ModalDialog = React.forwardRef(function ModalDialog(
         match(evt, keys.Tab) &&
         innerModal.current
       ) {
+        evt.stopPropagation();
         wrapFocusWithoutSentinels({
           containerNode: innerModal.current,
           currentActiveNode: target,
@@ -461,6 +476,18 @@ const ModalDialog = React.forwardRef(function ModalDialog(
       !modalContent.contains(currentActiveNode)
     ) {
       return;
+    }
+
+    const modalRect = modalContent.getBoundingClientRect();
+    const elementRect = currentActiveNode.getBoundingClientRect();
+
+    // Check if element is fully visible within the modal viewport
+    const isFullyVisible =
+      elementRect.top >= modalRect.top &&
+      elementRect.bottom <= modalRect.bottom;
+
+    if (isFullyVisible) {
+      return; // Don't scroll if already fully visible
     }
 
     currentActiveNode.scrollIntoView({ block: 'center' });
@@ -541,16 +568,18 @@ const ModalDialog = React.forwardRef(function ModalDialog(
     if (!open) return;
 
     const handleEscapeKey = (event) => {
-      if (match(event, keys.Escape)) {
+      if (
+        match(event, keys.Escape) &&
+        isTopmostVisibleModal(modalRef.current, prefix)
+      ) {
         event.preventDefault();
-        event.stopPropagation();
         onRequestClose(event);
       }
     };
-    document.addEventListener('keydown', handleEscapeKey, true);
+    document.addEventListener('keydown', handleEscapeKey);
 
     return () => {
-      document.removeEventListener('keydown', handleEscapeKey, true);
+      document.removeEventListener('keydown', handleEscapeKey);
     };
     // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20452
   }, [open]);
@@ -573,6 +602,17 @@ const ModalDialog = React.forwardRef(function ModalDialog(
     }
   }, [open, prefix, enableDialogElement]);
 
+  const focusLauncherButton = useCallback(() => {
+    if (!launcherButtonRef || !launcherButtonRef.current) return;
+
+    const { current: launcherButton } = launcherButtonRef;
+    const focusTarget = launcherButton.matches(selectorTabbable)
+      ? launcherButton
+      : launcherButton.querySelector<HTMLElement>(selectorTabbable);
+
+    focusTarget?.focus();
+  }, [launcherButtonRef]);
+
   useEffect(() => {
     if (
       !enableDialogElement &&
@@ -582,23 +622,29 @@ const ModalDialog = React.forwardRef(function ModalDialog(
       launcherButtonRef
     ) {
       setTimeout(() => {
-        if ('current' in launcherButtonRef) {
-          launcherButtonRef.current?.focus();
-        }
+        focusLauncherButton();
       });
     }
-  }, [open, prevOpen, launcherButtonRef, enableDialogElement, enablePresence]);
+  }, [
+    open,
+    prevOpen,
+    launcherButtonRef,
+    enableDialogElement,
+    enablePresence,
+    focusLauncherButton,
+  ]);
+
   // Focus launcherButtonRef on unmount
   useEffect(() => {
     const launcherButton = launcherButtonRef?.current;
     return () => {
       if (enablePresence && launcherButton) {
         setTimeout(() => {
-          launcherButton.focus();
+          focusLauncherButton();
         });
       }
     };
-  }, [enablePresence, launcherButtonRef]);
+  }, [enablePresence, launcherButtonRef, focusLauncherButton]);
 
   useEffect(() => {
     if (!enableDialogElement) {
@@ -746,6 +792,7 @@ const ModalDialog = React.forwardRef(function ModalDialog(
           <Button
             className={primaryButtonClass}
             kind={danger ? 'danger' : 'primary'}
+            dangerDescription={dangerDescription}
             disabled={loadingActive || primaryButtonDisabled}
             onClick={onRequestSubmit}
             ref={button}>
@@ -843,6 +890,7 @@ const ModalDialog = React.forwardRef(function ModalDialog(
             <Button
               className={primaryButtonClass}
               kind={danger ? 'danger' : 'primary'}
+              dangerDescription={dangerDescription}
               disabled={loadingActive || primaryButtonDisabled}
               onClick={onRequestSubmit}
               ref={button}>
@@ -926,6 +974,12 @@ Modal.propTypes = {
   danger: PropTypes.bool,
 
   /**
+   * Specify the message read by screen readers for the danger primary button.
+   * Defaults to an empty string; provide localized text to opt in.
+   */
+  dangerDescription: PropTypes.string,
+
+  /**
    * **Experimental**: Provide a decorator component to be rendered inside the `Modal` component
    */
   decorator: PropTypes.node,
@@ -952,16 +1006,16 @@ Modal.propTypes = {
     PropTypes.func,
     PropTypes.shape({
       current: PropTypes.oneOfType([
-        // `PropTypes.instanceOf(HTMLButtonElement)` alone won't work because
-        // `HTMLButtonElement` is not defined in the test environment even
+        // `PropTypes.instanceOf(HTMLElement)` alone won't work because
+        // `HTMLElement` is not defined in the test environment even
         // though `testEnvironment` is set to `jsdom`.
-        typeof HTMLButtonElement !== 'undefined'
-          ? PropTypes.instanceOf(HTMLButtonElement)
+        typeof HTMLElement !== 'undefined'
+          ? PropTypes.instanceOf(HTMLElement)
           : PropTypes.any,
         PropTypes.oneOf([null]),
       ]).isRequired,
     }),
-  ]) as Validator<RefObject<HTMLButtonElement | null>>,
+  ]) as Validator<RefObject<HTMLElement | null>>,
 
   /**
    * Specify the description for the loading text
