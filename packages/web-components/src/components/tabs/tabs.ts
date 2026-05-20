@@ -23,6 +23,7 @@ import {
   TABS_ICON_SIZE,
   TABS_KEYBOARD_ACTION,
   TABS_TYPE,
+  TABS_SIZE,
 } from './defs';
 import CDSTab from './tab';
 import styles from './tabs.scss?lit';
@@ -34,6 +35,7 @@ export {
   TABS_ICON_SIZE,
   TABS_KEYBOARD_ACTION,
   TABS_TYPE,
+  TABS_SIZE,
 };
 
 /**
@@ -80,6 +82,32 @@ export default class CDSTabs extends HostListenerMixin(CDSContentSwitcher) {
    * The width of the overflow scroll buttons.
    */
   private BUTTON_WIDTH = 44;
+
+  /**
+   * Propagates the layout size token to the host and all child tabs.
+   */
+  private _syncSizeToTabs() {
+    if (this.type === TABS_TYPE.CONTAINED) {
+      const size = this.getAttribute('size');
+      if (size) {
+        const value = `var(--${prefix}-layout-size-height-${size})`;
+        this.style.setProperty(`--${prefix}-layout-size-height`, value);
+        this.querySelectorAll(`${prefix}-tab`).forEach((tab) => {
+          (tab as HTMLElement).style.setProperty(
+            `--${prefix}-layout-size-height`,
+            value
+          );
+        });
+      } else {
+        this.style.removeProperty(`--${prefix}-layout-size-height`);
+        this.querySelectorAll(`${prefix}-tab`).forEach((tab) => {
+          (tab as HTMLElement).style.removeProperty(
+            `--${prefix}-layout-size-height`
+          );
+        });
+      }
+    }
+  }
 
   /**
    * Navigates through tabs.
@@ -355,6 +383,7 @@ export default class CDSTabs extends HostListenerMixin(CDSContentSwitcher) {
     this._updateTabsVerticalAttribute();
     this._syncSecondaryLabels();
     this._updateTabsState();
+    this._syncSizeToTabs();
   }
 
   /**
@@ -447,6 +476,12 @@ export default class CDSTabs extends HostListenerMixin(CDSContentSwitcher) {
    */
   @property({ type: Boolean, reflect: true })
   dismissable;
+
+  /**
+   * Specify the size of contained tabs.
+   */
+  @property({ reflect: true })
+  size?: TABS_SIZE;
 
   /**
    * Specify the icon size used by icon-only tabs.
@@ -549,7 +584,11 @@ export default class CDSTabs extends HostListenerMixin(CDSContentSwitcher) {
       this._isScrollable = scrollWidth > clientWidth;
     }
     const { selectorItem } = this.constructor as typeof CDSTabs;
-    if (changedProperties.has('type') || changedProperties.has('iconSize')) {
+    if (
+      changedProperties.has('type') ||
+      changedProperties.has('iconSize') ||
+      changedProperties.has('size')
+    ) {
       this._totalTabs = 0;
       forEach(this.querySelectorAll(selectorItem), (elem) => {
         this._totalTabs++;
@@ -566,11 +605,15 @@ export default class CDSTabs extends HostListenerMixin(CDSContentSwitcher) {
     this._tabInitialLoad();
     this._cleanAndCreateIntersectionObserverContainer({ create: true });
     this._syncSecondaryLabels();
+    this._syncSizeToTabs();
   }
 
   updated(changedProperties) {
     // Call super to keep selection/value in sync
     super.updated?.(changedProperties);
+    if (changedProperties.has('size') || changedProperties.has('type')) {
+      this._syncSizeToTabs();
+    }
 
     if (changedProperties.has('vertical')) {
       this._updateTabsVerticalAttribute();

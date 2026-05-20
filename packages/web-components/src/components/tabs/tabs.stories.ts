@@ -57,6 +57,18 @@ const argTypes = {
   },
 };
 
+const containedTabsSizeArgType = {
+  size: {
+    control: { type: 'select' },
+    options: ['sm', 'md', 'lg'],
+    description: 'Specify the size of the contained tabs',
+  },
+};
+
+const containedTabsSizeArgs = {
+  size: 'lg',
+};
+
 const onTabsBeingSelected = action('cds-tabs-beingselected');
 const onTabsSelected = action('cds-tabs-selected');
 const iconStoriesArgs = {
@@ -146,13 +158,16 @@ export const Default = {
 };
 
 export const Contained = {
-  render: () => html`
+  args: containedTabsSizeArgs,
+  argTypes: containedTabsSizeArgType,
+  render: ({ size }) => html`
     <style>
       ${styles}
     </style>
     <cds-tabs
       value="dashboard"
       type="${TABS_TYPE.CONTAINED}"
+      size="${ifDefined(size)}"
       @cds-tabs-beingselected="${onTabsBeingSelected}"
       @cds-tabs-selected="${onTabsSelected}">
       <cds-tab id="tab-dashboard" target="panel-dashboard" value="dashboard">
@@ -230,13 +245,16 @@ export const Contained = {
 };
 
 export const ContainedFullWidth = {
-  render: () => html`
+  args: containedTabsSizeArgs,
+  argTypes: containedTabsSizeArgType,
+  render: ({ size }) => html`
     <style>
       ${styles}
     </style>
     <cds-tabs
       value="tls"
       type="${TABS_TYPE.CONTAINED}"
+      size="${ifDefined(size)}"
       full-width
       @cds-tabs-beingselected="${onTabsBeingSelected}"
       @cds-tabs-selected="${onTabsSelected}">
@@ -348,13 +366,16 @@ export const ContainedFullWidth = {
 };
 
 export const ContainedWithIcons = {
-  render: () => html`
+  args: containedTabsSizeArgs,
+  argTypes: containedTabsSizeArgType,
+  render: ({ size }) => html`
     <style>
       ${styles}
     </style>
     <cds-tabs
       value="dashboard"
       type="${TABS_TYPE.CONTAINED}"
+      size="${ifDefined(size)}"
       @cds-tabs-beingselected="${onTabsBeingSelected}"
       @cds-tabs-selected="${onTabsSelected}">
       <cds-tab id="tab-dashboard" target="panel-dashboard" value="dashboard">
@@ -666,6 +687,7 @@ export const DismissableContained = {
     contained: true,
     dismissable: true,
     selectedIndex: 0,
+    ...containedTabsSizeArgs,
   },
   argTypes: {
     dismissable: {
@@ -677,8 +699,9 @@ export const DismissableContained = {
       description:
         'Specify a selected index for the initially selected content.',
     },
+    ...containedTabsSizeArgType,
   },
-  render: ({ contained, dismissable, selectedIndex }) => {
+  render: ({ contained, dismissable, selectedIndex, size }) => {
     return html`
       <style>
         ${styles}
@@ -686,7 +709,8 @@ export const DismissableContained = {
       <tabs-story-wrapper
         ?dismissable="${dismissable}"
         ?contained="${contained}"
-        selected-index="${selectedIndex}">
+        selected-index="${selectedIndex}"
+        size="${ifDefined(size)}">
       </tabs-story-wrapper>
     `;
   },
