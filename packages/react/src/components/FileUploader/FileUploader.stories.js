@@ -85,6 +85,18 @@ _FileUploaderItem.argTypes = {
   },
 };
 
+_FileUploaderItem.args = {
+  disabled: false,
+  errorBody: '1 MB max file size. Select a new file and try again.',
+  errorSubject: 'File size exceeds limit',
+  iconDescription: 'Delete file',
+  invalid: false,
+  name: 'This is a very long filename which will be truncated',
+  status: 'edit',
+  size: 'md',
+  filenameStatus: 'complete',
+};
+
 // Remove all the props that don't apply to FileUploaderItem
 _FileUploaderItem.parameters = {
   controls: {
@@ -94,6 +106,7 @@ _FileUploaderItem.parameters = {
       'buttonLabel',
       'labelDescription',
       'labelTitle',
+      'maxFileSize',
       'multiple',
       'filenameStatus',
     ],

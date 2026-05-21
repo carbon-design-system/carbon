@@ -93,7 +93,7 @@ export interface FileUploaderButtonProps
    * Specify the size of the FileUploaderButton, from a list of available
    * sizes.
    */
-  size?: 'sm' | 'small' | 'field' | 'md' | 'lg';
+  size?: 'sm' | 'md' | 'lg';
 
   /**
    * @deprecated The `tabIndex` prop for `FileUploaderButton` has been deprecated since it now renders a button element by default.
@@ -127,9 +127,8 @@ function FileUploaderButton({
   const classes = cx(`${prefix}--btn`, className, {
     [`${prefix}--btn--${buttonKind}`]: buttonKind,
     [`${prefix}--btn--disabled`]: disabled,
-    // V11: remove field, small
-    [`${prefix}--btn--md`]: size === 'field' || size === 'md',
-    [`${prefix}--btn--sm`]: size === 'small' || size === 'sm',
+    [`${prefix}--btn--md`]: size === 'md',
+    [`${prefix}--btn--sm`]: size === 'sm',
     [`${prefix}--layout--size-${size}`]: size,
   });
 

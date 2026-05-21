@@ -7,7 +7,7 @@
 
 import { Close, WarningFilled, CheckmarkFilled } from '@carbon/icons-react';
 import PropTypes from 'prop-types';
-import React, { type HTMLAttributes } from 'react';
+import React, { forwardRef, type HTMLAttributes } from 'react';
 import Loading from '../Loading';
 import { usePrefix } from '../../internal/usePrefix';
 
@@ -53,16 +53,20 @@ export interface FilenameProps
   tabIndex?: number;
 }
 
-function Filename({
-  iconDescription = 'Uploading file',
-  status = 'uploading',
-  invalid,
-  disabled,
-  name,
-  tabIndex = 0,
-  ['aria-describedby']: ariaDescribedBy,
-  ...rest
-}: FilenameProps) {
+const Filename = forwardRef<HTMLButtonElement, FilenameProps>(function Filename(
+  {
+    iconDescription = 'Uploading file',
+    status = 'uploading',
+    invalid,
+    disabled,
+    name,
+    tabIndex = 0,
+    ['aria-describedby']: ariaDescribedBy,
+    onClick,
+    ...rest
+  }: FilenameProps,
+  ref
+) {
   const prefix = usePrefix();
   switch (status) {
     case 'uploading':
@@ -79,13 +83,15 @@ function Filename({
         <>
           {invalid && <WarningFilled className={`${prefix}--file-invalid`} />}
           <button
+            ref={ref}
             disabled={disabled}
             aria-label={`${iconDescription} - ${name}`}
             className={`${prefix}--file-close`}
             type="button"
             tabIndex={tabIndex}
-            {...rest}
-            aria-describedby={invalid ? ariaDescribedBy : undefined}>
+            onClick={onClick}
+            aria-describedby={invalid ? ariaDescribedBy : undefined}
+            {...rest}>
             <Close />
           </button>
         </>
@@ -95,15 +101,14 @@ function Filename({
         <CheckmarkFilled
           aria-label={iconDescription}
           className={`${prefix}--file-complete`}
-          {...rest}
-          tabIndex={-1}>
+          {...rest}>
           {iconDescription && <title>{iconDescription}</title>}
         </CheckmarkFilled>
       );
     default:
       return null;
   }
-}
+});
 
 Filename.propTypes = {
   /**

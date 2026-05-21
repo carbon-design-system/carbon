@@ -10,6 +10,7 @@ import PropTypes from 'prop-types';
 import React, {
   forwardRef,
   useCallback,
+  useEffect,
   useImperativeHandle,
   useRef,
   useState,
@@ -152,7 +153,7 @@ export interface FileUploaderProps extends HTMLAttributes<HTMLSpanElement> {
    * Specify the size of the FileUploaderButton, from a list of available
    * sizes.
    */
-  size?: 'sm' | 'small' | 'md' | 'field' | 'lg';
+  size?: 'sm' | 'md' | 'lg';
 }
 
 export interface FileUploaderHandle {
@@ -210,7 +211,8 @@ const FileUploader = forwardRef<FileUploaderHandle, FileUploaderProps>(
     const [deletionAnnouncement, setDeletionAnnouncement] = useState('');
 
     const uploaderButton = useRef<HTMLLabelElement>(null);
-    const nodesRef = useRef<HTMLElement[]>([]);
+    const deleteButtonRefs = useRef<(HTMLButtonElement | null)[]>([]);
+    const pendingFocusIndex = useRef<number | null>(null);
 
     const count = fileItems.length || legacyFileNames.length;
     const fileCountText =
@@ -341,18 +343,6 @@ const FileUploader = forwardRef<FileUploaderHandle, FileUploaderProps>(
       setTimeout(() => setDeletionAnnouncement(''), 0);
     }, []);
 
-    const focusLastDeleteButton = useCallback((remainingCount: number) => {
-      const lastItemNode = nodesRef.current[remainingCount - 1];
-      const deleteButton = lastItemNode?.querySelector(
-        'button'
-      ) as HTMLButtonElement;
-      if (deleteButton) {
-        requestAnimationFrame(() => {
-          deleteButton.focus();
-        });
-      }
-    }, []);
-
     const focusUploaderButton = useCallback(() => {
       const buttonElement = uploaderButton.current
         ?.previousElementSibling as HTMLButtonElement;
@@ -409,14 +399,17 @@ const FileUploader = forwardRef<FileUploaderHandle, FileUploaderProps>(
     );
 
     const manageFocusAfterDeletion = useCallback(
-      (wasLastItem: boolean, remainingCount: number) => {
+      (deletedIndex: number, remainingCount: number) => {
         if (remainingCount === 0) {
+          pendingFocusIndex.current = null;
           focusUploaderButton();
-        } else if (wasLastItem) {
-          focusLastDeleteButton(remainingCount);
+          return;
         }
+
+        pendingFocusIndex.current =
+          deletedIndex < remainingCount ? deletedIndex : remainingCount - 1;
       },
-      [focusUploaderButton, focusLastDeleteButton]
+      [focusUploaderButton]
     );
 
     const handleClick = useCallback(
@@ -424,13 +417,10 @@ const FileUploader = forwardRef<FileUploaderHandle, FileUploaderProps>(
         evt.stopPropagation();
 
         let remainingCount: number;
-        let wasLastItem: boolean;
-
         if (enhancedFileUploaderEnabled) {
           const deletedItem = fileItems[index];
 
           announceFileDeletion(deletedItem.name);
-          wasLastItem = index === fileItems.length - 1;
           remainingCount = handleEnhancedFileDeletion(evt, index, deletedItem);
         } else {
           const deletedFileName = legacyFileNames[index] as string;
@@ -440,7 +430,6 @@ const FileUploader = forwardRef<FileUploaderHandle, FileUploaderProps>(
           );
 
           announceFileDeletion(deletedFileName);
-          wasLastItem = index === legacyFileNames.length - 1;
           remainingCount = handleLegacyFileDeletion(evt, filteredArray);
         }
 
@@ -448,7 +437,7 @@ const FileUploader = forwardRef<FileUploaderHandle, FileUploaderProps>(
           onClick(evt);
         }
 
-        manageFocusAfterDeletion(wasLastItem, remainingCount);
+        manageFocusAfterDeletion(index, remainingCount);
       },
       [
         enhancedFileUploaderEnabled,
@@ -461,6 +450,18 @@ const FileUploader = forwardRef<FileUploaderHandle, FileUploaderProps>(
         manageFocusAfterDeletion,
       ]
     );
+
+    useEffect(() => {
+      if (pendingFocusIndex.current === null) {
+        return;
+      }
+
+      const deleteButton = deleteButtonRefs.current[pendingFocusIndex.current];
+      if (deleteButton) {
+        deleteButton.focus();
+        pendingFocusIndex.current = null;
+      }
+    }, [fileItems, legacyFileNames]);
 
     useImperativeHandle(
       ref,
@@ -511,10 +512,8 @@ const FileUploader = forwardRef<FileUploaderHandle, FileUploaderProps>(
 
     const getSelectedFileClasses = (file) =>
       classNames(`${prefix}--file__selected-file`, {
-        [`${prefix}--file__selected-file--md`]:
-          size === 'field' || size === 'md',
-        [`${prefix}--file__selected-file--sm`]:
-          size === 'small' || size === 'sm',
+        [`${prefix}--file__selected-file--md`]: size === 'md',
+        [`${prefix}--file__selected-file--sm`]: size === 'sm',
         [`${prefix}--file__selected-file--disabled`]: file.disabled,
       });
 
@@ -570,9 +569,6 @@ const FileUploader = forwardRef<FileUploaderHandle, FileUploaderProps>(
                 <span
                   key={file.key}
                   className={getSelectedFileClasses(file)}
-                  ref={(node) => {
-                    nodesRef.current[file.index] = node as HTMLSpanElement;
-                  }}
                   {...other}>
                   <Text
                     as="p"
@@ -586,6 +582,9 @@ const FileUploader = forwardRef<FileUploaderHandle, FileUploaderProps>(
                   </Text>
                   <span className={`${prefix}--file__state-container`}>
                     <Filename
+                      ref={(node) => {
+                        deleteButtonRefs.current[file.index] = node;
+                      }}
                       name={file.name}
                       disabled={file.disabled}
                       iconDescription={iconDescription}
@@ -707,7 +706,7 @@ FileUploader.propTypes = {
    * Specify the size of the FileUploaderButton, from a list of available
    * sizes.
    */
-  size: PropTypes.oneOf(['sm', 'small', 'md', 'field', 'lg']),
+  size: PropTypes.oneOf(['sm', 'md', 'lg']),
 } as PropTypes.ValidationMap<FileUploaderProps>;
 
 export default FileUploader;

@@ -35,7 +35,7 @@ describe('Filename', () => {
     );
   });
 
-  it('should support events on interactive icons when `edit` or `complete` is the status', () => {
+  it('should support events on interactive icons when `edit` is the status', () => {
     const onClick = jest.fn();
     const { container: edit } = render(
       <Filename
@@ -53,18 +53,6 @@ describe('Filename', () => {
     expect(onClick).toHaveBeenCalledTimes(1);
 
     onClick.mockReset();
-
-    const { container: complete } = render(
-      <Filename
-        iconDescription="test description"
-        status="complete"
-        onClick={onClick}
-      />
-    );
-
-    // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
-    fireEvent.click(complete.querySelector(`[aria-label="test description"]`));
-    expect(onClick).toHaveBeenCalledTimes(1);
 
     const { container: uploading } = render(
       <Filename

@@ -134,8 +134,8 @@ export const ControlledFileState = (args) => {
         buttonKind="primary"
         filenameStatus="edit"
         multiple
-        onChange={handleChange}
-        onDelete={handleDelete}
+        // onChange={handleChange}
+        // onDelete={handleDelete}
         iconDescription="Remove uploaded file"
         {...args}
       />
