@@ -56,6 +56,16 @@ export enum TABS_TYPE {
 }
 
 /**
+ * Vertical navigation direction, associated with key symbols.
+ */
+export const VERTICAL_NAVIGATION_DIRECTION = {
+  Up: -1,
+  ArrowUp: -1,
+  Down: 1,
+  ArrowDown: 1,
+};
+
+/**
  * Tabs icon sizes.
  */
 export enum TABS_ICON_SIZE {

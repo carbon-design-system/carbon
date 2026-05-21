@@ -9,5 +9,6 @@ import './tabs';
 import './tab';
 import './tab-skeleton';
 import './tabs-skeleton';
+import './tabs-vertical';
 import '../badge-indicator';
 import '../tooltip';
