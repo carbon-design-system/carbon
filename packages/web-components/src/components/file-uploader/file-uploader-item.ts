@@ -63,6 +63,7 @@ class CDSFileUploaderItem extends LitElement {
         : iconLoader(WarningFilled16, { class: `${prefix}--file-invalid` })}
       <button
         type="button"
+        ?disabled=${this.disabled}
         aria-label="${iconDescription}"
         class="${prefix}--file-close"
         @click="${handleClickDeleteButton}">
@@ -122,6 +123,12 @@ class CDSFileUploaderItem extends LitElement {
    */
   @property({ type: Boolean, reflect: true })
   invalid = false;
+
+  /**
+   * Controls the disabled state of this file uploader item.
+   */
+  @property({ type: Boolean, reflect: true })
+  disabled = false;
 
   /**
    * The size of this file uploader item.
