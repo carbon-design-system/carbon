@@ -45,7 +45,7 @@ const legacyCustomElement = (tagName: string, clazz: CustomElementClass) => {
   try {
     customElements.define(tagName, clazz as CustomElementConstructor);
   } catch {
-    // eslint-disable-next-line no-console -- https://github.com/carbon-design-system/carbon/issues/20452
+    // eslint-disable-next-line no-console
     console.warn(`Attempting to re-define ${tagName}`);
   }
   // Cast as any because TS doesn't recognize the return type as being a
@@ -70,7 +70,7 @@ const standardCustomElement = (
       try {
         customElements.define(tagName, clazz);
       } catch {
-        // eslint-disable-next-line no-console -- https://github.com/carbon-design-system/carbon/issues/20452
+        // eslint-disable-next-line no-console
         console.warn(`Attempting to re-define ${tagName}`);
       }
     },

@@ -97,6 +97,43 @@ test step-by-step to debug what's going on. It will also allow you to interact
 with the page to quickly find selectors you can use to find items to run tests
 against.
 
+#### Chromatic Visual Regression Testing
+
+Chromatic is used for visual regression testing of Storybook stories. By
+default, stories are tested in the following modes:
+
+- `g10` theme
+- `g100` theme
+- `breakpoint-sm` viewport
+
+The `g90` theme is intentionally excluded from global Chromatic coverage to
+reduce snapshot volume. However, individual stories can opt into g90 coverage
+when needed.
+
+##### Opting a Story into g90 Coverage
+
+To include g90 theme snapshots for a specific story, import `allModes` from the
+Storybook modes configuration and add it to the story's parameters:
+
+```js
+import { allModes } from '../../.storybook/modes';
+
+export const MyStory = {
+  parameters: {
+    chromatic: {
+      modes: {
+        g10: allModes['g10'],
+        g90: allModes['g90'], // Opt into g90 coverage
+        g100: allModes['g100'],
+      },
+    },
+  },
+};
+```
+
+This approach allows targeted g90 coverage for stories where it's specifically
+needed, such as when addressing theme-specific bugs or visual regressions.
+
 ## FAQ
 
 ### Why am I seeing `browserType.launch: Executable doesn't exist at ../path`?

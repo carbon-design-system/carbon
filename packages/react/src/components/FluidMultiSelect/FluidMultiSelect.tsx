@@ -178,8 +178,6 @@ const FluidMultiSelect = React.forwardRef(function FluidMultiSelect<ItemType>(
           {...other}
         />
       ) : (
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20452
-        // @ts-ignore
         <MultiSelect ref={ref} className={classNames} {...other} />
       )}
     </FormContext.Provider>
