@@ -33,7 +33,7 @@ export interface PaginationProps
   backwardText?: string;
 
   /**
-   * Specify the position of the tooltip for the backward button. Can be one of: top, right, bottom, or left.
+   * The tooltip position for the backward button.
    */
   backwardTextTooltipPosition?: 'top' | 'right' | 'bottom' | 'left';
 
@@ -53,7 +53,7 @@ export interface PaginationProps
   forwardText?: string;
 
   /**
-   * Specify the position of the tooltip for the forward button. Can be one of: top, right, bottom, or left.
+   * The tooltip position for the forward button.
    */
   forwardTextTooltipPosition?: 'top' | 'right' | 'bottom' | 'left';
 
@@ -555,7 +555,7 @@ Pagination.propTypes = {
   backwardText: PropTypes.string,
 
   /**
-   * Specify the position of the tooltip for the backward button. Can be one of: top, right, bottom, or left.
+   * The tooltip position for the backward button.
    */
   backwardTextTooltipPosition: PropTypes.oneOf([
     'top',
@@ -580,7 +580,7 @@ Pagination.propTypes = {
   forwardText: PropTypes.string,
 
   /**
-   * Specify the position of the tooltip for the forward button. Can be one of: top, right, bottom, or left.
+   * The tooltip position for the forward button.
    */
   forwardTextTooltipPosition: PropTypes.oneOf([
     'top',
