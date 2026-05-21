@@ -5,10 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-'use strict';
-
-const github = require('@actions/github');
-const core = require('@actions/core');
+import * as github from '@actions/github';
+import * as core from '@actions/core';
 
 async function run() {
   const { context } = github;
@@ -16,7 +14,7 @@ async function run() {
     required: true,
   });
   const autoLabelUsers = core.getInput('AUTO_LABEL_USERS').split(',');
-  const octokit = new github.getOctokit(token);
+  const octokit = github.getOctokit(token);
   const { pull_request: pullRequest, repository, review } = context.payload;
   const { state, draft } = pullRequest;
 
@@ -31,7 +29,7 @@ async function run() {
   }
 
   const { data: permissionLevel } =
-    await octokit.repos.getCollaboratorPermissionLevel({
+    await octokit.rest.repos.getCollaboratorPermissionLevel({
       owner: repository.owner.login,
       repo: repository.name,
       username: review.user.login,
@@ -49,7 +47,7 @@ async function run() {
     return;
   }
 
-  const { data: allReviews } = await octokit.pulls.listReviews({
+  const { data: allReviews } = await octokit.rest.pulls.listReviews({
     owner: repository.owner.login,
     repo: repository.name,
     pull_number: pullRequest.number,

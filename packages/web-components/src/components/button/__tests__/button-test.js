@@ -100,6 +100,26 @@ describe('cds-button', () => {
       expect([...button.classList]).to.include(className);
     });
   });
+
+  it('does not render default danger assistive text when none is provided', async () => {
+    const el = await fixture(html`<cds-button kind="danger">test</cds-button>`);
+    const hiddenText = el.shadowRoot?.querySelector('.cds--visually-hidden');
+
+    expect(hiddenText).to.not.exist;
+  });
+
+  it('renders custom danger assistive text when provided', async () => {
+    const el = await fixture(html`
+      <cds-button kind="danger" danger-description="gefahr">test</cds-button>
+    `);
+    const button = el.shadowRoot?.querySelector('button');
+    const hiddenText = el.shadowRoot?.querySelector('.cds--visually-hidden');
+
+    expect(button).to.have.attribute('aria-describedby', 'danger-description');
+    expect(hiddenText).to.exist;
+    expect(hiddenText).to.have.attribute('id', 'danger-description');
+    expect(hiddenText?.textContent).to.equal('gefahr');
+  });
   describe('supports props.size', () => {
     const sizes = [
       ['sm', 'cds--btn--sm'],
