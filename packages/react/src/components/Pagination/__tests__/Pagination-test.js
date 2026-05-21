@@ -621,5 +621,23 @@ describe('Pagination', () => {
         expect.objectContaining({ page: 1, pageSize: 3 })
       );
     });
+
+    it('should respect tooltip position props', () => {
+      render(
+        <Pagination
+          pageSizes={[10]}
+          backwardTextTooltipPosition="right"
+          forwardTextTooltipPosition="bottom"
+        />
+      );
+
+      expect(
+        document.querySelector('.cds--popover--right')
+      ).toBeInTheDocument();
+
+      expect(
+        document.querySelector('.cds--popover--bottom')
+      ).toBeInTheDocument();
+    });
   });
 });
