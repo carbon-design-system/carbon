@@ -551,6 +551,8 @@ collect:
         - oncds-tabs-selected
         - selected-item-assistive-text
         - selecting-items-assistive-text
+        # cds-tabs-vertical
+        - custom-height
         # cds-tearsheet
         - has-close-icon
         - influencer-placement
