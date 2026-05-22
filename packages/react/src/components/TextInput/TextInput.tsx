@@ -264,7 +264,8 @@ const TextInput = forwardRef<unknown, TextInputProps>(
       [classNames(`${prefix}--form-item`, className)],
       `${prefix}--text-input-wrapper`,
       {
-        [`${prefix}--text-input-wrapper--readonly`]: readOnly,
+        [`${prefix}--text-input-wrapper--readonly`]:
+          readOnly && !normalizedProps.disabled,
         [`${prefix}--text-input-wrapper--light`]: light,
         [`${prefix}--text-input-wrapper--inline`]: inline,
         [`${prefix}--text-input-wrapper--inline--invalid`]:
