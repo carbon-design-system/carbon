@@ -165,7 +165,7 @@ class CDSPasswordInput extends CDSTextInput {
       'slot-text': string;
       icon: ReturnType<typeof iconLoader>;
     } = {
-      disabled: !readonly && disabled,
+      disabled,
       invalid: isInteractive && invalid,
       warn: isInteractive && !invalid && warn,
       'slot-name': '',
@@ -188,7 +188,7 @@ class CDSPasswordInput extends CDSTextInput {
       [`${prefix}--text-input-wrapper`]: true,
       [`${prefix}--password-input-wrapper`]: true,
       [`${prefix}--text-input-wrapper--inline`]: inline,
-      [`${prefix}--text-input-wrapper--readonly`]: readonly,
+      [`${prefix}--text-input-wrapper--readonly`]: readonly && !disabled,
       [`${prefix}--text-input-wrapper--inline--invalid`]:
         inline && normalizedProps.invalid,
     });
