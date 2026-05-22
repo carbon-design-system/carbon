@@ -214,7 +214,7 @@ const TimePicker = frFn((props, ref) => {
     [`${prefix}--time-picker--light`]: light,
     [`${prefix}--time-picker--invalid`]: normalizedProps.invalid,
     [`${prefix}--time-picker--warning`]: normalizedProps.warn,
-    [`${prefix}--time-picker--readonly`]: readOnly,
+    [`${prefix}--time-picker--readonly`]: readOnly && !disabled,
     [`${prefix}--time-picker--${size}`]: size,
     ...(pickerClassName && { [pickerClassName]: true }),
   });

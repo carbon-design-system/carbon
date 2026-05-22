@@ -428,7 +428,7 @@ class CDSSelect extends FormMixin(LitElement) {
       invalid: boolean;
       warn: boolean;
     } = {
-      disabled: !readonly && disabled,
+      disabled: disabled,
       invalid: !readonly && !disabled && invalid,
       warn: !readonly && !invalid && !disabled && warn,
     };

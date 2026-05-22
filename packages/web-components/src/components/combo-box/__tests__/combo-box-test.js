@@ -719,5 +719,25 @@ describe('cds-combo-box', function () {
       expect(listBox.classList.contains('cds--dropdown--warn')).to.be.true;
       expect(el.shadowRoot.textContent).to.contain('Warning text');
     });
+
+    it('should prioritize disabled over readOnly when both are true', async () => {
+      const el = await fixture(html`
+        <cds-combo-box disabled read-only title-text="Combo box Label">
+          <cds-combo-box-item value="option-1">Option 1</cds-combo-box-item>
+          <cds-combo-box-item value="option-2">Option 2</cds-combo-box-item>
+        </cds-combo-box>
+      `);
+      await el.updateComplete;
+
+      const input = getInput(el);
+      const listBox = getListBox(el);
+
+      // Check that input has disabled attribute
+      expect(input.hasAttribute('disabled')).to.be.true;
+      // Check that the disabled property is true (takes precedence)
+      expect(input.disabled).to.be.true;
+      // Check that listBox has disabled class
+      expect(listBox.classList.contains('cds--list-box--disabled')).to.be.true;
+    });
   });
 });

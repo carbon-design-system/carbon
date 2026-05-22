@@ -266,4 +266,24 @@ describe('cds-password-input', () => {
     expect(el.value).to.equal('', 'host.value remains empty');
     expect(inputElement.value).to.equal('', 'input.value remains empty');
   });
+
+  it('should prioritize disabled over readOnly when both are true', async () => {
+    const el = await fixture(html`
+      <cds-password-input
+        disabled
+        readonly
+        label-text="PasswordInput label"
+        placeholder="Placeholder text"></cds-password-input>
+    `);
+    await el.updateComplete;
+
+    const input = el.shadowRoot.querySelector('input');
+
+    // Check that input has disabled attribute
+    expect(input.hasAttribute('disabled')).to.be.true;
+    // Check that input also has readonly attribute
+    expect(input.hasAttribute('readonly')).to.be.true;
+    // Check that the disabled property is true (takes precedence)
+    expect(input.disabled).to.be.true;
+  });
 });

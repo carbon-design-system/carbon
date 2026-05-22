@@ -294,4 +294,20 @@ describe('cds-select', () => {
     const internalSelect = el.shadowRoot.querySelector('select');
     expect(internalSelect.getAttribute('aria-invalid')).to.equal('false');
   });
+
+  it('should prioritize disabled over readOnly when both are true', async () => {
+    const el = await fixture(html`
+      <cds-select disabled readonly label-text="Select">
+        <option value="option-1">Option 1</option>
+      </cds-select>
+    `);
+    await el.updateComplete;
+
+    const select = el.shadowRoot.querySelector('select');
+
+    // Check that select has disabled attribute
+    expect(select.hasAttribute('disabled')).to.be.true;
+    // Check that the disabled property is true (takes precedence)
+    expect(select.disabled).to.be.true;
+  });
 });

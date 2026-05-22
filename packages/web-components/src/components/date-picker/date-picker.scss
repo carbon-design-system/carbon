@@ -153,6 +153,16 @@ $css--plex: true !default;
   }
 }
 
+:host(#{$prefix}-date-picker-input) {
+  // Disabled takes precedence over read-only
+  .#{$prefix}--date-picker__input:disabled {
+    background-color: $field;
+    border-block-end: 1px solid transparent;
+    color: $text-disabled;
+    cursor: not-allowed;
+  }
+}
+
 :host(#{$prefix}-date-picker-input-skeleton) {
   display: inline-block;
 

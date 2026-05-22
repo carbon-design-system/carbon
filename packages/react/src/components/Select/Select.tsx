@@ -215,7 +215,7 @@ const Select = forwardRef<HTMLSelectElement, SelectProps>(
       [`${prefix}--select--light`]: light,
       [`${prefix}--select--invalid`]: normalizedProps.invalid,
       [`${prefix}--select--disabled`]: normalizedProps.disabled,
-      [`${prefix}--select--readonly`]: readOnly,
+      [`${prefix}--select--readonly`]: readOnly && !normalizedProps.disabled,
       [`${prefix}--select--warning`]: normalizedProps.warn,
       [`${prefix}--select--fluid--invalid`]: isFluid && normalizedProps.invalid,
       [`${prefix}--select--fluid--focus`]: isFluid && isFocused,
