@@ -43,7 +43,6 @@ export const _FileUploaderItem = (args) => {
     <FileUploaderItem
       errorBody="1 MB max file size. Select a new file and try again."
       errorSubject="File size exceeds limit"
-      iconDescription="Delete file"
       invalid={false}
       name="THIS IS A VERY LONG FILENAME WHICH WILL BE TRUNCATED"
       status="edit"
@@ -89,7 +88,6 @@ _FileUploaderItem.args = {
   disabled: false,
   errorBody: '1 MB max file size. Select a new file and try again.',
   errorSubject: 'File size exceeds limit',
-  iconDescription: 'Delete file',
   invalid: false,
   name: 'This is a very long filename which will be truncated',
   status: 'edit',
@@ -185,7 +183,6 @@ Default.args = {
   multiple: true,
   maxFileSize: 1024 * 1024,
   disabled: false,
-  iconDescription: 'Delete file',
   name: '',
 };
 Default.argTypes = {

@@ -55,7 +55,7 @@ export interface FilenameProps
 
 const Filename = forwardRef<HTMLButtonElement, FilenameProps>(function Filename(
   {
-    iconDescription = 'Uploading file',
+    iconDescription,
     status = 'uploading',
     invalid,
     disabled,
@@ -68,11 +68,29 @@ const Filename = forwardRef<HTMLButtonElement, FilenameProps>(function Filename(
   ref
 ) {
   const prefix = usePrefix();
+
+  // Provide status-specific default descriptions
+  const getDefaultDescription = () => {
+    if (iconDescription) return iconDescription;
+    switch (status) {
+      case 'uploading':
+        return name ? `Uploading ${name}` : 'Uploading file';
+      case 'edit':
+        return 'Remove file';
+      case 'complete':
+        return name ? `${name} uploaded` : 'Upload complete';
+      default:
+        return '';
+    }
+  };
+
+  const description = getDefaultDescription();
+
   switch (status) {
     case 'uploading':
       return (
         <Loading
-          description={iconDescription}
+          description={description}
           small
           withOverlay={false}
           className={`${prefix}--file-loading`}
@@ -85,7 +103,7 @@ const Filename = forwardRef<HTMLButtonElement, FilenameProps>(function Filename(
           <button
             ref={ref}
             disabled={disabled}
-            aria-label={`${iconDescription} - ${name}`}
+            aria-label={`${description} - ${name}`}
             className={`${prefix}--file-close`}
             type="button"
             tabIndex={tabIndex}
@@ -99,10 +117,10 @@ const Filename = forwardRef<HTMLButtonElement, FilenameProps>(function Filename(
     case 'complete':
       return (
         <CheckmarkFilled
-          aria-label={iconDescription}
+          aria-label={description}
           className={`${prefix}--file-complete`}
           {...rest}>
-          {iconDescription && <title>{iconDescription}</title>}
+          <title>{description}</title>
         </CheckmarkFilled>
       );
     default:
