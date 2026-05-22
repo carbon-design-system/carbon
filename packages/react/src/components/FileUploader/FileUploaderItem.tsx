@@ -137,7 +137,6 @@ function FileUploaderItem({
               <Text
                 ref={textRef}
                 as="p"
-                title={name}
                 className={`${prefix}--file-filename-button`}
                 id={filterSpaceName(name)}>
                 {name}
