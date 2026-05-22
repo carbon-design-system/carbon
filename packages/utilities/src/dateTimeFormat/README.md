@@ -1,7 +1,7 @@
 # dateTimeFormat
 
-A wrapper utility around `Intl.RelativeTimeFormat` and `Intl.DateTimeFormat`.
-See the
+A wrapper utility around `Intl.RelativeTimeFormat`, `Intl.DateTimeFormat`, and
+`Intl.DurationFormat`. See the
 [Date and time guidance](https://pages.github.ibm.com/carbon/ibm-products/guidelines/content/date-and-time/)
 provided on the Carbon for IBM Products site.
 
@@ -161,3 +161,21 @@ dateTimeFormat.absolute.format(timestamp, { timeZone: 'UTC' });
 
 Timezone options are according to
 [ECMAScript® 2026 Internationalization API Specification](https://tc39.es/ecma402/#datetimeformat-objects)
+
+## Duration
+
+- Supported styles: `"long" | "short" | "narrow" | "digital"`
+- Default style: `"narrow"`
+
+```js
+import { DurationFormat } from '@carbon/utilities';
+
+dateTimeFormat.duration.format(time);
+// 1h 23m 45s
+
+dateTimeFormat.duration.format(time, { locale: 'de-DE' });
+// 1h, 23 Min. und 45 Sek.
+
+dateTimeFormat.duration.format(time, { style: 'long' });
+// 1 hour, 23 minutes, 45 seconds
+```
