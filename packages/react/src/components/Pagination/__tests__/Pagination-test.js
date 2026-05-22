@@ -622,22 +622,38 @@ describe('Pagination', () => {
       );
     });
 
-    it('should respect tooltip position props', () => {
+    it('should respect backwardTextTooltipPosition position prop', () => {
       render(
-        <Pagination
-          pageSizes={[10]}
-          backwardTextTooltipPosition="right"
-          forwardTextTooltipPosition="bottom"
-        />
+        <Pagination pageSizes={[10]} backwardTextTooltipPosition="right" />
       );
 
-      expect(
-        document.querySelector('.cds--popover--right')
-      ).toBeInTheDocument();
+      const backBtn = document.querySelector(
+        '.cds--popover--right .cds--pagination__button--backward'
+      );
 
-      expect(
-        document.querySelector('.cds--popover--bottom')
-      ).toBeInTheDocument();
+      const forwardBtn = document.querySelector(
+        '.cds--popover--top .cds--pagination__button--forward'
+      );
+
+      expect(backBtn).toBeInTheDocument();
+      expect(forwardBtn).toBeInTheDocument();
+    });
+
+    it('should respect forwardTextTooltipPosition position prop', () => {
+      render(
+        <Pagination pageSizes={[10]} forwardTextTooltipPosition="bottom" />
+      );
+
+      const backBtn = document.querySelector(
+        '.cds--popover--top .cds--pagination__button--backward'
+      );
+
+      const forwardBtn = document.querySelector(
+        '.cds--popover--bottom .cds--pagination__button--forward'
+      );
+
+      expect(backBtn).toBeInTheDocument();
+      expect(forwardBtn).toBeInTheDocument();
     });
   });
 });
