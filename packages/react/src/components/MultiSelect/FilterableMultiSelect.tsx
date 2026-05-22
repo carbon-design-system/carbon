@@ -866,7 +866,7 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
       [`${prefix}--multi-select--selected`]:
         controlledSelectedItems?.length > 0,
       [`${prefix}--multi-select--filterable--input-focused`]: inputFocused,
-      [`${prefix}--multi-select--readonly`]: readOnly,
+      [`${prefix}--multi-select--readonly`]: readOnly && !disabled,
       [`${prefix}--multi-select--selectall`]: selectAll,
     }
   );
@@ -1043,7 +1043,7 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
             {...inputProp}
             ref={mergedRef}
             {...readOnlyEventHandlers}
-            {...(readOnly ? { readOnly: true } : {})}
+            {...(readOnly && !disabled ? { readOnly: true } : {})}
           />
           {normalizedProps.invalid && (
             <WarningFilled className={`${prefix}--list-box__invalid-icon`} />
