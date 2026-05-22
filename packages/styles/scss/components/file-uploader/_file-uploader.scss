@@ -234,7 +234,7 @@
         inline-size: -moz-available;
       }
     }
-    .#{$prefix}--file-filename-button:focus {
+    .#{$prefix}--file-filename-button:focus-visible {
       @include focus-outline('outline');
     }
   }
