@@ -195,7 +195,9 @@ test.describe('@avt FileUploader', () => {
         )
       );
     await expect(
-      page.getByTitle('test-upload-file-long-text-for-tooltip-to-show-up.png')
+      page.getByRole('button').filter({
+        hasText: 'test-upload-file-long-text-for-tooltip-to-show-up.png',
+      })
     ).toBeVisible();
 
     // Checking Tooltip
