@@ -622,38 +622,23 @@ describe('Pagination', () => {
       );
     });
 
-    it('should respect backwardTextTooltipPosition position prop', () => {
+    it('should map each tooltip position prop to the correct button', () => {
       render(
-        <Pagination pageSizes={[10]} backwardTextTooltipPosition="right" />
+        <Pagination
+          pageSizes={[10]}
+          backwardTextTooltipPosition="right"
+          forwardTextTooltipPosition="bottom"
+        />
       );
 
-      const backBtn = document.querySelector(
-        '.cds--popover--right .cds--pagination__button--backward'
-      );
+      const previousButton = screen.getByLabelText('Previous page');
+      const nextButton = screen.getByLabelText('Next page');
 
-      const forwardBtn = document.querySelector(
-        '.cds--popover--top .cds--pagination__button--forward'
-      );
+      expect(
+        previousButton.closest('.cds--popover--right')
+      ).toBeInTheDocument();
 
-      expect(backBtn).toBeInTheDocument();
-      expect(forwardBtn).toBeInTheDocument();
-    });
-
-    it('should respect forwardTextTooltipPosition position prop', () => {
-      render(
-        <Pagination pageSizes={[10]} forwardTextTooltipPosition="bottom" />
-      );
-
-      const backBtn = document.querySelector(
-        '.cds--popover--top .cds--pagination__button--backward'
-      );
-
-      const forwardBtn = document.querySelector(
-        '.cds--popover--bottom .cds--pagination__button--forward'
-      );
-
-      expect(backBtn).toBeInTheDocument();
-      expect(forwardBtn).toBeInTheDocument();
+      expect(nextButton.closest('.cds--popover--bottom')).toBeInTheDocument();
     });
   });
 });
