@@ -1394,5 +1394,25 @@ describe('<cds-number-input>', () => {
       expect(input.hasAttribute('data-invalid')).to.be.true;
       expect(el.value).to.equal('-10');
     });
+
+    it('should prioritize disabled over readOnly when both are true', async () => {
+      const el = await fixture(html`
+        <cds-number-input
+          disabled
+          readonly
+          label="NumberInput label"
+          value="5"></cds-number-input>
+      `);
+      await el.updateComplete;
+
+      const input = el.shadowRoot.querySelector('input');
+
+      // Check that input has disabled attribute
+      expect(input.hasAttribute('disabled')).to.be.true;
+      // Check that input also has readonly attribute
+      expect(input.hasAttribute('readonly')).to.be.true;
+      // Check that the disabled property is true (takes precedence)
+      expect(input.disabled).to.be.true;
+    });
   });
 });
