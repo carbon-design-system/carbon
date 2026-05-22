@@ -11185,8 +11185,8 @@
     - modem
     - wireless
     - home
-- name: men--showers
-  friendly_name: Men showers
+- name: women--showers
+  friendly_name: Women showers
   aliases:
     - person
     - shower
