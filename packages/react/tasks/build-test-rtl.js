@@ -7,7 +7,7 @@
 
 'use strict';
 
-const clipboard = require('clipboardy');
+const { writeText } = require('tinyclip');
 const prettier = require('prettier');
 const CarbonComponents = require('@carbon/react');
 const enquirer = require('enquirer');
@@ -234,7 +234,7 @@ async function main() {
     ]);
 
     if (copy) {
-      clipboard.writeSync(testFile);
+      await writeText(testFile);
     }
     return;
   }

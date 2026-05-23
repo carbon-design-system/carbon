@@ -46,3 +46,8 @@ body {
 #{$prefix}-tabs[type='contained'] ~ .#{$prefix}--tab-content {
   background: $layer;
 }
+
+.#{$prefix}-ce-demo-devenv--tab-story-button {
+  display: inline-block;
+  inline-size: auto;
+}

@@ -23,7 +23,8 @@ $css--plex: true !default;
   @extend .#{$prefix}--date-picker;
 
   #floating-menu-container {
-    position: absolute;
+    position: fixed;
+    z-index: z('dropdown');
     inline-size: 100%;
   }
 

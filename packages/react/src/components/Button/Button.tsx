@@ -6,7 +6,7 @@
  */
 
 import PropTypes from 'prop-types';
-import React, { type ReactNode } from 'react';
+import React from 'react';
 import { IconButton, IconButtonKind, IconButtonKinds } from '../IconButton';
 import { PopoverAlignment } from '../Popover';
 import ButtonBase from './ButtonBase';
@@ -125,8 +125,11 @@ export type ButtonProps<T extends React.ElementType> =
   PolymorphicComponentPropWithRef<T, ButtonBaseProps>;
 
 export type ButtonComponent = <T extends React.ElementType = 'button'>(
-  props: ButtonProps<T>
-) => ReactNode;
+  props: ButtonProps<T>,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
+  context?: any
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
+) => React.ReactElement | any;
 
 function isIconOnlyButton(
   hasIconOnly: ButtonBaseProps['hasIconOnly'],
@@ -167,7 +170,7 @@ const Button: ButtonComponent = React.forwardRef(
     } = props;
 
     if (ButtonImageElement && !children && !iconDescription) {
-      // eslint-disable-next-line no-console -- https://github.com/carbon-design-system/carbon/issues/20452
+      // eslint-disable-next-line no-console
       console.error(
         'Button: renderIcon property specified without also providing an iconDescription property. ' +
           'This may impact accessibility for screen reader users.'
