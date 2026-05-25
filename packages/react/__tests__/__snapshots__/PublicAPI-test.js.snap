@@ -6015,6 +6015,46 @@ Map {
       },
     },
   },
+  "InlineCheckbox" => {
+    "$$typeof": Symbol(react.forward_ref),
+    "propTypes": {
+      "aria-label": {
+        "isRequired": true,
+        "type": "string",
+      },
+      "ariaLabel": [Function],
+      "checked": {
+        "type": "bool",
+      },
+      "disabled": {
+        "type": "bool",
+      },
+      "id": {
+        "isRequired": true,
+        "type": "string",
+      },
+      "indeterminate": {
+        "type": "bool",
+      },
+      "name": {
+        "isRequired": true,
+        "type": "string",
+      },
+      "onChange": {
+        "type": "func",
+      },
+      "onClick": {
+        "type": "func",
+      },
+      "onKeyDown": {
+        "type": "func",
+      },
+      "title": {
+        "type": "string",
+      },
+    },
+    "render": [Function],
+  },
   "InlineLoading" => {
     "propTypes": {
       "className": {
@@ -6535,6 +6575,9 @@ Map {
       "danger": {
         "type": "bool",
       },
+      "dangerDescription": {
+        "type": "string",
+      },
       "decorator": {
         "type": "node",
       },
@@ -6704,6 +6747,9 @@ Map {
       },
       "danger": {
         "type": "bool",
+      },
+      "dangerDescription": {
+        "type": "string",
       },
       "inputref": {
         "args": [
@@ -12192,6 +12238,9 @@ Map {
         },
         "danger": {
           "type": "bool",
+        },
+        "dangerDescription": {
+          "type": "string",
         },
         "loadingDescription": {
           "type": "string",

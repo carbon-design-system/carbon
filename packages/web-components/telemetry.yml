@@ -55,7 +55,6 @@ collect:
         - cols
         - condensed
         - contained
-        - container-class
         - counter-mode
         - danger-description
         - data-table
@@ -88,7 +87,6 @@ collect:
         - has-focus
         - has-main-content
         - has-rounded-corners
-        - has-scrolling-content
         - has-three-buttons
         - hasCustomIcon
         - heading
@@ -163,8 +161,6 @@ collect:
         - oncds-dropdown-selected
         - oncds-dropdown-toggled
         - oncds-header-menu-button-toggled
-        - oncds-modal-beingclosed
-        - oncds-modal-closed
         - oncds-multi-select-beingselected
         - oncds-multi-select-beingtoggled
         - oncds-multi-select-selected
@@ -215,6 +211,7 @@ collect:
         - revert-label
         - role
         - rows
+        - secondary-label
         - select-all
         - selected
         - selected-index
@@ -227,7 +224,6 @@ collect:
         - selector-initial-focus
         - shortcut
         - should-filter-item
-        - should-submit-on-enter
         - show-password-label
         - show-password-visibility-toggle
         - showPasswordLabel
@@ -408,6 +404,13 @@ collect:
         - selectedItem
         # cds-menu-item-selectable
         - renderIcon
+        # cds-modal
+        - container-class
+        - enable-dialog-element
+        - has-scrolling-content
+        - oncds-modal-beingclosed
+        - oncds-modal-closed
+        - should-submit-on-enter
         # cds-multi-select-item
         - is-select-all
         # cds-operational-tag
@@ -451,7 +454,6 @@ collect:
         - complete
         - current
         - icon-label
-        - secondary-label
         - secondary-label-text
         - spaceEqually
         # cds-radio-button
@@ -549,6 +551,8 @@ collect:
         - oncds-tabs-selected
         - selected-item-assistive-text
         - selecting-items-assistive-text
+        # cds-tabs-vertical
+        - custom-height
         # cds-tearsheet
         - has-close-icon
         - influencer-placement
@@ -577,6 +581,8 @@ collect:
         - is-expanded
         - oneventSelected
         - oneventToggled
+        # tabs-story-wrapper
+        - with-icons
       allowedAttributeStringValues:
         # General - boolean attributes
         - "true"

@@ -56,6 +56,7 @@ export * from './components/FormLabel';
 export * from './components/Grid';
 export * from './components/Icon/Icon.Skeleton';
 export * from './components/IdPrefix';
+export { InlineCheckbox } from './components/InlineCheckbox';
 export * from './components/InlineLoading';
 export * from './components/Link';
 export * from './components/ListItem';

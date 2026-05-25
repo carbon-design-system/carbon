@@ -18,7 +18,7 @@ const ButtonBase = React.forwardRef(function ButtonBase<
     as,
     children,
     className,
-    dangerDescription = 'danger',
+    dangerDescription = '',
     disabled = false,
     hasIconOnly = false,
     href,
@@ -72,6 +72,8 @@ const ButtonBase = React.forwardRef(function ButtonBase<
   );
 
   const dangerButtonVariants = ['danger', 'danger--tertiary', 'danger--ghost'];
+  const hasDangerDescription =
+    dangerButtonVariants.includes(kind) && Boolean(dangerDescription);
 
   let component: React.ElementType = 'button';
   const assistiveId = useId('danger-description');
@@ -80,7 +82,7 @@ const ButtonBase = React.forwardRef(function ButtonBase<
   let otherProps: Partial<ButtonBaseProps> = {
     disabled,
     type,
-    'aria-describedby': dangerButtonVariants.includes(kind)
+    'aria-describedby': hasDangerDescription
       ? assistiveId
       : ariaDescribedBy || undefined,
     'aria-pressed':
@@ -91,7 +93,7 @@ const ButtonBase = React.forwardRef(function ButtonBase<
   };
 
   let assistiveText: JSX.Element | null = null;
-  if (dangerButtonVariants.includes(kind)) {
+  if (hasDangerDescription) {
     assistiveText = (
       <span id={assistiveId} className={`${prefix}--visually-hidden`}>
         {dangerDescription}
