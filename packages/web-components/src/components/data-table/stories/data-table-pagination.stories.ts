@@ -9,6 +9,8 @@ import { LitElement, html } from 'lit';
 import { prefix } from '../../../globals/settings';
 import { TABLE_SIZE } from '../table';
 import { PAGINATION_SIZE } from '../../pagination/defs';
+import { iconLoader } from '../../../globals/internal/icon-loader';
+import Settings16 from '@carbon/icons/es/settings/16.js';
 import '../index';
 import '../../pagination/index';
 import '../../select/index';
@@ -143,6 +145,10 @@ class PaginatedDataTableDemo extends LitElement {
                 persistent
                 placeholder="Filter table"></cds-table-toolbar-search>
               <cds-overflow-menu toolbar-action>
+                ${iconLoader(Settings16, {
+                  slot: 'icon',
+                  class: `${prefix}--overflow-menu__icon`,
+                })}
                 <span slot="tooltip-content">Settings</span>
                 <cds-overflow-menu-body>
                   <cds-overflow-menu-item> Action 1 </cds-overflow-menu-item>
