@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { DataTable } from '..';
 import Pagination from '../../Pagination';
 import { headers } from './shared';
