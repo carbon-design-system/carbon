@@ -5,7 +5,9 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import { action } from 'storybook/actions';
 import React, { useState } from 'react';
+import Button from '../../Button';
 import { DataTable } from '..';
 import Pagination from '../../Pagination';
 import { headers } from './shared';
@@ -18,6 +20,11 @@ const {
   TableHead,
   TableHeader,
   TableRow,
+  TableToolbar,
+  TableToolbarAction,
+  TableToolbarContent,
+  TableToolbarMenu,
+  TableToolbarSearch,
 } = DataTable;
 
 import mdx from '../DataTable.mdx';
@@ -106,7 +113,34 @@ export const Default = (args) => {
 
   return (
     <>
-      <TableContainer title="Load Balancers" description="Paginated data table">
+      <TableContainer
+        title="Load Balancers"
+        description="Paginated data table with persistent toolbar">
+        <TableToolbar
+          aria-label="data table toolbar"
+          size={args.size === 'xs' ? 'sm' : args.size}>
+          <TableToolbarContent>
+            <TableToolbarSearch
+              onChange={(event) => {
+                action('toolbar search input')(event);
+              }}
+              persistent
+              size={args.size === 'xs' ? 'sm' : args.size}
+            />
+            <TableToolbarMenu size={args.size === 'xl' ? 'lg' : args.size}>
+              <TableToolbarAction onClick={action('Action 1 Click')}>
+                Action 1
+              </TableToolbarAction>
+              <TableToolbarAction onClick={action('Action 2 Click')}>
+                Action 2
+              </TableToolbarAction>
+              <TableToolbarAction onClick={action('Action 3 Click')}>
+                Action 3
+              </TableToolbarAction>
+            </TableToolbarMenu>
+            <Button onClick={action('Button click')}>Primary Button</Button>
+          </TableToolbarContent>
+        </TableToolbar>
         <Table {...args} aria-label="paginated table">
           <TableHead>
             <TableRow>

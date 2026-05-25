@@ -6,6 +6,7 @@
  */
 
 import { LitElement, html } from 'lit';
+import { prefix } from '../../../globals/settings';
 import { TABLE_SIZE } from '../table';
 import { PAGINATION_SIZE } from '../../pagination/defs';
 import '../index';
@@ -129,6 +130,29 @@ class PaginatedDataTableDemo extends LitElement {
           size="${this.size}"
           ?use-static-width="${this.useStaticWidth}"
           ?use-zebra-styles="${this.useZebraStyles}">
+          <cds-table-header-title slot="title"
+            >Load Balancers</cds-table-header-title
+          >
+          <cds-table-header-description slot="description"
+            >Paginated data table with persistent
+            toolbar</cds-table-header-description
+          >
+          <cds-table-toolbar slot="toolbar">
+            <cds-table-toolbar-content>
+              <cds-table-toolbar-search
+                persistent
+                placeholder="Filter table"></cds-table-toolbar-search>
+              <cds-overflow-menu toolbar-action>
+                <span slot="tooltip-content">Settings</span>
+                <cds-overflow-menu-body>
+                  <cds-overflow-menu-item> Action 1 </cds-overflow-menu-item>
+                  <cds-overflow-menu-item> Action 2 </cds-overflow-menu-item>
+                  <cds-overflow-menu-item> Action 3 </cds-overflow-menu-item>
+                </cds-overflow-menu-body>
+              </cds-overflow-menu>
+              <cds-button>Primary button</cds-button>
+            </cds-table-toolbar-content>
+          </cds-table-toolbar>
           <cds-table-head>
             <cds-table-header-row>
               <cds-table-header-cell>Name</cds-table-header-cell>
