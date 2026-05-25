@@ -165,7 +165,7 @@ class PaginatedDataTableDemo extends LitElement {
               <cds-table-header-cell>Protocol</cds-table-header-cell>
               <cds-table-header-cell>Port</cds-table-header-cell>
               <cds-table-header-cell>Rule</cds-table-header-cell>
-              <cds-table-header-cell>Attached Groups</cds-table-header-cell>
+              <cds-table-header-cell>Attached groups</cds-table-header-cell>
               <cds-table-header-cell>Status</cds-table-header-cell>
             </cds-table-header-row>
           </cds-table-head>
