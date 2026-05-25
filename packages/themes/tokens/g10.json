@@ -1,0 +1,1480 @@
+{
+  "$schema": "https://design-tokens.github.io/community-group/format/schema.json",
+  "$description": "Carbon Design System g10 theme tokens",
+  "$version": "11.0.0",
+  "ai": {
+    "aiAuraEnd": {
+      "$value": "rgba(255, 255, 255, 0)",
+      "$type": "color",
+      "$description": "aiAuraEnd token from g10 theme"
+    },
+    "aiAuraHoverBackground": {
+      "$value": "#edf5ff",
+      "$type": "color",
+      "$description": "aiAuraHoverBackground token from g10 theme"
+    },
+    "aiAuraHoverEnd": {
+      "$value": "rgba(255, 255, 255, 0)",
+      "$type": "color",
+      "$description": "aiAuraHoverEnd token from g10 theme"
+    },
+    "aiAuraHoverStart": {
+      "$value": "rgba(69, 137, 255, 0.32)",
+      "$type": "color",
+      "$description": "aiAuraHoverStart token from g10 theme"
+    },
+    "aiAuraStart": {
+      "$value": "rgba(69, 137, 255, 0.1)",
+      "$type": "color",
+      "$description": "aiAuraStart token from g10 theme"
+    },
+    "aiAuraStartSm": {
+      "$value": "rgba(69, 137, 255, 0.16)",
+      "$type": "color",
+      "$description": "aiAuraStartSm token from g10 theme"
+    },
+    "aiBorderEnd": {
+      "$value": "#78a9ff",
+      "$type": "color",
+      "$description": "aiBorderEnd token from g10 theme"
+    },
+    "aiBorderStart": {
+      "$value": "rgba(166, 200, 255, 0.64)",
+      "$type": "color",
+      "$description": "aiBorderStart token from g10 theme"
+    },
+    "aiBorderStrong": {
+      "$value": "#4589ff",
+      "$type": "color",
+      "$description": "aiBorderStrong token from g10 theme"
+    },
+    "aiDropShadow": {
+      "$value": "rgba(15, 98, 254, 0.1)",
+      "$type": "color",
+      "$description": "aiDropShadow token from g10 theme"
+    },
+    "aiInnerShadow": {
+      "$value": "rgba(69, 137, 255, 0.1)",
+      "$type": "color",
+      "$description": "aiInnerShadow token from g10 theme"
+    },
+    "aiOverlay": {
+      "$value": "rgba(0, 17, 65, 0.5)",
+      "$type": "color",
+      "$description": "aiOverlay token from g10 theme"
+    },
+    "aiPopoverBackground": {
+      "$value": "#ffffff",
+      "$type": "color",
+      "$description": "aiPopoverBackground token from g10 theme"
+    },
+    "aiPopoverCaretBottom": {
+      "$value": "#78a9ff",
+      "$type": "color",
+      "$description": "aiPopoverCaretBottom token from g10 theme"
+    },
+    "aiPopoverCaretBottomBackground": {
+      "$value": "#EAF1FF",
+      "$type": "color",
+      "$description": "aiPopoverCaretBottomBackground token from g10 theme"
+    },
+    "aiPopoverCaretBottomBackgroundActions": {
+      "$value": "#E9EFFA",
+      "$type": "color",
+      "$description": "aiPopoverCaretBottomBackgroundActions token from g10 theme"
+    },
+    "aiPopoverCaretCenter": {
+      "$value": "#A0C3FF",
+      "$type": "color",
+      "$description": "aiPopoverCaretCenter token from g10 theme"
+    },
+    "aiPopoverShadowOuter01": {
+      "$value": "rgba(0, 67, 206, 0.06)",
+      "$type": "color",
+      "$description": "aiPopoverShadowOuter01 token from g10 theme"
+    },
+    "aiPopoverShadowOuter02": {
+      "$value": "rgba(0, 0, 0, 0.04)",
+      "$type": "color",
+      "$description": "aiPopoverShadowOuter02 token from g10 theme"
+    },
+    "aiSkeletonBackground": {
+      "$value": "#d0e2ff",
+      "$type": "color",
+      "$description": "aiSkeletonBackground token from g10 theme"
+    },
+    "aiSkeletonElementBackground": {
+      "$value": "#4589ff",
+      "$type": "color",
+      "$description": "aiSkeletonElementBackground token from g10 theme"
+    }
+  },
+  "background": {
+    "background": {
+      "$value": "#f4f4f4",
+      "$type": "color",
+      "$description": "background token from g10 theme"
+    },
+    "backgroundActive": {
+      "$value": "rgba(141, 141, 141, 0.5)",
+      "$type": "color",
+      "$description": "backgroundActive token from g10 theme"
+    },
+    "backgroundBrand": {
+      "$value": "#0f62fe",
+      "$type": "color",
+      "$description": "backgroundBrand token from g10 theme"
+    },
+    "backgroundHover": {
+      "$value": "rgba(141, 141, 141, 0.12)",
+      "$type": "color",
+      "$description": "backgroundHover token from g10 theme"
+    },
+    "backgroundInverse": {
+      "$value": "#393939",
+      "$type": "color",
+      "$description": "backgroundInverse token from g10 theme"
+    },
+    "backgroundInverseHover": {
+      "$value": "#474747",
+      "$type": "color",
+      "$description": "backgroundInverseHover token from g10 theme"
+    },
+    "backgroundSelected": {
+      "$value": "rgba(141, 141, 141, 0.2)",
+      "$type": "color",
+      "$description": "backgroundSelected token from g10 theme"
+    },
+    "backgroundSelectedHover": {
+      "$value": "rgba(141, 141, 141, 0.32)",
+      "$type": "color",
+      "$description": "backgroundSelectedHover token from g10 theme"
+    }
+  },
+  "border": {
+    "borderDisabled": {
+      "$value": "#c6c6c6",
+      "$type": "color",
+      "$description": "borderDisabled token from g10 theme"
+    },
+    "borderInteractive": {
+      "$value": "#0f62fe",
+      "$type": "color",
+      "$description": "borderInteractive token from g10 theme"
+    },
+    "borderInverse": {
+      "$value": "#161616",
+      "$type": "color",
+      "$description": "borderInverse token from g10 theme"
+    },
+    "borderStrong01": {
+      "$value": "#8d8d8d",
+      "$type": "color",
+      "$description": "borderStrong01 token from g10 theme"
+    },
+    "borderStrong02": {
+      "$value": "#8d8d8d",
+      "$type": "color",
+      "$description": "borderStrong02 token from g10 theme"
+    },
+    "borderStrong03": {
+      "$value": "#8d8d8d",
+      "$type": "color",
+      "$description": "borderStrong03 token from g10 theme"
+    },
+    "borderSubtle00": {
+      "$value": "#c6c6c6",
+      "$type": "color",
+      "$description": "borderSubtle00 token from g10 theme"
+    },
+    "borderSubtle01": {
+      "$value": "#e0e0e0",
+      "$type": "color",
+      "$description": "borderSubtle01 token from g10 theme"
+    },
+    "borderSubtle02": {
+      "$value": "#c6c6c6",
+      "$type": "color",
+      "$description": "borderSubtle02 token from g10 theme"
+    },
+    "borderSubtle03": {
+      "$value": "#e0e0e0",
+      "$type": "color",
+      "$description": "borderSubtle03 token from g10 theme"
+    },
+    "borderSubtleSelected01": {
+      "$value": "#c6c6c6",
+      "$type": "color",
+      "$description": "borderSubtleSelected01 token from g10 theme"
+    },
+    "borderSubtleSelected02": {
+      "$value": "#c6c6c6",
+      "$type": "color",
+      "$description": "borderSubtleSelected02 token from g10 theme"
+    },
+    "borderSubtleSelected03": {
+      "$value": "#c6c6c6",
+      "$type": "color",
+      "$description": "borderSubtleSelected03 token from g10 theme"
+    },
+    "borderTile01": {
+      "$value": "#a8a8a8",
+      "$type": "color",
+      "$description": "borderTile01 token from g10 theme"
+    },
+    "borderTile02": {
+      "$value": "#c6c6c6",
+      "$type": "color",
+      "$description": "borderTile02 token from g10 theme"
+    },
+    "borderTile03": {
+      "$value": "#a8a8a8",
+      "$type": "color",
+      "$description": "borderTile03 token from g10 theme"
+    }
+  },
+  "chat": {
+    "chatAvatarAgent": {
+      "$value": "#393939",
+      "$type": "color",
+      "$description": "chatAvatarAgent token from g10 theme"
+    },
+    "chatAvatarBot": {
+      "$value": "#6f6f6f",
+      "$type": "color",
+      "$description": "chatAvatarBot token from g10 theme"
+    },
+    "chatAvatarUser": {
+      "$value": "#0f62fe",
+      "$type": "color",
+      "$description": "chatAvatarUser token from g10 theme"
+    },
+    "chatBubbleAgent": {
+      "$value": "#ffffff",
+      "$type": "color",
+      "$description": "chatBubbleAgent token from g10 theme"
+    },
+    "chatBubbleAgentText": {
+      "$value": "#161616",
+      "$type": "color",
+      "$description": "chatBubbleAgentText token from g10 theme"
+    },
+    "chatBubbleBorder": {
+      "$value": "#e0e0e0",
+      "$type": "color",
+      "$description": "chatBubbleBorder token from g10 theme"
+    },
+    "chatBubbleUser": {
+      "$value": "#e0e0e0",
+      "$type": "color",
+      "$description": "chatBubbleUser token from g10 theme"
+    },
+    "chatBubbleUserText": {
+      "$value": "#161616",
+      "$type": "color",
+      "$description": "chatBubbleUserText token from g10 theme"
+    },
+    "chatButton": {
+      "$value": "#0f62fe",
+      "$type": "color",
+      "$description": "chatButton token from g10 theme"
+    },
+    "chatButtonActive": {
+      "$value": "rgba(141, 141, 141, 0.5)",
+      "$type": "color",
+      "$description": "chatButtonActive token from g10 theme"
+    },
+    "chatButtonHover": {
+      "$value": "rgba(141, 141, 141, 0.12)",
+      "$type": "color",
+      "$description": "chatButtonHover token from g10 theme"
+    },
+    "chatButtonSelected": {
+      "$value": "rgba(141, 141, 141, 0.2)",
+      "$type": "color",
+      "$description": "chatButtonSelected token from g10 theme"
+    },
+    "chatButtonTextHover": {
+      "$value": "#0043ce",
+      "$type": "color",
+      "$description": "chatButtonTextHover token from g10 theme"
+    },
+    "chatButtonTextSelected": {
+      "$value": "#525252",
+      "$type": "color",
+      "$description": "chatButtonTextSelected token from g10 theme"
+    },
+    "chatHeaderBackground": {
+      "$value": "#ffffff",
+      "$type": "color",
+      "$description": "chatHeaderBackground token from g10 theme"
+    },
+    "chatHeaderText": {
+      "$value": "#161616",
+      "$type": "color",
+      "$description": "chatHeaderText token from g10 theme"
+    },
+    "chatPromptBackground": {
+      "$value": "#ffffff",
+      "$type": "color",
+      "$description": "chatPromptBackground token from g10 theme"
+    },
+    "chatPromptBorderEnd": {
+      "$value": "rgba(244, 244, 244, 0)",
+      "$type": "color",
+      "$description": "chatPromptBorderEnd token from g10 theme"
+    },
+    "chatPromptBorderStart": {
+      "$value": "#f4f4f4",
+      "$type": "color",
+      "$description": "chatPromptBorderStart token from g10 theme"
+    },
+    "chatPromptText": {
+      "$value": "#161616",
+      "$type": "color",
+      "$description": "chatPromptText token from g10 theme"
+    },
+    "chatShellBackground": {
+      "$value": "#ffffff",
+      "$type": "color",
+      "$description": "chatShellBackground token from g10 theme"
+    }
+  },
+  "other": {
+    "colorScheme": {
+      "$value": "light",
+      "$type": "color",
+      "$description": "colorScheme token from g10 theme"
+    },
+    "container01": {
+      "$value": "1.5rem",
+      "$type": "dimension",
+      "$description": "container01 token from g10 theme"
+    },
+    "container02": {
+      "$value": "2rem",
+      "$type": "dimension",
+      "$description": "container02 token from g10 theme"
+    },
+    "container03": {
+      "$value": "2.5rem",
+      "$type": "dimension",
+      "$description": "container03 token from g10 theme"
+    },
+    "container04": {
+      "$value": "3rem",
+      "$type": "dimension",
+      "$description": "container04 token from g10 theme"
+    },
+    "container05": {
+      "$value": "4rem",
+      "$type": "dimension",
+      "$description": "container05 token from g10 theme"
+    },
+    "fluidSpacing01": {
+      "$value": 0,
+      "$type": "color",
+      "$description": "fluidSpacing01 token from g10 theme"
+    },
+    "fluidSpacing02": {
+      "$value": "2vw",
+      "$type": "color",
+      "$description": "fluidSpacing02 token from g10 theme"
+    },
+    "fluidSpacing03": {
+      "$value": "5vw",
+      "$type": "color",
+      "$description": "fluidSpacing03 token from g10 theme"
+    },
+    "fluidSpacing04": {
+      "$value": "10vw",
+      "$type": "color",
+      "$description": "fluidSpacing04 token from g10 theme"
+    },
+    "layout01": {
+      "$value": "1rem",
+      "$type": "dimension",
+      "$description": "layout01 token from g10 theme"
+    },
+    "layout02": {
+      "$value": "1.5rem",
+      "$type": "dimension",
+      "$description": "layout02 token from g10 theme"
+    },
+    "layout03": {
+      "$value": "2rem",
+      "$type": "dimension",
+      "$description": "layout03 token from g10 theme"
+    },
+    "layout04": {
+      "$value": "3rem",
+      "$type": "dimension",
+      "$description": "layout04 token from g10 theme"
+    },
+    "layout05": {
+      "$value": "4rem",
+      "$type": "dimension",
+      "$description": "layout05 token from g10 theme"
+    },
+    "layout06": {
+      "$value": "6rem",
+      "$type": "dimension",
+      "$description": "layout06 token from g10 theme"
+    },
+    "layout07": {
+      "$value": "10rem",
+      "$type": "dimension",
+      "$description": "layout07 token from g10 theme"
+    },
+    "size2XLarge": {
+      "$value": "5rem",
+      "$type": "dimension",
+      "$description": "size2XLarge token from g10 theme"
+    },
+    "sizeLarge": {
+      "$value": "3rem",
+      "$type": "dimension",
+      "$description": "sizeLarge token from g10 theme"
+    },
+    "sizeMedium": {
+      "$value": "2.5rem",
+      "$type": "dimension",
+      "$description": "sizeMedium token from g10 theme"
+    },
+    "sizeSmall": {
+      "$value": "2rem",
+      "$type": "dimension",
+      "$description": "sizeSmall token from g10 theme"
+    },
+    "sizeXLarge": {
+      "$value": "4rem",
+      "$type": "dimension",
+      "$description": "sizeXLarge token from g10 theme"
+    },
+    "sizeXSmall": {
+      "$value": "1.5rem",
+      "$type": "dimension",
+      "$description": "sizeXSmall token from g10 theme"
+    },
+    "spacing01": {
+      "$value": "0.125rem",
+      "$type": "dimension",
+      "$description": "spacing01 token from g10 theme"
+    },
+    "spacing02": {
+      "$value": "0.25rem",
+      "$type": "dimension",
+      "$description": "spacing02 token from g10 theme"
+    },
+    "spacing03": {
+      "$value": "0.5rem",
+      "$type": "dimension",
+      "$description": "spacing03 token from g10 theme"
+    },
+    "spacing04": {
+      "$value": "0.75rem",
+      "$type": "dimension",
+      "$description": "spacing04 token from g10 theme"
+    },
+    "spacing05": {
+      "$value": "1rem",
+      "$type": "dimension",
+      "$description": "spacing05 token from g10 theme"
+    },
+    "spacing06": {
+      "$value": "1.5rem",
+      "$type": "dimension",
+      "$description": "spacing06 token from g10 theme"
+    },
+    "spacing07": {
+      "$value": "2rem",
+      "$type": "dimension",
+      "$description": "spacing07 token from g10 theme"
+    },
+    "spacing08": {
+      "$value": "2.5rem",
+      "$type": "dimension",
+      "$description": "spacing08 token from g10 theme"
+    },
+    "spacing09": {
+      "$value": "3rem",
+      "$type": "dimension",
+      "$description": "spacing09 token from g10 theme"
+    },
+    "spacing10": {
+      "$value": "4rem",
+      "$type": "dimension",
+      "$description": "spacing10 token from g10 theme"
+    },
+    "spacing11": {
+      "$value": "5rem",
+      "$type": "dimension",
+      "$description": "spacing11 token from g10 theme"
+    },
+    "spacing12": {
+      "$value": "6rem",
+      "$type": "dimension",
+      "$description": "spacing12 token from g10 theme"
+    },
+    "spacing13": {
+      "$value": "10rem",
+      "$type": "dimension",
+      "$description": "spacing13 token from g10 theme"
+    }
+  },
+  "field": {
+    "field01": {
+      "$value": "#ffffff",
+      "$type": "color",
+      "$description": "field01 token from g10 theme"
+    },
+    "field02": {
+      "$value": "#f4f4f4",
+      "$type": "color",
+      "$description": "field02 token from g10 theme"
+    },
+    "field03": {
+      "$value": "#ffffff",
+      "$type": "color",
+      "$description": "field03 token from g10 theme"
+    },
+    "fieldHover01": {
+      "$value": "#e8e8e8",
+      "$type": "color",
+      "$description": "fieldHover01 token from g10 theme"
+    },
+    "fieldHover02": {
+      "$value": "#e8e8e8",
+      "$type": "color",
+      "$description": "fieldHover02 token from g10 theme"
+    },
+    "fieldHover03": {
+      "$value": "#e8e8e8",
+      "$type": "color",
+      "$description": "fieldHover03 token from g10 theme"
+    }
+  },
+  "focus": {
+    "focus": {
+      "$value": "#0f62fe",
+      "$type": "color",
+      "$description": "focus token from g10 theme"
+    },
+    "focusInset": {
+      "$value": "#ffffff",
+      "$type": "color",
+      "$description": "focusInset token from g10 theme"
+    },
+    "focusInverse": {
+      "$value": "#ffffff",
+      "$type": "color",
+      "$description": "focusInverse token from g10 theme"
+    }
+  },
+  "highlight": {
+    "highlight": {
+      "$value": "#d0e2ff",
+      "$type": "color",
+      "$description": "highlight token from g10 theme"
+    }
+  },
+  "icon": {
+    "iconDisabled": {
+      "$value": "rgba(22, 22, 22, 0.25)",
+      "$type": "color",
+      "$description": "iconDisabled token from g10 theme"
+    },
+    "iconInteractive": {
+      "$value": "#0f62fe",
+      "$type": "color",
+      "$description": "iconInteractive token from g10 theme"
+    },
+    "iconInverse": {
+      "$value": "#ffffff",
+      "$type": "color",
+      "$description": "iconInverse token from g10 theme"
+    },
+    "iconOnColor": {
+      "$value": "#ffffff",
+      "$type": "color",
+      "$description": "iconOnColor token from g10 theme"
+    },
+    "iconOnColorDisabled": {
+      "$value": "#8d8d8d",
+      "$type": "color",
+      "$description": "iconOnColorDisabled token from g10 theme"
+    },
+    "iconPrimary": {
+      "$value": "#161616",
+      "$type": "color",
+      "$description": "iconPrimary token from g10 theme"
+    },
+    "iconSecondary": {
+      "$value": "#525252",
+      "$type": "color",
+      "$description": "iconSecondary token from g10 theme"
+    },
+    "iconSize01": {
+      "$value": "1rem",
+      "$type": "dimension",
+      "$description": "iconSize01 token from g10 theme"
+    },
+    "iconSize02": {
+      "$value": "1.25rem",
+      "$type": "dimension",
+      "$description": "iconSize02 token from g10 theme"
+    }
+  },
+  "interactive": {
+    "interactive": {
+      "$value": "#0f62fe",
+      "$type": "color",
+      "$description": "interactive token from g10 theme"
+    }
+  },
+  "layer": {
+    "layer01": {
+      "$value": "#ffffff",
+      "$type": "color",
+      "$description": "layer01 token from g10 theme"
+    },
+    "layer02": {
+      "$value": "#f4f4f4",
+      "$type": "color",
+      "$description": "layer02 token from g10 theme"
+    },
+    "layer03": {
+      "$value": "#ffffff",
+      "$type": "color",
+      "$description": "layer03 token from g10 theme"
+    },
+    "layerAccent01": {
+      "$value": "#e0e0e0",
+      "$type": "color",
+      "$description": "layerAccent01 token from g10 theme"
+    },
+    "layerAccent02": {
+      "$value": "#e0e0e0",
+      "$type": "color",
+      "$description": "layerAccent02 token from g10 theme"
+    },
+    "layerAccent03": {
+      "$value": "#e0e0e0",
+      "$type": "color",
+      "$description": "layerAccent03 token from g10 theme"
+    },
+    "layerAccentActive01": {
+      "$value": "#a8a8a8",
+      "$type": "color",
+      "$description": "layerAccentActive01 token from g10 theme"
+    },
+    "layerAccentActive02": {
+      "$value": "#a8a8a8",
+      "$type": "color",
+      "$description": "layerAccentActive02 token from g10 theme"
+    },
+    "layerAccentActive03": {
+      "$value": "#a8a8a8",
+      "$type": "color",
+      "$description": "layerAccentActive03 token from g10 theme"
+    },
+    "layerAccentHover01": {
+      "$value": "#d1d1d1",
+      "$type": "color",
+      "$description": "layerAccentHover01 token from g10 theme"
+    },
+    "layerAccentHover02": {
+      "$value": "#d1d1d1",
+      "$type": "color",
+      "$description": "layerAccentHover02 token from g10 theme"
+    },
+    "layerAccentHover03": {
+      "$value": "#d1d1d1",
+      "$type": "color",
+      "$description": "layerAccentHover03 token from g10 theme"
+    },
+    "layerActive01": {
+      "$value": "#c6c6c6",
+      "$type": "color",
+      "$description": "layerActive01 token from g10 theme"
+    },
+    "layerActive02": {
+      "$value": "#c6c6c6",
+      "$type": "color",
+      "$description": "layerActive02 token from g10 theme"
+    },
+    "layerActive03": {
+      "$value": "#c6c6c6",
+      "$type": "color",
+      "$description": "layerActive03 token from g10 theme"
+    },
+    "layerBackground01": {
+      "$value": "#f4f4f4",
+      "$type": "color",
+      "$description": "layerBackground01 token from g10 theme"
+    },
+    "layerBackground02": {
+      "$value": "#ffffff",
+      "$type": "color",
+      "$description": "layerBackground02 token from g10 theme"
+    },
+    "layerBackground03": {
+      "$value": "#f4f4f4",
+      "$type": "color",
+      "$description": "layerBackground03 token from g10 theme"
+    },
+    "layerHover01": {
+      "$value": "#e8e8e8",
+      "$type": "color",
+      "$description": "layerHover01 token from g10 theme"
+    },
+    "layerHover02": {
+      "$value": "#e8e8e8",
+      "$type": "color",
+      "$description": "layerHover02 token from g10 theme"
+    },
+    "layerHover03": {
+      "$value": "#e8e8e8",
+      "$type": "color",
+      "$description": "layerHover03 token from g10 theme"
+    },
+    "layerSelected01": {
+      "$value": "#e0e0e0",
+      "$type": "color",
+      "$description": "layerSelected01 token from g10 theme"
+    },
+    "layerSelected02": {
+      "$value": "#e0e0e0",
+      "$type": "color",
+      "$description": "layerSelected02 token from g10 theme"
+    },
+    "layerSelected03": {
+      "$value": "#e0e0e0",
+      "$type": "color",
+      "$description": "layerSelected03 token from g10 theme"
+    },
+    "layerSelectedDisabled": {
+      "$value": "#8d8d8d",
+      "$type": "color",
+      "$description": "layerSelectedDisabled token from g10 theme"
+    },
+    "layerSelectedHover01": {
+      "$value": "#d1d1d1",
+      "$type": "color",
+      "$description": "layerSelectedHover01 token from g10 theme"
+    },
+    "layerSelectedHover02": {
+      "$value": "#d1d1d1",
+      "$type": "color",
+      "$description": "layerSelectedHover02 token from g10 theme"
+    },
+    "layerSelectedHover03": {
+      "$value": "#d1d1d1",
+      "$type": "color",
+      "$description": "layerSelectedHover03 token from g10 theme"
+    },
+    "layerSelectedInverse": {
+      "$value": "#161616",
+      "$type": "color",
+      "$description": "layerSelectedInverse token from g10 theme"
+    }
+  },
+  "link": {
+    "linkInverse": {
+      "$value": "#78a9ff",
+      "$type": "color",
+      "$description": "linkInverse token from g10 theme"
+    },
+    "linkInverseActive": {
+      "$value": "#f4f4f4",
+      "$type": "color",
+      "$description": "linkInverseActive token from g10 theme"
+    },
+    "linkInverseHover": {
+      "$value": "#a6c8ff",
+      "$type": "color",
+      "$description": "linkInverseHover token from g10 theme"
+    },
+    "linkInverseVisited": {
+      "$value": "#be95ff",
+      "$type": "color",
+      "$description": "linkInverseVisited token from g10 theme"
+    },
+    "linkPrimary": {
+      "$value": "#0f62fe",
+      "$type": "color",
+      "$description": "linkPrimary token from g10 theme"
+    },
+    "linkPrimaryHover": {
+      "$value": "#0043ce",
+      "$type": "color",
+      "$description": "linkPrimaryHover token from g10 theme"
+    },
+    "linkSecondary": {
+      "$value": "#0043ce",
+      "$type": "color",
+      "$description": "linkSecondary token from g10 theme"
+    },
+    "linkVisited": {
+      "$value": "#8a3ffc",
+      "$type": "color",
+      "$description": "linkVisited token from g10 theme"
+    }
+  },
+  "overlay": {
+    "overlay": {
+      "$value": "rgba(0, 0, 0, 0.6)",
+      "$type": "color",
+      "$description": "overlay token from g10 theme"
+    }
+  },
+  "shadow": {
+    "shadow": {
+      "$value": "rgba(0, 0, 0, 0.3)",
+      "$type": "color",
+      "$description": "shadow token from g10 theme"
+    }
+  },
+  "skeleton": {
+    "skeletonBackground": {
+      "$value": "#e8e8e8",
+      "$type": "color",
+      "$description": "skeletonBackground token from g10 theme"
+    },
+    "skeletonElement": {
+      "$value": "#c6c6c6",
+      "$type": "color",
+      "$description": "skeletonElement token from g10 theme"
+    }
+  },
+  "support": {
+    "supportCautionMajor": {
+      "$value": "#ff832b",
+      "$type": "color",
+      "$description": "supportCautionMajor token from g10 theme"
+    },
+    "supportCautionMinor": {
+      "$value": "#f1c21b",
+      "$type": "color",
+      "$description": "supportCautionMinor token from g10 theme"
+    },
+    "supportCautionUndefined": {
+      "$value": "#8a3ffc",
+      "$type": "color",
+      "$description": "supportCautionUndefined token from g10 theme"
+    },
+    "supportError": {
+      "$value": "#da1e28",
+      "$type": "color",
+      "$description": "supportError token from g10 theme"
+    },
+    "supportErrorInverse": {
+      "$value": "#fa4d56",
+      "$type": "color",
+      "$description": "supportErrorInverse token from g10 theme"
+    },
+    "supportInfo": {
+      "$value": "#0043ce",
+      "$type": "color",
+      "$description": "supportInfo token from g10 theme"
+    },
+    "supportInfoInverse": {
+      "$value": "#4589ff",
+      "$type": "color",
+      "$description": "supportInfoInverse token from g10 theme"
+    },
+    "supportSuccess": {
+      "$value": "#24a148",
+      "$type": "color",
+      "$description": "supportSuccess token from g10 theme"
+    },
+    "supportSuccessInverse": {
+      "$value": "#42be65",
+      "$type": "color",
+      "$description": "supportSuccessInverse token from g10 theme"
+    },
+    "supportWarning": {
+      "$value": "#f1c21b",
+      "$type": "color",
+      "$description": "supportWarning token from g10 theme"
+    },
+    "supportWarningInverse": {
+      "$value": "#f1c21b",
+      "$type": "color",
+      "$description": "supportWarningInverse token from g10 theme"
+    }
+  },
+  "syntax": {
+    "syntaxAngleBracket": {
+      "$value": "#697077",
+      "$type": "color",
+      "$description": "syntaxAngleBracket token from g10 theme"
+    },
+    "syntaxAnnotation": {
+      "$value": "#007d79",
+      "$type": "color",
+      "$description": "syntaxAnnotation token from g10 theme"
+    },
+    "syntaxArithmeticOperator": {
+      "$value": "#343a3f",
+      "$type": "color",
+      "$description": "syntaxArithmeticOperator token from g10 theme"
+    },
+    "syntaxAtom": {
+      "$value": "#161616",
+      "$type": "color",
+      "$description": "syntaxAtom token from g10 theme"
+    },
+    "syntaxAttribute": {
+      "$value": "#00539a",
+      "$type": "color",
+      "$description": "syntaxAttribute token from g10 theme"
+    },
+    "syntaxAttributeName": {
+      "$value": "#00539a",
+      "$type": "color",
+      "$description": "syntaxAttributeName token from g10 theme"
+    },
+    "syntaxAttributeValue": {
+      "$value": "#161616",
+      "$type": "color",
+      "$description": "syntaxAttributeValue token from g10 theme"
+    },
+    "syntaxBitwiseOperator": {
+      "$value": "#343a3f",
+      "$type": "color",
+      "$description": "syntaxBitwiseOperator token from g10 theme"
+    },
+    "syntaxBlockComment": {
+      "$value": "#198038",
+      "$type": "color",
+      "$description": "syntaxBlockComment token from g10 theme"
+    },
+    "syntaxBool": {
+      "$value": "#161616",
+      "$type": "color",
+      "$description": "syntaxBool token from g10 theme"
+    },
+    "syntaxBrace": {
+      "$value": "#343a3f",
+      "$type": "color",
+      "$description": "syntaxBrace token from g10 theme"
+    },
+    "syntaxBracket": {
+      "$value": "#343a3f",
+      "$type": "color",
+      "$description": "syntaxBracket token from g10 theme"
+    },
+    "syntaxCharacter": {
+      "$value": "#161616",
+      "$type": "color",
+      "$description": "syntaxCharacter token from g10 theme"
+    },
+    "syntaxClassName": {
+      "$value": "#007d79",
+      "$type": "color",
+      "$description": "syntaxClassName token from g10 theme"
+    },
+    "syntaxColor": {
+      "$value": "#161616",
+      "$type": "color",
+      "$description": "syntaxColor token from g10 theme"
+    },
+    "syntaxComment": {
+      "$value": "#198038",
+      "$type": "color",
+      "$description": "syntaxComment token from g10 theme"
+    },
+    "syntaxCompareOperator": {
+      "$value": "#343a3f",
+      "$type": "color",
+      "$description": "syntaxCompareOperator token from g10 theme"
+    },
+    "syntaxConstant": {
+      "$value": "#0f62fe",
+      "$type": "color",
+      "$description": "syntaxConstant token from g10 theme"
+    },
+    "syntaxContent": {
+      "$value": "#161616",
+      "$type": "color",
+      "$description": "syntaxContent token from g10 theme"
+    },
+    "syntaxContentSeparator": {
+      "$value": "#343a3f",
+      "$type": "color",
+      "$description": "syntaxContentSeparator token from g10 theme"
+    },
+    "syntaxControlKeyword": {
+      "$value": "#6929c4",
+      "$type": "color",
+      "$description": "syntaxControlKeyword token from g10 theme"
+    },
+    "syntaxControlOperator": {
+      "$value": "#6929c4",
+      "$type": "color",
+      "$description": "syntaxControlOperator token from g10 theme"
+    },
+    "syntaxDefinition": {
+      "$value": "#00539a",
+      "$type": "color",
+      "$description": "syntaxDefinition token from g10 theme"
+    },
+    "syntaxDefinitionKeyword": {
+      "$value": "#00539a",
+      "$type": "color",
+      "$description": "syntaxDefinitionKeyword token from g10 theme"
+    },
+    "syntaxDefinitionOperator": {
+      "$value": "#00539a",
+      "$type": "color",
+      "$description": "syntaxDefinitionOperator token from g10 theme"
+    },
+    "syntaxDeleted": {
+      "$value": "#ffd7d9",
+      "$type": "color",
+      "$description": "syntaxDeleted token from g10 theme"
+    },
+    "syntaxDerefOperator": {
+      "$value": "#343a3f",
+      "$type": "color",
+      "$description": "syntaxDerefOperator token from g10 theme"
+    },
+    "syntaxDocComment": {
+      "$value": "#198038",
+      "$type": "color",
+      "$description": "syntaxDocComment token from g10 theme"
+    },
+    "syntaxDocString": {
+      "$value": "#161616",
+      "$type": "color",
+      "$description": "syntaxDocString token from g10 theme"
+    },
+    "syntaxDocumentMeta": {
+      "$value": "#198038",
+      "$type": "color",
+      "$description": "syntaxDocumentMeta token from g10 theme"
+    },
+    "syntaxEmphasis": {
+      "$value": "#161616",
+      "$type": "color",
+      "$description": "syntaxEmphasis token from g10 theme"
+    },
+    "syntaxEscape": {
+      "$value": "#343a3f",
+      "$type": "color",
+      "$description": "syntaxEscape token from g10 theme"
+    },
+    "syntaxFloat": {
+      "$value": "#198038",
+      "$type": "color",
+      "$description": "syntaxFloat token from g10 theme"
+    },
+    "syntaxFunction": {
+      "$value": "#8e6a00",
+      "$type": "color",
+      "$description": "syntaxFunction token from g10 theme"
+    },
+    "syntaxHeading": {
+      "$value": "#00539a",
+      "$type": "color",
+      "$description": "syntaxHeading token from g10 theme"
+    },
+    "syntaxHeading1": {
+      "$value": "#00539a",
+      "$type": "color",
+      "$description": "syntaxHeading1 token from g10 theme"
+    },
+    "syntaxHeading2": {
+      "$value": "#00539a",
+      "$type": "color",
+      "$description": "syntaxHeading2 token from g10 theme"
+    },
+    "syntaxHeading3": {
+      "$value": "#00539a",
+      "$type": "color",
+      "$description": "syntaxHeading3 token from g10 theme"
+    },
+    "syntaxHeading4": {
+      "$value": "#00539a",
+      "$type": "color",
+      "$description": "syntaxHeading4 token from g10 theme"
+    },
+    "syntaxHeading5": {
+      "$value": "#00539a",
+      "$type": "color",
+      "$description": "syntaxHeading5 token from g10 theme"
+    },
+    "syntaxHeading6": {
+      "$value": "#00539a",
+      "$type": "color",
+      "$description": "syntaxHeading6 token from g10 theme"
+    },
+    "syntaxInserted": {
+      "$value": "#a7f0ba",
+      "$type": "color",
+      "$description": "syntaxInserted token from g10 theme"
+    },
+    "syntaxInteger": {
+      "$value": "#198038",
+      "$type": "color",
+      "$description": "syntaxInteger token from g10 theme"
+    },
+    "syntaxInvalid": {
+      "$value": "#da1e28",
+      "$type": "color",
+      "$description": "syntaxInvalid token from g10 theme"
+    },
+    "syntaxKeyword": {
+      "$value": "#0f62fe",
+      "$type": "color",
+      "$description": "syntaxKeyword token from g10 theme"
+    },
+    "syntaxLabelName": {
+      "$value": "#0f62fe",
+      "$type": "color",
+      "$description": "syntaxLabelName token from g10 theme"
+    },
+    "syntaxLineComment": {
+      "$value": "#198038",
+      "$type": "color",
+      "$description": "syntaxLineComment token from g10 theme"
+    },
+    "syntaxLink": {
+      "$value": "#0f62fe",
+      "$type": "color",
+      "$description": "syntaxLink token from g10 theme"
+    },
+    "syntaxList": {
+      "$value": "#161616",
+      "$type": "color",
+      "$description": "syntaxList token from g10 theme"
+    },
+    "syntaxLiteral": {
+      "$value": "#161616",
+      "$type": "color",
+      "$description": "syntaxLiteral token from g10 theme"
+    },
+    "syntaxLocal": {
+      "$value": "#0f62fe",
+      "$type": "color",
+      "$description": "syntaxLocal token from g10 theme"
+    },
+    "syntaxLogicOperator": {
+      "$value": "#343a3f",
+      "$type": "color",
+      "$description": "syntaxLogicOperator token from g10 theme"
+    },
+    "syntaxMacroName": {
+      "$value": "#161616",
+      "$type": "color",
+      "$description": "syntaxMacroName token from g10 theme"
+    },
+    "syntaxMeta": {
+      "$value": "#198038",
+      "$type": "color",
+      "$description": "syntaxMeta token from g10 theme"
+    },
+    "syntaxModifier": {
+      "$value": "#0f62fe",
+      "$type": "color",
+      "$description": "syntaxModifier token from g10 theme"
+    },
+    "syntaxModuleKeyword": {
+      "$value": "#6929c4",
+      "$type": "color",
+      "$description": "syntaxModuleKeyword token from g10 theme"
+    },
+    "syntaxMonospace": {
+      "$value": "#161616",
+      "$type": "color",
+      "$description": "syntaxMonospace token from g10 theme"
+    },
+    "syntaxName": {
+      "$value": "#0f62fe",
+      "$type": "color",
+      "$description": "syntaxName token from g10 theme"
+    },
+    "syntaxNamespace": {
+      "$value": "#007d79",
+      "$type": "color",
+      "$description": "syntaxNamespace token from g10 theme"
+    },
+    "syntaxNull": {
+      "$value": "#161616",
+      "$type": "color",
+      "$description": "syntaxNull token from g10 theme"
+    },
+    "syntaxNumber": {
+      "$value": "#198038",
+      "$type": "color",
+      "$description": "syntaxNumber token from g10 theme"
+    },
+    "syntaxOperator": {
+      "$value": "#343a3f",
+      "$type": "color",
+      "$description": "syntaxOperator token from g10 theme"
+    },
+    "syntaxOperatorKeyword": {
+      "$value": "#0f62fe",
+      "$type": "color",
+      "$description": "syntaxOperatorKeyword token from g10 theme"
+    },
+    "syntaxParen": {
+      "$value": "#343a3f",
+      "$type": "color",
+      "$description": "syntaxParen token from g10 theme"
+    },
+    "syntaxProcessingInstruction": {
+      "$value": "#161616",
+      "$type": "color",
+      "$description": "syntaxProcessingInstruction token from g10 theme"
+    },
+    "syntaxPropertyName": {
+      "$value": "#00539a",
+      "$type": "color",
+      "$description": "syntaxPropertyName token from g10 theme"
+    },
+    "syntaxPunctuation": {
+      "$value": "#343a3f",
+      "$type": "color",
+      "$description": "syntaxPunctuation token from g10 theme"
+    },
+    "syntaxQuote": {
+      "$value": "#198038",
+      "$type": "color",
+      "$description": "syntaxQuote token from g10 theme"
+    },
+    "syntaxRegexp": {
+      "$value": "#6929c4",
+      "$type": "color",
+      "$description": "syntaxRegexp token from g10 theme"
+    },
+    "syntaxSelf": {
+      "$value": "#007d79",
+      "$type": "color",
+      "$description": "syntaxSelf token from g10 theme"
+    },
+    "syntaxSeparator": {
+      "$value": "#343a3f",
+      "$type": "color",
+      "$description": "syntaxSeparator token from g10 theme"
+    },
+    "syntaxSpecial": {
+      "$value": "#0f62fe",
+      "$type": "color",
+      "$description": "syntaxSpecial token from g10 theme"
+    },
+    "syntaxSpecialString": {
+      "$value": "#8a3ffc",
+      "$type": "color",
+      "$description": "syntaxSpecialString token from g10 theme"
+    },
+    "syntaxSquareBracket": {
+      "$value": "#343a3f",
+      "$type": "color",
+      "$description": "syntaxSquareBracket token from g10 theme"
+    },
+    "syntaxStandard": {
+      "$value": "#0f62fe",
+      "$type": "color",
+      "$description": "syntaxStandard token from g10 theme"
+    },
+    "syntaxStrikethrough": {
+      "$value": "#161616",
+      "$type": "color",
+      "$description": "syntaxStrikethrough token from g10 theme"
+    },
+    "syntaxString": {
+      "$value": "#161616",
+      "$type": "color",
+      "$description": "syntaxString token from g10 theme"
+    },
+    "syntaxStrong": {
+      "$value": "#161616",
+      "$type": "color",
+      "$description": "syntaxStrong token from g10 theme"
+    },
+    "syntaxTag": {
+      "$value": "#007d79",
+      "$type": "color",
+      "$description": "syntaxTag token from g10 theme"
+    },
+    "syntaxTagName": {
+      "$value": "#007d79",
+      "$type": "color",
+      "$description": "syntaxTagName token from g10 theme"
+    },
+    "syntaxType": {
+      "$value": "#007d79",
+      "$type": "color",
+      "$description": "syntaxType token from g10 theme"
+    },
+    "syntaxTypeName": {
+      "$value": "#007d79",
+      "$type": "color",
+      "$description": "syntaxTypeName token from g10 theme"
+    },
+    "syntaxTypeOperator": {
+      "$value": "#007d79",
+      "$type": "color",
+      "$description": "syntaxTypeOperator token from g10 theme"
+    },
+    "syntaxUnit": {
+      "$value": "#198038",
+      "$type": "color",
+      "$description": "syntaxUnit token from g10 theme"
+    },
+    "syntaxUpdateOperator": {
+      "$value": "#343a3f",
+      "$type": "color",
+      "$description": "syntaxUpdateOperator token from g10 theme"
+    },
+    "syntaxUrl": {
+      "$value": "#343a3f",
+      "$type": "color",
+      "$description": "syntaxUrl token from g10 theme"
+    },
+    "syntaxVariable": {
+      "$value": "#0f62fe",
+      "$type": "color",
+      "$description": "syntaxVariable token from g10 theme"
+    },
+    "syntaxVariableName": {
+      "$value": "#0f62fe",
+      "$type": "color",
+      "$description": "syntaxVariableName token from g10 theme"
+    }
+  },
+  "text": {
+    "textDisabled": {
+      "$value": "rgba(22, 22, 22, 0.25)",
+      "$type": "color",
+      "$description": "textDisabled token from g10 theme"
+    },
+    "textError": {
+      "$value": "#da1e28",
+      "$type": "color",
+      "$description": "textError token from g10 theme"
+    },
+    "textHelper": {
+      "$value": "#6f6f6f",
+      "$type": "color",
+      "$description": "textHelper token from g10 theme"
+    },
+    "textInverse": {
+      "$value": "#ffffff",
+      "$type": "color",
+      "$description": "textInverse token from g10 theme"
+    },
+    "textOnColor": {
+      "$value": "#ffffff",
+      "$type": "color",
+      "$description": "textOnColor token from g10 theme"
+    },
+    "textOnColorDisabled": {
+      "$value": "#8d8d8d",
+      "$type": "color",
+      "$description": "textOnColorDisabled token from g10 theme"
+    },
+    "textPlaceholder": {
+      "$value": "rgba(22, 22, 22, 0.4)",
+      "$type": "color",
+      "$description": "textPlaceholder token from g10 theme"
+    },
+    "textPrimary": {
+      "$value": "#161616",
+      "$type": "color",
+      "$description": "textPrimary token from g10 theme"
+    },
+    "textSecondary": {
+      "$value": "#525252",
+      "$type": "color",
+      "$description": "textSecondary token from g10 theme"
+    }
+  },
+  "toggle": {
+    "toggleOff": {
+      "$value": "#8d8d8d",
+      "$type": "color",
+      "$description": "toggleOff token from g10 theme"
+    }
+  },
+  "button": {
+    "buttonDangerActive": {
+      "$value": "#750e13",
+      "$type": "color",
+      "$description": "buttonDangerActive component token from g10 theme"
+    },
+    "buttonDangerHover": {
+      "$value": "#b81921",
+      "$type": "color",
+      "$description": "buttonDangerHover component token from g10 theme"
+    },
+    "buttonDangerPrimary": {
+      "$value": "#da1e28",
+      "$type": "color",
+      "$description": "buttonDangerPrimary component token from g10 theme"
+    },
+    "buttonDangerSecondary": {
+      "$value": "#da1e28",
+      "$type": "color",
+      "$description": "buttonDangerSecondary component token from g10 theme"
+    },
+    "buttonDisabled": {
+      "$value": "#c6c6c6",
+      "$type": "color",
+      "$description": "buttonDisabled component token from g10 theme"
+    },
+    "buttonPrimary": {
+      "$value": "#0f62fe",
+      "$type": "color",
+      "$description": "buttonPrimary component token from g10 theme"
+    },
+    "buttonPrimaryActive": {
+      "$value": "#002d9c",
+      "$type": "color",
+      "$description": "buttonPrimaryActive component token from g10 theme"
+    },
+    "buttonPrimaryHover": {
+      "$value": "#0050e6",
+      "$type": "color",
+      "$description": "buttonPrimaryHover component token from g10 theme"
+    },
+    "buttonSecondary": {
+      "$value": "#393939",
+      "$type": "color",
+      "$description": "buttonSecondary component token from g10 theme"
+    },
+    "buttonSecondaryActive": {
+      "$value": "#6f6f6f",
+      "$type": "color",
+      "$description": "buttonSecondaryActive component token from g10 theme"
+    },
+    "buttonSecondaryHover": {
+      "$value": "#474747",
+      "$type": "color",
+      "$description": "buttonSecondaryHover component token from g10 theme"
+    },
+    "buttonSeparator": {
+      "$value": "#e0e0e0",
+      "$type": "color",
+      "$description": "buttonSeparator component token from g10 theme"
+    },
+    "buttonTertiary": {
+      "$value": "#0f62fe",
+      "$type": "color",
+      "$description": "buttonTertiary component token from g10 theme"
+    },
+    "buttonTertiaryActive": {
+      "$value": "#002d9c",
+      "$type": "color",
+      "$description": "buttonTertiaryActive component token from g10 theme"
+    },
+    "buttonTertiaryHover": {
+      "$value": "#0050e6",
+      "$type": "color",
+      "$description": "buttonTertiaryHover component token from g10 theme"
+    }
+  }
+}
