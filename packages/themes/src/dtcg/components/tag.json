@@ -1,0 +1,486 @@
+{
+  "$schema": "https://tr.designtokens.org/format/",
+  "$description": "tag component tokens",
+  "tag": {
+    "background-blue": {
+      "$type": "color",
+      "$description": "background-blue token",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "#d0e2ff",
+          "g10": "#d0e2ff",
+          "g90": "#0043ce",
+          "g100": "#0043ce"
+        }
+      }
+    },
+    "background-cool-gray": {
+      "$type": "color",
+      "$description": "background-cool-gray token",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "#dde1e6",
+          "g10": "#dde1e6",
+          "g90": "#4d5358",
+          "g100": "#4d5358"
+        }
+      }
+    },
+    "background-cyan": {
+      "$type": "color",
+      "$description": "background-cyan token",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "#bae6ff",
+          "g10": "#bae6ff",
+          "g90": "#00539a",
+          "g100": "#00539a"
+        }
+      }
+    },
+    "background-gray": {
+      "$type": "color",
+      "$description": "background-gray token",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "#e0e0e0",
+          "g10": "#e0e0e0",
+          "g90": "#525252",
+          "g100": "#525252"
+        }
+      }
+    },
+    "background-green": {
+      "$type": "color",
+      "$description": "background-green token",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "#a7f0ba",
+          "g10": "#a7f0ba",
+          "g90": "#0e6027",
+          "g100": "#0e6027"
+        }
+      }
+    },
+    "background-magenta": {
+      "$type": "color",
+      "$description": "background-magenta token",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "#ffd6e8",
+          "g10": "#ffd6e8",
+          "g90": "#9f1853",
+          "g100": "#9f1853"
+        }
+      }
+    },
+    "background-purple": {
+      "$type": "color",
+      "$description": "background-purple token",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "#e8daff",
+          "g10": "#e8daff",
+          "g90": "#6929c4",
+          "g100": "#6929c4"
+        }
+      }
+    },
+    "background-red": {
+      "$type": "color",
+      "$description": "background-red token",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "#ffd7d9",
+          "g10": "#ffd7d9",
+          "g90": "#a2191f",
+          "g100": "#a2191f"
+        }
+      }
+    },
+    "background-teal": {
+      "$type": "color",
+      "$description": "background-teal token",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "#9ef0f0",
+          "g10": "#9ef0f0",
+          "g90": "#005d5d",
+          "g100": "#005d5d"
+        }
+      }
+    },
+    "background-warm-gray": {
+      "$type": "color",
+      "$description": "background-warm-gray token",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "#e5e0df",
+          "g10": "#e5e0df",
+          "g90": "#565151",
+          "g100": "#565151"
+        }
+      }
+    },
+    "border-blue": {
+      "$type": "color",
+      "$description": "border-blue token",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "#78a9ff",
+          "g10": "#78a9ff",
+          "g90": "#4589ff",
+          "g100": "#4589ff"
+        }
+      }
+    },
+    "border-cool-gray": {
+      "$type": "color",
+      "$description": "border-cool-gray token",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "#a2a9b0",
+          "g10": "#a2a9b0",
+          "g90": "#878d96",
+          "g100": "#878d96"
+        }
+      }
+    },
+    "border-cyan": {
+      "$type": "color",
+      "$description": "border-cyan token",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "#33b1ff",
+          "g10": "#33b1ff",
+          "g90": "#1192e8",
+          "g100": "#1192e8"
+        }
+      }
+    },
+    "border-gray": {
+      "$type": "color",
+      "$description": "border-gray token",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "#a8a8a8",
+          "g10": "#a8a8a8",
+          "g90": "#8d8d8d",
+          "g100": "#8d8d8d"
+        }
+      }
+    },
+    "border-green": {
+      "$type": "color",
+      "$description": "border-green token",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "#42be65",
+          "g10": "#42be65",
+          "g90": "#24a148",
+          "g100": "#24a148"
+        }
+      }
+    },
+    "border-magenta": {
+      "$type": "color",
+      "$description": "border-magenta token",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "#ff7eb6",
+          "g10": "#ff7eb6",
+          "g90": "#ee5396",
+          "g100": "#ee5396"
+        }
+      }
+    },
+    "border-purple": {
+      "$type": "color",
+      "$description": "border-purple token",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "#be95ff",
+          "g10": "#be95ff",
+          "g90": "#a56eff",
+          "g100": "#a56eff"
+        }
+      }
+    },
+    "border-red": {
+      "$type": "color",
+      "$description": "border-red token",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "#ff8389",
+          "g10": "#ff8389",
+          "g90": "#fa4d56",
+          "g100": "#fa4d56"
+        }
+      }
+    },
+    "border-teal": {
+      "$type": "color",
+      "$description": "border-teal token",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "#08bdba",
+          "g10": "#08bdba",
+          "g90": "#009d9a",
+          "g100": "#009d9a"
+        }
+      }
+    },
+    "border-warm-gray": {
+      "$type": "color",
+      "$description": "border-warm-gray token",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "#ada8a8",
+          "g10": "#ada8a8",
+          "g90": "#8f8b8b",
+          "g100": "#8f8b8b"
+        }
+      }
+    },
+    "color-blue": {
+      "$type": "color",
+      "$description": "color-blue token",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "#0043ce",
+          "g10": "#0043ce",
+          "g90": "#d0e2ff",
+          "g100": "#d0e2ff"
+        }
+      }
+    },
+    "color-cool-gray": {
+      "$type": "color",
+      "$description": "color-cool-gray token",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "#121619",
+          "g10": "#121619",
+          "g90": "#f2f4f8",
+          "g100": "#f2f4f8"
+        }
+      }
+    },
+    "color-cyan": {
+      "$type": "color",
+      "$description": "color-cyan token",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "#00539a",
+          "g10": "#00539a",
+          "g90": "#bae6ff",
+          "g100": "#bae6ff"
+        }
+      }
+    },
+    "color-gray": {
+      "$type": "color",
+      "$description": "color-gray token",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "#161616",
+          "g10": "#161616",
+          "g90": "#f4f4f4",
+          "g100": "#f4f4f4"
+        }
+      }
+    },
+    "color-green": {
+      "$type": "color",
+      "$description": "color-green token",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "#0e6027",
+          "g10": "#0e6027",
+          "g90": "#a7f0ba",
+          "g100": "#a7f0ba"
+        }
+      }
+    },
+    "color-magenta": {
+      "$type": "color",
+      "$description": "color-magenta token",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "#9f1853",
+          "g10": "#9f1853",
+          "g90": "#ffd6e8",
+          "g100": "#ffd6e8"
+        }
+      }
+    },
+    "color-purple": {
+      "$type": "color",
+      "$description": "color-purple token",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "#6929c4",
+          "g10": "#6929c4",
+          "g90": "#e8daff",
+          "g100": "#e8daff"
+        }
+      }
+    },
+    "color-red": {
+      "$type": "color",
+      "$description": "color-red token",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "#a2191f",
+          "g10": "#a2191f",
+          "g90": "#ffd7d9",
+          "g100": "#ffd7d9"
+        }
+      }
+    },
+    "color-teal": {
+      "$type": "color",
+      "$description": "color-teal token",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "#005d5d",
+          "g10": "#005d5d",
+          "g90": "#9ef0f0",
+          "g100": "#9ef0f0"
+        }
+      }
+    },
+    "color-warm-gray": {
+      "$type": "color",
+      "$description": "color-warm-gray token",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "#171414",
+          "g10": "#171414",
+          "g90": "#f7f3f2",
+          "g100": "#f7f3f2"
+        }
+      }
+    },
+    "hover-blue": {
+      "$type": "color",
+      "$description": "hover-blue token",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "#b8d3ff",
+          "g10": "#b8d3ff",
+          "g90": "#0053ff",
+          "g100": "#0053ff"
+        }
+      }
+    },
+    "hover-cool-gray": {
+      "$type": "color",
+      "$description": "hover-cool-gray token",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "#cdd3da",
+          "g10": "#cdd3da",
+          "g90": "#5d646a",
+          "g100": "#5d646a"
+        }
+      }
+    },
+    "hover-cyan": {
+      "$type": "color",
+      "$description": "hover-cyan token",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "#99daff",
+          "g10": "#99daff",
+          "g90": "#0066bd",
+          "g100": "#0066bd"
+        }
+      }
+    },
+    "hover-gray": {
+      "$type": "color",
+      "$description": "hover-gray token",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "#d1d1d1",
+          "g10": "#d1d1d1",
+          "g90": "#636363",
+          "g100": "#636363"
+        }
+      }
+    },
+    "hover-green": {
+      "$type": "color",
+      "$description": "hover-green token",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "#74e792",
+          "g10": "#74e792",
+          "g90": "#11742f",
+          "g100": "#11742f"
+        }
+      }
+    },
+    "hover-magenta": {
+      "$type": "color",
+      "$description": "hover-magenta token",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "#ffbdda",
+          "g10": "#ffbdda",
+          "g90": "#bf1d63",
+          "g100": "#bf1d63"
+        }
+      }
+    },
+    "hover-purple": {
+      "$type": "color",
+      "$description": "hover-purple token",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "#dcc7ff",
+          "g10": "#dcc7ff",
+          "g90": "#7c3dd6",
+          "g100": "#7c3dd6"
+        }
+      }
+    },
+    "hover-red": {
+      "$type": "color",
+      "$description": "hover-red token",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "#ffc2c5",
+          "g10": "#ffc2c5",
+          "g90": "#c21e25",
+          "g100": "#c21e25"
+        }
+      }
+    },
+    "hover-teal": {
+      "$type": "color",
+      "$description": "hover-teal token",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "#57e5e5",
+          "g10": "#57e5e5",
+          "g90": "#007070",
+          "g100": "#007070"
+        }
+      }
+    },
+    "hover-warm-gray": {
+      "$type": "color",
+      "$description": "hover-warm-gray token",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "#d8d0cf",
+          "g10": "#d8d0cf",
+          "g90": "#696363",
+          "g100": "#696363"
+        }
+      }
+    }
+  }
+}
