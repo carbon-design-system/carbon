@@ -1,0 +1,122 @@
+{
+  "$schema": "https://tr.designtokens.org/format/",
+  "$description": "status component tokens",
+  "status": {
+    "accessibility-background": {
+      "$type": "color",
+      "$description": "accessibility-background token",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "#ffffff",
+          "g10": "#ffffff",
+          "g90": "#161616",
+          "g100": "#161616"
+        }
+      }
+    },
+    "blue": {
+      "$type": "color",
+      "$description": "blue token",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "#0043ce",
+          "g10": "#0043ce",
+          "g90": "#4589ff",
+          "g100": "#4589ff"
+        }
+      }
+    },
+    "gray": {
+      "$type": "color",
+      "$description": "gray token",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "#6f6f6f",
+          "g10": "#6f6f6f",
+          "g90": "#8d8d8d",
+          "g100": "#8d8d8d"
+        }
+      }
+    },
+    "green": {
+      "$type": "color",
+      "$description": "green token",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "#24a148",
+          "g10": "#24a148",
+          "g90": "#42be65",
+          "g100": "#42be65"
+        }
+      }
+    },
+    "orange": {
+      "$type": "color",
+      "$description": "orange token",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "#ff832b",
+          "g10": "#ff832b",
+          "g90": "#ff832b",
+          "g100": "#ff832b"
+        }
+      }
+    },
+    "orange-outline": {
+      "$type": "color",
+      "$description": "orange-outline token",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "#ba4e00",
+          "g10": "#ba4e00"
+        }
+      }
+    },
+    "purple": {
+      "$type": "color",
+      "$description": "purple token",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "#8a3ffc",
+          "g10": "#8a3ffc",
+          "g90": "#a56eff",
+          "g100": "#a56eff"
+        }
+      }
+    },
+    "red": {
+      "$type": "color",
+      "$description": "red token",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "#da1e28",
+          "g10": "#da1e28",
+          "g90": "#fa4d56",
+          "g100": "#fa4d56"
+        }
+      }
+    },
+    "yellow": {
+      "$type": "color",
+      "$description": "yellow token",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "#f1c21b",
+          "g10": "#f1c21b",
+          "g90": "#f1c21b",
+          "g100": "#f1c21b"
+        }
+      }
+    },
+    "yellow-outline": {
+      "$type": "color",
+      "$description": "yellow-outline token",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "#8e6a00",
+          "g10": "#8e6a00"
+        }
+      }
+    }
+  }
+}
