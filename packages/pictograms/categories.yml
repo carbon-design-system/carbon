@@ -142,6 +142,7 @@ categories:
       - cairo--giza-plateau
       - cairo--giza-sphinx
       - canada--maple-leaf
+      - chennai
       - chicago
       - chile--easter-island
       - chile--hand-of-the-desert
@@ -150,6 +151,7 @@ categories:
       - copenhagen--snekkja
       - dallas--reunion-tower
       - dallas--skyline
+      - denver
       - dubai--palm-islands
       - dubai--skyscraper
       - dublin--brewery
@@ -157,6 +159,7 @@ categories:
       - ecuador--quito
       - ehningen--tech-campus-01
       - ehningen--tech-campus-02
+      - frankfurt
       - frost-tower
       - geodesic-montreal-biosphere
       - guadalajara--seal
@@ -170,6 +173,7 @@ categories:
       - kuala-lumpur
       - london
       - london--big-ben
+      - los-angeles
       - madrid--cathedral
       - madrid--skyscrapers
       - madrid--statue
@@ -177,6 +181,7 @@ categories:
       - melbourne
       - mexico-city--angel-of-independence
       - mexico-city--museo-soumaya
+      - miami
       - milan--duomo-di-milano
       - milan--skyscrapers
       - montreal--olympic-stadium
@@ -192,11 +197,13 @@ categories:
       - nyc--world-trade-center
       - okinawa
       - osaka--tsutenkaku-tower
+      - oslo
       - paris--arc-de-triomphe
       - paris--eiffel-tower
       - paris--louvre
       - paris--notre-dame
       - paris--pompidou-center
+      - perth
       - peru--machu-picchu
       - portland--building
       - poughkeepsie--bridge
@@ -211,6 +218,7 @@ categories:
       - rome
       - san-francisco
       - san-francisco--fog
+      - san-jose
       - sao-paulo
       - seattle
       - seoul--gyeongbokgung-palace
@@ -222,6 +230,7 @@ categories:
       - stuttgart--tv-tower
       - sydney--mlc-centre
       - sydney--opera-house
+      - taipei
       - taipei--bubble-tea
       - tel-aviv
       - tokyo--cherry-blossom
@@ -735,6 +744,7 @@ categories:
       - software--02
       - software--development
       - systems-and-tools
+      - technology-zone--finger
       - universal-experiences
       - user--experience-design
       - user--insights
@@ -804,6 +814,7 @@ categories:
       - drone
       - electric
       - headphones
+      - laptop
       - microphone
       - mouse
       - printer
@@ -1041,8 +1052,6 @@ categories:
       - dog--02
       - dog--walking
       - face--melting
-      - half-note
-      - hard--ice--cream
       - firecracker
       - fish
       - flower--01
@@ -1051,12 +1060,15 @@ categories:
       - frozen--pipe
       - gramophone
       - guitar
+      - half-note
+      - hard--ice--cream
       - hiking
       - horse
       - juice
       - lantern
       - limes
       - longhorn
+      - lotus--flower
       - mandolin
       - margarita-glass
       - martini-glass
@@ -1620,6 +1632,7 @@ categories:
       - literature
       - lockers
       - loop--hearing
+      - men--showers
       - metal-can
       - no--food
       - no--liquids
@@ -1641,3 +1654,4 @@ categories:
       - urinal--02
       - washing-hands
       - waste--electronic
+      - women--showers
