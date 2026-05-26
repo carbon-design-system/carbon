@@ -68,4 +68,17 @@ describe('@carbon/type', () => {
       );
     }
   });
+
+  it('should omit unsupported font-family keys', async () => {
+    const { result } = await render(`
+      @use '../index' as type;
+
+      .selector {
+        font-family: type.font-family('does-not-exist');
+      }
+    `);
+    const { stylesheet } = css.parse(result.css.toString());
+
+    expect(stylesheet.rules).toEqual([]);
+  });
 });

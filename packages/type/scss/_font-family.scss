@@ -66,6 +66,10 @@ $font-families: (
 /// @access public
 /// @group @carbon/type
 @function font-family($name) {
+  @if not map.has-key($font-families, $name) {
+    @return null;
+  }
+
   $stack: map.get($font-families, $name);
   @return string.unquote('var(--cds-font-family-#{$name}, #{$stack})');
 }
