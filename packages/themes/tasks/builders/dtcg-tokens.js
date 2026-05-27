@@ -23,11 +23,20 @@ function buildDTCGTokens() {
   // Get token structure from JS metadata
   const tokens = group.getTokens();
 
-  // Load the default theme (white) from DTCG JSON to get actual color values
+  // Load all themes from DTCG JSON
   const dtcgDir = path.resolve(__dirname, '../../src/dtcg');
-  const whiteJsonPath = path.join(dtcgDir, 'white.json');
-  const dtcgTokens = JSON.parse(fs.readFileSync(whiteJsonPath, 'utf8'));
-  const defaultTheme = convertDTCGToTheme(dtcgTokens);
+  const themeNames = ['white', 'g10', 'g90', 'g100'];
+  const themes = {};
+
+  themeNames.forEach((themeName) => {
+    const jsonPath = path.join(dtcgDir, `${themeName}.json`);
+    if (fs.existsSync(jsonPath)) {
+      const dtcgTokens = JSON.parse(fs.readFileSync(jsonPath, 'utf8'));
+      themes[themeName] = convertDTCGToTheme(dtcgTokens);
+    }
+  });
+
+  const defaultTheme = themes.white;
 
   // Generate Sass variables that reference the custom properties
   // These maintain backward compatibility with existing Sass code
@@ -58,17 +67,15 @@ function buildDTCGTokens() {
     t.SassModule('../theme'),
     t.Newline(),
 
-    // CSS Custom Properties in :root
-    // This makes all tokens available as CSS variables globally
-    // Values come directly from DTCG JSON (actual color values)
+    // CSS Custom Properties for white theme (default)
     t.Comment('/ CSS Custom Properties for all tokens'),
     t.Comment(
-      '/ These are defined in :root with actual values from the default theme'
+      '/ White theme is the default, applied to :root and [data-carbon-theme="white"]'
     ),
-    t.SassValue(':root {'),
+    t.SassValue(':root,'),
+    t.SassValue("[data-carbon-theme='white'] {"),
     ...tokens.map((token) => {
       const id = token.name;
-      // Get actual value from DTCG theme, fallback to theme.get() for non-DTCG tokens
       const value =
         defaultTheme[id] !== undefined
           ? `${defaultTheme[id]}`
@@ -76,6 +83,37 @@ function buildDTCGTokens() {
       return t.SassValue(`  --#{config.$prefix}-${id}: ${value};`);
     }),
     t.SassValue('}'),
+    t.Newline(),
+
+    // CSS Custom Properties for other themes
+    t.Comment('/ Theme-specific CSS Custom Property overrides'),
+    t.Comment(
+      '/ These selectors enable theme switching via data-carbon-theme attribute'
+    ),
+    ...themeNames
+      .filter((name) => name !== 'white')
+      .flatMap((themeName) => {
+        const theme = themes[themeName];
+        if (!theme) return [];
+
+        return [
+          t.Newline(),
+          t.Comment(`/ ${themeName} theme overrides`),
+          t.SassValue(`[data-carbon-theme='${themeName}'] {`),
+          ...tokens
+            .map((token) => {
+              const id = token.name;
+              const value = theme[id];
+              // Only emit if value exists and is different from white theme
+              if (value !== undefined && value !== defaultTheme[id]) {
+                return t.SassValue(`  --#{config.$prefix}-${id}: ${value};`);
+              }
+              return null;
+            })
+            .filter(Boolean),
+          t.SassValue('}'),
+        ];
+      }),
     t.Newline(),
 
     // Helper function for generating CSS Custom Properties

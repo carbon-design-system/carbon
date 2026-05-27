@@ -28,33 +28,39 @@ function buildDTCGThemesFile() {
     t.SassModule('../utilities'),
   ];
 
-  const variables = themeNames.flatMap((themeName) => {
-    // Load DTCG JSON file
-    const jsonPath = path.join(dtcgDir, `${themeName}.json`);
+  // Load white theme as base to get all token names
+  const whiteJsonPath = path.join(dtcgDir, 'white.json');
+  const whiteTokens = JSON.parse(fs.readFileSync(whiteJsonPath, 'utf8'));
+  const whiteTheme = convertDTCGToTheme(whiteTokens);
+  const allTokenNames = Object.keys(whiteTheme).sort();
 
-    if (!fs.existsSync(jsonPath)) {
-      console.warn(`Warning: ${themeName}.json not found, skipping`);
-      return [];
-    }
+  // Create shared base map with var() references for all tokens
+  const baseMapVariable = [
+    t.Newline(),
+    t.Comment(
+      ' Base map with CSS custom property references shared by all themes'
+    ),
+    t.Assignment({
+      id: t.Identifier('-token-base'),
+      init: t.SassMap({
+        properties: allTokenNames.map((token) => {
+          return t.SassMapProperty(
+            t.Identifier(token),
+            t.SassValue(`var(--cds-${token})`)
+          );
+        }),
+      }),
+      default: false,
+    }),
+  ];
 
-    const dtcgTokens = JSON.parse(fs.readFileSync(jsonPath, 'utf8'));
-    const theme = convertDTCGToTheme(dtcgTokens);
-
+  // Generate theme-specific variables
+  const themeVariables = themeNames.flatMap((themeName) => {
     return [
       t.Newline(),
       t.Assignment({
         id: t.Identifier(themeName),
-        init: t.SassMap({
-          properties: Object.entries(theme)
-            .sort(([a], [b]) => a.localeCompare(b)) // Sort alphabetically
-            .map(([token]) => {
-              // Reference custom property instead of hardcoded value
-              return t.SassMapProperty(
-                t.Identifier(token),
-                t.SassValue(`var(--cds-${token})`)
-              );
-            }),
-        }),
+        init: t.Identifier('-token-base'),
         default: true,
       }),
       // Merge with layout and type tokens
@@ -73,7 +79,13 @@ function buildDTCGThemesFile() {
     ];
   });
 
-  return t.StyleSheet([FILE_BANNER, t.Newline(), ...imports, ...variables]);
+  return t.StyleSheet([
+    FILE_BANNER,
+    t.Newline(),
+    ...imports,
+    ...baseMapVariable,
+    ...themeVariables,
+  ]);
 }
 
 module.exports = buildDTCGThemesFile;
