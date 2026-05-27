@@ -22,6 +22,7 @@ const buildModulesStatusTokens = require('./builders/modules-status-tokens');
 const buildModulesContentSwitcherTokens = require('./builders/modules-content-switcher-tokens');
 const buildDTCGThemesFile = require('./builders/dtcg-themes');
 const buildDTCGComponentTokensFile = require('./builders/dtcg-component-tokens');
+const buildDTCGTokens = require('./builders/dtcg-tokens');
 
 async function build() {
   reporter.info('Building scss files for themes...');
@@ -89,6 +90,12 @@ async function build() {
       filepath: path.join(GENERATED_DTCG_DIR, '_themes.scss'),
       builder() {
         return buildDTCGThemesFile();
+      },
+    },
+    {
+      filepath: path.join(GENERATED_DTCG_DIR, '_tokens.scss'),
+      builder() {
+        return buildDTCGTokens();
       },
     },
     {
