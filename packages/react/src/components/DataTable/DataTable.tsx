@@ -135,6 +135,7 @@ export interface DataTableRenderProps<RowType, ColTypes extends any[]> {
 
   getHeaderProps: (options: {
     header: DataTableHeader;
+    id?: string;
     isSortable?: boolean;
     onClick?: (
       event: MouseEvent<HTMLButtonElement>,
@@ -142,6 +143,7 @@ export interface DataTableRenderProps<RowType, ColTypes extends any[]> {
     ) => void;
     [key: string]: unknown;
   }) => {
+    id: string;
     isSortable: boolean | undefined;
     isSortHeader: boolean;
     key: string;
@@ -235,9 +237,14 @@ export interface DataTableRenderProps<RowType, ColTypes extends any[]> {
     useStaticWidth?: boolean;
   };
 
-  getCellProps: (options: { cell: DataTableCell<ColTypes> }) => {
+  getCellProps: (options: {
+    cell: DataTableCell<ColTypes>;
+    headers?: string;
+    [key: string]: unknown;
+  }) => {
     [key: string]: unknown;
     hasAILabelHeader?: boolean;
+    headers: string;
     key: string;
   };
 
@@ -402,9 +409,14 @@ export const DataTable = <RowType, ColTypes extends any[]>(
   }) => {
     const { sortDirection, sortHeaderKey } = state;
     const { key, slug, decorator } = header;
+    const id =
+      typeof rest.id === 'string' && rest.id.length
+        ? rest.id
+        : getHeaderId(key);
 
     return {
       ...rest,
+      id,
       key,
       sortDirection,
       isSortable: headerIsSortable ?? header.isSortable ?? isSortable,
@@ -609,12 +621,23 @@ export const DataTable = <RowType, ColTypes extends any[]>(
   };
 
   const getCellProps: RenderProps['getCellProps'] = ({
-    cell: { hasAILabelHeader, id },
+    cell: {
+      hasAILabelHeader,
+      id,
+      info: { header },
+    },
+    headers: customHeaders,
     ...rest
   }) => {
+    const headers =
+      typeof customHeaders === 'string' && customHeaders.length
+        ? customHeaders
+        : getHeaderId(header);
+
     return {
       ...rest,
       hasAILabelHeader,
+      headers,
       key: id,
     };
   };
@@ -643,6 +666,9 @@ export const DataTable = <RowType, ColTypes extends any[]>(
    * Generates a prefix for table related IDs.
    */
   const getTablePrefix = () => `data-table-${instanceId}`;
+
+  const getHeaderId = (headerKey: string) =>
+    `${getTablePrefix()}__header-${headerKey}`;
 
   /**
    * Generates a new `rowsById` object with updated selection state.
