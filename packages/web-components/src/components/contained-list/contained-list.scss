@@ -11,7 +11,7 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/styles/scss/theme' as *;
 @use '@carbon/styles/scss/type' as *;
-@use '@carbon/styles/scss/layout' as *;
+@use '@carbon/styles/scss/utilities/layout' as *;
 @use '@carbon/styles/scss/components/contained-list';
 @use '@carbon/styles/scss/components/form' as *;
 :host(#{$prefix}-contained-list) {

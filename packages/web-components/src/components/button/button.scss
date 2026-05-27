@@ -14,7 +14,7 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/components/button' as *;
 @use '@carbon/styles/scss/components/code-snippet/code-snippet' as *;
 @use '@carbon/styles/scss/components/chat-button' as *;
-@use '@carbon/styles/scss/layout' as *;
+@use '@carbon/styles/scss/utilities/layout' as *;
 @use '@carbon/styles/scss/motion' as *;
 @use '@carbon/styles/scss/components/button/tokens' as button-tokens;
 

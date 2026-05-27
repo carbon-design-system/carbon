@@ -12,7 +12,7 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/utilities/convert' as *;
 @use '@carbon/styles/scss/utilities' as *;
 @use '@carbon/styles/scss/components/text-input/index';
-@use '@carbon/styles/scss/layout' as *;
+@use '@carbon/styles/scss/utilities/layout' as *;
 @use '@carbon/styles/scss/utilities/ai-gradient' as *;
 
 :host(#{$prefix}-text-input),
