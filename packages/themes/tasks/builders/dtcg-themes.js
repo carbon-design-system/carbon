@@ -11,7 +11,7 @@ const { types: t } = require('@carbon/scss-generator');
 const fs = require('fs-extra');
 const path = require('path');
 const { convertDTCGToTheme } = require('./dtcg-converter');
-const { FILE_BANNER, primitive } = require('./shared');
+const { FILE_BANNER } = require('./shared');
 
 /**
  * Build themes file from DTCG JSON files
@@ -47,8 +47,12 @@ function buildDTCGThemesFile() {
         init: t.SassMap({
           properties: Object.entries(theme)
             .sort(([a], [b]) => a.localeCompare(b)) // Sort alphabetically
-            .map(([token, value]) => {
-              return t.SassMapProperty(t.Identifier(token), primitive(value));
+            .map(([token]) => {
+              // Reference custom property instead of hardcoded value
+              return t.SassMapProperty(
+                t.Identifier(token),
+                t.SassValue(`var(--cds-${token})`)
+              );
             }),
         }),
         default: true,

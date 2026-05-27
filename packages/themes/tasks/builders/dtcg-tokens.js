@@ -10,6 +10,9 @@
 const { types: t } = require('@carbon/scss-generator');
 const { group } = require('../../src/tokens');
 const { FILE_BANNER } = require('./shared');
+const fs = require('fs-extra');
+const path = require('path');
+const { convertDTCGToTheme } = require('./dtcg-converter');
 
 /**
  * Build token variables from DTCG + JS metadata
@@ -20,6 +23,14 @@ function buildDTCGTokens() {
   // Get token structure from JS metadata
   const tokens = group.getTokens();
 
+  // Load the default theme (white) from DTCG JSON to get actual color values
+  const dtcgDir = path.resolve(__dirname, '../../src/dtcg');
+  const whiteJsonPath = path.join(dtcgDir, 'white.json');
+  const dtcgTokens = JSON.parse(fs.readFileSync(whiteJsonPath, 'utf8'));
+  const defaultTheme = convertDTCGToTheme(dtcgTokens);
+
+  // Generate Sass variables that reference the custom properties
+  // These maintain backward compatibility with existing Sass code
   const variables = tokens.flatMap((token) => {
     const id = token.name;
     return [
@@ -47,6 +58,26 @@ function buildDTCGTokens() {
     t.SassModule('../theme'),
     t.Newline(),
 
+    // CSS Custom Properties in :root
+    // This makes all tokens available as CSS variables globally
+    // Values come directly from DTCG JSON (actual color values)
+    t.Comment('/ CSS Custom Properties for all tokens'),
+    t.Comment(
+      '/ These are defined in :root with actual values from the default theme'
+    ),
+    t.SassValue(':root {'),
+    ...tokens.map((token) => {
+      const id = token.name;
+      // Get actual value from DTCG theme, fallback to theme.get() for non-DTCG tokens
+      const value =
+        defaultTheme[id] !== undefined
+          ? `${defaultTheme[id]}`
+          : `#{theme.get('${id}')}`;
+      return t.SassValue(`  --#{config.$prefix}-${id}: ${value};`);
+    }),
+    t.SassValue('}'),
+    t.Newline(),
+
     // Helper function for generating CSS Custom Properties
     t.Comment('/ Internal helper for generating CSS Custom Properties'),
     t.SassFunction({
@@ -72,8 +103,11 @@ function buildDTCGTokens() {
         }),
       ]),
     }),
+    t.Newline(),
 
-    // Variables
+    // Sass Variables
+    t.Comment('/ Sass variables that reference CSS Custom Properties'),
+    t.Comment('/ Use these in Sass code for backward compatibility'),
     ...variables,
   ]);
 }
