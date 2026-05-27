@@ -12,7 +12,7 @@ const fs = require('fs-extra');
 const path = require('path');
 const {
   convertDTCGComponentTokens,
-  camelToKebab,
+  normalizeComponentThemeName,
 } = require('./dtcg-converter');
 const { FILE_BANNER, primitive } = require('./shared');
 
@@ -39,11 +39,11 @@ function buildDTCGComponentTokensFile(componentName) {
   const variables = Object.entries(componentTokens)
     .sort(([a], [b]) => a.localeCompare(b))
     .flatMap(([tokenName, themeValues]) => {
-      // Convert theme keys to kebab-case for Sass
+      // Normalize theme keys to match Carbon's SCSS naming convention
       const sassThemeValues = {};
       for (const [theme, value] of Object.entries(themeValues)) {
-        const kebabTheme = camelToKebab(theme);
-        sassThemeValues[kebabTheme] = value;
+        const normalizedTheme = normalizeComponentThemeName(theme);
+        sassThemeValues[normalizedTheme] = value;
       }
 
       return [

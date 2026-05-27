@@ -89,8 +89,31 @@ function camelToKebab(str) {
   return str.replace(/([a-z0-9])([A-Z])/g, '$1-$2').toLowerCase();
 }
 
+/**
+ * Normalize theme names to match Carbon's SCSS naming convention for component tokens
+ * This ensures compatibility with @carbon/styles which expects specific theme key names
+ * @param {string} themeName - Theme name from DTCG (e.g., "white", "g10", "g90", "g100")
+ * @returns {string} Normalized theme name (e.g., "white-theme", "g-10", "g-90", "g-100")
+ */
+function normalizeComponentThemeName(themeName) {
+  // Convert "white" to "white-theme" to match existing convention
+  if (themeName === 'white') {
+    return 'white-theme';
+  }
+
+  // Convert "g10", "g90", "g100" to "g-10", "g-90", "g-100"
+  // This matches the format expected by @carbon/styles component token lookups
+  if (/^g\d+$/.test(themeName)) {
+    return themeName.replace(/^g(\d+)$/, 'g-$1');
+  }
+
+  // For any other theme names, apply camelToKebab
+  return camelToKebab(themeName);
+}
+
 module.exports = {
   convertDTCGToTheme,
   convertDTCGComponentTokens,
   camelToKebab,
+  normalizeComponentThemeName,
 };
