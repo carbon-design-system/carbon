@@ -209,7 +209,7 @@ export interface DataTableRenderProps<RowType, ColTypes extends any[]> {
   };
 
   getToolbarProps: (options?: { [key: string]: unknown }) => {
-    size: 'sm' | undefined;
+    size: 'xs' | 'sm' | undefined;
     [key: string]: unknown;
   };
 
@@ -579,13 +579,10 @@ export const DataTable = <RowType, ColTypes extends any[]>(
     };
   };
 
-  const getToolbarProps: RenderProps['getToolbarProps'] = (props) => {
-    const isSmall = size === 'xs' || size === 'sm';
-    return {
-      ...props,
-      size: isSmall ? 'sm' : undefined,
-    };
-  };
+  const getToolbarProps: RenderProps['getToolbarProps'] = (props) => ({
+    ...props,
+    size: size === 'xs' || size === 'sm' ? size : undefined,
+  });
 
   const getBatchActionProps: RenderProps['getBatchActionProps'] = (props) => {
     const { shouldShowBatchActions } = state;
