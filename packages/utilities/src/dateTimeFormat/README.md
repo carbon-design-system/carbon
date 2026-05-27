@@ -168,7 +168,7 @@ Timezone options are according to
 - Default style: `"narrow"`
 
 ```js
-import { DurationFormat } from '@carbon/utilities';
+import { dateTimeFormat } from '@carbon/utilities';
 
 dateTimeFormat.duration.format(time);
 // 1h 23m 45s
