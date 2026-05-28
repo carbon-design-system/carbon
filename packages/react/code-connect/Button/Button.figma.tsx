@@ -34,7 +34,7 @@ figma.connect(
         Small: 'sm',
         'Extra small': 'xs',
         'Extra large': 'xl',
-        '2x large': '2xl',
+        '2X large': '2xl',
       }),
       isExpressive: figma.enum('Size', {
         Expressive: true,
@@ -62,7 +62,7 @@ figma.connect(
         Small: 'sm',
         'Extra small': 'xs',
         'Extra large': 'xl',
-        '2x large': '2xl',
+        '2X large': '2xl',
       }),
     },
     example: ({ size }) => {
