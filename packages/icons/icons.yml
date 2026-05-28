@@ -28320,12 +28320,14 @@
 - name: zos--partition
   friendly_name: z/OS® partition
   aliases:
-  - z/OS
-  - systems
-  - partition
-  - virtual machine
-  - LPAR
-  - z/OS LPAR
+    - z/OS
+    - systems
+    - partition
+    - virtual machine
+    - LPAR
+    - z/OS LPAR
+  sizes:
+    - 32
 - name: zos--sysplex
   friendly_name: IBM® z/OS® sysplex
   aliases:
