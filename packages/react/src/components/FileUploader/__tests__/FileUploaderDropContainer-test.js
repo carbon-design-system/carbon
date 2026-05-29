@@ -47,30 +47,30 @@ describe('FileUploaderDropContainer', () => {
     const { container } = render(
       <FileUploaderDropContainer {...requiredProps} />
     );
-
-    it('should render toolparamdescription attribute when toolParamDescription prop is provided', () => {
-      const { container } = render(
-        <FileUploaderDropContainer
-          {...requiredProps}
-          toolParamDescription="Drop files here"
-        />
-      );
-
-      const input = container.querySelector('input[type="file"]');
-      expect(input).toHaveAttribute('toolparamdescription', 'Drop files here');
-    });
-
-    it('should not render toolparamdescription attribute when toolParamDescription prop is not provided', () => {
-      const { container } = render(
-        <FileUploaderDropContainer {...requiredProps} />
-      );
-
-      const input = container.querySelector('input[type="file"]');
-      expect(input).not.toHaveAttribute('toolparamdescription');
-    });
     // eslint-disable-next-line testing-library/prefer-screen-queries
     const label = getByText(container, 'Add file');
     expect(label).toBeInstanceOf(HTMLElement);
+  });
+
+  it('should render toolparamdescription attribute when toolParamDescription prop is provided', () => {
+    const { container } = render(
+      <FileUploaderDropContainer
+        {...requiredProps}
+        toolParamDescription="Drop files here"
+      />
+    );
+
+    const input = container.querySelector('input[type="file"]');
+    expect(input).toHaveAttribute('toolparamdescription', 'Drop files here');
+  });
+
+  it('should not render toolparamdescription attribute when toolParamDescription prop is not provided', () => {
+    const { container } = render(
+      <FileUploaderDropContainer {...requiredProps} />
+    );
+
+    const input = container.querySelector('input[type="file"]');
+    expect(input).not.toHaveAttribute('toolparamdescription');
   });
 
   it('should render with multiple set to false by default', () => {
