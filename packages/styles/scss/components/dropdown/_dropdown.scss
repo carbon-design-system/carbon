@@ -119,14 +119,6 @@
     }
   }
 
-  .#{$prefix}--dropdown__invalid-icon {
-    position: absolute;
-    fill: $support-error;
-    inset-block-start: 50%;
-    inset-inline-end: $spacing-08;
-    transform: translateY(-50%);
-  }
-
   .#{$prefix}--dropdown--open:hover {
     background-color: $field;
   }
@@ -420,11 +412,6 @@
   .#{$prefix}--dropdown--inline.#{$prefix}--dropdown--disabled:focus
     .#{$prefix}--dropdown-text {
     outline: 0;
-  }
-
-  .#{$prefix}--dropdown--inline.#{$prefix}--dropdown--invalid
-    .#{$prefix}--dropdown__invalid-icon {
-    inset-inline-end: convert.to-rem(32px);
   }
 
   .#{$prefix}--dropdown--inline.#{$prefix}--dropdown--invalid
