@@ -5387,6 +5387,18 @@ Map {
       "className": {
         "type": "string",
       },
+      "onToolactivated": {
+        "type": "func",
+      },
+      "onToolcancel": {
+        "type": "func",
+      },
+      "toolDescription": {
+        "type": "string",
+      },
+      "toolName": {
+        "type": "string",
+      },
     },
   },
   "FormContext" => {

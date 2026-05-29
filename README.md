@@ -388,6 +388,7 @@ check out our [Contributing Guide](/.github/CONTRIBUTING.md) and our
     <td align="center"><a href="https://github.com/baadhira"><img src="https://avatars.githubusercontent.com/u/69342013?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Badira P P</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon/commits?author=baadhira" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/harishjanardhanan"><img src="https://avatars.githubusercontent.com/u/32760275?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Harish</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon/commits?author=harishjanardhanan" title="Documentation">📖</a> <a href="https://github.com/carbon-design-system/carbon/commits?author=harishjanardhanan" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/fucadzi"><img src="https://avatars.githubusercontent.com/u/8070263?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Natalija Fucadzi</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon/commits?author=fucadzi" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/davidebibm"><img src="https://avatars.githubusercontent.com/u/98974352?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Davide Barletta</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon/commits?author=davidebibm" title="Code">💻</a></td>
   </tr>
 </table>
 
