@@ -116,7 +116,7 @@ $link-focus-text-color: custom-property.get-var(
 
   // Paired with icon
   .#{$prefix}--link--icon {
-    display: inline;
+    display: inline-block;
   }
 
   .#{$prefix}--link__icon {
