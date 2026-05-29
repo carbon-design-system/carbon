@@ -29,6 +29,7 @@ import {
   autoUpdate,
   offset,
   FloatingFocusManager,
+  flip,
 } from '@floating-ui/react';
 import { CaretRight, CaretLeft, Checkmark } from '@carbon/icons-react';
 import { keys, match } from '../../internal/keyboard';
@@ -97,7 +98,7 @@ export const MenuItem = forwardRef<HTMLLIElement, MenuItemProps>(
     {
       children,
       className,
-      dangerDescription = 'danger',
+      dangerDescription = '',
       disabled,
       kind = 'default',
       label,
@@ -117,10 +118,45 @@ export const MenuItem = forwardRef<HTMLLIElement, MenuItemProps>(
       context: floatingContext,
     } = useFloating({
       open: submenuOpen,
-      onOpenChange: setSubmenuOpen,
+      onOpenChange: (open, event) => {
+        if (open) {
+          setSubmenuOpen(true);
+        } else {
+          const relatedTarget =
+            event && 'relatedTarget' in event ? event.relatedTarget : null;
+
+          // Do not close submenu if hovering back to its parent
+          if (
+            relatedTarget instanceof Node &&
+            menuItem.current?.contains(relatedTarget)
+          ) {
+            return;
+          }
+
+          setSubmenuOpen(false);
+
+          // do not focus parent menu if moving to another submenu,
+          // focus should instead move to that submenu
+          const movingToSubmenu =
+            relatedTarget instanceof HTMLElement &&
+            relatedTarget
+              .closest('[role="menuitem"]')
+              ?.querySelector('[role="menu"]');
+
+          if (!movingToSubmenu) {
+            menuItem.current?.focus();
+          }
+        }
+      },
       placement: rtl ? 'left-start' : 'right-start',
       whileElementsMounted: autoUpdate,
-      middleware: [offset({ mainAxis: -6, crossAxis: -6 })],
+      middleware: [
+        flip(),
+        offset(({ placement }) => ({
+          mainAxis: placement.startsWith('left') ? 10 : -6,
+          crossAxis: -6,
+        })),
+      ],
       strategy: 'fixed',
     });
     const { getReferenceProps, getFloatingProps } = useInteractions([
@@ -143,6 +179,7 @@ export const MenuItem = forwardRef<HTMLLIElement, MenuItemProps>(
 
     const isDisabled = disabled && !hasChildren;
     const isDanger = kind === 'danger' && !hasChildren;
+    const hasDangerDescription = isDanger && Boolean(dangerDescription);
 
     function registerItem() {
       context.dispatch({
@@ -289,7 +326,7 @@ export const MenuItem = forwardRef<HTMLLIElement, MenuItemProps>(
           <Text as="div" className={`${prefix}--menu-item__label`}>
             {label}
           </Text>
-          {isDanger && (
+          {hasDangerDescription && (
             <span id={assistiveId} className={`${prefix}--visually-hidden`}>
               {dangerDescription}
             </span>
