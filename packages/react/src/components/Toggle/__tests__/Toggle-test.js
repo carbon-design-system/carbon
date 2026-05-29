@@ -7,7 +7,7 @@
 
 import React from 'react';
 import Toggle from '../Toggle';
-import { render, screen } from '@testing-library/react';
+import { render, screen, cleanup } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 const prefix = 'cds';
@@ -15,24 +15,28 @@ const prefix = 'cds';
 describe('Toggle', () => {
   describe('WebMCP attributes', () => {
     it('should render toolparamdescription attribute when provided', () => {
-      render(
+      const { container } = render(
         <Toggle
-          id="toggle-1"
+          id="toggle-webmcp-1"
           labelText="Toggle label"
           toolParamDescription="Test description for WebMCP"
         />
       );
-      expect(screen.getByRole('switch')).toHaveAttribute(
+      const toggle = container.querySelector('#toggle-webmcp-1');
+      expect(toggle).toHaveAttribute(
         'toolparamdescription',
         'Test description for WebMCP'
       );
+      cleanup();
     });
 
     it('should not render toolparamdescription attribute when not provided', () => {
-      render(<Toggle id="toggle-1" labelText="Toggle label" />);
-      expect(screen.getByRole('switch')).not.toHaveAttribute(
-        'toolparamdescription'
+      const { container } = render(
+        <Toggle id="toggle-webmcp-2" labelText="Toggle label" />
       );
+      const toggle = container.querySelector('#toggle-webmcp-2');
+      expect(toggle).not.toHaveAttribute('toolparamdescription');
+      cleanup();
     });
   });
 
