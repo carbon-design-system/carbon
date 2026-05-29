@@ -356,6 +356,13 @@ export interface ComboBoxProps<ItemType>
   typeahead?: boolean;
 
   /**
+   * Optional description for WebMCP (Web Model Context Protocol) Declarative API.
+   * Maps to the `toolparamdescription` HTML attribute for AI agent integration.
+   * @see https://developer.chrome.com/docs/ai/webmcp/declarative-api
+   */
+  toolParamDescription?: string;
+
+  /**
    * Specify whether the control is currently in warning state
    */
   warn?: boolean;
@@ -410,6 +417,7 @@ const ComboBox = forwardRef(
       shouldFilterItem = defaultShouldFilterItem,
       size,
       titleText,
+      toolParamDescription,
       translateWithId,
       typeahead = false,
       warn,
@@ -1078,6 +1086,9 @@ const ComboBox = forwardRef(
               tabIndex={0}
               aria-haspopup="listbox"
               title={textInput?.current?.value}
+              {...(toolParamDescription && {
+                toolparamdescription: toolParamDescription,
+              })}
               {...getInputProps({
                 'aria-label': titleText
                   ? undefined
@@ -1532,6 +1543,12 @@ ComboBox.propTypes = {
    * **Experimental**: will enable autocomplete and typeahead for the input field
    */
   typeahead: PropTypes.bool,
+
+  /**
+   * Optional description for WebMCP (Web Model Context Protocol) Declarative API.
+   * Maps to the `toolparamdescription` HTML attribute for AI agent integration.
+   */
+  toolParamDescription: PropTypes.string,
 
   /**
    * Specify whether the control is currently in warning state

@@ -13,6 +13,29 @@ import userEvent from '@testing-library/user-event';
 const prefix = 'cds';
 
 describe('Toggle', () => {
+  describe('WebMCP attributes', () => {
+    it('should render toolparamdescription attribute when provided', () => {
+      render(
+        <Toggle
+          id="toggle-1"
+          labelText="Toggle label"
+          toolParamDescription="Test description for WebMCP"
+        />
+      );
+      expect(screen.getByRole('switch')).toHaveAttribute(
+        'toolparamdescription',
+        'Test description for WebMCP'
+      );
+    });
+
+    it('should not render toolparamdescription attribute when not provided', () => {
+      render(<Toggle id="toggle-1" labelText="Toggle label" />);
+      expect(screen.getByRole('switch')).not.toHaveAttribute(
+        'toolparamdescription'
+      );
+    });
+  });
+
   const props = {
     id: 'toggle-id',
     labelA: 'labelA-unchecked',

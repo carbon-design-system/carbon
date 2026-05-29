@@ -94,6 +94,11 @@ export interface CheckboxProps
   warnText?: ReactNode;
 
   /**
+   * WebMCP: Map elements to a property description within the JSON Schema
+   */
+  toolParamDescription?: string;
+
+  /**
    * Provide an optional handler that is called when the internal state of
    * Checkbox changes. This handler is called with event and state info.
    * `(event, { checked, id }) => void`
@@ -125,6 +130,7 @@ const Checkbox = React.forwardRef(
       hideLabel,
       readOnly,
       title = '',
+      toolParamDescription,
       warn,
       warnText,
       disabled,
@@ -189,6 +195,9 @@ const Checkbox = React.forwardRef(
       <div className={wrapperClasses}>
         <input
           {...other}
+          {...(toolParamDescription && {
+            toolparamdescription: toolParamDescription,
+          })}
           disabled={disabled}
           type="checkbox"
           data-invalid={normalizedProps.invalid ? true : undefined}
@@ -348,6 +357,11 @@ Checkbox.propTypes = {
    * Specify a title for the <label> node for the Checkbox
    */
   title: PropTypes.string,
+
+  /**
+   * WebMCP: Map elements to a property description within the JSON Schema
+   */
+  toolParamDescription: PropTypes.string,
 
   /**
    * Specify whether the Checkbox is currently in warning state

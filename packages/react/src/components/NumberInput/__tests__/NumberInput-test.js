@@ -31,6 +31,31 @@ function translateWithId(id) {
 }
 
 describe('NumberInput', () => {
+  describe('WebMCP attributes', () => {
+    it('should render toolparamdescription attribute when provided', () => {
+      render(
+        <NumberInput
+          id="number-input-1"
+          label="NumberInput label"
+          toolParamDescription="Description for AI agent"
+        />
+      );
+
+      const input = screen.getByLabelText('NumberInput label');
+      expect(input).toHaveAttribute(
+        'toolparamdescription',
+        'Description for AI agent'
+      );
+    });
+
+    it('should not render toolparamdescription attribute when not provided', () => {
+      render(<NumberInput id="number-input-1" label="NumberInput label" />);
+
+      const input = screen.getByLabelText('NumberInput label');
+      expect(input).not.toHaveAttribute('toolparamdescription');
+    });
+  });
+
   // Controlled tests - tests where component state is managed externally via useState/value prop
   describe('Controlled', () => {
     it('should update externally to an empty value when `allowEmpty` is `true`', async () => {

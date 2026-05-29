@@ -121,6 +121,13 @@ export interface SearchProps extends InputPropsBase {
   type?: string;
 
   /**
+   * Optional description for WebMCP (Web Model Context Protocol) Declarative API.
+   * Maps to the `toolparamdescription` HTML attribute for AI agent integration.
+   * @see https://developer.chrome.com/docs/ai/webmcp/declarative-api
+   */
+  toolParamDescription?: string;
+
+  /**
    * Specify the value of the `<input>`
    */
   value?: string | number;
@@ -147,6 +154,7 @@ const Search = React.forwardRef<HTMLInputElement, SearchProps>(
       renderIcon,
       role,
       size,
+      toolParamDescription,
       type = 'search',
       value,
       ...rest
@@ -304,6 +312,9 @@ const Search = React.forwardRef<HTMLInputElement, SearchProps>(
           type={type}
           value={value}
           tabIndex={onExpand && !isExpanded ? -1 : undefined}
+          {...(toolParamDescription && {
+            toolparamdescription: toolParamDescription,
+          })}
           {...rest}
         />
         <button
@@ -418,6 +429,12 @@ Search.propTypes = {
    * Specify the size of the Search
    */
   size: PropTypes.oneOf(['xs', 'sm', 'md', 'lg']),
+
+  /**
+   * Optional description for WebMCP (Web Model Context Protocol) Declarative API.
+   * Maps to the `toolparamdescription` HTML attribute for AI agent integration.
+   */
+  toolParamDescription: PropTypes.string,
 
   /**
    * Specify the type of the `<input>`

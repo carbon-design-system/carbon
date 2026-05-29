@@ -28,6 +28,27 @@ describe('Search', () => {
         'data-testid',
         'test-id'
       );
+      it('should render toolparamdescription attribute when toolParamDescription prop is provided', () => {
+        render(
+          <Search
+            labelText="test-search"
+            toolParamDescription="Search for items"
+          />
+        );
+
+        expect(screen.getByRole('searchbox')).toHaveAttribute(
+          'toolparamdescription',
+          'Search for items'
+        );
+      });
+
+      it('should not render toolparamdescription attribute when toolParamDescription prop is not provided', () => {
+        render(<Search labelText="test-search" />);
+
+        expect(screen.getByRole('searchbox')).not.toHaveAttribute(
+          'toolparamdescription'
+        );
+      });
     });
 
     it('should respect autoComplete prop', () => {

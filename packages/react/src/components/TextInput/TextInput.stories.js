@@ -8,7 +8,7 @@
 import React from 'react';
 import { WithLayer } from '../../../.storybook/templates/WithLayer';
 import FluidForm from '../FluidForm';
-import { View, FolderOpen, Folders, Information } from '@carbon/icons-react';
+import { View, FolderOpen, Folders } from '@carbon/icons-react';
 import Button from '../Button';
 import { AILabel, AILabelContent, AILabelActions } from '../AILabel';
 import { IconButton } from '../IconButton';
@@ -149,6 +149,13 @@ export default {
       control: {
         type: 'number',
       },
+    },
+    toolParamDescription: {
+      control: {
+        type: 'text',
+      },
+      description:
+        'Optional description for WebMCP (Web Model Context Protocol) Declarative API. Maps to the `toolparamdescription` HTML attribute for AI agent integration.',
     },
     light: {
       table: {

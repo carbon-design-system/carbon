@@ -100,6 +100,13 @@ export interface FileUploaderButtonProps
    */
   tabIndex?: number | string;
 
+  /**
+   * Optional description for WebMCP (Web Model Context Protocol) Declarative API.
+   * Maps to the `toolparamdescription` HTML attribute for AI agent integration.
+   * @see https://developer.chrome.com/docs/ai/webmcp/declarative-api
+   */
+  toolParamDescription?: string;
+
   innerRef?: React.RefObject<HTMLLabelElement | null>;
 }
 
@@ -115,7 +122,7 @@ function FileUploaderButton({
   onChange = noopFn,
   name,
   size = 'md',
-
+  toolParamDescription,
   innerRef,
   ...other
 }: FileUploaderButtonProps) {
@@ -201,6 +208,9 @@ function FileUploaderButton({
         accept={accept?.toString()}
         name={name}
         onChange={handleOnChange}
+        {...(toolParamDescription && {
+          toolparamdescription: toolParamDescription,
+        })}
       />
     </>
   );
@@ -285,6 +295,12 @@ FileUploaderButton.propTypes = {
     'The `tabIndex` prop for `FileUploaderButton` has ' +
       'been deprecated since it now renders a button element by default.'
   ),
+
+  /**
+   * Optional description for WebMCP (Web Model Context Protocol) Declarative API.
+   * Maps to the `toolparamdescription` HTML attribute for AI agent integration.
+   */
+  toolParamDescription: PropTypes.string,
 };
 
 export default FileUploaderButton;
