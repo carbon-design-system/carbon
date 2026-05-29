@@ -52,6 +52,10 @@ const containedTabsSizeArgs = {
   size: 'lg',
 };
 
+const lineTabsSizeArgs = {
+  size: 'md',
+};
+
 export default {
   title: 'Components/Tabs',
   component: Tabs,
@@ -99,6 +103,7 @@ export const Default = (args) => {
 Default.args = {
   contained: false,
   dismissable: false,
+  ...lineTabsSizeArgs,
   scrollDebounceWait: 200,
 };
 
@@ -139,9 +144,10 @@ Default.argTypes = {
       type: 'boolean',
     },
   },
+  ...containedTabsSizeArgType,
 };
 
-export const Dismissable = () => {
+export const Dismissable = (args) => {
   const tabs = [
     {
       label: 'Dashboard',
@@ -199,7 +205,7 @@ export const Dismissable = () => {
         onChange={handleTabChange}
         dismissable
         onTabCloseRequest={handleCloseTabRequest}>
-        <TabList>
+        <TabList size={args.size}>
           {renderedTabs.map((tab, index) => (
             <Tab key={index} disabled={tab.disabled}>
               {tab.label}
@@ -211,6 +217,9 @@ export const Dismissable = () => {
     </>
   );
 };
+
+Dismissable.argTypes = containedTabsSizeArgType;
+Dismissable.args = lineTabsSizeArgs;
 export const DismissableContained = (args) => {
   const tabs = [
     {
@@ -285,7 +294,7 @@ export const DismissableContained = (args) => {
 DismissableContained.argTypes = containedTabsSizeArgType;
 DismissableContained.args = containedTabsSizeArgs;
 
-export const DismissableWithIcons = ({ contained }) => {
+export const DismissableWithIcons = ({ contained, size }) => {
   const tabs = [
     {
       label: 'Dashboard',
@@ -345,7 +354,7 @@ export const DismissableWithIcons = ({ contained }) => {
         onChange={handleTabChange}
         dismissable
         onTabCloseRequest={handleCloseTabRequest}>
-        <TabList contained={contained}>
+        <TabList contained={contained} size={size}>
           {renderedTabs.map((tab, index) => (
             <Tab key={index} disabled={tab.disabled} renderIcon={icons[index]}>
               {tab.label}
@@ -358,10 +367,13 @@ export const DismissableWithIcons = ({ contained }) => {
   );
 };
 
-export const WithIcons = () => {
+DismissableWithIcons.argTypes = containedTabsSizeArgType;
+DismissableWithIcons.args = lineTabsSizeArgs;
+
+export const WithIcons = (args) => {
   return (
     <Tabs>
-      <TabList activation="manual">
+      <TabList activation="manual" size={args.size}>
         <Tab renderIcon={Dashboard}>Dashboard</Tab>
         <Tab renderIcon={CloudMonitoring}>Monitoring</Tab>
         <Tab renderIcon={Activity}>Activity</Tab>
@@ -396,6 +408,9 @@ export const WithIcons = () => {
     </Tabs>
   );
 };
+
+WithIcons.argTypes = containedTabsSizeArgType;
+WithIcons.args = lineTabsSizeArgs;
 
 export const Manual = () => {
   return (
@@ -473,7 +488,7 @@ Icon20Only.argTypes = {
 export const IconOnly = (args) => {
   return (
     <Tabs>
-      <TabList iconSize="default">
+      <TabList iconSize="default" size={args.size}>
         <IconTab label="Analyze" disabled>
           <IbmWatsonDiscovery aria-label="Analyze" />
         </IconTab>
@@ -498,6 +513,7 @@ export const IconOnly = (args) => {
 };
 
 IconOnly.argTypes = {
+  ...containedTabsSizeArgType,
   badgeIndicator: {
     description: '**Experimental**: Display an empty dot badge on the Tab.',
     control: {
@@ -505,6 +521,7 @@ IconOnly.argTypes = {
     },
   },
 };
+IconOnly.args = lineTabsSizeArgs;
 
 export const Contained = (args) => {
   return (

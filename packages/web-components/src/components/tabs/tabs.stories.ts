@@ -34,6 +34,7 @@ import './stories/tabs-wrapper';
 const args = {
   contained: false,
   disabled: false,
+  size: 'md',
   selectionMode: 'automatic',
 };
 
@@ -66,6 +67,10 @@ const containedTabsSizeArgs = {
   size: 'lg',
 };
 
+const lineTabsSizeArgs = {
+  size: 'md',
+};
+
 const onTabsBeingSelected = action('cds-tabs-beingselected');
 const onTabsSelected = action('cds-tabs-selected');
 const iconStoriesArgs = {
@@ -81,8 +86,11 @@ const iconStoriesArgTypes = {
 
 export const Default = {
   args,
-  argTypes,
-  render: ({ disabled, contained, selectionMode }) => {
+  argTypes: {
+    ...argTypes,
+    ...containedTabsSizeArgType,
+  },
+  render: ({ disabled, contained, selectionMode, size }) => {
     const handleBeforeSelected = (event: CustomEvent) => {
       onTabsBeingSelected(event);
 
@@ -98,6 +106,7 @@ export const Default = {
       <cds-tabs
         disabled="${disabled}"
         selection-mode="${selectionMode}"
+        size="${ifDefined(size)}"
         type="${ifDefined(contained && TABS_TYPE.CONTAINED)}"
         value="dashboard"
         @cds-tabs-beingselected="${handleBeforeSelected}"
@@ -655,6 +664,7 @@ export const Dismissable = {
   args: {
     dismissable: true,
     selectedIndex: 0,
+    ...lineTabsSizeArgs,
   },
   argTypes: {
     dismissable: {
@@ -666,15 +676,17 @@ export const Dismissable = {
       description:
         'Specify a selected index for the initially selected content.',
     },
+    ...containedTabsSizeArgType,
   },
-  render: ({ dismissable, selectedIndex }) => {
+  render: ({ dismissable, selectedIndex, size }) => {
     return html`
       <style>
         ${styles}
       </style>
       <tabs-story-wrapper
         ?dismissable="${dismissable}"
-        selected-index="${selectedIndex}">
+        selected-index="${selectedIndex}"
+        size="${ifDefined(size)}">
       </tabs-story-wrapper>
     `;
   },
@@ -717,6 +729,7 @@ export const DismissableWithIcons = {
   args: {
     dismissable: true,
     selectedIndex: 0,
+    ...lineTabsSizeArgs,
   },
   argTypes: {
     dismissable: {
@@ -728,8 +741,9 @@ export const DismissableWithIcons = {
       description:
         'Specify a selected index for the initially selected content.',
     },
+    ...containedTabsSizeArgType,
   },
-  render: ({ dismissable, selectedIndex }) => {
+  render: ({ dismissable, selectedIndex, size }) => {
     return html`
       <style>
         ${styles}
@@ -737,6 +751,7 @@ export const DismissableWithIcons = {
       <tabs-story-wrapper
         ?dismissable="${dismissable}"
         selected-index="${selectedIndex}"
+        size="${ifDefined(size)}"
         with-icons>
       </tabs-story-wrapper>
     `;
@@ -823,13 +838,22 @@ export const Icon20Only = {
 };
 
 export const IconOnly = {
-  args: iconStoriesArgs,
-  argTypes: iconStoriesArgTypes,
-  render: ({ badgeIndicator }) => html`
+  args: {
+    ...iconStoriesArgs,
+    ...lineTabsSizeArgs,
+  },
+  argTypes: {
+    ...iconStoriesArgTypes,
+    ...containedTabsSizeArgType,
+  },
+  render: ({ badgeIndicator, size }) => html`
     <style>
       ${styles}
     </style>
-    <cds-tabs value="icon-tab-2" icon-size="${TABS_ICON_SIZE.DEFAULT}">
+    <cds-tabs
+      value="icon-tab-2"
+      size="${ifDefined(size)}"
+      icon-size="${TABS_ICON_SIZE.DEFAULT}">
       <cds-tab
         id="icon-tab-1"
         target="icon-panel-1"
@@ -985,7 +1009,9 @@ export const skeleton = {
 };
 
 export const WithIcons = {
-  render: () => {
+  args: lineTabsSizeArgs,
+  argTypes: containedTabsSizeArgType,
+  render: ({ size }) => {
     return html`
       <style>
         ${styles}
@@ -993,6 +1019,7 @@ export const WithIcons = {
       <cds-tabs
         selection-mode="manual"
         value="icon-tab-1"
+        size="${ifDefined(size)}"
         icon-size="${TABS_ICON_SIZE.DEFAULT}">
         <cds-tab id="icon-tab-1" target="icon-panel-1" value="icon-tab-1">
           Dashboard ${iconLoader(Dashboard16)}
