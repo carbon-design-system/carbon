@@ -12,3 +12,47 @@
 .controlled-accordion-btnset .controlled-accordion-btn {
   max-inline-size: 13.25rem;
 }
+
+.accordion-research-demo {
+  inline-size: min(100%, 32rem);
+}
+
+.accordion-research-controls {
+  padding-block-end: 0.75rem;
+}
+
+.accordion-research-stage {
+  min-block-size: 16rem;
+}
+
+.accordion-native-demo {
+  position: relative;
+}
+
+.accordion-native-panel {
+  transition:
+    opacity var(--accordion-research-duration, 150ms)
+      var(--accordion-research-easing, cubic-bezier(0, 0, 0.38, 0.9)),
+    transform var(--accordion-research-duration, 150ms)
+      var(--accordion-research-easing, cubic-bezier(0, 0, 0.38, 0.9));
+}
+
+.accordion-native-panel.is-active {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
+.accordion-native-panel.is-hidden {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(0.5rem);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .accordion-native-panel {
+    transition: none;
+  }
+}
