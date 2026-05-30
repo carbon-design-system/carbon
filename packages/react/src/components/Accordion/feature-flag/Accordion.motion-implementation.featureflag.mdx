@@ -1,0 +1,168 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta
+  title="Components/Accordion/Feature Flag"
+  name="Motion implementation notes"
+/>
+
+# Accordion motion implementation (spike notes)
+
+This page explains the Accordion motion spike using the code as the source of
+truth. It covers what we implemented, why we implemented it this way, and how
+the Motion Library and native CSS versions compare in React and Web Components.
+
+The goal of this spike is focused and practical: test whether we can create a
+clear loading-to-content reveal pattern with predictable behavior in both
+flagship packages, while still using Carbon motion guidance and Carbon tokens.
+
+## What we implemented
+
+Both demos move from skeleton to content, then open the first Accordion item so
+users see a clear "content opens" moment.
+
+Important detail: the two paths do this a bit differently. The Motion Library
+path is a staged sequence (exit animation, then enter animation). The native CSS
+path switches both panels in the same frame and uses CSS transitions, so it
+behaves more like a controlled crossfade with offset rather than a strict
+one-after-the-other sequence.
+
+In React, the logic is implemented in
+`packages/react/src/components/Accordion/feature-flag/Accordion.featureflag.stories.js`.
+In Web Components, it is implemented in
+`packages/web-components/src/components/accordion/feature-flag/accordion.feature-flag.stories.ts`.
+
+Both versions support replay, both reset to a clean initial state before each
+run, and both provide reduced-motion handling.
+
+## Motion Library implementation
+
+The Motion Library path uses `animate()` from `motion` with explicit keyframes
+for `opacity` and `transform`. It uses Carbon timing values and productive
+easing values.
+
+React imports:
+
+- `animate` from `motion`
+- `useReducedMotion` from `motion/react`
+- `durationModerate01` and `motion` from `@carbon/motion`
+
+Web Components imports:
+
+- `animate` from `motion`
+- `durationModerate01` and `motion` from `@carbon/motion`
+
+In both implementations, the key transition uses:
+
+- `duration` derived from `durationModerate01`
+- `ease` set to the productive entrance curve `[0, 0, 0.38, 0.9]`
+
+This matches Carbon productive motion intent for fast, clear UI transitions.
+
+The code also stores animation handles and calls `cancel()` during replay
+cleanup. This is important to avoid animation overlap when users click replay
+multiple times.
+
+## Native CSS implementation
+
+The native CSS path uses class changes (`is-active` / `is-hidden`) and CSS
+transitions for the same properties (`opacity`, `transform`).
+
+React styles live in: `packages/react/src/components/Accordion/story.scss`
+
+Web Components styles are defined inline in the feature-flag story file:
+`packages/web-components/src/components/accordion/feature-flag/accordion.feature-flag.stories.ts`
+
+Both versions use Carbon values for duration and easing:
+
+- duration from `durationModerate01`
+- easing from `motion('entrance', 'productive')`
+
+This keeps visual rhythm close to the Motion Library version, even though the
+mechanism is different (CSS class transitions vs JavaScript keyframes).
+
+## How opening motion is handled
+
+After the reveal finishes, both demos open the first Accordion item.
+
+React opens by clicking the first heading button programmatically. Web
+Components opens by setting the `open` attribute on the first
+`cds-accordion-item`
+
+This gives a visible opening transition in both frameworks and aligns with the
+spike goal. It also builds on existing component motion behavior rather than
+replacing internal Accordion motion.
+
+## Parity status
+
+For this spike, parity is strong in visual behavior and sequence:
+
+- skeleton out
+- content in
+- first item opens
+
+However, this is not strict 100% functional parity yet. The programmatic open
+path is not identical between frameworks:
+
+- React path triggers the button click route.
+- Web Components path sets `open` directly.
+
+That means event behavior can differ in detail for this scripted step.
+
+## Consistency with Carbon patterns
+
+This implementation is aligned with Carbon patterns in key areas:
+
+- Feature-flag naming pattern: `enable-accordion-motion`
+- Feature-flag usage in stories under `Components/Accordion/Feature Flag`
+- Use of Carbon motion tokens and motion helper (`@carbon/motion`)
+- Use of productive motion for this microinteraction
+- Reduced-motion handling in both stacks
+
+## Safety and structure notes
+
+This spike has defensive behavior for replay:
+
+- timers are cleared before each run
+- previous animations are cancelled before each run
+- inline styles are reset before each run
+- run identifiers guard against stale async callbacks
+
+These details reduce flaky behavior in demos and are important if this pattern
+is reused in other component spikes.
+
+## What this spike proves and does not prove
+
+This spike proves that we can deliver a practical and consistent reveal
+transition pattern in both React and Web Components using either Motion Library
+or native CSS, while staying close to Carbon motion guidance.
+
+This spike does not prove full production readiness for every Accordion API
+shape, every event edge case, or every a11y/test requirement. Those would need
+additional AVT/VRT/unit coverage before moving to stable behavior.
+
+## External references used
+
+- Motion `animate()` docs: https://motion.dev/docs/animate
+- Motion `useReducedMotion()` docs:
+  https://motion.dev/docs/react-use-reduced-motion
+- Carbon Motion overview:
+  https://carbondesignsystem.com/elements/motion/overview/
+- Carbon Motion choreography:
+  https://carbondesignsystem.com/elements/motion/choreography/
+- Carbon Motion code: https://carbondesignsystem.com/elements/motion/code/
+- IBM Design Language animation overview:
+  https://www.ibm.com/design/language/animation/overview/
+
+## Internal code references used
+
+- React spike story:
+  `packages/react/src/components/Accordion/feature-flag/Accordion.featureflag.stories.js`
+- Web Components spike story:
+  `packages/web-components/src/components/accordion/feature-flag/accordion.feature-flag.stories.ts`
+- React spike CSS: `packages/react/src/components/Accordion/story.scss`
+- Carbon motion tokens/functions: `packages/motion/src/index.ts`
+- Core Accordion motion styling:
+  `packages/styles/scss/components/accordion/_accordion.scss`
+- Web Components Accordion behavior:
+  `packages/web-components/src/components/accordion/accordion-item.ts`
+  `packages/web-components/src/components/accordion/accordion.scss`
