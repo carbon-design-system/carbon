@@ -97,6 +97,7 @@
     "enquirer": "^2.3.6",
     "fast-glob": "^3.3.3",
     "fs-extra": "^11.0.0",
+    "motion": "^12.40.0",
     "process": "^0.11.10",
     "prop-types": "^15.8.1",
     "react": "^19.2.3",
