@@ -95,6 +95,43 @@ $mp-transition: $duration-moderate-02 motion(standard, productive);
   box-shadow: 0 2px 6px transparent;
 }
 
+// container-transform: true `layoutId` morph
+// native renders one element that resizes
+.mp-cell--container-transform {
+  min-block-size: 80px;
+}
+
+.mp-ct__surface {
+  position: absolute;
+  inset-block-start: 0;
+  inset-inline-start: 0;
+  background-color: $interactive;
+}
+
+.mp-ct__surface--small {
+  block-size: 40px;
+  inline-size: 40px;
+}
+
+.mp-ct__surface--big {
+  block-size: 72px;
+  inline-size: 140px;
+}
+
+// native fallback: a single surface that resizes via CSS (Layout)
+.mp-cell--native.mp-cell--container-transform .mp-ct__surface {
+  block-size: 40px;
+  inline-size: 40px;
+  transition:
+    inline-size $mp-transition,
+    block-size $mp-transition;
+}
+
+.mp-cell--native.mp-cell--container-transform.is-open .mp-ct__surface {
+  block-size: 72px;
+  inline-size: 140px;
+}
+
 // native transitions
 .mp-cell--native {
   // opacity (composite)
@@ -168,7 +205,8 @@ $mp-transition: $duration-moderate-02 motion(standard, productive);
 @media (prefers-reduced-motion: reduce) {
   .mp-cell--native .mp-cell__panel,
   .mp-cell--native .mp-cell__morph,
-  .mp-cell--native .mp-cell__shadow {
+  .mp-cell--native .mp-cell__shadow,
+  .mp-cell--native .mp-ct__surface {
     transition: none;
   }
 }

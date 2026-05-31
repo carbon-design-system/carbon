@@ -25,6 +25,9 @@ import Button from '../../Button';
 import './motion-perf.scss';
 
 const TRANSITION = { duration: 0.24, ease: [0.2, 0, 0.38, 0.9] };
+// pin layout/FLIP animation to the same tween (otherwise it defaults to a
+// spring). used by the true `layoutId` container transform
+const LAYOUT_TRANSITION = { ...TRANSITION, layout: TRANSITION };
 const SAMPLE_MS = 800;
 
 // use `$shadow` theme token (white theme,
@@ -39,6 +42,7 @@ const ANIMATE_OPTIONS = [
   'height',
   'morph',
   'morph-shadow',
+  'container-transform',
 ];
 
 const nextFrame = () =>
@@ -93,6 +97,18 @@ const cellPropTypes = {
 const isMorph = (animate) => animate === 'morph' || animate === 'morph-shadow';
 
 function NativeCell({ animate, open }) {
+  // cative can't do true container transform - fall back to layout-animated
+  // resize (the closest, expensive, native approximation)
+  if (animate === 'container-transform') {
+    return (
+      <div
+        className={`mp-cell mp-cell--native mp-cell--container-transform${
+          open ? ' is-open' : ''
+        }`}>
+        <div className="mp-ct__surface" />
+      </div>
+    );
+  }
   return (
     <div
       className={`mp-cell mp-cell--native mp-cell--${animate}${
@@ -119,7 +135,37 @@ function MotionShadowLayer({ open }) {
 }
 MotionShadowLayer.propTypes = { open: PropTypes.bool };
 
+// shared-element container transform: a small element morphs into a
+// different, larger element via a shared `layoutId` ("card > modal")
+// heavier than `morph` - motion matches the two elements by id and morphs one
+// into the other. motion-only; native has no equivalent
+function ContainerTransformCell({ open }) {
+  const id = React.useId();
+  return (
+    <div className="mp-cell mp-cell--container-transform">
+      {open ? (
+        <motion.div
+          layoutId={id}
+          className="mp-ct__surface mp-ct__surface--big"
+          transition={LAYOUT_TRANSITION}
+        />
+      ) : (
+        <motion.div
+          layoutId={id}
+          className="mp-ct__surface mp-ct__surface--small"
+          transition={LAYOUT_TRANSITION}
+        />
+      )}
+    </div>
+  );
+}
+ContainerTransformCell.propTypes = { open: PropTypes.bool };
+
 function MotionCell({ animate, open }) {
+  // container transform (true layoutId morph)
+  if (animate === 'container-transform') {
+    return <ContainerTransformCell open={open} />;
+  }
   // height (layout)
   if (animate === 'height') {
     return (
@@ -139,9 +185,10 @@ function MotionCell({ animate, open }) {
       </div>
     );
   }
-  // morph (container transform): motion FLIPs the resize via `layout`
-  // (transform/Composite); the morph-shadow variant also animates the elevation
-  // shadow (Paint) — the realistic "elevated card morph" worst case.
+  // morph a single element resizing via `layout` FLIP (transform/Composite) —
+  // the lighter layout animation. (The true small > large container transform is
+  // the separate `container-transform` option above.) morph-shadow also animates
+  // the elevation shadow (paint) - the worst case
   if (isMorph(animate)) {
     return (
       <div className={`mp-cell mp-cell--${animate}${open ? ' is-open' : ''}`}>
@@ -276,7 +323,7 @@ export default {
     },
     animate: {
       description:
-        'What to animate, by pipeline: opacity=Composite; box-shadow=Paint; shadow-layer=Composite (overlay opacity); height=Layout; morph=FLIP container-transform (motion=transform vs native=layout); morph-shadow=morph + animated elevation shadow',
+        'What to animate, by pipeline: opacity=Composite; box-shadow=Paint; shadow-layer=Composite (overlay opacity); height=Layout; morph=FLIP resize (motion=transform vs native=layout); morph-shadow=morph + animated elevation shadow; container-transform=TRUE layoutId morph, small→large element (motion only; native falls back to a layout resize)',
       options: ANIMATE_OPTIONS,
       control: { type: 'select' },
     },

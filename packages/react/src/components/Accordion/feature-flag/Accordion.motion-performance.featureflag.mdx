@@ -32,26 +32,32 @@ The single most important idea: the property animated matters more than the
 engine. Each option maps to a distinct stage of the browser's rendering
 pipeline:
 
-| Option                                              | Pipeline tier | Cost                                                                                         |
-| --------------------------------------------------- | ------------- | -------------------------------------------------------------------------------------------- |
-| `opacity` (transform + opacity)                     | Composite     | cheapest — GPU fast-path, can run off the main thread                                        |
-| `box-shadow`                                        | Paint         | repaints every frame (no compositor fast-path)                                               |
-| `shadow-layer` (opacity of a static-shadow overlay) | Composite     | the performant way to animate elevation                                                      |
-| `height`                                            | Layout        | reflow + paint + composite every frame (most expensive)                                      |
-| `morph` (React only)                                | FLIP          | container transform: motion uses `transform` (Composite) vs native `width`/`height` (Layout) |
-| `morph-shadow` (React only)                         | FLIP + Paint  | the realistic "elevated card morph": a FLIP _and_ an animated shadow at once                 |
+| Option                                              | Pipeline tier     | Cost                                                                                                                                    |
+| --------------------------------------------------- | ----------------- | --------------------------------------------------------------------------------------------------------------------------------------- |
+| `opacity` (transform + opacity)                     | Composite         | cheapest — GPU fast-path, can run off the main thread                                                                                   |
+| `box-shadow`                                        | Paint             | repaints every frame (no compositor fast-path)                                                                                          |
+| `shadow-layer` (opacity of a static-shadow overlay) | Composite         | the performant way to animate elevation                                                                                                 |
+| `height`                                            | Layout            | reflow + paint + composite every frame (most expensive)                                                                                 |
+| `morph` (React only)                                | FLIP              | a single element resizing: motion uses `transform` (Composite) vs native `width`/`height` (Layout)                                      |
+| `morph-shadow` (React only)                         | FLIP + Paint      | the "elevated card morph": a resize FLIP _and_ an animated shadow at once                                                               |
+| `container-transform` (React only)                  | FLIP (`layoutId`) | the TRUE morph: a small element morphs into a _different_, larger one (card → modal). Motion only; native falls back to a layout resize |
 
 `box-shadow` vs `shadow-layer` is the designers' drop-shadow question made
 measurable: animating the shadow (Paint) vs animating a shadow layer's opacity
 (Composite). On a _resizing_ element the layer trick can't help — the overlay
 repaints anyway.
 
-`morph` is the one test where the engines should genuinely diverge: it's the
-container-transform / shared-element effect, which motion does on the compositor
-(via `transform`) while native has to animate layout. `morph-shadow` stacks an
-animated elevation shadow on top — the worst-case combination of a layout change
-and a per-frame repaint. These are React-only because the automatic morph
-(`layout`/FLIP) is a `motion/react` feature.
+The morph options are where the engines should genuinely diverge — motion does
+the work on the compositor (`transform`) while native animates layout. There are
+two flavors: **`morph`** is the lighter case (one element resizing via
+`layout`), while **`container-transform`** is the real shared-element move
+(`layoutId`) — a small element morphing into a different, larger one (the "card
+→ modal" effect). The container transform is heavier (motion must match the two
+elements by id and project across them), so it's the truest stress of motion's
+morph machinery. `morph-shadow` stacks an animated shadow on top — the
+worst-case combination of a layout change and a per-frame repaint. All are
+React-only because automatic `layout`/`layoutId` morphs are a `motion/react`
+feature.
 
 ## What the data shows (provisional)
 
