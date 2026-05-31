@@ -1,0 +1,174 @@
+//
+// Copyright IBM Corp. 2026
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+// MotionPerf.stories.js
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/motion' as *;
+@use '@carbon/styles/scss/theme' as *;
+
+$mp-transition: $duration-moderate-02 motion(standard, productive);
+
+.mp__controls {
+  display: flex;
+  align-items: center;
+  margin-block-end: $spacing-04;
+  gap: $spacing-03;
+}
+
+.mp__meta {
+  color: $text-secondary;
+  font-size: 0.75rem;
+}
+
+.mp__stats {
+  display: flex;
+  margin: 0 0 $spacing-05;
+  padding: $spacing-04 $spacing-05;
+  background-color: $layer-01;
+  gap: $spacing-07;
+
+  dt {
+    color: $text-secondary;
+    font-size: 0.75rem;
+  }
+
+  dd {
+    margin: 0;
+    font-size: 1.25rem;
+    font-weight: 600;
+  }
+}
+
+.mp__grid {
+  display: grid;
+  gap: $spacing-02;
+  grid-template-columns: repeat(auto-fill, minmax(48px, 1fr));
+}
+
+.mp-cell {
+  position: relative;
+  min-block-size: $spacing-03;
+
+  &__panel {
+    block-size: 40px;
+    background-color: $interactive;
+  }
+
+  // `morph` container-transform target (absolute so it can grow past the cell)
+  &__morph {
+    position: absolute;
+    inset-block-start: 0;
+    inset-inline-start: 0;
+    block-size: 40px;
+    background-color: $interactive;
+    inline-size: 40px;
+  }
+
+  // `shadow-layer` animate opacity
+  &__shadow {
+    position: absolute;
+    box-shadow: 0 2px 6px $shadow;
+    inset: 0;
+    opacity: 0;
+    pointer-events: none;
+  }
+}
+
+// morph (container transform): the layout change both engines target. motion
+// FLIPs via transform; native animates via CSS (below)
+.mp-cell--morph,
+.mp-cell--morph-shadow {
+  min-block-size: 72px;
+}
+
+.mp-cell--morph.is-open .mp-cell__morph,
+.mp-cell--morph-shadow.is-open .mp-cell__morph {
+  block-size: 64px;
+  inline-size: 120px;
+}
+
+.mp-cell--morph-shadow .mp-cell__morph {
+  box-shadow: 0 2px 6px transparent;
+}
+
+// native transitions
+.mp-cell--native {
+  // opacity (composite)
+  &.mp-cell--opacity .mp-cell__panel {
+    opacity: 0;
+    transform: translateY($spacing-03);
+    transition:
+      opacity $mp-transition,
+      transform $mp-transition;
+  }
+
+  &.mp-cell--opacity.is-open .mp-cell__panel {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  // box-shadow (paint)
+  &.mp-cell--box-shadow .mp-cell__panel {
+    box-shadow: 0 2px 6px transparent;
+    transition: box-shadow $mp-transition;
+  }
+
+  &.mp-cell--box-shadow.is-open .mp-cell__panel {
+    box-shadow: 0 2px 6px $shadow;
+  }
+
+  // shadow-layer (composite: overlay opacity)
+  &.mp-cell--shadow-layer .mp-cell__shadow {
+    transition: opacity $mp-transition;
+  }
+
+  &.mp-cell--shadow-layer.is-open .mp-cell__shadow {
+    opacity: 1;
+  }
+
+  // height (layout)
+  &.mp-cell--height .mp-cell__panel {
+    block-size: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition:
+      block-size $mp-transition,
+      opacity $mp-transition;
+  }
+
+  &.mp-cell--height.is-open .mp-cell__panel {
+    block-size: 80px;
+    opacity: 1;
+  }
+
+  // mporph (FLIP)
+  &.mp-cell--morph .mp-cell__morph {
+    transition:
+      inline-size $mp-transition,
+      block-size $mp-transition;
+  }
+
+  // morph + animated elevation shadow (layout change + per-frame paint)
+  &.mp-cell--morph-shadow .mp-cell__morph {
+    transition:
+      inline-size $mp-transition,
+      block-size $mp-transition,
+      box-shadow $mp-transition;
+  }
+
+  &.mp-cell--morph-shadow.is-open .mp-cell__morph {
+    box-shadow: 0 2px 6px $shadow;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mp-cell--native .mp-cell__panel,
+  .mp-cell--native .mp-cell__morph,
+  .mp-cell--native .mp-cell__shadow {
+    transition: none;
+  }
+}

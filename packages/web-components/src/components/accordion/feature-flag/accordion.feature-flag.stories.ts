@@ -7,12 +7,13 @@
 
 import { html } from 'lit';
 import { animate } from 'motion';
-import { durationModerate01, motion as carbonMotion } from '@carbon/motion';
+import { durationModerate01 } from '@carbon/motion';
 import { prefix } from '../../../globals/settings';
 import { ACCORDION_SIZE } from '../accordion';
 import '../index';
 import '../../feature-flags/index';
 import '../../../../.storybook/templates/with-feature-flags';
+import styles from './accordion-motion.scss?lit';
 
 const sizes = {
   [`Small size (${ACCORDION_SIZE.SMALL})`]: ACCORDION_SIZE.SMALL,
@@ -72,51 +73,9 @@ const productiveEntranceDurationMilliseconds = Number.parseInt(
   10
 );
 const productiveEntranceBezier = [0, 0, 0.38, 0.9];
-const productiveEntranceEasing = carbonMotion('entrance', 'productive');
 const revealDelay = 700;
 const revealOffset = 8;
 const contentOpenDelay = productiveEntranceDurationMilliseconds;
-
-const researchDemoStyles = `
-  .accordion-research-demo {
-    inline-size: min(100%, 32rem);
-  }
-
-  .accordion-research-controls {
-    padding-block-end: 0.75rem;
-  }
-
-  .accordion-research-stage {
-    min-block-size: 16rem;
-    position: relative;
-  }
-
-  .accordion-native-panel {
-    transition:
-      opacity ${durationModerate01} ${productiveEntranceEasing},
-      transform ${durationModerate01} ${productiveEntranceEasing};
-  }
-
-  .accordion-native-panel.is-active {
-    opacity: 1;
-    pointer-events: auto;
-    transform: translateY(0);
-  }
-
-  .accordion-native-panel.is-hidden {
-    position: absolute;
-    inset: 0;
-    opacity: 0;
-    pointer-events: none;
-    transform: translateY(0.5rem);
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .accordion-native-panel {
-      transition: none;
-    }
-  }
-`;
 
 const renderResearchAccordion = ({
   alignment,
@@ -459,7 +418,7 @@ const renderResearchDemo = ({
 }) => html`
   <feature-flags enable-accordion-motion>
     <style>
-      ${researchDemoStyles}
+      ${styles}
     </style>
     <div class="accordion-research-demo" data-accordion-research-root>
       <cds-button-set class="accordion-research-controls">
@@ -545,7 +504,7 @@ export const NativeCSS = {
       <sb-template-feature-flags>
         <feature-flags enable-accordion-motion>
           <style>
-            ${researchDemoStyles}
+            ${styles}
           </style>
           <div class="accordion-research-demo" data-accordion-research-root>
             <cds-button-set class="accordion-research-controls">

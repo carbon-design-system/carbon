@@ -1,0 +1,184 @@
+//
+// Copyright IBM Corp. 2026
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/motion' as *;
+@use '@carbon/styles/scss/theme' as *;
+
+$mp-transition: $duration-moderate-02 motion(standard, productive);
+
+// accordion.motion-perf.stories.ts
+.mp__controls {
+  display: flex;
+  align-items: center;
+  gap: $spacing-03;
+  margin-block-end: $spacing-04;
+}
+
+.mp__meta {
+  color: $text-secondary;
+  font-size: 0.75rem;
+}
+
+.mp__run {
+  padding: $spacing-02 $spacing-05;
+  border: 0;
+  background-color: $interactive;
+  color: $text-on-color;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 0.875rem;
+  min-block-size: $spacing-07;
+}
+
+.mp__stats {
+  display: flex;
+  margin: 0 0 $spacing-05;
+  gap: $spacing-07;
+  min-block-size: $spacing-06;
+
+  dt {
+    color: $text-secondary;
+    font-size: 0.75rem;
+  }
+
+  dd {
+    margin: 0;
+    font-size: 1.25rem;
+    font-weight: 600;
+  }
+}
+
+.mp__grid {
+  display: grid;
+  gap: $spacing-02;
+  grid-template-columns: repeat(auto-fill, minmax(48px, 1fr));
+}
+
+.mp-cell {
+  position: relative;
+  min-block-size: $spacing-03;
+
+  &__panel {
+    background-color: $interactive;
+    block-size: 40px;
+  }
+
+  // `shadow-layer` animate opacity
+  &__shadow {
+    position: absolute;
+    box-shadow: 0 2px 6px $shadow;
+    inset: 0;
+    opacity: 0;
+    pointer-events: none;
+  }
+}
+
+// native transitions
+.mp-cell--native {
+  // opacity (composite)
+  &.mp-cell--opacity .mp-cell__panel {
+    opacity: 0;
+    transform: translateY($spacing-03);
+    transition:
+      opacity $mp-transition,
+      transform $mp-transition;
+
+    @media screen and (prefers-reduced-motion: reduce) {
+      transition: none;
+    }
+  }
+
+  // box-shadow (paint)
+  &.mp-cell--box-shadow .mp-cell__panel {
+    box-shadow: 0 2px 6px transparent;
+    transition: box-shadow $mp-transition;
+
+    @media screen and (prefers-reduced-motion: reduce) {
+      transition: none;
+    }
+  }
+
+  // shadow-layer (composite: overlay opacity)
+  &.mp-cell--shadow-layer .mp-cell__shadow {
+    transition: opacity $mp-transition;
+
+    @media screen and (prefers-reduced-motion: reduce) {
+      transition: none;
+    }
+  }
+
+  // height (layout)
+  &.mp-cell--height .mp-cell__panel {
+    overflow: hidden;
+    block-size: 0;
+    opacity: 0;
+    transition:
+      block-size $mp-transition,
+      opacity $mp-transition;
+
+    @media screen and (prefers-reduced-motion: reduce) {
+      transition: none;
+    }
+  }
+
+  &.mp-cell--opacity.is-open .mp-cell__panel {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  &.mp-cell--box-shadow.is-open .mp-cell__panel {
+    box-shadow: 0 2px 6px $shadow;
+  }
+
+  &.mp-cell--shadow-layer.is-open .mp-cell__shadow {
+    opacity: 1;
+  }
+
+  &.mp-cell--height.is-open .mp-cell__panel {
+    block-size: 80px;
+    opacity: 1;
+  }
+}
+
+// accordion.feature-flag.stories.ts
+.accordion-research-demo {
+  inline-size: min(100%, 32rem);
+}
+
+.accordion-research-controls {
+  padding-block-end: $spacing-04;
+}
+
+.accordion-research-stage {
+  position: relative;
+  min-block-size: 16rem;
+}
+
+.accordion-native-panel {
+  transition:
+    opacity $duration-moderate-01 motion(entrance, productive),
+    transform $duration-moderate-01 motion(entrance, productive);
+
+  @media screen and (prefers-reduced-motion: reduce) {
+    transition: none;
+  }
+
+  &.is-active {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+  }
+
+  &.is-hidden {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY($spacing-03);
+  }
+}

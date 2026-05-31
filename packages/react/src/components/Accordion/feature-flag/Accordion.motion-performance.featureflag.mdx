@@ -1,0 +1,114 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Components/Accordion/Feature Flag" name="Performance Overview" />
+
+# Motion performance
+
+The `Performance playground` story is a standalone story to evaluate the
+performance of motion-vs-native animations.
+
+It is not tied to the Accordion component — it animates simple boxes so the
+rendering-pipeline cost is isolated from component complexity.
+
+## How it works
+
+Pick an `engine`: native CSS, `motion/mini` (~3.2 KB), or full `motion` (~22.7
+KB), an `animate` target, and an `instance count`, then press `Run`. All
+instances animate at once while the harness samples the page's frame timing and
+long-tasks, and reports:
+
+- `FPS` — average frames per second during the run
+- `Jank frames` — frames that took >1.5x at 60fps
+- `Max frame gap` — the worst single frame (ms); spikes = hitches
+- `Long-task time` — total main-thread blocking >50ms (where a JS engine would
+  cost more than CSS)
+
+Pair it with the browser `Performance` panel, and throttle CPU 4-6x to ovserve
+differences.
+
+## The `animate` control = one pipeline tier
+
+The single most important idea: the property animated matters more than the
+engine. Each option maps to a distinct stage of the browser's rendering
+pipeline:
+
+| Option                                              | Pipeline tier | Cost                                                                                         |
+| --------------------------------------------------- | ------------- | -------------------------------------------------------------------------------------------- |
+| `opacity` (transform + opacity)                     | Composite     | cheapest — GPU fast-path, can run off the main thread                                        |
+| `box-shadow`                                        | Paint         | repaints every frame (no compositor fast-path)                                               |
+| `shadow-layer` (opacity of a static-shadow overlay) | Composite     | the performant way to animate elevation                                                      |
+| `height`                                            | Layout        | reflow + paint + composite every frame (most expensive)                                      |
+| `morph` (React only)                                | FLIP          | container transform: motion uses `transform` (Composite) vs native `width`/`height` (Layout) |
+| `morph-shadow` (React only)                         | FLIP + Paint  | the realistic "elevated card morph": a FLIP _and_ an animated shadow at once                 |
+
+`box-shadow` vs `shadow-layer` is the designers' drop-shadow question made
+measurable: animating the shadow (Paint) vs animating a shadow layer's opacity
+(Composite). On a _resizing_ element the layer trick can't help — the overlay
+repaints anyway.
+
+`morph` is the one test where the engines should genuinely diverge: it's the
+container-transform / shared-element effect, which motion does on the compositor
+(via `transform`) while native has to animate layout. `morph-shadow` stacks an
+animated elevation shadow on top — the worst-case combination of a layout change
+and a per-frame repaint. These are React-only because the automatic morph
+(`layout`/FLIP) is a `motion/react` feature.
+
+## What the data shows (provisional)
+
+- Up to ~40 simultaneous animations, all engines hold a flat 60fps — at
+  realistic scale, engine choice has no performance impact.
+- Degradation appears only under heavy stress (100-200 at once).
+- Heavy lifting is done at animated properties (`height` = Layout), not the
+  engine. Long-task time stayed 0ms in every run - the motion JS engines added
+  no blocking tasks.
+- Native CSS was _not_ the runtime winner at 200 instances.
+
+At realistic scale, performance is a non-differentiator between native and
+Motion. The decision rests on bundle size, developer experience, and migration -
+see the spike findings docs in this folder.
+
+## Morph results (React, provisional)
+
+The morph is where the engines could diverge, and the result is two-part.
+
+Pure `morph` (no shadow) stayed at a flat 60fps on motion even at 300
+instances - the FLIP transform itself is cheap. The cost only appears when a
+shadow is animated during the morph (`morph-shadow`), and there motion does
+_worse_ than native:
+
+| engine; animate; count    | FPS   | Jank | Max gap |
+| ------------------------- | ----- | ---- | ------- |
+| motion; morph-shadow; 100 | 59    | 1    | 33ms    |
+| motion; morph-shadow; 200 | 54    | 3    | 66ms    |
+| motion; morph-shadow; 300 | 47    | 3    | 112ms   |
+| native; morph-shadow; 300 | 54-59 | 1-2  | 33-62ms |
+| native; morph; 200        | 58    | 1    | 50ms    |
+
+(runs not listed stayed at 60fps / 17ms; long-task time was 0ms everywhere)
+
+Why motion is worse here: it drives both parts in JavaScript every frame - the
+FLIP projection and the box-shadow interpolation. Native runs both as
+browser-driven CSS. At 300 elements motion's per-element JS cost stacks past the
+native engine.
+
+Takeaway: the morph itself is fine on motion; animating a shadow _during_ it is
+the expensive part, and it is worse with motion. Elevated morphs should use the
+`shadow-layer` technique (animate a static shadow's opacity = Composite) rather
+than animating `box-shadow` (Paint) - and that matters most with motion.
+
+## Testing notes
+
+These numbers are not definitive. How they were gathered:
+
+- Run on a high-performance development machine (fast CPU, discrete GPU),
+  unthrottled. Lower-end hardware would show worse numbers and likely more
+  separation between engines - the differences here are the optimistic case.
+- Each configuration was run a handful of times (fewer than 10). The numbers
+  were stable across runs in nearly all cases; a few showed minor variance (e.g.
+  native `morph-shadow` at 300 ranged 33-62ms).
+- The harness animates simple boxes at random counts to isolate pipeline-tier
+  cost - not real components.
+
+Still to do: a CPU-throttled pass (4-6x), averaged runs rather than
+representative ones, and heavier, more realistic examples (real components, real
+content, real layouts) before drawing firm conclusions.
