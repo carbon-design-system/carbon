@@ -1221,8 +1221,6 @@ FilterableMultiSelect.propTypes = {
    * change, and in some cases they can not be shimmed by Carbon to shield you
    * from potentially breaking changes.
    */
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20452
-  // @ts-ignore
   downshiftProps: PropTypes.shape(Downshift.propTypes),
 
   /**
