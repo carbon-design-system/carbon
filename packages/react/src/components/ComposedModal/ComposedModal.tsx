@@ -8,7 +8,6 @@
 import React, {
   Children,
   cloneElement,
-  createContext,
   useState,
   useContext,
   useEffect,
@@ -51,13 +50,7 @@ import {
 import { useId } from '../../internal/useId';
 import { useComposedModalState } from './useComposedModalState';
 import { isTopmostVisibleModal } from '../Modal/isTopmostVisibleModal';
-
-export const ComposedModalContext = createContext<{
-  labelId?: string;
-  titleId?: string;
-  setLabelId?: (id: string | undefined) => void;
-  setTitleId?: (id: string | undefined) => void;
-}>({});
+import { ComposedModalContext } from './ComposedModalContext';
 
 export interface ModalBodyProps extends HTMLAttributes<HTMLDivElement> {
   /**

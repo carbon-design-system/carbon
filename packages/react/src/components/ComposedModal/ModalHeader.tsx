@@ -18,7 +18,7 @@ import { Close } from '@carbon/icons-react';
 import { usePrefix } from '../../internal/usePrefix';
 import { IconButton } from '../IconButton';
 import { useId } from '../../internal/useId';
-import { ComposedModalContext } from './ComposedModal';
+import { ComposedModalContext } from './ComposedModalContext';
 
 export type DivProps = Omit<HTMLAttributes<HTMLDivElement>, 'title'>;
 export interface ModalHeaderProps extends DivProps {
