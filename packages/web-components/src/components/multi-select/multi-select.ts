@@ -255,6 +255,9 @@ class CDSMultiSelect extends CDSDropdown {
    * Clears selections on Escape click
    */
   protected _handleKeydownInner(event: KeyboardEvent) {
+    if (event.target instanceof CDSAILabel) {
+      return;
+    }
     const { key } = event;
     if (
       key === 'Escape' &&
@@ -830,14 +833,7 @@ class CDSMultiSelect extends CDSDropdown {
         sortedMenuItems.unshift(aiLabel);
       }
 
-      // Only move elements that are not already in the correct position
-      // to avoid detaching/reattaching which breaks event listeners
-      sortedMenuItems.forEach((item, index) => {
-        const currentChild = this.children[index];
-        if (currentChild !== item) {
-          this.appendChild(item);
-        }
-      });
+      this.replaceChildren(...sortedMenuItems);
     }
 
     const shouldSortItemsAfterReopen =
@@ -859,13 +855,8 @@ class CDSMultiSelect extends CDSDropdown {
       if (aiLabel) {
         sortedMenuItems.unshift(aiLabel);
       }
-      // Only move elements that are not already in the correct position
-      // to avoid detaching/reattaching which breaks event listeners
-      sortedMenuItems.forEach((item, index) => {
-        const currentChild = this.children[index];
-        if (currentChild !== item) {
-          this.appendChild(item);
-        }
+      sortedMenuItems.forEach((item) => {
+        this.appendChild(item);
       });
     }
     return true;
