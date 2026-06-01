@@ -56,13 +56,13 @@ const StoryContent = ({ useResponsiveOffset = true }) => {
         <div className={classNameFirstColumn}>
           <h2 style={{ margin: '0 0 30px' }}>Purpose and function</h2>
           <p>
-            The shell is perhaps the most crucial piece of any UI built with
-            <a href="www.carbondesignsystem.com"> Carbon</a>. It contains the
-            shared navigation framework for the entire design system and ties
-            the products in IBM’s portfolio together in a cohesive and elegant
-            way. The shell is the home of the topmost navigation, where users
-            can quickly and dependably gain their bearings and move between
-            pages.
+            The shell is perhaps the most crucial piece of any UI built with{' '}
+            <a href="https://www.carbondesignsystem.com/">Carbon</a>. It
+            contains the shared navigation framework for the entire design
+            system and ties the products in IBM’s portfolio together in a
+            cohesive and elegant way. The shell is the home of the topmost
+            navigation, where users can quickly and dependably gain their
+            bearings and move between pages.
             <br />
             <br />
             The shell was designed with maximum flexibility built in, to serve
@@ -227,7 +227,7 @@ export const FixedSideNav = () => (
   </>
 );
 
-FixedSideNav.storyName = 'Fixed SideNav';
+FixedSideNav.storyName = 'Fixed Side Nav';
 
 export const FixedSideNavWIcons = () => (
   <>
@@ -294,7 +294,7 @@ export const FixedSideNavWIcons = () => (
   </>
 );
 
-FixedSideNavWIcons.storyName = 'Fixed SideNav w/ Icons';
+FixedSideNavWIcons.storyName = 'Fixed Side Nav with Icons';
 
 export const FixedSideNavWDivider = () => (
   <>
@@ -358,7 +358,7 @@ export const FixedSideNavWDivider = () => (
   </>
 );
 
-FixedSideNavWDivider.storyName = 'Fixed SideNav w/ Divider';
+FixedSideNavWDivider.storyName = 'Fixed Side Nav with Divider';
 
 export const FixedSideNavWMixedLinksAndButtons = () => (
   <>
@@ -570,7 +570,7 @@ SideNavRailWHeader.argTypes = {
   },
 };
 
-SideNavRailWHeader.storyName = 'SideNav Rail w/Header';
+SideNavRailWHeader.storyName = 'Side Nav Rail with Header';
 
 export const SideNavWLargeSideNavItems = () => (
   <>
@@ -599,7 +599,7 @@ export const SideNavWLargeSideNavItems = () => (
         <SideNavLink href="https://www.carbondesignsystem.com/" large>
           Large link
         </SideNavLink>
-        <SideNavMenu renderIcon={Fade} title="Large menu w/icon" large>
+        <SideNavMenu renderIcon={Fade} title="Large menu with icon" large>
           <SideNavMenuItem href="https://www.carbondesignsystem.com/">
             Menu 1
           </SideNavMenuItem>
@@ -614,7 +614,7 @@ export const SideNavWLargeSideNavItems = () => (
           renderIcon={Fade}
           href="https://www.carbondesignsystem.com/"
           large>
-          Large link w/icon
+          Large link with icon
         </SideNavLink>
       </SideNavItems>
     </SideNav>
@@ -622,4 +622,4 @@ export const SideNavWLargeSideNavItems = () => (
   </>
 );
 
-SideNavWLargeSideNavItems.storyName = 'SideNav w/ large side nav items';
+SideNavWLargeSideNavItems.storyName = 'Side Nav with Large Side Nav Items';
