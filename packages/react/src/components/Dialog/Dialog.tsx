@@ -424,8 +424,6 @@ const DialogControls = React.forwardRef<HTMLDivElement, DialogControlsProps>(
   ({ children, ...rest }, ref) => {
     const prefix = usePrefix();
     return (
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20452
-      // @ts-ignore
       <div className={`${prefix}--dialog__header-controls`} ref={ref} {...rest}>
         {children}
       </div>
@@ -794,6 +792,12 @@ interface DialogFooterProps extends HTMLAttributes<HTMLDivElement> {
   danger?: boolean;
 
   /**
+   * Specify the message read by screen readers for the danger primary button.
+   * Defaults to an empty string; provide localized text to opt in.
+   */
+  dangerDescription?: string;
+
+  /**
    * Specify loading status
    */
   loadingStatus?: InlineLoadingStatus;
@@ -832,6 +836,7 @@ const DialogFooter = React.forwardRef<HTMLDivElement, DialogFooterProps>(
       loadingIconDescription,
       onLoadingSuccess = noopFn,
       danger = false,
+      dangerDescription = '',
       ...rest
     },
     ref
@@ -906,6 +911,7 @@ const DialogFooter = React.forwardRef<HTMLDivElement, DialogFooterProps>(
         <Button
           className={primaryButtonClass}
           kind={danger ? 'danger' : 'primary'}
+          dangerDescription={dangerDescription}
           disabled={loadingActive || primaryButtonDisabled}
           onClick={onRequestSubmit}
           ref={button}>
@@ -1005,6 +1011,12 @@ DialogFooter.propTypes = {
    * Specify whether the Dialog is for dangerous actions
    */
   danger: PropTypes.bool,
+
+  /**
+   * Specify the message read by screen readers for the danger primary button.
+   * Defaults to an empty string; provide localized text to opt in.
+   */
+  dangerDescription: PropTypes.string,
 
   /**
    * Specify loading status
