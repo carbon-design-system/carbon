@@ -69,8 +69,6 @@ jobs:
         run:
           yarn lerna publish from-package --dist-tag next --no-verify-access
           --yes
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Create Release
         id: create_release
@@ -97,7 +95,7 @@ jobs:
       - name: Promote packages
         uses: ./actions/promote
         with:
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NPM_TOKEN: ${{ secrets.CARBON_BOT_NPM_TOKEN }}
           DRY_RUN: false
 
       # run deploy-packages workflow

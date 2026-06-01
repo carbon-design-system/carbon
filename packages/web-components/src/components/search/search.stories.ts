@@ -22,6 +22,7 @@ const sizes = {
 
 const args = {
   autoComplete: 'off',
+  autofocus: false,
   closeButtonLabelText: 'Clear search input',
   defaultWidth: 800,
   disabled: false,
@@ -38,6 +39,11 @@ const argTypes = {
     control: 'text',
     description:
       'Specify an optional value for the <code>autocomplete</code> property on the underlying <code>&lt;input&gt;</code>, defaults to "off".',
+  },
+  autofocus: {
+    control: 'boolean',
+    description:
+      'Sets the input to be focussed automatically on page load. Defaults to false',
   },
   closeButtonLabelText: {
     control: 'text',
@@ -92,6 +98,7 @@ export const Default = {
   render: (args) => {
     const {
       autoComplete,
+      autofocus,
       closeButtonLabelText,
       colorScheme,
       disabled,
@@ -108,6 +115,7 @@ export const Default = {
       <div style="width: ${defaultWidth}px;">
         <cds-search
           autocomplete="${autoComplete}"
+          ?autofocus="${autofocus}"
           close-button-label-text="${ifDefined(closeButtonLabelText)}"
           color-scheme="${ifDefined(colorScheme)}"
           ?disabled="${disabled}"
@@ -129,6 +137,7 @@ export const Expandable = {
   render: (args) => {
     const {
       autoComplete,
+      autofocus,
       closeButtonLabelText,
       colorScheme,
       disabled,
@@ -146,6 +155,7 @@ export const Expandable = {
       <div style="width: ${defaultWidth}px;">
         <cds-search
           autocomplete="${autoComplete}"
+          ?autofocus="${autofocus}"
           close-button-label-text="${ifDefined(closeButtonLabelText)}"
           color-scheme="${ifDefined(colorScheme)}"
           ?disabled="${disabled}"
@@ -173,6 +183,7 @@ export const ExpandableWithLayer = {
   render: (args) => {
     const {
       autoComplete,
+      autofocus,
       closeButtonLabelText,
       colorScheme,
       disabled,
@@ -190,6 +201,7 @@ export const ExpandableWithLayer = {
       <div style="width: ${defaultWidth}px;">
         <cds-search
           autocomplete="${autoComplete}"
+          ?autofocus="${autofocus}"
           close-button-label-text="${ifDefined(closeButtonLabelText)}"
           color-scheme="${ifDefined(colorScheme)}"
           ?disabled="${disabled}"
@@ -239,6 +251,7 @@ export const WithLayer = {
   render: (args) => {
     const {
       autoComplete,
+      autofocus,
       closeButtonLabelText,
       colorScheme,
       disabled,
@@ -255,6 +268,7 @@ export const WithLayer = {
       <div style="width: ${defaultWidth}px;">
         <cds-search
           autocomplete="${autoComplete}"
+          ?autofocus="${autofocus}"
           close-button-label-text="${ifDefined(closeButtonLabelText)}"
           color-scheme="${ifDefined(colorScheme)}"
           ?disabled="${disabled}"
