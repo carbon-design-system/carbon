@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2018, 2023
+ * Copyright IBM Corp. 2018, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -17,8 +17,8 @@ export const fontFamilies = {
   serif: "'IBM Plex Serif', 'Georgia', Times, serif",
 };
 
-export function fontFamily(name) {
-  if (!fontFamilies[name]) {
+export const fontFamily = (name: keyof typeof fontFamilies) => {
+  if (!(name in fontFamilies)) {
     throw new Error(
       `Unable to find font family: \`${name}\`. Expected one of: ` +
         `[${Object.keys(fontFamilies).join(', ')}]`
@@ -27,4 +27,4 @@ export function fontFamily(name) {
   return {
     fontFamily: fontFamilies[name],
   };
-}
+};
