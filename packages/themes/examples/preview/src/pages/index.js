@@ -86,7 +86,7 @@ function getColorName(hex) {
   return '—';
 }
 
-export default function IndexPage() {
+export default function IndexPage({ lastBuiltOn }) {
   const [activeGroup, setActiveGroup] = React.useState('All');
   const [activeProperty, setActiveProperty] = React.useState('All');
   const [activeSet, setActiveSet] = React.useState('All');
@@ -95,7 +95,10 @@ export default function IndexPage() {
     <main>
       <section>
         <header className="flex items-center justify-between header">
-          <h1 id="table-title">Tokens ({tokens.length})</h1>
+          <div>
+            <h1 id="table-title">Tokens ({tokens.length})</h1>
+            <p>Last built on {lastBuiltOn}</p>
+          </div>
           <ul className="grid grid-columns-4 gap">
             {activeGroup !== 'All' ||
             activeProperty !== 'All' ||
@@ -301,4 +304,12 @@ export default function IndexPage() {
       </section>
     </main>
   );
+}
+
+export async function getStaticProps() {
+  return {
+    props: {
+      lastBuiltOn: new Date().toISOString(),
+    },
+  };
 }
