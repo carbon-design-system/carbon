@@ -265,8 +265,6 @@ MenuButton.propTypes = {
   /**
    * Specify the type of button to be used as the base for the trigger button.
    */
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20452
-  // @ts-ignore-next-line -- avoid spurious (?) TS2322 error
   kind: PropTypes.oneOf(validButtonKinds),
 
   /**
@@ -289,15 +287,11 @@ MenuButton.propTypes = {
   /**
    * Specify the size of the button and menu.
    */
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20452
-  // @ts-ignore-next-line -- avoid spurious (?) TS2322 error
   size: PropTypes.oneOf(['xs', 'sm', 'md', 'lg']),
 
   /**
    * Specify the tabIndex of the button.
    */
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20452
-  // @ts-ignore-next-line -- avoid spurious (?) TS2322 error
   tabIndex: PropTypes.number,
 
   /**

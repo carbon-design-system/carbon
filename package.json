@@ -38,7 +38,7 @@
     "flatpickr@4.6.13": "patch:flatpickr@npm%3A4.6.13#./.yarn/patches/flatpickr-npm-4.6.13-06399933fc.patch",
     "@octokit/rest": "^22.0.0",
     "eslint": "9.39.4",
-    "typescript-eslint": "8.59.2"
+    "typescript-eslint": "8.60.0"
   },
   "devDependencies": {
     "@babel/core": "^7.27.3",
@@ -50,8 +50,8 @@
     "@babel/preset-react": "^7.27.1",
     "@babel/runtime": "^7.27.3",
     "@carbon/cli": "workspace:packages/cli",
-    "@commitlint/cli": "^20.0.0",
-    "@commitlint/config-conventional": "^20.0.0",
+    "@commitlint/cli": "^21.0.0",
+    "@commitlint/config-conventional": "^21.0.0",
     "@eslint/compat": "^2.0.1",
     "@eslint/js": "^9.24.0",
     "@playwright/test": "^1.36.2",
@@ -78,9 +78,9 @@
     "globals": "17.6.0",
     "husky": "^9.0.0",
     "jest": "^30.0.5",
-    "jest-junit": "^16.0.0",
+    "jest-junit": "^17.0.0",
     "lerna": "^9.0.1",
-    "lint-staged": "^16.0.0",
+    "lint-staged": "^17.0.0",
     "prettier": "^3.3.3",
     "react": "^19.2.3",
     "react-dom": "^19.2.3",

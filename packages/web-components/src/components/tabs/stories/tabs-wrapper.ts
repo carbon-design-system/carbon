@@ -7,8 +7,10 @@
 
 import { LitElement, html } from 'lit';
 import { property, state } from 'lit/decorators.js';
+import { carbonElement as customElement } from '../../../globals/decorators/carbon-element';
 import { prefix } from '../../../globals/settings';
 import { TABS_TYPE } from '../tabs';
+import { TABS_SIZE } from '../defs';
 import { iconLoader } from '../../../globals/internal/icon-loader';
 import Dashboard16 from '@carbon/icons/es/dashboard/16.js';
 import CloudMonitoring16 from '@carbon/icons/es/cloud--monitoring/16.js';
@@ -19,6 +21,7 @@ import '../../button';
 /**
  * Wrapper component for dismissable tabs story with state management
  */
+@customElement('tabs-story-wrapper')
 export class DismissableTabsWrapper extends LitElement {
   /**
    * Whether to render tabs with icons
@@ -79,6 +82,12 @@ export class DismissableTabsWrapper extends LitElement {
   selectedIndex = 0;
 
   /**
+   * Size of the tabs
+   */
+  @property({ reflect: true })
+  size?: TABS_SIZE;
+
+  /**
    * Handle tab dismissed event
    */
   private _handleDismissed(event: CustomEvent) {
@@ -111,6 +120,7 @@ export class DismissableTabsWrapper extends LitElement {
         selected-index="${this.selectedIndex}"
         type="${this.contained ? TABS_TYPE.CONTAINED : TABS_TYPE.REGULAR}"
         ?dismissable="${this.dismissable}"
+        size="${this.size || TABS_SIZE.LARGE}"
         value="all"
         @cds-tab-closed="${this._handleDismissed}"
         @cds-tabs-beingselected="${this._handleBeforeSelected}">
@@ -149,7 +159,3 @@ export class DismissableTabsWrapper extends LitElement {
     return this;
   }
 }
-
-customElements.define('tabs-story-wrapper', DismissableTabsWrapper);
-
-// Made with Bob
