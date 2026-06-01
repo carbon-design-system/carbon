@@ -852,9 +852,6 @@ class CDSMultiSelect extends CDSDropdown {
         locale,
       });
 
-      if (aiLabel) {
-        sortedMenuItems.unshift(aiLabel);
-      }
       sortedMenuItems.forEach((item) => {
         this.appendChild(item);
       });
