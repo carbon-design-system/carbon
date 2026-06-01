@@ -101,7 +101,7 @@ const config: StorybookConfig = {
           // use a regex instead of a glob.Vite 8 (Rolldown)
           // globs `**/*.{jsx,js,ts,tsx}` seem to mishandle the transform
           // filter and ends up matching `package.json`, which then fails to
-          // parse as JS. using matches the same set of files (and the
+          // parse as JS. using regex matches the same set of files (and the
           // plugin's own default) without that bug
           include: /\.[jt]sx?$/,
           babel: {
