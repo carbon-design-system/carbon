@@ -223,7 +223,7 @@ const RadioButton = React.forwardRef<HTMLInputElement, RadioButtonProps>(
           value={value}
           name={name}
           required={required}
-          {...(readOnly ? { readOnly: true } : {})}
+          {...(readOnly && !normalizedProps.disabled ? { readOnly: true } : {})}
         />
         <label
           htmlFor={uniqueId}
