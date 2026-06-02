@@ -1219,7 +1219,7 @@ const ComboBox = forwardRef(
               })}
               {...rest}
               {...readOnlyEventHandlers}
-              {...(readOnly ? { readOnly: true } : {})}
+              {...(readOnly && !disabled ? { readOnly: true } : {})}
               aria-describedby={ariaDescribedBy}
             />
 

@@ -264,7 +264,9 @@ const TimePicker = frFn((props, ref) => {
         return React.cloneElement(item, {
           ...item.props,
           disabled: item.props.disabled ?? disabled,
-          ...(readOnly ? { readOnly: true } : {}),
+          ...(readOnly && !(item.props.disabled ?? disabled)
+            ? { readOnly: true }
+            : {}),
           ...readOnlyEventHandlers,
         });
       }
@@ -273,9 +275,8 @@ const TimePicker = frFn((props, ref) => {
     return mappedChildren;
   }
 
-  const readOnlyProps = {
-    readOnly: readOnly ? { readOnly: true } : {},
-  };
+  const readOnlyProps =
+    readOnly && !normalizedProps.disabled ? { readOnly: true } : {};
   const describedBy =
     [
       normalizedProps.invalid

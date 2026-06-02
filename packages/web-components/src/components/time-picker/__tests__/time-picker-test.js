@@ -278,12 +278,9 @@ describe('cds-time-picker', () => {
 
       const input = el.shadowRoot.querySelector('input');
 
-      // Check that input has disabled attribute
       expect(input.hasAttribute('disabled')).to.be.true;
-      // Check that input also has readonly attribute
-      expect(input.hasAttribute('readonly')).to.be.true;
-      // Check that the disabled property is true (takes precedence)
       expect(input.disabled).to.be.true;
+      expect(input.readOnly).to.be.false;
     });
   });
 });

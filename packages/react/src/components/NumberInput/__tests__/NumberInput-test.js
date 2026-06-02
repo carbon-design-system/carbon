@@ -2780,8 +2780,8 @@ describe('NumberInput', () => {
 
       const input = screen.getByRole('spinbutton');
       expect(input).toHaveAttribute('disabled', '');
-      expect(input).toHaveAttribute('readOnly', '');
       expect(input.disabled).toBe(true);
+      expect(input.readOnly).toBe(false);
     });
   });
 
