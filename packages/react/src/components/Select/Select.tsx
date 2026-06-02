@@ -303,7 +303,9 @@ const Select = forwardRef<HTMLSelectElement, SelectProps>(
             className={inputClasses}
             disabled={normalizedProps.disabled || undefined}
             aria-invalid={normalizedProps.invalid || undefined}
-            aria-readonly={readOnly ? true : undefined}
+            aria-readonly={
+              readOnly && !normalizedProps.disabled ? true : undefined
+            }
             title={title}
             onChange={composeEventHandlers([onChange, handleChange])}
             {...readOnlyEventHandlers}

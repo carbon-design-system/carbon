@@ -257,7 +257,7 @@ class CDSTimePicker extends ValidityMixin(FormMixin(LitElement)) {
               name="${ifNonEmpty(this.name)}"
               pattern="${ifNonEmpty(pattern)}"
               placeholder="${ifNonEmpty(placeholder)}"
-              ?readonly="${readOnly}"
+              ?readonly="${readOnly && !normalizedProps.disabled}"
               type="${ifNonEmpty(type)}"
               .value="${value}"
               @input="${handleInput}" />

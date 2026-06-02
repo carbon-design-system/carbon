@@ -1709,5 +1709,6 @@ describe('MultiSelect', () => {
     const button = screen.getByRole('combobox');
     expect(button).toHaveAttribute('disabled', '');
     expect(button.disabled).toBe(true);
+    expect(button).not.toHaveAttribute('aria-readonly');
   });
 });

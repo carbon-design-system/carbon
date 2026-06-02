@@ -2001,7 +2001,6 @@ describe('ComboBox', () => {
 
     const input = screen.getByRole('combobox');
     expect(input).toHaveAttribute('disabled', '');
-    expect(input).not.toHaveAttribute('readOnly');
     expect(input.disabled).toBe(true);
     expect(input.readOnly).toBe(false);
   });

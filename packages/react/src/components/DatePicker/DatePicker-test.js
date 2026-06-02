@@ -1020,8 +1020,8 @@ describe('Range date picker', () => {
 
     const input = screen.getByLabelText('Date Picker label');
     expect(input).toHaveAttribute('disabled', '');
-    expect(input).toHaveAttribute('readOnly', '');
     expect(input.disabled).toBe(true);
+    expect(input.readOnly).toBe(false);
   });
 
   it('should work with ISO 8601 format or others', async () => {
