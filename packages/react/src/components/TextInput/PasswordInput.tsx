@@ -251,7 +251,7 @@ const PasswordInput = forwardRef<unknown, PasswordInputProps>(
       placeholder,
       type: inputType,
       className: textInputClasses,
-      ...(readOnly ? { readOnly: true } : {}),
+      ...(readOnly && !disabled ? { readOnly: true } : {}),
       ref,
       ...rest,
     };

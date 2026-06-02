@@ -1514,7 +1514,7 @@ describe('FilterableMultiSelect', () => {
 
     const input = screen.getByRole('combobox');
     expect(input).toHaveAttribute('disabled', '');
-    expect(input).toHaveAttribute('readOnly', '');
     expect(input.disabled).toBe(true);
+    expect(input.readOnly).toBe(false);
   });
 });

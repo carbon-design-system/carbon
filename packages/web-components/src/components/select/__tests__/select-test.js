@@ -305,9 +305,9 @@ describe('cds-select', () => {
 
     const select = el.shadowRoot.querySelector('select');
 
-    // Check that select has disabled attribute
     expect(select.hasAttribute('disabled')).to.be.true;
-    // Check that the disabled property is true (takes precedence)
+    expect(select.hasAttribute('readonly')).to.be.false;
     expect(select.disabled).to.be.true;
+    expect(select.readOnly).to.be.false;
   });
 });

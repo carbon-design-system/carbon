@@ -1029,7 +1029,7 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
               }}
               pattern={pattern}
               inputMode={inputMode}
-              {...(readOnly ? { readOnly: true } : {})}
+              {...(readOnly && !disabled ? { readOnly: true } : {})}
               step={step}
               type={type}
               value={type === 'number' ? value : inputValue}

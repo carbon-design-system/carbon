@@ -732,11 +732,10 @@ describe('cds-combo-box', function () {
       const input = getInput(el);
       const listBox = getListBox(el);
 
-      // Check that input has disabled attribute
       expect(input.hasAttribute('disabled')).to.be.true;
-      // Check that the disabled property is true (takes precedence)
+      expect(input.hasAttribute('readonly')).to.be.false;
       expect(input.disabled).to.be.true;
-      // Check that listBox has disabled class
+      expect(input.readOnly).to.be.false;
       expect(listBox.classList.contains('cds--list-box--disabled')).to.be.true;
     });
   });

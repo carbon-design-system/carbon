@@ -356,8 +356,8 @@ describe('TimePicker', () => {
 
       const input = screen.getByRole('textbox');
       expect(input).toHaveAttribute('disabled', '');
-      expect(input).toHaveAttribute('readOnly', '');
       expect(input.disabled).toBe(true);
+      expect(input.readOnly).toBe(false);
     });
   });
 });

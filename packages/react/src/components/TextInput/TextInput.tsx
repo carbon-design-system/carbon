@@ -248,7 +248,7 @@ const TextInput = forwardRef<unknown, TextInputProps>(
       className: textInputClasses,
       title: placeholder,
       disabled: normalizedProps.disabled,
-      ...(readOnly ? { readOnly: true } : {}),
+      ...(readOnly && !normalizedProps.disabled ? { readOnly: true } : {}),
       ['aria-describedby']:
         hasHelperText(helperText) && !normalizedProps.invalid
           ? normalizedProps.helperId

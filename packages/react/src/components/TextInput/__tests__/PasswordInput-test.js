@@ -484,8 +484,8 @@ describe('PasswordInput', () => {
 
       const input = screen.getByLabelText('PasswordInput label');
       expect(input).toHaveAttribute('disabled', '');
-      expect(input).toHaveAttribute('readOnly', '');
       expect(input.disabled).toBe(true);
+      expect(input.readOnly).toBe(false);
     });
   });
 });

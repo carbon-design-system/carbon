@@ -528,7 +528,7 @@ class CDSTextInput extends ValidityMixin(FormMixin(LitElement)) {
               name="${ifNonEmpty(this.name)}"
               pattern="${ifNonEmpty(this.pattern)}"
               placeholder="${ifNonEmpty(this.placeholder)}"
-              ?readonly="${readonly}"
+              ?readonly="${readonly && !disabled}"
               ?required="${required}"
               type="${ifNonEmpty(type)}"
               .value="${this._value}"

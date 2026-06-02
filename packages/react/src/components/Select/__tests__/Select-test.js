@@ -590,6 +590,8 @@ describe('Select', () => {
       const select = screen.getByRole('combobox');
       expect(select).toHaveAttribute('disabled', '');
       expect(select.disabled).toBe(true);
+      // Select elements don't have native readOnly, check aria-readonly is not set when disabled
+      expect(select).not.toHaveAttribute('aria-readonly');
     });
   });
 });
