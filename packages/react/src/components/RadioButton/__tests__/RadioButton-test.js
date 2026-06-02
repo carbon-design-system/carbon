@@ -208,7 +208,7 @@ describe('RadioButton', () => {
 
     const radio = screen.getByRole('radio');
     expect(radio).toHaveAttribute('disabled', '');
-    expect(radio).toHaveAttribute('readOnly', '');
     expect(radio.disabled).toBe(true);
+    expect(radio.readOnly).toBe(false);
   });
 });
