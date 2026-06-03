@@ -8,24 +8,14 @@
 import { html } from 'lit';
 import { animate } from 'motion';
 import { durationModerate01 } from '@carbon/motion';
-import { prefix } from '../../../globals/settings';
-import { ACCORDION_SIZE } from '../accordion';
 import '../index';
 import '../../feature-flags/index';
 import '../../../../.storybook/templates/with-feature-flags';
 import styles from './accordion-motion.scss?lit';
 
-const sizes = {
-  [`Small size (${ACCORDION_SIZE.SMALL})`]: ACCORDION_SIZE.SMALL,
-  [`Medium size (${ACCORDION_SIZE.MEDIUM})`]: ACCORDION_SIZE.MEDIUM,
-  [`Large size (${ACCORDION_SIZE.LARGE})`]: ACCORDION_SIZE.LARGE,
-};
-
 const args = {
   alignment: 'end',
-  disabled: false,
-  isFlush: false,
-  size: ACCORDION_SIZE.MEDIUM,
+  animationSpeed: 1,
 };
 
 const argTypes = {
@@ -35,26 +25,9 @@ const argTypes = {
       'Specify the alignment of the accordion heading title and chevron.',
     options: ['start', 'end'],
   },
-  disabled: {
-    control: 'boolean',
-    description:
-      'Specify whether an individual AccordionItem should be disabled.',
-  },
-  isFlush: {
-    control: 'boolean',
-    description:
-      'Specify whether Accordion text should be flush, default is false, does not work with align="start".',
-  },
-  size: {
-    control: 'select',
-    description: 'Specify the size of the Accordion.',
-    options: sizes,
-  },
-  onBeforeToggle: {
-    action: `${prefix}-accordion-item-beingtoggled`,
-  },
-  onToggle: {
-    action: `${prefix}-accordion-item-toggled`,
+  animationSpeed: {
+    control: { type: 'range', min: 0.25, max: 2, step: 0.25 },
+    description: 'Adjust the transition speed multiplier.',
   },
 };
 
@@ -75,60 +48,34 @@ const productiveEntranceDurationMilliseconds = Number.parseInt(
 const productiveEntranceBezier = [0, 0, 0.38, 0.9];
 const revealDelay = 700;
 const revealOffset = 8;
-const contentOpenDelay = productiveEntranceDurationMilliseconds;
 
-const renderResearchAccordion = ({
-  alignment,
-  isFlush,
-  size,
-  disabled,
-  onBeforeToggle,
-  onToggle,
-}: {
-  alignment: string;
-  isFlush: boolean;
-  size: string;
-  disabled: boolean;
-  onBeforeToggle?: (event: Event) => void;
-  onToggle?: (event: Event) => void;
-}) => {
+const getAnimationSpeed = (speed: number) => {
+  const value = Number(speed);
+  return Number.isFinite(value) && value > 0 ? value : 1;
+};
+
+const renderResearchAccordion = ({ alignment }: { alignment: string }) => {
   return html`
-    <cds-accordion
-      alignment="${alignment}"
-      size="${size}"
-      ?isFlush="${isFlush}"
-      ?disabled="${disabled}">
-      <cds-accordion-item
-        title="Choose your plan"
-        @cds-accordion-item-beingtoggled="${onBeforeToggle}"
-        @cds-accordion-item-toggled="${onToggle}">
+    <cds-accordion alignment="${alignment}">
+      <cds-accordion-item title="Choose your plan">
         <p>
           Compare plan features and select the option that best matches your
           team's expected usage.
         </p>
       </cds-accordion-item>
-      <cds-accordion-item
-        title="Add team members"
-        @cds-accordion-item-beingtoggled="${onBeforeToggle}"
-        @cds-accordion-item-toggled="${onToggle}">
+      <cds-accordion-item title="Add team members">
         <p>
           Invite collaborators by email and assign their workspace roles before
           launch.
         </p>
       </cds-accordion-item>
-      <cds-accordion-item
-        title="Set payment details"
-        @cds-accordion-item-beingtoggled="${onBeforeToggle}"
-        @cds-accordion-item-toggled="${onToggle}">
+      <cds-accordion-item title="Set payment details">
         <p>
           Add billing information and choose whether to receive invoices by
           email.
         </p>
       </cds-accordion-item>
-      <cds-accordion-item
-        title="Review and confirm"
-        @cds-accordion-item-beingtoggled="${onBeforeToggle}"
-        @cds-accordion-item-toggled="${onToggle}">
+      <cds-accordion-item title="Review and confirm">
         <p>
           Check your setup summary, then confirm to create the workspace for
           your team.
@@ -244,7 +191,11 @@ const openFirstAccordionItem = (root: ResearchRoot, runId: number) => {
   firstItem.setAttribute('open', '');
 };
 
-const runNativeReveal = (root: ResearchRoot, runId: number) => {
+const runNativeReveal = (
+  root: ResearchRoot,
+  runId: number,
+  animationSpeed: number
+) => {
   const skeletonPanel = root.querySelector<HTMLElement>(
     '[data-skeleton-panel]'
   );
@@ -264,6 +215,8 @@ const runNativeReveal = (root: ResearchRoot, runId: number) => {
     openFirstAccordionItem(root, runId);
     return;
   }
+
+  const duration = productiveEntranceDurationMilliseconds / animationSpeed;
 
   skeletonPanel.hidden = false;
   accordionPanel.hidden = false;
@@ -286,15 +239,19 @@ const runNativeReveal = (root: ResearchRoot, runId: number) => {
     }
     skeletonPanel.hidden = true;
     root.__settleTimer = undefined;
-  }, productiveEntranceDurationMilliseconds);
+  }, duration);
 
   root.__openTimer = window.setTimeout(() => {
     openFirstAccordionItem(root, runId);
     root.__openTimer = undefined;
-  }, contentOpenDelay);
+  }, duration);
 };
 
-const runMotionReveal = (root: ResearchRoot, runId: number) => {
+const runMotionReveal = (
+  root: ResearchRoot,
+  runId: number,
+  animationSpeed: number
+) => {
   const skeletonPanel = root.querySelector<HTMLElement>(
     '[data-skeleton-panel]'
   );
@@ -322,6 +279,10 @@ const runMotionReveal = (root: ResearchRoot, runId: number) => {
   accordionPanel.classList.remove('is-active');
   accordionPanel.classList.add('is-hidden');
 
+  const durationSeconds = productiveEntranceDurationSeconds / animationSpeed;
+  const durationMilliseconds =
+    productiveEntranceDurationMilliseconds / animationSpeed;
+
   const exitAnimation = animate(
     skeletonPanel,
     {
@@ -329,7 +290,7 @@ const runMotionReveal = (root: ResearchRoot, runId: number) => {
       transform: ['translateY(0px)', `translateY(-${revealOffset}px)`],
     },
     {
-      duration: productiveEntranceDurationSeconds,
+      duration: durationSeconds,
       ease: productiveEntranceBezier,
     }
   );
@@ -356,7 +317,7 @@ const runMotionReveal = (root: ResearchRoot, runId: number) => {
         transform: [`translateY(${revealOffset}px)`, 'translateY(0px)'],
       },
       {
-        duration: productiveEntranceDurationSeconds,
+        duration: durationSeconds,
         ease: productiveEntranceBezier,
       }
     );
@@ -365,11 +326,15 @@ const runMotionReveal = (root: ResearchRoot, runId: number) => {
     root.__openTimer = window.setTimeout(() => {
       openFirstAccordionItem(root, runId);
       root.__openTimer = undefined;
-    }, contentOpenDelay);
+    }, durationMilliseconds);
   });
 };
 
-const replayResearchDemo = (event: Event, strategy: 'motion' | 'native') => {
+const replayResearchDemo = (
+  event: Event,
+  strategy: 'motion' | 'native',
+  animationSpeed = 1
+) => {
   const root = getResearchRoot(event);
   if (!root) {
     return;
@@ -389,67 +354,61 @@ const replayResearchDemo = (event: Event, strategy: 'motion' | 'native') => {
       return;
     }
     if (strategy === 'motion') {
-      runMotionReveal(root, runId);
+      runMotionReveal(root, runId, animationSpeed);
     } else {
-      runNativeReveal(root, runId);
+      runNativeReveal(root, runId, animationSpeed);
     }
     root.__accordionTimer = undefined;
   }, revealDelay);
 };
 
-const replayMotionDemo = (event: Event) => replayResearchDemo(event, 'motion');
-const replayNativeCssDemo = (event: Event) =>
-  replayResearchDemo(event, 'native');
-
 const renderResearchDemo = ({
   alignment,
-  isFlush,
-  size,
-  disabled,
-  onBeforeToggle,
-  onToggle,
+  animationSpeed,
+  strategy,
 }: {
   alignment: string;
-  isFlush: boolean;
-  size: string;
-  disabled: boolean;
-  onBeforeToggle?: (event: Event) => void;
-  onToggle?: (event: Event) => void;
-}) => html`
-  <feature-flags enable-accordion-motion>
-    <style>
-      ${styles}
-    </style>
-    <div class="accordion-research-demo" data-accordion-research-root>
-      <cds-button-set class="accordion-research-controls">
-        <cds-button kind="secondary" @click="${replayMotionDemo}">
-          Replay transition
-        </cds-button>
-      </cds-button-set>
-      <div class="accordion-research-stage">
-        <div class="accordion-native-panel is-active" data-skeleton-panel>
-          <cds-accordion-skeleton
-            alignment="${alignment}"
-            open
-            ?isFlush="${isFlush}"></cds-accordion-skeleton>
-        </div>
-        <div
-          class="accordion-native-panel is-hidden"
-          data-accordion-panel
-          hidden>
-          ${renderResearchAccordion({
-            alignment,
-            isFlush,
-            size,
-            disabled,
-            onBeforeToggle,
-            onToggle,
-          })}
+  animationSpeed: number;
+  strategy: 'motion' | 'native';
+}) => {
+  const speed = getAnimationSpeed(animationSpeed);
+  const duration = productiveEntranceDurationMilliseconds / speed;
+
+  return html`
+    <feature-flags enable-accordion-motion>
+      <style>
+        ${styles} .accordion-native-panel {
+          transition-duration: ${duration}ms;
+        }
+      </style>
+      <div class="accordion-research-demo" data-accordion-research-root>
+        <cds-button-set class="accordion-research-controls">
+          <cds-button
+            kind="secondary"
+            @click="${(event: Event) =>
+              replayResearchDemo(event, strategy, speed)}">
+            Play transition
+          </cds-button>
+        </cds-button-set>
+        <div class="accordion-research-stage">
+          <div class="accordion-native-panel is-active" data-skeleton-panel>
+            <cds-accordion-skeleton
+              alignment="${alignment}"
+              open></cds-accordion-skeleton>
+          </div>
+          <div
+            class="accordion-native-panel is-hidden"
+            data-accordion-panel
+            hidden>
+            ${renderResearchAccordion({
+              alignment,
+            })}
+          </div>
         </div>
       </div>
-    </div>
-  </feature-flags>
-`;
+    </feature-flags>
+  `;
+};
 
 export const MotionLibrary = {
   args,
@@ -457,26 +416,16 @@ export const MotionLibrary = {
   tags: ['!autodocs'],
   parameters: {
     controls: {
-      include: ['alignment'],
+      include: ['alignment', 'animationSpeed'],
     },
   },
-  render: ({
-    alignment,
-    isFlush,
-    size,
-    disabled,
-    onBeforeToggle,
-    onToggle,
-  }) => {
+  render: ({ alignment, animationSpeed }) => {
     return html`
       <sb-template-feature-flags>
         ${renderResearchDemo({
           alignment,
-          isFlush,
-          size,
-          disabled,
-          onBeforeToggle,
-          onToggle,
+          animationSpeed,
+          strategy: 'motion',
         })}
       </sb-template-feature-flags>
     `;
@@ -489,52 +438,17 @@ export const NativeCSS = {
   tags: ['!autodocs'],
   parameters: {
     controls: {
-      include: ['alignment'],
+      include: ['alignment', 'animationSpeed'],
     },
   },
-  render: ({
-    alignment,
-    isFlush,
-    size,
-    disabled,
-    onBeforeToggle,
-    onToggle,
-  }) => {
+  render: ({ alignment, animationSpeed }) => {
     return html`
       <sb-template-feature-flags>
-        <feature-flags enable-accordion-motion>
-          <style>
-            ${styles}
-          </style>
-          <div class="accordion-research-demo" data-accordion-research-root>
-            <cds-button-set class="accordion-research-controls">
-              <cds-button kind="secondary" @click="${replayNativeCssDemo}">
-                Replay transition
-              </cds-button>
-            </cds-button-set>
-            <div class="accordion-research-stage">
-              <div class="accordion-native-panel is-active" data-skeleton-panel>
-                <cds-accordion-skeleton
-                  alignment="${alignment}"
-                  open
-                  ?isFlush="${isFlush}"></cds-accordion-skeleton>
-              </div>
-              <div
-                class="accordion-native-panel is-hidden"
-                data-accordion-panel
-                hidden>
-                ${renderResearchAccordion({
-                  alignment,
-                  isFlush,
-                  size,
-                  disabled,
-                  onBeforeToggle,
-                  onToggle,
-                })}
-              </div>
-            </div>
-          </div>
-        </feature-flags>
+        ${renderResearchDemo({
+          alignment,
+          animationSpeed,
+          strategy: 'native',
+        })}
       </sb-template-feature-flags>
     `;
   },

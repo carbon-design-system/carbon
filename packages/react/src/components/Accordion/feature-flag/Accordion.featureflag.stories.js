@@ -7,7 +7,6 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { action } from 'storybook/actions';
 import { useReducedMotion } from 'motion/react';
 import { animate } from 'motion';
 import { durationModerate01, motion as carbonMotion } from '@carbon/motion';
@@ -23,49 +22,15 @@ const sharedArgTypes = {
     options: ['start', 'end'],
     control: { type: 'select' },
   },
-  children: {
-    control: false,
-  },
-  className: {
-    control: false,
-  },
-  disabled: {
-    control: {
-      type: 'boolean',
-    },
-  },
-  ordered: {
-    control: {
-      type: 'boolean',
-    },
-  },
-  isFlush: {
-    control: {
-      type: 'boolean',
-    },
-  },
-  size: {
-    options: ['sm', 'md', 'lg'],
-    control: { type: 'select' },
-  },
-  onHeadingClick: {
-    action: 'onHeadingClick',
-    control: false,
+  animationSpeed: {
+    control: { type: 'range', min: 0.25, max: 2, step: 0.25 },
+    description: 'Adjust the transition speed multiplier.',
   },
 };
 
 const sharedArgs = {
   align: 'end',
-  disabled: false,
-  isFlush: false,
-  ordered: false,
-  size: 'md',
-  onHeadingClick: ({ isOpen, event }) => {
-    action('onHeadingClick')({
-      isOpen,
-      type: event.type,
-    });
-  },
+  animationSpeed: 1,
 };
 
 const toSeconds = (durationValue) => Number.parseInt(durationValue, 10) / 1000;
@@ -74,28 +39,32 @@ const productiveEntranceBezier = [0, 0, 0.38, 0.9];
 const productiveEntranceEasing = carbonMotion('entrance', 'productive');
 const revealDelay = 700;
 const revealOffset = 8;
-const contentOpenDelay = toMilliseconds(durationModerate01);
 
-const baseAccordionItems = (onHeadingClick) => (
+const getAnimationSpeed = (speed) => {
+  const value = Number(speed);
+  return Number.isFinite(value) && value > 0 ? value : 1;
+};
+
+const baseAccordionItems = (
   <>
-    <AccordionItem title="Choose your plan" onHeadingClick={onHeadingClick}>
+    <AccordionItem title="Choose your plan">
       <p>
         Compare plan features and select the option that best matches your
         team&apos;s expected usage.
       </p>
     </AccordionItem>
-    <AccordionItem title="Add team members" onHeadingClick={onHeadingClick}>
+    <AccordionItem title="Add team members">
       <p>
         Invite collaborators by email and assign their workspace roles before
         launch.
       </p>
     </AccordionItem>
-    <AccordionItem title="Set payment details" onHeadingClick={onHeadingClick}>
+    <AccordionItem title="Set payment details">
       <p>
         Add billing information and choose whether to receive invoices by email.
       </p>
     </AccordionItem>
-    <AccordionItem title="Review and confirm" onHeadingClick={onHeadingClick}>
+    <AccordionItem title="Review and confirm">
       <p>
         Check your setup summary, then confirm to create the workspace for your
         team.
@@ -114,10 +83,13 @@ const ResearchDemo = ({ args, strategy }) => {
   const skeletonPanelRef = React.useRef(null);
   const accordionPanelRef = React.useRef(null);
   const prefersReducedMotion = useReducedMotion();
+  const animationSpeed = getAnimationSpeed(args.animationSpeed);
   const motionDuration = prefersReducedMotion
     ? 0
-    : toSeconds(durationModerate01);
-  const motionDurationMs = toMilliseconds(durationModerate01);
+    : toSeconds(durationModerate01) / animationSpeed;
+  const motionDurationMs = prefersReducedMotion
+    ? 0
+    : toMilliseconds(durationModerate01) / animationSpeed;
 
   const clearTimers = React.useCallback(() => {
     if (timeoutRef.current) {
@@ -257,7 +229,7 @@ const ResearchDemo = ({ args, strategy }) => {
       openRef.current = window.setTimeout(() => {
         openFirstAccordionItem(runId);
         openRef.current = null;
-      }, contentOpenDelay);
+      }, motionDurationMs);
     },
     [
       motionDurationMs,
@@ -329,11 +301,12 @@ const ResearchDemo = ({ args, strategy }) => {
         openRef.current = window.setTimeout(() => {
           openFirstAccordionItem(runId);
           openRef.current = null;
-        }, contentOpenDelay);
+        }, motionDurationMs);
       });
     },
     [
       motionDuration,
+      motionDurationMs,
       openFirstAccordionItem,
       prefersReducedMotion,
       showContentOnly,
@@ -379,7 +352,7 @@ const ResearchDemo = ({ args, strategy }) => {
     };
   }, [clearAnimations, clearTimers, showSkeletonOnly]);
 
-  const { onHeadingClick, ...restArgs } = args;
+  const { align } = args;
 
   if (!enableAccordionMotion) {
     return (
@@ -394,14 +367,14 @@ const ResearchDemo = ({ args, strategy }) => {
     <div className="accordion-research-demo">
       <ButtonSet className="accordion-research-controls">
         <Button kind="secondary" onClick={replay}>
-          Replay transition
+          Play transition
         </Button>
       </ButtonSet>
 
       <div
         className="accordion-research-stage"
         style={{
-          '--accordion-research-duration': durationModerate01,
+          '--accordion-research-duration': `${motionDurationMs}ms`,
           '--accordion-research-easing': productiveEntranceEasing,
         }}>
         <div className="accordion-native-demo">
@@ -409,15 +382,15 @@ const ResearchDemo = ({ args, strategy }) => {
             ref={skeletonPanelRef}
             className="accordion-native-panel is-active"
             data-skeleton-panel>
-            <AccordionSkeleton open count={4} align={restArgs.align} />
+            <AccordionSkeleton open count={4} align={align} />
           </div>
           <div
             ref={accordionPanelRef}
             className="accordion-native-panel is-hidden"
             data-accordion-panel
             hidden>
-            <Accordion {...restArgs}>
-              {baseAccordionItems(onHeadingClick)}
+            <Accordion align={align} size="md">
+              {baseAccordionItems}
             </Accordion>
           </div>
         </div>
@@ -428,7 +401,8 @@ const ResearchDemo = ({ args, strategy }) => {
 
 ResearchDemo.propTypes = {
   args: PropTypes.shape({
-    onHeadingClick: PropTypes.func,
+    align: PropTypes.oneOf(['start', 'end']),
+    animationSpeed: PropTypes.number,
   }).isRequired,
   strategy: PropTypes.oneOf(['motion', 'native']).isRequired,
 };
@@ -457,7 +431,7 @@ MotionLibrary.args = { ...sharedArgs };
 MotionLibrary.argTypes = { ...sharedArgTypes };
 MotionLibrary.parameters = {
   controls: {
-    include: ['align'],
+    include: ['align', 'animationSpeed'],
   },
 };
 
@@ -470,6 +444,6 @@ NativeCSS.args = { ...sharedArgs };
 NativeCSS.argTypes = { ...sharedArgTypes };
 NativeCSS.parameters = {
   controls: {
-    include: ['align'],
+    include: ['align', 'animationSpeed'],
   },
 };

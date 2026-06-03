@@ -143,10 +143,11 @@ Stories:
 ### What these demos simulate
 
 1. Skeleton-to-content transition for accordion data loading states.
-2. Replayable transition flow for side-by-side implementation comparison.
-3. Reduced-motion-aware behavior in runtime path.
-4. Carbon-consistent component composition and naming.
-5. Feature-flag scoping via `enable-accordion-motion` in both frameworks.
+2. Playable transition flow for side-by-side implementation comparison.
+3. Adjustable transition speed for closer inspection.
+4. Reduced-motion-aware behavior in runtime path.
+5. Carbon-consistent component composition and naming.
+6. Feature-flag scoping via `enable-accordion-motion` in both frameworks.
 
 ## Production Risks Identified
 

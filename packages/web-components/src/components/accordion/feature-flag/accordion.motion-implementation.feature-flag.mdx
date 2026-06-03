@@ -31,8 +31,9 @@ In React, the logic is implemented in
 In Web Components, it is implemented in
 `packages/web-components/src/components/accordion/feature-flag/accordion.feature-flag.stories.ts`.
 
-Both versions support replay, both reset to a clean initial state before each
-run, and both provide reduced-motion handling.
+Both versions support a `Play transition` button, both reset to a clean initial
+state before each run, both expose an `animationSpeed` control for slowing down
+or speeding up the transition, and both provide reduced-motion handling.
 
 ## Motion Library implementation
 
@@ -49,11 +50,12 @@ React imports:
 Web Components imports:
 
 - `animate` from `motion`
-- `durationModerate01` and `motion` from `@carbon/motion`
+- `durationModerate01` from `@carbon/motion`
 
 In both implementations, the key transition uses:
 
-- `duration` derived from `durationModerate01`
+- `duration` derived from `durationModerate01`, scaled by the `animationSpeed`
+  control
 - `ease` set to the productive entrance curve `[0, 0, 0.38, 0.9]`
 
 This matches Carbon productive motion intent for fast, clear UI transitions.
@@ -69,10 +71,11 @@ transitions for the same properties (`opacity`, `transform`).
 
 React styles live in: `packages/react/src/components/Accordion/story.scss`
 
-Web Components styles are defined inline in the feature-flag story file:
-`packages/web-components/src/components/accordion/feature-flag/accordion.feature-flag.stories.ts`
+Web Components styles live in:
+`packages/web-components/src/components/accordion/feature-flag/accordion-motion.scss`,
+with the selected `animationSpeed` applied from the feature-flag story file.
 
-Both versions use Carbon values for duration and easing:
+Both versions use Carbon values for default duration and easing:
 
 - duration from `durationModerate01`
 - easing from `motion('entrance', 'productive')`
@@ -120,7 +123,7 @@ This implementation is aligned with Carbon patterns in key areas:
 
 ## Safety and structure notes
 
-This spike has defensive behavior for replay:
+This spike has defensive behavior for repeated plays:
 
 - timers are cleared before each run
 - previous animations are cancelled before each run
