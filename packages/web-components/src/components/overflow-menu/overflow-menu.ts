@@ -274,7 +274,9 @@ class CDSOverflowMenu
       this.setAttribute('aria-haspopup', 'true');
     }
     if (!this.shadowRoot) {
-      this.attachShadow({ mode: 'open' });
+      this.attachShadow(
+        (this.constructor as typeof CDSOverflowMenu).shadowRootOptions
+      );
     }
     super.connectedCallback();
 
@@ -417,16 +419,16 @@ class CDSOverflowMenu
   }
 
   /**
-   * Focuses the trigger button when focus is set on the host element.
+   * Delegates programmatic host clicks to the trigger button.
    */
-  focus() {
+  click() {
     const triggerButton = this._getTriggerButton();
     if (triggerButton) {
-      triggerButton.focus();
+      triggerButton.click();
       return;
     }
 
-    super.focus();
+    super.click();
   }
 
   private _getLabelText() {
@@ -705,6 +707,10 @@ class CDSOverflowMenu
       tooltip.open = false;
     }
   }
+
+  static shadowRootOptions = {
+    ...CDSIconButton.shadowRootOptions,
+  };
 }
 
 export default CDSOverflowMenu;
