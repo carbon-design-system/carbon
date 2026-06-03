@@ -1931,6 +1931,7 @@ categories:
           - container-image--push
           - container-image--push-pull
           - container-services
+          - coupling-facility
           - coupling-facility-encryption
           - data--center
           - data-accessor
@@ -2127,6 +2128,7 @@ categories:
           - z--lpar
           - z--systems
           - zos
+          - zos--partition
           - zos--sysplex
   - name: Person
     subcategories:
@@ -2157,6 +2159,7 @@ categories:
           - credentials
           - customer
           - customer-service
+          - customer-service--filled
           - dog-walker
           - education
           - events

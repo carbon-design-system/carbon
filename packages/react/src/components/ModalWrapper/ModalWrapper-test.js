@@ -6,7 +6,7 @@
  */
 
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import ModalWrapper from '../ModalWrapper';
 
@@ -208,6 +208,7 @@ describe('ModalWrapper', () => {
         modalHeading="Modal heading"
         modalLabel="Label"
         handleSubmit={handleSubmit}
+        shouldCloseAfterSubmit
         open>
         <p>Modal content here</p>
       </ModalWrapper>
@@ -215,11 +216,11 @@ describe('ModalWrapper', () => {
 
     const triggerBtn = screen.getByText('Launch modal');
     const submitBtn = screen.getByText('Save');
-    await userEvent.click(submitBtn);
 
+    await userEvent.click(triggerBtn);
+    expect(submitBtn).toHaveFocus();
+    await userEvent.click(submitBtn);
+    expect(triggerBtn).toHaveFocus();
     expect(handleSubmit).toHaveBeenCalled();
-    setTimeout(() => {
-      expect(triggerBtn).toHaveFocus();
-    }, 0);
   });
 });

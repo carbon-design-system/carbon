@@ -6323,10 +6323,28 @@
     - coughing
   sizes:
     - 32
+- name: coupling-facility
+  friendly_name: Coupling Facility
+  aliases:
+    - coupling facility
+    - coupling
+    - facility
+    - clustering
+    - connection
+    - triangle
+  sizes:
+    - 32
 - name: coupling-facility-encryption
   friendly_name: Coupling Facility Encryption
   aliases:
     - coupling facility encryption
+    - coupling
+    - facility
+    - encryption
+    - clustering
+    - connection
+    - triangle
+    - lock
     - IBM Z Batch Network Analyzer
     - z/OS
   sizes:
@@ -6667,6 +6685,19 @@
     - 32
 - name: customer-service
   friendly_name: Customer service
+  aliases:
+    - customer
+    - inquiry
+    - phone
+    - support
+    - chat
+    - client
+    - person
+    - headset
+  sizes:
+    - 32
+- name: customer-service--filled
+  friendly_name: Customer service filled
   aliases:
     - customer
     - inquiry
@@ -28284,6 +28315,17 @@
     - secure
     - scalable
     - operating system
+  sizes:
+    - 32
+- name: zos--partition
+  friendly_name: z/OS® partition
+  aliases:
+    - z/OS
+    - systems
+    - partition
+    - virtual machine
+    - LPAR
+    - z/OS LPAR
   sizes:
     - 32
 - name: zos--sysplex
