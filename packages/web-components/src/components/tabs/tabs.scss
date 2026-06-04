@@ -382,7 +382,9 @@ $inset-transition: inset 110ms motion(standard, productive);
   }
 }
 
-:host(#{$prefix}-tab:hover:not([selected]):not([vertical])) {
+:host(
+    #{$prefix}-tab:not([type='contained']):hover:not([selected]):not([vertical])
+  ) {
   background-color: transparent;
 
   a.#{$prefix}--tabs__nav-link {
