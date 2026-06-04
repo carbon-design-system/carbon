@@ -11,6 +11,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { usePrefix } from '../../internal/usePrefix';
 import OverflowMenu, { OverflowMenuProps } from '../OverflowMenu';
+import { useTableToolbar } from './TableToolbar';
 
 const defaultIconDescription = 'Settings';
 
@@ -22,8 +23,11 @@ const TableToolbarMenu = ({
   iconDescription = defaultIconDescription,
   children,
   menuOptionsClass,
+  size: sizeProp,
   ...rest
 }: TableToolbarMenuProps) => {
+  const toolbarContext = useTableToolbar();
+  const size = sizeProp ?? toolbarContext.size;
   const prefix = usePrefix();
   const toolbarActionClasses = cx(
     className,
@@ -39,6 +43,7 @@ const TableToolbarMenu = ({
       className={toolbarActionClasses}
       iconDescription={iconDescription}
       menuOptionsClass={menuOptionsClasses}
+      size={size}
       flipped
       {...rest}>
       {children}
@@ -68,6 +73,11 @@ TableToolbarMenu.propTypes = {
    * A component used to render an icon.
    */
   renderIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
+
+  /**
+   * Specify the size of the ToolbarMenu.
+   */
+  size: PropTypes.oneOf(['xs', 'sm', 'md', 'lg']),
 };
 
 export default TableToolbarMenu;
