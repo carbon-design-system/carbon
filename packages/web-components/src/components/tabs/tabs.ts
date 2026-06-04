@@ -19,6 +19,7 @@ import CDSContentSwitcher, {
   NAVIGATION_DIRECTION,
 } from '../content-switcher/content-switcher';
 import {
+  VERTICAL_NAVIGATION_DIRECTION,
   TABS_ICON_SIZE,
   TABS_KEYBOARD_ACTION,
   TABS_TYPE,
@@ -30,6 +31,7 @@ import { carbonElement as customElement } from '../../globals/decorators/carbon-
 
 export {
   NAVIGATION_DIRECTION,
+  VERTICAL_NAVIGATION_DIRECTION,
   TABS_ICON_SIZE,
   TABS_KEYBOARD_ACTION,
   TABS_TYPE,
@@ -188,8 +190,12 @@ export default class CDSTabs extends HostListenerMixin(CDSContentSwitcher) {
   @HostListener('keydown')
   protected _handleKeydown(event: KeyboardEvent) {
     const { key } = event;
-    const action = (this.constructor as typeof CDSTabs).getAction(key);
-    const enabledTabs = this.querySelectorAll(`${prefix}-tab:not([disabled])`);
+    const { selectorItemEnabled } = this.constructor as typeof CDSTabs;
+    const action = (this.constructor as typeof CDSTabs).getAction(
+      key,
+      this.vertical
+    );
+    const enabledTabs = this.querySelectorAll(selectorItemEnabled);
     switch (action) {
       case TABS_KEYBOARD_ACTION.HOME:
         {
@@ -227,7 +233,11 @@ export default class CDSTabs extends HostListenerMixin(CDSContentSwitcher) {
         break;
       case TABS_KEYBOARD_ACTION.NAVIGATING:
         {
-          const direction = NAVIGATION_DIRECTION[key];
+          event.preventDefault();
+          // Get direction based on orientation
+          const direction = this.vertical
+            ? VERTICAL_NAVIGATION_DIRECTION[key]
+            : NAVIGATION_DIRECTION[key];
           if (direction) {
             this._navigate(direction);
           }
@@ -369,9 +379,25 @@ export default class CDSTabs extends HostListenerMixin(CDSContentSwitcher) {
       (nextItem as CDSTab).hideDivider = true;
     }
 
+    // Set vertical attribute on all tabs if this tabs component is vertical
+    this._updateTabsVerticalAttribute();
     this._syncSecondaryLabels();
     this._updateTabsState();
     this._syncSizeToTabs();
+  }
+
+  /**
+   * Updates the vertical attribute on all child tabs based on the vertical property.
+   */
+  private _updateTabsVerticalAttribute() {
+    const { selectorItem } = this.constructor as typeof CDSTabs;
+    forEach(this.querySelectorAll(selectorItem), (tab) => {
+      if (this.vertical) {
+        (tab as CDSTab).setAttribute('vertical', '');
+      } else {
+        (tab as CDSTab).removeAttribute('vertical');
+      }
+    });
   }
 
   protected _selectionDidChange(
@@ -439,6 +465,12 @@ export default class CDSTabs extends HostListenerMixin(CDSContentSwitcher) {
   @property({ reflect: true })
   type = TABS_TYPE.REGULAR;
 
+  /**
+   * `true` if the tabs are in vertical orientation.
+   * This is automatically set by `cds-tabs-vertical`.
+   */
+  @property({ type: Boolean })
+  vertical = false;
   /**
    * Whether the rendered Tab children should be dismissable.
    */
@@ -581,6 +613,10 @@ export default class CDSTabs extends HostListenerMixin(CDSContentSwitcher) {
     super.updated?.(changedProperties);
     if (changedProperties.has('size') || changedProperties.has('type')) {
       this._syncSizeToTabs();
+    }
+
+    if (changedProperties.has('vertical')) {
+      this._updateTabsVerticalAttribute();
     }
 
     if (changedProperties.has('value')) {
@@ -802,16 +838,21 @@ export default class CDSTabs extends HostListenerMixin(CDSContentSwitcher) {
 
   /**
    * @param key The key symbol.
-   * @returns A action for dropdown for the given key symbol.
+   * @param isVertical Whether the tabs are in vertical orientation.
+   * @returns A action for tabs for the given key symbol.
    */
-  static getAction(key: string) {
+  static getAction(key: string, isVertical = false) {
     if (key === 'Home') {
       return TABS_KEYBOARD_ACTION.HOME;
     }
     if (key === 'End') {
       return TABS_KEYBOARD_ACTION.END;
     }
-    if (key in NAVIGATION_DIRECTION) {
+    // Check for navigation keys based on orientation
+    const navigationKeys = isVertical
+      ? VERTICAL_NAVIGATION_DIRECTION
+      : NAVIGATION_DIRECTION;
+    if (key in navigationKeys) {
       return TABS_KEYBOARD_ACTION.NAVIGATING;
     }
     if (key === 'Enter' || key === ' ') {

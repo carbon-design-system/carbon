@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2019, 2025
+ * Copyright IBM Corp. 2019, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -131,8 +131,7 @@ class CDSTableBatchActions extends LitElement {
       (this.constructor as typeof CDSTableBatchActions).selectorButtons
     ).forEach((button) => {
       button.setAttribute('batch-action', '');
-      const buttonSize = this.size === 'xs' || this.size === 'sm' ? 'sm' : 'lg';
-      button.setAttribute('size', buttonSize);
+      button.setAttribute('size', this.size);
     });
   }
 
@@ -145,8 +144,6 @@ class CDSTableBatchActions extends LitElement {
       _handleSelectAll: handleSelectAll,
       size,
     } = this;
-
-    const buttonSize = size === 'xs' || size === 'sm' ? 'sm' : 'lg';
 
     return html`
       <div class="${prefix}--batch-summary">
@@ -171,7 +168,7 @@ class CDSTableBatchActions extends LitElement {
         <slot></slot>
         <cds-button
           kind="primary"
-          size="${buttonSize}"
+          size="${size}"
           class="${prefix}--batch-summary__cancel"
           batch-action
           @click=${handleCancel}>
