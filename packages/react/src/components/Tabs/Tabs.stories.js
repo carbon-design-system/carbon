@@ -727,9 +727,10 @@ export const ContainedFullWidth = (args) => {
 };
 
 export const Vertical = (args) => {
+  const { size, ...tabsVerticalArgs } = args;
   return (
-    <TabsVertical>
-      <TabListVertical size={args.size}>
+    <TabsVertical {...tabsVerticalArgs}>
+      <TabListVertical size={size}>
         <Tab>Dashboard</Tab>
         <Tab>
           Extra long label that will go two lines then truncate when it goes
