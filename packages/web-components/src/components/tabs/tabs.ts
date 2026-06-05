@@ -87,7 +87,8 @@ export default class CDSTabs extends HostListenerMixin(CDSContentSwitcher) {
    * Propagates the layout size token to the host and all child tabs.
    */
   private _syncSizeToTabs() {
-    if (this.type === TABS_TYPE.CONTAINED) {
+    // Apply layout tokens for both contained and vertical tabs
+    if (this.type === TABS_TYPE.CONTAINED || this.vertical) {
       const size = this.getAttribute('size');
       if (size) {
         const value = `var(--${prefix}-layout-size-height-${size})`;
@@ -481,7 +482,8 @@ export default class CDSTabs extends HostListenerMixin(CDSContentSwitcher) {
    * Specify the size of contained tabs.
    */
   @property({ reflect: true })
-  size?: TABS_SIZE;
+  // @ts-expect-error - TABS_SIZE extends CONTENT_SWITCHER_SIZE with additional 'md' value
+  declare size: TABS_SIZE;
 
   /**
    * Specify the icon size used by icon-only tabs.

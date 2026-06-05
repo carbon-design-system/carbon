@@ -647,6 +647,9 @@ $inset-transition: inset 110ms motion(standard, productive);
 // Internal styles for cds-tabs when inside cds-tabs-vertical
 // These are applied via a CSS custom property / attribute set by the wrapper
 :host(#{$prefix}-tabs[vertical]) {
+  // Default line-clamp for vertical tabs
+  --#{$prefix}-tabs-vertical-line-clamp: 2;
+
   .#{$prefix}--tabs-nav-content-container {
     block-size: 100%;
     overflow-x: hidden;
@@ -682,10 +685,21 @@ $inset-transition: inset 110ms motion(standard, productive);
   }
 }
 
+// Size-specific line-clamp overrides for vertical tabs
+:host(#{$prefix}-tabs[size='sm'][vertical]) {
+  --#{$prefix}-tabs-vertical-line-clamp: 1;
+}
+
+:host(#{$prefix}-tabs[size='md'][vertical]),
+:host(#{$prefix}-tabs[size='lg'][vertical]),
+:host(#{$prefix}-tabs[size='xl'][vertical]) {
+  --#{$prefix}-tabs-vertical-line-clamp: 2;
+}
+
 :host(#{$prefix}-tab[vertical]) {
   flex: none;
   background-color: $layer-01;
-  block-size: $spacing-10;
+  block-size: var(--#{$prefix}-layout-size-height, $spacing-10);
   border-inline-end: 1px solid $border-subtle;
   box-shadow: inset 3px 0 0 0 $border-subtle;
   inline-size: 100%;
@@ -694,7 +708,7 @@ $inset-transition: inset 110ms motion(standard, productive);
     display: -webkit-box;
     overflow: hidden;
     -webkit-box-orient: vertical;
-    -webkit-line-clamp: 2;
+    -webkit-line-clamp: var(--#{$prefix}-tabs-vertical-line-clamp);
     line-height: var(--cds-body-compact-01-line-height);
     text-overflow: ellipsis;
     white-space: normal;
