@@ -24032,8 +24032,8 @@ __metadata:
   linkType: hard
 
 "vite@npm:^8.0.0":
-  version: 8.0.15
-  resolution: "vite@npm:8.0.15"
+  version: 8.0.16
+  resolution: "vite@npm:8.0.16"
   dependencies:
     fsevents: "npm:~2.3.3"
     lightningcss: "npm:^1.32.0"
@@ -24084,7 +24084,7 @@ __metadata:
       optional: true
   bin:
     vite: bin/vite.js
-  checksum: 10/b130eb541caa794b81c1e584892e45e73f0e472871c010dd23cc376874e645e90267bcc9c6f73b5cd894594e4ba494a6e70c40c1e5ad9568a28834d416bf6b11
+  checksum: 10/a5d91d26f6110672a292a06ca161af9a58279fe9d27106c8c0afb725a942b0b47091c440c3b1e7ebc8e0fe901f64ac6a2ffee3cdae2f899339686dbecd0c0266
   languageName: node
   linkType: hard
 
