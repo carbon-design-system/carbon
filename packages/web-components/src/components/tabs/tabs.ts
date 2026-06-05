@@ -87,7 +87,6 @@ export default class CDSTabs extends HostListenerMixin(CDSContentSwitcher) {
    * Propagates the layout size token to the host and all child tabs.
    */
   private _syncSizeToTabs() {
-    // Apply layout tokens for both contained and vertical tabs
     if (this.type === TABS_TYPE.CONTAINED || this.vertical) {
       const size = this.getAttribute('size');
       if (size) {
