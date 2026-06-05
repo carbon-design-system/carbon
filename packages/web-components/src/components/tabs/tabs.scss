@@ -100,7 +100,7 @@ $inset-transition: inset 110ms motion(standard, productive);
 :host(#{$prefix}-tabs.#{$prefix}--tabs__icon--default)
   .#{$prefix}--tabs-nav-content-container {
   overflow: visible;
-  block-size: $spacing-08;
+  block-size: layout.size('height');
 }
 
 :host(#{$prefix}-tabs[icon-size='lg']) .#{$prefix}--tabs-nav-content-container,
@@ -321,8 +321,8 @@ $inset-transition: inset 110ms motion(standard, productive);
 :host(#{$prefix}-tab[icon-only]),
 :host(#{$prefix}-tab.#{$prefix}--tabs__nav-item--icon-only) {
   flex: 0 0 auto;
-  block-size: $spacing-08;
-  inline-size: $spacing-08;
+  block-size: layout.size('height');
+  inline-size: layout.size('height');
 
   .#{$prefix}--tabs__nav-item-label-wrapper {
     display: flex;
@@ -398,7 +398,7 @@ $inset-transition: inset 110ms motion(standard, productive);
   }
 }
 
-:host(#{$prefix}-tab:hover:not([selected]):not([vertical])) {
+:host(#{$prefix}-tab:hover:not([selected]):not([disabled]):not([vertical])) {
   background-color: transparent;
 
   a.#{$prefix}--tabs__nav-link {

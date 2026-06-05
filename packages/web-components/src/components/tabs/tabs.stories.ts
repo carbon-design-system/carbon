@@ -62,7 +62,7 @@ const containedTabsSizeArgType = {
   size: {
     control: { type: 'select' },
     options: ['sm', 'md', 'lg'],
-    description: 'Specify the size of the contained tabs',
+    description: 'Specify the size of the tabs',
   },
 };
 
