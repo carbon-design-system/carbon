@@ -899,6 +899,11 @@ export interface TabListVerticalProps extends DivAttributes {
    * on component rerender
    */
   scrollIntoView?: boolean;
+
+  /**
+   * Specify the size of the tabs.
+   */
+  size?: 'sm' | 'md' | 'lg' | 'xl';
 }
 // type TabElement = HTMLElement & { disabled?: boolean };
 
@@ -908,6 +913,7 @@ function TabListVertical({
   children,
   className: customClassName,
   scrollIntoView,
+  size,
   ...rest
 }: TabListVerticalProps) {
   const { activeIndex, selectedIndex, setSelectedIndex, setActiveIndex } =
@@ -923,6 +929,9 @@ function TabListVertical({
     `${prefix}--tabs`,
     `${prefix}--tabs--vertical`,
     `${prefix}--tabs--contained`,
+    {
+      [`${prefix}--layout--size-${size}`]: size,
+    },
     customClassName
   );
 
@@ -1110,6 +1119,11 @@ TabListVertical.propTypes = {
    * Specify an optional className to be added to the container node
    */
   className: PropTypes.string,
+
+  /**
+   * Specify the size of the tabs.
+   */
+  size: PropTypes.oneOf(['sm', 'md', 'lg', 'xl']),
 };
 
 /**

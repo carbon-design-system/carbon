@@ -9889,6 +9889,17 @@ Map {
       "className": {
         "type": "string",
       },
+      "size": {
+        "args": [
+          [
+            "sm",
+            "md",
+            "lg",
+            "xl",
+          ],
+        ],
+        "type": "oneOf",
+      },
     },
   },
   "TabPanel" => {
