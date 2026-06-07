@@ -139,6 +139,10 @@
   }
 
   .#{$prefix}--btn--secondary {
+    display: inline-block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
     @include button-theme(
       $button-secondary,
       transparent,
@@ -155,6 +159,10 @@
   }
 
   .#{$prefix}--btn--tertiary {
+    display: inline-block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
     @include button-theme(
       transparent,
       $button-tertiary,
@@ -194,6 +202,9 @@
   }
 
   .#{$prefix}--btn--ghost {
+    display: inline-block;
+    overflow: hidden;
+
     @include button-theme(
       transparent,
       transparent,
@@ -206,6 +217,8 @@
     padding-inline-end: calc(
       layout.density('padding-inline') - convert.to-rem(1px)
     );
+    text-overflow: ellipsis;
+    white-space: nowrap;
 
     .#{$prefix}--btn__icon {
       position: static;
@@ -329,6 +342,10 @@
   }
 
   .#{$prefix}--btn--danger {
+    display: inline-block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
     @include button-theme(
       $button-danger-primary,
       transparent,
@@ -343,6 +360,10 @@
     }
 
     &--tertiary {
+      display: inline-block;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
       @include button-theme(
         transparent,
         $button-danger-secondary,
@@ -383,6 +404,9 @@
     }
 
     &--ghost {
+      display: inline-block;
+      overflow: hidden;
+
       @include button-theme(
         transparent,
         transparent,
@@ -395,6 +419,8 @@
       padding-inline-end: calc(
         layout.density('padding-inline') - convert.to-rem(1px)
       );
+      text-overflow: ellipsis;
+      white-space: nowrap;
 
       .#{$prefix}--btn__icon {
         position: static;
