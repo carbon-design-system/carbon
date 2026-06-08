@@ -422,6 +422,36 @@ describe('cds-overflow-menu', () => {
       expect(menuSurface?.style.top).to.not.equal('');
     });
 
+    it('should apply floating UI styles when autoalign is enabled', async () => {
+      const featureFlag = await fixture(html`
+        <feature-flags enable-v12-overflowmenu="true">
+          <cds-overflow-menu label="Actions" autoalign>
+            <cds-menu>
+              <cds-menu-item label="Stop app"></cds-menu-item>
+            </cds-menu>
+          </cds-overflow-menu>
+        </feature-flags>
+      `);
+      const el = featureFlag.querySelector('cds-overflow-menu');
+
+      el.open = true;
+      await el.updateComplete;
+
+      const menu = el.querySelector('cds-menu');
+      await menu.updateComplete;
+
+      await new Promise((resolve) => {
+        setTimeout(resolve, 0);
+      });
+
+      const menuSurface = menu.shadowRoot?.querySelector('.cds--menu');
+
+      expect(el.autoalign).to.be.true;
+      expect(menuSurface?.style.position).to.equal('fixed');
+      expect(menuSurface?.style.left).to.not.equal('');
+      expect(menuSurface?.style.top).to.not.equal('');
+    });
+
     it('should close the root menu when the managed menu emits a close event', async () => {
       const featureFlag = await fixture(html`
         <feature-flags enable-v12-overflowmenu="true">

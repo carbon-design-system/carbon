@@ -93,7 +93,7 @@ const renderDefaultMenu = () => html`
 `;
 
 const renderOverflowMenu = ({
-  autoAlign = false,
+  autoalign = false,
   label = 'Options',
   menu = renderDefaultMenu(),
   menuAlignment = 'bottom-start',
@@ -102,7 +102,7 @@ const renderOverflowMenu = ({
   align = 'top',
 } = {}) => html`
   <cds-overflow-menu
-    ?auto-align=${autoAlign}
+    ?autoalign=${autoalign}
     ?open=${open}
     label="${label}"
     menu-alignment="${menuAlignment}"
@@ -135,7 +135,7 @@ export const Default = {
 export const AutoAlign = {
   render: () => {
     requestAnimationFrame(() => {
-      document.querySelector('cds-overflow-menu[auto-align]')?.scrollIntoView({
+      document.querySelector('cds-overflow-menu[autoalign]')?.scrollIntoView({
         block: 'center',
         inline: 'center',
       });
@@ -146,7 +146,7 @@ export const AutoAlign = {
         <feature-flags enable-v12-overflowmenu="true">
           <div style="width: 4900px; height: 4900px; position: relative;">
             <div style="position: absolute; top: 2450px; left: 2450px;">
-              ${renderOverflowMenu({ autoAlign: true })}
+              ${renderOverflowMenu({ autoalign: true })}
             </div>
           </div>
         </feature-flags>

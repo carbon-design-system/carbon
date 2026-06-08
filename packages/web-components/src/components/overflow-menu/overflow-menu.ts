@@ -216,8 +216,8 @@ class CDSOverflowMenu
   /**
    * Experimental property. Enables automatic menu placement flipping to avoid clipping.
    */
-  @property({ type: Boolean, reflect: true, attribute: 'auto-align' })
-  autoAlign = false;
+  @property({ type: Boolean, reflect: true })
+  autoalign = false;
 
   /**
    * `true` if the dropdown should be open.
@@ -400,7 +400,7 @@ class CDSOverflowMenu
       menuCompositionEnabled &&
       (changedProperties.has('open') ||
         changedProperties.has('label') ||
-        changedProperties.has('autoAlign') ||
+        changedProperties.has('autoalign') ||
         changedProperties.has('menuAlignment') ||
         changedProperties.has('size') ||
         changedProperties.has('enableV12Overflowmenu'));
@@ -432,11 +432,13 @@ class CDSOverflowMenu
   }
 
   private _getLabelText() {
+    if (this.label) return this.label;
+
     const tooltipContent = this.querySelector(
       '[slot=tooltip-content]'
-    )?.textContent;
+    )?.textContent?.trim();
 
-    return this.label || tooltipContent?.trim() || 'Options';
+    return tooltipContent || 'Options';
   }
 
   private _getTriggerButton() {
@@ -476,7 +478,7 @@ class CDSOverflowMenu
    */
   private _usesDynamicFloatingStyles() {
     return (
-      this.autoAlign ||
+      this.autoalign ||
       isFeatureFlagEnabled('enable-v12-dynamic-floating-styles', this)
     );
   }
@@ -537,7 +539,7 @@ class CDSOverflowMenu
     const menuAlignment = this.menuAlignment;
 
     menu.id ||= this._menuId;
-    menu.label = this._getLabelText();;
+    menu.label = this._getLabelText();
     menu.menuAlignment = menuAlignment;
     this._syncMenuChildPosition(menu);
     menu.open = this.open;
@@ -584,7 +586,7 @@ class CDSOverflowMenu
         ? [...bottomFirstFallbackPlacements]
         : [...topFirstFallbackPlacements];
 
-      const flipArguments = this.autoAlign
+      const flipArguments = this.autoalign
         ? {
             fallbackPlacements,
           }
