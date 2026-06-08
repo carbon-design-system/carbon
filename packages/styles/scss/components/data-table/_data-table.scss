@@ -771,6 +771,8 @@
   .#{$prefix}--data-table--sticky-header {
     display: block;
     overflow-y: scroll;
+    inline-size: fit-content;
+    min-inline-size: 100%;
 
     thead,
     tbody,
@@ -783,10 +785,8 @@
     thead {
       position: sticky;
       z-index: 1;
-      overflow: scroll;
       inline-size: 100%;
       inset-block-start: 0;
-      // Hides ie scrollbar
       -ms-overflow-style: none;
       will-change: transform;
     }
@@ -797,9 +797,7 @@
 
     tbody {
       flex-direction: column;
-      // Hides ie scrollbar
       -ms-overflow-style: none;
-      overflow-x: scroll;
       will-change: transform;
     }
 
