@@ -28,13 +28,6 @@ JavaScript. First-party framework packages in this repo are available for:
 
 Additional ecosystem packages are also available for:
 
-<!--
-TODO: This project has been deprecated for three years
-(https://github.com/carbon-design-system/carbon-icons-angular/commit/f515f437b9964b1daa2b4758e55603a8b983fbb5).
-Should it still be listed here?
--->
-
-- [Angular](https://github.com/carbon-design-system/carbon-icons-angular)
 - [Svelte](https://github.com/IBM/carbon-icons-svelte)
 
 In order to use an icon, it may be helpful to reference our
