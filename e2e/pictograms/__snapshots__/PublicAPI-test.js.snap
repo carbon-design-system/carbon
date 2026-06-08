@@ -718,6 +718,7 @@ exports[`@carbon/pictograms should not update exports without a semver change 1`
   "HyperProtectDatabaseAsAService",
   "HyperProtectVirtualServers",
   "IbmAptio",
+  "IbmAtxOffice",
   "IbmAutomationPlatform",
   "IbmBob",
   "IbmCloud",

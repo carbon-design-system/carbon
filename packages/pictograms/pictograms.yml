@@ -5160,6 +5160,17 @@
     - investments
     - financial
     - insights
+- name: ibm--atx-office
+  friendly_name: IBM® ATX office
+  aliases:
+    - austin
+    - ibm
+    - atx
+    - texas
+    - office
+    - location
+    - work
+    - building
 - name: ibm--automation-platform
   friendly_name: IBM Automation platform
   aliases:
