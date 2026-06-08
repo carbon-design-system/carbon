@@ -60,8 +60,8 @@ const config: StorybookConfig = {
       },
       build: {
         /**
-         * Use esbuild for CSS minification because Lightning CSS (Vite 8.0 default) can fail on some
-         * web component selectors, such as ::slotted() and ::part().
+         * Use esbuild for CSS minification because Lightning CSS (Vite 8.0 default)
+         * fails when additional selectors are appended after ::slotted(), ::part(), etc..
          */
         cssMinify: 'esbuild',
       },
