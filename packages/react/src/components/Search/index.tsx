@@ -12,3 +12,5 @@ export default Search;
 export { Search };
 
 export { default as SearchSkeleton } from './Search.Skeleton';
+export { default as TypeAhead } from './TypeAhead';
+export * from './TypeAhead';

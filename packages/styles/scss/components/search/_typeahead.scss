@@ -1,0 +1,113 @@
+//
+// Copyright IBM Corp. 2016, 2026
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+//-----------------------------
+// TypeAhead
+//-----------------------------
+
+@use '../../theme' as *;
+@use '../../config' as *;
+@use '../../type';
+@use '../../motion' as *;
+@use '../../spacing' as *;
+@use '../../utilities/focus-outline' as *;
+@use '../../utilities/convert';
+@use '../../utilities/z-index' as *;
+
+/// TypeAhead styles
+/// @access public
+/// @group typeahead
+@mixin typeahead {
+  .#{$prefix}--typeahead {
+    position: relative;
+    inline-size: 100%;
+  }
+
+  .#{$prefix}--typeahead__menu {
+    position: absolute;
+    z-index: z('dropdown');
+    background-color: $layer;
+    inline-size: 100%;
+    inset-block-start: 100%;
+    inset-inline: 0;
+    max-block-size: convert.to-rem(220px);
+    overflow-y: auto;
+
+    &:focus {
+      @include focus-outline('outline');
+    }
+  }
+
+  .#{$prefix}--typeahead__list {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
+
+  .#{$prefix}--typeahead__item {
+    @include type.type-style('body-compact-01');
+
+    display: flex;
+    align-items: center;
+    border: 0;
+    background: transparent;
+    block-size: convert.to-rem(40px);
+    color: $text-secondary;
+    cursor: pointer;
+    inline-size: 100%;
+    padding-block: 0;
+    padding-inline: $spacing-05;
+    text-align: start;
+    transition: background $duration-fast-01 motion(standard, productive);
+
+    &:hover {
+      background-color: $layer-hover;
+    }
+
+    &:active {
+      background-color: $layer-selected;
+    }
+
+    &:focus {
+      @include focus-outline('outline');
+    }
+  }
+
+  .#{$prefix}--typeahead__item--active {
+    background-color: $layer-hover;
+  }
+
+  .#{$prefix}--typeahead__item-highlight {
+    color: $text-primary;
+    font-weight: 600;
+  }
+
+  // Size variants
+  .#{$prefix}--typeahead__list--xs .#{$prefix}--typeahead__item,
+  .#{$prefix}--typeahead__item--xs {
+    block-size: convert.to-rem(24px);
+    padding-inline-start: convert.to-rem(24px);
+  }
+
+  .#{$prefix}--typeahead__list--sm .#{$prefix}--typeahead__item,
+  .#{$prefix}--typeahead__item--sm {
+    block-size: convert.to-rem(32px);
+    padding-inline-start: convert.to-rem(32px);
+  }
+
+  .#{$prefix}--typeahead__list--md .#{$prefix}--typeahead__item,
+  .#{$prefix}--typeahead__item--md {
+    block-size: convert.to-rem(40px);
+    padding-inline-start: convert.to-rem(40px);
+  }
+
+  .#{$prefix}--typeahead__list--lg .#{$prefix}--typeahead__item,
+  .#{$prefix}--typeahead__item--lg {
+    block-size: convert.to-rem(48px);
+    padding-inline-start: convert.to-rem(48px);
+  }
+}
