@@ -537,8 +537,7 @@ class CDSOverflowMenu
     const menuAlignment = this.menuAlignment;
 
     menu.id ||= this._menuId;
-    const labelText = this._getLabelText();
-    menu.label = labelText;
+    menu.label = this._getLabelText();;
     menu.menuAlignment = menuAlignment;
     this._syncMenuChildPosition(menu);
     menu.open = this.open;
