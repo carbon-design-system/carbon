@@ -58,7 +58,7 @@ const argTypes = {
   },
 };
 
-const containedTabsSizeArgType = {
+const tabsSizeArgType = {
   size: {
     control: { type: 'select' },
     options: ['sm', 'md', 'lg'],
@@ -91,7 +91,7 @@ export const Default = {
   args,
   argTypes: {
     ...argTypes,
-    ...containedTabsSizeArgType,
+    ...tabsSizeArgType,
   },
   render: ({ disabled, contained, selectionMode, size }) => {
     const handleBeforeSelected = (event: CustomEvent) => {
@@ -168,7 +168,7 @@ export const Default = {
 
 export const Contained = {
   args: containedTabsSizeArgs,
-  argTypes: containedTabsSizeArgType,
+  argTypes: tabsSizeArgType,
   render: ({ size }) => html`
     <style>
       ${styles}
@@ -255,7 +255,7 @@ export const Contained = {
 
 export const ContainedFullWidth = {
   args: containedTabsSizeArgs,
-  argTypes: containedTabsSizeArgType,
+  argTypes: tabsSizeArgType,
   render: ({ size }) => html`
     <style>
       ${styles}
@@ -376,7 +376,7 @@ export const ContainedFullWidth = {
 
 export const ContainedWithIcons = {
   args: containedTabsSizeArgs,
-  argTypes: containedTabsSizeArgType,
+  argTypes: tabsSizeArgType,
   render: ({ size }) => html`
     <style>
       ${styles}
@@ -679,7 +679,7 @@ export const Dismissable = {
       description:
         'Specify a selected index for the initially selected content.',
     },
-    ...containedTabsSizeArgType,
+    ...tabsSizeArgType,
   },
   render: ({ dismissable, selectedIndex, size }) => {
     return html`
@@ -711,7 +711,7 @@ export const DismissableContained = {
       description:
         'Specify a selected index for the initially selected content.',
     },
-    ...containedTabsSizeArgType,
+    ...tabsSizeArgType,
   },
   render: ({ contained, dismissable, selectedIndex, size }) => {
     return html`
@@ -744,7 +744,7 @@ export const DismissableWithIcons = {
       description:
         'Specify a selected index for the initially selected content.',
     },
-    ...containedTabsSizeArgType,
+    ...tabsSizeArgType,
   },
   render: ({ dismissable, selectedIndex, size }) => {
     return html`
@@ -847,7 +847,7 @@ export const IconOnly = {
   },
   argTypes: {
     ...iconStoriesArgTypes,
-    ...containedTabsSizeArgType,
+    ...tabsSizeArgType,
   },
   render: ({ badgeIndicator, size }) => html`
     <style>
@@ -1192,7 +1192,7 @@ export const Vertical = {
 
 export const WithIcons = {
   args: lineTabsSizeArgs,
-  argTypes: containedTabsSizeArgType,
+  argTypes: tabsSizeArgType,
   render: ({ size }) => {
     return html`
       <style>

@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -40,7 +40,7 @@ import {
   Icon,
 } from '@carbon/icons-react';
 
-const containedTabsSizeArgType = {
+const tabsSizeArgType = {
   size: {
     control: { type: 'select' },
     options: ['sm', 'md', 'lg'],
@@ -144,7 +144,7 @@ Default.argTypes = {
       type: 'boolean',
     },
   },
-  ...containedTabsSizeArgType,
+  ...tabsSizeArgType,
 };
 
 export const Dismissable = (args) => {
@@ -218,7 +218,7 @@ export const Dismissable = (args) => {
   );
 };
 
-Dismissable.argTypes = containedTabsSizeArgType;
+Dismissable.argTypes = tabsSizeArgType;
 Dismissable.args = lineTabsSizeArgs;
 export const DismissableContained = (args) => {
   const tabs = [
@@ -291,7 +291,7 @@ export const DismissableContained = (args) => {
   );
 };
 
-DismissableContained.argTypes = containedTabsSizeArgType;
+DismissableContained.argTypes = tabsSizeArgType;
 DismissableContained.args = containedTabsSizeArgs;
 
 export const DismissableWithIcons = ({ contained, size }) => {
@@ -367,7 +367,7 @@ export const DismissableWithIcons = ({ contained, size }) => {
   );
 };
 
-DismissableWithIcons.argTypes = containedTabsSizeArgType;
+DismissableWithIcons.argTypes = tabsSizeArgType;
 DismissableWithIcons.args = lineTabsSizeArgs;
 
 export const WithIcons = (args) => {
@@ -409,7 +409,7 @@ export const WithIcons = (args) => {
   );
 };
 
-WithIcons.argTypes = containedTabsSizeArgType;
+WithIcons.argTypes = tabsSizeArgType;
 WithIcons.args = lineTabsSizeArgs;
 
 export const Manual = () => {
@@ -513,7 +513,7 @@ export const IconOnly = (args) => {
 };
 
 IconOnly.argTypes = {
-  ...containedTabsSizeArgType,
+  ...tabsSizeArgType,
   badgeIndicator: {
     description: '**Experimental**: Display an empty dot badge on the Tab.',
     control: {
@@ -561,7 +561,7 @@ export const Contained = (args) => {
   );
 };
 
-Contained.argTypes = containedTabsSizeArgType;
+Contained.argTypes = tabsSizeArgType;
 Contained.args = containedTabsSizeArgs;
 
 export const ContainedWithIcons = (args) => {
@@ -604,7 +604,7 @@ export const ContainedWithIcons = (args) => {
   );
 };
 
-ContainedWithIcons.argTypes = containedTabsSizeArgType;
+ContainedWithIcons.argTypes = tabsSizeArgType;
 ContainedWithIcons.args = containedTabsSizeArgs;
 
 export const ContainedWithSecondaryLabels = () => {
@@ -914,5 +914,5 @@ IconOnlyVisualSnapshots.play = async ({ userEvent }) => {
 
 IconOnlyVisualSnapshots.tags = ['!dev', '!autodocs'];
 
-ContainedFullWidth.argTypes = containedTabsSizeArgType;
+ContainedFullWidth.argTypes = tabsSizeArgType;
 ContainedFullWidth.args = containedTabsSizeArgs;
