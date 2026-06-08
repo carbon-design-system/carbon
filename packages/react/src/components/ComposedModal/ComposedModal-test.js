@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -25,7 +25,7 @@ import { FeatureFlags, useFeatureFlag } from '../FeatureFlags';
 import { ModalHeader } from './ModalHeader';
 import { ModalFooter } from './ModalFooter';
 import { TextInput, OverflowMenu, OverflowMenuItem } from '../../';
-import { AILabel } from '../AILabel';
+import { AILabel, AILabelContent } from '../AILabel';
 
 const prefix = 'cds';
 
@@ -772,6 +772,110 @@ describe.each([
     fireEvent.keyDown(document, { key: 'Escape', code: 'Escape', keyCode: 27 });
     expect(onClose).toHaveBeenCalled();
   });
+
+  it('should handle ESC key with AILabel - first ESC closes popover, second ESC closes modal', async () => {
+    const onClose = jest.fn();
+    const aiLabel = (
+      <AILabel className="ai-label-container">
+        <AILabelContent>
+          <div>
+            <p>AI Explained</p>
+            <p>Test content</p>
+          </div>
+        </AILabelContent>
+      </AILabel>
+    );
+
+    render(
+      <ComposedModal open onClose={onClose} decorator={aiLabel}>
+        <ModalHeader>Modal header</ModalHeader>
+        <ModalBody>
+          <p>Modal content</p>
+          <TextInput
+            data-modal-primary-focus
+            id="text-input-1"
+            labelText="Domain name"
+          />
+        </ModalBody>
+        <ModalFooter primaryButtonText="Add" secondaryButtonText="Cancel" />
+      </ComposedModal>
+    );
+
+    expect(screen.getByRole('presentation', { hidden: true })).toHaveClass(
+      'is-visible'
+    );
+
+    const aiLabelButton = screen.getByRole('button', {
+      name: /AI Show information/i,
+    });
+    await userEvent.click(aiLabelButton);
+
+    await waitFor(() => {
+      expect(aiLabelButton).toHaveAttribute('aria-expanded', 'true');
+    });
+
+    await userEvent.keyboard('{Escape}');
+    await waitFor(() => {
+      expect(aiLabelButton).toHaveAttribute('aria-expanded', 'false');
+    });
+
+    expect(onClose).not.toHaveBeenCalled();
+    expect(screen.getByRole('presentation', { hidden: true })).toHaveClass(
+      'is-visible'
+    );
+
+    await userEvent.keyboard('{Escape}');
+    expect(onClose).toHaveBeenCalled();
+  });
+
+  it('should handle ESC key with OverflowMenu - first ESC closes menu, second closes modal', async () => {
+    const onClose = jest.fn();
+
+    render(
+      <Component open onClose={onClose}>
+        <ModalHeader>Modal with Overflow Menu</ModalHeader>
+        <ModalBody>
+          <OverflowMenu iconDescription="More options">
+            <OverflowMenuItem itemText="Download" />
+            <OverflowMenuItem itemText="Share" />
+          </OverflowMenu>
+          <p>Modal content</p>
+          <TextInput
+            data-modal-primary-focus
+            id="text-input-1"
+            labelText="Domain name"
+          />
+        </ModalBody>
+        <ModalFooter primaryButtonText="Add" secondaryButtonText="Cancel" />
+      </Component>
+    );
+
+    expect(screen.getByRole('presentation', { hidden: true })).toHaveClass(
+      'is-visible'
+    );
+
+    const overflowMenuButton = screen.getByRole('button', {
+      name: /options/i,
+    });
+    await userEvent.click(overflowMenuButton);
+
+    expect(overflowMenuButton).toHaveAttribute('aria-expanded', 'true');
+
+    fireEvent.keyDown(
+      // eslint-disable-next-line testing-library/no-node-access
+      document.getElementById(overflowMenuButton.getAttribute('aria-controls')),
+      {
+        key: 'Escape',
+        code: 'Escape',
+        keyCode: 27,
+      }
+    );
+    expect(overflowMenuButton).toHaveAttribute('aria-expanded', 'false');
+    expect(onClose).not.toHaveBeenCalled();
+
+    fireEvent.keyDown(document, { key: 'Escape', code: 'Escape', keyCode: 27 });
+    expect(onClose).toHaveBeenCalled();
+  });
 });
 
 describe('state', () => {
@@ -971,11 +1075,19 @@ describe('state with presence context', () => {
     expect(screen.queryByTestId('sibling-modal')).toBeInTheDocument();
     expect(screen.queryByTestId('child-modal')).toBeInTheDocument();
 
+    // First ESC closes the tooltip in the child modal
     await userEvent.keyboard('{Escape}');
+
+    // Second ESC closes the child modal
+    await userEvent.keyboard('{Escape}');
+
+    // Wait for child modal to be removed
+    await waitFor(() => {
+      expect(screen.queryByTestId('child-modal')).not.toBeInTheDocument();
+    });
 
     expect(screen.queryByTestId('modal')).toBeInTheDocument();
     expect(screen.queryByTestId('sibling-modal')).toBeInTheDocument();
-    expect(screen.queryByTestId('child-modal')).not.toBeInTheDocument();
   });
 });
 
@@ -997,5 +1109,76 @@ describe('state with hof withModalPresence', () => {
   it('should not be present when open is undefined', () => {
     render(<ComposedModalWithPresenceHof data-testid="modal" />);
     expect(screen.queryByTestId('modal')).not.toBeInTheDocument();
+  });
+});
+
+describe('ModalBody scrollable content accessibility', () => {
+  it('should apply aria-labelledby to scrollable content using label from ModalHeader', () => {
+    render(
+      <ComposedModal open>
+        <ModalHeader label="Test Label" title="Test Title" />
+        <ModalBody hasScrollingContent data-testid="modal-body">
+          Scrollable content
+        </ModalBody>
+      </ComposedModal>
+    );
+
+    const modalBody = screen.getByTestId('modal-body');
+    expect(modalBody).toHaveAttribute('role', 'region');
+
+    const ariaLabelledBy = modalBody.getAttribute('aria-labelledby');
+    expect(ariaLabelledBy).toBeTruthy();
+    expect(ariaLabelledBy).toContain('modal-header__label');
+  });
+
+  it('should apply aria-labelledby to scrollable content using title from ModalHeader when no label', () => {
+    render(
+      <ComposedModal open>
+        <ModalHeader title="Test Title" />
+        <ModalBody hasScrollingContent data-testid="modal-body">
+          Scrollable content
+        </ModalBody>
+      </ComposedModal>
+    );
+
+    const modalBody = screen.getByTestId('modal-body');
+    expect(modalBody).toHaveAttribute('role', 'region');
+
+    const ariaLabelledBy = modalBody.getAttribute('aria-labelledby');
+    expect(ariaLabelledBy).toBeTruthy();
+    expect(ariaLabelledBy).toContain('modal-header__heading');
+  });
+
+  it('should use explicit aria-labelledby prop over default from context', () => {
+    render(
+      <ComposedModal open>
+        <ModalHeader label="Test Label" title="Test Title" />
+        <ModalBody
+          hasScrollingContent
+          aria-labelledby="custom-label-id"
+          data-testid="modal-body">
+          Scrollable content
+        </ModalBody>
+      </ComposedModal>
+    );
+
+    const modalBody = screen.getByTestId('modal-body');
+    expect(modalBody).toHaveAttribute('role', 'region');
+
+    expect(modalBody).toHaveAttribute('aria-labelledby', 'custom-label-id');
+  });
+
+  it('should not apply region role or labelling when content is not scrollable', () => {
+    render(
+      <ComposedModal open>
+        <ModalHeader label="Test Label" title="Test Title" />
+        <ModalBody data-testid="modal-body">Non-scrollable content</ModalBody>
+      </ComposedModal>
+    );
+
+    const modalBody = screen.getByTestId('modal-body');
+    expect(modalBody).not.toHaveAttribute('role', 'region');
+    expect(modalBody).not.toHaveAttribute('aria-label');
+    expect(modalBody).not.toHaveAttribute('aria-labelledby');
   });
 });

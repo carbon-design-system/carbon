@@ -793,7 +793,6 @@ categories:
           - ibm--app-connect-enterprise
           - ibm--application-and-discovery-delivery-intelligence
           - ibm--aspera
-          - ibm--bluepay
           - ibm--cloudant
           - ibm-consulting-advantage--agent
           - ibm-consulting-advantage--application
@@ -854,7 +853,6 @@ categories:
           - ibm--secure-infrastructure-on-vpc-for-regulated-industries
           - ibm--streamsets
           - ibm--telehealth
-          - ibm--tenet
           - ibm--test-accelerator-for-z
           - ibm--toolchain
           - ibm--turbonomic
@@ -975,6 +973,7 @@ categories:
           - infrastructure--classic
           - load-balancer--vpc
           - mysql
+          - portfolio--management
           - power-enterprise-pools-metered-capacity-integration
           - power-virtual-server-disaster-recovery-automation
           - red-hat-ai-instructlab-on-ibm-cloud
@@ -1031,6 +1030,7 @@ categories:
           - order--server
           - order--storm
           - order--stratus
+          - payment--methods
           - piggy-bank
           - piggy-bank--slot
           - pricing--consumption
@@ -1672,7 +1672,7 @@ categories:
           - gamification
           - gem
           - gem--reference
-          - generate-pdf
+          - generate--pdf
           - GIF
           - HD
           - HD--filled
@@ -1931,6 +1931,7 @@ categories:
           - container-image--push
           - container-image--push-pull
           - container-services
+          - coupling-facility
           - coupling-facility-encryption
           - data--center
           - data-accessor
@@ -2082,7 +2083,7 @@ categories:
           - slisor
           - software-resource
           - software-resource--cluster
-          - software-resource--resource
+          - software-resource--reference
           - source-control
           - subclassification
           - subject--definition
@@ -2127,6 +2128,7 @@ categories:
           - z--lpar
           - z--systems
           - zos
+          - zos--partition
           - zos--sysplex
   - name: Person
     subcategories:
@@ -2157,6 +2159,7 @@ categories:
           - credentials
           - customer
           - customer-service
+          - customer-service--filled
           - dog-walker
           - education
           - events
@@ -2371,8 +2374,8 @@ categories:
           - navaid--tacan
           - navaid--vhfor
           - navaid--vor
-          - navaid--vordme
-          - navaid--vortac
+          - navaid--vor-dme
+          - navaid--vor-tac
           - palm-tree
           - passenger--drinks
           - passenger--plus

@@ -22,7 +22,7 @@ export default {
     closeButtonLabelText: 'Clear search input',
     disabled: false,
     defaultWidth: 800,
-    labelText: 'Search',
+    labelText: 'Site search',
     placeholder: 'Placeholder text',
     size: 'md',
     type: 'search',

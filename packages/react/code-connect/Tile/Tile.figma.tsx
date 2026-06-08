@@ -181,7 +181,7 @@ figma.connect(
 //     },
 //     example: ({ titletext, descriptiontext }) => (
 //       <ExpandableTile
-//         // eslint-disable-next-line no-console -- https://github.com/carbon-design-system/carbon/issues/20071
+//         // eslint-disable-next-line no-console
 //         onClick={() => console.log('click')}
 //         tileCollapsedIconText="Interact to Expand tile"
 //         tileExpandedIconText="Interact to Collapse tile">

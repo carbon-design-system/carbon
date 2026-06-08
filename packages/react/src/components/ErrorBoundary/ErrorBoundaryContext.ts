@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -13,7 +13,7 @@ export interface ErrorBoundaryContextType {
 
 export const ErrorBoundaryContext = createContext<ErrorBoundaryContextType>({
   log(error, info) {
-    // eslint-disable-next-line no-console -- https://github.com/carbon-design-system/carbon/issues/20452
+    // eslint-disable-next-line no-console
     console.log(info.componentStack);
   },
 });

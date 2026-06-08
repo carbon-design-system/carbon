@@ -12,6 +12,7 @@ import React, {
   useContext,
   useEffect,
   useRef,
+  useState,
   type HTMLAttributes,
   type ReactNode,
   type RefObject,
@@ -101,6 +102,12 @@ export interface ModalProps extends HTMLAttributes<HTMLDivElement> {
    * Specify whether the Modal is for dangerous actions
    */
   danger?: boolean;
+
+  /**
+   * Specify the message read by screen readers for the danger primary button.
+   * Defaults to an empty string; provide localized text to opt in.
+   */
+  dangerDescription?: string;
 
   /**
    * **Experimental**: Provide a decorator component to be rendered inside the `Modal` component
@@ -296,6 +303,7 @@ const ModalDialog = React.forwardRef(function ModalDialog(
     onSecondarySubmit,
     primaryButtonDisabled = false,
     danger,
+    dangerDescription = '',
     alert,
     secondaryButtons,
     selectorPrimaryFocus = '[data-modal-primary-focus]',
@@ -379,8 +387,6 @@ const ModalDialog = React.forwardRef(function ModalDialog(
   function handleKeyDown(evt: React.KeyboardEvent<HTMLDivElement>) {
     const { target } = evt;
 
-    evt.stopPropagation();
-
     if (open && target instanceof HTMLElement) {
       if (
         match(evt, keys.Enter) &&
@@ -388,6 +394,7 @@ const ModalDialog = React.forwardRef(function ModalDialog(
         !isCloseButton(target) &&
         document.activeElement !== button.current
       ) {
+        evt.stopPropagation();
         onRequestSubmit(evt);
       }
 
@@ -397,6 +404,7 @@ const ModalDialog = React.forwardRef(function ModalDialog(
         match(evt, keys.Tab) &&
         innerModal.current
       ) {
+        evt.stopPropagation();
         wrapFocusWithoutSentinels({
           containerNode: innerModal.current,
           currentActiveNode: target,
@@ -511,13 +519,34 @@ const ModalDialog = React.forwardRef(function ModalDialog(
     [`${prefix}--modal-container--full-width`]: isFullWidth,
   });
 
-  /**
-   * isScrollable is implicitly dependent on height, when height gets updated
-   * via `useResizeObserver`, clientHeight and scrollHeight get updated too
-   */
-  const isScrollable =
-    !!contentRef.current &&
-    contentRef?.current?.scrollHeight > contentRef?.current?.clientHeight;
+  const currentScrollHeight = contentRef.current?.scrollHeight || 0;
+  const currentClientHeight = contentRef.current?.clientHeight || 0;
+
+  // The CSS border-block-end: 2px can cause clientHeight to change when the class is applied
+  const [isScrollable, setIsScrollable] = useState(
+    currentScrollHeight > currentClientHeight
+  );
+
+  useEffect(() => {
+    if (!contentRef.current) {
+      setIsScrollable(false);
+      return;
+    }
+
+    const scrollHeight = contentRef.current.scrollHeight;
+    const clientHeight = contentRef.current.clientHeight;
+    const diff = scrollHeight - clientHeight;
+
+    // Different thresholds for turning on vs off
+    if (diff > 5) {
+      // Clearly scrollable - turn on
+      setIsScrollable(true);
+    } else if (diff < -5) {
+      // Clearly not scrollable - turn off
+      setIsScrollable(false);
+    }
+    // If -5 <= diff <= 5: Keep current state (dead zone prevents oscillation)
+  }, [currentScrollHeight, currentClientHeight]);
 
   const contentClasses = classNames(`${prefix}--modal-content`, {
     [`${prefix}--modal-scroll-content`]: hasScrollingContent || isScrollable,
@@ -566,14 +595,13 @@ const ModalDialog = React.forwardRef(function ModalDialog(
         isTopmostVisibleModal(modalRef.current, prefix)
       ) {
         event.preventDefault();
-        event.stopPropagation();
         onRequestClose(event);
       }
     };
-    document.addEventListener('keydown', handleEscapeKey, true);
+    document.addEventListener('keydown', handleEscapeKey);
 
     return () => {
-      document.removeEventListener('keydown', handleEscapeKey, true);
+      document.removeEventListener('keydown', handleEscapeKey);
     };
     // eslint-disable-next-line  react-hooks/exhaustive-deps -- https://github.com/carbon-design-system/carbon/issues/20452
   }, [open]);
@@ -786,6 +814,7 @@ const ModalDialog = React.forwardRef(function ModalDialog(
           <Button
             className={primaryButtonClass}
             kind={danger ? 'danger' : 'primary'}
+            dangerDescription={dangerDescription}
             disabled={loadingActive || primaryButtonDisabled}
             onClick={onRequestSubmit}
             ref={button}>
@@ -883,6 +912,7 @@ const ModalDialog = React.forwardRef(function ModalDialog(
             <Button
               className={primaryButtonClass}
               kind={danger ? 'danger' : 'primary'}
+              dangerDescription={dangerDescription}
               disabled={loadingActive || primaryButtonDisabled}
               onClick={onRequestSubmit}
               ref={button}>
@@ -964,6 +994,12 @@ Modal.propTypes = {
    * Specify whether the Modal is for dangerous actions
    */
   danger: PropTypes.bool,
+
+  /**
+   * Specify the message read by screen readers for the danger primary button.
+   * Defaults to an empty string; provide localized text to opt in.
+   */
+  dangerDescription: PropTypes.string,
 
   /**
    * **Experimental**: Provide a decorator component to be rendered inside the `Modal` component

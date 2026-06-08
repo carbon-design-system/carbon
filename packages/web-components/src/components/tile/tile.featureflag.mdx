@@ -1,0 +1,92 @@
+import { ArgTypes, Canvas, Markdown, Meta } from '@storybook/addon-docs/blocks';
+import { cdnJs } from '../../globals/internal/storybook-cdn';
+import * as TileStories from './tile.feature-flag.stories';
+
+<Meta
+  of={TileStories}
+  title="Components/Tile/Feature Flag"
+  name="Flag details"
+/>
+
+# Tile Feature Flags
+
+[Usage guidelines](https://carbondesignsystem.com/components/tile/usage/#feature-flags)
+
+[Feature flags](/docs/getting-started-feature-flags--overview) have been added
+to tile to improve accessibility and change their visual appearance, not their
+functionality. Designed to meet accessibility standards, particularly regarding
+contrast minimums. This ensures that tiles are more accessible to users with
+visual impairments.
+
+| Flag                            | Description                                                         | Availability         | Codemod                                                                                                                                  |
+| ------------------------------- | ------------------------------------------------------------------- | -------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
+| `enable-tile-contrast`          | Enable the improved styling for tiles that provides better contrast | Web Components, Sass |                                                                                                                                          |
+| `enable-v12-tile-default-icons` | Enable default icons for Tile components                            | Web Components       | [enable-v12-tile-default-icons](https://github.com/carbon-design-system/carbon/tree/main/packages/upgrade#enable-v12-tile-default-icons) |
+| `enable-v12-tile-radio-icons`   | Enable rendering of radio button icons in the tile components       | Web Components       | [enable-v12-tile-radio-icons](https://github.com/carbon-design-system/carbon/tree/main/packages/upgrade#enable-v12-tile-radio-icons)     |
+
+## Enable tile contrast
+
+The `enable-tile-contrast` attribute adds a border to the tile with improved
+contrast for accessibility and to visually indicate they are operable.
+
+### Web Components
+
+Add the `enable-tile-contrast` attribute directly to tile components:
+
+```html
+<cds-clickable-tile enable-tile-contrast href="#">
+  Clickable tile with contrast
+</cds-clickable-tile>
+
+<cds-selectable-tile enable-tile-contrast>
+  Selectable tile with contrast
+</cds-selectable-tile>
+
+<cds-radio-tile enable-tile-contrast name="options">
+  Radio tile with contrast
+</cds-radio-tile>
+
+<cds-expandable-tile enable-tile-contrast>
+  <cds-tile-above-the-fold-content slot="above-the-fold-content">
+    Above the fold content
+  </cds-tile-above-the-fold-content>
+  <cds-tile-below-the-fold-content>
+    Below the fold content
+  </cds-tile-below-the-fold-content>
+</cds-expandable-tile>
+```
+
+## Enable tile default icons
+
+The `enable-v12-tile-default-icons` flag enables the rendering of default icons
+on the clickable variant of a tile, such as the ArrowRight icon for navigation
+or the Error icon when the tile is disabled. If the user hasn't configured a
+different icon, these defaults will be used.
+
+```html
+<cds-feature-flags enable-v12-tile-default-icons="true">
+  <cds-clickable-tile href="#">
+    Clickable tile with default icon
+  </cds-clickable-tile>
+</cds-feature-flags>
+```
+
+## Enable tile radio icons
+
+The `enable-v12-tile-radio-icons` flag changes RadioTile to use radio button
+icons instead of checkmark icons. When enabled, radio tiles will display:
+
+- An empty radio button icon when unselected
+- A filled radio button icon when selected
+
+This provides better visual consistency with standard radio button patterns.
+
+```html
+<cds-feature-flags enable-v12-tile-radio-icons="true">
+  <cds-tile-group legend="Radio Tile Group">
+    <cds-radio-tile value="option-1">Option 1</cds-radio-tile>
+    <cds-radio-tile value="option-2">Option 2</cds-radio-tile>
+    <cds-radio-tile value="option-3">Option 3</cds-radio-tile>
+  </cds-tile-group>
+</cds-feature-flags>
+```
