@@ -57,12 +57,6 @@ class CDSSelect extends FormMixin(LitElement) {
   private _selectNode!: HTMLSelectElement;
 
   /**
-   * Input node of `select` element
-   */
-  @query('#input')
-  private _inputNode!: HTMLInputElement;
-
-  /**
    * Select all <option> nodes with `selected` attribute
    */
   @queryAll(`.${prefix}--select-option[selected]`)
@@ -233,7 +227,7 @@ class CDSSelect extends FormMixin(LitElement) {
    * ID to link the `label` and `select`
    */
   @property()
-  id = '';
+  id = 'select';
 
   /**
    * Specify if the currently value is invalid.
@@ -264,6 +258,12 @@ class CDSSelect extends FormMixin(LitElement) {
    */
   @property({ attribute: 'label-text' })
   labelText = '';
+
+  /**
+   * Specify if you want to disable the default label styling
+   */
+  @property({ type: Boolean, attribute: 'label-styles-disable' })
+  labelStylesDisable = false;
 
   /**
    * Specify whether you want the inline version of this control
@@ -332,7 +332,7 @@ class CDSSelect extends FormMixin(LitElement) {
    * The input box size.
    */
   @property({ reflect: true })
-  size = INPUT_SIZE.MEDIUM;
+  size?: INPUT_SIZE;
 
   /**
    * The value of the text area.
@@ -382,7 +382,9 @@ class CDSSelect extends FormMixin(LitElement) {
 
     if (label) {
       if ((label as HTMLSlotElement).assignedNodes()?.length) {
-        this._inputNode?.classList.add(`${prefix}--select-input-has--ai-label`);
+        this._selectNode?.classList.add(
+          `${prefix}--select-input-has--ai-label`
+        );
       }
 
       label?.classList.toggle(
@@ -404,9 +406,11 @@ class CDSSelect extends FormMixin(LitElement) {
       disabled,
       helperText,
       hideLabel,
+      id,
       inline,
       invalid,
       invalidText,
+      labelStylesDisable,
       labelText,
       placeholder,
       readonly,
@@ -431,11 +435,11 @@ class CDSSelect extends FormMixin(LitElement) {
 
     const inputClasses = classMap({
       [`${prefix}--select-input`]: true,
-      [`${prefix}--select-input--${size}`]: size,
+      [`${prefix}--select-input--${size}`]: size !== undefined,
     });
 
     const labelClasses = classMap({
-      [`${prefix}--label`]: true,
+      [`${prefix}--label`]: !labelStylesDisable,
       [`${prefix}--label--disabled`]: normalizedProps.disabled,
       [`${prefix}--visually-hidden`]: hideLabel,
     });
@@ -469,7 +473,7 @@ class CDSSelect extends FormMixin(LitElement) {
 
     const input = html`
       <select
-        id="input"
+        id="${id}"
         class="${inputClasses}"
         ?disabled="${disabled}"
         title="${value}"
@@ -515,8 +519,8 @@ class CDSSelect extends FormMixin(LitElement) {
     `;
 
     return html`
-      <label class="${labelClasses}" for="input">
-        <slot name="label-text"> ${labelText} </slot>
+      <label class="${labelClasses}" for=${id}>
+        <slot name="label-text">${labelText}</slot>
       </label>
 
       ${inline

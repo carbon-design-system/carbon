@@ -85,6 +85,57 @@ Default.argTypes = {
   },
 };
 
+export const WithRowGap = (args) => {
+  return (
+    <div className="sb-css-grid-container">
+      <Grid {...args}>
+        <Column sm={4} md={4} lg={4} />
+        <Column sm={4} md={4} lg={4} />
+        <Column sm={4} md={4} lg={4} />
+        <Column sm={4} md={4} lg={4} />
+        <Column sm={4} md={4} lg={4} />
+        <Column sm={4} md={4} lg={4} />
+        <Column sm={4} md={4} lg={4} />
+        <Column sm={4} md={4} lg={4} />
+      </Grid>
+    </div>
+  );
+};
+
+WithRowGap.args = {
+  withRowGap: true,
+  narrow: false,
+  condensed: false,
+};
+
+WithRowGap.argTypes = {
+  withRowGap: {
+    control: {
+      type: 'boolean',
+    },
+    description:
+      'Add a row gap to the grid that matches the current gutter size',
+  },
+  narrow: {
+    control: {
+      type: 'boolean',
+    },
+    description: 'Container hangs 16px into the gutter',
+  },
+  condensed: {
+    control: {
+      type: 'boolean',
+    },
+    description: 'Collapse the gutter to 1px',
+  },
+  children: {
+    control: false,
+  },
+  className: {
+    control: false,
+  },
+};
+
 export const Narrow = () => {
   return (
     <div className="sb-css-grid-container">
@@ -252,6 +303,68 @@ export const Subgrid = () => {
       </Grid>
     </div>
   );
+};
+
+export const SubgridWithRowGap = (args) => (
+  <Grid withRowGap {...args}>
+    <Column sm={4} md={8} lg={16}>
+      <Grid withRowGap>
+        {/* Nested subgrid with row gap */}
+        <Column sm={4} md={4} lg={8} />
+        <Column sm={4} md={4} lg={8} />
+        <Column sm={4} md={4} lg={8} />
+        <Column sm={4} md={4} lg={8} />
+      </Grid>
+    </Column>
+    <Column sm={4} md={8} lg={16}>
+      <Grid withRowGap narrow>
+        {/* Nested subgrid with row gap */}
+        <Column sm={4} md={4} lg={8} />
+        <Column sm={4} md={4} lg={8} />
+        <Column sm={4} md={4} lg={8} />
+        <Column sm={4} md={4} lg={8} />
+      </Grid>
+    </Column>
+    <Column sm={4} md={8} lg={16}>
+      <Grid withRowGap condensed>
+        {/* Nested subgrid with row gap */}
+        <Column sm={4} md={4} lg={8} />
+        <Column sm={4} md={4} lg={8} />
+        <Column sm={4} md={4} lg={8} />
+        <Column sm={4} md={4} lg={8} />
+      </Grid>
+    </Column>
+  </Grid>
+);
+
+SubgridWithRowGap.args = {
+  fullWidth: false,
+  narrow: false,
+  condensed: false,
+};
+
+SubgridWithRowGap.argTypes = {
+  children: {
+    control: false,
+  },
+  className: {
+    control: false,
+  },
+  fullWidth: {
+    control: {
+      type: 'boolean',
+    },
+  },
+  narrow: {
+    control: {
+      type: 'boolean',
+    },
+  },
+  condensed: {
+    control: {
+      type: 'boolean',
+    },
+  },
 };
 
 export const MixedGutterModes = () => {

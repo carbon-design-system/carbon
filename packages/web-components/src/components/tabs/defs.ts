@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2020, 2023
+ * Copyright IBM Corp. 2020, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -53,4 +53,49 @@ export enum TABS_TYPE {
    * Contained type.
    */
   CONTAINED = 'contained',
+}
+
+/**
+ * Vertical navigation direction, associated with key symbols.
+ */
+export const VERTICAL_NAVIGATION_DIRECTION = {
+  Up: -1,
+  ArrowUp: -1,
+  Down: 1,
+  ArrowDown: 1,
+};
+
+/**
+ * Tabs icon sizes.
+ */
+export enum TABS_ICON_SIZE {
+  /**
+   * Default icon size.
+   */
+  DEFAULT = 'default',
+
+  /**
+   * Large icon size.
+   */
+  LARGE = 'lg',
+}
+
+/**
+ * Tabs size.
+ */
+export enum TABS_SIZE {
+  /**
+   * Small size.
+   */
+  SMALL = 'sm',
+
+  /**
+   * Medium size.
+   */
+  MEDIUM = 'md',
+
+  /**
+   * Large size.
+   */
+  LARGE = 'lg',
 }

@@ -93,9 +93,8 @@ const TreeView: TreeViewComponent = ({
   const enableTreeviewControllable = useFeatureFlag(
     'enable-treeview-controllable'
   );
-
-  // eslint-disable-next-line  react-hooks/rules-of-hooks -- https://github.com/carbon-design-system/carbon/issues/20452
-  const { current: treeId } = useRef(rest.id || useId());
+  const generatedId = useId();
+  const { current: treeId } = useRef(rest.id ?? generatedId);
   const prefix = usePrefix();
   const treeClasses = classNames(className, `${prefix}--tree`, {
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20452

@@ -14,9 +14,11 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/breakpoint' as *;
 @use '@carbon/styles/scss/components/pagination' as *;
 @use '@carbon/styles/scss/utilities/visually-hidden' as *;
+@use '@carbon/styles/scss/layout' as *;
 
 :host(#{$prefix}-pagination) {
   @extend .#{$prefix}--pagination;
+  @include emit-layout-tokens();
 
   position: relative;
   outline: none;
@@ -40,10 +42,4 @@ $css--plex: true !default;
   }
 }
 
-:host(#{$prefix}-pagination[size='sm']) {
-  @extend .#{$prefix}--pagination--sm;
-}
-
-:host(#{$prefix}-pagination[size='lg']) {
-  @extend .#{$prefix}--pagination--lg;
-}
+@include emit-layout-tokens-to-shadow-host('#{$prefix}-pagination');

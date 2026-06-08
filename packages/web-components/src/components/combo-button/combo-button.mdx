@@ -21,7 +21,10 @@ import * as ComboButtonStories from './combo-button.stories';
 
 ## Overview
 
-A `cds-menu-button` can be used to offer additional, secondary actions in a disclosed list next to the primary action. These additional actions must be `cds-menu-item` passed as `children`. The primary action's label is passed as `label`.
+A `cds-menu-button` can be used to offer additional, secondary actions in a
+disclosed list next to the primary action. These additional actions must be
+`cds-menu-item` passed as `children`. The primary action's label is passed as
+`label`.
 
 ```html
 <cds-combo-button label="Primary action">
@@ -33,9 +36,7 @@ A `cds-menu-button` can be used to offer additional, secondary actions in a disc
 </cds-combo-button>
 ```
 
-<Canvas
-  of={ComboButtonStories.Default}
-/>
+<Canvas of={ComboButtonStories.Default} />
 
 ## With Icons
 
@@ -47,9 +48,10 @@ A `cds-menu-button` can be used to offer additional, secondary actions in a disc
 
 ## Menu Alignment (experimental)
 
-The `menu-alignment` attribute enables you to define the placement of the Menu in
-relation to the `cds-menu-button`. For instance, setting `menu-alignment="top"` on
-the `cds-menu-button` will render the Menu above the button.
+The `menu-alignment` attribute enables you to define the placement of the Menu
+in relation to the `cds-menu-button`. For instance, setting
+`menu-alignment="top"` on the `cds-menu-button` will render the Menu above the
+button.
 
 If it seems your specified `menu-alignment` isn't working, it's because we
 prioritize ensuring the Menu remains visible. We calculate the optimal position

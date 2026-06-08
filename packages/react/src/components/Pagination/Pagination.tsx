@@ -134,7 +134,7 @@ export interface PaginationProps
   /**
    * Specify the size of the Pagination.
    */
-  size?: 'sm' | 'md' | 'lg';
+  size?: 'xs' | 'sm' | 'md' | 'lg';
 
   /**
    * The total number of items.
@@ -166,7 +166,7 @@ function renderSelectItems(total) {
 }
 
 const getPageSize = (pageSizes: PaginationPageSize[], pageSize?: number) => {
-  if (pageSize) {
+  if (typeof pageSize !== 'undefined') {
     const hasSize = pageSizes.find((size) => {
       return pageSize === size.value;
     });
@@ -214,12 +214,17 @@ const Pagination = React.forwardRef(
     const inputId = useFallbackId(id?.toString());
     const backBtnRef = useRef<HTMLButtonElement>(null);
     const forwardBtnRef = useRef<HTMLButtonElement>(null);
-
+    const pendingChangeRef = useRef<null | { page: number; pageSize: number }>(
+      null
+    );
     const normalizedControlledPageSizes = useMemo(
       () => mapPageSizesToObject(controlledPageSizes),
       [controlledPageSizes]
     );
     const prevControlledPageSize = usePreviousValue(controlledPageSize);
+    const prevControlledPageSizes = usePreviousValue(
+      normalizedControlledPageSizes
+    );
 
     const [pageSizes, setPageSizes] = useState(normalizedControlledPageSizes);
     const [page, setPage] = useState(controlledPage);
@@ -227,12 +232,13 @@ const Pagination = React.forwardRef(
       'backward' | 'forward' | null
     >(null);
     const [pageSize, setPageSize] = useState(() => {
-      return getPageSize(pageSizes, controlledPageSize);
+      return getPageSize(normalizedControlledPageSizes, controlledPageSize);
     });
 
     const className = cx({
       [`${prefix}--pagination`]: true,
-      [`${prefix}--pagination--${size}`]: size,
+      [`${prefix}--pagination--${size}`]: size, // TODO: V12 - Remove this class
+      [`${prefix}--layout--size-${size}`]: size,
       [customClassName]: !!customClassName,
     });
     const totalPages = totalItems
@@ -275,26 +281,75 @@ const Pagination = React.forwardRef(
     }, [focusTarget]);
 
     useEffect(() => {
+      if (pendingChangeRef.current && onChange) {
+        onChange(pendingChangeRef.current);
+
+        pendingChangeRef.current = null;
+      }
+    }, [onChange, page, pageSize]);
+
+    useEffect(() => {
       setPage(controlledPage);
     }, [controlledPage]);
 
     useEffect(() => {
+      if (
+        typeof prevControlledPageSizes === 'undefined' ||
+        isEqual(prevControlledPageSizes, normalizedControlledPageSizes)
+      ) {
+        return;
+      }
+
       setPageSizes((prev) =>
         isEqual(normalizedControlledPageSizes, prev)
           ? prev
           : normalizedControlledPageSizes
       );
 
-      const hasPageSize = normalizedControlledPageSizes.find((size) => {
+      const nextPageSize = getPageSize(
+        normalizedControlledPageSizes,
+        controlledPageSize ?? pageSize
+      );
+      const hasPageSize = normalizedControlledPageSizes.some((size) => {
         return size.value === pageSize;
       });
+      const nextPage = hasPageSize ? page : 1;
 
-      // Reset page to 1 if the current pageSize is not included in the new page
-      // sizes
+      const hasControlledPageSize = typeof controlledPageSize !== 'undefined';
+      const hasValidControlledPageSize = hasControlledPageSize
+        ? normalizedControlledPageSizes.some(
+            (size) => size.value === controlledPageSize
+          )
+        : false;
+
+      // Reset page to 1 if the current pageSize is not included in the new
+      // pageSizes.
       if (!hasPageSize) {
-        setPage(1);
+        setPage(nextPage);
       }
-    }, [normalizedControlledPageSizes, pageSize]);
+
+      if (nextPageSize !== pageSize) {
+        setPageSize(nextPageSize);
+      }
+
+      if (
+        onChange &&
+        (!hasControlledPageSize || !hasValidControlledPageSize) &&
+        (nextPage !== page || nextPageSize !== pageSize)
+      ) {
+        pendingChangeRef.current = {
+          page: nextPage,
+          pageSize: nextPageSize,
+        };
+      }
+    }, [
+      controlledPageSize,
+      normalizedControlledPageSizes,
+      onChange,
+      page,
+      pageSize,
+      prevControlledPageSizes,
+    ]);
 
     useEffect(() => {
       if (controlledPageSize === prevControlledPageSize) return;
@@ -592,7 +647,7 @@ Pagination.propTypes = {
   /**
    * Specify the size of the Pagination.
    */
-  size: PropTypes.oneOf(['sm', 'md', 'lg']),
+  size: PropTypes.oneOf(['xs', 'sm', 'md', 'lg']),
 
   /**
    * The total number of items.

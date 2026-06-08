@@ -96,7 +96,7 @@ $css--plex: true !default;
 :host(#{$prefix}-dropdown[type='inline']) {
   @extend .#{$prefix}--list-box__wrapper--inline;
 
-  grid-gap: 0 $spacing-06;
+  grid-gap: 0 $spacing-03;
 
   .#{$prefix}--list-box__menu {
     margin-block-start: 0;
@@ -121,6 +121,19 @@ $css--plex: true !default;
   .#{$prefix}--list-box.#{$prefix}--list-box--inline
     .#{$prefix}--list-box__field {
     padding-inline-end: $spacing-10;
+  }
+}
+
+:host(
+    #{$prefix}-dropdown[type='inline'][warn]:not([disabled]):not([read-only])
+  ),
+:host(
+    #{$prefix}-dropdown[type='inline'][invalid]:not([disabled]):not([read-only])
+  ) {
+  grid-template: auto / auto min-content auto;
+
+  .#{$prefix}--form__helper-text {
+    grid-column: 3;
   }
 }
 

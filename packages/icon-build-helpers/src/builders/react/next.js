@@ -15,6 +15,7 @@ const path = require('path');
 const ts = require('typescript');
 const virtual = require('../plugins/virtual');
 const { svgToJSX, jsToAST } = require('./next/convert');
+const { annotateAsPure } = require('./next/pure');
 const templates = require('./next/templates');
 const { writeTsDefinitions } = require('./next/typescript');
 
@@ -372,7 +373,9 @@ function createIconSource(moduleName, sizes, preamble = []) {
     ].filter(Boolean),
   });
 
-  return source;
+  // Mark `forwardRef` calls as pure so the bundler can drop unused icon
+  // exports.
+  return annotateAsPure(source);
 }
 
 /**

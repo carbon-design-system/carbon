@@ -199,6 +199,7 @@ describe('cds-dropdown', function () {
       triggerButton.click();
       await el.updateComplete;
       expect(el.open).to.be.false;
+      expect(el.getAttribute('tabindex')).to.be.null;
     });
 
     it('should respect the readOnly property', async () => {
@@ -503,6 +504,22 @@ describe('cds-dropdown', function () {
   });
 
   describe('events', () => {
+    it('should not commit selection when beingselected is prevented', async () => {
+      const el = await fixture(dropdown);
+      const items = el.querySelectorAll('cds-dropdown-item');
+
+      el.addEventListener('cds-dropdown-beingselected', (event) => {
+        event.preventDefault();
+      });
+
+      items[1].click();
+      await el.updateComplete;
+
+      expect(el.value).to.equal('');
+      expect(items[0].selected).to.be.false;
+      expect(items[1].selected).to.be.false;
+    });
+
     it('should fire cds-dropdown-selected event when item is selected', async () => {
       const el = await fixture(dropdown);
       let eventFired = false;
@@ -668,6 +685,51 @@ describe('Validation states with disabled/readonly', () => {
     const triggerButton = el.shadowRoot.querySelector('#trigger-button');
     triggerButton.click();
     await el.updateComplete;
+
+    describe('AI Label interaction', () => {
+      it('should not trigger dropdown actions when keypress events originate from AI Label', async () => {
+        const el = await fixture(html`
+          <cds-dropdown title-text="Dropdown Label">
+            <cds-dropdown-item value="option-1">Option 1</cds-dropdown-item>
+            <cds-dropdown-item value="option-2">Option 2</cds-dropdown-item>
+            <cds-ai-label slot="ai-label">AI</cds-ai-label>
+          </cds-dropdown>
+        `);
+
+        const aiLabel = el.querySelector('cds-ai-label');
+        expect(aiLabel).to.exist;
+
+        // Simulate keypress event from AI Label (Space key)
+        const spaceEvent = new KeyboardEvent('keypress', {
+          key: ' ',
+          bubbles: true,
+        });
+        Object.defineProperty(spaceEvent, 'target', {
+          value: aiLabel,
+          enumerable: true,
+        });
+
+        el.dispatchEvent(spaceEvent);
+
+        // Dropdown should remain closed
+        expect(el.open).to.be.false;
+
+        // Simulate keypress event from AI Label (Enter key)
+        const enterEvent = new KeyboardEvent('keypress', {
+          key: 'Enter',
+          bubbles: true,
+        });
+        Object.defineProperty(enterEvent, 'target', {
+          value: aiLabel,
+          enumerable: true,
+        });
+
+        el.dispatchEvent(enterEvent);
+
+        // Dropdown should still remain closed
+        expect(el.open).to.be.false;
+      });
+    });
 
     expect(el.open).to.be.false;
   });

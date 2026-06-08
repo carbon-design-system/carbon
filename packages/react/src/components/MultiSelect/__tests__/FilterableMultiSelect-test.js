@@ -545,6 +545,20 @@ describe('FilterableMultiSelect', () => {
     expect(screen.getByText('0')).toBeInTheDocument();
   });
 
+  it('should not render helperText when helperText is an empty string', async () => {
+    const { container } = render(
+      <FilterableMultiSelect {...mockProps} helperText="" />
+    );
+    await waitForPosition();
+
+    expect(
+      container.querySelector(`.${prefix}--form__helper-text`)
+    ).not.toBeInTheDocument();
+    expect(screen.getByRole('combobox')).not.toHaveAttribute(
+      'aria-describedby'
+    );
+  });
+
   it('should handle hideLabel prop', async () => {
     render(
       <FilterableMultiSelect {...mockProps} titleText="Test Title" hideLabel />

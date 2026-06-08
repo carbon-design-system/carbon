@@ -21,6 +21,7 @@ collect:
         - allowEmpty
         - aria-controls
         - aria-current
+        - aria-describedby
         - aria-label
         - aria-labelledby
         - ariaLabel
@@ -251,6 +252,7 @@ collect:
         - warn
         - warnText
         - width
+        - withRowGap
         # AccordionItem
         - handleAnimationEnd
         - onHeadingClick
@@ -359,8 +361,6 @@ collect:
         - enableV12TileDefaultIcons
         - enableV12TileRadioIcons
         - flags
-        # Filename
-        - aria-describedby
         # FileUploader
         - buttonLabel
         - filenameStatus
