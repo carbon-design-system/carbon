@@ -99,7 +99,7 @@ class CDSMenu extends HostListenerMixin(LitElement) {
    * Open value for the menu .
    */
   @property({ type: Boolean, reflect: true })
-  open = true;
+  open = false;
   /**
    * Active element in the DOM .
    */
