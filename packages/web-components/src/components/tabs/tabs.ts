@@ -88,7 +88,12 @@ export default class CDSTabs extends HostListenerMixin(CDSContentSwitcher) {
    */
   private _syncSizeToTabs() {
     if (this.type === TABS_TYPE.CONTAINED || this.vertical) {
-      const size = this.getAttribute('size');
+      const rawSize = this.getAttribute('size') as TABS_SIZE | null;
+      const size =
+        rawSize === TABS_SIZE.EXTRA_LARGE && !this.vertical
+          ? TABS_SIZE.LARGE
+          : rawSize;
+
       if (size) {
         const value = `var(--${prefix}-layout-size-height-${size})`;
         this.style.setProperty(`--${prefix}-layout-size-height`, value);
@@ -478,7 +483,10 @@ export default class CDSTabs extends HostListenerMixin(CDSContentSwitcher) {
   dismissable;
 
   /**
-   * Specify the size of contained tabs.
+   * Specify the size of the tabs.
+   *
+   * Supports `sm`, `md`, and `lg` for contained tabs.
+   * Supports `xl` only when `vertical` is set; otherwise `xl` falls back to `lg`.
    */
   @property({ reflect: true })
   // @ts-expect-error - TABS_SIZE extends CONTENT_SWITCHER_SIZE with additional 'md' value

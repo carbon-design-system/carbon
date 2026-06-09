@@ -1012,7 +1012,7 @@ export const Vertical = {
     size: {
       control: { type: 'select' },
       options: ['sm', 'md', 'lg', 'xl'],
-      description: 'Specify the size of the vertical tabs',
+      description: 'Specify the size of the vertical tabs.',
     },
   },
   render: ({ selectionMode, selectedIndex, customHeight, size }) => {
