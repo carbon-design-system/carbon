@@ -99,50 +99,6 @@ describe('cds-overflow-menu', () => {
     expect(menuBody.open).to.be.false;
   });
 
-  it('should focus the trigger button when focused programmatically', async () => {
-    const el = await fixture(basicOverflowMenu);
-    const triggerButton = el.shadowRoot?.querySelector('button');
-
-    el.focus();
-
-    expect(document.activeElement).to.equal(el);
-    expect(el.shadowRoot?.activeElement).to.equal(triggerButton);
-  });
-
-  it('should trigger the internal button when clicked programmatically', async () => {
-    const el = await fixture(basicOverflowMenu);
-    const menuBody = el.querySelector('cds-overflow-menu-body');
-
-    el.click();
-
-    await el.updateComplete;
-    await menuBody.updateComplete;
-
-    expect(el.open).to.be.true;
-    expect(menuBody.open).to.be.true;
-  });
-
-  it('should not trigger the internal button when disabled and clicked programmatically', async () => {
-    const el = await fixture(html`
-      <cds-overflow-menu disabled>
-        <span slot="tooltip-content">Options</span>
-        <cds-overflow-menu-body>
-          <cds-overflow-menu-item>Filter A</cds-overflow-menu-item>
-          <cds-overflow-menu-item>Filter B</cds-overflow-menu-item>
-        </cds-overflow-menu-body>
-      </cds-overflow-menu>
-    `);
-    const menuBody = el.querySelector('cds-overflow-menu-body');
-
-    el.click();
-
-    await el.updateComplete;
-    await menuBody.updateComplete;
-
-    expect(el.open).to.be.false;
-    expect(menuBody.open).to.be.false;
-  });
-
   it('should render icon slot in menu item', async () => {
     const el = await fixture(html`
       <cds-overflow-menu>
@@ -516,73 +472,6 @@ describe('cds-overflow-menu', () => {
 
       const firstItem = menu.querySelector('cds-menu-item');
       expect(document.activeElement).to.equal(firstItem);
-    });
-
-    it('should focus the trigger button when focused programmatically', async () => {
-      const featureFlag = await fixture(html`
-        <feature-flags enable-v12-overflowmenu="true">
-          <cds-overflow-menu label="Actions">
-            <cds-menu>
-              <cds-menu-item label="Stop app"></cds-menu-item>
-              <cds-menu-item label="Delete app" kind="danger"></cds-menu-item>
-            </cds-menu>
-          </cds-overflow-menu>
-        </feature-flags>
-      `);
-      const el = featureFlag.querySelector('cds-overflow-menu');
-      const triggerButton = el.shadowRoot?.querySelector('button');
-
-      el.focus();
-
-      expect(document.activeElement).to.equal(el);
-      expect(el.shadowRoot?.activeElement).to.equal(triggerButton);
-    });
-
-    it('should trigger the internal button when clicked programmatically', async () => {
-      const featureFlag = await fixture(html`
-        <feature-flags enable-v12-overflowmenu="true">
-          <cds-overflow-menu label="Actions">
-            <cds-menu>
-              <cds-menu-item label="Stop app"></cds-menu-item>
-              <cds-menu-item label="Delete app" kind="danger"></cds-menu-item>
-            </cds-menu>
-          </cds-overflow-menu>
-        </feature-flags>
-      `);
-      const el = featureFlag.querySelector('cds-overflow-menu');
-
-      el.click();
-
-      await el.updateComplete;
-
-      const menu = el.querySelector('cds-menu');
-      await menu.updateComplete;
-
-      expect(el.open).to.be.true;
-      expect(menu.open).to.be.true;
-    });
-
-    it('should not trigger the internal button when disabled and clicked programmatically', async () => {
-      const featureFlag = await fixture(html`
-        <feature-flags enable-v12-overflowmenu="true">
-          <cds-overflow-menu label="Actions" disabled>
-            <cds-menu>
-              <cds-menu-item label="Stop app"></cds-menu-item>
-              <cds-menu-item label="Delete app" kind="danger"></cds-menu-item>
-            </cds-menu>
-          </cds-overflow-menu>
-        </feature-flags>
-      `);
-      const el = featureFlag.querySelector('cds-overflow-menu');
-      const menu = el.querySelector('cds-menu');
-
-      el.click();
-
-      await el.updateComplete;
-      await menu.updateComplete;
-
-      expect(el.open).to.be.false;
-      expect(menu.open).to.be.false;
     });
 
     it('should focus selectable composition when it is the first active item', async () => {

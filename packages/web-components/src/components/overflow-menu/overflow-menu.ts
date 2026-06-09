@@ -274,9 +274,7 @@ class CDSOverflowMenu
       this.setAttribute('aria-haspopup', 'true');
     }
     if (!this.shadowRoot) {
-      this.attachShadow(
-        (this.constructor as typeof CDSOverflowMenu).shadowRootOptions
-      );
+      this.attachShadow({ mode: 'open' });
     }
     super.connectedCallback();
 
@@ -416,19 +414,6 @@ class CDSOverflowMenu
 
   render() {
     return html`${super.render()} `;
-  }
-
-  /**
-   * Delegates programmatic host clicks to the trigger button.
-   */
-  click() {
-    const triggerButton = this._getTriggerButton();
-    if (triggerButton) {
-      triggerButton.click();
-      return;
-    }
-
-    super.click();
   }
 
   private _getLabelText() {
@@ -708,10 +693,6 @@ class CDSOverflowMenu
       tooltip.open = false;
     }
   }
-
-  static shadowRootOptions = {
-    ...CDSIconButton.shadowRootOptions,
-  };
 }
 
 export default CDSOverflowMenu;
