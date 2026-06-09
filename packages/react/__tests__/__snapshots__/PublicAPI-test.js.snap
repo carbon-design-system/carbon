@@ -6730,7 +6730,12 @@ Map {
   "ModalBody" => {
     "$$typeof": Symbol(react.forward_ref),
     "propTypes": {
-      "aria-label": [Function],
+      "aria-label": {
+        "type": "string",
+      },
+      "aria-labelledby": {
+        "type": "string",
+      },
       "children": {
         "type": "node",
       },

@@ -537,7 +537,7 @@ exports[`DataTable behaves as expected selection should render and match snapsho
         class="cds--toolbar-content"
       >
         <div
-          aria-label="Filter table"
+          aria-labelledby="custom-id-search"
           class="cds--search cds--toolbar-search-container-persistent"
           role="search"
         >
@@ -987,7 +987,7 @@ exports[`DataTable renders as expected - Component API should render and match s
         class="cds--toolbar-content"
       >
         <div
-          aria-label="Filter table"
+          aria-labelledby="custom-id-search"
           class="cds--search cds--toolbar-search-container-persistent"
           role="search"
         >

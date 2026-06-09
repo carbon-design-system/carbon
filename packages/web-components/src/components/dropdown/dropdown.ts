@@ -35,6 +35,7 @@ import {
 import CDSDropdownItem from './dropdown-item';
 import styles from './dropdown.scss?lit';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
+import CDSAILabel from '../ai-label/ai-label';
 
 export {
   DROPDOWN_KEYBOARD_ACTION,
@@ -433,6 +434,9 @@ class CDSDropdown extends ValidityMixin(
    * Handles keypress events (Space, Enter)
    */
   protected _handleKeypressInner(event: KeyboardEvent) {
+    if (event.target instanceof CDSAILabel) {
+      return;
+    }
     const { key } = event;
     const action = (this.constructor as typeof CDSDropdown).getAction(key);
     // When closed
