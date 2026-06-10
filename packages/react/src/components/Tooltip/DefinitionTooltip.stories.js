@@ -165,22 +165,9 @@ WithLargeText.argTypes = {
       type: 'text',
     },
   },
-  id: {
-    table: { disable: true },
-  },
   openOnHover: {
     control: {
       type: 'boolean',
-    },
-  },
-  tooltipText: {
-    table: {
-      disable: true,
-    },
-  },
-  triggerClassName: {
-    table: {
-      disable: true,
     },
   },
 };

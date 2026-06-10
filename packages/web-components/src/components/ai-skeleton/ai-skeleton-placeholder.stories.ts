@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2019, 2024
+ * Copyright IBM Corp. 2019, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -12,7 +12,6 @@ import mdx from './ai-skeleton.mdx';
 export const AISkeletonPlaceholder = {
   // This story doesn't accept any args.
   args: {},
-  argTypes: {},
   parameters: {
     docs: {
       page: mdx,

@@ -214,6 +214,12 @@ class CDSSearch extends HostListenerMixin(FocusMixin(FormMixin(LitElement))) {
   autoComplete = 'off';
 
   /**
+   * Sets the input to be focussed automatically on page load. Defaults to false
+   */
+  @property({ type: Boolean })
+  autofocus = false;
+
+  /**
    * Specify a label to be read by screen readers on the "close" button
    */
   @property({ attribute: 'close-button-label-text' })
@@ -285,6 +291,7 @@ class CDSSearch extends HostListenerMixin(FocusMixin(FormMixin(LitElement))) {
   render() {
     const {
       autoComplete,
+      autofocus,
       closeButtonLabelText,
       disabled,
       hasCustomIcon,
@@ -319,6 +326,7 @@ class CDSSearch extends HostListenerMixin(FocusMixin(FormMixin(LitElement))) {
       </label>
       <input
         autocomplete="${autoComplete}"
+        ?autofocus="${autofocus}"
         id="input"
         part="input"
         type="${ifNonEmpty(type)}"
