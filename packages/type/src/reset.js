@@ -6,24 +6,24 @@
  */
 
 import { baseFontSize, px } from '@carbon/layout';
-import { fontFamilies } from './fontFamily';
-import { fontWeights } from './fontWeight';
+import { mono, sans } from './fontFamily';
+import { regular, semibold } from './fontWeight';
 
 export const reset = {
   html: {
-    fontSize: px(baseFontSize),
+    fontSize: /*#__PURE__*/ px(baseFontSize),
   },
   body: {
-    fontFamily: fontFamilies.sans,
-    fontWeight: fontWeights.regular,
+    fontFamily: sans,
+    fontWeight: regular,
     textRendering: 'optimizeLegibility',
     '-webkit-font-smoothing': 'antialiased',
     '-moz-osx-font-smoothing': 'grayscale',
   },
   strong: {
-    fontWeight: fontWeights.semibold,
+    fontWeight: semibold,
   },
   code: {
-    fontFamily: fontFamilies.mono,
+    fontFamily: mono,
   },
 };

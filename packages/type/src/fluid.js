@@ -7,9 +7,10 @@
 
 import { breakpoint as bp, breakpoints } from '@carbon/layout';
 
-const breakpointNames = Object.keys(breakpoints);
-
+// Computed lazily so the module stays free of top-level side effects, which
+// keeps this file tree-shakeable for bundlers.
 function next(name) {
+  const breakpointNames = Object.keys(breakpoints);
   return breakpointNames[breakpointNames.indexOf(name) + 1];
 }
 
