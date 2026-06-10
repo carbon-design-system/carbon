@@ -112,6 +112,23 @@ describe('cds-radio-button-group', () => {
     expect(rb?.checked).to.be.false;
   });
 
+  it('should render a visually-hidden "Read only" description when readonly', async () => {
+    const el = await fixture(html`
+      <cds-radio-button-group readonly legend-text="test">
+        <cds-radio-button value="test-1"></cds-radio-button>
+        <cds-radio-button value="test-2"></cds-radio-button>
+      </cds-radio-button-group>
+    `);
+    const hidden = el.shadowRoot.querySelector('.cds--visually-hidden');
+    expect(hidden).to.exist;
+    expect(hidden?.textContent).to.contain('Read only');
+
+    const fieldset = el.shadowRoot.querySelector('fieldset');
+    expect(fieldset?.getAttribute('aria-describedby')).to.contain(
+      'readonly-text'
+    );
+  });
+
   it('selects initial value', async () => {
     const el = await fixture(html`
       <cds-radio-button-group value="test-1">

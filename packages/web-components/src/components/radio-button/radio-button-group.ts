@@ -8,6 +8,7 @@
 import { LitElement, html } from 'lit';
 import { property } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
+import { ifDefined } from 'lit/directives/if-defined.js';
 import { prefix } from '../../globals/settings';
 import FormMixin from '../../globals/mixins/form';
 import HostListenerMixin from '../../globals/mixins/host-listener';
@@ -271,7 +272,13 @@ class CDSRadioButtonGroup extends FormMixin(HostListenerMixin(LitElement)) {
     return html` <fieldset
         class="${fieldsetClasses}"
         ?disabled="${disabled}"
-        aria-readonly="${readOnly}">
+        aria-readonly=${ifDefined(readOnly ? 'true' : undefined)}
+        aria-describedby=${ifDefined(readOnly ? 'readonly-text' : undefined)}>
+        ${readOnly
+          ? html`<span id="readonly-text" class="${prefix}--visually-hidden"
+              >Read only</span
+            >`
+          : null}
         ${legendText
           ? html` <legend class="${prefix}--label">
               ${legendText}

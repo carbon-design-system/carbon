@@ -218,6 +218,25 @@ describe('cds-dropdown', function () {
       expect(el.open).to.be.false;
     });
 
+    it('should announce readonly state to screen readers', async () => {
+      const el = await fixture(html`
+        <cds-dropdown read-only title-text="Dropdown Label">
+          <cds-dropdown-item value="option-1">Option 1</cds-dropdown-item>
+        </cds-dropdown>
+      `);
+      await el.updateComplete;
+
+      const readonlyText = el.shadowRoot.querySelector('.cds--visually-hidden');
+      expect(readonlyText).to.exist;
+      expect(readonlyText.textContent.trim()).to.equal('Read only');
+
+      const triggerButton = el.shadowRoot.querySelector('#trigger-button');
+      expect(triggerButton.getAttribute('aria-readonly')).to.equal('true');
+      expect(triggerButton.getAttribute('aria-describedby')).to.contain(
+        'readonly-text'
+      );
+    });
+
     it('should display helper text', async () => {
       const el = await fixture(html`
         <cds-dropdown

@@ -247,6 +247,8 @@ const RadioButtonGroup = React.forwardRef(
       </div>
     );
 
+    const readOnlyId = `radio-button-group-readonly-text-${radioButtonGroupInstanceId}`;
+
     const divRef = useRef<HTMLDivElement>(null);
 
     // AILabel is always size `mini`
@@ -262,8 +264,25 @@ const RadioButtonGroup = React.forwardRef(
           className={fieldsetClasses}
           disabled={disabled}
           data-invalid={invalid ? true : undefined}
-          aria-describedby={showHelper && hasHelper ? helperId : undefined}
-          {...rest}>
+          {...rest}
+          aria-readonly={readOnly || undefined}
+          aria-describedby={
+            readOnly
+              ? classNames(
+                  readOnlyId,
+                  showHelper && hasHelper ? helperId : undefined,
+                  rest['aria-describedby']
+                )
+              : classNames(
+                  showHelper && hasHelper ? helperId : undefined,
+                  rest['aria-describedby']
+                ) || undefined
+          }>
+          {readOnly && (
+            <span id={readOnlyId} className={`${prefix}--visually-hidden`}>
+              Read only
+            </span>
+          )}
           {legendText && (
             <Legend className={`${prefix}--label`}>
               {legendText}

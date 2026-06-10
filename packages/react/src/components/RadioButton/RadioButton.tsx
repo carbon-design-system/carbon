@@ -159,6 +159,7 @@ const RadioButton = React.forwardRef<HTMLInputElement, RadioButtonProps>(
     const prefix = usePrefix();
     const uid = useId('radio-button');
     const uniqueId = id || uid;
+    const readOnlyId = `${uniqueId}-readonly-text`;
 
     const normalizedProps = useNormalizedInputProps({
       id: uniqueId,
@@ -218,7 +219,17 @@ const RadioButton = React.forwardRef<HTMLInputElement, RadioButtonProps>(
           name={name}
           required={required}
           readOnly={readOnly}
+          aria-describedby={
+            readOnly
+              ? classNames(readOnlyId, rest['aria-describedby'])
+              : rest['aria-describedby']
+          }
         />
+        {readOnly && (
+          <span id={readOnlyId} className={`${prefix}--visually-hidden`}>
+            Read only
+          </span>
+        )}
         <label htmlFor={uniqueId} className={`${prefix}--radio-button__label`}>
           <span className={`${prefix}--radio-button__appearance`} />
           {labelText && (

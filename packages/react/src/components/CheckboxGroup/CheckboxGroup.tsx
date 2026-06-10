@@ -86,6 +86,8 @@ const CheckboxGroup = ({
     ? undefined
     : `checkbox-group-helper-text-${checkboxGroupInstanceId}`;
 
+  const readOnlyId = `checkbox-group-readonly-text-${checkboxGroupInstanceId}`;
+
   const helper = hasHelper && (
     <div id={helperId} className={`${prefix}--form__helper-text`}>
       {helperText}
@@ -149,9 +151,11 @@ const CheckboxGroup = ({
       aria-readonly={readOnly}
       aria-disabled={disabled}
       aria-describedby={
-        !normalizedProps.invalid && !normalizedProps.warn && helper
-          ? helperId
-          : undefined
+        cx({
+          [helperId as string]:
+            !normalizedProps.invalid && !normalizedProps.warn && helper,
+          [readOnlyId]: readOnly,
+        }) || undefined
       }
       {...rest}>
       <legend
@@ -169,6 +173,11 @@ const CheckboxGroup = ({
         )}
       </legend>
       {clonedChildren}
+      {readOnly && (
+        <span id={readOnlyId} className={`${prefix}--visually-hidden`}>
+          Read only
+        </span>
+      )}
       <div className={`${prefix}--checkbox-group__validation-msg`}>
         {normalizedProps.invalid && (
           <>

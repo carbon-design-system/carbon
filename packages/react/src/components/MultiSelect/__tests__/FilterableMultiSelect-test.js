@@ -87,6 +87,35 @@ describe('FilterableMultiSelect', () => {
     ).toBeFalsy();
   });
 
+  it('should announce readonly state to screen readers', async () => {
+    const items = generateItems(4, generateGenericItem);
+    const label = 'test-label';
+    const { container } = render(
+      <FilterableMultiSelect
+        id="test"
+        readOnly={true}
+        label={label}
+        items={items}
+      />
+    );
+    await waitForPosition();
+
+    // The visually-hidden "Read only" text node should exist
+    // eslint-disable-next-line testing-library/no-node-access
+    const readOnlyText = container.querySelector('#test-readonly-text');
+    expect(readOnlyText).toBeInTheDocument();
+    expect(readOnlyText).toHaveClass('cds--visually-hidden');
+    expect(readOnlyText).toHaveTextContent('Read only');
+
+    // The focusable combobox input should reference the readonly text and be aria-readonly
+    // eslint-disable-next-line testing-library/no-node-access
+    const input = container.querySelector('input');
+    expect(input).toHaveAttribute('aria-readonly', 'true');
+    expect(input.getAttribute('aria-describedby')).toContain(
+      'test-readonly-text'
+    );
+  });
+
   it('should display helper text instead of warning when disabled', async () => {
     render(
       <FilterableMultiSelect

@@ -6,6 +6,7 @@
  */
 
 import { classMap } from 'lit/directives/class-map.js';
+import { ifDefined } from 'lit/directives/if-defined.js';
 import { LitElement, html } from 'lit';
 import { property } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
@@ -187,6 +188,15 @@ class CDSCheckboxGroup extends LitElement {
         </div>`
       : null;
 
+    const showHelperDescribedBy =
+      !normalizedProps.invalid && !normalizedProps.warn && helper
+        ? helperId
+        : undefined;
+    const describedBy =
+      [showHelperDescribedBy, readonly ? 'readonly-text' : undefined]
+        .filter(Boolean)
+        .join(' ') || undefined;
+
     const fieldsetClasses = classMap({
       [`${prefix}--checkbox-group`]: true,
       [`${prefix}--checkbox-group--readonly`]: readonly,
@@ -202,13 +212,10 @@ class CDSCheckboxGroup extends LitElement {
         class="${fieldsetClasses}"
         ?data-invalid=${normalizedProps.invalid}
         ?disabled=${disabled}
-        aria-disabled=${readonly || disabled}
+        aria-disabled=${ifDefined(disabled ? 'true' : undefined)}
+        aria-readonly=${ifDefined(readonly ? 'true' : undefined)}
         ?aria-labelledby=${ariaLabelledBy || legendId}
-        ?aria-describedby=${!normalizedProps.invalid &&
-        !normalizedProps.warn &&
-        helper
-          ? helperId
-          : undefined}
+        aria-describedby=${ifDefined(describedBy)}
         orientation=${orientation}>
         <legend class="${prefix}--label" id=${legendId || ariaLabelledBy}>
           ${legendText}
@@ -216,6 +223,11 @@ class CDSCheckboxGroup extends LitElement {
           <slot name="decorator" @slotchange="${handleSlotChange}"></slot>
           <slot name="slug" @slotchange="${handleSlotChange}"></slot>
         </legend>
+        ${readonly
+          ? html`<span id="readonly-text" class="${prefix}--visually-hidden"
+              >Read only</span
+            >`
+          : null}
         <slot></slot>
         <div class="${prefix}--checkbox-group__validation-msg">
           ${normalizedProps.invalid

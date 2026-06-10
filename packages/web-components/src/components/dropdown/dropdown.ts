@@ -1274,6 +1274,7 @@ class CDSDropdown extends ValidityMixin(
       ariaLabel,
       _classes: classes,
       disabled,
+      readOnly,
       helperText,
       invalidText,
       open,
@@ -1388,7 +1389,16 @@ class CDSDropdown extends ValidityMixin(
               : open
                 ? (activeDescendant ?? activeDescendantFallback)
                 : ''
+          )}"
+          aria-readonly="${ifDefined(readOnly ? 'true' : undefined)}"
+          aria-describedby="${ifDefined(
+            readOnly ? 'readonly-text' : undefined
           )}">
+          ${readOnly
+            ? html`<span id="readonly-text" class="${prefix}--visually-hidden"
+                >Read only</span
+              >`
+            : null}
           ${this._renderPrecedingLabel()}${this._renderLabel()}${this._renderFollowingLabel()}
           <div id="trigger-caret" class="${iconContainerClasses}">
             ${iconLoader(ChevronDown16, { 'aria-label': toggleLabel })}

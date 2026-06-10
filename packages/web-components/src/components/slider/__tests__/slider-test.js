@@ -29,6 +29,33 @@ describe('cds-slider', () => {
     expect(input).to.have.attribute('data-invalid');
   });
 
+  it('should announce readonly state to screen readers', async () => {
+    const el = await fixture(
+      html` <cds-slider
+        label-text="Slider Label"
+        max="100"
+        min="0"
+        step="1"
+        value="50"
+        readonly>
+        <cds-slider-input
+          aria-label="Slider value"
+          type="number"></cds-slider-input>
+      </cds-slider>`
+    );
+    await el.updateComplete;
+
+    const readonlyText = el?.shadowRoot?.querySelector('.cds--visually-hidden');
+    expect(readonlyText).to.exist;
+    expect(readonlyText.textContent.trim()).to.equal('Read only');
+    expect(readonlyText.id).to.equal('readonly-text');
+
+    const thumb = el?.shadowRoot?.querySelector('[role="slider"]');
+    expect(thumb).to.exist;
+    expect(thumb.getAttribute('aria-readonly')).to.equal('true');
+    expect(thumb.getAttribute('aria-describedby')).to.contain('readonly-text');
+  });
+
   it('should display warn state and message', async () => {
     const el = await fixture(
       html` <cds-slider

@@ -198,6 +198,7 @@ class CDSToggle extends HostListenerMixin(CDSCheckbox) {
       labelA,
       labelB,
       value,
+      readOnly,
       _handleChange: handleChange,
     } = this;
     const inputClasses = classMap({
@@ -235,12 +236,19 @@ class CDSToggle extends HostListenerMixin(CDSCheckbox) {
         type="button"
         aria-checked=${toggled}
         aria-labelledby=${ifDefined(ariaLabelledby)}
+        aria-readonly=${ifDefined(readOnly ? 'true' : undefined)}
+        aria-describedby=${ifDefined(readOnly ? 'readonly-text' : undefined)}
         .checked=${toggled}
         name="${ifDefined(name)}"
         value="${ifDefined(value)}"
         ?disabled=${disabled}
         id="${id}"
         @click=${handleChange}></button>
+      ${readOnly
+        ? html`<span id="readonly-text" class="${prefix}--visually-hidden"
+            >Read only</span
+          >`
+        : null}
       <label for="${id}" class="${prefix}--toggle__label">
         ${labelText
           ? html`<span class="${labelTextClasses}">${labelText}</span>`

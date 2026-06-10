@@ -303,6 +303,25 @@ describe('Select', () => {
       expect(onChange).toHaveBeenCalledTimes(0);
     });
 
+    it('should announce readOnly state via a visually-hidden description', () => {
+      const { container } = render(
+        <Select id="select-readonly" labelText="Select label" readOnly>
+          <SelectItem text="Option 1" value="option-1" />
+        </Select>
+      );
+
+      const readOnlyText = container.querySelector(
+        `.${prefix}--visually-hidden`
+      );
+      expect(readOnlyText).toBeInTheDocument();
+      expect(readOnlyText).toHaveTextContent('Read only');
+
+      const theSelect = screen.getByRole('combobox');
+      expect(theSelect.getAttribute('aria-describedby')).toContain(
+        readOnlyText.getAttribute('id')
+      );
+    });
+
     it('should respect size prop', () => {
       const { container } = render(
         <Select id="select" labelText="Select" size="sm" />
