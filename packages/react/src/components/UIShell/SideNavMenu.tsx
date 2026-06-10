@@ -22,7 +22,7 @@ import { keys, match } from '../../internal/keyboard';
 import { usePrefix } from '../../internal/usePrefix';
 import { SideNavContext } from './SideNavContext';
 
-export interface SideNavMenuProps  extends React.HTMLAttributes<HTMLLIElement>  {
+export interface SideNavMenuProps extends React.HTMLAttributes<HTMLLIElement> {
   /**
    * An optional CSS class to apply to the component.
    */
