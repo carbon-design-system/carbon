@@ -22,7 +22,7 @@ import { keys, match } from '../../internal/keyboard';
 import { usePrefix } from '../../internal/usePrefix';
 import { SideNavContext } from './SideNavContext';
 
-export interface SideNavMenuProps {
+export interface SideNavMenuProps  extends React.HTMLAttributes<HTMLLIElement>  {
   /**
    * An optional CSS class to apply to the component.
    */
@@ -81,6 +81,7 @@ const SideNavMenu = forwardRef<HTMLElement, SideNavMenuProps>(
       isSideNavExpanded,
       tabIndex,
       title,
+      ...rest
     },
     ref
   ) => {
@@ -115,6 +116,7 @@ const SideNavMenu = forwardRef<HTMLElement, SideNavMenuProps>(
     return (
       // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
       <li
+        {...rest}
         className={className}
         onKeyDown={(event) => {
           if (match(event, keys.Escape)) {

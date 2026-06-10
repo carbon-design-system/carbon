@@ -100,6 +100,27 @@ describe('SideNavMenu', () => {
     expect(ref).toHaveBeenCalledWith(screen.getByRole('button'));
   });
 
+  it('should spread extra props onto the outermost element', () => {
+    const { container } = render(
+      <SideNavMenu
+        title="test-title"
+        data-testid="custom-sidenav-menu"
+        data-analytics="menu-analytics">
+        <SideNavMenuItem>a</SideNavMenuItem>
+        <SideNavMenuItem>b</SideNavMenuItem>
+        <SideNavMenuItem>c</SideNavMenuItem>
+      </SideNavMenu>
+    );
+    expect(container.firstChild).toHaveAttribute(
+      'data-testid',
+      'custom-sidenav-menu'
+    );
+    expect(container.firstChild).toHaveAttribute(
+      'data-analytics',
+      'menu-analytics'
+    );
+  });
+
   it('should collapse the menu when the rail side nav collapses', () => {
     render(
       <SideNavContext.Provider value={{ isRail: true }}>
