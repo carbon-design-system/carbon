@@ -11,9 +11,7 @@ import { Button, Tabs, Tab, TabList, TabPanels, TabPanel } from '@carbon/react';
 import { Lightning, Settings } from '@carbon/react/icons';
 
 // Test 1: Basic PageHeader with title only
-export const BasicPageHeader = () => (
-  <PageHeader><PageHeader.Content title="Page title" /></PageHeader>
-);
+export const BasicPageHeader = () => <PageHeader><PageHeader.Content title="Page title" /></PageHeader>;
 
 // Test 2: PageHeader with title and subtitle
 export const PageHeaderWithSubtitle = () => (
