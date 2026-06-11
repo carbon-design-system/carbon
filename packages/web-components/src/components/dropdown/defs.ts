@@ -47,6 +47,11 @@ export enum DROPDOWN_KEYBOARD_ACTION {
  */
 export enum DROPDOWN_SIZE {
   /**
+   * Extra small size.
+   */
+  EXTRA_SMALL = 'xs',
+
+  /**
    * Small size.
    */
   SMALL = 'sm',

@@ -319,3 +319,5 @@ $css--plex: true !default;
     inset-inline-end: to-rem(116px) !important;
   }
 }
+
+@include emit-layout-tokens-to-shadow-host('#{$prefix}-combo-box');

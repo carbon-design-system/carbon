@@ -8,7 +8,7 @@
 import PropTypes from 'prop-types';
 
 const listBoxTypes = ['default', 'inline'] as const;
-const listBoxSizes = ['sm', 'md', 'lg'] as const;
+const listBoxSizes = ['xs', 'sm', 'md', 'lg'] as const;
 
 export type ListBoxType = (typeof listBoxTypes)[number];
 export type ListBoxSize = (typeof listBoxSizes)[number];
