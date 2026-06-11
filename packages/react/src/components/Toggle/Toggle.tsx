@@ -160,6 +160,7 @@ export function Toggle({
   });
 
   const labelId = `${id}_label`;
+  const readOnlyId = `${id}_readonly`;
 
   return (
     // eslint-disable-next-line jsx-a11y/click-events-have-key-events
@@ -192,10 +193,24 @@ export function Toggle({
         role="switch"
         type="button"
         aria-checked={checked}
+        aria-readonly={readOnly || undefined}
         aria-labelledby={ariaLabelledby ?? (labelText ? labelId : undefined)}
+        aria-describedby={
+          readOnly
+            ? classNames(readOnlyId, other['aria-describedby'])
+            : other['aria-describedby']
+        }
         disabled={disabled}
         onClick={handleClick}
       />
+      {readOnly && (
+        <Text
+          as="span"
+          id={readOnlyId}
+          className={`${prefix}--visually-hidden`}>
+          Read only
+        </Text>
+      )}
       <LabelComponent
         id={labelId}
         htmlFor={ariaLabelledby ? undefined : id}

@@ -471,6 +471,11 @@ class CDSSelect extends FormMixin(LitElement) {
       describedBy = 'helper-text';
     }
 
+    const describedById =
+      [describedBy ?? '', readonly ? 'readonly-text' : '']
+        .filter(Boolean)
+        .join(' ') || undefined;
+
     const input = html`
       <select
         id="${id}"
@@ -479,7 +484,7 @@ class CDSSelect extends FormMixin(LitElement) {
         title="${value}"
         aria-readonly="${String(readonly)}"
         aria-invalid="${String(normalizedProps.invalid)}"
-        aria-describedby="${ifDefined(describedBy)}"
+        aria-describedby="${ifDefined(describedById)}"
         @input="${handleInput}">
         ${!placeholder || value
           ? undefined
@@ -494,6 +499,11 @@ class CDSSelect extends FormMixin(LitElement) {
             `}
         ${this._renderItems(this)}
       </select>
+      ${readonly
+        ? html`<span id="readonly-text" class="${prefix}--visually-hidden"
+            >Read only</span
+          >`
+        : null}
       ${iconLoader(ChevronDown16, {
         class: `${prefix}--select__arrow`,
         'aria-hidden': 'true',

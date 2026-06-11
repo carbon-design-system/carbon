@@ -274,6 +274,7 @@ class CDSCheckbox extends FocusMixin(FormMixin(LitElement)) {
         part="input"
         class="${`${prefix}--checkbox`}"
         aria-readonly="${String(readonly)}"
+        aria-describedby=${ifDefined(readonly ? 'readonly-text' : undefined)}
         .checked="${checked}"
         ?data-invalid="${normalizedProps.invalid}"
         ?disabled="${disabled}"
@@ -283,6 +284,11 @@ class CDSCheckbox extends FocusMixin(FormMixin(LitElement)) {
         value="${ifDefined(value)}"
         @change="${handleChange}"
         @click="${handleClick}" />
+      ${readonly
+        ? html`<span id="readonly-text" class="${prefix}--visually-hidden"
+            >Read only</span
+          >`
+        : null}
       <label
         for="${ifDefined(id)}"
         part="label"

@@ -112,4 +112,16 @@ describe('cds-radio-button', () => {
 
     expect(input?.getAttribute('aria-readonly')).to.equal('true');
   });
+
+  it('should render a visually-hidden "Read only" description when readonly', async () => {
+    const el = await fixture(
+      html`<cds-radio-button readOnly value="test-value"></cds-radio-button>`
+    );
+    const hidden = el.shadowRoot.querySelector('.cds--visually-hidden');
+    expect(hidden).to.exist;
+    expect(hidden?.textContent).to.contain('Read only');
+
+    const input = el.shadowRoot.querySelector('input[type="radio"]');
+    expect(input?.getAttribute('aria-describedby')).to.contain('readonly-text');
+  });
 });

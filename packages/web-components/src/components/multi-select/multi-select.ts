@@ -431,7 +431,6 @@ class CDSMultiSelect extends CDSDropdown {
   protected _renderPrecedingLabel() {
     const {
       disabled,
-      readOnly,
       clearSelectionLabel,
       _selectedItemsCount: selectedItemsCount,
     } = this;
@@ -452,7 +451,7 @@ class CDSMultiSelect extends CDSDropdown {
             role="button"
             class="${selectionButtonClasses}"
             tabindex="-1"
-            aria-disabled=${readOnly}
+            aria-disabled=${disabled}
             title="${clearSelectionLabel}">
             ${selectedItemsCount}
             ${iconLoader(Close16, {

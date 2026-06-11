@@ -294,4 +294,19 @@ describe('cds-select', () => {
     const internalSelect = el.shadowRoot.querySelector('select');
     expect(internalSelect.getAttribute('aria-invalid')).to.equal('false');
   });
+
+  it('should announce readonly state to screen readers', async () => {
+    const el = await fixture(html`
+      <cds-select label-text="Select" readonly>
+        <cds-select-item value="1">One</cds-select-item>
+      </cds-select>
+    `);
+    const hidden = el.shadowRoot.querySelector('.cds--visually-hidden');
+    expect(hidden).to.exist;
+    expect(hidden.textContent.trim()).to.equal('Read only');
+    const internalSelect = el.shadowRoot.querySelector('select');
+    expect(internalSelect.getAttribute('aria-describedby')).to.include(
+      'readonly-text'
+    );
+  });
 });

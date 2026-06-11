@@ -174,7 +174,30 @@ describe('cds-checkbox-group', function () {
     const el = await fixture(group);
 
     const fieldsetElement = el.shadowRoot.querySelector('fieldset');
-    expect(fieldsetElement.hasAttribute('aria-disabled')).to.be.true;
+    expect(fieldsetElement.getAttribute('aria-readonly')).to.equal('true');
+  });
+
+  it('should announce readonly state to screen readers', async () => {
+    const group = html` <cds-checkbox-group
+      legend-text="Checkbox heading"
+      readOnly>
+      <cds-checkbox default-checked>Checkbox label</cds-checkbox>
+      <cds-checkbox>Checkbox label</cds-checkbox>
+    </cds-checkbox-group>`;
+    const el = await fixture(group);
+
+    const fieldsetElement = el.shadowRoot.querySelector('fieldset');
+
+    const visuallyHidden = el.shadowRoot.querySelector('.cds--visually-hidden');
+    expect(visuallyHidden).to.exist;
+    expect(visuallyHidden.textContent.trim()).to.equal('Read only');
+
+    expect(fieldsetElement.getAttribute('aria-describedby')).to.include(
+      'readonly-text'
+    );
+
+    // readonly alone must not be communicated as disabled
+    expect(fieldsetElement.getAttribute('aria-disabled')).not.to.equal('true');
   });
 
   it('should respect warn prop', async () => {
