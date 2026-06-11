@@ -485,7 +485,7 @@ export default class CDSTabs extends HostListenerMixin(CDSContentSwitcher) {
   /**
    * Specify the size of the tabs.
    *
-   * Supports `sm`, `md`, and `lg` for contained tabs.
+   * Supports `sm`, `md`, and `lg` for all tabs.
    * Supports `xl` only when `vertical` is set; otherwise `xl` falls back to `lg`.
    */
   @property({ reflect: true })
