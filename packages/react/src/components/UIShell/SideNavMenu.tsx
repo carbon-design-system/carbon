@@ -14,6 +14,7 @@ import React, {
   useContext,
   useRef,
   useState,
+  type HTMLAttributes,
   type ReactNode,
   type Ref,
 } from 'react';
@@ -22,7 +23,7 @@ import { keys, match } from '../../internal/keyboard';
 import { usePrefix } from '../../internal/usePrefix';
 import { SideNavContext } from './SideNavContext';
 
-export interface SideNavMenuProps extends React.HTMLAttributes<HTMLLIElement> {
+export interface SideNavMenuProps extends HTMLAttributes<HTMLElement> {
   /**
    * An optional CSS class to apply to the component.
    */
@@ -81,6 +82,7 @@ const SideNavMenu = forwardRef<HTMLElement, SideNavMenuProps>(
       isSideNavExpanded,
       tabIndex,
       title,
+      onKeyDown,
       ...rest
     },
     ref
@@ -122,6 +124,7 @@ const SideNavMenu = forwardRef<HTMLElement, SideNavMenuProps>(
           if (match(event, keys.Escape)) {
             setIsExpanded(false);
           }
+          onKeyDown?.(event);
         }}>
         <button
           aria-expanded={isExpanded}

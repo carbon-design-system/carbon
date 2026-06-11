@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { render, screen } from '@testing-library/react';
+import { render, screen, fireEvent } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import React from 'react';
 import { SideNavMenu, SideNavMenuItem } from '../';
@@ -263,6 +263,30 @@ describe('SideNavMenu', () => {
     await userEvent.click(screen.getByRole('button'));
     await userEvent.keyboard('{Escape}');
 
+    expect(screen.getByRole('button')).toHaveAttribute(
+      'aria-expanded',
+      'false'
+    );
+  });
+
+  it('should call consumer-provided onKeyDown handler', () => {
+    const onKeyDown = jest.fn();
+    const { container } = render(
+      <SideNavMenu
+        title="test-title"
+        defaultExpanded={true}
+        onKeyDown={onKeyDown}>
+        <SideNavMenuItem>a</SideNavMenuItem>
+        <SideNavMenuItem>b</SideNavMenuItem>
+        <SideNavMenuItem>c</SideNavMenuItem>
+      </SideNavMenu>
+    );
+
+    // Trigger keydown on the li element
+    fireEvent.keyDown(container.firstChild, { key: 'Escape' });
+
+    expect(onKeyDown).toHaveBeenCalled();
+    // Verify internal handler still works (menu collapses)
     expect(screen.getByRole('button')).toHaveAttribute(
       'aria-expanded',
       'false'
