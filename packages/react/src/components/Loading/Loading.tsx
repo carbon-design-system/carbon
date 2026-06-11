@@ -7,7 +7,7 @@
 
 import cx from 'classnames';
 import PropTypes from 'prop-types';
-import React, { type HTMLAttributes } from 'react';
+import React, { type HTMLAttributes, useEffect, useRef } from 'react';
 import { usePrefix } from '../../internal/usePrefix';
 import { deprecate } from '../../prop-types/deprecate';
 
@@ -52,6 +52,43 @@ function Loading({
   ...rest
 }: LoadingProps) {
   const prefix = usePrefix();
+  const overlayRef = useRef<HTMLDivElement>(null);
+  const savedFocusRef = useRef<Element | null>(null);
+
+  const trapActive = !!(withOverlay && active);
+
+  useEffect(() => {
+    if (!trapActive) return;
+
+    savedFocusRef.current = document.activeElement;
+    overlayRef.current?.focus();
+
+    return () => {
+      if (
+        savedFocusRef.current &&
+        typeof (savedFocusRef.current as HTMLElement).focus === 'function'
+      ) {
+        (savedFocusRef.current as HTMLElement).focus();
+      }
+      savedFocusRef.current = null;
+    };
+  }, [trapActive]);
+
+  useEffect(() => {
+    if (!trapActive) return;
+
+    function handleKeyDown(e: KeyboardEvent) {
+      if (e.key !== 'Tab') return;
+      // Dialog has no tabbable children; keep focus on the dialog itself.
+      e.preventDefault();
+    }
+
+    document.addEventListener('keydown', handleKeyDown, true);
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown, true);
+    };
+  }, [trapActive]);
+
   const loadingClassName = cx(customClassName, {
     [`${prefix}--loading`]: true,
     [`${prefix}--loading--small`]: small,
@@ -93,7 +130,16 @@ function Loading({
   );
 
   return withOverlay ? (
-    <div className={overlayClassName}>{loading}</div>
+    <div className={overlayClassName} role="presentation">
+      <div
+        ref={overlayRef}
+        role="dialog"
+        aria-modal="true"
+        aria-label={description}
+        tabIndex={-1}>
+        {loading}
+      </div>
+    </div>
   ) : (
     loading
   );
