@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2025, 2025
+ * Copyright IBM Corp. 2025, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -98,5 +98,61 @@ describe('cds-shape-indicator', function () {
       const svgElement = el.shadowRoot.querySelector('svg');
       expect(svgElement).to.exist;
     }
+  });
+
+  it('should render compact mode with tooltip', async () => {
+    const el = await fixture(
+      html`<cds-shape-indicator
+        kind="failed"
+        label="test label"
+        compact></cds-shape-indicator>`
+    );
+    await el.updateComplete;
+
+    expect(el.compact).to.be.true;
+    const tooltip = el.shadowRoot.querySelector('cds-definition-tooltip');
+    expect(tooltip).to.exist;
+  });
+
+  it('should use custom shapeDescription in compact mode', async () => {
+    const el = await fixture(
+      html`<cds-shape-indicator
+        kind="failed"
+        label="test label"
+        compact
+        shape-description="Custom description"></cds-shape-indicator>`
+    );
+    await el.updateComplete;
+
+    expect(el.shapeDescription).to.equal('Custom description');
+    const hiddenText = el.shadowRoot.querySelector('.cds--visually-hidden');
+    expect(hiddenText).to.exist;
+    expect(hiddenText.textContent).to.equal('Custom description');
+  });
+
+  it('should render incomplete kind with custom SVG string', async () => {
+    const el = await fixture(
+      html`<cds-shape-indicator
+        kind="incomplete"
+        label="test label"></cds-shape-indicator>`
+    );
+    await el.updateComplete;
+
+    expect(el.kind).to.equal('incomplete');
+    const svgElement = el.shadowRoot.querySelector('svg');
+    expect(svgElement).to.exist;
+  });
+
+  it('should return null for invalid kind', async () => {
+    const el = await fixture(
+      html`<cds-shape-indicator
+        kind="invalid-kind"
+        label="test label"></cds-shape-indicator>`
+    );
+    await el.updateComplete;
+
+    // When kind is invalid, render should return null
+    const svgElement = el.shadowRoot.querySelector('svg');
+    expect(svgElement).to.not.exist;
   });
 });

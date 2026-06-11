@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2019, 2023
+ * Copyright IBM Corp. 2019, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -9,6 +9,8 @@ import { LitElement, html } from 'lit';
 import { property } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
 import { ICON_INDICATOR_KIND } from './defs';
+import { POPOVER_ALIGNMENT } from '../popover/defs';
+import '../tooltip/definition-tooltip';
 import ErrorFilled16 from '@carbon/icons/es/error--filled/16.js';
 import ErrorFilled20 from '@carbon/icons/es/error--filled/20.js';
 import WarningAltInvertedFilled16 from '@carbon/icons/es/warning--alt-inverted--filled/16.js';
@@ -98,6 +100,30 @@ const iconMap = {
 @customElement(`${prefix}-icon-indicator`)
 class CDSIconIndicator extends LitElement {
   /**
+   * Specify how the tooltip should align with the icon in compact mode
+   */
+  @property({ reflect: true })
+  align: POPOVER_ALIGNMENT = POPOVER_ALIGNMENT.RIGHT;
+
+  /**
+   * Will auto-align the tooltip in compact mode
+   */
+  @property({ type: Boolean, reflect: false })
+  autoalign = false;
+
+  /**
+   * When true, displays only the icon with the label in a tooltip
+   */
+  @property({ type: Boolean, reflect: true })
+  compact = false;
+
+  /**
+   * Additional Description for the icon, used for screen readers in compact mode
+   */
+  @property({ attribute: 'icon-description' })
+  iconDescription = 'Icon';
+
+  /**
    * Icon indicator should be size 16 or 20
    */
   @property()
@@ -117,7 +143,24 @@ class CDSIconIndicator extends LitElement {
 
   render() {
     const IconComponent = iconMap[this.kind]?.[this.size];
-    return html`${iconLoader(IconComponent, { size: this.size })}${this.label}`;
+    const iconElement = iconLoader(IconComponent, { size: this.size });
+
+    if (this.compact) {
+      return html`
+        <cds-definition-tooltip
+          align=${this.align}
+          ?autoalign=${this.autoalign}
+          open-on-hover>
+          ${iconElement}
+          <span class="${prefix}--visually-hidden"
+            >${this.iconDescription}</span
+          >
+          <span slot="definition">${this.label}</span>
+        </cds-definition-tooltip>
+      `;
+    }
+
+    return html`${iconElement}${this.label}`;
   }
 
   static styles = styles;
