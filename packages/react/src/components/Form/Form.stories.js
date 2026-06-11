@@ -95,6 +95,27 @@ export default {
       page: mdx,
     },
   },
+  argTypes: {
+    toolName: {
+      control: 'text',
+      description: 'WebMCP: Clearly name the tool, based on its purpose',
+    },
+    toolDescription: {
+      control: 'text',
+      description:
+        'WebMCP: Describe what action the tool takes and its purpose',
+    },
+    onToolactivated: {
+      action: 'toolactivated',
+      description:
+        'WebMCP: Event handler called when an AI agent activates the tool',
+    },
+    onToolcancel: {
+      action: 'toolcancel',
+      description:
+        'WebMCP: Event handler called when a user cancels the agentic operation',
+    },
+  },
 };
 
 export const Default = () => {
@@ -530,3 +551,161 @@ withAILabel.argTypes = {
     },
   },
 };
+
+export const WebMCP = () => {
+  const [logs, setLogs] = React.useState([]);
+
+  const handleToolActivated = (event) => {
+    const message = `Tool "${event.toolName}" was activated by an AI agent`;
+    console.log(message);
+    setLogs((prev) => [
+      ...prev,
+      { type: 'activated', message, time: new Date().toLocaleTimeString() },
+    ]);
+  };
+
+  const handleToolCancel = (event) => {
+    const message = `Tool "${event.toolName}" execution was cancelled`;
+    console.log(message);
+    setLogs((prev) => [
+      ...prev,
+      { type: 'cancel', message, time: new Date().toLocaleTimeString() },
+    ]);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const formData = new FormData(e.target);
+    const data = Object.fromEntries(formData.entries());
+    const message = `Form submitted with data: ${JSON.stringify(data)}`;
+    console.log(message);
+    setLogs((prev) => [
+      ...prev,
+      { type: 'submit', message, time: new Date().toLocaleTimeString() },
+    ]);
+  };
+
+  return (
+    <div>
+      <Form
+        aria-label="Customer support request form"
+        toolName="createSupportRequest"
+        toolDescription="Submits a request for customer support."
+        onToolactivated={handleToolActivated}
+        onToolcancel={handleToolCancel}
+        onSubmit={handleSubmit}
+        action="/submit">
+        <Stack gap={7}>
+          <TextInput
+            id="firstName"
+            name="firstName"
+            labelText="First Name"
+            placeholder="Enter your first name"
+          />
+
+          <TextInput
+            id="lastName"
+            name="lastName"
+            labelText="Last Name"
+            placeholder="Enter your last name"
+          />
+
+          <Select
+            id="support-select"
+            name="select"
+            labelText="Support Request Type"
+            defaultValue="placeholder-item"
+            required>
+            <SelectItem
+              disabled
+              hidden
+              value="placeholder-item"
+              text="Choose a support type"
+            />
+            <SelectItem
+              value="Customer happiness team"
+              text="Return my purchase."
+            />
+            <SelectItem
+              value="Distribution team"
+              text="Check where my package is."
+            />
+            <SelectItem
+              value="Website support team"
+              text="Get help on the website."
+            />
+          </Select>
+
+          <TextArea
+            id="description"
+            name="description"
+            labelText="Description"
+            placeholder="Describe your issue"
+            rows={4}
+          />
+
+          <Button type="submit">Submit</Button>
+        </Stack>
+      </Form>
+
+      {logs.length > 0 && (
+        <div
+          style={{
+            marginTop: '2rem',
+            padding: '1rem',
+            backgroundColor: '#f4f4f4',
+            borderRadius: '4px',
+          }}>
+          <h4 style={{ marginTop: 0 }}>Event Log:</h4>
+          <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
+            {logs.map((log, index) => (
+              <li
+                key={index}
+                style={{
+                  marginBottom: '0.5rem',
+                  fontFamily: 'monospace',
+                  fontSize: '0.875rem',
+                }}>
+                <strong>[{log.time}]</strong> {log.message}
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+
+      <div
+        style={{
+          marginTop: '2rem',
+          padding: '1rem',
+          backgroundColor: '#e0f2ff',
+          borderRadius: '4px',
+        }}>
+        <h4 style={{ marginTop: 0 }}>About WebMCP Declarative API</h4>
+        <p style={{ fontSize: '0.875rem', lineHeight: '1.5' }}>
+          This form demonstrates the WebMCP Declarative API. When an AI agent
+          interacts with this form:
+        </p>
+        <ul style={{ fontSize: '0.875rem', lineHeight: '1.5' }}>
+          <li>
+            The <code>toolName</code> and <code>toolDescription</code>{' '}
+            attributes register this form as a tool
+          </li>
+          <li>
+            The <code>onToolactivated</code> event fires when an agent pre-fills
+            the form fields
+          </li>
+          <li>
+            The <code>onToolcancel</code> event fires when the user cancels the
+            agentic operation
+          </li>
+          <li>
+            The form can be submitted normally by users or programmatically by
+            agents
+          </li>
+        </ul>
+      </div>
+    </div>
+  );
+};
+
+WebMCP.storyName = 'WebMCP Declarative API';

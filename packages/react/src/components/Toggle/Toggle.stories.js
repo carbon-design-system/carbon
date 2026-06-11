@@ -75,6 +75,11 @@ Default.argTypes = {
       control: { type: 'select' },
     },
   },
+  toolParamDescription: {
+    control: { type: 'text' },
+    description:
+      'Optional description for WebMCP (Web Model Context Protocol) to help AI agents understand the purpose of this input field.',
+  },
 };
 
 export const SmallToggle = (args) => {

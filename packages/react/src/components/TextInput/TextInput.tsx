@@ -161,6 +161,11 @@ export interface TextInputProps
    * Provide the text that is displayed when the control is in warning state
    */
   warnText?: ReactNode;
+
+  /**
+   * WebMCP: Map elements to a property description within the JSON Schema
+   */
+  toolParamDescription?: string;
 }
 
 const TextInput = forwardRef<unknown, TextInputProps>(
@@ -182,6 +187,7 @@ const TextInput = forwardRef<unknown, TextInputProps>(
       placeholder,
       readOnly,
       size,
+      toolParamDescription,
       type = 'text',
       warn = false,
       warnText,
@@ -253,6 +259,9 @@ const TextInput = forwardRef<unknown, TextInputProps>(
         hasHelperText(helperText) && !normalizedProps.invalid
           ? normalizedProps.helperId
           : undefined,
+      ...(toolParamDescription && {
+        toolparamdescription: toolParamDescription,
+      }),
       ...rest,
     };
 
@@ -544,6 +553,11 @@ TextInput.propTypes = {
     'The `slug` prop for `TextInput` has ' +
       'been deprecated in favor of the new `decorator` prop. It will be removed in the next major release.'
   ),
+
+  /**
+   * WebMCP: Map elements to a property description within the JSON Schema
+   */
+  toolParamDescription: PropTypes.string,
 
   /**
    * Specify the type of the `<input>`
