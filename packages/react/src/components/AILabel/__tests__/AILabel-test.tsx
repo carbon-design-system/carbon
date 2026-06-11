@@ -1,15 +1,17 @@
 /**
- * Copyright IBM Corp. 2016, 2024
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
+import { describe, expect, it } from '@jest/globals';
+import '@testing-library/jest-dom/jest-globals';
 import React from 'react';
-import { AILabel, AILabelContent, AILabelActions } from '../';
-import { Button } from '../../Button';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { AILabel, AILabelActions, AILabelContent } from '../';
+import { Button } from '../../Button';
 
 const prefix = 'cds';
 
@@ -18,7 +20,7 @@ describe('AILabel', () => {
     it('should spread extra props onto the popover element', () => {
       const { container } = render(<AILabel data-testid="test" />);
 
-      expect(container.firstChild.firstChild).toHaveAttribute(
+      expect(container.firstChild?.firstChild).toHaveAttribute(
         'data-testid',
         'test'
       );
@@ -97,7 +99,7 @@ describe('AILabel', () => {
       const { container } = render(<AILabel revertActive />);
 
       expect(container.firstChild).toHaveClass(`${prefix}--ai-label--revert`);
-      expect(container.firstChild.firstChild).toHaveClass(
+      expect(container.firstChild?.firstChild).toHaveClass(
         `${prefix}--icon-tooltip`
       );
     });
@@ -157,6 +159,7 @@ describe('AILabelActions', () => {
 
     expect(screen.getByText('View details')).toBeInTheDocument();
   });
+
   describe('Labels and kind prop', () => {
     it('should use empty label for inline kind', () => {
       render(<AILabel kind="inline" aiText="AI" textLabel="Text goes here" />);
