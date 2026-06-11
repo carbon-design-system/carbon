@@ -302,4 +302,22 @@ describe('cds-text-input', () => {
     expect(wrapper.classList.contains('cds--text-input-wrapper--inline')).to.be
       .true;
   });
+
+  it('should prioritize disabled over readOnly when both are true', async () => {
+    const el = await fixture(html`
+      <cds-text-input
+        disabled
+        readonly
+        label-text="TextInput label"
+        placeholder="Placeholder text"></cds-text-input>
+    `);
+    await el.updateComplete;
+
+    const input = el.shadowRoot.querySelector('input');
+
+    expect(input.hasAttribute('disabled')).to.be.true;
+    expect(input.hasAttribute('readonly')).to.be.false;
+    expect(input.disabled).to.be.true;
+    expect(input.readOnly).to.be.false;
+  });
 });

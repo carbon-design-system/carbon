@@ -60,7 +60,7 @@ $css--plex: true !default;
   }
 }
 
-:host(#{$prefix}-dropdown[read-only]) {
+:host(#{$prefix}-dropdown[read-only]:not([disabled])) {
   @extend .#{$prefix}--dropdown--readonly;
 
   .#{$prefix}--list-box {
