@@ -25,6 +25,8 @@ const translationIds = {
 
 type TranslationKey = keyof typeof translationIds;
 
+// TODO: Should these translations be more consistent? For example, should
+// `clear.all` be "Clear selected items" instead of "Clear all selected items"?
 const defaultTranslations: Record<TranslationKey, string> = {
   [translationIds['clear.all']]: 'Clear all selected items',
   [translationIds['clear.selection']]: 'Clear selected item',
@@ -92,11 +94,15 @@ function ListBoxSelection({
   ...rest
 }: ListBoxSelectionProps) {
   const prefix = usePrefix();
+  const hasSelectionCount = typeof selectionCount !== 'undefined';
+  const hasMultipleSelections = (selectionCount ?? 0) > 1;
   const className = cx(`${prefix}--list-box__selection`, {
-    [`${prefix}--tag--filter`]: selectionCount,
-    [`${prefix}--list-box__selection--multi`]: selectionCount,
+    [`${prefix}--tag--filter`]: hasSelectionCount,
+    [`${prefix}--list-box__selection--multi`]: hasSelectionCount,
   });
-  const description = selectionCount ? t('clear.all') : t('clear.selection');
+  const description = hasMultipleSelections
+    ? t('clear.all')
+    : t('clear.selection');
   const tagClasses = cx(
     `${prefix}--tag`,
     `${prefix}--tag--filter`,
@@ -117,7 +123,7 @@ function ListBoxSelection({
     }
   }
 
-  if (selectionCount) {
+  if (hasSelectionCount) {
     return (
       <div className={tagClasses}>
         <span

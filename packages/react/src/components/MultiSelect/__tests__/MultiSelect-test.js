@@ -391,17 +391,17 @@ describe('MultiSelect', () => {
 
     expect(
       // eslint-disable-next-line testing-library/no-node-access
-      document.querySelector('[aria-label="Clear all selected items"]')
+      document.querySelector('[aria-label="Clear selected item"]')
     ).toBeTruthy();
 
     await userEvent.click(
       // eslint-disable-next-line testing-library/no-node-access
-      document.querySelector('[aria-label="Clear all selected items"]')
+      document.querySelector('[aria-label="Clear selected item"]')
     );
 
     expect(
       // eslint-disable-next-line testing-library/no-node-access
-      document.querySelector('[aria-label="Clear all selected items"]')
+      document.querySelector('[aria-label="Clear selected item"]')
     ).toBeFalsy();
   });
 
@@ -419,7 +419,7 @@ describe('MultiSelect', () => {
 
     const combobox = screen.getByRole('combobox');
     expect(
-      screen.getByRole('button', { name: 'Clear all selected items' })
+      screen.getByRole('button', { name: 'Clear selected item' })
     ).toBeInTheDocument();
 
     await userEvent.click(combobox);
@@ -427,7 +427,7 @@ describe('MultiSelect', () => {
     await userEvent.keyboard('[Delete]');
 
     expect(
-      screen.queryByRole('button', { name: 'Clear all selected items' })
+      screen.queryByRole('button', { name: 'Clear selected item' })
     ).not.toBeInTheDocument();
     expect(screen.getByLabelText('all items have been cleared')).toBeVisible();
   });

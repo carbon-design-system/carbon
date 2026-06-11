@@ -33,7 +33,7 @@ describe('ListBoxSelection', () => {
     expect(screen.getByLabelText('test-clear-selection')).toBeInTheDocument();
   });
 
-  it('should render a clear all button if `selectionCount` is provided', () => {
+  it('should render a clear all button if `selectionCount` is greater than 1', () => {
     render(
       <ListBox.Selection
         selectionCount={10}
@@ -42,6 +42,18 @@ describe('ListBoxSelection', () => {
       />
     );
     expect(screen.getByLabelText('test-clear-all')).toBeInTheDocument();
+  });
+
+  it('should render a clear button if `selectionCount` is 1', () => {
+    render(
+      <ListBox.Selection
+        selectionCount={1}
+        clearSelection={jest.fn()}
+        translateWithId={translateWithId}
+      />
+    );
+    expect(screen.getByLabelText('test-clear-selection')).toBeInTheDocument();
+    expect(screen.getByText('1')).toBeInTheDocument();
   });
 
   it('should call `clearSelection` when the clear button is clicked', async () => {
