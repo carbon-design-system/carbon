@@ -35,6 +35,48 @@ describe('cds-overflow-menu', () => {
     expect(el);
   });
 
+  it('should focus the trigger button when focus() is called', async () => {
+    const el = await fixture(basicOverflowMenu);
+    const button = el.shadowRoot?.querySelector('button');
+    const tooltip = el.shadowRoot?.querySelector('cds-tooltip');
+
+    button.removeEventListener('focus', tooltip._handleHover);
+    button.removeEventListener('focusout', tooltip._handleHoverOut);
+    el.focus();
+
+    expect(document.activeElement).to.equal(el);
+    expect(el.shadowRoot?.activeElement).to.equal(button);
+  });
+
+  it('should pass focus options to the trigger button', async () => {
+    const el = await fixture(basicOverflowMenu);
+    const button = el.shadowRoot?.querySelector('button');
+    const focusOptions = { preventScroll: true };
+    const originalFocus = button.focus;
+    let receivedFocusOptions;
+
+    button.focus = (options) => {
+      receivedFocusOptions = options;
+    };
+
+    el.focus(focusOptions);
+    button.focus = originalFocus;
+
+    expect(receivedFocusOptions).to.equal(focusOptions);
+  });
+
+  it('should open when click() is called', async () => {
+    const el = await fixture(basicOverflowMenu);
+    const menuBody = el.querySelector('cds-overflow-menu-body');
+
+    el.click();
+    await el.updateComplete;
+    await menuBody.updateComplete;
+
+    expect(el.open).to.be.true;
+    expect(menuBody.open).to.be.true;
+  });
+
   describe('supports size', () => {
     const sizes = ['xs', 'sm', 'md', 'lg'];
 

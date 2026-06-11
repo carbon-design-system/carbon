@@ -269,6 +269,24 @@ class CDSOverflowMenu
     return this.getBoundingClientRect();
   }
 
+  /**
+   * Delegates host clicks to the internal trigger button.
+   * Enables programmatic interaction with the overflow menu.
+   */
+  click() {
+    const triggerButton = this._getTriggerButton();
+    return triggerButton ? triggerButton.click() : super.click();
+  }
+
+  /**
+   * Delegates host focus to the internal trigger button.
+   * Enables programmatic focus for keyboard navigation scenarios.
+   */
+  focus(options?: FocusOptions) {
+    const triggerButton = this._getTriggerButton();
+    return triggerButton ? triggerButton.focus(options) : super.focus();
+  }
+
   connectedCallback() {
     if (!this.hasAttribute('aria-haspopup')) {
       this.setAttribute('aria-haspopup', 'true');
