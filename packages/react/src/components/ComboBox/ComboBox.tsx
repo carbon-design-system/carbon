@@ -510,6 +510,14 @@ const ComboBox = forwardRef(
     const prevSelectedItemProp = useRef<ItemType | null | undefined>(
       selectedItemProp
     );
+    const isSyncingControlledSelectionRef = useRef(false);
+    const pendingControlledSelectionRef = useRef<{
+      pending: boolean;
+      value: ItemType | null | undefined;
+    }>({
+      pending: false,
+      value: undefined,
+    });
 
     useEffect(() => {
       isManualClearingRef.current = isClearing;
@@ -523,6 +531,10 @@ const ComboBox = forwardRef(
     // fully controlled combobox: handle changes to selectedItemProp
     useEffect(() => {
       if (prevSelectedItemProp.current !== selectedItemProp) {
+        pendingControlledSelectionRef.current = {
+          pending: true,
+          value: selectedItemProp,
+        };
         const currentInputValue = getInputValue({
           initialSelectedItem,
           itemToString,
@@ -885,13 +897,17 @@ const ComboBox = forwardRef(
       isItemDisabled: isDisabledItem,
       ...downshiftProps,
       onStateChange: ({ type, selectedItem: newSelectedItem }) => {
+        if (
+          isManualClearingRef.current ||
+          isSyncingControlledSelectionRef.current
+        ) {
+          isSyncingControlledSelectionRef.current = false;
+          return;
+        }
         downshiftProps?.onStateChange?.({
           type,
           selectedItem: newSelectedItem,
         });
-        if (isManualClearingRef.current) {
-          return;
-        }
         if (
           (type === ItemClick ||
             type === FunctionSelectItem ||
@@ -913,6 +929,19 @@ const ComboBox = forwardRef(
     // Downshift's own selection when uncontrolled.
     const currentSelectedItem =
       typeof selectedItemProp !== 'undefined' ? selectedItemProp : selectedItem;
+
+    useEffect(() => {
+      if (pendingControlledSelectionRef.current.pending) {
+        const { value } = pendingControlledSelectionRef.current;
+        const nextSelectedItem = typeof value === 'undefined' ? null : value;
+        pendingControlledSelectionRef.current.pending = false;
+
+        if (!isEqual(selectedItem, nextSelectedItem)) {
+          isSyncingControlledSelectionRef.current = true;
+          selectItem(nextSelectedItem);
+        }
+      }
+    }, [selectedItem, selectedItemProp, selectItem]);
 
     useEffect(() => {
       // Used to expose the downshift actions to consumers for use with downshiftProps

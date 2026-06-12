@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2023, 2024
+ * Copyright IBM Corp. 2023, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -57,6 +57,13 @@ const config: StorybookConfig = {
       optimizeDeps: {
         include: ['@storybook/web-components-vite'],
         exclude: ['lit', 'lit-html'],
+      },
+      build: {
+        /**
+         * Use esbuild for CSS minification because Lightning CSS (Vite 8.0 default)
+         * fails when additional selectors are appended after ::slotted(), ::part(), etc.
+         */
+        cssMinify: 'esbuild',
       },
       define: {
         'process.env.NODE_ENV': JSON.stringify(

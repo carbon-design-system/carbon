@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2019, 2023
+ * Copyright IBM Corp. 2019, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -13,6 +13,7 @@ import OverflowMenuVertical16 from '@carbon/icons/es/overflow-menu--vertical/16.
 import storyDocs from './data-table.mdx';
 import '../index';
 import { iconLoader } from '../../../globals/internal/icon-loader';
+import '../../overflow-menu/';
 
 const sizes = {
   [`xs (${TABLE_SIZE.XS})`]: TABLE_SIZE.XS,

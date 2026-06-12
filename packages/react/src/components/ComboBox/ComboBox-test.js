@@ -819,6 +819,29 @@ describe('ComboBox', () => {
         `${prefix}--list-box__menu-item--active`
       );
     });
+
+    it('should keep the external selection when the menu closes after an external update', async () => {
+      render(<ControlledComboBox />);
+
+      await openMenu();
+      await userEvent.click(screen.getByRole('option', { name: 'Item 2' }));
+      expect(screen.getByText('onChangeCallCount: 1')).toBeInTheDocument();
+      expect(screen.getByTestId('selected-item').textContent).toBe('Item 2');
+
+      await userEvent.click(
+        screen.getByRole('button', { name: 'Choose item 3' })
+      );
+      expect(screen.getByText('onChangeCallCount: 2')).toBeInTheDocument();
+      expect(screen.getByTestId('selected-item').textContent).toBe('Item 3');
+
+      await openMenu();
+      await userEvent.click(document.body);
+
+      expect(screen.getByText('onChangeCallCount: 2')).toBeInTheDocument();
+      expect(screen.getByTestId('selected-item').textContent).toBe('Item 3');
+      expect(findInputNode()).toHaveDisplayValue('Item 3');
+    });
+
     it('should update and call `onChange` once when selection is updated externally', async () => {
       const { rerender } = render(
         <ComboBox {...mockProps} selectedItem={mockProps.items[0]} />

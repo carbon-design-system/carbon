@@ -282,7 +282,7 @@ const Search = React.forwardRef<HTMLInputElement, SearchProps>(
       );
 
     return (
-      <div role="search" aria-label={placeholder} className={searchClasses}>
+      <div role="search" aria-labelledby={searchId} className={searchClasses}>
         {magnifierWithTooltip}
         {/* the magnifier is used in ExpandableSearch as a click target to expand,
       however, it does not need a keyboard event bc the input element gets focus on keyboard nav and expands that way*/}

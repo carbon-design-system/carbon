@@ -1003,6 +1003,46 @@ describe('TabPanel', () => {
 });
 
 describe('TabList', () => {
+  it('should apply a layout size class for line tabs when size is provided', () => {
+    jest.spyOn(hooks, 'useMatchMedia').mockImplementation(() => true);
+    const { container } = render(
+      <Tabs>
+        <TabList aria-label="List of tabs" size="sm">
+          <Tab>Tab Label 1</Tab>
+          <Tab>Tab Label 2</Tab>
+          <Tab>Tab Label 3</Tab>
+        </TabList>
+        <TabPanels>
+          <TabPanel>Tab Panel 1</TabPanel>
+          <TabPanel>Tab Panel 2</TabPanel>
+          <TabPanel>Tab Panel 3</TabPanel>
+        </TabPanels>
+      </Tabs>
+    );
+
+    expect(container.firstChild).toHaveClass(`${prefix}--layout--size-sm`);
+  });
+
+  it('should ignore size class for contained tabs with secondary labels', () => {
+    jest.spyOn(hooks, 'useMatchMedia').mockImplementation(() => true);
+    const { container } = render(
+      <Tabs>
+        <TabList aria-label="List of tabs" contained size="sm">
+          <Tab secondaryLabel="(1/3)">Tab Label 1</Tab>
+          <Tab secondaryLabel="(2/3)">Tab Label 2</Tab>
+          <Tab secondaryLabel="(3/3)">Tab Label 3</Tab>
+        </TabList>
+        <TabPanels>
+          <TabPanel>Tab Panel 1</TabPanel>
+          <TabPanel>Tab Panel 2</TabPanel>
+          <TabPanel>Tab Panel 3</TabPanel>
+        </TabPanels>
+      </Tabs>
+    );
+
+    expect(container.firstChild).not.toHaveClass(`${prefix}--layout--size-sm`);
+  });
+
   it('should span fullWidth if lg and fullWidth prop is passed in', () => {
     jest.spyOn(hooks, 'useMatchMedia').mockImplementation(() => true);
     const { container } = render(

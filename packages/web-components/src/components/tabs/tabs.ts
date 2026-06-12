@@ -478,12 +478,6 @@ export default class CDSTabs extends HostListenerMixin(CDSContentSwitcher) {
   dismissable;
 
   /**
-   * Specify the size of contained tabs.
-   */
-  @property({ reflect: true })
-  size?: TABS_SIZE;
-
-  /**
    * Specify the icon size used by icon-only tabs.
    */
   @property({ attribute: 'icon-size', reflect: true })

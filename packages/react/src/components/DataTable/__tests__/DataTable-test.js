@@ -155,6 +155,75 @@ describe('DataTable', () => {
       const { container } = render(<DataTable {...mockProps} />);
       expect(container).toMatchSnapshot();
     });
+
+    it('should associate data cells with their column headers', () => {
+      render(<DataTable {...mockProps} />);
+
+      const [firstHeader, secondHeader] = screen.getAllByRole('columnheader');
+      const cells = screen.getAllByRole('cell');
+
+      expect(firstHeader).toHaveAttribute(
+        'id',
+        expect.stringMatching(/^data-table-\d+__header-fieldA$/)
+      );
+      expect(secondHeader).toHaveAttribute(
+        'id',
+        expect.stringMatching(/^data-table-\d+__header-fieldB$/)
+      );
+      expect(cells[0]).toHaveAttribute('headers', firstHeader.id);
+      expect(cells[1]).toHaveAttribute('headers', secondHeader.id);
+      expect(cells[2]).toHaveAttribute('headers', firstHeader.id);
+      expect(cells[3]).toHaveAttribute('headers', secondHeader.id);
+    });
+
+    it('should preserve custom header and cell associations', () => {
+      const { render: _render, ...props } = mockProps;
+
+      render(
+        <DataTable {...props}>
+          {({ getCellProps, getHeaderProps, getTableProps, headers, rows }) => (
+            <Table {...getTableProps()}>
+              <TableHead>
+                <TableRow>
+                  {headers.map((header) => (
+                    <TableHeader
+                      {...getHeaderProps({
+                        header,
+                        id: `custom-header-${header.key}`,
+                      })}>
+                      {header.header}
+                    </TableHeader>
+                  ))}
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {rows.map((row) => (
+                  <TableRow key={row.id}>
+                    {row.cells.map((cell) => (
+                      <TableCell
+                        {...getCellProps({
+                          cell,
+                          headers: `custom-headers-${cell.info.header}`,
+                        })}>
+                        {cell.value}
+                      </TableCell>
+                    ))}
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          )}
+        </DataTable>
+      );
+
+      const [firstHeader, secondHeader] = screen.getAllByRole('columnheader');
+      const cells = screen.getAllByRole('cell');
+
+      expect(firstHeader).toHaveAttribute('id', 'custom-header-fieldA');
+      expect(secondHeader).toHaveAttribute('id', 'custom-header-fieldB');
+      expect(cells[0]).toHaveAttribute('headers', 'custom-headers-fieldA');
+      expect(cells[1]).toHaveAttribute('headers', 'custom-headers-fieldB');
+    });
   });
 
   describe('behaves as expected', () => {

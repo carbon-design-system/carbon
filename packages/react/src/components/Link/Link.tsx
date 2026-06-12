@@ -106,6 +106,7 @@ const LinkBase = React.forwardRef<
       [`${prefix}--link--inline`]: inline,
       [`${prefix}--link--visited`]: visited,
       [`${prefix}--link--${size}`]: size,
+      [`${prefix}--link--icon`]: Icon,
     });
     const rel = target === '_blank' ? 'noopener' : undefined;
     const linkProps: AnchorHTMLAttributes<HTMLAnchorElement> = {

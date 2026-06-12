@@ -21,6 +21,30 @@ const contentScenarios = [
 
 describe('Search', () => {
   describe('renders as expected - Component API', () => {
+    it('should label the search landmark using labelText via aria-labelledby', () => {
+      render(<Search labelText="Search A" />);
+
+      expect(
+        screen.getByRole('search', { name: 'Search A' })
+      ).toBeInTheDocument();
+    });
+
+    it('should give each search landmark a unique accessible name when labelText differs', () => {
+      render(
+        <>
+          <Search labelText="Search A" />
+          <Search labelText="Search B" />
+        </>
+      );
+
+      expect(
+        screen.getByRole('search', { name: 'Search A' })
+      ).toBeInTheDocument();
+      expect(
+        screen.getByRole('search', { name: 'Search B' })
+      ).toBeInTheDocument();
+    });
+
     it('should spread extra props onto the input element', () => {
       render(<Search labelText="test-search" data-testid="test-id" />);
 

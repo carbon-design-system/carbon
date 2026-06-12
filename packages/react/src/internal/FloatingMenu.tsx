@@ -314,13 +314,17 @@ export const FloatingMenu = ({
         });
 
         // Only update if the position has actually changed.
-        if (
-          !floatingPosition ||
-          floatingPosition.left !== newFloatingPosition.left ||
-          floatingPosition.top !== newFloatingPosition.top
-        ) {
-          setFloatingPosition(newFloatingPosition);
-        }
+        setFloatingPosition((prev) => {
+          if (
+            prev &&
+            prev.left === newFloatingPosition.left &&
+            prev.top === newFloatingPosition.top
+          ) {
+            return prev;
+          }
+
+          return newFloatingPosition;
+        });
 
         // Re-check after setting the position if not already adjusting.
         if (!isAdjustment) {
@@ -334,15 +338,7 @@ export const FloatingMenu = ({
         }
       }
     },
-    [
-      triggerRef,
-      menuOffset,
-      menuDirection,
-      flipped,
-      target,
-      updateOrientation,
-      floatingPosition,
-    ]
+    [triggerRef, menuOffset, menuDirection, flipped, target, updateOrientation]
   );
 
   const focusMenuContent = (menuBody: HTMLElement) => {
