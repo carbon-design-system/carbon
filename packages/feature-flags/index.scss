@@ -6,7 +6,11 @@
 //
 
 @use 'sass:map';
+@use 'sass:string';
 @use 'scss/generated/feature-flags';
+
+$v12-release-flag: 'enable-v12-release';
+$v12-flag-prefix: 'enable-v12-';
 
 $feature-flags: () !default;
 $feature-flags: map.merge(
@@ -19,6 +23,12 @@ $feature-flags: map.merge(
     @return true;
   }
   @error 'Unable to find a feature flag named: #{$name}';
+}
+
+@function enabled-by-v12-release($name) {
+  @return $name != $v12-release-flag and
+    string.index($name, $v12-flag-prefix) == 1 and
+    map.get($feature-flags, $v12-release-flag) == true;
 }
 
 @mixin add($name, $enabled: false) {
@@ -50,6 +60,10 @@ $feature-flags: map.merge(
 /// @returns {Boolean}
 @function enabled($name) {
   @if check-for-flag($name) == true {
+    @if enabled-by-v12-release($name) {
+      @return true;
+    }
+
     @return map.get($feature-flags, $name);
   }
 }

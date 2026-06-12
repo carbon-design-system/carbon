@@ -50,6 +50,7 @@ class FeatureFlagsElement extends LitElement {
    * Mapping of feature flag attributes to their related component names.
    */
   private static readonly flagComponentMap = {
+    'enable-v12-release': null,
     'enable-v12-tile-default-icons': 'CDS-TILE',
     'enable-v12-tile-radio-icons': 'CDS-TILE',
     'enable-v12-overflowmenu': 'CDS-OVERFLOW-MENU',
@@ -80,14 +81,17 @@ class FeatureFlagsElement extends LitElement {
     _oldVal: string | null,
     newVal: string | null
   ) {
-    const value = newVal === 'true';
+    const value = newVal !== null && newVal !== 'false';
     this.flags[name] = value;
 
     // Set feature flag to top component level
     const relatedComponent = hasOwn(FeatureFlagsElement.flagComponentMap, name)
       ? FeatureFlagsElement.flagComponentMap[name]
-      : 'unknown';
-    if (this.firstElementChild?.tagName === relatedComponent) {
+      : null;
+    if (
+      relatedComponent &&
+      this.firstElementChild?.tagName === relatedComponent
+    ) {
       this.firstElementChild.setAttribute(name, '');
     }
 

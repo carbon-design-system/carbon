@@ -46,12 +46,34 @@ describe('featue-flag', function () {
     expect(isFeatureFlagEnabled('enable-dialog-element', child)).to.be.true;
   });
 
+  it('should return true for boolean feature flag attributes', async () => {
+    const featureFlag = html`<feature-flags enable-dialog-element
+      ><div id="child"></div
+    ></feature-flags>`;
+    const el = await fixture(featureFlag);
+    const child = el.querySelector('#child');
+    expect(child).to.exist;
+    expect(isFeatureFlagEnabled('enable-dialog-element', child)).to.be.true;
+  });
+
   it('should return false if feature is disabled', async () => {
     const featureFlag = html`<feature-flags enable-dialog-element="false"
       ><div id="child"></div
     ></feature-flags>`;
     const el = await fixture(featureFlag);
     const child = el.querySelector('#child');
+    expect(isFeatureFlagEnabled('enable-dialog-element', child)).to.be.false;
+  });
+
+  it('should enable v12 flags with the v12 release flag', async () => {
+    const featureFlag = html`<feature-flags enable-v12-release
+      ><div id="child"></div
+    ></feature-flags>`;
+    const el = await fixture(featureFlag);
+    const child = el.querySelector('#child');
+    expect(child).to.exist;
+    expect(isFeatureFlagEnabled('enable-v12-toggle-reduced-label-spacing', child))
+      .to.be.true;
     expect(isFeatureFlagEnabled('enable-dialog-element', child)).to.be.false;
   });
 
@@ -79,6 +101,19 @@ describe('featue-flag', function () {
     `);
     const child = el.querySelector('#child');
     expect(isFeatureFlagEnabled('enable-dialog-element', child)).to.be.true;
+  });
+
+  it('should inherit the v12 release flag from parent feature-flags', async () => {
+    const el = await fixture(html`
+      <feature-flags enable-v12-release>
+        <feature-flags enable-v12-toggle-reduced-label-spacing="false">
+          <div id="child"></div>
+        </feature-flags>
+      </feature-flags>
+    `);
+    const child = el.querySelector('#child');
+    expect(isFeatureFlagEnabled('enable-v12-toggle-reduced-label-spacing', child))
+      .to.be.true;
   });
 
   it('should override parent flag if child redefines it', async () => {
