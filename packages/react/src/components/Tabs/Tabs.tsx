@@ -1761,7 +1761,9 @@ function TabPanels({ children }: TabPanelsProps) {
 
     // Should only apply same height to vertical Tab Panels without a given height
     if (isVertical && !parentHasHeight) {
-      hiddenStates.current = refs.current.map((ref) => ref?.hidden || false);
+      hiddenStates.current = refs.current.map(
+        (ref) => ref?.hasAttribute('hidden') || false
+      );
 
       // un-hide hidden Tab Panels to get heights
       refs.current.forEach((ref) => {
