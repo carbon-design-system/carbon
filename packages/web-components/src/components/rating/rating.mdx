@@ -1,0 +1,64 @@
+import { ArgTypes, Canvas, Markdown, Meta } from '@storybook/addon-docs/blocks';
+import { cdnJs } from '../../globals/internal/storybook-cdn';
+import * as RatingStories from './rating.stories';
+
+<Meta of={RatingStories} />
+
+# Rating
+
+[Source code](https://github.com/carbon-design-system/carbon/tree/main/packages/web-components/src/components/rating)
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Star Rating](#star-rating)
+- [Thumb Rating](#thumb-rating)
+- [NPS Rating](#nps-rating)
+- [Component API](#component-api)
+- [CDN](#cdn)
+- [Feedback](#feedback)
+
+## Overview
+
+The `cds-rating` component allows users to provide feedback by selecting a
+rating. It is commonly used in forms, product reviews, and customer satisfaction
+surveys.
+
+The component supports three variants controlled by the `variant` attribute:
+`star`, `thumb` and `nps`.
+
+## Star Rating
+
+The `star` variant renders a 1-to-N star selector. The number of stars is
+configurable via the `max` attribute (default: 5). Stars are filled up to the
+current `value`.
+
+<Canvas of={RatingStories.Default} />
+
+## Thumb Rating
+
+The `thumb` variant renders a binary thumbs up / thumbs down selector, useful
+for simple useful / not-useful feedback patterns.
+
+<Canvas of={RatingStories.Thumb} />
+
+## NPS Rating
+
+The `nps` variant renders a 0-to-10 Net Promoter Score scale, a standard
+enterprise metric used to measure customer loyalty and satisfaction.
+
+<Canvas of={RatingStories.Nps} />
+
+## Component API
+
+## `cds-rating`
+
+<ArgTypes of="cds-rating" />
+
+<Markdown>{`${cdnJs({ components: ['rating'] })}`}</Markdown>
+
+## Feedback
+
+Help us improve this component by providing feedback, asking questions on Slack,
+or updating this file on
+[GitHub](https://github.com/carbon-design-system/carbon/edit/main/packages/web-components/src/components/rating/rating.mdx).

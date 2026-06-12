@@ -1,0 +1,519 @@
+//
+// Copyright IBM Corp. 2026
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use '../../config' as *;
+@use '../../motion' as *;
+@use '../../spacing' as *;
+@use '../../theme' as *;
+@use '../../type' as *;
+@use '../../utilities/convert';
+@use '../../utilities/high-contrast-mode' as *;
+@use '../../utilities/custom-property';
+
+/// Rating styles
+/// @access public
+/// @group rating
+@mixin rating {
+  // ----------------------------------------
+  // base
+  // ----------------------------------------
+  .#{$prefix}--rating {
+    @include custom-property.declaration(
+      'rating-icon-size',
+      convert.to-rem(24px)
+    );
+
+    @include custom-property.declaration(
+      'rating-nps-size',
+      convert.to-rem(40px)
+    );
+
+    @include custom-property.declaration('rating-gap', $spacing-03);
+
+    //reset fieldset defaults
+    display: inline-flex;
+    flex-direction: column;
+    padding: 0;
+    border: none;
+    margin: 0;
+    gap: $spacing-03;
+  }
+
+  .#{$prefix}--rating__label {
+    @include type-style('label-01');
+
+    color: $text-secondary;
+    cursor: default;
+  }
+
+  // ----------------------------------------
+  // star variant
+  // ----------------------------------------
+  .#{$prefix}--rating__stars {
+    display: inline-flex;
+    align-items: center;
+  }
+
+  .#{$prefix}--rating__star-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    border: none;
+    background: transparent;
+    color: $icon-primary;
+    cursor: pointer;
+    transition: color $duration-fast-01 motion(exit, productive);
+
+    svg {
+      fill: currentColor;
+      pointer-events: none;
+      transition: fill $duration-fast-01 motion(exit, productive);
+
+      @media screen and (prefers-reduced-motion: reduce) {
+        transition: none;
+      }
+    }
+
+    &:focus {
+      outline: none;
+    }
+
+    &:focus-visible {
+      border-radius: 2px;
+      outline: 2px solid $focus;
+      outline-offset: 2px;
+    }
+  }
+
+  .#{$prefix}--rating__star-btn--filled {
+    color: $support-warning;
+  }
+
+  // ----------------------------------------
+  // thumb variant
+  // ----------------------------------------
+  .#{$prefix}--rating__thumb {
+    display: inline-flex;
+    align-items: center;
+  }
+
+  .#{$prefix}--rating__thumb-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    border: none;
+    background: transparent;
+    color: $icon-secondary;
+    cursor: pointer;
+
+    svg {
+      fill: currentColor;
+      pointer-events: none;
+    }
+
+    &:focus {
+      outline: none;
+    }
+
+    &:focus-visible {
+      border-radius: 2px;
+      outline: 2px solid $focus;
+      outline-offset: 2px;
+    }
+  }
+
+  .#{$prefix}--rating__thumb-btn--up {
+    color: $support-success;
+  }
+
+  .#{$prefix}--rating__thumb-btn--down {
+    color: $support-error;
+  }
+
+  // ----------------------------------------
+  // nps variant
+  // ----------------------------------------
+  .#{$prefix}--rating__nps {
+    display: flex;
+  }
+
+  .#{$prefix}--rating__nps-btn {
+    border: 1px solid $border-subtle;
+    border-radius: 50%;
+    background: transparent;
+    cursor: pointer;
+    transition:
+      background $duration-fast-01 motion(exit, productive),
+      transform $duration-fast-01 motion(exit, productive);
+
+    &--hovered {
+      background: $layer-hover;
+      transform: scale(1.05);
+    }
+
+    &--selected {
+      border-color: $interactive;
+      background: $interactive;
+      color: $text-on-color;
+    }
+
+    &:disabled {
+      cursor: not-allowed;
+      opacity: 0.5;
+    }
+  }
+
+  .#{$prefix}--rating__nps-wrapper {
+    display: flex;
+    align-items: center;
+    gap: $spacing-03;
+  }
+
+  .#{$prefix}--rating__nps-label {
+    @include type-style('label-01');
+
+    color: $text-secondary;
+    cursor: default;
+    white-space: nowrap;
+  }
+
+  // ----------------------------------------
+  // size modifiers
+  // ----------------------------------------
+
+  .#{$prefix}--rating--sm {
+    @include custom-property.declaration(
+      'rating-icon-size',
+      convert.to-rem(16px)
+    );
+    @include custom-property.declaration('rating-gap', $spacing-02);
+    @include custom-property.declaration(
+      'rating-nps-size',
+      convert.to-rem(32px)
+    );
+  }
+
+  .#{$prefix}--rating--md {
+    @include custom-property.declaration(
+      'rating-icon-size',
+      convert.to-rem(24px)
+    );
+    @include custom-property.declaration('rating-gap', $spacing-03);
+    @include custom-property.declaration(
+      'rating-nps-size',
+      convert.to-rem(40px)
+    );
+  }
+
+  .#{$prefix}--rating--lg {
+    @include custom-property.declaration(
+      'rating-icon-size',
+      convert.to-rem(40px)
+    );
+    @include custom-property.declaration('rating-gap', $spacing-04);
+    @include custom-property.declaration(
+      'rating-nps-size',
+      convert.to-rem(48px)
+    );
+  }
+
+  .#{$prefix}--rating__star-btn svg,
+  .#{$prefix}--rating__thumb-btn svg {
+    block-size: custom-property.get-var('rating-icon-size');
+    inline-size: custom-property.get-var('rating-icon-size');
+  }
+
+  .#{$prefix}--rating__nps-btn {
+    block-size: custom-property.get-var('rating-nps-size');
+    inline-size: custom-property.get-var('rating-nps-size');
+  }
+
+  .#{$prefix}--rating__stars,
+  .#{$prefix}--rating__thumb,
+  .#{$prefix}--rating__nps {
+    gap: custom-property.get-var('rating-gap');
+  }
+  // ----------------------------------------
+  // disabled
+  // ----------------------------------------
+
+  .#{$prefix}--rating--disabled {
+    .#{$prefix}--rating__star-btn,
+    .#{$prefix}--rating__thumb-btn,
+    .#{$prefix}--rating__nps-btn {
+      cursor: not-allowed;
+      opacity: 0.5;
+    }
+
+    .#{$prefix}--rating__label {
+      color: $text-disabled;
+    }
+  }
+
+  // ----------------------------------------
+  // read-only
+  // ----------------------------------------
+
+  .#{$prefix}--rating--read-only {
+    .#{$prefix}--rating__star-btn,
+    .#{$prefix}--rating__thumb-btn,
+    .#{$prefix}--rating__nps-btn {
+      cursor: default;
+    }
+  }
+
+  // ----------------------------------------
+  // HCM
+  // ----------------------------------------
+
+  .#{$prefix}--rating__star-btn,
+  .#{$prefix}--rating__thumb-btn,
+  .#{$prefix}--rating__nps-btn {
+    @include high-contrast-mode('outline');
+  }
+
+  .#{$prefix}--rating__star-btn:focus,
+  .#{$prefix}--rating__thumb-btn:focus,
+  .#{$prefix}--rating__nps-btn:focus {
+    @include high-contrast-mode('focus');
+  }
+
+  // ----------------------------------------
+  // overflow for animations
+  // ----------------------------------------
+
+  .#{$prefix}--rating__stars,
+  .#{$prefix}--rating__thumb {
+    overflow: visible;
+  }
+
+  .#{$prefix}--rating__star-btn,
+  .#{$prefix}--rating__thumb-btn {
+    position: relative;
+    overflow: visible;
+  }
+
+  // ----------------------------------------
+  // animations
+  // ----------------------------------------
+
+  @keyframes #{$prefix}--rating-pop {
+    0% {
+      transform: scale(1);
+    }
+
+    20% {
+      transform: scale(0);
+    }
+
+    60% {
+      transform: scale(1.5);
+    }
+
+    78% {
+      transform: scale(0.9);
+    }
+
+    100% {
+      transform: scale(1);
+    }
+  }
+
+  @keyframes #{$prefix}--rating-ring {
+    0% {
+      opacity: 1;
+      transform: translate(-50%, -50%) scale(0);
+    }
+
+    60% {
+      opacity: 1;
+    }
+
+    100% {
+      opacity: 0;
+      transform: translate(-50%, -50%) scale(1.8);
+    }
+  }
+
+  @keyframes #{$prefix}--rating-particles {
+    0% {
+      box-shadow:
+        0 0 0 $support-success,
+        0 0 0 $support-success,
+        0 0 0 $support-success,
+        0 0 0 $support-success,
+        0 0 0 $support-success,
+        0 0 0 $support-success;
+      opacity: 1;
+    }
+
+    100% {
+      box-shadow:
+        0 convert.to-rem(-22px) 0 $support-success,
+        convert.to-rem(19px) convert.to-rem(-11px) 0 $support-success,
+        convert.to-rem(19px) convert.to-rem(11px) 0 $support-success,
+        0 convert.to-rem(22px) 0 $support-success,
+        convert.to-rem(-19px) convert.to-rem(11px) 0 $support-success,
+        convert.to-rem(-19px) convert.to-rem(-11px) 0 $support-success;
+      opacity: 0;
+    }
+  }
+
+  @keyframes #{$prefix}--rating-particles-down {
+    0% {
+      box-shadow:
+        0 0 0 $support-error,
+        0 0 0 $support-error,
+        0 0 0 $support-error,
+        0 0 0 $support-error,
+        0 0 0 $support-error,
+        0 0 0 $support-error;
+      opacity: 1;
+    }
+
+    100% {
+      box-shadow:
+        0 convert.to-rem(-22px) 0 $support-error,
+        convert.to-rem(19px) convert.to-rem(-11px) 0 $support-error,
+        convert.to-rem(19px) convert.to-rem(11px) 0 $support-error,
+        0 convert.to-rem(22px) 0 $support-error,
+        convert.to-rem(-19px) convert.to-rem(11px) 0 $support-error,
+        convert.to-rem(-19px) convert.to-rem(-11px) 0 $support-error;
+      opacity: 0;
+    }
+  }
+
+  .#{$prefix}--rating__star-btn--animating {
+    svg {
+      animation: #{$prefix}--rating-pop 500ms
+        cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+
+      @media screen and (prefers-reduced-motion: reduce) {
+        animation: none;
+      }
+    }
+  }
+
+  .#{$prefix}--rating__star-btn--animating-particles {
+    &::before {
+      position: absolute;
+      border: convert.to-rem(4px) solid $support-warning;
+      border-radius: 50%;
+      animation: #{$prefix}--rating-ring 500ms ease-out forwards;
+      block-size: convert.to-rem(32px);
+      content: '';
+      inline-size: convert.to-rem(32px);
+      inset-block-start: 50%;
+      inset-inline-start: 50%;
+      pointer-events: none;
+
+      @media screen and (prefers-reduced-motion: reduce) {
+        animation: none;
+      }
+    }
+  }
+
+  .#{$prefix}--rating__thumb-btn--animating {
+    svg {
+      animation: #{$prefix}--rating-pop 500ms
+        cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+
+      @media screen and (prefers-reduced-motion: reduce) {
+        animation: none;
+      }
+    }
+  }
+
+  .#{$prefix}--rating__thumb-btn--animating-particles {
+    &::before {
+      position: absolute;
+      border: convert.to-rem(4px) solid $support-success;
+      border-radius: 50%;
+      animation: #{$prefix}--rating-ring 500ms ease-out forwards;
+      block-size: 100%;
+      content: '';
+      inline-size: 100%;
+      inset-block-start: 50%;
+      inset-inline-start: 50%;
+      pointer-events: none;
+
+      @media screen and (prefers-reduced-motion: reduce) {
+        animation: none;
+      }
+    }
+
+    &::after {
+      position: absolute;
+      border-radius: 50%;
+      animation: #{$prefix}--rating-particles 500ms ease-out forwards;
+      background: $support-success;
+      block-size: convert.to-rem(4px);
+      content: '';
+      inline-size: convert.to-rem(4px);
+      inset-block-start: 50%;
+      inset-inline-start: 50%;
+      margin-block-start: convert.to-rem(-2px);
+      margin-inline-start: convert.to-rem(-2px);
+      pointer-events: none;
+
+      @media screen and (prefers-reduced-motion: reduce) {
+        animation: none;
+      }
+    }
+  }
+
+  .#{$prefix}--rating__thumb-btn--animating-down {
+    svg {
+      animation: #{$prefix}--rating-pop 500ms
+        cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+
+      @media screen and (prefers-reduced-motion: reduce) {
+        animation: none;
+      }
+    }
+  }
+
+  .#{$prefix}--rating__thumb-btn--animating-down-particles {
+    &::before {
+      position: absolute;
+      border: convert.to-rem(4px) solid $support-error;
+      border-radius: 50%;
+      animation: #{$prefix}--rating-ring 500ms ease-out forwards;
+      block-size: 100%;
+      content: '';
+      inline-size: 100%;
+      inset-block-start: 50%;
+      inset-inline-start: 50%;
+      pointer-events: none;
+
+      @media screen and (prefers-reduced-motion: reduce) {
+        animation: none;
+      }
+    }
+
+    &::after {
+      position: absolute;
+      border-radius: 50%;
+      animation: #{$prefix}--rating-particles-down 500ms ease-out forwards;
+      background: $support-error;
+      block-size: convert.to-rem(4px);
+      content: '';
+      inline-size: convert.to-rem(4px);
+      inset-block-start: 50%;
+      inset-inline-start: 50%;
+      margin-block-start: convert.to-rem(-2px);
+      margin-inline-start: convert.to-rem(-2px);
+      pointer-events: none;
+
+      @media screen and (prefers-reduced-motion: reduce) {
+        animation: none;
+      }
+    }
+  }
+}
