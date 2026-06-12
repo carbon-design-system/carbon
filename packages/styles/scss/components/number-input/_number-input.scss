@@ -577,7 +577,7 @@
 
   .#{$prefix}--number__input-wrapper--decorator .#{$prefix}--number__invalid,
   .#{$prefix}--number__input-wrapper--slug .#{$prefix}--number__invalid {
-    inset-inline-end: $spacing-13 - $spacing-05;
+    inset-inline-end: calc($spacing-13 - $spacing-05);
   }
 
   .#{$prefix}--number__input-wrapper--decorator:has(

@@ -244,7 +244,7 @@
   // space between caret and trigger button
   $caret-height: convert.to-rem(5px);
   $caret-width: convert.to-rem(8px);
-  $body-spacing: $caret-spacing + $caret-height;
+  $body-spacing: calc($caret-spacing + $caret-height);
 
   // Use pseudo element to create invisible hover area to keep tooltip open on hover
   .#{$prefix}--assistive-text::after {

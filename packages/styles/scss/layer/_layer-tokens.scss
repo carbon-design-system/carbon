@@ -6,7 +6,7 @@
 //
 
 @use 'sass:list';
-@use '../config' as *;
+@use '../config';
 @use '../utilities/custom-property';
 @use './layer-sets' as *;
 
@@ -14,7 +14,10 @@
 /// @param {Number} $level
 @mixin emit-layer-tokens($level) {
   @each $key, $layer-set in $layer-sets {
-    $value: list.nth($layer-set, $level);
-    @include custom-property.declaration($key, $value);
+    $token-name: list.nth($layer-set, $level);
+    @include custom-property.declaration(
+      $key,
+      var(--#{config.$prefix}-#{$token-name})
+    );
   }
 }

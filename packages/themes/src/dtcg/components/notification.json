@@ -1,0 +1,124 @@
+{
+  "$schema": "https://tr.designtokens.org/format/",
+  "$description": "notification component tokens",
+  "notification": {
+    "action-hover": {
+      "$type": "color",
+      "$description": "action-hover token",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "#ffffff",
+          "g10": "#ffffff"
+        }
+      }
+    },
+    "action-tertiary-inverse": {
+      "$type": "color",
+      "$description": "action-tertiary-inverse token",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "#ffffff",
+          "g10": "#ffffff",
+          "g90": "#0f62fe",
+          "g100": "#0f62fe"
+        }
+      }
+    },
+    "action-tertiary-inverse-active": {
+      "$type": "color",
+      "$description": "action-tertiary-inverse-active token",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "#c6c6c6",
+          "g10": "#c6c6c6",
+          "g90": "#002d9c",
+          "g100": "#002d9c"
+        }
+      }
+    },
+    "action-tertiary-inverse-hover": {
+      "$type": "color",
+      "$description": "action-tertiary-inverse-hover token",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "#f4f4f4",
+          "g10": "#f4f4f4",
+          "g90": "#0050e6",
+          "g100": "#0050e6"
+        }
+      }
+    },
+    "action-tertiary-inverse-text": {
+      "$type": "color",
+      "$description": "action-tertiary-inverse-text token",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "#161616",
+          "g10": "#161616",
+          "g90": "#ffffff",
+          "g100": "#ffffff"
+        }
+      }
+    },
+    "action-tertiary-inverse-text-on-color-disabled": {
+      "$type": "color",
+      "$description": "action-tertiary-inverse-text-on-color-disabled token",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "rgba(255, 255, 255, 0.25)",
+          "g10": "rgba(255, 255, 255, 0.25)",
+          "g90": "#8d8d8d",
+          "g100": "#8d8d8d"
+        }
+      }
+    },
+    "background-error": {
+      "$type": "color",
+      "$description": "background-error token",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "#fff1f1",
+          "g10": "#fff1f1",
+          "g90": "#393939",
+          "g100": "#262626"
+        }
+      }
+    },
+    "background-info": {
+      "$type": "color",
+      "$description": "background-info token",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "#edf5ff",
+          "g10": "#edf5ff",
+          "g90": "#393939",
+          "g100": "#262626"
+        }
+      }
+    },
+    "background-success": {
+      "$type": "color",
+      "$description": "background-success token",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "#defbe6",
+          "g10": "#defbe6",
+          "g90": "#393939",
+          "g100": "#262626"
+        }
+      }
+    },
+    "background-warning": {
+      "$type": "color",
+      "$description": "background-warning token",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "#fcf4d6",
+          "g10": "#fcf4d6",
+          "g90": "#393939",
+          "g100": "#262626"
+        }
+      }
+    }
+  }
+}
