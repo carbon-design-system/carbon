@@ -8,7 +8,7 @@
 import React from 'react';
 import { FolderOpen, Folders, Information, View } from '@carbon/icons-react';
 
-import { WithLayer } from '../../../.storybook/templates/WithLayer';
+import { withLayers } from '../../../.storybook/decorators/withLayers';
 
 import { default as Dropdown, DropdownSkeleton } from './';
 import Button from '../Button';
@@ -23,6 +23,7 @@ import {
 import { IconButton } from '../IconButton';
 import mdx from './Dropdown.mdx';
 import Link from '../Link';
+import { useId } from '../../internal/useId';
 
 export default {
   title: 'Components/Dropdown',
@@ -155,6 +156,7 @@ const sharedArgTypes = {
 };
 
 export const Default = (args) => {
+  const id = useId('dropdown'); // required for unique id generation when cloning this story in layers stories
   const items = [
     {
       text: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit.',
@@ -189,7 +191,7 @@ export const Default = (args) => {
   return (
     <div style={{ width: 400 }}>
       <Dropdown
-        id="default"
+        id={id}
         titleText="Label"
         helperText="Helper text"
         label="Choose an option"
@@ -272,6 +274,7 @@ ExperimentalAutoAlign.args = {
 };
 
 export const Inline = (args) => {
+  const id = useId('dropdown-inline'); // required for unique id generation when cloning this story in layers stories
   const items = [
     {
       text: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit.',
@@ -305,7 +308,7 @@ export const Inline = (args) => {
   return (
     <div style={{ width: 600 }}>
       <Dropdown
-        id="inline"
+        id={id}
         titleText="Label"
         initialSelectedItem={items[1]}
         label="Option 1"
@@ -329,64 +332,24 @@ Inline.args = {
   warnText: 'Warning message goes here',
 };
 
-export const _WithLayer = (args) => (
-  <WithLayer>
-    {(layer) => (
-      <div style={{ width: 400 }}>
-        <Dropdown
-          id={`default-${layer}`}
-          titleText="Label"
-          helperText="Helper text"
-          initialSelectedItem={items[1]}
-          label="Option 1"
-          items={items}
-          itemToString={(item) => (item ? item.text : '')}
-          {...args}
-        />
-      </div>
-    )}
-  </WithLayer>
-);
-
-_WithLayer.argTypes = {
-  ...sharedArgTypes,
+export const _WithLayer = {
+  decorators: [withLayers],
+  parameters: {
+    layout: 'fullscreen',
+  },
+  argTypes: Default.argTypes,
+  args: Default.args,
+  render: Default,
 };
 
-_WithLayer.args = {
-  invalid: false,
-  invalidText: 'Error message goes here',
-  warn: false,
-  warnText: 'Warning message goes here',
-};
-
-export const InlineWithLayer = (args) => (
-  <WithLayer>
-    {(layer) => (
-      <div style={{ width: 600 }}>
-        <Dropdown
-          id={`inline-${layer}`}
-          titleText="Label"
-          initialSelectedItem={items[1]}
-          label="Option 1"
-          type="inline"
-          items={items}
-          itemToString={(item) => (item ? item.text : '')}
-          {...args}
-        />
-      </div>
-    )}
-  </WithLayer>
-);
-
-InlineWithLayer.argTypes = {
-  ...sharedArgTypes,
-};
-
-InlineWithLayer.args = {
-  invalid: false,
-  invalidText: 'Error message goes here',
-  warn: false,
-  warnText: 'Warning message goes here',
+export const InlineWithLayer = {
+  decorators: [withLayers],
+  parameters: {
+    layout: 'fullscreen',
+  },
+  argTypes: Inline.argTypes,
+  args: Inline.args,
+  render: Inline,
 };
 
 export const Skeleton = () => {

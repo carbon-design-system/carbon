@@ -7,7 +7,7 @@
 
 import React, { useState } from 'react';
 
-import { WithLayer } from '../../../.storybook/templates/WithLayer';
+import { withLayers } from '../../../.storybook/decorators/withLayers';
 
 import { Slider, SliderSkeleton } from '.';
 import mdx from './Slider.mdx';
@@ -194,39 +194,22 @@ export const ControlledSlider = () => {
   );
 };
 
-export const _WithLayer = () => (
-  <WithLayer>
-    <Slider
-      labelText="Slider label"
-      value={50}
-      min={0}
-      max={100}
-      step={1}
-      stepMultiplier={10}
-      noValidate
-    />
-  </WithLayer>
-);
+export const _WithLayer = {
+  decorators: [withLayers],
+  parameters: {
+    layout: 'fullscreen',
+  },
+  argTypes: Default.argTypes,
+  args: Default.args,
+  render: Default,
+};
 
-export const ControlledSliderWithLayer = () => {
-  const [val, setVal] = useState(87);
-  return (
-    <WithLayer>
-      <button
-        type="button"
-        onClick={() => setVal(Math.round(Math.random() * 100))}>
-        randomize value
-      </button>
-      <Slider
-        labelText="Slider label"
-        max={100}
-        min={0}
-        value={val}
-        onChange={({ value }) => setVal(value)}
-      />
-      <h1>{val}</h1>
-    </WithLayer>
-  );
+export const ControlledSliderWithLayer = {
+  decorators: [withLayers],
+  parameters: {
+    layout: 'fullscreen',
+  },
+  render: ControlledSlider,
 };
 
 export const TwoHandleSlider = () => {

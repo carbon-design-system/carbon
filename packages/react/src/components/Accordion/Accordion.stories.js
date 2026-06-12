@@ -14,7 +14,7 @@ import { default as Accordion, AccordionItem, AccordionSkeleton } from '.';
 import Button from '../Button';
 import ButtonSet from '../ButtonSet';
 import mdx from './Accordion.mdx';
-import { WithLayer } from '../../../.storybook/templates/WithLayer';
+import { withLayers } from '../../../.storybook/decorators/withLayers';
 
 export default {
   title: 'Components/Accordion',
@@ -87,7 +87,7 @@ export const Default = (args) => {
       <AccordionItem title="Choose your plan" onHeadingClick={onHeadingClick}>
         <p>
           Compare plan features and select the option that best matches your
-          team&apos;s expected usage.
+          team's expected usage.
         </p>
       </AccordionItem>
       <AccordionItem title="Add team members" onHeadingClick={onHeadingClick}>
@@ -156,7 +156,7 @@ export const Controlled = (args) => {
           onHeadingClick={onHeadingClick}>
           <p>
             Compare plan features and select the option that best matches your
-            team&apos;s expected usage.
+            team's expected usage.
           </p>
         </AccordionItem>
         <AccordionItem
@@ -195,48 +195,15 @@ Controlled.args = { ...sharedArgs };
 
 Controlled.argTypes = { ...sharedArgTypes };
 
-export const _WithLayer = (args) => {
-  const { onHeadingClick, ...restArgs } = args;
-
-  return (
-    <WithLayer>
-      <Accordion {...restArgs}>
-        <AccordionItem title="Choose your plan" onHeadingClick={onHeadingClick}>
-          <p>
-            Compare plan features and select the option that best matches your
-            team&apos;s expected usage.
-          </p>
-        </AccordionItem>
-        <AccordionItem title="Add team members" onHeadingClick={onHeadingClick}>
-          <p>
-            Invite collaborators by email and assign their workspace roles
-            before launch.
-          </p>
-        </AccordionItem>
-        <AccordionItem
-          title="Set payment details"
-          onHeadingClick={onHeadingClick}>
-          <p>
-            Add billing information and choose whether to receive invoices by
-            email.
-          </p>
-        </AccordionItem>
-        <AccordionItem
-          title="Review and confirm"
-          onHeadingClick={onHeadingClick}>
-          <p>
-            Check your setup summary, then confirm to create the workspace for
-            your team.
-          </p>
-        </AccordionItem>
-      </Accordion>
-    </WithLayer>
-  );
+export const _WithLayer = {
+  decorators: [withLayers],
+  parameters: {
+    layout: 'fullscreen',
+  },
+  args: { ...sharedArgs },
+  argTypes: { ...sharedArgTypes },
+  render: Default,
 };
-
-_WithLayer.args = { ...sharedArgs };
-
-_WithLayer.argTypes = { ...sharedArgTypes };
 
 export const Skeleton = (args) => (
   <AccordionSkeleton open count={4} {...args} />

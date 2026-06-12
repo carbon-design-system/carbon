@@ -7,7 +7,7 @@
 
 import React from 'react';
 
-import { WithLayer } from '../../../.storybook/templates/WithLayer';
+import { withLayers } from '../../../.storybook/decorators/withLayers';
 import { default as Select, SelectSkeleton } from '../Select';
 import SelectItem from '../SelectItem';
 import SelectItemGroup from '../SelectItemGroup';
@@ -16,6 +16,7 @@ import { AILabel, AILabelContent, AILabelActions } from '../AILabel';
 import { IconButton } from '../IconButton';
 import { View, FolderOpen, Folders } from '@carbon/icons-react';
 import mdx from './Select.mdx';
+import { useId } from '../../internal/useId';
 
 export default {
   title: 'Components/Select',
@@ -36,7 +37,6 @@ export default {
       },
     },
   },
-  decorators: [(story) => <div style={{ width: '400px' }}>{story()}</div>],
   subcomponents: {
     SelectItem,
     SelectItemGroup,
@@ -50,6 +50,37 @@ export default {
       exclude: ['id', 'defaultValue'],
     },
   },
+};
+
+export const Default = (args) => {
+  const id = useId('select'); // required for unique id generation when cloning this story in layers stories
+  return (
+    <div style={{ maxWidth: '400px' }}>
+      <Select
+        id={id}
+        labelText="Select an option"
+        helperText="Optional helper text"
+        {...args}>
+        <SelectItem value="" text="" />
+        <SelectItem
+          value="An example option that is really long to show what should be done to handle long text"
+          text="An example option that is really long to show what should be done to handle long text"
+        />
+        <SelectItem value="option-2" text="Option 2" />
+        <SelectItem value="option-3" text="Option 3" />
+        <SelectItem value="option-4" text="Option 4" />
+      </Select>
+    </div>
+  );
+};
+
+Default.argTypes = {
+  helperText: {
+    control: 'text',
+  },
+  invalidText: { control: 'text' },
+  labelText: { control: 'text' },
+  warnText: { control: 'text' },
 };
 
 export const Inline = (args) => {
@@ -79,29 +110,18 @@ export const Skeleton = () => {
   return <SelectSkeleton />;
 };
 
-export const _WithLayer = (args) => (
-  <WithLayer>
-    {(layer) => (
-      <Select
-        id={`select-${layer}`}
-        labelText=""
-        helperText="Optional helper text"
-        {...args}>
-        <SelectItem value="" text="" />
-        <SelectItem
-          value="An example option that is really long to show what should be done to handle long text"
-          text="An example option that is really long to show what should be done to handle long text"
-        />
-        <SelectItem value="option-2" text="Option 2" />
-      </Select>
-    )}
-  </WithLayer>
-);
-
-_WithLayer.argTypes = {
-  inline: {
-    control: false,
+export const _WithLayer = {
+  decorators: [withLayers],
+  parameters: {
+    layout: 'fullscreen',
   },
+  argTypes: {
+    ...Default.argTypes,
+    inline: {
+      control: false,
+    },
+  },
+  render: Default,
 };
 
 export const withAILabel = (args) => {
@@ -161,34 +181,4 @@ withAILabel.argTypes = {
   inline: {
     control: false,
   },
-};
-
-export const Default = (args) => {
-  return (
-    <div>
-      <Select
-        id="select-1"
-        labelText="Select an option"
-        helperText="Optional helper text"
-        {...args}>
-        <SelectItem value="" text="" />
-        <SelectItem
-          value="An example option that is really long to show what should be done to handle long text"
-          text="An example option that is really long to show what should be done to handle long text"
-        />
-        <SelectItem value="option-2" text="Option 2" />
-        <SelectItem value="option-3" text="Option 3" />
-        <SelectItem value="option-4" text="Option 4" />
-      </Select>
-    </div>
-  );
-};
-
-Default.argTypes = {
-  helperText: {
-    control: 'text',
-  },
-  invalidText: { control: 'text' },
-  labelText: { control: 'text' },
-  warnText: { control: 'text' },
 };

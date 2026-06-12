@@ -6,7 +6,7 @@
  */
 
 import React from 'react';
-import { WithLayer } from '../../../.storybook/templates/WithLayer';
+import { withLayers } from '../../../.storybook/decorators/withLayers';
 import { useFeatureFlag } from '../FeatureFlags';
 
 import {
@@ -84,12 +84,16 @@ Selection.parameters = {
   },
 };
 
-export const WithBackgroundLayer = () => {
-  const v12StructuredRadioIcons = useFeatureFlag(
-    'enable-v12-structured-list-visible-icons'
-  );
-  return (
-    <WithLayer>
+export const WithBackgroundLayer = {
+  decorators: [withLayers],
+  parameters: {
+    layout: 'fullscreen',
+  },
+  render: () => {
+    const v12StructuredRadioIcons = useFeatureFlag(
+      'enable-v12-structured-list-visible-icons'
+    );
+    return (
       <StructuredListWrapper selection>
         <StructuredListHead>
           <StructuredListRow head>
@@ -105,6 +109,6 @@ export const WithBackgroundLayer = () => {
           {structuredListBodyRowGenerator(4, v12StructuredRadioIcons)}
         </StructuredListBody>
       </StructuredListWrapper>
-    </WithLayer>
-  );
+    );
+  },
 };

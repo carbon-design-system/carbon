@@ -9,7 +9,7 @@ import './tile-story.scss';
 import '../AILabel/ailabel-story.scss';
 import React from 'react';
 
-import { WithLayer } from '../../../.storybook/templates/WithLayer';
+import { withLayers } from '../../../.storybook/decorators/withLayers';
 
 import Link from '../Link';
 import Button from '../Button';
@@ -35,6 +35,7 @@ import {
 import { AILabel, AILabelContent, AILabelActions } from '../AILabel';
 import { IconButton } from '../IconButton';
 import { Tooltip } from '../Tooltip';
+import { useId } from '../../internal/useId';
 
 import mdx from './Tile.mdx';
 
@@ -100,8 +101,9 @@ export default {
 };
 
 export const Default = (args) => {
+  const id = useId('tile'); // required for unique id generation when cloning this story in layers stories
   return (
-    <Tile id="tile-1" {...args}>
+    <Tile id={id} {...args}>
       Default tile
       <br />
       <br />
@@ -120,26 +122,20 @@ Default.args = {
   title: '',
 };
 
-export const DefaultWithLayer = (args) => (
-  <WithLayer>
-    {(layer) => (
-      <Tile id={`tile-${layer}`} {...args}>
-        Default tile
-        <br />
-        <br />
-        <Link href="https://www.carbondesignsystem.com">Link</Link>
-      </Tile>
-    )}
-  </WithLayer>
-);
-
-DefaultWithLayer.args = {
-  ...Default.args,
+export const DefaultWithLayer = {
+  decorators: [withLayers],
+  parameters: {
+    layout: 'fullscreen',
+  },
+  args: Default.args,
+  argTypes: Default.argTypes,
+  render: Default,
 };
 
 export const Clickable = (args) => {
+  const id = useId('tile-clickable'); // required for unique id generation when cloning this story in layers stories
   return (
-    <ClickableTile id="clickable-tile-1" {...args}>
+    <ClickableTile id={id} {...args}>
       Clickable Tile
     </ClickableTile>
   );
@@ -164,18 +160,14 @@ ClickableWithCustomIcon.args = {
   ...Clickable.args,
 };
 
-export const ClickableWithLayer = (args) => (
-  <WithLayer>
-    {(layer) => (
-      <ClickableTile id={`clickable-tile-${layer}`} {...args}>
-        Clickable tile
-      </ClickableTile>
-    )}
-  </WithLayer>
-);
-
-ClickableWithLayer.args = {
-  ...Clickable.args,
+export const ClickableWithLayer = {
+  decorators: [withLayers],
+  parameters: {
+    layout: 'fullscreen',
+  },
+  args: Clickable.args,
+  argTypes: Clickable.argTypes,
+  render: Clickable,
 };
 
 export const Selectable = (args) => {
@@ -214,25 +206,26 @@ MultiSelect.args = {
 };
 
 export const Radio = (args) => {
+  const id = useId('tile-radio'); // required for unique id generation when cloning this story in layers stories
   return (
     <TileGroup
       defaultSelected="default-selected"
       legend="Radio Tile Group"
-      name="radio tile group"
+      name={`radio tile group ${id}`}
       {...args}>
       <RadioTile
-        id="radio-tile-1"
+        id={`${id}-1`}
         value="standard"
         style={{ marginBottom: '.5rem' }}>
         Option 1
       </RadioTile>
       <RadioTile
-        id="radio-tile-2"
+        id={`${id}-2`}
         value="default-selected"
         style={{ marginBottom: '.5rem' }}>
         Option 2
       </RadioTile>
-      <RadioTile id="radio-tile-3" value="selected">
+      <RadioTile id={`${id}-3`} value="selected">
         Option 3
       </RadioTile>
     </TileGroup>
@@ -251,36 +244,21 @@ Radio.argTypes = {
   },
 };
 
-export const RadioWithLayer = (args) => (
-  <WithLayer>
-    {(layer) => (
-      <TileGroup
-        defaultSelected="default-selected"
-        legend="Radio Tile Group"
-        name={`radio tile group ${layer}`}
-        {...args}>
-        <RadioTile
-          id={`radio-tile-${layer}-1`}
-          value="standard"
-          style={{ marginBottom: '.5rem' }}>
-          Option 1
-        </RadioTile>
-        <RadioTile id={`radio-tile-${layer}-2`} value="default-selected">
-          Option 2
-        </RadioTile>
-      </TileGroup>
-    )}
-  </WithLayer>
-);
-
-RadioWithLayer.args = {
-  disabled: false,
+export const RadioWithLayer = {
+  decorators: [withLayers],
+  parameters: {
+    layout: 'fullscreen',
+  },
+  args: Radio.args,
+  argTypes: Radio.argTypes,
+  render: Radio,
 };
 
 export const Expandable = (args) => {
+  const id = useId('tile-expandable'); // required for unique id generation when cloning this story in layers stories
   return (
     <div style={{ width: '400px' }}>
-      <ExpandableTile id="expandable-tile-1" {...args}>
+      <ExpandableTile id={id} {...args}>
         <TileAboveTheFoldContent>
           <div style={{ height: '200px' }}>Above the fold content here</div>
         </TileAboveTheFoldContent>
@@ -339,27 +317,14 @@ ExpandableWithInteractive.argTypes = {
   ...Expandable.argTypes,
 };
 
-export const ExpandableWithLayer = (args) => {
-  return (
-    <WithLayer>
-      {(layer) => (
-        <div style={{ width: '400px' }}>
-          <ExpandableTile id={`expandable-tile-${layer}`} {...args}>
-            <TileAboveTheFoldContent>
-              <div style={{ height: '100px' }}>Above the fold content here</div>
-            </TileAboveTheFoldContent>
-            <TileBelowTheFoldContent>
-              <div style={{ height: '200px' }}>Below the fold content here</div>
-            </TileBelowTheFoldContent>
-          </ExpandableTile>
-        </div>
-      )}
-    </WithLayer>
-  );
-};
-
-ExpandableWithLayer.args = {
-  ...Expandable.args,
+export const ExpandableWithLayer = {
+  decorators: [withLayers],
+  parameters: {
+    layout: 'fullscreen',
+  },
+  args: Expandable.args,
+  argTypes: Expandable.argTypes,
+  render: Expandable,
 };
 
 const aiLabel = (

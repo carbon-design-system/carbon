@@ -7,7 +7,7 @@
 
 import React from 'react';
 import mdx from './StructuredList.mdx';
-import { WithLayer } from '../../../.storybook/templates/WithLayer';
+import { withLayers } from '../../../.storybook/decorators/withLayers';
 
 import {
   StructuredListWrapper,
@@ -169,26 +169,16 @@ Selection.parameters = { ...sharedParameters };
 
 InitialSelection.parameters = { ...sharedParameters };
 
-export const WithBackgroundLayer = () => {
-  return (
-    <WithLayer>
-      <StructuredListWrapper selection>
-        <StructuredListHead>
-          <StructuredListRow head>
-            <StructuredListCell head>ColumnA</StructuredListCell>
-            <StructuredListCell head>ColumnB</StructuredListCell>
-            <StructuredListCell head>ColumnC</StructuredListCell>
-          </StructuredListRow>
-        </StructuredListHead>
-        <StructuredListBody>
-          {structuredListBodyRowGenerator(4)}
-        </StructuredListBody>
-      </StructuredListWrapper>
-    </WithLayer>
-  );
+export const WithBackgroundLayer = {
+  decorators: [withLayers],
+  parameters: {
+    ...Selection.parameters,
+    layout: 'fullscreen',
+  },
+  args: Selection.args,
+  argTypes: Selection.argTypes,
+  render: Selection,
 };
-
-WithBackgroundLayer.parameters = { ...sharedParameters };
 
 export const Skeleton = (args) => (
   <div style={{ width: '800px' }}>
