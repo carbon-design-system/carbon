@@ -39,7 +39,7 @@
     "@carbon/test-utils": "^10.41.0",
     "core-js": "^3.16.0",
     "rimraf": "^6.0.1",
-    "typescript": "^5.7.3",
+    "typescript": "^6.0.3",
     "typescript-config-carbon": "workspace:^0.10.0"
   },
   "dependencies": {

@@ -31,7 +31,8 @@
     "build": "yarn clean && tsc -p tsconfig.json"
   },
   "dependencies": {
-    "typescript": "^5.7.3"
+    "@types/node": "^25.9.3",
+    "typescript": "^6.0.3"
   },
   "devDependencies": {
     "rimraf": "^6.0.1"
