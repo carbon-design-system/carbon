@@ -1,0 +1,1313 @@
+{
+  "$schema": "https://tr.designtokens.org/format/",
+  "$description": "g100 theme - Dark theme",
+  "color": {
+    "ai": {
+      "aura": {
+        "end": {
+          "$type": "color",
+          "$value": "rgba(0, 0, 0, 0)",
+          "$description": "ai-aura-end token"
+        },
+        "hover": {
+          "background": {
+            "$type": "color",
+            "$value": "#333333",
+            "$description": "ai-aura-hover-background token"
+          },
+          "end": {
+            "$type": "color",
+            "$value": "rgba(0, 0, 0, 0)",
+            "$description": "ai-aura-hover-end token"
+          },
+          "start": {
+            "$type": "color",
+            "$value": "rgba(69, 137, 255, 0.4)",
+            "$description": "ai-aura-hover-start token"
+          }
+        },
+        "start": {
+          "$type": "color",
+          "$value": "rgba(69, 137, 255, 0.1)",
+          "$description": "ai-aura-start token",
+          "sm": {
+            "$type": "color",
+            "$value": "rgba(69, 137, 255, 0.16)",
+            "$description": "ai-aura-start-sm token"
+          }
+        }
+      },
+      "border": {
+        "end": {
+          "$type": "color",
+          "$value": "#4589ff",
+          "$description": "ai-border-end token"
+        },
+        "start": {
+          "$type": "color",
+          "$value": "rgba(166, 200, 255, 0.36)",
+          "$description": "ai-border-start token"
+        },
+        "strong": {
+          "$type": "color",
+          "$value": "#78a9ff",
+          "$description": "ai-border-strong token"
+        }
+      },
+      "drop": {
+        "shadow": {
+          "$type": "color",
+          "$value": "rgba(0, 0, 0, 0.28)",
+          "$description": "ai-drop-shadow token"
+        }
+      },
+      "inner": {
+        "shadow": {
+          "$type": "color",
+          "$value": "rgba(69, 137, 255, 0.16)",
+          "$description": "ai-inner-shadow token"
+        }
+      },
+      "overlay": {
+        "$type": "color",
+        "$value": "rgba(0, 0, 0, 0.5)",
+        "$description": "ai-overlay token"
+      },
+      "popover": {
+        "background": {
+          "$type": "color",
+          "$value": "#161616",
+          "$description": "ai-popover-background token"
+        },
+        "caret": {
+          "bottom": {
+            "$type": "color",
+            "$value": "#4589ff",
+            "$description": "ai-popover-caret-bottom token",
+            "background": {
+              "$type": "color",
+              "$value": "#202d45",
+              "$description": "ai-popover-caret-bottom-background token",
+              "actions": {
+                "$type": "color",
+                "$value": "#1e283a",
+                "$description": "ai-popover-caret-bottom-background-actions token"
+              }
+            }
+          },
+          "center": {
+            "$type": "color",
+            "$value": "#4870b5",
+            "$description": "ai-popover-caret-center token"
+          }
+        },
+        "shadow": {
+          "outer": {
+            "01": {
+              "$type": "color",
+              "$value": "rgba(0, 0, 0, 0.12)",
+              "$description": "ai-popover-shadow-outer-01 token"
+            },
+            "02": {
+              "$type": "color",
+              "$value": "rgba(0, 0, 0, 0.08)",
+              "$description": "ai-popover-shadow-outer-02 token"
+            }
+          }
+        }
+      },
+      "skeleton": {
+        "background": {
+          "$type": "color",
+          "$value": "rgba(120, 169, 255, 0.5)",
+          "$description": "ai-skeleton-background token"
+        },
+        "element": {
+          "background": {
+            "$type": "color",
+            "$value": "rgba(120, 169, 255, 0.3)",
+            "$description": "ai-skeleton-element-background token"
+          }
+        }
+      }
+    },
+    "background": {
+      "$type": "color",
+      "$value": "#161616",
+      "$description": "background token",
+      "active": {
+        "$type": "color",
+        "$value": "rgba(141, 141, 141, 0.4)",
+        "$description": "background-active token"
+      },
+      "brand": {
+        "$type": "color",
+        "$value": "#0f62fe",
+        "$description": "background-brand token"
+      },
+      "hover": {
+        "$type": "color",
+        "$value": "rgba(141, 141, 141, 0.16)",
+        "$description": "background-hover token"
+      },
+      "inverse": {
+        "$type": "color",
+        "$value": "#f4f4f4",
+        "$description": "background-inverse token",
+        "hover": {
+          "$type": "color",
+          "$value": "#e8e8e8",
+          "$description": "background-inverse-hover token"
+        }
+      },
+      "selected": {
+        "$type": "color",
+        "$value": "rgba(141, 141, 141, 0.24)",
+        "$description": "background-selected token",
+        "hover": {
+          "$type": "color",
+          "$value": "rgba(141, 141, 141, 0.32)",
+          "$description": "background-selected-hover token"
+        }
+      }
+    },
+    "border": {
+      "disabled": {
+        "$type": "color",
+        "$value": "rgba(141, 141, 141, 0.5)",
+        "$description": "border-disabled token"
+      },
+      "interactive": {
+        "$type": "color",
+        "$value": "#4589ff",
+        "$description": "border-interactive token"
+      },
+      "inverse": {
+        "$type": "color",
+        "$value": "#f4f4f4",
+        "$description": "border-inverse token"
+      },
+      "strong": {
+        "01": {
+          "$type": "color",
+          "$value": "#6f6f6f",
+          "$description": "border-strong-01 token"
+        },
+        "02": {
+          "$type": "color",
+          "$value": "#8d8d8d",
+          "$description": "border-strong-02 token"
+        },
+        "03": {
+          "$type": "color",
+          "$value": "#a8a8a8",
+          "$description": "border-strong-03 token"
+        }
+      },
+      "subtle": {
+        "00": {
+          "$type": "color",
+          "$value": "#393939",
+          "$description": "border-subtle-00 token"
+        },
+        "01": {
+          "$type": "color",
+          "$value": "#525252",
+          "$description": "border-subtle-01 token"
+        },
+        "02": {
+          "$type": "color",
+          "$value": "#6f6f6f",
+          "$description": "border-subtle-02 token"
+        },
+        "03": {
+          "$type": "color",
+          "$value": "#6f6f6f",
+          "$description": "border-subtle-03 token"
+        },
+        "selected": {
+          "01": {
+            "$type": "color",
+            "$value": "#6f6f6f",
+            "$description": "border-subtle-selected-01 token"
+          },
+          "02": {
+            "$type": "color",
+            "$value": "#8d8d8d",
+            "$description": "border-subtle-selected-02 token"
+          },
+          "03": {
+            "$type": "color",
+            "$value": "#8d8d8d",
+            "$description": "border-subtle-selected-03 token"
+          }
+        }
+      },
+      "tile": {
+        "01": {
+          "$type": "color",
+          "$value": "#525252",
+          "$description": "border-tile-01 token"
+        },
+        "02": {
+          "$type": "color",
+          "$value": "#6f6f6f",
+          "$description": "border-tile-02 token"
+        },
+        "03": {
+          "$type": "color",
+          "$value": "#8d8d8d",
+          "$description": "border-tile-03 token"
+        }
+      }
+    },
+    "chat": {
+      "avatar": {
+        "agent": {
+          "$type": "color",
+          "$value": "#c6c6c6",
+          "$description": "chat-avatar-agent token"
+        },
+        "bot": {
+          "$type": "color",
+          "$value": "#8d8d8d",
+          "$description": "chat-avatar-bot token"
+        },
+        "user": {
+          "$type": "color",
+          "$value": "#4589ff",
+          "$description": "chat-avatar-user token"
+        }
+      },
+      "bubble": {
+        "agent": {
+          "$type": "color",
+          "$value": "#262626",
+          "$description": "chat-bubble-agent token",
+          "text": {
+            "$type": "color",
+            "$value": "#f4f4f4",
+            "$description": "chat-bubble-agent-text token"
+          }
+        },
+        "border": {
+          "$type": "color",
+          "$value": "#525252",
+          "$description": "chat-bubble-border token"
+        },
+        "user": {
+          "$type": "color",
+          "$value": "#393939",
+          "$description": "chat-bubble-user token",
+          "text": {
+            "$type": "color",
+            "$value": "#f4f4f4",
+            "$description": "chat-bubble-user-text token"
+          }
+        }
+      },
+      "button": {
+        "$type": "color",
+        "$value": "#78a9ff",
+        "$description": "chat-button token",
+        "active": {
+          "$type": "color",
+          "$value": "rgba(141, 141, 141, 0.4)",
+          "$description": "chat-button-active token"
+        },
+        "hover": {
+          "$type": "color",
+          "$value": "rgba(141, 141, 141, 0.16)",
+          "$description": "chat-button-hover token"
+        },
+        "selected": {
+          "$type": "color",
+          "$value": "rgba(141, 141, 141, 0.24)",
+          "$description": "chat-button-selected token"
+        },
+        "text": {
+          "hover": {
+            "$type": "color",
+            "$value": "#a6c8ff",
+            "$description": "chat-button-text-hover token"
+          },
+          "selected": {
+            "$type": "color",
+            "$value": "#c6c6c6",
+            "$description": "chat-button-text-selected token"
+          }
+        }
+      },
+      "header": {
+        "background": {
+          "$type": "color",
+          "$value": "#262626",
+          "$description": "chat-header-background token"
+        },
+        "text": {
+          "$type": "color",
+          "$value": "#f4f4f4",
+          "$description": "chat-header-text token"
+        }
+      },
+      "prompt": {
+        "background": {
+          "$type": "color",
+          "$value": "#161616",
+          "$description": "chat-prompt-background token"
+        },
+        "border": {
+          "end": {
+            "$type": "color",
+            "$value": "rgba(38, 38, 38, 0)",
+            "$description": "chat-prompt-border-end token"
+          },
+          "start": {
+            "$type": "color",
+            "$value": "#262626",
+            "$description": "chat-prompt-border-start token"
+          }
+        },
+        "text": {
+          "$type": "color",
+          "$value": "#f4f4f4",
+          "$description": "chat-prompt-text token"
+        }
+      },
+      "shell": {
+        "background": {
+          "$type": "color",
+          "$value": "#262626",
+          "$description": "chat-shell-background token"
+        }
+      }
+    },
+    "color": {
+      "scheme": {
+        "$type": "color",
+        "$value": "dark",
+        "$description": "color-scheme token"
+      }
+    },
+    "field": {
+      "01": {
+        "$type": "color",
+        "$value": "#262626",
+        "$description": "field-01 token"
+      },
+      "02": {
+        "$type": "color",
+        "$value": "#393939",
+        "$description": "field-02 token"
+      },
+      "03": {
+        "$type": "color",
+        "$value": "#525252",
+        "$description": "field-03 token"
+      },
+      "hover": {
+        "01": {
+          "$type": "color",
+          "$value": "#333333",
+          "$description": "field-hover-01 token"
+        },
+        "02": {
+          "$type": "color",
+          "$value": "#474747",
+          "$description": "field-hover-02 token"
+        },
+        "03": {
+          "$type": "color",
+          "$value": "#636363",
+          "$description": "field-hover-03 token"
+        }
+      }
+    },
+    "focus": {
+      "$type": "color",
+      "$value": "#ffffff",
+      "$description": "focus token",
+      "inset": {
+        "$type": "color",
+        "$value": "#161616",
+        "$description": "focus-inset token"
+      },
+      "inverse": {
+        "$type": "color",
+        "$value": "#0f62fe",
+        "$description": "focus-inverse token"
+      }
+    },
+    "highlight": {
+      "$type": "color",
+      "$value": "#001d6c",
+      "$description": "highlight token"
+    },
+    "icon": {
+      "disabled": {
+        "$type": "color",
+        "$value": "rgba(244, 244, 244, 0.25)",
+        "$description": "icon-disabled token"
+      },
+      "interactive": {
+        "$type": "color",
+        "$value": "#ffffff",
+        "$description": "icon-interactive token"
+      },
+      "inverse": {
+        "$type": "color",
+        "$value": "#161616",
+        "$description": "icon-inverse token"
+      },
+      "on": {
+        "color": {
+          "$type": "color",
+          "$value": "#ffffff",
+          "$description": "icon-on-color token",
+          "disabled": {
+            "$type": "color",
+            "$value": "rgba(255, 255, 255, 0.25)",
+            "$description": "icon-on-color-disabled token"
+          }
+        }
+      },
+      "primary": {
+        "$type": "color",
+        "$value": "#f4f4f4",
+        "$description": "icon-primary token"
+      },
+      "secondary": {
+        "$type": "color",
+        "$value": "#c6c6c6",
+        "$description": "icon-secondary token"
+      }
+    },
+    "interactive": {
+      "$type": "color",
+      "$value": "#4589ff",
+      "$description": "interactive token"
+    },
+    "layer": {
+      "01": {
+        "$type": "color",
+        "$value": "#262626",
+        "$description": "layer-01 token"
+      },
+      "02": {
+        "$type": "color",
+        "$value": "#393939",
+        "$description": "layer-02 token"
+      },
+      "03": {
+        "$type": "color",
+        "$value": "#525252",
+        "$description": "layer-03 token"
+      },
+      "accent": {
+        "01": {
+          "$type": "color",
+          "$value": "#393939",
+          "$description": "layer-accent-01 token"
+        },
+        "02": {
+          "$type": "color",
+          "$value": "#525252",
+          "$description": "layer-accent-02 token"
+        },
+        "03": {
+          "$type": "color",
+          "$value": "#6f6f6f",
+          "$description": "layer-accent-03 token"
+        },
+        "active": {
+          "01": {
+            "$type": "color",
+            "$value": "#6f6f6f",
+            "$description": "layer-accent-active-01 token"
+          },
+          "02": {
+            "$type": "color",
+            "$value": "#8d8d8d",
+            "$description": "layer-accent-active-02 token"
+          },
+          "03": {
+            "$type": "color",
+            "$value": "#393939",
+            "$description": "layer-accent-active-03 token"
+          }
+        },
+        "hover": {
+          "01": {
+            "$type": "color",
+            "$value": "#474747",
+            "$description": "layer-accent-hover-01 token"
+          },
+          "02": {
+            "$type": "color",
+            "$value": "#636363",
+            "$description": "layer-accent-hover-02 token"
+          },
+          "03": {
+            "$type": "color",
+            "$value": "#5e5e5e",
+            "$description": "layer-accent-hover-03 token"
+          }
+        }
+      },
+      "active": {
+        "01": {
+          "$type": "color",
+          "$value": "#525252",
+          "$description": "layer-active-01 token"
+        },
+        "02": {
+          "$type": "color",
+          "$value": "#6f6f6f",
+          "$description": "layer-active-02 token"
+        },
+        "03": {
+          "$type": "color",
+          "$value": "#8d8d8d",
+          "$description": "layer-active-03 token"
+        }
+      },
+      "background": {
+        "01": {
+          "$type": "color",
+          "$value": "#161616",
+          "$description": "layer-background-01 token"
+        },
+        "02": {
+          "$type": "color",
+          "$value": "#262626",
+          "$description": "layer-background-02 token"
+        },
+        "03": {
+          "$type": "color",
+          "$value": "#393939",
+          "$description": "layer-background-03 token"
+        }
+      },
+      "hover": {
+        "01": {
+          "$type": "color",
+          "$value": "#333333",
+          "$description": "layer-hover-01 token"
+        },
+        "02": {
+          "$type": "color",
+          "$value": "#474747",
+          "$description": "layer-hover-02 token"
+        },
+        "03": {
+          "$type": "color",
+          "$value": "#636363",
+          "$description": "layer-hover-03 token"
+        }
+      },
+      "selected": {
+        "01": {
+          "$type": "color",
+          "$value": "#393939",
+          "$description": "layer-selected-01 token"
+        },
+        "02": {
+          "$type": "color",
+          "$value": "#525252",
+          "$description": "layer-selected-02 token"
+        },
+        "03": {
+          "$type": "color",
+          "$value": "#6f6f6f",
+          "$description": "layer-selected-03 token"
+        },
+        "disabled": {
+          "$type": "color",
+          "$value": "#a8a8a8",
+          "$description": "layer-selected-disabled token"
+        },
+        "hover": {
+          "01": {
+            "$type": "color",
+            "$value": "#474747",
+            "$description": "layer-selected-hover-01 token"
+          },
+          "02": {
+            "$type": "color",
+            "$value": "#636363",
+            "$description": "layer-selected-hover-02 token"
+          },
+          "03": {
+            "$type": "color",
+            "$value": "#5e5e5e",
+            "$description": "layer-selected-hover-03 token"
+          }
+        },
+        "inverse": {
+          "$type": "color",
+          "$value": "#f4f4f4",
+          "$description": "layer-selected-inverse token"
+        }
+      }
+    },
+    "link": {
+      "inverse": {
+        "$type": "color",
+        "$value": "#0f62fe",
+        "$description": "link-inverse token",
+        "active": {
+          "$type": "color",
+          "$value": "#161616",
+          "$description": "link-inverse-active token"
+        },
+        "hover": {
+          "$type": "color",
+          "$value": "#0043ce",
+          "$description": "link-inverse-hover token"
+        },
+        "visited": {
+          "$type": "color",
+          "$value": "#8a3ffc",
+          "$description": "link-inverse-visited token"
+        }
+      },
+      "primary": {
+        "$type": "color",
+        "$value": "#78a9ff",
+        "$description": "link-primary token",
+        "hover": {
+          "$type": "color",
+          "$value": "#a6c8ff",
+          "$description": "link-primary-hover token"
+        }
+      },
+      "secondary": {
+        "$type": "color",
+        "$value": "#a6c8ff",
+        "$description": "link-secondary token"
+      },
+      "visited": {
+        "$type": "color",
+        "$value": "#be95ff",
+        "$description": "link-visited token"
+      }
+    },
+    "overlay": {
+      "$type": "color",
+      "$value": "rgba(0, 0, 0, 0.6)",
+      "$description": "overlay token"
+    },
+    "shadow": {
+      "$type": "color",
+      "$value": "rgba(0, 0, 0, 0.8)",
+      "$description": "shadow token"
+    },
+    "skeleton": {
+      "background": {
+        "$type": "color",
+        "$value": "#292929",
+        "$description": "skeleton-background token"
+      },
+      "element": {
+        "$type": "color",
+        "$value": "#393939",
+        "$description": "skeleton-element token"
+      }
+    },
+    "support": {
+      "caution": {
+        "major": {
+          "$type": "color",
+          "$value": "#ff832b",
+          "$description": "support-caution-major token"
+        },
+        "minor": {
+          "$type": "color",
+          "$value": "#f1c21b",
+          "$description": "support-caution-minor token"
+        },
+        "undefined": {
+          "$type": "color",
+          "$value": "#a56eff",
+          "$description": "support-caution-undefined token"
+        }
+      },
+      "error": {
+        "$type": "color",
+        "$value": "#fa4d56",
+        "$description": "support-error token",
+        "inverse": {
+          "$type": "color",
+          "$value": "#da1e28",
+          "$description": "support-error-inverse token"
+        }
+      },
+      "info": {
+        "$type": "color",
+        "$value": "#4589ff",
+        "$description": "support-info token",
+        "inverse": {
+          "$type": "color",
+          "$value": "#0043ce",
+          "$description": "support-info-inverse token"
+        }
+      },
+      "success": {
+        "$type": "color",
+        "$value": "#42be65",
+        "$description": "support-success token",
+        "inverse": {
+          "$type": "color",
+          "$value": "#24a148",
+          "$description": "support-success-inverse token"
+        }
+      },
+      "warning": {
+        "$type": "color",
+        "$value": "#f1c21b",
+        "$description": "support-warning token",
+        "inverse": {
+          "$type": "color",
+          "$value": "#f1c21b",
+          "$description": "support-warning-inverse token"
+        }
+      }
+    },
+    "syntax": {
+      "angle": {
+        "bracket": {
+          "$type": "color",
+          "$value": "#8d8d8d",
+          "$description": "syntax-angle-bracket token"
+        }
+      },
+      "annotation": {
+        "$type": "color",
+        "$value": "#08bdba",
+        "$description": "syntax-annotation token"
+      },
+      "arithmetic": {
+        "operator": {
+          "$type": "color",
+          "$value": "#e0e0e0",
+          "$description": "syntax-arithmetic-operator token"
+        }
+      },
+      "atom": {
+        "$type": "color",
+        "$value": "#f4f4f4",
+        "$description": "syntax-atom token"
+      },
+      "attribute": {
+        "$type": "color",
+        "$value": "#33b1ff",
+        "$description": "syntax-attribute token",
+        "name": {
+          "$type": "color",
+          "$value": "#33b1ff",
+          "$description": "syntax-attribute-name token"
+        },
+        "value": {
+          "$type": "color",
+          "$value": "#f4f4f4",
+          "$description": "syntax-attribute-value token"
+        }
+      },
+      "bitwise": {
+        "operator": {
+          "$type": "color",
+          "$value": "#e0e0e0",
+          "$description": "syntax-bitwise-operator token"
+        }
+      },
+      "block": {
+        "comment": {
+          "$type": "color",
+          "$value": "#42be65",
+          "$description": "syntax-block-comment token"
+        }
+      },
+      "bool": {
+        "$type": "color",
+        "$value": "#f4f4f4",
+        "$description": "syntax-bool token"
+      },
+      "brace": {
+        "$type": "color",
+        "$value": "#e0e0e0",
+        "$description": "syntax-brace token"
+      },
+      "bracket": {
+        "$type": "color",
+        "$value": "#e0e0e0",
+        "$description": "syntax-bracket token"
+      },
+      "character": {
+        "$type": "color",
+        "$value": "#f4f4f4",
+        "$description": "syntax-character token"
+      },
+      "class": {
+        "name": {
+          "$type": "color",
+          "$value": "#3ddbd9",
+          "$description": "syntax-class-name token"
+        }
+      },
+      "color": {
+        "$type": "color",
+        "$value": "#f4f4f4",
+        "$description": "syntax-color token"
+      },
+      "comment": {
+        "$type": "color",
+        "$value": "#42be65",
+        "$description": "syntax-comment token"
+      },
+      "compare": {
+        "operator": {
+          "$type": "color",
+          "$value": "#e0e0e0",
+          "$description": "syntax-compare-operator token"
+        }
+      },
+      "constant": {
+        "$type": "color",
+        "$value": "#4589ff",
+        "$description": "syntax-constant token"
+      },
+      "content": {
+        "$type": "color",
+        "$value": "#f4f4f4",
+        "$description": "syntax-content token",
+        "separator": {
+          "$type": "color",
+          "$value": "#e0e0e0",
+          "$description": "syntax-content-separator token"
+        }
+      },
+      "control": {
+        "keyword": {
+          "$type": "color",
+          "$value": "#be95ff",
+          "$description": "syntax-control-keyword token"
+        },
+        "operator": {
+          "$type": "color",
+          "$value": "#be95ff",
+          "$description": "syntax-control-operator token"
+        }
+      },
+      "definition": {
+        "$type": "color",
+        "$value": "#33b1ff",
+        "$description": "syntax-definition token",
+        "keyword": {
+          "$type": "color",
+          "$value": "#33b1ff",
+          "$description": "syntax-definition-keyword token"
+        },
+        "operator": {
+          "$type": "color",
+          "$value": "#33b1ff",
+          "$description": "syntax-definition-operator token"
+        }
+      },
+      "deleted": {
+        "$type": "color",
+        "$value": "#a2191f",
+        "$description": "syntax-deleted token"
+      },
+      "deref": {
+        "operator": {
+          "$type": "color",
+          "$value": "#e0e0e0",
+          "$description": "syntax-deref-operator token"
+        }
+      },
+      "doc": {
+        "comment": {
+          "$type": "color",
+          "$value": "#42be65",
+          "$description": "syntax-doc-comment token"
+        },
+        "string": {
+          "$type": "color",
+          "$value": "#f4f4f4",
+          "$description": "syntax-doc-string token"
+        }
+      },
+      "document": {
+        "meta": {
+          "$type": "color",
+          "$value": "#42be65",
+          "$description": "syntax-document-meta token"
+        }
+      },
+      "emphasis": {
+        "$type": "color",
+        "$value": "#f4f4f4",
+        "$description": "syntax-emphasis token"
+      },
+      "escape": {
+        "$type": "color",
+        "$value": "#e0e0e0",
+        "$description": "syntax-escape token"
+      },
+      "float": {
+        "$type": "color",
+        "$value": "#6fdc8c",
+        "$description": "syntax-float token"
+      },
+      "function": {
+        "$type": "color",
+        "$value": "#f1c21b",
+        "$description": "syntax-function token"
+      },
+      "heading": {
+        "1": {
+          "$type": "color",
+          "$value": "#33b1ff",
+          "$description": "syntax-heading-1 token"
+        },
+        "2": {
+          "$type": "color",
+          "$value": "#33b1ff",
+          "$description": "syntax-heading-2 token"
+        },
+        "3": {
+          "$type": "color",
+          "$value": "#33b1ff",
+          "$description": "syntax-heading-3 token"
+        },
+        "4": {
+          "$type": "color",
+          "$value": "#33b1ff",
+          "$description": "syntax-heading-4 token"
+        },
+        "5": {
+          "$type": "color",
+          "$value": "#33b1ff",
+          "$description": "syntax-heading-5 token"
+        },
+        "6": {
+          "$type": "color",
+          "$value": "#33b1ff",
+          "$description": "syntax-heading-6 token"
+        },
+        "$type": "color",
+        "$value": "#33b1ff",
+        "$description": "syntax-heading token"
+      },
+      "inserted": {
+        "$type": "color",
+        "$value": "#198038",
+        "$description": "syntax-inserted token"
+      },
+      "integer": {
+        "$type": "color",
+        "$value": "#6fdc8c",
+        "$description": "syntax-integer token"
+      },
+      "invalid": {
+        "$type": "color",
+        "$value": "#fa4d56",
+        "$description": "syntax-invalid token"
+      },
+      "keyword": {
+        "$type": "color",
+        "$value": "#4589ff",
+        "$description": "syntax-keyword token"
+      },
+      "label": {
+        "name": {
+          "$type": "color",
+          "$value": "#a6c8ff",
+          "$description": "syntax-label-name token"
+        }
+      },
+      "line": {
+        "comment": {
+          "$type": "color",
+          "$value": "#42be65",
+          "$description": "syntax-line-comment token"
+        }
+      },
+      "link": {
+        "$type": "color",
+        "$value": "#4589ff",
+        "$description": "syntax-link token"
+      },
+      "list": {
+        "$type": "color",
+        "$value": "#f4f4f4",
+        "$description": "syntax-list token"
+      },
+      "literal": {
+        "$type": "color",
+        "$value": "#f4f4f4",
+        "$description": "syntax-literal token"
+      },
+      "local": {
+        "$type": "color",
+        "$value": "#a6c8ff",
+        "$description": "syntax-local token"
+      },
+      "logic": {
+        "operator": {
+          "$type": "color",
+          "$value": "#e0e0e0",
+          "$description": "syntax-logic-operator token"
+        }
+      },
+      "macro": {
+        "name": {
+          "$type": "color",
+          "$value": "#f4f4f4",
+          "$description": "syntax-macro-name token"
+        }
+      },
+      "meta": {
+        "$type": "color",
+        "$value": "#42be65",
+        "$description": "syntax-meta token"
+      },
+      "modifier": {
+        "$type": "color",
+        "$value": "#4589ff",
+        "$description": "syntax-modifier token"
+      },
+      "module": {
+        "keyword": {
+          "$type": "color",
+          "$value": "#be95ff",
+          "$description": "syntax-module-keyword token"
+        }
+      },
+      "monospace": {
+        "$type": "color",
+        "$value": "#f4f4f4",
+        "$description": "syntax-monospace token"
+      },
+      "name": {
+        "$type": "color",
+        "$value": "#a6c8ff",
+        "$description": "syntax-name token"
+      },
+      "namespace": {
+        "$type": "color",
+        "$value": "#3ddbd9",
+        "$description": "syntax-namespace token"
+      },
+      "null": {
+        "$type": "color",
+        "$value": "#f4f4f4",
+        "$description": "syntax-null token"
+      },
+      "number": {
+        "$type": "color",
+        "$value": "#6fdc8c",
+        "$description": "syntax-number token"
+      },
+      "operator": {
+        "$type": "color",
+        "$value": "#e0e0e0",
+        "$description": "syntax-operator token",
+        "keyword": {
+          "$type": "color",
+          "$value": "#4589ff",
+          "$description": "syntax-operator-keyword token"
+        }
+      },
+      "paren": {
+        "$type": "color",
+        "$value": "#e0e0e0",
+        "$description": "syntax-paren token"
+      },
+      "processing": {
+        "instruction": {
+          "$type": "color",
+          "$value": "#f4f4f4",
+          "$description": "syntax-processing-instruction token"
+        }
+      },
+      "property": {
+        "name": {
+          "$type": "color",
+          "$value": "#33b1ff",
+          "$description": "syntax-property-name token"
+        }
+      },
+      "punctuation": {
+        "$type": "color",
+        "$value": "#e0e0e0",
+        "$description": "syntax-punctuation token"
+      },
+      "quote": {
+        "$type": "color",
+        "$value": "#42be65",
+        "$description": "syntax-quote token"
+      },
+      "regexp": {
+        "$type": "color",
+        "$value": "#be95ff",
+        "$description": "syntax-regexp token"
+      },
+      "self": {
+        "$type": "color",
+        "$value": "#3ddbd9",
+        "$description": "syntax-self token"
+      },
+      "separator": {
+        "$type": "color",
+        "$value": "#e0e0e0",
+        "$description": "syntax-separator token"
+      },
+      "special": {
+        "$type": "color",
+        "$value": "#4589ff",
+        "$description": "syntax-special token",
+        "string": {
+          "$type": "color",
+          "$value": "#be95ff",
+          "$description": "syntax-special-string token"
+        }
+      },
+      "square": {
+        "bracket": {
+          "$type": "color",
+          "$value": "#e0e0e0",
+          "$description": "syntax-square-bracket token"
+        }
+      },
+      "standard": {
+        "$type": "color",
+        "$value": "#4589ff",
+        "$description": "syntax-standard token"
+      },
+      "strikethrough": {
+        "$type": "color",
+        "$value": "#f4f4f4",
+        "$description": "syntax-strikethrough token"
+      },
+      "string": {
+        "$type": "color",
+        "$value": "#f4f4f4",
+        "$description": "syntax-string token"
+      },
+      "strong": {
+        "$type": "color",
+        "$value": "#f4f4f4",
+        "$description": "syntax-strong token"
+      },
+      "tag": {
+        "$type": "color",
+        "$value": "#3ddbd9",
+        "$description": "syntax-tag token",
+        "name": {
+          "$type": "color",
+          "$value": "#3ddbd9",
+          "$description": "syntax-tag-name token"
+        }
+      },
+      "type": {
+        "$type": "color",
+        "$value": "#3ddbd9",
+        "$description": "syntax-type token",
+        "name": {
+          "$type": "color",
+          "$value": "#3ddbd9",
+          "$description": "syntax-type-name token"
+        },
+        "operator": {
+          "$type": "color",
+          "$value": "#3ddbd9",
+          "$description": "syntax-type-operator token"
+        }
+      },
+      "unit": {
+        "$type": "color",
+        "$value": "#6fdc8c",
+        "$description": "syntax-unit token"
+      },
+      "update": {
+        "operator": {
+          "$type": "color",
+          "$value": "#e0e0e0",
+          "$description": "syntax-update-operator token"
+        }
+      },
+      "url": {
+        "$type": "color",
+        "$value": "#e0e0e0",
+        "$description": "syntax-url token"
+      },
+      "variable": {
+        "$type": "color",
+        "$value": "#a6c8ff",
+        "$description": "syntax-variable token",
+        "name": {
+          "$type": "color",
+          "$value": "#a6c8ff",
+          "$description": "syntax-variable-name token"
+        }
+      }
+    },
+    "text": {
+      "disabled": {
+        "$type": "color",
+        "$value": "rgba(244, 244, 244, 0.25)",
+        "$description": "text-disabled token"
+      },
+      "error": {
+        "$type": "color",
+        "$value": "#ff8389",
+        "$description": "text-error token"
+      },
+      "helper": {
+        "$type": "color",
+        "$value": "#a8a8a8",
+        "$description": "text-helper token"
+      },
+      "inverse": {
+        "$type": "color",
+        "$value": "#161616",
+        "$description": "text-inverse token"
+      },
+      "on": {
+        "color": {
+          "$type": "color",
+          "$value": "#ffffff",
+          "$description": "text-on-color token",
+          "disabled": {
+            "$type": "color",
+            "$value": "rgba(255, 255, 255, 0.25)",
+            "$description": "text-on-color-disabled token"
+          }
+        }
+      },
+      "placeholder": {
+        "$type": "color",
+        "$value": "rgba(244, 244, 244, 0.4)",
+        "$description": "text-placeholder token"
+      },
+      "primary": {
+        "$type": "color",
+        "$value": "#f4f4f4",
+        "$description": "text-primary token"
+      },
+      "secondary": {
+        "$type": "color",
+        "$value": "#c6c6c6",
+        "$description": "text-secondary token"
+      }
+    },
+    "toggle": {
+      "off": {
+        "$type": "color",
+        "$value": "#6f6f6f",
+        "$description": "toggle-off token"
+      }
+    }
+  }
+}

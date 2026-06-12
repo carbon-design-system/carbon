@@ -1,0 +1,1203 @@
+{
+  "$schema": "https://tr.designtokens.org/format/",
+  "$description": "White theme - Light theme with high contrast for optimal readability",
+  "color": {
+    "scheme": {
+      "$type": "string",
+      "$value": "light",
+      "$description": "Color scheme identifier for the theme"
+    },
+    "background": {
+      "$type": "color",
+      "$value": "#ffffff",
+      "$description": "Default page background"
+    },
+    "background-inverse": {
+      "$type": "color",
+      "$value": "#393939",
+      "$description": "Inverse background for dark UI elements"
+    },
+    "background-brand": {
+      "$type": "color",
+      "$value": "#0f62fe",
+      "$description": "Brand color for backgrounds"
+    },
+    "background-active": {
+      "$type": "color",
+      "$value": "rgba(141, 141, 141, 0.5)",
+      "$description": "Active state background"
+    },
+    "background-hover": {
+      "$type": "color",
+      "$value": "rgba(141, 141, 141, 0.12)",
+      "$description": "Hover state background"
+    },
+    "background-inverse-hover": {
+      "$type": "color",
+      "$value": "#4c4c4c",
+      "$description": "Hover state for inverse backgrounds"
+    },
+    "background-selected": {
+      "$type": "color",
+      "$value": "rgba(141, 141, 141, 0.2)",
+      "$description": "Selected state background"
+    },
+    "background-selected-hover": {
+      "$type": "color",
+      "$value": "rgba(141, 141, 141, 0.32)",
+      "$description": "Hover state for selected backgrounds"
+    },
+    "layer": {
+      "01": {
+        "$type": "color",
+        "$value": "#f4f4f4",
+        "$description": "Primary layer background"
+      },
+      "active-01": {
+        "$type": "color",
+        "$value": "#c6c6c6",
+        "$description": "Active state for layer 01"
+      },
+      "background-01": {
+        "$type": "color",
+        "$value": "#ffffff",
+        "$description": "Background behind layer 01"
+      },
+      "hover-01": {
+        "$type": "color",
+        "$value": "#e8e8e8",
+        "$description": "Hover state for layer 01"
+      },
+      "selected-01": {
+        "$type": "color",
+        "$value": "#e0e0e0",
+        "$description": "Selected state for layer 01"
+      },
+      "selected-hover-01": {
+        "$type": "color",
+        "$value": "#d1d1d1",
+        "$description": "Hover state for selected layer 01"
+      },
+      "02": {
+        "$type": "color",
+        "$value": "#ffffff",
+        "$description": "Secondary layer background"
+      },
+      "active-02": {
+        "$type": "color",
+        "$value": "#c6c6c6",
+        "$description": "Active state for layer 02"
+      },
+      "background-02": {
+        "$type": "color",
+        "$value": "#f4f4f4",
+        "$description": "Background behind layer 02"
+      },
+      "hover-02": {
+        "$type": "color",
+        "$value": "#f4f4f4",
+        "$description": "Hover state for layer 02"
+      },
+      "selected-02": {
+        "$type": "color",
+        "$value": "#e0e0e0",
+        "$description": "Selected state for layer 02"
+      },
+      "selected-hover-02": {
+        "$type": "color",
+        "$value": "#d1d1d1",
+        "$description": "Hover state for selected layer 02"
+      },
+      "03": {
+        "$type": "color",
+        "$value": "#f4f4f4",
+        "$description": "Tertiary layer background"
+      },
+      "active-03": {
+        "$type": "color",
+        "$value": "#c6c6c6",
+        "$description": "Active state for layer 03"
+      },
+      "background-03": {
+        "$type": "color",
+        "$value": "#ffffff",
+        "$description": "Background behind layer 03"
+      },
+      "hover-03": {
+        "$type": "color",
+        "$value": "#e8e8e8",
+        "$description": "Hover state for layer 03"
+      },
+      "selected-03": {
+        "$type": "color",
+        "$value": "#e0e0e0",
+        "$description": "Selected state for layer 03"
+      },
+      "selected-hover-03": {
+        "$type": "color",
+        "$value": "#d1d1d1",
+        "$description": "Hover state for selected layer 03"
+      },
+      "selected-inverse": {
+        "$type": "color",
+        "$value": "#161616",
+        "$description": "Inverse selected layer"
+      },
+      "selected-disabled": {
+        "$type": "color",
+        "$value": "#8d8d8d",
+        "$description": "Disabled selected layer"
+      },
+      "accent-01": {
+        "$type": "color",
+        "$value": "#e0e0e0",
+        "$description": "Primary accent layer"
+      },
+      "accent-active-01": {
+        "$type": "color",
+        "$value": "#a8a8a8",
+        "$description": "Active state for accent layer 01"
+      },
+      "accent-hover-01": {
+        "$type": "color",
+        "$value": "#d1d1d1",
+        "$description": "Hover state for accent layer 01"
+      },
+      "accent-02": {
+        "$type": "color",
+        "$value": "#e0e0e0",
+        "$description": "Secondary accent layer"
+      },
+      "accent-active-02": {
+        "$type": "color",
+        "$value": "#a8a8a8",
+        "$description": "Active state for accent layer 02"
+      },
+      "accent-hover-02": {
+        "$type": "color",
+        "$value": "#d1d1d1",
+        "$description": "Hover state for accent layer 02"
+      },
+      "accent-03": {
+        "$type": "color",
+        "$value": "#e0e0e0",
+        "$description": "Tertiary accent layer"
+      },
+      "accent-active-03": {
+        "$type": "color",
+        "$value": "#a8a8a8",
+        "$description": "Active state for accent layer 03"
+      },
+      "accent-hover-03": {
+        "$type": "color",
+        "$value": "#d1d1d1",
+        "$description": "Hover state for accent layer 03"
+      }
+    },
+    "field": {
+      "01": {
+        "$type": "color",
+        "$value": "#f4f4f4",
+        "$description": "Primary field background"
+      },
+      "hover-01": {
+        "$type": "color",
+        "$value": "#e8e8e8",
+        "$description": "Hover state for field 01"
+      },
+      "02": {
+        "$type": "color",
+        "$value": "#ffffff",
+        "$description": "Secondary field background"
+      },
+      "hover-02": {
+        "$type": "color",
+        "$value": "#f4f4f4",
+        "$description": "Hover state for field 02"
+      },
+      "03": {
+        "$type": "color",
+        "$value": "#f4f4f4",
+        "$description": "Tertiary field background"
+      },
+      "hover-03": {
+        "$type": "color",
+        "$value": "#e8e8e8",
+        "$description": "Hover state for field 03"
+      }
+    },
+    "border": {
+      "subtle-00": {
+        "$type": "color",
+        "$value": "#e0e0e0",
+        "$description": "Subtle border for level 00"
+      },
+      "subtle-01": {
+        "$type": "color",
+        "$value": "#c6c6c6",
+        "$description": "Subtle border for level 01"
+      },
+      "subtle-selected-01": {
+        "$type": "color",
+        "$value": "#c6c6c6",
+        "$description": "Selected subtle border for level 01"
+      },
+      "subtle-02": {
+        "$type": "color",
+        "$value": "#e0e0e0",
+        "$description": "Subtle border for level 02"
+      },
+      "subtle-selected-02": {
+        "$type": "color",
+        "$value": "#c6c6c6",
+        "$description": "Selected subtle border for level 02"
+      },
+      "subtle-03": {
+        "$type": "color",
+        "$value": "#c6c6c6",
+        "$description": "Subtle border for level 03"
+      },
+      "subtle-selected-03": {
+        "$type": "color",
+        "$value": "#c6c6c6",
+        "$description": "Selected subtle border for level 03"
+      },
+      "strong-01": {
+        "$type": "color",
+        "$value": "#8d8d8d",
+        "$description": "Strong border for level 01"
+      },
+      "strong-02": {
+        "$type": "color",
+        "$value": "#8d8d8d",
+        "$description": "Strong border for level 02"
+      },
+      "strong-03": {
+        "$type": "color",
+        "$value": "#8d8d8d",
+        "$description": "Strong border for level 03"
+      },
+      "tile-01": {
+        "$type": "color",
+        "$value": "#c6c6c6",
+        "$description": "Tile border for level 01"
+      },
+      "tile-02": {
+        "$type": "color",
+        "$value": "#a8a8a8",
+        "$description": "Tile border for level 02"
+      },
+      "tile-03": {
+        "$type": "color",
+        "$value": "#c6c6c6",
+        "$description": "Tile border for level 03"
+      },
+      "inverse": {
+        "$type": "color",
+        "$value": "#161616",
+        "$description": "Inverse border color"
+      },
+      "interactive": {
+        "$type": "color",
+        "$value": "#0f62fe",
+        "$description": "Interactive border color"
+      },
+      "disabled": {
+        "$type": "color",
+        "$value": "#c6c6c6",
+        "$description": "Disabled border color"
+      }
+    },
+    "text": {
+      "primary": {
+        "$type": "color",
+        "$value": "#161616",
+        "$description": "Primary text color for body copy and headings"
+      },
+      "secondary": {
+        "$type": "color",
+        "$value": "#525252",
+        "$description": "Secondary text color for supporting text"
+      },
+      "placeholder": {
+        "$type": "color",
+        "$value": "rgba(22, 22, 22, 0.4)",
+        "$description": "Placeholder text color"
+      },
+      "helper": {
+        "$type": "color",
+        "$value": "#6f6f6f",
+        "$description": "Helper text color"
+      },
+      "error": {
+        "$type": "color",
+        "$value": "#da1e28",
+        "$description": "Error text color"
+      },
+      "inverse": {
+        "$type": "color",
+        "$value": "#ffffff",
+        "$description": "Inverse text color for dark backgrounds"
+      },
+      "on-color": {
+        "$type": "color",
+        "$value": "#ffffff",
+        "$description": "Text color on colored backgrounds"
+      },
+      "on-color-disabled": {
+        "$type": "color",
+        "$value": "#8d8d8d",
+        "$description": "Disabled text color on colored backgrounds"
+      },
+      "disabled": {
+        "$type": "color",
+        "$value": "rgba(22, 22, 22, 0.25)",
+        "$description": "Disabled text color"
+      }
+    },
+    "link": {
+      "primary": {
+        "$type": "color",
+        "$value": "#0f62fe",
+        "$description": "Primary link color"
+      },
+      "primary-hover": {
+        "$type": "color",
+        "$value": "#0043ce",
+        "$description": "Primary link hover color"
+      },
+      "secondary": {
+        "$type": "color",
+        "$value": "#0043ce",
+        "$description": "Secondary link color"
+      },
+      "inverse": {
+        "$type": "color",
+        "$value": "#78a9ff",
+        "$description": "Inverse link color"
+      },
+      "visited": {
+        "$type": "color",
+        "$value": "#8a3ffc",
+        "$description": "Visited link color"
+      },
+      "inverse-visited": {
+        "$type": "color",
+        "$value": "#be95ff",
+        "$description": "Inverse visited link color"
+      },
+      "inverse-active": {
+        "$type": "color",
+        "$value": "#f4f4f4",
+        "$description": "Inverse active link color"
+      },
+      "inverse-hover": {
+        "$type": "color",
+        "$value": "#a6c8ff",
+        "$description": "Inverse link hover color"
+      }
+    },
+    "icon": {
+      "primary": {
+        "$type": "color",
+        "$value": "#161616",
+        "$description": "Primary icon color"
+      },
+      "secondary": {
+        "$type": "color",
+        "$value": "#525252",
+        "$description": "Secondary icon color"
+      },
+      "inverse": {
+        "$type": "color",
+        "$value": "#ffffff",
+        "$description": "Inverse icon color"
+      },
+      "on-color": {
+        "$type": "color",
+        "$value": "#ffffff",
+        "$description": "Icon color on colored backgrounds"
+      },
+      "on-color-disabled": {
+        "$type": "color",
+        "$value": "#8d8d8d",
+        "$description": "Disabled icon color on colored backgrounds"
+      },
+      "disabled": {
+        "$type": "color",
+        "$value": "rgba(22, 22, 22, 0.25)",
+        "$description": "Disabled icon color"
+      },
+      "interactive": {
+        "$type": "color",
+        "$value": "#0f62fe",
+        "$description": "Interactive icon color"
+      }
+    },
+    "support": {
+      "error": {
+        "$type": "color",
+        "$value": "#da1e28",
+        "$description": "Error support color"
+      },
+      "success": {
+        "$type": "color",
+        "$value": "#24a148",
+        "$description": "Success support color"
+      },
+      "warning": {
+        "$type": "color",
+        "$value": "#f1c21b",
+        "$description": "Warning support color"
+      },
+      "info": {
+        "$type": "color",
+        "$value": "#0043ce",
+        "$description": "Info support color"
+      },
+      "error-inverse": {
+        "$type": "color",
+        "$value": "#fa4d56",
+        "$description": "Inverse error support color"
+      },
+      "success-inverse": {
+        "$type": "color",
+        "$value": "#42be65",
+        "$description": "Inverse success support color"
+      },
+      "warning-inverse": {
+        "$type": "color",
+        "$value": "#f1c21b",
+        "$description": "Inverse warning support color"
+      },
+      "info-inverse": {
+        "$type": "color",
+        "$value": "#4589ff",
+        "$description": "Inverse info support color"
+      },
+      "caution-minor": {
+        "$type": "color",
+        "$value": "#f1c21b",
+        "$description": "Minor caution support color"
+      },
+      "caution-major": {
+        "$type": "color",
+        "$value": "#ff832b",
+        "$description": "Major caution support color"
+      },
+      "caution-undefined": {
+        "$type": "color",
+        "$value": "#8a3ffc",
+        "$description": "Undefined caution support color"
+      }
+    },
+    "focus": {
+      "$type": "color",
+      "$value": "#0f62fe",
+      "$description": "Focus indicator color"
+    },
+    "focus-inset": {
+      "$type": "color",
+      "$value": "#ffffff",
+      "$description": "Inset focus indicator color"
+    },
+    "focus-inverse": {
+      "$type": "color",
+      "$value": "#ffffff",
+      "$description": "Inverse focus indicator color"
+    },
+    "interactive": {
+      "$type": "color",
+      "$value": "#0f62fe",
+      "$description": "Interactive element color"
+    },
+    "highlight": {
+      "$type": "color",
+      "$value": "#d0e2ff",
+      "$description": "Highlight color"
+    },
+    "overlay": {
+      "$type": "color",
+      "$value": "rgba(0, 0, 0, 0.6)",
+      "$description": "Overlay background color"
+    },
+    "toggle-off": {
+      "$type": "color",
+      "$value": "#8d8d8d",
+      "$description": "Toggle off state color"
+    },
+    "shadow": {
+      "$type": "color",
+      "$value": "rgba(0, 0, 0, 0.3)",
+      "$description": "Shadow color"
+    },
+    "skeleton": {
+      "background": {
+        "$type": "color",
+        "$value": "#f4f4f4",
+        "$description": "Skeleton loading background"
+      },
+      "element": {
+        "$type": "color",
+        "$value": "#c6c6c6",
+        "$description": "Skeleton loading element"
+      }
+    },
+    "syntax": {
+      "comment": {
+        "$type": "color",
+        "$value": "#24a148",
+        "$description": "Syntax highlighting for comments"
+      },
+      "line-comment": {
+        "$type": "color",
+        "$value": "#24a148",
+        "$description": "Syntax highlighting for line comments"
+      },
+      "block-comment": {
+        "$type": "color",
+        "$value": "#24a148",
+        "$description": "Syntax highlighting for block comments"
+      },
+      "doc-comment": {
+        "$type": "color",
+        "$value": "#24a148",
+        "$description": "Syntax highlighting for documentation comments"
+      },
+      "string": {
+        "$type": "color",
+        "$value": "#161616",
+        "$description": "Syntax highlighting for strings"
+      },
+      "doc-string": {
+        "$type": "color",
+        "$value": "#161616",
+        "$description": "Syntax highlighting for documentation strings"
+      },
+      "keyword": {
+        "$type": "color",
+        "$value": "#0f62fe",
+        "$description": "Syntax highlighting for keywords"
+      },
+      "operator-keyword": {
+        "$type": "color",
+        "$value": "#0f62fe",
+        "$description": "Syntax highlighting for operator keywords"
+      },
+      "control-keyword": {
+        "$type": "color",
+        "$value": "#8a3ffc",
+        "$description": "Syntax highlighting for control keywords"
+      },
+      "definition-keyword": {
+        "$type": "color",
+        "$value": "#1192e8",
+        "$description": "Syntax highlighting for definition keywords"
+      },
+      "module-keyword": {
+        "$type": "color",
+        "$value": "#8a3ffc",
+        "$description": "Syntax highlighting for module keywords"
+      },
+      "variable": {
+        "$type": "color",
+        "$value": "#0f62fe",
+        "$description": "Syntax highlighting for variables"
+      },
+      "name": {
+        "$type": "color",
+        "$value": "#0f62fe",
+        "$description": "Syntax highlighting for names"
+      },
+      "variable-name": {
+        "$type": "color",
+        "$value": "#0f62fe",
+        "$description": "Syntax highlighting for variable names"
+      },
+      "label-name": {
+        "$type": "color",
+        "$value": "#0f62fe",
+        "$description": "Syntax highlighting for label names"
+      },
+      "attribute": {
+        "$type": "color",
+        "$value": "#1192e8",
+        "$description": "Syntax highlighting for attributes"
+      },
+      "attribute-name": {
+        "$type": "color",
+        "$value": "#1192e8",
+        "$description": "Syntax highlighting for attribute names"
+      },
+      "property-name": {
+        "$type": "color",
+        "$value": "#1192e8",
+        "$description": "Syntax highlighting for property names"
+      },
+      "tag": {
+        "$type": "color",
+        "$value": "#009d9a",
+        "$description": "Syntax highlighting for tags"
+      },
+      "tag-name": {
+        "$type": "color",
+        "$value": "#009d9a",
+        "$description": "Syntax highlighting for tag names"
+      },
+      "type": {
+        "$type": "color",
+        "$value": "#009d9a",
+        "$description": "Syntax highlighting for types"
+      },
+      "type-name": {
+        "$type": "color",
+        "$value": "#009d9a",
+        "$description": "Syntax highlighting for type names"
+      },
+      "class-name": {
+        "$type": "color",
+        "$value": "#009d9a",
+        "$description": "Syntax highlighting for class names"
+      },
+      "namespace": {
+        "$type": "color",
+        "$value": "#009d9a",
+        "$description": "Syntax highlighting for namespaces"
+      },
+      "macro-name": {
+        "$type": "color",
+        "$value": "#161616",
+        "$description": "Syntax highlighting for macro names"
+      },
+      "atom": {
+        "$type": "color",
+        "$value": "#161616",
+        "$description": "Syntax highlighting for atoms"
+      },
+      "literal": {
+        "$type": "color",
+        "$value": "#161616",
+        "$description": "Syntax highlighting for literals"
+      },
+      "bool": {
+        "$type": "color",
+        "$value": "#161616",
+        "$description": "Syntax highlighting for booleans"
+      },
+      "null": {
+        "$type": "color",
+        "$value": "#161616",
+        "$description": "Syntax highlighting for null"
+      },
+      "self": {
+        "$type": "color",
+        "$value": "#009d9a",
+        "$description": "Syntax highlighting for self"
+      },
+      "number": {
+        "$type": "color",
+        "$value": "#24a148",
+        "$description": "Syntax highlighting for numbers"
+      },
+      "integer": {
+        "$type": "color",
+        "$value": "#24a148",
+        "$description": "Syntax highlighting for integers"
+      },
+      "float": {
+        "$type": "color",
+        "$value": "#24a148",
+        "$description": "Syntax highlighting for floats"
+      },
+      "unit": {
+        "$type": "color",
+        "$value": "#24a148",
+        "$description": "Syntax highlighting for units"
+      },
+      "character": {
+        "$type": "color",
+        "$value": "#161616",
+        "$description": "Syntax highlighting for characters"
+      },
+      "attribute-value": {
+        "$type": "color",
+        "$value": "#161616",
+        "$description": "Syntax highlighting for attribute values"
+      },
+      "special-string": {
+        "$type": "color",
+        "$value": "#8a3ffc",
+        "$description": "Syntax highlighting for special strings"
+      },
+      "regexp": {
+        "$type": "color",
+        "$value": "#8a3ffc",
+        "$description": "Syntax highlighting for regular expressions"
+      },
+      "escape": {
+        "$type": "color",
+        "$value": "#393939",
+        "$description": "Syntax highlighting for escape sequences"
+      },
+      "url": {
+        "$type": "color",
+        "$value": "#393939",
+        "$description": "Syntax highlighting for URLs"
+      },
+      "color": {
+        "$type": "color",
+        "$value": "#161616",
+        "$description": "Syntax highlighting for color values"
+      },
+      "operator": {
+        "$type": "color",
+        "$value": "#393939",
+        "$description": "Syntax highlighting for operators"
+      },
+      "deref-operator": {
+        "$type": "color",
+        "$value": "#393939",
+        "$description": "Syntax highlighting for dereference operators"
+      },
+      "arithmetic-operator": {
+        "$type": "color",
+        "$value": "#393939",
+        "$description": "Syntax highlighting for arithmetic operators"
+      },
+      "logic-operator": {
+        "$type": "color",
+        "$value": "#393939",
+        "$description": "Syntax highlighting for logic operators"
+      },
+      "bitwise-operator": {
+        "$type": "color",
+        "$value": "#393939",
+        "$description": "Syntax highlighting for bitwise operators"
+      },
+      "compare-operator": {
+        "$type": "color",
+        "$value": "#393939",
+        "$description": "Syntax highlighting for comparison operators"
+      },
+      "update-operator": {
+        "$type": "color",
+        "$value": "#393939",
+        "$description": "Syntax highlighting for update operators"
+      },
+      "definition-operator": {
+        "$type": "color",
+        "$value": "#1192e8",
+        "$description": "Syntax highlighting for definition operators"
+      },
+      "type-operator": {
+        "$type": "color",
+        "$value": "#009d9a",
+        "$description": "Syntax highlighting for type operators"
+      },
+      "control-operator": {
+        "$type": "color",
+        "$value": "#8a3ffc",
+        "$description": "Syntax highlighting for control operators"
+      },
+      "modifier": {
+        "$type": "color",
+        "$value": "#0f62fe",
+        "$description": "Syntax highlighting for modifiers"
+      },
+      "punctuation": {
+        "$type": "color",
+        "$value": "#393939",
+        "$description": "Syntax highlighting for punctuation"
+      },
+      "separator": {
+        "$type": "color",
+        "$value": "#393939",
+        "$description": "Syntax highlighting for separators"
+      },
+      "bracket": {
+        "$type": "color",
+        "$value": "#393939",
+        "$description": "Syntax highlighting for brackets"
+      },
+      "angle-bracket": {
+        "$type": "color",
+        "$value": "#525252",
+        "$description": "Syntax highlighting for angle brackets"
+      },
+      "square-bracket": {
+        "$type": "color",
+        "$value": "#393939",
+        "$description": "Syntax highlighting for square brackets"
+      },
+      "paren": {
+        "$type": "color",
+        "$value": "#393939",
+        "$description": "Syntax highlighting for parentheses"
+      },
+      "brace": {
+        "$type": "color",
+        "$value": "#393939",
+        "$description": "Syntax highlighting for braces"
+      },
+      "content": {
+        "$type": "color",
+        "$value": "#161616",
+        "$description": "Syntax highlighting for content"
+      },
+      "list": {
+        "$type": "color",
+        "$value": "#161616",
+        "$description": "Syntax highlighting for lists"
+      },
+      "emphasis": {
+        "$type": "color",
+        "$value": "#161616",
+        "$description": "Syntax highlighting for emphasis"
+      },
+      "strong": {
+        "$type": "color",
+        "$value": "#161616",
+        "$description": "Syntax highlighting for strong text"
+      },
+      "monospace": {
+        "$type": "color",
+        "$value": "#161616",
+        "$description": "Syntax highlighting for monospace text"
+      },
+      "strikethrough": {
+        "$type": "color",
+        "$value": "#161616",
+        "$description": "Syntax highlighting for strikethrough text"
+      },
+      "heading": {
+        "$type": "color",
+        "$value": "#1192e8",
+        "$description": "Syntax highlighting for headings"
+      },
+      "heading1": {
+        "$type": "color",
+        "$value": "#1192e8",
+        "$description": "Syntax highlighting for heading level 1"
+      },
+      "heading2": {
+        "$type": "color",
+        "$value": "#1192e8",
+        "$description": "Syntax highlighting for heading level 2"
+      },
+      "heading3": {
+        "$type": "color",
+        "$value": "#1192e8",
+        "$description": "Syntax highlighting for heading level 3"
+      },
+      "heading4": {
+        "$type": "color",
+        "$value": "#1192e8",
+        "$description": "Syntax highlighting for heading level 4"
+      },
+      "heading5": {
+        "$type": "color",
+        "$value": "#1192e8",
+        "$description": "Syntax highlighting for heading level 5"
+      },
+      "heading6": {
+        "$type": "color",
+        "$value": "#1192e8",
+        "$description": "Syntax highlighting for heading level 6"
+      },
+      "content-separator": {
+        "$type": "color",
+        "$value": "#393939",
+        "$description": "Syntax highlighting for content separators"
+      },
+      "quote": {
+        "$type": "color",
+        "$value": "#24a148",
+        "$description": "Syntax highlighting for quotes"
+      },
+      "link": {
+        "$type": "color",
+        "$value": "#0f62fe",
+        "$description": "Syntax highlighting for links"
+      },
+      "invalid": {
+        "$type": "color",
+        "$value": "#da1e28",
+        "$description": "Syntax highlighting for invalid code"
+      },
+      "meta": {
+        "$type": "color",
+        "$value": "#24a148",
+        "$description": "Syntax highlighting for meta information"
+      },
+      "document-meta": {
+        "$type": "color",
+        "$value": "#24a148",
+        "$description": "Syntax highlighting for document meta"
+      },
+      "annotation": {
+        "$type": "color",
+        "$value": "#009d9a",
+        "$description": "Syntax highlighting for annotations"
+      },
+      "processing-instruction": {
+        "$type": "color",
+        "$value": "#161616",
+        "$description": "Syntax highlighting for processing instructions"
+      },
+      "definition": {
+        "$type": "color",
+        "$value": "#1192e8",
+        "$description": "Syntax highlighting for definitions"
+      },
+      "constant": {
+        "$type": "color",
+        "$value": "#0f62fe",
+        "$description": "Syntax highlighting for constants"
+      },
+      "function": {
+        "$type": "color",
+        "$value": "#f1c21b",
+        "$description": "Syntax highlighting for functions"
+      },
+      "standard": {
+        "$type": "color",
+        "$value": "#0f62fe",
+        "$description": "Syntax highlighting for standard library"
+      },
+      "local": {
+        "$type": "color",
+        "$value": "#0f62fe",
+        "$description": "Syntax highlighting for local scope"
+      },
+      "special": {
+        "$type": "color",
+        "$value": "#0f62fe",
+        "$description": "Syntax highlighting for special elements"
+      },
+      "inserted": {
+        "$type": "color",
+        "$value": "#defbe6",
+        "$description": "Syntax highlighting for inserted text"
+      },
+      "deleted": {
+        "$type": "color",
+        "$value": "#ffd7d9",
+        "$description": "Syntax highlighting for deleted text"
+      }
+    },
+    "ai": {
+      "inner-shadow": {
+        "$type": "color",
+        "$value": "rgba(69, 137, 255, 0.1)",
+        "$description": "AI inner shadow"
+      },
+      "aura-start-sm": {
+        "$type": "color",
+        "$value": "rgba(69, 137, 255, 0.16)",
+        "$description": "AI aura start small"
+      },
+      "aura-start": {
+        "$type": "color",
+        "$value": "rgba(69, 137, 255, 0.1)",
+        "$description": "AI aura start"
+      },
+      "aura-end": {
+        "$type": "color",
+        "$value": "rgba(255, 255, 255, 0)",
+        "$description": "AI aura end"
+      },
+      "border-strong": {
+        "$type": "color",
+        "$value": "#4589ff",
+        "$description": "AI strong border"
+      },
+      "border-start": {
+        "$type": "color",
+        "$value": "rgba(166, 200, 255, 0.64)",
+        "$description": "AI border start"
+      },
+      "border-end": {
+        "$type": "color",
+        "$value": "#78a9ff",
+        "$description": "AI border end"
+      },
+      "drop-shadow": {
+        "$type": "color",
+        "$value": "rgba(15, 98, 254, 0.1)",
+        "$description": "AI drop shadow"
+      },
+      "aura-hover-background": {
+        "$type": "color",
+        "$value": "#edf5ff",
+        "$description": "AI aura hover background"
+      },
+      "aura-hover-start": {
+        "$type": "color",
+        "$value": "rgba(69, 137, 255, 0.32)",
+        "$description": "AI aura hover start"
+      },
+      "aura-hover-end": {
+        "$type": "color",
+        "$value": "rgba(255, 255, 255, 0)",
+        "$description": "AI aura hover end"
+      },
+      "popover-background": {
+        "$type": "color",
+        "$value": "#ffffff",
+        "$description": "AI popover background"
+      },
+      "popover-shadow-outer-01": {
+        "$type": "color",
+        "$value": "rgba(0, 67, 206, 0.06)",
+        "$description": "AI popover outer shadow 01"
+      },
+      "popover-shadow-outer-02": {
+        "$type": "color",
+        "$value": "rgba(0, 0, 0, 0.04)",
+        "$description": "AI popover outer shadow 02"
+      },
+      "skeleton-background": {
+        "$type": "color",
+        "$value": "#d0e2ff",
+        "$description": "AI skeleton background"
+      },
+      "skeleton-element-background": {
+        "$type": "color",
+        "$value": "#4589ff",
+        "$description": "AI skeleton element background"
+      },
+      "overlay": {
+        "$type": "color",
+        "$value": "rgba(0, 17, 65, 0.5)",
+        "$description": "AI modal overlay"
+      },
+      "popover-caret-center": {
+        "$type": "color",
+        "$value": "#A0C3FF",
+        "$description": "AI popover caret center"
+      },
+      "popover-caret-bottom": {
+        "$type": "color",
+        "$value": "#78a9ff",
+        "$description": "AI popover caret bottom"
+      },
+      "popover-caret-bottom-background-actions": {
+        "$type": "color",
+        "$value": "#E9EFFA",
+        "$description": "AI popover caret bottom background for actions"
+      },
+      "popover-caret-bottom-background": {
+        "$type": "color",
+        "$value": "#EAF1FF",
+        "$description": "AI popover caret bottom background"
+      }
+    },
+    "chat": {
+      "prompt-background": {
+        "$type": "color",
+        "$value": "#ffffff",
+        "$description": "Chat prompt background"
+      },
+      "prompt-border-start": {
+        "$type": "color",
+        "$value": "#f4f4f4",
+        "$description": "Chat prompt border start"
+      },
+      "prompt-border-end": {
+        "$type": "color",
+        "$value": "rgba(244, 244, 244, 0)",
+        "$description": "Chat prompt border end"
+      },
+      "prompt-text": {
+        "$type": "color",
+        "$value": "#161616",
+        "$description": "Chat prompt text"
+      },
+      "bubble-user": {
+        "$type": "color",
+        "$value": "#e0e0e0",
+        "$description": "Chat bubble user background"
+      },
+      "bubble-user-text": {
+        "$type": "color",
+        "$value": "#161616",
+        "$description": "Chat bubble user text"
+      },
+      "bubble-agent": {
+        "$type": "color",
+        "$value": "#ffffff",
+        "$description": "Chat bubble agent background"
+      },
+      "bubble-agent-text": {
+        "$type": "color",
+        "$value": "#161616",
+        "$description": "Chat bubble agent text"
+      },
+      "bubble-border": {
+        "$type": "color",
+        "$value": "#e0e0e0",
+        "$description": "Chat bubble border"
+      },
+      "avatar-bot": {
+        "$type": "color",
+        "$value": "#525252",
+        "$description": "Chat avatar bot"
+      },
+      "avatar-agent": {
+        "$type": "color",
+        "$value": "#393939",
+        "$description": "Chat avatar agent"
+      },
+      "avatar-user": {
+        "$type": "color",
+        "$value": "#0f62fe",
+        "$description": "Chat avatar user"
+      },
+      "shell-background": {
+        "$type": "color",
+        "$value": "#ffffff",
+        "$description": "Chat shell background"
+      },
+      "header-background": {
+        "$type": "color",
+        "$value": "#ffffff",
+        "$description": "Chat header background"
+      },
+      "header-text": {
+        "$type": "color",
+        "$value": "#161616",
+        "$description": "Chat header text"
+      },
+      "button": {
+        "$type": "color",
+        "$value": "#0f62fe",
+        "$description": "Chat button color"
+      },
+      "button-hover": {
+        "$type": "color",
+        "$value": "rgba(141, 141, 141, 0.12)",
+        "$description": "Chat button hover background"
+      },
+      "button-text-hover": {
+        "$type": "color",
+        "$value": "#0043ce",
+        "$description": "Chat button text hover"
+      },
+      "button-active": {
+        "$type": "color",
+        "$value": "rgba(141, 141, 141, 0.5)",
+        "$description": "Chat button active background"
+      },
+      "button-selected": {
+        "$type": "color",
+        "$value": "rgba(141, 141, 141, 0.2)",
+        "$description": "Chat button selected background"
+      },
+      "button-text-selected": {
+        "$type": "color",
+        "$value": "#525252",
+        "$description": "Chat button text selected"
+      }
+    }
+  }
+}
