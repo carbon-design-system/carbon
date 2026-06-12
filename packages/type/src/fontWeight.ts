@@ -5,10 +5,18 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+// Individual weights are also exported as scalars so other modules in this
+// package can reference them as plain identifiers. Member accesses like
+// `fontWeights.regular` at module scope read as potential getter side effects
+// to bundlers and block tree shaking of otherwise-unused tokens.
+export const light = 300;
+export const regular = 400;
+export const semibold = 600;
+
 export const fontWeights = {
-  light: 300,
-  regular: 400,
-  semibold: 600,
+  light,
+  regular,
+  semibold,
 };
 
 export const fontWeight = (weight: keyof typeof fontWeights) => {
