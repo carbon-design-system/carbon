@@ -253,10 +253,7 @@ export default class CDSTab extends HostListenerMixin(CDSContentSwitcherItem) {
 
     if (isIconOnly && accessibleLabel && !disabled) {
       return html`
-        <cds-tooltip
-          align="bottom"
-          class="${prefix}--icon-tooltip"
-          leave-delay-ms="0">
+        <cds-tooltip align="bottom" class="${prefix}--icon-tooltip">
           ${tabLink}
           <cds-tooltip-content>${accessibleLabel}</cds-tooltip-content>
         </cds-tooltip>

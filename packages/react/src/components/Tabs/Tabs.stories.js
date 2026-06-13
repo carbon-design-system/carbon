@@ -453,16 +453,16 @@ export const Icon20Only = (args) => {
   return (
     <Tabs>
       <TabList iconSize="lg">
-        <IconTab label="Analyze" disabled leaveDelayMs={0}>
+        <IconTab label="Analyze" disabled>
           <IbmWatsonDiscovery size={20} aria-label="Analyze" />
         </IconTab>
-        <IconTab label="Activity" leaveDelayMs={0}>
+        <IconTab label="Activity">
           <Activity size={20} aria-label="Activity" />
         </IconTab>
-        <IconTab label="New Notifications" leaveDelayMs={0} {...args}>
+        <IconTab label="New Notifications" {...args}>
           <Notification size={20} aria-label="Notification" />
         </IconTab>
-        <IconTab label="Chat" leaveDelayMs={0}>
+        <IconTab label="Chat">
           <Chat size={20} aria-label="Chat" />
         </IconTab>
       </TabList>
@@ -489,16 +489,16 @@ export const IconOnly = (args) => {
   return (
     <Tabs>
       <TabList iconSize="default" size={args.size}>
-        <IconTab label="Analyze" disabled leaveDelayMs={0}>
+        <IconTab label="Analyze" disabled>
           <IbmWatsonDiscovery aria-label="Analyze" />
         </IconTab>
-        <IconTab label="Activity" leaveDelayMs={0}>
+        <IconTab label="Activity">
           <Activity aria-label="Activity" />
         </IconTab>
-        <IconTab label="New Notifications" leaveDelayMs={0} {...args}>
+        <IconTab label="New Notifications" {...args}>
           <Notification aria-label="Notification" />
         </IconTab>
-        <IconTab label="Chat" leaveDelayMs={0}>
+        <IconTab label="Chat">
           <Chat aria-label="Chat" />
         </IconTab>
       </TabList>
