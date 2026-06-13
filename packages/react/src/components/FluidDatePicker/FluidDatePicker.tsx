@@ -24,7 +24,7 @@ export interface FluidDatePickerProps {
   /**
    * Specify whether the `<input>` should be disabled
    */
-  disabled: boolean;
+  disabled?: boolean;
   /**
    * Specify whether or not the control is invalid
    */
@@ -51,14 +51,14 @@ const FluidDatePicker = React.forwardRef<
   HTMLInputElement,
   FluidDatePickerProps
 >(function FluidDatePicker(
-  { className, children, disabled, invalid, readOnly, warn, ...other },
+  { className, children, invalid, readOnly, warn, ...other },
   ref
 ) {
   const prefix = usePrefix();
   const classNames = classnames(className, {
     [`${prefix}--date-picker--fluid`]: true,
     [`${prefix}--date-picker--fluid--invalid`]: invalid,
-    [`${prefix}--date-picker--fluid--disabled`]: disabled,
+    [`${prefix}--date-picker--fluid--disabled`]: other.disabled,
     [`${prefix}--date-picker--fluid--readonly`]: readOnly,
     [`${prefix}--date-picker--fluid--warn`]: warn,
   });
