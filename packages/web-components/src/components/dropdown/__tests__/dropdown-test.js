@@ -686,6 +686,51 @@ describe('Validation states with disabled/readonly', () => {
     triggerButton.click();
     await el.updateComplete;
 
+    describe('AI Label interaction', () => {
+      it('should not trigger dropdown actions when keypress events originate from AI Label', async () => {
+        const el = await fixture(html`
+          <cds-dropdown title-text="Dropdown Label">
+            <cds-dropdown-item value="option-1">Option 1</cds-dropdown-item>
+            <cds-dropdown-item value="option-2">Option 2</cds-dropdown-item>
+            <cds-ai-label slot="ai-label">AI</cds-ai-label>
+          </cds-dropdown>
+        `);
+
+        const aiLabel = el.querySelector('cds-ai-label');
+        expect(aiLabel).to.exist;
+
+        // Simulate keypress event from AI Label (Space key)
+        const spaceEvent = new KeyboardEvent('keypress', {
+          key: ' ',
+          bubbles: true,
+        });
+        Object.defineProperty(spaceEvent, 'target', {
+          value: aiLabel,
+          enumerable: true,
+        });
+
+        el.dispatchEvent(spaceEvent);
+
+        // Dropdown should remain closed
+        expect(el.open).to.be.false;
+
+        // Simulate keypress event from AI Label (Enter key)
+        const enterEvent = new KeyboardEvent('keypress', {
+          key: 'Enter',
+          bubbles: true,
+        });
+        Object.defineProperty(enterEvent, 'target', {
+          value: aiLabel,
+          enumerable: true,
+        });
+
+        el.dispatchEvent(enterEvent);
+
+        // Dropdown should still remain closed
+        expect(el.open).to.be.false;
+      });
+    });
+
     expect(el.open).to.be.false;
   });
 });
