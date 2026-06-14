@@ -58,12 +58,17 @@ danger button style. However, if a destructive action is just one of several
 actions a user could choose from, then a lower emphasis style like the danger
 tertiary button or the danger ghost button may be more appropriate.
 
-<Unstyled>
-  <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
-    <cds-button kind="danger">Danger</cds-button>
-    <cds-button kind="danger-tertiary">Danger tertiary</cds-button>
-    <cds-button kind="danger-ghost">Danger ghost</cds-button>
-  </div>
+<Unstyled
+  style={{
+    padding: '1rem',
+    background: 'var(--cds-background)',
+    flexWrap: 'wrap',
+    display: 'flex',
+    gap: '1rem',
+  }}>
+  <cds-button kind="danger">Danger</cds-button>
+  <cds-button kind="danger-tertiary">Danger tertiary</cds-button>
+  <cds-button kind="danger-ghost">Danger ghost</cds-button>
 </Unstyled>
 
 ## Icon-only Button
@@ -107,7 +112,11 @@ This attribute allows you to specify an address to navigate to on click. This
 will change the underlying `Button` element to be rendered as an `a` anchor
 element.
 
-<Unstyled>
+<Unstyled
+  style={{
+    padding: '1rem',
+    background: 'var(--cds-background)',
+  }}>
   <cds-button href="https://www.carbondesignsystem.com">Navigate</cds-button>
 </Unstyled>
 
@@ -123,16 +132,21 @@ Carbon has seven types of buttons, `primary`, `secondary`, `tertiary`, `ghost`,
 variant, check out the
 [design documentation](https://www.carbondesignsystem.com/components/button/usage#overview)
 
-<Unstyled>
-  <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
-    <cds-button>Primary</cds-button>
-    <cds-button kind="secondary">Secondary</cds-button>
-    <cds-button kind="tertiary">Tertiary </cds-button>
-    <cds-button kind="danger">Danger</cds-button>
-    <cds-button kind="danger-tertiary">Danger tertiary</cds-button>
-    <cds-button kind="danger-ghost">Danger Ghost</cds-button>
-    <cds-button kind="ghost">Ghost</cds-button>
-  </div>
+<Unstyled
+  style={{
+    padding: '1rem',
+    background: 'var(--cds-background)',
+    flexWrap: 'wrap',
+    display: 'flex',
+    gap: '1rem',
+  }}>
+  <cds-button>Primary</cds-button>
+  <cds-button kind="secondary">Secondary</cds-button>
+  <cds-button kind="tertiary">Tertiary </cds-button>
+  <cds-button kind="danger">Danger</cds-button>
+  <cds-button kind="danger-tertiary">Danger tertiary</cds-button>
+  <cds-button kind="danger-ghost">Danger Ghost</cds-button>
+  <cds-button kind="ghost">Ghost</cds-button>
 </Unstyled>
 
 ```html
@@ -151,22 +165,22 @@ This attribute specifies at which size the `button` should be rendered. Valid
 values are `xs`, `sm`, `md`, `lg`, `xl`, and `2xl`. If no size is specified, it
 renders as `lg`.
 
-<unstyled>
-  <div
-    style={{
-      display: 'flex',
-      gap: '1rem',
-      flexWrap: 'wrap',
-      alignItems: 'end',
-    }}>
-    <cds-button size="xs">Button</cds-button>
-    <cds-button size="sm">Button</cds-button>
-    <cds-button size="md">Button</cds-button>
-    <cds-button>Button</cds-button>
-    <cds-button size="xl">Button</cds-button>
-    <cds-button size="2xl">Button</cds-button>
-  </div>
-</unstyled>
+<Unstyled
+  style={{
+    padding: '1rem',
+    background: 'var(--cds-background)',
+    flexWrap: 'wrap',
+    display: 'flex',
+    gap: '1rem',
+    alignItems: 'end',
+  }}>
+  <cds-button size="xs">Button</cds-button>
+  <cds-button size="sm">Button</cds-button>
+  <cds-button size="md">Button</cds-button>
+  <cds-button>Button</cds-button>
+  <cds-button size="xl">Button</cds-button>
+  <cds-button size="2xl">Button</cds-button>
+</Unstyled>
 
 ```html
 <cds-button>Button</cds-button>
@@ -182,40 +196,45 @@ The badge indicator is shown by adding a `cds-badge-indicator` child to the icon
 button. Setting count displays a number. adding the child without `count` shows
 a red dot.
 
-<unstyled>
-  <div style={{ display: 'flex', gap: '1rem' }}>
-    <cds-button kind="ghost" size="lg" tooltip-text="Icon Description">
-      <svg
-        focusable="false"
-        preserveAspectRatio="xMidYMid meet"
-        xmlns="http://www.w3.org/2000/svg"
-        fill="currentColor"
-        slot="icon"
-        width="16"
-        height="16"
-        viewBox="0 0 32 32"
-        aria-hidden="true">
-        <path d="M17 15 17 8 15 8 15 15 8 15 8 17 15 17 15 24 17 24 17 17 24 17 24 15z"></path>
-      </svg>
-      <cds-badge-indicator count="5"></cds-badge-indicator>
-    </cds-button>
-    <cds-button kind="ghost" size="lg" tooltip-text="Icon Description">
-      <svg
-        focusable="false"
-        preserveAspectRatio="xMidYMid meet"
-        xmlns="http://www.w3.org/2000/svg"
-        fill="currentColor"
-        slot="icon"
-        width="16"
-        height="16"
-        viewBox="0 0 32 32"
-        aria-hidden="true">
-        <path d="M17 15 17 8 15 8 15 15 8 15 8 17 15 17 15 24 17 24 17 17 24 17 24 15z"></path>
-      </svg>
-      <cds-badge-indicator></cds-badge-indicator>
-    </cds-button>
-  </div>
-</unstyled>
+<Unstyled
+  style={{
+    padding: '1rem',
+    background: 'var(--cds-background)',
+    flexWrap: 'wrap',
+    display: 'flex',
+    gap: '1rem',
+  }}>
+  <cds-button kind="ghost" size="lg" tooltip-text="Icon Description">
+    <svg
+      focusable="false"
+      preserveAspectRatio="xMidYMid meet"
+      xmlns="http://www.w3.org/2000/svg"
+      fill="currentColor"
+      slot="icon"
+      width="16"
+      height="16"
+      viewBox="0 0 32 32"
+      aria-hidden="true">
+      <path d="M17 15 17 8 15 8 15 15 8 15 8 17 15 17 15 24 17 24 17 17 24 17 24 15z"></path>
+    </svg>
+    <cds-badge-indicator count="5"></cds-badge-indicator>
+  </cds-button>
+  <cds-button kind="ghost" size="lg" tooltip-text="Icon Description">
+    <svg
+      focusable="false"
+      preserveAspectRatio="xMidYMid meet"
+      xmlns="http://www.w3.org/2000/svg"
+      fill="currentColor"
+      slot="icon"
+      width="16"
+      height="16"
+      viewBox="0 0 32 32"
+      aria-hidden="true">
+      <path d="M17 15 17 8 15 8 15 15 8 15 8 17 15 17 15 24 17 24 17 17 24 17 24 15z"></path>
+    </svg>
+    <cds-badge-indicator></cds-badge-indicator>
+  </cds-button>
+</Unstyled>
 
 ### Icon Button `tooltip-alignment`
 
@@ -223,52 +242,57 @@ The `tooltip-alignment` attribute is used to change where the tooltip text and
 caret is rendered in relation to the `button`. Accepted options are `start`,
 `center`, and `end`. The default alignment is `center`.
 
-<unstyled>
-  <div style={{ display: 'flex', gap: '1rem' }}>
-    <cds-button tooltip-text="Add to selection" tooltip-alignment="start">
-      <svg
-        focusable="false"
-        preserveAspectRatio="xMidYMid meet"
-        xmlns="http://www.w3.org/2000/svg"
-        fill="currentColor"
-        aria-hidden="true"
-        width="16"
-        height="16"
-        viewBox="0 0 32 32"
-        slot="icon">
-        <path d="M17 15L17 8 15 8 15 15 8 15 8 17 15 17 15 24 17 24 17 17 24 17 24 15z"></path>
-      </svg>
-    </cds-button>
-    <cds-button tooltip-text="Add to selection">
-      <svg
-        focusable="false"
-        preserveAspectRatio="xMidYMid meet"
-        xmlns="http://www.w3.org/2000/svg"
-        fill="currentColor"
-        aria-hidden="true"
-        width="16"
-        height="16"
-        viewBox="0 0 32 32"
-        slot="icon">
-        <path d="M17 15L17 8 15 8 15 15 8 15 8 17 15 17 15 24 17 24 17 17 24 17 24 15z"></path>
-      </svg>
-    </cds-button>
-    <cds-button tooltip-text="Add to selection" tooltip-alignment="end">
-      <svg
-        focusable="false"
-        preserveAspectRatio="xMidYMid meet"
-        xmlns="http://www.w3.org/2000/svg"
-        fill="currentColor"
-        aria-hidden="true"
-        width="16"
-        height="16"
-        viewBox="0 0 32 32"
-        slot="icon">
-        <path d="M17 15L17 8 15 8 15 15 8 15 8 17 15 17 15 24 17 24 17 17 24 17 24 15z"></path>
-      </svg>
-    </cds-button>
-  </div>
-</unstyled>
+<Unstyled
+  style={{
+    padding: '1rem',
+    background: 'var(--cds-background)',
+    flexWrap: 'wrap',
+    display: 'flex',
+    gap: '1rem',
+  }}>
+  <cds-button tooltip-text="Add to selection" tooltip-alignment="start">
+    <svg
+      focusable="false"
+      preserveAspectRatio="xMidYMid meet"
+      xmlns="http://www.w3.org/2000/svg"
+      fill="currentColor"
+      aria-hidden="true"
+      width="16"
+      height="16"
+      viewBox="0 0 32 32"
+      slot="icon">
+      <path d="M17 15L17 8 15 8 15 15 8 15 8 17 15 17 15 24 17 24 17 17 24 17 24 15z"></path>
+    </svg>
+  </cds-button>
+  <cds-button tooltip-text="Add to selection">
+    <svg
+      focusable="false"
+      preserveAspectRatio="xMidYMid meet"
+      xmlns="http://www.w3.org/2000/svg"
+      fill="currentColor"
+      aria-hidden="true"
+      width="16"
+      height="16"
+      viewBox="0 0 32 32"
+      slot="icon">
+      <path d="M17 15L17 8 15 8 15 15 8 15 8 17 15 17 15 24 17 24 17 17 24 17 24 15z"></path>
+    </svg>
+  </cds-button>
+  <cds-button tooltip-text="Add to selection" tooltip-alignment="end">
+    <svg
+      focusable="false"
+      preserveAspectRatio="xMidYMid meet"
+      xmlns="http://www.w3.org/2000/svg"
+      fill="currentColor"
+      aria-hidden="true"
+      width="16"
+      height="16"
+      viewBox="0 0 32 32"
+      slot="icon">
+      <path d="M17 15L17 8 15 8 15 15 8 15 8 17 15 17 15 24 17 24 17 17 24 17 24 15z"></path>
+    </svg>
+  </cds-button>
+</Unstyled>
 
 ```html
 <cds-button tooltip-text="Add to selection" tooltip-alignment="start">
@@ -325,78 +349,83 @@ change where the tooltip is positioned on the screen. `tooltip-position` takes
 in a position and will render the tooltip accordingly. Accepted options are
 `top`, `bottom`, `left`, and `right`. The default is position is `top`.
 
-<unstyled>
-  <div style={{ display: 'flex', gap: '1rem' }}>
-    <cds-button
-      tooltip-text="Icon Description"
-      kind="primary"
-      tooltip-position="top">
-      <svg
-        focusable="false"
-        preserveAspectRatio="xMidYMid meet"
-        xmlns="http://www.w3.org/2000/svg"
-        fill="currentColor"
-        aria-hidden="true"
-        width="16"
-        height="16"
-        viewBox="0 0 32 32"
-        slot="icon">
-        <path d="M17 15L17 8 15 8 15 15 8 15 8 17 15 17 15 24 17 24 17 17 24 17 24 15z"></path>
-      </svg>
-    </cds-button>
-    <cds-button
-      tooltip-text="Icon Description"
-      kind="primary"
-      tooltip-position="right">
-      <svg
-        focusable="false"
-        preserveAspectRatio="xMidYMid meet"
-        xmlns="http://www.w3.org/2000/svg"
-        fill="currentColor"
-        aria-hidden="true"
-        width="16"
-        height="16"
-        viewBox="0 0 32 32"
-        slot="icon">
-        <path d="M17 15L17 8 15 8 15 15 8 15 8 17 15 17 15 24 17 24 17 17 24 17 24 15z"></path>
-      </svg>
-    </cds-button>
-    <cds-button
-      tooltip-text="Icon Description"
-      kind="primary"
-      tooltip-position="bottom">
-      <svg
-        focusable="false"
-        preserveAspectRatio="xMidYMid meet"
-        xmlns="http://www.w3.org/2000/svg"
-        fill="currentColor"
-        aria-hidden="true"
-        width="16"
-        height="16"
-        viewBox="0 0 32 32"
-        slot="icon">
-        <path d="M17 15L17 8 15 8 15 15 8 15 8 17 15 17 15 24 17 24 17 17 24 17 24 15z"></path>
-      </svg>
-    </cds-button>
-    <cds-button
-      tooltip-text="Icon Description"
-      kind="primary"
-      tooltip-position="left">
-      <svg
-        focusable="false"
-        preserveAspectRatio="xMidYMid meet"
-        xmlns="http://www.w3.org/2000/svg"
-        fill="currentColor"
-        aria-hidden="true"
-        width="16"
-        height="16"
-        viewBox="0 0 32 32"
-        slot="icon">
-        <path d="M17 15L17 8 15 8 15 15 8 15 8 17 15 17 15 24 17 24 17 17 24 17 24 15z"></path>
-      </svg>
-    </cds-button>
-  </div>
-</unstyled>
+<Unstyled
+  style={{
+    padding: '1rem',
+    background: 'var(--cds-background)',
+    flexWrap: 'wrap',
+    display: 'flex',
+    gap: '1rem',
+  }}>
+  <cds-button
+    tooltip-text="Icon Description"
+    kind="primary"
+    tooltip-position="top">
+    <svg
+      focusable="false"
+      preserveAspectRatio="xMidYMid meet"
+      xmlns="http://www.w3.org/2000/svg"
+      fill="currentColor"
+      aria-hidden="true"
+      width="16"
+      height="16"
+      viewBox="0 0 32 32"
+      slot="icon">
+      <path d="M17 15L17 8 15 8 15 15 8 15 8 17 15 17 15 24 17 24 17 17 24 17 24 15z"></path>
+    </svg>
+  </cds-button>
+  <cds-button
+    tooltip-text="Icon Description"
+    kind="primary"
+    tooltip-position="right">
+    <svg
+      focusable="false"
+      preserveAspectRatio="xMidYMid meet"
+      xmlns="http://www.w3.org/2000/svg"
+      fill="currentColor"
+      aria-hidden="true"
+      width="16"
+      height="16"
+      viewBox="0 0 32 32"
+      slot="icon">
+      <path d="M17 15L17 8 15 8 15 15 8 15 8 17 15 17 15 24 17 24 17 17 24 17 24 15z"></path>
+    </svg>
+  </cds-button>
+  <cds-button
+    tooltip-text="Icon Description"
+    kind="primary"
+    tooltip-position="bottom">
+    <svg
+      focusable="false"
+      preserveAspectRatio="xMidYMid meet"
+      xmlns="http://www.w3.org/2000/svg"
+      fill="currentColor"
+      aria-hidden="true"
+      width="16"
+      height="16"
+      viewBox="0 0 32 32"
+      slot="icon">
+      <path d="M17 15L17 8 15 8 15 15 8 15 8 17 15 17 15 24 17 24 17 17 24 17 24 15z"></path>
+    </svg>
+  </cds-button>
+  <cds-button
+    tooltip-text="Icon Description"
+    kind="primary"
+    tooltip-position="left">
+    <svg
+      focusable="false"
+      preserveAspectRatio="xMidYMid meet"
+      xmlns="http://www.w3.org/2000/svg"
+      fill="currentColor"
+      aria-hidden="true"
+      width="16"
+      height="16"
+      viewBox="0 0 32 32"
+      slot="icon">
+      <path d="M17 15L17 8 15 8 15 15 8 15 8 17 15 17 15 24 17 24 17 17 24 17 24 15z"></path>
+    </svg>
+  </cds-button>
+</Unstyled>
 
 ```html
 <cds-button tooltip-text="Add" kind="primary" tooltip-position="top">
@@ -466,10 +495,16 @@ in a position and will render the tooltip accordingly. Accepted options are
 By using the `stacked` attribute with the `button-set` component, you can
 arrange your two `button` elements vertically
 
-<cds-button-set stacked>
-  <cds-button kind="secondary">Secondary button</cds-button>
-  <cds-button kind="primary">Primary button</cds-button>
-</cds-button-set>
+<Unstyled
+  style={{
+    padding: '1rem',
+    background: 'var(--cds-background)',
+  }}>
+  <cds-button-set stacked>
+    <cds-button kind="secondary">Secondary button</cds-button>
+    <cds-button kind="primary">Primary button</cds-button>
+  </cds-button-set>
+</Unstyled>
 
 ```html
 <cds-button-set stacked>
