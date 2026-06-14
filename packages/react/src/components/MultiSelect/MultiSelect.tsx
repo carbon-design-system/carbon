@@ -429,6 +429,8 @@ export const MultiSelect = React.forwardRef(
       locale,
     };
 
+    const toggleButtonRef = useRef<HTMLButtonElement>(null);
+
     const selectProps: UseSelectProps<ItemType> = {
       stateReducer,
       isOpen,
@@ -499,11 +501,17 @@ export const MultiSelect = React.forwardRef(
           if (match(e, keys.Enter) && isOpen) {
             setInputFocused(true);
           }
+          if (match(e, keys.Tab) && isOpen) {
+            setInputFocused(true);
+            // Refocus the toggle button after dropdown closes on Tab
+            setTimeout(() => {
+              toggleButtonRef.current?.focus();
+            }, 0);
+          }
         }
       },
     });
 
-    const toggleButtonRef = useRef<HTMLButtonElement>(null);
     const mergedRef = mergeRefs<HTMLButtonElement>(
       toggleButtonProps.ref,
       ref,
