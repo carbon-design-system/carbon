@@ -10,7 +10,9 @@ import PropTypes from 'prop-types';
 import React, {
   forwardRef,
   useCallback,
+  useEffect,
   useImperativeHandle,
+  useRef,
   useState,
   type HTMLAttributes,
 } from 'react';
@@ -151,7 +153,7 @@ export interface FileUploaderProps extends HTMLAttributes<HTMLSpanElement> {
    * Specify the size of the FileUploaderButton, from a list of available
    * sizes.
    */
-  size?: 'sm' | 'small' | 'md' | 'field' | 'lg';
+  size?: 'sm' | 'md' | 'lg';
 }
 
 export interface FileUploaderHandle {
@@ -206,9 +208,19 @@ const FileUploader = forwardRef<FileUploaderHandle, FileUploaderProps>(
     const [legacyFileNames, setLegacyFileNames] = useState<
       (string | undefined)[]
     >([]);
+    const [deletionAnnouncement, setDeletionAnnouncement] = useState('');
 
-    const uploaderButton = React.createRef<HTMLLabelElement>();
-    const nodes: HTMLElement[] = [];
+    const uploaderButton = useRef<HTMLLabelElement>(null);
+    const deleteButtonRefs = useRef<(HTMLButtonElement | null)[]>([]);
+    const pendingFocusIndex = useRef<number | null>(null);
+
+    const count = fileItems.length || legacyFileNames.length;
+    const fileCountText =
+      count === 0
+        ? ''
+        : count === 1
+          ? ' 1 file selected.'
+          : ` ${count} files selected.`;
 
     const createFileItem = useCallback(
       (file: File & { invalidFileType?: boolean }): FileItem => ({
@@ -326,72 +338,130 @@ const FileUploader = forwardRef<FileUploaderHandle, FileUploaderProps>(
       ]
     );
 
-    const handleClick = useCallback(
-      (evt, { index, filenameStatus }) => {
-        if (filenameStatus === 'edit') {
-          evt.stopPropagation();
+    const announceFileDeletion = useCallback((fileName: string) => {
+      setDeletionAnnouncement(`Deleted ${fileName}`);
+      setTimeout(() => setDeletionAnnouncement(''), 0);
+    }, []);
 
-          if (enhancedFileUploaderEnabled) {
-            const deletedItem = fileItems[index];
-            if (!deletedItem) return;
+    const focusUploaderButton = useCallback(() => {
+      const buttonElement = uploaderButton.current
+        ?.previousElementSibling as HTMLButtonElement;
+      if (buttonElement && buttonElement.tagName === 'BUTTON') {
+        buttonElement.focus();
+      }
+    }, [uploaderButton]);
 
-            const remainingItems = fileItems.filter((_, i) => i !== index);
-            setFileItems(remainingItems);
+    const handleEnhancedFileDeletion = useCallback(
+      (evt, index: number, deletedItem: FileItem) => {
+        const remainingItems = fileItems.filter((_, i) => i !== index);
+        setFileItems(remainingItems);
 
-            const remainingFiles = remainingItems.map((item) => item.file);
+        const remainingFiles = remainingItems.map((item) => item.file);
+        const enhancedEvent = {
+          ...evt,
+          target: {
+            ...evt.target,
+            files: Object.assign(remainingFiles, {
+              item: (index: number) => remainingFiles[index] || null,
+            }),
+            deletedFile: deletedItem,
+            deletedFileName: deletedItem.name,
+            remainingFiles: remainingItems,
+            currentFiles: remainingItems,
+            action: 'remove',
+          },
+        };
 
-            const enhancedEvent = {
-              ...evt,
-              target: {
-                ...evt.target,
-                files: Object.assign(remainingFiles, {
-                  item: (index: number) => remainingFiles[index] || null,
-                }),
-                deletedFile: deletedItem,
-                deletedFileName: deletedItem.name,
-                remainingFiles: remainingItems,
-                currentFiles: remainingItems,
-                action: 'remove',
-              },
-            };
-
-            if (onDelete) {
-              onDelete(enhancedEvent);
-            }
-
-            if (onChange) {
-              onChange(enhancedEvent);
-            }
-          } else {
-            const deletedFileName = legacyFileNames[index];
-            const filteredArray = legacyFileNames.filter(
-              (filename) => filename !== deletedFileName
-            );
-
-            setLegacyFileNames(filteredArray);
-
-            if (onDelete) {
-              onDelete(evt);
-            }
-          }
-
-          if (onClick) {
-            onClick(evt);
-          }
-
-          uploaderButton.current?.focus?.();
+        if (onDelete) {
+          onDelete(enhancedEvent);
         }
+
+        if (onChange) {
+          onChange(enhancedEvent);
+        }
+
+        return remainingItems.length;
+      },
+      [fileItems, onDelete, onChange]
+    );
+
+    const handleLegacyFileDeletion = useCallback(
+      (evt, filteredArray: (string | undefined)[]) => {
+        setLegacyFileNames(filteredArray);
+
+        if (onDelete) {
+          onDelete(evt);
+        }
+
+        return filteredArray.length;
+      },
+      [onDelete]
+    );
+
+    const manageFocusAfterDeletion = useCallback(
+      (deletedIndex: number, remainingCount: number) => {
+        if (remainingCount === 0) {
+          pendingFocusIndex.current = null;
+          focusUploaderButton();
+          return;
+        }
+
+        pendingFocusIndex.current =
+          deletedIndex < remainingCount ? deletedIndex : remainingCount - 1;
+      },
+      [focusUploaderButton]
+    );
+
+    const handleClick = useCallback(
+      (evt, { index }) => {
+        evt.stopPropagation();
+
+        let remainingCount: number;
+        if (enhancedFileUploaderEnabled) {
+          const deletedItem = fileItems[index];
+
+          announceFileDeletion(deletedItem.name);
+          remainingCount = handleEnhancedFileDeletion(evt, index, deletedItem);
+        } else {
+          const deletedFileName = legacyFileNames[index] as string;
+
+          const filteredArray = legacyFileNames.filter(
+            (filename) => filename !== deletedFileName
+          );
+
+          announceFileDeletion(deletedFileName);
+          remainingCount = handleLegacyFileDeletion(evt, filteredArray);
+        }
+
+        if (onClick) {
+          onClick(evt);
+        }
+
+        manageFocusAfterDeletion(index, remainingCount);
       },
       [
         enhancedFileUploaderEnabled,
         fileItems,
         legacyFileNames,
-        onDelete,
-        onChange,
         onClick,
-        uploaderButton,
+        announceFileDeletion,
+        handleEnhancedFileDeletion,
+        handleLegacyFileDeletion,
+        manageFocusAfterDeletion,
       ]
     );
+
+    useEffect(() => {
+      if (pendingFocusIndex.current === null) {
+        return;
+      }
+
+      const deleteButton = deleteButtonRefs.current[pendingFocusIndex.current];
+      if (deleteButton) {
+        deleteButton.focus();
+        pendingFocusIndex.current = null;
+      }
+    }, [fileItems, legacyFileNames]);
 
     useImperativeHandle(
       ref,
@@ -442,10 +512,8 @@ const FileUploader = forwardRef<FileUploaderHandle, FileUploaderProps>(
 
     const getSelectedFileClasses = (file) =>
       classNames(`${prefix}--file__selected-file`, {
-        [`${prefix}--file__selected-file--md`]:
-          size === 'field' || size === 'md',
-        [`${prefix}--file__selected-file--sm`]:
-          size === 'small' || size === 'sm',
+        [`${prefix}--file__selected-file--md`]: size === 'md',
+        [`${prefix}--file__selected-file--sm`]: size === 'sm',
         [`${prefix}--file__selected-file--disabled`]: file.disabled,
       });
 
@@ -471,8 +539,16 @@ const FileUploader = forwardRef<FileUploaderHandle, FileUploaderProps>(
           as="p"
           className={getHelperLabelClasses(`${prefix}--label-description`)}
           id={fileUploaderInstanceId}>
+          <span className={`${prefix}--visually-hidden`}>{fileCountText}</span>
           {labelDescription}
         </Text>
+        <div
+          role="alert"
+          aria-live="assertive"
+          aria-atomic="true"
+          className={`${prefix}--visually-hidden`}>
+          {deletionAnnouncement}
+        </div>
         <FileUploaderButton
           innerRef={uploaderButton}
           disabled={disabled}
@@ -493,9 +569,6 @@ const FileUploader = forwardRef<FileUploaderHandle, FileUploaderProps>(
                 <span
                   key={file.key}
                   className={getSelectedFileClasses(file)}
-                  ref={(node) => {
-                    nodes[file.index] = node as HTMLSpanElement;
-                  }}
                   {...other}>
                   <Text
                     as="p"
@@ -509,21 +582,22 @@ const FileUploader = forwardRef<FileUploaderHandle, FileUploaderProps>(
                   </Text>
                   <span className={`${prefix}--file__state-container`}>
                     <Filename
+                      ref={(node) => {
+                        deleteButtonRefs.current[file.index] = node;
+                      }}
                       name={file.name}
                       disabled={file.disabled}
                       iconDescription={iconDescription}
                       status={filenameStatus}
                       onKeyDown={(evt) => {
                         if (matches(evt, [keys.Enter, keys.Space])) {
+                          evt.preventDefault();
                           handleClick(evt, {
                             index: file.index,
-                            filenameStatus,
                           });
                         }
                       }}
-                      onClick={(evt) =>
-                        handleClick(evt, { index: file.index, filenameStatus })
-                      }
+                      onClick={(evt) => handleClick(evt, { index: file.index })}
                     />
                   </span>
                 </span>
@@ -632,7 +706,7 @@ FileUploader.propTypes = {
    * Specify the size of the FileUploaderButton, from a list of available
    * sizes.
    */
-  size: PropTypes.oneOf(['sm', 'small', 'md', 'field', 'lg']),
+  size: PropTypes.oneOf(['sm', 'md', 'lg']),
 } as PropTypes.ValidationMap<FileUploaderProps>;
 
 export default FileUploader;

@@ -113,7 +113,7 @@ export const Default = () => {
           label="Number Input"
           min={0}
           max={100}
-          value={50}
+          defaultValue={50}
           step={10}
           iconDescription="Add/decrement number"
         />
@@ -121,7 +121,6 @@ export const Default = () => {
         <FormGroup className="some-class" legendText="File Uploader">
           <FileUploader
             id="file-1"
-            role="button"
             labelDescription="Max file size is 500 MB. Only .jpg files are supported."
             buttonLabel="Add file"
             buttonKind="primary"
