@@ -157,7 +157,7 @@ $css--plex: true !default;
 }
 
 :host(#{$prefix}-fluid-date-picker-input[kind='from']),
-:host(#{$prefix}-fluid-date-picker-input[kind='to']),
+:host(#{$prefix}-fluid-date-picker-input[kind='to']) {
 :host(#{$prefix}-fluid-date-picker-input-skeleton[kind='from']),
 :host(#{$prefix}-fluid-date-picker-input-skeleton[kind='to']) {
   inline-size: convert.to-rem(143.5px);
