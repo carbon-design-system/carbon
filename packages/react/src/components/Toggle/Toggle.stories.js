@@ -22,21 +22,20 @@ export default {
 };
 
 export const Default = (args) => {
-  return (
-    <Toggle
-      labelText="Label"
-      labelA="Off"
-      labelB="On"
-      defaultToggled
-      id="toggle-3"
-      {...args}
-    />
-  );
+  return <Toggle {...args} />;
+};
+
+Default.args = {
+  labelText: 'Label',
+  defaultToggled: true,
+  id: 'toggle-3',
 };
 
 Default.argTypes = {
-  className: {
-    control: false,
+  'aria-labelledby': {
+    control: {
+      type: 'text',
+    },
   },
   defaultToggled: {
     control: false,
@@ -52,43 +51,66 @@ Default.argTypes = {
     },
   },
   id: {
-    control: false,
+    control: {
+      type: 'text',
+    },
   },
   labelA: {
-    control: false,
+    control: {
+      type: 'text',
+    },
   },
   labelB: {
-    control: false,
+    control: {
+      type: 'text',
+    },
   },
   labelText: {
-    control: false,
+    control: {
+      type: 'text',
+    },
   },
   onClick: {
     control: false,
+    action: 'clicked',
   },
   onToggle: {
     control: false,
+    action: 'toggled',
+  },
+  readOnly: {
+    control: {
+      type: 'boolean',
+    },
   },
   size: {
-    size: {
-      options: ['sm', 'md'],
-      control: { type: 'select' },
-    },
+    options: ['sm', 'md'],
+    control: { type: 'select' },
+  },
+  toggled: {
+    control: false,
   },
 };
 
 export const SmallToggle = (args) => {
-  return (
-    <Toggle
-      size="sm"
-      labelText="Label"
-      labelA="Off"
-      labelB="On"
-      defaultToggled
-      id="toggle-2"
-      {...args}
-    />
-  );
+  return <Toggle {...args} />;
+};
+
+SmallToggle.args = {
+  size: 'sm',
+  labelText: 'Label',
+  defaultToggled: true,
+  id: 'toggle-2',
+};
+
+SmallToggle.argTypes = {
+  ...Default.argTypes,
+};
+
+SmallToggle.parameters = {
+  controls: {
+    exclude: ['size'],
+  },
 };
 
 export const WithAccessibleLabels = () => {

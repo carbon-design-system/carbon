@@ -16,55 +16,51 @@ const sizes = {
 };
 
 const defaultArgs = {
-  labelA: 'On',
-  labelB: 'Off',
   toggled: true,
   labelText: 'Label',
+  labelA: 'On',
+  labelB: 'Off',
+  disabled: false,
+  hideLabel: false,
+  readOnly: false,
 };
 
 const smallToggleArgs = {
-  labelA: 'On',
-  labelB: 'Off',
   toggled: true,
   labelText: 'Label',
+  labelA: 'On',
+  labelB: 'Off',
   size: 'sm',
+  disabled: false,
+  hideLabel: false,
+  readOnly: false,
 };
 
 const controls = {
   disabled: {
     control: 'boolean',
-    description: 'Whether this control should be disabled',
   },
   hideLabel: {
     control: 'boolean',
-    description:
-      "If true, the side labels (props.labelA and props.labelB) will be replaced by props.labelText (if passed), so that the toggle doesn't render a top label.",
   },
   labelA: {
     control: 'text',
-    description: 'Specify the label for the "on" position',
   },
   labelB: {
     control: 'text',
-    description: 'Specify the label for the "off" position',
   },
   labelText: {
     control: 'text',
-    description: 'The text that is read for the control',
   },
   readOnly: {
     control: 'boolean',
-    description: 'Whether the toggle should be read-only',
   },
   size: {
     control: 'radio',
-    description:
-      "Specify the size of the Toggle. Currently only supports 'sm' or 'md' (default)",
     options: sizes,
   },
   toggled: {
     control: 'boolean',
-    description: 'Specify whether the control is toggled',
   },
 };
 
@@ -98,8 +94,15 @@ export const Skeleton = {
 };
 
 export const SmallToggle = {
-  argTypes: controls,
+  argTypes: {
+    ...controls,
+  },
   args: smallToggleArgs,
+  parameters: {
+    controls: {
+      exclude: ['size'],
+    },
+  },
   render: ({
     disabled,
     hideLabel,
