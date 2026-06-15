@@ -642,7 +642,7 @@ $list-box-menu-width: convert.to-rem(300px);
 
     display: block;
     overflow: hidden;
-    padding: calc((layout.size('height') - 1rem) / 2) 0;
+    padding: calc((layout.size('height') - 1rem) / 2 - 1px) 0;
     margin: 0 $spacing-05;
     block-size: layout.size('height');
     border-block-end: 1px solid transparent;
