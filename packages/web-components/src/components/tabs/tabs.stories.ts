@@ -1016,6 +1016,7 @@ export const Vertical = {
     selectionMode: 'automatic',
     selectedIndex: 0,
     customHeight: '',
+    size: 'xl',
   },
   argTypes: {
     selectionMode: {
