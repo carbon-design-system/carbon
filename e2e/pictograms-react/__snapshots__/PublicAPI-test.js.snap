@@ -718,6 +718,7 @@ exports[`@carbon/pictograms-react should not update exports without a semver cha
   "HyperProtectDatabaseAsAService",
   "HyperProtectVirtualServers",
   "IbmAptio",
+  "IbmAtxOffice",
   "IbmAutomationPlatform",
   "IbmBob",
   "IbmCloud",
