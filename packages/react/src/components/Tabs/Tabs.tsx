@@ -498,8 +498,7 @@ function TabList({
       [`${prefix}--tabs__icon--default`]: iconSize === 'default',
       [`${prefix}--tabs__icon--lg`]: iconSize === 'lg', // TODO: V12 - Remove this class
       [`${prefix}--layout--size-lg`]: iconSize === 'lg',
-      [`${prefix}--layout--size-${size}`]:
-        size && contained && !hasSecondaryLabelTabs,
+      [`${prefix}--layout--size-${size}`]: size && !hasSecondaryLabelTabs,
       [`${prefix}--tabs--tall`]: hasSecondaryLabelTabs,
       [`${prefix}--tabs--full-width`]: distributeWidth,
       [`${prefix}--tabs--dismissable`]: dismissable,
@@ -864,6 +863,11 @@ TabList.propTypes = {
    * to newly selected tabs on component rerender
    */
   scrollIntoView: PropTypes.bool,
+
+  /**
+   * Specify the size of the tabs.
+   */
+  size: PropTypes.oneOf(['sm', 'md', 'lg']),
 };
 
 /**
