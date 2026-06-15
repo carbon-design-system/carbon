@@ -1055,7 +1055,11 @@ function TabListVertical({
 
   if (isSm) {
     return (
-      <TabList {...rest} aria-label={label} contained>
+      <TabList
+        {...rest}
+        aria-label={label}
+        contained
+        size={size === 'xl' ? 'lg' : size}>
         {children}
       </TabList>
     );
