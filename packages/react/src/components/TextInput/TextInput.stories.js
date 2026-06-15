@@ -6,13 +6,14 @@
  */
 
 import React from 'react';
-import { WithLayer } from '../../../.storybook/templates/WithLayer';
+import { withLayers } from '../../../.storybook/decorators/withLayers';
 import FluidForm from '../FluidForm';
 import { View, FolderOpen, Folders, Information } from '@carbon/icons-react';
 import Button from '../Button';
 import { AILabel, AILabelContent, AILabelActions } from '../AILabel';
 import { IconButton } from '../IconButton';
 import mdx from './TextInput.mdx';
+import { useId } from '../../internal/useId';
 
 import { default as TextInput, TextInputSkeleton } from '../TextInput';
 
@@ -168,10 +169,11 @@ export default {
 
 export const Default = (args) => {
   const { defaultWidth, ...textInputArgs } = args;
+  const id = useId('text-input'); // required for unique id generation when cloning this story in layers stories
 
   return (
     <div style={{ width: defaultWidth }}>
-      <TextInput {...textInputArgs} />
+      <TextInput {...textInputArgs} id={id} />
     </div>
   );
 };
@@ -246,18 +248,12 @@ ReadOnly.parameters = {
   },
 };
 
-export const _WithLayer = (args) => {
-  const { defaultWidth, ...textInputArgs } = args;
-
-  return (
-    <WithLayer>
-      {(layer) => (
-        <div style={{ width: defaultWidth }}>
-          <TextInput {...textInputArgs} id={`text-input-${layer}`} />
-        </div>
-      )}
-    </WithLayer>
-  );
+export const _WithLayer = {
+  decorators: [withLayers],
+  parameters: {
+    layout: 'fullscreen',
+  },
+  render: Default,
 };
 
 export const withAILabel = (args) => {

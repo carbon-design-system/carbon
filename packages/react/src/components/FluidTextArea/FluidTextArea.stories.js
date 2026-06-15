@@ -7,7 +7,7 @@
 
 import React from 'react';
 
-import { WithLayer } from '../../../.storybook/templates/WithLayer';
+import { withLayers } from '../../../.storybook/decorators/withLayers';
 
 import FluidTextArea from '../FluidTextArea';
 import FluidTextAreaSkeleton from './FluidTextArea.Skeleton';
@@ -19,6 +19,7 @@ import {
 } from '../Toggletip';
 import { Information } from '@carbon/icons-react';
 import mdx from './FluidTextArea.mdx';
+import { useId } from '../../internal/useId';
 
 export default {
   title: 'Components/Fluid Components/FluidTextArea',
@@ -106,11 +107,14 @@ const sharedArgTypes = {
   },
 };
 
-export const Default = ({ defaultWidth, ...textAreaArgs }) => (
-  <div style={{ width: defaultWidth }}>
-    <FluidTextArea {...textAreaArgs} />
-  </div>
-);
+export const Default = ({ defaultWidth, ...textAreaArgs }) => {
+  const id = useId('fluid-textarea'); // required for unique id generation when cloning this story in layers stories
+  return (
+    <div style={{ width: defaultWidth }}>
+      <FluidTextArea {...textAreaArgs} id={id} />
+    </div>
+  );
+};
 
 Default.args = {
   defaultWidth: 300,
@@ -134,17 +138,15 @@ Default.argTypes = {
   },
 };
 
-export const DefaultWithLayers = () => (
-  <WithLayer>
-    {(layer) => (
-      <FluidTextArea
-        labelText="Text Area label"
-        placeholder="Placeholder text"
-        id={`text-area-${layer}`}
-      />
-    )}
-  </WithLayer>
-);
+export const DefaultWithLayers = {
+  decorators: [withLayers],
+  parameters: {
+    layout: 'fullscreen',
+  },
+  args: Default.args,
+  argTypes: Default.argTypes,
+  render: Default,
+};
 
 const ToggleTip = (
   <>

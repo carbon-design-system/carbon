@@ -7,7 +7,7 @@
 
 import React from 'react';
 
-import { WithLayer } from '../../../.storybook/templates/WithLayer';
+import { withLayers } from '../../../.storybook/decorators/withLayers';
 import { View, FolderOpen, Folders, Information } from '@carbon/icons-react';
 import Button from '../Button';
 import { AILabel, AILabelContent, AILabelActions } from '../AILabel';
@@ -15,6 +15,7 @@ import { IconButton } from '../IconButton';
 import { default as TextArea, TextAreaSkeleton } from './';
 import { Tooltip } from '../Tooltip';
 import mdx from './TextArea.mdx';
+import { useId } from '../../internal/useId';
 export default {
   title: 'Components/TextArea',
   component: TextArea,
@@ -137,28 +138,21 @@ export default {
 };
 
 export const Default = (args) => {
-  return <TextArea {...args} id="text-area-1" />;
+  const id = useId('textarea'); // required for unique id generation when cloning this story in layers stories
+  return <TextArea {...args} id={id} />;
 };
 
 Default.args = {
   enableCounter: true,
 };
 
-export const _WithLayer = (args) => (
-  <WithLayer>
-    {(layer) => (
-      <TextArea
-        labelText="Text Area label"
-        helperText="Optional helper text"
-        rows={4}
-        id={`text-area-${layer}`}
-        {...args}
-      />
-    )}
-  </WithLayer>
-);
-
-_WithLayer.args = { helperText: 'Optional helper text' };
+export const _WithLayer = {
+  decorators: [withLayers],
+  parameters: {
+    layout: 'fullscreen',
+  },
+  render: Default,
+};
 export const withAILabel = (args) => {
   const aiLabel = (
     <AILabel className="ai-label-container">

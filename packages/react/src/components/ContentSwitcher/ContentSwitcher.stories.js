@@ -7,7 +7,7 @@
 
 import React from 'react';
 
-import { WithLayer } from '../../../.storybook/templates/WithLayer';
+import { withLayers } from '../../../.storybook/decorators/withLayers';
 import { ContentSwitcher } from './ContentSwitcher';
 import { Switch, IconSwitch } from '../Switch';
 import mdx from './ContentSwitcher.mdx';
@@ -69,18 +69,13 @@ Default.argTypes = {
   ...sharedArgTypes,
 };
 
-export const _WithLayer = (args) => (
-  <WithLayer>
-    <ContentSwitcher onChange={() => {}} {...args}>
-      <Switch name="one" text="First section" disabled={args.disabled} />
-      <Switch name="two" text="Second section" disabled={args.disabled} />
-      <Switch name="three" text="Third section" disabled={args.disabled} />
-    </ContentSwitcher>
-  </WithLayer>
-);
-
-_WithLayer.argTypes = {
-  ...sharedArgTypes,
+export const _WithLayer = {
+  decorators: [withLayers],
+  parameters: {
+    layout: 'fullscreen',
+  },
+  argTypes: Default.argTypes,
+  render: Default,
 };
 
 export const IconOnly = (args) => (
@@ -101,21 +96,14 @@ IconOnly.argTypes = {
   ...sharedArgTypes,
 };
 
-export const IconOnlyWithLayer = (args) => (
-  <WithLayer>
-    <ContentSwitcher onChange={() => {}} {...args}>
-      <IconSwitch name="one" text="Table of Contents" disabled={args.disabled}>
-        <TableOfContents />
-      </IconSwitch>
-      <IconSwitch name="two" text="Workspace Test" disabled={args.disabled}>
-        <Workspace />
-      </IconSwitch>
-      <IconSwitch name="three" text="View Mode" disabled={args.disabled}>
-        <ViewMode_2 />
-      </IconSwitch>
-    </ContentSwitcher>
-  </WithLayer>
-);
+export const IconOnlyWithLayer = {
+  decorators: [withLayers],
+  parameters: {
+    layout: 'fullscreen',
+  },
+  argTypes: IconOnly.argTypes,
+  render: IconOnly,
+};
 
 export const lowContrast = (args) => (
   <ContentSwitcher lowContrast {...args}>

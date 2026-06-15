@@ -7,7 +7,7 @@
 
 import React, { useState } from 'react';
 
-import { WithLayer } from '../../../.storybook/templates/WithLayer';
+import { withLayers } from '../../../.storybook/decorators/withLayers';
 
 import DatePicker from './DatePicker';
 import DatePickerSkeleton from './DatePicker.Skeleton';
@@ -17,6 +17,7 @@ import { AILabel, AILabelContent, AILabelActions } from '../AILabel';
 import { IconButton } from '../IconButton';
 import { View, FolderOpen, Folders, Information } from '@carbon/icons-react';
 import { useDocumentLang } from '../../internal/useDocumentLang';
+import { useId } from '../../internal/useId';
 
 import mdx from './DatePicker.mdx';
 
@@ -160,40 +161,48 @@ Default.argTypes = {
   },
 };
 
-export const Simple = (args) => (
-  <DatePicker datePickerType="simple" {...args}>
-    <DatePickerInput
-      placeholder="mm/dd/yyyy"
-      labelText="Date Picker label"
-      id="date-picker-simple"
-      {...sharedArgs}
-      {...args}
-    />
-  </DatePicker>
-);
+export const Simple = (args) => {
+  const id = useId('date-picker-simple'); // required for unique id generation when cloning this story in layers stories
+  return (
+    <DatePicker datePickerType="simple" {...args}>
+      <DatePickerInput
+        placeholder="mm/dd/yyyy"
+        labelText="Date Picker label"
+        id={id}
+        {...sharedArgs}
+        {...args}
+      />
+    </DatePicker>
+  );
+};
 
 Simple.argTypes = { ...sharedArgTypes };
 
-export const SingleWithCalendar = (args) => (
-  <DatePicker datePickerType="single" {...args}>
-    <DatePickerInput
-      placeholder="mm/dd/yyyy"
-      labelText="Date Picker label"
-      id="date-picker-single"
-      size="md"
-      {...sharedArgs}
-      {...args}
-    />
-  </DatePicker>
-);
+export const SingleWithCalendar = (args) => {
+  const id = useId('date-picker-single'); // required for unique id generation when cloning this story in layers stories
+  return (
+    <DatePicker datePickerType="single" {...args}>
+      <DatePickerInput
+        placeholder="mm/dd/yyyy"
+        labelText="Date Picker label"
+        id={id}
+        size="md"
+        {...sharedArgs}
+        {...args}
+      />
+    </DatePicker>
+  );
+};
 
 SingleWithCalendar.argTypes = { ...sharedArgTypes };
 
 export const RangeWithCalendar = (args) => {
+  const startId = useId('date-picker-input-id-start'); // required for unique id generation when cloning this story in layers stories
+  const finishId = useId('date-picker-input-id-finish'); // required for unique id generation when cloning this story in layers stories
   return (
     <DatePicker datePickerType="range" {...args}>
       <DatePickerInput
-        id="date-picker-input-id-start"
+        id={startId}
         placeholder="mm/dd/yyyy"
         labelText="Start date"
         size="md"
@@ -201,7 +210,7 @@ export const RangeWithCalendar = (args) => {
         {...args}
       />
       <DatePickerInput
-        id="date-picker-input-id-finish"
+        id={finishId}
         placeholder="mm/dd/yyyy"
         labelText="End date"
         size="md"
@@ -214,70 +223,35 @@ export const RangeWithCalendar = (args) => {
 
 RangeWithCalendar.argTypes = { ...sharedArgTypes };
 
-export const SimpleWithLayer = (args) => (
-  <WithLayer>
-    {(layer) => (
-      <DatePicker datePickerType="simple" {...args}>
-        <DatePickerInput
-          placeholder="mm/dd/yyyy"
-          labelText="Date Picker label"
-          id={`date-picker-simple-${layer}`}
-          size="md"
-          {...sharedArgs}
-          {...args}
-        />
-      </DatePicker>
-    )}
-  </WithLayer>
-);
+export const SimpleWithLayer = {
+  decorators: [withLayers],
+  parameters: {
+    layout: 'fullscreen',
+  },
+  args: Simple.args,
+  argTypes: Simple.argTypes,
+  render: Simple,
+};
 
-SimpleWithLayer.argTypes = { ...sharedArgTypes };
+export const SingleWithCalendarWithLayer = {
+  decorators: [withLayers],
+  parameters: {
+    layout: 'fullscreen',
+  },
+  args: SingleWithCalendar.args,
+  argTypes: SingleWithCalendar.argTypes,
+  render: SingleWithCalendar,
+};
 
-export const SingleWithCalendarWithLayer = (args) => (
-  <WithLayer>
-    {(layer) => (
-      <DatePicker datePickerType="single" {...args}>
-        <DatePickerInput
-          placeholder="mm/dd/yyyy"
-          labelText="Date Picker label"
-          id={`date-picker-single-${layer}`}
-          size="md"
-          {...sharedArgs}
-          {...args}
-        />
-      </DatePicker>
-    )}
-  </WithLayer>
-);
-
-SingleWithCalendarWithLayer.argTypes = { ...sharedArgTypes };
-
-export const RangeWithCalendarWithLayer = (args) => (
-  <WithLayer>
-    {(layer) => (
-      <DatePicker datePickerType="range" {...args}>
-        <DatePickerInput
-          id={`date-picker-input-id-start-${layer}`}
-          placeholder="mm/dd/yyyy"
-          labelText="Start date"
-          size="md"
-          {...sharedArgs}
-          {...args}
-        />
-        <DatePickerInput
-          id={`date-picker-input-id-finish-${layer}`}
-          placeholder="mm/dd/yyyy"
-          labelText="End date"
-          size="md"
-          {...sharedArgs}
-          {...args}
-        />
-      </DatePicker>
-    )}
-  </WithLayer>
-);
-
-RangeWithCalendarWithLayer.argTypes = { ...sharedArgTypes };
+export const RangeWithCalendarWithLayer = {
+  decorators: [withLayers],
+  parameters: {
+    layout: 'fullscreen',
+  },
+  args: RangeWithCalendar.args,
+  argTypes: RangeWithCalendar.argTypes,
+  render: RangeWithCalendar,
+};
 
 export const Skeleton = () => {
   return <DatePickerSkeleton range />;

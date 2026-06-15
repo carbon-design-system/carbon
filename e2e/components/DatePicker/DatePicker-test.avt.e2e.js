@@ -123,10 +123,9 @@ test.describe('@avt DatePicker', () => {
     });
 
     // for some reason the firs tab is not working to focus the first tabstop, so focusing manually
-    await page.locator('input#date-picker-input-id-start').focus();
-    await expect(
-      page.locator('input#date-picker-input-id-start')
-    ).toBeFocused();
+    const startDateInput = page.getByRole('textbox', { name: 'Start date' });
+    await startDateInput.focus();
+    await expect(startDateInput).toBeFocused();
     await expect(page.locator('div.flatpickr-calendar')).toHaveClass(/open/);
     await page.keyboard.press('Tab');
     await expect(page.locator('span.today')).toBeFocused();
@@ -136,9 +135,7 @@ test.describe('@avt DatePicker', () => {
     await page.keyboard.press('ArrowDown');
     await page.keyboard.press('Enter');
     await page.keyboard.press('Enter');
-    await expect(
-      page.locator('input#date-picker-input-id-start')
-    ).toBeFocused();
+    await expect(startDateInput).toBeFocused();
     await expect(page.locator('div.flatpickr-calendar')).not.toHaveClass(
       /open/
     );

@@ -8,7 +8,8 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { View, FolderOpen, Folders, Information } from '@carbon/icons-react';
 import { action } from 'storybook/actions';
-import { WithLayer } from '../../../.storybook/templates/WithLayer';
+import { withLayers } from '../../../.storybook/decorators/withLayers';
+import { useId } from '../../internal/useId';
 import mdx from './MultiSelect.mdx';
 
 import { FilterableMultiSelect, MultiSelect } from '.';
@@ -203,6 +204,7 @@ const filterableArgTypes = {
   },
 };
 export const Default = (args) => {
+  const id = useId('multiselect'); // required for unique id generation when cloning this story in layers stories
   const items = [
     {
       id: 'downshift-1-item-0',
@@ -237,7 +239,7 @@ export const Default = (args) => {
       }}>
       <MultiSelect
         label="Multiselect Label"
-        id="carbon-multiselect-example"
+        id={id}
         titleText="Multiselect title"
         helperText="This is helper text"
         items={items}
@@ -302,6 +304,7 @@ export const WithInitialSelectedItems = (args) => {
 WithInitialSelectedItems.args = { ...sharedArgs };
 
 export const Filterable = (args) => {
+  const id = useId('multiselect-filterable'); // required for unique id generation when cloning this story in layers stories
   const items = [
     {
       id: 'downshift-1-item-0',
@@ -336,7 +339,7 @@ export const Filterable = (args) => {
         width: 300,
       }}>
       <FilterableMultiSelect
-        id="carbon-multiselect-example-3"
+        id={id}
         titleText="FilterableMultiSelect title"
         helperText="This is helper text"
         items={items}
@@ -394,52 +397,27 @@ Filterable.parameters = {
   },
 };
 
-export const WithLayerMultiSelect = (args) => (
-  <WithLayer>
-    {(layer) => (
-      <div style={{ width: 300 }}>
-        <MultiSelect
-          label="Multiselect Label"
-          id={`carbon-multiselect-example-${layer}`}
-          titleText="Multiselect title"
-          helperText="This is helper text"
-          items={items}
-          itemToString={(item) => (item ? item.text : '')}
-          selectionFeedback="top-after-reopen"
-          {...args}
-        />
-      </div>
-    )}
-  </WithLayer>
-);
-WithLayerMultiSelect.args = { ...sharedArgs };
-export const _FilterableWithLayer = (args) => (
-  <WithLayer>
-    {(layer) => (
-      <div style={{ width: 300 }}>
-        <FilterableMultiSelect
-          id={`carbon-multiselect-example-${layer}`}
-          titleText="Multiselect title"
-          helperText="This is helper text"
-          items={items}
-          itemToString={(item) => (item ? item.text : '')}
-          selectionFeedback="top-after-reopen"
-          {...args}
-        />
-      </div>
-    )}
-  </WithLayer>
-);
-
-_FilterableWithLayer.args = { ...sharedArgs };
-
-_FilterableWithLayer.argTypes = {
-  ...filterableArgTypes,
-};
-_FilterableWithLayer.parameters = {
-  controls: {
-    exclude: ['label'],
+export const WithLayerMultiSelect = {
+  decorators: [withLayers],
+  parameters: {
+    layout: 'fullscreen',
   },
+  args: Default.args,
+  argTypes: Default.argTypes,
+  render: Default,
+};
+
+export const _FilterableWithLayer = {
+  decorators: [withLayers],
+  parameters: {
+    layout: 'fullscreen',
+    controls: {
+      exclude: ['label'],
+    },
+  },
+  args: Filterable.args,
+  argTypes: Filterable.argTypes,
+  render: Filterable,
 };
 export const _Controlled = (args) => {
   const [selectedItems, setSelectedItems] = useState(

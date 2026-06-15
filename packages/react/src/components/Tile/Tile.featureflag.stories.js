@@ -31,8 +31,9 @@ import {
 import { AILabel, AILabelContent, AILabelActions } from '../AILabel';
 import { IconButton } from '../IconButton';
 
-import { WithLayer } from '../../../.storybook/templates/WithLayer';
+import { withLayers } from '../../../.storybook/decorators/withLayers';
 import { WithFeatureFlags } from '../../../.storybook/templates/WithFeatureFlags';
+import { useId } from '../../internal/useId';
 
 export default {
   title: 'Components/Tile/Feature Flag',
@@ -66,10 +67,11 @@ export default {
 const previewClassname = 'preview-tile';
 
 export const Clickable = (args) => {
+  const id = useId('tile-clickable'); // required for unique id generation when cloning this story in layers stories
   return (
     <div className={previewClassname}>
       <ClickableTile
-        id="clickable-tile-1"
+        id={id}
         href="https://www.carbondesignsystem.com/"
         {...args}>
         Clickable Tile
@@ -90,20 +92,14 @@ Clickable.argTypes = {
   },
 };
 
-export const ClickableWithLayer = () => {
-  return (
-    <WithLayer>
-      {(layer) => (
-        <div className={previewClassname}>
-          <ClickableTile
-            id={`clickable-tile-${layer}`}
-            href="https://www.carbondesignsystem.com/">
-            Clickable Tile
-          </ClickableTile>
-        </div>
-      )}
-    </WithLayer>
-  );
+export const ClickableWithLayer = {
+  decorators: [withLayers],
+  parameters: {
+    layout: 'fullscreen',
+  },
+  args: Clickable.args,
+  argTypes: Clickable.argTypes,
+  render: Clickable,
 };
 
 export const Selectable = (args) => {
@@ -164,24 +160,25 @@ MultiSelect.argTypes = {
 };
 
 export const Radio = (args) => {
+  const id = useId('tile-radio'); // required for unique id generation when cloning this story in layers stories
   return (
     <div className={previewClassname}>
-      <TileGroup legend="Radio Tile Group" name="radio tile group">
+      <TileGroup legend="Radio Tile Group" name={`radio tile group ${id}`}>
         <RadioTile
-          id="radio-tile-1"
+          id={`${id}-1`}
           value="radio-tile-1"
           style={{ marginBottom: '.5rem' }}
           {...args}>
           Option 1
         </RadioTile>
         <RadioTile
-          id="radio-tile-2"
+          id={`${id}-2`}
           value="radio-tile-2"
           style={{ marginBottom: '.5rem' }}
           {...args}>
           Option 2
         </RadioTile>
-        <RadioTile id="radio-tile-3" value="radio-tile-3" {...args} disabled>
+        <RadioTile id={`${id}-3`} value="radio-tile-3" {...args} disabled>
           Option 3
         </RadioTile>
       </TileGroup>
@@ -201,47 +198,35 @@ Radio.argTypes = {
   },
 };
 
-export const RadioWithLayer = () => {
-  return (
-    <WithLayer>
-      {(layer) => (
-        <div className={previewClassname}>
-          <TileGroup
-            legend="Radio Tile Group"
-            name={`radio-tile-group-${layer}`}>
-            <RadioTile
-              id={`radio-tile-${layer}-1`}
-              value={`radio-tile-${layer}-1`}
-              style={{ marginBottom: '.5rem' }}>
-              Option 1
-            </RadioTile>
-            <RadioTile
-              id={`radio-tile-${layer}-2`}
-              value={`radio-tile-${layer}-2`}>
-              Option 2
-            </RadioTile>
-          </TileGroup>
-        </div>
-      )}
-    </WithLayer>
-  );
+export const RadioWithLayer = {
+  decorators: [withLayers],
+  parameters: {
+    layout: 'fullscreen',
+  },
+  args: Radio.args,
+  argTypes: Radio.argTypes,
+  render: Radio,
 };
 
-export const Expandable = () => (
-  <div style={{ width: '400px' }} className={previewClassname}>
-    <ExpandableTile
-      id="expandable-tile-1"
-      tileCollapsedIconText="Interact to Expand tile"
-      tileExpandedIconText="Interact to Collapse tile">
-      <TileAboveTheFoldContent>
-        <div style={{ height: '200px' }}>Above the fold content here</div>
-      </TileAboveTheFoldContent>
-      <TileBelowTheFoldContent>
-        <div style={{ height: '400px' }}>Below the fold content here</div>
-      </TileBelowTheFoldContent>
-    </ExpandableTile>
-  </div>
-);
+export const Expandable = () => {
+  // required for unique id generation when cloning this story in layers stories
+  const id = useId('tile-expandable');
+  return (
+    <div style={{ width: '400px' }} className={previewClassname}>
+      <ExpandableTile
+        id={id}
+        tileCollapsedIconText="Interact to Expand tile"
+        tileExpandedIconText="Interact to Collapse tile">
+        <TileAboveTheFoldContent>
+          <div style={{ height: '200px' }}>Above the fold content here</div>
+        </TileAboveTheFoldContent>
+        <TileBelowTheFoldContent>
+          <div style={{ height: '400px' }}>Below the fold content here</div>
+        </TileBelowTheFoldContent>
+      </ExpandableTile>
+    </div>
+  );
+};
 
 export const ExpandableWithInteractive = () => (
   <div style={{ width: '400px' }} className={previewClassname}>
@@ -267,36 +252,14 @@ export const ExpandableWithInteractive = () => (
   </div>
 );
 
-export const ExpandableWithLayer = () => {
-  return (
-    <WithLayer>
-      {(layer) => (
-        <div style={{ width: '400px' }} className={previewClassname}>
-          <ExpandableTile
-            id={`expandable-tile-${layer}`}
-            tileCollapsedIconText="Interact to Expand tile"
-            tileExpandedIconText="Interact to Collapse tile">
-            <TileAboveTheFoldContent>
-              <div style={{ height: '100px', width: '200px' }}>
-                Above the fold content here
-              </div>
-            </TileAboveTheFoldContent>
-            <TileBelowTheFoldContent>
-              <div style={{ height: '200px', width: '200px' }}>
-                Below the fold content here
-                <Layer>
-                  <TextInput
-                    id={`expandable-tile-${layer}-input`}
-                    invalidText="A valid value is required"
-                  />
-                </Layer>
-              </div>
-            </TileBelowTheFoldContent>
-          </ExpandableTile>
-        </div>
-      )}
-    </WithLayer>
-  );
+export const ExpandableWithLayer = {
+  decorators: [withLayers],
+  parameters: {
+    layout: 'fullscreen',
+  },
+  args: Expandable.args,
+  argTypes: Expandable.argTypes,
+  render: Expandable,
 };
 
 const aiLabel = (

@@ -7,7 +7,7 @@
 
 import React, { useState, useEffect } from 'react';
 
-import { WithLayer } from '../../../.storybook/templates/WithLayer';
+import { withLayers } from '../../../.storybook/decorators/withLayers';
 import mdx from './ProgressBar.mdx';
 
 import ProgressBar from './';
@@ -88,12 +88,11 @@ export const Determinate = () => {
   );
 };
 
-export const _WithLayer = () => (
-  <WithLayer>
-    <ProgressBar
-      label="Progress bar label"
-      helperText="Optional helper text"
-      value={42}
-    />
-  </WithLayer>
-);
+export const _WithLayer = {
+  decorators: [withLayers],
+  parameters: {
+    layout: 'fullscreen',
+  },
+  argTypes: Default.argTypes,
+  render: Default,
+};
