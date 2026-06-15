@@ -61,7 +61,7 @@ const argTypes = {
 const tabsSizeArgType = {
   size: {
     control: { type: 'select' },
-    options: ['sm', 'md', 'lg'],
+    options: ['sm', 'md', 'lg', 'xl'],
     description: 'Specify the size of the tabs',
   },
 };
@@ -1016,6 +1016,7 @@ export const Vertical = {
     selectionMode: 'automatic',
     selectedIndex: 0,
     customHeight: '',
+    size: 'xl',
   },
   argTypes: {
     selectionMode: {
@@ -1033,8 +1034,13 @@ export const Vertical = {
       description:
         'Optional height for the vertical tabs container. Accepts any valid CSS height value (e.g. "500px", "50vh"). If omitted, the container grows to fit its content.',
     },
+    size: {
+      control: { type: 'select' },
+      options: ['sm', 'md', 'lg', 'xl'],
+      description: 'Specify the size of the vertical tabs.',
+    },
   },
-  render: ({ selectionMode, selectedIndex, customHeight }) => {
+  render: ({ selectionMode, selectedIndex, customHeight, size }) => {
     const handleBeforeSelected = (event: CustomEvent) => {
       action('cds-tabs-beingselected')(event.detail);
     };
@@ -1052,6 +1058,7 @@ export const Vertical = {
           slot="tabs"
           selection-mode="${selectionMode}"
           selected-index="${selectedIndex}"
+          size="${ifDefined(size)}"
           value="all"
           @cds-tabs-beingselected="${handleBeforeSelected}"
           @cds-tabs-selected="${handleSelected}">
