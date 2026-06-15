@@ -252,7 +252,7 @@ $css--plex: true !default;
   display: block;
 }
 
-:host(#{$prefix}-fluid-date-picker-skeleton[range]) {
+:host(#{$prefix}-fluid-date-picker-skeleton[date-picker-type='range']) {
   @extend .#{$prefix}--date-picker--fluid__skeleton--range;
 }
 
