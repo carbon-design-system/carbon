@@ -268,11 +268,11 @@ class CDSPopover extends HostListenerMixin(LitElement) {
    * An array of elements (found via #id1, #id2, #id3, separated by ",")
    * A rect, input format should be 'rect(x,y,width,height)'
    */
-  private _resolveAutoAlignBoundary(): Boundary {
+  private _resolveAutoAlignBoundary(): Boundary | undefined {
     const raw = (this.autoAlignBoundary ?? '').trim();
 
-    // Default to 'clippingAncestors'
-    if (!raw) return 'clippingAncestors';
+    // Default to undefined
+    if (!raw) return undefined;
     if (raw === 'clippingAncestors') return 'clippingAncestors';
 
     // regex match for: rect(x,y,width,height)
