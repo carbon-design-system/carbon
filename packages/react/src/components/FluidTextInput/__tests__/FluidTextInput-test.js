@@ -73,6 +73,21 @@ describe('FluidTextInput', () => {
       expect(screen.getByRole('textbox')).toBeDisabled();
     });
 
+    it('should add disabled classes when disabled', () => {
+      const { container } = render(
+        <FluidTextInput
+          disabled
+          id="input-1"
+          labelText="FluidTextInput label"
+        />
+      );
+
+      expect(container.firstChild).toHaveClass(
+        `${prefix}--text-input--fluid--disabled`
+      );
+      expect(screen.getByLabelText('FluidTextInput label')).toBeDisabled();
+    });
+
     it('should respect id prop', () => {
       render(<FluidTextInput id="input-1" labelText="FluidTextInput label" />);
 

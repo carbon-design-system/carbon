@@ -113,7 +113,10 @@ const FluidPasswordInput = ({
   ...other
 }: FluidPasswordInputProps) => {
   const prefix = usePrefix();
-  const classNames = classnames(className, `${prefix}--text-input--fluid`);
+  const classNames = classnames(className, {
+    [`${prefix}--text-input--fluid`]: true,
+    [`${prefix}--text-input--fluid--disabled`]: other.disabled,
+  });
 
   return (
     <FormContext.Provider value={{ isFluid: true }}>

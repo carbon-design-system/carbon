@@ -108,6 +108,7 @@ const FluidTextInput = React.forwardRef<HTMLInputElement, FluidTextInputProps>(
     const prefix = usePrefix();
     const classNames = classnames(className, {
       [`${prefix}--text-input--fluid`]: !isPassword,
+      [`${prefix}--text-input--fluid--disabled`]: other.disabled,
     });
 
     return (
