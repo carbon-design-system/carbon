@@ -140,8 +140,7 @@ $css--plex: true !default;
   }
 }
 
-:host(#{$prefix}-fluid-date-picker-input[kind='simple'][short]),
-:host(#{$prefix}-fluid-date-picker-input-skeleton[kind='simple'][short]) {
+:host(#{$prefix}-fluid-date-picker-input[kind='simple'][short]) {
   .#{$prefix}--date-picker__input {
     inline-size: convert.to-rem(90px);
   }
