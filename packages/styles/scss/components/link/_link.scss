@@ -37,7 +37,7 @@ $link-focus-text-color: custom-property.get-var(
     @include component-reset.reset;
     @include type.type-style('body-compact-01');
 
-    display: inline;
+    display: inline-flex;
     color: $link-text-color;
     outline: none;
     text-decoration: none;
@@ -112,6 +112,11 @@ $link-focus-text-color: custom-property.get-var(
   .#{$prefix}--link--lg,
   .#{$prefix}--link--lg.#{$prefix}--link--disabled:hover {
     @include type.type-style('body-compact-02');
+  }
+
+  // Paired with icon
+  .#{$prefix}--link--icon {
+    display: inline-block;
   }
 
   .#{$prefix}--link__icon {
