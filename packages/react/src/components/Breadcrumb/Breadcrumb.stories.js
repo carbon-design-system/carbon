@@ -28,7 +28,7 @@ export default {
 };
 
 const sharedArgs = {
-  noTrailingSlash: true,
+  noTrailingSlash: false,
   'aria-label': 'Breadcrumb container',
   size: 'md',
 };
