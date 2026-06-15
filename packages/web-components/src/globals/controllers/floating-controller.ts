@@ -186,8 +186,12 @@ export default class FloatingController implements ReactiveController {
 
         fallbackStrategy: 'initialPlacement',
         fallbackAxisSideDirection: 'start',
-        boundary: autoAlignBoundary,
         ...flipArguments,
+        // When autoAlignBoundary is undefined, set boundary to document.documentElement
+        boundary:
+          autoAlignBoundary !== undefined
+            ? autoAlignBoundary
+            : document.documentElement,
       }),
       ...(matchWidth && (shimmedAlign === 'bottom' || shimmedAlign === 'top')
         ? [

@@ -263,6 +263,7 @@ class CDSPopover extends HostListenerMixin(LitElement) {
 
   /**
    * This function resolves the string passed in for `autoAlignBoundary` to either:
+   * undefined (boundary defaults to viewport)
    * "clippingAncestors"
    * An element (found via #id)
    * An array of elements (found via #id1, #id2, #id3, separated by ",")
@@ -310,7 +311,7 @@ class CDSPopover extends HostListenerMixin(LitElement) {
     }
 
     // default fallback
-    return 'clippingAncestors';
+    return undefined;
   }
 
   updated(changedProperties) {
