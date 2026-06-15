@@ -147,8 +147,7 @@ $css--plex: true !default;
   }
 }
 
-:host(#{$prefix}-fluid-date-picker-input[kind='single']),
-:host(#{$prefix}-fluid-date-picker-input-skeleton[kind='single']) {
+:host(#{$prefix}-fluid-date-picker-input[kind='single']) {
   max-inline-size: convert.to-rem(288px);
 
   .#{$prefix}--date-picker__input {
