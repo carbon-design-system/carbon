@@ -406,7 +406,11 @@ $inset-transition: inset 110ms motion(standard, productive);
   }
 }
 
-:host(#{$prefix}-tab:hover:not([selected]):not([disabled]):not([vertical])) {
+:host(
+    #{$prefix}-tab:not([type='contained']):hover:not([selected]):not(
+        [disabled]
+      ):not([vertical])
+  ) {
   background-color: transparent;
 
   a.#{$prefix}--tabs__nav-link {
