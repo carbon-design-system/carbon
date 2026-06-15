@@ -2444,6 +2444,7 @@ Map {
         "size": {
           "args": [
             [
+              "xs",
               "sm",
               "lg",
             ],
@@ -2504,6 +2505,17 @@ Map {
           ],
           "type": "oneOfType",
         },
+        "size": {
+          "args": [
+            [
+              "xs",
+              "sm",
+              "md",
+              "lg",
+            ],
+          ],
+          "type": "oneOf",
+        },
       },
     },
     "TableToolbarSearch": {
@@ -2559,6 +2571,7 @@ Map {
         "size": {
           "args": [
             [
+              "xs",
               "sm",
               "md",
               "lg",
@@ -6015,6 +6028,46 @@ Map {
       },
     },
   },
+  "InlineCheckbox" => {
+    "$$typeof": Symbol(react.forward_ref),
+    "propTypes": {
+      "aria-label": {
+        "isRequired": true,
+        "type": "string",
+      },
+      "ariaLabel": [Function],
+      "checked": {
+        "type": "bool",
+      },
+      "disabled": {
+        "type": "bool",
+      },
+      "id": {
+        "isRequired": true,
+        "type": "string",
+      },
+      "indeterminate": {
+        "type": "bool",
+      },
+      "name": {
+        "isRequired": true,
+        "type": "string",
+      },
+      "onChange": {
+        "type": "func",
+      },
+      "onClick": {
+        "type": "func",
+      },
+      "onKeyDown": {
+        "type": "func",
+      },
+      "title": {
+        "type": "string",
+      },
+    },
+    "render": [Function],
+  },
   "InlineLoading" => {
     "propTypes": {
       "className": {
@@ -6677,7 +6730,12 @@ Map {
   "ModalBody" => {
     "$$typeof": Symbol(react.forward_ref),
     "propTypes": {
-      "aria-label": [Function],
+      "aria-label": {
+        "type": "string",
+      },
+      "aria-labelledby": {
+        "type": "string",
+      },
       "children": {
         "type": "node",
       },
@@ -9809,6 +9867,16 @@ Map {
       "scrollIntoView": {
         "type": "bool",
       },
+      "size": {
+        "args": [
+          [
+            "sm",
+            "md",
+            "lg",
+          ],
+        ],
+        "type": "oneOf",
+      },
     },
   },
   "TabListVertical" => {
@@ -10292,6 +10360,7 @@ Map {
       "size": {
         "args": [
           [
+            "xs",
             "sm",
             "lg",
           ],
@@ -10352,6 +10421,17 @@ Map {
         ],
         "type": "oneOfType",
       },
+      "size": {
+        "args": [
+          [
+            "xs",
+            "sm",
+            "md",
+            "lg",
+          ],
+        ],
+        "type": "oneOf",
+      },
     },
   },
   "TableToolbarSearch" => {
@@ -10407,6 +10487,7 @@ Map {
       "size": {
         "args": [
           [
+            "xs",
             "sm",
             "md",
             "lg",
