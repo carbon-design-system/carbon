@@ -592,6 +592,7 @@ $inset-transition: inset 110ms motion(standard, productive);
 :host(#{$prefix}-tab[vertical]) .#{$prefix}--tabs__nav-link {
   display: flex;
   align-items: center;
+  block-size: 100%;
   border-block-end: 1px solid $border-subtle;
 }
 
