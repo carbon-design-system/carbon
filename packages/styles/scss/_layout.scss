@@ -15,22 +15,10 @@
 @use './utilities/layout' as *;
 
 @each $group, $properties in $layout-tokens {
+  @include emit-layout-context-classes($group);
+
   @each $property, $steps in $properties {
     @each $step, $value in $steps {
-      .#{$prefix}--layout--#{$group}-#{$step} {
-        @include custom-property.declaration(
-          'layout-#{$group}-#{$property}-context',
-          custom-property.get-var(
-            'layout-#{$group}-#{$property}-#{$step}',
-            $value
-          )
-        );
-        @include custom-property.declaration(
-          'layout-#{$group}-#{$property}',
-          custom-property.get-var('layout-#{$group}-#{$property}-context')
-        );
-      }
-
       .#{$prefix}--layout-constraint--#{$group}__default-#{$step} {
         @include custom-property.declaration(
           'layout-#{$group}-#{$property}',

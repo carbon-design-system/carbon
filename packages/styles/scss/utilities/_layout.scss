@@ -134,6 +134,33 @@ $layout-tokens: (
   @return -group('density', $property);
 }
 
+/// Emits layout context class rules for a layout group.
+@mixin emit-layout-context-classes($group: size) {
+  $properties: map.get($layout-tokens, $group);
+
+  @if not $properties {
+    @error 'Unknown layout group: #{$group}';
+  }
+
+  @each $property, $steps in $properties {
+    @each $step, $value in $steps {
+      .#{config.$prefix}--layout--#{$group}-#{$step} {
+        @include custom-property.declaration(
+          'layout-#{$group}-#{$property}-context',
+          custom-property.get-var(
+            'layout-#{$group}-#{$property}-#{$step}',
+            $value
+          )
+        );
+        @include custom-property.declaration(
+          'layout-#{$group}-#{$property}',
+          custom-property.get-var('layout-#{$group}-#{$property}-context')
+        );
+      }
+    }
+  }
+}
+
 @mixin emit-layout-tokens {
   @each $group, $properties in $layout-tokens {
     @each $property, $steps in $properties {

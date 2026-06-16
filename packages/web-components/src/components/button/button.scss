@@ -18,6 +18,7 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/motion' as *;
 @use '@carbon/styles/scss/components/button/tokens' as button-tokens;
 
+@include emit-layout-context-classes();
 @include code-snippet;
 
 :host(#{$prefix}-button),

@@ -12,6 +12,8 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/utilities/layout' as *;
 @use '@carbon/styles/scss/theme' as *;
 
+@include emit-layout-context-classes();
+
 :host(#{$prefix}-pagination-nav) {
   @extend .#{$prefix}--pagination-nav;
   @include emit-layout-tokens();

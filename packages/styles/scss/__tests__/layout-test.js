@@ -22,6 +22,7 @@ describe('@carbon/styles/scss/layout', () => {
 
       $_: get('api', (
         mixins: (
+          emit-layout-context-classes: meta.mixin-exists('emit-layout-context-classes', 'layout'),
           emit-layout-tokens: meta.mixin-exists('emit-layout-tokens', 'layout'),
           emit-layout-tokens-to-shadow-host: meta.mixin-exists('emit-layout-tokens-to-shadow-host', 'layout'),
         ),
@@ -31,6 +32,7 @@ describe('@carbon/styles/scss/layout', () => {
     const { value: api } = get('api');
     expect(api).toEqual({
       mixins: {
+        'emit-layout-context-classes': true,
         'emit-layout-tokens': true,
         'emit-layout-tokens-to-shadow-host': true,
       },
@@ -217,6 +219,7 @@ describe('@carbon/styles/scss/utilities/layout', () => {
           density: meta.function-exists('density', 'layout'),
         ),
         mixins: (
+          emit-layout-context-classes: meta.mixin-exists('emit-layout-context-classes', 'layout'),
           emit-layout-tokens: meta.mixin-exists('emit-layout-tokens', 'layout'),
           emit-layout-tokens-to-shadow-host: meta.mixin-exists('emit-layout-tokens-to-shadow-host', 'layout'),
           redefine-tokens: meta.mixin-exists('redefine-tokens', 'layout'),
@@ -232,6 +235,7 @@ describe('@carbon/styles/scss/utilities/layout', () => {
         density: true,
       },
       mixins: {
+        'emit-layout-context-classes': true,
         'emit-layout-tokens': true,
         'emit-layout-tokens-to-shadow-host': true,
         'redefine-tokens': true,
@@ -248,6 +252,21 @@ describe('@carbon/styles/scss/utilities/layout', () => {
     const output = result.css.toString();
     expect(output).not.toContain(':root');
     expect(output).not.toContain('.cds--layout--size-sm');
+    expect(output).not.toContain('.cds--layout-constraint--size__default-md');
+  });
+
+  test('emit-layout-context-classes emits only context classes', async () => {
+    const { result } = await render(`
+      @use '../utilities/layout';
+
+      @include layout.emit-layout-context-classes();
+    `);
+
+    const output = result.css.toString();
+    expect(output).toContain('.cds--layout--size-sm');
+    expect(output).toContain('--cds-layout-size-height-context');
+    expect(output).not.toContain(':root');
+    expect(output).not.toContain('.cds--layout--density-normal');
     expect(output).not.toContain('.cds--layout-constraint--size__default-md');
   });
 
