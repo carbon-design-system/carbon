@@ -501,13 +501,6 @@ export const MultiSelect = React.forwardRef(
           if (match(e, keys.Enter) && isOpen) {
             setInputFocused(true);
           }
-          if (match(e, keys.Tab) && isOpen) {
-            setInputFocused(true);
-            // Refocus the toggle button after dropdown closes on Tab
-            setTimeout(() => {
-              toggleButtonRef.current?.focus();
-            }, 0);
-          }
         }
       },
     });
