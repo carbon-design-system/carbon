@@ -279,8 +279,8 @@ the ask. Checkout the flow chart to see the path a given feature might take.
 flowchart TD
     A[Received] --> B[Does it align with the maintainer team's <br />guiding principles for building a design system at IBM?]
     B -->|No| C[Closed]
-    B -->|Yes| D[Is it supporting a PAL in the DSAG?]
-    D -->|No| E[Is it suporting a PAL not in the DSAG?]
+    B -->|Yes| D[Is it supporting a PAL part of the Carbon Collective?]
+    D -->|No| E[Is it suporting a PAL not part of Carbon Collective?]
     E -->|No| F[Is it supporting an IBM product without a PAL?]
     F -->|No| G[Is it supporting a non-IBM offering that uses Carbon?]
     G -->|No| C[Closed]
@@ -294,7 +294,7 @@ flowchart TD
     J & K & L -->|Yes| M([Your request has been labeled as an `accepted` <br />proposal and has been added to our Icebox and is <br />being prioritized against competing workstreams])
     M --> N([Labeled with `Community Contribution` <br /> on GH. Looking for contributions])
     M --> O([Added to maintainer team's roadmap <br /> and backlog for refinement])
-    N & O --> storm((Design Crits, Code Reviews,<br /> CAG, DSAG meetings, <br /> Office hours when needed))
+    N & O --> storm((Design Crits, Code Reviews,<br /> CAG, Carbon Collective meetings, <br /> Office hours when needed))
     storm --> ide1
     subgraph ide1 [Evaluate against a definition of done]
     P[Storybook]
@@ -318,7 +318,7 @@ flowchart TD
 Guiding principles -
 https://carbondesignsystem.com/all-about-carbon/what-is-carbon/#our-guiding-principles
 
-DSAG - The Design System Adoption Guild is an expansive group of designers and
+Carbon Collective - Formerly the Design System Adoption Guild (DSAG) is an expansive group of designers and
 developers all aligned on the mission of delivering amazing experiences in the
 IBM Products organization. You can learn more about the guild
 [here](https://pages.github.ibm.com/cdai-design/pal/contributing/contribution-framework/intent).
