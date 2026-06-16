@@ -429,8 +429,6 @@ export const MultiSelect = React.forwardRef(
       locale,
     };
 
-    const toggleButtonRef = useRef<HTMLButtonElement>(null);
-
     const selectProps: UseSelectProps<ItemType> = {
       stateReducer,
       isOpen,
@@ -510,6 +508,7 @@ export const MultiSelect = React.forwardRef(
       },
     });
 
+    const toggleButtonRef = useRef<HTMLButtonElement>(null);
     const mergedRef = mergeRefs<HTMLButtonElement>(
       toggleButtonProps.ref,
       ref,
