@@ -712,6 +712,7 @@ export const MultiSelect = React.forwardRef(
         getMenuProps({
           ref: enableFloatingStyles ? refs.setFloating : null,
           hidden: !isOpen,
+          tabIndex: -1, // Prevent menu from being in tab order
         }),
       [enableFloatingStyles, getMenuProps, isOpen, refs.setFloating]
     );
