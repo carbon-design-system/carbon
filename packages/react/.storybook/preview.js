@@ -18,7 +18,7 @@ import './styles.scss';
 import '../src/feature-flags';
 
 import { white, g10, g90, g100 } from '@carbon/themes';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import useIsomorphicEffect from '../src/internal/useIsomorphicEffect';
 import { breakpoints } from '@carbon/layout';
 import { GlobalTheme } from '../src/components/Theme';
@@ -121,16 +121,6 @@ const globalTypes = {
           value: 'rtl',
         },
       ],
-    },
-  },
-  theme: {
-    name: 'Theme',
-    description: 'Set the global theme for displaying components',
-    defaultValue: 'white',
-    toolbar: {
-      icon: 'paintbrush',
-      title: 'Theme',
-      items: ['white', 'g10', 'g90', 'g100'],
     },
   },
   ...(process.env.NODE_ENV === 'development' ? devTools : {}),
@@ -339,10 +329,35 @@ const parameters = {
   },
 };
 
+// Helper function to map background values to theme names
+function getThemeFromBackground(backgroundValue) {
+  // Handle both hex values and named values
+  if (backgroundValue === white.background || backgroundValue === 'white') {
+    return 'white';
+  } else if (backgroundValue === g10.background || backgroundValue === 'g10') {
+    return 'g10';
+  } else if (backgroundValue === g90.background || backgroundValue === 'g90') {
+    return 'g90';
+  } else if (
+    backgroundValue === g100.background ||
+    backgroundValue === 'g100'
+  ) {
+    return 'g100';
+  }
+  return 'white'; // default theme
+}
+
 const decorators = [
   (Story, context) => {
-    const { layoutDensity, layoutSize, locale, dir, theme } = context.globals;
+    const { layoutDensity, layoutSize, locale, dir } = context.globals;
+    const backgroundValue = context.globals.backgrounds?.value;
     const [randomKey, setRandomKey] = useState(1);
+
+    // Memoize theme calculation to avoid redundant calls
+    const theme = useMemo(
+      () => getThemeFromBackground(backgroundValue),
+      [backgroundValue]
+    );
 
     useEffect(() => {
       document.documentElement.setAttribute('data-carbon-theme', theme);
