@@ -1177,4 +1177,170 @@ describe('TabListVertical', () => {
 
     expect(container.firstChild).toHaveAttribute('style', 'height: 100px;');
   });
+
+  it('should apply size sm class when size prop is sm', () => {
+    const { container } = render(
+      <TabsVertical>
+        <TabListVertical aria-label="List of tabs" size="sm">
+          <Tab>Tab Label 1</Tab>
+          <Tab>Tab Label 2</Tab>
+          <Tab>Tab Label 3</Tab>
+        </TabListVertical>
+        <TabPanels>
+          <TabPanel>Tab Panel 1</TabPanel>
+          <TabPanel>Tab Panel 2</TabPanel>
+          <TabPanel>Tab Panel 3</TabPanel>
+        </TabPanels>
+      </TabsVertical>
+    );
+
+    expect(container.querySelector(`.${prefix}--tabs`)).toHaveClass(
+      `${prefix}--layout--size-sm`
+    );
+  });
+
+  it('should apply size md class when size prop is md', () => {
+    const { container } = render(
+      <TabsVertical>
+        <TabListVertical aria-label="List of tabs" size="md">
+          <Tab>Tab Label 1</Tab>
+          <Tab>Tab Label 2</Tab>
+          <Tab>Tab Label 3</Tab>
+        </TabListVertical>
+        <TabPanels>
+          <TabPanel>Tab Panel 1</TabPanel>
+          <TabPanel>Tab Panel 2</TabPanel>
+          <TabPanel>Tab Panel 3</TabPanel>
+        </TabPanels>
+      </TabsVertical>
+    );
+
+    expect(container.querySelector(`.${prefix}--tabs`)).toHaveClass(
+      `${prefix}--layout--size-md`
+    );
+  });
+
+  it('should apply size lg class when size prop is lg', () => {
+    const { container } = render(
+      <TabsVertical>
+        <TabListVertical aria-label="List of tabs" size="lg">
+          <Tab>Tab Label 1</Tab>
+          <Tab>Tab Label 2</Tab>
+          <Tab>Tab Label 3</Tab>
+        </TabListVertical>
+        <TabPanels>
+          <TabPanel>Tab Panel 1</TabPanel>
+          <TabPanel>Tab Panel 2</TabPanel>
+          <TabPanel>Tab Panel 3</TabPanel>
+        </TabPanels>
+      </TabsVertical>
+    );
+
+    expect(container.querySelector(`.${prefix}--tabs`)).toHaveClass(
+      `${prefix}--layout--size-lg`
+    );
+  });
+
+  it('should apply size xl class when size prop is xl', () => {
+    const { container } = render(
+      <TabsVertical>
+        <TabListVertical aria-label="List of tabs" size="xl">
+          <Tab>Tab Label 1</Tab>
+          <Tab>Tab Label 2</Tab>
+          <Tab>Tab Label 3</Tab>
+        </TabListVertical>
+        <TabPanels>
+          <TabPanel>Tab Panel 1</TabPanel>
+          <TabPanel>Tab Panel 2</TabPanel>
+          <TabPanel>Tab Panel 3</TabPanel>
+        </TabPanels>
+      </TabsVertical>
+    );
+
+    expect(container.querySelector(`.${prefix}--tabs`)).toHaveClass(
+      `${prefix}--layout--size-xl`
+    );
+  });
+
+  it('should not apply size class when size prop is not provided', () => {
+    const { container } = render(
+      <TabsVertical>
+        <TabListVertical aria-label="List of tabs">
+          <Tab>Tab Label 1</Tab>
+          <Tab>Tab Label 2</Tab>
+          <Tab>Tab Label 3</Tab>
+        </TabListVertical>
+        <TabPanels>
+          <TabPanel>Tab Panel 1</TabPanel>
+          <TabPanel>Tab Panel 2</TabPanel>
+          <TabPanel>Tab Panel 3</TabPanel>
+        </TabPanels>
+      </TabsVertical>
+    );
+
+    expect(container.querySelector(`.${prefix}--tabs`)).not.toHaveClass(
+      `${prefix}--layout--size-sm`
+    );
+    expect(container.querySelector(`.${prefix}--tabs`)).not.toHaveClass(
+      `${prefix}--layout--size-md`
+    );
+    expect(container.querySelector(`.${prefix}--tabs`)).not.toHaveClass(
+      `${prefix}--layout--size-lg`
+    );
+    expect(container.querySelector(`.${prefix}--tabs`)).not.toHaveClass(
+      `${prefix}--layout--size-xl`
+    );
+  });
+
+  it('should inherit size from parent layout context when no size prop is provided', () => {
+    const { container } = render(
+      <div className={`${prefix}--layout ${prefix}--layout--size-lg`}>
+        <TabsVertical>
+          <TabListVertical aria-label="List of tabs">
+            <Tab>Tab Label 1</Tab>
+            <Tab>Tab Label 2</Tab>
+            <Tab>Tab Label 3</Tab>
+          </TabListVertical>
+          <TabPanels>
+            <TabPanel>Tab Panel 1</TabPanel>
+            <TabPanel>Tab Panel 2</TabPanel>
+            <TabPanel>Tab Panel 3</TabPanel>
+          </TabPanels>
+        </TabsVertical>
+      </div>
+    );
+
+    expect(container.querySelector(`.${prefix}--layout`)).toHaveClass(
+      `${prefix}--layout--size-lg`
+    );
+    expect(container.querySelector(`.${prefix}--tabs`)).not.toHaveClass(
+      `${prefix}--layout--size-lg`
+    );
+  });
+
+  it('should override parent layout context when size prop is provided', () => {
+    const { container } = render(
+      <div className={`${prefix}--layout ${prefix}--layout--size-lg`}>
+        <TabsVertical>
+          <TabListVertical aria-label="List of tabs" size="sm">
+            <Tab>Tab Label 1</Tab>
+            <Tab>Tab Label 2</Tab>
+            <Tab>Tab Label 3</Tab>
+          </TabListVertical>
+          <TabPanels>
+            <TabPanel>Tab Panel 1</TabPanel>
+            <TabPanel>Tab Panel 2</TabPanel>
+            <TabPanel>Tab Panel 3</TabPanel>
+          </TabPanels>
+        </TabsVertical>
+      </div>
+    );
+
+    expect(container.querySelector(`.${prefix}--layout`)).toHaveClass(
+      `${prefix}--layout--size-lg`
+    );
+    expect(container.querySelector(`.${prefix}--tabs`)).toHaveClass(
+      `${prefix}--layout--size-sm`
+    );
+  });
 });
