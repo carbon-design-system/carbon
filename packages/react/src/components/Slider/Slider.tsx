@@ -127,11 +127,10 @@ const calcRawLeftPercent = ({
   return clamp((value - min) / range, 0, 1);
 };
 
-// TODO: Assuming a 16ms throttle corresponds to 60 FPS, should it be halved,
-// since many systems can handle 120 FPS? If it doesn't correspond to 60 FPS,
-// what does it correspond to?
 /**
  * Minimum time between processed "drag" events in milliseconds.
+ *
+ * A value of `16` limits updates to at most ~60 per second.
  */
 const EVENT_THROTTLE = 16;
 
@@ -320,21 +319,14 @@ export interface SliderProps
   unstable_valueUpper?: number;
 
   /**
-   * Specify whether the control is currently in warning state
+   * Specify whether the Slider is in a warning state.
    */
   warn?: boolean;
 
-  // TODO: This JSDoc comment isn't accurate. Evaluate all others.
   /**
-   * Provide the text that is displayed when the control is in warning state
+   * Provide the text displayed when the Slider is in a warning state.
    */
   warnText?: ReactNode;
-}
-
-// TODO: Delete this type and directory type the properties in the function.
-interface CalcLeftPercentProps {
-  clientX?: number;
-  value?: number;
 }
 
 type State = {
@@ -424,6 +416,8 @@ const Slider = (props: SliderProps) => {
 
   const twoHandles = hasUpperValue(state.valueUpper);
 
+  const getOwnerDocument = () => elementRef.current?.ownerDocument;
+
   /**
    * Sets up initial slider position and value in response to component mount.
    */
@@ -450,18 +444,14 @@ const Slider = (props: SliderProps) => {
     }
 
     return () => {
-      DRAG_STOP_EVENT_TYPES.forEach((element) =>
-        elementRef.current?.ownerDocument.removeEventListener(
-          element,
-          onDragStop
-        )
+      const ownerDocument = getOwnerDocument();
+
+      DRAG_STOP_EVENT_TYPES.forEach((type) =>
+        ownerDocument?.removeEventListener(type, onDragStop)
       );
 
-      DRAG_EVENT_TYPES.forEach((element) =>
-        elementRef.current?.ownerDocument.removeEventListener(
-          element,
-          handleDrag
-        )
+      DRAG_EVENT_TYPES.forEach((type) =>
+        ownerDocument?.removeEventListener(type, handleDrag)
       );
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -614,17 +604,16 @@ const Slider = (props: SliderProps) => {
     // @see https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/focus#notes
     evt.preventDefault();
 
-    // TODO: Abstract `elementRef.current?.ownerDocument` to a variable that can
-    // be used here and everywhere else in this file.
+    const ownerDocument = getOwnerDocument();
 
     // Add drag stop handlers
-    DRAG_STOP_EVENT_TYPES.forEach((element) => {
-      elementRef.current?.ownerDocument.addEventListener(element, onDragStop);
+    DRAG_STOP_EVENT_TYPES.forEach((type) => {
+      ownerDocument?.addEventListener(type, onDragStop);
     });
 
     // Add drag handlers
-    DRAG_EVENT_TYPES.forEach((element) => {
-      elementRef.current?.ownerDocument.addEventListener(element, handleDrag);
+    DRAG_EVENT_TYPES.forEach((type) => {
+      ownerDocument?.addEventListener(type, handleDrag);
     });
 
     const clientX = getClientXFromEvent(evt.nativeEvent);
@@ -685,21 +674,16 @@ const Slider = (props: SliderProps) => {
       return;
     }
 
-    // TODO: Rename parameters in `DRAG_*` loops to `type`.
     // Remove drag stop handlers
-    DRAG_STOP_EVENT_TYPES.forEach((element) => {
-      elementRef.current?.ownerDocument.removeEventListener(
-        element,
-        onDragStop
-      );
+    const ownerDocument = getOwnerDocument();
+
+    DRAG_STOP_EVENT_TYPES.forEach((type) => {
+      ownerDocument?.removeEventListener(type, onDragStop);
     });
 
     // Remove drag handlers
-    DRAG_EVENT_TYPES.forEach((element) => {
-      elementRef.current?.ownerDocument.removeEventListener(
-        element,
-        handleDrag
-      );
+    DRAG_EVENT_TYPES.forEach((type) => {
+      ownerDocument?.removeEventListener(type, handleDrag);
     });
 
     // Set needsOnRelease flag so event fires on next update.
@@ -728,7 +712,7 @@ const Slider = (props: SliderProps) => {
    * @param activeHandle The first drag event call, we may have an explicit
    * activeHandle value, which is to be used before state is used.
    */
-  const _onDragRef =
+  const onDragRef =
     useRef<
       (
         evt: globalThis.MouseEvent | globalThis.TouchEvent,
@@ -736,7 +720,7 @@ const Slider = (props: SliderProps) => {
       ) => void
     >(null);
 
-  _onDragRef.current = (evt, activeHandle) => {
+  onDragRef.current = (evt, activeHandle) => {
     activeHandle = activeHandle ?? stateRef.current.activeHandle;
     // Do nothing if component is disabled or read-only.
     if (disabled || readOnly) {
@@ -769,8 +753,8 @@ const Slider = (props: SliderProps) => {
   };
 
   /**
-   * Throttles calls to `_onDrag` by limiting events to being processed at
-   * most once every `EVENT_THROTTLE` milliseconds.
+   * Throttles drag event handling to at most once every `EVENT_THROTTLE`
+   * milliseconds.
    */
   const onDrag = useMemo(
     () =>
@@ -779,7 +763,7 @@ const Slider = (props: SliderProps) => {
           evt: globalThis.MouseEvent | globalThis.TouchEvent,
           activeHandle?: HandlePosition
         ) => {
-          _onDragRef.current?.(evt, activeHandle);
+          onDragRef.current?.(evt, activeHandle);
         },
         EVENT_THROTTLE,
         { leading: true, trailing: false }
@@ -949,11 +933,7 @@ const Slider = (props: SliderProps) => {
             min,
             max,
           })
-        : getAdjustedValue({
-            value: targetValue,
-            min,
-            max,
-          });
+        : clamp(targetValue, min, max);
 
       if (adjustedValue !== targetValue) {
         setState({
@@ -983,9 +963,14 @@ const Slider = (props: SliderProps) => {
     }
   };
 
-  const calcLeftPercent = ({ clientX, value }: CalcLeftPercentProps) => {
-    // TODO: Delete the optional chaining operator after `getBoundingClientRect`.
-    const boundingRect = elementRef.current?.getBoundingClientRect?.();
+  const calcLeftPercent = ({
+    clientX,
+    value,
+  }: {
+    clientX?: number;
+    value?: number;
+  }) => {
+    const boundingRect = elementRef.current?.getBoundingClientRect();
     let width = boundingRect ? boundingRect.right - boundingRect.left : 0;
     const nextValue = value ?? min;
 
@@ -1089,8 +1074,7 @@ const Slider = (props: SliderProps) => {
     const base =
       delta > 0 ? Math.round(currentValue / step) * step : currentValue;
     const newValue = base + delta;
-    // TODO: Why is the logical OR needed here?
-    const decimals = (step.toString().split('.')[1] || '').length;
+    const decimals = (step.toString().split('.')[1] ?? '').length;
 
     return Number(newValue.toFixed(decimals));
   };
@@ -1194,35 +1178,17 @@ const Slider = (props: SliderProps) => {
     max: number;
   }) => {
     const { value, valueUpper } = state;
-    let newValue = getAdjustedValue({ value: newValueInput, min, max });
+    const nextValue = clamp(newValueInput, min, max);
 
-    // TODO: Just return the value.
-    // Next adjust to the opposite handle.
-    if (handle === HandlePosition.LOWER && valueUpper) {
-      newValue = newValue > valueUpper ? valueUpper : newValue;
-    } else if (handle === HandlePosition.UPPER && value) {
-      newValue = newValue < value ? value : newValue;
+    if (handle === HandlePosition.LOWER && hasUpperValue(valueUpper)) {
+      return Math.min(nextValue, valueUpper);
     }
-    return newValue;
-  };
 
-  const getAdjustedValue = ({
-    value,
-    min,
-    max,
-  }: {
-    value: number;
-    min: number;
-    max: number;
-  }) => {
-    // TODO: Just return the value.
-    if (value < min) {
-      value = min;
+    if (handle === HandlePosition.UPPER) {
+      return Math.max(nextValue, value);
     }
-    if (value > max) {
-      value = max;
-    }
-    return value;
+
+    return nextValue;
   };
 
   /**
@@ -1817,12 +1783,12 @@ Slider.propTypes = {
   value: PropTypes.number.isRequired,
 
   /**
-   * `Specify whether the Slider is in a warn state
+   * Specify whether the Slider is in a warning state.
    */
   warn: PropTypes.bool,
 
   /**
-   * Provide the text that is displayed when the Slider is in a warn state
+   * Provide the text displayed when the Slider is in a warning state.
    */
   warnText: PropTypes.node,
 };
