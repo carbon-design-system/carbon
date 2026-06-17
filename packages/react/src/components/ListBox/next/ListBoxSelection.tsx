@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2025
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -94,7 +94,7 @@ function ListBoxSelection({
   ...rest
 }: ListBoxSelectionProps) {
   const prefix = usePrefix();
-  const hasSelectionCount = typeof selectionCount !== 'undefined';
+  const hasSelectionCount = (selectionCount ?? 0) > 0;
   const hasMultipleSelections = (selectionCount ?? 0) > 1;
   const className = cx(`${prefix}--list-box__selection`, {
     [`${prefix}--tag--filter`]: hasSelectionCount,

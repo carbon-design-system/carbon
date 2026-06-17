@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -54,6 +54,19 @@ describe('ListBoxSelection', () => {
     );
     expect(screen.getByLabelText('test-clear-selection')).toBeInTheDocument();
     expect(screen.getByText('1')).toBeInTheDocument();
+  });
+
+  it('should render a clear button without a count chip if `selectionCount` is 0', () => {
+    render(
+      <ListBox.Selection
+        selectionCount={0}
+        clearSelection={jest.fn()}
+        translateWithId={translateWithId}
+      />
+    );
+
+    expect(screen.getByLabelText('test-clear-selection')).toBeInTheDocument();
+    expect(screen.queryByText('0')).not.toBeInTheDocument();
   });
 
   it('should call `clearSelection` when the clear button is clicked', async () => {
