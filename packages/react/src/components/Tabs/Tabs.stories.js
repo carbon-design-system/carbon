@@ -744,9 +744,10 @@ export const ContainedFullWidth = (args) => {
 };
 
 export const Vertical = (args) => {
+  const { size, ...tabsVerticalArgs } = args;
   return (
-    <TabsVertical {...args}>
-      <TabListVertical>
+    <TabsVertical {...tabsVerticalArgs}>
+      <TabListVertical size={size}>
         <Tab>Dashboard</Tab>
         <Tab>
           Extra long label that will go two lines then truncate when it goes
@@ -806,6 +807,7 @@ export const Vertical = (args) => {
 
 Vertical.args = {
   height: '',
+  size: 'xl',
 };
 
 Vertical.argTypes = {
@@ -813,6 +815,11 @@ Vertical.argTypes = {
     control: {
       type: 'text',
     },
+  },
+  size: {
+    control: { type: 'select' },
+    options: ['sm', 'md', 'lg', 'xl'],
+    description: 'Specify the size of the vertical tabs',
   },
 };
 
