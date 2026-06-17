@@ -58,6 +58,14 @@ const argTypes = {
   },
 };
 
+const lineTabsSizeArgType = {
+  size: {
+    control: { type: 'select' },
+    options: ['sm', 'md'],
+    description: 'Specify the size of the tabs',
+  },
+};
+
 const tabsSizeArgType = {
   size: {
     control: { type: 'select' },
@@ -91,7 +99,7 @@ export const Default = {
   args,
   argTypes: {
     ...argTypes,
-    ...tabsSizeArgType,
+    ...lineTabsSizeArgType,
   },
   render: ({ disabled, contained, selectionMode, size }) => {
     const handleBeforeSelected = (event: CustomEvent) => {
@@ -679,7 +687,7 @@ export const Dismissable = {
       description:
         'Specify a selected index for the initially selected content.',
     },
-    ...tabsSizeArgType,
+    ...lineTabsSizeArgType,
   },
   render: ({ dismissable, selectedIndex, size }) => {
     return html`
@@ -744,7 +752,7 @@ export const DismissableWithIcons = {
       description:
         'Specify a selected index for the initially selected content.',
     },
-    ...tabsSizeArgType,
+    ...lineTabsSizeArgType,
   },
   render: ({ dismissable, selectedIndex, size }) => {
     return html`
@@ -847,7 +855,7 @@ export const IconOnly = {
   },
   argTypes: {
     ...iconStoriesArgTypes,
-    ...tabsSizeArgType,
+    ...lineTabsSizeArgType,
   },
   render: ({ badgeIndicator, size }) => html`
     <style>
@@ -1199,7 +1207,7 @@ export const Vertical = {
 
 export const WithIcons = {
   args: lineTabsSizeArgs,
-  argTypes: tabsSizeArgType,
+  argTypes: lineTabsSizeArgType,
   render: ({ size }) => {
     return html`
       <style>
@@ -1208,8 +1216,7 @@ export const WithIcons = {
       <cds-tabs
         selection-mode="manual"
         value="icon-tab-1"
-        size="${ifDefined(size)}"
-        icon-size="${TABS_ICON_SIZE.DEFAULT}">
+        size="${ifDefined(size)}">
         <cds-tab id="icon-tab-1" target="icon-panel-1" value="icon-tab-1">
           Dashboard ${iconLoader(Dashboard16)}
         </cds-tab>
