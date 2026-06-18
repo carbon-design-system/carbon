@@ -280,7 +280,7 @@ flowchart TD
     A[Received] --> B[Does it align with the maintainer team's <br />guiding principles for building a design system at IBM?]
     B -->|No| C[Closed]
     B -->|Yes| D[Is it supporting a PAL part of the Carbon Collective?]
-    D -->|No| E[Is it suporting a PAL not part of Carbon Collective?]
+    D -->|No| E[Is it supporting a PAL not part of Carbon Collective?]
     E -->|No| F[Is it supporting an IBM product without a PAL?]
     F -->|No| G[Is it supporting a non-IBM offering that uses Carbon?]
     G -->|No| C[Closed]
