@@ -96,7 +96,21 @@ describe('ModalFooter', () => {
     );
 
     expect(screen.getByText('Submit')).toHaveClass('cds--btn--danger');
-    expect(screen.getByText('danger', { hidden: true })).toBeInTheDocument();
+    expect(screen.getByText('Submit')).not.toHaveAttribute('aria-describedby');
+  });
+
+  it('should allow a localized danger description for the primary button', () => {
+    render(
+      <ModalFooter
+        secondaryButtonText="Cancel"
+        primaryButtonText="Submit"
+        danger
+        dangerDescription="gefahr"
+      />
+    );
+
+    expect(screen.getByText('Submit')).toHaveAttribute('aria-describedby');
+    expect(screen.getByText('gefahr', { hidden: true })).toBeInTheDocument();
   });
 
   it('should call onRequestClose when close requested', async () => {
