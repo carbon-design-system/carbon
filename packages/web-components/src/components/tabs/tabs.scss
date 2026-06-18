@@ -91,7 +91,8 @@ $inset-transition: inset 110ms motion(standard, productive);
   @extend .#{$prefix}--layout--size-md;
 }
 
-:host(#{$prefix}-tabs[size='lg']) {
+:host(#{$prefix}-tabs[type='contained'][size='lg']),
+:host(#{$prefix}-tabs[vertical][size='lg']) {
   @extend .#{$prefix}--layout--size-lg;
 }
 
