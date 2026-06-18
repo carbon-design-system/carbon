@@ -1658,15 +1658,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@carbon/actions-add-review-labels@workspace:actions/add-review-labels":
-  version: 0.0.0-use.local
-  resolution: "@carbon/actions-add-review-labels@workspace:actions/add-review-labels"
-  dependencies:
-    "@actions/core": "npm:^1.11.1"
-    "@actions/github": "npm:6.0.1"
-  languageName: unknown
-  linkType: soft
-
 "@carbon/actions-issues@workspace:actions/issues":
   version: 0.0.0-use.local
   resolution: "@carbon/actions-issues@workspace:actions/issues"
