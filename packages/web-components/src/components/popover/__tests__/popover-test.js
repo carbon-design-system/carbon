@@ -605,3 +605,26 @@ describe('cds-popover focusout/outsideclick', () => {
     expect(el.hasAttribute('open')).to.be.false;
   });
 });
+
+describe('cds-popover autoAlignBoundary', () => {
+  it('should use viewport as default boundary when autoAlignBoundary is not defined', async () => {
+    const el = await fixture(html`
+      <div
+        style="position: relative; width: 200px; height: 200px; overflow: hidden;">
+        <cds-popover open autoalign id="test-popover">
+          <button type="button">Test</button>
+          <cds-popover-content></cds-popover-content>
+        </cds-popover>
+      </div>
+    `);
+
+    await el.updateComplete;
+    const popover = el.querySelector('#test-popover');
+    await popover.updateComplete;
+
+    // Access the private _resolveAutoAlignBoundary method to verify it returns document.documentElement
+    // When autoAlignBoundary is not set, the viewport (document.documentElement) should be used as the boundary
+    const resolvedBoundary = popover._resolveAutoAlignBoundary();
+    expect(resolvedBoundary).to.equal(document.documentElement);
+  });
+});

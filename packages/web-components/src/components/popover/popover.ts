@@ -263,17 +263,17 @@ class CDSPopover extends HostListenerMixin(LitElement) {
 
   /**
    * This function resolves the string passed in for `autoAlignBoundary` to either:
-   * undefined (boundary defaults to viewport)
+   * document.documentElement (viewport - the default)
    * "clippingAncestors"
    * An element (found via #id)
    * An array of elements (found via #id1, #id2, #id3, separated by ",")
    * A rect, input format should be 'rect(x,y,width,height)'
    */
-  private _resolveAutoAlignBoundary(): Boundary | undefined {
+  private _resolveAutoAlignBoundary(): Boundary {
     const raw = (this.autoAlignBoundary ?? '').trim();
 
-    // Default to undefined
-    if (!raw) return undefined;
+    // Default to viewport (document.documentElement)
+    if (!raw) return document.documentElement;
     if (raw === 'clippingAncestors') return 'clippingAncestors';
 
     // regex match for: rect(x,y,width,height)
@@ -311,7 +311,7 @@ class CDSPopover extends HostListenerMixin(LitElement) {
     }
 
     // default fallback
-    return undefined;
+    return 'clippingAncestors';
   }
 
   updated(changedProperties) {
