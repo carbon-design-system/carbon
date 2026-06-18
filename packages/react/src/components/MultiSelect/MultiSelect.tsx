@@ -499,10 +499,8 @@ export const MultiSelect = React.forwardRef(
           if (match(e, keys.Enter) && isOpen) {
             setInputFocused(true);
           }
-          // Handle Tab key to close menu and allow natural tab order
           if (match(e, keys.Tab) && isOpen) {
             setIsOpenWrapper(false);
-            // Don't prevent default - let Tab move focus naturally
           }
         }
       },
