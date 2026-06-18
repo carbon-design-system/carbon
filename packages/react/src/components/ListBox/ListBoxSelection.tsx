@@ -56,10 +56,8 @@ const translationIds = {
 
 type TranslationKey = keyof typeof translationIds;
 
-// TODO: Should these translations be more consistent? For example, should
-// `clear.all` be "Clear selected items" instead of "Clear all selected items"?
 const defaultTranslations: Record<TranslationKey, string> = {
-  [translationIds['clear.all']]: 'Clear all selected items',
+  [translationIds['clear.all']]: 'Clear selected items',
   [translationIds['clear.selection']]: 'Clear selected item',
 };
 

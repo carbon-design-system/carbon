@@ -370,7 +370,7 @@ describe('FilterableMultiSelect', () => {
     await waitForPosition();
 
     expect(
-      screen.getAllByRole('button', { name: 'Clear all selected items' })
+      screen.getAllByRole('button', { name: 'Clear selected items' })
     ).toHaveLength(1);
     expect(screen.getByText('2')).toBeInTheDocument();
   });
@@ -446,7 +446,7 @@ describe('FilterableMultiSelect', () => {
     await waitForPosition();
 
     await userEvent.click(
-      screen.getByRole('button', { name: 'Clear all selected items' })
+      screen.getByRole('button', { name: 'Clear selected items' })
     );
 
     expect(mockProps.onChange).toHaveBeenCalledWith({ selectedItems: [] });
@@ -900,7 +900,7 @@ describe('FilterableMultiSelect', () => {
 
     // Remove all selected items
     const clearButton = screen.getByRole('button', {
-      name: 'Clear all selected items',
+      name: 'Clear selected items',
     });
     await user.click(clearButton);
 

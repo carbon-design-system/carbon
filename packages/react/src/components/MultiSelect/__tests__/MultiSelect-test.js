@@ -484,7 +484,7 @@ describe('MultiSelect', () => {
 
       expect(
         // eslint-disable-next-line testing-library/no-node-access
-        document.querySelector('[aria-label="Clear all selected items"]')
+        document.querySelector('[aria-label="Clear selected items"]')
       ).toBeTruthy();
 
       // eslint-disable-next-line testing-library/prefer-screen-queries
