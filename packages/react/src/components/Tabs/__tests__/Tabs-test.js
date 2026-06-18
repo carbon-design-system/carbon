@@ -1178,6 +1178,40 @@ describe('TabListVertical', () => {
     expect(container.firstChild).toHaveAttribute('style', 'height: 100px;');
   });
 
+  it('should keep hidden panels hidden after auto-height effect runs', () => {
+    const { container } = render(
+      <TabsVertical defaultSelectedIndex={1}>
+        <TabListVertical aria-label="List of tabs">
+          <Tab>Tab Label 1</Tab>
+          <Tab>Tab Label 2</Tab>
+          <Tab>Tab Label 3</Tab>
+          <Tab>Tab Label 4</Tab>
+        </TabListVertical>
+        <TabPanels>
+          <TabPanel>Tab Panel 1</TabPanel>
+          <TabPanel>Tab Panel 2</TabPanel>
+          <TabPanel>Tab Panel 3</TabPanel>
+          <TabPanel>Tab Panel 4</TabPanel>
+        </TabPanels>
+      </TabsVertical>
+    );
+
+    expect(container.firstChild.style.height.match(/\d+px/));
+
+    const tabpanels = screen.getAllByRole('tabpanel', { hidden: true });
+    expect(tabpanels).toHaveLength(4);
+
+    const activeTabpanel = tabpanels[1];
+    expect(activeTabpanel).not.toHaveAttribute('hidden');
+
+    const hiddenTabpanels = tabpanels.filter(
+      (panel) => panel !== activeTabpanel
+    );
+    expect(hiddenTabpanels.every((panel) => panel.hasAttribute('hidden'))).toBe(
+      true
+    );
+  });
+
   it('should apply size sm class when size prop is sm', () => {
     const { container } = render(
       <TabsVertical>
