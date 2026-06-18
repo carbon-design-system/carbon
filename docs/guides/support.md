@@ -321,7 +321,7 @@ https://carbondesignsystem.com/all-about-carbon/what-is-carbon/#our-guiding-prin
 Carbon Collective - Formerly the Design System Adoption Guild (DSAG) is an
 expansive group of designers and developers all aligned on the mission of
 delivering amazing experiences in the IBM Products organization. You can learn
-more about the guild
+more about the Carbon Collective
 [here](https://pages.github.ibm.com/cdai-design/pal/contributing/contribution-framework/intent).
 
 PAL - Pattern & Asset Library. These are the local systems around IBM that
