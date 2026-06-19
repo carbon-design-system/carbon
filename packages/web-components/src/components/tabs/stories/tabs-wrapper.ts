@@ -110,6 +110,9 @@ export class DismissableTabsWrapper extends LitElement {
 
   render() {
     const { resetTabs } = this;
+    const size =
+      this.size || (this.contained ? TABS_SIZE.LARGE : TABS_SIZE.MEDIUM);
+
     return html`
       <cds-button style="margin-bottom: 3rem" @click="${resetTabs}">
         Reset
@@ -120,7 +123,7 @@ export class DismissableTabsWrapper extends LitElement {
         selected-index="${this.selectedIndex}"
         type="${this.contained ? TABS_TYPE.CONTAINED : TABS_TYPE.REGULAR}"
         ?dismissable="${this.dismissable}"
-        size="${this.size || TABS_SIZE.LARGE}"
+        size="${size}"
         value="all"
         @cds-tab-closed="${this._handleDismissed}"
         @cds-tabs-beingselected="${this._handleBeforeSelected}">
