@@ -18,7 +18,7 @@ import './styles.scss';
 import '../src/feature-flags';
 
 import { white, g10, g90, g100 } from '@carbon/themes';
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import useIsomorphicEffect from '../src/internal/useIsomorphicEffect';
 import { breakpoints } from '@carbon/layout';
 import { GlobalTheme } from '../src/components/Theme';
