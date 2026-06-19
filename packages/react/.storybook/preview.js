@@ -350,11 +350,7 @@ const decorators = [
     const backgroundValue = context.globals.backgrounds?.value;
     const [randomKey, setRandomKey] = useState(1);
 
-    // Memoize theme calculation to avoid redundant calls
-    const theme = useMemo(
-      () => getThemeFromBackground(backgroundValue),
-      [backgroundValue]
-    );
+    const theme = getThemeFromBackground(backgroundValue);
 
     useEffect(() => {
       document.documentElement.setAttribute('data-carbon-theme', theme);
