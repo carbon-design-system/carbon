@@ -9,6 +9,7 @@
 'use client'
 
 import './feature-flags';
+import './internal/warnAboutDeprecatedReactVersion';
 
 export * from './components/Accordion';
 export * from './components/AccordionItem';
