@@ -349,7 +349,6 @@ const decorators = [
     const { layoutDensity, layoutSize, locale, dir } = context.globals;
     const backgroundValue = context.globals.backgrounds?.value;
     const [randomKey, setRandomKey] = useState(1);
-
     const theme = getThemeFromBackground(backgroundValue);
 
     useEffect(() => {
