@@ -217,7 +217,7 @@ describe('MultiSelect', () => {
       container.querySelector('[aria-expanded="true"][aria-haspopup="listbox"]')
     ).toBeNull();
   });
-  
+
   it('should move focus to the next control when the user tabs away with the menu open', async () => {
     jest.useFakeTimers();
 
@@ -257,14 +257,13 @@ describe('MultiSelect', () => {
       // Verify focus moved to the next interactive element
       expect(nextInput).toHaveFocus();
       expect(document.activeElement).toBe(nextInput);
-      
+
       // Verify menu is closed after tabbing away
       expect(combobox).toHaveAttribute('aria-expanded', 'false');
     } finally {
       jest.useRealTimers();
     }
   });
-
 
   it('close menu with click outside of field', async () => {
     const items = generateItems(4, generateGenericItem);
