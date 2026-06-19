@@ -1260,6 +1260,7 @@ class CDSDropdown extends ValidityMixin(
       [`${prefix}--list-box--inline`]: inline,
       [`${prefix}--list-box--expanded`]: open,
       [`${prefix}--list-box--${size}`]: size,
+      [`${prefix}--layout--size-${size}`]: size,
       [`${prefix}--dropdown--invalid`]: normalizedProps.invalid,
       [`${prefix}--dropdown--warn`]: normalizedProps.warn,
       [`${prefix}--dropdown--inline`]: inline,
