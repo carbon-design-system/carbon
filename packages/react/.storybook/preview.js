@@ -331,20 +331,17 @@ const parameters = {
 
 // Helper function to map background values to theme names
 function getThemeFromBackground(backgroundValue) {
-  // Handle both hex values and named values
-  if (backgroundValue === white.background || backgroundValue === 'white') {
-    return 'white';
-  } else if (backgroundValue === g10.background || backgroundValue === 'g10') {
-    return 'g10';
-  } else if (backgroundValue === g90.background || backgroundValue === 'g90') {
-    return 'g90';
-  } else if (
-    backgroundValue === g100.background ||
-    backgroundValue === 'g100'
-  ) {
-    return 'g100';
-  }
-  return 'white'; // default theme
+  const backgroundThemeMap = {
+    [white.background]: 'white',
+    white: 'white',
+    [g10.background]: 'g10',
+    g10: 'g10',
+    [g90.background]: 'g90',
+    g90: 'g90',
+    [g100.background]: 'g100',
+    g100: 'g100',
+  };
+  return backgroundThemeMap[backgroundValue] ?? 'white';
 }
 
 const decorators = [
