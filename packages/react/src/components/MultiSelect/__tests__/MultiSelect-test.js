@@ -218,6 +218,53 @@ describe('MultiSelect', () => {
     ).toBeNull();
   });
 
+  it('should move focus to the next control when the user tabs away with the menu open', async () => {
+    jest.useFakeTimers();
+
+    const user = userEvent.setup({
+      advanceTimers: jest.advanceTimersByTime,
+    });
+
+    try {
+      const items = generateItems(4, generateGenericItem);
+      render(
+        <>
+          <MultiSelect id="test" label="test-label" items={items} />
+          <input data-testid="next-input" type="text" />
+        </>
+      );
+
+      const combobox = screen.getByRole('combobox');
+      const nextInput = screen.getByTestId('next-input');
+
+      // Tab to focus the combobox
+      await user.tab();
+      expect(combobox).toHaveFocus();
+
+      // Open the menu with Space
+      await user.keyboard('[Space]');
+      expect(combobox).toHaveAttribute('aria-expanded', 'true');
+
+      // Verify focus is still on combobox before tabbing
+      expect(combobox).toHaveFocus();
+
+      // Tab away from the combobox
+      await user.tab();
+      act(() => {
+        jest.runOnlyPendingTimers();
+      });
+
+      // Verify focus moved to the next interactive element
+      expect(nextInput).toHaveFocus();
+      expect(document.activeElement).toBe(nextInput);
+
+      // Verify menu is closed after tabbing away
+      expect(combobox).toHaveAttribute('aria-expanded', 'false');
+    } finally {
+      jest.useRealTimers();
+    }
+  });
+
   it('close menu with click outside of field', async () => {
     const items = generateItems(4, generateGenericItem);
     const label = 'test-label';
