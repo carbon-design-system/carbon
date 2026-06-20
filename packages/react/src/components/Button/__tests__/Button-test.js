@@ -162,6 +162,23 @@ describe('Button', () => {
       expect(screen.getByLabelText('test')).toHaveClass('cds--btn--icon-only');
     });
 
+    it('should clamp unsupported sizes down to `lg` for icon-only buttons', () => {
+      render(
+        <Button hasIconOnly iconDescription="test" renderIcon={Add} size="2xl" />
+      );
+      const button = screen.getByLabelText('test');
+      expect(button).toHaveClass('cds--btn--lg');
+      expect(button).not.toHaveClass('cds--btn--2xl');
+    });
+
+    it('should forward supported sizes unchanged for icon-only buttons', () => {
+      render(
+        <Button hasIconOnly iconDescription="test" renderIcon={Add} size="sm" />
+      );
+      const button = screen.getByLabelText('test');
+      expect(button).toHaveClass('cds--btn--sm');
+    });
+
     it('should support badge indicator', () => {
       render(
         <Button
