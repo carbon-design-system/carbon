@@ -201,15 +201,14 @@ const Button: ButtonComponent = React.forwardRef(
         align = tooltipPosition;
       }
 
+      // `IconButton` only supports a subset of the `size`s that `Button`
+      // supports. Coerce the larger sizes (`xl`, `2xl`) down to the largest
+      // size `IconButton` supports (`lg`) so icon-only buttons render at a
+      // valid size instead of forwarding an unsupported value.
+      const iconButtonSize =
+        size === 'xl' || size === '2xl' ? 'lg' : size;
+
       return (
-        // @ts-expect-error - `IconButton` does not support all `size`s that
-        // `Button` supports.
-        //
-        // TODO: What should be done here?
-        // 1. Should the `IconButton` not be rendered if the `size` is not
-        //    supported?
-        // 2. Should an error be thrown?
-        // 3. Something else?
         <IconButton
           {...rest}
           ref={ref}
@@ -217,7 +216,7 @@ const Button: ButtonComponent = React.forwardRef(
           align={align}
           label={iconDescription}
           kind={kind}
-          size={size}
+          size={iconButtonSize}
           highContrast={tooltipHighContrast}
           dropShadow={tooltipDropShadow}
           onMouseEnter={onMouseEnter}
