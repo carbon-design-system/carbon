@@ -713,6 +713,10 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
         setHighlightedIndex(changes.selectedItem);
         return changes;
       case InputBlur:
+        setInputValue('');
+        setInputFocused(false);
+        setIsOpen(false);
+        return changes;
       case InputKeyDownEscape:
         setIsOpen(false);
         return changes;
@@ -824,6 +828,17 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
       setInputValue('');
     } else {
       setInputValue(value ?? '');
+    }
+
+    // Only trigger callback for mouse events (clear button clicks)
+    // Keyboard events will trigger InputChange naturally through Downshift
+    if (onInputValueChange && event && !('key' in event)) {
+      setInputValue('');
+      onInputValueChange({
+        inputValue: '',
+        type: InputChange,
+      });
+      setIsOpen(false);
     }
 
     if (textInput.current) {
@@ -938,10 +953,6 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
         }
       },
       onFocus: () => setInputFocused(true),
-      onBlur: () => {
-        setInputFocused(false);
-        setInputValue('');
-      },
     })
   );
 
