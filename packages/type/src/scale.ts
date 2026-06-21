@@ -14,17 +14,12 @@ export const getTypeSize = (step: number): number => {
 };
 
 /**
- * Default type scale with 23 steps, where `scaleNN` is the size for step `NN`.
+ * The individual type scale steps, where `scaleNN` is the size for step `NN`.
  *
- * Generated with:
- * ```ts
- * Array.from({ length: 23 }, (_, i) => getTypeSize(i + 1))
- * ```
- *
- * The individual steps are also exported as scalars so other modules in this
- * package can reference them as plain identifiers. Member accesses like
- * `scale[0]` at module scope read as potential getter side effects to bundlers
- * and block tree shaking of otherwise-unused tokens.
+ * Each step is exported as a scalar so other modules in this package can
+ * reference it as a plain identifier. Member accesses like `scale[0]` at module
+ * scope read as potential getter side effects to bundlers and block tree
+ * shaking of otherwise-unused tokens.
  */
 export const scale01 = 12;
 export const scale02 = 14;
@@ -50,6 +45,14 @@ export const scale21 = 132;
 export const scale22 = 144;
 export const scale23 = 156;
 
+/**
+ * Default type scale with 23 steps.
+ *
+ * Generated with:
+ * ```ts
+ * Array.from({ length: 23 }, (_, i) => getTypeSize(i + 1))
+ * ```
+ */
 export const scale = [
   scale01,
   scale02,
