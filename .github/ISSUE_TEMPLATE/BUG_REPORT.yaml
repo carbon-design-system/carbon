@@ -108,10 +108,12 @@ body:
         - 'Severity 4 = Unrelated to a user task, has a workaround or does not
           need a workaround.'
   - type: input
-    id: application
+    id: project
     attributes:
-      label: Application/PAL
-      description: 'What application and/or PAL do you work on?'
+      label: Project name
+      description: 'What project, team, or product do you work on?'
+    validations:
+      required: true
   - type: checkboxes
     id: terms
     attributes:
