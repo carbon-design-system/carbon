@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2025
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -74,7 +74,7 @@ export interface ListBoxProps
   light?: boolean;
 
   /**
-   * Specify the size of the ListBox. Currently supports either `sm`, `md` or `lg` as an option.
+   * Specify the size of the ListBox. Currently supports either `xs`, `sm`, `md` or `lg` as an option.
    */
   size?: ListBoxSize;
 
@@ -129,6 +129,7 @@ const ListBox = forwardRef<HTMLDivElement, ListBoxProps>((props, ref) => {
     ...(containerClassName && { [containerClassName]: true }),
     [`${prefix}--list-box`]: true,
     [`${prefix}--list-box--${size}`]: size,
+    [`${prefix}--layout--size-${size}`]: size,
     [`${prefix}--list-box--inline`]: type === 'inline',
     [`${prefix}--list-box--disabled`]: disabled,
     [`${prefix}--list-box--light`]: light,
@@ -211,7 +212,7 @@ ListBox.propTypes = {
   ),
 
   /**
-   * Specify the size of the ListBox. Currently supports either `sm`, `md` or `lg` as an option.
+   * Specify the size of the ListBox. Currently supports either `xs`, `sm`, `md` or `lg` as an option.
    */
   size: ListBoxSizePropType,
 
