@@ -607,7 +607,7 @@ describe('cds-popover focusout/outsideclick', () => {
 });
 
 describe('cds-popover autoAlignBoundary', () => {
-  it('should use viewport as default boundary when autoAlignBoundary is not defined', async () => {
+  it('should use viewport rect as default boundary when autoAlignBoundary is not defined', async () => {
     const el = await fixture(html`
       <div
         style="position: relative; width: 200px; height: 200px; overflow: hidden;">
@@ -622,9 +622,15 @@ describe('cds-popover autoAlignBoundary', () => {
     const popover = el.querySelector('#test-popover');
     await popover.updateComplete;
 
-    // Access the private _resolveAutoAlignBoundary method to verify it returns document.documentElement
-    // When autoAlignBoundary is not set, the viewport (document.documentElement) should be used as the boundary
+    // When autoAlignBoundary is not set, a Rect calculated from the Visual Viewport API
+    // or window dimensions should be used as the boundary
     const resolvedBoundary = popover._resolveAutoAlignBoundary();
-    expect(resolvedBoundary).to.equal(document.documentElement);
+
+    // Verify it returns a Rect object with the expected properties
+    expect(resolvedBoundary).to.be.an('object');
+    expect(resolvedBoundary).to.have.property('x').that.is.a('number');
+    expect(resolvedBoundary).to.have.property('y').that.is.a('number');
+    expect(resolvedBoundary).to.have.property('width').that.is.a('number');
+    expect(resolvedBoundary).to.have.property('height').that.is.a('number');
   });
 });
