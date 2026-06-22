@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2016, 2023
+// Copyright IBM Corp. 2016, 2026
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -21,6 +21,7 @@
 @use '../../utilities/convert';
 @use '../../utilities/z-index' as *;
 @use '../../utilities/custom-property';
+@use '../../utilities/layout';
 
 /// Overflow menu styles
 /// @access public
@@ -28,6 +29,7 @@
 @mixin overflow-menu {
   .#{$prefix}--overflow-menu,
   .#{$prefix}--overflow-menu__trigger {
+    @include layout.use('size', $default: 'md', $min: 'xs', $max: 'lg');
     @include button-reset.reset;
     @include component-reset.reset;
     @include focus-outline('reset');
@@ -36,10 +38,10 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    block-size: $spacing-08;
+    block-size: layout.size('height');
     cursor: pointer;
-    inline-size: $spacing-08;
-    min-block-size: $spacing-08;
+    inline-size: layout.size('height');
+    min-block-size: layout.size('height');
     transition:
       outline $duration-fast-02 motion(entrance, productive),
       background-color $duration-fast-02 motion(entrance, productive);
@@ -57,22 +59,25 @@
     margin-block-start: 0;
   }
 
-  .#{$prefix}--overflow-menu--xs {
-    block-size: $spacing-06;
-    inline-size: $spacing-06;
-    min-block-size: $spacing-06;
-  }
+  // remove commented code blocks before merging
+  // keeping for now as a point of reference
 
-  .#{$prefix}--overflow-menu--sm {
-    block-size: $spacing-07;
-    inline-size: $spacing-07;
-    min-block-size: $spacing-07;
-  }
+  // .#{$prefix}--overflow-menu--xs {
+  //   block-size: $spacing-06;
+  //   inline-size: $spacing-06;
+  //   min-block-size: $spacing-06;
+  // }
 
-  .#{$prefix}--overflow-menu--lg {
-    block-size: $spacing-09;
-    inline-size: $spacing-09;
-  }
+  // .#{$prefix}--overflow-menu--sm {
+  //   block-size: $spacing-07;
+  //   inline-size: $spacing-07;
+  //   min-block-size: $spacing-07;
+  // }
+
+  // .#{$prefix}--overflow-menu--lg {
+  //   block-size: $spacing-09;
+  //   inline-size: $spacing-09;
+  // }
 
   // Overwrite Icon Tooltip focus styles
   .#{$prefix}--overflow-menu__trigger.#{$prefix}--tooltip--a11y.#{$prefix}--tooltip__trigger:focus {
@@ -109,6 +114,7 @@
   }
 
   .#{$prefix}--overflow-menu-options {
+    @include layout.use('size', $default: 'md', $min: 'xs', $max: 'lg');
     @include component-reset.reset;
     @include box-shadow;
 
@@ -157,67 +163,67 @@
       .#{$prefix}--breadcrumb-menu-options
     )::after {
     block-size: convert.to-rem(3px);
-    inline-size: $spacing-08;
+    inline-size: layout.size('height');
     inset-block-start: convert.to-rem(-3px);
     inset-inline-start: 0;
   }
 
   .#{$prefix}--overflow-menu-options[data-floating-menu-direction='top']::after {
     block-size: $spacing-03;
-    inline-size: $spacing-08;
+    inline-size: layout.size('height');
     inset-block-end: -$spacing-03;
     inset-inline-start: 0;
   }
 
   .#{$prefix}--overflow-menu-options[data-floating-menu-direction='left']::after {
-    block-size: $spacing-08;
+    block-size: layout.size('height');
     inline-size: convert.to-rem(6px);
     inset-block-start: 0;
     inset-inline-end: convert.to-rem(-6px);
   }
 
   .#{$prefix}--overflow-menu-options[data-floating-menu-direction='right']::after {
-    block-size: $spacing-08;
+    block-size: layout.size('height');
     inline-size: convert.to-rem(6px);
     inset-block-start: 0;
     inset-inline-start: convert.to-rem(-6px);
   }
 
-  .#{$prefix}--overflow-menu-options--xs.#{$prefix}--overflow-menu-options {
-    &[data-floating-menu-direction='bottom']::after,
-    &[data-floating-menu-direction='top']::after {
-      inline-size: $spacing-06;
-    }
+  // .#{$prefix}--overflow-menu-options--xs.#{$prefix}--overflow-menu-options {
+  //   &[data-floating-menu-direction='bottom']::after,
+  //   &[data-floating-menu-direction='top']::after {
+  //     inline-size: $spacing-06;
+  //   }
 
-    &[data-floating-menu-direction='left']::after,
-    &[data-floating-menu-direction='right']::after {
-      block-size: $spacing-06;
-    }
-  }
+  //   &[data-floating-menu-direction='left']::after,
+  //   &[data-floating-menu-direction='right']::after {
+  //     block-size: $spacing-06;
+  //   }
+  // }
 
-  .#{$prefix}--overflow-menu-options--sm.#{$prefix}--overflow-menu-options {
-    &[data-floating-menu-direction='bottom']::after,
-    &[data-floating-menu-direction='top']::after {
-      inline-size: $spacing-07;
-    }
+  // .#{$prefix}--overflow-menu-options--sm.#{$prefix}--overflow-menu-options {
+  //   &[data-floating-menu-direction='bottom']::after,
+  //   &[data-floating-menu-direction='top']::after {
+  //     inline-size: $spacing-07;
+  //   }
 
-    &[data-floating-menu-direction='left']::after,
-    &[data-floating-menu-direction='right']::after {
-      block-size: $spacing-07;
-    }
-  }
+  //   &[data-floating-menu-direction='left']::after,
+  //   &[data-floating-menu-direction='right']::after {
+  //     block-size: $spacing-07;
+  //   }
+  // }
 
-  .#{$prefix}--overflow-menu-options--lg.#{$prefix}--overflow-menu-options {
-    &[data-floating-menu-direction='bottom']::after,
-    &[data-floating-menu-direction='top']::after {
-      inline-size: $spacing-09;
-    }
+  // .#{$prefix}--overflow-menu-options--lg.#{$prefix}--overflow-menu-options {
+  //   &[data-floating-menu-direction='bottom']::after,
+  //   &[data-floating-menu-direction='top']::after {
+  //     inline-size: $spacing-09;
+  //   }
 
-    &[data-floating-menu-direction='left']::after,
-    &[data-floating-menu-direction='right']::after {
-      block-size: $spacing-09;
-    }
-  }
+  //   &[data-floating-menu-direction='left']::after,
+  //   &[data-floating-menu-direction='right']::after {
+  //     block-size: $spacing-09;
+  //   }
+  // }
 
   .#{$prefix}--overflow-menu--flip.#{$prefix}--overflow-menu-options[data-floating-menu-direction='top']::after,
   .#{$prefix}--overflow-menu--flip.#{$prefix}--overflow-menu-options[data-floating-menu-direction='bottom']::after {
@@ -244,25 +250,25 @@
     align-items: center;
     padding: 0;
     background-color: transparent;
-    block-size: $spacing-08;
+    block-size: layout.size('height');
     inline-size: 100%;
     transition: background-color $duration-fast-02 motion(entrance, productive);
   }
 
-  .#{$prefix}--overflow-menu-options--xs
-    .#{$prefix}--overflow-menu-options__option {
-    block-size: $spacing-06;
-  }
+  // .#{$prefix}--overflow-menu-options--xs
+  //   .#{$prefix}--overflow-menu-options__option {
+  //   block-size: $spacing-06;
+  // }
 
-  .#{$prefix}--overflow-menu-options--sm
-    .#{$prefix}--overflow-menu-options__option {
-    block-size: $spacing-07;
-  }
+  // .#{$prefix}--overflow-menu-options--sm
+  //   .#{$prefix}--overflow-menu-options__option {
+  //   block-size: $spacing-07;
+  // }
 
-  .#{$prefix}--overflow-menu-options--lg
-    .#{$prefix}--overflow-menu-options__option {
-    block-size: $spacing-09;
-  }
+  // .#{$prefix}--overflow-menu-options--lg
+  //   .#{$prefix}--overflow-menu-options__option {
+  //   block-size: $spacing-09;
+  // }
 
   .#{$prefix}--overflow-menu--divider {
     border-block-start: 1px solid $border-subtle;
