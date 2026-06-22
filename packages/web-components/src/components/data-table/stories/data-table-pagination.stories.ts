@@ -156,7 +156,7 @@ class PaginatedDataTableDemo extends LitElement {
                   <cds-overflow-menu-item> Action 3 </cds-overflow-menu-item>
                 </cds-overflow-menu-body>
               </cds-overflow-menu>
-              <cds-button>Primary button</cds-button>
+              <cds-button>Primary Button</cds-button>
             </cds-table-toolbar-content>
           </cds-table-toolbar>
           <cds-table-head>
