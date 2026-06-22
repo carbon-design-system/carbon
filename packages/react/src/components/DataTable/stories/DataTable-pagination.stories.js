@@ -100,6 +100,7 @@ export const Default = (args) => {
   const allRows = generateRows(100);
   const [page, setPage] = useState(1);
   const [pageSize, setPageSize] = useState(10);
+  const paginationSize = args.size === 'xl' ? 'lg' : args.size;
 
   const handlePaginationChange = ({ page, pageSize }) => {
     setPage(page);
@@ -113,62 +114,77 @@ export const Default = (args) => {
 
   return (
     <>
-      <TableContainer
-        title="Load Balancers"
-        description="Paginated data table with persistent toolbar">
-        <TableToolbar
-          aria-label="data table toolbar"
-          size={args.size === 'xs' ? 'sm' : args.size}>
-          <TableToolbarContent>
-            <TableToolbarSearch
-              onChange={(event) => {
-                action('toolbar search input')(event);
-              }}
-              persistent
-              size={args.size === 'xs' ? 'sm' : args.size}
-            />
-            <TableToolbarMenu size={args.size === 'xl' ? 'lg' : args.size}>
-              <TableToolbarAction onClick={action('Action 1 Click')}>
-                Action 1
-              </TableToolbarAction>
-              <TableToolbarAction onClick={action('Action 2 Click')}>
-                Action 2
-              </TableToolbarAction>
-              <TableToolbarAction onClick={action('Action 3 Click')}>
-                Action 3
-              </TableToolbarAction>
-            </TableToolbarMenu>
-            <Button onClick={action('Button click')}>Primary Button</Button>
-          </TableToolbarContent>
-        </TableToolbar>
-        <Table {...args} aria-label="paginated table">
-          <TableHead>
-            <TableRow>
-              {headers.map((header) => (
-                <TableHeader key={header.key} id={header.key}>
-                  {header.header}
-                </TableHeader>
-              ))}
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {paginatedRows.map((row) => (
-              <TableRow key={row.id}>
-                {headers.map((header) => (
-                  <TableCell key={header.key}>{row[header.key]}</TableCell>
+      <DataTable rows={paginatedRows} headers={headers} {...args}>
+        {({
+          rows,
+          headers,
+          getHeaderProps,
+          getRowProps,
+          getTableProps,
+          getToolbarProps,
+          onInputChange,
+          getCellProps,
+        }) => (
+          <TableContainer
+            title="Load Balancers"
+            description="Paginated data table with persistent toolbar">
+            <TableToolbar {...getToolbarProps()}>
+              <TableToolbarContent>
+                <TableToolbarSearch
+                  onChange={(event) => {
+                    action('toolbar search input')(event);
+                    onInputChange(event);
+                  }}
+                  persistent
+                />
+                <TableToolbarMenu>
+                  <TableToolbarAction onClick={action('Action 1 Click')}>
+                    Action 1
+                  </TableToolbarAction>
+                  <TableToolbarAction onClick={action('Action 2 Click')}>
+                    Action 2
+                  </TableToolbarAction>
+                  <TableToolbarAction onClick={action('Action 3 Click')}>
+                    Action 3
+                  </TableToolbarAction>
+                </TableToolbarMenu>
+                <Button onClick={action('Button click')}>Primary Button</Button>
+              </TableToolbarContent>
+            </TableToolbar>
+            <Table {...getTableProps()} aria-label="paginated table">
+              <TableHead>
+                <TableRow>
+                  {headers.map((header) => (
+                    <TableHeader
+                      key={header.key}
+                      {...getHeaderProps({ header })}>
+                      {header.header}
+                    </TableHeader>
+                  ))}
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {rows.map((row) => (
+                  <TableRow key={row.id} {...getRowProps({ row })}>
+                    {row.cells.map((cell) => (
+                      <TableCell key={cell.id} {...getCellProps({ cell })}>
+                        {cell.value}
+                      </TableCell>
+                    ))}
+                  </TableRow>
                 ))}
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
+              </TableBody>
+            </Table>
+          </TableContainer>
+        )}
+      </DataTable>
       <Pagination
         page={page}
         pageSize={pageSize}
         pageSizes={[10, 20, 30, 40, 50]}
         totalItems={allRows.length}
         onChange={handlePaginationChange}
-        size={args.size}
+        size={paginationSize}
       />
     </>
   );

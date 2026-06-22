@@ -71,18 +71,15 @@ const generateRows = (count: number) => {
 
 // Map TABLE_SIZE to PAGINATION_SIZE
 const getPaginationSize = (tableSize: TABLE_SIZE): PAGINATION_SIZE => {
-  switch (tableSize) {
-    case TABLE_SIZE.XS:
-      return PAGINATION_SIZE.XS;
-    case TABLE_SIZE.SM:
-      return PAGINATION_SIZE.SMALL;
-    case TABLE_SIZE.MD:
-      return PAGINATION_SIZE.MEDIUM;
-    case TABLE_SIZE.LG:
-    case TABLE_SIZE.XL:
-    default:
-      return PAGINATION_SIZE.LARGE;
-  }
+  const sizeMap: Record<TABLE_SIZE, PAGINATION_SIZE> = {
+    [TABLE_SIZE.XS]: PAGINATION_SIZE.XS,
+    [TABLE_SIZE.SM]: PAGINATION_SIZE.SMALL,
+    [TABLE_SIZE.MD]: PAGINATION_SIZE.MEDIUM,
+    [TABLE_SIZE.LG]: PAGINATION_SIZE.LARGE,
+    [TABLE_SIZE.XL]: PAGINATION_SIZE.LARGE,
+  };
+
+  return sizeMap[tableSize] ?? PAGINATION_SIZE.MEDIUM;
 };
 
 /**
@@ -111,7 +108,7 @@ class PaginatedDataTableDemo extends LitElement {
   }
 
   _handlePageSizeChange(event: CustomEvent) {
-    this._pageSize = event.detail.value;
+    this._pageSize = event.detail.pageSize;
     this._currentPage = 1; // Reset to first page when page size changes
   }
 
@@ -150,7 +147,7 @@ class PaginatedDataTableDemo extends LitElement {
                   class: `${prefix}--overflow-menu__icon`,
                 })}
                 <span slot="tooltip-content">Settings</span>
-                <cds-overflow-menu-body>
+                <cds-overflow-menu-body flipped>
                   <cds-overflow-menu-item> Action 1 </cds-overflow-menu-item>
                   <cds-overflow-menu-item> Action 2 </cds-overflow-menu-item>
                   <cds-overflow-menu-item> Action 3 </cds-overflow-menu-item>
