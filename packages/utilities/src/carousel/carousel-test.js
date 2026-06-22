@@ -273,4 +273,23 @@ describe('initCarousel', () => {
       container.querySelector('.carousel__live-region')
     ).not.toBeInTheDocument();
   });
+
+  test('onViewChangeEnd is called only once the first time that it is called', () => {
+    const carousel = initCarousel(container, {
+      onViewChangeStart: mockOnViewChangeStart,
+      onViewChangeEnd: mockOnViewChangeEnd,
+    });
+
+    mockOnViewChangeEnd.mockClear();
+
+    carousel.next();
+
+    const activeItem = carousel.getActiveItem().item;
+    activeItem?.dispatchEvent(new Event('transitionend'));
+
+    expect(mockOnViewChangeEnd).toHaveBeenCalledTimes(1);
+    expect(mockOnViewChangeEnd).toHaveBeenLastCalledWith(
+      expect.objectContaining({ currentIndex: 1 })
+    );
+  });
 });

@@ -46,7 +46,7 @@ export const initCarousel = (
     '(prefers-reduced-motion: reduce)'
   ).matches;
   // fallback check if animationend or transitionend events aren't present
-  let supportsAnimations = false;
+  let supportsAnimations: boolean;
 
   const minHeight = 4; // 4 rem
 
@@ -373,7 +373,7 @@ export const initCarousel = (
             //transitionend will trigger twice for pervious card and current card
             transitionComplete(viewItem);
           }
-          if (supportsAnimations === false) {
+          if (!supportsAnimations) {
             supportsAnimations = true;
           }
         };
@@ -416,7 +416,7 @@ export const initCarousel = (
       performAnimation(false);
       if (
         (prefersReducedMotion ||
-          (prefersReducedMotion === false && supportsAnimations === false)) &&
+          (prefersReducedMotion === false && !supportsAnimations)) &&
         viewItems
       ) {
         const targetViewIndex = viewIndexStack[0];
