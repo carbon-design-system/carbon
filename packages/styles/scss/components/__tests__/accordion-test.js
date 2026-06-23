@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2018, 2023
+ * Copyright IBM Corp. 2018, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -43,5 +43,15 @@ describe('scss/components/accordion', () => {
       $_: get('direction', accordion.$flex-direction);
     `);
     expect(unwrap('direction')).toBe('row');
+  });
+
+  test('hover styles are only applied on devices that support hover', async () => {
+    const { result } = await render(`
+      @use '../accordion';
+    `);
+    const cssText = result.css.toString();
+
+    expect(cssText).toContain('@media (any-hover: hover)');
+    expect(cssText).toContain('.cds--accordion__heading:hover');
   });
 });

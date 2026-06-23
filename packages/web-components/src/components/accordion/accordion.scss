@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2019, 2025
+// Copyright IBM Corp. 2019, 2026
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -106,37 +106,40 @@ $css--plex: true !default;
   }
 }
 
-:host([isFlush]) .#{$prefix}--accordion__heading:hover {
-  position: relative;
-  z-index: 1;
+// Apply hover styles only on devices that support hover
+@media (any-hover: hover) {
+  :host([isFlush]) .#{$prefix}--accordion__heading:hover {
+    position: relative;
+    z-index: 1;
 
-  &::before,
-  &::after {
-    position: absolute;
-    display: block;
-    background: $layer-hover;
-    block-size: 1px;
-    content: '';
-    inline-size: 100%;
-    inset-inline-start: 0;
-    transition: background $duration-fast-02 motion(standard, productive);
+    &::before,
+    &::after {
+      position: absolute;
+      display: block;
+      background: $layer-hover;
+      block-size: 1px;
+      content: '';
+      inline-size: 100%;
+      inset-inline-start: 0;
+      transition: background $duration-fast-02 motion(standard, productive);
 
-    @media screen and (prefers-reduced-motion: reduce) {
-      transition: none;
+      @media screen and (prefers-reduced-motion: reduce) {
+        transition: none;
+      }
     }
-  }
 
-  &::before {
-    inset-block-start: -1px;
-  }
+    &::before {
+      inset-block-start: -1px;
+    }
 
-  &::after {
-    inset-block-end: -1px;
-  }
+    &::after {
+      inset-block-end: -1px;
+    }
 
-  &:focus::before,
-  &:focus::after {
-    background: none;
+    &:focus::before,
+    &:focus::after {
+      background: none;
+    }
   }
 }
 
@@ -170,8 +173,11 @@ $css--plex: true !default;
     cursor: default;
     pointer-events: none;
 
-    &:hover::before {
-      background: transparent;
+    // Apply hover styles only on devices that support hover
+    @media (any-hover: hover) {
+      &:hover::before {
+        background: transparent;
+      }
     }
   }
 }
