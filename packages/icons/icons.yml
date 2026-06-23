@@ -7498,6 +7498,17 @@
     - drop
   sizes:
     - 32
+- name: delay
+  friendly_name: Delay
+  aliases:
+    - clock
+    - hour
+    - minute
+    - watch
+    - time
+    - delay
+  sizes:
+    - 32
 - name: delete
   friendly_name: Delete
   aliases:
@@ -27216,6 +27227,21 @@
     - account
     - rank
     - military
+  sizes:
+    - 32
+- name: user--minus
+  friendly_name: User minus
+  aliases:
+    - person
+    - avatar
+    - man
+    - woman
+    - figure
+    - profile
+    - account
+    - user
+    - minus
+    - remove
   sizes:
     - 32
 - name: user--multiple
