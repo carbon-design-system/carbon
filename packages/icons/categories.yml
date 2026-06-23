@@ -2214,6 +2214,7 @@ categories:
           - user--follow
           - user--identification
           - user--military
+          - user--minus
           - user--multiple
           - user--online
           - user--profile
@@ -2241,6 +2242,7 @@ categories:
           - calendar--add--alt
           - calendar--settings
           - calendar--tools
+          - delay
           - delivery--time
           - event
           - event--schedule
