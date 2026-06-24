@@ -441,6 +441,10 @@ export {
   // Icon sizes
   iconSize01,
   iconSize02,
+  // Border radius
+  borderRadiusBox,
+  borderRadiusField,
+  borderRadiusSelector,
   // Layout
   // Deprecated ☠️
   layout01,

@@ -30,36 +30,25 @@ import theme from './theme';
 const devTools = {
   layoutSize: {
     description: "Set the layout context's size",
-    defaultValue: false,
+    defaultValue: 'Size: md',
     toolbar: {
       title: 'dev :: preview__Layout size',
       items: [
-        {
-          value: false,
-          title: 'None',
-        },
-        'xs',
-        'sm',
-        'md',
-        'lg',
-        'xl',
-        '2xl',
+        'Size: xs',
+        'Size: sm',
+        'Size: md',
+        'Size: lg',
+        'Size: xl',
+        'Size: 2xl',
       ],
     },
   },
   layoutDensity: {
     description: "Set the layout context's density",
-    defaultValue: false,
+    defaultValue: 'Density: normal',
     toolbar: {
       title: 'dev :: preview__Layout density',
-      items: [
-        {
-          value: false,
-          title: 'None',
-        },
-        'condensed',
-        'normal',
-      ],
+      items: ['Density: condensed', 'Density: normal'],
     },
   },
 };
@@ -123,7 +112,52 @@ const globalTypes = {
       ],
     },
   },
-  ...(process.env.NODE_ENV === 'development' ? devTools : {}),
+  borderRadiusBox: {
+    name: 'Border Radius - Box',
+    description: 'Set the border radius for box',
+    defaultValue: 'Box: 0rem',
+    toolbar: {
+      title: 'Border Radius - Box',
+      items: [
+        'Box: 0rem',
+        'Box: 0.25rem',
+        'Box: 0.5rem',
+        'Box: 1rem',
+        'Box: 2rem',
+      ],
+    },
+  },
+  borderRadiusField: {
+    name: 'Border Radius - Field',
+    description: 'Set the border radius for field',
+    defaultValue: 'Field: 0rem',
+    toolbar: {
+      title: 'Border Radius - Field',
+      items: [
+        'Field: 0rem',
+        'Field: 0.25rem',
+        'Field: 0.5rem',
+        'Field: 1rem',
+        'Field: 2rem',
+      ],
+    },
+  },
+  borderRadiusSelector: {
+    name: 'Border Radius - Selector',
+    description: 'Set the border radius for selector',
+    defaultValue: 'Selector: 0rem',
+    toolbar: {
+      title: 'Border Radius - Selector',
+      items: [
+        'Selector: 0rem',
+        'Selector: 0.25rem',
+        'Selector: 0.5rem',
+        'Selector: 1rem',
+        'Selector: 2rem',
+      ],
+    },
+  },
+  ...devTools,
 };
 
 const parameters = {
@@ -346,14 +380,72 @@ function getThemeFromBackground(backgroundValue) {
 
 const decorators = [
   (Story, context) => {
-    const { layoutDensity, layoutSize, locale, dir } = context.globals;
+    const {
+      layoutDensity,
+      layoutSize,
+      locale,
+      dir,
+      borderRadiusBox,
+      borderRadiusField,
+      borderRadiusSelector,
+    } = context.globals;
     const backgroundValue = context.globals.backgrounds?.value;
     const [randomKey, setRandomKey] = useState(1);
     const theme = getThemeFromBackground(backgroundValue);
 
+    // Helper function to extract rem value from prefixed format
+    // e.g., "Box: 0rem" -> "0rem", "Field: 0.25rem" -> "0.25rem"
+    const extractBorderRadiusValue = (prefixedValue) => {
+      if (!prefixedValue) return null;
+      const colonIndex = prefixedValue.indexOf(': ');
+      return colonIndex !== -1
+        ? prefixedValue.substring(colonIndex + 2)
+        : prefixedValue;
+    };
+
+    // Helper function to extract layout value from prefixed format
+    // e.g., "Size: xs" -> "xs", "Density: condensed" -> "condensed"
+    const extractLayoutValue = (prefixedValue) => {
+      if (!prefixedValue) return null;
+      const colonIndex = prefixedValue.indexOf(': ');
+      return colonIndex !== -1
+        ? prefixedValue.substring(colonIndex + 2)
+        : prefixedValue;
+    };
+
     useEffect(() => {
       document.documentElement.setAttribute('data-carbon-theme', theme);
     }, [theme]);
+
+    useEffect(() => {
+      if (borderRadiusBox) {
+        const value = extractBorderRadiusValue(borderRadiusBox);
+        if (value) {
+          document.documentElement.style.setProperty(
+            '--cds-border-radius-box',
+            value
+          );
+        }
+      }
+      if (borderRadiusField) {
+        const value = extractBorderRadiusValue(borderRadiusField);
+        if (value) {
+          document.documentElement.style.setProperty(
+            '--cds-border-radius-field',
+            value
+          );
+        }
+      }
+      if (borderRadiusSelector) {
+        const value = extractBorderRadiusValue(borderRadiusSelector);
+        if (value) {
+          document.documentElement.style.setProperty(
+            '--cds-border-radius-selector',
+            value
+          );
+        }
+      }
+    }, [borderRadiusBox, borderRadiusField, borderRadiusSelector]);
 
     useIsomorphicEffect(() => {
       document.documentElement.lang = locale;
@@ -364,7 +456,9 @@ const decorators = [
 
     return (
       <GlobalTheme theme={theme}>
-        <Layout size={layoutSize || null} density={layoutDensity || null}>
+        <Layout
+          size={extractLayoutValue(layoutSize) || null}
+          density={extractLayoutValue(layoutDensity) || null}>
           <TextDirection
             getTextDirection={(text) => {
               return dir;

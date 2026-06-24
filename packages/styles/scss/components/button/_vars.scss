@@ -6,6 +6,7 @@
 //
 
 @use '../../spacing' as *;
+@use '@carbon/layout' as *;
 
 /// @type Number
 /// @access public
@@ -20,7 +21,7 @@ $button-font-size: 0.875rem !default;
 /// @type Number
 /// @access public
 /// @group button
-$button-border-radius: 0 !default;
+$button-border-radius: $border-radius-field !default;
 
 /// @type Number
 /// @access public
