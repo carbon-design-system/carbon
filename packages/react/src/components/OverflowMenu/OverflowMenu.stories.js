@@ -10,7 +10,7 @@ import { OverflowMenu } from './OverflowMenu';
 import { default as OverflowMenuItem } from '../OverflowMenuItem';
 import { Filter } from '@carbon/icons-react';
 import mdx from './OverflowMenu.mdx';
-
+import { Layout } from '../Layout'; // remove before merging
 export default {
   title: 'Components/OverflowMenu',
   component: OverflowMenu,
@@ -92,6 +92,55 @@ Default.argTypes = {
     control: { type: 'select' },
   },
 };
+
+// remove before merging
+export const SizeTest = (args) => {
+  return (
+    <>
+      <h4>The menu on the right is using layout tokens (no size prop)</h4>
+      <br />
+      <div style={{ display: 'flex', gap: '6rem' }}>
+        <OverflowMenu aria-label="overflow-menu" {...args}>
+          <OverflowMenuItem itemText="Stop app" />
+          <OverflowMenuItem itemText="Restart app" />
+          <OverflowMenuItem itemText="Rename app" />
+          <OverflowMenuItem
+            itemText="Clone and move app"
+            disabled
+            requireTitle
+          />
+          <OverflowMenuItem itemText="Edit routes and access" requireTitle />
+          <OverflowMenuItem hasDivider isDelete itemText="Delete app" />
+        </OverflowMenu>
+
+        <Layout {...args}>
+          <OverflowMenu aria-label="overflow-menu">
+            <OverflowMenuItem itemText="Stop app" />
+            <OverflowMenuItem itemText="Restart app" />
+            <OverflowMenuItem itemText="Rename app" />
+            <OverflowMenuItem
+              itemText="Clone and move app"
+              disabled
+              requireTitle
+            />
+            <OverflowMenuItem itemText="Edit routes and access" requireTitle />
+            <OverflowMenuItem hasDivider isDelete itemText="Delete app" />
+          </OverflowMenu>
+        </Layout>
+      </div>
+    </>
+  );
+};
+
+SizeTest.args = {
+  size: 'lg',
+};
+SizeTest.parameters = {
+  controls: {
+    include: ['size'],
+  },
+};
+//
 
 Default.parameters = {
   controls: {
