@@ -38,10 +38,7 @@ describe('cds-overflow-menu', () => {
   it('should focus the trigger button when focus() is called', async () => {
     const el = await fixture(basicOverflowMenu);
     const button = el.shadowRoot?.querySelector('button');
-    const tooltip = el.shadowRoot?.querySelector('cds-tooltip');
 
-    button.removeEventListener('focus', tooltip._handleHover);
-    button.removeEventListener('focusout', tooltip._handleHoverOut);
     el.focus();
 
     expect(document.activeElement).to.equal(el);
@@ -63,18 +60,6 @@ describe('cds-overflow-menu', () => {
     button.focus = originalFocus;
 
     expect(receivedFocusOptions).to.equal(focusOptions);
-  });
-
-  it('should open when click() is called', async () => {
-    const el = await fixture(basicOverflowMenu);
-    const menuBody = el.querySelector('cds-overflow-menu-body');
-
-    el.click();
-    await el.updateComplete;
-    await menuBody.updateComplete;
-
-    expect(el.open).to.be.true;
-    expect(menuBody.open).to.be.true;
   });
 
   describe('supports size', () => {
@@ -283,6 +268,26 @@ describe('cds-overflow-menu', () => {
       const button = el.shadowRoot?.querySelector('button');
 
       expect(button).to.have.attribute('aria-label', 'Actions');
+    });
+
+    it('should focus the trigger button when focus() is called on the flagged path', async () => {
+      const featureFlag = await fixture(html`
+        <feature-flags enable-v12-overflowmenu="true">
+          <cds-overflow-menu label="Actions">
+            <cds-menu>
+              <cds-menu-item label="Stop app"></cds-menu-item>
+              <cds-menu-item label="Delete app" kind="danger"></cds-menu-item>
+            </cds-menu>
+          </cds-overflow-menu>
+        </feature-flags>
+      `);
+      const el = featureFlag.querySelector('cds-overflow-menu');
+      const button = el.shadowRoot?.querySelector('button');
+
+      el.focus();
+
+      expect(document.activeElement).to.equal(el);
+      expect(el.shadowRoot?.activeElement).to.equal(button);
     });
 
     it('should manage a cds-menu child when the feature flag is enabled', async () => {

@@ -270,15 +270,6 @@ class CDSOverflowMenu
   }
 
   /**
-   * Delegates host clicks to the internal trigger button.
-   * Enables programmatic interaction with the overflow menu.
-   */
-  click() {
-    const triggerButton = this._getTriggerButton();
-    return triggerButton ? triggerButton.click() : super.click();
-  }
-
-  /**
    * Delegates host focus to the internal trigger button.
    * Enables programmatic focus for keyboard navigation scenarios.
    */
