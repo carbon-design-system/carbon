@@ -81,6 +81,8 @@
     }
 
     &.#{$prefix}--tabs--vertical {
+      @include layout.use('size', $min: 'sm', $max: 'xl', $default: 'xl');
+
       background: $layer;
       box-shadow: inset -1px 0 $border-subtle;
       grid-column: span 2;
@@ -337,7 +339,7 @@
     &.#{$prefix}--tabs--vertical .#{$prefix}--tabs__nav-item {
       flex: none;
       background-color: $layer-01;
-      block-size: $spacing-10;
+      block-size: layout.size('height');
       border-block-end: 1px solid $border-subtle;
       border-inline-end: 1px solid $border-subtle;
       box-shadow: inset 3px 0 0 0 $border-subtle;
@@ -821,6 +823,14 @@
       -webkit-line-clamp: 2;
       text-overflow: ellipsis;
       white-space: normal;
+    }
+  }
+}
+
+.#{$prefix}--tabs.#{$prefix}--tabs--vertical.#{$prefix}--layout--size-sm {
+  .#{$prefix}--tabs__nav-link {
+    .#{$prefix}--tabs__nav-item-label {
+      -webkit-line-clamp: 1;
     }
   }
 }
