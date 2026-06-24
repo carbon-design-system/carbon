@@ -285,10 +285,7 @@ $content-padding: 0 0 0 $spacing-05 !default;
     position: relative;
     border-color: transparent;
 
-    &:last-child,
-    &:hover,
-    &:last-child:hover,
-    &:hover + .#{$prefix}--accordion__item {
+    &:last-child {
       border-color: transparent;
     }
 
@@ -315,6 +312,17 @@ $content-padding: 0 0 0 $spacing-05 !default;
     &:last-child::after {
       background: $border-subtle;
       inset-block-end: -1px;
+    }
+  }
+
+  // Apply hover styles only on devices that support hover
+  @media (any-hover: hover) {
+    .#{$prefix}--accordion--flush .#{$prefix}--accordion__item:hover,
+    .#{$prefix}--accordion--flush .#{$prefix}--accordion__item:last-child:hover,
+    .#{$prefix}--accordion--flush
+      .#{$prefix}--accordion__item:hover
+      + .#{$prefix}--accordion__item {
+      border-color: transparent;
     }
   }
 
@@ -367,9 +375,18 @@ $content-padding: 0 0 0 $spacing-05 !default;
     fill: $icon-primary;
     pointer-events: none;
 
-    &:hover,
     &:focus,
     &:active {
+      border: none;
+      cursor: default;
+      outline: none;
+    }
+  }
+
+  // Apply hover styles only on devices that support hover
+  @media (any-hover: hover) {
+    .#{$prefix}--accordion.#{$prefix}--skeleton
+      .#{$prefix}--accordion__arrow:hover {
       border: none;
       cursor: default;
       outline: none;
