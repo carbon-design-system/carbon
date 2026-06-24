@@ -1931,6 +1931,7 @@ categories:
           - container-image--push
           - container-image--push-pull
           - container-services
+          - coupling-facility
           - coupling-facility-encryption
           - data--center
           - data-accessor
@@ -2127,6 +2128,7 @@ categories:
           - z--lpar
           - z--systems
           - zos
+          - zos--partition
           - zos--sysplex
   - name: Person
     subcategories:
@@ -2212,6 +2214,7 @@ categories:
           - user--follow
           - user--identification
           - user--military
+          - user--minus
           - user--multiple
           - user--online
           - user--profile
@@ -2239,6 +2242,7 @@ categories:
           - calendar--add--alt
           - calendar--settings
           - calendar--tools
+          - delay
           - delivery--time
           - event
           - event--schedule

@@ -18,16 +18,24 @@ import ChevronRight16 from '@carbon/icons/es/chevron--right/16.js';
 import CDSContentSwitcher, {
   NAVIGATION_DIRECTION,
 } from '../content-switcher/content-switcher';
-import { TABS_ICON_SIZE, TABS_KEYBOARD_ACTION, TABS_TYPE } from './defs';
+import {
+  VERTICAL_NAVIGATION_DIRECTION,
+  TABS_ICON_SIZE,
+  TABS_KEYBOARD_ACTION,
+  TABS_TYPE,
+  TABS_SIZE,
+} from './defs';
 import CDSTab from './tab';
 import styles from './tabs.scss?lit';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
 export {
   NAVIGATION_DIRECTION,
+  VERTICAL_NAVIGATION_DIRECTION,
   TABS_ICON_SIZE,
   TABS_KEYBOARD_ACTION,
   TABS_TYPE,
+  TABS_SIZE,
 };
 
 /**
@@ -74,6 +82,37 @@ export default class CDSTabs extends HostListenerMixin(CDSContentSwitcher) {
    * The width of the overflow scroll buttons.
    */
   private BUTTON_WIDTH = 44;
+
+  /**
+   * Propagates the layout size token to the host and all child tabs.
+   */
+  private _syncSizeToTabs() {
+    if (this.type === TABS_TYPE.CONTAINED || this.vertical) {
+      const rawSize = this.getAttribute('size') as TABS_SIZE | null;
+      const size =
+        rawSize === TABS_SIZE.EXTRA_LARGE && !this.vertical
+          ? TABS_SIZE.LARGE
+          : rawSize;
+
+      if (size) {
+        const value = `var(--${prefix}-layout-size-height-${size})`;
+        this.style.setProperty(`--${prefix}-layout-size-height`, value);
+        this.querySelectorAll(`${prefix}-tab`).forEach((tab) => {
+          (tab as HTMLElement).style.setProperty(
+            `--${prefix}-layout-size-height`,
+            value
+          );
+        });
+      } else {
+        this.style.removeProperty(`--${prefix}-layout-size-height`);
+        this.querySelectorAll(`${prefix}-tab`).forEach((tab) => {
+          (tab as HTMLElement).style.removeProperty(
+            `--${prefix}-layout-size-height`
+          );
+        });
+      }
+    }
+  }
 
   /**
    * Navigates through tabs.
@@ -156,8 +195,12 @@ export default class CDSTabs extends HostListenerMixin(CDSContentSwitcher) {
   @HostListener('keydown')
   protected _handleKeydown(event: KeyboardEvent) {
     const { key } = event;
-    const action = (this.constructor as typeof CDSTabs).getAction(key);
-    const enabledTabs = this.querySelectorAll(`${prefix}-tab:not([disabled])`);
+    const { selectorItemEnabled } = this.constructor as typeof CDSTabs;
+    const action = (this.constructor as typeof CDSTabs).getAction(
+      key,
+      this.vertical
+    );
+    const enabledTabs = this.querySelectorAll(selectorItemEnabled);
     switch (action) {
       case TABS_KEYBOARD_ACTION.HOME:
         {
@@ -195,7 +238,11 @@ export default class CDSTabs extends HostListenerMixin(CDSContentSwitcher) {
         break;
       case TABS_KEYBOARD_ACTION.NAVIGATING:
         {
-          const direction = NAVIGATION_DIRECTION[key];
+          event.preventDefault();
+          // Get direction based on orientation
+          const direction = this.vertical
+            ? VERTICAL_NAVIGATION_DIRECTION[key]
+            : NAVIGATION_DIRECTION[key];
           if (direction) {
             this._navigate(direction);
           }
@@ -337,8 +384,25 @@ export default class CDSTabs extends HostListenerMixin(CDSContentSwitcher) {
       (nextItem as CDSTab).hideDivider = true;
     }
 
+    // Set vertical attribute on all tabs if this tabs component is vertical
+    this._updateTabsVerticalAttribute();
     this._syncSecondaryLabels();
     this._updateTabsState();
+    this._syncSizeToTabs();
+  }
+
+  /**
+   * Updates the vertical attribute on all child tabs based on the vertical property.
+   */
+  private _updateTabsVerticalAttribute() {
+    const { selectorItem } = this.constructor as typeof CDSTabs;
+    forEach(this.querySelectorAll(selectorItem), (tab) => {
+      if (this.vertical) {
+        (tab as CDSTab).setAttribute('vertical', '');
+      } else {
+        (tab as CDSTab).removeAttribute('vertical');
+      }
+    });
   }
 
   protected _selectionDidChange(
@@ -407,10 +471,27 @@ export default class CDSTabs extends HostListenerMixin(CDSContentSwitcher) {
   type = TABS_TYPE.REGULAR;
 
   /**
+   * `true` if the tabs are in vertical orientation.
+   * This is automatically set by `cds-tabs-vertical`.
+   */
+  @property({ type: Boolean })
+  vertical = false;
+  /**
    * Whether the rendered Tab children should be dismissable.
    */
   @property({ type: Boolean, reflect: true })
   dismissable;
+
+  /**
+   * Specify the size of the tabs.
+   *
+   * Supports `sm` and `md` for line tabs.
+   * Supports `sm`, `md`, and `lg` for contained tabs.
+   * Supports `xl` only when `vertical` is set; otherwise `xl` falls back to `lg`.
+   */
+  @property({ reflect: true })
+  // @ts-expect-error - TABS_SIZE extends CONTENT_SWITCHER_SIZE with additional 'md' value
+  declare size: TABS_SIZE;
 
   /**
    * Specify the icon size used by icon-only tabs.
@@ -513,7 +594,11 @@ export default class CDSTabs extends HostListenerMixin(CDSContentSwitcher) {
       this._isScrollable = scrollWidth > clientWidth;
     }
     const { selectorItem } = this.constructor as typeof CDSTabs;
-    if (changedProperties.has('type') || changedProperties.has('iconSize')) {
+    if (
+      changedProperties.has('type') ||
+      changedProperties.has('iconSize') ||
+      changedProperties.has('size')
+    ) {
       this._totalTabs = 0;
       forEach(this.querySelectorAll(selectorItem), (elem) => {
         this._totalTabs++;
@@ -530,11 +615,19 @@ export default class CDSTabs extends HostListenerMixin(CDSContentSwitcher) {
     this._tabInitialLoad();
     this._cleanAndCreateIntersectionObserverContainer({ create: true });
     this._syncSecondaryLabels();
+    this._syncSizeToTabs();
   }
 
   updated(changedProperties) {
     // Call super to keep selection/value in sync
     super.updated?.(changedProperties);
+    if (changedProperties.has('size') || changedProperties.has('type')) {
+      this._syncSizeToTabs();
+    }
+
+    if (changedProperties.has('vertical')) {
+      this._updateTabsVerticalAttribute();
+    }
 
     if (changedProperties.has('value')) {
       const tab = this.querySelector(
@@ -755,16 +848,21 @@ export default class CDSTabs extends HostListenerMixin(CDSContentSwitcher) {
 
   /**
    * @param key The key symbol.
-   * @returns A action for dropdown for the given key symbol.
+   * @param isVertical Whether the tabs are in vertical orientation.
+   * @returns A action for tabs for the given key symbol.
    */
-  static getAction(key: string) {
+  static getAction(key: string, isVertical = false) {
     if (key === 'Home') {
       return TABS_KEYBOARD_ACTION.HOME;
     }
     if (key === 'End') {
       return TABS_KEYBOARD_ACTION.END;
     }
-    if (key in NAVIGATION_DIRECTION) {
+    // Check for navigation keys based on orientation
+    const navigationKeys = isVertical
+      ? VERTICAL_NAVIGATION_DIRECTION
+      : NAVIGATION_DIRECTION;
+    if (key in navigationKeys) {
       return TABS_KEYBOARD_ACTION.NAVIGATING;
     }
     if (key === 'Enter' || key === ' ') {
