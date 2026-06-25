@@ -183,9 +183,9 @@ export const iconSize = [iconSize01, iconSize02];
 // Border radius
 export const borderRadiusBox = '0rem';
 export const borderRadiusButton = '0rem';
-export const borderRadiusSelector = '0rem';
+export const borderRadiusInput = '0rem';
 export const borderRadius = [
   borderRadiusBox,
   borderRadiusButton,
-  borderRadiusSelector,
+  borderRadiusInput,
 ];

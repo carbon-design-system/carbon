@@ -443,7 +443,7 @@ export {
   // Border radius
   borderRadiusBox,
   borderRadiusButton,
-  borderRadiusSelector,
+  borderRadiusInput,
   // Layout
   // Deprecated ☠️
   layout01,

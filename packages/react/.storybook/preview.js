@@ -142,18 +142,18 @@ const globalTypes = {
       ],
     },
   },
-  borderRadiusSelector: {
-    name: 'Border Radius - Selector',
-    description: 'Set the border radius for selector',
-    defaultValue: 'Selector: 0rem',
+  borderRadiusInput: {
+    name: 'Border Radius - Input',
+    description: 'Set the border radius for Input',
+    defaultValue: 'Input: 0rem',
     toolbar: {
-      title: 'Border Radius - Selector',
+      title: 'Border Radius - Input',
       items: [
-        'Selector: 0rem',
-        'Selector: 0.25rem',
-        'Selector: 0.5rem',
-        'Selector: 1rem',
-        'Selector: 2rem',
+        'Input: 0rem',
+        'Input: 0.25rem',
+        'Input: 0.5rem',
+        'Input: 1rem',
+        'Input: 2rem',
       ],
     },
   },
@@ -387,7 +387,7 @@ const decorators = [
       dir,
       borderRadiusBox,
       borderRadiusButton,
-      borderRadiusSelector,
+      borderRadiusInput,
     } = context.globals;
     const backgroundValue = context.globals.backgrounds?.value;
     const [randomKey, setRandomKey] = useState(1);
@@ -436,16 +436,16 @@ const decorators = [
           );
         }
       }
-      if (borderRadiusSelector) {
-        const value = extractBorderRadiusValue(borderRadiusSelector);
+      if (borderRadiusInput) {
+        const value = extractBorderRadiusValue(borderRadiusInput);
         if (value) {
           document.documentElement.style.setProperty(
-            '--cds-border-radius-selector',
+            '--cds-border-radius-input',
             value
           );
         }
       }
-    }, [borderRadiusBox, borderRadiusButton, borderRadiusSelector]);
+    }, [borderRadiusBox, borderRadiusButton, borderRadiusInput]);
 
     useIsomorphicEffect(() => {
       document.documentElement.lang = locale;

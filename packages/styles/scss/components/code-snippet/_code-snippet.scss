@@ -72,10 +72,10 @@ $copy-btn-feedback: $background-inverse !default;
     padding: 0;
     border: 1px solid transparent;
     background-color: $layer;
-    border-end-end-radius: var(--cds-border-radius-selector, 0);
-    border-end-start-radius: var(--cds-border-radius-selector, 0);
-    border-start-end-radius: var(--cds-border-radius-selector, 0);
-    border-start-start-radius: var(--cds-border-radius-selector, 0);
+    border-end-end-radius: var(--cds-border-radius-button, 0);
+    border-end-start-radius: var(--cds-border-radius-button, 0);
+    border-start-end-radius: var(--cds-border-radius-button, 0);
+    border-start-start-radius: var(--cds-border-radius-button, 0);
     color: $text-primary;
     cursor: pointer;
 
@@ -154,6 +154,10 @@ $copy-btn-feedback: $background-inverse !default;
     display: flex;
     align-items: center;
     block-size: $spacing-08;
+    border-end-end-radius: var(--cds-border-radius-box, 0);
+    border-end-start-radius: var(--cds-border-radius-box, 0);
+    border-start-end-radius: var(--cds-border-radius-box, 0);
+    border-start-start-radius: var(--cds-border-radius-box, 0);
     padding-inline-end: $spacing-08;
   }
 
@@ -170,6 +174,10 @@ $copy-btn-feedback: $background-inverse !default;
     display: flex;
     align-items: center;
     block-size: 100%;
+    border-end-end-radius: var(--cds-border-radius-box, 0);
+    border-end-start-radius: var(--cds-border-radius-box, 0);
+    border-start-end-radius: var(--cds-border-radius-box, 0);
+    border-start-start-radius: var(--cds-border-radius-box, 0);
     min-inline-size: 0;
     overflow-x: auto;
     padding-inline-start: $spacing-05;

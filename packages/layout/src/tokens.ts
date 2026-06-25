@@ -47,7 +47,7 @@ export const unstable_tokens = [
   // Border radius
   'borderRadiusBox',
   'borderRadiusButton',
-  'borderRadiusSelector',
+  'borderRadiusInput',
 
   // Layout
   // Deprecated
