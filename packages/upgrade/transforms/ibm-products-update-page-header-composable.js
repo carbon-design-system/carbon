@@ -42,6 +42,30 @@ const transform = (fileInfo, api) => {
   const root = j(fileInfo.source);
   let dirtyFlag = false;
 
+  // Find the local name used for PageHeader import (could be aliased)
+  let pageHeaderLocalName = null;
+  root
+    .find(j.ImportDeclaration)
+    .filter((path) => path.node.source.value === '@carbon/ibm-products')
+    .forEach((path) => {
+      path.node.specifiers.forEach((specifier) => {
+        if (
+          specifier.type === 'ImportSpecifier' &&
+          specifier.imported &&
+          specifier.imported.name === 'PageHeader'
+        ) {
+          pageHeaderLocalName = specifier.local
+            ? specifier.local.name
+            : 'PageHeader';
+        }
+      });
+    });
+
+  // If PageHeader is not imported, nothing to transform
+  if (!pageHeaderLocalName) {
+    return root.toSource();
+  }
+
   // Helper to create JSX member expression (e.g., PageHeader.Content)
   const createMemberExpression = (object, property) => {
     return j.jsxMemberExpression(
@@ -67,9 +91,11 @@ const transform = (fileInfo, api) => {
         );
   };
 
-  // Transform PageHeader components
+  // Transform PageHeader components (using the local name which could be an alias)
   root
-    .find(j.JSXElement, { openingElement: { name: { name: 'PageHeader' } } })
+    .find(j.JSXElement, {
+      openingElement: { name: { name: pageHeaderLocalName } },
+    })
     .forEach((path) => {
       const attributes = path.node.openingElement.attributes;
       const originalChildren = path.node.children || [];
@@ -169,7 +195,7 @@ const transform = (fileInfo, api) => {
         }
         newChildren.push(
           createMemberJSXElement(
-            'PageHeader',
+            pageHeaderLocalName,
             'BreadcrumbBar',
             breadcrumbBarAttrs,
             []
@@ -236,7 +262,7 @@ const transform = (fileInfo, api) => {
         if (subtitleProp) {
           contentChildren.push(
             createMemberJSXElement(
-              'PageHeader',
+              pageHeaderLocalName,
               'ContentText',
               [subtitleProp],
               []
@@ -249,7 +275,7 @@ const transform = (fileInfo, api) => {
 
         newChildren.push(
           createMemberJSXElement(
-            'PageHeader',
+            pageHeaderLocalName,
             'Content',
             contentAttrs,
             contentChildren
@@ -264,7 +290,12 @@ const transform = (fileInfo, api) => {
           tabBarChildren.push(navigationProp.value.expression);
         }
         newChildren.push(
-          createMemberJSXElement('PageHeader', 'TabBar', [], tabBarChildren)
+          createMemberJSXElement(
+            pageHeaderLocalName,
+            'TabBar',
+            [],
+            tabBarChildren
+          )
         );
       }
 
@@ -285,7 +316,7 @@ const transform = (fileInfo, api) => {
         }
         newChildren.push(
           createMemberJSXElement(
-            'PageHeader',
+            pageHeaderLocalName,
             'TagOverflow',
             tagOverflowAttrs,
             []
@@ -303,7 +334,7 @@ const transform = (fileInfo, api) => {
       }
       if (!path.node.closingElement) {
         path.node.closingElement = j.jsxClosingElement(
-          j.jsxIdentifier('PageHeader')
+          j.jsxIdentifier(pageHeaderLocalName)
         );
       }
     });
@@ -336,10 +367,14 @@ const transform = (fileInfo, api) => {
               specifier.imported &&
               specifier.imported.name === 'PageHeader'
             ) {
-              // Change to preview__PageHeader
+              // Change to preview__PageHeader, preserving the local name (alias)
+              // If there's a local name (alias), preserve it; otherwise use 'PageHeader'
+              const localName = specifier.local
+                ? specifier.local.name
+                : 'PageHeader';
               return j.importSpecifier(
                 j.identifier('preview__PageHeader'),
-                j.identifier('PageHeader')
+                j.identifier(localName)
               );
             }
             return specifier;
