@@ -30,7 +30,8 @@
               0.278431,
               0.278431,
               0.278431
-            ]
+            ],
+            "hex": "#474747"
           },
           "$description": "ai-aura-hover-background token"
         },
@@ -97,7 +98,8 @@
             0.270588,
             0.537255,
             1.0
-          ]
+          ],
+          "hex": "#4589ff"
         },
         "$description": "ai-border-end token"
       },
@@ -122,7 +124,8 @@
             0.470588,
             0.662745,
             1.0
-          ]
+          ],
+          "hex": "#78a9ff"
         },
         "$description": "ai-border-strong token"
       }
@@ -179,7 +182,8 @@
             0.086275,
             0.086275,
             0.086275
-          ]
+          ],
+          "hex": "#161616"
         },
         "$description": "ai-popover-background token"
       },
@@ -192,7 +196,8 @@
               0.270588,
               0.537255,
               1.0
-            ]
+            ],
+            "hex": "#4589ff"
           },
           "$description": "ai-popover-caret-bottom token",
           "background": {
@@ -203,7 +208,8 @@
                 0.12549,
                 0.176471,
                 0.270588
-              ]
+              ],
+              "hex": "#202d45"
             },
             "$description": "ai-popover-caret-bottom-background token",
             "actions": {
@@ -214,7 +220,8 @@
                   0.117647,
                   0.156863,
                   0.227451
-                ]
+                ],
+                "hex": "#1e283a"
               },
               "$description": "ai-popover-caret-bottom-background-actions token"
             }
@@ -228,7 +235,8 @@
               0.282353,
               0.439216,
               0.709804
-            ]
+            ],
+            "hex": "#4870b5"
           },
           "$description": "ai-popover-caret-center token"
         }
@@ -303,7 +311,8 @@
         0.14902,
         0.14902,
         0.14902
-      ]
+      ],
+      "hex": "#262626"
     },
     "$description": "background token",
     "active": {
@@ -327,7 +336,8 @@
           0.058824,
           0.384314,
           0.996078
-        ]
+        ],
+        "hex": "#0f62fe"
       },
       "$description": "background-brand token"
     },
@@ -352,7 +362,8 @@
           0.956863,
           0.956863,
           0.956863
-        ]
+        ],
+        "hex": "#f4f4f4"
       },
       "$description": "background-inverse token",
       "hover": {
@@ -363,7 +374,8 @@
             0.909804,
             0.909804,
             0.909804
-          ]
+          ],
+          "hex": "#e8e8e8"
         },
         "$description": "background-inverse-hover token"
       }
@@ -417,7 +429,8 @@
           0.270588,
           0.537255,
           1.0
-        ]
+        ],
+        "hex": "#4589ff"
       },
       "$description": "border-interactive token"
     },
@@ -429,7 +442,8 @@
           0.956863,
           0.956863,
           0.956863
-        ]
+        ],
+        "hex": "#f4f4f4"
       },
       "$description": "border-inverse token"
     },
@@ -442,7 +456,8 @@
             0.552941,
             0.552941,
             0.552941
-          ]
+          ],
+          "hex": "#8d8d8d"
         },
         "$description": "border-strong-01 token"
       },
@@ -454,7 +469,8 @@
             0.658824,
             0.658824,
             0.658824
-          ]
+          ],
+          "hex": "#a8a8a8"
         },
         "$description": "border-strong-02 token"
       },
@@ -466,7 +482,8 @@
             0.776471,
             0.776471,
             0.776471
-          ]
+          ],
+          "hex": "#c6c6c6"
         },
         "$description": "border-strong-03 token"
       }
@@ -480,7 +497,8 @@
             0.321569,
             0.321569,
             0.321569
-          ]
+          ],
+          "hex": "#525252"
         },
         "$description": "border-subtle-00 token"
       },
@@ -492,7 +510,8 @@
             0.435294,
             0.435294,
             0.435294
-          ]
+          ],
+          "hex": "#6f6f6f"
         },
         "$description": "border-subtle-01 token"
       },
@@ -504,7 +523,8 @@
             0.552941,
             0.552941,
             0.552941
-          ]
+          ],
+          "hex": "#8d8d8d"
         },
         "$description": "border-subtle-02 token"
       },
@@ -516,7 +536,8 @@
             0.552941,
             0.552941,
             0.552941
-          ]
+          ],
+          "hex": "#8d8d8d"
         },
         "$description": "border-subtle-03 token"
       },
@@ -529,7 +550,8 @@
               0.552941,
               0.552941,
               0.552941
-            ]
+            ],
+            "hex": "#8d8d8d"
           },
           "$description": "border-subtle-selected-01 token"
         },
@@ -541,7 +563,8 @@
               0.658824,
               0.658824,
               0.658824
-            ]
+            ],
+            "hex": "#a8a8a8"
           },
           "$description": "border-subtle-selected-02 token"
         },
@@ -553,7 +576,8 @@
               0.658824,
               0.658824,
               0.658824
-            ]
+            ],
+            "hex": "#a8a8a8"
           },
           "$description": "border-subtle-selected-03 token"
         }
@@ -568,7 +592,8 @@
             0.435294,
             0.435294,
             0.435294
-          ]
+          ],
+          "hex": "#6f6f6f"
         },
         "$description": "border-tile-01 token"
       },
@@ -580,7 +605,8 @@
             0.552941,
             0.552941,
             0.552941
-          ]
+          ],
+          "hex": "#8d8d8d"
         },
         "$description": "border-tile-02 token"
       },
@@ -592,7 +618,8 @@
             0.658824,
             0.658824,
             0.658824
-          ]
+          ],
+          "hex": "#a8a8a8"
         },
         "$description": "border-tile-03 token"
       }
@@ -608,7 +635,8 @@
             0.776471,
             0.776471,
             0.776471
-          ]
+          ],
+          "hex": "#c6c6c6"
         },
         "$description": "chat-avatar-agent token"
       },
@@ -620,7 +648,8 @@
             0.552941,
             0.552941,
             0.552941
-          ]
+          ],
+          "hex": "#8d8d8d"
         },
         "$description": "chat-avatar-bot token"
       },
@@ -632,7 +661,8 @@
             0.270588,
             0.537255,
             1.0
-          ]
+          ],
+          "hex": "#4589ff"
         },
         "$description": "chat-avatar-user token"
       }
@@ -646,7 +676,8 @@
             0.14902,
             0.14902,
             0.14902
-          ]
+          ],
+          "hex": "#262626"
         },
         "$description": "chat-bubble-agent token",
         "text": {
@@ -657,7 +688,8 @@
               0.956863,
               0.956863,
               0.956863
-            ]
+            ],
+            "hex": "#f4f4f4"
           },
           "$description": "chat-bubble-agent-text token"
         }
@@ -670,7 +702,8 @@
             0.321569,
             0.321569,
             0.321569
-          ]
+          ],
+          "hex": "#525252"
         },
         "$description": "chat-bubble-border token"
       },
@@ -682,7 +715,8 @@
             0.223529,
             0.223529,
             0.223529
-          ]
+          ],
+          "hex": "#393939"
         },
         "$description": "chat-bubble-user token",
         "text": {
@@ -693,7 +727,8 @@
               0.956863,
               0.956863,
               0.956863
-            ]
+            ],
+            "hex": "#f4f4f4"
           },
           "$description": "chat-bubble-user-text token"
         }
@@ -707,7 +742,8 @@
           0.470588,
           0.662745,
           1.0
-        ]
+        ],
+        "hex": "#78a9ff"
       },
       "$description": "chat-button token",
       "active": {
@@ -758,7 +794,8 @@
               0.65098,
               0.784314,
               1.0
-            ]
+            ],
+            "hex": "#a6c8ff"
           },
           "$description": "chat-button-text-hover token"
         },
@@ -770,7 +807,8 @@
               0.776471,
               0.776471,
               0.776471
-            ]
+            ],
+            "hex": "#c6c6c6"
           },
           "$description": "chat-button-text-selected token"
         }
@@ -785,7 +823,8 @@
             0.14902,
             0.14902,
             0.14902
-          ]
+          ],
+          "hex": "#262626"
         },
         "$description": "chat-header-background token"
       },
@@ -797,7 +836,8 @@
             0.956863,
             0.956863,
             0.956863
-          ]
+          ],
+          "hex": "#f4f4f4"
         },
         "$description": "chat-header-text token"
       }
@@ -811,7 +851,8 @@
             0.086275,
             0.086275,
             0.086275
-          ]
+          ],
+          "hex": "#161616"
         },
         "$description": "chat-prompt-background token"
       },
@@ -837,7 +878,8 @@
               0.14902,
               0.14902,
               0.14902
-            ]
+            ],
+            "hex": "#262626"
           },
           "$description": "chat-prompt-border-start token"
         }
@@ -850,7 +892,8 @@
             0.956863,
             0.956863,
             0.956863
-          ]
+          ],
+          "hex": "#f4f4f4"
         },
         "$description": "chat-prompt-text token"
       }
@@ -864,7 +907,8 @@
             0.14902,
             0.14902,
             0.14902
-          ]
+          ],
+          "hex": "#262626"
         },
         "$description": "chat-shell-background token"
       }
@@ -879,7 +923,8 @@
           0.223529,
           0.223529,
           0.223529
-        ]
+        ],
+        "hex": "#393939"
       },
       "$description": "field-01 token"
     },
@@ -891,7 +936,8 @@
           0.321569,
           0.321569,
           0.321569
-        ]
+        ],
+        "hex": "#525252"
       },
       "$description": "field-02 token"
     },
@@ -903,7 +949,8 @@
           0.435294,
           0.435294,
           0.435294
-        ]
+        ],
+        "hex": "#6f6f6f"
       },
       "$description": "field-03 token"
     },
@@ -916,7 +963,8 @@
             0.278431,
             0.278431,
             0.278431
-          ]
+          ],
+          "hex": "#474747"
         },
         "$description": "field-hover-01 token"
       },
@@ -928,7 +976,8 @@
             0.388235,
             0.388235,
             0.388235
-          ]
+          ],
+          "hex": "#636363"
         },
         "$description": "field-hover-02 token"
       },
@@ -940,7 +989,8 @@
             0.368627,
             0.368627,
             0.368627
-          ]
+          ],
+          "hex": "#5e5e5e"
         },
         "$description": "field-hover-03 token"
       }
@@ -954,7 +1004,8 @@
         1.0,
         1.0,
         1.0
-      ]
+      ],
+      "hex": "#ffffff"
     },
     "$description": "focus token",
     "inset": {
@@ -965,7 +1016,8 @@
           0.086275,
           0.086275,
           0.086275
-        ]
+        ],
+        "hex": "#161616"
       },
       "$description": "focus-inset token"
     },
@@ -977,7 +1029,8 @@
           0.058824,
           0.384314,
           0.996078
-        ]
+        ],
+        "hex": "#0f62fe"
       },
       "$description": "focus-inverse token"
     }
@@ -990,7 +1043,8 @@
         0.0,
         0.176471,
         0.611765
-      ]
+      ],
+      "hex": "#002d9c"
     },
     "$description": "highlight token"
   },
@@ -1016,7 +1070,8 @@
           1.0,
           1.0,
           1.0
-        ]
+        ],
+        "hex": "#ffffff"
       },
       "$description": "icon-interactive token"
     },
@@ -1028,7 +1083,8 @@
           0.086275,
           0.086275,
           0.086275
-        ]
+        ],
+        "hex": "#161616"
       },
       "$description": "icon-inverse token"
     },
@@ -1041,7 +1097,8 @@
             1.0,
             1.0,
             1.0
-          ]
+          ],
+          "hex": "#ffffff"
         },
         "$description": "icon-on-color token",
         "disabled": {
@@ -1067,7 +1124,8 @@
           0.956863,
           0.956863,
           0.956863
-        ]
+        ],
+        "hex": "#f4f4f4"
       },
       "$description": "icon-primary token"
     },
@@ -1079,7 +1137,8 @@
           0.776471,
           0.776471,
           0.776471
-        ]
+        ],
+        "hex": "#c6c6c6"
       },
       "$description": "icon-secondary token"
     }
@@ -1092,7 +1151,8 @@
         0.270588,
         0.537255,
         1.0
-      ]
+      ],
+      "hex": "#4589ff"
     },
     "$description": "interactive token"
   },
@@ -1105,7 +1165,8 @@
           0.223529,
           0.223529,
           0.223529
-        ]
+        ],
+        "hex": "#393939"
       },
       "$description": "layer-01 token"
     },
@@ -1117,7 +1178,8 @@
           0.321569,
           0.321569,
           0.321569
-        ]
+        ],
+        "hex": "#525252"
       },
       "$description": "layer-02 token"
     },
@@ -1129,7 +1191,8 @@
           0.435294,
           0.435294,
           0.435294
-        ]
+        ],
+        "hex": "#6f6f6f"
       },
       "$description": "layer-03 token"
     },
@@ -1142,7 +1205,8 @@
             0.321569,
             0.321569,
             0.321569
-          ]
+          ],
+          "hex": "#525252"
         },
         "$description": "layer-accent-01 token"
       },
@@ -1154,7 +1218,8 @@
             0.435294,
             0.435294,
             0.435294
-          ]
+          ],
+          "hex": "#6f6f6f"
         },
         "$description": "layer-accent-02 token"
       },
@@ -1166,7 +1231,8 @@
             0.552941,
             0.552941,
             0.552941
-          ]
+          ],
+          "hex": "#8d8d8d"
         },
         "$description": "layer-accent-03 token"
       },
@@ -1179,7 +1245,8 @@
               0.552941,
               0.552941,
               0.552941
-            ]
+            ],
+            "hex": "#8d8d8d"
           },
           "$description": "layer-accent-active-01 token"
         },
@@ -1191,7 +1258,8 @@
               0.223529,
               0.223529,
               0.223529
-            ]
+            ],
+            "hex": "#393939"
           },
           "$description": "layer-accent-active-02 token"
         },
@@ -1203,7 +1271,8 @@
               0.321569,
               0.321569,
               0.321569
-            ]
+            ],
+            "hex": "#525252"
           },
           "$description": "layer-accent-active-03 token"
         }
@@ -1217,7 +1286,8 @@
               0.388235,
               0.388235,
               0.388235
-            ]
+            ],
+            "hex": "#636363"
           },
           "$description": "layer-accent-hover-01 token"
         },
@@ -1229,7 +1299,8 @@
               0.368627,
               0.368627,
               0.368627
-            ]
+            ],
+            "hex": "#5e5e5e"
           },
           "$description": "layer-accent-hover-02 token"
         },
@@ -1241,7 +1312,8 @@
               0.478431,
               0.478431,
               0.478431
-            ]
+            ],
+            "hex": "#7a7a7a"
           },
           "$description": "layer-accent-hover-03 token"
         }
@@ -1256,7 +1328,8 @@
             0.435294,
             0.435294,
             0.435294
-          ]
+          ],
+          "hex": "#6f6f6f"
         },
         "$description": "layer-active-01 token"
       },
@@ -1268,7 +1341,8 @@
             0.552941,
             0.552941,
             0.552941
-          ]
+          ],
+          "hex": "#8d8d8d"
         },
         "$description": "layer-active-02 token"
       },
@@ -1280,7 +1354,8 @@
             0.223529,
             0.223529,
             0.223529
-          ]
+          ],
+          "hex": "#393939"
         },
         "$description": "layer-active-03 token"
       }
@@ -1294,7 +1369,8 @@
             0.14902,
             0.14902,
             0.14902
-          ]
+          ],
+          "hex": "#262626"
         },
         "$description": "layer-background-01 token"
       },
@@ -1306,7 +1382,8 @@
             0.223529,
             0.223529,
             0.223529
-          ]
+          ],
+          "hex": "#393939"
         },
         "$description": "layer-background-02 token"
       },
@@ -1318,7 +1395,8 @@
             0.321569,
             0.321569,
             0.321569
-          ]
+          ],
+          "hex": "#525252"
         },
         "$description": "layer-background-03 token"
       }
@@ -1332,7 +1410,8 @@
             0.278431,
             0.278431,
             0.278431
-          ]
+          ],
+          "hex": "#474747"
         },
         "$description": "layer-hover-01 token"
       },
@@ -1344,7 +1423,8 @@
             0.388235,
             0.388235,
             0.388235
-          ]
+          ],
+          "hex": "#636363"
         },
         "$description": "layer-hover-02 token"
       },
@@ -1356,7 +1436,8 @@
             0.368627,
             0.368627,
             0.368627
-          ]
+          ],
+          "hex": "#5e5e5e"
         },
         "$description": "layer-hover-03 token"
       }
@@ -1370,7 +1451,8 @@
             0.321569,
             0.321569,
             0.321569
-          ]
+          ],
+          "hex": "#525252"
         },
         "$description": "layer-selected-01 token"
       },
@@ -1382,7 +1464,8 @@
             0.435294,
             0.435294,
             0.435294
-          ]
+          ],
+          "hex": "#6f6f6f"
         },
         "$description": "layer-selected-02 token"
       },
@@ -1394,7 +1477,8 @@
             0.321569,
             0.321569,
             0.321569
-          ]
+          ],
+          "hex": "#525252"
         },
         "$description": "layer-selected-03 token"
       },
@@ -1406,7 +1490,8 @@
             0.658824,
             0.658824,
             0.658824
-          ]
+          ],
+          "hex": "#a8a8a8"
         },
         "$description": "layer-selected-disabled token"
       },
@@ -1419,7 +1504,8 @@
               0.388235,
               0.388235,
               0.388235
-            ]
+            ],
+            "hex": "#636363"
           },
           "$description": "layer-selected-hover-01 token"
         },
@@ -1431,7 +1517,8 @@
               0.368627,
               0.368627,
               0.368627
-            ]
+            ],
+            "hex": "#5e5e5e"
           },
           "$description": "layer-selected-hover-02 token"
         },
@@ -1443,7 +1530,8 @@
               0.388235,
               0.388235,
               0.388235
-            ]
+            ],
+            "hex": "#636363"
           },
           "$description": "layer-selected-hover-03 token"
         }
@@ -1456,7 +1544,8 @@
             0.956863,
             0.956863,
             0.956863
-          ]
+          ],
+          "hex": "#f4f4f4"
         },
         "$description": "layer-selected-inverse token"
       }
@@ -1471,7 +1560,8 @@
           0.058824,
           0.384314,
           0.996078
-        ]
+        ],
+        "hex": "#0f62fe"
       },
       "$description": "link-inverse token",
       "active": {
@@ -1482,7 +1572,8 @@
             0.086275,
             0.086275,
             0.086275
-          ]
+          ],
+          "hex": "#161616"
         },
         "$description": "link-inverse-active token"
       },
@@ -1494,7 +1585,8 @@
             0.0,
             0.262745,
             0.807843
-          ]
+          ],
+          "hex": "#0043ce"
         },
         "$description": "link-inverse-hover token"
       },
@@ -1506,7 +1598,8 @@
             0.541176,
             0.247059,
             0.988235
-          ]
+          ],
+          "hex": "#8a3ffc"
         },
         "$description": "link-inverse-visited token"
       }
@@ -1519,7 +1612,8 @@
           0.470588,
           0.662745,
           1.0
-        ]
+        ],
+        "hex": "#78a9ff"
       },
       "$description": "link-primary token",
       "hover": {
@@ -1530,7 +1624,8 @@
             0.65098,
             0.784314,
             1.0
-          ]
+          ],
+          "hex": "#a6c8ff"
         },
         "$description": "link-primary-hover token"
       }
@@ -1543,7 +1638,8 @@
           0.65098,
           0.784314,
           1.0
-        ]
+        ],
+        "hex": "#a6c8ff"
       },
       "$description": "link-secondary token"
     },
@@ -1555,7 +1651,8 @@
           0.745098,
           0.584314,
           1.0
-        ]
+        ],
+        "hex": "#be95ff"
       },
       "$description": "link-visited token"
     }
@@ -1595,7 +1692,8 @@
           0.2,
           0.2,
           0.2
-        ]
+        ],
+        "hex": "#333333"
       },
       "$description": "skeleton-background token"
     },
@@ -1607,7 +1705,8 @@
           0.321569,
           0.321569,
           0.321569
-        ]
+        ],
+        "hex": "#525252"
       },
       "$description": "skeleton-element token"
     }
@@ -1622,7 +1721,8 @@
             1.0,
             0.513725,
             0.168627
-          ]
+          ],
+          "hex": "#ff832b"
         },
         "$description": "support-caution-major token"
       },
@@ -1634,7 +1734,8 @@
             0.945098,
             0.760784,
             0.105882
-          ]
+          ],
+          "hex": "#f1c21b"
         },
         "$description": "support-caution-minor token"
       },
@@ -1646,7 +1747,8 @@
             0.647059,
             0.431373,
             1.0
-          ]
+          ],
+          "hex": "#a56eff"
         },
         "$description": "support-caution-undefined token"
       }
@@ -1659,7 +1761,8 @@
           1.0,
           0.513725,
           0.537255
-        ]
+        ],
+        "hex": "#ff8389"
       },
       "$description": "support-error token",
       "inverse": {
@@ -1670,7 +1773,8 @@
             0.854902,
             0.117647,
             0.156863
-          ]
+          ],
+          "hex": "#da1e28"
         },
         "$description": "support-error-inverse token"
       }
@@ -1683,7 +1787,8 @@
           0.270588,
           0.537255,
           1.0
-        ]
+        ],
+        "hex": "#4589ff"
       },
       "$description": "support-info token",
       "inverse": {
@@ -1694,7 +1799,8 @@
             0.0,
             0.262745,
             0.807843
-          ]
+          ],
+          "hex": "#0043ce"
         },
         "$description": "support-info-inverse token"
       }
@@ -1707,7 +1813,8 @@
           0.258824,
           0.745098,
           0.396078
-        ]
+        ],
+        "hex": "#42be65"
       },
       "$description": "support-success token",
       "inverse": {
@@ -1718,7 +1825,8 @@
             0.141176,
             0.631373,
             0.282353
-          ]
+          ],
+          "hex": "#24a148"
         },
         "$description": "support-success-inverse token"
       }
@@ -1731,7 +1839,8 @@
           0.945098,
           0.760784,
           0.105882
-        ]
+        ],
+        "hex": "#f1c21b"
       },
       "$description": "support-warning token",
       "inverse": {
@@ -1742,7 +1851,8 @@
             0.945098,
             0.760784,
             0.105882
-          ]
+          ],
+          "hex": "#f1c21b"
         },
         "$description": "support-warning-inverse token"
       }
@@ -1758,7 +1868,8 @@
             0.552941,
             0.552941,
             0.552941
-          ]
+          ],
+          "hex": "#8d8d8d"
         },
         "$description": "syntax-angle-bracket token"
       }
@@ -1771,7 +1882,8 @@
           0.031373,
           0.741176,
           0.729412
-        ]
+        ],
+        "hex": "#08bdba"
       },
       "$description": "syntax-annotation token"
     },
@@ -1784,7 +1896,8 @@
             0.878431,
             0.878431,
             0.878431
-          ]
+          ],
+          "hex": "#e0e0e0"
         },
         "$description": "syntax-arithmetic-operator token"
       }
@@ -1797,7 +1910,8 @@
           0.956863,
           0.956863,
           0.956863
-        ]
+        ],
+        "hex": "#f4f4f4"
       },
       "$description": "syntax-atom token"
     },
@@ -1809,7 +1923,8 @@
           0.2,
           0.694118,
           1.0
-        ]
+        ],
+        "hex": "#33b1ff"
       },
       "$description": "syntax-attribute token",
       "name": {
@@ -1820,7 +1935,8 @@
             0.2,
             0.694118,
             1.0
-          ]
+          ],
+          "hex": "#33b1ff"
         },
         "$description": "syntax-attribute-name token"
       },
@@ -1832,7 +1948,8 @@
             0.956863,
             0.956863,
             0.956863
-          ]
+          ],
+          "hex": "#f4f4f4"
         },
         "$description": "syntax-attribute-value token"
       }
@@ -1846,7 +1963,8 @@
             0.878431,
             0.878431,
             0.878431
-          ]
+          ],
+          "hex": "#e0e0e0"
         },
         "$description": "syntax-bitwise-operator token"
       }
@@ -1860,7 +1978,8 @@
             0.258824,
             0.745098,
             0.396078
-          ]
+          ],
+          "hex": "#42be65"
         },
         "$description": "syntax-block-comment token"
       }
@@ -1873,7 +1992,8 @@
           0.956863,
           0.956863,
           0.956863
-        ]
+        ],
+        "hex": "#f4f4f4"
       },
       "$description": "syntax-bool token"
     },
@@ -1885,7 +2005,8 @@
           0.878431,
           0.878431,
           0.878431
-        ]
+        ],
+        "hex": "#e0e0e0"
       },
       "$description": "syntax-brace token"
     },
@@ -1897,7 +2018,8 @@
           0.878431,
           0.878431,
           0.878431
-        ]
+        ],
+        "hex": "#e0e0e0"
       },
       "$description": "syntax-bracket token"
     },
@@ -1909,7 +2031,8 @@
           0.956863,
           0.956863,
           0.956863
-        ]
+        ],
+        "hex": "#f4f4f4"
       },
       "$description": "syntax-character token"
     },
@@ -1922,7 +2045,8 @@
             0.239216,
             0.858824,
             0.85098
-          ]
+          ],
+          "hex": "#3ddbd9"
         },
         "$description": "syntax-class-name token"
       }
@@ -1935,7 +2059,8 @@
           0.956863,
           0.956863,
           0.956863
-        ]
+        ],
+        "hex": "#f4f4f4"
       },
       "$description": "syntax-color token"
     },
@@ -1947,7 +2072,8 @@
           0.258824,
           0.745098,
           0.396078
-        ]
+        ],
+        "hex": "#42be65"
       },
       "$description": "syntax-comment token"
     },
@@ -1960,7 +2086,8 @@
             0.878431,
             0.878431,
             0.878431
-          ]
+          ],
+          "hex": "#e0e0e0"
         },
         "$description": "syntax-compare-operator token"
       }
@@ -1973,7 +2100,8 @@
           0.270588,
           0.537255,
           1.0
-        ]
+        ],
+        "hex": "#4589ff"
       },
       "$description": "syntax-constant token"
     },
@@ -1985,7 +2113,8 @@
           0.956863,
           0.956863,
           0.956863
-        ]
+        ],
+        "hex": "#f4f4f4"
       },
       "$description": "syntax-content token",
       "separator": {
@@ -1996,7 +2125,8 @@
             0.878431,
             0.878431,
             0.878431
-          ]
+          ],
+          "hex": "#e0e0e0"
         },
         "$description": "syntax-content-separator token"
       }
@@ -2010,7 +2140,8 @@
             0.745098,
             0.584314,
             1.0
-          ]
+          ],
+          "hex": "#be95ff"
         },
         "$description": "syntax-control-keyword token"
       },
@@ -2022,7 +2153,8 @@
             0.745098,
             0.584314,
             1.0
-          ]
+          ],
+          "hex": "#be95ff"
         },
         "$description": "syntax-control-operator token"
       }
@@ -2035,7 +2167,8 @@
           0.2,
           0.694118,
           1.0
-        ]
+        ],
+        "hex": "#33b1ff"
       },
       "$description": "syntax-definition token",
       "keyword": {
@@ -2046,7 +2179,8 @@
             0.2,
             0.694118,
             1.0
-          ]
+          ],
+          "hex": "#33b1ff"
         },
         "$description": "syntax-definition-keyword token"
       },
@@ -2058,7 +2192,8 @@
             0.2,
             0.694118,
             1.0
-          ]
+          ],
+          "hex": "#33b1ff"
         },
         "$description": "syntax-definition-operator token"
       }
@@ -2071,7 +2206,8 @@
           0.635294,
           0.098039,
           0.121569
-        ]
+        ],
+        "hex": "#a2191f"
       },
       "$description": "syntax-deleted token"
     },
@@ -2084,7 +2220,8 @@
             0.878431,
             0.878431,
             0.878431
-          ]
+          ],
+          "hex": "#e0e0e0"
         },
         "$description": "syntax-deref-operator token"
       }
@@ -2098,7 +2235,8 @@
             0.258824,
             0.745098,
             0.396078
-          ]
+          ],
+          "hex": "#42be65"
         },
         "$description": "syntax-doc-comment token"
       },
@@ -2110,7 +2248,8 @@
             0.956863,
             0.956863,
             0.956863
-          ]
+          ],
+          "hex": "#f4f4f4"
         },
         "$description": "syntax-doc-string token"
       }
@@ -2124,7 +2263,8 @@
             0.258824,
             0.745098,
             0.396078
-          ]
+          ],
+          "hex": "#42be65"
         },
         "$description": "syntax-document-meta token"
       }
@@ -2137,7 +2277,8 @@
           0.956863,
           0.956863,
           0.956863
-        ]
+        ],
+        "hex": "#f4f4f4"
       },
       "$description": "syntax-emphasis token"
     },
@@ -2149,7 +2290,8 @@
           0.878431,
           0.878431,
           0.878431
-        ]
+        ],
+        "hex": "#e0e0e0"
       },
       "$description": "syntax-escape token"
     },
@@ -2161,7 +2303,8 @@
           0.435294,
           0.862745,
           0.54902
-        ]
+        ],
+        "hex": "#6fdc8c"
       },
       "$description": "syntax-float token"
     },
@@ -2173,7 +2316,8 @@
           0.945098,
           0.760784,
           0.105882
-        ]
+        ],
+        "hex": "#f1c21b"
       },
       "$description": "syntax-function token"
     },
@@ -2185,7 +2329,8 @@
           0.2,
           0.694118,
           1.0
-        ]
+        ],
+        "hex": "#33b1ff"
       },
       "$description": "syntax-heading token",
       "1": {
@@ -2196,7 +2341,8 @@
             0.2,
             0.694118,
             1.0
-          ]
+          ],
+          "hex": "#33b1ff"
         },
         "$description": "syntax-heading-1 token"
       },
@@ -2208,7 +2354,8 @@
             0.2,
             0.694118,
             1.0
-          ]
+          ],
+          "hex": "#33b1ff"
         },
         "$description": "syntax-heading-2 token"
       },
@@ -2220,7 +2367,8 @@
             0.2,
             0.694118,
             1.0
-          ]
+          ],
+          "hex": "#33b1ff"
         },
         "$description": "syntax-heading-3 token"
       },
@@ -2232,7 +2380,8 @@
             0.2,
             0.694118,
             1.0
-          ]
+          ],
+          "hex": "#33b1ff"
         },
         "$description": "syntax-heading-4 token"
       },
@@ -2244,7 +2393,8 @@
             0.2,
             0.694118,
             1.0
-          ]
+          ],
+          "hex": "#33b1ff"
         },
         "$description": "syntax-heading-5 token"
       },
@@ -2256,7 +2406,8 @@
             0.2,
             0.694118,
             1.0
-          ]
+          ],
+          "hex": "#33b1ff"
         },
         "$description": "syntax-heading-6 token"
       }
@@ -2269,7 +2420,8 @@
           0.098039,
           0.501961,
           0.219608
-        ]
+        ],
+        "hex": "#198038"
       },
       "$description": "syntax-inserted token"
     },
@@ -2281,7 +2433,8 @@
           0.435294,
           0.862745,
           0.54902
-        ]
+        ],
+        "hex": "#6fdc8c"
       },
       "$description": "syntax-integer token"
     },
@@ -2293,7 +2446,8 @@
           0.980392,
           0.301961,
           0.337255
-        ]
+        ],
+        "hex": "#fa4d56"
       },
       "$description": "syntax-invalid token"
     },
@@ -2305,7 +2459,8 @@
           0.270588,
           0.537255,
           1.0
-        ]
+        ],
+        "hex": "#4589ff"
       },
       "$description": "syntax-keyword token"
     },
@@ -2318,7 +2473,8 @@
             0.65098,
             0.784314,
             1.0
-          ]
+          ],
+          "hex": "#a6c8ff"
         },
         "$description": "syntax-label-name token"
       }
@@ -2332,7 +2488,8 @@
             0.258824,
             0.745098,
             0.396078
-          ]
+          ],
+          "hex": "#42be65"
         },
         "$description": "syntax-line-comment token"
       }
@@ -2345,7 +2502,8 @@
           0.270588,
           0.537255,
           1.0
-        ]
+        ],
+        "hex": "#4589ff"
       },
       "$description": "syntax-link token"
     },
@@ -2357,7 +2515,8 @@
           0.956863,
           0.956863,
           0.956863
-        ]
+        ],
+        "hex": "#f4f4f4"
       },
       "$description": "syntax-list token"
     },
@@ -2369,7 +2528,8 @@
           0.956863,
           0.956863,
           0.956863
-        ]
+        ],
+        "hex": "#f4f4f4"
       },
       "$description": "syntax-literal token"
     },
@@ -2381,7 +2541,8 @@
           0.65098,
           0.784314,
           1.0
-        ]
+        ],
+        "hex": "#a6c8ff"
       },
       "$description": "syntax-local token"
     },
@@ -2394,7 +2555,8 @@
             0.878431,
             0.878431,
             0.878431
-          ]
+          ],
+          "hex": "#e0e0e0"
         },
         "$description": "syntax-logic-operator token"
       }
@@ -2408,7 +2570,8 @@
             0.956863,
             0.956863,
             0.956863
-          ]
+          ],
+          "hex": "#f4f4f4"
         },
         "$description": "syntax-macro-name token"
       }
@@ -2421,7 +2584,8 @@
           0.258824,
           0.745098,
           0.396078
-        ]
+        ],
+        "hex": "#42be65"
       },
       "$description": "syntax-meta token"
     },
@@ -2433,7 +2597,8 @@
           0.270588,
           0.537255,
           1.0
-        ]
+        ],
+        "hex": "#4589ff"
       },
       "$description": "syntax-modifier token"
     },
@@ -2446,7 +2611,8 @@
             0.745098,
             0.584314,
             1.0
-          ]
+          ],
+          "hex": "#be95ff"
         },
         "$description": "syntax-module-keyword token"
       }
@@ -2459,7 +2625,8 @@
           0.956863,
           0.956863,
           0.956863
-        ]
+        ],
+        "hex": "#f4f4f4"
       },
       "$description": "syntax-monospace token"
     },
@@ -2471,7 +2638,8 @@
           0.65098,
           0.784314,
           1.0
-        ]
+        ],
+        "hex": "#a6c8ff"
       },
       "$description": "syntax-name token"
     },
@@ -2483,7 +2651,8 @@
           0.239216,
           0.858824,
           0.85098
-        ]
+        ],
+        "hex": "#3ddbd9"
       },
       "$description": "syntax-namespace token"
     },
@@ -2495,7 +2664,8 @@
           0.956863,
           0.956863,
           0.956863
-        ]
+        ],
+        "hex": "#f4f4f4"
       },
       "$description": "syntax-null token"
     },
@@ -2507,7 +2677,8 @@
           0.435294,
           0.862745,
           0.54902
-        ]
+        ],
+        "hex": "#6fdc8c"
       },
       "$description": "syntax-number token"
     },
@@ -2519,7 +2690,8 @@
           0.878431,
           0.878431,
           0.878431
-        ]
+        ],
+        "hex": "#e0e0e0"
       },
       "$description": "syntax-operator token",
       "keyword": {
@@ -2530,7 +2702,8 @@
             0.270588,
             0.537255,
             1.0
-          ]
+          ],
+          "hex": "#4589ff"
         },
         "$description": "syntax-operator-keyword token"
       }
@@ -2543,7 +2716,8 @@
           0.878431,
           0.878431,
           0.878431
-        ]
+        ],
+        "hex": "#e0e0e0"
       },
       "$description": "syntax-paren token"
     },
@@ -2556,7 +2730,8 @@
             0.956863,
             0.956863,
             0.956863
-          ]
+          ],
+          "hex": "#f4f4f4"
         },
         "$description": "syntax-processing-instruction token"
       }
@@ -2570,7 +2745,8 @@
             0.2,
             0.694118,
             1.0
-          ]
+          ],
+          "hex": "#33b1ff"
         },
         "$description": "syntax-property-name token"
       }
@@ -2583,7 +2759,8 @@
           0.878431,
           0.878431,
           0.878431
-        ]
+        ],
+        "hex": "#e0e0e0"
       },
       "$description": "syntax-punctuation token"
     },
@@ -2595,7 +2772,8 @@
           0.258824,
           0.745098,
           0.396078
-        ]
+        ],
+        "hex": "#42be65"
       },
       "$description": "syntax-quote token"
     },
@@ -2607,7 +2785,8 @@
           0.745098,
           0.584314,
           1.0
-        ]
+        ],
+        "hex": "#be95ff"
       },
       "$description": "syntax-regexp token"
     },
@@ -2619,7 +2798,8 @@
           0.239216,
           0.858824,
           0.85098
-        ]
+        ],
+        "hex": "#3ddbd9"
       },
       "$description": "syntax-self token"
     },
@@ -2631,7 +2811,8 @@
           0.878431,
           0.878431,
           0.878431
-        ]
+        ],
+        "hex": "#e0e0e0"
       },
       "$description": "syntax-separator token"
     },
@@ -2643,7 +2824,8 @@
           0.270588,
           0.537255,
           1.0
-        ]
+        ],
+        "hex": "#4589ff"
       },
       "$description": "syntax-special token",
       "string": {
@@ -2654,7 +2836,8 @@
             0.745098,
             0.584314,
             1.0
-          ]
+          ],
+          "hex": "#be95ff"
         },
         "$description": "syntax-special-string token"
       }
@@ -2668,7 +2851,8 @@
             0.878431,
             0.878431,
             0.878431
-          ]
+          ],
+          "hex": "#e0e0e0"
         },
         "$description": "syntax-square-bracket token"
       }
@@ -2681,7 +2865,8 @@
           0.270588,
           0.537255,
           1.0
-        ]
+        ],
+        "hex": "#4589ff"
       },
       "$description": "syntax-standard token"
     },
@@ -2693,7 +2878,8 @@
           0.956863,
           0.956863,
           0.956863
-        ]
+        ],
+        "hex": "#f4f4f4"
       },
       "$description": "syntax-strikethrough token"
     },
@@ -2705,7 +2891,8 @@
           0.956863,
           0.956863,
           0.956863
-        ]
+        ],
+        "hex": "#f4f4f4"
       },
       "$description": "syntax-string token"
     },
@@ -2717,7 +2904,8 @@
           0.956863,
           0.956863,
           0.956863
-        ]
+        ],
+        "hex": "#f4f4f4"
       },
       "$description": "syntax-strong token"
     },
@@ -2729,7 +2917,8 @@
           0.239216,
           0.858824,
           0.85098
-        ]
+        ],
+        "hex": "#3ddbd9"
       },
       "$description": "syntax-tag token",
       "name": {
@@ -2740,7 +2929,8 @@
             0.239216,
             0.858824,
             0.85098
-          ]
+          ],
+          "hex": "#3ddbd9"
         },
         "$description": "syntax-tag-name token"
       }
@@ -2753,7 +2943,8 @@
           0.239216,
           0.858824,
           0.85098
-        ]
+        ],
+        "hex": "#3ddbd9"
       },
       "$description": "syntax-type token",
       "name": {
@@ -2764,7 +2955,8 @@
             0.239216,
             0.858824,
             0.85098
-          ]
+          ],
+          "hex": "#3ddbd9"
         },
         "$description": "syntax-type-name token"
       },
@@ -2776,7 +2968,8 @@
             0.239216,
             0.858824,
             0.85098
-          ]
+          ],
+          "hex": "#3ddbd9"
         },
         "$description": "syntax-type-operator token"
       }
@@ -2789,7 +2982,8 @@
           0.435294,
           0.862745,
           0.54902
-        ]
+        ],
+        "hex": "#6fdc8c"
       },
       "$description": "syntax-unit token"
     },
@@ -2802,7 +2996,8 @@
             0.878431,
             0.878431,
             0.878431
-          ]
+          ],
+          "hex": "#e0e0e0"
         },
         "$description": "syntax-update-operator token"
       }
@@ -2815,7 +3010,8 @@
           0.878431,
           0.878431,
           0.878431
-        ]
+        ],
+        "hex": "#e0e0e0"
       },
       "$description": "syntax-url token"
     },
@@ -2827,7 +3023,8 @@
           0.65098,
           0.784314,
           1.0
-        ]
+        ],
+        "hex": "#a6c8ff"
       },
       "$description": "syntax-variable token",
       "name": {
@@ -2838,7 +3035,8 @@
             0.65098,
             0.784314,
             1.0
-          ]
+          ],
+          "hex": "#a6c8ff"
         },
         "$description": "syntax-variable-name token"
       }
@@ -2866,7 +3064,8 @@
           1.0,
           0.701961,
           0.721569
-        ]
+        ],
+        "hex": "#ffb3b8"
       },
       "$description": "text-error token"
     },
@@ -2878,7 +3077,8 @@
           0.776471,
           0.776471,
           0.776471
-        ]
+        ],
+        "hex": "#c6c6c6"
       },
       "$description": "text-helper token"
     },
@@ -2890,7 +3090,8 @@
           0.086275,
           0.086275,
           0.086275
-        ]
+        ],
+        "hex": "#161616"
       },
       "$description": "text-inverse token"
     },
@@ -2903,7 +3104,8 @@
             1.0,
             1.0,
             1.0
-          ]
+          ],
+          "hex": "#ffffff"
         },
         "$description": "text-on-color token",
         "disabled": {
@@ -2942,7 +3144,8 @@
           0.956863,
           0.956863,
           0.956863
-        ]
+        ],
+        "hex": "#f4f4f4"
       },
       "$description": "text-primary token"
     },
@@ -2954,7 +3157,8 @@
           0.776471,
           0.776471,
           0.776471
-        ]
+        ],
+        "hex": "#c6c6c6"
       },
       "$description": "text-secondary token"
     }
@@ -2968,7 +3172,8 @@
           0.552941,
           0.552941,
           0.552941
-        ]
+        ],
+        "hex": "#8d8d8d"
       },
       "$description": "toggle-off token"
     }
