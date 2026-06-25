@@ -1,0 +1,227 @@
+import { ArgTypes, Markdown, Meta, Canvas } from '@storybook/addon-docs/blocks';
+import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
+import * as EditInPlaceStories from './edit-in-place.stories';
+import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
+import helperSource from './edit-in-place-helpers.ts?raw';
+
+export const customFunctionArr = [
+  helperSource
+    .replace(/import\s+.*?from\s+['"].*?['"];?\s*/g, '')
+    .replace(/import\s+\{[^}]*\}\s+from\s+['"].*?['"];?\s*/g, '')
+    .replace(/export\s+/g, '')
+    .replace(/\/\*\*[\s\S]*?\*\//g, '')
+    .replace(/const\s+prefix\s*=.*?;/g, '')
+    .replace(/\$\{prefix\}/g, '${\'c4p\'}')
+    .replace(/\s*\{\s+args:\s*defaultArgs,\s+render:\s*\(args:\s*any\)\s*=>\s*\{\s*/g, '')
+    .trim()
+];
+
+export const customImportArr = [`import '@carbon/web-components/es/components/tooltip/index.js';
+`];
+
+<Meta of={EditInPlaceStories} />
+
+# Edit in place
+
+The EditInPlace component allows users to edit text inline with save and cancel actions. It provides a seamless editing experience with keyboard support and validation.
+
+## Getting started
+
+Here's a quick example to get you started.
+
+### JS (via import)
+
+```javascript
+import '@carbon/ibm-products-web-components/es/components/edit-in-place/index.js';
+```
+
+### HTML
+
+```html
+<c4p-edit-in-place
+  id="my-edit"
+  value="Edit me"
+  label-text="Editable field"
+  edit-label="Edit"
+  save-label="Save"
+  cancel-label="Cancel"
+></c4p-edit-in-place>
+```
+
+### JavaScript (Event Handling)
+
+```javascript
+const editInPlace = document.querySelector('c4p-edit-in-place');
+
+editInPlace.addEventListener('c4p-edit-in-place-change', (e) => {
+  console.log('Value changed:', e.detail.value);
+});
+
+editInPlace.addEventListener('c4p-edit-in-place-save', (e) => {
+  console.log('Saved:', e.detail.value);
+});
+
+editInPlace.addEventListener('c4p-edit-in-place-cancel', (e) => {
+  console.log('Cancelled:', e.detail.value);
+});
+```
+
+### Example Usage
+
+### Default
+
+<Canvas
+  of={EditInPlaceStories.Default}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () =>
+        stackblitzPrefillConfig({
+          story: EditInPlaceStories.Default,
+          customFunctionDefs: customFunctionArr,
+          customImports: customImportArr,
+          componentName: 'edit-in-place',
+        }),
+    },
+  ]}
+></Canvas>
+
+### Invalid
+
+<Canvas
+  of={EditInPlaceStories.Invalid}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () =>
+        stackblitzPrefillConfig({
+          story: EditInPlaceStories.Invalid,
+          customFunctionDefs: customFunctionArr,
+          customImports: customImportArr,
+          componentName: 'edit-in-place',
+        }),
+    },
+  ]}
+></Canvas>
+
+### Custom Blur Function
+
+<Canvas
+  of={EditInPlaceStories.CustomBlurFunction}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () =>
+        stackblitzPrefillConfig({
+          story: EditInPlaceStories.CustomBlurFunction,
+          customFunctionDefs: customFunctionArr,
+          customImports: customImportArr,
+          componentName: 'edit-in-place',
+        }),
+    },
+  ]}
+></Canvas>
+
+### Read Only
+
+<Canvas
+  of={EditInPlaceStories.ReadOnly}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () =>
+        stackblitzPrefillConfig({
+          story: EditInPlaceStories.ReadOnly,
+          customFunctionDefs: customFunctionArr,
+          customImports: customImportArr,
+          componentName: 'edit-in-place',
+        }),
+    },
+  ]}
+></Canvas>
+
+## Component API
+
+### Properties
+
+| Property | Attribute | Type | Default | Description |
+|----------|-----------|------|---------|-------------|
+| `cancelLabel` | `cancel-label` | `string` | `'Cancel'` | Label for the cancel button |
+| `editAlwaysVisible` | `edit-always-visible` | `boolean` | `false` | Always show the edit icon (not just on hover) |
+| `editLabel` | `edit-label` | `string` | `'Edit'` | Label for the edit button |
+| `id` | `id` | `string` | `''` | Specify a custom id for the input |
+| `inheritTypography` | `inherit-typography` | `boolean` | `false` | Inherit typography from container |
+| `invalid` | `invalid` | `boolean` | `false` | Determines if the input is invalid |
+| `invalidText` | `invalid-text` | `string` | `''` | Text displayed when input is invalid |
+| `labelText` | `label-text` | `string` | `''` | Text for screen readers |
+| `placeholder` | `placeholder` | `string` | `''` | Placeholder text for the input |
+| `readOnly` | `read-only` | `boolean` | `false` | Determines if the input is in read-only mode |
+| `readOnlyLabel` | `read-only-label` | `string` | `'Edit off'` | Label for the edit off button in read-only mode |
+| `saveLabel` | `save-label` | `string` | `'Save'` | Label for the save button |
+| `size` | `size` | `'sm' \| 'md' \| 'lg'` | `'sm'` | Vertical size of control |
+| `tooltipAlignment` | `tooltip-alignment` | `TooltipAlignment` | `'top'` | Tooltip alignment for buttons |
+| `value` | `value` | `string` | `''` | Current value of the input |
+
+### TooltipAlignment Type
+
+```typescript
+type TooltipAlignment =
+  | 'top'
+  | 'top-left'
+  | 'top-right'
+  | 'bottom'
+  | 'bottom-left'
+  | 'bottom-right'
+  | 'left'
+  | 'right';
+```
+
+## Events
+
+| Event | Description | Detail |
+|-------|-------------|--------|
+| `c4p-edit-in-place-change` | Fired when the input value changes | `{ value: string }` |
+| `c4p-edit-in-place-save` | Fired when save is triggered (button click or Enter key) | `{ value: string }` |
+| `c4p-edit-in-place-cancel` | Fired when cancel is triggered (button click or Escape key) | `{ value: string }` |
+| `c4p-edit-in-place-blur` | Fired when the input loses focus | `{ value: string }` |
+
+## CSS Parts
+
+The component exposes the following CSS parts for external styling:
+
+| Part | Description |
+|------|-------------|
+| `input` | The input element |
+| `actions` | The button container |
+| `invalid-text` | The error message container |
+
+### Example: Styling with CSS Parts
+
+```css
+c4p-edit-in-place::part(input) {
+  font-weight: bold;
+}
+
+c4p-edit-in-place::part(actions) {
+  background-color: lightgray;
+}
+
+c4p-edit-in-place::part(invalid-text) {
+  font-style: italic;
+}
+```
+
+## Accessibility
+
+- The component uses proper ARIA attributes for screen readers
+- Keyboard navigation is fully supported:
+  - **Enter**: Save changes (when in edit mode)
+  - **Escape**: Cancel changes (when in edit mode)
+  - **Tab**: Navigate between input and action buttons
+- All buttons have accessible labels via tooltips
+- Invalid state is properly announced to screen readers
+
+## Feedback
+
+Help us improve this component by providing feedback, asking questions on Slack, or updating this file in
+[GitHub](https://github.com/carbon-design-system/ibm-products/tree/main/packages/ibm-products-web-components/src/components/edit-in-place/edit-in-place.mdx).

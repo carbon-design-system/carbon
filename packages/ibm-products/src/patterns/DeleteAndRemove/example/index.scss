@@ -1,0 +1,65 @@
+//
+// Copyright IBM Corp. 2026
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+$prefix: 'c4p' !default;
+$carbon-prefix: 'cds';
+
+@use '@carbon/styles/scss/config' with (
+  $font-path: '@ibm/plex'
+);
+@use '@carbon/styles';
+
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/theme' as theme;
+@use '@carbon/styles/scss/themes' as themes;
+@use '@carbon/styles/scss/type';
+@use '@carbon/styles/scss/motion' as *;
+
+body {
+  padding: 0;
+  margin: 0;
+}
+
+#root {
+  min-block-size: 100vh;
+}
+
+.notification {
+  position: fixed;
+  z-index: 9999;
+  inset-block-start: $spacing-05;
+  inset-inline-end: $spacing-05;
+}
+
+.no-bullets {
+  list-style: none;
+  padding-inline-start: $spacing-05;
+}
+
+.example-container {
+  margin-inline-start: $spacing-02;
+  max-inline-size: 1200px;
+
+  h1 {
+    font-size: 2rem;
+    font-weight: 400;
+    margin-block-end: $spacing-07;
+  }
+
+  .example-section {
+    padding: $spacing-07;
+    border: 1px solid var(--cds-border-subtle);
+    background-color: var(--cds-layer-01);
+    margin-block-end: $spacing-05;
+
+    h2 {
+      font-size: 1.5rem;
+      font-weight: 400;
+      margin-block: 0 $spacing-06;
+    }
+  }
+}

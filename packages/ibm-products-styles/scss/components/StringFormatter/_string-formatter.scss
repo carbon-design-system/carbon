@@ -1,0 +1,113 @@
+//
+// Copyright IBM Corp. 2024, 2025
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+// Standard imports.
+@use '../../global/styles/project-settings' as c4p-settings;
+@use '../../global/styles/mixins';
+@use '@carbon/styles/scss/type';
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/config' as carbon-config;
+// Other Carbon settings if needed
+// TODO: @use '@carbon/styles/scss/grid';
+// or
+// TODO: @use '@carbon/styles/scss/grid';
+
+// StringFormatter uses the following Carbon for IBM Products components:
+// TODO: @use(s) of IBM Products component styles used by StringFormatter
+
+// The block part of our conventional BEM class names (blockClass__E--M).
+$block-class: #{c4p-settings.$pkg-prefix}--string-formatter;
+$popover-block-class: #{carbon-config.$prefix}--popover;
+
+.#{$block-class} {
+  display: inline-block;
+
+  &--truncate {
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    line-height: inherit;
+    text-overflow: ellipsis;
+    word-break: break-word;
+  }
+
+  button.#{carbon-config.$prefix}--definition-term {
+    border-block-end: none;
+    letter-spacing: inherit;
+  }
+
+  .#{carbon-config.$prefix}--popover-container {
+    display: flex;
+  }
+}
+
+.#{$block-class}--content {
+  display: inline-block;
+  text-align: start;
+}
+
+.#{$block-class}--truncate {
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+}
+
+.#{$block-class}__tooltip > button {
+  border-width: 0;
+  color: currentColor;
+  font-size: inherit;
+  font-weight: inherit;
+  line-height: inherit;
+}
+
+.#{$block-class} .#{$popover-block-class} {
+  margin: 0 auto;
+  max-inline-size: $spacing-05;
+}
+
+.#{$block-class} .#{$popover-block-class}-content {
+  max-inline-size: 20rem;
+}
+
+.#{$block-class} .#{$popover-block-class}--left .#{$popover-block-class},
+.#{$block-class} .#{$popover-block-class}--left-bottom .#{$popover-block-class},
+.#{$block-class} .#{$popover-block-class}--left-top .#{$popover-block-class} {
+  margin: 0;
+}
+
+.#{$block-class} .#{$popover-block-class}--right .#{$popover-block-class},
+.#{$block-class}
+  .#{$popover-block-class}--right-bottom
+  .#{$popover-block-class},
+.#{$block-class} .#{$popover-block-class}--right-top .#{$popover-block-class} {
+  margin-inline: auto 0;
+}
+
+.#{$block-class} .#{$popover-block-class}--top .#{$popover-block-class}-caret,
+.#{$block-class}
+  .#{$popover-block-class}--top-left
+  .#{$popover-block-class}-caret,
+.#{$block-class}
+  .#{$popover-block-class}--top-right
+  .#{$popover-block-class}-caret {
+  /* stylelint-disable-next-line */
+  inset-block-start: -1px !important;
+}
+
+.#{$block-class}
+  .#{$popover-block-class}--bottom
+  .#{$popover-block-class}-caret,
+.#{$block-class}
+  .#{$popover-block-class}--bottom-left
+  .#{$popover-block-class}-caret,
+.#{$block-class}
+  .#{$popover-block-class}--bottom-right
+  .#{$popover-block-class}-caret {
+  /* stylelint-disable-next-line */
+  inset-block-end: -1px !important;
+}

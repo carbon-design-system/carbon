@@ -1,0 +1,140 @@
+import { Markdown, Meta, Story, Canvas } from '@storybook/addon-docs/blocks';
+import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
+import * as CoachmarkOverlayElementsStories from './coachmark-overlay-elements.stories';
+
+<Meta of={CoachmarkOverlayElementsStories} />
+
+# CoachmarkOverlayElements
+
+[CoachmarkOverlayElements usage guidelines](https://pages.github.ibm.com/carbon/ibm-products/patterns/coachmark-overlay-elements/usage/)
+
+## Overview
+
+The CoachmarkOverlayElements pattern acts as a container element for onboarding and should only be used within the scope of a Coachmark.
+
+## Coded examples
+
+Patterns have multiple ways of accomplishing a user need and typically use a
+combination of components with additional design considerations. The pattern
+code we share is meant to serve as an example implementation that can be built
+and extended further.
+
+### Ingredients
+
+To build this pattern, we recommend including the following components:
+
+- [Coachmark](https://ibm-products-web-components.carbondesignsystem.com/?path=/docs/components-coachmark)
+- [cds-button](https://web-components.carbondesignsystem.com/?path=/docs/components-button)
+- [Carousel utility](https://github.com/carbon-design-system/carbon/blob/main/packages/utilities/src/carousel/README.md)
+
+### Implementation Notes
+
+#### Carousel Integration
+Use the `@carbon/utilities` carousel for managing slide navigation:
+- Initialize after component first render
+- Handle view change events to update button states
+- Manage focus and accessibility attributes
+
+> 💡 Check our
+> [Stackblitz](https://stackblitz.com/github/carbon-design-system/ibm-products/tree/main/packages/ibm-products-web-components/examples/coachmark-overlay-elements)
+> example implementation.
+
+[![Edit carbon-web-components](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/carbon-design-system/ibm-products/tree/main/packages/ibm-products-web-components/examples/coachmark-overlay-elements)
+
+### Example Usage
+
+<Canvas
+  of={CoachmarkOverlayElementsStories.Default}
+  title="Coachmark overlay elements"
+></Canvas>
+
+## Getting started
+
+Here's a quick example to get you started.
+
+#### JS (via import)
+
+```javascript
+import { POPOVER_ALIGNMENT } from '@carbon/web-components/es/components/popover/defs.js';
+import '@carbon/ibm-products-web-components/es/components/coachmark/index.js';
+import '@carbon/ibm-products-web-components/es/components/coachmark/coachmark-beacon/index.js';
+import { InitCarousel, initCarousel } from '@carbon/utilities';
+import '@carbon/web-components/es/components/button/button.js';
+```
+
+### HTML
+
+```html
+<c4p-coachmark
+  ?open=${this._open}
+  align=${POPOVER_ALIGNMENT.TOP}
+  .position=${{ x: 150, y: 150 }}
+  .highContrast=${true}
+>
+  <c4p-coachmark-beacon
+    label="Show information"
+    ?expanded=${this._open}
+    @c4p-coachmark-beacon-clicked=${this.handleBeaconClick}
+    slot="trigger"
+  >
+  </c4p-coachmark-beacon>
+  <c4p-coachmark-header
+    closeIconDescription="Close"
+  ></c4p-coachmark-header>
+  <c4p-coachmark-body class="coachmark-body">
+    <div>
+      <img
+        src=${sampleImage}
+        style="width: 100%; margin-bottom: 1rem;"
+        alt="Sample"
+      />
+    </div>
+
+    <div class="exampleCarouselWrapper">
+      ${items.map(
+        (item) => html`
+          <div>
+            <h2>${item.title}</h2>
+            <p>${item.text}</p>
+          </div>
+        `
+      )}
+    </div>
+    <div class="carouselControlWrapper__footer">
+      <div class="carouselControlWrapper--controls-progress">
+        <span class="carousel-progress">${this._currentViewIndex + 1} / ${items.length}</span>
+      </div>
+      <div class="carouselControlWrapper--buttons">
+        ${this.showBack ? html`
+          <cds-button
+            class="back-btn"
+            size="sm"
+            kind="ghost"
+            @click=${this.handlePrev}
+          >
+            Back
+          </cds-button>
+        ` : ''}
+        ${this.showNext ? html`
+          <cds-button
+            class="next-btn"
+            size="sm"
+            @click=${this.handleNext}
+          >
+            Next
+          </cds-button>
+        ` : ''}
+        ${this.showDone ? html`
+          <cds-button
+            class="done-btn"
+            size="sm"
+            @click=${this.handleClose}
+          >
+            Done
+          </cds-button>
+        ` : ''}
+      </div>
+    </div>
+  </c4p-coachmark-body>
+</c4p-coachmark>
+```

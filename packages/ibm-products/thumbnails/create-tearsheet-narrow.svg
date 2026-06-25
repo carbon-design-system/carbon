@@ -1,0 +1,36 @@
+<svg width="320" height="180" viewBox="0 0 320 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect x="60" y="41" width="200" height="109" fill="white"/>
+<rect x="60" y="29" width="200" height="13" fill="#171717"/>
+<rect opacity="0.844385" x="94" y="34.5" width="22" height="3" fill="#C6C6C6"/>
+<rect opacity="0.844385" x="67" y="34.5" width="22" height="3" fill="#C6C6C6"/>
+<rect opacity="0.844385" x="121" y="34.5" width="22" height="3" fill="#C6C6C6"/>
+<rect opacity="0.844385" x="239" y="33" width="5" height="5" fill="#C6C6C6"/>
+<rect opacity="0.844385" x="249" y="33" width="5" height="5" fill="#C6C6C6"/>
+<g style="mix-blend-mode:multiply">
+<rect x="60" y="29" width="200" height="122" fill="#8D8D8D"/>
+</g>
+<rect x="125" y="51" width="69" height="90" fill="white"/>
+<path d="M189.265 57L190.5 55.7651L190.235 55.5L189 56.7349L187.765 55.5L187.5 55.7651L188.735 57L187.5 58.2349L187.765 58.5L189 57.2651L190.235 58.5L190.5 58.2349L189.265 57V57Z" fill="black"/>
+<mask id="mask0_7_2960" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="187" y="55" width="4" height="4">
+<path d="M189.265 57L190.5 55.7651L190.235 55.5L189 56.7349L187.765 55.5L187.5 55.7651L188.735 57L187.5 58.2349L187.765 58.5L189 57.2651L190.235 58.5L190.5 58.2349L189.265 57V57Z" fill="white"/>
+</mask>
+<g mask="url(#mask0_7_2960)">
+<rect width="12" height="12" transform="translate(186 54)" fill="#171717"/>
+</g>
+<rect x="130" y="62" width="45" height="2" fill="#A8A8A8"/>
+<rect x="130" y="76" width="45" height="2" fill="#A8A8A8"/>
+<rect x="130" y="80" width="51" height="2" fill="#A8A8A8"/>
+<rect x="130" y="100" width="15" height="2" fill="#A8A8A8"/>
+<rect x="130" y="119" width="15" height="2" fill="#A8A8A8"/>
+<rect x="130" y="56" width="30" height="3" fill="#8D8D8D"/>
+<rect x="125" y="140" width="69" height="11" fill="#0F62FE"/>
+<rect x="125" y="140" width="35" height="11" fill="#393939"/>
+<rect x="159" y="140" width="1" height="11" fill="#F4F4F4"/>
+<rect x="130" y="86" width="59" height="7" fill="#F4F4F4"/>
+<rect x="130" y="105" width="59" height="7" fill="#F4F4F4"/>
+<rect x="130" y="124" width="59" height="7" fill="#F4F4F4"/>
+<rect x="125" y="70" width="69" height="0.5" fill="#C6C6C6"/>
+<rect x="130" y="93" width="59" height="1" fill="#C6C6C6"/>
+<rect x="130" y="112" width="59" height="1" fill="#C6C6C6"/>
+<rect x="130" y="131" width="59" height="1" fill="#C6C6C6"/>
+</svg>

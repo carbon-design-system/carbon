@@ -1,0 +1,26 @@
+//
+// Copyright IBM Corp. 2020, 2021
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+// shared card styles can be found in the Card folder
+@use '../Card/storybook-styles' as *;
+@use 'ALIAS_STORY_STYLE_CONFIG' as c4p-settings;
+@use '@carbon/styles/scss/theme' as *;
+
+$block-class: #{c4p-settings.$pkg-prefix}--card;
+
+// aspect ratio box styling
+.card-story .#{c4p-settings.$carbon-prefix}--aspect-ratio {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: $layer-accent-01;
+}
+
+.#{$block-class}__media-left .#{$block-class}__media {
+  inline-size: 100%;
+  max-inline-size: 300px;
+}

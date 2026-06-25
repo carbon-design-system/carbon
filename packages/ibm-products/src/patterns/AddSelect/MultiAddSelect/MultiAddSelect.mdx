@@ -1,0 +1,119 @@
+import { Meta, Canvas } from '@storybook/addon-docs/blocks';
+import { CodesandboxLink } from '../../../global/js/utils/story-helper';
+import * as stories from './MultiAddSelect.stories';
+
+<Meta of={stories} />
+
+# MultiAddSelect pattern
+
+[Usage guidelines](https://pages.github.ibm.com/carbon/ibm-products/patterns/add-and-select/usage/)
+
+## Overview
+
+The MultiAddSelect pattern supports workflows where users need to add or choose
+multiple items in a tearsheet experience.
+
+These patterns are created using composable AddSelect presentational components
+and the AddSelect utility. They are intended to be copied, adapted, and composed
+to fit product-specific data, labels, and submission logic.
+
+## Choosing the right pattern
+
+### Multi add and select
+
+Use this pattern when users need to select multiple items and complete the task
+in a single flow.
+
+Choose it when:
+
+- users need to select more than one item before submitting
+- users benefit from reviewing a running selection
+- the workflow supports bulk add, assignment, or association tasks
+
+### Multi add and select with hierarchy
+
+Use this variation when users need to select multiple items from hierarchical
+content.
+
+Choose it when:
+
+- items are organized in parent-child relationships
+- users need to navigate through levels to find items
+- users may need to select items across different branches of the hierarchy
+
+### Multi add and select with modifiers
+
+Use this variation when users need to assign additional values or attributes to
+selected items as part of the same flow.
+
+Choose it when:
+
+- each selected item needs an associated modifier such as a role or type
+- users need to make selection and configuration decisions together
+- the workflow would be slower if modifiers were assigned in a separate step
+
+### Non-hierarchical with peek inside item
+
+Use this variation when users need to inspect item contents or metadata before
+selecting from a flat list.
+
+Choose it when:
+
+- items are not hierarchical
+- users need more context before selecting
+- a middle panel helps users understand item contents without leaving the flow
+
+### With hierarchy and no select all
+
+Use this variation when users need hierarchical multi-selection but should only
+select items individually.
+
+Choose it when:
+
+- items are hierarchical
+- select-all behavior would be too broad or risky
+- users must make deliberate item-by-item selections
+
+## How this pattern can be used
+
+MultiAddSelect can be used to support tasks such as adding multiple assets,
+business terms, users, resources, or records from a list or hierarchy.
+
+Typical usage includes:
+
+- opening the pattern from a primary task flow
+- letting users browse or search available items
+- optionally navigating through hierarchy levels
+- selecting multiple items and reviewing the current selection
+- optionally applying modifiers or inspecting item details
+- returning the selected values to the parent workflow
+
+## Example usage
+
+### Default
+
+<Canvas of={stories.Default} />
+
+### With hierarchy
+
+<Canvas of={stories.WithHierarchy} />
+
+### With modifiers
+
+<Canvas of={stories.WithModifiers} />
+
+### Non-hierarchical with peek inside item
+
+<Canvas of={stories.NonHierarchicalWithPeekInsideItem} />
+
+### With hierarchy (no select all)
+
+<Canvas of={stories.WithHierarchyNoSelectAll} />
+
+## Copy-paste ready code
+
+Reference implementation:
+
+```text
+packages/ibm-products/src/patterns/AddSelect/example/components/MultiAddSelect/MultiAddSelect.tsx
+```

@@ -1,0 +1,77 @@
+<!--
+@license
+
+Copyright IBM Corp. 2020
+
+This source code is licensed under the Apache-2.0 license found in the
+LICENSE file in the root directory of this source tree.
+-->
+
+<html>
+<head>
+  <title>carbon-web-components example</title>
+  <meta charset="UTF-8" />
+  <link rel="stylesheet" href="src/styles.scss" />
+  <style>
+    /* Suppress custom element until styles are loaded */
+    cds-ai-label:not(:defined) {
+      display: none;
+    }
+  </style>
+  <script type="module" src="src/index.js"></script>
+</head>
+<body>
+  <div class="example-container">
+    <div class="example-header"></div>
+    <div id="page-content-selector" class="example-content">
+      <cds-button id="toggle-button">Toggle side-panel</cds-button>
+    </div>
+  </div>
+  <c4p-side-panel
+      include-overlay
+      open
+      animate-title
+      label-text="An optional label"
+      size="md"
+      selector-page-content="#page-content-selector"
+      >
+      <h5>Section</h5>
+      <div class="text-inputs">
+        <cds-text-input
+          label="Input A"
+          id="side-panel-story-text-input-a"></cds-text-input>
+        <cds-text-input
+          label="Input B"
+          id="side-panel-story-text-input-b"></cds-text-input>
+      </div>
+      <div class="text-inputs">
+        <cds-text-input
+          label="Input C"
+          id="side-panel-story-text-input-c"></cds-text-input>
+        <cds-text-input
+          label="Input D"
+          id="side-panel-story-text-input-d"></cds-text-input>
+      </div>
+      <div class="textarea-container">
+        <cds-textarea label="Notes" value="This is a text area"></cds-textarea>
+        <cds-textarea label="Notes" value="This is a text area"></cds-textarea>
+        <cds-textarea label="Notes" value="This is a text area"></cds-textarea>
+      </div>
+      <!-- subtitle optional -->
+      <div slot="subtitle">
+        Subtitle text which can provide more detail on the content being displayed.
+      </div>
+
+      <cds-button slot="actions" kind="primary">Primary</cds-button>
+  </c4p-side-panel>
+
+  <script type="text/javascript">
+    document.addEventListener("DOMContentLoaded", () => {
+      const panel = document.querySelector("c4p-side-panel");
+      if (panel) {
+        panel.title = "A title, can be omitted";
+      }
+    });
+  </script>
+</body>
+</html>

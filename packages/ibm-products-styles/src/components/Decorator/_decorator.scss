@@ -1,0 +1,23 @@
+//
+// Copyright IBM Corp. 2024, 2024
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use '../../global/styles/project-settings' as c4p-settings;
+@use '../../global/styles/mixins';
+
+@use '../DecoratorBase/decorator-base-mixins' as *;
+@use '../DecoratorBase/decorator-base';
+
+// Decorator uses the following Carbon for IBM Products components:
+
+// The block part of our conventional BEM class names (blockClass__E--M).
+$block-class: #{c4p-settings.$pkg-prefix}--decorator;
+$default: #{$block-class}--default;
+$value: #{$block-class}__value;
+
+.#{$default} .#{$value} {
+  @include value-divider();
+}

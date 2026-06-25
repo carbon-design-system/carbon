@@ -1,0 +1,32 @@
+/**
+ * Copyright IBM Corp. 2026
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+$css--plex: true !default;
+
+/* Carbon and IBM Products styles */
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/spacing' as *;
+
+$prefix: 'c4p';
+
+/* Import shared AddSelect composable/next styles from ibm-products-styles */
+@use '@carbon/ibm-products-styles/scss/components/AddSelect/add-select_next'
+  as *;
+
+/* Web Component specific overrides */
+:host(#{$prefix}-add-select) {
+  display: block;
+
+  /* Apply shared styles within shadow DOM */
+  .#{$block-class__next} {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    block-size: 100%;
+    inline-size: 100%;
+  }
+}

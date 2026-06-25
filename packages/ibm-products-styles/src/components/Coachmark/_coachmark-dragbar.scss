@@ -1,0 +1,26 @@
+//
+// Copyright IBM Corp. 2023, 2024
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+// Standard imports.
+@use '../../global/styles/project-settings' as c4p-settings;
+@use '../../global/styles/mixins';
+@use '@carbon/styles/scss/theme' as *;
+
+// Define all component styles in a mixin which is then exported using
+// the Carbon import-once mechanism.
+// The block part of our conventional BEM class names (blockClass__E--M).
+$block-class: #{c4p-settings.$pkg-prefix}--coachmark-dragbar;
+$handle-class: #{c4p-settings.$pkg-prefix}--coachmark-dragbar__handle;
+
+.#{$block-class} {
+  display: flex;
+
+  /* stylelint-disable-next-line max-nesting-depth */
+  svg {
+    color: $icon-inverse;
+  }
+}

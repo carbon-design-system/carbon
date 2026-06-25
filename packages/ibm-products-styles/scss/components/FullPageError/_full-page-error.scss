@@ -1,0 +1,87 @@
+//
+// Copyright IBM Corp. 2024, 2024
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+// Standard imports.
+@use '../../global/styles/project-settings' as c4p-settings;
+@use '../../global/styles/mixins';
+
+// Other Carbon settings if needed
+@use '@carbon/type' as *;
+@use '@carbon/themes' as *;
+@use '@carbon/layout' as *;
+@use '@carbon/grid' as *;
+
+// FullPageError uses the following Carbon for IBM Products components:
+// TODO: @use(s) of IBM Products component styles used by FullPageError
+
+// The block part of our conventional BEM class names (blockClass__E--M).
+$block-class: #{c4p-settings.$pkg-prefix}--full-page-error;
+
+.#{$block-class} {
+  block-size: inherit;
+}
+.#{$block-class}__container {
+  margin: 0 $spacing-06;
+  block-size: 100%;
+
+  @include breakpoint-down(md) {
+    margin: 0 $spacing-03;
+  }
+}
+.#{$block-class}__grid {
+  block-size: 100%;
+  padding-block: $spacing-07;
+}
+.#{$block-class}__column {
+  padding: 0;
+  @include breakpoint(lg) {
+    padding: 0 $spacing-07 0 0;
+  }
+}
+
+.#{$block-class}__svg-container {
+  display: flex;
+  padding: $spacing-03 $spacing-03 $spacing-11 $spacing-03;
+  block-size: 100%;
+  @include breakpoint(md) {
+    padding: auto $spacing-03 $spacing-11;
+  }
+}
+
+.#{$block-class}__label,
+.#{$block-class}__title {
+  @include type-style('fluid-heading-05', true);
+}
+
+.#{$block-class}__label {
+  display: block;
+  color: $text-error;
+}
+.#{$block-class}__title {
+  margin-block-end: $spacing-09;
+}
+
+.#{$block-class}__description {
+  @include type-style('body-02');
+
+  margin-block-end: $spacing-07;
+}
+
+.#{$block-class}__body {
+  @include type-style('body-02');
+}
+
+// safari rendering fix
+.#{$block-class}__svg-container svg.#{$block-class}__svg {
+  inline-size: 100%;
+}
+
+// svg theme styles
+.#{$block-class}__svg-container svg.#{$block-class}__svg path {
+  fill: $background;
+  stroke: $border-inverse;
+}

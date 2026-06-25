@@ -1,0 +1,94 @@
+import { Story, Controls, Source, Canvas } from '@storybook/addon-docs/blocks';
+import { CodesandboxLink } from '../../global/js/utils/story-helper';
+import { RemoveModal } from '.';
+import * as stories from './RemoveModal.stories';
+import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
+
+# Remove Modal
+
+[Usage guidelines](https://pages.github.ibm.com/carbon/ibm-products/patterns/delete-and-remove/usage/)
+|
+[Carbon modal usage guidelines](https://www.carbondesignsystem.com/components/modal/usage)
+|
+[Carbon modal documentation](https://react.carbondesignsystem.com/?path=/docs/components-modal)
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Example usage](#example-usage)
+  - [Standard](#standard)
+  - [Remove Pattern](#remove-pattern)
+  - [Delete Pattern](#delete-pattern)
+  - [Component In Body Pattern](#component-in-body-pattern)
+- [Component API](#component-api)
+
+## Overview
+
+Modal dialog version of the Remove pattern. “Removing” is an action that moves
+information from one location to another. Removal can be both destructive and
+non-destructive. “Deletion” is the most common type of removal and is
+destructive.
+
+### Standard
+
+<Canvas
+  of={stories.Standard}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () =>
+        stackblitzPrefillConfig({
+          story: stories.Standard,
+        }),
+    },
+  ]}
+></Canvas>
+
+### Remove Pattern
+
+<Canvas
+  of={stories.RemovePattern}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () =>
+        stackblitzPrefillConfig({
+          story: stories.RemovePattern,
+        }),
+    },
+  ]}
+></Canvas>
+
+### Delete Pattern
+
+<Canvas
+  of={stories.DeletePattern}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () =>
+        stackblitzPrefillConfig({
+          story: stories.DeletePattern,
+        }),
+    },
+  ]}
+></Canvas>
+
+### Component In Body Pattern
+
+<Canvas
+  of={stories.ComponentInBodyPattern}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () =>
+        stackblitzPrefillConfig({
+          story: stories.ComponentInBodyPattern,
+        }),
+    },
+  ]}
+></Canvas>
+
+## Component API
+
+<Controls />

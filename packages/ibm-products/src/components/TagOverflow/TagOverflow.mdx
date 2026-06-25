@@ -1,0 +1,64 @@
+import { Story, Controls, Source, Canvas } from '@storybook/addon-docs/blocks';
+import { CodesandboxLink } from '../../global/js/utils/story-helper';
+import { TagOverflow } from '.';
+import * as TagOverflowStories from './TagOverflow.stories';
+
+# TagOverflow
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Example usage](#example-usage)
+- [Coded example](#coded-example)
+- [Component API](#component-api)
+
+## Overview
+
+A tag overflow is the use of an interactive tag with the addition of a toggletip
+to show additional content.
+
+The need to show additional items related to an object will occur in small
+spaces in the UI. A tag overflow count can be used with a group of tags when
+there is not enough space to show all tags related to an object. Clicking on the
+tag overflow presents a toggletip that lists up to 10 additional tags. If there
+are more than 10 additional tags, the toggletip also includes a link to view all
+tags. When the user clicks on this link, a modal opens with a list of all the
+tags associated with the object.
+
+## Example usage
+
+### Tags with overflow count and overflow modal
+
+<Canvas of={TagOverflowStories.TagsWithOverflowModal}></Canvas>
+
+### Tags with truncation and overflow count
+
+<Canvas of={TagOverflowStories.TagsWithTruncation}></Canvas>
+
+### Multiline tags
+
+<Canvas of={TagOverflowStories.MultilineTags}></Canvas>
+
+### UserAvatars with overflow count and overflow modal
+
+<Canvas of={TagOverflowStories.UserAvatarsWithOverflowModal}></Canvas>
+
+### Custom components with overflow count and overflow modal
+
+<Canvas of={TagOverflowStories.CustomComponentsWithOverflowModal}></Canvas>
+
+## Coded example
+
+<CodesandboxLink exampleDirectory="TagOverflow" />
+
+## Component API
+
+<Controls />
+
+### Considerations
+
+Under the hood this component utilizes the Carbon `Popover` component, which has
+an experimental auto-align feature. This feature is disabled by default. If you
+are interested in trying this feature please refer to the `autoAlign` prop in
+the component API table above as well as the
+[Carbon Popover documentation](https://react.carbondesignsystem.com/?path=/docs/components-popover--overview#component-api).

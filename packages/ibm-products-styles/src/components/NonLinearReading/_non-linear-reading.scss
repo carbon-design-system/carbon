@@ -1,0 +1,126 @@
+//
+// Copyright IBM Corp. 2023, 2023
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+/* stylelint-disable carbon/layout-use */
+/* stylelint-disable function-no-unknown */
+
+// Standard imports.
+@use '@carbon/layout/scss/convert' as *;
+@use '@carbon/styles/scss/colors' as *;
+@use '@carbon/styles/scss/components/button/tokens' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/themes';
+@use '@carbon/styles/scss/type';
+@use '../../global/styles/project-settings' as c4p-settings;
+
+@keyframes fade {
+  0% {
+    opacity: 0;
+  }
+
+  15% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+// The block part of our conventional BEM class names (blockClass__E--M).
+$block-class: #{c4p-settings.$pkg-prefix}--non-linear-reading;
+
+.#{$block-class}__dark {
+  @include theme(themes.$g100, true);
+}
+
+// CLOSED/COLLAPSED STATE, DEFAULT
+.#{$block-class} .#{$block-class}__keyword {
+  border-width: to-rem(1px);
+  border-style: solid;
+  border-color: $button-tertiary;
+  border-radius: $spacing-04;
+  background-color: transparent;
+  block-size: to-rem(20px);
+  color: $button-tertiary;
+  padding-block-start: 0;
+  padding-inline-end: to-rem(3px);
+  white-space: nowrap;
+}
+.#{$block-class} .#{$block-class}__keyword:hover {
+  border-color: $button-tertiary;
+  background-color: $button-tertiary;
+  color: $text-inverse;
+}
+// Disable browser's default focus outline.
+// We will provide all the focus/outline styling below.
+.#{$block-class} .#{$block-class}__keyword:focus-visible {
+  outline: none;
+}
+.#{$block-class} .#{$block-class}__keyword:focus {
+  border-color: $text-inverse;
+  background-color: $button-tertiary;
+  box-shadow:
+    0 0 0 1px $text-inverse,
+    0 0 0 3px $button-tertiary;
+  color: $text-inverse;
+}
+// The "up" chevron
+.#{$block-class} .#{$block-class}__keyword svg {
+  margin: to-rem(1px) 0 0;
+  vertical-align: text-top;
+}
+
+// OPEN/EXPANDED STATE
+.#{$block-class} .#{$block-class}__keyword-open {
+  border-color: $button-tertiary;
+  background-color: $button-tertiary;
+  color: $text-inverse;
+}
+.#{$block-class} .#{$block-class}__keyword-open:hover {
+  border-color: $button-tertiary;
+  background-color: transparent;
+  color: $button-tertiary;
+}
+.#{$block-class} .#{$block-class}__keyword-open:focus {
+  border-color: $text-inverse;
+  background-color: transparent;
+  box-shadow:
+    inset 0 0 0 1px $button-tertiary,
+    0 0 0 1px $text-inverse,
+    0 0 0 3px $button-tertiary;
+  color: $button-tertiary;
+}
+// The "up" chevron, flipped
+.#{$block-class} .#{$block-class}__keyword-open svg {
+  transform: rotate(180deg);
+}
+
+.#{$block-class} .#{$block-class}__body {
+  @include type.type-style('body-01');
+
+  display: block;
+  padding: $spacing-03 $spacing-04;
+  margin: $spacing-02 0;
+  // Onboarding does not always use Carbon defaults/tokens
+  // stylelint-disable-next-line carbon/motion-duration-use, carbon/motion-easing-use
+  animation: fade 600ms;
+  border-inline-start: to-rem(1.25px) solid $text-primary;
+
+  /* stylelint-disable-next-line max-nesting-depth */
+  @media (prefers-reduced-motion: reduce) {
+    animation: none;
+  }
+}
+// The body has an id that must be visible to the button's "aria-controls" property.
+// We *must* render the body with the id to avoid breaking accessibility.
+// When closed: we render but don't display the body and we don't render the "content".
+// When open: we display the body and render the content.
+.#{$block-class} .#{$block-class}__keyword-closed + .#{$block-class}__body {
+  display: none;
+}

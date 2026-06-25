@@ -1,0 +1,128 @@
+/**
+ * Copyright IBM Corp. 2024, 2025
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/config' as carbon-config;
+@use '@carbon/styles/scss/motion' as *;
+
+@use '../../../global/styles/project-settings' as c4p-settings;
+@use './variables' as *;
+
+.#{carbon-config.$prefix}--data-table tr.#{$block-class}__carbon-nested-row {
+  border-inline-start: 1px solid transparent;
+
+  .#{$block-class}__cell {
+    border-block-end: 1px solid $layer-accent-01;
+  }
+}
+
+.#{$block-class} .#{$block-class}__expander-icon {
+  transition: transform $duration-fast-01 motion('standard', 'productive');
+}
+
+.#{$block-class} .#{$block-class}__expander-icon--open {
+  transform: rotate(90deg);
+}
+
+.#{$block-class}__expanded-row
+  .#{$block-class}__carbon-row-expanded
+  td:first-child {
+  border-block-end: none;
+}
+
+.#{$block-class} .#{$block-class}__carbon-row-expandable {
+  position: relative;
+}
+
+.#{$block-class}
+  tr.#{$block-class}__carbon-nested-row
+  + :not(tr.#{$block-class}__carbon-nested-row)::after {
+  position: absolute;
+  background-color: $border-subtle;
+  block-size: 1px;
+  content: '';
+  inline-size: 100%;
+  /* stylelint-disable-next-line carbon/layout-use */
+  inset-block-start: -1px;
+  inset-inline-start: 0;
+}
+
+.#{$block-class} tr.#{$block-class}__carbon-nested-row {
+  td:first-child:empty,
+  .#{$block-class}__expandable-row-cell {
+    border-block-end: none;
+  }
+}
+
+.#{carbon-config.$prefix}--data-table td.#{$block-class}__expandable-row-cell {
+  padding-inline-start: $spacing-03;
+}
+
+.#{carbon-config.$prefix}--data-table
+  td.#{$block-class}__expandable-row-cell
+  + td,
+.#{carbon-config.$prefix}--data-table
+  .#{$block-class}__carbon-nested-row:not(
+    .#{$block-class}__carbon-row-expandable
+  )
+  td.#{$block-class}__cell:nth-of-type(2),
+.#{carbon-config.$prefix}--data-table
+  .#{$block-class}__carbon-nested-row
+  td.#{$block-class}__cell:nth-of-type(2)
+  + td {
+  position: relative;
+}
+
+.#{carbon-config.$prefix}--data-table
+  td.#{$block-class}__expandable-row-cell.#{$block-class}__expandable-row-cell--is-expanded
+  + td::before,
+.#{carbon-config.$prefix}--data-table
+  .#{$block-class}__carbon-nested-row:not(
+    .#{$block-class}__carbon-row-expandable
+  ):not(.#{$block-class}__carbon-row-expandable--async)
+  td.#{$block-class}__cell:nth-of-type(2)::before,
+.#{carbon-config.$prefix}--data-table
+  .#{$block-class}__carbon-nested-row
+  td.#{$block-class}__expandable-row-cell
+  + td::before {
+  position: absolute;
+  background-color: $layer-01;
+  block-size: 1px;
+  content: '';
+  inline-size: 1rem;
+  /* stylelint-disable-next-line carbon/layout-use */
+  inset-block-end: -1px;
+  inset-inline-start: 0;
+  transition: background-color $duration-fast-01 motion(entrance, productive);
+}
+
+.#{carbon-config.$prefix}--data-table
+  tr:hover
+  td.#{$block-class}__expandable-row-cell.#{$block-class}__expandable-row-cell--is-expanded
+  + td::before,
+.#{carbon-config.$prefix}--data-table
+  .#{$block-class}__carbon-nested-row:hover
+  td.#{$block-class}__expandable-row-cell
+  + td::before,
+.#{carbon-config.$prefix}--data-table
+  .#{$block-class}__expandable-row--hover
+  td.#{$block-class}__expandable-row-cell
+  + td::before,
+.#{carbon-config.$prefix}--data-table
+  .#{$block-class}__carbon-nested-row:hover:not(
+    .#{$block-class}__carbon-row-expandable
+  )
+  td.#{$block-class}__cell:nth-of-type(2)::before {
+  background-color: $layer-hover;
+}
+
+.#{$block-class}__carbon-row-expanded {
+  .#{$block-class}__expandable-row-cell {
+    border-block-end: none;
+  }
+}

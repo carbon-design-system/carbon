@@ -1,0 +1,155 @@
+import { ArgTypes, Markdown, Meta, Canvas } from '@storybook/addon-docs/blocks';
+import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
+import * as CoachmarkStories from './coachmark.stories';
+import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
+import helperSource from './coachmark-helpers.ts?raw';
+
+export const customFunctionArr = [
+  `const el = document?.body.querySelector('my-app');\n\n` +
+  helperSource
+    .replace(/import\s+.*?from\s+['"].*?['"];?\s*/g, '')
+    .replace(/export\s+/g, '')
+    .replace(/\/\*\*[\s\S]*?\*\//g, '')
+    .replace(/document\.querySelector\(/g, 'el?.shadowRoot?.querySelector(')
+    .trim()
+];
+
+
+export const customImportArr = [`import iconLoader from '@carbon/web-components/es/globals/internal/icon-loader.js';
+import Crossroads from '@carbon/icons/es/crossroads/16.js';
+`];
+
+<Meta of={CoachmarkStories} />
+
+# Coachmark
+
+> 💡 Check our
+> [Stackblitz](https://stackblitz.com/github/carbon-design-system/ibm-products/tree/main/packages/ibm-products-web-components/examples/coachmark)
+> example implementation.
+
+[Usage guidelines](https://pages.github.ibm.com/carbon/ibm-products/components/onboarding/coachmark/usage)
+
+
+[Coachmark](https://pages.github.ibm.com/carbon/ibm-products/components/onboarding/coachmark/usage)
+are used to call out specific functionality or concepts within the UI that may not be intuitive but are important for the user to gain an understanding of the product’s main value and discover new use cases. They can be used for first-time use, as well as secondary onboarding and to highlight new functionality.
+
+## Getting started
+
+Here's a quick example to get you started.
+
+### JS (via import)
+
+```javascript
+import '@carbon/ibm-products-web-components/es/components/coachmark/index.js';
+import '@carbon/ibm-products-web-components/es/components/coachmark/coachmark-beacon/index.js';
+import '@carbon/web-components/es/components/button/index.js';
+import Crossroads from '@carbon/icons/es/crossroads/16.js';
+```
+
+
+### HTML
+
+### Tooltip
+
+```html
+  <c4p-coachmark
+    align='bottom'
+    .open=${true}
+    .highContrast=${true}
+  >
+    <c4p-coachmark-beacon
+      label="Show information"
+      .expanded=${true}
+      @c4p-coachmark-beacon-clicked=${handleClick}
+      slot="trigger"
+    >
+    </c4p-coachmark-beacon>
+    <c4p-coachmark-header
+      class="coachmark-header"
+      closeIconDescription="close icon"
+    ></c4p-coachmark-header>
+    <c4p-coachmark-body class="coachmark-body">
+      <h2>Hello World</h2>
+      <p>this is a description test</p>
+      <cds-button size="sm">Done</cds-button>
+    </c4p-coachmark-body>
+  </c4p-coachmark>
+```
+
+### Floating
+
+```html
+  <c4p-coachmark
+    align="bottom"
+    .open=${true}
+    .highContrast=${true}
+    .floating=${true}
+  >
+    <cds-button
+      kind="tertiary"
+      slot="trigger"
+      class="trigger-btn"
+      @click=${handleClick}
+    >Show information ${iconLoader(ArrowRight as any, { slot: 'icon' })}
+    </cds-button>
+    <c4p-coachmark-header
+    class="coachmark-header"
+    closeIconDescription="close icon"
+    ></c4p-coachmark-header>
+    <c4p-coachmark-body class="coachmark-body">
+      <h2>Hello World</h2>
+      <p>this is a description test</p>
+      <cds-button size="sm">Done</cds-button>
+    </c4p-coachmark-body>
+  </c4p-coachmark>
+```
+
+### Example Usage
+
+### Tooltip
+
+<Canvas
+  of={CoachmarkStories.Tooltip}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () =>
+        stackblitzPrefillConfig({
+          story: CoachmarkStories.Tooltip,
+          customFunctionDefs: customFunctionArr,
+          componentName: 'coachmark', 
+        }),
+    },
+  ]}
+></Canvas>
+
+### Floating
+
+<Canvas
+  of={CoachmarkStories.Floating}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () =>
+        stackblitzPrefillConfig({
+          story: CoachmarkStories.Floating,
+          customFunctionDefs: customFunctionArr,
+          customImports: customImportArr,
+          componentName: 'coachmark', 
+        }),
+    },
+  ]}
+></Canvas>
+
+
+## `<c4p-coachmark>` attributes, properties and events
+
+<ArgTypes of="c4p-coachmark" />
+
+## `<c4p-coachmark-header>` attributes, properties and events
+
+<ArgTypes of="c4p-coachmark-header" />
+
+## `<c4p-coachmark-body>` attributes, properties and events
+
+The `<c4p-coachmark-body>` component serves as a container for the coachmark’s main content.

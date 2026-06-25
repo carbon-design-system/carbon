@@ -1,0 +1,181 @@
+/*
+* Copyright IBM Corp. 2025, 2025
+*
+* This source code is licensed under the Apache-2.0 license found in the
+* LICENSE file in the root directory of this source tree.
+*/
+
+$css--plex: true !default;
+
+/* Other Carbon settings. */
+@use 'sass:map';
+@use '@carbon/styles';
+@use '@carbon/styles/scss/themes';
+@use '@carbon/styles/scss/type';
+@use '@carbon/styles/scss/motion' as *;
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/breakpoint' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/utilities/focus-outline';
+@use '@carbon/styles/scss/components/tag';
+
+$prefix: 'c4p';
+$overlap-divisor: 1.4;
+$carbon-prefix: 'cds';
+
+$block-class: #{$prefix}--set-of-users;
+
+:host {
+  * {
+    box-sizing: border-box;
+  }
+
+  cds-modal-header {
+    padding-inline: $spacing-05;
+  }
+
+  cds-modal-body {
+    @extend .#{$carbon-prefix}--modal-scroll-content;
+
+    cds-tag {
+      margin-block-end: $spacing-02;
+      margin-inline-end: $spacing-02;
+    }
+  }
+
+  .#{$block-class}__custom-avatar {
+    display: flex;
+
+    @media (prefers-reduced-motion: no-preference) {
+      transition: all $duration-fast-01 ease-out;
+    }
+
+    &:not(.#{$block-class}__custom-avatar--condensed) {
+      margin-right: $spacing-02;
+    }
+  }
+
+  @each $size, $spacing,
+    $type
+      in (
+        xl: (
+            $spacing-10,
+            'heading-04',
+          ),
+        lg: (
+            $spacing-09,
+            'heading-03',
+          ),
+        md: (
+            $spacing-07,
+            'body-compact-01',
+          ),
+        sm: (
+            $spacing-06,
+            null,
+          )
+      )
+  {
+    .#{$block-class}__custom-avatar--#{$size} {
+      block-size: nth($spacing, 1);
+      inline-size: nth($spacing, 1);
+    }
+
+    .#{$block-class}__custom-avatar--#{$size}.#{$block-class}__custom-avatar--condensed {
+      inline-size: calc(nth($spacing, 1) / $overlap-divisor);
+      justify-content: flex-start;
+
+      &:hover,
+      &:focus {
+        inline-size: nth($spacing, 1);
+      }
+    }
+  }
+
+  .#{$block-class}__custom-overflow {
+    @include type.type-style('label-01', true);
+    border: none;
+    box-shadow: inset 0 0 0 1px tag.$tag-border-gray;
+    background-color: tag.$tag-background-gray;
+    color: $text-primary;
+    padding-inline: $spacing-03;
+    border-radius: $spacing-10;
+    padding-block: 0;
+
+    &:focus-within {
+      @include focus-outline.focus-outline('outline');
+      outline-offset: 1px;
+    }
+
+    &:hover {
+      background-color: tag.$tag-hover-gray;
+    }
+  }
+
+  @each $size, $spacing,
+    $type
+      in (
+        xl: (
+            $spacing-10,
+            'heading-04',
+            $spacing-05,
+          ),
+        lg: (
+            $spacing-09,
+            'heading-03',
+            $spacing-04,
+          ),
+        md: (
+            $spacing-07,
+            'body-compact-01',
+            $spacing-03,
+          ),
+        sm: (
+            $spacing-06,
+            null,
+            null,
+          )
+      )
+  {
+    .#{$block-class}__custom-overflow--#{$size} {
+      block-size: nth($spacing, 1);
+      min-inline-size: nth($spacing, 1);
+      padding-inline: if(length($spacing) > 2, nth($spacing, 3), null);
+      @if nth($spacing, 2) {
+        @include type.type-style(nth($spacing, 2), true);
+      }
+    }
+  }
+
+  .#{$block-class}__modal-users-search {
+    margin-block-start: $spacing-05;
+  }
+
+  .#{$block-class}__modal-tags-container {
+    cds-dismissible-tag {
+      margin: $spacing-02 $spacing-03 $spacing-02 0;
+    }
+  }
+
+  .#{$block-class}__popover-container {
+    .#{$block-class}__popover-user {
+      @include type.type-style('label-02');
+      margin: 0;
+    }
+  }
+
+  .#{$block-class}__popover-view-all {
+    --#{$carbon-prefix}-link-text-color: var(--#{$carbon-prefix}-link-inverse);
+    --#{$carbon-prefix}-link-hover-text-color: var(
+      --#{$carbon-prefix}-link-inverse-hover
+    );
+    --#{$carbon-prefix}-link-visited-text-color: var(
+      --#{$carbon-prefix}-link-inverse-visited
+    );
+    --#{$carbon-prefix}-link-focus-text-color: var(
+      --#{$carbon-prefix}-focus-inverse
+    );
+    margin-top: $spacing-03;
+    display: block;
+  }
+}

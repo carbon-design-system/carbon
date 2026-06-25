@@ -1,0 +1,96 @@
+/**
+ * Copyright IBM Corp. 2024, 2025
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/config' as carbon-config;
+
+@use '../../../../global/styles/project-settings' as c4p-settings;
+@use '../variables';
+
+.#{variables.$block-class}
+  .#{variables.$block-class}__row-size-toggle-tip-content {
+  background-color: $layer-02;
+  box-shadow:
+    1px 4px 8px -3px $overlay,
+    -1px 6px 8px -5px $overlay;
+}
+
+.#{variables.$block-class}
+  .#{variables.$block-class}__row-size-radio-button
+  .#{carbon-config.$prefix}--radio-button__label {
+  color: $text-primary;
+}
+
+.#{variables.$block-class}
+  .#{variables.$block-class}__row-size-toggle-tip
+  .#{carbon-config.$prefix}--popover-caret {
+  background-color: $layer-02;
+}
+
+.#{variables.$block-class}
+  .#{carbon-config.$prefix}--popover--bottom-right.#{variables.$block-class}__row-height-settings-popover
+  .#{carbon-config.$prefix}--popover-caret {
+  // Used to fix layout issue with IconButton caret inside of Popover component
+  inset-inline-start: -$spacing-02;
+}
+
+.#{variables.$block-class}__row-size-toggle-tip-button.#{carbon-config.$prefix}--toggletip-button {
+  display: flex;
+  justify-content: center;
+  block-size: $spacing-09;
+  inline-size: $spacing-09;
+}
+
+// Top align cell content for xl row size
+.#{variables.$block-class}
+  table.#{carbon-config.$prefix}--data-table--xl.#{variables.$block-class}__vertical-align-center
+  td,
+.#{variables.$block-class}
+  table.#{carbon-config.$prefix}--data-table--xl.#{variables.$block-class}__vertical-align-top
+  td {
+  align-items: flex-start;
+  padding-block: $spacing-05;
+
+  &.#{variables.$block-class}__actions-column-cell {
+    padding-inline-start: $spacing-03;
+  }
+}
+
+// Top align header content for xl row size
+.#{variables.$block-class}
+  table.#{carbon-config.$prefix}--data-table--xl.#{variables.$block-class}__vertical-align-center
+  th,
+.#{variables.$block-class}
+  table.#{carbon-config.$prefix}--data-table--xl.#{variables.$block-class}__vertical-align-top
+  th {
+  .#{carbon-config.$prefix}--table-header-label {
+    align-items: flex-start;
+  }
+}
+
+// Top align checkbox row header for xl row size
+.#{variables.$block-class}
+  table.#{carbon-config.$prefix}--data-table--xl.#{variables.$block-class}__vertical-align-center
+  .#{variables.$block-class}__checkbox-cell
+  th.#{carbon-config.$prefix}--table-column-checkbox {
+  align-items: flex-start;
+  padding-block-start: $spacing-04;
+}
+
+.#{variables.$block-class}__row-size__row-settings-trigger--open.#{carbon-config.$prefix}--btn--ghost {
+  background-color: $layer-02;
+}
+
+.#{variables.$block-class}
+  table.#{carbon-config.$prefix}--data-table--xl.#{variables.$block-class}__vertical-align-center
+  td.#{variables.$block-class}__expandable-row-cell,
+.#{variables.$block-class}
+  table.#{carbon-config.$prefix}--data-table--xl.#{variables.$block-class}__vertical-align-top
+  td.#{variables.$block-class}__expandable-row-cell {
+  padding-block-start: $spacing-03;
+}

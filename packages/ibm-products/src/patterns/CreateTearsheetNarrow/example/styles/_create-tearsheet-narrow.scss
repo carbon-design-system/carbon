@@ -1,0 +1,63 @@
+//
+// Copyright IBM Corp. 2026
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+$prefix: 'c4p' !default;
+
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/type';
+@use '@carbon/styles/scss/config' as carbon-config;
+
+.create-tearsheet__section--title {
+  margin-block-end: $spacing-05;
+}
+
+.create-tearsheet__section--subtitle {
+  @include type.type-style('heading-compact-01');
+
+  margin-block-end: $spacing-03;
+}
+
+.create-tearsheet__section--description {
+  @include type.type-style('body-01');
+
+  margin-block-end: $spacing-06;
+}
+
+.create-tearsheet-narrow__body .#{$prefix}--tearsheet__next__main-content {
+  padding: $spacing-05;
+}
+
+.create-tearsheet-narrow__form-title {
+  @include type.type-style('heading-compact-02');
+
+  padding-block-end: $spacing-03;
+}
+
+.create-tearsheet-narrow__form-description {
+  @include type.type-style('body-01');
+}
+
+.tearsheet-create-narrow__example-form-group
+  > legend.#{carbon-config.$prefix}--label {
+  padding-block-start: $spacing-05;
+}
+
+.tearsheet-create-narrow__example-form-group
+  .#{carbon-config.$prefix}--form-item {
+  margin-block-end: $spacing-05;
+}
+
+.tearsheet-create-narrow__flex-container {
+  display: flex;
+  align-items: baseline;
+}
+
+.tearsheet-create-narrow__flex-container .#{carbon-config.$prefix}--form-item,
+.tearsheet-create-narrow__flex-container
+  .#{carbon-config.$prefix}--dropdown__wrapper.#{carbon-config.$prefix}--list-box__wrapper {
+  inline-size: 50%;
+}

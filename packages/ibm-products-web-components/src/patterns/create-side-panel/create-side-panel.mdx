@@ -1,0 +1,115 @@
+import { Markdown, Meta, Story } from '@storybook/addon-docs/blocks';
+
+import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
+import Stories from './create-side-panel.stories';
+
+<Meta of={Stories} />
+
+# Create Sidepanel
+
+[Create sidepanel usage guidelines](https://pages.github.ibm.com/carbon/ibm-products/patterns/create-flows/usage/#side-panel)
+
+## Overview
+
+Use with medium complexity creations if the user needs page context. On-page content can be seen and interacted with.
+
+Patterns have multiple ways of accomplishing a user need and typically use a
+combination of components with additional design considerations. The pattern
+code we share is meant to serve as an example implementation that can be built
+and extended further.
+
+#### Ingredients
+
+To build this pattern, we recommend including the following components:
+
+- [c4p-sidepanel](https://ibm-products-web-components.netlify.app/?path=/docs/components-sidepanel--overview)
+- [cds-button](https://web-components.carbondesignsystem.com/?path=/docs/components-button--overview)
+- [cds-form-item](https://web-components.carbondesignsystem.com/?path=/docs/components-form--overview)
+- [cds-number-input](https://web-components.carbondesignsystem.com/?path=/docs/components-number-input--overview)
+- [cds-text-input](https://web-components.carbondesignsystem.com/?path=/docs/components-text-input--overview)
+
+> 💡 Check our
+> [Stackblitz](https://stackblitz.com/github/carbon-design-system/ibm-products/tree/main/packages/ibm-products-web-components/examples/create-side-panel)
+> example implementation.
+
+[![Edit carbon-web-components](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/carbon-design-system/ibm-products/tree/main/packages/ibm-products-web-components/examples/create-side-panel)
+
+### Example
+
+Here's a quick example to get you started.
+
+#### JS (via import)
+
+```javascript
+import '@carbon/ibm-products-web-components/es/components/side-panel/index.js';
+import '@carbon/web-components/es/components/button/index.js';
+import '@carbon/web-components/es/components/form/form-item.js';
+import '@carbon/web-components/es/components/number-input/index.js';
+import '@carbon/web-components/es/components/text-input/index.js';
+```
+
+#### HTML
+
+```html
+<div>
+  <cds-button @click=${this._openHandler}>Create partitions</cds-button>
+  <c4p-side-panel
+    @c4p-side-panel-closed=${this._openHandler}
+    class="${blockClass}"
+    ?animate-title=${false}
+    include-overlay
+    ?open=${this.open}
+    size="md"
+    title="Create partitions"
+  >
+    <div slot="subtitle">
+      Specify the details of the partitions you're creating
+    </div>
+    <h3
+      class="${blockClass}__form-title-text ${blockClass}__content-text"
+    >
+      Core configuration
+    </h3>
+    <p class="${blockClass}__form-description-text ${blockClass}__content-text">
+      We recommend you fill out and evaluate these details at a minimum
+      before deploying your topic.
+    </p>
+    <cds-form id="example-form" class="${blockClass}__form">
+      <cds-form-item>
+        <cds-text-input value="Topic" label="Topic name"></cds-text-input>
+      </cds-form-item>
+      <cds-form-item>
+        <cds-number-input
+          value="50"
+          min="0"
+          max="100"
+          step="1"
+          label="Partitions"
+          size="md"
+        >
+        </cds-number-input>
+      </cds-form-item>
+      <cds-form-item>
+        <cds-number-input
+          value="50"
+          min="0"
+          max="100"
+          step="1"
+          label="Replicas"
+          size="md"
+        >
+        </cds-number-input>
+      </cds-form-item>
+    </cds-form>
+    <cds-button
+      slot="actions"
+      kind="secondary"
+      @click=${this._openHandler}
+      >Cancel</cds-button
+    >
+    <cds-button slot="actions" kind="primary" @click=${this._openHandler}
+      >Create</cds-button
+    >
+  </c4p-side-panel>
+</div>
+```

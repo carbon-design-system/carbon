@@ -1,0 +1,53 @@
+/**
+ * @license
+ *
+ * Copyright IBM Corp. 2025
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+@use '@carbon/styles/scss/reset';
+@use '@carbon/styles/scss/theme';
+@use '@carbon/styles/scss/themes';
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/type';
+
+$interstitial-block-class: #{c4p}--interstitial-screen;
+$block-class: #{c4p}--interstitial-screen-view-module;
+
+:root {
+  @include theme.theme(themes.$white);
+  background-color: var(--cds-background);
+  color: var(--cds-text-primary);
+}
+
+.example-container {
+  position: fixed;
+  display: grid;
+  block-size: 100vh;
+  grid-template-rows: 3rem 1fr;
+  inline-size: 100vw;
+  inset-block-start: 0;
+  inset-inline-start: 0;
+}
+
+.example-header {
+  background: #393939;
+}
+
+.example-content {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.#{$block-class} {
+  margin-block: $spacing-07;
+}
+.#{$block-class}--heading {
+  @include type.type-style('heading-05');
+
+  margin-block-end: $spacing-07;
+}

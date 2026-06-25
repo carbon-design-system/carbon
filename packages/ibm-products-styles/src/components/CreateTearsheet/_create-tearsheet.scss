@@ -1,0 +1,164 @@
+//
+// Copyright IBM Corp. 2021, 2025
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+// Other Carbon settings.
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/components/button/tokens' as *;
+@use '@carbon/styles/scss/motion' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/type';
+@use '@carbon/styles/scss/config' as carbon-config;
+
+// Standard imports.
+@use '../../global/styles/project-settings' as c4p-settings;
+
+// CreateTearsheet uses the following IBM Products components:
+// TearsheetShell
+@use '../Tearsheet/tearsheet';
+@use '../CreateInfluencer';
+
+@keyframes step-content-entrance {
+  0% {
+    opacity: 0;
+    transform: translateY(-$spacing-04);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+$create-tearsheet-block-class: #{c4p-settings.$pkg-prefix}--tearsheet-create;
+$step-block-class: #{c4p-settings.$pkg-prefix}--tearsheet-create__step;
+$section-block-class: #{c4p-settings.$pkg-prefix}--tearsheet-create__section;
+$tearsheet-divider-class: #{c4p-settings.$pkg-prefix}--tearsheet-create__section--divider;
+$tearsheet-fieldset-class: #{c4p-settings.$pkg-prefix}--tearsheet-create__step--fieldset;
+
+.#{$create-tearsheet-block-class} .#{$step-block-class}__step--visible-step {
+  // stylelint-disable-next-line carbon/motion-easing-use
+  animation: step-content-entrance $duration-slow-01;
+
+  animation-fill-mode: forwards;
+  animation-timing-function: $standard-easing;
+
+  margin-inline-start: 0;
+  opacity: 0;
+  padding-inline: $spacing-03;
+}
+
+.#{$create-tearsheet-block-class} {
+  --#{$create-tearsheet-block-class}--total-width: 0;
+}
+
+.#{$step-block-class} .#{carbon-config.$prefix}--css-grid {
+  margin-inline-start: 0;
+}
+
+.#{$create-tearsheet-block-class} .#{$step-block-class}__step--hidden-step {
+  display: none;
+}
+
+.#{$create-tearsheet-block-class} .#{$step-block-class}__step--visible-step {
+  // stylelint-disable-next-line carbon/motion-easing-use
+  animation: step-content-entrance $duration-slow-01;
+  animation-fill-mode: forwards;
+  animation-timing-function: $standard-easing;
+  opacity: 0;
+}
+
+@media (prefers-reduced-motion) {
+  .#{$create-tearsheet-block-class} .#{$step-block-class}__step--visible-step {
+    animation: none;
+    opacity: 1;
+  }
+}
+
+.#{$create-tearsheet-block-class} .#{$create-tearsheet-block-class}__content {
+  min-block-size: 100%;
+  overflow-x: hidden;
+  @supports (overflow-inline: hidden) {
+    overflow-inline: hidden;
+  }
+
+  padding-block: $spacing-06;
+}
+
+.#{$create-tearsheet-block-class}
+  .#{$create-tearsheet-block-class}__content
+  .#{carbon-config.$prefix}--form {
+  block-size: inherit;
+}
+
+.#{$create-tearsheet-block-class}
+  .#{$create-tearsheet-block-class}__content
+  .#{carbon-config.$prefix}--grid {
+  padding: 0;
+  margin: 0;
+}
+
+.#{$create-tearsheet-block-class}
+  .#{$create-tearsheet-block-class}__step--heading {
+  padding-block-end: $spacing-06;
+}
+
+.#{$create-tearsheet-block-class}
+  .#{carbon-config.$prefix}--btn-set
+  .#{carbon-config.$prefix}--btn.#{carbon-config.$prefix}--btn--disabled {
+  box-shadow: -0.0625rem 0 0 0 $button-separator;
+}
+
+.#{$create-tearsheet-block-class} .#{carbon-config.$prefix}--side-nav--ux {
+  position: initial;
+  background-color: transparent;
+}
+
+.#{$create-tearsheet-block-class}
+  .#{$create-tearsheet-block-class}__section--divider {
+  position: relative;
+  display: block;
+  margin: $spacing-06 calc(-1 * #{$spacing-08}) $spacing-07
+    calc(-1 * #{$spacing-06});
+  background-color: $layer-accent-01;
+  block-size: 1px;
+  inline-size: var(--#{$create-tearsheet-block-class}--total-width);
+}
+
+.#{$create-tearsheet-block-class}
+  .#{$create-tearsheet-block-class}__step--title,
+.#{$create-tearsheet-block-class}
+  .#{$create-tearsheet-block-class}__section--title {
+  margin-block-end: $spacing-05;
+}
+
+.#{$create-tearsheet-block-class}
+  .#{$create-tearsheet-block-class}__section--subtitle,
+.#{$create-tearsheet-block-class}
+  .#{$create-tearsheet-block-class}__step--subtitle {
+  @include type.type-style('heading-compact-01');
+
+  margin-block-end: $spacing-03;
+}
+
+.#{$create-tearsheet-block-class}
+  .#{$create-tearsheet-block-class}__section--description,
+.#{$create-tearsheet-block-class}
+  .#{$create-tearsheet-block-class}__step--description {
+  @include type.type-style('body-01');
+
+  margin-block-end: $spacing-06;
+}
+
+.#{$create-tearsheet-block-class} .#{carbon-config.$prefix}--fieldset {
+  margin-block-end: 0;
+}
+
+.#{$create-tearsheet-block-class}
+  .#{$create-tearsheet-block-class}__step--fieldset
+  > * {
+  margin-block-end: $spacing-05;
+}

@@ -1,0 +1,254 @@
+//
+// Copyright IBM Corp. 2024, 2024
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+// Standard imports.
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/layout/scss/convert' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/motion' as *;
+@use '@carbon/styles/scss/type';
+@use '@carbon/type/scss/font-family';
+@use '../../global/styles/project-settings' as c4p-settings;
+@use '../../global/styles/mixins';
+@use '@carbon/styles/scss/utilities';
+
+$block-class: #{c4p-settings.$pkg-prefix}--nav;
+$nav-list-block-class: #{c4p-settings.$pkg-prefix}--nav-list;
+$nav-item-block-class: #{c4p-settings.$pkg-prefix}--nav-item;
+
+$nav__heading: '#{&}__heading';
+$nav__wrapper: '#{&}__wrapper';
+
+/// Icon position.
+/// @type Length
+$nav__icon__position: translate3d(-50%, 0, 0);
+
+@mixin rtl {
+  $rtl: '[dir="rtl"]';
+
+  &#{$rtl},
+  #{$rtl} & {
+    @content;
+  }
+}
+
+.#{$block-class} {
+  position: relative;
+}
+
+.#{$block-class}:not(:first-of-type) {
+  padding-block-start: $spacing-05;
+}
+
+.#{$block-class}:not(:last-of-type) {
+  padding-block-end: $spacing-05;
+}
+
+.#{$block-class}:last-of-type {
+  padding-block-end: $spacing-07;
+}
+
+.#{$block-class} + .#{$block-class} > .#{$nav__heading} {
+  padding-block-start: $spacing-02;
+}
+
+.#{$block-class}::before {
+  position: absolute;
+  display: inline-block;
+  /* stylelint-disable-next-line -- to-rem carbon replacement for rem */
+  border-block-end: to-rem(1px) solid $layer-02;
+  content: '';
+  inline-size: auto;
+  inset-block-end: 0;
+  inset-inline: $spacing-07;
+}
+
+.#{$block-class}:last-of-type::before {
+  border-width: 0;
+}
+
+.#{$block-class}__wrapper {
+  list-style: none;
+  margin-block: initial;
+  padding-inline-start: initial;
+
+  @include rtl {
+    padding-inline-end: initial;
+  }
+}
+
+.#{$block-class}__heading {
+  @include type.type-style('caption-01');
+
+  padding: $spacing-04 $spacing-08;
+  color: $text-secondary;
+  margin-block: initial;
+}
+
+// Navigation lists.
+.#{$nav-list-block-class} {
+  @include type.type-style('body-short-01');
+
+  display: flex;
+  flex-direction: column;
+  list-style: none;
+  margin-block-end: $spacing-01;
+}
+
+.#{$nav-list-block-class}:focus {
+  outline: 0;
+  outline-width: 0;
+
+  > .#{$nav-item-block-class}__link {
+    @include utilities.focus-outline('outline');
+  }
+}
+
+.#{$nav-list-block-class}__icon {
+  margin-block-start: $spacing-01;
+  margin-inline-start: auto;
+  transform: $nav__icon__position rotate(0deg);
+  transition-duration: $duration-moderate-02;
+  transition-property: transform;
+  transition-timing-function: $standard-easing;
+  @include rtl {
+    inset-inline-end: $spacing-02;
+    transform: $nav__icon__position rotate(180deg);
+  }
+}
+
+.#{$nav-list-block-class}--nested {
+  overflow: hidden;
+  margin-block-end: 0;
+  max-block-size: 0;
+  opacity: 0;
+  padding-inline-start: 0;
+  transition-duration: $duration-moderate-02;
+  $transition-property: (max-height, opacity);
+  @include rtl {
+    padding-inline: initial 0;
+  }
+
+  > .#{$nav-item-block-class}:last-of-type {
+    margin-block-end: $spacing-03;
+  }
+}
+
+// Navigation items.
+.#{$nav-item-block-class} {
+  @include type.type-style('body-short-01');
+
+  position: relative;
+  margin-block-end: $spacing-01;
+}
+
+// Content including text and sometimes a product icon.
+.#{$nav-item-block-class}__content {
+  display: flex;
+}
+
+.#{$nav-item-block-class}::before {
+  position: absolute;
+  display: inline-block;
+  background-color: transparent;
+  block-size: 100%;
+  content: '';
+  /* stylelint-disable-next-line -- to-rem carbon replacement for rem */
+  inline-size: to-rem(4px);
+  inset-block-start: 0;
+  inset-inline-start: 0;
+  transform: translate3d(-100%, 0, 0);
+  transition-property: transform;
+}
+
+.#{$nav-item-block-class}--disabled {
+  pointer-events: none;
+
+  > #{$nav-item-block-class}__link {
+    color: $text-on-color-disabled;
+  }
+}
+
+.#{$nav-item-block-class}--active {
+  @include font-family.font-weight('semibold');
+
+  @include rtl {
+    &::before {
+      transform: translate3d(0, 0, 0);
+    }
+  }
+}
+
+.#{$nav-item-block-class}--active::before {
+  z-index: 100;
+  background-color: $background-brand;
+  transform: translate3d(0, 0, 0);
+}
+
+// Expanded navigation list.
+.#{$nav-item-block-class}--expanded {
+  margin-block-end: $spacing-03;
+
+  > .#{$nav-list-block-class}--nested {
+    /* stylelint-disable-next-line -- to-rem carbon replacement for rem */
+    max-block-size: to-rem(320px);
+    opacity: 1;
+    transition-timing-function: $ease-in;
+  }
+
+  > .#{$nav-item-block-class}__link > .#{$nav-list-block-class}__icon {
+    transform: $nav__icon__position rotate(180deg);
+
+    @include rtl {
+      transform: $nav__icon__position rotate(0);
+    }
+  }
+}
+
+// Navigation item link.
+.#{$nav-item-block-class}__link {
+  position: relative;
+  display: flex;
+  padding: $spacing-03 $spacing-02 $spacing-03 $spacing-08;
+  color: $text-primary;
+  cursor: pointer;
+  text-decoration: none;
+  transition-property: background-color;
+}
+
+.#{$nav-item-block-class}__link:hover,
+.#{$nav-item-block-class}__link:focus {
+  background-color: $layer-02;
+}
+
+.#{$nav-item-block-class}__link:focus {
+  @include utilities.focus-outline('outline');
+}
+
+.#{$nav-item-block-class}__img {
+  /* stylelint-disable-next-line -- to-rem carbon replacement for rem */
+  block-size: to-rem(20px);
+  margin-inline: -$spacing-07 $spacing-04;
+}
+
+//nav-item__link--external__icon
+
+// External link icon selector.
+.#{$nav-item-block-class}__link--external__icon {
+  flex-shrink: 0;
+  align-self: center;
+  fill: $text-primary;
+  margin-inline-start: $spacing-02;
+  opacity: 0;
+}
+
+.#{$nav-item-block-class}__link--external:hover,
+.#{$nav-item-block-class}__link--external:focus {
+  > .#{$nav-item-block-class}__link--external__icon {
+    opacity: 1;
+  }
+}

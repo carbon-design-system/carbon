@@ -1,0 +1,99 @@
+/**
+ * Copyright IBM Corp. 2026, 2026
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/type';
+@use '@carbon/layout/scss/convert' as *;
+@use '@carbon/styles/scss/config' as carbon-config;
+@use '@carbon/styles/scss/components/button/tokens' as button-tokens;
+@use '@carbon/ibm-products-styles/scss/components/ActionSet/index' as *;
+
+$c4p-prefix: 'c4p';
+$carbon-prefix: 'cds';
+
+$block-class: #{$c4p-prefix}--action-set;
+
+// Import base button styles
+@use '@carbon/web-components/scss/components/button/button';
+
+// Mixin for button separator styles (DRY principle)
+@mixin button-separator($direction: horizontal) {
+  $shadow: if(
+    $direction == horizontal,
+    to-rem(-1px) 0 0 0 button-tokens.$button-separator,
+    0 to-rem(-1px) 0 0 button-tokens.$button-separator
+  );
+
+  // Slotted buttons
+  ::slotted(#{$carbon-prefix}-button:not(:first-of-type)) {
+    z-index: 1;
+    box-shadow: $shadow;
+  }
+
+  ::slotted(#{$carbon-prefix}-button:focus-within),
+  ::slotted(#{$carbon-prefix}-button:not(:first-of-type)[hide-margin]) {
+    box-shadow: inherit;
+  }
+
+  // Directly rendered buttons (from actions prop)
+  #{$carbon-prefix}-button:not(:first-of-type) {
+    z-index: 1;
+    box-shadow: $shadow;
+  }
+
+  #{$carbon-prefix}-button:focus-within,
+  #{$carbon-prefix}-button:not(:first-of-type)[hide-margin] {
+    box-shadow: inherit;
+  }
+}
+
+:host(#{$c4p-prefix}-action-set) {
+  @extend .#{$block-class} !optional;
+
+  // Override padding-inline-start for ghost buttons from ActionSet styles
+  .#{$block-class}__action-button--ghost {
+    /* stylelint-disable-next-line declaration-no-important */
+    padding-inline-start: 0 !important;
+  }
+
+  // Button separator styles for horizontal layout
+  @include button-separator(horizontal);
+}
+
+// Stacked layout styles
+:host(#{$c4p-prefix}-action-set[stacked]) {
+  @include button-separator(vertical);
+}
+
+// Side-panel specific overrides for button widths
+:host(#{$c4p-prefix}-action-set[actions-multiple='single']) {
+  // Single button should be full width
+  ::slotted(#{$carbon-prefix}-button),
+  #{$carbon-prefix}-button {
+    flex: 0 0 100%;
+    max-inline-size: none;
+  }
+}
+
+:host(#{$c4p-prefix}-action-set[actions-multiple='double']) {
+  // Double buttons should be 50% width each
+  ::slotted(#{$carbon-prefix}-button),
+  #{$carbon-prefix}-button {
+    flex: 0 1 50%;
+    max-inline-size: none;
+  }
+}
+
+:host(#{$c4p-prefix}-action-set[actions-multiple='triple']) {
+  // Triple buttons should be ~33% width each
+  ::slotted(#{$carbon-prefix}-button),
+  #{$carbon-prefix}-button {
+    flex: 0 1 33.33%;
+    max-inline-size: none;
+  }
+}

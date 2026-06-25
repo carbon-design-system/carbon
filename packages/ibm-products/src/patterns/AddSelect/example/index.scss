@@ -1,0 +1,53 @@
+/**
+ * Copyright IBM Corp. 2026
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+@use '@carbon/react/scss/spacing' as *;
+@use '@carbon/styles/scss/type' as *;
+
+.example-container {
+  padding: $spacing-05;
+  max-inline-size: 800px;
+
+  h3 {
+    @include type-style('heading-03');
+
+    margin-block-end: $spacing-03;
+  }
+
+  p {
+    @include type-style('body-01');
+
+    margin-block-end: $spacing-05;
+  }
+
+  .launch-button {
+    margin-block-start: $spacing-03;
+  }
+}
+
+.example-section {
+  padding: $spacing-07;
+  border: 1px solid var(--cds-border-subtle);
+  border-radius: 4px;
+  margin-block-end: $spacing-09;
+
+  h2 {
+    margin-block: 0 $spacing-03;
+  }
+
+  p {
+    color: var(--cds-text-secondary);
+    margin-block-end: $spacing-06;
+  }
+}
+
+.notification {
+  position: fixed;
+  z-index: 9999;
+  inset-block-start: $spacing-05;
+  inset-inline-end: $spacing-05;
+}

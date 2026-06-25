@@ -1,0 +1,37 @@
+//
+// Copyright IBM Corp. 2024, 2024
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+/* stylelint-disable function-no-unknown */
+/* stylelint-disable max-nesting-depth */
+
+// Standard imports.
+@use '../../global/styles/project-settings' as c4p-settings;
+@use '../../global/styles/mixins';
+
+@use '@carbon/layout/scss/convert' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/type';
+
+// FilterPanel uses the following Carbon for IBM Products components:
+// TODO: @use(s) of IBM Products component styles used by FilterPanel
+
+// The block part of our conventional BEM class names (blockClass__E--M).
+$block-class: #{c4p-settings.$pkg-prefix}--filter-panel-group;
+
+.#{$block-class} {
+  border-block-start: to-rem(1px) solid $border-subtle;
+  margin-block: $spacing-04;
+  padding-block-start: $spacing-04;
+}
+
+.#{$block-class}__title {
+  @include type.type-style('label-01');
+  @include type.font-weight('semibold');
+
+  margin-block: 0 $spacing-04;
+}

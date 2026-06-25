@@ -1,0 +1,156 @@
+//
+// Copyright IBM Corp. 2022, 2023
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/type';
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/components/tooltip';
+
+@use 'ALIAS_STORY_STYLE_CONFIG' as c4p-settings;
+
+// TODO: add any additional styles used by Datagrid.stories.js
+// helper class for the nested table
+
+$block-class: #{c4p-settings.$pkg-prefix}--datagrid;
+
+.sb-show-main.sb-main-centered {
+  block-size: 100vh;
+}
+
+.sb-show-main.sb-main-centered #storybook-root {
+  padding: $spacing-07;
+  block-size: 100vh;
+  inline-size: 100%;
+}
+
+#storybook-root
+  .#{c4p-settings.$carbon-prefix}--actionable-notification__content {
+  white-space: pre-wrap;
+}
+
+.carbon-nested-table {
+  border-block-end: 1px solid $border-subtle-01;
+
+  .#{$block-class}__virtual-scrollbar > div > div:last-child td {
+    border-block-end: none;
+  }
+}
+
+.#{$block-class}__panelContent {
+  display: inline;
+}
+
+/* only for storybook purpose. */
+.#{c4p-settings.$pkg-prefix}--side-panel.#{c4p-settings.$pkg-prefix}--side-panel__container {
+  block-size: 100%;
+  inset-block-start: 0;
+}
+
+.page-content-wrapper.side-panel-open {
+  .#{$block-class} {
+    padding-inline-end: $spacing-05;
+  }
+}
+
+.#{$block-class}__side-panel-sections {
+  padding-block-end: $spacing-06;
+}
+
+.#{$block-class}__side-panel-link {
+  padding-block: $spacing-01 $spacing-06;
+}
+
+.#{$block-class}__side-panel-section-inner {
+  display: flex;
+  padding: $spacing-01 0;
+}
+
+.#{$block-class}__side-panel-label-text {
+  @include type.type-style('body-compact-01');
+
+  color: $text-secondary;
+}
+
+.#{$block-class}__side-panel-value {
+  @include type.type-style('body-compact-01');
+
+  padding-inline-start: $spacing-03;
+}
+
+.#{$block-class}__side-panel-section-header {
+  @include type.type-style('heading-compact-01');
+
+  padding-block-end: $spacing-02;
+}
+
+.#{c4p-settings.$pkg-prefix}--side-panel.#{c4p-settings.$pkg-prefix}--side-panel__container.#{c4p-settings.$pkg-prefix}--side-panel__container-right-placement {
+  border: 0 none;
+  box-shadow: none;
+}
+
+.#{c4p-settings.$pkg-prefix}--side-panel__container
+  .#{c4p-settings.$pkg-prefix}--side-panel__inner-content {
+  block-size: 100%;
+}
+
+.#{$block-class}-story__custom-cell-wrapper.#{c4p-settings.$carbon-prefix}--link {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.#{$block-class}-story__hidden-column-id-snippet {
+  padding-block-start: $spacing-07;
+}
+
+.#{$block-class}__mobile-toolbar-modal
+  .#{c4p-settings.$carbon-prefix}--dropdown__wrapper {
+  margin-block-end: $spacing-07;
+}
+
+.storybook-#{$block-class}__validation-code-snippet {
+  @include type.font-family($name: mono);
+  @include type.type-style('code-01');
+
+  display: inline-block;
+  padding: 0 $spacing-03;
+  border: 2px solid transparent;
+  border-radius: $spacing-02;
+  background-color: $field-01;
+  margin-inline-end: $spacing-03;
+}
+
+.#{c4p-settings.$carbon-prefix}--body--with-modal-open {
+  .#{$block-class}__mobile-toolbar-modal.#{c4p-settings.$carbon-prefix}--modal {
+    inline-size: 100vw;
+    inset-block-start: -$spacing-07;
+    inset-inline-start: -$spacing-07;
+  }
+}
+
+$story-anchor: 'Datagrid';
+div[data-story-title*='#{$story-anchor}']
+  .docs-story
+  > div:first-child
+  > div:first-child {
+  overflow: auto;
+  inline-size: 100%;
+}
+
+.sb--tooltip-trigger {
+  display: flex;
+  box-sizing: border-box;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border: 0;
+  margin: 0;
+  background: none;
+  cursor: pointer;
+  text-align: start;
+}

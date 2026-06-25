@@ -1,0 +1,112 @@
+//
+// Copyright IBM Corp. 2020, 2025
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+// Standard imports.
+@use '@carbon/styles/scss/colors' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/motion' as *;
+@use '@carbon/styles/scss/themes' as *;
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/config' as carbon-config;
+
+@use '../../global/styles/project-settings' as *;
+
+$web-terminal-width: 40rem; // 640px
+$block-class: #{$pkg-prefix}--web-terminal;
+
+@keyframes web-terminal-entrance {
+  from {
+    opacity: 0;
+    // stylelint-disable-next-line carbon/layout-use
+    transform: translateX(#{$web-terminal-width});
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes web-terminal-exit {
+  from {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  to {
+    opacity: 0;
+    // stylelint-disable-next-line carbon/layout-use
+    transform: translateX(#{$web-terminal-width});
+  }
+}
+
+/*
+  The reason for not using theme tokens in the web terminal
+  component is because we want these colors to always be the same
+  despite of which carbon theme the user has.
+*/
+
+.#{$block-class}--open {
+  animation: web-terminal-entrance $duration-moderate-02 motion(standard);
+}
+
+.#{$block-class}--closed {
+  animation: web-terminal-exit forwards $duration-moderate-02 motion(standard);
+}
+
+.#{$block-class} {
+  @include theme($g90);
+
+  position: fixed;
+  block-size: calc(100vh - #{$spacing-09});
+  border-inline-start: 1px solid $gray-90;
+  color: $text-primary;
+  inline-size: 100%;
+  inset-block-start: $spacing-09;
+  inset-inline-end: 0;
+  max-inline-size: $web-terminal-width;
+
+  @media (prefers-reduced-motion) {
+    animation: none;
+  }
+}
+
+.#{$block-class}__bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: $background;
+  block-size: 3rem;
+}
+
+.#{$block-class}__actions {
+  display: flex;
+}
+
+.#{$block-class}__documentation-overflow {
+  @include theme($g100);
+}
+
+.#{$block-class}__documentation-overflow
+  .#{carbon-config.$prefix}--overflow-menu-options__btn {
+  text-decoration: none;
+}
+
+// Terminal body styles
+.#{$block-class}__body {
+  block-size: calc(100vh - #{$spacing-09});
+}
+
+// Terminal wrapper styles
+.#{$block-class}-content-wrapper {
+  block-size: 100%;
+  inline-size: 100vw;
+}
+
+.#{$block-class}-content-wrapper--open {
+  inline-size: calc(100vw - #{$web-terminal-width});
+}

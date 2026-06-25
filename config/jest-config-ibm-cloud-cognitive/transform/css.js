@@ -1,0 +1,92 @@
+/**
+ * Copyright IBM Corp. 2020, 2026
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+import { createHash } from 'crypto';
+import fs from 'fs';
+import * as sass from 'sass';
+import path from 'path';
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
+const THIS_FILE = fs.readFileSync(__filename);
+const { root: ROOT_DIR } = path.parse(__dirname);
+
+/**
+ * Returns an array of the directory and its ancestors
+ * @param {string} directory
+ * @returns {Array<string>}
+ */
+function ancestors(directory) {
+  const result = [directory];
+  let current = directory;
+
+  while (current !== '') {
+    result.push(current);
+
+    if (current !== ROOT_DIR) {
+      current = path.dirname(current);
+    } else {
+      current = '';
+    }
+  }
+
+  return result;
+}
+
+export default {
+  process(_file, filepath) {
+    const nodeModules = ancestors(path.dirname(filepath))
+      .map((directory) => {
+        return path.join(directory, 'node_modules');
+      })
+      .filter((directory) => {
+        return fs.existsSync(directory);
+      });
+
+    const result = sass.compile(filepath, {
+      style: 'compressed',
+      loadPaths: [...nodeModules],
+    });
+    const cssString =
+      typeof result.css === 'string' ? result.css : String(result.css);
+    return {
+      code: `
+        const css = ${JSON.stringify(cssString)};
+        let style;
+        beforeAll(() => {
+          style = document.createElement('style');
+          style.textContent = css;
+          document.head.appendChild(style);
+        });
+        afterAll(() => {
+          document.head.removeChild(style);
+        });
+      `,
+    };
+  },
+  getCacheKey(sourceText, sourcePath, transformOptions) {
+    const { config, configString, instrument } = transformOptions;
+    return createHash('md5')
+      .update(THIS_FILE)
+      .update('\0', 'utf8')
+      .update(sourceText)
+      .update('\0', 'utf8')
+      .update(path.relative(config.rootDir, sourcePath))
+      .update('\0', 'utf8')
+      .update(configString)
+      .update('\0', 'utf8')
+      .update(instrument ? 'instrument' : '')
+      .update('\0', 'utf8')
+      .update(process.version)
+      .update('\0', 'utf8')
+      .update(String(sass.info))
+      .digest('hex');
+  },
+};

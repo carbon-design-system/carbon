@@ -1,0 +1,42 @@
+/**
+ * Copyright IBM Corp. 2024
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/theme';
+@use './variables';
+
+.#{variables.$block-class}__actions-column-cell {
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+}
+
+.#{variables.$block-class}__actions-column-content {
+  display: flex;
+  justify-content: center;
+}
+
+.#{variables.$block-class}__actions-column-loading {
+  margin-block-end: $spacing-03;
+}
+
+.#{variables.$block-class}
+  .#{variables.$block-class}__disabled-row-action-button {
+  cursor: not-allowed;
+}
+
+.#{variables.$block-class} .#{variables.$block-class}__disabled-row-action {
+  pointer-events: none;
+}
+
+.#{variables.$block-class} .#{variables.$block-class}__disabled-row-action svg {
+  fill: theme.$layer-selected-disabled;
+}
+
+.#{variables.$block-class}_actions-column {
+  display: flex;
+}

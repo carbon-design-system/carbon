@@ -1,0 +1,33 @@
+//
+// Copyright IBM Corp. 2023, 2023
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use '@carbon/styles/scss/colors' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/themes';
+@use '@carbon/styles/scss/type';
+
+// For demo purposes, have text surrounding component match styling in component.
+#storybook-root {
+  @include type.type-style('body-01');
+}
+
+// The layout has been changed from middle/center to top/left, because
+// the component can expand, and it looks weird when expanding vertically
+// from the middle of the page instead of "dropping down" from above.
+// Margin provides spacing from the edge of the viewport.
+.non-linear-reading-stories__viewport {
+  margin: $spacing-10; // 64px
+}
+
+.gradient-bg {
+  @include theme(themes.$g100, true);
+
+  padding: $spacing-05;
+  background: linear-gradient(90deg, $blue-90 0%, $purple-70 100%);
+  color: $text-primary;
+}

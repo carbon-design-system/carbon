@@ -1,0 +1,77 @@
+//
+// Copyright IBM Corp. 2021, 2025
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/breakpoint' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/config' as carbon-config;
+
+@use '../../global/styles/project-settings' as *;
+
+$block-class: #{$pkg-prefix}--toolbar;
+
+$border: 1px solid $border-subtle-01;
+
+$toolbar-dimensions: $spacing-08;
+
+.#{$block-class} {
+  @include breakpoint($name: lg) {
+    justify-content: flex-end;
+  }
+
+  display: flex;
+  background-color: $layer-01;
+  min-block-size: $toolbar-dimensions;
+  min-inline-size: $toolbar-dimensions;
+}
+
+.#{$block-class}--vertical,
+.#{$block-class}--vertical > .#{$block-class}__group {
+  flex-wrap: wrap;
+}
+
+.#{$block-class}--vertical {
+  max-inline-size: $toolbar-dimensions;
+}
+
+.#{$block-class}__group {
+  display: flex;
+  border-block-end: $border;
+  border-inline-end: $border;
+}
+
+.#{$block-class}--vertical > .#{$block-class}__group,
+.#{$block-class}__group:last-of-type {
+  border-inline-end-width: 0;
+}
+
+.#{$block-class}--vertical > .#{$block-class}__group:last-of-type,
+.#{$block-class} .#{carbon-config.$prefix}--dropdown {
+  border-block-end-width: 0;
+}
+
+.#{$block-class}__button--caret {
+  position: relative;
+}
+
+.#{$block-class}__button__caret {
+  $caret-dimensions: calc(#{$spacing-01} + #{$spacing-02});
+
+  $position: $spacing-01;
+
+  position: absolute;
+  background: linear-gradient(
+    to right bottom,
+    transparent 50%,
+    $icon-primary 50%
+  );
+  block-size: $caret-dimensions;
+  content: '';
+  inline-size: $caret-dimensions;
+  inset-block-end: $position;
+  inset-inline-end: $position;
+}

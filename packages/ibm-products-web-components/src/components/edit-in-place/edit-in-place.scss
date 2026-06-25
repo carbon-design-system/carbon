@@ -1,0 +1,145 @@
+/*
+ * Copyright IBM Corp. 2026
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+$css--plex: true !default;
+
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/reset';
+@use '@carbon/styles/scss/config' as carbon-config;
+@use '@carbon/ibm-products-styles/scss/config';
+@use '@carbon/ibm-products-styles/scss/components/EditInPlace' as *;
+
+$prefix: config.$pkg-prefix;
+$carbon-prefix: config.$carbon-prefix;
+$block-class: #{$prefix}--edit-in-place;
+
+:host(#{$prefix}-edit-in-place) {
+  display: block;
+}
+
+// Container that wraps input and toolbar (excludes warning text)
+.#{$block-class}__container {
+  display: flex;
+  align-items: center;
+  padding: 0 0 0 $spacing-05;
+  background: transparent;
+  cursor: pointer;
+}
+
+// Hover state on container
+.#{$block-class}__container:hover {
+  background: $field-01;
+}
+
+// Show outline on container when in focused/edit mode
+.#{$block-class}__container.#{$block-class}--focused {
+  background: $field-01;
+  outline: 2px solid $focus;
+  outline-offset: 0;
+}
+
+// Remove container outline when focus is on buttons (to avoid double focus ring)
+.#{$block-class}__container.#{$block-class}--focused:has(
+    .#{$block-class}__btn:focus-within
+  ) {
+  outline: none;
+}
+
+// Invalid state on container (not on warning text)
+.#{$block-class}__container.#{$block-class}--invalid {
+  padding: 0 0 0 $spacing-05;
+  border: 2px solid $support-error;
+}
+
+// Remove border when focused to avoid double border with outline
+.#{$block-class}__container.#{$block-class}--invalid.#{$block-class}--focused {
+  border: none;
+}
+
+// Remove default input outline since we're showing it on the container
+.#{$block-class}__text-input:focus {
+  outline: none;
+}
+
+// Also remove any browser default focus styles
+.#{$block-class}__text-input {
+  outline: none;
+}
+
+// Edit button visibility - hidden by default, shown on hover
+.#{$block-class}__btn-edit {
+  visibility: hidden;
+}
+
+// Show edit button on container hover or when always visible
+.#{$block-class}__container:hover .#{$block-class}__btn-edit,
+.#{$block-class}__btn-edit.#{$block-class}__btn-edit--always-visible {
+  visibility: visible;
+}
+
+// Web component specific overrides for icon buttons
+.#{$block-class}__toolbar {
+  justify-content: end;
+
+  #{$carbon-prefix}-icon-button {
+    display: flex;
+    align-items: stretch;
+    padding: 0;
+    min-block-size: unset;
+  }
+}
+
+// Match button heights to input heights for each size and make them square
+.#{$block-class}__toolbar #{$carbon-prefix}-icon-button {
+  block-size: 100%;
+}
+
+// Remove borders from save and cancel buttons to match React
+// Target the button element inside the web component with higher specificity
+.#{$block-class}__toolbar .#{$block-class}__btn-save::part(button),
+.#{$block-class}__toolbar .#{$block-class}__btn-cancel::part(button) {
+  border: none;
+  border-color: transparent;
+}
+
+// Also handle all button states
+.#{$block-class}__toolbar .#{$block-class}__btn-save::part(button):hover,
+.#{$block-class}__toolbar .#{$block-class}__btn-cancel::part(button):hover {
+  border: none;
+  border-color: transparent;
+}
+
+// Focus state - 2px outline
+.#{$block-class}__toolbar .#{$block-class}__btn-save::part(button):focus,
+.#{$block-class}__toolbar .#{$block-class}__btn-cancel::part(button):focus {
+  border: none;
+  border-color: transparent;
+  outline: 2px solid $focus;
+  outline-offset: -2px;
+}
+
+// Disabled button styling - make icons greyed out
+.#{$block-class}__toolbar .#{$block-class}__btn-save::part(button):disabled,
+.#{$block-class}__toolbar .#{$block-class}__btn-cancel::part(button):disabled {
+  border: none;
+  border-color: transparent;
+  opacity: 0.5;
+}
+
+// Toggletip wrapper styling for read-only mode
+.#{$block-class}__toggletip-wrapper {
+  display: flex;
+  flex: 1;
+
+  button[slot='tooltip-trigger'] {
+    all: unset;
+    display: flex;
+    flex: 1;
+    cursor: pointer;
+  }
+}

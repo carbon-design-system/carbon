@@ -1,0 +1,203 @@
+/**
+ * @license
+ *
+ * Copyright IBM Corp. 2026
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+@use '@carbon/styles/scss/breakpoint' as *;
+@use '@carbon/ibm-products-styles/scss/config';
+@use '@carbon/styles/scss/motion' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/type';
+@use './tearsheet.scss' as *;
+
+$prefix: config.$pkg-prefix;
+$carbon-prefix: config.$carbon-prefix;
+$block-class__next: #{$prefix}--tearsheet__next;
+$motion-duration: $duration-moderate-02;
+// Narrow variant styles
+:host-context(#{$c4p-prefix}-preview-tearsheet[variant='narrow']) {
+  display: flex;
+  flex-direction: column;
+
+  .#{$block-class__next}__header-title {
+    @include type.type-style('heading-03');
+  }
+
+  .#{$block-class__next}__header-actions {
+    justify-content: flex-start;
+    margin-inline-end: 0;
+  }
+}
+
+// Hide header actions when collapsed in narrow variant
+:host-context(#{$c4p-prefix}-preview-tearsheet[variant='narrow']) {
+  &:host-context(#{$c4p-prefix}-tearsheet-header[collapsed]) {
+    .#{$block-class__next}__header-actions {
+      display: none;
+    }
+    .#{$block-class__next}__header-content {
+      align-self: flex-start;
+    }
+  }
+  .#{$block-class__next}__title-start {
+    align-items: center;
+
+    ::slotted(*) {
+      block-size: $spacing-06;
+      inline-size: $spacing-06;
+    }
+  }
+}
+
+:host {
+  display: grid;
+  flex-basis: unset;
+  gap: $spacing-05;
+  grid-template-columns: minmax(auto, 40rem) minmax(
+      var(--tearsheet-header-title-grid-width, 0),
+      1fr
+    );
+
+  inline-size: calc(100% - var(--tearsheet-header-action-offset));
+
+  @include breakpoint-down(md) {
+    display: flex;
+    flex-direction: column;
+
+    .#{$block-class__next}__header-actions {
+      justify-content: flex-start;
+      margin-inline-end: 0;
+    }
+  }
+}
+.#{$block-class__next}__header-actions {
+  display: flex;
+  justify-content: flex-end;
+  order: 2; /* Visual order: appears on the right on desktop */
+  margin-block-start: -14px;
+
+  @include breakpoint-down(md) {
+    order: 0; /* Reset to DOM order on mobile (header-actions first) */
+  }
+}
+
+.#{$block-class__next}__header-content {
+  order: 1; /* Visual order: appears on the left on desktop */
+
+  @include breakpoint-down(md) {
+    order: 0; /* Reset to DOM order on mobile (header-content second) */
+  }
+}
+
+:host {
+  .#{$block-class__next}__header-actions,
+  .#{$block-class__next}__header-content
+    *:not(
+      .#{$block-class__next}__content__title-wrapper,
+      .#{$block-class__next}__header-label
+    ) {
+    opacity: 1;
+    transition:
+      all $motion-duration motion(entrance, expressive),
+      opacity $motion-duration motion(entrance, expressive);
+  }
+}
+
+// ──────────────────────────────────────────────────────────────
+// Collapsed Header State
+// ──────────────────────────────────────────────────────────────
+:host-context(#{$c4p-prefix}-tearsheet-header[collapsed]) {
+  // Collapse header actions except the main action button
+  .#{$block-class__next}__header-actions
+    > *:not(.#{$block-class__next}__content__header-actions) {
+    @include collapsed-element;
+  }
+
+  // Collapse all header content except title wrapper
+  .#{$block-class__next}__header-content
+    > *:not(.#{$block-class__next}__content__title-wrapper) {
+    @include collapsed-element;
+  }
+
+  // Collapse nested elements within non-title elements
+  .#{$block-class__next}__header-content
+    > *:not(.#{$block-class__next}__content__title-wrapper)
+    * {
+    @include collapsed-element;
+  }
+
+  // Header title styling when collapsed
+  .#{$block-class__next}__header-title {
+    @include type.type-style('label-02');
+
+    align-items: center;
+    margin-block-start: $spacing-02;
+    transition: all $motion-duration motion(entrance, expressive);
+
+    > span {
+      display: flex;
+      align-items: center;
+      block-size: $spacing-06;
+    }
+  }
+
+  // Header content alignment
+  .#{$block-class__next}__header-content {
+    align-self: center;
+    margin-block-end: 0;
+  }
+
+  // Hide header actions on small screens when collapsed
+  @include breakpoint-down(md) {
+    .#{$block-class__next}__header-actions {
+      display: none;
+    }
+  }
+
+  // Normalize visible elements
+  .#{$block-class__next}__header-content,
+  .#{$block-class__next}__content__title-wrapper,
+  .#{$block-class__next}__header-actions,
+  .#{$block-class__next}__header-title {
+    margin-block: 0;
+    transition: margin-block $motion-duration ease;
+  }
+  // Header actions adjustment
+  .#{$block-class__next}__header-actions {
+    margin-block-start: -$spacing-01;
+  }
+  // Style for title-start slot content (like icons)
+  .#{$block-class__next}__title-start {
+    display: inline-flex;
+    align-items: center;
+
+    ::slotted(*) {
+      block-size: $spacing-05;
+      inline-size: $spacing-05;
+    }
+  }
+}
+.#{$block-class__next}__title-start {
+  @media screen and (prefers-reduced-motion: reduce) {
+    ::slotted(*) {
+      transition: none;
+    }
+  }
+
+  ::slotted(*) {
+    transition: all $motion-duration motion(entrance, expressive);
+  }
+}
+
+// Hide header content elements immediately when tearsheet is closing
+:host-context(#{$c4p-prefix}-preview-tearsheet:not([open])) {
+  .#{$block-class__next}__header-actions,
+  .#{$block-class__next}__header-content,
+  .#{$block-class__next}__header-content * {
+    opacity: 0;
+    transition: opacity 0.1s ease-out;
+  }
+}

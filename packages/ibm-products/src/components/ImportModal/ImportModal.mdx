@@ -1,0 +1,44 @@
+import { Story, Controls, Source, Canvas } from '@storybook/addon-docs/blocks';
+import { CodesandboxLink } from '../../global/js/utils/story-helper';
+import { ImportModal } from '.';
+import * as stories from './ImportModal.stories';
+import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
+
+# Import Modal
+
+[Usage guidelines](https://pages.github.ibm.com/carbon/ibm-products/patterns/import-and-upload/usage/)
+|
+[Carbon modal usage guidelines](https://www.carbondesignsystem.com/components/modal/usage)
+|
+[Carbon modal documentation](https://react.carbondesignsystem.com/?path=/docs/components-modal)
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Example usage](#example-usage)
+  - [Standard](#standard)
+- [Component API](#component-api)
+
+## Overview
+
+Modal dialog version of the Import pattern. The import action transfers data or
+objects from an external source into a system.
+
+### Standard
+
+<Canvas
+  of={stories.Standard}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () =>
+        stackblitzPrefillConfig({
+          story: stories.Standard,
+        }),
+    },
+  ]}
+></Canvas>
+
+## Component API
+
+<Controls />

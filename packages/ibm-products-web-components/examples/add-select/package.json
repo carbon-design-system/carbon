@@ -1,0 +1,25 @@
+{
+  "name": "add-and-select-examples",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Sample project for getting started with the Add and Select Web Components from Carbon for IBM Products.",
+  "license": "Apache-2",
+  "main": "index.html",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "clean": "rimraf node_modules dist .cache"
+  },
+  "dependencies": {
+    "@carbon/ibm-products-web-components": "latest",
+    "@carbon/icons": "^11.75.0",
+    "@carbon/web-components": "^2.48.0",
+    "lit": "^3.2.1",
+    "sass": "^1.64.1"
+  },
+  "devDependencies": {
+    "rimraf": "^3.0.2",
+    "vite": "^5.4.20"
+  }
+}

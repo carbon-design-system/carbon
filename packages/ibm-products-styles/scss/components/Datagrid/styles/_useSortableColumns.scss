@@ -1,0 +1,87 @@
+/**
+ * Copyright IBM Corp. 2020, 2025
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/config' as carbon-config;
+@use '@carbon/styles/scss/spacing' as *;
+
+@use '../../../global/styles/project-settings' as c4p-settings;
+@use './variables' as *;
+
+.#{$block-class}__sortableColumn {
+  /* stylelint-disable-next-line declaration-no-important */
+  padding-inline: $spacing-05 !important;
+
+  .#{carbon-config.$prefix}--table-header-label .header-title {
+    display: inline-block;
+    inline-size: auto;
+  }
+  .#{carbon-config.$prefix}--table-header-label {
+    display: block;
+    block-size: 100%;
+    inline-size: 100%;
+  }
+  .#{carbon-config.$prefix}--table-header-label
+    .#{carbon-config.$prefix}--table-sort:focus,
+  .#{carbon-config.$prefix}--table-header-label
+    .#{carbon-config.$prefix}--table-sort:active,
+  .#{carbon-config.$prefix}--table-header-label
+    button:focus
+    .#{$block-class}__sortable-icon {
+    /* stylelint-disable-next-line declaration-no-important */
+    background: none !important;
+    /* stylelint-disable-next-line declaration-no-important */
+    color: $text-primary !important;
+  }
+
+  .#{carbon-config.$prefix}--table-header-label
+    .#{carbon-config.$prefix}--table-sort:focus,
+  .#{carbon-config.$prefix}--table-header-label
+    .#{carbon-config.$prefix}--table-sort:active {
+    + .#{$block-class}__resizer {
+      z-index: -1;
+    }
+  }
+
+  .#{carbon-config.$prefix}--table-header-label
+    .#{carbon-config.$prefix}--table-sort {
+    padding: 0 $spacing-05;
+    border: none;
+    /* stylelint-disable-next-line declaration-no-important */
+    background: none !important;
+    /* stylelint-disable-next-line declaration-no-important */
+    color: $text-primary !important;
+    font: inherit;
+    inline-size: 100%;
+    min-inline-size: 100%;
+  }
+  .#{carbon-config.$prefix}--table-header-label
+    .#{carbon-config.$prefix}--table-sort
+    .#{$block-class}__sortable-icon {
+    fill: $text-primary;
+    opacity: 0;
+    visibility: hidden;
+  }
+
+  .#{carbon-config.$prefix}--table-sort.#{$block-class}--table-sort {
+    align-items: inherit;
+    margin: 0 calc(-1 * #{$spacing-05}); // fill width of parent table column header
+    inline-size: calc(100% + #{$spacing-07}); // offset due to inner label
+  }
+}
+
+.#{$block-class}__sortableColumn:hover,
+.#{$block-class}__sortableColumn:focus-within,
+.#{$block-class}__sortableColumn.#{$block-class}__isSorted {
+  .#{carbon-config.$prefix}--table-header-label
+    .#{$block-class}__sortable-icon {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  background-color: $layer-selected-hover-01;
+}

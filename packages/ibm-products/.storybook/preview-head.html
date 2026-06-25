@@ -1,0 +1,156 @@
+<style>
+  .sbdocs-li {
+    list-style: circle;
+  }
+
+  .sbdocs-wrapper .sbdocs-a {
+    color: #0f62fe;
+  }
+
+  .sbdocs-wrapper .sbdocs-a:hover {
+    color: #0353e9;
+  }
+
+  .sbdocs-wrapper .sbdocs-h2 {
+    padding-bottom: 12px;
+    margin-bottom: 0;
+  }
+
+  .sb-show-main.sb-main-padded {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 42px;
+  }
+
+  body #storybook-root {
+    width: 100%;
+  }
+</style>
+
+<!-- Analytics scripts - conditionally loaded (disabled in Chromatic) -->
+<script type="module">
+  import isChromatic from 'chromatic/isChromatic';
+
+  // Only load analytics if NOT in Chromatic environment
+  if (!isChromatic() && typeof window !== 'undefined') {
+    window.digitalData = {
+      page: {
+        pageInfo: {
+          language: 'en-US',
+          productTitle: 'Carbon for IBM Products',
+          analytics: {
+            category: 'KnowledgeCenter',
+          },
+          ibm: {
+            country: 'US',
+            siteId: 'C4IP',
+          },
+          segment: {
+            autoPageEventSpa: true,
+            enabled: true,
+            env: 'test',
+            key: 'aWg1ug3bDNcSTnde9iwvg1OcvVRzf0JC',
+            coremetrics: false,
+            skipIdentify: true,
+            commonProperties: {
+              productCode: 'C4IP',
+              productTitle: 'Carbon for IBM Products',
+            },
+            pageProperties: {
+              productCode: 'C4IP',
+              productTitle: 'Carbon for IBM Products',
+            },
+          },
+        },
+        category: {
+          primaryCategory: 'PC110',
+        },
+      },
+    };
+
+    // Load autotrack script dynamically with null checks
+    if (
+      typeof document !== 'undefined' &&
+      document.createElement &&
+      document.head
+    ) {
+      var autotrackScript = document.createElement('script');
+      autotrackScript.type = 'text/javascript';
+      autotrackScript.async = true;
+      autotrackScript.src = '//1.www.s81c.com/common/carbon/autotrack.min.js';
+      document.head.appendChild(autotrackScript);
+    }
+
+    // Setup analytics callbacks
+    (function () {
+      const isInIframe = () => {
+        try {
+          return window && window.self !== window.top;
+        } catch (e) {
+          return true;
+        }
+      };
+
+      const conditionallyLoadIBMCommon = () => {
+        if (
+          !isInIframe() &&
+          typeof document !== 'undefined' &&
+          document.createElement &&
+          document.head
+        ) {
+          var ibmCommonScript = document.createElement('script');
+          ibmCommonScript.type = 'text/javascript';
+          ibmCommonScript.defer = true;
+          ibmCommonScript.src = '//1.www.s81c.com/common/stats/ibm-common.js';
+          document.head.appendChild(ibmCommonScript);
+        }
+      };
+
+      const overrideCallback = (eName, eData) => {
+        try {
+          if (isInIframe()) {
+            if (
+              window &&
+              window.parent &&
+              window.parent.postMessage &&
+              window.location
+            ) {
+              window.parent.postMessage(
+                {
+                  topic: 'Autotrack',
+                  eName,
+                  eData,
+                },
+                window.location.origin
+              );
+            }
+          } else {
+            if (
+              window &&
+              window.bluemixAnalytics &&
+              typeof window.bluemixAnalytics.trackEvent === 'function'
+            ) {
+              window.bluemixAnalytics.trackEvent(eName, eData);
+            }
+          }
+        } catch (e) {
+          // Silently fail if analytics tracking fails
+          console.warn('Analytics tracking failed:', e);
+        }
+      };
+
+      if (window && window.addEventListener) {
+        window.addEventListener('load', () => {
+          conditionallyLoadIBMCommon();
+          if (
+            window.autoTrack &&
+            typeof window.autoTrack.updateCallback === 'function'
+          ) {
+            window.autoTrack.updateCallback(overrideCallback);
+          }
+        });
+      }
+    })();
+  }
+</script>

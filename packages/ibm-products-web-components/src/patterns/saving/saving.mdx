@@ -1,0 +1,76 @@
+import { ArgTypes, Markdown, Meta, Story } from '@storybook/addon-docs/blocks';
+import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
+import SavingStories from './saving.stories';
+
+<Meta of={SavingStories} />
+
+# Saving
+
+To build this pattern, we recommend including the following components:
+
+- [cds-textarea](https://web-components.carbondesignsystem.com/?path=/docs/components-text-area)
+- [cds-button](https://web-components.carbondesignsystem.com/?path=/docs/components-button)
+- [cds-inline-loading](https://web-components.carbondesignsystem.com/?path=/docs/components-inline-loading)
+
+These components are used within the `auto-saving` and `manual-saving` wrapper components to handle state management.
+
+> 💡 Check our
+> [Stackblitz](https://stackblitz.com/github/carbon-design-system/ibm-products/tree/main/packages/ibm-products-web-components/examples/saving)
+> example implementation.
+
+[![Edit carbon-web-components](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/carbon-design-system/ibm-products/tree/main/packages/ibm-products-web-components/examples/saving)
+
+## Getting started
+
+Here's a quick example to get you started.
+
+## Auto
+
+### HTML
+
+```html
+<cds-textarea
+  id="save-auto-textarea"
+  label="Enter in the thing you wanted saved"
+  class="saving-story-textarea"
+></cds-textarea>
+${dirtyInput && status !== 'default'
+  ? html`
+      <div class="${blockClass}__message">
+        ${status === 'fail'
+          ? html`
+              <div class="${blockClass}__error-icon">
+                <ErrorFilled size="{16}" />
+                ${errorFilled16({})}
+              </div>
+            `
+          : ''}
+        <p class="${blockClass}__text">${statusObj[status]?.text}</p>
+      </div>
+    `
+  : ''}
+```
+
+## Manual
+
+### HTML
+
+```html
+<div class="${blockClass}__buttons">
+  <cds-button
+    kind="secondary"
+    ?disabled=${status !== 'in-progress'}
+    type="button"
+  >
+    Cancel
+  </cds-button>
+  <cds-button
+    @click=${onRequestSave}
+    kind="primary"
+    ?disabled=${status === 'in-progress'}
+    type="button"
+  >
+    ${statusObj[status]?.text} ${icon}
+  </cds-button>
+</div>
+```

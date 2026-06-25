@@ -1,0 +1,128 @@
+//
+// Copyright IBM Corp. 2026
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+/* stylelint-disable declaration-no-important */
+
+$prefix: 'c4p' !default;
+
+@use '@carbon/styles/scss/config' with (
+  $font-path: '@ibm/plex'
+);
+@use '@carbon/styles';
+
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/theme' as theme;
+@use '@carbon/styles/scss/themes' as themes;
+@use '@carbon/styles/scss/type';
+@use '@carbon/styles/scss/motion' as *;
+@use '@carbon/utilities/scss/carousel/_index' as carousel;
+@include carousel.carousel();
+
+@include carousel.wrapperStyles();
+
+$block-class: #{$prefix}--coachmark__next;
+
+.#{$block-class} {
+  position: fixed;
+  inset-block-end: 0;
+  inset-inline-end: 180px;
+}
+
+// content styling
+.#{$block-class}--coachmark-content {
+  position: fixed;
+  inline-size: 18rem;
+  inset-block-start: 0.2rem !important;
+  margin-inline-start: 18px;
+  transition: translate $duration-moderate-02 motion(exit, productive);
+  translate: 0 0;
+  visibility: visible;
+  will-change: translate;
+
+  &.is-visible {
+    translate: 0 0;
+  }
+  .#{$block-class}--content-body {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .#{$block-class}--content-body > h2 {
+    @include type.type-style('productive-heading-02');
+
+    margin: 0 0 $spacing-03;
+  }
+
+  .#{$block-class}--content-body > p {
+    @include type.type-style('body-long-01');
+  }
+
+  .#{$block-class}--content-body > button {
+    display: flex;
+    align-self: flex-end;
+    margin-block-start: $spacing-05;
+  }
+}
+
+//carousel
+.exampleCarouselWrapper {
+  margin-block-end: $spacing-05;
+}
+
+// Fix for carousel views blocking button clicks in Storybook
+.carousel__view {
+  pointer-events: none;
+
+  // Re-enable pointer events for interactive content inside carousel views
+  * {
+    pointer-events: auto;
+  }
+}
+
+.carousel__view > h2 {
+  @include type.type-style('productive-heading-02');
+
+  margin: 0 0 $spacing-03;
+}
+
+.carousel__view > p {
+  @include type.type-style('body-long-01');
+}
+
+.carouselControls {
+  position: relative;
+
+  .nextButton {
+    position: absolute;
+    inset-inline-start: $spacing-07;
+  }
+
+  .prevButton {
+    position: absolute;
+    inset-inline-start: $spacing-07;
+  }
+}
+
+.carouselControlWrapper__footer {
+  span {
+    justify-self: flex-start;
+    margin-inline-end: auto;
+  }
+}
+
+.carouselControlWrapper__footer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  margin-block-end: $spacing-05;
+}
+
+.carouselControlWrapper--controls-progress {
+  justify-self: flex-start;
+  margin-inline-end: auto;
+  @include type.type-style('helper-text-01');
+}

@@ -1,0 +1,64 @@
+{
+  "name": "@carbon/storybook-addon-theme",
+  "description": "Carbon theme switcher for Storybook",
+  "version": "2.42.0-rc.0",
+  "license": "Apache-2.0",
+  "main": "dist/react.js",
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/carbon-design-system/ibm-products.git",
+    "directory": "config/storybook-addon-carbon-theme"
+  },
+  "bugs": "https://github.com/carbon-design-system/ibm-products/issues",
+  "homepage": "https://github.com/storybookjs/storybook#readme",
+  "files": [
+    "dist/**/*",
+    "README.md",
+    "*.js",
+    "telemetry.yml"
+  ],
+  "keywords": [
+    "addon",
+    "carbon",
+    "theme",
+    "storybook",
+    "carbon design system",
+    "carbon community",
+    "carbon for cloud & cognitive",
+    "carbon for ibm products"
+  ],
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  },
+  "scripts": {
+    "clean": "rimraf dist",
+    "build": "run-s clean build:js",
+    "build:js": "babel src --out-dir dist -s",
+    "postinstall": "ibmtelemetry --config=telemetry.yml",
+    "prepare": "npm run build"
+  },
+  "peerDependencies": {
+    "react": "*",
+    "vue": "*"
+  },
+  "dependencies": {
+    "@ibm/telemetry-js": "^1.9.1",
+    "@storybook/addons": "7.6.17",
+    "@storybook/api": "7.6.17",
+    "@storybook/client-api": "7.6.17",
+    "@storybook/client-logger": "^8.6.6",
+    "@storybook/components": "^8.6.6",
+    "@storybook/core-events": "^8.6.6",
+    "@storybook/theming": "^8.6.6",
+    "core-js": "^3.41.0"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.26.4",
+    "@babel/core": "^7.26.10",
+    "@babel/preset-react": "^7.26.3",
+    "npm-run-all2": "^8.0.0",
+    "rimraf": "^6.0.1"
+  }
+}

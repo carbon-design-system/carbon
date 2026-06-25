@@ -1,0 +1,116 @@
+import { ArgTypes, Canvas, Markdown, Meta, Story } from '@storybook/addon-docs/blocks';
+import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
+import * as ChecklistStories from './checklist.stories';
+
+<Meta of={ChecklistStories} />
+
+# Checklist
+
+{/* 
+// todo:  uncomment this after adding stackblitz example
+> 💡 Check our
+> [Stackblitz](https://stackblitz.com/github/carbon-design-system/ibm-products/tree/main/packages/ibm-products-web-components/examples/checklist)
+> example implementation.
+
+[![Edit carbon-web-components](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/carbon-design-system/ibm-products/tree/main/packages/ibm-products-web-components/examples/checklist) */}
+
+
+## Overview
+
+The `c4p-checklist` is a web component designed to display a list of items users should complete in order to learn about and/or onboard to a product This component has a structured layout with features such as progress tracking, task grouping, and expandable sections.
+
+#### Component Dependencies
+
+- `c4p-checklist-chart` for progress visualization
+- `c4p-checklist-group` for task categorization
+- `c4p-checklist-item` for individual tasks
+- `c4p-checklist-icon` for task status indication
+
+#### Progress Indicator
+
+The `c4p-checklist` component integrates a `c4p-checklist-chart` component in the header to visually represent the overall progress of the checklist. This helps users understand how far they’ve come and what remains.
+
+#### Checklist Group
+
+Use the `c4p-checklist-group` component to divide a long onboarding journey into manageable blocks. Each group can have its own title and set of tasks.
+
+#### Checklist Item
+
+Each task is rendered using the `c4p-checklist-item` component. It supports:
+
+- Task title 
+- Status indication via `c4p-checklist-icon` component
+
+### Composability
+
+All major sections (checklist header, body, footer, checklist item content, item status indicator) are implemented as **slots**, allowing developers to inject their own content and styling. When customizing these slots, developers are expected to apply appropriate styles in alignment with Carbon design guidelines.
+
+
+## Getting started
+
+Here's a quick example to get you started.
+
+### JS (via import)
+
+```javascript
+import '@carbon/ibm-products-web-components/es/components/checklist/index.js';
+```
+### Usage Example
+
+<Canvas className="page-header--docs-demo" of={ChecklistStories.Default} />
+
+### HTML
+
+```html
+<c4p-checklist
+  title=${title}
+  chartLabel=${chartLabel}
+  chartValue=${chartValue}
+  toggleLabel=${toggleLabel}
+  toggleLabelAlign=${toggleLabelAlign}
+  toggleAriaLabel=${toggleAriaLabel}
+  open
+  viewAllLabel=${viewAllLabel}
+  @c4p-checklist-view-all=${action(`Clicked View All`)}
+  @c4p-checklist-toggle=${action(`Clicked Toggle`)}
+  >
+  <c4p-checklist-group title=${groupTitle}>
+    <c4p-checklist-item
+    label="Task name"
+    status="completed"
+    ></c4p-checklist-item>
+    <c4p-checklist-item
+    label="Task name"
+    status="in progress"
+    @c4p-checklist-item-clicked=${action(`Clicked Checklist Item`)}
+    ?clickable=${true}
+    ></c4p-checklist-item>
+    <c4p-checklist-item
+    label="Task name"
+    status="not started"
+    @c4p-checklist-item-clicked=${action(`Clicked Checklist Item`)}
+    ?clickable=${true}
+    ></c4p-checklist-item>
+  </c4p-checklist-group>
+</c4p-checklist>
+```
+
+## `<c4p-checklist>` attributes, properties, events and slots.
+
+<ArgTypes of="c4p-checklist" />
+
+## `<c4p-checklist-group>` attributes, properties, events and slots.
+
+<ArgTypes of="c4p-checklist-group" />
+
+## `<c4p-checklist-item>` attributes, properties, events and slots.
+
+<ArgTypes of="c4p-checklist-item" />
+
+## `<c4p-checklist-chart>` attributes, properties, events and slots.
+
+<ArgTypes of="c4p-checklist-chart" />
+
+## `<c4p-checklist-icon>` attributes, properties, events and slots.
+
+<ArgTypes of="c4p-checklist-icon" />

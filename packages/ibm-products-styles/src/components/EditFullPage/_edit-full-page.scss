@@ -1,0 +1,26 @@
+//
+// Copyright IBM Corp. 2022, 2022
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+// Standard imports.
+@use '../../global/styles/project-settings' as c4p-settings;
+@use '../../global/styles/mixins';
+
+// Other Carbon settings.
+// TODO: @use 'carbon-components/scss/globals/grid/grid'; if needed
+
+// EditFullPage uses the following Carbon components:
+// TODO: @use(s) of Carbon component styles used by EditFullPage
+
+// EditFullPage uses the following Carbon for IBM Products components:
+// TODO: @use(s) of IBM Products component styles used by EditFullPage
+
+// The block part of our conventional BEM class names (blockClass__E--M).
+$block-class: #{c4p-settings.$pkg-prefix}--edit-full-page;
+
+.#{$block-class} {
+  // TODO: Styles.
+}

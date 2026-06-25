@@ -1,0 +1,152 @@
+<meta
+  name="keywords"
+  content="IBM, IBM Software, Carbon, Carbon for IBM Products, Cloud, Cognitive, React, React.js"
+/>
+<meta
+  name="description"
+  content="This is the React implementation of the Carbon for IBM Products components which build on top of the Carbon Design System. It is a set of styled patterns and components, designed and implemented for IBM Products."
+/>
+
+<!-- Open Graph -->
+<meta property="og:title" content="Carbon for IBM Products" />
+<meta property="og:site_name" content="Carbon for IBM Products" />
+<meta
+  property="og:description"
+  content="This is the React implementation of the Carbon for IBM Products components which build on top of the Carbon Design System. It is a set of styled patterns and components, designed and implemented for IBM Products."
+/>
+<meta
+  property="og:image"
+  content="https://ibm-products.carbondesignsystem.com/social.png"
+/>
+<meta property="og:url" content="https://ibm-products.carbondesignsystem.com" />
+
+<!-- Favicon -->
+<link rel="icon" type="image/svg+xml" href="favicon.svg" sizes="any" />
+
+<!-- Social -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image:alt" content="Carbon for IBM Products" />
+<meta
+  name="twitter:image"
+  content="https://ibm-products.carbondesignsystem.com/social.png"
+/>
+
+<!-- Window objects / analytics config -->
+<script>
+  window.digitalData = {
+    page: {
+      pageInfo: {
+        language: 'en-US',
+        productTitle: 'Carbon for IBM Products',
+        analytics: {
+          category: 'KnowledgeCenter',
+        },
+        ibm: {
+          country: 'US',
+          siteId: 'C4IP',
+        },
+        segment: {
+          autoPageEventSpa: true,
+          enabled: true,
+          env: 'test',
+          key: 'aWg1ug3bDNcSTnde9iwvg1OcvVRzf0JC',
+          coremetrics: false,
+          skipIdentify: true,
+          commonProperties: {
+            productCode: 'C4IP',
+            productTitle: 'Carbon for IBM Products',
+          },
+          pageProperties: {
+            productCode: 'C4IP',
+            productTitle: 'Carbon for IBM Products',
+          },
+        },
+      },
+      category: {
+        primaryCategory: 'PC110',
+      },
+    },
+  };
+</script>
+
+<script>
+  (function () {
+    const overrideParentCallback = (eName, eData) => {
+      window.bluemixAnalytics.trackEvent(eName, eData);
+    };
+
+    window.onload = () => {
+      if (window.autoTrack) {
+        window.autoTrack.updateCallback(overrideParentCallback);
+      }
+    };
+
+    window.addEventListener('message', (message) => {
+      const msg = message.data;
+      if (msg.topic === 'Autotrack') {
+        overrideParentCallback(msg.eName, msg.eData);
+      }
+    });
+  })();
+</script>
+
+<script
+  src="//1.www.s81c.com/common/stats/ibm-common.js"
+  type="text/javascript"
+  async="async"
+></script>
+
+<!-- Storybook override -->
+<script>
+  setTimeout(function () {
+    document.title = 'Carbon for IBM Products';
+  }, 1000);
+</script>
+
+<!-- Footer -->
+<footer>
+  <c4d-footer-container
+    disable-locale-button="true"
+    size="micro"
+  ></c4d-footer-container>
+</footer>
+<script
+  type="module"
+  src="https://1.www.s81c.com/common/carbon-for-ibm-dotcom/version/v2.29.0/footer.min.js"
+></script>
+
+<!-- Style overrides -->
+<style>
+  body {
+    font-family: 'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif;
+  }
+
+  /* This style is required because of the compliance footer */
+  #root > div {
+    height: calc(100vh - 48px);
+  }
+
+  @media (max-width: 1056px) {
+    #root > div {
+      height: calc(100vh - 98px);
+    }
+  }
+
+  @media (max-width: 671px) {
+    #root > div {
+      height: calc(100vh - 342px);
+    }
+
+    /* This style is required because of the compliance footer in smaller screens */
+    nav[class^='css-'] {
+      height: 281px;
+    }
+  }
+
+  footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    z-index: 99999;
+  }
+</style>

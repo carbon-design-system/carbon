@@ -1,0 +1,41 @@
+import { Story, Controls, Source, Canvas } from '@storybook/addon-docs/blocks';
+import { CodesandboxLink } from '../../global/js/utils/story-helper';
+import { Checklist } from '.';
+import * as CheckListStories from './Checklist.stories';
+
+# Checklist
+
+## Table of Contents
+
+- [Overview](#overview)
+- [About Onboarding](#about-onboarding)
+- [Example usage](#example-usage)
+- [Component API](#component-api)
+
+## Overview
+
+The Checklist tracks a user's progress much like Your Learning or WalkMe. Each
+item in the list can be clickable, and each item has an icon that defines the
+item's state as "not started", "in progress", and "complete".
+
+## About Onboarding
+
+[Onboarding](https://pages.github.ibm.com/security/security-design/department/end-to-end-experiences/onboarding/overview/)
+is a continuous learning methodology and framework that aims to orient, onboard,
+explain, educate, and cultivate novice users into high-functioning power users.
+
+## Example usage
+
+{/* TODO: One example per designed use case. */}
+
+<Canvas style={{ backgroundColor: '#f4f4f4' }}>
+  <Story of={CheckListStories.checklist} />
+</Canvas>
+
+{/* ## Code sample */}
+
+{/* <CodesandboxLink exampleDirectory="Checklist" /> */}
+
+## Component API
+
+<Controls />

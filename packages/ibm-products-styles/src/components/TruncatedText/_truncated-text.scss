@@ -1,0 +1,48 @@
+//
+// Copyright IBM Corp. 2025
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use '../../global/styles/project-settings' as c4p-settings;
+@use '../../global/styles/mixins';
+@use '@carbon/styles/scss/theme';
+
+$block-class: #{c4p-settings.$pkg-prefix}--truncated-text;
+
+.#{$block-class} {
+  &__text-content {
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    line-height: initial;
+    text-overflow: clip;
+  }
+
+  &__expand-toggle {
+    color: theme.$link-primary;
+    cursor: pointer;
+
+    &:focus-visible {
+      outline: 2px solid theme.$focus;
+      outline-offset: 2px;
+    }
+  }
+
+  &__tooltip-trigger {
+    display: inline;
+    padding: 0;
+    border: 0;
+    background: none;
+    color: inherit;
+    cursor: default;
+    font: inherit;
+    text-align: inherit;
+
+    &:focus-visible {
+      outline: 2px solid theme.$focus;
+      outline-offset: 2px;
+    }
+  }
+}

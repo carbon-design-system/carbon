@@ -1,0 +1,27 @@
+// Copyright IBM Corp. 2025
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+
+$css--plex: true !default;
+
+@use '@carbon/styles/scss/reset';
+@use '@carbon/ibm-products-styles/scss/components/BigNumber/index' as big-number;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/ibm-products-styles/scss/config';
+
+$prefix: config.$pkg-prefix;
+$baseClass: #{$prefix}--big-number;
+
+:host(#{$prefix}-big-number) {
+  ::slotted(.#{$baseClass}__trend) {
+    margin-block-start: $spacing-03;
+    vertical-align: top;
+  }
+
+  .#{$baseClass}--xl {
+    ::slotted(.#{$baseClass}__trend) {
+      margin-block-start: $spacing-04;
+    }
+  }
+}

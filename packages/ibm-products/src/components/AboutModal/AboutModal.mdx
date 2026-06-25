@@ -1,0 +1,101 @@
+import { Story, Controls, Source, Canvas } from '@storybook/addon-docs/blocks';
+import { CodesandboxLink } from '../../global/js/utils/story-helper';
+import { AboutModal } from '.';
+import * as stories from './AboutModal.stories';
+import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
+
+# AboutModal
+
+[Source code](https://github.com/carbon-design-system/ibm-products/tree/main/packages/ibm-products/src/components/AboutModal)
+&nbsp;|&nbsp;
+[Usage guidelines](https://pages.github.ibm.com/carbon/ibm-products/components/about-modal/usage/)
+|
+[Carbon modal usage guidelines](https://www.carbondesignsystem.com/components/modal/usage)
+|
+[Carbon modal documentation](https://react.carbondesignsystem.com/?path=/docs/components-modal)
+
+## Table of Contents
+
+- [Overview](#overview)
+  - [With additional content](#with-additional-content)
+- [Component API](#component-api)
+- [References](#references)
+- [Feedback](#feedback)
+
+## Overview
+
+The `AboutModal` component conveys product information, including the version
+number, copyright information, and license details. The about modal is triggered
+by a user’s action which appears on top of the main page content and is
+persistent until dismissed. The purpose of this modal should be immediately
+apparent to the user, with a clear and obvious path to completion.
+
+<Canvas
+  of={stories.Default}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () =>
+        stackblitzPrefillConfig({
+          story: stories.Default,
+          styles: stories.default.parameters.styles,
+        }),
+    },
+  ]}
+></Canvas>
+
+### With additional content
+
+Some products may be legally required to display logos of technologies used to
+build the product. These can be provided through the `additionalInfo` prop and
+will be displayed in the footer.
+
+While the about modal supports an array of Carbon `Link` components via the
+`links` prop, these should be used to display product information and not to
+direct users to find help content.
+
+```jsx
+<AboutModal
+  closeIconDescription="Close"
+  copyrightText="Copyright © IBM Corp. 2020, 2025"
+  logo={logo}
+  title="IBM Product name"
+  version="Version 0.0.0"
+  additionalInfo={
+    <p className={`${pkg.prefix}--about-modal__footer-label`}>Powered by</p>
+    <img src={img1} alt="First logo"/>
+    <img src={img2} alt="Second logo"/>
+    <img src={img3} alt="Third logo"/>
+  }
+/>
+```
+
+<Canvas
+  of={stories.withAdditionalContent}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () =>
+        stackblitzPrefillConfig({
+          story: stories.withAdditionalContent,
+          styles: stories.default.parameters.styles,
+        }),
+    },
+  ]}
+></Canvas>
+
+## Component API
+
+<Controls />
+
+## References
+
+The `AboutModal` is built using the `ComposedModal`. Any additional props will
+be passed to the `ComposedModal`. For a full list of props, please see the
+[ComposedModal](https://react.carbondesignsystem.com/?path=/docs/components-modal).
+
+## Feedback
+
+Help us improve this component by providing feedback, asking questions on Slack,
+or updating this file on
+[GitHub](https://github.com/carbon-design-system/ibm-products/edit/main/packages/ibm-products/src/components/AboutModal/AboutModal.mdx).

@@ -1,0 +1,154 @@
+import { Story, Controls, Source, Canvas } from '@storybook/addon-docs/blocks';
+import { APIKeyModal } from '.';
+import * as stories from './APIKeyModal.stories';
+import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
+
+export const customFunctionArr = [
+  `function wait(ms) {
+      return new Promise((resolve) => setTimeout(resolve, ms));
+    }`,
+];
+export const customImportsArr = [
+  `import {InlineLoading} from '@carbon/react';`,
+];
+
+# APIKeyModal
+
+[Usage guidelines](https://pages.github.ibm.com/carbon/ibm-products/patterns/generate-an-api-key/usage/)
+|
+[Carbon modal usage guidelines](https://www.carbondesignsystem.com/components/modal/usage)
+|
+[Carbon modal documentation](https://react.carbondesignsystem.com/?path=/docs/components-modal)
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Component API](#component-api)
+
+## Overview
+
+The API key modal is an implementation of the generating an API key pattern.
+
+## Generate
+
+<Canvas
+  of={stories.Generate}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () =>
+        stackblitzPrefillConfig({
+          story: stories.Generate,
+          customFunctionDefs: customFunctionArr,
+          styles: stories.default.parameters.styles,
+        }),
+    },
+  ]}
+></Canvas>
+
+## Generate With Error
+
+<Canvas
+  of={stories.GenerateWithError}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () =>
+        stackblitzPrefillConfig({
+          story: stories.GenerateWithError,
+          customFunctionDefs: customFunctionArr,
+          styles: stories.default.parameters.styles,
+        }),
+    },
+  ]}
+></Canvas>
+
+## Instant Generate
+
+<Canvas
+  of={stories.InstantGenerate}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () =>
+        stackblitzPrefillConfig({
+          story: stories.InstantGenerate,
+          customImports: customImportsArr,
+          customFunctionDefs: customFunctionArr,
+          styles: stories.default.parameters.styles,
+        }),
+    },
+  ]}
+></Canvas>
+
+## Custom Generate
+
+<Canvas
+  of={stories.CustomGenerate}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () =>
+        stackblitzPrefillConfig({
+          story: stories.CustomGenerate,
+          customFunctionDefs: customFunctionArr,
+          styles: stories.default.parameters.styles,
+        }),
+    },
+  ]}
+></Canvas>
+
+## Edit
+
+<Canvas
+  of={stories.Edit}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () =>
+        stackblitzPrefillConfig({
+          story: stories.Edit,
+          customFunctionDefs: customFunctionArr,
+          styles: stories.default.parameters.styles,
+        }),
+    },
+  ]}
+></Canvas>
+
+## Edit With Error
+
+<Canvas
+  of={stories.EditWithError}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () =>
+        stackblitzPrefillConfig({
+          story: stories.EditWithError,
+          customFunctionDefs: customFunctionArr,
+          styles: stories.default.parameters.styles,
+        }),
+    },
+  ]}
+></Canvas>
+
+## Custom Edit
+
+<Canvas
+  of={stories.CustomEdit}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () =>
+        stackblitzPrefillConfig({
+          story: stories.CustomEdit,
+          customFunctionDefs: customFunctionArr,
+          styles: stories.default.parameters.styles,
+        }),
+    },
+  ]}
+></Canvas>
+
+## Component API
+
+<Controls />

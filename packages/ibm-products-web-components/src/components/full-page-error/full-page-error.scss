@@ -1,0 +1,28 @@
+/*
+* Copyright IBM Corp. 2025, 2025
+*
+* This source code is licensed under the Apache-2.0 license found in the
+* LICENSE file in the root directory of this source tree.
+*/
+
+$css--plex: true !default;
+@use 'sass:map';
+
+@use '@carbon/styles/scss/reset';
+
+@use '@carbon/grid';
+@use '@carbon/ibm-products-styles/scss/components/FullPageError' as *;
+
+@use '@carbon/themes' as *;
+
+@include grid.css-grid();
+
+// Local vars
+$prefix: 'c4p';
+$block-class: #{$prefix}--side-panel;
+
+:host(#{$prefix}-full-page-error) {
+  .#{$block-class} {
+    @extend .#{$block-class};
+  }
+}

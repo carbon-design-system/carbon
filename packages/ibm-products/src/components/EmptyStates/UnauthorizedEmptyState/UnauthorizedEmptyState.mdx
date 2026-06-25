@@ -1,0 +1,112 @@
+import { Story, Controls, Source, Canvas } from '@storybook/addon-docs/blocks';
+import * as stories from './UnauthorizedEmptyState.stories';
+import { stackblitzPrefillConfig } from '../../../../previewer/codePreviewer';
+
+# Unauthorized Empty State
+
+[Carbon empty states pattern](https://carbondesignsystem.com/patterns/empty-states-pattern/)
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Default](#default)
+- [WithDarkModeIllustration](#with-dark-mode-illustration)
+- [withAction](#with-action)
+- [withActionIconButton](#with-action-icon-button)
+- [withLink](#with-link)
+- [withActionAndLink](#with-action-and-link)
+
+## Overview
+
+Empty states are moments in an app where there is no data to display to the
+user.
+
+## Default
+
+<Canvas
+  of={stories.Default}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () =>
+        stackblitzPrefillConfig({
+          story: stories.Default,
+        }),
+    },
+  ]}
+/>
+
+## With Dark Mode Illustration
+
+<Canvas
+  of={stories.WithDarkModeIllustration}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () =>
+        stackblitzPrefillConfig({
+          story: stories.WithDarkModeIllustration,
+        }),
+    },
+  ]}
+/>
+
+## With Action
+
+<Canvas
+  of={stories.withAction}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () =>
+        stackblitzPrefillConfig({
+          story: stories.withAction,
+        }),
+    },
+  ]}
+/>
+
+## with Action Icon Button
+
+<Canvas
+  of={stories.withActionIconButton}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () =>
+        stackblitzPrefillConfig({
+          story: stories.withActionIconButton,
+        }),
+    },
+  ]}
+/>
+
+## With Link
+
+<Canvas
+  of={stories.withLink}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () =>
+        stackblitzPrefillConfig({
+          story: stories.withLink,
+        }),
+    },
+  ]}
+/>
+
+## With Action And Link
+
+<Canvas
+  of={stories.withActionAndLink}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () =>
+        stackblitzPrefillConfig({
+          story: stories.withActionAndLink,
+        }),
+    },
+  ]}
+/>

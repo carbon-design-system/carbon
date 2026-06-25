@@ -1,0 +1,341 @@
+import { ArgTypes, Markdown, Meta } from '@storybook/addon-docs/blocks';
+import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
+import * as TearsheetStories from './tearsheet.stories';
+
+<Meta of={TearsheetStories} />
+
+# Tearsheet (New Composable)
+
+> 💡 This is the new composable tearsheet component with enhanced features including stacking support, collapsible headers, responsive and improved composability.
+
+A tearsheet is a mostly full-screen type of dialog that keeps users in-context and focused by bringing actionable content front and center while revealing parts of the UI behind it.
+
+## Overview
+
+The next-generation tearsheet uses a compound component pattern with the following sub-components:
+
+- **`c4p-preview-tearsheet`** - Main container
+- **`c4p-tearsheet-header`** - Header section
+- **`c4p-tearsheet-header-content`** - Header content area
+- **`c4p-tearsheet-navigation-bar`** - Rendered at the bottom of header that can render tabs
+- **`c4p-tearsheet-scroller`** - Can be used inside navigation bar as a trigger to collapse/ expand header
+- **`c4p-tearsheet-body`** - Main content area
+- **`c4p-tearsheet-influencer`** - Left-side panel to render any influencer.
+- **`c4p-tearsheet-footer`** - Footer with actions
+
+## Available Slots
+
+### Main Tearsheet (`c4p-preview-tearsheet`)
+
+| Slot | Component | Description |
+|------|-----------|-------------|
+| `header` | `c4p-tearsheet-header` | Header section with title and actions |
+|`influencer` | `c4p-tearsheet-influencer` | Left-side panel for contextual info |
+| `body` | `c4p-tearsheet-body` | Main content area |
+| `footer` | `c4p-tearsheet-footer` | Footer with action buttons |
+
+### Header (`c4p-tearsheet-header`)
+
+| Slot | Component | Description |
+|------|-----------|-------------|
+| `header-content` | `c4p-tearsheet-header-content` | Main header content (title, description) |
+| `header-navigation` | Any | Navigation tabs or breadcrumbs |
+| `header-actions` | `cds-button` | Action buttons (e.g., settings, delete) |
+| `decorator` | `cds-ai-label` | AI label or decorative elements |
+
+### Header Content (`c4p-tearsheet-header-content`)
+
+| Slot | Component | Description |
+|------|-----------|-------------|
+| `label` | Any | Optional label text above title |
+| `title-start` | Any | Content before title (e.g., icons) |
+| `title-end` | Any | Content after title (e.g., badges) |
+| `description` | Any | Custom description content |
+| `decorator` | `cds-ai-label` | AI label or decorative elements |
+
+### Body (`c4p-tearsheet-body`)
+
+| Slot | Component | Description |
+|------|-----------|-------------|
+| `main-content` | Any | Primary content area |
+| `summary-content` | `c4p-tearsheet-summary-content` | Right-side panel for summary |
+
+
+## Key Features
+
+- ✅ **Stacking Support** - Multiple tearsheets can stack on top of each other
+- ✅ **Collapsible Header** - Header automatically collapses on scroll
+- ✅ **Responsive Layout** - Adapts to different screen sizes
+- ✅ **Flexible Layout** - Influencer and summary content panels transform to side panels on small screens and narrow tearsheet 
+
+## Getting Started
+
+### JS (via import)
+
+```javascript
+import '@carbon/ibm-products-web-components/es/components/tearsheet-preview/index.js';
+// Import Carbon components for content
+import '@carbon/web-components/es/components/text-input/index.js';
+import '@carbon/web-components/es/components/textarea/index.js';
+import '@carbon/web-components/es/components/button/index.js';
+```
+
+### Basic Example
+
+```html
+<c4p-preview-tearsheet open>
+  <c4p-tearsheet-header slot="header">
+    <c4p-tearsheet-header-content 
+      slot="header-content"
+      title="Create resource">
+      <div slot="description"> description</div>
+    </c4p-tearsheet-header-content>
+  </c4p-tearsheet-header>
+
+  <c4p-tearsheet-body slot="body">
+    <div slot="main-content">
+      <cds-text-input label="Resource name"></cds-text-input>
+      <cds-textarea label="Description"></cds-textarea>
+    </div>
+  </c4p-tearsheet-body>
+
+  <c4p-tearsheet-footer slot="footer">
+    <cds-button  kind="secondary">Cancel</cds-button>
+    <cds-button  kind="primary">Create</cds-button>
+  </c4p-tearsheet-footer>
+</c4p-preview-tearsheet>
+```
+
+## With Influencer and Summary Content
+
+```html
+<c4p-preview-tearsheet open variant="wide">
+  <c4p-tearsheet-header slot="header">
+    <c4p-tearsheet-header-content 
+      slot="header-content"
+      title="Resource details">
+    </c4p-tearsheet-header-content>
+  </c4p-tearsheet-header>
+  <!-- Left panel -->
+    <c4p-tearsheet-influencer slot="influencer">
+      <h6>Quick info</h6>
+      <p>Additional context here</p>
+    </c4p-tearsheet-influencer>
+  <c4p-tearsheet-body slot="body">
+  
+
+    <!-- Main content -->
+    <div slot="main-content">
+      <h5>Main content area</h5>
+      <!-- Your content -->
+    </div>
+
+    <!-- Right panel -->
+    <c4p-tearsheet-summary-content slot="summary-content">
+      <h6>Summary</h6>
+      <p>Key details</p>
+    </c4p-tearsheet-summary-content>
+  </c4p-tearsheet-body>
+
+  <c4p-tearsheet-footer slot="footer">
+    <cds-button slot="actions">Save</cds-button>
+  </c4p-tearsheet-footer>
+</c4p-preview-tearsheet>
+```
+
+## Stacking Tearsheets
+
+To enable stacking for multiple tearsheets, wrap them in a `<c4p-tearsheet-stack>` component. This opt-in approach provides better performance and explicit control over which tearsheets participate in stacking, similar to React's `StackProvider`. The `stack-step-size` attribute controls the visual offset between stacked tearsheets (`sm`, `md`, or `lg`).
+
+```html
+<c4p-tearsheet-stack stack-step-size="lg">
+  <!-- First tearsheet -->
+  <c4p-preview-tearsheet id="tearsheet-1" open>
+    <c4p-tearsheet-header slot="header">
+      <cds-button slot="header-actions" @click="${openSecondTearsheet}">
+        Open details
+      </cds-button>
+    </c4p-tearsheet-header>
+    <!-- ... -->
+  </c4p-preview-tearsheet>
+
+  <!-- Second tearsheet - will stack on top -->
+  <c4p-preview-tearsheet id="tearsheet-2" open>
+    <!-- ... -->
+  </c4p-preview-tearsheet>
+</c4p-tearsheet-stack>
+```
+
+## With AI Label Decorator
+
+```html
+<c4p-tearsheet-header-content 
+  slot="header-content"
+  title="AI-powered analysis">
+  <cds-ai-label slot="decorator" size="xs">
+    <div slot="body-text">
+      <p>AI Explained</p>
+      <h1>84%</h1>
+      <p>Confidence score</p>
+    </div>
+  </cds-ai-label>
+</c4p-tearsheet-header-content>
+```
+
+## Collapsible Header
+
+The header automatically collapses when scrolling in the main content area. To disable this behavior:
+
+```html
+<c4p-tearsheet-header slot="header" disable-header-collapse>
+  <!-- Header will not collapse on scroll -->
+</c4p-tearsheet-header>
+```
+
+## Custom Widths
+
+```html
+<c4p-preview-tearsheet 
+  influencer-width="320px"
+  summary-content-width="280px"
+  vertical-gap="4rem">
+</c4p-preview-tearsheet>
+```
+
+## Footer Actions
+
+The `c4p-tearsheet-footer` component supports two approaches for rendering action buttons:
+
+**Using the `.actions` property (recommended):**
+
+```html
+<c4p-tearsheet-footer
+  slot="footer"
+  .actions="${[
+    {
+      kind: 'ghost',
+      label: 'Cancel',
+      onClick: () => setOpen(false),
+    },
+    {
+      kind: 'secondary',
+      label: 'Back',
+    },
+    {
+      kind: 'primary',
+      label: 'Submit',
+    },
+  ]}">
+</c4p-tearsheet-footer>
+```
+
+**Using custom buttons:**
+
+```html
+<c4p-tearsheet-footer slot="footer">
+  <cds-button kind="ghost">Cancel</cds-button>
+  <cds-button kind="secondary">Back</cds-button>
+  <cds-button kind="primary">Submit</cds-button>
+</c4p-tearsheet-footer>
+```
+
+The `.actions` property automatically handles button sizing based on the tearsheet variant and screen size, while custom buttons give you full control over the footer layout.
+
+## Migration from Legacy Tearsheet
+
+
+
+### Migration Example
+
+**Before (Legacy):**
+```html
+<c4p-tearsheet 
+  open 
+  label="Create resource"
+  description="Configure settings">
+  <div>Content</div>
+</c4p-tearsheet>
+```
+
+**After (Next Gen):**
+```html
+<c4p-preview-tearsheet open>
+  <c4p-tearsheet-header slot="header">
+    <c4p-tearsheet-header-content 
+      slot="header-content"
+      title="Create resource"
+      description="Configure settings">
+    </c4p-tearsheet-header-content>
+  </c4p-tearsheet-header>
+  
+  <c4p-tearsheet-body slot="body">
+    <div slot="main-content">Content</div>
+  </c4p-tearsheet-body>
+</c4p-preview-tearsheet>
+```
+
+## Component API
+
+### `<c4p-preview-tearsheet>` attributes and properties
+
+Note: For `boolean` attributes, `true` means simply setting the attribute (e.g. `<c4p-preview-tearsheet open>`) and `false` means not setting the attribute.
+
+<ArgTypes of="c4p-preview-tearsheet" />
+
+### `<c4p-tearsheet-header>` attributes and properties
+
+<ArgTypes of="c4p-tearsheet-header" />
+
+### `<c4p-tearsheet-header-content>` attributes and properties
+
+<ArgTypes of="c4p-tearsheet-header-content" />
+
+## Events
+
+| Event | Detail | Description |
+|-------|--------|-------------|
+| `c4p-preview-tearsheet-beingclosed` | `{ triggeredBy: Element }` | Fired before tearsheet closes |
+| `c4p-preview-tearsheet-closed` | `{ triggeredBy: Element }` | Fired after tearsheet closes |
+
+## Slots Reference
+
+### Main Tearsheet Slots
+
+| Slot | Description |
+|------|-------------|
+| `header` | Header section (use `c4p-tearsheet-header`) |
+| `influencer` | Left-side panel (use `c4p-tearsheet-influencer`) |
+| `body` | Main content area (use `c4p-tearsheet-body`) |
+| `footer` | Footer with actions (use `c4p-tearsheet-footer`) |
+
+### Header Slots
+
+| Slot | Description |
+|------|-------------|
+| `header-content` | Header content area (use `c4p-tearsheet-header-content`) |
+| `header-navigation` | Navigation tabs or breadcrumbs |
+| `header-actions` | Action buttons in header |
+
+### Header Content Slots
+
+| Slot | Description |
+|------|-------------|
+| `title-start` | Content before title (e.g., icons) |
+| `title-end` | Content after title (e.g., badges) |
+| `description` | Custom description content |
+| `decorator` | AI label or other decorative elements |
+
+### Body Slots
+
+| Slot | Description |
+|------|-------------|
+
+| `main-content` | Primary content area |
+| `summary-content` | Right-side panel (use `c4p-tearsheet-summary-content`) |
+
+### Footer Slots
+
+| Slot | Description |
+|------|-------------|
+| `actions` | Action buttons (typically Cancel, Submit) |
+

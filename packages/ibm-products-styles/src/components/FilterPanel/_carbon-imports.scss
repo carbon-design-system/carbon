@@ -1,0 +1,14 @@
+//
+// Copyright IBM Corp. 2024, 2024
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+// Import any Carbon component styles used from FilterPanel in this file.
+// FilterPanel uses the following Carbon components:
+@use '@carbon/styles/scss/components/accordion';
+@use '@carbon/styles/scss/components/checkbox';
+@use '@carbon/styles/scss/components/list';
+@use '@carbon/styles/scss/components/overflow-menu';
+@use '@carbon/styles/scss/components/search';

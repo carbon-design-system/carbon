@@ -1,0 +1,18 @@
+//
+// Copyright IBM Corp. 2022, 2022
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use 'ALIAS_STORY_STYLE_CONFIG' as c4p-settings;
+
+$block-class: #{c4p-settings.$pkg-prefix}--page-header;
+
+.docs-story > div {
+  overflow: auto;
+  inline-size: 100%;
+}
+.#{c4p-settings.$pkg-prefix}--annotation__content {
+  overflow-x: auto;
+}

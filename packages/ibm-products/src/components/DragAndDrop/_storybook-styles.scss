@@ -1,0 +1,97 @@
+//
+// Copyright IBM Corp. 2024, 2024
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use 'ALIAS_STORY_STYLE_CONFIG' as c4p-settings;
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/colors';
+@use '@carbon/styles/scss/type';
+@use '@carbon/styles/scss/utilities';
+
+// TODO: add any additional styles used by DragAndDrop.stories.js
+
+$drag-class: #{c4p-settings.$pkg-prefix}__draggable-item;
+$horizontal-drag-height: 6rem;
+
+.#{$drag-class} {
+  position: relative;
+  padding: $spacing-03;
+  background-color: $layer;
+  block-size: 3rem;
+  border-block-end: 1px solid $border-subtle;
+  cursor: grab;
+  inline-size: 320px;
+  list-style-type: none;
+
+  &.#{$drag-class}--horizontal {
+    block-size: $horizontal-drag-height;
+    border-block-end: none;
+    border-inline-end: 1px solid $border-subtle;
+    inline-size: 6rem;
+  }
+
+  &.#{$drag-class}:focus {
+    @include utilities.focus-outline('outline');
+  }
+}
+
+.#{$drag-class}--dragging {
+  @include utilities.focus-outline('outline');
+
+  position: relative;
+  z-index: 2000000;
+  background-color: $layer-hover;
+  cursor: grabbing;
+}
+
+.#{$drag-class}__assistive-text {
+  position: absolute;
+  visibility: hidden;
+}
+
+.#{$drag-class}__draggable-underlay {
+  position: absolute;
+  inline-size: 100%;
+  inset-block-start: 0;
+}
+
+.#{$drag-class}__draggable-underlay-item {
+  border: 2px dashed $focus;
+  /* stylelint-disable-next-line carbon/theme-use */
+  background-color: colors.$blue-10;
+  block-size: $spacing-09;
+  // must match draggable item size
+  inline-size: 100%;
+}
+
+.#{$drag-class}__list-container {
+  position: relative;
+}
+
+.#{$drag-class}__list-container--grid,
+.#{$drag-class}__draggable-underlay--grid {
+  display: grid;
+  grid-gap: var(--grid-gap);
+  grid-template-columns: repeat(var(--col-count), 1fr);
+  max-inline-size: 800px;
+}
+
+.#{$drag-class}--type {
+  @include type.type-style('body-compact-01');
+}
+
+.#{$drag-class}__list-container--horizontal,
+.#{$drag-class}__draggable-underlay--horizontal {
+  display: grid;
+  grid-auto-flow: column;
+  inline-size: 100%;
+}
+
+.#{$drag-class}__draggable-underlay--horizontal
+  .#{$drag-class}__draggable-underlay-item {
+  block-size: $horizontal-drag-height;
+}

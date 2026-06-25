@@ -1,0 +1,67 @@
+import { ArgTypes, Markdown, Meta, Canvas } from '@storybook/addon-docs/blocks';
+import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
+import * as OptionsTileStories from './options-tile.stories';
+import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
+
+<Meta of={OptionsTileStories} />
+
+export const customFunctionArr=[`const blockClass = 'options-tile';`];
+
+# OptionsTile
+
+> 💡 Check our [Stackblitz](#) example implementation.
+
+[![Edit carbon-web-components](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/carbon-design-system/ibm-products/tree/main/packages/ibm-products-web-components/examples/options-tile)
+
+An options tile can contain information, controls or tables which, when
+collapsed, are summarized. It can be paired with a toggle to quickly enable or
+disable the option.
+
+## Getting started
+
+Here's a quick example to get you started.
+
+### JS (via import)
+
+```javascript
+import '@carbon/ibm-products-web-components/es/components/options-tile/index.js';
+```
+
+
+### Example Usage
+<Canvas
+  of={OptionsTileStories.Default}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () =>
+        stackblitzPrefillConfig({
+          story: OptionsTileStories.Default,
+          customFunctionDefs: customFunctionArr,
+          componentName: 'options-tile', 
+        }),
+    },
+  ]}
+></Canvas>
+
+### HTML
+
+```html
+<c4p-options-tile
+  id="my-tile"
+  size="lg"
+  titleText="A title describing all included content."
+  titleId="my-title"
+>
+  <div slot="summary">
+    <span>A summary of the current state of content.</span>
+  </div>
+  <div slot="body">
+    Additional detail or content will be shown when expanded.
+  </div>
+</c4p-options-tile>
+```
+
+## `<c4p-options-tile>` attributes, properties and events
+
+<ArgTypes of="c4p-options-tile" />

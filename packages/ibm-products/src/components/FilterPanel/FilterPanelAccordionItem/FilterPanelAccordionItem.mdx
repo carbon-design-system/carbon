@@ -1,0 +1,39 @@
+import { Story, Controls, Source, Canvas } from '@storybook/addon-docs/blocks';
+import { CodesandboxLink } from '../../../global/js/utils/story-helper';
+import { FilterPanelAccordionItem } from '..';
+import * as FilterPanelAccordionItemStories from './FilterPanelAccordionItem.stories';
+
+# FilterPanelAccordionItem
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Example usage](#example-usage)
+- [Truncated usage](#truncated-usage)
+- [Component API](#component-api)
+
+## Deprecation notice
+
+> This component is deprecated and will be removed in the next major version.
+
+## Overview
+
+The `FilterPanelAccordionItem` can be expanded and collapsed and will accept any
+number of `children`. The `children` will be formatted as part of an internal
+`TruncatedList`.
+
+## Example usage
+
+<Canvas>
+  <Story of={FilterPanelAccordionItemStories.Default} />
+</Canvas>
+
+## Truncated usage
+
+<Canvas>
+  <Story of={FilterPanelAccordionItemStories.Truncated} />
+</Canvas>
+
+## Component API
+
+<Controls />

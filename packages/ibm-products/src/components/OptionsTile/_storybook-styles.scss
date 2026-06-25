@@ -1,0 +1,36 @@
+//
+// Copyright IBM Corp. 2021, 2022
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use 'ALIAS_STORY_STYLE_CONFIG' as c4p-settings;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/type';
+
+$block-class: #{c4p-settings.$pkg-prefix}--options-tile;
+
+main {
+  display: flex;
+  align-items: center;
+  justify-content: left;
+  min-block-size: 100vh;
+}
+
+.#{$block-class} {
+  inline-size: 80vw;
+  max-inline-size: 48rem;
+  min-inline-size: 16rem;
+}
+
+.#{$block-class}__content p {
+  @include type.type-style('body-01');
+
+  margin-block-end: $spacing-06;
+}
+
+.#{$block-class}__content
+  .#{c4p-settings.$carbon-prefix}--dropdown__wrapper:first-of-type {
+  margin-block-end: $spacing-06;
+}

@@ -1,0 +1,32 @@
+//
+// Copyright IBM Corp. 2021, 2021
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use 'ALIAS_STORY_STYLE_CONFIG' as c4p-settings;
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/spacing' as *;
+
+$block-class: #{c4p-settings.$pkg-prefix}--apikey-modal;
+
+.#{$block-class} .#{c4p-settings.$carbon-prefix}--radio-button-wrapper {
+  margin-block-end: $spacing-02;
+}
+
+.#{$block-class}__permissions.#{c4p-settings.$carbon-prefix}--fieldset {
+  margin-block: $spacing-05 0;
+}
+
+.#{$block-class}__resource-toggle.#{c4p-settings.$carbon-prefix}--fieldset {
+  margin-block: 0 $spacing-05;
+}
+
+.#{$block-class}__resource-name.#{c4p-settings.$carbon-prefix}--fieldset {
+  margin-block: 0;
+}
+
+.#{$block-class}__button-loading.#{c4p-settings.$carbon-prefix}--btn--primary {
+  background: $link-secondary;
+}

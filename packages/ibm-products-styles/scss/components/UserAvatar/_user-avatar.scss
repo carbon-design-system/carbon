@@ -1,0 +1,154 @@
+//
+// Copyright IBM Corp. 2024, 2025
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use 'sass:map';
+
+// Standard imports.
+@use '../../global/styles/project-settings' as *;
+@use '../../global/styles/mixins';
+@use '@carbon/colors' as *;
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/type';
+@use '@carbon/styles/scss/config' as carbon-config;
+
+$block-class: #{$pkg-prefix}--user-avatar;
+
+$sizes: (
+  xl: $spacing-10,
+  lg: $spacing-09,
+  md: $spacing-07,
+  sm: $spacing-06,
+);
+
+@mixin size($size) {
+  $_size: map.get($sizes, $size);
+
+  block-size: $_size;
+
+  inline-size: $_size;
+}
+
+.#{$block-class} {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 0.5px solid transparent;
+  border-radius: 100%;
+  block-size: 4rem;
+  color: $text-inverse;
+  inline-size: 4rem;
+  outline: none;
+  outline-offset: 3px;
+}
+
+.#{$block-class} svg {
+  color: $icon-inverse;
+}
+
+.#{$block-class}__tooltip {
+  &:focus-within .#{$block-class} {
+    // stylelint-disable-next-line carbon/theme-use
+    outline: 2px solid $focus;
+    outline-offset: 1px;
+  }
+}
+
+@mixin photo-styling {
+  border-radius: 100%;
+  object-fit: fill;
+}
+
+@mixin setBgColor($color) {
+  // stylelint-disable-next-line carbon/theme-use
+  background-color: $color;
+}
+
+//this mixin allows you to set background color based on the lighter themes such as g10 and white
+@mixin setLightBg($order, $color) {
+  :root .#{$block-class}--#{$order},
+  .#{carbon-config.$prefix}--g10 .#{$block-class}--#{$order},
+  .#{carbon-config.$prefix}--white .#{$block-class}--#{$order} {
+    @include setBgColor($color);
+  }
+}
+
+//this mixin allows you to set background color based on the darker themes such as g90 and g100
+@mixin setDarkBg($order, $color) {
+  .#{carbon-config.$prefix}--g90 .#{$block-class}--#{$order},
+  .#{carbon-config.$prefix}--g100 .#{$block-class}--#{$order} {
+    @include setBgColor($color);
+  }
+}
+
+@include setLightBg(order-1-cyan, $cyan-60);
+@include setLightBg(order-2-gray, $gray-60);
+@include setLightBg(order-3-green, $green-60);
+@include setLightBg(order-4-magenta, $magenta-60);
+@include setLightBg(order-5-purple, $purple-60);
+@include setLightBg(order-6-teal, $teal-60);
+@include setLightBg(order-7-cyan, $cyan-80);
+@include setLightBg(order-8-gray, $gray-80);
+@include setLightBg(order-9-green, $green-80);
+@include setLightBg(order-10-magenta, $magenta-80);
+@include setLightBg(order-11-purple, $purple-80);
+@include setLightBg(order-12-teal, $teal-80);
+
+@include setDarkBg(order-1-cyan, $cyan-50);
+@include setDarkBg(order-2-gray, $gray-50);
+@include setDarkBg(order-3-green, $green-50);
+@include setDarkBg(order-4-magenta, $magenta-50);
+@include setDarkBg(order-5-purple, $purple-50);
+@include setDarkBg(order-6-teal, $teal-50);
+@include setDarkBg(order-7-cyan, $cyan-30);
+@include setDarkBg(order-8-gray, $gray-30);
+@include setDarkBg(order-9-green, $green-30);
+@include setDarkBg(order-10-magenta, $magenta-30);
+@include setDarkBg(order-11-purple, $purple-30);
+@include setDarkBg(order-12-teal, $teal-30);
+
+.#{$block-class}--xl {
+  @include size('xl');
+  @include type.type-style('heading-04');
+}
+
+.#{$block-class}--lg {
+  @include size('lg');
+  @include type.type-style('heading-03');
+}
+
+.#{$block-class}--md {
+  @include size('md');
+  @include type.type-style('body-compact-01');
+}
+
+.#{$block-class}--sm {
+  @include size('sm');
+  @include type.type-style('label-01');
+}
+
+.#{$block-class}__photo {
+  border-radius: 100%;
+  object-fit: contain;
+}
+.#{$block-class}__photo--xl {
+  @include photo-styling;
+  @include size('xl');
+}
+.#{$block-class}__photo--lg {
+  @include photo-styling;
+  @include size('lg');
+}
+.#{$block-class}__photo--md {
+  @include photo-styling;
+  @include size('md');
+}
+.#{$block-class}__photo--sm {
+  @include photo-styling;
+  @include size('sm');
+}

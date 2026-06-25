@@ -1,0 +1,58 @@
+/*
+* Copyright IBM Corp. 2023, 2024
+*
+* This source code is licensed under the Apache-2.0 license found in the
+* LICENSE file in the root directory of this source tree.
+*/
+
+$css--plex: true !default;
+@use 'sass:map';
+
+/* Other Carbon settings. */
+@use '@carbon/styles/scss/reset';
+@use '@carbon/styles/scss/config' as *;
+@use '@carbon/styles/scss/motion' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/type';
+@use '@carbon/type/scss/font-family' as *;
+@use '@carbon/styles/scss/utilities/ai-gradient' as *;
+@use '@carbon/styles/scss/utilities/convert' as *;
+
+$prefix: 'c4p';
+$carbon-prefix: 'cds';
+@use '@carbon/ibm-products-styles/scss/components/NotificationsPanel/index' as *;
+
+$block-class: #{$prefix}--notifications-panel;
+$block-class-action-set: #{$prefix}--action-set;
+
+:host(#{$prefix}-notification-panel) {
+  .c4p--notifications-panel__do-not-disturb-toggle {
+    display: block;
+  }
+}
+:host(#{$prefix}-notification-panel)
+  ::slotted(.c4p--notifications-panel__bottom-actions) {
+  display: flex;
+  align-items: center;
+}
+
+.#{$block-class}__header-container {
+  --#{$carbon-prefix}-heading-06-font-size: --#{$carbon-prefix}-heading-compact-01-font-size;
+  --#{$carbon-prefix}-heading-06-font-weight: --#{$carbon-prefix}-heading-compact-01-font-weight;
+  --#{$carbon-prefix}-heading-06-line-height: --#{$carbon-prefix}-heading-compact-01-line-height;
+  --#{$carbon-prefix}-heading-06-letter-spacing: --#{$carbon-prefix}-heading-compact-01-letter-spacing;
+}
+.#{$block-class}__dismiss-button {
+  --#{$carbon-prefix}-link-primary: --#{$carbon-prefix}-text-primary;
+  --#{$carbon-prefix}-link-primary-hover: --#{$carbon-prefix}-text-primary;
+}
+.#{$block-class}__bottom-actions-container {
+  position: sticky;
+  z-index: 2;
+  background-color: $layer-01;
+  block-size: $spacing-08;
+  border-block-start: 1px solid $border-subtle-01;
+  inset-block-end: 0;
+  min-block-size: $spacing-08;
+}

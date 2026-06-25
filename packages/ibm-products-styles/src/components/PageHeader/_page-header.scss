@@ -1,0 +1,1268 @@
+//
+// Copyright IBM Corp. 2020, 2026
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+// Other Carbon settings.
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/breakpoint' as *;
+@use '@carbon/styles/scss/grid/flexbox';
+@use '@carbon/styles/scss/motion' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/type';
+@use '@carbon/styles/scss/utilities';
+@use '@carbon/styles/scss/config' as carbon-config;
+@use '@carbon/layout/scss/convert' as *;
+
+// Standard imports.
+@use '../../global/styles/project-settings' as *;
+@use '../../global/styles/mixins' as *;
+
+// PageHeader uses the following IBM Products components:
+// ActionBar, BreadcrumbWithOverflow, TagSet, ButtonSetWithOverflow
+@use '../ActionBar/action-bar';
+@use '../BreadcrumbWithOverflow/breadcrumb-with-overflow';
+@use '../TagSet/tag-set';
+@use '../ButtonSetWithOverflow/button-set-with-overflow';
+
+$block-class: #{$pkg-prefix}--page-header;
+$breadcrumb-block-class: #{$pkg-prefix}--breadcrumb-with-overflow;
+
+$raised-z-index: 99;
+$z-index-header-minus: utilities.z('header') - 1;
+
+$left-section-std-width: 60%;
+$right-section-std-width: 100% - $left-section-std-width;
+$left-section-alt-width: 75%;
+$right-section-alt-width: 100% - $left-section-alt-width;
+
+$animation: background-appear;
+// This transitions the background-color between from-color and to-color
+$duration: 1000ms;
+
+@keyframes background-appear {
+  from {
+    /* stylelint-disable-next-line carbon/theme-use */
+    background-color: var(--from-color);
+  }
+
+  to {
+    /* stylelint-disable-next-line carbon/theme-use */
+    background-color: var(--to-color);
+  }
+}
+@keyframes background-and-shadow-appear {
+  from {
+    /* stylelint-disable-next-line carbon/theme-use */
+    background-color: var(--from-color);
+    /* stylelint-disable-next-line carbon/theme-use */
+    box-shadow: 0 1px 0 var(--from-color);
+  }
+
+  to {
+    /* stylelint-disable-next-line carbon/theme-use */
+    background-color: var(--to-color);
+    /* stylelint-disable-next-line carbon/theme-use */
+    box-shadow: 0 1px 0 var(--to-color-shadow);
+  }
+}
+
+@mixin appearingBackground(
+  $with-shadow: false,
+  $from-color: $background,
+  $to-color: $layer-01,
+  $to-color-shadow: $layer-accent-01
+) {
+  // stylelint-disable-next-line carbon/theme-use
+  --from-color: #{$from-color};
+  // stylelint-disable-next-line carbon/theme-use
+  --to-color: #{$to-color};
+  // stylelint-disable-next-line carbon/theme-use
+  --to-color-shadow: #{$to-color-shadow};
+
+  position: absolute;
+  display: block;
+
+  /* stylelint-disable-next-line carbon/motion-duration-use, carbon/motion-easing-use -- non-standard duration used */
+  animation: $animation $duration linear paused forwards;
+  // Added separately for clarity
+  animation-delay: calc(
+    -1 * $duration * var(--#{$block-class}--background-opacity)
+  );
+  block-size: 100%;
+  content: '';
+  inline-size: 100%;
+  inset-block-start: 0;
+  inset-inline-start: 0;
+
+  @if $with-shadow {
+    $animation: background-and-shadow-appear;
+  }
+}
+
+@include block-wrap($block-class) {
+  &.#{$block-class} {
+    /* Bleed class for the background */
+    position: sticky;
+    /* z-index used to raise above any position relative content as per Carbon header */
+    /* dropped  1 below Carbon header so as not to overlay the side panel */
+    z-index: $z-index-header-minus;
+    display: inline-block; /* cause top/bottom margin to reserve space */
+    background-color: $background;
+    border-block-end: 1px solid $border-subtle-00;
+    color: $text-primary;
+    inline-size: 100%;
+    /* stylelint-disable-next-line carbon/layout-use */
+    inset-block-start: var(--#{$block-class}--header-top);
+
+    /* custom props */
+    --#{$block-class}--breadcrumb-title-visibility: hidden;
+    --#{$block-class}--breadcrumb-title-opacity: 1;
+    --#{$block-class}--breadcrumb-top: 0; //1
+    --#{$block-class}--background-opacity: 1;
+    --#{$block-class}--breadcrumb-title-top: initial;
+    --#{$block-class}--button-set-in-breadcrumb-width-px: initial;
+  }
+
+  &.#{$block-class}--without-background {
+    border-block-end: none;
+  }
+
+  &::before {
+    @include appearingBackground(true);
+
+    z-index: -1;
+  }
+
+  .#{$block-class}--width--xl {
+    padding-inline: $spacing-07;
+  }
+
+  .#{$block-class}__breadcrumb-row {
+    position: sticky;
+    z-index: $raised-z-index;
+    inset-block-start: var(--#{$block-class}--breadcrumb-top); //2
+    min-block-size: $spacing-08;
+
+    + .#{$block-class}__last-row-buffer--active {
+      block-size: $spacing-02;
+    }
+  }
+
+  .#{$block-class}__breadcrumb-row:not(
+      .#{$block-class}__breadcrumb-row--has-action-bar
+    ) {
+    // lifts up page title when there is no action bar
+    min-block-size: $spacing-08;
+  }
+
+  .#{$block-class}__breadcrumb-row--container {
+    display: flex;
+    flex-wrap: nowrap;
+    min-inline-size: 100%;
+  }
+
+  .#{$block-class}__has-page-actions-without-action-bar {
+    max-inline-size: calc(0.6 * (100% + 2 * #{$spacing-05}));
+    // NOTE: the extra spacing accounts for carbon margins
+    min-inline-size: calc(0.6 * (100% + 2 * #{$spacing-05}));
+  }
+
+  .#{$block-class}__has-page-actions-with-title-collapsed {
+    max-inline-size: none;
+  }
+
+  .#{$block-class}__has-page-actions-without-action-bar
+    .#{$block-class}__has-page-actions-without-action-bar {
+    min-inline-size: 100%;
+  }
+
+  .#{$block-class}__breadcrumb-row--has-action-bar
+    .#{$block-class}__breadcrumb-row--container {
+    min-inline-size: calc(
+      100% +
+        (
+          var(--#{$block-class}--width-px) - var(
+              --#{$block-class}--breadcrumb-row-width-px
+            )
+        ) /
+        2
+    );
+  }
+  .#{$block-class}__breadcrumb-row::after {
+    position: absolute;
+    display: block;
+    block-size: 1px;
+    /* creates a full width box shadow without causing scroll */
+    box-shadow:
+      0 1px 0 0 $layer-accent-01,
+      0 1px 0 0 $layer-accent-01;
+    content: '';
+    inline-size: 50vw;
+    inset-block-end: 0;
+    inset-inline-start: 50%;
+    opacity: 0;
+    transform: translateX(-50%) scaleX(1);
+    // stylelint-disable-next-line carbon/motion-easing-use
+    transition: all $duration-moderate-01 ease-out;
+  }
+
+  .#{$block-class}__breadcrumb-row--next-to-tabs:not(
+      .#{$block-class}__has-page-actions-without-action-bar
+    )::after,
+  .#{$block-class}__has-page-actions-without-action-bar.#{$block-class}__has-page-actions-with-title-collapsed::after,
+  .#{$block-class}__breadcrumb-row--has-action-bar::after {
+    /* creates a full width box shadow without causing scroll */
+    box-shadow:
+      25vw 1px 0 0 $layer-accent-01,
+      -25vw 1px 0 0 $layer-accent-01;
+    opacity: 1;
+  }
+
+  .#{$block-class}__breadcrumb-container {
+    inline-size: 100%;
+  }
+
+  .#{$block-class}__action-bar-column {
+    display: none;
+  }
+
+  .#{$block-class}__breadcrumb-row--has-breadcrumbs
+    .#{$block-class}__action-bar-column {
+    flex: 0 1 $right-section-alt-width;
+    // back button displayed only
+    max-inline-size: $right-section-alt-width;
+
+    @include breakpoint(md) {
+      flex: 1 0 $right-section-std-width;
+      max-inline-size: $right-section-std-width;
+    }
+  }
+
+  .#{$block-class}__breadcrumb-row--has-action-bar
+    .#{$block-class}__action-bar-column {
+    display: initial;
+  }
+
+  .#{$block-class}__action-bar-column-content {
+    display: flex;
+    justify-content: flex-end;
+    white-space: nowrap;
+
+    @include breakpoint-up('lg') {
+      flex-wrap: nowrap; /* assume enough space */
+    }
+  }
+
+  .#{$block-class}__breadcrumb-row .#{$block-class}__page-actions {
+    position: relative;
+    display: inline-block;
+    flex: 1 1 var(--#{$block-class}--button-set-in-breadcrumb-width-px);
+    inline-size: 100%;
+    max-inline-size: var(--#{$block-class}--button-set-in-breadcrumb-width-px);
+    opacity: 0;
+    transition: opacity $duration-moderate-02 motion('entrance', 'productive');
+    visibility: hidden;
+    white-space: nowrap;
+  }
+
+  .#{$block-class}__breadcrumb-row
+    .#{$block-class}__page-actions--in-breadcrumb {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .#{$block-class}__breadcrumb-column {
+    overflow: hidden; /* required for ellipsis in title, title not visible in breadcrumb with back arrow */
+    flex: 0 0 100%;
+    max-inline-size: 100%;
+
+    @include breakpoint(md) {
+      overflow: hidden; /* required for ellipsis in title, title not visible in breadcrumb with back arrow */
+    }
+  }
+
+  .#{$block-class}__breadcrumb-row--has-action-bar.#{$block-class}__breadcrumb-row
+    .#{$block-class}__breadcrumb-column {
+    flex: 0 1 $left-section-alt-width;
+    // back button displayed only
+    max-inline-size: $left-section-alt-width;
+
+    @include breakpoint(md) {
+      flex: 0 1 $left-section-std-width;
+      max-inline-size: $left-section-std-width;
+    }
+  }
+
+  .#{$block-class}__has-page-actions-without-action-bar.#{$block-class}__breadcrumb-row
+    .#{$block-class}__breadcrumb-column {
+    flex: 0 1 100%;
+    // the width of the breadcrumb column is adjusted elsewhere to compensate
+    max-inline-size: 100%;
+  }
+
+  .#{$block-class}__breadcrumb-column--background,
+  .#{$block-class}__action-bar-column--background {
+    position: relative;
+  }
+
+  .#{$block-class}__breadcrumb-column--background::before,
+  .#{$block-class}__action-bar-column--background::before {
+    @include appearingBackground();
+  }
+
+  .#{$block-class}__action-bar-column--influenced-by-collapse-button {
+    padding-inline-end: $spacing-08;
+  }
+
+  .#{$block-class}__breadcrumb {
+    @include type.type-style('label-01');
+
+    padding-block-start: $spacing-04;
+  }
+
+  .#{$block-class}--breadcrumb.#{$breadcrumb-block-class}__with-items {
+    padding-block-start: 0;
+    @include breakpoint(md) {
+      padding-block-start: $spacing-04;
+    }
+  }
+
+  .#{$block-class}__breadcrumb .#{carbon-config.$prefix}--breadcrumb-item {
+    margin-inline-end: $spacing-02;
+  }
+
+  .#{$block-class}__breadcrumb
+    .#{carbon-config.$prefix}--breadcrumb-item::after {
+    margin-inline-start: $spacing-02;
+  }
+
+  .#{$block-class}__breadcrumb .#{carbon-config.$prefix}--breadcrumb-item,
+  .#{$block-class}__breadcrumb
+    .#{carbon-config.$prefix}--breadcrumb-item
+    .#{carbon-config.$prefix}--link {
+    @include type.type-style('label-01');
+  }
+
+  .#{$block-class}__breadcrumb-title {
+    position: relative;
+
+    &:not(.#{$block-class}__breadcrumb-title--pre-collapsed) {
+      opacity: var(--#{$block-class}--breadcrumb-title-opacity);
+
+      transform: translateY(var(--#{$block-class}--breadcrumb-title-top));
+      visibility: var(--#{$block-class}--breadcrumb-title-visibility);
+    }
+  }
+
+  .#{$block-class}__breadcrumb-container--hidden
+    .#{$block-class}__breadcrumb-title.#{$block-class}__breadcrumb-title {
+    overflow: initial;
+  }
+
+  .#{$block-class}__action-bar {
+    flex: 1 1 var(--#{$block-class}--max-action-bar-width-px);
+    inline-size: 100%;
+    margin-block-start: calc(-1 * #{$spacing-04}); /* align with breadcrumb */
+    max-inline-size: var(--#{$block-class}--max-action-bar-width-px);
+    padding-block-start: $spacing-04;
+    vertical-align: top;
+    white-space: nowrap;
+  }
+
+  .#{$block-class}__title-row {
+    --title-row-margin-top: #{$spacing-01}; /* spacing needed in case of editable title, otherwise top of focus indicator hidden */
+
+    margin-block-end: 0;
+    transform: translateY(
+      $spacing-01
+    ); // position adjusted for editable title focus outline
+
+    @include breakpoint-up('md') {
+      flex-wrap: nowrap; /* assume enough space */
+    }
+
+    &.#{$block-class}__title-row--under-action-bar {
+      margin-block-start: $spacing-05;
+      transform: translateY(0); // Not needed under action bar
+    }
+
+    + .#{$block-class}__last-row-buffer--active {
+      block-size: $spacing-07;
+    }
+
+    &.#{$block-class}__title-row--spacing-below-03 {
+      margin-block-end: $spacing-03;
+    }
+
+    &.#{$block-class}__title-row--spacing-below-05 {
+      + .#{$block-class}__last-row-buffer--active {
+        block-size: $spacing-05;
+      }
+    }
+
+    &.#{$block-class}__title-row--spacing-below-06 {
+      margin-block-end: $spacing-06;
+    }
+
+    &.#{$block-class}__title-row--no-breadcrumb-row {
+      margin-block-start: $spacing-07;
+    }
+  }
+
+  &.#{$block-class}--has-navigation
+    .#{$block-class}__title-row
+    + .#{$block-class}__last-row-buffer--active {
+    block-size: calc(#{$spacing-06});
+  }
+
+  &.#{$block-class}--has-navigation-tags-only
+    .#{$block-class}__title-row
+    + .#{$block-class}__last-row-buffer--active {
+    block-size: calc(#{$spacing-05});
+  }
+
+  .#{$block-class}__title-row--sticky {
+    position: sticky;
+  }
+
+  .#{$block-class}__breadcrumb-row--has-breadcrumbs
+    + .#{$block-class}__title-row--sticky {
+    // stylelint-disable-next-line carbon/layout-use
+    inset-block-start: calc(
+      var(--#{$block-class}--breadcrumb-top) - var(--title-row-margin-top)
+    );
+  }
+
+  .#{$block-class}__title-column {
+    flex: 0 0 100%;
+    min-block-size: 40px;
+
+    @include breakpoint-up('md') {
+      flex: 1 0 $left-section-std-width;
+      max-inline-size: $left-section-std-width;
+    }
+  }
+
+  .#{$block-class}__tooltip {
+    flex-basis: auto;
+    min-inline-size: 0;
+
+    button {
+      border-block-end: none;
+      cursor: default;
+    }
+  }
+  .#{$block-class}__titleText {
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .#{$block-class}__title {
+    @include type.type-style('heading-04');
+
+    display: flex;
+    min-block-size: $spacing-08;
+  }
+
+  .#{$block-class}__title--editable {
+    display: flex;
+    overflow: visible;
+    // move to match non-editable version position
+    margin-block-start: calc(-1 * #{$spacing-01});
+    margin-inline-start: calc(-1 * #{$spacing-05});
+  }
+
+  .#{$block-class}__title-skeleton {
+    block-size: $spacing-07;
+  }
+
+  .#{$block-class}__title--fades {
+    opacity: calc(1 - var(--#{$block-class}--breadcrumb-title-opacity));
+  }
+
+  .#{$block-class}__title-icon {
+    margin-inline-end: $spacing-04;
+    // stylelint-disable-next-line carbon/layout-use
+    transform: translateY(
+      -$spacing-01
+    ); // positional tweak requested by design review
+
+    vertical-align: middle;
+  }
+
+  .#{$block-class}__page-actions {
+    flex: 0 0 100%;
+    margin-block-start: $spacing-05;
+    white-space: nowrap;
+
+    @include breakpoint-up('md') {
+      flex: 0 1 $right-section-std-width;
+      margin-block-start: 0;
+      max-inline-size: $right-section-std-width;
+    }
+  }
+
+  .#{$block-class}__page-actions
+    .#{carbon-config.$prefix}--btn-set
+    .#{carbon-config.$prefix}--btn {
+    inline-size: initial;
+  }
+
+  .#{$block-class}__action-bar-column .#{$block-class}__page-actions {
+    margin-block-start: 0;
+  }
+
+  .#{$block-class}__page-actions-container {
+    justify-content: flex-start;
+
+    @include breakpoint-up('md') {
+      justify-content: flex-end;
+    }
+  }
+
+  .#{$block-class}__title-row .#{$block-class}__page-actions {
+    position: relative;
+    opacity: 1;
+    transition: all $duration-fast-02 motion('entrance', 'productive');
+    transition-property: opacity, visibility;
+    visibility: visible;
+  }
+
+  .#{$block-class}__title-row .#{$block-class}__page-actions::before {
+    @include appearingBackground();
+  }
+
+  .#{$block-class}__page-actions-content {
+    position: relative; // ensure appears over ::before
+    display: flex;
+    overflow: hidden;
+    justify-content: flex-end;
+    block-size: 100%;
+    inline-size: 100%;
+  }
+
+  .#{$block-class}__title-row .#{$block-class}__page-actions--in-breadcrumb {
+    opacity: 0;
+    visibility: hidden;
+  }
+
+  .#{$block-class}__subtitle-row {
+    margin-block-start: $spacing-03;
+
+    @include breakpoint-up('md') {
+      max-inline-size: $left-section-std-width;
+    }
+
+    + .#{$block-class}__last-row-buffer--active {
+      block-size: $spacing-05;
+    }
+  }
+
+  .#{$block-class}__subtitle {
+    @include type.type-style('body-01');
+  }
+
+  .#{$block-class}__subtitle-tooltip
+    .#{carbon-config.$prefix}--definition-term {
+    border-block-end: 0;
+    letter-spacing: inherit;
+  }
+
+  // overwrites the existing styles to make the popover bigger because in some cases the narrow space can be too constricting for the header
+  .#{$block-class}__subtitle-tooltip
+    .#{carbon-config.$prefix}--popover-content.#{carbon-config.$prefix}--definition-tooltip {
+    max-inline-size: fit-content;
+  }
+
+  .#{$block-class}__subtitle-text {
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+  }
+
+  .#{$block-class}__available-row {
+    @include type.type-style('body-01');
+
+    margin-block-start: $spacing-03;
+
+    + .#{$block-class}__last-row-buffer--active {
+      block-size: $spacing-05;
+    }
+  }
+
+  .#{$block-class}__title-row + .#{$block-class}__available-row {
+    margin-block-start: $spacing-05;
+  }
+
+  .#{$block-class}__available-row * {
+    // default content of available row to body-long-01
+    @include type.type-style('body-01');
+  }
+
+  .#{$block-class}__navigation-row {
+    flex-wrap: wrap-reverse;
+    margin-block-start: 0;
+
+    .#{carbon-config.$prefix}--content-switcher {
+      box-sizing: content-box;
+      padding-block-end: $spacing-05;
+    }
+  }
+
+  .#{$block-class}__navigation-row .#{carbon-config.$prefix}--tab-content {
+    display: none; /* need to figure out how to handle the tab content */
+  }
+
+  .#{$block-class}__action-bar-column--has-page-actions {
+    display: block;
+  }
+
+  .#{$block-class}__has-page-actions-with-title-collapsed
+    .#{$block-class}__action-bar-column--has-page-actions {
+    display: block;
+  }
+
+  .#{$block-class}__navigation-tabs {
+    margin-inline-start: calc(-1 * #{$spacing-05});
+  }
+
+  .#{$block-class}__navigation-row--has-tags .#{$block-class}__navigation-tabs {
+    flex: 0 1 $left-section-alt-width;
+    max-inline-size: $left-section-alt-width;
+  }
+
+  .#{$block-class}__navigation-tags {
+    display: flex;
+    flex: 1 0 $right-section-alt-width;
+    align-items: center;
+    justify-content: flex-end;
+    max-inline-size: $right-section-alt-width;
+    padding-block: $spacing-02;
+    // allow space for expand/collapse if we have a background
+    padding-inline-end: $spacing-07;
+    text-align: end;
+    white-space: nowrap;
+
+    @include breakpoint(md) {
+      padding-inline-end: $spacing-05;
+    }
+  }
+
+  .#{$block-class}__navigation-tags--tags-only {
+    justify-content: flex-start;
+    margin-inline-start: calc(-1 * #{$spacing-02});
+    padding-block: 0 $spacing-04;
+    text-align: initial;
+  }
+
+  .#{$block-class}__navigation-row
+    .#{carbon-config.$prefix}--content-switcher-btn {
+    background-color: $background;
+  }
+
+  .#{$block-class}__collapse-expand-toggle {
+    position: absolute;
+    z-index: $raised-z-index + 1;
+    inset-block-end: 0;
+    inset-inline-end: 0;
+  }
+
+  .#{$block-class}__collapse-expand-toggle
+    .#{carbon-config.$prefix}--btn__icon {
+    // transform: rotate(-90deg); // accordion does this, but it feels odd in page header
+    transition: all $duration-slow-01 motion(standard, productive);
+  }
+
+  .#{$block-class}__collapse-expand-toggle--collapsed svg {
+    // transform: rotate(90deg);
+    transform: scaleY(-1);
+  }
+}
+
+:root {
+  --#{$block-class}--tagset-tooltip-offset: 0;
+}
+
+.#{$block-class}__tagset-tooltip.#{$block-class}__tagset-tooltip {
+  // stylelint-disable-next-line
+  position: var(--#{$block-class}--tagset-tooltip-position) !important;
+  // stylelint-disable-next-line
+  inset-block-start: var(--#{$block-class}--tagset-tooltip-offset) !important;
+}
+
+.#{$block-class}__navigation-tags-overflow.#{carbon-config.$prefix}--tooltip {
+  z-index: $z-index-header-minus;
+}
+
+.#{$block-class}__action-bar-menu-options.#{carbon-config.$prefix}--overflow-menu-options,
+.#{carbon-config.$prefix}--breadcrumb-menu-options.#{carbon-config.$prefix}--overflow-menu-options,
+.#{$block-class}__button-set-menu-options.#{carbon-config.$prefix}--overflow-menu-options {
+  z-index: $z-index-header-minus;
+}
+
+.#{$block-class}__button-set-menu-options
+  > button.#{carbon-config.$prefix}--menu-button__trigger {
+  min-inline-size: 0;
+}
+
+/// Experimental Page header styles
+/// @access public
+/// @group page-header
+@include block-wrap(#{$block-class}__next) {
+  &.#{$block-class} {
+    position: sticky;
+    background-color: $layer-01;
+    border-block-end: 1px solid $border-subtle-01;
+    /* stylelint-disable-next-line carbon/layout-use */
+    inset-block-start: var(--#{$pkg-prefix}-page-header-header-top);
+    overflow-x: clip;
+  }
+
+  // When disableStickyTabBar is true, remove sticky positioning from root
+  // This allows breadcrumb to stick to viewport while tab bar scrolls normally
+  &.#{$block-class}.#{$block-class}--disable-sticky-tab-bar {
+    position: static;
+    // Add padding to compensate for fixed breadcrumb (40px height)
+    padding-block-start: to-rem(40px);
+  }
+
+  .#{$block-class}__breadcrumb-bar {
+    position: sticky;
+    z-index: 1;
+    background-color: $layer;
+    block-size: to-rem(40px);
+    /* stylelint-disable-next-line carbon/layout-use */
+    inset-block-start: var(--#{$pkg-prefix}-page-header-breadcrumb-top);
+  }
+
+  // When disableStickyTabBar is true, breadcrumb uses fixed positioning at top of viewport
+  &.#{$block-class}.#{$block-class}--disable-sticky-tab-bar
+    .#{$block-class}__breadcrumb-bar {
+    position: fixed;
+    inset-block-start: 0;
+    inset-inline-end: 0;
+    inset-inline-start: 0;
+  }
+
+  .#{$block-class}__breadcrumb-bar .#{$carbon-prefix}--subgrid,
+  .#{$block-class}__breadcrumb-bar .#{$carbon-prefix}--css-grid {
+    block-size: 100%;
+  }
+
+  .#{$block-class}__breadcrumb-bar
+    .#{$carbon-prefix}--css-grid
+    .#{$carbon-prefix}--css-grid-column {
+    block-size: to-rem(40px);
+  }
+
+  .#{$block-class}__breadcrumb-bar
+    .#{$carbon-prefix}--css-grid
+    .#{$carbon-prefix}--css-grid-column,
+  .#{$block-class}__breadcrumb-bar .#{$block-class}__breadcrumb-container {
+    block-size: to-rem(40px);
+
+    .#{$block-class}__breadcrumb-wrapper {
+      align-items: center;
+      block-size: inherit;
+    }
+  }
+
+  .#{$block-class}__breadcrumb-container {
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    block-size: 100%;
+    inline-size: 100%;
+  }
+
+  .#{$block-class}__breadcrumb__actions-flush {
+    .#{$carbon-prefix}--css-grid {
+      padding-inline-end: 0;
+    }
+
+    .#{$carbon-prefix}--css-grid-column {
+      margin-inline-end: 0;
+    }
+  }
+
+  .#{$block-class}__breadcrumb-bar-border {
+    border-block-end: 1px solid $border-subtle-01;
+  }
+
+  .#{$block-class}__breadcrumb__icon {
+    margin-inline-end: $spacing-03;
+
+    svg {
+      fill: $icon-primary;
+    }
+  }
+
+  .#{$block-class}__breadcrumb__actions {
+    display: inline-flex;
+    flex: 0 0 auto;
+    justify-content: flex-end;
+    min-inline-size: 75%;
+
+    @include breakpoint(md) {
+      min-inline-size: 40%;
+    }
+  }
+
+  .#{$block-class}__breadcrumb__content-actions {
+    margin-inline-end: $spacing-04;
+  }
+
+  .#{$block-class}__breadcrumb-wrapper {
+    display: inline-flex;
+    flex: 1 1 auto;
+    min-inline-size: 0;
+
+    @include breakpoint(md) {
+      min-inline-size: 60%;
+    }
+  }
+
+  .#{$block-class}__breadcrumb-wrapper .#{$block-class}-breadcrumb-overflow {
+    flex: 1 1 0%;
+    min-inline-size: 0;
+
+    .#{$carbon-prefix}--breadcrumb {
+      display: flex;
+      flex-wrap: nowrap;
+    }
+
+    .#{$carbon-prefix}--breadcrumb-item[data-fixed='true'] {
+      .#{$carbon-prefix}--link {
+        display: block;
+        overflow: hidden;
+        inline-size: 100%;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+      @include breakpoint-down(lg) {
+        max-inline-size: 75vw;
+
+        .#{$carbon-prefix}--link {
+          inline-size: 75%;
+        }
+      }
+
+      @include breakpoint-down(md) {
+        max-inline-size: 35vw;
+
+        .#{$carbon-prefix}--link {
+          inline-size: 100%;
+        }
+      }
+    }
+  }
+
+  .#{$block-class}__breadcrumb-wrapper
+    .#{$block-class}-breadcrumb-overflow-item {
+    display: none;
+    opacity: 0;
+  }
+  .#{$block-class}__breadcrumb-wrapper
+    .#{$block-class}-overflow-breadcrumb-item-with-items {
+    display: flex;
+    opacity: 1;
+  }
+
+  .#{$block-class}__content {
+    background-color: $layer;
+    padding-block-start: $spacing-06;
+  }
+
+  .#{$block-class}__content__title-wrapper {
+    display: grid;
+    gap: $spacing-05;
+    grid-template-columns: auto minmax(
+        var(--page-header-title-grid-width, 0),
+        1fr
+      );
+    margin-block-end: $spacing-05;
+    min-block-size: to-rem(40px);
+
+    @include breakpoint-down(md) {
+      display: flex;
+      flex-direction: column;
+      grid-gap: $spacing-05;
+    }
+  }
+
+  .#{$block-class}__content__start {
+    display: flex;
+    flex-wrap: wrap;
+    gap: $spacing-05;
+  }
+
+  .#{$block-class}__content__title-container {
+    display: flex;
+  }
+
+  .#{$block-class}__content__title-container
+    .#{$carbon-prefix}--definition-term {
+    border-block-end: none;
+  }
+
+  .#{$block-class}__content__contextual-actions {
+    display: flex;
+    align-items: center;
+  }
+
+  .#{$block-class}__content__title {
+    @include type.type-style('productive-heading-04');
+
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    max-inline-size: to-rem(640px);
+    text-overflow: ellipsis;
+    white-space: normal;
+  }
+
+  .#{$block-class}__content:has(.#{$block-class}__content__contextual-actions)
+    .#{$block-class}__content__title {
+    -webkit-line-clamp: 1;
+  }
+
+  .#{$block-class}__content__icon {
+    margin-inline-end: $spacing-05;
+
+    svg {
+      fill: $icon-primary;
+    }
+  }
+
+  .#{$block-class}__content__page-actions {
+    display: flex;
+    justify-content: right;
+    /* stylelint-disable-next-line carbon/motion-easing-use */
+    transition: opacity motion(standard, productive) $duration-moderate-02;
+
+    &.#{$block-class}__content__page-actions--clipped {
+      opacity: 0;
+      visibility: hidden;
+    }
+
+    @include breakpoint-down('md') {
+      justify-content: left;
+      margin-block-start: 0;
+    }
+  }
+
+  .#{$block-class}__content__page-actions
+    .#{$carbon-prefix}--menu-button__trigger:not(
+      .#{$carbon-prefix}--btn--ghost
+    ) {
+    min-inline-size: 0;
+  }
+
+  // Ensure menu dropdown stays within viewport bounds
+  // Note: Carbon MenuButton renders the menu in a portal at body level
+  .#{$carbon-prefix}--menu.#{$carbon-prefix}--menu--open {
+    // Prevent menu from being cut off at top of viewport
+    max-block-size: calc(100vh - #{$spacing-05});
+    overflow-y: auto;
+  }
+
+  .#{$block-class}__content__subtitle {
+    @include type.type-style('productive-heading-03');
+
+    margin-block-end: $spacing-03;
+  }
+
+  .#{$block-class}__content__body {
+    @include type.type-style('body-01');
+
+    margin-block-start: $spacing-03;
+    max-inline-size: to-rem(640px);
+    padding-block-end: $spacing-06;
+  }
+
+  [data-hidden]:not([data-fixed]) {
+    display: none;
+  }
+
+  .#{$block-class}__hero-image {
+    display: flex;
+    overflow: hidden;
+    align-items: center;
+    justify-content: flex-end;
+    block-size: 100%;
+
+    // Object-fit styles for images
+    &--object-fit-cover,
+    &--object-fit-contain,
+    &--object-fit-fill,
+    &--object-fit-none {
+      picture,
+      img {
+        block-size: 100%;
+        inline-size: 100%;
+      }
+    }
+
+    &--object-fit-cover {
+      picture,
+      img {
+        object-fit: cover;
+        object-position: center;
+      }
+    }
+
+    &--object-fit-contain {
+      picture,
+      img {
+        object-fit: contain;
+        object-position: center;
+      }
+    }
+
+    &--object-fit-fill {
+      picture,
+      img {
+        object-fit: fill;
+      }
+    }
+
+    &--object-fit-none {
+      picture,
+      img {
+        object-fit: none;
+        object-position: center;
+      }
+    }
+  }
+
+  .#{$block-class}__tab-bar {
+    position: sticky;
+    z-index: 1;
+    background-color: $layer;
+    /* stylelint-disable-next-line carbon/layout-use */
+    inset-block-start: var(--#{$pkg-prefix}-page-header-breadcrumb-top);
+  }
+
+  // Disable sticky positioning for tab bar when disableStickyTabBar prop is true
+  &.#{$block-class}.#{$block-class}--disable-sticky-tab-bar
+    .#{$block-class}__tab-bar {
+    position: static;
+    // On smaller screens, use flex to keep scroller button in flow
+    // position: relative;
+    display: flex;
+    align-items: center;
+    // background-color: $layer;
+
+    // // On max breakpoint and above, use block to maintain Carbon alignment (scroller uses absolute positioning)
+    @include breakpoint(sm) {
+      display: block;
+    }
+  }
+
+  .#{$block-class}__tab-bar--tablist {
+    display: flex;
+    align-items: center;
+  }
+
+  .#{$block-class}__tab-bar--tablist > .#{$carbon-prefix}--tabs {
+    display: inline-flex;
+    margin-inline-end: $spacing-03;
+  }
+
+  .#{$pkg-prefix}--page-header__tab-bar--tablist
+    .#{$pkg-prefix}--page-header__tags {
+    display: inline-flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin-inline-start: auto;
+    min-inline-size: 0;
+  }
+
+  .#{$pkg-prefix}--page-header__tab-bar--tablist.#{$pkg-prefix}--page-header__tab-bar--with-scroller
+    .#{$pkg-prefix}--page-header__tags {
+    display: flex;
+    align-items: center;
+    justify-content: right;
+    transform: translateX(calc($spacing-06 * -1));
+
+    @include breakpoint(md) {
+      padding-inline-end: $spacing-03;
+      transform: translateX(0);
+    }
+    @include breakpoint(max) {
+      padding-inline-end: $spacing-05;
+    }
+  }
+
+  .#{$carbon-prefix}--tabs .#{$carbon-prefix}--tab--overflow-nav-button {
+    background-color: $layer-01;
+
+    &.#{$carbon-prefix}--tab--overflow-nav-button--next::before {
+      background: linear-gradient(to right, rgba(255, 255, 255, 0), $layer-01);
+    }
+
+    &.#{$carbon-prefix}--tab--overflow-nav-button--previous::before {
+      background: linear-gradient(to left, rgba(255, 255, 255, 0), $layer-01);
+    }
+  }
+
+  // **** This is a temporary work-around until the focus clipping
+  // **** for overflowing tabs is resolved in core.
+  // **** https://github.com/carbon-design-system/carbon/issues/19942
+  .#{$carbon-prefix}--tabs .#{$carbon-prefix}--tabs__nav-link {
+    margin-inline-end: $spacing-01;
+  }
+
+  .#{$block-class}__tags {
+    display: flex;
+    align-items: center;
+    justify-content: right;
+  }
+
+  .#{$block-class}__tags-popover-list {
+    display: flex;
+    flex-direction: column;
+    padding: $spacing-05;
+  }
+
+  .#{$block-class}--tag-overflow-container {
+    display: inline-flex;
+    align-content: center;
+    justify-content: flex-end;
+    inline-size: 40%;
+    padding-inline-end: $spacing-06;
+    text-align: end;
+
+    .#{$carbon-prefix}--tag {
+      flex-shrink: 0;
+      margin-inline-end: $spacing-03;
+    }
+
+    @include breakpoint-down(lg) {
+      padding-inline-end: $spacing-06;
+    }
+  }
+
+  .#{$block-class}--tag-overflow-popover__hidden {
+    display: none;
+  }
+
+  .#{$block-class}__tag-item {
+    flex-shrink: 0;
+  }
+
+  .#{$pkg-prefix}--page-header--scroller-button-icon {
+    /* stylelint-disable-next-line */
+    transition: transform $transition-base;
+    @media (prefers-reduced-motion: reduce) {
+      transition: none;
+    }
+  }
+
+  .#{$pkg-prefix}--page-header--scroller-button-icon-collapsed {
+    transform: rotate(-180deg);
+  }
+
+  .#{$pkg-prefix}--page-header--scroller-button-container {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    margin-inline-start: $spacing-03;
+
+    // On max breakpoint and above, position absolutely to the right (enough gutter space)
+    @include breakpoint(sm) {
+      position: absolute;
+      inset-block-start: 0;
+      inset-inline-end: 0;
+      margin-inline-start: 0;
+    }
+  }
+
+  @keyframes page-header-title-breadcrumb-animation {
+    0% {
+      opacity: 0;
+      transform: translateY($spacing-05);
+    }
+
+    5% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes page-header-title-breadcrumb-animation-reduced-motion {
+    0% {
+      opacity: 0;
+    }
+
+    5% {
+      opacity: 1;
+    }
+
+    100% {
+      opacity: 1;
+    }
+  }
+
+  .#{$pkg-prefix}--page-header__breadcrumb__content-actions {
+    opacity: 0;
+  }
+
+  .#{$pkg-prefix}--page-header__breadcrumb__content-actions-with-global-actions--show {
+    opacity: 1;
+    transition:
+      /* stylelint-disable-next-line */ opacity
+      motion(standard, productive) $duration-moderate-01;
+  }
+
+  .#{$pkg-prefix}--page-header-title-breadcrumb {
+    opacity: 0;
+    transform: translateY($spacing-05);
+    transition:
+      /* stylelint-disable-next-line */
+      transform motion(standard, productive) $duration-moderate-01,
+      opacity motion(standard, productive) $duration-moderate-01;
+    // Target browsers that do not yet support animation-timeline: scroll()
+    @supports not (animation-timeline: scroll()) {
+      &.#{$pkg-prefix}--page-header-title-breadcrumb-show {
+        @media (prefers-reduced-motion: reduce) {
+          transform: translateY(0);
+          /* stylelint-disable-next-line */
+          transition: opacity motion(standard, productive) $duration-moderate-01;
+        }
+      }
+    }
+
+    &.#{$pkg-prefix}--page-header-title-breadcrumb-show__with-content-element {
+      // `animation-timeline: scroll()` only currently supported in Chromium based browsers
+      @supports (animation-timeline: scroll()) {
+        animation-direction: alternate;
+        animation-duration: 1ms; /* Firefox requires this to apply the animation */
+        animation-name: page-header-title-breadcrumb-animation;
+        animation-timeline: scroll(block nearest);
+
+        @media (prefers-reduced-motion: reduce) {
+          animation-name: page-header-title-breadcrumb-animation-reduced-motion;
+          transform: translateY(0);
+        }
+      }
+    }
+    &.#{$pkg-prefix}--page-header-title-breadcrumb-show__without-content-element {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}

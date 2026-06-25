@@ -1,0 +1,216 @@
+import { Markdown, Meta, Story } from '@storybook/addon-docs/blocks';
+
+import { cdnJs, cdnCss } from '../../../globals/internal/storybook-cdn';
+import SingleAddSelectStories from './single-add-select.stories';
+
+<Meta of={SingleAddSelectStories} />
+
+# Single add select
+
+[Single add select usage guidelines](https://pages.github.ibm.com/carbon/ibm-products/patterns/add-and-select/usage/#select-flow)
+
+## Overview
+
+The single add select pattern is used to add or select a single item from larger lists or hierarchies. It provides a streamlined interface for users to search, filter, and select one item from a collection.
+
+## Coded examples
+
+Patterns have multiple ways of accomplishing a user need and typically use a combination of components with additional design considerations. The pattern code we share is meant to serve as an example implementation that can be built and extended further.
+
+#### Ingredients
+
+To build this pattern, we recommend including the following components:
+
+- [c4p-tearsheet](/?path=/docs/components-tearsheet--docs) - Container for the pattern
+- [c4p-add-select](/?path=/docs/components-add-select--docs) - Wrapper component
+- [c4p-add-select-body](/?path=/docs/components-add-select--docs) - Container with search and breadcrumb navigation
+- [c4p-add-select-breadcrumbs](/?path=/docs/components-add-select--docs) - Breadcrumb navigation for hierarchical data (used internally by c4p-add-select-body)
+- [c4p-add-select-list](/?path=/docs/components-add-select--docs) - List container
+- [c4p-add-select-row](/?path=/docs/components-add-select--docs) - Individual selectable items
+- [cds-button](https://web-components.carbondesignsystem.com/?path=/docs/components-button--overview) - Action buttons
+- [cds-toast-notification](https://web-components.carbondesignsystem.com/?path=/docs/components-notifications-toast--overview) - Success feedback
+
+> 💡 Check our
+> [Stackblitz](https://stackblitz.com/github/carbon-design-system/ibm-products/tree/main/packages/ibm-products-web-components/examples/single-add-select)
+> example implementation.
+
+[![Edit carbon-web-components](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/carbon-design-system/ibm-products/tree/main/packages/ibm-products-web-components/examples/single-add-select)
+
+## Single item selection
+
+The single add select pattern allows users to select one item from a list. It includes:
+
+- A search/filter capability to narrow down options
+- Radio button selection for single choice
+- Clear visual feedback on the selected item
+- Submit and cancel actions
+
+### Example
+
+Here's a quick example to get you started.
+
+#### JS (via import)
+
+```javascript
+import '@carbon/web-components/es/components/button/index.js';
+import '@carbon/web-components/es/components/notification/toast-notification.js';
+
+import '../../../../src/components/tearsheet/index';
+import '../../../../src/components/add-select/add-select/add-select';
+import '../../../../src/components/add-select/add-select-body/add-select-body';
+import '../../../../src/components/add-select/add-select-list/add-select-list';
+import '../../../../src/components/add-select/add-select-row/add-select-row';
+```
+
+#### HTML
+
+```html
+<!-- Trigger button -->
+<cds-button
+  type="button"
+  kind="primary"
+  size="md"
+  @click="${this._openAddSelect}"
+>
+  Select an item
+</cds-button>
+
+<!-- Single Add Select Pattern using Tearsheet -->
+<c4p-add-select>
+  <c4p-tearsheet
+    ?open=${this._open}
+    width="narrow"
+    @c4p-tearsheet-closed="${this._handleClose}"
+  >
+    <!-- Header -->
+    <h3 slot="title">Select category</h3>
+    <div slot="description">Choose one category from the list below</div>
+
+    <!-- Body with Add Select Content -->
+    <c4p-add-select-body
+      global-search-label="Search categories"
+      global-search-placeholder="Search..."
+      items-label="Categories"
+      search-results-title="Search results"
+      .itemCount="${this._filteredItems.length}"
+      .path="${this._getBreadcrumbPath()}"
+      @c4p-add-select-body-search="${this._handleSearch}"
+      @c4p-add-select-body-breadcrumb-click="${this._handleBreadcrumbClick}"
+    >
+      <c4p-add-select-list>
+        ${this._filteredItems.map((item) => html`
+          <c4p-add-select-row
+            item-id="${item.id}"
+            title="${item.title}"
+            value="${item.value}"
+            ?has-children="${!!item.children}"
+            ?selected="${this._selectedItem === item.id}"
+            @c4p-add-select-row-select="${this._handleItemSelect}"
+            @c4p-add-select-row-navigate="${this._handleNavigate}"
+          >
+          </c4p-add-select-row>
+        `)}
+      </c4p-add-select-list>
+    </c4p-add-select-body>
+
+    <!-- Footer with Action Buttons -->
+    <cds-button
+      slot="actions"
+      kind="secondary"
+      @click="${this._handleClose}"
+    >
+      Cancel
+    </cds-button>
+    <cds-button
+      slot="actions"
+      kind="primary"
+      @click="${this._handleSubmit}"
+      ?disabled="${!this._selectedItem}"
+    >
+      Select
+    </cds-button>
+  </c4p-tearsheet>
+</c4p-add-select>
+
+<!-- Success notification -->
+<cds-toast-notification
+  kind="success"
+  title="Item selected"
+  subtitle="You selected: ${selectedItemData?.title}"
+  timeout="3000"
+  @cds-notification-closed="${this._onNotificationClose}"
+>
+</cds-toast-notification>
+```
+
+## Key features
+
+### Search and filter
+
+The pattern includes built-in search functionality that allows users to quickly find items by typing. The search filters items in real-time based on the item title and supports hierarchical navigation.
+
+### Single selection
+
+Users can select only one item at a time using radio buttons. The selected item is visually highlighted and the submit button is enabled only when an item is selected.
+
+### Hierarchical navigation
+
+The pattern supports nested data structures with breadcrumb navigation, allowing users to drill down into categories and navigate back up the hierarchy.
+
+### Event handling
+
+The pattern emits custom events for key interactions:
+
+- `c4p-tearsheet-closed` - Fired when the tearsheet is closed
+- `c4p-add-select-body-search` - Fired when search term changes
+- `c4p-add-select-body-breadcrumb-click` - Fired when breadcrumb is clicked
+- `c4p-add-select-row-select` - Fired when item is selected/deselected
+- `c4p-add-select-row-navigate` - Fired when navigating to item children
+
+### Accessibility
+
+The pattern follows accessibility best practices:
+
+- Proper ARIA attributes for screen readers
+- Keyboard navigation support
+- Focus management
+- Clear visual indicators for selected items
+
+## Component properties
+
+### c4p-add-select-body
+
+- `global-search-label` (String) - Search input label
+- `global-search-placeholder` (String) - Search placeholder text
+- `items-label` (String) - Label for items section
+- `search-results-title` (String) - Title for search results
+- `itemCount` (Number) - Number of items for display
+- `path` (Array) - Breadcrumb navigation path
+
+### c4p-add-select-row
+
+- `item-id` (String) - Unique identifier
+- `title` (String) - Item title
+- `value` (String) - Item value
+- `selected` (Boolean) - Selection state
+- `has-children` (Boolean) - Whether item has child items
+- `disabled` (Boolean) - Disabled state
+
+### c4p-tearsheet
+
+- `open` (Boolean) - Controls tearsheet visibility
+- `width` (String) - Tearsheet width ("narrow", "wide")
+
+## Best practices
+
+1. **Use tearsheet for complex selections**: The tearsheet provides a focused environment for selection tasks without losing context.
+
+2. **Implement hierarchical data thoughtfully**: Use breadcrumbs to help users understand their location in the data hierarchy.
+
+3. **Enable search for large lists**: For lists with more than 10 items, search functionality becomes essential.
+
+4. **Show feedback**: Display a success notification after selection to confirm the action.
+
+5. **Handle empty states**: Provide helpful messages when no results are found or when navigating to empty categories.
+
+6. **Maintain selection state**: Keep track of the selected item and display it clearly in the UI, even when navigating through hierarchies.

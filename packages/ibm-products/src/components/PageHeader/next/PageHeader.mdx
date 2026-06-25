@@ -1,0 +1,802 @@
+import { Story, ArgTypes, Canvas, Meta } from '@storybook/addon-docs/blocks';
+import * as PageHeaderStories from './PageHeader.stories';
+import { stackblitzPrefillConfig } from '../../../../previewer/codePreviewer';
+
+<Meta isTemplate />
+
+# PageHeader
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Observer Callbacks](#observer-callbacks)
+- [PageHeader.BreadcrumbBar](#pageheaderbreadcrumbbar)
+  - [Dynamic Action Rendering](#dynamic-action-rendering)
+- [PageHeader.Content](#pageheadercontent)
+  - [PageHeader.Content with hero image](#pageheadercontent-with-hero-image)
+- [PageHeader.TabsBar](#pageheadertabsbar)
+  - [PageHeader.TabsBar with Tags](#pageheadertabsbar-with-tags)
+
+## Overview
+
+The `PageHeader` is a large family of components, composed of three zones; the
+Breadcrumb, Content, and Tabs.
+
+export const customFunctionArr = [
+  `const BreadcrumbBeeIcon = () => <Bee size={16} />;`,
+  `const pageActionButtonItems = [
+  {
+    // props used for both collapse menu item and non-collapsed action form
+    id: 'action1',
+    onClick: () => console.log('Action 1'),
+    // component to render when non-collapsed
+    body: (
+      <Button
+        renderIcon={AiGenerate}
+        iconDescription="Icon Description 1"
+        hasIconOnly
+        size="md"
+        kind="ghost"
+      />
+    ),
+    // props to pass to the corresponding collapsed menu item
+    menuItem: {
+      label: 'action 1',
+    },
+  },
+  {
+    id: 'action2',
+    onClick: () => console.log('Action 2'),
+    body: (
+      <Button
+        renderIcon={Activity}
+        iconDescription="Icon Description 2"
+        hasIconOnly
+        size="md"
+        kind="ghost"
+      />
+    ),
+    menuItem: {
+      label: 'action 2',
+    },
+  },
+  {
+    id: 'action3',
+    onClick: () => console.log('Action 3'),
+    body: (
+      <Button
+        renderIcon={Activity}
+        iconDescription="Icon Description 3"
+        hasIconOnly
+        size="md"
+        kind="ghost"
+      />
+    ),
+    menuItem: {
+      label: 'action 3',
+    },
+  },
+  {
+    id: 'action4',
+    onClick: () => console.log('Action 4'),
+    body: (
+      <Button
+        renderIcon={Activity}
+        iconDescription="Icon Description 4"
+        hasIconOnly
+        size="md"
+        kind="ghost"
+      />
+    ),
+    menuItem: {
+      label: 'action 4',
+    },
+  },
+  {
+    id: 'primary-action',
+    onClick: () => console.log('Primary action'),
+    body: (
+      <Button kind="primary" renderIcon={Add} size="md">
+        Primary action
+      </Button>
+    ),
+    menuItem: {
+      label: 'Primary action',
+    },
+  },
+];`,
+  `const breadcrumbPageActions = (
+    <>
+      <Button
+        renderIcon={Activity}
+        iconDescription="Icon Description 1"
+        hasIconOnly
+        size="md"
+        kind="ghost"
+      />
+      <Button
+        renderIcon={AiGenerate}
+        iconDescription="Icon Description 2"
+        hasIconOnly
+        size="md"
+        kind="ghost"
+      />
+      <Button
+        renderIcon={CloudFoundry_1}
+        iconDescription="Icon Description 3"
+        hasIconOnly
+        size="md"
+        kind="ghost"
+      />
+    </>
+  );`,
+];
+
+<Canvas
+  className="page-header--docs-demo" 
+  of={PageHeaderStories.Default}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () =>
+        stackblitzPrefillConfig({
+          story: PageHeaderStories.Default,
+          status: {
+            preview: ['PageHeader']
+          },
+          customFunctionDefs: customFunctionArr,
+          customImports: [
+            `import { Button } from '@carbon/react';`,
+            `import { Add, Bee, CloudFoundry_1, AiGenerate, Activity } from '@carbon/react/icons';`,
+          ],
+          styles: PageHeaderStories.default.parameters.styles,
+        }),
+    },
+  ]}
+
+/>
+
+## Observer Callbacks
+
+The
+[`PageHeader.Root`](packages/ibm-products/src/components/PageHeader/next/PageHeader.tsx:76)
+component provides callback functions that notify you when specific scroll-based
+visibility changes occur:
+
+- **`onContentFullyCollapsed`**: Called when the content area becomes fully
+  collapsed or visible
+- **`onTitleClipped`**: Called when the title becomes clipped or visible
+- **`onContentActionsClipped`**: Called when the content actions become clipped
+  or visible
+
+Each callback receives a boolean parameter (`true` when clipped/collapsed,
+`false` when visible).
+
+```jsx
+<PageHeader.Root
+  onContentFullyCollapsed={(collapsed) => {
+    console.log('Content fully collapsed:', collapsed);
+  }}
+  onTitleClipped={(clipped) => {
+    console.log('Title clipped:', clipped);
+  }}
+  onContentActionsClipped={(clipped) => {
+    console.log('Content actions clipped:', clipped);
+  }}
+>
+  {/* PageHeader children */}
+</PageHeader.Root>
+```
+
+These callbacks are useful for tracking scroll state, analytics, or coordinating
+with other UI elements.
+
+## PageHeader.BreadcrumbBar
+
+The
+[`PageHeader.BreadcrumbBar`](packages/ibm-products/src/components/PageHeader/next/PageHeaderBreadcrumbBar.tsx:57)
+component renders the breadcrumb navigation area within the PageHeader. It
+accepts `Breadcrumb`, `BreadcrumbItem`, and
+[`PageHeader.TitleBreadcrumb`](packages/ibm-products/src/components/PageHeader/next/PageHeaderTitleBreadcrumb.tsx:1)
+components as children to define the breadcrumb trail. Additionally, it accepts
+[`contentActions`](packages/ibm-products/src/components/PageHeader/next/PageHeaderBreadcrumbBar.tsx:37-39)
+and
+[`pageActions`](packages/ibm-products/src/components/PageHeader/next/PageHeaderBreadcrumbBar.tsx:48-50)
+props for rendering action buttons alongside the breadcrumb content.
+
+### PageHeader.BreadcrumbPageActions
+
+The
+[`PageHeader.BreadcrumbPageActions`](packages/ibm-products/src/components/PageHeader/next/PageHeaderBreadcrumbPageActions.tsx:1)
+component provides a reusable way to render action buttons in the breadcrumb bar
+with automatic overflow handling. When the viewport width is reduced, actions
+automatically collapse into an overflow menu, ensuring a responsive experience.
+
+```jsx
+import { Activity, AiGenerate, CloudFoundry_1 } from '@carbon/icons-react';
+
+const breadcrumbPageActionItems = [
+  {
+    id: 'breadcrumb-action-1',
+    label: 'Icon Description 1',
+    renderIcon: Activity,
+    onClick: () => console.log('Breadcrumb action 1'),
+  },
+  {
+    id: 'breadcrumb-action-2',
+    label: 'Icon Description 2',
+    renderIcon: AiGenerate,
+    onClick: () => console.log('Breadcrumb action 2'),
+  },
+  {
+    id: 'breadcrumb-action-3',
+    label: 'Icon Description 3',
+    renderIcon: CloudFoundry_1,
+    onClick: () => console.log('Breadcrumb action 3'),
+  },
+];
+
+return (
+  <PageHeader.Root>
+    <PageHeader.BreadcrumbBar
+      pageActions={
+        <PageHeader.BreadcrumbPageActions
+          actions={breadcrumbPageActionItems}
+          buttonSize="md"
+          buttonKind="ghost"
+          overflowMenuLabel="More page actions"
+        />
+      }
+    >
+      <Breadcrumb>
+        <BreadcrumbItem href="/#">Breadcrumb 1</BreadcrumbItem>
+        <BreadcrumbItem href="#">Breadcrumb 2</BreadcrumbItem>
+      </Breadcrumb>
+    </PageHeader.BreadcrumbBar>
+    ...
+  </PageHeader.Root>
+);
+```
+
+**Action Item Type:**
+
+Each action item in the `actions` array must conform to the
+[`PageHeaderBreadcrumbPageActionItem`](packages/ibm-products/src/components/PageHeader/next/PageHeaderBreadcrumbPageActions.tsx:20-37)
+interface:
+
+```typescript
+interface PageHeaderBreadcrumbPageActionItem {
+  id: string; // Unique identifier
+  label: string; // Used for icon description and overflow menu text
+  renderIcon: React.ComponentType; // Icon component to render
+  onClick?: () => void; // Optional click handler
+}
+```
+
+**Props:**
+
+- `actions` (required): Array of
+  [`PageHeaderBreadcrumbPageActionItem`](packages/ibm-products/src/components/PageHeader/next/PageHeaderBreadcrumbPageActions.tsx:20-37)
+  objects
+- `buttonSize`: Size of action buttons (`'sm'`, `'md'`, `'lg'`). Default: `'md'`
+- `buttonKind`: Kind of action buttons (`'ghost'`, `'primary'`, `'secondary'`,
+  etc.). Default: `'ghost'`
+- `overflowMenuLabel`: Aria label for the overflow menu. Default:
+  `'More page actions'`
+- `className`: Optional CSS class name for custom styling
+
+```jsx
+import { Bee, Activity } from '@carbon/icons-react';
+
+const BeeIcon = () => <Bee size={16} />;
+
+const pageActions = (
+  <Button
+    renderIcon={Activity}
+    iconDescription="Icon Description 1"
+    hasIconOnly
+    size="md"
+    kind="ghost"
+  />
+);
+
+const contentActions = <Button size="md">Button</Button>;
+
+return (
+  <PageHeader.Root>
+    <PageHeader.BreadcrumbBar
+      renderIcon={BeeIcon}
+      contentActions={contentActions}
+      pageActions={pageActions}
+    >
+      <Breadcrumb>
+        <BreadcrumbItem href="/#">Breadcrumb 1</BreadcrumbItem>
+        <BreadcrumbItem href="#">Breadcrumb 2</BreadcrumbItem>
+        <PageHeader.TitleBreadcrumb>Title</PageHeader.TitleBreadcrumb>
+      </Breadcrumb>
+    </PageHeader.BreadcrumbBar>
+    ...
+  </PageHeader.Root>
+);
+```
+
+### Dynamic Action Rendering
+
+Both
+[`contentActions`](packages/ibm-products/src/components/PageHeader/next/PageHeaderBreadcrumbBar.tsx:37-39)
+and
+[`pageActions`](packages/ibm-products/src/components/PageHeader/next/PageHeaderBreadcrumbBar.tsx:48-50)
+support two rendering patterns:
+
+1. **Static rendering**: Pass a React node directly for default behavior
+2. **Function rendering**: Pass a function that receives observer state and
+   returns a React node
+
+When using function rendering, your function receives a
+[`PageHeaderObserverState`](packages/ibm-products/src/components/PageHeader/next/context.ts:23-27)
+object with:
+
+- `fullyCollapsed`: boolean - Whether the content area is fully collapsed
+- `titleClipped`: boolean - Whether the title is clipped
+- `contentActionsClipped`: boolean - Whether the content actions are clipped
+
+This enables conditional rendering based on scroll position. For example, you
+can show actions in the breadcrumb bar only when they're clipped in the content
+area:
+
+<Canvas
+  className="page-header--docs-demo"
+  of={PageHeaderStories.CustomRenderWithCallbacks}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () =>
+        stackblitzPrefillConfig({
+          story: PageHeaderStories.CustomRenderWithCallbacks,
+          status: {
+            preview: ['PageHeader'],
+          },
+          customFunctionDefs: customFunctionArr,
+          customImports: [
+            `import { Button } from '@carbon/react';`,
+            `import { Add, Bee, CloudFoundry_1, AiGenerate, Activity } from '@carbon/react/icons';`,
+          ],
+          styles: PageHeaderStories.default.parameters.styles,
+        }),
+    },
+  ]}
+/>
+
+```jsx
+<PageHeader.Root
+  onContentActionsClipped={(clipped) =>
+    console.log('Actions clipped:', clipped)
+  }
+>
+  <PageHeader.BreadcrumbBar
+    // Function rendering: show actions only when clipped
+    contentActions={({ contentActionsClipped }) =>
+      contentActionsClipped ? (
+        <PageHeader.ContentPageActions
+          menuButtonLabel="Actions"
+          actions={actionItems}
+        />
+      ) : null
+    }
+    pageActions={breadcrumbPageActions}
+  >
+    <Breadcrumb>
+      <BreadcrumbItem href="/#">Breadcrumb 1</BreadcrumbItem>
+      <BreadcrumbItem href="#">Breadcrumb 2</BreadcrumbItem>
+    </Breadcrumb>
+  </PageHeader.BreadcrumbBar>
+
+  <PageHeader.Content
+    title="Page Title"
+    // Function rendering: hide actions when fully collapsed
+    pageActions={({ fullyCollapsed }) =>
+      !fullyCollapsed ? (
+        <PageHeader.ContentPageActions
+          menuButtonLabel="Actions"
+          actions={actionItems}
+        />
+      ) : null
+    }
+  >
+    <PageHeader.ContentText subtitle="Subtitle">
+      Page description text
+    </PageHeader.ContentText>
+  </PageHeader.Content>
+</PageHeader.Root>
+```
+
+**Key benefits:**
+
+- Actions in
+  [`BreadcrumbBar`](packages/ibm-products/src/components/PageHeader/next/PageHeaderBreadcrumbBar.tsx:57)
+  and
+  [`Content`](packages/ibm-products/src/components/PageHeader/next/PageHeaderContent.tsx:65)
+  can operate independently
+- Choose static nodes for simple cases or functions for dynamic behavior
+- Create responsive scroll-based interactions without managing state
+- Backward compatible - existing code using React nodes continues to work
+
+## PageHeader.Content
+
+<Canvas
+  className="page-header--docs-demo"
+  of={PageHeaderStories.ContentWithContextualActionsAndPageActions}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () =>
+        stackblitzPrefillConfig({
+          story: PageHeaderStories.ContentWithContextualActionsAndPageActions,
+          status: {
+            preview: ['PageHeader'],
+          },
+          customFunctionDefs: customFunctionArr,
+          customImports: [
+            `import { Add, AiGenerate, Activity, Bee, CloudFoundry_1 } from '@carbon/react/icons';`,
+            `import { Button } from '@carbon/react';`,
+          ],
+          styles: PageHeaderStories.default.parameters.styles,
+        }),
+    },
+  ]}
+/>
+
+The
+[`PageHeader.Content`](packages/ibm-products/src/components/PageHeader/next/PageHeaderContent.tsx:65)
+component defines the primary content area of the PageHeader, including the
+title, subtitle, and any supporting text or contextual actions. It accepts a
+`title` prop to display the main heading and can optionally include a
+`renderIcon` prop to show an icon adjacent to the title. Child components such
+as
+[`PageHeader.ContentText`](packages/ibm-products/src/components/PageHeader/next/PageHeaderContentText.tsx:1)
+can be used to provide additional descriptive text. To support use cases such as
+tags, `contextualActions` can be passed as a prop to render components beside
+the content.
+
+The
+[`pageActions`](packages/ibm-products/src/components/PageHeader/next/PageHeaderContent.tsx:60-62)
+prop supports both static React nodes and function rendering. When using a
+function, it receives
+[`PageHeaderObserverState`](packages/ibm-products/src/components/PageHeader/next/context.ts:23-27)
+allowing you to conditionally render actions based on scroll position (e.g.,
+hide actions when content is fully collapsed).
+
+The
+[`PageHeader.ContentPageActions`](packages/ibm-products/src/components/PageHeader/next/PageHeaderContentPageActions.tsx:1)
+component provides responsive behavior by collapsing actions into a `MenuButton`
+when the viewport width is reduced. To enable this functionality, it expects an
+array of action objects with a specific API shape, as demonstrated below:
+
+```jsx
+
+const actionItems = [
+  {
+    // props used for both collapse menu item and non-collapsed action form
+    id: 'action1',
+    onClick: () => console.log(`Action 1`),
+    // component to render when non-collapsed
+    body: (
+      <Button
+        renderIcon={AiGenerate}
+        iconDescription="Icon Description 1"
+        hasIconOnly
+        size="md"
+        kind="ghost"
+      />
+    ),
+    // props to pass to the corresponding collapsed menu item
+    menuItem: {
+      label: 'action 1',
+    },
+  },
+  ...
+];
+
+return (
+  <PageHeader.Root>
+   ...
+    <PageHeader.Content
+      title="Title text"
+      contextualActions={
+        <>
+          <Tag className="tag" type="blue" size="lg">
+            Tag
+          </Tag>
+        </>
+      }
+      pageActions={
+        <PageHeader.ContentPageActions
+          menuButtonLabel="Actions"
+          actions={actionItems}></PageHeader.ContentPageActions>
+      }>
+      <PageHeader.ContentText subtitle="Subtitle">
+        Built for modern teams, our technology platform simplifies complexity
+        with powerful APIs, real-time collaboration tools, and seamless
+        integration. From deployment to monitoring, we help you ship faster,
+        scale efficiently, and stay in control every step of the way.
+      </PageHeader.ContentText>
+    </PageHeader.Content>
+  </PageHeader.Root>
+)
+```
+
+### PageHeader.Content With Hero Image
+
+<Canvas
+  className="page-header--docs-demo"
+  of={PageHeaderStories.ContentWithHeroImage}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () =>
+        stackblitzPrefillConfig({
+          story: PageHeaderStories.ContentWithHeroImage,
+          status: {
+            preview: ['PageHeader'],
+          },
+          customFunctionDefs: [
+            `const BreadcrumbBeeIcon = () => <Bee size={16} />;`,
+            `const image1 = 'https://placehold.co/600x400';`,
+            `const image2 = 'https://placehold.co/600x400';`,
+          ],
+          customImports: [
+            `import { Button } from '@carbon/react';`,
+            `import { breakpoints } from '@carbon/layout';`,
+            `import { Bee } from '@carbon/react/icons';`,
+          ],
+          styles: PageHeaderStories.default.parameters.styles,
+        }),
+    },
+  ]}
+/>
+
+When including a hero image within the `PageHeader`, the `Grid` and `Column`
+components will need to be utilized in order to define the layout correctly.
+
+The
+[`PageHeader.HeroImage`](packages/ibm-products/src/components/PageHeader/next/PageHeaderHeroImage.tsx:38)
+component uses Carbon's `AspectRatio` component to maintain a consistent aspect
+ratio (3×2 on mobile/tablet, 2×1 on desktop). It accepts an `objectFit` prop to
+control how the image fills the container:
+
+- `'cover'` (default): Image fills container, may crop edges
+- `'contain'`: Image fits within container, may show empty space
+- `'fill'`: Image stretches to fill container
+- `'none'`: Image uses its natural size
+
+```jsx
+import { Grid, Column } from '@carbon/react';
+
+return (
+  <PageHeader.Root>
+    <Grid>
+      <Column lg={8} md={4} sm={4}>
+        <PageHeader.BreadcrumbBar ... />
+        <PageHeader.Content ... />
+      </Column>
+      <Column lg={8} md={4} sm={0}>
+        <PageHeader.HeroImage objectFit="cover">
+          <picture>
+            <source
+              srcset={image1}
+              media={`(min-width: ${breakpoints.lg.width})`}
+            />
+            <source
+              srcset={image2}
+              media={`(max-width: ${breakpoints.lg.width})`}
+            />
+            <img
+              src={image1}
+              alt="a default image"
+            />
+          </picture>
+        </PageHeader.HeroImage>
+      </Column>
+    </Grid>
+  </PageHeader.Root>
+)
+
+```
+
+**Note:** The hero image is automatically constrained to prevent horizontal
+overflow. The image will be centered within its container and maintain the
+specified aspect ratio across all viewport sizes.
+
+## PageHeader.TabBar
+
+To render the Tabs zone, utilize the `PageHeader.TabBar` component, passing in
+the `TabList` and `Tab` components as its children. Then set up the `TabPanels`
+and `TabPanel` components outside of the `PageHeader`, making sure to wrap all
+components within the `Tabs` component to ensures proper linkage of tab and its
+associated panel.
+
+```jsx
+<Tabs>
+  <PageHeader.Root>
+    ...
+    <PageHeader.TabBar>
+      <TabList>
+        <Tab>Dashboard</Tab>
+        <Tab>Monitoring</Tab>
+        <Tab>Activity</Tab>
+        <Tab>Settings</Tab>
+      </TabList>
+    </PageHeader.TabBar>
+  </PageHeader.Root>
+  <TabPanels>
+    <TabPanel>Dashboard Tab Panel</TabPanel>
+    <TabPanel>Monitoring Tab Panel</TabPanel>
+    <TabPanel>Activity Tab Panel</TabPanel>
+    <TabPanel>Settings Tab Panel</TabPanel>
+  </TabPanels>
+</Tabs>
+```
+
+### PageHeader.TabBar With Tags
+
+<Canvas
+  className="page-header--docs-demo"
+  of={PageHeaderStories.TabBarWithTabsAndTags}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () =>
+        stackblitzPrefillConfig({
+          story: PageHeaderStories.TabBarWithTabsAndTags,
+          status: {
+            preview: ['PageHeader'],
+          },
+          customFunctionDefs: [
+            ...customFunctionArr,
+            `const renderUIShellHeader = () => (
+              <HeaderContainer
+                render={() => (
+                  <Header aria-label="Application header">
+                    <HeaderName href="/">Application header</HeaderName>
+                  </Header>
+                )}
+              />
+            );`,
+            `const tabBarTags = [
+              <Tag type="blue" id="example-tag-1" key="example-tag-1">
+                Tag 1
+              </Tag>,
+              <Tag type="purple" id="example-tag-2" key="example-tag-2">
+                Tag 2
+              </Tag>,
+              <Tag type="red" id="example-tag-3" key="example-tag-3">
+                Tag 3
+              </Tag>,
+              <OperationalTag
+                type="blue"
+                id="example-tag-4"
+                key="example-tag-4"
+                text="Tag 4"
+              />,
+              <Tag type="purple" id="example-tag-5" key="example-tag-5">
+                Tag 5
+              </Tag>,
+              <Tag type="red" id="example-tag-6" key="example-tag-6">
+                Tag 6
+              </Tag>,
+            ];`,
+          ],
+          customImports: [
+            `import { Button, Tag, HeaderContainer, Header, HeaderName } from '@carbon/react';`,
+            `import { Add, AiGenerate, Activity, Bee, CloudFoundry_1 } from '@carbon/react/icons';`,
+          ],
+          styles: PageHeaderStories.default.parameters.styles,
+        }),
+    },
+  ]}
+/>
+
+The `PageHeader.TabsBar` component accepts a `tags` prop expecting a react node.
+If you wish to handle overflowing logic on your own, you can pass any node to
+this prop. You can also use the tag overflow sub component
+(`PageHeader.TagOverflow`), which will handle the overflowing logic for you, yet
+still remains unopinionated and composable enough to allow you to take rendering
+responsibility for the overflow/operational tag and the contents within the
+popover via two render props, `renderOverflowTag` and `renderPopoverContent`.
+
+```jsx
+const tags = [
+  <Tag type="blue" id="example-tag-1">
+    Tag 1
+  </Tag>,
+  <Tag type="purple" id="example-tag-2">
+    Tag 2
+  </Tag>,
+  <Tag type="red" id="example-tag-3">
+    Tag 3
+  </Tag>,
+  <OperationalTag type="blue" id="example-tag-4" text="Tag 4" />,
+  <Tag type="purple" id="example-tag-5">
+    Tag 5
+  </Tag>,
+  <Tag type="red" id="example-tag-6">
+    Tag 6
+  </Tag>,
+];
+
+return (
+  <Tabs>
+    <PageHeader.Root>
+      <PageHeader.TabBar
+        tags={
+          <PageHeader.TagOverflow
+            renderOverflowTag={(
+              hiddenItems,
+              handleOverflowClick,
+              openPopover
+            ) => (
+              <OperationalTag
+                onClick={handleOverflowClick}
+                aria-expanded={openPopover}
+                text={`+${hiddenItems.length}`}
+              />
+            )}
+            renderPopoverContent={(hiddenItems) => {
+              return hiddenItems.map((i, index) => {
+                const foundJSXTag = tabBarTags.find((c) => c.props.id === i.id);
+                return cloneElement(foundJSXTag, {
+                  id: `cloned-tag-node-id-${index}`,
+                  key: `cloned-tag-key-${index}`,
+                });
+              });
+            }}
+          >
+            {tags}
+          </PageHeader.TagOverflow>
+        }
+      >
+        <TabList>
+          <Tab>Tab 1</Tab>
+          ...
+        </TabList>
+      </PageHeader.TabBar>
+    </PageHeader.Root>
+    <TabPanels>
+      <TabPanel>Tab Panel 1</TabPanel>
+      ...
+    </TabPanels>
+  </Tabs>
+);
+```
+
+### PageHeader.TabBar With scroller button
+
+To include the scroller button to expand and collapse the header, pass
+`PageHeader.ScrollButton` to the `scroller` prop of the tab bar.
+
+```jsx
+<Tabs>
+  <PageHeader.Root>
+    <PageHeader.TabBar tags={tags} scroller={<PageHeader.ScrollButton />}>
+      <TabList>
+        <Tab>Tab 1</Tab>
+        ...
+      </TabList>
+    </PageHeader.TabBar>
+  </PageHeader.Root>
+  <TabPanels>
+    <TabPanel>Tab Panel 1</TabPanel>
+    ...
+  </TabPanels>
+</Tabs>
+```
+
+## Component API
+
+<ArgTypes />
+
+## Feedback
+
+Help us improve this component by providing feedback, asking questions on Slack,
+or updating this file on
+[GitHub](https://github.com/carbon-design-system/carbon/edit/main/packages/react/src/components/PageHeader/PageHeader.mdx).

@@ -1,0 +1,116 @@
+/*
+* Copyright IBM Corp. 2023, 2024
+*
+* This source code is licensed under the Apache-2.0 license found in the
+* LICENSE file in the root directory of this source tree.
+*/
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/type';
+@use '@carbon/styles/scss/motion' as *;
+@use '@carbon/type/scss/font-family' as *;
+
+$prefix: 'c4p';
+$carbon-prefix: 'cds';
+$story-prefix: #{$prefix}--notifications-panel__story;
+$block-class: #{$prefix}--notifications-panel;
+
+.#{$story-prefix}__story-container {
+  position: fixed;
+  display: grid;
+  block-size: 100vh;
+  grid-template-rows: 3rem 1fr;
+  inline-size: 100vw;
+  inset-block-start: 0;
+  inset-inline-start: 0;
+}
+.#{$story-prefix}body-content {
+  display: flex;
+  flex-direction: column;
+  padding: $spacing-05;
+  gap: $spacing-05;
+}
+
+.#{$story-prefix}text-inputs {
+  display: flex;
+  gap: $spacing-05;
+
+  > * {
+    flex-basis: 50%;
+  }
+}
+
+.#{$story-prefix}story-container {
+  position: fixed;
+  display: grid;
+  block-size: 100vh;
+  grid-template-rows: 3rem 1fr;
+  inline-size: 100vw;
+  inset-block-start: 0;
+  inset-inline-start: 0;
+}
+
+.#{$story-prefix}story-header {
+  background: $background-inverse;
+}
+
+.#{$story-prefix}story-content {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.#{$story-prefix}__header-panel {
+  padding: $spacing-10 $spacing-05 0;
+  font-weight: bold;
+  line-height: 1.4;
+  text-align: center;
+}
+.#{$block-class}__notification-description {
+  @include type.type-style('label-01');
+
+  color: $text-secondary;
+}
+
+.#{$block-class}__notification-read-more-button,
+.#{$block-class}__notification-read-less-button {
+  @include type.type-style('label-01');
+
+  display: flex;
+  align-items: center;
+  padding: 0;
+  min-inline-size: 5.5rem;
+
+  .#{carbon-prefix}--btn__icon {
+    // stylelint-disable-next-line carbon/motion-easing-use
+    transition: transform $duration-moderate-02 ease;
+    /* stylelint-disable-next-line max-nesting-depth */
+    @media (prefers-reduced-motion: reduce) {
+      transition: none;
+    }
+  }
+  &.#{$block-class}__notification-read-more-button {
+    .#{$carbon-prefix}--btn__icon {
+      transform: rotate(0deg);
+    }
+  }
+  &.#{$block-class}__notification-read-less-button {
+    .#{$carbon-prefix}--btn__icon {
+      transform: rotate(180deg);
+    }
+  }
+}
+.#{$block-class}__notification-title {
+  @include type.type-style('heading-01');
+
+  color: $text-secondary;
+  margin-block-end: $spacing-02;
+  @include font-weight('regular');
+}
+
+.#{$block-class}__notification-title-unread {
+  color: $text-secondary;
+  margin-block-end: $spacing-02;
+  @include font-weight('semibold');
+}

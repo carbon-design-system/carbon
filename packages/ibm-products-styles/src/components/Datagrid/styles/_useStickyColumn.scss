@@ -1,0 +1,72 @@
+/**
+ * Copyright IBM Corp. 2024
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use './variables';
+
+.#{variables.$block-class}__right-sticky-column-cell {
+  /* stylelint-disable-next-line declaration-no-important */
+  position: sticky !important;
+  display: flex;
+  align-items: center;
+  border-inline-start: 1px solid $border-subtle;
+  inset-inline-end: 0;
+}
+
+.#{variables.$block-class}__right-sticky-column-header {
+  /* stylelint-disable-next-line declaration-no-important */
+  position: sticky !important;
+  inset-inline-end: 0;
+}
+
+.#{variables.$block-class}__left-sticky-column-cell {
+  /* stylelint-disable-next-line declaration-no-important */
+  position: sticky !important;
+  display: flex;
+  align-items: center;
+  border-inline-end: 1px solid $border-subtle;
+  inset-inline-start: 0;
+}
+
+.#{variables.$block-class}__left-sticky-column-header {
+  /* stylelint-disable-next-line declaration-no-important */
+  position: sticky !important;
+  z-index: 10;
+  border-inline-end: 1px solid $border-subtle;
+  inset-inline-start: 0;
+}
+
+.#{variables.$block-class}__right-sticky-column-header {
+  border-inline-start: 1px solid $border-subtle;
+}
+
+.#{variables.$block-class}__left-sticky-column-cell.#{variables.$block-class}__left-sticky-column-cell--with-extra-select-column,
+.#{variables.$block-class}__left-sticky-column-header.#{variables.$block-class}__left-sticky-column-header--with-extra-select-column {
+  inset-inline-start: $spacing-09;
+}
+
+.#{variables.$block-class}__sticky-noShadow {
+  box-shadow: none;
+}
+
+.#{variables.$block-class}__sticky-column-noShadow {
+  .#{variables.$block-class}__right-sticky-column-cell {
+    box-shadow: none;
+  }
+}
+
+.#{variables.$block-class}__right-sticky-column-offset-scroll {
+  /* stylelint-disable-next-line */
+  inset-inline-end: 6px !important; // offset the vertical scroll bar in the table body
+}
+
+.#{variables.$block-class}__select-all-toggle-on.#{variables.$block-class}__select-all-sticky-left {
+  position: sticky;
+  z-index: 10;
+  inset-inline-start: 0;
+}

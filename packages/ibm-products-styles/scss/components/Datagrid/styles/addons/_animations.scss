@@ -1,0 +1,56 @@
+//
+// Copyright IBM Corp. 2025, 2025
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@keyframes filter-panel-entrance-reduced {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes filter-panel-exit-reduced {
+  0% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes filter-panel-entrance-left {
+  0% {
+    inline-size: 0;
+    opacity: 0;
+    /* stylelint-disable-next-line carbon/layout-use */
+    transform: translateX(calc(var(--panel-transform, 320px) * -1));
+  }
+
+  100% {
+    inline-size: var(--panel-transform, 320px);
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes filter-panel-exit-left {
+  0% {
+    inline-size: var(--panel-transform, 320px);
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  100% {
+    inline-size: 0;
+    opacity: 0;
+    /* stylelint-disable-next-line carbon/layout-use */
+    transform: translateX(calc(var(--panel-transform, 320px) * -1));
+  }
+}

@@ -1,0 +1,149 @@
+/**
+ * Copyright IBM Corp. 2026
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/type' as *;
+
+$c4p-prefix: 'c4p';
+$carbon-prefix: 'cds';
+
+
+.example-container {
+  padding: $spacing-05;
+  max-width: 800px;
+
+  h3 {
+    @include type-style('heading-03');
+    margin-bottom: $spacing-03;
+  }
+
+  p {
+    @include type-style('body-01');
+    margin-bottom: $spacing-05;
+  }
+
+  .selected-item-display {
+    @include type-style('body-01');
+    padding: $spacing-04;
+    background-color: $layer-01;
+    border: 1px solid $border-subtle-01;
+    border-radius: 4px;
+    margin-bottom: $spacing-05;
+
+    strong {
+      font-weight: 600;
+    }
+  }
+
+  .no-selection {
+    @include type-style('body-01');
+    color: $text-secondary;
+    font-style: italic;
+  }
+
+  .launch-button {
+    margin-top: $spacing-03;
+  }
+}
+
+.notification {
+  position: fixed;
+  top: $spacing-05;
+  right: $spacing-05;
+  z-index: 9999;
+}
+
+
+// Styles for add-select content within tearsheet
+.add-select-content {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  gap: $spacing-05;
+
+  .add-select-search {
+    padding: 0 $spacing-05;
+  }
+
+  .add-select-items-section {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+
+    .add-select-items-label {
+      @include type-style('label-01');
+      font-weight: 600;
+      color: $text-primary;
+      margin: 0 0 $spacing-03 $spacing-05;
+      padding: 0;
+    }
+
+    c4p-add-select-list {
+      flex: 1;
+      overflow-y: auto;
+    }
+
+    .add-select-no-results {
+      padding: $spacing-07 $spacing-05;
+      text-align: center;
+      color: $text-secondary;
+
+      p {
+        @include type-style('body-01');
+        margin: $spacing-03 0;
+      }
+
+      strong {
+        color: $text-primary;
+      }
+    }
+  }
+}
+
+.no-results {
+  padding: $spacing-09 $spacing-05;
+  text-align: center;
+
+  &__title {
+    @include type-style('heading-03');
+    color: $text-primary;
+    margin: 0 0 $spacing-03 0;
+  }
+
+  &__description {
+    @include type-style('body-01');
+    color: $text-secondary;
+    margin: 0;
+  }
+}
+
+cds-toast-notification {
+  position: absolute;
+  top: $spacing-05;
+  right: $spacing-05;
+  z-index: 9999;
+}
+
+// Footer action buttons styles - equal width buttons
+.default__action-buttons {
+  display: flex;
+  width: 100%;
+  height: 100%;
+
+  > #{$carbon-prefix}-button {
+    flex: 1;
+    block-size: 100%;
+    max-inline-size: none;
+  }
+}
+// todo: this is not working, fix this style rule to remove extra padding
+// Override tearsheet padding for add-select content
+#{$c4p-prefix}-tearsheet-body .#{$c4p-prefix}--tearsheet__next__main-content {
+  padding-inline: 0;
+}

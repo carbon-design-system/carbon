@@ -1,0 +1,25 @@
+//
+// Copyright IBM Corp. 2021, 2021
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+/// List of Carbon style modules used.
+/// @type List
+/// @access public
+$imported-carbon-modules: 'css--reset' 'css--default-type' 'skeleton'
+  'helper-classes' 'css--font-face' 'css--helpers' 'css--body' 'grid'
+  'accordion' 'link' 'breadcrumb' 'button' 'form' 'checkbox' 'snippet'
+  'list-box' 'combo-box' 'content-switcher' 'copy-button' 'data-table-v2-action'
+  'data-table-v2-core' 'data-table-v2-expandable' 'data-table-sort'
+  'data-table-inline-edit' 'data-table-skeleton' 'date-picker' 'dropdown'
+  'loading' 'file-uploader' 'inline-loading' 'lists' 'menu' 'modal'
+  'multi-select' 'inline-notifications' 'toast-notifications' 'number-input'
+  'overflow-menu' 'pagination-nav' 'select' 'text-input' 'pagination'
+  'progress-bar' 'tooltip' 'progress-indicator' 'radio-button' 'search'
+  'skeleton-text' 'skeleton-icon' 'skeleton-placeholder' 'slider'
+  'structured-list' 'tabs' 'tags' 'text-area' 'tile' 'time-picker' 'toggle'
+  'toolbar' 'unstable_pagination' 'carbon-header' 'carbon-header-panel'
+  'product-switcher' 'carbon-header-switcher' 'carbon-side-nav'
+  'carbon-navigation' 'carbon-content' 'treeview';

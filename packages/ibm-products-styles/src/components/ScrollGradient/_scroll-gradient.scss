@@ -1,0 +1,132 @@
+//
+// Copyright IBM Corp. 2024, 2024
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+// Standard imports.
+@use '../../global/styles/project-settings' as c4p-settings;
+@use '../../global/styles/mixins';
+@use '@carbon/styles/scss/motion' as *;
+@use '@carbon/styles/scss/spacing' as *;
+
+$block-class: #{c4p-settings.$pkg-prefix}--scroll-gradient;
+$intersection-value: 3rem;
+
+.#{$block-class} {
+  position: relative;
+  display: flex;
+  align-items: stretch;
+  justify-content: stretch;
+  block-size: inherit;
+  inline-size: inherit;
+}
+.#{$block-class}__content {
+  display: grid;
+  overflow: auto;
+  block-size: inherit;
+  grid-template-columns: 1fr;
+  inline-size: 100%;
+}
+
+.#{$block-class}__content-children {
+  block-size: 100%;
+  grid-column-start: 1;
+  grid-row-start: 1;
+  inline-size: 100%;
+}
+
+.#{$block-class}__content-children > * {
+  grid-area: 1 / 1;
+}
+// All gradients
+.#{$block-class}__start-vertical,
+.#{$block-class}__start-horizontal,
+.#{$block-class}__end-vertical,
+.#{$block-class}__end-horizontal {
+  position: absolute;
+  z-index: 1;
+  display: none;
+  pointer-events: none;
+}
+
+// Vertical start
+.#{$block-class}--y-scrollable .#{$block-class}__start-vertical {
+  block-size: $spacing-09;
+  inset-block-start: 0;
+  inset-inline-start: 0;
+}
+// Vertical end
+.#{$block-class}--y-scrollable .#{$block-class}__end-vertical {
+  block-size: $spacing-09;
+  inset-block-end: 0;
+  inset-inline-start: 0;
+}
+
+// Horizontal start
+.#{$block-class}--x-scrollable .#{$block-class}__start-horizontal {
+  inline-size: $spacing-09;
+  inset-block-start: 0;
+  inset-inline-start: 0;
+}
+
+// Horizontal end
+.#{$block-class}--x-scrollable .#{$block-class}__end-horizontal {
+  inline-size: $spacing-09;
+  inset-block-start: 0;
+  inset-inline-end: 0;
+}
+
+// Vertical start states
+.#{$block-class}--y-started.#{$block-class}--y-scrollable
+  .#{$block-class}__start-vertical,
+.#{$block-class}--y-end.#{$block-class}--y-scrollable
+  .#{$block-class}__start-vertical {
+  display: block;
+}
+
+// Vertical end states
+.#{$block-class}--y-initial.#{$block-class}--y-scrollable
+  .#{$block-class}__end-vertical,
+.#{$block-class}--y-started.#{$block-class}--y-scrollable
+  .#{$block-class}__end-vertical {
+  display: block;
+}
+
+// Horizontal start states
+.#{$block-class}--x-started.#{$block-class}--x-scrollable
+  .#{$block-class}__start-horizontal,
+.#{$block-class}--x-end.#{$block-class}--x-scrollable
+  .#{$block-class}__start-horizontal {
+  display: block;
+}
+
+// Horizontal end states
+.#{$block-class}--x-initial.#{$block-class}--x-scrollable
+  .#{$block-class}__end-horizontal,
+.#{$block-class}--x-started.#{$block-class}--x-scrollable
+  .#{$block-class}__end-horizontal {
+  display: block;
+}
+
+.#{$block-class} [data-start-vertical],
+.#{$block-class} [data-end-vertical] {
+  block-size: $intersection-value;
+  grid-column-start: 1;
+  grid-row-start: 1;
+  inline-size: 100%;
+}
+
+.#{$block-class} [data-end-vertical],
+.#{$block-class} [data-end-horizontal] {
+  place-self: flex-end;
+}
+
+.#{$block-class} [data-start-horizontal],
+.#{$block-class} [data-end-horizontal] {
+  block-size: 100%;
+  grid-column-start: 1;
+  grid-row-start: 1;
+  inline-size: $intersection-value;
+}

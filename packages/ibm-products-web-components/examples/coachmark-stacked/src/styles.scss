@@ -1,0 +1,191 @@
+/*
+* Copyright IBM Corp. 2026
+*
+* This source code is licensed under the Apache-2.0 license found in the
+* LICENSE file in the root directory of this source tree.
+*/
+
+@use '@carbon/styles' with (
+  $font-path: '@ibm/plex'
+);
+
+@use '@carbon/utilities/scss/carousel/_index' as carousel;
+@use '@carbon/ibm-products-web-components/scss/components/coachmark/coachmark-tagline/coachmark-tagline.scss';
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/type';
+@use '@carbon/styles/scss/motion' as *;
+@use '@carbon/styles/scss/theme' as *;
+@include carousel.carousel();
+@include carousel.wrapperStyles();
+
+$prefix: 'c4p';
+$carbon-prefix: 'cds';
+$stack-home-class: 'coachmark-stacked-home';
+$stacked-coachmark: 'stacked-coachmark';
+
+/* Parent coachmark positioning */
+/* stylelint-disable-next-line selector-type-no-unknown */
+.parent-coachmark #{$prefix}-coachmark::part(popover) {
+  inset-block-end: 0;
+  inset-inline-end: 160px;
+}
+
+/* Child coachmark positioning - match parent position */
+/* stylelint-disable-next-line selector-type-no-unknown */
+.stacked_element_content::part(popover) {
+  inset-block-end: 0;
+  inset-inline-end: 160px;
+}
+
+/* stylelint-disable-next-line selector-type-no-unknown */
+#{$prefix}-coachmark::part(popover-container) {
+  position: absolute;
+}
+
+/* stylelint-disable-next-line selector-type-no-unknown */
+#{$prefix}-coachmark::part(content) {
+  inset-block-start: 0px;
+}
+
+/* stylelint-disable-next-line selector-type-no-unknown */
+#{$prefix}-coachmark-body {
+  display: flex;
+  flex-direction: column;
+  inline-size: 256px;
+
+  h2 {
+    @include type.type-style('productive-heading-02');
+
+    margin: 0 0 $spacing-03;
+  }
+
+  p {
+    @include type.type-style('body-long-01');
+
+    margin: 0 0 $spacing-03;
+  }
+  /* stylelint-disable-next-line selector-type-no-unknown */
+  #{$carbon-prefix}-button {
+    align-self: flex-end;
+    justify-content: flex-end;
+  }
+
+  .exampleCarouselWrapper {
+    // Remove fixed height to allow carousel to use max height of all pages
+    margin-inline-end: $spacing-05;
+  }
+
+  .coachmark-stacked-home__nav-links
+  
+    #{$carbon-prefix}-button button
+    {
+      padding-inline : 0px;
+    }
+  
+}
+
+.carouselControlWrapper__footer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;   
+}
+
+.carouselControlWrapper--buttons {
+  display: flex;
+  gap: $spacing-03;
+}
+
+.carouselControlWrapper--controls-progress {
+  justify-self: flex-start;
+  margin-inline-end: auto;
+  @include type.type-style('helper-text-01');
+
+.coachmark-stacked-home--scaled-content,
+.coachmark-stacked-home--scaled-content::part(popover-container) {
+  opacity: 0.8 !important;
+  transform: scale(0.9) !important;
+  transform-origin: top center !important;
+  transition: transform $duration-moderate-02 motion(exit, productive),
+    opacity $duration-moderate-02 motion(exit, productive) !important;
+  pointer-events: none !important;
+}
+
+.coachmark-stacked-home--unscaled-content,
+.coachmark-stacked-home--unscaled-content::part(popover-container) {
+  opacity: 1 !important;
+}
+
+/* Update coachmark body width */
+/* stylelint-disable-next-line selector-type-no-unknown */
+#{$prefix}-coachmark-body {
+  inline-size: 18rem;
+}
+
+/* Fix for carousel views blocking button clicks */
+.carousel__view {
+  pointer-events: none;
+
+  * {
+    pointer-events: auto;
+  }
+}
+
+.carousel__view > h2 {
+  @include type.type-style('productive-heading-02');
+  margin: 0 0 $spacing-03;
+}
+
+.carousel__view > p {
+  @include type.type-style('body-long-01');
+}
+
+/* Carousel controls */
+.carouselControlWrapper__footer {
+  padding-block-start: $spacing-05;
+}
+
+/* Parent coachmark home styles */
+.#{$stack-home-class} {
+  &-element {
+    margin-block-end: $spacing-03;
+  }
+
+  &__title {
+    @include type.type-style('productive-heading-02');
+    margin: 0 0 $spacing-03;
+  }
+
+  &__body {
+    @include type.type-style('body-long-01');
+  }
+
+  &__footer {
+    margin-block-start: $spacing-05;
+  }
+}
+
+/* Stacked child coachmark styles */
+.#{$stacked-coachmark} {
+  &__content {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__title {
+    @include type.type-style('productive-heading-02');
+    margin: 0 0 $spacing-03;
+  }
+
+  &__body {
+    @include type.type-style('body-long-01');
+    margin: 0 0 $spacing-03;
+  }
+
+  &__button {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding-block-start: $spacing-05;
+  }
+}
+}

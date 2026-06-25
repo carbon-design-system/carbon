@@ -1,0 +1,30 @@
+<svg width="320" height="180" viewBox="0 0 320 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect x="60" y="41" width="200" height="109" fill="white"/>
+<rect x="60" y="29" width="200" height="13" fill="#171717"/>
+<rect opacity="0.844385" x="94" y="34.5" width="22" height="3" fill="#C6C6C6"/>
+<rect opacity="0.844385" x="67" y="34.5" width="22" height="3" fill="#C6C6C6"/>
+<rect opacity="0.844385" x="121" y="34.5" width="22" height="3" fill="#C6C6C6"/>
+<rect opacity="0.844385" x="239" y="33" width="5" height="5" fill="#C6C6C6"/>
+<rect opacity="0.844385" x="249" y="33" width="5" height="5" fill="#C6C6C6"/>
+<g style="mix-blend-mode:multiply">
+<rect x="60" y="29" width="200" height="122" fill="#8D8D8D"/>
+</g>
+<rect x="99" y="51" width="123" height="75" fill="#F4F4F4"/>
+<rect x="106" y="103" width="74" height="8" fill="white"/>
+<rect x="106" y="111" width="74" height="1" fill="#C6C6C6"/>
+<rect x="185" y="103" width="32" height="9" fill="#0062FF"/>
+<path d="M215.354 58L217 56.3535L216.647 56L215 57.6465L213.354 56L213 56.3535L214.647 58L213 59.6465L213.354 60L215 58.3535L216.647 60L217 59.6465L215.354 58V58Z" fill="black"/>
+<mask id="mask0_8_2966" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="213" y="56" width="4" height="4">
+<path d="M215.354 58L217 56.3535L216.647 56L215 57.6465L213.354 56L213 56.3535L214.647 58L213 59.6465L213.354 60L215 58.3535L216.647 60L217 59.6465L215.354 58V58Z" fill="white"/>
+</mask>
+<g mask="url(#mask0_8_2966)">
+<rect width="16" height="16" transform="translate(211 54)" fill="#171717"/>
+</g>
+<rect x="105" y="65" width="63" height="2" fill="#A8A8A8"/>
+<rect x="105" y="69" width="72" height="2" fill="#A8A8A8"/>
+<rect x="105" y="57" width="32" height="4" fill="#8D8D8D"/>
+<rect x="99" y="125" width="123" height="16" fill="#BEBEBE"/>
+<rect x="99" y="125" width="61.4035" height="16" fill="#393939"/>
+<rect x="160" y="125" width="1" height="16" fill="#F4F4F4"/>
+<rect x="106.5" y="77.5" width="73" height="18" stroke="#8D8D8D" stroke-dasharray="2 2"/>
+</svg>

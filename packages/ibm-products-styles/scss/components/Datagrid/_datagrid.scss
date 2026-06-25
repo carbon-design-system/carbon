@@ -1,0 +1,85 @@
+//
+// Copyright IBM Corp. 2022, 2025
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+// Standard imports.
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/config' as carbon-config;
+
+@use '../../global/styles/project-settings' as c4p-settings;
+@use '../../global/styles/mixins';
+
+@use './styles/index';
+
+/* stylelint-disable max-nesting-depth */
+
+// Other Carbon settings.
+// TODO: @use '@carbon/styles/scss/grid'; if needed
+
+// Datagrid uses the following Carbon components:
+// TODO: @use(s) of Carbon component styles used by Datagrid
+
+// Datagrid uses the following Carbon for IBM Products components:
+// TODO: @use(s) of IBM Products component styles used by Datagrid
+@use '../ButtonMenu';
+@use '../FilterSummary';
+
+// The block part of our conventional BEM class names (blockClass__E--M).
+$block-class: #{c4p-settings.$pkg-prefix}--datagrid;
+
+.#{$block-class}__datagridWrap {
+  display: block;
+  inline-size: 100%;
+
+  .#{carbon-config.$prefix}--checkbox {
+    display: none;
+  }
+}
+
+.#{$block-class}
+  .#{c4p-settings.$pkg-prefix}--datagrid__row-size-options-container
+  .#{carbon-config.$prefix}--popover-container
+  .#{carbon-config.$prefix}--btn--icon-only {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  block-size: $spacing-09;
+  inline-size: $spacing-09;
+  padding-block-start: 0;
+}
+
+.#{$block-class}
+  .#{c4p-settings.$pkg-prefix}--datagrid__row-size-options-container
+  .#{c4p-settings.$pkg-prefix}--datagrid__row-size-dropdown {
+  padding: $spacing-05;
+  background-color: $layer;
+}
+
+.#{$block-class}__datagridWrap-simple {
+  display: flex;
+  flex-direction: column;
+  block-size: 100%;
+  inline-size: 100%;
+
+  .#{carbon-config.$prefix}--pagination {
+    // newer version of carbon pagination has scroll which doesn't make any sense, removing it
+    /* stylelint-disable-next-line declaration-property-value-disallowed-list */
+    overflow-x: unset;
+    @supports (overflow-inline: unset) {
+      /* stylelint-disable-next-line declaration-property-value-disallowed-list */
+      overflow-inline: unset;
+    }
+  }
+}
+
+// firefox fix for issue mentioned in 3442
+.#{$block-class}
+  .#{carbon-config.$prefix}--menu-button__trigger:not(
+    .#{carbon-config.$prefix}--btn--ghost
+  ) {
+  min-inline-size: auto;
+}

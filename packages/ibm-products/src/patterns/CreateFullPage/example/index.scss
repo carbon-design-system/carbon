@@ -1,0 +1,457 @@
+//
+// Copyright IBM Corp. 2026
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use '@carbon/styles';
+
+// Standard imports.
+@use '@carbon/layout/scss/convert' as *;
+@use '@carbon/styles/scss/breakpoint' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/type';
+@use '@carbon/styles/scss/utilities';
+@use '@carbon/styles/scss/motion' as *;
+@use '@carbon/styles/scss/config' as carbon-config;
+
+// Pattern-specific block classes
+$block-class: create-full-page-pattern;
+$action-set-block-class: action-set;
+$breadcrumb-block-class: breadcrumb-with-overflow;
+$influencer-block-class: create-influencer;
+
+// ActionSet styles
+.#{$action-set-block-class} {
+  align-items: stretch;
+  justify-content: flex-end;
+  background-color: $layer-01;
+}
+
+.#{$action-set-block-class} .#{$action-set-block-class}__action-button {
+  @include type.type-style('body-short-01');
+
+  align-items: center;
+  margin: 0;
+
+  &.#{$action-set-block-class}__action-button--expressive {
+    block-size: $spacing-10;
+    padding-block: $spacing-05 $spacing-07;
+  }
+}
+
+.#{$action-set-block-class}.#{carbon-config.$prefix}--btn-set
+  .#{$action-set-block-class}__action-button.#{carbon-config.$prefix}--btn.#{carbon-config.$prefix}--btn--expressive,
+.#{$action-set-block-class}.#{carbon-config.$prefix}--btn-set
+  .#{$action-set-block-class}__action-button.#{carbon-config.$prefix}--btn {
+  max-inline-size: none;
+}
+
+.#{$action-set-block-class}:not(.#{$action-set-block-class}--stacking)
+  .#{$action-set-block-class}__action-button--ghost {
+  padding-inline-start: $spacing-07;
+}
+
+.#{$action-set-block-class}.#{$action-set-block-class}--row-single.#{$action-set-block-class}--md
+  .#{$action-set-block-class}__action-button,
+.#{$action-set-block-class}.#{$action-set-block-class}--row-single
+  .#{$action-set-block-class}__action-button--ghost {
+  flex: 0 0 100%;
+}
+
+.#{$action-set-block-class}.#{$action-set-block-class}--row-double
+  .#{$action-set-block-class}__action-button--ghost {
+  flex: 1 1 75%;
+}
+
+.#{$action-set-block-class}.#{$action-set-block-class}--row-single.#{$action-set-block-class}--lg
+  .#{$action-set-block-class}__action-button:not(
+    .#{$action-set-block-class}__action-button--ghost
+  ),
+.#{$action-set-block-class}.#{$action-set-block-class}--row-double.#{$action-set-block-class}--md
+  .#{$action-set-block-class}__action-button,
+.#{$action-set-block-class}.#{$action-set-block-class}--row-double.#{$action-set-block-class}--lg
+  .#{$action-set-block-class}__action-button,
+.#{$action-set-block-class}.#{$action-set-block-class}--row-triple
+  .#{$action-set-block-class}__action-button--ghost {
+  flex: 0 1 50%;
+}
+
+.#{$action-set-block-class}.#{$action-set-block-class}--row-triple
+  .#{$action-set-block-class}__action-button--ghost {
+  flex: 1 1 50%;
+}
+
+.#{$action-set-block-class}.#{carbon-config.$prefix}--btn-set.#{$action-set-block-class}--row-triple.#{$action-set-block-class}--lg
+  .#{$action-set-block-class}__action-button:not(
+    .#{$action-set-block-class}__action-button--ghost
+  ),
+.#{$action-set-block-class}.#{carbon-config.$prefix}--btn-set.#{$action-set-block-class}--xl
+  .#{$action-set-block-class}__action-button:not(
+    .#{$action-set-block-class}__action-button--ghost
+  ),
+.#{$action-set-block-class}.#{carbon-config.$prefix}--btn-set.#{$action-set-block-class}--2xl
+  .#{$action-set-block-class}__action-button:not(
+    .#{$action-set-block-class}__action-button--ghost
+  ),
+.#{$action-set-block-class}.#{carbon-config.$prefix}--btn-set.#{$action-set-block-class}--row-quadruple
+  .#{$action-set-block-class}__action-button:not(
+    .#{$action-set-block-class}__action-button--ghost
+  ) {
+  flex: 0 1 25%;
+  /* stylelint-disable-next-line function-no-unknown */
+  max-inline-size: to-rem(232px);
+}
+
+.#{$action-set-block-class}.#{carbon-config.$prefix}--btn-set.#{$action-set-block-class}--row-quadruple
+  .#{$action-set-block-class}__action-button--ghost {
+  flex: 1 1 25%;
+}
+
+.#{$action-set-block-class}
+  .#{$action-set-block-class}__action-button
+  .#{carbon-config.$prefix}--inline-loading {
+  position: absolute;
+  inline-size: $spacing-07;
+  inset-block-start: 0;
+  inset-inline-end: 0;
+}
+
+// BreadcrumbWithOverflow styles
+.#{$breadcrumb-block-class} {
+  display: block;
+}
+
+.#{$breadcrumb-block-class}__space {
+  position: relative;
+  display: block;
+  inline-size: 100%;
+  white-space: nowrap;
+}
+
+.#{$breadcrumb-block-class}__breadcrumb-container.#{$breadcrumb-block-class}__breadcrumb-container-with-items {
+  display: inline-flex;
+  inline-size: 100%;
+}
+
+.#{$breadcrumb-block-class}__breadcrumb-container
+  .#{carbon-config.$prefix}--breadcrumb {
+  flex-wrap: nowrap;
+  align-items: flex-start;
+  inline-size: 100%;
+}
+
+.#{$breadcrumb-block-class}__breadcrumb-container--hidden {
+  position: absolute;
+  overflow: hidden;
+  block-size: 1px;
+  clip: rect(0, 0, 0, 0);
+  inline-size: 1px;
+  white-space: nowrap;
+}
+
+.#{$breadcrumb-block-class}__breadcrumb-back {
+  display: none;
+
+  svg {
+    fill: $icon-primary;
+  }
+}
+
+.#{$breadcrumb-block-class}__back__button.#{carbon-config.$prefix}--btn {
+  padding: 0;
+  min-block-size: revert;
+}
+
+.#{$breadcrumb-block-class}__back__button.#{carbon-config.$prefix}--btn--ghost:hover {
+  background-color: inherit;
+}
+
+@include breakpoint-down(md) {
+  .#{carbon-config.$prefix}--breadcrumb-item {
+    display: none;
+  }
+
+  .#{$breadcrumb-block-class}__breadcrumb-back,
+  .#{carbon-config.$prefix}--breadcrumb-item:last-child {
+    display: inline-flex;
+    vertical-align: middle;
+  }
+
+  .#{$breadcrumb-block-class}__displayed-breadcrumb:last-child {
+    max-inline-size: calc(100% - $spacing-07);
+  }
+}
+
+.#{carbon-config.$prefix}--breadcrumb-item:last-child {
+  display: inline-flex;
+}
+
+.#{$breadcrumb-block-class}__displayed-breadcrumb:last-child {
+  display: inline-flex;
+}
+
+.#{$breadcrumb-block-class}__displayed-breadcrumb:last-child
+  .#{carbon-config.$prefix}--link {
+  display: inline-block;
+  overflow: hidden;
+  inline-size: 100%;
+  text-overflow: ellipsis;
+}
+
+.#{$breadcrumb-block-class}__overflow-menu {
+  /* stylelint-disable-next-line carbon/type-use */
+  line-height: 0;
+}
+
+// CreateInfluencer styles
+$influencerAnimationStart: calc(-1 * #{$spacing-05});
+
+@keyframes influencer-menu-entrance {
+  0% {
+    opacity: 0;
+    /* stylelint-disable-next-line carbon/layout-use */
+    transform: translateX($influencerAnimationStart);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes influencer-menu-exit {
+  0% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  100% {
+    opacity: 0;
+    /* stylelint-disable-next-line carbon/layout-use */
+    transform: translateX($influencerAnimationStart);
+  }
+}
+
+.#{$influencer-block-class} {
+  display: grid;
+  padding: $spacing-06 $spacing-07;
+  block-size: 100%;
+  grid-template-columns: 100%;
+  grid-template-rows: 1fr auto;
+}
+
+.#{$influencer-block-class}__left-nav {
+  grid-column: 1 / -1;
+  grid-row: 1 / -1;
+  overflow-y: auto;
+  @supports (overflow-block: auto) {
+    overflow-block: auto;
+  }
+}
+
+.#{$influencer-block-class}__title {
+  @include type.type-style('heading-03');
+
+  margin-block-end: $spacing-06;
+}
+
+.#{$influencer-block-class}__view-all-toggle {
+  padding: $spacing-06;
+  grid-column: 1 / -1;
+  grid-row: -1 / -1;
+}
+
+.#{$influencer-block-class}__side-nav-opening,
+.#{$influencer-block-class}__progress-indicator-opening {
+  /* stylelint-disable-next-line carbon/motion-easing-use */
+  animation: influencer-menu-entrance $duration-moderate-02 1;
+  animation-fill-mode: forwards;
+  @include motion(entrance, productive);
+}
+
+.#{$influencer-block-class}__side-nav-closing,
+.#{$influencer-block-class}__progress-indicator-closing {
+  /* stylelint-disable-next-line carbon/motion-easing-use */
+  animation: influencer-menu-exit $duration-moderate-02 1;
+  animation-fill-mode: forwards;
+  @include motion(exit, productive);
+}
+
+@media (prefers-reduced-motion) {
+  .#{$influencer-block-class}__side-nav-opening,
+  .#{$influencer-block-class}__progress-indicator-opening,
+  .#{$influencer-block-class}__side-nav-closing,
+  .#{$influencer-block-class}__progress-indicator-closing {
+    animation: none;
+    opacity: 1;
+  }
+}
+
+// CreateFullPage pattern styles
+.#{$block-class} {
+  display: grid;
+  block-size: 100%;
+  color: $text-primary;
+  grid-template-rows: minmax(auto, 100%);
+
+  &:has(.#{$block-class}__header) {
+    grid-template-rows: auto minmax(auto, 100%);
+  }
+}
+
+.#{$block-class}__influencer-and-body-container {
+  display: flex;
+  overflow: hidden;
+  padding: 0;
+  margin: 0;
+  max-block-size: 100%;
+}
+
+.#{$block-class}__influencer {
+  display: grid;
+  flex: 0 0 257px;
+  background-color: $layer-01;
+  border-inline-end: 1px solid $layer-accent-01;
+  grid-template-columns: 100%;
+  grid-template-rows: 1fr auto;
+}
+
+.#{$block-class}__left-nav {
+  grid-column: 1 / -1;
+  grid-row: 1 / -1;
+  overflow-y: auto;
+  @supports (overflow-block: auto) {
+    overflow-block: auto;
+  }
+}
+
+.#{$block-class}__body {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.#{$block-class}__main {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  max-block-size: 100%;
+}
+
+.#{$block-class}__content {
+  overflow: auto;
+  flex-grow: 1;
+  background-color: $background;
+  color: $text-primary;
+  overflow-x: hidden;
+  @supports (overflow-inline: hidden) {
+    overflow-inline: hidden;
+  }
+
+  padding-block-start: $spacing-06;
+}
+
+.#{$block-class}__content .#{carbon-config.$prefix}--grid {
+  margin-inline: 0;
+  padding-block-start: $spacing-06;
+}
+
+.#{$block-class}__form {
+  block-size: 100%;
+
+  .#{carbon-config.$prefix}--inline-notification--error {
+    margin-block-start: $spacing-04;
+  }
+}
+
+.#{$block-class}__buttons {
+  display: inline-flex;
+  border-block-start: 1px solid $layer-accent-01;
+  min-inline-size: 100%;
+}
+
+.#{$block-class}__section-divider {
+  position: relative;
+  display: block;
+  margin: $spacing-07 calc(-1 * #{$spacing-08}) $spacing-07
+    calc(-1 * #{$spacing-08});
+  block-size: 1px;
+  inline-size: 0;
+
+  &::after {
+    position: absolute;
+    background-color: $layer-accent-01;
+    block-size: 1px;
+    content: '';
+    inline-size: 100vw;
+    inset-block-start: 0;
+    inset-inline-start: 0;
+  }
+}
+
+.#{$block-class}__header {
+  button:first-of-type {
+    background: none;
+  }
+}
+
+// Example app container styles
+.example-container {
+  padding: $spacing-07;
+  max-inline-size: 800px;
+
+  h1 {
+    @include type.type-style('heading-05');
+
+    margin-block-end: $spacing-05;
+  }
+
+  .example-section {
+    padding: $spacing-05;
+    border: 1px solid $border-subtle-01;
+    border-radius: 4px;
+    margin-block-end: $spacing-07;
+
+    h2 {
+      @include type.type-style('heading-03');
+
+      margin-block-end: $spacing-03;
+    }
+
+    p {
+      @include type.type-style('body-short-01');
+
+      color: $text-secondary;
+      margin-block-end: $spacing-05;
+    }
+  }
+}
+
+// Viewport styles for full-page display
+.create-full-page-stories__viewport {
+  position: fixed;
+  z-index: 9999;
+  overflow: hidden;
+  background-color: $background;
+  block-size: 100vh;
+  inline-size: 100vw;
+  inset: 0;
+}
+
+.create-full-page-stories__viewport
+  .create-full-page-stories__content-container {
+  block-size: 100%;
+  overflow-y: auto;
+  @supports (overflow-block: auto) {
+    overflow-block: auto;
+  }
+}
+
+.create-full-page-stories__viewport
+  .create-full-page-stories__content-container--with-global-header {
+  block-size: calc(100% - #{$spacing-09});
+  margin-block-start: $spacing-09;
+}

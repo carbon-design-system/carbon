@@ -1,0 +1,157 @@
+//
+// Copyright IBM Corp. 2024, 2025
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+// Standard imports.
+@use '../../global/styles/project-settings' as c4p-settings;
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/type' as *;
+@use '../../global/styles/mixins';
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/utilities';
+
+// Other Carbon settings if needed
+// TODO: @use '@carbon/styles/scss/grid';
+// or
+// TODO: @use '@carbon/styles/scss/grid';
+// BigNumber uses the following Carbon for IBM Products components:
+// TODO: @use(s) of IBM Products component styles used by BigNumber
+// The block part of our conventional BEM class names (blockClass__E--M).
+$block-class: #{c4p-settings.$pkg-prefix}--big-number;
+$skeleton-block-class: #{c4p-settings.$pkg-prefix}--big-number-skeleton;
+
+.#{$block-class}__label {
+  @include type-style('label-01');
+
+  display: block;
+  margin: 0;
+  color: $text-secondary;
+}
+
+.#{$block-class}__value {
+  @include type-style('heading-04');
+
+  margin-block-end: 0;
+}
+
+.#{$block-class}__total {
+  @include type-style('body-compact-01');
+}
+
+.#{$block-class}__total,
+.#{$block-class}__percentage-mark {
+  margin-block: auto $spacing-02;
+}
+
+.#{$block-class}__info {
+  vertical-align: top;
+}
+
+.#{$block-class}__trend {
+  margin-block-start: $spacing-03;
+  vertical-align: top;
+}
+
+.#{$block-class}__row {
+  display: flex;
+}
+
+.#{$block-class}__info {
+  padding-inline-start: $spacing-03;
+}
+
+.#{$block-class}__percentage {
+  @include type-style('heading-04');
+}
+
+.#{$block-class}__percentage-mark {
+  @include type-style('body-compact-01');
+}
+
+.#{$block-class}__icon-button {
+  margin-inline-start: $spacing-02;
+}
+
+.#{$block-class}--lg .#{$block-class}__value,
+.#{$block-class}--lg .#{$block-class}__percentage {
+  @include type-style('heading-06');
+}
+
+.#{$block-class}--lg .#{$block-class}__total,
+.#{$block-class}--lg .#{$block-class}__percentage-mark {
+  @include type-style('heading-03');
+}
+
+.#{$block-class}--xl .#{$block-class}__label {
+  @include type-style('body-compact-01');
+}
+
+.#{$block-class}--xl .#{$block-class}__value,
+.#{$block-class}--xl .#{$block-class}__percentage {
+  @include type-style('heading-07');
+}
+
+.#{$block-class}--xl .#{$block-class}__total,
+.#{$block-class}--xl .#{$block-class}__percentage-mark {
+  @include type-style('heading-04');
+}
+
+.#{$block-class}--xl .#{$block-class}__trend {
+  margin-block-start: $spacing-04;
+}
+
+//
+// Skeleton
+//
+
+.#{$skeleton-block-class} {
+  inline-size: 4rem;
+}
+
+.#{$skeleton-block-class}__label {
+  block-size: $spacing-04;
+  margin-block: 0 $spacing-03;
+}
+
+.#{$skeleton-block-class}__value {
+  margin: 0;
+  /* stylelint-disable-next-line declaration-no-important */
+  block-size: $spacing-08 !important;
+}
+
+.#{$skeleton-block-class}--lg {
+  inline-size: 5rem;
+}
+
+.#{$skeleton-block-class}--xl {
+  inline-size: 6rem;
+}
+
+.#{$skeleton-block-class}.#{$skeleton-block-class}--lg
+  .#{$skeleton-block-class}__label {
+  block-size: $spacing-04;
+}
+
+.#{$skeleton-block-class}.#{$skeleton-block-class}--lg
+  .#{$skeleton-block-class}__value {
+  /* stylelint-disable-next-line declaration-no-important */
+  block-size: $spacing-09 !important;
+}
+
+.#{$skeleton-block-class}.#{$skeleton-block-class}--xl
+  .#{$skeleton-block-class}__label {
+  block-size: $spacing-04;
+}
+
+.#{$skeleton-block-class}.#{$skeleton-block-class}--xl
+  .#{$skeleton-block-class}__value {
+  /* stylelint-disable-next-line declaration-no-important */
+  block-size: $spacing-10 !important;
+}
+
+.#{$block-class} .#{$block-class}__tooltip-trigger:focus {
+  outline: 1px solid $focus;
+}

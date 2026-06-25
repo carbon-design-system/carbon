@@ -1,0 +1,102 @@
+<!--
+@license
+
+Copyright IBM Corp. 2025
+
+This source code is licensed under the Apache-2.0 license found in the
+LICENSE file in the root directory of this source tree.
+-->
+
+<html>
+<head>
+  <title>carbon-web-components example</title>
+  <meta charset="UTF-8" />
+  <link rel="stylesheet" href="src/styles.scss" />
+  <style>
+    /* Suppress custom element until styles are loaded */
+    cds-ai-label:not(:defined) {
+      display: none;
+    }
+  </style>
+  <script type="module" src="src/index.js"></script>
+</head>
+<body>
+  <div class="example-container">
+    <div class="example-header"></div>
+    <div id="page-content-selector" class="example-content">
+      <cds-button id="toggle-button">Add notification</cds-button>
+    </div>
+  </div>
+<cds-header aria-label="IBM Cloud Pak" class="c4p--notifications-panel__story--header">
+        <cds-header-name
+          href="/"
+          prefix="IBM"
+        >
+          Cloud Pak
+        </cds-header-name>
+        <div class="cds--header__global">
+          <cds-header-global-action
+            aria-label="User"
+            tooltip-text="User"
+            id="user-button"
+          >
+            <svg focusable="false" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" fill="currentColor" aria-hidden="true" width="20" height="20" viewBox="0 0 32 32" slot="icon"><!--?lit$923491682$--><path d="M16 4a5 5 0 11-5 5 5 5 0 015-5m0-2a7 7 0 107 7A7 7 0 0016 2zM26 30H24V25a5 5 0 00-5-5H13a5 5 0 00-5 5v5H6V25a7 7 0 017-7h6a7 7 0 017 7z"></path></svg>
+          </cds-header-global-action>
+          <cds-header-panel
+            id="user-panel"
+            .expanded="${expandUserPanel}"
+            aria-label="User Panel"
+          >
+            <div class="c4p--notifications-panel__story_header-panel">
+              User account
+              <br />
+              example panel
+            </div>
+          </cds-header-panel>
+          <cds-header-global-action
+            class="c4p--notifications-panel__story_notification-trigger"
+            aria-label="Notification"
+            tooltip-text="Notification"
+            id="notification-button"
+            @click="${toggleButton}"
+          >
+            <svg focusable="false" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" fill="currentColor" aria-hidden="true" width="20" height="20" viewBox="0 0 32 32" slot="icon"><!--?lit$923491682$--><path d="M28.7071,19.293,26,16.5859V13a10.0136,10.0136,0,0,0-9-9.9492V1H15V3.0508A10.0136,10.0136,0,0,0,6,13v3.5859L3.2929,19.293A1,1,0,0,0,3,20v3a1,1,0,0,0,1,1h7v.7768a5.152,5.152,0,0,0,4.5,5.1987A5.0057,5.0057,0,0,0,21,25V24h7a1,1,0,0,0,1-1V20A1,1,0,0,0,28.7071,19.293ZM19,25a3,3,0,0,1-6,0V24h6Zm8-3H5V20.4141L7.707,17.707A1,1,0,0,0,8,17V13a8,8,0,0,1,16,0v4a1,1,0,0,0,.293.707L27,20.4141Z"></path></svg>
+          </cds-header-global-action>
+          <cds-header-global-action
+            aria-label="App Switcher"
+            tooltip-text="App Switcher"
+            tooltip-alignment="right"
+            id="switcher-button"
+          >
+            <svg focusable="false" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" fill="currentColor" aria-hidden="true" width="20" height="20" viewBox="0 0 32 32" slot="icon"><!--?lit$923491682$--><path d="M14 4H18V8H14zM4 4H8V8H4zM24 4H28V8H24zM14 14H18V18H14zM4 14H8V18H4zM24 14H28V18H24zM14 24H18V28H14zM4 24H8V28H4zM24 24H28V28H24z"></path></svg>
+          </cds-header-global-action>
+          <cds-header-panel
+            id="switcher-panel"
+            .expanded="${expandPanel}"
+            aria-label="Header Panel"
+          >
+            <div class="c4p--notifications-panel__story_header-panel">
+              App switcher
+              <br />
+              example panel
+            </div>
+          </cds-header-panel>
+        </div>
+      </cds-header>
+ <c4p-notification-panel
+    id="notification-panel"
+    open="true"
+    title-text="Notifications"
+    today-text="Today"
+    previous-text="Previous"
+    dismiss-all-label="Dismiss all"
+    donot-disturb-label="Do not disturb"
+    date-time-locale="en-US"
+  >
+    <c4p-notification-footer
+      slot="footer"
+      view-all-label="View all (3)"
+    ></c4p-notification-footer>
+  </c4p-notification-panel>
+</body>
+</html>

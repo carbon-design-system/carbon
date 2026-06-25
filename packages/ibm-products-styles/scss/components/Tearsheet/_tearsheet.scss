@@ -1,0 +1,553 @@
+// stylelint-disable carbon/motion-duration-use, carbon/motion-easing-use
+
+//
+// Copyright IBM Corp. 2020, 2025
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+// Standard imports.
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/colors' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/motion' as *;
+@use '@carbon/styles/scss/breakpoint' as *;
+@use '@carbon/styles/scss/feature-flags' as *;
+@use '@carbon/styles/scss/type';
+@use '@carbon/styles/scss/utilities';
+@use '@carbon/styles/scss/config' as carbon-config;
+
+@use '../../global/styles/project-settings' as *;
+@use '../../global/styles/mixins' as *;
+
+// Tearsheets use the following IBM Products components:
+// ActionSet
+@use '../ActionSet/action-set';
+
+$block-class: #{$pkg-prefix}--tearsheet;
+
+// viewport, capped at 500px to set an upper limit on the movement speed
+// For the reason for calc() see https://github.com/sass/sass/issues/2849
+// and https://github.com/sass/node-sass/issues/2815.
+// stylelint-disable-next-line carbon/layout-use
+$transform-start: translate3d(0, calc(min(95vh, 500px)), 0);
+
+// stylelint-disable-next-line carbon/theme-use
+$motion-duration: $duration-moderate-02;
+
+@mixin tearsheet-entrance-exit($has-presence: false) {
+  @if not($has-presence) {
+    &.#{$block-class} {
+      &:not(.is-visible) {
+        &.#{$block-class}.#{$block-class} .#{$block-class}__container {
+          transform: $transform-start;
+        }
+      }
+    }
+  } @else {
+    // handle entrance and exit via CSS animations,
+    // however keep CSS transitions for stacking animations
+    &.#{$block-class} {
+      animation: #{$block-class}--presence-tearsheet__enter
+        $motion-duration
+        motion(entrance, expressive);
+      opacity: 1;
+
+      // extra specificity to ensure this transition overrides the carbon default
+      &.#{$block-class}.#{$block-class} .#{$block-class}__container {
+        animation: #{$block-class}--presence-tearsheet--container__enter
+          $motion-duration
+          motion(entrance, expressive);
+        transform: translate3d(0, 0, 0);
+        @media screen and (prefers-reduced-motion: reduce) {
+          animation: none;
+        }
+      }
+
+      &.#{$block-class}--stacked-1-of-2.is-visible .#{$block-class}__container,
+      &.#{$block-class}--stacked-2-of-3.is-visible .#{$block-class}__container {
+        transform: scale(var(--#{$block-class}--stacking-scale-factor-single));
+      }
+
+      &.#{$block-class}--stacked-1-of-3.is-visible .#{$block-class}__container {
+        transform: scale(var(--#{$block-class}--stacking-scale-factor-double));
+      }
+
+      &[data-tearsheet-exiting] {
+        animation: #{$block-class}--presence-tearsheet__exit
+          $motion-duration
+          motion(exit, expressive)
+          forwards;
+
+        &.#{$block-class}.#{$block-class} .#{$block-class}__container {
+          animation: #{$block-class}--presence-tearsheet--container__exit
+            $motion-duration
+            motion(entrance, expressive)
+            forwards;
+          @media screen and (prefers-reduced-motion: reduce) {
+            animation: none;
+          }
+        }
+      }
+    }
+
+    @keyframes #{$block-class}--presence-tearsheet__enter {
+      from {
+        opacity: 0;
+        transition: none;
+      }
+    }
+
+    @keyframes #{$block-class}--presence-tearsheet__exit {
+      to {
+        opacity: 0;
+      }
+    }
+
+    @keyframes #{$block-class}--presence-tearsheet--container__enter {
+      from {
+        transform: $transform-start;
+        transition: none;
+      }
+    }
+
+    @keyframes #{$block-class}--presence-tearsheet--container__exit {
+      to {
+        transform: $transform-start;
+      }
+    }
+  }
+}
+
+@include block-wrap($block-class) {
+  &.#{$block-class} {
+    --overlay-color: #{$overlay};
+    --overlay-opacity: 1;
+
+    &::before {
+      position: absolute;
+      display: block;
+      background: var(--overlay-color);
+      content: '';
+      inset: 0;
+      opacity: var(--overlay-opacity);
+
+      transition:
+        background-color $motion-duration motion(exit, expressive),
+        opacity $motion-duration motion(exit, expressive);
+
+      @media (prefers-reduced-motion: reduce) {
+        transition: none;
+      }
+    }
+
+    &.#{$block-class}.#{$block-class} {
+      /* tearsheet uses --overlay-color and --overlay-opacity in ::before */
+      background: initial;
+    }
+
+    z-index: utilities.z('modal') + 1;
+    align-items: flex-end;
+    color: $text-primary;
+    transition:
+      visibility 0s linear $motion-duration,
+      background-color $motion-duration motion(exit, expressive),
+      opacity $motion-duration motion(exit, expressive);
+    --#{$block-class}--stacking-scale-factor-single: 0.95;
+    --#{$block-class}--stacking-scale-factor-double: 0.9;
+  }
+
+  &.is-visible {
+    z-index: utilities.z('modal');
+    align-items: flex-end;
+    transition:
+      visibility 0s linear,
+      background-color $motion-duration motion(entrance, expressive),
+      opacity $motion-duration motion(entrance, expressive);
+    @media (prefers-reduced-motion: reduce) {
+      transition: none;
+    }
+  }
+
+  &.#{$block-class}--stacked-1-of-2 {
+    --overlay-opacity: 0.67;
+
+    z-index: utilities.z('modal') - 1;
+  }
+
+  &.#{$block-class}--stacked-1-of-3 {
+    --overlay-opacity: 0.22;
+
+    z-index: utilities.z('modal') - 2;
+  }
+
+  &.#{$block-class}--stacked-2-of-3 {
+    --overlay-opacity: 0.5;
+
+    z-index: utilities.z('modal') - 1;
+  }
+
+  &.#{$block-class}--stacked-2-of-2,
+  &.#{$block-class}--stacked-3-of-3 {
+    --overlay-opacity: 0.5;
+  }
+
+  .#{$block-class}__container {
+    block-size: 100%;
+    inset-block-start: auto;
+    max-block-size: calc(100% - #{$spacing-09});
+  }
+
+  &.#{$block-class}.#{$block-class}.#{$block-class}.#{$block-class}--has-slug
+    .#{$block-class}__container,
+  &.#{$block-class}.#{$block-class}.#{$block-class}.#{$block-class}--has-ai-label
+    .#{$block-class}__container {
+    border: 1px solid transparent;
+
+    /* override carbon ai removing background gradient */
+    background:
+      linear-gradient(to top, var(--cds-layer), var(--cds-layer)) padding-box,
+      linear-gradient(
+          to bottom,
+          var(--cds-ai-border-start, #78a9ff),
+          var(--cds-ai-border-end, #d0e2ff)
+        )
+        border-box,
+      linear-gradient(to top, var(--cds-layer), var(--cds-layer)) border-box;
+    border-block-end: 0;
+    box-shadow: 0 4px 10px 2px $ai-drop-shadow;
+  }
+
+  // extra specificity to ensure this transition overrides the carbon default
+  &.#{$block-class}.#{$block-class} .#{$block-class}__container {
+    transition:
+      transform $motion-duration motion(entrance, expressive),
+      max-height $motion-duration motion(entrance, expressive);
+  }
+
+  &.#{$block-class}--stacked-1-of-2
+    .#{$block-class}__container:not(
+      .#{$block-class}__container--mixed-size-stacking
+    ),
+  &.#{$block-class}--stacked-2-of-3
+    .#{$block-class}__container:not(
+      .#{$block-class}__container--mixed-size-stacking
+    ) {
+    max-block-size: calc(100% - #{$spacing-09} + #{$spacing-05});
+  }
+
+  &.#{$block-class}--stacked-1-of-3
+    .#{$block-class}__container:not(
+      .#{$block-class}__container--mixed-size-stacking
+    ) {
+    max-block-size: calc(100% - #{$spacing-09} + (2 * #{$spacing-05}));
+  }
+
+  .#{$block-class}__container--lower {
+    max-block-size: calc(100% - (#{$spacing-09} + #{$spacing-08}));
+  }
+
+  &.#{$block-class}--stacked-1-of-2
+    .#{$block-class}__container--lower:not(
+      .#{$block-class}__container--mixed-size-stacking
+    ),
+  &.#{$block-class}--stacked-2-of-3
+    .#{$block-class}__container--lower:not(
+      .#{$block-class}__container--mixed-size-stacking
+    ) {
+    max-block-size: calc(
+      100% - (#{$spacing-09} + #{$spacing-08}) + #{$spacing-05}
+    );
+  }
+
+  &.#{$block-class}--stacked-1-of-3
+    .#{$block-class}__container--lower:not(
+      .#{$block-class}__container--mixed-size-stacking
+    ) {
+    max-block-size: calc(
+      100% - (#{$spacing-09} + #{$spacing-08}) + (2 * #{$spacing-05})
+    );
+  }
+
+  &.#{$block-class}--wide .#{$block-class}__container {
+    inline-size: 100%;
+  }
+
+  &.#{$block-class}--wide
+    .#{$pkg-prefix}--action-set
+    .#{$pkg-prefix}--action-set__action-button.#{$pkg-prefix}--action-set__action-button--expressive {
+    block-size: $spacing-11;
+  }
+
+  @include breakpoint(md) {
+    &.#{$block-class}--wide .#{$block-class}__container {
+      inline-size: calc(100% - (2 * #{$spacing-10}));
+    }
+  }
+
+  &.#{$block-class}--stacked-1-of-2.is-visible .#{$block-class}__container,
+  &.#{$block-class}--stacked-2-of-3.is-visible .#{$block-class}__container {
+    transform: scale(var(--#{$block-class}--stacking-scale-factor-single));
+  }
+
+  &.#{$block-class}--stacked-1-of-3.is-visible .#{$block-class}__container {
+    transform: scale(var(--#{$block-class}--stacking-scale-factor-double));
+  }
+
+  .#{$block-class}__header {
+    min-block-size: fit-content;
+  }
+
+  &.#{$block-class}--wide .#{$block-class}__header {
+    padding: $spacing-06 $spacing-07;
+    margin: 0;
+    background-color: $layer;
+    border-block-end: 1px solid $border-subtle-01;
+  }
+
+  &.#{$block-class}--narrow .#{$block-class}__header {
+    padding: $spacing-05;
+    margin: 0;
+    background-color: $layer;
+    border-block-end: 1px solid $border-subtle-01;
+  }
+
+  .#{$block-class}__header-content {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .#{$block-class}__header-fields {
+    flex: 1 1 100%;
+  }
+
+  .#{$block-class}__header-actions {
+    flex: 0 0 auto;
+    padding-inline-start: $spacing-06;
+  }
+
+  // buttons inside button sets in the header action area have 8px gap
+  .#{$block-class}__header-actions
+    .#{carbon-config.$prefix}--btn-set
+    .#{carbon-config.$prefix}--btn:not(:first-of-type) {
+    margin-inline-start: $spacing-03;
+  }
+
+  .#{$block-class}__header--no-close-icon {
+    display: none;
+  }
+
+  &.#{$block-class}--wide
+    .#{carbon-config.$prefix}--modal-header__heading.#{$block-class}__heading {
+    @include type.type-style('heading-04');
+  }
+
+  .#{$block-class}__header-description {
+    display: inline-flex;
+    margin-block-start: $spacing-05;
+    max-inline-size: 100%;
+
+    @include type.type-style('body-compact-01');
+
+    @include breakpoint-up('md') {
+      max-inline-size: 60%;
+    }
+  }
+
+  &.#{$block-class}--narrow .#{$block-class}__header-description {
+    margin-block-start: $spacing-03;
+  }
+
+  .#{$block-class}__header-navigation {
+    margin: $spacing-04 0 0;
+  }
+
+  &.#{$block-class}--wide
+    .#{$block-class}__header.#{$block-class}__header--with-nav {
+    padding: $spacing-06 $spacing-07 0;
+  }
+
+  &.#{$block-class}--wide
+    .#{$block-class}__header.#{$block-class}__header--with-close-icon,
+  &.#{$block-class}--has-slug .#{$block-class}__header.#{$block-class}__header,
+  &.#{$block-class}--has-ai-label
+    .#{$block-class}__header.#{$block-class}__header {
+    padding-inline-end: $spacing-11;
+  }
+
+  &.#{$block-class}--wide.#{$block-class}--has-slug
+    .#{$block-class}__header.#{$block-class}__header--with-close-icon,
+  &.#{$block-class}--wide.#{$block-class}--has-ai-label
+    .#{$block-class}__header.#{$block-class}__header--with-close-icon {
+    /* spacing 11 plus additional space for slug/close */
+    /* stylelint-disable-next-line carbon/layout-use */
+    padding-inline-end: calc(#{$spacing-11 + $spacing-09});
+  }
+
+  &.#{$block-class}--narrow .#{$block-class}__header-description {
+    max-inline-size: 80%;
+  }
+
+  .#{$block-class}__header-navigation {
+    margin: $spacing-04 0 0;
+  }
+
+  // Unfortunately <Layer> creates an extra DOM element.  Try not to let it break
+  // existing layouts.
+  .#{$block-class}__layer {
+    display: contents;
+  }
+
+  &.#{$block-class} .#{$block-class}__body {
+    display: flex;
+    overflow: hidden;
+    flex-direction: row;
+    padding: 0;
+    margin: 0;
+  }
+
+  .#{$block-class}__resize-detector {
+    block-size: 0;
+    inline-size: 100%;
+  }
+
+  .#{$block-class}__influencer {
+    flex: 0 0 257px; // influencer width 256px plus 1px border
+    border-inline-end: 1px solid $border-subtle-01;
+    overflow-y: auto;
+    @supports (overflow-block: auto) {
+      overflow-block: auto;
+    }
+
+    // the normal 80% content width inside modals should not apply to influencer content
+    // apply the class again for higher specificity
+    &.#{$block-class}__influencer p {
+      padding-inline-end: 0;
+    }
+  }
+
+  @include breakpoint-down(md) {
+    .#{$block-class}__container {
+      max-block-size: 100%;
+    }
+
+    .#{$block-class}__influencer {
+      flex-basis: auto;
+    }
+  }
+
+  .#{$block-class}__influencer--wide {
+    flex-basis: 321px; // influencer width 320px plus 1px border
+  }
+
+  .#{$block-class}__right {
+    display: grid;
+    flex-grow: 1;
+    grid-template-columns: 100%;
+    grid-template-rows: 1fr auto;
+  }
+
+  .#{$block-class}__main {
+    display: flex;
+    flex-direction: row;
+    background-color: $background;
+    grid-column: 1 / -1;
+    grid-row: 1 / -1;
+  }
+
+  &.#{$block-class}--narrow .#{$block-class}__main {
+    background-color: $layer;
+  }
+
+  .#{$block-class}__main .#{$block-class}__influencer {
+    background-color: $layer;
+    border-inline-end: none;
+    border-inline-start: 1px solid $border-subtle-01;
+  }
+
+  .#{$block-class}__content {
+    overflow: auto;
+    flex-grow: 1;
+  }
+
+  &.#{$block-class}--has-slug .#{$block-class}__content,
+  &.#{$block-class}--has-ai-label .#{$block-class}__content {
+    @include utilities.ai-popover-gradient('default', 0);
+
+    box-shadow: inset 0 -80px 70px -65px $ai-inner-shadow;
+  }
+
+  &.#{$block-class}--wide .#{$block-class}__content {
+    // Specific to the Tearsheet *and* radio buttons,
+    // `readOnly` styling is not applying a grey outline.
+    .#{carbon-config.$prefix}--radio-button[readonly]
+      + .#{carbon-config.$prefix}--radio-button__label
+      .#{carbon-config.$prefix}--radio-button__appearance {
+      border-color: $icon-disabled;
+    }
+
+    .#{carbon-config.$prefix}--select--inline
+      .#{carbon-config.$prefix}--select-input {
+      background-color: transparent;
+    }
+
+    // and restore the 'light' prop in case light fields are wanted
+    .#{carbon-config.$prefix}--text-input--light,
+    .#{carbon-config.$prefix}--text-area--light,
+    .#{carbon-config.$prefix}--search--light .#{carbon-config.$prefix}--search-input,
+    .#{carbon-config.$prefix}--select--light .#{carbon-config.$prefix}--select-input,
+    .#{carbon-config.$prefix}--dropdown--light,
+    .#{carbon-config.$prefix}--dropdown--light .#{carbon-config.$prefix}--dropdown-list,
+    /* stylelint-disable-next-line prettier/prettier */
+    .#{carbon-config.$prefix}--number--light input[type='number'],
+    .#{carbon-config.$prefix}--date-picker--light
+      .#{carbon-config.$prefix}--date-picker__input {
+      background-color: $field-02;
+    }
+  }
+
+  .#{$block-class}__button-container {
+    grid-column: 1 / -1;
+    grid-row: -1 / -1;
+    min-block-size: fit-content;
+    overflow-x: auto;
+    @supports (overflow-inline: auto) {
+      /* stylelint-disable-next-line declaration-property-value-disallowed-list */
+      overflow-inline: auto;
+    }
+  }
+
+  .#{$block-class}__buttons {
+    display: inline-flex;
+    border-block-start: 1px solid $border-subtle-01;
+    min-inline-size: 100%;
+  }
+
+  &.#{$block-class}--wide .#{$block-class}__buttons {
+    background: $background;
+  }
+
+  &.#{$block-class}--has-slug,
+  &.#{$block-class}--has-ai-label {
+    --overlay-color: #{$ai-overlay};
+  }
+
+  &.#{$block-class}--has-slug:not(.#{$block-class}--has-close)
+    .#{carbon-config.$prefix}--slug,
+  &.#{$block-class}--has-ai-label:not(.#{$block-class}--has-close)
+    .#{carbon-config.$prefix}--slug {
+    inset-inline-end: 0;
+    /* stylelint-disable-next-line carbon/layout-use */
+    margin-block: 6px;
+    margin-inline-end: $spacing-05;
+  }
+
+  &.#{$block-class}--tearsheet-enable-presence {
+    @include tearsheet-entrance-exit($has-presence: true);
+  }
+
+  &:not(.#{$block-class}--tearsheet-enable-presence) {
+    @include tearsheet-entrance-exit($has-presence: enabled('enable-presence'));
+  }
+}

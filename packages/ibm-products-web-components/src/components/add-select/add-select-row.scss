@@ -1,0 +1,151 @@
+/**
+ * Copyright IBM Corp. 2026
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+$css--plex: true !default;
+
+/* Carbon and IBM Products styles */
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/type';
+@use '@carbon/styles/scss/motion' as *;
+
+$prefix: 'c4p';
+
+/* Import shared AddSelect composable/next styles from ibm-products-styles */
+@use '@carbon/ibm-products-styles/scss/components/AddSelect/add-select_next'
+  as *;
+
+/* Web Component specific overrides */
+:host(#{$prefix}-add-select-row) {
+  display: block;
+
+  /* Apply shared styles within shadow DOM */
+  .#{$block-class__next}-row {
+    display: flex;
+    border-inline-start: 0.125rem solid transparent;
+    transition: background-color $duration-fast-01 motion(standard, productive);
+
+    &:focus {
+      outline: 2px solid $focus;
+      outline-offset: -2px;
+    }
+
+    // Only show focus outline when navigating via keyboard, not mouse clicks
+    &:focus:not(:focus-visible) {
+      outline: none;
+    }
+
+    &--selected {
+      background-color: $layer-selected-01;
+    }
+
+    &--disabled {
+      cursor: not-allowed;
+      opacity: 0.5;
+    }
+
+    &:hover:not(&--disabled) {
+      background: $layer-hover-01;
+
+      .#{$block-class__next}-row__title {
+        color: $interactive;
+      }
+
+      .#{$block-class__next}-row__nav-indicator svg {
+        color: $interactive;
+      }
+    }
+  }
+
+  .#{$block-class__next}-row__cell {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .#{$block-class__next}-row__cell-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 $spacing-05;
+    block-size: 3rem;
+    border-block-end: 1px solid $layer-accent-01;
+  }
+
+  .#{$block-class__next}-row__content {
+    display: flex;
+    flex: 1;
+    align-items: center;
+  }
+
+  .#{$block-class__next}-row__icon {
+    display: flex;
+    align-items: center;
+    margin-inline-end: $spacing-03;
+  }
+
+  .#{$block-class__next}-row__text {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+  }
+
+  .#{$block-class__next}-row__title {
+    @include type.type-style('body-compact-01');
+
+    display: block;
+    color: $text-primary;
+  }
+
+  .#{$block-class__next}-row__subtitle {
+    @include type.type-style('label-01');
+
+    display: block;
+    color: $text-secondary;
+  }
+
+  .#{$block-class__next}-row__meta {
+    display: flex;
+    align-items: center;
+    margin-inline-start: $spacing-03;
+  }
+
+  .#{$block-class__next}-row__nav-indicator {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: $spacing-02;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-inline-start: $spacing-03;
+    transition: background-color $duration-fast-01 motion(standard, productive);
+
+    &:hover {
+      background-color: $layer-hover-01;
+    }
+
+    &:focus {
+      outline: 2px solid $focus;
+      outline-offset: -2px;
+    }
+
+    svg {
+      fill: $icon-primary;
+    }
+  }
+
+  @media screen and (prefers-reduced-motion: reduce) {
+    .#{$block-class__next}-row {
+      transition: none;
+    }
+
+    .#{$block-class__next}-row__nav-indicator {
+      transition: none;
+    }
+  }
+}

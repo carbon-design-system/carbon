@@ -1,0 +1,160 @@
+/*
+* Copyright IBM Corp. 2023, 2024
+*
+* This source code is licensed under the Apache-2.0 license found in the
+* LICENSE file in the root directory of this source tree.
+*/
+
+$css--plex: true !default;
+@use 'sass:map';
+
+/* Other Carbon settings. */
+@use '@carbon/styles/scss/reset';
+@use '@carbon/styles/scss/config' as *;
+@use '@carbon/styles/scss/motion' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/type';
+@use '@carbon/type/scss/font-family' as *;
+@use '@carbon/styles/scss/utilities/ai-gradient' as *;
+@use '@carbon/styles/scss/utilities/convert' as *;
+
+$prefix: 'c4p';
+$carbon-prefix: 'cds';
+@use '@carbon/ibm-products-styles/scss/components/NotificationsPanel/index' as *;
+$block-notification-class: #{$prefix}--notifications-panel__notification;
+
+:host(#{$prefix}-notification) {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  padding: $spacing-05;
+  border: 0;
+  background-color: $layer-01;
+  cursor: pointer;
+  inline-size: 100%;
+  min-block-size: 6.25rem;
+  text-align: start;
+  transition: background-color $duration-moderate-02 motion(standard);
+  @media screen and (prefers-reduced-motion: reduce) {
+    &::before {
+      position: absolute;
+      margin: 0 auto;
+      background-color: $border-subtle-01;
+      block-size: 1px;
+      content: '';
+      inline-size: calc(100% - (2 * #{$spacing-05}));
+      inset-block-start: 0;
+      transition: none;
+    }
+  }
+
+  &::before {
+    position: absolute;
+    margin: 0 auto;
+    background-color: $border-subtle-01;
+    block-size: 1px;
+    content: '';
+    inline-size: calc(100% - (2 * #{$spacing-05}));
+    inset-block-start: 0;
+    transition: background-color $duration-moderate-02 motion(standard);
+  }
+
+  &:hover::before {
+    background-color: transparent;
+  }
+  .#{$block-notification-class}-status-icon {
+    margin-inline-end: $spacing-03;
+    min-inline-size: 1rem;
+    &.#{$block-notification-class}-status-icon-error {
+      fill: $support-error;
+    }
+    &.#{$block-notification-class}-status-icon-success {
+      fill: $support-success;
+    }
+    &.#{$block-notification-class}-status-icon-warning {
+      fill: $support-warning;
+    }
+    &.#{$block-notification-class}-status-icon-informational {
+      fill: $support-info;
+    }
+  }
+  .#{$block-notification-class}-time-label {
+    margin-block-end: $spacing-03;
+  }
+  .#{$block-notification-class}__dismiss-single-button {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    color: $text-primary;
+    inset-block-start: 0;
+    inset-inline-end: 0;
+    min-inline-size: 2rem;
+    opacity: 0;
+    /* stylelint-disable-next-line max-nesting-depth */
+    &:hover,
+    &:focus {
+      opacity: 1;
+    }
+    --cds-link-primary: --cds-text-primary;
+    --cds-link-primary-hover: --cds-text-primary;
+  }
+  .#{$block-notification-class}-time-label,
+  .#{$block-notification-class}-description {
+    @include type.type-style('label-01');
+
+    color: $text-secondary;
+  }
+  .#{$block-notification-class}-description {
+    display: block;
+  }
+}
+::slotted(.#{$block-notification-class}-title) {
+  @include type.type-style('heading-01');
+
+  color: $text-secondary;
+  margin-block-end: $spacing-02;
+  @include font-weight('regular');
+}
+::slotted(.#{$block-notification-class}-title-unread) {
+  color: $text-secondary;
+  margin-block-end: $spacing-02;
+  @include font-weight('semibold');
+}
+
+:host(.first-notification)::before {
+  content: none;
+}
+
+:host(:hover),
+:host(:focus-visible) {
+  background-color: $layer-accent-01;
+  .#{$block-notification-class}__dismiss-single-button {
+    opacity: 1;
+  }
+
+  &::before {
+    background-color: transparent;
+  }
+}
+
+:host(:focus-visible) {
+  border-color: $focus;
+  box-shadow:
+    inset 0 0 0 2px $focus,
+    inset 0 0 0 2px $background;
+  outline: 0;
+
+  &::before,
+  &::after {
+    display: none;
+  }
+}
+
+:host(.#{$block-notification-class}--next) {
+  &::before {
+    background-color: transparent;
+  }
+}

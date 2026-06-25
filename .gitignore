@@ -77,3 +77,6 @@ blob-report
 **/.yarn/cache/
 **/.yarn/build-state.yml
 **/.yarn/install-state.gz
+storybook-static
+packages/*/scss
+results

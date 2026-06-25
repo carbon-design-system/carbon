@@ -1,0 +1,42 @@
+//
+// Copyright IBM Corp. 2021, 2025
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+// Standard imports.
+@use '@carbon/styles/scss/type';
+@use '@carbon/styles/scss/components/button/tokens' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/config' as carbon-config;
+
+@use '../../global/styles/project-settings' as c4p-settings;
+
+$block-class: #{c4p-settings.$pkg-prefix}--saving;
+
+.#{$block-class}__message {
+  display: flex;
+}
+
+.#{$block-class}__error-icon {
+  margin-inline-end: $spacing-05;
+}
+
+.#{$block-class}__error-icon svg {
+  fill: $button-danger-primary;
+}
+
+.#{$block-class}__text {
+  @include type.type-style('body-compact-01');
+}
+
+.#{$block-class}__buttons {
+  display: flex;
+}
+
+.#{$block-class}__buttons
+  .#{carbon-config.$prefix}--btn
+  .#{carbon-config.$prefix}--inline-loading {
+  min-block-size: auto;
+}

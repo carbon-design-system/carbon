@@ -1,0 +1,167 @@
+import { ArgTypes, Markdown, Meta, Story } from '@storybook/addon-docs/blocks';
+import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
+import APIKeyModalStories from './api-key-modal.stories';
+
+<Meta of={APIKeyModalStories} />
+
+# APIKeyModal
+
+[Usage guidelines](https://pages.github.ibm.com/carbon/ibm-products/patterns/generate-an-api-key/usage/)
+|
+[Carbon modal usage guidelines](https://www.carbondesignsystem.com/components/modal/usage)
+|
+[Carbon modal documentation](https://react.carbondesignsystem.com/?path=/docs/components-modal)
+
+## Table of Contents
+
+- [Overview](#overview).    
+- [Example usage](#example-usage)
+
+## Overview
+
+The APIKey Modal pattern is used When designing for the generation of API keys,
+ensure users know what the key is created for, the security implications, and
+the end destination of the key.
+
+Patterns have multiple ways of accomplishing a user need and typically use a
+combination of components with additional design considerations. The pattern
+code we share is meant to serve as an example implementation that can be built
+and extended further.
+
+To build this pattern, we recommend including the following components:
+
+- [cds-modal](https://web-components.carbondesignsystem.com/?path=/docs/components-modal)
+- [cds-form-group](https://web-components.carbondesignsystem.com/?path=/docs/components-form-group)
+- [cds-radio-button](https://web-components.carbondesignsystem.com/?path=/docs/components-radio-button)
+- [cds-toggle](https://web-components.carbondesignsystem.com/?path=/docs/components-toggle)
+- [cds-inline-loading](https://web-components.carbondesignsystem.com/?path=/docs/components-inline-loading)
+- [cds-text-input](https://web-components.carbondesignsystem.com/?path=/docs/components-text-input)
+- [cds-button](https://web-components.carbondesignsystem.com/?path=/docs/components-button)
+
+## Example usage
+
+> 💡 Check our
+> [Stackblitz](https://stackblitz.com/github/carbon-design-system/ibm-products/tree/main/packages/ibm-products-web-components/examples/api-key-modal)
+> example implementation.
+
+[![Edit carbon-web-components](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/carbon-design-system/ibm-products/tree/main/packages/ibm-products-web-components/examples/api-key-modal)
+
+Here's a quick example to get you started.
+
+#### JS (via import)
+
+```javascript
+import '@carbon/web-components/es/components/modal/index.js';
+import '@carbon/web-components/es/components/button/index.js';
+import '@carbon/web-components/es/components/text-input/index.js';
+import '@carbon/web-components/es/components/inline-loading/index.js';
+import '@carbon/web-components/es/components/form-group/index.js';
+import '@carbon/web-components/es/components/radio-button/index.js';
+import '@carbon/web-components/es/components/toggle/index.js';
+```
+
+### HTML
+
+```html
+<cds-modal >
+  <cds-modal-header>
+    <cds-modal-label>An example of Generate API key</cds-modal-label>
+    <cds-modal-heading>Generate an API key</cds-modal-heading>
+  </cds-modal-header>
+  <cds-modal-body>
+    <cds-modal-body-content>
+      (Optional description text) To connect securely to [product name], your
+      application or tool needs an API key with permission to access resources
+      such as [product resource name].
+    </cds-modal-body-content>
+
+    ${this.apiKey ? html`
+    <cds-text-input
+      value="${this.apiKey}"
+      label="API key"
+      showPasswordLabel="Show key"
+      hidePasswordLabel="Hide key"
+      tooltipPosition="left"
+      type="password"
+      show-password-visibility-toggle="true"
+      readonly="true"
+      helper-text="This is your unique API key and is non-recoverable. If you lose this API key, you will have to reset it."
+    />
+    ` : null} ${!this.apiKeyLoaded && this.nameRequired ? html`
+    <cds-form-item>
+      <cds-text-input
+        label="Name your application"
+        id="test-id"
+        .value="${this.apiKeyName}"
+        @input="${this._inputHandler}"
+        placeholder="Application name"
+        ?disabled="${this.loading}"
+        ?required="${this.nameRequired}"
+        helper-text="Providing the application name will help you identify your API key later."
+      ></cds-text-input> </cds-form-item
+    >` : null} ${this.loading ? html`
+    <cds-inline-loading
+      ?icon-description="Generating"
+      >Generating...</cds-inline-loading
+    >
+    ` : null} ${this.copyError || this.error ? html`
+    <div>
+      <div>
+        ${ErrorFilled16({ slot: 'icon'})}
+      </div>
+      <p
+        class="${`${blockClass}__messaging-text`}"
+        role="alert"
+        aria-live="assertive"
+      >
+        ${this.copyError ? html`` : html`Failed to create API key`}
+      </p>
+    </div>
+    ` : null} ${this.apiKeyLoaded ? html`
+    <div>
+      ${InformationFilled16({ slot: 'icon', })} ${this.hasDownloadLink ? html`
+      <api-key-downloader
+        apiKey="${this.apiKey}"
+        fileName="apikey"
+        linkText="Download as JSON"
+        fileType="json"
+        downloadLinkLabel="Download API Key in Java Script File format"
+      />` : html`
+      <div
+        role="alert"
+        aria-live="assertive"
+      >
+        <p>
+          This is your unique API key and is non-recoverable. If you lose this
+          API key, you will have to reset it.
+        </p>
+      </div>
+      `}
+    </div>
+    ` : null} ${this.editSuccess || this.apiKeyLoaded ? html`
+    <div>
+      ${CheckmarkFilled16({ slot: 'icon'})}
+      <p
+        role="alert"
+        aria-live="assertive"
+      >
+        API key successfully created
+      </p>
+    </div>
+    ` : null}
+  </cds-modal-body>
+  <cds-modal-footer>
+    <cds-modal-footer-button
+      kind="secondary"
+      data-modal-close
+      @click="${onCloseHandler}"
+    >Close</cds-modal-footer-button>
+    <cds-modal-footer-button
+      ?disabled="${this.isPrimaryButtonDisabled()}"
+      @click="${this._submitHandler}"
+      >${this.apiKeyLoaded ? html `Copy ${Copy16({ slot: 'icon' })}` : 'Generate
+      API key'}
+    </cds-modal-footer-button>
+  </cds-modal-footer>
+</cds-modal>
+```

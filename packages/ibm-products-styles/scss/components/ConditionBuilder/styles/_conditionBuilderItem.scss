@@ -1,0 +1,338 @@
+// stylelint-disable carbon/theme-use, declaration-empty-line-before
+/**
+ * Copyright IBM Corp. 2024
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+@use 'sass:list';
+@use 'sass:math';
+@use 'sass:string';
+@use '@carbon/styles/scss/theme' as *;
+@use '../../../global/styles/project-settings' as c4p-settings;
+@use '@carbon/styles/scss/type';
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/utilities';
+@use '@carbon/styles/scss/motion' as *;
+@use '@carbon/styles/scss/utilities/focus-outline';
+@use '@carbon/styles/scss/components/tag/tokens' as *;
+
+@use '@carbon/styles/scss/type' as *;
+@use '@carbon/styles/scss/colors' as *;
+
+$block-class: #{c4p-settings.$pkg-prefix}--condition-builder;
+
+@mixin actions-animation($translateValue) {
+  z-index: -1;
+  opacity: 0;
+  pointer-events: none;
+  /* stylelint-disable-next-line carbon/layout-use */
+  transform: translateX($translateValue);
+  transition: all $duration-fast-02 motion(standard, productive);
+}
+
+.#{$block-class}__condition-wrapper {
+  @include type-style('body-01');
+}
+
+.#{$block-class}__popover-content-wrapper {
+  overflow: auto;
+  max-block-size: $spacing-13 + $spacing-13 + $spacing-07;
+  max-inline-size: $spacing-13 + $spacing-13;
+  min-inline-size: $spacing-07 + $spacing-13;
+}
+
+.#{$block-class}__item__title {
+  @include type-style('heading-01');
+
+  padding: $spacing-05;
+}
+
+.#{$block-class}__item-option__search {
+  padding-block-end: $spacing-05;
+  padding-inline: $spacing-05;
+}
+
+.#{$block-class}__item-option__option {
+  display: grid;
+  cursor: pointer;
+  inline-size: 100%;
+  min-block-size: 2rem;
+  min-inline-size: 0;
+  padding-inline: $spacing-05;
+}
+
+.#{$block-class}__item-option__option[aria-disabled] {
+  color: $text-disabled;
+
+  &:hover {
+    cursor: not-allowed;
+  }
+
+  &:focus {
+    cursor: not-allowed;
+    outline: none;
+  }
+}
+.#{$block-class}__item-option__option[aria-hidden] {
+  display: none;
+}
+
+.#{$block-class}__item-option__option:not([aria-disabled]):hover {
+  background-color: $layer-hover;
+}
+
+.#{$block-class}__item-option__option-content {
+  display: flex;
+  align-items: center;
+  block-size: 100%;
+  inline-size: 100%;
+  min-inline-size: 0;
+}
+
+.#{$block-class}__item-option__option-label {
+  display: flex;
+  overflow: hidden;
+  align-items: center;
+  column-gap: $spacing-03;
+  inline-size: 100%;
+  min-inline-size: 0;
+
+  > svg {
+    flex-shrink: 0;
+  }
+}
+
+.#{$block-class}__item-option__option-label-text {
+  overflow: hidden;
+  flex: 1 1 auto;
+  min-inline-size: 0;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.#{$block-class}__item-option
+  > ul[aria-multiSelectable='true']
+  .#{$block-class}__item-option__option-label {
+  justify-content: center;
+}
+
+.#{$block-class}__item-option__option:not(:first-of-type)
+  .#{$block-class}__item-option__option-content {
+  border-block-start: 0.0625rem solid $border-subtle;
+}
+
+.#{$block-class}__item-option__option:not([aria-disabled]) {
+  &:hover,
+  &[aria-selected='true'],
+  &:hover + .#{$block-class}__item-option__option,
+  &[aria-selected='true'] + .#{$block-class}__item-option__option {
+    .#{$block-class}__item-option__option-content {
+      border-block-start-color: transparent;
+    }
+  }
+}
+
+.#{$block-class}__item-option__option[aria-selected='true'] {
+  background-color: $layer-selected;
+}
+
+.#{$block-class}__item-option__option[aria-selected='true']:hover {
+  background-color: $layer-selected-hover;
+}
+
+.#{$block-class}__item-date,
+.#{$block-class}__item-text,
+.#{$block-class}__item-number,
+.#{$block-class}__item-time {
+  padding-block-end: $spacing-05;
+  padding-inline: $spacing-05;
+}
+
+.#{$block-class}__checkmark {
+  margin-inline-start: auto;
+}
+
+.#{$block-class}__button {
+  @include utilities.button-reset();
+
+  display: inline-flex;
+  align-items: center;
+  background-color: $layer;
+  block-size: $spacing-07;
+  color: inherit;
+  column-gap: $spacing-02;
+  cursor: pointer;
+  padding-inline: $spacing-03;
+  white-space: nowrap;
+}
+.#{$block-class}__button:hover {
+  background-color: $layer-hover;
+}
+.#{$block-class}__condition-builder__group.hoveredConnector
+  .#{$block-class}__condition-wrapper
+  > .#{$block-class}__condition-block
+  .#{$block-class}__connector-button {
+  background-color: $layer-hover;
+}
+
+.#{$block-class}__button:focus {
+  @include focus-outline.focus-outline('outline');
+
+  content: '';
+  inset: 0;
+}
+
+.#{$block-class}__statement-button,
+.#{$block-class}__connector-button {
+  min-inline-size: $spacing-10;
+  padding-inline: $spacing-03;
+}
+.#{$block-class}__property-field {
+  @include type.type-style('heading-01');
+
+  padding-inline-start: $spacing-03;
+}
+.#{$block-class}__close-condition {
+  padding-inline-end: $spacing-03;
+}
+.#{$block-class}__add-button {
+  padding-inline: $spacing-03;
+}
+
+.#{$block-class}__multiselectSelectionStatusContainer {
+  display: flex;
+  align-items: center;
+  padding-inline: $spacing-05;
+  .#{$block-class}__selectAll-button {
+    margin-inline-start: auto;
+  }
+}
+
+.#{$block-class}__item-option__option:focus {
+  @include focus-outline.focus-outline('outline');
+}
+//need to revamp to a simpler logic
+$colors: (
+  ($purple-70, $purple-60, $purple-50, $purple-40, $purple-30),
+  ($blue-70, $blue-60, $blue-50, $blue-40, $blue-30),
+  ($cyan-70, $cyan-60, $cyan-50, $cyan-40, $cyan-30),
+  ($teal-70, $teal-60, $teal-50, $teal-40, $teal-30),
+  ($green-70, $green-60, $green-50, $green-40, $green-30)
+);
+
+@for $i from 1 through list.length($colors) {
+  $selector: (
+    string.unquote(
+      '.#{$block-class}__content-container > .#{$block-class}__group-wrapper:nth-of-type(#{list.length($colors)}n+#{$i})'
+    )
+  );
+  $group-colors: list.nth($colors, $i);
+  $group-colors-length: list.length($group-colors);
+
+  //this is to select and add color to the new group preview
+  .#{$block-class}__group-preview[data-color-index='#{($i%list.length($colors))}']
+    button {
+    $next-group-color: list.nth($colors, (($i%list.length($colors)) + 1));
+    box-shadow: inset 0 #{$spacing-01} 0 0 list.nth($next-group-color, 1);
+  }
+
+  //we need to select the group color from the $colors array and need to repeat the colors after $colors.length subgroups
+  @for $el-index from 1 through 50 {
+    $item-index: $el-index;
+    $item-index: ((($item-index - 1) % $group-colors-length) + 1);
+    #{$selector} {
+      @if $item-index != 1 {
+        --#{$block-class}__condition-wrapper-color: #{list.nth(
+            $group-colors,
+            $item-index
+          )};
+      }
+    }
+
+    $selector: list.append(
+      $selector,
+      string.unquote('.#{$block-class}__group')
+    );
+  }
+}
+
+.#{$block-class}__Hierarchical {
+  .#{$block-class}__condition-wrapper > :nth-child(n + 3) {
+    flex-basis: 100%;
+  }
+  .#{$block-class}__groupConnector {
+    background-color: $layer;
+  }
+  .#{$block-class}__condition-wrapper:not(.#{$block-class}__group-preview)
+    > :nth-child(1)
+    .#{$block-class}__button,
+  .#{$block-class}__condition-wrapper:not(.#{$block-class}__group-preview)
+    > :nth-child(2)
+    .#{$block-class}__button:not(
+      .#{$block-class}__add-button,
+      .#{$block-class}__add-condition-sub-group
+    ) {
+    box-shadow: inset 0 #{$spacing-01} 0 0
+      var(--#{$block-class}__condition-wrapper-color);
+  }
+}
+
+.#{$block-class}__groupOperatorConnector {
+  margin-block-end: $spacing-02;
+}
+.#{$block-class}__option-check-box {
+  display: flex;
+  margin-inline-end: $spacing-03;
+}
+.#{$block-class}__option-icon {
+  align-self: center;
+  margin-inline-start: auto;
+}
+.#{$block-class}__content-container {
+  .#{$block-class}__add-button-wrapper > :nth-child(1) {
+    @include actions-animation(-100%);
+  }
+  .#{$block-class}__add-button-wrapper > :nth-child(2) {
+    @include actions-animation(-200%);
+  }
+
+  .#{$block-class}__condition-block:focus-within:first-child
+    .#{$block-class}__add-button-wrapper
+    > span,
+  .#{$block-class}__condition--interacting
+    .#{$block-class}__add-button-wrapper
+    > span {
+    z-index: 0;
+    opacity: 1;
+    pointer-events: all;
+    transform: translateX(0);
+    /* stylelint-disable-next-line carbon/motion-easing-use */
+    transition: transform motion(exit, productive) $duration-fast-02;
+  }
+  .#{$block-class}__condition--interacting
+    .#{$block-class}__close-condition-wrapper {
+    z-index: 2;
+  }
+}
+
+.#{$block-class}__invalid-input {
+  display: flex;
+  direction: rtl;
+}
+.#{$block-class}__invalid-input > svg {
+  color: $support-warning;
+  /* stylelint-disable max-nesting-depth */
+  > path:first-child {
+    fill: $icon-primary;
+  }
+}
+
+.#{$block-class}__statement_wrapper {
+  padding: $spacing-03 0;
+
+  :nth-child(2) {
+    color: $text-secondary;
+  }
+}

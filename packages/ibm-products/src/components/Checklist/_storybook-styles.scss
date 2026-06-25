@@ -1,0 +1,13 @@
+//
+// Copyright IBM Corp. 2023, 2023
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use '@carbon/styles/scss/spacing' as *;
+
+.checklist-stories__viewport {
+  max-inline-size: calc(2 * $spacing-13);
+  min-inline-size: calc(2 * $spacing-13); // 320px
+}

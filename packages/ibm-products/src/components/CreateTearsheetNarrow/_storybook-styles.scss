@@ -1,0 +1,27 @@
+//
+// Copyright IBM Corp. 2021, 2021
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use 'ALIAS_STORY_STYLE_CONFIG' as c4p-settings;
+@use '@carbon/styles/scss/spacing' as *;
+
+$story-class: #{c4p-settings.$pkg-prefix}--create-tearsheet-narrow--story;
+
+.#{$story-class}__flex-container {
+  display: flex;
+  align-items: baseline;
+}
+
+.#{$story-class}__flex-container .#{c4p-settings.$carbon-prefix}--form-item,
+.#{$story-class}__form .#{c4p-settings.$carbon-prefix}--form-item {
+  margin-block-end: $spacing-05;
+}
+
+.#{$story-class}__flex-container .#{c4p-settings.$carbon-prefix}--form-item,
+.#{$story-class}__flex-container
+  .#{c4p-settings.$carbon-prefix}--dropdown__wrapper.#{c4p-settings.$carbon-prefix}--list-box__wrapper {
+  inline-size: 50%;
+}

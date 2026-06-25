@@ -1,0 +1,48 @@
+import { Story, Controls, Source, Canvas } from '@storybook/addon-docs/blocks';
+import { CodesandboxLink } from '../../global/js/utils/story-helper';
+import { SearchBar } from '.';
+import * as SearchBarStories from './SearchBar.stories';
+
+# SearchBar
+
+[Carbon Search pattern](https://carbondesignsystem.com/patterns/search-pattern/)
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Example usage](#example-usage)
+- [Component API](#component-api)
+
+## Overview
+
+{/* TODO: Overview. */}
+
+## Example usage
+
+### Default
+
+<Canvas of={SearchBarStories.Default}></Canvas>
+
+### Initial Value
+
+<Canvas of={SearchBarStories.InitialValue}></Canvas>
+
+### Scopes
+
+<Canvas of={SearchBarStories.Scopes}></Canvas>
+
+### Unsorted Scopes
+
+<Canvas of={SearchBarStories.UnsortedScopes}></Canvas>
+
+### Selected Scopes
+
+<Canvas of={SearchBarStories.SelectedScopes}></Canvas>
+
+## Code sample
+
+<CodesandboxLink exampleDirectory="SearchBar" />
+
+## Component API
+
+<Controls />

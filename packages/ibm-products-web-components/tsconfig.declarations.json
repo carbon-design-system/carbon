@@ -1,0 +1,24 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "outDir": "./es",
+    "rootDir": "./src",
+    "declaration": true,
+    "declarationMap": true,
+    "emitDeclarationOnly": true,
+    "skipLibCheck": true
+  },
+  "include": ["src/**/*"],
+  "exclude": [
+    "**/*.test.ts",
+    "**/*.test.tsx",
+    "**/*.stories.ts",
+    "**/*.stories.tsx",
+    "**/*.figma.ts",
+    "**/__tests__/**",
+    "**/node_modules/**",
+    "src/**/_story-assets/**",
+    "src/**/*-helpers.ts",
+    "src/globals/internal/storybook-cdn.ts"
+  ]
+}

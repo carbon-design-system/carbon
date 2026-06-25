@@ -1,0 +1,94 @@
+//
+// Copyright IBM Corp. 2024, 2025
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+/* stylelint-disable carbon/layout-use */
+/* stylelint-disable function-no-unknown */
+
+// Standard imports.
+@use '../../global/styles/project-settings' as c4p-settings;
+@use '../../global/styles/mixins';
+
+// Other Carbon settings if needed
+@use '@carbon/layout/scss/convert' as *;
+@use '@carbon/styles/scss/type' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/themes';
+@use '@carbon/styles/scss/type';
+@use '@carbon/styles/scss/config' as carbon-config;
+
+// The block part of our conventional BEM class names (blockClass__E--M).
+$block-class: #{c4p-settings.$pkg-prefix}--status-indicator;
+$block-class-step: #{c4p-settings.$pkg-prefix}--status-indicator-step;
+
+// Default styling
+.#{$block-class}__title {
+  @include type-style('heading-02');
+
+  margin-block-end: $spacing-02;
+}
+.#{$block-class-step}__details {
+  display: flex;
+  align-items: center;
+  min-block-size: $spacing-07;
+}
+.#{$block-class-step}__icon {
+  position: relative;
+  display: flex;
+  inline-size: $spacing-06;
+}
+.#{$block-class-step}__text {
+  @include type-style('body-compact-01');
+
+  color: $text-primary;
+}
+.#{$block-class} .#{$block-class}__button {
+  align-items: center;
+  margin-block-start: $spacing-01;
+  margin-inline-start: $spacing-03;
+}
+.#{$block-class} .#{$block-class}__button:not([disabled]) svg {
+  fill: currentColor;
+  margin-inline-start: $spacing-03;
+}
+
+// Text
+.#{$block-class-step}--inactive .#{$block-class-step}__text {
+  color: $text-secondary;
+}
+.#{$block-class-step}--inactive svg {
+  fill: $icon-primary;
+}
+
+// Icons
+//
+// Override <InlineLoading's> large margins.
+.#{$block-class-step}--active .#{$block-class-step}__icon {
+  margin-inline-end: 0;
+}
+.#{$block-class-step}--active
+  .#{carbon-config.$prefix}--inline-loading__animation {
+  margin-inline-end: to-rem(7px);
+}
+// /Override
+//
+.#{$block-class-step}--error svg {
+  fill: $support-error;
+}
+.#{$block-class-step}--finished svg {
+  fill: $support-success;
+}
+
+// Error message
+.#{$block-class-step}__error-message {
+  @include type-style('label-01');
+
+  color: $text-error;
+
+  margin-block: to-rem(-2px) to-rem(6px);
+  margin-inline-start: $spacing-06;
+}

@@ -1,0 +1,27 @@
+//
+// Copyright IBM Corp. 2024, 2024
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+// Standard imports.
+@use '../../global/styles/project-settings' as c4p-settings;
+@use '../../global/styles/mixins';
+
+// Other Carbon settings if needed
+// TODO: @use '@carbon/styles/scss/grid';
+// or
+// TODO: @use '@carbon/styles/scss/grid';
+
+// DelimitedList uses the following Carbon for IBM Products components:
+// TODO: @use(s) of IBM Products component styles used by DelimitedList
+
+// The block part of our conventional BEM class names (blockClass__E--M).
+$block-class: #{c4p-settings.$pkg-prefix}--delimited-list;
+
+.#{$block-class}-truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

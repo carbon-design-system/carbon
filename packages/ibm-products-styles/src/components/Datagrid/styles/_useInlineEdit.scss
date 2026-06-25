@@ -1,0 +1,447 @@
+/**
+ * Copyright IBM Corp. 2024, 2025
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/components/button/tokens' as *;
+@use '@carbon/styles/scss/config' as carbon-config;
+@use '@carbon/type' as *;
+
+@use '../../../global/styles/project-settings' as c4p-settings;
+@use './variables';
+
+$row-heights: (
+  xs: 1.5rem,
+  sm: 2rem,
+  md: 2.5rem,
+  lg: 3rem,
+  xl: 4rem,
+);
+
+@each $size, $size-value in $row-heights {
+  .#{variables.$block-class}
+    .#{variables.$block-class}__inline-edit--outer-cell-button--#{$size}
+    .#{carbon-config.$prefix}--text-input,
+  .#{variables.$block-class}
+    .#{variables.$block-class}__inline-edit--outer-cell-button--#{$size}
+    .#{carbon-config.$prefix}--number
+    input[type='number'],
+  .#{variables.$block-class}
+    .#{variables.$block-class}__inline-edit--outer-cell-button--#{$size}
+    .#{variables.$block-class}__inline-edit--select
+    .#{carbon-config.$prefix}--list-box.#{carbon-config.$prefix}--dropdown,
+  .#{variables.$block-class}
+    .#{variables.$block-class}__inline-edit--date.#{variables.$block-class}__inline-edit--date-#{$size}
+    .#{carbon-config.$prefix}--date-picker__input {
+    block-size: $size-value;
+  }
+  .#{variables.$block-class}
+    .#{variables.$block-class}__inline-edit--outer-cell-button--#{$size}
+    .#{carbon-config.$prefix}--number__control-btn::before,
+  .#{variables.$block-class}
+    .#{variables.$block-class}__inline-edit--outer-cell-button--#{$size}
+    .#{carbon-config.$prefix}--number__control-btn::after {
+    block-size: calc(#{$size-value} - 0.25rem);
+  }
+  .#{variables.$block-class}
+    .#{variables.$block-class}__inline-edit--outer-cell-button--#{$size}
+    .#{variables.$block-class}__inline-edit--select
+    .#{carbon-config.$prefix}--list-box {
+    max-block-size: none;
+  }
+}
+
+@mixin input-outline($color: $focus) {
+  /* stylelint-disable-next-line carbon/theme-use */
+  outline: $spacing-01 solid $color;
+  outline-offset: calc(-1 * #{$spacing-01});
+
+  @media screen and (prefers-contrast) {
+    outline-style: dotted;
+  }
+}
+
+.#{variables.$block-class} {
+  --#{variables.$block-class}--grid-header-height: 0;
+}
+
+.#{variables.$block-class}__inline-edit-cell {
+  display: flex;
+  align-items: center;
+  block-size: 100%;
+}
+
+.#{variables.$block-class}
+  .#{c4p-settings.$pkg-prefix}--inline-edit__after-input-elements {
+  display: flex;
+  align-items: center;
+}
+
+.#{variables.$block-class}__inline-edit--outer-cell-checkbox-focus
+  .#{carbon-config.$prefix}--checkbox-label::before {
+  outline: $spacing-01 solid $focus;
+  outline-offset: 1px;
+}
+
+.#{variables.$block-class}__inline-edit--outer-cell-checkbox {
+  display: flex;
+  justify-content: center;
+  block-size: -webkit-fill-available;
+  padding-inline: $spacing-05;
+}
+
+.#{variables.$block-class}__static--outer-cell {
+  display: flex;
+  align-items: center;
+  block-size: -webkit-fill-available;
+}
+
+.#{variables.$block-class}__inline-edit--outer-cell-button {
+  block-size: calc(100% + 2px); // account for borders
+  inline-size: 100%;
+}
+
+.#{variables.$block-class}__inline-edit--outer-cell-button
+  .#{variables.$block-class}__inline-edit-button {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  block-size: 100%;
+  color: $text-secondary;
+  cursor: pointer;
+  inline-size: 100%;
+  outline: 0; // handled by active class
+  padding-inline-start: $spacing-05;
+  .#{variables.$block-class}__label-icon {
+    block-size: $spacing-05;
+    padding-inline-end: $spacing-05;
+  }
+  &.#{variables.$block-class}__inline-edit-button--non-edit {
+    cursor: default;
+    padding-inline-start: 0;
+  }
+  .#{variables.$block-class}__inline-edit-button-icon {
+    block-size: $spacing-05;
+    fill: $icon-secondary;
+  }
+  &.#{variables.$block-class}__inline-edit-button--date {
+    @include font-family($name: mono);
+  }
+  &.#{variables.$block-class}__inline-edit-button--selection {
+    justify-content: flex-start;
+  }
+  // Always show renderIcon if inline edit columns are less than half of total columns
+  .#{variables.$block-class}__inline-edit-button-icon {
+    display: none;
+  }
+
+  /* stylelint-disable-next-line */
+  &:hover,
+  &.#{variables.$block-class}__inline-edit-button--active {
+    .#{variables.$block-class}__inline-edit-button-icon {
+      display: block;
+    }
+  }
+}
+
+.#{variables.$block-class}__inline-edit--outer-cell-button
+  .#{variables.$block-class}__inline-edit-button:not(
+    [data-disabled='true']
+  ):hover {
+  background-color: $layer-active;
+  color: $text-primary;
+  .#{variables.$block-class}__inline-edit-button-icon {
+    fill: $icon-primary;
+  }
+}
+
+.#{variables.$block-class}__inline-edit--outer-cell-button
+  .#{variables.$block-class}__inline-edit-button.#{variables.$block-class}__inline-edit-button--active:not(
+    [data-disabled='true']
+  ) {
+  background-color: $layer-active;
+  color: $text-primary;
+  cursor: text;
+}
+
+.#{variables.$block-class}__inline-edit--outer-cell-button
+  .#{variables.$block-class}__inline-edit-button.#{variables.$block-class}__inline-edit-button--active {
+  @include input-outline;
+}
+
+.#{variables.$block-class}__inline-edit--outer-cell-button
+  .#{variables.$block-class}__inline-edit-button--disabled:not(
+    .#{variables.$block-class}__inline-edit-button--edit-less-than-half-of-total-cols
+  ) {
+  color: $button-disabled;
+  cursor: not-allowed;
+}
+
+.#{variables.$block-class}__inline-edit--outer-cell-button
+  .#{variables.$block-class}__inline-edit-button
+  .#{variables.$block-class}__inline-edit-button-label {
+  overflow: hidden;
+  padding-inline-end: $spacing-05;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.#{variables.$block-class}__inline-edit--outer-cell-button
+  .#{variables.$block-class}__inline-edit-button
+  .#{variables.$block-class}__inline-edit-button-label.#{variables.$block-class}__inline-edit-button-label-with-icon {
+  padding-inline-end: $spacing-09;
+}
+
+.#{variables.$block-class}__inline-edit--outer-cell-button
+  .#{carbon-config.$prefix}--text-input,
+.#{variables.$block-class}__inline-edit--outer-cell-button
+  .#{carbon-config.$prefix}--number
+  input[type='number'] {
+  block-size: $spacing-09;
+}
+
+.#{variables.$block-class}__inline-edit-button-icon {
+  position: absolute;
+  inset-inline-end: $spacing-05;
+}
+
+.#{variables.$block-class}__table-with-inline-edit.#{carbon-config.$prefix}--data-table
+  .#{variables.$block-class}__cell-inline-edit {
+  position: relative;
+  padding: 0;
+  .#{variables.$block-class}__inline-edit-button--non-edit {
+    padding-inline-start: $spacing-05;
+  }
+
+  .#{carbon-config.$prefix}--number input[type='number'] {
+    min-inline-size: auto;
+    padding-inline-end: $spacing-05;
+  }
+}
+
+.#{variables.$block-class}__inline-edit--select
+  .#{variables.$block-class}__inline-edit--select-item {
+  padding-block-end: $spacing-05;
+  padding-inline-start: $spacing-05;
+}
+
+.#{variables.$block-class}__inline-edit--select.#{carbon-config.$prefix}--dropdown,
+.#{variables.$block-class}__inline-edit--date
+  .#{carbon-config.$prefix}--date-picker {
+  inline-size: inherit;
+}
+
+.#{variables.$block-class}__inline-edit--select.#{carbon-config.$prefix}--dropdown,
+.#{variables.$block-class}__inline-edit--date
+  .#{carbon-config.$prefix}--date-picker.#{carbon-config.$prefix}--date-picker--single
+  .#{carbon-config.$prefix}--date-picker__input {
+  block-size: $spacing-09; // default row height
+  inline-size: 100%;
+  max-block-size: none;
+}
+
+.#{variables.$block-class}__inline-edit--date
+  .#{carbon-config.$prefix}--date-picker-container {
+  inline-size: inherit;
+}
+
+.#{variables.$block-class}__inline-edit--date.#{carbon-config.$prefix}--date-picker.#{carbon-config.$prefix}--date-picker--single
+  .#{carbon-config.$prefix}--date-picker__input {
+  overflow: hidden;
+  inline-size: 100%;
+  max-inline-size: none;
+  padding-inline-end: $spacing-07;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.#{variables.$block-class}
+  .#{carbon-config.$prefix}--data-table
+  .#{variables.$block-class}__carbon-row-hover-active
+  td {
+  background-color: $layer-hover;
+  border-block-start-color: $layer-hover;
+}
+
+// Custom border/outline for the focus region area, because of the scrolling
+// containers, using default border caused grid area width to be changed and
+// outlines were not present be
+.#{variables.$block-class}
+  .#{variables.$block-class}__grid-container-active::before {
+  position: absolute;
+  z-index: 2;
+  background-color: $link-inverse;
+  block-size: calc(
+    100% - 50px - var(--#{variables.$block-class}--grid-header-height)
+  );
+  content: '';
+  inline-size: 2px;
+  inset-block-end: 0;
+  inset-inline-start: 0;
+}
+
+.#{variables.$block-class}
+  .#{variables.$block-class}__grid-container-active::after {
+  position: absolute;
+  z-index: 2;
+  background-color: $link-inverse;
+  block-size: calc(
+    100% - 50px - var(--#{variables.$block-class}--grid-header-height)
+  );
+  content: '';
+  inline-size: 2px;
+  inset-block-end: 0;
+  inset-inline-end: 0;
+}
+
+.#{variables.$block-class}
+  .#{variables.$block-class}__grid-container-active
+  .#{carbon-config.$prefix}--data-table-content::before {
+  position: absolute;
+  z-index: 2;
+  background-color: $link-inverse;
+  block-size: 2px;
+  inline-size: var(--#{variables.$block-class}--grid-width);
+  inset-block-start: 0;
+  inset-inline: 0;
+}
+
+.#{variables.$block-class}
+  .#{variables.$block-class}__grid-container-active.#{variables.$block-class}__grid-container-active--without-toolbar::before,
+.#{variables.$block-class}
+  .#{variables.$block-class}__grid-container-active.#{variables.$block-class}__grid-container-active--without-toolbar::after {
+  block-size: calc(
+    100% - 2px - var(--#{variables.$block-class}--grid-header-height)
+  );
+}
+
+.#{variables.$block-class}
+  .#{variables.$block-class}__grid-container-active
+  .#{variables.$block-class}__table-container {
+  outline: 2px solid $link-inverse;
+  outline-offset: -2px;
+}
+
+.#{variables.$block-class}
+  .#{variables.$block-class}__grid-container-inline-edit
+  .#{variables.$block-class}__table-container {
+  padding-block-start: $spacing-01;
+}
+
+.#{variables.$block-class}
+  .#{variables.$block-class}__inline-edit--outer-cell-button--invalid
+  [data-invalid]
+  ~ .#{carbon-config.$prefix}--form-requirement,
+.#{variables.$block-class}
+  .#{variables.$block-class}__inline-edit--outer-cell-button--invalid
+  [data-invalid]
+  .#{carbon-config.$prefix}--form-requirement {
+  position: absolute;
+  z-index: 3;
+  padding: $spacing-03 $spacing-06 $spacing-03 $spacing-03;
+  margin: 0;
+  background-color: $layer-01;
+  inline-size: 100%;
+  inset-block-start: calc(100% - #{$spacing-01});
+  outline: $spacing-01 solid $support-error;
+  outline-offset: calc(-1 * #{$spacing-01});
+}
+
+.#{variables.$block-class}
+  .#{variables.$block-class}__inline-edit--outer-cell-button--invalid
+  .#{carbon-config.$prefix}--list-box[data-invalid]:focus-within
+  ~ .#{carbon-config.$prefix}--form-requirement {
+  outline: $spacing-01 solid $focus;
+}
+
+.#{variables.$block-class}
+  .#{variables.$block-class}__inline-edit--outer-cell-button--invalid
+  .#{carbon-config.$prefix}--list-box__invalid-icon,
+.#{variables.$block-class}
+  .#{variables.$block-class}__inline-edit--outer-cell-button--invalid
+  .#{carbon-config.$prefix}--text-input__invalid-icon,
+.#{variables.$block-class}
+  .#{variables.$block-class}__inline-edit--outer-cell-button--invalid
+  .#{carbon-config.$prefix}--number__invalid {
+  z-index: 4;
+  inset-block-start: calc(100% + #{$spacing-04} + #{$spacing-01});
+  inset-inline-end: $spacing-03;
+}
+
+.#{variables.$block-class}
+  .#{variables.$block-class}__inline-edit--outer-cell-button--invalid
+  .#{carbon-config.$prefix}--number__invalid {
+  inset-block-start: calc(100% + #{$spacing-02} + #{$spacing-01});
+}
+
+.#{variables.$block-class}
+  .#{variables.$block-class}__inline-edit--outer-cell-button--invalid
+  .#{carbon-config.$prefix}--form-requirement::before {
+  position: absolute;
+  background-color: $layer-01;
+  block-size: $spacing-01;
+  content: '';
+  inline-size: calc(100% - (#{$spacing-01} * 2));
+  inset-block-start: 0;
+  inset-inline-start: $spacing-01;
+}
+
+.#{variables.$block-class}__inline-edit--outer-cell-button--invalid
+  .#{carbon-config.$prefix}--form-requirement::after {
+  position: absolute;
+  background-color: $layer-accent-01;
+  block-size: 1px;
+  content: '';
+  inline-size: calc(100% - (#{$spacing-03} * 2));
+  inset-block-start: $spacing-01;
+  inset-inline-start: $spacing-03;
+}
+
+.#{variables.$block-class} tbody tr:hover {
+  .#{variables.$block-class}__inline-edit--outer-cell-button--invalid
+    .#{carbon-config.$prefix}--form-requirement::before {
+    background-color: $layer-accent-01;
+  }
+  .#{variables.$block-class}__inline-edit--outer-cell-button--invalid
+    .#{carbon-config.$prefix}--form-requirement::after {
+    background-color: transparent;
+  }
+}
+
+// Keep input focus states using $support-01 when inline edit cell is invalid
+.#{variables.$block-class}
+  .#{variables.$block-class}__inline-edit--outer-cell-button--invalid
+  .#{carbon-config.$prefix}--text-input:focus,
+.#{variables.$block-class}
+  .#{variables.$block-class}__inline-edit--outer-cell-button--invalid
+  .#{carbon-config.$prefix}--number
+  input[type='number']:focus,
+.#{variables.$block-class}
+  .#{variables.$block-class}__inline-edit--outer-cell-button--invalid
+  .#{carbon-config.$prefix}--number
+  input[type='number']:focus
+  ~ .#{carbon-config.$prefix}--number__controls
+  .#{carbon-config.$prefix}--number__control-btn:hover,
+.#{variables.$block-class}
+  .#{variables.$block-class}__inline-edit--outer-cell-button--invalid
+  .#{carbon-config.$prefix}--number__control-btn:focus {
+  outline-color: $support-error;
+}
+
+.#{variables.$block-class} .#{carbon-config.$prefix}--text-input:focus {
+  background: $field-01;
+}
+
+.#{variables.$block-class}
+  .#{variables.$block-class}__inline-edit--outer-cell-button--invalid
+  .#{carbon-config.$prefix}--number
+  input[type='number'][data-invalid]:focus
+  ~ .#{carbon-config.$prefix}--number__controls
+  .#{carbon-config.$prefix}--number__control-btn.up-icon::after {
+  background-color: $support-error;
+}

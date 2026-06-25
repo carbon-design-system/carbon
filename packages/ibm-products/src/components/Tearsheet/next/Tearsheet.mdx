@@ -1,0 +1,544 @@
+import { Story, Controls, Source, Canvas } from '@storybook/addon-docs/blocks';
+import { Tearsheet } from '.';
+import * as stories from './Tearsheet.stories';
+import { stackblitzPrefillConfig } from '../../../../previewer/codePreviewer';
+import styles from './_storybook-styles.scss?inline';
+
+export const customImports = [
+  `import {
+  AILabel,
+  AILabelContent
+} from '@carbon/react';
+ import {
+  Information
+} from '@carbon/react/icons';
+import { preview__TruncatedText as TruncatedText } from '@carbon/ibm-products';
+import { breakpoints } from '@carbon/layout';`,
+];
+
+export const customFunctionArr = [
+  [
+    `const variant = ['wide', 'narrow', 'wide'],decorator=1,influencerWidth='',summaryContentWidth='',verticalGap='';
+    const useMatchMedia = (query) => {
+  const [matches, setMatches] = React.useState(() => {
+    if (typeof window !== 'undefined') {
+      return window.matchMedia(query).matches;
+    }
+    return false;
+  });
+
+React.useEffect(() => { if (typeof window === 'undefined') { return; }
+
+    const mediaQueryList = window.matchMedia(query);
+    const handleChange = (event) => {
+      setMatches(event.matches);
+    };
+
+    mediaQueryList.addEventListener('change', handleChange);
+    setMatches(mediaQueryList.matches);
+
+    return () => {
+      mediaQueryList.removeEventListener('change', handleChange);
+    };
+
+}, [query]);
+
+return matches; }; const sampleDecorator = (decorator) => { switch (decorator) {
+case 1: return ( <AILabel className="decorator-container" size="xs">
+
+<AILabelContent> <div> <p className="secondary">AI Explained</p> <h1>84%</h1>
+<p className="secondary bold">Confidence score</p> <p className="secondary">
+This is not really Lorem Ipsum but the spell checker did not like the previous
+text with it&apos;s non-words which is why this unwieldy sentence, should one
+choose to call it that, here. </p> <hr /> <p className="secondary">Model
+type</p> <p className="bold">Foundation model</p> </div> </AILabelContent>
+</AILabel> ); case 2: return ( <Toggletip>
+<ToggletipButton label="Additional information"> <Information />
+</ToggletipButton> <ToggletipContent> <p>Custom content here</p>
+</ToggletipContent> </Toggletip> ); default: return; } };const description = <TruncatedText id='header-description__truncatedText' expandLabel={'Read more'} collapseLabel={'Read less'} value="Buttons are used to initialize an action, either in the background or foreground of an experience. There are several kinds of buttons. Primary buttons should be used for the principle call to action on the page. Secondary buttons should be used for secondary actions on each page. Danger buttons should be used for a negative action (such as Delete) on the page" type="expand" />;`,],];
+
+# Tearsheet
+
+[Usage guidelines](https://pages.github.ibm.com/carbon/ibm-products/components/tearsheet/usage/)
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Usage](#usage)
+- [Examples](#examples)
+- [Component API](#component-api)
+
+## Overview
+
+A tearsheet is a mostly full-screen type of dialog that keeps users in-context
+and focused by bringing actionable content front and center while revealing
+parts of the UI behind it. There is also a narrow variant of the tearsheet.
+
+A tearsheet is composed of up to five zones, providing flexibility based on the
+content: a heading area, an optional navigation area positioned just below the
+heading, an optional influencer area on the left, a main content area, an
+optional summary details area on the right, and a footer section.
+
+The implementation is designed to deliver a composable tearsheet that’s both
+feature-rich and highly customizable, allowing users to adapt it to any level of
+complexity. This is structured using the compound component pattern in React,
+with distinct and well-defined sections, so that you need to import the main
+`Tearsheet` and all other subcomponents will be static properties of this one.
+
+By default, the tearsheet unmounts from the DOM after closing for optimal
+performance and smooth animations unlike in old Tearsheet. To keep the component
+mounted in the DOM when closed (preserving state), use the `keepMounted` prop:
+`<Tearsheet keepMounted={true}>`.
+
+## Migration from Legacy Tearsheet
+
+### Benefits of the New Tearsheet
+
+- **Scalable & Composable**: Built with compound components that can be easily
+  extended and customized for any use case
+- **Improved Performance**: Presence-based rendering with automatic cleanup and
+  optimized animations
+- **Collapsible Header**: Smart header that automatically collapses on scroll to
+  maximize content space (can be disabled via `disableHeaderCollapse` prop)
+- **Better Developer Experience**: Intuitive API with clear component boundaries
+  and self-documenting structure
+- **Type Safety**: Full TypeScript support with better type inference and
+  autocomplete
+
+### Migration Guide
+
+**Old Tearsheet
+(packages/ibm-products/src/components/Tearsheet/Tearsheet.tsx):**
+
+```jsx
+<Tearsheet
+  open={open}
+  title="Title"
+  description="Description"
+  actions={[
+    { label: 'Cancel', kind: 'secondary', onClick: handleCancel },
+    { label: 'Submit', kind: 'primary', onClick: handleSubmit },
+  ]}
+  influencer={<div>Influencer content</div>}
+  onClose={handleClose}
+>
+  <div>Main content</div>
+</Tearsheet>
+```
+
+**New Tearsheet (packages/ibm-products/src/components/Tearsheet/next):**
+
+```jsx
+<Tearsheet open={open} onClose={handleClose}>
+  <Tearsheet.Header>
+    <Tearsheet.HeaderContent title="Title" description="Description" />
+  </Tearsheet.Header>
+
+  <Tearsheet.Influencer>
+    <div>Influencer content</div>
+  </Tearsheet.Influencer>
+
+  <Tearsheet.Body>
+    <Tearsheet.MainContent>
+      <div>Main content</div>
+    </Tearsheet.MainContent>
+  </Tearsheet.Body>
+
+  <Tearsheet.Footer>
+    <Button kind="secondary" onClick={handleCancel}>
+      Cancel
+    </Button>
+    <Button kind="primary" onClick={handleSubmit}>
+      Submit
+    </Button>
+  </Tearsheet.Footer>
+</Tearsheet>
+```
+
+**Note on Influencer and SummaryContent:** In narrow variant or on small
+screens, `<Tearsheet.Influencer>` and `<Tearsheet.SummaryContent>` are hidden by
+default. They can be accessed via side panels using
+`influencerPanelOpen`/`onInfluencerPanelClose` and
+`summaryPanelOpen`/`onSummaryPanelClose` props, triggered by user actions (e.g.,
+button clicks).
+
+### Accessibility
+
+#### Trigger Button Announcement
+
+When implementing a button or control that opens a Tearsheet, it's important to
+inform screen reader users that the action will open a dialog. Add the
+`aria-haspopup="dialog"` attribute to your trigger button:
+
+```jsx
+<Button onClick={() => setOpen(true)} aria-haspopup="dialog">
+  Open Tearsheet
+</Button>
+```
+
+This ensures that assistive technologies announce "opens dialog" or similar
+text, helping users understand the behavior of the control before activating it.
+
+#### Landmark Regions
+
+For better accessibility, wrap your Tearsheet content in a proper landmark
+region. If your Tearsheet contains form inputs, wrap the content in a `<form>`
+element:
+
+```jsx
+<Tearsheet open={open} onClose={handleClose}>
+  <Tearsheet.Header>
+    <Tearsheet.HeaderContent title="Form Title" />
+  </Tearsheet.Header>
+
+  <Tearsheet.Body>
+    <Tearsheet.MainContent>
+      <form onSubmit={handleSubmit}>{/* Your form content */}</form>
+    </Tearsheet.MainContent>
+  </Tearsheet.Body>
+
+  <Tearsheet.Footer>
+    <Button kind="secondary" onClick={handleClose}>
+      Cancel
+    </Button>
+    <Button kind="primary" onClick={handleSubmit}>
+      Submit
+    </Button>
+  </Tearsheet.Footer>
+</Tearsheet>
+```
+
+For non-form content, consider using semantic HTML elements like `<section>` or
+`<article>` with appropriate ARIA roles to create proper landmark regions for
+screen reader navigation.
+
+### Usage
+
+```jsx
+<Tearsheet {...props}>
+  <Tearsheet.Header>
+    <Tearsheet.HeaderContent
+      {...headerContentProps}
+      headerActions={
+        <Tearsheet.HeaderActions
+          menuButtonProps={{ label: 'Actions', kind: 'tertiary' }}
+        >
+          <Tearsheet.HeaderActionItem overflowItemLabel="Action 1">
+            <Button kind="tertiary" size="sm">
+              Action 1
+            </Button>
+          </Tearsheet.HeaderActionItem>
+          ...
+        </Tearsheet.HeaderActions>
+      }
+    ></Tearsheet.HeaderContent>
+    Any extra content like ProgressIndicator, notifications etc can go here
+    <Tearsheet.NavigationBar scroller={<Tearsheet.ScrollButton />}>
+      This sticks to bottom of the header , so tablist, tags etc can be rendered
+      here
+    </Tearsheet.NavigationBar>
+  </Tearsheet.Header>
+
+  <Tearsheet.Influencer>
+    Rendered on the left, spanning the full height. Can be used to display a
+    vertical progress indicator or similar elements.
+  </Tearsheet.Influencer>
+
+  <Tearsheet.Body>
+    <Tearsheet.MainContent>
+      This is the main content area.
+    </Tearsheet.MainContent>
+    <Tearsheet.SummaryContent>
+      // Rendered next to the main content area, this section can be used to
+      display summary details or related information.
+    </Tearsheet.SummaryContent>
+  </Tearsheet.Body>
+
+  <Tearsheet.Footer>Footer buttons can be rendered here</Tearsheet.Footer>
+</Tearsheet>
+```
+
+## Main Anatomy
+
+The Tearsheet component is composed of several sections: a Header, an optional
+Influencer area displayed on the left below the header (spanning the full
+height), a Body that contains the main content and an optional Summary, and a
+Footer.
+
+```jsx
+<Tearsheet {...props}>
+  <Tearsheet.Header></Tearsheet.Header>
+
+  <Tearsheet.Influencer> </Tearsheet.Influencer>
+
+  <Tearsheet.Body>
+    <Tearsheet.MainContent></Tearsheet.MainContent>
+
+    <Tearsheet.SummaryContent></Tearsheet.SummaryContent>
+  </Tearsheet.Body>
+
+  <Tearsheet.Footer></Tearsheet.Footer>
+</Tearsheet>
+```
+
+On smaller screens or within narrow tearsheets, the Influencer and
+SummaryContent sections are hidden by default.
+
+However, they can be accessed through side panels: use the `influencerPanelOpen`
+and `onInfluencerPanelClose` props to control the left (influencer) panel, and
+the `summaryPanelOpen` and `onSummaryPanelClose` props to control the right
+(summary) panel.
+
+```jsx
+ <Tearsheet.Influencer
+    influencerPanelOpen={influencerPanelOpen}
+    onInfluencerPanelClose={() => setInfluencerPanelOpen(false)} >
+</Tearsheet.Influencer>
+
+<Tearsheet.SummaryContent
+    summaryPanelOpen={rightPanelOpen}
+    onSummaryPanelClose={() => setRightPanelOpen(false)}>
+</Tearsheet.Influencer>
+```
+
+## Tearsheet.Header
+
+Header sections consist of HeaderContent, HeaderActions and NavigationBar. <br/>
+**HeaderContent :**<br/> Here is where we render label, title, description,
+titleIcon . User can optionally render any custom content as children of
+HeaderContent **headerActions** The `headerActions` prop of `HeaderContent`
+accepts a `ReactNode` and occupies the right-hand area next to the header
+content. You can pass `<Tearsheet.HeaderActions>` to this prop, which positions
+itself at the top of the header—just before the AI label and close button. This
+area can contain action buttons or any other interactive elements. Each action
+item can be wrapped inside `Tearsheet.HeaderActionItem`, which automatically
+manages layout by collapsing overflowing actions into a menu button based on
+available space.<br/> **NavigationBar :**<br/> This section is anchored to the
+bottom of the header and can be used to render elements such as a tab bar or
+tags, depending on your needs. It also accepts a scroller prop, which takes a
+React node. To include a scroll button that expands or collapses the header,
+pass `PageHeader.ScrollButton` to the `scroller` prop.
+
+```jsx
+<Tearsheet.Header>
+  <Tearsheet.HeaderContent
+    {...headerContentProps}
+    headerActions={
+      <Tearsheet.HeaderActions>
+        <Tearsheet.HeaderActionItem>
+          <Button kind="tertiary" size="sm">
+            Action 1
+          </Button>
+        </Tearsheet.HeaderActionItem>
+        ...
+      </Tearsheet.HeaderActions>
+    }
+  ></Tearsheet.HeaderContent>
+  Any extra content like ProgressIndicator, notifications etc can go here
+  <Tearsheet.NavigationBar
+    scroller={<Tearsheet.ScrollButton />}
+  ></Tearsheet.NavigationBar>
+</Tearsheet.Header>
+```
+
+## Tearsheet.Footer
+
+The Footer component supports two approaches for rendering action buttons:
+
+**Using the `actions` prop (recommended):**
+
+```jsx
+<Tearsheet.Footer
+  actions={[
+    {
+      kind: 'ghost',
+      label: 'Cancel',
+      onClick: () => setOpen(false),
+    },
+    {
+      kind: 'secondary',
+      label: 'Back',
+    },
+    {
+      kind: 'primary',
+      label: 'Submit',
+    },
+  ]}
+/>
+```
+
+**Using custom buttons:**
+
+```jsx
+<Tearsheet.Footer>
+  <Button kind="ghost" onClick={() => setOpen(false)}>
+    Cancel
+  </Button>
+  <Button kind="secondary">Back</Button>
+  <Button kind="primary">Submit</Button>
+</Tearsheet.Footer>
+```
+
+The `actions` prop automatically handles button sizing based on the tearsheet
+variant and screen size, while custom buttons give you full control over the
+footer layout.
+
+# Examples
+
+## Default
+
+<Canvas
+  of={stories.Default}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () =>
+        stackblitzPrefillConfig({
+          story: stories.Default,
+          styles: `
+            ${stories.default.parameters.styles ?? ''}
+            ${styles}
+          `,
+          customFunctionDefs: customFunctionArr,
+          customImports: customImports,
+          status: {
+            preview: ['Tearsheet'],
+          },
+        }),
+    },
+  ]}
+/>
+
+## With Influencer
+
+<Canvas
+  of={stories.WithInfluencer}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () =>
+        stackblitzPrefillConfig({
+          story: stories.WithInfluencer,
+          styles: `
+            ${stories.StackingTearsheet.parameters.styles ?? ''}
+            ${styles}
+          `,
+          customFunctionDefs: customFunctionArr,
+          customImports: [
+            `${customImports[0]};import {Bee} from '@carbon/react/icons';`,
+          ],
+          status: {
+            preview: ['Tearsheet'],
+          },
+        }),
+    },
+  ]}
+/>
+
+## With tabs
+
+To render tabs, wrap the entire Tearsheet in `<Tabs></Tabs>`. You can render
+`<Tablist>` in header `<Tearsheet.NavigationBar>` and `<TabPanels>` in
+`<Tearsheet.MainContent>`
+
+<Canvas
+  of={stories.WithTabs}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () =>
+        stackblitzPrefillConfig({
+          story: stories.WithTabs,
+          styles: `
+            ${stories.StackingTearsheet.parameters.styles ?? ''}
+            ${styles}
+          `,
+          customFunctionDefs: customFunctionArr,
+          customImports: customImports,
+          status: {
+            preview: ['Tearsheet'],
+          },
+        }),
+    },
+  ]}
+/>
+
+## With steps
+
+By default Tearsheet doesn't provide stepping, but you easily realize it using
+the `<StepProvider>`
+[utility](https://ibm-products.carbondesignsystem.com/?path=/docs/patterns-step-flows--overview)
+as demonstrated below
+
+<Canvas of={stories.withSteps} />
+
+## Narrow
+
+A narrow tearsheet is a slimmer variant of the tearsheet, providing a dialog
+that keeps users in-context and focused by bringing actionable content front and
+center while revealing more of the UI behind it.
+
+A narrow tearsheet comprises 3 zones: Header, MainContent and Footer. You can
+optionally choose to open influencer and SummaryContent in side panels
+
+<Canvas
+  of={stories.narrowTearsheet}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () =>
+        stackblitzPrefillConfig({
+          story: stories.narrowTearsheet,
+          styles: `
+            ${stories.StackingTearsheet.parameters.styles ?? ''}
+            ${styles}
+          `,
+          customFunctionDefs: customFunctionArr,
+          customImports: customImports,
+          status: {
+            preview: ['Tearsheet'],
+          },
+        }),
+    },
+  ]}
+/>
+
+## Stacking
+
+Stacking can be enabled using the `<StackProvider>` utility by wrapping all
+Tearsheets. You can optionally specify a stackStepSize—sm (0.5rem), md
+(0.75rem), or lg (1rem, default)
+
+```jsx
+ <StackProvider>
+ <Tearsheet>...</Tearsheet>
+ <Tearsheet>...</Tearsheet>
+ <Tearsheet>...</Tearsheet>
+ <StackProvider>
+```
+
+<Canvas
+  of={stories.StackingTearsheet}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () =>
+        stackblitzPrefillConfig({
+          story: stories.StackingTearsheet,
+          styles: `
+            ${stories.StackingTearsheet.parameters.styles ?? ''}
+            ${styles}
+          `,
+          customFunctionDefs: customFunctionArr,
+          customImports: customImports,
+          status: {
+            preview: ['Tearsheet'],
+          },
+        }),
+    },
+  ]}
+/>
+
+## Component API
+
+<Controls />

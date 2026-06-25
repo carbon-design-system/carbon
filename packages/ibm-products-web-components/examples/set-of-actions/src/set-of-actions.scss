@@ -1,0 +1,51 @@
+/*
+* Copyright IBM Corp. 2025, 2025
+*
+* This source code is licensed under the Apache-2.0 license found in the
+* LICENSE file in the root directory of this source tree.
+*/
+
+$css--plex: true !default;
+
+/* Other Carbon settings. */
+@use '@carbon/styles/scss/theme' as *;
+
+$prefix: 'c4p';
+$carbon-prefix: 'cds';
+
+$block-class: #{$prefix}--set-of-actions;
+
+:host {
+  .#{$block-class} {
+    height: 100%;
+
+    // Suppress custom elements until styles are loaded
+    #{$carbon-prefix}-button:not(:defined),
+    #{$carbon-prefix}-overflow-menu:not(:defined) {
+      display: none;
+    }
+
+    &--horizontal {
+      display: flex;
+    }
+
+    &--vertical {
+      display: inline-flex;
+      flex-direction: column;
+    }
+
+    &__overflow-svg {
+      // Web components ghost icon only button bug override
+      align-self: unset;
+      color: $icon-primary;
+    }
+
+    [data-floating-menu-container] {
+      position: relative;
+    }
+
+    [data-hidden]:not([data-fixed]) {
+      display: none;
+    }
+  }
+}

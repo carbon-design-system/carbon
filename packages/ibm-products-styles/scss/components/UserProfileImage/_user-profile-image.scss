@@ -1,0 +1,166 @@
+//
+// Copyright IBM Corp. 2021, 2025
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use 'sass:map';
+
+// Standard imports.
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/type';
+@use '@carbon/type/scss/font-family';
+@use '@carbon/styles/scss/config' as carbon-config;
+
+@use '../../global/styles/project-settings' as *;
+@use './color-map' as *;
+
+$block-class: #{$pkg-prefix}--user-profile-image;
+
+$sizes: (
+  xl: $spacing-10,
+  lg: $spacing-07,
+  md: $spacing-06,
+  sm: calc(#{$spacing-05} + #{$spacing-02}),
+  xs: $spacing-05,
+);
+
+@mixin size($size) {
+  $_size: map.get($sizes, $size);
+
+  block-size: $_size;
+
+  inline-size: $_size;
+}
+
+$base-colors: 'cyan', 'gray', 'green', 'magenta', 'purple', 'teal';
+$themes: (
+  'light': (
+    'light-contrast': 60,
+    'dark-contrast': 80,
+  ),
+  'dark': (
+    'light-contrast': 50,
+    'dark-contrast': 30,
+  ),
+);
+
+$theme-keys: map-keys($themes);
+
+@function carbon-get-background-color($color, $key, $contrast-key) {
+  @return map.get(
+    $carbon-colors,
+    #{$color}#{map.get(map.get($themes, $key), #{$contrast-key}-contrast)}
+  );
+}
+
+@each $key in $theme-keys {
+  .#{$block-class}--#{$key} {
+    color: $layer-01;
+  }
+  @each $color in $base-colors {
+    @each $contrast-key in $theme-keys {
+      .#{$block-class}--#{$key}.#{$block-class}--#{$contrast-key}-#{$color} {
+        // stylelint-disable-next-line carbon/theme-use
+        background-color: carbon-get-background-color(
+          $color,
+          $key,
+          $contrast-key
+        );
+      }
+    }
+  }
+}
+
+.#{carbon-config.$prefix}--tooltip__trigger.#{$block-class}__tooltip,
+.#{$block-class}__tooltip.#{carbon-config.$prefix}--btn--ghost:not([disabled])
+  svg {
+  /* stylelint-disable-next-line max-nesting-depth */
+  &:hover,
+  &:focus {
+    /* stylelint-disable-next-line max-nesting-depth */
+    svg {
+      fill: $layer-01;
+    }
+  }
+}
+
+.#{$block-class} {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 100%;
+  text-transform: uppercase;
+}
+
+.#{$block-class}__tooltip.#{carbon-config.$prefix}--btn--md.#{carbon-config.$prefix}--btn--icon-only {
+  padding: 0;
+  border-radius: 50%;
+  min-block-size: auto;
+}
+
+.#{carbon-config.$prefix}--btn--ghost.#{$block-class}__tooltip:focus {
+  border: 0;
+  box-shadow: 0 0 0 $spacing-02 $focus;
+}
+
+.#{carbon-config.$prefix}--tooltip__trigger .#{$block-class} svg,
+.#{$block-class}__tooltip.#{carbon-config.$prefix}--btn--ghost:not([disabled])
+  svg {
+  fill: $layer-01;
+}
+
+.#{$block-class}__photo {
+  border-radius: 100%;
+  inline-size: 100%;
+}
+
+.#{$block-class}__photo--xl {
+  @include size('xl');
+}
+
+.#{$block-class}__photo--lg {
+  @include size('lg');
+}
+
+.#{$block-class}__photo--md {
+  @include size('md');
+}
+.#{$block-class}__photo--sm {
+  @include size('sm');
+}
+
+.#{$block-class}__photo--xs {
+  @include size('xs');
+}
+
+.#{$block-class}--xl {
+  @include size('xl');
+  @include type.type-style('heading-04');
+}
+
+.#{$block-class}--lg {
+  @include size('lg');
+  @include type.type-style('body-compact-01');
+}
+
+.#{$block-class}--md {
+  @include size('md');
+  @include type.type-style('label-01');
+  @include font-family.font-weight('semibold');
+}
+
+.#{$block-class}--sm {
+  @include size('sm');
+  @include type.type-style('label-01');
+  @include font-family.font-weight('semibold');
+}
+
+.#{$block-class}--xs {
+  @include size('xs');
+  @include type.type-style('label-01');
+  @include font-family.font-weight('semibold');
+}

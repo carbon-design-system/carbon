@@ -1,0 +1,80 @@
+//
+// Copyright IBM Corp. 2020, 2025
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/components/button/tokens' as *;
+@use '@carbon/styles/scss/config' as carbon-config;
+
+@use '../../global/styles/project-settings' as c4p-settings;
+
+.#{c4p-settings.$pkg-prefix}--combo-button {
+  position: relative;
+  display: inline-flex;
+}
+
+.#{c4p-settings.$pkg-prefix}--combo-button__action {
+  display: block;
+  overflow-x: hidden;
+  @supports (overflow-inline: hidden) {
+    overflow-inline: hidden;
+  }
+
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.#{c4p-settings.$pkg-prefix}--combo-button
+  .#{c4p-settings.$pkg-prefix}--combo-button__overflow-menu {
+  background-color: $background-brand;
+  block-size: $spacing-09;
+  border-inline-start: $spacing-01 solid $border-subtle-01;
+  inline-size: $spacing-09;
+}
+
+.#{c4p-settings.$pkg-prefix}--combo-button
+  .#{c4p-settings.$pkg-prefix}--combo-button__overflow-menu.#{carbon-config.$prefix}--overflow-menu:hover,
+.#{c4p-settings.$pkg-prefix}--combo-button
+  .#{c4p-settings.$pkg-prefix}--combo-button__overflow-menu.#{carbon-config.$prefix}--overflow-menu--open,
+.#{c4p-settings.$pkg-prefix}--combo-button
+  .#{carbon-config.$prefix}--overflow-menu.#{carbon-config.$prefix}--overflow-menu--open:hover,
+.#{c4p-settings.$pkg-prefix}--combo-button
+  .#{carbon-config.$prefix}--overflow-menu.#{carbon-config.$prefix}--overflow-menu--open {
+  background-color: $button-primary-hover;
+}
+
+.#{c4p-settings.$pkg-prefix}--combo-button
+  .#{carbon-config.$prefix}--overflow-menu--flip.#{carbon-config.$prefix}--overflow-menu-options[data-floating-menu-direction='bottom']::after {
+  block-size: 0;
+  inline-size: 0;
+}
+
+.#{c4p-settings.$pkg-prefix}--combo-button__overflow-menu.#{carbon-config.$prefix}--overflow-menu:active {
+  background-color: $button-primary-active;
+}
+
+.#{c4p-settings.$pkg-prefix}--combo-button__overflow-menu__icon {
+  fill: $icon-on-color;
+  pointer-events: none;
+}
+
+.#{c4p-settings.$pkg-prefix}--combo-button__overflow-menu__list.#{carbon-config.$prefix}--overflow-menu-options {
+  inline-size: 100%;
+  inset-inline-start: 0;
+}
+
+.#{c4p-settings.$pkg-prefix}--combo-button__overflow-menu__list:after {
+  display: none;
+}
+
+.#{c4p-settings.$pkg-prefix}--combo-button__overflow-menu__item.#{carbon-config.$prefix}--overflow-menu-options__btn {
+  max-inline-size: 100%;
+}
+
+.#{c4p-settings.$pkg-prefix}--combo-button__overflow-menu__item__icon {
+  margin-inline-start: auto;
+}

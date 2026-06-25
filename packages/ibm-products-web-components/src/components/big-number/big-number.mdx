@@ -1,0 +1,106 @@
+import { ArgTypes, Canvas, Markdown, Meta, Story } from '@storybook/addon-docs/blocks';
+import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
+import * as BigNumberStories from './big-number.stories';
+
+<Meta of={BigNumberStories} />
+
+# BigNumber
+
+[Usage guidelines](https://pages.github.ibm.com/carbon/ibm-products/components/bignumber/usage/)
+
+
+{/* 
+// todo:  uncomment this after adding stackblitz example
+> 💡 Check our
+> [Stackblitz](https://stackblitz.com/github/carbon-design-system/ibm-products/tree/main/packages/ibm-products-web-components/examples/big-number)
+> example implementation.
+
+[![Edit carbon-web-components](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/carbon-design-system/ibm-products/tree/main/packages/ibm-products-web-components/examples/big-number) */}
+
+
+## Overview
+
+BigNumber is used to display large values in a small area. The display of values
+can be the value itself, or grouped in a `numerator/denominator` fashion.
+Control over the total fraction decimals displayed as well as how the
+values/totals are displayed are done via a locale prop. Other optional props
+allow control over size, truncation, if the value is a percentage as well as the addition of trending icon functionality.
+The default locale is English(`en-US`) if one is not provided or if the provided one is not supported.
+
+[Supported locales](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat/NumberFormat#locales)
+
+
+## Getting started
+
+Here's a quick example to get you started.
+
+### JS (via import)
+
+```javascript
+import '@carbon/ibm-products-web-components/es/components/big-number/index.js';
+```
+
+### Usage Example
+
+<Canvas className="page-header--docs-demo" of={BigNumberStories.Default} />
+
+### HTML
+
+```html
+    <c4p-big-number
+        fraction-digits=${fractionDigits}
+        label=${label}
+        .value=${value}
+        .total=${total}
+        size=${size}
+        locale=${locale}
+        ?trending=${trending}
+        ?truncate=${truncate}
+        ?percentage=${percentage}
+        ?loading=${loading}
+    >
+    </c4p-big-number>
+```
+
+<Canvas className="page-header--docs-demo" of={BigNumberStories.WithCustomIcons} />
+
+### HTML
+
+```html
+<c4p-big-number
+    fraction-digits=${fractionDigits}
+    label=${label}
+    .value=${value}
+    .total=${total}
+    size=${size}
+    locale=${locale}
+    ?trending=${trending}
+    ?truncate=${truncate}
+    ?percentage=${percentage}
+    ?loading=${loading}
+    >
+        ${iconLoader(getTrendingIcon(size), {
+            slot: 'trending-icon',
+            class: `${prefix}--big-number__trend`,
+        })}
+        <cds-icon-button
+        kind="ghost"
+        size="sm"
+        align="bottom"
+        slot="icon-button"
+        >
+            ${iconLoader(Edit16, {
+                slot: 'icon',
+            })}
+            <span slot="tooltip-content">Icon description</span>
+        </cds-icon-button>
+    </c4p-big-number>
+```
+
+## `<c4p-big-number>` attributes, properties, events and slots.
+
+<ArgTypes of="c4p-big-number" />
+
+## `<c4p-big-number-skeleton` attributes, properties, events and slots.
+
+<ArgTypes of="c4p-big-number-skeleton" />

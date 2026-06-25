@@ -1,0 +1,43 @@
+import { Story, Controls, Source, Canvas } from '@storybook/addon-docs/blocks';
+import { CodesandboxLink } from '../../global/js/utils/story-helper';
+import * as stories from './ExportModal.stories';
+
+# Export Modal
+
+[Usage guidelines](https://pages.github.ibm.com/carbon/ibm-products/patterns/export/usage/)
+|
+[Carbon modal usage guidelines](https://www.carbondesignsystem.com/components/modal/usage)
+|
+[Carbon modal documentation](https://react.carbondesignsystem.com/?path=/docs/components-modal)
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Example usage](#example-usage)
+
+## Overview
+
+Export modal is a pattern which is applicable to both exporting and downloading.
+Below is the Modal dialog version of the export pattern.
+
+To build this pattern, we recommend including the following ingredients:
+
+- [ComposedModal](https://react.carbondesignsystem.com/?path=/docs/components-composedmodal)
+- [Button](https://react.carbondesignsystem.com/?path=/docs/components-button)
+- [FormGroup](https://react.carbondesignsystem.com/?path=/docs/components-formgroup)
+- [TextInput](https://react.carbondesignsystem.com/?path=/docs/components-textinput)
+- [RadioButton](https://react.carbondesignsystem.com/?path=/docs/components-radiobutton)
+- [Loading](https://react.carbondesignsystem.com/?path=/docs/components-loading)
+
+### Example usage
+
+> 💡 Check our
+> [Stackblitz](https://stackblitz.com/github/carbon-design-system/ibm-products/tree/main/packages/ibm-products/src/patterns/ExportModal/example)
+> example implementation.
+
+[![Edit react-patterns](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/carbon-design-system/ibm-products/tree/main/packages/ibm-products/src/patterns/ExportModal/example)
+{/* TODO: One example per designed use case. */}
+
+<Canvas withSource="none">
+  <Story of={stories.Standard} />
+</Canvas>

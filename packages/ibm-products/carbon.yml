@@ -1,0 +1,640 @@
+# yaml-language-server: $schema=https://unpkg.com/@carbon-platform/schemas@v1/carbon-resources.schema.json
+library:
+  id: ibm-products
+  name: IBM Products
+  description:
+    Discover React-based solutions designed for IBM’s product portfolio.
+  externalDocsUrl: https://pages.github.ibm.com/cdai-design/pal/
+  designKits:
+    ibm-products-g10-figma:
+      $ref: https://unpkg.com/@carbon-platform/resources/carbon.yml#/designKits/ibm-products-g10-figma
+assets:
+  api-key-modal:
+    name: API key modal
+    externalDocsUrl: https://pages.github.ibm.com/cdai-design/pal/patterns/generating-api-key/usage
+    status: stable
+    type: pattern
+    platform: web
+    framework: react
+    thumbnailPath: './thumbnails/api-key-modal.svg'
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://ibm-products.carbondesignsystem.com/?path=/story/ibm-products-patterns-generating-an-api-key-apikeymodal
+    tags:
+      - system-feedback
+      - form
+  about-modal:
+    name: About modal
+    externalDocsUrl: https://pages.github.ibm.com/cdai-design/pal/patterns/about-modal/usage
+    status: stable
+    type: pattern
+    platform: web
+    framework: react
+    thumbnailPath: './thumbnails/about-modal.svg'
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://ibm-products.carbondesignsystem.com/?path=/story/ibm-products-patterns-about-modal-aboutmodal
+    tags:
+      - system-feedback
+      - content-block
+  action-bar:
+    name: Action bar
+    status: stable
+    type: component
+    platform: web
+    framework: react
+    thumbnailPath: './thumbnails/action-bar.svg'
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://ibm-products.carbondesignsystem.com/?path=/story/ibm-products-internal-actionbar
+    tags:
+      - input-control
+  action-set:
+    name: Action set
+    status: stable
+    type: component
+    platform: web
+    framework: react
+    thumbnailPath: './thumbnails/action-set.svg'
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://ibm-products.carbondesignsystem.com/?path=/story/ibm-products-internal-actionset
+    tags:
+      - data-display
+  breadcrumb-with-overflow:
+    name: Breadcrumb with overflow
+    status: stable
+    type: component
+    platform: web
+    framework: react
+    thumbnailPath: './thumbnails/breadcrumb-with-overflow.svg'
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://ibm-products.carbondesignsystem.com/?path=/story/ibm-products-internal-breadcrumbwithoverflow
+    tags:
+      - structural-navigation
+      - contextual-navigation
+  button-menu:
+    name: Button menu
+    status: stable
+    type: component
+    platform: web
+    framework: react
+    thumbnailPath: './thumbnails/button-menu.svg'
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://ibm-products.carbondesignsystem.com/?path=/story/ibm-products-internal-buttonmenu
+    tags:
+      - input-control
+  button-set-with-overflow:
+    name: Button set with overflow
+    status: stable
+    type: component
+    platform: web
+    framework: react
+    thumbnailPath: './thumbnails/button-set-with-overflow.svg'
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://ibm-products.carbondesignsystem.com/?path=/story/ibm-products-internal-buttonsetwithoverflow
+    tags:
+      - input-control
+  cascade:
+    name: Cascade
+    externalDocsUrl: https://pages.github.ibm.com/cdai-design/pal/patterns/cascade
+    status: stable
+    type: pattern
+    platform: web
+    framework: react
+    thumbnailPath: './thumbnails/cascade.svg'
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://ibm-products.carbondesignsystem.com/?path=/story/ibm-products-patterns-cascade-cascade
+    tags:
+      - content-block
+  checklist:
+    name: Checklist
+    externalDocsUrl: https://pages.github.ibm.com/cdai-design/pal/components/onboarding/checklist/usage/
+    status: stable
+    type: component
+    platform: web
+    framework: react
+    thumbnailPath: './thumbnails/cascade.svg'
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://ibm-products.carbondesignsystem.com/?path=/story/ibm-products-onboarding-checklist--checklist
+    tags:
+      - content-block
+  combo-button:
+    name: Combo button
+    externalDocsUrl: https://pages.github.ibm.com/cdai-design/pal/components/button-guidance/menu-and-combo-buttons
+    status: stable
+    type: component
+    platform: web
+    framework: react
+    thumbnailPath: './thumbnails/combo-button.svg'
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://ibm-products.carbondesignsystem.com/?path=/story/ibm-products-internal-combobutton
+    tags:
+      - input-control
+  create-full-page:
+    name: Create full page
+    externalDocsUrl: https://pages.github.ibm.com/cdai-design/pal/patterns/creation-flows/usage#full-page
+    status: stable
+    type: pattern
+    platform: web
+    framework: react
+    thumbnailPath: './thumbnails/create-full-page.svg'
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://ibm-products.carbondesignsystem.com/?path=/story/ibm-products-patterns-create-flows-createfullpage
+    tags:
+      - content-block
+      - system-feedback
+      - form
+  create-modal:
+    name: Create modal
+    externalDocsUrl: https://pages.github.ibm.com/cdai-design/pal/patterns/creation-flows/usage#modal
+    status: stable
+    type: pattern
+    platform: web
+    framework: react
+    thumbnailPath: './thumbnails/create-modal.svg'
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://ibm-products.carbondesignsystem.com/?path=/story/ibm-products-patterns-create-flows-createmodal
+    tags:
+      - input-control
+      - form
+  create-tearsheet:
+    name: Create tearsheet
+    externalDocsUrl: https://pages.github.ibm.com/cdai-design/pal/patterns/creation-flows/usage#wide-tearsheet
+    status: stable
+    type: pattern
+    platform: web
+    framework: react
+    thumbnailPath: './thumbnails/create-tearsheet.svg'
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://ibm-products.carbondesignsystem.com/?path=/story/ibm-products-patterns-create-flows-createtearsheet
+    tags:
+      - form
+      - input-control
+  create-tearsheet-narrow:
+    name: Create tearsheet narrow
+    externalDocsUrl: https://pages.github.ibm.com/cdai-design/pal/patterns/creation-flows/usage#narrow-tearsheet
+    status: stable
+    type: pattern
+    platform: web
+    framework: react
+    thumbnailPath: './thumbnails/create-tearsheet-narrow.svg'
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://ibm-products.carbondesignsystem.com/?path=/story/ibm-products-patterns-create-flows-createtearsheetnarrow
+    tags:
+      - form
+      - input-control
+  data-spreadsheet:
+    name: Data spreadsheet
+    externalDocsUrl: https://pages.github.ibm.com/cdai-design/pal/components/data-spreadsheet/usage
+    status: experimental
+    type: component
+    platform: web
+    framework: react
+    thumbnailPath: './thumbnails/data-spreadsheet.svg'
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://ibm-products.carbondesignsystem.com/?path=/story/ibm-products-components-dataspreadsheet-dataspreadsheet-canary
+    tags:
+      - input-control
+      - data-display
+  data-grid:
+    name: Data grid
+    status: stable
+    type: component
+    platform: web
+    framework: react
+    thumbnailPath: './thumbnails/data-grid.svg'
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://ibm-products.carbondesignsystem.com/?path=/story/ibm-products-components-datagrid-datagrid
+    tags:
+      - input-control
+      - content-block
+      - data-display
+  edit-side-panel:
+    name: Edit side panel
+    externalDocsUrl: https://pages.github.ibm.com/cdai-design/pal/patterns/edit/usage#side-panel-edit
+    status: experimental
+    type: pattern
+    platform: web
+    framework: react
+    thumbnailPath: './thumbnails/edit-side-panel.svg'
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://ibm-products.carbondesignsystem.com/?path=/story/ibm-products-patterns-edit-and-update-editsidepanel-canary
+    tags:
+      - input-control
+      - form
+  empty-state:
+    name: Empty state
+    externalDocsUrl: https://pages.github.ibm.com/cdai-design/pal/patterns/empty-state/usage
+    status: stable
+    type: pattern
+    platform: web
+    framework: react
+    thumbnailPath: './thumbnails/empty-state.svg'
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://ibm-products.carbondesignsystem.com/?path=/story/ibm-products-patterns-empty-state-emptystate
+    tags:
+      - content-element
+  export-modal:
+    name: Export modal
+    externalDocsUrl: https://pages.github.ibm.com/cdai-design/pal/patterns/exporting/usage
+    status: stable
+    type: pattern
+    platform: web
+    framework: react
+    thumbnailPath: './thumbnails/export-modal.svg'
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://ibm-products.carbondesignsystem.com/?path=/story/ibm-products-patterns-export-exportmodal
+    tags:
+      - system-feedback
+      - form
+  expressive-card:
+    name: Expressive card
+    externalDocsUrl: https://pages.github.ibm.com/cdai-design/pal/components/card/expressive/usage
+    status: stable
+    type: component
+    platform: web
+    framework: react
+    thumbnailPath: './thumbnails/expressive-card.svg'
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://ibm-products.carbondesignsystem.com/?path=/story/ibm-products-components-cards-expressivecard
+    tags:
+      - content-block
+      - contextual-navigation
+  full-page-error:
+    name: Full page error
+    externalDocsUrl: https://pages.github.ibm.com/cdai-design/pal/patterns/full-page-errors/usage
+    status: stable
+    type: pattern
+    platform: web
+    framework: react
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://ibm-products.carbondesignsystem.com/?path=/docs/ibm-products-patterns-full-page-error
+    tags:
+      - system-feedback
+      - content-block
+      - contextual-navigation
+  http-error:
+    name: HTTP error
+    externalDocsUrl: https://pages.github.ibm.com/cdai-design/pal/patterns/http-errors/usage
+    status: stable
+    type: pattern
+    platform: web
+    framework: react
+    thumbnailPath: './thumbnails/http-error.svg'
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://ibm-products.carbondesignsystem.com/?path=/story/ibm-products-patterns-http-errors
+    tags:
+      - system-feedback
+      - content-block
+      - contextual-navigation
+  import-modal:
+    name: Import modal
+    externalDocsUrl: https://pages.github.ibm.com/cdai-design/pal/patterns/importing/usage
+    status: stable
+    type: pattern
+    platform: web
+    framework: react
+    thumbnailPath: './thumbnails/import-modal.svg'
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://ibm-products.carbondesignsystem.com/?path=/story/ibm-products-patterns-import-and-upload-importmodal
+    tags:
+      - system-feedback
+      - input-control
+      - form
+  edit-in-place:
+    name: Inline edit
+    externalDocsUrl: https://pages.github.ibm.com/cdai-design/pal/patterns/edit/usage#edit-in-place
+    status: stable
+    type: pattern
+    platform: web
+    framework: react
+    thumbnailPath: './thumbnails/edit-in-place.svg'
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://ibm-products.carbondesignsystem.com/?path=/story/ibm-products-patterns-edit-and-update-editinplace
+    tags:
+      - input-control
+  multi-add-select:
+    name: Multi add select
+    externalDocsUrl: https://pages.github.ibm.com/cdai-design/pal/patterns/add-and-select/usage
+    status: stable
+    type: pattern
+    platform: web
+    framework: react
+    thumbnailPath: './thumbnails/multi-add-select.svg'
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://ibm-products.carbondesignsystem.com/?path=/story/ibm-products-patterns-add-select-multiaddselect
+    tags:
+      - form
+      - content-block
+  notifications-panel:
+    name: Notifications panel
+    externalDocsUrl: https://pages.github.ibm.com/cdai-design/pal/patterns/notifications/usage
+    status: stable
+    type: pattern
+    platform: web
+    framework: react
+    thumbnailPath: './thumbnails/notifications-panel.svg'
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://ibm-products.carbondesignsystem.com/?path=/story/ibm-products-patterns-notifications-notificationspanel
+    tags:
+      - input-control
+      - system-feedback
+  options-tile:
+    name: Options tile
+    externalDocsUrl: https://pages.github.ibm.com/cdai-design/pal/components/options-tile/usage
+    status: stable
+    type: component
+    platform: web
+    framework: react
+    thumbnailPath: './thumbnails/options-tile.svg'
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://ibm-products.carbondesignsystem.com/?path=/story/ibm-products-components-options-tile-optionstile
+    tags:
+      - input-control
+      - form
+      - content-block
+  page-header:
+    name: Page header
+    externalDocsUrl: https://pages.github.ibm.com/cdai-design/pal/components/page-header/usage
+    status: stable
+    type: component
+    platform: web
+    framework: react
+    thumbnailPath: './thumbnails/page-header.svg'
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://ibm-products.carbondesignsystem.com/?path=/story/ibm-products-components-page-header-pageheader
+    tags:
+      - structural-navigation
+      - shell
+      - content-block
+  productive-card:
+    name: Productive card
+    externalDocsUrl: https://pages.github.ibm.com/cdai-design/pal/components/card/productive/usage
+    status: stable
+    type: component
+    platform: web
+    framework: react
+    thumbnailPath: './thumbnails/productive-card.svg'
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://ibm-products.carbondesignsystem.com/?path=/story/ibm-products-components-cards-productivecard
+    tags:
+      - content-block
+      - input-control
+  remove-modal:
+    name: Remove modal
+    externalDocsUrl: https://pages.github.ibm.com/cdai-design/pal/patterns/removing/usage
+    status: stable
+    type: pattern
+    platform: web
+    framework: react
+    thumbnailPath: './thumbnails/remove-modal.svg'
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://ibm-products.carbondesignsystem.com/?path=/story/ibm-products-patterns-remove-removemodal
+    tags:
+      - system-feedback
+      - input-control
+  saving:
+    name: Saving
+    externalDocsUrl: https://pages.github.ibm.com/cdai-design/pal/patterns/saving/usage
+    status: stable
+    type: pattern
+    platform: web
+    framework: react
+    thumbnailPath: './thumbnails/saving.svg'
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://ibm-products.carbondesignsystem.com/?path=/story/ibm-products-patterns-saving-saving
+    tags:
+      - input-control
+      - system-feedback
+  side-panel:
+    name: Side panel
+    externalDocsUrl: https://pages.github.ibm.com/cdai-design/pal/components/side-panel/usage
+    status: stable
+    type: component
+    platform: web
+    framework: react
+    thumbnailPath: './thumbnails/side-panel.svg'
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://ibm-products.carbondesignsystem.com/?path=/story/ibm-products-components-side-panel-sidepanel
+    tags:
+      - input-control
+      - form
+      - content-block
+      - data-display
+  single-add-select:
+    name: Single add select
+    externalDocsUrl: https://pages.github.ibm.com/cdai-design/pal/patterns/add-and-select/usage
+    status: stable
+    type: pattern
+    platform: web
+    framework: react
+    thumbnailPath: './thumbnails/single-add-select.svg'
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://ibm-products.carbondesignsystem.com/?path=/story/ibm-products-patterns-add-select-singleaddselect
+    tags:
+      - form
+  status-icon:
+    name: Status icon
+    externalDocsUrl: https://pages.github.ibm.com/cdai-design/pal/patterns/status-icons/usage
+    status: stable
+    type: pattern
+    platform: web
+    framework: react
+    thumbnailPath: './thumbnails/status-icon.svg'
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://ibm-products.carbondesignsystem.com/?path=/story/ibm-products-patterns-status-icons-statusicon
+    tags:
+      - media
+      - content-element
+      - system-feedback
+  tag-set:
+    name: Tag set
+    externalDocsUrl: https://pages.github.ibm.com/cdai-design/pal/components/tag-set/usage
+    status: stable
+    type: component
+    platform: web
+    framework: react
+    thumbnailPath: './thumbnails/tag-set.svg'
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://ibm-products.carbondesignsystem.com/?path=/story/ibm-products-components-tag-set-tagset
+    tags:
+      - data-display
+  tearsheet:
+    name: Tearsheet
+    externalDocsUrl: https://pages.github.ibm.com/cdai-design/pal/components/tearsheet/usage
+    status: stable
+    type: component
+    platform: web
+    framework: react
+    thumbnailPath: './thumbnails/tearsheet.svg'
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://ibm-products.carbondesignsystem.com/?path=/story/ibm-products-components-tearsheet-tearsheet
+    tags:
+      - input-control
+      - form
+  toolbar:
+    name: Toolbar
+    externalDocsUrl: https://pages.github.ibm.com/cdai-design/pal/patterns/toolbars/usage
+    status: experimental
+    type: pattern
+    platform: web
+    framework: react
+    thumbnailPath: './thumbnails/toolbar.svg'
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://ibm-products.carbondesignsystem.com/?path=/story/ibm-products-patterns-toolbars-toolbar-canary
+    tags:
+      - input-control
+  user avatar:
+    name: User avatar
+    externalDocsUrl: https://pages.github.ibm.com/carbon/ibm-products/components/user-avatar/usage
+    status: stable
+    type: component
+    platform: web
+    framework: react
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://ibm-products.carbondesignsystem.com/?path=/docs/ibm-products-components-user-avatar-useravatar
+    tags:
+      - media
+  user-profile-image:
+    name: User profile image
+    externalDocsUrl: https://pages.github.ibm.com/cdai-design/pal/patterns/user-profile-images/usage
+    status: stable
+    type: pattern
+    platform: web
+    framework: react
+    thumbnailPath: './thumbnails/user-profile-image.svg'
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://ibm-products.carbondesignsystem.com/?path=/story/ibm-products-patterns-user-profile-images-userprofileimage
+    tags:
+      - media
+  web-terminal:
+    name: Web terminal
+    externalDocsUrl: https://pages.github.ibm.com/cdai-design/pal/patterns/web-terminal/usage
+    status: stable
+    type: pattern
+    platform: web
+    framework: react
+    thumbnailPath: './thumbnails/web-terminal.svg'
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://ibm-products.carbondesignsystem.com/?path=/story/ibm-products-patterns-web-terminal-webterminal
+    tags:
+      - content-block
+      - shell
+      - input-control

@@ -1,0 +1,48 @@
+//
+// Copyright IBM Corp. 2021, 2023
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+/* stylelint-disable  */
+
+@use '@carbon/styles/scss/colors';
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/themes';
+@use 'ALIAS_STORY_STYLE_CONFIG' as c4p-settings;
+
+$storybook-block-class: #{c4p-settings.$pkg-prefix}--notifications-panel__story;
+
+.#{c4p-settings.$carbon-prefix}--header {
+  @include theme(themes.$g100);
+}
+
+.sb-show-main.sb-main-centered #root {
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+.example-terminal {
+  padding: $spacing-05;
+  color: colors.$gray-10;
+  font-family: 'IBM Plex Mono', monospace;
+
+  p {
+    font-size: 14px;
+    padding-block-end: $spacing-07;
+  }
+}
+
+$story-anchor: 'web-terminal';
+
+#storybook-docs {
+  ul {
+    list-style: initial;
+  }
+
+  ol {
+    list-style: decimal;
+  }
+}

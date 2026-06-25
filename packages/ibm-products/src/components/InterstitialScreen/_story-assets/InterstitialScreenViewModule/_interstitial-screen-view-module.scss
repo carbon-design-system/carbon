@@ -1,0 +1,58 @@
+//
+// Copyright IBM Corp. 2024, 2024
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+/* stylelint-disable max-nesting-depth */
+
+// Standard imports.
+@use 'ALIAS_STORY_STYLE_CONFIG' as c4p-settings;
+@use '@carbon/styles/scss/type';
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/breakpoint' as *;
+
+// Other Carbon settings if needed
+// TODO: @use '@carbon/styles/scss/grid';
+// or
+// TODO: @use '@carbon/styles/scss/grid';
+
+// InterstitialScreenViewModule uses the following Carbon for IBM Products components:
+// TODO: @use(s) of IBM Products component styles used by InterstitialScreenViewModule
+
+// The block part of our conventional BEM class names (blockClass__E--M).
+
+$interstitial-block-class: #{c4p-settings.$pkg-prefix}--interstitial-screen;
+$block-class: #{c4p-settings.$pkg-prefix}--interstitial-screen-view-module;
+
+.#{$block-class} {
+  margin: $spacing-07;
+
+  &--heading {
+    @include type.type-style('heading-05');
+
+    margin-block-end: $spacing-07;
+  }
+
+  &--body {
+    @include type.type-style('body-01');
+  }
+}
+.#{$interstitial-block-class} {
+  &--modal {
+    .#{$block-class} {
+      margin: $spacing-11 $spacing-07;
+    }
+  }
+
+  &--full-screen {
+    .#{$block-class} {
+      margin: $spacing-12 $spacing-08;
+
+      @include breakpoint-down(xlg) {
+        margin: $spacing-12 $spacing-07;
+      }
+    }
+  }
+}

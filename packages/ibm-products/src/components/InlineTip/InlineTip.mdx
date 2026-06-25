@@ -1,0 +1,44 @@
+import { Story, Controls, Canvas } from '@storybook/addon-docs/blocks';
+import { StackblitzLink } from '../../global/js/utils/story-helper';
+import { InlineTip } from '.';
+import * as stories from './InlineTip.stories';
+
+# InlineTip
+
+[Usage guidelines](https://pages.github.ibm.com/carbon/ibm-products/components/onboarding/inline-tip/usage/)
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Example usage](#example-usage)
+  - [Inline tip](#inline-tip)
+  - [Inline tip narrow](#inline-tip-narrow)
+- [Coded examples](#coded-examples)
+  - [Stackblitz example with animated media](#stackblitz-example-with-animated-media)
+- [Component API](#component-api)
+
+## Overview
+
+Inline tips are messages embedded within other components that provide an
+ambient way to deliver learning content without distracting the user from their
+flow.
+
+## Example usage
+
+### Inline tip
+
+<Canvas of={stories.inlineTip} />
+
+### Inline tip narrow
+
+<Canvas of={stories.inlineTipNarrow} />
+
+## Code sample
+
+### Stackblitz example with animated media
+
+[![Example with animated media](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/carbon-design-system/ibm-products/tree/main/examples/carbon-for-ibm-products/InlineTipWithAnimatedMedia)
+
+## Component API
+
+<Controls />

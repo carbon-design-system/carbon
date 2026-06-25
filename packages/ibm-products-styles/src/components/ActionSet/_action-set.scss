@@ -1,0 +1,127 @@
+//
+// Copyright IBM Corp. 2021, 2025
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use '@carbon/layout/scss/convert' as *;
+
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/type';
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/config' as carbon-config;
+
+@use '../../global/styles/project-settings' as c4p-settings;
+
+// The block part of our conventional BEM class names (blockClass__E--M).
+$action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
+
+.#{$action-set-block-class} {
+  align-items: stretch;
+  justify-content: flex-end;
+  background-color: $layer-01;
+}
+
+.#{$action-set-block-class} .#{$action-set-block-class}__action-button {
+  @include type.type-style('body-short-01');
+
+  align-items: center;
+  margin: 0;
+
+  &.#{$action-set-block-class}__action-button--expressive {
+    block-size: $spacing-10;
+    padding-block: $spacing-05 $spacing-07;
+  }
+}
+
+.#{$action-set-block-class}.#{carbon-config.$prefix}--btn-set
+  .#{$action-set-block-class}__action-button.#{carbon-config.$prefix}--btn.#{carbon-config.$prefix}--btn--expressive,
+.#{$action-set-block-class}.#{carbon-config.$prefix}--btn-set
+  .#{$action-set-block-class}__action-button.#{carbon-config.$prefix}--btn {
+  max-inline-size: none;
+}
+
+.#{$action-set-block-class}:not(.#{$action-set-block-class}--stacking)
+  .#{$action-set-block-class}__action-button--ghost {
+  padding-inline-start: $spacing-05;
+}
+
+// For row-single in medium,
+// or for ghosts in row-single,
+// buttons are 100% width
+.#{$action-set-block-class}.#{$action-set-block-class}--row-single.#{$action-set-block-class}--md
+  .#{$action-set-block-class}__action-button,
+.#{$action-set-block-class}.#{$action-set-block-class}--row-single
+  .#{$action-set-block-class}__action-button--ghost {
+  flex: 0 0 100%;
+}
+
+// For ghosts in row-double,
+// buttons are 75% width and expand to use any remaining space
+.#{$action-set-block-class}.#{$action-set-block-class}--row-double
+  .#{$action-set-block-class}__action-button--ghost {
+  flex: 1 1 75%;
+}
+
+// For row-single in large (non-ghost),
+// or row-double in medium or large,
+// buttons are 50% width
+.#{$action-set-block-class}.#{$action-set-block-class}--row-single.#{$action-set-block-class}--lg
+  .#{$action-set-block-class}__action-button:not(
+    .#{$action-set-block-class}__action-button--ghost
+  ),
+.#{$action-set-block-class}.#{$action-set-block-class}--row-double.#{$action-set-block-class}--md
+  .#{$action-set-block-class}__action-button,
+.#{$action-set-block-class}.#{$action-set-block-class}--row-double.#{$action-set-block-class}--lg
+  .#{$action-set-block-class}__action-button,
+.#{$action-set-block-class}.#{$action-set-block-class}--row-triple
+  .#{$action-set-block-class}__action-button--ghost {
+  flex: 0 1 50%;
+}
+
+// For ghosts in row-triple,
+// buttons are 50% width and expand to use any remaining space
+.#{$action-set-block-class}.#{$action-set-block-class}--row-triple
+  .#{$action-set-block-class}__action-button--ghost {
+  flex: 1 1 50%;
+}
+
+// For row-triple in large (non-ghost),
+// or any non-ghosts in extra large or 2xl,
+// or row-quadruple (non-ghost),
+// buttons are 25% width with a 2xl of 232px
+.#{$action-set-block-class}.#{carbon-config.$prefix}--btn-set.#{$action-set-block-class}--row-triple.#{$action-set-block-class}--lg
+  .#{$action-set-block-class}__action-button:not(
+    .#{$action-set-block-class}__action-button--ghost
+  ),
+.#{$action-set-block-class}.#{carbon-config.$prefix}--btn-set.#{$action-set-block-class}--xl
+  .#{$action-set-block-class}__action-button:not(
+    .#{$action-set-block-class}__action-button--ghost
+  ),
+.#{$action-set-block-class}.#{carbon-config.$prefix}--btn-set.#{$action-set-block-class}--2xl
+  .#{$action-set-block-class}__action-button:not(
+    .#{$action-set-block-class}__action-button--ghost
+  ),
+.#{$action-set-block-class}.#{carbon-config.$prefix}--btn-set.#{$action-set-block-class}--row-quadruple
+  .#{$action-set-block-class}__action-button:not(
+    .#{$action-set-block-class}__action-button--ghost
+  ) {
+  flex: 0 1 25%;
+  /* stylelint-disable-next-line function-no-unknown -- to-rem carbon replacement for rem */
+  max-inline-size: to-rem(232px);
+}
+
+.#{$action-set-block-class}.#{carbon-config.$prefix}--btn-set.#{$action-set-block-class}--row-quadruple
+  .#{$action-set-block-class}__action-button--ghost {
+  flex: 1 1 25%;
+}
+
+.#{$action-set-block-class}
+  .#{$action-set-block-class}__action-button
+  .#{carbon-config.$prefix}--inline-loading {
+  position: absolute;
+  inline-size: $spacing-07;
+  inset-block-start: 0;
+  inset-inline-end: 0;
+}

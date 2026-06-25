@@ -1,0 +1,63 @@
+//
+// Copyright IBM Corp. 2021, 2025
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+// Standard imports.
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/type';
+@use '@carbon/styles/scss/config' as carbon-config;
+
+@use '../../global/styles/project-settings' as c4p-settings;
+
+// CreateTearsheetNarrow uses the following IBM Products components:
+// TearsheetNarrow
+@use '../Tearsheet/tearsheet';
+
+// The block part of our conventional BEM class names (blockClass__E--M).
+$block-class: #{c4p-settings.$pkg-prefix}--create-tearsheet-narrow;
+
+.#{$block-class} .#{carbon-config.$prefix}--modal-header__heading,
+.#{$block-class} .#{carbon-config.$prefix}--modal-header__label,
+.#{$block-class} .#{c4p-settings.$pkg-prefix}--tearsheet__header-description {
+  max-inline-size: 100%;
+  padding-inline-end: calc(20% - #{$spacing-05});
+}
+
+.#{$block-class} .#{c4p-settings.$pkg-prefix}--tearsheet__header-description {
+  margin-block-start: $spacing-02;
+}
+
+.#{$block-class} .#{c4p-settings.$pkg-prefix}--tearsheet__header {
+  border-block-end: 1px solid $border-subtle-02;
+}
+
+.#{$block-class} .#{c4p-settings.$pkg-prefix}--tearsheet__content {
+  padding: $spacing-05;
+}
+
+.#{$block-class} .#{$block-class}__form {
+  padding-block-start: $spacing-05;
+}
+
+.#{$block-class} .#{$block-class}__form > * {
+  margin-block-end: $spacing-05;
+
+  /* stylelint-disable-next-line max-nesting-depth */
+  &:last-child {
+    margin-block-end: 0;
+  }
+}
+
+.#{$block-class} .#{$block-class}__form-title-text {
+  @include type.type-style('heading-compact-02');
+
+  padding-block-end: $spacing-03;
+}
+
+.#{$block-class} .#{$block-class}__form-description-text {
+  @include type.type-style('body-01');
+}

@@ -1,0 +1,75 @@
+//
+// Copyright IBM Corp. 2024, 2024
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+/* stylelint-disable max-nesting-depth */
+
+/* stylelint-disable media-feature-range-notation */
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/breakpoint' as *;
+@use '@carbon/styles/scss/colors' as *;
+@use '@carbon/styles/scss/type';
+
+@use 'ALIAS_STORY_STYLE_CONFIG' as c4p-settings;
+
+.CustomLayout {
+  display: flex;
+  flex-wrap: wrap;
+  padding: $spacing-07;
+  gap: $spacing-05;
+}
+
+.storyCardExample {
+  flex-grow: 1;
+  padding: $spacing-06;
+  border: 1px solid $border-inverse;
+  background-color: $layer-accent-01;
+  block-size: 350px;
+  inline-size: 20%;
+}
+
+.GenericView {
+  /* stylelint-disable-next-line declaration-no-important */
+  margin-block-start: $spacing-12 !important;
+}
+
+.NoImageExampleModal {
+  $one-grid-column: calc(100% / 16); // stylelint-disable-line carbon/layout-use
+
+  inline-size: calc(
+    $one-grid-column * 16
+  ); // stylelint-disable-line carbon/layout-use
+
+  @media (min-width: 672px) {
+    inline-size: calc(
+      $one-grid-column * 12
+    ); // stylelint-disable-line carbon/layout-use
+  }
+}
+
+.NoImageExampleFullScreen {
+  $one-grid-column: calc(100% / 16); // stylelint-disable-line carbon/layout-use
+
+  inline-size: calc(
+    $one-grid-column * 16
+  ); // stylelint-disable-line carbon/layout-use
+  @media (min-width: 672px) {
+    inline-size: calc(
+      $one-grid-column * 12
+    ); // stylelint-disable-line carbon/layout-use
+  }
+  @media (min-width: 1056px) {
+    inline-size: calc(
+      $one-grid-column * 8
+    ); // stylelint-disable-line carbon/layout-use
+  }
+}
+
+.#{c4p-settings.$pkg-prefix}--interstitial-screen-view-module--enableTag {
+  margin-block-start: $spacing-07;
+}

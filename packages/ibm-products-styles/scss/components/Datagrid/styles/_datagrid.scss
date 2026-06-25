@@ -1,0 +1,1006 @@
+//
+// Copyright IBM Corp. 2020, 2025
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/utilities' as *;
+@use '@carbon/layout/scss/convert' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/components/button/tokens' as *;
+@use '@carbon/styles/scss/breakpoint';
+@use '@carbon/styles/scss/config' as carbon-config;
+
+@use '../../../global/styles/project-settings' as c4p-settings;
+@use './variables' as *;
+
+.#{$block-class}__table-toolbar > section {
+  z-index: 2;
+  overflow: visible; // RowSizeDropdown depend on this
+}
+
+.#{$block-class}__full-height,
+.#{$block-class}__full-height table,
+.#{$block-class}__full-height tbody {
+  block-size: 100%;
+}
+
+.#{$block-class}__grid-container::-webkit-scrollbar-thumb {
+  background-color: $text-placeholder;
+}
+
+.#{$block-class}__grid-container table {
+  /* Removes additional scroll introduced by Carbon table */
+  overflow: hidden;
+
+  &.#{$block-class}__vertical-align-center {
+    .#{$block-class}__head {
+      .#{carbon-config.$prefix}--table-header-label {
+        display: flex;
+        align-items: center;
+        block-size: 100%;
+        color: $text-primary;
+      }
+
+      .#{$block-class}__head-select-all.#{$block-class}__checkbox-cell.#{$block-class}__checkbox-cell-sticky-left {
+        position: sticky;
+        z-index: 10;
+        inset-inline-start: 0;
+      }
+    }
+
+    .#{$block-class}__cell {
+      align-items: center;
+      padding-block: 0;
+    }
+
+    td.#{carbon-config.$prefix}--table-column-checkbox,
+    th.#{carbon-config.$prefix}--table-column-checkbox {
+      /* stylelint-disable-next-line carbon/layout-use */
+      padding-block-start: 0.6875rem;
+
+      &.#{$block-class}__checkbox-cell {
+        display: flex;
+        align-items: center;
+        padding-block-start: 0;
+      }
+
+      &.#{$block-class}__checkbox-cell-sticky-left {
+        position: sticky;
+        inset-inline-start: 0;
+      }
+    }
+
+    .#{$block-class}__checkbox-cell {
+      th.#{carbon-config.$prefix}--table-column-checkbox {
+        display: flex;
+        align-items: center;
+        block-size: 100%;
+        padding-block-start: 0;
+      }
+    }
+
+    &.#{$block-class}__variable-row-height {
+      &.#{carbon-config.$prefix}--data-table--xs {
+        .#{$block-class}__cell {
+          padding-block: $spacing-01;
+        }
+      }
+
+      &.#{carbon-config.$prefix}--data-table--sm,
+      &.#{carbon-config.$prefix}--data-table--md {
+        .#{$block-class}__cell {
+          /* stylelint-disable-next-line -- to-rem carbon replacement for rem */
+          padding-block: to-rem(7px) to-rem(6px);
+        }
+      }
+
+      &.#{carbon-config.$prefix}--data-table--lg,
+      &.#{carbon-config.$prefix}--data-table--xl {
+        .#{$block-class}__cell {
+          padding-block: $spacing-05;
+        }
+      }
+    }
+  }
+
+  &.#{$block-class}__vertical-align-top {
+    &.#{carbon-config.$prefix}--data-table--lg,
+    &.#{carbon-config.$prefix}--data-table--xl {
+      .#{$block-class}__cell {
+        padding-block-start: $spacing-05;
+      }
+
+      .#{carbon-config.$prefix}--table-header-label {
+        padding-block-start: $spacing-05;
+      }
+
+      .#{carbon-config.$prefix}--table-column-checkbox {
+        /* stylelint-disable-next-line -- to-rem carbon replacement for rem */
+        padding-block-start: to-rem(13px);
+      }
+    }
+
+    &.#{$block-class}__variable-row-height {
+      &.#{carbon-config.$prefix}--data-table--lg,
+      &.#{carbon-config.$prefix}--data-table--xl {
+        .#{$block-class}__cell {
+          padding-block-end: $spacing-05;
+        }
+
+        .#{carbon-config.$prefix}--table-header-label {
+          padding-block-end: $spacing-05;
+        }
+      }
+    }
+  }
+
+  &.#{$block-class}__variable-row-height {
+    tr.#{$block-class}__carbon-row {
+      block-size: auto;
+    }
+  }
+}
+
+.#{$block-class}__grid-container::-webkit-scrollbar-thumb {
+  background-color: $text-placeholder;
+}
+
+.#{$block-class}__grid-container::-webkit-scrollbar {
+  background-color: $background;
+  inline-size: 6px;
+}
+
+/* This section to be removed after support for slug dropped  - start */
+.#{$block-class} th.#{$block-class}__with-slug {
+  box-shadow: inset 0 1px $ai-border-strong;
+}
+
+.#{$block-class} th.#{$block-class}__with-slug,
+.#{$block-class} td.#{$block-class}__slug--cell {
+  @include ai-table-gradient();
+}
+
+.#{$block-class}
+  .#{carbon-config.$prefix}--data-table
+  tbody
+  tr.#{$block-class}__slug--row,
+.#{$block-class}
+  .#{carbon-config.$prefix}--data-table
+  tbody
+  tr.#{$block-class}__slug--row
+  + .#{$block-class}__expanded-row {
+  @include ai-table-gradient();
+
+  background-attachment: fixed;
+}
+
+.#{$block-class}
+  .#{carbon-config.$prefix}--data-table
+  tbody
+  tr.#{$block-class}__slug--row {
+  /* stylelint-disable-next-line carbon/theme-use */
+  box-shadow: inset 1px 0 $ai-border-strong;
+}
+
+.#{$block-class}
+  .#{carbon-config.$prefix}--data-table
+  tbody
+  tr.#{$block-class}__slug--row:hover,
+.#{$block-class}
+  .#{carbon-config.$prefix}--data-table
+  tbody
+  tr.#{$block-class}__slug--row.#{carbon-config.$prefix}--data-table--selected:hover,
+.#{$block-class}
+  .#{carbon-config.$prefix}--data-table
+  tbody
+  tr.#{$block-class}__slug--row.#{$block-class}__carbon-row-expanded:hover
+  + .#{$block-class}__expanded-row,
+.#{$block-class}
+  .#{carbon-config.$prefix}--data-table
+  tbody
+  tr.#{$block-class}__expandable-row--hover.#{$block-class}__slug--row {
+  @include ai-table-gradient('hover');
+}
+
+.#{$block-class}
+  .#{carbon-config.$prefix}--data-table
+  tbody
+  tr.#{$block-class}__expandable-row--hover.#{$block-class}__slug--row
+  td {
+  background-color: transparent;
+}
+
+.#{$block-class}
+  .#{carbon-config.$prefix}--data-table
+  tbody
+  tr.#{$block-class}__slug--row.#{carbon-config.$prefix}--data-table--selected {
+  @include ai-table-gradient('selected');
+}
+
+.#{$block-class} th.#{$block-class}__with-slug .#{carbon-config.$prefix}--slug {
+  margin-inline-start: $spacing-03;
+}
+/* This section to be removed after support for slug dropped  - end */
+
+.#{$block-class} th.#{$block-class}__with-ai-label {
+  box-shadow: inset 0 1px $ai-border-strong;
+}
+
+.#{$block-class} th.#{$block-class}__with-ai-label,
+.#{$block-class} td.#{$block-class}__ai-label--cell {
+  @include ai-table-gradient();
+}
+
+.#{$block-class}
+  .#{carbon-config.$prefix}--data-table
+  tbody
+  tr.#{$block-class}__ai-label--row,
+.#{$block-class}
+  .#{carbon-config.$prefix}--data-table
+  tbody
+  tr.#{$block-class}__ai-label--row
+  + .#{$block-class}__expanded-row {
+  @include ai-table-gradient();
+
+  background-attachment: fixed;
+}
+
+.#{$block-class}
+  .#{carbon-config.$prefix}--data-table
+  tbody
+  tr.#{$block-class}__ai-label--row {
+  box-shadow: inset 1px 0 $ai-border-strong;
+}
+
+.#{$block-class}
+  .#{carbon-config.$prefix}--data-table
+  tbody
+  tr.#{$block-class}__ai-label--row:hover,
+.#{$block-class}
+  .#{carbon-config.$prefix}--data-table
+  tbody
+  tr.#{$block-class}__ai-label--row.#{carbon-config.$prefix}--data-table--selected:hover,
+.#{$block-class}
+  .#{carbon-config.$prefix}--data-table
+  tbody
+  tr.#{$block-class}__ai-label--row.#{$block-class}__carbon-row-expanded:hover
+  + .#{$block-class}__expanded-row,
+.#{$block-class}
+  .#{carbon-config.$prefix}--data-table
+  tbody
+  tr.#{$block-class}__expandable-row--hover.#{$block-class}__ai-label--row {
+  @include ai-table-gradient('hover');
+}
+
+.#{$block-class}
+  .#{carbon-config.$prefix}--data-table
+  tbody
+  tr.#{$block-class}__expandable-row--hover.#{$block-class}__ai-label--row
+  td {
+  background-color: transparent;
+}
+
+.#{$block-class}
+  .#{carbon-config.$prefix}--data-table
+  tbody
+  tr.#{$block-class}__ai-label--row.#{carbon-config.$prefix}--data-table--selected {
+  @include ai-table-gradient('selected');
+}
+
+.#{$block-class}
+  th.#{$block-class}__with-ai-label
+  .#{carbon-config.$prefix}--slug {
+  margin-inline-start: $spacing-03;
+}
+
+.#{$block-class}__grid-container {
+  display: block;
+  inline-size: 100%;
+  padding-block-start: 0;
+
+  .#{carbon-config.$prefix}--data-table-header__description {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .#{carbon-config.$prefix}--data-table-header__title {
+    overflow: hidden;
+    max-inline-size: 80ch;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+
+    @include breakpoint.breakpoint(md) {
+      max-inline-size: 55ch;
+    }
+  }
+
+  .#{carbon-config.$prefix}--data-table-content {
+    block-size: 100%;
+    inline-size: 100%;
+    overflow-x: auto;
+    @supports (overflow-inline: auto) {
+      /* stylelint-disable-next-line declaration-property-value-disallowed-list */
+      overflow-inline: auto;
+    }
+  }
+
+  .#{$block-class}-filter-panel
+    + .#{$block-class}__table-container-inner
+    .#{c4p-settings.$carbon-prefix}--pagination {
+    background-color: $layer-02;
+  }
+
+  table.#{$block-class}__table-simple {
+    display: flex;
+    overflow: auto;
+    flex-direction: column;
+    background-color: $layer-01;
+    max-block-size: 100%;
+  }
+
+  .#{$block-class}__head {
+    display: flex;
+  }
+
+  .#{$block-class}__head .header {
+    align-items: center;
+    /* Each cell should grow equally */
+    inline-size: 1%;
+  }
+
+  .#{$block-class}__virtual-scrollbar {
+    //makes thin scrollbar in chrome and firefox
+    scrollbar-width: thin;
+  }
+
+  .#{$block-class}__virtual-scrollbar::-webkit-scrollbar-thumb {
+    background-color: $text-placeholder;
+  }
+
+  .#{$block-class}__virtual-scrollbar::-webkit-scrollbar {
+    background-color: $background;
+    inline-size: 6px;
+  }
+
+  .#{$block-class}__cell {
+    display: flex;
+    /* Each cell should grow equally */
+    inline-size: 1%;
+  }
+
+  .#{$block-class}__defaultStringRenderer {
+    overflow: hidden;
+    inline-size: 100%;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .#{$block-class}__defaultStringRenderer.#{$block-class}__defaultStringRenderer--multiline {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    white-space: initial;
+  }
+
+  .#{$block-class}__defaultStringRenderer.#{$block-class}__defaultStringRenderer--slug,
+  .#{$block-class}__defaultStringRenderer.#{$block-class}__defaultStringRenderer--ai-label {
+    inline-size: fit-content;
+  }
+
+  .#{$block-class}__expanded-row {
+    display: flex;
+    overflow: hidden;
+    flex-direction: column;
+    block-size: 100%;
+    inline-size: 100%;
+  }
+
+  .#{$block-class}__carbon-row {
+    /* stylelint-disable-next-line declaration-no-important */
+    flex: none !important;
+
+    .#{$block-class}__carbon-row:hover a {
+      /* stylelint-disable-next-line declaration-no-important */
+      color: $link-primary-hover !important;
+    }
+  }
+
+  .#{$block-class}__carbon-row .#{$block-class}__left-sticky-column-cell,
+  .#{$block-class}__carbon-row .#{$block-class}__right-sticky-column-cell,
+  .#{$block-class}__carbon-row .#{$block-class}__checkbox-cell-sticky-left {
+    /* stylelint-disable-next-line declaration-no-important */
+    background-color: $layer-01;
+  }
+
+  .#{$block-class}__carbon-row:hover .#{$block-class}__left-sticky-column-cell,
+  .#{$block-class}__carbon-row:hover .#{$block-class}__right-sticky-column-cell,
+  .#{$block-class}__carbon-row:hover
+    .#{$block-class}__checkbox-cell-sticky-left {
+    /* stylelint-disable-next-line declaration-no-important */
+    background-color: $layer-hover-01;
+  }
+
+  .#{carbon-config.$prefix}--data-table--selected
+    .#{$block-class}__left-sticky-column-cell,
+  .#{carbon-config.$prefix}--data-table--selected
+    .#{$block-class}__right-sticky-column-cell,
+  .#{carbon-config.$prefix}--data-table--selected
+    .#{$block-class}__checkbox-cell-sticky-left {
+    /* stylelint-disable-next-line declaration-no-important */
+    background-color: $layer-selected-01;
+  }
+
+  .#{carbon-config.$prefix}--select-input {
+    -webkit-appearance: none; // could be fixed by post-css plugin
+    appearance: none; // could be fixed by post-css plugin
+  }
+
+  th.#{carbon-config.$prefix}--table-column-checkbox {
+    display: block;
+  }
+
+  td.#{carbon-config.$prefix}--table-column-checkbox,
+  th.#{carbon-config.$prefix}--table-column-checkbox {
+    /* stylelint-disable-next-line declaration-no-important */
+    inline-size: $spacing-09 !important;
+    /* stylelint-disable-next-line declaration-no-important */
+    padding-inline-end: $spacing-05 !important;
+  }
+}
+
+.#{$block-class}__empty-state .#{$block-class}__table-simple {
+  display: table;
+  block-size: 100%;
+
+  .#{c4p-settings.$pkg-prefix}--empty-state {
+    max-inline-size: 280px;
+  }
+}
+
+.#{$block-class}__empty-state
+  .#{carbon-config.$prefix}--data-table
+  tbody
+  tr:not([data-child-row]):hover {
+  background: inherit;
+}
+
+.#{$block-class}__empty-state .#{$block-class}__table-simple tr:hover {
+  background: transparent;
+}
+
+.#{$block-class}__empty-state .#{$block-class}__table-simple tr:hover td {
+  background: transparent;
+  border-block-end: none;
+}
+
+.#{$block-class}__empty-state .#{$block-class}__table-simple td,
+.#{$block-class}__empty-state .#{$block-class}__table-virtual-scroll td {
+  padding: $spacing-11;
+}
+
+.#{$block-class}__empty-state .#{$block-class}__grid-container {
+  flex: 1 1 auto;
+}
+
+.#{$block-class}__empty-state .#{$block-class}__empty-state-cell {
+  border-block-end: none;
+}
+
+.#{$block-class}__resizer {
+  position: absolute;
+  z-index: 1;
+  display: inline-block;
+  background: transparent;
+  block-size: 100%;
+  inline-size: $spacing-02;
+  inset-block-start: 0;
+  inset-inline-end: 0;
+  touch-action: none;
+  transform: translateX(50%);
+}
+
+.#{$block-class}__resizer:hover {
+  background: transparent;
+}
+
+.#{$block-class}__sortableColumn:hover {
+  background-color: $background-selected-hover;
+}
+
+.#{$block-class}__grid-container
+  table.#{$block-class}__table-simple.#{carbon-config.$prefix}--data-table.#{$block-class}__table-is-resizing {
+  overflow-y: hidden;
+  @supports (overflow-block: hidden) {
+    overflow-block: hidden;
+  }
+}
+
+.#{$block-class}__resizableColumn {
+  &.#{$block-class}__isResizing {
+    .#{$block-class}__resizer {
+      border-inline-end: $spacing-01 solid $button-secondary-hover;
+    }
+  }
+
+  &.#{$block-class}__isSorted {
+    background-color: $background-selected-hover;
+  }
+}
+
+.#{$block-class}__resizableColumn:hover {
+  background-color: $layer-selected-hover;
+
+  .#{$block-class}__resizer {
+    background-color: $background-selected-hover;
+    border-inline-end: $spacing-01 solid $border-strong-01;
+  }
+}
+
+.#{$block-class}__header-actions-column:hover {
+  background-color: $layer-accent;
+}
+
+.#{$block-class}
+  .#{$block-class}__carbon-row
+  .#{$block-class}__actions-column-cell-non-sticky
+  .#{carbon-config.$prefix}--btn--icon-only {
+  opacity: 0;
+}
+
+.#{$block-class}
+  .#{$block-class}__carbon-row:hover
+  .#{$block-class}__actions-column-cell-non-sticky
+  .#{carbon-config.$prefix}--btn--icon-only,
+.#{$block-class}
+  .#{$block-class}__carbon-row
+  .#{$block-class}__actions-column-cell-non-sticky
+  .#{carbon-config.$prefix}--btn--icon-only:focus,
+.#{$block-class}
+  .#{$block-class}__carbon-row
+  .#{$block-class}__actions-column-cell-non-sticky
+  .#{carbon-config.$prefix}--btn--icon-only[aria-expanded='true'] {
+  opacity: 1;
+}
+
+.#{$block-class}__head-hidden-select-all {
+  min-inline-size: $spacing-09;
+  padding-inline-end: $spacing-09;
+
+  &.#{$block-class}__select-all-sticky-left {
+    position: sticky;
+    z-index: 10;
+    background-color: $layer-accent-01;
+    inset-inline-start: 0;
+  }
+}
+
+.#{$block-class}__simple-body {
+  position: relative;
+  display: table;
+  overflow: hidden auto;
+  //makes thin scrollbar in chrome and firefox
+  scrollbar-width: thin;
+}
+
+.#{$block-class}__simple-body::-webkit-scrollbar-thumb {
+  background-color: $text-placeholder;
+}
+
+.#{$block-class}__simple-body::-webkit-scrollbar {
+  background-color: $background;
+  inline-size: 6px;
+}
+
+.#{$block-class}__sticky.#{$block-class}__table-simple {
+  /* stylelint-disable-next-line declaration-no-important */
+  min-inline-size: 0 !important;
+}
+
+.#{$block-class}__sticky.#{$block-class}__simple-body {
+  overflow: auto;
+}
+
+.#{$block-class}__sticky.#{$block-class}__table-simple thead > div {
+  overflow: hidden;
+  /* stylelint-disable-next-line declaration-no-important */
+  inline-size: 100% !important;
+}
+
+.#{$block-class}__sticky thead {
+  display: flex;
+
+  tr.#{$block-class}__sticky {
+    inline-size: auto;
+  }
+}
+
+.#{$block-class}__displayFlex {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  block-size: 100%;
+  inline-size: 100%;
+}
+
+.#{$block-class}__table-container-inner {
+  overflow: hidden;
+  flex: 1;
+}
+
+.#{$block-class}__datagridWithPanel {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  block-size: 100%;
+
+  .#{$block-class}__grid-container {
+    display: flex;
+    overflow: visible;
+    flex-direction: column;
+  }
+
+  .#{$block-class}__table-toolbar {
+    inline-size: 100%;
+  }
+
+  .#{$block-class}__table-container {
+    display: flex;
+    overflow: visible;
+    background-color: $layer-01;
+  }
+
+  .#{$block-class}__table-container .#{$block-class}__filter-summary {
+    border-block-end: 1px solid $layer-03;
+  }
+
+  .#{c4p-settings.$pkg-prefix}--datagrid__table-simple {
+    block-size: 100%;
+  }
+
+  .#{c4p-settings.$carbon-prefix}--data-table-content {
+    block-size: fit-content;
+  }
+}
+
+.#{$block-class}__table-container {
+  position: relative;
+  display: flex;
+  overflow: auto;
+  inline-size: 100%;
+  max-block-size: 100%;
+  overflow-y: auto;
+  @supports (overflow-block: auto) {
+    overflow-block: auto;
+  }
+}
+
+.#{$block-class}__carbon-row-expanded {
+  position: relative;
+
+  &.#{$block-class}__carbon-row-expanded-hover-active::before {
+    position: absolute;
+    z-index: 2;
+    block-size: var(--#{$block-class}--indicator-height);
+    border-inline-start: 1px solid $border-subtle-selected-01;
+    content: '';
+    inline-size: 1px;
+    /* stylelint-disable-next-line carbon/layout-use */
+    inset-block-start: var(--#{$block-class}--row-height);
+    /* stylelint-disable-next-line carbon/layout-use */
+    inset-inline-start: calc(
+      var(--#{$block-class}--indicator-offset-amount) + #{$spacing-05}
+    );
+  }
+}
+
+.#{$block-class} .#{carbon-config.$prefix}--data-table-header {
+  background: transparent;
+}
+
+.#{$block-class}__dense-header {
+  display: flex;
+  flex-wrap: wrap;
+
+  .#{carbon-config.$prefix}--data-table-header {
+    flex: 1 1 auto;
+    padding-block-end: $spacing-05;
+  }
+
+  .#{$block-class}__table-toolbar {
+    display: flex;
+    flex: 1 0 auto;
+    align-items: flex-end;
+  }
+
+  .#{carbon-config.$prefix}--table-toolbar {
+    background: transparent;
+  }
+
+  .#{carbon-config.$prefix}__table-container {
+    flex: 1 1 100%;
+  }
+
+  .#{$block-class}__toolbar-divider {
+    position: relative;
+  }
+
+  .#{$block-class}__toolbar-divider::before {
+    position: absolute;
+    block-size: $spacing-05;
+    border-inline-start: 1px solid $border-subtle-01;
+    content: '';
+    inline-size: 1px;
+    inset-block-start: 50%;
+    inset-inline-start: 0;
+    transform: translateY(-50%);
+  }
+}
+
+.#{$block-class}
+  .#{carbon-config.$prefix}--data-table--selected:not(
+    .#{$block-class}__active-row
+  ) {
+  position: relative;
+}
+
+.#{$block-class}
+  .#{carbon-config.$prefix}--data-table--selected:not(
+    .#{$block-class}__active-row
+  )::before {
+  position: absolute;
+  background-color: $background-brand;
+  block-size: 100%;
+  content: '';
+  inline-size: $spacing-02;
+  inset-block-start: 0;
+  inset-inline-start: 0;
+}
+
+.#{c4p-settings.$pkg-prefix}--datagrid__table-toolbar
+  .#{carbon-config.$prefix}--batch-summary__para {
+  white-space: nowrap;
+}
+
+.#{c4p-settings.$pkg-prefix}--datagrid__table-toolbar
+  .#{carbon-config.$prefix}--batch-actions
+  .#{carbon-config.$prefix}--batch-actions--active {
+  overflow-x: hidden;
+  @supports (overflow-inline: hidden) {
+    /* stylelint-disable-next-line declaration-property-value-disallowed-list */
+    overflow-inline: hidden;
+  }
+}
+
+.#{c4p-settings.$pkg-prefix}--datagrid__table-toolbar
+  .#{c4p-settings.$pkg-prefix}--datagrid__button-menu--icon-only.#{c4p-settings.$pkg-prefix}--button-menu {
+  display: flex;
+  justify-content: center;
+  margin-inline-end: $spacing-04;
+  min-inline-size: $spacing-08;
+}
+
+.#{c4p-settings.$pkg-prefix}--datagrid__table-toolbar
+  .#{c4p-settings.$pkg-prefix}--datagrid__button-menu {
+  min-inline-size: calc(#{$spacing-12} + #{$spacing-03});
+}
+
+.#{c4p-settings.$pkg-prefix}--datagrid__table-toolbar
+  .#{c4p-settings.$pkg-prefix}--datagrid__button-menu--icon-only.#{c4p-settings.$pkg-prefix}--button-menu
+  .#{c4p-settings.$pkg-prefix}--button-menu__trigger {
+  display: flex;
+  justify-content: center;
+  padding: 0;
+  margin: 0;
+  inline-size: 100%;
+  min-inline-size: $spacing-09;
+
+  .#{carbon-config.$prefix}--btn__icon {
+    margin: 0;
+  }
+}
+
+.#{$block-class} .#{c4p-settings.$pkg-prefix}--button-menu {
+  block-size: $spacing-09;
+}
+
+.#{$block-class} .#{$block-class}__row-size-button {
+  display: flex;
+  justify-content: center;
+  block-size: $spacing-09;
+  inline-size: $spacing-09;
+}
+
+.#{$block-class}__customize-columns-checkbox-wrapper.#{carbon-config.$prefix}--form-item {
+  flex: 0 0 auto;
+  margin-inline-end: $spacing-03;
+}
+
+.#{$block-class}__virtual-scrollbar::-webkit-scrollbar {
+  block-size: 7px;
+  inline-size: 10px;
+}
+
+.#{$block-class}__virtual-scrollbar::-webkit-scrollbar-track {
+  background: $layer;
+}
+
+.#{$block-class}__virtual-scrollbar::-webkit-scrollbar-thumb {
+  border-radius: 5px;
+}
+
+.#{$block-class}__virtualScrollContainer {
+  inline-size: 100%;
+  .#{carbon-config.$prefix}--data-table-content {
+    // overrides default scroll overflow as we handle overflow in thead and tbody separately for virtualScrollContainer variant
+    overflow-x: hidden;
+    @supports (overflow-inline: hidden) {
+      /* stylelint-disable-next-line declaration-property-value-disallowed-list */
+      overflow-inline: hidden;
+    }
+  }
+}
+
+.#{$block-class} .#{carbon-config.$prefix}--modal {
+  inline-size: 100%;
+}
+
+.#{carbon-config.$prefix}--overflow-menu.#{$block-class}__toolbar-menu__trigger {
+  flex-shrink: 0;
+  background-color: $interactive;
+}
+
+.#{carbon-config.$prefix}--overflow-menu.#{$block-class}__toolbar-menu__trigger
+  svg {
+  fill: $background;
+}
+
+.#{carbon-config.$prefix}--overflow-menu.#{$block-class}__toolbar-menu__trigger:hover,
+.#{carbon-config.$prefix}--overflow-menu.#{$block-class}__toolbar-menu__trigger.#{carbon-config.$prefix}--overflow-menu--open:hover,
+.#{carbon-config.$prefix}--overflow-menu.#{$block-class}__toolbar-menu__trigger.#{carbon-config.$prefix}--overflow-menu--open {
+  background-color: $button-primary-hover;
+}
+
+// extra specificity to override Carbon default
+.#{$block-class}__toolbar-options.#{$block-class}__toolbar-options {
+  background-color: $layer-02;
+}
+
+.#{$block-class}__toolbar-options.#{carbon-config.$prefix}--overflow-menu-options::after {
+  background-color: transparent;
+}
+
+.#{$block-class}__mobile-toolbar-modal
+  .#{carbon-config.$prefix}--modal-container {
+  position: absolute;
+}
+
+.#{$block-class}__table-toolbar--sm,
+.#{$block-class}__table-toolbar--xs {
+  .#{c4p-settings.$pkg-prefix}--filter-summary {
+    padding: 0 $spacing-03;
+  }
+}
+
+.#{$block-class} .#{c4p-settings.$pkg-prefix}--datagrid__head-wrap {
+  overflow: hidden;
+  background-color: $layer-accent;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.#{$block-class}
+  .#{c4p-settings.$pkg-prefix}--datagrid__head-wrap::-webkit-scrollbar {
+  display: none;
+}
+
+.#{$block-class}
+  .#{carbon-config.$prefix}--action-list
+  .#{carbon-config.$prefix}--btn.#{c4p-settings.$pkg-prefix}--button-menu {
+  padding: 0;
+}
+
+.#{$block-class}
+  .#{carbon-config.$prefix}--noLabel
+  svg.#{carbon-config.$prefix}--btn__icon {
+  margin-inline-start: 0;
+}
+
+.#{$block-class}
+  .#{carbon-config.$prefix}--action-list
+  .#{carbon-config.$prefix}--btn__icon {
+  margin-block-start: 0;
+}
+
+.#{$block-class} .#{$block-class}__col-resizer-range {
+  position: absolute;
+  z-index: 2;
+  margin: 0;
+  -moz-appearance: initial;
+  -webkit-appearance: none;
+  appearance: none;
+  background: transparent;
+  block-size: 100%;
+  inline-size: 1rem;
+  inset-block-start: 0;
+  inset-inline-end: calc(#{$spacing-03} * -1);
+}
+
+.#{$block-class} .#{$block-class}__col-resizer-range:focus {
+  outline: 0;
+}
+
+.#{$block-class}
+  .#{$block-class}__col-resizer-range:focus
+  + .#{$block-class}__col-resize-indicator::before {
+  position: absolute;
+  background-color: $focus;
+  block-size: var(--#{$block-class}--header-height);
+  content: '';
+  inline-size: 2px;
+  inset-block-start: 50%;
+  inset-inline-start: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.#{$block-class}
+  .#{$block-class}__col-resizer-range:focus
+  + .#{$block-class}__col-resize-indicator {
+  position: absolute;
+  z-index: 2;
+  border-radius: 100%;
+  margin: 0;
+  background-color: $focus;
+  block-size: 0.5rem;
+  inline-size: 0.5rem;
+  inset-inline-end: calc(#{$spacing-03} * -1);
+  transform: translate(-50%, 0);
+}
+
+.#{$block-class}
+  .#{$block-class}__col-resizer-range:focus
+  + .#{$block-class}__col-resize-indicator::after {
+  position: absolute;
+  background-color: $layer-active-01;
+  block-size: calc(
+    var(--#{$block-class}--grid-height) - var(--#{$block-class}--row-height)
+  );
+  content: '';
+  inline-size: 1px;
+  /* stylelint-disable-next-line carbon/layout-use */
+  inset-block-start: calc(var(--#{$block-class}--row-height) - 20px);
+  inset-inline-end: $spacing-02;
+}
+
+.#{$block-class} .#{$block-class}__col-resizer-range::-webkit-slider-thumb {
+  border: none;
+  border-radius: 50%;
+  -webkit-appearance: none;
+  appearance: none;
+  background: transparent;
+  block-size: 16px;
+  inline-size: 16px;
+}
+
+.#{$block-class} .#{$block-class}__col-resizer-range::-moz-range-thumb {
+  visibility: hidden;
+}
+
+.#{$block-class} .#{$block-class}__table-row-ai-enabled {
+  display: flex;
+  align-items: center;
+
+  &.#{$block-class}__slug--expanded,
+  &.#{$block-class}__ai-label--expanded {
+    border: none;
+  }
+}
+
+.#{$block-class} .#{$block-class}__table-row-ai-spacer,
+.#{$block-class} .#{$block-class}__table-row-ai-enabled {
+  inline-size: $spacing-05;
+}

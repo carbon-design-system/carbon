@@ -1,0 +1,25 @@
+//
+// Copyright IBM Corp. 2024, 2024
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@forward '../../../../ibm-products-styles/src/global/styles/project-settings';
+
+// Any additional styles used by TagOverflow.stories.js
+@use '../../../../ibm-products-styles/src/global/styles/display-box' as *;
+
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/theme' as *;
+
+.custom-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid $text-primary;
+  border-radius: 50%;
+  block-size: $spacing-07;
+  inline-size: $spacing-07;
+  min-inline-size: $spacing-07;
+}

@@ -1,0 +1,59 @@
+//
+// Copyright IBM Corp. 2022, 2022
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/type';
+@use '@carbon/type/scss/font-family';
+
+@use 'ALIAS_STORY_STYLE_CONFIG' as c4p-settings;
+
+// TODO: add any additional styles used by EditTearsheet.stories.js
+
+$preview-block-class: #{c4p-settings.$pkg-prefix}--tearsheet-edit-multi-form;
+
+.#{$preview-block-class}__description {
+  @include type.type-style('body-compact-01');
+
+  padding-block-end: $spacing-04;
+}
+
+p.#{$preview-block-class}__description:last-of-type {
+  padding-block-end: $spacing-07;
+}
+
+.#{$preview-block-class}__heading {
+  @include font-family.font-weight('semibold');
+}
+
+.#{$preview-block-class}
+  .#{c4p-settings.$pkg-prefix}--tearsheet__content
+  .#{c4p-settings.$carbon-prefix}--form-item {
+  margin-block-end: $spacing-05;
+}
+
+.#{c4p-settings.$carbon-prefix}--tile-group div {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.#{c4p-settings.$pkg-prefix}--tearsheet-edit-multi-form--custom-tile {
+  block-size: 240px;
+  inline-size: 280px;
+  margin-inline-end: $spacing-05;
+}
+
+.#{c4p-settings.$pkg-prefix}--tearsheet-edit-multi-form--custom-tile
+  .#{c4p-settings.$pkg-prefix}--empty-state__illustration.#{c4p-settings.$pkg-prefix}--empty-state__illustration--lg {
+  block-size: 120px;
+  min-inline-size: 120px;
+}
+
+.#{c4p-settings.$pkg-prefix}--tearsheet-edit-multi-form--custom-tile-label {
+  position: absolute;
+  inset-block-end: $spacing-05;
+  inset-inline-start: $spacing-05;
+}

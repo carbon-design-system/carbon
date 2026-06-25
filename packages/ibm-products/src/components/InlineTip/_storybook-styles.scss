@@ -1,0 +1,21 @@
+//
+// Copyright IBM Corp. 2023, 2023
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use '@carbon/styles/scss/spacing' as *;
+// @use '@carbon/ibm-products-styles/scss/global/styles/project-settings';
+@use '../../../../ibm-products-styles/src/global/styles/project-settings';
+
+.storybook--inline-tip-wide {
+  // Allow enough space above the component to show the "X" tooltip.
+  margin-block-start: $spacing-07;
+  max-inline-size: 784px;
+}
+
+.storybook--inline-tip-narrow {
+  margin-block-start: $spacing-07;
+  max-inline-size: 348px;
+}

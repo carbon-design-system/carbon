@@ -1,0 +1,160 @@
+//
+// Copyright IBM Corp. 2026
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+$prefix: 'c4p' !default;
+
+@use '@carbon/styles/scss/config' with (
+  $font-path: '@ibm/plex'
+);
+@use '@carbon/styles';
+
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/theme' as theme;
+@use '@carbon/styles/scss/themes' as themes;
+@use '@carbon/styles/scss/type';
+@use '@carbon/styles/scss/motion' as *;
+@use '@carbon/utilities/scss/carousel/_index' as carousel;
+
+@include carousel.carousel();
+@include carousel.wrapperStyles();
+
+.app {
+  background-color: theme.$background;
+  min-block-size: 100vh;
+}
+
+// Carousel example styles
+.exampleCarouselWrapper {
+  margin-block-end: $spacing-05;
+}
+
+.carouselIndicators {
+  display: flex;
+  gap: $spacing-03;
+
+  .activeIndicator {
+    background-color: theme.$background-inverse;
+  }
+
+  > div {
+    border: 1px solid theme.$border-strong-01;
+    border-radius: 100%;
+    background-color: transparent;
+    block-size: 1rem;
+    inline-size: 1rem;
+  }
+}
+
+.carouselControlWrapper {
+  margin-block-start: $spacing-05;
+
+  > :nth-child(2) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    > div {
+      display: flex;
+    }
+  }
+
+  > :nth-child(3) {
+    display: flex;
+    justify-content: flex-end;
+  }
+}
+
+// ViewStack example styles
+.PlayingCard {
+  position: relative;
+  border: 1px solid theme.$background;
+  border-radius: $spacing-07;
+  margin: $spacing-03;
+  background-color: theme.$background-inverse;
+  block-size: calc(100% - #{$spacing-03} * 2);
+  color: theme.$text-inverse;
+  font-size: 1.5rem;
+  inline-size: calc(100% - #{$spacing-03} * 2);
+}
+
+.playingCardContainer {
+  block-size: 31.25rem;
+  inline-size: 18.75rem;
+}
+
+.PlayingCardViewStack {
+  block-size: 31.25rem;
+  inline-size: 18.75rem;
+  outline: thin dashed theme.$button-danger-primary;
+}
+
+.ViewStackStoryExample {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: $spacing-02;
+  margin-block-start: $spacing-09;
+}
+
+.ViewStackStoryHistory {
+  display: flex;
+  flex-direction: column;
+  block-size: 31.25rem;
+  inline-size: 18.75rem;
+  outline: thin dashed theme.$button-danger-primary;
+}
+
+.ViewStackStoryControls {
+  display: grid;
+  block-size: 31.25rem;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  inline-size: 18.75rem;
+  outline: thin dashed theme.$button-danger-primary;
+}
+
+.ViewStackStoryHistoryRow {
+  flex-grow: 0;
+  padding-block: $spacing-02;
+  padding-inline: $spacing-03;
+}
+
+.ViewStackStoryHistoryEntriesLabel {
+  margin-block-end: $spacing-02;
+  padding-block: $spacing-02;
+  padding-inline: $spacing-03;
+}
+
+.ViewStackStoryHistoryEntries {
+  flex-grow: 1;
+  margin: $spacing-03;
+  outline: 1px solid rgba(255, 255, 255, 0.5);
+  overflow-y: auto;
+  padding-block: $spacing-02;
+}
+
+.ViewStackStoryHistoryEntry {
+  padding: $spacing-03;
+  border-block-end: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.exampleWrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: $spacing-05;
+  margin-block-start: $spacing-07;
+}
+
+// Fix for carousel views blocking button clicks
+.carousel__view {
+  pointer-events: none;
+
+  // Re-enable pointer events for interactive content inside carousel views
+  * {
+    pointer-events: auto;
+  }
+}

@@ -1,0 +1,47 @@
+//
+// Copyright IBM Corp. 2021, 2021
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+// Standard imports.
+@use '@carbon/styles/scss/grid' as *;
+@use '@carbon/styles/scss/motion' as *;
+@use '../../global/styles/project-settings' as c4p-settings;
+
+$block-class: #{c4p-settings.$pkg-prefix}--cascade;
+$animationProps: $duration-moderate-02 motion(standard, productive) 0s 1;
+$fadeStart: translateY(3rem);
+$fadeEnd: translateY(0);
+
+@keyframes fade {
+  0% {
+    opacity: 0;
+    transform: $fadeStart;
+  }
+
+  100% {
+    opacity: 1;
+    transform: $fadeEnd;
+  }
+}
+
+.#{$block-class}__element,
+.#{$block-class}__col {
+  /* stylelint-disable-next-line max-nesting-depth */
+  @media (prefers-reduced-motion: no-preference) {
+    /* stylelint-disable-next-line carbon/motion-duration-use, carbon/motion-easing-use -- Carbon animation duration defined above in $animationProps */
+    animation: $animationProps fade;
+    animation-fill-mode: forwards;
+    opacity: 0;
+  }
+}
+
+//adds cascading delay
+@for $i from 1 through 8 {
+  .#{$block-class}__element:nth-child(n + #{$i}),
+  .#{$block-class}__col-#{$i} {
+    animation-delay: #{$i * 60}ms;
+  }
+}

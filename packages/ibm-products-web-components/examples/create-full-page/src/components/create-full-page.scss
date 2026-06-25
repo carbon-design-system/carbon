@@ -1,0 +1,201 @@
+//
+// Copyright IBM Corp. 2026
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use '@carbon/styles/scss/breakpoint' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/themes';
+@use '@carbon/styles/scss/type';
+@use '@carbon/styles/scss/motion' as *;
+@use '@carbon/styles/scss/config' as carbon-config;
+@use '@carbon/styles/scss/reset';
+@use '@carbon/styles/scss/breakpoint' as *;
+
+// Pattern-specific block classes
+$block-class: create-full-page-pattern;
+$action-set-block-class: action-set;
+$breadcrumb-block-class: breadcrumb-with-overflow;
+$influencer-block-class: create-influencer;
+
+// CreateInfluencer styles
+$influencerAnimationStart: calc(-1 * #{$spacing-05});
+
+@keyframes influencer-menu-entrance {
+  0% {
+    opacity: 0;
+    transform: translateX($influencerAnimationStart);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes influencer-menu-exit {
+  0% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateX($influencerAnimationStart);
+  }
+}
+
+// CreateFullPage pattern styles
+:host {
+  inline-size: 100%;
+}
+
+.#{$block-class} {
+  display: grid;
+  block-size: 100%;
+  color: $text-primary;
+  grid-template-rows: minmax(auto, 100%);
+
+  &:has(.#{$block-class}__header) {
+    grid-template-rows: auto minmax(auto, 100%);
+  }
+}
+
+.#{$block-class}__influencer-and-body-container {
+  display: flex;
+  overflow: hidden;
+  padding: 0;
+  margin: 0;
+  max-block-size: 100%;
+}
+
+.#{$block-class}__influencer {
+  display: grid;
+  flex: 0 0 257px;
+  background-color: $layer-01;
+  border-inline-end: 1px solid $layer-accent-01;
+  grid-template-columns: 100%;
+  grid-template-rows: 1fr auto;
+  padding: $spacing-06 $spacing-07;
+
+}
+
+.#{$block-class}__body {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.#{$block-class}__main {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  max-block-size: 100%;
+}
+
+.#{$block-class}__content {
+  overflow: auto;
+  flex-grow: 1;
+  background-color: $background;
+  color: $text-primary;
+  overflow-x: hidden;
+  @supports (overflow-inline: hidden) {
+    overflow-inline: hidden;
+  }
+
+  padding-block-start: $spacing-06;
+}
+
+.#{$block-class}__content .#{carbon-config.$prefix}--grid {
+  margin-inline: 0;
+  padding-block-start: $spacing-06;
+}
+
+.create-full-page-stories__error--text
+{
+   @include type.type-style('heading-04');
+}
+.#{$block-class}__form {
+  block-size: 100%;
+
+  cds-inline-notification[kind='error'] {
+    margin-block-start: $spacing-04;
+  }
+}
+
+.#{$block-class}__buttons {
+  border-block-start: 1px solid $layer-accent-01;
+  min-inline-size: 100%;
+  inline-size: 100%;
+}
+
+@include breakpoint-down(md) {
+  .#{$block-class}__buttons cds-button {
+    flex: 1 1 0;
+    min-inline-size: 0;
+  }
+}
+
+@include breakpoint(md) {
+  .#{$block-class}__buttons cds-button[kind='secondary'],
+  .#{$block-class}__buttons cds-button[kind='primary'] {
+    flex-shrink: 0;
+    inline-size: calc($spacing-11 * 3);
+    max-inline-size: calc($spacing-11 * 3);
+  }
+
+  .#{$block-class}__buttons cds-button[kind='ghost'] {
+    flex: 1 1 auto;
+    inline-size: auto;
+    max-inline-size: none;
+  }
+}
+
+.#{$block-class}__buttons cds-inline-loading {
+  position: absolute;
+  inset-block-start: 0;
+}
+
+.#{$block-class}__step-title {
+  @include type.type-style('heading-04');
+
+  margin-block-end: $spacing-05;
+}
+
+.#{$block-class}__step-subtitle {
+  @include type.type-style('heading-compact-01');
+
+  margin-block-end: $spacing-03;
+}
+
+.#{$block-class}__step-description {
+  @include type.type-style('body-01');
+
+  margin-block-end: $spacing-06;
+}
+
+.#{$block-class}__step-fieldset {
+  margin-block-start: $spacing-06;
+  border: none;
+  padding: 0;
+
+  legend {
+    @include type.type-style('heading-03');
+
+    margin-block-end: $spacing-05;
+  }
+}
+
+.#{$block-class}__header {
+  button:first-of-type {
+    background: none;
+  }
+}
+
+.#{$influencer-block-class}__title {
+    @include type.type-style('heading-03');
+    margin-block-end: $spacing-06;
+}

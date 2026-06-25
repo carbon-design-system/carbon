@@ -1,0 +1,12 @@
+//
+// Copyright IBM Corp. 2020, 2022
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+// @forward './global/styles/imported-carbon-modules';
+// $imported-modules: $imported-carbon-modules;
+
+@forward './global/styles/project-settings';
+@forward './components/index-released-only';

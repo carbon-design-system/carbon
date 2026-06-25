@@ -1,0 +1,18 @@
+//
+// Copyright IBM Corp. 2024, 2024
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+@use '@carbon/themes' as *;
+
+$story-class: 'http-error-stories';
+
+.#{$story-class}__viewport {
+  overflow: hidden;
+  block-size: calc(100vh - 58px);
+}
+.sbdocs .#{$story-class}__viewport {
+  background-color: $background;
+  max-block-size: 60vh;
+}

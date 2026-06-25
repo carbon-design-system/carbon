@@ -1,0 +1,39 @@
+/**
+ * @license
+ *
+ * Copyright IBM Corp. 2025
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/type';
+
+.coachmark-body {
+  display: flex;
+  flex-direction: column;
+  inline-size: 290px;
+
+  h2 {
+    @include type.type-style('productive-heading-02');
+
+    margin: 0 0 $spacing-03;
+  }
+
+  p {
+    @include type.type-style('body-long-01');
+
+    margin: 0 0 $spacing-03;
+  }
+  /* stylelint-disable-next-line selector-type-no-unknown */
+  cds-button {
+    display: flex;
+    align-self: flex-end;
+    margin-block-start: $spacing-03;
+  }
+}
+
+.trigger-btn {
+  margin: $spacing-03;
+}

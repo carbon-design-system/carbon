@@ -1,0 +1,269 @@
+import { Story, Controls, Source, Canvas } from '@storybook/addon-docs/blocks';
+import { CodesandboxLink } from '../../global/js/utils/story-helper';
+import { InterstitialScreen } from '.';
+import * as stories from './InterstitialScreen.stories';
+import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
+
+# InterstitialScreen
+
+[Usage guidelines](https://pages.github.ibm.com/carbon/ibm-products/components/onboarding/interstitial-screen/usage)
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Expected Composability](#expected-composability)
+- [About Onboarding](#about-onboarding)
+- [Stackblitz Examples](#stackblitz-examples)
+- [Component API](#component-api)
+
+## Overview
+
+[Interstitial screen](https://pages.github.ibm.com/carbon/ibm-products/components/onboarding/interstitial-screen/usage)
+can be a full page or an overlay, and are shown on the first time a user
+accesses a new experience (e.g. upon first login or first time opening a page
+where a newly purchased capability is presented).
+
+## Expected Composability
+
+The InterstitialScreen component is structured using the compound component
+pattern in React, with distinct and well-defined sections: Header, Body, and
+Footer. `InterstitialScreen` acting as a container and
+`InterstitialScreen.Header`, `InterstitialScreen.Body`,
+`InterstitialScreen.Footer` are static properties of the `InterstitialScreen`
+component, effectively acting as sub-components. All related parts of the
+screen, the Header, Body and Footer are grouped under a single logical component
+called `InterstitialScreen`. You can mix and match subcomponents or even omit
+some.
+
+### InterstitialScreen.Header
+
+The Header component is designed to be fully composable. It accepts optional
+props such as
+`className, headerTitle, headerSubTitle, closeIconDescription, hideProgressIndicator`.
+You can also provide custom children, which will be rendered below the header
+title, subtitle and above the progress indicator. If the interstitial screen
+includes multiple steps, the progress indicator is displayed automatically.
+
+### InterstitialScreen.Body
+
+The Body component represents the main content area of the interstitial screen.
+It supports two ways of rendering content:
+
+**1.Using the `contentRenderer` prop**<br/> You can pass a callback function to
+the contentRenderer prop that returns any JSX to be displayed as the body
+content.
+
+The component automatically determines the number of steps based on the number
+of children returned. If you want to render multiple steps, wrap each step’s
+content inside a wrapper component. You can either use the built-in
+`InterstitialScreenView` utility component or your own custom wrapper.
+
+Each wrapper component accepts a stepTitle prop, which defines the label shown
+in the progress indicator. You can also provide an translateWithId callback to
+handle internationalized strings for message IDs.
+
+```jsx
+<InterstitialScreen.Body
+  contentRenderer={({ handleGotoStep, progStep, disableActionButton }) => (
+    <>
+      <InterstitialScreenView stepTitle="Step 1">
+        Content for Step 1
+      </InterstitialScreenView>
+      <InterstitialScreenView stepTitle="Step 2">
+        Content for Step 2
+      </InterstitialScreenView>
+    </>
+  )}
+/>
+```
+
+The contentRenderer function receives an object with the following properties:
+
+```js
+type contentRendererArgs = {
+ handleGotoStep?: (value: number) => void; // Navigate to a specific step
+ progStep?: number;                        // Current step number
+ disableActionButton: (value: disableButtonConfigType) => void; // Disable footer action buttons
+};
+```
+
+If your interstitial does not require multiple steps, you can simply return the
+desired content directly as single child.
+
+```jsx
+<InterstitialScreen.Body
+  contentRenderer={() => (
+    <InterstitialScreenView>Content</InterstitialScreenView>
+  )}
+/>
+```
+
+or
+
+```jsx
+<InterstitialScreen.Body contentRenderer={() => <div>Content</div>} />
+```
+
+**2.Passing static children of `InterstitialScreen.Body`**<br/> Alternatively,
+you can render the body content by passing it directly as static children of
+InterstitialScreen.Body, especially if you don’t need to perform step
+operations.
+
+In this approach, the steps are inferred automatically based on the number of
+child elements provided. You can use either your own custom wrapper component or
+the built-in `InterstitialScreenView` component to render each step’s content.
+
+```jsx
+<InterstitialScreen.Body>
+  <InterstitialScreenView stepTitle="Step 1">
+    Content for Step 1
+  </InterstitialScreenView>
+  <InterstitialScreenView stepTitle="Step 2">
+    Content for Step 2
+  </InterstitialScreenView>
+</InterstitialScreen.Body>
+```
+
+If your interstitial does not require multiple steps, you can simply return the
+desired content directly as a single child
+
+```jsx
+<InterstitialScreen.Body>
+  <InterstitialScreenView>Content</InterstitialScreenView>
+</InterstitialScreen.Body>
+```
+
+or
+
+```jsx
+<InterstitialScreen.Body>
+  <div>Content</div>
+</InterstitialScreen.Body>
+```
+
+### InterstitialScreen.Footer
+
+The footer provides built-in behavior for rendering action buttons
+automatically. **Without steps**: The footer displays Skip (which closes the
+interstitial) and Get started buttons. **With steps**: It displays Skip, Back,
+Previous, Next, and Start buttons, with step navigation handled internally.
+
+You can also override the default button labels using the provided props.
+
+**onAction** <br/> The `onAction` prop is a callback triggered when a user
+interacts with any footer action button (e.g., Next, Back, Skip, or Cancel). It
+allows you to perform custom logic such as validation, asynchronous operations,
+or conditional navigation before the interstitial proceeds to the next step. It
+comes with args that can be used to perform step operation, disable action
+buttons etc...
+
+If the callback performs an asynchronous operation, the action button will
+automatically display a loading state until the promise resolves. You can
+optionally return true from the callback to abort navigation and remain on the
+same step.
+
+```jsx
+<InterstitialScreen.Footer
+  onAction={async (actionType:'close' | 'start' | 'skip' | 'back' | 'next', config:actionButtonArgs) => {
+    // Perform async tasks, such as validation or API calls
+    await new Promise((resolve) => {
+      // simulate async operation
+      resolve();
+    });
+
+    return true; // optionally return true to prevent automatic navigation
+  }}
+/>
+
+```
+
+If your implementation doesn’t require any asynchronous operations, you can
+simply define the `onAction` callback as a regular synchronous function. In this
+case, the interstitial will immediately handle the action (e.g., move to the
+next or previous step) once the callback completes.
+
+```jsx
+<InterstitialScreen.Footer
+  onAction={(actionType, config) => {
+    // Perform synchronous logic
+    return true; // optionally return true to stay on the current step
+  }}
+/>
+```
+
+**actionButtonRenderer**<br/> If you want to override the default footer
+behavior and render your own custom action buttons, you can use the
+actionButtonRenderer prop. This callback provides configuration utilities that
+allow you to control step operations manually.
+
+```jsx
+<InterstitialScreen.Footer
+  actionButtonRenderer={({ handleGotoStep, progStep, stepCount }) => {
+    return (
+      <div className="custom-footer">
+        <Button onClick={() => handleGotoStep?.(progStep - 1)}>Previous</Button>
+        <Button onClick={() => handleGotoStep?.(progStep + 1)}>Next</Button>
+      </div>
+    );
+  }}
+/>
+```
+
+## About Onboarding
+
+[Onboarding](https://pages.github.ibm.com/carbon/ibm-products/patterns/onboarding-flows/overview/overview/)
+is a continuous learning methodology and framework that aims to orient, onboard,
+explain, educate, and cultivate novice users into high-functioning power users.
+
+## Usage
+
+```jsx
+<InterstitialScreen open >
+  <InterstitialScreen.Header
+    headerTitle={'headerTitle'}
+    headerSubTitle={'headerSubTitle'}
+  ></InterstitialScreen.Header>
+  <InterstitialScreen.Body
+    contentRenderer={(internalConfig) => {
+      return (
+        <InterstitialScreenView
+          className="NoImageExampleModal"
+          stepTitle="Step 1"
+        >
+          Step 1 content
+        </InterstitialScreenView>
+         <InterstitialScreenView
+          className="NoImageExampleModal"
+          stepTitle="Step 2"
+        >
+          Step 2 content
+        </InterstitialScreenView>
+      );
+    }}
+  />
+  <InterstitialScreen.Footer
+    nextButtonLabel="Next"
+    previousButtonLabel="Back"
+    skipButtonLabel="Skip"
+    startButtonLabel="Get started"
+  />
+</InterstitialScreen>
+```
+
+## Stackblitz Examples
+
+#### Example using sample design from usage guidelines
+
+[![Example 1](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/carbon-design-system/ibm-products/tree/main/examples/carbon-for-ibm-products/InterstitialScreen)
+
+#### Example using steppedAnimatedMedia and lottie web
+
+[![Example 1](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/carbon-design-system/ibm-products/tree/main/examples/carbon-for-ibm-products/InterstitialScreenWithAnimatedMedia)
+
+#### Example using InterstitialView and InterstitialViewModule components
+
+[![Example 1](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/carbon-design-system/ibm-products/tree/main/examples/carbon-for-ibm-products/InterstitialScreenView)
+
+## Component API
+
+<Controls />

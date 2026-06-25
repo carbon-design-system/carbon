@@ -1,0 +1,51 @@
+<svg width="320" height="180" viewBox="0 0 320 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect x="60" y="41" width="200" height="109" fill="white"/>
+<rect x="60" y="29" width="200" height="13" fill="#171717"/>
+<rect opacity="0.844385" x="94" y="34.5" width="22" height="3" fill="#C6C6C6"/>
+<rect opacity="0.844385" x="67" y="34.5" width="22" height="3" fill="#C6C6C6"/>
+<rect opacity="0.844385" x="121" y="34.5" width="22" height="3" fill="#C6C6C6"/>
+<rect opacity="0.844385" x="239" y="33" width="5" height="5" fill="#C6C6C6"/>
+<rect opacity="0.844385" x="249" y="33" width="5" height="5" fill="#C6C6C6"/>
+<g style="mix-blend-mode:multiply">
+<rect x="60" y="29" width="200" height="122" fill="#8D8D8D"/>
+</g>
+<rect x="67" y="48" width="187" height="103" fill="white"/>
+<rect x="114" y="68" width="140" height="83" fill="#F4F4F4"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M68 49H254V61.2449V69H68V49Z" fill="white"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M68 69H113V118.592V150H68V69Z" fill="white"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M121 101H169V104.673V107H121V101Z" fill="white" stroke="#0F62FE"/>
+<rect opacity="0.891745" x="121" y="144" width="16" height="2" fill="#78A9FF"/>
+<rect opacity="0.891745" x="72" y="53" width="16" height="2" fill="#78A9FF"/>
+<rect opacity="0.891745" x="85" y="85" width="14" height="2" fill="#A8A8A8"/>
+<rect opacity="0.891745" x="121" y="85" width="56" height="2" fill="#A8A8A8"/>
+<rect opacity="0.891745" x="121" y="124" width="56" height="2" fill="#A8A8A8"/>
+<rect opacity="0.891745" x="121" y="89" width="66" height="2" fill="#A8A8A8"/>
+<rect opacity="0.891745" x="121" y="93" width="56" height="2" fill="#A8A8A8"/>
+<rect opacity="0.891745" x="121" y="128" width="66" height="2" fill="#A8A8A8"/>
+<rect opacity="0.891745" x="85" y="97" width="14" height="2" fill="#A8A8A8"/>
+<rect opacity="0.891745" x="85" y="108" width="14" height="2" fill="#A8A8A8"/>
+<rect opacity="0.891745" x="85" y="119" width="14" height="2" fill="#A8A8A8"/>
+<rect opacity="0.891745" x="93" y="53" width="16" height="2" fill="#78A9FF"/>
+<rect x="121" y="76" width="28" height="3" fill="#A8A8A8"/>
+<rect x="72" y="58" width="54" height="3" fill="#A8A8A8"/>
+<rect x="121" y="115" width="28" height="3" fill="#A8A8A8"/>
+<rect x="113" y="69" width="1" height="82" fill="#E5E5E5"/>
+<rect x="67" y="150" width="187" height="1" fill="#C6C6C6"/>
+<rect x="72" y="76" width="17" height="3" fill="#A8A8A8"/>
+<rect x="72" y="89" width="2" height="42" fill="#E5E5E5"/>
+<rect x="72" y="84" width="2" height="15" fill="#0F62FE"/>
+<circle cx="79.5" cy="108.5" r="2.25" stroke="black" stroke-width="0.5"/>
+<circle cx="79.5" cy="97.5" r="2.25" stroke="black" stroke-width="0.5"/>
+<circle cx="79.5" cy="86.5" r="2.25" stroke="#0F62FE" stroke-width="0.5"/>
+<rect x="114" y="139" width="140" height="1" fill="#E5E5E5"/>
+<rect x="67" y="68" width="187" height="1" fill="#E5E5E5"/>
+<rect x="219" y="140" width="35" height="11" fill="#0F6DFF"/>
+<rect x="183" y="140" width="35" height="11" fill="#C6C6C6"/>
+<circle cx="79.5" cy="119.5" r="2.25" stroke="black" stroke-width="0.5"/>
+<mask id="mask0_7_2957" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="77" y="84" width="5" height="5">
+<circle cx="79.5" cy="86.5" r="2.25" fill="#0F62FE" stroke="#0F62FE" stroke-width="0.5"/>
+</mask>
+<g mask="url(#mask0_7_2957)">
+<rect x="74" y="82" width="5.5" height="10" fill="#0F62FE"/>
+</g>
+</svg>

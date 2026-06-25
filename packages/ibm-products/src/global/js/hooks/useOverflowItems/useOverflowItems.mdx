@@ -1,0 +1,67 @@
+import { Story, Canvas } from '@storybook/addon-docs/blocks';
+import * as UseOverflowItemsStories from './useOverflowItems.stories';
+import { useOverflowItems } from '.';
+
+# useOverflowItems
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Hook API](#hook-api)
+- [Example usage](#example-usage)
+- [Example implementation](#example-implementation)
+
+## Overview
+
+The `useOverflowItems` hook can be used for handling overflow behavior of
+multiple DOM elements inside of a given area.
+
+For example, if you need to display a certain number of `Tag` elements in a
+container and render additional values in a popover, you could use this hook to
+do just that.
+
+## Hook API
+
+```jsx
+// Hook arguments
+items: T[] = [], // A generic array of items
+containerRef: RefObject<HTMLElement | null>, // The parent container that the items are confined to
+offsetRef?: RefObject<HTMLElement | null>, // An optional ref to an element that you want to exclude from the calculation
+maxItems?: number, // An optional argument for a maximum amount of items to return
+onChange?: (value: {
+  hiddenItems?: T[];
+  minWidth?: number;
+  maxWidth?: number;
+}) => void // An event handler that's called whenever the number of number of visible items changes
+
+// Hook returns
+{
+  visibleItems: T[]; // An array of items that fit in the containerRef
+  itemRefHandler: (id: string, node: HTMLElement | null) => void; // A handler for passing the ref of the node to the hook
+  hiddenItems: T[]; // An array of items that don't fit in the containerRef
+  offsetRefHandler: (node: HTMLElement | null) => HTMLElement; // A handler for passing the ref of the offset element to the hook
+}
+```
+
+## Example usage
+
+```jsx
+const { visibleItems, hiddenItems, itemRefHandler, offsetRefHandler } =
+  useOverflowItems(items, containerRef, offsetRef, maxVisible, onChange);
+```
+
+<Canvas>
+  <Story of={UseOverflowItemsStories.Default} />
+</Canvas>
+
+## Example implementation
+
+`useOverflowItems` is used in several components within the Carbon for IBM
+products library.
+
+- ActionBar
+  - [Storybook](?path=/docs/utils-components-actionbar--docs&globals=viewport:basic)
+  - [Source](https://github.com/carbon-design-system/ibm-products/blob/4fea32f2b62cf45c6ea92a3034e9fe5fc294af62/packages/ibm-products/src/components/ActionBar/ActionBar.tsx#L129)
+- TagOverflow
+  - [Storybook](?path=/docs/utils-components-tagoverflow--docs&globals=viewport:basic)
+  - [Source](https://github.com/carbon-design-system/ibm-products/blob/4fea32f2b62cf45c6ea92a3034e9fe5fc294af62/packages/ibm-products/src/components/TagOverflow/TagOverflow.tsx#L130)

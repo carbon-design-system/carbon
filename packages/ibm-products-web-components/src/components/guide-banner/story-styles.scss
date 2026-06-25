@@ -1,0 +1,30 @@
+/*
+* Copyright IBM Corp. 2025, 2025
+*
+* This source code is licensed under the Apache-2.0 license found in the
+* LICENSE file in the root directory of this source tree.
+*/
+
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/spacing' as *;
+
+$horizontal-margin: $spacing-09;
+
+.body {
+  color: $text-primary;
+
+  &-elm {
+    inline-size: 600px;
+    padding-inline-start: $horizontal-margin;
+  }
+}
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+  inline-size: 100%;
+
+  &-left .guide-banner-story__toggle-button {
+    margin-inline-start: $spacing-07;
+  }
+}

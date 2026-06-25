@@ -1,0 +1,44 @@
+<svg width="320" height="180" viewBox="0 0 320 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect x="60" y="41" width="200" height="109" fill="white"/>
+<rect x="60" y="29" width="200" height="13" fill="#171717"/>
+<rect opacity="0.844385" x="94" y="34.5" width="22" height="3" fill="#C6C6C6"/>
+<rect opacity="0.844385" x="67" y="34.5" width="22" height="3" fill="#C6C6C6"/>
+<rect opacity="0.844385" x="121" y="34.5" width="22" height="3" fill="#C6C6C6"/>
+<rect opacity="0.844385" x="239" y="33" width="5" height="5" fill="#C6C6C6"/>
+<rect opacity="0.844385" x="249" y="33" width="5" height="5" fill="#C6C6C6"/>
+<g style="mix-blend-mode:multiply">
+<rect x="60" y="29" width="200" height="122" fill="#8D8D8D"/>
+</g>
+<rect x="67" y="48" width="187" height="103" fill="white"/>
+<g style="mix-blend-mode:multiply">
+<rect x="67" y="48" width="187" height="103" fill="#F4F4F4"/>
+</g>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M68 49H254V61.2449V69H68V49Z" fill="white"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M206 70H254V118.98V150H206V70Z" fill="white"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M73 77H201V81.2857V84H73V77Z" fill="white"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M67 109H206V115.122V119H67V109Z" fill="#E0E0E0"/>
+<rect opacity="0.891745" x="72" y="53" width="16" height="2" fill="#C6C6C6"/>
+<rect opacity="0.891745" x="212" y="76" width="24" height="2" fill="#A8A8A8"/>
+<rect opacity="0.891745" x="73" y="92" width="24" height="2" fill="#A8A8A8"/>
+<rect opacity="0.891745" x="212" y="88" width="32" height="2" fill="#A8A8A8"/>
+<rect opacity="0.891745" x="83" y="104" width="92" height="2" fill="#A8A8A8"/>
+<rect opacity="0.891745" x="212" y="97" width="32" height="2" fill="#A8A8A8"/>
+<rect opacity="0.891745" x="83" y="113" width="92" height="2" fill="#A8A8A8"/>
+<rect opacity="0.891745" x="212" y="106" width="32" height="2" fill="#A8A8A8"/>
+<rect opacity="0.891745" x="83" y="122" width="92" height="2" fill="#A8A8A8"/>
+<rect opacity="0.891745" x="212" y="115" width="32" height="2" fill="#A8A8A8"/>
+<rect opacity="0.891745" x="83" y="131" width="92" height="2" fill="#A8A8A8"/>
+<rect x="72" y="58" width="54" height="3" fill="#A8A8A8"/>
+<rect x="206" y="69" width="1" height="82" fill="#E5E5E5"/>
+<rect x="73" y="84" width="128" height="1" fill="#A8A8A8"/>
+<rect x="67" y="136" width="140" height="1" fill="#E5E5E5"/>
+<rect x="68" y="69" width="185" height="1" fill="#E5E5E5"/>
+<rect x="231" y="140" width="23" height="11" fill="#0F6DFF"/>
+<rect x="207" y="140" width="23" height="11" fill="#3D3D3D"/>
+<rect x="240" y="74" width="9" height="5" rx="2.5" fill="#B1B1B1"/>
+<rect x="101" y="90" width="9" height="5" rx="2.5" fill="#B1B1B1"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M76.0625 103.625H72.9375C72.7649 103.625 72.625 103.765 72.625 103.938V107.062C72.625 107.235 72.7649 107.375 72.9375 107.375H76.0625C76.2351 107.375 76.375 107.235 76.375 107.062V103.938C76.375 103.765 76.2351 103.625 76.0625 103.625ZM72.9375 107.062V103.938H76.0625V107.062H72.9375Z" fill="black"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M76.0625 112.625H72.9375C72.7649 112.625 72.625 112.765 72.625 112.938V116.062C72.625 116.235 72.7649 116.375 72.9375 116.375H76.0625C76.2351 116.375 76.375 116.235 76.375 116.062V112.938C76.375 112.765 76.2351 112.625 76.0625 112.625ZM74.1875 115.359L73.4062 114.578L73.6547 114.344L74.1875 114.867L75.3453 113.719L75.5938 113.966L74.1875 115.359Z" fill="black"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M76.0625 121.625H72.9375C72.7649 121.625 72.625 121.765 72.625 121.938V125.062C72.625 125.235 72.7649 125.375 72.9375 125.375H76.0625C76.2351 125.375 76.375 125.235 76.375 125.062V121.938C76.375 121.765 76.2351 121.625 76.0625 121.625ZM72.9375 125.062V121.938H76.0625V125.062H72.9375Z" fill="black"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M76.0625 130.625H72.9375C72.7649 130.625 72.625 130.765 72.625 130.938V134.062C72.625 134.235 72.7649 134.375 72.9375 134.375H76.0625C76.2351 134.375 76.375 134.235 76.375 134.062V130.938C76.375 130.765 76.2351 130.625 76.0625 130.625ZM72.9375 134.062V130.938H76.0625V134.062H72.9375Z" fill="black"/>
+</svg>

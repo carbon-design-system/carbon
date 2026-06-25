@@ -1,0 +1,65 @@
+//
+// Copyright IBM Corp. 2022, 2025
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/type' as *;
+@use '../../global/styles/project-settings' as *;
+
+$block-class: 'ccs-sb--display-box';
+
+$indicator-width: $spacing-02;
+$indicator-height: $spacing-04;
+
+/**
+  Adds a box indicating the extent of the available space to the displayed component
+*/
+.#{$block-class} {
+  position: relative;
+  display: inline-block;
+  color: $text-helper;
+  margin-block-start: $spacing-09; // provides space in docs
+  padding-block-start: $spacing-05; // space for the indicators
+}
+
+.#{$block-class}__indicator {
+  position: absolute;
+  border-block-end: 1px solid $text-helper;
+  inline-size: 100%;
+  inset-block-start: 0;
+  white-space: nowrap;
+  @include type-style('helper-text-01');
+}
+
+.#{$block-class}__message {
+  position: absolute;
+  inset-block-end: $spacing-02;
+}
+
+.sb-main-centered .#{$block-class}__message {
+  inline-size: inherit;
+  text-align: center;
+}
+
+.#{$block-class}__indicator--left,
+.#{$block-class}__indicator--right {
+  position: absolute;
+  block-size: 0;
+  border-block-start: $indicator-height solid $text-helper;
+  border-inline-end: $indicator-width solid transparent;
+  border-inline-start: $indicator-width solid transparent;
+  inline-size: 0;
+  inset-block-end: calc(-1 * $indicator-height);
+}
+
+.#{$block-class}__indicator--left {
+  inset-inline-start: calc(-1 * $indicator-width);
+}
+
+.#{$block-class}__indicator--right {
+  inset-inline-end: calc(-1 * $indicator-width);
+}

@@ -1,0 +1,45 @@
+import { Story, Controls, Source, Canvas } from '@storybook/addon-docs/blocks';
+import { CodesandboxLink } from '../../global/js/utils/story-helper';
+import { DecoratorSingleButton } from '.';
+import * as DecoratorSingleButtonStories from './DecoratorSingleButton.stories';
+
+# DecoratorSingleButton
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Example usage](#example-usage)
+- [Example setLabelTitle()](#example-setlabeltitle)
+- [Component API](#component-api)
+
+## Deprecation notice
+
+> This component is deprecated and will be removed in the next major version.
+
+## Overview
+
+The DecoratorSingleButton groups a key/value pair to look and behave like a
+single button.
+
+## Example usage
+
+<Canvas>
+  <Story of={DecoratorSingleButtonStories.Default} />
+</Canvas>
+
+## Example **setLabelTitle()**
+
+```js
+setLabelTitle: (score, scoreThresholds, magnitude) => {
+  if (typeof score !== 'number') {
+    return 'Unknown score';
+  }
+  return `"${magnitude}" magnitude. Score ${score} out of ${
+    scoreThresholds[scoreThresholds.length - 1]
+  }`;
+},
+```
+
+## Component API
+
+<Controls />

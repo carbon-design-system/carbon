@@ -1,0 +1,77 @@
+//
+// Copyright IBM Corp. 2023, 2026
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+// Standard imports.
+@use '../../global/styles/project-settings' as c4p-settings;
+@use '../../global/styles/mixins';
+@use '@carbon/styles/scss/config' as carbon-config;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/theme' as *;
+
+@use './coachmark-dragbar';
+@use './coachmark-header';
+@use './coachmark-overlay';
+@use './coachmark-tagline';
+@use './bubble';
+@use './coachmark-beacon';
+@use '../../global/styles/mixins' as *;
+
+// Other Carbon settings if needed
+// TODO: @use '@carbon/styles/scss/grid';
+// or
+// TODO: @use '@carbon/styles/scss/grid';
+
+// Coachmark uses the following Carbon for IBM Products components:
+// TODO: @use(s) of IBM Products component styles used by Coachmark
+
+// The block part of our conventional BEM class names (blockClass__E--M).
+$block-class: #{c4p-settings.$pkg-prefix}--coachmark;
+
+.#{$block-class} {
+  position: relative;
+}
+
+// Onboarding/Coachmark/next
+
+$block-class-next: #{c4p-settings.$pkg-prefix}--coachmark__next;
+
+@include block-wrap(#{$block-class}__next) {
+  &.#{$block-class-next}--floating {
+    span:has(> div > .#{$block-class-next}--content-header--drag-icon) {
+      margin-inline-end: auto;
+    }
+  }
+  .#{$block-class-next}--content-header--is-dragging {
+    border-radius: 0;
+    box-shadow: 0 0 0 $spacing-02 $icon-inverse;
+    outline: $spacing-01 solid $background-inverse;
+  }
+
+  .#{$block-class-next}--coachmark-content {
+    .#{$block-class-next}--content-header {
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    .#{$block-class-next}--content-header--drag-icon,
+    .#{$block-class-next}--content-header .#{carbon-config.$prefix}--btn {
+      color: $icon-inverse;
+
+      .#{carbon-config.$prefix}--btn__icon,
+      svg {
+        color: $icon-inverse;
+        fill: $icon-inverse;
+      }
+    }
+
+    .#{$block-class-next}--content-body {
+      display: flex;
+      flex-direction: column;
+      padding: $spacing-01 $spacing-05 0;
+    }
+  }
+}

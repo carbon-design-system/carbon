@@ -1,0 +1,65 @@
+/**
+ * Copyright IBM Corp. 2026
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+$css--plex: true !default;
+
+/* Carbon and IBM Products styles */
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/type';
+
+$prefix: 'c4p';
+
+/* Import shared AddSelect composable/next styles from ibm-products-styles */
+@use '@carbon/ibm-products-styles/scss/components/AddSelect/add-select_next'
+  as *;
+
+/* Web Component specific overrides */
+:host(#{$prefix}-add-select-body) {
+  display: block;
+
+  /* Apply shared styles within shadow DOM */
+  .#{$block-class__next}__body {
+    display: flex;
+    flex-direction: column;
+    block-size: 100%;
+    inline-size: 100%;
+  }
+
+  .#{$block-class__next}__header {
+    padding: $spacing-05;
+    border-block-end: 1px solid $border-subtle-01;
+  }
+
+  .#{$block-class__next}__search {
+    margin-block-end: $spacing-05;
+  }
+
+  .#{$block-class__next}__sub-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .#{$block-class__next}__tags {
+    display: flex;
+    align-items: center;
+    gap: $spacing-03;
+  }
+
+  .#{$block-class__next}__tags-label {
+    @include type.type-style('body-compact-01');
+
+    margin: 0;
+    color: $text-secondary;
+  }
+
+  .#{$block-class__next}__content {
+    overflow: auto;
+    flex: 1;
+  }
+}

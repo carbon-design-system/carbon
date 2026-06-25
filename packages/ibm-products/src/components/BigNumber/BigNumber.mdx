@@ -1,0 +1,42 @@
+import { Story, Controls, Source, Canvas } from '@storybook/addon-docs/blocks';
+import { CodesandboxLink } from '../../global/js/utils/story-helper';
+import { BigNumber } from '.';
+import * as BigNumberStories from './BigNumber.stories';
+
+# BigNumber
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Example usage](#example-usage)
+- [Component API](#component-api)
+
+## Overview
+
+BigNumber is used to display large values in a small area. The display of values
+can be the value itself, or grouped in a `numerator/denominator` fashion.
+Control over the total fraction decimals displayed as well as how the
+values/totals are displayed are done via a locale prop. Other optional props
+allow control over size, truncation, if the value is a percentage, the addition
+of a button as well as tool tip functionality. The default locale is English
+(`en-US`) if one is not provided or if the provided one is not supported.
+
+[Supported locales](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat/NumberFormat#locales)
+
+## Example usage
+
+{/* TODO: One example per designed use case. */}
+
+### Big numbers
+
+<Canvas>
+  <Story of={BigNumberStories.bigNumber} />
+</Canvas>
+
+## Code sample
+
+{/* <CodesandboxLink exampleDirectory="BigNumbers" /> */}
+
+## Component API
+
+<Controls />

@@ -1,0 +1,51 @@
+//
+// Copyright IBM Corp. 2022, 2025
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+@use '@carbon/layout/scss/convert' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/motion' as *;
+@use '@carbon/styles/scss/config' as carbon-config;
+
+@use '../../global/styles/project-settings' as *;
+
+$block-class: #{$pkg-prefix}--filter-summary;
+
+.#{$block-class} {
+  display: flex;
+  align-items: center;
+  padding: $spacing-03;
+  background: $layer-01;
+  /* stylelint-disable-next-line -- to-rem carbon replacement for rem */
+  block-size: to-rem(48px);
+  border-block-start: 1px solid $border-subtle-01;
+  inline-size: 100%;
+  &.#{$block-class}__expanded {
+    block-size: fit-content;
+  }
+}
+
+.#{$block-class}
+  .#{$pkg-prefix}--tag-set.#{$pkg-prefix}--tag-set.#{$block-class}__clear-button-inline {
+  inline-size: auto;
+}
+
+.#{$block-class}__view-all--wrapper {
+  position: absolute;
+  inset-block-start: $spacing-03;
+  inset-inline-end: 0;
+}
+
+.#{$block-class}__expanded
+  .#{$block-class}__clear-all-button.#{carbon-config.$prefix}--btn {
+  margin-inline-end: $spacing-07;
+}
+
+.#{$block-class}__view-all--wrapper
+  .#{$block-class}__view-all--chevron-multiline {
+  transform: rotate(180deg);
+  transition: transform $duration-fast-01 motion(standard);
+}

@@ -1,0 +1,79 @@
+//
+// Copyright IBM Corp. 2024, 2024
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+// Standard imports.
+@use '../../global/styles/project-settings' as c4p-settings;
+@use '../../global/styles/mixins';
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/type' as *;
+@use '@carbon/styles/scss/theme';
+
+@use './styles/index';
+// Other Carbon settings if needed
+// TODO: @use '@carbon/styles/scss/grid';
+// or
+// TODO: @use '@carbon/styles/scss/grid';
+
+// ConditionBuilder uses the following Carbon for IBM Products components:
+// TODO: @use(s) of IBM Products component styles used by ConditionBuilder
+
+// The block part of our conventional BEM class names (blockClass__E--M).
+$block-class: #{c4p-settings.$pkg-prefix}--condition-builder;
+
+.#{$block-class}__condition-builder__group {
+  display: flex;
+}
+
+.#{$block-class}__visible {
+  visibility: visible;
+}
+
+.#{$block-class}__hidden {
+  visibility: hidden;
+}
+
+.#{$block-class}__condition-wrapper {
+  display: flex;
+  flex-flow: row wrap;
+}
+.#{$block-class}__gap {
+  margin-inline-end: $spacing-01;
+}
+.#{$block-class}__gap-bottom {
+  margin-block-end: $spacing-01;
+}
+.#{$block-class}__gap-left {
+  margin-inline-start: $spacing-01;
+}
+.#{$block-class}__condition-block {
+  display: flex;
+  flex-direction: row;
+  inline-size: fit-content;
+}
+.#{$block-class}__content-container {
+  display: flex;
+  flex-direction: column;
+  row-gap: $spacing-02;
+}
+.#{$block-class}__heading {
+  margin-block: $spacing-03;
+}
+.#{$block-class}__Hierarchical
+  .#{$block-class}__actions-container
+  .#{$block-class}__condition-wrapper {
+  flex-direction: column;
+}
+.#{$block-class}__group-separator {
+  margin-block-start: $spacing-02;
+}
+.#{$block-class}__add-group,
+.#{$block-class}__group-separator {
+  inline-size: fit-content;
+}
+.#{$block-class}__tooltip {
+  word-break: break-all;
+}

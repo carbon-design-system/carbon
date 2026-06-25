@@ -1,0 +1,39 @@
+//
+// Copyright IBM Corp. 2024, 2024
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+/* stylelint-disable carbon/layout-use */
+
+@use '@carbon/styles/scss/theme' as *;
+
+// Use value-divider() by default for the component's dividing line.
+@mixin value-divider($top: 0, $bottom: 0, $left: 0, $color: $border-subtle-02) {
+  &::after {
+    position: absolute;
+    border-inline-start: 1px solid #{$color};
+    content: '';
+    inset-block: #{$top} #{$bottom};
+    inset-inline-start: #{$left};
+  }
+}
+
+// Use label-divider() only when hovering/focusing the label.
+@mixin label-divider(
+  // Nudge the line over so it occupies the same space as the value divider.
+  $top: -1px,
+  $right: -1px,
+  $bottom: -1px,
+  $color: $border-strong
+) {
+  &::after {
+    position: absolute;
+    z-index: 1;
+    border-inline-end: 1px solid #{$color};
+    content: '';
+    inset-block: #{$top} #{$bottom};
+    inset-inline-end: #{$right};
+  }
+}

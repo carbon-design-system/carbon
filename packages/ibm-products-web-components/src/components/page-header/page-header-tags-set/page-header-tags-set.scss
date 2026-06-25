@@ -1,0 +1,96 @@
+/*
+* Copyright IBM Corp. 2025, 2026
+*
+* This source code is licensed under the Apache-2.0 license found in the
+* LICENSE file in the root directory of this source tree.
+*/
+
+/* stylelint-disable  */
+
+$css--plex: true !default;
+
+/* Other Carbon settings. */
+@use 'sass:map';
+@use '@carbon/styles';
+@use '@carbon/styles/scss/themes';
+@use '@carbon/styles/scss/type';
+@use '@carbon/styles/scss/breakpoint' as *;
+@use '@carbon/styles/scss/spacing' as *;
+
+$prefix: 'c4p';
+$carbon-prefix: 'cds';
+
+$block-class: #{$prefix}--page-header-tags-set;
+
+:host {
+  inline-size: 100%;
+  .#{$block-class} {
+    display: flex;
+    // Spacing between tags.
+    gap: $spacing-03;
+    box-sizing: border-box;
+    justify-content: flex-end;
+    inline-size: 100%;
+    white-space: nowrap;
+
+    &__popover-container {
+      padding: $spacing-05;
+
+      .#{$block-class}__popover-tag {
+        @include type.type-style('label-02');
+
+        margin: 0;
+      }
+
+      cds-dismissible-tag {
+        margin: $spacing-01 0;
+      }
+    }
+
+    &__view-all {
+      --#{$carbon-prefix}-link-text-color: var(
+        --#{$carbon-prefix}-link-inverse
+      );
+      --#{$carbon-prefix}-link-hover-text-color: var(
+        --#{$carbon-prefix}-link-inverse-hover
+      );
+      --#{$carbon-prefix}-link-visited-text-color: var(
+        --#{$carbon-prefix}-link-inverse-visited
+      );
+      --#{$carbon-prefix}-link-focus-text-color: var(
+        --#{$carbon-prefix}-focus-inverse
+      );
+      margin-top: $spacing-03;
+      display: block;
+    }
+
+    &__modal-tags-search {
+      margin-block-start: $spacing-05;
+    }
+
+    &__modal-tags-container {
+      cds-dismissible-tag {
+        margin: $spacing-02 $spacing-03 $spacing-02 0;
+      }
+    }
+  }
+
+  // Suppress custom elements until styles are loaded
+  #{$carbon-prefix}-tag:not(:defined),
+  #{$carbon-prefix}-dismissible-tag:not(:defined),
+  #{$carbon-prefix}-operational-tag:not(:defined) {
+    display: none;
+  }
+
+  cds-modal-header {
+    padding-inline: $spacing-05;
+  }
+
+  cds-modal-body {
+    @extend .#{$carbon-prefix}--modal-scroll-content;
+
+    cds-tag {
+      margin-inline-start: 0;
+    }
+  }
+}

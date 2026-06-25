@@ -1,0 +1,13 @@
+//
+// Copyright IBM Corp. 2024, 2024
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use 'ALIAS_STORY_STYLE_CONFIG' as c4p-settings;
+
+.#{c4p-settings.$pkg-prefix}--side-panel .custom-intro-tile {
+  block-size: 120px;
+  inline-size: 200px;
+}

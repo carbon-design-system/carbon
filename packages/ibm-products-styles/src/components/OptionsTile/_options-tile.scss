@@ -1,0 +1,249 @@
+//
+// Copyright IBM Corp. 2021, 2025
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+// Standard imports.
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/type';
+@use '@carbon/styles/scss/motion' as *;
+@use '@carbon/styles/scss/colors' as *;
+@use '@carbon/styles/scss/config' as carbon-config;
+
+@use '../../global/styles/project-settings' as c4p-settings;
+@use '../../global/styles/mixins' as *;
+
+// Other Carbon settings.
+@use '@carbon/styles/scss/utilities' as *;
+
+// The block part of our conventional BEM class names (blockClass__E--M).
+$block-class: #{c4p-settings.$pkg-prefix}--options-tile;
+
+.#{$block-class} {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  background-color: $layer;
+  border-block-end: 1px solid $border-subtle;
+}
+
+.#{$block-class}__toggle-container {
+  position: absolute;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  inline-size: calc(
+    #{$spacing-05} + 2rem + #{$spacing-05}
+  ); // spacing + toggle width + spacing
+
+  inset-block: 0;
+  inset-inline-end: 0;
+  padding-inline-end: $spacing-05;
+  padding-inline-start: $spacing-05;
+}
+
+.#{$block-class}__toggle {
+  position: absolute;
+}
+
+.#{$block-class}__toggle
+  .#{carbon-config.$prefix}--toggle-input__label
+  .#{carbon-config.$prefix}--toggle__switch {
+  margin: 0;
+}
+
+.#{$block-class}__toggle .#{carbon-config.$prefix}--toggle__label-text {
+  @include visually-hidden;
+}
+
+.#{$block-class}__details {
+  display: inline-flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.#{$block-class}__header,
+.#{$block-class}__static-content {
+  display: grid;
+  box-sizing: border-box;
+  align-items: center;
+  grid-template-columns: 3rem 1fr 0; // chevron container, heading, toggle width
+  padding-inline-end: $spacing-05;
+}
+
+.#{$block-class}__header {
+  flex-grow: 1;
+  background-color: transparent;
+  cursor: pointer;
+  inline-size: 100%;
+
+  transition: background-color $duration-fast-01 motion(entrance, productive);
+
+  &--has-toggle {
+    inline-size: calc(
+      100% - (#{$spacing-05} + 2rem + #{$spacing-05})
+    ); // total width - toggle container width
+  }
+}
+
+.#{$block-class}__header::-webkit-details-marker {
+  display: none;
+}
+
+.#{$block-class}__header:hover {
+  background-color: $background-hover;
+}
+
+.#{$block-class}__header:has(.#{$block-class}__toggle-container:hover) {
+  background-color: transparent;
+}
+
+.#{$block-class}__header:focus {
+  @include focus-outline('outline');
+}
+
+.#{$block-class}__heading {
+  grid-column: 2;
+}
+
+.#{$block-class}__title {
+  @include type.type-style('productive-heading-01');
+
+  color: $text-primary;
+}
+
+.#{$block-class}__summary {
+  @include type.type-style('helper-text-01');
+
+  display: grid;
+  block-size: $spacing-05;
+  color: $text-secondary;
+  margin-block-start: $spacing-02;
+  opacity: 1;
+  transition-duration: $duration-moderate-01;
+  transition-property: height, opacity, margin-top;
+  transition-timing-function: motion(standard, productive);
+}
+
+.#{$block-class}__summary--invalid,
+.#{$block-class}__summary--warn,
+.#{$block-class}__summary--locked {
+  column-gap: $spacing-02;
+  grid-template-columns: 1rem 1fr; // icon, text
+}
+
+.#{$block-class}__summary--invalid {
+  color: $support-error;
+}
+
+.#{$block-class}__summary--warn {
+  color: $text-primary;
+}
+
+.#{$block-class}__summary--warn svg {
+  color: $support-warning;
+}
+
+.#{$block-class}__summary--warn svg path[fill='none'] {
+  /* stylelint-disable-next-line carbon/theme-use */
+  fill: $black-100;
+}
+
+.#{$block-class}__summary--warn svg path[fill='none'] {
+  /* stylelint-disable-next-line carbon/theme-use */
+  fill: $black-100;
+}
+
+.#{$block-class}__summary-text {
+  overflow: hidden;
+  block-size: max-content;
+  padding-inline-end: $spacing-05;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.#{$block-class}__chevron {
+  display: block;
+  justify-self: center;
+  transition: transform $duration-fast-02 motion(standard, productive);
+}
+
+.#{$block-class}__content {
+  padding-inline: $spacing-09 $spacing-05;
+}
+
+.#{$block-class}__content
+  > .#{carbon-config.$prefix}--fieldset
+  > .#{carbon-config.$prefix}--label:empty {
+  display: none;
+}
+
+.#{$block-class}--closing .#{$block-class}__content {
+  overflow: hidden;
+}
+
+.#{$block-class}__summary.#{$block-class}__summary--open:not(
+    .#{$block-class}__summary--closing
+  ),
+.#{$block-class}__summary--hidden {
+  block-size: 0;
+  margin-block-start: 0;
+  opacity: 0;
+}
+
+.#{$block-class}__chevron.#{$block-class}__chevron--open:not(
+    .#{$block-class}__chevron--closing
+  ) {
+  transform: rotate(180deg);
+}
+
+.#{$block-class} > details[open] .#{$block-class}__content {
+  padding-block: $spacing-03 $spacing-06;
+}
+
+.#{$block-class}__locked-text {
+  @include type.type-style('body-long-01');
+
+  display: inline-flex;
+  align-items: center;
+  color: $text-secondary;
+  margin-block-end: $spacing-06;
+}
+
+.#{$block-class}__locked-text > svg {
+  margin-inline-end: $spacing-02;
+}
+
+.#{$block-class}--lg .#{$block-class}__header,
+.#{$block-class}--lg .#{$block-class}__static-content {
+  block-size: 3rem;
+}
+
+.#{$block-class}--xl .#{$block-class}__header,
+.#{$block-class}--xl .#{$block-class}__static-content {
+  block-size: 4rem;
+}
+
+.#{$block-class}--lg .#{$block-class}__toggle {
+  // "top" shouldn't be spacing token as it depends on the toggle size
+  inset-block-start: $spacing-05;
+}
+
+.#{$block-class}--xl .#{$block-class}__toggle {
+  // "top" shouldn't be spacing token as it depends on the toggle size
+  inset-block-start: $spacing-06;
+}
+
+.#{$block-class}--lg .#{$block-class}__summary {
+  margin-block-start: $spacing-01;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .#{$block-class}__summary,
+  .#{$block-class}__chevron {
+    transition: none;
+  }
+}

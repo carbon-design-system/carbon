@@ -1,0 +1,53 @@
+import { Story, Controls, Source, Canvas } from '@storybook/addon-docs/blocks';
+import { CodesandboxLink } from '../../global/js/utils/story-helper';
+import { TagSet } from '.';
+import * as stories from './TagSet.stories';
+
+# TagSet
+
+[Usage guidelines](https://pages.github.ibm.com/carbon/ibm-products/components/tag-set/usage/)
+|
+[Carbon tag usage guidelines](https://carbondesignsystem.com/components/tag/usage/)
+|
+[Carbon tag documentation](https://react.carbondesignsystem.com/?path=/docs/components-tag--overview)
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Example usage](#example-usage)
+- [Component API](#component-api)
+
+## Overview
+
+The Tag set component allows users to see all the labels of a cluster in areas
+where all tags may not be visible at one time. They provide the ability to see
+how many additional labels exist and what they are.
+
+## Example usage
+
+Here it is in use with no overflow. Change max-visible to see an overflow.
+
+<Canvas>
+  <Story of={stories.FiveTags} />
+</Canvas>
+
+Here it is with more than 10 tags.
+
+<Canvas>
+  <Story of={stories.ManyTags} />
+</Canvas>
+
+Here it is with hundreds of tags. This option offers a searchable modal to
+display all tags.
+
+<Canvas>
+  <Story of={stories.HundredsOfTags} />
+</Canvas>
+
+## Code sample
+
+<CodesandboxLink exampleDirectory="TagSet" />
+
+## Component API
+
+<Controls />

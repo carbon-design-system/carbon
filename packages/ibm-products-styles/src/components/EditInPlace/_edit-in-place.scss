@@ -1,0 +1,190 @@
+//
+// Copyright IBM Corp. 2022, 2025
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+// Standard imports.
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/type';
+@use '@carbon/styles/scss/motion' as *;
+@use '@carbon/styles/scss/config' as carbon-config;
+
+@use '../../global/styles/project-settings' as *;
+
+$block-class: #{$pkg-prefix}--edit-in-place;
+$carbon-input: #{carbon-config.$prefix}--text-input;
+
+.#{$block-class} {
+  --#{$block-class}--size: #{$spacing-07};
+
+  display: flex;
+  align-items: center;
+  background: transparent;
+  cursor: pointer;
+}
+
+.#{$block-class}--sm {
+  --#{$block-class}--size: #{$spacing-08};
+}
+
+.#{$block-class}--md {
+  --#{$block-class}--size: #{$spacing-09};
+}
+
+.#{$block-class}--lg {
+  --#{$block-class}--size: #{$spacing-10};
+}
+
+.#{$block-class}__toggletip-wrapper {
+  display: block;
+  inline-size: 100%;
+}
+
+.#{$block-class}__toggletip-wrapper
+  .#{carbon-config.$prefix}--toggletip-button {
+  display: block;
+  inline-size: 100%;
+}
+
+.#{$block-class}:hover {
+  background: $field-01;
+}
+
+.#{$block-class}:hover .#{$block-class}__btn-edit,
+.#{$block-class}__btn-edit.#{$block-class}__btn-edit--always-visible {
+  visibility: visible;
+}
+
+.#{$block-class}__btn-edit {
+  visibility: hidden;
+}
+
+.#{$block-class}--invalid {
+  border: 2px solid $support-error;
+}
+
+.#{$block-class}--focused {
+  background: $field-01;
+}
+
+// Show outline on entire component when input has focus
+.#{$block-class}--focused:has(.#{$block-class}__text-input:focus) {
+  outline: 2px solid $focus;
+}
+
+// Remove border when focused to avoid double border with outline
+.#{$block-class}--invalid.#{$block-class}--focused {
+  border: none;
+}
+
+.#{$block-class}__text-input {
+  flex: 1;
+}
+
+.#{$block-class}--inherit-type .#{$block-class}__text-input {
+  /* match font of container */
+  font-size: inherit;
+  font-weight: inherit;
+  letter-spacing: inherit;
+  line-height: inherit;
+}
+
+.#{$block-class}__text-input-label {
+  display: none;
+}
+
+.#{$block-class}__warning-icon {
+  margin: auto $spacing-03;
+  color: $support-error;
+  inline-size: $spacing-05;
+}
+
+.#{$block-class}__warning-text {
+  @include type.type-style('label-01');
+
+  color: $support-error;
+
+  margin-block-start: $spacing-03;
+}
+
+// overrides
+.#{$block-class}__text-input.#{$carbon-input} {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  outline: none;
+}
+
+// Remove outline when not in edit mode
+.#{$block-class}:not(.#{$block-class}--focused)
+  .#{$block-class}__text-input.#{$carbon-input}:focus,
+.#{$block-class}:not(.#{$block-class}--focused)
+  .#{$block-class}__text-input.#{$carbon-input}:active {
+  outline: none;
+}
+
+.#{$block-class}__toolbar {
+  --toolbar-width: var(--#{$block-class}--size);
+  --toolbar-width-focussed: calc(2 * var(--#{$block-class}--size));
+
+  // animation div
+  display: inline-flex;
+  align-self: stretch;
+  inline-size: var(--toolbar-width);
+
+  .#{carbon-config.$prefix}--btn.#{carbon-config.$prefix}--btn--icon-only:not(
+      #{$carbon-prefix}-icon-button
+    ) {
+    padding: 0;
+    min-block-size: unset;
+  }
+}
+
+// Match button heights to input heights for each size and make them square
+.#{$block-class}__toolbar
+  .#{carbon-config.$prefix}--btn.#{carbon-config.$prefix}--btn--icon-only:not(
+    #{$carbon-prefix}-icon-button
+  ) {
+  block-size: var(--#{$block-class}--size);
+  inline-size: var(--#{$block-class}--size);
+}
+
+.#{$block-class}__toolbar #{$carbon-prefix}-icon-button::part(button) {
+  padding: $spacing-02;
+}
+
+.#{$block-class}--invalid .#{$block-class}__toolbar {
+  // width of invalid icon is always $spacing-07 ($spacing-05 + 2 * $spacing-03 margin)
+  --toolbar-width: calc(var(--#{$block-class}--size) + #{$spacing-07});
+  --toolbar-width-focussed: calc(
+    2 * var(--#{$block-class}--size) + #{$spacing-07}
+  );
+}
+
+@keyframes slide-in {
+  0% {
+    overflow: hidden;
+    inline-size: var(--toolbar-width);
+  }
+
+  99% {
+    overflow: hidden;
+    inline-size: var(--toolbar-width-focussed);
+  }
+
+  100% {
+    overflow: visible;
+    inline-size: var(--toolbar-width-focussed);
+  }
+}
+
+.#{$block-class}--focused:not(.#{$block-class}--readonly)
+  .#{$block-class}__toolbar {
+  overflow: initial;
+
+  animation: slide-in $duration-moderate-01 motion(entrance, productive);
+  inline-size: var(--toolbar-width-focussed);
+}

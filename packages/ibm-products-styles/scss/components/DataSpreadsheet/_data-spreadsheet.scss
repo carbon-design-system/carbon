@@ -1,0 +1,310 @@
+//
+// Copyright IBM Corp. 2022, 2022
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+// Standard imports.
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/type';
+@use '@carbon/type/scss/font-family';
+@use '@carbon/styles/scss/utilities';
+@use '../../global/styles/project-settings' as c4p-settings;
+@use '../../global/styles/mixins' as *;
+
+@mixin set-header-borders {
+  border-block-end: 1px solid $border-subtle-selected-01;
+  border-inline-end: 1px solid $border-subtle-selected-01;
+}
+@mixin set-active-header-borders {
+  border-block-end: 1px solid $text-placeholder;
+  border-inline-end: 1px solid $text-placeholder;
+}
+@mixin set-body-borders {
+  border-block-end: 1px solid $border-subtle-01;
+  border-inline-end: 1px solid $border-subtle-01;
+}
+
+// The block part of our conventional BEM class names (blockClass__E--M).
+$block-class: #{c4p-settings.$pkg-prefix}--data-spreadsheet;
+$body-cell-background: $field-01;
+$header-cell-background: $layer-accent-01;
+
+.#{$block-class} {
+  --#{$block-class}--total-width: 0;
+
+  display: inline-block;
+  border-spacing: 0;
+
+  &.#{$block-class}__container-has-focus {
+    outline: 2px solid $link-inverse;
+  }
+
+  .#{$block-class}__header--container {
+    position: relative;
+  }
+
+  .#{$block-class}__tr {
+    :last-child .#{$block-class}__body--td {
+      .#{$block-class}__td {
+        border-block-end: 0;
+      }
+    }
+  }
+
+  .#{$block-class}__th,
+  .#{$block-class}__td {
+    @include type.type-style('body-compact-01');
+
+    padding: 0 $spacing-03;
+    border: 0;
+    margin: 0;
+    block-size: 100%;
+    color: $text-primary;
+    font-family: inherit;
+
+    inline-size: 100%;
+  }
+
+  .#{$block-class}__body--td {
+    color: $text-secondary;
+  }
+
+  /* stylelint-disable-next-line max-nesting-depth */
+  [role="'columnheader'"]:last-child,
+  [role="'gridcell'"]:last-child {
+    border-inline-end: 1px solid $text-placeholder;
+  }
+  .#{$block-class}__th,
+  .#{$block-class}__td-th.#{$block-class}__td {
+    @include set-header-borders();
+
+    background-color: $header-cell-background;
+
+    block-size: 100%;
+    cursor: pointer;
+
+    /* stylelint-disable-next-line max-nesting-depth */
+    &:hover,
+    &:focus {
+      background-color: $background-selected-hover;
+    }
+  }
+  .#{$block-class}__th--select-all {
+    inline-size: $spacing-10;
+  }
+  .#{$block-class}__td-th--cell-container,
+  .#{$block-class}__select-all-cell-container {
+    position: sticky;
+    z-index: 4;
+    background-color: $background;
+    inset-inline-start: 0;
+  }
+  .#{$block-class}__td-th.#{$block-class}__td {
+    @include font-family.font-weight('semibold');
+
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+  }
+
+  .#{$block-class}__td {
+    @include set-body-borders();
+
+    overflow: hidden;
+    margin: 0;
+    background-color: $body-cell-background;
+    cursor: cell;
+    text-align: start;
+  }
+  .#{$block-class}__th {
+    @include type.type-style('heading-compact-01');
+
+    color: $text-primary;
+    text-align: start;
+  }
+  .#{$block-class}__cell-editor {
+    @include type.type-style('body-compact-01');
+    @include utilities.focus-outline('reset');
+
+    position: absolute;
+    z-index: 4;
+    display: none;
+    overflow: hidden;
+    /* stylelint-disable-next-line carbon/layout-use */
+    padding: 0 calc(#{$spacing-03} + 1px) 0 $spacing-03;
+    margin: 0;
+    background-color: $body-cell-background;
+    color: $text-primary;
+    font-family: inherit;
+    min-block-size: initial;
+    min-inline-size: initial;
+    resize: none;
+
+    /* stylelint-disable-next-line max-nesting-depth */
+    &:focus,
+    &:active {
+      @include utilities.focus-outline('outline');
+    }
+    &.#{$block-class}__cell-editor--active {
+      outline: $spacing-01 solid $background-brand;
+      outline-offset: -2px;
+    }
+  }
+  .#{$block-class}__cell-editor-ruler {
+    @include type.type-style('body-compact-01');
+
+    position: absolute;
+    overflow: hidden;
+    /* stylelint-disable-next-line carbon/layout-use */
+    padding: 0 calc(#{$spacing-03} + 1px) 0 $spacing-03;
+    inline-size: fit-content;
+    max-inline-size: var(--#{$block-class}--total-width);
+    visibility: hidden;
+
+    /* stylelint-disable-next-line max-nesting-depth */
+    &:focus {
+      outline: $spacing-01 solid $background-brand;
+    }
+  }
+  .#{$block-class}__active-cell--highlight {
+    @include type.type-style('body-compact-01');
+    @include set-body-borders();
+
+    position: absolute;
+    z-index: 3;
+    display: none;
+    overflow: hidden;
+    /* stylelint-disable-next-line carbon/layout-use */
+    border: $spacing-01 solid $background-brand;
+    background-color: $body-cell-background;
+    color: $text-primary;
+    font-family: inherit;
+    padding-block-end: $spacing-01;
+    // Could be fixed by using border-right but the fact that
+    // this element is positioned absolute prevents that from working
+    /* stylelint-disable-next-line carbon/layout-use */
+    padding-inline: #{$spacing-03 - $spacing-01} calc(#{$spacing-03} - 1px);
+    text-align: start;
+
+    /* stylelint-disable-next-line max-nesting-depth */
+    &[data-active-row-index='header'],
+    &[data-active-column-index='header'] {
+      z-index: 4;
+      background-color: transparent;
+    }
+
+    /* stylelint-disable-next-line max-nesting-depth */
+    &:focus {
+      border: $spacing-01 solid $background-brand;
+      outline: 0;
+    }
+  }
+
+  .#{$block-class}__td-th.#{$block-class}__td_custom {
+    align-items: center;
+    justify-content: center;
+    gap: $spacing-03;
+  }
+
+  .#{$block-class}__selection-area--element {
+    position: absolute;
+    z-index: 2;
+    border: 1px solid $background-brand;
+    pointer-events: none;
+
+    /* stylelint-disable-next-line max-nesting-depth */
+    &::before {
+      position: absolute;
+      display: block;
+      background-color: $background-brand;
+      block-size: 100%;
+      content: '';
+      inline-size: 100%;
+      inset-block-start: 0;
+      inset-inline-start: 0;
+      opacity: 0.2;
+    }
+    &.#{$block-class}__selection-area--element-cloned {
+      z-index: 4;
+
+      /* stylelint-disable-next-line max-nesting-depth */
+      &::before {
+        background-color: $border-inverse;
+        opacity: 0.25;
+      }
+    }
+    .#{$block-class}__reorder-indicator-line {
+      position: absolute;
+      z-index: 4;
+      background-color: $background-brand;
+      inline-size: $spacing-01;
+      pointer-events: none;
+    }
+    .#{$block-class}__th--active-header,
+    .#{$block-class}__td-th--active-header.#{$block-class}__td {
+      @include set-active-header-borders();
+
+      background-color: $background-selected-hover;
+    }
+    .#{$block-class}__th--selected-header,
+    .#{$block-class}__td-th--selected-header.#{$block-class}__td {
+      background-color: $background-inverse;
+      color: $text-inverse;
+
+      /* stylelint-disable-next-line max-nesting-depth */
+      &:focus,
+      &:hover {
+        background-color: $background-inverse;
+      }
+    }
+    .#{$block-class}__th--selected-header.#{$block-class}__th:not(
+        .#{$block-class}__th--active-header-disabledSwapping
+      ) {
+      cursor: grab;
+    }
+    .#{$block-class}__th--selected-header-reorder-active.#{$block-class}__th {
+      cursor: grabbing;
+    }
+    .#{$block-class}__list--container {
+      overscroll-behavior: none;
+    }
+  }
+  .#{$block-class}__reorder-indicator-line {
+    position: absolute;
+    z-index: 4;
+    background-color: $background-brand;
+    inline-size: $spacing-01;
+  }
+  .#{$block-class}__th--active-header-disabledSwapping {
+    cursor: pointer;
+  }
+  .#{$block-class}__th--active-header,
+  .#{$block-class}__td-th--active-header.#{$block-class}__td {
+    background-color: $background-selected-hover;
+  }
+  .#{$block-class}__th--selected-header,
+  .#{$block-class}__td-th--selected-header.#{$block-class}__td {
+    background-color: $background-inverse;
+    color: $text-inverse;
+
+    /* stylelint-disable-next-line max-nesting-depth */
+    &:focus,
+    &:hover {
+      background-color: $background-inverse;
+    }
+  }
+  .#{$block-class}__th--selected-header.#{$block-class}__th:not(
+      .#{$block-class}__th--active-header-disabledSwapping
+    ) {
+    cursor: grab;
+  }
+  .#{$block-class}__th--selected-header-reorder-active.#{$block-class}__th {
+    cursor: grabbing;
+  }
+  .#{$block-class}__list--container {
+    overscroll-behavior: none;
+  }
+}

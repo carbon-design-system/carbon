@@ -1,0 +1,38 @@
+/**
+ * Copyright IBM Corp. 2024, 2025
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/config' as carbon-config;
+
+@use '../../../global/styles/project-settings' as c4p-settings;
+@use './variables';
+
+// used for tables within a expandable row
+.#{variables.$block-class}__expanded-row
+  .#{carbon-config.$prefix}--data-table-container {
+  border-inline-start: 2px solid $background-brand;
+  inline-size: calc(100% - #{$spacing-07});
+  margin-inline-start: $spacing-07;
+  overflow-x: hidden;
+  @supports (overflow-inline: hidden) {
+    /* stylelint-disable-next-line declaration-property-value-disallowed-list */
+    overflow-inline: hidden;
+  }
+
+  tr.#{variables.$block-class}__carbon-nested-row {
+    border-inline-start: none;
+  }
+}
+
+.#{variables.$block-class}__expanded-row
+  .#{carbon-config.$prefix}--data-table-container
+  th {
+  background-color: $layer-accent-01;
+  border-block-start-color: $layer-accent-01;
+  padding-block: 0;
+}

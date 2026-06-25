@@ -1,0 +1,693 @@
+/**
+ * Copyright IBM Corp. 2025
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/colors' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/motion' as *;
+@use '@carbon/styles/scss/breakpoint' as *;
+@use '@carbon/styles/scss/type';
+@use '@carbon/styles/scss/utilities';
+@use '../../global/styles/project-settings' as *;
+@use '../../global/styles/mixins' as *;
+@use '@carbon/layout/scss/convert';
+@use '@carbon/styles/scss/utilities/focus-outline';
+
+$block-class__next: #{$pkg-prefix}--tearsheet__next;
+$motion-duration: $duration-moderate-02;
+// viewport, capped at 500px to set an upper limit on the movement speed
+$transform-start: translate3d(0, calc(min(95vh, 500px)), 0);
+
+/// Experimental tearsheet styles
+.#{$block-class__next} {
+  // ──────────────────────────────────────────────────────────────
+  // Presence animations (enter/exit) - default behavior
+  // ──────────────────────────────────────────────────────────────
+  &.#{$block-class__next}:not(.#{$block-class__next}--keep-mounted) {
+    animation: #{$block-class__next}--presence-tearsheet__enter $motion-duration
+      motion(entrance, expressive);
+    opacity: 1;
+
+    // extra specificity to ensure this transition overrides the carbon default
+    &.#{$block-class__next}.#{$block-class__next}
+      .#{$block-class__next}__container {
+      animation: #{$block-class__next}--presence-tearsheet--container__enter
+        $motion-duration motion(entrance, expressive);
+      transform: translate3d(0, 0, 0);
+      @media screen and (prefers-reduced-motion: reduce) {
+        animation: none;
+      }
+    }
+
+    &.#{$block-class__next}--stacked.is-visible
+      .#{$block-class__next}__container {
+      transform: scaleX(var(--scale-factor));
+    }
+
+    &[data-tearsheet-exiting] {
+      animation: #{$block-class__next}--presence-tearsheet__exit
+        $motion-duration motion(exit, expressive) forwards;
+
+      &.#{$block-class__next}.#{$block-class__next}
+        .#{$block-class__next}__container {
+        animation: #{$block-class__next}--presence-tearsheet--container__exit
+          $motion-duration motion(entrance, expressive) forwards;
+        @media screen and (prefers-reduced-motion: reduce) {
+          animation: none;
+        }
+      }
+    }
+  }
+
+  // ──────────────────────────────────────────────────────────────
+  // Traditional visibility toggle when keepMounted is true
+  // ──────────────────────────────────────────────────────────────
+  &.#{$block-class__next}--keep-mounted {
+    &:not(.is-visible) {
+      &.#{$block-class__next}.#{$block-class__next}
+        .#{$block-class__next}__container {
+        transform: $transform-start;
+      }
+    }
+  }
+
+  @keyframes #{$block-class__next}--presence-tearsheet__enter {
+    from {
+      opacity: 0;
+      transition: none;
+    }
+  }
+
+  @keyframes #{$block-class__next}--presence-tearsheet__exit {
+    to {
+      opacity: 0;
+    }
+  }
+
+  @keyframes #{$block-class__next}--presence-tearsheet--container__enter {
+    from {
+      transform: $transform-start;
+      transition: none;
+    }
+  }
+
+  @keyframes #{$block-class__next}--presence-tearsheet--container__exit {
+    to {
+      transform: $transform-start;
+    }
+  }
+
+  // ──────────────────────────────────────────────────────────────
+  // Container
+  // ──────────────────────────────────────────────────────────────
+  .#{$block-class__next}__container {
+    align-self: flex-end;
+    border: 1px solid $border-subtle-01;
+    block-size: 100%;
+    inset-block-start: auto;
+    max-block-size: calc(100% - var(--tearsheet-vertical-gap, #{$spacing-09}));
+    max-inline-size: var(--tearsheet-max-inline-size, 1312px);
+  }
+  &:not(.#{$block-class__next}--stack-activated.is-visible) {
+    .#{$block-class__next}__container {
+      @include breakpoint-down(md) {
+        max-block-size: none;
+      }
+    }
+  }
+
+  &:not(.is-visible) {
+    &.#{$block-class__next}.#{$block-class__next}
+      .#{$block-class__next}__container {
+      transform: translate3d(0, calc(min(95vh, 500px)), 0);
+    }
+  }
+
+  &.#{$block-class__next}.#{$block-class__next}--has-ai-label {
+    .#{$block-class__next}__container {
+      border: 1px solid transparent;
+
+      /* override carbon ai removing background gradient */
+      background:
+        linear-gradient(to top, var(--cds-layer), var(--cds-layer)) padding-box,
+        linear-gradient(
+            to bottom,
+            var(--cds-ai-border-start, #78a9ff),
+            var(--cds-ai-border-end, #d0e2ff)
+          )
+          border-box,
+        linear-gradient(to top, var(--cds-layer), var(--cds-layer)) border-box;
+      border-block-end: 0;
+      box-shadow: 0 4px 10px 2px $ai-drop-shadow;
+    }
+    .#{$block-class__next}__main-content {
+      position: relative;
+      @include utilities.ai-popover-gradient('default', 0, 'background');
+
+      box-shadow: inset 0 -80px 70px -65px $ai-inner-shadow;
+    }
+  }
+
+  // Extra specificity to override Carbon default transition
+  // Keep transitions for stacking animations only
+  &.#{$block-class__next}.#{$block-class__next}
+    .#{$block-class__next}__container {
+    transition:
+      transform $motion-duration motion(entrance, expressive),
+      max-block-size $motion-duration motion(entrance, expressive);
+
+    @media screen and (prefers-reduced-motion: reduce) {
+      transition: none;
+    }
+  }
+
+  // ──────────────────────────────────────────────────────────────
+  // Header
+  // ──────────────────────────────────────────────────────────────
+  .#{$block-class__next}__header {
+    display: flex;
+    flex-wrap: wrap;
+    align-content: space-between;
+    border-block-end: 1px solid $border-subtle-01;
+    margin-block: 0;
+    max-block-size: 50vh;
+    padding-block-end: 0;
+    padding-block-start: $spacing-06;
+    padding-inline: $spacing-07;
+
+    > * {
+      flex-basis: 100%;
+    }
+    // change if carbon provide flexible close button
+    > *:not(
+        .#{$block-class__next}__navigation-bar,
+        .#{$block-class__next}__header-content-wrapper,
+        .#{$carbon-prefix}--modal-close-button,
+        .#{$block-class__next}__close-button
+      ) {
+      margin-block-end: $spacing-06;
+    }
+
+    @include breakpoint-down(md) {
+      padding-inline: $spacing-05;
+    }
+  }
+  .#{$carbon-prefix}--modal-container--sm .#{$carbon-prefix}--modal-header {
+    padding-inline-end: $spacing-07;
+  }
+
+  // ──────────────────────────────────────────────────────────────
+  // Header content wrapper (grid on desktop → flex on mobile)
+  // ──────────────────────────────────────────────────────────────
+  .#{$block-class__next}__header-content-wrapper {
+    display: grid;
+    flex-basis: unset;
+    gap: $spacing-05;
+    grid-template-columns: minmax(auto, 40rem) minmax(
+        var(--tearsheet-header-title-grid-width, 0),
+        1fr
+      );
+
+    inline-size: calc(100% - var(--tearsheet-header-action-offset));
+
+    @include breakpoint-down(md) {
+      display: flex;
+      flex-direction: column;
+    }
+  }
+
+  // Reorder elements visually for wide variant on desktop
+  // headerActions is first in DOM but should display on the right (order: 2)
+  // This only applies to wide variant on desktop (not mobile, not narrow)
+  &:not(.#{$block-class__next}--narrow) {
+    @include breakpoint(md) {
+      .#{$block-class__next}__header-content-wrapper {
+        .#{$block-class__next}__header-actions {
+          order: 2;
+        }
+        .#{$block-class__next}__header-content {
+          order: 1;
+        }
+      }
+    }
+  }
+
+  // ──────────────────────────────────────────────────────────────
+  // Header (default vs collapsed)
+  // ──────────────────────────────────────────────────────────────
+  .#{$block-class__next}__header {
+    // Animate all non-core visible elements
+    > *:not(
+        .#{$block-class__next}__navigation-bar,
+        .#{$block-class__next}__header-content-wrapper,
+        .#{$carbon-prefix}--modal-close-button,
+        .#{$block-class__next}__close-button,
+        .#{$block-class__next}__decorator,
+        .excludeFromCollapse
+      ) {
+      overflow: hidden;
+      max-block-size: 50vh; // large enough for expanded content
+      opacity: 1;
+      transition:
+        max-block-size $motion-duration motion(entrance, expressive),
+        opacity $motion-duration motion(entrance, expressive),
+        margin $motion-duration motion(entrance, expressive),
+        padding $motion-duration motion(entrance, expressive);
+      visibility: hidden;
+    }
+
+    .#{$block-class__next}__header-actions,
+    .#{$block-class__next}__header-content-wrapper
+      .#{$block-class__next}__header-content
+      *:not(
+        .#{$block-class__next}__content__title-wrapper,
+        .#{$block-class__next}__header-label
+      ) {
+      opacity: 1;
+      transition:
+        all $motion-duration motion(entrance, expressive),
+        opacity $motion-duration motion(entrance, expressive);
+    }
+  }
+
+  // COLLAPSED STATE
+  .#{$block-class__next}__header-collapsed {
+    padding-block-start: $spacing-04;
+    transition: padding $motion-duration motion(entrance, expressive);
+
+    // Collapse everything except core elements
+    > *:not(
+        .#{$block-class__next}__navigation-bar,
+        .#{$block-class__next}__header-content-wrapper,
+        .#{$carbon-prefix}--modal-close-button,
+        .#{$block-class__next}__close-button,
+        .#{$block-class__next}__decorator,
+        .excludeFromCollapse
+      ),
+    .#{$block-class__next}__header-actions
+      > *:not(.#{$block-class__next}__content__header-actions),
+    .#{$block-class__next}__header-content
+      > *:not(.#{$block-class__next}__content__title-wrapper),
+    > *:not(
+        .#{$block-class__next}__navigation-bar,
+        .#{$block-class__next}__header-content-wrapper,
+        .#{$carbon-prefix}--modal-close-button,
+        .#{$block-class__next}__close-button,
+        .#{$block-class__next}__decorator,
+        .excludeFromCollapse
+      )
+      *,
+    .#{$block-class__next}__header-content-wrapper
+      .#{$block-class__next}__header-content
+      > *:not(.#{$block-class__next}__content__title-wrapper)
+      * {
+      overflow: hidden;
+      padding: 0;
+      margin: 0;
+      max-block-size: 0;
+      opacity: 0;
+      pointer-events: none;
+      transition: all $motion-duration motion(entrance, expressive);
+      visibility: hidden;
+    }
+
+    // Header title
+    .#{$block-class__next}__header-title {
+      @include type.type-style('label-02');
+
+      align-items: center;
+      margin-block-start: $spacing-02;
+      transition: all $motion-duration motion(entrance, expressive);
+
+      > span {
+        display: flex;
+        align-items: center;
+        block-size: $spacing-06;
+      }
+      .#{$block-class__next}__title-start,
+      .#{$block-class__next}__title-end {
+        svg {
+          inline-size: $spacing-05;
+        }
+      }
+    }
+
+    .#{$block-class__next}__header-content {
+      align-self: center;
+      margin-block-end: 0;
+    }
+
+    .#{$block-class__next}__content__header-actions {
+      margin-block-start: -$spacing-01;
+    }
+
+    // Hide header actions on small screens
+    @include breakpoint-down(md) {
+      .#{$block-class__next}__header-actions {
+        display: none;
+      }
+    }
+
+    // Normalize visible elements
+    .#{$block-class__next}__header-content-wrapper,
+    .#{$block-class__next}__header-content,
+    .#{$block-class__next}__content__title-wrapper,
+    .#{$block-class__next}__header-actions,
+    .#{$block-class__next}__header-title {
+      margin-block: 0;
+      transition: margin-block $motion-duration ease;
+    }
+
+    .#{$block-class__next}__header-content-wrapper {
+      min-block-size: $spacing-08;
+      padding-block-end: $spacing-04;
+    }
+
+    // Divider line above navigation bar
+    .#{$block-class__next}__navigation-bar::before {
+      position: absolute;
+      z-index: 1;
+      background: $border-subtle-01;
+      block-size: 1px;
+      content: '';
+      inline-size: calc(100% + $spacing-11);
+      inset-block-start: 0;
+      inset-inline-start: -$spacing-07;
+      pointer-events: none;
+    }
+  }
+
+  &.#{$block-class__next}--stack-activated.is-visible {
+    --overlay-color: #{$overlay};
+    --overlay-alpha: 0.5;
+
+    z-index: calc(#{utilities.z('modal')} - var(--stack-depth, 0));
+
+    background-color: initial;
+
+    &::before {
+      position: absolute;
+      display: block;
+      background: var(--overlay-color);
+      content: '';
+      inset: 0;
+      opacity: calc(var(--overlay-alpha) - var(--stack-depth) * 0.1);
+
+      transition:
+        background-color $motion-duration motion(exit, expressive),
+        opacity $motion-duration motion(exit, expressive);
+
+      @media (prefers-reduced-motion: reduce) {
+        transition: none;
+      }
+    }
+
+    &.is-visible {
+      .#{$block-class__next}__container {
+        max-block-size: calc(
+          100% - var(--tearsheet-vertical-gap, #{$spacing-09}) +
+            var(--block-size-change)
+        );
+        transform: scaleX(var(--scale-factor));
+      }
+    }
+  }
+}
+
+// Label, title, description styles
+.#{$block-class__next}__header-label {
+  @include type.type-style('label-01');
+
+  color: $text-secondary;
+  margin-block-end: $spacing-02;
+}
+
+.#{$block-class__next}__header-title {
+  @include type.type-style('heading-04');
+
+  @include breakpoint-down(md) {
+    @include type.type-style('heading-03');
+  }
+
+  display: flex;
+  align-items: flex-start;
+  gap: $spacing-05;
+  margin-block-end: $spacing-03;
+
+  svg {
+    flex-shrink: 0;
+  }
+
+  .#{$block-class__next}__title-end {
+    margin-inline-start: $spacing-05;
+  }
+}
+
+.#{$block-class__next}__header-description {
+  @include type.type-style('body-compact-01');
+}
+
+// Always hide Carbon's default modal close button
+.#{$block-class__next}__header--no-close-icon {
+  display: none;
+}
+
+// Decorator positioning (after close button)
+.#{$block-class__next}__decorator {
+  position: absolute;
+  inset-block-start: convert.to-rem(10px);
+  inset-inline-end: convert.to-rem(48px);
+}
+
+// ──────────────────────────────────────────────────────────────
+// Navigation bar inside header
+// ──────────────────────────────────────────────────────────────
+.#{$block-class__next}__navigation-bar {
+  // margin: $spacing-04 0 0;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: $spacing-01;
+  max-inline-size: calc(100% - $spacing-04);
+  min-block-size: $spacing-08;
+
+  .#{$carbon-prefix}--tabs {
+    margin-inline-start: -$spacing-05;
+  }
+}
+.#{$block-class__next}__scroller-container {
+  position: absolute;
+  inset-block-end: 0;
+  inset-inline-end: -$spacing-08; // padding inline end of header + adjusted -ve margin for tabs
+  @include breakpoint-down(md) {
+    inset-inline-end: -$spacing-06;
+  }
+
+  .#{$block-class__next}__scroller-button-icon-collapsed {
+    transform: rotate(-180deg);
+  }
+}
+
+// ──────────────────────────────────────────────────────────────
+// Header actions
+// ──────────────────────────────────────────────────────────────
+.#{$block-class__next}__header-actions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.#{$block-class__next}__content__header-actions {
+  display: flex;
+  overflow: hidden;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: flex-end;
+  block-size: $spacing-07;
+  inline-size: 100%;
+  margin-block-start: -14px;
+
+  > *.#{$block-class__next}__header-action-item:not([data-hidden='true']) {
+    margin-inline-end: $spacing-03; /* space between visible items */
+  }
+
+  /* Remove margin on the last visible item */
+  > *.#{$block-class__next}__header-action-item:not(
+      [data-hidden='true']
+    ):nth-last-child(2) {
+    margin-inline-end: 0;
+  }
+
+  > * {
+    flex-shrink: 0;
+  }
+  @include breakpoint-down(md) {
+    justify-content: flex-start;
+    margin-inline-end: 0;
+  }
+}
+// Header content and actions
+.#{$block-class__next}__header-content,
+.#{$block-class__next}__header-actions {
+  margin-block-end: $spacing-06;
+}
+// Wide variant at medium breakpoint
+@include breakpoint(md) {
+  .#{$block-class__next}--wide .#{$block-class__next}__container {
+    inline-size: calc(100% - (2 * #{$spacing-10}));
+  }
+}
+// ──────────────────────────────────────────────────────────────
+// Body layout grid
+// ──────────────────────────────────────────────────────────────
+.#{$block-class__next}__body-layout {
+  display: grid;
+  grid-template-areas:
+    'influencer body'
+    'influencer footer';
+  grid-template-columns:
+    var(--tearsheet-influencer-width, calc($spacing-10 * 4))
+    1fr;
+  grid-template-rows: 1fr auto;
+  padding-block: 0;
+  padding-inline-end: 0;
+
+  /* Redefine grid when influencer is absent */
+  &:not(.#{$block-class__next}__body-layout--has-influencer) {
+    grid-template-areas:
+      'body'
+      'footer';
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Assign components to their named grid areas */
+.#{$block-class__next}__influencer {
+  border-inline-end: 1px solid $border-subtle-01;
+  grid-area: influencer;
+}
+
+.#{$block-class__next}__body {
+  position: relative;
+  display: grid;
+  overflow: hidden;
+  grid-area: body;
+  grid-template-columns: 1fr var(
+      --tearsheet-summary-content-width,
+      calc($spacing-10 * 4)
+    );
+  @include breakpoint-down(md) {
+    grid-template-columns: 1fr 0;
+  }
+
+  > *:only-child {
+    grid-column: 1 / -1;
+  }
+}
+
+.#{$block-class__next}__footer {
+  overflow: hidden;
+  block-size: $spacing-11;
+  border-block-start: 1px solid $border-subtle-01;
+  grid-area: footer;
+
+  @include breakpoint-down(md) {
+    block-size: $spacing-10;
+  }
+
+  // Footer overflow handling for many actions (> 3 buttons)
+  &.#{$block-class__next}__footer--three-actions {
+    @include breakpoint-down(sm) {
+      overflow-x: auto;
+      overflow-y: hidden;
+      .#{$pkg-prefix}--action-set {
+        display: inline-flex;
+        flex-shrink: 0;
+        min-inline-size: max-content;
+      }
+    }
+  }
+  &.#{$block-class__next}__footer--many-actions {
+    @include breakpoint-down(md) {
+      overflow-x: auto;
+      overflow-y: hidden;
+      .#{$pkg-prefix}--action-set {
+        display: inline-flex;
+        flex-shrink: 0;
+        min-inline-size: max-content;
+      }
+    }
+  }
+}
+
+.#{$block-class__next}__influencer,
+.#{$block-class__next}__main-content,
+.#{$block-class__next}__summary-content {
+  overflow: auto;
+  &:not(.#{$block-class__next}__flush) {
+    padding-inline: $spacing-07;
+    @include breakpoint-down(md) {
+      padding-inline: $spacing-05;
+    }
+  }
+
+  &:focus {
+    @include focus-outline.focus-outline('outline');
+  }
+}
+
+.#{$block-class__next}__main-content {
+  position: relative;
+}
+.#{$block-class__next}__side-panel {
+  position: absolute;
+  z-index: 9999;
+  block-size: 100%;
+  inline-size: 100% !important; /* stylelint-disable-line declaration-no-important */
+  inset-block-start: 0;
+  max-inline-size: none;
+  .#{$pkg-prefix}--side-panel__header {
+    min-block-size: 0;
+  }
+}
+
+.#{$block-class__next}--narrow {
+  .#{$block-class__next}__header {
+    padding-inline: $spacing-05;
+  }
+  .#{$block-class__next}__header.#{$block-class__next}__header-collapsed {
+    .#{$block-class__next}__header-actions {
+      display: none;
+    }
+    .#{$block-class__next}__header-content {
+      align-self: flex-start;
+    }
+  }
+  .#{$block-class__next}__header-content-wrapper {
+    display: flex;
+    flex-direction: column;
+  }
+  .#{$block-class__next}__header-title {
+    @include type.type-style('heading-03');
+  }
+  .#{$block-class__next}__content__header-actions {
+    justify-content: flex-start;
+    margin-inline-end: 0;
+  }
+  .#{$block-class__next}__body {
+    grid-template-columns: 1fr 0;
+  }
+  .#{$block-class__next}__influencer,
+  .#{$block-class__next}__main-content,
+  .#{$block-class__next}__summary-content {
+    &:not(.#{$block-class__next}__flush) {
+      padding-inline: $spacing-05;
+    }
+  }
+  .#{$block-class__next}__footer {
+    block-size: $spacing-10;
+  }
+}

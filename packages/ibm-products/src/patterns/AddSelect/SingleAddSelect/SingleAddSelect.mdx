@@ -1,0 +1,81 @@
+import { Meta, Canvas } from '@storybook/addon-docs/blocks';
+import { CodesandboxLink } from '../../../global/js/utils/story-helper';
+import * as stories from './SingleAddSelect.stories';
+
+<Meta of={stories} />
+
+# SingleAddSelect pattern
+
+[Usage guidelines](https://pages.github.ibm.com/carbon/ibm-products/patterns/add-and-select/usage/)
+
+## Overview
+
+The SingleAddSelect pattern supports workflows where users need to add or choose
+exactly one item in a tearsheet experience.
+
+These patterns are created using composable AddSelect presentational components
+and the AddSelect utility. They are intended to be copied, adapted, and composed
+to fit product-specific data, labels, and submission logic.
+
+## Choosing the right pattern
+
+### Single add and select
+
+Use this pattern when users need to select exactly one item and complete the
+task in a straightforward flow.
+
+Choose it when:
+
+- only one item can be selected
+- users do not need to compare many selected items at once
+- the workflow benefits from a focused tearsheet experience
+
+### Single add and select with hierarchy and side panel
+
+Use this variation when users need to select one item from hierarchical content
+and may need more detail before making a decision.
+
+Choose it when:
+
+- items are organized in parent-child relationships
+- users need breadcrumb-based navigation through levels
+- users benefit from seeing metadata or details in a side panel before
+  confirming
+
+## How this pattern can be used
+
+SingleAddSelect can be used to support tasks such as selecting one asset, one
+location, one category, or one resource from a list or hierarchy.
+
+Typical usage includes:
+
+- opening the pattern from a primary task flow
+- letting users browse or search available items
+- optionally navigating through hierarchy levels
+- selecting one item and confirming the choice
+- returning the selected value to the parent workflow
+
+## Example usage
+
+### Default
+
+<Canvas of={stories.Default} />
+
+### With hierarchy
+
+<Canvas of={stories.WithHierarchy} />
+
+### With hierarchy and side panel
+
+Use this variation when users need additional context about the selected item
+before confirming.
+
+<Canvas of={stories.WithHierarchyAndSidePanel} />
+
+## Copy-paste ready code
+
+Reference implementation:
+
+```text
+packages/ibm-products/src/patterns/AddSelect/example/components/SingleAddSelect/SingleAddSelect.tsx
+```

@@ -1,0 +1,14 @@
+//
+// Copyright IBM Corp. 2026
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+// Storybook-specific styles that override the prefix
+@use 'ALIAS_STORY_STYLE_CONFIG' as c4p-settings;
+
+// Use the main example styles with the overridden prefix
+@use './example/index.scss' with (
+  $prefix: c4p-settings.$pkg-prefix
+);

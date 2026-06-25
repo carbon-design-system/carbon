@@ -1,0 +1,34 @@
+//
+// Copyright IBM Corp. 2025
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+$css--plex: true !default;
+
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/ibm-products-styles/scss/config';
+@use '@carbon/ibm-products-styles/scss/components/Coachmark/_coachmark-beacon';
+
+$prefix: config.$pkg-prefix;
+$carbon-prefix: config.$carbon-prefix;
+
+$block-class: #{$prefix}--coachmark;
+
+:host {
+  display: inline-block;
+}
+
+.#{$block-class}--popover {
+  position: fixed;
+
+  /* stylelint-disable-next-line selector-type-no-unknown */
+  #{$carbon-prefix}-popover-content.is-dragging::part(content) {
+    border-radius: 0;
+    box-shadow:
+      0 0 0 $spacing-01 $icon-inverse,
+      0 0 0 $spacing-02 $background-inverse;
+  }
+}

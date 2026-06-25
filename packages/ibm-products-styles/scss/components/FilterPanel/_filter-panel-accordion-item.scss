@@ -1,0 +1,55 @@
+//
+// Copyright IBM Corp. 2024, 2025
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+/* stylelint-disable function-no-unknown */
+/* stylelint-disable max-nesting-depth */
+
+// Standard imports.
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/type';
+@use '@carbon/styles/scss/config' as carbon-config;
+
+@use '../../global/styles/project-settings' as c4p-settings;
+@use '../../global/styles/mixins';
+
+// The block part of our conventional BEM class names (blockClass__E--M).
+$block-class: #{c4p-settings.$pkg-prefix}--filter-panel-accordion-item;
+$carbon: #{carbon-config.$prefix};
+
+// Remove top and bottom borders.
+html .#{$block-class} {
+  border-block-start: 0;
+}
+html .#{$block-class}:last-child {
+  border-block-end: 0;
+}
+
+// Override Carbon Accordion Item styling
+html .#{$block-class} .#{$carbon}--accordion__wrapper {
+  padding-block: 0;
+}
+html .#{$block-class} .#{$carbon}--accordion__heading {
+  min-block-size: $spacing-07;
+  padding-inline-end: 0;
+}
+html .#{$block-class} .#{$carbon}--accordion__title {
+  inline-size: 100%;
+  margin-inline-end: 0;
+  // 100% - the space taken up by the expand/collapse icon.
+  max-inline-size: calc(100% - $spacing-07);
+}
+html .#{$block-class} .#{$carbon}--accordion__content {
+  padding-inline-end: 0;
+}
+
+// Override Filter Panel Label
+.#{$block-class} .#{c4p-settings.$pkg-prefix}--filter-panel-label__text {
+  @include type.type-style('body-01');
+}
+.#{$block-class} .#{c4p-settings.$pkg-prefix}--filter-panel-label__count {
+  @include type.type-style('label-01');
+}

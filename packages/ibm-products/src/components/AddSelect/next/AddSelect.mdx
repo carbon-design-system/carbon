@@ -1,0 +1,886 @@
+import { Story, Controls, Source, Canvas } from '@storybook/addon-docs/blocks';
+import { AddSelect } from '.';
+import * as stories from './AddSelect.stories';
+import styles from './_storybook-styles.scss?inline';
+
+# AddSelect
+
+[Usage guidelines](https://pages.github.ibm.com/carbon/ibm-products/patterns/add-and-select/usage/)
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Component Hierarchy](#component-hierarchy)
+- [Subcomponents & Usage](#subcomponents--usage)
+- [Data Utilities](#data-utilities)
+- [Usage Patterns](#usage-patterns)
+- [Component API](#component-api)
+
+## Overview
+
+AddSelect is a composable component system for building flexible add/select
+interfaces. It provides a component-based approach where you compose the UI
+using smaller, focused components instead of a monolithic component. This design
+enables maximum flexibility while maintaining consistency and accessibility.
+
+The implementation uses the compound component pattern in React, with distinct
+and well-defined sections. You need to import the main
+[`AddSelect`](./AddSelect.tsx) component, and all other subcomponents are
+available as static properties.
+
+### Key Features
+
+- **Composable Architecture**: Build complex selection interfaces by combining
+  simple, focused components
+- **Multi-select & Single-select**: Support for both checkbox-based
+  multi-selection and radio button-based single selection
+- **Hierarchical Navigation**: Built-in support for navigating through nested
+  item structures
+- **Search & Filter**: Global and column-level search with custom filter actions
+- **Selection Summary**: Display and manage selected items with optional
+  accordion view
+- **Item Details Panel**: Show detailed information about individual items
+- **Keyboard Navigation**: Full keyboard support for accessibility
+- **Flexible Layouts**: Vertical and horizontal layouts for different use cases
+
+## Component Hierarchy
+
+The AddSelect component system follows a clear hierarchical structure:
+
+```
+AddSelect (Root Container)
+├── AddSelect.Body (Main Content Area)
+│   ├── Header Section (Search, Breadcrumbs, Item Count)
+│   └── AddSelect.Content (Items Container)
+│       ├── AddSelect.Column (Optional Column Wrapper)
+│       │   ├── Column Header (Search, Title, Select All)
+│       │   └── AddSelect.Row (Individual Items)
+│       └── AddSelect.Row (Direct Items, no column)
+│
+├── AddSelect.SelectionSummary (Selected Items Panel)
+│   └── AddSelect.SelectionSummaryItem (Individual Selected Item)
+│
+└── AddSelect.ItemPanel (Item Details Panel)
+```
+
+## Subcomponents & Usage
+
+### 1. AddSelect (Root)
+
+**Purpose**: The main container component that provides context for selection
+state and callbacks. All child components access selection state through this
+context.
+
+**When to use**: Always required as the root wrapper for any AddSelect
+interface.
+
+**Component flow position**: Root container that manages selection state
+
+---
+
+### 2. AddSelect.Body
+
+**Purpose**: Contains the header section (search, breadcrumbs, item count) and
+the main content area. Handles global search and navigation.
+
+**When to use**: Required for displaying the main item selection interface.
+
+**Component flow position**: Contains search, filters, and item list
+
+---
+
+### 3. AddSelect.Content
+
+**Purpose**: Container for items with built-in keyboard navigation support.
+Manages focus and provides grid-based navigation.
+
+**When to use**: Required as a wrapper for AddSelect.Row or AddSelect.Column
+components.
+
+**Component flow position**: Handles keyboard navigation and layout
+
+---
+
+### 4. AddSelect.Column (Optional)
+
+**Purpose**: Optional column wrapper that provides column-specific features like
+column title, column-level search, and "Select All" functionality.
+
+**When to use**:
+
+- When organizing items into distinct columns
+- When you need column-level search or "Select All"
+- For hierarchical navigation with multiple levels
+
+**Component flow position**: Groups items with column-specific features
+
+---
+
+### 5. AddSelect.Row
+
+**Purpose**: Individual selectable item with support for checkboxes
+(multi-select) or radio buttons (single-select).
+
+**When to use**: For every selectable item in your interface.
+
+**Component flow position**: Individual selectable items
+
+---
+
+### 6. AddSelect.SelectionSummary (Optional)
+
+**Purpose**: Displays a list of selected items with optional count badge and
+edit functionality.
+
+**When to use**:
+
+- When you need to show selected items separately
+- For review/confirmation workflows
+- When building multi-step selection processes
+
+**Component flow position**: Shows selected items
+
+---
+
+### 7. AddSelect.SelectionSummaryItem (Optional)
+
+**Purpose**: Individual item display within the selection summary, with optional
+accordion view and remove functionality.
+
+**When to use**:
+
+- For custom rendering of selected items
+- When you need accordion-style item details
+- When items need individual remove buttons
+
+**Component flow position**: Individual selected item display
+
+---
+
+### 8. AddSelect.ItemPanel (Optional)
+
+**Purpose**: Side panel that displays detailed information about a specific
+item.
+
+**When to use**:
+
+- When items have additional details to display
+- For preview/inspection workflows
+- When users need more context before selecting
+
+**Component flow position**: Detailed item information
+
+## Data Utilities
+
+The AddSelect component system includes the **`AddSelectData`** utility class
+for managing hierarchical selection data. This framework-agnostic utility
+encapsulates data logic separate from UI components, enabling efficient data
+operations and state management.
+
+### AddSelectData Class
+
+The `AddSelectData` class is a lightweight utility for managing hierarchical
+data structures with built-in support for:
+
+- **Selection Management**: Track selected items with O(1) lookup performance
+- **Hierarchical Navigation**: Traverse parent-child relationships efficiently
+- **Search & Filter**: Built-in search with customizable options
+- **Sorting**: Sort items at any level with optional recursion
+- **Status Tracking**: Manage checked/unchecked/indeterminate states
+- **Performance Optimized**: Uses Maps and Sets for efficient operations
+
+### Import
+
+```jsx
+import { AddSelectData, AddSelectItem } from '@carbon/ibm-products';
+```
+
+### Basic Usage
+
+```jsx
+import { AddSelectData } from '@carbon/ibm-products';
+
+// Initialize with hierarchical data
+const dataManager = new AddSelectData();
+dataManager.setItems(hierarchicalItems);
+
+// Select items
+dataManager.setSelectedItems(['item-1', 'item-2']);
+
+// Get selected items
+const selected = dataManager.getSelectedItems();
+
+// Search items
+const results = dataManager.search('query', {
+  caseSensitive: false,
+  searchFields: ['title', 'value'],
+});
+
+// Navigate hierarchy
+const children = dataManager.getItemChildren('parent-id');
+const parent = dataManager.getItemParent('child-id');
+const ancestors = dataManager.getItemParents('child-id');
+
+// Check selection status
+if (dataManager.isSelected('item-1')) {
+  console.log('Item is selected');
+}
+
+// Sort items
+dataManager.sort((a, b) => a.title.localeCompare(b.title), true);
+```
+
+### Key Features
+
+- **Framework Agnostic**: Works with React, Web Components, or vanilla
+  JavaScript
+- **Type Safe**: Full TypeScript support with comprehensive type definitions
+- **Efficient**: Optimized with caching, memoization, and efficient data
+  structures (Maps, Sets)
+- **Flexible**: Supports custom search fields, sorting, filtering, and
+  extensible data structures
+- **Comprehensive**: Covers all common hierarchical data operations (selection,
+  navigation, search, sort)
+
+### Complete API Reference
+
+For complete API documentation, detailed usage examples, and advanced patterns,
+see:
+
+**[AddSelectData API Documentation](https://github.com/carbon-design-system/ibm-products/blob/main/packages/ibm-products-utilities/src/utils/add-select/add-select-data.md)**
+
+The utility is designed to work seamlessly with AddSelect components but can
+also be used independently for any hierarchical data management needs.
+
+## Usage Patterns
+
+For complete, production-ready implementations of common selection workflows,
+see the **Add and select patterns**:
+
+- **[SingleAddSelect Pattern](/docs/patterns-add-and-select-singleaddselect--overview)** -
+  Complete single-selection workflow with hierarchical navigation, breadcrumbs,
+  and success notifications
+- **[MultiAddSelect Pattern](/docs/patterns-add-and-select-multiaddselect--overview)** -
+  Complete multi-selection workflow with Tearsheet, selection summary, and
+  success notifications
+- **[Pattern Overview](/docs/patterns-add-and-select-overview--overview)** -
+  Learn more about when to use each pattern
+
+The examples below demonstrate how to compose AddSelect components for custom
+implementations:
+
+### Pattern 1: Basic Single Select
+
+Simple list with radio buttons for single selection.
+
+```jsx
+const [selectedItems, setSelectedItems] = useState(new Set());
+
+const handleItemSelect = (itemId, selected) => {
+  const newSelected = new Set();
+  if (selected) {
+    newSelected.add(itemId);
+  }
+  setSelectedItems(newSelected);
+};
+
+<AddSelect selectedItems={selectedItems} onItemSelect={handleItemSelect}>
+  <AddSelect.Body itemsLabel="Items" itemCount={items.length}>
+    <AddSelect.Content>
+      {items.map((item) => (
+        <AddSelect.Row
+          key={item.id}
+          itemId={item.id}
+          title={item.title}
+          subtitle={item.subtitle}
+          value={item.value}
+        />
+      ))}
+    </AddSelect.Content>
+  </AddSelect.Body>
+</AddSelect>;
+```
+
+---
+
+### Pattern 2: Basic Multi-Select List
+
+Simple list with checkboxes for multiple selection. Use the `multi` prop on
+AddSelect.Column to control selection mode.
+
+```jsx
+const [selectedItems, setSelectedItems] = useState(new Set());
+
+const handleItemSelect = (itemId, selected) => {
+  const newSelected = new Set(selectedItems);
+  if (selected) {
+    newSelected.add(itemId);
+  } else {
+    newSelected.delete(itemId);
+  }
+  setSelectedItems(newSelected);
+};
+
+<AddSelect selectedItems={selectedItems} onItemSelect={handleItemSelect}>
+  <AddSelect.Body itemsLabel="Items" itemCount={items.length}>
+    <AddSelect.Content>
+      <AddSelect.Column multi={true}>
+        {items.map((item) => (
+          <AddSelect.Row
+            key={item.id}
+            itemId={item.id}
+            title={item.title}
+            subtitle={item.subtitle}
+            value={item.value}
+          />
+        ))}
+      </AddSelect.Column>
+    </AddSelect.Content>
+  </AddSelect.Body>
+</AddSelect>;
+```
+
+---
+
+### Pattern 3: With Search and Filters
+
+Add global search and custom filter actions.
+
+```jsx
+const [selectedItems, setSelectedItems] = useState(new Set());
+const [searchTerm, setSearchTerm] = useState('');
+const [filterType, setFilterType] = useState('all');
+
+const handleItemSelect = (itemId, selected) => {
+  const newSelected = new Set(selectedItems);
+  if (selected) {
+    newSelected.add(itemId);
+  } else {
+    newSelected.delete(itemId);
+  }
+  setSelectedItems(newSelected);
+};
+
+const filteredItems = items.filter((item) => {
+  const matchesSearch = item.title
+    .toLowerCase()
+    .includes(searchTerm.toLowerCase());
+  const matchesFilter = filterType === 'all' || item.type === filterType;
+  return matchesSearch && matchesFilter;
+});
+
+<AddSelect selectedItems={selectedItems} onItemSelect={handleItemSelect}>
+  <AddSelect.Body
+    itemsLabel="Items"
+    globalSearchLabel="Search"
+    globalSearchPlaceholder="Search items"
+    itemCount={filteredItems.length}
+    onSearch={setSearchTerm}
+    actionsSlot={
+      <Dropdown
+        id="filter"
+        label="Filter"
+        items={filterOptions}
+        onChange={({ selectedItem }) =>
+          setFilterType(selectedItem?.id || 'all')
+        }
+      />
+    }
+  >
+    <AddSelect.Content>
+      {filteredItems.map((item) => (
+        <AddSelect.Row
+          key={item.id}
+          itemId={item.id}
+          title={item.title}
+          subtitle={item.subtitle}
+          value={item.value}
+        />
+      ))}
+    </AddSelect.Content>
+  </AddSelect.Body>
+</AddSelect>;
+```
+
+---
+
+### Pattern 4: With Columns and Select All
+
+Organize items into columns with "Select All" functionality.
+
+```jsx
+const [selectedItems, setSelectedItems] = useState(new Set());
+
+const handleItemSelect = (itemId, selected) => {
+  const newSelected = new Set(selectedItems);
+  if (selected) {
+    newSelected.add(itemId);
+  } else {
+    newSelected.delete(itemId);
+  }
+  setSelectedItems(newSelected);
+};
+
+const handleSelectAll = (checked) => {
+  if (checked) {
+    setSelectedItems(new Set(items.map((item) => item.id)));
+  } else {
+    setSelectedItems(new Set());
+  }
+};
+
+const allSelected =
+  items.length > 0 && items.every((item) => selectedItems.has(item.id));
+
+<AddSelect selectedItems={selectedItems} onItemSelect={handleItemSelect}>
+  <AddSelect.Body itemsLabel="Items" itemCount={items.length}>
+    <AddSelect.Content layout="horizontal">
+      <AddSelect.Column
+        title="Available items"
+        showSelectAll
+        multi
+        itemCount={items.length}
+        allSelected={allSelected}
+        onSelectAll={handleSelectAll}
+      >
+        {items.map((item) => (
+          <AddSelect.Row
+            key={item.id}
+            itemId={item.id}
+            title={item.title}
+            subtitle={item.subtitle}
+            value={item.value}
+          />
+        ))}
+      </AddSelect.Column>
+    </AddSelect.Content>
+  </AddSelect.Body>
+</AddSelect>;
+```
+
+---
+
+### Pattern 5: With Selection Summary
+
+Display selected items in a separate panel.
+
+```jsx
+const [selectedItems, setSelectedItems] = useState(new Set());
+
+const handleItemSelect = (itemId, selected) => {
+  const newSelected = new Set(selectedItems);
+  if (selected) {
+    newSelected.add(itemId);
+  } else {
+    newSelected.delete(itemId);
+  }
+  setSelectedItems(newSelected);
+};
+
+const handleRemove = (itemId) => {
+  const newSelected = new Set(selectedItems);
+  newSelected.delete(itemId);
+  setSelectedItems(newSelected);
+};
+
+const selectedItemsArray = Array.from(selectedItems)
+  .map((id) => items.find((item) => item.id === id))
+  .filter((item) => item !== undefined);
+
+<AddSelect selectedItems={selectedItems} onItemSelect={handleItemSelect}>
+  <AddSelect.Body itemsLabel="Items" itemCount={items.length}>
+    <AddSelect.Content>
+      {items.map((item) => (
+        <AddSelect.Row
+          key={item.id}
+          itemId={item.id}
+          title={item.title}
+          subtitle={item.subtitle}
+          value={item.value}
+        />
+      ))}
+    </AddSelect.Content>
+  </AddSelect.Body>
+
+  <AddSelect.SelectionSummary
+    title="Selected items"
+    selectedItems={selectedItemsArray}
+    showCount
+    showEditIcon
+    onEdit={() => console.log('Edit clicked')}
+  >
+    {selectedItemsArray.map((item) => (
+      <AddSelect.SelectionSummaryItem
+        key={item.id}
+        item={item}
+        useAccordion
+        onRemove={handleRemove}
+      />
+    ))}
+  </AddSelect.SelectionSummary>
+</AddSelect>;
+```
+
+---
+
+### Pattern 6: With Item Details Panel
+
+Show detailed information about items.
+
+```jsx
+const [selectedItems, setSelectedItems] = useState(new Set());
+const [itemPanelOpen, setItemPanelOpen] = useState(false);
+const [selectedItemForPanel, setSelectedItemForPanel] = useState(null);
+
+const handleItemSelect = (itemId, selected) => {
+  const newSelected = new Set(selectedItems);
+  if (selected) {
+    newSelected.add(itemId);
+  } else {
+    newSelected.delete(itemId);
+  }
+  setSelectedItems(newSelected);
+};
+
+const handleItemPanelClick = (itemId) => {
+  const item = items.find((i) => i.id === itemId);
+  setSelectedItemForPanel(item);
+  setItemPanelOpen(true);
+};
+
+<AddSelect selectedItems={selectedItems} onItemSelect={handleItemSelect}>
+  <AddSelect.Body itemsLabel="Items" itemCount={items.length}>
+    <AddSelect.Content>
+      {items.map((item) => (
+        <AddSelect.Row
+          key={item.id}
+          itemId={item.id}
+          title={item.title}
+          subtitle={item.subtitle}
+          value={item.value}
+          hasItemPanel
+          onItemPanelClick={handleItemPanelClick}
+          itemPanelOpen={itemPanelOpen && selectedItemForPanel?.id === item.id}
+        />
+      ))}
+    </AddSelect.Content>
+  </AddSelect.Body>
+
+  {itemPanelOpen && selectedItemForPanel && (
+    <AddSelect.ItemPanel
+      title="Item details"
+      item={selectedItemForPanel}
+      onClose={() => {
+        setItemPanelOpen(false);
+        setSelectedItemForPanel(null);
+      }}
+    />
+  )}
+</AddSelect>;
+```
+
+---
+
+### Pattern 7: Single Select With Hierarchical Navigation
+
+Navigate through nested item structures.
+
+```jsx
+const [selectedItems, setSelectedItems] = useState(new Set());
+const [currentLevel, setCurrentLevel] = useState({
+  title: 'Root',
+  items: rootItems,
+});
+
+const handleItemSelect = (itemId, selected) => {
+  const newSelected = new Set(selectedItems);
+  if (selected) {
+    newSelected.add(itemId);
+  } else {
+    newSelected.delete(itemId);
+  }
+  setSelectedItems(newSelected);
+};
+
+const handleNavigate = (itemId, title, parentId) => {
+  const item = currentLevel.items.find((i) => i.id === itemId);
+  if (item && item.children) {
+    setCurrentLevel({
+      title: item.title,
+      items: item.children,
+      parentId: itemId,
+    });
+  }
+};
+
+<AddSelect selectedItems={selectedItems} onItemSelect={handleItemSelect}>
+  <AddSelect.Body itemsLabel="Items" itemCount={currentLevel.items.length}>
+    <AddSelect.Content layout="horizontal">
+      <AddSelect.Column title={currentLevel.title} onNavigate={handleNavigate}>
+        {currentLevel.items.map((item) => (
+          <AddSelect.Row
+            key={item.id}
+            itemId={item.id}
+            title={item.title}
+            subtitle={item.subtitle}
+            value={item.value}
+            hasChildren={item.children && item.children.length > 0}
+          />
+        ))}
+      </AddSelect.Column>
+    </AddSelect.Content>
+  </AddSelect.Body>
+</AddSelect>;
+```
+
+## Component API
+
+The AddSelect component system provides a comprehensive API across all
+subcomponents. The Controls panel below shows props for all components in the
+system. Use the component selector tabs to view props for specific
+subcomponents.
+
+### AddSelect (Root Component)
+
+The root `AddSelect` component manages selection state and provides context to
+all child components.
+
+**Props:**
+
+- **children** (ReactNode) - Child components
+- **className** (string, optional) - Optional CSS class name
+- **onItemSelect** (function, optional) - Callback when an item is
+  selected/deselected
+  - Signature: `(itemId: string, selected: boolean, value: string) => void`
+- **selectedItems** (Set of strings, optional) - Set of selected item IDs
+
+---
+
+### AddSelect.Body
+
+Contains the header section (search, breadcrumbs, item count) and the main
+content area.
+
+**Props:**
+
+- **children** (ReactNode, optional) - Child components (typically
+  AddSelect.Content)
+- **className** (string, optional) - Optional CSS class name
+- **itemsLabel** (string, optional) - Label for items section (shown when
+  breadcrumbs are not used)
+- **globalSearchLabel** (string, optional, default: "Search") - Global search
+  label for accessibility
+- **globalSearchPlaceholder** (string, optional, default: "Search") - Global
+  search placeholder text
+- **searchResultsTitle** (string, optional, default: "Search results") - Title
+  shown when search returns filtered results
+- **itemCount** (number, optional, default: 0) - Item count for display in tag
+  badge
+- **path** (Array of objects with id and title properties, optional, default:
+  []) - Navigation path for breadcrumbs
+- **onSearch** (function, optional) - Callback when search term changes
+  - Signature: `(searchTerm: string) => void`
+- **onBreadcrumbClick** (function, optional) - Callback when breadcrumb is
+  clicked
+  - Signature: `(index: number) => void`
+- **headerContent** (ReactNode, optional) - Custom header content (slot) -
+  replaces entire header
+- **actionsSlot** (ReactNode, optional) - Actions slot - adds custom actions
+  (filter/sort) next to default search
+- **subHeaderActions** (ReactNode, optional) - Sub-header actions - custom
+  content/actions rendered after breadcrumbs and item count
+- **searchProps** (object, optional) - Additional props to pass to the Search
+  component
+- **tagProps** (object, optional) - Additional props to pass to the Tag
+  component (for item count)
+- **breadcrumbProps** (object, optional) - Additional props to pass to the
+  Breadcrumb component
+- **breadcrumbItemProps** (object, optional) - Additional props to pass to
+  BreadcrumbItem components
+- **linkProps** (object, optional) - Additional props to pass to Link components
+  in breadcrumbs
+
+---
+
+### AddSelect.Content
+
+Container for items with built-in keyboard navigation support. Manages focus and
+provides grid-based navigation.
+
+**Props:**
+
+- **children** (ReactNode, optional) - Child components (AddSelect.Row or
+  AddSelect.Column)
+- **className** (string, optional) - Optional CSS class name
+- **layout** ('vertical' | 'horizontal', optional, default: 'vertical') - Layout
+  direction for columns
+
+---
+
+### AddSelect.Column
+
+Optional column wrapper that provides column-specific features like column
+title, column-level search, and "Select All" functionality.
+
+**Props:**
+
+- **children** (ReactNode, optional) - AddSelectRow children
+- **title** (string, optional) - Column title displayed in the header
+- **searchLabel** (string, optional, default: "Search") - Label text for the
+  search input (accessibility)
+- **searchPlaceholder** (string, optional, default: "Search") - Placeholder text
+  for the search input
+- **onSearch** (function, optional) - Callback when search value changes
+  - Signature: `(value: string) => void`
+- **actionsSlot** (ReactNode, optional) - Actions slot - adds custom actions
+  (filter/sort) next to search
+- **hideSearch** (boolean, optional, default: false) - Whether to hide the
+  search input
+- **multi** (boolean, optional, default: false) - Whether to enable
+  multi-selection (checkboxes) or single selection (radio buttons)
+- **showSelectAll** (boolean, optional, default: false) - Whether to show the
+  "Select All" checkbox (only applicable when multi is true)
+- **itemCount** (number, optional, default: 0) - Total number of items in the
+  column (for display in tag)
+- **allSelected** (boolean, optional, default: false) - Whether all items are
+  currently selected
+- **onSelectAll** (function, optional) - Callback when "Select All" is toggled
+  - Signature: `(checked: boolean) => void`
+- **onNavigate** (function, optional) - Callback when navigating to children
+  - Signature: `(itemId: string, title: string, parentId: string) => void`
+- **className** (string, optional) - Optional CSS class name
+- **searchProps** (object, optional) - Additional props to pass to the Search
+  component
+- **tagProps** (object, optional) - Additional props to pass to the Tag
+  component
+- **selectAllCheckboxProps** (object, optional) - Additional props to pass to
+  the Checkbox component (Select All)
+
+---
+
+### AddSelect.Row
+
+Individual selectable item with support for checkboxes (multi-select) or radio
+buttons (single-select).
+
+**Props:**
+
+- **itemId** (string, required) - Unique identifier for the item
+- **title** (string, required) - Item title
+- **value** (string, required) - Item value
+- **subtitle** (string, optional) - Item subtitle
+- **selected** (boolean, optional, default: false) - Whether the item is
+  selected
+- **disabled** (boolean, optional, default: false) - Whether the item is
+  disabled
+- **hasChildren** (boolean, optional, default: false) - Whether the item has
+  children (for navigation)
+- **parentId** (string, optional) - Parent ID for hierarchical navigation
+- **icon** (ReactNode, optional) - Optional icon slot
+- **children** (ReactNode, optional) - Custom content to render after the
+  title/subtitle section (badges, tags, metadata)
+- **hasItemPanel** (boolean, optional, default: false) - Whether to show the
+  item panel view icon for this item
+- **onItemPanelClick** (function, optional) - Callback when item panel view icon
+  is clicked
+  - Signature: `(itemId: string) => void`
+- **itemPanelIconDescription** (string, optional, default: "View details") -
+  Description for the item panel icon button
+- **itemPanelOpen** (boolean, optional, default: false) - Whether the item panel
+  is currently open for this item
+- **className** (string, optional) - Optional CSS class name
+- **checkboxProps** (object, optional) - Additional props to pass to the
+  Checkbox component (when multi=true)
+- **radioButtonProps** (object, optional) - Additional props to pass to the
+  RadioButton component (when multi=false)
+- **itemPanelIconButtonProps** (object, optional) - Additional props to pass to
+  the IconButton component (info panel)
+
+---
+
+### AddSelect.SelectionSummary
+
+Displays a list of selected items with optional count badge and edit
+functionality.
+
+**Props:**
+
+- **title** (string, optional, default: "Selected items") - Panel title
+- **selectedItems** (AddSelectItem[], optional, default: []) - Array of selected
+  items
+- **children** (ReactNode, optional) - Custom content or SelectionSummaryItem
+  components
+- **emptyState** (ReactNode, optional) - Custom empty state component
+- **showCount** (boolean, optional, default: true) - Show count badge
+- **showEditIcon** (boolean, optional, default: false) - Show edit icon next to
+  count
+- **onEdit** (function, optional) - Edit icon click handler
+  - Signature: `() => void`
+- **editIconDescription** (string, optional, default: "Edit selections") - Edit
+  icon aria-label
+- **className** (string, optional) - Optional CSS class name
+- **renderItem** (function, optional) - Custom item renderer
+  - Signature: `(item: AddSelectItem) => ReactNode`
+- **headerContent** (ReactNode, optional) - Custom header content (slot) -
+  replaces entire header section
+- **headerActions** (ReactNode, optional) - Header actions slot - adds custom
+  actions alongside the edit icon
+- **tagProps** (object, optional) - Additional props to pass to the Tag
+  component
+- **editIconButtonProps** (object, optional) - Additional props to pass to the
+  edit IconButton
+
+---
+
+### AddSelect.SelectionSummaryItem
+
+Individual item display within the selection summary, with optional accordion
+view and remove functionality.
+
+**Props:**
+
+- **item** (AddSelectItem, required) - Item data
+- **renderAccordionTitle** (function, optional) - Custom title renderer (only
+  works with useAccordion mode)
+  - Signature: `(item: AddSelectItem) => ReactNode`
+- **renderAccordionBody** (function, optional) - Custom content renderer (only
+  works with useAccordion mode)
+  - Signature: `(item: AddSelectItem) => ReactNode`
+- **renderTemplate** (function, optional) - Custom template for rendering the
+  entire item content (takes precedence over all other rendering props)
+  - Signature:
+    `(item: AddSelectItem, onRemove?: (id: string) => void) => ReactNode`
+- **onRemove** (function, optional) - Remove button handler
+  - Signature: `(itemId: string) => void`
+- **removeButtonLabel** (string, optional, default: "Remove item") - Remove
+  button aria-label
+- **useAccordion** (boolean, optional, default: false) - Use accordion pattern
+- **className** (string, optional) - Optional CSS class name
+- **accordionProps** (object, optional) - Additional props to pass to the
+  Accordion component
+- **accordionItemProps** (object, optional) - Additional props to pass to the
+  AccordionItem component
+- **removeIconButtonProps** (object, optional) - Additional props to pass to the
+  remove IconButton
+
+---
+
+### AddSelect.ItemPanel
+
+Side panel that displays detailed information about a specific item.
+
+**Props:**
+
+- **title** (string, optional, default: "Item details") - Panel title
+- **item** (AddSelectItem | ItemDetailEntry[] | ReactNode, optional) - Item
+  data, array of entries, or custom content
+- **onClose** (function, optional) - Close button handler
+  - Signature: `() => void`
+- **closeIconDescription** (string, optional, default: "Close") - Close button
+  aria-label
+- **children** (ReactNode, optional) - Custom content (alternative to item prop)
+- **renderContent** (function, optional) - Custom content renderer
+  - Signature: `(item: AddSelectItem) => ReactNode`
+- **className** (string, optional) - Optional CSS class name
+- **closeIconButtonProps** (object, optional) - Additional props to pass to the
+  close IconButton

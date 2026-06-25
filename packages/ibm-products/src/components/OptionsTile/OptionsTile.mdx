@@ -1,0 +1,61 @@
+import { Story, Controls, Source, Canvas } from '@storybook/addon-docs/blocks';
+import { OptionsTile } from '.';
+import * as stories from './OptionsTile.stories';
+import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
+
+# OptionsTile
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Example usage](#example-usage)
+- [Component API](#component-api)
+
+## Overview
+
+The options tile is a disclosure widget, grouping a set of related controls or
+information while providing a summary of its contents when collapsed. It is used
+to avoid overwhelming the user with too many choices and elements when they’re
+likely not interested in all available options, but only a subset.
+
+An options tile can also be paired with a toggle to enable or disable an entire
+set of features with ease.
+
+[Options Tile guidelines](https://pages.github.ibm.com/carbon/ibm-products/components/options-tile/usage)
+(IBM internal)
+
+## Options Tile
+
+<Canvas
+  of={stories.optionsTile}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () =>
+        stackblitzPrefillConfig({
+          story: stories.optionsTile,
+          styles: stories.default.parameters.styles,
+        }),
+    },
+  ]}
+></Canvas>
+
+## Static Options Tile
+
+<Canvas
+  of={stories.staticOptionsTile}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () =>
+        stackblitzPrefillConfig({
+          story: stories.staticOptionsTile,
+          styles: stories.default.parameters.styles,
+        }),
+    },
+  ]}
+></Canvas>
+
+## Component API
+
+<Controls />

@@ -1,0 +1,69 @@
+import { Story, Controls, Source, Canvas } from '@storybook/addon-docs/blocks';
+import { CodesandboxLink } from '../../global/js/utils/story-helper';
+import { UserAvatar } from '.';
+import * as UserAvatarStories from './UserAvatar.stories';
+
+# UserAvatar
+
+[Usage guidelines](https://pages.github.ibm.com/carbon/ibm-products/components/user-avatar/usage/)
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Example usage](#example-usage)
+- [Component API](#component-api)
+
+## Overview
+
+User avatars are a representation of a user or group of users. They can be used
+to identify a user or indicate collaborators. By default the component will
+display `name` on a 'order-1-cyan' background if name exist else it will render
+a user icon. UserAvatar allows an image of the user to be displayed by passing
+in the `image` prop as well as customizing icons using `renderIcon` prop.
+
+## Migration from `UserProfileImage`
+
+If you are currently using `UserProfileImage` you can use the following guide to
+migrate to the newer `UserAvatar` component using the below command:
+
+`npx @carbon/upgrade migrate ibm-products-update-userprofileimage --write`
+
+The following props have been updated in `UserAvatar`:
+
+`icon` has been replaced with `renderIcon`
+
+`backgroundColor` remains the same but the values have changed. To see the new
+values please refer to the component API table below.
+
+`initials` has been replaced with `name`. Please refer to the component API
+table below to see the new specifications.
+
+`sm` has been added to the list of available `size` options
+
+`theme` and `kind` have been removed
+
+## Note on theming
+
+The user avatar supports all the 4 theme variants from carbon (white, g10, g90
+and g100). The backgroundColor and font color will adapt dynamically based on
+the lighter and darker themes.
+
+## Example usage
+
+{/* TODO: One example per designed use case. */}
+
+### Default
+
+<Canvas of={UserAvatarStories.Default}></Canvas>
+
+### With Image
+
+<Canvas of={UserAvatarStories.WithImage}></Canvas>
+
+## Code sample
+
+{/* <CodesandboxLink exampleDirectory="UserAvatar" /> */}
+
+## Component API
+
+<Controls />

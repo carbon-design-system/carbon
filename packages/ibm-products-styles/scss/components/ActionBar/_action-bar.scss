@@ -1,0 +1,53 @@
+//
+// Copyright IBM Corp. 2020, 2021
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+// Standard imports.
+@use '@carbon/styles/scss/spacing' as *;
+@use '../../global/styles/project-settings' as c4p-settings;
+@use '../../global/styles/mixins' as *;
+
+$_block-class: #{c4p-settings.$pkg-prefix}--action-bar;
+$block-class-overflow-items: #{$_block-class}-overflow-items;
+
+@include block-wrap($block-class: $_block-class) {
+  &.#{$_block-class} {
+    display: block;
+  }
+
+  .#{$_block-class}__displayed-items {
+    display: inline-flex;
+    inline-size: 100%;
+    white-space: nowrap;
+  }
+
+  .#{$_block-class}__displayed-items--right {
+    justify-content: flex-end;
+  }
+
+  .#{$_block-class}__hidden-sizing-items {
+    // This breadcrumb container is used to measure the width of all displayable breadcrumbs
+    @include measuring-container;
+  }
+}
+
+@include block-wrap($block-class: $block-class-overflow-items + '__options') {
+  .#{$block-class-overflow-items}__item {
+    padding: 0 $spacing-03;
+  }
+
+  .#{$block-class-overflow-items}__item-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    inline-size: 100%;
+  }
+
+  .#{$block-class-overflow-items}__item svg {
+    flex-shrink: 0;
+    margin: 0 $spacing-02;
+  }
+}

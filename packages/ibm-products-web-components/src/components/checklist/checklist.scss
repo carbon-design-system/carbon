@@ -1,0 +1,70 @@
+//
+// Copyright IBM Corp. 2025, 2025
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+$css--plex: true !default;
+
+@use '@carbon/styles/scss/reset';
+@use '@carbon/styles/scss/spacing';
+@use '@carbon/styles/scss/theme';
+@use '@carbon/styles/scss/colors';
+@use '@carbon/styles/scss/components/tag';
+@use '@carbon/ibm-products-styles/scss/config';
+@use '@carbon/ibm-products-styles/scss/components/Checklist/index' as checklist;
+
+$prefix: config.$pkg-prefix;
+$carbon-prefix: config.$carbon-prefix;
+
+$baseClass: #{$prefix}--checklist;
+
+:host(#{$prefix}-checklist) {
+  .#{$baseClass}__toggle {
+    margin-block-start: calc(-1 * spacing.$spacing-03);
+    margin-inline: auto calc(-1 * spacing.$spacing-03);
+  }
+
+  #{$carbon-prefix}-icon-button::part(button):focus {
+    box-shadow: none;
+    outline: 2px solid theme.$focus;
+  }
+}
+
+:host(#{$prefix}-checklist-item) {
+  display: flex;
+  margin-block-end: spacing.$spacing-03;
+}
+
+:host(#{$prefix}-checklist-item:last-of-type) {
+  margin-block-end: 0;
+}
+
+:host(#{$prefix}-checklist-group) {
+  display: block;
+  padding: spacing.$spacing-05;
+  border-block-start: 1px solid theme.$border-subtle-01;
+}
+
+:host(#{$prefix}-checklist-group:first-of-type) {
+  border-block-start: none;
+}
+
+.#{$baseClass}__label--clickable {
+  color: theme.$link-primary;
+  cursor: pointer;
+}
+
+.#{$baseClass}__label--clickable:hover {
+  color: theme.$link-primary-hover;
+  text-decoration: underline;
+}
+
+.#{$baseClass}__chart {
+  border-radius: 50%;
+  background-image: conic-gradient(
+    colors.$purple-50 var(--#{$prefix}-num-degrees),
+    tag.$tag-background-gray var(--#{$prefix}-num-degrees) 360deg
+  );
+}

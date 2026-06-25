@@ -1,0 +1,76 @@
+//
+// Copyright IBM Corp. 2023, 2023
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+// Standard imports.
+@use '@carbon/layout/scss/convert' as *;
+@use '@carbon/styles/scss/colors' as *;
+@use '@carbon/styles/scss/motion' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/themes';
+@use '@carbon/styles/scss/type' as *;
+@use '@carbon/styles/scss/utilities';
+@use '../../global/styles/project-settings' as c4p-settings;
+
+// The block part of our conventional BEM class names (blockClass__E--M).
+$block-class: #{c4p-settings.$pkg-prefix}--carousel;
+
+.#{$block-class} {
+  position: relative;
+
+  /* stylelint-disable-next-line max-nesting-depth */
+  &:focus {
+    outline: none;
+  }
+}
+.#{$block-class}__elements-container {
+  overflow: hidden;
+}
+.#{$block-class}__elements-container--scrolled,
+.#{$block-class}__elements-container--scroll-max {
+  position: absolute;
+  z-index: 1;
+  inline-size: $spacing-07;
+  inset-block: 0;
+  pointer-events: none;
+}
+
+.#{$block-class}__elements-container--scrolled {
+  inset-inline-start: 0;
+}
+
+.#{$block-class}__elements-container--scroll-max {
+  inset-inline-end: 0;
+}
+
+.#{$block-class}__elements {
+  display: flex;
+  overflow: scroll;
+  -ms-overflow-style: none;
+  scroll-behavior: smooth;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+
+  &:focus {
+    @include utilities.focus-outline('outline');
+  }
+
+  /* stylelint-disable-next-line max-nesting-depth */
+  @media (prefers-reduced-motion) {
+    scroll-behavior: auto;
+  }
+}
+
+.#{$block-class}__elements::-webkit-scrollbar {
+  display: none;
+}

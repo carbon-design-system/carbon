@@ -1,0 +1,467 @@
+//
+// Copyright IBM Corp. 2022, 2025
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+// Standard imports.
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/type';
+@use '@carbon/type/scss/font-family' as *;
+@use '@carbon/styles/scss/config' as carbon-config;
+
+// Standard imports.
+@use '../../global/styles/project-settings' as *;
+
+$block-class: #{$pkg-prefix}--add-select;
+$tearsheet-class: #{$pkg-prefix}--tearsheet;
+
+.#{$block-class}__header {
+  padding: $spacing-05;
+  border-block-start: 1px solid $layer-accent-01;
+  padding-block-end: 0;
+}
+
+.#{$block-class}__body {
+  padding: $spacing-05;
+}
+
+/* stylelint-disable max-nesting-depth */
+.#{$block-class}__selections {
+  &-wrapper {
+    display: block;
+  }
+
+  &-cell-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 $spacing-05;
+    block-size: 3rem;
+    border-block-end: 1px solid $layer-accent-01;
+  }
+
+  &-cell-title {
+    display: block;
+    color: $text-primary;
+  }
+
+  &-cell-subtitle {
+    @include type.type-style('label-01');
+
+    display: block;
+    color: $text-secondary;
+  }
+
+  &-cell {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  &-dropdown .#{carbon-config.$prefix}--dropdown {
+    background: transparent;
+  }
+
+  &-row--selected {
+    background-color: $layer-selected-01;
+  }
+
+  &-row--active {
+    background-color: $layer-active-01;
+  }
+
+  &-form-control {
+    display: flex;
+    align-items: center;
+  }
+
+  &-form-control-wrapper--radio {
+    cursor: pointer;
+  }
+
+  &-form-control-label-wrapper {
+    display: flex;
+    margin-inline-start: $spacing-05;
+  }
+
+  &-form-control-label-text {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &-cell-avatar {
+    margin-inline-end: $spacing-03;
+  }
+
+  &-cell-icon {
+    margin-inline-end: $spacing-03;
+  }
+
+  &-row {
+    border-inline-start: 0.125rem solid transparent;
+  }
+
+  &-row-meta--selected {
+    background-color: $layer-hover-01;
+    border-inline-start: 0.125rem solid $interactive;
+  }
+}
+
+.#{$block-class} .#{$block-class}__selections-row:hover {
+  background: $layer-hover-01;
+
+  .#{$block-class}__selections-cell-title {
+    color: $interactive;
+  }
+
+  .#{$block-class}__selections-view-children svg {
+    color: $interactive;
+  }
+
+  button.#{$block-class}__selections-view-children.#{carbon-config.$prefix}--btn--ghost.#{carbon-config.$prefix}--btn--icon-only
+    .#{carbon-config.$prefix}--btn__icon
+    path {
+    fill: currentColor;
+  }
+}
+
+.#{$block-class}__sub-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+
+  &-multi {
+    padding: 0 $spacing-05;
+  }
+}
+
+// sidebar
+
+.#{$block-class}__sidebar-header {
+  display: flex;
+  padding: $spacing-07 $spacing-05 $spacing-03 $spacing-05;
+  border-block-end: 1px solid $layer-accent-01;
+
+  .#{$block-class}__sidebar-title {
+    @include type.type-style('heading-compact-02');
+  }
+}
+
+.#{$block-class}__sidebar-title {
+  margin-inline-end: $spacing-03;
+}
+
+.#{$block-class}__sidebar-selected-item {
+  &-title {
+    color: $text-primary;
+  }
+
+  &-subtitle {
+    @include type.type-style('label-01');
+
+    color: $text-secondary;
+  }
+}
+
+.#{$block-class}__sidebar-body {
+  padding: 0 $spacing-05;
+}
+
+.#{$block-class} .#{$block-class}__sidebar-item-header {
+  @include type.type-style('label-01');
+
+  color: $text-secondary;
+
+  margin-block-end: $spacing-03;
+}
+
+.#{$block-class} .#{$block-class}__sidebar-item-body {
+  @include type.type-style('body-01');
+
+  margin-block-end: $spacing-05;
+}
+
+.#{$block-class} .#{$block-class}__sidebar-item-remove-button:hover {
+  background: $text-disabled;
+}
+
+.#{$block-class} .#{$block-class}__sidebar-accordion-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+// columns
+
+.#{$block-class}__columns {
+  display: flex;
+  flex-direction: row;
+  flex-grow: 1;
+
+  .#{$block-class}__selections-form-control-label-wrapper {
+    margin-inline-start: $spacing-03;
+  }
+
+  .#{$block-class}__selections-row {
+    border-inline-start: 0;
+  }
+
+  .#{$block-class}__selections .#{$block-class}__selections-cell {
+    padding: 0;
+  }
+
+  .#{$block-class}__selections-cell-wrapper {
+    padding: 0 $spacing-03;
+    block-size: 2rem;
+  }
+
+  .#{$block-class}__tags {
+    padding: 0 $spacing-03;
+    margin-block-end: 0;
+  }
+
+  .#{$block-class}__selections-wrapper-multi {
+    padding: 0;
+  }
+}
+
+.#{$block-class}__selections-wrapper-multi .#{$block-class}__selections-cell {
+  padding: 0 $spacing-05;
+}
+
+.#{$block-class}__selections-row:first-child
+  .#{$block-class}__selections-cell-wrapper {
+  border-block-start: 1px solid $border-subtle-01;
+}
+
+.#{$block-class}__column {
+  flex: 0 0 20rem;
+  padding: $spacing-05;
+  border-block-start: 1px solid $border-subtle-01;
+  border-inline-end: 1px solid $border-subtle-01;
+
+  &-search-bar {
+    display: flex;
+  }
+
+  .#{$carbon-prefix}--popover--tab-tip.#{$carbon-prefix}--popover--open
+    .#{$carbon-prefix}--btn {
+    background: $layer;
+  }
+
+  &-filter-popover.#{$carbon-prefix}--popover-content {
+    padding: $spacing-05;
+    min-inline-size: $spacing-13;
+  }
+
+  &-sort-filter {
+    display: flex;
+  }
+
+  .#{carbon-config.$prefix}--overflow-menu {
+    border-block-end: 1px solid $border-strong-01;
+  }
+}
+
+.#{$block-class}-sort_overflow {
+  z-index: 9999;
+}
+
+.#{$block-class}__tags {
+  display: flex;
+  align-items: center;
+  margin-block: $spacing-05 $spacing-03;
+
+  &-label {
+    margin-inline-end: $spacing-03;
+  }
+}
+
+.#{$block-class}__global-filter {
+  position: absolute;
+  z-index: 999999;
+  background: $layer-01;
+  box-shadow: 0 6px 6px 0 rgba(0, 0, 0, 0.2);
+  inline-size: 100%;
+  inset-inline-end: 0;
+  max-inline-size: 40rem;
+  transform: translate(0, 100%);
+
+  &-search {
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+  }
+
+  &-content {
+    padding: $spacing-05;
+  }
+
+  &-opts {
+    display: grid;
+    grid-gap: $spacing-05 2rem;
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  &-applied {
+    display: flex;
+    align-items: center;
+    padding: $spacing-03;
+    background: $layer-01;
+  }
+}
+
+.#{$block-class}__global-filter-button-set
+  button.#{$block-class}__global-filter-button {
+  flex: 1;
+  max-inline-size: none;
+}
+
+button.#{$block-class}__global-filter-toggle {
+  background: $field-01;
+  border-block-end-color: $border-strong-01;
+
+  &--open {
+    border-block-end: $border-strong-01;
+    box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.2);
+  }
+}
+
+// meta panel
+.#{$block-class}__meta-panel {
+  padding: $spacing-05;
+
+  &-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-block-end: $spacing-05;
+  }
+
+  &-entry {
+    margin-block-end: $spacing-05;
+  }
+}
+
+.#{$block-class}__meta-panel p.#{$block-class}__meta-panel-title {
+  @include type.type-style('heading-03');
+}
+
+.#{$block-class}__meta-panel p.#{$block-class}__meta-panel-entry-title {
+  @include type.type-style('heading-compact-01');
+}
+
+.#{$block-class}__meta-panel p.#{$block-class}__meta-panel-entry-body {
+  @include type.type-style('body-compact-01');
+}
+
+// overrides
+
+.#{$block-class}__selections .#{carbon-config.$prefix}--list-box__menu {
+  inset-inline-start: auto;
+}
+
+.#{$block-class}__tags .#{carbon-config.$prefix}--tag {
+  margin: 0;
+}
+
+// the influencer sidebar needs to be even with the buttons
+.#{$block-class}.#{$tearsheet-class} .#{$tearsheet-class}__influencer {
+  flex-basis: 22.5rem;
+  background: $layer-01;
+}
+
+.#{$block-class}.#{$tearsheet-class}.#{$tearsheet-class}--wide
+  .#{$tearsheet-class}__content
+  .#{carbon-config.$prefix}--dropdown {
+  background-color: transparent;
+}
+
+.#{$block-class}.#{$tearsheet-class} .#{$tearsheet-class}__header-description {
+  color: $text-secondary;
+}
+
+.#{$block-class}.#{$tearsheet-class} .#{$tearsheet-class}__content {
+  display: flex;
+  flex-direction: column;
+}
+
+.#{$block-class}.#{$block-class}__multi
+  .#{$pkg-prefix}--action-set.#{carbon-config.$prefix}--btn-set.#{$pkg-prefix}--action-set--max
+  .#{$pkg-prefix}--action-set__action-button {
+  max-inline-size: 11.25rem;
+}
+
+.#{$block-class} .#{$block-class}__items-label {
+  @include type.type-style('heading-compact-01');
+}
+
+.#{$block-class}
+  .#{carbon-config.$prefix}--modal-container--sm
+  .#{carbon-config.$prefix}--modal-content
+  p {
+  padding-inline-end: 0;
+}
+
+.#{$block-class} .#{carbon-config.$prefix}--radio-button__appearance {
+  margin: 0 $spacing-05 0 0;
+}
+
+.#{$block-class}
+  .#{carbon-config.$prefix}--radio-button-wrapper
+  .#{carbon-config.$prefix}--radio-button__label {
+  justify-content: left;
+}
+
+.#{$block-class}
+  .#{carbon-config.$prefix}--breadcrumb
+  .#{carbon-config.$prefix}--link {
+  cursor: pointer;
+}
+
+.#{$block-class} .#{carbon-config.$prefix}--accordion__item {
+  &:hover .#{$block-class}__sidebar-accordion-title button {
+    opacity: 1;
+  }
+
+  .#{$block-class}__sidebar-accordion-title button {
+    opacity: 0;
+  }
+}
+
+.#{$block-class}__multi .#{$pkg-prefix}--empty-state {
+  margin-block-start: $spacing-09;
+  max-inline-size: 16rem;
+}
+
+.#{$block-class} .#{carbon-config.$prefix}--accordion__arrow {
+  transform: rotate(0deg);
+}
+
+.#{$block-class}
+  .#{carbon-config.$prefix}--accordion__item--active
+  .#{carbon-config.$prefix}--accordion__arrow {
+  transform: rotate(90deg);
+}
+
+.#{$block-class}
+  .#{carbon-config.$prefix}--accordion--start
+  .#{carbon-config.$prefix}--accordion__arrow {
+  margin: 0 0 0 $spacing-05;
+}
+
+.#{$block-class}
+  .#{carbon-config.$prefix}--accordion--start
+  .#{carbon-config.$prefix}--accordion__title {
+  margin: 0 $spacing-05 0 $spacing-03;
+}
+
+.#{$block-class}
+  .#{carbon-config.$prefix}--accordion__item--active
+  .#{carbon-config.$prefix}--accordion__content {
+  margin-block-start: $spacing-03;
+  padding-block: 0;
+}

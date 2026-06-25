@@ -1,0 +1,276 @@
+//
+// Copyright IBM Corp. 2023, 2025
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+/**
+ * The Guidebanner specifically is theme-agnostic, and so we have to
+ * use color tokens to keep the colors static instead of theme tokens
+ * that will change depending on the selected theme.
+ *
+ * Because of this, we are triggering a *large* amount of linting errors.
+ * So, we're adding a few "disable" rules for the file instead of 60
+ * individual rules.
+ */
+
+/* stylelint-disable carbon/layout-use */
+/* stylelint-disable carbon/motion-duration-use */
+/* stylelint-disable carbon/theme-use */
+/* stylelint-disable declaration-no-important */
+/* stylelint-disable function-no-unknown */
+/* stylelint-disable max-nesting-depth */
+
+// Standard imports.
+@use '@carbon/layout/scss/convert' as *;
+@use '@carbon/styles/scss/colors' as *;
+@use '@carbon/styles/scss/motion' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/themes';
+@use '@carbon/styles/scss/type' as *;
+@use '@carbon/styles/scss/config' as carbon-config;
+
+@use '../../global/styles/project-settings' as c4p-settings;
+
+// Guidebanner uses the following Carbon for IBM Products components:
+@use '../Carousel/carousel';
+
+// The block part of our conventional BEM class names (blockClass__E--M).
+$block-class: #{c4p-settings.$pkg-prefix}--guidebanner;
+
+// Each GuidebannerElement is contained in a CarouselItem.
+$carousel-item: #{c4p-settings.$pkg-prefix}--carousel__item;
+
+@mixin when-collapsed($selector: '&') {
+  .#{c4p-settings.$pkg-prefix}--guidebanner__collapsible-collapsed
+    #{$selector} {
+    @content;
+  }
+}
+
+$horizontal-margin: to-rem(52px);
+// Guidebanner-specific colors.
+$purple-1: #9b63ff;
+$purple-2: #7f3ae7;
+$purple-3: #7433e3;
+
+.#{$block-class} {
+  // Due to the Guidebanner's dark background,
+  // apply dark theme by default for all elements:
+  // i.e. light text, icons, tooltips, etc.
+  @include theme(themes.$g100, true);
+
+  position: relative;
+  background: linear-gradient(90deg, $blue-90 0%, $purple-70 100%);
+  background-color: $blue-90;
+}
+
+.#{$block-class}__icon-idea {
+  position: absolute;
+  color: $gray-10;
+  inset-block-start: $spacing-05;
+  inset-inline-start: $spacing-05;
+}
+
+.#{$block-class}__title {
+  @include type-style('heading-compact-02');
+
+  padding: $spacing-05 to-rem(175px) 0 $horizontal-margin;
+  color: $gray-10;
+}
+
+.#{$block-class}__close-button {
+  position: absolute;
+  inset-block-start: 0;
+  inset-inline-end: 0;
+}
+.#{$block-class}__close-button button {
+  block-size: $spacing-07;
+  inline-size: $spacing-07;
+  min-block-size: $spacing-07;
+  padding-block-start: 6px;
+
+  &:active,
+  &:hover {
+    background-color: $purple-3;
+  }
+
+  path {
+    fill: $white-0;
+  }
+}
+
+// Specify Carousel look and feel.
+.#{$block-class}__carousel {
+  padding: 0 0 $spacing-05;
+  color: $gray-10;
+
+  @include when-collapsed() {
+    margin-block-end: 0;
+  }
+}
+
+// All carousel elements are 400px wide,
+// except the last one (see below).
+.#{$block-class}__carousel .#{$carousel-item} .#{$block-class}__element {
+  display: flex;
+  flex-flow: column;
+  flex-shrink: 0;
+  margin: $spacing-05 0 0 0;
+  inline-size: to-rem(400px); // 25rem
+  max-block-size: to-rem(512px); // 32rem
+  opacity: 1;
+  padding-inline-start: $horizontal-margin;
+  scroll-snap-align: start;
+  transition:
+    max-height 50ms motion(exit, productive),
+    margin-top 50ms motion(exit, productive),
+    opacity 300ms motion(exit, productive);
+
+  @include when-collapsed() {
+    margin-block-start: 0;
+    max-block-size: $spacing-03;
+    opacity: 0;
+  }
+}
+// The last carousel item is wider, with more padding-right,
+// to provide more space against the right edge of the carousel.
+.#{$block-class}__carousel
+  .#{$carousel-item}:last-child
+  .#{$block-class}__element {
+  inline-size: to-rem(448px); // 28rem
+  padding-inline-end: $horizontal-margin;
+}
+
+.#{$block-class}__carousel .#{$carousel-item} .#{$block-class}__element-title {
+  @include type-style('heading-compact-01');
+
+  margin: $spacing-05 0 0 0;
+}
+
+.#{$block-class}__carousel .#{$block-class}__element-content {
+  @include type-style('body-01');
+
+  margin-block-end: $spacing-05;
+}
+
+// Button with crossroads icon
+.#{$block-class}__carousel .#{carbon-config.$prefix}--btn--tertiary {
+  border-color: $white-0;
+  color: $white-0;
+
+  &:active,
+  &:hover {
+    border-color: $white-0;
+    background-color: $white-0;
+    color: $gray-100;
+  }
+
+  // The "render icon" CSS seems to be missing in the latest Carbon button.
+  // Specifically, getting the icon to move to right-hand side of the content area.
+  // Repeating here.
+  svg {
+    position: absolute;
+    flex-shrink: 0;
+    block-size: 1rem;
+    inline-size: 1rem;
+    inset-inline-end: $spacing-05;
+  }
+}
+
+.#{$block-class}__carousel .#{carbon-config.$prefix}--btn--ghost {
+  color: $blue-30;
+  margin-inline-start: calc(-1 * $spacing-05);
+
+  &:active,
+  &:hover {
+    background-color: $purple-2;
+    color: $gray-10;
+  }
+}
+
+.#{$block-class}__carousel .#{$block-class}__element-link {
+  color: $blue-30;
+
+  &:visited {
+    color: $blue-30;
+  }
+
+  &:active,
+  &:hover {
+    color: $blue-20;
+  }
+}
+
+.#{$block-class}__navigation {
+  display: flex;
+  border-block-start: to-rem(1px) solid $purple-60;
+
+  @include when-collapsed() {
+    border-block-start: none;
+  }
+}
+.#{$block-class}__navigation .#{$block-class}__toggle-button {
+  color: $blue-30;
+  margin-inline-start: calc($horizontal-margin - to-rem(18px));
+
+  &:active,
+  &:hover {
+    background-color: $purple-3;
+    color: $gray-10;
+  }
+}
+
+// Push navigation buttons to the right
+.#{$block-class}__navigation .#{$block-class}__back-button {
+  margin-inline-start: auto;
+}
+// Hide navigation buttons when collapsed
+.#{$block-class}__navigation .#{$block-class}__back-button,
+.#{$block-class}__navigation .#{$block-class}__next-button {
+  @include when-collapsed() {
+    display: none;
+  }
+}
+.#{$block-class}__navigation .#{$block-class}__back-button button,
+.#{$block-class}__navigation .#{$block-class}__next-button button {
+  &:active,
+  &:hover {
+    background-color: $purple-3;
+  }
+
+  path {
+    fill: $white-0;
+  }
+
+  &[disabled] path {
+    fill: $purple-1;
+  }
+}
+
+// Exception handling.
+// If "withLeftGutter", then:
+// - insert 1 rem of more "space" on the left.
+// - move icon 1 rem more to the right.
+.#{$block-class}__with-left-gutter .#{$block-class}__icon-idea {
+  inset-inline-start: $spacing-07;
+}
+.#{$block-class}__with-left-gutter .#{$block-class}__title {
+  padding-inline-start: calc($horizontal-margin + $spacing-05);
+}
+.#{$block-class}__with-left-gutter .#{$block-class}__navigation {
+  padding-inline-start: $spacing-05;
+}
+// Override Carousel settings
+// - insert 1 rem of more "space" on the left.
+.#{$block-class}__with-left-gutter
+  .#{c4p-settings.$pkg-prefix}--carousel__elements-container {
+  padding-inline-start: $spacing-05;
+}
+// - expand "fade" to cover more of the left side of the carousel.
+.#{$block-class}__with-left-gutter
+  .#{c4p-settings.$pkg-prefix}--carousel__elements-container--scrolled {
+  inline-size: $spacing-10;
+}

@@ -1,0 +1,249 @@
+import { ArgTypes, Markdown, Meta, Story, Canvas } from '@storybook/addon-docs/blocks';
+import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
+import * as createFullPageStories from './create-full-page.stories';
+
+<Meta of={createFullPageStories} />
+
+# Create Full Page
+
+[Usage guidelines](https://pages.github.ibm.com/carbon/ibm-products/patterns/create-flows/usage/#full-page) | [Carbon page usage guidelines](https://www.carbondesignsystem.com/patterns/common-actions/#create)
+
+## Table of Contents
+
+- [Overview](#overview)
+- [What is a Pattern?](#what-is-a-pattern)
+- [Getting Started](#getting-started)
+- [Example Usage](#example-usage)
+- [Architecture](#architecture)
+- [Customization](#customization)
+
+## Overview
+
+The `create-full-page` is a **pattern** (not a component) that provides a recipe
+for building multi-step workflow interfaces for creating resources using a full
+page experience. It demonstrates how to compose a full-page layout with StepFlow
+from `@carbon/utilities` for managing step navigation and state.
+
+
+> 💡 Check our
+> [Stackblitz](https://stackblitz.com/github/carbon-design-system/ibm-products/tree/main/packages/ibm-products-web-components/examples/create-full-page)
+> example implementation.
+
+[![Edit carbon-web-components](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/carbon-design-system/ibm-products/tree/main/packages/ibm-products-web-components/examples/create-full-page)
+
+
+## What is a Pattern?
+
+Unlike components that are exported from the package, **patterns are recipes**
+that you copy into your codebase and customize to fit your specific needs. This
+approach offers:
+
+- **Full Control**: Modify the code to match your exact requirements
+- **No Breaking Changes**: Updates to the pattern don't affect your
+  implementation
+- **Seamless Customization**: Adapt the pattern without workarounds or prop
+  drilling
+- **Scalability**: Build upon the foundation with your own features
+
+The CreateFullPage pattern consists of:
+
+- `create-full-page.ts` - Main full-page wrapper web component
+- `create-full-page-step.ts` - Individual step web component
+- `create-influencer.ts` - Progress indicator web component
+- `index.ts` - Exports and component registration
+- `@carbon/ibm-products-web-components` page-header components for breadcrumbs and title display
+- Styles and utilities
+
+
+The pattern uses Carbon's `@carbon/ibm-products-web-components` page-header components for breadcrumbs and title display.
+
+## Getting Started
+
+1. **Copy the pattern code** from the
+   [example directory](https://github.com/carbon-design-system/ibm-products/tree/main/packages/ibm-products-web-components/examples/create-full-page/src/components)
+   into your project
+2. **Install dependencies**: `@carbon/web-components`, `lit`
+3. **Import and use** the pattern components in your application
+4. **Customize** as needed for your use case
+
+The pattern uses:
+
+- **LitElement**: Base class for creating web components with reactive properties
+- **Shadow DOM**: Encapsulation for component styles and structure
+- **Carbon Web Components**: For form inputs (`cds-text-input`, `cds-number-input`, etc.), layout (`cds-grid`, `cds-column`), and UI elements
+- **Carbon IBM Products Web Components**: `c4p-page-header`, `c4p-page-header-breadcrumbs-set` for page header and breadcrumbs
+- **Custom web components**: `create-influencer` for progress indication
+
+### Key Features
+
+- **Multi-step workflow**: Guide users through complex creation processes
+- **Progress indication**: Visual feedback with vertical progress indicators
+- **Breadcrumb navigation**: Optional breadcrumbs with overflow handling
+- **Page header**: Support for page title and breadcrumbs
+- **Step management**: Built-in navigation with back, next, and submit actions
+- **Reactive state management**: Using Lit's `@state()` decorators for reactive properties
+- **Global header integration**: Works seamlessly with Carbon's UI Shell components
+- **Responsive design**: Adapts to different screen sizes using Carbon Grid
+
+### Key Implementation Steps
+
+1. **Copy Pattern Files**: Copy all pattern web components from the example directory into your project
+2. **Import Components**: Import the pattern components and Carbon Web Components in your application
+3. **State Management**: Use `@state()` decorators in your wrapper component to manage form state
+4. **Event Handlers**: Implement event handlers for form inputs and step navigation
+5. **Close Handler**: Set `onClose` callback on the `create-full-page` element to handle dismissal
+6. **Submit Handler**: Set `onRequestSubmit` callback on the `create-full-page` element for form submission
+7. **Customization**: Modify the copied pattern files to fit your specific needs
+
+## Example Usage
+
+### Standard CreateFullPage
+
+<Canvas of={createFullPageStories.CreateFullPage} />
+
+### With Sections
+
+Demonstrates how to organize form fields into logical sections within a step.
+
+<Canvas of={createFullPageStories.CreateFullPageWithSections} />
+
+### With Header
+
+Shows breadcrumbs and page title in the header.
+
+<Canvas of={createFullPageStories.CreateFullPageWithHeader} />
+
+### With Step in Error State
+
+Demonstrates error handling and validation in steps.
+
+<Canvas of={createFullPageStories.CreateFullPageWithStepInErrorState} />
+
+### With Global Header
+
+Shows integration with Carbon's global header and side navigation.
+
+<Canvas of={createFullPageStories.CreateFullPageWithGlobalHeader} />
+
+## Customization
+
+Here's a minimal example showing how to use the create-full-page pattern:
+
+```javascript
+// Import the pattern components
+import './components/create-full-page/index.js';
+
+// Import Carbon Web Components
+import '@carbon/web-components/es/components/text-input/index.js';
+import '@carbon/web-components/es/components/grid/index.js';
+```
+
+**HTML:**
+```html
+<create-full-page
+  secondary-title="Create topic"
+  next-button-text="Next"
+  back-button-text="Back"
+  cancel-button-text="Cancel"
+  submit-button-text="Create"
+  modal-title="Are you sure you want to cancel?"
+  modal-description="If you cancel, the information you have entered won't be saved."
+  modal-danger-button-text="Cancel partition"
+  modal-secondary-button-text="Return to form"
+>
+  <create-full-page-step
+    slot="steps"
+    title="Partition"
+    subtitle="One or more partitions make up a topic."
+    description="A partition is an ordered list of messages."
+  >
+    <cds-grid>
+      <cds-column xlg="5" lg="5" md="4" sm="4">
+        <cds-text-input
+          id="topic-name"
+          label="Topic name"
+          placeholder="Enter topic name"
+          required
+        >
+        </cds-text-input>
+      </cds-column>
+    </cds-grid>
+  </create-full-page-step>
+
+  <create-full-page-step
+    slot="steps"
+    title="Configuration"
+    description="Configure your topic settings."
+  >
+    <cds-grid>
+      <cds-column xlg="5" lg="5" md="4" sm="4">
+        <p>Additional configuration options...</p>
+      </cds-column>
+    </cds-grid>
+  </create-full-page-step>
+</create-full-page>
+```
+
+## Architecture
+
+The CreateFullPage pattern is built on top of:
+
+- **LitElement**: Base class for creating reactive web components with Shadow DOM
+- **Lit Reactive Properties**: Using `@state()` and `@property()` decorators for reactive state management
+- **Carbon Web Components**: For form inputs (`cds-text-input`, `cds-number-input`, `cds-radio-button`, etc.), layout (`cds-grid`, `cds-column`), and UI elements
+- **Carbon IBM Products Web Components**:
+  - `c4p-page-header`: Handles page header layout
+  - `c4p-page-header-breadcrumbs-set`: Handles breadcrumbs with overflow
+- **Custom Web Components**:
+  - `create-influencer`: Displays vertical progress indicator
+
+### Step Management
+
+Steps are managed internally by the `create-full-page` web component:
+
+- Current step tracking with reactive state
+- Navigation methods (next, previous, go to step)
+- Step data extraction from slotted `create-full-page-step` elements
+- Step visibility management
+
+**Important**: Always use the `slot="steps"` attribute on `create-full-page-step` elements for proper step management.
+
+### Layout Structure
+
+The full-page layout consists of:
+
+1. **Header** (optional): Breadcrumbs and page title via `c4p-page-header` and `c4p-page-header-breadcrumbs-set`
+2. **Main Content Area**:
+   - **Influencer Panel** (left): Vertical progress indicator via `create-influencer`
+   - **Form Area** (right): Step content with form fields
+3. **Footer**: Action buttons (Cancel, Back, Next/Submit)
+
+### State Management
+
+- **Step state**: Managed internally by the `create-full-page` web component using `@state()` decorators
+- **Form state**: Managed in your wrapper component using `@state()` decorators and passed to form inputs
+- **Loading state**: Managed internally for async `onNext` handlers
+- **Validation**: Each step can have its own `onNext` handler for validation
+- **Reactive updates**: Lit's reactive property system automatically re-renders when state changes
+
+### Form Validation
+
+All forms within the `CreateFullPage` should follow `@carbon/ibm-products`
+guidelines for form validation:
+
+- The `Submit` button should be disabled until all required inputs are filled in
+  and valid
+- All required inputs should only throw an invalid error after the element loses
+  focus
+- All optional form fields should have an `(optional)` text at the end of the
+  input `labelText`. Optional should always be in parentheses
+- Use the `disableSubmit` prop on `CreateFullPageStep` to control button state
+- Use the `onNext` handler to perform async validation before proceeding
+
+You can find more information on how to validate your form fields in
+[Carbon's Form usage page](https://carbondesignsystem.com/components/form/usage/).
+
+## Feedback
+
+Help us improve this component by providing feedback through
+[GitHub issues](https://github.com/carbon-design-system/ibm-products/issues/new/choose).

@@ -1,0 +1,182 @@
+import { Story, Controls, Source, Canvas } from '@storybook/addon-docs/blocks';
+import { CodesandboxLink } from '../../global/js/utils/story-helper';
+import * as stories from './CreateTearsheet.stories';
+
+# CreateTearsheet Pattern
+
+[Usage guidelines](https://pages.github.ibm.com/carbon/ibm-products/patterns/create-flows/usage/#wide-tearsheet)
+
+## Table of Contents
+
+- [Overview](#overview)
+- [What is a Pattern?](#what-is-a-pattern)
+- [Getting Started](#getting-started)
+- [Example Usage](#example-usage)
+- [Architecture](#architecture)
+- [Customization](#customization)
+
+## Overview
+
+The `CreateTearsheet` is a **pattern** (not a component) that provides a recipe
+for building multi-step workflow interfaces for creating resources or completing
+complex tasks. It demonstrates how to compose the Tearsheet component with
+StepFlow from `@carbon/utilities-react` for managing step navigation and state.
+
+> 💡 Try our
+> [StackBlitz example](https://stackblitz.com/github/carbon-design-system/ibm-products/tree/main/packages/ibm-products/src/patterns/CreateTearsheet/example)
+> for a complete implementation.
+
+## What is a Pattern?
+
+Unlike components that are exported from the package, **patterns are recipes**
+that you copy into your codebase and customize to fit your specific needs. This
+approach offers:
+
+- **Full Control**: Modify the code to match your exact requirements
+- **No Breaking Changes**: Updates to the pattern don't affect your
+  implementation
+- **Seamless Customization**: Adapt the pattern without workarounds or prop
+  drilling
+- **Scalability**: Build upon the foundation with your own features
+
+The CreateTearsheet pattern consists of:
+
+- `CreateTearsheet.tsx` - Main tearsheet wrapper component
+- `CreateTearsheetStep.tsx` - Individual step component
+- `CreateTearsheetContext.tsx` - Context for sharing state
+- Styles and utilities
+
+## Getting Started
+
+1. **Copy the pattern code** from the
+   [example directory](https://github.com/carbon-design-system/ibm-products/tree/main/packages/ibm-products/src/patterns/CreateTearsheet/example/components)
+   into your project
+2. **Install dependencies**: `@carbon/react`, `@carbon/utilities-react`,
+   `@carbon/ibm-products`
+3. **Import and use** the pattern components in your application
+4. **Customize** as needed for your use case
+
+The pattern uses:
+
+- **Tearsheet component** (`@carbon/ibm-products`): Provides the modal container
+  and layout
+- **StepProvider** (`@carbon/utilities-react`): Manages step navigation and form
+  state
+- **Carbon React components**: For form inputs and UI elements
+
+### Key Features
+
+- **Multi-step workflow**: Guide users through complex creation processes
+- **Progress indication**: Visual feedback with vertical progress indicators
+- **Responsive design**: Progress indicator automatically switches to a side
+  panel on small screens
+- **Step management**: Built-in navigation with back, next, and submit actions
+- **Form state management**: Integrated state management across steps
+
+### Key Implementation Steps
+
+1. **Copy Pattern Files**: Copy the pattern components from the example
+   directory into your project
+2. **StepProvider Wrapper**: Always wrap `CreateTearsheet` with `StepProvider`
+   for step management
+3. **Form State Management**: Use `useStepContext()` hook to access and update
+   form state across steps
+4. **Open State**: Manage `open` state in parent component and pass both `open`
+   and `setOpen` props
+5. **Customization**: Modify the copied pattern files to fit your specific needs
+
+## Customization
+
+Since this is a pattern (not a component), you have full control to customize:
+
+### Modify Validation Logic
+
+Edit the `handleNextDisabledState` function in your copied
+`CreateTearsheet.tsx`:
+
+```jsx
+const handleNextDisabledState = (formState, currentStep) => {
+  // Add your custom validation logic
+  if (currentStep === 1 && !formState?.requiredField) {
+    return true;
+  }
+  return false;
+};
+```
+
+### Add Custom Buttons
+
+Modify the footer section in `CreateTearsheet.tsx`:
+
+```jsx
+<Tearsheet.Footer>
+  <ButtonSet>
+    {/* Add your custom buttons */}
+    <Button kind="ghost">Save Draft</Button>
+    <Button kind="secondary" onClick={handlePrevious}>
+      Back
+    </Button>
+    <Button onClick={handleNext}>Next</Button>
+  </ButtonSet>
+</Tearsheet.Footer>
+```
+
+### Customize Step Layout
+
+Edit `CreateTearsheetStep.tsx` to change the layout structure:
+
+```jsx
+// Modify the Grid/Column structure
+<Grid>
+  <Column xlg={16} lg={16} md={8} sm={4}>
+    {/* Your custom layout */}
+  </Column>
+</Grid>
+```
+
+## Architecture
+
+The CreateTearsheet pattern is built on top of:
+
+- **Tearsheet component** (`@carbon/ibm-products`): Provides the modal container
+  and layout with responsive behavior
+- **StepProvider** (`@carbon/utilities-react`): Manages step navigation and
+  state through `useStepContext`
+- **React Context**: Custom `CreateTearsheetContext` for sharing state like
+  `open` prop
+- **Carbon React components**: For form inputs and UI elements
+
+### Step Management
+
+Steps are managed using the `StepProvider` and `useStepContext` from
+`@carbon/utilities-react`. The provider wraps the CreateTearsheet and provides:
+
+- Current step tracking
+- Navigation methods (`handleNext`, `handlePrevious`, `handleGoToStep`)
+- Form state management (`formState`, `setFormState`)
+- Total step count
+
+**Important**: Always wrap your `CreateTearsheet` with `<StepProvider>` for
+proper step management.
+
+### Responsive Behavior
+
+The progress indicator adapts to screen size:
+
+- **Large screens**: Vertical progress indicator displayed in the influencer
+  panel
+- **Small screens**: Progress indicator automatically switches to a side panel
+  for better mobile experience
+
+### State Management
+
+- **Step state**: Managed by `StepProvider` from `@carbon/utilities-react`
+- **Form state**: Shared across steps via `useStepContext()` hook
+- **Open state**: Managed in parent component and passed via props
+- **Auto-reset**: Tearsheet automatically resets to step 1 when closed using
+  `useEffect`
+
+## Feedback
+
+Help us improve this component by providing feedback through
+[GitHub issues](https://github.com/carbon-design-system/ibm-products/issues/new/choose).

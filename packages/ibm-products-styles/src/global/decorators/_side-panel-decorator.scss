@@ -1,0 +1,53 @@
+/**
+ * Copyright IBM Corp. 2023, 2023
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+@mixin side-panel-decorator($prefix) {
+  .sbdocs {
+    // styles to apply to docs page iframe views of stories
+    .#{$prefix}container {
+      display: flex;
+      background-color: var(--cds-background, #ffffff);
+      block-size: 60vh;
+      box-shadow: 0 0 4px 1px var(--cds-layer-accent-01, #e0e0e0);
+      color: var(--cds-text-primary, #161616);
+    }
+    .#{$prefix}content {
+      block-size: unset;
+    }
+  }
+
+  // styles applied to story pages
+  .#{$prefix}content {
+    display: flex;
+    flex-grow: 1;
+    align-items: center;
+    justify-content: center;
+    block-size: calc(100vh - 48px);
+
+    // dynamic prefix not working here, and this file is out of scope in the configuration
+    > div:first-of-type {
+      > div:last-of-type[class*='--annotation__content'] {
+        display: flex;
+        justify-content: center;
+      }
+    }
+  }
+
+  .#{$prefix}toggle {
+    margin: auto;
+  }
+
+  .sb-show-main.sb-main-fullscreen {
+    // sidepanel sets overflow hidden to body when open, which is right in context of irl application but in story page, as we are rendering many isolated sidepanel variants, we need to unset this for presentational purposes
+    /* stylelint-disable-next-line declaration-no-important */
+    overflow: unset !important;
+  }
+
+  .sbdocs .docs-story > div {
+    overflow: hidden;
+  }
+}

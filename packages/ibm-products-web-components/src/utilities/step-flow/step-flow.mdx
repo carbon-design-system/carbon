@@ -1,0 +1,192 @@
+import { ArgTypes, Markdown, Meta } from '@storybook/addon-docs/blocks';
+import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
+import StepFlowStories from './step-flow.stories';
+
+<Meta of={StepFlowStories} />
+
+# Step flows
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Example usage](#example-usage)
+
+## Overview
+
+The step flow utility can be used to compose stepping experiences across any
+variation of components. This utility allows for stepping as commonly seen in
+the `CreateTearsheet` and `CreateFullPage` components from `@carbon/ibm-products` (react), but through a more
+composable and headless delivery and specifically built for use with web components. This allows for the flexibility to incorporate
+stepped experiences within any component.
+
+Included assets:
+
+- `StepInstance`
+- `step-group`
+
+## Getting started
+
+Here's a quick example to get you started.
+
+### HTML
+
+Basic usage example, initializes a `StepInstance` and access the step data via `this._stepInfo.data`.
+```ts
+@customElement("my-stepped-component")
+export class MySteppedComponent extends LitElement {
+  private _stepInfo = new StepInstance();
+  render() {
+    const { totalSteps, currentStep } = this._stepInfo.data;
+    return html`
+    <c4p-tearsheet
+      class=${'step-tearsheet-with-util'}
+      selector-initial-focus=${'#tearsheet-story-text-input-a'}
+      ?open=${this._open}
+      width=${'wide'}
+      influencer-placement=${'left'}
+      prevent-close-on-click-outside
+    >
+      ${currentStep === 0 ? html`step 1` : nothing}
+      ${currentStep === 1 ? html`step 2` : nothing}
+      ${currentStep === 2 ? html`step 3` : nothing}
+      ${currentStep === 3 ? html`step 4` : nothing}
+    </c4p-tearsheet>
+    `;
+  }
+}
+```
+
+Updating form state example, uses `StepInstance.updateFormState` method to save form state within the step instance. This allows for storing form data that can be used in sub-sequent steps or when submitting.
+```ts
+@customElement("my-stepped-component")
+export class MySteppedComponent extends LitElement {
+  private _stepInfo = new StepInstance();
+
+  private _handleEmailInput(e) {
+    const savedFormState = structuredClone(
+      this._stepInfo.data.formState
+    ) as FormStateType;
+    savedFormState.email = e.target.value;
+    this._stepInfo.updateFormState = savedFormState;
+  }
+
+  render() {
+    const { totalSteps, currentStep } = this._stepInfo.data;
+    return html`
+      <c4p-tearsheet
+        class=${'step-tearsheet-with-util'}
+        selector-initial-focus=${'#tearsheet-story-text-input-a'}
+        ?open=${this._open}
+        width=${'wide'}
+        influencer-placement=${'left'}
+        prevent-close-on-click-outside
+      >
+      ${currentStep === 0 ? html`
+        <cds-text-input
+          label="Email"
+          id="tearsheet-story-text-input-a"
+          value=${this._email}
+          @input="${this._handleEmailInput}"
+        ></cds-text-input>` : nothing}
+      ${currentStep === 1 ? html`step 2` : nothing}
+      ${currentStep === 2 ? html`step 3` : nothing}
+      ${currentStep === 3 ? html`step 4` : nothing}
+    </div>
+    </c4p-tearsheet>
+    `;
+  }
+}
+```
+
+Action buttons example, this brings everything together by adding the ability to move between steps via `StepInstance.handleNext()` and `StepInstance.handlePrevious()`, as well as showing how to reset via `StepInstance.reset()` if the cancel button is clicked. This will reset the form state and current step.
+```ts
+@customElement("my-stepped-component")
+export class MySteppedComponent extends LitElement {
+  @state()
+  private _open: boolean = false;
+
+  @state()
+  private _email: string = '';
+
+  @state()
+  private _city: string = '';
+
+  @state()
+  private _state: string = '';
+
+  private _stepInfo = new StepInstance();
+
+  private _handleCancelButton() {
+    this._open = false;
+    this._stepInfo.reset();
+  }
+
+  private _handleBackButton() {
+    const { currentStep } = this._stepInfo.data;
+    if (currentStep === 0) {
+      return;
+    }
+    return this._stepInfo.handlePrevious();
+  }
+
+  private _handleNextButton() {
+    const { currentStep, totalSteps } = this._stepInfo.data;
+    if (currentStep + 1 === totalSteps) {
+      this._open = false;
+      this._stepInfo.reset();
+      return;
+    }
+    return this._stepInfo.handleNext();
+  }
+
+  private _handleEmailInput(e) {
+    const savedFormState = structuredClone(
+      this._stepInfo.data.formState
+    ) as FormStateType;
+    savedFormState.email = e.target.value;
+    this._stepInfo.updateFormState = savedFormState;
+  }
+
+  render() {
+    const { totalSteps, currentStep } = this._stepInfo.data;
+    return html`
+    <c4p-tearsheet
+      class=${'step-tearsheet-with-util'}
+      selector-initial-focus=${'#tearsheet-story-text-input-a'}
+      ?open=${this._open}
+      width=${'wide'}
+      influencer-placement=${'left'}
+      prevent-close-on-click-outside
+    >
+      ${currentStep === 0 ? html`
+        <cds-text-input
+          label="Email"
+          id="tearsheet-story-text-input-a"
+          value=${this._email}
+          @input="${this._handleEmailInput}"
+        ></cds-text-input>` : nothing}
+      ${currentStep === 1 ? html`step 2` : nothing}
+      ${currentStep === 2 ? html`step 3` : nothing}
+      ${currentStep === 3 ? html`step 4` : nothing}
+      <cds-button
+        slot="actions"
+        kind=${'ghost'}
+        @click=${this._handleCancelButton}
+      >
+        Cancel
+      </cds-button>
+      <cds-button
+        slot="actions"
+        kind=${'secondary'}
+        @click=${this._handleBackButton}
+      >
+        Back
+      </cds-button>
+      <cds-button slot="actions" @click=${this._handleNextButton}>
+        ${currentStep + 1 < totalSteps ? 'Next' : 'Submit'}
+      </cds-button>
+    </c4p-tearsheet>
+    `;
+  }
+}
+```

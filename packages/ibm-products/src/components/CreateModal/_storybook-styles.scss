@@ -1,0 +1,53 @@
+//
+// Copyright IBM Corp. 2021, 2021
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use '@carbon/styles/scss/components/number-input';
+@use '@carbon/styles/scss/components/text-area';
+@use '@carbon/styles/scss/components/text-input';
+@use '@carbon/styles/scss/components/dropdown';
+@use '@carbon/styles/scss/components/date-picker';
+@use '@carbon/styles/scss/components/radio-button';
+@use '@carbon/styles/scss/components/progress-indicator';
+@use '@carbon/styles/scss/components/tooltip';
+@use '@carbon/styles/scss/components/modal';
+@use '@carbon/styles/scss/spacing' as *;
+@use 'ALIAS_STORY_STYLE_CONFIG' as c4p-settings;
+
+.#{c4p-settings.$carbon-prefix}--number {
+  min-inline-size: 100%;
+}
+
+.#{c4p-settings.$carbon-prefix}--number__control-btn::before {
+  background-color: transparent;
+}
+
+.#{c4p-settings.$carbon-prefix}--number__control-btn::after {
+  background-color: transparent;
+}
+
+.#{c4p-settings.$carbon-prefix}--date-picker {
+  min-inline-size: 100%;
+}
+
+.#{c4p-settings.$carbon-prefix}--date-picker-container {
+  min-inline-size: 100%;
+}
+
+.#{c4p-settings.$carbon-prefix}--date-picker.#{c4p-settings.$carbon-prefix}--date-picker--single
+  .#{c4p-settings.$carbon-prefix}--date-picker__input {
+  min-inline-size: 100%;
+}
+
+.#{c4p-settings.$carbon-prefix}--list-box__menu-icon {
+  inset-block-start: $spacing-03;
+}
+
+.example-wrapper {
+  display: grid;
+  grid-gap: $spacing-05;
+  grid-template-columns: 1fr 1fr;
+}

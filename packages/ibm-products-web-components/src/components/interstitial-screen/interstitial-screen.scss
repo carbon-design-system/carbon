@@ -1,0 +1,28 @@
+/*
+* Copyright IBM Corp. 2025, 2025
+*
+* This source code is licensed under the Apache-2.0 license found in the
+* LICENSE file in the root directory of this source tree.
+*/
+
+$css--plex: true !default;
+
+@use 'sass:map';
+
+@use '@carbon/styles/scss/reset';
+
+@use '@carbon/ibm-products-styles/scss/components/InterstitialScreen/index' as *;
+
+$prefix: 'c4p';
+$block-class: #{$prefix}--interstitial-screen;
+
+:host([fullscreen]) {
+  @extend .#{$block-class}--full-screen;
+  .#{$block-class}--container {
+    @extend .#{$block-class}--container;
+  }
+}
+
+.#{$block-class}__body-container {
+  padding: 0;
+}

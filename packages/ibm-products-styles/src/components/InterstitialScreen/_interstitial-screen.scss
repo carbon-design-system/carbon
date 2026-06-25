@@ -1,0 +1,186 @@
+//
+// Copyright IBM Corp. 2024, 2025
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+/* stylelint-disable max-nesting-depth */
+/* stylelint-disable declaration-no-important */
+
+// Standard imports.
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/breakpoint' as *;
+@use '@carbon/styles/scss/colors' as *;
+@use '@carbon/styles/scss/type';
+@use '@carbon/styles/scss/config' as carbon-config;
+
+@use '../../global/styles/project-settings' as c4p-settings;
+@use '../../global/styles/mixins';
+
+@use '@carbon/utilities/scss/carousel/_index';
+
+// The block part of our conventional BEM class names (blockClass__E--M).
+$block-class: #{c4p-settings.$pkg-prefix}--interstitial-screen;
+$carousel: #{c4p-settings.$pkg-prefix}--carousel;
+$carousel-item: #{c4p-settings.$pkg-prefix}--carousel__item;
+$one-grid-column: calc(100% / 16);
+
+.#{$block-class} {
+  $block: &;
+
+  &--body {
+    overflow: hidden auto;
+    flex-grow: 1;
+    padding: 0;
+    margin: 0;
+    background-color: $background;
+  }
+
+  &--progress {
+    overflow: auto;
+    margin-block-end: $spacing-04;
+  }
+
+  &__carousel {
+    block-size: 100%;
+    .#{$carousel-item} {
+      flex: 0 0 100%;
+      scroll-snap-align: start;
+    }
+  }
+
+  &--internal-body {
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  &--content {
+    block-size: 100%;
+  }
+
+  // HEADER
+  &--internal-header {
+    position: relative;
+    background-color: $background;
+    margin-block-end: 0 !important;
+    padding-block-start: $spacing-06;
+    padding-inline-start: $spacing-07;
+
+    @include breakpoint-down(md) {
+      padding-inline: $spacing-05;
+    }
+
+    &:empty {
+      min-block-size: 0;
+    }
+
+    .#{$block-class}--titleContainer {
+      margin-block-end: $spacing-05;
+
+      h1 {
+        @include type.type-style('productive-heading-04');
+
+        margin-block-end: $spacing-03;
+
+        &:empty {
+          padding: 0;
+        }
+      }
+
+      h2 {
+        @include type.type-style('productive-heading-03');
+
+        &:empty {
+          padding: 0;
+        }
+      }
+    }
+
+    &--has-title {
+      background: $layer-01;
+      border-block-end: 1px solid $border-subtle-01;
+
+      #{$block}--progress {
+        margin-block-start: 0;
+      }
+    }
+  }
+
+  // FOOTER
+  &--footer {
+    background: $background;
+    border-block-start: 1px solid $border-subtle-01;
+    inline-size: 100%;
+
+    @include breakpoint-down(md) {
+      block-size: auto;
+    }
+
+    // ButtonSet wrapper
+    .#{carbon-config.$prefix}--btn-set {
+      display: flex;
+      justify-content: flex-end;
+      inline-size: 100%;
+    }
+
+    // On small screens, split width equally among all buttons
+    @include breakpoint-down(md) {
+      #{$block}--prev-btn,
+      #{$block}--next-btn,
+      #{$block}--start-btn,
+      #{$block}--skip-btn {
+        flex: 1 1 0;
+        inline-size: auto;
+        max-inline-size: none;
+        min-inline-size: 0;
+      }
+    }
+
+    // On larger screens, fixed widths for action buttons, flexible skip
+    @include breakpoint(md) {
+      #{$block}--prev-btn,
+      #{$block}--next-btn,
+      #{$block}--start-btn {
+        flex-shrink: 0;
+        inline-size: calc($spacing-11 * 3); // 240px
+        max-inline-size: 15rem;
+      }
+
+      #{$block}--skip-btn {
+        flex: 1 1 auto;
+        max-inline-size: none;
+      }
+    }
+
+    .#{carbon-config.$prefix}--inline-loading {
+      position: absolute;
+      inline-size: $spacing-07;
+      inset-block-start: 0;
+      inset-inline-end: 0;
+    }
+  }
+
+  &--footer-controls {
+    display: flex;
+    flex-direction: row;
+    // flex: 1;
+    margin-inline-start: auto;
+  }
+
+  // FULL SCREEN (settings exclusive of "MODAL")
+  &--full-screen {
+    position: fixed;
+    inset-block-start: 0;
+    inset-inline: 0;
+    #{$block}--container {
+      display: flex;
+      flex-direction: column;
+      padding: 0;
+      margin: 0;
+      block-size: 100vh;
+      max-inline-size: 100vw;
+    }
+  }
+}

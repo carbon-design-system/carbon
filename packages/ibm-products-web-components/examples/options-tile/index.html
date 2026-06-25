@@ -1,0 +1,49 @@
+<!--
+@license
+
+Copyright IBM Corp. 2025
+
+This source code is licensed under the Apache-2.0 license found in the
+LICENSE file in the root directory of this source tree.
+-->
+
+<html>
+  <head>
+    <title>carbon-web-components example</title>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="src/styles.scss" />
+    <style>
+      /* Suppress custom element until styles are loaded */
+      cds-ai-label:not(:defined) {
+        display: none;
+      }
+    </style>
+    <script type="module" src="src/index.js"></script>
+  </head>
+  <body>
+    <c4p-options-tile
+      id="my-tile"
+      size="lg"
+      title="A title describing all included content."
+      titleId="my-title-title"
+    >
+      <div slot="summary">
+        <span>A summary of the current state of content.</span>
+      </div>
+      <div slot="body">
+        Additional detail or content will be shown when expanded.
+      </div>
+    </c4p-options-tile>
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        const tile = document.querySelector('c4p-options-tile');
+        tile.addEventListener('c4p-options-tile-open', () => {
+          tile?.setAttribute('open', 'true');
+        });
+        tile.addEventListener('c4p-options-tile-close', () => {
+          tile?.removeAttribute('open');
+        });
+      });
+    </script>
+  </body>
+</html>

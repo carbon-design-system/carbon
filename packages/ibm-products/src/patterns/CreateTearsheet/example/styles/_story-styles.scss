@@ -1,0 +1,60 @@
+//
+// Copyright IBM Corp. 2026
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use '@carbon/styles/scss/type';
+@use '@carbon/type/scss/font-family';
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/config' as carbon-config;
+
+// Preview component styles for create-tearsheet-step
+.step__description {
+  @include type.type-style('body-compact-01');
+
+  padding-block-end: $spacing-04;
+}
+
+p.step__description:last-of-type {
+  padding-block-end: $spacing-07;
+}
+
+.create-tearsheet-step____step--title {
+  @include font-family.font-weight('semibold');
+}
+
+.create-tearsheet-step__fieldset .#{carbon-config.$prefix}--form-item {
+  margin-block-end: $spacing-05;
+}
+
+// Tile group styles
+.#{carbon-config.$prefix}--tile-group div {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+// Custom tile styles
+.c4p--create-tearsheet-step--custom-tile {
+  block-size: 240px;
+  inline-size: 280px;
+  margin-inline-end: $spacing-05;
+}
+
+.c4p--create-tearsheet-step--custom-tile
+  .c4p--empty-state__illustration.c4p--empty-state__illustration--lg {
+  block-size: 120px;
+  min-inline-size: 120px;
+}
+
+.c4p--create-tearsheet-step--custom-tile-label {
+  position: absolute;
+  inset-block-end: $spacing-05;
+  inset-inline-start: $spacing-05;
+}
+
+// Error toggle style
+.create-tearsheet-step__error--toggle {
+  margin-block-start: $spacing-05;
+}

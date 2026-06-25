@@ -1,0 +1,92 @@
+<!--
+@license
+
+Copyright IBM Corp. 2025
+
+This source code is licensed under the Apache-2.0 license found in the
+LICENSE file in the root directory of this source tree.
+-->
+
+<html>
+<head>
+  <title>carbon-web-components example</title>
+  <meta charset="UTF-8" />
+  <link rel="stylesheet" href="src/styles.scss" />
+  <style>
+    /* Suppress custom element until styles are loaded */
+    cds-ai-label:not(:defined) {
+      display: none;
+    }
+  </style>
+  <script type="module" src="src/index.js"></script>
+</head>
+<body>
+  <div class="example-container">
+    <div class="example-header"></div>
+    <div id="page-content-selector" class="example-content">
+      <cds-button id="toggle-button">Toggle About Modal</cds-button>
+    </div>
+  </div>
+  <c4p-about-modal
+  closeIconDescription="close"
+  copyrightText="Copyright © IBM Corp. 2020, 2023"
+  aria-label="label"
+></c4p-about-modal>
+<script>
+
+document.addEventListener("DOMContentLoaded", () => {
+  const modal = document.querySelector("c4p-about-modal");
+  const logo = document.createElement("img");
+  logo.src = "./src/assets/example-logo.svg";
+  logo.alt = "Example product or service logo";
+  logo.style.maxWidth = "6rem";
+
+  const additionalInfo = document.createElement("div");
+  const p = document.createElement("p");
+  p.className = "c4p--about-modal__footer-label";
+  p.textContent = "Powered by";
+  const grafanaImg = document.createElement("img");
+  grafanaImg.src = "./src/assets/grafana-logo.png";;
+  grafanaImg.alt = "Grafana";
+  grafanaImg.className = `c4p--about-modal__footer--tech-logo`;
+  const ansibleImg = document.createElement("img");
+  ansibleImg.src = "./src/assets/ansible-logo.png";;
+  ansibleImg.alt = "Ansible";
+  ansibleImg.className = `c4p--about-modal__footer--tech-logo`;
+  const jsImg = document.createElement("img");
+  jsImg.src = "./src/assets/js-logo.png";;
+  jsImg.alt = "JavaScript";
+  jsImg.className = `c4p--about-modal__footer--tech-logo`;
+  additionalInfo.appendChild(p);
+  additionalInfo.appendChild(grafanaImg);
+  additionalInfo.appendChild(ansibleImg);
+  additionalInfo.appendChild(jsImg);
+
+  const links = [];
+  const index = 3;
+  for (let i = 0; i < index; i++) {
+    const link = document.createElement("cds-link");
+    link.setAttribute("href", "#");
+    link.textContent = "Link action";
+    links.push(link);
+  }
+
+  if (modal) {
+    modal.logo = logo;
+    modal.title = `IBM Product name`;
+    modal.version = `Version 0.0.0`;
+    modal.additionalInfo = additionalInfo;  
+    modal.content = `This Web site contains proprietary notices and copyright
+      information, the terms of which must be observed and followed. Please see
+      the tab entitled 'Copyright and trademark information' for related
+      information. IBM grants you a non-exclusive, non-transferable, limited
+      permission to access and display the Web pages within this site as a
+      customer or potential customer of IBM provided you comply with these Terms
+      of Use, and all copyright, trademark, and other proprietary notices remain
+      intact.`;
+    modal.links = links;
+  }
+});
+</script>
+</body>
+</html>

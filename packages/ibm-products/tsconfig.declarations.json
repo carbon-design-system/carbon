@@ -1,0 +1,31 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "outDir": "./es",
+    "rootDir": "./src",
+    "declaration": true,
+    "declarationMap": true,
+    "emitDeclarationOnly": true,
+    "skipLibCheck": true
+  },
+  "include": ["src/**/*"],
+  "exclude": [
+    "**/*.test.ts",
+    "**/*.test.tsx",
+    "**/*.test.js",
+    "**/*.test.jsx",
+    "**/*.stories.ts",
+    "**/*.stories.tsx",
+    "**/*.stories.js",
+    "**/*.stories.jsx",
+    "**/*.docs-page.jsx",
+    "**/*.docs-page.tsx",
+    "**/patterns/**",
+    "**/*.figma.tsx",
+    "**/__tests__/**",
+    "**/node_modules/**",
+    "src/global/js/utils/StoryDocsPage.jsx",
+    "src/global/js/story-parts/**",
+    "src/global/decorators/**"
+  ]
+}

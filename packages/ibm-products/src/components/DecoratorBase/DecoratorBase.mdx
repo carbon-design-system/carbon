@@ -1,0 +1,41 @@
+import { Story, Controls, Source, Canvas } from '@storybook/addon-docs/blocks';
+import { CodesandboxLink } from '../../global/js/utils/story-helper';
+import { DecoratorBase } from '.';
+import * as DecoratorBaseStories from './DecoratorBase.internal.stories';
+
+# DecoratorBase
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Example usage](#example-usage)
+- [Example setLabelTitle()](#example-setlabeltitle)
+- [Component API](#component-api)
+
+## Overview
+
+_**The DecoratorBase is for internal use only and is used to build the other
+Decorator types.**_
+
+## Example usage
+
+<Canvas>
+  <Story of={DecoratorBaseStories.Default} />
+</Canvas>
+
+## Example **setLabelTitle()**
+
+```js
+setLabelTitle: (score, scoreThresholds, magnitude) => {
+  if (typeof score !== 'number') {
+    return 'Unknown score';
+  }
+  return `"${magnitude}" magnitude. Score ${score} out of ${
+    scoreThresholds[scoreThresholds.length - 1]
+  }`;
+},
+```
+
+## Component API
+
+<Controls />

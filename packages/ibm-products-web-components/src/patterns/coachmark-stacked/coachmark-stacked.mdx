@@ -1,0 +1,236 @@
+import { Markdown, Meta, Story, Canvas } from '@storybook/addon-docs/blocks';
+import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
+import * as CoachmarkStackedStories from './coachmark-stacked.stories';
+
+<Meta of={CoachmarkStackedStories} />
+
+# CoachmarkStacked
+
+[Usage guidelines](https://pages.github.ibm.com/carbon/ibm-products/components/onboarding/coachmark/usage/#stacked)
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Example usage](#example-usage)
+
+## Overview
+
+CoachmarkStacked appears fixed at the bottom right corner of the browser window
+when the page loads. It starts in a minimized state, to cover as little of the
+UI as possible; when shown in tests as expanded by default, users immediately
+closed it without reading, to get it out of the way. CoachmarkStacked can
+include ghost buttons to trigger another layer to slide up to stack on top of
+it, much like the stacked Tearsheet. When dismissed, the stacked layer exits by
+sliding back down, revealing the main layer. When the main layer is dismissed,
+it slides down off the page. Only one layer can be stacked on the main layer.
+
+## Coded examples
+
+Patterns have multiple ways of accomplishing a user need and typically use a
+combination of components with additional design considerations. The pattern
+code we share is meant to serve as an example implementation that can be built
+and extended further.
+
+### Ingredients
+
+To build this pattern, you'll need the following components:
+
+To build this pattern, we recommend including the following components:
+
+- [Coachmark](https://ibm-products-web-components.carbondesignsystem.com/?path=/docs/components-coachmark)
+- [cds-button](https://web-components.carbondesignsystem.com/?path=/docs/components-button)
+- [cds-link](https://web-components.carbondesignsystem.com/?path=/docs/components-link--overview)
+- [Carousel utility](https://github.com/carbon-design-system/carbon/blob/main/packages/utilities/src/carousel/README.md)
+
+### Implementation Notes
+
+#### Required Styles
+The tagline component requires both JavaScript and SCSS imports:
+```scss
+@use '@carbon/ibm-products-web-components/scss/components/coachmark/coachmark-tagline/coachmark-tagline.scss';
+```
+
+#### Carousel Integration
+Use the `@carbon/utilities` carousel for managing slide navigation:
+- Initialize after component first render
+- Handle view change events to update button states
+- Manage focus and accessibility attributes
+
+> 💡 Check our
+> [Stackblitz](https://stackblitz.com/github/carbon-design-system/ibm-products/tree/main/packages/ibm-products-web-components/examples/coachmark-stacked)
+> example implementation.
+
+[![Edit carbon-web-components](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/carbon-design-system/ibm-products/tree/main/packages/ibm-products-web-components/examples/coachmark-stacked)
+
+### Example Usage
+
+<Canvas of={CoachmarkStackedStories.Default} />
+
+## Getting started
+
+Here's a quick example to get you started.
+
+#### JS (via import)
+
+```javascript
+import { POPOVER_ALIGNMENT } from '@carbon/web-components/es/components/popover/defs.js';
+import '@carbon/ibm-products-web-components/es/components/coachmark/index.js';
+import '@carbon/ibm-products-web-components/es/components/coachmark/coachmark-tagline/index.js';
+import '@carbon/web-components/es/components/button/button.js';
+import { InitCarousel, initCarousel } from '@carbon/utilities';
+import '@carbon/web-components/es/components/link/index.js';
+```
+
+### HTML
+
+```html
+    <!-- Parent Coachmark -->
+        <c4p-coachmark
+          ?open=${this._parentOpen}
+          align=${POPOVER_ALIGNMENT.TOP}
+          .highContrast=${true}
+          .caret=${false}
+          @c4p-coachmark-request-close=${this.handleParentClose}
+        >
+          <c4p-coachmark-tagline
+            id="CoachmarkTagline"
+            title="Why are there two types of severity scores?"
+            close-icon-description="close"
+            ?open=${this._parentOpen}
+            @c4p-coachmark-tagline-cta-click=${this.handleTaglineClick}
+            slot="trigger"
+          >
+          </c4p-coachmark-tagline>
+          <c4p-coachmark-header closeIconDescription="Close"></c4p-coachmark-header>
+          <c4p-coachmark-body class="coachmark-stacked-home__body">
+            <div class="coachmark-stacked-home-element">
+              ${iconLoader(Idea20, { class: 'coachmark-stacked-home__icon-idea' })}
+            </div>
+            <div class="coachmark-stacked-home__content">
+              <h2 class="coachmark-stacked-home__title">Example title</h2>
+              <p class="coachmark-stacked-home__body">This is an example of a description</p>
+            </div>
+            <ul class="coachmark-stacked-home__nav-links">
+              ${parentItems.map((item) => html`
+                <li key=${item.id}>
+                  <cds-button
+                    id="parent-button-${item.id}"
+                    kind="ghost"
+                    size="sm"
+                    class="nav-button"
+                    @click=${(e: Event) => this.handleChildButtonClick(item.id, e)}
+                  >
+                    ${item.label}
+                  </cds-button>
+                </li>
+              `)}
+            </ul>
+            <cds-button
+              size="sm"
+              @click=${this.handleParentClose}
+              class="coachmark-stacked-home__footer"
+            >
+              Close
+            </cds-button>
+          </c4p-coachmark-body>
+        </c4p-coachmark>
+      </div>
+
+      <!-- Child Coachmarks with their trigger buttons -->
+      ${parentItems.map((item) => {
+        const isOpen = this._openChildId === item.id;
+        const nestedItem = nestedItems.find((nested) => nested.id === item.id);
+        
+        if (!nestedItem) return '';
+
+        return html`
+          <c4p-coachmark
+            id="child-${item.id}"
+            class="stacked_element_content"
+            ?open=${isOpen}
+            align=${POPOVER_ALIGNMENT.TOP}
+            .highContrast=${true}
+            .caret=${false}
+            @c4p-coachmark-request-close=${(e: Event) => {
+              e.stopPropagation();
+              this.handleChildClose(e);
+            }}
+          >
+            <!-- Use the button as the trigger -->
+            <cds-button
+              slot="trigger"
+              id="coachmark-trigger-${item.id}"
+              kind="ghost"
+              size="sm"
+              class="coachmark-stacked-home__nav-link"
+              @click=${(e: Event) => this.handleChildButtonClick(item.id, e)}
+            >
+            </cds-button>
+            <c4p-coachmark-header closeIconDescription="Close"></c4p-coachmark-header>
+            <c4p-coachmark-body>
+              ${nestedItem.type === 'simple' ? html`
+                <div class="stacked-coachmark__content">
+                  <h2 class="stacked-coachmark__title">${nestedItem.title}</h2>
+                  <p class="stacked-coachmark__body">${nestedItem.text}</p>
+                  <div class="stacked-coachmark__button">
+                    <cds-button
+                      class="done-btn"
+                      size="sm"
+                      @click=${this.handleChildClose}
+                    >
+                      Done
+                    </cds-button>
+                  </div>
+                </div>
+              ` : ''}
+              
+              ${nestedItem.type === 'carousel' ? html`
+                <div class="exampleCarouselWrapper">
+                  ${nestedItem.pages.map((page) => html`
+                    <div>
+                      <h2>${page.title}</h2>
+                      <p>${page.text}</p>
+                      ${page.button ? html`<p>${page.button}</p>` : ''}
+                    </div>
+                  `)}
+                </div>
+
+                <div class="carouselControlWrapper__footer">
+                  <div class="carouselControlWrapper--controls-progress">
+                    <span>${this._currentViewIndex + 1} / ${nestedItem.pages.length}</span>
+                  </div>
+                  <div class="carouselControlWrapper--buttons">
+                    ${this.showBack ? html`
+                      <cds-button
+                        class="back-btn"
+                        size="sm"
+                        kind="ghost"
+                        @click=${(e: Event) => this.handlePrev(item.id, e)}
+                      >
+                        Back
+                      </cds-button>
+                    ` : ''}
+                    ${this.showNext ? html`
+                      <cds-button
+                        class="next-btn"
+                        size="sm"
+                        @click=${(e: Event) => this.handleNext(item.id, e)}
+                      >
+                        Next
+                      </cds-button>
+                    ` : ''}
+                    ${this.showDone ? html`
+                      <cds-button
+                        class="done-btn"
+                        size="sm"
+                        @click=${(e: Event) => this.handleChildClose(e)}
+                      >
+                        Done
+                      </cds-button>
+                    ` : ''}
+                  </div>
+                </div>
+              ` : ''}
+            </c4p-coachmark-body>
+          </c4p-coachmark>
+```

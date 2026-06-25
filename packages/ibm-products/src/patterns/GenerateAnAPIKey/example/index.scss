@@ -1,0 +1,79 @@
+/**
+ * Copyright IBM Corp. 2026
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+@use '@carbon/react';
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/type';
+@use '@carbon/styles/scss/components/button/tokens' as *;
+
+$prefix: 'c4p';
+$carbon-prefix: 'cds';
+$block-class: 'apikey-modal-pattern';
+
+body {
+  padding: $spacing-07;
+  background-color: var(--cds-background);
+  color: var(--cds-text-primary);
+  font-family: 'IBM Plex Sans', sans-serif;
+}
+
+.example-container {
+  max-inline-size: 1200px;
+
+  h1 {
+    font-size: 2rem;
+    font-weight: 400;
+    margin-block-end: $spacing-07;
+  }
+
+  .example-section {
+    padding: $spacing-05;
+    border: 1px solid var(--cds-border-subtle);
+    background-color: var(--cds-layer-01);
+    margin-block-end: $spacing-05;
+
+    h2 {
+      font-size: 1.5rem;
+      font-weight: 400;
+      margin-block: 0 $spacing-06;
+    }
+  }
+}
+.#{$block-class}__header {
+  .#{$carbon-prefix}--modal-close-button {
+    display: none;
+  }
+}
+
+.#{$block-class} .#{$carbon-prefix}--inline-loading {
+  min-block-size: 3rem;
+}
+
+.#{$block-class}__messaging {
+  display: flex;
+  margin-block-start: $spacing-03;
+  padding-inline-end: calc(20% - #{$spacing-05});
+}
+
+.#{$block-class}__messaging-text {
+  flex: 1;
+  margin-inline-start: $spacing-03;
+  @include type.type-style('label-01');
+}
+
+.#{$block-class}__messaging-text > * {
+  font: inherit;
+}
+
+.#{$block-class}__error-icon svg {
+  fill: $button-danger-primary;
+}
+
+.#{$block-class}__checkmark-icon {
+  fill: $button-primary;
+}

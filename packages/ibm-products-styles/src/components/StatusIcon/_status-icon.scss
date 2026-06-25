@@ -1,0 +1,148 @@
+//
+// Copyright IBM Corp. 2021, 2025
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use 'sass:map';
+
+// Standard imports.
+@use '@carbon/styles/scss/colors' as *;
+@use '@carbon/styles/scss/config' as carbon-config;
+
+@use '../../global/styles/project-settings' as *;
+
+$colors: (
+  fatal: (
+    light: $black-100,
+    dark: $gray-50,
+  ),
+  critical: (
+    light: $red-60,
+    dark: $red-50,
+  ),
+  major-warning: (
+    light: $orange-40,
+    dark: $orange-40,
+  ),
+  minor-warning: (
+    light: $yellow-20,
+    dark: $yellow-20,
+  ),
+  undefined: (
+    light: $purple-60,
+    dark: $purple-50,
+  ),
+  unknown: (
+    light: $gray-60,
+    dark: $gray-50,
+  ),
+  normal: (
+    light: $green-60,
+    dark: $green-50,
+  ),
+  info: (
+    light: $blue-60,
+    dark: $blue-50,
+  ),
+  in-progress: (
+    light: $blue-60,
+    dark: $blue-50,
+  ),
+  running: (
+    light: $green-60,
+    dark: $green-50,
+  ),
+  pending: (
+    light: $gray-60,
+    dark: $gray-50,
+  ),
+);
+
+$icons: (
+  'fatal',
+  'critical',
+  'major-warning',
+  'minor-warning',
+  'undefined',
+  'unknown',
+  'normal',
+  'info',
+  'in-progress',
+  'running',
+  'pending'
+);
+$themes: ('light', 'dark');
+
+$block-class: #{$pkg-prefix}--status-icon;
+
+@function carbon-clr($name, $theme: light) {
+  // stylelint-disable-next-line carbon/theme-use
+  $color: map.get(map.get($colors, $name), $theme);
+  @return $color;
+}
+
+@keyframes rotating {
+  0% {
+    transform: scaleY(-1) rotate(360deg);
+  }
+
+  100% {
+    transform: scaleY(-1) rotate(0deg);
+  }
+}
+
+.#{$block-class} {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.#{$block-class}--light.#{$block-class}--light-minor-warning,
+.#{$block-class}--dark.#{$block-class}--dark-minor-warning {
+  // stylelint-disable-next-line carbon/theme-use
+  fill: $yellow-20;
+}
+
+.#{$block-class}--light.#{$block-class}--light-major-warning
+  path:nth-of-type(1),
+.#{$block-class}--dark.#{$block-class}--dark-major-warning path:nth-of-type(1),
+.#{$block-class}--light.#{$block-class}--light-minor-warning
+  path:nth-of-type(1),
+.#{$block-class}--dark.#{$block-class}--dark-minor-warning path:nth-of-type(1) {
+  // stylelint-disable-next-line carbon/theme-use
+  fill: $gray-100;
+}
+
+@each $theme in $themes {
+  @each $icon in $icons {
+    @each $theme-key in $themes {
+      .#{carbon-config.$prefix}--btn--ghost:not([disabled])
+        .#{$block-class}--#{$theme}.#{$block-class}--#{$theme-key}-#{$icon},
+      .#{carbon-config.$prefix}--btn.#{carbon-config.$prefix}--btn--icon-only.#{carbon-config.$prefix}--tooltip__trigger
+        .#{$block-class}--#{$theme}.#{$block-class}--#{$theme-key}-#{$icon},
+      .#{$block-class}--#{$theme}.#{$block-class}--#{$theme-key}-#{$icon} {
+        @if $icon == in-progress {
+          @media (prefers-reduced-motion: reduce) {
+            animation: none;
+          }
+          // stylelint-disable-next-line carbon/motion-duration-use, carbon/motion-easing-use
+          animation: rotating 8000ms infinite linear;
+          // stylelint-disable-next-line carbon/theme-use
+          fill: carbon-clr($icon, $theme);
+        } @else if $icon == running {
+          // stylelint-disable-next-line carbon/theme-use
+          fill: carbon-clr($icon, $theme);
+        } @else {
+          // stylelint-disable-next-line carbon/theme-use
+          fill: carbon-clr($icon, $theme);
+          @media (prefers-reduced-motion) {
+            .#{$block-class}--#{$theme}.#{$block-class}--#{$theme-key}-in-progress {
+              animation: none;
+            }
+          }
+        }
+      }
+    }
+  }
+}

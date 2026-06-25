@@ -1,0 +1,683 @@
+/**
+ * Copyright IBM Corp. 2026
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+// Standard imports.
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/type';
+@use '@carbon/styles/scss/motion' as *;
+@use '../../global/styles/project-settings' as *;
+
+$block-class__next: #{$pkg-prefix}--add-select__next;
+
+/// Composable AddSelect styles (next)
+/// These styles support the composable AddSelect component structure
+
+// ──────────────────────────────────────────────────────────────
+// AddSelect - Root container
+// ──────────────────────────────────────────────────────────────
+.#{$block-class__next} {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  block-size: 100%;
+  inline-size: 100%;
+}
+
+// ──────────────────────────────────────────────────────────────
+// AddSelectBody - Main content area with search and header
+// ──────────────────────────────────────────────────────────────
+.#{$block-class__next}__body {
+  display: flex;
+  flex-direction: column;
+  block-size: 100%;
+  inline-size: 100%;
+}
+
+.#{$block-class__next}__header {
+  padding: $spacing-05;
+  border-block-end: 1px solid $border-subtle-01;
+}
+
+.#{$block-class__next}__search {
+  margin-block-end: $spacing-05;
+
+  &--with-actions {
+    display: flex;
+    align-items: flex-end;
+  }
+}
+
+.#{$block-class__next}__search-input {
+  flex: 1;
+}
+
+.#{$block-class__next}__global-actions {
+  display: flex;
+  align-items: flex-end;
+}
+
+.#{$block-class__next}__sub-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.#{$block-class__next}__tags {
+  display: flex;
+  align-items: center;
+  gap: $spacing-03;
+}
+
+.#{$block-class__next}__tags-label {
+  @include type.type-style('body-compact-01');
+
+  margin: 0;
+  color: $text-secondary;
+}
+
+.#{$block-class__next}__sub-header-actions {
+  display: flex;
+  align-items: center;
+  gap: $spacing-03;
+  margin-inline-start: $spacing-05;
+}
+
+.#{$block-class__next}__content {
+  overflow: auto;
+  flex: 1;
+}
+
+// ──────────────────────────────────────────────────────────────
+// AddSelectList - Container for items with keyboard navigation
+// ──────────────────────────────────────────────────────────────
+.#{$block-class__next}-list {
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  @supports (overflow-block: auto) {
+    overflow-block: auto;
+  }
+
+  &:focus {
+    outline: none;
+  }
+}
+
+.#{$block-class__next}-list-body {
+  display: flex;
+  flex-direction: column;
+
+  // Horizontal layout for hierarchy view (columns side-by-side)
+  &--horizontal {
+    flex-direction: row;
+    .#{$block-class__next}-column {
+      padding: $spacing-05;
+    }
+  }
+}
+
+// ──────────────────────────────────────────────────────────────
+// AddSelectRow - Individual selectable row (aligns with v1 AddSelectRow)
+// ──────────────────────────────────────────────────────────────
+.#{$block-class__next}-row {
+  display: flex;
+  border-inline-start: $spacing-01 solid transparent;
+  transition: background-color $duration-fast-01 motion(standard, productive);
+
+  &:focus {
+    outline: $spacing-01 solid $focus;
+    outline-offset: calc(-1 * $spacing-01);
+  }
+
+  // Only show focus outline when navigating via keyboard, not mouse clicks
+  &:focus:not(:focus-visible) {
+    outline: none;
+  }
+
+  &--selected {
+    background-color: $layer-selected-01;
+  }
+
+  &--disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
+
+  &:hover:not(&--disabled) {
+    background: $layer-hover-01;
+
+    .#{$block-class__next}-row__title {
+      color: $interactive;
+    }
+
+    .#{$block-class__next}-row__nav-indicator svg {
+      color: $interactive;
+    }
+  }
+
+  &__cell {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  &__cell-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 $spacing-05;
+    block-size: $spacing-09;
+    border-block-end: 1px solid $layer-accent-01;
+  }
+
+  &__content {
+    display: flex;
+    flex: 1;
+    align-items: center;
+  }
+
+  &__checkbox {
+    flex: none;
+    margin-inline-end: $spacing-05;
+  }
+
+  &__radio {
+    .cds--radio-button__appearance {
+      margin-inline-end: 0;
+    }
+  }
+
+  &__icon {
+    display: flex;
+    align-items: center;
+    margin-inline-end: $spacing-03;
+  }
+
+  &__text {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+  }
+
+  &__title {
+    @include type.type-style('body-compact-01');
+
+    display: block;
+    color: $text-primary;
+  }
+
+  &__subtitle {
+    @include type.type-style('label-01');
+
+    display: block;
+    color: $text-secondary;
+  }
+
+  &__meta {
+    display: flex;
+    align-items: center;
+    margin-inline-start: $spacing-03;
+  }
+
+  &__view-item-panel {
+    margin-inline-start: auto;
+  }
+
+  &-item-panel--selected {
+    background-color: $layer-hover-01;
+    border-inline-start: 0.125rem solid $interactive;
+  }
+
+  @media screen and (prefers-reduced-motion: reduce) {
+    &__nav-indicator {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: $spacing-02;
+      border-radius: $spacing-02;
+      cursor: pointer;
+      margin-inline-start: $spacing-03;
+      transition: none;
+
+      &:hover {
+        background-color: $layer-hover-01;
+      }
+
+      &:focus {
+        outline: $spacing-01 solid $focus;
+        outline-offset: calc(-1 * $spacing-01);
+      }
+
+      svg {
+        fill: $icon-primary;
+      }
+    }
+  }
+
+  &__nav-indicator {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: $spacing-02;
+    border-radius: $spacing-02;
+    cursor: pointer;
+    margin-inline-start: $spacing-03;
+    transition: background-color $duration-fast-01 motion(standard, productive);
+
+    &:hover {
+      background-color: $layer-hover-01;
+    }
+
+    &:focus {
+      outline: $spacing-01 solid $focus;
+      outline-offset: calc(-1 * $spacing-01);
+    }
+
+    svg {
+      fill: $icon-primary;
+    }
+  }
+}
+
+// ──────────────────────────────────────────────────────────────
+// AddSelectColumn - Column container with search, sort, filter
+// ──────────────────────────────────────────────────────────────
+.#{$block-class__next}-column {
+  display: flex;
+  flex-direction: column;
+  block-size: 100%;
+  border-inline-end: 1px solid $border-subtle-01;
+  min-inline-size: 300px;
+
+  &:last-child {
+    border-inline-end: none;
+  }
+
+  // Search section with actions
+  &__search {
+    padding: $spacing-05;
+    padding-block-end: 0;
+
+    &--with-actions {
+      display: flex;
+      align-items: flex-end;
+    }
+  }
+
+  &__search-input {
+    flex: 1;
+  }
+
+  &__actions {
+    display: flex;
+    align-items: flex-end;
+  }
+
+  // Search bar section (legacy)
+  &__search-bar {
+    padding: $spacing-05;
+    padding-block-end: 0;
+  }
+
+  &__search-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 0;
+  }
+
+  &__search-input {
+    flex: 1;
+  }
+
+  // Controls (sort and filter buttons) - positioned outside search input
+  &__controls {
+    display: flex;
+    align-items: center;
+    gap: 0;
+  }
+
+  &__sort-button,
+  &__filter-button {
+    flex: none;
+  }
+
+  &__filter-popover {
+    padding: $spacing-05;
+
+    .cds--checkbox-wrapper {
+      margin-block-end: $spacing-03;
+
+      &:last-child {
+        margin-block-end: 0;
+      }
+    }
+  }
+
+  // Header section with select all
+  &__header {
+    display: flex;
+    align-items: center;
+    padding: $spacing-05;
+    border-block-end: 1px solid $border-subtle-01;
+  }
+
+  &__select-all {
+    .cds--checkbox-label {
+      display: flex;
+      align-items: center;
+      gap: 0;
+    }
+
+    .cds--checkbox-label-text {
+      display: flex;
+      align-items: center;
+      gap: $spacing-03;
+      margin-inline-start: $spacing-03;
+    }
+  }
+
+  &__title-wrapper {
+    display: flex;
+    align-items: center;
+    gap: $spacing-03;
+  }
+
+  &__title {
+    @include type.type-style('body-compact-01');
+
+    color: $text-secondary;
+    font-weight: 600;
+  }
+
+  // Rows container
+  &__rows {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    overflow-y: auto;
+
+    @supports (overflow-block: auto) {
+      overflow-block: auto;
+    }
+  }
+}
+
+// ──────────────────────────────────────────────────────────────
+// AddSelectBreadcrumbs - Navigation breadcrumbs
+// ──────────────────────────────────────────────────────────────
+.#{$block-class__next}__breadcrumbs {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: $spacing-02;
+}
+
+.#{$block-class__next}__breadcrumb {
+  &-item {
+    display: flex;
+    align-items: center;
+    gap: $spacing-02;
+  }
+
+  &-button {
+    @include type.type-style('body-compact-01');
+
+    padding: 0;
+    border: none;
+    background: none;
+    color: $link-primary;
+    cursor: pointer;
+    text-decoration: none;
+
+    &:hover {
+      color: $link-primary-hover;
+      text-decoration: underline;
+    }
+
+    &:focus {
+      outline: $spacing-01 solid $focus;
+      outline-offset: $spacing-01;
+    }
+  }
+
+  &-separator {
+    display: flex;
+    align-items: center;
+    color: $text-secondary;
+
+    svg {
+      fill: currentColor;
+    }
+  }
+
+  &-current {
+    @include type.type-style('body-compact-01');
+
+    color: $text-primary;
+  }
+}
+
+// ──────────────────────────────────────────────────────────────
+// AddSelectSelectionSummary - Selected items display
+// ──────────────────────────────────────────────────────────────
+.#{$block-class__next}__selection-summary {
+  display: flex;
+  flex-direction: column;
+
+  &-header {
+    display: flex;
+    align-items: center;
+    padding: $spacing-07 $spacing-05 $spacing-03 $spacing-05;
+    border-block-end: 1px solid $layer-accent-01;
+  }
+
+  &-title {
+    @include type.type-style('heading-compact-02');
+
+    margin-inline-end: $spacing-03;
+  }
+
+  &-header-actions {
+    display: flex;
+    align-items: center;
+    gap: $spacing-03;
+    margin-inline-start: auto;
+  }
+
+  &-edit-button {
+    // Edit icon button styles
+  }
+
+  &-body {
+    // padding: 0 $spacing-05;
+  }
+
+  &-item-default {
+    padding: $spacing-05 0;
+    border-block-end: 1px solid $layer-accent-01;
+  }
+
+  &-item-default-title {
+    color: $text-primary;
+  }
+
+  &-item-default-subtitle {
+    @include type.type-style('label-01');
+
+    color: $text-secondary;
+  }
+}
+
+// ──────────────────────────────────────────────────────────────
+// AddSelectSelectionSummaryItem - Individual selected item
+// ──────────────────────────────────────────────────────────────
+.#{$block-class__next}__selection-summary-item {
+  position: relative;
+
+  // Mode-specific variants
+  &--accordion {
+    // Accordion-specific styles
+  }
+
+  &--default {
+    // Simple mode specific styles
+    .#{$block-class__next}__selection-summary-item-title-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: $spacing-05;
+    }
+    .#{$block-class__next}__selection-summary-item-content {
+      padding-inline: $spacing-05;
+    }
+  }
+
+  &--template {
+    // Custom template mode - minimal styling
+  }
+
+  &-title-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &-selected-item {
+    flex: 1;
+  }
+
+  &-title {
+    color: $text-primary;
+  }
+
+  &-subtitle {
+    @include type.type-style('label-01');
+
+    color: $text-secondary;
+  }
+
+  &-entry {
+    margin-block-end: $spacing-05;
+  }
+
+  &-header {
+    @include type.type-style('label-01');
+
+    color: $text-secondary;
+    margin-block-end: $spacing-03;
+  }
+
+  &-body {
+    @include type.type-style('body-01');
+
+    margin-block-end: $spacing-05;
+  }
+
+  // Remove button - works in all modes
+  &-remove-button-container {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding-inline-start: $spacing-05;
+
+    // In accordion mode, position absolutely
+    .#{$block-class__next}__selection-summary-item--accordion & {
+      position: absolute;
+      inset-inline-end: 0;
+    }
+
+    // In simple mode, position in flex layout
+    .#{$block-class__next}__selection-summary-item--simple & {
+      position: relative;
+      margin-inline-start: auto;
+    }
+  }
+
+  &-remove-button {
+    opacity: 0;
+    transition: opacity $duration-fast-01 motion(standard, productive);
+
+    @media screen and (prefers-reduced-motion: reduce) {
+      transition: none;
+    }
+  }
+
+  // Show remove button on hover/focus for all modes
+  &:hover &-remove-button,
+  &:focus-within &-remove-button {
+    opacity: 1;
+  }
+
+  &-content {
+    margin-block-start: $spacing-03;
+  }
+}
+
+// Accordion overrides for selection summary items
+.#{$block-class__next}__selection-summary {
+  .cds--accordion__arrow {
+    transform: rotate(0deg);
+  }
+
+  .cds--accordion__item--active .cds--accordion__arrow {
+    transform: rotate(90deg);
+  }
+
+  .cds--accordion--start .cds--accordion__arrow {
+    margin: 0 0 0 $spacing-05;
+  }
+
+  .cds--accordion--start .cds--accordion__title {
+    margin: 0 $spacing-05 0 $spacing-03;
+    padding-inline-end: $spacing-07; // Add padding to prevent overlap with remove button
+  }
+
+  .cds--accordion__item--active .cds--accordion__content {
+    margin-block-start: $spacing-03;
+    padding-block: 0;
+  }
+}
+
+// ──────────────────────────────────────────────────────────────
+// AddSelectItemSummaryPanel - Item summary view
+// ──────────────────────────────────────────────────────────────
+.#{$block-class__next}__item-summary-panel {
+  padding: $spacing-05;
+
+  &-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-block-end: $spacing-05;
+  }
+
+  &-title {
+    @include type.type-style('heading-03');
+  }
+
+  &-close {
+    // Close button styles
+  }
+
+  &-body {
+    // Body content styles
+  }
+
+  &-entry {
+    margin-block-end: $spacing-05;
+
+    &-title {
+      @include type.type-style('heading-compact-01');
+    }
+
+    &-body {
+      @include type.type-style('body-compact-01');
+    }
+  }
+}

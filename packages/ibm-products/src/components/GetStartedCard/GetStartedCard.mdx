@@ -1,0 +1,40 @@
+import { Story, Controls, Canvas } from '@storybook/addon-docs/blocks';
+import { CodesandboxLink } from '../../global/js/utils/story-helper';
+import { GetStartedCard } from '.';
+import * as stories from './GetStartedCard.stories';
+
+# GetStartedCard
+
+[Usage guidelines](https://pages.github.ibm.com/carbon/ibm-products/patterns/onboarding-flows/orientation/usage/#get-started-card)
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Example usage](#example-usage)
+- [Component API](#component-api)
+
+## Overview
+
+<Canvas of={stories.Default} />
+
+## Example usage
+
+### with Sequence
+
+<Canvas of={stories.withSequence} />
+
+### with Media and Pictogram
+
+<Canvas of={stories.withMediaAndPictogram} />
+
+### with Media and Sequence
+
+<Canvas of={stories.withMediaAndSequence} />
+
+## Code sample
+
+<CodesandboxLink exampleDirectory="GetStartedCard" />
+
+## Component API
+
+<Controls />

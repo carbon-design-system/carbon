@@ -1,0 +1,131 @@
+import {
+  Story,
+  Controls,
+  Source,
+  Canvas,
+  Meta,
+} from '@storybook/addon-docs/blocks';
+import { CodesandboxLink } from '../../global/js/utils/story-helper';
+import {
+  previewCandidate__Coachmark as Coachmark,
+  previewCandidate__CoachmarkFixed as CoachmarkFixed,
+} from '..';
+import * as CoachmarkStories from './Coachmark.stories';
+
+<Meta title="Coachmark" component={Coachmark} />
+
+# Coachmark
+
+[Usage guidelines](https://pages.github.ibm.com/carbon/ibm-products/components/onboarding/coachmark/usage/)
+
+## Deprecation notice
+
+This component is deprecated and will be removed in the next major version.
+Please migrate to
+[composable Coachmark](https://carbon-for-ibm-products.netlify.app/?path=/docs/preview-onboarding-coachmark--overview).
+
+## Table of Contents
+
+- [Overview](#overview)
+- [About Onboarding](#about-onboarding)
+- [Note on theming](#note-on-theming)
+- [Overview](#overview)
+- [Tooltip example usage](#tooltip-example-usage)
+- [Tooltip code sample](#tooltip-code-sample)
+- [Floating example usage](#floating-example-usage)
+- [Floating code sample](#floating-code-sample)
+- [Stackblitz example with Animated Media](#stackblitz-example-with-animated-media)
+- [Component API](#component-api)
+
+## Overview
+
+[Coachmarks](https://pages.github.ibm.com/carbon/ibm-products/components/onboarding/coachmark/usage)
+are just-in-time messages used to draw a user’s attention to a particular spot,
+and explain new functionality or concepts they might not otherwise notice or
+understand.
+
+**Note:**
+
+- The target prop should always be either a CoachmarkBeacon or a
+  CoachmarkButton.
+- BEACON_KIND, COACHMARK_OVERLAY_KIND, COACHMARK_ALIGNMENT are enums exported as
+  a convenience from Coachmark.
+
+## About Onboarding
+
+[Onboarding](https://pages.github.ibm.com/security/security-design/department/end-to-end-experiences/onboarding/overview/)
+is a continuous learning methodology and framework that aims to orient, onboard,
+explain, educate, and cultivate novice users into high-functioning power users.
+
+## Note on theming
+
+The Coachmark uses the theme prop (e.g., theme='dark') to set the appropriate
+background and font colors for the overlay. Specify a value ('light' or 'dark')
+to display properly within your usage.
+
+## Tooltip example usage
+
+<Canvas className="coachmarkExample" withSource="none">
+  <div className="CoachmarkBaseExampleUsage">
+    <Story of={CoachmarkStories.tooltip} />
+  </div>
+</Canvas>
+
+## Tooltip code sample
+
+```jsx
+<Coachmark
+  theme={'light'}
+  target={<CoachmarkBeacon label="Show information" kind={'tooltip'} />}
+>
+  <CoachmarkOverlayElements closeButtonLabel="Done">
+    <CoachmarkOverlayElement
+      title="Hello World"
+      description="this is a description test"
+    />
+  </CoachmarkOverlayElements>
+</Coachmark>
+```
+
+## Floating example usage
+
+<Canvas className="coachmarkExample" withSource="none">
+  <div className="CoachmarkBaseExampleUsage coachmark_annotation">
+    <Story of={CoachmarkStories.floating} />
+  </div>
+</Canvas>
+
+## Floating code sample
+
+```jsx
+<Coachmark
+  theme={'dark'}
+  align={'bottom'}
+  overlayKind={'floating'}
+  target={
+    <CoachmarkButton
+      kind="tertiary"
+      size="md"
+      label="Show information"
+      renderIcon={Crossroads16}
+    >
+      Click Me
+    </CoachmarkButton>
+  }
+>
+  <CoachmarkOverlayElements closeButtonLabel="Done">
+    <CoachmarkOverlayElement
+      title="Hello World"
+      description="this is a description test"
+    />
+  </CoachmarkOverlayElements>
+</Coachmark>
+```
+
+## Stackblitz example with Animated Media
+
+[![Example with Animated media](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/carbon-design-system/ibm-products/tree/main/examples/carbon-for-ibm-products/CoachmarkWithAnimatedMedia)
+
+## Component API
+
+<Controls />

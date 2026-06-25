@@ -1,0 +1,52 @@
+/* stylelint-disable max-nesting-depth */
+//
+// Copyright IBM Corp. 2023, 2024
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+// Standard imports.
+@use '../../global/styles/project-settings' as c4p-settings;
+@use '../../global/styles/mixins';
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/type' as *;
+// Other Carbon settings if needed
+// TODO: @use '@carbon/styles/scss/grid';
+// or
+// TODO: @use '@carbon/styles/scss/grid';
+
+// CoachmarkOverlayElement uses the following Carbon for IBM Products components:
+// TODO: @use(s) of IBM Products component styles used by CoachmarkOverlayElement
+
+// The block part of our conventional BEM class names (blockClass__E--M).
+$block-class: #{c4p-settings.$pkg-prefix}--coachmark-overlay-element;
+$carousel-item-class: #{c4p-settings.$pkg-prefix}--carousel__item;
+.#{$block-class} {
+  padding: $spacing-01 $spacing-05 0;
+
+  &__content {
+    padding-block-end: $spacing-05;
+  }
+
+  &__title {
+    @include type-style('productive-heading-02');
+
+    margin: 0 0 $spacing-03;
+  }
+
+  &__body {
+    @include type-style('body-long-01');
+  }
+
+  &__button {
+    margin-block-end: 0;
+  }
+}
+.#{$carousel-item-class} {
+  .#{$block-class} {
+    &__button {
+      margin-block-end: $spacing-05;
+    }
+  }
+}

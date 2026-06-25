@@ -1,0 +1,131 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Patterns/Add and select/Overview" />
+
+# Add and select patterns
+
+[Usage guidelines](https://pages.github.ibm.com/carbon/ibm-products/patterns/add-and-select/usage/)
+
+## Overview
+
+The Add and select patterns provide complete, production-ready implementations
+for selection workflows in IBM products. These patterns combine Carbon
+components with IBM Products components to create cohesive user experiences.
+
+## Available patterns
+
+### SingleAddSelect
+
+A complete pattern for single-selection workflows with hierarchical navigation,
+breadcrumbs, and success notifications.
+
+**Use when:**
+
+- Users need to select exactly one item
+- Items are organized in a hierarchical structure
+- Navigation through categories is required
+- Selection requires a modal/tearsheet interface
+
+[View SingleAddSelect →](/docs/patterns-add-and-select-singleaddselect--overview)
+
+### MultiAddSelect
+
+A complete pattern for multi-selection workflows with Tearsheet, selection
+summary, and success notifications.
+
+**Use when:**
+
+- Users need to select multiple items from a list
+- Selection requires a modal/tearsheet interface
+- You need real-time selection feedback
+- Success confirmation is important
+
+[View MultiAddSelect →](/docs/patterns-add-and-select-multiaddselect--overview)
+
+## Pattern philosophy
+
+These patterns are **copy-paste ready** - they include everything you need:
+
+✅ **Complete implementations** - Tearsheet, AddSelect, Toast notifications, and
+all interaction logic  
+✅ **Production-ready** - Fully tested, accessible, and responsive  
+✅ **Customizable** - Easy to adapt to your specific use case  
+✅ **Well-documented** - Clear API and usage examples
+
+## How to use
+
+1. **Copy the component file** from `example/components/`
+2. **Import and use** in your application
+3. **Customize props** to match your requirements
+4. **Style as needed** using Carbon tokens
+
+## File structure
+
+```
+patterns/AddSelect/
+├── example/
+│   ├── components/           # 🎯 COPY-PASTE READY CODE
+│   │   ├── MultiAddSelect.tsx
+│   │   └── SingleAddSelect.tsx
+│   └── preview-components/   # Demo wrappers (for Storybook only)
+│       ├── MultiAddSelectDefault.tsx
+│       └── SingleAddSelectDefault.tsx
+├── MultiAddSelect/
+│   ├── MultiAddSelect.stories.jsx
+│   └── MultiAddSelect.mdx
+└── SingleAddSelect/
+    ├── SingleAddSelect.stories.jsx
+    └── SingleAddSelect.mdx
+```
+
+## Components used
+
+These patterns are built using:
+
+- **Tearsheet** - Modal container
+- **AddSelect** - Core selection component
+- **Button** - Action triggers
+- **ToastNotification** - Success feedback
+- **NoDataEmptyState** - Empty states
+
+## Best practices
+
+1. **Choose the right pattern** - Multi for bulk operations, Single for category
+   selection
+2. **Customize labels** - Update all text to match your domain language
+3. **Handle callbacks** - Always implement `onSubmit` to process selections
+4. **Test with real data** - Ensure patterns work with your actual data
+   structure
+5. **Consider performance** - For large datasets, implement pagination or
+   virtualization
+
+## Accessibility
+
+Both patterns include:
+
+- Full keyboard navigation
+- ARIA attributes for screen readers
+- Focus management
+- Semantic HTML structure
+- High contrast support
+
+## Example usage
+
+> 💡 Check our
+> [Stackblitz](https://stackblitz.com/github/carbon-design-system/ibm-products/tree/main/packages/ibm-products/src/patterns/AddSelect/example)
+> example implementation.
+
+[![Edit react-patterns](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/carbon-design-system/ibm-products/tree/main/packages/ibm-products/src/patterns/AddSelect/example)
+
+## Related resources
+
+- [AddSelect Component](/docs/preview-add-and-select--overview)
+- [Tearsheet Component](/docs/preview-tearsheet--overview)
+- [Carbon Design System](https://carbondesignsystem.com)
+
+## Support
+
+For questions or issues:
+
+- [GitHub Issues](https://github.com/carbon-design-system/ibm-products/issues)
+- [Carbon for IBM Products Slack](https://ibm.enterprise.slack.com/archives/CQGR0HC05)

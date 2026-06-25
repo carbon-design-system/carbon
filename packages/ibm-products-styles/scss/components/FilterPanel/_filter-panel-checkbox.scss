@@ -1,0 +1,54 @@
+//
+// Copyright IBM Corp. 2024, 2025
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+/* stylelint-disable max-nesting-depth */
+
+// Standard imports.
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/type';
+@use '@carbon/styles/scss/config' as carbon-config;
+
+@use '../../global/styles/project-settings' as c4p-settings;
+@use '../../global/styles/mixins';
+
+// The block part of our conventional BEM class names (blockClass__E--M).
+$block-class: #{c4p-settings.$pkg-prefix}--filter-panel-checkbox;
+$label: #{c4p-settings.$pkg-prefix}--filter-panel-label;
+$carbon: #{carbon-config.$prefix};
+
+// UNDO Carbon's concept that a Checkbox is always a list item (":last-of-type").
+// This also allows the TruncatedList to calculate the correct height for expanding/collapsing the list.
+.#{$block-class}.#{$carbon}--form-item.#{$carbon}--checkbox-wrapper,
+.#{$block-class}.#{$carbon}--form-item.#{$carbon}--checkbox-wrapper:last-of-type {
+  margin-block-end: 0;
+}
+
+// Surround a checkbox's count with parentheses.
+.#{$block-class}
+  .#{c4p-settings.$pkg-prefix}--filter-panel-label__count::before {
+  content: '(';
+}
+.#{$block-class}
+  .#{c4p-settings.$pkg-prefix}--filter-panel-label__count::after {
+  content: ')';
+}
+
+.#{$block-class} .#{$carbon}--checkbox-label,
+.#{$block-class} .#{$carbon}--checkbox-label-text {
+  // Match height to the "checkbox with overflow" button.
+  block-size: $spacing-06;
+  // Set Carbon's Checkbox label to 100% the width of the filter panel.
+  inline-size: 100%;
+}
+
+.#{$block-class} .#{$label}__text {
+  @include type.type-style('body-compact-01');
+}
+
+.#{$block-class} .#{$label}__count {
+  @include type.type-style('label-01');
+}

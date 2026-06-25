@@ -1,0 +1,49 @@
+/*
+* Copyright IBM Corp. 2025
+*
+* This source code is licensed under the Apache-2.0 license found in the
+* LICENSE file in the root directory of this source tree.
+*/
+@use '@carbon/ibm-products-styles/scss/config';
+@use '@carbon/styles/scss/spacing';
+@use '@carbon/styles/scss/type' as *;
+@use '@carbon/styles/scss/theme' as *;
+
+$prefix: config.$pkg-prefix;
+$story-prefix: #{$prefix}--big-number-stories;
+
+#storybook-root #main-content {
+  padding: 0;
+}
+
+.#{$story-prefix}__viewport {
+  display: grid;
+  align-items: center;
+  padding: spacing.$spacing-05;
+  block-size: spacing.$spacing-13;
+}
+
+.custom-label {
+  @include type-style('label-01');
+
+  display: inline-block;
+  margin: 0;
+  color: $text-secondary;
+}
+
+.#{prefix}--big-number--xl {
+  .custom-label {
+    @include type-style('body-compact-01');
+  }
+}
+
+.#{$story-prefix}__label-with-tooltip {
+  display: inline-flex;
+  align-items: center;
+  gap: spacing.$spacing-03;
+}
+
+.#{$story-prefix}__tooltip {
+  display: inline-flex;
+  align-items: center;
+}

@@ -1,0 +1,130 @@
+//
+// Copyright IBM Corp. 2022, 2025
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/components/button/tokens' as *;
+@use '@carbon/styles/scss/type';
+@use '@carbon/styles/scss/motion';
+@use '@carbon/styles/scss/config' as carbon-config;
+
+// Standard imports.
+@use '../../global/styles/project-settings' as c4p-settings;
+
+// EditTearsheet uses the following IBM Products components:
+// TearsheetShell
+@use '../Tearsheet/tearsheet';
+@use '../CreateInfluencer/index';
+
+@keyframes form-content-entrance {
+  0% {
+    opacity: 0;
+    transform: translateY(-$spacing-04);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+$block-class: #{c4p-settings.$pkg-prefix}--tearsheet-edit;
+$form-block-class: #{c4p-settings.$pkg-prefix}--tearsheet-edit__form;
+$section-block-class: #{c4p-settings.$pkg-prefix}--tearsheet-edit__section;
+$tearsheet-divider-class: #{c4p-settings.$pkg-prefix}--tearsheet-edit__section--divider;
+$tearsheet-fieldset-class: #{c4p-settings.$pkg-prefix}--tearsheet-edit__form--fieldset;
+
+.#{$block-class} {
+  --#{$block-class}--total-width: 0;
+}
+
+.#{$block-class} .#{$form-block-class}__form--hidden-form {
+  display: none;
+}
+
+.#{$block-class} .#{$form-block-class}__form--visible-form {
+  animation-duration: motion.$duration-slow-01;
+  animation-fill-mode: forwards;
+  animation-name: form-content-entrance;
+  animation-timing-function: motion.$standard-easing;
+  opacity: 0;
+}
+
+@media (prefers-reduced-motion) {
+  .#{$block-class} .#{$form-block-class}__form--visible-form {
+    animation: none;
+    opacity: 1;
+  }
+}
+
+.#{$block-class} .#{$block-class}__content {
+  block-size: 100%;
+  overflow-x: hidden;
+  @supports (overflow-inline: hidden) {
+    /* stylelint-disable-next-line declaration-property-value-disallowed-list */
+    overflow-inline: hidden;
+  }
+
+  padding-block: $spacing-06;
+}
+
+.#{$block-class} .#{$block-class}__content .#{carbon-config.$prefix}--css-grid {
+  margin-inline-start: 0;
+  padding-inline: $spacing-03;
+}
+
+.#{$block-class} .#{$block-class}__form--heading {
+  padding-block-end: $spacing-06;
+}
+
+.#{$block-class}
+  .#{carbon-config.$prefix}--btn-set
+  .#{carbon-config.$prefix}--btn.#{carbon-config.$prefix}--btn--disabled {
+  box-shadow: -0.0625rem 0 0 0 $button-separator;
+}
+
+.#{$block-class} .#{carbon-config.$prefix}--side-nav--ux {
+  position: initial;
+  background-color: transparent;
+  inline-size: 100%;
+  max-inline-size: 100%;
+}
+
+.#{$block-class} .#{carbon-config.$prefix}--side-nav__link:hover {
+  cursor: pointer;
+}
+
+.#{$block-class} .#{carbon-config.$prefix}--side-nav__overlay-active {
+  display: none;
+}
+
+.#{$block-class} .#{$block-class}__form--title,
+.#{$block-class} .#{$block-class}__section--title {
+  margin-block-end: $spacing-05;
+}
+
+.#{$block-class} .#{$block-class}__section--subtitle,
+.#{$block-class} .#{$block-class}__form--subtitle {
+  @include type.type-style('heading-compact-01');
+
+  margin-block-end: $spacing-03;
+}
+
+.#{$block-class} .#{$block-class}__section--description,
+.#{$block-class} .#{$block-class}__form--description {
+  @include type.type-style('body-01');
+
+  margin-block-end: $spacing-06;
+}
+
+.#{$block-class} .#{carbon-config.$prefix}--fieldset {
+  margin-block-end: 0;
+}
+
+.#{$block-class} .#{$block-class}__form--fieldset > * {
+  margin-block-end: $spacing-05;
+}

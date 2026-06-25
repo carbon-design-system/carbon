@@ -1,0 +1,103 @@
+<!--
+@license
+
+Copyright IBM Corp. 2025
+
+This source code is licensed under the Apache-2.0 license found in the
+LICENSE file in the root directory of this source tree.
+-->
+
+<html>
+  <head>
+    <title>carbon-web-components example</title>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="src/styles.scss" />
+    <style>
+      /* Suppress custom element until styles are loaded */
+      cds-ai-label:not(:defined) {
+        display: none;
+      }
+    </style>
+    <script type="module" src="src/index.js"></script>
+  </head>
+  <body>
+    <div class="example-container">
+      <div class="example-header"></div>
+      <div id="page-content-selector" class="example-content">
+        <cds-button id="toggle-button">Toggle interstitial-screen</cds-button>
+      </div>
+    </div>
+    <c4p-interstitial-screen>
+      <style>
+        c4p-interstitial-screen-body {
+          block-size: 20rem;
+        }
+      </style>
+      <c4p-interstitial-screen-header
+        header-title="Use case-specific title"
+        header-subtitle="Use case-specific sub title"
+      ></c4p-interstitial-screen-header>
+      <c4p-interstitial-screen-body>
+        <c4p-interstitial-screen-body-item id="1" stepTitle="Step 1">
+         
+          <div
+            role="complementary"
+            aria-label="Use case-specific heading 1"
+            class="c4p--interstitial-screen-view"
+          >
+            <section class="c4p--interstitial-screen-view-module">
+              <h1 class="c4p--interstitial-screen-view-module--heading">
+                Use case-specific heading 1
+              </h1>
+              <p class="c4p--interstitial-screen-view-module--body">
+                Use case-specific content that explains the concept. Use
+                case-specific content that explains the concept. Use
+                case-specific content that explains the concept. Use
+                case-specific content that explains the concept.
+              </p>
+            </section>
+          </div></c4p-interstitial-screen-body-item
+        >
+        <c4p-interstitial-screen-body-item id="2" stepTitle="Step 2">
+          <div
+            role="complementary"
+            aria-label="Use case-specific heading 2"
+            class="c4p--interstitial-screen-view"
+          >
+            <section class="c4p--interstitial-screen-view-module">
+              <h1 class="c4p--interstitial-screen-view-module--heading">
+                Use case-specific heading 2
+              </h1>
+              <p class="c4p--interstitial-screen-view-module--body">
+                Use case-specific content that explains the concept. Use
+                case-specific content that explains the concept. Use
+                case-specific content that explains the concept. Use
+                case-specific content that explains the concept.
+              </p>
+            </section>
+          </div></c4p-interstitial-screen-body-item
+        >
+        <c4p-interstitial-screen-body-item id="3" stepTitle="Step 3">
+          <div
+            role="complementary"
+            aria-label="Use case-specific heading 3"
+            class="c4p--interstitial-screen-view"
+          >
+            <section class="c4p--interstitial-screen-view-module">
+              <h1 class="c4p--interstitial-screen-view-module--heading">
+                Use case-specific heading 3
+              </h1>
+              <p class="c4p--interstitial-screen-view-module--body">
+                Use case-specific content that explains the concept. Use
+                case-specific content that explains the concept. Use
+                case-specific content that explains the concept. Use
+                case-specific content that explains the concept.
+              </p>
+            </section>
+          </div></c4p-interstitial-screen-body-item
+        >
+      </c4p-interstitial-screen-body>
+      <c4p-interstitial-screen-footer></c4p-interstitial-screen-footer>
+    </c4p-interstitial-screen>
+  </body>
+</html>

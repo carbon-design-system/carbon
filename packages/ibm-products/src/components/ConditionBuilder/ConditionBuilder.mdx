@@ -1,0 +1,193 @@
+import { Story, Controls, Source, Canvas } from '@storybook/addon-docs/blocks';
+import { CodesandboxLink } from '../../global/js/utils/story-helper';
+import { ConditionBuilder } from '.';
+import * as stories from './ConditionBuilder.stories';
+
+# ConditionBuilder
+
+[Usage guidelines](https://pages.github.ibm.com/carbon/ibm-products/components/condition-builder/usage/)
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Example usage](#example-usage)
+- [Component API](#component-api)
+
+## Overview
+
+The Condition Builder component empowers non-technical users to create
+conditional statements with minimal or no coding knowledge. It is available in
+two variants: **Non-Hierarchical**: Ideal for simple, linear conditions
+presented in a sentence-like format. **Hierarchical**: Designed for more complex
+use cases, allowing nested conditions and multiple top-level groups. Users can
+build conditions using a list of properties defined in the inputConfig. Each
+property supports six built-in input types—option, text, textarea, number, time,
+and date—as well as a custom type that allows users to render their own custom
+components.
+
+### inputConfig
+
+**Input types** <br/> **option :** Support single select as well as multi
+select. Multi-select will be activated for one-of operator or user preferred
+multi select custom operator. User can pass the list of options inside config
+object (`properties[i].config.options`) or can be dynamically populated using an
+asynchronous callback prop `getOptions`.
+
+**text**, **textarea**, **number**, **date**, & **time :** Here the component
+uses the corresponding Carbon components and supports standard Carbon props.
+
+The date range picker can be enabled when using the '`between`' operator or user
+preferred multiselect custom operator. Eg: you can customize the date format and
+locale by setting `properties[i].config.dateFormat` and
+`properties[i].config.locale`, respectively.
+
+**custom :** Users can render a custom component by providing a
+`properties[i].config.component`, which should be a function that returns JSX.
+This function receives `onChange` and `conditionState` as arguments. To update
+the condition builder’s state, users must call `onChange('value')` with the new
+value.
+
+Additionally, a `valueFormatter` can be specified via
+`properties[i].config.valueFormatter` to format how the value is displayed in
+the UI.
+
+```
+valueFormatter: (value) => {
+ // add any customization to the value to be populated
+ return value.toLocaleUpperCase();
+}
+
+```
+
+### readOnly mode
+
+The condition builder can be rendered in a read-only mode by setting `readOnly`
+prop to true. In this mode, you won’t be able to add or edit conditions, but you
+can still navigate through them using the keyboard.
+
+### Custom operators
+
+Default operators are built-in for all input types, but users can override them
+by passing a list of custom operators via properties[i].config.operators,
+including for the custom input type.
+
+Additionally, to enable multiselect or range picker functionality for option and
+date input types, users can set `isMultiSelect` to `true`.
+
+```
+const customOperators = [
+  { label: 'has value', id: 'hasValue' },
+  { label: 'has no value', id: 'hasNoValue' },
+  { label: 'has values', id: 'hasValues', isMultiSelect: true },
+];
+```
+
+### Custom statements
+
+Currently, the default statements available are: if all, if any, unless all, and
+unless any. But user can pass `statementConfigCustom`, which allows users to
+provide their own custom statements, overriding the default ones.
+
+```
+const statementConfigCustom = [
+  {
+    id: 'if',
+    connector: 'and',
+    label: 'if',
+  },
+  {
+    id: 'exclIf',
+    connector: 'or',
+    label: 'excl. if',
+  },
+];
+```
+
+### Disable/hide specific property
+
+Each property in the condition builder can be dynamically disabled or hidden
+while conditions are being built. For this, the property config supports
+getIsDisabled and getIsHidden callbacks. These functions are evaluated during
+rendering of each property option in the dropdown, and they receive the current
+condition and group state so they can decide whether the property should be
+available.
+
+```
+properties: [
+    {
+      id: 'continent',
+      label: 'Continent',
+      icon: Earth,
+      type: 'option',
+      description: 'Continent',
+      getIsDisabled: ({ conditionState, group }) => {
+
+        return true or false;
+      },
+       getIsHidden: ({ conditionState, group }) => {
+
+        return true or false;
+      },
+      config: {
+        options: [
+          ...
+        ],
+      },
+    },
+    ...]
+```
+
+### Dynamic options
+
+If the input type is set to option and you want to load options dynamically
+during condition building—rather than supplying them directly in the
+inputConfig—you can use the getOptions callback prop. This asynchronous function
+returns a promise that should be resolved with the options array in the expected
+format. It receives two arguments: the root condition state and the current
+condition.
+
+```
+const getOptions = async (conditionState, condition) => {
+  switch (condition.property) {
+    case 'continent':
+     return new Promise((resolve) => {
+        const continents = [
+         { label: 'Africa', id: 'Africa' },
+          ...
+        ];
+        resolve(continents);
+      });
+    default:
+      return [];
+  }
+};
+```
+
+### Custom remove interception
+
+Use `onRemoveItem` to intercept removal of a condition, subgroup, group, or
+action. Return `{ preventRemove: true }` to block the removal.
+
+```jsx
+<ConditionBuilder
+  {...props}
+  onRemoveItem={({ type, item, group, state }) => {
+    if (type === 'condition' && item?.property === 'region') {
+      return { preventRemove: true };
+    }
+    return { preventRemove: false };
+  }}
+/>
+```
+
+## Example usage
+
+{/* TODO: One example per designed use case. */}
+
+<Canvas>
+  <Story of={stories.conditionBuilder} />
+</Canvas>
+
+## Component API
+
+<Controls />

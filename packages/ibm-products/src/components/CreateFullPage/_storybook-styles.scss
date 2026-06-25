@@ -1,0 +1,88 @@
+//
+// Copyright IBM Corp. 2021, 2022
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/type';
+@use 'ALIAS_STORY_STYLE_CONFIG' as c4p-settings;
+
+$story-class: 'create-full-page-stories';
+$block-class: #{c4p-settings.$pkg-prefix}--create-full-page;
+// cspell:disable-next-line
+.sbdocs .#{$story-class}__viewport {
+  background-color: $background;
+  block-size: 100vh;
+  box-shadow: 0 0 4px 1px $border-subtle-01;
+  color: $text-primary;
+  overflow-y: auto;
+  @supports (overflow-block: auto) {
+    overflow-block: auto;
+  }
+}
+
+.#{$story-class}__step-fieldset--no-label
+  .#{c4p-settings.$carbon-prefix}--fieldset
+  legend {
+  position: absolute;
+  overflow: hidden;
+  block-size: 1px;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  inline-size: 1px;
+  white-space: nowrap;
+}
+
+.#{$story-class}__tooltip {
+  position: relative;
+  // stylelint-disable-next-line carbon/layout-use
+  inset-block-start: calc(#{$spacing-05} + #{$spacing-01});
+  inset-inline-start: $spacing-11;
+}
+
+.#{$block-class}__step-fieldset.#{$story-class}__step-fieldset--label.#{c4p-settings.$carbon-prefix}--label {
+  position: absolute;
+  overflow: hidden;
+  block-size: 1px;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  inline-size: 1px;
+  white-space: nowrap;
+}
+
+.#{c4p-settings.$carbon-prefix}--form-item {
+  margin-block-end: $spacing-05;
+}
+
+.#{$story-class}__error--text {
+  @include type.type-style('label-01');
+
+  margin-block-end: $spacing-05;
+}
+
+.#{$block-class}
+  .#{$block-class}__step-description.#{$story-class}__step-description {
+  padding-inline-start: 0;
+}
+
+.#{$story-class}__viewport {
+  overflow: hidden;
+  block-size: 100vh;
+}
+
+.#{$story-class}__viewport .#{$story-class}__content-container {
+  block-size: 100%;
+  overflow-y: auto;
+  @supports (overflow-block: auto) {
+    overflow-block: auto;
+  }
+}
+
+.#{$story-class}__viewport
+  .#{$story-class}__content-container--with-global-header {
+  block-size: calc(100% - #{$spacing-09});
+  margin-block-start: $spacing-09;
+}

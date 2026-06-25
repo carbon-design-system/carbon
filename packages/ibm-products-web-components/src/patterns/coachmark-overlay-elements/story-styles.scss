@@ -1,0 +1,69 @@
+/*
+* Copyright IBM Corp. 2026
+*
+* This source code is licensed under the Apache-2.0 license found in the
+* LICENSE file in the root directory of this source tree.
+*/
+
+@use '@carbon/styles' with (
+  $font-path: '@ibm/plex'
+);
+
+@use '../../utilities/carousel/index' as carousel;
+
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/type';
+@include carousel.carousel();
+
+.coachmark-body {
+  display: flex;
+  flex-direction: column;
+  inline-size: 280px;
+
+  h2 {
+    @include type.type-style('productive-heading-02');
+
+    margin: 0 0 $spacing-03;
+  }
+
+  p {
+    @include type.type-style('body-long-01');
+
+    margin: 0 0 $spacing-03;
+  }
+  /* stylelint-disable-next-line selector-type-no-unknown */
+  cds-button {
+    display: flex;
+    align-self: flex-end;
+    margin-block-start: $spacing-03;
+  }
+
+  .exampleCarouselWrapper {
+    block-size: 10vh;
+  }
+}
+
+.carouselControlWrapper__footer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.carouselControlWrapper--buttons {
+  display: flex;
+  gap: $spacing-03;
+}
+
+.carouselControlWrapper--controls-progress {
+  justify-self: flex-start;
+  margin-inline-end: auto;
+  @include type.type-style('helper-text-01');
+}
+
+.back-btn,
+.next-btn,
+.done-btn {
+  display: none;
+  /* stylelint-disable-next-line declaration-no-important */
+  box-shadow: none !important;
+}

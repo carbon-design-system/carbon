@@ -1,0 +1,142 @@
+import { Story, Controls, Source, Canvas } from '@storybook/addon-docs/blocks';
+import { CodesandboxLink } from '../../global/js/utils/story-helper';
+import * as stories from './CreateTearsheet.stories';
+
+# CreateTearsheetNarrow
+
+[Usage guidelines](https://pages.github.ibm.com/carbon/ibm-products/patterns/create-flows/usage/#narrow-tearsheet)
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Example usage](#example-usage)
+- [Default](#default)
+- [With form validation](#with-form-validation)
+
+## Overview
+
+The CreateTearsheetNarrow pattern provides a recipe for building single-form
+creation interfaces in a narrow tearsheet format. It demonstrates how to use the
+Tearsheet component with the `variant="narrow"` prop for creating resources or
+completing tasks in a compact, focused layout.
+
+> NOTE: Patterns have multiple ways of accomplishing a user need and typically
+> use a combination of components with additional design considerations. The
+> pattern code we share is meant to serve as an example implementation that can
+> be built and extended further.
+
+To build this pattern, we recommend including the following components:
+
+- [Tearsheet](https://ibm-products.carbondesignsystem.com/?path=/docs/ibm-products-patterns-tearsheet--docs)
+  (with `variant="narrow"`)
+- [Form](https://react.carbondesignsystem.com/?path=/docs/components-form)
+- [TextInput](https://react.carbondesignsystem.com/?path=/docs/components-textinput)
+- [NumberInput](https://react.carbondesignsystem.com/?path=/docs/components-numberinput)
+- [Dropdown](https://react.carbondesignsystem.com/?path=/docs/components-dropdown)
+- [FormGroup](https://react.carbondesignsystem.com/?path=/docs/components-formgroup)
+- [Button](https://react.carbondesignsystem.com/?path=/docs/components-button)
+
+```jsx
+import { preview__Tearsheet as Tearsheet } from '@carbon/ibm-products';
+import {
+  Form,
+  TextInput,
+  NumberInput,
+  Dropdown,
+  FormGroup,
+  Button,
+} from '@carbon/react';
+```
+
+## Example usage
+
+> 💡 Check our
+> [Stackblitz](https://stackblitz.com/github/carbon-design-system/ibm-products/tree/main/packages/ibm-products/src/patterns/CreateTearsheetNarrow/example)
+> example implementation.
+
+[![Edit react-patterns](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/carbon-design-system/ibm-products/tree/main/packages/ibm-products/src/patterns/CreateTearsheetNarrow/example)
+
+<Canvas withSource="none">
+  <Story of={stories.createTearsheetNarrow} />
+</Canvas>
+
+### Example
+
+Here's a quick example to get you started.
+
+#### HTML
+
+```html
+<div className="app">
+  <Button onClick={() => setOpen(true)}>
+    Create partition
+  </Button>
+  <Tearsheet
+    open={open}
+    variant="narrow"
+    onClose={() => setOpen(false)}
+    preventCloseOnClickOutside
+  >
+    <Tearsheet.Header hideCloseButton={true}>
+      <Tearsheet.HeaderContent
+        label="Test label"
+        title="Create partition"
+        description="Select the number of partitions you want to create"
+      />
+    </Tearsheet.Header>
+    <Tearsheet.Body className="create-tearsheet-narrow__body">
+      <Tearsheet.MainContent isFlush={true}>
+        <h3 className="create-tearsheet-narrow__form-title">
+          Core configuration
+        </h3>
+        <p className="create-tearsheet-narrow__form-description">
+          We recommend you fill out and evaluate these details at a minimum before deploying your topic.
+        </p>
+        <Form onSubmit={handleSubmit}>
+          <FormGroup legendText="Topic information">
+            <TextInput
+              labelText="Topic name"
+              id="topic-name"
+              value={topicName}
+              placeholder="Enter topic name"
+              onChange={(e) => setTopicName(e.target.value)}
+            />
+            <NumberInput
+              id="partition-count"
+              min={1}
+              max={100}
+              value={partitionCount}
+              label="Partitions"
+              onChange={(e) => setPartitionCount(e.imaginaryTarget.value)}
+            />
+          </FormGroup>
+        </Form>
+      </Tearsheet.MainContent>
+    </Tearsheet.Body>
+    <Tearsheet.Footer actions={actions} buttonSize="2xl" />
+  </Tearsheet>
+</div>
+```
+
+## Default
+
+The default CreateTearsheetNarrow pattern provides a basic single-form creation
+interface with:
+
+- A narrow tearsheet layout optimized for focused workflows
+- Form title and description
+- Form groups for organizing related inputs
+- Submit and cancel actions in the footer
+
+## With form validation
+
+The pattern can be extended to include form validation:
+
+- Field-level validation with error states
+- Submit button disabled until form is valid
+- Invalid text displayed for fields with errors
+- Real-time validation on blur or change events
+
+<Canvas withSource="none">
+  <Story of={stories.withFormValidation} />
+</Canvas>

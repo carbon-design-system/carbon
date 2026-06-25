@@ -1,0 +1,221 @@
+//
+// Copyright IBM Corp. 2022, 2025
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/layout/scss/convert' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/type' as *;
+@use '@carbon/styles/scss/motion' as *;
+@use '@carbon/styles/scss/config' as carbon-config;
+
+@use '../variables' as *;
+@use '../../../../global/styles/project-settings' as c4p-settings;
+@use './animations' as *;
+
+@property --panel-transform {
+  inherits: true;
+  initial-value: 320px;
+  syntax: '<length>';
+}
+$block-class-component: #{$block-class}-filter-panel;
+
+.#{$block-class-component} {
+  --panel-transform: 320px;
+
+  transform: translateX(0);
+  transition-behavior: allow-discrete;
+  transition-duration: $duration-moderate-01;
+  transition-property: display, opacity, transform;
+
+  @starting-style {
+    opacity: 0;
+    /* stylelint-disable-next-line carbon/layout-use */
+    transform: translateX(var(--panel-transform));
+  }
+
+  // animation only set for older browsers that do not support `transition-behavior: allow-discrete;`
+  &.#{$block-class-component}--open.#{$block-class-component}--left-placement {
+    animation: filter-panel-entrance-left $duration-moderate-01
+      motion(entrance, productive) forwards;
+  }
+
+  &.#{$block-class-component}--closing.#{$block-class-component}--left-placement {
+    animation: filter-panel-exit-left $duration-moderate-01
+      motion(exit, productive) forwards;
+  }
+
+  @supports (transition-behavior: allow-discrete) {
+    &.#{$block-class-component}--closing {
+      opacity: 0;
+      /* stylelint-disable-next-line carbon/layout-use */
+      transform: translateX(var(--panel-transform, 320px));
+      transition-duration: $duration-moderate-01;
+    }
+    &.#{$block-class-component}--closing.#{$block-class-component}--left-placement {
+      /* stylelint-disable-next-line carbon/layout-use */
+      transform: translateX(calc(-1 * var(--panel-transform, 320px)));
+    }
+  }
+
+  @media (prefers-reduced-motion) {
+    /* styles to apply if a user's device settings are set to reduced motion */
+    &.#{$block-class-component}--open.#{$block-class-component}--left-placement {
+      animation: filter-panel-entrance-reduced $duration-moderate-01
+        motion(exit, productive) forwards;
+      @starting-style {
+        opacity: 0;
+        transform: translateX(0);
+      }
+    }
+    &.#{$block-class-component}--closing.#{$block-class-component}--left-placement {
+      animation: filter-panel-exit-reduced $duration-moderate-01
+        motion(exit, productive) forwards;
+      @starting-style {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+  }
+}
+
+.#{$block-class-component}__container {
+  position: relative;
+  background-color: $layer-01;
+  block-size: clamp(var(--filter-panel-min-height), 100%, 100vh);
+  border-block-start: 1px $layer-accent-01 solid;
+  /* stylelint-disable-next-line -- to-rem carbon replacement for rem */
+  inline-size: to-rem(320px);
+}
+
+.#{$block-class-component}--open {
+  border-inline-end: 1px $layer-accent-01 solid;
+}
+
+.#{$block-class-component}__container::before {
+  position: absolute;
+  display: block;
+  background-color: $layer-01;
+  block-size: 1px;
+  content: '';
+  /* stylelint-disable-next-line -- to-rem carbon replacement for rem */
+  inline-size: to-rem(47px); // size of filter panel button
+  inset-block-start: -1px; // stylelint-disable-line
+  inset-inline-start: 0;
+}
+
+.#{$block-class-component}__inner-container {
+  position: relative;
+  z-index: 0;
+  overflow: auto;
+  padding: 0 $spacing-05 $spacing-10;
+  overscroll-behavior: contain;
+}
+
+// Adds extra space to the last category so the scroll shows everything visible when you reach the bottom
+.#{$block-class-component}__inner-container
+  .#{$block-class-component}__category:last-of-type {
+  padding-block-end: $spacing-11;
+}
+
+.#{$block-class-component} {
+  position: sticky;
+  inset-block-start: 0;
+}
+
+.#{$block-class-component}__heading {
+  display: flex;
+  justify-content: space-between;
+  border-block-end: 1px solid transparent;
+  padding-inline-start: $spacing-05;
+}
+
+.#{$block-class-component}__heading--with-divider {
+  border-block-end: 1px solid $layer-accent-01;
+}
+
+.#{$block-class-component}__title {
+  padding: $spacing-05 0;
+  @include type-style('heading-compact-02');
+}
+
+.#{$block-class-component}__search {
+  padding: 0 $spacing-05 $spacing-06;
+}
+
+.#{$block-class-component}__category-title {
+  @include type-style('heading-compact-01');
+
+  color: $text-secondary;
+
+  margin-block-end: $spacing-05;
+}
+
+.#{$block-class-component}__category {
+  padding-block-end: $spacing-06;
+}
+
+// This selects all filter elements inside of categories and give them 16px margin bottom
+.#{$block-class-component}__category
+  > *:not(.c4p--datagrid-filter-panel__category-title, .bx--accordion) {
+  margin-block-end: $spacing-05;
+}
+
+.#{$block-class-component}__action-set {
+  position: sticky;
+  z-index: 1; // To layer action set on top of content behind when sticky
+  /* stylelint-disable-next-line -- to-rem carbon replacement for rem */
+  block-size: to-rem(64px);
+  inset-block-end: 0;
+  margin-block-start: auto;
+
+  opacity: 1;
+  /* stylelint-disable-next-line carbon/layout-use */
+  transform: translateY(64px) translateZ(0);
+
+  &.#{$block-class-component}__animationComplete {
+    transform: none;
+    transition-behavior: allow-discrete;
+    transition-duration: $duration-moderate-01;
+    transition-property: display, opacity, transform;
+  }
+}
+
+// Overrides
+.#{$block-class-component}__container
+  .#{carbon-config.$prefix}--accordion__title {
+  margin: 0;
+}
+
+.#{$block-class-component}__container
+  .#{carbon-config.$prefix}--accordion__arrow {
+  margin: $spacing-01 0 0;
+}
+
+.#{$block-class-component}__container
+  .#{carbon-config.$prefix}--accordion__content {
+  padding-inline: 0;
+}
+
+// Makes sure every child (filter) inside the accordion content has space in between
+.#{$block-class-component}__container
+  .#{carbon-config.$prefix}--accordion__content
+  > *:not(:last-child) {
+  margin-block-end: $spacing-05;
+}
+
+.#{carbon-config.$prefix}--btn.#{$block-class-component}-open-button {
+  display: flex;
+  justify-content: center;
+  block-size: 3rem;
+  border-block-end: none;
+  border-inline-end: 1px solid $layer-accent-01;
+  inline-size: 3rem;
+}
+
+.#{carbon-config.$prefix}--btn.#{$block-class-component}__view-all-button {
+  margin-inline-start: -$spacing-05;
+}

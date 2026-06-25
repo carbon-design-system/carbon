@@ -1,0 +1,31 @@
+//
+// Copyright IBM Corp. 2024, 2025
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+/* stylelint-disable max-nesting-depth */
+
+// Standard imports.
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/type';
+@use '@carbon/styles/scss/config' as carbon-config;
+
+@use '../../global/styles/project-settings' as c4p-settings;
+@use '../../global/styles/mixins';
+
+// FilterPanel uses the following Carbon for IBM Products components:
+// TODO: @use(s) of IBM Products component styles used by FilterPanel
+@use '../TruncatedList';
+
+// The block part of our conventional BEM class names (blockClass__E--M).
+$block-class: #{c4p-settings.$pkg-prefix}--filter-panel;
+$carbon: #{carbon-config.$prefix};
+
+.#{$block-class}__title {
+  @include type.type-style('body-compact-01');
+
+  margin-block: $spacing-04;
+}

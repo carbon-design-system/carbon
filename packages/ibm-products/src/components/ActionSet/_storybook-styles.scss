@@ -1,0 +1,37 @@
+//
+// Copyright IBM Corp. 2021, 2021
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use 'ALIAS_STORY_STYLE_CONFIG' as c4p-settings;
+// @use '@carbon/ibm-products-styles/scss/global/styles/display-box' as *;
+@use '../../../../ibm-products-styles/src/global/styles/display-box' as *;
+
+$block-class: #{c4p-settings.$pkg-prefix}--action-set;
+
+.#{$block-class}__story-container {
+  inline-size: 96vw;
+  min-block-size: 3rem;
+}
+
+.#{$block-class}__story-container--xlg {
+  inline-size: 75vw;
+}
+
+.#{$block-class}__story-container--lg {
+  inline-size: 60vw;
+}
+
+.#{$block-class}__story-container--md {
+  inline-size: 45vw;
+}
+
+.#{$block-class}__story-container--sm {
+  inline-size: 30vw;
+}
+
+.#{$block-class}__story-container--xs {
+  inline-size: 25vw;
+}

@@ -1,0 +1,126 @@
+import { ArgTypes, Markdown, Meta } from '@storybook/addon-docs/blocks';
+import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
+import NotificationPanelStories from './notification-panel.stories';
+
+<Meta of={NotificationPanelStories} />
+
+# NotificationPanel
+
+> 💡 Check our
+> [Stackblitz](https://stackblitz.com/github/carbon-design-system/ibm-products/tree/main/packages/ibm-products-web-components/examples/notification-panel)
+> example implementation.
+
+[![Edit carbon-web-components](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/carbon-design-system/ibm-products/tree/main/packages/ibm-products-web-components/examples/notification-panel)
+
+The NotificationsPanel sets expectations on the behavior for notifications, allowing the user to view and interact with them all in one place.
+
+The component includes a composable footer section, exposed via the footer slot. Adopters can insert custom content into this slot and, if they choose to do so, are expected to provide the appropriate styles. Alternatively, the `c4p-notification-footer` component can be used, which comes with built-in styling.
+
+In addition to the footer, the today and previous sections are also exposed as named slots, giving adopters more flexibility to control the content in those areas. These sections are intended to contain `c4p-notification` components. Each `c4p-notification` supports two named slots: title and description, allowing for further customization of the notification content.
+
+## Getting started
+
+Here's a quick example to get you started.
+
+### JS (via import)
+
+```javascript
+import '@carbon/ibm-products-web-components/es/components/notification-panel/index.js';
+```
+
+### HTML
+
+```html
+<c4p-notification-panel
+  .triggerButtonRef=${triggerButton}
+  .open="${openPanel}"
+  title-text="${args.titleText}"
+  today-text="${args.todayText}"
+  previous-text="${args.previousText}"
+  dismiss-all-label="${args.dismissAllLabel}"
+  donot-disturb-label="${args.doNotDisturbLabel}"
+  date-time-locale="${args.dateTimeLocale}"
+  @c4p-notification-dismiss-all=${dismissAllNotification}
+  @c4p-notification-click-outside=${clickOutside}
+>
+  ${dataToday.length > 0
+    ? html`
+        ${dataToday.map((item) => {
+          return html`
+            <c4p-notification
+              slot="today"
+              .open=${args.open}
+              @c4p-notification-click=${item.onNotificationClick}
+              @c4p-notification-dismiss=${() => {
+                notificationSingleDismiss(item.id, 'today');
+              }}
+              type=${item.type}
+              unread=${item.unread}
+              .timestamp=${item.timestamp}
+            >
+              <cds-heading
+                class=${classMap({
+                  [`${blockClassNotification}-title`]: true,
+                  [`${blockClassNotification}-title-unread`]:
+                    item.unread,
+                })}
+                slot="title"
+              >
+                ${item.title}
+              </cds-heading>
+              <div slot="description">${item.description}</div>
+            </c4p-notification>
+          `;
+        })}
+      `
+    : ''}
+  ${dataPrevious.length > 0
+    ? html`
+        ${dataPrevious.map((item) => {
+          return html`
+            <c4p-notification
+              slot="previous"
+              @c4p-notification-click=${item.onNotificationClick}
+              @c4p-notification-dismiss=${() => {
+                notificationSingleDismiss(item.id, 'previous');
+              }}
+              type=${item.type}
+              unread=${item.unread}
+              .timestamp=${item.timestamp}
+            >
+              <cds-heading
+                class=${classMap({
+                  [`${blockClassNotification}-title`]: true,
+                  [`${blockClassNotification}-title-unread`]:
+                    item.unread,
+                })}
+                slot="title"
+              >
+                ${item.title}
+              </cds-heading>
+              <div slot="description">${item.description}</div>
+            </c4p-notification>
+          `;
+        })}
+      `
+    : ''}
+  <c4p-notification-footer
+    slot="footer"
+    view-all-label="View all (${dataToday.length + dataPrevious.length})"
+    @c4p-notification-view-all=${action(`Clicked View All`)}
+    @c4p-notification-settings=${action(`Clicked Settings`)}
+  ></c4p-notification-footer>
+</c4p-notification-panel>
+```
+
+## `<c4p-notification-panel>` attributes, properties, events and slots.
+
+<ArgTypes of="c4p-notification-panel" />
+
+## `<c4p-notification>` attributes, properties, events and slots.
+
+<ArgTypes of="c4p-notification" />
+
+## `<c4p-notification-footer>` attributes, properties, events and slots.
+
+<ArgTypes of="c4p-notification-footer" />

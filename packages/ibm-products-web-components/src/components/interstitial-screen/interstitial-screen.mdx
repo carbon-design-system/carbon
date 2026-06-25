@@ -1,0 +1,90 @@
+import { ArgTypes, Markdown, Meta } from '@storybook/addon-docs/blocks';
+import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
+import InterstitialScreenStories from './interstitial-screen.stories';
+
+<Meta of={InterstitialScreenStories} />
+
+# InterstitialScreen
+
+> 💡 Check our
+> [Stackblitz](https://stackblitz.com/github/carbon-design-system/ibm-products/tree/main/packages/ibm-products-web-components/examples/interstitial-screen)
+> example implementation.
+
+[Usage guidelines](https://pages.github.ibm.com/carbon/ibm-products/components/onboarding/interstitial-screen/usage)
+
+
+[Interstitial screen](https://pages.github.ibm.com/carbon/ibm-products/components/onboarding/interstitial-screen/usage)
+can be a full page or an overlay, and are shown on the first time a user
+accesses a new experience (e.g. upon first login or first time opening a page
+where a newly purchased capability is presented).
+
+## Getting started
+
+Here's a quick example to get you started.
+
+### JS (via import)
+
+```javascript
+import '@carbon/ibm-products-web-components/es/components/interstitial-screen/index.js';
+```
+
+
+### HTML
+
+```html
+  <c4p-interstitial-screen
+        ?full-screen=${false}
+        ?open=${true}
+        @c4p-interstitial-opened=${(e) => {
+          console.log('event initialize', e.detail);
+        }}
+      >
+      
+        <c4p-interstitial-screen-header
+          header-title="Use case-specific title"
+          header-subtitle="Use case-specific sub title"
+        ></c4p-interstitial-screen-header>
+        <c4p-interstitial-screen-body>
+          <c4p-interstitial-screen-body-item
+        id="${eachContent.id}"
+        stepTitle="${eachContent.stepTitle}"
+      >
+       
+        <div
+          role="complementary"
+          aria-label=${eachContent.stepTitle}
+          class="c4p--interstitial-screen-view"
+        >
+          <section class="${blockClass}">
+            <h1 class="${blockClass}--heading">${eachContent.title}</h1>
+            <p class="${blockClass}--body">${eachContent.description}</p>
+          </section>
+
+         
+        </div>
+        </c4p-interstitial-screen-body-item>
+        </c4p-interstitial-screen-body>
+        <c4p-interstitial-screen-footer
+          @c4p-on-before-action="${onAction}"
+        ></c4p-interstitial-screen-footer>
+      </c4p-interstitial-screen>
+
+
+```
+
+## `<c4p-interstitial-screen>` attributes, properties and events
+
+<ArgTypes of="c4p-interstitial-screen" />
+
+## `<c4p-interstitial-header>` attributes, properties and events
+
+<ArgTypes of="c4p-interstitial-screen-header" />
+## `<c4p-interstitial-screen-body>` attributes, properties and events
+
+<ArgTypes of="c4p-interstitial-screen-body" />
+## `<c4p-interstitial-screen-body-item>` attributes, properties and events
+
+<ArgTypes of="c4p-interstitial-screen-body-item" />
+## `<c4p-interstitial-screen-footer>` attributes, properties and events
+
+<ArgTypes of="c4p-interstitial-screen-footer" />

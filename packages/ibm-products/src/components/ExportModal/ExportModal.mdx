@@ -1,0 +1,84 @@
+import { Story, Controls, Source, Canvas } from '@storybook/addon-docs/blocks';
+import { CodesandboxLink } from '../../global/js/utils/story-helper';
+import { ExportModal } from '.';
+import * as stories from './ExportModal.stories';
+import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
+import wait from '../../global/js/utils/wait';
+
+export const customFunctionArr = [wait];
+
+# Export Modal
+
+[Usage guidelines](https://pages.github.ibm.com/carbon/ibm-products/patterns/export/usage/)
+|
+[Carbon modal usage guidelines](https://www.carbondesignsystem.com/components/modal/usage)
+|
+[Carbon modal documentation](https://react.carbondesignsystem.com/?path=/docs/components-modal)
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Example usage](#example-usage)
+  - [Standard](#standard)
+  - [With Extension Validation](#with-extension-validation)
+  - [With Preformatted Extensions](#with-preformatted-extensions)
+- [Component API](#component-api)
+
+## Overview
+
+Modal dialog version of the export pattern.
+
+### Standard
+
+<Canvas
+  of={stories.Standard}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () =>
+        stackblitzPrefillConfig({
+          story: stories.Standard,
+          customFunctionDefs: customFunctionArr,
+          styles: stories.default.parameters.styles,
+        }),
+    },
+  ]}
+></Canvas>
+
+### With Extension Validation
+
+<Canvas
+  of={stories.WithExtensionValidation}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () =>
+        stackblitzPrefillConfig({
+          story: stories.WithExtensionValidation,
+          customFunctionDefs: customFunctionArr,
+          styles: stories.default.parameters.styles,
+        }),
+    },
+  ]}
+></Canvas>
+
+### With Preformatted Extensions
+
+<Canvas
+  of={stories.WithPreformattedExtensions}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () =>
+        stackblitzPrefillConfig({
+          story: stories.WithPreformattedExtensions,
+          customFunctionDefs: customFunctionArr,
+          styles: stories.default.parameters.styles,
+        }),
+    },
+  ]}
+></Canvas>
+
+## Component API
+
+<Controls />

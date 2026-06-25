@@ -1,0 +1,110 @@
+import { ArgTypes, Markdown, Meta } from '@storybook/addon-docs/blocks';
+import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
+import TearsheetStories from './tearsheet.stories';
+
+<Meta of={TearsheetStories} />
+
+# Tearsheet
+
+> 💡 Check our
+> [Stackblitz](https://stackblitz.com/github/carbon-design-system/ibm-products/tree/main/packages/ibm-products-web-components/examples/tearsheet)
+> example implementation.
+
+[![Edit carbon-web-components](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/carbon-design-system/ibm-products/tree/main/packages/ibm-products-web-components/examples/tearsheet)
+
+A tearsheet is a mostly full-screen type of dialog that keeps users in-context
+and focused by bringing actionable content front and center while revealing
+parts of the UI behind it. There is also a narrow variant of the tearsheet.
+
+A tearsheet comprises up to 5 zones, allowing for flexibility depending on the
+content: a heading area including a title, an optional navigation area that sits
+just below the heading, an optional influencer which is a side panel on either
+the left or right side, the main content area, and a set of action buttons.
+
+## Getting started
+
+Here's a quick example to get you started.
+
+### JS (via import)
+
+```javascript
+import '@carbon/ibm-products-web-components/es/components/tearsheet/index.js';
+// The following are used for slotted fields
+import '@carbon/web-components/es/components/text-input/index.js';
+import '@carbon/web-components/es/components/textarea/index.js';
+import '@carbon/web-components/es/components/button/index.js';
+```
+
+### HTML
+
+```html
+<c4p-tearsheet>
+  <!-- Content -->
+  <h5>Tearsheet content</h5>
+  <div class="${storyPrefix}text-inputs">
+    <cds-text-input
+      label="Input A"
+      id="tearsheet-story-text-input-a"
+    ></cds-text-input>
+    <cds-text-input
+      label="Input B"
+      id="tearsheet-story-text-input-b"
+    ></cds-text-input>
+  </div>
+  <div class="${storyPrefix}text-inputs">
+    <cds-text-input
+      label="Input C"
+      id="tearsheet-story-text-input-c"
+    ></cds-text-input>
+    <cds-text-input
+      label="Input D"
+      id="tearsheet-story-text-input-d"
+    ></cds-text-input>
+  </div>
+  <div class="${storyPrefix}textarea-container">
+    <cds-textarea label="Notes" value="This is a text area"></cds-textarea>
+    <cds-textarea label="Notes" value="This is a text area"></cds-textarea>
+    <cds-textarea label="Notes" value="This is a text area"></cds-textarea>
+  </div>
+
+  <!-- subtitle optional -->
+  <div slot="subtitle">
+    Subtitle text which can provide more detail on the content being displayed.
+  </div>
+
+  <!-- Action toolbar optional -->
+  <cds-button slot="action-toolbar">Copy</cds-button>
+  <cds-button
+    slot="action-toolbar"
+    aria-label="Settings"
+    has-icon-only="true"
+    kind="${BUTTON_KIND.GHOST}"
+    size="sm"
+    tooltip-text="Settings"
+  >
+    ${Settings({ slot: 'icon' })}
+  </cds-button>
+  <cds-button
+    slot="action-toolbar"
+    aria-label="Delete"
+    has-icon-only="true"
+    kind="${BUTTON_KIND.GHOST}"
+    size="sm"
+    tooltip-text="Delete"
+  >
+    ${Trashcan({ slot: 'icon' })}
+  </cds-button>
+
+  <!-- Tearsheet actions optional -->
+  <cds-button slot="actions" kind="${BUTTON_KIND.GHOST}">Ghost</cds-button>
+  <cds-button slot="actions" kind="${BUTTON_KIND.PRIMARY}"></cds-button>
+</c4p-tearsheet>
+```
+
+## `<c4p-tearsheet>` attributes, properties and events
+
+Note: For `boolean` attributes, `true` means simply setting the attribute (e.g.
+`<c4p-tearsheet open>`) and `false` means not setting the attribute (e.g.
+`<c4p-tearsheet>` without `open` attribute).
+
+<ArgTypes of="c4p-tearsheet" />

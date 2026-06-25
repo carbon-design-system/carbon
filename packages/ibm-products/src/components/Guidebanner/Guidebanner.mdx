@@ -1,0 +1,43 @@
+import { Story, Controls, Canvas } from '@storybook/addon-docs/blocks';
+import { StackblitzLink } from '../../global/js/utils/story-helper';
+import { Guidebanner } from '.';
+import * as stories from './Guidebanner.stories';
+
+# Guidebanner
+
+[Usage guidelines](https://pages.github.ibm.com/carbon/ibm-products/components/onboarding/guide-banner/usage/)
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Example usage](#example-usage)
+  - [Collapsible](#collapsible)
+  - [Many insights](#many-insights)
+  - [Few insights](#few-insights)
+- [Component API](#component-api)
+
+## Overview
+
+The guide banner sits at the top of a page, or page-level tab, to introduce
+foundational concepts related to the page's content. The component is a
+collapsible banner that provides guidance or information to users. It features a
+horizontal scrollable list of guide elements with navigation controls, and can
+be expanded or collapsed to show or hide detailed content.
+
+## Example usage
+
+### Collapsible
+
+<Canvas of={stories.collapsible} />
+
+### Many insights
+
+<Canvas of={stories.manyInsights} />
+
+### Few insights
+
+<Canvas of={stories.fewInsights} />
+
+## Component API
+
+<Controls />

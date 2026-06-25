@@ -1,0 +1,114 @@
+/**
+ * Copyright IBM Corp. 2024
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/motion' as *;
+@use '@carbon/styles/scss/components/tag/tokens' as *;
+@use '@carbon/styles/scss/utilities/focus-outline';
+@use '../../../global/styles/project-settings' as c4p-settings;
+@use '@carbon/styles/scss/type';
+@use '@carbon/styles/scss/type' as *;
+@use '@carbon/styles/scss/utilities';
+
+$block-class: #{c4p-settings.$pkg-prefix}--condition-builder;
+
+.#{$block-class}__condition-block,
+.#{$block-class}__condition-block .#{$block-class}__block {
+  position: relative;
+  display: inline-flex;
+}
+
+.#{$block-class} [role='row'] {
+  position: relative;
+  outline: none;
+}
+.#{$block-class} [role='row']:focus::after {
+  @include focus-outline.focus-outline('outline');
+
+  position: absolute;
+  content: '';
+  inset: 0;
+}
+.#{$block-class}__condition__deletion-preview
+  .#{$block-class}__button:not(
+    .#{$block-class}__statement-button,
+    .#{$block-class}__connector-button,
+    .#{$block-class}__add-button,
+    .#{$block-class}__add-condition-sub-group
+  ) {
+  background-color: $tag-background-red;
+  color: $tag-color-red;
+}
+
+.#{$block-class}__condition__deletion-preview
+  .#{$block-class}__button:not(
+    .#{$block-class}__statement-button,
+    .#{$block-class}__connector-button
+  ):hover {
+  background-color: $tag-hover-red;
+}
+
+.#{$block-class}__text-ellipsis {
+  display: block;
+  overflow: hidden;
+  max-inline-size: $spacing-13;
+  text-overflow: ellipsis;
+  text-wrap: nowrap;
+}
+.#{$block-class}__group-preview {
+  block-size: 0;
+  opacity: 0;
+  pointer-events: none;
+  transition: all $duration-moderate-02 motion(exit, expressive);
+  .#{$block-class}__preview-condition {
+    display: flex;
+  }
+}
+.#{$block-class}__group-preview-animate {
+  block-size: auto;
+  color: $text-secondary;
+  opacity: 0.5;
+  pointer-events: none;
+  transition: all $duration-moderate-02 motion(exit, expressive);
+}
+.#{$block-class}__connector--disabled {
+  display: flex;
+  background-color: $layer;
+  color: $text-helper;
+  min-inline-size: $spacing-10;
+  pointer-events: none;
+}
+.#{$block-class}__condition-wrapper
+  > .#{$block-class}__condition-block:last-child
+  > .#{$block-class}__groupConnector {
+  margin-block-end: 0;
+}
+
+.#{$block-class}__readonly {
+  .#{$block-class}__condition-inner-block,
+  .#{$block-class}__connector,
+  .#{$block-class}__action-block,
+  .#{$block-class}__add-condition-wrapper,
+  .#{$block-class}__groupConnector {
+    background: transparent;
+    box-shadow: inset 0 0 0 1px $border-subtle-00;
+
+    button {
+      background: transparent;
+      cursor: default;
+
+      svg {
+        color: $icon-disabled;
+      }
+    }
+  }
+}
+
+.#{$block-class}__condition-inner-block {
+  display: flex;
+}

@@ -1,0 +1,217 @@
+//
+// Copyright IBM Corp. 2023, 2025
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+// Standard imports.
+@use '@carbon/layout/scss/convert' as *;
+@use '@carbon/styles/scss/motion' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/type' as *;
+@use '@carbon/styles/scss/config' as carbon-config;
+
+@use '../../global/styles/project-settings' as c4p-settings;
+
+@mixin ellipsis-2-lines {
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  text-overflow: ellipsis;
+}
+
+// The block part of our conventional BEM class names (blockClass__E--M).
+$block-class: #{c4p-settings.$pkg-prefix}--checklist;
+
+.#{$block-class}__header {
+  display: flex;
+  padding: $spacing-05;
+  background-color: $layer-01;
+  border-block-end: 1px solid $border-subtle-01;
+  gap: $spacing-03;
+}
+
+.#{$block-class}__chart {
+  // outer donut
+  position: relative;
+  align-self: center;
+  block-size: $spacing-08;
+  inline-size: $spacing-08;
+  min-inline-size: $spacing-08;
+}
+
+.#{$block-class}__chart::after {
+  // inner donut
+  position: absolute;
+  border-radius: 50%;
+  background-color: $layer-01;
+  block-size: $spacing-07;
+  content: '';
+  inline-size: $spacing-07;
+  inset-block-start: $spacing-02;
+  inset-inline-start: $spacing-02;
+}
+
+// Align __title and __chart-label vertically centered in the header.
+.#{$block-class}__titles {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.#{$block-class}__title {
+  @include type-style('productive-heading-02');
+}
+
+.#{$block-class}__chart-label {
+  @include type-style('label-01');
+
+  color: $text-secondary;
+}
+
+.#{$block-class}__title + .#{$block-class}__chart-label {
+  margin-block-start: $spacing-01;
+}
+
+// TOGGLE
+// The <IconButton> itself (class="...__toggle") is embedded inside two more tags,
+// which do not accept any class names passed via the <IconButton>.
+// So, we have to refer to it via it's "tooltip" wrapper element. :/
+.#{$block-class}__header .#{carbon-config.$prefix}--tooltip {
+  block-size: 2rem;
+  margin-block-start: calc(-1 * $spacing-03);
+  margin-inline: auto calc(-1 * $spacing-03);
+}
+
+.#{$block-class}__chevron {
+  color: $text-primary;
+  transform: rotate(0deg);
+  transition: all $duration-fast-02 motion(standard, productive);
+
+  /* stylelint-disable-next-line max-nesting-depth */
+  @media (prefers-reduced-motion: reduce) {
+    transition: none;
+  }
+}
+
+.#{$block-class}__closed .#{$block-class}__chevron {
+  transform: rotate(-180deg);
+}
+
+// Button to appear more like a link so it aligns better with the list text.
+// Override Primary button styling to appear more like a link.
+// "Unset" some settings to allow an inner div to enable multiple lines and an ellipsis if req'd.
+.#{$block-class}__button.#{carbon-config.$prefix}--btn--primary {
+  @include type-style('body-short-01');
+  // override bx--btn to allow two-line ellipsis
+  /* stylelint-disable-next-line declaration-property-value-disallowed-list */
+  flex-shrink: unset;
+  padding: 0;
+  border: none;
+  background-color: transparent;
+  color: $link-primary;
+
+  max-inline-size: none;
+  min-block-size: auto;
+}
+// The CSS for the Carbon button's label is incompatible with two-line ellipsis,
+// but a div inside a Carbon button works.
+.#{$block-class}__button.#{carbon-config.$prefix}--btn--primary div {
+  @include ellipsis-2-lines();
+}
+
+.#{$block-class}__button.#{carbon-config.$prefix}--btn--primary:hover {
+  background: transparent;
+  color: $link-primary-hover;
+  text-decoration: underline;
+}
+
+.#{$block-class}__button.#{carbon-config.$prefix}--btn--primary:active {
+  background: transparent;
+  color: $text-primary;
+  text-decoration: underline;
+}
+
+// container for animated content
+.#{$block-class}__content-outer {
+  overflow: hidden;
+}
+
+.#{$block-class}__content-inner {
+  background-color: $layer-01;
+  block-size: 100%;
+  transform: translate(0, 0);
+  transition: all $duration-fast-02 motion(standard, productive);
+
+  /* stylelint-disable-next-line max-nesting-depth */
+  @media (prefers-reduced-motion: reduce) {
+    transition: none;
+  }
+}
+
+.#{$block-class}__closed .#{$block-class}__content-inner {
+  block-size: 0;
+  transform: translate(0, -100%);
+}
+
+.#{$block-class}__list-group {
+  padding: $spacing-05;
+  border-block-start: 1px solid $border-subtle-01;
+}
+.#{$block-class}__list-group:first-of-type {
+  border-block-start: none;
+}
+
+.#{$block-class}__list-title {
+  @include type-style('body-short-01');
+  @include ellipsis-2-lines();
+
+  margin-block-end: $spacing-03;
+}
+
+.#{$block-class}__list-item {
+  display: flex;
+  margin-block-end: $spacing-03;
+}
+
+.#{$block-class}__list-item:last-child {
+  margin-block-end: 0;
+}
+
+.#{$block-class}__icon {
+  /* stylelint-disable-next-line */
+  margin: to-rem(1px) $spacing-03 0 0;
+  color: $icon-primary;
+}
+
+.#{$block-class}__icon--checked,
+.#{$block-class}__icon--indeterminate {
+  color: $interactive;
+}
+
+.#{$block-class}__icon--error {
+  color: $support-error;
+}
+
+.#{$block-class}__icon--disabled {
+  color: $icon-disabled;
+}
+
+.#{$block-class}__label {
+  @include type-style('body-short-01');
+  @include ellipsis-2-lines();
+}
+
+.#{$block-class}__label--disabled {
+  color: $text-disabled;
+}
+
+.#{$block-class}__footer {
+  @include ellipsis-2-lines();
+
+  padding: $spacing-03 $spacing-05;
+  border-block-start: 1px solid $border-subtle-01;
+}

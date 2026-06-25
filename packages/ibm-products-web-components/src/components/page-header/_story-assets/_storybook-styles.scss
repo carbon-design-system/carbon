@@ -1,0 +1,54 @@
+//
+// Copyright IBM Corp. 2025, 2025
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use '@carbon/styles/scss/spacing';
+
+.page-header--docs-demo .docs-story div:first-child {
+  padding: 0;
+}
+
+.tabs-demo {
+  block-size: 200vh;
+}
+
+.page-header--docs-demo .tabs-demo {
+  block-size: 100%;
+}
+
+.page-header--docs-demo .innerZoomElementWrapper > * {
+  /* Used to override storybook styling from a dynamically generated class in the canvas preview */
+  /* stylelint-disable-next-line declaration-no-important */
+  border: 0 !important;
+}
+
+.page-header--docs-demo .ui-shell--header {
+  /* stylelint-disable-next-line carbon/layout-use */
+  transform: translateY(-48px);
+}
+
+.page-header-story__wrapper {
+  overflow: auto;
+  block-size: calc(100vh - 3rem);
+  margin-block-start: spacing.$spacing-09;
+}
+
+main {
+  margin-block-start: spacing.$spacing-09;
+}
+
+.content-actions-wrapper {
+  display: inline-flex;
+  align-items: center;
+  gap: 0;
+
+  @media (width <= 671px) {
+    /* stylelint-disable-next-line selector-type-no-unknown */
+    cds-button {
+      display: none;
+    }
+  }
+}

@@ -1,0 +1,156 @@
+import { ArgTypes, Markdown, Meta } from '@storybook/addon-docs/blocks';
+import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
+import AddSelectStories from './add-select.stories';
+
+<Meta of={AddSelectStories} />
+
+# AddSelect Web Component
+
+[Usage guidelines](https://pages.github.ibm.com/carbon/ibm-products/components/add-select/usage/)
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Usage](#usage)
+- [Examples](#examples)
+- [Component API](#component-api)
+
+## Overview
+
+AddSelect is a composable web component system for building add/select interfaces. It provides a flexible approach where you can compose the UI using smaller, focused web components.
+
+## Components
+
+### c4p-add-select
+
+The root component that provides context for selection state.
+
+**Attributes:**
+- `multi` - Enable multi-select (checkboxes) or single-select (radio buttons)
+
+### c4p-add-select-body
+
+Contains the search bar, breadcrumbs, and main content area.
+
+**Attributes:**
+- `items-label` - Label for the items section
+- `global-search-label` - Label for the search input
+- `global-search-placeholder` - Placeholder text for search
+- `item-count` - Total number of items
+
+### c4p-add-select-content
+
+Container for items with keyboard navigation support.
+
+**Keyboard Navigation:**
+- **Arrow Up/Down** - Navigate between items
+- **Arrow Right** - Navigate into children (if available)
+- **Enter/Space** - Select/deselect item
+- **Ctrl+Home** - Jump to first item
+- **Ctrl+End** - Jump to last item
+
+### c4p-add-select-row
+
+Individual selectable item.
+
+**Attributes:**
+- `item-id` - Unique identifier
+- `title` - Item title
+- `subtitle` - Optional subtitle
+- `value` - Item value
+- `selected` - Whether item is selected
+- `disabled` - Whether item is disabled
+
+## Usage
+
+### Basic Multi-Select
+
+```html
+<c4p-add-select multi>
+  <c4p-add-select-body
+    items-label="All items"
+    global-search-label="Search"
+    item-count="5"
+  >
+    <c4p-add-select-content>
+      <c4p-add-select-row
+        item-id="1"
+        title="Item 1"
+        subtitle="Description"
+        value="item-1"
+      ></c4p-add-select-row>
+      <!-- More rows -->
+    </c4p-add-select-content>
+  </c4p-add-select-body>
+</c4p-add-select>
+```
+
+### Single Select
+
+```html
+<c4p-add-select>
+  <c4p-add-select-body items-label="Select one item">
+    <c4p-add-select-content>
+      <!-- Rows -->
+    </c4p-add-select-content>
+  </c4p-add-select-body>
+</c4p-add-select>
+```
+
+## Getting started
+
+Here's a quick example to get you started.
+
+### JS (via import)
+
+```javascript
+import '@carbon/ibm-products-web-components/es/components/add-select/index.js';
+```
+
+### HTML
+
+```html
+<c4p-add-select multi>
+  <c4p-add-select-body
+    items-label="All items"
+    global-search-label="Search"
+    global-search-placeholder="Search items"
+    item-count="5"
+  >
+    <c4p-add-select-content>
+      <c4p-add-select-row
+        item-id="1"
+        title="Item 1"
+        subtitle="Description"
+        value="item-1"
+      ></c4p-add-select-row>
+      <c4p-add-select-row
+        item-id="2"
+        title="Item 2"
+        subtitle="Description"
+        value="item-2"
+      ></c4p-add-select-row>
+    </c4p-add-select-content>
+  </c4p-add-select-body>
+</c4p-add-select>
+```
+
+## `<c4p-add-select>` attributes, properties and events
+
+Note: For `boolean` attributes, `true` means simply setting the attribute (e.g.
+`<c4p-add-select multi>`) and `false` means not setting the attribute (e.g.
+`<c4p-add-select>` without `multi` attribute).
+
+<ArgTypes of="c4p-add-select" />
+
+## `<c4p-add-select-body>` attributes, properties and events
+
+<ArgTypes of="c4p-add-select-body" />
+
+## `<c4p-add-select-content>` attributes, properties and events
+
+<ArgTypes of="c4p-add-select-content" />
+
+## `<c4p-add-select-row>` attributes, properties and events
+
+<ArgTypes of="c4p-add-select-row" />

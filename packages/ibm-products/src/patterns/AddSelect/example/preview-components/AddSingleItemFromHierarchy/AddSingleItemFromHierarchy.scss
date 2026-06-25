@@ -1,0 +1,29 @@
+/**
+ * Copyright IBM Corp. 2026
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/type' as *;
+
+// Preview component styles
+.example-container {
+  padding: $spacing-05;
+
+  h3 {
+    @include type-style('heading-03');
+
+    margin-block-end: $spacing-03;
+  }
+
+  p {
+    @include type-style('body-01');
+
+    margin-block-end: $spacing-05;
+  }
+
+  .launch-button {
+    margin-block-start: $spacing-05;
+  }
+}

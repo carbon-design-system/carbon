@@ -1,0 +1,103 @@
+//
+// Copyright IBM Corp. 2020, 2025
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+// Standard imports.
+@use '@carbon/styles/scss/breakpoint' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/utilities';
+@use '@carbon/styles/scss/config' as carbon-config;
+
+@use '../../global/styles/project-settings' as c4p-settings;
+@use '../../global/styles/mixins' as *;
+
+$_block-class: #{c4p-settings.$pkg-prefix}--breadcrumb-with-overflow;
+
+@include block-wrap($block-class: $_block-class) {
+  &.#{$_block-class} {
+    display: block;
+  }
+
+  .#{$_block-class}__space {
+    position: relative;
+    display: block;
+    inline-size: 100%;
+    white-space: nowrap;
+  }
+
+  .#{$_block-class}__breadcrumb-container.#{$_block-class}__breadcrumb-container-with-items {
+    display: inline-flex; // needed to register a width
+    inline-size: 100%;
+  }
+
+  .#{$_block-class}__breadcrumb-container
+    .#{carbon-config.$prefix}--breadcrumb {
+    flex-wrap: nowrap;
+    align-items: flex-start;
+    inline-size: 100%;
+  }
+
+  .#{$_block-class}__breadcrumb-container--hidden {
+    // This breadcrumb container is used to measure the width of all displayable breadcrumbs
+    @include measuring-container;
+  }
+
+  .#{$_block-class}__breadcrumb-back {
+    display: none;
+
+    svg {
+      fill: $icon-primary;
+    }
+  }
+
+  .#{$_block-class}__back__button.#{carbon-config.$prefix}--btn {
+    padding: 0;
+    min-block-size: revert;
+  }
+
+  .#{$_block-class}__back__button.#{carbon-config.$prefix}--btn--ghost:hover {
+    background-color: inherit;
+  }
+
+  @include breakpoint-down(md) {
+    .#{carbon-config.$prefix}--breadcrumb-item {
+      display: none;
+    }
+
+    .#{$_block-class}__breadcrumb-back,
+    .#{carbon-config.$prefix}--breadcrumb-item:last-child {
+      display: inline-flex;
+      vertical-align: middle;
+    }
+
+    .#{$_block-class}__displayed-breadcrumb:last-child {
+      max-inline-size: calc(
+        100% - $spacing-07
+      ); // allow room for breadcrumb back
+    }
+  }
+
+  .#{carbon-config.$prefix}--breadcrumb-item:last-child {
+    display: inline-flex; // flex instead of block due to spacing
+  }
+
+  .#{$_block-class}__displayed-breadcrumb:last-child {
+    display: inline-flex; // flex instead of block due to spacing
+  }
+
+  .#{$_block-class}__displayed-breadcrumb:last-child
+    .#{carbon-config.$prefix}--link {
+    display: inline-block;
+    overflow: hidden;
+    inline-size: 100%;
+    text-overflow: ellipsis;
+  }
+}
+.#{$_block-class}__overflow-menu {
+  /* stylelint-disable-next-line carbon/type-use */
+  line-height: 0;
+}

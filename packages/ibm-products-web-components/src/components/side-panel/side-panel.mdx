@@ -1,0 +1,116 @@
+import { ArgTypes, Markdown, Meta } from '@storybook/addon-docs/blocks';
+import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
+import SidePanelStories from './side-panel.stories';
+
+<Meta of={SidePanelStories} />
+
+# SidePanel
+
+> 💡 Check our
+> [Stackblitz](https://stackblitz.com/github/carbon-design-system/ibm-products/tree/main/packages/ibm-products-web-components/examples/side-panel)
+> example implementation.
+
+[![Edit carbon-web-components](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/carbon-design-system/ibm-products/tree/main/packages/ibm-products-web-components/examples/side-panel)
+
+Side panels keep users in-context of a page while performing tasks like
+navigating, editing, viewing details, or configuring something new.
+
+The side panel supports an optional resizer feature that allows users to adjust
+the panel width by dragging a handle. This feature uses the
+`@carbon-labs/wc-resizer` component and can be enabled by setting the
+`enable-resizer` attribute.
+
+## Getting started
+
+Here's a quick example to get you started.
+
+### JS (via import)
+
+```javascript
+import '@carbon/ibm-products-web-components/es/components/side-panel/index.js';
+// The following are used for slotted fields
+import '@carbon/web-components/es/components/text-input/index.js';
+import '@carbon/web-components/es/components/textarea/index.js';
+import '@carbon/web-components/es/components/button/index.js';
+```
+
+### HTML
+
+```html
+<c4p-side-panel
+  include-overlay
+  open
+  label-text="An optional label"
+  size="md"
+  title="A title, can be omitted"
+  enable-resizer
+>
+  <!-- Content -->
+  <h5>Side panel content</h5>
+  <div class="${storyPrefix}text-inputs">
+    <cds-text-input
+      label="Input A"
+      id="side-panel-story-text-input-a"
+    ></cds-text-input>
+    <cds-text-input
+      label="Input B"
+      id="side-panel-story-text-input-b"
+    ></cds-text-input>
+  </div>
+  <div class="${storyPrefix}text-inputs">
+    <cds-text-input
+      label="Input C"
+      id="side-panel-story-text-input-c"
+    ></cds-text-input>
+    <cds-text-input
+      label="Input D"
+      id="side-panel-story-text-input-d"
+    ></cds-text-input>
+  </div>
+  <div class="${storyPrefix}textarea-container">
+    <cds-textarea label="Notes" value="This is a text area"></cds-textarea>
+    <cds-textarea label="Notes" value="This is a text area"></cds-textarea>
+    <cds-textarea label="Notes" value="This is a text area"></cds-textarea>
+  </div>
+
+  <!-- subtitle optional -->
+  <div slot="subtitle">
+    Subtitle text which can provide more detail on the content being displayed.
+  </div>
+
+  <!-- Action toolbar optional -->
+  <cds-button slot="action-toolbar">Copy</cds-button>
+  <cds-button
+    slot="action-toolbar"
+    aria-label="Settings"
+    has-icon-only="true"
+    kind="${BUTTON_KIND.GHOST}"
+    size="sm"
+    tooltip-text="Settings"
+  >
+    ${Settings({ slot: 'icon' })}
+  </cds-button>
+  <cds-button
+    slot="action-toolbar"
+    aria-label="Delete"
+    has-icon-only="true"
+    kind="${BUTTON_KIND.GHOST}"
+    size="sm"
+    tooltip-text="Delete"
+  >
+    ${Trashcan({ slot: 'icon' })}
+  </cds-button>
+
+  <!-- Side panel actions optional -->
+  <cds-button slot="actions" kind="${BUTTON_KIND.GHOST}">Ghost</cds-button>
+  <cds-button slot="actions" kind="${BUTTON_KIND.PRIMARY}"></cds-button>
+</c4p-side-panel>
+```
+
+## `<c4p-side-panel>` attributes, properties and events
+
+Note: For `boolean` attributes, `true` means simply setting the attribute (e.g.
+`<c4p-side-panel open>`) and `false` means not setting the attribute (e.g.
+`<c4p-side-panel>` without `open` attribute).
+
+<ArgTypes of="c4p-side-panel" />

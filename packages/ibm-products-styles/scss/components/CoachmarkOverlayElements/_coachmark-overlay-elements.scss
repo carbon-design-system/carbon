@@ -1,0 +1,48 @@
+/* stylelint-disable max-nesting-depth */
+//
+// Copyright IBM Corp. 2023, 2024
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+// Standard imports.
+@use '../../global/styles/project-settings' as c4p-settings;
+@use '../../global/styles/mixins';
+@use '@carbon/layout/scss/convert' as *;
+
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/type';
+@use '@carbon/styles/scss/spacing' as *;
+// Other Carbon settings if needed
+// TODO: @use '@carbon/styles/scss/grid';
+// or
+// TODO: @use '@carbon/styles/scss/grid';
+
+// CoachmarkOverlayElements uses the following Carbon for IBM Products components:
+@use '../Carousel/carousel';
+
+// The block part of our conventional BEM class names (blockClass__E--M).
+$block-class: #{c4p-settings.$pkg-prefix}--coachmark-overlay-elements;
+
+.#{$block-class} {
+  &__element-stepped-media {
+    padding: 0 $spacing-05;
+    /* stylelint-disable-next-line function-no-unknown -- to-rem carbon replacement for rem */
+    block-size: to-rem(128px);
+    margin-block-end: $spacing-05;
+  }
+
+  &__footer {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 0 $spacing-05 $spacing-05;
+  }
+
+  &--controls-progress {
+    justify-self: flex-start;
+    margin-inline-end: auto;
+    @include type.type-style('helper-text-01');
+  }
+}

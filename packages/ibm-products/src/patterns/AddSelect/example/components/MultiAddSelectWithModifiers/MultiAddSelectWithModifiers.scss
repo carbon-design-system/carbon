@@ -1,0 +1,74 @@
+/**
+ * Copyright IBM Corp. 2026
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/type' as *;
+
+.multi-add-select-with-modifiers-pattern {
+  &__modifier {
+    flex: 0 0 auto;
+    margin-inline-start: auto;
+    min-inline-size: 200px;
+  }
+
+  &__summary-title {
+    display: flex;
+    flex: 1;
+    align-items: center;
+    justify-content: space-between;
+    gap: $spacing-03;
+  }
+
+  &__summary-name {
+    flex: 1;
+    min-inline-size: 0;
+  }
+
+  &__summary-modifier-value {
+    color: var(--cds-text-secondary);
+    font-size: 0.875rem;
+    white-space: nowrap;
+  }
+
+  &__summary-content {
+    padding-block-start: $spacing-03;
+  }
+
+  &__summary-field {
+    margin-block-end: $spacing-03;
+
+    &:last-child {
+      margin-block-end: 0;
+    }
+
+    strong {
+      font-weight: 600;
+    }
+  }
+
+  &__no-results {
+    padding: $spacing-07;
+    text-align: center;
+
+    h4 {
+      font-size: 1rem;
+      font-weight: 600;
+      margin-block-end: $spacing-03;
+    }
+
+    p {
+      color: var(--cds-text-secondary);
+      font-size: 0.875rem;
+    }
+  }
+
+  &__notification {
+    position: fixed;
+    z-index: 9999;
+    inset-block-start: $spacing-05;
+    inset-inline-end: $spacing-05;
+  }
+}

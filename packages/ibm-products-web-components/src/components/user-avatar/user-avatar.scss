@@ -1,0 +1,118 @@
+/*
+* Copyright IBM Corp. 2025, 2025
+*
+* This source code is licensed under the Apache-2.0 license found in the
+* LICENSE file in the root directory of this source tree.
+*/
+
+$css--plex: true !default;
+
+/* Other Carbon settings. */
+@use '@carbon/styles/scss/reset';
+@use '@carbon/styles/scss/breakpoint' as *;
+@use '@carbon/styles/scss/config' as *;
+@use '@carbon/styles/scss/motion' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/type';
+@use '@carbon/styles/scss/colors' as *;
+@use '@carbon/styles/scss/layout' as *;
+@use '@carbon/styles/scss/utilities';
+@use 'sass:map';
+
+@use '@carbon/ibm-products-styles/scss/components/UserAvatar' as *;
+
+$prefix: 'c4p';
+
+$block-class: #{$prefix}--user-avatar;
+
+:host(#{$prefix}-user-avatar) {
+  display: inline-block;
+
+  .#{$block-class} {
+    box-sizing: border-box;
+  }
+}
+
+:host(#{$prefix}-user-avatar) .#{$block-class}--xl {
+  ::slotted([slot='rendericon']) {
+    block-size: $spacing-07;
+    inline-size: $spacing-07;
+  }
+}
+:host(#{$prefix}-user-avatar) .#{$block-class}--lg {
+  ::slotted([slot='rendericon']) {
+    block-size: $spacing-06;
+    inline-size: $spacing-06;
+  }
+}
+:host(#{$prefix}-user-avatar) .#{$block-class}--md {
+  ::slotted([slot='rendericon']) {
+    block-size: $spacing-04 + $spacing-03;
+    inline-size: $spacing-04 + $spacing-03;
+  }
+}
+:host(#{$prefix}-user-avatar) .#{$block-class}--sm {
+  ::slotted([slot='rendericon']) {
+    block-size: $spacing-05;
+    inline-size: $spacing-05;
+  }
+}
+
+:host(#{$prefix}-user-avatar) .#{$block-class}__tooltip-trigger {
+  padding: 0;
+  border: 0;
+  background: none;
+  outline: none;
+}
+
+:host(#{$prefix}-user-avatar) .#{$block-class}__tooltip-content {
+  --cds-tooltip-padding-block: #{$spacing-01};
+
+  &:focus-within {
+    outline: $spacing-01 solid $focus;
+    outline-offset: 1px;
+  }
+}
+
+@mixin setBgColor($color) {
+  // stylelint-disable-next-line carbon/theme-use
+  background-color: $color;
+}
+
+//this mixin allows you to set background color based on the lighter themes such as g10 and white
+@mixin setLightBg($order, $color) {
+  :host(#{$prefix}-user-avatar) .#{$block-class}--#{$order},
+  :host(#{$prefix}-user-avatar[theme='light']) .#{$block-class}--#{$order} {
+    @include setBgColor($color);
+  }
+}
+@mixin setDarkBg($order, $color) {
+  :host(#{$prefix}-user-avatar[theme='dark']) .#{$block-class}--#{$order} {
+    @include setBgColor($color);
+  }
+}
+@include setLightBg(order-1-cyan, $cyan-60);
+@include setLightBg(order-2-gray, $gray-60);
+@include setLightBg(order-3-green, $green-60);
+@include setLightBg(order-4-magenta, $magenta-60);
+@include setLightBg(order-5-purple, $purple-60);
+@include setLightBg(order-6-teal, $teal-60);
+@include setLightBg(order-7-cyan, $cyan-80);
+@include setLightBg(order-8-gray, $gray-80);
+@include setLightBg(order-9-green, $green-80);
+@include setLightBg(order-10-magenta, $magenta-80);
+@include setLightBg(order-11-purple, $purple-80);
+@include setLightBg(order-12-teal, $teal-80);
+@include setDarkBg(order-1-cyan, $cyan-50);
+@include setDarkBg(order-2-gray, $gray-50);
+@include setDarkBg(order-3-green, $green-50);
+@include setDarkBg(order-4-magenta, $magenta-50);
+@include setDarkBg(order-5-purple, $purple-50);
+@include setDarkBg(order-6-teal, $teal-50);
+@include setDarkBg(order-7-cyan, $cyan-30);
+@include setDarkBg(order-8-gray, $gray-30);
+@include setDarkBg(order-9-green, $green-30);
+@include setDarkBg(order-10-magenta, $magenta-30);
+@include setDarkBg(order-11-purple, $purple-30);
+@include setDarkBg(order-12-teal, $teal-30);

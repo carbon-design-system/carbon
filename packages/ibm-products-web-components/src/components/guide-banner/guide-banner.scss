@@ -1,0 +1,36 @@
+/*
+* Copyright IBM Corp. 2025, 2025
+*
+* This source code is licensed under the Apache-2.0 license found in the
+* LICENSE file in the root directory of this source tree.
+*/
+
+$css--plex: true !default;
+
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/reset';
+@use '@carbon/styles/scss/type';
+@use '@carbon/ibm-products-styles/scss/config';
+@use '@carbon/ibm-products-styles/scss/components/Guidebanner' as *;
+
+$prefix: config.$pkg-prefix;
+$carbon-prefix: config.$carbon-prefix;
+$block-class: #{$prefix}--guidebanner;
+
+:host(#{$prefix}-guide-banner) {
+  details {
+    display: flex;
+    flex-direction: column-reverse;
+  }
+
+  ::marker,
+  ::-webkit-details-marker {
+    display: none;
+    content: '';
+  }
+
+  .#{$block-class}__title {
+    padding-block-end: $spacing-05;
+  }
+}

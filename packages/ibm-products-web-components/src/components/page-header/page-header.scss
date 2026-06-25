@@ -1,0 +1,547 @@
+//
+// Copyright IBM Corp. 2025, 2025
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use 'sass:math';
+
+$css--plex: true !default;
+
+@use '@carbon/styles/scss/config' as *;
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/type' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/motion' as *;
+@use '@carbon/styles/scss/breakpoint' as *;
+@use '@carbon/styles/scss/utilities/convert';
+@use '@carbon/styles/scss/utilities/z-index' as *;
+@use '@carbon/grid';
+@use '@carbon/styles/scss/components/page-header/index' as *;
+@use 'sass:map';
+
+$prefix: 'c4p';
+$carbon-prefix: 'cds';
+
+:host(#{$prefix}-page-header) {
+  // TODO: remove above styles when styles from React have been migrated
+  // and use the extend below
+  // @extend .#{$prefix}--page-header;
+  position: sticky;
+  display: block;
+  background-color: $layer-01;
+  border-block-end: 1px solid $border-subtle-01;
+  /* custom css property used from calculation of header offset */
+  /* stylelint-disable-next-line carbon/layout-use */
+  inset-block-start: var(--c4p-page-header-header-top);
+}
+
+// When disableStickyTabBar is true, remove sticky positioning from root and add padding
+:host(#{$prefix}-page-header.#{$prefix}--page-header--disable-sticky-tab-bar) {
+  position: static;
+  // Add padding to compensate for fixed breadcrumb (40px height)
+  padding-block-start: convert.to-rem(40px);
+}
+
+:host(#{$prefix}-page-header-breadcrumb),
+:host(#{$prefix}-page-header-content),
+:host(#{$prefix}-page-header-tabs) {
+  @include grid.css-grid();
+
+  display: block;
+}
+
+:host(#{$prefix}-page-header-breadcrumb) {
+  position: sticky;
+  z-index: 1;
+  overflow: visible;
+  background-color: $layer-01;
+  block-size: convert.to-rem(40px);
+
+  /* custom css property used from calculation of breadcrumb offset */
+  /* stylelint-disable-next-line carbon/layout-use */
+  inset-block-start: var(--c4p-page-header-breadcrumb-top);
+  // TODO: remove above styles when styles from React have been migrated
+  // and use the extend below
+  // @extend .#{$prefix}--page-header__breadcrumb-bar;
+}
+
+// Apply border only when border attribute is true (default)
+:host(#{$prefix}-page-header-breadcrumb[border]) {
+  border-block-end: 1px solid $border-subtle-01;
+}
+
+// When breadcrumb has fixed class, use fixed positioning below UI Shell header
+:host(
+  #{$prefix}-page-header-breadcrumb.#{$prefix}--page-header-breadcrumb--fixed
+) {
+  position: fixed;
+  z-index: z('header') - 1;
+  background-color: $layer-01;
+  block-size: convert.to-rem(40px);
+  /* stylelint-disable-next-line carbon/layout-use */
+  inset-block-start: var(--c4p-page-header-breadcrumb-top);
+  inset-inline-end: 0;
+  inset-inline-start: 0;
+}
+
+// Apply border to fixed breadcrumb only when border attribute is true (default)
+:host(
+  #{$prefix}-page-header-breadcrumb.#{$prefix}--page-header-breadcrumb--fixed[border]
+) {
+  border-block-end: 1px solid $border-subtle-01;
+}
+
+:host(#{$prefix}-page-header-breadcrumb) {
+  ::slotted([slot='icon']) {
+    margin-inline-end: $spacing-03;
+    // TODO: remove above styles when styles from React have been migrated
+    // and use the extend below
+    // @extend .#{$prefix}--page-header__breadcrumb__icon;
+  }
+
+  .#{$carbon-prefix}--subgrid {
+    block-size: 100%;
+  }
+
+  .#{$carbon-prefix}--css-grid-column {
+    overflow: visible;
+    min-inline-size: 0;
+  }
+
+  // TODO: remove this section when styles from React have been migrated
+  .#{$prefix}--page-header__breadcrumb-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    block-size: $spacing-08;
+    gap: $spacing-03;
+    inline-size: 100%;
+    min-inline-size: 0;
+  }
+
+  .#{$prefix}--page-header__breadcrumb-wrapper {
+    display: flex;
+    flex: 1 1 auto;
+    min-inline-size: 0;
+
+    @include breakpoint-down(md) {
+      flex: 1 1 75%;
+    }
+
+    @include breakpoint(md) {
+      max-inline-size: 60%;
+    }
+
+    @include breakpoint(lg) {
+      max-inline-size: 60%;
+    }
+  }
+
+  .#{$prefix}--page-header__breadcrumb__actions {
+    display: flex;
+    flex: 0 0 auto;
+    align-items: center;
+    justify-content: flex-end;
+    gap: $spacing-03;
+    min-inline-size: 0;
+
+    @include breakpoint-down(md) {
+      flex: 0 1 25%;
+      max-inline-size: 25%;
+    }
+  }
+  ///////////////////////////////
+}
+
+:host(#{$prefix}-page-header-breadcrumb:not([content-actions-flush]))
+  ::slotted([slot='content-actions']) {
+  //stylelint-disable declaration-no-important
+  margin-inline-end: $spacing-04 !important;
+}
+
+:host(#{$prefix}-page-header-breadcrumb[page-actions-flush]) {
+  .#{$carbon-prefix}--css-grid {
+    margin-inline-end: 0;
+    padding-inline-end: 0;
+  }
+
+  .#{$carbon-prefix}--css-grid-column {
+    margin-inline-end: 0;
+  }
+}
+
+:host(#{$prefix}-page-header-content) {
+  padding-block-start: $spacing-06;
+  // TODO: remove above styles when styles from React have been migrated
+  // and use the extend below
+  // @extend .#{$prefix}--page-header__content;
+
+  .#{$prefix}--page-header__content__title {
+    @include type-style('productive-heading-04');
+
+    display: -webkit-box;
+    overflow: hidden;
+    // TODO: remove above styles when styles from React have been migrated
+    // and use the extend below
+    // @extend .#{$prefix}--page-header__content__title;
+    margin: 0;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    max-inline-size: convert.to-rem(640px);
+    text-overflow: ellipsis;
+    white-space: normal;
+  }
+
+  .#{$prefix}--page-header__content__title-wrapper {
+    // TODO: remove this section
+    @include breakpoint-down(md) {
+      display: flex;
+      flex-direction: column;
+      grid-gap: $spacing-05;
+    }
+
+    display: grid;
+    gap: $spacing-05;
+    ///////////////////////////////
+
+    // overriding until the responsive behavior is implemented
+    grid-template-columns: auto minmax(auto, auto);
+    margin-block-end: $spacing-05;
+    min-block-size: convert.to-rem(40px);
+  }
+
+  // TODO: remove this section
+  .#{$prefix}--page-header__content__start {
+    display: flex;
+    flex-wrap: wrap;
+    gap: $spacing-05;
+  }
+
+  .#{$prefix}--page-header__content__page-actions {
+    display: flex;
+    justify-content: right;
+    /* stylelint-disable-next-line carbon/motion-easing-use */
+    transition: opacity motion(standard, productive) $duration-moderate-02;
+
+    &.#{$prefix}--page-header__content__page-actions--clipped {
+      opacity: 0;
+      visibility: hidden;
+    }
+
+    @include breakpoint-down('md') {
+      justify-content: left;
+      margin-block-start: 0;
+    }
+  }
+
+  .#{$prefix}--page-header__content__title-container {
+    display: flex;
+  }
+  ///////////////////////////////
+  ::slotted([slot='icon']) {
+    margin-inline-end: $spacing-05;
+    // TODO: remove above styles when styles from React have been migrated
+    // and use the extend below
+    // @extend .#{$prefix}--page-header__content__icon;
+  }
+
+  ::slotted([slot='contextual-actions']) {
+    display: flex;
+    align-items: center;
+    // TODO: remove above styles when styles from React have been migrated
+    // and use the extend below
+    // @extend .#{$prefix}--page-header__content__contextual-actions;
+  }
+}
+
+:host(#{$prefix}-page-header-content[contextual-actions]) {
+  .#{$prefix}--page-header__content__title {
+    -webkit-line-clamp: 1;
+  }
+}
+
+:host(#{$prefix}-page-header-content[contextual-actions]) {
+  .#{$prefix}--page-header__content__title {
+    -webkit-line-clamp: 1;
+  }
+}
+
+:host(#{$prefix}-page-header-content-text) {
+  @include type-style('body-01');
+  // TODO: remove above styles when styles from React have been migrated
+  // and use the extend below
+  // @extend .#{$prefix}--page-header__content__body;
+  display: block;
+  max-inline-size: convert.to-rem(640px);
+  padding-block-end: $spacing-06;
+
+  .#{$prefix}--page-header__content__subtitle {
+    @include type-style('productive-heading-03');
+
+    margin-block-end: $spacing-03;
+    // TODO: remove above styles when styles from React have been migrated
+    margin-block-start: 0;
+  }
+}
+
+:host(#{$prefix}-page-header-hero-image) {
+  // Aspect ratio container - matches Carbon's AspectRatio component
+  position: relative;
+  display: block;
+  overflow: hidden;
+  block-size: 100%;
+
+  // The inner div with hero-image class needs to be absolutely positioned
+  // to overlay on the aspect ratio padding
+  .#{$prefix}--page-header__hero-image {
+    position: absolute;
+    inset: 0;
+  }
+
+  // Styles for slotted content - needed for shadow DOM
+  ::slotted(picture) {
+    display: flex;
+    justify-content: center;
+    block-size: 100%;
+    inline-size: 100%;
+  }
+
+  ::slotted(img) {
+    display: block;
+    block-size: 100%;
+    inline-size: 100%;
+    object-fit: var(--object-fit, cover);
+    object-position: var(--object-position, center);
+  }
+}
+
+:host(#{$prefix}-page-header-hero-image)::before {
+  display: block;
+  content: '';
+  padding-block-start: math.percentage(math.div(2, 3));
+
+  @include grid.breakpoint-up('lg') {
+    padding-block-start: math.percentage(math.div(1, 2));
+  }
+}
+
+:host(#{$prefix}-page-header-hero-image)::after {
+  display: table;
+  clear: both;
+  content: '';
+}
+
+:host(#{$prefix}-page-header-tabs) {
+  position: sticky;
+  z-index: 1;
+  background-color: $layer-01;
+  /* stylelint-disable-next-line carbon/layout-use */
+  inset-block-start: var(--c4p-page-header-breadcrumb-top);
+  // TODO: remove above styles when styles from React have been migrated
+  // and use the extend below
+  // @extend .#{$prefix}--page-header__tab-bar;
+
+  .#{$carbon-prefix}--css-grid {
+    // On small screens, use flex to keep grid and scroller on same line
+    display: flex;
+    align-items: center;
+
+    // On max breakpoint and above, use grid for proper Carbon alignment
+    @include breakpoint(max) {
+      display: grid;
+    }
+  }
+
+  .#{$carbon-prefix}--css-grid .#{$carbon-prefix}--css-grid-column {
+    // On small screens, allow column to flex
+    flex: 1;
+    margin: 0;
+    min-inline-size: 0;
+
+    @include breakpoint(max) {
+      flex: none;
+    }
+  }
+}
+
+// Disable sticky positioning for tab bar when disableStickyTabBar prop is true
+:host(
+  #{$prefix}-page-header-tabs.#{$prefix}--page-header-tabs--disable-sticky
+) {
+  position: static;
+}
+
+:host(#{$prefix}-page-header-tabs) .#{$prefix}--page-header__tab-bar--tablist {
+  display: flex;
+  align-items: center;
+}
+
+:host(#{$prefix}-page-header-tabs) ::slotted([slot='tags']) {
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-end;
+  inline-size: 40%;
+  margin-inline-start: auto;
+  min-inline-size: 0;
+  // TODO: remove above styles when styles from React have been migrated
+  // and use the extend below
+  // @extend .#{$prefix}--page-header__tags;
+}
+
+// When scroller is present, adjust tags styling
+:host(#{$prefix}-page-header-tabs:has([slot='scroller']))
+  ::slotted([slot='tags']) {
+  transform: translateX(calc($spacing-06 * -1));
+
+  @include breakpoint(md) {
+    padding-inline-end: $spacing-03;
+    transform: translateX(0);
+  }
+  @include breakpoint(max) {
+    padding-inline-end: $spacing-05;
+  }
+}
+
+// Scroller positioning: relative on small screens, absolute on max+
+:host(#{$prefix}-page-header-tabs) ::slotted([slot='scroller']) {
+  position: relative;
+
+  @include breakpoint(max) {
+    position: absolute;
+    inset-block-start: 0;
+    inset-inline-end: 0;
+  }
+}
+
+:host(#{$prefix}-page-header-breadcrumb),
+:host(#{$prefix}-page-header-content),
+:host(#{$prefix}-page-header-tabs) {
+  .#{$carbon-prefix}--css-grid {
+    inline-size: initial;
+  }
+}
+
+#{$carbon-prefix}-definition-tooltip::part(definition-term) {
+  border: none;
+}
+
+:host(#{$prefix}-page-header-tabs) ::slotted(#{$carbon-prefix}-tabs) {
+  --tabs-overflow-button-background: $layer-01;
+}
+
+@keyframes page-header-title-breadcrumb-animation {
+  0% {
+    opacity: 0;
+    transform: translateY($spacing-05);
+  }
+
+  5% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes page-header-title-breadcrumb-animation-reduced-motion {
+  0% {
+    opacity: 0;
+  }
+
+  5% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+// Target browsers that do not yet support animation-timeline: scroll()
+@mixin scroll-fallback {
+  @supports not (animation-timeline: scroll()) {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    transform: translateY(0);
+    /* stylelint-disable-next-line */
+    transition: opacity motion(standard, productive) $duration-moderate-01;
+  }
+}
+
+@mixin scroll-animation {
+  @supports (animation-timeline: scroll()) {
+    // Show by default should not have any animation, this means
+    // there was not a page header content element provided
+    animation-direction: alternate;
+    animation-duration: 1ms; /* Firefox requires this to apply the animation */
+    animation-name: page-header-title-breadcrumb-animation;
+    animation-timeline: scroll(block nearest);
+
+    @media (prefers-reduced-motion: reduce) {
+      animation-name: page-header-title-breadcrumb-animation-reduced-motion;
+      transform: translateY(0);
+    }
+  }
+}
+
+:host(
+  #{$prefix}-page-header-title-breadcrumb.#{$prefix}--page-header-title-breadcrumb-show__fallback
+) {
+  @include scroll-fallback();
+}
+
+:host(#{$prefix}-page-header-breadcrumb)
+  .#{$prefix}--page-header__breadcrumb__content-actions-with-global-actions {
+  opacity: 0;
+  visibility: hidden;
+  &.#{$prefix}--page-header__breadcrumb__content-actions-with-global-actions--show {
+    opacity: 1;
+    transform: translateY(0);
+    transition:
+    /* stylelint-disable-next-line */ opacity
+      motion(standard, productive) $duration-moderate-01;
+    visibility: visible;
+  }
+}
+
+:host(#{$prefix}-page-header-title-breadcrumb) {
+  opacity: 0;
+  transform: translateY($spacing-05);
+  transition:
+    /* stylelint-disable-next-line */
+    transform motion(standard, productive) $duration-moderate-01,
+    opacity motion(standard, productive) $duration-moderate-01;
+}
+
+:host(
+  #{$prefix}-page-header-title-breadcrumb.#{$prefix}--page-header-title-breadcrumb-show__with-content
+) {
+  // Target browsers that do not yet support animation-timeline: scroll()
+  &.#{$prefix}--page-header-title-breadcrumb-show__fallback {
+    @supports not (animation-timeline: scroll()) {
+      @include scroll-fallback();
+
+      @media (prefers-reduced-motion: reduce) {
+        transform: translateY(0);
+        /* stylelint-disable-next-line */
+        transition: opacity motion(standard, productive) $duration-moderate-01;
+      }
+    }
+  }
+  // `animation-timeline: scroll()` only currently supported in Chromium based browsers
+  @include scroll-animation();
+}
+
+:host(
+  #{$prefix}-page-header-title-breadcrumb.#{$prefix}--page-header-title-breadcrumb-show__by-default
+) {
+  opacity: 1;
+  transform: translateY(0);
+}

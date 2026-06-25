@@ -1,0 +1,378 @@
+/* stylelint-disable function-no-unknown */
+/* stylelint-disable max-nesting-depth */
+//
+// Copyright IBM Corp. 2023, 2025
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+/* stylelint-disable carbon/layout-use */
+/* stylelint-disable carbon/theme-use */
+/* stylelint-disable declaration-no-important */
+
+// Standard imports.
+@use '@carbon/layout/scss/convert' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/type';
+@use '@carbon/styles/scss/colors' as *;
+@use '@carbon/styles/scss/components/button/tokens' as *;
+@use '@carbon/styles/scss/motion' as *;
+@use '@carbon/styles/scss/config' as carbon-config;
+
+@use '../../global/styles/project-settings' as c4p-settings;
+@use '../../global/styles/mixins';
+// Define all component styles in a mixin which is then exported using
+// the Carbon import-once mechanism.
+
+// The block part of our conventional BEM class names (blockClass__E--M).
+$block-class: #{c4p-settings.$pkg-prefix}--coachmark-overlay;
+$carousel-class: #{c4p-settings.$pkg-prefix}--carousel;
+$close-btn-class: #{$block-class}--close-btn;
+$draghandle-btn-class: #{$block-class}__handle;
+
+.#{$block-class} {
+  position: absolute;
+  z-index: 5901;
+  border-radius: $spacing-01;
+  background-color: $background-inverse;
+  color: $text-inverse;
+  inline-size: 18rem;
+
+  visibility: hidden;
+  $caret-height: calc(
+    $spacing-03 - $spacing-01
+  ); // from the "peak" of the pyramid to its "base"
+  $caret-center: $caret-height; // use "center" for left-right calculations, and "height" for top-bottom calculations
+  $distance-offset: $spacing-06; // see also ./utils/constants.js > distanceOffset
+
+  &--tooltip {
+    position: initial;
+    transform: none !important;
+  }
+
+  &--fixed {
+    position: fixed;
+    inset-block-end: 0;
+    inset-inline-end: $spacing-05;
+    transform: translateY(100%);
+
+    transition: transform $duration-moderate-02 motion(exit, productive);
+    @media (prefers-reduced-motion) {
+      transition: none;
+    }
+  }
+
+  &--is-dragmode {
+    border-radius: 0;
+    box-shadow: 0 0 0 $spacing-02 $background-inverse;
+    outline: $spacing-01 solid $icon-inverse;
+  }
+
+  &--is-visible {
+    transform: translateY(0);
+    visibility: visible;
+  }
+
+  // OVERLAY POSITIONING
+  &--top {
+    $horizontal-push: calc($distance-offset - $caret-center);
+    $translate-y: calc(-1 * (100% + $distance-offset + $caret-height));
+
+    transform: translate(-50%, $translate-y);
+
+    &-left {
+      transform: translate(calc(-1 * $distance-offset), $translate-y);
+    }
+
+    &-right {
+      transform: translate(calc(-1 * (100% - $distance-offset)), $translate-y);
+    }
+  }
+
+  &--bottom {
+    $horizontal-push: calc($distance-offset - $caret-center);
+    $top: calc(-1 * $caret-height);
+    $translate-y: calc($distance-offset + $caret-height);
+
+    transform: translate(-50%, $translate-y);
+
+    &-left {
+      transform: translate(calc(-1 * $distance-offset), $translate-y);
+    }
+
+    &-right {
+      transform: translate(calc(-1 * (100% - $distance-offset)), $translate-y);
+    }
+  }
+
+  &--left {
+    $right: calc(-1 * $caret-center * 1.5);
+    $translate-x: calc(-1 * (100% + $distance-offset + $caret-center));
+    $vertical-push: calc($distance-offset - ($caret-height * 0.5));
+
+    transform: translate($translate-x, -50%);
+
+    &-top {
+      transform: translate($translate-x, calc(-1 * $distance-offset));
+    }
+
+    &-bottom {
+      transform: translate($translate-x, calc(-1 * (100% - $distance-offset)));
+    }
+  }
+
+  &--right {
+    $left: calc(-1 * $caret-center * 1.5);
+    $translate-x: calc($distance-offset + $caret-center);
+    $vertical-push: calc($distance-offset - ($caret-height * 0.5));
+
+    transform: translate($translate-x, -50%);
+
+    &-top {
+      transform: translate($translate-x, calc(-1 * $distance-offset));
+    }
+
+    &-bottom {
+      transform: translate($translate-x, calc(-1 * (100% - $distance-offset)));
+    }
+  }
+
+  // ANIMATED MEDIA
+  &__element-stepped-media {
+    block-size: calc($spacing-07 + $spacing-12); // 32 + 96 = 128
+    margin-block-end: $spacing-05;
+  }
+
+  // BODY
+  &__body {
+    .#{carbon-config.$prefix}--btn--ghost {
+      color: $link-inverse;
+
+      &:hover {
+        color: $link-inverse;
+      }
+    }
+
+    // CAROUSEL ELEMENTS
+    #{$block-class}-element {
+      display: block;
+      flex: 0 0 100%;
+      max-inline-size: 100%;
+
+      #{$block-class}-element__content {
+        padding-block-end: $spacing-05;
+      }
+
+      #{$block-class}-element__title > div {
+        margin: 0 0 $spacing-03;
+
+        > h2 {
+          @include type.type-style('productive-heading-02');
+
+          order: 1;
+        }
+      }
+    }
+  }
+
+  // HEADER BUTTONS
+  &__handle {
+    position: relative;
+    flex-grow: 1;
+    padding: $spacing-02 0 0 $spacing-03;
+    border: 0;
+    background-color: transparent;
+    text-align: start;
+
+    &::before {
+      position: absolute;
+      block-size: calc($spacing-06 + $spacing-01);
+      content: '';
+      inline-size: calc($spacing-06 + $spacing-01);
+      inset-block-start: $spacing-01;
+      inset-inline-start: $spacing-01;
+    }
+
+    &:hover {
+      cursor: move;
+    }
+
+    &:focus {
+      border: none;
+      outline: none;
+
+      &::before {
+        border: 1px solid $icon-inverse;
+        outline: 1px solid $blue-60;
+      }
+    }
+  }
+
+  &--close-btn-container {
+    block-size: $spacing-07;
+    inline-size: $spacing-07;
+    margin-inline-start: auto !important;
+  }
+
+  &--close-btn {
+    block-size: $spacing-07;
+    inline-size: $spacing-07;
+    margin-inline-start: auto !important;
+
+    svg > path {
+      margin: 0;
+      fill: $icon-inverse !important;
+    }
+
+    &:hover {
+      background-color: $background-inverse-hover !important;
+    }
+  }
+
+  // FOOTER
+  &__footer {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin-block-start: $spacing-05;
+    padding-block-end: $spacing-05;
+  }
+
+  // THEME
+  &__light {
+    .#{$block-class}__body {
+      .#{carbon-config.$prefix}--link {
+        color: $link-inverse;
+
+        &:hover {
+          color: #a6c8ff;
+        }
+
+        &:active {
+          color: $text-on-color;
+        }
+
+        &:focus {
+          outline-color: $text-on-color;
+        }
+      }
+
+      .#{carbon-config.$prefix}--btn--ghost {
+        border-color: transparent !important;
+        border-radius: 0;
+        outline: 1px solid transparent;
+
+        &:hover {
+          background-color: $background-inverse-hover;
+        }
+
+        &:active {
+          background-color: $button-secondary-active;
+        }
+
+        &:focus {
+          box-shadow:
+            inset 0 0 0 1px $background-inverse,
+            inset 0 0 0 $spacing-01 $white-0;
+        }
+      }
+    }
+    .#{$draghandle-btn-class} {
+      &:focus {
+        &::before {
+          border: 1px solid $white-0;
+          outline: 1px solid transparent;
+        }
+      }
+    }
+    .#{$close-btn-class} {
+      border-color: transparent !important;
+      border-radius: 0;
+      outline: 1px solid transparent;
+
+      &:active {
+        background-color: $button-secondary-active;
+      }
+
+      &:focus {
+        box-shadow:
+          inset 0 0 0 1px $background-inverse,
+          inset 0 0 0 $spacing-01 $white-0;
+      }
+    }
+  }
+
+  &__dark {
+    .#{$block-class}__body {
+      .#{carbon-config.$prefix}--link {
+        color: #0062fe;
+
+        &:hover {
+          color: #0043ce;
+        }
+
+        &:active {
+          color: $link-secondary;
+        }
+
+        &:focus {
+          color: $text-inverse;
+          outline-color: $text-inverse;
+        }
+      }
+
+      .#{carbon-config.$prefix}--btn--primary {
+        &:focus {
+          background-color: $button-primary-active;
+          box-shadow:
+            inset 0 0 0 $spacing-01 $button-primary,
+            inset 0 0 0 to-rem(3px) $button-tertiary;
+        }
+      }
+
+      .#{carbon-config.$prefix}--btn--ghost {
+        border-color: transparent;
+
+        &:hover {
+          background-color: $background-inverse-hover;
+        }
+
+        &:active {
+          background-color: $button-tertiary-active;
+        }
+
+        &:focus {
+          box-shadow:
+            inset 0 0 0 1px $blue-60,
+            inset 0 0 0 $spacing-01 $white-0;
+        }
+      }
+    }
+    .#{$draghandle-btn-class} {
+      &:focus {
+        &::before {
+          border: 1px solid $white-0;
+          outline: 1px solid $blue-60;
+        }
+      }
+    }
+    .#{$close-btn-class} {
+      border-color: transparent;
+
+      &:focus {
+        box-shadow:
+          inset 0 0 0 1px $blue-60,
+          inset 0 0 0 $spacing-01 $white-0;
+      }
+
+      &:active {
+        background-color: $button-tertiary-active;
+      }
+    }
+  }
+  .#{$carousel-class}__item {
+    flex: 0 0 100% !important;
+  }
+}

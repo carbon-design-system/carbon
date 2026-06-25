@@ -1,0 +1,80 @@
+/*
+* Copyright IBM Corp. 2025, 2026
+*
+* This source code is licensed under the Apache-2.0 license found in the
+* LICENSE file in the root directory of this source tree.
+*/
+
+@use '@carbon/styles/scss/theme' as *;
+
+$prefix: 'c4p';
+$carbon-prefix: 'cds';
+
+/* stylelint-disable selector-type-no-unknown */
+:host(#{$prefix}-page-header-actions-set) {
+  display: flex;
+  flex: 1;
+  max-inline-size: 100%;
+  min-inline-size: 0;
+
+  // Suppress custom elements until styles are loaded
+  #{$carbon-prefix}-overflow-menu:not(:defined) {
+    display: none;
+  }
+}
+
+$block-class: #{$prefix}--page-header-actions-set;
+
+.#{$block-class} {
+  display: flex;
+  align-items: center;
+  padding: 0;
+  margin: 0;
+  gap: 0;
+  inline-size: 100%;
+  list-style: none;
+  min-inline-size: 0;
+
+  &__items {
+    display: flex;
+    overflow: hidden;
+    flex: 1;
+    align-items: center;
+    gap: 0;
+    list-style: none;
+    min-inline-size: 0;
+
+    ::slotted(*) {
+      display: flex;
+      flex-shrink: 0;
+    }
+
+    ::slotted([data-hidden]) {
+      display: none;
+    }
+  }
+}
+
+@media screen and (prefers-reduced-motion: reduce) {
+  [data-offset] {
+    flex-shrink: 0;
+    transition: none;
+
+    &[data-hidden] {
+      display: none;
+    }
+  }
+}
+
+[data-offset] {
+  flex-shrink: 0;
+  transition: opacity 0.15s ease-in-out;
+
+  &[data-hidden] {
+    display: none;
+  }
+}
+
+.#{$block-class}__overflow-svg {
+  fill: $text-primary;
+}

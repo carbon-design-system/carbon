@@ -1,0 +1,9 @@
+# Netlify build and deploy settings - https://docs.netlify.com/configure-builds/file-based-configuration/#sample-file
+[build]
+ignore = "git diff --quiet $CACHED_COMMIT_REF $COMMIT_REF packages/core packages/ibm-products"
+command = "yarn build"
+publish = "storybook-static"
+
+[build.environment]
+YARN_ENABLE_GLOBAL_CACHE = "true"
+YARN_GLOBAL_FOLDER = "/opt/buildhome/.yarn_cache"

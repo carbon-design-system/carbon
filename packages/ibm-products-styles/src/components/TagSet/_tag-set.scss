@@ -1,0 +1,191 @@
+//
+// Copyright IBM Corp. 2020, 2025
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+// Standard imports.
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/breakpoint' as *;
+@use '@carbon/styles/scss/type';
+@use '@carbon/styles/scss/config' as carbon-config;
+
+@use '../../global/styles/project-settings' as *;
+@use '../../global/styles/mixins' as *;
+
+$block-class: #{$pkg-prefix}--tag-set;
+$block-class-overflow: #{$block-class}-overflow;
+$block-class-modal: #{$block-class}-modal;
+
+@include block-wrap($block-class) {
+  &.#{$block-class} {
+    display: block;
+    inline-size: 100%;
+  }
+
+  .#{$block-class}__space {
+    position: relative;
+    display: block;
+    inline-size: 100%;
+    white-space: nowrap;
+  }
+
+  .#{$block-class}__space--align-end {
+    text-align: end;
+  }
+
+  .#{$block-class}__space--align-center {
+    text-align: center;
+  }
+
+  .#{$block-class}__tag-container {
+    display: inline-flex; // needed to register a width
+    white-space: nowrap;
+  }
+
+  .#{$block-class}__tag-container--multiline {
+    flex-wrap: wrap;
+  }
+
+  .#{$block-class}__tag-container--hidden {
+    // This tag container is used to measure the width of all displayable tags
+    @include measuring-container;
+  }
+
+  .#{$block-class-overflow} {
+    display: inline-block;
+    vertical-align: bottom;
+    .#{carbon-config.$prefix}--tag.#{carbon-config.$prefix}--tag--interactive {
+      border: 0;
+    }
+
+    .#{carbon-config.$prefix}--popover
+      .#{carbon-config.$prefix}--popover-content {
+      padding: $spacing-05;
+    }
+  }
+
+  .#{$block-class-overflow}--hidden {
+    overflow: hidden;
+    max-inline-size: 0;
+    visibility: hidden;
+  }
+
+  .#{carbon-config.$prefix}--tag {
+    margin-block-end: $spacing-03;
+    margin-inline-end: $spacing-03;
+  }
+}
+
+@include block-wrap('#{$block-class-modal}') {
+  &.#{$block-class-modal} {
+    // not to be overridden by use in tag set
+    text-align: initial;
+    white-space: initial;
+  }
+
+  .#{$block-class-modal}__container {
+    @include breakpoint(md) {
+      block-size: 90%;
+      max-block-size: 450px;
+    }
+  }
+
+  .#{$block-class-modal}__search {
+    margin-block: $spacing-05 0;
+  }
+
+  .#{$block-class-modal}__header {
+    margin-inline-end: $spacing-05;
+    padding-inline-end: 0;
+  }
+
+  .#{$block-class-modal}__body {
+    .#{carbon-config.$prefix}--tag {
+      margin-block-end: $spacing-03;
+      margin-inline-end: $spacing-03;
+    }
+  }
+}
+
+@include block-wrap('#{$block-class-overflow}__tagset-popover') {
+  &.#{$block-class-overflow}__tagset-popover {
+    // removes the min width in Carbon
+    min-inline-size: initial;
+    text-align: start;
+  }
+
+  .#{carbon-config.$prefix}--link:active,
+  .#{carbon-config.$prefix}--link:active:visited,
+  .#{carbon-config.$prefix}--link:active:visited:hover {
+    color: $text-inverse;
+  }
+
+  .#{$block-class-overflow}__tag-list {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .#{$block-class-overflow}__show-all-tags-link {
+    color: $link-inverse;
+    margin-block-start: $spacing-03;
+
+    &:hover,
+    &:visited:hover {
+      color: $link-inverse-hover;
+    }
+
+    &:focus {
+      color: $focus-inverse;
+    }
+
+    &:visited {
+      color: $link-inverse;
+    }
+  }
+
+  .#{$block-class-overflow}__tag-item.#{$block-class-overflow}__tag-item--tag
+    .#{carbon-config.$prefix}--tag {
+    background-color: $background-inverse-hover;
+  }
+
+  .#{$block-class-overflow}__tag-item.#{$block-class-overflow}__tag-item--default,
+  .#{$block-class-overflow}__tag-item.#{$block-class-overflow}__tag-item--default
+    .#{carbon-config.$prefix}--tag {
+    @include type.type-style('body-compact-01');
+
+    display: block;
+    overflow: hidden;
+    padding: 0;
+    border-radius: 0;
+    margin: 0;
+    background-color: inherit;
+    color: inherit;
+    min-block-size: initial;
+    min-inline-size: initial;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .#{$block-class-overflow}__tag .#{carbon-config.$prefix}--tag__close-icon {
+    // undo override by .#{carbon-config.$prefix}--tooltip button
+    padding: 0;
+  }
+
+  .#{$block-class-overflow}__tag .#{carbon-config.$prefix}--tag--high-contrast {
+    background-color: $background;
+    color: $text-primary;
+  }
+
+  .#{$block-class-overflow}__tag
+    .#{carbon-config.$prefix}--tag__close-icon:hover {
+    background-color: $background-hover;
+  }
+
+  .#{$block-class-overflow}__tag
+    .#{carbon-config.$prefix}--tag__close-icon:focus {
+    box-shadow: inset 0 0 0 $spacing-01 $focus;
+  }
+}

@@ -1,0 +1,80 @@
+@use 'sass:map';
+
+@use '@carbon/styles/scss/colors';
+@use '@carbon/styles/scss/theme';
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/type';
+@use '@carbon/styles/scss/components/tag';
+
+@use '../../../ibm-products-styles/src/global/styles/project-settings' as *;
+
+$types: (
+  'deprecation-notice': (
+    border: colors.$red-50,
+    background: tag.$tag-background-red,
+    color: tag.$tag-color-red,
+  ),
+  'feature-flags': (
+    border: colors.$teal-50,
+    background: tag.$tag-background-teal,
+    color: tag.$tag-color-teal,
+  ),
+  'layer': (
+    border: colors.$purple-40,
+    background: tag.$tag-background-purple,
+    color: tag.$tag-color-purple,
+  ),
+);
+
+.#{$pkg-prefix}--annotation {
+  position: relative;
+  border: 1px dashed transparent;
+}
+
+.#{$pkg-prefix}--annotation .#{$pkg-prefix}--annotation {
+  margin-block-start: $spacing-07;
+}
+
+.#{$pkg-prefix}--annotation__content > .#{$pkg-prefix}--annotation:first-child {
+  margin-block-start: 0;
+}
+
+.#{$pkg-prefix}--annotation__label {
+  @include type.type-style('code-01');
+
+  display: inline-flex;
+  padding: $spacing-02;
+  column-gap: $spacing-02;
+}
+
+.#{$pkg-prefix}--annotation__label > :first-child {
+  flex-shrink: 0;
+}
+
+.#{$pkg-prefix}--annotation__label a {
+  color: inherit;
+  text-decoration: underline;
+}
+
+.#{$pkg-prefix}--annotation__content {
+  padding: $spacing-05;
+}
+
+@each $type, $colors in $types {
+  $border: map.get($colors, 'border');
+  $background: map.get($colors, 'background');
+  /* stylelint-disable-next-line carbon/theme-use */
+  $color: map.get($colors, 'color');
+
+  .#{$pkg-prefix}--annotation--#{$type} {
+    /* stylelint-disable-next-line carbon/theme-use */
+    border-color: $border;
+  }
+
+  .#{$pkg-prefix}--annotation--#{$type} > .#{$pkg-prefix}--annotation__label {
+    /* stylelint-disable-next-line carbon/theme-use */
+    background-color: $background;
+    /* stylelint-disable-next-line carbon/theme-use */
+    color: $color;
+  }
+}

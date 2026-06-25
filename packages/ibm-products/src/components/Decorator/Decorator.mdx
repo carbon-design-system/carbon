@@ -1,0 +1,34 @@
+import { Story, Controls, Source, Canvas } from '@storybook/addon-docs/blocks';
+import { CodesandboxLink } from '../../global/js/utils/story-helper';
+import { Decorator } from '.';
+import * as DecoratorStories from './Decorator.stories';
+
+# Decorator
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Example usage](#example-usage)
+- [Example setLabelTitle()](#example-setlabeltitle)
+- [Component API](#component-api)
+
+## Overview
+
+The Decorator groups a key/value pair as a single element. This component is not
+interactive.
+
+## Example usage
+
+<Canvas>
+  <Story of={DecoratorStories.Default} />
+</Canvas>
+
+## Example **setLabelTitle()**
+
+```jsx
+<Decorator label="IP" score={5} value="192.168.0.50" />
+```
+
+## Component API
+
+<Controls />

@@ -1,0 +1,58 @@
+//
+// Copyright IBM Corp. 2021, 2025
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+// Standard imports.
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/type';
+@use '@carbon/styles/scss/config' as carbon-config;
+
+@use '../../global/styles/project-settings' as c4p-settings;
+@use '../SidePanel/side-panel-variables' as side-panel-vars;
+
+// CreateSidePanel uses the following IBM Products components:
+// SidePanel
+@use '../SidePanel/side-panel';
+
+$create-side-panel-block-class: #{c4p-settings.$pkg-prefix}--create-side-panel;
+$side-panel-block-class: #{c4p-settings.$pkg-prefix}--side-panel;
+
+.#{$create-side-panel-block-class}.#{$side-panel-block-class}
+  .#{$create-side-panel-block-class}__content-text {
+  padding-inline-end: calc(20% - #{$spacing-05});
+}
+
+.#{carbon-config.$prefix}--form.#{$create-side-panel-block-class}__form {
+  padding-block-start: $spacing-05;
+}
+
+.#{$create-side-panel-block-class}__form.#{carbon-config.$prefix}--fieldset {
+  padding-block-start: $spacing-03;
+}
+
+.#{$create-side-panel-block-class}__form > * {
+  margin-block-end: $spacing-05;
+}
+
+.#{$create-side-panel-block-class}__form-title-text {
+  @include type.type-style('heading-compact-02');
+
+  padding-block-end: $spacing-03;
+}
+
+.#{$create-side-panel-block-class}__form-description-text {
+  @include type.type-style('body-01');
+}
+
+.#{$create-side-panel-block-class}.#{$side-panel-block-class}
+  .#{carbon-config.$prefix}--btn.#{$side-panel-block-class}__close-button {
+  display: none;
+}
+
+.#{$create-side-panel-block-class} .#{$side-panel-block-class}__subtitle-text {
+  color: $text-secondary;
+}

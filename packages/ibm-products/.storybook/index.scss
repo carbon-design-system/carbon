@@ -1,0 +1,75 @@
+//
+// Copyright IBM Corp. 2020, 2024
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use '@carbon/styles/scss/config' with (
+  $font-path: '@ibm/plex'
+);
+
+// Load Carbon theme and spacing first so variables are available
+@use '@carbon/styles' as styles;
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/spacing' as *;
+
+// Load the C&CS styles first, excluding Carbon styles. We will then load full
+// Carbon styles at the end -- this is to obtain a "worst case" for our own CSS,
+// to ensure we are resilient against different CSS loading orders and our
+// styles have the specificity necessary to override Carbon styles when needed.
+@use 'ALIAS_STORY_STYLE_CONFIG' as c4p-settings; // loads config.css or config-dev.scss from ibm-products/src (see main.js)
+@use '../../ibm-products-styles/src/index-without-carbon';
+
+@use './Annotation/annotation';
+
+// Setting attribute data-carbon-theme="XXX" on the html element
+// will set the carbon theme used for the storybook pane.
+// Adding class sb--use-carbon-theme-XXX on any element
+// will set the carbon theme used within that element.
+body {
+  background-color: $background;
+  --doc-story-height: initial;
+}
+
+[data-carbon-theme] {
+  @include styles.theme(styles.$white);
+
+  /* make sure background and color are set if theme in use */
+  background-color: $background;
+  color: $text-primary;
+}
+
+[data-carbon-theme='g10'],
+.sb--use-carbon-theme-g10 {
+  @include styles.theme(styles.$g10);
+}
+
+[data-carbon-theme='g90'],
+.sb--use-carbon-theme-g90 {
+  @include styles.theme(styles.$g90);
+}
+
+[data-carbon-theme='debug'],
+[data-carbon-theme='g100'],
+.sb--use-carbon-theme-g100 {
+  @include styles.theme(styles.$g100);
+}
+
+[data-carbon-theme='debug'] body {
+  color: initial;
+}
+
+// Docs overrides
+.docblock-argstable-head ~ .docblock-argstable-body,
+.docblock-argstable-head ~ .docblock-argstable-body p {
+  @include styles.type-style('body-01');
+}
+
+.docs-story {
+  background: styles.$background;
+}
+
+.docs-story > *:has(> .docblock-code-toggle) {
+  background-color: styles.$background;
+}

@@ -1,0 +1,107 @@
+//
+// Copyright IBM Corp. 2024, 2024
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use '@carbon/react/scss/spacing';
+@use '@carbon/react/scss/theme';
+@use '@carbon/react/scss/type';
+@use 'ALIAS_STORY_STYLE_CONFIG' as c4p-settings;
+@use '../SidePanel/step-side-panel';
+
+#root {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-block-size: 100vh;
+}
+
+.step-container {
+  inline-size: 50%;
+  min-inline-size: 320px;
+}
+
+.my-custom-action-set {
+  display: grid;
+  grid-auto-rows: minmax(auto, auto);
+  grid-template-columns: repeat(6, 1fr);
+}
+
+.step-action-button {
+  inline-size: 100%;
+}
+
+.step-action-button__cancel {
+  grid-column: span 4;
+}
+
+.#{c4p-settings.$carbon-prefix}--tile-group div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: spacing.$spacing-05;
+}
+
+.custom-intro-tile {
+  block-size: 240px;
+  inline-size: 280px;
+}
+
+.selected-intro-option {
+  padding-block-end: spacing.$spacing-06;
+  text-transform: capitalize;
+}
+
+.step-form-items {
+  display: flex;
+  container-type: size;
+
+  #city {
+    margin-inline-end: spacing.$spacing-06;
+  }
+}
+
+.#{c4p-settings.$pkg-prefix}--tearsheet__content {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: spacing.$spacing-06 spacing.$spacing-06 0 spacing.$spacing-06;
+}
+
+.c4p--step-actions__button-container.my-custom-action-set {
+  position: fixed;
+  background-color: theme.$background;
+  border-block-start: 1px solid theme.$border-subtle-01;
+  inline-size: 100%;
+  inset-block-end: 0;
+  inset-inline-start: 0;
+  margin-block-start: auto;
+  max-block-size: 120px;
+
+  button {
+    inline-size: 100%;
+    max-inline-size: none;
+  }
+}
+
+.#{c4p-settings.$pkg-prefix}--tearsheet__influencer {
+  /* stylelint-disable-next-line carbon/layout-use */
+  padding: 1.5rem 2rem;
+}
+
+.#{c4p-settings.$pkg-prefix}--tearsheet
+  .#{c4p-settings.$pkg-prefix}--tearsheet__influencer
+  + .#{c4p-settings.$pkg-prefix}--tearsheet__right
+  .c4p--step-actions__button-container.my-custom-action-set {
+  /* stylelint-disable-next-line carbon/layout-use */
+  inset-inline-start: 257px;
+  /* stylelint-disable-next-line order/properties-order */
+  inline-size: calc(100% - 257px);
+}
+
+.step-heading {
+  @include type.type-style('heading-02');
+
+  padding-block-end: spacing.$spacing-06;
+}

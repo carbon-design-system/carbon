@@ -1,0 +1,12 @@
+//
+// Copyright IBM Corp. 2020, 2021
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+// make the root full width to get a better idea of how the cards
+// look in a real grid situation
+#root {
+  inline-size: 100%;
+}

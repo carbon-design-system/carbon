@@ -1,0 +1,61 @@
+//
+// Copyright IBM Corp. 2024, 2025
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+/* stylelint-disable function-no-unknown */
+/* stylelint-disable max-nesting-depth */
+
+// Standard imports.
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/config' as carbon-config;
+
+@use '../../global/styles/project-settings' as c4p-settings;
+@use '../../global/styles/mixins';
+
+// The block part of our conventional BEM class names (blockClass__E--M).
+$block-class: #{c4p-settings.$pkg-prefix}--filter-panel-checkbox-with-overflow;
+$carbon: #{carbon-config.$prefix};
+
+.#{$block-class} {
+  position: relative;
+}
+.#{$block-class}--open,
+.#{$block-class}:hover,
+.#{$block-class}:focus-within {
+  background-color: $field;
+}
+
+// Position the menu button via its wrapper, not the button itself.
+.#{$block-class} .#{$carbon}--overflow-menu__wrapper {
+  position: absolute;
+  inset-block-start: 0;
+  inset-inline-end: 0;
+}
+// Size the menu button.
+.#{$block-class} .#{$block-class}__overflow-button {
+  background-color: $layer;
+  block-size: $spacing-06;
+  inline-size: $spacing-06;
+  min-block-size: $spacing-06;
+}
+
+// OverflowMenu <li>
+.#{$block-class}__overflow-options .#{$carbon}--overflow-menu-options__option {
+  block-size: $spacing-06;
+}
+// OverflowMenu <button>
+.#{$block-class}__overflow-options .#{$carbon}--overflow-menu-options__btn {
+  justify-content: flex-end;
+  max-inline-size: none;
+}
+// SIZE FIX: This element is being used to "erase" the drop shadow
+// created by the menu items overtop the menu button.
+.#{$block-class}__overflow-options.#{$carbon}--overflow-menu-options[data-floating-menu-direction='bottom']:not(
+    .#{$carbon}--breadcrumb-menu-options
+  )::after {
+  inline-size: $spacing-06;
+}

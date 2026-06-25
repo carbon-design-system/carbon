@@ -1,0 +1,11 @@
+{
+  "codeConnect": {
+    "parser": "html",
+    "include": ["src/**"],
+    "exclude": ["**/node_modules/**"],
+    "interactiveSetupFigmaFileUrl": "https://www.figma.com/design/0F9dKH2abAd7gSfvnacfWf/-v11--IBM-Products-%E2%80%93-Carbon-Design-System?m=auto&node-id=4395-242870&t=yYYqoolgX9f4bm4c-1",
+    "importPaths": {
+      "packages/ibm-products-web-components/src/*": "@carbon/ibm-products-web-components"
+    }
+  }
+}

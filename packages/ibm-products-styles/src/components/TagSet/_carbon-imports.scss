@@ -1,0 +1,14 @@
+//
+// Copyright IBM Corp. 2022, 2022
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+// TagSet uses the following Carbon components:
+// ComposedModal, ModalHeader, ModalBody, Search, Link, Tag, Tooltip
+@use '@carbon/styles/scss/components/modal';
+@use '@carbon/styles/scss/components/search';
+@use '@carbon/styles/scss/components/link';
+@use '@carbon/styles/scss/components/tag';
+@use '@carbon/styles/scss/components/popover';

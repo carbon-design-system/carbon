@@ -1,0 +1,25 @@
+//
+// Copyright IBM Corp. 2023, 2024
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use '@carbon/styles/scss/spacing' as *;
+@use 'ALIAS_STORY_STYLE_CONFIG' as c4p-settings;
+
+// TODO: add any additional styles used by CoachmarkOverlayElements.stories.js
+.CoachmarkBaseExampleUsage {
+  position: relative;
+  display: inline-block;
+  box-sizing: border-box;
+  padding: $spacing-05;
+  margin-inline-start: 50%;
+  max-block-size: 100%;
+  transform: translateX(-50%);
+}
+.#{c4p-settings.$pkg-prefix}--coachmark-overlay-elements__element-stepped-media
+  img {
+  block-size: 100%;
+  inline-size: 100%;
+}

@@ -1,0 +1,75 @@
+/**
+ * @license
+ *
+ * Copyright IBM Corp. 2026
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/utilities/hide-at-breakpoint' as *;
+@use '@carbon/styles/scss/type';
+@use '@carbon/styles/scss/breakpoint' as *;
+
+$c4p-prefix: 'c4p';
+$carbon-prefix: 'cds';
+
+#{$c4p-prefix}-tearsheet-influencer,
+div[slot='main-content'],
+#{$c4p-prefix}-tearsheet-summary-content {
+  padding-block: $spacing-07;
+}
+
+$block-class__next: #{$c4p-prefix}--tearsheet__next;
+@mixin hideAtLargeScreens() {
+  @include hide-at-lg;
+  @include hide-at-md;
+  @include hide-at-xlg;
+  @include hide-at-max;
+}
+
+.summaryPanelTrigger {
+  position: absolute;
+  inset-block-start: 0;
+  inset-inline-end: 0;
+}
+
+.influencerPanelTrigger {
+  position: absolute;
+  inset-block-start: 0;
+  inset-inline-start: 0;
+}
+
+#{$c4p-prefix}-preview-tearsheet:not([variant='narrow']) {
+  .summaryPanelTrigger,
+  .influencerPanelTrigger {
+    @include hideAtLargeScreens();
+  }
+}
+
+.summaryPanelHeading {
+  @include type.type-style('heading-03');
+}
+
+.stackButtons {
+  @include hide-at-sm;
+}
+
+.smallScreenButton {
+  @include hideAtLargeScreens();
+}
+//footer actions styles
+.default__action-buttons {
+  display: grid;
+  grid-auto-rows: minmax(auto, auto);
+  grid-template-columns: repeat(6, 1fr);
+
+  > #{$carbon-prefix}-button {
+    inline-size: 100%;
+    max-inline-size: none;
+
+    &:first-child {
+      grid-column: span 4;
+    }
+  }
+}

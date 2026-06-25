@@ -1,0 +1,61 @@
+import { Story, Controls, Source, Canvas } from '@storybook/addon-docs/blocks';
+import { CodesandboxLink } from '../../global/js/utils/story-helper';
+import * as CoachmarkStackedStories from './CoachmarkStacked.stories';
+
+# CoachmarkStacked
+
+[Usage guidelines](https://pages.github.ibm.com/carbon/ibm-products/components/onboarding/coachmark/usage/#stacked)
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Example usage](#example-usage)
+
+## Overview
+
+CoachmarkStacked appears fixed at the bottom right corner of the browser window
+when the page loads. It starts in a minimized state, to cover as little of the
+UI as possible; when shown in tests as expanded by default, users immediately
+closed it without reading, to get it out of the way. CoachmarkStacked can
+include ghost buttons to trigger another layer to slide up to stack on top of
+it, much like the stacked Tearsheet. When dismissed, the stacked layer exits by
+sliding back down, revealing the main layer. When the main layer is dismissed,
+it slides down off the page. Only one layer can be stacked on the main layer.
+
+To build this pattern, we recommend including the following components:
+
+- [Coachmark](https://carbon-for-ibm-products.netlify.app/?path=/docs/preview-onboarding-coachmark--overview)
+- [Button](https://react.carbondesignsystem.com/?path=/docs/components-button)
+- [Link](https://react.carbondesignsystem.com/?path=/docs/components-link)
+- [Theme](https://react.carbondesignsystem.com/?path=/docs/components-theme)
+- [Carousel utility](https://github.com/carbon-design-system/carbon/blob/main/packages/utilities/src/carousel/README.md)
+
+```jsx
+import { Button, Theme, Link as CarbonLink } from '@carbon/react';
+import {
+  preview__CoachmarkTagline as CoachmarkTagline,
+  preview__Coachmark as Coachmark,
+} from '@carbon/ibm-products';
+import { InitCarousel, initCarousel } from '@carbon/utilities';
+```
+
+## About Onboarding
+
+[Onboarding](https://pages.github.ibm.com/security/security-design/department/end-to-end-experiences/onboarding/overview/)
+is a continuous learning methodology and framework that aims to orient, onboard,
+explain, educate, and cultivate novice users into high-functioning power users.
+
+## Example usage
+
+> 💡 Check our
+> [Stackblitz](https://stackblitz.com/github/carbon-design-system/ibm-products/tree/main/packages/ibm-products/src/patterns/CoachmarkStacked/example)
+> example implementation.
+
+[![Edit react-patterns](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/carbon-design-system/ibm-products/tree/main/packages/ibm-products/src/patterns/CoachmarkStacked/example)
+{/* TODO: One example per designed use case. */}
+
+<Canvas className="coachmarkExample" withSource="none">
+  <div className="CoachmarkBaseExampleUsage">
+    <Story of={CoachmarkStackedStories.CoachmarkStack} />
+  </div>
+</Canvas>

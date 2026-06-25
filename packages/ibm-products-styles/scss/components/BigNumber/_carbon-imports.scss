@@ -1,0 +1,11 @@
+//
+// Copyright IBM Corp. 2024, 2025
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+// Import any Carbon component styles used from BigNumber in this file.
+// BigNumber uses the following Carbon components:
+@use '@carbon/styles/scss/components/skeleton-styles';
+@use '@carbon/styles/scss/components/tooltip';

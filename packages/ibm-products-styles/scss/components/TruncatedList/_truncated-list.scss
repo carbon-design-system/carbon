@@ -1,0 +1,52 @@
+//
+// Copyright IBM Corp. 2024, 2025
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+// Standard imports.
+@use '../../global/styles/project-settings' as c4p-settings;
+@use '../../global/styles/mixins';
+
+// Other Carbon settings if needed
+@use '@carbon/styles/scss/motion' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/config' as carbon-config;
+
+// The block part of our conventional BEM class names (blockClass__E--M).
+$block-class: #{c4p-settings.$pkg-prefix}--truncated-list;
+
+.#{$block-class}__list {
+  /* stylelint-disable-next-line carbon/motion-duration-use */
+  transition: height 240ms motion(exit, productive);
+
+  /* stylelint-disable-next-line max-nesting-depth */
+  @media (prefers-reduced-motion: reduce) {
+    transition: none;
+  }
+}
+
+.#{$block-class}--expanded .#{$block-class}__list {
+  overflow-y: auto;
+  @supports (overflow-block: auto) {
+    overflow-block: auto;
+  }
+}
+
+.#{$block-class}--expanded-all .#{$block-class}__list {
+  overflow-y: hidden;
+  @supports (overflow-block: hidden) {
+    overflow-block: hidden;
+  }
+}
+
+.#{carbon-config.$prefix}--btn.#{$block-class}__button {
+  padding: 0;
+  inline-size: 100%;
+  margin-block-start: $spacing-02;
+  min-block-size: auto;
+}
+.#{carbon-config.$prefix}--btn.#{$block-class}__button:hover {
+  background: transparent;
+}

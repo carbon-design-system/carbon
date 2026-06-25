@@ -1,0 +1,39 @@
+//
+// Copyright IBM Corp. 2021, 2022
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use '@carbon/styles/scss/colors' as *;
+
+$carbon-colors: (
+  'blue30': $blue-30,
+  'blue50': $blue-50,
+  'blue60': $blue-60,
+  'blue80': $blue-80,
+  'cyan30': $cyan-30,
+  'cyan50': $cyan-50,
+  'cyan60': $cyan-60,
+  'cyan80': $cyan-80,
+  'gray30': $gray-30,
+  'gray50': $gray-50,
+  'gray60': $gray-60,
+  'gray80': $gray-80,
+  'green30': $green-30,
+  'green50': $green-50,
+  'green60': $green-60,
+  'green80': $green-80,
+  'magenta30': $magenta-30,
+  'magenta50': $magenta-50,
+  'magenta60': $magenta-60,
+  'magenta80': $magenta-80,
+  'purple30': $purple-30,
+  'purple50': $purple-50,
+  'purple60': $purple-60,
+  'purple80': $purple-80,
+  'teal30': $teal-30,
+  'teal50': $teal-50,
+  'teal60': $teal-60,
+  'teal80': $teal-80,
+);

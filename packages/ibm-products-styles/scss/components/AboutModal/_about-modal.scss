@@ -1,0 +1,101 @@
+//
+// Copyright IBM Corp. 2020, 2025
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/type';
+@use '@carbon/type/scss/font-family' as *;
+@use '@carbon/styles/scss/config' as carbon-config;
+
+// Standard imports.
+@use '../../global/styles/project-settings' as c4p-settings;
+
+// The block part of our conventional BEM class names (blockClass__E--M).
+$block-class: #{c4p-settings.$pkg-prefix}--about-modal;
+
+.#{$block-class} .#{carbon-config.$prefix}--modal-container {
+  grid-template-rows: auto auto 1fr auto;
+}
+
+.#{$block-class} .#{$block-class}__logo {
+  margin: $spacing-05 $spacing-05 $spacing-07 $spacing-05;
+}
+
+.#{$block-class} .#{$block-class}__header {
+  padding: 0;
+  grid-row: auto;
+  margin-block-end: 0;
+  padding-inline-end: 20%;
+  padding-inline-start: $spacing-05;
+}
+
+.#{$block-class} .#{$block-class}__title {
+  @include type.type-style('heading-04');
+
+  color: $text-primary;
+}
+
+.#{$block-class} .#{$block-class}__body {
+  @include type.type-style('body-compact-02');
+
+  overflow: hidden auto;
+  grid-row: auto;
+  min-block-size: $spacing-10;
+  padding-block-start: 0;
+  padding-inline: $spacing-05 20%;
+
+  &:not(.#{carbon-config.$prefix}--modal-scroll-content) {
+    margin-block-end: $spacing-06;
+    padding-block-end: 0;
+  }
+}
+
+.#{$block-class} .#{carbon-config.$prefix}--modal-content--overflow-indicator {
+  background-image: linear-gradient(to bottom, #00000000, $layer-01);
+  inset-block-end: #{$spacing-06};
+}
+
+.#{$block-class} .#{$block-class}__links-container {
+  @include type.type-style('body-compact-01');
+
+  margin-block-start: $spacing-06;
+}
+
+.#{$block-class} .#{$block-class}__version {
+  color: $text-secondary;
+}
+
+.#{$block-class} .#{$block-class}__links-container a + a {
+  border-inline-start: 1px solid $border-strong-01;
+  margin-inline-start: $spacing-03;
+  padding-inline-start: $spacing-03;
+}
+
+.#{$block-class} .#{$block-class}__content,
+.#{$block-class} .#{$block-class}__copyright-text {
+  @include type.type-style('label-01');
+
+  color: $text-secondary;
+
+  margin-block: $spacing-06 0;
+}
+
+.#{$block-class} .#{$block-class}__copyright-text {
+  margin-block-start: $spacing-05;
+}
+
+p.c4p--about-modal__content:first-child,
+p.c4p--about-modal__copyright-text:first-child {
+  margin-block-start: $spacing-07;
+}
+
+.#{$block-class} .#{$block-class}__footer {
+  display: block;
+  padding: $spacing-05;
+  background-color: $layer-02;
+  block-size: auto;
+}

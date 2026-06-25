@@ -1,0 +1,95 @@
+//
+// Copyright IBM Corp. 2022, 2022
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+// Standard imports.
+
+// Other Carbon settings.
+// TODO: @use 'carbon-components/scss/globals/grid/grid'; if needed
+@use '@carbon/colors/' as *;
+@use '@carbon/motion/' as *;
+@use '../../global/styles/project-settings' as c4p-settings;
+
+// EditUpdateCards uses the following Carbon components:
+// TODO: @use(s) of Carbon component styles used by EditUpdateCards
+
+// EditUpdateCards uses the following Carbon for IBM Products components:
+// TODO: @use(s) of IBM Products component styles used by EditUpdateCards
+
+// Define all component styles in a mixin which is then exported using
+// the Carbon import-once mechanism.
+/* stylelint-disable max-nesting-depth */
+$block-class: #{c4p-settings.$pkg-prefix}--edit-update-cards;
+
+.#{$block-class} {
+  &##{$block-class}--edit {
+    /* Used id for overriding the SVG path fill */
+
+    .#{c4p-settings.$pkg-prefix}--card__header,
+    .#{c4p-settings.$pkg-prefix}--card__footer {
+      button {
+        // stylelint-disable-next-line carbon/theme-use
+        color: $white-0;
+
+        &:hover {
+          // stylelint-disable-next-line carbon/theme-use
+          background-color: $blue-60-hover;
+        }
+
+        &:focus {
+          box-shadow: none;
+        }
+
+        svg {
+          path {
+            // stylelint-disable-next-line carbon/theme-use
+            fill: $white-0;
+          }
+        }
+
+        &.#{c4p-settings.$pkg-prefix}--loading {
+          &:hover {
+            background-color: transparent;
+          }
+        }
+      }
+    }
+
+    .#{c4p-settings.$pkg-prefix}--card__footer {
+      // stylelint-disable-next-line carbon/theme-use
+      background-color: $blue-60;
+      // stylelint-disable-next-line carbon/theme-use
+      color: $white-0;
+    }
+
+    .#{c4p-settings.$pkg-prefix}--loading {
+      animation-duration: $duration-slow-02;
+      animation-fill-mode: forwards;
+      animation-iteration-count: infinite;
+      animation-name: rotate;
+      animation-timing-function: motion(standard, productive);
+
+      &:hover {
+        background-color: transparent;
+      }
+    }
+
+    .#{c4p-settings.$pkg-prefix}--card__header-container {
+      align-items: center;
+    }
+  }
+
+  &:not(.#{$block-class}__actions-bottom) {
+    &##{$block-class}--edit {
+      .#{c4p-settings.$pkg-prefix}--card__header {
+        // stylelint-disable-next-line carbon/theme-use
+        background-color: $blue-60;
+        // stylelint-disable-next-line carbon/theme-use
+        color: $white-0;
+      }
+    }
+  }
+}

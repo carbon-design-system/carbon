@@ -1,0 +1,167 @@
+import { Markdown, Meta, Story, Canvas } from '@storybook/addon-docs/blocks';
+
+import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
+import DeleteStories from './delete-and-remove.stories';
+
+<Meta of={DeleteStories} />
+
+# Delete and remove 
+
+[Usage guidelines](https://pages.github.ibm.com/carbon/ibm-products/patterns/delete-and-remove/usage/)
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Example usage](#example-usage)
+- [High impact deletion](#high-impact-deletion)
+- [High impact deletion with connected items](#high-impact-deletion-with-connected-items)
+- [High impact batch deletion](#high-impact-batch-deletion)
+- [Medium impact deletion or removal](#medium-impact-deletion-or-removal)
+- [Low impact deletion or removal](#low-impact-deletion-or-removal)
+
+## Overview
+
+“Removing” is an action that moves information from one location to another.
+Removal can be both destructive and non-destructive. “Deletion” is the most
+common type of removal and is destructive
+
+> NOTE: Patterns have multiple ways of accomplishing a user need and typically
+> use a combination of components with additional design considerations. The
+> pattern code we share is meant to serve as an example implementation that can
+> be built and extended further.
+
+To build this pattern, we recommend including the following components:
+
+- [cds-modal](https://web-components.carbondesignsystem.com/?path=/docs/components-modal)
+- [cds-text-input](https://web-components.carbondesignsystem.com/?path=/docs/components-text-input--overview)
+- [cds-toast-notification](https://web-components.carbondesignsystem.com/?path=/docs/components-notifications-toast--overview)
+- [cds-button](https://web-components.carbondesignsystem.com/?path=/docs/components-button--overview)
+- [cds-checkbox](https://web-components.carbondesignsystem.com/?path=/docs/components-checkbox--overview)
+- [cds-link](https://web-components.carbondesignsystem.com/?path=/docs/components-link--overview)
+
+```javascript
+import '@carbon/web-components/es/components/modal/index.js';
+import '@carbon/web-components/es/components/form/form-item.js';
+import '@carbon/web-components/es/components/text-input/text-input.js';
+import '@carbon/web-components/es/components/notification/toast-notification.js';
+import '@carbon/web-components/es/components/checkbox/checkbox.js';
+import '@carbon/web-components/es/components/link/link.js';
+```
+
+## Example usage
+
+> 💡 Check our
+> [Stackblitz](https://stackblitz.com/github/carbon-design-system/ibm-products/tree/main/packages/ibm-products-web-components/examples/delete-and-remove)
+> example implementation.
+
+[![Edit carbon-web-components](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/carbon-design-system/ibm-products/tree/main/packages/ibm-products-web-components/examples/delete-and-remove)
+
+<Canvas withSource="none">
+  <Story of={DeleteStories.highImpactDeletion} />
+</Canvas>
+
+### Example
+
+Here's a quick example of high impact deletion to get you started.
+
+#### HTML
+
+```html
+<cds-modal size="sm" ?open="${this._open}" prevent-close>
+  <cds-modal-header>
+    <cds-modal-close-button @click="${this._close}"></cds-modal-close-button>
+    <cds-modal-label>Delete Bx1001</cds-modal-label>
+    <cds-modal-heading>Confirm delete</cds-modal-heading>
+  </cds-modal-header>
+  <cds-modal-body>
+    <cds-modal-body-content description="">
+      Deleting 'Bx1001' will permanently delete the configuration. This action
+      cannot be undone.
+    </cds-modal-body-content>
+    <cds-form-item>
+      <cds-text-input
+        placeholder="Name of resource"
+        label="Type Bx1001 to confirm"
+        value="${this._textInput}"
+        @input="${this._onInputChange}"
+        autocomplete="off"
+      >
+      </cds-text-input>
+    </cds-form-item>
+  </cds-modal-body>
+  <cds-modal-footer>
+    <cds-modal-footer-button kind="secondary" @click="${this._close}"
+      >Cancel</cds-modal-footer-button
+    >
+    <cds-modal-footer-button
+      ?disabled="${!this._enableDelete}"
+      kind="danger"
+      @click="${this._onDelete}"
+      >Delete
+    </cds-modal-footer-button>
+  </cds-modal-footer>
+</cds-modal>
+<cds-toast-notification
+  class="notification"
+  kind="success"
+  title="Success"
+  subtitle="Bx1001 has been successfully deleted."
+  caption="${getCurrentTime()}"
+  low-contrast="true"
+  timeout="3000"
+  @cds-notification-closed="${this._onNotificationClose}"
+></cds-toast-notification>
+```
+
+## High impact deletion
+
+When deleting is high-impact, a confirmation dialog should be presented to the
+user which displays:
+
+- The name of the resource
+- Consequences of the deletion
+- This action cannot be undone.
+- An editable text field for the name of the resource to be entered
+
+
+### High impact deletion with connected items
+
+It is similar to high-impact deletion pattern, but the confirmation dialog will
+display the below 2 additional content:
+
+- A list of all the connected items
+- A checkbox to confirm the deletion of all its connected items.
+
+### High impact batch deletion
+
+In batch deletion, a confirmation dialog should be presented to the user which
+displays:
+
+- The names of the items selected
+- The consequences of the deletion
+- The phrase, “This action cannot be undone”
+- A checkbox to confirm the deletion of the selected resources
+- A note of items that cannot be deleted in batch selection (optional)
+
+## Medium impact deletion or removal
+
+When deleting is medium-impact, a confirmation dialog should be presented to the
+user which displays:
+
+- The name of the resource
+- Consequences of the deletion
+- The action cannot be undone.
+
+> NOTE: The medium-impact removal pattern is similar to medium-impact deletion
+> pattern, with the only difference being the usage of “remove” or “delete“ in
+> the text. Use “remove” when the action is reversible or not truly destructive.
+
+## Low impact deletion or removal
+
+Requiring the user to confirm deletion is generally recommended. However, in low
+impact situations, or when an ‘undo’ option is available, user confirmation may
+not be required.
+
+> NOTE: The low-impact removal pattern is similar to low-impact deletion
+> pattern, with the only difference being the usage of “remove” or “delete“ in
+> the text. Use “remove” when the action is reversible or not truly destructive.

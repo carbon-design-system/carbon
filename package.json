@@ -13,9 +13,13 @@
     "packages/*"
   ],
   "scripts": {
+    "avt:ibm-products": "AVT=true yarn playwright test --project chromium --grep @avt",
     "build": "lerna run build --stream --prefix && node tasks/generate-repo-structure.js",
+    "build:ibm-products": "lerna run build --scope '@carbon/ibm-products*' --include-dependencies --stream",
     "ci-check": "carbon-cli ci-check",
     "clean": "lerna run clean && lerna clean --yes && rimraf node_modules",
+    "coverage:ibm-products": "yarn test:ibm-products --coverage",
+    "coverage:ibm-products-wc": "cd packages/ibm-products-web-components && yarn coverage",
     "doctoc": "doctoc --title '## Table of Contents'",
     "format": "prettier --cache --write '**/*.{js,md,mdx,scss,ts,tsx}' '!**/{build,es,lib,storybook,ts,umd}/**'",
     "format:diff": "prettier --list-different '**/*.{js,md,mdx,scss,ts,tsx}' '!**/{build,es,lib,storybook,ts,umd}/**' '!packages/components/**'",
@@ -23,9 +27,15 @@
     "lint:fix": "eslint --cache --fix --max-warnings 0 actions config packages",
     "lint:styles": "stylelint '**/*.scss' --report-needless-disables --report-invalid-scope-disables",
     "postinstall": "husky",
+    "storybook:ibm-products": "cd packages/ibm-products && yarn storybook:start",
+    "storybook:ibm-products-wc": "cd packages/ibm-products-web-components && yarn storybook",
+    "storybook:ibm-products:build": "cd packages/ibm-products && yarn storybook:build",
     "telemetry:config": "lerna run telemetry:config",
     "test": "cross-env BABEL_ENV=test jest",
-    "test:e2e": "cross-env BABEL_ENV=test jest -c jest.e2e.config.js"
+    "test:e2e": "cross-env BABEL_ENV=test jest -c jest.e2e.config.js",
+    "test:ibm-products": "lerna run --stream --scope @carbon/ibm-products test --",
+    "test:ibm-products-styles": "lerna run --stream --scope @carbon/ibm-products-styles test --",
+    "test:ibm-products-wc": "lerna run --stream --scope @carbon/ibm-products-web-components test --"
   },
   "resolutions": {
     "@types/react": "~19.2.0",

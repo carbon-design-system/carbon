@@ -1,0 +1,145 @@
+//
+// Copyright IBM Corp. 2021, 2023
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+// Standard imports.
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/type';
+@use '@carbon/styles/scss/breakpoint' as *;
+@use '../../global/styles/project-settings' as c4p-settings;
+
+$block-class: #{c4p-settings.$pkg-prefix}--http-errors;
+$block-class-404: #{c4p-settings.$pkg-prefix}--http-errors-404;
+$block-class-403: #{c4p-settings.$pkg-prefix}--http-errors-403;
+$block-class-other: #{c4p-settings.$pkg-prefix}--http-errors-other;
+
+.#{$block-class} .#{$block-class}__content {
+  position: fixed;
+  z-index: 2;
+  inset-block-start: 50%;
+  inset-inline-start: 50%;
+  transform: translate(-50%, -75%);
+  @include breakpoint(md) {
+    transform: translate(-50%, -100%);
+  }
+  @include breakpoint(lg) {
+    transform: translate(-50%, -50%);
+  }
+}
+
+.#{$block-class} .#{$block-class}__error-code-label {
+  @include type.type-style('heading-compact-02');
+
+  margin-block-end: $spacing-02;
+}
+
+.#{$block-class} .#{$block-class}__title {
+  @include type.type-style('heading-05');
+
+  margin-block-end: $spacing-04;
+}
+
+.#{$block-class} .#{$block-class}__description {
+  @include type.type-style('body-compact-01');
+
+  margin-block-end: $spacing-06;
+}
+
+.#{$block-class} .#{$block-class}__error-code-label,
+.#{$block-class} .#{$block-class}__title,
+.#{$block-class} .#{$block-class}__description {
+  color: $text-primary;
+}
+.#{$block-class} .#{$block-class}__link {
+  display: block;
+  margin-block-end: $spacing-02;
+}
+.#{$block-class} .#{$block-class}__image {
+  position: fixed;
+  inline-size: 100%;
+  inset-block-end: 0;
+  inset-inline-start: 0;
+  max-block-size: 100%;
+  @include breakpoint-down(md) {
+    inset-inline-start: 10%;
+    transform: scale(1.5);
+  }
+}
+/* stylelint-disable carbon/theme-use */
+
+.#{$block-class-404}__prefix-cls-1 {
+  fill: none;
+}
+.#{$block-class-404}__prefix-cls-67 {
+  fill: #697077;
+}
+.#{$block-class-404}__prefix-cls-68 {
+  fill: #282828;
+}
+.#{$block-class-404}__prefix-cls-69 {
+  fill: #51565c;
+}
+.#{$block-class-404}__prefix-cls-70 {
+  fill: #002b50;
+}
+.#{$block-class-404}__prefix-cls-71 {
+  fill: #413d3d;
+}
+.#{$block-class-404}__prefix-cls-72 {
+  fill: #908b8b;
+}
+.#{$block-class-404}__prefix-cls-75 {
+  fill: #a4a4a5;
+}
+.#{$block-class-404}__prefix-cls-76 {
+  opacity: 0.15;
+}
+.#{$block-class-403}__prefix-cls-1 {
+  fill: none;
+}
+.#{$block-class-403}__prefix-cls-80 {
+  mix-blend-mode: multiply;
+  opacity: 0.25;
+}
+.#{$block-class-403}__prefix-cls-75 {
+  fill: #595655;
+}
+.#{$block-class-403}__prefix-cls-76 {
+  opacity: 0.15;
+}
+.#{$block-class-403}__prefix-cls-77 {
+  fill: #373d42;
+}
+.#{$block-class-403}__prefix-cls-78 {
+  fill: #002b50;
+}
+.#{$block-class-403}__prefix-cls-81 {
+  fill: #2b2828;
+}
+.#{$block-class-other}__prefix-cls-1 {
+  fill: none;
+}
+.#{$block-class-other}__prefix-cls-69 {
+  fill: #697077;
+}
+.#{$block-class-other}__prefix-cls-70 {
+  fill: #282828;
+}
+.#{$block-class-other}__prefix-cls-71 {
+  fill: #51565c;
+}
+.#{$block-class-other}__prefix-cls-72 {
+  fill: #e0dbda;
+}
+.#{$block-class-other}__prefix-cls-73 {
+  fill: #003d73;
+}
+.#{$block-class-other}__prefix-cls-75 {
+  opacity: 0.15;
+}
+
+/* stylelint-enable */

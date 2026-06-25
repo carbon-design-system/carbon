@@ -1,0 +1,16 @@
+{
+    "compilerOptions": {
+      "target": "ESNext",
+      "module": "ESNext",
+      "lib": ["DOM", "ESNext"],
+      "moduleResolution": "Node",
+      "strict": true,
+      "experimentalDecorators": true,
+      "emitDecoratorMetadata": false,
+      "useDefineForClassFields": false, 
+      "esModuleInterop": true,
+      "skipLibCheck": true,
+      "forceConsistentCasingInFileNames": true
+    },
+    "exclude": ["dist", "node_modules"]
+  }

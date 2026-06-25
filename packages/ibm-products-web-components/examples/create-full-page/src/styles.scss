@@ -1,0 +1,92 @@
+/**
+ * @license
+ *
+* Copyright IBM Corp. 2026
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+@use '@carbon/styles/scss/reset';
+@use '@carbon/styles/scss/theme';
+@use '@carbon/styles/scss/themes';
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/type';
+@use '@carbon/styles/scss/grid';
+@use '@carbon/styles/scss/components/ui-shell';
+$story-class: 'create-full-page-stories';
+$block-class: 'create-full-page-pattern';
+
+:root {
+  @include theme.theme(themes.$white);
+  background-color: var(--cds-background);
+  color: var(--cds-text-primary);
+}
+
+// Viewport styles for full-page display
+.#{$story-class}__viewport {
+  position: fixed;
+  z-index: 9999;
+  overflow: hidden;
+  background-color: theme.$background;
+  block-size: 100vh;
+  inline-size: 100vw;
+  inset: 0;
+}
+
+.#{$story-class}__content-container {
+  block-size: 100%;
+  inline-size: 100%;
+}
+
+.#{$story-class}__content-container--with-global-header {
+  block-size: calc(100% - $spacing-10); // Subtract header height
+  margin-block-start: $spacing-10; // Header height
+}
+
+.form-field-wrapper {
+  margin-block-end: $spacing-05;
+}
+
+.#{$story-class}__error--text {
+  @include type.type-style('label-01');
+
+  margin-block-end: $spacing-05;
+}
+
+.#{$block-class}__section-divider {
+  position: relative;
+  display: block;
+  margin: $spacing-07 calc(-1 * #{$spacing-08}) $spacing-07
+    calc(-1 * #{$spacing-08});
+  block-size: 1px;
+  inline-size: 0;
+
+  &::after {
+    position: absolute;
+    background-color: theme.$layer-accent-01;
+    block-size: 1px;
+    content: '';
+    inline-size: 100vw;
+    inset-block-start: 0;
+    inset-inline-start: 0;
+  }
+}
+
+.#{$block-class}__step-title {
+  @include type.type-style('heading-04');
+
+  margin-block-end: $spacing-05;
+}
+
+.#{$block-class}__step-subtitle {
+  @include type.type-style('heading-compact-01');
+
+  margin-block-end: $spacing-05;
+}
+
+.#{$block-class}__step-description {
+  @include type.type-style('body-01');
+
+  margin-block-end: $spacing-06;
+}

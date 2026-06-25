@@ -1,0 +1,29 @@
+//
+// Copyright IBM Corp. 2020, 2021
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/type';
+@use 'ALIAS_STORY_STYLE_CONFIG' as c4p-settings;
+
+// The block part of our conventional BEM class names (blockClass__E--M).
+$block-class: #{c4p-settings.$pkg-prefix}--about-modal;
+
+.#{$block-class}__stories--tech-logo {
+  block-size: $spacing-06;
+  inline-size: $spacing-06;
+  margin-inline-end: $spacing-03;
+  object-fit: contain;
+}
+
+.#{$block-class}__footer-label {
+  @include type.type-style('label-01');
+
+  color: $text-secondary;
+
+  margin-block-end: $spacing-02;
+}

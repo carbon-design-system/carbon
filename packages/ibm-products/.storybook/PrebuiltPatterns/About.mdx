@@ -1,0 +1,65 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+import LinkTo from '@storybook/addon-links/react';
+
+<Meta title="Patterns/Prebuilt patterns/About" />
+
+# About prebuilt patterns
+
+## Table of Contents
+
+- [How prebuilt patterns and patterns differ](#how-prebuilt-patterns-and-patterns-differ)
+- [Prebuilt patterns to patterns](#prebuilt-patterns-to-patterns)
+- [Prebuilt patterns to other alternatives](#prebuilt-patterns-to-other-alternatives)
+
+Patterns can be accomplished in multiple ways utilizing one or more components
+with additional design considerations. The prebuilt patterns in this library are
+based on existing
+[patterns](https://pages.github.ibm.com/carbon/ibm-products/patterns/overview/patterns/)
+documented on the Carbon for IBM Products website, however, they are built like
+traditional components that can also be imported directly for use.
+
+While these prebuilt patterns are available for use directly in code, they only
+capture a subset of use cases from the broader patterns they represent and their
+flexibility may be limited by their component APIs. For a more flexible
+approach, consider leveraging the equivalent pattern code.
+
+## How prebuilt patterns and patterns differ
+
+Prebuilt patterns can be useful, containing a number of features built-in.
+However, prebuilt patterns have stricter APIs and may have limited flexibility.
+Many of our patterns include “recipes” that list the components used to deliver
+the pattern. These are often provided as example code that you can adopt or
+extend further for your own use case.
+
+## Prebuilt patterns to patterns
+
+While many of the prebuilt patterns may not have pattern equivalents at this
+time, we will be adding more patterns in the future.
+
+| Prebuilt pattern name                | Equivalent pattern                                                                        |
+| ------------------------------------ | ----------------------------------------------------------------------------------------- |
+| Add and select `MultiAddSelect`      | —                                                                                         |
+| Add and select `SingleAddSelect`     | —                                                                                         |
+| `APIKeyModal`                        | <LinkTo title="Patterns/Generate an API key" name="Overview">Generate an API key</LinkTo> |
+| Create flows `CreateFullPage`        | —                                                                                         |
+| Create flows `CreateModal`           | —                                                                                         |
+| Create flows `CreateSidePanel`       | —                                                                                         |
+| Create flows `CreateTearsheet`       | —                                                                                         |
+| Create flows `CreateTearsheetNarrow` | —                                                                                         |
+| `ExportModal`                        | —                                                                                         |
+| `ImportModal`                        | —                                                                                         |
+| `RemoveModal`                        | —                                                                                         |
+| `Saving`                             | —                                                                                         |
+| `WebTerminal`                        | —                                                                                         |
+
+## Prebuilt patterns to other alternatives
+
+On occasion, new versions of our components and prebuilt patterns may be in
+progress in other libraries. These may also exist at different points of
+Carbon's
+[Product Development Lifecycle](https://carbondesignsystem.com/contributing/product-development-lifecycle/).
+
+| Prebuilt pattern name | Alternative                                                                                                                    | Status  |
+| --------------------- | ------------------------------------------------------------------------------------------------------------------------------ | ------- |
+| Empty states          | [Empty states](https://labs.carbondesignsystem.com/?path=/docs/web-components_components-empty-state) via Carbon Labs          | Draft   |
+| `StatusIcon`          | [Status indicators](https://react.carbondesignsystem.com/?path=/docs/experimental-statusindicators) (preview) via Carbon React | Preview |

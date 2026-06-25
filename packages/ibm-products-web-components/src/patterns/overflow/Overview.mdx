@@ -1,0 +1,145 @@
+import {
+  ArgTypes,
+  Markdown,
+  Meta,
+  Story,
+  Canvas,
+} from '@storybook/addon-docs/blocks';
+import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
+import * as SetOfTags from './set-of-tags.stories';
+import * as SetOfActions from './set-of-actions.stories';
+import * as SetOfUsers from './set-of-users.stories';
+import * as SetOfBreadcrumbs from './set-of-breadcrumbs.stories';
+
+<Meta of={SetOfTags} />
+
+# Item overflow
+
+item overflow are a group of patterns built using
+[overflowHandler](?path=/docs/experimental-utilities-overflowhandler--docs)
+
+Patterns have multiple ways of accomplishing a user need and typically use a
+combination of components with additional design considerations. The pattern
+code we share is meant to serve as an example implementation that can be built
+and extended further.
+
+### 1) Set of Tags
+
+The Set of Tags pattern displays a row of tags. If there isn’t enough space to
+show all of them, the overflowing tags are grouped in a popover, triggered by an
+overflow button labeled +N.
+
+If there are more than 10 overflowing tags, a View all tags button appears in
+the popover. Clicking it opens a modal that displays the full list of tags.
+
+This pattern is commonly used to filter or categorize content.
+
+To build this pattern, we recommend including the following components:
+
+- [cds-tag cds-dismissible-tag cds-operational-tag](https://web-components.carbondesignsystem.com/?path=/docs/components-tag--overview)
+- [cds-popover](https://web-components.carbondesignsystem.com/?path=/docs/components-popover--overview)
+- [cds-modal](https://web-components.carbondesignsystem.com/?path=/docs/components-modal--overview)
+
+and the following utility:
+
+- [overflowHandler](?path=/docs/experimental-utilities-overflowhandler--docs)
+
+These components are used within the `set-of-tags` wrapper component to handle
+state management.
+
+> 💡 Check our
+> [Stackblitz](https://stackblitz.com/github/carbon-design-system/ibm-products/tree/main/packages/ibm-products-web-components/examples/set-of-tags)
+> example implementation.
+
+[![Edit carbon-web-components](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/carbon-design-system/ibm-products/tree/main/packages/ibm-products-web-components/examples/set-of-tags)
+
+<Canvas of={SetOfTags.SetOfTags} sourceState="none" />
+
+### 2) Set of Actions
+
+The Set of Actions pattern displays a row of actions in the form of icon
+buttons. If there isn’t enough space to show all of them, the overflowing
+actions are grouped into an overflow menu.
+
+There is also a vertical variant available to display actions.
+
+To build this pattern, we recommend including the following components:
+
+- [cds-icon-button](https://web-components.carbondesignsystem.com/?path=/docs/components-icon-button--overview)
+- [cds-overflow-menu](https://web-components.carbondesignsystem.com/?path=/docs/components-overflow-menu--overview)
+
+and the following utility:
+
+- [overflowHandler](?path=/docs/experimental-utilities-overflowhandler--docs)
+
+These components are used within the `set-of-actions` wrapper component to
+handle state management.
+
+> 💡 Check our
+> [Stackblitz](https://stackblitz.com/github/carbon-design-system/ibm-products/tree/main/packages/ibm-products-web-components/examples/set-of-actions)
+> example implementation.
+
+[![Edit carbon-web-components](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/carbon-design-system/ibm-products/tree/main/packages/ibm-products-web-components/examples/set-of-actions)
+
+<Canvas of={SetOfActions.SetOfActions} sourceState="none" />
+
+### 3) Set of UserAvatars
+
+The Set of UserAvatars pattern displays a row of user avatars. If there isn’t
+enough space to show all of them, the overflowing avatars are grouped in a
+popover, triggered by an overflow button labeled +N.
+
+If there are more than 10 overflowing users, a View all users button appears in
+the popover. Clicking it opens a modal that displays the full list of users.
+
+To build this pattern, we recommend including the following components:
+
+- [c4p-user-avatar](?path=/docs/experimental-useravatar--docs)
+- [cds-popover](https://web-components.carbondesignsystem.com/?path=/docs/components-popover--overview)
+- [cds-modal](https://web-components.carbondesignsystem.com/?path=/docs/components-modal--overview)
+
+and the following utility:
+
+- [overflowHandler](?path=/docs/experimental-utilities-overflowhandler--docs)
+
+These components are used within the `set-of-users` wrapper component to handle
+state management.
+
+> 💡 Check our
+> [Stackblitz](https://stackblitz.com/github/carbon-design-system/ibm-products/tree/main/packages/ibm-products-web-components/examples/set-of-users)
+> example implementation.
+
+[![Edit carbon-web-components](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/carbon-design-system/ibm-products/tree/main/packages/ibm-products-web-components/examples/set-of-users)
+
+<Canvas of={SetOfUsers.SetOfUsers} sourceState="none" />
+
+### 4) Set of Breadcrumbs
+
+The Set of Breadcrumbs pattern displays a horizontal trail of links representing
+the user's navigation path. If there isn’t enough space to show all of them, the
+overflowing breadcrumbs are grouped into an overflow menu.
+
+To build this pattern, we recommend including the following components:
+
+- [cds-breadcrumb](https://web-components.carbondesignsystem.com/?path=/docs/components-breadcrumb--overview)
+
+and the following utility:
+
+- [overflowHandler](?path=/docs/experimental-utilities-overflowhandler--docs)
+
+These components are used within the `set-of-breadcrumbs` wrapper component to
+handle state management.
+
+> 💡 Check our
+> [Stackblitz](https://stackblitz.com/github/carbon-design-system/ibm-products/tree/main/packages/ibm-products-web-components/examples/set-of-breadcrumbs)
+> example implementation.
+
+[![Edit carbon-web-components](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/carbon-design-system/ibm-products/tree/main/packages/ibm-products-web-components/examples/set-of-breadcrumbs)
+
+<Canvas of={SetOfBreadcrumbs.SetOfBreadcrumbs} sourceState="none" />
+
+### 5) Collapsible button-set
+
+this is different from button-set with container queries, this will show a group
+of buttons collapse into a
+[menu-button](https://web-components.carbondesignsystem.com/?path=/docs/components-menu-button--overview)

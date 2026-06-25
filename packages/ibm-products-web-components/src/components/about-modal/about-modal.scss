@@ -1,0 +1,120 @@
+/*
+* Copyright IBM Corp. 2025, 2025
+*
+* This source code is licensed under the Apache-2.0 license found in the
+* LICENSE file in the root directory of this source tree.
+*/
+
+$css--plex: true !default;
+
+/* Other Carbon settings. */
+@use '@carbon/styles' as styles;
+@use '@carbon/styles/scss/reset';
+@use '@carbon/styles/scss/breakpoint' as *;
+@use '@carbon/styles/scss/config' as carbon-config;
+@use '@carbon/styles/scss/motion' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/themes/scss/themes';
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/type';
+@use '@carbon/styles/scss/utilities';
+@use '@carbon/styles/scss/utilities/ai-gradient' as *;
+@use '@carbon/styles/scss/components/modal' as *;
+@use '@carbon/styles/scss/utilities/convert' as *;
+@use 'sass:map';
+
+$prefix: 'c4p';
+
+@use '@carbon/ibm-products-styles/scss/components/AboutModal/index' as *;
+
+:host(#{$prefix}-about-modal) {
+  .#{$prefix}--about-modal__logo {
+    margin: $spacing-05 $spacing-05 $spacing-07 $spacing-05;
+  }
+  #{carbon-config.$prefix}-modal-header {
+    padding: 0 20% 0 $spacing-05;
+    grid-row: auto;
+    margin-block-end: 0;
+    overflow-y: visible;
+  }
+  #{carbon-config.$prefix}-modal-body {
+    @include type.type-style('body-compact-02');
+
+    overflow: hidden auto;
+    grid-row: auto;
+    min-block-size: $spacing-10;
+    padding-block-start: 0;
+    padding-inline: $spacing-05 20%;
+    &:not(.#{carbon-config.$prefix}--modal-scroll-content) {
+      margin-block-end: $spacing-06;
+      padding-block-end: 0;
+    }
+    &.#{carbon-config.$prefix}--modal-scroll-content {
+      padding-block-end: $spacing-06;
+    }
+  }
+
+  .#{carbon-config.$prefix}--modal-content--overflow-indicator {
+    background-image: linear-gradient(to bottom, #00000000, $layer-01);
+    inset-block-end: 0;
+  }
+
+  #{carbon-config.$prefix}-modal-heading {
+    @include type.type-style('heading-04');
+
+    color: $text-primary;
+    margin-block-end: $spacing-02;
+  }
+
+  .#{$prefix}--about-modal__version {
+    color: $text-secondary;
+  }
+
+  .#{$prefix}--about-modal__content,
+  .#{$prefix}--about-modal__copyright-text {
+    @include type.type-style('label-01');
+
+    color: $text-secondary;
+    margin-block: $spacing-06 0;
+  }
+
+  .#{$prefix}--about-modal__copyright-text {
+    margin-block-start: $spacing-05;
+  }
+
+  .#{$prefix}--about-modal__content:first-child,
+  .#{$prefix}--about-modal__copyright-text:first-child {
+    margin-block-start: $spacing-07;
+  }
+  #{carbon-config.$prefix}-link {
+    display: inline-flex;
+  }
+  .#{$prefix}--about-modal__links-container {
+    @include type.type-style('body-compact-01');
+
+    margin-block-start: $spacing-06;
+    #{carbon-config.$prefix}-link + #{carbon-config.$prefix}-link {
+      border-inline-start: 1px solid $border-strong-01;
+      margin-inline-start: $spacing-03;
+      padding-inline-start: $spacing-03;
+    }
+  }
+  #{carbon-config.$prefix}-modal-footer {
+    display: block;
+    padding: $spacing-05;
+    background-color: $layer-02;
+    block-size: auto;
+    .#{$prefix}--about-modal__footer-label {
+      @include type.type-style('label-01');
+
+      color: $text-secondary;
+      margin-block-end: $spacing-02;
+    }
+    .#{$prefix}--about-modal__footer--tech-logo {
+      block-size: $spacing-06;
+      inline-size: $spacing-06;
+      margin-inline-end: $spacing-03;
+      object-fit: contain;
+    }
+  }
+}

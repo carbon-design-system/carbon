@@ -1,0 +1,58 @@
+import { Story, Controls, Source, Canvas } from '@storybook/addon-docs/blocks';
+import { CodesandboxLink } from '../../global/js/utils/story-helper';
+import { CoachmarkFixed } from '.';
+import * as CoachmarkFixedStories from './CoachmarkFixed.stories';
+
+# CoachmarkFixed
+
+## Deprecation notice
+
+This component is deprecated and will be removed in the next major version. This
+can be created as
+[pattern](https://carbon-for-ibm-products.netlify.app/?path=/docs/patterns-coachmark-fixed--overview)
+using new
+[composable coachmark](https://carbon-for-ibm-products.netlify.app/?path=/docs/preview-onboarding-coachmark--overview),
+[carousel utility](https://github.com/carbon-design-system/carbon/blob/main/packages/utilities/src/carousel/README.md)
+and other [carbon components](https://react.carbondesignsystem.com).
+
+## Table of Contents
+
+- [Overview](#overview)
+- [About Onboarding](#about-onboarding)
+- [Note on theming](#note-on-theming)
+- [Example usage](#example-usage)
+- [Component API](#component-api)
+
+## Overview
+
+[CoachmarkFixed](https://pages.github.ibm.com/carbon/ibm-products/components/onboarding/coachmark/usage#fixed)
+appears fixed at the bottom right corner of the browser window when the page
+loads. It starts in a minimized state, to cover as little of the UI as possible;
+when shown in tests as expanded by default, users immediately closed it without
+reading, to get it out of the way. When dismissed, it slides down off the page.
+
+## About Onboarding
+
+[Onboarding](https://pages.github.ibm.com/security/security-design/teams-across-security/onboarding/overview/)
+is a continuous learning methodology and framework that aims to orient, onboard,
+explain, educate, and cultivate novice users into high-functioning power users.
+
+## Note on theming
+
+The CoachmarkFixed uses the theme prop (e.g., theme='dark') to set the
+appropriate background and font colors for the overlay. Specify a value ('light'
+or 'dark') to display properly within your usage.
+
+## Example usage
+
+_(See bottom right)_
+
+<Canvas>
+  <div className="CoachmarkBaseExampleUsage">
+    <Story of={CoachmarkFixedStories.coachmarkFixed} />
+  </div>
+</Canvas>
+
+## Component API
+
+<Controls />

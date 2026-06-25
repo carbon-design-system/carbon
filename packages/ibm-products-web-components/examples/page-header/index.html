@@ -1,0 +1,107 @@
+<!--
+@license
+
+Copyright IBM Corp. 2025
+
+This source code is licensed under the Apache-2.0 license found in the
+LICENSE file in the root directory of this source tree.
+-->
+
+<html>
+  <head>
+    <title>ibm-products web components example</title>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="src/styles.scss" />
+    <style>
+      /* Suppress custom element until styles are loaded */
+      c4p-page-header:not(:defined) {
+        display: none;
+      }
+    </style>
+    <script type="module" src="src/index.js"></script>
+  </head>
+  <body>
+   <c4p-page-header>
+    <c4p-page-header-breadcrumb>
+      <svg focusable="false" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" fill="currentColor" aria-hidden="true" width="16" height="16" viewBox="0 0 32 32" slot="icon"><!--?lit$894887976$--><path d="M16 10a6 6 0 00-6 6v8a6 6 0 0012 0V16A6 6 0 0016 10zm-4.25 7.87h8.5v4.25h-8.5zM16 28.25A4.27 4.27 0 0111.75 24v-.13h8.5V24A4.27 4.27 0 0116 28.25zm4.25-12.13h-8.5V16a4.25 4.25 0 018.5 0zM30.66 19.21L24 13v9.1a4 4 0 008 0A3.83 3.83 0 0030.66 19.21zM28 24.35a2.25 2.25 0 01-2.25-2.25V17l3.72 3.47h0A2.05 2.05 0 0130.2 22 2.25 2.25 0 0128 24.35zM0 22.1a4 4 0 008 0V13L1.34 19.21A3.88 3.88 0 000 22.1zm2.48-1.56h0L6.25 17v5.1a2.25 2.25 0 01-4.5 0A2.05 2.05 0 012.48 20.54zM15 5.5A3.5 3.5 0 1011.5 9 3.5 3.5 0 0015 5.5zm-5.25 0A1.75 1.75 0 1111.5 7.25 1.77 1.77 0 019.75 5.5zM20.5 2A3.5 3.5 0 1024 5.5 3.5 3.5 0 0020.5 2zm0 5.25A1.75 1.75 0 1122.25 5.5 1.77 1.77 0 0120.5 7.25z"></path></svg>
+      <cds-breadcrumb>
+        <cds-breadcrumb-item>
+          <cds-breadcrumb-link href="#">Breadcrumb 1</cds-breadcrumb-link>
+        </cds-breadcrumb-item>
+        <cds-breadcrumb-item>
+          <cds-breadcrumb-link href="#">Breadcrumb 2</cds-breadcrumb-link>
+        </cds-breadcrumb-item>
+      </cds-breadcrumb>
+      <div slot="content-actions">
+        <cds-button size="md">Button</cds-button>
+      </div>
+      <cds-icon-button slot="page-actions" kind="ghost" size="md"
+        ><svg focusable="false" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" fill="currentColor" aria-hidden="true" width="16" height="16" viewBox="0 0 32 32" slot="icon"><!--?lit$303040124$--><path d="M12,29a1,1,0,0,1-.92-.62L6.33,17H2V15H7a1,1,0,0,1,.92.62L12,25.28,20.06,3.65A1,1,0,0,1,21,3a1,1,0,0,1,.93.68L25.72,15H30v2H25a1,1,0,0,1-.95-.68L21,7,12.94,28.35A1,1,0,0,1,12,29Z"></path></svg></cds-icon-button
+      >
+      <cds-icon-button slot="page-actions" kind="ghost" size="md"
+        ><svg focusable="false" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" fill="currentColor" aria-hidden="true" width="16" height="16" viewBox="0 0 32 32" slot="icon"><!--?lit$303040124$--><path d="M12,29a1,1,0,0,1-.92-.62L6.33,17H2V15H7a1,1,0,0,1,.92.62L12,25.28,20.06,3.65A1,1,0,0,1,21,3a1,1,0,0,1,.93.68L25.72,15H30v2H25a1,1,0,0,1-.95-.68L21,7,12.94,28.35A1,1,0,0,1,12,29Z"></path></svg></cds-icon-button
+      >
+      <cds-icon-button slot="page-actions" kind="ghost" size="md"
+        ><svg focusable="false" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" fill="currentColor" aria-hidden="true" width="16" height="16" viewBox="0 0 32 32" slot="icon"><!--?lit$303040124$--><path d="M12,29a1,1,0,0,1-.92-.62L6.33,17H2V15H7a1,1,0,0,1,.92.62L12,25.28,20.06,3.65A1,1,0,0,1,21,3a1,1,0,0,1,.93.68L25.72,15H30v2H25a1,1,0,0,1-.95-.68L21,7,12.94,28.35A1,1,0,0,1,12,29Z"></path></svg></cds-icon-button
+      >
+    </c4p-page-header-breadcrumb>
+        <c4p-page-header-content title="Page header title">
+          <c4p-page-header-content-text subtitle="Subtitle">
+            Built for modern teams, our technology platform simplifies
+            complexity with powerful APIs, real-time collaboration tools, and
+            seamless integration. From deployment to monitoring, we help you
+            ship faster, scale efficiently, and stay in control every step of
+            the way.
+          </c4p-page-header-content-text>
+        </c4p-page-header-content>
+        <c4p-page-header-tabs>
+          <cds-tabs value="tab-1">
+            <cds-tab id="tab-1" target="tab-panel-1" value="tab-1"
+              >Tab 1</cds-tab
+            >
+            <cds-tab id="tab-2" target="tab-panel-2" value="tab-2"
+              >Tab 2</cds-tab
+            >
+            <cds-tab id="tab-3" target="tab-panel-3" value="tab-3"
+              >Tab 3</cds-tab
+            >
+            <cds-tab id="tab-4" target="tab-panel-4" value="tab-4"
+              >Tab 4</cds-tab
+            >
+            <cds-tab id="tab-5" target="tab-panel-5" value="tab-5"
+              >Tab 5</cds-tab
+            >
+            <cds-tab id="tab-6" target="tab-panel-6" value="tab-6"
+              >Tab 6</cds-tab
+            >
+            <cds-tab id="tab-7" target="tab-panel-7" value="tab-7"
+              >Tab 7</cds-tab
+            >
+          </cds-tabs>
+        </c4p-page-header-tabs>
+      </c4p-page-header>
+      <div class="tabs-demo">
+        <div id="tab-panel-1" role="tabpanel" aria-labelledby="tab-1" hidden>
+          Tab Panel 1
+        </div>
+        <div id="tab-panel-2" role="tabpanel" aria-labelledby="tab-2" hidden>
+          Tab Panel 2
+        </div>
+        <div id="tab-panel-3" role="tabpanel" aria-labelledby="tab-3" hidden>
+          Tab Panel 3
+        </div>
+        <div id="tab-panel-4" role="tabpanel" aria-labelledby="tab-4" hidden>
+          Tab Panel 4
+        </div>
+        <div id="tab-panel-5" role="tabpanel" aria-labelledby="tab-5" hidden>
+          Tab Panel 5
+        </div>
+        <div id="tab-panel-6" role="tabpanel" aria-labelledby="tab-6" hidden>
+          Tab Panel 6
+        </div>
+        <div id="tab-panel-7" role="tabpanel" aria-labelledby="tab-7" hidden>
+          Tab Panel 7
+        </div>
+      </div>
+  </body>
+</html>

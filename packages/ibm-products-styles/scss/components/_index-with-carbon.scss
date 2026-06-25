@@ -1,0 +1,81 @@
+//
+// Copyright IBM Corp. 2021, 2026
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+// Package all scss files here for those that want them all bundled up.
+
+@use './_Canary/index-with-carbon' as *;
+
+@use './APIKeyModal/index-with-carbon' as *;
+@use './AboutModal/index-with-carbon' as *;
+@use './ActionSet/index-with-carbon' as *;
+@use './AddSelect/index-with-carbon' as *;
+@use './ButtonMenu/index-with-carbon' as *;
+@use './Cascade/index-with-carbon' as *;
+@use './Checklist/index-with-carbon' as *;
+@use './ComboButton/index-with-carbon' as *;
+@use './CreateFullPage/index-with-carbon' as *;
+@use './CreateModal/index-with-carbon' as *;
+@use './CreateSidePanel/index-with-carbon' as *;
+@use './CreateTearsheet/index-with-carbon' as *;
+@use './CreateTearsheetNarrow/index-with-carbon' as *;
+@use './EmptyStates/index-with-carbon' as *;
+@use './ExportModal/index-with-carbon' as *;
+@use './ExpressiveCard/index-with-carbon' as *;
+@use './HTTPErrors/index-with-carbon' as *;
+@use './ImportModal/index-with-carbon' as *;
+@use './MultiAddSelect/index-with-carbon' as *;
+@use './NotificationsPanel/index-with-carbon' as *;
+@use './PageHeader/index-with-carbon' as *;
+@use './ProductiveCard/index-with-carbon' as *;
+@use './RemoveModal/index-with-carbon' as *;
+@use './Saving/index-with-carbon' as *;
+@use './SidePanel/index-with-carbon' as *;
+@use './SingleAddSelect/index-with-carbon' as *;
+@use './StatusIcon/index-with-carbon' as *;
+@use './TagSet/index-with-carbon' as *;
+@use './Tearsheet/index-with-carbon' as *;
+@use './Toolbar/index-with-carbon' as *;
+@use './TooltipTrigger/index-with-carbon' as *;
+@use './WebTerminal/index-with-carbon' as *;
+@use './UserProfileImage/index-with-carbon' as *;
+@use './EditSidePanel/index-with-carbon' as *;
+@use './OptionsTile/index-with-carbon' as *;
+@use './EditInPlace/index-with-carbon' as *;
+@use './EditTearsheet/index-with-carbon' as *;
+@use './DataSpreadsheet/index-with-carbon' as *;
+@use './Datagrid/index-with-carbon' as *;
+@use './EditUpdateCards/index-with-carbon' as *;
+@use './SimpleHeader/index-with-carbon' as *;
+@use './BigNumber/index-with-carbon' as *;
+@use './TruncatedList/index-with-carbon' as *;
+@use './TruncatedText/index-with-carbon' as *;
+@use './InterstitialScreen/index-with-carbon' as *;
+@use './Coachmark/index-with-carbon' as *;
+@use './CoachmarkBeacon/index-with-carbon' as *;
+@use './CoachmarkButton/index-with-carbon' as *;
+@use './CoachmarkFixed/index-with-carbon' as *;
+@use './CoachmarkOverlayElement/index-with-carbon' as *;
+@use './CoachmarkOverlayElements/index-with-carbon' as *;
+@use './CoachmarkStack/index-with-carbon' as *;
+@use './DelimitedList/index-with-carbon' as *;
+@use './Decorator/index-with-carbon' as *;
+@use './DecoratorLink/index-with-carbon' as *;
+@use './DecoratorSingleButton/index-with-carbon' as *;
+@use './DecoratorDualButton/index-with-carbon' as *;
+@use './DescriptionList/index-with-carbon' as *;
+@use './FullPageError/index-with-carbon' as *;
+@use './SearchBar/index-with-carbon' as *;
+@use './Nav/index-with-carbon' as *;
+@use './StringFormatter/index-with-carbon' as *;
+@use './UserAvatar/index-with-carbon' as *;
+@use './ScrollGradient/index-with-carbon' as *;
+@use './StatusIndicator/index-with-carbon' as *;
+@use './TagOverflow/index-with-carbon' as *;
+@use './FilterPanel/index-with-carbon' as *;
+@use './ConditionBuilder/index-with-carbon' as *;
+@use './GetStartedCard/index-with-carbon' as *;
+@use './Guidebanner/index-with-carbon' as *;

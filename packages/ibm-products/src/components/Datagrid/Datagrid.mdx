@@ -1,0 +1,1291 @@
+import { Story, Controls, Source, Canvas } from '@storybook/addon-docs/blocks';
+import { CodesandboxLink } from '../../global/js/utils/story-helper';
+import { Datagrid } from '.';
+import datagridActionsExample from './storybook-assets/datagrid-actions-example.png';
+import * as stories from './Datagrid.stories';
+import * as ExpandedStories from './Extensions/ExpandableRow/ExpandableRow.stories';
+import * as ClickableRowStories from './Extensions/ClickableRow/ClickableRow.stories';
+import * as EditableCellStories from './Extensions/EditableCell/EditableCell.stories';
+import * as FlyoutStories from './Extensions/Filtering/Flyout.stories';
+
+# Datagrid
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Getting started](#getting-started)
+- [Basic](#basic)
+- [Empty](#empty)
+
+### Extensions
+
+- [Expandable rows - `useExpandedRow`](#expandable-rows)
+- [Column alignment - `useColumnCenterAlign` `useColumnRightAlign`](#column-alignment)
+- [Inline editing - `useInlineEdit`](#inline-editing)
+- [Filtering - `useFiltering`](#filtering)
+- [Auto size column to fit content - `getAutoSizedColumnWidth`](#auto-size-column-to-fit-content)
+- [Actions column - `useActionsColumn`](#actions-column)
+- [Customizing columns - `useCustomizeColumns` `useColumnOrder`](#customizing-columns)
+- [Disabling select rows - `useDisableSelectRows` `useColumnOrder`](#disabling-select-rows)
+- [Infinite scroll - `useInfiniteScroll`](#infinite-scroll)
+- [Nested rows - `useNestedRows`](#nested-rows)
+- [Row click - `useOnRowClick`](#row-click)
+- [Detect row hover - `useRowIsMouseOver`](#detect-row-hover)
+- [Select items across all pages - `useSelectAllWithToggle` `useSelectRows`](#select-items-across-all-pages)
+- [Selecting rows - `useSelectRows`](#selecting-rows)
+- [Sortable columns - `useSortableColumns`](#sortable-columns)
+- [Sticky column - `useStickyColumn`](#sticky-column)
+
+## Overview
+
+{/* <!-- TODO: Overview. --> */}
+
+The `Datagrid` component is an extension of Carbon's DataTable component. At the
+most basic level, the `Datagrid` component takes in columns and rows and renders
+a data table. There is a set of data table extensions which this component
+provides support for, these can be found
+[here](https://pages.github.ibm.com/carbon/ibm-products/components/datagrid/overview/).
+This component is data driven and allows you to choose what pieces will be
+included based on the hooks/plugins that are provided.
+
+## Getting started
+
+You can use the `Datagrid` component to create various kinds of Carbon data
+tables. Simply import the `Datagrid` along with any accompanying hooks (listed
+below) depending on what extensions you'd like to be included.
+
+```jsx
+import {
+  Datagrid,
+  useDatagrid,
+  useInfiniteScroll,
+  useNestedRows,
+  useSelectRows,
+  useExpandedRow,
+  useOnRowClick,
+  useSortableColumns,
+  useRowIsMouseOver,
+  useColumnRightAlign,
+  useDisableSelectRows,
+  useStickyColumn,
+  useActionsColumn,
+  useCustomizeColumns,
+  useSelectAllWithToggle,
+  useColumnCenterAlign,
+  useColumnOrder,
+  useInlineEdit,
+  useEditableCell,
+} from '@carbon/ibm-products';
+```
+
+## Basic
+
+{/* <!-- TODO: One example per designed use case. --> */}
+
+Here is a basic usage example. The following component will render the datagrid
+seen below, with pagination and some toolbar actions. One of the key pieces to
+building the `Datagrid` is the `useDatagrid` hook, this will give you all of the
+state/props required to render a `Datagrid`.
+
+#### Multi line wrap
+
+This setting enables the table cell text wrap to two lines. This can be turned
+on for only one column in the datagrid or for every column.
+
+```jsx
+import { Datagrid, useDatagrid } from '@carbon/ibm-products';
+const App = () => {
+  const columns = React.useMemo(() => defaultHeader, []); // These are the columns that will be used by the datagrid
+  const [data] = useState(makeData(10)); // This is the data that will be rendered by the datagrid
+
+  const columns = React.useMemo(
+    () => [
+      ...defaultHeader,
+      {
+        Header: 'Someone 11',
+        accessor: 'someone11',
+        multiLineWrap: true, //If `multiLineWrap` is required only for specific columns
+      },
+    ],
+    []
+  );
+
+  const datagridState = useDatagrid({
+    columns,
+    data,
+    multiLineWrapAll: true, // If `multiLineWrap` is required for all columns in data grid
+  });
+  return <Datagrid datagridState={datagridState} />;
+};
+```
+
+<Canvas>
+  <Story of={stories.BasicUsage} />
+</Canvas>
+
+### Column structure
+
+The columns that are passed to the `useDatagrid` hook will have the following
+structure:
+
+```jsx
+const columns = [
+  {
+    Header: 'First Name',
+    accessor: 'firstName',
+  },
+  {
+    Header: 'Last Name',
+    accessor: 'lastName',
+  },
+];
+```
+
+To change the default/initial width of a column, add a `width` property to the
+column.
+
+```jsx
+const columns = [
+  {
+    Header: 'First Name',
+    accessor: 'firstName',
+    width: 120,
+  },
+  {
+    Header: 'Last Name',
+    accessor: 'lastName',
+    width: 180,
+  },
+];
+```
+
+If needed, it is also possible to wrap each cell in a containing element. See
+below:
+
+```jsx
+const columns = [
+  {
+    Header: 'First Name',
+    accessor: 'firstName',
+  },
+  {
+    Header: 'Last Name',
+    accessor: 'lastName',
+    Cell: ({ cell: { value } }) => (
+      <span className="custom-cell-wrapper">{value}</span>
+    ),
+  },
+];
+```
+
+## Rendering the table toolbar
+
+<img src={datagridActionsExample} />
+
+In some of the examples you will see a component named `DatagridActions` passed
+to the `useDatagrid` hook. This component will render the table toolbar and is
+something that you will need to create on your own and then provide it to the
+`useDatagrid` hook. You can reference the `DatagridActions` that we have
+[created for our stories](https://github.com/carbon-design-system/ibm-products/blob/main/packages/ibm-products/src/components/Datagrid/utils/DatagridActions.js)
+when building your own.
+
+## Empty
+
+The `Datagrid` supports empty states, when the data prop passed to the
+`useDatagrid` hook is an empty array.
+
+```jsx
+import { Datagrid, useDatagrid } from '@carbon/ibm-products';
+const App = () => {
+  const columns = React.useMemo(() => defaultHeader, []); // These are the columns that will be used by the datagrid
+  const [data] = useState([]); // This is the data that will be rendered by the datagrid
+  const datagridState = useDatagrid({
+    columns,
+    data,
+    emptyStateTitle: 'Empty state title',
+    emptyStateDescription: 'Description explaining why table is empty',
+    emptyStateSize: 'lg', // See empty state size options from the EmptyState component
+  });
+  return <Datagrid datagridState={datagridState} />;
+};
+```
+
+<Canvas>
+  <Story of={stories.EmptyState} />
+</Canvas>
+
+## Expandable rows
+
+The `Datagrid` supports expandable rows with the use of the `useExpandedRow`
+hook.
+
+```jsx
+import { Datagrid, useDatagrid, useExpandedRow } from '@carbon/ibm-products';
+const App = () => {
+  const columns = React.useMemo(() => defaultHeader, []); // These are the columns that will be used by the datagrid
+  const [data] = useState(makeData(10)); // This is the data that will be rendered by the datagrid
+  const expansionRenderer = ({ row }) => {
+    return <div>Content for row index: {row.id}</div>;
+  };
+  const datagridState = useDatagrid(
+    {
+      columns,
+      data,
+      ExpandedRowContentComponent: expansionRenderer,
+      tags: ['autodocs'],
+    },
+    useExpandedRow
+  );
+  return <Datagrid datagridState={datagridState} />;
+};
+```
+
+<Canvas>
+  <Story of={ExpandedStories.ExpandableRowStory} />
+</Canvas>
+
+## Column alignment
+
+The default column alignment in the `Datagrid` is left, however there is support
+for center and right aligned as well. See
+[design guidance](https://pages.github.ibm.com/carbon/ibm-products/components/datagrid/column-alignment/usage/)
+for details around when to change default column alignment.
+
+To utilize center or right aligned columns refer to the steps below:
+
+1. Include `useColumnCenterAlign` or `useColumnRightAlign` hook/s.
+2. Add `rightAlignedColumn` or `centerAlignedColumn` to the column object in
+   which you which to change the default column alignment.
+
+```jsx
+import {
+  Datagrid,
+  useDatagrid,
+  useColumnCenterAlign,
+  useColumnRightAlign,
+} from '@carbon/ibm-products';
+const defaultColumns = [
+  ...defaultCols,
+  {
+    Header: 'Bonus',
+    accessor: 'bonus',
+    width: 120,
+    rightAlignedColumn: true,
+  },
+  {
+    Header: 'Status',
+    accessor: 'status_icon',
+    width: 100,
+    centerAlignedColumn: true,
+  },
+];
+const App = () => {
+  const columns = React.useMemo(() => [...defaultHeader], []);
+  const [data] = useState(makeData(10));
+  const datagridState = useDatagrid(
+    {
+      columns,
+      data,
+      initialState: {
+        pageSize: 10,
+        pageSizes: [5, 10, 25, 50],
+      },
+      DatagridActions,
+      DatagridPagination,
+    },
+    useColumnCenterAlign,
+    useColumnRightAlign
+  );
+  return <Datagrid datagridState={datagridState} />;
+};
+```
+
+<Canvas>
+  <Story of={ClickableRowStories.ClickableRowItemStory} />
+</Canvas>
+
+## Inline editing
+
+The `Datagrid` supports inline editing when used with the `useEditableCell` hook
+(previously named `useInlineEdit` in v1) and columns are provided the required
+configuration. The four data types supported are strings, numbers, dates, and
+selection (dropdown).
+
+Below are example column configurations for the supported inline edit data
+types:
+
+Default/string:
+
+```json
+{
+  Header: 'First Name',
+  accessor: 'firstName',
+  inlineEdit: {
+    type: 'text',
+    // required for including validation, this is used to set the invalid prop internally
+    validator: (n) => n.length >= 40,
+    // These props are passed to the Carbon component used for inline editing, in this case the TextInput
+    inputProps: {
+      invalidText: 'Invalid text, character count must be less than 40',
+    },
+  },
+}
+```
+
+Number:
+
+```json
+{
+  Header: 'Age',
+  accessor: 'age',
+  width: 120,
+  inlineEdit: {
+    // required for including validation, this is used to set the invalid prop internally
+    validator: (n) => n && n < 18,
+    type: 'number',
+    // These props are passed to the Carbon component used for inline editing, in this case NumberInput
+    inputProps: {
+      invalidText: 'Invalid number, must be 18 or greater',
+    },
+  },
+},
+```
+
+Date:
+
+```jsx
+{
+  Header: 'Active since',
+  accessor: 'activeSince',
+  inlineEdit: {
+    type: 'date',
+    inputProps: {
+      // optionally pass props here to be passed through to Carbon's DatePicker component
+      onChange: (newDateObj, cell) => {
+        console.log(newDateObj, cell);
+      },
+      labelText: 'Change active since date',
+      // optionally pass props here to be passed through to Carbon's DatePickerInput component
+      datePickerInputProps: {
+        labelText: 'Change active since date',
+      },
+    },
+  },
+},
+```
+
+Selection:
+
+```jsx
+{
+  Header: 'Chart type',
+  accessor: 'chartType',
+  inlineEdit: {
+    type: 'selection',
+    inputProps: {
+      // These props are passed to the Carbon component used for inline editing
+      items: [
+        {
+          id: 'option-0',
+          icon: ChartColumnFloating16,
+          text: 'Column Chart',
+        },
+        {
+          id: 'option-1',
+          icon: ChartBubble16,
+          text: 'Bubble Chart',
+        },
+        {
+          id: 'option-2',
+          icon: ChartVennDiagram16,
+          text: 'Venn Diagram',
+        },
+      ],
+      onChange: (item) => {
+        console.log(item);
+      },
+    },
+  },
+},
+```
+
+Using the column structure outlined above, along with the use of the
+`useEditableCell` hook (previously named `useInlineEdit` in v1), the Datagrid
+will support inline editing. See example below:
+
+```jsx
+import { Datagrid, useDatagrid, useEditableCell } from '@carbon/ibm-products';
+const App = () => {
+  const [data, setData] = useState(makeData(10));
+  const columns = React.useMemo(() => getInlineEditColumns(), []); // These columns follow the inline edit column configuration detailed above
+  const datagridState = useDatagrid(
+    {
+      columns,
+      data,
+      onDataUpdate: setData,
+    },
+    useEditableCell
+  );
+  return <Datagrid datagridState={datagridState} />;
+};
+```
+
+<Canvas>
+  <Story of={EditableCellStories.EditableCellUsageStory} />
+</Canvas>
+
+At this time, it is possible to still use the deprecated `useInlineEdit` hook
+but requires setting a feature flag. See example below:
+
+```jsx
+import {
+  Datagrid,
+  useDatagrid,
+  useInlineEdit,
+  pkg,
+} from '@carbon/ibm-products';
+
+const MyInlineEditDatagrid = () => {
+  pkg.feature['Datagrid.useInlineEdit'] = true;
+  const [data, setData] = useState(gridData);
+  const datagridState = useDatagrid(
+    {
+      columns,
+      data,
+      onDataUpdate: setData,
+    },
+    useInlineEdit
+  );
+  return <Datagrid datagridState={datagridState} />;
+};
+```
+
+## Filtering
+
+Table filtering allows a user to add or remove data items from a data table by
+selecting or clearing predefined attributes. Filters can help a user find
+something they're looking for, view available options within a certain set of
+criteria, and decide between many options. These guidelines are an extension of
+[Carbon's filter documentation.](https://carbondesignsystem.com/patterns/filtering/)
+
+Filtering results in a table is a different type of action from searching. While
+both actions can help the user narrow results down, searching is meant to help
+the user find a specific result, whereas filtering allows users to trim results
+according to its attributes.
+
+Applied filters can affect both the data that is visible in the table and also
+data that might not be displayed in the columns available in the table. Filter
+options can be displayed in many form components, including dropdowns, text
+inputs, checkboxes, radio buttons, and date range pickers.
+
+[Check out the Guidance here.](https://pages.github.ibm.com/carbon/ibm-products/components/datagrid/filtering/usage/)
+
+### Preparing your column headers
+
+To utilize filtering, you have to add some extra properties into your headers
+that are going to be filtered.
+
+Two things you need to do is:
+
+1. Specify a `filter` to use (unless it's text match which is default)
+2. (Optional) Render the component with the `Cell` property to display the right
+   information. Use this if the data you send into the table isn't how you want
+   to display it, for example like Dates. See the example for `passwordStrength`
+   below.
+
+For example; here we are specifying that the `joined` header column should be
+filtered using a `filter: 'date'`, and render the cell using it's value and
+converting it to string. (Since the value of joined is a date object, react
+isn't going to allow you to render it as jsx so we have to convert it to string)
+
+```js
+{
+    Header: 'Joined',
+    accessor: 'joined',
+    filter: 'date',
+    Cell: ({ cell: { value } }) => <span>{value.toLocaleDateString()}</span>,
+  },
+```
+
+The different types of filters are:
+
+1. text (default)
+2. date
+3. number
+4. checkbox
+5. radio
+6. dropdown
+
+```jsx
+const columns = [
+  {
+    Header: 'Row Index',
+    accessor: (row, i) => i,
+    sticky: 'left',
+    id: 'rowIndex', // id is required when accessor is a function.
+  },
+  {
+    Header: 'First Name',
+    accessor: 'firstName',
+  },
+  {
+    Header: 'Last Name',
+    accessor: 'lastName',
+  },
+  {
+    Header: 'Age',
+    accessor: 'age',
+    width: 50,
+  },
+  {
+    Header: 'Visits',
+    accessor: 'visits',
+    filter: 'number',
+    width: 60,
+  },
+  {
+    Header: 'Status',
+    accessor: 'status',
+    filter: 'dropdown',
+  },
+  // Shows the date filter example
+  {
+    Header: 'Joined',
+    accessor: 'joined',
+    filter: 'date',
+    Cell: ({ cell: { value } }) => <span>{value.toLocaleDateString()}</span>,
+  },
+  // Shows the checkbox filter example
+  {
+    Header: 'Password strength',
+    accessor: 'passwordStrength',
+    filter: 'checkbox',
+    Cell: ({ cell: { value } }) => {
+      const iconProps = {
+        size: 'sm',
+        theme: 'light',
+        kind: value,
+        iconDescription: value,
+      };
+      return (
+        <span
+          style={{
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}
+        >
+          <StatusIcon {...iconProps} />
+          {iconProps.iconDescription}
+        </span>
+      );
+    },
+  },
+  // Shows the checkbox filter example
+  {
+    Header: 'Role',
+    accessor: 'role',
+    filter: 'radio',
+  },
+];
+```
+
+### Store you data into state, this can also come from an API
+
+```jsx
+const [data] = useState([
+  {
+    activeSince: new Date('09/26/81'),
+    age: 41,
+    firstName: 'Joel',
+    lastName: 'Miller',
+    passwordStrength: 'normal',
+    role: 'developer',
+    visits: '81',
+  },
+  {
+    activeSince: new Date('08/30/97'),
+    age: 19,
+    firstName: 'Ellie',
+    lastName: 'N/A',
+    passwordStrength: 'critical',
+    role: 'designer',
+    visits: '7',
+  },
+  {
+    activeSince: new Date('01/26/03'),
+    age: 39,
+    firstName: 'Tommy',
+    lastName: 'Miller',
+    passwordStrength: 'minor-warning',
+    role: 'researcher',
+    visits: '25',
+  },
+]);
+```
+
+### Create your filters for flyout variant
+
+To add filters to the flyout, you have to pass in an array of filters. These
+filters will be converted to it's respective component. Each filters has 3
+important props, `type`, `column`, `props`.
+
+- `type`: the type of filter (this should be the same `filter` property in the
+  headers)
+- `column`: the column that it should be filtered on
+- `props`: the props for the components needed to render the filter.
+
+Please refer to all the available filters that you can use below.
+
+```jsx
+const filters = [
+  {
+    type: 'date',
+    column: 'joined',
+    props: {
+      DatePicker: {
+        datePickerType: 'range',
+        // Add any other Carbon DatePicker props here
+      },
+      DatePickerInput: {
+        start: {
+          id: 'date-picker-input-id-start',
+          placeholder: 'mm/dd/yyyy',
+          labelText: 'Joined start date',
+          // Add any other Carbon DatePickerInput props here
+        },
+        end: {
+          id: 'date-picker-input-id-end',
+          placeholder: 'mm/dd/yyyy',
+          labelText: 'Joined end date',
+          // Add any other Carbon DatePickerInput props here
+        },
+      },
+    },
+  },
+  {
+    type: 'number',
+    column: 'visits',
+    props: {
+      NumberInput: {
+        min: 0,
+        id: 'visits-number-input',
+        invalidText: 'A valid value is required',
+        label: 'Visits',
+        placeholder: 'Type a number amount of visits',
+        // Add any other Carbon NumberInput props here
+      },
+    },
+  },
+  {
+    type: 'checkbox',
+    column: 'passwordStrength',
+    props: {
+      FormGroup: {
+        legendText: 'Password strength',
+        // Add any other Carbon FormGroup props here
+      },
+      Checkbox: [
+        {
+          id: 'normal',
+          labelText: 'Normal',
+          value: 'normal',
+          // Add any other Carbon Checkbox props here
+        },
+        {
+          id: 'minor-warning',
+          labelText: 'Minor warning',
+          value: 'minor-warning',
+          // Add any other Carbon Checkbox props here
+        },
+        {
+          id: 'critical',
+          labelText: 'Critical',
+          value: 'critical',
+          // Add any other Carbon Checkbox props here
+        },
+      ],
+    },
+  },
+  {
+    type: 'radio',
+    column: 'role',
+    props: {
+      FormGroup: {
+        legendText: 'Role',
+        // Add any other Carbon FormGroup props here
+      },
+      RadioButtonGroup: {
+        orientation: 'vertical',
+        legend: 'Role legend',
+        name: 'role-radio-button-group',
+        // Add any other Carbon RadioButtonGroup props here
+      },
+      RadioButton: [
+        {
+          id: 'developer',
+          labelText: 'Developer',
+          value: 'developer',
+          // Add any other Carbon RadioButton props here
+        },
+        {
+          id: 'designer',
+          labelText: 'Designer',
+          value: 'designer',
+          // Add any other Carbon RadioButton props here
+        },
+        {
+          id: 'researcher',
+          labelText: 'Researcher',
+          value: 'researcher',
+          // Add any other Carbon RadioButton props here
+        },
+      ],
+    },
+  },
+  {
+    type: 'dropdown',
+    column: 'status',
+    props: {
+      Dropdown: {
+        id: 'marital-status-dropdown',
+        ariaLabel: 'Marital status dropdown',
+        items: ['relationship', 'complicated', 'single'],
+        label: 'Marital status',
+        titleText: 'Marital status',
+        // Add any other Carbon Dropdown props here
+      },
+    },
+  },
+];
+```
+
+### Create your filters for panel variant
+
+Filter panel coming soon.
+
+### Putting it all together
+
+```jsx
+import { Datagrid, useDatagrid, useFiltering } from '@carbon/ibm-products';
+const App = () => {
+  const columns = [...];
+  const [data] = useState([...]);
+  const filters = [...];
+  const datagridState = useDatagrid(
+    {
+      columns,
+      data,
+      filterProps: {
+        variation: 'flyout', // default
+        updateMethod: 'batch', // default
+        primaryActionLabel: 'Apply', // default
+        secondaryActionLabel: 'Cancel', // default
+        flyoutIconDescription: 'Open filters', // default
+        shouldClickOutsideToClose: false, // default
+        filters,
+      },
+      DatagridActions,
+      batchActions: true,
+      toolbarBatchActions: getBatchActions(),
+    },
+    useFiltering
+  );
+  return <Datagrid datagridState={datagridState} />;
+};
+```
+
+### `filterProps` types
+
+```ts
+filterProps: {
+  /** The variation of filtering */
+  variation: 'flyout'|'panel',
+  /** The update method in which to filter, instant automatically
+      applies the filters, batch the user has to click apply */
+  updateMethod: 'batch'|'instant',
+  /** Text for primary action button, default is 'Apply' */
+  primaryActionLabel: string,
+  /** Text for secondary action button, default is 'Cancel' */
+  secondaryActionLabel: string,
+  /** Text for flyout icon description */
+  flyoutIconDescription: string,
+  /** Array of objects to render filters in flyout */
+  filters: object[]
+}
+```
+
+<Canvas>
+  <Story of={FlyoutStories.FlyoutBatch} />
+</Canvas>
+
+## Auto size column to fit content
+
+The `getAutoSizedColumnWidth` utility function can be used to auto size columns
+based on it's content. The width will be set to that of the largest cell in the
+column or the column header, whichever is greater. If this is not used, the
+width will be set to the default column width (150px) or the value passed to the
+`width` property in the column definition. See example below:
+
+```jsx
+  import { Datagrid, useDatagrid, getAutoSizedColumnWidth } from '@carbon/ibm-products';
+  ...
+  const myColumns = [
+    {
+      Header: 'Column 1',
+      accessor: 'column_1',
+      width: getAutoSizedColumnWidth(rows, 'column_1', 'Column 1'),
+    }
+  ]
+  ...
+```
+
+## Actions column
+
+This will add row actions (if more than two actions are provided an OverflowMenu
+component will be used) to the cells on the column marked with `isAction: true`.
+Each action button callback will include the actionId and the row object.
+
+1. Include `useActionsColumn` hook
+2. Add `isAction = true` to the column object in which you which to add the
+   overflow menu actions
+3. Add `rowActions = []` array to the props
+
+- `rowActions[].id` for callback to identify the action is called
+- `rowActions[].onClick(actionId: string, row: Row, event: ClickEvent)` callback
+  on menuitem clicked.
+  [Row properties](https://react-table.tanstack.com/docs/api/useTable#row-properties)
+- `rowActions[].shouldHideMenuItem(row: Row)` callback to hide this menuitem.
+  [Row properties](https://react-table.tanstack.com/docs/api/useTable#row-properties)
+- `rowActions[].shouldDisableMenuItem(row: Row)` callback to disable this
+  menuitem.
+  [Row properties](https://react-table.tanstack.com/docs/api/useTable#row-properties)
+  - This will override `rowActions[].disabled` (from Carbon) because
+    `shouldDisableMenuItem` is more specific to the row.
+- each action object can take all the props from `OverflowMenuItem` props, see
+  [carbon docs](https://react.carbondesignsystem.com/?path=/docs/components-overflowmenu--default#overflowmenu)
+
+```jsx
+const columns = [
+  // other columns
+  {
+    Header: '',
+    accessor: 'actions',
+    isAction: true,
+  },
+];
+const onActionClick = (actionId, row, event) => {};
+const datagridState = useDatagrid(
+  {
+    columns,
+    data,
+    rowActions: [
+      {
+        id: 'edit',
+        itemText: 'Edit',
+        onClick: onActionClick,
+      },
+      {
+        id: 'hidden',
+        itemText: 'Hidden item',
+        onClick: onActionClick,
+        shouldHideMenuItem: () => true,
+      },
+      {
+        id: 'delete',
+        itemText: 'Delete',
+        hasDivider: true,
+        isDelete: true,
+        onClick: onActionClick,
+      },
+    ],
+  },
+  useActionsColumn
+);
+
+return <Datagrid datagridState={datagridState} />;
+```
+
+## Customizing columns
+
+Customizing columns allows user to reorder and hide certain columns of the
+datagrid. Consuming component can use the provided callback to save/update
+according to their persistent strategy.
+
+1. Include `useCustomizeColumns` and `useColumnOrder` hooks (required)
+
+- `useColumnOrder` comes from `react-table` but is exported by
+  `@carbon/ibm-products` to be used alongside `useCustomizeColumns`.
+
+2. Implement `options.DatagridActions` component
+
+- this component will have props: `datagridState`
+- render `datagridState.CustomizeColumnsButton` component wherever makes sense.
+
+3. Options available to set:
+
+- `options.initialState.hiddenColumns: Array<ColumnId: String>`
+  - Array of column ids that will be hidden after initial render
+  - [react-table doc](https://react-table.tanstack.com/docs/api/useTable#table-options)
+  - `options.initialState.columnOrder: Array<ColumnId: String>`
+    - Order of the columns. Any column ids not in this array will be ordered by
+      their position in the `options.columns`
+    - [react-table doc](https://react-table.tanstack.com/docs/api/useColumnOrder#table-options)
+  - `options.customizeColumnsProps.onSaveColumnPrefs`
+    - type:
+      `Function(Columns: Array<{ColumnId: String, isVisible: Boolean}>) => void`
+    - Callback function when 'Save' button clicked on the narrow tearsheet. It
+      allows consumer to preserve the updated column preference. This output can
+      also be used to compute the `hiddenColumns` and `columnOrder`
+
+```jsx
+const columns = React.useMemo(() => defaultHeader, []);
+const [data] = useState(makeData(10));
+const DatagridActions = (datagridState) => (
+  <TableToolbarContent>
+    <TableToolbarSearch ... />
+    <Button ... />
+    <datagridState.CustomizeColumnsButton />
+  </TableToolbarContent>
+)
+const datagridState = useDatagrid(
+  {
+    columns,
+    data,
+    initialState: {
+      hiddenColumns: ['age'],
+      columnOrder: [],
+    },
+    customizeColumnsProps: {
+      onSaveColumnPrefs: (newColDefs) => {
+        console.log(newColDefs);
+      },
+    },
+    DatagridActions,
+  },
+  useCustomizeColumns,
+  useColumnOrder,
+);
+
+return (
+  <Datagrid datagridState={datagridState} />
+);
+```
+
+## Disabling select rows
+
+Disabling select rows allows you to choose which rows will be disabled in the
+table.
+
+1. Include the `useDisableSelectRows` hook in the `endPlugins` property of
+   `useDatagrid`.
+2. Add the `shouldDisableSelectRow` to the `useDatagrid` hook, this will be a
+   function that returns the row indexes that will be disabled.
+
+```jsx
+const [data] = useState(makeData(10));
+const columns = React.useMemo(() => getColumns(data), []);
+const datagridState = useDatagrid(
+  {
+    columns,
+    data,
+    DatagridActions,
+    DatagridBatchActions,
+    endPlugins: [useDisableSelectRows],
+    shouldDisableSelectRow: (row) => row.id % 2 === 0,
+    disableSelectAll: true,
+  },
+  useSelectRows
+);
+
+return <Datagrid datagridState={datagridState} />;
+```
+
+## Infinite scroll
+
+Infinite scroll is supported via the `useInfiniteScroll` hook. This hook will
+allow you to fetch more data to display to the user after a certain scroll
+threshold. The `useInfiniteScroll` hook can also be used to support virtualized
+data, this is required when working with large amounts of data, only rendering
+the rows that need to be visible in the component at a point in time.
+
+Infinite scroll:
+
+1. Include `useInfiniteScroll` hook
+2. Add `fetchMoreData` property to `useDatagrid`, this will be a function that
+   is called when the scroll threshold is met. Optionally change the height of
+   the grid with the `virtualHeight` property.
+
+```jsx
+const datagridState = useDatagrid(
+  {
+    columns,
+    data,
+    isFetching,
+    fetchMoreData: fetchData,
+    virtualHeight: 540,
+    emptyStateTitle: 'Empty state title',
+    emptyStateDescription: 'Description explaining why the table is empty',
+  },
+  useInfiniteScroll
+);
+```
+
+Virtualized data:
+
+1. Include `useInfiniteScroll` hook
+2. The Datagrid will know to use virtualized data just by providing the
+   `useInfiniteScroll` hook
+
+```jsx
+const [data] = useState(makeData(10000));
+const columns = React.useMemo(() => getColumns(data), []);
+const datagridState = useDatagrid(
+  {
+    columns,
+    data,
+  },
+  useInfiniteScroll
+);
+```
+
+## Nested rows
+
+Nested rows allow disclosing content in data tables progressively by displaying
+primary data first (parent row) and enabling users to navigate secondary
+information levels (child rows).
+
+1. Include the `useNestedRows` hook
+2. Make sure that any row you want to have nested rows in your data has a
+   `subRows` property with an array of objects for each nested row. The row
+   expander will be included by default as long as the `useNestedRows` hook is
+   provided and it is detected that a row has `subRows` within it.
+
+```jsx
+const datagridState = useDatagrid(
+  {
+    columns,
+    data,
+  },
+  useNestedRows
+);
+
+return <Datagrid datagridState={datagridState} />;
+```
+
+## Row click
+
+Datagrid supports adding a click event on an entire row with the use of the
+`useOnRowClick` hook.
+
+1. Include the `useOnRowClick` hook
+2. Add the `onRowClick` property, this is a callback function that will be
+   called when a row is clicked. It will give back the row and the click event.
+
+```jsx
+const datagridState = useDatagrid(
+  {
+    columns,
+    data,
+    onRowClick: (row, event) => {
+      ...
+    },
+  },
+  useOnRowClick
+);
+
+return <Datagrid datagridState={datagridState} />;
+```
+
+## Detect row hover
+
+There may be cases when you want to detect if a user is hovering on a particular
+row. In this case, use the `useRowIsMouseOver` hook.
+
+1. Include the `useRowIsMouseOver` hook
+2. When hover is detected on a row, a property called `isMouseOver` is changed
+   from `false` to `true` within that row.
+
+## Select items across all pages
+
+By default, selecting all items with paginated rows will result in just the
+current page rows being selected. Incorporating the `useSelectAllWithToggle`
+hook will provide the option to select all rows across all pages.
+
+1. Include `useSelectAllWithToggle` and `useSelectRows` hook
+2. Add the `selectAllToggle` property to the `useDatagrid` hook
+
+- optionally pass in labels to ensure proper translation
+- optionally pass in `onSelectAllRows`, function that will be called via the
+  select all rows checkbox onChange
+
+```jsx
+const [data] = useState(makeData(100));
+const columns = React.useMemo(() => getColumns(data), []);
+const [areAllSelected, setAreAllSelected] = useState(false);
+const datagridState = useDatagrid(
+  {
+    columns,
+    data,
+    initialState: {
+      pageSize: 10,
+      pageSizes: [5, 10, 25, 50],
+    },
+    selectAllToggle: {
+      labels: {
+        allRows: 'Select all',
+        allPageRows: 'Select all on page',
+      },
+      onSelectAllRows: setAreAllSelected,
+    },
+    DatagridPagination,
+    DatagridActions,
+    DatagridBatchActions,
+  },
+  useSelectRows,
+  useSelectAllWithToggle
+);
+
+return (
+  <>
+    <Datagrid datagridState={datagridState} />
+    <p>{`Are all entries selected across all pages? - ${areAllSelected}`}</p>
+  </>
+);
+```
+
+## Selecting rows
+
+When building a Datagrid that requires selectable rows, use the `useSelectRows`
+hook.
+
+1. Include `useSelectRows` hook
+2. Add `onRowSelect` to the `useDatagrid` hook, this is a callback function
+   called when on a row's selection checkbox onChange, and sends back the row
+   object and the event
+3. Add `onAllRowSelect` to the `useDatagrid` hook, this is a callback function
+   called when on all rows selection checkbox onChange, and sends back all rows
+   object and the event
+
+```jsx
+const [data] = useState(makeData(10));
+const columns = React.useMemo(() => getColumns(data), []);
+const datagridState = useDatagrid(
+  {
+    columns,
+    data,
+    onRowSelect: (row, event) => console.log(row, event),
+    onAllRowSelect: (rows, event) => console.log(rows, event),
+  },
+  useSelectRows
+);
+
+return <Datagrid datagridState={datagridState} />;
+```
+
+The select all checkbox can be optionally hidden by settings the `hideSelectAll`
+property to `true` in the `useDatagrid` hook.
+
+```jsx
+const datagridState = useDatagrid(
+  {
+    columns,
+    data,
+    onRowSelect: (row, event) => console.log(row, event),
+    hideSelectAll: true,
+  },
+  useSelectRows
+);
+```
+
+Datagrid also provides the option to use radio selection in cases where only one
+row should be selected at a time. Additionally, you can have preselected
+row/rows, see example below.
+
+```jsx
+const [data] = useState(makeData(10));
+const columns = React.useMemo(() => getColumns(data), []);
+const datagridState = useDatagrid(
+  {
+    columns,
+    data,
+    radio: true,
+    onRadioSelect: (row) => console.log(`Row clicked: ${row.id}`),
+    initialState: {
+      selectedRowIds: {
+        3: true,
+      },
+    },
+  },
+  useSelectRows
+);
+
+return <Datagrid datagridState={datagridState} />;
+```
+
+## Sortable columns
+
+To add sortable columns to your Datagrid, simply add the `useSortableColumns`
+hook. This will allow each column header to be clickable and sort each column in
+either ascending or descending order.
+
+1. Include `useSortableColumns` hook
+
+```jsx
+const [data] = useState(makeData(10));
+const columns = React.useMemo(() => getColumns(data), []);
+const datagridState = useDatagrid(
+  {
+    columns,
+    data,
+  },
+  useSortableColumns
+);
+
+return <Datagrid datagridState={datagridState} />;
+```
+
+## Sticky column
+
+Sticky columns can be useful when you have many columns that create a horizontal
+scroll and you have important data in the first or last column that you always
+want to be visible.
+
+1. Include the `useStickyColumn` hook
+2. Sticky columns can _only_ be applied to the first and the last columns in the
+   Datagrid. To have the first column stick, add `sticky: 'left'` to the first
+   column definition. To have the last column stick, add `sticky: 'right'` to
+   the last column definition.
+
+```jsx
+const columns = [
+  {
+    Header: 'First column',
+    accessor: 'first_column',
+    sticky: 'left',
+  },
+  {
+    ...
+  },
+  {
+    ...
+  }
+];
+const datagridState = useDatagrid(
+  {
+    columns,
+    data,
+  },
+  useStickyColumn
+);
+
+return <Datagrid datagridState={datagridState} />;
+```
+
+## Code sample
+
+<CodesandboxLink exampleDirectory="Datagrid" />
+
+## Component API
+
+<Controls />

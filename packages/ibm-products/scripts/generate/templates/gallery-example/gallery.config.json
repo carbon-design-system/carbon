@@ -1,0 +1,12 @@
+{
+  "label": "TITLE_NAME",
+  "package-config": {
+    "flags": {
+      "component": {
+        "DISPLAY_NAME": true
+      }
+    }
+  },
+  "dependencies": {},
+  "devDependencies": {}
+}

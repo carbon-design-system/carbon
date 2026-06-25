@@ -1,0 +1,96 @@
+//
+// Copyright IBM Corp. 2025, 2025
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use '@carbon/react/scss/spacing';
+@use '@carbon/styles/scss/theme';
+@use 'ALIAS_STORY_STYLE_CONFIG' as c4p-settings;
+
+$block-class: #{c4p-settings.$pkg-prefix}--page-header;
+
+.page-header-story-wrapper {
+  margin-block-start: spacing.$spacing-09;
+}
+
+.page-header-story--tall-tab-panel {
+  /* Disabling in order to create scrolling content */
+  /* stylelint-disable-next-line csstools/use-logical */
+  height: 200vh;
+}
+
+.page-header--docs-demo .docs-story > div:first-child {
+  padding: 0;
+}
+
+.page-header--docs-demo .docs-story > div > div:first-child {
+  inline-size: 100%;
+}
+
+.page-header--docs-demo .innerZoomElementWrapper > * {
+  /* Used to override storybook styling from a dynamically generated class in the canvas preview */
+  /* stylelint-disable-next-line declaration-no-important */
+  border: 0 !important;
+}
+
+.page-header--docs-demo .page-header-story--tall-tab-panel {
+  background-color: theme.$layer-01;
+  block-size: inherit;
+}
+
+[data-hidden] {
+  display: none;
+}
+
+.breadcrumb-bar-button {
+  display: flex;
+  align-items: center;
+  padding: 0;
+  block-size: 40px;
+  inline-size: 40px;
+}
+
+.breadcrumb-bar-action-button {
+  align-items: center;
+  block-size: 40px;
+}
+
+// Fixes style issues in storybook docs page
+.page-header--docs-demo
+  .#{$block-class}__breadcrumb-bar
+  .#{c4p-settings.$carbon-prefix}--css-grid
+  .#{c4p-settings.$carbon-prefix}--css-grid-column,
+.page-header--docs-demo
+  .#{$block-class}__breadcrumb-bar
+  .#{$block-class}__breadcrumb__actions {
+  block-size: 40px;
+}
+
+$stackblitz-block-class: c4p--page-header;
+.#{$stackblitz-block-class}__breadcrumb-bar
+  .#{c4p-settings.$carbon-prefix}--css-grid
+  .#{c4p-settings.$carbon-prefix}--css-grid-column,
+.#{$stackblitz-block-class}__breadcrumb-bar
+  .c4p--page-header__breadcrumb-container {
+  block-size: 40px;
+
+  .c4p--page-header__breadcrumb-wrapper {
+    align-items: center;
+    block-size: inherit;
+  }
+}
+
+.page-header-story__wrapper {
+  overflow: auto;
+  block-size: calc(100vh - 3rem);
+  margin-block-start: spacing.$spacing-09;
+}
+
+// Hide content actions on small screens (story level)
+@media (width <= 671px) {
+  .#{$block-class}__breadcrumb__content-actions {
+    display: none;
+  }
+}

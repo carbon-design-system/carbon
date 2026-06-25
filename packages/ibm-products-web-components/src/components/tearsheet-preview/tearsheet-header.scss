@@ -1,0 +1,161 @@
+/**
+ * @license
+ *
+ * Copyright IBM Corp. 2026
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+@use '@carbon/styles/scss/breakpoint' as *;
+@use '@carbon/ibm-products-styles/scss/config';
+@use '@carbon/styles/scss/motion' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/theme' as *;
+@use './tearsheet.scss' as *;
+
+$prefix: config.$pkg-prefix;
+$carbon-prefix: config.$carbon-prefix;
+$block-class__next: #{$prefix}--tearsheet__next;
+$motion-duration: $duration-moderate-02;
+// Narrow variant styles
+:host-context(#{$c4p-prefix}-preview-tearsheet[variant='narrow']) {
+  .#{$block-class__next}__header {
+    padding-inline: $spacing-05;
+  }
+}
+
+:host-context(#{$c4p-prefix}-preview-tearsheet[variant='narrow'][collapsed]) {
+  .#{$block-class__next}__header-actions {
+    display: none;
+  }
+}
+
+:host {
+  position: relative;
+  .#{$block-class__next}__header {
+    display: flex;
+    flex-wrap: wrap;
+    align-content: space-between;
+    border-block-end: 1px solid $border-subtle-01;
+    margin-block: 0;
+    max-block-size: 50vh;
+    padding-block-end: 0;
+    padding-block-start: $spacing-06;
+    padding-inline: $spacing-07;
+    @include breakpoint-down(md) {
+      padding-inline: $spacing-05;
+    }
+  }
+
+  ::slotted(*:not([slot='header-content'])) {
+    flex-basis: 100%;
+    margin-block-end: $spacing-06;
+  }
+
+  ::slotted([slot='header-content']) {
+    inline-size: calc(100% - var(--tearsheet-header-action-offset));
+  }
+}
+
+:host ::slotted([slot='header-content']),
+:host ::slotted([slot='navigation-bar']) {
+  margin-block-end: 0;
+}
+
+.#{$block-class__next}__header--no-close-icon {
+  display: none;
+}
+
+// ──────────────────────────────────────────────────────────────
+// Header (default vs collapsed)
+// ──────────────────────────────────────────────────────────────
+:host {
+  /* Animate all slotted children by default */
+  @media screen and (prefers-reduced-motion: reduce) {
+    ::slotted(*) {
+      overflow: hidden;
+      max-block-size: 50vh;
+      opacity: 1;
+      transition: none;
+    }
+  }
+
+  ::slotted(*) {
+    overflow: hidden;
+    max-block-size: 50vh;
+    opacity: 1;
+    transition:
+      max-block-size $motion-duration motion(entrance, expressive),
+      opacity $motion-duration motion(entrance, expressive),
+      margin $motion-duration motion(entrance, expressive),
+      padding $motion-duration motion(entrance, expressive);
+  }
+
+  /* Exclusions */
+  ::slotted([slot='navigation-bar']),
+  ::slotted([slot='header-content']),
+  ::slotted(.excludeFromCollapse) {
+    overflow: visible;
+    max-block-size: none;
+    opacity: 1;
+    transition: none;
+  }
+}
+
+// Hide header elements immediately when tearsheet is closing
+:host-context(#{$c4p-prefix}-preview-tearsheet:not([open])) {
+  @media screen and (prefers-reduced-motion: reduce) {
+    ::slotted(*) {
+      opacity: 0;
+      transition: none;
+    }
+  }
+
+  ::slotted(*) {
+    opacity: 0;
+    transition: opacity 0.1s ease-out;
+  }
+}
+
+// ──────────────────────────────────────────────────────────────
+// Collapsed Header State
+// ──────────────────────────────────────────────────────────────
+:host([collapsed]) {
+  .#{$block-class__next}__header {
+    padding-block-start: $spacing-04;
+    transition: padding $motion-duration motion(entrance, expressive);
+  }
+
+  // Collapse everything except core elements (navigation-bar, header-content, excludeFromCollapse)
+  ::slotted(
+    *:not(
+        [slot='navigation-bar'],
+        [slot='header-content'],
+        .excludeFromCollapse,
+        [slot='decorator']
+      )
+  ) {
+    @include collapsed-element;
+
+    display: none;
+  }
+
+  ::slotted([slot='header-content']) {
+    min-block-size: $spacing-08;
+    padding-block-end: $spacing-04;
+  }
+
+  // Divider line above navigation bar when collapsed
+  ::slotted([slot='navigation-bar'])::before {
+    position: absolute;
+    z-index: 1;
+    background: rgba(0, 0, 0, 0.12);
+    block-size: 1px;
+    content: '';
+    inline-size: 100vw;
+    inset-block-start: -$spacing-02;
+    inset-inline-start: 50%;
+    pointer-events: none;
+    transform: translateX(-50%);
+  }
+}

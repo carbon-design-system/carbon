@@ -1,0 +1,43 @@
+import { Story, Controls, Source, Canvas } from '@storybook/addon-docs/blocks';
+import { CodesandboxLink } from '../../global/js/utils/story-helper';
+import { StringFormatter } from '.';
+import * as StringFormatterStories from './StringFormatter.stories';
+
+# StringFormatter
+
+> **Deprecated:** This component is deprecated and will be removed in the next
+> major version. Please migrate to TruncatedText.
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Example usage](#example-usage)
+- [Component API](#component-api)
+
+## Overview
+
+StringFormatter allows for truncating text while displaying a tooltip overlay on
+hover or focus with the entirety of the provided copy.
+
+## Example usage
+
+<Canvas>
+  <Story of={StringFormatterStories.stringFormatter} />
+</Canvas>
+
+## Code sample
+
+```jsx
+<StringFormatter
+  className="myStringFormatter"
+  lines={1}
+  truncate={true}
+  value="Hello world"
+  width="200px"
+  tooltipDirection="bottom-left"
+/>
+```
+
+## Component API
+
+<Controls />

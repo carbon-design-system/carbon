@@ -1,0 +1,95 @@
+import { ArgTypes, Markdown, Meta, Canvas } from '@storybook/addon-docs/blocks';
+import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
+import * as AboutModalStories from './about-modal.stories';
+import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
+import helperSource from './about-modal-helpers.ts?raw';
+
+export const customFunctionArr = [
+  helperSource
+    .replace(/import\s+.*?from\s+['"].*?['"];?\s*/g, '')
+    .replace(/export\s+/g, '')
+    .replace(/\/\*\*[\s\S]*?\*\//g, '')
+    .trim()
+];
+
+
+export const customImportArr = [`import '@carbon/web-components/es/components/link/index.js';
+import { TemplateResult } from 'lit';
+import ExampleLogo from './story-assets/example-logo.svg';
+import ansibleLogo from './story-assets/ansible-logo.svg';
+import jsLogo from './story-assets/js-logo.svg';
+import grafanaLogo from './story-assets/grafana-logo.svg';
+`];
+
+<Meta of={AboutModalStories} />
+
+# AboutModal
+
+> 💡 Check our
+> [Stackblitz](https://stackblitz.com/github/carbon-design-system/ibm-products/tree/main/packages/ibm-products-web-components/examples/about-modal)
+> example implementation.
+
+[![Edit carbon-web-components](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/carbon-design-system/ibm-products/tree/main/packages/ibm-products-web-components/examples/about-modal)
+
+The AboutModal component provides a way to communicate product information to
+users. It is triggered by a user’s action, appears on top of the main page
+content, and is persistent until dismissed. The purpose of this modal should be
+immediately apparent to the user, with a clear and obvious path to completion.
+
+## Getting started
+
+Here's a quick example to get you started.
+
+### JS (via import)
+
+```javascript
+import '@carbon/ibm-products-web-components/es/components/about-modal/index.js';
+```
+
+### HTML  
+
+```html
+<c4p-about-modal> </c4p-about-modal>
+```
+
+### Example Usage
+
+### Default
+
+<Canvas
+  of={AboutModalStories.Default}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () =>
+        stackblitzPrefillConfig({
+          story: AboutModalStories.Default,
+          customFunctionDefs: customFunctionArr,
+          customImports: customImportArr,
+          componentName: 'about-modal', 
+        }),
+    },
+  ]}
+></Canvas>
+
+### About Modal With All Props Set
+
+<Canvas
+  of={AboutModalStories.AboutModalWithAllPropsSet}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () =>
+        stackblitzPrefillConfig({
+          story: AboutModalStories.AboutModalWithAllPropsSet,
+          customFunctionDefs: customFunctionArr,
+          customImports: customImportArr,
+          componentName: 'about-modal',
+        }),
+    },
+  ]}
+></Canvas>
+
+## `<c4p-about-modal>` attributes, properties and events
+
+<ArgTypes of="c4p-about-modal" />

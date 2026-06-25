@@ -1,0 +1,57 @@
+/*
+* Copyright IBM Corp. 2025, 2025
+*
+* This source code is licensed under the Apache-2.0 license found in the
+* LICENSE file in the root directory of this source tree.
+*/
+
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/spacing' as *;
+
+$story-prefix: 'full-page-error-stories__';
+
+#main-content {
+  padding: $spacing-05 0;
+}
+
+.#{$story-prefix}story-container {
+  position: relative;
+  display: grid;
+  block-size: 100vh;
+  grid-template-rows: 3rem 1fr;
+  inline-size: 100vw;
+}
+
+.#{$story-prefix}story-breadcrumbs {
+  position: fixed;
+  z-index: 8000;
+  display: flex;
+  align-items: center;
+  padding: $spacing-04 $spacing-09;
+  background: $layer-01;
+  border-block-end: 1px solid $border-subtle-01;
+  inset-block-start: $spacing-09;
+  inset-inline: 0;
+}
+
+.#{$story-prefix}story-header {
+  background: $background-inverse;
+}
+
+// Style the cds-header to match React component
+.#{$story-prefix}story-container c4p-full-page-error {
+  margin-block-start: $spacing-10;
+}
+
+:root[data-carbon-theme='white'],
+:root[data-carbon-theme='g10'] {
+  .#{$story-prefix}story-container cds-header {
+    --cds-text-primary: #{$text-inverse};
+    --cds-text-secondary: #{$text-inverse};
+    --cds-icon-primary: #{$text-inverse};
+    --cds-icon-secondary: #{$text-inverse};
+
+    background-color: $background-inverse;
+    border-block-end: 1px solid $border-subtle-01;
+  }
+}

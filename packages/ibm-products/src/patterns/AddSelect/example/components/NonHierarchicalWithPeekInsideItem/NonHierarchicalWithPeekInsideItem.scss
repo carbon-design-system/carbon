@@ -1,0 +1,159 @@
+/**
+ * Copyright IBM Corp. 2026
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/motion' as *;
+
+.non-hierarchical-peek-inside-pattern {
+  &__modifier {
+    flex: 0 0 auto;
+    margin-inline-start: $spacing-09;
+
+    .cds--dropdown--inline .cds--list-box__menu {
+      max-inline-size: 9rem;
+      min-inline-size: 9rem;
+    }
+  }
+
+  &__summary-title {
+    display: flex;
+    flex: 1;
+    align-items: center;
+    justify-content: space-between;
+    gap: $spacing-03;
+  }
+
+  &__summary-name {
+    flex: 1;
+    min-inline-size: 0;
+  }
+
+  &__summary-modifier-value {
+    color: var(--cds-text-secondary);
+    font-size: 0.875rem;
+    white-space: nowrap;
+  }
+
+  &__summary-content {
+    padding-block-start: $spacing-03;
+  }
+
+  &__summary-field {
+    margin-block-end: $spacing-03;
+
+    &:last-child {
+      margin-block-end: 0;
+    }
+
+    strong {
+      font-weight: 600;
+    }
+  }
+
+  &__no-results {
+    padding: $spacing-07;
+    text-align: center;
+
+    h4 {
+      font-size: 1rem;
+      font-weight: 600;
+      margin-block-end: $spacing-03;
+    }
+
+    p {
+      color: var(--cds-text-secondary);
+      font-size: 0.875rem;
+    }
+  }
+
+  &__notification {
+    position: fixed;
+    z-index: 9999;
+    inset-block-start: $spacing-09;
+    inset-inline-end: $spacing-05;
+  }
+
+  &__peek-list {
+    display: flex;
+    flex-direction: column;
+  }
+  @media screen and (prefers-reduced-motion: reduce) {
+    &__peek-item {
+      display: flex;
+      border-inline-start: $spacing-01 solid transparent;
+      transition: none;
+
+      &:hover {
+        background: $layer-hover-01;
+
+        .non-hierarchical-peek-inside-pattern__peek-item-title {
+          color: $interactive;
+        }
+      }
+    }
+  }
+
+  &__peek-item {
+    display: flex;
+    border-inline-start: $spacing-01 solid transparent;
+    transition: background-color $duration-fast-01 cubic-bezier(0, 0, 0.38, 0.9);
+
+    &:hover {
+      background: $layer-hover-01;
+
+      .non-hierarchical-peek-inside-pattern__peek-item-title {
+        color: $interactive;
+      }
+    }
+  }
+
+  &__peek-item-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 $spacing-05;
+    block-size: $spacing-09;
+    border-block-end: 1px solid $layer-accent-01;
+    inline-size: 100%;
+  }
+
+  &__peek-item-content {
+    display: flex;
+    flex: 1;
+    align-items: center;
+  }
+
+  &__peek-item-icon {
+    display: flex;
+    align-items: center;
+    margin-inline-end: $spacing-03;
+  }
+
+  &__peek-item-text {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+  }
+
+  &__peek-item-title {
+    display: block;
+    color: $text-primary;
+    font-size: 0.875rem;
+    font-weight: 400;
+    letter-spacing: 0.16px;
+    line-height: 1.2857;
+  }
+
+  &__peek-item-subtitle {
+    display: block;
+    color: $text-secondary;
+    font-size: 0.75rem;
+    font-weight: 400;
+    letter-spacing: 0.32px;
+    line-height: 1.3333;
+  }
+}

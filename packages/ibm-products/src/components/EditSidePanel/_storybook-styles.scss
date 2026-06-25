@@ -1,0 +1,35 @@
+//
+// Copyright IBM Corp. 2021, 2021
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use 'ALIAS_STORY_STYLE_CONFIG' as c4p-settings;
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/spacing' as *;
+// @use '@carbon/ibm-products-styles/scss/global/decorators/side-panel-decorator'
+//   as *;
+@use '../../../../ibm-products-styles/src/global/decorators/side-panel-decorator'
+  as *;
+
+$block-class: #{c4p-settings.$pkg-prefix}--edit-side-panel;
+$story-prefix: edit-side-panel-stories__;
+
+.#{$story-prefix}example-container {
+  display: grid;
+  align-items: flex-end;
+  grid-gap: $spacing-04;
+  grid-template-columns: 1fr 1fr;
+}
+
+.#{$story-prefix}example-form-group .#{c4p-settings.$carbon-prefix}--label {
+  margin-block-end: 0;
+}
+
+.#{$block-class} .#{c4p-settings.$carbon-prefix}--number__control-btn::before,
+.#{$block-class} .#{c4p-settings.$carbon-prefix}--number__control-btn::after {
+  background-color: $field-02;
+}
+
+@include side-panel-decorator($story-prefix);

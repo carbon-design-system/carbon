@@ -1,0 +1,95 @@
+//
+// Copyright IBM Corp. 2020, 2024
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/type';
+
+$story-class: 'page-header-stories';
+
+.#{$story-class}__content-switcher {
+  justify-content: flex-start;
+}
+
+.#{$story-class}__content-switcher button {
+  inline-size: auto;
+}
+
+.#{$story-class}__dummy-content {
+  position: relative; // used to raise the stacking context and check it still goes under the page header
+  background-color: $background;
+  color: $text-primary;
+  margin-block-start: $spacing-05;
+  padding-block-start: $spacing-05;
+}
+
+.#{$story-class}__dummy-content-block {
+  background: $layer-01;
+  background-clip: content-box;
+  min-block-size: 120vh;
+}
+
+.#{$story-class}__dummy-content-text {
+  @include type.type-style('body-compact-01');
+
+  padding: $spacing-05;
+}
+
+.#{$story-class}__status-icon {
+  fill: $support-success;
+  vertical-align: middle;
+}
+
+.#{$story-class}__app {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  max-block-size: 100vh;
+  // min and max height needed to prevent scroll off screen (verify on in context page)
+  min-block-size: 100vh;
+}
+
+.#{$story-class}__viewport {
+  overflow: hidden;
+  block-size: 100vh;
+}
+
+.#{$story-class}__viewport--scroll {
+  overflow-y: auto;
+  @supports (overflow-block: auto) {
+    overflow-block: auto;
+  }
+}
+
+.#{$story-class}__viewport .#{$story-class}__content-container {
+  block-size: 100%;
+  overflow-y: auto;
+  @supports (overflow-block: auto) {
+    overflow-block: auto;
+  }
+}
+
+.#{$story-class}__viewport
+  .#{$story-class}__content-container--with-global-header {
+  block-size: calc(100% - #{$spacing-09});
+  margin-block-start: $spacing-09;
+}
+
+.#{$story-class}__viewport--scroll .#{$story-class}__content-container {
+  overflow-y: initial;
+  @supports (overflow-block: initial) {
+    overflow-block: initial;
+  }
+}
+
+// cspell:disable-next-line
+.sbdocs .#{$story-class}__viewport {
+  background-color: $background;
+  box-shadow: 0 0 4px 1px $layer-accent-01;
+  color: $text-primary;
+  max-block-size: 50vh;
+}

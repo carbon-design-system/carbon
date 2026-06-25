@@ -1,0 +1,42 @@
+//
+// Copyright IBM Corp. 2020, 2021
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+// Standard imports.
+@use '../../global/styles/project-settings' as c4p-settings;
+@use '../../global/styles/mixins' as *;
+
+// ButtonSetWithOverflow uses the following IBM Products components:
+// ButtonMenu, ButtonMenuItem
+@use '../ButtonMenu/button-menu';
+
+$_block-class: #{c4p-settings.$pkg-prefix}--button-set-with-overflow;
+
+@include block-wrap($_block-class) {
+  &.#{$_block-class} {
+    display: flex;
+    inline-size: 100%;
+  }
+
+  .#{$_block-class}__space {
+    position: relative;
+    display: block;
+    inline-size: 100%;
+    white-space: nowrap;
+  }
+
+  .#{$_block-class}__button-container {
+    display: inline-flex; // needed to register a width
+  }
+
+  .#{$_block-class}__button-container--hidden {
+    // This button-set container is used to measure the width of all displayable button-sets
+    @include measuring-container;
+  }
+
+  &.#{$_block-class}--right {
+    justify-content: flex-end;
+  }
+}

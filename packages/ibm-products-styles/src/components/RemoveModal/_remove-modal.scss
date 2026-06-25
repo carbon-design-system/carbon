@@ -1,0 +1,28 @@
+//
+// Copyright IBM Corp. 2020, 2025
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+// Standard imports.
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/config' as carbon-config;
+@use '../../global/styles/project-settings' as c4p-settings;
+
+$block-class: #{c4p-settings.$pkg-prefix}--remove-modal;
+
+.#{$block-class}
+  .#{carbon-config.$prefix}--modal-footer
+  .#{carbon-config.$prefix}--btn {
+  max-inline-size: none;
+}
+
+.#{$block-class} .#{carbon-config.$prefix}--modal-content {
+  padding-inline-end: $spacing-05;
+}
+
+.#{$block-class}__body {
+  margin-block-end: $spacing-05;
+  padding-inline-end: 20%;
+}

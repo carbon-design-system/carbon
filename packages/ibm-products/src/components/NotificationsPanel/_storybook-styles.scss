@@ -1,0 +1,40 @@
+/* stylelint-disable carbon/type-use */
+
+//
+// Copyright IBM Corp. 2020, 2020
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+@use '@carbon/react/scss/spacing' as *;
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/themes';
+@use 'ALIAS_STORY_STYLE_CONFIG' as c4p-settings;
+@use '@carbon/styles/scss/config' as carbon-config;
+
+$storybook-block-class: #{c4p-settings.$pkg-prefix}--notifications-panel__story;
+
+.#{$storybook-block-class}--full-height {
+  block-size: 100vh;
+  max-block-size: var(--doc-story-height); // set in core if needed;
+}
+
+.#{$storybook-block-class}__add {
+  padding: $spacing-10 0 0 $spacing-05;
+}
+
+.#{$storybook-block-class}__header-panel {
+  padding: $spacing-10 $spacing-05 0;
+  font-weight: bold;
+  line-height: 1.4;
+  text-align: center;
+}
+
+.#{c4p-settings.$carbon-prefix}--header__global {
+  z-index: 2;
+}
+
+// Mirror unread notification bell svg in RTL
+[dir='rtl'] .sb-unread-notification-icon {
+  transform: scaleX(-1);
+}

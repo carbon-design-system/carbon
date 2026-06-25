@@ -1,0 +1,25 @@
+//
+// Copyright IBM Corp. 2020, 2021
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use 'ALIAS_STORY_STYLE_CONFIG' as c4p-settings;
+@use '@carbon/styles/scss/spacing' as *;
+
+.tearsheet-stories__dummy-content-block {
+  padding: $spacing-06 $spacing-07;
+}
+
+.tearsheet-stories__narrow-content-block {
+  padding: $spacing-05;
+}
+
+.tearsheet-stories__tabs {
+  margin-inline-start: calc(-1 * #{$spacing-05});
+}
+
+.tearsheet-stories__tabs .#{c4p-settings.$carbon-prefix}--tab-content {
+  display: none;
+}

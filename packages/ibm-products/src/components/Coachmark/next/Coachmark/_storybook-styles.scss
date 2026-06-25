@@ -1,0 +1,41 @@
+//
+// Copyright IBM Corp. 2023, 2024
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use 'ALIAS_STORY_STYLE_CONFIG' as c4p-settings;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/theme' as theme;
+@use '@carbon/styles/scss/themes' as themes;
+@use '@carbon/styles/scss/type';
+
+$block-class: #{c4p-settings.$pkg-prefix}--coachmark__next;
+
+// BUBBLE - content styling
+.#{$block-class}--coachmark-content {
+  inline-size: 290px;
+
+  .#{$block-class}--content-body {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .#{$block-class}--content-body > h2 {
+    @include type.type-style('productive-heading-02');
+
+    margin: 0 0 $spacing-03;
+  }
+
+  .#{$block-class}--content-body > p {
+    @include type.type-style('body-long-01');
+  }
+
+  .#{$block-class}--content-body > button {
+    display: flex;
+    align-self: flex-end;
+    margin-block-end: $spacing-05;
+    margin-block-start: $spacing-05;
+  }
+}

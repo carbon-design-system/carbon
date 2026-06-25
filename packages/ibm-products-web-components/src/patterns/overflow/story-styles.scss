@@ -1,0 +1,46 @@
+/*
+* Copyright IBM Corp. 2025, 2025
+*
+* This source code is licensed under the Apache-2.0 license found in the
+* LICENSE file in the root directory of this source tree.
+*/
+
+@use '@carbon/styles' with (
+  $font-path: '@ibm/plex'
+);
+@use '@carbon/styles/scss/spacing';
+@use '@carbon/styles/scss/colors';
+@use '@carbon/styles/scss/type';
+@use '@carbon/styles/scss/components/tag';
+
+.parent {
+  margin-block-start: spacing.$spacing-04;
+  min-block-size: 6rem;
+  // min-height: 560px;
+  // height: 100%;
+  // resize: horizontal;
+  // overflow: auto;
+}
+
+// todo - create annotation component
+.annotation {
+  /* stylelint-disable-next-line carbon/theme-use */
+  border: 1px dashed colors.$purple-40;
+  inline-size: 100%;
+}
+
+.annotation__label {
+  @include type.type-style('code-01');
+
+  display: inline-flex;
+  padding: spacing.$spacing-02;
+  background: tag.$tag-background-purple;
+  /* stylelint-disable-next-line carbon/theme-use */
+  color: tag.$tag-color-purple;
+  column-gap: spacing.$spacing-02;
+}
+
+.annotation__content {
+  padding: spacing.$spacing-05;
+  block-size: calc(100% - spacing.$spacing-06);
+}

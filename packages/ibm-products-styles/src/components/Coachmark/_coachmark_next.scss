@@ -1,0 +1,53 @@
+//
+// Copyright IBM Corp. 2026
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+// Standard imports.
+@use '../../global/styles/project-settings' as c4p-settings;
+@use '../../global/styles/mixins';
+@use '@carbon/styles/scss/config' as carbon-config;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/theme' as *;
+
+// The block part of our conventional BEM class names (blockClass__E--M).
+$block-class-next: #{c4p-settings.$pkg-prefix}--coachmark__next;
+
+@include mixins.block-wrap(#{c4p-settings.$pkg-prefix}--coachmark__next) {
+  &.#{$block-class-next}--floating {
+    span:has(> div > .#{$block-class-next}--content-header--drag-icon) {
+      margin-inline-end: auto;
+    }
+  }
+  .#{$block-class-next}--content-header--is-dragging {
+    border-radius: 0;
+    box-shadow: 0 0 0 $spacing-02 $icon-inverse;
+    outline: $spacing-01 solid $background-inverse;
+  }
+
+  .#{$block-class-next}--coachmark-content {
+    .#{$block-class-next}--content-header {
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    .#{$block-class-next}--content-header--drag-icon,
+    .#{$block-class-next}--content-header .#{carbon-config.$prefix}--btn {
+      color: $icon-inverse;
+
+      .#{carbon-config.$prefix}--btn__icon,
+      svg {
+        color: $icon-inverse;
+        fill: $icon-inverse;
+      }
+    }
+
+    .#{$block-class-next}--content-body {
+      display: flex;
+      flex-direction: column;
+      padding: $spacing-01 $spacing-05 0;
+    }
+  }
+}

@@ -1,0 +1,40 @@
+import { Story, Controls, Canvas } from '@storybook/addon-docs/blocks';
+import { StackblitzLink } from '../../global/js/utils/story-helper';
+import { NonLinearReading } from '.';
+import * as stories from './NonLinearReading.stories';
+
+# NonLinearReading
+
+[Usage guidelines](https://pages.github.ibm.com/carbon/ibm-products/components/onboarding/nonlinear-reading/usage/)
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Example usage](#example-usage)
+  - [Single level](#single-level)
+  - [Multiple level](#multiple-level)
+  - [With gradient background](#with-gradient-background)
+- [Component API](#component-api)
+
+## Overview
+
+Use non-linear reading when space is limited to share a brief, at-a-glance,
+summary of a concept that may require more explanation for some users.
+
+## Example usage
+
+### Single level
+
+<Canvas of={stories.SingleLevel} />
+
+### Multiple level
+
+<Canvas of={stories.MultipleLevel} />
+
+### With gradient background
+
+<Canvas of={stories.WithGradientBackground} />
+
+## Component API
+
+<Controls />

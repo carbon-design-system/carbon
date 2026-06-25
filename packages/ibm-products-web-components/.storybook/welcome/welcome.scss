@@ -1,0 +1,154 @@
+/**
+ * @license
+ *
+ * Copyright IBM Corp. 2025
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+@use '@carbon/styles/scss/type';
+@use '@carbon/styles/scss/colors';
+@use '@carbon/styles/scss/spacing' as *;
+
+body {
+  @include type.reset();
+}
+
+.welcome__container--outer {
+  position: fixed;
+  overflow: hidden;
+  box-sizing: border-box;
+  padding: $spacing-09;
+  /* stylelint-disable-next-line carbon/theme-use */
+  background-color: colors.$purple-10;
+  block-size: 100vh;
+  inline-size: 100%;
+  inset-block-start: 0;
+  inset-inline-start: 0;
+}
+
+.welcome__container--inner {
+  display: flex;
+  justify-content: space-between;
+  block-size: 100%;
+  /* stylelint-disable-next-line carbon/theme-use */
+  color: colors.$black;
+}
+
+.welcome__col--left {
+  padding: $spacing-09;
+  inline-size: 35%;
+}
+
+.welcome__col--right {
+  inline-size: 65%;
+}
+
+.welcome__animation {
+  display: flex;
+  overflow: hidden;
+  justify-content: flex-end;
+  max-block-size: 100vh;
+  max-inline-size: 1200px;
+}
+
+.welcome__header {
+  margin-block-end: $spacing-09;
+}
+
+.welcome__heading {
+  @include type.type-style('heading-07');
+}
+
+.welcome__subtitle {
+  @include type.type-style('heading-05');
+}
+
+.welcome__tag--xl {
+  @include type.type-style('heading-03');
+
+  border-radius: $spacing-06;
+  margin-block-start: $spacing-06;
+
+  padding-inline: $spacing-04;
+}
+
+.welcome__links {
+  display: flex;
+  flex-direction: column;
+}
+
+.welcome__link {
+  /* stylelint-disable-next-line carbon/theme-use */
+  color: colors.$blue-60;
+  margin-block-end: $spacing-03;
+  margin-inline-end: auto;
+}
+
+@media (width <= 1312px) {
+  .welcome__col--left {
+    padding: $spacing-07;
+    inline-size: 35%;
+  }
+
+  .welcome__col--right {
+    inline-size: 65%;
+  }
+
+  .welcome__heading {
+    @include type.type-style('heading-06');
+  }
+
+  .welcome__subtitle {
+    @include type.type-style('heading-05');
+  }
+
+  .welcome__tag--xl {
+    @include type.type-style('heading-02');
+  }
+}
+
+@media (width <= 930px) {
+  .welcome__col--left {
+    padding: $spacing-06;
+    inline-size: 50%;
+    min-inline-size: 200px;
+  }
+
+  .welcome__col--right {
+    overflow: hidden;
+    inline-size: 50%;
+    min-inline-size: 300px;
+  }
+
+  .welcome__animation {
+    align-items: flex-start;
+    justify-content: flex-start;
+    inline-size: 1090px;
+  }
+
+  .welcome__heading {
+    @include type.type-style('heading-05');
+  }
+
+  .welcome__subtitle {
+    @include type.type-style('heading-03');
+  }
+
+  .welcome__tag--xl {
+    @include type.type-style('heading-01');
+  }
+}
+
+@media (width <= 400px) {
+  .welcome__col--left {
+    padding: $spacing-08;
+    inline-size: 100%;
+  }
+
+  .welcome__col--right {
+    display: none;
+    visibility: hidden;
+  }
+}

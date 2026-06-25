@@ -1,0 +1,298 @@
+import {
+  Story,
+  Controls,
+  Source,
+  Canvas,
+  Meta,
+} from '@storybook/addon-docs/blocks';
+import * as CarouselStories from './Carousel.stories';
+
+<Meta of={CarouselStories} />
+
+# Carousel Utility
+
+`carousel` is a lightweight, headless, framework-agnostic JavaScript utility for
+building swipeable, carousel-like components. It provides a flexible way to
+create carousel and view stack navigation patterns in your application.
+
+## Overview
+
+The carousel utility is a headless utility that manages the state and
+transitions of carousel items. It's framework-agnostic and provides a flexible
+foundation for building various carousel-based interactions, from simple content
+showcases to complex navigation experiences with history tracking.
+
+## Real-world Usage
+
+The carousel utility is used throughout Carbon for IBM Products and related
+libraries to power various components:
+
+- **[InterstitialScreen](https://ibm-products.carbondesignsystem.com/?path=/docs/components-onboarding-interstitialscreen--overview)** -
+  Multi-step onboarding flows with carousel navigation
+- **[InterstitialScreen (Web Components)](https://ibm-products-web-components.carbondesignsystem.com/?path=/docs/components-onboarding-interstitialscreen--overview)** -
+  Web Component implementation with carousel
+- **[Coachmark Overlay Elements](https://ibm-products.carbondesignsystem.com/?path=/story/patterns-coachmark-overlay-elements--coachmark-overlay)** -
+  Guided tour experiences with carousel-based navigation
+- **[Preview Card (AI Chat)](https://carbon-ai-chat-components.netlify.app/?path=/story/components-card-preview-card--small)** -
+  Card preview with carousel for content navigation
+
+These components demonstrate production-ready implementations of the carousel
+utility in different contexts.
+
+## Features
+
+- **Swipe gesture support** - Touch and mouse drag interactions
+- **Transition animations** - Smooth, configurable transitions
+- **View history tracking** - Navigate back through view history
+- **Custom event hooks** - `onViewChangeStart` and `onViewChangeEnd` callbacks
+- **Programmatic navigation** - `next`, `prev`, `goToIndex`, `reset` methods
+- **SCSS-based styling system** - Flexible styling with mixins
+- **Automatic height management** - Smart height calculation based on content
+
+## Examples
+
+### Standard Carousel
+
+The standard carousel pattern is ideal for showcasing content in a sequential
+manner with navigation controls and indicators.
+
+<Canvas>of={CarouselStories.StandardCarousel}</Canvas>
+
+### ViewStack Navigation
+
+The ViewStack pattern is perfect for drill-down navigation experiences where
+users can navigate forward to new views and back through their history. This
+example shows the history tracking in action.
+
+<Canvas>of={CarouselStories.ViewStack}</Canvas>
+
+## Getting Started
+
+The utility can be initialized from any on-load function by passing in the
+carousel container element. Once initialized, it returns a set of APIs that
+enable programmatic navigation between views.
+
+### Basic Usage
+
+```html
+<div id="myCarousel">
+  <div>Slide 1</div>
+  <div>Slide 2</div>
+  <div>Slide 3</div>
+</div>
+```
+
+```typescript
+import { initCarousel } from '@carbon/utilities';
+
+const container = document.getElementById('myCarousel');
+
+const config = {
+  onViewChangeStart: (startData) =>
+    console.log('View change started', startData),
+  onViewChangeEnd: (endData) => console.log('View change ended', endData),
+  excludeSwipeSupport: false,
+};
+
+const carousel = initCarousel(container, config);
+
+// Navigation controls
+carousel.next();
+carousel.prev();
+carousel.goToIndex(2);
+carousel.reset();
+```
+
+By default, the carousel responds to swipe gestures, horizontal scroll gestures,
+and click-and-drag interactions. To disable this behavior, set the
+`excludeSwipeSupport` flag to `true`.
+
+## API Reference
+
+### initCarousel(container, config)
+
+Initializes a carousel on the specified container element.
+
+**Parameters:**
+
+- `container` (HTMLElement): The container element that holds the carousel items
+- `config` (Object): Configuration options
+  - `onViewChangeStart` (Function): Callback fired when transition starts
+  - `onViewChangeEnd` (Function): Callback fired when transition completes
+  - `excludeSwipeSupport` (Boolean): Disable swipe gesture support (default:
+    `false`)
+  - `useMaxHeight` (Boolean): Use maximum item height instead of minimum
+    (default: `false`)
+
+**Returns:** Object with methods:
+
+- `next()`: Navigate to the next item
+- `prev()`: Navigate to the previous item (or back in history for ViewStack)
+- `goToIndex(index)`: Navigate to a specific index
+- `reset()`: Reset to the first item
+- `getActiveItem()`: Get the currently active item
+- `destroyEvents()`: Clean up event listeners
+
+### Callback Response
+
+Both `onViewChangeStart` and `onViewChangeEnd` receive an object with:
+
+- `currentIndex` (Number): Index of the current item
+- `lastIndex` (Number): Index of the last item
+- `totalViews` (Number): Total number of items
+- `historyStack` (Array): Array of history entries with `{id, title}` objects
+
+## Height Management
+
+The carousel automatically calculates and manages the height of the carousel
+container based on the content of the carousel items.
+
+### Height Calculation Modes
+
+#### Default Mode (Minimum Height)
+
+By default, the carousel calculates height based on the **smallest item**:
+
+```typescript
+const carousel = initCarousel(container);
+// Uses the smallest item height (minimum 4rem/64px)
+```
+
+**How it works:**
+
+- Finds the smallest height among all carousel items
+- Enforces a minimum threshold of **4rem** at default font size
+- If the smallest item is less than the threshold, uses the threshold height
+- Ensures all items fit within the container without overflow
+
+#### Maximum Height Mode
+
+Use `useMaxHeight: true` to calculate based on the **largest item**:
+
+```typescript
+const carousel = initCarousel(container, {
+  useMaxHeight: true,
+});
+// Uses the largest item height
+```
+
+**How it works:**
+
+- Finds the largest height among all carousel items
+- Sets the container to accommodate the tallest item
+- Ensures the tallest item is fully visible without scrolling
+- All items are positioned absolutely within this maximum height
+
+### Controlling Carousel Height
+
+You have several options to control the carousel height:
+
+#### 1. Use the `useMaxHeight` Configuration
+
+```typescript
+const carousel = initCarousel(container, {
+  useMaxHeight: true,
+});
+```
+
+#### 2. Set CSS Height on the Container
+
+The carousel respects any height set via CSS. If the container height is greater
+than the minimum threshold (4rem), automatic height calculation is bypassed:
+
+```css
+#myCarousel {
+  height: 500px; /* Fixed height */
+}
+```
+
+#### 3. Set Height on Individual Items
+
+You can set explicit heights on carousel items, and the carousel will calculate
+based on those heights:
+
+```css
+#myCarousel > div {
+  height: 300px;
+}
+```
+
+## Styling
+
+The carousel utility provides SCSS mixins for styling carousel components with
+smooth animations and accessibility features.
+
+### SCSS Import Options
+
+**Option 1: From `@carbon/react`** (React apps)
+
+```scss
+@use '@carbon/react/scss/_carbon-utilities.scss';
+```
+
+**Option 2: From `@carbon/styles`**
+
+```scss
+@use '@carbon/styles/scss/_carbon-utilities.scss';
+```
+
+**Option 3: From `@carbon/utilities`** (Direct access)
+
+```scss
+@use '@carbon/utilities/scss/carousel';
+```
+
+### Configuration to Override Animation Time
+
+```scss
+@use '@carbon/utilities/scss/carousel' with (
+  $animateTime: 500ms
+);
+```
+
+### For Web Component Applications
+
+If you're building Web Components, there are mixins exported to be used for
+wrappers and view items:
+
+```scss
+@use '@carbon/utilities/scss/carousel' as carousel;
+
+:host {
+  @include carousel.carousel; // Includes all carousel styles
+  // or
+  @include carousel.wrapperStyles; // for wrapper styles
+  @include carousel.viewStyles; // for view styles
+}
+```
+
+### Available Mixins
+
+- `carousel()` - Includes all carousel styles (wrapper and view styles)
+- `wrapperStyles()` - Styles for the carousel wrapper container
+- `viewStyles()` - Styles for different carousel view items
+
+### Variables
+
+- `$animateTime` - Animation duration (default: `$duration-moderate-02` from
+  Carbon motion)
+
+## Implementation Notes
+
+- The utility automatically wraps carousel items in a container
+- Items are positioned absolutely for smooth transitions
+- Minimum height is enforced to prevent layout shifts
+- Swipe gestures work on touch-enabled devices
+- The utility manages CSS classes for animation states
+- Height calculation happens automatically on initialization
+
+## Accessibility
+
+When implementing carousel patterns:
+
+- Provide clear navigation labels for all controls
+- Ensure keyboard navigation is fully supported
+- Add appropriate ARIA labels for screen readers
+- Provide alternative ways to access all content
+- Consider auto-play implications for users with motion sensitivities
+- Ensure sufficient color contrast for indicators and controls

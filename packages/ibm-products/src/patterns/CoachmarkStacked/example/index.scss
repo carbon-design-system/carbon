@@ -1,0 +1,204 @@
+//
+// Copyright IBM Corp. 2026
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+/* stylelint-disable declaration-no-important */
+$prefix: 'c4p' !default;
+$carbon-prefix: 'cds';
+
+@use '@carbon/styles';
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/theme' as theme;
+@use '@carbon/styles/scss/themes' as themes;
+@use '@carbon/styles/scss/type';
+@use '@carbon/styles/scss/motion' as *;
+@use '@carbon/layout/scss/convert';
+@use '@carbon/styles/scss/colors' as colors;
+@use '@carbon/styles/scss/components/button/tokens' as button-tokens;
+@use '@carbon/utilities/scss/carousel/_index' as carousel;
+
+@include carousel.carousel();
+
+@include carousel.wrapperStyles();
+
+$block-class: #{$prefix}--coachmark__next;
+$stack-home-class: 'coachmark-stacked-home';
+$stacked-coachmark: 'stacked-coachmark';
+$elements-block-class: 'stacked_element_content';
+
+// BUBBLE - content styling
+.#{$block-class}--coachmark-content {
+  position: fixed;
+  inline-size: 18rem;
+  inset-block-start: 0.2rem !important;
+  margin-inline-start: $spacing-04;
+  visibility: visible;
+
+  &.--is-visible {
+    visibility: visible;
+  }
+
+  .#{$block-class}--content-body {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .#{$block-class}--content-body > h2 {
+    @include type.type-style('productive-heading-02');
+
+    margin: 0 0 $spacing-03;
+  }
+
+  .#{$block-class}--content-body > p {
+    @include type.type-style('body-long-01');
+  }
+
+  .#{$block-class}--content-body > button {
+    display: flex;
+    align-self: flex-end;
+    margin-block-start: $spacing-05;
+  }
+}
+
+// Fix for carousel views blocking button clicks in Storybook
+.carousel__view {
+  pointer-events: none;
+
+  // Re-enable pointer events for interactive content inside carousel views
+  * {
+    pointer-events: auto;
+  }
+}
+
+.carousel__view > h2 {
+  @include type.type-style('productive-heading-02');
+
+  margin: 0 0 $spacing-03;
+}
+
+.carousel__view > p {
+  @include type.type-style('body-long-01');
+}
+
+.carouselControls {
+  position: relative;
+
+  .nextButton {
+    position: absolute;
+    inset-inline-start: $spacing-07;
+  }
+
+  .prevButton {
+    position: absolute;
+    inset-inline-start: $spacing-07;
+  }
+}
+
+.carouselControlWrapper__footer {
+  margin-block-end: $spacing-05;
+
+  span {
+    justify-self: flex-start;
+    margin-inline-end: auto;
+  }
+}
+
+.carouselControlWrapper__footer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding-block-start: $spacing-05;
+}
+
+.carouselControlWrapper--controls-progress {
+  justify-self: flex-start;
+  margin-inline-end: auto;
+  @include type.type-style('helper-text-01');
+}
+
+// SPECIFIC TO THE HOME ELEMENT
+.#{$stack-home-class},
+.#{$stacked-coachmark} {
+  &__nav-links {
+    margin-block-start: $spacing-04;
+    margin-inline-start: calc(-1 * $spacing-05);
+  }
+
+  &__icon-idea {
+    margin-block-end: $spacing-03;
+  }
+
+  li {
+    display: block;
+    max-inline-size: 100%;
+    white-space: nowrap;
+  }
+
+  &__title {
+    @include type.type-style('productive-heading-02');
+
+    margin: 0 0 $spacing-03;
+  }
+
+  &__body {
+    @include type.type-style('body-long-01');
+  }
+
+  &__button {
+    margin-block-end: 0;
+  }
+}
+
+.#{$stacked-coachmark} {
+  &__button {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding: $spacing-05 $spacing-05 $spacing-05 $spacing-05;
+  }
+}
+
+.#{$prefix}__bubble__arrow {
+  display: none;
+}
+
+.#{$stack-home-class}--scaled-home {
+  inset-block-end: $spacing-05;
+  opacity: 0.8;
+  transform: scaleX(0.9);
+  transform-origin: top center;
+  transition: transform $duration-moderate-02 motion(exit, productive);
+}
+
+.#{$stack-home-class}--unscaled-home {
+  transform: none;
+}
+
+// Position parent coachmark at bottom-right
+.#{$stack-home-class} {
+  position: fixed;
+  z-index: 9000;
+  inset-block-end: 0;
+  inset-block-start: auto;
+  inset-inline-end: $spacing-13;
+  inset-inline-start: auto;
+}
+
+// Create a fixed positioning context for nested coachmarks
+.#{$prefix}--coachmark__next:has(.#{$elements-block-class}) {
+  position: fixed;
+  z-index: 9001;
+  inset-block-end: 0;
+  inset-block-start: auto;
+  inset-inline-end: $spacing-13;
+  inset-inline-start: auto;
+
+  // Allow the popover to be positioned absolutely within the fixed container
+  .#{$carbon-prefix}--popover {
+    position: absolute;
+    visibility: visible;
+  }
+}

@@ -1,0 +1,125 @@
+/*
+* Copyright IBM Corp. 2025, 2025
+*
+* This source code is licensed under the Apache-2.0 license found in the
+* LICENSE file in the root directory of this source tree.
+*/
+
+// $css--plex: true !default;
+
+@use 'sass:map';
+@use '@carbon/styles/scss/utilities' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/theme';
+@use '@carbon/styles/scss/motion' as *;
+@use '@carbon/styles/scss/config' as carbon-config;
+
+$prefix: 'c4p';
+$carbon-prefix: carbon-config.$prefix;
+$block-class: #{$prefix}--truncated-text;
+
+// Common reset button style
+%reset-button {
+  border: none;
+  cursor: pointer;
+  font: inherit;
+  line-height: inherit;
+}
+
+// Mixin for directional gradients
+@mixin gradient-bg($direction, $color) {
+  background: linear-gradient($direction, rgba(255, 255, 255, 0) 0%, $color 0%);
+}
+
+:host(#{$prefix}-truncated-text) {
+  display: block;
+  inline-size: 100%;
+
+  .#{$block-class}_transition {
+    @media (prefers-reduced-motion: no-preference) {
+      transition: max-height $duration-fast-02 motion(standard, productive);
+    }
+  }
+
+  .#{$block-class}_content {
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: var(--line-clamp, 0);
+    text-overflow: clip;
+    white-space: normal;
+
+    &:focus-visible {
+      @include focus-outline('outline');
+    }
+  }
+
+  .#{$block-class}_content--closing {
+    -webkit-line-clamp: none;
+  }
+
+  #{$carbon-prefix}-tooltip {
+    display: inline-flex;
+  }
+
+  .#{$block-class}_tooltip-trigger {
+    display: inline;
+    padding: 0;
+    border: 0;
+    background: none;
+    color: inherit;
+    cursor: default;
+    font: inherit;
+    text-align: inherit;
+
+    &:focus-visible {
+      @include focus-outline('outline');
+    }
+  }
+
+  button:focus-visible,
+  .#{$block-class}_button-expand:focus-visible,
+  .#{$block-class}_button-collapse:focus-visible {
+    @include focus-outline('outline');
+  }
+}
+
+.#{$block-class}_button-expand,
+.#{$block-class}_button-collapse {
+  @extend %reset-button;
+
+  padding: 0 $spacing-01;
+  color: theme.$link-primary;
+
+  &.#{$block-class}_button-hide {
+    display: none;
+  }
+}
+
+.#{$block-class}_button-expand {
+  &.#{$block-class}_button-layered {
+    background-color: theme.$layer;
+  }
+
+  // Gradient LTR
+  &:dir(ltr)::before {
+    @include gradient-bg(90deg, theme.$background);
+  }
+
+  &.#{$block-class}_button-layered:dir(ltr)::before {
+    @include gradient-bg(90deg, theme.$layer);
+  }
+
+  // Gradient RTL
+  &:dir(rtl)::before {
+    @include gradient-bg(270deg, theme.$background);
+  }
+
+  &.#{$block-class}_button-layered:dir(rtl)::before {
+    @include gradient-bg(270deg, theme.$layer);
+  }
+}
+
+.#{$block-class}_button-collapse {
+  background-color: transparent;
+}

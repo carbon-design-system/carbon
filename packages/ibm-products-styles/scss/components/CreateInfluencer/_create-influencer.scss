@@ -1,0 +1,93 @@
+//
+// Copyright IBM Corp. 2021, 2021
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/motion' as *;
+@use '../../global/styles/project-settings' as c4p-settings;
+@use '@carbon/styles/scss/type';
+
+$influencer-block-class: #{c4p-settings.$pkg-prefix}--create-influencer;
+$create-tearsheet-block-class: #{c4p-settings.$pkg-prefix}--tearsheet-create;
+$influencerAnimationStart: calc(-1 * #{$spacing-05});
+@keyframes influencer-menu-entrance {
+  0% {
+    opacity: 0;
+    // stylelint-disable-next-line carbon/layout-use
+    transform: translateX($influencerAnimationStart);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+@keyframes influencer-menu-exit {
+  0% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  100% {
+    opacity: 0;
+    // stylelint-disable-next-line carbon/layout-use
+    transform: translateX($influencerAnimationStart);
+  }
+}
+.#{$influencer-block-class} {
+  display: grid;
+  padding: $spacing-06 $spacing-07;
+  block-size: 100%;
+  grid-template-columns: 100%;
+  grid-template-rows: 1fr auto;
+}
+
+.#{$influencer-block-class}__left-nav {
+  grid-column: 1 / -1;
+  grid-row: 1 / -1;
+  overflow-y: auto;
+  @supports (overflow-block: auto) {
+    overflow-block: auto;
+  }
+}
+
+.#{$influencer-block-class}__title {
+  @include type.type-style('heading-03');
+
+  margin-block-end: $spacing-06;
+}
+
+.#{$influencer-block-class}__view-all-toggle {
+  padding: $spacing-06;
+  grid-column: 1 / -1;
+  grid-row: -1 / -1;
+}
+
+.#{$influencer-block-class}__side-nav-opening,
+.#{$influencer-block-class}__progress-indicator-opening {
+  // stylelint-disable-next-line carbon/motion-easing-use
+  animation: influencer-menu-entrance $duration-moderate-02 1;
+  animation-fill-mode: forwards;
+  @include motion(entrance, productive);
+}
+
+.#{$influencer-block-class}__side-nav-closing,
+.#{$influencer-block-class}__progress-indicator-closing {
+  // stylelint-disable-next-line carbon/motion-easing-use
+  animation: influencer-menu-exit $duration-moderate-02 1;
+  animation-fill-mode: forwards;
+  @include motion(exit, productive);
+}
+
+@media (prefers-reduced-motion) {
+  .#{$influencer-block-class}__side-nav-opening,
+  .#{$influencer-block-class}__progress-indicator-opening,
+  .#{$influencer-block-class}__side-nav-closing,
+  .#{$influencer-block-class}__progress-indicator-closing {
+    animation: none;
+    opacity: 1;
+  }
+}

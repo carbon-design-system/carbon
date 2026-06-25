@@ -1,0 +1,60 @@
+import { Story, Controls, Source, Canvas } from '@storybook/addon-docs/blocks';
+import { CodesandboxLink } from '../../global/js/utils/story-helper';
+import * as CoachmarkFixedStories from './CoachmarkFixed.stories';
+
+# Coachmark Fixed
+
+[Usage guidelines](https://pages.github.ibm.com/carbon/ibm-products/components/onboarding/coachmark/usage/#fixed)
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Example usage](#example-usage)
+
+## Overview
+
+[CoachmarkFixed](https://pages.github.ibm.com/carbon/ibm-products/components/onboarding/coachmark/usage#fixed)
+appears fixed at the bottom right corner of the browser window when the page
+loads. It starts in a minimized state, to cover as little of the UI as possible;
+when shown in tests as expanded by default, users immediately closed it without
+reading, to get it out of the way. When dismissed, it slides down off the page.
+
+> NOTE: Patterns have multiple ways of accomplishing a user need and typically
+> use a combination of components with additional design considerations. The
+> pattern code we share is meant to serve as an example implementation that can
+> be built and extended further.
+
+#### Ingredients
+
+To build this pattern, we recommend including the following components:
+
+- [Coachmark](https://carbon-for-ibm-products.netlify.app/?path=/docs/preview-onboarding-coachmark--overview)
+- [Button](https://react.carbondesignsystem.com/?path=/docs/components-button)
+- [Link](https://react.carbondesignsystem.com/?path=/docs/components-link)
+- [Theme](https://react.carbondesignsystem.com/?path=/docs/components-theme)
+- [Carousel utility](https://github.com/carbon-design-system/carbon/blob/main/packages/utilities/src/carousel/README.md)
+
+```jsx
+import { Button, Theme, Link as CarbonLink } from '@carbon/react';
+import {
+  preview__CoachmarkTagline as CoachmarkTagline,
+  preview__Coachmark as Coachmark,
+} from '@carbon/ibm-products';
+import { InitCarousel, initCarousel } from '@carbon/utilities';
+```
+
+## Example usage
+
+> 💡 Check our
+> [Stackblitz](https://stackblitz.com/github/carbon-design-system/ibm-products/tree/main/packages/ibm-products/src/patterns/CoachmarkFixed/example)
+> example implementation.
+
+[![Edit react-patterns](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/carbon-design-system/ibm-products/tree/main/packages/ibm-products/src/patterns/CoachmarkFixed/example)
+
+{/* TODO: One example per designed use case. */}
+
+<Canvas className="coachmarkExample" withSource="none">
+  <div className="CoachmarkBaseExampleUsage">
+    <Story of={CoachmarkFixedStories.CoachmarkFixed} />
+  </div>
+</Canvas>

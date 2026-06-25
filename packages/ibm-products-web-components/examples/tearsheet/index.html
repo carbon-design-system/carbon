@@ -1,0 +1,62 @@
+<!--
+@license
+
+Copyright IBM Corp. 2020
+
+This source code is licensed under the Apache-2.0 license found in the
+LICENSE file in the root directory of this source tree.
+-->
+
+<html>
+<head>
+  <title>carbon-web-components example</title>
+  <meta charset="UTF-8" />
+  <link rel="stylesheet" href="src/styles.scss" />
+  <style>
+    /* Suppress custom element until styles are loaded */
+    cds-ai-label:not(:defined) {
+      display: none;
+    }
+  </style>
+  <script type="module" src="src/index.js"></script>
+</head>
+<body>
+  
+  <cds-button id="toggle-button" >Toggle tearsheet</cds-button>
+  <c4p-tearsheet
+  open
+  width="wide">
+  <span slot="label">Optional label for context</span>
+  <span slot="title">Title used to designate the overarching flow of the tearsheet.
+  </span>
+  <span slot="description">Description used to describe the flow if need be.</span>
+    <!-- Content -->
+    <h5>Section</h5>
+    <div class="text-inputs">
+      <cds-text-input
+        label="Input A"
+        id="tearsheet-story-text-input-a"></cds-text-input>
+      <cds-text-input
+        label="Input B"
+        id="tearsheet-story-text-input-b"></cds-text-input>
+    </div>
+    <div class="text-inputs">
+      <cds-text-input
+        label="Input C"
+        id="tearsheet-story-text-input-c"></cds-text-input>
+      <cds-text-input
+        label="Input D"
+        id="tearsheet-story-text-input-d"></cds-text-input>
+    </div>
+    <div class="textarea-container">
+      <cds-textarea label="Notes" value="This is a text area"></cds-textarea>
+      <cds-textarea label="Notes" value="This is a text area"></cds-textarea>
+      <cds-textarea label="Notes" value="This is a text area"></cds-textarea>
+    </div>
+    <!-- Tearsheet actions optional -->
+    <cds-button slot="actions" kind="ghost">Ghost</cds-button>
+    <cds-button slot="actions" kind="secondary">Secondary</cds-button>
+    <cds-button slot="actions" kind="primary">Primary</cds-button>
+  </c4p-tearsheet>
+</body>
+</html>

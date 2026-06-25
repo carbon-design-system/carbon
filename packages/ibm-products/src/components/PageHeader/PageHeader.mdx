@@ -1,0 +1,181 @@
+import { Story, Controls, Source, Canvas } from '@storybook/addon-docs/blocks';
+import { CodesandboxLink } from '../../global/js/utils/story-helper';
+import { PageHeader } from '.';
+import * as stories from './PageHeader.stories';
+// cspell:ignore actionbar breadcrumbitems pageactions summarydetails
+
+# PageHeader
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Main types](#main-types)
+- [Examples](#examples)
+- [Component API](#component-api)
+
+## Overview
+
+The page header is comprised of 6 zones, allowing for the flexibility to include
+(or exclude) areas depending on the context and needs of the page.
+
+![image](https://user-images.githubusercontent.com/50155706/93520637-69dcad00-f8f4-11ea-8d2a-d56c90beb0b4.png)
+
+1. **Breadcrumbs:** This zone is for the breadcrumb component to be displayed.
+   Breadcrumbs should typically be displayed if there are navigable pages that
+   precede the current page.
+2. **Page title:** This zone is for a page title to be displayed. Optionally an
+   icon can be included to the left of the title text.
+3. **Subtitle / description (optional):** This zone is for the inclusion of a
+   subtitle or description to provide additional context to identify the current
+   page.
+4. **Available space (optional):** This zone is for placing high-level content
+   above page tabs.
+5. **Tabs (optional):** This zone is for placing navigation within a page. e.g.
+   tabs, content switcher etc.
+6. **Actions (optional):** This zone is for placing critical page actions.
+
+## Usage Notes for Developers
+
+On scroll the PageHeader can be configured to allow the breadcrumb row and/or
+the navigation row to stick to the top of the page, with content scrolling below
+it.
+
+In order for this to be successful the following conditions must be met:
+
+1. The PageHeader should be a peer of the structure where the content is placed.
+2. The z-index of the content should not exceed that of the PageHeader. This is
+   set by a Carbon SCSS function `z('header')` which currently evaluates
+   to 8000.
+
+## Main types
+
+### Page header without background
+
+The simplest expression of the page header. A background-less page header should
+be used if only the breadcrumb, title, actions, and/or simple status are
+required.
+
+<Canvas>
+  <Story of={stories.withButtons} />
+</Canvas>
+
+### Page header with background
+
+The more complex expression of the page header. The background provides
+structurality and aids in establishing hierarchy for page headers with more
+items. The page header with a background should be used if tabs, subtitles,
+and/or more global items are required.
+
+<Canvas>
+  <Story of={stories.withTabs} />
+</Canvas>
+
+### Page header with background (breadcrumb + actions toolbar included)
+
+If the page header contains action icons, the default state includes a toolbar
+designated for the breadcrumbs and action icons.
+
+<Canvas>
+  <Story id={stories.withActionsToolbar} />
+</Canvas>
+
+### Page header with background (breadcrumb + actions toolbar ONLY)
+
+On occasion, a condensed page header is required. This version accommodates this
+by just displaying the breadcrumb bar only.
+
+<Canvas>
+  <Story of={stories.withBreadcrumbActionsToolbarOnly} />
+</Canvas>
+
+## Examples
+
+The page header allows for the flexibility to additively contain both type and
+components with predictable spacing in the overall layout.
+
+### Examples without background
+
+#### Page title only
+
+This is the base of the page header, establishing spacing/title structure that
+all other sans background page headers follow. The base is best used to
+accommodate simple requirements, including page title only, or page title +
+buttons.
+
+<Canvas>
+  <Story of={stories.withTitle} />
+</Canvas>
+
+#### With breadcrumbs
+
+This variant of the page header accounts for page title, buttons, breadcrumbs,
+and occasionally icons and metadata.
+
+<Canvas>
+  <Story of={stories.withBreadcrumbs} />
+</Canvas>
+
+#### With status indicator
+
+Structured similarly to the examples above, this variant is for the inclusion of
+a page level status indicator.
+
+<Canvas>
+  <Story of={stories.withButtons} />
+</Canvas>
+
+### Examples with background
+
+#### With tabs
+
+Tabs are positioned underneath the page title and sit flush at the base of the
+page header background.
+
+<Canvas>
+  <Story of={stories.withTabs} />
+</Canvas>
+
+#### With tags
+
+Tags are positioned underneath the page title and sit above the base of the page
+header background.
+
+<Canvas>
+  <Story of={stories.withTags} />
+</Canvas>
+
+#### With tabs & tags
+
+If both tabs & tags need to be present, tabs should be remain left aligned with
+the page and tags reposition over to the right side of the screen.
+
+<Canvas>
+  <Story of={stories.withTabsAndTags} />
+</Canvas>
+
+#### With subtitle
+
+Subtitles, if necessary, are placed directly below the page title. Page headers
+with subtitles use the background to create hierarchy and to separate it from
+type placed within the page.
+
+<Canvas>
+  <Story of={stories.withSubtitle} />
+</Canvas>
+
+#### With summary details
+
+Page content with global page hierarchy can be placed above tabs within the page
+header. **This is just an example of an allowable zone for content.**
+
+<Canvas>
+  <Story of={stories.withSummaryDetails} />
+</Canvas>
+
+## Code sample
+
+<CodesandboxLink exampleDirectory="PageHeader" />
+
+## Component API
+
+<Controls />

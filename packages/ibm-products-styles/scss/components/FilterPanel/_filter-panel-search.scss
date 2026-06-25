@@ -1,0 +1,40 @@
+//
+// Copyright IBM Corp. 2024, 2024
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+// Standard imports.
+@use '../../global/styles/project-settings' as c4p-settings;
+
+@use '@carbon/layout/scss/convert' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/utilities';
+
+// FilterPanel uses the following Carbon for IBM Products components:
+// TODO: @use(s) of IBM Products component styles used by FilterPanel
+
+// The block part of our conventional BEM class names (blockClass__E--M).
+$block-class: #{c4p-settings.$pkg-prefix}--filter-panel-search;
+
+.#{$block-class} {
+  position: relative;
+  margin-block-end: $spacing-05;
+}
+
+.#{$block-class}__results {
+  position: absolute;
+  z-index: utilities.z('dropdown');
+  padding: $spacing-03;
+  background-color: $layer;
+  inset-block-start: 100%;
+  inset-inline: 0;
+  /* stylelint-disable-next-line function-no-unknown */
+  max-block-size: to-rem(320px);
+  overflow-y: auto;
+  @supports (overflow-block: auto) {
+    overflow-block: auto;
+  }
+}

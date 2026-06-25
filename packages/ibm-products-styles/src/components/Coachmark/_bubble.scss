@@ -1,0 +1,61 @@
+/**
+ * Copyright IBM Corp. 2025
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+@use '@carbon/react/scss/spacing' as *;
+@use '@carbon/react/scss/colors' as *;
+@use '@carbon/styles/scss/theme' as theme;
+@use '@carbon/styles/scss/themes' as themes;
+@use '@carbon/styles/scss/breakpoint' as *;
+@use '@carbon/styles/scss/utilities';
+@use '../../global/styles/project-settings' as c4p-settings;
+
+$prefix: #{c4p-settings.$pkg-prefix} !default;
+
+.#{$prefix}__bubble {
+  position: fixed;
+  z-index: 10000;
+  display: none;
+  padding: $spacing-05;
+  border-radius: $spacing-01;
+  /* stylelint-disable-next-line declaration-no-important */
+  background: theme.$layer !important;
+  color: theme.$text-primary;
+  font-weight: bold;
+  inline-size: max-content;
+  inset-block-start: 0;
+  inset-inline-start: 0;
+  pointer-events: none;
+}
+
+.#{$prefix}__bubble-hidden {
+  display: none;
+}
+
+.#{$prefix}__bubble-open {
+  display: grid;
+  pointer-events: all;
+}
+
+.#{$prefix}__bubble-drop-shadow {
+  filter: drop-shadow(0 $spacing-01 $spacing-01 rgba(0, 0, 0, 0.2));
+}
+
+.#{$prefix}__bubble__arrow {
+  position: absolute;
+  z-index: 10010;
+  background: theme.$layer;
+  block-size: $spacing-04;
+  inline-size: $spacing-04;
+  transform: rotate(45deg);
+}
+
+.#{$prefix}__bubble__header {
+  z-index: 10020;
+  display: flex;
+  justify-content: flex-end;
+  margin-block-start: -$spacing-05;
+  margin-inline: -$spacing-05;
+}

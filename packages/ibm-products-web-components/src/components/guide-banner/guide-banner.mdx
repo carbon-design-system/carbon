@@ -1,0 +1,95 @@
+import { ArgTypes, Markdown, Meta, Canvas } from '@storybook/addon-docs/blocks';
+import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
+import * as GuideBannerStories from './guide-banner.stories';
+
+<Meta of={GuideBannerStories} />
+
+# GuideBanner
+
+[Usage guidelines](https://pages.github.ibm.com/carbon/ibm-products/components/onboarding/guide-banner/usage/)
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Getting started](#getting-started)
+- [Example Usage](#example-usage)
+  - [Collapsible](#collapsible)
+  - [Many insights](#many-insights)
+  - [Few insights](#few-insights)
+- [Component API](#component-api)
+
+## Overview
+
+The guide banner sits at the top of a page, or page-level tab, to introduce foundational concepts related to the page's content. The component is a collapsible banner that provides guidance or information to users. It features a horizontal scrollable list of guide elements with navigation controls, and can be expanded or collapsed to show or hide detailed content.
+
+#### Component Dependencies
+
+- `c4p-guide-banner-element` for individual guide items within the banner
+
+#### Guide Banner Element
+
+Each guide item is rendered using the `c4p-guide-banner-element` component. It supports:
+
+- Title slot for the guide item heading
+- Description slot for detailed information
+- Default slot for additional content (buttons, links, etc.)
+
+### Composability
+
+All major sections (header icon, body content, footer navigation) are implemented as **slots**, allowing developers to inject their own content and styling. When customizing these slots, developers are expected to apply appropriate styles in alignment with Carbon design guidelines.
+
+The component provides the following customization points:
+
+- **Icon slot**: Replace the default idea icon with a custom icon
+- **Header slot**: Add custom content to the header area
+- **Body slot**: Insert guide banner elements or custom content
+- **Footer slot**: Customize the navigation and toggle controls
+
+## Getting started
+
+Here's a quick example to get you started.
+
+### JS (via import)
+
+```javascript
+import '@carbon/ibm-products-web-components/es/components/guide-banner/index.js';
+```
+
+### HTML
+
+```html
+<c4p-guide-banner
+  collapseButtonLabel="Read less"
+  expandButtonLabel="Read more"
+  titleText="Page-related heading that can stand on its own"
+  open
+>
+  <div slot="body">
+    <!-- Guide banner elements go here -->
+  </div>
+</c4p-guide-banner>
+```
+
+## Example Usage
+
+### Collapsible
+
+<Canvas of={GuideBannerStories.Default} />
+
+### Many insights
+
+<Canvas of={GuideBannerStories.ManyInsights} />
+
+### Few insights
+
+<Canvas of={GuideBannerStories.FewInsights} />
+
+## Component API
+
+### `<c4p-guide-banner>` attributes, properties, events and slots
+
+<ArgTypes of="c4p-guide-banner" />
+
+### `<c4p-guide-banner-element>` attributes, properties, events and slots
+
+<ArgTypes of="c4p-guide-banner-element" />

@@ -1,0 +1,219 @@
+//
+// Copyright IBM Corp. 2026
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+// Other Carbon settings.
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/components/button/tokens' as *;
+@use '@carbon/styles/scss/grid' as *;
+@use '@carbon/styles/scss/motion' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/type';
+@use '@carbon/styles/scss/utilities/hide-at-breakpoint' as *;
+@use '@carbon/styles/scss/config' as carbon-config;
+
+// CreateTearsheet uses the following IBM Products components:
+// TearsheetShell
+
+@mixin hideAtLargeScreens() {
+  @include hide-at-lg;
+  @include hide-at-md;
+  @include hide-at-xlg;
+  @include hide-at-max;
+}
+
+@keyframes step-content-entrance {
+  0% {
+    opacity: 0;
+    transform: translateY(-$spacing-04);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// CreateTearsheet step animations
+.create-tearsheet-step {
+  // stylelint-disable-next-line carbon/motion-easing-use
+  animation: step-content-entrance $duration-slow-01;
+  animation-fill-mode: forwards;
+  animation-timing-function: $standard-easing;
+  margin-inline-start: 0;
+  opacity: 0;
+  padding-inline: $spacing-03;
+
+  .#{carbon-config.$prefix}--css-grid {
+    padding: 0;
+    margin: 0;
+    margin-inline-start: 0;
+  }
+}
+
+@media (prefers-reduced-motion) {
+  .create-tearsheet-step {
+    animation: none;
+    opacity: 1;
+  }
+}
+
+// Hidden step state
+.create-tearsheet-step--hidden-step {
+  display: none;
+}
+
+// Visible step state
+@media screen and (prefers-reduced-motion: reduce) {
+  .create-tearsheet-step--visible-step {
+    // stylelint-disable-next-line carbon/motion-easing-use
+    animation: none;
+    animation-fill-mode: forwards;
+    animation-timing-function: $standard-easing;
+    opacity: 0;
+  }
+}
+
+.create-tearsheet-step--visible-step {
+  // stylelint-disable-next-line carbon/motion-easing-use
+  animation: step-content-entrance $duration-slow-01;
+  animation-fill-mode: forwards;
+  animation-timing-function: $standard-easing;
+  opacity: 0;
+}
+
+// CreateTearsheet step elements
+.create-tearsheet-step__title {
+  margin-block-end: $spacing-05;
+  @include type.type-style('heading-03');
+}
+
+.create-tearsheet-step__subtitle {
+  @include type.type-style('heading-compact-01');
+
+  margin-block-end: $spacing-03;
+}
+
+.create-tearsheet-step__description {
+  @include type.type-style('body-01');
+
+  margin-block-end: $spacing-06;
+}
+
+.create-tearsheet-step__content {
+  min-block-size: 100%;
+  overflow-x: hidden;
+  @supports (overflow-inline: hidden) {
+    overflow-inline: hidden;
+  }
+
+  padding-block: $spacing-06;
+
+  .#{carbon-config.$prefix}--form {
+    block-size: inherit;
+  }
+
+  .#{carbon-config.$prefix}--grid {
+    padding: 0;
+    margin: 0;
+  }
+
+  .#{carbon-config.$prefix}--fieldset {
+    margin-block-end: 0;
+  }
+}
+
+.create-tearsheet-step__fieldset {
+  margin-block-end: 0;
+
+  > * {
+    margin-block-end: $spacing-05;
+  }
+}
+
+// Section styles
+.create-tearsheet__section--title {
+  margin-block-end: $spacing-05;
+}
+
+.create-tearsheet__section--subtitle {
+  @include type.type-style('heading-compact-01');
+
+  margin-block-end: $spacing-03;
+}
+
+.create-tearsheet__section--description {
+  @include type.type-style('body-01');
+
+  margin-block-end: $spacing-06;
+}
+
+// CreateTearsheet divider (using pkg.prefix which is c4p)
+.c4p--tearsheet-create__section--divider {
+  position: relative;
+  display: block;
+  margin: $spacing-06 calc(-1 * #{$spacing-08}) $spacing-07
+    calc(-1 * #{$spacing-06});
+  background-color: $layer-accent-01;
+  block-size: 1px;
+  inline-size: 100%;
+}
+
+// Preview component styles
+.tearsheet-create-multi-step {
+  .#{carbon-config.$prefix}--btn-set
+    .#{carbon-config.$prefix}--btn.#{carbon-config.$prefix}--btn--disabled {
+    box-shadow: -0.0625rem 0 0 0 $button-separator;
+  }
+
+  .#{carbon-config.$prefix}--side-nav--ux {
+    position: initial;
+    background-color: transparent;
+  }
+
+  .#{carbon-config.$prefix}--fieldset {
+    margin-block-end: 0;
+  }
+}
+
+.tearsheet-create-multi-step__error--toggle {
+  margin-block-start: $spacing-05;
+}
+
+.influencer__content,
+.create-tearsheet-step {
+  margin-block-start: $spacing-06;
+}
+
+.default__action-buttons {
+  display: grid;
+  grid-auto-rows: minmax(auto, auto);
+  grid-template-columns: repeat(6, 1fr);
+
+  > button {
+    inline-size: 100%;
+    /* stylelint-disable-next-line declaration-no-important */
+    max-inline-size: none !important;
+  }
+
+  :first-child {
+    grid-column: span 4;
+  }
+}
+
+.#{carbon-config.$prefix}--inline-loading {
+  position: absolute;
+  inline-size: $spacing-07;
+  inset-block-start: 0;
+  inset-inline-end: 0;
+}
+
+.showInfluencer {
+  display: flex;
+  align-items: center;
+  gap: $spacing-03;
+  @include hideAtLargeScreens();
+}

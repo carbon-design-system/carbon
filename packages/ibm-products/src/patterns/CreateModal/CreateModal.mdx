@@ -1,0 +1,69 @@
+import { Story, Controls, Source, Canvas } from '@storybook/addon-docs/blocks';
+import { CodesandboxLink } from '../../global/js/utils/story-helper';
+import * as stories from './CreateModal.stories';
+
+# Create Modal
+
+[Usage guidelines](https://pages.github.ibm.com/carbon/ibm-products/patterns/create-flows/usage/#modal)
+|
+[Carbon modal usage guidelines](https://www.carbondesignsystem.com/components/modal/usage)
+|
+[Carbon modal documentation](https://react.carbondesignsystem.com/?path=/docs/components-modal)
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Example usage](#example-usage)
+  - [Create Modal](#create-modal)
+  - [From validation](#form-validation)
+
+## Overview
+
+The `CreateModal` pattern provides a way for a user to quickly generate a new
+resource. It is triggered by a user’s action, appears on top of the main page
+content, and is persistent until dismissed. The purpose of this modal should be
+immediately apparent to the user, with a clear and obvious path to completion.
+
+To build this pattern, we recommend including the following ingredients:
+
+- [ComposedModal](https://react.carbondesignsystem.com/?path=/docs/components-composedmodal)
+- [Button](https://react.carbondesignsystem.com/?path=/docs/components-button)
+- [Form](https://react.carbondesignsystem.com/?path=/docs/components-form)
+- [FormGroup](https://react.carbondesignsystem.com/?path=/docs/components-formgroup)
+- [TextInput](https://react.carbondesignsystem.com/?path=/docs/components-textinput)
+- [TextArea](https://react.carbondesignsystem.com/?path=/docs/components-textarea)
+- [RadioButton](https://react.carbondesignsystem.com/?path=/docs/components-radiobutton)
+- [DropDown](https://react.carbondesignsystem.com/?path=/docs/components-dropdown)
+- [Loading](https://react.carbondesignsystem.com/?path=/docs/components-loading)
+
+### Example usage
+
+### Create Modal
+
+> 💡 Check our
+> [Stackblitz](https://stackblitz.com/github/carbon-design-system/ibm-products/tree/main/packages/ibm-products/src/patterns/CreateModal/example)
+> example implementation.
+
+[![Edit react-patterns](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/carbon-design-system/ibm-products/tree/main/packages/ibm-products/src/patterns/CreateModal/example)
+{/* TODO: One example per designed use case. */}
+
+<Canvas withSource="none">
+  <Story of={stories.CreateModal} />
+</Canvas>
+
+### Form validation
+
+All forms, including that within the `CreateModal` should follow
+`@carbon/ibm-products` guidelines for form validation.
+
+This includes the following:
+
+- The `Submit` button in the modal should be disabled, until all required inputs
+  are filled in and valid
+- All required inputs should only throw an invalid error after the element loses
+  focus
+- All optional form fields should have an `(optional)` text at the end of the
+  input `labelText`. Optional should always be in parentheses
+
+You can find more information on how to validate your form fields in
+[Carbon's Form usage page](https://carbondesignsystem.com/components/form/usage/).

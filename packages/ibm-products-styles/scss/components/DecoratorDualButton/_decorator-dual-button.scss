@@ -1,0 +1,112 @@
+/* stylelint-disable carbon/theme-use */
+/* stylelint-disable function-no-unknown */
+
+//
+// Copyright IBM Corp. 2024, 2024
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use '../../global/styles/project-settings' as c4p-settings;
+@use '../../global/styles/mixins';
+
+@use '../DecoratorBase/decorator-base-mixins' as *;
+@use '../DecoratorBase/decorator-base';
+
+// DecoratorDualButton uses the following Carbon for IBM Products components:
+@use '@carbon/layout/scss/convert' as *;
+@use '@carbon/styles/scss/colors' as *;
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/type';
+
+// The block part of our conventional BEM class names (blockClass__E--M).
+$block-class: #{c4p-settings.$pkg-prefix}--decorator;
+$buttons: '#{$block-class}--dual-button:not(.#{$block-class}-disabled)';
+$buttons-disabled: '#{$block-class}--dual-button.#{$block-class}-disabled';
+$icon: #{$block-class}-icon;
+$label: #{$block-class}__label;
+$value: #{$block-class}__value;
+
+.#{$buttons} .#{$label} {
+  background-color: $layer-02;
+  cursor: pointer;
+}
+.#{$buttons}:not(:hover) .#{$value} {
+  @include value-divider();
+}
+.#{$buttons} .#{$value} {
+  background-color: $layer-02;
+  cursor: pointer;
+}
+.#{$buttons} .#{$label}:hover {
+  @include label-divider($color: $border-strong);
+
+  border-color: $border-strong;
+  background-color: $layer-hover-02;
+}
+.#{$buttons} .#{$value}:hover {
+  @include value-divider($color: $border-strong);
+
+  border-color: $border-strong;
+  background-color: $layer-hover-02;
+}
+.#{$buttons} .#{$label}:focus {
+  @include label-divider($color: $focus);
+
+  border-color: $focus;
+  // Disable browser's default "focus" style.
+  outline: none;
+}
+.#{$buttons} .#{$value}:focus {
+  @include value-divider($color: $focus);
+
+  border-color: $focus;
+  // Disable browser's default "focus" style.
+  outline: none;
+}
+.#{$buttons} .#{$label}:active {
+  background-color: $layer-hover-02;
+}
+.#{$buttons} .#{$value}:active {
+  background-color: $layer-hover-02;
+}
+.#{$buttons-disabled} .#{$label} {
+  background-color: $layer-02;
+  color: $icon-on-color-disabled;
+}
+.#{$buttons-disabled} .#{$value} {
+  @include value-divider();
+
+  background-color: $layer-02;
+  color: $icon-on-color-disabled;
+}
+
+// ICON ENHANCED ACCESSIBILITY
+// Add a border to the icon on hover & active to increase contrast.
+.#{$block-class}--light {
+  &.#{$buttons} .#{$label}:hover .#{$icon}__magnitude-low,
+  &.#{$buttons} .#{$label}:active .#{$icon}__magnitude-low {
+    stroke: $yellow-60;
+    stroke-width: 1px;
+  }
+  // The "diamond-fill/medium" icon has an inner and outer path.
+  // Fill the outer path to simulate a 1px border.
+  &.#{$buttons} .#{$label}:hover .#{$icon}__magnitude-medium path:first-child,
+  &.#{$buttons} .#{$label}:active .#{$icon}__magnitude-medium path:first-child {
+    fill: $orange-60;
+  }
+}
+.#{$block-class}--dark {
+  // The "caution/high" icon has an inner and outer path.
+  // Fill the outer path to simulate a 1px border.
+  &.#{$buttons} .#{$label}:hover .#{$icon}__magnitude-high path:first-child,
+  &.#{$buttons} .#{$label}:active .#{$icon}__magnitude-high path:first-child {
+    fill: $red-40;
+  }
+  &.#{$buttons} .#{$label}:hover .#{$icon}__magnitude-critical,
+  &.#{$buttons} .#{$label}:active .#{$icon}__magnitude-critical {
+    stroke: $red-40;
+    stroke-width: to-rem(0.5px);
+  }
+}

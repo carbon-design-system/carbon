@@ -1,0 +1,65 @@
+//
+// Copyright IBM Corp. 2026
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/type';
+
+$next-story-prefix: 'add-select-next-stories';
+
+// Storybook-specific styles for AddSelect demos and examples
+// These styles are NOT part of the production component styles
+
+// Viewport container for next stories
+.#{$next-story-prefix}__viewport {
+  inline-size: 50%;
+}
+
+// Story container styling
+.#{$next-story-prefix}-container {
+  display: flex;
+  flex-direction: column;
+  padding: $spacing-11 $spacing-10;
+  gap: $spacing-07;
+  inline-size: 600px;
+  max-inline-size: 600px;
+}
+
+.#{$next-story-prefix}-container--single {
+  inline-size: 26rem;
+}
+
+// Column story container
+.#{$next-story-prefix}-column-container {
+  padding: $spacing-05;
+  border: 1px dashed var(--cds-border-subtle);
+  background: var(--cds-layer);
+  inline-size: 360px;
+}
+
+// Column story container
+.#{$next-story-prefix}-summary-container {
+  overflow: auto;
+  padding: 0 $spacing-05;
+  border: 1px dashed var(--cds-border-subtle);
+  background: var(--cds-layer);
+  block-size: 500px;
+  inline-size: 16rem;
+}
+
+// Variant container for showing single and multi side by side
+.#{$next-story-prefix}-variant-container {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-03;
+
+  h4 {
+    @include type.type-style('label-02');
+
+    margin: 0;
+    color: var(--cds-text-secondary);
+  }
+}

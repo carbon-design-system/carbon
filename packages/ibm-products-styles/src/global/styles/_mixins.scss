@@ -1,0 +1,22 @@
+//
+// Copyright IBM Corp. 2020, 2020
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@mixin block-wrap($block-class) {
+  .#{$block-class} {
+    @content;
+  }
+}
+
+@mixin measuring-container() {
+  position: absolute;
+  overflow: hidden;
+  inset-block-start: -100vh; // off screen
+  inset-inline-start: -100vw; // off screen
+  max-inline-size: 100vw; // NOTE: resize only detected if < 100vw
+  pointer-events: none;
+  visibility: hidden;
+}

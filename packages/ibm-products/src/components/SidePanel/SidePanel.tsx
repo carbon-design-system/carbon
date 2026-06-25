@@ -1,0 +1,1300 @@
+/**
+ * Copyright IBM Corp. 2020, 2025
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+import { ArrowLeft, Close } from '@carbon/react/icons';
+// Carbon and package components we use.
+import {
+  Button,
+  ButtonProps,
+  Heading,
+  IconButton,
+  Layer,
+  Section,
+} from '@carbon/react';
+import { useFeatureFlag } from '../FeatureFlags';
+// Import portions of React that are needed.
+import React, {
+  ForwardedRef,
+  ReactNode,
+  RefObject,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
+import {
+  useFocus,
+  usePreviousValue,
+  usePresence,
+  usePrefersReducedMotion,
+} from '../../global/js/hooks';
+
+import { ActionSet } from '../ActionSet';
+import { Resizer } from '@carbon-labs/react-resizer';
+
+// Other standard imports.
+import PropTypes from 'prop-types';
+import { SIDE_PANEL_SIZES } from './constants';
+import { allPropTypes } from '../../global/js/utils/props-helper';
+import cx from 'classnames';
+import { getDevtoolsProps } from '../../global/js/utils/devtools';
+import { moderate02 } from '@carbon/motion';
+import pconsole from '../../global/js/utils/pconsole';
+import { pkg } from '../../settings';
+import { getSpecificElement } from '../../global/js/hooks/useFocus';
+
+const blockClass = `${pkg.prefix}--side-panel`;
+const componentName = 'SidePanel';
+
+type SidePanelBaseProps = {
+  /**
+   * Sets the action toolbar buttons
+   */
+  actionToolbarButtons?: ButtonProps<React.ElementType>[];
+
+  /**
+   * The primary actions to be shown in the side panel. Each action is
+   * specified as an object that will render expressive Buttons. Any Button
+   * props can be passed in and any other fields in the object will be
+   * passed through to the button element as HTML attributes.
+   *
+   * See https://react.carbondesignsystem.com/?path=/docs/components-button--default#component-api
+   */
+  actions?: ButtonProps<React.ElementType>[];
+
+  /**
+   * Determines if the title will animate on scroll
+   */
+  animateTitle?: boolean;
+
+  /**
+   * Sets the body content of the side panel
+   */
+  children: ReactNode;
+
+  /**
+   * Sets an optional className to be added to the side panel outermost element
+   */
+  className?: string;
+
+  /**
+   * Sets the close button icon description
+   */
+  closeIconDescription?: string;
+
+  /**
+   * Sets the close button tooltip alignment
+   */
+  closeIconTooltipAlignment?: string;
+
+  /**
+   * Determines whether the side panel should render the condensed version (affects action buttons primarily)
+   */
+  condensedActions?: boolean;
+
+  /**
+   * Sets the current step of the side panel
+   */
+  currentStep?: number;
+
+  /**
+   * Show/hide the "X" close button.
+   */
+  hideCloseButton?: boolean;
+
+  /**
+   * Unique identifier
+   */
+  id?: string;
+
+  /**
+   * Determines whether the side panel should render with an overlay
+   */
+  includeOverlay?: boolean;
+
+  /**
+   * Sets the label text which will display above the title text
+   */
+  labelText?: string;
+
+  /**
+   * Provide a ref to return focus to once the side panel is closed.
+   */
+  launcherButtonRef?: RefObject<any>;
+
+  /**
+   * Sets the icon description for the navigation back icon button
+   */
+  navigationBackIconDescription?: string;
+
+  /**
+   * Changes the current side panel page to the previous page
+   */
+  onNavigationBack?(): void;
+
+  /**
+   * Specify a handler for closing the side panel.
+   * This handler closes the modal, e.g. changing `open` prop.
+   */
+  onRequestClose?(): void;
+
+  /**
+   * Optional function called when the side panel exit animation is complete.
+   * This handler can be used for any state cleanup needed before the panel is removed from the DOM.
+   */
+  onUnmount?(): void;
+
+  /**
+   * Determines whether the side panel should render or not
+   */
+  open: boolean;
+
+  /**
+   * Determines if the side panel is on the right or left
+   */
+  placement?: 'left' | 'right';
+
+  /**
+   * Prevent closing on click outside of the panel
+   */
+  preventCloseOnClickOutside?: boolean;
+
+  /**
+   * This is the selector to the element that contains all of the page content that will shrink if the panel is a slide in.
+   * This prop is required when using the `slideIn` variant of the side panel.
+   */
+  selectorPageContent?: string;
+
+  /**
+   * Specify a CSS selector that matches the DOM element that should
+   * be focused when the side panel opens
+   */
+  selectorPrimaryFocus?: string;
+
+  /**
+   * Sets the size of the side panel
+   */
+  size: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl';
+
+  /**
+   * Determines if this panel slides in
+   */
+  slideIn?: boolean;
+
+  /**
+   * @deprecated please use the `decorator` instead
+   *  **Experimental:** Provide a `Slug` component to be rendered inside the `SidePanel` component
+   */
+  slug?: ReactNode;
+
+  /**
+   * @deprecated please use the `decorator` instead
+   * Optional prop that is intended for any scenario where something is being generated by AI to reinforce AI transparency, accountability, and explainability at the UI level.
+   */
+  aiLabel?: ReactNode;
+
+  /**
+   * Provide a `decorator` component to be rendered inside the `SidePanel` component
+   */
+  decorator?: ReactNode;
+
+  /**
+   * Sets the subtitle text
+   */
+  subtitle?: ReactNode;
+
+  /**
+   * Sets the title text
+   */
+  title?: string;
+};
+
+type SidePanelSlideInProps =
+  | {
+      /**
+       * Determines if this panel slides in
+       */
+      slideIn?: false;
+      /**
+       * This is the selector to the element that contains all of the page content that will shrink if the panel is a slide in.
+       * This prop is required when using the `slideIn` variant of the side panel.
+       */
+      selectorPageContent?: string;
+    }
+  | {
+      /**
+       * Determines if this panel slides in
+       */
+      slideIn: true;
+      /**
+       * This is the selector to the element that contains all of the page content that will shrink if the panel is a slide in.
+       * This prop is required when using the `slideIn` variant of the side panel. Required for slideIn panels.
+       */
+      selectorPageContent: string;
+    };
+
+export type SidePanelProps = SidePanelBaseProps & SidePanelSlideInProps;
+
+// Default values for props
+const defaults = {
+  animateTitle: true,
+  closeIconDescription: 'Close',
+  closeIconTooltipAlignment: 'left',
+  currentStep: 0,
+  hideCloseButton: false,
+  navigationBackIconDescription: 'Back',
+  placement: 'right',
+  size: 'md',
+};
+
+/**
+ * Side panels keep users in-context of a page while performing tasks like navigating, editing, viewing details, or configuring something new.
+ */
+export const SidePanel = React.forwardRef<HTMLDivElement, SidePanelProps>(
+  (props, ref) => {
+    const {
+      actionToolbarButtons,
+      actions,
+      aiLabel,
+      animateTitle = defaults.animateTitle,
+      children,
+      className,
+      closeIconDescription = defaults.closeIconDescription,
+      closeIconTooltipAlignment = defaults.closeIconTooltipAlignment,
+      condensedActions,
+      currentStep = defaults.currentStep,
+      decorator,
+      hideCloseButton = defaults.hideCloseButton,
+      id = blockClass,
+      includeOverlay,
+      labelText,
+      navigationBackIconDescription = defaults.navigationBackIconDescription,
+      onNavigationBack,
+      onRequestClose,
+      onUnmount,
+      open,
+      placement = defaults.placement as SidePanelProps['placement'],
+      preventCloseOnClickOutside,
+      selectorPageContent,
+      selectorPrimaryFocus,
+      size = defaults.size as SidePanelProps['size'],
+      slideIn,
+      slug,
+      subtitle,
+      title,
+      launcherButtonRef,
+      ...rest
+    } = props;
+    const [animationComplete, setAnimationComplete] = useState(false);
+    const localRef = useRef<HTMLDivElement>(null);
+    const sidePanelRef = (ref || localRef) as RefObject<HTMLDivElement>;
+    const overlayRef = useRef<HTMLDivElement>(null);
+    const innerContentRef = useRef<HTMLDivElement>(null);
+    const closeRef = useRef<HTMLButtonElement>(null);
+    const animatedScrollRef = useRef<HTMLDivElement>(null);
+    const headerRef = useRef<HTMLDivElement>(null);
+    const titleRef = useRef<HTMLDivElement>(null);
+    const labelTextRef = useRef<HTMLParagraphElement>(null);
+    const subtitleRef = useRef<HTMLParagraphElement>(null);
+    const previousState = usePreviousValue({ size, open, currentStep });
+    const [scrollAnimationDistance, setScrollAnimationDistance] = useState(-1);
+    const [doAnimateTitle, setDoAnimateTitle] = useState(true);
+    const { firstElement, keyDownListener } = useFocus(sidePanelRef);
+    const panelRefValue = sidePanelRef.current;
+    const previousOpen = usePreviousValue(open);
+    const enableResizer = useFeatureFlag('enableSidepanelResizer');
+    const sidePanelWidth = useRef<number | undefined>(undefined);
+    const accumulatedDeltaRef = useRef(0);
+    const shouldReduceMotion = usePrefersReducedMotion();
+    const exitAnimationName = shouldReduceMotion
+      ? 'side-panel-exit-reduced'
+      : placement === 'right'
+        ? 'side-panel-exit-right'
+        : 'side-panel-exit-left';
+    const { shouldRender } = usePresence(open, sidePanelRef, exitAnimationName);
+
+    // Title animation on scroll related state
+    const [labelTextHeight, setLabelTextHeight] = useState<any>(0);
+
+    const handleEscapeKey = useCallback(
+      (event) => {
+        if (event.key === 'Escape' && open) {
+          onRequestClose?.();
+        }
+      },
+      [onRequestClose, open]
+    );
+
+    useEffect(() => {
+      if (open && !slideIn) {
+        window.addEventListener('keydown', handleEscapeKey);
+        return () => {
+          window.removeEventListener('keydown', handleEscapeKey);
+        };
+      }
+    }, [handleEscapeKey, open, slideIn]);
+
+    useEffect(() => {
+      if (!enableResizer) {
+        return;
+      }
+      const parentEl = sidePanelRef.current?.parentElement;
+      if (parentEl) {
+        parentEl.style.removeProperty('--c4p-side-panel-modified-size');
+      }
+    }, [size, enableResizer, sidePanelRef]);
+
+    useEffect(() => {
+      if (!enableResizer) {
+        return;
+      }
+      sidePanelWidth.current = sidePanelRef?.current?.clientWidth;
+    }, [sidePanelRef, sidePanelRef?.current?.clientWidth, enableResizer]);
+
+    useEffect(() => {
+      if (open && !titleRef?.current) {
+        setDoAnimateTitle(false);
+      } else {
+        setDoAnimateTitle(animateTitle);
+      }
+    }, [animateTitle, open]);
+
+    const onResize = useCallback(
+      (event, delta) => {
+        event.preventDefault();
+        event.stopPropagation();
+
+        const setWidth = (width: number | string) => {
+          const parentEl = sidePanelRef.current?.parentElement;
+          if (parentEl) {
+            parentEl.style.setProperty(
+              '--c4p-side-panel-modified-size',
+              typeof width === 'number' ? `${width}px` : width
+            );
+          }
+        };
+
+        if (event.type === 'keydown') {
+          const key = (event as KeyboardEvent).key;
+          switch (key) {
+            case 'Home':
+              setWidth('75vw');
+              break;
+            case 'End':
+              setWidth(SIDE_PANEL_SIZES['xs']);
+              break;
+            case 'ArrowLeft':
+            case 'ArrowRight':
+              accumulatedDeltaRef.current += delta;
+              setWidth(
+                (sidePanelWidth.current ?? 0) -
+                  (placement === 'right'
+                    ? accumulatedDeltaRef.current
+                    : -accumulatedDeltaRef.current)
+              );
+              break;
+          }
+          return;
+        }
+
+        if (sidePanelRef.current?.style) {
+          sidePanelRef.current.style.transition = 'none';
+        }
+        setWidth(
+          (sidePanelWidth.current ?? 0) -
+            (placement === 'right' ? delta : -delta)
+        );
+      },
+      [placement, sidePanelRef, sidePanelWidth]
+    );
+
+    const getPanelWidthPercent = useCallback(
+      (customWidth?: string) => {
+        if (customWidth) {
+          const remValue = parseFloat(customWidth);
+          const remInPixels =
+            remValue *
+            parseFloat(getComputedStyle(document.documentElement).fontSize);
+          return Math.round((remInPixels / window.innerWidth) * 100);
+        }
+        return Math.round(
+          ((sidePanelRef.current?.clientWidth || 0) / window.innerWidth) * 100
+        );
+      },
+      [sidePanelRef]
+    );
+
+    const onResizeEnd = useCallback(
+      (_, ref) => {
+        accumulatedDeltaRef.current = 0;
+        sidePanelRef.current?.style?.removeProperty('transition');
+        // custom a11y announcements
+        ref.current.setAttribute(
+          'aria-label',
+          `side panel is covering ${getPanelWidthPercent()}% of screen`
+        );
+        ref.current.setAttribute('aria-valuenow', getPanelWidthPercent());
+
+        sidePanelWidth.current = sidePanelRef.current?.clientWidth;
+      },
+      [sidePanelRef, getPanelWidthPercent]
+    );
+
+    const onDoubleClick = useCallback(() => {
+      sidePanelWidth.current = Math.min(
+        parseFloat(SIDE_PANEL_SIZES[size]) * 16,
+        window.innerWidth * 0.75
+      );
+
+      const parentEl = sidePanelRef.current?.parentElement;
+      if (parentEl) {
+        parentEl.style.removeProperty('--c4p-side-panel-modified-size');
+      }
+    }, [sidePanelRef, size]);
+
+    const titleItemsStyles = useCallback(
+      (progress) => {
+        if (subtitleRef?.current) {
+          const subtitleEl = subtitleRef?.current;
+          const height = subtitleEl?.clientHeight;
+          const calculatedMargin = height * progress;
+
+          subtitleEl?.style?.setProperty(
+            'margin-top',
+            `${-calculatedMargin}px`
+          );
+        }
+
+        if (labelTextRef?.current) {
+          const calculatedMargin = labelTextHeight * progress;
+
+          labelTextRef?.current?.style?.setProperty(
+            'margin-top',
+            `${-calculatedMargin}px`
+          );
+        }
+      },
+      [labelTextHeight]
+    );
+
+    useEffect(() => {
+      if (open && animateTitle && labelTextRef?.current) {
+        setLabelTextHeight(Number(labelTextRef?.current?.clientHeight || null));
+      }
+    }, [animateTitle, labelTextRef, open]);
+
+    const handleScroll = useCallback(() => {
+      if (doAnimateTitle && innerContentRef?.current) {
+        const scrollTop = innerContentRef?.current?.scrollTop;
+
+        const animationProgress =
+          Math.min(Number(scrollTop), scrollAnimationDistance) /
+          scrollAnimationDistance;
+
+        panelRefValue?.style.setProperty(
+          `--${blockClass}--scroll-animation-progress`,
+          animationProgress.toString()
+        );
+
+        titleItemsStyles(animationProgress);
+      }
+    }, [
+      doAnimateTitle,
+      panelRefValue?.style,
+      scrollAnimationDistance,
+      titleItemsStyles,
+    ]);
+
+    // scroll panel to top going between steps
+    useEffect(() => {
+      if (sidePanelRef && panelRefValue) {
+        const scrollableSection =
+          animatedScrollRef.current ?? innerContentRef.current;
+
+        if (
+          previousState &&
+          previousState['currentStep'] !== currentStep &&
+          scrollableSection
+        ) {
+          scrollableSection.scrollTop = 0;
+        }
+
+        // The size of the panel has changed while it is still opened
+        // so we need to scroll it to the top and reset the header
+        // height css custom property
+        if (
+          previousState &&
+          previousState['size'] !== size &&
+          scrollableSection
+        ) {
+          scrollableSection.scrollTop = 0;
+        }
+      }
+    }, [currentStep, sidePanelRef, size, previousState, id, panelRefValue]);
+
+    // Add console warning if labelText is provided without a title.
+    // This combination is not allowed.
+    useEffect(() => {
+      if (!title && labelText) {
+        console.warn(
+          `${componentName}: The prop \`labelText\` was provided without a \`title\`. It is required to have a \`title\` when using the \`labelText\` prop.`
+        );
+      }
+    }, [labelText, title]);
+
+    useEffect(() => {
+      if (previousOpen && !open && launcherButtonRef) {
+        setTimeout(() => {
+          launcherButtonRef?.current?.focus();
+        }, 0);
+      }
+    }, [launcherButtonRef, open, previousOpen]);
+
+    const checkSetDoAnimateTitle = () => {
+      let canDoAnimateTitle = false;
+      if (
+        panelRefValue &&
+        open &&
+        animateTitle &&
+        animationComplete &&
+        titleRef?.current &&
+        title &&
+        title.length &&
+        !shouldReduceMotion
+      ) {
+        const titleEl = titleRef.current;
+        const labelHeight = labelTextRef?.current?.offsetHeight ?? 0;
+        const subtitleHeight = subtitleRef?.current?.offsetHeight ?? 0;
+
+        // Adjusts space at bottom of titles by changing where scrolling finishes
+        // Styles use border to save use of get computed style
+        const titleVerticalBorder = actionToolbarButtons
+          ? titleEl.offsetHeight - titleEl.clientHeight
+          : 0;
+
+        const scrollAnimationDistance =
+          labelHeight + subtitleHeight + titleVerticalBorder;
+        setScrollAnimationDistance(scrollAnimationDistance);
+
+        // used to calculate the header moves
+        panelRefValue?.style.setProperty(
+          `--${blockClass}--scroll-animation-distance`,
+          scrollAnimationDistance.toString()
+        );
+
+        const scrollEl = innerContentRef.current;
+
+        if (scrollEl) {
+          const innerComputed = window?.getComputedStyle(
+            innerContentRef.current as HTMLDivElement
+          );
+          const innerPaddingHeight = innerComputed
+            ? parseFloat(innerComputed?.paddingTop) +
+              parseFloat(innerComputed?.paddingBottom)
+            : 0;
+
+          canDoAnimateTitle =
+            (!!labelText || !!actionToolbarButtons || !!subtitle) &&
+            scrollEl.scrollHeight - scrollEl.clientHeight >=
+              scrollAnimationDistance + innerPaddingHeight;
+        }
+      }
+
+      if (doAnimateTitle !== canDoAnimateTitle) {
+        // will need updating on resize
+        setDoAnimateTitle(canDoAnimateTitle);
+      }
+    };
+
+    useEffect(() => {
+      if (!doAnimateTitle && sidePanelRef.current) {
+        panelRefValue?.style.setProperty(
+          `--${blockClass}--scroll-animation-progress`,
+          '0'
+        );
+      }
+    }, [
+      doAnimateTitle,
+      handleScroll,
+      sidePanelRef,
+      innerContentRef,
+      open,
+      panelRefValue?.style,
+    ]);
+
+    // Calculate scroll distances
+    useEffect(() => {
+      if (
+        panelRefValue &&
+        open &&
+        animateTitle &&
+        animationComplete &&
+        titleRef?.current &&
+        title &&
+        title.length &&
+        !shouldReduceMotion
+      ) {
+        checkSetDoAnimateTitle();
+      }
+
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [
+      open,
+      doAnimateTitle /* use do instead of animateTitle directly */,
+      animationComplete,
+      handleScroll,
+      title,
+      size,
+      shouldReduceMotion,
+      id,
+    ]);
+
+    // click outside functionality if `includeOverlay` prop is set
+    useEffect(() => {
+      const handleOutsideClick = (event) => {
+        if (
+          panelRefValue &&
+          overlayRef.current &&
+          overlayRef.current.contains(event.target) &&
+          onRequestClose
+        ) {
+          onRequestClose();
+        }
+      };
+      const bodyElement = document.body;
+      if (includeOverlay && open) {
+        bodyElement.style.overflow = 'hidden';
+      } else if (includeOverlay && !open) {
+        bodyElement.style.overflow = '';
+      }
+      if (includeOverlay && !preventCloseOnClickOutside) {
+        document.addEventListener('click', handleOutsideClick);
+      }
+      return () => {
+        const bodyElement = document.body;
+        bodyElement.style.overflow = '';
+        document.removeEventListener('click', handleOutsideClick);
+      };
+    }, [
+      includeOverlay,
+      onRequestClose,
+      open,
+      preventCloseOnClickOutside,
+      onUnmount,
+      sidePanelRef,
+      panelRefValue,
+    ]);
+
+    // initializes the side panel to close
+    const onAnimationEnd = () => {
+      if (!open) {
+        onUnmount?.();
+      }
+      setAnimationComplete(!animationComplete);
+    };
+
+    // Set the internal state `animationComplete` to true if
+    // prefers reduced motion is true
+    useEffect(() => {
+      if (shouldReduceMotion) {
+        setAnimationComplete(true);
+      }
+    }, [shouldReduceMotion]);
+
+    // initializes the side panel to open
+    const onAnimationStart = () => {
+      setAnimationComplete(false);
+    };
+
+    // used to reset margins of the slide in panel when closed/closing
+    useEffect(() => {
+      if (!open && slideIn) {
+        const pageContentElement = selectorPageContent
+          ? (document.querySelector(selectorPageContent) as HTMLElement)
+          : null;
+        if (placement && placement === 'right' && pageContentElement) {
+          pageContentElement.style.marginInlineEnd = '0';
+        } else if (pageContentElement) {
+          pageContentElement.style.marginInlineStart = '0';
+        }
+      }
+    }, [open, placement, selectorPageContent, slideIn]);
+
+    useEffect(() => {
+      if (
+        !open &&
+        previousState &&
+        previousState['open'] &&
+        shouldReduceMotion
+      ) {
+        onUnmount?.();
+      }
+    }, [open, onUnmount, shouldReduceMotion, previousState]);
+
+    // used to set margins of content for slide in panel version
+    useEffect(() => {
+      if (open && slideIn) {
+        const pageContentElement = selectorPageContent
+          ? (document.querySelector(selectorPageContent) as HTMLElement)
+          : null;
+        if (pageContentElement) {
+          pageContentElement.style.inlineSize = 'auto';
+        } else {
+          pconsole.warn(
+            'SidePanel prop `selectorPageContent` was not provided a selector that matches any element on your page. If an element is not found, the panel will render as a slide over.'
+          );
+        }
+        if (placement && placement === 'right' && pageContentElement) {
+          pageContentElement.style.marginInlineEnd = '0';
+          pageContentElement.style.transition = !shouldReduceMotion
+            ? `margin-inline-end ${moderate02}`
+            : '';
+          pageContentElement.style.marginInlineEnd = SIDE_PANEL_SIZES[size];
+        } else if (pageContentElement) {
+          pageContentElement.style.marginInlineStart = '0';
+          pageContentElement.style.transition = !shouldReduceMotion
+            ? `margin-inline-start ${moderate02}`
+            : '';
+          pageContentElement.style.marginInlineStart = SIDE_PANEL_SIZES[size];
+        }
+      }
+    }, [
+      slideIn,
+      selectorPageContent,
+      placement,
+      size,
+      shouldReduceMotion,
+      open,
+    ]);
+
+    useEffect(() => {
+      if (open && animationComplete) {
+        if (
+          selectorPrimaryFocus &&
+          getSpecificElement(sidePanelRef?.current, selectorPrimaryFocus)
+        ) {
+          const primeFocusEl = getSpecificElement(
+            sidePanelRef?.current,
+            selectorPrimaryFocus
+          );
+          if (
+            primeFocusEl &&
+            window?.getComputedStyle(primeFocusEl)?.display !== 'none'
+          ) {
+            setTimeout(() => primeFocusEl?.focus(), 0);
+          }
+        } else if (!slideIn) {
+          setTimeout(() => firstElement?.focus(), 0);
+        }
+      }
+    }, [
+      animationComplete,
+      firstElement,
+      open,
+      selectorPrimaryFocus,
+      sidePanelRef,
+      slideIn,
+    ]);
+
+    const primaryActionContainerClassNames = cx([
+      `${blockClass}__actions-container`,
+      {
+        [`${blockClass}__actions-container--condensed`]: condensedActions,
+      },
+    ]);
+
+    const mainPanelClassNames = cx([
+      blockClass,
+      className,
+      `${blockClass}`,
+      `${blockClass}--${size}`,
+      {
+        [`${blockClass}--right-placement`]: placement === 'right',
+        [`${blockClass}--left-placement`]: placement === 'left',
+        [`${blockClass}--slide-in`]: slideIn,
+        [`${blockClass}--enable-sidepanel-resizer`]:
+          enableResizer && window.innerWidth > 768,
+        [`${blockClass}--has-decorator`]: decorator,
+        [`${blockClass}--has-slug`]: slug,
+        [`${blockClass}--has-ai-label`]: aiLabel,
+        [`${blockClass}--condensed-actions`]: condensedActions,
+        [`${blockClass}--has-overlay`]: includeOverlay,
+        [`${blockClass}--open`]: open,
+        [`${blockClass}--closing`]: !open,
+        [`${blockClass}--reduced-motion`]: shouldReduceMotion,
+      },
+    ]);
+
+    const renderTitle = () => (
+      <div
+        className={cx(`${blockClass}__title`, {
+          [`${blockClass}__title--no-label`]: !labelTextRef.current,
+        })}
+        ref={titleRef}
+      >
+        <Heading className={`${blockClass}__title-text`} aria-hidden={false}>
+          {title}
+        </Heading>
+
+        {doAnimateTitle && !shouldReduceMotion && (
+          <Heading
+            className={`${blockClass}__collapsed-title-text`}
+            aria-hidden={true}
+          >
+            {title}
+          </Heading>
+        )}
+      </div>
+    );
+
+    const renderHeader = () => {
+      const closeSize =
+        actions && actions.length && /l/.test(size) ? 'md' : 'sm';
+      let normalizedDecorator;
+      /**
+       * slug is deprecated
+       * can remove this condition in future release
+       */
+      if (slug && slug['type']?.displayName === 'AILabel') {
+        normalizedDecorator = React.cloneElement(
+          slug as React.ReactElement<any>,
+          {
+            // slug size is always xs
+            size: 'xs',
+          }
+        );
+      }
+
+      if (aiLabel && aiLabel['type']?.displayName === 'AILabel') {
+        normalizedDecorator = React.cloneElement(
+          aiLabel as React.ReactElement<any>,
+          {
+            // aiLabel size is always xs
+            size: 'xs',
+          }
+        );
+      }
+
+      if (decorator?.['type']?.displayName === 'AILabel') {
+        normalizedDecorator = React.cloneElement(
+          decorator as React.ReactElement<any>,
+          {
+            // decorator size is always xs
+            size: 'xs',
+          }
+        );
+      }
+
+      return (
+        <div
+          className={cx(`${blockClass}__header`, {
+            [`${blockClass}__header--on-detail-step`]: currentStep > 0,
+            [`${blockClass}__header--no-title-animation`]: !animateTitle,
+            [`${blockClass}__header--reduced-motion`]: shouldReduceMotion,
+            [`${blockClass}__header--has-title`]: title,
+          })}
+          ref={headerRef}
+        >
+          {/* back button */}
+          {currentStep > 0 && (
+            <IconButton
+              kind="ghost"
+              size={closeSize}
+              align="bottom"
+              label={navigationBackIconDescription}
+              className={`${blockClass}__navigation-back-button`}
+              onClick={onNavigationBack}
+            >
+              <ArrowLeft />
+            </IconButton>
+          )}
+          {/* label */}
+          {title && title.length && labelText && labelText.length && (
+            <p className={`${blockClass}__label-text`} ref={labelTextRef}>
+              {labelText}
+            </p>
+          )}
+          {/* title */}
+          {title && title.length && renderTitle()}
+          {/* decorator and close */}
+          {(normalizedDecorator || !hideCloseButton) && (
+            <div className={`${blockClass}__decorator-and-close`}>
+              {normalizedDecorator}
+              {!hideCloseButton && (
+                <IconButton
+                  className={`${blockClass}__close-button`}
+                  label={closeIconDescription}
+                  onClick={onRequestClose}
+                  onKeyDown={slideIn ? undefined : handleEscapeKey}
+                  ref={closeRef}
+                  align={closeIconTooltipAlignment}
+                >
+                  <Close
+                    size={16}
+                    aria-hidden="true"
+                    tabIndex="-1"
+                    className={`${blockClass}--btn__icon`}
+                  />
+                </IconButton>
+              )}
+            </div>
+          )}
+          {/* subtitle */}
+          {subtitle && (
+            <p
+              className={cx(`${blockClass}__subtitle-text`, {
+                [`${blockClass}__subtitle-text-no-animation-no-action-toolbar`]:
+                  !doAnimateTitle &&
+                  (!actionToolbarButtons || !actionToolbarButtons.length),
+              })}
+              ref={subtitleRef}
+            >
+              {subtitle}
+            </p>
+          )}
+          {/* action toolbar */}
+          {actionToolbarButtons && actionToolbarButtons.length && (
+            <div className={`${blockClass}__action-toolbar`}>
+              {actionToolbarButtons.map(
+                ({
+                  label,
+                  kind,
+                  hasIconOnly = false,
+                  icon,
+                  renderIcon,
+                  tooltipPosition,
+                  tooltipAlignment,
+                  leading,
+                  disabled,
+                  className,
+                  onClick,
+                  ...rest
+                }) => (
+                  <Button
+                    {...rest}
+                    key={label}
+                    kind={kind || 'ghost'}
+                    size="sm"
+                    renderIcon={renderIcon || icon}
+                    iconDescription={label}
+                    {...(hasIconOnly && {
+                      tooltipPosition: tooltipPosition || 'bottom',
+                      tooltipAlignment: tooltipAlignment || 'start',
+                    })}
+                    hasIconOnly={hasIconOnly}
+                    disabled={disabled}
+                    className={cx([
+                      `${blockClass}__action-toolbar-button`,
+                      className,
+                      {
+                        [`${blockClass}__action-toolbar-leading-button`]:
+                          leading,
+                      },
+                    ])}
+                    onClick={onClick}
+                  >
+                    {leading && label}
+                  </Button>
+                )
+              )}
+            </div>
+          )}
+        </div>
+      );
+    };
+
+    const renderMain = () => {
+      return (
+        <div
+          ref={innerContentRef}
+          onScroll={handleScroll}
+          className={cx(
+            `${blockClass}__inner-content`,
+            `${blockClass}--scrolls`,
+            `${
+              !doAnimateTitle && !animateTitle
+                ? `${blockClass}__inner-content--no-animated-title`
+                : ''
+            }`
+          )}
+        >
+          <Layer>{children}</Layer>
+        </div>
+      );
+    };
+
+    const handleKeyDown = (event) => {
+      if (!slideIn) {
+        handleEscapeKey(event);
+        keyDownListener(event);
+      }
+    };
+
+    return shouldRender ? (
+      <>
+        <Section
+          {...getDevtoolsProps(componentName)}
+          {...rest}
+          id={id}
+          className={mainPanelClassNames}
+          ref={sidePanelRef}
+          as="aside"
+          aria-label={title || rest['aria-label']}
+          onAnimationEnd={onAnimationEnd}
+          onAnimationStart={onAnimationStart}
+          onKeyDown={handleKeyDown}
+        >
+          {!slideIn && enableResizer && window.innerWidth > 768 && (
+            <Resizer
+              className={`${blockClass}__resizer`}
+              orientation="vertical"
+              aria-valuemin={getPanelWidthPercent(SIDE_PANEL_SIZES['xs'])}
+              aria-valuemax={75}
+              aria-valuenow={getPanelWidthPercent()}
+              onResize={onResize}
+              onResizeEnd={onResizeEnd}
+              onDoubleClick={onDoubleClick}
+            />
+          )}
+          {/* header */}
+          {renderHeader()}
+
+          {/* main */}
+          {renderMain()}
+
+          {/* footer */}
+          <ActionSet
+            actions={actions ?? []}
+            className={primaryActionContainerClassNames}
+            size={size === 'xs' ? 'sm' : size}
+          />
+        </Section>
+        {includeOverlay && (
+          <div
+            ref={overlayRef}
+            className={cx(`${blockClass}__overlay`, {
+              [`${blockClass}__overlay--closing`]: !open,
+            })}
+          />
+        )}
+      </>
+    ) : null;
+  }
+);
+
+const deprecatedProps = {
+  /**
+   * **deprecated**
+   *  **Experimental:** Provide a `Slug` component to be rendered inside the `SidePanel` component
+   */
+  slug: PropTypes.node,
+
+  /**
+   * **deprecated**
+   * Please use the `decorator` instead
+   * Optional prop that is intended for any scenario where something is being generated by AI to reinforce AI transparency, accountability, and explainability at the UI level.
+   */
+  aiLabel: PropTypes.node,
+};
+
+SidePanel.propTypes = {
+  /**
+   * Sets the action toolbar buttons
+   */
+  /**@ts-ignore */
+  actionToolbarButtons: PropTypes.arrayOf(
+    PropTypes.shape({
+      label: PropTypes.string,
+      leading: PropTypes.bool,
+      icon: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
+      onClick: PropTypes.func,
+      kind: PropTypes.oneOf(['ghost', 'tertiary', 'secondary', 'primary']),
+      tooltipAlignment: PropTypes.oneOf(['top', 'right', 'bottom', 'left']),
+      tooltipPosition: PropTypes.oneOf(['start', 'center', 'end']),
+    })
+  ),
+
+  /**
+   * The primary actions to be shown in the side panel. Each action is
+   * specified as an object with optional fields: 'label' to supply the button
+   * label, 'kind' to select the button kind (must be 'primary', 'secondary' or
+   * 'ghost'), 'tooltipPosition' to select where the tooltip is placed around
+   * the button (must be 'top', 'right', 'bottom', or 'left'), 'tooltipAlignment'
+   * to select how the tooltip is aligned with the button (must be 'start',
+   * 'center', or 'end', 'loading' to display a loading indicator, and 'onClick' to
+   * receive notifications when the button is clicked. Additional fields in the
+   * object will be passed to the Button component, and these can include
+   * 'disabled', 'ref', 'className', and any other Button props. Any other
+   * fields in the object will be passed through to the button element as HTML
+   * attributes.
+   *
+   * See https://react.carbondesignsystem.com/?path=/docs/components-button--default#component-api
+   */
+  actions: allPropTypes([
+    PropTypes.arrayOf(
+      PropTypes.shape({
+        ...Button.propTypes,
+        kind: PropTypes.oneOf([
+          'ghost',
+          'danger--ghost',
+          'secondary',
+          'danger',
+          'primary',
+        ]),
+        tooltipPosition: PropTypes.oneOf(['top', 'right', 'bottom', 'left']),
+        tooltipAlignment: PropTypes.oneOf(['start', 'center', 'end']),
+        label: PropTypes.string,
+        loading: PropTypes.bool,
+        // we duplicate this Button prop to improve the DocGen here
+        /**@ts-ignore */
+        onClick: Button.propTypes.onClick,
+      })
+    ),
+  ]),
+
+  /**
+   * Determines if the title will animate on scroll
+   */
+  animateTitle: PropTypes.bool,
+
+  /**
+   * Sets the body content of the side panel
+   */
+  children: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.node,
+  ]).isRequired,
+
+  /**
+   * Sets an optional className to be added to the side panel outermost element
+   */
+  className: PropTypes.string,
+
+  /**
+   * Sets the close button icon description
+   */
+  closeIconDescription: PropTypes.string,
+
+  /**
+   * Sets the close button tooltip alignment
+   */
+  closeIconTooltipAlignment: PropTypes.string,
+
+  /**
+   * Determines whether the side panel should render the condensed version (affects action buttons primarily)
+   */
+  condensedActions: PropTypes.bool,
+
+  /**
+   * Sets the current step of the side panel
+   */
+  currentStep: PropTypes.number,
+
+  /**
+   * Show/hide the "X" close button.
+   */
+  hideCloseButton: PropTypes.bool,
+
+  /**
+   * Unique identifier
+   */
+  id: PropTypes.string,
+
+  /**
+   * Determines whether the side panel should render with an overlay
+   */
+  includeOverlay: PropTypes.bool,
+
+  /**
+   * Sets the label text which will display above the title text
+   */
+  labelText: PropTypes.string,
+
+  /**
+   * Provide a ref to return focus to once the modal is closed.
+   */
+  /**@ts-ignore */
+  launcherButtonRef: PropTypes.any,
+
+  /**
+   * Sets the icon description for the navigation back icon button
+   */
+  navigationBackIconDescription: PropTypes.string,
+
+  /**
+   * Changes the current side panel page to the previous page
+   */
+  onNavigationBack: PropTypes.func,
+
+  /**
+   * Specify a handler for closing the side panel.
+   * This handler closes the modal, e.g. changing `open` prop.
+   */
+  onRequestClose: PropTypes.func,
+
+  /**
+   * Optional function called when the side panel exit animation is complete.
+   * This handler can be used for any state cleanup needed before the panel is removed from the DOM.
+   */
+  onUnmount: PropTypes.func,
+
+  /**
+   * Determines whether the side panel should render or not
+   */
+  open: PropTypes.bool.isRequired,
+
+  /**
+   * Determines if the side panel is on the right or left
+   */
+  placement: PropTypes.oneOf(['left', 'right']),
+
+  /**
+   * Prevent closing on click outside of the panel
+   */
+  preventCloseOnClickOutside: PropTypes.bool,
+
+  /**
+   * This is the selector to the element that contains all of the page content that will shrink if the panel is a slide in.
+   * This prop is required when using the `slideIn` variant of the side panel.
+   */
+  /**@ts-ignore*/
+  selectorPageContent: PropTypes.string,
+
+  /**
+   * Specify a CSS selector that matches the DOM element that should
+   * be focused when the side panel opens
+   */
+  /**@ts-ignore*/
+  selectorPrimaryFocus: PropTypes.string,
+
+  /**
+   * Sets the size of the side panel
+   */
+  /**@ts-ignore*/
+  size: PropTypes.oneOf(['xs', 'sm', 'md', 'lg', 'xl', '2xl']),
+
+  /**
+   * Determines if this panel slides in
+   */
+  /**@ts-ignore*/
+  slideIn: PropTypes.bool,
+
+  /**
+   * Sets the subtitle text
+   */
+  subtitle: PropTypes.node,
+
+  /**
+   * Sets the title text
+   */
+  /**@ts-ignore*/
+  title: PropTypes.string,
+
+  ...deprecatedProps,
+};
+
+SidePanel.displayName = componentName;

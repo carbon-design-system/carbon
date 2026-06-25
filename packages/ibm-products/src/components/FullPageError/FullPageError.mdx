@@ -1,0 +1,95 @@
+import { Story, Controls, Source, Canvas } from '@storybook/addon-docs/blocks';
+import {
+  CodesandboxLink,
+  stackblitzHref,
+} from '../../global/js/utils/story-helper';
+import { FullPageError } from '.';
+import * as stories from './FullPageError.stories';
+import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
+
+# FullPageError
+
+[Usage guidelines](https://pages.github.ibm.com/carbon/ibm-products/components/full-page-error/usage/)
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Example usage](#example-usage)
+- [Component API](#component-api)
+  - [Migrating from HTTP errors](https://github.com/carbon-design-system/ibm-products/blob/main/docs/guides/v2.md#carbon-for-ibm-products-v2-migration-guide)
+
+## Overview
+
+Display a full-page error when the requested page is unavailable to the user.
+This is typically caused by issues with the requested URL or access permissions.
+Errors caused by server connectivity issues are not covered in this guideline.\
+The `UIShell` and `Breadcrumbs` (if applicable) should be implemented at the
+product level.
+
+### Default
+
+The default error page can be used for full-page errors that are not 403 or 404
+errors, and not caused by server connectivity issues.
+
+<Canvas
+  of={stories.fullPageError}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () =>
+        stackblitzPrefillConfig({
+          story: stories.fullPageError,
+          styles: stories.default.parameters.styles,
+        }),
+    },
+  ]}
+/>
+
+### 403 variant
+
+Display an Access Denied (403) error message when the user lacks permission to
+access the page or data, or when login is required.
+
+<Canvas
+  of={stories.fullPageError403}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () =>
+        stackblitzPrefillConfig({
+          story: stories.fullPageError403,
+          styles: stories.default.parameters.styles,
+        }),
+    },
+  ]}
+/>
+
+### 404 variant
+
+Show a Page Not Found (404) error message when the requested page cannot be
+located on the server, typically due to outdated bookmarks, mistyped URLs, or
+broken links.
+
+<Canvas
+  of={stories.fullPageError404}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () =>
+        stackblitzPrefillConfig({
+          story: stories.fullPageError404,
+          styles: stories.default.parameters.styles,
+        }),
+    },
+  ]}
+/>
+
+## Code sample
+
+{/* <CodesandboxLink exampleDirectory="FullPageError" /> */}
+
+<a href={stackblitzHref('FullPageError')}>Stackblitz example</a>
+
+## Component API
+
+<Controls />

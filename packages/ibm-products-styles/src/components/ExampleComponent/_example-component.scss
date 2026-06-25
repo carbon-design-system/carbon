@@ -1,0 +1,28 @@
+//
+// Copyright IBM Corp. 2020, 2022
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use '@carbon/styles/scss/spacing' as *;
+// Standard imports.
+@use '../../global/styles/project-settings' as c4p-settings;
+
+// The block part of our conventional BEM class names (blockClass__E--M).
+$block-class: #{c4p-settings.$pkg-prefix}--example-component;
+
+.#{$block-class} {
+  display: flex;
+  justify-content: flex-end;
+  --#{$block-class}--border-color: transparent;
+}
+
+.#{$block-class}.#{$block-class}--boxed-set {
+  border: 10px solid var(--#{$block-class}--border-color);
+}
+
+.#{$block-class}.#{$block-class}--shadow-set {
+  margin: $spacing-04;
+  box-shadow: 0 0 10px var(--#{$block-class}--border-color);
+}

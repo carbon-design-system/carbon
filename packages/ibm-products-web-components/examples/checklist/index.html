@@ -1,0 +1,49 @@
+<!--
+@license
+
+Copyright IBM Corp. 2025
+
+This source code is licensed under the Apache-2.0 license found in the
+LICENSE file in the root directory of this source tree.
+-->
+
+<html>
+<head>
+  <title>Carbon checklist web components example</title>
+  <meta charset="UTF-8" />
+  <link rel="stylesheet" href="src/styles.scss" />
+  <script type="module" src="src/index.js"></script>
+</head>
+<body>
+  <div class="example-container">
+    <div class="checklist-wrapper">
+      <c4p-checklist
+        title="Checklist header"
+        chart-label="15% complete"
+        toggle-label="Toggle"
+        toggle-label-align="top"
+        toggle-aria-label="Checklist toggle"
+        open
+        view-all-label="View all (10)"
+      >
+        <c4p-checklist-group title="Section label">
+          <c4p-checklist-item
+            label="Task name"
+            status="completed"
+          ></c4p-checklist-item>
+          <c4p-checklist-item
+            label="Task name"
+            status="in progress"
+          ></c4p-checklist-item>
+          <c4p-checklist-item
+            label="Task name"
+            status="not started"
+            clickable
+          ></c4p-checklist-item>
+        </c4p-checklist-group>
+      </c4p-checklist>
+    </div>
+    
+  </div>
+</body>
+</html>

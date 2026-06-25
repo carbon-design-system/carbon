@@ -1,0 +1,61 @@
+import { Story, Controls, Source, Canvas } from '@storybook/addon-docs/blocks';
+import {
+  CodesandboxLink,
+  stackblitzHref,
+} from '../../global/js/utils/story-helper';
+import { Saving } from '.';
+import * as stories from './Saving.stories';
+import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
+
+# Saving
+
+[Usage guidelines](https://pages.github.ibm.com/carbon/ibm-products/patterns/save/usage/)
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Example usage](#example-usage)
+  - [Auto](#auto)
+  - [Manual](##auto)
+- [Component API](#component-api)
+
+## Overview
+
+### Auto
+
+<Canvas
+  of={stories.Auto}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () =>
+        stackblitzPrefillConfig({
+          story: stories.Auto,
+          styles: stories.default.parameters.styles,
+        }),
+    },
+  ]}
+/>
+
+### Manual
+
+<Canvas
+  of={stories.Manual}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () =>
+        stackblitzPrefillConfig({
+          story: stories.Manual,
+          styles: stories.default.parameters.styles,
+        }),
+    },
+  ]}
+/>
+
+## Component API
+
+NOTE: Changing the controls below affects the default/primary example shown on
+the docs page.
+
+<Controls />

@@ -1,0 +1,10 @@
+//
+// Copyright IBM Corp. 2020, 2022
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+// Index with minimal Carbon styles, only the styles of Carbon components used by our components
+@forward './global/styles/project-settings';
+@forward './components/index-with-carbon';

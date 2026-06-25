@@ -1,0 +1,62 @@
+//
+// Copyright IBM Corp. 2020, 2025
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/themes/scss/themes';
+@use '@carbon/styles/scss/type';
+// @use '@carbon/ibm-products-styles/scss/global/decorators/side-panel-decorator'
+//   as *;
+@use '../../../../ibm-products-styles/src/global/decorators/side-panel-decorator'
+  as *;
+// NOTE: there is a separate decorator for side panel that adds changes to all the sidepanel patterns.
+$story-prefix: side-panel-stories__;
+
+.side-panel-stories__body-content {
+  .#{$story-prefix}text-inputs {
+    display: flex;
+    margin: $spacing-05 0;
+  }
+  .#{$story-prefix}text-inputs #side-panel-story-text-input-a,
+  .#{$story-prefix}text-inputs #side-panel-story-text-input-c {
+    margin-inline-end: $spacing-05;
+  }
+  .#{$story-prefix}text-area-container {
+    position: relative;
+  }
+  .#{$story-prefix}multi-select-container {
+    position: relative;
+    margin: $spacing-05 0;
+  }
+  .#{$story-prefix}text-area-container .#{$story-prefix}allowed-characters {
+    @include type.type-style('label-01');
+
+    position: absolute;
+    color: $text-secondary;
+    inset-inline-end: 0;
+  }
+  .#{$story-prefix}text-area-container
+    .#{$story-prefix}allowed-characters-invalid {
+    color: $support-error;
+  }
+  .#{$story-prefix}content-subtitle {
+    margin: $spacing-05 0 $spacing-04;
+  }
+  .#{$story-prefix}body-subheading {
+    @include type.type-style('heading-02');
+  }
+}
+
+.#{$story-prefix}header {
+  @include theme(themes.$g100);
+}
+
+.#{$story-prefix}grid {
+  block-size: 100%;
+}
+
+@include side-panel-decorator($story-prefix);

@@ -1,0 +1,133 @@
+/* stylelint-disable carbon/layout-use */
+/* stylelint-disable max-nesting-depth */
+//
+// Copyright IBM Corp. 2024, 2024
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+// Standard imports.
+@use '../../global/styles/project-settings' as c4p-settings;
+@use '../../global/styles/mixins';
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/type' as *;
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/colors' as *;
+@use '@carbon/layout/scss/convert' as *;
+@use '@carbon/styles/scss/breakpoint' as *;
+
+$block-class: #{c4p-settings.$pkg-prefix}--card;
+
+.#{$block-class}__get-started {
+  border-width: 1px;
+  border-style: solid;
+  background: linear-gradient(to bottom, $purple-80 40%, $purple-70);
+  border-image: linear-gradient(to bottom, $purple-60, $purple-50) 1;
+  color: $text-on-color;
+
+  &:hover {
+    background: linear-gradient($purple-70-hover, $purple-70-hover);
+  }
+
+  &:focus {
+    border: 2px solid $focus;
+    outline: 1px solid $focus-inset;
+    outline-offset: -3px;
+  }
+
+  .#{$block-class}__sequence {
+    @include type-style('heading-05');
+
+    padding-block-start: $spacing-05;
+    padding-inline-start: $spacing-05;
+  }
+
+  .#{$block-class}__status {
+    position: absolute;
+    z-index: 2;
+    inset-block-start: $spacing-05;
+    inset-inline-end: $spacing-05;
+  }
+
+  .#{$block-class}__header-body-container {
+    display: flex;
+  }
+
+  .#{$block-class}__header {
+    padding-inline-end: $spacing-09;
+
+    @include breakpoint-down(lg) {
+      padding-block-end: 0;
+    }
+  }
+
+  .#{$block-class}__body {
+    @include breakpoint-down(lg) {
+      padding: 0;
+    }
+  }
+  .#{$block-class}__media {
+    align-content: center;
+
+    @include breakpoint-down(lg) {
+      display: none;
+    }
+  }
+
+  .#{$block-class}__pictogram ~ .#{$block-class}__content-container {
+    .#{$block-class}__media {
+      /* stylelint-disable-next-line function-no-unknown */
+      margin-block: to-rem(-50px) - $spacing-09;
+    }
+  }
+
+  .#{$block-class}__sequence ~ .#{$block-class}__content-container {
+    .#{$block-class}__media {
+      /* stylelint-disable-next-line function-no-unknown */
+      margin-block: to-rem(-56px) - $spacing-09;
+    }
+  }
+
+  //meta-data
+  .#{$block-class}__actions {
+    padding: $spacing-05;
+    gap: $spacing-04;
+    @include type-style('label-01');
+
+    .#{$block-class}__icon {
+      display: flex;
+      padding: 0;
+      margin-inline-end: 0;
+    }
+
+    .#{$block-class}__icon svg {
+      margin-inline-end: $spacing-02;
+    }
+
+    .#{$block-class}__icon:hover {
+      background: none;
+    }
+  }
+
+  .#{$block-class}__footer {
+    position: relative;
+    z-index: 1;
+    justify-content: space-between;
+    border: none;
+
+    .#{$block-class}__action-icon {
+      display: flex;
+      align-self: center;
+      padding-inline-end: $spacing-05;
+    }
+  }
+}
+.#{$block-class}__disabled:focus,
+.#{$block-class}__disabled:hover,
+.#{$block-class}__disabled {
+  border: 1px solid $border-disabled;
+  background: $layer-02;
+  color: $text-disabled;
+  cursor: default;
+}

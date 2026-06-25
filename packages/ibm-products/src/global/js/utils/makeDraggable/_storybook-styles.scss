@@ -1,0 +1,80 @@
+/**
+ * Copyright IBM Corp. 2025
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/utilities';
+@use '@carbon/styles/scss/config' as carbon-config;
+
+//Div
+.draggable__div {
+  position: absolute;
+  background: $layer-01;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  inline-size: 300px;
+}
+
+.draggable__div-header {
+  display: flex;
+  justify-content: space-between;
+  background: #f0f0f0;
+}
+
+.draggable__div-body {
+  padding: 6px;
+}
+
+.is-dragging {
+  border-radius: 0;
+  box-shadow: 0 0 0 $spacing-02 $background-inverse;
+  outline: $spacing-01 solid $icon-inverse;
+}
+
+//Popover
+.popover-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.popover-details {
+  margin-inline-start: $spacing-05;
+  padding-block: 10px;
+}
+
+.close-icon {
+  position: absolute;
+  border: none;
+  cursor: pointer;
+}
+
+.heading {
+  font-weight: bolder;
+  margin-inline-start: $spacing-05;
+}
+
+//Storybook
+.mt-10 {
+  padding-block-start: $spacing-10;
+}
+
+.flex {
+  display: flex;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.#{carbon-config.$prefix}--popover .is-dragging {
+  border-radius: 0;
+  box-shadow: 0 0 0 $spacing-02 $background-inverse;
+  outline: $spacing-01 solid $icon-inverse;
+}
+
+.sr-only {
+  visibility: hidden;
+}

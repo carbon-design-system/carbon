@@ -1,0 +1,242 @@
+//
+// Copyright IBM Corp. 2023, 2023
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+/**
+ * The InlineTip specifically is theme-agnostic, and so we have to
+ * use color tokens to keep the colors static instead of theme tokens
+ * that will change depending on the selected theme.
+ *
+ * We are triggering a *large* amount of linting errors.
+ * So, we're using the following "disable" rules for the entire file
+ * instead of many individual rules.
+ */
+
+/* stylelint-disable carbon/layout-use */
+/* stylelint-disable carbon/theme-use */
+/* stylelint-disable declaration-no-important */
+/* stylelint-disable function-no-unknown */
+/* stylelint-disable max-nesting-depth */
+
+// Standard imports.
+@use '../../global/styles/project-settings' as c4p-settings;
+@use '@carbon/styles/scss/colors' as *;
+@use '@carbon/layout/scss/convert' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/type' as *;
+
+$block-class: #{c4p-settings.$pkg-prefix}--inline-tip;
+// Images and animation are the same fixed size
+$media-height: to-rem(118px);
+$media-width: calc(#{$media-height} * 2);
+$purple: #7f3ae7;
+
+.#{$block-class} {
+  position: relative;
+  display: flex;
+  background: linear-gradient(90deg, $blue-90 0%, $purple-70 100%);
+}
+// layout only: wide
+.#{$block-class}__wide {
+  padding: $spacing-05 $spacing-10 $spacing-05 $spacing-09;
+}
+// layout: wide, with image
+.#{$block-class}__wide.#{$block-class}__has-media {
+  padding-inline-end: $spacing-09;
+}
+
+.#{$block-class}__wide.#{$block-class}__has-media .#{$block-class}__media {
+  padding-inline-start: $spacing-10;
+}
+
+.#{$block-class}__wide.#{$block-class}__has-media .#{$block-class}__media img {
+  display: block;
+  block-size: $media-height;
+}
+
+.#{$block-class}__wide.#{$block-class}__has-media .#{$block-class}__media svg {
+  block-size: $media-height !important;
+  // Overrides the inline CSS of "100%".
+  inline-size: $media-width !important;
+}
+
+// layout only: narrow
+.#{$block-class}__narrow {
+  flex-direction: column-reverse;
+  padding: to-rem(52px) $spacing-07 $spacing-05 $spacing-05;
+}
+// layout: narrow, with image
+.#{$block-class}__narrow.#{$block-class}__has-media {
+  padding-block-start: $spacing-07;
+  padding-inline-end: $spacing-05;
+}
+
+.#{$block-class}__narrow.#{$block-class}__has-media .#{$block-class}__media {
+  padding-block-end: $spacing-05;
+
+  img {
+    inline-size: 100%;
+  }
+}
+
+.#{$block-class}__narrow.#{$block-class}__has-media .#{$block-class}__content {
+  padding-inline-end: $spacing-05;
+}
+
+.#{$block-class}__narrow.#{$block-class}__has-media .#{$block-class}__footer {
+  justify-content: space-between;
+}
+.#{$block-class}__narrow.#{$block-class}__has-media
+  .#{$block-class}__footer
+  .#{$block-class}__close-btn {
+  margin-inline-end: calc(-1 * $spacing-05);
+}
+
+// All links in use by this component and provided by the user must reflect the 'dark' theme.
+.#{$block-class} a {
+  color: $blue-30;
+
+  &:visited,
+  &:hover,
+  &:visited:hover {
+    color: $blue-30;
+  }
+}
+
+.#{$block-class}__title {
+  @include type-style('productive-heading-01');
+
+  color: $white-0;
+}
+
+.#{$block-class}__body {
+  @include type-style('body-short-01');
+
+  color: $gray-10;
+}
+.#{$block-class}__body p {
+  @include type-style('body-short-01');
+
+  font-size: inherit;
+  line-height: inherit;
+
+  margin-block-end: $spacing-03;
+
+  &:last-of-type {
+    margin-block-end: 0;
+  }
+}
+
+.#{$block-class}__body .#{$block-class}__secondary-btn {
+  margin-block-start: $spacing-03;
+}
+.#{$block-class}__body
+  .#{$block-class}__secondary-btn
+  .#{$block-class}__button {
+  color: $blue-30;
+  margin-inline-start: calc(-1 * $spacing-05);
+
+  &:active,
+  &:hover {
+    background-color: $purple;
+    color: $gray-10;
+  }
+}
+
+.#{$block-class}__footer {
+  display: flex;
+  padding-block-start: $spacing-05;
+
+  &:empty {
+    display: none;
+  }
+}
+
+// When 'collapsed', a text-only preview with ellipsis is shown.
+.#{$block-class}__preview-text {
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+}
+
+.#{$block-class}__icon-idea {
+  position: absolute;
+  color: $white-0;
+  inline-size: to-rem(20px);
+  inset: $spacing-05 0 0 $spacing-05;
+}
+
+.#{$block-class}__close-icon-wrapper {
+  position: absolute;
+  inset-block-start: 0;
+  inset-inline-end: 0;
+}
+
+.#{$block-class} .#{$block-class}__close-icon {
+  padding: to-rem(6px) 0 0;
+  block-size: $spacing-07;
+  color: $white-0;
+  inline-size: $spacing-07;
+  min-block-size: $spacing-07;
+
+  &:active,
+  &:hover {
+    background-color: $purple;
+    color: $text-primary;
+  }
+
+  path {
+    margin: 0;
+    fill: $white-0;
+  }
+}
+
+.#{$block-class} .#{$block-class}__toggle-btn {
+  border: none;
+  margin: 0 $spacing-05 0 calc(-1 * $spacing-05);
+  color: $blue-30;
+
+  &:hover {
+    background-color: $purple-70-hover;
+    color: $gray-10;
+  }
+}
+
+.#{$block-class} .#{$block-class}__close-btn {
+  border: to-rem(1px) solid $white-0;
+  color: $white-0;
+
+  &:active,
+  &:hover {
+    background-color: $gray-10;
+    color: $gray-100;
+  }
+
+  // The "render icon" CSS seems to be missing in the latest Carbon button.
+  // Specifically, getting the icon to move to right-hand side of the content area.
+  // Repeating here.
+  svg {
+    position: absolute;
+    flex-shrink: 0;
+    block-size: 1rem;
+    inline-size: 1rem;
+    inset-inline-end: $spacing-05;
+  }
+}
+
+// Exception handling.
+// If "withLeftGutter", then:
+// - insert 1 rem of more "space" on the left.
+// - move icon 1 rem more to the right.
+.#{$block-class}__wide.#{$block-class}__with-left-gutter {
+  padding-inline-start: $spacing-10;
+}
+.#{$block-class}__wide.#{$block-class}__with-left-gutter
+  .#{$block-class}__icon-idea {
+  inset-inline-start: $spacing-07;
+}

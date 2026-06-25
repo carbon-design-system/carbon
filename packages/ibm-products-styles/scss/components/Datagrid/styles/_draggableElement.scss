@@ -1,0 +1,120 @@
+//
+// Copyright IBM Corp. 2022, 2024
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/colors';
+@use '@carbon/styles/scss/motion' as *;
+@use './variables';
+
+// Drag handle.
+.#{variables.$block-class}__draggable-handleStyle {
+  // Cancel out default button styling.
+  padding: 0;
+  border: none;
+  background: none;
+
+  cursor: grab;
+  margin-inline-end: $spacing-03;
+}
+
+.#{variables.$block-class}__draggable-handleStyle:active,
+.#{variables.$block-class}__draggable-handleHolder--dragging {
+  cursor: grabbing;
+}
+
+.#{variables.$block-class}__draggable-handleStyle.disabled {
+  cursor: none;
+  pointer-events: none;
+}
+
+.#{variables.$block-class}__draggable-handleStyle.disabled svg {
+  fill: $icon-on-color-disabled;
+}
+
+.#{variables.$block-class}__draggable-underlay {
+  position: absolute;
+  inline-size: 100%;
+}
+
+.#{variables.$block-class}__draggable-underlay-item {
+  border: 2px dashed $focus;
+  /* stylelint-disable-next-line carbon/theme-use */
+  background-color: colors.$blue-10; // not good in dark mode
+  block-size: $spacing-09;
+  // must match draggable item size
+  inline-size: 100%;
+}
+
+// The draggable element itself.
+.#{variables.$block-class}__draggable-handleHolder {
+  position: relative; // above underlay
+  display: flex;
+  background-color: $layer;
+  block-size: $spacing-09;
+  border-block-end: 1px solid $layer-active;
+}
+
+.#{variables.$block-class}__draggable-handleHolder:hover {
+  background-color: $layer-hover;
+}
+
+.#{variables.$block-class}__draggable-handleHolder:focus {
+  box-shadow: inset 0 0 0 1px $focus;
+  outline: none;
+}
+
+.#{variables.$block-class}__draggable-handleHolder--selected {
+  background-color: $layer-selected;
+}
+
+.#{variables.$block-class}__draggable-handleHolder--dragging {
+  z-index: 2; // raise above other items in draggable list
+  background-color: $highlight;
+  color: $text-primary;
+  outline: none;
+}
+
+.#{variables.$block-class}__draggable-handleHolder-selected:hover {
+  background-color: $layer-selected-hover-01;
+}
+
+.#{variables.$block-class}__draggable-handleHolder-droppable {
+  display: flex;
+  align-items: center;
+  inline-size: 100%;
+  /* stylelint-disable-next-line carbon/type-use */
+  line-height: 1; // center align text within row
+  padding-inline-start: $spacing-05;
+  transition-property: opacity;
+}
+
+.#{variables.$block-class}__draggable-handleHolder-droppable.#{variables.$block-class}__draggable-handleHolder-droppable--origin {
+  opacity: 0.5;
+  transition: opacity $duration-moderate-01 motion(entrance, productive);
+  /* stylelint-disable-next-line max-nesting-depth */
+  @media (prefers-reduced-motion: reduce) {
+    transition: none;
+  }
+}
+
+.#{variables.$block-class}__draggable-handleHolder--sticky {
+  color: $text-on-color-disabled;
+}
+
+.#{variables.$block-class}__shared-ui--assistive-text {
+  // hide the assistive text. can not use display: none which will also hide from ARIA
+  position: absolute;
+  overflow: hidden;
+  padding: 0;
+  border: 0;
+  block-size: 0;
+  clip: rect(0 0 0 0);
+  inline-size: 0;
+  text-transform: none;
+  white-space: nowrap;
+}

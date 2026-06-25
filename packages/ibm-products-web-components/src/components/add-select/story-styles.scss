@@ -1,0 +1,35 @@
+/*
+* Copyright IBM Corp. 2026
+*
+* This source code is licensed under the Apache-2.0 license found in the
+* LICENSE file in the root directory of this source tree.
+*/
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/type';
+@use '@carbon/styles/scss/config' as *;
+
+$story-prefix: 'add-select-story';
+
+// Story container styling
+.#{$story-prefix}-container {
+  display: flex;
+  flex-direction: column;
+  padding: $spacing-11 $spacing-10;
+  gap: $spacing-07;
+  inline-size: 600px;
+  max-inline-size: 600px;
+}
+
+// Variant container for showing single and multi side by side
+.#{$story-prefix}-variant-container {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-03;
+
+  h4 {
+    @include type.type-style('label-02');
+
+    margin: 0;
+    color: var(--cds-text-secondary);
+  }
+}

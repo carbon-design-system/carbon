@@ -1,0 +1,63 @@
+import { ArgTypes, Markdown, Meta, Canvas } from '@storybook/addon-docs/blocks';
+import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
+import * as FullPageErrorStories from './full-page-error.stories';
+import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
+
+<Meta of={FullPageErrorStories} />
+
+# FullPageError
+
+Display a full-page error when the requested page is unavailable to the user.
+This is typically caused by issues with the requested URL or access permissions.
+Errors caused by server connectivity issues are not covered in this guideline.
+
+> 💡 Check our
+> [Stackblitz](https://stackblitz.com/github/carbon-design-system/ibm-products/tree/main/packages/ibm-products-web-components/examples/full-page-error)
+> example implementation.
+> [![Edit carbon-web-components](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/carbon-design-system/ibm-products/tree/main/packages/ibm-products-web-components/examples/full-page-error)
+
+## Getting started
+
+Here's a quick example to get you started.
+
+### JS (via import)
+
+```javascript
+import '@carbon/ibm-products-web-components/es/components/full-page-error/index.js';
+```
+
+### HTML
+
+```html
+<c4p-full-page-error
+  label="Error 404"
+  class="my-custom-class"
+  title="Page not found"
+  description="The page you requested has moved or is unavailable, or the specified URL is not valid. Please check the URL or search the site for the requested content."
+  kind="404"
+>
+  <!-- Pass any content you want to display to the user here -->
+  <a class="cds--link" href="#">– Forwarding link 1</a>
+  <br />
+  <a class="cds--link" href="#">– Forwarding link 2</a>
+</c4p-full-page-error>
+```
+
+### Example Usage
+<Canvas
+  of={FullPageErrorStories.Default}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () =>
+        stackblitzPrefillConfig({
+          story: FullPageErrorStories.Default,
+          componentName:'full-page-error'
+        }),
+    },
+  ]}
+></Canvas>
+
+## `<c4p-full-page-error>` attributes, properties and events
+
+<ArgTypes of="c4p-full-page-error" />

@@ -1,0 +1,116 @@
+//
+// Copyright IBM Corp. 2020, 2021
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+// ProductiveCard uses the following IBM Products components:
+// Card
+@use '../Card/card' as *;
+@use '@carbon/styles/scss/theme';
+@use '@carbon/styles/scss/type';
+@use '@carbon/styles/scss/spacing' as *;
+@use '../../global/styles/project-settings' as c4p-settings;
+
+$block-class: #{c4p-settings.$pkg-prefix}--card;
+
+.#{$block-class}__productive {
+  display: flex;
+  flex-direction: column;
+
+  .#{$block-class}__title {
+    @include type.type-style('heading-compact-02');
+  }
+
+  .#{$block-class}__title-lg .#{$block-class}__title {
+    @include type.type-style('heading-03');
+  }
+
+  .#{$block-class}__body {
+    padding-block-start: $spacing-03;
+  }
+
+  .#{$block-class}__footer {
+    align-items: center;
+    justify-content: space-between;
+    border-block-start: 1px solid theme.$border-subtle-01;
+  }
+
+  .#{$block-class}__footer-no-button {
+    justify-content: flex-end;
+  }
+
+  .#{$block-class}__actions {
+    margin: 0;
+    min-block-size: $spacing-07;
+  }
+
+  .#{$block-class}__actions-header {
+    margin-block-start: calc(-1 * #{$spacing-02});
+  }
+
+  .#{$block-class}__actions-header-ghost-button {
+    min-block-size: $spacing-07;
+    // stylelint-disable-next-line carbon/layout-use
+    padding-inline: calc($spacing-01 + $spacing-03);
+    // stylelint-disable-next-line carbon/layout-use
+
+    /* stylelint-disable-next-line max-nesting-depth */
+    &::before {
+      position: absolute;
+      background-color: theme.$layer-hover-01;
+      block-size: $spacing-06;
+      content: '';
+      inline-size: 0.05rem;
+      inset-inline-start: 0;
+      opacity: 1;
+    }
+
+    /* stylelint-disable-next-line max-nesting-depth */
+    &:hover {
+      /* stylelint-disable-next-line max-nesting-depth */
+      &::before {
+        opacity: 0;
+      }
+
+      + .#{$block-class}__actions-header-ghost-button {
+        /* stylelint-disable-next-line max-nesting-depth */
+        &::before {
+          opacity: 0;
+        }
+      }
+    }
+
+    /* stylelint-disable-next-line max-nesting-depth */
+    &:first-child:not(:last-child) {
+      /* stylelint-disable-next-line max-nesting-depth */
+      &::before {
+        display: none;
+      }
+    }
+  }
+
+  .#{$block-class}__title-lg .#{$block-class}__actions-header,
+  .#{$block-class}__header-has-label .#{$block-class}__actions-header {
+    margin-block-start: 0;
+  }
+
+  .#{$block-class}__icon {
+    margin-inline-end: $spacing-05;
+  }
+
+  .#{$block-class}__header-container {
+    align-items: flex-start;
+  }
+
+  .#{$block-class}__content-container {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+  }
+
+  .#{$block-class}__header-body-container {
+    flex: 1;
+  }
+}

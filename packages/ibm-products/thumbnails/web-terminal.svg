@@ -1,0 +1,50 @@
+<svg width="320" height="180" viewBox="0 0 320 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect x="60" y="41" width="200" height="109" fill="white"/>
+<rect x="60" y="29" width="200" height="13" fill="#171717"/>
+<rect opacity="0.844385" x="94" y="34.5" width="22" height="3" fill="#C6C6C6"/>
+<rect opacity="0.844385" x="67" y="34.5" width="22" height="3" fill="#C6C6C6"/>
+<rect opacity="0.844385" x="121" y="34.5" width="22" height="3" fill="#C6C6C6"/>
+<rect opacity="0.844385" x="240" y="33" width="5" height="5" fill="#C6C6C6"/>
+<rect opacity="0.844385" x="250" y="33" width="5" height="5" fill="#C6C6C6"/>
+<g style="mix-blend-mode:multiply">
+<rect x="60.5" y="41.5" width="199" height="109" fill="#F4F4F4"/>
+<rect x="60.5" y="41.5" width="199" height="109" stroke="#C6C6C6"/>
+</g>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M188 42H260V108.122V150H188V42Z" fill="black"/>
+<rect x="192" y="60" width="18" height="2" fill="#BEBEBE"/>
+<rect x="192" y="86" width="18" height="2" fill="#BEBEBE"/>
+<rect x="197" y="64" width="24" height="2" fill="#BEBEBE"/>
+<rect x="197" y="90" width="24" height="2" fill="#BEBEBE"/>
+<rect x="197" y="68" width="12" height="2" fill="#C6C6C6"/>
+<rect x="197" y="94" width="12" height="2" fill="#C6C6C6"/>
+<rect x="202" y="73" width="11" height="2" fill="#BEBEBE"/>
+<rect x="202" y="77" width="2" height="2" fill="#BEBEBE"/>
+<rect x="202" y="81" width="2" height="2" fill="#BEBEBE"/>
+<rect x="207" y="77" width="30" height="2" fill="#BEBEBE"/>
+<rect x="207" y="81" width="30" height="2" fill="#BEBEBE"/>
+<rect x="212" y="68" width="9" height="2" fill="#C6C6C6"/>
+<rect x="212" y="94" width="9" height="2" fill="#C6C6C6"/>
+<rect x="224" y="68" width="2" height="2" fill="#C6C6C6"/>
+<rect x="224" y="94" width="2" height="2" fill="#C6C6C6"/>
+<rect x="224" y="64" width="7" height="2" fill="#BEBEBE"/>
+<rect x="224" y="90" width="7" height="2" fill="#BEBEBE"/>
+<rect x="213" y="60" width="6" height="2" fill="#BEBEBE"/>
+<rect x="213" y="86" width="6" height="2" fill="#BEBEBE"/>
+<rect x="234" y="64" width="9" height="2" fill="#BEBEBE"/>
+<rect x="234" y="90" width="9" height="2" fill="#BEBEBE"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M188 42H260V49.3469V54H188V42Z" fill="#393939"/>
+<path d="M253.265 48L254.5 46.7651L254.235 46.5L253 47.7349L251.765 46.5L251.5 46.7651L252.735 48L251.5 49.2349L251.765 49.5L253 48.2651L254.235 49.5L254.5 49.2349L253.265 48V48Z" fill="white"/>
+<mask id="mask0_37_4775" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="251" y="46" width="4" height="4">
+<path d="M253.265 48L254.5 46.7651L254.235 46.5L253 47.7349L251.765 46.5L251.5 46.7651L252.735 48L251.5 49.2349L251.765 49.5L253 48.2651L254.235 49.5L254.5 49.2349L253.265 48V48Z" fill="white"/>
+</mask>
+<g mask="url(#mask0_37_4775)">
+<rect width="12" height="12" transform="translate(250 45)" fill="white"/>
+</g>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M192.438 47.4846C192.438 46.1003 193.545 45 194.938 45C196.33 45 197.438 46.1003 197.438 47.4846C197.438 48.8689 196.33 49.9692 194.938 49.9692C193.545 49.9692 192.438 48.8689 192.438 47.4846ZM194.933 49.0768C195.09 49.0768 195.218 48.9496 195.218 48.7928C195.218 48.636 195.09 48.5089 194.933 48.5089C194.775 48.5089 194.647 48.636 194.647 48.7928C194.647 48.9496 194.775 49.0768 194.933 49.0768ZM195.111 46.0243H194.861C194.397 46.0243 194.04 46.3792 194.04 46.8051V46.8761H194.397V46.8051C194.397 46.5922 194.611 46.3792 194.861 46.3792H195.147C195.397 46.3792 195.576 46.5922 195.576 46.8051C195.576 47.0181 195.361 47.2666 195.111 47.2666H194.754V48.0474H195.111V47.6215C195.54 47.6215 195.897 47.2666 195.897 46.8406C195.897 46.4147 195.54 46.0243 195.111 46.0243ZM192.794 47.4846C192.794 48.6559 193.758 49.6142 194.937 49.6142C196.115 49.6142 197.08 48.6559 197.08 47.4846C197.08 46.3133 196.115 45.3549 194.937 45.3549C193.758 45.3549 192.794 46.3133 192.794 47.4846Z" fill="white"/>
+<rect width="6" height="6" transform="translate(212 44.5)" fill="white" style="mix-blend-mode:multiply"/>
+<path d="M216.875 46.375H215.562V46.75H216.875V46.375Z" fill="white"/>
+<path d="M216.875 47.3125H215.562V47.6875H216.875V47.3125Z" fill="white"/>
+<path d="M216.875 48.25H215.562V48.625H216.875V48.25Z" fill="white"/>
+<path d="M217.25 45.4375H212.75C212.651 45.4376 212.555 45.4771 212.485 45.5474C212.415 45.6177 212.375 45.7131 212.375 45.8125V49.1875C212.375 49.2869 212.415 49.3822 212.485 49.4525C212.555 49.5228 212.651 49.5624 212.75 49.5625H217.25C217.349 49.5624 217.445 49.5228 217.515 49.4525C217.585 49.3822 217.625 49.2869 217.625 49.1875V45.8125C217.625 45.7131 217.585 45.6178 217.515 45.5475C217.445 45.4772 217.349 45.4376 217.25 45.4375ZM212.75 45.8125H214.812V49.1875H212.75V45.8125ZM215.188 49.1875V45.8125H217.25L217.25 49.1875H215.188Z" fill="white"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M205.307 45.3127L204.328 49.5746L204.691 49.6878L205.67 45.426L205.307 45.3127ZM202.188 47.5L203.5 45.9688L203.764 46.2772L202.718 47.5L203.764 48.7229L203.5 49.0313L202.188 47.5ZM207.812 47.5L206.5 49.0313L206.236 48.7229L207.282 47.5L206.236 46.2772L206.5 45.9688L207.812 47.5Z" fill="white"/>
+</svg>

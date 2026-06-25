@@ -1,0 +1,85 @@
+//
+// Copyright IBM Corp. 2020, 2023
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+// Standard imports.
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/type';
+@use '../../global/styles/project-settings' as c4p-settings;
+
+$block-class: #{c4p-settings.$pkg-prefix}--empty-state;
+
+.#{$block-class} {
+  display: flex;
+  color: $text-primary;
+
+  .#{$block-class}__header {
+    @include type.type-style('heading-03');
+
+    margin: 0;
+
+    padding-block-end: $spacing-03;
+  }
+
+  .#{$block-class}__subtitle {
+    @include type.type-style('body-01');
+
+    color: $text-secondary;
+
+    padding-block-end: $spacing-05;
+  }
+
+  .#{$block-class}__header--small {
+    @include type.type-style('body-compact-02');
+
+    padding-block-end: $spacing-03;
+  }
+
+  .#{$block-class}__subtitle--small {
+    @include type.type-style('label-01');
+  }
+}
+
+.#{$block-class}__illustration {
+  block-size: auto;
+  margin-block-end: $spacing-05;
+
+  &.#{$block-class}__illustration--lg {
+    max-inline-size: $spacing-11;
+    min-inline-size: $spacing-11;
+  }
+
+  &.#{$block-class}__illustration--sm {
+    max-inline-size: $spacing-10;
+    min-inline-size: $spacing-10;
+  }
+}
+
+.#{$block-class}-position--top {
+  flex-direction: column;
+}
+
+.#{$block-class}-position--right {
+  flex-direction: row-reverse;
+}
+
+.#{$block-class}-position--bottom {
+  flex-direction: column-reverse;
+}
+
+.#{$block-class}-position--left {
+  flex-direction: row;
+}
+
+.#{$block-class} .#{$block-class}__action-button {
+  display: block;
+  margin-block-end: $spacing-05;
+}
+
+.#{$block-class} .#{$block-class}__link {
+  display: inline-block;
+}

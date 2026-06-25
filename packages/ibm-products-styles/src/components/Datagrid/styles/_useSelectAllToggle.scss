@@ -1,0 +1,39 @@
+//
+// Copyright IBM Corp. 2021, 2025
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/config' as carbon-config;
+
+@use './variables';
+@use '../../../global/styles/project-settings' as c4p-settings;
+
+.#{variables.$block-class}__grid-container {
+  th.#{variables.$block-class}__select-all-toggle-on,
+  td.#{variables.$block-class}__select-all-toggle-on {
+    box-sizing: border-box;
+    flex: 0 0 auto;
+    /* stylelint-disable-next-line declaration-no-important */
+    inline-size: 4.5rem !important;
+    /* stylelint-disable-next-line declaration-no-important */
+    min-inline-size: initial !important;
+  }
+}
+
+th.#{variables.$block-class}__select-all-toggle-on {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+th.#{variables.$block-class}__select-all-toggle-on.button {
+  margin-inline-start: $spacing-01;
+}
+
+.#{variables.$block-class}__select-all-toggle-overflow.#{carbon-config.$prefix}--overflow-menu-options--sm.#{carbon-config.$prefix}--overflow-menu-options[data-floating-menu-direction='bottom']::after {
+  inline-size: $spacing-13;
+}

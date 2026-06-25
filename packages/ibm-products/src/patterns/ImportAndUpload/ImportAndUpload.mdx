@@ -1,0 +1,41 @@
+import { Story, Controls, Source, Canvas } from '@storybook/addon-docs/blocks';
+import { CodesandboxLink } from '../../global/js/utils/story-helper';
+import * as stories from './ImportAndUpload.stories';
+
+# Import And Upload
+
+[Usage guidelines](https://pages.github.ibm.com/carbon/ibm-products/patterns/export/usage/)
+|
+[Carbon modal usage guidelines](https://www.carbondesignsystem.com/components/modal/usage)
+|
+[Carbon modal documentation](https://react.carbondesignsystem.com/?path=/docs/components-modal)
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Example usage](#example-usage)
+
+## Overview
+
+Modal dialog version of the Import and Upload pattern. The import action
+transfers data or objects from an external source into a system.
+
+To build this pattern, we recommend including the following ingredients:
+
+- [ComposedModal](https://react.carbondesignsystem.com/?path=/docs/components-composedmodal)
+- [Button](https://react.carbondesignsystem.com/?path=/docs/components-button)
+- [TextInput](https://react.carbondesignsystem.com/?path=/docs/components-textinput)
+- [FileUploader](https://react.carbondesignsystem.com/?path=/docs/components-fileuploader)
+
+### Example usage
+
+> 💡 Check our
+> [Stackblitz](https://stackblitz.com/github/carbon-design-system/ibm-products/tree/main/packages/ibm-products/src/patterns/ImportAndUpload/example)
+> example implementation.
+
+[![Edit react-patterns](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/carbon-design-system/ibm-products/tree/main/packages/ibm-products/src/patterns/ImportAndUpload/example)
+{/* TODO: One example per designed use case. */}
+
+<Canvas withSource="none">
+  <Story of={stories.Standard} />
+</Canvas>

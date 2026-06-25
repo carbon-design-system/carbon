@@ -1,0 +1,140 @@
+import { ArgTypes, Markdown, Meta, Canvas } from '@storybook/addon-docs/blocks';
+import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
+import * as UserAvatarStories from './user-avatar.stories';
+import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
+
+<Meta of={UserAvatarStories} />
+
+export const customImportArr = [`import Group from '@carbon/icons/es/group/16';
+import { iconLoader } from '@carbon/web-components/es/globals/internal/icon-loader.js';`];
+
+
+# User-avatar
+
+User avatars are a representation of a user or group of users. They can be used
+to identify a user or indicate collaborators.
+
+> 💡 Check our
+> [Stackblitz](https://stackblitz.com/github/carbon-design-system/ibm-products/tree/main/packages/ibm-products-web-components/examples/user-avatar)
+> example implementation.
+
+[![Edit carbon-web-components](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/carbon-design-system/ibm-products/tree/main/packages/ibm-products-web-components/examples/user-avatar)
+
+## Note on theming
+
+The backgroundColor and font color will adapt dynamically based on the `theme`
+prop.
+
+## Getting started
+
+Here's a quick example to get you started.
+
+### JS (via import)
+
+```javascript
+import '@carbon/ibm-products-web-components/es/components/user-avatar/index.js';
+```
+
+### HTML
+
+### Default
+
+```html
+<c4p-user-avatar
+  name="Thomas J. Watson"
+  background-color="order-11-purple"
+  size="lg"
+  tooltip-text="TW, Thomas J. Watson user profile"
+  tooltip-alignment="right"
+></c4p-user-avatar>
+```
+
+### Example Usage
+
+In this example, each of the four avatars is wrapped in a separate div to demonstrate how the backgroundColor changes based on the theme prop.
+
+<Canvas
+  of={UserAvatarStories.Default}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () =>
+        stackblitzPrefillConfig({
+          story: UserAvatarStories.Default,
+          componentName:'user-avatar'
+        }),
+    },
+  ]}
+></Canvas>
+
+### With Icon
+
+The user avatar with profile picture
+
+```html
+<c4p-user-avatar
+  tooltip-alignment=${args.tooltipAlignment}
+  tooltip-text=${args.tooltipText}
+  size=${args.size}
+  image=${args.image}
+  image-description=${args.imageDescription}   
+  theme=${args.theme}
+>
+</c4p-user-avatar>
+```
+
+### Example Usage
+<Canvas
+  of={UserAvatarStories.WithIcon}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () =>
+        stackblitzPrefillConfig({
+          story: UserAvatarStories.WithIcon,
+          customImports: customImportArr,
+          componentName:'user-avatar'
+        }),
+    },
+  ]}
+></Canvas>
+
+
+### With Image
+
+For a custom icon, specify the slot by adding the
+`slot="rendericon"` attribute to the element.
+
+```html
+<c4p-user-avatar
+  name="Thomas J. Watson"
+  background-color="order-11-purple"
+  size="lg"
+  tooltip-text="TW, Thomas J. Watson user profile"
+  tooltip-alignment="right"
+>
+  ${Group({ slot: 'rendericon' })}
+</c4p-user-avatar>
+```
+
+### Example Usage
+<Canvas
+  of={UserAvatarStories.WithImage}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () =>
+        stackblitzPrefillConfig({
+          story: UserAvatarStories.WithImage,
+          customImports: customImportArr,
+          componentName:'user-avatar'
+        }),
+    },
+  ]}
+></Canvas>
+
+## `<c4p-user-avatar>` attributes, properties and events
+
+Note: For `boolean` attributes, `true` means simply setting the attribute.
+
+<ArgTypes of="c4p-user-avatar" />

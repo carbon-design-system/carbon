@@ -1,0 +1,57 @@
+<svg width="320" height="180" viewBox="0 0 320 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect x="60" y="41" width="200" height="109" fill="white"/>
+<rect x="60" y="29" width="200" height="13" fill="#171717"/>
+<rect opacity="0.844385" x="94" y="34.5" width="22" height="3" fill="#C6C6C6"/>
+<rect opacity="0.844385" x="67" y="34.5" width="22" height="3" fill="#C6C6C6"/>
+<rect opacity="0.844385" x="121" y="34.5" width="22" height="3" fill="#C6C6C6"/>
+<rect opacity="0.844385" x="239" y="33" width="5" height="5" fill="#C6C6C6"/>
+<rect opacity="0.844385" x="249" y="33" width="5" height="5" fill="#C6C6C6"/>
+<g style="mix-blend-mode:multiply">
+<rect x="60.5" y="41.5" width="199" height="109" fill="#F4F4F4"/>
+<rect x="60.5" y="41.5" width="199" height="109" stroke="#C6C6C6"/>
+</g>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M61 42H259V59.1429V70H61V42Z" fill="white"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M66 94H110.476V109.306V119H66V94Z" fill="white"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M161.016 94H205.491V109.306V119H161.016V94Z" fill="white"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M113.508 94H157.983V109.306V119H113.508V94Z" fill="white"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M208.523 94H252.999V109.306V119H208.523V94Z" fill="white"/>
+<rect opacity="0.891745" x="65" y="64" width="25" height="2" fill="#A8A8A8"/>
+<rect opacity="0.891745" x="110" y="64" width="25" height="2" fill="#BEBEBE"/>
+<rect opacity="0.891745" x="155" y="64" width="25" height="2" fill="#BEBEBE"/>
+<rect opacity="0.891745" x="200" y="64" width="25" height="2" fill="#BEBEBE"/>
+<rect x="65" y="50" width="54" height="3" fill="#A8A8A8"/>
+<rect x="61" y="70" width="44" height="2" fill="#0F62FE"/>
+<rect x="151" y="70" width="44" height="2" fill="#BEBEBE"/>
+<rect x="106" y="70" width="44" height="2" fill="#BEBEBE"/>
+<rect x="196" y="70" width="44" height="2" fill="#BEBEBE"/>
+<path d="M97.8093 64.5L99.25 63.0593L98.9407 62.75L97.5 64.1907L96.0593 62.75L95.75 63.0593L97.1907 64.5L95.75 65.9407L96.0593 66.25L97.5 64.8093L98.9407 66.25L99.25 65.9407L97.8093 64.5V64.5Z" fill="black"/>
+<mask id="mask0_8_2963" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="95" y="62" width="5" height="5">
+<path d="M97.8093 64.5L99.25 63.0593L98.9407 62.75L97.5 64.1907L96.0593 62.75L95.75 63.0593L97.1907 64.5L95.75 65.9407L96.0593 66.25L97.5 64.8093L98.9407 66.25L99.25 65.9407L97.8093 64.5V64.5Z" fill="white"/>
+</mask>
+<g mask="url(#mask0_8_2963)">
+<rect width="14" height="14" transform="translate(94 61)" fill="#171717"/>
+</g>
+<path d="M142.809 64.5L144.25 63.0593L143.941 62.75L142.5 64.1907L141.059 62.75L140.75 63.0593L142.191 64.5L140.75 65.9407L141.059 66.25L142.5 64.8093L143.941 66.25L144.25 65.9407L142.809 64.5V64.5Z" fill="black"/>
+<mask id="mask1_8_2963" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="140" y="62" width="5" height="5">
+<path d="M142.809 64.5L144.25 63.0593L143.941 62.75L142.5 64.1907L141.059 62.75L140.75 63.0593L142.191 64.5L140.75 65.9407L141.059 66.25L142.5 64.8093L143.941 66.25L144.25 65.9407L142.809 64.5V64.5Z" fill="white"/>
+</mask>
+<g mask="url(#mask1_8_2963)">
+<rect width="14" height="14" transform="translate(139 61)" fill="#171717"/>
+</g>
+<path d="M187.809 64.5L189.25 63.0593L188.941 62.75L187.5 64.1907L186.059 62.75L185.75 63.0593L187.191 64.5L185.75 65.9407L186.059 66.25L187.5 64.8093L188.941 66.25L189.25 65.9407L187.809 64.5V64.5Z" fill="black"/>
+<mask id="mask2_8_2963" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="185" y="62" width="5" height="5">
+<path d="M187.809 64.5L189.25 63.0593L188.941 62.75L187.5 64.1907L186.059 62.75L185.75 63.0593L187.191 64.5L185.75 65.9407L186.059 66.25L187.5 64.8093L188.941 66.25L189.25 65.9407L187.809 64.5V64.5Z" fill="white"/>
+</mask>
+<g mask="url(#mask2_8_2963)">
+<rect width="14" height="14" transform="translate(184 61)" fill="#171717"/>
+</g>
+<path d="M232.809 64.5L234.25 63.0593L233.941 62.75L232.5 64.1907L231.059 62.75L230.75 63.0593L232.191 64.5L230.75 65.9407L231.059 66.25L232.5 64.8093L233.941 66.25L234.25 65.9407L232.809 64.5V64.5Z" fill="black"/>
+<mask id="mask3_8_2963" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="230" y="62" width="5" height="5">
+<path d="M232.809 64.5L234.25 63.0593L233.941 62.75L232.5 64.1907L231.059 62.75L230.75 63.0593L232.191 64.5L230.75 65.9407L231.059 66.25L232.5 64.8093L233.941 66.25L234.25 65.9407L232.809 64.5V64.5Z" fill="white"/>
+</mask>
+<g mask="url(#mask3_8_2963)">
+<rect width="14" height="14" transform="translate(229 61)" fill="#171717"/>
+</g>
+<rect x="66" y="127" width="187" height="23" fill="white"/>
+<rect x="66" y="78" width="187" height="9" fill="white"/>
+</svg>
