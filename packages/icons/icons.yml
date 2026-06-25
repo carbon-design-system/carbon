@@ -4580,7 +4580,7 @@
     - data
   sizes:
     - 32
-- name: chart-performance
+- name: chart--performance
   friendly_name: Chart performance
   aliases:
     - chart
