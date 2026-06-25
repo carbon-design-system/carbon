@@ -6,6 +6,9 @@
 //
 
 @forward 'search';
+@forward 'typeahead';
 @use 'search';
+@use 'typeahead';
 
 @include search.search;
+@include typeahead.typeahead;
