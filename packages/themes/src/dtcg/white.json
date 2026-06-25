@@ -5,8 +5,139 @@
     "com.ibm.carbon": {
       "color-scheme": "light"
     }
+  },
+  "background": {
+    "$type": "color",
+    "$value": {
+      "colorSpace": "srgb",
+      "components": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "hex": "#ffffff"
     },
-    "background": {
+    "$description": "Default page background"
+  },
+  "background-inverse": {
+    "$type": "color",
+    "$value": {
+      "colorSpace": "srgb",
+      "components": [
+        0.223529,
+        0.223529,
+        0.223529
+      ],
+      "hex": "#393939"
+    },
+    "$description": "Inverse background for dark UI elements"
+  },
+  "background-brand": {
+    "$type": "color",
+    "$value": {
+      "colorSpace": "srgb",
+      "components": [
+        0.058824,
+        0.384314,
+        0.996078
+      ],
+      "hex": "#0f62fe"
+    },
+    "$description": "Brand color for backgrounds"
+  },
+  "background-active": {
+    "$type": "color",
+    "$value": {
+      "colorSpace": "srgb",
+      "components": [
+        0.552941,
+        0.552941,
+        0.552941
+      ],
+      "alpha": 0.5
+    },
+    "$description": "Active state background"
+  },
+  "background-hover": {
+    "$type": "color",
+    "$value": {
+      "colorSpace": "srgb",
+      "components": [
+        0.552941,
+        0.552941,
+        0.552941
+      ],
+      "alpha": 0.12
+    },
+    "$description": "Hover state background"
+  },
+  "background-inverse-hover": {
+    "$type": "color",
+    "$value": {
+      "colorSpace": "srgb",
+      "components": [
+        0.278431,
+        0.278431,
+        0.278431
+      ],
+      "hex": "#474747"
+    },
+    "$description": "Hover state for inverse backgrounds"
+  },
+  "background-selected": {
+    "$type": "color",
+    "$value": {
+      "colorSpace": "srgb",
+      "components": [
+        0.552941,
+        0.552941,
+        0.552941
+      ],
+      "alpha": 0.2
+    },
+    "$description": "Selected state background"
+  },
+  "background-selected-hover": {
+    "$type": "color",
+    "$value": {
+      "colorSpace": "srgb",
+      "components": [
+        0.552941,
+        0.552941,
+        0.552941
+      ],
+      "alpha": 0.32
+    },
+    "$description": "Hover state for selected backgrounds"
+  },
+  "layer": {
+    "01": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.956863,
+          0.956863,
+          0.956863
+        ],
+        "hex": "#f4f4f4"
+      },
+      "$description": "Primary layer background"
+    },
+    "active-01": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.776471,
+          0.776471,
+          0.776471
+        ],
+        "hex": "#c6c6c6"
+      },
+      "$description": "Active state for layer 01"
+    },
+    "background-01": {
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
@@ -17,1245 +148,48 @@
         ],
         "hex": "#ffffff"
       },
-      "$description": "Default page background"
+      "$description": "Background behind layer 01"
     },
-    "background-inverse": {
+    "hover-01": {
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
         "components": [
-          0.223529,
-          0.223529,
-          0.223529
+          0.909804,
+          0.909804,
+          0.909804
         ],
-        "hex": "#393939"
+        "hex": "#e8e8e8"
       },
-      "$description": "Inverse background for dark UI elements"
+      "$description": "Hover state for layer 01"
     },
-    "background-brand": {
+    "selected-01": {
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
         "components": [
-          0.058824,
-          0.384314,
-          0.996078
+          0.878431,
+          0.878431,
+          0.878431
         ],
-        "hex": "#0f62fe"
+        "hex": "#e0e0e0"
       },
-      "$description": "Brand color for backgrounds"
+      "$description": "Selected state for layer 01"
     },
-    "background-active": {
+    "selected-hover-01": {
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
         "components": [
-          0.552941,
-          0.552941,
-          0.552941
+          0.819608,
+          0.819608,
+          0.819608
         ],
-        "alpha": 0.5
+        "hex": "#d1d1d1"
       },
-      "$description": "Active state background"
+      "$description": "Hover state for selected layer 01"
     },
-    "background-hover": {
-      "$type": "color",
-      "$value": {
-        "colorSpace": "srgb",
-        "components": [
-          0.552941,
-          0.552941,
-          0.552941
-        ],
-        "alpha": 0.12
-      },
-      "$description": "Hover state background"
-    },
-    "background-inverse-hover": {
-      "$type": "color",
-      "$value": {
-        "colorSpace": "srgb",
-        "components": [
-          0.298039,
-          0.298039,
-          0.298039
-        ],
-        "hex": "#4c4c4c"
-      },
-      "$description": "Hover state for inverse backgrounds"
-    },
-    "background-selected": {
-      "$type": "color",
-      "$value": {
-        "colorSpace": "srgb",
-        "components": [
-          0.552941,
-          0.552941,
-          0.552941
-        ],
-        "alpha": 0.2
-      },
-      "$description": "Selected state background"
-    },
-    "background-selected-hover": {
-      "$type": "color",
-      "$value": {
-        "colorSpace": "srgb",
-        "components": [
-          0.552941,
-          0.552941,
-          0.552941
-        ],
-        "alpha": 0.32
-      },
-      "$description": "Hover state for selected backgrounds"
-    },
-    "layer": {
-      "01": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            0.956863,
-            0.956863,
-            0.956863
-          ],
-          "hex": "#f4f4f4"
-        },
-        "$description": "Primary layer background"
-      },
-      "active-01": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            0.776471,
-            0.776471,
-            0.776471
-          ],
-          "hex": "#c6c6c6"
-        },
-        "$description": "Active state for layer 01"
-      },
-      "background-01": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            1.0,
-            1.0,
-            1.0
-          ],
-          "hex": "#ffffff"
-        },
-        "$description": "Background behind layer 01"
-      },
-      "hover-01": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            0.909804,
-            0.909804,
-            0.909804
-          ],
-          "hex": "#e8e8e8"
-        },
-        "$description": "Hover state for layer 01"
-      },
-      "selected-01": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            0.878431,
-            0.878431,
-            0.878431
-          ],
-          "hex": "#e0e0e0"
-        },
-        "$description": "Selected state for layer 01"
-      },
-      "selected-hover-01": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            0.819608,
-            0.819608,
-            0.819608
-          ],
-          "hex": "#d1d1d1"
-        },
-        "$description": "Hover state for selected layer 01"
-      },
-      "02": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            1.0,
-            1.0,
-            1.0
-          ],
-          "hex": "#ffffff"
-        },
-        "$description": "Secondary layer background"
-      },
-      "active-02": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            0.776471,
-            0.776471,
-            0.776471
-          ],
-          "hex": "#c6c6c6"
-        },
-        "$description": "Active state for layer 02"
-      },
-      "background-02": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            0.956863,
-            0.956863,
-            0.956863
-          ],
-          "hex": "#f4f4f4"
-        },
-        "$description": "Background behind layer 02"
-      },
-      "hover-02": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            0.956863,
-            0.956863,
-            0.956863
-          ],
-          "hex": "#f4f4f4"
-        },
-        "$description": "Hover state for layer 02"
-      },
-      "selected-02": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            0.878431,
-            0.878431,
-            0.878431
-          ],
-          "hex": "#e0e0e0"
-        },
-        "$description": "Selected state for layer 02"
-      },
-      "selected-hover-02": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            0.819608,
-            0.819608,
-            0.819608
-          ],
-          "hex": "#d1d1d1"
-        },
-        "$description": "Hover state for selected layer 02"
-      },
-      "03": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            0.956863,
-            0.956863,
-            0.956863
-          ],
-          "hex": "#f4f4f4"
-        },
-        "$description": "Tertiary layer background"
-      },
-      "active-03": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            0.776471,
-            0.776471,
-            0.776471
-          ],
-          "hex": "#c6c6c6"
-        },
-        "$description": "Active state for layer 03"
-      },
-      "background-03": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            1.0,
-            1.0,
-            1.0
-          ],
-          "hex": "#ffffff"
-        },
-        "$description": "Background behind layer 03"
-      },
-      "hover-03": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            0.909804,
-            0.909804,
-            0.909804
-          ],
-          "hex": "#e8e8e8"
-        },
-        "$description": "Hover state for layer 03"
-      },
-      "selected-03": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            0.878431,
-            0.878431,
-            0.878431
-          ],
-          "hex": "#e0e0e0"
-        },
-        "$description": "Selected state for layer 03"
-      },
-      "selected-hover-03": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            0.819608,
-            0.819608,
-            0.819608
-          ],
-          "hex": "#d1d1d1"
-        },
-        "$description": "Hover state for selected layer 03"
-      },
-      "selected-inverse": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            0.086275,
-            0.086275,
-            0.086275
-          ],
-          "hex": "#161616"
-        },
-        "$description": "Inverse selected layer"
-      },
-      "selected-disabled": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            0.552941,
-            0.552941,
-            0.552941
-          ],
-          "hex": "#8d8d8d"
-        },
-        "$description": "Disabled selected layer"
-      },
-      "accent-01": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            0.878431,
-            0.878431,
-            0.878431
-          ],
-          "hex": "#e0e0e0"
-        },
-        "$description": "Primary accent layer"
-      },
-      "accent-active-01": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            0.658824,
-            0.658824,
-            0.658824
-          ],
-          "hex": "#a8a8a8"
-        },
-        "$description": "Active state for accent layer 01"
-      },
-      "accent-hover-01": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            0.819608,
-            0.819608,
-            0.819608
-          ],
-          "hex": "#d1d1d1"
-        },
-        "$description": "Hover state for accent layer 01"
-      },
-      "accent-02": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            0.878431,
-            0.878431,
-            0.878431
-          ],
-          "hex": "#e0e0e0"
-        },
-        "$description": "Secondary accent layer"
-      },
-      "accent-active-02": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            0.658824,
-            0.658824,
-            0.658824
-          ],
-          "hex": "#a8a8a8"
-        },
-        "$description": "Active state for accent layer 02"
-      },
-      "accent-hover-02": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            0.819608,
-            0.819608,
-            0.819608
-          ],
-          "hex": "#d1d1d1"
-        },
-        "$description": "Hover state for accent layer 02"
-      },
-      "accent-03": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            0.878431,
-            0.878431,
-            0.878431
-          ],
-          "hex": "#e0e0e0"
-        },
-        "$description": "Tertiary accent layer"
-      },
-      "accent-active-03": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            0.658824,
-            0.658824,
-            0.658824
-          ],
-          "hex": "#a8a8a8"
-        },
-        "$description": "Active state for accent layer 03"
-      },
-      "accent-hover-03": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            0.819608,
-            0.819608,
-            0.819608
-          ],
-          "hex": "#d1d1d1"
-        },
-        "$description": "Hover state for accent layer 03"
-      }
-    },
-    "field": {
-      "01": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            0.956863,
-            0.956863,
-            0.956863
-          ],
-          "hex": "#f4f4f4"
-        },
-        "$description": "Primary field background"
-      },
-      "hover-01": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            0.909804,
-            0.909804,
-            0.909804
-          ],
-          "hex": "#e8e8e8"
-        },
-        "$description": "Hover state for field 01"
-      },
-      "02": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            1.0,
-            1.0,
-            1.0
-          ],
-          "hex": "#ffffff"
-        },
-        "$description": "Secondary field background"
-      },
-      "hover-02": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            0.956863,
-            0.956863,
-            0.956863
-          ],
-          "hex": "#f4f4f4"
-        },
-        "$description": "Hover state for field 02"
-      },
-      "03": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            0.956863,
-            0.956863,
-            0.956863
-          ],
-          "hex": "#f4f4f4"
-        },
-        "$description": "Tertiary field background"
-      },
-      "hover-03": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            0.909804,
-            0.909804,
-            0.909804
-          ],
-          "hex": "#e8e8e8"
-        },
-        "$description": "Hover state for field 03"
-      }
-    },
-    "border": {
-      "subtle-00": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            0.878431,
-            0.878431,
-            0.878431
-          ],
-          "hex": "#e0e0e0"
-        },
-        "$description": "Subtle border for level 00"
-      },
-      "subtle-01": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            0.776471,
-            0.776471,
-            0.776471
-          ],
-          "hex": "#c6c6c6"
-        },
-        "$description": "Subtle border for level 01"
-      },
-      "subtle-selected-01": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            0.776471,
-            0.776471,
-            0.776471
-          ],
-          "hex": "#c6c6c6"
-        },
-        "$description": "Selected subtle border for level 01"
-      },
-      "subtle-02": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            0.878431,
-            0.878431,
-            0.878431
-          ],
-          "hex": "#e0e0e0"
-        },
-        "$description": "Subtle border for level 02"
-      },
-      "subtle-selected-02": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            0.776471,
-            0.776471,
-            0.776471
-          ],
-          "hex": "#c6c6c6"
-        },
-        "$description": "Selected subtle border for level 02"
-      },
-      "subtle-03": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            0.776471,
-            0.776471,
-            0.776471
-          ],
-          "hex": "#c6c6c6"
-        },
-        "$description": "Subtle border for level 03"
-      },
-      "subtle-selected-03": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            0.776471,
-            0.776471,
-            0.776471
-          ],
-          "hex": "#c6c6c6"
-        },
-        "$description": "Selected subtle border for level 03"
-      },
-      "strong-01": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            0.552941,
-            0.552941,
-            0.552941
-          ],
-          "hex": "#8d8d8d"
-        },
-        "$description": "Strong border for level 01"
-      },
-      "strong-02": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            0.552941,
-            0.552941,
-            0.552941
-          ],
-          "hex": "#8d8d8d"
-        },
-        "$description": "Strong border for level 02"
-      },
-      "strong-03": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            0.552941,
-            0.552941,
-            0.552941
-          ],
-          "hex": "#8d8d8d"
-        },
-        "$description": "Strong border for level 03"
-      },
-      "tile-01": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            0.776471,
-            0.776471,
-            0.776471
-          ],
-          "hex": "#c6c6c6"
-        },
-        "$description": "Tile border for level 01"
-      },
-      "tile-02": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            0.658824,
-            0.658824,
-            0.658824
-          ],
-          "hex": "#a8a8a8"
-        },
-        "$description": "Tile border for level 02"
-      },
-      "tile-03": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            0.776471,
-            0.776471,
-            0.776471
-          ],
-          "hex": "#c6c6c6"
-        },
-        "$description": "Tile border for level 03"
-      },
-      "inverse": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            0.086275,
-            0.086275,
-            0.086275
-          ],
-          "hex": "#161616"
-        },
-        "$description": "Inverse border color"
-      },
-      "interactive": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            0.058824,
-            0.384314,
-            0.996078
-          ],
-          "hex": "#0f62fe"
-        },
-        "$description": "Interactive border color"
-      },
-      "disabled": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            0.776471,
-            0.776471,
-            0.776471
-          ],
-          "hex": "#c6c6c6"
-        },
-        "$description": "Disabled border color"
-      }
-    },
-    "text": {
-      "primary": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            0.086275,
-            0.086275,
-            0.086275
-          ],
-          "hex": "#161616"
-        },
-        "$description": "Primary text color"
-      },
-      "secondary": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            0.321569,
-            0.321569,
-            0.321569
-          ],
-          "hex": "#525252"
-        },
-        "$description": "Secondary text color"
-      },
-      "placeholder": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            0.086275,
-            0.086275,
-            0.086275
-          ],
-          "alpha": 0.4
-        },
-        "$description": "Placeholder text color"
-      },
-      "helper": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            0.435294,
-            0.435294,
-            0.435294
-          ],
-          "hex": "#6f6f6f"
-        },
-        "$description": "Helper text color"
-      },
-      "error": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            0.854902,
-            0.117647,
-            0.156863
-          ],
-          "hex": "#da1e28"
-        },
-        "$description": "Error text color"
-      },
-      "inverse": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            1.0,
-            1.0,
-            1.0
-          ],
-          "hex": "#ffffff"
-        },
-        "$description": "Inverse text color"
-      },
-      "on-color": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            1.0,
-            1.0,
-            1.0
-          ],
-          "hex": "#ffffff"
-        },
-        "$description": "Text color on colored backgrounds"
-      },
-      "on-color-disabled": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            0.552941,
-            0.552941,
-            0.552941
-          ],
-          "hex": "#8d8d8d"
-        },
-        "$description": "Disabled text on colored backgrounds"
-      },
-      "disabled": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            0.086275,
-            0.086275,
-            0.086275
-          ],
-          "alpha": 0.25
-        },
-        "$description": "Disabled text color"
-      }
-    },
-    "link": {
-      "primary": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            0.058824,
-            0.384314,
-            0.996078
-          ],
-          "hex": "#0f62fe"
-        },
-        "$description": "Primary link color"
-      },
-      "primary-hover": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            0.0,
-            0.262745,
-            0.807843
-          ],
-          "hex": "#0043ce"
-        },
-        "$description": "Primary link hover color"
-      },
-      "secondary": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            0.0,
-            0.262745,
-            0.807843
-          ],
-          "hex": "#0043ce"
-        },
-        "$description": "Secondary link color"
-      },
-      "inverse": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            0.470588,
-            0.662745,
-            1.0
-          ],
-          "hex": "#78a9ff"
-        },
-        "$description": "Inverse link color"
-      },
-      "visited": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            0.541176,
-            0.247059,
-            0.988235
-          ],
-          "hex": "#8a3ffc"
-        },
-        "$description": "Visited link color"
-      },
-      "inverse-visited": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            0.745098,
-            0.584314,
-            1.0
-          ],
-          "hex": "#be95ff"
-        },
-        "$description": "Inverse visited link color"
-      },
-      "inverse-active": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            0.956863,
-            0.956863,
-            0.956863
-          ],
-          "hex": "#f4f4f4"
-        },
-        "$description": "Inverse active link color"
-      },
-      "inverse-hover": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            0.65098,
-            0.784314,
-            1.0
-          ],
-          "hex": "#a6c8ff"
-        },
-        "$description": "Inverse link hover color"
-      }
-    },
-    "icon": {
-      "primary": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            0.086275,
-            0.086275,
-            0.086275
-          ],
-          "hex": "#161616"
-        },
-        "$description": "Primary icon color"
-      },
-      "secondary": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            0.321569,
-            0.321569,
-            0.321569
-          ],
-          "hex": "#525252"
-        },
-        "$description": "Secondary icon color"
-      },
-      "inverse": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            1.0,
-            1.0,
-            1.0
-          ],
-          "hex": "#ffffff"
-        },
-        "$description": "Inverse icon color"
-      },
-      "on-color": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            1.0,
-            1.0,
-            1.0
-          ],
-          "hex": "#ffffff"
-        },
-        "$description": "Icon color on colored backgrounds"
-      },
-      "on-color-disabled": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            0.552941,
-            0.552941,
-            0.552941
-          ],
-          "hex": "#8d8d8d"
-        },
-        "$description": "Disabled icon on colored backgrounds"
-      },
-      "disabled": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            0.086275,
-            0.086275,
-            0.086275
-          ],
-          "alpha": 0.25
-        },
-        "$description": "Disabled icon color"
-      },
-      "interactive": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            0.058824,
-            0.384314,
-            0.996078
-          ],
-          "hex": "#0f62fe"
-        },
-        "$description": "Interactive icon color"
-      }
-    },
-    "support": {
-      "error": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            0.854902,
-            0.117647,
-            0.156863
-          ],
-          "hex": "#da1e28"
-        },
-        "$description": "Error support color"
-      },
-      "success": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            0.141176,
-            0.631373,
-            0.282353
-          ],
-          "hex": "#24a148"
-        },
-        "$description": "Success support color"
-      },
-      "warning": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            0.945098,
-            0.760784,
-            0.105882
-          ],
-          "hex": "#f1c21b"
-        },
-        "$description": "Warning support color"
-      },
-      "info": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            0.0,
-            0.262745,
-            0.807843
-          ],
-          "hex": "#0043ce"
-        },
-        "$description": "Info support color"
-      },
-      "error-inverse": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            0.980392,
-            0.301961,
-            0.337255
-          ],
-          "hex": "#fa4d56"
-        },
-        "$description": "Inverse error support color"
-      },
-      "success-inverse": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            0.258824,
-            0.745098,
-            0.396078
-          ],
-          "hex": "#42be65"
-        },
-        "$description": "Inverse success support color"
-      },
-      "warning-inverse": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            0.945098,
-            0.760784,
-            0.105882
-          ],
-          "hex": "#f1c21b"
-        },
-        "$description": "Inverse warning support color"
-      },
-      "info-inverse": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            0.270588,
-            0.537255,
-            1.0
-          ],
-          "hex": "#4589ff"
-        },
-        "$description": "Inverse info support color"
-      },
-      "caution-minor": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            0.945098,
-            0.760784,
-            0.105882
-          ],
-          "hex": "#f1c21b"
-        },
-        "$description": "Minor caution support color"
-      },
-      "caution-major": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            1.0,
-            0.513725,
-            0.168627
-          ],
-          "hex": "#ff832b"
-        },
-        "$description": "Major caution support color"
-      },
-      "caution-undefined": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            0.541176,
-            0.247059,
-            0.988235
-          ],
-          "hex": "#8a3ffc"
-        },
-        "$description": "Undefined caution support color"
-      }
-    },
-    "focus": {
-      "$type": "color",
-      "$value": {
-        "colorSpace": "srgb",
-        "components": [
-          0.058824,
-          0.384314,
-          0.996078
-        ],
-        "hex": "#0f62fe"
-      },
-      "$description": "Focus indicator color"
-    },
-    "focus-inset": {
+    "02": {
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
@@ -1266,9 +200,100 @@
         ],
         "hex": "#ffffff"
       },
-      "$description": "Inset focus indicator color"
+      "$description": "Secondary layer background"
     },
-    "focus-inverse": {
+    "active-02": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.776471,
+          0.776471,
+          0.776471
+        ],
+        "hex": "#c6c6c6"
+      },
+      "$description": "Active state for layer 02"
+    },
+    "background-02": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.956863,
+          0.956863,
+          0.956863
+        ],
+        "hex": "#f4f4f4"
+      },
+      "$description": "Background behind layer 02"
+    },
+    "hover-02": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.909804,
+          0.909804,
+          0.909804
+        ],
+        "hex": "#e8e8e8"
+      },
+      "$description": "Hover state for layer 02"
+    },
+    "selected-02": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.878431,
+          0.878431,
+          0.878431
+        ],
+        "hex": "#e0e0e0"
+      },
+      "$description": "Selected state for layer 02"
+    },
+    "selected-hover-02": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.819608,
+          0.819608,
+          0.819608
+        ],
+        "hex": "#d1d1d1"
+      },
+      "$description": "Hover state for selected layer 02"
+    },
+    "03": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.956863,
+          0.956863,
+          0.956863
+        ],
+        "hex": "#f4f4f4"
+      },
+      "$description": "Tertiary layer background"
+    },
+    "active-03": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.776471,
+          0.776471,
+          0.776471
+        ],
+        "hex": "#c6c6c6"
+      },
+      "$description": "Active state for layer 03"
+    },
+    "background-03": {
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
@@ -1279,7 +304,453 @@
         ],
         "hex": "#ffffff"
       },
-      "$description": "Inverse focus indicator color"
+      "$description": "Background behind layer 03"
+    },
+    "hover-03": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.909804,
+          0.909804,
+          0.909804
+        ],
+        "hex": "#e8e8e8"
+      },
+      "$description": "Hover state for layer 03"
+    },
+    "selected-03": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.878431,
+          0.878431,
+          0.878431
+        ],
+        "hex": "#e0e0e0"
+      },
+      "$description": "Selected state for layer 03"
+    },
+    "selected-hover-03": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.819608,
+          0.819608,
+          0.819608
+        ],
+        "hex": "#d1d1d1"
+      },
+      "$description": "Hover state for selected layer 03"
+    },
+    "selected-inverse": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.086275,
+          0.086275,
+          0.086275
+        ],
+        "hex": "#161616"
+      },
+      "$description": "Inverse selected layer"
+    },
+    "selected-disabled": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.552941,
+          0.552941,
+          0.552941
+        ],
+        "hex": "#8d8d8d"
+      },
+      "$description": "Disabled selected layer"
+    },
+    "accent-01": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.878431,
+          0.878431,
+          0.878431
+        ],
+        "hex": "#e0e0e0"
+      },
+      "$description": "Primary accent layer"
+    },
+    "accent-active-01": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.658824,
+          0.658824,
+          0.658824
+        ],
+        "hex": "#a8a8a8"
+      },
+      "$description": "Active state for accent layer 01"
+    },
+    "accent-hover-01": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.819608,
+          0.819608,
+          0.819608
+        ],
+        "hex": "#d1d1d1"
+      },
+      "$description": "Hover state for accent layer 01"
+    },
+    "accent-02": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.878431,
+          0.878431,
+          0.878431
+        ],
+        "hex": "#e0e0e0"
+      },
+      "$description": "Secondary accent layer"
+    },
+    "accent-active-02": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.658824,
+          0.658824,
+          0.658824
+        ],
+        "hex": "#a8a8a8"
+      },
+      "$description": "Active state for accent layer 02"
+    },
+    "accent-hover-02": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.819608,
+          0.819608,
+          0.819608
+        ],
+        "hex": "#d1d1d1"
+      },
+      "$description": "Hover state for accent layer 02"
+    },
+    "accent-03": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.878431,
+          0.878431,
+          0.878431
+        ],
+        "hex": "#e0e0e0"
+      },
+      "$description": "Tertiary accent layer"
+    },
+    "accent-active-03": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.658824,
+          0.658824,
+          0.658824
+        ],
+        "hex": "#a8a8a8"
+      },
+      "$description": "Active state for accent layer 03"
+    },
+    "accent-hover-03": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.819608,
+          0.819608,
+          0.819608
+        ],
+        "hex": "#d1d1d1"
+      },
+      "$description": "Hover state for accent layer 03"
+    }
+  },
+  "field": {
+    "01": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.956863,
+          0.956863,
+          0.956863
+        ],
+        "hex": "#f4f4f4"
+      },
+      "$description": "Primary field background"
+    },
+    "hover-01": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.909804,
+          0.909804,
+          0.909804
+        ],
+        "hex": "#e8e8e8"
+      },
+      "$description": "Hover state for field 01"
+    },
+    "02": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "hex": "#ffffff"
+      },
+      "$description": "Secondary field background"
+    },
+    "hover-02": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.909804,
+          0.909804,
+          0.909804
+        ],
+        "hex": "#e8e8e8"
+      },
+      "$description": "Hover state for field 02"
+    },
+    "03": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.956863,
+          0.956863,
+          0.956863
+        ],
+        "hex": "#f4f4f4"
+      },
+      "$description": "Tertiary field background"
+    },
+    "hover-03": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.909804,
+          0.909804,
+          0.909804
+        ],
+        "hex": "#e8e8e8"
+      },
+      "$description": "Hover state for field 03"
+    }
+  },
+  "border": {
+    "subtle-00": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.878431,
+          0.878431,
+          0.878431
+        ],
+        "hex": "#e0e0e0"
+      },
+      "$description": "Subtle border for level 00"
+    },
+    "subtle-01": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.776471,
+          0.776471,
+          0.776471
+        ],
+        "hex": "#c6c6c6"
+      },
+      "$description": "Subtle border for level 01"
+    },
+    "subtle-selected-01": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.776471,
+          0.776471,
+          0.776471
+        ],
+        "hex": "#c6c6c6"
+      },
+      "$description": "Selected subtle border for level 01"
+    },
+    "subtle-02": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.878431,
+          0.878431,
+          0.878431
+        ],
+        "hex": "#e0e0e0"
+      },
+      "$description": "Subtle border for level 02"
+    },
+    "subtle-selected-02": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.776471,
+          0.776471,
+          0.776471
+        ],
+        "hex": "#c6c6c6"
+      },
+      "$description": "Selected subtle border for level 02"
+    },
+    "subtle-03": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.776471,
+          0.776471,
+          0.776471
+        ],
+        "hex": "#c6c6c6"
+      },
+      "$description": "Subtle border for level 03"
+    },
+    "subtle-selected-03": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.776471,
+          0.776471,
+          0.776471
+        ],
+        "hex": "#c6c6c6"
+      },
+      "$description": "Selected subtle border for level 03"
+    },
+    "strong-01": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.552941,
+          0.552941,
+          0.552941
+        ],
+        "hex": "#8d8d8d"
+      },
+      "$description": "Strong border for level 01"
+    },
+    "strong-02": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.552941,
+          0.552941,
+          0.552941
+        ],
+        "hex": "#8d8d8d"
+      },
+      "$description": "Strong border for level 02"
+    },
+    "strong-03": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.552941,
+          0.552941,
+          0.552941
+        ],
+        "hex": "#8d8d8d"
+      },
+      "$description": "Strong border for level 03"
+    },
+    "tile-01": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.776471,
+          0.776471,
+          0.776471
+        ],
+        "hex": "#c6c6c6"
+      },
+      "$description": "Tile border for level 01"
+    },
+    "tile-02": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.658824,
+          0.658824,
+          0.658824
+        ],
+        "hex": "#a8a8a8"
+      },
+      "$description": "Tile border for level 02"
+    },
+    "tile-03": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.776471,
+          0.776471,
+          0.776471
+        ],
+        "hex": "#c6c6c6"
+      },
+      "$description": "Tile border for level 03"
+    },
+    "inverse": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.086275,
+          0.086275,
+          0.086275
+        ],
+        "hex": "#161616"
+      },
+      "$description": "Inverse border color"
     },
     "interactive": {
       "$type": "color",
@@ -1292,35 +763,115 @@
         ],
         "hex": "#0f62fe"
       },
-      "$description": "Interactive element color"
+      "$description": "Interactive border color"
     },
-    "highlight": {
+    "disabled": {
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
         "components": [
-          0.815686,
-          0.886275,
+          0.776471,
+          0.776471,
+          0.776471
+        ],
+        "hex": "#c6c6c6"
+      },
+      "$description": "Disabled border color"
+    }
+  },
+  "text": {
+    "primary": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.086275,
+          0.086275,
+          0.086275
+        ],
+        "hex": "#161616"
+      },
+      "$description": "Primary text color"
+    },
+    "secondary": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.321569,
+          0.321569,
+          0.321569
+        ],
+        "hex": "#525252"
+      },
+      "$description": "Secondary text color"
+    },
+    "placeholder": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.086275,
+          0.086275,
+          0.086275
+        ],
+        "alpha": 0.4
+      },
+      "$description": "Placeholder text color"
+    },
+    "helper": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.435294,
+          0.435294,
+          0.435294
+        ],
+        "hex": "#6f6f6f"
+      },
+      "$description": "Helper text color"
+    },
+    "error": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.854902,
+          0.117647,
+          0.156863
+        ],
+        "hex": "#da1e28"
+      },
+      "$description": "Error text color"
+    },
+    "inverse": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          1.0,
+          1.0,
           1.0
         ],
-        "hex": "#d0e2ff"
+        "hex": "#ffffff"
       },
-      "$description": "Highlight color"
+      "$description": "Inverse text color"
     },
-    "overlay": {
+    "on-color": {
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
         "components": [
-          0.0,
-          0.0,
-          0.0
+          1.0,
+          1.0,
+          1.0
         ],
-        "alpha": 0.6
+        "hex": "#ffffff"
       },
-      "$description": "Overlay background color"
+      "$description": "Text color on colored backgrounds"
     },
-    "toggle-off": {
+    "on-color-disabled": {
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
@@ -1331,9 +882,1815 @@
         ],
         "hex": "#8d8d8d"
       },
-      "$description": "Toggle off state color"
+      "$description": "Disabled text on colored backgrounds"
     },
-    "shadow": {
+    "disabled": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.086275,
+          0.086275,
+          0.086275
+        ],
+        "alpha": 0.25
+      },
+      "$description": "Disabled text color"
+    }
+  },
+  "link": {
+    "primary": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.058824,
+          0.384314,
+          0.996078
+        ],
+        "hex": "#0f62fe"
+      },
+      "$description": "Primary link color"
+    },
+    "primary-hover": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.0,
+          0.262745,
+          0.807843
+        ],
+        "hex": "#0043ce"
+      },
+      "$description": "Primary link hover color"
+    },
+    "secondary": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.0,
+          0.262745,
+          0.807843
+        ],
+        "hex": "#0043ce"
+      },
+      "$description": "Secondary link color"
+    },
+    "inverse": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.470588,
+          0.662745,
+          1.0
+        ],
+        "hex": "#78a9ff"
+      },
+      "$description": "Inverse link color"
+    },
+    "visited": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.541176,
+          0.247059,
+          0.988235
+        ],
+        "hex": "#8a3ffc"
+      },
+      "$description": "Visited link color"
+    },
+    "inverse-visited": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.745098,
+          0.584314,
+          1.0
+        ],
+        "hex": "#be95ff"
+      },
+      "$description": "Inverse visited link color"
+    },
+    "inverse-active": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.956863,
+          0.956863,
+          0.956863
+        ],
+        "hex": "#f4f4f4"
+      },
+      "$description": "Inverse active link color"
+    },
+    "inverse-hover": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.65098,
+          0.784314,
+          1.0
+        ],
+        "hex": "#a6c8ff"
+      },
+      "$description": "Inverse link hover color"
+    }
+  },
+  "icon": {
+    "primary": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.086275,
+          0.086275,
+          0.086275
+        ],
+        "hex": "#161616"
+      },
+      "$description": "Primary icon color"
+    },
+    "secondary": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.321569,
+          0.321569,
+          0.321569
+        ],
+        "hex": "#525252"
+      },
+      "$description": "Secondary icon color"
+    },
+    "inverse": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "hex": "#ffffff"
+      },
+      "$description": "Inverse icon color"
+    },
+    "on-color": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "hex": "#ffffff"
+      },
+      "$description": "Icon color on colored backgrounds"
+    },
+    "on-color-disabled": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.552941,
+          0.552941,
+          0.552941
+        ],
+        "hex": "#8d8d8d"
+      },
+      "$description": "Disabled icon on colored backgrounds"
+    },
+    "disabled": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.086275,
+          0.086275,
+          0.086275
+        ],
+        "alpha": 0.25
+      },
+      "$description": "Disabled icon color"
+    },
+    "interactive": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.058824,
+          0.384314,
+          0.996078
+        ],
+        "hex": "#0f62fe"
+      },
+      "$description": "Interactive icon color"
+    }
+  },
+  "support": {
+    "error": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.854902,
+          0.117647,
+          0.156863
+        ],
+        "hex": "#da1e28"
+      },
+      "$description": "Error support color"
+    },
+    "success": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.141176,
+          0.631373,
+          0.282353
+        ],
+        "hex": "#24a148"
+      },
+      "$description": "Success support color"
+    },
+    "warning": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.945098,
+          0.760784,
+          0.105882
+        ],
+        "hex": "#f1c21b"
+      },
+      "$description": "Warning support color"
+    },
+    "info": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.0,
+          0.262745,
+          0.807843
+        ],
+        "hex": "#0043ce"
+      },
+      "$description": "Info support color"
+    },
+    "error-inverse": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.980392,
+          0.301961,
+          0.337255
+        ],
+        "hex": "#fa4d56"
+      },
+      "$description": "Inverse error support color"
+    },
+    "success-inverse": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.258824,
+          0.745098,
+          0.396078
+        ],
+        "hex": "#42be65"
+      },
+      "$description": "Inverse success support color"
+    },
+    "warning-inverse": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.945098,
+          0.760784,
+          0.105882
+        ],
+        "hex": "#f1c21b"
+      },
+      "$description": "Inverse warning support color"
+    },
+    "info-inverse": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.270588,
+          0.537255,
+          1.0
+        ],
+        "hex": "#4589ff"
+      },
+      "$description": "Inverse info support color"
+    },
+    "caution-minor": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.945098,
+          0.760784,
+          0.105882
+        ],
+        "hex": "#f1c21b"
+      },
+      "$description": "Minor caution support color"
+    },
+    "caution-major": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          1.0,
+          0.513725,
+          0.168627
+        ],
+        "hex": "#ff832b"
+      },
+      "$description": "Major caution support color"
+    },
+    "caution-undefined": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.541176,
+          0.247059,
+          0.988235
+        ],
+        "hex": "#8a3ffc"
+      },
+      "$description": "Undefined caution support color"
+    }
+  },
+  "focus": {
+    "$type": "color",
+    "$value": {
+      "colorSpace": "srgb",
+      "components": [
+        0.058824,
+        0.384314,
+        0.996078
+      ],
+      "hex": "#0f62fe"
+    },
+    "$description": "Focus indicator color"
+  },
+  "focus-inset": {
+    "$type": "color",
+    "$value": {
+      "colorSpace": "srgb",
+      "components": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "hex": "#ffffff"
+    },
+    "$description": "Inset focus indicator color"
+  },
+  "focus-inverse": {
+    "$type": "color",
+    "$value": {
+      "colorSpace": "srgb",
+      "components": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "hex": "#ffffff"
+    },
+    "$description": "Inverse focus indicator color"
+  },
+  "interactive": {
+    "$type": "color",
+    "$value": {
+      "colorSpace": "srgb",
+      "components": [
+        0.058824,
+        0.384314,
+        0.996078
+      ],
+      "hex": "#0f62fe"
+    },
+    "$description": "Interactive element color"
+  },
+  "highlight": {
+    "$type": "color",
+    "$value": {
+      "colorSpace": "srgb",
+      "components": [
+        0.815686,
+        0.886275,
+        1.0
+      ],
+      "hex": "#d0e2ff"
+    },
+    "$description": "Highlight color"
+  },
+  "overlay": {
+    "$type": "color",
+    "$value": {
+      "colorSpace": "srgb",
+      "components": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "alpha": 0.6
+    },
+    "$description": "Overlay background color"
+  },
+  "toggle-off": {
+    "$type": "color",
+    "$value": {
+      "colorSpace": "srgb",
+      "components": [
+        0.552941,
+        0.552941,
+        0.552941
+      ],
+      "hex": "#8d8d8d"
+    },
+    "$description": "Toggle off state color"
+  },
+  "shadow": {
+    "$type": "color",
+    "$value": {
+      "colorSpace": "srgb",
+      "components": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "alpha": 0.3
+    },
+    "$description": "Shadow color"
+  },
+  "skeleton": {
+    "background": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.909804,
+          0.909804,
+          0.909804
+        ],
+        "hex": "#e8e8e8"
+      },
+      "$description": "Skeleton loading background"
+    },
+    "element": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.776471,
+          0.776471,
+          0.776471
+        ],
+        "hex": "#c6c6c6"
+      },
+      "$description": "Skeleton loading element"
+    }
+  },
+  "syntax": {
+    "comment": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.098039,
+          0.501961,
+          0.219608
+        ],
+        "hex": "#198038"
+      },
+      "$description": "Syntax comment"
+    },
+    "line-comment": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.098039,
+          0.501961,
+          0.219608
+        ],
+        "hex": "#198038"
+      },
+      "$description": "Syntax line comment"
+    },
+    "block-comment": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.098039,
+          0.501961,
+          0.219608
+        ],
+        "hex": "#198038"
+      },
+      "$description": "Syntax block comment"
+    },
+    "doc-comment": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.098039,
+          0.501961,
+          0.219608
+        ],
+        "hex": "#198038"
+      },
+      "$description": "Syntax doc comment"
+    },
+    "string": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.086275,
+          0.086275,
+          0.086275
+        ],
+        "hex": "#161616"
+      },
+      "$description": "Syntax string"
+    },
+    "doc-string": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.086275,
+          0.086275,
+          0.086275
+        ],
+        "hex": "#161616"
+      },
+      "$description": "Syntax doc string"
+    },
+    "keyword": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.058824,
+          0.384314,
+          0.996078
+        ],
+        "hex": "#0f62fe"
+      },
+      "$description": "Syntax keyword"
+    },
+    "operator-keyword": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.058824,
+          0.384314,
+          0.996078
+        ],
+        "hex": "#0f62fe"
+      },
+      "$description": "Syntax operator keyword"
+    },
+    "control-keyword": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.411765,
+          0.160784,
+          0.768627
+        ],
+        "hex": "#6929c4"
+      },
+      "$description": "Syntax control keyword"
+    },
+    "definition-keyword": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.0,
+          0.32549,
+          0.603922
+        ],
+        "hex": "#00539a"
+      },
+      "$description": "Syntax definition keyword"
+    },
+    "module-keyword": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.411765,
+          0.160784,
+          0.768627
+        ],
+        "hex": "#6929c4"
+      },
+      "$description": "Syntax module keyword"
+    },
+    "variable": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.058824,
+          0.384314,
+          0.996078
+        ],
+        "hex": "#0f62fe"
+      },
+      "$description": "Syntax variable"
+    },
+    "name": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.058824,
+          0.384314,
+          0.996078
+        ],
+        "hex": "#0f62fe"
+      },
+      "$description": "Syntax name"
+    },
+    "variable-name": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.058824,
+          0.384314,
+          0.996078
+        ],
+        "hex": "#0f62fe"
+      },
+      "$description": "Syntax variable name"
+    },
+    "label-name": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.058824,
+          0.384314,
+          0.996078
+        ],
+        "hex": "#0f62fe"
+      },
+      "$description": "Syntax label name"
+    },
+    "attribute": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.0,
+          0.32549,
+          0.603922
+        ],
+        "hex": "#00539a"
+      },
+      "$description": "Syntax attribute"
+    },
+    "attribute-name": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.0,
+          0.32549,
+          0.603922
+        ],
+        "hex": "#00539a"
+      },
+      "$description": "Syntax attribute name"
+    },
+    "property-name": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.0,
+          0.32549,
+          0.603922
+        ],
+        "hex": "#00539a"
+      },
+      "$description": "Syntax property name"
+    },
+    "tag": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.0,
+          0.490196,
+          0.47451
+        ],
+        "hex": "#007d79"
+      },
+      "$description": "Syntax tag"
+    },
+    "tag-name": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.0,
+          0.490196,
+          0.47451
+        ],
+        "hex": "#007d79"
+      },
+      "$description": "Syntax tag name"
+    },
+    "type": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.0,
+          0.490196,
+          0.47451
+        ],
+        "hex": "#007d79"
+      },
+      "$description": "Syntax type"
+    },
+    "type-name": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.0,
+          0.490196,
+          0.47451
+        ],
+        "hex": "#007d79"
+      },
+      "$description": "Syntax type name"
+    },
+    "class-name": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.0,
+          0.490196,
+          0.47451
+        ],
+        "hex": "#007d79"
+      },
+      "$description": "Syntax class name"
+    },
+    "namespace": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.0,
+          0.490196,
+          0.47451
+        ],
+        "hex": "#007d79"
+      },
+      "$description": "Syntax namespace"
+    },
+    "macro-name": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.086275,
+          0.086275,
+          0.086275
+        ],
+        "hex": "#161616"
+      },
+      "$description": "Syntax macro name"
+    },
+    "atom": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.086275,
+          0.086275,
+          0.086275
+        ],
+        "hex": "#161616"
+      },
+      "$description": "Syntax atom"
+    },
+    "literal": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.086275,
+          0.086275,
+          0.086275
+        ],
+        "hex": "#161616"
+      },
+      "$description": "Syntax literal"
+    },
+    "bool": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.086275,
+          0.086275,
+          0.086275
+        ],
+        "hex": "#161616"
+      },
+      "$description": "Syntax bool"
+    },
+    "null": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.086275,
+          0.086275,
+          0.086275
+        ],
+        "hex": "#161616"
+      },
+      "$description": "Syntax null"
+    },
+    "self": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.0,
+          0.490196,
+          0.47451
+        ],
+        "hex": "#007d79"
+      },
+      "$description": "Syntax self"
+    },
+    "number": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.098039,
+          0.501961,
+          0.219608
+        ],
+        "hex": "#198038"
+      },
+      "$description": "Syntax number"
+    },
+    "integer": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.098039,
+          0.501961,
+          0.219608
+        ],
+        "hex": "#198038"
+      },
+      "$description": "Syntax integer"
+    },
+    "float": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.098039,
+          0.501961,
+          0.219608
+        ],
+        "hex": "#198038"
+      },
+      "$description": "Syntax float"
+    },
+    "unit": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.098039,
+          0.501961,
+          0.219608
+        ],
+        "hex": "#198038"
+      },
+      "$description": "Syntax unit"
+    },
+    "character": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.086275,
+          0.086275,
+          0.086275
+        ],
+        "hex": "#161616"
+      },
+      "$description": "Syntax character"
+    },
+    "attribute-value": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.086275,
+          0.086275,
+          0.086275
+        ],
+        "hex": "#161616"
+      },
+      "$description": "Syntax attribute value"
+    },
+    "special-string": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.541176,
+          0.247059,
+          0.988235
+        ],
+        "hex": "#8a3ffc"
+      },
+      "$description": "Syntax special string"
+    },
+    "regexp": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.411765,
+          0.160784,
+          0.768627
+        ],
+        "hex": "#6929c4"
+      },
+      "$description": "Syntax regexp"
+    },
+    "escape": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.203922,
+          0.227451,
+          0.247059
+        ],
+        "hex": "#343a3f"
+      },
+      "$description": "Syntax escape"
+    },
+    "url": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.203922,
+          0.227451,
+          0.247059
+        ],
+        "hex": "#343a3f"
+      },
+      "$description": "Syntax url"
+    },
+    "color": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.086275,
+          0.086275,
+          0.086275
+        ],
+        "hex": "#161616"
+      },
+      "$description": "Syntax color"
+    },
+    "operator": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.203922,
+          0.227451,
+          0.247059
+        ],
+        "hex": "#343a3f"
+      },
+      "$description": "Syntax operator"
+    },
+    "deref-operator": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.203922,
+          0.227451,
+          0.247059
+        ],
+        "hex": "#343a3f"
+      },
+      "$description": "Syntax deref operator"
+    },
+    "arithmetic-operator": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.203922,
+          0.227451,
+          0.247059
+        ],
+        "hex": "#343a3f"
+      },
+      "$description": "Syntax arithmetic operator"
+    },
+    "logic-operator": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.203922,
+          0.227451,
+          0.247059
+        ],
+        "hex": "#343a3f"
+      },
+      "$description": "Syntax logic operator"
+    },
+    "bitwise-operator": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.203922,
+          0.227451,
+          0.247059
+        ],
+        "hex": "#343a3f"
+      },
+      "$description": "Syntax bitwise operator"
+    },
+    "compare-operator": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.203922,
+          0.227451,
+          0.247059
+        ],
+        "hex": "#343a3f"
+      },
+      "$description": "Syntax compare operator"
+    },
+    "update-operator": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.203922,
+          0.227451,
+          0.247059
+        ],
+        "hex": "#343a3f"
+      },
+      "$description": "Syntax update operator"
+    },
+    "definition-operator": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.0,
+          0.32549,
+          0.603922
+        ],
+        "hex": "#00539a"
+      },
+      "$description": "Syntax definition operator"
+    },
+    "type-operator": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.0,
+          0.490196,
+          0.47451
+        ],
+        "hex": "#007d79"
+      },
+      "$description": "Syntax type operator"
+    },
+    "control-operator": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.411765,
+          0.160784,
+          0.768627
+        ],
+        "hex": "#6929c4"
+      },
+      "$description": "Syntax control operator"
+    },
+    "modifier": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.058824,
+          0.384314,
+          0.996078
+        ],
+        "hex": "#0f62fe"
+      },
+      "$description": "Syntax modifier"
+    },
+    "punctuation": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.203922,
+          0.227451,
+          0.247059
+        ],
+        "hex": "#343a3f"
+      },
+      "$description": "Syntax punctuation"
+    },
+    "separator": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.203922,
+          0.227451,
+          0.247059
+        ],
+        "hex": "#343a3f"
+      },
+      "$description": "Syntax separator"
+    },
+    "bracket": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.203922,
+          0.227451,
+          0.247059
+        ],
+        "hex": "#343a3f"
+      },
+      "$description": "Syntax bracket"
+    },
+    "angle-bracket": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.411765,
+          0.439216,
+          0.466667
+        ],
+        "hex": "#697077"
+      },
+      "$description": "Syntax angle bracket"
+    },
+    "square-bracket": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.203922,
+          0.227451,
+          0.247059
+        ],
+        "hex": "#343a3f"
+      },
+      "$description": "Syntax square bracket"
+    },
+    "paren": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.203922,
+          0.227451,
+          0.247059
+        ],
+        "hex": "#343a3f"
+      },
+      "$description": "Syntax paren"
+    },
+    "brace": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.203922,
+          0.227451,
+          0.247059
+        ],
+        "hex": "#343a3f"
+      },
+      "$description": "Syntax brace"
+    },
+    "content": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.086275,
+          0.086275,
+          0.086275
+        ],
+        "hex": "#161616"
+      },
+      "$description": "Syntax content"
+    },
+    "list": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.086275,
+          0.086275,
+          0.086275
+        ],
+        "hex": "#161616"
+      },
+      "$description": "Syntax list"
+    },
+    "emphasis": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.086275,
+          0.086275,
+          0.086275
+        ],
+        "hex": "#161616"
+      },
+      "$description": "Syntax emphasis"
+    },
+    "strong": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.086275,
+          0.086275,
+          0.086275
+        ],
+        "hex": "#161616"
+      },
+      "$description": "Syntax strong"
+    },
+    "monospace": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.086275,
+          0.086275,
+          0.086275
+        ],
+        "hex": "#161616"
+      },
+      "$description": "Syntax monospace"
+    },
+    "strikethrough": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.086275,
+          0.086275,
+          0.086275
+        ],
+        "hex": "#161616"
+      },
+      "$description": "Syntax strikethrough"
+    },
+    "heading": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.0,
+          0.32549,
+          0.603922
+        ],
+        "hex": "#00539a"
+      },
+      "$description": "Syntax heading"
+    },
+    "content-separator": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.203922,
+          0.227451,
+          0.247059
+        ],
+        "hex": "#343a3f"
+      },
+      "$description": "Syntax content separator"
+    },
+    "quote": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.098039,
+          0.501961,
+          0.219608
+        ],
+        "hex": "#198038"
+      },
+      "$description": "Syntax quote"
+    },
+    "link": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.058824,
+          0.384314,
+          0.996078
+        ],
+        "hex": "#0f62fe"
+      },
+      "$description": "Syntax link"
+    },
+    "invalid": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.854902,
+          0.117647,
+          0.156863
+        ],
+        "hex": "#da1e28"
+      },
+      "$description": "Syntax invalid"
+    },
+    "meta": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.098039,
+          0.501961,
+          0.219608
+        ],
+        "hex": "#198038"
+      },
+      "$description": "Syntax meta"
+    },
+    "document-meta": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.098039,
+          0.501961,
+          0.219608
+        ],
+        "hex": "#198038"
+      },
+      "$description": "Syntax document meta"
+    },
+    "annotation": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.0,
+          0.490196,
+          0.47451
+        ],
+        "hex": "#007d79"
+      },
+      "$description": "Syntax annotation"
+    },
+    "processing-instruction": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.086275,
+          0.086275,
+          0.086275
+        ],
+        "hex": "#161616"
+      },
+      "$description": "Syntax processing instruction"
+    },
+    "definition": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.0,
+          0.32549,
+          0.603922
+        ],
+        "hex": "#00539a"
+      },
+      "$description": "Syntax definition"
+    },
+    "constant": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.058824,
+          0.384314,
+          0.996078
+        ],
+        "hex": "#0f62fe"
+      },
+      "$description": "Syntax constant"
+    },
+    "function": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.556863,
+          0.415686,
+          0.0
+        ],
+        "hex": "#8e6a00"
+      },
+      "$description": "Syntax function"
+    },
+    "standard": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.058824,
+          0.384314,
+          0.996078
+        ],
+        "hex": "#0f62fe"
+      },
+      "$description": "Syntax standard"
+    },
+    "local": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.058824,
+          0.384314,
+          0.996078
+        ],
+        "hex": "#0f62fe"
+      },
+      "$description": "Syntax local"
+    },
+    "special": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.058824,
+          0.384314,
+          0.996078
+        ],
+        "hex": "#0f62fe"
+      },
+      "$description": "Syntax special"
+    },
+    "inserted": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.654902,
+          0.941176,
+          0.729412
+        ],
+        "hex": "#a7f0ba"
+      },
+      "$description": "Syntax inserted"
+    },
+    "deleted": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          1.0,
+          0.843137,
+          0.85098
+        ],
+        "hex": "#ffd7d9"
+      },
+      "$description": "Syntax deleted"
+    },
+    "heading-1": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.0,
+          0.32549,
+          0.603922
+        ],
+        "hex": "#00539a"
+      },
+      "$description": "Syntax heading 1"
+    },
+    "heading-2": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.0,
+          0.32549,
+          0.603922
+        ],
+        "hex": "#00539a"
+      },
+      "$description": "Syntax heading 2"
+    },
+    "heading-3": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.0,
+          0.32549,
+          0.603922
+        ],
+        "hex": "#00539a"
+      },
+      "$description": "Syntax heading 3"
+    },
+    "heading-4": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.0,
+          0.32549,
+          0.603922
+        ],
+        "hex": "#00539a"
+      },
+      "$description": "Syntax heading 4"
+    },
+    "heading-5": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.0,
+          0.32549,
+          0.603922
+        ],
+        "hex": "#00539a"
+      },
+      "$description": "Syntax heading 5"
+    },
+    "heading-6": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.0,
+          0.32549,
+          0.603922
+        ],
+        "hex": "#00539a"
+      },
+      "$description": "Syntax heading 6"
+    }
+  },
+  "ai": {
+    "inner-shadow": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.270588,
+          0.537255,
+          1.0
+        ],
+        "alpha": 0.1
+      },
+      "$description": "AI inner shadow"
+    },
+    "aura-start-sm": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.270588,
+          0.537255,
+          1.0
+        ],
+        "alpha": 0.16
+      },
+      "$description": "AI aura start small"
+    },
+    "aura-start": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.270588,
+          0.537255,
+          1.0
+        ],
+        "alpha": 0.1
+      },
+      "$description": "AI aura start"
+    },
+    "aura-end": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "alpha": 0.0
+      },
+      "$description": "AI aura end"
+    },
+    "border-strong": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.270588,
+          0.537255,
+          1.0
+        ],
+        "hex": "#4589ff"
+      },
+      "$description": "AI strong border"
+    },
+    "border-start": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.65098,
+          0.784314,
+          1.0
+        ],
+        "alpha": 0.64
+      },
+      "$description": "AI border start"
+    },
+    "border-end": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.470588,
+          0.662745,
+          1.0
+        ],
+        "hex": "#78a9ff"
+      },
+      "$description": "AI border end"
+    },
+    "drop-shadow": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.058824,
+          0.384314,
+          0.996078
+        ],
+        "alpha": 0.1
+      },
+      "$description": "AI drop shadow"
+    },
+    "aura-hover-background": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.929412,
+          0.960784,
+          1.0
+        ],
+        "hex": "#edf5ff"
+      },
+      "$description": "AI aura hover background"
+    },
+    "aura-hover-start": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.270588,
+          0.537255,
+          1.0
+        ],
+        "alpha": 0.32
+      },
+      "$description": "AI aura hover start"
+    },
+    "aura-hover-end": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "alpha": 0.0
+      },
+      "$description": "AI aura hover end"
+    },
+    "popover-background": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "hex": "#ffffff"
+      },
+      "$description": "AI popover background"
+    },
+    "popover-shadow-outer-01": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.0,
+          0.262745,
+          0.807843
+        ],
+        "alpha": 0.06
+      },
+      "$description": "AI popover outer shadow 01"
+    },
+    "popover-shadow-outer-02": {
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
@@ -1342,1732 +2699,375 @@
           0.0,
           0.0
         ],
-        "alpha": 0.3
+        "alpha": 0.04
       },
-      "$description": "Shadow color"
+      "$description": "AI popover outer shadow 02"
     },
-    "skeleton": {
-      "background": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            0.956863,
-            0.956863,
-            0.956863
-          ],
-          "hex": "#f4f4f4"
-        },
-        "$description": "Skeleton loading background"
+    "skeleton-background": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.815686,
+          0.886275,
+          1.0
+        ],
+        "hex": "#d0e2ff"
       },
-      "element": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            0.776471,
-            0.776471,
-            0.776471
-          ],
-          "hex": "#c6c6c6"
-        },
-        "$description": "Skeleton loading element"
-      }
+      "$description": "AI skeleton background"
     },
-    "syntax": {
-      "comment": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            0.141176,
-            0.631373,
-            0.282353
-          ],
-          "hex": "#24a148"
-        },
-        "$description": "Syntax comment"
-      },
-      "line-comment": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            0.141176,
-            0.631373,
-            0.282353
-          ],
-          "hex": "#24a148"
-        },
-        "$description": "Syntax line comment"
-      },
-      "block-comment": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            0.141176,
-            0.631373,
-            0.282353
-          ],
-          "hex": "#24a148"
-        },
-        "$description": "Syntax block comment"
-      },
-      "doc-comment": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            0.141176,
-            0.631373,
-            0.282353
-          ],
-          "hex": "#24a148"
-        },
-        "$description": "Syntax doc comment"
-      },
-      "string": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            0.086275,
-            0.086275,
-            0.086275
-          ],
-          "hex": "#161616"
-        },
-        "$description": "Syntax string"
-      },
-      "doc-string": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            0.086275,
-            0.086275,
-            0.086275
-          ],
-          "hex": "#161616"
-        },
-        "$description": "Syntax doc string"
-      },
-      "keyword": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            0.058824,
-            0.384314,
-            0.996078
-          ],
-          "hex": "#0f62fe"
-        },
-        "$description": "Syntax keyword"
-      },
-      "operator-keyword": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            0.058824,
-            0.384314,
-            0.996078
-          ],
-          "hex": "#0f62fe"
-        },
-        "$description": "Syntax operator keyword"
-      },
-      "control-keyword": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            0.541176,
-            0.247059,
-            0.988235
-          ],
-          "hex": "#8a3ffc"
-        },
-        "$description": "Syntax control keyword"
-      },
-      "definition-keyword": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            0.066667,
-            0.572549,
-            0.909804
-          ],
-          "hex": "#1192e8"
-        },
-        "$description": "Syntax definition keyword"
-      },
-      "module-keyword": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            0.541176,
-            0.247059,
-            0.988235
-          ],
-          "hex": "#8a3ffc"
-        },
-        "$description": "Syntax module keyword"
-      },
-      "variable": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            0.058824,
-            0.384314,
-            0.996078
-          ],
-          "hex": "#0f62fe"
-        },
-        "$description": "Syntax variable"
-      },
-      "name": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            0.058824,
-            0.384314,
-            0.996078
-          ],
-          "hex": "#0f62fe"
-        },
-        "$description": "Syntax name"
-      },
-      "variable-name": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            0.058824,
-            0.384314,
-            0.996078
-          ],
-          "hex": "#0f62fe"
-        },
-        "$description": "Syntax variable name"
-      },
-      "label-name": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            0.058824,
-            0.384314,
-            0.996078
-          ],
-          "hex": "#0f62fe"
-        },
-        "$description": "Syntax label name"
-      },
-      "attribute": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            0.066667,
-            0.572549,
-            0.909804
-          ],
-          "hex": "#1192e8"
-        },
-        "$description": "Syntax attribute"
-      },
-      "attribute-name": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            0.066667,
-            0.572549,
-            0.909804
-          ],
-          "hex": "#1192e8"
-        },
-        "$description": "Syntax attribute name"
-      },
-      "property-name": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            0.066667,
-            0.572549,
-            0.909804
-          ],
-          "hex": "#1192e8"
-        },
-        "$description": "Syntax property name"
-      },
-      "tag": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            0.0,
-            0.615686,
-            0.603922
-          ],
-          "hex": "#009d9a"
-        },
-        "$description": "Syntax tag"
-      },
-      "tag-name": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            0.0,
-            0.615686,
-            0.603922
-          ],
-          "hex": "#009d9a"
-        },
-        "$description": "Syntax tag name"
-      },
-      "type": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            0.0,
-            0.615686,
-            0.603922
-          ],
-          "hex": "#009d9a"
-        },
-        "$description": "Syntax type"
-      },
-      "type-name": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            0.0,
-            0.615686,
-            0.603922
-          ],
-          "hex": "#009d9a"
-        },
-        "$description": "Syntax type name"
-      },
-      "class-name": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            0.0,
-            0.615686,
-            0.603922
-          ],
-          "hex": "#009d9a"
-        },
-        "$description": "Syntax class name"
-      },
-      "namespace": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            0.0,
-            0.615686,
-            0.603922
-          ],
-          "hex": "#009d9a"
-        },
-        "$description": "Syntax namespace"
-      },
-      "macro-name": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            0.086275,
-            0.086275,
-            0.086275
-          ],
-          "hex": "#161616"
-        },
-        "$description": "Syntax macro name"
-      },
-      "atom": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            0.086275,
-            0.086275,
-            0.086275
-          ],
-          "hex": "#161616"
-        },
-        "$description": "Syntax atom"
-      },
-      "literal": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            0.086275,
-            0.086275,
-            0.086275
-          ],
-          "hex": "#161616"
-        },
-        "$description": "Syntax literal"
-      },
-      "bool": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            0.086275,
-            0.086275,
-            0.086275
-          ],
-          "hex": "#161616"
-        },
-        "$description": "Syntax bool"
-      },
-      "null": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            0.086275,
-            0.086275,
-            0.086275
-          ],
-          "hex": "#161616"
-        },
-        "$description": "Syntax null"
-      },
-      "self": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            0.0,
-            0.615686,
-            0.603922
-          ],
-          "hex": "#009d9a"
-        },
-        "$description": "Syntax self"
-      },
-      "number": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            0.141176,
-            0.631373,
-            0.282353
-          ],
-          "hex": "#24a148"
-        },
-        "$description": "Syntax number"
-      },
-      "integer": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            0.141176,
-            0.631373,
-            0.282353
-          ],
-          "hex": "#24a148"
-        },
-        "$description": "Syntax integer"
-      },
-      "float": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            0.141176,
-            0.631373,
-            0.282353
-          ],
-          "hex": "#24a148"
-        },
-        "$description": "Syntax float"
-      },
-      "unit": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            0.141176,
-            0.631373,
-            0.282353
-          ],
-          "hex": "#24a148"
-        },
-        "$description": "Syntax unit"
-      },
-      "character": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            0.086275,
-            0.086275,
-            0.086275
-          ],
-          "hex": "#161616"
-        },
-        "$description": "Syntax character"
-      },
-      "attribute-value": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            0.086275,
-            0.086275,
-            0.086275
-          ],
-          "hex": "#161616"
-        },
-        "$description": "Syntax attribute value"
-      },
-      "special-string": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            0.541176,
-            0.247059,
-            0.988235
-          ],
-          "hex": "#8a3ffc"
-        },
-        "$description": "Syntax special string"
-      },
-      "regexp": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            0.541176,
-            0.247059,
-            0.988235
-          ],
-          "hex": "#8a3ffc"
-        },
-        "$description": "Syntax regexp"
-      },
-      "escape": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            0.223529,
-            0.223529,
-            0.223529
-          ],
-          "hex": "#393939"
-        },
-        "$description": "Syntax escape"
-      },
-      "url": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            0.223529,
-            0.223529,
-            0.223529
-          ],
-          "hex": "#393939"
-        },
-        "$description": "Syntax url"
-      },
-      "color": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            0.086275,
-            0.086275,
-            0.086275
-          ],
-          "hex": "#161616"
-        },
-        "$description": "Syntax color"
-      },
-      "operator": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            0.223529,
-            0.223529,
-            0.223529
-          ],
-          "hex": "#393939"
-        },
-        "$description": "Syntax operator"
-      },
-      "deref-operator": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            0.223529,
-            0.223529,
-            0.223529
-          ],
-          "hex": "#393939"
-        },
-        "$description": "Syntax deref operator"
-      },
-      "arithmetic-operator": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            0.223529,
-            0.223529,
-            0.223529
-          ],
-          "hex": "#393939"
-        },
-        "$description": "Syntax arithmetic operator"
-      },
-      "logic-operator": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            0.223529,
-            0.223529,
-            0.223529
-          ],
-          "hex": "#393939"
-        },
-        "$description": "Syntax logic operator"
-      },
-      "bitwise-operator": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            0.223529,
-            0.223529,
-            0.223529
-          ],
-          "hex": "#393939"
-        },
-        "$description": "Syntax bitwise operator"
-      },
-      "compare-operator": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            0.223529,
-            0.223529,
-            0.223529
-          ],
-          "hex": "#393939"
-        },
-        "$description": "Syntax compare operator"
-      },
-      "update-operator": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            0.223529,
-            0.223529,
-            0.223529
-          ],
-          "hex": "#393939"
-        },
-        "$description": "Syntax update operator"
-      },
-      "definition-operator": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            0.066667,
-            0.572549,
-            0.909804
-          ],
-          "hex": "#1192e8"
-        },
-        "$description": "Syntax definition operator"
-      },
-      "type-operator": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            0.0,
-            0.615686,
-            0.603922
-          ],
-          "hex": "#009d9a"
-        },
-        "$description": "Syntax type operator"
-      },
-      "control-operator": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            0.541176,
-            0.247059,
-            0.988235
-          ],
-          "hex": "#8a3ffc"
-        },
-        "$description": "Syntax control operator"
-      },
-      "modifier": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            0.058824,
-            0.384314,
-            0.996078
-          ],
-          "hex": "#0f62fe"
-        },
-        "$description": "Syntax modifier"
-      },
-      "punctuation": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            0.223529,
-            0.223529,
-            0.223529
-          ],
-          "hex": "#393939"
-        },
-        "$description": "Syntax punctuation"
-      },
-      "separator": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            0.223529,
-            0.223529,
-            0.223529
-          ],
-          "hex": "#393939"
-        },
-        "$description": "Syntax separator"
-      },
-      "bracket": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            0.223529,
-            0.223529,
-            0.223529
-          ],
-          "hex": "#393939"
-        },
-        "$description": "Syntax bracket"
-      },
-      "angle-bracket": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            0.321569,
-            0.321569,
-            0.321569
-          ],
-          "hex": "#525252"
-        },
-        "$description": "Syntax angle bracket"
-      },
-      "square-bracket": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            0.223529,
-            0.223529,
-            0.223529
-          ],
-          "hex": "#393939"
-        },
-        "$description": "Syntax square bracket"
-      },
-      "paren": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            0.223529,
-            0.223529,
-            0.223529
-          ],
-          "hex": "#393939"
-        },
-        "$description": "Syntax paren"
-      },
-      "brace": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            0.223529,
-            0.223529,
-            0.223529
-          ],
-          "hex": "#393939"
-        },
-        "$description": "Syntax brace"
-      },
-      "content": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            0.086275,
-            0.086275,
-            0.086275
-          ],
-          "hex": "#161616"
-        },
-        "$description": "Syntax content"
-      },
-      "list": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            0.086275,
-            0.086275,
-            0.086275
-          ],
-          "hex": "#161616"
-        },
-        "$description": "Syntax list"
-      },
-      "emphasis": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            0.086275,
-            0.086275,
-            0.086275
-          ],
-          "hex": "#161616"
-        },
-        "$description": "Syntax emphasis"
-      },
-      "strong": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            0.086275,
-            0.086275,
-            0.086275
-          ],
-          "hex": "#161616"
-        },
-        "$description": "Syntax strong"
-      },
-      "monospace": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            0.086275,
-            0.086275,
-            0.086275
-          ],
-          "hex": "#161616"
-        },
-        "$description": "Syntax monospace"
-      },
-      "strikethrough": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            0.086275,
-            0.086275,
-            0.086275
-          ],
-          "hex": "#161616"
-        },
-        "$description": "Syntax strikethrough"
-      },
-      "heading": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            0.066667,
-            0.572549,
-            0.909804
-          ],
-          "hex": "#1192e8"
-        },
-        "$description": "Syntax heading"
-      },
-      "heading-1": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            0.066667,
-            0.572549,
-            0.909804
-          ],
-          "hex": "#1192e8"
-        },
-        "$description": "Syntax heading 1"
-      },
-      "heading-2": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            0.066667,
-            0.572549,
-            0.909804
-          ],
-          "hex": "#1192e8"
-        },
-        "$description": "Syntax heading 2"
-      },
-      "heading-3": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            0.066667,
-            0.572549,
-            0.909804
-          ],
-          "hex": "#1192e8"
-        },
-        "$description": "Syntax heading 3"
-      },
-      "heading-4": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            0.066667,
-            0.572549,
-            0.909804
-          ],
-          "hex": "#1192e8"
-        },
-        "$description": "Syntax heading 4"
-      },
-      "heading-5": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            0.066667,
-            0.572549,
-            0.909804
-          ],
-          "hex": "#1192e8"
-        },
-        "$description": "Syntax heading 5"
-      },
-      "heading-6": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            0.066667,
-            0.572549,
-            0.909804
-          ],
-          "hex": "#1192e8"
-        },
-        "$description": "Syntax heading 6"
-      },
-      "content-separator": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            0.223529,
-            0.223529,
-            0.223529
-          ],
-          "hex": "#393939"
-        },
-        "$description": "Syntax content separator"
-      },
-      "quote": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            0.141176,
-            0.631373,
-            0.282353
-          ],
-          "hex": "#24a148"
-        },
-        "$description": "Syntax quote"
-      },
-      "link": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            0.058824,
-            0.384314,
-            0.996078
-          ],
-          "hex": "#0f62fe"
-        },
-        "$description": "Syntax link"
-      },
-      "invalid": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            0.854902,
-            0.117647,
-            0.156863
-          ],
-          "hex": "#da1e28"
-        },
-        "$description": "Syntax invalid"
-      },
-      "meta": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            0.141176,
-            0.631373,
-            0.282353
-          ],
-          "hex": "#24a148"
-        },
-        "$description": "Syntax meta"
-      },
-      "document-meta": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            0.141176,
-            0.631373,
-            0.282353
-          ],
-          "hex": "#24a148"
-        },
-        "$description": "Syntax document meta"
-      },
-      "annotation": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            0.0,
-            0.615686,
-            0.603922
-          ],
-          "hex": "#009d9a"
-        },
-        "$description": "Syntax annotation"
-      },
-      "processing-instruction": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            0.086275,
-            0.086275,
-            0.086275
-          ],
-          "hex": "#161616"
-        },
-        "$description": "Syntax processing instruction"
-      },
-      "definition": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            0.066667,
-            0.572549,
-            0.909804
-          ],
-          "hex": "#1192e8"
-        },
-        "$description": "Syntax definition"
-      },
-      "constant": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            0.058824,
-            0.384314,
-            0.996078
-          ],
-          "hex": "#0f62fe"
-        },
-        "$description": "Syntax constant"
-      },
-      "function": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            0.945098,
-            0.760784,
-            0.105882
-          ],
-          "hex": "#f1c21b"
-        },
-        "$description": "Syntax function"
-      },
-      "standard": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            0.058824,
-            0.384314,
-            0.996078
-          ],
-          "hex": "#0f62fe"
-        },
-        "$description": "Syntax standard"
-      },
-      "local": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            0.058824,
-            0.384314,
-            0.996078
-          ],
-          "hex": "#0f62fe"
-        },
-        "$description": "Syntax local"
-      },
-      "special": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            0.058824,
-            0.384314,
-            0.996078
-          ],
-          "hex": "#0f62fe"
-        },
-        "$description": "Syntax special"
-      },
-      "inserted": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            0.870588,
-            0.984314,
-            0.901961
-          ],
-          "hex": "#defbe6"
-        },
-        "$description": "Syntax inserted"
-      },
-      "deleted": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            1.0,
-            0.843137,
-            0.85098
-          ],
-          "hex": "#ffd7d9"
-        },
-        "$description": "Syntax deleted"
-      }
+    "skeleton-element-background": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.270588,
+          0.537255,
+          1.0
+        ],
+        "hex": "#4589ff"
+      },
+      "$description": "AI skeleton element background"
     },
-    "ai": {
-      "inner-shadow": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            0.270588,
-            0.537255,
-            1.0
-          ],
-          "alpha": 0.1
-        },
-        "$description": "AI inner shadow"
+    "overlay": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.0,
+          0.066667,
+          0.254902
+        ],
+        "alpha": 0.5
       },
-      "aura-start-sm": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            0.270588,
-            0.537255,
-            1.0
-          ],
-          "alpha": 0.16
-        },
-        "$description": "AI aura start small"
-      },
-      "aura-start": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            0.270588,
-            0.537255,
-            1.0
-          ],
-          "alpha": 0.1
-        },
-        "$description": "AI aura start"
-      },
-      "aura-end": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            1.0,
-            1.0,
-            1.0
-          ],
-          "alpha": 0.0
-        },
-        "$description": "AI aura end"
-      },
-      "border-strong": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            0.270588,
-            0.537255,
-            1.0
-          ],
-          "hex": "#4589ff"
-        },
-        "$description": "AI strong border"
-      },
-      "border-start": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            0.65098,
-            0.784314,
-            1.0
-          ],
-          "alpha": 0.64
-        },
-        "$description": "AI border start"
-      },
-      "border-end": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            0.470588,
-            0.662745,
-            1.0
-          ],
-          "hex": "#78a9ff"
-        },
-        "$description": "AI border end"
-      },
-      "drop-shadow": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            0.058824,
-            0.384314,
-            0.996078
-          ],
-          "alpha": 0.1
-        },
-        "$description": "AI drop shadow"
-      },
-      "aura-hover-background": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            0.929412,
-            0.960784,
-            1.0
-          ],
-          "hex": "#edf5ff"
-        },
-        "$description": "AI aura hover background"
-      },
-      "aura-hover-start": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            0.270588,
-            0.537255,
-            1.0
-          ],
-          "alpha": 0.32
-        },
-        "$description": "AI aura hover start"
-      },
-      "aura-hover-end": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            1.0,
-            1.0,
-            1.0
-          ],
-          "alpha": 0.0
-        },
-        "$description": "AI aura hover end"
-      },
-      "popover-background": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            1.0,
-            1.0,
-            1.0
-          ],
-          "hex": "#ffffff"
-        },
-        "$description": "AI popover background"
-      },
-      "popover-shadow-outer-01": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            0.0,
-            0.262745,
-            0.807843
-          ],
-          "alpha": 0.06
-        },
-        "$description": "AI popover outer shadow 01"
-      },
-      "popover-shadow-outer-02": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            0.0,
-            0.0,
-            0.0
-          ],
-          "alpha": 0.04
-        },
-        "$description": "AI popover outer shadow 02"
-      },
-      "skeleton-background": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            0.815686,
-            0.886275,
-            1.0
-          ],
-          "hex": "#d0e2ff"
-        },
-        "$description": "AI skeleton background"
-      },
-      "skeleton-element-background": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            0.270588,
-            0.537255,
-            1.0
-          ],
-          "hex": "#4589ff"
-        },
-        "$description": "AI skeleton element background"
-      },
-      "overlay": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            0.0,
-            0.066667,
-            0.254902
-          ],
-          "alpha": 0.5
-        },
-        "$description": "AI modal overlay"
-      },
-      "popover-caret-center": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            0.627451,
-            0.764706,
-            1.0
-          ],
-          "hex": "#a0c3ff"
-        },
-        "$description": "AI popover caret center"
-      },
-      "popover-caret-bottom": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            0.470588,
-            0.662745,
-            1.0
-          ],
-          "hex": "#78a9ff"
-        },
-        "$description": "AI popover caret bottom"
-      },
-      "popover-caret-bottom-background-actions": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            0.913725,
-            0.937255,
-            0.980392
-          ],
-          "hex": "#e9effa"
-        },
-        "$description": "AI popover caret bottom background for actions"
-      },
-      "popover-caret-bottom-background": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            0.917647,
-            0.945098,
-            1.0
-          ],
-          "hex": "#eaf1ff"
-        },
-        "$description": "AI popover caret bottom background"
-      }
+      "$description": "AI modal overlay"
     },
-    "chat": {
-      "prompt-background": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            1.0,
-            1.0,
-            1.0
-          ],
-          "hex": "#ffffff"
-        },
-        "$description": "Chat prompt background"
+    "popover-caret-center": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.627451,
+          0.764706,
+          1.0
+        ],
+        "hex": "#a0c3ff"
       },
-      "prompt-border-start": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            0.956863,
-            0.956863,
-            0.956863
-          ],
-          "hex": "#f4f4f4"
-        },
-        "$description": "Chat prompt border start"
+      "$description": "AI popover caret center"
+    },
+    "popover-caret-bottom": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.470588,
+          0.662745,
+          1.0
+        ],
+        "hex": "#78a9ff"
       },
-      "prompt-border-end": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            0.956863,
-            0.956863,
-            0.956863
-          ],
-          "alpha": 0.0
-        },
-        "$description": "Chat prompt border end"
+      "$description": "AI popover caret bottom"
+    },
+    "popover-caret-bottom-background-actions": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.913725,
+          0.937255,
+          0.980392
+        ],
+        "hex": "#e9effa"
       },
-      "prompt-text": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            0.086275,
-            0.086275,
-            0.086275
-          ],
-          "hex": "#161616"
-        },
-        "$description": "Chat prompt text"
+      "$description": "AI popover caret bottom background for actions"
+    },
+    "popover-caret-bottom-background": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.917647,
+          0.945098,
+          1.0
+        ],
+        "hex": "#eaf1ff"
       },
-      "bubble-user": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            0.878431,
-            0.878431,
-            0.878431
-          ],
-          "hex": "#e0e0e0"
-        },
-        "$description": "Chat bubble user background"
+      "$description": "AI popover caret bottom background"
+    }
+  },
+  "chat": {
+    "prompt-background": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "hex": "#ffffff"
       },
-      "bubble-user-text": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            0.086275,
-            0.086275,
-            0.086275
-          ],
-          "hex": "#161616"
-        },
-        "$description": "Chat bubble user text"
+      "$description": "Chat prompt background"
+    },
+    "prompt-border-start": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.956863,
+          0.956863,
+          0.956863
+        ],
+        "hex": "#f4f4f4"
       },
-      "bubble-agent": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            1.0,
-            1.0,
-            1.0
-          ],
-          "hex": "#ffffff"
-        },
-        "$description": "Chat bubble agent background"
+      "$description": "Chat prompt border start"
+    },
+    "prompt-border-end": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.956863,
+          0.956863,
+          0.956863
+        ],
+        "alpha": 0.0
       },
-      "bubble-agent-text": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            0.086275,
-            0.086275,
-            0.086275
-          ],
-          "hex": "#161616"
-        },
-        "$description": "Chat bubble agent text"
+      "$description": "Chat prompt border end"
+    },
+    "prompt-text": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.086275,
+          0.086275,
+          0.086275
+        ],
+        "hex": "#161616"
       },
-      "bubble-border": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            0.878431,
-            0.878431,
-            0.878431
-          ],
-          "hex": "#e0e0e0"
-        },
-        "$description": "Chat bubble border"
+      "$description": "Chat prompt text"
+    },
+    "bubble-user": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.878431,
+          0.878431,
+          0.878431
+        ],
+        "hex": "#e0e0e0"
       },
-      "avatar-bot": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            0.321569,
-            0.321569,
-            0.321569
-          ],
-          "hex": "#525252"
-        },
-        "$description": "Chat avatar bot"
+      "$description": "Chat bubble user background"
+    },
+    "bubble-user-text": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.086275,
+          0.086275,
+          0.086275
+        ],
+        "hex": "#161616"
       },
-      "avatar-agent": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            0.223529,
-            0.223529,
-            0.223529
-          ],
-          "hex": "#393939"
-        },
-        "$description": "Chat avatar agent"
+      "$description": "Chat bubble user text"
+    },
+    "bubble-agent": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "hex": "#ffffff"
       },
-      "avatar-user": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            0.058824,
-            0.384314,
-            0.996078
-          ],
-          "hex": "#0f62fe"
-        },
-        "$description": "Chat avatar user"
+      "$description": "Chat bubble agent background"
+    },
+    "bubble-agent-text": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.086275,
+          0.086275,
+          0.086275
+        ],
+        "hex": "#161616"
       },
-      "shell-background": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            1.0,
-            1.0,
-            1.0
-          ],
-          "hex": "#ffffff"
-        },
-        "$description": "Chat shell background"
+      "$description": "Chat bubble agent text"
+    },
+    "bubble-border": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.878431,
+          0.878431,
+          0.878431
+        ],
+        "hex": "#e0e0e0"
       },
-      "header-background": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            1.0,
-            1.0,
-            1.0
-          ],
-          "hex": "#ffffff"
-        },
-        "$description": "Chat header background"
+      "$description": "Chat bubble border"
+    },
+    "avatar-bot": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.435294,
+          0.435294,
+          0.435294
+        ],
+        "hex": "#6f6f6f"
       },
-      "header-text": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            0.086275,
-            0.086275,
-            0.086275
-          ],
-          "hex": "#161616"
-        },
-        "$description": "Chat header text"
+      "$description": "Chat avatar bot"
+    },
+    "avatar-agent": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.223529,
+          0.223529,
+          0.223529
+        ],
+        "hex": "#393939"
       },
-      "button": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            0.058824,
-            0.384314,
-            0.996078
-          ],
-          "hex": "#0f62fe"
-        },
-        "$description": "Chat button color"
+      "$description": "Chat avatar agent"
+    },
+    "avatar-user": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.058824,
+          0.384314,
+          0.996078
+        ],
+        "hex": "#0f62fe"
       },
-      "button-hover": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            0.552941,
-            0.552941,
-            0.552941
-          ],
-          "alpha": 0.12
-        },
-        "$description": "Chat button hover background"
+      "$description": "Chat avatar user"
+    },
+    "shell-background": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "hex": "#ffffff"
       },
-      "button-text-hover": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            0.0,
-            0.262745,
-            0.807843
-          ],
-          "hex": "#0043ce"
-        },
-        "$description": "Chat button text hover"
+      "$description": "Chat shell background"
+    },
+    "header-background": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "hex": "#ffffff"
       },
-      "button-active": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            0.552941,
-            0.552941,
-            0.552941
-          ],
-          "alpha": 0.5
-        },
-        "$description": "Chat button active background"
+      "$description": "Chat header background"
+    },
+    "header-text": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.086275,
+          0.086275,
+          0.086275
+        ],
+        "hex": "#161616"
       },
-      "button-selected": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            0.552941,
-            0.552941,
-            0.552941
-          ],
-          "alpha": 0.2
-        },
-        "$description": "Chat button selected background"
+      "$description": "Chat header text"
+    },
+    "button": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.058824,
+          0.384314,
+          0.996078
+        ],
+        "hex": "#0f62fe"
       },
-      "button-text-selected": {
-        "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            0.321569,
-            0.321569,
-            0.321569
-          ],
-          "hex": "#525252"
-        },
-        "$description": "Chat button text selected"
-      }
+      "$description": "Chat button color"
+    },
+    "button-hover": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.552941,
+          0.552941,
+          0.552941
+        ],
+        "alpha": 0.12
+      },
+      "$description": "Chat button hover background"
+    },
+    "button-text-hover": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.0,
+          0.262745,
+          0.807843
+        ],
+        "hex": "#0043ce"
+      },
+      "$description": "Chat button text hover"
+    },
+    "button-active": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.552941,
+          0.552941,
+          0.552941
+        ],
+        "alpha": 0.5
+      },
+      "$description": "Chat button active background"
+    },
+    "button-selected": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.552941,
+          0.552941,
+          0.552941
+        ],
+        "alpha": 0.2
+      },
+      "$description": "Chat button selected background"
+    },
+    "button-text-selected": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.321569,
+          0.321569,
+          0.321569
+        ],
+        "hex": "#525252"
+      },
+      "$description": "Chat button text selected"
     }
   }
+}
