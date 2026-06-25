@@ -2233,7 +2233,7 @@
         },
         "$description": "Syntax heading"
       },
-      "heading1": {
+      "heading-1": {
         "$type": "color",
         "$value": {
           "colorSpace": "srgb",
@@ -2246,7 +2246,7 @@
         },
         "$description": "Syntax heading 1"
       },
-      "heading2": {
+      "heading-2": {
         "$type": "color",
         "$value": {
           "colorSpace": "srgb",
@@ -2259,7 +2259,7 @@
         },
         "$description": "Syntax heading 2"
       },
-      "heading3": {
+      "heading-3": {
         "$type": "color",
         "$value": {
           "colorSpace": "srgb",
@@ -2272,7 +2272,7 @@
         },
         "$description": "Syntax heading 3"
       },
-      "heading4": {
+      "heading-4": {
         "$type": "color",
         "$value": {
           "colorSpace": "srgb",
@@ -2285,7 +2285,7 @@
         },
         "$description": "Syntax heading 4"
       },
-      "heading5": {
+      "heading-5": {
         "$type": "color",
         "$value": {
           "colorSpace": "srgb",
@@ -2298,7 +2298,7 @@
         },
         "$description": "Syntax heading 5"
       },
-      "heading6": {
+      "heading-6": {
         "$type": "color",
         "$value": {
           "colorSpace": "srgb",

@@ -8,12 +8,53 @@
 'use strict';
 
 /**
+ * Resolve a DTCG color $value object to a CSS string.
+ *
+ * DTCG color values follow one of two shapes:
+ *   • { colorSpace, components, hex }   → solid color  → use hex directly
+ *   • { colorSpace, components, alpha } → alpha color  → rgba(r, g, b, alpha)
+ *
+ * @param {*} dtcgValue - The raw $value from a DTCG token
+ * @returns {string|*} A CSS color string when the value is a DTCG color object,
+ *                     or the original value unchanged for all other types.
+ */
+function resolveDTCGColorValue(dtcgValue) {
+  if (
+    dtcgValue === null ||
+    typeof dtcgValue !== 'object' ||
+    dtcgValue.colorSpace !== 'srgb' ||
+    !Array.isArray(dtcgValue.components)
+  ) {
+    return dtcgValue;
+  }
+
+  // Solid color — hex fallback is present; use it directly.
+  if (typeof dtcgValue.hex === 'string') {
+    return dtcgValue.hex;
+  }
+
+  // Alpha color — convert sRGB components (0–1) to rgba().
+  const [r, g, b] = dtcgValue.components.map((c) => Math.round(c * 255));
+  const alpha = dtcgValue.alpha !== undefined ? dtcgValue.alpha : 1;
+  return `rgba(${r}, ${g}, ${b}, ${alpha})`;
+}
+
+/**
  * Convert DTCG format tokens to flat theme object
  * @param {Object} dtcgTokens - DTCG format token object
  * @returns {Object} Flat token map
  */
 function convertDTCGToTheme(dtcgTokens) {
   const theme = {};
+
+  // Extract color-scheme from top-level $extensions (DTCG metadata)
+  const extensions = dtcgTokens.$extensions;
+  if (extensions && extensions['com.ibm.carbon']) {
+    const carbonExt = extensions['com.ibm.carbon'];
+    if (carbonExt['color-scheme']) {
+      theme['color-scheme'] = carbonExt['color-scheme'];
+    }
+  }
 
   function traverse(obj, path = []) {
     for (const [key, value] of Object.entries(obj)) {
@@ -22,21 +63,32 @@ function convertDTCGToTheme(dtcgTokens) {
         continue;
       }
 
-      // If this is a token (has $value)
-      if (value && typeof value === 'object' && value.$value !== undefined) {
-        // Build token name from path
+      if (value && typeof value === 'object') {
+        // Build token name from path.
         // Skip 'color' prefix EXCEPT for 'scheme' which should be 'color-scheme'
         let tokenPath = path;
         if (path[0] === 'color' && key !== 'scheme') {
           tokenPath = path.slice(1);
         }
-        // Normalize key: add dash before numbers (e.g., "heading1" -> "heading-1")
-        const normalizedKey = key.replace(/([a-z])(\d)/g, '$1-$2');
-        const tokenName = [...tokenPath, normalizedKey].join('-');
-        theme[tokenName] = value.$value;
-      } else if (value && typeof value === 'object') {
-        // Recurse into nested groups
-        traverse(value, [...path, key]);
+
+        // Join all path segments and the current key with dashes.
+        // The JS token metadata (v11TokenGroup.ts) is the naming authority:
+        // it uses dashes before numbers, e.g. "layer-01", "field-hover-01",
+        // "layer-accent-active-01". Pure-number keys ("01") in the JSON
+        // become segments in the path and are joined the same way.
+        const tokenPath2 = [...tokenPath, key];
+
+        // If this node has a $value, register it as a token
+        if (value.$value !== undefined) {
+          theme[tokenPath2.join('-')] = resolveDTCGColorValue(value.$value);
+        }
+
+        // Also recurse into any non-$ children (a node can be both a token
+        // and a group when nested themes use parent keys as token names too)
+        const hasChildren = Object.keys(value).some((k) => !k.startsWith('$'));
+        if (hasChildren) {
+          traverse(value, tokenPath2);
+        }
       }
     }
   }
@@ -112,6 +164,7 @@ function normalizeComponentThemeName(themeName) {
 }
 
 module.exports = {
+  resolveDTCGColorValue,
   convertDTCGToTheme,
   convertDTCGComponentTokens,
   camelToKebab,
