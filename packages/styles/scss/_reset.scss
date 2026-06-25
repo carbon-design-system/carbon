@@ -113,6 +113,16 @@
     font-family: inherit;
   }
 
+  // the following commented block sets a border-radius on EVERY <button> html element with no
+  // exclusions (accordion, number-input +/- icons, etc.) unless there is a more specific selector
+  // that explicitly sets the radius to something else
+
+  // button {
+  //   border-end-end-radius: var(--cds-border-radius-field, 0);
+  //   border-end-start-radius: var(--cds-border-radius-field, 0);
+  //   border-start-end-radius: var(--cds-border-radius-field, 0);
+  //   border-start-start-radius: var(--cds-border-radius-field, 0);
+  // }
   :root {
     color-scheme: custom-property.get-var('color-scheme', light);
   }
