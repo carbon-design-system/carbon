@@ -439,6 +439,9 @@ export interface TabListProps extends DivAttributes {
 
   /**
    * Specify the size of the tabs.
+   *
+   * Supports `sm` and `md` for line tabs.
+   * Supports `sm`, `md`, and `lg` for contained tabs.
    */
   size?: 'sm' | 'md' | 'lg';
 }
@@ -498,7 +501,10 @@ function TabList({
       [`${prefix}--tabs__icon--default`]: iconSize === 'default',
       [`${prefix}--tabs__icon--lg`]: iconSize === 'lg', // TODO: V12 - Remove this class
       [`${prefix}--layout--size-lg`]: iconSize === 'lg',
-      [`${prefix}--layout--size-${size}`]: size && !hasSecondaryLabelTabs,
+      [`${prefix}--layout--size-${size}`]:
+        size &&
+        !hasSecondaryLabelTabs &&
+        (contained || size === 'sm' || size === 'md'),
       [`${prefix}--tabs--tall`]: hasSecondaryLabelTabs,
       [`${prefix}--tabs--full-width`]: distributeWidth,
       [`${prefix}--tabs--dismissable`]: dismissable,
@@ -866,6 +872,9 @@ TabList.propTypes = {
 
   /**
    * Specify the size of the tabs.
+   *
+   * Supports `sm` and `md` for line tabs.
+   * Supports `sm`, `md`, and `lg` for contained tabs.
    */
   size: PropTypes.oneOf(['sm', 'md', 'lg']),
 };

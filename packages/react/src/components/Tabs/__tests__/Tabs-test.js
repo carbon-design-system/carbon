@@ -1023,6 +1023,46 @@ describe('TabList', () => {
     expect(container.firstChild).toHaveClass(`${prefix}--layout--size-sm`);
   });
 
+  it('should not apply large layout size for line tabs', () => {
+    jest.spyOn(hooks, 'useMatchMedia').mockImplementation(() => true);
+    const { container } = render(
+      <Tabs>
+        <TabList aria-label="List of tabs" size="lg">
+          <Tab>Tab Label 1</Tab>
+          <Tab>Tab Label 2</Tab>
+          <Tab>Tab Label 3</Tab>
+        </TabList>
+        <TabPanels>
+          <TabPanel>Tab Panel 1</TabPanel>
+          <TabPanel>Tab Panel 2</TabPanel>
+          <TabPanel>Tab Panel 3</TabPanel>
+        </TabPanels>
+      </Tabs>
+    );
+
+    expect(container.firstChild).not.toHaveClass(`${prefix}--layout--size-lg`);
+  });
+
+  it('should apply large layout size for contained tabs', () => {
+    jest.spyOn(hooks, 'useMatchMedia').mockImplementation(() => true);
+    const { container } = render(
+      <Tabs>
+        <TabList aria-label="List of tabs" contained size="lg">
+          <Tab>Tab Label 1</Tab>
+          <Tab>Tab Label 2</Tab>
+          <Tab>Tab Label 3</Tab>
+        </TabList>
+        <TabPanels>
+          <TabPanel>Tab Panel 1</TabPanel>
+          <TabPanel>Tab Panel 2</TabPanel>
+          <TabPanel>Tab Panel 3</TabPanel>
+        </TabPanels>
+      </Tabs>
+    );
+
+    expect(container.firstChild).toHaveClass(`${prefix}--layout--size-lg`);
+  });
+
   it('should ignore size class for contained tabs with secondary labels', () => {
     jest.spyOn(hooks, 'useMatchMedia').mockImplementation(() => true);
     const { container } = render(
