@@ -127,18 +127,18 @@ const globalTypes = {
       ],
     },
   },
-  borderRadiusField: {
-    name: 'Border Radius - Field',
-    description: 'Set the border radius for field',
-    defaultValue: 'Field: 0rem',
+  borderRadiusButton: {
+    name: 'Border Radius - Button',
+    description: 'Set the border radius for button',
+    defaultValue: 'Button: 0rem',
     toolbar: {
-      title: 'Border Radius - Field',
+      title: 'Border Radius - Button',
       items: [
-        'Field: 0rem',
-        'Field: 0.25rem',
-        'Field: 0.5rem',
-        'Field: 1rem',
-        'Field: 2rem',
+        'Button: 0rem',
+        'Button: 0.25rem',
+        'Button: 0.5rem',
+        'Button: 1rem',
+        'Button: 2rem',
       ],
     },
   },
@@ -386,7 +386,7 @@ const decorators = [
       locale,
       dir,
       borderRadiusBox,
-      borderRadiusField,
+      borderRadiusButton,
       borderRadiusSelector,
     } = context.globals;
     const backgroundValue = context.globals.backgrounds?.value;
@@ -394,7 +394,7 @@ const decorators = [
     const theme = getThemeFromBackground(backgroundValue);
 
     // Helper function to extract rem value from prefixed format
-    // e.g., "Box: 0rem" -> "0rem", "Field: 0.25rem" -> "0.25rem"
+    // e.g., "Box: 0rem" -> "0rem", "Button: 0.25rem" -> "0.25rem"
     const extractBorderRadiusValue = (prefixedValue) => {
       if (!prefixedValue) return null;
       const colonIndex = prefixedValue.indexOf(': ');
@@ -427,11 +427,11 @@ const decorators = [
           );
         }
       }
-      if (borderRadiusField) {
-        const value = extractBorderRadiusValue(borderRadiusField);
+      if (borderRadiusButton) {
+        const value = extractBorderRadiusValue(borderRadiusButton);
         if (value) {
           document.documentElement.style.setProperty(
-            '--cds-border-radius-field',
+            '--cds-border-radius-button',
             value
           );
         }
@@ -445,7 +445,7 @@ const decorators = [
           );
         }
       }
-    }, [borderRadiusBox, borderRadiusField, borderRadiusSelector]);
+    }, [borderRadiusBox, borderRadiusButton, borderRadiusSelector]);
 
     useIsomorphicEffect(() => {
       document.documentElement.lang = locale;

@@ -50,10 +50,10 @@ $button-focus-color: custom-property.get-var('button-focus-color', $focus);
   justify-content: space-between;
   // Fix to remove added margins on buttons in safari (see #5155)
   margin: 0;
-  border-end-end-radius: var(--cds-border-radius-field, 0);
-  border-end-start-radius: var(--cds-border-radius-field, 0);
-  border-start-end-radius: var(--cds-border-radius-field, 0);
-  border-start-start-radius: var(--cds-border-radius-field, 0);
+  border-end-end-radius: var(--cds-border-radius-button, 0);
+  border-end-start-radius: var(--cds-border-radius-button, 0);
+  border-start-end-radius: var(--cds-border-radius-button, 0);
+  border-start-start-radius: var(--cds-border-radius-button, 0);
   cursor: pointer;
   inline-size: max-content;
   max-inline-size: convert.to-rem(320px);

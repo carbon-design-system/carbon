@@ -46,7 +46,7 @@ export const unstable_tokens = [
 
   // Border radius
   'borderRadiusBox',
-  'borderRadiusField',
+  'borderRadiusButton',
   'borderRadiusSelector',
 
   // Layout

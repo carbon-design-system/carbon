@@ -443,7 +443,7 @@ export {
   iconSize02,
   // Border radius
   borderRadiusBox,
-  borderRadiusField,
+  borderRadiusButton,
   borderRadiusSelector,
   // Layout
   // Deprecated ☠️

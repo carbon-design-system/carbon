@@ -109,7 +109,7 @@ async function build() {
  This source code is licensed under the Apache-2.0 license found in the
  LICENSE file in the root directory of this source tree.
 `);
-        const names = ['box', 'field', 'selector'];
+        const names = ['box', 'button', 'selector'];
         const comment = t.Comment(`/ @type Number
 / @access public
 / @group @carbon/layout`);

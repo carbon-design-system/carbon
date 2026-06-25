@@ -281,10 +281,10 @@
 
   .#{$prefix}--search--expandable .#{$prefix}--search-magnifier {
     position: absolute;
-    border-end-end-radius: var(--cds-border-radius-field, 0);
-    border-end-start-radius: var(--cds-border-radius-field, 0);
-    border-start-end-radius: var(--cds-border-radius-field, 0);
-    border-start-start-radius: var(--cds-border-radius-field, 0);
+    border-end-end-radius: var(--cds-border-radius-button, 0);
+    border-end-start-radius: var(--cds-border-radius-button, 0);
+    border-start-end-radius: var(--cds-border-radius-button, 0);
+    border-start-start-radius: var(--cds-border-radius-button, 0);
     cursor: pointer;
 
     &:focus {

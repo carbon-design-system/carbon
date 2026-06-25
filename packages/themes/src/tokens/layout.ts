@@ -36,7 +36,7 @@ export const layout = TokenGroup.create({
     'icon-size-01',
     'icon-size-02',
     'border-radius-box',
-    'border-radius-field',
+    'border-radius-button',
     'border-radius-selector',
   ],
 });
