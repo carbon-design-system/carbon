@@ -103,6 +103,7 @@
     "storybook": "^10.3.5",
     "storybook-addon-accessibility-checker": "^9.2.0-rc.4",
     "tsdown": "^0.21.0",
+    "typescript": "^6.0.3",
     "typescript-config-carbon": "workspace:^0.10.0",
     "vite": "^8.0.0",
     "web-component-analyzer": "2.0.0"
