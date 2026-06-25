@@ -8640,9 +8640,7 @@
 - name: double-chevron--left
   friendly_name: Double chevron left
   sizes:
-    - 16
     - 32
-    - glyph
   aliases:
     - open
     - close
@@ -8656,9 +8654,7 @@
 - name: double-chevron--right
   friendly_name: Double chevron right
   sizes:
-    - 16
     - 32
-    - glyph
   aliases:
     - open
     - close
