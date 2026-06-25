@@ -14,16 +14,18 @@ import React, {
   useContext,
   useRef,
   useState,
-  type HTMLAttributes,
+  type LiHTMLAttributes,
+  type KeyboardEvent,
   type ReactNode,
   type Ref,
 } from 'react';
 import SideNavIcon from './SideNavIcon';
 import { keys, match } from '../../internal/keyboard';
 import { usePrefix } from '../../internal/usePrefix';
+import { composeEventHandlers } from '../../tools/events';
 import { SideNavContext } from './SideNavContext';
 
-export interface SideNavMenuProps extends HTMLAttributes<HTMLElement> {
+export interface SideNavMenuProps extends LiHTMLAttributes<HTMLLIElement> {
   /**
    * An optional CSS class to apply to the component.
    */
@@ -115,17 +117,18 @@ const SideNavMenu = forwardRef<HTMLElement, SideNavMenuProps>(
       }
     }, [currentIsSideNavExpanded, isExpanded, isRail]);
 
+    const handleOnKeyDown = (event: KeyboardEvent<HTMLLIElement>) => {
+      if (match(event, keys.Escape)) {
+        setIsExpanded(false);
+      }
+    };
+
     return (
       // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
       <li
         {...rest}
         className={className}
-        onKeyDown={(event) => {
-          if (match(event, keys.Escape)) {
-            setIsExpanded(false);
-          }
-          onKeyDown?.(event);
-        }}>
+        onKeyDown={composeEventHandlers([onKeyDown, handleOnKeyDown])}>
         <button
           aria-expanded={isExpanded}
           className={`${prefix}--side-nav__submenu`}

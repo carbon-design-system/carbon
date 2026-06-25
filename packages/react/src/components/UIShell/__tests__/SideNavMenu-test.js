@@ -292,6 +292,29 @@ describe('SideNavMenu', () => {
       'false'
     );
   });
+
+  it('should not collapse the menu when consumer `onKeyDown` prevents default', () => {
+    const onKeyDown = jest.fn((event) => {
+      event.preventDefault();
+    });
+
+    const { container } = render(
+      <SideNavMenu
+        title="test-title"
+        defaultExpanded={true}
+        onKeyDown={onKeyDown}>
+        <SideNavMenuItem>a</SideNavMenuItem>
+        <SideNavMenuItem>b</SideNavMenuItem>
+        <SideNavMenuItem>c</SideNavMenuItem>
+      </SideNavMenu>
+    );
+
+    fireEvent.keyDown(container.firstChild, { key: 'Escape' });
+
+    expect(onKeyDown).toHaveBeenCalled();
+    // Menu should remain expanded because consumer prevented default
+    expect(screen.getByRole('button')).toHaveAttribute('aria-expanded', 'true');
+  });
 });
 
 describe('properly detects active descendants and applies active styling', () => {
