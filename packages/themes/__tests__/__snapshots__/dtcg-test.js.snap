@@ -90,6 +90,7 @@ $button-secondary-hover: (
 ) !default;
 
 $button-separator: (
+  fallback: #e0e0e0,
   white-theme: #e0e0e0,
   g-10: #e0e0e0,
   g-90: #161616,

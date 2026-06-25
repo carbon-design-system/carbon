@@ -139,6 +139,7 @@
       "$description": "separator token",
       "$extensions": {
         "carbon.themes": {
+          "fallback": "#e0e0e0",
           "white": "#e0e0e0",
           "g10": "#e0e0e0",
           "g90": "#161616",
