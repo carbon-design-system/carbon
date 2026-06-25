@@ -19211,8 +19211,8 @@
     - warning
   sizes:
     - 32
-- name: emissions
-  friendly_name: Emissions
+- name: offset--environmental
+  friendly_name: Offset environmental
   aliases:
     - offset
     - environment
