@@ -1196,7 +1196,9 @@ describe('TabListVertical', () => {
       </TabsVertical>
     );
 
-    expect(container.firstChild.style.height.match(/\d+px/));
+    expect(
+      screen.getByRole('tablist').parentElement.style.height.match(/\d+px/)
+    ).toBeTruthy();
 
     const tabpanels = screen.getAllByRole('tabpanel', { hidden: true });
     expect(tabpanels).toHaveLength(4);
