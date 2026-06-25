@@ -84,6 +84,10 @@ $sizes: (
     justify-content: center;
     border: 1px solid $border-inverse;
     background: transparent;
+    border-end-end-radius: var(--cds-border-radius-field, 0);
+    border-end-start-radius: var(--cds-border-radius-field, 0);
+    border-start-end-radius: var(--cds-border-radius-field, 0);
+    border-start-start-radius: var(--cds-border-radius-field, 0);
     color: $text-primary;
     font-weight: 600;
     outline: none;

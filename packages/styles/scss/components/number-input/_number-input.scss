@@ -165,6 +165,10 @@
     align-items: center;
     justify-content: center;
     block-size: 100%;
+    border-end-end-radius: var(--cds-border-radius-field, 0);
+    border-end-start-radius: var(--cds-border-radius-field, 0);
+    border-start-end-radius: var(--cds-border-radius-field, 0);
+    border-start-start-radius: var(--cds-border-radius-field, 0);
     color: $icon-primary;
 
     svg {
