@@ -67,9 +67,9 @@ const FOOTER_PROPS = ['actions'];
 /**
  * Helper to create JSX member expression (e.g., Tearsheet.Header)
  */
-function createMemberExpression(j, object, property) {
+function createMemberExpression(j, localName, property) {
   return j.jsxMemberExpression(
-    j.jsxIdentifier(object),
+    j.jsxIdentifier(localName),
     j.jsxIdentifier(property)
   );
 }
@@ -90,7 +90,7 @@ function extractJSXValue(attributeValue) {
 /**
  * Create Tearsheet.Header with HeaderContent
  */
-function createHeader(j, headerProps, headerContentProps) {
+function createHeader(j, localName, headerProps, headerContentProps) {
   const hasHeaderContentProps = headerContentProps.length > 0;
   const hasHeaderProps = headerProps.length > 0;
 
@@ -101,14 +101,14 @@ function createHeader(j, headerProps, headerContentProps) {
   // Create HeaderContent
   const headerContent = j.jsxElement(
     j.jsxOpeningElement(
-      createMemberExpression(j, 'Tearsheet', 'HeaderContent'),
+      createMemberExpression(j, localName, 'HeaderContent'),
       headerContentProps,
       headerContentProps.length === 0
     ),
     headerContentProps.length === 0
       ? null
       : j.jsxClosingElement(
-          createMemberExpression(j, 'Tearsheet', 'HeaderContent')
+          createMemberExpression(j, localName, 'HeaderContent')
         ),
     []
   );
@@ -116,10 +116,10 @@ function createHeader(j, headerProps, headerContentProps) {
   // Create Header wrapping HeaderContent
   const header = j.jsxElement(
     j.jsxOpeningElement(
-      createMemberExpression(j, 'Tearsheet', 'Header'),
+      createMemberExpression(j, localName, 'Header'),
       headerProps
     ),
-    j.jsxClosingElement(createMemberExpression(j, 'Tearsheet', 'Header')),
+    j.jsxClosingElement(createMemberExpression(j, localName, 'Header')),
     [j.jsxText('\n    '), headerContent, j.jsxText('\n  ')]
   );
 
@@ -129,18 +129,15 @@ function createHeader(j, headerProps, headerContentProps) {
 /**
  * Create Tearsheet.Influencer
  */
-function createInfluencer(j, influencerValue) {
+function createInfluencer(j, localName, influencerValue) {
   if (!influencerValue) return null;
 
   const content = extractJSXValue(influencerValue);
   if (!content) return null;
 
   return j.jsxElement(
-    j.jsxOpeningElement(
-      createMemberExpression(j, 'Tearsheet', 'Influencer'),
-      []
-    ),
-    j.jsxClosingElement(createMemberExpression(j, 'Tearsheet', 'Influencer')),
+    j.jsxOpeningElement(createMemberExpression(j, localName, 'Influencer'), []),
+    j.jsxClosingElement(createMemberExpression(j, localName, 'Influencer')),
     [j.jsxText('\n    '), content, j.jsxText('\n  ')]
   );
 }
@@ -148,7 +145,7 @@ function createInfluencer(j, influencerValue) {
 /**
  * Create Tearsheet.NavigationBar
  */
-function createNavigationBar(j, navigationValue) {
+function createNavigationBar(j, localName, navigationValue) {
   if (!navigationValue) return null;
 
   const content = extractJSXValue(navigationValue);
@@ -156,12 +153,10 @@ function createNavigationBar(j, navigationValue) {
 
   return j.jsxElement(
     j.jsxOpeningElement(
-      createMemberExpression(j, 'Tearsheet', 'NavigationBar'),
+      createMemberExpression(j, localName, 'NavigationBar'),
       []
     ),
-    j.jsxClosingElement(
-      createMemberExpression(j, 'Tearsheet', 'NavigationBar')
-    ),
+    j.jsxClosingElement(createMemberExpression(j, localName, 'NavigationBar')),
     [j.jsxText('\n    '), content, j.jsxText('\n  ')]
   );
 }
@@ -169,14 +164,14 @@ function createNavigationBar(j, navigationValue) {
 /**
  * Create Tearsheet.Body with MainContent
  */
-function createBody(j, originalChildren) {
+function createBody(j, localName, originalChildren) {
   // Create MainContent with original children
   const mainContent = j.jsxElement(
     j.jsxOpeningElement(
-      createMemberExpression(j, 'Tearsheet', 'MainContent'),
+      createMemberExpression(j, localName, 'MainContent'),
       []
     ),
-    j.jsxClosingElement(createMemberExpression(j, 'Tearsheet', 'MainContent')),
+    j.jsxClosingElement(createMemberExpression(j, localName, 'MainContent')),
     originalChildren.length > 0
       ? [j.jsxText('\n      '), ...originalChildren, j.jsxText('\n    ')]
       : []
@@ -184,8 +179,8 @@ function createBody(j, originalChildren) {
 
   // Create Body wrapping MainContent
   const body = j.jsxElement(
-    j.jsxOpeningElement(createMemberExpression(j, 'Tearsheet', 'Body'), []),
-    j.jsxClosingElement(createMemberExpression(j, 'Tearsheet', 'Body')),
+    j.jsxOpeningElement(createMemberExpression(j, localName, 'Body'), []),
+    j.jsxClosingElement(createMemberExpression(j, localName, 'Body')),
     [j.jsxText('\n    '), mainContent, j.jsxText('\n  ')]
   );
 
@@ -195,12 +190,12 @@ function createBody(j, originalChildren) {
 /**
  * Create Tearsheet.Footer
  */
-function createFooter(j, footerProps) {
+function createFooter(j, localName, footerProps) {
   if (footerProps.length === 0) return null;
 
   return j.jsxElement(
     j.jsxOpeningElement(
-      createMemberExpression(j, 'Tearsheet', 'Footer'),
+      createMemberExpression(j, localName, 'Footer'),
       footerProps,
       true // self-closing
     )
@@ -210,7 +205,7 @@ function createFooter(j, footerProps) {
 /**
  * Transform Tearsheet JSX element to composable structure
  */
-function transformTearsheetElement(j, path) {
+function transformTearsheetElement(j, path, localName) {
   const element = path.node;
   const openingElement = element.openingElement;
   const attributes = openingElement.attributes || [];
@@ -269,29 +264,29 @@ function transformTearsheetElement(j, path) {
   const newChildren = [];
 
   // Add Header (if needed)
-  const header = createHeader(j, headerProps, headerContentProps);
+  const header = createHeader(j, localName, headerProps, headerContentProps);
   if (header) {
     newChildren.push(j.jsxText('\n  '), header);
   }
 
   // Add Influencer (if needed)
-  const influencer = createInfluencer(j, influencerValue);
+  const influencer = createInfluencer(j, localName, influencerValue);
   if (influencer) {
     newChildren.push(j.jsxText('\n  '), influencer);
   }
 
   // Add NavigationBar (if needed)
-  const navigationBar = createNavigationBar(j, navigationValue);
+  const navigationBar = createNavigationBar(j, localName, navigationValue);
   if (navigationBar) {
     newChildren.push(j.jsxText('\n  '), navigationBar);
   }
 
   // Add Body (always)
-  const body = createBody(j, originalChildren);
+  const body = createBody(j, localName, originalChildren);
   newChildren.push(j.jsxText('\n  '), body);
 
   // Add Footer (if needed)
-  const footer = createFooter(j, footerProps);
+  const footer = createFooter(j, localName, footerProps);
   if (footer) {
     newChildren.push(j.jsxText('\n  '), footer);
   }
@@ -303,8 +298,8 @@ function transformTearsheetElement(j, path) {
 
   // Create new Tearsheet element with composable structure
   const newElement = j.jsxElement(
-    j.jsxOpeningElement(j.jsxIdentifier('Tearsheet'), rootProps),
-    j.jsxClosingElement(j.jsxIdentifier('Tearsheet')),
+    j.jsxOpeningElement(j.jsxIdentifier(localName), rootProps),
+    j.jsxClosingElement(j.jsxIdentifier(localName)),
     newChildren
   );
 
@@ -317,6 +312,9 @@ function transform(fileInfo, api) {
 
   let importsTransformed = false;
   let jsxTransformed = false;
+
+  // Track local names for Tearsheet imports
+  const tearsheetLocalNames = new Map();
 
   // Transform imports
   root
@@ -337,8 +335,11 @@ function transform(fileInfo, api) {
             : importedName;
 
           // Check if this is Tearsheet
-          if (importedName === 'Tearsheet') {
-            // Transform to preview__Tearsheet as Tearsheet
+          if (
+            importedName === 'Tearsheet' ||
+            importedName === 'preview__Tearsheet'
+          ) {
+            // Transform to preview__Tearsheet as localName
             const newImported = j.identifier('preview__Tearsheet');
             const newLocal = j.identifier(localName);
             const newSpecifier = j.importSpecifier(newImported, newLocal);
@@ -346,7 +347,11 @@ function transform(fileInfo, api) {
             if (!seen.has(localName)) {
               newSpecifiers.push(newSpecifier);
               seen.add(localName);
-              importsTransformed = true;
+              tearsheetLocalNames.set(localName, true);
+              // Only mark as transformed if we're actually changing the import
+              if (importedName === 'Tearsheet') {
+                importsTransformed = true;
+              }
             }
           } else {
             // Keep other imports as-is
@@ -365,19 +370,19 @@ function transform(fileInfo, api) {
     });
 
   // Transform Tearsheet JSX elements
-  root
-    .find(j.JSXElement, {
-      openingElement: {
-        name: {
-          name: 'Tearsheet',
-        },
-      },
-    })
-    .forEach((path) => {
-      const newElement = transformTearsheetElement(j, path);
-      j(path).replaceWith(newElement);
-      jsxTransformed = true;
-    });
+  root.find(j.JSXElement).forEach((path) => {
+    const openingElement = path.node.openingElement;
+    if (openingElement.name.type === 'JSXIdentifier') {
+      const elementName = openingElement.name.name;
+
+      // Check if this element uses a Tearsheet local name
+      if (tearsheetLocalNames.has(elementName)) {
+        const newElement = transformTearsheetElement(j, path, elementName);
+        j(path).replaceWith(newElement);
+        jsxTransformed = true;
+      }
+    }
+  });
 
   if (importsTransformed || jsxTransformed) {
     return root.toSource({ quote: 'single', trailingComma: true });
