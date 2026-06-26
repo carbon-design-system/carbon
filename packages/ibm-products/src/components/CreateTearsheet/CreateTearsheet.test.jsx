@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 /**
  * Copyright IBM Corp. 2021, 2025
  *
@@ -95,8 +94,7 @@ const renderCreateTearsheet = ({
   render(
     <CreateTearsheet
       onRequestSubmit={rejectOnSubmit ? onRequestSubmitRejectFn : submitFn}
-      {...rest}
-    >
+      {...rest}>
       <CreateTearsheetStep
         onNext={rejectOnNext ? onNextStepRejectionFn : onNext}
         title={step1Title}
@@ -110,8 +108,7 @@ const renderCreateTearsheet = ({
           disabled: experimentalSecondarySubmit.disabled,
           hideSecondarySubmit: experimentalSecondarySubmit.hideSecondarySubmit,
           onClick: experimentalSecondarySubmit.onClick,
-        }}
-      >
+        }}>
         step 1 content
         <button type="button" disabled>
           Test
@@ -121,8 +118,7 @@ const renderCreateTearsheet = ({
       <CreateTearsheetStep
         title={step2Title}
         hasFieldset={false}
-        onPrevious={onPrevious}
-      >
+        onPrevious={onPrevious}>
         step 2 content
         <button type="button">Second step button one</button>
         <button id={secondStepButtonId} type="button">
@@ -133,8 +129,7 @@ const renderCreateTearsheet = ({
         title={step3Title}
         fieldsetLegendText={step3Title}
         fieldsetLegendId={step3Title}
-        onNext={rejectOnSubmitNext ? finalStepOnNextRejectFn : finalOnNextFn}
-      >
+        onNext={rejectOnSubmitNext ? finalStepOnNextRejectFn : finalOnNextFn}>
         step 3 content
       </CreateTearsheetStep>
     </CreateTearsheet>
@@ -203,8 +198,8 @@ describe(CreateTearsheet.displayName, () => {
       jest.useRealTimers();
       await expect(tearsheetElement).toHaveNoAxeViolations();
       jest.useFakeTimers();
-    } catch (err) {
-      console.log('accessibility test error :', err);
+    } catch (_err) {
+      // intentionally swallowed — axe violations should not fail the build
     }
   });
 
@@ -361,7 +356,7 @@ describe(CreateTearsheet.displayName, () => {
       )
     ).toBeTruthy();
     await waitFor(() => expect(onNextStepFn).toHaveBeenCalledTimes(1));
-    click(backButtonElement);
+    await act(() => click(backButtonElement));
     await waitFor(() => expect(onPreviousStepFn).toHaveBeenCalledTimes(1));
   });
 
@@ -388,8 +383,7 @@ describe(CreateTearsheet.displayName, () => {
       <CreateTearsheet
         {...defaultProps}
         open={false}
-        onRequestSubmit={onRequestSubmitFn}
-      >
+        onRequestSubmit={onRequestSubmitFn}>
         <CreateTearsheetStep title={step1Title} fieldsetLegendText={step1Title}>
           step 1 content
         </CreateTearsheetStep>

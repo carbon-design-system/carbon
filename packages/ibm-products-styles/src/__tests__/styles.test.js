@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const { resolve } = require('path');
+import { resolve } from 'path';
 import { scssCompile } from './test-helper';
 
 describe('CSS export checks', () => {

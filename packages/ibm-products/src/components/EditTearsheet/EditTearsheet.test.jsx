@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 /**
  * Copyright IBM Corp. 2022, 2023
  *

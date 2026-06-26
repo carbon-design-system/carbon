@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 /**
  * Copyright IBM Corp. 2020, 2023
  *
@@ -8,7 +7,6 @@
 
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { expectMultipleError } from '../../global/js/utils/test-helper';
 
 import React, { act } from 'react';
 import { Button, TextInput, AILabel, AILabelContent } from '@carbon/react';
@@ -63,8 +61,7 @@ const renderSidePanel = ({ ...rest } = {}, children = <p>test</p>) =>
         open: true,
         onRequestClose: onRequestCloseFn,
         ...rest,
-      }}
-    >
+      }}>
       {children}
     </SidePanel>
   );
@@ -79,11 +76,9 @@ const renderResizableSidePanel = ({ ...rest } = {}, children = <p>test</p>) =>
           open: true,
           placement: 'right',
           size: 'md',
-          open: true,
           onRequestClose: onRequestCloseFn,
           ...rest,
-        }}
-      >
+        }}>
         {children}
       </SidePanel>
     </FeatureFlags>
@@ -114,8 +109,7 @@ const SlideIn = ({
         }
         placement={placement}
         onUnmount={onUnmountFn}
-        {...rest}
-      >
+        {...rest}>
         Content
       </SidePanel>
       <div id={selectorPageContentValue.slice(1)} />
@@ -235,8 +229,7 @@ describe('SidePanel', () => {
           includeOverlay
           open={false}
           onRequestClose={onRequestCloseFn}
-          id="sidepanel-id"
-        >
+          id="sidepanel-id">
           Content
         </SidePanel>
       )
@@ -341,7 +334,7 @@ describe('SidePanel', () => {
   });
 
   it('should render navigation button', async () => {
-    const { container } = renderSidePanel({
+    renderSidePanel({
       currentStep: 1,
     });
     const navigationAction = screen.getByRole('button', { name: 'Back' });
@@ -469,7 +462,7 @@ describe('SidePanel', () => {
 
   it('should call the onRequestClose event handler', async () => {
     const { click } = userEvent;
-    const { container } = renderSidePanel();
+    renderSidePanel();
     const closeIconButton = screen.getByRole('button', { name: 'Close' });
     await act(() => click(closeIconButton));
     expect(onRequestCloseFn).toHaveBeenCalled();
@@ -570,9 +563,7 @@ describe('SidePanel', () => {
       );
     };
 
-    const { container, getByText, rerender } = render(
-      <DummyComponent open={true} />
-    );
+    const { getByText, rerender } = render(<DummyComponent open={true} />);
 
     const launchButtonEl = getByText('Open');
     expect(launchButtonEl).toBeInTheDocument();

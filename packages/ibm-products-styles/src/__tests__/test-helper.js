@@ -5,8 +5,8 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-const { execFileSync } = require('child_process');
-const { resolve } = require('path');
+import { execFileSync } from 'child_process';
+import { resolve } from 'path';
 
 const r = (file) => resolve(__dirname, file);
 const loadPath1 = r('../../../../node_modules');

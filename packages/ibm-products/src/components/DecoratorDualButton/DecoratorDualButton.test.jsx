@@ -153,7 +153,7 @@ describe(componentName, () => {
   });
 
   it('has no accessibility violations', async () => {
-    const { container } = renderComponent();
+    const { container } = renderComponent({ label, value });
     expect(container).toBeAccessible(componentName);
     expect(container).toHaveNoAxeViolations();
   });

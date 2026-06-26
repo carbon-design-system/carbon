@@ -223,34 +223,38 @@ describe(componentName, () => {
 
   async function expectNextKeyFocus(text, props) {
     const items = await setupKeyFocus(props);
-    items.forEach(async (_value, index) => await expectMove(text, index + 1));
+    for (let index = 0; index < items.length; index++) {
+      await expectMove(text, index + 1);
+    }
   }
 
   it('moves focus to the next item', async () => {
-    expectNextKeyFocus('ArrowRight');
+    await expectNextKeyFocus('ArrowRight');
   });
 
   async function expectPreviousKeyFocus({ next, previous }, props) {
     const items = await setupKeyFocus(props);
     const { length } = items;
 
-    Promise.all(items.map(() => key(next)));
+    for (let i = 0; i < items.length; i++) {
+      await key(next);
+    }
 
-    items.forEach((_value, index) =>
-      expectMove(previous, length - (index + 1))
-    );
+    for (let index = 0; index < items.length; index++) {
+      await expectMove(previous, length - (index + 1));
+    }
   }
 
   it('moves focus to the previous item', async () => {
-    expectPreviousKeyFocus({ next: 'ArrowRight', previous: 'ArrowLeft' });
+    await expectPreviousKeyFocus({ next: 'ArrowRight', previous: 'ArrowLeft' });
   });
 
   it('moves focus to the next item for the vertical variant', async () => {
-    expectNextKeyFocus('ArrowDown', { vertical: true });
+    await expectNextKeyFocus('ArrowDown', { vertical: true });
   });
 
   it('moves focus to the previous item for the vertical variant', async () => {
-    expectPreviousKeyFocus(
+    await expectPreviousKeyFocus(
       { next: 'ArrowDown', previous: 'ArrowUp' },
       { vertical: true }
     );

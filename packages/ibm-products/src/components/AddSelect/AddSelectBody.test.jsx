@@ -5,7 +5,7 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-import { render, fireEvent, screen } from '@testing-library/react';
+import { render, fireEvent, screen, act } from '@testing-library/react';
 import React from 'react';
 import { AddSelectBody } from './AddSelectBody';
 import { pkg, carbon } from '../../settings';
@@ -60,7 +60,7 @@ const singleProps = {
   noResultsTitle: 'No results',
   noResultsDescription: 'Try again',
   onCloseButtonText: 'Cancel',
-  onSubmit: (selection) => console.log(selection),
+  onSubmit: () => null,
   onSubmitButtonText: 'submit selections',
   searchResultsTitle: 'Search results',
   title,
@@ -139,7 +139,7 @@ const multiProps = {
   noSelectionTitle: 'No business terms selected',
   noResultsDescription: 'Try again',
   onCloseButtonText: 'Cancel',
-  onSubmit: (selections) => console.log(selections),
+  onSubmit: () => null,
   onSubmitButtonText: 'Add',
   searchResultsTitle: 'Search results',
   title: 'Add business terms',
@@ -472,9 +472,10 @@ describe(componentName, () => {
       normalizedItems,
     };
     render(<AddSelectBody {...newProps} />);
+    await waitForPosition();
     const input = screen.getByPlaceholderText('Find');
     fireEvent.change(input, { target: { value: 'florida' } });
-    expect(screen.findByText('florida'));
+    expect(await screen.findByText('Florida'));
     fireEvent.change(input, { target: { value: '' } });
     const selectAll = document.querySelector(
       `.${blockClass}__column__select-all input`
@@ -492,9 +493,9 @@ describe(componentName, () => {
     fireEvent.click(
       document.querySelector(`.${blockClass}__selections-view-children`)
     );
-    expect(screen.findByText('Los Angeles'));
+    expect(await screen.findByText('Los Angeles'));
     const globalSearch = screen.getByPlaceholderText('Find business terms');
-    fireEvent.change(globalSearch, { target: { value: 'florida' } });
-    fireEvent.change(globalSearch, { target: { value: '' } });
+    await act(() => fireEvent.change(globalSearch, { target: { value: 'florida' } }));
+    await act(() => fireEvent.change(globalSearch, { target: { value: '' } }));
   });
 });

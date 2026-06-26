@@ -18,6 +18,7 @@ const dataTestId = uuidv4();
 
 const defaultProps = {
   onClick: () => {},
+  title: 'Get started',
 };
 
 describe(componentName, () => {

@@ -5,8 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const { resolve } = require('path');
-const { sync: glob } = require('glob');
+import { resolve } from 'path';
+import { sync as glob } from 'glob';
 import { scssCheck } from './test-helper';
 
 const g = (globString) =>

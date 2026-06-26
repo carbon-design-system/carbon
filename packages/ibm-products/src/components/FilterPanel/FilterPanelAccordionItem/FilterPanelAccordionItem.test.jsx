@@ -25,9 +25,11 @@ const labelText = `hello, world (${uuidv4()})`;
 
 const renderComponent = ({ ...rest } = {}) =>
   render(
-    <FilterPanelAccordionItem labelText={labelText} {...{ ...rest }}>
-      <FilterPanelCheckbox labelText="Checkbox" id={uuidv4()} />
-    </FilterPanelAccordionItem>
+    <ul>
+      <FilterPanelAccordionItem labelText={labelText} {...{ ...rest }}>
+        <FilterPanelCheckbox labelText="Checkbox" id={uuidv4()} />
+      </FilterPanelAccordionItem>
+    </ul>
   );
 
 describe(componentName, () => {

@@ -82,7 +82,6 @@ export const scssCompile = (file, compressed = false) =>
  * This function should be called after tests in order not to pollute other
  * tests with the installed mocks.
  */
-// eslint-disable-next-line ssr-friendly/no-dom-globals-in-module-scope
 const hep = HTMLElement.prototype;
 export const mockHTMLElement = (options) => {
   const originals = {};
