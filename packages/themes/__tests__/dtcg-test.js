@@ -13,7 +13,7 @@ const fs = require('fs');
 const path = require('path');
 
 describe('DTCG Generated SCSS Snapshots', () => {
-  const generatedDir = path.join(__dirname, '../scss/generated-dtcg');
+  const generatedDir = path.join(__dirname, '../scss/generated');
 
   const files = [
     '_themes.scss',

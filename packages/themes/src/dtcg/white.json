@@ -10,11 +10,7 @@
     "$type": "color",
     "$value": {
       "colorSpace": "srgb",
-      "components": [
-        1.0,
-        1.0,
-        1.0
-      ],
+      "components": [1.0, 1.0, 1.0],
       "hex": "#ffffff"
     },
     "$description": "Default page background"
@@ -23,11 +19,7 @@
     "$type": "color",
     "$value": {
       "colorSpace": "srgb",
-      "components": [
-        0.223529,
-        0.223529,
-        0.223529
-      ],
+      "components": [0.223529, 0.223529, 0.223529],
       "hex": "#393939"
     },
     "$description": "Inverse background for dark UI elements"
@@ -36,11 +28,7 @@
     "$type": "color",
     "$value": {
       "colorSpace": "srgb",
-      "components": [
-        0.058824,
-        0.384314,
-        0.996078
-      ],
+      "components": [0.058824, 0.384314, 0.996078],
       "hex": "#0f62fe"
     },
     "$description": "Brand color for backgrounds"
@@ -49,11 +37,7 @@
     "$type": "color",
     "$value": {
       "colorSpace": "srgb",
-      "components": [
-        0.552941,
-        0.552941,
-        0.552941
-      ],
+      "components": [0.552941, 0.552941, 0.552941],
       "alpha": 0.5
     },
     "$description": "Active state background"
@@ -62,11 +46,7 @@
     "$type": "color",
     "$value": {
       "colorSpace": "srgb",
-      "components": [
-        0.552941,
-        0.552941,
-        0.552941
-      ],
+      "components": [0.552941, 0.552941, 0.552941],
       "alpha": 0.12
     },
     "$description": "Hover state background"
@@ -75,11 +55,7 @@
     "$type": "color",
     "$value": {
       "colorSpace": "srgb",
-      "components": [
-        0.278431,
-        0.278431,
-        0.278431
-      ],
+      "components": [0.278431, 0.278431, 0.278431],
       "hex": "#474747"
     },
     "$description": "Hover state for inverse backgrounds"
@@ -88,11 +64,7 @@
     "$type": "color",
     "$value": {
       "colorSpace": "srgb",
-      "components": [
-        0.552941,
-        0.552941,
-        0.552941
-      ],
+      "components": [0.552941, 0.552941, 0.552941],
       "alpha": 0.2
     },
     "$description": "Selected state background"
@@ -101,11 +73,7 @@
     "$type": "color",
     "$value": {
       "colorSpace": "srgb",
-      "components": [
-        0.552941,
-        0.552941,
-        0.552941
-      ],
+      "components": [0.552941, 0.552941, 0.552941],
       "alpha": 0.32
     },
     "$description": "Hover state for selected backgrounds"
@@ -115,11 +83,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          0.956863,
-          0.956863,
-          0.956863
-        ],
+        "components": [0.956863, 0.956863, 0.956863],
         "hex": "#f4f4f4"
       },
       "$description": "Primary layer background"
@@ -128,11 +92,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          0.776471,
-          0.776471,
-          0.776471
-        ],
+        "components": [0.776471, 0.776471, 0.776471],
         "hex": "#c6c6c6"
       },
       "$description": "Active state for layer 01"
@@ -141,11 +101,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          1.0,
-          1.0,
-          1.0
-        ],
+        "components": [1.0, 1.0, 1.0],
         "hex": "#ffffff"
       },
       "$description": "Background behind layer 01"
@@ -154,11 +110,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          0.909804,
-          0.909804,
-          0.909804
-        ],
+        "components": [0.909804, 0.909804, 0.909804],
         "hex": "#e8e8e8"
       },
       "$description": "Hover state for layer 01"
@@ -167,11 +119,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          0.878431,
-          0.878431,
-          0.878431
-        ],
+        "components": [0.878431, 0.878431, 0.878431],
         "hex": "#e0e0e0"
       },
       "$description": "Selected state for layer 01"
@@ -180,11 +128,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          0.819608,
-          0.819608,
-          0.819608
-        ],
+        "components": [0.819608, 0.819608, 0.819608],
         "hex": "#d1d1d1"
       },
       "$description": "Hover state for selected layer 01"
@@ -193,11 +137,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          1.0,
-          1.0,
-          1.0
-        ],
+        "components": [1.0, 1.0, 1.0],
         "hex": "#ffffff"
       },
       "$description": "Secondary layer background"
@@ -206,11 +146,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          0.776471,
-          0.776471,
-          0.776471
-        ],
+        "components": [0.776471, 0.776471, 0.776471],
         "hex": "#c6c6c6"
       },
       "$description": "Active state for layer 02"
@@ -219,11 +155,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          0.956863,
-          0.956863,
-          0.956863
-        ],
+        "components": [0.956863, 0.956863, 0.956863],
         "hex": "#f4f4f4"
       },
       "$description": "Background behind layer 02"
@@ -232,11 +164,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          0.909804,
-          0.909804,
-          0.909804
-        ],
+        "components": [0.909804, 0.909804, 0.909804],
         "hex": "#e8e8e8"
       },
       "$description": "Hover state for layer 02"
@@ -245,11 +173,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          0.878431,
-          0.878431,
-          0.878431
-        ],
+        "components": [0.878431, 0.878431, 0.878431],
         "hex": "#e0e0e0"
       },
       "$description": "Selected state for layer 02"
@@ -258,11 +182,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          0.819608,
-          0.819608,
-          0.819608
-        ],
+        "components": [0.819608, 0.819608, 0.819608],
         "hex": "#d1d1d1"
       },
       "$description": "Hover state for selected layer 02"
@@ -271,11 +191,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          0.956863,
-          0.956863,
-          0.956863
-        ],
+        "components": [0.956863, 0.956863, 0.956863],
         "hex": "#f4f4f4"
       },
       "$description": "Tertiary layer background"
@@ -284,11 +200,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          0.776471,
-          0.776471,
-          0.776471
-        ],
+        "components": [0.776471, 0.776471, 0.776471],
         "hex": "#c6c6c6"
       },
       "$description": "Active state for layer 03"
@@ -297,11 +209,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          1.0,
-          1.0,
-          1.0
-        ],
+        "components": [1.0, 1.0, 1.0],
         "hex": "#ffffff"
       },
       "$description": "Background behind layer 03"
@@ -310,11 +218,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          0.909804,
-          0.909804,
-          0.909804
-        ],
+        "components": [0.909804, 0.909804, 0.909804],
         "hex": "#e8e8e8"
       },
       "$description": "Hover state for layer 03"
@@ -323,11 +227,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          0.878431,
-          0.878431,
-          0.878431
-        ],
+        "components": [0.878431, 0.878431, 0.878431],
         "hex": "#e0e0e0"
       },
       "$description": "Selected state for layer 03"
@@ -336,11 +236,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          0.819608,
-          0.819608,
-          0.819608
-        ],
+        "components": [0.819608, 0.819608, 0.819608],
         "hex": "#d1d1d1"
       },
       "$description": "Hover state for selected layer 03"
@@ -349,11 +245,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          0.086275,
-          0.086275,
-          0.086275
-        ],
+        "components": [0.086275, 0.086275, 0.086275],
         "hex": "#161616"
       },
       "$description": "Inverse selected layer"
@@ -362,11 +254,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          0.552941,
-          0.552941,
-          0.552941
-        ],
+        "components": [0.552941, 0.552941, 0.552941],
         "hex": "#8d8d8d"
       },
       "$description": "Disabled selected layer"
@@ -375,11 +263,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          0.878431,
-          0.878431,
-          0.878431
-        ],
+        "components": [0.878431, 0.878431, 0.878431],
         "hex": "#e0e0e0"
       },
       "$description": "Primary accent layer"
@@ -388,11 +272,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          0.658824,
-          0.658824,
-          0.658824
-        ],
+        "components": [0.658824, 0.658824, 0.658824],
         "hex": "#a8a8a8"
       },
       "$description": "Active state for accent layer 01"
@@ -401,11 +281,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          0.819608,
-          0.819608,
-          0.819608
-        ],
+        "components": [0.819608, 0.819608, 0.819608],
         "hex": "#d1d1d1"
       },
       "$description": "Hover state for accent layer 01"
@@ -414,11 +290,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          0.878431,
-          0.878431,
-          0.878431
-        ],
+        "components": [0.878431, 0.878431, 0.878431],
         "hex": "#e0e0e0"
       },
       "$description": "Secondary accent layer"
@@ -427,11 +299,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          0.658824,
-          0.658824,
-          0.658824
-        ],
+        "components": [0.658824, 0.658824, 0.658824],
         "hex": "#a8a8a8"
       },
       "$description": "Active state for accent layer 02"
@@ -440,11 +308,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          0.819608,
-          0.819608,
-          0.819608
-        ],
+        "components": [0.819608, 0.819608, 0.819608],
         "hex": "#d1d1d1"
       },
       "$description": "Hover state for accent layer 02"
@@ -453,11 +317,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          0.878431,
-          0.878431,
-          0.878431
-        ],
+        "components": [0.878431, 0.878431, 0.878431],
         "hex": "#e0e0e0"
       },
       "$description": "Tertiary accent layer"
@@ -466,11 +326,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          0.658824,
-          0.658824,
-          0.658824
-        ],
+        "components": [0.658824, 0.658824, 0.658824],
         "hex": "#a8a8a8"
       },
       "$description": "Active state for accent layer 03"
@@ -479,11 +335,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          0.819608,
-          0.819608,
-          0.819608
-        ],
+        "components": [0.819608, 0.819608, 0.819608],
         "hex": "#d1d1d1"
       },
       "$description": "Hover state for accent layer 03"
@@ -494,11 +346,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          0.956863,
-          0.956863,
-          0.956863
-        ],
+        "components": [0.956863, 0.956863, 0.956863],
         "hex": "#f4f4f4"
       },
       "$description": "Primary field background"
@@ -507,11 +355,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          0.909804,
-          0.909804,
-          0.909804
-        ],
+        "components": [0.909804, 0.909804, 0.909804],
         "hex": "#e8e8e8"
       },
       "$description": "Hover state for field 01"
@@ -520,11 +364,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          1.0,
-          1.0,
-          1.0
-        ],
+        "components": [1.0, 1.0, 1.0],
         "hex": "#ffffff"
       },
       "$description": "Secondary field background"
@@ -533,11 +373,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          0.909804,
-          0.909804,
-          0.909804
-        ],
+        "components": [0.909804, 0.909804, 0.909804],
         "hex": "#e8e8e8"
       },
       "$description": "Hover state for field 02"
@@ -546,11 +382,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          0.956863,
-          0.956863,
-          0.956863
-        ],
+        "components": [0.956863, 0.956863, 0.956863],
         "hex": "#f4f4f4"
       },
       "$description": "Tertiary field background"
@@ -559,11 +391,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          0.909804,
-          0.909804,
-          0.909804
-        ],
+        "components": [0.909804, 0.909804, 0.909804],
         "hex": "#e8e8e8"
       },
       "$description": "Hover state for field 03"
@@ -574,11 +402,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          0.878431,
-          0.878431,
-          0.878431
-        ],
+        "components": [0.878431, 0.878431, 0.878431],
         "hex": "#e0e0e0"
       },
       "$description": "Subtle border for level 00"
@@ -587,11 +411,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          0.776471,
-          0.776471,
-          0.776471
-        ],
+        "components": [0.776471, 0.776471, 0.776471],
         "hex": "#c6c6c6"
       },
       "$description": "Subtle border for level 01"
@@ -600,11 +420,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          0.776471,
-          0.776471,
-          0.776471
-        ],
+        "components": [0.776471, 0.776471, 0.776471],
         "hex": "#c6c6c6"
       },
       "$description": "Selected subtle border for level 01"
@@ -613,11 +429,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          0.878431,
-          0.878431,
-          0.878431
-        ],
+        "components": [0.878431, 0.878431, 0.878431],
         "hex": "#e0e0e0"
       },
       "$description": "Subtle border for level 02"
@@ -626,11 +438,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          0.776471,
-          0.776471,
-          0.776471
-        ],
+        "components": [0.776471, 0.776471, 0.776471],
         "hex": "#c6c6c6"
       },
       "$description": "Selected subtle border for level 02"
@@ -639,11 +447,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          0.776471,
-          0.776471,
-          0.776471
-        ],
+        "components": [0.776471, 0.776471, 0.776471],
         "hex": "#c6c6c6"
       },
       "$description": "Subtle border for level 03"
@@ -652,11 +456,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          0.776471,
-          0.776471,
-          0.776471
-        ],
+        "components": [0.776471, 0.776471, 0.776471],
         "hex": "#c6c6c6"
       },
       "$description": "Selected subtle border for level 03"
@@ -665,11 +465,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          0.552941,
-          0.552941,
-          0.552941
-        ],
+        "components": [0.552941, 0.552941, 0.552941],
         "hex": "#8d8d8d"
       },
       "$description": "Strong border for level 01"
@@ -678,11 +474,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          0.552941,
-          0.552941,
-          0.552941
-        ],
+        "components": [0.552941, 0.552941, 0.552941],
         "hex": "#8d8d8d"
       },
       "$description": "Strong border for level 02"
@@ -691,11 +483,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          0.552941,
-          0.552941,
-          0.552941
-        ],
+        "components": [0.552941, 0.552941, 0.552941],
         "hex": "#8d8d8d"
       },
       "$description": "Strong border for level 03"
@@ -704,11 +492,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          0.776471,
-          0.776471,
-          0.776471
-        ],
+        "components": [0.776471, 0.776471, 0.776471],
         "hex": "#c6c6c6"
       },
       "$description": "Tile border for level 01"
@@ -717,11 +501,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          0.658824,
-          0.658824,
-          0.658824
-        ],
+        "components": [0.658824, 0.658824, 0.658824],
         "hex": "#a8a8a8"
       },
       "$description": "Tile border for level 02"
@@ -730,11 +510,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          0.776471,
-          0.776471,
-          0.776471
-        ],
+        "components": [0.776471, 0.776471, 0.776471],
         "hex": "#c6c6c6"
       },
       "$description": "Tile border for level 03"
@@ -743,11 +519,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          0.086275,
-          0.086275,
-          0.086275
-        ],
+        "components": [0.086275, 0.086275, 0.086275],
         "hex": "#161616"
       },
       "$description": "Inverse border color"
@@ -756,11 +528,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          0.058824,
-          0.384314,
-          0.996078
-        ],
+        "components": [0.058824, 0.384314, 0.996078],
         "hex": "#0f62fe"
       },
       "$description": "Interactive border color"
@@ -769,11 +537,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          0.776471,
-          0.776471,
-          0.776471
-        ],
+        "components": [0.776471, 0.776471, 0.776471],
         "hex": "#c6c6c6"
       },
       "$description": "Disabled border color"
@@ -784,11 +548,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          0.086275,
-          0.086275,
-          0.086275
-        ],
+        "components": [0.086275, 0.086275, 0.086275],
         "hex": "#161616"
       },
       "$description": "Primary text color"
@@ -797,11 +557,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          0.321569,
-          0.321569,
-          0.321569
-        ],
+        "components": [0.321569, 0.321569, 0.321569],
         "hex": "#525252"
       },
       "$description": "Secondary text color"
@@ -810,11 +566,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          0.086275,
-          0.086275,
-          0.086275
-        ],
+        "components": [0.086275, 0.086275, 0.086275],
         "alpha": 0.4
       },
       "$description": "Placeholder text color"
@@ -823,11 +575,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          0.435294,
-          0.435294,
-          0.435294
-        ],
+        "components": [0.435294, 0.435294, 0.435294],
         "hex": "#6f6f6f"
       },
       "$description": "Helper text color"
@@ -836,11 +584,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          0.854902,
-          0.117647,
-          0.156863
-        ],
+        "components": [0.854902, 0.117647, 0.156863],
         "hex": "#da1e28"
       },
       "$description": "Error text color"
@@ -849,11 +593,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          1.0,
-          1.0,
-          1.0
-        ],
+        "components": [1.0, 1.0, 1.0],
         "hex": "#ffffff"
       },
       "$description": "Inverse text color"
@@ -862,11 +602,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          1.0,
-          1.0,
-          1.0
-        ],
+        "components": [1.0, 1.0, 1.0],
         "hex": "#ffffff"
       },
       "$description": "Text color on colored backgrounds"
@@ -875,11 +611,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          0.552941,
-          0.552941,
-          0.552941
-        ],
+        "components": [0.552941, 0.552941, 0.552941],
         "hex": "#8d8d8d"
       },
       "$description": "Disabled text on colored backgrounds"
@@ -888,11 +620,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          0.086275,
-          0.086275,
-          0.086275
-        ],
+        "components": [0.086275, 0.086275, 0.086275],
         "alpha": 0.25
       },
       "$description": "Disabled text color"
@@ -903,11 +631,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          0.058824,
-          0.384314,
-          0.996078
-        ],
+        "components": [0.058824, 0.384314, 0.996078],
         "hex": "#0f62fe"
       },
       "$description": "Primary link color"
@@ -916,11 +640,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          0.0,
-          0.262745,
-          0.807843
-        ],
+        "components": [0.0, 0.262745, 0.807843],
         "hex": "#0043ce"
       },
       "$description": "Primary link hover color"
@@ -929,11 +649,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          0.0,
-          0.262745,
-          0.807843
-        ],
+        "components": [0.0, 0.262745, 0.807843],
         "hex": "#0043ce"
       },
       "$description": "Secondary link color"
@@ -942,11 +658,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          0.470588,
-          0.662745,
-          1.0
-        ],
+        "components": [0.470588, 0.662745, 1.0],
         "hex": "#78a9ff"
       },
       "$description": "Inverse link color"
@@ -955,11 +667,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          0.541176,
-          0.247059,
-          0.988235
-        ],
+        "components": [0.541176, 0.247059, 0.988235],
         "hex": "#8a3ffc"
       },
       "$description": "Visited link color"
@@ -968,11 +676,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          0.745098,
-          0.584314,
-          1.0
-        ],
+        "components": [0.745098, 0.584314, 1.0],
         "hex": "#be95ff"
       },
       "$description": "Inverse visited link color"
@@ -981,11 +685,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          0.956863,
-          0.956863,
-          0.956863
-        ],
+        "components": [0.956863, 0.956863, 0.956863],
         "hex": "#f4f4f4"
       },
       "$description": "Inverse active link color"
@@ -994,11 +694,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          0.65098,
-          0.784314,
-          1.0
-        ],
+        "components": [0.65098, 0.784314, 1.0],
         "hex": "#a6c8ff"
       },
       "$description": "Inverse link hover color"
@@ -1009,11 +705,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          0.086275,
-          0.086275,
-          0.086275
-        ],
+        "components": [0.086275, 0.086275, 0.086275],
         "hex": "#161616"
       },
       "$description": "Primary icon color"
@@ -1022,11 +714,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          0.321569,
-          0.321569,
-          0.321569
-        ],
+        "components": [0.321569, 0.321569, 0.321569],
         "hex": "#525252"
       },
       "$description": "Secondary icon color"
@@ -1035,11 +723,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          1.0,
-          1.0,
-          1.0
-        ],
+        "components": [1.0, 1.0, 1.0],
         "hex": "#ffffff"
       },
       "$description": "Inverse icon color"
@@ -1048,11 +732,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          1.0,
-          1.0,
-          1.0
-        ],
+        "components": [1.0, 1.0, 1.0],
         "hex": "#ffffff"
       },
       "$description": "Icon color on colored backgrounds"
@@ -1061,11 +741,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          0.552941,
-          0.552941,
-          0.552941
-        ],
+        "components": [0.552941, 0.552941, 0.552941],
         "hex": "#8d8d8d"
       },
       "$description": "Disabled icon on colored backgrounds"
@@ -1074,11 +750,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          0.086275,
-          0.086275,
-          0.086275
-        ],
+        "components": [0.086275, 0.086275, 0.086275],
         "alpha": 0.25
       },
       "$description": "Disabled icon color"
@@ -1087,11 +759,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          0.058824,
-          0.384314,
-          0.996078
-        ],
+        "components": [0.058824, 0.384314, 0.996078],
         "hex": "#0f62fe"
       },
       "$description": "Interactive icon color"
@@ -1102,11 +770,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          0.854902,
-          0.117647,
-          0.156863
-        ],
+        "components": [0.854902, 0.117647, 0.156863],
         "hex": "#da1e28"
       },
       "$description": "Error support color"
@@ -1115,11 +779,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          0.141176,
-          0.631373,
-          0.282353
-        ],
+        "components": [0.141176, 0.631373, 0.282353],
         "hex": "#24a148"
       },
       "$description": "Success support color"
@@ -1128,11 +788,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          0.945098,
-          0.760784,
-          0.105882
-        ],
+        "components": [0.945098, 0.760784, 0.105882],
         "hex": "#f1c21b"
       },
       "$description": "Warning support color"
@@ -1141,11 +797,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          0.0,
-          0.262745,
-          0.807843
-        ],
+        "components": [0.0, 0.262745, 0.807843],
         "hex": "#0043ce"
       },
       "$description": "Info support color"
@@ -1154,11 +806,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          0.980392,
-          0.301961,
-          0.337255
-        ],
+        "components": [0.980392, 0.301961, 0.337255],
         "hex": "#fa4d56"
       },
       "$description": "Inverse error support color"
@@ -1167,11 +815,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          0.258824,
-          0.745098,
-          0.396078
-        ],
+        "components": [0.258824, 0.745098, 0.396078],
         "hex": "#42be65"
       },
       "$description": "Inverse success support color"
@@ -1180,11 +824,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          0.945098,
-          0.760784,
-          0.105882
-        ],
+        "components": [0.945098, 0.760784, 0.105882],
         "hex": "#f1c21b"
       },
       "$description": "Inverse warning support color"
@@ -1193,11 +833,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          0.270588,
-          0.537255,
-          1.0
-        ],
+        "components": [0.270588, 0.537255, 1.0],
         "hex": "#4589ff"
       },
       "$description": "Inverse info support color"
@@ -1206,11 +842,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          0.945098,
-          0.760784,
-          0.105882
-        ],
+        "components": [0.945098, 0.760784, 0.105882],
         "hex": "#f1c21b"
       },
       "$description": "Minor caution support color"
@@ -1219,11 +851,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          1.0,
-          0.513725,
-          0.168627
-        ],
+        "components": [1.0, 0.513725, 0.168627],
         "hex": "#ff832b"
       },
       "$description": "Major caution support color"
@@ -1232,11 +860,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          0.541176,
-          0.247059,
-          0.988235
-        ],
+        "components": [0.541176, 0.247059, 0.988235],
         "hex": "#8a3ffc"
       },
       "$description": "Undefined caution support color"
@@ -1246,11 +870,7 @@
     "$type": "color",
     "$value": {
       "colorSpace": "srgb",
-      "components": [
-        0.058824,
-        0.384314,
-        0.996078
-      ],
+      "components": [0.058824, 0.384314, 0.996078],
       "hex": "#0f62fe"
     },
     "$description": "Focus indicator color"
@@ -1259,11 +879,7 @@
     "$type": "color",
     "$value": {
       "colorSpace": "srgb",
-      "components": [
-        1.0,
-        1.0,
-        1.0
-      ],
+      "components": [1.0, 1.0, 1.0],
       "hex": "#ffffff"
     },
     "$description": "Inset focus indicator color"
@@ -1272,11 +888,7 @@
     "$type": "color",
     "$value": {
       "colorSpace": "srgb",
-      "components": [
-        1.0,
-        1.0,
-        1.0
-      ],
+      "components": [1.0, 1.0, 1.0],
       "hex": "#ffffff"
     },
     "$description": "Inverse focus indicator color"
@@ -1285,11 +897,7 @@
     "$type": "color",
     "$value": {
       "colorSpace": "srgb",
-      "components": [
-        0.058824,
-        0.384314,
-        0.996078
-      ],
+      "components": [0.058824, 0.384314, 0.996078],
       "hex": "#0f62fe"
     },
     "$description": "Interactive element color"
@@ -1298,11 +906,7 @@
     "$type": "color",
     "$value": {
       "colorSpace": "srgb",
-      "components": [
-        0.815686,
-        0.886275,
-        1.0
-      ],
+      "components": [0.815686, 0.886275, 1.0],
       "hex": "#d0e2ff"
     },
     "$description": "Highlight color"
@@ -1311,11 +915,7 @@
     "$type": "color",
     "$value": {
       "colorSpace": "srgb",
-      "components": [
-        0.0,
-        0.0,
-        0.0
-      ],
+      "components": [0.0, 0.0, 0.0],
       "alpha": 0.6
     },
     "$description": "Overlay background color"
@@ -1324,11 +924,7 @@
     "$type": "color",
     "$value": {
       "colorSpace": "srgb",
-      "components": [
-        0.552941,
-        0.552941,
-        0.552941
-      ],
+      "components": [0.552941, 0.552941, 0.552941],
       "hex": "#8d8d8d"
     },
     "$description": "Toggle off state color"
@@ -1337,11 +933,7 @@
     "$type": "color",
     "$value": {
       "colorSpace": "srgb",
-      "components": [
-        0.0,
-        0.0,
-        0.0
-      ],
+      "components": [0.0, 0.0, 0.0],
       "alpha": 0.3
     },
     "$description": "Shadow color"
@@ -1351,11 +943,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          0.909804,
-          0.909804,
-          0.909804
-        ],
+        "components": [0.909804, 0.909804, 0.909804],
         "hex": "#e8e8e8"
       },
       "$description": "Skeleton loading background"
@@ -1364,11 +952,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          0.776471,
-          0.776471,
-          0.776471
-        ],
+        "components": [0.776471, 0.776471, 0.776471],
         "hex": "#c6c6c6"
       },
       "$description": "Skeleton loading element"
@@ -1379,11 +963,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          0.098039,
-          0.501961,
-          0.219608
-        ],
+        "components": [0.098039, 0.501961, 0.219608],
         "hex": "#198038"
       },
       "$description": "Syntax comment"
@@ -1392,11 +972,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          0.098039,
-          0.501961,
-          0.219608
-        ],
+        "components": [0.098039, 0.501961, 0.219608],
         "hex": "#198038"
       },
       "$description": "Syntax line comment"
@@ -1405,11 +981,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          0.098039,
-          0.501961,
-          0.219608
-        ],
+        "components": [0.098039, 0.501961, 0.219608],
         "hex": "#198038"
       },
       "$description": "Syntax block comment"
@@ -1418,11 +990,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          0.098039,
-          0.501961,
-          0.219608
-        ],
+        "components": [0.098039, 0.501961, 0.219608],
         "hex": "#198038"
       },
       "$description": "Syntax doc comment"
@@ -1431,11 +999,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          0.086275,
-          0.086275,
-          0.086275
-        ],
+        "components": [0.086275, 0.086275, 0.086275],
         "hex": "#161616"
       },
       "$description": "Syntax string"
@@ -1444,11 +1008,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          0.086275,
-          0.086275,
-          0.086275
-        ],
+        "components": [0.086275, 0.086275, 0.086275],
         "hex": "#161616"
       },
       "$description": "Syntax doc string"
@@ -1457,11 +1017,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          0.058824,
-          0.384314,
-          0.996078
-        ],
+        "components": [0.058824, 0.384314, 0.996078],
         "hex": "#0f62fe"
       },
       "$description": "Syntax keyword"
@@ -1470,11 +1026,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          0.058824,
-          0.384314,
-          0.996078
-        ],
+        "components": [0.058824, 0.384314, 0.996078],
         "hex": "#0f62fe"
       },
       "$description": "Syntax operator keyword"
@@ -1483,11 +1035,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          0.411765,
-          0.160784,
-          0.768627
-        ],
+        "components": [0.411765, 0.160784, 0.768627],
         "hex": "#6929c4"
       },
       "$description": "Syntax control keyword"
@@ -1496,11 +1044,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          0.0,
-          0.32549,
-          0.603922
-        ],
+        "components": [0.0, 0.32549, 0.603922],
         "hex": "#00539a"
       },
       "$description": "Syntax definition keyword"
@@ -1509,11 +1053,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          0.411765,
-          0.160784,
-          0.768627
-        ],
+        "components": [0.411765, 0.160784, 0.768627],
         "hex": "#6929c4"
       },
       "$description": "Syntax module keyword"
@@ -1522,11 +1062,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          0.058824,
-          0.384314,
-          0.996078
-        ],
+        "components": [0.058824, 0.384314, 0.996078],
         "hex": "#0f62fe"
       },
       "$description": "Syntax variable"
@@ -1535,11 +1071,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          0.058824,
-          0.384314,
-          0.996078
-        ],
+        "components": [0.058824, 0.384314, 0.996078],
         "hex": "#0f62fe"
       },
       "$description": "Syntax name"
@@ -1548,11 +1080,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          0.058824,
-          0.384314,
-          0.996078
-        ],
+        "components": [0.058824, 0.384314, 0.996078],
         "hex": "#0f62fe"
       },
       "$description": "Syntax variable name"
@@ -1561,11 +1089,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          0.058824,
-          0.384314,
-          0.996078
-        ],
+        "components": [0.058824, 0.384314, 0.996078],
         "hex": "#0f62fe"
       },
       "$description": "Syntax label name"
@@ -1574,11 +1098,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          0.0,
-          0.32549,
-          0.603922
-        ],
+        "components": [0.0, 0.32549, 0.603922],
         "hex": "#00539a"
       },
       "$description": "Syntax attribute"
@@ -1587,11 +1107,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          0.0,
-          0.32549,
-          0.603922
-        ],
+        "components": [0.0, 0.32549, 0.603922],
         "hex": "#00539a"
       },
       "$description": "Syntax attribute name"
@@ -1600,11 +1116,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          0.0,
-          0.32549,
-          0.603922
-        ],
+        "components": [0.0, 0.32549, 0.603922],
         "hex": "#00539a"
       },
       "$description": "Syntax property name"
@@ -1613,11 +1125,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          0.0,
-          0.490196,
-          0.47451
-        ],
+        "components": [0.0, 0.490196, 0.47451],
         "hex": "#007d79"
       },
       "$description": "Syntax tag"
@@ -1626,11 +1134,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          0.0,
-          0.490196,
-          0.47451
-        ],
+        "components": [0.0, 0.490196, 0.47451],
         "hex": "#007d79"
       },
       "$description": "Syntax tag name"
@@ -1639,11 +1143,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          0.0,
-          0.490196,
-          0.47451
-        ],
+        "components": [0.0, 0.490196, 0.47451],
         "hex": "#007d79"
       },
       "$description": "Syntax type"
@@ -1652,11 +1152,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          0.0,
-          0.490196,
-          0.47451
-        ],
+        "components": [0.0, 0.490196, 0.47451],
         "hex": "#007d79"
       },
       "$description": "Syntax type name"
@@ -1665,11 +1161,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          0.0,
-          0.490196,
-          0.47451
-        ],
+        "components": [0.0, 0.490196, 0.47451],
         "hex": "#007d79"
       },
       "$description": "Syntax class name"
@@ -1678,11 +1170,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          0.0,
-          0.490196,
-          0.47451
-        ],
+        "components": [0.0, 0.490196, 0.47451],
         "hex": "#007d79"
       },
       "$description": "Syntax namespace"
@@ -1691,11 +1179,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          0.086275,
-          0.086275,
-          0.086275
-        ],
+        "components": [0.086275, 0.086275, 0.086275],
         "hex": "#161616"
       },
       "$description": "Syntax macro name"
@@ -1704,11 +1188,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          0.086275,
-          0.086275,
-          0.086275
-        ],
+        "components": [0.086275, 0.086275, 0.086275],
         "hex": "#161616"
       },
       "$description": "Syntax atom"
@@ -1717,11 +1197,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          0.086275,
-          0.086275,
-          0.086275
-        ],
+        "components": [0.086275, 0.086275, 0.086275],
         "hex": "#161616"
       },
       "$description": "Syntax literal"
@@ -1730,11 +1206,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          0.086275,
-          0.086275,
-          0.086275
-        ],
+        "components": [0.086275, 0.086275, 0.086275],
         "hex": "#161616"
       },
       "$description": "Syntax bool"
@@ -1743,11 +1215,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          0.086275,
-          0.086275,
-          0.086275
-        ],
+        "components": [0.086275, 0.086275, 0.086275],
         "hex": "#161616"
       },
       "$description": "Syntax null"
@@ -1756,11 +1224,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          0.0,
-          0.490196,
-          0.47451
-        ],
+        "components": [0.0, 0.490196, 0.47451],
         "hex": "#007d79"
       },
       "$description": "Syntax self"
@@ -1769,11 +1233,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          0.098039,
-          0.501961,
-          0.219608
-        ],
+        "components": [0.098039, 0.501961, 0.219608],
         "hex": "#198038"
       },
       "$description": "Syntax number"
@@ -1782,11 +1242,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          0.098039,
-          0.501961,
-          0.219608
-        ],
+        "components": [0.098039, 0.501961, 0.219608],
         "hex": "#198038"
       },
       "$description": "Syntax integer"
@@ -1795,11 +1251,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          0.098039,
-          0.501961,
-          0.219608
-        ],
+        "components": [0.098039, 0.501961, 0.219608],
         "hex": "#198038"
       },
       "$description": "Syntax float"
@@ -1808,11 +1260,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          0.098039,
-          0.501961,
-          0.219608
-        ],
+        "components": [0.098039, 0.501961, 0.219608],
         "hex": "#198038"
       },
       "$description": "Syntax unit"
@@ -1821,11 +1269,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          0.086275,
-          0.086275,
-          0.086275
-        ],
+        "components": [0.086275, 0.086275, 0.086275],
         "hex": "#161616"
       },
       "$description": "Syntax character"
@@ -1834,11 +1278,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          0.086275,
-          0.086275,
-          0.086275
-        ],
+        "components": [0.086275, 0.086275, 0.086275],
         "hex": "#161616"
       },
       "$description": "Syntax attribute value"
@@ -1847,11 +1287,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          0.541176,
-          0.247059,
-          0.988235
-        ],
+        "components": [0.541176, 0.247059, 0.988235],
         "hex": "#8a3ffc"
       },
       "$description": "Syntax special string"
@@ -1860,11 +1296,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          0.411765,
-          0.160784,
-          0.768627
-        ],
+        "components": [0.411765, 0.160784, 0.768627],
         "hex": "#6929c4"
       },
       "$description": "Syntax regexp"
@@ -1873,11 +1305,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          0.203922,
-          0.227451,
-          0.247059
-        ],
+        "components": [0.203922, 0.227451, 0.247059],
         "hex": "#343a3f"
       },
       "$description": "Syntax escape"
@@ -1886,11 +1314,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          0.203922,
-          0.227451,
-          0.247059
-        ],
+        "components": [0.203922, 0.227451, 0.247059],
         "hex": "#343a3f"
       },
       "$description": "Syntax url"
@@ -1899,11 +1323,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          0.086275,
-          0.086275,
-          0.086275
-        ],
+        "components": [0.086275, 0.086275, 0.086275],
         "hex": "#161616"
       },
       "$description": "Syntax color"
@@ -1912,11 +1332,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          0.203922,
-          0.227451,
-          0.247059
-        ],
+        "components": [0.203922, 0.227451, 0.247059],
         "hex": "#343a3f"
       },
       "$description": "Syntax operator"
@@ -1925,11 +1341,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          0.203922,
-          0.227451,
-          0.247059
-        ],
+        "components": [0.203922, 0.227451, 0.247059],
         "hex": "#343a3f"
       },
       "$description": "Syntax deref operator"
@@ -1938,11 +1350,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          0.203922,
-          0.227451,
-          0.247059
-        ],
+        "components": [0.203922, 0.227451, 0.247059],
         "hex": "#343a3f"
       },
       "$description": "Syntax arithmetic operator"
@@ -1951,11 +1359,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          0.203922,
-          0.227451,
-          0.247059
-        ],
+        "components": [0.203922, 0.227451, 0.247059],
         "hex": "#343a3f"
       },
       "$description": "Syntax logic operator"
@@ -1964,11 +1368,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          0.203922,
-          0.227451,
-          0.247059
-        ],
+        "components": [0.203922, 0.227451, 0.247059],
         "hex": "#343a3f"
       },
       "$description": "Syntax bitwise operator"
@@ -1977,11 +1377,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          0.203922,
-          0.227451,
-          0.247059
-        ],
+        "components": [0.203922, 0.227451, 0.247059],
         "hex": "#343a3f"
       },
       "$description": "Syntax compare operator"
@@ -1990,11 +1386,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          0.203922,
-          0.227451,
-          0.247059
-        ],
+        "components": [0.203922, 0.227451, 0.247059],
         "hex": "#343a3f"
       },
       "$description": "Syntax update operator"
@@ -2003,11 +1395,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          0.0,
-          0.32549,
-          0.603922
-        ],
+        "components": [0.0, 0.32549, 0.603922],
         "hex": "#00539a"
       },
       "$description": "Syntax definition operator"
@@ -2016,11 +1404,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          0.0,
-          0.490196,
-          0.47451
-        ],
+        "components": [0.0, 0.490196, 0.47451],
         "hex": "#007d79"
       },
       "$description": "Syntax type operator"
@@ -2029,11 +1413,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          0.411765,
-          0.160784,
-          0.768627
-        ],
+        "components": [0.411765, 0.160784, 0.768627],
         "hex": "#6929c4"
       },
       "$description": "Syntax control operator"
@@ -2042,11 +1422,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          0.058824,
-          0.384314,
-          0.996078
-        ],
+        "components": [0.058824, 0.384314, 0.996078],
         "hex": "#0f62fe"
       },
       "$description": "Syntax modifier"
@@ -2055,11 +1431,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          0.203922,
-          0.227451,
-          0.247059
-        ],
+        "components": [0.203922, 0.227451, 0.247059],
         "hex": "#343a3f"
       },
       "$description": "Syntax punctuation"
@@ -2068,11 +1440,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          0.203922,
-          0.227451,
-          0.247059
-        ],
+        "components": [0.203922, 0.227451, 0.247059],
         "hex": "#343a3f"
       },
       "$description": "Syntax separator"
@@ -2081,11 +1449,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          0.203922,
-          0.227451,
-          0.247059
-        ],
+        "components": [0.203922, 0.227451, 0.247059],
         "hex": "#343a3f"
       },
       "$description": "Syntax bracket"
@@ -2094,11 +1458,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          0.411765,
-          0.439216,
-          0.466667
-        ],
+        "components": [0.411765, 0.439216, 0.466667],
         "hex": "#697077"
       },
       "$description": "Syntax angle bracket"
@@ -2107,11 +1467,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          0.203922,
-          0.227451,
-          0.247059
-        ],
+        "components": [0.203922, 0.227451, 0.247059],
         "hex": "#343a3f"
       },
       "$description": "Syntax square bracket"
@@ -2120,11 +1476,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          0.203922,
-          0.227451,
-          0.247059
-        ],
+        "components": [0.203922, 0.227451, 0.247059],
         "hex": "#343a3f"
       },
       "$description": "Syntax paren"
@@ -2133,11 +1485,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          0.203922,
-          0.227451,
-          0.247059
-        ],
+        "components": [0.203922, 0.227451, 0.247059],
         "hex": "#343a3f"
       },
       "$description": "Syntax brace"
@@ -2146,11 +1494,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          0.086275,
-          0.086275,
-          0.086275
-        ],
+        "components": [0.086275, 0.086275, 0.086275],
         "hex": "#161616"
       },
       "$description": "Syntax content"
@@ -2159,11 +1503,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          0.086275,
-          0.086275,
-          0.086275
-        ],
+        "components": [0.086275, 0.086275, 0.086275],
         "hex": "#161616"
       },
       "$description": "Syntax list"
@@ -2172,11 +1512,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          0.086275,
-          0.086275,
-          0.086275
-        ],
+        "components": [0.086275, 0.086275, 0.086275],
         "hex": "#161616"
       },
       "$description": "Syntax emphasis"
@@ -2185,11 +1521,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          0.086275,
-          0.086275,
-          0.086275
-        ],
+        "components": [0.086275, 0.086275, 0.086275],
         "hex": "#161616"
       },
       "$description": "Syntax strong"
@@ -2198,11 +1530,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          0.086275,
-          0.086275,
-          0.086275
-        ],
+        "components": [0.086275, 0.086275, 0.086275],
         "hex": "#161616"
       },
       "$description": "Syntax monospace"
@@ -2211,11 +1539,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          0.086275,
-          0.086275,
-          0.086275
-        ],
+        "components": [0.086275, 0.086275, 0.086275],
         "hex": "#161616"
       },
       "$description": "Syntax strikethrough"
@@ -2224,11 +1548,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          0.0,
-          0.32549,
-          0.603922
-        ],
+        "components": [0.0, 0.32549, 0.603922],
         "hex": "#00539a"
       },
       "$description": "Syntax heading"
@@ -2237,11 +1557,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          0.203922,
-          0.227451,
-          0.247059
-        ],
+        "components": [0.203922, 0.227451, 0.247059],
         "hex": "#343a3f"
       },
       "$description": "Syntax content separator"
@@ -2250,11 +1566,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          0.098039,
-          0.501961,
-          0.219608
-        ],
+        "components": [0.098039, 0.501961, 0.219608],
         "hex": "#198038"
       },
       "$description": "Syntax quote"
@@ -2263,11 +1575,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          0.058824,
-          0.384314,
-          0.996078
-        ],
+        "components": [0.058824, 0.384314, 0.996078],
         "hex": "#0f62fe"
       },
       "$description": "Syntax link"
@@ -2276,11 +1584,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          0.854902,
-          0.117647,
-          0.156863
-        ],
+        "components": [0.854902, 0.117647, 0.156863],
         "hex": "#da1e28"
       },
       "$description": "Syntax invalid"
@@ -2289,11 +1593,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          0.098039,
-          0.501961,
-          0.219608
-        ],
+        "components": [0.098039, 0.501961, 0.219608],
         "hex": "#198038"
       },
       "$description": "Syntax meta"
@@ -2302,11 +1602,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          0.098039,
-          0.501961,
-          0.219608
-        ],
+        "components": [0.098039, 0.501961, 0.219608],
         "hex": "#198038"
       },
       "$description": "Syntax document meta"
@@ -2315,11 +1611,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          0.0,
-          0.490196,
-          0.47451
-        ],
+        "components": [0.0, 0.490196, 0.47451],
         "hex": "#007d79"
       },
       "$description": "Syntax annotation"
@@ -2328,11 +1620,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          0.086275,
-          0.086275,
-          0.086275
-        ],
+        "components": [0.086275, 0.086275, 0.086275],
         "hex": "#161616"
       },
       "$description": "Syntax processing instruction"
@@ -2341,11 +1629,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          0.0,
-          0.32549,
-          0.603922
-        ],
+        "components": [0.0, 0.32549, 0.603922],
         "hex": "#00539a"
       },
       "$description": "Syntax definition"
@@ -2354,11 +1638,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          0.058824,
-          0.384314,
-          0.996078
-        ],
+        "components": [0.058824, 0.384314, 0.996078],
         "hex": "#0f62fe"
       },
       "$description": "Syntax constant"
@@ -2367,11 +1647,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          0.556863,
-          0.415686,
-          0.0
-        ],
+        "components": [0.556863, 0.415686, 0.0],
         "hex": "#8e6a00"
       },
       "$description": "Syntax function"
@@ -2380,11 +1656,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          0.058824,
-          0.384314,
-          0.996078
-        ],
+        "components": [0.058824, 0.384314, 0.996078],
         "hex": "#0f62fe"
       },
       "$description": "Syntax standard"
@@ -2393,11 +1665,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          0.058824,
-          0.384314,
-          0.996078
-        ],
+        "components": [0.058824, 0.384314, 0.996078],
         "hex": "#0f62fe"
       },
       "$description": "Syntax local"
@@ -2406,11 +1674,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          0.058824,
-          0.384314,
-          0.996078
-        ],
+        "components": [0.058824, 0.384314, 0.996078],
         "hex": "#0f62fe"
       },
       "$description": "Syntax special"
@@ -2419,11 +1683,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          0.654902,
-          0.941176,
-          0.729412
-        ],
+        "components": [0.654902, 0.941176, 0.729412],
         "hex": "#a7f0ba"
       },
       "$description": "Syntax inserted"
@@ -2432,11 +1692,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          1.0,
-          0.843137,
-          0.85098
-        ],
+        "components": [1.0, 0.843137, 0.85098],
         "hex": "#ffd7d9"
       },
       "$description": "Syntax deleted"
@@ -2445,11 +1701,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          0.0,
-          0.32549,
-          0.603922
-        ],
+        "components": [0.0, 0.32549, 0.603922],
         "hex": "#00539a"
       },
       "$description": "Syntax heading 1"
@@ -2458,11 +1710,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          0.0,
-          0.32549,
-          0.603922
-        ],
+        "components": [0.0, 0.32549, 0.603922],
         "hex": "#00539a"
       },
       "$description": "Syntax heading 2"
@@ -2471,11 +1719,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          0.0,
-          0.32549,
-          0.603922
-        ],
+        "components": [0.0, 0.32549, 0.603922],
         "hex": "#00539a"
       },
       "$description": "Syntax heading 3"
@@ -2484,11 +1728,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          0.0,
-          0.32549,
-          0.603922
-        ],
+        "components": [0.0, 0.32549, 0.603922],
         "hex": "#00539a"
       },
       "$description": "Syntax heading 4"
@@ -2497,11 +1737,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          0.0,
-          0.32549,
-          0.603922
-        ],
+        "components": [0.0, 0.32549, 0.603922],
         "hex": "#00539a"
       },
       "$description": "Syntax heading 5"
@@ -2510,11 +1746,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          0.0,
-          0.32549,
-          0.603922
-        ],
+        "components": [0.0, 0.32549, 0.603922],
         "hex": "#00539a"
       },
       "$description": "Syntax heading 6"
@@ -2525,11 +1757,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          0.270588,
-          0.537255,
-          1.0
-        ],
+        "components": [0.270588, 0.537255, 1.0],
         "alpha": 0.1
       },
       "$description": "AI inner shadow"
@@ -2538,11 +1766,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          0.270588,
-          0.537255,
-          1.0
-        ],
+        "components": [0.270588, 0.537255, 1.0],
         "alpha": 0.16
       },
       "$description": "AI aura start small"
@@ -2551,11 +1775,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          0.270588,
-          0.537255,
-          1.0
-        ],
+        "components": [0.270588, 0.537255, 1.0],
         "alpha": 0.1
       },
       "$description": "AI aura start"
@@ -2564,11 +1784,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          1.0,
-          1.0,
-          1.0
-        ],
+        "components": [1.0, 1.0, 1.0],
         "alpha": 0.0
       },
       "$description": "AI aura end"
@@ -2577,11 +1793,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          0.270588,
-          0.537255,
-          1.0
-        ],
+        "components": [0.270588, 0.537255, 1.0],
         "hex": "#4589ff"
       },
       "$description": "AI strong border"
@@ -2590,11 +1802,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          0.65098,
-          0.784314,
-          1.0
-        ],
+        "components": [0.65098, 0.784314, 1.0],
         "alpha": 0.64
       },
       "$description": "AI border start"
@@ -2603,11 +1811,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          0.470588,
-          0.662745,
-          1.0
-        ],
+        "components": [0.470588, 0.662745, 1.0],
         "hex": "#78a9ff"
       },
       "$description": "AI border end"
@@ -2616,11 +1820,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          0.058824,
-          0.384314,
-          0.996078
-        ],
+        "components": [0.058824, 0.384314, 0.996078],
         "alpha": 0.1
       },
       "$description": "AI drop shadow"
@@ -2629,11 +1829,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          0.929412,
-          0.960784,
-          1.0
-        ],
+        "components": [0.929412, 0.960784, 1.0],
         "hex": "#edf5ff"
       },
       "$description": "AI aura hover background"
@@ -2642,11 +1838,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          0.270588,
-          0.537255,
-          1.0
-        ],
+        "components": [0.270588, 0.537255, 1.0],
         "alpha": 0.32
       },
       "$description": "AI aura hover start"
@@ -2655,11 +1847,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          1.0,
-          1.0,
-          1.0
-        ],
+        "components": [1.0, 1.0, 1.0],
         "alpha": 0.0
       },
       "$description": "AI aura hover end"
@@ -2668,11 +1856,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          1.0,
-          1.0,
-          1.0
-        ],
+        "components": [1.0, 1.0, 1.0],
         "hex": "#ffffff"
       },
       "$description": "AI popover background"
@@ -2681,11 +1865,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          0.0,
-          0.262745,
-          0.807843
-        ],
+        "components": [0.0, 0.262745, 0.807843],
         "alpha": 0.06
       },
       "$description": "AI popover outer shadow 01"
@@ -2694,11 +1874,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          0.0,
-          0.0,
-          0.0
-        ],
+        "components": [0.0, 0.0, 0.0],
         "alpha": 0.04
       },
       "$description": "AI popover outer shadow 02"
@@ -2707,11 +1883,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          0.815686,
-          0.886275,
-          1.0
-        ],
+        "components": [0.815686, 0.886275, 1.0],
         "hex": "#d0e2ff"
       },
       "$description": "AI skeleton background"
@@ -2720,11 +1892,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          0.270588,
-          0.537255,
-          1.0
-        ],
+        "components": [0.270588, 0.537255, 1.0],
         "hex": "#4589ff"
       },
       "$description": "AI skeleton element background"
@@ -2733,11 +1901,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          0.0,
-          0.066667,
-          0.254902
-        ],
+        "components": [0.0, 0.066667, 0.254902],
         "alpha": 0.5
       },
       "$description": "AI modal overlay"
@@ -2746,11 +1910,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          0.627451,
-          0.764706,
-          1.0
-        ],
+        "components": [0.627451, 0.764706, 1.0],
         "hex": "#a0c3ff"
       },
       "$description": "AI popover caret center"
@@ -2759,11 +1919,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          0.470588,
-          0.662745,
-          1.0
-        ],
+        "components": [0.470588, 0.662745, 1.0],
         "hex": "#78a9ff"
       },
       "$description": "AI popover caret bottom"
@@ -2772,11 +1928,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          0.913725,
-          0.937255,
-          0.980392
-        ],
+        "components": [0.913725, 0.937255, 0.980392],
         "hex": "#e9effa"
       },
       "$description": "AI popover caret bottom background for actions"
@@ -2785,11 +1937,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          0.917647,
-          0.945098,
-          1.0
-        ],
+        "components": [0.917647, 0.945098, 1.0],
         "hex": "#eaf1ff"
       },
       "$description": "AI popover caret bottom background"
@@ -2800,11 +1948,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          1.0,
-          1.0,
-          1.0
-        ],
+        "components": [1.0, 1.0, 1.0],
         "hex": "#ffffff"
       },
       "$description": "Chat prompt background"
@@ -2813,11 +1957,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          0.956863,
-          0.956863,
-          0.956863
-        ],
+        "components": [0.956863, 0.956863, 0.956863],
         "hex": "#f4f4f4"
       },
       "$description": "Chat prompt border start"
@@ -2826,11 +1966,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          0.956863,
-          0.956863,
-          0.956863
-        ],
+        "components": [0.956863, 0.956863, 0.956863],
         "alpha": 0.0
       },
       "$description": "Chat prompt border end"
@@ -2839,11 +1975,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          0.086275,
-          0.086275,
-          0.086275
-        ],
+        "components": [0.086275, 0.086275, 0.086275],
         "hex": "#161616"
       },
       "$description": "Chat prompt text"
@@ -2852,11 +1984,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          0.878431,
-          0.878431,
-          0.878431
-        ],
+        "components": [0.878431, 0.878431, 0.878431],
         "hex": "#e0e0e0"
       },
       "$description": "Chat bubble user background"
@@ -2865,11 +1993,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          0.086275,
-          0.086275,
-          0.086275
-        ],
+        "components": [0.086275, 0.086275, 0.086275],
         "hex": "#161616"
       },
       "$description": "Chat bubble user text"
@@ -2878,11 +2002,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          1.0,
-          1.0,
-          1.0
-        ],
+        "components": [1.0, 1.0, 1.0],
         "hex": "#ffffff"
       },
       "$description": "Chat bubble agent background"
@@ -2891,11 +2011,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          0.086275,
-          0.086275,
-          0.086275
-        ],
+        "components": [0.086275, 0.086275, 0.086275],
         "hex": "#161616"
       },
       "$description": "Chat bubble agent text"
@@ -2904,11 +2020,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          0.878431,
-          0.878431,
-          0.878431
-        ],
+        "components": [0.878431, 0.878431, 0.878431],
         "hex": "#e0e0e0"
       },
       "$description": "Chat bubble border"
@@ -2917,11 +2029,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          0.435294,
-          0.435294,
-          0.435294
-        ],
+        "components": [0.435294, 0.435294, 0.435294],
         "hex": "#6f6f6f"
       },
       "$description": "Chat avatar bot"
@@ -2930,11 +2038,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          0.223529,
-          0.223529,
-          0.223529
-        ],
+        "components": [0.223529, 0.223529, 0.223529],
         "hex": "#393939"
       },
       "$description": "Chat avatar agent"
@@ -2943,11 +2047,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          0.058824,
-          0.384314,
-          0.996078
-        ],
+        "components": [0.058824, 0.384314, 0.996078],
         "hex": "#0f62fe"
       },
       "$description": "Chat avatar user"
@@ -2956,11 +2056,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          1.0,
-          1.0,
-          1.0
-        ],
+        "components": [1.0, 1.0, 1.0],
         "hex": "#ffffff"
       },
       "$description": "Chat shell background"
@@ -2969,11 +2065,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          1.0,
-          1.0,
-          1.0
-        ],
+        "components": [1.0, 1.0, 1.0],
         "hex": "#ffffff"
       },
       "$description": "Chat header background"
@@ -2982,11 +2074,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          0.086275,
-          0.086275,
-          0.086275
-        ],
+        "components": [0.086275, 0.086275, 0.086275],
         "hex": "#161616"
       },
       "$description": "Chat header text"
@@ -2995,11 +2083,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          0.058824,
-          0.384314,
-          0.996078
-        ],
+        "components": [0.058824, 0.384314, 0.996078],
         "hex": "#0f62fe"
       },
       "$description": "Chat button color"
@@ -3008,11 +2092,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          0.552941,
-          0.552941,
-          0.552941
-        ],
+        "components": [0.552941, 0.552941, 0.552941],
         "alpha": 0.12
       },
       "$description": "Chat button hover background"
@@ -3021,11 +2101,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          0.0,
-          0.262745,
-          0.807843
-        ],
+        "components": [0.0, 0.262745, 0.807843],
         "hex": "#0043ce"
       },
       "$description": "Chat button text hover"
@@ -3034,11 +2110,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          0.552941,
-          0.552941,
-          0.552941
-        ],
+        "components": [0.552941, 0.552941, 0.552941],
         "alpha": 0.5
       },
       "$description": "Chat button active background"
@@ -3047,11 +2119,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          0.552941,
-          0.552941,
-          0.552941
-        ],
+        "components": [0.552941, 0.552941, 0.552941],
         "alpha": 0.2
       },
       "$description": "Chat button selected background"
@@ -3060,11 +2128,7 @@
       "$type": "color",
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          0.321569,
-          0.321569,
-          0.321569
-        ],
+        "components": [0.321569, 0.321569, 0.321569],
         "hex": "#525252"
       },
       "$description": "Chat button text selected"
