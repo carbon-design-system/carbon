@@ -107,7 +107,7 @@ describe(componentName, () => {
     });
 
     await act(() => click(screen.getByRole('button', { name: label })));
-    expect(handleClick).toBeCalled();
+    expect(handleClick).toHaveBeenCalled();
   });
 
   it('label registers a context menu click event', async () => {
@@ -121,7 +121,7 @@ describe(componentName, () => {
     });
 
     await act(() => contextMenu(screen.getByRole('button', { name: label })));
-    expect(handleContextMenu).toBeCalled();
+    expect(handleContextMenu).toHaveBeenCalled();
   });
 
   it('value registers a click event', async () => {
@@ -135,7 +135,7 @@ describe(componentName, () => {
     });
 
     await act(() => click(screen.getByRole('button', { name: value })));
-    expect(handleClick).toBeCalled();
+    expect(handleClick).toHaveBeenCalled();
   });
 
   it('value registers a context menu click event', async () => {
@@ -149,7 +149,7 @@ describe(componentName, () => {
     });
 
     await act(() => contextMenu(screen.getByRole('button', { name: value })));
-    expect(handleContextMenu).toBeCalled();
+    expect(handleContextMenu).toHaveBeenCalled();
   });
 
   it('has no accessibility violations', async () => {

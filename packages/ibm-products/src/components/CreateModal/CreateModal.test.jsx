@@ -17,7 +17,6 @@ import uuidv4 from '../../global/js/utils/uuidv4';
 const blockClass = `${pkg.prefix}--create-modal`;
 
 import { CreateModal } from '.';
-import { expectError } from '../../global/js/utils/test-helper';
 const componentName = CreateModal.displayName;
 
 const className = `class-${uuidv4()}`;
@@ -28,7 +27,7 @@ const description =
 const dataTestId = uuidv4();
 
 // render a CreateModal with title, subtitle, description, and any other required props
-// eslint-disable-next-line react/prop-types
+ 
 const RenderComponent = forwardRef(({ children, ...rest }, ref) => {
   const carbonPrefix = usePrefix();
   return (
@@ -120,7 +119,7 @@ describe(componentName, () => {
     await act(() =>
       userEvent.click(screen.getByRole('button', { name: 'Create' }))
     );
-    expect(primaryHandler).toBeCalledTimes(1);
+    expect(primaryHandler).toHaveBeenCalledTimes(1);
   });
 
   it('calls onRequestClose() when secondary button is clicked', async () => {
@@ -129,7 +128,7 @@ describe(componentName, () => {
     await act(() =>
       userEvent.click(screen.getByRole('button', { name: 'Cancel' }))
     );
-    expect(secondaryHandler).toBeCalledTimes(1);
+    expect(secondaryHandler).toHaveBeenCalledTimes(1);
   });
 
   it('notifies a click on each button', async () => {
@@ -144,11 +143,11 @@ describe(componentName, () => {
     await act(() =>
       userEvent.click(screen.getByRole('button', { name: 'Create' }))
     );
-    expect(primaryHandler).toBeCalledTimes(1);
+    expect(primaryHandler).toHaveBeenCalledTimes(1);
     await act(() =>
       userEvent.click(screen.getByRole('button', { name: 'Cancel' }))
     );
-    expect(secondaryHandler).toBeCalledTimes(1);
+    expect(secondaryHandler).toHaveBeenCalledTimes(1);
   });
 
   it('disables primary focus button when `disableSubmit` prop is provided', async () => {

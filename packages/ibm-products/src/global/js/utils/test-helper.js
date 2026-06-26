@@ -143,7 +143,7 @@ const makeMatcherArray = (args) =>
 export const expectWarn = (message, test, calls = 1) => {
   const warn = jest.spyOn(console, 'warn').mockImplementation(jest.fn());
   const result = test();
-  expect(warn).toBeCalledTimes(calls);
+  expect(warn).toHaveBeenCalledTimes(calls);
   // expect(warn).toHaveBeenCalledWith(...makeMatcherArray(message));
   warn.mockRestore();
   return result;
@@ -156,7 +156,7 @@ export const expectWarn = (message, test, calls = 1) => {
 export const expectWarnAsync = async (message, test) => {
   const warn = jest.spyOn(console, 'warn').mockImplementation(jest.fn());
   await test();
-  expect(warn).toBeCalledTimes(1);
+  expect(warn).toHaveBeenCalledTimes(1);
   expect(warn).toHaveBeenCalledWith(...makeMatcherArray(message));
   warn.mockRestore();
 };
@@ -179,7 +179,7 @@ export const expectMultipleWarn = async (messages, test) => {
   const warn = jest.spyOn(console, 'warn').mockImplementation(jest.fn());
   const result = await test();
 
-  expect(warn).toBeCalledTimes(messages.length);
+  expect(warn).toHaveBeenCalledTimes(messages.length);
   // TODO: React 18 update - console messages appear to be failing with calls that look like printf props
   // messages.forEach((args, index) =>
   //   expect(warn).toHaveBeenNthCalledWith(index + 1, ...makeMatcherArray(args))
@@ -190,7 +190,7 @@ export const expectMultipleWarn = async (messages, test) => {
 
 export const checkLogging = (mockedThing, message) => {
   if (message) {
-    expect(mockedThing).toBeCalled();
+    expect(mockedThing).toHaveBeenCalled();
     // TODO: React 18 update - console messages appear to be failing with calls that look like printf props
     // expect(mockedThing).toHaveBeenCalledWith(1, ...makeMatcherArray(message));
   }
@@ -269,7 +269,7 @@ export const expectMultipleError = async (messages, test) => {
   //   return jestFn();
   // });
   const result = await test();
-  expect(error).toBeCalledTimes(messages.length);
+  expect(error).toHaveBeenCalledTimes(messages.length);
 
   // TODO: React 18 update - console messages appear to be failing with calls that look like printf props
   // messages.forEach((args, index) =>

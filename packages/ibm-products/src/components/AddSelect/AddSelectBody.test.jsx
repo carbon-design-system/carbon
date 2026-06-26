@@ -287,7 +287,7 @@ describe(componentName, () => {
     const radio = screen.getByLabelText('Kansas');
     fireEvent.click(radio);
     fireEvent.click(submitBtn);
-    expect(onSubmit).toBeCalledWith('1');
+    expect(onSubmit).toHaveBeenCalledWith('1');
   });
 
   it('filters the items', async () => {
@@ -367,7 +367,7 @@ describe(componentName, () => {
     fireEvent.click(opt1);
     fireEvent.click(opt2);
     fireEvent.click(submitBtn);
-    expect(onSubmit).toBeCalledWith(['1', '2']);
+    expect(onSubmit).toHaveBeenCalledWith(['1', '2']);
   });
 
   it('handles multi select submit with modifiers', async () => {
@@ -389,7 +389,7 @@ describe(componentName, () => {
     );
     fireEvent.click(modifierOpts[1]);
     fireEvent.click(submitBtn);
-    expect(onSubmit).toBeCalledWith([
+    expect(onSubmit).toHaveBeenCalledWith([
       {
         id: '1',
         role: 'admin',

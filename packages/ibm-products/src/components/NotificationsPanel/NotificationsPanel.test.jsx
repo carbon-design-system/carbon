@@ -75,7 +75,7 @@ describe('Notifications', () => {
     await act(() =>
       userEvent.click(screen.getByRole('switch', /Do not disturb/i))
     );
-    expect(onToggle).toBeCalled();
+    expect(onToggle).toHaveBeenCalled();
   });
 
   it('should render notifications empty state', async () => {
@@ -310,7 +310,7 @@ describe('Notifications', () => {
       `.${dismissSingleNotificationClass}`
     );
     await act(() => userEvent.click(dismissIconButtonElement));
-    expect(onDismissSingleNotificationFn).toBeCalled();
+    expect(onDismissSingleNotificationFn).toHaveBeenCalled();
   });
 
   it('should simulate a keydown event on a single notification', async () => {
@@ -325,7 +325,7 @@ describe('Notifications', () => {
       keyCode: 13,
       charCode: 13,
     });
-    expect(onNotificationClickFn).toBeCalled();
+    expect(onNotificationClickFn).toHaveBeenCalled();
   });
 
   it('should stop propagation of notification event if key event is fired upon dismiss single notification icon button', async () => {
@@ -345,7 +345,7 @@ describe('Notifications', () => {
       keyCode: 13,
       charCode: 13,
     });
-    expect(onNotificationClickFn).toBeCalledTimes(0);
+    expect(onNotificationClickFn).toHaveBeenCalledTimes(0);
   });
 
   it('should call the dismiss all notifications event handler', async () => {
@@ -355,7 +355,7 @@ describe('Notifications', () => {
       onDismissAllNotifications: onDismissAllNotificationsFn,
     });
     await act(() => userEvent.click(screen.getByText(/Dismiss all/i)));
-    expect(onDismissAllNotificationsFn).toBeCalled();
+    expect(onDismissAllNotificationsFn).toHaveBeenCalled();
   });
 
   it('should call the onViewAll event handler', async () => {
@@ -374,8 +374,8 @@ describe('Notifications', () => {
         container.querySelector(`.${blockClass}__settings-button`)
       )
     );
-    expect(onViewAllFn).toBeCalled();
-    expect(onSettingsClickFn).toBeCalled();
+    expect(onViewAllFn).toHaveBeenCalled();
+    expect(onSettingsClickFn).toHaveBeenCalled();
   });
 
   it('should click onDismissAllNotification and onDismissSingleNotifications buttons to test default props', async () => {

@@ -82,7 +82,7 @@ describe(componentName, () => {
     await act(() =>
       userEvent.click(screen.getByRole('button', { name: 'Create' }))
     );
-    expect(primaryHandler).toBeCalledTimes(1);
+    expect(primaryHandler).toHaveBeenCalledTimes(1);
   });
 
   it('calls onRequestClose() when secondary button is clicked', async () => {
@@ -93,7 +93,7 @@ describe(componentName, () => {
     await act(() =>
       userEvent.click(screen.getByRole('button', { name: 'Cancel' }))
     );
-    expect(secondaryHandler).toBeCalledTimes(1);
+    expect(secondaryHandler).toHaveBeenCalledTimes(1);
   });
 
   it('disables primary focus button when `disableSubmit` prop is provided', async () => {

@@ -44,13 +44,13 @@ describe(componentName, () => {
 
     const { rerender, getByText } = render(<Saving {...props} />);
     await act(() => click(getByText(props.defaultText)));
-    expect(onRequestSave).toBeCalled();
+    expect(onRequestSave).toHaveBeenCalled();
     await act(() => click(getByText(props.secondaryButtonText)));
-    expect(onRequestCancel).not.toBeCalled();
+    expect(onRequestCancel).not.toHaveBeenCalled();
     rerender(<Saving {...props} status="in-progress" />);
     expect(getByText(props.inProgressText)).toBeVisible();
     await act(() => click(getByText(props.secondaryButtonText)));
-    expect(onRequestCancel).toBeCalled();
+    expect(onRequestCancel).toHaveBeenCalled();
     rerender(<Saving {...props} status="fail" />);
     expect(getByText(props.failText)).toBeVisible();
   });

@@ -89,9 +89,9 @@ describe(componentName, () => {
     render(<RemoveModal {...props} />);
     await act(() => click(screen.getByText(props.primaryButtonText)));
 
-    expect(onRequestSubmit).toBeCalled();
+    expect(onRequestSubmit).toHaveBeenCalled();
     await act(() => click(screen.getByText(props.secondaryButtonText)));
-    expect(onClose).toBeCalled();
+    expect(onClose).toHaveBeenCalled();
   });
 
   it('renders with text confirmation functionality', async () => {
@@ -108,20 +108,20 @@ describe(componentName, () => {
     render(<RemoveModal {...props} />);
 
     await act(() => click(screen.getByText(props.primaryButtonText)));
-    expect(onRequestSubmit).not.toBeCalled();
+    expect(onRequestSubmit).not.toHaveBeenCalled();
 
     const textInput = screen.getByRole('textbox');
     change(textInput, {
       target: { value: 'bx1002' },
     });
     await act(() => click(screen.getByText(props.primaryButtonText)));
-    expect(onRequestSubmit).not.toBeCalled();
+    expect(onRequestSubmit).not.toHaveBeenCalled();
 
     change(textInput, {
       target: { value: 'bx1001' },
     });
     await act(() => click(screen.getByText(props.primaryButtonText)));
-    expect(onRequestSubmit).toBeCalled();
+    expect(onRequestSubmit).toHaveBeenCalled();
   });
 
   it('disables the primary button when primaryButtonDisabled is used', async () => {

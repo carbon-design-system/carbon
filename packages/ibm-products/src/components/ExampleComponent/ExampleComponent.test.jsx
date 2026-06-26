@@ -87,8 +87,8 @@ describe(componentName, () => {
       Promise.all(buttons.map((button) => userEvent.click(button)))
     );
 
-    expect(primaryHandler).toBeCalledTimes(1);
-    expect(secondaryHandler).toBeCalledTimes(1);
+    expect(primaryHandler).toHaveBeenCalledTimes(1);
+    expect(secondaryHandler).toHaveBeenCalledTimes(1);
   });
 
   it('renders the primaryButtonLabel and secondaryButtonLabel properties', async () => {

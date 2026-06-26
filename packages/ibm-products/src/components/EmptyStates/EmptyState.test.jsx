@@ -48,7 +48,7 @@ describe(name, () => {
     );
 
     await act(() => click(getByText('Create new')));
-    expect(onActionHandler).toBeCalled();
+    expect(onActionHandler).toHaveBeenCalled();
   });
 
   it('should render a clickable link and match rendered url to linkUrl prop', async () => {

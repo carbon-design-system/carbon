@@ -73,7 +73,7 @@ export default {
   },
   getCacheKey(sourceText, sourcePath, transformOptions) {
     const { config, configString, instrument } = transformOptions;
-    return createHash('md5')
+    return createHash('sha256')
       .update(THIS_FILE)
       .update('\0', 'utf8')
       .update(sourceText)

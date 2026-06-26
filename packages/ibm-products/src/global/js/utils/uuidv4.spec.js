@@ -30,6 +30,6 @@ describe('uuidv4', () => {
       value: { getRandomValues: mGetRandomValues },
     });
     expect(uuidv4()).toEqual('10000000-1000-4000-8000-100000000000');
-    expect(mGetRandomValues).toBeCalledWith(new Uint8Array(1));
+    expect(mGetRandomValues).toHaveBeenCalledWith(new Uint8Array(1));
   });
 });

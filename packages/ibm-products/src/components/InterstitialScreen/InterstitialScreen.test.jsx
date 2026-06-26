@@ -314,7 +314,7 @@ describe(componentName, () => {
     });
     const closeBtn = screen.getByLabelText('Close');
     await act(() => userEvent.click(closeBtn));
-    expect(onClose).toBeCalled();
+    expect(onClose).toHaveBeenCalled();
   });
 
   it('should return focus to the launcher button', async () => {

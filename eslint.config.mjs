@@ -219,6 +219,20 @@ export default defineConfig(
     },
   },
   {
+    // TODO: Migrate ibm-products tests to testing-library best practices and
+    // remove these overrides. https://github.com/carbon-design-system/carbon/issues/18991
+    files: [
+      'packages/ibm-products/**/*.{test,spec}.{js,jsx,ts,tsx}',
+      'packages/ibm-products/**/__tests__/**/*.{js,jsx,ts,tsx}',
+    ],
+    rules: Object.fromEntries(
+      Object.keys(testingLibrary.configs.react.rules ?? {}).map((rule) => [
+        rule,
+        'off',
+      ])
+    ),
+  },
+  {
     files: ['packages/react/code-connect/**/*.figma.tsx'],
     rules: {
       '@typescript-eslint/ban-ts-comment': ['error', { 'ts-nocheck': false }],

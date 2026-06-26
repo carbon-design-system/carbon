@@ -103,7 +103,6 @@ export default {
     ),
   },
   testEnvironment: 'jsdom',
-  testRunner: 'jest-circus/runner',
   testPathIgnorePatterns: [
     '/.avt/',
     '/cjs/',

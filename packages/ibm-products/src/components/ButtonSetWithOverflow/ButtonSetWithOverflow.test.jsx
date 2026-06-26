@@ -80,7 +80,7 @@ describe(ButtonSetWithOverflow.displayName, () => {
     });
 
     await act(() => userEvent.click(action1));
-    expect(myOnClick).toBeCalled();
+    expect(myOnClick).toHaveBeenCalled();
   });
 
   it('Renders as ComboButton when not enough space', async () => {
@@ -111,7 +111,7 @@ describe(ButtonSetWithOverflow.displayName, () => {
     });
 
     await act(() => userEvent.click(action1a));
-    expect(myOnClick).toBeCalled();
+    expect(myOnClick).toHaveBeenCalled();
   });
 
   it('Applies right align class when requested', async () => {

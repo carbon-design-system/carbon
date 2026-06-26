@@ -58,7 +58,7 @@ describe(componentName, () => {
     };
     render(<AddSelectBreadcrumbs {...newProps} />);
     fireEvent.click(screen.queryByText('default'));
-    expect(onClick).toBeCalled();
+    expect(onClick).toHaveBeenCalled();
   });
 
   it('displays multiple breadcrumbs', async () => {

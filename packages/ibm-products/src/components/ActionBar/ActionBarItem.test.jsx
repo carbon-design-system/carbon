@@ -47,7 +47,7 @@ describe(ActionBarItem.displayName, () => {
     expect(actionBarItemElement).toHaveClass(`${carbon.prefix}--btn`);
 
     await act(() => click(actionBarItemElement));
-    expect(myOnClick).toBeCalled();
+    expect(myOnClick).toHaveBeenCalled();
   });
 
   it('adds user classes', async () => {

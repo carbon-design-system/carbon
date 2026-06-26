@@ -131,9 +131,9 @@ describe(componentName, () => {
   it('reports clicks on an action button', async () => {
     const onClick = jest.fn();
     render(<ActionSet actions={[{ ...actionS, onClick }]} />);
-    expect(onClick).toBeCalledTimes(0);
+    expect(onClick).toHaveBeenCalledTimes(0);
     await act(() => userEvent.click(getByRoleAndLabel('button', labelS)));
-    expect(onClick).toBeCalledTimes(1);
+    expect(onClick).toHaveBeenCalledTimes(1);
   });
 
   it('adds additional properties to an action button', async () => {

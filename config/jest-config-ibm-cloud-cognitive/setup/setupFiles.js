@@ -67,6 +67,10 @@ if (global.HTMLElement) {
   // behavior, which does not work in JSDOM for testing. It was suggested (by Josh Black) to mock this behavior
   // explicitly for `scrollIntoView` via our jest setup.
   Element.prototype.scrollIntoView = jest.fn();
+  // JSDOM does not implement scrollBy; mock it so components that call
+  // element.scrollBy() or window.scrollBy() do not trigger console.error.
+  Element.prototype.scrollBy = jest.fn();
+  window.scrollBy = jest.fn();
 }
 
 // jsdom does not support the second argument to getComputedStyle, but some

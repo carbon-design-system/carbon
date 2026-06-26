@@ -74,7 +74,7 @@ describe(componentName, () => {
     change(textInput, { target: { value: `${props.filename}.pdf` } });
     blur(textInput);
     await act(() => click(screen.getByText(props.primaryButtonText)));
-    expect(onRequestSubmit).toBeCalled();
+    expect(onRequestSubmit).toHaveBeenCalled();
   });
 
   it('does not submit without text input', async () => {
@@ -94,7 +94,7 @@ describe(componentName, () => {
     );
 
     await act(() => click(submitBtn));
-    expect(onRequestSubmit).not.toBeCalled();
+    expect(onRequestSubmit).not.toHaveBeenCalled();
   });
 
   it('does not submit with invalid extension', async () => {
@@ -115,13 +115,13 @@ describe(componentName, () => {
     change(textInput, { target: { value: `${props.filename}` } });
     blur(textInput);
     await act(() => click(screen.getByText(props.primaryButtonText)));
-    expect(onRequestSubmit).not.toBeCalled();
+    expect(onRequestSubmit).not.toHaveBeenCalled();
     screen.getByText(props.invalidInputText);
 
     change(textInput, { target: { value: `${props.filename}.mp3` } });
     blur(textInput);
     await act(() => click(screen.getByText(props.primaryButtonText)));
-    expect(onRequestSubmit).not.toBeCalled();
+    expect(onRequestSubmit).not.toHaveBeenCalled();
     screen.getByText(props.invalidInputText);
   });
 
@@ -153,10 +153,10 @@ describe(componentName, () => {
     screen.getByText(props.preformattedExtensionsLabel);
     await act(() => click(getByLabelText('BAR (best for integration server)')));
     await act(() => click(screen.getByText(props.primaryButtonText)));
-    expect(onRequestSubmit).toBeCalledWith(`${props.filename}.bar`);
+    expect(onRequestSubmit).toHaveBeenCalledWith(`${props.filename}.bar`);
 
     await act(() => click(screen.getByText(props.secondaryButtonText)));
-    expect(onClose).toBeCalled();
+    expect(onClose).toHaveBeenCalled();
   });
 
   it('renders with password field', async () => {

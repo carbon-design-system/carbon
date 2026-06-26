@@ -19,7 +19,7 @@
     "carbon for ibm products"
   ],
   "peerDependencies": {
-    "jest": "^29.7.0"
+    "jest": "^30.0.5"
   },
   "dependencies": {
     "@babel/core": "^7.26.10",
@@ -32,10 +32,9 @@
     "@testing-library/jest-dom": "^6.6.3",
     "accessibility-checker": "^4.0.12",
     "axe-core": "^4.10.3",
-    "babel-jest": "^29.7.0",
+    "babel-jest": "^30.0.5",
     "babel-preset-ibm-cloud-cognitive": "^0.51.0-rc.0",
     "identity-obj-proxy": "^3.0.0",
-    "jest-circus": "^29.7.0",
     "jest-watch-typeahead": "^3.0.0",
     "sass": "^1.93.2"
   }

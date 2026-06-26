@@ -16,7 +16,7 @@ import uuidv4 from '../../global/js/utils/uuidv4';
 import userEvent from '@testing-library/user-event';
 const { click } = userEvent.setup({
   // delay: null, // prev version
-  advanceTimers: jest.advanceTimersByTime,
+  advanceTimers: (ms) => jest.advanceTimersByTime(ms),
 });
 
 const { prefix } = pkg;

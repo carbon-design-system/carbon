@@ -248,9 +248,9 @@ describe(componentName, () => {
     const onToggle = jest.fn();
     render(<OptionsTile {...props} enabled onToggle={onToggle} />);
 
-    expect(onToggle).not.toBeCalled();
+    expect(onToggle).not.toHaveBeenCalled();
     fireEvent.click(screen.getByRole('switch'));
-    expect(onToggle).toBeCalled();
+    expect(onToggle).toHaveBeenCalled();
   });
 
   it('should call the onChange prop if provided when option tile is opened or closed', async () => {

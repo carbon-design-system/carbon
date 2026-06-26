@@ -114,7 +114,7 @@ describe(componentName, () => {
       )
     ).toBe(true);
     await act(() => click(getByText(props.primaryButtonText)));
-    expect(onRequestSubmit).not.toBeCalled();
+    expect(onRequestSubmit).not.toHaveBeenCalled();
 
     change(getByRole('textbox'), {
       target: { value: 'test.jpeg' },
@@ -130,7 +130,7 @@ describe(componentName, () => {
       screen.getByText(`1 / 1 ${defaultProps.fileUploadLabel}`)
     ).toBeVisible();
     await act(() => click(getByText(props.primaryButtonText)));
-    expect(onRequestSubmit).toBeCalled();
+    expect(onRequestSubmit).toHaveBeenCalled();
   });
 
   it('should display the network error message when the fetch is rejected', async () => {

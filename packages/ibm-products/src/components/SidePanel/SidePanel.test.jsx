@@ -402,7 +402,7 @@ describe('SidePanel', () => {
       `.${blockClass}__navigation-back-button`
     );
     await act(() => click(navigationAction));
-    expect(onNavigationBackFn).toBeCalled();
+    expect(onNavigationBackFn).toHaveBeenCalled();
   });
 
   it('should click the primary action button', async () => {
@@ -418,7 +418,7 @@ describe('SidePanel', () => {
     });
     const sidePanelAction = screen.getByText(/Primary button/i);
     await act(() => click(sidePanelAction));
-    expect(onClick).toBeCalled();
+    expect(onClick).toHaveBeenCalled();
   });
 
   it('should click an action toolbar button', async () => {

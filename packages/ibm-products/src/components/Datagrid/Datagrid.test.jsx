@@ -68,10 +68,7 @@ import {
   flyoutFilterProps as flyoutProps,
 } from './utils/filterPropsForTesting';
 
-const { click, hover, unhover } = userEvent.setup({
-  // delay: null, // prev version
-  advanceTimers: jest.advanceTimersByTime,
-});
+const { click, hover, unhover } = userEvent.setup({ delay: null });
 
 const dataTestId = uuidv4();
 
@@ -980,9 +977,7 @@ describe(componentName, () => {
   });
 
   it('renders a basic table and resizes column', async () => {
-    const user = userEvent.setup({
-      advanceTimers: jest.advanceTimersByTime,
-    });
+    const user = userEvent.setup({ delay: null });
     const { keyboard, tab } = user;
     render(<BasicUsage data-testid={dataTestId} />);
     const resizerInput = screen.getAllByLabelText(
@@ -1298,9 +1293,7 @@ describe(componentName, () => {
     );
     const newBodyRow = newBodyRows[0];
     newBodyRow.focus();
-    const user = userEvent.setup({
-      advanceTimers: jest.advanceTimersByTime,
-    });
+    const user = userEvent.setup({ delay: null });
     const { keyboard } = user;
     await keyboard('{Enter}');
     expect(onRowClickFn).toHaveBeenCalledTimes(2);
@@ -1895,9 +1888,7 @@ describe(componentName, () => {
   });
 
   it('Row Size Dropdown', async () => {
-    const user = userEvent.setup({
-      advanceTimers: jest.advanceTimersByTime,
-    });
+    const user = userEvent.setup({ delay: null });
     const { click, keyboard } = user;
     render(<RowSizeDropdown data-testid={dataTestId} />);
 
@@ -2398,9 +2389,7 @@ describe(componentName, () => {
   };
 
   it('should test basic interactions of filter panel', async () => {
-    const user = userEvent.setup({
-      advanceTimers: jest.advanceTimersByTime,
-    });
+    const user = userEvent.setup({ delay: null });
     const { keyboard, type } = user;
     const dropdownOnChange = jest.fn();
     render(

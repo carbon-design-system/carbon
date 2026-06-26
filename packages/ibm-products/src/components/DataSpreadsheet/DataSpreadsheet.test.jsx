@@ -16,7 +16,7 @@ import { DataSpreadsheet } from '.';
 import { generateData } from './utils/generateData';
 const { click, dblClick, keyboard, tab } = userEvent.setup({
   // delay: null, // prev version
-  advanceTimers: jest.advanceTimersByTime,
+  advanceTimers: (ms) => jest.advanceTimersByTime(ms),
 });
 
 // cspell:words rowcount colcount

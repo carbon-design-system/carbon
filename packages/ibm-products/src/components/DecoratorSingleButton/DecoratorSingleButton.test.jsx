@@ -103,7 +103,7 @@ describe(componentName, () => {
     });
 
     await act(() => click(screen.getByRole('button')));
-    expect(handleClick).toBeCalled();
+    expect(handleClick).toHaveBeenCalled();
   });
 
   it('"single-button" registers a context menu click event', async () => {
@@ -115,7 +115,7 @@ describe(componentName, () => {
     });
 
     await act(() => contextMenu(screen.getByRole('button')));
-    expect(handleContextMenu).toBeCalled();
+    expect(handleContextMenu).toHaveBeenCalled();
   });
 
   it('has no accessibility violations', async () => {
