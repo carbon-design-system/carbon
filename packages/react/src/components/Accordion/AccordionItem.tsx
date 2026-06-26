@@ -76,8 +76,7 @@ export interface AccordionItemProps {
    */
   renderExpando?: (
     props: PropsWithChildren<AccordionToggleProps>
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
-  ) => ReactElement<any>;
+  ) => ReactElement;
 
   /**
    * The callback function to render the expand button.
@@ -85,8 +84,7 @@ export interface AccordionItemProps {
    */
   renderToggle?: (
     props: PropsWithChildren<AccordionToggleProps>
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
-  ) => ReactElement<any>;
+  ) => ReactElement;
 
   /**
    * The accordion title.

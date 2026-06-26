@@ -162,6 +162,42 @@ describe('TextArea', () => {
       expect(screen.getByRole('textbox')).toHaveAttribute('aria-invalid');
     });
 
+    it('should set aria-errormessage to the invalid message element id', () => {
+      render(
+        <TextArea
+          id="textarea-1"
+          labelText="TextArea"
+          invalid
+          invalidText="Some error"
+        />
+      );
+
+      const input = screen.getByRole('textbox');
+      expect(input).toHaveAttribute(
+        'aria-errormessage',
+        'textarea-1-error-msg'
+      );
+      expect(screen.getByText('Some error')).toHaveAttribute(
+        'id',
+        'textarea-1-error-msg'
+      );
+    });
+
+    it('should use aria-describedby for helper text when not invalid', () => {
+      render(
+        <TextArea
+          id="textarea-1"
+          labelText="TextArea"
+          helperText="Helper copy"
+        />
+      );
+
+      const helper = screen.getByText('Helper copy');
+      const input = screen.getByRole('textbox');
+      expect(input).toHaveAttribute('aria-describedby', helper.id);
+      expect(input).not.toHaveAttribute('aria-errormessage');
+    });
+
     it('should respect `invalidText` prop', () => {
       render(
         <TextArea

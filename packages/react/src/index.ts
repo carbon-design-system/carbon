@@ -9,6 +9,7 @@
 'use client'
 
 import './feature-flags';
+import './internal/warnAboutDeprecatedReactVersion';
 
 export * from './components/Accordion';
 export * from './components/AccordionItem';
@@ -56,6 +57,7 @@ export * from './components/FormLabel';
 export * from './components/Grid';
 export * from './components/Icon/Icon.Skeleton';
 export * from './components/IdPrefix';
+export { InlineCheckbox } from './components/InlineCheckbox';
 export * from './components/InlineLoading';
 export * from './components/Link';
 export * from './components/ListItem';

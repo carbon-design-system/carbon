@@ -205,7 +205,7 @@ export interface DropdownProps<ItemType>
   selectedItem?: ItemType;
 
   /**
-   * Specify the size of the ListBox. Currently supports either `sm`, `md` or `lg` as an option.
+   * Specify the size of the ListBox. Currently supports either `xs`, `sm`, `md` or `lg` as an option.
    */
   size?: ListBoxSize;
 
@@ -735,8 +735,7 @@ const Dropdown = React.forwardRef(
 interface DropdownComponent {
   <ItemType>(
     props: DropdownProps<ItemType> & { ref?: Ref<HTMLButtonElement> }
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
-  ): React.ReactElement<any> | null;
+  ): React.ReactElement | null;
 }
 
 Dropdown.displayName = 'Dropdown';
@@ -892,7 +891,7 @@ Dropdown.propTypes = {
   ]),
 
   /**
-   * Specify the size of the ListBox. Currently supports either `sm`, `md` or `lg` as an option.
+   * Specify the size of the ListBox. Currently supports either `xs`, `sm`, `md` or `lg` as an option.
    */
   size: ListBoxSizePropType,
 

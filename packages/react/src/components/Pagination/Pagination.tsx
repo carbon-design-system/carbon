@@ -33,6 +33,11 @@ export interface PaginationProps
   backwardText?: string;
 
   /**
+   * The tooltip position for the backward button.
+   */
+  backwardTextTooltipPosition?: 'top' | 'right' | 'bottom' | 'left';
+
+  /**
    * The CSS class names.
    */
   className?: string;
@@ -46,6 +51,11 @@ export interface PaginationProps
    * The description for the forward icon.
    */
   forwardText?: string;
+
+  /**
+   * The tooltip position for the forward button.
+   */
+  forwardTextTooltipPosition?: 'top' | 'right' | 'bottom' | 'left';
 
   /**
    * The unique ID of this component instance.
@@ -134,7 +144,7 @@ export interface PaginationProps
   /**
    * Specify the size of the Pagination.
    */
-  size?: 'sm' | 'md' | 'lg';
+  size?: 'xs' | 'sm' | 'md' | 'lg';
 
   /**
    * The total number of items.
@@ -183,9 +193,11 @@ const Pagination = React.forwardRef(
   (
     {
       backwardText = 'Previous page',
+      backwardTextTooltipPosition = 'top',
       className: customClassName = '',
       disabled = false,
       forwardText = 'Next page',
+      forwardTextTooltipPosition = 'top',
       id,
       isLastPage = false,
       itemText = (min, max) => `${min}–${max} items`,
@@ -237,7 +249,8 @@ const Pagination = React.forwardRef(
 
     const className = cx({
       [`${prefix}--pagination`]: true,
-      [`${prefix}--pagination--${size}`]: size,
+      [`${prefix}--pagination--${size}`]: size, // TODO: V12 - Remove this class
+      [`${prefix}--layout--size-${size}`]: size,
       [customClassName]: !!customClassName,
     });
     const totalPages = totalItems
@@ -507,7 +520,7 @@ const Pagination = React.forwardRef(
           )}
           <div className={`${prefix}--pagination__control-buttons`}>
             <IconButton
-              align="top"
+              align={backwardTextTooltipPosition}
               disabled={backButtonDisabled}
               kind="ghost"
               className={backButtonClasses}
@@ -518,7 +531,7 @@ const Pagination = React.forwardRef(
               <CaretLeft />
             </IconButton>
             <IconButton
-              align="top"
+              align={forwardTextTooltipPosition}
               disabled={forwardButtonDisabled || isLastPage}
               kind="ghost"
               className={forwardButtonClasses}
@@ -542,6 +555,16 @@ Pagination.propTypes = {
   backwardText: PropTypes.string,
 
   /**
+   * The tooltip position for the backward button.
+   */
+  backwardTextTooltipPosition: PropTypes.oneOf([
+    'top',
+    'right',
+    'bottom',
+    'left',
+  ]),
+
+  /**
    * The CSS class names.
    */
   className: PropTypes.string,
@@ -555,6 +578,16 @@ Pagination.propTypes = {
    * The description for the forward icon.
    */
   forwardText: PropTypes.string,
+
+  /**
+   * The tooltip position for the forward button.
+   */
+  forwardTextTooltipPosition: PropTypes.oneOf([
+    'top',
+    'right',
+    'bottom',
+    'left',
+  ]),
 
   /**
    * The unique ID of this component instance.
@@ -646,7 +679,7 @@ Pagination.propTypes = {
   /**
    * Specify the size of the Pagination.
    */
-  size: PropTypes.oneOf(['sm', 'md', 'lg']),
+  size: PropTypes.oneOf(['xs', 'sm', 'md', 'lg']),
 
   /**
    * The total number of items.

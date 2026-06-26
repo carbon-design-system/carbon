@@ -411,6 +411,35 @@ describe('Pagination', () => {
       const { container } = render(<Pagination size="sm" pageSizes={[10]} />);
 
       expect(container.firstChild).toHaveClass('cds--pagination--sm');
+      expect(container.firstChild).toHaveClass('cds--layout--size-sm');
+    });
+
+    it('should respect xs size prop', () => {
+      const { container } = render(<Pagination size="xs" pageSizes={[10]} />);
+
+      expect(container.firstChild).toHaveClass('cds--pagination--xs');
+      expect(container.firstChild).toHaveClass('cds--layout--size-xs');
+    });
+
+    it('should respect sm size prop', () => {
+      const { container } = render(<Pagination size="sm" pageSizes={[10]} />);
+
+      expect(container.firstChild).toHaveClass('cds--pagination--sm');
+      expect(container.firstChild).toHaveClass('cds--layout--size-sm');
+    });
+
+    it('should respect md size prop', () => {
+      const { container } = render(<Pagination size="md" pageSizes={[10]} />);
+
+      expect(container.firstChild).toHaveClass('cds--pagination--md');
+      expect(container.firstChild).toHaveClass('cds--layout--size-md');
+    });
+
+    it('should respect lg size prop', () => {
+      const { container } = render(<Pagination size="lg" pageSizes={[10]} />);
+
+      expect(container.firstChild).toHaveClass('cds--pagination--lg');
+      expect(container.firstChild).toHaveClass('cds--layout--size-lg');
     });
 
     it('should respect totalItems prop', () => {
@@ -591,6 +620,25 @@ describe('Pagination', () => {
       expect(onChange).toHaveBeenCalledWith(
         expect.objectContaining({ page: 1, pageSize: 3 })
       );
+    });
+
+    it('should map each tooltip position prop to the correct button', () => {
+      render(
+        <Pagination
+          pageSizes={[10]}
+          backwardTextTooltipPosition="right"
+          forwardTextTooltipPosition="bottom"
+        />
+      );
+
+      const previousButton = screen.getByLabelText('Previous page');
+      const nextButton = screen.getByLabelText('Next page');
+
+      expect(
+        previousButton.closest('.cds--popover--right')
+      ).toBeInTheDocument();
+
+      expect(nextButton.closest('.cds--popover--bottom')).toBeInTheDocument();
     });
   });
 });

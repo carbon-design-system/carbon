@@ -304,11 +304,12 @@ describe('Select', () => {
     });
 
     it('should respect size prop', () => {
-      render(<Select id="select" labelText="Select" size="sm" />);
-
-      expect(screen.getByRole('combobox')).toHaveClass(
-        `${prefix}--select-input--sm`
+      const { container } = render(
+        <Select id="select" labelText="Select" size="sm" />
       );
+      const selectWrapper = container.querySelector(`.${prefix}--select`);
+      expect(selectWrapper).toHaveClass(`${prefix}--select--sm`);
+      expect(selectWrapper).toHaveClass(`${prefix}--layout--size-sm`);
     });
 
     it('should respect warn prop', () => {
