@@ -96,22 +96,22 @@ class CDSMenu extends HostListenerMixin(LitElement) {
   @property({ type: String })
   direction = 'ltr';
   /**
-   * Open value for the menu .
+   * Open value for the menu.
    */
   @property({ type: Boolean, reflect: true })
-  open = true;
+  open = false;
   /**
-   * Active element in the DOM .
+   * Active element in the DOM.
    */
   @property({ type: HTMLElement })
   focusreturn;
   /**
-   * Position of the Menu .
+   * Position of the Menu.
    */
   @property()
   position = [-1, -1];
   /**
-   * Size attribute .
+   * Size attribute.
    */
   @property({ attribute: true })
   size = MENU_SIZE.SMALL;
@@ -141,12 +141,12 @@ class CDSMenu extends HostListenerMixin(LitElement) {
   @property({ type: String })
   menuAlignment;
   /**
-   * Position of the Menu in X axis .
+   * Position of the Menu in X axis.
    */
   @property()
   x: number | number[] = 0;
   /**
-   * Position of the Menu in Y axis .
+   * Position of the Menu in Y axis.
    */
   @property()
   y: number | number[] = 0;
