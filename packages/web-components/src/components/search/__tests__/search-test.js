@@ -50,6 +50,15 @@ describe('cds-search', () => {
       expect(input).to.have.attribute('disabled');
     });
 
+    it('should respect the autofocus attribute', async () => {
+      const el = await fixture(html`
+        <cds-search label-text="test-search" autofocus></cds-search>
+      `);
+
+      const input = el.shadowRoot?.querySelector('input');
+      expect(input).to.have.attribute('autofocus');
+    });
+
     it('should respect the label-text attribute', async () => {
       const el = await fixture(html`
         <cds-search label-text="test-search"></cds-search>

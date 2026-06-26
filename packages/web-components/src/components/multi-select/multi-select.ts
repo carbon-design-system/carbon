@@ -21,6 +21,7 @@ import CDSMultiSelectItem from './multi-select-item';
 import styles from './multi-select.scss?lit';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import HostListener from '../../globals/decorators/host-listener';
+import CDSAILabel from '../ai-label/ai-label';
 
 export {
   DROPDOWN_SIZE,
@@ -48,6 +49,12 @@ export { SELECTION_FEEDBACK_OPTION };
 class CDSMultiSelect extends CDSDropdown {
   @property({ type: Boolean })
   filterable;
+
+  /**
+   * The native `autocomplete` attribute for the filterable input.
+   */
+  @property({ type: String })
+  autocomplete = 'off';
 
   /**
    * The count of selected items.
@@ -248,6 +255,9 @@ class CDSMultiSelect extends CDSDropdown {
    * Clears selections on Escape click
    */
   protected _handleKeydownInner(event: KeyboardEvent) {
+    if (event.target instanceof CDSAILabel) {
+      return;
+    }
     const { key } = event;
     if (
       key === 'Escape' &&
@@ -279,6 +289,9 @@ class CDSMultiSelect extends CDSDropdown {
    * Handler for the `keypress` event, ensures filter still works upon entering space
    */
   protected _handleKeypressInner(event: KeyboardEvent) {
+    if (event.target instanceof CDSAILabel) {
+      return;
+    }
     const { key } = event;
     const action = (this.constructor as typeof CDSDropdown).getAction(key);
     const { TRIGGERING } = DROPDOWN_KEYBOARD_ACTION;
@@ -454,7 +467,12 @@ class CDSMultiSelect extends CDSDropdown {
     @returns The main content of the trigger button.
    */
   protected _renderLabel(): TemplateResult {
-    const { label, value, _selectedItemContent: selectedItemContent } = this;
+    const {
+      label,
+      value,
+      autocomplete,
+      _selectedItemContent: selectedItemContent,
+    } = this;
 
     const inputClasses = classMap({
       [`${prefix}--text-input`]: true,
@@ -476,6 +494,7 @@ class CDSMultiSelect extends CDSDropdown {
             aria-controls="menu-body"
             aria-expanded="${String(this.open)}"
             aria-autocomplete="list"
+            autocomplete="${autocomplete}"
             @input="${this._handleInput}" />
         `;
   }
@@ -833,9 +852,6 @@ class CDSMultiSelect extends CDSDropdown {
         locale,
       });
 
-      if (aiLabel) {
-        sortedMenuItems.unshift(aiLabel);
-      }
       sortedMenuItems.forEach((item) => {
         this.appendChild(item);
       });

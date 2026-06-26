@@ -23,6 +23,19 @@ describe('cds-table-toolbar-content', () => {
 
   it('should propagate normalized size to children', async () => {
     const el = await fixture(html`
+      <cds-table-toolbar-content size="xl">
+        <cds-button></cds-button>
+      </cds-table-toolbar-content>
+    `);
+
+    await el.updateComplete;
+
+    const button = el.querySelector('cds-button');
+    expect(button?.getAttribute('size')).to.equal('lg');
+  });
+
+  it('should propagate `xs` size to children without normalizing to `sm`', async () => {
+    const el = await fixture(html`
       <cds-table-toolbar-content size="xs">
         <cds-button></cds-button>
       </cds-table-toolbar-content>
@@ -31,6 +44,6 @@ describe('cds-table-toolbar-content', () => {
     await el.updateComplete;
 
     const button = el.querySelector('cds-button');
-    expect(button?.getAttribute('size')).to.equal('sm');
+    expect(button?.getAttribute('size')).to.equal('xs');
   });
 });
