@@ -89,7 +89,6 @@ $link-focus-text-color: custom-property.get-var(
     color: $link-visited-text-color;
   }
 
-  .#{$prefix}--link.#{$prefix}--link--visited:hover,
   .#{$prefix}--link.#{$prefix}--link--visited:visited:hover {
     color: $link-hover-text-color;
   }
