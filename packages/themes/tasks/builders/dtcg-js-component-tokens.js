@@ -35,7 +35,7 @@ function kebabToCamel(str) {
  */
 function toSource(value) {
   if (typeof value === 'string') {
-    return `'${value.replace(/'/g, "\\'")}'`;
+    return `'${value.replace(/\\/g, '\\\\').replace(/'/g, "\\'")}'`;
   }
   return JSON.stringify(value);
 }
