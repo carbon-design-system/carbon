@@ -8,6 +8,7 @@
 import { LitElement, html } from 'lit';
 import { property } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
+import { ifDefined } from 'lit/directives/if-defined.js';
 import { prefix } from '../../globals/settings';
 import FormMixin from '../../globals/mixins/form';
 import HostListenerMixin from '../../globals/mixins/host-listener';
@@ -110,6 +111,18 @@ class CDSRadioButtonGroup extends FormMixin(HostListenerMixin(LitElement)) {
    * `true` if there is an AI Label.
    */
   protected _hasAILabel = false;
+
+  private _helperTextId = `${prefix}--radio-button-group-helper-text-${Math.random()
+    .toString(16)
+    .slice(2)}`;
+
+  private _invalidTextId = `${prefix}--radio-button-group-invalid-text-${Math.random()
+    .toString(16)
+    .slice(2)}`;
+
+  private _warnTextId = `${prefix}--radio-button-group-warn-text-${Math.random()
+    .toString(16)
+    .slice(2)}`;
 
   /**
    * The `value` attribute for the `<input>` for selection.
@@ -243,7 +256,15 @@ class CDSRadioButtonGroup extends FormMixin(HostListenerMixin(LitElement)) {
     } = this;
 
     const showWarning = !readOnly && !disabled && !invalid && warn;
+    const showInvalid = !readOnly && !disabled && invalid;
     const showHelper = !invalid && !disabled && !warn;
+    const describedBy = showInvalid
+      ? this._invalidTextId
+      : showWarning
+        ? this._warnTextId
+        : showHelper && helperText
+          ? this._helperTextId
+          : undefined;
 
     const invalidIcon = iconLoader(WarningFilled16, {
       class: `${prefix}--radio-button__invalid-icon`,
@@ -254,7 +275,11 @@ class CDSRadioButtonGroup extends FormMixin(HostListenerMixin(LitElement)) {
     });
 
     const helper = helperText
-      ? html`<div class="${prefix}--form__helper-text">${helperText}</div>`
+      ? html`<div
+          id="${this._helperTextId}"
+          class="${prefix}--form__helper-text">
+          ${helperText}
+        </div>`
       : null;
 
     const fieldsetClasses = classMap({
@@ -271,6 +296,7 @@ class CDSRadioButtonGroup extends FormMixin(HostListenerMixin(LitElement)) {
     return html` <fieldset
         class="${fieldsetClasses}"
         ?disabled="${disabled}"
+        aria-describedby="${ifDefined(describedBy)}"
         aria-readonly="${readOnly}">
         ${legendText
           ? html` <legend class="${prefix}--label">
@@ -282,15 +308,21 @@ class CDSRadioButtonGroup extends FormMixin(HostListenerMixin(LitElement)) {
         <slot></slot>
       </fieldset>
       <div class="${prefix}--radio-button__validation-msg">
-        ${!readOnly && !disabled && invalid
+        ${showInvalid
           ? html`
               ${invalidIcon}
-              <div class="${prefix}--form-requirement">${invalidText}</div>
+              <div
+                id="${this._invalidTextId}"
+                class="${prefix}--form-requirement">
+                ${invalidText}
+              </div>
             `
           : null}
         ${showWarning
           ? html`${warnIcon}
-              <div class="${prefix}--form-requirement">${warnText}</div>`
+              <div id="${this._warnTextId}" class="${prefix}--form-requirement">
+                ${warnText}
+              </div>`
           : null}
       </div>
       ${showHelper ? helper : null}`;
