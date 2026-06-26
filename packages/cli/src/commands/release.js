@@ -217,6 +217,7 @@ async function cherryPickCommitsFrom(commitRange, bump) {
       ]);
       if (!answers.proceed) {
         await execa('git', ['cherry-pick', '--abort']);
+        // eslint-disable-next-line preserve-caught-error -- error.stderr is inspected above on line 205
         throw new Error(
           'Unable to proceed with cherry-picking after failed conflict ' +
             'resolution attempt'

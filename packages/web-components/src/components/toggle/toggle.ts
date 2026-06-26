@@ -214,6 +214,8 @@ class CDSToggle extends HostListenerMixin(CDSCheckbox) {
       [`${prefix}--visually-hidden`]: hideLabel,
     });
 
+    // TODO: initial value is redundant — both branches of the if/else below always assign stateText
+    // eslint-disable-next-line no-useless-assignment
     let stateText = '';
 
     if (hideLabel) {

@@ -38,6 +38,7 @@ function transformer(file, api) {
         if (specifier.type === 'ImportSpecifier') {
           nonStableComponentKeys.forEach((c) => {
             let importedName = specifier.imported.name;
+            // eslint-disable-next-line no-useless-assignment -- default mirrors importedName; conditionally overridden below
             let transformedImportedName = importedName;
             if (importedName === c) {
               transformedImportedName = reactPreviewMap[c];

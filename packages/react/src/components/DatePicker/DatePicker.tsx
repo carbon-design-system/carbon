@@ -940,6 +940,9 @@ const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>((props, ref) => {
     }
   }, [value, prefix, startInputField]);
 
+  // TODO: fluidError is never assigned — implement fluid validation error or remove
+  // https://github.com/carbon-design-system/carbon/issues/18991
+  // eslint-disable-next-line no-unassigned-vars
   let fluidError;
 
   return (

@@ -65,12 +65,15 @@ const fluidTypeSize = (
   const defaultFontSize = defaultStyles.fontSize ?? '';
   const breakpointFontSize = fluidBreakpoint?.fontSize;
 
+  // eslint-disable-next-line no-useless-assignment -- default value; conditionally overridden below
   let maxFontSize = defaultFontSize;
   let minFontSize = defaultFontSize;
   if (breakpointFontSize) {
     minFontSize = breakpointFontSize;
   }
 
+  // TODO: maxViewportWidth initial value is always overwritten before use — consider removing initialiser
+  // eslint-disable-next-line no-useless-assignment
   let maxViewportWidth = breakpoint.width;
   const minViewportWidth = breakpoint.width;
 
