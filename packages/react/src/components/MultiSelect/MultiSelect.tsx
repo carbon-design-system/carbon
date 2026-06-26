@@ -500,6 +500,9 @@ export const MultiSelect = React.forwardRef(
           if (match(e, keys.Enter) && isOpen) {
             setInputFocused(true);
           }
+          if (match(e, keys.Tab) && isOpen) {
+            setIsOpenWrapper(false);
+          }
         }
       },
     });
