@@ -11,5 +11,6 @@ export * from './carousel';
 export * from './datePartsOrder';
 export * from './dateTimeFormat';
 export * from './documentLang';
+export * from './addSelect';
 export * from './makeDraggable';
 export * from './overflowHandler';

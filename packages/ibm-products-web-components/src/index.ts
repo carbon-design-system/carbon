@@ -39,10 +39,10 @@ export { default as CDSBigNumber } from './components/big-number/big-number';
 export { default as CDSEditInPlace } from './components/edit-in-place/edit-in-place';
 export { default as CDSBigNumberSkeleton } from './components/big-number/big-number-skeleton';
 
-// Re-export utilities from @carbon/ibm-products-utilities
-export { AddSelectData } from '@carbon/ibm-products-utilities';
+// Re-export utilities from @carbon/utilities
+export { AddSelectData } from '@carbon/utilities/addSelect';
 export type {
   AddSelectItem,
   ItemStatus,
   SearchOptions,
-} from '@carbon/ibm-products-utilities';
+} from '@carbon/utilities/addSelect';

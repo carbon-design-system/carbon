@@ -5,11 +5,11 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { AddSelectData, AddSelectItem } from './add-select-data';
+import { AddSelectData } from './add-select-data';
 
 describe('AddSelectData', () => {
-  let dataManager: AddSelectData;
-  let sampleData: AddSelectItem[];
+  let dataManager;
+  let sampleData;
 
   beforeEach(() => {
     dataManager = new AddSelectData();
@@ -322,7 +322,7 @@ describe('AddSelectData', () => {
     });
 
     it('should sort items by title', () => {
-      dataManager.sort((a, b) => a.title!.localeCompare(b.title!));
+      dataManager.sort((a, b) => a.title.localeCompare(b.title));
       const items = dataManager.getItems();
       expect(items[0].title).toBe('Item 1');
       expect(items[1].title).toBe('Item 2');
@@ -330,7 +330,7 @@ describe('AddSelectData', () => {
     });
 
     it('should sort items recursively', () => {
-      const dataWithUnsortedChildren: AddSelectItem[] = [
+      const dataWithUnsortedChildren = [
         {
           id: '1',
           title: 'Parent',
@@ -346,7 +346,7 @@ describe('AddSelectData', () => {
       ];
 
       dataManager.setItems(dataWithUnsortedChildren);
-      dataManager.sort((a, b) => a.title!.localeCompare(b.title!), true);
+      dataManager.sort((a, b) => a.title.localeCompare(b.title), true);
 
       const children = dataManager.getItemChildren('1');
       expect(children[0].title).toBe('A');

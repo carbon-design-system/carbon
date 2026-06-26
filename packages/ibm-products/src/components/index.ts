@@ -43,14 +43,14 @@ export * from './TagSet';
 export * from './Tearsheet';
 export * from './UserAvatar';
 export * from './WebTerminal';
-// Re-export utilities from @carbon/ibm-products-utilities
-export { AddSelectData } from '@carbon/ibm-products-utilities';
+// Re-export utilities from @carbon/utilities
+export { AddSelectData } from '@carbon/utilities/addSelect';
 export type {
   AddSelectItem,
   ItemDetails,
   ItemStatus,
   SearchOptions,
-} from '@carbon/ibm-products-utilities';
+} from '@carbon/utilities/addSelect';
 
 /**
  * Non-stable components

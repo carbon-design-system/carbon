@@ -247,7 +247,7 @@ dataManager.sort((a, b) => a.title.localeCompare(b.title), true);
 For complete API documentation, detailed usage examples, and advanced patterns,
 see:
 
-**[AddSelectData API Documentation](https://github.com/carbon-design-system/ibm-products/blob/main/packages/ibm-products-utilities/src/utils/add-select/add-select-data.md)**
+**[AddSelectData API Documentation](https://github.com/carbon-design-system/carbon/blob/main/packages/utilities/src/addSelect/README.md)**
 
 The utility is designed to work seamlessly with AddSelect components but can
 also be used independently for any hierarchical data management needs.
@@ -385,8 +385,7 @@ const filteredItems = items.filter((item) => {
           setFilterType(selectedItem?.id || 'all')
         }
       />
-    }
-  >
+    }>
     <AddSelect.Content>
       {filteredItems.map((item) => (
         <AddSelect.Row
@@ -441,8 +440,7 @@ const allSelected =
         multi
         itemCount={items.length}
         allSelected={allSelected}
-        onSelectAll={handleSelectAll}
-      >
+        onSelectAll={handleSelectAll}>
         {items.map((item) => (
           <AddSelect.Row
             key={item.id}
@@ -507,8 +505,7 @@ const selectedItemsArray = Array.from(selectedItems)
     selectedItems={selectedItemsArray}
     showCount
     showEditIcon
-    onEdit={() => console.log('Edit clicked')}
-  >
+    onEdit={() => console.log('Edit clicked')}>
     {selectedItemsArray.map((item) => (
       <AddSelect.SelectionSummaryItem
         key={item.id}

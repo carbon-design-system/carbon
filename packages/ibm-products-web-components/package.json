@@ -61,7 +61,7 @@
     "@carbon/ibm-products-styles": "workspace:*",
     "@carbon/layout": "workspace:*",
     "@carbon/styles": "workspace:*",
-    "@carbon/utilities": "^0.19.0",
+    "@carbon/utilities": "workspace:*",
     "@carbon/web-components": "workspace:*",
     "@ibm/telemetry-js": "^1.10.2",
     "@lit-labs/signals": "^0.3.0",
@@ -71,7 +71,6 @@
   "devDependencies": {
     "@aarsteinmedia/dotlottie-player": "^6.0.5",
     "@blockquote/rollup-plugin-externalize-source-dependencies": "^1.0.0",
-    "@carbon/ibm-products-utilities": "workspace:*",
     "@carbon/icon-helpers": "^10.75.0",
     "@carbon/icons": "workspace:*",
     "@carbon/motion": "workspace:*",

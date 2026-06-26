@@ -5,8 +5,6 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { ReactNode } from 'react';
-
 /**
  * Status types for items in the hierarchical data structure
  */
@@ -38,7 +36,7 @@ export interface AddSelectItem {
   /** Whether the item is disabled and cannot be selected */
   disabled?: boolean;
   /** Icon or visual element to display with the item */
-  icon?: ReactNode;
+  icon?: unknown;
   /** Nested children items */
   children?: {
     entries: AddSelectItem[];

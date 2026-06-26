@@ -14,18 +14,21 @@ frameworks.
 
 ## Installation
 
-**⚠️ Important:** This is a private package not published to npm. Always import
-from the main consumer packages:
+This utility lives in `@carbon/utilities` and is re-exported by the higher-level
+packages for convenience:
 
 ```typescript
-// For React projects
+// For React projects (via @carbon/ibm-products)
 import { AddSelectData, AddSelectItem } from '@carbon/ibm-products';
 
-// For Web Components projects
+// For Web Components projects (via @carbon/ibm-products-web-components)
 import {
   AddSelectData,
   AddSelectItem,
 } from '@carbon/ibm-products-web-components';
+
+// Directly from @carbon/utilities
+import { AddSelectData, AddSelectItem } from '@carbon/utilities';
 ```
 
 ## Data Structure
@@ -64,7 +67,7 @@ interface AddSelectItem {
   /** Whether the item is disabled and cannot be selected */
   disabled?: boolean;
   /** Icon or visual element to display with the item */
-  icon?: ReactNode;
+  icon?: unknown;
   /** Nested children items */
   children?: {
     entries: AddSelectItem[];
@@ -323,13 +326,10 @@ dataManager.sort((a, b) => a.title!.localeCompare(b.title!), true);
 ## Complete Usage Example
 
 ```typescript
-// Import from main packages (not directly from utilities)
-import { AddSelectData, AddSelectItem } from '@carbon/ibm-products';
-// or
-import {
-  AddSelectData,
-  AddSelectItem,
-} from '@carbon/ibm-products-web-components';
+import { AddSelectData, AddSelectItem } from '@carbon/utilities';
+// or from higher-level packages:
+// import { AddSelectData, AddSelectItem } from '@carbon/ibm-products';
+// import { AddSelectData, AddSelectItem } from '@carbon/ibm-products-web-components';
 
 // Initialize the data manager
 const dataManager = new AddSelectData();
@@ -484,5 +484,5 @@ The utility includes comprehensive unit tests covering all methods. Run tests
 with:
 
 ```bash
-yarn test -- add-select-data.spec.ts
+yarn test --testPathPattern add-select-data-test
 ```
