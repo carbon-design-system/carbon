@@ -6,6 +6,7 @@
  */
 
 import '@carbon/web-components/es/components/overflow-menu/index.js';
+import '@carbon/web-components/es/components/feature-flags/index.js';
 
 import { expect, fixture, html } from '@open-wc/testing';
 
@@ -190,7 +191,7 @@ describe('cds-overflow-menu', () => {
       expect(dangerSpan).to.not.exist;
     });
 
-    it('should use default danger description', async () => {
+    it('should not render default danger description when none is provided', async () => {
       const el = await fixture(html`
         <cds-overflow-menu-item danger>Delete</cds-overflow-menu-item>
       `);
@@ -198,8 +199,392 @@ describe('cds-overflow-menu', () => {
       await el.updateComplete;
 
       const dangerSpan = el.shadowRoot?.querySelector('#danger-description');
-      expect(dangerSpan).to.exist;
-      expect(dangerSpan?.textContent).to.equal('danger');
+      expect(dangerSpan).to.not.exist;
+    });
+  });
+
+  describe('enable-v12-overflowmenu', () => {
+    it('should support align on the flagged path', async () => {
+      const featureFlag = await fixture(html`
+        <feature-flags enable-v12-overflowmenu="true">
+          <cds-overflow-menu label="Actions" align="bottom">
+            <cds-menu>
+              <cds-menu-item label="Stop app"></cds-menu-item>
+            </cds-menu>
+          </cds-overflow-menu>
+        </feature-flags>
+      `);
+      const el = featureFlag.querySelector('cds-overflow-menu');
+
+      await el.updateComplete;
+
+      const tooltip = el.shadowRoot?.querySelector('cds-tooltip');
+
+      expect(el.align).to.equal('bottom');
+      expect(tooltip).to.have.attribute('align', 'bottom');
+    });
+
+    it('should use the label prop for the trigger tooltip and menu label', async () => {
+      const featureFlag = await fixture(html`
+        <feature-flags enable-v12-overflowmenu="true">
+          <cds-overflow-menu label="Actions">
+            <cds-menu>
+              <cds-menu-item label="Stop app"></cds-menu-item>
+            </cds-menu>
+          </cds-overflow-menu>
+        </feature-flags>
+      `);
+      const el = featureFlag.querySelector('cds-overflow-menu');
+
+      await el.updateComplete;
+
+      const button = el.shadowRoot?.querySelector('button');
+
+      expect(button).to.have.attribute('aria-label', 'Actions');
+    });
+
+    it('should manage a cds-menu child when the feature flag is enabled', async () => {
+      const featureFlag = await fixture(html`
+        <feature-flags enable-v12-overflowmenu="true">
+          <cds-overflow-menu label="Actions">
+            <cds-menu>
+              <cds-menu-item label="Stop app"></cds-menu-item>
+              <cds-menu-item-divider></cds-menu-item-divider>
+              <cds-menu-item label="Delete app" kind="danger"></cds-menu-item>
+            </cds-menu>
+          </cds-overflow-menu>
+        </feature-flags>
+      `);
+      const el = featureFlag.querySelector('cds-overflow-menu');
+
+      el.open = true;
+      await el.updateComplete;
+
+      const menu = el.querySelector('cds-menu');
+      await menu.updateComplete;
+
+      const menuNode = menu.shadowRoot?.querySelector('[role="menu"]');
+
+      expect(menu).to.exist;
+      expect(menu.open).to.be.true;
+      expect(menuNode).to.have.attribute('aria-label', 'Actions');
+      expect(el.shadowRoot?.querySelector('button')).to.have.attribute(
+        'aria-controls',
+        menu.id
+      );
+    });
+
+    it('should propagate menu-alignment to the flagged cds-menu child', async () => {
+      const featureFlag = await fixture(html`
+        <feature-flags enable-v12-overflowmenu="true">
+          <cds-overflow-menu label="Actions" menu-alignment="top-end">
+            <cds-menu>
+              <cds-menu-item label="Stop app"></cds-menu-item>
+            </cds-menu>
+          </cds-overflow-menu>
+        </feature-flags>
+      `);
+      const el = featureFlag.querySelector('cds-overflow-menu');
+
+      el.open = true;
+      await el.updateComplete;
+
+      const menu = el.querySelector('cds-menu');
+      await menu.updateComplete;
+
+      expect(el.menuAlignment).to.equal('top-end');
+      expect(menu.menuAlignment).to.equal('top-end');
+    });
+
+    it('should accept all valid menu-alignment values', async () => {
+      const validAlignments = [
+        'bottom-start',
+        'bottom-end',
+        'top-start',
+        'top-end',
+      ];
+
+      for (const alignment of validAlignments) {
+        const featureFlag = await fixture(html`
+          <feature-flags enable-v12-overflowmenu="true">
+            <cds-overflow-menu label="Actions" menu-alignment="${alignment}">
+              <cds-menu>
+                <cds-menu-item label="Stop app"></cds-menu-item>
+              </cds-menu>
+            </cds-overflow-menu>
+          </feature-flags>
+        `);
+        const el = featureFlag.querySelector('cds-overflow-menu');
+
+        await el.updateComplete;
+
+        expect(el.menuAlignment).to.equal(alignment);
+      }
+    });
+
+    it('should not apply floating UI styles when dynamic floating styles are disabled', async () => {
+      const featureFlag = await fixture(html`
+        <feature-flags enable-v12-overflowmenu="true">
+          <cds-overflow-menu label="Actions">
+            <cds-menu>
+              <cds-menu-item label="Stop app"></cds-menu-item>
+            </cds-menu>
+          </cds-overflow-menu>
+        </feature-flags>
+      `);
+      const el = featureFlag.querySelector('cds-overflow-menu');
+
+      el.open = true;
+      await el.updateComplete;
+
+      const menu = el.querySelector('cds-menu');
+      await menu.updateComplete;
+
+      const menuSurface = menu.shadowRoot?.querySelector('.cds--menu');
+
+      expect(menuSurface?.style.position).to.equal('');
+      expect(menuSurface?.style.left).to.equal('');
+      expect(menuSurface?.style.top).to.equal('');
+    });
+
+    it('should apply floating UI styles when dynamic floating styles are enabled', async () => {
+      const featureFlag = await fixture(html`
+        <feature-flags
+          enable-v12-overflowmenu="true"
+          enable-v12-dynamic-floating-styles="true">
+          <cds-overflow-menu label="Actions">
+            <cds-menu>
+              <cds-menu-item label="Stop app"></cds-menu-item>
+            </cds-menu>
+          </cds-overflow-menu>
+        </feature-flags>
+      `);
+      const el = featureFlag.querySelector('cds-overflow-menu');
+
+      el.open = true;
+      await el.updateComplete;
+
+      const menu = el.querySelector('cds-menu');
+      await menu.updateComplete;
+
+      await new Promise((resolve) => {
+        setTimeout(resolve, 0);
+      });
+
+      const menuSurface = menu.shadowRoot?.querySelector('.cds--menu');
+
+      expect(menuSurface?.style.position).to.equal('fixed');
+      expect(menuSurface?.style.left).to.not.equal('');
+      expect(menuSurface?.style.top).to.not.equal('');
+    });
+
+    it('should apply floating UI styles when autoalign is enabled', async () => {
+      const featureFlag = await fixture(html`
+        <feature-flags enable-v12-overflowmenu="true">
+          <cds-overflow-menu label="Actions" autoalign>
+            <cds-menu>
+              <cds-menu-item label="Stop app"></cds-menu-item>
+            </cds-menu>
+          </cds-overflow-menu>
+        </feature-flags>
+      `);
+      const el = featureFlag.querySelector('cds-overflow-menu');
+
+      el.open = true;
+      await el.updateComplete;
+
+      const menu = el.querySelector('cds-menu');
+      await menu.updateComplete;
+
+      await new Promise((resolve) => {
+        setTimeout(resolve, 0);
+      });
+
+      const menuSurface = menu.shadowRoot?.querySelector('.cds--menu');
+
+      expect(el.autoalign).to.be.true;
+      expect(menuSurface?.style.position).to.equal('fixed');
+      expect(menuSurface?.style.left).to.not.equal('');
+      expect(menuSurface?.style.top).to.not.equal('');
+    });
+
+    it('should close the root menu when the managed menu emits a close event', async () => {
+      const featureFlag = await fixture(html`
+        <feature-flags enable-v12-overflowmenu="true">
+          <cds-overflow-menu label="Actions">
+            <cds-menu>
+              <cds-menu-item label="Stop app"></cds-menu-item>
+              <cds-menu-item label="Delete app" kind="danger"></cds-menu-item>
+            </cds-menu>
+          </cds-overflow-menu>
+        </feature-flags>
+      `);
+      const el = featureFlag.querySelector('cds-overflow-menu');
+
+      el.open = true;
+      await el.updateComplete;
+
+      const menu = el.querySelector('cds-menu');
+      await menu.updateComplete;
+
+      menu.dispatchEvent(
+        new CustomEvent('cds-menu-closed', {
+          bubbles: true,
+          composed: true,
+          detail: {
+            triggerEventType: 'click',
+          },
+        })
+      );
+
+      await new Promise((resolve) => {
+        setTimeout(resolve, 0);
+      });
+      await el.updateComplete;
+      await menu.updateComplete;
+
+      expect(el.open).to.be.false;
+      expect(menu.open).to.be.false;
+    });
+
+    it('should focus the first enabled menu item when opened from the trigger', async () => {
+      const featureFlag = await fixture(html`
+        <feature-flags enable-v12-overflowmenu="true">
+          <cds-overflow-menu label="Actions">
+            <cds-menu>
+              <cds-menu-item label="Stop app"></cds-menu-item>
+              <cds-menu-item label="Delete app" kind="danger"></cds-menu-item>
+            </cds-menu>
+          </cds-overflow-menu>
+        </feature-flags>
+      `);
+      const el = featureFlag.querySelector('cds-overflow-menu');
+      const triggerButton = el.shadowRoot?.querySelector('button');
+
+      triggerButton?.click();
+      await el.updateComplete;
+
+      const menu = el.querySelector('cds-menu');
+      await menu.updateComplete;
+      await new Promise((resolve) => {
+        setTimeout(resolve, 0);
+      });
+
+      const firstItem = menu.querySelector('cds-menu-item');
+      expect(document.activeElement).to.equal(firstItem);
+    });
+
+    it('should focus selectable composition when it is the first active item', async () => {
+      const featureFlag = await fixture(html`
+        <feature-flags enable-v12-overflowmenu="true">
+          <cds-overflow-menu label="Actions">
+            <cds-menu>
+              <cds-menu-item-selectable
+                label="Stop app"></cds-menu-item-selectable>
+              <cds-menu-item label="Delete app" kind="danger"></cds-menu-item>
+            </cds-menu>
+          </cds-overflow-menu>
+        </feature-flags>
+      `);
+      const el = featureFlag.querySelector('cds-overflow-menu');
+      const triggerButton = el.shadowRoot?.querySelector('button');
+
+      triggerButton?.click();
+      await el.updateComplete;
+
+      const menu = el.querySelector('cds-menu');
+      await menu.updateComplete;
+      await new Promise((resolve) => {
+        setTimeout(resolve, 0);
+      });
+
+      const firstSelectable = menu.querySelector('cds-menu-item-selectable');
+      const selectableInnerItem =
+        firstSelectable?.shadowRoot?.querySelector('cds-menu-item');
+
+      expect(document.activeElement).to.equal(firstSelectable);
+      expect(firstSelectable?.shadowRoot?.activeElement).to.equal(
+        selectableInnerItem
+      );
+    });
+
+    it('should close when opened from the trigger and the menu emits focusout close', async () => {
+      const featureFlag = await fixture(html`
+        <feature-flags enable-v12-overflowmenu="true">
+          <cds-overflow-menu label="Actions">
+            <cds-menu>
+              <cds-menu-item label="Stop app"></cds-menu-item>
+              <cds-menu-item label="Delete app" kind="danger"></cds-menu-item>
+            </cds-menu>
+          </cds-overflow-menu>
+        </feature-flags>
+      `);
+      const el = featureFlag.querySelector('cds-overflow-menu');
+      const triggerButton = el.shadowRoot?.querySelector('button');
+
+      triggerButton?.click();
+      await el.updateComplete;
+
+      const menu = el.querySelector('cds-menu');
+      await menu.updateComplete;
+      await new Promise((resolve) => {
+        setTimeout(resolve, 0);
+      });
+
+      expect(el.open).to.be.true;
+      menu.dispatchEvent(
+        new CustomEvent('cds-menu-closed', {
+          bubbles: true,
+          composed: true,
+          detail: {
+            triggerEventType: 'focusout',
+          },
+        })
+      );
+
+      await new Promise((resolve) => {
+        setTimeout(resolve, 0);
+      });
+      await el.updateComplete;
+      await menu.updateComplete;
+
+      expect(el.open).to.be.false;
+      expect(menu.open).to.be.false;
+    });
+
+    it('should keep trigger tooltip closed when hovering a v12 menu item', async () => {
+      const featureFlag = await fixture(html`
+        <feature-flags enable-v12-overflowmenu="true">
+          <cds-overflow-menu label="Actions">
+            <cds-menu>
+              <cds-menu-item label="Stop app"></cds-menu-item>
+              <cds-menu-item label="Delete app" kind="danger"></cds-menu-item>
+            </cds-menu>
+          </cds-overflow-menu>
+        </feature-flags>
+      `);
+      const el = featureFlag.querySelector('cds-overflow-menu');
+
+      el.open = true;
+      await el.updateComplete;
+
+      const menu = el.querySelector('cds-menu');
+      await menu.updateComplete;
+
+      const menuItem = menu.querySelector('cds-menu-item[kind="danger"]');
+      const tooltip = el.shadowRoot?.querySelector('cds-tooltip');
+
+      menuItem?.dispatchEvent(new MouseEvent('mouseover', { bubbles: true }));
+
+      await new Promise((resolve) => {
+        setTimeout(resolve, 125);
+      });
+
+      const tooltipContent = el.shadowRoot?.querySelector(
+        'cds-tooltip-content'
+      );
+      expect(tooltip?.open).to.be.false;
+      expect(tooltipContent?.hidden).to.be.true;
     });
   });
 });

@@ -139,8 +139,7 @@ const findHighlightedIndex = <ItemType,>(
 
   for (let i = 0; i < items.length; i++) {
     const item = itemToString(items[i]).toLowerCase();
-    // TODO: Use `isDisabledItem`.
-    if (!items[i]['disabled'] && item.indexOf(searchValue) !== -1) {
+    if (!isDisabledItem(items[i]) && item.indexOf(searchValue) !== -1) {
       return i;
     }
   }
@@ -335,7 +334,7 @@ export interface ComboBoxProps<ItemType>
   }) => boolean;
 
   /**
-   * Specify the size of the ListBox. Currently supports either `sm`, `md` or `lg` as an option.
+   * Specify the size of the ListBox. Currently supports either `xs`, `sm`, `md` or `lg` as an option.
    */
   size?: ListBoxSize;
 
@@ -511,6 +510,14 @@ const ComboBox = forwardRef(
     const prevSelectedItemProp = useRef<ItemType | null | undefined>(
       selectedItemProp
     );
+    const isSyncingControlledSelectionRef = useRef(false);
+    const pendingControlledSelectionRef = useRef<{
+      pending: boolean;
+      value: ItemType | null | undefined;
+    }>({
+      pending: false,
+      value: undefined,
+    });
 
     useEffect(() => {
       isManualClearingRef.current = isClearing;
@@ -524,6 +531,10 @@ const ComboBox = forwardRef(
     // fully controlled combobox: handle changes to selectedItemProp
     useEffect(() => {
       if (prevSelectedItemProp.current !== selectedItemProp) {
+        pendingControlledSelectionRef.current = {
+          pending: true,
+          value: selectedItemProp,
+        };
         const currentInputValue = getInputValue({
           initialSelectedItem,
           itemToString,
@@ -657,10 +668,12 @@ const ComboBox = forwardRef(
                 items.some((item) => itemToString(item) === currentInput);
 
               if (!hasExactMatch) {
+                const selectedItem =
+                  typeof selectedItemProp !== 'undefined'
+                    ? selectedItemProp
+                    : state.selectedItem;
                 const restoredInput =
-                  state.selectedItem !== null
-                    ? itemToString(state.selectedItem)
-                    : '';
+                  selectedItem !== null ? itemToString(selectedItem) : '';
 
                 return { ...changes, inputValue: restoredInput };
               }
@@ -679,9 +692,7 @@ const ComboBox = forwardRef(
                 );
                 const highlightedItem = filteredList[state.highlightedIndex];
 
-                // TODO: Use `isDisabledItem`.
-                // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
-                if (highlightedItem && !(highlightedItem as any).disabled) {
+                if (highlightedItem && !isDisabledItem(highlightedItem)) {
                   return {
                     ...changes,
                     selectedItem: highlightedItem,
@@ -693,9 +704,7 @@ const ComboBox = forwardRef(
                 if (autoIndex !== -1) {
                   const matchingItem = items[autoIndex];
 
-                  // TODO: Use `isDisabledItem`.
-                  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
-                  if (matchingItem && !(matchingItem as any).disabled) {
+                  if (matchingItem && !isDisabledItem(matchingItem)) {
                     return {
                       ...changes,
                       selectedItem: matchingItem,
@@ -729,10 +738,12 @@ const ComboBox = forwardRef(
                 items.some((item) => itemToString(item) === currentInput);
 
               if (!hasExactMatch) {
+                const selectedItem =
+                  typeof selectedItemProp !== 'undefined'
+                    ? selectedItemProp
+                    : state.selectedItem;
                 const restoredInput =
-                  state.selectedItem !== null
-                    ? itemToString(state.selectedItem)
-                    : '';
+                  selectedItem !== null ? itemToString(selectedItem) : '';
 
                 return { ...changes, inputValue: restoredInput };
               }
@@ -883,26 +894,27 @@ const ComboBox = forwardRef(
       initialSelectedItem: initialSelectedItem,
       inputId: id,
       stateReducer,
-      isItemDisabled(item) {
-        // TODO: Use `isDisabledItem`.
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
-        return (item as any)?.disabled;
-      },
+      isItemDisabled: isDisabledItem,
       ...downshiftProps,
       onStateChange: ({ type, selectedItem: newSelectedItem }) => {
+        if (
+          isManualClearingRef.current ||
+          isSyncingControlledSelectionRef.current
+        ) {
+          isSyncingControlledSelectionRef.current = false;
+          return;
+        }
         downshiftProps?.onStateChange?.({
           type,
           selectedItem: newSelectedItem,
         });
-        if (isManualClearingRef.current) {
-          return;
-        }
         if (
           (type === ItemClick ||
             type === FunctionSelectItem ||
-            type === InputKeyDownEnter) &&
+            type === InputKeyDownEnter ||
+            (!allowCustomValue && type === InputBlur)) &&
           typeof newSelectedItem !== 'undefined' &&
-          !isEqual(selectedItemProp, newSelectedItem)
+          !isEqual(currentSelectedItem, newSelectedItem)
         ) {
           if (items.some((item) => isEqual(item, newSelectedItem))) {
             committedCustomValueRef.current = '';
@@ -917,6 +929,19 @@ const ComboBox = forwardRef(
     // Downshift's own selection when uncontrolled.
     const currentSelectedItem =
       typeof selectedItemProp !== 'undefined' ? selectedItemProp : selectedItem;
+
+    useEffect(() => {
+      if (pendingControlledSelectionRef.current.pending) {
+        const { value } = pendingControlledSelectionRef.current;
+        const nextSelectedItem = typeof value === 'undefined' ? null : value;
+        pendingControlledSelectionRef.current.pending = false;
+
+        if (!isEqual(selectedItem, nextSelectedItem)) {
+          isSyncingControlledSelectionRef.current = true;
+          selectItem(nextSelectedItem);
+        }
+      }
+    }, [selectedItem, selectedItemProp, selectItem]);
 
     useEffect(() => {
       // Used to expose the downshift actions to consumers for use with downshiftProps
@@ -1483,7 +1508,7 @@ ComboBox.propTypes = {
   shouldFilterItem: PropTypes.func,
 
   /**
-   * Specify the size of the ListBox. Currently supports either `sm`, `md` or `lg` as an option.
+   * Specify the size of the ListBox. Currently supports either `xs`, `sm`, `md` or `lg` as an option.
    */
   size: ListBoxSizePropType,
 
@@ -1533,8 +1558,7 @@ type ComboboxComponentProps<ItemType> = PropsWithChildren<
   RefAttributes<HTMLInputElement>;
 
 export interface ComboBoxComponent {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
-  <ItemType>(props: ComboboxComponentProps<ItemType>): ReactElement<any> | null;
+  <ItemType>(props: ComboboxComponentProps<ItemType>): ReactElement | null;
 }
 
 export default ComboBox as ComboBoxComponent;

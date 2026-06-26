@@ -172,16 +172,25 @@ export function Toggletip<E extends ElementType = 'span'>({
   });
 
   useEffect(() => {
-    if (!ref.current) return;
+    if (!open || !ref.current) return;
 
     const targetDocument = ref.current.ownerDocument || document;
     const eventType: 'pointerdown' | 'mousedown' =
       'PointerEvent' in window ? 'pointerdown' : 'mousedown';
 
     const handleOutsideClick = (event: MouseEvent | PointerEvent) => {
-      const node = event.target as Node | null;
+      const { current } = ref;
+      if (!current) return;
 
-      if (open && node && !ref.current?.contains(node)) {
+      const isInsideCurrent = (target: EventTarget | null): target is Node =>
+        target instanceof Node && current.contains(target);
+
+      const isInside =
+        isInsideCurrent(event.target) ||
+        (typeof event.composedPath === 'function' &&
+          event.composedPath().some(isInsideCurrent));
+
+      if (!isInside) {
         setOpen(false);
       }
     };

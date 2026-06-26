@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2019, 2025
+ * Copyright IBM Corp. 2019, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -10,8 +10,8 @@ import { prefix } from '../../globals/settings';
 import { ACCORDION_SIZE } from './accordion';
 import './index';
 import '../layer/index';
-import '../../../.storybook/templates/with-layer';
 import styles from './accordion.scss?lit';
+import { withLayers } from '../../../.storybook/decorators/with-layers';
 
 const sizes = {
   [`Small size (${ACCORDION_SIZE.SMALL})`]: ACCORDION_SIZE.SMALL,
@@ -50,21 +50,20 @@ const argTypes = {
   },
   onBeforeToggle: {
     action: `${prefix}-accordion-item-beingtoggled`,
-    table: {
-      disable: true,
-    },
   },
   onToggle: {
     action: `${prefix}-accordion-item-toggled`,
-    table: {
-      disable: true,
-    },
   },
 };
 
 export const Default = {
   args,
   argTypes,
+  parameters: {
+    controls: {
+      exclude: ['onBeforeToggle', 'onToggle'],
+    },
+  },
   render: ({
     alignment,
     isFlush,
@@ -238,6 +237,10 @@ export const Skeleton = {
 };
 
 export const WithLayer = {
+  decorators: [withLayers],
+  parameters: {
+    layout: 'fullscreen',
+  },
   args,
   argTypes,
   render: ({
@@ -249,42 +252,40 @@ export const WithLayer = {
     onToggle,
   }) => {
     return html`
-      <sb-template-layers>
-        <cds-accordion
-          alignment="${alignment}"
-          size="${size}"
-          ?isFlush="${isFlush}"
-          ?disabled="${disabled}">
-          <cds-accordion-item
-            title="Choose your plan"
-            @cds-accordion-item-beingtoggled="${onBeforeToggle}"
-            @cds-accordion-item-toggled="${onToggle}">
-            Compare plan features and select the option that best matches your
-            team's expected usage.
-          </cds-accordion-item>
-          <cds-accordion-item
-            title="Add team members"
-            @cds-accordion-item-beingtoggled="${onBeforeToggle}"
-            @cds-accordion-item-toggled="${onToggle}">
-            Invite collaborators by email and assign their workspace roles
-            before launch.
-          </cds-accordion-item>
-          <cds-accordion-item
-            title="Set payment details"
-            @cds-accordion-item-beingtoggled="${onBeforeToggle}"
-            @cds-accordion-item-toggled="${onToggle}">
-            Add billing information and choose whether to receive invoices by
-            email.
-          </cds-accordion-item>
-          <cds-accordion-item
-            title="Review and confirm"
-            @cds-accordion-item-beingtoggled="${onBeforeToggle}"
-            @cds-accordion-item-toggled="${onToggle}">
-            Check your setup summary, then confirm to create the workspace for
-            your team.
-          </cds-accordion-item>
-        </cds-accordion>
-      </sb-template-layers>
+      <cds-accordion
+        alignment="${alignment}"
+        size="${size}"
+        ?isFlush="${isFlush}"
+        ?disabled="${disabled}">
+        <cds-accordion-item
+          title="Choose your plan"
+          @cds-accordion-item-beingtoggled="${onBeforeToggle}"
+          @cds-accordion-item-toggled="${onToggle}">
+          Compare plan features and select the option that best matches your
+          team's expected usage.
+        </cds-accordion-item>
+        <cds-accordion-item
+          title="Add team members"
+          @cds-accordion-item-beingtoggled="${onBeforeToggle}"
+          @cds-accordion-item-toggled="${onToggle}">
+          Invite collaborators by email and assign their workspace roles before
+          launch.
+        </cds-accordion-item>
+        <cds-accordion-item
+          title="Set payment details"
+          @cds-accordion-item-beingtoggled="${onBeforeToggle}"
+          @cds-accordion-item-toggled="${onToggle}">
+          Add billing information and choose whether to receive invoices by
+          email.
+        </cds-accordion-item>
+        <cds-accordion-item
+          title="Review and confirm"
+          @cds-accordion-item-beingtoggled="${onBeforeToggle}"
+          @cds-accordion-item-toggled="${onToggle}">
+          Check your setup summary, then confirm to create the workspace for
+          your team.
+        </cds-accordion-item>
+      </cds-accordion>
     `;
   },
 };

@@ -64,11 +64,12 @@ const devTools = {
   },
 };
 
+// always use full locale code strings for values
 const globalTypes = {
   locale: {
     name: 'Locale',
     description: 'Set the localization for the storybook',
-    defaultValue: 'en',
+    defaultValue: 'en-US',
     toolbar: {
       icon: 'globe',
       title: 'Locale',
@@ -86,7 +87,7 @@ const globalTypes = {
         {
           right: '🇵🇸',
           title: 'Arabic',
-          value: 'ar',
+          value: 'ar-SA',
         },
         {
           right: '🇯🇵',
@@ -120,16 +121,6 @@ const globalTypes = {
           value: 'rtl',
         },
       ],
-    },
-  },
-  theme: {
-    name: 'Theme',
-    description: 'Set the global theme for displaying components',
-    defaultValue: 'white',
-    toolbar: {
-      icon: 'paintbrush',
-      title: 'Theme',
-      items: ['white', 'g10', 'g90', 'g100'],
     },
   },
   ...(process.env.NODE_ENV === 'development' ? devTools : {}),
@@ -327,19 +318,38 @@ const parameters = {
     },
   },
   chromatic: {
+    // g90 is intentionally excluded from global Chromatic coverage to reduce
+    // snapshot volume. Individual stories can opt into g90 coverage by setting
+    // parameters.chromatic.modes to include allModes.g90
     modes: {
       g10: allModes['g10'],
-      g90: allModes['g90'],
       g100: allModes['g100'],
       'breakpoint-sm': allModes['breakpoint-sm'],
     },
   },
 };
 
+// Helper function to map background values to theme names
+function getThemeFromBackground(backgroundValue) {
+  const backgroundThemeMap = {
+    [white.background]: 'white',
+    white: 'white',
+    [g10.background]: 'g10',
+    g10: 'g10',
+    [g90.background]: 'g90',
+    g90: 'g90',
+    [g100.background]: 'g100',
+    g100: 'g100',
+  };
+  return backgroundThemeMap[backgroundValue] ?? 'white';
+}
+
 const decorators = [
   (Story, context) => {
-    const { layoutDensity, layoutSize, locale, dir, theme } = context.globals;
+    const { layoutDensity, layoutSize, locale, dir } = context.globals;
+    const backgroundValue = context.globals.backgrounds?.value;
     const [randomKey, setRandomKey] = useState(1);
+    const theme = getThemeFromBackground(backgroundValue);
 
     useEffect(() => {
       document.documentElement.setAttribute('data-carbon-theme', theme);

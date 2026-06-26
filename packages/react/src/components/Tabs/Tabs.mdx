@@ -103,7 +103,8 @@ what is in rendered inside of `Tab` and `TabPanel`.
   additionalActions={[
     {
       title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(TabsStories.ContainedWithSecondaryLabels),
+      onClick: () =>
+        stackblitzPrefillConfig(TabsStories.ContainedWithSecondaryLabels),
     },
   ]}
 />
@@ -115,7 +116,10 @@ what is in rendered inside of `Tab` and `TabPanel`.
   additionalActions={[
     {
       title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(TabsStories.ContainedWithSecondaryLabelsAndIcons),
+      onClick: () =>
+        stackblitzPrefillConfig(
+          TabsStories.ContainedWithSecondaryLabelsAndIcons
+        ),
     },
   ]}
 />
@@ -272,7 +276,7 @@ And there you have it! Working dismissable tabs.
   ]}
 />
 
-Dismissable With Icons: 
+Dismissable With Icons:
 
 <Canvas
   of={TabsStories.DismissableWithIcons}

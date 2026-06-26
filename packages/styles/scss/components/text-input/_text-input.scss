@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2016, 2025
+// Copyright IBM Corp. 2016, 2026
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -31,7 +31,7 @@
 /// @group text-input
 @mixin text-input {
   .#{$prefix}--text-input {
-    @include layout.use('size', $default: 'md', $min: 'sm', $max: 'lg');
+    @include layout.use('size', $default: 'md', $min: 'xs', $max: 'lg');
     @include layout.use('density', $default: 'normal');
     @include component-reset.reset;
     @include type-style('body-compact-01');
@@ -61,15 +61,7 @@
   }
 
   .#{$prefix}--password-input {
-    padding-inline-end: $spacing-08;
-  }
-
-  .#{$prefix}--text-input--sm.#{$prefix}--password-input {
-    padding-inline-end: $spacing-07;
-  }
-
-  .#{$prefix}--text-input--lg.#{$prefix}--password-input {
-    padding-inline-end: $spacing-09;
+    padding-inline-end: layout.size('height');
   }
 
   .#{$prefix}--text-input::placeholder {
@@ -123,31 +115,24 @@
     justify-content: center;
     padding: 0;
     border: 0;
+    aspect-ratio: 1;
     background: none;
     block-size: 100%;
     cursor: pointer;
-    inline-size: convert.to-rem(40px);
     inset-inline-end: 0;
     min-block-size: auto;
     transition: outline $duration-fast-01 motion(standard, productive);
   }
 
   .#{$prefix}--toggle-password-tooltip .#{$prefix}--popover {
-    inset-inline-start: -($spacing-08);
+    @include layout.use('size', $default: 'md', $min: 'xs', $max: 'lg');
+
+    gap: $spacing-02;
+    inset-inline-start: calc(-1 * (layout.size('height')));
   }
 
   .#{$prefix}--toggle-password-tooltip .#{$prefix}--popover-content {
     min-inline-size: $spacing-08;
-  }
-
-  .#{$prefix}--text-input--sm
-    + .#{$prefix}--btn.#{$prefix}--text-input--password__visibility__toggle.#{$prefix}--tooltip__trigger {
-    inline-size: convert.to-rem(32px);
-  }
-
-  .#{$prefix}--text-input--lg
-    + .#{$prefix}--btn.#{$prefix}--text-input--password__visibility__toggle.#{$prefix}--tooltip__trigger {
-    inline-size: convert.to-rem(48px);
   }
 
   .#{$prefix}--btn.#{$prefix}--text-input--password__visibility__toggle.#{$prefix}--tooltip__trigger
@@ -164,17 +149,15 @@
     padding-inline-end: $spacing-08;
   }
 
-  .#{$prefix}--text-input--invalid.#{$prefix}--password-input {
-    padding-inline-end: convert.to-rem(64px);
-  }
-
-  .#{$prefix}--text-input--invalid
-    + .#{$prefix}--text-input--password__visibility__toggle {
-    inset-inline-end: $spacing-05;
+  .#{$prefix}--text-input--invalid.#{$prefix}--password-input,
+  .#{$prefix}--text-input--warning.#{$prefix}--password-input {
+    padding-inline-end: calc(layout.size('height') + 1.5rem);
   }
 
   .#{$prefix}--password-input-wrapper .#{$prefix}--text-input__invalid-icon {
-    inset-inline-end: $spacing-08;
+    @include layout.use('size', $default: 'md', $min: 'xs', $max: 'lg');
+
+    inset-inline-end: layout.size('height');
   }
 
   .#{$prefix}--text-input:disabled
@@ -251,10 +234,6 @@
     @include focus-outline('invalid');
 
     box-shadow: none;
-
-    .#{$prefix}--text-input--password__visibility__toggle {
-      inset-inline-end: $spacing-08;
-    }
   }
 
   //-----------------------------
@@ -363,34 +342,41 @@
   //-----------------------------
 
   .#{$prefix}--text-input-wrapper.#{$prefix}--text-input-wrapper--inline {
-    flex-flow: row wrap;
+    flex-flow: row nowrap;
+    align-items: center;
   }
 
   .#{$prefix}--text-input-wrapper .#{$prefix}--label--inline {
-    flex: 1;
-    margin: convert.to-rem(13px) 0 0 0;
+    flex: 0 1 auto;
+    margin: 0;
     overflow-wrap: break-word;
     word-break: break-word;
   }
 
-  .#{$prefix}--text-input-wrapper .#{$prefix}--label--inline--sm {
-    margin-block-start: convert.to-rem(9px);
-  }
-
-  .#{$prefix}--text-input-wrapper .#{$prefix}--label--inline--lg {
-    margin-block-start: convert.to-rem(17px);
-  }
-
   .#{$prefix}--text-input__label-helper-wrapper {
-    flex: 2;
+    flex: 0 1 auto;
     flex-direction: column;
-    margin-inline-end: convert.to-rem(24px);
-    max-inline-size: convert.to-rem(128px);
+    max-inline-size: convert.to-rem(142px);
     overflow-wrap: break-word;
+
+    &:first-of-type {
+      margin-inline-end: $spacing-03;
+    }
+
+    &:last-of-type {
+      margin-inline-start: $spacing-03;
+    }
   }
 
   .#{$prefix}--text-input-wrapper .#{$prefix}--form__helper-text--inline {
     margin-block-start: convert.to-rem(2px);
+  }
+
+  .#{$prefix}--text-input-wrapper--inline {
+    .#{$prefix}--form__helper-text--inline,
+    .#{$prefix}--form-requirement {
+      margin: 0;
+    }
   }
 
   .#{$prefix}--text-input__field-outer-wrapper {
@@ -460,15 +446,18 @@
     ) {
     @include ai-gradient;
   }
-
   .#{$prefix}--text-input__field-wrapper--decorator
-    .#{$prefix}--text-input:has(
-      ~ .#{$prefix}--text-input__field-inner-wrapper--decorator > *
-    ),
+    .#{$prefix}--text-input:not(.#{$prefix}--text-input--invalid):not(
+      .#{$prefix}--text-input--warning
+    ):has(~ .#{$prefix}--text-input__field-inner-wrapper--decorator > *),
   .#{$prefix}--text-input__field-wrapper--slug
-    .#{$prefix}--text-input:has(~ .#{$prefix}--ai-label),
+    .#{$prefix}--text-input:not(.#{$prefix}--text-input--invalid):not(
+      .#{$prefix}--text-input--warning
+    ):has(~ .#{$prefix}--ai-label),
   .#{$prefix}--text-input__field-wrapper--slug
-    .#{$prefix}--text-input:has(~ .#{$prefix}--slug) {
+    .#{$prefix}--text-input:not(.#{$prefix}--text-input--invalid):not(
+      .#{$prefix}--text-input--warning
+    ):has(~ .#{$prefix}--slug) {
     padding-inline-end: $spacing-08;
   }
 
@@ -485,17 +474,25 @@
     padding-inline-end: $spacing-10;
   }
 
-  .#{$prefix}--text-input--invalid
-    ~ .#{$prefix}--text-input__field-inner-wrapper--decorator
-    > *,
-  .#{$prefix}--text-input--warning
-    ~ .#{$prefix}--text-input__field-inner-wrapper--decorator
-    > *,
-  .#{$prefix}--text-input--invalid ~ .#{$prefix}--ai-label,
-  .#{$prefix}--text-input--warning ~ .#{$prefix}--ai-label,
-  .#{$prefix}--text-input--invalid ~ .#{$prefix}--slug,
-  .#{$prefix}--text-input--warning ~ .#{$prefix}--slug {
-    inset-inline-end: $spacing-08;
+  .#{$prefix}--text-input__field-wrapper--decorator,
+  .#{$prefix}--text-input__field-wrapper--slug {
+    .#{$prefix}--text-input--invalid ~ .#{$prefix}--text-input__invalid-icon,
+    .#{$prefix}--text-input--warning ~ .#{$prefix}--text-input__invalid-icon {
+      inset-inline-end: $spacing-08;
+    }
+
+    .#{$prefix}--text-input--invalid
+      ~ .#{$prefix}--text-input__field-inner-wrapper--decorator
+      > *,
+    .#{$prefix}--text-input--warning
+      ~ .#{$prefix}--text-input__field-inner-wrapper--decorator
+      > *,
+    .#{$prefix}--text-input--invalid ~ .#{$prefix}--ai-label,
+    .#{$prefix}--text-input--warning ~ .#{$prefix}--ai-label,
+    .#{$prefix}--text-input--invalid ~ .#{$prefix}--slug,
+    .#{$prefix}--text-input--warning ~ .#{$prefix}--slug {
+      inset-inline-end: $spacing-05;
+    }
   }
 
   // Decorator

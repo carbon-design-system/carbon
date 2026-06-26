@@ -218,6 +218,53 @@ describe('MultiSelect', () => {
     ).toBeNull();
   });
 
+  it('should move focus to the next control when the user tabs away with the menu open', async () => {
+    jest.useFakeTimers();
+
+    const user = userEvent.setup({
+      advanceTimers: jest.advanceTimersByTime,
+    });
+
+    try {
+      const items = generateItems(4, generateGenericItem);
+      render(
+        <>
+          <MultiSelect id="test" label="test-label" items={items} />
+          <input data-testid="next-input" type="text" />
+        </>
+      );
+
+      const combobox = screen.getByRole('combobox');
+      const nextInput = screen.getByTestId('next-input');
+
+      // Tab to focus the combobox
+      await user.tab();
+      expect(combobox).toHaveFocus();
+
+      // Open the menu with Space
+      await user.keyboard('[Space]');
+      expect(combobox).toHaveAttribute('aria-expanded', 'true');
+
+      // Verify focus is still on combobox before tabbing
+      expect(combobox).toHaveFocus();
+
+      // Tab away from the combobox
+      await user.tab();
+      act(() => {
+        jest.runOnlyPendingTimers();
+      });
+
+      // Verify focus moved to the next interactive element
+      expect(nextInput).toHaveFocus();
+      expect(document.activeElement).toBe(nextInput);
+
+      // Verify menu is closed after tabbing away
+      expect(combobox).toHaveAttribute('aria-expanded', 'false');
+    } finally {
+      jest.useRealTimers();
+    }
+  });
+
   it('close menu with click outside of field', async () => {
     const items = generateItems(4, generateGenericItem);
     const label = 'test-label';
@@ -320,6 +367,29 @@ describe('MultiSelect', () => {
     expect(onMenuChange).toHaveBeenLastCalledWith(false);
   });
 
+  it('should call `onMenuChange` when user interaction toggles the menu', async () => {
+    const onMenuChange = jest.fn();
+    const items = generateItems(4, generateGenericItem);
+
+    render(
+      <MultiSelect
+        id="test"
+        label="test-label"
+        items={items}
+        onMenuChange={onMenuChange}
+      />
+    );
+    await waitForPosition();
+
+    const combobox = screen.getByRole('combobox');
+
+    await userEvent.click(combobox);
+    expect(onMenuChange).toHaveBeenNthCalledWith(1, true);
+
+    await userEvent.keyboard('[Escape]');
+    expect(onMenuChange).toHaveBeenNthCalledWith(2, false);
+  });
+
   it('should toggle selection with enter', async () => {
     const items = generateItems(4, generateGenericItem);
     const label = 'test-label';
@@ -368,18 +438,45 @@ describe('MultiSelect', () => {
 
     expect(
       // eslint-disable-next-line testing-library/no-node-access
-      document.querySelector('[aria-label="Clear all selected items"]')
+      document.querySelector('[aria-label="Clear selected item"]')
     ).toBeTruthy();
 
     await userEvent.click(
       // eslint-disable-next-line testing-library/no-node-access
-      document.querySelector('[aria-label="Clear all selected items"]')
+      document.querySelector('[aria-label="Clear selected item"]')
     );
 
     expect(
       // eslint-disable-next-line testing-library/no-node-access
-      document.querySelector('[aria-label="Clear all selected items"]')
+      document.querySelector('[aria-label="Clear selected item"]')
     ).toBeFalsy();
+  });
+
+  it('should clear selected items and announce it when Delete is pressed', async () => {
+    const items = generateItems(4, generateGenericItem);
+    render(
+      <MultiSelect
+        id="test"
+        label="test-label"
+        items={items}
+        initialSelectedItems={[items[0]]}
+      />
+    );
+    await waitForPosition();
+
+    const combobox = screen.getByRole('combobox');
+    expect(
+      screen.getByRole('button', { name: 'Clear selected item' })
+    ).toBeInTheDocument();
+
+    await userEvent.click(combobox);
+    await userEvent.keyboard('[Escape]');
+    await userEvent.keyboard('[Delete]');
+
+    expect(
+      screen.queryByRole('button', { name: 'Clear selected item' })
+    ).not.toBeInTheDocument();
+    expect(screen.getByLabelText('all items have been cleared')).toBeVisible();
   });
 
   it('should not be interactive if disabled', async () => {
@@ -434,7 +531,7 @@ describe('MultiSelect', () => {
 
       expect(
         // eslint-disable-next-line testing-library/no-node-access
-        document.querySelector('[aria-label="Clear all selected items"]')
+        document.querySelector('[aria-label="Clear selected items"]')
       ).toBeTruthy();
 
       // eslint-disable-next-line testing-library/prefer-screen-queries
@@ -670,6 +767,65 @@ describe('MultiSelect', () => {
 
       // the first option in the list to the the former third option in the list
       expect(optionsArray[0]).toHaveAttribute('aria-label', 'Item 2');
+    });
+
+    it('should keep item order when `selectionFeedback` is `fixed`', async () => {
+      const items = generateItems(4, generateGenericItem);
+      const label = 'test-label';
+      const thirdItem = items[2];
+      const { container } = render(
+        <MultiSelect
+          id="custom-id"
+          selectionFeedback="fixed"
+          label={label}
+          items={items}
+        />
+      );
+
+      await waitForPosition();
+
+      const labelNode = getByText(container, label);
+      await userEvent.click(labelNode);
+
+      const itemNode = getByText(container, thirdItem.label);
+      await userEvent.click(itemNode);
+
+      const optionsArray = screen.getAllByRole('option');
+
+      expect(optionsArray[0]).toHaveAttribute('aria-label', 'Item 0');
+      expect(optionsArray[2]).toHaveAttribute('aria-label', 'Item 2');
+    });
+
+    it('should apply floating styles when `autoAlign` is enabled', async () => {
+      const items = generateItems(4, generateGenericItem);
+
+      render(
+        <MultiSelect
+          autoAlign
+          open
+          id="test"
+          label="test-label"
+          items={items}
+        />
+      );
+      await waitForPosition();
+
+      const combobox = screen.getByRole('combobox');
+      const listbox = screen.getByRole('listbox', { hidden: true });
+      const multiSelect = combobox.closest(`.${prefix}--multi-select`);
+
+      expect(multiSelect).toHaveClass(
+        `${prefix}--multi-select`,
+        `${prefix}--autoalign`,
+        `${prefix}--list-box`,
+        `${prefix}--list-box--expanded`,
+        { exact: true }
+      );
+
+      await waitFor(() => {
+        expect(listbox.style.visibility).toBe('hidden');
+        expect(listbox.style.width).toBe('0px');
+      });
     });
 
     it('should accept a `ref` for the underlying button element', async () => {

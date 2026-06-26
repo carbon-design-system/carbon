@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -9,6 +9,7 @@ import Pagination from './Pagination';
 import React from 'react';
 import { action } from 'storybook/actions';
 import mdx from './Pagination.mdx';
+import userEvent from '@testing-library/user-event';
 
 const props = () => ({
   disabled: false,
@@ -30,12 +31,22 @@ export default {
   component: Pagination,
   argTypes: {
     size: {
-      options: ['sm', 'md', 'lg'],
+      options: ['xs', 'sm', 'md', 'lg'],
+      control: { type: 'select' },
+    },
+    backwardTextTooltipPosition: {
+      options: ['top', 'right', 'bottom', 'left'],
+      control: { type: 'select' },
+    },
+    forwardTextTooltipPosition: {
+      options: ['top', 'right', 'bottom', 'left'],
       control: { type: 'select' },
     },
   },
   args: {
     size: 'md',
+    backwardTextTooltipPosition: 'top',
+    forwardTextTooltipPosition: 'top',
   },
   decorators: [
     (story) => (
@@ -55,7 +66,9 @@ export const Default = (args) => {
 
 Default.args = {
   backwardText: 'Previous',
+  backwardTextTooltipPosition: 'top',
   forwardText: 'Next',
+  forwardTextTooltipPosition: 'top',
   disabled: false,
   isLastPage: false,
   itemsPerPageText: 'Items per page:',
@@ -84,10 +97,18 @@ Default.argTypes = {
       type: 'text',
     },
   },
+  backwardTextTooltipPosition: {
+    options: ['top', 'right', 'bottom', 'left'],
+    control: { type: 'select' },
+  },
   forwardText: {
     control: {
       type: 'text',
     },
+  },
+  forwardTextTooltipPosition: {
+    options: ['top', 'right', 'bottom', 'left'],
+    control: { type: 'select' },
   },
   disabled: {
     control: {
@@ -140,13 +161,27 @@ Default.argTypes = {
     },
   },
   size: {
-    options: ['sm', 'md', 'lg'],
+    options: ['xs', 'sm', 'md', 'lg'],
     control: { type: 'select' },
   },
   totalItems: {
     control: {
       type: 'number',
     },
+  },
+};
+
+export const TooltipHover = {
+  ...Default,
+  tags: ['!autodocs', '!dev'],
+  parameters: {
+    chromatic: { delay: 100 },
+  },
+  play: async ({ canvasElement }) => {
+    const nextButton = canvasElement.querySelector(
+      '.cds--pagination__button--forward'
+    );
+    await userEvent.hover(nextButton);
   },
 };
 
@@ -183,17 +218,24 @@ PaginationWithCustomPageSizesLabel.storyName =
   'Pagination with custom page sizes label';
 
 export const PaginationUnknownPages = (args) => {
+  const { pageInputDisabled, pagesUnknown, totalItems, ...rest } = args ?? {};
+
   return (
     <div>
       <Pagination
         {...props()}
-        pagesUnknown={true}
-        totalItems={undefined}
         page={1}
-        {...args}
+        {...rest}
+        pagesUnknown
+        totalItems={undefined}
       />
     </div>
   );
 };
 
 PaginationUnknownPages.storyName = 'Unknown pages and items';
+PaginationUnknownPages.parameters = {
+  controls: {
+    exclude: ['pageInputDisabled', 'pagesUnknown', 'totalItems'],
+  },
+};

@@ -52,6 +52,11 @@ export default {
   },
 };
 
+const sharedArgs = {
+  invalidText: 'Error message goes here',
+  warnText: 'Warning message goes here',
+};
+
 const sharedArgTypes = {
   onChange: {
     action: 'onChange',
@@ -130,6 +135,7 @@ export const Default = ({ readOnly, ...args }) => {
         placeholder="mm/dd/yyyy"
         labelText="Date Picker label"
         id="date-picker-single"
+        {...sharedArgs}
         {...args}
       />
       {args.datePickerType === 'range' && (
@@ -138,6 +144,7 @@ export const Default = ({ readOnly, ...args }) => {
           labelText="End date"
           size="md"
           id="date-picker-input-2"
+          {...sharedArgs}
           {...args}
         />
       )}
@@ -159,6 +166,7 @@ export const Simple = (args) => (
       placeholder="mm/dd/yyyy"
       labelText="Date Picker label"
       id="date-picker-simple"
+      {...sharedArgs}
       {...args}
     />
   </DatePicker>
@@ -173,6 +181,7 @@ export const SingleWithCalendar = (args) => (
       labelText="Date Picker label"
       id="date-picker-single"
       size="md"
+      {...sharedArgs}
       {...args}
     />
   </DatePicker>
@@ -188,6 +197,7 @@ export const RangeWithCalendar = (args) => {
         placeholder="mm/dd/yyyy"
         labelText="Start date"
         size="md"
+        {...sharedArgs}
         {...args}
       />
       <DatePickerInput
@@ -195,6 +205,7 @@ export const RangeWithCalendar = (args) => {
         placeholder="mm/dd/yyyy"
         labelText="End date"
         size="md"
+        {...sharedArgs}
         {...args}
       />
     </DatePicker>
@@ -212,6 +223,7 @@ export const SimpleWithLayer = (args) => (
           labelText="Date Picker label"
           id={`date-picker-simple-${layer}`}
           size="md"
+          {...sharedArgs}
           {...args}
         />
       </DatePicker>
@@ -230,6 +242,7 @@ export const SingleWithCalendarWithLayer = (args) => (
           labelText="Date Picker label"
           id={`date-picker-single-${layer}`}
           size="md"
+          {...sharedArgs}
           {...args}
         />
       </DatePicker>
@@ -248,6 +261,7 @@ export const RangeWithCalendarWithLayer = (args) => (
           placeholder="mm/dd/yyyy"
           labelText="Start date"
           size="md"
+          {...sharedArgs}
           {...args}
         />
         <DatePickerInput
@@ -255,6 +269,7 @@ export const RangeWithCalendarWithLayer = (args) => (
           placeholder="mm/dd/yyyy"
           labelText="End date"
           size="md"
+          {...sharedArgs}
           {...args}
         />
       </DatePicker>
@@ -308,6 +323,7 @@ export const withAILabel = (args) => {
           size="md"
           id="date-picker"
           decorator={aiLabel}
+          {...sharedArgs}
           {...args}
         />
       </DatePicker>

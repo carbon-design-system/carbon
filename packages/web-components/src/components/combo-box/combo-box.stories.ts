@@ -15,6 +15,7 @@ import Folders16 from '@carbon/icons/es/folders/16.js';
 import '../ai-label/index';
 import '../button/index';
 import { iconLoader } from '../../globals/internal/icon-loader';
+import { withLayers } from '../../../.storybook/decorators/with-layers';
 
 const items = [
   {
@@ -50,6 +51,8 @@ const directionOptions = {
 };
 
 const sizes = {
+  [`Extra small size (${DROPDOWN_SIZE.EXTRA_SMALL})`]:
+    DROPDOWN_SIZE.EXTRA_SMALL,
   [`Small size (${DROPDOWN_SIZE.SMALL})`]: DROPDOWN_SIZE.SMALL,
   'Regular size': null,
   [`Large size (${DROPDOWN_SIZE.LARGE})`]: DROPDOWN_SIZE.LARGE,
@@ -591,6 +594,10 @@ export const WithAILabel = {
 };
 
 export const WithLayer = {
+  decorators: [withLayers],
+  parameters: {
+    layout: 'fullscreen',
+  },
   argTypes: controls,
   args: {
     ...defaultArgs,
@@ -619,39 +626,37 @@ export const WithLayer = {
       inputProps,
     } = args ?? {};
     return html`
-      <sb-template-layers>
-        <div style="width:300px">
-          <cds-combo-box
-            .inputProps=${inputProps}
-            direction=${ifDefined(direction)}
-            ?autoalign=${autoalign}
-            ?disabled=${disabled}
-            helper-text=${ifDefined(helperText)}
-            ?hide-label=${hideLabel}
-            ?invalid=${invalid}
-            invalid-text=${ifDefined(invalidText)}
-            ?read-only=${readOnly}
-            ?allow-custom-value=${allowCustomValue}
-            title-text=${ifDefined(titleText)}
-            size=${ifDefined(size)}
-            type=${ifDefined(type)}
-            value=${ifDefined(value)}
-            label=${ifDefined(label)}
-            ?warn=${warn}
-            warn-text=${ifDefined(warnText)}
-            ?typeahead=${typeahead}>
-            ${items.map(
-              (elem) => html`
-                <cds-combo-box-item
-                  ?disabled=${elem.disabled}
-                  value="${elem.value}"
-                  >${elem.text}</cds-combo-box-item
-                >
-              `
-            )}
-          </cds-combo-box>
-        </div>
-      </sb-template-layers>
+      <div style="width:300px">
+        <cds-combo-box
+          .inputProps=${inputProps}
+          direction=${ifDefined(direction)}
+          ?autoalign=${autoalign}
+          ?disabled=${disabled}
+          helper-text=${ifDefined(helperText)}
+          ?hide-label=${hideLabel}
+          ?invalid=${invalid}
+          invalid-text=${ifDefined(invalidText)}
+          ?read-only=${readOnly}
+          ?allow-custom-value=${allowCustomValue}
+          title-text=${ifDefined(titleText)}
+          size=${ifDefined(size)}
+          type=${ifDefined(type)}
+          value=${ifDefined(value)}
+          label=${ifDefined(label)}
+          ?warn=${warn}
+          warn-text=${ifDefined(warnText)}
+          ?typeahead=${typeahead}>
+          ${items.map(
+            (elem) => html`
+              <cds-combo-box-item
+                ?disabled=${elem.disabled}
+                value="${elem.value}"
+                >${elem.text}</cds-combo-box-item
+              >
+            `
+          )}
+        </cds-combo-box>
+      </div>
     `;
   },
 };

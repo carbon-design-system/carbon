@@ -749,7 +749,11 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
               : Number(event.target.value),
           direction: value < event.target.value ? 'up' : 'down',
         };
-        setValue(state.value);
+
+        // Only update internal state if component is uncontrolled
+        if (controlledValue === undefined) {
+          setValue(state.value);
+        }
 
         if (onChange) {
           onChange(event, state);
@@ -833,7 +837,10 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
         };
 
         if (type === 'number') {
-          setValue(state.value);
+          // Only update internal state if component is uncontrolled
+          if (controlledValue === undefined) {
+            setValue(state.value);
+          }
         }
 
         if (type === 'text') {
@@ -920,7 +927,7 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
               onChange={handleOnChange}
               onKeyUp={onKeyUp}
               onKeyDown={(e) => {
-                if (type === 'text') {
+                if (type === 'text' && !readOnly && !disabled) {
                   if (match(e, keys.ArrowUp)) {
                     handleStep(e, 'up');
                   } else if (match(e, keys.ArrowDown)) {

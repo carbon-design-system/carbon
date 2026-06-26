@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2019, 2025
+ * Copyright IBM Corp. 2019, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -14,12 +14,14 @@ import Close16 from '@carbon/icons/es/close/16.js';
 import ifNonEmpty from '../../globals/directives/if-non-empty';
 import FocusMixin from '../../globals/mixins/focus';
 import FormMixin from '../../globals/mixins/form';
-import { INPUT_SIZE } from '../text-input/text-input';
+import { SEARCH_SIZE } from './defs';
 import HostListener from '../../globals/decorators/host-listener';
 import HostListenerMixin from '../../globals/mixins/host-listener';
 import styles from './search.scss?lit';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import { iconLoader } from '../../globals/internal/icon-loader';
+
+export { SEARCH_SIZE };
 
 /**
  * Search box.
@@ -212,6 +214,12 @@ class CDSSearch extends HostListenerMixin(FocusMixin(FormMixin(LitElement))) {
   autoComplete = 'off';
 
   /**
+   * Sets the input to be focussed automatically on page load. Defaults to false
+   */
+  @property({ type: Boolean })
+  autofocus = false;
+
+  /**
    * Specify a label to be read by screen readers on the "close" button
    */
   @property({ attribute: 'close-button-label-text' })
@@ -266,7 +274,7 @@ class CDSSearch extends HostListenerMixin(FocusMixin(FormMixin(LitElement))) {
    * The search box size.
    */
   @property({ reflect: true })
-  size = INPUT_SIZE.MEDIUM;
+  size?: SEARCH_SIZE;
 
   /**
    * The `<input>` name.
@@ -283,6 +291,7 @@ class CDSSearch extends HostListenerMixin(FocusMixin(FormMixin(LitElement))) {
   render() {
     const {
       autoComplete,
+      autofocus,
       closeButtonLabelText,
       disabled,
       hasCustomIcon,
@@ -317,6 +326,7 @@ class CDSSearch extends HostListenerMixin(FocusMixin(FormMixin(LitElement))) {
       </label>
       <input
         autocomplete="${autoComplete}"
+        ?autofocus="${autofocus}"
         id="input"
         part="input"
         type="${ifNonEmpty(type)}"

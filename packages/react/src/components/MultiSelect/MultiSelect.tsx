@@ -39,7 +39,8 @@ import {
   MultiSelectSortingProps,
   sortingPropTypes,
 } from './MultiSelectPropTypes';
-import { defaultSortItems, defaultCompareItems } from './tools/sorting';
+import { defaultCompareItems, defaultSortItems } from './tools/sorting';
+import { isSelectAllItem } from './tools/isSelectAllItem';
 import { useSelection } from '../../internal/Selection';
 import { useId } from '../../internal/useId';
 import { mergeRefs } from '../../tools/mergeRefs';
@@ -251,7 +252,7 @@ export interface MultiSelectProps<ItemType>
   selectionFeedback?: 'fixed' | 'top' | 'top-after-reopen';
 
   /**
-   * Specify the size of the ListBox. Currently supports either `sm`, `md` or `lg` as an option.
+   * Specify the size of the ListBox. Currently supports either `xs`, `sm`, `md` or `lg` as an option.
    */
   size?: ListBoxSize;
 
@@ -344,8 +345,7 @@ export const MultiSelect = React.forwardRef(
       });
     }, [items]);
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
-    const selectAll = filteredItems.some((item) => (item as any).isSelectAll);
+    const selectAll = filteredItems.some(isSelectAllItem);
 
     const prefix = usePrefix();
     const { isFluid } = useContext(FormContext);
@@ -498,6 +498,9 @@ export const MultiSelect = React.forwardRef(
           }
           if (match(e, keys.Enter) && isOpen) {
             setInputFocused(true);
+          }
+          if (match(e, keys.Tab) && isOpen) {
+            setIsOpenWrapper(false);
           }
         }
       },
@@ -702,8 +705,7 @@ export const MultiSelect = React.forwardRef(
       selectedItems.map((item) => (item as selectedItemType)?.text);
 
     const selectedItemsLength = selectAll
-      ? // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
-        selectedItems.filter((item: any) => !item.isSelectAll).length
+      ? selectedItems.filter((item) => !isSelectAllItem(item)).length
       : selectedItems.length;
 
     // Memoize the value of getMenuProps to avoid an infinite loop
@@ -733,15 +735,15 @@ export const MultiSelect = React.forwardRef(
         totalSelectableCount: number;
       } => {
         const hasIndividualSelections = selectedItems.some(
-          (selected) => !selected.isSelectAll
+          (selected) => !isSelectAllItem(selected)
         );
 
         const nonSelectAllSelectedCount = selectedItems.filter(
-          (selected) => !selected.isSelectAll
+          (selected) => !isSelectAllItem(selected)
         ).length;
 
         const totalSelectableCount = filteredItems.filter(
-          (item) => !item.isSelectAll && !item.disabled
+          (item) => !isSelectAllItem(item) && !item.disabled
         ).length;
 
         return {
@@ -837,15 +839,13 @@ export const MultiSelect = React.forwardRef(
                   totalSelectableCount,
                 } = getSelectionStats(selectedItems, filteredItems);
 
-                // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
-                const isChecked = (item as any).isSelectAll
+                const isChecked = isSelectAllItem(item)
                   ? nonSelectAllSelectedCount === totalSelectableCount &&
                     totalSelectableCount > 0
                   : selectedItems.some((selected) => isEqual(selected, item));
 
                 const isIndeterminate =
-                  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
-                  (item as any).isSelectAll &&
+                  isSelectAllItem(item) &&
                   hasIndividualSelections &&
                   nonSelectAllSelectedCount < totalSelectableCount;
 
@@ -860,7 +860,7 @@ export const MultiSelect = React.forwardRef(
                 return (
                   <ListBox.MenuItem
                     key={itemProps.id}
-                    isActive={isChecked && !item['isSelectAll']}
+                    isActive={isChecked && !isSelectAllItem(item)}
                     aria-label={itemText}
                     aria-checked={isIndeterminate ? 'mixed' : isChecked}
                     isHighlighted={highlightedIndex === index}
@@ -908,8 +908,7 @@ interface MultiSelectComponent {
   displayName: string;
   <ItemType>(
     props: MultiSelectComponentProps<ItemType>
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
-  ): React.ReactElement<any> | null;
+  ): React.ReactElement | null;
 }
 
 MultiSelect.displayName = 'MultiSelect';
@@ -1082,7 +1081,7 @@ MultiSelect.propTypes = {
   selectionFeedback: PropTypes.oneOf(['top', 'fixed', 'top-after-reopen']),
 
   /**
-   * Specify the size of the ListBox. Currently supports either `sm`, `md` or `lg` as an option.
+   * Specify the size of the ListBox. Currently supports either `xs`, `sm`, `md` or `lg` as an option.
    */
   size: ListBoxSizePropType,
 

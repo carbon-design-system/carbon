@@ -142,6 +142,7 @@ const frFn = forwardRef<HTMLInputElement, TimePickerProps>;
 
 const TimePicker = frFn((props, ref) => {
   const {
+    ['aria-describedby']: ariaDescribedBy,
     children,
     className,
     inputClassName,
@@ -149,9 +150,9 @@ const TimePicker = frFn((props, ref) => {
     disabled = false,
     hideLabel,
     id,
-    invalidText = 'Invalid time format.',
+    invalidText = 'Error message goes here',
     invalid = false,
-    warningText = 'Warning message.',
+    warningText = 'Warning message goes here',
     warning = false,
     labelText,
     light = false,
@@ -268,6 +269,17 @@ const TimePicker = frFn((props, ref) => {
   const readOnlyProps = {
     readOnly: readOnly,
   };
+  const describedBy =
+    [
+      normalizedProps.invalid
+        ? normalizedProps.invalidId
+        : normalizedProps.warn
+          ? normalizedProps.warnId
+          : null,
+      ariaDescribedBy,
+    ]
+      .filter(Boolean)
+      .join(' ') || undefined;
 
   return (
     <div className={cx(`${prefix}--form-item`, className)}>
@@ -290,6 +302,8 @@ const TimePicker = frFn((props, ref) => {
             value={value}
             {...rest}
             {...readOnlyProps}
+            aria-describedby={describedBy}
+            aria-invalid={normalizedProps.invalid ? true : undefined}
           />
           {(normalizedProps.invalid || normalizedProps.warn) &&
             normalizedProps.icon && (

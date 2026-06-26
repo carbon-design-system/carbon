@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2025
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -33,6 +33,7 @@ test.describe('@avt Dialog', () => {
     await expect(dialog).toBeVisible();
     await expect(dialog).toHaveClass(/cds--dialog cds--dialog--modal/);
     await expect(page.getByRole('button', { name: 'Close' })).toBeFocused();
+    await page.keyboard.press('Tab');
     await page.keyboard.press('Tab');
     await page.keyboard.press('Tab');
     await page.keyboard.press('Tab');

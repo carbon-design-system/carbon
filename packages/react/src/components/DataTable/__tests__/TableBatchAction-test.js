@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -30,5 +30,29 @@ describe('TableBatchAction', () => {
   it('should support labeling the button with `iconDescription`', () => {
     render(<TableBatchAction iconDescription="test" />);
     expect(screen.getByLabelText('test')).toBeInTheDocument();
+  });
+
+  it('should return an error when `renderIcon` is provided without `iconDescription` or children', () => {
+    const renderIcon = () => null;
+
+    const result = TableBatchAction.propTypes.iconDescription({
+      renderIcon,
+    });
+
+    expect(result).toBeInstanceOf(Error);
+    expect(result.message).toBe(
+      'renderIcon property specified without also providing an iconDescription property.'
+    );
+  });
+
+  it('should not return an error when `renderIcon` is provided with children', () => {
+    const renderIcon = () => null;
+
+    const result = TableBatchAction.propTypes.iconDescription({
+      children: 'Archive',
+      renderIcon,
+    });
+
+    expect(result).toBeUndefined();
   });
 });

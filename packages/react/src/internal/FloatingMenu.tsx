@@ -7,7 +7,6 @@
 
 import React, {
   cloneElement,
-  JSXElementConstructor,
   useCallback,
   useContext,
   useEffect,
@@ -59,6 +58,11 @@ interface FloatingPosition {
   top: number;
 }
 
+type FloatingMenuChildProps = {
+  ref?: (node: HTMLElement | null) => void;
+  style?: CSSProperties;
+};
+
 export type MenuDirection =
   | typeof DIRECTION_LEFT
   | typeof DIRECTION_TOP
@@ -78,7 +82,7 @@ interface FloatingMenuProps {
   /**
    * Contents of the floating menu.
    */
-  children: ReactElement;
+  children: ReactElement<FloatingMenuChildProps>;
 
   /**
    * Whether the menu alignment should be flipped.
@@ -310,13 +314,17 @@ export const FloatingMenu = ({
         });
 
         // Only update if the position has actually changed.
-        if (
-          !floatingPosition ||
-          floatingPosition.left !== newFloatingPosition.left ||
-          floatingPosition.top !== newFloatingPosition.top
-        ) {
-          setFloatingPosition(newFloatingPosition);
-        }
+        setFloatingPosition((prev) => {
+          if (
+            prev &&
+            prev.left === newFloatingPosition.left &&
+            prev.top === newFloatingPosition.top
+          ) {
+            return prev;
+          }
+
+          return newFloatingPosition;
+        });
 
         // Re-check after setting the position if not already adjusting.
         if (!isAdjustment) {
@@ -330,15 +338,7 @@ export const FloatingMenu = ({
         }
       }
     },
-    [
-      triggerRef,
-      menuOffset,
-      menuDirection,
-      flipped,
-      target,
-      updateOrientation,
-      floatingPosition,
-    ]
+    [triggerRef, menuOffset, menuDirection, flipped, target, updateOrientation]
   );
 
   const focusMenuContent = (menuBody: HTMLElement) => {
@@ -440,13 +440,7 @@ export const FloatingMenu = ({
           visibility: 'hidden',
           top: '0px',
         };
-    const child = children as ReactElement<
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
-      any,
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
-      string | JSXElementConstructor<any>
-    >;
-    return cloneElement(child, {
+    return cloneElement(children, {
       ref: handleMenuRef,
       style: {
         ...styles,

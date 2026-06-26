@@ -9,18 +9,17 @@ on:
   repository_dispatch:
     types: [deploy-packages]
 
-
 jobs:
   design-language-website:
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
-      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
         with:
           repository: carbon-design-system/design-language-website
           ref: master
       - name: Use Node.js version from .nvmrc
-        uses: actions/setup-node@53b83947a5a98c8d113130e565377fae1a50d02f # v6.3.0
+        uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6.4.0
         with:
           node-version-file: '.nvmrc'
           registry-url: 'https://registry.npmjs.org'
@@ -32,13 +31,14 @@ jobs:
             @carbon/icons@next \
             @carbon/icons-react@next \
       - name: Generate token
-        uses: tibdex/github-app-token@3beb63f4bd073e61482598c45c71c1019b59b73a #v2.1.0
+        uses: actions/create-github-app-token@bcd2ba49218906704ab6c1aa796996da409d3eb1 # v3.2.0
         id: generate_token
         with:
-          app_id: ${{ secrets.APP_ID }}
-          private_key: ${{ secrets.APP_PRIVATE_KEY }}
+          app-id: ${{ secrets.APP_ID }}
+          private-key: ${{ secrets.APP_PRIVATE_KEY }}
+          repositories: design-language-website
       - name: Create Pull Request
-        uses: peter-evans/create-pull-request@c0f553fe549906ede9cf27b5156039d195d2ece0 # v8.1.0
+        uses: peter-evans/create-pull-request@5f6978faf089d4d20b00c7766989d076bb2fc7f1 # v8.1.1
         with:
           branch: 'release/update-carbon-deps'
           commit-message: 'chore(release): update carbon deps'
@@ -57,12 +57,12 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
-      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
         with:
           repository: carbon-design-system/gatsby-theme-carbon
           ref: main
       - name: Use Node.js version from .nvmrc
-        uses: actions/setup-node@53b83947a5a98c8d113130e565377fae1a50d02f # v6.3.0
+        uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6.4.0
         with:
           node-version-file: '.nvmrc'
           registry-url: 'https://registry.npmjs.org'
@@ -75,13 +75,14 @@ jobs:
             @carbon/pictograms-react \
             @carbon/react
       - name: Generate token
-        uses: tibdex/github-app-token@3beb63f4bd073e61482598c45c71c1019b59b73a #v2.1.0
+        uses: actions/create-github-app-token@bcd2ba49218906704ab6c1aa796996da409d3eb1 # v3.2.0
         id: generate_token
         with:
-          app_id: ${{ secrets.APP_ID }}
-          private_key: ${{ secrets.APP_PRIVATE_KEY }}
+          app-id: ${{ secrets.APP_ID }}
+          private-key: ${{ secrets.APP_PRIVATE_KEY }}
+          repositories: gatsby-theme-carbon
       - name: Create Pull Request
-        uses: peter-evans/create-pull-request@c0f553fe549906ede9cf27b5156039d195d2ece0 # v8.1.0
+        uses: peter-evans/create-pull-request@5f6978faf089d4d20b00c7766989d076bb2fc7f1 # v8.1.1
         with:
           branch: 'release/update-carbon-deps'
           commit-message: 'chore(release): update carbon deps'
