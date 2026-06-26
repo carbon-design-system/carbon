@@ -16,11 +16,16 @@ import CaretRight16 from '@carbon/icons/es/caret--right/16.js';
 import FocusMixin from '../../globals/mixins/focus';
 import HostListener from '../../globals/decorators/host-listener';
 import HostListenerMixin from '../../globals/mixins/host-listener';
-import { PAGINATION_SIZE } from './defs';
+import { PAGINATION_SIZE, PAGINATION_TOOLTIP_POSITION } from './defs';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import { iconLoader } from '../../globals/internal/icon-loader';
 import { prefix } from '../../globals/settings';
 import styles from './pagination.scss?lit';
+
+const selectorPagesSelect = `${prefix}-select#pages-select`;
+const selectorPageSizesSelect = `${prefix}-select`;
+const selectorPreviousButton = `${prefix}--pagination__button--backward`;
+const selectorForwardButton = `${prefix}--pagination__button--forward`;
 
 /**
  * Pagination UI.
@@ -32,8 +37,17 @@ import styles from './pagination.scss?lit';
  */
 @customElement(`${prefix}-pagination`)
 class CDSPagination extends FocusMixin(HostListenerMixin(LitElement)) {
-  @query(`${prefix}-select`)
-  private _pageSizeSelect!: HTMLElement;
+  @query(selectorPageSizesSelect)
+  private _pageSizeSelect!: CDSSelect;
+
+  @query(selectorPagesSelect)
+  private _pagesSelect!: CDSSelect | null;
+
+  @query(`[button-class-name*=${selectorPreviousButton}]`)
+  private _previousButton!: HTMLElement;
+
+  @query(`[button-class-name*=${selectorForwardButton}]`)
+  private _forwardButton!: HTMLElement;
 
   private _handleSlotChange({ target }: Event) {
     const content = (target as HTMLSlotElement).assignedNodes().filter(
@@ -163,13 +177,7 @@ class CDSPagination extends FocusMixin(HostListenerMixin(LitElement)) {
     }
     // reset focus to forward button if it reaches the beginning
     if (this.page === 1) {
-      const { selectorForwardButton } = this
-        .constructor as typeof CDSPagination;
-      (
-        this.shadowRoot?.querySelector(
-          `[button-class-name*=${selectorForwardButton}]`
-        ) as HTMLElement
-      ).focus();
+      this._forwardButton.focus();
     }
   }
 
@@ -189,13 +197,7 @@ class CDSPagination extends FocusMixin(HostListenerMixin(LitElement)) {
     }
     // reset focus to previous button if it reaches the end and `pagesUnknown` is not true
     if (!pagesUnknown && this.page === this.totalPages) {
-      const { selectorPreviousButton } = this
-        .constructor as typeof CDSPagination;
-      (
-        this.shadowRoot?.querySelector(
-          `[button-class-name*=${selectorPreviousButton}]`
-        ) as HTMLElement
-      ).focus();
+      this._previousButton.focus();
     }
   }
 
@@ -237,6 +239,12 @@ class CDSPagination extends FocusMixin(HostListenerMixin(LitElement)) {
    */
   @property({ attribute: 'backward-text' })
   backwardText = 'Previous page';
+
+  /**
+   * Specify the position of the tooltip for the backward button. Can be one of: top, right, bottom, or left.
+   */
+  @property({ attribute: 'backward-text-tooltip-position' })
+  backwardTextTooltipPosition = PAGINATION_TOOLTIP_POSITION.TOP;
 
   /**
    * The current page
@@ -286,7 +294,7 @@ class CDSPagination extends FocusMixin(HostListenerMixin(LitElement)) {
    * The translatable text indicating the number of items per page.
    */
   @property({ attribute: 'items-per-page-text' })
-  itemsPerPageText = 'Items per page:';
+  itemsPerPageText = '';
 
   /**
    * `true` if the pagination UI should be disabled.
@@ -299,6 +307,12 @@ class CDSPagination extends FocusMixin(HostListenerMixin(LitElement)) {
    */
   @property({ attribute: 'forward-text' })
   forwardText = 'Next page';
+
+  /**
+   * Specify the position of the tooltip for the forward button. Can be one of: top, right, bottom, or left.
+   */
+  @property({ attribute: 'forward-text-tooltip-position' })
+  forwardTextTooltipPosition = PAGINATION_TOOLTIP_POSITION.TOP;
 
   /**
    * true if the select box to change the page should be disabled.
@@ -363,17 +377,9 @@ class CDSPagination extends FocusMixin(HostListenerMixin(LitElement)) {
 
   updated(changedProperties) {
     const { pageSize, totalItems } = this;
-    const { selectorPageSizesSelect, selectorPagesSelect } = this
-      .constructor as typeof CDSPagination;
 
     if (changedProperties.has('pageSize')) {
-      const pageSizeSelect = this.shadowRoot?.querySelector(
-        selectorPageSizesSelect
-      ) as CDSSelect | null;
-
-      if (pageSizeSelect) {
-        pageSizeSelect.value = String(pageSize ?? '');
-      }
+      this._pageSizeSelect.value = String(pageSize ?? '');
     }
 
     // Recompute total pages and clamp the visible page whenever any relevant input changes
@@ -399,12 +405,8 @@ class CDSPagination extends FocusMixin(HostListenerMixin(LitElement)) {
       const requestedPage = Math.max(1, Math.floor(this.page || 1));
       const displayPage = Math.min(requestedPage, totalPagesSafe);
 
-      const pagesSelect = this.shadowRoot?.querySelector(
-        selectorPagesSelect
-      ) as CDSSelect | null;
-
-      if (pagesSelect) {
-        pagesSelect.value = displayPage.toString();
+      if (this._pagesSelect) {
+        this._pagesSelect.value = displayPage.toString();
       }
     }
 
@@ -415,11 +417,8 @@ class CDSPagination extends FocusMixin(HostListenerMixin(LitElement)) {
         this.totalItems,
         this.pagesUnknown
       );
-      const pagesSelect = this.shadowRoot?.querySelector(
-        (this.constructor as typeof CDSPagination).selectorPagesSelect
-      ) as CDSSelect | null;
-      if (pagesSelect) {
-        pagesSelect.value = String(this.page);
+      if (this._pagesSelect) {
+        this._pagesSelect.value = String(this.page);
       }
     }
   }
@@ -429,7 +428,9 @@ class CDSPagination extends FocusMixin(HostListenerMixin(LitElement)) {
       page,
       disabled,
       forwardText,
+      forwardTextTooltipPosition,
       backwardText,
+      backwardTextTooltipPosition,
       itemsPerPageText,
       pageInputDisabled,
       pageSize,
@@ -485,9 +486,6 @@ class CDSPagination extends FocusMixin(HostListenerMixin(LitElement)) {
 
     return html`
       <div class="${prefix}--pagination__left">
-        <label for="select" class="${prefix}--pagination__text"
-          ><slot name="label-text">${itemsPerPageText}</slot></label
-        >
         <cds-select
           ?disabled=${disabled || pageSizeInputDisabled}
           id="page-size-select"
@@ -495,7 +493,15 @@ class CDSPagination extends FocusMixin(HostListenerMixin(LitElement)) {
           pagination
           size="${size}"
           inline
-          value="${pageSize}">
+          value="${pageSize}"
+          label-styles-disable>
+          <div slot="label-text">
+            ${itemsPerPageText &&
+            html`<span class="${prefix}--pagination__text"
+              >${itemsPerPageText}</span
+            >`}
+            <slot name="label-text"></slot>
+          </div>
           <slot @slotchange=${handleSlotChange}></slot>
         </cds-select>
         <span
@@ -504,15 +510,6 @@ class CDSPagination extends FocusMixin(HostListenerMixin(LitElement)) {
         >
       </div>
       <div class="${prefix}--pagination__right">
-        ${!pagesUnknown || totalItems
-          ? html`
-              <label
-                for="select"
-                class="${prefix}--label ${prefix}--visually-hidden">
-                ${formatLabelText({ count: totalPages })}
-              </label>
-            `
-          : null}
         ${pagesUnknown || !totalItems
           ? html`
               <span
@@ -527,7 +524,11 @@ class CDSPagination extends FocusMixin(HostListenerMixin(LitElement)) {
                 pagination
                 size="${size}"
                 inline
-                value="${page}">
+                value="${page}"
+                hide-label>
+                <span slot="label-text">
+                  ${formatLabelText({ count: totalPages })}
+                </span>
                 ${Array.from(new Array(totalPagesSafe)).map(
                   (_item, index) => html`
                     <cds-select-item
@@ -545,6 +546,7 @@ class CDSPagination extends FocusMixin(HostListenerMixin(LitElement)) {
 
         <div class="${prefix}--pagination__control-buttons">
           <cds-button
+            tooltip-position=${backwardTextTooltipPosition}
             pagination
             size="${size}"
             ?disabled="${prevButtonDisabled}"
@@ -554,7 +556,7 @@ class CDSPagination extends FocusMixin(HostListenerMixin(LitElement)) {
             ${iconLoader(CaretLeft16, { slot: 'icon' })}
           </cds-button>
           <cds-button
-            tooltip-position="top"
+            tooltip-position=${forwardTextTooltipPosition}
             pagination
             size="${size}"
             ?disabled="${nextButtonDisabled}"
@@ -572,28 +574,28 @@ class CDSPagination extends FocusMixin(HostListenerMixin(LitElement)) {
    * A selector that will return the select box for the current page.
    */
   static get selectorPagesSelect() {
-    return `${prefix}-select#pages-select`;
+    return selectorPagesSelect;
   }
 
   /**
    * A selector that will return the select box for page sizes.
    */
   static get selectorPageSizesSelect() {
-    return `${prefix}-select`;
+    return selectorPageSizesSelect;
   }
 
   /**
    * A selector that will return the previous button.
    */
   static get selectorPreviousButton() {
-    return `${prefix}--pagination__button--backward`;
+    return selectorPreviousButton;
   }
 
   /**
    * A selector that will return the forward button.
    */
   static get selectorForwardButton() {
-    return `${prefix}--pagination__button--forward`;
+    return selectorForwardButton;
   }
 
   /**

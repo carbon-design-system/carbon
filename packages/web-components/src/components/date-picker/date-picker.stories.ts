@@ -35,9 +35,9 @@ const defaultArgs = {
   short: false,
   helperText: '',
   invalid: false,
-  invalidText: '',
+  invalidText: 'Error message goes here',
+  warnText: 'Warning message goes here',
   warn: false,
-  warnText: '',
   placeholder: 'mm/dd/yyyy',
   size: INPUT_SIZE.MEDIUM,
 };

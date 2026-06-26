@@ -1583,6 +1583,13 @@
     - cheese
     - food
     - snack
+- name: chennai
+  friendly_name: Chennai
+  aliases:
+    - chennai
+    - landmark
+    - landscape
+    - city
 - name: cherries
   friendly_name: Cherries
   aliases:
@@ -2935,6 +2942,13 @@
     - delivery
     - manufacturing
     - workplace
+- name: denver
+  friendly_name: Denver
+  aliases:
+    - denver
+    - landmark
+    - landscape
+    - city
 - name: deploying-containers
   friendly_name: Deploying containers
   aliases:
@@ -4229,6 +4243,13 @@
   aliases:
     - fragile
     - packaging
+- name: frankfurt
+  friendly_name: Frankfurt
+  aliases:
+    - frankfurt
+    - landmark
+    - landscape
+    - city
 - name: free--trial
   friendly_name: Free trial
   aliases:
@@ -4793,6 +4814,21 @@
     - engineered
     - prompt
     - AI
+- name: hashicorp--terraform
+  friendly_name: HashiCorp® Terraform
+  aliases:
+    - hashicorp
+    - terraform
+    - code
+    - tool
+    - build
+    - change
+    - version
+    - infrastructure
+    - safety
+    - safely
+    - efficiency
+    - efficiently
 - name: hazy
   friendly_name: Hazy
   aliases:
@@ -5115,15 +5151,63 @@
     - hyper protect
     - virtual servers
     - cloud
+- name: ibm--aptio
+  friendly_name: IBM® Aptio®
+  aliases:
+    - aptio
+    - saas
+    - investment
+    - investments
+    - financial
+    - insights
+- name: ibm--atx-office
+  friendly_name: IBM® ATX office
+  aliases:
+    - austin
+    - ibm
+    - atx
+    - texas
+    - office
+    - location
+    - work
+    - building
 - name: ibm--automation-platform
   friendly_name: IBM Automation platform
   aliases:
     - IBM automation platform
     - automation
+- name: ibm--bob
+  friendly_name: IBM® Bob
+  aliases:
+    - bob
+    - ibm bob
+    - ai
+    - ai-powered
+    - integration
+    - development
+    - environment
+    - ide
+    - modernization
+    - assistant
 - name: ibm--cloud
   friendly_name: IBM Cloud
   aliases:
     - IBM cloud
+- name: ibm--concert
+  friendly_name: IBM® Concert®
+  aliases:
+    - concert
+    - ibm concert
+    - generative
+    - ai
+    - ai-driven
+    - insights
+    - automation
+    - platform
+    - streamline
+    - application
+    - management
+    - application management
 - name: ibm--elm
   friendly_name: IBM® Engineering Lifecycle Management
   aliases:
@@ -5206,6 +5290,20 @@
     - Institute for Business Value
     - Thought Leadership
     - IBV study
+- name: ibm--instana
+  friendly_name: IBM® Instana®
+  aliases:
+    - instana
+    - ibm instana
+    - observability
+    - platform
+    - analyze
+    - troubleshoot
+    - services
+    - microservices
+    - applications
+    - containerized
+    - containerized applications
 - name: ibm--ix
   friendly_name: IBM iX®
   aliases:
@@ -5799,6 +5897,13 @@
     - lantern
     - light
     - celebration
+- name: laptop
+  friendly_name: Laptop
+  aliases:
+    - laptop
+    - computer
+    - notebook
+    - PC
 - name: launch
   friendly_name: Launch
   aliases:
@@ -5985,6 +6090,21 @@
     - listen
     - ADA
     - deaf
+- name: los-angeles
+  friendly_name: Los Angeles
+  aliases:
+    - los angeles
+    - landmark
+    - landscape
+    - city
+- name: lotus--flower
+  friendly_name: Lotus flower
+  aliases:
+    - meditation
+    - relaxation
+    - lotus
+    - flower
+    - nature
 - name: love
   friendly_name: Love
   aliases:
@@ -6325,6 +6445,13 @@
     - memory
     - RAM
     - cloud
+- name: men--showers
+  friendly_name: Men showers
+  aliases:
+    - person
+    - shower
+    - shower head
+    - bathroom
 - name: messaging--01
   friendly_name: Messaging 01
   aliases:
@@ -6378,6 +6505,13 @@
     - museum
     - city
     - cities
+- name: miami
+  friendly_name: Miami
+  aliases:
+    - miami
+    - landmark
+    - landscape
+    - city
 - name: micro
   friendly_name: Micro
   aliases:
@@ -7154,6 +7288,13 @@
     - Japan
     - Tsutenkaku Tower
     - landmark
+- name: oslo
+  friendly_name: Oslo
+  aliases:
+    - oslo
+    - landmark
+    - landscape
+    - city
 - name: osprey
   friendly_name: Osprey
   aliases:
@@ -7447,6 +7588,13 @@
     - insights
     - watson
     - AI
+- name: perth
+  friendly_name: Perth
+  aliases:
+    - perth
+    - landmark
+    - landscape
+    - city
 - name: peru--machu-picchu
   friendly_name: Peru Machu Picchu
   aliases:
@@ -8110,6 +8258,18 @@
     - environment
     - process
     - workplace
+- name: red-hat--ansible
+  friendly_name: Red Hat® Ansible®
+  aliases:
+    - red hat
+    - ansible
+    - red hat ansible
+    - automation
+    - circle
+    - round
+    - scaling
+    - ai
+    - generative ai
 - name: red-hat--applications
   friendly_name: Red Hat applications
   aliases:
@@ -8408,6 +8568,13 @@
     - San Francisco
     - city
     - cities
+- name: san-jose
+  friendly_name: San Jose
+  aliases:
+    - san jose
+    - landmark
+    - landscape
+    - city
 - name: san-francisco--fog
   friendly_name: San Francisco fog
   aliases:
@@ -9563,6 +9730,13 @@
     - tags
     - retail
     - label
+- name: taipei
+  friendly_name: Taipei
+  aliases:
+    - taipei
+    - landmark
+    - landscape
+    - city
 - name: taipei--bubble-tea
   friendly_name: Taipei bubble tea
   aliases:
@@ -9644,6 +9818,18 @@
     - education
     - technique
     - security
+- name: technology-zone--finger
+  friendly_name: Technology Zone finger
+  aliases:
+    - finger
+    - touch
+    - gesture
+    - interaction
+    - technology
+    - TechZone
+    - IBM Technology Zone
+    - hand
+    - tap
 - name: tel-aviv
   friendly_name: Tel Aviv
   aliases:
@@ -9922,6 +10108,14 @@
     - data analytics
     - data
     - analytics
+- name: timesheet
+  friendly_name: Timesheet
+  aliases:
+    - timesheet
+    - time
+    - clock
+    - calendar
+    - document
 - name: tire
   friendly_name: Tire
   aliases:
@@ -10825,6 +11019,16 @@
     - responsible workflow
     - transparent workflow
     - explainability
+- name: watsonx--orchestrate
+  friendly_name: IBM® watsonx Orchestrate™
+  aliases:
+    - IBM watsonx
+    - orchestrate
+    - circle
+    - enterprise
+    - platform
+    - AI
+    - data
 - name: waving-hand
   friendly_name: Waving hand
   aliases:
@@ -10992,6 +11196,13 @@
     - modem
     - wireless
     - home
+- name: women--showers
+  friendly_name: Women showers
+  aliases:
+    - person
+    - shower
+    - shower head
+    - bathroom
 - name: word--cloud
   friendly_name: Word cloud
   aliases:

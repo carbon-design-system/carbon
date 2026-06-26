@@ -127,11 +127,10 @@ const calcRawLeftPercent = ({
   return clamp((value - min) / range, 0, 1);
 };
 
-// TODO: Assuming a 16ms throttle corresponds to 60 FPS, should it be halved,
-// since many systems can handle 120 FPS? If it doesn't correspond to 60 FPS,
-// what does it correspond to?
 /**
  * Minimum time between processed "drag" events in milliseconds.
+ *
+ * A value of `16` limits updates to at most ~60 per second.
  */
 const EVENT_THROTTLE = 16;
 
@@ -320,21 +319,14 @@ export interface SliderProps
   unstable_valueUpper?: number;
 
   /**
-   * Specify whether the control is currently in warning state
+   * Specify whether the Slider is in a warning state.
    */
   warn?: boolean;
 
-  // TODO: This JSDoc comment isn't accurate. Evaluate all others.
   /**
-   * Provide the text that is displayed when the control is in warning state
+   * Provide the text displayed when the Slider is in a warning state.
    */
   warnText?: ReactNode;
-}
-
-// TODO: Delete this type and directory type the properties in the function.
-interface CalcLeftPercentProps {
-  clientX?: number;
-  value?: number;
 }
 
 type State = {
@@ -352,17 +344,45 @@ type State = {
 };
 
 const Slider = (props: SliderProps) => {
-  // TODO: Move destructured `props` from the IIFE to here.
-  const controlledValue = props.value;
-  const controlledValueUpper = props.unstable_valueUpper;
-  const controlledMax = props.max;
-  const controlledMin = props.min;
-  const onChange = props.onChange;
-  const onRelease = props.onRelease;
+  const {
+    ariaLabelInput,
+    unstable_ariaLabelInputUpper: ariaLabelInputUpper,
+    className,
+    hideTextInput = false,
+    id: idProp,
+    min,
+    minLabel,
+    max,
+    maxLabel,
+    formatLabel = defaultFormatLabel,
+    labelText,
+    hideLabel,
+    step = 1,
+    inputType = 'number',
+    invalidText,
+    required,
+    disabled = false,
+    name,
+    unstable_nameUpper: nameUpper,
+    light,
+    readOnly = false,
+    value: controlledValue,
+    unstable_valueUpper: controlledValueUpper,
+    invalid,
+    onBlur,
+    onChange,
+    onInputKeyUp,
+    onRelease,
+    stepMultiplier = 4,
+    warn = false,
+    warnText,
+    translateWithId: t = defaultTranslateWithId,
+    ...other
+  } = props;
 
   const initialState: State = {
-    value: props.value,
-    valueUpper: props.unstable_valueUpper,
+    value: controlledValue,
+    valueUpper: controlledValueUpper,
     left: 0,
     leftUpper: 0,
     needsOnRelease: false,
@@ -387,21 +407,16 @@ const Slider = (props: SliderProps) => {
     stateRef.current = state;
   }, [state]);
 
-  const propsRef = useRef(props);
-
-  useEffect(() => {
-    propsRef.current = props;
-  }, [props]);
-
   const thumbRef = useRef<HTMLDivElement>(null);
   const thumbRefUpper = useRef<HTMLDivElement>(null);
   const filledTrackRef = useRef<HTMLDivElement>(null);
   const elementRef = useRef<HTMLDivElement>(null);
-  const trackRef = useRef<HTMLDivElement>(null);
   const generatedId = useId();
   const prefix = usePrefix();
 
   const twoHandles = hasUpperValue(state.valueUpper);
+
+  const getOwnerDocument = () => elementRef.current?.ownerDocument;
 
   /**
    * Sets up initial slider position and value in response to component mount.
@@ -429,18 +444,14 @@ const Slider = (props: SliderProps) => {
     }
 
     return () => {
-      DRAG_STOP_EVENT_TYPES.forEach((element) =>
-        elementRef.current?.ownerDocument.removeEventListener(
-          element,
-          onDragStop
-        )
+      const ownerDocument = getOwnerDocument();
+
+      DRAG_STOP_EVENT_TYPES.forEach((type) =>
+        ownerDocument?.removeEventListener(type, onDragStop)
       );
 
-      DRAG_EVENT_TYPES.forEach((element) =>
-        elementRef.current?.ownerDocument.removeEventListener(
-          element,
-          handleDrag
-        )
+      DRAG_EVENT_TYPES.forEach((type) =>
+        ownerDocument?.removeEventListener(type, handleDrag)
       );
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -512,8 +523,8 @@ const Slider = (props: SliderProps) => {
     const next: [number, number | undefined, number, number] = [
       controlledValue,
       controlledValueUpper,
-      controlledMax,
-      controlledMin,
+      max,
+      min,
     ];
 
     // If value from props does not change, do nothing here.
@@ -529,8 +540,8 @@ const Slider = (props: SliderProps) => {
         value: controlledValue,
         left:
           calcRawLeftPercent({
-            max: controlledMax,
-            min: controlledMin,
+            max,
+            min,
             value: controlledValue,
           }) * 100,
       });
@@ -539,8 +550,8 @@ const Slider = (props: SliderProps) => {
           valueUpper: controlledValueUpper,
           leftUpper:
             calcRawLeftPercent({
-              max: controlledMax,
-              min: controlledMin,
+              max,
+              min,
               value: controlledValueUpper,
             }) * 100,
         });
@@ -550,7 +561,7 @@ const Slider = (props: SliderProps) => {
 
       prevSyncKeysRef.current = next;
     }
-  }, [controlledMax, controlledMin, controlledValue, controlledValueUpper]);
+  }, [controlledValue, controlledValueUpper, max, min]);
 
   /**
    * Rounds a given value to the nearest step defined by the slider's `step`
@@ -560,7 +571,7 @@ const Slider = (props: SliderProps) => {
    * @returns The value rounded to the precision determined by the step.
    */
   const nearestStepValue = (value = 0) => {
-    const decimals = (props.step?.toString().split('.')[1] ?? '').length;
+    const decimals = (step.toString().split('.')[1] ?? '').length;
 
     return Number(value.toFixed(decimals));
   };
@@ -582,8 +593,8 @@ const Slider = (props: SliderProps) => {
   const onDragStart = (
     evt: MouseEvent<HTMLDivElement> | TouchEvent<HTMLDivElement>
   ) => {
-    // Do nothing if component is disabled
-    if (props.disabled || props.readOnly) {
+    // Do nothing if component is disabled or read-only.
+    if (disabled || readOnly) {
       return;
     }
 
@@ -593,17 +604,16 @@ const Slider = (props: SliderProps) => {
     // @see https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/focus#notes
     evt.preventDefault();
 
-    // TODO: Abstract `elementRef.current?.ownerDocument` to a variable that can
-    // be used here and everywhere else in this file.
+    const ownerDocument = getOwnerDocument();
 
     // Add drag stop handlers
-    DRAG_STOP_EVENT_TYPES.forEach((element) => {
-      elementRef.current?.ownerDocument.addEventListener(element, onDragStop);
+    DRAG_STOP_EVENT_TYPES.forEach((type) => {
+      ownerDocument?.addEventListener(type, onDragStop);
     });
 
     // Add drag handlers
-    DRAG_EVENT_TYPES.forEach((element) => {
-      elementRef.current?.ownerDocument.addEventListener(element, handleDrag);
+    DRAG_EVENT_TYPES.forEach((type) => {
+      ownerDocument?.addEventListener(type, handleDrag);
     });
 
     const clientX = getClientXFromEvent(evt.nativeEvent);
@@ -659,34 +669,38 @@ const Slider = (props: SliderProps) => {
    * indicating that the `onRelease` callback should be called.
    */
   const onDragStop = () => {
-    // Do nothing if component is disabled
-    if (props.disabled || props.readOnly) {
+    // Do nothing if component is disabled or read-only.
+    if (disabled || readOnly) {
       return;
     }
 
-    // TODO: Rename parameters in `DRAG_*` loops to `type`.
     // Remove drag stop handlers
-    DRAG_STOP_EVENT_TYPES.forEach((element) => {
-      elementRef.current?.ownerDocument.removeEventListener(
-        element,
-        onDragStop
-      );
+    const ownerDocument = getOwnerDocument();
+
+    DRAG_STOP_EVENT_TYPES.forEach((type) => {
+      ownerDocument?.removeEventListener(type, onDragStop);
     });
 
     // Remove drag handlers
-    DRAG_EVENT_TYPES.forEach((element) => {
-      elementRef.current?.ownerDocument.removeEventListener(
-        element,
-        handleDrag
-      );
+    DRAG_EVENT_TYPES.forEach((type) => {
+      ownerDocument?.removeEventListener(type, handleDrag);
     });
 
     // Set needsOnRelease flag so event fires on next update.
     setState({
       needsOnRelease: true,
-      isValid: true,
-      isValidUpper: true,
     });
+  };
+
+  const getValidityUpdateForHandle = (
+    handle: HandlePosition,
+    validity: boolean
+  ) => {
+    if (typeof invalid !== 'undefined') return {};
+
+    return handle === HandlePosition.UPPER
+      ? { isValidUpper: validity }
+      : { isValid: validity };
   };
 
   // TODO: Rename this reference.
@@ -698,7 +712,7 @@ const Slider = (props: SliderProps) => {
    * @param activeHandle The first drag event call, we may have an explicit
    * activeHandle value, which is to be used before state is used.
    */
-  const _onDragRef =
+  const onDragRef =
     useRef<
       (
         evt: globalThis.MouseEvent | globalThis.TouchEvent,
@@ -706,10 +720,10 @@ const Slider = (props: SliderProps) => {
       ) => void
     >(null);
 
-  _onDragRef.current = (evt, activeHandle) => {
+  onDragRef.current = (evt, activeHandle) => {
     activeHandle = activeHandle ?? stateRef.current.activeHandle;
-    // Do nothing if component is disabled.
-    if (propsRef.current.disabled || propsRef.current.readOnly) {
+    // Do nothing if component is disabled or read-only.
+    if (disabled || readOnly) {
       return;
     }
 
@@ -730,7 +744,7 @@ const Slider = (props: SliderProps) => {
       setState({
         value: nearestStepValue(value),
         left,
-        isValid: true,
+        ...getValidityUpdateForHandle(HandlePosition.LOWER, true),
       });
     }
     // TODO: Investigate if it would be better to not call `setState`
@@ -739,8 +753,8 @@ const Slider = (props: SliderProps) => {
   };
 
   /**
-   * Throttles calls to `_onDrag` by limiting events to being processed at
-   * most once every `EVENT_THROTTLE` milliseconds.
+   * Throttles drag event handling to at most once every `EVENT_THROTTLE`
+   * milliseconds.
    */
   const onDrag = useMemo(
     () =>
@@ -749,7 +763,7 @@ const Slider = (props: SliderProps) => {
           evt: globalThis.MouseEvent | globalThis.TouchEvent,
           activeHandle?: HandlePosition
         ) => {
-          _onDragRef.current?.(evt, activeHandle);
+          onDragRef.current?.(evt, activeHandle);
         },
         EVENT_THROTTLE,
         { leading: true, trailing: false }
@@ -762,12 +776,10 @@ const Slider = (props: SliderProps) => {
    * state accordingly.
    */
   const onKeyDown = (evt: KeyboardEvent<HTMLDivElement>) => {
-    // Do nothing if component is disabled, or we don't have a valid event
-    if (props.disabled || props.readOnly) {
+    // Do nothing if component is disabled or read-only.
+    if (disabled || readOnly) {
       return;
     }
-
-    const { step = 1, stepMultiplier = 4 } = props;
 
     let delta = 0;
     if (matches(evt, [keys.ArrowDown, keys.ArrowLeft])) {
@@ -790,7 +802,7 @@ const Slider = (props: SliderProps) => {
           ? state.value
           : state.valueUpper;
       const { value, left } = calcValue({
-        value: calcValueForDelta(currentValue ?? props.min, delta, props.step),
+        value: calcValueForDelta(currentValue ?? min, delta, step),
       });
       setValueLeftForHandle(state.activeHandle, {
         value: nearestStepValue(value),
@@ -802,12 +814,12 @@ const Slider = (props: SliderProps) => {
         // point with right arrow key, e.g. Typing 51 in `<input>`, moving focus
         // onto the thumb and the hitting right arrow key should yield 52 instead
         // of 54.
-        value: calcValueForDelta(state.value, delta, props.step),
+        value: calcValueForDelta(state.value, delta, step),
       });
       setState({
         value: nearestStepValue(value),
         left,
-        isValid: true,
+        ...getValidityUpdateForHandle(HandlePosition.LOWER, true),
       });
     }
     setState({ correctedValue: null, correctedPosition: null });
@@ -819,8 +831,8 @@ const Slider = (props: SliderProps) => {
    * setting state accordingly.
    */
   const onChangeInput = (evt: ChangeEvent<HTMLInputElement>) => {
-    // Do nothing if component is disabled
-    if (props.disabled || props.readOnly) {
+    // Do nothing if component is disabled or read-only.
+    if (disabled || readOnly) {
       return;
     }
 
@@ -837,8 +849,8 @@ const Slider = (props: SliderProps) => {
         isValidValueForPosition({
           handle: activeHandle,
           value: targetValue,
-          min: props.min,
-          max: props.max,
+          min,
+          max,
         })
       ) {
         processNewInputValue(evt.target);
@@ -855,8 +867,8 @@ const Slider = (props: SliderProps) => {
       } else if (
         isValidValue({
           value: targetValue,
-          min: props.min,
-          max: props.max,
+          min,
+          max,
         })
       ) {
         processNewInputValue(evt.target);
@@ -875,7 +887,7 @@ const Slider = (props: SliderProps) => {
 
     processNewInputValue(evt.target);
 
-    props.onBlur?.({
+    onBlur?.({
       value: targetValue,
       handlePosition: evt.target.dataset.handlePosition as
         | HandlePosition
@@ -884,12 +896,8 @@ const Slider = (props: SliderProps) => {
   };
 
   const onInputKeyDown = (evt: KeyboardEvent<HTMLInputElement>) => {
-    // Do nothing if component is disabled, or we don't have a valid event.
-    if (
-      props.disabled ||
-      props.readOnly ||
-      !(evt.target instanceof HTMLInputElement)
-    ) {
+    // Do nothing if component is disabled, read-only, or missing a valid input target.
+    if (disabled || readOnly || !(evt.target instanceof HTMLInputElement)) {
       return;
     }
 
@@ -910,26 +918,22 @@ const Slider = (props: SliderProps) => {
       | HandlePosition
       | undefined;
 
-    if (handlePosition === HandlePosition.LOWER) {
-      setState({ isValid: validity });
-    } else if (handlePosition === HandlePosition.UPPER) {
-      setState({ isValidUpper: validity });
-    }
-    setState({ isValid: validity });
+    setState(
+      getValidityUpdateForHandle(
+        handlePosition ?? HandlePosition.LOWER,
+        validity
+      )
+    );
 
     if (validity) {
       const adjustedValue = handlePosition
         ? getAdjustedValueForPosition({
             handle: handlePosition,
             value: targetValue,
-            min: props.min,
-            max: props.max,
+            min,
+            max,
           })
-        : getAdjustedValue({
-            value: targetValue,
-            min: props.min,
-            max: props.max,
-          });
+        : clamp(targetValue, min, max);
 
       if (adjustedValue !== targetValue) {
         setState({
@@ -959,11 +963,16 @@ const Slider = (props: SliderProps) => {
     }
   };
 
-  const calcLeftPercent = ({ clientX, value }: CalcLeftPercentProps) => {
-    // TODO: Delete the optional chaining operator after `getBoundingClientRect`.
-    const boundingRect = elementRef.current?.getBoundingClientRect?.();
+  const calcLeftPercent = ({
+    clientX,
+    value,
+  }: {
+    clientX?: number;
+    value?: number;
+  }) => {
+    const boundingRect = elementRef.current?.getBoundingClientRect();
     let width = boundingRect ? boundingRect.right - boundingRect.left : 0;
-    const nextValue = value ?? props.min;
+    const nextValue = value ?? min;
 
     // Enforce a minimum width of at least 1 for calculations
     if (width <= 0) {
@@ -980,8 +989,8 @@ const Slider = (props: SliderProps) => {
     }
 
     return calcRawLeftPercent({
-      max: props.max,
-      min: props.min,
+      max,
+      min,
       value: nextValue,
     });
   };
@@ -995,7 +1004,6 @@ const Slider = (props: SliderProps) => {
   }: {
     leftPercent: number;
   }) => {
-    const { step = 1, min, max } = props;
     const numSteps = Math.floor((max - min) / step) + 1;
     /** Index of the step that corresponds to `leftPercent`. */
     const stepIndex = Math.round(leftPercent * (numSteps - 1));
@@ -1066,8 +1074,7 @@ const Slider = (props: SliderProps) => {
     const base =
       delta > 0 ? Math.round(currentValue / step) * step : currentValue;
     const newValue = base + delta;
-    // TODO: Why is the logical OR needed here?
-    const decimals = (step.toString().split('.')[1] || '').length;
+    const decimals = (step.toString().split('.')[1] ?? '').length;
 
     return Number(newValue.toFixed(decimals));
   };
@@ -1087,13 +1094,13 @@ const Slider = (props: SliderProps) => {
       setState({
         value: valueUpper && newValue > valueUpper ? valueUpper : newValue,
         left: valueUpper && newValue > valueUpper ? leftUpper : newLeft,
-        isValid: true,
+        ...getValidityUpdateForHandle(handle, true),
       });
     } else {
       setState({
         valueUpper: value && newValue < value ? value : newValue,
         leftUpper: value && newValue < value ? left : newLeft,
-        isValidUpper: true,
+        ...getValidityUpdateForHandle(handle, true),
       });
     }
   };
@@ -1109,7 +1116,7 @@ const Slider = (props: SliderProps) => {
         // @ts-expect-error - Passing a string to something that expects a
         // number.
         value,
-        isValid: true,
+        ...getValidityUpdateForHandle(handle, true),
       });
     } else {
       setState({
@@ -1118,7 +1125,7 @@ const Slider = (props: SliderProps) => {
         // @ts-expect-error - Passing a string to something that expects a
         // number.
         valueUpper: value,
-        isValidUpper: true,
+        ...getValidityUpdateForHandle(handle, true),
       });
     }
   };
@@ -1171,35 +1178,17 @@ const Slider = (props: SliderProps) => {
     max: number;
   }) => {
     const { value, valueUpper } = state;
-    let newValue = getAdjustedValue({ value: newValueInput, min, max });
+    const nextValue = clamp(newValueInput, min, max);
 
-    // TODO: Just return the value.
-    // Next adjust to the opposite handle.
-    if (handle === HandlePosition.LOWER && valueUpper) {
-      newValue = newValue > valueUpper ? valueUpper : newValue;
-    } else if (handle === HandlePosition.UPPER && value) {
-      newValue = newValue < value ? value : newValue;
+    if (handle === HandlePosition.LOWER && hasUpperValue(valueUpper)) {
+      return Math.min(nextValue, valueUpper);
     }
-    return newValue;
-  };
 
-  const getAdjustedValue = ({
-    value,
-    min,
-    max,
-  }: {
-    value: number;
-    min: number;
-    max: number;
-  }) => {
-    // TODO: Just return the value.
-    if (value < min) {
-      value = min;
+    if (handle === HandlePosition.UPPER) {
+      return Math.max(nextValue, value);
     }
-    if (value > max) {
-      value = max;
-    }
-    return value;
+
+    return nextValue;
   };
 
   /**
@@ -1238,10 +1227,10 @@ const Slider = (props: SliderProps) => {
     const derivedState: Partial<State> = {};
 
     // Will override state in favor of invalid prop
-    if (props.invalid === true) {
+    if (invalid === true) {
       if (isValid === true) derivedState.isValid = false;
       if (isValidUpper === true) derivedState.isValidUpper = false;
-    } else if (props.invalid === false) {
+    } else if (invalid === false) {
       if (isValid === false) derivedState.isValid = true;
       if (isValidUpper === false) derivedState.isValidUpper = true;
     }
@@ -1249,35 +1238,8 @@ const Slider = (props: SliderProps) => {
     if (Object.keys(derivedState).length) {
       setState(derivedState);
     }
-  }, [props.invalid]);
+  }, [invalid]);
 
-  const {
-    ariaLabelInput,
-    unstable_ariaLabelInputUpper: ariaLabelInputUpper,
-    className,
-    hideTextInput = false,
-    id: idProp,
-    min,
-    minLabel,
-    max,
-    maxLabel,
-    formatLabel = defaultFormatLabel,
-    labelText,
-    hideLabel,
-    step = 1,
-    inputType = 'number',
-    invalidText,
-    required,
-    disabled = false,
-    name,
-    unstable_nameUpper: nameUpper,
-    light,
-    readOnly = false,
-    warn = false,
-    warnText,
-    translateWithId: t = defaultTranslateWithId,
-    ...other
-  } = props;
   const id = idProp ?? generatedId;
 
   const {
@@ -1306,10 +1268,12 @@ const Slider = (props: SliderProps) => {
     warn,
   });
 
-  delete other.invalid;
-  delete other.onRelease;
-  delete other.stepMultiplier;
-  delete other.unstable_valueUpper;
+  const passthroughProps = {
+    ...other,
+    onBlur,
+    onChange,
+    value: controlledValue,
+  };
 
   const showWarning =
     normalizedProps.warn ||
@@ -1437,7 +1401,7 @@ const Slider = (props: SliderProps) => {
               step={step}
               onChange={onChangeInput}
               onBlur={onBlurInput}
-              onKeyUp={props.onInputKeyUp}
+              onKeyUp={onInputKeyUp}
               onKeyDown={onInputKeyDown}
               data-invalid={normalizedProps.invalid ? true : null}
               data-handle-position={HandlePosition.LOWER}
@@ -1479,7 +1443,7 @@ const Slider = (props: SliderProps) => {
               ? true
               : null
           }
-          {...other}>
+          {...passthroughProps}>
           <ThumbWrapper
             hasTooltip={hideTextInput}
             className={lowerThumbWrapperClasses}
@@ -1545,12 +1509,7 @@ const Slider = (props: SliderProps) => {
               </div>
             </ThumbWrapper>
           ) : null}
-          <div
-            className={`${prefix}--slider__track`}
-            ref={(node) => {
-              trackRef.current = node;
-            }}
-          />
+          <div className={`${prefix}--slider__track`} />
           <div
             className={`${prefix}--slider__filled-track`}
             ref={filledTrackRef}
@@ -1585,7 +1544,7 @@ const Slider = (props: SliderProps) => {
             onChange={onChangeInput}
             onBlur={onBlurInput}
             onKeyDown={onInputKeyDown}
-            onKeyUp={props.onInputKeyUp}
+            onKeyUp={onInputKeyUp}
             data-invalid={
               (
                 twoHandles
@@ -1824,12 +1783,12 @@ Slider.propTypes = {
   value: PropTypes.number.isRequired,
 
   /**
-   * `Specify whether the Slider is in a warn state
+   * Specify whether the Slider is in a warning state.
    */
   warn: PropTypes.bool,
 
   /**
-   * Provide the text that is displayed when the Slider is in a warn state
+   * Provide the text displayed when the Slider is in a warning state.
    */
   warnText: PropTypes.node,
 };

@@ -4,6 +4,10 @@
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
+/**
+ * @deprecated PageHeader has moved to Carbon for IBM Products.
+ * See https://github.com/carbon-design-system/carbon/issues/21926
+ */
 
 import { LitElement, html } from 'lit';
 import { classMap } from 'lit/directives/class-map.js';
@@ -14,6 +18,9 @@ import { carbonElement as customElement } from '../../globals/decorators/carbon-
 
 /**
  * Page header Breadcrumb Bar.
+ * @deprecated This component has moved to Carbon for IBM Products and is now maintained in
+ *   `@carbon/ibm-products-web-components`.
+ *   See https://github.com/carbon-design-system/carbon/issues/21926
  * @element cds-page-header-breadcrumb
  */
 @customElement(`${prefix}-page-header-breadcrumb`)

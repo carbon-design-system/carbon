@@ -22,7 +22,6 @@ describe('AISkeleton', () => {
 
     expect(screen.getByTestId('ai-skeleton-placeholder')).toHaveClass(
       'cds--skeleton__placeholder',
-      'className',
       'cds--skeleton__placeholder--ai',
       '💾',
       { exact: true }

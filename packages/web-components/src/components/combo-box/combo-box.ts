@@ -360,14 +360,12 @@ class CDSComboBox extends CDSDropdown {
    * Handles user-initiated clearing the `<input>` for filtering.
    */
   protected _handleUserInitiatedClearInput() {
-    this._resetFilteredItems();
-    this._filterInputValue = '';
-    if (this._filterInputNode) {
-      this._filterInputNode.value = '';
-      this._filterInputNode.focus();
-    }
-
     this._handleUserInitiatedSelectItem();
+    if (this.value) {
+      this._revertInputToSelected(true);
+    } else {
+      this._clearInputWithoutSelecting(true);
+    }
     this.requestUpdate();
   }
 

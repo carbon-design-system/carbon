@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2019, 2025
+// Copyright IBM Corp. 2019, 2026
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -18,11 +18,14 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/components/tag';
 @use '@carbon/styles/scss/utilities/ai-gradient' as *;
 @use '@carbon/styles/scss/utilities/convert' as convert;
+@use '@carbon/styles/scss/layout' as *;
 
 // https://github.com/carbon-design-system/carbon/issues/11408
 @include list-box;
 
 :host(#{$prefix}-dropdown) {
+  @include emit-layout-tokens();
+
   outline: none;
 
   .#{$prefix}--list-box {
@@ -96,7 +99,7 @@ $css--plex: true !default;
 :host(#{$prefix}-dropdown[type='inline']) {
   @extend .#{$prefix}--list-box__wrapper--inline;
 
-  grid-gap: 0 $spacing-06;
+  grid-gap: 0 $spacing-03;
 
   .#{$prefix}--list-box__menu {
     margin-block-start: 0;
@@ -121,6 +124,19 @@ $css--plex: true !default;
   .#{$prefix}--list-box.#{$prefix}--list-box--inline
     .#{$prefix}--list-box__field {
     padding-inline-end: $spacing-10;
+  }
+}
+
+:host(
+    #{$prefix}-dropdown[type='inline'][warn]:not([disabled]):not([read-only])
+  ),
+:host(
+    #{$prefix}-dropdown[type='inline'][invalid]:not([disabled]):not([read-only])
+  ) {
+  grid-template: auto / auto min-content auto;
+
+  .#{$prefix}--form__helper-text {
+    grid-column: 3;
   }
 }
 
@@ -349,3 +365,5 @@ $divider-width: 1px;
     inset-inline-end: $spacing-08;
   }
 }
+
+@include emit-layout-tokens-to-shadow-host('#{$prefix}-dropdown');

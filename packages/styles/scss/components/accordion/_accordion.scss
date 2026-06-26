@@ -119,6 +119,13 @@ $content-padding: 0 0 0 $spacing-05 !default;
     }
   }
 
+  // Box shadow focus rings don't appear in high contrast mode, so we use outline instead
+  @media screen and (-ms-high-contrast: active), (forced-colors: active) {
+    .#{$prefix}--accordion__heading:focus {
+      outline: 2px solid Highlight;
+    }
+  }
+
   // Disabled styles
   .#{$prefix}--accordion__heading[disabled] {
     background-color: transparent;
