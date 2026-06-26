@@ -1668,15 +1668,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@carbon/actions-add-review-labels@workspace:actions/add-review-labels":
-  version: 0.0.0-use.local
-  resolution: "@carbon/actions-add-review-labels@workspace:actions/add-review-labels"
-  dependencies:
-    "@actions/core": "npm:^1.11.1"
-    "@actions/github": "npm:9.1.1"
-  languageName: unknown
-  linkType: soft
-
 "@carbon/actions-issues@workspace:actions/issues":
   version: 0.0.0-use.local
   resolution: "@carbon/actions-issues@workspace:actions/issues"
@@ -3128,9 +3119,9 @@ __metadata:
   linkType: hard
 
 "@fastify/busboy@npm:^2.0.0":
-  version: 2.0.0
-  resolution: "@fastify/busboy@npm:2.0.0"
-  checksum: 10/6a2366d06b82aac1069b8323792f76f7a8fca02533cb3745fcd218d8f0f953dc4dbef057287237414658cd43f8dede0846ef33398999e3dbe54ddaeefec71c0a
+  version: 2.1.1
+  resolution: "@fastify/busboy@npm:2.1.1"
+  checksum: 10/2bb8a7eca8289ed14c9eb15239bc1019797454624e769b39a0b90ed204d032403adc0f8ed0d2aef8a18c772205fa7808cf5a1b91f21c7bfc7b6032150b1062c5
   languageName: node
   linkType: hard
 
@@ -23255,16 +23246,16 @@ __metadata:
   linkType: hard
 
 "undici@npm:^6.23.0":
-  version: 6.25.0
-  resolution: "undici@npm:6.25.0"
-  checksum: 10/a475e45da3e1d1073283bb70531666f09a432eabff2b857bd7063d469a1ee1486192ff61dc0dadbb526673ce1120fee14d66a59b6b17d1e0bd3a4d5f0a52d0a6
+  version: 6.27.0
+  resolution: "undici@npm:6.27.0"
+  checksum: 10/30c18cdb235edf4dd36f8aa3ace1ffaf44060289a7d62ad44c33180d2d74a224015d25574812f62ce9c625b5beb1b0b766495b650fedf356aca11eed7ce2c816
   languageName: node
   linkType: hard
 
 "undici@npm:^7.19.1":
-  version: 7.22.0
-  resolution: "undici@npm:7.22.0"
-  checksum: 10/a7a1813ba4b74c0d46cc8dd160386202c05699ffc487c5d882cf40e6d2435c8d6faff3b8f8675d09bd1ef0386e370675c26b59b9a8c8b3f17b9f82a42236a927
+  version: 7.28.0
+  resolution: "undici@npm:7.28.0"
+  checksum: 10/154423b280d623278a61decb437f8a7e581fb18b8c95556ef956b32a58cd668eadbb812d28e20678cb2dc545a566f35a3afc0962307ca801da30f4741117986d
   languageName: node
   linkType: hard
 

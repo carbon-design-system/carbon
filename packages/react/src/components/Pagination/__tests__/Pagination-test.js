@@ -621,5 +621,24 @@ describe('Pagination', () => {
         expect.objectContaining({ page: 1, pageSize: 3 })
       );
     });
+
+    it('should map each tooltip position prop to the correct button', () => {
+      render(
+        <Pagination
+          pageSizes={[10]}
+          backwardTextTooltipPosition="right"
+          forwardTextTooltipPosition="bottom"
+        />
+      );
+
+      const previousButton = screen.getByLabelText('Previous page');
+      const nextButton = screen.getByLabelText('Next page');
+
+      expect(
+        previousButton.closest('.cds--popover--right')
+      ).toBeInTheDocument();
+
+      expect(nextButton.closest('.cds--popover--bottom')).toBeInTheDocument();
+    });
   });
 });
