@@ -45,8 +45,9 @@ export {
   formatTokenName,
 };
 
-// Re-export type and layout tokens that were previously re-exported via
-// white.ts to preserve backward compatibility with @carbon/themes consumers.
+// Re-export type and layout tokens that were previously re-exported via the
+// hand-authored theme files (white.ts, g10.ts, g90.ts, g100.ts) to preserve
+// backward compatibility with @carbon/themes consumers.
 export {
   caption01,
   caption02,
