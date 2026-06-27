@@ -7,7 +7,7 @@
 
 import { classMap } from 'lit/directives/class-map.js';
 import { LitElement, html } from 'lit';
-import { property } from 'lit/decorators.js';
+import { property, query } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
 import ChevronRight16 from '@carbon/icons/es/chevron--right/16.js';
 import { iconLoader } from '../../globals/internal/icon-loader';
@@ -52,6 +52,12 @@ const observeResize = (observer: ResizeObserver, elem: Element) => {
 @customElement(`${prefix}-accordion-item`)
 class CDSAccordionItem extends FocusMixin(LitElement) {
   /**
+   * The accordion content container.
+   */
+  @query(`.${prefix}--accordion__content`)
+  private _accordionContent!: HTMLDivElement;
+
+  /**
    * The current breakpoint.
    */
   private _currentBreakpoint?: ACCORDION_ITEM_BREAKPOINT;
@@ -83,18 +89,12 @@ class CDSAccordionItem extends FocusMixin(LitElement) {
         )
       )
     ) {
-      const { selectorAccordionContent } = this
-        .constructor as typeof CDSAccordionItem;
-
       if (!this.open) {
         this.setAttribute('expanding', '');
       } else {
         this.setAttribute('collapsing', '');
       }
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
-      this.shadowRoot!.querySelector(
-        selectorAccordionContent
-      )!.addEventListener('animationend', () => {
+      this._accordionContent?.addEventListener('animationend', () => {
         this.removeAttribute('expanding');
         this.removeAttribute('collapsing');
       });

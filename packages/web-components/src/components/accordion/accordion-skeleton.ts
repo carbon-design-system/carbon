@@ -7,7 +7,7 @@
 
 import { classMap } from 'lit/directives/class-map.js';
 import { LitElement, html } from 'lit';
-import { property } from 'lit/decorators.js';
+import { property, queryAll } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
 import { ACCORDION_ALIGNMENT } from './accordion';
 import { forEach } from '../../globals/internal/collection-helpers';
@@ -48,15 +48,17 @@ class CDSAccordionSkeleton extends LitElement {
   @property({ type: Boolean, reflect: true })
   open = true;
 
+  /**
+   * The accordion item skeleton elements.
+   */
+  @queryAll(`${prefix}-accordion-item-skeleton`)
+  private _accordionItemSkeletons!: NodeListOf<HTMLElement>;
+
   updated(changedProperties) {
     if (changedProperties.has('alignment')) {
       // Propagate `alignment` attribute to descendants until `:host-context()` gets supported in all major browsers
       forEach(
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
-        this.shadowRoot!.querySelectorAll(
-          (this.constructor as typeof CDSAccordionSkeleton)
-            .selectorAccordionItemSkeletons
-        ),
+        this._accordionItemSkeletons,
         (elem) => {
           elem.setAttribute('alignment', this.alignment);
         }
@@ -68,11 +70,7 @@ class CDSAccordionSkeleton extends LitElement {
     ) {
       // Propagate `isFlush` attribute to descendants until `:host-context()` gets supported in all major browsers
       forEach(
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
-        this.shadowRoot!.querySelectorAll(
-          (this.constructor as typeof CDSAccordionSkeleton)
-            .selectorAccordionItemSkeletons
-        ),
+        this._accordionItemSkeletons,
         (elem) => {
           if (this.isFlush && this.alignment !== 'start') {
             elem.setAttribute('isFlush', '');
