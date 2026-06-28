@@ -72,7 +72,7 @@ Default.argTypes = {
 };
 
 export const BreadcrumbWithOverflowMenu = (args) => (
-  <Breadcrumb noTrailingSlash {...args}>
+  <Breadcrumb {...args}>
     <BreadcrumbItem>
       <a href="/#">Breadcrumb 1</a>
     </BreadcrumbItem>
@@ -95,7 +95,7 @@ BreadcrumbWithOverflowMenu.argTypes = {
 };
 
 export const BreadcrumbWithOverflowMenuSizeSmall = (args) => (
-  <Breadcrumb noTrailingSlash {...args}>
+  <Breadcrumb {...args}>
     <BreadcrumbItem>
       <a href="/#">Breadcrumb 1</a>
     </BreadcrumbItem>
@@ -150,7 +150,7 @@ Skeleton.argTypes = {
 };
 
 export const BreadcrumbWithOverflowVisualSnapshots = (args) => (
-  <Breadcrumb noTrailingSlash {...args}>
+  <Breadcrumb {...args}>
     <BreadcrumbItem>
       <a href="/#">Breadcrumb 1</a>
     </BreadcrumbItem>
