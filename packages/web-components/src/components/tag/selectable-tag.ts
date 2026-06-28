@@ -6,13 +6,13 @@
  */
 
 import { html, LitElement } from 'lit';
-import { property, state } from 'lit/decorators.js';
+import { property, query, state } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
 import FocusMixin from '../../globals/mixins/focus';
 import HostListener from '../../globals/decorators/host-listener';
 import HostListenerMixin from '../../globals/mixins/host-listener';
 import { TAG_SIZE, TAG_TYPE } from './defs';
-import './tag';
+import CDSTag from './tag';
 import '../tooltip/index';
 import styles from './tag.scss?lit';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
@@ -29,6 +29,9 @@ export { TAG_SIZE, TAG_TYPE };
  */
 @customElement(`${prefix}-selectable-tag`)
 class CDSSelectableTag extends HostListenerMixin(FocusMixin(LitElement)) {
+  @query(`${prefix}-tag`)
+  private _tag!: CDSTag | null;
+
   /**
    * Custom events to be triggered
    * @param event Event object
@@ -118,9 +121,7 @@ class CDSSelectableTag extends HostListenerMixin(FocusMixin(LitElement)) {
   async updated() {
     await this.updateComplete;
 
-    const textContainer = this.shadowRoot
-      ?.querySelector(`${prefix}-tag`)
-      ?.shadowRoot?.querySelector(`.${prefix}--tag__label`);
+    const textContainer = this._tag?._textContainer;
     if (!textContainer) return;
 
     const hasEllipsis = textContainer.scrollWidth > textContainer.clientWidth;

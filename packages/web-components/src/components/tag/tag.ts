@@ -30,6 +30,9 @@ class CDSTag extends HostListenerMixin(FocusMixin(LitElement)) {
   @query('button')
   protected _buttonNode!: HTMLButtonElement;
 
+  @query(`.${prefix}--tag__label`)
+  _textContainer!: HTMLElement | null;
+
   /**
    * Handles `slotchange` event.
    */
@@ -160,13 +163,10 @@ class CDSTag extends HostListenerMixin(FocusMixin(LitElement)) {
   _hasEllipsisApplied = false;
 
   updated() {
-    const textContainer = this.shadowRoot?.querySelector(
-      `.${prefix}--tag__label`
-    );
-    if (!textContainer || this._hasEllipsisApplied === true) return;
+    if (!this._textContainer || this._hasEllipsisApplied === true) return;
 
     this._hasEllipsisApplied =
-      textContainer.scrollWidth > textContainer.clientWidth;
+      this._textContainer.scrollWidth > this._textContainer.clientWidth;
 
     const root = this.getRootNode();
     // Check if the root is a shadow root and get its host
