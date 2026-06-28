@@ -121,3 +121,48 @@ $slow-01: $duration-slow-01;
 /// @type Duration
 /// @group @carbon/motion
 $slow-02: $duration-slow-02;
+
+/// Named motion intents shared across Carbon implementations
+/// @type Map
+/// @access public
+/// @group @carbon/motion
+$surfaces: (
+  expand: (
+    kind: shared-element,
+    origin: surface,
+    duration: slow-01,
+    enter-easing: (
+      entrance,
+      expressive,
+    ),
+    exit-easing: (
+      exit,
+      expressive,
+    ),
+    reduced-motion: fade,
+  ),
+);
+
+/// Get a named motion surface or one of its properties
+/// @param {String} $name - The motion surface name
+/// @param {String | Null} $property [null] - An optional surface property
+/// @access public
+/// @group @carbon/motion
+/// @return {Map | *} The surface definition or requested property
+@function surface($name, $property: null) {
+  @if not map.has-key($surfaces, $name) {
+    @error 'Unable to find a motion surface named #{$name}.';
+  }
+
+  $definition: map.get($surfaces, $name);
+
+  @if not $property {
+    @return $definition;
+  }
+
+  @if not map.has-key($definition, $property) {
+    @error 'Unable to find a property named #{$property} on the #{$name} motion surface.';
+  }
+
+  @return map.get($definition, $property);
+}

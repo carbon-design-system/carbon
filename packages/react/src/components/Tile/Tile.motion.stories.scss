@@ -1,0 +1,68 @@
+//
+// Copyright IBM Corp. 2026
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use '@carbon/styles/scss/spacing';
+@use '@carbon/styles/scss/type';
+
+.motion-surface-tile-grid {
+  display: grid;
+  max-inline-size: 72rem;
+  gap: spacing.$spacing-05;
+  grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+}
+
+.motion-surface-tile {
+  display: grid;
+  min-block-size: 13rem;
+  align-content: start;
+  gap: spacing.$spacing-04;
+  grid-template-rows: auto auto 1fr auto;
+}
+
+.motion-surface-tile__eyebrow,
+.motion-surface-tile__metric {
+  @include type.type-style('label-01');
+}
+
+.motion-surface-tile__heading {
+  @include type.type-style('heading-03');
+}
+
+.motion-surface-tile__description {
+  @include type.type-style('body-01');
+
+  max-inline-size: 28rem;
+}
+
+.motion-surface-modal.is-visible .cds--modal-container {
+  transform: none;
+  transition: none;
+}
+
+.motion-surface-modal__details {
+  display: grid;
+  margin-block-start: spacing.$spacing-07;
+  gap: spacing.$spacing-05;
+  grid-template-columns: repeat(auto-fit, minmax(8rem, 1fr));
+
+  div {
+    padding-block-start: spacing.$spacing-04;
+    border-block-start: 1px solid var(--cds-border-subtle);
+  }
+
+  dt {
+    @include type.type-style('label-01');
+
+    margin-block-end: spacing.$spacing-03;
+  }
+
+  dd {
+    @include type.type-style('body-01');
+
+    margin: 0;
+  }
+}
