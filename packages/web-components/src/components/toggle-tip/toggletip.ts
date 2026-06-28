@@ -7,7 +7,7 @@
 
 import { classMap } from 'lit/directives/class-map.js';
 import { adoptStyles, html, LitElement } from 'lit';
-import { property } from 'lit/decorators.js';
+import { property, query } from 'lit/decorators.js';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import { prefix } from '../../globals/settings';
 import Information16 from '@carbon/icons/es/information/16.js';
@@ -32,6 +32,24 @@ class CDSToggletip extends HostListenerMixin(FocusMixin(LitElement)) {
    * Create popover controller instance
    */
   private popoverController = new FloatingUIController(this);
+
+  /**
+   * The toggletip button element
+   */
+  @query(`.${prefix}--toggletip-button`)
+  private _toggletipButton?: HTMLElement;
+
+  /**
+   * The toggletip content element
+   */
+  @query(`.${prefix}--popover-content`)
+  private _toggletipContent?: HTMLElement;
+
+  /**
+   * The toggletip caret element
+   */
+  @query(`.${prefix}--popover-caret`)
+  private _toggletipCaret?: HTMLElement;
 
   /**
    * How the tooltip is aligned to the trigger button.
@@ -188,25 +206,17 @@ class CDSToggletip extends HostListenerMixin(FocusMixin(LitElement)) {
   updated() {
     if (this.autoalign) {
       // auto align functionality with @floating-ui/dom library
-      const button = this.shadowRoot?.querySelector(
-        CDSToggletip.selectorToggletipButton
-      );
-
-      const tooltip = this.shadowRoot?.querySelector(
-        CDSToggletip.selectorToggletipContent
-      );
-      const arrowElement = this.shadowRoot?.querySelector(
-        CDSToggletip.selectorToggletipCaret
-      );
-
-      if (button && tooltip) {
+      if (this._toggletipButton && this._toggletipContent) {
         // Ensure toggletip is visible when rendered in a large scrollable container (storybook parity)
-        button.scrollIntoView({ block: 'center', inline: 'center' });
+        this._toggletipButton.scrollIntoView({
+          block: 'center',
+          inline: 'center',
+        });
 
         this.popoverController?.setPlacement({
-          trigger: button as HTMLElement,
-          target: tooltip as HTMLElement,
-          arrowElement: arrowElement as HTMLElement,
+          trigger: this._toggletipButton,
+          target: this._toggletipContent,
+          arrowElement: this._toggletipCaret as HTMLElement,
           caret: true,
           flipArguments: { fallbackAxisSideDirection: 'start' },
           alignment: this.alignment,
