@@ -62,7 +62,7 @@ export interface LinkBaseProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
   target?: HTMLAttributeAnchorTarget;
 
   /**
-   * Specify whether you want the link to receive visited styles after the link has been clicked
+   * When enabled, applies Carbon's visited-link styles to browser-controlled :visited link state.
    */
   visited?: boolean;
 }
@@ -204,7 +204,7 @@ Link.propTypes = {
   size: PropTypes.oneOf(['sm', 'md', 'lg']),
 
   /**
-   * Specify whether you want the link to receive visited styles after the link has been clicked
+   * When enabled, applies Carbon's visited-link styles to browser-controlled :visited link state.
    */
   visited: PropTypes.bool,
 };

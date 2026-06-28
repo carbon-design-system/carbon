@@ -387,7 +387,14 @@ check out our [Contributing Guide](/.github/CONTRIBUTING.md) and our
     <td align="center"><a href="https://github.com/suniltc-ibm"><img src="https://avatars.githubusercontent.com/u/186133269?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Sunil TC</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon/commits?author=suniltc-ibm" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/baadhira"><img src="https://avatars.githubusercontent.com/u/69342013?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Badira P P</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon/commits?author=baadhira" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/harishjanardhanan"><img src="https://avatars.githubusercontent.com/u/32760275?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Harish</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon/commits?author=harishjanardhanan" title="Documentation">📖</a> <a href="https://github.com/carbon-design-system/carbon/commits?author=harishjanardhanan" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/zardai"><img src="https://avatars.githubusercontent.com/u/266987099?v=4?s=100" width="100px;" alt=""/><br /><sub><b>zardai</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon/commits?author=zardai" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/fucadzi"><img src="https://avatars.githubusercontent.com/u/8070263?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Natalija Fucadzi</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon/commits?author=fucadzi" title="Code">💻</a></td>
+  </tr>
+  <tr>
+    <td align="center"><a href="https://github.com/saiteja-nizam"><img src="https://avatars.githubusercontent.com/u/88249670?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Saiteja Nizam</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon/commits?author=saiteja-nizam" title="Code">💻</a></td>
+  </tr>
+  <tr>
+    <td align="center"><a href="https://github.com/wkeese"><img src="https://avatars.githubusercontent.com/u/69599?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Bill Keese</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon/commits?author=wkeese" title="Code">💻</a></td>
   </tr>
 </table>
 

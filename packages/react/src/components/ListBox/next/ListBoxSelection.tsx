@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2025
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -26,7 +26,7 @@ const translationIds = {
 type TranslationKey = keyof typeof translationIds;
 
 const defaultTranslations: Record<TranslationKey, string> = {
-  [translationIds['clear.all']]: 'Clear all selected items',
+  [translationIds['clear.all']]: 'Clear selected items',
   [translationIds['clear.selection']]: 'Clear selected item',
 };
 
@@ -92,11 +92,15 @@ function ListBoxSelection({
   ...rest
 }: ListBoxSelectionProps) {
   const prefix = usePrefix();
+  const hasSelectionCount = (selectionCount ?? 0) > 0;
+  const hasMultipleSelections = (selectionCount ?? 0) > 1;
   const className = cx(`${prefix}--list-box__selection`, {
-    [`${prefix}--tag--filter`]: selectionCount,
-    [`${prefix}--list-box__selection--multi`]: selectionCount,
+    [`${prefix}--tag--filter`]: hasSelectionCount,
+    [`${prefix}--list-box__selection--multi`]: hasSelectionCount,
   });
-  const description = selectionCount ? t('clear.all') : t('clear.selection');
+  const description = hasMultipleSelections
+    ? t('clear.all')
+    : t('clear.selection');
   const tagClasses = cx(
     `${prefix}--tag`,
     `${prefix}--tag--filter`,
@@ -117,7 +121,7 @@ function ListBoxSelection({
     }
   }
 
-  if (selectionCount) {
+  if (hasSelectionCount) {
     return (
       <div className={tagClasses}>
         <span
