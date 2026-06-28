@@ -55,7 +55,7 @@
   },
   "devDependencies": {
     "rimraf": "^6.0.1",
-    "tsdown": "^0.21.0",
+    "tsdown": "^0.22.0",
     "typescript-config-carbon": "workspace:^0.10.0"
   },
   "dependencies": {
