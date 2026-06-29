@@ -51,6 +51,19 @@
     - new
     - additional
     - add
+- name: add-comments--mobile
+  friendly_name: Add comments mobile
+  aliases:
+    - comments
+    - new
+    - additional
+    - add
+    - plus
+    - plus sign
+    - mobile
+    - phone
+    - device
+    - message
 - name: advanced--fraud--protection
   friendly_name: Advanced fraud protection
   aliases:
@@ -2252,6 +2265,21 @@
     - commercial financing 02
     - financing
     - finance
+- name: complete-work--technician
+  friendly_name: Complete work technician
+  aliases:
+    - done
+    - complete
+    - finished
+    - checkmark
+    - work
+    - work order
+    - technician
+    - man
+    - person
+    - mobile
+    - phone
+    - device
 - name: compliant
   friendly_name: Compliant
   aliases:
@@ -2589,6 +2617,18 @@
     - sea
     - marine life
     - animal
+- name: create-work
+  friendly_name: Create work
+  aliases:
+    - clipboard
+    - work
+    - create
+    - create work
+    - work order
+    - new work
+    - plus
+    - plus sign
+    - add
 - name: credit--card
   friendly_name: Credit card
   aliases:
@@ -4090,6 +4130,12 @@
   friendly_name: Flashing content
   aliases:
     - flashing content
+    - content
+    - container
+    - window
+    - play
+    - play button
+    - video
 - name: flexibility
   friendly_name: Flexibility
   aliases:
@@ -8369,6 +8415,18 @@
     - data
     - analytics
     - chart
+- name: report-time--technician
+  friendly_name: Report time technician
+  aliases:
+    - time
+    - time card
+    - timesheet
+    - entry
+    - report
+    - technician
+    - man
+    - person
+    - clock
 - name: research
   friendly_name: Research
   aliases:
@@ -8453,6 +8511,16 @@
     - rank
     - watson
     - AI
+- name: review-checklist
+  friendly_name: Review checklist
+  aliases:
+    - checklist
+    - checkbox
+    - clipboard
+    - tasks
+    - items
+    - review
+    - review checklist
 - name: rich--text--format
   friendly_name: Rich text format
   aliases:
@@ -9308,6 +9376,22 @@
   aliases:
     - start-ups
     - cloud
+- name: start-work--technician
+  friendly_name: Start work technician
+  aliases:
+    - begin
+    - start
+    - in progress
+    - play
+    - play button
+    - work
+    - work order
+    - technician
+    - man
+    - person
+    - mobile
+    - phone
+    - device
 - name: station--hydration
   friendly_name: Hydration station
   aliases:
@@ -9499,6 +9583,32 @@
     - weather
     - sky
     - forecast
+- name: supervisor
+  friendly_name: Supervisor
+  aliases:
+    - supervisor
+    - field
+    - dispatcher
+    - work
+    - man
+    - person
+    - helmet
+- name: supervisor-close--work
+  friendly_name: Supervisor close work
+  aliases:
+    - supervisor
+    - close work
+    - manage work
+    - checkmark
+    - dashboard
+    - graph
+    - kpi
+    - field
+    - dispatcher
+    - work
+    - man
+    - person
+    - helmet
 - name: supply--chain--optimization--01
   friendly_name: Supply chain optimization 01
   aliases:

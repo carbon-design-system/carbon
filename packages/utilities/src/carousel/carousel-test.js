@@ -24,6 +24,20 @@ describe('initCarousel', () => {
     container = document.getElementById('carousel');
     mockOnViewChangeStart = jest.fn();
     mockOnViewChangeEnd = jest.fn();
+
+    Object.defineProperty(window, 'matchMedia', {
+      writable: true,
+      value: jest.fn().mockImplementation((query) => ({
+        matches: false,
+        media: query,
+        onchange: null,
+        addListener: jest.fn(), // deprecated
+        removeListener: jest.fn(), // deprecated
+        addEventListener: jest.fn(),
+        removeEventListener: jest.fn(),
+        dispatchEvent: jest.fn(),
+      })),
+    });
   });
 
   test('initializes carousel with correct classes and wrapper', () => {
@@ -122,6 +136,36 @@ describe('initCarousel', () => {
     );
     const active = carousel.getActiveItem();
     expect(active.index).toBe(0);
+  });
+
+  test('should return correct callback data when transitions or animations are disabled', () => {
+    Object.defineProperty(window, 'matchMedia', {
+      writable: true,
+      value: jest.fn().mockImplementation((query) => ({
+        matches: true,
+        media: query,
+        onchange: null,
+        addListener: jest.fn(), // deprecated
+        removeListener: jest.fn(), // deprecated
+        addEventListener: jest.fn(),
+        removeEventListener: jest.fn(),
+        dispatchEvent: jest.fn(),
+      })),
+    });
+
+    const carousel = initCarousel(container, {
+      onViewChangeStart: mockOnViewChangeStart,
+      onViewChangeEnd: mockOnViewChangeEnd,
+    });
+
+    carousel.next();
+    expect(mockOnViewChangeEnd.mock.lastCall[0].currentIndex).toBe(1);
+
+    carousel.next();
+    expect(mockOnViewChangeEnd.mock.lastCall[0].currentIndex).toBe(2);
+
+    carousel.prev();
+    expect(mockOnViewChangeEnd.mock.lastCall[0].currentIndex).toBe(1);
   });
 
   test('nav controls handle out of bounds', () => {
@@ -228,5 +272,24 @@ describe('initCarousel', () => {
     expect(
       container.querySelector('.carousel__live-region')
     ).not.toBeInTheDocument();
+  });
+
+  test('onViewChangeEnd is called only once the first time that it is called', () => {
+    const carousel = initCarousel(container, {
+      onViewChangeStart: mockOnViewChangeStart,
+      onViewChangeEnd: mockOnViewChangeEnd,
+    });
+
+    mockOnViewChangeEnd.mockClear();
+
+    carousel.next();
+
+    const activeItem = carousel.getActiveItem().item;
+    activeItem?.dispatchEvent(new Event('transitionend'));
+
+    expect(mockOnViewChangeEnd).toHaveBeenCalledTimes(1);
+    expect(mockOnViewChangeEnd).toHaveBeenLastCalledWith(
+      expect.objectContaining({ currentIndex: 1 })
+    );
   });
 });

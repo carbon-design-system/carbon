@@ -3,7 +3,7 @@
   "private": true,
   "type": "module",
   "dependencies": {
-    "@actions/core": "^1.11.1",
+    "@actions/core": "^3.0.0",
     "execa": "^9.6.0",
     "fast-glob": "^3.3.3",
     "fs-extra": "^11.0.0",
