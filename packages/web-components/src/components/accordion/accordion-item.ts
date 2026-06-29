@@ -262,10 +262,6 @@ class CDSAccordionItem extends FocusMixin(LitElement) {
     return `${prefix}-accordion-item-toggled`;
   }
 
-  static get selectorAccordionContent() {
-    return `.${prefix}--accordion__content`;
-  }
-
   static styles = styles;
 }
 

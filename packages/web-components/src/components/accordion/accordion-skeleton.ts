@@ -57,28 +57,22 @@ class CDSAccordionSkeleton extends LitElement {
   updated(changedProperties) {
     if (changedProperties.has('alignment')) {
       // Propagate `alignment` attribute to descendants until `:host-context()` gets supported in all major browsers
-      forEach(
-        this._accordionItemSkeletons,
-        (elem) => {
-          elem.setAttribute('alignment', this.alignment);
-        }
-      );
+      forEach(this._accordionItemSkeletons, (elem) => {
+        elem.setAttribute('alignment', this.alignment);
+      });
     }
     if (
       changedProperties.has('isFlush') ||
       changedProperties.has('alignment')
     ) {
       // Propagate `isFlush` attribute to descendants until `:host-context()` gets supported in all major browsers
-      forEach(
-        this._accordionItemSkeletons,
-        (elem) => {
-          if (this.isFlush && this.alignment !== 'start') {
-            elem.setAttribute('isFlush', '');
-          } else {
-            elem.removeAttribute('isFlush');
-          }
+      forEach(this._accordionItemSkeletons, (elem) => {
+        if (this.isFlush && this.alignment !== 'start') {
+          elem.setAttribute('isFlush', '');
+        } else {
+          elem.removeAttribute('isFlush');
         }
-      );
+      });
     }
   }
 
@@ -119,10 +113,6 @@ class CDSAccordionSkeleton extends LitElement {
             arr.length - 1}></cds-accordion-item-skeleton>`
       )}
     `;
-  }
-
-  static get selectorAccordionItemSkeletons() {
-    return `${prefix}-accordion-item-skeleton`;
   }
 
   static styles = styles;
