@@ -42,6 +42,7 @@ function transform(fileInfo, api, options) {
       if (specifier.type === 'ImportSpecifier') {
         let importedName = specifier.imported.name;
         let localName = specifier.local ? specifier.local.name : importedName;
+        // eslint-disable-next-line no-useless-assignment -- default mirrors importedName; conditionally overridden below
         let transformedImportedName = importedName;
         let transformedLocalName = localName;
 

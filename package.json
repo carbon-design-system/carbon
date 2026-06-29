@@ -37,7 +37,7 @@
     "react-is": "~19.2.0",
     "flatpickr@4.6.13": "patch:flatpickr@npm%3A4.6.13#./.yarn/patches/flatpickr-npm-4.6.13-06399933fc.patch",
     "@octokit/rest": "^22.0.0",
-    "eslint": "9.39.4",
+    "eslint": "^10.0.0",
     "typescript-eslint": "8.61.0"
   },
   "devDependencies": {
@@ -53,7 +53,7 @@
     "@commitlint/cli": "^21.0.0",
     "@commitlint/config-conventional": "^21.0.0",
     "@eslint/compat": "^2.0.1",
-    "@eslint/js": "^9.24.0",
+    "@eslint/js": "^10.0.0",
     "@playwright/test": "^1.36.2",
     "@testing-library/dom": "^10.1.0",
     "@testing-library/jest-dom": "^6.0.0",
@@ -66,7 +66,7 @@
     "cross-env": "^10.0.0",
     "cross-spawn": "^7.0.0",
     "doctoc": "^2.0.0",
-    "eslint": "^9.32.0",
+    "eslint": "^10.0.0",
     "eslint-plugin-jsdoc": "^58.1.1",
     "eslint-plugin-jsx-a11y": "^6.10.2",
     "eslint-plugin-playwright": "^2.0.0",

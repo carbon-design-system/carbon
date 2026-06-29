@@ -62,6 +62,7 @@ export default async function getGitHubClient() {
     return octokit;
   } catch (error) {
     console.error(error);
+    // eslint-disable-next-line preserve-caught-error -- error is logged above
     throw new Error('Invalid GitHub token');
   }
 }

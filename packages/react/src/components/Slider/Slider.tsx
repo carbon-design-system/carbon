@@ -781,6 +781,7 @@ const Slider = (props: SliderProps) => {
       return;
     }
 
+    // eslint-disable-next-line no-useless-assignment -- initialised as default; conditionally reassigned before use
     let delta = 0;
     if (matches(evt, [keys.ArrowDown, keys.ArrowLeft])) {
       delta = -step;

@@ -192,6 +192,7 @@ function transform(fileInfo, api, options) {
           // Since the `size` information needs to be provided, otherwise the
           // default size will be used
           if (j.ObjectProperty.check(parent)) {
+            // eslint-disable-next-line no-useless-assignment -- null is the initialiser; always assigned in the if/else below
             let replacement = null;
 
             // map to React.createElement instead of using as the JSX Opening
