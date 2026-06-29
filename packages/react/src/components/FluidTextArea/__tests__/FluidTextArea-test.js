@@ -5,7 +5,6 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
 import FluidTextArea from '../FluidTextArea';
 import userEvent from '@testing-library/user-event';
 import { render, screen } from '@testing-library/react';
@@ -69,11 +68,7 @@ describe('FluidTextArea', () => {
 
     it('should add disabled classes when disabled', () => {
       const { container } = render(
-        <FluidTextArea
-          disabled
-          id="input-1"
-          labelText="FluidTextArea label"
-        />
+        <FluidTextArea disabled id="input-1" labelText="FluidTextArea label" />
       );
 
       expect(container.firstChild).toHaveClass(
