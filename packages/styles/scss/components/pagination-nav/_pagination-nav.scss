@@ -79,7 +79,10 @@
     display: block;
     // subtract 0.875rem to account for font-size 14px
     padding: calc((layout.size('height') - 0.875rem) / 2) $spacing-02;
-    border-radius: 0;
+    border-end-end-radius: var(--cds-border-radius-button, 0);
+    border-end-start-radius: var(--cds-border-radius-button, 0);
+    border-start-end-radius: var(--cds-border-radius-button, 0);
+    border-start-start-radius: var(--cds-border-radius-button, 0);
     color: $text-primary;
     font-weight: $font-weight;
     line-height: 1;

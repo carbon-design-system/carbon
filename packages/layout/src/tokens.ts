@@ -44,6 +44,11 @@ export const unstable_tokens = [
   'iconSize01',
   'iconSize02',
 
+  // Border radius
+  'borderRadiusBox',
+  'borderRadiusButton',
+  'borderRadiusInput',
+
   // Layout
   // Deprecated
   'layout01',

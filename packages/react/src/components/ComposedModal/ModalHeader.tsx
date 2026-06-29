@@ -161,6 +161,7 @@ export const ModalHeader = React.forwardRef<HTMLDivElement, ModalHeaderProps>(
 
         <div className={`${prefix}--modal-close-button`}>
           <IconButton
+            kind="ghost"
             className={closeClass}
             label={iconDescription}
             onClick={handleCloseButtonClick}

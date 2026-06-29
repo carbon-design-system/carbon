@@ -179,3 +179,13 @@ export const sizes: Record<SizeName, string> = {
 export const iconSize01 = '1rem';
 export const iconSize02 = '1.25rem';
 export const iconSize = [iconSize01, iconSize02];
+
+// Border radius
+export const borderRadiusBox = '0rem';
+export const borderRadiusButton = '0rem';
+export const borderRadiusInput = '0rem';
+export const borderRadius = [
+  borderRadiusBox,
+  borderRadiusButton,
+  borderRadiusInput,
+];

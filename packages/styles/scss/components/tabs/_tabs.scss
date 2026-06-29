@@ -320,6 +320,10 @@
       display: flex;
       flex: 1 0 auto;
       padding: 0;
+      border-end-end-radius: var(--cds-border-radius-button, 0);
+      border-end-start-radius: var(--cds-border-radius-button, 0);
+      border-start-end-radius: var(--cds-border-radius-button, 0);
+      border-start-start-radius: var(--cds-border-radius-button, 0);
       cursor: pointer;
       transition: background-color $duration-fast-01
         motion(standard, productive);

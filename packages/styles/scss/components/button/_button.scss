@@ -52,6 +52,7 @@
     flex-direction: var(--flex-direction);
     align-items: stretch;
     justify-content: flex-end;
+    gap: $spacing-05;
     inline-size: 100%;
   }
 
@@ -261,7 +262,6 @@
     &.#{$prefix}--btn--ghost {
       &:focus {
         background-color: $background-active;
-        box-shadow: inset 0 0 0 $button-outline-width $button-focus-color;
       }
     }
 
@@ -463,6 +463,7 @@
   // button set styles
   .#{$prefix}--btn-set {
     display: flex;
+    gap: $spacing-05;
   }
 
   .#{$prefix}--btn-set--stacked {
@@ -473,48 +474,11 @@
     inline-size: 100%;
     // 196px from design kit
     max-inline-size: convert.to-rem(196px);
-
-    &:not(:focus) {
-      box-shadow: convert.to-rem(-1px) 0 0 0 $button-separator;
-    }
-
-    &:first-of-type:not(:focus) {
-      box-shadow: inherit;
-    }
-  }
-
-  .#{$prefix}--btn-set .#{$prefix}--btn:focus + .#{$prefix}--btn {
-    box-shadow: inherit;
-  }
-
-  .#{$prefix}--btn-set--stacked .#{$prefix}--btn:not(:focus) {
-    box-shadow: 0 convert.to-rem(-1px) 0 0 $button-separator;
-  }
-
-  .#{$prefix}--btn-set--stacked .#{$prefix}--btn:first-of-type:not(:focus) {
-    box-shadow: inherit;
-  }
-
-  .#{$prefix}--btn-set .#{$prefix}--btn.#{$prefix}--btn--disabled {
-    box-shadow: convert.to-rem(-1px) 0 0 0 $icon-on-color-disabled;
-
-    &:first-of-type {
-      box-shadow: none;
-    }
-  }
-
-  .#{$prefix}--btn-set--stacked .#{$prefix}--btn.#{$prefix}--btn--disabled {
-    box-shadow: 0 convert.to-rem(-1px) 0 0 $layer-selected-disabled;
-
-    &:first-of-type {
-      box-shadow: none;
-    }
   }
 
   .#{$prefix}--btn-set .#{$prefix}--btn.#{$prefix}--btn--loading {
     border-color: transparent;
     background-color: transparent;
-    box-shadow: none;
   }
 
   // badge indicator
@@ -527,11 +491,6 @@
   // Windows HCM fix
   .#{$prefix}--btn:focus {
     @include high-contrast-mode('focus');
-  }
-
-  // RTL overrides
-  [dir='rtl'] .#{$prefix}--btn-set .#{$prefix}--btn:not(:focus) {
-    box-shadow: convert.to-rem(1px) 0 0 0 $button-separator;
   }
 
   .#{$prefix}--btn-set--fluid {

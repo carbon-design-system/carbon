@@ -72,6 +72,11 @@
   //HIDDEN SEARCH - DEFAULT TOOLBAR
   //-------------------------------------------------
   .#{$prefix}--toolbar-search-container-expandable {
+    border-end-end-radius: var(--cds-border-radius-button, 0);
+    border-end-start-radius: var(--cds-border-radius-button, 0);
+    border-start-end-radius: var(--cds-border-radius-button, 0);
+    border-start-start-radius: var(--cds-border-radius-button, 0);
+
     transition:
       width $transition-expansion $standard-easing,
       background-color $duration-fast-02 motion(entrance, productive);
