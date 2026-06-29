@@ -1517,6 +1517,7 @@ Map {
       "size": {
         "args": [
           [
+            "xs",
             "sm",
             "md",
             "lg",
@@ -2444,6 +2445,7 @@ Map {
         "size": {
           "args": [
             [
+              "xs",
               "sm",
               "lg",
             ],
@@ -2504,6 +2506,17 @@ Map {
           ],
           "type": "oneOfType",
         },
+        "size": {
+          "args": [
+            [
+              "xs",
+              "sm",
+              "md",
+              "lg",
+            ],
+          ],
+          "type": "oneOf",
+        },
       },
     },
     "TableToolbarSearch": {
@@ -2559,6 +2572,7 @@ Map {
         "size": {
           "args": [
             [
+              "xs",
               "sm",
               "md",
               "lg",
@@ -3314,6 +3328,7 @@ Map {
       "size": {
         "args": [
           [
+            "xs",
             "sm",
             "md",
             "lg",
@@ -3358,6 +3373,7 @@ Map {
       "size": {
         "args": [
           [
+            "xs",
             "sm",
             "md",
             "lg",
@@ -4086,6 +4102,7 @@ Map {
       "size": {
         "args": [
           [
+            "xs",
             "sm",
             "md",
             "lg",
@@ -6717,7 +6734,12 @@ Map {
   "ModalBody" => {
     "$$typeof": Symbol(react.forward_ref),
     "propTypes": {
-      "aria-label": [Function],
+      "aria-label": {
+        "type": "string",
+      },
+      "aria-labelledby": {
+        "type": "string",
+      },
       "children": {
         "type": "node",
       },
@@ -7052,6 +7074,7 @@ Map {
       "size": {
         "args": [
           [
+            "xs",
             "sm",
             "md",
             "lg",
@@ -7778,6 +7801,17 @@ Map {
       "backwardText": {
         "type": "string",
       },
+      "backwardTextTooltipPosition": {
+        "args": [
+          [
+            "top",
+            "right",
+            "bottom",
+            "left",
+          ],
+        ],
+        "type": "oneOf",
+      },
       "className": {
         "type": "string",
       },
@@ -7786,6 +7820,17 @@ Map {
       },
       "forwardText": {
         "type": "string",
+      },
+      "forwardTextTooltipPosition": {
+        "args": [
+          [
+            "top",
+            "right",
+            "bottom",
+            "left",
+          ],
+        ],
+        "type": "oneOf",
       },
       "id": {
         "args": [
@@ -9849,6 +9894,16 @@ Map {
       "scrollIntoView": {
         "type": "bool",
       },
+      "size": {
+        "args": [
+          [
+            "sm",
+            "md",
+            "lg",
+          ],
+        ],
+        "type": "oneOf",
+      },
     },
   },
   "TabListVertical" => {
@@ -9870,6 +9925,17 @@ Map {
       },
       "className": {
         "type": "string",
+      },
+      "size": {
+        "args": [
+          [
+            "sm",
+            "md",
+            "lg",
+            "xl",
+          ],
+        ],
+        "type": "oneOf",
       },
     },
   },
@@ -10332,6 +10398,7 @@ Map {
       "size": {
         "args": [
           [
+            "xs",
             "sm",
             "lg",
           ],
@@ -10392,6 +10459,17 @@ Map {
         ],
         "type": "oneOfType",
       },
+      "size": {
+        "args": [
+          [
+            "xs",
+            "sm",
+            "md",
+            "lg",
+          ],
+        ],
+        "type": "oneOf",
+      },
     },
   },
   "TableToolbarSearch" => {
@@ -10447,6 +10525,7 @@ Map {
       "size": {
         "args": [
           [
+            "xs",
             "sm",
             "md",
             "lg",

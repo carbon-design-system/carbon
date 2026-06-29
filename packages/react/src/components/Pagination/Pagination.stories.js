@@ -34,9 +34,19 @@ export default {
       options: ['xs', 'sm', 'md', 'lg'],
       control: { type: 'select' },
     },
+    backwardTextTooltipPosition: {
+      options: ['top', 'right', 'bottom', 'left'],
+      control: { type: 'select' },
+    },
+    forwardTextTooltipPosition: {
+      options: ['top', 'right', 'bottom', 'left'],
+      control: { type: 'select' },
+    },
   },
   args: {
     size: 'md',
+    backwardTextTooltipPosition: 'top',
+    forwardTextTooltipPosition: 'top',
   },
   decorators: [
     (story) => (
@@ -56,7 +66,9 @@ export const Default = (args) => {
 
 Default.args = {
   backwardText: 'Previous',
+  backwardTextTooltipPosition: 'top',
   forwardText: 'Next',
+  forwardTextTooltipPosition: 'top',
   disabled: false,
   isLastPage: false,
   itemsPerPageText: 'Items per page:',
@@ -85,10 +97,18 @@ Default.argTypes = {
       type: 'text',
     },
   },
+  backwardTextTooltipPosition: {
+    options: ['top', 'right', 'bottom', 'left'],
+    control: { type: 'select' },
+  },
   forwardText: {
     control: {
       type: 'text',
     },
+  },
+  forwardTextTooltipPosition: {
+    options: ['top', 'right', 'bottom', 'left'],
+    control: { type: 'select' },
   },
   disabled: {
     control: {
