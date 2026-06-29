@@ -15,6 +15,8 @@ describe('cds-progress-bar', () => {
     `);
     const bar = el.shadowRoot.querySelector('.cds--progress-bar__bar');
 
+    expect(el._bar).to.exist;
+    expect(el._bar).to.equal(bar);
     expect(bar.style.transform).to.equal('scaleX(0.25)');
 
     el.value = 100;
