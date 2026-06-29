@@ -7,6 +7,7 @@
 
 import React from 'react';
 import { useState } from 'react';
+import { Checkmark } from '@carbon/icons-react';
 import { Menu, MenuItem, MenuItemSelectable, MenuItemRadioGroup } from './';
 import {
   act,
@@ -324,6 +325,40 @@ describe('MenuItem', () => {
       );
 
       expect(screen.getByText('item')).toBeInTheDocument();
+    });
+
+    it('should mark the menu as having icons when a menu item renders an icon', () => {
+      render(
+        <Menu open>
+          <MenuItem label="item" renderIcon={Checkmark} />
+        </Menu>
+      );
+
+      expect(screen.getByRole('menu')).toHaveClass(
+        'cds--menu',
+        'cds--menu--sm',
+        'cds--menu--open',
+        'cds--menu--shown',
+        'cds--menu--with-icons',
+        { exact: true }
+      );
+    });
+
+    it('should mark the menu as having selectable items when a selectable item is rendered', () => {
+      render(
+        <Menu open>
+          <MenuItemSelectable label="item" />
+        </Menu>
+      );
+
+      expect(screen.getByRole('menu')).toHaveClass(
+        'cds--menu',
+        'cds--menu--sm',
+        'cds--menu--open',
+        'cds--menu--shown',
+        'cds--menu--with-selectable-items',
+        { exact: true }
+      );
     });
   });
 

@@ -21,6 +21,7 @@ import CDSMultiSelectItem from './multi-select-item';
 import styles from './multi-select.scss?lit';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import HostListener from '../../globals/decorators/host-listener';
+import CDSAILabel from '../ai-label/ai-label';
 
 export {
   DROPDOWN_SIZE,
@@ -255,6 +256,9 @@ class CDSMultiSelect extends CDSDropdown {
    * Clears selections on Escape click
    */
   protected _handleKeydownInner(event: KeyboardEvent) {
+    if (event.target instanceof CDSAILabel) {
+      return;
+    }
     const { key } = event;
     if (
       key === 'Escape' &&
@@ -286,6 +290,9 @@ class CDSMultiSelect extends CDSDropdown {
    * Handler for the `keypress` event, ensures filter still works upon entering space
    */
   protected _handleKeypressInner(event: KeyboardEvent) {
+    if (event.target instanceof CDSAILabel) {
+      return;
+    }
     const { key } = event;
     const action = (this.constructor as typeof CDSDropdown).getAction(key);
     const { TRIGGERING } = DROPDOWN_KEYBOARD_ACTION;
@@ -846,9 +853,6 @@ class CDSMultiSelect extends CDSDropdown {
         locale,
       });
 
-      if (aiLabel) {
-        sortedMenuItems.unshift(aiLabel);
-      }
       sortedMenuItems.forEach((item) => {
         this.appendChild(item);
       });

@@ -98,4 +98,9 @@ export enum TABS_SIZE {
    * Large size.
    */
   LARGE = 'lg',
+
+  /**
+   * Extra large size.
+   */
+  EXTRA_LARGE = 'xl',
 }

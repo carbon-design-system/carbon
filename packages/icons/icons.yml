@@ -2906,6 +2906,18 @@
     - building
   sizes:
     - 32
+- name: building--electrical
+  friendly_name: Building electrical
+  aliases:
+    - building
+    - architecture
+    - office
+    - commerce
+    - highrise
+    - electrical
+    - lightning
+  sizes:
+    - 32
 - name: building--insights-1
   friendly_name: Building insights 1
   sizes:
@@ -4568,6 +4580,17 @@
     - data
   sizes:
     - 32
+- name: chart--performance
+  friendly_name: Chart performance
+  aliases:
+    - chart
+    - performance
+    - graph
+    - data
+    - trend
+    - arrow
+  sizes:
+    - 32
 - name: chat
   friendly_name: Chat
   aliases:
@@ -5895,6 +5918,18 @@
     - target
   sizes:
     - 32
+- name: connection
+  friendly_name: Connection
+  aliases:
+    - connection
+    - connect
+    - receive
+    - diagram
+    - relationship
+    - flow
+    - node
+  sizes:
+    - 32
 - name: connection--receive
   friendly_name: Connection receive
   aliases:
@@ -5911,6 +5946,21 @@
     - send
     - outgoing
     - output
+  sizes:
+    - 32
+- name: connection--signal--alt
+  friendly_name: Connection signal alt
+  aliases:
+    - connection
+    - connect
+    - receive
+    - signal
+    - tower
+    - service
+    - station
+    - radio
+    - wireless
+    - network
   sizes:
     - 32
 - name: connection--two-way
@@ -6804,6 +6854,24 @@
     - numbers
     - metrics
     - characters
+- name: data--add
+  friendly_name: Data add
+  sizes:
+    - 32
+  aliases:
+    - data
+    - add
+    - connection
+    - stack
+- name: data--alert
+  friendly_name: Data alert
+  sizes:
+    - 32
+  aliases:
+    - data
+    - alert
+    - connection
+    - stack
 - name: data--base
   friendly_name: Data base
   sizes:
@@ -7428,6 +7496,17 @@
     - trend
     - negative trend
     - drop
+  sizes:
+    - 32
+- name: delay
+  friendly_name: Delay
+  aliases:
+    - clock
+    - hour
+    - minute
+    - watch
+    - time
+    - delay
   sizes:
     - 32
 - name: delete
@@ -8558,6 +8637,34 @@
     - double axis
   sizes:
     - 32
+- name: double-chevron--left
+  friendly_name: Double chevron left
+  sizes:
+    - 32
+  aliases:
+    - open
+    - close
+    - expand
+    - collapse
+    - chevron
+    - chevron left
+    - left chevron
+    - double chevron
+    - navigation
+- name: double-chevron--right
+  friendly_name: Double chevron right
+  sizes:
+    - 32
+  aliases:
+    - open
+    - close
+    - expand
+    - collapse
+    - chevron
+    - chevron right
+    - right chevron
+    - double chevron
+    - navigation
 - name: double-integer
   friendly_name: Double integer
   aliases:
@@ -8999,6 +9106,35 @@
     - mail
   sizes:
     - 32
+- name: email--user
+  friendly_name: Email user
+  aliases:
+    - mail
+    - contact
+    - envelope
+    - post
+    - send
+    - user
+    - conversation
+  sizes:
+    - 32
+- name: emissions
+  friendly_name: Emissions
+  aliases:
+    - emissions
+    - sustainability
+    - chemicals
+    - chemical plant
+    - smoke
+    - gas
+    - flue
+    - flue gas
+    - stack
+    - chimney
+    - smoke stack
+    - chimney stack
+  sizes:
+    - 32
 - name: emissions-management
   friendly_name: Emissions management
   aliases:
@@ -9037,6 +9173,27 @@
     - weather
     - green
     - resource
+  sizes:
+    - 32
+- name: energy--report
+  friendly_name: Energy report
+  aliases:
+    - clipboard
+    - paper
+    - report
+    - energy
+    - lightning
+    - summary
+  sizes:
+    - 32
+- name: energy--waste
+  friendly_name: Energy waste
+  aliases:
+    - energy
+    - waste
+    - bin
+    - trash
+    - lightning
   sizes:
     - 32
 - name: enterprise
@@ -9182,6 +9339,17 @@
     - star
   sizes:
     - 32
+- name: event--number
+  friendly_name: Event number
+  sizes:
+    - 32
+  aliases:
+    - calendar
+    - pound sign
+    - hashtag
+    - date
+    - number
+    - schedule
 - name: event--schedule
   friendly_name: Event schedule
   sizes:
@@ -9577,6 +9745,43 @@
     - face wink filled
     - person
     - people
+- name: facility--group
+  friendly_name: Facility group
+  aliases:
+    - facility
+    - group
+    - place
+    - locate
+    - gps
+    - destination
+    - map
+    - pin
+    - site
+    - area
+    - legend
+    - location
+    - travel
+  sizes:
+    - 32
+- name: facility--group--alternate
+  friendly_name: Facility group alternate
+  aliases:
+    - facility
+    - group
+    - alternate
+    - place
+    - locate
+    - gps
+    - destination
+    - map
+    - pin
+    - site
+    - area
+    - legend
+    - location
+    - travel
+  sizes:
+    - 32
 - name: factor
   friendly_name: Factor
   aliases:
@@ -10447,6 +10652,21 @@
     - bowl
   sizes:
     - 32
+- name: fuel-can
+  friendly_name: Fuel can
+  aliases:
+    - fuel
+    - can
+    - container
+    - combustible
+    - gas
+    - gasoline
+    - petrol
+    - oil
+    - diesel
+    - inflamable
+  sizes:
+    - 32
 - name: function
   friendly_name: Function
   aliases:
@@ -10554,6 +10774,34 @@
     - gas
     - fueling station
     - fuel
+  sizes:
+    - 32
+- name: gas-station--diesel
+  friendly_name: Gas station diesel
+  aliases:
+    - gas station
+    - gas
+    - gasoline
+    - diesel
+    - fueling station
+    - fuel
+    - pump
+    - combustible
+    - inflamable
+  sizes:
+    - 32
+- name: gas-station--eco
+  friendly_name: Gas station eco
+  aliases:
+    - gas station
+    - gas
+    - gasoline
+    - eco
+    - fueling station
+    - fuel
+    - pump
+    - combustible
+    - inflamable
   sizes:
     - 32
 - name: gas-station--filled
@@ -11151,6 +11399,17 @@
     - airplane
   sizes:
     - 32
+- name: helmet
+  friendly_name: Helmet
+  aliases:
+    - helmet
+    - hard hat
+    - protection
+    - equipment
+    - construction
+    - construction site
+  sizes:
+    - 32
 - name: help
   friendly_name: Help
   aliases:
@@ -11270,6 +11529,17 @@
     - hole filling
     - health
     - digital imaging
+  sizes:
+    - 32
+- name: history
+  friendly_name: History
+  aliases:
+    - history
+    - clock
+    - hour
+    - minute
+    - watch
+    - timeline
   sizes:
     - 32
 - name: home
@@ -16145,6 +16415,23 @@
     - filled
   sizes:
     - 32
+- name: location--group
+  friendly_name: Location group
+  aliases:
+    - location
+    - group
+    - place
+    - locate
+    - gps
+    - destination
+    - map
+    - pin
+    - site
+    - area
+    - legend
+    - travel
+  sizes:
+    - 32
 - name: location--hazard
   friendly_name: Location hazard
   aliases:
@@ -16319,6 +16606,24 @@
     - legend
     - location
     - star
+    - travel
+  sizes:
+    - 32
+- name: location--supplier
+  friendly_name: Location supplier
+  aliases:
+    - location
+    - supplier
+    - place
+    - locate
+    - gps
+    - destination
+    - map
+    - pin
+    - arrow
+    - site
+    - area
+    - legend
     - travel
   sizes:
     - 32
@@ -18244,7 +18549,7 @@
   sizes:
     - 32
 - name: navaid--tacan
-  friendly_name: Navaid tacan
+  friendly_name: NAVAID TACAN
   aliases:
     - travel
     - navigation
@@ -18906,6 +19211,15 @@
     - warning
   sizes:
     - 32
+- name: offset--environmental
+  friendly_name: Offset environmental
+  aliases:
+    - offset
+    - environment
+    - sustainability
+    - arrow
+  sizes:
+    - 32
 - name: omega
   friendly_name: Omega
   aliases:
@@ -19456,6 +19770,17 @@
     - people
     - business
     - user
+  sizes:
+    - 32
+- name: party-popper
+  friendly_name: Party popper
+  aliases:
+    - party
+    - popper
+    - event
+    - tada
+    - celebrate
+    - celebration
   sizes:
     - 32
 - name: passenger--drinks
@@ -20568,6 +20893,24 @@
     - paper
   sizes:
     - 32
+- name: priority--high
+  friendly_name: Priority high
+  aliases:
+    - priority
+    - high
+    - arrow
+    - up
+  sizes:
+    - 32
+- name: priority--low
+  friendly_name: Priority low
+  aliases:
+    - priority
+    - low
+    - arrow
+    - down
+  sizes:
+    - 32
 - name: private-network
   friendly_name: Private network
   aliases:
@@ -20631,6 +20974,25 @@
     - general availability
     - live
     - public
+  sizes:
+    - 32
+- name: program
+  friendly_name: Program
+  aliases:
+    - program
+    - container
+    - data
+    - lines
+  sizes:
+    - 32
+- name: program--action
+  friendly_name: Program action
+  aliases:
+    - program
+    - action
+    - container
+    - data
+    - lines
   sizes:
     - 32
 - name: progress-bar
@@ -20966,6 +21328,17 @@
     - total
   sizes:
     - 32
+- name: receipt--verification
+  friendly_name: Receipt verification
+  aliases:
+    - check
+    - bill
+    - total
+    - receipt
+    - verification
+    - checkmark
+  sizes:
+    - 32
 - name: recently-viewed
   friendly_name: Recently viewed
   aliases:
@@ -21075,6 +21448,18 @@
     - reflect vertical
     - reflect
     - formatting
+  sizes:
+    - 32
+- name: refrigerant
+  friendly_name: Refrigerant
+  aliases:
+    - refrigerant
+    - fridge
+    - can
+    - container
+    - coolant
+    - gas
+    - inflamable
   sizes:
     - 32
 - name: region-analysis--area
@@ -21210,6 +21595,16 @@
     - summary
   sizes:
     - 32
+- name: report--chart
+  friendly_name: Report chart
+  aliases:
+    - clipboard
+    - paper
+    - chart
+    - pie
+    - summary
+  sizes:
+    - 32
 - name: report--data
   friendly_name: Report data
   sizes:
@@ -21219,6 +21614,17 @@
     - paper
     - chart
     - summary
+- name: report--growth
+  friendly_name: Report growth
+  aliases:
+    - clipboard
+    - paper
+    - chart
+    - growth
+    - arrow
+    - summary
+  sizes:
+    - 32
 - name: request-quote
   friendly_name: Request quote
   aliases:
@@ -22395,6 +22801,18 @@
     - deliver
     - letter
     - email
+  sizes:
+    - 32
+- name: sensor
+  friendly_name: Sensor
+  aliases:
+    - sensor
+    - receiver
+    - input
+    - output
+    - signal
+    - wave
+    - wireless
   sizes:
     - 32
 - name: send--alt
@@ -24619,6 +25037,18 @@
     - vehicle
   sizes:
     - 32
+- name: target
+  friendly_name: Target
+  aliases:
+    - target
+    - crosshair
+    - bullseye
+    - mark
+    - objective
+    - goal
+    - center
+  sizes:
+    - 32
 - name: task
   friendly_name: Task
   aliases:
@@ -24664,6 +25094,18 @@
     - asset-view
   sizes:
     - 32
+- name: task--blank
+  friendly_name: Task blank
+  aliases:
+    - task
+    - clipboard
+    - to do list
+    - list
+    - chore
+    - paper
+    - blank
+  sizes:
+    - 32
 - name: task--complete
   friendly_name: Task complete
   aliases:
@@ -24675,6 +25117,32 @@
     - complete
   sizes:
     - 32
+- name: task--edit
+  friendly_name: Task edit
+  aliases:
+    - task
+    - clipboard
+    - to do list
+    - list
+    - chore
+    - paper
+    - pencil
+    - edit
+  sizes:
+    - 32
+- name: task--hold
+  friendly_name: Task hold
+  aliases:
+    - task
+    - clipboard
+    - to do list
+    - list
+    - chore
+    - paper
+    - pause
+    - hold
+  sizes:
+    - 32
 - name: task--location
   friendly_name: Task location
   aliases:
@@ -24683,6 +25151,18 @@
     - clipboard
     - pin
     - location
+  sizes:
+    - 32
+- name: task--progress
+  friendly_name: Task progress
+  aliases:
+    - task
+    - clipboard
+    - to do list
+    - list
+    - chore
+    - paper
+    - progress
   sizes:
     - 32
 - name: task--remove
@@ -25507,6 +25987,18 @@
   aliases:
     - time plot
     - data
+  sizes:
+    - 32
+- name: timeline
+  friendly_name: Timeline
+  aliases:
+    - timeline
+    - time
+    - stream
+    - flow
+    - sequence
+    - progression
+    - roadmap
   sizes:
     - 32
 - name: timer
@@ -26733,6 +27225,21 @@
     - military
   sizes:
     - 32
+- name: user--minus
+  friendly_name: User minus
+  aliases:
+    - person
+    - avatar
+    - man
+    - woman
+    - figure
+    - profile
+    - account
+    - user
+    - minus
+    - remove
+  sizes:
+    - 32
 - name: user--multiple
   friendly_name: User multiple
   aliases:
@@ -26862,6 +27369,18 @@
     - profile
     - account
     - my account
+- name: utility--expense
+  friendly_name: Utility expense
+  aliases:
+    - check
+    - bill
+    - total
+    - utility
+    - expense
+    - lightning
+    - currency
+  sizes:
+    - 32
 - name: user-profile--alt
   friendly_name: User profile alt
   sizes:

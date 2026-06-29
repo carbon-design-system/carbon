@@ -22,6 +22,11 @@ import { iconLoader } from '../../globals/internal/icon-loader';
 import { prefix } from '../../globals/settings';
 import styles from './pagination.scss?lit';
 
+const selectorPagesSelect = `${prefix}-select#pages-select`;
+const selectorPageSizesSelect = `${prefix}-select`;
+const selectorPreviousButton = `${prefix}--pagination__button--backward`;
+const selectorForwardButton = `${prefix}--pagination__button--forward`;
+
 /**
  * Pagination UI.
  *
@@ -32,8 +37,17 @@ import styles from './pagination.scss?lit';
  */
 @customElement(`${prefix}-pagination`)
 class CDSPagination extends FocusMixin(HostListenerMixin(LitElement)) {
-  @query(`${prefix}-select`)
-  private _pageSizeSelect!: HTMLElement;
+  @query(selectorPageSizesSelect)
+  private _pageSizeSelect!: CDSSelect;
+
+  @query(selectorPagesSelect)
+  private _pagesSelect!: CDSSelect | null;
+
+  @query(`[button-class-name*=${selectorPreviousButton}]`)
+  private _previousButton!: HTMLElement;
+
+  @query(`[button-class-name*=${selectorForwardButton}]`)
+  private _forwardButton!: HTMLElement;
 
   private _handleSlotChange({ target }: Event) {
     const content = (target as HTMLSlotElement).assignedNodes().filter(
@@ -163,13 +177,7 @@ class CDSPagination extends FocusMixin(HostListenerMixin(LitElement)) {
     }
     // reset focus to forward button if it reaches the beginning
     if (this.page === 1) {
-      const { selectorForwardButton } = this
-        .constructor as typeof CDSPagination;
-      (
-        this.shadowRoot?.querySelector(
-          `[button-class-name*=${selectorForwardButton}]`
-        ) as HTMLElement
-      ).focus();
+      this._forwardButton.focus();
     }
   }
 
@@ -189,13 +197,7 @@ class CDSPagination extends FocusMixin(HostListenerMixin(LitElement)) {
     }
     // reset focus to previous button if it reaches the end and `pagesUnknown` is not true
     if (!pagesUnknown && this.page === this.totalPages) {
-      const { selectorPreviousButton } = this
-        .constructor as typeof CDSPagination;
-      (
-        this.shadowRoot?.querySelector(
-          `[button-class-name*=${selectorPreviousButton}]`
-        ) as HTMLElement
-      ).focus();
+      this._previousButton.focus();
     }
   }
 
@@ -375,17 +377,9 @@ class CDSPagination extends FocusMixin(HostListenerMixin(LitElement)) {
 
   updated(changedProperties) {
     const { pageSize, totalItems } = this;
-    const { selectorPageSizesSelect, selectorPagesSelect } = this
-      .constructor as typeof CDSPagination;
 
     if (changedProperties.has('pageSize')) {
-      const pageSizeSelect = this.shadowRoot?.querySelector(
-        selectorPageSizesSelect
-      ) as CDSSelect | null;
-
-      if (pageSizeSelect) {
-        pageSizeSelect.value = String(pageSize ?? '');
-      }
+      this._pageSizeSelect.value = String(pageSize ?? '');
     }
 
     // Recompute total pages and clamp the visible page whenever any relevant input changes
@@ -411,12 +405,8 @@ class CDSPagination extends FocusMixin(HostListenerMixin(LitElement)) {
       const requestedPage = Math.max(1, Math.floor(this.page || 1));
       const displayPage = Math.min(requestedPage, totalPagesSafe);
 
-      const pagesSelect = this.shadowRoot?.querySelector(
-        selectorPagesSelect
-      ) as CDSSelect | null;
-
-      if (pagesSelect) {
-        pagesSelect.value = displayPage.toString();
+      if (this._pagesSelect) {
+        this._pagesSelect.value = displayPage.toString();
       }
     }
 
@@ -427,11 +417,8 @@ class CDSPagination extends FocusMixin(HostListenerMixin(LitElement)) {
         this.totalItems,
         this.pagesUnknown
       );
-      const pagesSelect = this.shadowRoot?.querySelector(
-        (this.constructor as typeof CDSPagination).selectorPagesSelect
-      ) as CDSSelect | null;
-      if (pagesSelect) {
-        pagesSelect.value = String(this.page);
+      if (this._pagesSelect) {
+        this._pagesSelect.value = String(this.page);
       }
     }
   }
@@ -587,28 +574,28 @@ class CDSPagination extends FocusMixin(HostListenerMixin(LitElement)) {
    * A selector that will return the select box for the current page.
    */
   static get selectorPagesSelect() {
-    return `${prefix}-select#pages-select`;
+    return selectorPagesSelect;
   }
 
   /**
    * A selector that will return the select box for page sizes.
    */
   static get selectorPageSizesSelect() {
-    return `${prefix}-select`;
+    return selectorPageSizesSelect;
   }
 
   /**
    * A selector that will return the previous button.
    */
   static get selectorPreviousButton() {
-    return `${prefix}--pagination__button--backward`;
+    return selectorPreviousButton;
   }
 
   /**
    * A selector that will return the forward button.
    */
   static get selectorForwardButton() {
-    return `${prefix}--pagination__button--forward`;
+    return selectorForwardButton;
   }
 
   /**
