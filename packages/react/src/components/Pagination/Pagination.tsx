@@ -117,6 +117,22 @@ export interface PaginationProps
   pageSelectLabelText?: (total: number) => string;
 
   /**
+   * Provide a custom render function for the page-selection control.
+   * When provided, the default `<Select>` is replaced with the returned node.
+   * Receives `{ currentPage, totalPages, currentPageSize, onSetPage }`.
+   */
+  pageSelectRenderer?: (props: {
+    /** The currently active page. */
+    currentPage: number;
+    /** Total number of pages derived from `totalItems` and `pageSize`. */
+    totalPages: number;
+    /** Current page size. */
+    currentPageSize: number;
+    /** Call this to change the active page. */
+    onSetPage: (page: number) => void;
+  }) => React.ReactNode;
+
+  /**
    * The number dictating how many items a page contains.
    */
   pageSize?: number;
@@ -211,6 +227,7 @@ const Pagination = React.forwardRef(
         `Page of ${total} ${total === 1 ? 'page' : 'pages'}`,
       page: controlledPage = 1,
       pageInputDisabled,
+      pageSelectRenderer,
       pageSize: controlledPageSize,
       pageSizeInputDisabled,
       pageSizes: controlledPageSizes,
@@ -269,7 +286,7 @@ const Pagination = React.forwardRef(
       [`${prefix}--pagination__button--forward`]: true,
       [`${prefix}--pagination__button--no-index`]: forwardButtonDisabled,
     });
-    const selectItems = renderSelectItems(totalPages);
+    const selectItems = pageSelectRenderer ? [] : renderSelectItems(totalPages);
 
     const focusMap = {
       backward: backBtnRef,
@@ -501,18 +518,32 @@ const Pagination = React.forwardRef(
             </span>
           ) : (
             <>
-              <Select
-                id={`${prefix}-pagination-select-${inputId}-right`}
-                className={`${prefix}--select__page-number`}
-                labelText={pageSelectLabelText(totalPages)}
-                inline
-                hideLabel
-                onChange={handlePageInputChange}
-                value={page}
-                key={page}
-                disabled={pageInputDisabled || disabled}>
-                {selectItems}
-              </Select>
+              {pageSelectRenderer ? (
+                pageSelectRenderer({
+                  currentPage: page,
+                  totalPages,
+                  currentPageSize: pageSize,
+                  onSetPage: (nextPage: number) => {
+                    setPage(nextPage);
+                    if (onChange) {
+                      onChange({ page: nextPage, pageSize });
+                    }
+                  },
+                })
+              ) : (
+                <Select
+                  id={`${prefix}-pagination-select-${inputId}-right`}
+                  className={`${prefix}--select__page-number`}
+                  labelText={pageSelectLabelText(totalPages)}
+                  inline
+                  hideLabel
+                  onChange={handlePageInputChange}
+                  value={page}
+                  key={page}
+                  disabled={pageInputDisabled || disabled}>
+                  {selectItems}
+                </Select>
+              )}
               <span className={`${prefix}--pagination__text`}>
                 {pageRangeText(page, totalPages)}
               </span>
@@ -642,6 +673,13 @@ Pagination.propTypes = {
    * A function returning the label for the page select.
    */
   pageSelectLabelText: PropTypes.func,
+
+  /**
+   * Provide a custom render function for the page-selection control.
+   * When provided, the default `<Select>` is replaced with the returned node.
+   * Receives `{ currentPage, totalPages, currentPageSize, onSetPage }`.
+   */
+  pageSelectRenderer: PropTypes.func,
 
   /**
    * The number dictating how many items a page contains.

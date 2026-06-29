@@ -239,3 +239,45 @@ PaginationUnknownPages.parameters = {
     exclude: ['pageInputDisabled', 'pagesUnknown', 'totalItems'],
   },
 };
+
+/**
+ * `pageSelectRenderer` lets you replace the default page-select control with
+ * any React node. The render function receives `{ currentPage, totalPages,
+ * currentPageSize, onSetPage }`.
+ *
+ * This story swaps the default `<Select>` for a plain `<input type="number">`
+ * to illustrate that any custom control works — and to show a case the default
+ * pagination cannot already handle on its own.
+ *
+ * TODO: remove after initial review
+ */
+export const WithPageSelectRenderer = (args) => (
+  <Pagination
+    {...props()}
+    totalItems={350}
+    pageSizes={[10, 20, 30]}
+    {...args}
+    pageSelectRenderer={({ currentPage, totalPages, onSetPage }) => (
+      <input
+        type="number"
+        min={1}
+        max={totalPages}
+        value={currentPage}
+        aria-label={`Page number, of ${totalPages} pages`}
+        onChange={(e) => {
+          const next = Number(e.target.value);
+          if (next >= 1 && next <= totalPages) {
+            onSetPage(next);
+          }
+        }}
+      />
+    )}
+  />
+);
+
+WithPageSelectRenderer.storyName = 'With custom page select renderer';
+WithPageSelectRenderer.parameters = {
+  controls: {
+    exclude: ['pageSelectRenderer'],
+  },
+};
