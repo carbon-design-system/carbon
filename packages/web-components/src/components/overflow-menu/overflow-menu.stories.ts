@@ -1,12 +1,11 @@
 /**
- * Copyright IBM Corp. 2019, 2025
+ * Copyright IBM Corp. 2019, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
 import { html } from 'lit';
-import { ifDefined } from 'lit/directives/if-defined.js';
 import { OVERFLOW_MENU_SIZE } from './overflow-menu';
 import './overflow-menu-body';
 import './overflow-menu-item';
@@ -14,6 +13,7 @@ import { prefix } from '../../globals/settings';
 import OverflowMenuVertical16 from '@carbon/icons/es/overflow-menu--vertical/16.js';
 import Filter16 from '@carbon/icons/es/filter/16.js';
 import { iconLoader } from '../../globals/internal/icon-loader';
+import '../layout/index'; // remove before merging
 
 const sizes = {
   [`Extra small size (${OVERFLOW_MENU_SIZE.EXTRA_SMALL})`]:
@@ -69,7 +69,7 @@ export const Default = {
           slot: 'icon',
         })}
         <span slot="tooltip-content"> ${iconDescription} </span>
-        <cds-overflow-menu-body ?flipped="${ifDefined(flipped)}">
+        <cds-overflow-menu-body ?flipped="${flipped}">
           <cds-overflow-menu-item>Stop app</cds-overflow-menu-item>
           <cds-overflow-menu-item>Restart app</cds-overflow-menu-item>
           <cds-overflow-menu-item>Rename app</cds-overflow-menu-item>
@@ -87,6 +87,59 @@ export const Default = {
     `;
   },
 };
+
+// remove before merging
+const renderMenuItems = () => html`
+  <cds-overflow-menu-item>Stop app</cds-overflow-menu-item>
+  <cds-overflow-menu-item>Restart app</cds-overflow-menu-item>
+  <cds-overflow-menu-item>Rename app</cds-overflow-menu-item>
+  <cds-overflow-menu-item disabled>Clone and move app</cds-overflow-menu-item>
+  <cds-overflow-menu-item>Edit routes and access</cds-overflow-menu-item>
+  <cds-overflow-menu-item divider danger>Delete app</cds-overflow-menu-item>
+`;
+
+export const SizeTest = {
+  args,
+  argTypes,
+  parameters: {
+    controls: {
+      include: ['size'],
+    },
+  },
+  render: (args) => {
+    const { flipped, iconDescription, open, index, size } = args ?? {};
+    const icon = iconLoader(OverflowMenuVertical16, {
+      class: `${prefix}--overflow-menu__icon`,
+      slot: 'icon',
+    });
+    return html`
+      <h4>The menu on the right is using layout tokens (no size attribute)</h4>
+      <br />
+
+      <div style="display: flex; gap: 6rem;">
+        <cds-overflow-menu ?open="${open}" size="${size}" index=${index}>
+          ${icon}
+          <span slot="tooltip-content"> ${iconDescription} </span>
+          <cds-overflow-menu-body ?flipped="${flipped}">
+            ${renderMenuItems()}
+          </cds-overflow-menu-body>
+        </cds-overflow-menu>
+
+        <cds-layout size="${size}">
+          <cds-overflow-menu ?open="${open}" index=${index}>
+            ${icon}
+            <span slot="tooltip-content"> ${iconDescription} </span>
+            <cds-overflow-menu-body ?flipped="${flipped}">
+              ${renderMenuItems()}
+            </cds-overflow-menu-body>
+          </cds-overflow-menu>
+        </cds-layout>
+      </div>
+    `;
+  },
+};
+//
+
 export const RenderCustomIcon = {
   render: () => {
     return html`

@@ -69,7 +69,7 @@ class CDSOverflowMenuBody extends CDSFloatingMenu {
    * The overflow menu size.
    */
   @property({ reflect: true })
-  size = OVERFLOW_MENU_SIZE.MEDIUM;
+  size?: OVERFLOW_MENU_SIZE;
 
   /**
    * The adjustment in position applied to the floating menu.
@@ -223,7 +223,7 @@ class CDSOverflowMenuBody extends CDSFloatingMenu {
         .constructor as typeof CDSOverflowMenuBody;
       const menuItems = this.querySelectorAll(selectorMenuItem);
       menuItems.forEach((item) => {
-        item.setAttribute('size', this.size);
+        if (this.size) item.setAttribute('size', this.size);
       });
     }
 
