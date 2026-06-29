@@ -269,21 +269,14 @@ class CDSOverflowMenu
     return this.getBoundingClientRect();
   }
 
-  /**
-   * Delegates host focus to the internal trigger button.
-   * Enables programmatic focus for keyboard navigation scenarios.
-   */
-  focus(options?: FocusOptions) {
-    const triggerButton = this._getTriggerButton();
-    return triggerButton ? triggerButton.focus(options) : super.focus();
-  }
-
   connectedCallback() {
     if (!this.hasAttribute('aria-haspopup')) {
       this.setAttribute('aria-haspopup', 'true');
     }
     if (!this.shadowRoot) {
-      this.attachShadow({ mode: 'open' });
+      this.attachShadow(
+        (this.constructor as typeof CDSOverflowMenu).shadowRootOptions
+      );
     }
     super.connectedCallback();
 
