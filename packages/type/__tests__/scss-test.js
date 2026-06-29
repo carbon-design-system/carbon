@@ -12,7 +12,7 @@
 const { SassRenderer } = require('@carbon/test-utils/scss');
 const css = require('css');
 const { camelCase, paramCase } = require('change-case-all');
-const { productiveHeading01 } = require('../src');
+const { productiveHeading01, fontFamilies } = require('../src');
 
 const { render } = SassRenderer.create(__dirname);
 
@@ -67,6 +67,60 @@ describe('@carbon/type', () => {
         expect.stringContaining('' + productiveHeading01[key])
       );
     }
+  });
+
+  it('should preserve the raw font-family stack from the Sass function', async () => {
+    const { result } = await render(`
+      @use '../index' as type;
+
+      .selector {
+        font-family: type.font-family('sans');
+      }
+    `);
+    const { stylesheet } = css.parse(result.css.toString());
+    const { declarations } = stylesheet.rules[0];
+
+    expect(declarations.length).toBe(1);
+
+    const [declaration] = declarations;
+    // The compiled value should be wrapped in a CSS custom property
+    expect(declaration.value).toEqual(
+      expect.stringContaining('var(--cds-font-family-sans,')
+    );
+    // The raw font stack must be present as the fallback value
+    expect(declaration.value).toEqual(
+      expect.stringContaining(
+        "'IBM Plex Sans', system-ui, -apple-system, BlinkMacSystemFont, '.SFNSText-Regular', sans-serif"
+      )
+    );
+  });
+
+  it('should emit a CSS custom property fallback from the font-family mixin', async () => {
+    const { result } = await render(`
+      @use '../index' as type;
+
+      .selector {
+        @include type.font-family('mono');
+      }
+    `);
+    const { stylesheet } = css.parse(result.css.toString());
+    const { declarations } = stylesheet.rules[0];
+
+    expect(declarations.length).toBe(1);
+
+    const [declaration] = declarations;
+    // The mixin should set the font-family property
+    expect(declaration.property).toBe('font-family');
+    // The value should be a CSS custom property for the named font
+    expect(declaration.value).toEqual(
+      expect.stringContaining('var(--cds-font-family-mono,')
+    );
+    // The raw mono font stack should be present as the fallback
+    expect(declaration.value).toEqual(
+      expect.stringContaining(
+        "'IBM Plex Mono', system-ui, -apple-system, BlinkMacSystemFont, '.SFNSText-Regular', monospace"
+      )
+    );
   });
 
   it('should omit unsupported font-family keys', async () => {
