@@ -68,7 +68,6 @@ $content-padding: 0 0 0 $spacing-05 !default;
   }
 
   .#{$prefix}--accordion__item:not(.#{$prefix}--accordion__item--active) {
-    // Apply hover styles only on devices that support hover
     @media (any-hover: hover) {
       // Blend border on hover
       &:hover,
@@ -102,7 +101,6 @@ $content-padding: 0 0 0 $spacing-05 !default;
       padding-inline-end: layout.density('padding-inline');
     }
 
-    // Apply hover styles only on devices that support hover
     @media (any-hover: hover) {
       &:hover {
         background-color: $layer-hover;
@@ -143,7 +141,6 @@ $content-padding: 0 0 0 $spacing-05 !default;
     fill: $icon-disabled;
   }
 
-  // Apply hover styles only on devices that support hover
   @media (any-hover: hover) {
     .#{$prefix}--accordion__heading[disabled]:hover::before {
       background-color: transparent;
@@ -315,7 +312,6 @@ $content-padding: 0 0 0 $spacing-05 !default;
     }
   }
 
-  // Apply hover styles only on devices that support hover
   @media (any-hover: hover) {
     .#{$prefix}--accordion--flush .#{$prefix}--accordion__item:hover,
     .#{$prefix}--accordion--flush .#{$prefix}--accordion__item:last-child:hover,
@@ -326,7 +322,6 @@ $content-padding: 0 0 0 $spacing-05 !default;
     }
   }
 
-  // Apply hover styles only on devices that support hover
   @media (any-hover: hover) {
     .#{$prefix}--accordion--flush .#{$prefix}--accordion__heading:hover {
       position: relative;
@@ -383,7 +378,6 @@ $content-padding: 0 0 0 $spacing-05 !default;
     }
   }
 
-  // Apply hover styles only on devices that support hover
   @media (any-hover: hover) {
     .#{$prefix}--accordion.#{$prefix}--skeleton
       .#{$prefix}--accordion__arrow:hover {
@@ -393,7 +387,6 @@ $content-padding: 0 0 0 $spacing-05 !default;
     }
   }
 
-  // Apply hover styles only on devices that support hover
   @media (any-hover: hover) {
     .#{$prefix}--accordion.#{$prefix}--skeleton
       .#{$prefix}--accordion__heading:hover::before,

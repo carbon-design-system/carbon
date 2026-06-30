@@ -106,7 +106,6 @@ $css--plex: true !default;
   }
 }
 
-// Apply hover styles only on devices that support hover
 @media (any-hover: hover) {
   :host([isFlush]) .#{$prefix}--accordion__heading:hover {
     position: relative;
@@ -173,7 +172,6 @@ $css--plex: true !default;
     cursor: default;
     pointer-events: none;
 
-    // Apply hover styles only on devices that support hover
     @media (any-hover: hover) {
       &:hover::before {
         background: transparent;
