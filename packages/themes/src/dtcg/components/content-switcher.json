@@ -7,10 +7,16 @@
       "$description": "background token",
       "$extensions": {
         "carbon.themes": {
-          "white": "#e0e0e0",
-          "g10": "#e0e0e0",
-          "g90": "rgba(0, 0, 0, 0)",
-          "g100": "rgba(0, 0, 0, 0)"
+          "white": "{gray.20}",
+          "g10": "{gray.20}",
+          "g90": "{black.default}",
+          "g100": "{black.default}"
+        },
+        "com.ibm.carbon": {
+          "alphaModifiers": {
+            "g90": 0,
+            "g100": 0
+          }
         }
       }
     },
@@ -19,10 +25,16 @@
       "$description": "background-hover token",
       "$extensions": {
         "carbon.themes": {
-          "white": "#d1d1d1",
-          "g10": "#d1d1d1",
-          "g90": "rgba(141, 141, 141, 0.12)",
-          "g100": "rgba(141, 141, 141, 0.12)"
+          "white": "{gray.20Hover}",
+          "g10": "{gray.20Hover}",
+          "g90": "{gray.50}",
+          "g100": "{gray.50}"
+        },
+        "com.ibm.carbon": {
+          "alphaModifiers": {
+            "g90": 0.12,
+            "g100": 0.12
+          }
         }
       }
     },
@@ -31,10 +43,16 @@
       "$description": "selected token",
       "$extensions": {
         "carbon.themes": {
-          "white": "#ffffff",
-          "g10": "#ffffff",
-          "g90": "rgba(141, 141, 141, 0.24)",
-          "g100": "rgba(141, 141, 141, 0.24)"
+          "white": "{white.default}",
+          "g10": "{white.default}",
+          "g90": "{gray.50}",
+          "g100": "{gray.50}"
+        },
+        "com.ibm.carbon": {
+          "alphaModifiers": {
+            "g90": 0.24,
+            "g100": 0.24
+          }
         }
       }
     }

@@ -7,10 +7,10 @@
       "$description": "background-blue token",
       "$extensions": {
         "carbon.themes": {
-          "white": "#d0e2ff",
-          "g10": "#d0e2ff",
-          "g90": "#0043ce",
-          "g100": "#0043ce"
+          "white": "{blue.20}",
+          "g10": "{blue.20}",
+          "g90": "{blue.70}",
+          "g100": "{blue.70}"
         }
       }
     },
@@ -19,10 +19,10 @@
       "$description": "background-cool-gray token",
       "$extensions": {
         "carbon.themes": {
-          "white": "#dde1e6",
-          "g10": "#dde1e6",
-          "g90": "#4d5358",
-          "g100": "#4d5358"
+          "white": "{coolGray.20}",
+          "g10": "{coolGray.20}",
+          "g90": "{coolGray.70}",
+          "g100": "{coolGray.70}"
         }
       }
     },
@@ -31,10 +31,10 @@
       "$description": "background-cyan token",
       "$extensions": {
         "carbon.themes": {
-          "white": "#bae6ff",
-          "g10": "#bae6ff",
-          "g90": "#00539a",
-          "g100": "#00539a"
+          "white": "{cyan.20}",
+          "g10": "{cyan.20}",
+          "g90": "{cyan.70}",
+          "g100": "{cyan.70}"
         }
       }
     },
@@ -43,10 +43,10 @@
       "$description": "background-gray token",
       "$extensions": {
         "carbon.themes": {
-          "white": "#e0e0e0",
-          "g10": "#e0e0e0",
-          "g90": "#525252",
-          "g100": "#525252"
+          "white": "{gray.20}",
+          "g10": "{gray.20}",
+          "g90": "{gray.70}",
+          "g100": "{gray.70}"
         }
       }
     },
@@ -55,10 +55,10 @@
       "$description": "background-green token",
       "$extensions": {
         "carbon.themes": {
-          "white": "#a7f0ba",
-          "g10": "#a7f0ba",
-          "g90": "#0e6027",
-          "g100": "#0e6027"
+          "white": "{green.20}",
+          "g10": "{green.20}",
+          "g90": "{green.70}",
+          "g100": "{green.70}"
         }
       }
     },
@@ -67,10 +67,10 @@
       "$description": "background-magenta token",
       "$extensions": {
         "carbon.themes": {
-          "white": "#ffd6e8",
-          "g10": "#ffd6e8",
-          "g90": "#9f1853",
-          "g100": "#9f1853"
+          "white": "{magenta.20}",
+          "g10": "{magenta.20}",
+          "g90": "{magenta.70}",
+          "g100": "{magenta.70}"
         }
       }
     },
@@ -79,10 +79,10 @@
       "$description": "background-purple token",
       "$extensions": {
         "carbon.themes": {
-          "white": "#e8daff",
-          "g10": "#e8daff",
-          "g90": "#6929c4",
-          "g100": "#6929c4"
+          "white": "{purple.20}",
+          "g10": "{purple.20}",
+          "g90": "{purple.70}",
+          "g100": "{purple.70}"
         }
       }
     },
@@ -91,10 +91,10 @@
       "$description": "background-red token",
       "$extensions": {
         "carbon.themes": {
-          "white": "#ffd7d9",
-          "g10": "#ffd7d9",
-          "g90": "#a2191f",
-          "g100": "#a2191f"
+          "white": "{red.20}",
+          "g10": "{red.20}",
+          "g90": "{red.70}",
+          "g100": "{red.70}"
         }
       }
     },
@@ -103,10 +103,10 @@
       "$description": "background-teal token",
       "$extensions": {
         "carbon.themes": {
-          "white": "#9ef0f0",
-          "g10": "#9ef0f0",
-          "g90": "#005d5d",
-          "g100": "#005d5d"
+          "white": "{teal.20}",
+          "g10": "{teal.20}",
+          "g90": "{teal.70}",
+          "g100": "{teal.70}"
         }
       }
     },
@@ -115,10 +115,10 @@
       "$description": "background-warm-gray token",
       "$extensions": {
         "carbon.themes": {
-          "white": "#e5e0df",
-          "g10": "#e5e0df",
-          "g90": "#565151",
-          "g100": "#565151"
+          "white": "{warmGray.20}",
+          "g10": "{warmGray.20}",
+          "g90": "{warmGray.70}",
+          "g100": "{warmGray.70}"
         }
       }
     },
@@ -127,10 +127,10 @@
       "$description": "border-blue token",
       "$extensions": {
         "carbon.themes": {
-          "white": "#78a9ff",
-          "g10": "#78a9ff",
-          "g90": "#4589ff",
-          "g100": "#4589ff"
+          "white": "{blue.40}",
+          "g10": "{blue.40}",
+          "g90": "{blue.50}",
+          "g100": "{blue.50}"
         }
       }
     },
@@ -139,10 +139,10 @@
       "$description": "border-cool-gray token",
       "$extensions": {
         "carbon.themes": {
-          "white": "#a2a9b0",
-          "g10": "#a2a9b0",
-          "g90": "#878d96",
-          "g100": "#878d96"
+          "white": "{coolGray.40}",
+          "g10": "{coolGray.40}",
+          "g90": "{coolGray.50}",
+          "g100": "{coolGray.50}"
         }
       }
     },
@@ -151,10 +151,10 @@
       "$description": "border-cyan token",
       "$extensions": {
         "carbon.themes": {
-          "white": "#33b1ff",
-          "g10": "#33b1ff",
-          "g90": "#1192e8",
-          "g100": "#1192e8"
+          "white": "{cyan.40}",
+          "g10": "{cyan.40}",
+          "g90": "{cyan.50}",
+          "g100": "{cyan.50}"
         }
       }
     },
@@ -163,10 +163,10 @@
       "$description": "border-gray token",
       "$extensions": {
         "carbon.themes": {
-          "white": "#a8a8a8",
-          "g10": "#a8a8a8",
-          "g90": "#8d8d8d",
-          "g100": "#8d8d8d"
+          "white": "{gray.40}",
+          "g10": "{gray.40}",
+          "g90": "{gray.50}",
+          "g100": "{gray.50}"
         }
       }
     },
@@ -175,10 +175,10 @@
       "$description": "border-green token",
       "$extensions": {
         "carbon.themes": {
-          "white": "#42be65",
-          "g10": "#42be65",
-          "g90": "#24a148",
-          "g100": "#24a148"
+          "white": "{green.40}",
+          "g10": "{green.40}",
+          "g90": "{green.50}",
+          "g100": "{green.50}"
         }
       }
     },
@@ -187,10 +187,10 @@
       "$description": "border-magenta token",
       "$extensions": {
         "carbon.themes": {
-          "white": "#ff7eb6",
-          "g10": "#ff7eb6",
-          "g90": "#ee5396",
-          "g100": "#ee5396"
+          "white": "{magenta.40}",
+          "g10": "{magenta.40}",
+          "g90": "{magenta.50}",
+          "g100": "{magenta.50}"
         }
       }
     },
@@ -199,10 +199,10 @@
       "$description": "border-purple token",
       "$extensions": {
         "carbon.themes": {
-          "white": "#be95ff",
-          "g10": "#be95ff",
-          "g90": "#a56eff",
-          "g100": "#a56eff"
+          "white": "{purple.40}",
+          "g10": "{purple.40}",
+          "g90": "{purple.50}",
+          "g100": "{purple.50}"
         }
       }
     },
@@ -211,10 +211,10 @@
       "$description": "border-red token",
       "$extensions": {
         "carbon.themes": {
-          "white": "#ff8389",
-          "g10": "#ff8389",
-          "g90": "#fa4d56",
-          "g100": "#fa4d56"
+          "white": "{red.40}",
+          "g10": "{red.40}",
+          "g90": "{red.50}",
+          "g100": "{red.50}"
         }
       }
     },
@@ -223,10 +223,10 @@
       "$description": "border-teal token",
       "$extensions": {
         "carbon.themes": {
-          "white": "#08bdba",
-          "g10": "#08bdba",
-          "g90": "#009d9a",
-          "g100": "#009d9a"
+          "white": "{teal.40}",
+          "g10": "{teal.40}",
+          "g90": "{teal.50}",
+          "g100": "{teal.50}"
         }
       }
     },
@@ -235,10 +235,10 @@
       "$description": "border-warm-gray token",
       "$extensions": {
         "carbon.themes": {
-          "white": "#ada8a8",
-          "g10": "#ada8a8",
-          "g90": "#8f8b8b",
-          "g100": "#8f8b8b"
+          "white": "{warmGray.40}",
+          "g10": "{warmGray.40}",
+          "g90": "{warmGray.50}",
+          "g100": "{warmGray.50}"
         }
       }
     },
@@ -247,10 +247,10 @@
       "$description": "color-blue token",
       "$extensions": {
         "carbon.themes": {
-          "white": "#0043ce",
-          "g10": "#0043ce",
-          "g90": "#d0e2ff",
-          "g100": "#d0e2ff"
+          "white": "{blue.70}",
+          "g10": "{blue.70}",
+          "g90": "{blue.20}",
+          "g100": "{blue.20}"
         }
       }
     },
@@ -259,10 +259,10 @@
       "$description": "color-cool-gray token",
       "$extensions": {
         "carbon.themes": {
-          "white": "#121619",
-          "g10": "#121619",
-          "g90": "#f2f4f8",
-          "g100": "#f2f4f8"
+          "white": "{coolGray.100}",
+          "g10": "{coolGray.100}",
+          "g90": "{coolGray.10}",
+          "g100": "{coolGray.10}"
         }
       }
     },
@@ -271,10 +271,10 @@
       "$description": "color-cyan token",
       "$extensions": {
         "carbon.themes": {
-          "white": "#00539a",
-          "g10": "#00539a",
-          "g90": "#bae6ff",
-          "g100": "#bae6ff"
+          "white": "{cyan.70}",
+          "g10": "{cyan.70}",
+          "g90": "{cyan.20}",
+          "g100": "{cyan.20}"
         }
       }
     },
@@ -283,10 +283,10 @@
       "$description": "color-gray token",
       "$extensions": {
         "carbon.themes": {
-          "white": "#161616",
-          "g10": "#161616",
-          "g90": "#f4f4f4",
-          "g100": "#f4f4f4"
+          "white": "{gray.100}",
+          "g10": "{gray.100}",
+          "g90": "{gray.10}",
+          "g100": "{gray.10}"
         }
       }
     },
@@ -295,10 +295,10 @@
       "$description": "color-green token",
       "$extensions": {
         "carbon.themes": {
-          "white": "#0e6027",
-          "g10": "#0e6027",
-          "g90": "#a7f0ba",
-          "g100": "#a7f0ba"
+          "white": "{green.70}",
+          "g10": "{green.70}",
+          "g90": "{green.20}",
+          "g100": "{green.20}"
         }
       }
     },
@@ -307,10 +307,10 @@
       "$description": "color-magenta token",
       "$extensions": {
         "carbon.themes": {
-          "white": "#9f1853",
-          "g10": "#9f1853",
-          "g90": "#ffd6e8",
-          "g100": "#ffd6e8"
+          "white": "{magenta.70}",
+          "g10": "{magenta.70}",
+          "g90": "{magenta.20}",
+          "g100": "{magenta.20}"
         }
       }
     },
@@ -319,10 +319,10 @@
       "$description": "color-purple token",
       "$extensions": {
         "carbon.themes": {
-          "white": "#6929c4",
-          "g10": "#6929c4",
-          "g90": "#e8daff",
-          "g100": "#e8daff"
+          "white": "{purple.70}",
+          "g10": "{purple.70}",
+          "g90": "{purple.20}",
+          "g100": "{purple.20}"
         }
       }
     },
@@ -331,10 +331,10 @@
       "$description": "color-red token",
       "$extensions": {
         "carbon.themes": {
-          "white": "#a2191f",
-          "g10": "#a2191f",
-          "g90": "#ffd7d9",
-          "g100": "#ffd7d9"
+          "white": "{red.70}",
+          "g10": "{red.70}",
+          "g90": "{red.20}",
+          "g100": "{red.20}"
         }
       }
     },
@@ -343,10 +343,10 @@
       "$description": "color-teal token",
       "$extensions": {
         "carbon.themes": {
-          "white": "#005d5d",
-          "g10": "#005d5d",
-          "g90": "#9ef0f0",
-          "g100": "#9ef0f0"
+          "white": "{teal.70}",
+          "g10": "{teal.70}",
+          "g90": "{teal.20}",
+          "g100": "{teal.20}"
         }
       }
     },
@@ -355,10 +355,10 @@
       "$description": "color-warm-gray token",
       "$extensions": {
         "carbon.themes": {
-          "white": "#171414",
-          "g10": "#171414",
-          "g90": "#f7f3f2",
-          "g100": "#f7f3f2"
+          "white": "{warmGray.100}",
+          "g10": "{warmGray.100}",
+          "g90": "{warmGray.10}",
+          "g100": "{warmGray.10}"
         }
       }
     },
@@ -367,10 +367,10 @@
       "$description": "hover-blue token",
       "$extensions": {
         "carbon.themes": {
-          "white": "#b8d3ff",
-          "g10": "#b8d3ff",
-          "g90": "#0053ff",
-          "g100": "#0053ff"
+          "white": "{blue.20Hover}",
+          "g10": "{blue.20Hover}",
+          "g90": "{blue.70Hover}",
+          "g100": "{blue.70Hover}"
         }
       }
     },
@@ -379,10 +379,10 @@
       "$description": "hover-cool-gray token",
       "$extensions": {
         "carbon.themes": {
-          "white": "#cdd3da",
-          "g10": "#cdd3da",
-          "g90": "#5d646a",
-          "g100": "#5d646a"
+          "white": "{coolGray.20Hover}",
+          "g10": "{coolGray.20Hover}",
+          "g90": "{coolGray.70Hover}",
+          "g100": "{coolGray.70Hover}"
         }
       }
     },
@@ -391,10 +391,10 @@
       "$description": "hover-cyan token",
       "$extensions": {
         "carbon.themes": {
-          "white": "#99daff",
-          "g10": "#99daff",
-          "g90": "#0066bd",
-          "g100": "#0066bd"
+          "white": "{cyan.20Hover}",
+          "g10": "{cyan.20Hover}",
+          "g90": "{cyan.70Hover}",
+          "g100": "{cyan.70Hover}"
         }
       }
     },
@@ -403,10 +403,10 @@
       "$description": "hover-gray token",
       "$extensions": {
         "carbon.themes": {
-          "white": "#d1d1d1",
-          "g10": "#d1d1d1",
-          "g90": "#636363",
-          "g100": "#636363"
+          "white": "{gray.20Hover}",
+          "g10": "{gray.20Hover}",
+          "g90": "{gray.70Hover}",
+          "g100": "{gray.70Hover}"
         }
       }
     },
@@ -415,10 +415,10 @@
       "$description": "hover-green token",
       "$extensions": {
         "carbon.themes": {
-          "white": "#74e792",
-          "g10": "#74e792",
-          "g90": "#11742f",
-          "g100": "#11742f"
+          "white": "{green.20Hover}",
+          "g10": "{green.20Hover}",
+          "g90": "{green.70Hover}",
+          "g100": "{green.70Hover}"
         }
       }
     },
@@ -427,10 +427,10 @@
       "$description": "hover-magenta token",
       "$extensions": {
         "carbon.themes": {
-          "white": "#ffbdda",
-          "g10": "#ffbdda",
-          "g90": "#bf1d63",
-          "g100": "#bf1d63"
+          "white": "{magenta.20Hover}",
+          "g10": "{magenta.20Hover}",
+          "g90": "{magenta.70Hover}",
+          "g100": "{magenta.70Hover}"
         }
       }
     },
@@ -439,10 +439,10 @@
       "$description": "hover-purple token",
       "$extensions": {
         "carbon.themes": {
-          "white": "#dcc7ff",
-          "g10": "#dcc7ff",
-          "g90": "#7c3dd6",
-          "g100": "#7c3dd6"
+          "white": "{purple.20Hover}",
+          "g10": "{purple.20Hover}",
+          "g90": "{purple.70Hover}",
+          "g100": "{purple.70Hover}"
         }
       }
     },
@@ -451,10 +451,10 @@
       "$description": "hover-red token",
       "$extensions": {
         "carbon.themes": {
-          "white": "#ffc2c5",
-          "g10": "#ffc2c5",
-          "g90": "#c21e25",
-          "g100": "#c21e25"
+          "white": "{red.20Hover}",
+          "g10": "{red.20Hover}",
+          "g90": "{red.70Hover}",
+          "g100": "{red.70Hover}"
         }
       }
     },
@@ -463,10 +463,10 @@
       "$description": "hover-teal token",
       "$extensions": {
         "carbon.themes": {
-          "white": "#57e5e5",
-          "g10": "#57e5e5",
-          "g90": "#007070",
-          "g100": "#007070"
+          "white": "{teal.20Hover}",
+          "g10": "{teal.20Hover}",
+          "g90": "{teal.70Hover}",
+          "g100": "{teal.70Hover}"
         }
       }
     },
@@ -475,10 +475,10 @@
       "$description": "hover-warm-gray token",
       "$extensions": {
         "carbon.themes": {
-          "white": "#d8d0cf",
-          "g10": "#d8d0cf",
-          "g90": "#696363",
-          "g100": "#696363"
+          "white": "{warmGray.20Hover}",
+          "g10": "{warmGray.20Hover}",
+          "g90": "{warmGray.70Hover}",
+          "g100": "{warmGray.70Hover}"
         }
       }
     }

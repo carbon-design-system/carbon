@@ -7,10 +7,10 @@
       "$description": "danger-active token",
       "$extensions": {
         "carbon.themes": {
-          "white": "#750e13",
-          "g10": "#750e13",
-          "g90": "#750e13",
-          "g100": "#750e13"
+          "white": "{red.80}",
+          "g10": "{red.80}",
+          "g90": "{red.80}",
+          "g100": "{red.80}"
         }
       }
     },
@@ -31,10 +31,10 @@
       "$description": "danger-primary token",
       "$extensions": {
         "carbon.themes": {
-          "white": "#da1e28",
-          "g10": "#da1e28",
-          "g90": "#da1e28",
-          "g100": "#da1e28"
+          "white": "{red.60}",
+          "g10": "{red.60}",
+          "g90": "{red.60}",
+          "g100": "{red.60}"
         }
       }
     },
@@ -43,10 +43,10 @@
       "$description": "danger-secondary token",
       "$extensions": {
         "carbon.themes": {
-          "white": "#da1e28",
-          "g10": "#da1e28",
-          "g90": "#ff8389",
-          "g100": "#fa4d56"
+          "white": "{red.60}",
+          "g10": "{red.60}",
+          "g90": "{red.40}",
+          "g100": "{red.50}"
         }
       }
     },
@@ -55,10 +55,16 @@
       "$description": "disabled token",
       "$extensions": {
         "carbon.themes": {
-          "white": "#c6c6c6",
-          "g10": "#c6c6c6",
-          "g90": "rgb(141 141 141 / 30%)",
-          "g100": "rgb(141 141 141 / 30%)"
+          "white": "{gray.30}",
+          "g10": "{gray.30}",
+          "g90": "{gray.50}",
+          "g100": "{gray.50}"
+        },
+        "com.ibm.carbon": {
+          "alphaModifiers": {
+            "g90": 0.3,
+            "g100": 0.3
+          }
         }
       }
     },
@@ -67,10 +73,10 @@
       "$description": "primary token",
       "$extensions": {
         "carbon.themes": {
-          "white": "#0f62fe",
-          "g10": "#0f62fe",
-          "g90": "#0f62fe",
-          "g100": "#0f62fe"
+          "white": "{blue.60}",
+          "g10": "{blue.60}",
+          "g90": "{blue.60}",
+          "g100": "{blue.60}"
         }
       }
     },
@@ -79,10 +85,10 @@
       "$description": "primary-active token",
       "$extensions": {
         "carbon.themes": {
-          "white": "#002d9c",
-          "g10": "#002d9c",
-          "g90": "#002d9c",
-          "g100": "#002d9c"
+          "white": "{blue.80}",
+          "g10": "{blue.80}",
+          "g90": "{blue.80}",
+          "g100": "{blue.80}"
         }
       }
     },
@@ -91,10 +97,10 @@
       "$description": "primary-hover token",
       "$extensions": {
         "carbon.themes": {
-          "white": "#0050e6",
-          "g10": "#0050e6",
-          "g90": "#0050e6",
-          "g100": "#0050e6"
+          "white": "{blue.60Hover}",
+          "g10": "{blue.60Hover}",
+          "g90": "{blue.60Hover}",
+          "g100": "{blue.60Hover}"
         }
       }
     },
@@ -103,10 +109,10 @@
       "$description": "secondary token",
       "$extensions": {
         "carbon.themes": {
-          "white": "#393939",
-          "g10": "#393939",
-          "g90": "#6f6f6f",
-          "g100": "#6f6f6f"
+          "white": "{gray.80}",
+          "g10": "{gray.80}",
+          "g90": "{gray.60}",
+          "g100": "{gray.60}"
         }
       }
     },
@@ -115,10 +121,10 @@
       "$description": "secondary-active token",
       "$extensions": {
         "carbon.themes": {
-          "white": "#6f6f6f",
-          "g10": "#6f6f6f",
-          "g90": "#393939",
-          "g100": "#393939"
+          "white": "{gray.60}",
+          "g10": "{gray.60}",
+          "g90": "{gray.80}",
+          "g100": "{gray.80}"
         }
       }
     },
@@ -127,10 +133,10 @@
       "$description": "secondary-hover token",
       "$extensions": {
         "carbon.themes": {
-          "white": "#474747",
-          "g10": "#474747",
-          "g90": "#5e5e5e",
-          "g100": "#5e5e5e"
+          "white": "{gray.80Hover}",
+          "g10": "{gray.80Hover}",
+          "g90": "{gray.60Hover}",
+          "g100": "{gray.60Hover}"
         }
       }
     },
@@ -139,11 +145,11 @@
       "$description": "separator token",
       "$extensions": {
         "carbon.themes": {
-          "fallback": "#e0e0e0",
-          "white": "#e0e0e0",
-          "g10": "#e0e0e0",
-          "g90": "#161616",
-          "g100": "#161616"
+          "fallback": "{gray.20}",
+          "white": "{gray.20}",
+          "g10": "{gray.20}",
+          "g90": "{gray.100}",
+          "g100": "{gray.100}"
         }
       }
     },
@@ -152,10 +158,10 @@
       "$description": "tertiary token",
       "$extensions": {
         "carbon.themes": {
-          "white": "#0f62fe",
-          "g10": "#0f62fe",
-          "g90": "#ffffff",
-          "g100": "#ffffff"
+          "white": "{blue.60}",
+          "g10": "{blue.60}",
+          "g90": "{white.default}",
+          "g100": "{white.default}"
         }
       }
     },
@@ -164,10 +170,10 @@
       "$description": "tertiary-active token",
       "$extensions": {
         "carbon.themes": {
-          "white": "#002d9c",
-          "g10": "#002d9c",
-          "g90": "#c6c6c6",
-          "g100": "#c6c6c6"
+          "white": "{blue.80}",
+          "g10": "{blue.80}",
+          "g90": "{gray.30}",
+          "g100": "{gray.30}"
         }
       }
     },
@@ -176,10 +182,10 @@
       "$description": "tertiary-hover token",
       "$extensions": {
         "carbon.themes": {
-          "white": "#0050e6",
-          "g10": "#0050e6",
-          "g90": "#f4f4f4",
-          "g100": "#f4f4f4"
+          "white": "{blue.60Hover}",
+          "g10": "{blue.60Hover}",
+          "g90": "{gray.10}",
+          "g100": "{gray.10}"
         }
       }
     }

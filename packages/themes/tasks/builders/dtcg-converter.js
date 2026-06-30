@@ -7,36 +7,193 @@
 
 'use strict';
 
+const fs = require('fs');
+const path = require('path');
+
+// ---------------------------------------------------------------------------
+// Palette alias resolution
+// ---------------------------------------------------------------------------
+
 /**
- * Resolve a DTCG color $value object to a CSS string.
+ * Lazily-loaded map of DTCG alias reference → hex string.
+ * e.g. "{blue.60}" → "#0f62fe"
+ * Built once from color-palette.json on first use.
+ * @type {Map<string, string> | null}
+ */
+let _paletteAliasMap = null;
+
+/**
+ * Return the alias→hex map, building it from color-palette.json on first call.
+ * @returns {Map<string, string>}
+ */
+function getPaletteAliasMap() {
+  if (_paletteAliasMap) return _paletteAliasMap;
+
+  const palettePath = path.resolve(
+    __dirname,
+    '../../src/dtcg/color-palette.json'
+  );
+  const palette = JSON.parse(fs.readFileSync(palettePath, 'utf8'));
+
+  _paletteAliasMap = new Map();
+  for (const [family, scales] of Object.entries(palette)) {
+    if (family.startsWith('$')) continue;
+    for (const [scale, token] of Object.entries(scales)) {
+      if (token.$value && token.$value.hex) {
+        _paletteAliasMap.set(`{${family}.${scale}}`, token.$value.hex);
+      }
+    }
+  }
+
+  return _paletteAliasMap;
+}
+
+/**
+ * Resolve a DTCG alias reference string like "{blue.60}" to its hex value.
+ * Returns null if the reference is not found in the palette.
  *
- * DTCG color values follow one of two shapes:
- *   • { colorSpace, components, hex }   → solid color  → use hex directly
- *   • { colorSpace, components, alpha } → alpha color  → rgba(r, g, b, alpha)
+ * @param {string} ref - e.g. "{blue.60}"
+ * @returns {string|null}
+ */
+function resolveAliasRef(ref) {
+  return getPaletteAliasMap().get(ref) ?? null;
+}
+
+// ---------------------------------------------------------------------------
+// $value resolver
+// ---------------------------------------------------------------------------
+
+/**
+ * Resolve a DTCG color $value to a CSS color string.
+ *
+ * Handles all shapes produced by this codebase:
+ *
+ *   1. Alias string          "{blue.60}"
+ *      → looked up in color-palette.json → "#0f62fe"
+ *
+ *   2. Alias + alpha object  { colorSpace:"srgb", color:"{gray.50}", alpha:0.5 }
+ *      → alias resolved to hex, hex parsed to rgb channels → "rgba(r, g, b, a)"
+ *
+ *   3. Solid inline object   { colorSpace:"srgb", components:[…], hex:"#rrggbb" }
+ *      → hex used directly (bespoke one-off values not in palette)
+ *
+ *   4. Alpha inline object   { colorSpace:"srgb", components:[…], alpha:0.x }
+ *      → components converted to rgb channels → "rgba(r, g, b, a)"
+ *
+ *   5. Anything else         returned unchanged
  *
  * @param {*} dtcgValue - The raw $value from a DTCG token
- * @returns {string|*} A CSS color string when the value is a DTCG color object,
- *                     or the original value unchanged for all other types.
+ * @returns {string|*}
  */
 function resolveDTCGColorValue(dtcgValue) {
-  if (
-    dtcgValue === null ||
-    typeof dtcgValue !== 'object' ||
-    dtcgValue.colorSpace !== 'srgb' ||
-    !Array.isArray(dtcgValue.components)
-  ) {
+  // ── Shape 1: plain alias string ──────────────────────────────────────────
+  if (typeof dtcgValue === 'string') {
+    if (dtcgValue.startsWith('{') && dtcgValue.endsWith('}')) {
+      const hex = resolveAliasRef(dtcgValue);
+      if (hex) return hex;
+    }
     return dtcgValue;
   }
 
-  // Solid color — hex fallback is present; use it directly.
+  // NOTE: alias+alpha is NOT handled here — it requires the sibling $extensions
+  // context which the caller (convertDTCGToTheme / convertDTCGComponentTokens)
+  // must supply. See resolveWithExtensions() below.
+
+  if (dtcgValue === null || typeof dtcgValue !== 'object') {
+    return dtcgValue;
+  }
+
+  if (dtcgValue.colorSpace !== 'srgb') {
+    return dtcgValue;
+  }
+
+  // ── Shape 2: alias + alpha ───────────────────────────────────────────────
+  if (typeof dtcgValue.color === 'string' && dtcgValue.alpha !== undefined) {
+    const hex = resolveAliasRef(dtcgValue.color);
+    if (hex) {
+      const r = parseInt(hex.slice(1, 3), 16);
+      const g = parseInt(hex.slice(3, 5), 16);
+      const b = parseInt(hex.slice(5, 7), 16);
+      return `rgba(${r}, ${g}, ${b}, ${dtcgValue.alpha})`;
+    }
+    // Alias not found — fall through to return unchanged
+    return dtcgValue;
+  }
+
+  // ── Shapes 3 & 4: inline components array ────────────────────────────────
+  if (!Array.isArray(dtcgValue.components)) {
+    return dtcgValue;
+  }
+
+  // Shape 3: solid — hex present
   if (typeof dtcgValue.hex === 'string') {
     return dtcgValue.hex;
   }
 
-  // Alpha color — convert sRGB components (0–1) to rgba().
+  // Shape 4: alpha — derive rgba from components
   const [r, g, b] = dtcgValue.components.map((c) => Math.round(c * 255));
   const alpha = dtcgValue.alpha !== undefined ? dtcgValue.alpha : 1;
   return `rgba(${r}, ${g}, ${b}, ${alpha})`;
+}
+
+/**
+ * Resolve a token node's $value together with its sibling $extensions.
+ * When a plain alias $value is accompanied by an alphaModifier extension,
+ * this produces the rgba() string that the inline baked-in form used to give.
+ *
+ * @param {*}      dtcgValue   - the token's $value
+ * @param {object} extensions  - the token's $extensions (may be undefined)
+ * @returns {string|*}
+ */
+function resolveWithExtensions(dtcgValue, extensions) {
+  const alphaModifier =
+    extensions &&
+    extensions['com.ibm.carbon'] &&
+    extensions['com.ibm.carbon'].alphaModifier;
+
+  if (alphaModifier !== undefined) {
+    // $value must be a palette alias string — resolve it then apply alpha
+    const hex = resolveAliasRef(dtcgValue);
+    if (hex) {
+      const r = parseInt(hex.slice(1, 3), 16);
+      const g = parseInt(hex.slice(3, 5), 16);
+      const b = parseInt(hex.slice(5, 7), 16);
+      return `rgba(${r}, ${g}, ${b}, ${alphaModifier})`;
+    }
+  }
+
+  return resolveDTCGColorValue(dtcgValue);
+}
+
+/**
+ * Resolve a component token's per-theme value together with its sibling
+ * alphaModifiers extension entry for that theme.
+ *
+ * @param {*}      themeValue      - value from carbon.themes[theme]
+ * @param {object} extensions      - the token node's $extensions
+ * @param {string} theme           - theme key (e.g. "white", "g90")
+ * @returns {string|*}
+ */
+function resolveComponentValueWithExtensions(themeValue, extensions, theme) {
+  const alphaModifiers =
+    extensions &&
+    extensions['com.ibm.carbon'] &&
+    extensions['com.ibm.carbon'].alphaModifiers;
+
+  const alpha = alphaModifiers && alphaModifiers[theme];
+
+  if (alpha !== undefined) {
+    // themeValue is now a plain alias string
+    const hex = resolveAliasRef(themeValue);
+    if (hex) {
+      const r = parseInt(hex.slice(1, 3), 16);
+      const g = parseInt(hex.slice(3, 5), 16);
+      const b = parseInt(hex.slice(5, 7), 16);
+      return `rgba(${r}, ${g}, ${b}, ${alpha})`;
+    }
+  }
+
+  return resolveDTCGColorValue(themeValue);
 }
 
 /**
@@ -78,9 +235,13 @@ function convertDTCGToTheme(dtcgTokens) {
         // become segments in the path and are joined the same way.
         const tokenPath2 = [...tokenPath, key];
 
-        // If this node has a $value, register it as a token
+        // If this node has a $value, register it as a token.
+        // Pass $extensions so alphaModifier is applied when present.
         if (value.$value !== undefined) {
-          theme[tokenPath2.join('-')] = resolveDTCGColorValue(value.$value);
+          theme[tokenPath2.join('-')] = resolveWithExtensions(
+            value.$value,
+            value.$extensions
+          );
         }
 
         // Also recurse into any non-$ children (a node can be both a token
@@ -120,7 +281,17 @@ function convertDTCGComponentTokens(dtcgTokens) {
         value.$extensions['carbon.themes']
       ) {
         const tokenName = [...path, key].join('-');
-        componentTokens[tokenName] = value.$extensions['carbon.themes'];
+        // Resolve alias strings, applying per-theme alphaModifiers when present.
+        const rawThemes = value.$extensions['carbon.themes'];
+        const resolvedThemes = {};
+        for (const [themeName, themeValue] of Object.entries(rawThemes)) {
+          resolvedThemes[themeName] = resolveComponentValueWithExtensions(
+            themeValue,
+            value.$extensions,
+            themeName
+          );
+        }
+        componentTokens[tokenName] = resolvedThemes;
       } else if (value && typeof value === 'object' && !key.startsWith('$')) {
         // Recurse into nested groups
         traverse(value, [...path, key]);
@@ -165,6 +336,8 @@ function normalizeComponentThemeName(themeName) {
 
 module.exports = {
   resolveDTCGColorValue,
+  resolveWithExtensions,
+  resolveComponentValueWithExtensions,
   convertDTCGToTheme,
   convertDTCGComponentTokens,
   camelToKebab,

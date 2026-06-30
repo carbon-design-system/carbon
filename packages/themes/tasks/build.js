@@ -16,9 +16,23 @@ const buildCompatTokensFile = require('./builders/compat/tokens');
 const buildDTCGThemesFile = require('./builders/dtcg-themes');
 const buildDTCGComponentTokensFile = require('./builders/dtcg-component-tokens');
 const buildDTCGTokens = require('./builders/dtcg-tokens');
+const generateDTCGColorAliases = require('./builders/generate-dtcg-color-aliases');
+const migrateToColorAliases = require('./builders/migrate-to-color-aliases');
 
 async function build() {
   reporter.info('Building scss files for themes...');
+
+  // 1. Generate color-palette.json from @carbon/colors.
+  reporter.info('Generating DTCG color palette aliases from @carbon/colors...');
+  const paletteFile = generateDTCGColorAliases();
+  reporter.success(`Written: ${paletteFile}`);
+
+  // 2. Rewrite theme + component JSON files to use palette aliases.
+  reporter.info('Migrating theme and component tokens to color aliases...');
+  const migrated = migrateToColorAliases();
+  migrated.forEach((f) =>
+    reporter.success(`Migrated: ${path.relative(process.cwd(), f)}`)
+  );
 
   const SCSS_DIR = path.resolve(__dirname, '../scss');
   const GENERATED_DTCG_DIR = path.join(SCSS_DIR, 'generated');

@@ -43,8 +43,8 @@ $button-danger-secondary: (
 $button-disabled: (
   white-theme: #c6c6c6,
   g-10: #c6c6c6,
-  g-90: rgb(141 141 141 / 30%),
-  g-100: rgb(141 141 141 / 30%),
+  g-90: rgba(141, 141, 141, 0.3),
+  g-100: rgba(141, 141, 141, 0.3),
 ) !default;
 
 $button-primary: (
