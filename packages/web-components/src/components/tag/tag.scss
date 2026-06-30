@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2019, 2024
+// Copyright IBM Corp. 2019, 2026
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -234,11 +234,13 @@ $css--plex: true !default;
 :host(#{$prefix}-dismissible-tag[disabled]),
 :host(#{$prefix}-tag[filter][disabled]) {
   .#{$prefix}--tag__close-icon {
+    background-color: transparent;
     cursor: not-allowed;
 
-    &,
-    &:hover {
-      background-color: transparent;
+    @media (any-hover: hover) {
+      &:hover {
+        background-color: transparent;
+      }
     }
   }
 }
@@ -249,9 +251,11 @@ $css--plex: true !default;
   background-color: $layer;
   color: $text-disabled;
 
-  &:hover {
-    background-color: $layer;
-    cursor: not-allowed;
+  @media (any-hover: hover) {
+    &:hover {
+      background-color: $layer;
+      cursor: not-allowed;
+    }
   }
 }
 
