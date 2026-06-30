@@ -1,116 +1,328 @@
 # Motion surfaces architecture spike
 
-Motion surfaces name an interaction intent without selecting an animation
-engine. The definition belongs in `@carbon/motion`; framework packages adapt
-that definition to their lifecycle and rendering model.
+This spike only covers one surface:
 
-## Initial scope
+- `expand`: a Tile expands into a Modal
 
-The first proof of concept defines `expand`: a surface such as a tile or card
-expands into a larger modal or panel. It deliberately does not define every
-proposed surface category. New definitions should be added only after a proof of
-concept demonstrates that their lifecycle and token requirements are reusable.
+## Goal
 
-```ts
-const expand = {
-  kind: 'shared-element',
-  origin: 'surface',
-  duration: 'slow-01',
-  enterEasing: ['entrance', 'expressive'],
-  exitEasing: ['exit', 'expressive'],
-  reducedMotion: 'fade',
-};
-```
+The goal of this spike is to test a simple architecture where:
 
-The values reference Carbon duration and easing tokens. Adapters resolve them
-into the representation their engine expects. For example, the React Motion
-adapter converts milliseconds to seconds and Carbon cubic-bezier curves to
-numeric tuples. Engine-specific values such as `layoutId`, springs, or View
-Transition names do not belong in the definition.
+- motion surface definitions live in `@carbon/motion`
+- Sass values are generated from the same source definition
+- React owns lifecycle and presence logic
+- Motion runs the shared-element animation
+- Carbon components keep ownership of layout, focus, dialog behavior, and
+  semantics
 
-## Layering
+## Files created
 
-1. `@carbon/motion` owns names, intent, tokens, and reduced-motion policy.
-2. A framework adapter owns rendering lifecycle, presence, focus coordination,
-   interruption, and conversion to engine options.
-3. Components expose stable origin and destination surfaces. They do not query
-   each other's private DOM structure.
-4. An engine implements the transition. Native CSS is the default for simple
-   reveals; Motion or View Transitions can implement shared elements where the
-   framework and browser support them.
+### `packages/motion/src/surfaces.ts`
 
-## React proof of concept
+This file defines the shared motion surface data.
 
-The Tile story measures a Carbon `ClickableTile` and the inner surface of an
-actual Carbon `Modal`, then uses Motion to apply an inverse FLIP transform to
-the modal surface. The Modal retains ownership of focus trapping, keyboard
-dismissal, and modal semantics. The adapter owns measurement, animation
-completion, interruption, reduced motion, and focus return.
+What we added:
 
-The current `Modal` ref resolves to its full-screen overlay rather than the
-inner modal container. The proof of concept temporarily queries
-`.cds--modal-container` to test the animation. This selector is private and must
-not become production API. A production implementation needs a stable internal
-surface ref or registration primitive supplied by Modal. This is a concrete
-requirement surfaced by the spike.
+- the `expand` surface
+- `getMotionSurface()`
+- `MotionSurfaceName`
+
+Why:
+
+- to keep the motion intent in one shared place
+- to avoid putting React or Motion-specific values in the base definition
+
+What it uses:
+
+- `DurationName`
+- `EasingName`
+- `EasingMode`
+
+### `packages/motion/tasks/build.mjs`
+
+This file generates Sass from the TypeScript surface definition.
+
+What we added:
+
+- a build script that reads the exported `surfaces`
+- conversion from JavaScript values to Sass values
+- output generation for `scss/generated/_surfaces.scss`
+
+Why:
+
+- to keep TypeScript and Sass in sync
+- to follow the request that root definitions live in `@carbon/motion`
+
+What it uses:
+
+- `@carbon/scss-generator`
+- Node `fs/promises`
+- Node `path`
+
+### `packages/motion/scss/generated/_surfaces.scss`
+
+This is a generated file.
+
+What it contains:
+
+- the Sass map for `$surfaces`
+
+Why:
+
+- so Sass can read the same surface data used by JavaScript
+
+### `packages/react/src/internal/motion/adapters/motion.ts`
+
+This file is the Motion adapter for React.
+
+What we added:
+
+- token resolution from `@carbon/motion`
+- FLIP transform calculation
+- enter and exit animation logic
+- reduced-motion fallback
+- target style restoration after animation
+
+Why:
+
+- to translate the shared surface definition into a real animation
+- to keep Motion-specific code out of `@carbon/motion`
+
+What it uses:
+
+- `getMotionSurface()`
+- `resolveDuration()`
+- `resolveEasing()`
+- `animate` from `motion/mini`
+
+### `packages/react/src/internal/motion/useMotionSurface.ts`
+
+This file is the internal React helper for surface lifecycle.
+
+What we added:
+
+- controlled open / close coordination
+- presence management
+- source Tile visibility handling
+- animation interruption handling
+- reduced-motion support through Carbon media-query helpers
+
+Why:
+
+- to keep lifecycle logic separate from the visual story
+- to create a reusable React helper for future surfaces
+
+What it uses:
+
+- `useMatchMedia`
+- `useSavedCallback`
+- `useIsomorphicEffect`
+- `createMotionAdapter()`
+
+### `packages/react/src/internal/motion/__tests__/useMotionSurface-test.js`
+
+This file tests the React lifecycle helper.
+
+What we added:
+
+- reduced-motion test
+- interrupted animation test
+- cleanup on unmount test
+
+### `packages/react/src/internal/motion/adapters/__tests__/motion-test.js`
+
+This file tests the Motion adapter.
+
+What we added:
+
+- token conversion test
+- FLIP transform test
+- reduced-motion test
+- measurable geometry validation test
+- target style restore test
+
+### `packages/react/src/components/Tile/Tile.motion.stories.js`
+
+This file is the Storybook proof of concept.
+
+What we added:
+
+- `TileToDefaultModal`
+- `TileToFullWidthModal`
+- a grid of Carbon `ClickableTile` surfaces
+- real Carbon `Modal` destinations
+- a hover motion experiment for the full-width story
+
+Why:
+
+- to test a real Tile-to-Modal morph with Carbon components
+- to compare a default Modal and a full-width Modal as destinations
+
+What it uses:
+
+- `ClickableTile`
+- `Modal`
+- `AspectRatio`
+- `Grid` and `Column`
+- `StructuredList`
+- `TextInput`, `Select`, `Dropdown`, `ComboBox`, `MultiSelect`, `CheckboxGroup`,
+  `Checkbox`
+- `useMotionSurface()`
+- `hover` from `motion`
+- `animate` from `motion/mini`
+- `resolveDuration()` and `resolveEasing()` for hover timing
+
+### `packages/react/src/components/Tile/Tile.motion.stories.scss`
+
+This file styles the Tile story content.
+
+What we added:
+
+- Tile content layout
+- heading and description type styles
+- spacing around the content
+- a class for the hover-motion story
+
+Why:
+
+- to make the Tile look closer to the design reference
+- to keep the styling inside Carbon tokens and type styles
+
+What it uses:
+
+- `@carbon/styles/scss/spacing`
+- `@carbon/styles/scss/theme`
+- `@carbon/styles/scss/type`
+- `@carbon/styles/scss/utilities/component-reset`
+
+## Files modified
+
+### `packages/motion/src/tokens.ts`
+
+What changed:
+
+- added named duration support
+- added easing resolution helpers
+- kept the existing token source as the single source of truth
+
+Why:
+
+- JavaScript adapters need numeric timing and easing values
+
+### `packages/motion/index.scss`
+
+What changed:
+
+- added generated `$surfaces`
+- added `surface()` Sass function
+
+Why:
+
+- Sass needs access to the same surface data
+
+### `packages/motion/__tests__/motion-test.js`
+
+What changed:
+
+- added tests for the `expand` surface
+- added tests for Sass parity and error handling
+
+### `packages/motion/__tests__/__snapshots__/motion-test.js.snap`
+
+What changed:
+
+- snapshot updated because the public motion API changed
+
+### `packages/motion/docs/surfaces.md`
+
+What changed:
+
+- added the detailed architecture write-up
+- added answers to open questions in simple comments
+- documented the current scope, gaps, and limits
+
+### `packages/motion/package.json`
+
+What changed:
+
+- added the surface Sass generation step to the build
+- added `@carbon/scss-generator`
+
+### `packages/react/package.json`
+
+What changed:
+
+- added `motion` as a development dependency
+
+Why:
+
+- the proof of concept uses `motion/mini`
+- the hover experiment uses `hover` from `motion`
+
+### `yarn.lock`
+
+What changed:
+
+- lockfile updated for dependency changes
+
+## Important implementation notes
+
+### Modal ownership
+
+We did not rebuild the Carbon Modal.
+
+We reused the real `Modal` component and only composed the content inside it.
+The modal still owns:
+
+- dialog semantics
+- overlay behavior
+- focus trap
+- close behavior
+- submit and secondary actions
 
 ### Why the Motion adapter is imperative
 
-Motion's declarative `layoutId` works best when both visual surfaces are Motion
-components during the same React layout measurement. Carbon Modal renders the
-visual container inside its component, while its public ref points to the
-full-screen overlay. Preview Dialog promotes itself to the browser top layer in
-an effect, after the first layout measurement. Neither currently gives a
-declarative shared element the stable destination it requires.
+The proof of concept uses the imperative `animate()` API instead of Motion React
+`layoutId`.
 
-The proof of concept therefore uses Motion's `animate()` API as a FLIP engine:
+Why:
 
-1. Measure the clicked Tile and mounted Modal container.
-2. Invert the Modal to the Tile's position and dimensions using translate and
-   scale.
-3. Animate that transform to `none` while separately revealing content and the
-   overlay.
-4. Reverse the measurements on close, wait for every animation control to
-   finish, then let Modal close and restore focus.
+- `ClickableTile` and `Modal` are existing Carbon components
+- the Modal public ref points to the overlay, not the inner modal container
+- the spike needs to animate existing DOM elements without rewriting those
+  components as Motion components
 
-This is a real geometry morph of the Modal surface, not a clip-path reveal from
-a fixed origin. Motion supplies animation controls, easing support, completion,
-and interruption; Carbon supplies the intent and tokens.
+### Hover experiment
 
-### Web Components parity
+The hover effect is only a story experiment.
 
-A Lit reactive controller can consume the same `expand` definition. It would
-capture the source rectangle before an update, capture the registered target
-surface after the update, and run the same FLIP transform with Motion's
-framework-neutral `animate()` API. Controller cleanup must stop active controls,
-restore source visibility, and return focus. A View Transitions adapter can be
-tested separately, but it should implement the same surface contract rather than
-changing component APIs.
+What it does:
 
-### Native boundary
+- slightly moves the Tile up
+- slightly scales the Tile up
 
-Native CSS is still the preferred zero-dependency engine for local reveals whose
-start and end state are owned by one element. A Tile-to-Modal morph needs
-cross-component measurement, presence coordination, interruption, and an
-explicit completion signal. Native Web Animations can implement those pieces,
-but Carbon would have to author and maintain the FLIP orchestration that Motion
-already provides.
+Why:
 
-## Compatibility boundary
+- to test if Motion can add a hover state on top of Carbon behavior, just get an
+  idea from Figma's example
 
-Motion for React currently requires React 18.2 or newer. `@carbon/react` still
-supports React 16.8 and 17, so Motion cannot become an unconditional production
-dependency without a support-policy decision. During the spike it remains a
-development dependency used by the Storybook proof of concept. A production
-option could be an opt-in adapter package or a future v12 integration after the
-React support range is aligned.
+What it uses:
 
-## Acceptance criteria
+- `hover` from `motion` to detect the hover gesture
+- `animate` from `motion/mini` to animate the Tile transform
+- Carbon motion tokens for duration and easing
 
-- Opening morphs the selected Tile surface into the Modal surface.
-- Closing returns to the same Tile and restores focus.
-- Escape, close button, and backdrop dismissal use the same close lifecycle.
-- `prefers-reduced-motion` uses a fade without layout transforms.
-- Rapid state changes do not leave stale animation controls or mounted modals.
-- The semantic definition remains usable by a Web Components adapter without
-  importing React or Motion.
+## Current references
+
+- Main architecture doc: `packages/motion/docs/surfaces.md`
+- Carbon Modal story: `packages/react/src/components/Modal/Modal.stories.js`
+- Carbon Modal Sass: `packages/styles/scss/components/modal/_modal.scss`
+- Carbon Tile Sass: `packages/styles/scss/components/tile/_tile.scss`
+
+## Current limits
+
+- Only the `expand` surface is implemented
+- The proof of concept currently targets React only
+- The Modal surface still depends on a private query for the inner modal
+  container
+- The hover motion is a Storybook experiment, not a production API decision

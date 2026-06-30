@@ -28,12 +28,13 @@
   },
   "scripts": {
     "build:types": "tsc -p tsconfig.types.json",
-    "build": "yarn clean && carbon-cli bundle src/index.ts --name CarbonMotion && yarn build:types",
-    "clean": "rimraf es lib umd",
+    "build": "yarn clean && carbon-cli bundle src/index.ts --name CarbonMotion && node tasks/build.mjs && yarn build:types",
+    "clean": "rimraf es lib umd scss/generated",
     "postinstall": "ibmtelemetry --config=telemetry.yml"
   },
   "devDependencies": {
     "@carbon/cli": "^11.44.0",
+    "@carbon/scss-generator": "^10.20.0",
     "rimraf": "^6.0.1",
     "typescript": "^5.7.3",
     "typescript-config-carbon": "workspace:^0.10.0"

@@ -6,63 +6,47 @@
 //
 
 @use '@carbon/styles/scss/spacing';
+@use '@carbon/styles/scss/theme';
 @use '@carbon/styles/scss/type';
+@use '@carbon/styles/scss/utilities/component-reset';
 
-.motion-surface-tile-grid {
-  display: grid;
-  max-inline-size: 72rem;
-  gap: spacing.$spacing-05;
-  grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+// Keep the Tile content inside the spacing owned by ClickableTile.
+.motion-surface-tile__content {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  inline-size: calc(100% - #{spacing.$spacing-07});
+  inset: spacing.$spacing-05;
+  min-block-size: calc(100% - #{spacing.$spacing-07});
+  padding-inline-end: spacing.$spacing-08;
+  pointer-events: none;
+  text-align: start;
+  transform-origin: center;
+  will-change: transform;
 }
 
-.motion-surface-tile {
-  display: grid;
-  min-block-size: 13rem;
-  align-content: start;
-  gap: spacing.$spacing-04;
-  grid-template-rows: auto auto 1fr auto;
-}
-
-.motion-surface-tile__eyebrow,
-.motion-surface-tile__metric {
-  @include type.type-style('label-01');
-}
-
+// Keep the heading close to the top edge like the reference layout.
 .motion-surface-tile__heading {
-  @include type.type-style('heading-03');
+  @include component-reset.reset;
+  @include type.type-style('heading-compact-02');
+
+  color: theme.$text-primary;
+  margin-block-end: spacing.$spacing-06;
 }
 
+// Keep the body copy near the lower half and clear of the chevron area.
 .motion-surface-tile__description {
-  @include type.type-style('body-01');
+  @include component-reset.reset;
+  @include type.type-style('body-compact-01');
 
-  max-inline-size: 28rem;
+  color: theme.$text-secondary;
+  margin-block-start: auto;
+  max-inline-size: 100%;
 }
 
-.motion-surface-modal.is-visible .cds--modal-container {
-  transform: none;
-  transition: none;
-}
-
-.motion-surface-modal__details {
-  display: grid;
-  margin-block-start: spacing.$spacing-07;
-  gap: spacing.$spacing-05;
-  grid-template-columns: repeat(auto-fit, minmax(8rem, 1fr));
-
-  div {
-    padding-block-start: spacing.$spacing-04;
-    border-block-start: 1px solid var(--cds-border-subtle);
-  }
-
-  dt {
-    @include type.type-style('label-01');
-
-    margin-block-end: spacing.$spacing-03;
-  }
-
-  dd {
-    @include type.type-style('body-01');
-
-    margin: 0;
-  }
+// Let the hover story use Motion on top of the normal Carbon hover state.
+.motion-surface-tile--hover-motion {
+  transform-origin: center;
+  will-change: transform;
 }

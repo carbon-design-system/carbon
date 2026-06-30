@@ -27,58 +27,6 @@ exports[`@carbon/motion Public API 1`] = `
   "durationModerate02": "240ms",
   "durationSlow01": "400ms",
   "durationSlow02": "700ms",
-  "durations": {
-    "fast-01": "70ms",
-    "fast-02": "110ms",
-    "moderate-01": "150ms",
-    "moderate-02": "240ms",
-    "slow-01": "400ms",
-    "slow-02": "700ms",
-  },
-  "easingCurves": {
-    "entrance": {
-      "expressive": [
-        0,
-        0,
-        0.3,
-        1,
-      ],
-      "productive": [
-        0,
-        0,
-        0.38,
-        0.9,
-      ],
-    },
-    "exit": {
-      "expressive": [
-        0.4,
-        0.14,
-        1,
-        1,
-      ],
-      "productive": [
-        0.2,
-        0,
-        1,
-        0.9,
-      ],
-    },
-    "standard": {
-      "expressive": [
-        0.4,
-        0.14,
-        0.3,
-        1,
-      ],
-      "productive": [
-        0.2,
-        0,
-        0.38,
-        0.9,
-      ],
-    },
-  },
   "easings": {
     "entrance": {
       "expressive": "cubic-bezier(0, 0, 0.3, 1)",
@@ -100,7 +48,6 @@ exports[`@carbon/motion Public API 1`] = `
   "moderate02": "240ms",
   "motion": [Function],
   "resolveDuration": [Function],
-  "resolveDurationMilliseconds": [Function],
   "resolveEasing": [Function],
   "slow01": "400ms",
   "slow02": "700ms",

@@ -7,18 +7,16 @@
 
 import type { DurationName, EasingMode, EasingName } from './tokens';
 
-export type MotionSurfaceKind = 'reveal' | 'shared-element';
-export type MotionSurfaceOrigin = 'surface' | 'trigger';
-export type ReducedMotionStrategy = 'fade' | 'none';
-export type MotionEasing = readonly [EasingName, EasingMode];
+type MotionEasing = readonly [EasingName, EasingMode];
 
-export interface MotionSurfaceDefinition {
-  kind: MotionSurfaceKind;
-  origin: MotionSurfaceOrigin;
+// Keep the shared definition free from React and animation-library values.
+interface MotionSurfaceDefinition {
+  kind: 'shared-element';
+  origin: 'surface';
   duration: DurationName;
   enterEasing: MotionEasing;
   exitEasing: MotionEasing;
-  reducedMotion: ReducedMotionStrategy;
+  reducedMotion: 'fade';
 }
 
 /**
@@ -37,6 +35,7 @@ export const surfaces = {
 
 export type MotionSurfaceName = keyof typeof surfaces;
 
+// Give JavaScript consumers a clear error for an unknown surface name.
 export const getMotionSurface = (name: MotionSurfaceName) => {
   const surface = surfaces[name];
 

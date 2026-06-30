@@ -1900,6 +1900,7 @@ __metadata:
   resolution: "@carbon/motion@workspace:packages/motion"
   dependencies:
     "@carbon/cli": "npm:^11.44.0"
+    "@carbon/scss-generator": "npm:^10.20.0"
     "@ibm/telemetry-js": "npm:^1.5.0"
     rimraf: "npm:^6.0.1"
     typescript: "npm:^5.7.3"
@@ -1948,6 +1949,7 @@ __metadata:
     "@carbon/feature-flags": "npm:^1.3.0"
     "@carbon/icons-react": "npm:^11.82.0"
     "@carbon/layout": "npm:^11.53.0"
+    "@carbon/motion": "npm:^11.46.0"
     "@carbon/styles": "npm:^1.109.0"
     "@carbon/test-utils": "npm:^10.41.0"
     "@carbon/themes": "npm:^11.75.0"

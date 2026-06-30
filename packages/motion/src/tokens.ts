@@ -43,7 +43,8 @@ export type DurationName =
   | 'slow-01'
   | 'slow-02';
 
-export const durations: Record<DurationName, string> = {
+// Map the surface names to the existing Carbon duration tokens.
+const durations: Record<DurationName, string> = {
   'fast-01': durationFast01,
   'fast-02': durationFast02,
   'moderate-01': durationModerate01,
@@ -56,12 +57,10 @@ export type EasingName = 'standard' | 'entrance' | 'exit';
 export type EasingMode = 'productive' | 'expressive';
 export type CubicBezier = readonly [number, number, number, number];
 export type EasingMap = Record<EasingName, Record<EasingMode, string>>;
-export type EasingCurveMap = Record<
-  EasingName,
-  Record<EasingMode, CubicBezier>
->;
+type EasingCurveMap = Record<EasingName, Record<EasingMode, CubicBezier>>;
 
-export const easingCurves: EasingCurveMap = {
+// Keep one numeric source for every Carbon easing curve.
+const easingCurves: EasingCurveMap = {
   standard: {
     productive: [0.2, 0, 0.38, 0.9],
     expressive: [0.4, 0.14, 0.3, 1],
@@ -113,6 +112,7 @@ export const motion = (name: EasingName, mode: EasingMode) => {
   return easing[mode];
 };
 
+// Return the numeric curve required by JavaScript animation engines.
 export const resolveEasing = (name: EasingName, mode: EasingMode) => {
   if (!easingCurves[name]) {
     throw new Error(
@@ -132,6 +132,7 @@ export const resolveEasing = (name: EasingName, mode: EasingMode) => {
   return easing[mode];
 };
 
+// Return the existing Carbon duration for a named surface token.
 export const resolveDuration = (name: DurationName) => {
   const duration = durations[name];
 
@@ -144,6 +145,3 @@ export const resolveDuration = (name: DurationName) => {
 
   return duration;
 };
-
-export const resolveDurationMilliseconds = (name: DurationName) =>
-  Number.parseInt(resolveDuration(name), 10);

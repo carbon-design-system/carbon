@@ -6,6 +6,7 @@
 //
 
 @use 'sass:map';
+@use 'scss/generated/surfaces' as generated;
 
 /// Common component easings
 /// @type Map
@@ -126,22 +127,7 @@ $slow-02: $duration-slow-02;
 /// @type Map
 /// @access public
 /// @group @carbon/motion
-$surfaces: (
-  expand: (
-    kind: shared-element,
-    origin: surface,
-    duration: slow-01,
-    enter-easing: (
-      entrance,
-      expressive,
-    ),
-    exit-easing: (
-      exit,
-      expressive,
-    ),
-    reduced-motion: fade,
-  ),
-);
+$surfaces: generated.$surfaces;
 
 /// Get a named motion surface or one of its properties
 /// @param {String} $name - The motion surface name
