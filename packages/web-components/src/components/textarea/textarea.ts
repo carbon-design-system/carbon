@@ -181,35 +181,63 @@ class CDSTextarea extends CDSTextInput {
       class: `${prefix}--text-area__invalid-icon ${prefix}--text-area__invalid-icon--warning`,
     });
 
+    // Suppress invalid/warn when the field is readonly or disabled, matching
+    // the behaviour of CDSTextInput and the React useNormalizedInputProps hook.
+    const normalizedProps: {
+      disabled: boolean;
+      invalid: boolean;
+      warn: boolean;
+      'slot-name': string;
+      'slot-text': string;
+      icon: ReturnType<typeof iconLoader>;
+    } = {
+      disabled: !this.readonly && this.disabled,
+      invalid: !this.readonly && this.invalid,
+      warn: !this.readonly && !this.invalid && this.warn,
+      'slot-name': '',
+      'slot-text': '',
+      icon: null,
+    };
+
+    if (normalizedProps.invalid) {
+      normalizedProps.icon = invalidIcon;
+      normalizedProps['slot-name'] = 'invalid-text';
+      normalizedProps['slot-text'] = this.invalidText;
+    } else if (normalizedProps.warn) {
+      normalizedProps.icon = warnIcon;
+      normalizedProps['slot-name'] = 'warn-text';
+      normalizedProps['slot-text'] = this.warnText;
+    }
+
     const textareaClasses = classMap({
       [`${prefix}--text-area`]: true,
-      [`${prefix}--text-area--warn`]: this.warn,
-      [`${prefix}--text-area--invalid`]: this.invalid,
+      [`${prefix}--text-area--warn`]: normalizedProps.warn,
+      [`${prefix}--text-area--invalid`]: normalizedProps.invalid,
       [`${prefix}--text-area__wrapper--decorator`]: this._hasAILabel,
     });
 
     const textareaWrapperClasses = classMap({
       [`${prefix}--text-area__wrapper`]: true,
       [`${prefix}--text-area__wrapper--cols`]: this.cols,
-      [`${prefix}--text-area__wrapper--warn`]: this.warn,
+      [`${prefix}--text-area__wrapper--warn`]: normalizedProps.warn,
       [`${prefix}--text-area__wrapper--readonly`]: this.readonly,
     });
 
     const labelClasses = classMap({
       [`${prefix}--label`]: true,
       [`${prefix}--visually-hidden`]: this.hideLabel,
-      [`${prefix}--label--disabled`]: this.disabled,
+      [`${prefix}--label--disabled`]: normalizedProps.disabled,
     });
 
     const counterClasses = classMap({
       [`${prefix}--label`]: true,
-      [`${prefix}--label--disabled`]: this.disabled,
+      [`${prefix}--label--disabled`]: normalizedProps.disabled,
       [`${prefix}--text-area__label-counter`]: true,
     });
 
     const helperTextClasses = classMap({
       [`${prefix}--form__helper-text`]: true,
-      [`${prefix}--form__helper-text--disabled`]: this.disabled,
+      [`${prefix}--form__helper-text--disabled`]: normalizedProps.disabled,
     });
 
     const counter =
@@ -223,34 +251,19 @@ class CDSTextarea extends CDSTextInput {
           </label>`
         : null;
 
-    const icon = () => {
-      if (this.invalid) {
-        return invalidIcon;
-      } else if (this.warn && !this.invalid) {
-        return warnIcon;
-      }
-      return null;
-    };
-
     const helper = html`
       <div class="${helperTextClasses}" id="helper-text">
         <slot name="helper-text">${this.helperText}</slot>
       </div>
     `;
 
-    const normalizedProps = {
-      invalid: this.invalid,
-      warn: this.warn,
-      'slot-name': this.invalid ? 'invalid-text' : 'warn-text',
-      'slot-text': this.invalid ? this.invalidText : this.warnText,
-    };
-
     const validationMessage = html`
       <div
         class="${prefix}--form-requirement"
         ?hidden="${!normalizedProps.invalid && !normalizedProps.warn}">
         <slot name="${normalizedProps['slot-name']}">
-          ${normalizedProps['slot-text']} ${this.isFluid ? icon() : null}
+          ${normalizedProps['slot-text']}
+          ${this.isFluid ? normalizedProps.icon : null}
         </slot>
       </div>
     `;
@@ -262,15 +275,17 @@ class CDSTextarea extends CDSTextInput {
         </label>
         ${counter}
       </div>
-      <div class="${textareaWrapperClasses}" ?data-invalid="${this.invalid}">
-        ${!this.isFluid ? icon() : null}
+      <div
+        class="${textareaWrapperClasses}"
+        ?data-invalid="${normalizedProps.invalid}">
+        ${!this.isFluid ? normalizedProps.icon : null}
         <textarea
           autocomplete="${this.autocomplete}"
           ?autofocus="${this.autofocus}"
           class="${textareaClasses}"
           cols="${ifDefined(this.cols)}"
-          ?data-invalid="${this.invalid}"
-          ?disabled="${this.disabled}"
+          ?data-invalid="${normalizedProps.invalid}"
+          ?disabled="${normalizedProps.disabled}"
           id="input"
           name="${ifNonEmpty(this.name)}"
           pattern="${ifNonEmpty(this.pattern)}"
