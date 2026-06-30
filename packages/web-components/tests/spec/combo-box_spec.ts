@@ -521,7 +521,9 @@ describe('cds-combo-box', () => {
       await Promise.resolve();
 
       expect((elem as CDSComboBox).value).toBe('item1');
-      const appleItem = elem?.querySelector('cds-combo-box-item[value="item1"]');
+      const appleItem = elem?.querySelector(
+        'cds-combo-box-item[value="item1"]'
+      );
       expect(appleItem?.hasAttribute('selected')).toBe(true);
     });
   });
