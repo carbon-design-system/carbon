@@ -121,7 +121,7 @@ export interface PaginationProps
    * When provided, the default `<Select>` is replaced with the returned node.
    * Receives `{ currentPage, totalPages, currentPageSize, onSetPage }`.
    */
-  pageSelectRenderer?: (props: {
+  renderPageSelect?: (props: {
     /** The currently active page. */
     currentPage: number;
     /** Total number of pages derived from `totalItems` and `pageSize`. */
@@ -227,7 +227,7 @@ const Pagination = React.forwardRef(
         `Page of ${total} ${total === 1 ? 'page' : 'pages'}`,
       page: controlledPage = 1,
       pageInputDisabled,
-      pageSelectRenderer,
+      renderPageSelect,
       pageSize: controlledPageSize,
       pageSizeInputDisabled,
       pageSizes: controlledPageSizes,
@@ -286,7 +286,7 @@ const Pagination = React.forwardRef(
       [`${prefix}--pagination__button--forward`]: true,
       [`${prefix}--pagination__button--no-index`]: forwardButtonDisabled,
     });
-    const selectItems = pageSelectRenderer ? [] : renderSelectItems(totalPages);
+    const selectItems = renderPageSelect ? [] : renderSelectItems(totalPages);
 
     const focusMap = {
       backward: backBtnRef,
@@ -518,8 +518,8 @@ const Pagination = React.forwardRef(
             </span>
           ) : (
             <>
-              {pageSelectRenderer ? (
-                pageSelectRenderer({
+              {renderPageSelect ? (
+                renderPageSelect({
                   currentPage: page,
                   totalPages,
                   currentPageSize: pageSize,
@@ -679,7 +679,7 @@ Pagination.propTypes = {
    * When provided, the default `<Select>` is replaced with the returned node.
    * Receives `{ currentPage, totalPages, currentPageSize, onSetPage }`.
    */
-  pageSelectRenderer: PropTypes.func,
+  renderPageSelect: PropTypes.func,
 
   /**
    * The number dictating how many items a page contains.

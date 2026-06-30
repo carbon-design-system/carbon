@@ -15,7 +15,7 @@ import { IconButton } from '../../IconButton';
 import { usePrefix } from '../../../internal/usePrefix';
 
 /**
- * @deprecated Use the stable `Pagination` component with the `pageSelectRenderer`
+ * @deprecated Use the stable `Pagination` component with the `renderPageSelect`
  * prop instead. `unstable_Pagination` / `preview_Pagination` will be removed in v12.
  */
 function Pagination({
@@ -46,7 +46,7 @@ function Pagination({
     if (process.env.NODE_ENV !== 'production') {
       console.warn(
         '[Carbon] `unstable_Pagination` / `preview_Pagination` is deprecated and will be removed in v12. ' +
-          'Use the stable `Pagination` component with the `pageSelectRenderer` prop instead.'
+          'Use the stable `Pagination` component with the `renderPageSelect` prop instead.'
       );
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps

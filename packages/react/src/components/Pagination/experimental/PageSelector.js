@@ -14,7 +14,7 @@ import SelectItem from '../../SelectItem';
 import { usePrefix } from '../../../internal/usePrefix';
 
 /**
- * @deprecated Use `Pagination` with the `pageSelectRenderer` prop instead.
+ * @deprecated Use `Pagination` with the `renderPageSelect` prop instead.
  * `unstable_PageSelector` / `preview_PageSelector` will be removed in v12.
  */
 function PageSelector({
@@ -33,7 +33,7 @@ function PageSelector({
     if (process.env.NODE_ENV !== 'production') {
       console.warn(
         '[Carbon] `unstable_PageSelector` / `preview_PageSelector` is deprecated and will be removed in v12. ' +
-          'Use `Pagination` with the `pageSelectRenderer` prop instead.'
+          'Use `Pagination` with the `renderPageSelect` prop instead.'
       );
     }
   }, []);
