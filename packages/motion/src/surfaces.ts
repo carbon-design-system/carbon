@@ -9,15 +9,30 @@ import type { DurationName, EasingMode, EasingName } from './tokens';
 
 type MotionEasing = readonly [EasingName, EasingMode];
 
-// Keep the shared definition free from React and animation-library values.
-interface MotionSurfaceDefinition {
-  kind: 'shared-element';
-  origin: 'surface';
+interface MotionSurfaceBase {
   duration: DurationName;
   enterEasing: MotionEasing;
   exitEasing: MotionEasing;
   reducedMotion: 'fade';
 }
+
+// Keep the shared definition free from React and animation-library values.
+interface SharedElementSurface extends MotionSurfaceBase {
+  kind: 'shared-element';
+}
+
+interface InvokeKeyframe {
+  opacity: number;
+  clipPath: string;
+}
+
+interface RevealSurface extends MotionSurfaceBase {
+  kind: 'reveal';
+  enter: InvokeKeyframe;
+  exit: InvokeKeyframe;
+}
+
+type MotionSurfaceDefinition = SharedElementSurface | RevealSurface;
 
 /**
  * Named motion intents. These definitions are engine and framework agnostic.
@@ -25,8 +40,22 @@ interface MotionSurfaceDefinition {
 export const surfaces = {
   expand: {
     kind: 'shared-element',
-    origin: 'surface',
     duration: 'slow-01',
+    enterEasing: ['entrance', 'expressive'],
+    exitEasing: ['exit', 'expressive'],
+    reducedMotion: 'fade',
+  },
+  invoke: {
+    kind: 'reveal',
+    duration: 'slow-01',
+    enter: {
+      opacity: 1,
+      clipPath: 'inset(0 0 0 0)',
+    },
+    exit: {
+      opacity: 0,
+      clipPath: 'inset(50% 0 50% 0)',
+    },
     enterEasing: ['entrance', 'expressive'],
     exitEasing: ['exit', 'expressive'],
     reducedMotion: 'fade',

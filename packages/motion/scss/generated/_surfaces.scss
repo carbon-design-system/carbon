@@ -9,8 +9,28 @@
 $surfaces: (
   expand: (
     kind: 'shared-element',
-    origin: 'surface',
     duration: 'slow-01',
+    enter-easing: (
+      'entrance',
+      'expressive',
+    ),
+    exit-easing: (
+      'exit',
+      'expressive',
+    ),
+    reduced-motion: 'fade',
+  ),
+  invoke: (
+    kind: 'reveal',
+    duration: 'slow-01',
+    enter: (
+      opacity: 1,
+      clip-path: 'inset(0 0 0 0)',
+    ),
+    exit: (
+      opacity: 0,
+      clip-path: 'inset(50% 0 50% 0)',
+    ),
     enter-easing: (
       'entrance',
       'expressive',

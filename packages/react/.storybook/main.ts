@@ -98,6 +98,7 @@ const config: StorybookConfig = {
         },
       },
       optimizeDeps: {
+        exclude: ['@carbon/motion'],
         esbuildOptions: {
           loader: {
             '.js': 'jsx',

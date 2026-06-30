@@ -6,9 +6,9 @@
  */
 
 import {
-  getMotionSurface,
   resolveDuration,
   resolveEasing,
+  surfaces,
   type DurationName,
   type MotionSurfaceName,
 } from '@carbon/motion';
@@ -119,14 +119,13 @@ export function createMotionAdapterConfig(
   surfaceName: MotionSurfaceName,
   shouldReduceMotion = false
 ) {
-  const surface = getMotionSurface(surfaceName);
-
-  if (surface.kind !== 'shared-element') {
+  if (surfaceName !== 'expand') {
     throw new Error(
-      `The Motion adapter only supports shared-element surfaces. Received: ${surface.kind}`
+      `The Motion adapter only supports the expand surface. Received: ${surfaceName}`
     );
   }
 
+  const surface = surfaces.expand;
   const duration = toSeconds(surface.duration);
   const [enterName, enterMode] = surface.enterEasing;
   const [exitName, exitMode] = surface.exitEasing;
@@ -181,7 +180,66 @@ export function createMotionAdapter(
   surfaceName: MotionSurfaceName,
   shouldReduceMotion: boolean
 ): MotionSurfaceAdapter {
-  const config = createMotionAdapterConfig(surfaceName, shouldReduceMotion);
+  if (surfaceName === 'invoke') {
+    const surface = surfaces.invoke;
+    const duration = toSeconds(surface.duration);
+    const fadeDuration = Math.min(duration, toSeconds('moderate-02'));
+    const [enterName, enterMode] = surface.enterEasing;
+    const [exitName, exitMode] = surface.exitEasing;
+    const enterEase = [...resolveEasing(enterName, enterMode)] as [
+      number,
+      number,
+      number,
+      number,
+    ];
+    const exitEase = [...resolveEasing(exitName, exitMode)] as [
+      number,
+      number,
+      number,
+      number,
+    ];
+    const activeDuration = shouldReduceMotion ? fadeDuration : duration;
+
+    return {
+      enter({ target }) {
+        return createRun([
+          animate(
+            target,
+            shouldReduceMotion
+              ? { opacity: [0, 1] }
+              : {
+                  opacity: [0, surface.enter.opacity],
+                  clipPath: ['inset(50% 0 50% 0)', surface.enter.clipPath],
+                },
+            { duration: activeDuration, ease: enterEase }
+          ),
+        ]);
+      },
+
+      exit({ target }) {
+        return createRun([
+          animate(
+            target,
+            shouldReduceMotion
+              ? { opacity: [1, 0] }
+              : {
+                  opacity: [surface.enter.opacity, surface.exit.opacity],
+                  clipPath: [surface.enter.clipPath, surface.exit.clipPath],
+                },
+            { duration: activeDuration, ease: exitEase }
+          ),
+        ]);
+      },
+    };
+  }
+
+  if (surfaceName !== 'expand') {
+    throw new Error(
+      `Unsupported motion surface "${surfaceName}". Expected one of: expand, invoke`
+    );
+  }
+
+  const config = createMotionAdapterConfig('expand', shouldReduceMotion);
 
   return {
     enter({ content, fromOrigin, origin, overlay, target }) {

@@ -11,6 +11,7 @@ import {
   useMemo,
   useRef,
   useState,
+  type ReactNode,
   type RefObject,
 } from 'react';
 import type { MotionSurfaceName } from '@carbon/motion';
@@ -35,7 +36,7 @@ interface MotionSurfaceElementRefs {
   contentRef?: RefObject<Element[] | null>;
   originRef: RefObject<HTMLElement | null>;
   overlayRef?: RefObject<HTMLElement | null>;
-  targetRef: RefObject<HTMLElement | null>;
+  targetRef?: RefObject<HTMLElement | null>;
 }
 
 interface UseMotionSurfaceOptions extends MotionSurfaceElementRefs {
@@ -45,6 +46,9 @@ interface UseMotionSurfaceOptions extends MotionSurfaceElementRefs {
   onExitComplete?: () => void;
   /** Controlled open state. */
   open: boolean;
+  /** State setter for the open value. Required when targetRef is not provided
+   *  so that useMotionSurface can manage the target ref internally. */
+  setOpen?: (open: boolean) => void;
 }
 
 interface UseMotionSurfaceResult {
@@ -52,29 +56,37 @@ interface UseMotionSurfaceResult {
   isComponentOpen: boolean;
   /** Whether the component should stay mounted during enter and exit. */
   isPresent: boolean;
+  /** Call to open the modal and start the enter animation. */
+  openWithMotion: () => void;
+  /** Call to close the modal and start the exit animation. */
+  closeWithMotion: () => void;
+  /** Spread onto the trigger element (e.g. Button). */
+  triggerProps: Record<string, unknown>;
+  /** Spread onto the Modal element. */
+  modalProps: { ref: (node: HTMLElement | null) => void };
+  /** Wrap the Modal JSX so useMotionSurface can attach the target ref. */
+  renderModal: (children: ReactNode) => ReactNode;
 }
 
-function getElements({
-  contentRef,
-  originRef,
-  overlayRef,
-  targetRef,
-}: MotionSurfaceElementRefs) {
-  const origin = originRef.current;
-  const target = targetRef.current;
+function getElements(
+  refs: MotionSurfaceElementRefs,
+  internalTargetRef: RefObject<HTMLElement | null>
+) {
+  const origin = refs.originRef.current;
+  const target = (refs.targetRef ?? internalTargetRef).current;
 
   if (!origin || !target) {
     return null;
   }
 
   const elements: MotionSurfaceElements = {
-    content: contentRef?.current ?? [],
+    content: refs.contentRef?.current ?? [],
     origin,
     target,
   };
 
-  if (overlayRef?.current) {
-    elements.overlay = overlayRef.current;
+  if (refs.overlayRef?.current) {
+    elements.overlay = refs.overlayRef.current;
   }
 
   return elements;
@@ -93,6 +105,7 @@ export function useMotionSurface(
     open,
     originRef,
     overlayRef,
+    setOpen,
     targetRef,
   }: UseMotionSurfaceOptions
 ): UseMotionSurfaceResult {
@@ -102,6 +115,8 @@ export function useMotionSurface(
   const phaseRef = useRef<MotionPhase>(open ? 'open' : 'idle');
   const animationsRef = useRef<MotionAnimation[]>([]);
   const runIdRef = useRef(0);
+  // Internal target ref used when the caller does not supply one (invoke pattern).
+  const internalTargetRef = useRef<HTMLElement | null>(null);
   const hiddenOriginRef = useRef<{
     element: HTMLElement;
     transition: string;
@@ -164,6 +179,25 @@ export function useMotionSurface(
     animationsRef.current = [];
   }, []);
 
+  const openWithMotion = useCallback(() => {
+    setOpen?.(true);
+  }, [setOpen]);
+
+  const closeWithMotion = useCallback(() => {
+    setOpen?.(false);
+  }, [setOpen]);
+
+  // Callback ref attached to the modal container for the invoke pattern.
+  const setModalRef = useCallback((node: HTMLElement | null) => {
+    internalTargetRef.current = node;
+  }, []);
+
+  const triggerProps = useMemo(() => ({}), []);
+
+  const modalProps = useMemo(() => ({ ref: setModalRef }), [setModalRef]);
+
+  const renderModal = useCallback((children: ReactNode) => children, []);
+
   useIsomorphicEffect(() => {
     if (open && !isPresent) {
       // Mount first so the destination refs are ready on the next layout pass.
@@ -175,12 +209,10 @@ export function useMotionSurface(
 
     if (!isPresent) return;
 
-    const elements = getElements({
-      contentRef,
-      originRef,
-      overlayRef,
-      targetRef,
-    });
+    const elements = getElements(
+      { contentRef, originRef, overlayRef, targetRef },
+      internalTargetRef
+    );
 
     if (!elements) return;
 
@@ -251,6 +283,7 @@ export function useMotionSurface(
   }, [
     contentRef,
     hideOrigin,
+    internalTargetRef,
     isPresent,
     motionAdapter,
     open,
@@ -297,5 +330,10 @@ export function useMotionSurface(
   return {
     isComponentOpen,
     isPresent,
+    openWithMotion,
+    closeWithMotion,
+    triggerProps,
+    modalProps,
+    renderModal,
   };
 }

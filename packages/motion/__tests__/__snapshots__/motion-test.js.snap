@@ -63,7 +63,27 @@ exports[`@carbon/motion Public API 1`] = `
         "expressive",
       ],
       "kind": "shared-element",
-      "origin": "surface",
+      "reducedMotion": "fade",
+    },
+    "invoke": {
+      "duration": "slow-01",
+      "enter": {
+        "clipPath": "inset(0 0 0 0)",
+        "opacity": 1,
+      },
+      "enterEasing": [
+        "entrance",
+        "expressive",
+      ],
+      "exit": {
+        "clipPath": "inset(50% 0 50% 0)",
+        "opacity": 0,
+      },
+      "exitEasing": [
+        "exit",
+        "expressive",
+      ],
+      "kind": "reveal",
       "reducedMotion": "fade",
     },
   },
