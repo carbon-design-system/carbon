@@ -111,6 +111,8 @@ jobs:
           yarn carbon-cli check --ignore '**/@(node_modules|examples|components|react|fixtures|compat)/**' 'packages/**/*.scss'
       - name: Run tests
         run: yarn test --ci --collectCoverage
+      - name: Run scss-generator tests
+        run: yarn test:scss-generator --ci
       - name: Upload coverage reports to Codecov with GitHub Action
         uses: codecov/codecov-action@57e3a136b779b570ffcdbf80b3bdc90e7fab3de2 # v6.0.0
         with:
