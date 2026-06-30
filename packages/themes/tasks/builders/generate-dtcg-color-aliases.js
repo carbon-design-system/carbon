@@ -133,7 +133,7 @@ function parseToken(name, value) {
  */
 function generateDTCGColorAliases() {
   // Require the CJS build — works at build time without a transpiler step.
-  const colors = require('@carbon/colors');  
+  const colors = require('@carbon/colors');
 
   const output = {
     $schema: 'https://tr.designtokens.org/format/',
