@@ -16,6 +16,7 @@
 @use '@carbon/styles/scss/type';
 
 @use 'ALIAS_STORY_STYLE_CONFIG' as c4p-settings;
+@use './_story-assets/InterstitialScreenViewModule/interstitial-screen-view-module';
 
 .CustomLayout {
   display: flex;

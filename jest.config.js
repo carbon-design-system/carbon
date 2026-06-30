@@ -33,6 +33,12 @@ export default {
     // TODO: remove scss-generator once issue is resolved
     // https://github.com/carbon-design-system/carbon/issues/20115
     'packages/scss-generator/*',
+    // ibm-products has its own jest.config.js with package-specific setup,
+    // transforms, and moduleNameMapper. Run its tests via `yarn test:ibm-products`
+    // (lerna --scope @carbon/ibm-products) so the correct config is used.
+    'packages/ibm-products/*',
+    'packages/ibm-products-web-components/*',
+    'packages/ibm-products-styles/*',
   ],
   transformIgnorePatterns: [
     '<rootDir>/node_modules/(?!lodash-es|nanoid|chalk)',

@@ -22,9 +22,9 @@ import * as matchers from './jest/matchers/index.js';
 
 expect.extend(matchers);
 
-// Known false-positive: @floating-ui/react-dom schedules a state update from a
-// ref callback during React's commit phase. React 19 warns about this because
-// the update is not wrapped in act(), but it does not affect test correctness.
+// Known false-positive: @floating-ui/react schedules a state update from a
+// ref callback during React's commit phase. React 19 emits this warning even
+// without IS_REACT_ACT_ENVIRONMENT set. It does not affect test correctness.
 // https://github.com/floating-ui/floating-ui/issues/2840
 const KNOWN_FALSE_POSITIVES = [
   'The current testing environment is not configured to support act(...)',

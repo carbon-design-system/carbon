@@ -8,7 +8,7 @@
 import toBeAccessible from './toBeAccessible.js';
 import toHaveDevtoolsAttribute from './toHaveDevtoolsAttribute.js';
 import toHaveNoAxeViolations from './toHaveNoAxeViolations.js';
-import toHaveNoACViolations from './toHaveNoACViolations.js';
+import toHaveNoACViolations from '../../../../config/jest-config-carbon/matchers/toHaveNoACViolations.js';
 
 export {
   toBeAccessible,

@@ -22,11 +22,6 @@ setAllComponents(true);
 
 global.__DEV__ = true;
 
-// Tell React this is a test environment so act() warnings are suppressed.
-// Must be set here (setupFiles, before the framework) so it applies to passive
-// mount effects that fire outside of explicit act() calls.
-global.IS_REACT_ACT_ENVIRONMENT = true;
-
 if (global.window) {
   window.matchMedia = jest.fn().mockImplementation((query) => ({
     matches: false,
