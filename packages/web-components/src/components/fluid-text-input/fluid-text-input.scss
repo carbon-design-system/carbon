@@ -10,8 +10,10 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/components/fluid-text-input/index';
 @use '@carbon/styles/scss/layout' as *;
 @use '@carbon/styles/scss/spacing' as *;
-@use '@carbon/styles/scss/theme';
+@use '@carbon/styles/scss/theme' as *;
 @use '@carbon/styles/scss/type' as *;
+@use '@carbon/styles/scss/colors';
+@use '@carbon/styles/scss/utilities/convert' as *;
 @use '@carbon/styles/scss/utilities/skeleton' as *;
 
 :host(#{$prefix}-fluid-text-input) {
@@ -24,4 +26,10 @@ $css--plex: true !default;
   @extend .#{$prefix}--text-input--fluid__skeleton;
 
   display: block;
+}
+
+:host(#{$prefix}-fluid-text-input[disabled])
+  .#{$prefix}--text-input--fluid
+  .#{$prefix}--text-input:disabled {
+  border-block-end: to-rem(1px) solid $border-subtle;
 }

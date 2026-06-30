@@ -6,9 +6,11 @@
  */
 
 import React from 'react';
-import { render } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import { generateItems, generateGenericItem } from '../../ListBox/test-helpers';
 import FluidPasswordInput from '../FluidPasswordInput';
+
+const prefix = 'cds';
 
 describe('FluidPasswordInput', () => {
   it('should render with fluid classes', async () => {
@@ -17,5 +19,20 @@ describe('FluidPasswordInput', () => {
       <FluidPasswordInput id="input-1" labelText="PasswordInput label" />
     );
     expect(container.firstChild).toHaveClass(`cds--text-input--fluid`);
+  });
+
+  it('should add disabled classes when disabled', () => {
+    const { container } = render(
+      <FluidPasswordInput
+        disabled
+        id="input-1"
+        labelText="PasswordInput label"
+      />
+    );
+
+    expect(container.firstChild).toHaveClass(
+      `${prefix}--text-input--fluid--disabled`
+    );
+    expect(screen.getByLabelText('PasswordInput label')).toBeDisabled();
   });
 });
