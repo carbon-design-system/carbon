@@ -72,9 +72,27 @@ describe('featue-flag', function () {
     const el = await fixture(featureFlag);
     const child = el.querySelector('#child');
     expect(child).to.exist;
-    expect(isFeatureFlagEnabled('enable-v12-toggle-reduced-label-spacing', child))
-      .to.be.true;
+    expect(
+      isFeatureFlagEnabled('enable-v12-toggle-reduced-label-spacing', child)
+    ).to.be.true;
     expect(isFeatureFlagEnabled('enable-dialog-element', child)).to.be.false;
+  });
+
+  it('should add enabled v12 release flags to child components', async () => {
+    const featureFlag = html`<feature-flags enable-v12-release>
+      <cds-toggle
+        id="child"
+        label-text="Label"
+        label-a="On"
+        label-b="Off"
+        toggled></cds-toggle>
+    </feature-flags>`;
+    const el = await fixture(featureFlag);
+    const child = el.querySelector('#child');
+    expect(child).to.have.attribute(
+      'enable-v12-toggle-reduced-label-spacing',
+      ''
+    );
   });
 
   it('should recognize multiple enabled flags', async () => {
@@ -112,8 +130,9 @@ describe('featue-flag', function () {
       </feature-flags>
     `);
     const child = el.querySelector('#child');
-    expect(isFeatureFlagEnabled('enable-v12-toggle-reduced-label-spacing', child))
-      .to.be.true;
+    expect(
+      isFeatureFlagEnabled('enable-v12-toggle-reduced-label-spacing', child)
+    ).to.be.true;
   });
 
   it('should override parent flag if child redefines it', async () => {

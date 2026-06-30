@@ -98,6 +98,33 @@ class FeatureFlagsElement extends LitElement {
     this.updateScope();
   }
 
+  private syncFeatureFlagAttributes() {
+    for (const [flag, relatedComponent] of Object.entries(
+      FeatureFlagsElement.flagComponentMap
+    )) {
+      if (!relatedComponent || flag === 'enable-v12-release') {
+        continue;
+      }
+
+      let isEnabled = false;
+      try {
+        isEnabled = this.scope.enabled(flag);
+      } catch {
+        isEnabled = false;
+      }
+
+      if (!isEnabled) {
+        continue;
+      }
+
+      for (const element of this.querySelectorAll(
+        relatedComponent.toLowerCase()
+      )) {
+        element.setAttribute(flag, '');
+      }
+    }
+  }
+
   private getParentScope() {
     let parent = this.parentNode;
     while (parent) {
@@ -116,6 +143,7 @@ class FeatureFlagsElement extends LitElement {
       newScope.mergeWithScope(parentScope);
     }
     this.scope = newScope;
+    this.syncFeatureFlagAttributes();
   }
 
   render() {
