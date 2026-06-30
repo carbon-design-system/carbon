@@ -142,6 +142,7 @@ const Search = React.forwardRef<HTMLInputElement, SearchProps>(
       defaultValue,
       disabled,
       isExpanded = true,
+      inert,
       id,
       labelText,
       // @ts-expect-error: deprecated prop
@@ -155,6 +156,7 @@ const Search = React.forwardRef<HTMLInputElement, SearchProps>(
       role,
       size,
       toolParamDescription,
+      tabIndex,
       type = 'search',
       value,
       ...rest
@@ -172,6 +174,7 @@ const Search = React.forwardRef<HTMLInputElement, SearchProps>(
     const uniqueId = id || inputId;
     const searchId = `${uniqueId}-search`;
     const [hasContent, setHasContent] = useState(hasPropValue || false);
+    const isExpandableCollapsed = !!onExpand && !isExpanded;
     const searchClasses = cx(
       {
         [`${prefix}--search`]: true,
@@ -262,7 +265,7 @@ const Search = React.forwardRef<HTMLInputElement, SearchProps>(
         className={`${prefix}--search-magnifier`}
         onClick={onExpand}
         onKeyDown={handleExpandButtonKeyDown}
-        tabIndex={onExpand && !isExpanded ? 0 : -1}
+        tabIndex={isExpandableCollapsed ? 0 : -1}
         ref={expandButtonRef}
         aria-expanded={
           onExpand && isExpanded
@@ -311,11 +314,16 @@ const Search = React.forwardRef<HTMLInputElement, SearchProps>(
           placeholder={placeholder}
           type={type}
           value={value}
+<<<<<<< feature/22338-webmcp-declarative-api-support
           tabIndex={onExpand && !isExpanded ? -1 : undefined}
           {...(toolParamDescription && {
             toolparamdescription: toolParamDescription,
           })}
+=======
+>>>>>>> main
           {...rest}
+          inert={isExpandableCollapsed ? true : inert}
+          tabIndex={isExpandableCollapsed ? -1 : tabIndex}
         />
         <button
           aria-label={closeButtonLabelText}
