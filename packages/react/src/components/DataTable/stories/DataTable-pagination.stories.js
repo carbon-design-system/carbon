@@ -6,7 +6,7 @@
  */
 
 import { action } from 'storybook/actions';
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import Button from '../../Button';
 import { DataTable } from '..';
 import Pagination from '../../Pagination';
@@ -97,20 +97,40 @@ const sharedArgs = {
 };
 
 export const Default = (args) => {
-  const allRows = generateRows(100);
+  const allRows = useMemo(() => generateRows(100), []);
   const [page, setPage] = useState(1);
   const [pageSize, setPageSize] = useState(10);
+  const [searchValue, setSearchValue] = useState('');
   const paginationSize = args.size === 'xl' ? 'lg' : args.size;
+
+  const filteredRows = allRows.filter((row) => {
+    const search = searchValue.trim().toLowerCase();
+
+    if (search === '') {
+      return true;
+    }
+
+    return Object.values(row).some((value) =>
+      String(value).toLowerCase().includes(search)
+    );
+  });
 
   const handlePaginationChange = ({ page, pageSize }) => {
     setPage(page);
     setPageSize(pageSize);
   };
 
+  const handleSearchChange = (event, onInputChange) => {
+    action('toolbar search input')(event);
+    onInputChange(event);
+    setSearchValue(event.target.value);
+    setPage(1);
+  };
+
   // Calculate the rows to display for the current page
   const startIndex = (page - 1) * pageSize;
   const endIndex = startIndex + pageSize;
-  const paginatedRows = allRows.slice(startIndex, endIndex);
+  const paginatedRows = filteredRows.slice(startIndex, endIndex);
 
   return (
     <>
@@ -131,10 +151,7 @@ export const Default = (args) => {
             <TableToolbar {...getToolbarProps()}>
               <TableToolbarContent>
                 <TableToolbarSearch
-                  onChange={(event) => {
-                    action('toolbar search input')(event);
-                    onInputChange(event);
-                  }}
+                  onChange={(event) => handleSearchChange(event, onInputChange)}
                   persistent
                 />
                 <TableToolbarMenu>
@@ -182,7 +199,7 @@ export const Default = (args) => {
         page={page}
         pageSize={pageSize}
         pageSizes={[10, 20, 30, 40, 50]}
-        totalItems={allRows.length}
+        totalItems={filteredRows.length}
         onChange={handlePaginationChange}
         size={paginationSize}
       />
