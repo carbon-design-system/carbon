@@ -9,12 +9,16 @@ import React, {
   type ReactNode,
   type MouseEvent,
   type HTMLAttributes,
+  useContext,
+  useEffect,
 } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { Close } from '@carbon/icons-react';
 import { usePrefix } from '../../internal/usePrefix';
 import { IconButton } from '../IconButton';
+import { useId } from '../../internal/useId';
+import { ComposedModalContext } from './ComposedModalContext';
 
 export type DivProps = Omit<HTMLAttributes<HTMLDivElement>, 'title'>;
 export interface ModalHeaderProps extends DivProps {
@@ -95,6 +99,25 @@ export const ModalHeader = React.forwardRef<HTMLDivElement, ModalHeaderProps>(
     ref
   ) {
     const prefix = usePrefix();
+    const modalId = useId();
+    const { setLabelId, setTitleId } = useContext(ComposedModalContext);
+
+    const generatedLabelId = `${prefix}--modal-header__label--${modalId}`;
+    const generatedTitleId = `${prefix}--modal-header__heading--${modalId}`;
+
+    useEffect(() => {
+      if (label && setLabelId) {
+        setLabelId(generatedLabelId);
+        return () => setLabelId(undefined);
+      }
+    }, [label, generatedLabelId, setLabelId]);
+
+    useEffect(() => {
+      if (title && setTitleId) {
+        setTitleId(generatedTitleId);
+        return () => setTitleId(undefined);
+      }
+    }, [title, generatedTitleId, setTitleId]);
 
     function handleCloseButtonClick(evt: MouseEvent) {
       closeModal?.(evt);
@@ -122,9 +145,17 @@ export const ModalHeader = React.forwardRef<HTMLDivElement, ModalHeaderProps>(
 
     return (
       <div className={headerClass} {...rest} ref={ref}>
-        {label && <h2 className={labelClass}>{label}</h2>}
+        {label && (
+          <h2 id={generatedLabelId} className={labelClass}>
+            {label}
+          </h2>
+        )}
 
-        {title && <h2 className={titleClass}>{title}</h2>}
+        {title && (
+          <h2 id={generatedTitleId} className={titleClass}>
+            {title}
+          </h2>
+        )}
 
         {children}
 
