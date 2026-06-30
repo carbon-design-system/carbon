@@ -1,7 +1,7 @@
 {
   "name": "@carbon/web-components",
   "description": "Web components for the Carbon Design System",
-  "version": "2.56.0",
+  "version": "2.58.0-rc.0",
   "license": "Apache-2.0",
   "main": "es/index.js",
   "module": "es/index.js",
@@ -66,8 +66,8 @@
   },
   "dependencies": {
     "@carbon/icon-helpers": "10.47.0",
-    "@carbon/icons": "^11.82.0",
-    "@carbon/styles": "^1.108.0",
+    "@carbon/icons": "^11.83.0-rc.0",
+    "@carbon/styles": "^1.110.0-rc.0",
     "@carbon/utilities": "^0.17.0",
     "@floating-ui/dom": "^1.6.3",
     "@ibm/telemetry-js": "^1.10.2",
@@ -77,8 +77,8 @@
     "tslib": "^2.6.3"
   },
   "devDependencies": {
-    "@carbon/layout": "^11.53.0",
-    "@carbon/motion": "^11.46.0",
+    "@carbon/layout": "^11.54.0-rc.0",
+    "@carbon/motion": "^11.47.0-rc.0",
     "@juggle/resize-observer": "^3.4.0",
     "@mordech/vite-lit-loader": "^0.40.0",
     "@open-wc/testing": "^4.0.0",
@@ -102,7 +102,7 @@
     "sass": "^1.93.2",
     "storybook": "^10.3.5",
     "storybook-addon-accessibility-checker": "^9.2.0-rc.4",
-    "tsdown": "^0.21.0",
+    "tsdown": "^0.22.0",
     "typescript-config-carbon": "workspace:^0.10.0",
     "vite": "^8.0.0",
     "web-component-analyzer": "2.0.0"

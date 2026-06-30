@@ -106,7 +106,7 @@ export const RenderCustomIcon = {
 };
 
 const meta = {
-  title: 'Components/Overflow Menu',
+  title: 'Components/OverflowMenu',
 };
 
 export default meta;
