@@ -226,7 +226,12 @@ export function useMotionSurface(
       const runId = runIdRef.current;
       phaseRef.current = 'entering';
       setIsComponentOpen(true);
-      hideOrigin(elements.origin);
+      // Only hide the origin for shared-element surfaces (e.g. expand) where
+      // the launcher visually transforms into the modal. Reveal surfaces
+      // (e.g. invoke) keep the launcher visible while the modal is open.
+      if (surfaceName === 'expand') {
+        hideOrigin(elements.origin);
+      }
 
       let run: MotionSurfaceRun;
       try {
@@ -272,7 +277,9 @@ export function useMotionSurface(
       () => {
         if (runIdRef.current !== runId) return;
 
-        showOrigin();
+        if (surfaceName === 'expand') {
+          showOrigin();
+        }
         phaseRef.current = 'closed';
         setIsComponentOpen(false);
       },

@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useRef, useState } from 'react';
+import React, { useCallback, useRef, useState } from 'react';
 import Button from '../Button';
 import { ClassPrefix } from '../ClassPrefix';
 import Modal from '../Modal';
@@ -26,12 +26,31 @@ export default {
 export const Invoke = () => {
   const [open, setOpen] = useState(false);
   const launcherButtonRef = useRef(null);
+  // targetRef points at the inner modal container (.--modal-container) so the
+  // invoke clip-path animation runs only on the panel. The outer overlay
+  // element retains its default CSS fade-in from the modal styles.
+  const targetRef = useRef(null);
   const invokeMotion = useMotionSurface('invoke', {
     adapter: 'motion',
     open,
     originRef: launcherButtonRef,
     setOpen,
+    targetRef,
   });
+
+  // Resolve targetRef to the inner --modal-container when the Modal mounts.
+  // modalProps.ref attaches to the outer overlay <Layer>; we query downward
+  // to find the panel that should receive the clip-path animation.
+  const modalRef = useCallback(
+    (overlayNode) => {
+      invokeMotion.modalProps.ref(overlayNode);
+      targetRef.current = overlayNode
+        ? overlayNode.querySelector('[role="dialog"]')
+        : null;
+    },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [invokeMotion.modalProps.ref]
+  );
 
   return (
     <>
@@ -47,6 +66,7 @@ export const Invoke = () => {
             {invokeMotion.renderModal(
               <Modal
                 {...invokeMotion.modalProps}
+                ref={modalRef}
                 launcherButtonRef={launcherButtonRef}
                 open={invokeMotion.isComponentOpen}
                 onRequestClose={invokeMotion.closeWithMotion}
