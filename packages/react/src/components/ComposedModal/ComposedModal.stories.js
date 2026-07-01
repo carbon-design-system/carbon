@@ -28,6 +28,17 @@ import { IconButton } from '../IconButton';
 import { View, FolderOpen, Folders } from '@carbon/icons-react';
 import mdx from './ComposedModal.mdx';
 
+const sharedControls = {
+  controls: {
+    exclude: [
+      'containerClassName',
+      'launcherButtonRef',
+      'selectorPrimaryFocus',
+      'selectorsFloatingMenus',
+    ],
+  },
+};
+
 export default {
   title: 'Components/ComposedModal',
   component: ComposedModal,
@@ -40,14 +51,7 @@ export default {
     docs: {
       page: mdx,
     },
-    controls: {
-      exclude: [
-        'containerClassName',
-        'launcherButtonRef',
-        'selectorPrimaryFocus',
-        'selectorsFloatingMenus',
-      ],
-    },
+    ...sharedControls,
   },
   argTypes: {
     danger: { control: 'boolean' },
@@ -59,8 +63,6 @@ export default {
     label: { control: 'text' },
     title: { control: 'text' },
     iconDescription: { control: 'text' },
-    hasScrollingContent: { control: 'boolean' },
-    hasForm: { control: 'boolean' },
     primaryButtonText: { control: 'text' },
     secondaryButtonText: { control: 'text' },
     primaryButtonDisabled: { control: 'boolean' },
@@ -82,8 +84,6 @@ export default {
     label: 'Account resources',
     title: 'Add a custom domain',
     iconDescription: 'Close the modal',
-    hasScrollingContent: false,
-    hasForm: false,
     primaryButtonText: 'Add',
     secondaryButtonText: 'Cancel',
     primaryButtonDisabled: false,
@@ -138,10 +138,10 @@ export const FullWidth = (args) => {
     <>
       <Button onClick={() => setOpen(true)}>Launch composed modal</Button>
       <ComposedModal
+        {...args}
         open={open}
         onClose={() => setOpen(false)}
-        isFullWidth
-        {...args}>
+        isFullWidth>
         <ModalHeader
           label="An example of a modal with no padding"
           title="Full Width Modal"
@@ -206,17 +206,48 @@ export const FullWidth = (args) => {
   );
 };
 
+FullWidth.args = {
+  label: 'An example of a modal with no padding',
+  title: 'Full Width Modal',
+};
+FullWidth.parameters = {
+  controls: {
+    exclude: [
+      'isFullWidth',
+      'containerClassName',
+      'launcherButtonRef',
+      'selectorPrimaryFocus',
+      'selectorsFloatingMenus',
+    ],
+  },
+};
+
 export const PassiveModal = (args) => {
   const [open, setOpen] = useState(true);
   return (
     <>
       <Button onClick={() => setOpen(true)}>Launch composed modal</Button>
-      <ComposedModal open={open} onClose={() => setOpen(false)} {...args}>
+      <ComposedModal {...args} open={open} onClose={() => setOpen(false)}>
         <ModalHeader title="You have been successfully signed out" {...args} />
         <ModalBody />
       </ComposedModal>
     </>
   );
+};
+
+PassiveModal.args = {
+  title: 'You have been successfully signed out',
+};
+PassiveModal.parameters = {
+  controls: {
+    include: [
+      'aria-label',
+      'preventCloseOnClickOutside',
+      'size',
+      'title',
+      'iconDescription',
+    ],
+  },
 };
 
 export const WithStateManager = (args) => {
@@ -251,12 +282,12 @@ export const WithStateManager = (args) => {
       )}>
       {({ open, setOpen }) => (
         <ComposedModal
+          {...args}
           open={open}
           onClose={() => {
             setOpen(false);
           }}
-          launcherButtonRef={button}
-          {...args}>
+          launcherButtonRef={button}>
           <ModalHeader
             label="Account resources"
             title="Add a custom domain"
@@ -296,7 +327,7 @@ export const WithScrollingContent = (args) => {
   return (
     <>
       <Button onClick={() => setOpen(true)}>Launch composed modal</Button>
-      <ComposedModal open={open} onClose={() => setOpen(false)} {...args}>
+      <ComposedModal {...args} open={open} onClose={() => setOpen(false)}>
         <ModalHeader
           label="Account resources"
           title="Add a custom domain"
@@ -402,7 +433,7 @@ export const WithInlineLoading = (args) => {
   return (
     <>
       <Button onClick={() => setOpen(true)}>Launch composed modal</Button>
-      <ComposedModal open={open} onClose={() => setOpen(false)} {...args}>
+      <ComposedModal {...args} open={open} onClose={() => setOpen(false)}>
         <ModalHeader
           label="Account resources"
           title="Add a custom domain"
@@ -427,17 +458,31 @@ export const WithInlineLoading = (args) => {
           </Select>
         </ModalBody>
         <ModalFooter
+          {...args}
           primaryButtonText="Add"
           secondaryButtonText="Cancel"
           loadingStatus={status}
           loadingDescription={description}
           onRequestSubmit={submit}
           onLoadingSuccess={resetStatus}
-          {...args}
         />
       </ComposedModal>
     </>
   );
+};
+
+WithInlineLoading.parameters = {
+  controls: {
+    exclude: [
+      'loadingStatus',
+      'loadingDescription',
+      'loadingIconDescription',
+      'containerClassName',
+      'launcherButtonRef',
+      'selectorPrimaryFocus',
+      'selectorsFloatingMenus',
+    ],
+  },
 };
 
 const aiLabel = (
@@ -476,13 +521,14 @@ export const _withAILabel = {
     label: 'Account resources',
     title: 'Add a custom domain',
     primaryButtonText: 'Save',
-    secondaryButtonText: 'Cancel',
+  },
+  parameters: {
+    ...sharedControls,
   },
   argTypes: {
     label: { control: 'text' },
     title: { control: 'text' },
     primaryButtonText: { control: 'text' },
-    secondaryButtonText: { control: 'text' },
     onClose: { action: 'onClose' },
     onKeyDown: { action: 'onKeyDown' },
   },
