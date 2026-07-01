@@ -314,16 +314,12 @@ const Search = React.forwardRef<HTMLInputElement, SearchProps>(
           placeholder={placeholder}
           type={type}
           value={value}
-<<<<<<< feature/22338-webmcp-declarative-api-support
           tabIndex={onExpand && !isExpanded ? -1 : undefined}
           {...(toolParamDescription && {
             toolparamdescription: toolParamDescription,
           })}
-=======
->>>>>>> main
           {...rest}
           inert={isExpandableCollapsed ? true : inert}
-          tabIndex={isExpandableCollapsed ? -1 : tabIndex}
         />
         <button
           aria-label={closeButtonLabelText}
