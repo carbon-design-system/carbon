@@ -30,7 +30,7 @@ export { TAG_SIZE, TAG_TYPE };
 @customElement(`${prefix}-selectable-tag`)
 class CDSSelectableTag extends HostListenerMixin(FocusMixin(LitElement)) {
   @query(`${prefix}-tag`)
-  private _tag!: CDSTag | null;
+  private _tag!: CDSTag;
 
   /**
    * Custom events to be triggered

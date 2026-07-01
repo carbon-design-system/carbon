@@ -31,7 +31,7 @@ class CDSTag extends HostListenerMixin(FocusMixin(LitElement)) {
   protected _buttonNode!: HTMLButtonElement;
 
   @query(`.${prefix}--tag__label`)
-  _textContainer!: HTMLElement | null;
+  _textContainer!: HTMLElement;
 
   /**
    * Handles `slotchange` event.
