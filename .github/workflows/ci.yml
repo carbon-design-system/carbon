@@ -113,10 +113,12 @@ jobs:
         run: yarn test --ci --collectCoverage
       - name: Run scss-generator tests
         run: yarn test:scss-generator --ci
+      - name: Merge coverage reports
+        run: cat coverage/scss-generator/lcov.info >> coverage/lcov.info
       - name: Upload coverage reports to Codecov with GitHub Action
         uses: codecov/codecov-action@57e3a136b779b570ffcdbf80b3bdc90e7fab3de2 # v6.0.0
         with:
-          files: ./coverage/lcov.info,./coverage/scss-generator/lcov.info
+          files: ./coverage/lcov.info
           flags: main-packages
         env:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
