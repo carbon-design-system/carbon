@@ -140,8 +140,10 @@
         @include focus-outline('outline');
       }
 
-      &:hover {
-        background-color: $background-hover;
+      @media (hover: hover) {
+        &:hover {
+          background-color: $background-hover;
+        }
       }
 
       &:active {
@@ -158,8 +160,10 @@
       background-color: $layer-accent;
       inline-size: $spacing-09;
 
-      &:hover {
-        background-color: $layer-accent-hover;
+      @media (hover: hover) {
+        &:hover {
+          background-color: $layer-accent-hover;
+        }
       }
 
       &:active {
@@ -171,9 +175,14 @@
       z-index: 2;
       fill: $icon-primary;
 
-      &:active,
-      &:hover {
+      &:active {
         fill: $icon-primary;
+      }
+
+      @media (hover: hover) {
+        &:hover {
+          fill: $icon-primary;
+        }
       }
     }
 
@@ -410,12 +419,14 @@
         inline-size: convert.to-rem(16px);
       }
 
-      svg:hover {
-        fill: $icon-primary;
-      }
+      @media (hover: hover) {
+        svg:hover {
+          fill: $icon-primary;
+        }
 
-      &:hover {
-        background-color: $layer-hover;
+        &:hover {
+          background-color: $layer-hover;
+        }
       }
 
       &:focus,
@@ -424,11 +435,13 @@
       }
     }
 
-    .#{$prefix}--tabs__nav-item:hover
-      + .#{$prefix}--tabs__nav-item--close
-      .#{$prefix}--tabs__nav-item--close-icon
-      svg {
-      fill: $icon-primary;
+    @media (hover: hover) {
+      .#{$prefix}--tabs__nav-item:hover
+        + .#{$prefix}--tabs__nav-item--close
+        .#{$prefix}--tabs__nav-item--close-icon
+        svg {
+        fill: $icon-primary;
+      }
     }
 
     .#{$prefix}--tabs__nav-item--close-icon--selected {
@@ -437,11 +450,16 @@
       }
     }
 
-    .#{$prefix}--tabs__nav-item:hover
-      + .#{$prefix}--tabs__nav-item--close
-      .#{$prefix}--tabs__nav-item--close-icon--disabled,
-    .#{$prefix}--tabs__nav-item--close-icon--disabled,
-    .#{$prefix}--tabs__nav-item--close-icon--disabled:hover {
+    @media (hover: hover) {
+      .#{$prefix}--tabs__nav-item:hover
+        + .#{$prefix}--tabs__nav-item--close
+        .#{$prefix}--tabs__nav-item--close-icon--disabled,
+      .#{$prefix}--tabs__nav-item--close-icon--disabled:hover {
+        background-color: inherit;
+      }
+    }
+
+    .#{$prefix}--tabs__nav-item--close-icon--disabled {
       background-color: inherit;
       cursor: not-allowed;
 
@@ -561,32 +579,34 @@
     //-----------------------------
     // Item Hover
     //-----------------------------
-    &:not(.#{$prefix}--tabs--contained)
-      .#{$prefix}--tabs__nav-item:not(
-        .#{$prefix}--tabs__nav-item--selected
-      ):not(.#{$prefix}--tabs__nav-item--disabled):hover {
-      border-block-end: $tab-underline-color-hover;
-      color: $text-primary;
-    }
+    @media (hover: hover) {
+      &:not(.#{$prefix}--tabs--contained)
+        .#{$prefix}--tabs__nav-item:not(
+          .#{$prefix}--tabs__nav-item--selected
+        ):not(.#{$prefix}--tabs__nav-item--disabled):hover {
+        border-block-end: $tab-underline-color-hover;
+        color: $text-primary;
+      }
 
-    &.#{$prefix}--tabs--contained
-      .#{$prefix}--tabs__nav-item:not(
-        .#{$prefix}--tabs__nav-item--selected
-      ):not(.#{$prefix}--tabs__nav-item--disabled):not(
-        .#{$prefix}--tabs__nav-item--hover-off
-      ):hover {
-      background-color: $layer-accent-hover;
-      color: $text-primary;
-    }
+      &.#{$prefix}--tabs--contained
+        .#{$prefix}--tabs__nav-item:not(
+          .#{$prefix}--tabs__nav-item--selected
+        ):not(.#{$prefix}--tabs__nav-item--disabled):not(
+          .#{$prefix}--tabs__nav-item--hover-off
+        ):hover {
+        background-color: $layer-accent-hover;
+        color: $text-primary;
+      }
 
-    &.#{$prefix}--tabs--vertical
-      .#{$prefix}--tabs__nav-item:not(
-        .#{$prefix}--tabs__nav-item--selected
-      ):not(.#{$prefix}--tabs__nav-item--disabled):not(
-        .#{$prefix}--tabs__nav-item--hover-off
-      ):hover {
-      background-color: $layer-hover;
-      box-shadow: inset 3px 0 0 0 $border-strong;
+      &.#{$prefix}--tabs--vertical
+        .#{$prefix}--tabs__nav-item:not(
+          .#{$prefix}--tabs__nav-item--selected
+        ):not(.#{$prefix}--tabs__nav-item--disabled):not(
+          .#{$prefix}--tabs__nav-item--hover-off
+        ):hover {
+        background-color: $layer-hover;
+        box-shadow: inset 3px 0 0 0 $border-strong;
+      }
     }
 
     //-----------------------------
@@ -628,15 +648,20 @@
     }
 
     &.#{$prefix}--tabs--contained:not(.#{$prefix}--tabs--tall)
-      .#{$prefix}--tabs__nav-item--selected,
-    &.#{$prefix}--tabs--contained:not(.#{$prefix}--tabs--tall)
-      .#{$prefix}--tabs__nav-item--selected:hover {
+      .#{$prefix}--tabs__nav-item--selected {
       // height - vertical padding
       line-height: calc(#{convert.to-rem(48px)} - (#{$spacing-03} * 2));
     }
 
-    &.#{$prefix}--tabs--contained .#{$prefix}--tabs__nav-item--selected,
-    &.#{$prefix}--tabs--contained .#{$prefix}--tabs__nav-item--selected:hover {
+    @media (hover: hover) {
+      &.#{$prefix}--tabs--contained:not(.#{$prefix}--tabs--tall)
+        .#{$prefix}--tabs__nav-item--selected:hover {
+        // height - vertical padding
+        line-height: calc(#{convert.to-rem(48px)} - (#{$spacing-03} * 2));
+      }
+    }
+
+    &.#{$prefix}--tabs--contained .#{$prefix}--tabs__nav-item--selected {
       background-color: $layer;
 
       .#{$prefix}--tabs__nav-link:focus,
@@ -645,11 +670,23 @@
       }
     }
 
+    @media (hover: hover) {
+      &.#{$prefix}--tabs--contained
+        .#{$prefix}--tabs__nav-item--selected:hover {
+        background-color: $layer;
+      }
+    }
+
     &.#{$prefix}--tabs--light.#{$prefix}--tabs--contained
-      .#{$prefix}--tabs__nav-item--selected,
-    &.#{$prefix}--tabs--light.#{$prefix}--tabs--contained
-      .#{$prefix}--tabs__nav-item--selected:hover {
+      .#{$prefix}--tabs__nav-item--selected {
       background-color: $background;
+    }
+
+    @media (hover: hover) {
+      &.#{$prefix}--tabs--light.#{$prefix}--tabs--contained
+        .#{$prefix}--tabs__nav-item--selected:hover {
+        background-color: $background;
+      }
     }
 
     //-----------------------------
@@ -663,23 +700,32 @@
       outline: none;
     }
 
-    .#{$prefix}--tabs__nav-item--disabled:hover {
-      border-block-end: 2px solid $border-subtle;
-      color: $tab-text-disabled;
-      cursor: not-allowed;
+    @media (hover: hover) {
+      .#{$prefix}--tabs__nav-item--disabled:hover {
+        border-block-end: 2px solid $border-subtle;
+        color: $tab-text-disabled;
+        cursor: not-allowed;
+      }
+
+      &.#{$prefix}--tabs--contained
+        .#{$prefix}--tabs__nav-item.#{$prefix}--tabs__nav-item--disabled:hover {
+        background-color: button.$button-disabled;
+      }
+
+      &.#{$prefix}--tabs--vertical
+        .#{$prefix}--tabs__nav-item.#{$prefix}--tabs__nav-item--disabled:hover {
+        background-color: $layer;
+        border-block-end: 1px solid $border-subtle;
+      }
     }
 
     &.#{$prefix}--tabs--contained
-      .#{$prefix}--tabs__nav-item.#{$prefix}--tabs__nav-item--disabled,
-    &.#{$prefix}--tabs--contained
-      .#{$prefix}--tabs__nav-item.#{$prefix}--tabs__nav-item--disabled:hover {
+      .#{$prefix}--tabs__nav-item.#{$prefix}--tabs__nav-item--disabled {
       background-color: button.$button-disabled;
     }
 
     &.#{$prefix}--tabs--vertical
-      .#{$prefix}--tabs__nav-item.#{$prefix}--tabs__nav-item--disabled,
-    &.#{$prefix}--tabs--vertical
-      .#{$prefix}--tabs__nav-item.#{$prefix}--tabs__nav-item--disabled:hover {
+      .#{$prefix}--tabs__nav-item.#{$prefix}--tabs__nav-item--disabled {
       background-color: $layer;
       border-block-end: 1px solid $border-subtle;
     }
@@ -697,10 +743,12 @@
       border-block-end-color: $border-subtle;
     }
 
-    .#{$prefix}--tabs--light
-      .#{$prefix}--tabs__nav-item--disabled:hover
-      .#{$prefix}--tabs__nav-link {
-      border-block-end-color: $border-subtle;
+    @media (hover: hover) {
+      .#{$prefix}--tabs--light
+        .#{$prefix}--tabs__nav-item--disabled:hover
+        .#{$prefix}--tabs__nav-link {
+        border-block-end-color: $border-subtle;
+      }
     }
 
     .#{$prefix}--tabs--light
