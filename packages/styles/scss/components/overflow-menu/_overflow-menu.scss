@@ -48,8 +48,10 @@
       @include focus-outline('outline');
     }
 
-    &:hover {
-      background-color: $background-hover;
+    @media (any-hover: hover) {
+      &:hover {
+        background-color: $background-hover;
+      }
     }
   }
 
@@ -137,8 +139,10 @@
     }
   }
 
-  .#{$prefix}--overflow-menu.#{$prefix}--overflow-menu--open:hover {
-    background-color: $layer;
+  @media (any-hover: hover) {
+    .#{$prefix}--overflow-menu.#{$prefix}--overflow-menu--open:hover {
+      background-color: $layer;
+    }
   }
 
   .#{$prefix}--overflow-menu-options--light {
@@ -149,8 +153,10 @@
     }
   }
 
-  .#{$prefix}--overflow-menu.#{$prefix}--overflow-menu--light.#{$prefix}--overflow-menu--open:hover {
-    background-color: $layer-hover;
+  @media (any-hover: hover) {
+    .#{$prefix}--overflow-menu.#{$prefix}--overflow-menu--light.#{$prefix}--overflow-menu--open:hover {
+      background-color: $layer-hover;
+    }
   }
 
   .#{$prefix}--overflow-menu-options[data-floating-menu-direction='bottom']:not(
@@ -301,8 +307,10 @@
       background-color $duration-fast-02 motion(entrance, productive),
       color $duration-fast-02 motion(entrance, productive);
 
-    &:hover {
-      color: $text-primary;
+    @media (any-hover: hover) {
+      &:hover {
+        color: $text-primary;
+      }
     }
 
     &:focus {
@@ -318,8 +326,10 @@
     fill: $icon-secondary;
   }
 
-  .#{$prefix}--overflow-menu-options__btn:hover svg {
-    fill: $icon-primary;
+  @media (any-hover: hover) {
+    .#{$prefix}--overflow-menu-options__btn:hover svg {
+      fill: $icon-primary;
+    }
   }
 
   .#{$prefix}--overflow-menu-options__option-content {
@@ -328,12 +338,27 @@
     white-space: nowrap;
   }
 
-  .#{$prefix}--overflow-menu-options__option:hover {
-    background-color: $layer-hover;
+  @media (any-hover: hover) {
+    .#{$prefix}--overflow-menu-options__option:hover {
+      background-color: $layer-hover;
+    }
+
+    .#{$prefix}--overflow-menu-options__option--danger
+      .#{$prefix}--overflow-menu-options__btn:hover {
+      background-color: button.$button-danger-primary;
+      color: $text-on-color;
+
+      svg {
+        fill: currentColor;
+      }
+    }
+
+    .#{$prefix}--overflow-menu-options__option--disabled:hover {
+      background-color: $layer;
+      cursor: not-allowed;
+    }
   }
 
-  .#{$prefix}--overflow-menu-options__option--danger
-    .#{$prefix}--overflow-menu-options__btn:hover,
   .#{$prefix}--overflow-menu-options__option--danger
     .#{$prefix}--overflow-menu-options__btn:focus {
     background-color: button.$button-danger-primary;
@@ -344,23 +369,26 @@
     }
   }
 
-  .#{$prefix}--overflow-menu-options__option--disabled:hover {
-    background-color: $layer;
-    cursor: not-allowed;
-  }
-
   .#{$prefix}--overflow-menu-options__option--disabled
     .#{$prefix}--overflow-menu-options__btn {
     color: $text-disabled;
     cursor: not-allowed;
 
-    &:hover,
     &:active,
     &:focus {
       @include focus-outline('reset');
 
       background-color: $layer;
       color: $text-disabled;
+    }
+
+    @media (any-hover: hover) {
+      &:hover {
+        @include focus-outline('reset');
+
+        background-color: $layer;
+        color: $text-disabled;
+      }
     }
   }
 
