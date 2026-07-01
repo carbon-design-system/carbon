@@ -24,8 +24,8 @@ export default {
   ],
   coveragePathIgnorePatterns: [
     'packages/web-components/*',
-    // scss-generator is covered by `yarn test:scss-generator`, which scopes
-    // VM modules to the Prettier 3 dynamic imports in that package.
+    // scss-generator coverage is collected by `yarn test:scss-generator`,
+    // which scopes VM modules to the Prettier 3 dynamic imports in that package.
     'packages/scss-generator/*',
   ],
   testPathIgnorePatterns: [
