@@ -120,8 +120,10 @@ $popover-caret-height: custom-property.get-var(
     @include focus-outline('outline');
   }
 
-  &:hover {
-    background-color: theme.$layer-hover;
+  @media (any-hover: hover) {
+    &:hover {
+      background-color: theme.$layer-hover;
+    }
   }
 
   svg {
