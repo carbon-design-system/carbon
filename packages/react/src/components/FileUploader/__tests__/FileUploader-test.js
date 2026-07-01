@@ -186,20 +186,6 @@ describe('FileUploader', () => {
   });
 
   describe('Enhanced FileUploader (with feature flag)', () => {
-    beforeAll(() => {
-      Object.defineProperty(global, 'crypto', {
-        value: {
-          getRandomValues: (arr) => {
-            for (let i = 0; i < arr.length; i++) {
-              arr[i] = Math.floor(Math.random() * 256);
-            }
-            return arr;
-          },
-        },
-        writable: true,
-      });
-    });
-
     it('should handle multiple file uploads with duplicate prevention', async () => {
       const onChange = jest.fn();
 
@@ -516,6 +502,359 @@ describe('FileUploader', () => {
       // Test the item() function returns null for cleared files
       expect(typeof clearEvent.target.files.item).toBe('function');
       expect(clearEvent.target.files.item(0)).toBe(null);
+    });
+  });
+
+  describe('Accessibility features', () => {
+    describe('Screen reader announcements', () => {
+      it('should announce single file selection to screen readers', async () => {
+        const { container } = render(<FileUploader {...requiredProps} />);
+
+        const fileInput = container.querySelector('input[type="file"]');
+        const file = new File(['content'], 'document.png', {
+          type: 'image/png',
+        });
+
+        await userEvent.upload(fileInput, file);
+
+        // Verify screen reader announcement using accessible text content
+        expect(
+          screen.getByText('1 file selected.', {
+            selector: '.cds--visually-hidden',
+          })
+        ).toBeInTheDocument();
+      });
+
+      it('should announce multiple file selections to screen readers', async () => {
+        const { container } = render(
+          <FileUploader {...requiredProps} multiple />
+        );
+
+        const fileInput = container.querySelector('input[type="file"]');
+        const files = [
+          new File(['content1'], 'doc1.png', { type: 'image/png' }),
+          new File(['content2'], 'doc2.png', { type: 'image/png' }),
+          new File(['content3'], 'doc3.png', { type: 'image/png' }),
+        ];
+
+        await userEvent.upload(fileInput, files);
+
+        expect(
+          screen.getByText('3 files selected.', {
+            selector: '.cds--visually-hidden',
+          })
+        ).toBeInTheDocument();
+      });
+
+      it('should clear file count announcement when all files are removed', async () => {
+        const { container } = render(
+          <FileUploader {...requiredProps} filenameStatus="edit" />
+        );
+
+        const fileInput = container.querySelector('input[type="file"]');
+        const file = new File(['content'], 'document.png', {
+          type: 'image/png',
+        });
+
+        await userEvent.upload(fileInput, file);
+
+        expect(
+          screen.getByText('1 file selected.', {
+            selector: '.cds--visually-hidden',
+          })
+        ).toBeInTheDocument();
+
+        const deleteButton = screen.getByRole('button', {
+          name: /test description - document\.png/i,
+        });
+        await userEvent.click(deleteButton);
+
+        expect(
+          screen.queryByText(/selected/, {
+            selector: '.cds--visually-hidden',
+          })
+        ).not.toBeInTheDocument();
+      });
+
+      it('should have properly configured aria-live region for deletion announcements', () => {
+        const { container } = render(<FileUploader {...requiredProps} />);
+
+        const liveRegion = container.querySelector('[role="alert"]');
+
+        expect(liveRegion).toBeInTheDocument();
+        expect(liveRegion).toHaveAttribute('aria-live', 'assertive');
+        expect(liveRegion).toHaveAttribute('aria-atomic', 'true');
+        expect(liveRegion).toHaveClass('cds--visually-hidden');
+      });
+    });
+
+    describe('Keyboard interactions', () => {
+      it('should handle Enter key on delete button', async () => {
+        const { container } = render(
+          <FileUploader {...requiredProps} filenameStatus="edit" />
+        );
+
+        const fileInput = container.querySelector('input[type="file"]');
+        const file = new File(['content'], 'document.png', {
+          type: 'image/png',
+        });
+
+        await userEvent.upload(fileInput, file);
+
+        const deleteButton = screen.getByRole('button', {
+          name: /test description - document\.png/i,
+        });
+
+        // Focus the button and press Enter
+        deleteButton.focus();
+        await userEvent.keyboard('{Enter}');
+
+        // File should be deleted
+        expect(screen.queryByText('document.png')).not.toBeInTheDocument();
+      });
+
+      it('should handle Space key on delete button', async () => {
+        const { container } = render(
+          <FileUploader {...requiredProps} filenameStatus="edit" />
+        );
+
+        const fileInput = container.querySelector('input[type="file"]');
+        const file = new File(['content'], 'document.png', {
+          type: 'image/png',
+        });
+
+        await userEvent.upload(fileInput, file);
+
+        const deleteButton = screen.getByRole('button', {
+          name: /test description - document\.png/i,
+        });
+
+        deleteButton.focus();
+        await userEvent.keyboard(' ');
+
+        // File should be deleted
+        expect(screen.queryByText('document.png')).not.toBeInTheDocument();
+      });
+    });
+
+    describe('Focus management', () => {
+      it('should move focus to upload button when last file is deleted', async () => {
+        const { container } = render(
+          <FileUploader
+            {...requiredProps}
+            filenameStatus="edit"
+            buttonLabel="Add files"
+          />
+        );
+
+        const fileInput = container.querySelector('input[type="file"]');
+        const file = new File(['content'], 'document.png', {
+          type: 'image/png',
+        });
+
+        await userEvent.upload(fileInput, file);
+
+        const deleteButton = screen.getByRole('button', {
+          name: /test description - document\.png/i,
+        });
+        await userEvent.click(deleteButton);
+
+        const uploadButton = screen.getByRole('button', { name: 'Add files' });
+
+        expect(uploadButton).toHaveFocus();
+      });
+
+      it('should maintain focus on delete buttons when middle file is removed', async () => {
+        const { container } = render(
+          <FileUploader
+            {...requiredProps}
+            filenameStatus="edit"
+            multiple
+            buttonLabel="Add files"
+          />
+        );
+
+        const fileInput = container.querySelector('input[type="file"]');
+        const files = [
+          new File(['content1'], 'first.png', { type: 'image/png' }),
+          new File(['content2'], 'second.png', { type: 'image/png' }),
+          new File(['content3'], 'third.png', { type: 'image/png' }),
+        ];
+
+        await userEvent.upload(fileInput, files);
+
+        const secondDeleteButton = screen.getByRole('button', {
+          name: /test description - second\.png/i,
+        });
+        await userEvent.click(secondDeleteButton);
+
+        const uploadButton = screen.getByRole('button', { name: 'Add files' });
+
+        // Upload button should not have focus
+        expect(uploadButton).not.toHaveFocus();
+
+        // Other delete buttons should still exist
+        expect(
+          screen.getByRole('button', {
+            name: /test description - first\.png/i,
+          })
+        ).toBeInTheDocument();
+        expect(
+          screen.getByRole('button', {
+            name: /test description - third\.png/i,
+          })
+        ).toBeInTheDocument();
+
+        // Focus should be on the current third delete button
+        expect(
+          screen.getByRole('button', {
+            name: /test description - third\.png/i,
+          })
+        ).toHaveFocus();
+      });
+
+      it('should move focus to previous delete button when last file is removed', async () => {
+        const { container } = render(
+          <FileUploader {...requiredProps} filenameStatus="edit" multiple />
+        );
+
+        const fileInput = container.querySelector('input[type="file"]');
+        const files = [
+          new File(['content1'], 'first.png', { type: 'image/png' }),
+          new File(['content2'], 'second.png', { type: 'image/png' }),
+        ];
+
+        await userEvent.upload(fileInput, files);
+
+        const lastDeleteButton = screen.getByRole('button', {
+          name: /test description - second\.png/i,
+        });
+        await userEvent.click(lastDeleteButton);
+
+        const remainingDeleteButton = screen.getByRole('button', {
+          name: /test description - first\.png/i,
+        });
+
+        expect(remainingDeleteButton).toHaveFocus();
+      });
+    });
+  });
+
+  describe('Accessibility features with enhanced FileUploader', () => {
+    describe('Screen reader announcements', () => {
+      it('should announce file count in enhanced mode', async () => {
+        const { container } = render(
+          <FeatureFlags enableEnhancedFileUploader>
+            <FileUploader {...requiredProps} multiple />
+          </FeatureFlags>
+        );
+
+        const fileInput = container.querySelector('input[type="file"]');
+        const files = [
+          new File(['content1'], 'doc1.png', { type: 'image/png' }),
+          new File(['content2'], 'doc2.png', { type: 'image/png' }),
+        ];
+
+        await userEvent.upload(fileInput, files);
+
+        expect(
+          screen.getByText('2 files selected.', {
+            selector: '.cds--visually-hidden',
+          })
+        ).toBeInTheDocument();
+      });
+
+      it('should update file count announcement after deletion', async () => {
+        const { container } = render(
+          <FeatureFlags enableEnhancedFileUploader>
+            <FileUploader {...requiredProps} filenameStatus="edit" multiple />
+          </FeatureFlags>
+        );
+
+        const fileInput = container.querySelector('input[type="file"]');
+        const files = [
+          new File(['content1'], 'first.png', { type: 'image/png' }),
+          new File(['content2'], 'second.png', { type: 'image/png' }),
+          new File(['content3'], 'third.png', { type: 'image/png' }),
+        ];
+
+        await userEvent.upload(fileInput, files);
+
+        expect(
+          screen.getByText('3 files selected.', {
+            selector: '.cds--visually-hidden',
+          })
+        ).toBeInTheDocument();
+
+        const deleteButton = screen.getByRole('button', {
+          name: /test description - second\.png/i,
+        });
+        await userEvent.click(deleteButton);
+
+        expect(
+          screen.getByText('2 files selected.', {
+            selector: '.cds--visually-hidden',
+          })
+        ).toBeInTheDocument();
+      });
+    });
+
+    describe('Focus management', () => {
+      it('should move focus to upload button when last file is deleted', async () => {
+        const { container } = render(
+          <FeatureFlags enableEnhancedFileUploader>
+            <FileUploader
+              {...requiredProps}
+              filenameStatus="edit"
+              buttonLabel="Add files"
+            />
+          </FeatureFlags>
+        );
+
+        const fileInput = container.querySelector('input[type="file"]');
+        const file = new File(['content'], 'document.png', {
+          type: 'image/png',
+        });
+
+        await userEvent.upload(fileInput, file);
+
+        const deleteButton = screen.getByRole('button', {
+          name: /test description - document\.png/i,
+        });
+        await userEvent.click(deleteButton);
+
+        const uploadButton = screen.getByRole('button', { name: 'Add files' });
+
+        expect(uploadButton).toHaveFocus();
+      });
+
+      it('should move focus to previous delete button when last file is removed', async () => {
+        const { container } = render(
+          <FeatureFlags enableEnhancedFileUploader>
+            <FileUploader {...requiredProps} filenameStatus="edit" multiple />
+          </FeatureFlags>
+        );
+
+        const fileInput = container.querySelector('input[type="file"]');
+        const files = [
+          new File(['content1'], 'first.png', { type: 'image/png' }),
+          new File(['content2'], 'second.png', { type: 'image/png' }),
+          new File(['content3'], 'third.png', { type: 'image/png' }),
+        ];
+
+        await userEvent.upload(fileInput, files);
+
+        const lastDeleteButton = screen.getByRole('button', {
+          name: /test description - third\.png/i,
+        });
+        await userEvent.click(lastDeleteButton);
+
+        const newLastDeleteButton = screen.getByRole('button', {
+          name: /test description - second\.png/i,
+        });
+
+        expect(newLastDeleteButton).toHaveFocus();
+      });
     });
   });
 });

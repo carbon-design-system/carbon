@@ -35,7 +35,7 @@ describe('Filename', () => {
     );
   });
 
-  it('should support events on interactive icons when `edit` or `complete` is the status', () => {
+  it('should support events on interactive icons when `edit` is the status', () => {
     const onClick = jest.fn();
     const { container: edit } = render(
       <Filename
@@ -54,18 +54,6 @@ describe('Filename', () => {
 
     onClick.mockReset();
 
-    const { container: complete } = render(
-      <Filename
-        iconDescription="test description"
-        status="complete"
-        onClick={onClick}
-      />
-    );
-
-    // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
-    fireEvent.click(complete.querySelector(`[aria-label="test description"]`));
-    expect(onClick).toHaveBeenCalledTimes(1);
-
     const { container: uploading } = render(
       <Filename
         iconDescription="test description"
@@ -79,5 +67,54 @@ describe('Filename', () => {
     // eslint-disable-next-line testing-library/prefer-screen-queries
     fireEvent.click(getByText(uploading, 'test description'));
     expect(onClick).not.toHaveBeenCalled();
+  });
+
+  it('should return null for invalid status', () => {
+    const { container } = render(<Filename status="invalid" />);
+    expect(container.firstChild).toBeNull();
+  });
+
+  it('should use status-specific default descriptions when iconDescription is not provided', () => {
+    // Without filename
+    const { container: uploading } = render(<Filename status="uploading" />);
+    expect(getByText(uploading, 'Uploading file')).toBeInTheDocument();
+
+    const { container: complete } = render(<Filename status="complete" />);
+    const svg = complete.querySelector('svg');
+    expect(svg).toHaveAttribute('aria-label', 'Upload complete');
+    const title = complete.querySelector('title');
+    expect(title).toHaveTextContent('Upload complete');
+
+    // With filename
+    const { container: uploadingWithName } = render(
+      <Filename status="uploading" name="test.txt" />
+    );
+    expect(
+      getByText(uploadingWithName, 'Uploading test.txt')
+    ).toBeInTheDocument();
+
+    const { container: edit } = render(
+      <Filename status="edit" name="test.txt" />
+    );
+    const button = edit.querySelector('button');
+    expect(button).toHaveAttribute('aria-label', 'Remove file - test.txt');
+
+    const { container: completeWithName } = render(
+      <Filename status="complete" name="test.txt" />
+    );
+    const svgWithName = completeWithName.querySelector('svg');
+    expect(svgWithName).toHaveAttribute('aria-label', 'test.txt uploaded');
+    const titleWithName = completeWithName.querySelector('title');
+    expect(titleWithName).toHaveTextContent('test.txt uploaded');
+  });
+
+  it('should use custom iconDescription when provided', () => {
+    const { container } = render(
+      <Filename status="complete" iconDescription="Custom description" />
+    );
+    const svg = container.querySelector('svg');
+    expect(svg).toHaveAttribute('aria-label', 'Custom description');
+    const title = container.querySelector('title');
+    expect(title).toHaveTextContent('Custom description');
   });
 });

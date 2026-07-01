@@ -7,7 +7,7 @@
 
 import { Close, WarningFilled, CheckmarkFilled } from '@carbon/icons-react';
 import PropTypes from 'prop-types';
-import React, { type HTMLAttributes } from 'react';
+import React, { forwardRef, type HTMLAttributes } from 'react';
 import Loading from '../Loading';
 import { usePrefix } from '../../internal/usePrefix';
 
@@ -53,22 +53,44 @@ export interface FilenameProps
   tabIndex?: number;
 }
 
-function Filename({
-  iconDescription = 'Uploading file',
-  status = 'uploading',
-  invalid,
-  disabled,
-  name,
-  tabIndex = 0,
-  ['aria-describedby']: ariaDescribedBy,
-  ...rest
-}: FilenameProps) {
+const Filename = forwardRef<HTMLButtonElement, FilenameProps>(function Filename(
+  {
+    iconDescription,
+    status = 'uploading',
+    invalid,
+    disabled,
+    name,
+    tabIndex = 0,
+    ['aria-describedby']: ariaDescribedBy,
+    onClick,
+    ...rest
+  }: FilenameProps,
+  ref
+) {
   const prefix = usePrefix();
+
+  // Provide status-specific default descriptions
+  const getDefaultDescription = () => {
+    if (iconDescription) return iconDescription;
+    switch (status) {
+      case 'uploading':
+        return name ? `Uploading ${name}` : 'Uploading file';
+      case 'edit':
+        return 'Remove file';
+      case 'complete':
+        return name ? `${name} uploaded` : 'Upload complete';
+      default:
+        return '';
+    }
+  };
+
+  const description = getDefaultDescription();
+
   switch (status) {
     case 'uploading':
       return (
         <Loading
-          description={iconDescription}
+          description={description}
           small
           withOverlay={false}
           className={`${prefix}--file-loading`}
@@ -79,13 +101,15 @@ function Filename({
         <>
           {invalid && <WarningFilled className={`${prefix}--file-invalid`} />}
           <button
+            ref={ref}
             disabled={disabled}
-            aria-label={`${iconDescription} - ${name}`}
+            aria-label={`${description} - ${name}`}
             className={`${prefix}--file-close`}
             type="button"
             tabIndex={tabIndex}
-            {...rest}
-            aria-describedby={invalid ? ariaDescribedBy : undefined}>
+            onClick={onClick}
+            aria-describedby={invalid ? ariaDescribedBy : undefined}
+            {...rest}>
             <Close />
           </button>
         </>
@@ -93,17 +117,16 @@ function Filename({
     case 'complete':
       return (
         <CheckmarkFilled
-          aria-label={iconDescription}
+          aria-label={description}
           className={`${prefix}--file-complete`}
-          {...rest}
-          tabIndex={-1}>
-          {iconDescription && <title>{iconDescription}</title>}
+          {...rest}>
+          <title>{description}</title>
         </CheckmarkFilled>
       );
     default:
       return null;
   }
-}
+});
 
 Filename.propTypes = {
   /**

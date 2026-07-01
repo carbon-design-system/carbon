@@ -175,7 +175,6 @@
     }
 
     .#{$prefix}--file-filename-container-wrap {
-      margin-block-start: 1px;
       max-inline-size: 17.5rem;
       padding-inline-start: $spacing-05;
       @include breakpoint-down(410px) {
@@ -210,6 +209,10 @@
       }
     }
 
+    .#{$prefix}--file-filename-tooltip .#{$prefix}--tooltip-trigger__wrapper {
+      display: flex;
+    }
+
     .#{$prefix}--file-filename-button {
       @include type-style('body-compact-01');
 
@@ -219,7 +222,6 @@
       background: none;
       color: inherit;
       cursor: pointer;
-      font: inherit;
       inline-size: -webkit-fill-available;
       outline: inherit;
       text-overflow: ellipsis;
@@ -232,8 +234,8 @@
         inline-size: -moz-available;
       }
     }
-    .#{$prefix}--file-filename-button:focus {
-      outline: revert;
+    .#{$prefix}--file-filename-button:focus-visible {
+      @include focus-outline('outline');
     }
   }
 
@@ -355,10 +357,6 @@
     // TODO: Should this be $icon-interactive instead?
     fill: $interactive;
     inline-size: $spacing-06;
-
-    &:focus {
-      @include focus-outline('border');
-    }
 
     // for checkmark contrast
     [data-icon-path='inner-path'] {
