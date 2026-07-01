@@ -342,7 +342,7 @@ export const ExperimentalAutoAlignBoundary = (args) => {
         height: '500px',
         border: '1px',
         borderStyle: 'dashed',
-        borderColor: 'black',
+        borderColor: 'var(--cds-border-strong, #8d8d8d)',
         margin: '0 auto',
       }}
       ref={setBoundary}>

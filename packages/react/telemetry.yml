@@ -493,7 +493,9 @@ collect:
         - totalPages
         # Pagination
         - backwardText
+        - backwardTextTooltipPosition
         - forwardText
+        - forwardTextTooltipPosition
         - initialPage
         - isLastPage
         - itemRangeText
@@ -948,6 +950,16 @@ collect:
         - actionable
         - inline
         - toast
+        # Pagination - backwardTextTooltipPosition
+        - bottom
+        - left
+        - right
+        - top
+        # Pagination - forwardTextTooltipPosition
+        - bottom
+        - left
+        - right
+        - top
         # Popover - autoAlignBoundary
         - clippingAncestors
         # ShapeIndicator - textSize

@@ -439,6 +439,9 @@ export interface TabListProps extends DivAttributes {
 
   /**
    * Specify the size of the tabs.
+   *
+   * Supports `sm` and `md` for line tabs.
+   * Supports `sm`, `md`, and `lg` for contained tabs.
    */
   size?: 'sm' | 'md' | 'lg';
 }
@@ -498,7 +501,10 @@ function TabList({
       [`${prefix}--tabs__icon--default`]: iconSize === 'default',
       [`${prefix}--tabs__icon--lg`]: iconSize === 'lg', // TODO: V12 - Remove this class
       [`${prefix}--layout--size-lg`]: iconSize === 'lg',
-      [`${prefix}--layout--size-${size}`]: size && !hasSecondaryLabelTabs,
+      [`${prefix}--layout--size-${size}`]:
+        size &&
+        !hasSecondaryLabelTabs &&
+        (contained || size === 'sm' || size === 'md'),
       [`${prefix}--tabs--tall`]: hasSecondaryLabelTabs,
       [`${prefix}--tabs--full-width`]: distributeWidth,
       [`${prefix}--tabs--dismissable`]: dismissable,
@@ -866,6 +872,9 @@ TabList.propTypes = {
 
   /**
    * Specify the size of the tabs.
+   *
+   * Supports `sm` and `md` for line tabs.
+   * Supports `sm`, `md`, and `lg` for contained tabs.
    */
   size: PropTypes.oneOf(['sm', 'md', 'lg']),
 };
@@ -903,6 +912,11 @@ export interface TabListVerticalProps extends DivAttributes {
    * on component rerender
    */
   scrollIntoView?: boolean;
+
+  /**
+   * Specify the size of the tabs.
+   */
+  size?: 'sm' | 'md' | 'lg' | 'xl';
 }
 // type TabElement = HTMLElement & { disabled?: boolean };
 
@@ -912,6 +926,7 @@ function TabListVertical({
   children,
   className: customClassName,
   scrollIntoView,
+  size,
   ...rest
 }: TabListVerticalProps) {
   const { activeIndex, selectedIndex, setSelectedIndex, setActiveIndex } =
@@ -927,6 +942,9 @@ function TabListVertical({
     `${prefix}--tabs`,
     `${prefix}--tabs--vertical`,
     `${prefix}--tabs--contained`,
+    {
+      [`${prefix}--layout--size-${size}`]: size,
+    },
     customClassName
   );
 
@@ -1046,7 +1064,11 @@ function TabListVertical({
 
   if (isSm) {
     return (
-      <TabList {...rest} aria-label={label} contained>
+      <TabList
+        {...rest}
+        aria-label={label}
+        contained
+        size={size === 'xl' ? 'lg' : size}>
         {children}
       </TabList>
     );
@@ -1114,6 +1136,11 @@ TabListVertical.propTypes = {
    * Specify an optional className to be added to the container node
    */
   className: PropTypes.string,
+
+  /**
+   * Specify the size of the tabs.
+   */
+  size: PropTypes.oneOf(['sm', 'md', 'lg', 'xl']),
 };
 
 /**

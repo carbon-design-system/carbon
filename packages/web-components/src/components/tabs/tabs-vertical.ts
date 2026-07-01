@@ -44,6 +44,11 @@ export default class CDSTabsVertical extends LitElement {
       if (tabs) {
         tabs.setAttribute('vertical', '');
         tabs.removeAttribute('type');
+        // Preserve size attribute for vertical tabs to use layout tokens
+        const size = tabs.getAttribute('size');
+        if (size) {
+          tabs.setAttribute('size', size);
+        }
       }
     } else {
       this.classList.remove(`${prefix}--css-grid`);

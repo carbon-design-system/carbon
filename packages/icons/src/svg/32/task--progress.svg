@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: none;
+      }
+    </style>
+  </defs>
+  <path id="task--progress" d="M25,5h-3v-1c0-1.1-.9-2-2-2h-8c-1.1,0-2,.9-2,2v1h-3c-1.1,0-2,.9-2,2v21c0,1.1.9,2,2,2h6v-2h-6V7h3v3h12v-3h3v6h2v-6c0-1.1-.9-2-2-2ZM20,8h-8v-4h8v4ZM23,16c-3.86,0-7,3.14-7,7s3.14,7,7,7,7-3.14,7-7-3.14-7-7-7ZM23,28v-10c2.76,0,5,2.24,5,5s-2.24,5-5,5Z"/>
+  <rect id="Transparent_Rectangle" data-name="Transparent Rectangle" class="cls-1" width="32" height="32"/>
+</svg>

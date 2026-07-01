@@ -757,6 +757,7 @@ categories:
       - windows
   - name: Device interaction
     members:
+      - add-comments--mobile
       - add--device
       - augmented--reality
       - color--contrast
@@ -945,7 +946,6 @@ categories:
       - ibm--z-os-package-manager
       - ibm--z--partition
       - progress
-      - red-hat--ansible
       - selectric-typewriter
       - silicon--wafer
       - swift-at-ibm
@@ -959,8 +959,10 @@ categories:
       - cargo--crane
       - cargo--ship
       - cheese
+      - complete-work--technician
       - construction-worker--mask
       - construction-worker
+      - create-work
       - farm--01
       - farm--02
       - farmer--01
@@ -976,13 +978,18 @@ categories:
       - power
       - recycle
       - refinery
+      - report-time--technician
+      - review-checklist
       - satellite
       - satellite--dish
       - solar--field
       - solar--panel
       - sprout
       - stack-limitation
+      - start-work--technician
       - steel
+      - supervisor
+      - supervisor-close--work
       - sustainability
       - telecom
       - this-side-up
@@ -1261,6 +1268,7 @@ categories:
       - manage-applications-anywhere
       - open-source
       - quantum-computing
+      - red-hat--ansible
       - red-hat--applications
       - synergy
       - virtual--server

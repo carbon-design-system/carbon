@@ -263,6 +263,7 @@ class CDSPopover extends HostListenerMixin(LitElement) {
 
   /**
    * This function resolves the string passed in for `autoAlignBoundary` to either:
+   * The viewport (default)
    * "clippingAncestors"
    * An element (found via #id)
    * An array of elements (found via #id1, #id2, #id3, separated by ",")
@@ -271,8 +272,10 @@ class CDSPopover extends HostListenerMixin(LitElement) {
   private _resolveAutoAlignBoundary(): Boundary {
     const raw = (this.autoAlignBoundary ?? '').trim();
 
-    // Default to 'clippingAncestors'
-    if (!raw) return 'clippingAncestors';
+    if (!raw) {
+      // Default to viewport
+      return this._getViewportRect();
+    }
     if (raw === 'clippingAncestors') return 'clippingAncestors';
 
     // regex match for: rect(x,y,width,height)
@@ -311,6 +314,30 @@ class CDSPopover extends HostListenerMixin(LitElement) {
 
     // default fallback
     return 'clippingAncestors';
+  }
+
+  /**
+   * Gets the viewport rectangle for use as the default autoalign boundary.
+   */
+  private _getViewportRect(): Rect {
+    // Use the Visual Viewport API when available for accurate viewport dimensions
+    if (window.visualViewport) {
+      const viewport = window.visualViewport;
+      return {
+        x: viewport.offsetLeft,
+        y: viewport.offsetTop,
+        width: viewport.width,
+        height: viewport.height,
+      };
+    }
+
+    // Fallback for browsers not suporting Visual Viewport API
+    return {
+      x: 0,
+      y: 0,
+      width: window.innerWidth,
+      height: window.innerHeight,
+    };
   }
 
   updated(changedProperties) {

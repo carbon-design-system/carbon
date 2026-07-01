@@ -102,10 +102,12 @@ body:
     validations:
       required: true
   - type: input
-    id: application
+    id: project
     attributes:
-      label: Application/PAL
-      description: 'What application and/or PAL do you work on?'
+      label: Project name
+      description: 'What project, team, or product do you work on?'
+    validations:
+      required: true
   - type: dropdown
     id: priority
     attributes:

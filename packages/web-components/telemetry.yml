@@ -71,6 +71,7 @@ collect:
         - download
         - dropShadow
         - enable-counter
+        - enable-v12-overflowmenu
         - enter-delay-ms
         - even
         - expandable

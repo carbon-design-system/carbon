@@ -8,14 +8,16 @@
 - [Overview](#overview)
   - [What does "ongoing support" mean regarding GitHub?](#what-does-ongoing-support-mean-regarding-github)
   - [What does "ongoing support" mean regarding Slack?](#what-does-ongoing-support-mean-regarding-slack)
+  - [Configuring the GitHub Slack integration](#configuring-the-github-slack-integration)
   - [What repositories do we support?](#what-repositories-do-we-support)
 - [Issues](#issues)
   - [Types of issues](#types-of-issues)
   - [Triaging a new issue](#triaging-a-new-issue)
   - [Triage Process](#triage-process)
-    - [type: bug 🐛 & type: a11y ♿](#type-bug---type-a11y-)
+    - [type: bug 🐛](#type-bug-)
     - [type: question ❓](#type-question-)
     - [type: enhancement 💡](#type-enhancement-)
+  - [Definitions](#definitions)
   - [Severity](#severity)
   - [Project](#project)
   - [Other labels](#other-labels)
@@ -38,8 +40,8 @@ our support channels, here are some responses that can help get the conversation
 started in case you get stuck.
 
 - “Could you share more about what you’ve already tried?”
-- “Can you share more about your usecase?”
-- “Can you add a repro (reproduction) using Stackblitz?”
+- “Can you share more about your use case?”
+- “Can you add a repro (reproduction) using StackBlitz?”
 - “After searching through [FILL IN RESOURCE HERE], I was able to find this and thought
   it might be helpful... Let me know if that works.”
 
@@ -65,11 +67,11 @@ started in case you get stuck.
   reiterating the answer and acknowledging the community member.
 - Use discretion to respond to applicable threads. Lean on the maintainer team's
   private #carbon-support channel to look for subject matter experts when a
-  question goes beyond your skillset. When you ask in this channel, take a leap
+  question goes beyond your skill set. When you ask in this channel, take a leap
   of faith in your skills and propose a response, such as, "This is how I want
   to respond ... YOUR REPLY HERE". Follow the question by practicing humility,
   "How far off am I"? "What am I missing"? Remember, you're acting as an
-  advocate for the person who originally asked the question. Respresent their
+  advocate for the person who originally asked the question. Represent their
   needs to the best of your ability.
 - If a question is Carbon-related, but not necessarily related to the core
   components, route the person to the correct Slack channel where they might
@@ -208,7 +210,7 @@ If they are, remove the question label, label as a `type: enhancement 💡` or
 <details>
 <summary>Is there a duplicate question?</summary>
 
-We tend to recieve more questions through Slack than through GitHub so with any
+We tend to receive more questions through Slack than through GitHub so with any
 incoming question issues, search in both places to see if it has already been
 answered. If you can find an answer, point the author to where they can find it
 and close the issue.
@@ -279,8 +281,8 @@ the ask. Checkout the flow chart to see the path a given feature might take.
 flowchart TD
     A[Received] --> B[Does it align with the maintainer team's <br />guiding principles for building a design system at IBM?]
     B -->|No| C[Closed]
-    B -->|Yes| D[Is it supporting a PAL in the DSAG?]
-    D -->|No| E[Is it suporting a PAL not in the DSAG?]
+    B -->|Yes| D[Is it supporting a PAL part of the Carbon Collective?]
+    D -->|No| E[Is it supporting a PAL not part of Carbon Collective?]
     E -->|No| F[Is it supporting an IBM product without a PAL?]
     F -->|No| G[Is it supporting a non-IBM offering that uses Carbon?]
     G -->|No| C[Closed]
@@ -294,7 +296,7 @@ flowchart TD
     J & K & L -->|Yes| M([Your request has been labeled as an `accepted` <br />proposal and has been added to our Icebox and is <br />being prioritized against competing workstreams])
     M --> N([Labeled with `Community Contribution` <br /> on GH. Looking for contributions])
     M --> O([Added to maintainer team's roadmap <br /> and backlog for refinement])
-    N & O --> storm((Design Crits, Code Reviews,<br /> CAG, DSAG meetings, <br /> Office hours when needed))
+    N & O --> storm((Design Crits, Code Reviews,<br /> CAG, Carbon Collective meetings, <br /> Office hours when needed))
     storm --> ide1
     subgraph ide1 [Evaluate against a definition of done]
     P[Storybook]
@@ -318,16 +320,17 @@ flowchart TD
 Guiding principles -
 https://carbondesignsystem.com/all-about-carbon/what-is-carbon/#our-guiding-principles
 
-DSAG - The Design System Adoption Guild is an expansive group of designers and
-developers all aligned on the mission of delivering amazing experiences in the
-IBM Products organization. You can learn more about the guild
+Carbon Collective - Formerly the Design System Adoption Guild (DSAG) is an
+expansive group of designers and developers all aligned on the mission of
+delivering amazing experiences in the IBM Products organization. You can learn
+more about the Carbon Collective
 [here](https://pages.github.ibm.com/cdai-design/pal/contributing/contribution-framework/intent).
 
 PAL - Pattern & Asset Library. These are the local systems around IBM that
 extend our core components to fit their desired business need.
 
 CAG - Carbon Accessibility Guild. A once a sprint meeting where the Carbon team
-gets together with the Accessiblity team. Our components and patterns are
+gets together with the Accessibility team. Our components and patterns are
 reviewed and made more accessible.
 
 Design crit - A once a sprint meeting led by Carbon designers to review patterns

@@ -1,4 +1,10 @@
-import { ArgTypes, Canvas, Story, Meta } from '@storybook/addon-docs/blocks';
+import {
+  ArgTypes,
+  Canvas,
+  Story,
+  Meta,
+  Unstyled,
+} from '@storybook/addon-docs/blocks';
 import { AILabel, AILabelContent, AILabelActions } from '.';
 import * as AILabelStories from './AILabel.stories';
 import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
@@ -117,9 +123,11 @@ callout. To achieve this, you can pass in `AILabelActions` as a child of
 If needed, you can change the text inside the `AILabel` when translating to
 different languages.
 
-<AILabel aiText="IA" className="sbdocs-ai-label">
-  <AILabelContent>Explanation of AI generated content</AILabelContent>
-</AILabel>
+<Unstyled style={{ padding: '1rem', background: 'var(--cds-background)' }}>
+  <AILabel aiText="IA" className="sbdocs-ai-label">
+    <AILabelContent>Explanation of AI generated content</AILabelContent>
+  </AILabel>
+</Unstyled>
 
 ```jsx
 <AILabel aiText="IA">
@@ -132,13 +140,15 @@ different languages.
 When using the `inline` variant, you can add text adjacent to the AI label with
 the `aiTextLabel` prop.
 
-<AILabel kind="inline" textLabel="Text goes here" className="sbdocs-ai-label">
-  <AILabelContent>Explanation of AI generated content</AILabelContent>
-</AILabel>
-<br />
-<AILabel kind="inline" className="sbdocs-ai-label">
-  <AILabelContent>Explanation of AI generated content</AILabelContent>
-</AILabel>
+<Unstyled style={{ padding: '1rem', background: 'var(--cds-background)' }}>
+  <AILabel kind="inline" textLabel="Text goes here" className="sbdocs-ai-label">
+    <AILabelContent>Explanation of AI generated content</AILabelContent>
+  </AILabel>
+  <br />
+  <AILabel kind="inline" className="sbdocs-ai-label">
+    <AILabelContent>Explanation of AI generated content</AILabelContent>
+  </AILabel>
+</Unstyled>
 
 ```jsx
 <AILabel kind="inline" textLabel="Text goes here">
@@ -154,9 +164,11 @@ the `aiTextLabel` prop.
 
 The `AILabel` component has two variants, `default` and `inline`.
 
-<AILabel size="xs" className="sbdocs-ai-label">
-  <AILabelContent>AI was used to generate this content</AILabelContent>
-</AILabel>
+<Unstyled style={{ padding: '1rem', background: 'var(--cds-background)' }}>
+  <AILabel size="xs" className="sbdocs-ai-label">
+    <AILabelContent>AI was used to generate this content</AILabelContent>
+  </AILabel>
+</Unstyled>
 
 ```jsx
 <AILabel size="xs">
@@ -167,9 +179,11 @@ The `AILabel` component has two variants, `default` and `inline`.
 The `inline` `AILabel` with the standard icon can also trigger the AI
 explainability callout.
 
-<AILabel kind="inline" textLabel="Text goes here" className="sbdocs-ai-label">
-  <AILabelContent>Explanation of AI generated content</AILabelContent>
-</AILabel>
+<Unstyled style={{ padding: '1rem', background: 'var(--cds-background)' }}>
+  <AILabel kind="inline" textLabel="Text goes here" className="sbdocs-ai-label">
+    <AILabelContent>Explanation of AI generated content</AILabelContent>
+  </AILabel>
+</Unstyled>
 
 ```jsx
 <AILabel kind="inline" textLabel="Text goes here" size="xs">

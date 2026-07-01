@@ -205,7 +205,7 @@ export interface DropdownProps<ItemType>
   selectedItem?: ItemType;
 
   /**
-   * Specify the size of the ListBox. Currently supports either `sm`, `md` or `lg` as an option.
+   * Specify the size of the ListBox. Currently supports either `xs`, `sm`, `md` or `lg` as an option.
    */
   size?: ListBoxSize;
 
@@ -891,7 +891,7 @@ Dropdown.propTypes = {
   ]),
 
   /**
-   * Specify the size of the ListBox. Currently supports either `sm`, `md` or `lg` as an option.
+   * Specify the size of the ListBox. Currently supports either `xs`, `sm`, `md` or `lg` as an option.
    */
   size: ListBoxSizePropType,
 

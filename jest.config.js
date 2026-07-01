@@ -35,7 +35,7 @@ export default {
     'packages/scss-generator/*',
   ],
   transformIgnorePatterns: [
-    '<rootDir>/node_modules/(?!lodash-es|nanoid|chalk)',
+    '<rootDir>/node_modules/(?!lodash-es|nanoid|chalk|color)',
   ],
   moduleNameMapper: {
     // Jest uses identity-obj-proxy to mock CSS/SCSS imports.

@@ -20,16 +20,15 @@ yarn add @carbon/icons
 
 ## Usage
 
-Icons in Carbon are provided through a variety of packages, often specific for
-the framework that will use them. Currently, we support the following packages
-for various frameworks:
+Icons in Carbon are available directly from `@carbon/icons` for Vanilla
+JavaScript. First-party framework packages in this repo are available for:
 
-- [Angular](https://github.com/carbon-design-system/carbon-icons-angular)
 - [React](../icons-react)
 - [Vue](../icons-vue)
-- [Svelte](https://github.com/IBM/carbon-icons-svelte)
 
-We also support using icons in Vanilla JavaScript.
+Additional ecosystem packages are also available for:
+
+- [Svelte](https://github.com/IBM/carbon-icons-svelte)
 
 In order to use an icon, it may be helpful to reference our
 [Icon library](https://carbon-elements.netlify.app/icons/examples/preview/)
