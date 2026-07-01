@@ -192,8 +192,8 @@ class CDSTextarea extends CDSTextInput {
       icon: ReturnType<typeof iconLoader>;
     } = {
       disabled: !this.readonly && this.disabled,
-      invalid: !this.readonly && this.invalid,
-      warn: !this.readonly && !this.invalid && this.warn,
+      invalid: !this.readonly && !this.disabled && this.invalid,
+      warn: !this.readonly && !this.disabled && !this.invalid && this.warn,
       'slot-name': '',
       'slot-text': '',
       icon: null,

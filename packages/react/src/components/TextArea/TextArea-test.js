@@ -642,6 +642,52 @@ describe('TextArea', () => {
   });
 
   describe('invalid and warn states are suppressed when not interactive', () => {
+    describe('normal (interactive) inputs still show validation states', () => {
+      it('should apply invalid CSS class when invalid and interactive', () => {
+        const { container } = render(
+          <TextArea
+            id="textarea-1"
+            labelText="TextArea label"
+            invalid
+            invalidText="Some error"
+          />
+        );
+        expect(screen.getByRole('textbox')).toHaveClass(
+          `${prefix}--text-area--invalid`
+        );
+        // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
+        expect(
+          container.querySelector(`svg.${prefix}--text-area__invalid-icon`)
+        ).toBeInTheDocument();
+        expect(screen.getByText('Some error')).toBeInTheDocument();
+        expect(screen.getByRole('textbox')).toHaveAttribute(
+          'aria-invalid',
+          'true'
+        );
+      });
+
+      it('should apply warn CSS class when warn and interactive', () => {
+        const { container } = render(
+          <TextArea
+            id="textarea-1"
+            labelText="TextArea label"
+            warn
+            warnText="Some warning"
+          />
+        );
+        expect(screen.getByRole('textbox')).toHaveClass(
+          `${prefix}--text-area--warn`
+        );
+        // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
+        expect(
+          container.querySelector(
+            `svg.${prefix}--text-area__invalid-icon--warning`
+          )
+        ).toBeInTheDocument();
+        expect(screen.getByText('Some warning')).toBeInTheDocument();
+      });
+    });
+
     describe('disabled', () => {
       it('should not apply invalid CSS class when disabled', () => {
         render(
