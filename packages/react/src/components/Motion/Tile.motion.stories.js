@@ -31,7 +31,7 @@ import {
 import TextInput from '../TextInput';
 import { usePrefix } from '../../internal/usePrefix';
 import { useMotionSurface } from '../../internal/motion/useMotionSurface';
-import { ClickableTile } from './Tile';
+import { ClickableTile } from '../Tile/Tile';
 import './Tile.motion.stories.scss';
 
 // These Carbon tiles give the story several real source surfaces.
