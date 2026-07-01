@@ -41,8 +41,8 @@
     "color": "^5.0.0"
   },
   "devDependencies": {
-    "@babel/node": "^7.27.1",
-    "@babel/preset-env": "^7.27.2",
+    "@babel/node": "^8.0.0",
+    "@babel/preset-env": "^8.0.0",
     "@carbon/cli": "^11.45.0",
     "@carbon/cli-reporter": "^10.8.0",
     "@carbon/scss-generator": "^10.20.0",

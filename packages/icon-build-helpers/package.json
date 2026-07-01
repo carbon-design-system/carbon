@@ -23,9 +23,9 @@
     "provenance": true
   },
   "devDependencies": {
-    "@babel/generator": "^7.27.3",
-    "@babel/template": "^7.27.2",
-    "@babel/types": "^7.27.3",
+    "@babel/generator": "^8.0.0",
+    "@babel/template": "^8.0.0",
+    "@babel/types": "^8.0.0",
     "@carbon/cli-reporter": "^10.8.0",
     "@carbon/icon-helpers": "^10.77.0",
     "@hapi/joi": "^17.1.1",
