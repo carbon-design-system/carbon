@@ -29,10 +29,15 @@ const v12ReleaseToolbar = {
   },
 };
 
+const { options: baseOptions = {}, ...baseParameters } =
+  basePreview.parameters ?? {};
+const baseOptionsWithoutStorySort = { ...baseOptions };
+delete baseOptionsWithoutStorySort.storySort;
+
 export const parameters = {
-  ...basePreview.parameters,
+  ...baseParameters,
   options: {
-    ...(basePreview.parameters?.options ?? {}),
+    ...baseOptionsWithoutStorySort,
     storySort: {
       method: 'alphabetical',
       order: [

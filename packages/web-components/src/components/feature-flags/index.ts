@@ -51,7 +51,7 @@ class FeatureFlagsElement extends LitElement {
    */
   private static readonly flagComponentMap = {
     'enable-v12-release': null,
-    'enable-v12-tile-default-icons': 'CDS-TILE',
+    'enable-v12-tile-default-icons': 'CDS-CLICKABLE-TILE',
     'enable-v12-tile-radio-icons': 'CDS-TILE',
     'enable-v12-overflowmenu': 'CDS-OVERFLOW-MENU',
     'enable-treeview-controllable': 'CDS-TREEVIEW',
@@ -151,6 +151,9 @@ class FeatureFlagsElement extends LitElement {
   }
 
   public isFeatureFlagEnabled(flag: string) {
+    if (Object.prototype.hasOwnProperty.call(this.flags, flag)) {
+      return this.flags[flag];
+    }
     return this.scope.enabled(flag);
   }
 
@@ -167,8 +170,12 @@ export default FeatureFlagsElement;
 export function findParentFeatureFlags(
   el: HTMLElement
 ): FeatureFlagsElement | null {
-  let parent = el.parentNode;
+  let parent: Node | null = el.parentNode;
   while (parent) {
+    if (parent instanceof ShadowRoot) {
+      parent = parent.host;
+      continue;
+    }
     if (parent instanceof FeatureFlagsElement) {
       return parent;
     }

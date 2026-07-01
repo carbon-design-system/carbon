@@ -35,27 +35,34 @@ const withV12Release = (Story, context) => (
   </FeatureFlags>
 );
 
-const preview = {
-  ...basePreview,
-  parameters: {
-    ...basePreview.parameters,
-    options: {
-      ...(basePreview.parameters?.options ?? {}),
-      storySort: {
-        method: 'alphabetical',
-        order: [
-          'Getting Started',
-          'Components',
-          'Deprecated',
-          'Elements',
-          'Helpers',
-          'Hooks',
-          'Layout',
-          'Preview',
-        ],
-      },
+const { options: baseOptions = {}, ...baseParameters } =
+  basePreview.parameters ?? {};
+const baseOptionsWithoutStorySort = { ...baseOptions };
+delete baseOptionsWithoutStorySort.storySort;
+
+export const parameters = {
+  ...baseParameters,
+  options: {
+    ...baseOptionsWithoutStorySort,
+    storySort: {
+      method: 'alphabetical',
+      order: [
+        'Getting Started',
+        'Components',
+        'Deprecated',
+        'Elements',
+        'Helpers',
+        'Hooks',
+        'Layout',
+        'Preview',
+      ],
     },
   },
+};
+
+const preview = {
+  ...basePreview,
+  parameters,
   globalTypes: {
     ...basePreview.globalTypes,
     v12Release: v12ReleaseToolbar,

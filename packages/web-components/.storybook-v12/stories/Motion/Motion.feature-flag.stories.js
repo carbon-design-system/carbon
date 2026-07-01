@@ -8,7 +8,7 @@
 import { html } from 'lit';
 
 export default {
-  title: 'Elements/Motion',
+  title: 'Components/Motion',
 };
 
 export const TBD = {

@@ -7,7 +7,7 @@
 import React from 'react';
 
 export default {
-  title: 'Elements/Motion',
+  title: 'Components/Motion',
 };
 
 export const TBD = () => {
