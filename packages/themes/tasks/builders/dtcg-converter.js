@@ -107,30 +107,17 @@ function resolveDTCGColorValue(dtcgValue) {
     return dtcgValue;
   }
 
-  // ── Shape 2: alias + alpha ───────────────────────────────────────────────
-  if (typeof dtcgValue.color === 'string' && dtcgValue.alpha !== undefined) {
-    const hex = resolveAliasRef(dtcgValue.color);
-    if (hex) {
-      const r = parseInt(hex.slice(1, 3), 16);
-      const g = parseInt(hex.slice(3, 5), 16);
-      const b = parseInt(hex.slice(5, 7), 16);
-      return `rgba(${r}, ${g}, ${b}, ${dtcgValue.alpha})`;
-    }
-    // Alias not found — fall through to return unchanged
-    return dtcgValue;
-  }
-
-  // ── Shapes 3 & 4: inline components array ────────────────────────────────
+  // ── Shapes 2 & 3: inline components array ────────────────────────────────
   if (!Array.isArray(dtcgValue.components)) {
     return dtcgValue;
   }
 
-  // Shape 3: solid — hex present
+  // Shape 2: solid — hex present
   if (typeof dtcgValue.hex === 'string') {
     return dtcgValue.hex;
   }
 
-  // Shape 4: alpha — derive rgba from components
+  // Shape 3: alpha — derive rgba from components
   const [r, g, b] = dtcgValue.components.map((c) => Math.round(c * 255));
   const alpha = dtcgValue.alpha !== undefined ? dtcgValue.alpha : 1;
   return `rgba(${r}, ${g}, ${b}, ${alpha})`;
