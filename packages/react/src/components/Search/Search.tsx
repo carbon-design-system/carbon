@@ -314,7 +314,7 @@ const Search = React.forwardRef<HTMLInputElement, SearchProps>(
           placeholder={placeholder}
           type={type}
           value={value}
-          tabIndex={onExpand && !isExpanded ? -1 : undefined}
+          tabIndex={onExpand && !isExpanded ? -1 : tabIndex}
           {...(toolParamDescription && {
             toolparamdescription: toolParamDescription,
           })}
