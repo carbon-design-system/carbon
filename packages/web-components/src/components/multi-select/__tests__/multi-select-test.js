@@ -133,6 +133,23 @@ describe('cds-multi-select', function () {
     expect(selectedItems.length).to.equal(0);
   });
 
+  it('should mark the clear-selection button as aria-disabled when disabled', async () => {
+    const el = await fixture(html`
+      <cds-multi-select label="test-label" value="item-0" disabled>
+        <cds-multi-select-item value="item-0" selected
+          >Item 0</cds-multi-select-item
+        >
+        <cds-multi-select-item value="item-1">Item 1</cds-multi-select-item>
+      </cds-multi-select>
+    `);
+
+    await el.updateComplete;
+
+    const clearButton = el.shadowRoot.querySelector('#selection-button');
+    expect(clearButton).to.exist;
+    expect(clearButton.getAttribute('aria-disabled')).to.equal('true');
+  });
+
   it('should not be interactive if disabled', async () => {
     const el = await fixture(html`
       <cds-multi-select label="test-label" disabled>
