@@ -12,7 +12,6 @@ const path = require('path');
 const buildDTCGJsThemeFile = require('./builders/dtcg-js-themes');
 const buildDTCGJsComponentTokensFile = require('./builders/dtcg-js-component-tokens');
 const generateDTCGColorAliases = require('./builders/generate-dtcg-color-aliases');
-const migrateToColorAliases = require('./builders/migrate-to-color-aliases');
 
 const JS_DIR = path.resolve(__dirname, '../js');
 const GENERATED_JS_THEMES_DIR = path.join(JS_DIR, 'generated', 'themes');
@@ -26,10 +25,6 @@ const GENERATED_JS_COMPONENT_TOKENS_DIR = path.join(
 reporter.info('Generating DTCG color palette aliases from @carbon/colors...');
 const paletteFile = generateDTCGColorAliases();
 reporter.success(`Written: ${paletteFile}`);
-
-// 2. Rewrite theme + component JSON files to use palette aliases.
-reporter.info('Migrating theme and component tokens to color aliases...');
-migrateToColorAliases();
 
 reporter.info('Generating JS theme files from DTCG JSON...');
 for (const themeName of ['white', 'g10', 'g90', 'g100']) {
