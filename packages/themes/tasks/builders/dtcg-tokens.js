@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2015, 2023
+ * Copyright IBM Corp. 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -11,8 +11,15 @@ const { types: t } = require('@carbon/scss-generator');
 const { group } = require('../../src/tokens');
 const { FILE_BANNER } = require('./shared');
 
-function buildThemeTokens() {
+/**
+ * Build token variables from DTCG + JS metadata
+ * This generates SCSS variables that wrap CSS custom properties
+ * Token structure comes from JS metadata, values come from DTCG themes
+ */
+function buildDTCGTokens() {
+  // Get token structure from JS metadata
   const tokens = group.getTokens();
+
   const variables = tokens.flatMap((token) => {
     const id = token.name;
     return [
@@ -40,6 +47,7 @@ function buildThemeTokens() {
     t.SassModule('../theme'),
     t.Newline(),
 
+    // Helper function for generating CSS Custom Properties
     t.Comment('/ Internal helper for generating CSS Custom Properties'),
     t.SassFunction({
       id: t.Identifier('_get'),
@@ -70,4 +78,4 @@ function buildThemeTokens() {
   ]);
 }
 
-module.exports = buildThemeTokens;
+module.exports = buildDTCGTokens;

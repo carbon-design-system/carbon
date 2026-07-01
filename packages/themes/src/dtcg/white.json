@@ -1,0 +1,1345 @@
+{
+  "$schema": "https://tr.designtokens.org/format/",
+  "$description": "White theme - Light theme with high contrast for optimal readability",
+  "$extensions": {
+    "com.ibm.carbon": {
+      "color-scheme": "light"
+    }
+  },
+  "background": {
+    "$type": "color",
+    "$value": "{white.default}",
+    "$description": "Default page background"
+  },
+  "background-inverse": {
+    "$type": "color",
+    "$value": "{gray.80}",
+    "$description": "Inverse background for dark UI elements"
+  },
+  "background-brand": {
+    "$type": "color",
+    "$value": "{blue.60}",
+    "$description": "Brand color for backgrounds"
+  },
+  "background-active": {
+    "$type": "color",
+    "$value": "{gray.50}",
+    "$description": "Active state background",
+    "$extensions": {
+      "com.ibm.carbon": {
+        "alphaModifier": 0.5
+      }
+    }
+  },
+  "background-hover": {
+    "$type": "color",
+    "$value": "{gray.50}",
+    "$description": "Hover state background",
+    "$extensions": {
+      "com.ibm.carbon": {
+        "alphaModifier": 0.12
+      }
+    }
+  },
+  "background-inverse-hover": {
+    "$type": "color",
+    "$value": "{gray.80Hover}",
+    "$description": "Hover state for inverse backgrounds"
+  },
+  "background-selected": {
+    "$type": "color",
+    "$value": "{gray.50}",
+    "$description": "Selected state background",
+    "$extensions": {
+      "com.ibm.carbon": {
+        "alphaModifier": 0.2
+      }
+    }
+  },
+  "background-selected-hover": {
+    "$type": "color",
+    "$value": "{gray.50}",
+    "$description": "Hover state for selected backgrounds",
+    "$extensions": {
+      "com.ibm.carbon": {
+        "alphaModifier": 0.32
+      }
+    }
+  },
+  "layer": {
+    "01": {
+      "$type": "color",
+      "$value": "{gray.10}",
+      "$description": "Primary layer background"
+    },
+    "active-01": {
+      "$type": "color",
+      "$value": "{gray.30}",
+      "$description": "Active state for layer 01"
+    },
+    "background-01": {
+      "$type": "color",
+      "$value": "{white.default}",
+      "$description": "Background behind layer 01"
+    },
+    "hover-01": {
+      "$type": "color",
+      "$value": "{gray.10Hover}",
+      "$description": "Hover state for layer 01"
+    },
+    "selected-01": {
+      "$type": "color",
+      "$value": "{gray.20}",
+      "$description": "Selected state for layer 01"
+    },
+    "selected-hover-01": {
+      "$type": "color",
+      "$value": "{gray.20Hover}",
+      "$description": "Hover state for selected layer 01"
+    },
+    "02": {
+      "$type": "color",
+      "$value": "{white.default}",
+      "$description": "Secondary layer background"
+    },
+    "active-02": {
+      "$type": "color",
+      "$value": "{gray.30}",
+      "$description": "Active state for layer 02"
+    },
+    "background-02": {
+      "$type": "color",
+      "$value": "{gray.10}",
+      "$description": "Background behind layer 02"
+    },
+    "hover-02": {
+      "$type": "color",
+      "$value": "{gray.10Hover}",
+      "$description": "Hover state for layer 02"
+    },
+    "selected-02": {
+      "$type": "color",
+      "$value": "{gray.20}",
+      "$description": "Selected state for layer 02"
+    },
+    "selected-hover-02": {
+      "$type": "color",
+      "$value": "{gray.20Hover}",
+      "$description": "Hover state for selected layer 02"
+    },
+    "03": {
+      "$type": "color",
+      "$value": "{gray.10}",
+      "$description": "Tertiary layer background"
+    },
+    "active-03": {
+      "$type": "color",
+      "$value": "{gray.30}",
+      "$description": "Active state for layer 03"
+    },
+    "background-03": {
+      "$type": "color",
+      "$value": "{white.default}",
+      "$description": "Background behind layer 03"
+    },
+    "hover-03": {
+      "$type": "color",
+      "$value": "{gray.10Hover}",
+      "$description": "Hover state for layer 03"
+    },
+    "selected-03": {
+      "$type": "color",
+      "$value": "{gray.20}",
+      "$description": "Selected state for layer 03"
+    },
+    "selected-hover-03": {
+      "$type": "color",
+      "$value": "{gray.20Hover}",
+      "$description": "Hover state for selected layer 03"
+    },
+    "selected-inverse": {
+      "$type": "color",
+      "$value": "{gray.100}",
+      "$description": "Inverse selected layer"
+    },
+    "selected-disabled": {
+      "$type": "color",
+      "$value": "{gray.50}",
+      "$description": "Disabled selected layer"
+    },
+    "accent-01": {
+      "$type": "color",
+      "$value": "{gray.20}",
+      "$description": "Primary accent layer"
+    },
+    "accent-active-01": {
+      "$type": "color",
+      "$value": "{gray.40}",
+      "$description": "Active state for accent layer 01"
+    },
+    "accent-hover-01": {
+      "$type": "color",
+      "$value": "{gray.20Hover}",
+      "$description": "Hover state for accent layer 01"
+    },
+    "accent-02": {
+      "$type": "color",
+      "$value": "{gray.20}",
+      "$description": "Secondary accent layer"
+    },
+    "accent-active-02": {
+      "$type": "color",
+      "$value": "{gray.40}",
+      "$description": "Active state for accent layer 02"
+    },
+    "accent-hover-02": {
+      "$type": "color",
+      "$value": "{gray.20Hover}",
+      "$description": "Hover state for accent layer 02"
+    },
+    "accent-03": {
+      "$type": "color",
+      "$value": "{gray.20}",
+      "$description": "Tertiary accent layer"
+    },
+    "accent-active-03": {
+      "$type": "color",
+      "$value": "{gray.40}",
+      "$description": "Active state for accent layer 03"
+    },
+    "accent-hover-03": {
+      "$type": "color",
+      "$value": "{gray.20Hover}",
+      "$description": "Hover state for accent layer 03"
+    }
+  },
+  "field": {
+    "01": {
+      "$type": "color",
+      "$value": "{gray.10}",
+      "$description": "Primary field background"
+    },
+    "hover-01": {
+      "$type": "color",
+      "$value": "{gray.10Hover}",
+      "$description": "Hover state for field 01"
+    },
+    "02": {
+      "$type": "color",
+      "$value": "{white.default}",
+      "$description": "Secondary field background"
+    },
+    "hover-02": {
+      "$type": "color",
+      "$value": "{gray.10Hover}",
+      "$description": "Hover state for field 02"
+    },
+    "03": {
+      "$type": "color",
+      "$value": "{gray.10}",
+      "$description": "Tertiary field background"
+    },
+    "hover-03": {
+      "$type": "color",
+      "$value": "{gray.10Hover}",
+      "$description": "Hover state for field 03"
+    }
+  },
+  "border": {
+    "subtle-00": {
+      "$type": "color",
+      "$value": "{gray.20}",
+      "$description": "Subtle border for level 00"
+    },
+    "subtle-01": {
+      "$type": "color",
+      "$value": "{gray.30}",
+      "$description": "Subtle border for level 01"
+    },
+    "subtle-selected-01": {
+      "$type": "color",
+      "$value": "{gray.30}",
+      "$description": "Selected subtle border for level 01"
+    },
+    "subtle-02": {
+      "$type": "color",
+      "$value": "{gray.20}",
+      "$description": "Subtle border for level 02"
+    },
+    "subtle-selected-02": {
+      "$type": "color",
+      "$value": "{gray.30}",
+      "$description": "Selected subtle border for level 02"
+    },
+    "subtle-03": {
+      "$type": "color",
+      "$value": "{gray.30}",
+      "$description": "Subtle border for level 03"
+    },
+    "subtle-selected-03": {
+      "$type": "color",
+      "$value": "{gray.30}",
+      "$description": "Selected subtle border for level 03"
+    },
+    "strong-01": {
+      "$type": "color",
+      "$value": "{gray.50}",
+      "$description": "Strong border for level 01"
+    },
+    "strong-02": {
+      "$type": "color",
+      "$value": "{gray.50}",
+      "$description": "Strong border for level 02"
+    },
+    "strong-03": {
+      "$type": "color",
+      "$value": "{gray.50}",
+      "$description": "Strong border for level 03"
+    },
+    "tile-01": {
+      "$type": "color",
+      "$value": "{gray.30}",
+      "$description": "Tile border for level 01"
+    },
+    "tile-02": {
+      "$type": "color",
+      "$value": "{gray.40}",
+      "$description": "Tile border for level 02"
+    },
+    "tile-03": {
+      "$type": "color",
+      "$value": "{gray.30}",
+      "$description": "Tile border for level 03"
+    },
+    "inverse": {
+      "$type": "color",
+      "$value": "{gray.100}",
+      "$description": "Inverse border color"
+    },
+    "interactive": {
+      "$type": "color",
+      "$value": "{blue.60}",
+      "$description": "Interactive border color"
+    },
+    "disabled": {
+      "$type": "color",
+      "$value": "{gray.30}",
+      "$description": "Disabled border color"
+    }
+  },
+  "text": {
+    "primary": {
+      "$type": "color",
+      "$value": "{gray.100}",
+      "$description": "Primary text color"
+    },
+    "secondary": {
+      "$type": "color",
+      "$value": "{gray.70}",
+      "$description": "Secondary text color"
+    },
+    "placeholder": {
+      "$type": "color",
+      "$value": "{gray.100}",
+      "$description": "Placeholder text color",
+      "$extensions": {
+        "com.ibm.carbon": {
+          "alphaModifier": 0.4
+        }
+      }
+    },
+    "helper": {
+      "$type": "color",
+      "$value": "{gray.60}",
+      "$description": "Helper text color"
+    },
+    "error": {
+      "$type": "color",
+      "$value": "{red.60}",
+      "$description": "Error text color"
+    },
+    "inverse": {
+      "$type": "color",
+      "$value": "{white.default}",
+      "$description": "Inverse text color"
+    },
+    "on-color": {
+      "$type": "color",
+      "$value": "{white.default}",
+      "$description": "Text color on colored backgrounds"
+    },
+    "on-color-disabled": {
+      "$type": "color",
+      "$value": "{gray.50}",
+      "$description": "Disabled text on colored backgrounds"
+    },
+    "disabled": {
+      "$type": "color",
+      "$value": "{gray.100}",
+      "$description": "Disabled text color",
+      "$extensions": {
+        "com.ibm.carbon": {
+          "alphaModifier": 0.25
+        }
+      }
+    }
+  },
+  "link": {
+    "primary": {
+      "$type": "color",
+      "$value": "{blue.60}",
+      "$description": "Primary link color"
+    },
+    "primary-hover": {
+      "$type": "color",
+      "$value": "{blue.70}",
+      "$description": "Primary link hover color"
+    },
+    "secondary": {
+      "$type": "color",
+      "$value": "{blue.70}",
+      "$description": "Secondary link color"
+    },
+    "inverse": {
+      "$type": "color",
+      "$value": "{blue.40}",
+      "$description": "Inverse link color"
+    },
+    "visited": {
+      "$type": "color",
+      "$value": "{purple.60}",
+      "$description": "Visited link color"
+    },
+    "inverse-visited": {
+      "$type": "color",
+      "$value": "{purple.40}",
+      "$description": "Inverse visited link color"
+    },
+    "inverse-active": {
+      "$type": "color",
+      "$value": "{gray.10}",
+      "$description": "Inverse active link color"
+    },
+    "inverse-hover": {
+      "$type": "color",
+      "$value": "{blue.30}",
+      "$description": "Inverse link hover color"
+    }
+  },
+  "icon": {
+    "primary": {
+      "$type": "color",
+      "$value": "{gray.100}",
+      "$description": "Primary icon color"
+    },
+    "secondary": {
+      "$type": "color",
+      "$value": "{gray.70}",
+      "$description": "Secondary icon color"
+    },
+    "inverse": {
+      "$type": "color",
+      "$value": "{white.default}",
+      "$description": "Inverse icon color"
+    },
+    "on-color": {
+      "$type": "color",
+      "$value": "{white.default}",
+      "$description": "Icon color on colored backgrounds"
+    },
+    "on-color-disabled": {
+      "$type": "color",
+      "$value": "{gray.50}",
+      "$description": "Disabled icon on colored backgrounds"
+    },
+    "disabled": {
+      "$type": "color",
+      "$value": "{gray.100}",
+      "$description": "Disabled icon color",
+      "$extensions": {
+        "com.ibm.carbon": {
+          "alphaModifier": 0.25
+        }
+      }
+    },
+    "interactive": {
+      "$type": "color",
+      "$value": "{blue.60}",
+      "$description": "Interactive icon color"
+    }
+  },
+  "support": {
+    "error": {
+      "$type": "color",
+      "$value": "{red.60}",
+      "$description": "Error support color"
+    },
+    "success": {
+      "$type": "color",
+      "$value": "{green.50}",
+      "$description": "Success support color"
+    },
+    "warning": {
+      "$type": "color",
+      "$value": "{yellow.30}",
+      "$description": "Warning support color"
+    },
+    "info": {
+      "$type": "color",
+      "$value": "{blue.70}",
+      "$description": "Info support color"
+    },
+    "error-inverse": {
+      "$type": "color",
+      "$value": "{red.50}",
+      "$description": "Inverse error support color"
+    },
+    "success-inverse": {
+      "$type": "color",
+      "$value": "{green.40}",
+      "$description": "Inverse success support color"
+    },
+    "warning-inverse": {
+      "$type": "color",
+      "$value": "{yellow.30}",
+      "$description": "Inverse warning support color"
+    },
+    "info-inverse": {
+      "$type": "color",
+      "$value": "{blue.50}",
+      "$description": "Inverse info support color"
+    },
+    "caution-minor": {
+      "$type": "color",
+      "$value": "{yellow.30}",
+      "$description": "Minor caution support color"
+    },
+    "caution-major": {
+      "$type": "color",
+      "$value": "{orange.40}",
+      "$description": "Major caution support color"
+    },
+    "caution-undefined": {
+      "$type": "color",
+      "$value": "{purple.60}",
+      "$description": "Undefined caution support color"
+    }
+  },
+  "focus": {
+    "$type": "color",
+    "$value": "{blue.60}",
+    "$description": "Focus indicator color"
+  },
+  "focus-inset": {
+    "$type": "color",
+    "$value": "{white.default}",
+    "$description": "Inset focus indicator color"
+  },
+  "focus-inverse": {
+    "$type": "color",
+    "$value": "{white.default}",
+    "$description": "Inverse focus indicator color"
+  },
+  "interactive": {
+    "$type": "color",
+    "$value": "{blue.60}",
+    "$description": "Interactive element color"
+  },
+  "highlight": {
+    "$type": "color",
+    "$value": "{blue.20}",
+    "$description": "Highlight color"
+  },
+  "overlay": {
+    "$type": "color",
+    "$value": "{black.default}",
+    "$description": "Overlay background color",
+    "$extensions": {
+      "com.ibm.carbon": {
+        "alphaModifier": 0.6
+      }
+    }
+  },
+  "toggle-off": {
+    "$type": "color",
+    "$value": "{gray.50}",
+    "$description": "Toggle off state color"
+  },
+  "shadow": {
+    "$type": "color",
+    "$value": "{black.default}",
+    "$description": "Shadow color",
+    "$extensions": {
+      "com.ibm.carbon": {
+        "alphaModifier": 0.3
+      }
+    }
+  },
+  "skeleton": {
+    "background": {
+      "$type": "color",
+      "$value": "{gray.10Hover}",
+      "$description": "Skeleton loading background"
+    },
+    "element": {
+      "$type": "color",
+      "$value": "{gray.30}",
+      "$description": "Skeleton loading element"
+    }
+  },
+  "syntax": {
+    "comment": {
+      "$type": "color",
+      "$value": "{green.60}",
+      "$description": "Syntax comment"
+    },
+    "line-comment": {
+      "$type": "color",
+      "$value": "{green.60}",
+      "$description": "Syntax line comment"
+    },
+    "block-comment": {
+      "$type": "color",
+      "$value": "{green.60}",
+      "$description": "Syntax block comment"
+    },
+    "doc-comment": {
+      "$type": "color",
+      "$value": "{green.60}",
+      "$description": "Syntax doc comment"
+    },
+    "string": {
+      "$type": "color",
+      "$value": "{gray.100}",
+      "$description": "Syntax string"
+    },
+    "doc-string": {
+      "$type": "color",
+      "$value": "{gray.100}",
+      "$description": "Syntax doc string"
+    },
+    "keyword": {
+      "$type": "color",
+      "$value": "{blue.60}",
+      "$description": "Syntax keyword"
+    },
+    "operator-keyword": {
+      "$type": "color",
+      "$value": "{blue.60}",
+      "$description": "Syntax operator keyword"
+    },
+    "control-keyword": {
+      "$type": "color",
+      "$value": "{purple.70}",
+      "$description": "Syntax control keyword"
+    },
+    "definition-keyword": {
+      "$type": "color",
+      "$value": "{cyan.70}",
+      "$description": "Syntax definition keyword"
+    },
+    "module-keyword": {
+      "$type": "color",
+      "$value": "{purple.70}",
+      "$description": "Syntax module keyword"
+    },
+    "variable": {
+      "$type": "color",
+      "$value": "{blue.60}",
+      "$description": "Syntax variable"
+    },
+    "name": {
+      "$type": "color",
+      "$value": "{blue.60}",
+      "$description": "Syntax name"
+    },
+    "variable-name": {
+      "$type": "color",
+      "$value": "{blue.60}",
+      "$description": "Syntax variable name"
+    },
+    "label-name": {
+      "$type": "color",
+      "$value": "{blue.60}",
+      "$description": "Syntax label name"
+    },
+    "attribute": {
+      "$type": "color",
+      "$value": "{cyan.70}",
+      "$description": "Syntax attribute"
+    },
+    "attribute-name": {
+      "$type": "color",
+      "$value": "{cyan.70}",
+      "$description": "Syntax attribute name"
+    },
+    "property-name": {
+      "$type": "color",
+      "$value": "{cyan.70}",
+      "$description": "Syntax property name"
+    },
+    "tag": {
+      "$type": "color",
+      "$value": "{teal.60}",
+      "$description": "Syntax tag"
+    },
+    "tag-name": {
+      "$type": "color",
+      "$value": "{teal.60}",
+      "$description": "Syntax tag name"
+    },
+    "type": {
+      "$type": "color",
+      "$value": "{teal.60}",
+      "$description": "Syntax type"
+    },
+    "type-name": {
+      "$type": "color",
+      "$value": "{teal.60}",
+      "$description": "Syntax type name"
+    },
+    "class-name": {
+      "$type": "color",
+      "$value": "{teal.60}",
+      "$description": "Syntax class name"
+    },
+    "namespace": {
+      "$type": "color",
+      "$value": "{teal.60}",
+      "$description": "Syntax namespace"
+    },
+    "macro-name": {
+      "$type": "color",
+      "$value": "{gray.100}",
+      "$description": "Syntax macro name"
+    },
+    "atom": {
+      "$type": "color",
+      "$value": "{gray.100}",
+      "$description": "Syntax atom"
+    },
+    "literal": {
+      "$type": "color",
+      "$value": "{gray.100}",
+      "$description": "Syntax literal"
+    },
+    "bool": {
+      "$type": "color",
+      "$value": "{gray.100}",
+      "$description": "Syntax bool"
+    },
+    "null": {
+      "$type": "color",
+      "$value": "{gray.100}",
+      "$description": "Syntax null"
+    },
+    "self": {
+      "$type": "color",
+      "$value": "{teal.60}",
+      "$description": "Syntax self"
+    },
+    "number": {
+      "$type": "color",
+      "$value": "{green.60}",
+      "$description": "Syntax number"
+    },
+    "integer": {
+      "$type": "color",
+      "$value": "{green.60}",
+      "$description": "Syntax integer"
+    },
+    "float": {
+      "$type": "color",
+      "$value": "{green.60}",
+      "$description": "Syntax float"
+    },
+    "unit": {
+      "$type": "color",
+      "$value": "{green.60}",
+      "$description": "Syntax unit"
+    },
+    "character": {
+      "$type": "color",
+      "$value": "{gray.100}",
+      "$description": "Syntax character"
+    },
+    "attribute-value": {
+      "$type": "color",
+      "$value": "{gray.100}",
+      "$description": "Syntax attribute value"
+    },
+    "special-string": {
+      "$type": "color",
+      "$value": "{purple.60}",
+      "$description": "Syntax special string"
+    },
+    "regexp": {
+      "$type": "color",
+      "$value": "{purple.70}",
+      "$description": "Syntax regexp"
+    },
+    "escape": {
+      "$type": "color",
+      "$value": "{coolGray.80}",
+      "$description": "Syntax escape"
+    },
+    "url": {
+      "$type": "color",
+      "$value": "{coolGray.80}",
+      "$description": "Syntax url"
+    },
+    "color": {
+      "$type": "color",
+      "$value": "{gray.100}",
+      "$description": "Syntax color"
+    },
+    "operator": {
+      "$type": "color",
+      "$value": "{coolGray.80}",
+      "$description": "Syntax operator"
+    },
+    "deref-operator": {
+      "$type": "color",
+      "$value": "{coolGray.80}",
+      "$description": "Syntax deref operator"
+    },
+    "arithmetic-operator": {
+      "$type": "color",
+      "$value": "{coolGray.80}",
+      "$description": "Syntax arithmetic operator"
+    },
+    "logic-operator": {
+      "$type": "color",
+      "$value": "{coolGray.80}",
+      "$description": "Syntax logic operator"
+    },
+    "bitwise-operator": {
+      "$type": "color",
+      "$value": "{coolGray.80}",
+      "$description": "Syntax bitwise operator"
+    },
+    "compare-operator": {
+      "$type": "color",
+      "$value": "{coolGray.80}",
+      "$description": "Syntax compare operator"
+    },
+    "update-operator": {
+      "$type": "color",
+      "$value": "{coolGray.80}",
+      "$description": "Syntax update operator"
+    },
+    "definition-operator": {
+      "$type": "color",
+      "$value": "{cyan.70}",
+      "$description": "Syntax definition operator"
+    },
+    "type-operator": {
+      "$type": "color",
+      "$value": "{teal.60}",
+      "$description": "Syntax type operator"
+    },
+    "control-operator": {
+      "$type": "color",
+      "$value": "{purple.70}",
+      "$description": "Syntax control operator"
+    },
+    "modifier": {
+      "$type": "color",
+      "$value": "{blue.60}",
+      "$description": "Syntax modifier"
+    },
+    "punctuation": {
+      "$type": "color",
+      "$value": "{coolGray.80}",
+      "$description": "Syntax punctuation"
+    },
+    "separator": {
+      "$type": "color",
+      "$value": "{coolGray.80}",
+      "$description": "Syntax separator"
+    },
+    "bracket": {
+      "$type": "color",
+      "$value": "{coolGray.80}",
+      "$description": "Syntax bracket"
+    },
+    "angle-bracket": {
+      "$type": "color",
+      "$value": "{coolGray.60}",
+      "$description": "Syntax angle bracket"
+    },
+    "square-bracket": {
+      "$type": "color",
+      "$value": "{coolGray.80}",
+      "$description": "Syntax square bracket"
+    },
+    "paren": {
+      "$type": "color",
+      "$value": "{coolGray.80}",
+      "$description": "Syntax paren"
+    },
+    "brace": {
+      "$type": "color",
+      "$value": "{coolGray.80}",
+      "$description": "Syntax brace"
+    },
+    "content": {
+      "$type": "color",
+      "$value": "{gray.100}",
+      "$description": "Syntax content"
+    },
+    "list": {
+      "$type": "color",
+      "$value": "{gray.100}",
+      "$description": "Syntax list"
+    },
+    "emphasis": {
+      "$type": "color",
+      "$value": "{gray.100}",
+      "$description": "Syntax emphasis"
+    },
+    "strong": {
+      "$type": "color",
+      "$value": "{gray.100}",
+      "$description": "Syntax strong"
+    },
+    "monospace": {
+      "$type": "color",
+      "$value": "{gray.100}",
+      "$description": "Syntax monospace"
+    },
+    "strikethrough": {
+      "$type": "color",
+      "$value": "{gray.100}",
+      "$description": "Syntax strikethrough"
+    },
+    "heading": {
+      "$type": "color",
+      "$value": "{cyan.70}",
+      "$description": "Syntax heading"
+    },
+    "content-separator": {
+      "$type": "color",
+      "$value": "{coolGray.80}",
+      "$description": "Syntax content separator"
+    },
+    "quote": {
+      "$type": "color",
+      "$value": "{green.60}",
+      "$description": "Syntax quote"
+    },
+    "link": {
+      "$type": "color",
+      "$value": "{blue.60}",
+      "$description": "Syntax link"
+    },
+    "invalid": {
+      "$type": "color",
+      "$value": "{red.60}",
+      "$description": "Syntax invalid"
+    },
+    "meta": {
+      "$type": "color",
+      "$value": "{green.60}",
+      "$description": "Syntax meta"
+    },
+    "document-meta": {
+      "$type": "color",
+      "$value": "{green.60}",
+      "$description": "Syntax document meta"
+    },
+    "annotation": {
+      "$type": "color",
+      "$value": "{teal.60}",
+      "$description": "Syntax annotation"
+    },
+    "processing-instruction": {
+      "$type": "color",
+      "$value": "{gray.100}",
+      "$description": "Syntax processing instruction"
+    },
+    "definition": {
+      "$type": "color",
+      "$value": "{cyan.70}",
+      "$description": "Syntax definition"
+    },
+    "constant": {
+      "$type": "color",
+      "$value": "{blue.60}",
+      "$description": "Syntax constant"
+    },
+    "function": {
+      "$type": "color",
+      "$value": "{yellow.60}",
+      "$description": "Syntax function"
+    },
+    "standard": {
+      "$type": "color",
+      "$value": "{blue.60}",
+      "$description": "Syntax standard"
+    },
+    "local": {
+      "$type": "color",
+      "$value": "{blue.60}",
+      "$description": "Syntax local"
+    },
+    "special": {
+      "$type": "color",
+      "$value": "{blue.60}",
+      "$description": "Syntax special"
+    },
+    "inserted": {
+      "$type": "color",
+      "$value": "{green.20}",
+      "$description": "Syntax inserted"
+    },
+    "deleted": {
+      "$type": "color",
+      "$value": "{red.20}",
+      "$description": "Syntax deleted"
+    },
+    "heading-1": {
+      "$type": "color",
+      "$value": "{cyan.70}",
+      "$description": "Syntax heading 1"
+    },
+    "heading-2": {
+      "$type": "color",
+      "$value": "{cyan.70}",
+      "$description": "Syntax heading 2"
+    },
+    "heading-3": {
+      "$type": "color",
+      "$value": "{cyan.70}",
+      "$description": "Syntax heading 3"
+    },
+    "heading-4": {
+      "$type": "color",
+      "$value": "{cyan.70}",
+      "$description": "Syntax heading 4"
+    },
+    "heading-5": {
+      "$type": "color",
+      "$value": "{cyan.70}",
+      "$description": "Syntax heading 5"
+    },
+    "heading-6": {
+      "$type": "color",
+      "$value": "{cyan.70}",
+      "$description": "Syntax heading 6"
+    }
+  },
+  "ai": {
+    "inner-shadow": {
+      "$type": "color",
+      "$value": "{blue.50}",
+      "$description": "AI inner shadow",
+      "$extensions": {
+        "com.ibm.carbon": {
+          "alphaModifier": 0.1
+        }
+      }
+    },
+    "aura-start-sm": {
+      "$type": "color",
+      "$value": "{blue.50}",
+      "$description": "AI aura start small",
+      "$extensions": {
+        "com.ibm.carbon": {
+          "alphaModifier": 0.16
+        }
+      }
+    },
+    "aura-start": {
+      "$type": "color",
+      "$value": "{blue.50}",
+      "$description": "AI aura start",
+      "$extensions": {
+        "com.ibm.carbon": {
+          "alphaModifier": 0.1
+        }
+      }
+    },
+    "aura-end": {
+      "$type": "color",
+      "$value": "{white.default}",
+      "$description": "AI aura end",
+      "$extensions": {
+        "com.ibm.carbon": {
+          "alphaModifier": 0
+        }
+      }
+    },
+    "border-strong": {
+      "$type": "color",
+      "$value": "{blue.50}",
+      "$description": "AI strong border"
+    },
+    "border-start": {
+      "$type": "color",
+      "$value": "{blue.30}",
+      "$description": "AI border start",
+      "$extensions": {
+        "com.ibm.carbon": {
+          "alphaModifier": 0.64
+        }
+      }
+    },
+    "border-end": {
+      "$type": "color",
+      "$value": "{blue.40}",
+      "$description": "AI border end"
+    },
+    "drop-shadow": {
+      "$type": "color",
+      "$value": "{blue.60}",
+      "$description": "AI drop shadow",
+      "$extensions": {
+        "com.ibm.carbon": {
+          "alphaModifier": 0.1
+        }
+      }
+    },
+    "aura-hover-background": {
+      "$type": "color",
+      "$value": "{blue.10}",
+      "$description": "AI aura hover background"
+    },
+    "aura-hover-start": {
+      "$type": "color",
+      "$value": "{blue.50}",
+      "$description": "AI aura hover start",
+      "$extensions": {
+        "com.ibm.carbon": {
+          "alphaModifier": 0.32
+        }
+      }
+    },
+    "aura-hover-end": {
+      "$type": "color",
+      "$value": "{white.default}",
+      "$description": "AI aura hover end",
+      "$extensions": {
+        "com.ibm.carbon": {
+          "alphaModifier": 0
+        }
+      }
+    },
+    "popover-background": {
+      "$type": "color",
+      "$value": "{white.default}",
+      "$description": "AI popover background"
+    },
+    "popover-shadow-outer-01": {
+      "$type": "color",
+      "$value": "{blue.70}",
+      "$description": "AI popover outer shadow 01",
+      "$extensions": {
+        "com.ibm.carbon": {
+          "alphaModifier": 0.06
+        }
+      }
+    },
+    "popover-shadow-outer-02": {
+      "$type": "color",
+      "$value": "{black.default}",
+      "$description": "AI popover outer shadow 02",
+      "$extensions": {
+        "com.ibm.carbon": {
+          "alphaModifier": 0.04
+        }
+      }
+    },
+    "skeleton-background": {
+      "$type": "color",
+      "$value": "{blue.20}",
+      "$description": "AI skeleton background"
+    },
+    "skeleton-element-background": {
+      "$type": "color",
+      "$value": "{blue.50}",
+      "$description": "AI skeleton element background"
+    },
+    "overlay": {
+      "$type": "color",
+      "$value": "{blue.100}",
+      "$description": "AI modal overlay",
+      "$extensions": {
+        "com.ibm.carbon": {
+          "alphaModifier": 0.5
+        }
+      }
+    },
+    "popover-caret-center": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.627451,
+          0.764706,
+          1
+        ],
+        "hex": "#a0c3ff"
+      },
+      "$description": "AI popover caret center"
+    },
+    "popover-caret-bottom": {
+      "$type": "color",
+      "$value": "{blue.40}",
+      "$description": "AI popover caret bottom"
+    },
+    "popover-caret-bottom-background-actions": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.913725,
+          0.937255,
+          0.980392
+        ],
+        "hex": "#e9effa"
+      },
+      "$description": "AI popover caret bottom background for actions"
+    },
+    "popover-caret-bottom-background": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.917647,
+          0.945098,
+          1
+        ],
+        "hex": "#eaf1ff"
+      },
+      "$description": "AI popover caret bottom background"
+    }
+  },
+  "chat": {
+    "prompt-background": {
+      "$type": "color",
+      "$value": "{white.default}",
+      "$description": "Chat prompt background"
+    },
+    "prompt-border-start": {
+      "$type": "color",
+      "$value": "{gray.10}",
+      "$description": "Chat prompt border start"
+    },
+    "prompt-border-end": {
+      "$type": "color",
+      "$value": "{gray.10}",
+      "$description": "Chat prompt border end",
+      "$extensions": {
+        "com.ibm.carbon": {
+          "alphaModifier": 0
+        }
+      }
+    },
+    "prompt-text": {
+      "$type": "color",
+      "$value": "{gray.100}",
+      "$description": "Chat prompt text"
+    },
+    "bubble-user": {
+      "$type": "color",
+      "$value": "{gray.20}",
+      "$description": "Chat bubble user background"
+    },
+    "bubble-user-text": {
+      "$type": "color",
+      "$value": "{gray.100}",
+      "$description": "Chat bubble user text"
+    },
+    "bubble-agent": {
+      "$type": "color",
+      "$value": "{white.default}",
+      "$description": "Chat bubble agent background"
+    },
+    "bubble-agent-text": {
+      "$type": "color",
+      "$value": "{gray.100}",
+      "$description": "Chat bubble agent text"
+    },
+    "bubble-border": {
+      "$type": "color",
+      "$value": "{gray.20}",
+      "$description": "Chat bubble border"
+    },
+    "avatar-bot": {
+      "$type": "color",
+      "$value": "{gray.60}",
+      "$description": "Chat avatar bot"
+    },
+    "avatar-agent": {
+      "$type": "color",
+      "$value": "{gray.80}",
+      "$description": "Chat avatar agent"
+    },
+    "avatar-user": {
+      "$type": "color",
+      "$value": "{blue.60}",
+      "$description": "Chat avatar user"
+    },
+    "shell-background": {
+      "$type": "color",
+      "$value": "{white.default}",
+      "$description": "Chat shell background"
+    },
+    "header-background": {
+      "$type": "color",
+      "$value": "{white.default}",
+      "$description": "Chat header background"
+    },
+    "header-text": {
+      "$type": "color",
+      "$value": "{gray.100}",
+      "$description": "Chat header text"
+    },
+    "button": {
+      "$type": "color",
+      "$value": "{blue.60}",
+      "$description": "Chat button color"
+    },
+    "button-hover": {
+      "$type": "color",
+      "$value": "{gray.50}",
+      "$description": "Chat button hover background",
+      "$extensions": {
+        "com.ibm.carbon": {
+          "alphaModifier": 0.12
+        }
+      }
+    },
+    "button-text-hover": {
+      "$type": "color",
+      "$value": "{blue.70}",
+      "$description": "Chat button text hover"
+    },
+    "button-active": {
+      "$type": "color",
+      "$value": "{gray.50}",
+      "$description": "Chat button active background",
+      "$extensions": {
+        "com.ibm.carbon": {
+          "alphaModifier": 0.5
+        }
+      }
+    },
+    "button-selected": {
+      "$type": "color",
+      "$value": "{gray.50}",
+      "$description": "Chat button selected background",
+      "$extensions": {
+        "com.ibm.carbon": {
+          "alphaModifier": 0.2
+        }
+      }
+    },
+    "button-text-selected": {
+      "$type": "color",
+      "$value": "{gray.70}",
+      "$description": "Chat button text selected"
+    }
+  }
+}

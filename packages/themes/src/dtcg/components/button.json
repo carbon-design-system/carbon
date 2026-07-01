@@ -1,0 +1,193 @@
+{
+  "$schema": "https://tr.designtokens.org/format/",
+  "$description": "button component tokens",
+  "button": {
+    "danger-active": {
+      "$type": "color",
+      "$description": "danger-active token",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "{red.80}",
+          "g10": "{red.80}",
+          "g90": "{red.80}",
+          "g100": "{red.80}"
+        }
+      }
+    },
+    "danger-hover": {
+      "$type": "color",
+      "$description": "danger-hover token",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "#b81921",
+          "g10": "#b81921",
+          "g90": "#b81921",
+          "g100": "#b81921"
+        }
+      }
+    },
+    "danger-primary": {
+      "$type": "color",
+      "$description": "danger-primary token",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "{red.60}",
+          "g10": "{red.60}",
+          "g90": "{red.60}",
+          "g100": "{red.60}"
+        }
+      }
+    },
+    "danger-secondary": {
+      "$type": "color",
+      "$description": "danger-secondary token",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "{red.60}",
+          "g10": "{red.60}",
+          "g90": "{red.40}",
+          "g100": "{red.50}"
+        }
+      }
+    },
+    "disabled": {
+      "$type": "color",
+      "$description": "disabled token",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "{gray.30}",
+          "g10": "{gray.30}",
+          "g90": "{gray.50}",
+          "g100": "{gray.50}"
+        },
+        "com.ibm.carbon": {
+          "alphaModifiers": {
+            "g90": 0.3,
+            "g100": 0.3
+          }
+        }
+      }
+    },
+    "primary": {
+      "$type": "color",
+      "$description": "primary token",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "{blue.60}",
+          "g10": "{blue.60}",
+          "g90": "{blue.60}",
+          "g100": "{blue.60}"
+        }
+      }
+    },
+    "primary-active": {
+      "$type": "color",
+      "$description": "primary-active token",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "{blue.80}",
+          "g10": "{blue.80}",
+          "g90": "{blue.80}",
+          "g100": "{blue.80}"
+        }
+      }
+    },
+    "primary-hover": {
+      "$type": "color",
+      "$description": "primary-hover token",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "{blue.60Hover}",
+          "g10": "{blue.60Hover}",
+          "g90": "{blue.60Hover}",
+          "g100": "{blue.60Hover}"
+        }
+      }
+    },
+    "secondary": {
+      "$type": "color",
+      "$description": "secondary token",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "{gray.80}",
+          "g10": "{gray.80}",
+          "g90": "{gray.60}",
+          "g100": "{gray.60}"
+        }
+      }
+    },
+    "secondary-active": {
+      "$type": "color",
+      "$description": "secondary-active token",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "{gray.60}",
+          "g10": "{gray.60}",
+          "g90": "{gray.80}",
+          "g100": "{gray.80}"
+        }
+      }
+    },
+    "secondary-hover": {
+      "$type": "color",
+      "$description": "secondary-hover token",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "{gray.80Hover}",
+          "g10": "{gray.80Hover}",
+          "g90": "{gray.60Hover}",
+          "g100": "{gray.60Hover}"
+        }
+      }
+    },
+    "separator": {
+      "$type": "color",
+      "$description": "separator token",
+      "$extensions": {
+        "carbon.themes": {
+          "fallback": "{gray.20}",
+          "white": "{gray.20}",
+          "g10": "{gray.20}",
+          "g90": "{gray.100}",
+          "g100": "{gray.100}"
+        }
+      }
+    },
+    "tertiary": {
+      "$type": "color",
+      "$description": "tertiary token",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "{blue.60}",
+          "g10": "{blue.60}",
+          "g90": "{white.default}",
+          "g100": "{white.default}"
+        }
+      }
+    },
+    "tertiary-active": {
+      "$type": "color",
+      "$description": "tertiary-active token",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "{blue.80}",
+          "g10": "{blue.80}",
+          "g90": "{gray.30}",
+          "g100": "{gray.30}"
+        }
+      }
+    },
+    "tertiary-hover": {
+      "$type": "color",
+      "$description": "tertiary-hover token",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "{blue.60Hover}",
+          "g10": "{blue.60Hover}",
+          "g90": "{gray.10}",
+          "g100": "{gray.10}"
+        }
+      }
+    }
+  }
+}

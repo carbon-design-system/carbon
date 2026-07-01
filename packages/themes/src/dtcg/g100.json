@@ -1,0 +1,1478 @@
+{
+  "$schema": "https://tr.designtokens.org/format/",
+  "$description": "g100 theme - Dark theme",
+  "$extensions": {
+    "com.ibm.carbon": {
+      "color-scheme": "dark"
+    }
+  },
+  "ai": {
+    "aura": {
+      "end": {
+        "$type": "color",
+        "$value": "{black.default}",
+        "$description": "ai-aura-end token",
+        "$extensions": {
+          "com.ibm.carbon": {
+            "alphaModifier": 0
+          }
+        }
+      },
+      "hover": {
+        "background": {
+          "$type": "color",
+          "$value": "{gray.90Hover}",
+          "$description": "ai-aura-hover-background token"
+        },
+        "end": {
+          "$type": "color",
+          "$value": "{black.default}",
+          "$description": "ai-aura-hover-end token",
+          "$extensions": {
+            "com.ibm.carbon": {
+              "alphaModifier": 0
+            }
+          }
+        },
+        "start": {
+          "$type": "color",
+          "$value": "{blue.50}",
+          "$description": "ai-aura-hover-start token",
+          "$extensions": {
+            "com.ibm.carbon": {
+              "alphaModifier": 0.4
+            }
+          }
+        }
+      },
+      "start": {
+        "$type": "color",
+        "$value": "{blue.50}",
+        "$description": "ai-aura-start token",
+        "sm": {
+          "$type": "color",
+          "$value": "{blue.50}",
+          "$description": "ai-aura-start-sm token",
+          "$extensions": {
+            "com.ibm.carbon": {
+              "alphaModifier": 0.16
+            }
+          }
+        },
+        "$extensions": {
+          "com.ibm.carbon": {
+            "alphaModifier": 0.1
+          }
+        }
+      }
+    },
+    "border": {
+      "end": {
+        "$type": "color",
+        "$value": "{blue.50}",
+        "$description": "ai-border-end token"
+      },
+      "start": {
+        "$type": "color",
+        "$value": "{blue.30}",
+        "$description": "ai-border-start token",
+        "$extensions": {
+          "com.ibm.carbon": {
+            "alphaModifier": 0.36
+          }
+        }
+      },
+      "strong": {
+        "$type": "color",
+        "$value": "{blue.40}",
+        "$description": "ai-border-strong token"
+      }
+    },
+    "drop": {
+      "shadow": {
+        "$type": "color",
+        "$value": "{black.default}",
+        "$description": "ai-drop-shadow token",
+        "$extensions": {
+          "com.ibm.carbon": {
+            "alphaModifier": 0.28
+          }
+        }
+      }
+    },
+    "inner": {
+      "shadow": {
+        "$type": "color",
+        "$value": "{blue.50}",
+        "$description": "ai-inner-shadow token",
+        "$extensions": {
+          "com.ibm.carbon": {
+            "alphaModifier": 0.16
+          }
+        }
+      }
+    },
+    "overlay": {
+      "$type": "color",
+      "$value": "{black.default}",
+      "$description": "ai-overlay token",
+      "$extensions": {
+        "com.ibm.carbon": {
+          "alphaModifier": 0.5
+        }
+      }
+    },
+    "popover": {
+      "background": {
+        "$type": "color",
+        "$value": "{gray.100}",
+        "$description": "ai-popover-background token"
+      },
+      "caret": {
+        "bottom": {
+          "$type": "color",
+          "$value": "{blue.50}",
+          "$description": "ai-popover-caret-bottom token",
+          "background": {
+            "$type": "color",
+            "$value": {
+              "colorSpace": "srgb",
+              "components": [
+                0.12549,
+                0.176471,
+                0.270588
+              ],
+              "hex": "#202d45"
+            },
+            "$description": "ai-popover-caret-bottom-background token",
+            "actions": {
+              "$type": "color",
+              "$value": {
+                "colorSpace": "srgb",
+                "components": [
+                  0.117647,
+                  0.156863,
+                  0.227451
+                ],
+                "hex": "#1e283a"
+              },
+              "$description": "ai-popover-caret-bottom-background-actions token"
+            }
+          }
+        },
+        "center": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.282353,
+              0.439216,
+              0.709804
+            ],
+            "hex": "#4870b5"
+          },
+          "$description": "ai-popover-caret-center token"
+        }
+      },
+      "shadow": {
+        "outer": {
+          "01": {
+            "$type": "color",
+            "$value": "{black.default}",
+            "$description": "ai-popover-shadow-outer-01 token",
+            "$extensions": {
+              "com.ibm.carbon": {
+                "alphaModifier": 0.12
+              }
+            }
+          },
+          "02": {
+            "$type": "color",
+            "$value": "{black.default}",
+            "$description": "ai-popover-shadow-outer-02 token",
+            "$extensions": {
+              "com.ibm.carbon": {
+                "alphaModifier": 0.08
+              }
+            }
+          }
+        }
+      }
+    },
+    "skeleton": {
+      "background": {
+        "$type": "color",
+        "$value": "{blue.40}",
+        "$description": "ai-skeleton-background token",
+        "$extensions": {
+          "com.ibm.carbon": {
+            "alphaModifier": 0.5
+          }
+        }
+      },
+      "element": {
+        "background": {
+          "$type": "color",
+          "$value": "{blue.40}",
+          "$description": "ai-skeleton-element-background token",
+          "$extensions": {
+            "com.ibm.carbon": {
+              "alphaModifier": 0.3
+            }
+          }
+        }
+      }
+    }
+  },
+  "background": {
+    "$type": "color",
+    "$value": "{gray.100}",
+    "$description": "background token",
+    "active": {
+      "$type": "color",
+      "$value": "{gray.50}",
+      "$description": "background-active token",
+      "$extensions": {
+        "com.ibm.carbon": {
+          "alphaModifier": 0.4
+        }
+      }
+    },
+    "brand": {
+      "$type": "color",
+      "$value": "{blue.60}",
+      "$description": "background-brand token"
+    },
+    "hover": {
+      "$type": "color",
+      "$value": "{gray.50}",
+      "$description": "background-hover token",
+      "$extensions": {
+        "com.ibm.carbon": {
+          "alphaModifier": 0.16
+        }
+      }
+    },
+    "inverse": {
+      "$type": "color",
+      "$value": "{gray.10}",
+      "$description": "background-inverse token",
+      "hover": {
+        "$type": "color",
+        "$value": "{gray.10Hover}",
+        "$description": "background-inverse-hover token"
+      }
+    },
+    "selected": {
+      "$type": "color",
+      "$value": "{gray.50}",
+      "$description": "background-selected token",
+      "hover": {
+        "$type": "color",
+        "$value": "{gray.50}",
+        "$description": "background-selected-hover token",
+        "$extensions": {
+          "com.ibm.carbon": {
+            "alphaModifier": 0.32
+          }
+        }
+      },
+      "$extensions": {
+        "com.ibm.carbon": {
+          "alphaModifier": 0.24
+        }
+      }
+    }
+  },
+  "border": {
+    "disabled": {
+      "$type": "color",
+      "$value": "{gray.50}",
+      "$description": "border-disabled token",
+      "$extensions": {
+        "com.ibm.carbon": {
+          "alphaModifier": 0.5
+        }
+      }
+    },
+    "interactive": {
+      "$type": "color",
+      "$value": "{blue.50}",
+      "$description": "border-interactive token"
+    },
+    "inverse": {
+      "$type": "color",
+      "$value": "{gray.10}",
+      "$description": "border-inverse token"
+    },
+    "strong": {
+      "01": {
+        "$type": "color",
+        "$value": "{gray.60}",
+        "$description": "border-strong-01 token"
+      },
+      "02": {
+        "$type": "color",
+        "$value": "{gray.50}",
+        "$description": "border-strong-02 token"
+      },
+      "03": {
+        "$type": "color",
+        "$value": "{gray.40}",
+        "$description": "border-strong-03 token"
+      }
+    },
+    "subtle": {
+      "00": {
+        "$type": "color",
+        "$value": "{gray.80}",
+        "$description": "border-subtle-00 token"
+      },
+      "01": {
+        "$type": "color",
+        "$value": "{gray.70}",
+        "$description": "border-subtle-01 token"
+      },
+      "02": {
+        "$type": "color",
+        "$value": "{gray.60}",
+        "$description": "border-subtle-02 token"
+      },
+      "03": {
+        "$type": "color",
+        "$value": "{gray.60}",
+        "$description": "border-subtle-03 token"
+      },
+      "selected": {
+        "01": {
+          "$type": "color",
+          "$value": "{gray.60}",
+          "$description": "border-subtle-selected-01 token"
+        },
+        "02": {
+          "$type": "color",
+          "$value": "{gray.50}",
+          "$description": "border-subtle-selected-02 token"
+        },
+        "03": {
+          "$type": "color",
+          "$value": "{gray.50}",
+          "$description": "border-subtle-selected-03 token"
+        }
+      }
+    },
+    "tile": {
+      "01": {
+        "$type": "color",
+        "$value": "{gray.70}",
+        "$description": "border-tile-01 token"
+      },
+      "02": {
+        "$type": "color",
+        "$value": "{gray.60}",
+        "$description": "border-tile-02 token"
+      },
+      "03": {
+        "$type": "color",
+        "$value": "{gray.50}",
+        "$description": "border-tile-03 token"
+      }
+    }
+  },
+  "chat": {
+    "avatar": {
+      "agent": {
+        "$type": "color",
+        "$value": "{gray.30}",
+        "$description": "chat-avatar-agent token"
+      },
+      "bot": {
+        "$type": "color",
+        "$value": "{gray.50}",
+        "$description": "chat-avatar-bot token"
+      },
+      "user": {
+        "$type": "color",
+        "$value": "{blue.50}",
+        "$description": "chat-avatar-user token"
+      }
+    },
+    "bubble": {
+      "agent": {
+        "$type": "color",
+        "$value": "{gray.90}",
+        "$description": "chat-bubble-agent token",
+        "text": {
+          "$type": "color",
+          "$value": "{gray.10}",
+          "$description": "chat-bubble-agent-text token"
+        }
+      },
+      "border": {
+        "$type": "color",
+        "$value": "{gray.70}",
+        "$description": "chat-bubble-border token"
+      },
+      "user": {
+        "$type": "color",
+        "$value": "{gray.80}",
+        "$description": "chat-bubble-user token",
+        "text": {
+          "$type": "color",
+          "$value": "{gray.10}",
+          "$description": "chat-bubble-user-text token"
+        }
+      }
+    },
+    "button": {
+      "$type": "color",
+      "$value": "{blue.40}",
+      "$description": "chat-button token",
+      "active": {
+        "$type": "color",
+        "$value": "{gray.50}",
+        "$description": "chat-button-active token",
+        "$extensions": {
+          "com.ibm.carbon": {
+            "alphaModifier": 0.4
+          }
+        }
+      },
+      "hover": {
+        "$type": "color",
+        "$value": "{gray.50}",
+        "$description": "chat-button-hover token",
+        "$extensions": {
+          "com.ibm.carbon": {
+            "alphaModifier": 0.16
+          }
+        }
+      },
+      "selected": {
+        "$type": "color",
+        "$value": "{gray.50}",
+        "$description": "chat-button-selected token",
+        "$extensions": {
+          "com.ibm.carbon": {
+            "alphaModifier": 0.24
+          }
+        }
+      },
+      "text": {
+        "hover": {
+          "$type": "color",
+          "$value": "{blue.30}",
+          "$description": "chat-button-text-hover token"
+        },
+        "selected": {
+          "$type": "color",
+          "$value": "{gray.30}",
+          "$description": "chat-button-text-selected token"
+        }
+      }
+    },
+    "header": {
+      "background": {
+        "$type": "color",
+        "$value": "{gray.90}",
+        "$description": "chat-header-background token"
+      },
+      "text": {
+        "$type": "color",
+        "$value": "{gray.10}",
+        "$description": "chat-header-text token"
+      }
+    },
+    "prompt": {
+      "background": {
+        "$type": "color",
+        "$value": "{gray.100}",
+        "$description": "chat-prompt-background token"
+      },
+      "border": {
+        "end": {
+          "$type": "color",
+          "$value": "{gray.90}",
+          "$description": "chat-prompt-border-end token",
+          "$extensions": {
+            "com.ibm.carbon": {
+              "alphaModifier": 0
+            }
+          }
+        },
+        "start": {
+          "$type": "color",
+          "$value": "{gray.90}",
+          "$description": "chat-prompt-border-start token"
+        }
+      },
+      "text": {
+        "$type": "color",
+        "$value": "{gray.10}",
+        "$description": "chat-prompt-text token"
+      }
+    },
+    "shell": {
+      "background": {
+        "$type": "color",
+        "$value": "{gray.90}",
+        "$description": "chat-shell-background token"
+      }
+    }
+  },
+  "field": {
+    "01": {
+      "$type": "color",
+      "$value": "{gray.90}",
+      "$description": "field-01 token"
+    },
+    "02": {
+      "$type": "color",
+      "$value": "{gray.80}",
+      "$description": "field-02 token"
+    },
+    "03": {
+      "$type": "color",
+      "$value": "{gray.70}",
+      "$description": "field-03 token"
+    },
+    "hover": {
+      "01": {
+        "$type": "color",
+        "$value": "{gray.90Hover}",
+        "$description": "field-hover-01 token"
+      },
+      "02": {
+        "$type": "color",
+        "$value": "{gray.80Hover}",
+        "$description": "field-hover-02 token"
+      },
+      "03": {
+        "$type": "color",
+        "$value": "{gray.70Hover}",
+        "$description": "field-hover-03 token"
+      }
+    }
+  },
+  "focus": {
+    "$type": "color",
+    "$value": "{white.default}",
+    "$description": "focus token",
+    "inset": {
+      "$type": "color",
+      "$value": "{gray.100}",
+      "$description": "focus-inset token"
+    },
+    "inverse": {
+      "$type": "color",
+      "$value": "{blue.60}",
+      "$description": "focus-inverse token"
+    }
+  },
+  "highlight": {
+    "$type": "color",
+    "$value": "{blue.90}",
+    "$description": "highlight token"
+  },
+  "icon": {
+    "disabled": {
+      "$type": "color",
+      "$value": "{gray.10}",
+      "$description": "icon-disabled token",
+      "$extensions": {
+        "com.ibm.carbon": {
+          "alphaModifier": 0.25
+        }
+      }
+    },
+    "interactive": {
+      "$type": "color",
+      "$value": "{white.default}",
+      "$description": "icon-interactive token"
+    },
+    "inverse": {
+      "$type": "color",
+      "$value": "{gray.100}",
+      "$description": "icon-inverse token"
+    },
+    "on": {
+      "color": {
+        "$type": "color",
+        "$value": "{white.default}",
+        "$description": "icon-on-color token",
+        "disabled": {
+          "$type": "color",
+          "$value": "{white.default}",
+          "$description": "icon-on-color-disabled token",
+          "$extensions": {
+            "com.ibm.carbon": {
+              "alphaModifier": 0.25
+            }
+          }
+        }
+      }
+    },
+    "primary": {
+      "$type": "color",
+      "$value": "{gray.10}",
+      "$description": "icon-primary token"
+    },
+    "secondary": {
+      "$type": "color",
+      "$value": "{gray.30}",
+      "$description": "icon-secondary token"
+    }
+  },
+  "interactive": {
+    "$type": "color",
+    "$value": "{blue.50}",
+    "$description": "interactive token"
+  },
+  "layer": {
+    "01": {
+      "$type": "color",
+      "$value": "{gray.90}",
+      "$description": "layer-01 token"
+    },
+    "02": {
+      "$type": "color",
+      "$value": "{gray.80}",
+      "$description": "layer-02 token"
+    },
+    "03": {
+      "$type": "color",
+      "$value": "{gray.70}",
+      "$description": "layer-03 token"
+    },
+    "accent": {
+      "01": {
+        "$type": "color",
+        "$value": "{gray.80}",
+        "$description": "layer-accent-01 token"
+      },
+      "02": {
+        "$type": "color",
+        "$value": "{gray.70}",
+        "$description": "layer-accent-02 token"
+      },
+      "03": {
+        "$type": "color",
+        "$value": "{gray.60}",
+        "$description": "layer-accent-03 token"
+      },
+      "active": {
+        "01": {
+          "$type": "color",
+          "$value": "{gray.60}",
+          "$description": "layer-accent-active-01 token"
+        },
+        "02": {
+          "$type": "color",
+          "$value": "{gray.50}",
+          "$description": "layer-accent-active-02 token"
+        },
+        "03": {
+          "$type": "color",
+          "$value": "{gray.80}",
+          "$description": "layer-accent-active-03 token"
+        }
+      },
+      "hover": {
+        "01": {
+          "$type": "color",
+          "$value": "{gray.80Hover}",
+          "$description": "layer-accent-hover-01 token"
+        },
+        "02": {
+          "$type": "color",
+          "$value": "{gray.70Hover}",
+          "$description": "layer-accent-hover-02 token"
+        },
+        "03": {
+          "$type": "color",
+          "$value": "{gray.60Hover}",
+          "$description": "layer-accent-hover-03 token"
+        }
+      }
+    },
+    "active": {
+      "01": {
+        "$type": "color",
+        "$value": "{gray.70}",
+        "$description": "layer-active-01 token"
+      },
+      "02": {
+        "$type": "color",
+        "$value": "{gray.60}",
+        "$description": "layer-active-02 token"
+      },
+      "03": {
+        "$type": "color",
+        "$value": "{gray.50}",
+        "$description": "layer-active-03 token"
+      }
+    },
+    "background": {
+      "01": {
+        "$type": "color",
+        "$value": "{gray.100}",
+        "$description": "layer-background-01 token"
+      },
+      "02": {
+        "$type": "color",
+        "$value": "{gray.90}",
+        "$description": "layer-background-02 token"
+      },
+      "03": {
+        "$type": "color",
+        "$value": "{gray.80}",
+        "$description": "layer-background-03 token"
+      }
+    },
+    "hover": {
+      "01": {
+        "$type": "color",
+        "$value": "{gray.90Hover}",
+        "$description": "layer-hover-01 token"
+      },
+      "02": {
+        "$type": "color",
+        "$value": "{gray.80Hover}",
+        "$description": "layer-hover-02 token"
+      },
+      "03": {
+        "$type": "color",
+        "$value": "{gray.70Hover}",
+        "$description": "layer-hover-03 token"
+      }
+    },
+    "selected": {
+      "01": {
+        "$type": "color",
+        "$value": "{gray.80}",
+        "$description": "layer-selected-01 token"
+      },
+      "02": {
+        "$type": "color",
+        "$value": "{gray.70}",
+        "$description": "layer-selected-02 token"
+      },
+      "03": {
+        "$type": "color",
+        "$value": "{gray.60}",
+        "$description": "layer-selected-03 token"
+      },
+      "disabled": {
+        "$type": "color",
+        "$value": "{gray.40}",
+        "$description": "layer-selected-disabled token"
+      },
+      "hover": {
+        "01": {
+          "$type": "color",
+          "$value": "{gray.80Hover}",
+          "$description": "layer-selected-hover-01 token"
+        },
+        "02": {
+          "$type": "color",
+          "$value": "{gray.70Hover}",
+          "$description": "layer-selected-hover-02 token"
+        },
+        "03": {
+          "$type": "color",
+          "$value": "{gray.60Hover}",
+          "$description": "layer-selected-hover-03 token"
+        }
+      },
+      "inverse": {
+        "$type": "color",
+        "$value": "{gray.10}",
+        "$description": "layer-selected-inverse token"
+      }
+    }
+  },
+  "link": {
+    "inverse": {
+      "$type": "color",
+      "$value": "{blue.60}",
+      "$description": "link-inverse token",
+      "active": {
+        "$type": "color",
+        "$value": "{gray.100}",
+        "$description": "link-inverse-active token"
+      },
+      "hover": {
+        "$type": "color",
+        "$value": "{blue.70}",
+        "$description": "link-inverse-hover token"
+      },
+      "visited": {
+        "$type": "color",
+        "$value": "{purple.60}",
+        "$description": "link-inverse-visited token"
+      }
+    },
+    "primary": {
+      "$type": "color",
+      "$value": "{blue.40}",
+      "$description": "link-primary token",
+      "hover": {
+        "$type": "color",
+        "$value": "{blue.30}",
+        "$description": "link-primary-hover token"
+      }
+    },
+    "secondary": {
+      "$type": "color",
+      "$value": "{blue.30}",
+      "$description": "link-secondary token"
+    },
+    "visited": {
+      "$type": "color",
+      "$value": "{purple.40}",
+      "$description": "link-visited token"
+    }
+  },
+  "overlay": {
+    "$type": "color",
+    "$value": "{black.default}",
+    "$description": "overlay token",
+    "$extensions": {
+      "com.ibm.carbon": {
+        "alphaModifier": 0.6
+      }
+    }
+  },
+  "shadow": {
+    "$type": "color",
+    "$value": "{black.default}",
+    "$description": "shadow token",
+    "$extensions": {
+      "com.ibm.carbon": {
+        "alphaModifier": 0.8
+      }
+    }
+  },
+  "skeleton": {
+    "background": {
+      "$type": "color",
+      "$value": "{gray.100Hover}",
+      "$description": "skeleton-background token"
+    },
+    "element": {
+      "$type": "color",
+      "$value": "{gray.80}",
+      "$description": "skeleton-element token"
+    }
+  },
+  "support": {
+    "caution": {
+      "major": {
+        "$type": "color",
+        "$value": "{orange.40}",
+        "$description": "support-caution-major token"
+      },
+      "minor": {
+        "$type": "color",
+        "$value": "{yellow.30}",
+        "$description": "support-caution-minor token"
+      },
+      "undefined": {
+        "$type": "color",
+        "$value": "{purple.50}",
+        "$description": "support-caution-undefined token"
+      }
+    },
+    "error": {
+      "$type": "color",
+      "$value": "{red.50}",
+      "$description": "support-error token",
+      "inverse": {
+        "$type": "color",
+        "$value": "{red.60}",
+        "$description": "support-error-inverse token"
+      }
+    },
+    "info": {
+      "$type": "color",
+      "$value": "{blue.50}",
+      "$description": "support-info token",
+      "inverse": {
+        "$type": "color",
+        "$value": "{blue.70}",
+        "$description": "support-info-inverse token"
+      }
+    },
+    "success": {
+      "$type": "color",
+      "$value": "{green.40}",
+      "$description": "support-success token",
+      "inverse": {
+        "$type": "color",
+        "$value": "{green.50}",
+        "$description": "support-success-inverse token"
+      }
+    },
+    "warning": {
+      "$type": "color",
+      "$value": "{yellow.30}",
+      "$description": "support-warning token",
+      "inverse": {
+        "$type": "color",
+        "$value": "{yellow.30}",
+        "$description": "support-warning-inverse token"
+      }
+    }
+  },
+  "syntax": {
+    "angle": {
+      "bracket": {
+        "$type": "color",
+        "$value": "{gray.50}",
+        "$description": "syntax-angle-bracket token"
+      }
+    },
+    "annotation": {
+      "$type": "color",
+      "$value": "{teal.40}",
+      "$description": "syntax-annotation token"
+    },
+    "arithmetic": {
+      "operator": {
+        "$type": "color",
+        "$value": "{gray.20}",
+        "$description": "syntax-arithmetic-operator token"
+      }
+    },
+    "atom": {
+      "$type": "color",
+      "$value": "{gray.10}",
+      "$description": "syntax-atom token"
+    },
+    "attribute": {
+      "$type": "color",
+      "$value": "{cyan.40}",
+      "$description": "syntax-attribute token",
+      "name": {
+        "$type": "color",
+        "$value": "{cyan.40}",
+        "$description": "syntax-attribute-name token"
+      },
+      "value": {
+        "$type": "color",
+        "$value": "{gray.10}",
+        "$description": "syntax-attribute-value token"
+      }
+    },
+    "bitwise": {
+      "operator": {
+        "$type": "color",
+        "$value": "{gray.20}",
+        "$description": "syntax-bitwise-operator token"
+      }
+    },
+    "block": {
+      "comment": {
+        "$type": "color",
+        "$value": "{green.40}",
+        "$description": "syntax-block-comment token"
+      }
+    },
+    "bool": {
+      "$type": "color",
+      "$value": "{gray.10}",
+      "$description": "syntax-bool token"
+    },
+    "brace": {
+      "$type": "color",
+      "$value": "{gray.20}",
+      "$description": "syntax-brace token"
+    },
+    "bracket": {
+      "$type": "color",
+      "$value": "{gray.20}",
+      "$description": "syntax-bracket token"
+    },
+    "character": {
+      "$type": "color",
+      "$value": "{gray.10}",
+      "$description": "syntax-character token"
+    },
+    "class": {
+      "name": {
+        "$type": "color",
+        "$value": "{teal.30}",
+        "$description": "syntax-class-name token"
+      }
+    },
+    "color": {
+      "$type": "color",
+      "$value": "{gray.10}",
+      "$description": "syntax-color token"
+    },
+    "comment": {
+      "$type": "color",
+      "$value": "{green.40}",
+      "$description": "syntax-comment token"
+    },
+    "compare": {
+      "operator": {
+        "$type": "color",
+        "$value": "{gray.20}",
+        "$description": "syntax-compare-operator token"
+      }
+    },
+    "constant": {
+      "$type": "color",
+      "$value": "{blue.50}",
+      "$description": "syntax-constant token"
+    },
+    "content": {
+      "$type": "color",
+      "$value": "{gray.10}",
+      "$description": "syntax-content token",
+      "separator": {
+        "$type": "color",
+        "$value": "{gray.20}",
+        "$description": "syntax-content-separator token"
+      }
+    },
+    "control": {
+      "keyword": {
+        "$type": "color",
+        "$value": "{purple.40}",
+        "$description": "syntax-control-keyword token"
+      },
+      "operator": {
+        "$type": "color",
+        "$value": "{purple.40}",
+        "$description": "syntax-control-operator token"
+      }
+    },
+    "definition": {
+      "$type": "color",
+      "$value": "{cyan.40}",
+      "$description": "syntax-definition token",
+      "keyword": {
+        "$type": "color",
+        "$value": "{cyan.40}",
+        "$description": "syntax-definition-keyword token"
+      },
+      "operator": {
+        "$type": "color",
+        "$value": "{cyan.40}",
+        "$description": "syntax-definition-operator token"
+      }
+    },
+    "deleted": {
+      "$type": "color",
+      "$value": "{red.70}",
+      "$description": "syntax-deleted token"
+    },
+    "deref": {
+      "operator": {
+        "$type": "color",
+        "$value": "{gray.20}",
+        "$description": "syntax-deref-operator token"
+      }
+    },
+    "doc": {
+      "comment": {
+        "$type": "color",
+        "$value": "{green.40}",
+        "$description": "syntax-doc-comment token"
+      },
+      "string": {
+        "$type": "color",
+        "$value": "{gray.10}",
+        "$description": "syntax-doc-string token"
+      }
+    },
+    "document": {
+      "meta": {
+        "$type": "color",
+        "$value": "{green.40}",
+        "$description": "syntax-document-meta token"
+      }
+    },
+    "emphasis": {
+      "$type": "color",
+      "$value": "{gray.10}",
+      "$description": "syntax-emphasis token"
+    },
+    "escape": {
+      "$type": "color",
+      "$value": "{gray.20}",
+      "$description": "syntax-escape token"
+    },
+    "float": {
+      "$type": "color",
+      "$value": "{green.30}",
+      "$description": "syntax-float token"
+    },
+    "function": {
+      "$type": "color",
+      "$value": "{yellow.30}",
+      "$description": "syntax-function token"
+    },
+    "heading": {
+      "1": {
+        "$type": "color",
+        "$value": "{cyan.40}",
+        "$description": "syntax-heading-1 token"
+      },
+      "2": {
+        "$type": "color",
+        "$value": "{cyan.40}",
+        "$description": "syntax-heading-2 token"
+      },
+      "3": {
+        "$type": "color",
+        "$value": "{cyan.40}",
+        "$description": "syntax-heading-3 token"
+      },
+      "4": {
+        "$type": "color",
+        "$value": "{cyan.40}",
+        "$description": "syntax-heading-4 token"
+      },
+      "5": {
+        "$type": "color",
+        "$value": "{cyan.40}",
+        "$description": "syntax-heading-5 token"
+      },
+      "6": {
+        "$type": "color",
+        "$value": "{cyan.40}",
+        "$description": "syntax-heading-6 token"
+      },
+      "$type": "color",
+      "$value": "{cyan.40}",
+      "$description": "syntax-heading token"
+    },
+    "inserted": {
+      "$type": "color",
+      "$value": "{green.60}",
+      "$description": "syntax-inserted token"
+    },
+    "integer": {
+      "$type": "color",
+      "$value": "{green.30}",
+      "$description": "syntax-integer token"
+    },
+    "invalid": {
+      "$type": "color",
+      "$value": "{red.50}",
+      "$description": "syntax-invalid token"
+    },
+    "keyword": {
+      "$type": "color",
+      "$value": "{blue.50}",
+      "$description": "syntax-keyword token"
+    },
+    "label": {
+      "name": {
+        "$type": "color",
+        "$value": "{blue.30}",
+        "$description": "syntax-label-name token"
+      }
+    },
+    "line": {
+      "comment": {
+        "$type": "color",
+        "$value": "{green.40}",
+        "$description": "syntax-line-comment token"
+      }
+    },
+    "link": {
+      "$type": "color",
+      "$value": "{blue.50}",
+      "$description": "syntax-link token"
+    },
+    "list": {
+      "$type": "color",
+      "$value": "{gray.10}",
+      "$description": "syntax-list token"
+    },
+    "literal": {
+      "$type": "color",
+      "$value": "{gray.10}",
+      "$description": "syntax-literal token"
+    },
+    "local": {
+      "$type": "color",
+      "$value": "{blue.30}",
+      "$description": "syntax-local token"
+    },
+    "logic": {
+      "operator": {
+        "$type": "color",
+        "$value": "{gray.20}",
+        "$description": "syntax-logic-operator token"
+      }
+    },
+    "macro": {
+      "name": {
+        "$type": "color",
+        "$value": "{gray.10}",
+        "$description": "syntax-macro-name token"
+      }
+    },
+    "meta": {
+      "$type": "color",
+      "$value": "{green.40}",
+      "$description": "syntax-meta token"
+    },
+    "modifier": {
+      "$type": "color",
+      "$value": "{blue.50}",
+      "$description": "syntax-modifier token"
+    },
+    "module": {
+      "keyword": {
+        "$type": "color",
+        "$value": "{purple.40}",
+        "$description": "syntax-module-keyword token"
+      }
+    },
+    "monospace": {
+      "$type": "color",
+      "$value": "{gray.10}",
+      "$description": "syntax-monospace token"
+    },
+    "name": {
+      "$type": "color",
+      "$value": "{blue.30}",
+      "$description": "syntax-name token"
+    },
+    "namespace": {
+      "$type": "color",
+      "$value": "{teal.30}",
+      "$description": "syntax-namespace token"
+    },
+    "null": {
+      "$type": "color",
+      "$value": "{gray.10}",
+      "$description": "syntax-null token"
+    },
+    "number": {
+      "$type": "color",
+      "$value": "{green.30}",
+      "$description": "syntax-number token"
+    },
+    "operator": {
+      "$type": "color",
+      "$value": "{gray.20}",
+      "$description": "syntax-operator token",
+      "keyword": {
+        "$type": "color",
+        "$value": "{blue.50}",
+        "$description": "syntax-operator-keyword token"
+      }
+    },
+    "paren": {
+      "$type": "color",
+      "$value": "{gray.20}",
+      "$description": "syntax-paren token"
+    },
+    "processing": {
+      "instruction": {
+        "$type": "color",
+        "$value": "{gray.10}",
+        "$description": "syntax-processing-instruction token"
+      }
+    },
+    "property": {
+      "name": {
+        "$type": "color",
+        "$value": "{cyan.40}",
+        "$description": "syntax-property-name token"
+      }
+    },
+    "punctuation": {
+      "$type": "color",
+      "$value": "{gray.20}",
+      "$description": "syntax-punctuation token"
+    },
+    "quote": {
+      "$type": "color",
+      "$value": "{green.40}",
+      "$description": "syntax-quote token"
+    },
+    "regexp": {
+      "$type": "color",
+      "$value": "{purple.40}",
+      "$description": "syntax-regexp token"
+    },
+    "self": {
+      "$type": "color",
+      "$value": "{teal.30}",
+      "$description": "syntax-self token"
+    },
+    "separator": {
+      "$type": "color",
+      "$value": "{gray.20}",
+      "$description": "syntax-separator token"
+    },
+    "special": {
+      "$type": "color",
+      "$value": "{blue.50}",
+      "$description": "syntax-special token",
+      "string": {
+        "$type": "color",
+        "$value": "{purple.40}",
+        "$description": "syntax-special-string token"
+      }
+    },
+    "square": {
+      "bracket": {
+        "$type": "color",
+        "$value": "{gray.20}",
+        "$description": "syntax-square-bracket token"
+      }
+    },
+    "standard": {
+      "$type": "color",
+      "$value": "{blue.50}",
+      "$description": "syntax-standard token"
+    },
+    "strikethrough": {
+      "$type": "color",
+      "$value": "{gray.10}",
+      "$description": "syntax-strikethrough token"
+    },
+    "string": {
+      "$type": "color",
+      "$value": "{gray.10}",
+      "$description": "syntax-string token"
+    },
+    "strong": {
+      "$type": "color",
+      "$value": "{gray.10}",
+      "$description": "syntax-strong token"
+    },
+    "tag": {
+      "$type": "color",
+      "$value": "{teal.30}",
+      "$description": "syntax-tag token",
+      "name": {
+        "$type": "color",
+        "$value": "{teal.30}",
+        "$description": "syntax-tag-name token"
+      }
+    },
+    "type": {
+      "$type": "color",
+      "$value": "{teal.30}",
+      "$description": "syntax-type token",
+      "name": {
+        "$type": "color",
+        "$value": "{teal.30}",
+        "$description": "syntax-type-name token"
+      },
+      "operator": {
+        "$type": "color",
+        "$value": "{teal.30}",
+        "$description": "syntax-type-operator token"
+      }
+    },
+    "unit": {
+      "$type": "color",
+      "$value": "{green.30}",
+      "$description": "syntax-unit token"
+    },
+    "update": {
+      "operator": {
+        "$type": "color",
+        "$value": "{gray.20}",
+        "$description": "syntax-update-operator token"
+      }
+    },
+    "url": {
+      "$type": "color",
+      "$value": "{gray.20}",
+      "$description": "syntax-url token"
+    },
+    "variable": {
+      "$type": "color",
+      "$value": "{blue.30}",
+      "$description": "syntax-variable token",
+      "name": {
+        "$type": "color",
+        "$value": "{blue.30}",
+        "$description": "syntax-variable-name token"
+      }
+    }
+  },
+  "text": {
+    "disabled": {
+      "$type": "color",
+      "$value": "{gray.10}",
+      "$description": "text-disabled token",
+      "$extensions": {
+        "com.ibm.carbon": {
+          "alphaModifier": 0.25
+        }
+      }
+    },
+    "error": {
+      "$type": "color",
+      "$value": "{red.40}",
+      "$description": "text-error token"
+    },
+    "helper": {
+      "$type": "color",
+      "$value": "{gray.40}",
+      "$description": "text-helper token"
+    },
+    "inverse": {
+      "$type": "color",
+      "$value": "{gray.100}",
+      "$description": "text-inverse token"
+    },
+    "on": {
+      "color": {
+        "$type": "color",
+        "$value": "{white.default}",
+        "$description": "text-on-color token",
+        "disabled": {
+          "$type": "color",
+          "$value": "{white.default}",
+          "$description": "text-on-color-disabled token",
+          "$extensions": {
+            "com.ibm.carbon": {
+              "alphaModifier": 0.25
+            }
+          }
+        }
+      }
+    },
+    "placeholder": {
+      "$type": "color",
+      "$value": "{gray.10}",
+      "$description": "text-placeholder token",
+      "$extensions": {
+        "com.ibm.carbon": {
+          "alphaModifier": 0.4
+        }
+      }
+    },
+    "primary": {
+      "$type": "color",
+      "$value": "{gray.10}",
+      "$description": "text-primary token"
+    },
+    "secondary": {
+      "$type": "color",
+      "$value": "{gray.30}",
+      "$description": "text-secondary token"
+    }
+  },
+  "toggle": {
+    "off": {
+      "$type": "color",
+      "$value": "{gray.60}",
+      "$description": "toggle-off token"
+    }
+  }
+}

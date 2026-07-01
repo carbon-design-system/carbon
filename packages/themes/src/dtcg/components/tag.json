@@ -1,0 +1,486 @@
+{
+  "$schema": "https://tr.designtokens.org/format/",
+  "$description": "tag component tokens",
+  "tag": {
+    "background-blue": {
+      "$type": "color",
+      "$description": "background-blue token",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "{blue.20}",
+          "g10": "{blue.20}",
+          "g90": "{blue.70}",
+          "g100": "{blue.70}"
+        }
+      }
+    },
+    "background-cool-gray": {
+      "$type": "color",
+      "$description": "background-cool-gray token",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "{coolGray.20}",
+          "g10": "{coolGray.20}",
+          "g90": "{coolGray.70}",
+          "g100": "{coolGray.70}"
+        }
+      }
+    },
+    "background-cyan": {
+      "$type": "color",
+      "$description": "background-cyan token",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "{cyan.20}",
+          "g10": "{cyan.20}",
+          "g90": "{cyan.70}",
+          "g100": "{cyan.70}"
+        }
+      }
+    },
+    "background-gray": {
+      "$type": "color",
+      "$description": "background-gray token",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "{gray.20}",
+          "g10": "{gray.20}",
+          "g90": "{gray.70}",
+          "g100": "{gray.70}"
+        }
+      }
+    },
+    "background-green": {
+      "$type": "color",
+      "$description": "background-green token",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "{green.20}",
+          "g10": "{green.20}",
+          "g90": "{green.70}",
+          "g100": "{green.70}"
+        }
+      }
+    },
+    "background-magenta": {
+      "$type": "color",
+      "$description": "background-magenta token",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "{magenta.20}",
+          "g10": "{magenta.20}",
+          "g90": "{magenta.70}",
+          "g100": "{magenta.70}"
+        }
+      }
+    },
+    "background-purple": {
+      "$type": "color",
+      "$description": "background-purple token",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "{purple.20}",
+          "g10": "{purple.20}",
+          "g90": "{purple.70}",
+          "g100": "{purple.70}"
+        }
+      }
+    },
+    "background-red": {
+      "$type": "color",
+      "$description": "background-red token",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "{red.20}",
+          "g10": "{red.20}",
+          "g90": "{red.70}",
+          "g100": "{red.70}"
+        }
+      }
+    },
+    "background-teal": {
+      "$type": "color",
+      "$description": "background-teal token",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "{teal.20}",
+          "g10": "{teal.20}",
+          "g90": "{teal.70}",
+          "g100": "{teal.70}"
+        }
+      }
+    },
+    "background-warm-gray": {
+      "$type": "color",
+      "$description": "background-warm-gray token",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "{warmGray.20}",
+          "g10": "{warmGray.20}",
+          "g90": "{warmGray.70}",
+          "g100": "{warmGray.70}"
+        }
+      }
+    },
+    "border-blue": {
+      "$type": "color",
+      "$description": "border-blue token",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "{blue.40}",
+          "g10": "{blue.40}",
+          "g90": "{blue.50}",
+          "g100": "{blue.50}"
+        }
+      }
+    },
+    "border-cool-gray": {
+      "$type": "color",
+      "$description": "border-cool-gray token",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "{coolGray.40}",
+          "g10": "{coolGray.40}",
+          "g90": "{coolGray.50}",
+          "g100": "{coolGray.50}"
+        }
+      }
+    },
+    "border-cyan": {
+      "$type": "color",
+      "$description": "border-cyan token",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "{cyan.40}",
+          "g10": "{cyan.40}",
+          "g90": "{cyan.50}",
+          "g100": "{cyan.50}"
+        }
+      }
+    },
+    "border-gray": {
+      "$type": "color",
+      "$description": "border-gray token",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "{gray.40}",
+          "g10": "{gray.40}",
+          "g90": "{gray.50}",
+          "g100": "{gray.50}"
+        }
+      }
+    },
+    "border-green": {
+      "$type": "color",
+      "$description": "border-green token",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "{green.40}",
+          "g10": "{green.40}",
+          "g90": "{green.50}",
+          "g100": "{green.50}"
+        }
+      }
+    },
+    "border-magenta": {
+      "$type": "color",
+      "$description": "border-magenta token",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "{magenta.40}",
+          "g10": "{magenta.40}",
+          "g90": "{magenta.50}",
+          "g100": "{magenta.50}"
+        }
+      }
+    },
+    "border-purple": {
+      "$type": "color",
+      "$description": "border-purple token",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "{purple.40}",
+          "g10": "{purple.40}",
+          "g90": "{purple.50}",
+          "g100": "{purple.50}"
+        }
+      }
+    },
+    "border-red": {
+      "$type": "color",
+      "$description": "border-red token",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "{red.40}",
+          "g10": "{red.40}",
+          "g90": "{red.50}",
+          "g100": "{red.50}"
+        }
+      }
+    },
+    "border-teal": {
+      "$type": "color",
+      "$description": "border-teal token",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "{teal.40}",
+          "g10": "{teal.40}",
+          "g90": "{teal.50}",
+          "g100": "{teal.50}"
+        }
+      }
+    },
+    "border-warm-gray": {
+      "$type": "color",
+      "$description": "border-warm-gray token",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "{warmGray.40}",
+          "g10": "{warmGray.40}",
+          "g90": "{warmGray.50}",
+          "g100": "{warmGray.50}"
+        }
+      }
+    },
+    "color-blue": {
+      "$type": "color",
+      "$description": "color-blue token",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "{blue.70}",
+          "g10": "{blue.70}",
+          "g90": "{blue.20}",
+          "g100": "{blue.20}"
+        }
+      }
+    },
+    "color-cool-gray": {
+      "$type": "color",
+      "$description": "color-cool-gray token",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "{coolGray.100}",
+          "g10": "{coolGray.100}",
+          "g90": "{coolGray.10}",
+          "g100": "{coolGray.10}"
+        }
+      }
+    },
+    "color-cyan": {
+      "$type": "color",
+      "$description": "color-cyan token",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "{cyan.70}",
+          "g10": "{cyan.70}",
+          "g90": "{cyan.20}",
+          "g100": "{cyan.20}"
+        }
+      }
+    },
+    "color-gray": {
+      "$type": "color",
+      "$description": "color-gray token",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "{gray.100}",
+          "g10": "{gray.100}",
+          "g90": "{gray.10}",
+          "g100": "{gray.10}"
+        }
+      }
+    },
+    "color-green": {
+      "$type": "color",
+      "$description": "color-green token",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "{green.70}",
+          "g10": "{green.70}",
+          "g90": "{green.20}",
+          "g100": "{green.20}"
+        }
+      }
+    },
+    "color-magenta": {
+      "$type": "color",
+      "$description": "color-magenta token",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "{magenta.70}",
+          "g10": "{magenta.70}",
+          "g90": "{magenta.20}",
+          "g100": "{magenta.20}"
+        }
+      }
+    },
+    "color-purple": {
+      "$type": "color",
+      "$description": "color-purple token",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "{purple.70}",
+          "g10": "{purple.70}",
+          "g90": "{purple.20}",
+          "g100": "{purple.20}"
+        }
+      }
+    },
+    "color-red": {
+      "$type": "color",
+      "$description": "color-red token",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "{red.70}",
+          "g10": "{red.70}",
+          "g90": "{red.20}",
+          "g100": "{red.20}"
+        }
+      }
+    },
+    "color-teal": {
+      "$type": "color",
+      "$description": "color-teal token",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "{teal.70}",
+          "g10": "{teal.70}",
+          "g90": "{teal.20}",
+          "g100": "{teal.20}"
+        }
+      }
+    },
+    "color-warm-gray": {
+      "$type": "color",
+      "$description": "color-warm-gray token",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "{warmGray.100}",
+          "g10": "{warmGray.100}",
+          "g90": "{warmGray.10}",
+          "g100": "{warmGray.10}"
+        }
+      }
+    },
+    "hover-blue": {
+      "$type": "color",
+      "$description": "hover-blue token",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "{blue.20Hover}",
+          "g10": "{blue.20Hover}",
+          "g90": "{blue.70Hover}",
+          "g100": "{blue.70Hover}"
+        }
+      }
+    },
+    "hover-cool-gray": {
+      "$type": "color",
+      "$description": "hover-cool-gray token",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "{coolGray.20Hover}",
+          "g10": "{coolGray.20Hover}",
+          "g90": "{coolGray.70Hover}",
+          "g100": "{coolGray.70Hover}"
+        }
+      }
+    },
+    "hover-cyan": {
+      "$type": "color",
+      "$description": "hover-cyan token",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "{cyan.20Hover}",
+          "g10": "{cyan.20Hover}",
+          "g90": "{cyan.70Hover}",
+          "g100": "{cyan.70Hover}"
+        }
+      }
+    },
+    "hover-gray": {
+      "$type": "color",
+      "$description": "hover-gray token",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "{gray.20Hover}",
+          "g10": "{gray.20Hover}",
+          "g90": "{gray.70Hover}",
+          "g100": "{gray.70Hover}"
+        }
+      }
+    },
+    "hover-green": {
+      "$type": "color",
+      "$description": "hover-green token",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "{green.20Hover}",
+          "g10": "{green.20Hover}",
+          "g90": "{green.70Hover}",
+          "g100": "{green.70Hover}"
+        }
+      }
+    },
+    "hover-magenta": {
+      "$type": "color",
+      "$description": "hover-magenta token",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "{magenta.20Hover}",
+          "g10": "{magenta.20Hover}",
+          "g90": "{magenta.70Hover}",
+          "g100": "{magenta.70Hover}"
+        }
+      }
+    },
+    "hover-purple": {
+      "$type": "color",
+      "$description": "hover-purple token",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "{purple.20Hover}",
+          "g10": "{purple.20Hover}",
+          "g90": "{purple.70Hover}",
+          "g100": "{purple.70Hover}"
+        }
+      }
+    },
+    "hover-red": {
+      "$type": "color",
+      "$description": "hover-red token",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "{red.20Hover}",
+          "g10": "{red.20Hover}",
+          "g90": "{red.70Hover}",
+          "g100": "{red.70Hover}"
+        }
+      }
+    },
+    "hover-teal": {
+      "$type": "color",
+      "$description": "hover-teal token",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "{teal.20Hover}",
+          "g10": "{teal.20Hover}",
+          "g90": "{teal.70Hover}",
+          "g100": "{teal.70Hover}"
+        }
+      }
+    },
+    "hover-warm-gray": {
+      "$type": "color",
+      "$description": "hover-warm-gray token",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "{warmGray.20Hover}",
+          "g10": "{warmGray.20Hover}",
+          "g90": "{warmGray.70Hover}",
+          "g100": "{warmGray.70Hover}"
+        }
+      }
+    }
+  }
+}

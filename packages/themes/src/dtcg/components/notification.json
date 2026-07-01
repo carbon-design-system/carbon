@@ -1,0 +1,130 @@
+{
+  "$schema": "https://tr.designtokens.org/format/",
+  "$description": "notification component tokens",
+  "notification": {
+    "action-hover": {
+      "$type": "color",
+      "$description": "action-hover token",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "{white.default}",
+          "g10": "{white.default}"
+        }
+      }
+    },
+    "action-tertiary-inverse": {
+      "$type": "color",
+      "$description": "action-tertiary-inverse token",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "{white.default}",
+          "g10": "{white.default}",
+          "g90": "{blue.60}",
+          "g100": "{blue.60}"
+        }
+      }
+    },
+    "action-tertiary-inverse-active": {
+      "$type": "color",
+      "$description": "action-tertiary-inverse-active token",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "{gray.30}",
+          "g10": "{gray.30}",
+          "g90": "{blue.80}",
+          "g100": "{blue.80}"
+        }
+      }
+    },
+    "action-tertiary-inverse-hover": {
+      "$type": "color",
+      "$description": "action-tertiary-inverse-hover token",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "{gray.10}",
+          "g10": "{gray.10}",
+          "g90": "{blue.60Hover}",
+          "g100": "{blue.60Hover}"
+        }
+      }
+    },
+    "action-tertiary-inverse-text": {
+      "$type": "color",
+      "$description": "action-tertiary-inverse-text token",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "{gray.100}",
+          "g10": "{gray.100}",
+          "g90": "{white.default}",
+          "g100": "{white.default}"
+        }
+      }
+    },
+    "action-tertiary-inverse-text-on-color-disabled": {
+      "$type": "color",
+      "$description": "action-tertiary-inverse-text-on-color-disabled token",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "{white.default}",
+          "g10": "{white.default}",
+          "g90": "{gray.50}",
+          "g100": "{gray.50}"
+        },
+        "com.ibm.carbon": {
+          "alphaModifiers": {
+            "white": 0.25,
+            "g10": 0.25
+          }
+        }
+      }
+    },
+    "background-error": {
+      "$type": "color",
+      "$description": "background-error token",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "{red.10}",
+          "g10": "{red.10}",
+          "g90": "{gray.80}",
+          "g100": "{gray.90}"
+        }
+      }
+    },
+    "background-info": {
+      "$type": "color",
+      "$description": "background-info token",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "{blue.10}",
+          "g10": "{blue.10}",
+          "g90": "{gray.80}",
+          "g100": "{gray.90}"
+        }
+      }
+    },
+    "background-success": {
+      "$type": "color",
+      "$description": "background-success token",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "{green.10}",
+          "g10": "{green.10}",
+          "g90": "{gray.80}",
+          "g100": "{gray.90}"
+        }
+      }
+    },
+    "background-warning": {
+      "$type": "color",
+      "$description": "background-warning token",
+      "$extensions": {
+        "carbon.themes": {
+          "white": "{yellow.10}",
+          "g10": "{yellow.10}",
+          "g90": "{gray.80}",
+          "g100": "{gray.90}"
+        }
+      }
+    }
+  }
+}

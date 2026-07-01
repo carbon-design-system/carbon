@@ -28,9 +28,11 @@
   },
   "scripts": {
     "ci-check": "carbon-cli check \"scss/**/*.scss\" -i \"**/generated/**\" -i \"**/compat/**\"",
-    "clean": "rimraf es lib umd scss/generated scss/compat/generated",
+    "clean": "rimraf es lib umd scss/compat/generated scss/generated js/generated",
     "build:types": "tsc -p tsconfig.types.json",
-    "build": "yarn clean && carbon-cli bundle src/index.ts --name CarbonThemes && babel-node --extensions '.js,.ts' --presets '@babel/preset-env,@babel/preset-typescript' tasks/build.js && yarn build:types && carbon-cli check \"scss/*.scss\"",
+    "build:js-tokens": "babel-node --extensions '.js,.ts' --presets '@babel/preset-env,@babel/preset-typescript' tasks/generate-js-tokens.js",
+    "build": "yarn clean && yarn build:js-tokens && carbon-cli bundle src/index.ts --name CarbonThemes && babel-node --extensions '.js,.ts' --presets '@babel/preset-env,@babel/preset-typescript' tasks/build.js && yarn build:types && carbon-cli check \"scss/*.scss\"",
+    "test:dtcg": "jest __tests__/dtcg-schema-validation-test.js",
     "postinstall": "ibmtelemetry --config=telemetry.yml"
   },
   "dependencies": {
@@ -48,6 +50,9 @@
     "@carbon/scss-generator": "^10.20.0",
     "@carbon/test-utils": "^10.41.0",
     "@types/color": "^4.2.1",
+    "ajv": "^8.20.0",
+    "ajv-formats": "^3.0.1",
+    "axios": "^1.18.1",
     "change-case-all": "^2.1.0",
     "core-js": "^3.16.0",
     "fs-extra": "^11.0.0",
