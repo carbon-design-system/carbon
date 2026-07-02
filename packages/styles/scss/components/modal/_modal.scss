@@ -363,8 +363,10 @@
     inline-size: 3rem;
     transition: background-color $duration-fast-02 motion(standard, productive);
 
-    &:hover {
-      background-color: $layer-hover;
+    @media (any-hover: hover) {
+      &:hover {
+        background-color: $layer-hover;
+      }
     }
 
     &:focus {
