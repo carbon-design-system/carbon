@@ -1,4 +1,7 @@
 {
   "extends": "typescript-config-carbon/tsconfig.base.json",
+  "compilerOptions": {
+    "rootDir": "./src"
+  },
   "include": ["src/**/*"]
 }
