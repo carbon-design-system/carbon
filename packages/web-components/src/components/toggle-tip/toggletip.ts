@@ -216,7 +216,7 @@ class CDSToggletip extends HostListenerMixin(FocusMixin(LitElement)) {
         this.popoverController?.setPlacement({
           trigger: this._toggletipButton,
           target: this._toggletipContent,
-          arrowElement: this._toggletipCaret as HTMLElement,
+          arrowElement: this._toggletipCaret,
           caret: true,
           flipArguments: { fallbackAxisSideDirection: 'start' },
           alignment: this.alignment,
