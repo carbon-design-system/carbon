@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2016, 2023
+// Copyright IBM Corp. 2016, 2026
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -198,7 +198,7 @@
       background $duration-fast-02 motion(standard, productive),
       box-shadow $duration-fast-02 motion(standard, productive);
 
-    @media (hover: hover) {
+    @media (any-hover: hover) {
       &:hover {
         // 20px / 14px = 1.4286
         transform: scale(1.4286);
@@ -250,7 +250,7 @@
       inset-inline-end: 0;
     }
 
-    @media (hover: hover) {
+    @media (any-hover: hover) {
       &:hover {
         transform: none;
 
@@ -298,7 +298,7 @@
       transform: none;
     }
 
-    @media (hover: hover) {
+    @media (any-hover: hover) {
       &:hover {
         transform: none;
       }
@@ -385,7 +385,7 @@
   .#{$prefix}--slider--disabled .#{$prefix}--slider__thumb {
     background-color: $border-disabled;
 
-    @media (hover: hover) {
+    @media (any-hover: hover) {
       &:hover {
         cursor: not-allowed;
         transform: none;
@@ -416,7 +416,7 @@
       transform: none;
     }
 
-    @media (hover: hover) {
+    @media (any-hover: hover) {
       &:hover {
         background-color: transparent;
         transform: none;
@@ -452,7 +452,7 @@
       outline: none;
     }
 
-    @media (hover: hover) {
+    @media (any-hover: hover) {
       &:hover {
         color: $text-disabled;
         outline: none;
