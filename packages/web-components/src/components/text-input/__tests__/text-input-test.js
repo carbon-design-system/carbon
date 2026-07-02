@@ -302,4 +302,212 @@ describe('cds-text-input', () => {
     expect(wrapper.classList.contains('cds--text-input-wrapper--inline')).to.be
       .true;
   });
+
+  describe('invalid and warn states are suppressed when not interactive', () => {
+    describe('disabled', () => {
+      it('should not apply invalid CSS class when disabled', async () => {
+        const el = await fixture(html`
+          <cds-text-input
+            disabled
+            invalid
+            invalid-text="Some error"
+            label-text="TextInput"></cds-text-input>
+        `);
+        await el.updateComplete;
+        const input = el.shadowRoot.querySelector('input');
+        expect(input.classList.contains('cds--text-input--invalid')).to.be
+          .false;
+      });
+
+      it('should not render the invalid icon when disabled', async () => {
+        const el = await fixture(html`
+          <cds-text-input
+            disabled
+            invalid
+            invalid-text="Some error"
+            label-text="TextInput"></cds-text-input>
+        `);
+        await el.updateComplete;
+        const icon = el.shadowRoot.querySelector(
+          '.cds--text-input__invalid-icon:not(.cds--text-input__invalid-icon--warning)'
+        );
+        expect(icon).to.not.exist;
+      });
+
+      it('should hide the invalid message when disabled', async () => {
+        const el = await fixture(html`
+          <cds-text-input
+            disabled
+            invalid
+            invalid-text="Some error"
+            label-text="TextInput"></cds-text-input>
+        `);
+        await el.updateComplete;
+        const requirement = el.shadowRoot.querySelector(
+          '.cds--form-requirement'
+        );
+        expect(requirement).to.not.exist;
+      });
+
+      it('should not set data-invalid on the input when disabled', async () => {
+        const el = await fixture(html`
+          <cds-text-input
+            disabled
+            invalid
+            invalid-text="Some error"
+            label-text="TextInput"></cds-text-input>
+        `);
+        await el.updateComplete;
+        const input = el.shadowRoot.querySelector('input');
+        expect(input.hasAttribute('data-invalid')).to.be.false;
+      });
+
+      it('should not apply warn CSS class when disabled', async () => {
+        const el = await fixture(html`
+          <cds-text-input
+            disabled
+            warn
+            warn-text="Some warning"
+            label-text="TextInput"></cds-text-input>
+        `);
+        await el.updateComplete;
+        const input = el.shadowRoot.querySelector('input');
+        expect(input.classList.contains('cds--text-input--warning')).to.be
+          .false;
+      });
+
+      it('should not render the warn icon when disabled', async () => {
+        const el = await fixture(html`
+          <cds-text-input
+            disabled
+            warn
+            warn-text="Some warning"
+            label-text="TextInput"></cds-text-input>
+        `);
+        await el.updateComplete;
+        const icon = el.shadowRoot.querySelector(
+          '.cds--text-input__invalid-icon--warning'
+        );
+        expect(icon).to.not.exist;
+      });
+
+      it('should hide the warn message when disabled', async () => {
+        const el = await fixture(html`
+          <cds-text-input
+            disabled
+            warn
+            warn-text="Some warning"
+            label-text="TextInput"></cds-text-input>
+        `);
+        await el.updateComplete;
+        const requirement = el.shadowRoot.querySelector(
+          '.cds--form-requirement'
+        );
+        expect(requirement).to.not.exist;
+      });
+    });
+
+    describe('readonly', () => {
+      it('should not apply invalid CSS class when readonly', async () => {
+        const el = await fixture(html`
+          <cds-text-input
+            readonly
+            invalid
+            invalid-text="Some error"
+            label-text="TextInput"></cds-text-input>
+        `);
+        await el.updateComplete;
+        const input = el.shadowRoot.querySelector('input');
+        expect(input.classList.contains('cds--text-input--invalid')).to.be
+          .false;
+      });
+
+      it('should not render the invalid icon when readonly', async () => {
+        const el = await fixture(html`
+          <cds-text-input
+            readonly
+            invalid
+            invalid-text="Some error"
+            label-text="TextInput"></cds-text-input>
+        `);
+        await el.updateComplete;
+        const icon = el.shadowRoot.querySelector(
+          '.cds--text-input__invalid-icon:not(.cds--text-input__invalid-icon--warning)'
+        );
+        expect(icon).to.not.exist;
+      });
+
+      it('should hide the invalid message when readonly', async () => {
+        const el = await fixture(html`
+          <cds-text-input
+            readonly
+            invalid
+            invalid-text="Some error"
+            label-text="TextInput"></cds-text-input>
+        `);
+        await el.updateComplete;
+        const requirement = el.shadowRoot.querySelector(
+          '.cds--form-requirement'
+        );
+        expect(requirement).to.not.exist;
+      });
+
+      it('should not set data-invalid on the input when readonly', async () => {
+        const el = await fixture(html`
+          <cds-text-input
+            readonly
+            invalid
+            invalid-text="Some error"
+            label-text="TextInput"></cds-text-input>
+        `);
+        await el.updateComplete;
+        const input = el.shadowRoot.querySelector('input');
+        expect(input.hasAttribute('data-invalid')).to.be.false;
+      });
+
+      it('should not apply warn CSS class when readonly', async () => {
+        const el = await fixture(html`
+          <cds-text-input
+            readonly
+            warn
+            warn-text="Some warning"
+            label-text="TextInput"></cds-text-input>
+        `);
+        await el.updateComplete;
+        const input = el.shadowRoot.querySelector('input');
+        expect(input.classList.contains('cds--text-input--warning')).to.be
+          .false;
+      });
+
+      it('should not render the warn icon when readonly', async () => {
+        const el = await fixture(html`
+          <cds-text-input
+            readonly
+            warn
+            warn-text="Some warning"
+            label-text="TextInput"></cds-text-input>
+        `);
+        await el.updateComplete;
+        const icon = el.shadowRoot.querySelector(
+          '.cds--text-input__invalid-icon--warning'
+        );
+        expect(icon).to.not.exist;
+      });
+
+      it('should hide the warn message when readonly', async () => {
+        const el = await fixture(html`
+          <cds-text-input
+            readonly
+            warn
+            warn-text="Some warning"
+            label-text="TextInput"></cds-text-input>
+        `);
+        await el.updateComplete;
+        const requirement = el.shadowRoot.querySelector(
+          '.cds--form-requirement'
+        );
+        expect(requirement).to.not.exist;
+      });
+    });
+  });
 });
