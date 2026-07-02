@@ -6,6 +6,7 @@
  */
 
 import Pagination from './Pagination';
+import { NumberInput } from '../NumberInput';
 import React from 'react';
 import { action } from 'storybook/actions';
 import mdx from './Pagination.mdx';
@@ -237,5 +238,55 @@ PaginationUnknownPages.storyName = 'Unknown pages and items';
 PaginationUnknownPages.parameters = {
   controls: {
     exclude: ['pageInputDisabled', 'pagesUnknown', 'totalItems'],
+  },
+};
+
+/**
+ * `renderPageSelect` lets you replace the default page-select control with
+ * any React node. The render function receives `{ currentPage, totalPages,
+ * currentPageSize, onSetPage }`.
+ *
+ * This story uses Carbon's `NumberInput` with `hideSteppers` to replace the
+ * default page-select `<Select>`, illustrating how any custom control can be
+ * slotted in.
+ * TODO: remove after initial review ?
+ */
+export const WithRenderPageSelect = (args) => (
+  <Pagination
+    {...props()}
+    totalItems={350}
+    pageSizes={[10, 20, 30]}
+    {...args}
+    renderPageSelect={({ currentPage, totalPages, onSetPage }) => (
+      <NumberInput
+        hideSteppers
+        id="page-select-number-input"
+        label="Page number"
+        hideLabel
+        size={args.size}
+        style={{
+          minInlineSize: 'unset',
+          paddingInline: '1rem',
+          inlineSize: `calc(${String(currentPage).length + 2}ch + 1rem)`,
+          border: '0',
+        }}
+        min={1}
+        max={totalPages}
+        value={currentPage}
+        onChange={(_e, { value }) => {
+          const next = Number(value);
+          if (next >= 1 && next <= totalPages) {
+            onSetPage(next);
+          }
+        }}
+      />
+    )}
+  />
+);
+
+WithRenderPageSelect.storyName = 'With custom page select (renderPageSelect)';
+WithRenderPageSelect.parameters = {
+  controls: {
+    exclude: ['renderPageSelect'],
   },
 };

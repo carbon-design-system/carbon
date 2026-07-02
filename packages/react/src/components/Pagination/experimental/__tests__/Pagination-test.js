@@ -11,6 +11,17 @@ import { render, screen } from '@testing-library/react';
 import Pagination from '../Pagination';
 
 describe('Preview Pagination', () => {
+  let consoleWarnSpy;
+
+  beforeEach(() => {
+    // Suppress expected deprecation warnings from unstable_Pagination
+    consoleWarnSpy = jest.spyOn(console, 'warn').mockImplementation(() => {});
+  });
+
+  afterEach(() => {
+    consoleWarnSpy.mockRestore();
+  });
+
   describe('renders as expected - Component API', () => {
     it('should spread extra props onto outermost element', () => {
       const { container } = render(
