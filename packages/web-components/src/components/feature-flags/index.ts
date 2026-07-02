@@ -151,9 +151,6 @@ class FeatureFlagsElement extends LitElement {
   }
 
   public isFeatureFlagEnabled(flag: string) {
-    if (Object.prototype.hasOwnProperty.call(this.flags, flag)) {
-      return this.flags[flag];
-    }
     return this.scope.enabled(flag);
   }
 

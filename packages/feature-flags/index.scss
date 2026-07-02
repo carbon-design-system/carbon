@@ -26,8 +26,11 @@ $feature-flags: map.merge(
 }
 
 @function enabled-by-v12-release($name) {
-  @return $name != $v12-release-flag and string.index($name, $v12-flag-prefix)
-    == 1 and map.get($feature-flags, $v12-release-flag) == true;
+  $is-v12-flag: string.index($name, $v12-flag-prefix) == 1;
+  $is-v12-release-enabled: map.get($feature-flags, $v12-release-flag) == true;
+
+  @return $name != $v12-release-flag and $is-v12-flag and
+    $is-v12-release-enabled;
 }
 
 @mixin add($name, $enabled: false) {
