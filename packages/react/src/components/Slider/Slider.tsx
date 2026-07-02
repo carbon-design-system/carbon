@@ -1285,6 +1285,7 @@ const Slider = (props: SliderProps) => {
       (twoHandles ? isValidUpper : isValid));
 
   const labelId = `${id}-label`;
+  const readOnlyId = `${id}-readonly-text`;
   const labelClasses = classNames(`${prefix}--label`, {
     [`${prefix}--visually-hidden`]: hideLabel,
     [`${prefix}--label--disabled`]: disabled,
@@ -1461,6 +1462,8 @@ const Slider = (props: SliderProps) => {
               aria-valuenow={value}
               aria-labelledby={twoHandles ? undefined : labelId}
               aria-label={twoHandles ? ariaLabelInput : undefined}
+              aria-readonly={readOnly || undefined}
+              aria-describedby={readOnly ? readOnlyId : undefined}
               ref={thumbRef}
               onFocus={() => setState({ activeHandle: HandlePosition.LOWER })}>
               {twoHandles && !isRtl ? (
@@ -1491,6 +1494,8 @@ const Slider = (props: SliderProps) => {
                 aria-valuemin={value}
                 aria-valuenow={valueUpper}
                 aria-label={ariaLabelInputUpper}
+                aria-readonly={readOnly || undefined}
+                aria-describedby={readOnly ? readOnlyId : undefined}
                 ref={thumbRefUpper}
                 onFocus={() =>
                   setState({ activeHandle: HandlePosition.UPPER })
@@ -1514,6 +1519,11 @@ const Slider = (props: SliderProps) => {
             className={`${prefix}--slider__filled-track`}
             ref={filledTrackRef}
           />
+          {readOnly && (
+            <span id={readOnlyId} className={`${prefix}--visually-hidden`}>
+              Read only
+            </span>
+          )}
         </div>
         <Text className={`${prefix}--slider__range-label`}>
           {formatLabel(max, maxLabel)}

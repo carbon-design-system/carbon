@@ -596,6 +596,7 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
   );
   const menuId = `${id}__menu`;
   const inputId = `${id}-input`;
+  const readOnlyId = `${id}-readonly-text`;
 
   useEffect(() => {
     if (!isOpen) {
@@ -1027,6 +1028,12 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
           <input
             className={inputClasses}
             {...inputProp}
+            aria-readonly={readOnly || undefined}
+            aria-describedby={
+              cx(inputProp['aria-describedby'], {
+                [readOnlyId]: readOnly,
+              }) || undefined
+            }
             ref={mergedRef}
             {...readOnlyEventHandlers}
             readOnly={readOnly}
@@ -1139,6 +1146,11 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
         </ListBox.Menu>
       </ListBox>
       {!inline && showHelperText ? helper : null}
+      {readOnly && (
+        <span id={readOnlyId} className={`${prefix}--visually-hidden`}>
+          Read only
+        </span>
+      )}
     </div>
   );
 }) as {

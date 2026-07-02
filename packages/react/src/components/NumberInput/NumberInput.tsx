@@ -736,6 +736,11 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
       ariaDescribedBy = helperText ? normalizedProps.helperId : undefined;
     }
 
+    const readOnlyId = `${id}-readonly-text`;
+    const inputDescribedBy = readOnly
+      ? cx(readOnlyId, ariaDescribedBy) || undefined
+      : ariaDescribedBy;
+
     function handleOnChange(event) {
       if (disabled) {
         return;
@@ -916,7 +921,7 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
               {...rest}
               data-invalid={normalizedProps.invalid ? true : undefined}
               aria-invalid={normalizedProps.invalid}
-              aria-describedby={ariaDescribedBy}
+              aria-describedby={inputDescribedBy}
               aria-readonly={readOnly}
               disabled={normalizedProps.disabled}
               ref={ref}
@@ -1033,6 +1038,11 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
               type={type}
               value={type === 'number' ? value : inputValue}
             />
+            {readOnly && (
+              <span id={readOnlyId} className={`${prefix}--visually-hidden`}>
+                Read only
+              </span>
+            )}
             {slug ? (
               normalizedDecorator
             ) : decorator ? (

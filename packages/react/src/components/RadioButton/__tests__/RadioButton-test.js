@@ -194,4 +194,24 @@ describe('RadioButton', () => {
     );
     expect(screen.getByRole('radio')).toHaveAttribute('required');
   });
+
+  it('should announce the readonly state to screen readers', () => {
+    const { container } = render(
+      <RadioButton
+        name="test-name"
+        value="test-value"
+        labelText="test-label"
+        readOnly
+      />
+    );
+
+    const readOnlyText = container.querySelector(`.${prefix}--visually-hidden`);
+    expect(readOnlyText).toBeInTheDocument();
+    expect(readOnlyText).toHaveTextContent('Read only');
+
+    const radio = screen.getByRole('radio');
+    expect(radio.getAttribute('aria-describedby')).toContain(
+      readOnlyText.getAttribute('id')
+    );
+  });
 });

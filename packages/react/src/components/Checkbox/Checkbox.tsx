@@ -150,6 +150,8 @@ const Checkbox = React.forwardRef(
 
     const checkboxGroupInstanceId = useId();
 
+    const readOnlyId = `${id}-readonly-text`;
+
     const hasHelper = hasHelperText(helperText);
     const helperId = !hasHelper
       ? undefined
@@ -212,6 +214,11 @@ const Checkbox = React.forwardRef(
           // readonly attribute not applicable to type="checkbox"
           // see - https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/checkbox
           aria-readonly={readOnly}
+          aria-describedby={
+            readOnly
+              ? classNames(readOnlyId, other['aria-describedby'])
+              : other['aria-describedby']
+          }
           onClick={(evt) => {
             if (readOnly) {
               // prevent default stops the checkbox being updated
@@ -240,6 +247,11 @@ const Checkbox = React.forwardRef(
             )}
           </Text>
         </label>
+        {readOnly && (
+          <span id={readOnlyId} className={`${prefix}--visually-hidden`}>
+            Read only
+          </span>
+        )}
         <div className={`${prefix}--checkbox__validation-msg`}>
           {normalizedProps.invalid && (
             <>

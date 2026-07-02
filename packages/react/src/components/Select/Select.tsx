@@ -245,6 +245,7 @@ const Select = forwardRef<HTMLSelectElement, SelectProps>(
         {helperText}
       </Text>
     ) : null;
+    const readOnlyId = `${id}-readonly-text`;
     const ariaProps = {};
     if (normalizedProps.invalid) {
       ariaProps['aria-describedby'] = normalizedProps.invalidId;
@@ -252,6 +253,12 @@ const Select = forwardRef<HTMLSelectElement, SelectProps>(
       ariaProps['aria-describedby'] = helper
         ? normalizedProps.helperId
         : undefined;
+    }
+    if (readOnly) {
+      ariaProps['aria-describedby'] = classNames(
+        ariaProps['aria-describedby'],
+        readOnlyId
+      );
     }
 
     const handleFocus = (evt) => {
@@ -305,6 +312,11 @@ const Select = forwardRef<HTMLSelectElement, SelectProps>(
             ref={ref}>
             {children}
           </select>
+          {readOnly && (
+            <span id={readOnlyId} className={`${prefix}--visually-hidden`}>
+              Read only
+            </span>
+          )}
           <ChevronDown className={`${prefix}--select__arrow`} />
           {normalizedProps.invalid && (
             <WarningFilled className={`${prefix}--select__invalid-icon`} />

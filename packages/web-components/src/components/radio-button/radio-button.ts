@@ -487,9 +487,15 @@ class CDSRadioButton extends HostListenerMixin(FocusMixin(LitElement)) {
         .checked=${checked}
         ?disabled="${disabledItem || disabled}"
         ?required=${this.required}
-        aria-readonly="${String(readOnly)}"
+        aria-readonly=${ifDefined(readOnly ? 'true' : undefined)}
+        aria-describedby=${ifDefined(readOnly ? 'readonly-text' : undefined)}
         name=${ifDefined(name)}
         value=${ifDefined(value)} />
+      ${readOnly
+        ? html`<span id="readonly-text" class="${prefix}--visually-hidden"
+            >Read only</span
+          >`
+        : null}
       <label
         for="input"
         class="${prefix}--radio-button__label ${normalizedProps.invalid

@@ -133,6 +133,23 @@ describe('cds-multi-select', function () {
     expect(selectedItems.length).to.equal(0);
   });
 
+  it('should mark the clear-selection button as aria-disabled when disabled', async () => {
+    const el = await fixture(html`
+      <cds-multi-select label="test-label" value="item-0" disabled>
+        <cds-multi-select-item value="item-0" selected
+          >Item 0</cds-multi-select-item
+        >
+        <cds-multi-select-item value="item-1">Item 1</cds-multi-select-item>
+      </cds-multi-select>
+    `);
+
+    await el.updateComplete;
+
+    const clearButton = el.shadowRoot.querySelector('#selection-button');
+    expect(clearButton).to.exist;
+    expect(clearButton.getAttribute('aria-disabled')).to.equal('true');
+  });
+
   it('should not be interactive if disabled', async () => {
     const el = await fixture(html`
       <cds-multi-select label="test-label" disabled>
@@ -159,6 +176,28 @@ describe('cds-multi-select', function () {
     await el.updateComplete;
 
     expect(el.open).to.be.false;
+  });
+
+  it('should announce readonly state to screen readers', async () => {
+    const el = await fixture(html`
+      <cds-multi-select label="test-label" read-only>
+        <cds-multi-select-item value="item-0">Item 0</cds-multi-select-item>
+      </cds-multi-select>
+    `);
+    await el.updateComplete;
+
+    const readonlyText = el.shadowRoot.querySelector('.cds--visually-hidden');
+    expect(readonlyText).to.exist;
+    expect(readonlyText.textContent.trim()).to.equal('Read only');
+
+    const trigger = el.shadowRoot.querySelector('.cds--list-box__field');
+    expect(trigger.getAttribute('aria-readonly')).to.equal('true');
+    expect(trigger.getAttribute('aria-describedby')).to.contain(
+      'readonly-text'
+    );
+
+    // readonly alone must not make the trigger appear disabled
+    expect(trigger.getAttribute('aria-disabled')).to.not.equal('true');
   });
 
   it('does not render items with undefined values', async () => {

@@ -454,6 +454,20 @@ describe('NumberInput', () => {
       );
     });
 
+    it('should announce the readonly state to screen readers via a visually-hidden description', () => {
+      render(<NumberInput label="test-label" id="test" readOnly />);
+
+      const readOnlyText = screen.getByText('Read only');
+      expect(readOnlyText).toBeInTheDocument();
+      expect(readOnlyText).toHaveClass('cds--visually-hidden');
+      expect(readOnlyText).toHaveAttribute('id');
+
+      const input = screen.getByLabelText('test-label');
+      expect(input.getAttribute('aria-describedby')).toContain(
+        readOnlyText.getAttribute('id')
+      );
+    });
+
     it('should set the defaultValue of the <input> with `defaultValue`', () => {
       render(<NumberInput label="test-label" id="test" defaultValue={5} />);
       expect(screen.getByLabelText('test-label')).toHaveValue(5);

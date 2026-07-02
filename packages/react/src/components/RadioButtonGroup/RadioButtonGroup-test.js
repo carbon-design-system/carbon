@@ -177,6 +177,31 @@ describe('RadioButtonGroup', () => {
       expect(radio2).not.toBeChecked();
     });
 
+    it('should announce the readonly state to screen readers', () => {
+      const { container } = render(
+        <RadioButtonGroup
+          defaultSelected="test-1"
+          readOnly={true}
+          name="test"
+          legendText="test">
+          <RadioButton labelText="test-1" value="test-1" />
+          <RadioButton labelText="test-2" value="test-2" />
+        </RadioButtonGroup>
+      );
+
+      const fieldset = container.querySelector('fieldset');
+      const readOnlyText = fieldset.querySelector(
+        `.${prefix}--visually-hidden`
+      );
+
+      expect(readOnlyText).toBeInTheDocument();
+      expect(readOnlyText).toHaveTextContent('Read only');
+      expect(fieldset).toHaveAttribute('aria-readonly', 'true');
+      expect(fieldset.getAttribute('aria-describedby')).toContain(
+        readOnlyText.getAttribute('id')
+      );
+    });
+
     it('should support `defaultSelected` as a way to select a radio button', () => {
       render(
         <RadioButtonGroup

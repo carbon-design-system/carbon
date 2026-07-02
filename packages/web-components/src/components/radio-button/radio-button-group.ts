@@ -296,8 +296,17 @@ class CDSRadioButtonGroup extends FormMixin(HostListenerMixin(LitElement)) {
     return html` <fieldset
         class="${fieldsetClasses}"
         ?disabled="${disabled}"
-        aria-describedby="${ifDefined(describedBy)}"
-        aria-readonly="${readOnly}">
+        aria-readonly=${ifDefined(readOnly ? 'true' : undefined)}
+        aria-describedby="${ifDefined(
+          [describedBy, readOnly ? 'readonly-text' : undefined]
+            .filter(Boolean)
+            .join(' ') || undefined
+        )}">
+        ${readOnly
+          ? html`<span id="readonly-text" class="${prefix}--visually-hidden"
+              >Read only</span
+            >`
+          : null}
         ${legendText
           ? html` <legend class="${prefix}--label">
               ${legendText}

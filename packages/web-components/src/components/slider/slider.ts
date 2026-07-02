@@ -8,6 +8,7 @@
 import { LitElement, html } from 'lit';
 import { property, query } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
+import { ifDefined } from 'lit/directives/if-defined.js';
 import throttle from 'lodash-es/throttle';
 import { prefix } from '../../globals/settings';
 import FocusMixin from '../../globals/mixins/focus';
@@ -992,6 +993,11 @@ class CDSSlider extends HostListenerMixin(FormMixin(FocusMixin(LitElement))) {
         <slot name="label-text">${labelText}</slot>
       </label>
       <div class="${prefix}--slider-container">
+        ${readonly
+          ? html`<span id="readonly-text" class="${prefix}--visually-hidden"
+              >Read only</span
+            >`
+          : null}
         ${unstable_valueUpper || unstable_valueUpper === ''
           ? html` <slot name="lower-input"></slot>`
           : ''}
@@ -1018,6 +1024,10 @@ class CDSSlider extends HostListenerMixin(FormMixin(FocusMixin(LitElement))) {
                     class="${thumbLowerClasses}"
                     role="slider"
                     tabindex="${!readonly ? 0 : -1}"
+                    aria-readonly=${ifDefined(readonly ? 'true' : undefined)}
+                    aria-describedby=${ifDefined(
+                      readonly ? 'readonly-text' : undefined
+                    )}
                     aria-valuemax="${max}"
                     aria-valuemin="${min}"
                     aria-valuenow="${value}"
@@ -1061,6 +1071,10 @@ class CDSSlider extends HostListenerMixin(FormMixin(FocusMixin(LitElement))) {
                     class="${thumbLowerClasses}"
                     role="slider"
                     tabindex="${!readonly ? 0 : -1}"
+                    aria-readonly=${ifDefined(readonly ? 'true' : undefined)}
+                    aria-describedby=${ifDefined(
+                      readonly ? 'readonly-text' : undefined
+                    )}
                     aria-valuemax="${max}"
                     aria-valuemin="${min}"
                     aria-valuenow="${value}"
@@ -1105,6 +1119,10 @@ class CDSSlider extends HostListenerMixin(FormMixin(FocusMixin(LitElement))) {
                       class="${thumbUpperClasses}"
                       role="slider"
                       tabindex="${!readonly ? 0 : -1}"
+                      aria-readonly=${ifDefined(readonly ? 'true' : undefined)}
+                      aria-describedby=${ifDefined(
+                        readonly ? 'readonly-text' : undefined
+                      )}
                       aria-valuemax="${max}"
                       aria-valuemin="${min}"
                       aria-valuenow="${unstable_valueUpper}"
@@ -1147,6 +1165,10 @@ class CDSSlider extends HostListenerMixin(FormMixin(FocusMixin(LitElement))) {
                       class="${thumbUpperClasses}"
                       role="slider"
                       tabindex="${!readonly ? 0 : -1}"
+                      aria-readonly=${ifDefined(readonly ? 'true' : undefined)}
+                      aria-describedby=${ifDefined(
+                        readonly ? 'readonly-text' : undefined
+                      )}
                       aria-valuemax="${max}"
                       aria-valuemin="${min}"
                       aria-valuenow="${unstable_valueUpper}"
