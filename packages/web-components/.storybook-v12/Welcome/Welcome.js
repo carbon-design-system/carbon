@@ -7,6 +7,8 @@
 
 import React from 'react';
 import './welcome.scss';
+import '../../src/components/link/index';
+import '../../src/components/notification/index';
 
 const links = [
   {
@@ -41,17 +43,29 @@ export const Welcome = () => {
       { className: 'welcome__heading welcome__heading--subtitle' },
       'v3.x'
     ),
+    React.createElement('cds-callout-notification', {
+      className: 'v12-callout',
+      'low-contrast': true,
+      'status-icon-description': 'notification',
+      subtitle:
+        'Every story has the enable-v12-release flag set to true. Stories with 🚀 are v12-specific stories not present in the v11 storybook.',
+      title: 'This storybook reflects work in progress for v12',
+    }),
     React.createElement(
       'div',
       { className: 'welcome__links' },
       links.map((link) => {
         return React.createElement(
-          'a',
+          'cds-link',
           { className: 'welcome__link', href: link.href, key: link.href },
-          React.createElement('span', null, link.label),
+          link.label,
           React.createElement(
             'span',
-            { className: 'welcome__link-icon', 'aria-hidden': 'true' },
+            {
+              className: 'welcome__link-icon',
+              slot: 'icon',
+              'aria-hidden': 'true',
+            },
             '→'
           )
         );

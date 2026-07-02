@@ -40,9 +40,9 @@
     "build": "yarn clean && node tasks/build-styles.js && node tasks/build.js",
     "clean": "rimraf es lib icons/index.js icons/index.d.ts icons/index.esm.js storybook-static storybook-static-v12 .storybook-v12/generated",
     "postinstall": "ibmtelemetry --config=telemetry.yml",
-    "storybook": "storybook dev -p 3000",
+    "storybook": "storybook dev -p 3011",
     "storybook:build": "storybook build",
-    "storybook:v12": "yarn storybook:v12:prepare && storybook dev -p 3001 --config-dir .storybook-v12",
+    "storybook:v12": "yarn storybook:v12:prepare && storybook dev -p 3012 --config-dir .storybook-v12",
     "storybook:v12:build": "yarn storybook:v12:prepare && storybook build --config-dir .storybook-v12 --output-dir storybook-static-v12",
     "storybook:v12:prepare": "node ../../tasks/prepare-v12-storybook.mjs .",
     "telemetry:config": "npx -y @ibm/telemetry-js-config-generator generate --id fd89d12b-6a39-48b4-adf4-30c94dc0dddd --endpoint https://www-api.ibm.com/ibm-telemetry/v1/metrics --files ./src/components/**/*.(tsx|js|jsx)"

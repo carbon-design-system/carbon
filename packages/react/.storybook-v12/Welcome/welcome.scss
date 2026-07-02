@@ -7,10 +7,11 @@
 
 @use '@carbon/styles/scss/type';
 @use '@carbon/styles/scss/colors';
+@use '@carbon/styles/scss/spacing';
 
 .welcome__container {
   position: fixed;
-  padding: 3rem;
+  padding: spacing.$spacing-09;
   background: url('../../.storybook/Welcome/carbon_bg.png') no-repeat center
     center fixed;
   background-size: cover;
@@ -37,5 +38,9 @@
 }
 
 .welcome__links {
-  margin-block-start: 2rem;
+  margin-block-start: spacing.$spacing-07;
+}
+
+.v12-callout {
+  margin-block-start: spacing.$spacing-06;
 }

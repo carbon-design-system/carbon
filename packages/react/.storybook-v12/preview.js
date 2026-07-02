@@ -14,18 +14,19 @@ import { FeatureFlags } from '../src/components/FeatureFlags';
 enable('enable-v12-release');
 
 const v12ReleaseToolbar = {
-  name: '🏳️‍🌈 enable-v12-release',
+  name: '🚀 enable-v12-release',
   description: 'Visual indicator for the v12 Storybook',
   defaultValue: true,
   toolbar: {
     icon: 'flag',
-    title: '🏳️‍🌈 enable-v12-release',
+    title: '🚀 enable-v12-release',
     items: [
       {
         value: true,
-        title: '🏳️‍🌈 enable-v12-release',
+        title: 'This storybook reflects work in progress for v12.',
       },
     ],
+    dynamicTitle: false,
   },
 };
 
@@ -48,6 +49,14 @@ export const parameters = {
       method: 'alphabetical',
       order: [
         'Getting Started',
+        [
+          'Welcome',
+          'Getting started',
+          'Feature Flags',
+          'Custom styles',
+          'Carbon CDN style helpers',
+          'Form participation',
+        ],
         'Components',
         'Deprecated',
         'Elements',

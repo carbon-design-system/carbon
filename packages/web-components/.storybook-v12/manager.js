@@ -11,3 +11,6 @@ import theme from './theme';
 addons.setConfig({
   theme,
 });
+
+localStorage.removeItem('@storybook/ui/store');
+localStorage.removeItem('storybook-layout');

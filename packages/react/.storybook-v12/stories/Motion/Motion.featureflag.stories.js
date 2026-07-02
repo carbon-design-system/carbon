@@ -7,9 +7,12 @@
 import React from 'react';
 
 export default {
-  title: 'Components/Motion',
+  title: 'Elements/Motion',
 };
 
-export const TBD = () => {
-  return <p>Motion guidance for v12 is TBD.</p>;
+export const TBD = {
+  name: '🚀 TBD',
+  render: () => {
+    return <p>Motion guidance for v12 is TBD.</p>;
+  },
 };

@@ -27,12 +27,30 @@ const replacedDocs = new Set(
   })
 );
 const v12FeatureFlags = `@use '@carbon/styles/scss/feature-flags' with ($feature-flags: ('enable-v12-release': true));\n`;
+const v12FeatureFlagPattern = /\benable-v12-[a-z0-9-]+\b/;
 const titlePatterns = {
   Deprecated: /(?:title:\s*['"`]|<Meta\s+title=["'])Deprecated(?:\/|['"`])/,
 };
 
 function isFeatureFlagStory(story: string) {
-  return story.includes('.feature-flag.') || story.includes('/Feature Flag');
+  return (
+    story.includes('.featureflag.') ||
+    story.includes('.feature-flag.') ||
+    story.includes('/Feature Flag')
+  );
+}
+
+function isV12FeatureFlagStory(story: string) {
+  if (!isFeatureFlagStory(story) || story.startsWith('./')) {
+    return false;
+  }
+
+  try {
+    const source = fs.readFileSync(path.resolve(configDir, story), 'utf8');
+    return v12FeatureFlagPattern.test(source);
+  } catch {
+    return false;
+  }
 }
 
 function isV12ExcludedStory(story: string) {
@@ -73,7 +91,7 @@ const stories = (baseConfig.stories ?? [])
     return (
       typeof story !== 'string' ||
       (!isV12ExcludedStory(story) &&
-        !isFeatureFlagStory(story) &&
+        !isV12FeatureFlagStory(story) &&
         !hasTopLevelTitle(story, 'Deprecated') &&
         !replacedStories.has(story) &&
         !replacedDocs.has(story))

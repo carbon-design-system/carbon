@@ -14,18 +14,20 @@ import '../src/components/feature-flags/index';
 enable('enable-v12-release');
 
 const v12ReleaseToolbar = {
-  name: '🏳️‍🌈 enable-v12-release',
+  name: '🚀 enable-v12-release',
   description: 'Visual indicator for the v12 Storybook',
   defaultValue: true,
   toolbar: {
     icon: 'flag',
-    title: '🏳️‍🌈 enable-v12-release',
+    title: '🚀 enable-v12-release',
     items: [
       {
         value: true,
-        title: '🏳️‍🌈 enable-v12-release',
+        title:
+          'This storybook reflects work in progress for v12. Every story here has the enable-v12-release flag set to true. Stories with 🚀 are v12-specific stories not present in the v11 storybook.',
       },
     ],
+    dynamicTitle: false,
   },
 };
 
@@ -42,6 +44,14 @@ export const parameters = {
       method: 'alphabetical',
       order: [
         'Getting Started',
+        [
+          'Welcome',
+          'Getting started',
+          'Feature Flags',
+          'Custom styles',
+          'Carbon CDN style helpers',
+          'Form participation',
+        ],
         'Components',
         'Deprecated',
         'Elements',
