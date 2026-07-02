@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2016, 2023
+// Copyright IBM Corp. 2016, 2026
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -99,8 +99,10 @@
     padding-block: 0;
     padding-inline-end: 0;
 
-    &:hover {
-      outline: none;
+    @media (any-hover: hover) {
+      &:hover {
+        outline: none;
+      }
     }
   }
 
@@ -110,9 +112,11 @@
     color: $text-primary;
     cursor: pointer;
 
-    &:hover {
-      background-color: $layer-hover;
-      outline: none;
+    @media (any-hover: hover) {
+      &:hover {
+        background-color: $layer-hover;
+        outline: none;
+      }
     }
 
     &:focus {
@@ -125,8 +129,10 @@
     background-color: $layer-selected-inverse;
     color: $text-inverse;
 
-    &:hover {
-      background-color: $layer-selected-inverse;
+    @media (any-hover: hover) {
+      &:hover {
+        background-color: $layer-selected-inverse;
+      }
     }
   }
 
@@ -136,9 +142,11 @@
     color: $tag-color-gray;
     cursor: pointer;
 
-    &:hover {
-      background-color: $tag-hover-gray;
-      outline: none;
+    @media (any-hover: hover) {
+      &:hover {
+        background-color: $tag-hover-gray;
+        outline: none;
+      }
     }
 
     &:focus {
@@ -248,8 +256,10 @@
   .#{$prefix}--multi-select--readonly
     .#{$prefix}--tag--high-contrast:not(.#{$prefix}--tag--operational)
     .#{$prefix}--tag__close-icon {
-    &:hover {
-      background-color: transparent;
+    @media (any-hover: hover) {
+      &:hover {
+        background-color: transparent;
+      }
     }
   }
 
@@ -270,8 +280,10 @@
     box-shadow: none;
     outline: none;
 
-    &:hover {
-      cursor: not-allowed;
+    @media (any-hover: hover) {
+      &:hover {
+        cursor: not-allowed;
+      }
     }
 
     .#{$prefix}--tag__label {
@@ -286,9 +298,11 @@
     background-color: $layer;
     color: $text-disabled;
 
-    &:hover {
-      background-color: $layer;
-      cursor: not-allowed;
+    @media (any-hover: hover) {
+      &:hover {
+        background-color: $layer;
+        cursor: not-allowed;
+      }
     }
   }
 
@@ -350,9 +364,11 @@
     box-shadow: inset 0 0 0 1px $focus-inverse;
   }
 
-  .#{$prefix}--tag--filter.#{$prefix}--tag--disabled
-    .#{$prefix}--tag__close-icon:hover {
-    background-color: transparent;
+  @media (any-hover: hover) {
+    .#{$prefix}--tag--filter.#{$prefix}--tag--disabled
+      .#{$prefix}--tag__close-icon:hover {
+      background-color: transparent;
+    }
   }
 
   .#{$prefix}--tag--filter.#{$prefix}--tag--disabled svg {
@@ -404,11 +420,13 @@
     background-color: currentColor;
   }
 
-  .#{$prefix}--tag
-    .#{$prefix}--ai-label
-    .#{$prefix}--ai-label__button--inline:hover,
-  .#{$prefix}--tag .#{$prefix}--slug .#{$prefix}--slug__button--inline:hover {
-    border-color: currentColor;
+  @media (any-hover: hover) {
+    .#{$prefix}--tag
+      .#{$prefix}--ai-label
+      .#{$prefix}--ai-label__button--inline:hover,
+    .#{$prefix}--tag .#{$prefix}--slug .#{$prefix}--slug__button--inline:hover {
+      border-color: currentColor;
+    }
   }
 
   .#{$prefix}--tag--filter .#{$prefix}--tag__decorator > *,
