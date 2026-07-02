@@ -480,5 +480,21 @@ describe('TextInput', () => {
       await userEvent.click(screen.getByText('Enable Counter'));
       expect(screen.getByText('9/15')).toBeInTheDocument();
     });
+
+    it('should prioritize disabled over readOnly when both are true', () => {
+      render(
+        <TextInput
+          id="input-1"
+          labelText="TextInput label"
+          disabled={true}
+          readOnly={true}
+        />
+      );
+
+      const input = screen.getByLabelText('TextInput label');
+      expect(input).toHaveAttribute('disabled', '');
+      expect(input.disabled).toBe(true);
+      expect(input.readOnly).toBe(false);
+    });
   });
 });

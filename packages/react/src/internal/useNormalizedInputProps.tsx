@@ -66,7 +66,7 @@ export const useNormalizedInputProps = ({
 }: InputProps): NormalizedInputProps => {
   const prefix = usePrefix();
   const normalizedProps: NormalizedInputProps = {
-    disabled: !readOnly && disabled,
+    disabled: disabled,
     invalid: !readOnly && !disabled && invalid,
     invalidId: `${id}-error-msg`,
     warn: !readOnly && !invalid && !disabled && warn,

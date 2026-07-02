@@ -109,6 +109,27 @@ describe('cds-date-picker', () => {
       );
       expect(warnIcon).not.to.exist;
     });
+
+    it('should prioritize disabled over readOnly when both are true', async () => {
+      const el = await fixture(html`
+        <cds-date-picker-input
+          disabled
+          readonly
+          label-text="Date Input"
+          placeholder="mm/dd/yyyy">
+        </cds-date-picker-input>
+      `);
+      await el.updateComplete;
+
+      const shadowRoot = el.shadowRoot;
+      const input = shadowRoot?.querySelector('input');
+
+      expect(input?.hasAttribute('disabled')).to.be.true;
+      expect(input?.hasAttribute('readonly')).to.be.false;
+      expect(input?.disabled).to.be.true;
+      expect(input?.readOnly).to.be.false;
+      expect(input?.disabled).to.be.true;
+    });
   });
 
   describe('Date Picker Functionality', () => {

@@ -215,7 +215,7 @@ const Select = forwardRef<HTMLSelectElement, SelectProps>(
       [`${prefix}--select--light`]: light,
       [`${prefix}--select--invalid`]: normalizedProps.invalid,
       [`${prefix}--select--disabled`]: normalizedProps.disabled,
-      [`${prefix}--select--readonly`]: readOnly,
+      [`${prefix}--select--readonly`]: readOnly && !normalizedProps.disabled,
       [`${prefix}--select--warning`]: normalizedProps.warn,
       [`${prefix}--select--fluid--invalid`]: isFluid && normalizedProps.invalid,
       [`${prefix}--select--fluid--focus`]: isFluid && isFocused,
@@ -228,6 +228,7 @@ const Select = forwardRef<HTMLSelectElement, SelectProps>(
     const labelClasses = classNames(`${prefix}--label`, {
       [`${prefix}--visually-hidden`]: hideLabel,
       [`${prefix}--label--disabled`]: normalizedProps.disabled,
+      [`${prefix}--label--readonly`]: readOnly && !normalizedProps.disabled,
     });
     const inputClasses = classNames({
       [`${prefix}--select-input`]: true,
@@ -266,7 +267,7 @@ const Select = forwardRef<HTMLSelectElement, SelectProps>(
     const readOnlyEventHandlers = {
       onMouseDown: (evt) => {
         // NOTE: does not prevent click
-        if (readOnly) {
+        if (readOnly && !normalizedProps.disabled) {
           evt.preventDefault();
           // focus on the element as per readonly input behavior
           evt.target.focus();
@@ -275,7 +276,11 @@ const Select = forwardRef<HTMLSelectElement, SelectProps>(
       onKeyDown: (evt) => {
         const selectAccessKeys = ['ArrowDown', 'ArrowUp', ' '];
         // This prevents the select from opening for the above keys
-        if (readOnly && selectAccessKeys.includes(evt.key)) {
+        if (
+          readOnly &&
+          !normalizedProps.disabled &&
+          selectAccessKeys.includes(evt.key)
+        ) {
           evt.preventDefault();
         }
       },
@@ -298,7 +303,9 @@ const Select = forwardRef<HTMLSelectElement, SelectProps>(
             className={inputClasses}
             disabled={normalizedProps.disabled || undefined}
             aria-invalid={normalizedProps.invalid || undefined}
-            aria-readonly={readOnly || undefined}
+            aria-readonly={
+              readOnly && !normalizedProps.disabled ? true : undefined
+            }
             title={title}
             onChange={composeEventHandlers([onChange, handleChange])}
             {...readOnlyEventHandlers}
