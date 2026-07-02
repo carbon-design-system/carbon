@@ -21,6 +21,7 @@ import { deprecate } from '../../prop-types/deprecate';
 export interface FeatureFlagsProps {
   children?: ReactNode;
   flags?: Record<string, boolean>;
+  enableV12Release?: boolean;
   enableV12TileDefaultIcons?: boolean;
   enableV12TileRadioIcons?: boolean;
   enableV12Overflowmenu?: boolean;
@@ -52,6 +53,7 @@ const FeatureFlagContext = createContext<FeatureFlagScope>(GlobalFeatureFlags);
 export const FeatureFlags = ({
   children,
   flags = {},
+  enableV12Release,
   enableV12TileDefaultIcons = false,
   enableV12TileRadioIcons = false,
   enableV12Overflowmenu = false,
@@ -67,6 +69,9 @@ export const FeatureFlags = ({
 
   const scope = useMemo(() => {
     const combinedFlags = {
+      ...(enableV12Release !== undefined
+        ? { 'enable-v12-release': enableV12Release }
+        : {}),
       'enable-v12-tile-default-icons': enableV12TileDefaultIcons,
       'enable-v12-tile-radio-icons': enableV12TileRadioIcons,
       'enable-v12-overflowmenu': enableV12Overflowmenu,
@@ -85,6 +90,7 @@ export const FeatureFlags = ({
     scope.mergeWithScope(parentScope);
     return scope;
   }, [
+    enableV12Release,
     enableV12TileDefaultIcons,
     enableV12TileRadioIcons,
     enableV12Overflowmenu,
@@ -117,6 +123,7 @@ FeatureFlags.propTypes = {
       'been deprecated. Please run the `featureflag-deprecate-flags-prop` codemod to migrate to individual boolean props.' +
       `npx @carbon/upgrade migrate featureflag-deprecate-flags-prop --write`
   ),
+  enableV12Release: PropTypes.bool,
   enableV12TileDefaultIcons: PropTypes.bool,
   enableV12TileRadioIcons: PropTypes.bool,
   enableV12Overflowmenu: PropTypes.bool,

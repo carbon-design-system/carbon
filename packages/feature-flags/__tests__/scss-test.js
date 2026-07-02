@@ -88,6 +88,41 @@ describe('@carbon/feature-flags', () => {
       // flag-b
       expect(getValue(1)).toBe(false);
     });
+
+    it('should enable v12 flags when the v12 release flag is enabled', async () => {
+      const { getValue } = await render(`
+        @use '../index.scss' as feature-flags with (
+          $feature-flags: (
+            'enable-v12-release': true,
+            'enable-v12-example': false,
+            'enable-not-v12-example': false,
+          )
+        );
+
+        $_: get-value(feature-flags.enabled('enable-v12-example'));
+        $_: get-value(feature-flags.enabled('enable-not-v12-example'));
+      `);
+
+      // enable-v12-example
+      expect(getValue(0)).toBe(true);
+      // enable-not-v12-example
+      expect(getValue(1)).toBe(false);
+    });
+
+    it('should allow v12 flags to be enabled independently of the v12 release flag', async () => {
+      const { getValue } = await render(`
+        @use '../index.scss' as feature-flags with (
+          $feature-flags: (
+            'enable-v12-release': false,
+            'enable-v12-example': true,
+          )
+        );
+
+        $_: get-value(feature-flags.enabled('enable-v12-example'));
+      `);
+
+      expect(getValue(0)).toBe(true);
+    });
   });
 
   describe('merge', () => {

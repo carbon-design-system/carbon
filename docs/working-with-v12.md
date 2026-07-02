@@ -1,0 +1,314 @@
+# Working with v12
+
+This guide is for contributors working on the v12 preview surface in this
+repository. v12 work is still developed from within the v11 codebase, so the
+important rule is to keep the preview explicit: v11 remains the default
+experience, and v12 behavior is enabled through the v12 release flag in the v12
+Storybook environment.
+
+## v12 Storybooks
+
+The v12 storybooks are ran separately from the existing ones and use different
+ports so they can be open at the same time.
+
+```sh
+cd packages/react
+yarn storybook:v12
+```
+
+```sh
+cd packages/web-components
+yarn storybook:v12
+```
+
+|                         | v11     | v12     |
+| ----------------------- | ------- | ------- |
+| packages/react          | `:3011` | `:3012` |
+| packages/web-components | `:6011` | `:6012` |
+
+## The v12 release flag
+
+The root v12 flag is `enable-v12-release`. It is defined in
+`packages/feature-flags/feature-flags.yml` and defaults to `false` so normal v11
+usage stays unchanged.
+
+When `enable-v12-release` is enabled, every other flag whose name starts with
+`enable-v12-` is treated as enabled. That override lives in the shared feature
+flag package, not in one component or Storybook layer, because the behavior has
+to be consistent across JavaScript scopes and Sass:
+
+- `packages/feature-flags/src/FeatureFlagScope.ts` handles runtime flag checks.
+- `packages/feature-flags/index.scss` handles Sass `enabled(...)` checks.
+- `packages/react/src/components/FeatureFlags/index.tsx` exposes
+  `enableV12Release` for React trees.
+- `packages/web-components/src/components/feature-flags/index.ts` recognizes the
+  `enable-v12-release` attribute for Web Components.
+
+Prefer enabling `enable-v12-release` when you want the v12 preview as a whole.
+Use individual `enable-v12-*` flags only when a story, test, or migration path
+needs to isolate one behavior.
+
+## React usage
+
+The React v12 storybook has the `enable-v12-release` flag turned on globally for
+every story.
+
+A global decorator is configured in `.storybook-v12/preview.js` that wraps every
+story with `<FeatureFlags enableV12Release>`. That file also calls
+`enable('enable-v12-release')` so direct calls to the shared feature flag scope
+see the same v12 state.
+
+<!-- prettier-ignore-start -->
+
+> [!IMPORTANT]
+> You do not need to wrap stories with `<FeatureFlags enableV12Release>`
+>
+> Component-level `<FeatureFlag>` wrappers are still useful though, especially
+> when a story demonstrates a non-v12 flag or a focused migration case.
+
+<!-- prettier-ignore-end -->
+
+## Web Components usage
+
+The Web Components v12 storybook has the `enable-v12-release` flag turned on
+globally for every story.
+
+A global decorator is configured in `.storybook-v12/preview.js` that wraps every
+story with `<feature-flags enable-v12-release>`. That file also calls
+`enable('enable-v12-release')` so direct calls to the shared feature flag scope
+see the same v12 state.
+
+<!-- prettier-ignore-start -->
+
+> [!IMPORTANT]
+> You do not need to wrap stories with `<feature-flags enable-v12-release>`
+>
+> Component-level `<feature-flags>` wrappers are still useful though, especially
+> when a story demonstrates a non-v12 flag or a focused migration case.
+
+<!-- prettier-ignore-end -->
+
+Some Web Components Sass is selected through attributes on the component itself,
+for example `cds-toggle[enable-v12-toggle-reduced-label-spacing]`. The
+`feature-flags` element syncs enabled related flags onto nested components so a
+root v12 decorator is enough for those styles to apply. Keep that mapping in
+`FeatureFlagsElement.flagComponentMap` up to date when adding attribute-driven
+Web Components flags.
+
+## Sass usage
+
+For v12 Storybook builds, the `.storybook-v12/main.ts` files add this Sass
+configuration through Vite:
+
+```scss
+@use '@carbon/styles/scss/feature-flags' with (
+  $feature-flags: (
+    'enable-v12-release': true,
+  )
+);
+```
+
+That means component styles compiled in the v12 Storybook see all `enable-v12-*`
+Sass flags as enabled. Keep this at the Storybook config level instead of
+sprinkling v12 Sass setup through individual stories; the goal is for v12
+Storybook to behave like the future default build.
+
+Avoid configuring the same Sass module more than once in one compilation unit.
+If a story needs one-off Sass to demonstrate a flag, check whether it still
+makes sense after `enable-v12-release` is already on by default.
+
+## Feature flag stories in v12 Storybook
+
+The v12 Storybooks do not show separate `Feature Flag` sections for stories that
+are already committed to the next major. Instead, `enable-v12-*` feature flag
+stories are merged into the normal component story section.
+
+Feature flag stories for non-v12 flags are intentionally left in their
+`Feature Flag` sections. Those flags are still experimental or opt-in in v12, so
+the v12 Storybook should not make them look like defaults.
+
+This is generated by `tasks/prepare-v12-storybook.mjs`, which runs before v12
+Storybook dev and build commands. The script:
+
+- finds React `*.featureflag.stories.*` files and Web Components
+  `*.feature-flag.stories.*` files in `src/` and `.storybook-v12/stories/`;
+- only promotes `src/` feature-flag stories that reference an `enable-v12-*`
+  flag;
+- pairs them with the matching base `*.stories.*` file when one exists;
+- replaces matching base story exports with the feature-flag export;
+- keeps base-only stories unchanged;
+- moves feature-only stories into the normal component section;
+- prefixes feature-only story names with `🚀`;
+- preserves feature-story decorators and parameters for moved stories.
+
+The generated files live under `.storybook-v12/generated/` and are intentionally
+ignored by Git. Do not edit them. Change the original story files or the
+generator instead.
+
+When the generator runs, it prints the generated wrapper directory relative to
+the package command and then lists the story names grouped under each generated
+wrapper file. That output is the quickest way to check whether a new story was
+promoted or intentionally left in its feature flag section.
+
+The merge is export-name based. If a feature story is intended to replace an
+existing story, use the same export name in both files. If the export name is
+different, the v12 Storybook treats it as an additional story and marks it with
+`🚀`.
+
+## Authoring stories for v11, v12, or both
+
+Most stories should continue to live in the normal `*.stories.*` file. Reach for
+a feature-flag story file only when the v12 version needs different markup,
+different args, a different wrapper, or a story that should not appear in the
+v11 Storybook.
+
+### Stories for both v11 and v12
+
+Add the story to the normal component story file:
+
+- React: `Component.stories.js`
+- Web Components: `component.stories.ts`
+
+Use this when the story should appear in both Storybooks and the v12 release
+flag does not require a different example. In the v12 Storybook, the root v12
+decorator and Sass setup will still be active, so the same story may render with
+v12 behavior without needing a duplicate story.
+
+### v11-only stories
+
+Add the story only to the normal component story file. Do not add a matching
+export to the feature-flag story file.
+
+This keeps the story in v11 and, by default, also keeps it in v12. If the story
+should truly disappear from v12, it needs to be replaced by a feature-flag story
+with the same export name that represents the v12 default. Prefer replacement
+over hiding; v12 Storybook should show the future default surface, not a
+manually curated subset.
+
+### v12 replacements for existing v11 stories
+
+Add the v12 version to the matching feature-flag story file and use the same
+export name as the v11 story. The story file must reference an `enable-v12-*`
+flag for the v12 generator to promote it into the normal component section.
+
+For example, if the v11 file exports `Default`, the feature-flag file should
+also export `Default`. The v12 Storybook generator will use the feature-flag
+`Default` in place of the base `Default`, while the v11 Storybook continues to
+use the original story.
+
+Use this when a v12 flag changes the recommended default markup, args, expected
+interaction, or visual treatment. Keeping the export name the same is the signal
+that this is a replacement, not a new story.
+
+Do not use this path for non-v12 flags. A story for a flag such as
+`enable-whatever-flag` should stay in the `Feature Flag` section in both v11 and
+v12 because that behavior is still opt-in.
+
+### v12-only stories
+
+Add the story to a feature-flag story file under `.storybook-v12/stories/` and
+use a new export name that does not exist in a base story file.
+
+The v12 Storybook generator will move it into the normal component section and
+prefix the display name with `🚀`. This is for examples that are genuinely new
+in v12, such as a new component state, API shape, or migration-specific example
+that has no v11 equivalent.
+
+Use the `src/` feature-flag story files for stories that should still be visible
+in the v11 feature flag sections and are backed by an `enable-v12-*` flag. Use
+`.storybook-v12/stories/` when the story should only exist in the v12 Storybook
+or when there is no `src/` feature-flag story to promote.
+
+Do not rely on the JavaScript export name to include the emoji. The generator
+sets the display name through Storybook story metadata so the source remains a
+valid, normal export.
+
+#### A note on VRT
+
+The v12 Storybooks are preview environments. They are not currently enabled for
+Chromatic VRT. Keep visual checks focused on the existing default Storybooks
+until v12 ships and these v12 Storybooks become the default package Storybooks;
+at that point they should take over the normal Chromatic coverage.
+
+### Deprecated stories
+
+Inherited v11 stories whose top-level title is `Deprecated` are filtered out of
+the v12 Storybooks. Those stories describe APIs that are deprecated before v12,
+so carrying them forward would make the v12 surface look older than it is.
+
+The v12 Storybooks can still have a `Deprecated` section for APIs that are
+introduced in, or still present in, v12 and planned for removal later. Put those
+stories under `.storybook-v12/deprecated/` and use a `Deprecated/...` title. The
+inherited-story filter intentionally does not apply to local `.storybook-v12`
+stories.
+
+## Sidebar order
+
+The v12 Storybooks keep the same top-level sidebar order as v11:
+
+1. Getting Started
+2. Components
+3. Deprecated
+4. Elements
+5. Helpers
+6. Hooks
+7. Layout
+8. Preview
+
+For example, the current `Elements/Motion` placeholder is authored under
+`.storybook-v12/stories/` so it only appears in the v12 Storybooks and can
+validate the `🚀` prefix behavior under the Elements section.
+
+## Storybook identity
+
+The v12 Storybooks use hardcoded package next-version titles in
+`packages/*/.storybook-v12/theme.js` and the manager head files:
+
+- `@carbon/react v2.x`
+- `@carbon/web-components v3.x`
+
+They also add a toolbar item named `🚀 enable-v12-release` with the flag icon.
+The toolbar item is only a visual indicator; the actual flag state comes from
+the v12 preview decorator and Sass setup.
+
+Keep that indicator non-interactive unless there is a clear need to support
+toggling v12 off inside the v12 Storybook. The main reason it exists is to make
+parallel v11 and v12 Storybook windows hard to confuse.
+
+The v12 welcome pages are package-specific and use the React Storybook welcome
+layout. Web Components keeps its longer introductory content in
+`Getting Started/Getting started` so `Getting Started/Welcome` can stay a quick
+package/version landing page.
+
+## Publishing
+
+`.github/workflows/deploy-v12-storybooks.yml` publishes the v12 Storybooks on
+every push to `main` and can also be run manually. It follows the existing Web
+Components Storybook publish flow:
+
+1. install dependencies;
+2. build the project;
+3. build the package v12 Storybook;
+4. add `.nojekyll`;
+5. push the static output to a separate repository.
+
+The workflow only publishes static Storybook output. GitHub Pages repository
+settings are intentionally not handled here.
+
+## Things to watch out for
+
+- Do not turn `enable-v12-release` on by default in the root YAML until v12 is
+  actually the default release behavior.
+- Do not duplicate v12 defaults in every component story. Use the root v12
+  Storybook decorator and Sass setup.
+- Do not commit `.storybook-v12/generated/` output.
+- Do not remove feature-story decorators blindly. Some feature-flag stories
+  still enable non-v12 flags or carry documentation-specific parameters.
+- Keep Web Components attribute syncing in mind for Sass selectors that depend
+  on host attributes.
+- Do not treat the v12 Storybooks as VRT coverage yet. They are intentionally
+  outside Chromatic until they replace the current default Storybooks for v12.
+- When adding a new `enable-v12-*` flag, make sure it is represented anywhere
+  the package needs it: root YAML, React props if applicable, Web Components
+  attributes if applicable, Sass defaults if applicable, docs, telemetry, and
+  tests.

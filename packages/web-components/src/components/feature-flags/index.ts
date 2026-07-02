@@ -50,6 +50,7 @@ class FeatureFlagsElement extends LitElement {
    * Mapping of feature flag attributes to their related component names.
    */
   private static readonly flagComponentMap = {
+    'enable-v12-release': null,
     'enable-v12-tile-default-icons': 'CDS-CLICKABLE-TILE',
     'enable-v12-tile-radio-icons': 'CDS-TILE',
     'enable-v12-overflowmenu': 'CDS-OVERFLOW-MENU',
@@ -86,12 +87,42 @@ class FeatureFlagsElement extends LitElement {
     // Set feature flag to top component level
     const relatedComponent = hasOwn(FeatureFlagsElement.flagComponentMap, name)
       ? FeatureFlagsElement.flagComponentMap[name]
-      : 'unknown';
-    if (this.firstElementChild?.tagName === relatedComponent) {
+      : null;
+    if (
+      relatedComponent &&
+      this.firstElementChild?.tagName === relatedComponent
+    ) {
       this.firstElementChild.setAttribute(name, '');
     }
 
     this.updateScope();
+  }
+
+  private syncFeatureFlagAttributes() {
+    for (const [flag, relatedComponent] of Object.entries(
+      FeatureFlagsElement.flagComponentMap
+    )) {
+      if (!relatedComponent || flag === 'enable-v12-release') {
+        continue;
+      }
+
+      let isEnabled = false;
+      try {
+        isEnabled = this.scope.enabled(flag);
+      } catch {
+        isEnabled = false;
+      }
+
+      if (!isEnabled) {
+        continue;
+      }
+
+      for (const element of this.querySelectorAll(
+        relatedComponent.toLowerCase()
+      )) {
+        element.setAttribute(flag, '');
+      }
+    }
   }
 
   private getParentScope() {
@@ -112,6 +143,7 @@ class FeatureFlagsElement extends LitElement {
       newScope.mergeWithScope(parentScope);
     }
     this.scope = newScope;
+    this.syncFeatureFlagAttributes();
   }
 
   render() {
@@ -119,9 +151,6 @@ class FeatureFlagsElement extends LitElement {
   }
 
   public isFeatureFlagEnabled(flag: string) {
-    if (Object.prototype.hasOwnProperty.call(this.flags, flag)) {
-      return this.flags[flag];
-    }
     return this.scope.enabled(flag);
   }
 
