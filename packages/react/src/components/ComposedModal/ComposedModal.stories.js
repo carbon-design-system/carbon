@@ -207,18 +207,16 @@ export const FullWidth = (args) => {
 };
 
 FullWidth.args = {
+  isFullWidth: true,
   label: 'An example of a modal with no padding',
   title: 'Full Width Modal',
 };
-FullWidth.parameters = {
-  controls: {
-    exclude: [
-      'isFullWidth',
-      'containerClassName',
-      'launcherButtonRef',
-      'selectorPrimaryFocus',
-      'selectorsFloatingMenus',
-    ],
+FullWidth.argTypes = {
+  isFullWidth: {
+    control: 'boolean',
+    table: {
+      readonly: true,
+    },
   },
 };
 
