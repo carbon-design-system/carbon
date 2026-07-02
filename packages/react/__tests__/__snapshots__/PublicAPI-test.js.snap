@@ -3551,6 +3551,9 @@ Map {
       "children": {
         "type": "node",
       },
+      "enableAccordionMotion": {
+        "type": "bool",
+      },
       "enableDialogElement": {
         "type": "bool",
       },
@@ -11818,6 +11821,9 @@ Map {
       "children": {
         "type": "node",
       },
+      "enableAccordionMotion": {
+        "type": "bool",
+      },
       "enableDialogElement": {
         "type": "bool",
       },
@@ -13993,6 +13999,9 @@ Map {
     "propTypes": {
       "children": {
         "type": "node",
+      },
+      "enableAccordionMotion": {
+        "type": "bool",
       },
       "enableDialogElement": {
         "type": "bool",

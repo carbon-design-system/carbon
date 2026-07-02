@@ -59,6 +59,8 @@ class FeatureFlagsElement extends LitElement {
     'enable-dialog-element': 'CDS-MODAL',
     'enable-v12-dynamic-floating-styles': 'CDS-FLOATING',
     'enable-v12-toggle-reduced-label-spacing': 'CDS-TOGGLE',
+    // Accordion motion spike stories (Feature Flag folder)
+    'enable-accordion-motion': 'CDS-ACCORDION',
   } as const;
 
   static get observedAttributes() {

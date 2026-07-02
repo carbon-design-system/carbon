@@ -31,6 +31,8 @@ export interface FeatureFlagsProps {
   enableV12DynamicFloatingStyles?: boolean;
   enableEnhancedFileUploader?: boolean;
   enablePresence?: boolean;
+  // Accordion motion spike stories (Feature Flag folder)
+  enableAccordionMotion?: boolean;
 }
 
 // Reuse the runtime scope shape from `@carbon/feature-flags` directly. A local
@@ -62,6 +64,7 @@ export const FeatureFlags = ({
   enableV12DynamicFloatingStyles = false,
   enableEnhancedFileUploader = false,
   enablePresence = false,
+  enableAccordionMotion = false,
 }: FeatureFlagsProps) => {
   const parentScope = useContext(FeatureFlagContext);
 
@@ -78,6 +81,8 @@ export const FeatureFlags = ({
       'enable-v12-dynamic-floating-styles': enableV12DynamicFloatingStyles,
       'enable-enhanced-file-uploader': enableEnhancedFileUploader,
       'enable-presence': enablePresence,
+      // Accordion motion spike stories (Feature Flag folder)
+      'enable-accordion-motion': enableAccordionMotion,
       ...flags,
     };
 
@@ -95,6 +100,7 @@ export const FeatureFlags = ({
     enableV12DynamicFloatingStyles,
     enableEnhancedFileUploader,
     enablePresence,
+    enableAccordionMotion,
     flags,
     parentScope,
   ]);
@@ -127,6 +133,7 @@ FeatureFlags.propTypes = {
   enableV12DynamicFloatingStyles: PropTypes.bool,
   enableEnhancedFileUploader: PropTypes.bool,
   enablePresence: PropTypes.bool,
+  enableAccordionMotion: PropTypes.bool,
 };
 
 /**

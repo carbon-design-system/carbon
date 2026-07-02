@@ -97,6 +97,7 @@
     "cssnano": "^8.0.0",
     "flatpickr": "4.6.13",
     "globby": "^16.0.0",
+    "motion": "^12.40.0",
     "remark-gfm": "^4.0.0",
     "rimraf": "^6.0.1",
     "sass": "^1.93.2",
