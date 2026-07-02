@@ -1,0 +1,195 @@
+import { ArgTypes, Meta } from '@storybook/addon-docs/blocks';
+import Menu from '../Menu';
+import * as MenuStories from './Menu.stories';
+
+<Meta isTemplate />
+
+# Menu
+
+[Source code](https://github.com/carbon-design-system/carbon/tree/main/packages/react/src/components/Menu)
+
+{/* <!-- START doctoc generated TOC please keep comment here to allow auto update --> <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE --> */}
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Positioning](#positioning)
+- [Subcomponents](#subcomponents)
+  - [MenuItem](#menuitem)
+  - [MenuItemDivider](#menuitemdivider)
+  - [MenuItemGroup](#menuitemgroup)
+  - [MenuItemSelectable](#menuitemselectable)
+  - [MenuItemRadioGroup](#menuitemradiogroup)
+- [Context menu (right-click menu)](#context-menu-right-click-menu)
+- [Component API](#component-api)
+- [Feedback](#feedback)
+
+{/* <!-- END doctoc generated TOC please keep comment here to allow auto update --> */}
+
+## Overview
+
+`Menu` is a versatile component that can be used in a variety of situations. It
+implements the
+[menu design pattern](https://www.w3.org/WAI/ARIA/apg/patterns/menubar/) defined
+in the ARIA Authoring Practices Guide (APG).
+
+The `Menu` component's `children` must be a collection of any of these
+subcomponents:
+
+- [MenuItem](#menuitem)
+- [MenuItemDivider](#menuitemdivider)
+- [MenuItemGroup](#menuitemgroup)
+- [MenuItemSelectable](#menuitemselectable)
+- [MenuItemRadioGroup](#menuitemradiogroup)
+
+## Positioning
+
+You must provide a reference point for the `Menu` to position itself at. The
+props `x` and `y` either accept a single number each or an array of two numbers.
+
+The latter option is used to specify the trigger boundaries. For example, Carbon
+uses this for the
+[next version of OverflowMenu](/story/experimental-feature-flags-overflowmenu--overflow-menu)
+where we pass `[x, x + width]` and `[y, y + height]` of the trigger button. This
+way, the `Menu` is able to automatically determine its ideal position on the
+screen (which side to open at and in which direction) while always staying
+visually attached to the trigger. Each `MenuItem` that has `children` and
+therefore a submenu uses the same approach under the hood to correctly position
+the submenu.
+
+## Subcomponents
+
+### MenuItem
+
+A `MenuItem` renders a basic menu item with a label an optionally a shortcut
+hint (_note: the component only renders this hint and doesn't actually register
+the shortcut in the browser_). Each `MenuItem` can be clicked unless it's marked
+as `disabled`. If it triggers a destructive action, you can pass it
+`kind="danger"` to highlight it specially on hover and focus.
+
+```jsx
+<Menu open>
+  <MenuItem label="Copy" shortcut="⌘C" />
+  <MenuItem label="Paste" shortcut="⌘V" disabled />
+  <MenuItem label="Delete" kind="danger" />
+</Menu>
+```
+
+In order to render a submenu, you can pass any of the above mentioned
+subcomponents as `children` of a `MenuItem`.
+
+```jsx
+<Menu open>
+  <MenuItem label="Open" />
+  <MenuItem label="Save" />
+  <MenuItem label="Import">
+    <MenuItem label="Image" />
+    <MenuItem label="Movie" />
+    <MenuItem label="Text" />
+  </MenuItem>
+</Menu>
+```
+
+### MenuItemDivider
+
+The `MenuItemDivider` renders a thin dividing line, visually separating menu
+items. Use this to enhance grouping of related items.
+
+```jsx
+<Menu open>
+  <MenuItem label="Cut" />
+  <MenuItem label="Copy" />
+  <MenuItem label="Paste" />
+  <MenuItemDivider />
+  <MenuItem label="Delete" kind="danger" />
+</Menu>
+```
+
+### MenuItemGroup
+
+You can logically group multiple menu items by wrapping them inside a
+`MenuItemGroup`. This doesn't affect the visual rendering but can tremendously
+improve the experience for assistive technology users. You'll always want to use
+a `MenuItemGroup` if you have multiple
+[`MenuItemSelectable`](#menuitemselectable) that are related to each other.
+
+### MenuItemSelectable
+
+`MenuItemSelectable` is a checkbox in a menu context. Each `MenuItemSelectable`
+can be checked and unchecked unrelated to other items. If multiple items are
+related to each other, you'll want to wrap them in a `MenuItemGroup` for
+improved accessibility.
+
+```jsx
+<Menu open>
+  <MenuItemGroup label="Font style">
+    <MenuItemSelectable label="Bold" selected />
+    <MenuItemSelectable label="Italic" />
+  </MenuItemGroup>
+</Menu>
+```
+
+### MenuItemRadioGroup
+
+`MenuItemRadioGroup` is a radio button group in a menu context. Only one item
+can be selected at a time. The component automatically wraps itself in a
+`MenuItemGroup`, so you won't have to nest it manually.
+
+```jsx
+<Menu open>
+  <MenuItemRadioGroup
+    label="Font family"
+    items={['Sans', 'Serif', 'Mono']}
+    selectedItem="Sans"
+  />
+  <MenuItemDivider />
+  <MenuItemRadioGroup
+    label="Text decoration"
+    items={['None', 'Overline', 'Line-through', 'Underline']}
+    selectedItem="None"
+  />
+</Menu>
+```
+
+The `items` prop is designed to accept arbitrary items to best match your data
+structure. If you pass your items as anything that doesn't support `.toString()`
+out of the box, you'll need to pass a custom `itemToString` function that will
+be used for rendering the labels.
+
+```jsx
+const items = [
+  { weight: 100, label: 'Thin' },
+  { weight: 200, label: 'Extralight' },
+  { weight: 300, label: 'Light' },
+  { weight: 400, label: 'Regular' },
+  { weight: 500, label: 'Medium' },
+  { weight: 600, label: 'Semibold' },
+  { weight: 700, label: 'Bold' },
+];
+
+<MenuItemRadioGroup
+  label="Font weight"
+  items={items}
+  selectedItem={items[3]}
+  itemToString={(item) => item.label}
+/>;
+```
+
+## Context menu (right-click menu)
+
+The `Menu` component is suited to be used as a context menu for complex web
+applications. To make this easy, Carbon provides a
+[`useContextMenu`](/story/hooks-usecontextmenu--use-context-menu) react hook.
+Please refer to the
+[hook's documentation](/docs/hooks-usecontextmenu--use-context-menu) for more
+details.
+
+## Component API
+
+<ArgTypes />
+
+## Feedback
+
+Help us improve this component by providing feedback, asking questions on Slack,
+or updating this file on
+[GitHub](https://github.com/carbon-design-system/carbon/edit/main/packages/react/src/components/Menu/Menu.mdx).

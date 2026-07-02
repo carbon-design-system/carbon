@@ -1,0 +1,26 @@
+//
+// Copyright IBM Corp. 2020, 2024
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use '@carbon/styles/scss/config' as *;
+@use '@carbon/styles/scss/breakpoint' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/components/ui-shell/functions';
+
+#{$prefix}-header ~ #{$prefix}-side-nav {
+  block-size: calc(100% - $spacing-09);
+  margin-block-start: $spacing-09;
+}
+
+.#{$prefix}-ce-demo-devenv--container {
+  transition: margin-left 0.11s cubic-bezier(0.2, 0, 1, 0.9);
+  // Ref: https://github.com/carbon-design-system/carbon/blob/v10.10.0/packages/components/src/components/ui-shell/_side-nav.scss#L82
+  will-change: margin-left;
+
+  @include breakpoint('lg') {
+    margin-inline-start: 16rem;
+  }
+}

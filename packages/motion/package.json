@@ -1,0 +1,44 @@
+{
+  "name": "@carbon/motion",
+  "description": "Motion helpers for digital and software products using the Carbon Design System",
+  "version": "11.47.0",
+  "license": "Apache-2.0",
+  "main": "lib/index.js",
+  "module": "es/index.js",
+  "types": "lib/index.d.ts",
+  "sass": "index.scss",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/carbon-design-system/carbon.git",
+    "directory": "packages/motion"
+  },
+  "bugs": "https://github.com/carbon-design-system/carbon/issues",
+  "keywords": [
+    "ibm",
+    "elements",
+    "carbon",
+    "carbon-elements",
+    "carbon-design-system",
+    "components",
+    "react"
+  ],
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  },
+  "scripts": {
+    "build:types": "tsc -p tsconfig.types.json",
+    "build": "yarn clean && carbon-cli bundle src/index.ts --name CarbonMotion && yarn build:types",
+    "clean": "rimraf es lib umd",
+    "postinstall": "ibmtelemetry --config=telemetry.yml"
+  },
+  "devDependencies": {
+    "@carbon/cli": "^11.45.0",
+    "rimraf": "^6.0.1",
+    "typescript": "^6.0.3",
+    "typescript-config-carbon": "workspace:^0.10.0"
+  },
+  "dependencies": {
+    "@ibm/telemetry-js": "^1.5.0"
+  }
+}

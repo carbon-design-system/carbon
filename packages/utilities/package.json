@@ -1,0 +1,69 @@
+{
+  "name": "@carbon/utilities",
+  "description": "Utilities and helpers to drive consistency across software products using the Carbon Design System",
+  "version": "0.21.0",
+  "license": "Apache-2.0",
+  "main": "lib/index.js",
+  "module": "es/index.js",
+  "types": "es/index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/carbon-design-system/carbon.git",
+    "directory": "packages/utilities"
+  },
+  "bugs": "https://github.com/carbon-design-system/carbon/issues",
+  "files": [
+    "es",
+    "lib",
+    "telemetry.yml",
+    "scss",
+    "index.scss"
+  ],
+  "sideEffects": [
+    "*.scss",
+    "./index.scss",
+    "./scss/**"
+  ],
+  "exports": {
+    ".": {
+      "types": "./es/index.d.ts",
+      "import": "./es/index.js",
+      "require": "./lib/index.js",
+      "default": "./es/index.js"
+    },
+    "./index.scss": "./index.scss",
+    "./scss/*": "./scss/*",
+    "./*": {
+      "types": "./es/*/index.d.ts",
+      "import": "./es/*/index.js",
+      "require": "./lib/*/index.js",
+      "default": "./es/*/index.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "keywords": [
+    "ibm",
+    "carbon",
+    "carbon-design-system",
+    "carbon-utilities"
+  ],
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  },
+  "scripts": {
+    "build": "yarn clean && tsdown --config tsdown.config.mts",
+    "watch": "tsdown --config tsdown.config.mts --watch",
+    "clean": "rimraf es lib types",
+    "postinstall": "ibmtelemetry --config=telemetry.yml"
+  },
+  "devDependencies": {
+    "rimraf": "^6.0.1",
+    "tsdown": "^0.22.0",
+    "typescript-config-carbon": "workspace:^0.10.0"
+  },
+  "dependencies": {
+    "@ibm/telemetry-js": "^1.6.1",
+    "@internationalized/number": "^3.6.1"
+  }
+}

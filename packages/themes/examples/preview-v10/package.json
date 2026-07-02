@@ -1,0 +1,19 @@
+{
+  "name": "@carbon/themes-examples-preview-v10",
+  "private": true,
+  "version": "0.0.0",
+  "license": "Apache-2.0",
+  "scripts": {
+    "develop": "next",
+    "build": "next build"
+  },
+  "dependencies": {
+    "@carbon/grid": "^10.43.1",
+    "@carbon/themes": "^10.55.1",
+    "classnames": "^2.2.6",
+    "next": "^16.2.6",
+    "react": "^19.2.5",
+    "react-dom": "^19.2.5",
+    "sass": "^1.36.0"
+  }
+}

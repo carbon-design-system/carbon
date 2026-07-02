@@ -1,0 +1,110 @@
+//
+// Copyright IBM Corp. 2025
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use 'sass:color';
+@use 'sass:map';
+@use '../../config';
+@use '../../colors';
+@use '../../themes';
+@use '../../theme' as *;
+@use '../../utilities/component-tokens';
+@use '@carbon/themes/scss/component-tokens' as content-switcher;
+
+// content-switcher-background
+$content-switcher-background: (
+  fallback: map.get(content-switcher.$content-switcher-background, white-theme),
+  values: (
+    (
+      theme: themes.$white,
+      value: map.get(content-switcher.$content-switcher-background, white-theme),
+    ),
+    (
+      theme: themes.$g10,
+      value: map.get(content-switcher.$content-switcher-background, g-10),
+    ),
+    (
+      theme: themes.$g90,
+      value: map.get(content-switcher.$content-switcher-background, g-90),
+    ),
+    (
+      theme: themes.$g100,
+      value: map.get(content-switcher.$content-switcher-background, g-100),
+    ),
+  ),
+) !default;
+
+// content-switcher-background-hover
+$content-switcher-background-hover: (
+  fallback:
+    map.get(content-switcher.$content-switcher-background-hover, white-theme),
+  values: (
+    (
+      theme: themes.$white,
+      value:
+        map.get(
+          content-switcher.$content-switcher-background-hover,
+          white-theme
+        ),
+    ),
+    (
+      theme: themes.$g10,
+      value: map.get(content-switcher.$content-switcher-background-hover, g-10),
+    ),
+    (
+      theme: themes.$g90,
+      value: map.get(content-switcher.$content-switcher-background-hover, g-90),
+    ),
+    (
+      theme: themes.$g100,
+      value: map.get(content-switcher.$content-switcher-background-hover, g-100),
+    ),
+  ),
+) !default;
+
+// content-switcher-selected
+$content-switcher-selected: (
+  fallback: map.get(content-switcher.$content-switcher-selected, white-theme),
+  values: (
+    (
+      theme: themes.$white,
+      value: map.get(content-switcher.$content-switcher-selected, white-theme),
+    ),
+    (
+      theme: themes.$g10,
+      value: map.get(content-switcher.$content-switcher-selected, g-10),
+    ),
+    (
+      theme: themes.$g90,
+      value: map.get(content-switcher.$content-switcher-selected, g-90),
+    ),
+    (
+      theme: themes.$g100,
+      value: map.get(content-switcher.$content-switcher-selected, g-100),
+    ),
+  ),
+) !default;
+
+// Add to $content-switcher-tokens map
+$content-switcher-tokens: (
+  content-switcher-background: $content-switcher-background,
+  content-switcher-background-hover: $content-switcher-background-hover,
+  content-switcher-selected: $content-switcher-selected,
+);
+
+// Generate CSS custom properties for each token
+$content-switcher-background: component-tokens.get-var(
+  $content-switcher-background,
+  'content-switcher-background'
+);
+$content-switcher-background-hover: component-tokens.get-var(
+  $content-switcher-background-hover,
+  'content-switcher-background-hover'
+);
+$content-switcher-selected: component-tokens.get-var(
+  $content-switcher-selected,
+  'content-switcher-selected'
+);

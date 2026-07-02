@@ -1,0 +1,403 @@
+//
+// Copyright IBM Corp. 2016, 2023
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use '../button' as button;
+@use '../tooltip';
+@use '../../config' as *;
+@use '../../motion' as *;
+@use '../../spacing' as *;
+@use '../../theme' as *;
+@use '../../type' as *;
+@use '../../layer' as *;
+@use '../../utilities/box-shadow' as *;
+@use '../../utilities/button-reset';
+@use '../../utilities/component-reset';
+@use '../../utilities/focus-outline' as *;
+@use '../../utilities/high-contrast-mode' as *;
+@use '../../utilities/convert';
+@use '../../utilities/z-index' as *;
+@use '../../utilities/custom-property';
+
+/// Overflow menu styles
+/// @access public
+/// @group overflow-menu
+@mixin overflow-menu {
+  .#{$prefix}--overflow-menu,
+  .#{$prefix}--overflow-menu__trigger {
+    @include button-reset.reset;
+    @include component-reset.reset;
+    @include focus-outline('reset');
+
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    block-size: $spacing-08;
+    cursor: pointer;
+    inline-size: $spacing-08;
+    min-block-size: $spacing-08;
+    transition:
+      outline $duration-fast-02 motion(entrance, productive),
+      background-color $duration-fast-02 motion(entrance, productive);
+
+    &:focus {
+      @include focus-outline('outline');
+    }
+
+    &:hover {
+      background-color: $background-hover;
+    }
+  }
+
+  .#{$prefix}--overflow-menu > :first-child {
+    margin-block-start: 0;
+  }
+
+  .#{$prefix}--overflow-menu--xs {
+    block-size: $spacing-06;
+    inline-size: $spacing-06;
+    min-block-size: $spacing-06;
+  }
+
+  .#{$prefix}--overflow-menu--sm {
+    block-size: $spacing-07;
+    inline-size: $spacing-07;
+    min-block-size: $spacing-07;
+  }
+
+  .#{$prefix}--overflow-menu--lg {
+    block-size: $spacing-09;
+    inline-size: $spacing-09;
+  }
+
+  // Overwrite Icon Tooltip focus styles
+  .#{$prefix}--overflow-menu__trigger.#{$prefix}--tooltip--a11y.#{$prefix}--tooltip__trigger:focus {
+    @include focus-outline('outline');
+
+    svg {
+      outline: none;
+    }
+  }
+
+  .#{$prefix}--overflow-menu.#{$prefix}--overflow-menu--open,
+  .#{$prefix}--overflow-menu.#{$prefix}--overflow-menu--open
+    .#{$prefix}--overflow-menu__trigger {
+    @include box-shadow;
+
+    background-color: $layer;
+    transition: none;
+  }
+
+  .#{$prefix}--overflow-menu--light.#{$prefix}--overflow-menu--open,
+  .#{$prefix}--overflow-menu--light.#{$prefix}--overflow-menu--open
+    .#{$prefix}--overflow-menu__trigger {
+    background-color: $layer;
+  }
+
+  .#{$prefix}--overflow-menu__icon {
+    block-size: $spacing-05;
+    fill: $icon-primary;
+    inline-size: $spacing-05;
+  }
+
+  .#{$prefix}--overflow-menu__wrapper {
+    line-height: 0;
+  }
+
+  .#{$prefix}--overflow-menu-options {
+    @include component-reset.reset;
+    @include box-shadow;
+
+    position: absolute;
+    z-index: z('floating');
+    display: none;
+    flex-direction: column;
+    align-items: flex-start;
+    background-color: $layer;
+    inline-size: $spacing-13;
+    inset-block-start: $spacing-07;
+    inset-inline-start: 0;
+    list-style: none;
+
+    &::after {
+      position: absolute;
+      display: block;
+      background-color: $layer;
+      content: '';
+      transition: background-color $duration-fast-02
+        motion(entrance, productive);
+
+      @media screen and (prefers-reduced-motion: reduce) {
+        transition: none;
+      }
+    }
+  }
+
+  .#{$prefix}--overflow-menu.#{$prefix}--overflow-menu--open:hover {
+    background-color: $layer;
+  }
+
+  .#{$prefix}--overflow-menu-options--light {
+    background-color: $layer-hover;
+
+    &::after {
+      background-color: $layer;
+    }
+  }
+
+  .#{$prefix}--overflow-menu.#{$prefix}--overflow-menu--light.#{$prefix}--overflow-menu--open:hover {
+    background-color: $layer-hover;
+  }
+
+  .#{$prefix}--overflow-menu-options[data-floating-menu-direction='bottom']:not(
+      .#{$prefix}--breadcrumb-menu-options
+    )::after {
+    block-size: convert.to-rem(3px);
+    inline-size: $spacing-08;
+    inset-block-start: convert.to-rem(-3px);
+    inset-inline-start: 0;
+  }
+
+  .#{$prefix}--overflow-menu-options[data-floating-menu-direction='top']::after {
+    block-size: $spacing-03;
+    inline-size: $spacing-08;
+    inset-block-end: -$spacing-03;
+    inset-inline-start: 0;
+  }
+
+  .#{$prefix}--overflow-menu-options[data-floating-menu-direction='left']::after {
+    block-size: $spacing-08;
+    inline-size: convert.to-rem(6px);
+    inset-block-start: 0;
+    inset-inline-end: convert.to-rem(-6px);
+  }
+
+  .#{$prefix}--overflow-menu-options[data-floating-menu-direction='right']::after {
+    block-size: $spacing-08;
+    inline-size: convert.to-rem(6px);
+    inset-block-start: 0;
+    inset-inline-start: convert.to-rem(-6px);
+  }
+
+  .#{$prefix}--overflow-menu-options--xs.#{$prefix}--overflow-menu-options {
+    &[data-floating-menu-direction='bottom']::after,
+    &[data-floating-menu-direction='top']::after {
+      inline-size: $spacing-06;
+    }
+
+    &[data-floating-menu-direction='left']::after,
+    &[data-floating-menu-direction='right']::after {
+      block-size: $spacing-06;
+    }
+  }
+
+  .#{$prefix}--overflow-menu-options--sm.#{$prefix}--overflow-menu-options {
+    &[data-floating-menu-direction='bottom']::after,
+    &[data-floating-menu-direction='top']::after {
+      inline-size: $spacing-07;
+    }
+
+    &[data-floating-menu-direction='left']::after,
+    &[data-floating-menu-direction='right']::after {
+      block-size: $spacing-07;
+    }
+  }
+
+  .#{$prefix}--overflow-menu-options--lg.#{$prefix}--overflow-menu-options {
+    &[data-floating-menu-direction='bottom']::after,
+    &[data-floating-menu-direction='top']::after {
+      inline-size: $spacing-09;
+    }
+
+    &[data-floating-menu-direction='left']::after,
+    &[data-floating-menu-direction='right']::after {
+      block-size: $spacing-09;
+    }
+  }
+
+  .#{$prefix}--overflow-menu--flip.#{$prefix}--overflow-menu-options[data-floating-menu-direction='top']::after,
+  .#{$prefix}--overflow-menu--flip.#{$prefix}--overflow-menu-options[data-floating-menu-direction='bottom']::after {
+    inset-inline: auto 0;
+  }
+
+  .#{$prefix}--overflow-menu--flip.#{$prefix}--overflow-menu-options[data-floating-menu-direction='left']::after,
+  .#{$prefix}--overflow-menu--flip.#{$prefix}--overflow-menu-options[data-floating-menu-direction='right']::after {
+    inset-block: auto 0;
+  }
+
+  .#{$prefix}--overflow-menu-options--open {
+    display: flex;
+  }
+
+  .#{$prefix}--overflow-menu-options__content {
+    inline-size: 100%;
+  }
+
+  .#{$prefix}--overflow-menu-options__option {
+    @include component-reset.reset;
+
+    display: flex;
+    align-items: center;
+    padding: 0;
+    background-color: transparent;
+    block-size: $spacing-08;
+    inline-size: 100%;
+    transition: background-color $duration-fast-02 motion(entrance, productive);
+  }
+
+  .#{$prefix}--overflow-menu-options--xs
+    .#{$prefix}--overflow-menu-options__option {
+    block-size: $spacing-06;
+  }
+
+  .#{$prefix}--overflow-menu-options--sm
+    .#{$prefix}--overflow-menu-options__option {
+    block-size: $spacing-07;
+  }
+
+  .#{$prefix}--overflow-menu-options--lg
+    .#{$prefix}--overflow-menu-options__option {
+    block-size: $spacing-09;
+  }
+
+  .#{$prefix}--overflow-menu--divider {
+    border-block-start: 1px solid $border-subtle;
+  }
+
+  .#{$prefix}--overflow-menu--light .#{$prefix}--overflow-menu--divider {
+    border-block-start: 1px solid $border-subtle;
+  }
+
+  a.#{$prefix}--overflow-menu-options__btn::before {
+    display: inline-block;
+    block-size: 100%;
+    content: '';
+    vertical-align: middle;
+  }
+
+  .#{$prefix}--overflow-menu-options__btn {
+    @include type-style('body-compact-01');
+    @include focus-outline('reset');
+
+    display: inline-flex;
+    align-items: center;
+    padding: 0 $spacing-05;
+    border: none;
+    background-color: transparent;
+    block-size: 100%;
+    color: $text-secondary;
+    cursor: pointer;
+    font-family: inherit;
+    font-weight: 400;
+    inline-size: 100%;
+    max-inline-size: 11.25rem;
+    text-align: start;
+    transition:
+      outline $duration-fast-02 motion(entrance, productive),
+      background-color $duration-fast-02 motion(entrance, productive),
+      color $duration-fast-02 motion(entrance, productive);
+
+    &:hover {
+      color: $text-primary;
+    }
+
+    &:focus {
+      @include focus-outline('outline');
+    }
+
+    &::-moz-focus-inner {
+      border: none;
+    }
+  }
+
+  .#{$prefix}--overflow-menu-options__btn svg {
+    fill: $icon-secondary;
+  }
+
+  .#{$prefix}--overflow-menu-options__btn:hover svg {
+    fill: $icon-primary;
+  }
+
+  .#{$prefix}--overflow-menu-options__option-content {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .#{$prefix}--overflow-menu-options__option:hover {
+    background-color: $layer-hover;
+  }
+
+  .#{$prefix}--overflow-menu-options__option--danger
+    .#{$prefix}--overflow-menu-options__btn:hover,
+  .#{$prefix}--overflow-menu-options__option--danger
+    .#{$prefix}--overflow-menu-options__btn:focus {
+    background-color: button.$button-danger-primary;
+    color: $text-on-color;
+
+    svg {
+      fill: currentColor;
+    }
+  }
+
+  .#{$prefix}--overflow-menu-options__option--danger
+    .#{$prefix}--overflow-menu-options__btn:focus {
+    box-shadow: inset 0 0 0 convert.to-rem(3px) $background;
+  }
+
+  .#{$prefix}--overflow-menu-options__option--disabled:hover {
+    background-color: $layer;
+    cursor: not-allowed;
+  }
+
+  .#{$prefix}--overflow-menu-options__option--disabled
+    .#{$prefix}--overflow-menu-options__btn {
+    color: $text-disabled;
+    cursor: not-allowed;
+
+    &:hover,
+    &:active,
+    &:focus {
+      @include focus-outline('reset');
+
+      background-color: $layer;
+      color: $text-disabled;
+    }
+  }
+
+  .#{$prefix}--overflow-menu-options__option--disabled
+    .#{$prefix}--overflow-menu-options__btn
+    svg {
+    fill: $icon-disabled;
+  }
+
+  .#{$prefix}--overflow-menu--flip {
+    inset-inline-start: -140px;
+
+    &::before {
+      inset-inline-start: 145px;
+    }
+  }
+
+  // Windows HCM fix
+  /* stylelint-disable */
+  .#{$prefix}--overflow-menu:focus,
+  .#{$prefix}--overflow-menu-options__btn:focus {
+    @include high-contrast-mode('focus');
+  }
+  /*stylelint-enable */
+
+  $popover-offset: custom-property.get-var('popover-offset', 2.5rem);
+
+  .#{$prefix}--overflow-menu__top-start {
+    transform: translate(0, calc(-100% - $popover-offset));
+  }
+
+  .#{$prefix}--overflow-menu__top-end {
+    transform: translate(0, calc(-100% - $popover-offset));
+  }
+}

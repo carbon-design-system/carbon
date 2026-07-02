@@ -1,0 +1,544 @@
+//
+// Copyright IBM Corp. 2016, 2023
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use '../mixins' as *;
+@use '../functions' as *;
+@use '../../../breakpoint' as *;
+@use '../../../config' as *;
+@use '../../../layer' as *;
+@use '../../../motion' as *;
+@use '../../../spacing' as *;
+@use '../../../theme' as *;
+@use '../../../type' as *;
+@use '../../../utilities/button-reset';
+@use '../../../utilities/component-reset';
+@use '../../../utilities/convert';
+@use '../../../utilities/focus-outline' as *;
+@use '../../../utilities/z-index' as *;
+
+/// UI shell side nav
+/// @access private
+/// @group ui-shell
+@mixin side-nav {
+  //----------------------------------------------------------------------------
+  // Side-nav > Panel
+  //----------------------------------------------------------------------------.
+  .#{$prefix}--side-nav {
+    position: fixed;
+    z-index: z('header');
+    // Useful to toggle this property to see what's going on when not expanded
+    overflow: hidden;
+    background-color: $background;
+    color: $text-secondary;
+    inline-size: mini-units(6);
+    inset-block: 0;
+    inset-inline-start: 0;
+    max-inline-size: mini-units(32);
+    // TODO: sync with motion work
+    transition:
+      inline-size 0.11s cubic-bezier(0.2, 0, 1, 0.9),
+      transform 0.11s cubic-bezier(0.2, 0, 1, 0.9);
+    will-change: inline-size;
+  }
+
+  .#{$prefix}--side-nav--ux {
+    inline-size: mini-units(32);
+    inset-block-start: $spacing-09;
+
+    @include breakpoint-down('lg') {
+      inline-size: 0;
+    }
+  }
+
+  //----------------------------------------------------------------------------
+  // Rail
+  //---------------------------------------------------------------------------
+  // Used for rendering the actual side rail. There are two states that we have
+  // to style for, namely for when the rail is collapsed and expanded. When
+  // collapsed, the rail is intended to expand on mouse over. When expanded, it
+  // should have the same dimensions as when expanded on mouse over
+
+  .#{$prefix}--side-nav--rail {
+    inline-size: mini-units(6);
+  }
+
+  .#{$prefix}--side-nav--hidden {
+    inline-size: 0;
+  }
+
+  .#{$prefix}--side-nav--expanded {
+    inline-size: mini-units(32);
+  }
+
+  .#{$prefix}--side-nav__overlay {
+    position: fixed;
+    background-color: transparent;
+    block-size: 0;
+    inline-size: 0;
+    inset-block-start: convert.to-rem(48px);
+    inset-inline-start: 0;
+    opacity: 0;
+    transition:
+      opacity $transition-expansion $standard-easing,
+      background-color $transition-expansion $standard-easing;
+  }
+
+  .#{$prefix}--side-nav__overlay-active {
+    @include breakpoint-down('lg') {
+      z-index: z('overlay');
+      background-color: $overlay;
+      block-size: 100vh;
+      inline-size: 100vw;
+      opacity: 1;
+      transition:
+        opacity $transition-expansion $standard-easing,
+        background-color $transition-expansion $standard-easing;
+    }
+  }
+
+  // When used alongside the header, we update the `top` positioning so that we
+  // can fit both widgets on the same page without overlapping.
+  .#{$prefix}--header ~ .#{$prefix}--side-nav {
+    block-size: calc(100% - 48px);
+    inset-block-start: mini-units(6);
+  }
+
+  .#{$prefix}--side-nav--fixed {
+    inline-size: mini-units(32);
+  }
+
+  .#{$prefix}--side-nav--collapsed {
+    inline-size: mini-units(32);
+    transform: translateX(mini-units(-32));
+  }
+
+  //----------------------------------------------------------------------------
+  // Side-nav > Navigation
+  //----------------------------------------------------------------------------
+  .#{$prefix}--side-nav__navigation {
+    display: flex;
+    flex-direction: column;
+  }
+
+  //----------------------------------------------------------------------------
+  // Side-nav > Navigation > Item(s)
+  //----------------------------------------------------------------------------
+  .#{$prefix}--side-nav__items {
+    @include component-reset.reset;
+
+    overflow: hidden;
+    flex: 1 1 0%;
+    padding: 1rem 0 0;
+
+    @include expanded() {
+      overflow-y: auto;
+    }
+  }
+
+  .#{$prefix}--side-nav--ux .#{$prefix}--side-nav__items {
+    overflow-y: auto;
+  }
+
+  .#{$prefix}--side-nav__item {
+    overflow: hidden;
+    block-size: auto;
+    inline-size: auto;
+  }
+
+  .#{$prefix}--side-nav--ux .#{$prefix}--side-nav__item {
+    block-size: auto;
+    inline-size: auto;
+  }
+
+  .#{$prefix}--side-nav__item:not(.#{$prefix}--side-nav__item--active):hover
+    .#{$prefix}--side-nav__item:not(.#{$prefix}--side-nav__item--active)
+    > .#{$prefix}--side-nav__submenu:hover,
+  .#{$prefix}--side-nav__item:not(.#{$prefix}--side-nav__item--active)
+    > .#{$prefix}--side-nav__link:hover,
+  .#{$prefix}--side-nav__menu
+    a.#{$prefix}--side-nav__link:not(.#{$prefix}--side-nav__link--current):not(
+      [aria-current='page']
+    ):hover,
+  .#{$prefix}--side-nav a.#{$prefix}--header__menu-item:hover,
+  .#{$prefix}--side-nav
+    .#{$prefix}--header__menu-title[aria-expanded='true']:hover {
+    // TODO: sync color
+    background-color: $background-hover;
+    color: $text-primary;
+  }
+
+  .#{$prefix}--side-nav__item:not(.#{$prefix}--side-nav__item--active)
+    > .#{$prefix}--side-nav__link:hover
+    > span,
+  .#{$prefix}--side-nav__item:not(.#{$prefix}--side-nav__item--active)
+    .#{$prefix}--side-nav__menu-item
+    > .#{$prefix}--side-nav__link:hover
+    > span {
+    color: $text-primary;
+  }
+
+  .#{$prefix}--side-nav__item--large {
+    block-size: auto;
+  }
+
+  //----------------------------------------------------------------------------
+  // Side-nav > Navigation > Divider
+  //----------------------------------------------------------------------------
+  .#{$prefix}--side-nav__divider {
+    margin: $spacing-03 $spacing-05;
+    background-color: $border-subtle;
+    block-size: 1px;
+    list-style-type: none;
+  }
+
+  .#{$prefix}--side-nav__divider hr {
+    border: none;
+  }
+
+  //----------------------------------------------------------------------------
+  // Side-nav > Navigation > {Menu,Submenu}
+  //----------------------------------------------------------------------------
+  .#{$prefix}--side-nav__submenu {
+    @include button-reset.reset($width: true);
+    @include type-style('heading-compact-01');
+    @include focus-outline('reset');
+
+    display: flex;
+    align-items: center;
+
+    padding: 0 mini-units(2);
+    block-size: mini-units(4);
+    color: $text-secondary;
+    transition:
+      color $duration-fast-02,
+      background-color $duration-fast-02,
+      outline $duration-fast-02;
+    user-select: none;
+  }
+
+  .#{$prefix}--side-nav__submenu:hover {
+    background-color: $background-hover;
+    color: $text-primary;
+  }
+
+  .#{$prefix}--side-nav__submenu:focus {
+    @include focus-outline('outline');
+  }
+
+  .#{$prefix}--side-nav__submenu-title {
+    @include text-overflow();
+
+    text-align: start;
+  }
+
+  .#{$prefix}--side-nav__icon.#{$prefix}--side-nav__submenu-chevron {
+    display: flex;
+    flex: 1;
+    justify-content: flex-end;
+  }
+
+  .#{$prefix}--side-nav__submenu-chevron > svg {
+    block-size: convert.to-rem(16px);
+    inline-size: convert.to-rem(16px);
+    transition: transform $duration-fast-02;
+  }
+
+  .#{$prefix}--side-nav__submenu[aria-expanded='true']
+    .#{$prefix}--side-nav__submenu-chevron
+    > svg {
+    transform: rotate(180deg);
+  }
+
+  .#{$prefix}--side-nav__item--large .#{$prefix}--side-nav__submenu {
+    block-size: mini-units(6);
+  }
+
+  .#{$prefix}--side-nav__item--active .#{$prefix}--side-nav__submenu:hover {
+    //the active className is used for selected styles, hence using the selected tokens
+    background-color: $background-selected;
+    color: $text-primary;
+  }
+
+  .#{$prefix}--side-nav__item--active
+    .#{$prefix}--side-nav__submenu[aria-expanded='false'] {
+    position: relative;
+    background-color: $background-selected;
+    color: $text-primary;
+
+    &::before {
+      position: absolute;
+      background-color: $border-interactive;
+      content: '';
+      inline-size: 3px;
+      inset-block: 0;
+      inset-inline-start: 0;
+    }
+  }
+
+  .#{$prefix}--side-nav__item--active .#{$prefix}--side-nav__submenu-title {
+    color: $text-primary;
+    font-weight: 600;
+  }
+
+  .#{$prefix}--side-nav__item--active .#{$prefix}--side-nav__icon > svg {
+    fill: $icon-primary;
+  }
+
+  .#{$prefix}--side-nav__menu {
+    @include component-reset.reset;
+
+    display: block;
+    max-block-size: 0;
+    visibility: hidden;
+  }
+
+  .#{$prefix}--side-nav__submenu[aria-expanded='true']
+    + .#{$prefix}--side-nav__menu {
+    max-block-size: convert.to-rem(1500px);
+    visibility: inherit;
+  }
+
+  .#{$prefix}--side-nav__menu a.#{$prefix}--side-nav__link {
+    block-size: mini-units(4);
+    font-weight: 400;
+    min-block-size: mini-units(4);
+    padding-inline-start: mini-units(4);
+  }
+
+  .#{$prefix}--side-nav__item.#{$prefix}--side-nav__item--icon
+    a.#{$prefix}--side-nav__link {
+    padding-inline-start: mini-units(9);
+  }
+  .#{$prefix}--side-nav__menu a.#{$prefix}--side-nav__link--current,
+  .#{$prefix}--side-nav__menu a.#{$prefix}--side-nav__link[aria-current='page'],
+  a.#{$prefix}--side-nav__link--current {
+    background-color: $background-selected;
+
+    > span {
+      color: $text-primary;
+      font-weight: 600;
+    }
+  }
+
+  //----------------------------------------------------------------------------
+  // Side-nav > Link
+  //----------------------------------------------------------------------------
+  a.#{$prefix}--side-nav__link,
+  .#{$prefix}--side-nav a.#{$prefix}--header__menu-item,
+  .#{$prefix}--side-nav
+    .#{$prefix}--header__menu-title[aria-expanded='true']
+    + .#{$prefix}--header__menu {
+    @include focus-outline('reset');
+    @include type-style('heading-compact-01');
+
+    position: relative;
+    display: flex;
+    align-items: center;
+    padding: 0 mini-units(2);
+    min-block-size: mini-units(4);
+    text-decoration: none;
+    transition:
+      color $duration-fast-02,
+      background-color $duration-fast-02,
+      outline $duration-fast-02;
+  }
+
+  .#{$prefix}--side-nav__item--large a.#{$prefix}--side-nav__link {
+    block-size: mini-units(6);
+  }
+
+  a.#{$prefix}--side-nav__link > .#{$prefix}--side-nav__link-text,
+  .#{$prefix}--side-nav
+    a.#{$prefix}--header__menu-item
+    .#{$prefix}--text-truncate-end {
+    @include text-overflow();
+
+    color: $text-secondary;
+    font-size: convert.to-rem(14px);
+    letter-spacing: 0.1px;
+    line-height: 1.25rem;
+    user-select: none;
+  }
+
+  a.#{$prefix}--side-nav__link:focus,
+  .#{$prefix}--side-nav a.#{$prefix}--header__menu-item:focus {
+    @include focus-outline('outline');
+  }
+
+  a.#{$prefix}--side-nav__link[aria-current='page'],
+  a.#{$prefix}--side-nav__link--current {
+    background-color: $background-selected;
+    font-weight: 600;
+  }
+
+  a.#{$prefix}--side-nav__link[aria-current='page']
+    .#{$prefix}--side-nav__link-text,
+  a.#{$prefix}--side-nav__link--current .#{$prefix}--side-nav__link-text {
+    color: $text-primary;
+  }
+
+  a.#{$prefix}--side-nav__link[aria-current='page']::before,
+  a.#{$prefix}--side-nav__link--current::before {
+    position: absolute;
+    background-color: $border-interactive;
+    content: '';
+    inline-size: 3px;
+    inset-block: 0;
+    inset-inline-start: 0;
+  }
+
+  //----------------------------------------------------------------------------
+  // Side-nav > Icons
+  //----------------------------------------------------------------------------
+  .#{$prefix}--side-nav__icon {
+    display: flex;
+    // Helpful in flex containers so the icon does not have less than the
+    // expected width
+    flex: 0 0 mini-units(2);
+    align-items: center;
+    justify-content: center;
+  }
+
+  .#{$prefix}--side-nav__icon:not(.#{$prefix}--side-nav__submenu-chevron) {
+    margin-inline-end: mini-units(3);
+  }
+
+  .#{$prefix}--side-nav__icon > svg {
+    block-size: mini-units(2);
+    fill: $icon-secondary;
+    inline-size: mini-units(2);
+  }
+
+  .#{$prefix}--side-nav__icon > svg.#{$prefix}--side-nav-collapse-icon {
+    display: none;
+  }
+
+  .#{$prefix}--side-nav--expanded
+    .#{$prefix}--side-nav__icon
+    > svg.#{$prefix}--side-nav-expand-icon {
+    display: none;
+  }
+
+  .#{$prefix}--side-nav--expanded
+    .#{$prefix}--side-nav__icon
+    > svg.#{$prefix}--side-nav-collapse-icon {
+    display: block;
+  }
+
+  //----------------------------------------------------------------------------
+  // Variants - Fixed
+  //----------------------------------------------------------------------------
+  .#{$prefix}--side-nav--fixed a.#{$prefix}--side-nav__link,
+  .#{$prefix}--side-nav--fixed .#{$prefix}--side-nav__submenu {
+    padding-inline-start: mini-units(2);
+  }
+
+  .#{$prefix}--side-nav--fixed
+    .#{$prefix}--side-nav__item:not(.#{$prefix}--side-nav__item--icon)
+    .#{$prefix}--side-nav__menu
+    a.#{$prefix}--side-nav__link {
+    padding-inline-start: mini-units(4);
+  }
+
+  //----------------------------------------------------------------------------
+  // Variants - Header Nav Links in Side Nav
+  //----------------------------------------------------------------------------
+  .#{$prefix}--side-nav .#{$prefix}--header__nav {
+    @include breakpoint-down('lg') {
+      display: block;
+    }
+  }
+
+  .#{$prefix}--side-nav__header-navigation {
+    @include component-reset.reset;
+
+    display: none;
+
+    @include breakpoint-down('lg') {
+      position: relative;
+      display: block;
+      margin-block-end: convert.to-rem(32px);
+    }
+  }
+
+  .#{$prefix}--side-nav__header-divider::after {
+    position: absolute;
+    background: $border-subtle;
+    block-size: convert.to-rem(1px);
+    content: '';
+    inline-size: calc(100% - 32px);
+    inset-block-end: convert.to-rem(-16px);
+    inset-inline-start: convert.to-rem(16px);
+  }
+
+  //header menu items overrides
+  .#{$prefix}--side-nav a.#{$prefix}--header__menu-item {
+    justify-content: space-between;
+    color: $text-secondary;
+    white-space: nowrap;
+
+    &[aria-expanded='true'] {
+      background-color: transparent;
+    }
+  }
+
+  .#{$prefix}--side-nav
+    .#{$prefix}--header__menu-title[aria-expanded='true']
+    + .#{$prefix}--header__menu {
+    padding: 0;
+    background-color: transparent;
+    box-shadow: none;
+    inline-size: 100%;
+    inset-block-end: inherit;
+    transform: none;
+
+    li {
+      inline-size: 100%;
+    }
+
+    a.#{$prefix}--header__menu-item {
+      font-weight: 400;
+      padding-inline-start: 4.25rem;
+    }
+
+    a.#{$prefix}--header__menu-item:hover {
+      background-color: $background-hover;
+      color: $text-primary;
+    }
+
+    // non-hover, selected state inherited from `_header.scss`
+    a.#{$prefix}--header__menu-item--current:hover {
+      background-color: $layer-selected-hover;
+    }
+  }
+
+  .#{$prefix}--side-nav
+    .#{$prefix}--side-nav__header-navigation
+    a.#{$prefix}--header__menu-item[aria-current='page']::after,
+  .#{$prefix}--side-nav
+    .#{$prefix}--side-nav__header-navigation
+    .#{$prefix}--header__menu-item--current::after {
+    block-size: calc(100% + 4px);
+    inline-size: 3px;
+  }
+
+  .#{$prefix}--side-nav
+    .#{$prefix}--header__menu
+    a.#{$prefix}--header__menu-item {
+    block-size: inherit;
+  }
+
+  .#{$prefix}--side-nav
+    a.#{$prefix}--header__menu-item:hover
+    .#{$prefix}--header__menu-arrow,
+  .#{$prefix}--side-nav
+    a.#{$prefix}--header__menu-item:focus
+    .#{$prefix}--header__menu-arrow,
+  .#{$prefix}--side-nav .#{$prefix}--header__menu-arrow {
+    fill: $icon-secondary;
+  }
+}

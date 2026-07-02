@@ -1,0 +1,306 @@
+/**
+ * Copyright IBM Corp. 2019, 2026
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+import { html } from 'lit';
+import { ifDefined } from 'lit/directives/if-defined.js';
+import { iconLoader } from '../../globals/internal/icon-loader';
+import View16 from '@carbon/icons/es/view/16.js';
+import FolderOpen16 from '@carbon/icons/es/folder--open/16.js';
+import Folders16 from '@carbon/icons/es/folders/16.js';
+import './index';
+import '../form/form-item';
+import '../ai-label';
+import '../icon-button';
+import { withLayers } from '../../../.storybook/decorators/with-layers';
+
+const content = html`
+  <div slot="body-text">
+    <p class="secondary">AI Explained</p>
+    <h2 class="ai-label-heading">84%</h2>
+    <p class="secondary bold">Confidence score</p>
+    <p class="secondary">
+      Lorem ipsum dolor sit amet, di os consectetur adipiscing elit, sed do
+      eiusmod tempor incididunt ut fsil labore et dolore magna aliqua.
+    </p>
+    <hr />
+    <p class="secondary">Model type</p>
+    <p class="bold">Foundation model</p>
+  </div>
+`;
+
+const actions = html`
+  <cds-icon-button kind="ghost" slot="actions" size="lg">
+    ${iconLoader(View16, { slot: 'icon' })}
+    <span slot="tooltip-content"> View </span>
+  </cds-icon-button>
+  <cds-icon-button kind="ghost" slot="actions" size="lg">
+    ${iconLoader(FolderOpen16, { slot: 'icon' })}
+    <span slot="tooltip-content"> Open folder</span>
+  </cds-icon-button>
+  <cds-icon-button kind="ghost" slot="actions" size="lg">
+    ${iconLoader(Folders16, { slot: 'icon' })}
+    <span slot="tooltip-content"> Folders </span>
+  </cds-icon-button>
+  <cds-ai-label-action-button>View details</cds-ai-label-action-button>
+`;
+
+const args = {
+  cols: 0,
+  counterMode: '',
+  disabled: false,
+  enableCounter: true,
+  helperText: 'TextArea helper text',
+  hideLabel: false,
+  invalid: false,
+  invalidText:
+    'Error message that is really long can wrap to more lines but should not be excessively long.',
+  label: 'TextArea label',
+  maxCount: 500,
+  onInput: () => {},
+  placeholder: '',
+  readonly: false,
+  rows: 4,
+  value: '',
+  warn: false,
+  warnText: 'This is a warning message.',
+};
+
+const argTypes = {
+  cols: {
+    control: 'number',
+    description: 'Number of columns (cols)',
+  },
+  counterMode: {
+    control: 'radio',
+    options: ['character', 'word'],
+    description:
+      'Specify the method used for calculating the counter number (character or word)',
+  },
+  disabled: {
+    control: 'boolean',
+    description: 'Disabled (disabled)',
+  },
+  enableCounter: {
+    control: 'boolean',
+    description: 'Enable character counter (enable-counter)',
+  },
+  helperText: {
+    control: 'text',
+    description: 'Helper text (helper-text)',
+  },
+  hideLabel: {
+    control: 'boolean',
+    description: 'Hide label (hide-label)',
+  },
+  invalid: {
+    control: 'boolean',
+    description: 'Invalid (invalid)',
+  },
+  invalidText: {
+    control: 'text',
+    description: 'Invalid text (invalid-text)',
+  },
+  label: {
+    control: 'text',
+    description: 'Label (label)',
+  },
+  maxCount: {
+    control: 'number',
+    description: 'Max character count (max-count)',
+  },
+  onInput: {
+    action: `input`,
+  },
+  placeholder: {
+    control: 'text',
+    description: 'Placeholder text (placeholder)',
+  },
+  readonly: {
+    control: 'boolean',
+    description: 'Read only (readonly)',
+  },
+  rows: {
+    control: 'number',
+    description: 'Number of rows (rows)',
+  },
+  value: {
+    control: 'text',
+    description: 'Value (value)',
+  },
+  warn: {
+    control: 'boolean',
+    description: 'Warn (warn)',
+  },
+  warnText: {
+    control: 'text',
+    description: 'Warn text (warn-text)',
+  },
+};
+
+export const Default = {
+  args,
+  argTypes,
+  parameters: {
+    controls: {
+      exclude: ['onInput'],
+    },
+  },
+  render: ({
+    cols,
+    counterMode,
+    disabled,
+    enableCounter,
+    helperText,
+    hideLabel,
+    invalid,
+    invalidText,
+    label,
+    maxCount,
+    onInput,
+    placeholder,
+    readonly,
+    rows,
+    value,
+    warn,
+    warnText,
+  }) => html`
+    <cds-form-item>
+      <cds-textarea
+        ?enable-counter="${enableCounter}"
+        counter-mode="${ifDefined(counterMode)}"
+        helper-text="${ifDefined(helperText)}"
+        ?hide-label="${hideLabel}"
+        ?invalid="${invalid}"
+        invalid-text="${ifDefined(invalidText)}"
+        label="${ifDefined(label)}"
+        ?readonly="${readonly}"
+        value="${ifDefined(value)}"
+        ?warn="${warn}"
+        warn-text="${ifDefined(warnText)}"
+        ?disabled="${disabled}"
+        max-count="${ifDefined(maxCount)}"
+        placeholder="${ifDefined(placeholder)}"
+        @input="${onInput}"
+        rows="${ifDefined(rows)}"
+        cols="${ifDefined(cols)}">
+        ${value}
+      </cds-textarea>
+    </cds-form-item>
+  `,
+};
+
+export const Skeleton = {
+  args,
+  argTypes,
+  parameters: {
+    controls: {
+      include: ['hideLabel'],
+    },
+  },
+  render: ({ hideLabel }) => html`
+    <cds-textarea-skeleton ?hide-label=${hideLabel}></cds-textarea-skeleton>
+  `,
+};
+
+export const WithAILabel = {
+  args: { ...args, helperText: 'Optional helper text', enableCounter: false },
+  argTypes,
+  render: ({
+    cols,
+    counterMode,
+    disabled,
+    enableCounter,
+    helperText,
+    hideLabel,
+    invalid,
+    invalidText,
+    label,
+    maxCount,
+    onInput,
+    placeholder,
+    readonly,
+    rows,
+    value,
+    warn,
+    warnText,
+  }) => html`
+    <cds-textarea
+      ?enable-counter="${enableCounter}"
+      counter-mode="${ifDefined(counterMode)}"
+      helper-text="${ifDefined(helperText)}"
+      ?hide-label="${hideLabel}"
+      ?invalid="${invalid}"
+      invalid-text="${ifDefined(invalidText)}"
+      label="${ifDefined(label)}"
+      ?readonly="${readonly}"
+      value="${ifDefined(value)}"
+      ?warn="${warn}"
+      warn-text="${ifDefined(warnText)}"
+      ?disabled="${disabled}"
+      max-count="${ifDefined(maxCount)}"
+      placeholder="${ifDefined(placeholder)}"
+      @input="${onInput}"
+      rows="${ifDefined(rows)}"
+      cols="${ifDefined(cols)}">
+      <cds-ai-label alignment="bottom-right">
+        ${content}${actions}
+      </cds-ai-label>
+    </cds-textarea>
+  `,
+};
+
+export const WithLayer = {
+  decorators: [withLayers],
+  parameters: {
+    layout: 'fullscreen',
+  },
+  args: { ...args, helperText: 'Optional helper text', enableCounter: false },
+  argTypes,
+  render: ({
+    cols,
+    counterMode,
+    disabled,
+    enableCounter,
+    helperText,
+    hideLabel,
+    invalid,
+    invalidText,
+    label,
+    maxCount,
+    onInput,
+    placeholder,
+    readonly,
+    rows,
+    value,
+    warn,
+    warnText,
+  }) => html`
+    <cds-textarea
+      ?enable-counter="${enableCounter}"
+      counter-mode="${ifDefined(counterMode)}"
+      helper-text="${ifDefined(helperText)}"
+      ?hide-label="${hideLabel}"
+      ?invalid="${invalid}"
+      invalid-text="${ifDefined(invalidText)}"
+      label="${ifDefined(label)}"
+      ?readonly="${readonly}"
+      value="${ifDefined(value)}"
+      ?warn="${warn}"
+      warn-text="${ifDefined(warnText)}"
+      ?disabled="${disabled}"
+      max-count="${ifDefined(maxCount)}"
+      placeholder="${ifDefined(placeholder)}"
+      @input="${onInput}"
+      rows="${ifDefined(rows)}"
+      cols="${ifDefined(cols)}">
+    </cds-textarea>
+  `,
+};
+
+export default {
+  title: 'Components/Text Area',
+};

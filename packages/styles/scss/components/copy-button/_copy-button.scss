@@ -1,0 +1,94 @@
+//
+// Copyright IBM Corp. 2016, 2023
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use '../button';
+@use '../../config' as *;
+@use '../../spacing' as *;
+@use '../../motion' as *;
+@use '../../theme' as *;
+@use '../../type' as *;
+@use '../../utilities/box-shadow' as *;
+@use '../../utilities/focus-outline' as *;
+@use '../../utilities/keyframes' as *;
+@use '../../utilities/tooltip' as *;
+@use '../../utilities/visually-hidden' as *;
+
+@mixin copy-button {
+  .#{$prefix}--copy-btn {
+    @include reset;
+
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    border: none;
+    background-color: $layer;
+    cursor: pointer;
+
+    &:hover {
+      background-color: $layer-hover;
+    }
+
+    &:active {
+      background-color: $layer-active;
+    }
+
+    &::before {
+      @include tooltip--caret;
+
+      display: none;
+    }
+
+    .#{$prefix}--copy-btn__feedback {
+      @include tooltip--content('icon');
+
+      display: none;
+      overflow: visible;
+      box-sizing: content-box;
+      margin: auto;
+      clip: auto;
+    }
+
+    &:focus {
+      @include focus-outline('outline');
+
+      outline-color: $focus;
+    }
+
+    &.#{$prefix}--copy-btn--animating::before,
+    &.#{$prefix}--copy-btn--animating .#{$prefix}--copy-btn__feedback {
+      display: block;
+    }
+
+    &.#{$prefix}--copy-btn--animating::before {
+      border: none;
+    }
+
+    &.#{$prefix}--copy-btn--animating.#{$prefix}--copy-btn--fade-out::before,
+    &.#{$prefix}--copy-btn--animating.#{$prefix}--copy-btn--fade-out
+      .#{$prefix}--copy-btn__feedback {
+      // https://github.com/stylelint/stylelint/issues/2363
+      animation: $duration-fast-02 motion(standard, productive) #{$prefix}--hide-feedback;
+    }
+
+    &.#{$prefix}--copy-btn--animating.#{$prefix}--copy-btn--fade-in::before,
+    &.#{$prefix}--copy-btn--animating.#{$prefix}--copy-btn--fade-in
+      .#{$prefix}--copy-btn__feedback {
+      animation: $duration-fast-02 motion(standard, productive) #{$prefix}--show-feedback;
+    }
+  }
+
+  .#{$prefix}--copy-btn svg {
+    fill: $icon-primary;
+  }
+
+  // Needs to come after reset so hidden text is not set to font-size: 100%
+  .#{$prefix}--copy {
+    font-size: 0;
+  }
+}

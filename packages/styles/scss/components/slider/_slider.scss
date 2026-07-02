@@ -1,0 +1,515 @@
+//
+// Copyright IBM Corp. 2016, 2023
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+//-----------------------------
+// Slider
+//-----------------------------
+
+@use '../form';
+@use '../text-input';
+@use '../../config' as *;
+@use '../../colors' as *;
+@use '../../motion' as *;
+@use '../../spacing' as *;
+@use '../../theme' as *;
+@use '../../type' as *;
+@use '../../utilities/focus-outline' as *;
+@use '../../utilities/skeleton' as *;
+@use '../../utilities/high-contrast-mode' as *;
+@use '../../utilities/convert';
+@use '../../utilities/custom-property';
+@use '../../utilities/visually-hidden' as *;
+
+/// Slider styles
+/// @access public
+/// @group slider
+@mixin slider {
+  .#{$prefix}--slider-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    user-select: none;
+  }
+
+  .#{$prefix}--slider {
+    position: relative;
+    padding: $spacing-05 0;
+    cursor: pointer;
+    inline-size: 100%;
+    max-inline-size: convert.to-rem(640px);
+    min-inline-size: convert.to-rem(200px);
+
+    .#{$prefix}--slider-container--two-handles & {
+      margin-inline: convert.to-rem(4px);
+    }
+  }
+
+  .#{$prefix}--slider__range-label {
+    @include type-style('body-compact-01');
+
+    color: $text-primary;
+    white-space: nowrap;
+  }
+
+  .#{$prefix}--slider__track {
+    position: absolute;
+    background: $border-subtle;
+    block-size: convert.to-rem(2px);
+    inline-size: 100%;
+    transform: translate(0%, -50%);
+  }
+
+  .#{$prefix}--slider__track:before {
+    position: absolute;
+    display: inline-block;
+    background: $border-subtle;
+    block-size: convert.to-rem(4px);
+    content: '';
+    inline-size: convert.to-rem(2px);
+    inset-block-start: convert.to-rem(-5px);
+    inset-inline-start: 50%;
+    transform: translate(-50%, 0);
+  }
+
+  .#{$prefix}--slider__filled-track {
+    position: absolute;
+    background: $layer-selected-inverse;
+    block-size: convert.to-rem(2px);
+    inline-size: 100%;
+    pointer-events: none;
+    transform: translate(0%, -50%);
+    transform-origin: left;
+    transition: background $duration-fast-02 motion(standard, productive);
+  }
+
+  .#{$prefix}--slider__thumb-wrapper {
+    position: absolute;
+    z-index: 3;
+    block-size: convert.to-rem(14px);
+    inline-size: convert.to-rem(14px);
+    transform: translate(-50%, -50%);
+    @include custom-property.declaration('tooltip-padding-inline', $spacing-03);
+    @include custom-property.declaration('popover-offset', $spacing-03);
+
+    .#{$prefix}--slider-container--rtl & {
+      transform: translate(50%, -50%);
+    }
+  }
+
+  .#{$prefix}--slider__thumb-wrapper--lower,
+  .#{$prefix}--slider__thumb-wrapper--upper {
+    block-size: 24px;
+    inline-size: 16px;
+    @include custom-property.declaration(
+      'popover-offset',
+      custom-property.get-var('popover-caret-height', $spacing-03)
+    );
+  }
+
+  .#{$prefix}--slider__thumb-wrapper--lower {
+    transform: translate(-100%, -50%);
+
+    > .#{$prefix}--popover > .#{$prefix}--popover-content {
+      transform: translate(
+        50%,
+        calc(-100% - custom-property.get-var('popover-offset', 0rem))
+      );
+    }
+
+    > .#{$prefix}--popover > .#{$prefix}--popover-caret {
+      inset-inline-start: revert;
+      transform: translate(
+        50%,
+        calc(-1 * custom-property.get-var('popover-offset', 0rem))
+      );
+    }
+  }
+
+  .#{$prefix}--slider-container--rtl .#{$prefix}--slider__thumb-wrapper--lower {
+    transform: translate(100%, -50%);
+
+    > .#{$prefix}--popover > .#{$prefix}--popover-content {
+      transform: translate(
+        0,
+        calc(-100% - custom-property.get-var('popover-offset', 0rem))
+      );
+    }
+
+    > .#{$prefix}--popover > .#{$prefix}--popover-caret {
+      transform: translate(
+        -50%,
+        calc(-1 * custom-property.get-var('popover-offset', 0rem))
+      );
+    }
+  }
+
+  .#{$prefix}--slider__thumb-wrapper--upper {
+    transform: translate(0, -50%);
+
+    > .#{$prefix}--popover > .#{$prefix}--popover-content {
+      transform: translate(
+        -50%,
+        calc(-100% - custom-property.get-var('popover-offset', 0rem))
+      );
+    }
+
+    > .#{$prefix}--popover > .#{$prefix}--popover-caret {
+      transform: translate(
+        -50%,
+        calc(-1 * custom-property.get-var('popover-offset', 0rem))
+      );
+    }
+  }
+
+  .#{$prefix}--slider-container--rtl .#{$prefix}--slider__thumb-wrapper--upper {
+    transform: translate(0, -50%);
+
+    > .#{$prefix}--popover > .#{$prefix}--popover-content {
+      transform: translate(
+        0,
+        calc(-100% - custom-property.get-var('popover-offset', 0rem))
+      );
+    }
+
+    > .#{$prefix}--popover > .#{$prefix}--popover-caret {
+      transform: translate(
+        50%,
+        calc(-1 * custom-property.get-var('popover-offset', 0rem))
+      );
+    }
+  }
+
+  .#{$prefix}--slider__thumb {
+    position: absolute;
+    border-radius: 50%;
+    background: $layer-selected-inverse;
+    box-shadow:
+      inset 0 0 0 1px transparent,
+      inset 0 0 0 2px transparent;
+    inset: 0;
+    outline: none;
+    transition:
+      transform $duration-fast-02 motion(standard, productive),
+      background $duration-fast-02 motion(standard, productive),
+      box-shadow $duration-fast-02 motion(standard, productive);
+
+    &:hover {
+      // 20px / 14px = 1.4286
+      transform: scale(1.4286);
+    }
+
+    &:focus {
+      background-color: $interactive;
+      box-shadow:
+        inset 0 0 0 2px $interactive,
+        inset 0 0 0 3px $layer;
+      // 20px / 14px = 1.4286
+      transform: scale(1.4286);
+    }
+
+    &:active {
+      box-shadow: inset 0 0 0 2px $interactive;
+      transform: scale(1.4286);
+    }
+  }
+
+  .#{$prefix}--slider__thumb-icon {
+    fill: $layer-selected-inverse;
+  }
+
+  .#{$prefix}--slider__thumb-icon--focus {
+    display: none;
+    fill: $interactive;
+  }
+
+  .#{$prefix}--slider__thumb--lower,
+  .#{$prefix}--slider__thumb--upper {
+    position: absolute;
+    border-radius: unset;
+    background-color: transparent;
+    box-shadow: none;
+    inset: 0;
+    transition: none;
+
+    &::before {
+      position: absolute;
+      z-index: -1;
+      display: block;
+      background: $background;
+      block-size: convert.to-rem(2px);
+      content: '';
+      inline-size: convert.to-rem(6px);
+      inset-block-start: calc(50% - #{convert.to-rem(2px) * 0.5});
+      inset-inline-end: 0;
+    }
+
+    &:hover {
+      transform: none;
+
+      .#{$prefix}--slider__thumb-icon {
+        fill: $text-secondary;
+      }
+    }
+
+    &:active {
+      box-shadow: none;
+      transform: none;
+    }
+
+    &:focus {
+      background-color: transparent;
+      box-shadow: none;
+      transform: none;
+
+      .#{$prefix}--slider__thumb-icon {
+        display: none;
+        fill: $interactive;
+      }
+
+      .#{$prefix}--slider__thumb-icon--focus {
+        display: block;
+      }
+    }
+  }
+
+  .#{$prefix}--slider__thumb--lower:focus::before,
+  .#{$prefix}--slider__thumb--upper:focus::before {
+    inline-size: 100%;
+  }
+
+  .#{$prefix}--slider__thumb--upper {
+    transform: none;
+
+    &::before {
+      inset-inline: 0 auto;
+    }
+
+    &:hover,
+    &:active,
+    &:focus {
+      transform: none;
+    }
+  }
+
+  .#{$prefix}--slider__input {
+    display: none;
+  }
+
+  .#{$prefix}--slider-text-input-wrapper {
+    position: relative;
+  }
+
+  .#{$prefix}--slider-text-input-wrapper--hidden {
+    display: none;
+  }
+
+  .#{$prefix}--slider-text-input,
+  .#{$prefix}-slider-text-input {
+    -moz-appearance: textfield;
+    appearance: textfield;
+    block-size: convert.to-rem(40px);
+    inline-size: convert.to-rem(64px);
+
+    &::-webkit-outer-spin-button,
+    &::-webkit-inner-spin-button {
+      display: none;
+    }
+  }
+
+  .#{$prefix}--slider__thumb:focus ~ .#{$prefix}--slider__filled-track,
+  .#{$prefix}--slider__thumb-wrapper:focus-within
+    ~ .#{$prefix}--slider__filled-track {
+    background-color: $border-interactive;
+  }
+
+  // Invalid & warn state
+  .#{$prefix}--slider-text-input.#{$prefix}--text-input--invalid,
+  .#{$prefix}--slider-text-input--warn {
+    inline-size: 6rem;
+    padding-inline-end: $spacing-09;
+  }
+
+  .#{$prefix}--slider__invalid-icon {
+    position: absolute;
+    fill: $support-error;
+    // top/transform used to center invalid icon in IE11
+    inset-block-start: 50%;
+    inset-inline-end: $spacing-05;
+    transform: translateY(-50%);
+  }
+
+  .#{$prefix}--slider__validation-msg.#{$prefix}--form-requirement {
+    display: block;
+    overflow: visible;
+    max-block-size: 100%;
+  }
+
+  .#{$prefix}--slider__validation-msg--invalid {
+    color: $text-error;
+  }
+
+  .#{$prefix}--slider__invalid-icon.#{$prefix}--slider__invalid-icon--warning {
+    fill: $support-warning;
+  }
+
+  .#{$prefix}--slider__invalid-icon--warning path:first-of-type {
+    fill: $black-100;
+    opacity: 1;
+  }
+
+  // Disabled state
+  .#{$prefix}--label--disabled
+    ~ .#{$prefix}--slider-container
+    > .#{$prefix}--slider__range-label {
+    color: $text-disabled;
+  }
+
+  .#{$prefix}--slider--disabled.#{$prefix}--slider {
+    cursor: not-allowed;
+  }
+
+  .#{$prefix}--slider--disabled .#{$prefix}--slider__thumb {
+    background-color: $border-disabled;
+
+    &:hover {
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    &:focus {
+      background-color: $border-disabled;
+      box-shadow: none;
+      outline: none;
+      transform: none;
+    }
+
+    &:active {
+      background: $border-disabled;
+      box-shadow: none;
+      transform: none;
+    }
+  }
+
+  .#{$prefix}--slider--disabled .#{$prefix}--slider__thumb--lower,
+  .#{$prefix}--slider--disabled .#{$prefix}--slider__thumb--upper {
+    background-color: transparent;
+
+    &:active,
+    &:hover,
+    &:focus {
+      background-color: transparent;
+      transform: none;
+    }
+
+    .#{$prefix}--slider__thumb-icon {
+      fill: $border-disabled;
+    }
+  }
+
+  .#{$prefix}--slider--disabled .#{$prefix}--slider__track,
+  .#{$prefix}--slider--disabled .#{$prefix}--slider__filled-track,
+  .#{$prefix}--slider--disabled
+    .#{$prefix}--slider__thumb:focus
+    ~ .#{$prefix}--slider__filled-track {
+    background-color: $border-disabled;
+  }
+
+  .#{$prefix}--slider--disabled
+    ~ .#{$prefix}--form-item
+    .#{$prefix}--slider-text-input,
+  .#{$prefix}--slider--disabled ~ .#{$prefix}--slider-text-input {
+    border: none;
+    background-color: $field;
+    color: $text-disabled;
+    cursor: not-allowed;
+    transition: none;
+
+    &:active,
+    &:focus,
+    &:hover {
+      color: $text-disabled;
+      outline: none;
+    }
+  }
+
+  // readonly state
+  .#{$prefix}--slider--readonly {
+    cursor: default;
+  }
+
+  .#{$prefix}--slider-container--readonly .#{$prefix}--slider__thumb {
+    block-size: 0;
+    inline-size: 0;
+
+    &::before,
+    &::after {
+      display: none;
+    }
+  }
+
+  .#{$prefix}--slider-container--readonly .#{$prefix}--slider-text-input {
+    background-color: transparent;
+  }
+
+  .#{$prefix}--slider__status-msg.#{$prefix}--form-requirement {
+    display: block;
+    overflow: visible;
+    max-block-size: 100%;
+  }
+
+  // Skeleton state
+  .#{$prefix}--slider-container.#{$prefix}--skeleton
+    .#{$prefix}--slider__range-label {
+    @include skeleton;
+
+    block-size: convert.to-rem(12px);
+    inline-size: convert.to-rem(20px);
+  }
+
+  .#{$prefix}--slider-container.#{$prefix}--skeleton
+    .#{$prefix}--slider__track {
+    cursor: default;
+    pointer-events: none;
+  }
+
+  .#{$prefix}--slider-container.#{$prefix}--skeleton {
+    .#{$prefix}--slider__thumb-wrapper {
+      inset-inline-start: 50%;
+    }
+
+    .#{$prefix}--slider__thumb {
+      cursor: default;
+      pointer-events: none;
+    }
+
+    .#{$prefix}--slider__thumb-wrapper--lower {
+      inset-inline-start: 0;
+    }
+
+    .#{$prefix}--slider__thumb-wrapper--upper {
+      inset-inline-start: 100%;
+    }
+  }
+
+  // With hidden input
+  .#{$prefix}--popover-container.#{$prefix}--slider__thumb-wrapper {
+    position: absolute;
+  }
+
+  // Windows HCM fix
+
+  .#{$prefix}--slider__thumb {
+    @include high-contrast-mode('outline');
+  }
+  .#{$prefix}--slider__thumb:focus {
+    @include high-contrast-mode('focus');
+  }
+  .#{$prefix}--slider__track {
+    @include high-contrast-mode('outline');
+  }
+}

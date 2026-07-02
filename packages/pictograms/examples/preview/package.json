@@ -1,0 +1,18 @@
+{
+  "name": "pictogram-preview-example",
+  "private": true,
+  "scripts": {
+    "develop": "next",
+    "build": "next build"
+  },
+  "dependencies": {
+    "@carbon/styles": "link:../../../styles",
+    "change-case-all": "^2.1.0",
+    "next": "^16.2.6",
+    "prismjs": "^1.30.0",
+    "react": "^19.2.5",
+    "react-dom": "^19.2.5",
+    "sass": "^1.36.0",
+    "url-polyfill": "^1.1.9"
+  }
+}

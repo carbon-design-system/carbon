@@ -1,0 +1,51 @@
+@use '@carbon/react/scss/motion';
+@use '@carbon/react/scss/type';
+
+.motion {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.circle {
+  @include type.type-style('code-01');
+
+  display: flex;
+  width: 7rem;
+  height: 7rem;
+  align-items: center;
+  justify-content: center;
+  background-color: #8a3ffc;
+  border-radius: 50%;
+  color: #ffffff;
+  margin: 0.5rem;
+}
+
+.circle:hover {
+  background-color: #0f62fe;
+  transform: scale(1.2);
+}
+
+.fast-01 {
+  transition: all motion.$fast-01;
+}
+
+.fast-02 {
+  transition: all motion.$fast-02;
+}
+
+.moderate-01 {
+  transition: all motion.$moderate-01;
+}
+
+.moderate-02 {
+  transition: all motion.$moderate-02;
+}
+
+.slow-01 {
+  transition: all motion.$slow-01;
+}
+
+.slow-02 {
+  transition: all motion.$slow-02;
+}

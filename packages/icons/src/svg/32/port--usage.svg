@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="icon" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: none;
+      }
+
+      .cls-1, .cls-2 {
+        stroke-width: 0px;
+      }
+    </style>
+  </defs>
+  <path id="PortUsage" class="cls-2" d="m21,7h-2v-3.3999c0-.8999-.7002-1.6001-1.6001-1.6001H4v2h13v3h-2c-3.3,0-6,2.7002-6,6v6c0,3.2998,2.7,6,6,6h2v3H4v2h13.3999c.8999,0,1.6001-.7002,1.6001-1.6001v-3.3999h2c3.3,0,6-2.7002,6-6v-6c0-3.2998-2.7-6-6-6Zm4,12c0,2.2002-1.8,4-4,4h-6c-2.2,0-4-1.7998-4-4v-6c0-2.2002,1.8-4,4-4h6c2.2,0,4,1.7998,4,4v6Z"/>
+  <rect id="_Transparent_Rectangle_" data-name="&amp;lt;Transparent Rectangle&amp;gt;" class="cls-1" width="32" height="32"/>
+</svg>

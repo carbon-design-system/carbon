@@ -1,0 +1,94 @@
+//
+// Copyright IBM Corp. 2018, 2023
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use 'sass:map';
+@use '@carbon/layout/scss/convert';
+
+/// Namespace prefix
+/// @type String
+/// @access public
+/// @group @carbon/grid
+$prefix: 'cds' !default;
+
+/// Total columns used in the flex grid
+/// @type Number
+/// @access public
+/// @group @carbon/grid
+$flex-grid-columns: 16 !default;
+
+/// Carbon gutter size in rem
+/// @type Number
+/// @access public
+/// @group @carbon/layout
+$grid-gutter: convert.to-rem(32px) !default;
+
+/// Carbon condensed gutter size in rem
+/// @type Number
+/// @access public
+/// @group @carbon/layout
+$grid-gutter-condensed: convert.to-rem(1px) !default;
+
+// Initial map of our breakpoints and their values
+/// @type Map
+/// @access public
+/// @group @carbon/layout
+$grid-breakpoints: (
+  sm: (
+    columns: 4,
+    margin: 0,
+    width: convert.to-rem(320px),
+  ),
+  md: (
+    columns: 8,
+    margin: convert.to-rem(16px),
+    width: convert.to-rem(672px),
+  ),
+  lg: (
+    columns: 16,
+    margin: convert.to-rem(16px),
+    width: convert.to-rem(1056px),
+  ),
+  xlg: (
+    columns: 16,
+    margin: convert.to-rem(16px),
+    width: convert.to-rem(1312px),
+  ),
+  max: (
+    columns: 16,
+    margin: convert.to-rem(24px),
+    width: convert.to-rem(1584px),
+  ),
+) !default;
+
+@if $flex-grid-columns == 12 {
+  $grid-breakpoints: map.merge(
+    $grid-breakpoints,
+    (
+      lg:
+        map.merge(
+          map.get($grid-breakpoints, lg),
+          (
+            columns: 12,
+          )
+        ),
+      xlg:
+        map.merge(
+          map.get($grid-breakpoints, xlg),
+          (
+            columns: 12,
+          )
+        ),
+      max:
+        map.merge(
+          map.get($grid-breakpoints, max),
+          (
+            columns: 12,
+          )
+        ),
+    )
+  );
+}

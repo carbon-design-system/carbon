@@ -1,0 +1,637 @@
+//
+// Copyright IBM Corp. 2016, 2023
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use '../button/tokens' as button;
+@use '../../config' as *;
+@use '../../feature-flags' as *;
+@use '../../layer' as *;
+@use '../../motion' as *;
+@use '../../spacing' as *;
+@use '../../theme' as *;
+@use '../../type' as *;
+@use '../../utilities/ai-gradient' as *;
+@use '../../utilities/button-reset';
+@use '../../utilities/convert';
+@use '../../utilities/component-reset';
+@use '../../utilities/focus-outline' as *;
+@use '../../utilities/visually-hidden' as *;
+@use '../../utilities/layout';
+
+// padding + icon size (1rem) + padding
+$-icon-container-size: calc(#{layout.density('padding-inline')} * 2 + 1rem);
+
+/// Tile styles
+/// @access public
+/// @group tile
+@mixin tile(
+  $enable-experimental-tile-contrast: false,
+  $enable-tile-contrast: false,
+  $enable-v12-tile-radio-icons: false
+) {
+  .#{$prefix}--tile-group {
+    @include reset;
+  }
+
+  .#{$prefix}--tile {
+    @include type-style('body-compact-01');
+    @include layout.use('density', $default: 'normal');
+
+    position: relative;
+    display: block;
+    padding: layout.density('padding-inline');
+    background-color: $layer;
+    min-block-size: 4rem;
+    min-inline-size: 8rem;
+    outline: 2px solid transparent;
+    outline-offset: -2px;
+
+    &:focus {
+      @include focus-outline('outline');
+    }
+  }
+
+  // V11: Possibly deprecate
+  .#{$prefix}--tile--light {
+    background-color: $layer-02;
+  }
+
+  .#{$prefix}--tile--clickable,
+  .#{$prefix}--tile--selectable {
+    @include component-reset.reset;
+    @include type-style('body-compact-01');
+
+    padding: layout.density('padding-inline');
+    cursor: pointer;
+    transition: $duration-moderate-01 motion(standard, productive);
+
+    &:hover {
+      background: $layer-hover;
+    }
+  }
+
+  .#{$prefix}--tile--clickable {
+    color: $text-primary;
+    text-decoration: none;
+
+    @if (
+      enabled('enable-experimental-tile-contrast') or
+        $enable-experimental-tile-contrast or
+        enabled('enable-tile-contrast') or
+        $enable-tile-contrast
+    ) {
+      border: 1px solid $border-tile;
+    }
+
+    &:focus {
+      @include focus-outline('outline');
+
+      text-decoration: none;
+    }
+
+    &:hover,
+    &:focus {
+      .#{$prefix}--tile__checkmark {
+        opacity: 1;
+      }
+    }
+  }
+
+  // Removes Firefox automatic border on buttons
+  .#{$prefix}--tile--expandable::-moz-focus-inner {
+    border: 0;
+  }
+
+  .#{$prefix}--tile--clickable:hover,
+  .#{$prefix}--tile--clickable:active,
+  .#{$prefix}--tile--clickable:visited,
+  .#{$prefix}--tile--clickable:visited:hover {
+    color: $text-primary;
+    text-decoration: none;
+  }
+
+  // Disabled ClickableTile
+  .#{$prefix}--tile--clickable.#{$prefix}--link--disabled,
+  .#{$prefix}--tile--clickable:hover.#{$prefix}--link--disabled {
+    display: block;
+    padding: layout.density('padding-inline');
+    background-color: $layer;
+    color: $text-disabled;
+    cursor: not-allowed;
+
+    @if (
+      enabled('enable-experimental-tile-contrast') or
+        $enable-experimental-tile-contrast or
+        enabled('enable-tile-contrast') or
+        $enable-tile-contrast
+    ) {
+      border: 1px solid $border-disabled;
+    }
+  }
+
+  .#{$prefix}--tile--clickable .#{$prefix}--tile--icon,
+  .#{$prefix}--tile--clickable.#{$prefix}--link--disabled
+    .#{$prefix}--tile--disabled-icon {
+    position: absolute;
+    block-size: convert.to-rem(20px);
+    inline-size: convert.to-rem(20px);
+    inset-block-end: convert.to-rem(12px);
+    inset-inline-end: convert.to-rem(12px);
+  }
+
+  .#{$prefix}--tile--clickable .#{$prefix}--tile--icon {
+    fill: $icon-interactive;
+  }
+
+  .#{$prefix}--tile--clickable.#{$prefix}--link--disabled
+    .#{$prefix}--tile--disabled-icon {
+    fill: $icon-disabled;
+  }
+
+  .#{$prefix}--tile--clickable.#{$prefix}--link--disabled
+    .#{$prefix}--tile--icon {
+    display: none;
+  }
+
+  .#{$prefix}--tile--selectable {
+    border: 1px solid transparent;
+    padding-inline-end: $-icon-container-size;
+
+    @if (
+      enabled('enable-experimental-tile-contrast') or
+        $enable-experimental-tile-contrast or
+        enabled('enable-tile-contrast') or
+        $enable-tile-contrast
+    ) {
+      border: 1px solid $border-tile;
+    }
+  }
+
+  .#{$prefix}--tile__checkmark {
+    position: absolute;
+    border: none;
+    background: transparent;
+    block-size: 1rem;
+    inset-block-start: layout.density('padding-inline');
+    inset-inline-end: layout.density('padding-inline');
+    transition: $duration-fast-02 motion(standard, productive);
+
+    @if (
+      enabled('enable-v12-tile-radio-icons') or
+        $enable-experimental-tile-contrast or
+        $enable-tile-contrast
+    ) {
+      opacity: 1;
+    } @else {
+      opacity: 0;
+    }
+
+    svg {
+      border-radius: 50%;
+      fill: $icon-secondary;
+    }
+
+    &:focus {
+      @include focus-outline('outline');
+    }
+  }
+
+  .#{$prefix}--tile__checkmark--persistent {
+    opacity: 1;
+  }
+
+  .#{$prefix}--tile__chevron {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    block-size: $-icon-container-size;
+    inline-size: $-icon-container-size;
+    inset-block-end: 0;
+    inset-inline-end: 0;
+
+    svg {
+      fill: $icon-primary;
+      transform-origin: center;
+      transition: $duration-fast-02 motion(standard, productive);
+
+      @media screen and (prefers-reduced-motion: reduce) {
+        transition: none;
+      }
+    }
+  }
+
+  .#{$prefix}--tile__chevron--interactive {
+    @include button-reset.reset;
+
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    block-size: $-icon-container-size;
+    inline-size: $-icon-container-size;
+    inset-block-end: 0;
+    inset-inline-end: 0;
+    @if (
+      enabled('enable-experimental-tile-contrast') or
+        $enable-experimental-tile-contrast or
+        enabled('enable-tile-contrast') or
+        $enable-tile-contrast
+    ) {
+      border: 1px solid $border-disabled;
+    }
+
+    &:focus {
+      outline: 2px solid $focus;
+      outline-offset: -2px;
+    }
+
+    &:hover {
+      background-color: $layer-hover;
+      cursor: pointer;
+    }
+  }
+
+  .#{$prefix}--tile--expandable {
+    position: relative;
+    overflow: hidden;
+    border: 0;
+    color: inherit;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: inherit;
+    inline-size: 100%;
+    text-align: start;
+    transition: max-height $duration-moderate-01 motion(standard, productive);
+
+    @include type-style('body-compact-01');
+
+    @if (
+      enabled('enable-experimental-tile-contrast') or
+        $enable-experimental-tile-contrast or
+        enabled('enable-tile-contrast') or
+        $enable-tile-contrast
+    ) {
+      border: 1px solid $border-tile;
+    }
+
+    &:hover {
+      background: $layer-hover;
+    }
+  }
+
+  .#{$prefix}--tile--expandable.#{$prefix}--tile--expandable--interactive {
+    border: none;
+    cursor: default;
+    transition: max-height $duration-moderate-01 motion(standard, productive);
+
+    &:hover {
+      background-color: $layer;
+    }
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  .#{$prefix}--tile--expandable--interactive:focus {
+    @include focus-outline('outline');
+  }
+
+  .#{$prefix}--tile-content__below-the-fold {
+    display: block;
+    opacity: 0;
+    transition:
+      opacity $duration-fast-02 motion(standard, productive),
+      visibility $duration-fast-02 motion(standard, productive);
+    visibility: hidden;
+  }
+
+  .#{$prefix}--tile--is-expanded {
+    overflow: visible;
+    transition: max-height $duration-fast-02 motion(standard, productive);
+
+    .#{$prefix}--tile__chevron svg {
+      transform: rotate(180deg);
+    }
+
+    .#{$prefix}--tile-content__below-the-fold {
+      opacity: 1;
+      transition:
+        opacity $duration-fast-02 motion(standard, productive),
+        visibility $duration-fast-02 motion(standard, productive);
+      visibility: inherit;
+
+      // Safari-only media query
+      // Fixes an issue with scrolling
+      // and absolutely positioned elements (#8119)
+      @supports (hanging-punctuation: first) and (font: -apple-system-body) and
+        (-webkit-appearance: none) {
+        overflow-y: auto;
+      }
+    }
+  }
+
+  .#{$prefix}--tile--is-selected {
+    border: 1px solid $layer-selected-inverse;
+  }
+
+  .#{$prefix}--tile--is-selected .#{$prefix}--tile__checkmark {
+    opacity: 1;
+  }
+
+  .#{$prefix}--tile--is-selected .#{$prefix}--tile__checkmark svg {
+    fill: $icon-primary;
+  }
+
+  .#{$prefix}--tile-content {
+    block-size: 100%;
+    inline-size: 100%;
+  }
+
+  .#{$prefix}--tile-input {
+    @include visually-hidden;
+  }
+
+  .#{$prefix}--tile-input:focus + .#{$prefix}--tile {
+    @include focus-outline('outline');
+  }
+
+  .#{$prefix}--tile--disabled.#{$prefix}--tile--selectable {
+    background-color: $layer;
+    color: $text-disabled;
+    cursor: not-allowed;
+
+    @if (
+      enabled('enable-experimental-tile-contrast') or
+        $enable-experimental-tile-contrast or
+        enabled('enable-tile-contrast') or
+        $enable-tile-contrast
+    ) {
+      border: 1px solid $border-disabled;
+    }
+  }
+
+  // V11: Possibly deprecate
+  .#{$prefix}--tile--disabled.#{$prefix}--tile--selectable.#{$prefix}--tile--light {
+    background-color: $layer-02;
+  }
+
+  .#{$prefix}--tile--disabled.#{$prefix}--tile--is-selected {
+    border-color: $border-disabled;
+  }
+
+  .#{$prefix}--tile--disabled .#{$prefix}--tile__checkmark svg {
+    fill: $icon-disabled;
+  }
+
+  // AILabel styles
+  .#{$prefix}--tile > .#{$prefix}--tile--inner-decorator > *,
+  .#{$prefix}--tile--expandable > div > .#{$prefix}--tile--inner-decorator > *,
+  .#{$prefix}--tile > .#{$prefix}--ai-label,
+  .#{$prefix}--tile--expandable > div > .#{$prefix}--ai-label,
+  .#{$prefix}--tile > .#{$prefix}--slug,
+  .#{$prefix}--tile--expandable > div > .#{$prefix}--slug,
+  .#{$prefix}--tile--clickable .#{$prefix}--tile--ai-label-icon {
+    position: absolute;
+    inset-block-start: $spacing-05;
+    inset-inline-end: $spacing-05;
+  }
+
+  .#{$prefix}--tile.#{$prefix}--tile--selectable
+    > .#{$prefix}--tile--inner-decorator
+    > *,
+  .#{$prefix}--tile.#{$prefix}--tile--selectable > .#{$prefix}--ai-label,
+  .#{$prefix}--tile.#{$prefix}--tile--selectable > .#{$prefix}--slug {
+    inset-inline-end: $spacing-08;
+  }
+
+  .#{$prefix}--tile.#{$prefix}--tile--selectable.#{$prefix}--tile--radio
+    > .#{$prefix}--tile--inner-decorator
+    > *,
+  .#{$prefix}--tile.#{$prefix}--tile--selectable.#{$prefix}--tile--radio
+    > .#{$prefix}--ai-label,
+  .#{$prefix}--tile.#{$prefix}--tile--selectable.#{$prefix}--tile--radio
+    > .#{$prefix}--slug {
+    inset-inline-end: $spacing-05;
+    transition: inset-inline-end $duration-fast-02 motion(standard, productive);
+
+    @if (
+      enabled('enable-v12-tile-radio-icons') or
+        $enable-experimental-tile-contrast
+        $enable-tile-contrast
+    ) {
+      inset-inline-end: $spacing-08;
+    }
+  }
+
+  .#{$prefix}--tile.#{$prefix}--tile--selectable.#{$prefix}--tile--radio.#{$prefix}--tile--is-selected
+    > .#{$prefix}--tile--inner-decorator
+    > *,
+  .#{$prefix}--tile.#{$prefix}--tile--selectable.#{$prefix}--tile--radio.#{$prefix}--tile--is-selected
+    > .#{$prefix}--ai-label,
+  .#{$prefix}--tile.#{$prefix}--tile--selectable.#{$prefix}--tile--radio.#{$prefix}--tile--is-selected
+    > .#{$prefix}--slug {
+    inset-inline-end: $spacing-08;
+  }
+
+  .#{$prefix}--tile.#{$prefix}--tile--clickable
+    > .#{$prefix}--tile--inner-decorator
+    > *,
+  .#{$prefix}--tile.#{$prefix}--tile--clickable > .#{$prefix}--ai-label,
+  .#{$prefix}--tile.#{$prefix}--tile--clickable > .#{$prefix}--slug {
+    pointer-events: none;
+  }
+
+  .#{$prefix}--tile--decorator:has(
+      .#{$prefix}--tile--ai-label-icon
+    ).#{$prefix}--tile,
+  .#{$prefix}--tile--decorator:has(.#{$prefix}--ai-label).#{$prefix}--tile,
+  .#{$prefix}--tile--slug.#{$prefix}--tile {
+    @include ai-popover-gradient('default', 0, 'layer');
+
+    border: 1px solid transparent;
+    box-shadow:
+      inset 0 -80px 70px -65px $ai-inner-shadow,
+      0 4px 8px 0 $ai-drop-shadow;
+  }
+
+  .#{$prefix}--tile--decorator:has(
+      .#{$prefix}--ai-label
+    ).#{$prefix}--tile--expandable:hover,
+  .#{$prefix}--tile--slug.#{$prefix}--tile--expandable:hover {
+    @include ai-popover-gradient('default', 0, 'layer');
+  }
+
+  .#{$prefix}--tile--decorator.#{$prefix}--tile--selectable::before,
+  .#{$prefix}--tile--decorator.#{$prefix}--tile--selectable::after,
+  .#{$prefix}--tile--decorator.#{$prefix}--tile--clickable::before,
+  .#{$prefix}--tile--slug.#{$prefix}--tile--selectable::before,
+  .#{$prefix}--tile--slug.#{$prefix}--tile--selectable::after,
+  .#{$prefix}--tile--slug.#{$prefix}--tile--clickable::before {
+    position: absolute;
+    display: block;
+    block-size: 100%;
+    content: '';
+    inline-size: 100%;
+    inset-block-start: 0;
+    inset-inline-start: 0;
+    opacity: 0;
+    transition: opacity $duration-fast-02 motion(standard, productive);
+  }
+
+  .#{$prefix}--tile--decorator:has(
+      .#{$prefix}--ai-label
+    ).#{$prefix}--tile--selectable::before,
+  .#{$prefix}--tile--decorator:has(
+      .#{$prefix}--ai-label
+    ).#{$prefix}--tile--clickable::before,
+  .#{$prefix}--tile--decorator:has(
+      .#{$prefix}--tile--ai-label-icon
+    ).#{$prefix}--tile--clickable::before,
+  .#{$prefix}--tile--slug.#{$prefix}--tile--selectable::before,
+  .#{$prefix}--tile--slug.#{$prefix}--tile--clickable::before {
+    @include ai-popover-gradient('hover', 0, 'layer');
+
+    box-shadow:
+      inset 0 -80px 70px -65px $ai-inner-shadow,
+      0 4px 10px 2px $ai-drop-shadow;
+  }
+
+  .#{$prefix}--tile--decorator.#{$prefix}--tile--selectable:hover::before,
+  .#{$prefix}--tile--decorator.#{$prefix}--tile--clickable:hover::before,
+  .#{$prefix}--tile--slug.#{$prefix}--tile--selectable:hover::before,
+  .#{$prefix}--tile--slug.#{$prefix}--tile--clickable:hover::before {
+    opacity: 1;
+  }
+
+  .#{$prefix}--tile--decorator.#{$prefix}--tile--selectable:focus,
+  .#{$prefix}--tile--decorator.#{$prefix}--tile--clickable:focus,
+  .#{$prefix}--tile-input:focus + .#{$prefix}--tile--decorator.#{$prefix}--tile,
+  .#{$prefix}--tile--slug.#{$prefix}--tile--selectable:focus,
+  .#{$prefix}--tile--slug.#{$prefix}--tile--clickable:focus,
+  .#{$prefix}--tile-input:focus + .#{$prefix}--tile--slug.#{$prefix}--tile {
+    outline-offset: -1px;
+  }
+
+  .#{$prefix}--tile--decorator:has(
+      .#{$prefix}--tile--inner-decorator .#{$prefix}--ai-label
+    ).#{$prefix}--tile--selectable::after,
+  .#{$prefix}--tile--slug.#{$prefix}--tile--selectable::after {
+    @include ai-popover-gradient('selected', 0, 'layer');
+
+    box-shadow:
+      inset 0 -80px 70px -65px $ai-inner-shadow,
+      0 4px 8px 0 $ai-drop-shadow;
+  }
+
+  .#{$prefix}--tile--decorator.#{$prefix}--tile--selectable:hover::after,
+  .#{$prefix}--tile--slug.#{$prefix}--tile--selectable:hover::after {
+    opacity: 0;
+  }
+
+  .#{$prefix}--tile--decorator.#{$prefix}--tile--is-selected::after,
+  .#{$prefix}--tile--slug.#{$prefix}--tile--is-selected::after {
+    opacity: 1;
+  }
+
+  .#{$prefix}--tile--decorator:has(
+      .#{$prefix}--tile--inner-decorator
+    ).#{$prefix}--tile--is-selected,
+  .#{$prefix}--tile--slug.#{$prefix}--tile--is-selected {
+    border-color: $border-inverse;
+  }
+
+  .#{$prefix}--tile--decorator.#{$prefix}--tile--selectable
+    .#{$prefix}--tile-content,
+  .#{$prefix}--tile--decorator.#{$prefix}--tile--clickable
+    .#{$prefix}--tile-content,
+  .#{$prefix}--tile--slug.#{$prefix}--tile--selectable
+    .#{$prefix}--tile-content,
+  .#{$prefix}--tile--slug.#{$prefix}--tile--clickable
+    .#{$prefix}--tile-content {
+    position: relative;
+    cursor: pointer;
+  }
+
+  .#{$prefix}--tile--decorator.#{$prefix}--tile--selectable
+    .#{$prefix}--tile-content,
+  .#{$prefix}--tile--decorator.#{$prefix}--tile--clickable
+    .#{$prefix}--tile-content,
+  .#{$prefix}--tile--decorator.#{$prefix}--tile--selectable
+    > .#{$prefix}--tile__checkmark,
+  .#{$prefix}--tile--decorator.#{$prefix}--tile--is-selected
+    .#{$prefix}--tile--inner-decorator
+    > *,
+  .#{$prefix}--tile--slug.#{$prefix}--tile--selectable
+    .#{$prefix}--tile-content,
+  .#{$prefix}--tile--slug.#{$prefix}--tile--clickable .#{$prefix}--tile-content,
+  .#{$prefix}--tile--slug.#{$prefix}--tile--selectable
+    > .#{$prefix}--tile__checkmark,
+  .#{$prefix}--tile--slug.#{$prefix}--tile--is-selected .#{$prefix}--ai-label,
+  .#{$prefix}--tile--slug.#{$prefix}--tile--is-selected .#{$prefix}--slug {
+    z-index: 1;
+  }
+
+  .#{$prefix}--tile--decorator.#{$prefix}--tile--selectable
+    .#{$prefix}--tile--inner-decorator
+    > *:has(> .#{$prefix}--popover--open),
+  .#{$prefix}--tile--slug.#{$prefix}--tile--selectable
+    .#{$prefix}--ai-label:has(> .#{$prefix}--popover--open),
+  .#{$prefix}--tile--slug.#{$prefix}--tile--selectable
+    .#{$prefix}--slug:has(> .#{$prefix}--popover--open) {
+    z-index: 2;
+  }
+
+  .#{$prefix}--tile--decorator.#{$prefix}--tile--selectable
+    > .#{$prefix}--tile--inner-decorator
+    > *,
+  .#{$prefix}--tile--decorator.#{$prefix}--tile--selectable
+    > .#{$prefix}--tile__checkmark,
+  .#{$prefix}--tile--slug.#{$prefix}--tile--selectable > .#{$prefix}--ai-label,
+  .#{$prefix}--tile--slug.#{$prefix}--tile--selectable > .#{$prefix}--slug,
+  .#{$prefix}--tile--slug.#{$prefix}--tile--selectable
+    > .#{$prefix}--tile__checkmark {
+    z-index: 1;
+  }
+
+  .#{$prefix}--tile--expandable:has(
+      .#{$prefix}--tile--inner-decorator > * > .#{$prefix}--popover--open
+    ),
+  .#{$prefix}--tile--expandable:has(
+      .#{$prefix}--ai-label > .#{$prefix}--popover--open
+    ),
+  .#{$prefix}--tile--expandable:has(
+      .#{$prefix}--slug > .#{$prefix}--popover--open
+    ) {
+    overflow: visible;
+  }
+
+  .#{$prefix}--tile--clickable .#{$prefix}--tile--ai-label-icon rect {
+    stroke: $icon-primary;
+  }
+
+  .#{$prefix}--tile--clickable .#{$prefix}--tile--ai-label-icon path {
+    fill: $icon-primary;
+  }
+
+  // Tile with slug and rounded corners
+  .#{$prefix}--tile--decorator-rounded,
+  .#{$prefix}--tile--decorator-rounded.#{$prefix}--tile--selectable::before,
+  .#{$prefix}--tile--decorator-rounded.#{$prefix}--tile--selectable::after,
+  .#{$prefix}--tile--decorator-rounded.#{$prefix}--tile--clickable::before,
+  .#{$prefix}--tile--slug-rounded,
+  .#{$prefix}--tile--slug-rounded.#{$prefix}--tile--selectable::before,
+  .#{$prefix}--tile--slug-rounded.#{$prefix}--tile--selectable::after,
+  .#{$prefix}--tile--slug-rounded.#{$prefix}--tile--clickable::before {
+    border-radius: $spacing-03;
+  }
+
+  .#{$prefix}--tile--decorator-rounded .#{$prefix}--tile__chevron,
+  .#{$prefix}--tile--slug-rounded .#{$prefix}--tile__chevron {
+    border-end-end-radius: $spacing-03;
+  }
+}

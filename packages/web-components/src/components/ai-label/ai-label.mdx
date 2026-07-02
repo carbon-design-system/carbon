@@ -1,0 +1,201 @@
+import {
+  ArgTypes,
+  Canvas,
+  Markdown,
+  Meta,
+  Unstyled,
+} from '@storybook/addon-docs/blocks';
+import { cdnJs } from '../../globals/internal/storybook-cdn';
+import * as AILabelStories from './ai-label.stories';
+
+<Meta of={AILabelStories} />
+
+# AI Label
+
+[Source code](https://github.com/carbon-design-system/carbon/tree/main/packages/web-components/src/components/ai-label)
+|
+[AILabel release status](https://airtable.com/appCAqlGVN8tRUbAp/shr71ZyLlIGORz3Vh/tblHqPusgkK8hIeHo)
+
+## Table of Contents
+
+- [Overview](#overview)
+- [AILabel anatomy](#ai-label-anatomy)
+- [Component API](#component-api)
+  - [AILabel `aiText`](#ai-label-ai-text)
+  - [AILabel `aiTextLabel`](#ai-label-ai-text-label)
+  - [AILabel `kind`](#ai-label-kind)
+  - [AILabel `revertActive`](#ai-label-revertactive)
+- [CDN](#cdn)
+- [Feedback](#feedback)
+
+## Overview
+
+The `AI Label` is intended for any scenario where something is being generated
+by (or with) AI to reinforce AI transparency, accountability, and explainability
+at any interface level. This also enables more effective recognition and recall
+of AI instances in a way that is identifiable across any IBM product.
+
+<Canvas of={AILabelStories.Default} />
+
+## Inline
+
+<Canvas of={AILabelStories.Inline} />
+
+## Inline with content
+
+<Canvas of={AILabelStories.InlineWithContent} />
+
+## AI Label anatomy
+
+The `AI Label` itself is a button that acts as a `toggle-tip` trigger. To
+construct the contents of the `AI Label` callout, you can place the desired
+elements as a child of `cds-ai-label`, like so:
+
+```html
+<cds-ai-label>Content Here</cds-ai-label>
+```
+
+The `AI Label` also supports the rendering of an action bar at the bottom of the
+callout. To achieve this, you can add a set of actions as children of
+`AI Label`.
+
+```html
+<cds-ai-label>
+  {Content Here}
+  <cds-icon-button kind="ghost" slot="actions" size="lg">
+    ${iconLoader(View16, { slot: 'icon' })}
+    <span slot="tooltip-content"> View </span>
+  </cds-icon-button>
+  <cds-icon-button kind="ghost" slot="actions" size="lg">
+    ${iconLoader(FolderOpen16, { slot: 'icon' })}
+    <span slot="tooltip-content"> Open folder</span>
+  </cds-icon-button>
+  <cds-icon-button kind="ghost" slot="actions" size="lg">
+    ${iconLoader(Folders16, { slot: 'icon' })}
+    <span slot="tooltip-content"> Folders </span>
+  </cds-icon-button>
+  <cds-ai-label-action-button>View details</cds-ai-label-action-button>
+</cds-ai-label>
+```
+
+## Component API
+
+<ArgTypes of="cds-ai-label" />
+
+### AI Label `ai-text`
+
+If needed, you can change the text inside the `AI Label` when translating to
+different languages.
+
+<Unstyled
+  style={{
+    padding: '1rem',
+    background: 'var(--cds-background)',
+    display: 'flex',
+    alignItems: 'start',
+  }}>
+  <cds-ai-label ai-text="IA">
+    <div slot="body-text">Explanation of AI-generated content</div>
+  </cds-ai-label>
+</Unstyled>
+
+```html
+<cds-ai-label ai-text="IA">
+  <div slot="body-text">Explanation of AI-generated content</div>
+</cds-ai-label>
+```
+
+### AI Label `ai-text-label`
+
+When using the `inline` variant, you can add text adjacent to the `AI Label`
+with the `ai-text-label` attribute.
+
+<Unstyled
+  style={{
+    padding: '1rem',
+    background: 'var(--cds-background)',
+    display: 'flex',
+    alignItems: 'start',
+    flexDirection: 'column',
+    gap: '1rem',
+  }}>
+  <cds-ai-label kind="inline" ai-text-label="Text goes here">
+    <div slot="body-text">Explanation of AI-generated content</div>
+  </cds-ai-label>
+
+  <cds-ai-label kind="inline">
+    <div slot="body-text">Explanation of AI-generated content</div>
+  </cds-ai-label>
+</Unstyled>
+
+```html
+<cds-ai-label kind="inline" ai-text-label="Text goes here">
+  <div slot="body-text">Explanation of AI-generated content</div>
+</cds-ai-label>
+
+<cds-ai-label kind="inline">
+  <div slot="body-text">Explanation of AI-generated content</div>
+</cds-ai-label>
+```
+
+### AI Label `kind`
+
+The `AI Label` component has two variants, `default` and `inline`.
+
+<Unstyled
+  style={{
+    padding: '1rem',
+    background: 'var(--cds-background)',
+    display: 'flex',
+    alignItems: 'start',
+  }}>
+  <cds-ai-label size="xs">
+    <div slot="body-text">AI was used to generate this content</div>
+  </cds-ai-label>
+</Unstyled>
+
+```html
+<cds-ai-label size="xs">
+  <div slot="body-text">AI was used to generate this content</div>
+</cds-ai-label>
+```
+
+The `inline` `AI Label` with the standard icon can also trigger the AI
+explainability callout.
+
+<Unstyled
+  style={{
+    padding: '1rem',
+    background: 'var(--cds-background)',
+    display: 'flex',
+    alignItems: 'start',
+  }}>
+  <cds-ai-label kind="inline" ai-text-label="Text goes here" size="xs">
+    <div slot="body-text">Explanation of AI-generated content</div>
+  </cds-ai-label>
+</Unstyled>
+
+```html
+<cds-ai-label kind="inline" ai-text-label="Text goes here" size="xs">
+  <div slot="body-text">Explanation of AI-generated content</div>
+</cds-ai-label>
+```
+
+### AI Label `revertActive`
+
+`revert-active` is a boolean property that can be set on `AI Label` that
+transforms the `AI Label` into a revert action button. This is useful if a user
+edits an AI-generated input to show that the element has been modified. This can
+be used in conjunction with the `@click` event listener to handle restoring the
+element to the AI-generated state. For an example, please take a look at the
+[Form Group With AI Label](https://web-components.carbondesignsystem.com/?path=/story/components-form-group--with-ai-label)
+with the `revert` control set to true or take a look at the example story
+[source code](https://github.com/carbon-design-system/carbon/blob/main/packages/web-components/src/components/form-group/form-group.stories.ts).
+
+<Markdown>{`${cdnJs({ components: ['ai-label'] })}`}</Markdown>
+
+## Feedback
+
+Help us improve this component by providing feedback, asking questions on Slack,
+or updating this file on
+[GitHub](https://github.com/carbon-design-system/carbon/edit/main/packages/web-components/src/components/ai-label/ai-label.mdx).

@@ -1,0 +1,74 @@
+/**
+ * Copyright IBM Corp. 2016, 2026
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+import cx from 'classnames';
+import PropTypes from 'prop-types';
+import React, { useContext } from 'react';
+import { SideNavContext, SideNavContextProvider } from './SideNavContext';
+import { usePrefix } from '../../internal/usePrefix';
+
+export interface SideNavItemsProps {
+  /**
+   * Provide a single icon as the child to `SideNavIcon` to render in the
+   * container
+   */
+  children: React.ReactNode;
+
+  /**
+   * Provide an optional class to be applied to the containing node
+   */
+  className?: string;
+
+  /**
+   * Property to indicate if the side nav container is open (or not). Use to
+   * keep local state and styling in step with the SideNav expansion state.
+   */
+  isSideNavExpanded?: boolean;
+}
+
+const SideNavItems = ({
+  className: customClassName,
+  children,
+  isSideNavExpanded,
+}: SideNavItemsProps) => {
+  const prefix = usePrefix();
+  const { isRail, isSideNavExpanded: contextIsSideNavExpanded } =
+    useContext(SideNavContext);
+  const currentIsSideNavExpanded =
+    isSideNavExpanded ?? contextIsSideNavExpanded;
+  const className = cx([`${prefix}--side-nav__items`], customClassName);
+
+  return (
+    <SideNavContextProvider
+      isRail={isRail}
+      isSideNavExpanded={currentIsSideNavExpanded}>
+      <ul className={className}>{children}</ul>
+    </SideNavContextProvider>
+  );
+};
+
+SideNavItems.displayName = 'SideNavItems';
+SideNavItems.propTypes = {
+  /**
+   * Provide a single icon as the child to `SideNavIcon` to render in the
+   * container
+   */
+  children: PropTypes.node.isRequired,
+
+  /**
+   * Provide an optional class to be applied to the containing node
+   */
+  className: PropTypes.string,
+
+  /**
+   * Property to indicate if the side nav container is open (or not). Use to
+   * keep local state and styling in step with the SideNav expansion state.
+   */
+  isSideNavExpanded: PropTypes.bool,
+};
+
+export default SideNavItems;

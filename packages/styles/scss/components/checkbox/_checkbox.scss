@@ -1,0 +1,467 @@
+//
+// Copyright IBM Corp. 2016, 2023
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use '../form';
+@use '../../config' as *;
+@use '../../spacing' as *;
+@use '../../theme' as *;
+@use '../../type' as *;
+@use '../../utilities/component-reset';
+@use '../../utilities/convert';
+@use '../../utilities/high-contrast-mode' as *;
+@use '../../utilities/skeleton' as *;
+@use '../../utilities/visually-hidden' as *;
+
+@mixin checkbox {
+  .#{$prefix}--checkbox-group {
+    @include component-reset.reset;
+  }
+
+  // Spacing between checkboxes
+  .#{$prefix}--form-item.#{$prefix}--checkbox-wrapper {
+    position: relative;
+    margin-block-end: convert.to-rem(6px);
+  }
+
+  // Spacing above collection of checkboxes
+  .#{$prefix}--form-item.#{$prefix}--checkbox-wrapper:first-of-type {
+    margin-block-start: 0;
+  }
+
+  // Shift collection of checkboxes up if label is present
+  // to account for the 2px top margin for the first checkbox
+  .#{$prefix}--label + .#{$prefix}--form-item.#{$prefix}--checkbox-wrapper {
+    margin-block-start: -#{$spacing-01};
+  }
+
+  // Spacing below collection of checkboxes
+  .#{$prefix}--form-item.#{$prefix}--checkbox-wrapper:last-of-type {
+    margin-block-end: convert.to-rem(3px);
+  }
+
+  // Visually, we'll hide the checkbox input and create our own styled version
+  // to match the specs.
+  .#{$prefix}--checkbox {
+    @include visually-hidden;
+    //even though its hidden, positioning is for native validation to be aligned to checkbox
+    inset-block-start: 1.25rem;
+    inset-inline-start: 0.7rem;
+  }
+
+  // The label corresponds to the content inside of the `label` tag. Since we're
+  // creating our own checkbox style, we'll need to position this in order to
+  // accommodate the spacing needed for the checkbox.
+  .#{$prefix}--checkbox-label {
+    @include reset;
+    @include type-style('body-compact-01');
+
+    position: relative;
+    display: flex;
+    cursor: pointer;
+    min-block-size: convert.to-rem(20px);
+    padding-block-start: convert.to-rem(1px);
+    padding-inline-start: convert.to-rem(20px);
+    user-select: none;
+  }
+
+  .#{$prefix}--checkbox-label-text {
+    // Add extra spacing when label is present
+    padding-inline-start: convert.to-rem(10px);
+  }
+
+  // Required because `$css--reset: true` cannot currently apply to this `::before` and `::after`
+  .#{$prefix}--checkbox-label::before,
+  .#{$prefix}--checkbox-label::after {
+    box-sizing: border-box;
+
+    @media print {
+      print-color-adjust: exact;
+    }
+  }
+
+  // Spacing for presentational checkbox
+  .#{$prefix}--checkbox-label::before {
+    // We need to position the pseudo-element absolutely in the space that we've
+    // created with the padding from the label itself. We position only with
+    // `top` since we don't want the checkbox to be centered vertically with the
+    // text overflows.
+    position: absolute;
+    border: 1px solid $icon-primary;
+    border-radius: 2px;
+    @include high-contrast-mode {
+      border: 1px solid ButtonBorder;
+    }
+
+    // Checkboxes with a background color look visually off against a parent container.
+    background-color: transparent;
+    block-size: convert.to-rem(16px);
+    content: '';
+
+    // According to the spec, we'll want the bounding box for our checkbox to
+    // be 16px. The border size will be what will be updated during the
+    // different checkbox states.
+    inline-size: convert.to-rem(16px);
+    inset-block-start: convert.to-rem(2px);
+    inset-inline-start: 0;
+
+    // increase left margin for #6480
+    margin-block: convert.to-rem(1px) convert.to-rem(2px);
+    margin-inline: convert.to-rem(3px) 0;
+  }
+
+  // Create the appearance of the check in the `after` pseudo-element
+  .#{$prefix}--checkbox-label::after {
+    position: absolute;
+    background: none;
+    block-size: convert.to-rem(5px);
+    border-block-end: 1.5px solid $icon-inverse;
+    border-inline-start: 1.5px solid $icon-inverse;
+    content: '';
+    inline-size: convert.to-rem(9px);
+    inset-block-start: convert.to-rem(6.5px);
+    inset-inline-start: convert.to-rem(7px);
+    margin-block-start: convert.to-rem(-3px);
+    transform: scale(0) rotate(-45deg);
+    transform-origin: bottom right;
+  }
+
+  //----------------------------------------------
+  // Checked
+  // ---------------------------------------------
+
+  // Update properties for checked checkbox
+  .#{$prefix}--checkbox:checked + .#{$prefix}--checkbox-label::before,
+  .#{$prefix}--checkbox:indeterminate + .#{$prefix}--checkbox-label::before,
+  .#{$prefix}--checkbox-label[data-contained-checkbox-state='true']::before {
+    border: none;
+    border-width: 1px;
+    background-color: $icon-primary;
+
+    // According to https://developer.mozilla.org/en-US/docs/Web/CSS/system-color, in high contrast mode, the
+    // checkbox should be displayed using SelectedItem and SelectedItemText.
+    @include high-contrast-mode {
+      border: 1px solid ButtonBorder;
+      background-color: SelectedItem;
+    }
+  }
+
+  // Display the check
+  .#{$prefix}--checkbox:checked + .#{$prefix}--checkbox-label::after,
+  .#{$prefix}--checkbox-label[data-contained-checkbox-state='true']::after {
+    transform: scale(1) rotate(-45deg);
+  }
+
+  // Indeterminate symbol
+  .#{$prefix}--checkbox:indeterminate + .#{$prefix}--checkbox-label::after {
+    border-block-end: 2px solid $icon-inverse;
+    border-inline-start: 0 solid $icon-inverse;
+    inline-size: convert.to-rem(8px);
+    inset-block-start: convert.to-rem(11px);
+    transform: scale(1) rotate(0deg);
+  }
+
+  //----------------------------------------------
+  // Focus
+  // ---------------------------------------------
+
+  // Unchecked
+  .#{$prefix}--checkbox:focus + .#{$prefix}--checkbox-label::before,
+  .#{$prefix}--checkbox-label__focus::before,
+  // Checked
+  .#{$prefix}--checkbox:checked:focus + .#{$prefix}--checkbox-label::before,
+  .#{$prefix}--checkbox-label[data-contained-checkbox-state='true'].#{$prefix}--checkbox-label__focus::before,
+  // Indeterminate
+  .#{$prefix}--checkbox:indeterminate:focus + .#{$prefix}--checkbox-label::before {
+    outline: 2px solid $focus;
+    outline-offset: 1px;
+  }
+
+  //----------------------------------------------
+  // Disabled
+  // ---------------------------------------------
+
+  .#{$prefix}--checkbox:disabled + .#{$prefix}--checkbox-label,
+  .#{$prefix}--checkbox-label[data-contained-checkbox-disabled='true'] {
+    color: $text-disabled;
+    cursor: not-allowed;
+  }
+
+  .#{$prefix}--checkbox:disabled + .#{$prefix}--checkbox-label::before,
+  .#{$prefix}--checkbox-label[data-contained-checkbox-disabled='true']::before {
+    border-color: $icon-disabled;
+  }
+
+  .#{$prefix}--checkbox:checked:disabled + .#{$prefix}--checkbox-label::before,
+  .#{$prefix}--checkbox:indeterminate:disabled
+    + .#{$prefix}--checkbox-label::before,
+  .#{$prefix}--checkbox-label[data-contained-checkbox-state='true'][data-contained-checkbox-disabled='true']::before {
+    background-color: $icon-disabled;
+  }
+
+  //----------------------------------------------
+  // Invalid + warn
+  // ---------------------------------------------
+  .#{$prefix}--checkbox-group[data-invalid] .#{$prefix}--checkbox-label::before,
+  .#{$prefix}--checkbox-wrapper--invalid .#{$prefix}--checkbox-label::before,
+  .#{$prefix}--checkbox-wrapper--invalid
+    .#{$prefix}--checkbox:checked
+    + .#{$prefix}--checkbox-label::before {
+    border: 1px solid $support-error;
+  }
+
+  // checkbox group overrides for individual validation checkbox
+  .#{$prefix}--checkbox-group
+    .#{$prefix}--checkbox-wrapper--invalid
+    > .#{$prefix}--checkbox__validation-msg,
+  .#{$prefix}--checkbox-group
+    .#{$prefix}--checkbox-wrapper--warning
+    > .#{$prefix}--checkbox__validation-msg,
+  .#{$prefix}--checkbox-group
+    .#{$prefix}--checkbox-wrapper
+    > .#{$prefix}--form__helper-text {
+    display: none;
+  }
+
+  .#{$prefix}--checkbox-group:not(.#{$prefix}--checkbox-group[data-invalid])
+    .#{$prefix}--checkbox-wrapper--invalid
+    .#{$prefix}--checkbox-label::before,
+  .#{$prefix}--checkbox-group:not(.#{$prefix}--checkbox-group[data-invalid])
+    .#{$prefix}--checkbox-wrapper--invalid
+    .#{$prefix}--checkbox:checked
+    + .#{$prefix}--checkbox-label::before {
+    border: 1px solid $icon-primary;
+  }
+
+  .#{$prefix}--checkbox-group__validation-msg,
+  .#{$prefix}--checkbox__validation-msg {
+    display: none;
+    align-items: flex-start;
+    inline-size: 100%;
+    margin-block-start: $spacing-02;
+  }
+
+  .#{$prefix}--checkbox__invalid-icon {
+    margin: convert.to-rem(1px) convert.to-rem(1px) 0 convert.to-rem(3px);
+    fill: $support-error;
+    min-inline-size: convert.to-rem(16px);
+  }
+
+  .#{$prefix}--checkbox__invalid-icon--warning {
+    fill: $support-warning;
+  }
+
+  .#{$prefix}--checkbox__invalid-icon--warning path:first-of-type {
+    fill: #000000;
+  }
+
+  .#{$prefix}--checkbox-group--invalid
+    .#{$prefix}--checkbox-group__validation-msg,
+  .#{$prefix}--checkbox-group--warning
+    .#{$prefix}--checkbox-group__validation-msg,
+  .#{$prefix}--checkbox-wrapper--invalid
+    > .#{$prefix}--checkbox__validation-msg,
+  .#{$prefix}--checkbox-wrapper--warning
+    > .#{$prefix}--checkbox__validation-msg {
+    display: flex;
+  }
+
+  .#{$prefix}--checkbox-group--invalid
+    .#{$prefix}--checkbox-group__validation-msg
+    .#{$prefix}--form-requirement,
+  .#{$prefix}--checkbox-group--warning
+    .#{$prefix}--checkbox-group__validation-msg
+    .#{$prefix}--form-requirement,
+  .#{$prefix}--checkbox-wrapper--invalid
+    .#{$prefix}--checkbox__validation-msg
+    .#{$prefix}--form-requirement,
+  .#{$prefix}--checkbox-wrapper--warning
+    .#{$prefix}--checkbox__validation-msg
+    .#{$prefix}--form-requirement {
+    display: block;
+    overflow: visible;
+    margin-block-start: 0;
+    margin-inline-start: $spacing-03;
+    max-block-size: 100%;
+  }
+
+  .#{$prefix}--checkbox-group--invalid
+    .#{$prefix}--checkbox-group__validation-msg
+    .#{$prefix}--form-requirement,
+  .#{$prefix}--checkbox-wrapper--invalid
+    .#{$prefix}--checkbox__validation-msg
+    .#{$prefix}--form-requirement {
+    color: $text-error;
+  }
+
+  //----------------------------------------------
+  // Read-only
+  // ---------------------------------------------
+  .#{$prefix}--checkbox-group--readonly .#{$prefix}--checkbox-label,
+  .#{$prefix}--checkbox-wrapper--readonly .#{$prefix}--checkbox-label {
+    cursor: default;
+  }
+
+  .#{$prefix}--checkbox-group--readonly .#{$prefix}--checkbox-label-text,
+  .#{$prefix}--checkbox-wrapper--readonly .#{$prefix}--checkbox-label-text {
+    cursor: text;
+    user-select: text;
+  }
+
+  .#{$prefix}--checkbox-group--readonly
+    .#{$prefix}--checkbox
+    + .#{$prefix}--checkbox-label::before,
+  .#{$prefix}--checkbox-wrapper--readonly
+    .#{$prefix}--checkbox
+    + .#{$prefix}--checkbox-label::before {
+    border-color: $icon-disabled;
+  }
+
+  .#{$prefix}--checkbox-group--readonly
+    .#{$prefix}--checkbox:checked
+    + .#{$prefix}--checkbox-label::before,
+  .#{$prefix}--checkbox-wrapper--readonly
+    .#{$prefix}--checkbox:checked
+    + .#{$prefix}--checkbox-label::before {
+    border: 1px solid $icon-disabled;
+    background: transparent;
+  }
+
+  .#{$prefix}--checkbox-group--readonly
+    .#{$prefix}--checkbox:checked
+    + .#{$prefix}--checkbox-label::after,
+  .#{$prefix}--checkbox-wrapper--readonly
+    .#{$prefix}--checkbox:checked
+    + .#{$prefix}--checkbox-label::after {
+    border-color: $text-primary;
+
+    // According to https://developer.mozilla.org/en-US/docs/Web/CSS/system-color, in high contrast mode, the
+    // checkbox should be displayed using SelectedItem and SelectedItemText.
+    @include high-contrast-mode {
+      fill: SelectedItemText;
+    }
+  }
+
+  //-----------------------------------------------
+  // Skeleton
+  //-----------------------------------------------
+  .#{$prefix}--checkbox-skeleton .#{$prefix}--checkbox-label {
+    cursor: default;
+  }
+
+  .#{$prefix}--checkbox-label-text.#{$prefix}--skeleton {
+    @include skeleton;
+
+    // Add extra spacing when label is present
+    block-size: $spacing-05;
+    inline-size: convert.to-rem(100px);
+    margin-block: convert.to-rem(1px) 0;
+    margin-inline: convert.to-rem(6px) 0;
+  }
+
+  //-----------------------------------------------
+  // InlineCheckbox
+  //-----------------------------------------------
+  .#{$prefix}--checkbox--inline {
+    position: relative;
+  }
+
+  // RTL overrides
+  [dir='rtl'] .#{$prefix}--checkbox-label::after {
+    margin-block-start: 0;
+    margin-inline-start: convert.to-rem(-1px);
+    transform-origin: center;
+  }
+
+  [dir='rtl']
+    .#{$prefix}--checkbox:checked
+    + .#{$prefix}--checkbox-label::after,
+  [dir='rtl']
+    .#{$prefix}--checkbox-label[data-contained-checkbox-state='true']::after {
+    transform: scale(1.2) rotate3d(0.5, 1, 0, 158deg);
+  }
+
+  //-----------------------------------------------
+  // Decorator
+  //-----------------------------------------------
+  .#{$prefix}--checkbox-group--decorator legend.#{$prefix}--label,
+  .#{$prefix}--checkbox-wrapper--decorator .#{$prefix}--checkbox-label-text {
+    display: flex;
+  }
+  // Remove v12
+  .#{$prefix}--checkbox-group--slug legend.#{$prefix}--label,
+  .#{$prefix}--checkbox-wrapper--slug .#{$prefix}--checkbox-label-text {
+    display: flex;
+  }
+
+  .#{$prefix}--checkbox-group--decorator
+    legend.#{$prefix}--label
+    .#{$prefix}--checkbox-group-inner--decorator
+    > *,
+  .#{$prefix}--checkbox-wrapper--decorator
+    .#{$prefix}--checkbox-label-text
+    .#{$prefix}--checkbox-wrapper-inner--decorator
+    > * {
+    margin-inline-start: $spacing-03;
+  }
+  // Remove v12
+  .#{$prefix}--checkbox-group--slug
+    legend.#{$prefix}--label
+    .#{$prefix}--ai-label,
+  .#{$prefix}--checkbox-wrapper--slug
+    .#{$prefix}--checkbox-label-text
+    .#{$prefix}--ai-label,
+  .#{$prefix}--checkbox-group--slug legend.#{$prefix}--label .#{$prefix}--slug,
+  .#{$prefix}--checkbox-wrapper--slug
+    .#{$prefix}--checkbox-label-text
+    .#{$prefix}--slug {
+    margin-inline-start: $spacing-03;
+  }
+
+  .#{$prefix}--checkbox-wrapper--decorator
+    .#{$prefix}--checkbox-label-text
+    .#{$prefix}--ai-label__button--inline {
+    line-height: inherit;
+    margin-block-start: convert.to-rem(-1px);
+  }
+  // Remove v12
+  .#{$prefix}--checkbox-wrapper--slug
+    .#{$prefix}--checkbox-label-text
+    .#{$prefix}--ai-label__button--inline,
+  .#{$prefix}--checkbox-wrapper--slug
+    .#{$prefix}--checkbox-label-text
+    .#{$prefix}--slug__button--inline {
+    line-height: inherit;
+    margin-block-start: convert.to-rem(-1px);
+  }
+
+  //-----------------------------------------------
+  // Horizontal group
+  //-----------------------------------------------
+  .#{$prefix}--checkbox-group--horizontal {
+    position: relative;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: flex-start;
+
+    .#{$prefix}--form-item {
+      flex: none;
+      margin-block-end: 0;
+
+      &:not(:last-of-type) {
+        margin-inline-end: $spacing-05;
+      }
+    }
+
+    .#{$prefix}--checkbox-label-text {
+      padding-inline-start: $spacing-03;
+    }
+
+    .#{$prefix}--label + .#{$prefix}--form-item.#{$prefix}--checkbox-wrapper {
+      margin-block-start: 0;
+    }
+  }
+}

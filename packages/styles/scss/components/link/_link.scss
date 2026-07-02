@@ -1,0 +1,139 @@
+//
+// Copyright IBM Corp. 2016, 2026
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use '../../config' as *;
+@use '../../motion' as *;
+@use '../../spacing' as *;
+@use '../../theme' as *;
+@use '../../type';
+@use '../../utilities/component-reset';
+@use '../../utilities/convert';
+@use '../../utilities/custom-property';
+@use '../../utilities/focus-outline' as *;
+
+$link-text-color: custom-property.get-var('link-text-color', $link-primary);
+$link-hover-text-color: custom-property.get-var(
+  'link-hover-text-color',
+  $link-primary-hover
+);
+$link-visited-text-color: custom-property.get-var(
+  'link-visited-text-color',
+  $link-visited
+);
+$link-focus-text-color: custom-property.get-var(
+  'link-focus-text-color',
+  $focus
+);
+
+/// Link styles
+/// @access public
+/// @group link
+@mixin link {
+  .#{$prefix}--link {
+    @include component-reset.reset;
+    @include type.type-style('body-compact-01');
+
+    display: inline-flex;
+    color: $link-text-color;
+    outline: none;
+    text-decoration: none;
+    transition: color $duration-fast-01 motion(standard, productive);
+
+    &:hover {
+      color: $link-hover-text-color;
+      text-decoration: underline;
+    }
+
+    &:active:not(.#{$prefix}--link--disabled),
+    &:active:visited,
+    &:active:visited:hover {
+      @include focus-outline;
+
+      color: $link-text-color;
+      outline-color: $link-focus-text-color;
+      text-decoration: underline;
+    }
+
+    &:focus:not(.#{$prefix}--link--disabled) {
+      @include focus-outline;
+
+      outline-color: $link-focus-text-color;
+      text-decoration: underline;
+    }
+
+    &:visited {
+      color: $link-text-color;
+    }
+
+    &:visited:hover {
+      color: $link-hover-text-color;
+    }
+  }
+
+  .#{$prefix}--link--disabled,
+  .#{$prefix}--link--disabled:hover {
+    @include component-reset.reset;
+    @include type.type-style('body-compact-01');
+
+    color: $text-disabled;
+    cursor: not-allowed;
+    font-weight: 400;
+    text-decoration: none;
+  }
+
+  .#{$prefix}--link.#{$prefix}--link--visited:visited {
+    color: $link-visited-text-color;
+  }
+
+  .#{$prefix}--link.#{$prefix}--link--visited:visited:hover {
+    color: $link-hover-text-color;
+  }
+
+  .#{$prefix}--link.#{$prefix}--link--inline {
+    display: inline;
+    text-decoration: underline;
+  }
+
+  .#{$prefix}--link--disabled.#{$prefix}--link--inline {
+    text-decoration: underline;
+  }
+
+  .#{$prefix}--link--sm,
+  .#{$prefix}--link--sm.#{$prefix}--link--disabled:hover {
+    @include type.type-style('helper-text-01');
+  }
+
+  .#{$prefix}--link--lg,
+  .#{$prefix}--link--lg.#{$prefix}--link--disabled:hover {
+    @include type.type-style('body-compact-02');
+  }
+
+  // Paired with icon
+  .#{$prefix}--link--icon {
+    display: inline-block;
+  }
+
+  .#{$prefix}--link__icon {
+    display: inline-flex;
+    align-items: center;
+    block-size: 1lh;
+    line-height: inherit;
+    margin-inline-start: $spacing-03;
+    vertical-align: text-bottom;
+  }
+
+  // Large icon size
+  .#{$prefix}--link--lg .#{$prefix}--link__icon > svg {
+    block-size: convert.to-rem(20px);
+    inline-size: convert.to-rem(20px);
+  }
+
+  // For large links, set block-size to match icon size to prevent misalignment
+  .#{$prefix}--link--lg .#{$prefix}--link__icon {
+    block-size: convert.to-rem(20px);
+  }
+}

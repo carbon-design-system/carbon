@@ -1,0 +1,62 @@
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
+
+exports[`DataTable.TableExpandRow renders as expected - Component API should render 1`] = `
+<div>
+  <div
+    class="cds--data-table-content"
+  >
+    <table
+      class="cds--data-table cds--data-table--lg"
+    >
+      <tbody
+        aria-live="polite"
+      >
+        <tr
+          class="cds--parent-row custom-class"
+          data-parent-row="true"
+        >
+          <td
+            class="cds--table-expand"
+            headers="expand"
+          >
+            <button
+              aria-expanded="false"
+              aria-label="Aria label"
+              class="cds--table-expand__button"
+              type="button"
+            >
+              <svg
+                aria-hidden="true"
+                class="cds--table-expand__svg"
+                fill="currentColor"
+                focusable="false"
+                height="16"
+                preserveAspectRatio="xMidYMid meet"
+                viewBox="0 0 16 16"
+                width="16"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M11 8 6 13 5.3 12.3 9.6 8 5.3 3.7 6 3z"
+                />
+              </svg>
+            </button>
+          </td>
+        </tr>
+        <tr
+          class="cds--expandable-row"
+          data-child-row="true"
+        >
+          <td
+            colspan="1"
+          >
+            <div
+              class="cds--child-row-inner-container"
+            />
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+`;

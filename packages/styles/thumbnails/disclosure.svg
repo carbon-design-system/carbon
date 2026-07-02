@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="320px" height="180px" viewBox="0 0 320 180" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>disclosure</title>
+    <defs>
+        <polygon id="path-1" points="1 24 109.293945 24 109.293945 3.48165941e-13 133 3.48165941e-13 133 24 133 98 1 98"></polygon>
+        <filter x="-7.6%" y="-8.2%" width="115.2%" height="120.4%" filterUnits="objectBoundingBox" id="filter-2">
+            <feOffset dx="0" dy="2" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="3" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.3 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
+        </filter>
+    </defs>
+    <g id="disclosure" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Group" transform="translate(93.000000, 32.000000)">
+            <rect id="Rectangle-Copy" x="0" y="98" width="18" height="18"></rect>
+            <g id="Rectangle-2-Copy-19">
+                <use fill="black" fill-opacity="1" filter="url(#filter-2)" xlink:href="#path-1"></use>
+                <use fill="#F3F3F3" fill-rule="evenodd" xlink:href="#path-1"></use>
+            </g>
+            <g transform="translate(115.000000, 6.000000)" fill="#000000" id="icon/navigation/overflow-menu/16-copy-7">
+                <path d="M11.25,2.625 L9.3375,2.625 C9.16005283,1.75112851 8.3917056,1.12312029 7.5,1.12312029 C6.6082944,1.12312029 5.83994717,1.75112851 5.6625,2.625 L0.75,2.625 L0.75,3.375 L5.6625,3.375 C5.83994717,4.24887149 6.6082944,4.87687971 7.5,4.87687971 C8.3917056,4.87687971 9.16005283,4.24887149 9.3375,3.375 L11.25,3.375 L11.25,2.625 Z M7.5,4.125 C6.87867966,4.125 6.375,3.62132034 6.375,3 C6.375,2.37867966 6.87867966,1.875 7.5,1.875 C8.12132034,1.875 8.625,2.37867966 8.625,3 C8.625,3.62132034 8.12132034,4.125 7.5,4.125 L7.5,4.125 Z M0.75,9.375 L2.6625,9.375 C2.83994717,10.2488715 3.6082944,10.8768797 4.5,10.8768797 C5.3917056,10.8768797 6.16005283,10.2488715 6.3375,9.375 L11.25,9.375 L11.25,8.625 L6.3375,8.625 C6.16005283,7.75112851 5.3917056,7.12312029 4.5,7.12312029 C3.6082944,7.12312029 2.83994717,7.75112851 2.6625,8.625 L0.75,8.625 L0.75,9.375 Z M3.375,9 C3.375,8.37867966 3.87867966,7.875 4.5,7.875 C5.12132034,7.875 5.625,8.37867966 5.625,9 C5.625,9.62132034 5.12132034,10.125 4.5,10.125 C3.87867966,10.125 3.375,9.62132034 3.375,9 Z" id="Fill"></path>
+            </g>
+        </g>
+    </g>
+</svg>

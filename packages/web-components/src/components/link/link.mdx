@@ -1,0 +1,56 @@
+import { ArgTypes, Canvas, Markdown, Meta } from '@storybook/addon-docs/blocks';
+import { cdnJs } from '../../globals/internal/storybook-cdn';
+import * as LinkStories from './link.stories';
+
+<Meta of={LinkStories} />
+
+# Link
+
+[Source code](https://github.com/carbon-design-system/carbon/tree/main/packages/web-components/src/components/link)
+&nbsp;|&nbsp;
+[Usage guidelines](https://www.carbondesignsystem.com/components/link/usage)
+&nbsp;|&nbsp;
+[Accessibility](https://www.carbondesignsystem.com/components/link/accessibility)
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Inline](#inline)
+- [Accessible Link with Icon](#accessible-link-with-icon)
+- [Component API](#component-api)
+- [CDN](#cdn)
+- [Feedback](#feedback)
+
+## Overview
+
+Links are used as navigational elements and can be used on their own or inline
+with text. They provide a lightweight option for navigation but like other
+interactive elements, too many links will clutter a page and make it difficult
+for users to identify their next steps. This is especially true for inline
+links, which should be used sparingly.
+
+<Canvas of={LinkStories.Default} />
+
+## Inline
+
+<Canvas of={LinkStories.Inline} />
+
+## Accessible Link with Icon
+
+If the text of your link doesn't correspond to the action represented by the
+icon, consider incorporating an `aria-label` for the icon. This will ensure that
+visually impaired users can comprehend the outcome of clicking the link.
+
+<Canvas of={LinkStories.PairedWithIcon} />
+
+## Component API
+
+<ArgTypes of="cds-link" />
+
+<Markdown>{`${cdnJs({ components: ['link'] })}`}</Markdown>
+
+## Feedback
+
+Help us improve this component by providing feedback, asking questions on Slack,
+or updating this file on
+[GitHub](https://github.com/carbon-design-system/carbon/edit/main/packages/web-components/src/components/link/link.mdx).

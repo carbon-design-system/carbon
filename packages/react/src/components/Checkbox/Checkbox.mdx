@@ -1,0 +1,167 @@
+import { Story, Canvas, ArgTypes, Meta } from '@storybook/addon-docs/blocks';
+import Checkbox, { CheckboxSkeleton } from '../Checkbox';
+import * as CheckboxStories from './Checkbox.stories';
+import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
+
+<Meta isTemplate />
+
+# Checkbox
+
+[Source code](https://github.com/carbon-design-system/carbon/tree/main/packages/react/src/components/Checkbox)
+&nbsp;|&nbsp;
+[Usage guidelines](https://www.carbondesignsystem.com/components/checkbox/usage)
+&nbsp;|&nbsp;
+[Accessibility](https://www.carbondesignsystem.com/components/checkbox/accessibility)
+
+{/* <!-- START doctoc generated TOC please keep comment here to allow auto update --> <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE --> */}
+
+## Table of Contents
+
+- [Overview](#overview)
+  - [Controlled example](#controlled-example)
+- [Horizontal](#horizontal)
+- [Single](#single)
+- [Skeleton state](#skeleton-state)
+- [With AI label](#with-ai-label)
+- [Component API](#component-api)
+  - [Checkbox id](#checkbox-id)
+  - [Checkbox labelText](#checkbox-labeltext)
+  - [Checkbox onChange](#checkbox-onchange)
+- [Feedback](#feedback)
+
+{/* <!-- END doctoc generated TOC please keep comment here to allow auto update --> */}
+
+## Overview
+
+You can build a checkbox using the `Checkbox` in combination with a `<fieldset>`
+element to group controls and `<legend>` element for the label.
+
+<Canvas
+  of={CheckboxStories.Default}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(CheckboxStories.Default),
+    },
+  ]}
+/>
+
+### Controlled example
+
+You can also use a controlled checkbox component driven by state:
+
+```jsx
+function ExampleComponent() {
+  const [isChecked, setIsChecked] = useState(false);
+  return (
+    <Checkbox
+      id="checkbox"
+      labelText="checkbox"
+      checked={isChecked}
+      onChange={(_, { checked }) => setIsChecked(checked)}
+    />
+  );
+}
+```
+
+## Horizontal
+
+<Canvas
+  of={CheckboxStories.Horizontal}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(CheckboxStories.Horizontal),
+    },
+  ]}
+/>
+
+## Single
+
+<Canvas
+  of={CheckboxStories.Single}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(CheckboxStories.Single),
+    },
+  ]}
+/>
+
+## Skeleton state
+
+You can use the `CheckboxSkeleton` component to render a skeleton variant of a
+checkbox. This is useful to display while content in your checkbox is being
+fetched from an external resource like an API.
+
+<Canvas
+  of={CheckboxStories.Skeleton}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(CheckboxStories.Skeleton),
+    },
+  ]}
+/>
+
+## With AI label
+
+<Canvas
+  of={CheckboxStories.withAILabel}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(CheckboxStories.withAILabel),
+    },
+  ]}
+/>
+
+## Component API
+
+<ArgTypes />
+### Checkbox defaultChecked
+
+You can use the `defaultChecked` prop to specify weather a checkbox is checked
+by default or not on page load.
+
+```jsx
+<Checkbox defaultChecked labelText={`Checkbox label`} id="checkbox-label-1" />
+<Checkbox defaultChecked labelText={`Checkbox label`} id="checkbox-label-2" />
+```
+
+### Checkbox id
+
+The `id` should be used to provide each checkbox input with a unique id and is a
+required prop.
+
+```jsx
+<Checkbox labelText={`Checkbox label`} id="checkbox-label-1" />
+<Checkbox labelText={`Checkbox label`} id="checkbox-label-2" />
+```
+
+### Checkbox labelText
+
+The `labelText` should be used to provide a label that describes the checkbox
+input that is being exposed to the user and is a required prop.
+
+```jsx
+<Checkbox labelText={`Checkbox label`} id="checkbox-label-1" />
+<Checkbox labelText={`Checkbox label`} id="checkbox-label-2" />
+```
+
+### Checkbox onChange
+
+You can use the `onChange` prop to pass in a custom function for event handling.
+This prop receives three arguments: a boolean, the checkbox id, and the dom
+event.
+
+```jsx
+<Checkbox onChange={()=>{}} labelText={`Checkbox label`} id="checkbox-label-1" />
+<Checkbox onChange={()=>{}} labelText={`Checkbox label`} id="checkbox-label-2" />
+```
+
+## Feedback
+
+Help us improve this component by providing feedback, asking questions on Slack,
+or updating this file on
+[GitHub](https://github.com/carbon-design-system/carbon/edit/main/packages/react/src/components/Checkbox/Checkbox.mdx).

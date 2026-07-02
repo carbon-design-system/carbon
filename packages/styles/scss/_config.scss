@@ -1,0 +1,86 @@
+//
+// Copyright IBM Corp. 2018, 2025
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+/// Specify whether default styles should be emitted for the <body> element,
+/// specifically background and text color
+/// @access public
+/// @type Bool
+/// @group config
+$css--body: true !default;
+
+/// If true, includes font face mixins from scss/fonts
+/// @access public
+/// @type Bool
+/// @group config
+$css--font-face: true !default;
+
+/// If true, emit the custom type properties in :root
+/// @access public
+/// @type Bool
+/// @group config
+$css--emit-type-custom-props: false !default;
+
+/// If true, include reset CSS
+/// @access public
+/// @type Bool
+/// @group config
+$css--reset: true !default;
+
+/// If true, include default type
+/// @access public
+/// @type Bool
+/// @group config
+$css--default-type: true !default;
+
+/// Specify the default value for the `font-display` property used for fonts
+/// loaded with @font-face
+/// @access public
+/// @type String
+/// @group config
+$font-display: swap !default;
+
+/// Specify the base path for loading IBM Plex
+/// @access public
+/// @type String
+/// @group config
+$font-path: '~@ibm/plex' !default;
+
+/// Specify if the new per-family plex packages (e.g. @ibm/plex-sans) should be used
+/// @access public
+/// @type Boolean
+/// @group config
+$use-per-family-plex: false !default;
+
+/// Specify if IBM Plex should be provided by the IBM Akamai CDN
+/// @access public
+/// @type String
+/// @group config
+$use-akamai-cdn: false !default;
+
+/// The value used to prefix selectors and CSS Custom Properties across the
+/// codebase
+/// @access public
+/// @type String
+/// @group config
+$prefix: 'cds' !default;
+
+/// Total columns used in the flex grid
+/// @type Number
+/// @access public
+/// @group @carbon/grid
+$flex-grid-columns: 16 !default;
+
+/// Specify if the flexbox grid styles should be emitted
+/// @type Boolean
+/// @group config
+$use-flexbox-grid: false !default;
+
+@forward '@carbon/grid/scss/config' hide $prefix,
+  $flex-grid-columns with (
+    $prefix: $prefix,
+    $flex-grid-columns: $flex-grid-columns
+  );

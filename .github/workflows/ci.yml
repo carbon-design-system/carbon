@@ -1,0 +1,486 @@
+name: ci
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    types: [opened, reopened, synchronize, ready_for_review]
+    branches:
+      - main
+  merge_group:
+    types: [checks_requested]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  dedupe:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+      - name: Use Node.js version from .nvmrc
+        uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6.4.0
+        with:
+          node-version-file: '.nvmrc'
+      - name: Run yarn dedupe
+        run: yarn dedupe --check
+
+  format:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+      - name: Use Node.js version from .nvmrc
+        uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6.4.0
+        with:
+          node-version-file: '.nvmrc'
+      - uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        if: github.event_name != 'merge_group'
+        with:
+          path: |
+            node_modules
+            */**/node_modules
+          key:
+            ${{ runner.os }}-yarn-${{ hashFiles('yarn.lock',
+            'packages/**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
+      - name: Install dependencies
+        env:
+          YARN_ENABLE_HARDENED_MODE: 0
+        run: yarn install --immutable
+      - name: Check formatting of project files
+        run: yarn format:diff
+
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+      - name: Use Node.js version from .nvmrc
+        uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6.4.0
+        with:
+          node-version-file: '.nvmrc'
+      - uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        if: github.event_name != 'merge_group'
+        with:
+          path: |
+            node_modules
+            */**/node_modules
+          key:
+            ${{ runner.os }}-yarn-${{ hashFiles('yarn.lock',
+            'packages/**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
+      - name: Install dependencies
+        env:
+          YARN_ENABLE_HARDENED_MODE: 0
+        run: yarn install --immutable
+      - name: Lint code
+        run: yarn lint
+      - name: Lint styles
+        run: yarn lint:styles
+
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+      - name: Use Node.js version from .nvmrc
+        uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6.4.0
+        with:
+          node-version-file: '.nvmrc'
+      - uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        if: github.event_name != 'merge_group'
+        id: cache
+        with:
+          path: |
+            node_modules
+            */**/node_modules
+          key:
+            ${{ runner.os }}-yarn-${{ hashFiles('yarn.lock',
+            'packages/**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
+      - name: Install dependencies
+        env:
+          YARN_ENABLE_HARDENED_MODE: 0
+        run: yarn install --immutable
+      - name: Build project
+        run: yarn build
+      - name: Check generated styles
+        run: |
+          yarn carbon-cli check --ignore '**/@(node_modules|examples|components|react|fixtures|compat)/**' 'packages/**/*.scss'
+      - name: Run tests
+        run: yarn test --ci --collectCoverage
+      - name: Upload coverage reports to Codecov with GitHub Action
+        uses: codecov/codecov-action@fb8b3582c8e4def4969c97caa2f19720cb33a72f # v7.0.0
+        with:
+          flags: main-packages
+        env:
+          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+
+  web-components-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+      - name: Use Node.js version from .nvmrc
+        uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6.4.0
+        with:
+          node-version-file: '.nvmrc'
+      - uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        if: github.event_name != 'merge_group'
+        id: cache
+        with:
+          path: |
+            node_modules
+            */**/node_modules
+          key:
+            ${{ runner.os }}-yarn-${{ hashFiles('yarn.lock',
+            'packages/**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
+      - name: Install dependencies
+        env:
+          YARN_ENABLE_HARDENED_MODE: 0
+        run: yarn install --immutable
+      - name: Build web-components project
+        run:
+          yarn lerna run build --scope='@carbon/web-components'
+          --include-dependencies
+      - name: Run tests
+        run: |
+          cd packages/web-components
+          yarn test --coverage
+      - name: Upload web-components coverage reports to Codecov
+        uses: codecov/codecov-action@fb8b3582c8e4def4969c97caa2f19720cb33a72f # v7.0.0
+        with:
+          files: ./packages/web-components/coverage/lcov.info
+          flags: web-components
+          verbose: true
+        env:
+          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+
+  elements-previews:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+      - name: Use Node.js version from .nvmrc
+        uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6.4.0
+        with:
+          node-version-file: '.nvmrc'
+      - uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        if: github.event_name != 'merge_group'
+        with:
+          path: |
+            node_modules
+            */**/node_modules
+          key:
+            ${{ runner.os }}-yarn-${{ hashFiles('yarn.lock',
+            'packages/**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
+      - name: Install dependencies
+        env:
+          YARN_ENABLE_HARDENED_MODE: 0
+        run: yarn install --immutable
+      - name: Build project
+        run: yarn build
+      - name: Build elements previews
+        run: node tasks/examples.js
+
+  e2e:
+    name: 'test:e2e'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+      - name: Use Node.js version from .nvmrc
+        uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6.4.0
+        with:
+          node-version-file: '.nvmrc'
+      - uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        if: github.event_name != 'merge_group'
+        id: cache
+        with:
+          path: |
+            node_modules
+            */**/node_modules
+          key:
+            ${{ runner.os }}-yarn-${{ hashFiles('yarn.lock',
+            'packages/**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
+      - name: Install dependencies
+        env:
+          YARN_ENABLE_HARDENED_MODE: 0
+        run: yarn install --immutable
+      - uses: dorny/paths-filter@fbd0ab8f3e69293af611ebaee6363fc25e6d187d # v4.0.1
+        id: filter
+        with:
+          token: ${{ github.token }}
+          filters: |
+            e2e:
+              - 'e2e/**'
+              - 'packages/icons/**'
+              - 'packages/icons-react/**'
+              - 'packages/icons-vue/**'
+              - 'packages/pictograms/**'
+              - 'packages/pictograms-react/**'
+              - 'packages/icon-build-helpers/**'
+      - name: Build project
+        if: ${{ steps.filter.outputs.e2e == 'true' }}
+        run: yarn build
+      - name: Run e2e tests
+        if: ${{ steps.filter.outputs.e2e == 'true' }}
+        run: yarn test:e2e
+
+  avt-build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+      - name: Use Node.js version from .nvmrc
+        uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6.4.0
+        with:
+          node-version-file: '.nvmrc'
+      - uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        if: github.event_name != 'merge_group'
+        id: cache
+        with:
+          path: |
+            node_modules
+            */**/node_modules
+          key:
+            ${{ runner.os }}-yarn-${{ hashFiles('yarn.lock',
+            'packages/**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
+      - name: Install dependencies
+        env:
+          YARN_ENABLE_HARDENED_MODE: 0
+        run: yarn install --immutable
+      - name: Build project
+        env:
+          NODE_OPTIONS: --max-old-space-size=6144
+        run:
+          yarn lerna run build --scope='@carbon/react'
+          --include-dependencies
+      - name: Build storybook
+        env:
+          NODE_OPTIONS: --max-old-space-size=6144
+        run: yarn workspace @carbon/react storybook:build
+      - name: Upload storybook static files
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a #7.0.1
+        with:
+          name: avt-storybook-static
+          path: packages/react/storybook-static
+          retention-days: 1
+
+  avt-runner:
+    needs: avt-build
+    strategy:
+      fail-fast: false
+      matrix:
+        shardIndex: [1, 2, 3, 4]
+        shardTotal: [4]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+      - name: Use Node.js version from .nvmrc
+        uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6.4.0
+        with:
+          node-version-file: '.nvmrc'
+      - uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        if: github.event_name != 'merge_group'
+        id: cache
+        with:
+          path: |
+            node_modules
+            */**/node_modules
+          key:
+            ${{ runner.os }}-yarn-${{ hashFiles('yarn.lock',
+            'packages/**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
+      - name: Install dependencies
+        env:
+          YARN_ENABLE_HARDENED_MODE: 0
+        run: yarn install --immutable
+      - name: Install browsers
+        run: yarn playwright install --with-deps
+      - name: Download storybook artifacts
+        uses: actions/download-artifact@v8
+        with:
+          name: avt-storybook-static
+          path: packages/react/storybook-static
+      - name: Run storybook
+        id: storybook
+        run: |
+          npx serve -l 3000 packages/react/storybook-static &
+          pid=$!
+          echo "pid=$pid" >> $GITHUB_OUTPUT
+      - uses: ./actions/wait-for-it
+        with:
+          URL: 'http://localhost:3000'
+        timeout-minutes: 3
+      - name: Run AVT
+        if: github.repository == 'carbon-design-system/carbon'
+        run: |
+          yarn playwright test --project chromium --grep @avt --shard="${{ matrix.shardIndex }}/${{ matrix.shardTotal }}"
+      - name: Stop storybook
+        run: kill ${{ steps.storybook.outputs.pid }}
+      - name: Upload blob report to GitHub Actions Artifacts
+        if:
+          ${{ !cancelled() && github.repository == 'carbon-design-system/carbon'
+          }}
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a #7.0.1
+        with:
+          name: playwright-avt-blob-report-${{ matrix.shardIndex }}
+          path: blob-report
+          retention-days: 1
+
+  avt:
+    if: ${{ always() }}
+    runs-on: ubuntu-latest
+    needs: avt-runner
+    steps:
+      - name: Check AVT Runner job status
+        if: ${{ needs.avt-runner.result != 'success' }}
+        run: exit 1
+
+  merge-playwright-reports:
+    # Merge reports after avt-runner jobs, even if some shards have failed
+    if:
+      ${{ github.repository == 'carbon-design-system/carbon' && !cancelled() &&
+      github.event.pull_request.draft == false }}
+    needs: [avt-runner]
+
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+      - name: Use Node.js version from .nvmrc
+        uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6.4.0
+        with:
+          node-version-file: '.nvmrc'
+      - uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        if: github.event_name != 'merge_group'
+        id: cache
+        with:
+          path: |
+            node_modules
+            */**/node_modules
+          key:
+            ${{ runner.os }}-yarn-${{ hashFiles('yarn.lock',
+            'packages/**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
+      - name: Install dependencies
+        env:
+          YARN_ENABLE_HARDENED_MODE: 0
+        run: yarn install --immutable
+
+      - name: Download avt blob reports from GitHub Actions Artifacts
+        uses: actions/download-artifact@v8
+        with:
+          path: all-playwright-avt-blob-reports
+          pattern: playwright-avt-blob-report-*
+          merge-multiple: true
+
+      - name: Merge avt reports into HTML Report
+        run:
+          npx playwright merge-reports --reporter html
+          ./all-playwright-avt-blob-reports
+
+      - name: Upload avt HTML report
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a #7.0.1
+        with:
+          name: html-playwright-avt-report--attempt-${{ github.run_attempt }}
+          path: playwright-avt-report
+          retention-days: 1
+
+  chromatic-react:
+    if:
+      ${{ github.repository == 'carbon-design-system/carbon' &&
+      github.event.pull_request.draft == false }}
+    runs-on: ubuntu-latest
+    outputs:
+      buildUrl: ${{ steps.chromatic.outputs.buildUrl }}
+      storybookUrl: ${{ steps.chromatic.outputs.storybookUrl }}
+    steps:
+      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+        with:
+          fetch-depth: 0
+          # 👇 Tells the checkout which commit hash to reference
+          # https://www.chromatic.com/docs/github-actions/#recommended-configuration-for-build-events
+          ref: ${{ github.event.pull_request.head.sha }}
+      - name: Use Node.js version from .nvmrc
+        uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6.4.0
+        with:
+          node-version-file: '.nvmrc'
+      - uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        if: github.event_name != 'merge_group'
+        id: cache
+        with:
+          path: |
+            node_modules
+            */**/node_modules
+          key:
+            ${{ runner.os }}-yarn-${{ hashFiles('yarn.lock',
+            'packages/**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
+      - name: Install dependencies
+        env:
+          YARN_ENABLE_HARDENED_MODE: 0
+        run: yarn install --immutable
+      - name: Build project
+        run: yarn build
+      - name: Build storybook
+        run: yarn workspace @carbon/react storybook:build --stats-json
+      - id: chromatic
+        name: Run Chromatic
+        uses: chromaui/action@98132da0fca2211fb41b3af7b49ce85176007851 # v17.8.0
+        with:
+          # 👇 Token is intentionally plaintext
+          # https://www.chromatic.com/docs/github-actions/#run-chromatic-on-external-forks-of-open-source-projects
+          projectToken: 6q6rgoheqk2
+          workingDir: packages/react
+          buildScriptName: storybook:build
+          zip: true # Runs Chromatic with the option to compress the build output
+          autoAcceptChanges: '{main,gh-readonly-queue/main/**}' # Option to accept all changes on main and merge queue
+          # 👇 Add debug: true and print dependency trace for changed files to help with debugging:
+          traceChanged: 'expanded'
+          debug: true
+          onlyChanged: true # 👈 Required option to enable TurboSnap
+          externals: |
+            packages/(colors|elements|feature-flags|grid|icons|icons-react|layout|motion|pictograms|pictograms-react|styles|themes|type|utilities|utilities-react)/**
+            *.sass
+          untraced: |
+            config/**
+        env:
+          # 👇 Set to the PR branch if it's a PR; otherwise, falls back to the pushed branch name
+          CHROMATIC_BRANCH:
+            ${{ github.event.pull_request.head.ref || github.ref_name }}
+          # 👇 Set to the PR head commit if it's a PR; otherwise to the ref (which typically resolves to the latest commit SHA)
+          CHROMATIC_SHA: ${{ github.event.pull_request.head.sha || github.ref }}
+          # 👇 Makes sure this is always set to the corect owner/repo
+          CHROMATIC_SLUG: ${{ github.repository }}
+
+  # This takes the chromatic storybook url and pipes it into a github deployment
+  # environment so that PRs will have the deploy preview listed in both the
+  # PR timeline and the 'branch deployment' section at the bottom above the
+  # status checks. This avoids noisy/large comments for deploy previews.
+  react-storybook-preview:
+    runs-on: ubuntu-latest
+    needs: chromatic-react
+    environment:
+      name: '@carbon/react storybook preview'
+      url: ${{ needs.chromatic-react.outputs.storybookUrl }}
+    steps:
+      - name: Generate job summary
+        env:
+          buildUrl: ${{ needs.chromatic-react.outputs.buildUrl }}
+          storybookUrl: ${{ needs.chromatic-react.outputs.storybookUrl }}
+        run: |
+          echo "### @carbon/react storybook deploy preview :rocket:" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY # this is a blank line
+          echo "- Storybook deploy preview: ${{ env.storybookUrl }}" >> $GITHUB_STEP_SUMMARY
+          echo "- Commit: ${{ github.event.pull_request.head.sha }}" >> $GITHUB_STEP_SUMMARY
+          echo "- Chromatic build URL: ${{ env.buildUrl }}" >> $GITHUB_STEP_SUMMARY

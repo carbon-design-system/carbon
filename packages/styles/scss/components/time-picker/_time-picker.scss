@@ -1,0 +1,129 @@
+//
+// Copyright IBM Corp. 2016, 2023
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use '../text-input';
+@use '../select';
+@use '../../config' as *;
+@use '../../motion' as *;
+@use '../../spacing' as *;
+@use '../../theme' as *;
+@use '../../type' as *;
+@use '../../utilities/convert';
+@use '../../utilities/focus-outline' as *;
+@use '../../utilities/placeholder-colors' as *;
+
+/// Time picker styles
+/// @access public
+/// @group time-picker
+@mixin time-picker {
+  .#{$prefix}--time-picker {
+    display: flex;
+    align-items: flex-end;
+  }
+
+  .#{$prefix}--time-picker__select {
+    justify-content: center;
+    margin-inline-start: $spacing-01;
+  }
+
+  .#{$prefix}--time-picker__input {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .#{$prefix}--time-picker__error__icon {
+    position: absolute;
+    display: flex;
+    block-size: 100%;
+    inset-block-start: 50%;
+    inset-inline-end: 1rem;
+    place-items: center;
+    // top/transform used to center invalid icon in IE11
+    transform: translateY(-50%);
+  }
+
+  .#{$prefix}--time-picker__error__icon .#{$prefix}--checkbox__invalid-icon {
+    fill: $support-error;
+  }
+
+  .#{$prefix}--time-picker .#{$prefix}--select-input {
+    margin: 0;
+    inline-size: auto;
+    line-height: 1;
+    min-inline-size: auto;
+    padding-inline-end: convert.to-rem(48px);
+  }
+
+  .#{$prefix}--time-picker__input-field {
+    @include focus-outline('reset');
+    @include type-style('code-02');
+
+    display: flex;
+    align-items: center;
+    block-size: convert.to-rem(40px);
+    inline-size: 4.875rem;
+    transition:
+      outline $duration-fast-01 motion(standard, productive),
+      background-color $duration-fast-01 motion(standard, productive);
+
+    &::placeholder {
+      @include placeholder-colors;
+    }
+  }
+
+  .#{$prefix}--time-picker__input-field-error {
+    inline-size: 6.175rem;
+  }
+
+  // V11: Possibly deprecate
+  .#{$prefix}--time-picker--light .#{$prefix}--select-input {
+    background-color: $field-02;
+
+    &:hover {
+      background-color: $field-hover;
+    }
+
+    &:disabled,
+    &:hover:disabled {
+      background-color: transparent;
+      border-block-end: 1px solid transparent;
+      color: $text-disabled;
+      cursor: not-allowed;
+    }
+  }
+
+  .#{$prefix}--time-picker--sm .#{$prefix}--select-input,
+  .#{$prefix}--time-picker--sm .#{$prefix}--time-picker__input-field {
+    block-size: convert.to-rem(32px);
+    max-block-size: convert.to-rem(32px);
+  }
+
+  .#{$prefix}--time-picker--lg .#{$prefix}--select-input,
+  .#{$prefix}--time-picker--lg .#{$prefix}--time-picker__input-field {
+    block-size: convert.to-rem(48px);
+    max-block-size: convert.to-rem(48px);
+  }
+
+  // readonly
+  .#{$prefix}--time-picker--readonly .#{$prefix}--time-picker__input-field {
+    background-color: transparent;
+    border-block-end-color: $border-subtle;
+  }
+
+  .#{$prefix}--time-picker--readonly .#{$prefix}--select-input {
+    background-color: transparent;
+    border-block-end-color: $border-subtle;
+    cursor: default;
+  }
+
+  .#{$prefix}--time-picker--readonly
+    .#{$prefix}--select-input
+    + .#{$prefix}--select__arrow {
+    fill: $icon-disabled;
+  }
+}

@@ -1,0 +1,93 @@
+//
+// Copyright IBM Corp. 2021
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use 'keyframes';
+@use '../theme' as *;
+@use '../config' as *;
+@use '../utilities/high-contrast-mode' as *;
+
+/// Skeleton loading animation
+/// @access public
+/// @example @include skeleton;
+/// @group utilities
+@mixin skeleton {
+  position: relative;
+  padding: 0;
+  border: none;
+  background: $skeleton-background;
+  box-shadow: none;
+  pointer-events: none;
+
+  &:hover,
+  &:focus,
+  &:active {
+    border: none;
+    cursor: default;
+    outline: none;
+  }
+
+  &::before {
+    position: absolute;
+    animation: 3000ms ease-in-out #{$prefix}--skeleton infinite;
+    background: $skeleton-element;
+    block-size: 100%;
+    content: '';
+    inline-size: 100%;
+    inset-inline-start: 0;
+    will-change: transform-origin, transform, opacity;
+
+    @media (prefers-reduced-motion: reduce) {
+      animation: none;
+    }
+  }
+
+  // High Contrast Mode support
+  @include high-contrast-mode {
+    background: CanvasText;
+
+    &::before {
+      background: Canvas;
+      forced-color-adjust: none;
+    }
+  }
+}
+
+/// Circular Skeleton loading animation
+/// @access public
+/// @example @include circular-skeleton;
+/// @group utilities
+@mixin circular-skeleton {
+  position: relative;
+  overflow: hidden;
+  border-radius: 50%;
+  background: $skeleton-background;
+
+  &::before {
+    position: absolute;
+    animation: 3000ms ease-in-out #{$prefix}--skeleton infinite;
+    background: $skeleton-element;
+    block-size: 100%;
+    content: '';
+    inline-size: 200%;
+    will-change: transform-origin, transform, opacity;
+
+    @media (prefers-reduced-motion: reduce) {
+      animation: none;
+    }
+  }
+
+  //High Contrast Mode
+  //Ensure Skeleton is visible and animated in Windows HCM
+  @include high-contrast-mode {
+    background: CanvasText;
+
+    &::before {
+      background: Canvas;
+      forced-color-adjust: none;
+    }
+  }
+}

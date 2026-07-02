@@ -1,0 +1,487 @@
+//
+// Copyright IBM Corp. 2016, 2023
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use '../../theme' as *;
+@use '../../utilities/button-reset';
+@use '../../type' as *;
+@use '../../motion' as *;
+@use '../../config' as *;
+@use '../../utilities/component-tokens' as *;
+@use '../../utilities/convert';
+@use '../../utilities/high-contrast-mode' as *;
+@use '../../utilities/layout';
+@use '../../spacing' as *;
+@use './tokens' as *;
+@use './mixins' as *;
+@use '../../utilities/skeleton' as *;
+
+/// Tag styles
+/// @access public
+/// @group tag
+@mixin tag {
+  .#{$prefix}--tag {
+    @include layout.redefine-tokens(
+      (
+        size: (
+          height: (
+            xs: convert.to-rem(18px),
+            sm: convert.to-rem(18px),
+            md: convert.to-rem(24px),
+            lg: convert.to-rem(32px),
+          ),
+        ),
+      )
+    );
+
+    @include layout.use('size', $default: 'md', $min: 'sm', $max: 'lg');
+    @include type-style('label-01');
+    @include tag-theme($tag-background-gray, $tag-color-gray, $tag-hover-gray);
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: convert.to-rem(16px);
+    cursor: default;
+    // restricts size of contained elements
+    max-inline-size: convert.to-rem(208px);
+    min-block-size: layout.size('height');
+    // ensures tag stays pill shaped;
+    min-inline-size: convert.to-rem(32px);
+    padding-inline: $spacing-03;
+    vertical-align: middle;
+    word-break: break-word;
+
+    &.#{$prefix}--tag--lg {
+      padding-inline-start: $spacing-04;
+    }
+
+    &:has(.#{$prefix}--tag__custom-icon) {
+      padding-inline-start: $spacing-02;
+    }
+
+    &.#{$prefix}--tag--lg:not(.#{$prefix}--tag--filter) {
+      padding-inline: $spacing-04;
+    }
+
+    &.#{$prefix}--tag--lg:has(.#{$prefix}--tag__custom-icon) {
+      padding-inline-start: $spacing-03;
+    }
+
+    &:not(.#{$prefix}--tag--selectable) {
+      border: 0;
+    }
+
+    &:not(:first-child) {
+      margin-inline-start: 0;
+    }
+  }
+
+  .#{$prefix}--tag--operational > span,
+  .#{$prefix}--tag--selectable > span,
+  .#{$prefix}--tag__label {
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .#{$prefix}--tag--interactive:focus {
+    outline: 2px solid $focus;
+    outline-offset: 1px;
+  }
+
+  // tags used for filtering
+  .#{$prefix}--tag--filter {
+    padding-block: 0;
+    padding-inline-end: 0;
+
+    &:hover {
+      outline: none;
+    }
+  }
+
+  .#{$prefix}--tag--selectable {
+    border: 1px solid $border-inverse;
+    background-color: $layer;
+    color: $text-primary;
+    cursor: pointer;
+
+    &:hover {
+      background-color: $layer-hover;
+      outline: none;
+    }
+
+    &:focus {
+      outline: 2px solid $focus;
+      outline-offset: 1px;
+    }
+  }
+
+  .#{$prefix}--tag--selectable-selected {
+    background-color: $layer-selected-inverse;
+    color: $text-inverse;
+
+    &:hover {
+      background-color: $layer-selected-inverse;
+    }
+  }
+
+  .#{$prefix}--tag--operational {
+    border: 1px solid $tag-border-gray;
+    background-color: $tag-background-gray;
+    color: $tag-color-gray;
+    cursor: pointer;
+
+    &:hover {
+      background-color: $tag-hover-gray;
+      outline: none;
+    }
+
+    &:focus {
+      outline: 2px solid $focus;
+      outline-offset: 1px;
+    }
+  }
+
+  .#{$prefix}--tag--red {
+    @include tag-theme(
+      $tag-background-red,
+      $tag-color-red,
+      $tag-hover-red,
+      $tag-border-red
+    );
+  }
+
+  .#{$prefix}--tag--magenta {
+    @include tag-theme(
+      $tag-background-magenta,
+      $tag-color-magenta,
+      $tag-hover-magenta,
+      $tag-border-magenta
+    );
+  }
+
+  .#{$prefix}--tag--purple {
+    @include tag-theme(
+      $tag-background-purple,
+      $tag-color-purple,
+      $tag-hover-purple,
+      $tag-border-purple
+    );
+  }
+
+  .#{$prefix}--tag--blue {
+    @include tag-theme(
+      $tag-background-blue,
+      $tag-color-blue,
+      $tag-hover-blue,
+      $tag-border-blue
+    );
+  }
+
+  .#{$prefix}--tag--cyan {
+    @include tag-theme(
+      $tag-background-cyan,
+      $tag-color-cyan,
+      $tag-hover-cyan,
+      $tag-border-cyan
+    );
+  }
+
+  .#{$prefix}--tag--teal {
+    @include tag-theme(
+      $tag-background-teal,
+      $tag-color-teal,
+      $tag-hover-teal,
+      $tag-border-teal
+    );
+  }
+
+  .#{$prefix}--tag--green {
+    @include tag-theme(
+      $tag-background-green,
+      $tag-color-green,
+      $tag-hover-green,
+      $tag-border-green
+    );
+  }
+
+  .#{$prefix}--tag--gray {
+    @include tag-theme(
+      $tag-background-gray,
+      $tag-color-gray,
+      $tag-hover-gray,
+      $tag-border-gray
+    );
+  }
+
+  .#{$prefix}--tag--cool-gray {
+    @include tag-theme(
+      $tag-background-cool-gray,
+      $tag-color-cool-gray,
+      $tag-hover-cool-gray,
+      $tag-border-cool-gray
+    );
+  }
+
+  .#{$prefix}--tag--warm-gray {
+    @include tag-theme(
+      $tag-background-warm-gray,
+      $tag-color-warm-gray,
+      $tag-hover-warm-gray,
+      $tag-border-warm-gray
+    );
+  }
+
+  .#{$prefix}--tag--high-contrast:not(.#{$prefix}--tag--operational) {
+    @include tag-theme(
+      $background-inverse,
+      $text-inverse,
+      $background-inverse-hover
+    );
+  }
+
+  .#{$prefix}--multi-select--readonly
+    .#{$prefix}--tag--high-contrast:not(.#{$prefix}--tag--operational)
+    .#{$prefix}--tag__close-icon {
+    &:hover {
+      background-color: transparent;
+    }
+  }
+
+  .#{$prefix}--tag--outline:not(.#{$prefix}--tag--operational):not(span):not(
+      [disabled]
+    ) {
+    @include tag-theme($background, $text-primary, $layer-hover);
+
+    outline: 1px solid $background-inverse;
+    outline-offset: -1px;
+  }
+
+  .#{$prefix}--tag--disabled:not(.#{$prefix}--tag--operational),
+  .#{$prefix}--tag--filter.#{$prefix}--tag--disabled,
+  .#{$prefix}--tag--interactive.#{$prefix}--tag--disabled {
+    @include tag-theme($layer, $text-disabled);
+
+    box-shadow: none;
+    outline: none;
+
+    &:hover {
+      cursor: not-allowed;
+    }
+
+    .#{$prefix}--tag__label {
+      background-color: $layer;
+      color: $text-disabled;
+    }
+  }
+
+  .#{$prefix}--tag--selectable.#{$prefix}--tag--disabled,
+  .#{$prefix}--tag--operational.#{$prefix}--tag--disabled {
+    border: 1px solid $border-disabled;
+    background-color: $layer;
+    color: $text-disabled;
+
+    &:hover {
+      background-color: $layer;
+      cursor: not-allowed;
+    }
+  }
+
+  .#{$prefix}--tag--interactive {
+    transition: background-color $duration-fast-01 motion(entrance, productive);
+  }
+
+  .#{$prefix}--tag__close-icon {
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    border: 0;
+    border-radius: 50%;
+    margin: 0 0 0 convert.to-rem(2px);
+    background-color: transparent;
+    block-size: layout.size('height');
+    color: currentColor;
+    cursor: pointer;
+    inline-size: layout.size('height');
+    transition:
+      background-color $duration-fast-01 motion(standard, productive),
+      box-shadow $duration-fast-01 motion(standard, productive);
+
+    svg {
+      fill: currentColor;
+    }
+  }
+
+  .#{$prefix}--tag__custom-icon {
+    flex-shrink: 0;
+    padding: 0;
+    border: 0;
+    background-color: transparent;
+    block-size: convert.to-rem(16px);
+    color: currentColor;
+    inline-size: convert.to-rem(16px);
+    margin-inline-end: $spacing-02;
+    outline: none;
+
+    svg {
+      fill: currentColor;
+    }
+  }
+
+  .#{$prefix}--tag--disabled .#{$prefix}--tag__close-icon {
+    cursor: not-allowed;
+  }
+
+  .#{$prefix}--tag__close-icon:focus {
+    z-index: 99999;
+    border-radius: 50%;
+    box-shadow: inset 0 0 0 1px $focus;
+    outline: none;
+  }
+
+  .#{$prefix}--tag--high-contrast .#{$prefix}--tag__close-icon:focus {
+    box-shadow: inset 0 0 0 1px $focus-inverse;
+  }
+
+  .#{$prefix}--tag--filter.#{$prefix}--tag--disabled
+    .#{$prefix}--tag__close-icon:hover {
+    background-color: transparent;
+  }
+
+  .#{$prefix}--tag--filter.#{$prefix}--tag--disabled svg {
+    fill: $icon-disabled;
+  }
+
+  .#{$prefix}--tag--sm.#{$prefix}--tag--filter {
+    padding-inline-end: 0;
+  }
+
+  .#{$prefix}--tag--sm .#{$prefix}--tag__close-icon {
+    margin-inline-start: convert.to-rem(5px);
+  }
+
+  // Skeleton state
+  .#{$prefix}--tag.#{$prefix}--skeleton {
+    @include skeleton;
+
+    @include tag-theme(
+      $bg-color: $skeleton-background,
+      $text-color: $text-primary
+    );
+
+    overflow: hidden;
+    inline-size: convert.to-rem(60px);
+
+    // Safari specific bug (#7672)
+    @supports (hanging-punctuation: first) and (font: -apple-system-body) and
+      (-webkit-appearance: none) {
+      transform: translateZ(0);
+    }
+  }
+
+  // AILabel styles
+  .#{$prefix}--tag .#{$prefix}--ai-label .#{$prefix}--ai-label__button--inline,
+  .#{$prefix}--tag .#{$prefix}--slug .#{$prefix}--slug__button--inline {
+    color: currentColor;
+    margin-inline-start: convert.to-rem(1px);
+  }
+
+  .#{$prefix}--tag
+    .#{$prefix}--ai-label
+    .#{$prefix}--ai-label__button--inline
+    .#{$prefix}--ai-label__text::before,
+  .#{$prefix}--tag
+    .#{$prefix}--slug
+    .#{$prefix}--slug__button--inline
+    .#{$prefix}--slug__text::before {
+    background-color: currentColor;
+  }
+
+  .#{$prefix}--tag
+    .#{$prefix}--ai-label
+    .#{$prefix}--ai-label__button--inline:hover,
+  .#{$prefix}--tag .#{$prefix}--slug .#{$prefix}--slug__button--inline:hover {
+    border-color: currentColor;
+  }
+
+  .#{$prefix}--tag--filter .#{$prefix}--tag__decorator > *,
+  .#{$prefix}--tag--filter .#{$prefix}--ai-label,
+  .#{$prefix}--tag--filter .#{$prefix}--slug {
+    min-inline-size: convert.to-rem(32.14px);
+  }
+
+  // Decorator styles
+  .#{$prefix}--tag
+    .#{$prefix}--tag__decorator:not(:has(.#{$prefix}--ai-label)) {
+    block-size: 1rem;
+    text-align: center;
+  }
+
+  // Windows HCM fix
+
+  .#{$prefix}--tag {
+    @include high-contrast-mode('outline');
+  }
+
+  .#{$prefix}--tag__close-icon:focus {
+    @include high-contrast-mode('focus');
+  }
+
+  .#{$prefix}--tag-label-tooltip {
+    max-inline-size: -webkit-fill-available;
+  }
+
+  .#{$prefix}--tag__custom-icon + .#{$prefix}--tag-label-tooltip {
+    max-inline-size: convert.to-rem(176px);
+  }
+
+  .#{$prefix}--tag--filter
+    .#{$prefix}--tag__custom-icon
+    + .#{$prefix}--tag-label-tooltip {
+    max-inline-size: convert.to-rem(158px);
+  }
+
+  .#{$prefix}--interactive--tag-children {
+    display: inline-flex;
+    max-inline-size: convert.to-rem(200px);
+    place-items: center;
+  }
+
+  .#{$prefix}--tag--filter
+    .#{$prefix}--tag__custom-icon
+    + span
+    > .#{$prefix}--interactive--tag-children {
+    max-inline-size: convert.to-rem(184px);
+  }
+
+  .#{$prefix}--tag .#{$prefix}--definition-term {
+    -webkit-border-after: none;
+    border-block-end: none;
+    cursor: default;
+    max-inline-size: convert.to-rem(192px);
+  }
+
+  .#{$prefix}--tag
+    .#{$prefix}--tag__custom-icon
+    + span
+    > .#{$prefix}--definition-term {
+    max-inline-size: convert.to-rem(176px);
+  }
+
+  .#{$prefix}--tag > .#{$prefix}--popover-container {
+    display: flex;
+  }
+
+  .#{$prefix}--toggletip-button:has(
+      .#{$prefix}--tag--operational.#{$prefix}--tag--disabled
+    ) {
+    pointer-events: none;
+  }
+}

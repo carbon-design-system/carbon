@@ -1,0 +1,274 @@
+//
+// Copyright IBM Corp. 2016, 2023
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use 'mixins' as *;
+@use '../../config' as *;
+@use '../../feature-flags' as *;
+@use '../../layer' as *;
+@use '../../motion';
+@use '../../theme' as *;
+@use '../../type' as *;
+@use '../../spacing' as *;
+@use '../../utilities/focus-outline' as *;
+@use '../../utilities/skeleton' as *;
+@use '../../utilities/convert';
+@use '../../utilities/component-reset';
+
+@mixin structured-list($enable-v12-structured-list-visible-icons: false) {
+  .#{$prefix}--structured-list--selection .#{$prefix}--structured-list-td,
+  .#{$prefix}--structured-list--selection .#{$prefix}--structured-list-th {
+    @include padding--data-structured-list;
+  }
+  .#{$prefix}--structured-list-row--focused-within {
+    @include focus-outline('outline');
+  }
+
+  .#{$prefix}--structured-list {
+    @include component-reset.reset;
+
+    display: table;
+
+    background-color: $layer transparent;
+    border-collapse: collapse;
+    border-spacing: 0;
+    inline-size: 100%;
+    overflow-x: auto;
+
+    // Condensed list
+    &.#{$prefix}--structured-list--condensed .#{$prefix}--structured-list-td,
+    &.#{$prefix}--structured-list--condensed .#{$prefix}--structured-list-th {
+      @include padding-td--condensed;
+      //8px padding all over
+    }
+
+    .#{$prefix}--structured-list-row
+      .#{$prefix}--structured-list-td:first-of-type,
+    .#{$prefix}--structured-list-row
+      .#{$prefix}--structured-list-th:first-of-type {
+      padding-inline-start: 1rem;
+      // specs require 16px spacing between columns
+      // 8px side padding between col creates 16 px, with exception of 1st col, which needs an override to be 16px
+    }
+
+    // Flush list
+    &.#{$prefix}--structured-list--flush
+      .#{$prefix}--structured-list-row
+      .#{$prefix}--structured-list-td,
+    &.#{$prefix}--structured-list--flush
+      .#{$prefix}--structured-list-row
+      .#{$prefix}--structured-list-th,
+    &.#{$prefix}--structured-list--flush
+      .#{$prefix}--structured-list-row
+      .#{$prefix}--structured-list-td:first-of-type,
+    &.#{$prefix}--structured-list--flush
+      .#{$prefix}--structured-list-row
+      .#{$prefix}--structured-list-th:first-of-type {
+      padding-inline: 0 1rem;
+    }
+  }
+
+  .#{$prefix}--structured-list-row {
+    display: table-row;
+    border-block-start: 1px solid $border-subtle;
+    transition: background-color motion.$duration-fast-02
+      motion.motion(standard, productive);
+  }
+
+  .#{$prefix}--structured-list-tbody
+    .#{$prefix}--structured-list-row:last-child {
+    border-block-end: 1px solid $border-subtle;
+  }
+
+  .#{$prefix}--structured-list-row--header-row {
+    border: none;
+  }
+
+  .#{$prefix}--structured-list--selection
+    .#{$prefix}--structured-list-row:hover:not(
+      .#{$prefix}--structured-list-row--header-row
+    ):not(.#{$prefix}--structured-list-row--selected) {
+    border-color: $layer-hover;
+    background-color: $layer-hover;
+    cursor: pointer;
+  }
+
+  .#{$prefix}--structured-list--selection
+    .#{$prefix}--structured-list-row:hover:not(
+      .#{$prefix}--structured-list-row--header-row
+    ):not(.#{$prefix}--structured-list-row--selected)
+    + .#{$prefix}--structured-list-row {
+    border-color: $layer-hover;
+  }
+
+  .#{$prefix}--structured-list--selection
+    .#{$prefix}--structured-list-row.#{$prefix}--structured-list-row--selected {
+    border-color: $layer-selected;
+    background-color: $layer-selected;
+  }
+
+  .#{$prefix}--structured-list--selection
+    .#{$prefix}--structured-list-row--selected
+    + .#{$prefix}--structured-list-row {
+    border-color: $layer-selected;
+  }
+
+  .#{$prefix}--structured-list--selection
+    .#{$prefix}--structured-list-row.#{$prefix}--structured-list-row--selected
+    .#{$prefix}--structured-list-td {
+    color: $text-primary;
+  }
+
+  .#{$prefix}--structured-list-row.#{$prefix}--structured-list-row--header-row {
+    cursor: inherit;
+  }
+
+  .#{$prefix}--structured-list--selection
+    .#{$prefix}--structured-list-row:hover:not(
+      .#{$prefix}--structured-list-row--header-row
+    )
+    > .#{$prefix}--structured-list-td,
+  .#{$prefix}--structured-list--selection
+    .#{$prefix}--structured-list-row.#{$prefix}--structured-list-row--selected
+    > .#{$prefix}--structured-list-td {
+    color: $text-primary;
+  }
+
+  .#{$prefix}--structured-list-thead {
+    display: table-header-group;
+    vertical-align: middle;
+  }
+
+  .#{$prefix}--structured-list-th {
+    @include component-reset.reset;
+    @include padding-th;
+    @include type-style('heading-compact-01');
+
+    display: table-cell;
+    block-size: convert.to-rem(40px);
+    color: $text-primary;
+    font-weight: 600;
+    text-align: start;
+    text-transform: $structured-list-text-transform;
+    vertical-align: top;
+  }
+
+  .#{$prefix}--structured-list-tbody {
+    display: table-row-group;
+    vertical-align: middle;
+  }
+
+  .#{$prefix}--structured-list-td {
+    @include component-reset.reset;
+    @include type-style('body-01');
+    @include padding-td;
+
+    position: relative;
+    display: table-cell;
+    color: $text-secondary;
+    max-inline-size: 36rem;
+
+    transition: color motion.$duration-fast-02
+      motion.motion(standard, productive);
+  }
+
+  .#{$prefix}--structured-list-content--nowrap {
+    white-space: nowrap;
+  }
+
+  .#{$prefix}--structured-list-input + .#{$prefix}--structured-list-td {
+    text-align: end;
+  }
+
+  .#{$prefix}--structured-list-svg {
+    display: inline-block;
+    margin-block-start: $spacing-01;
+    transition: all motion.$duration-fast-02 motion.motion(standard, productive);
+    vertical-align: top;
+  }
+
+  .#{$prefix}--structured-list-input:checked
+    + .#{$prefix}--structured-list-row
+    .#{$prefix}--structured-list-svg,
+  .#{$prefix}--structured-list-input:checked
+    + .#{$prefix}--structured-list-td
+    .#{$prefix}--structured-list-svg {
+    fill: $icon-primary;
+  }
+
+  @if not(
+    enabled('enable-v12-structured-list-visible-icons') and
+      $enable-v12-structured-list-visible-icons
+  )
+  {
+    .#{$prefix}--structured-list-svg {
+      fill: transparent;
+    }
+    .#{$prefix}--structured-list--selection
+      .#{$prefix}--structured-list-td:last-child {
+      inline-size: $spacing-07;
+      padding-inline-start: 0;
+    }
+  }
+  @if (
+    enabled('enable-v12-structured-list-visible-icons') or
+      $enable-v12-structured-list-visible-icons
+  ) {
+    .#{$prefix}--structured-list-input:checked
+      ~ .#{$prefix}--structured-list-td
+      .#{$prefix}--structured-list-svg {
+      fill: $icon-primary;
+    }
+  }
+
+  // Skeleton State
+  .#{$prefix}--structured-list.#{$prefix}--skeleton {
+    .#{$prefix}--structured-list-th {
+      &:first-child {
+        inline-size: 8%;
+      }
+
+      &:nth-child(3n + 2) {
+        inline-size: 30%;
+      }
+
+      &:nth-child(3n + 3) {
+        inline-size: 15%;
+      }
+    }
+
+    span {
+      @include skeleton;
+
+      display: block;
+      block-size: 1rem;
+
+      inline-size: 75%;
+    }
+  }
+
+  .#{$prefix}--structured-list.#{$prefix}--structured-list--selection.#{$prefix}--skeleton
+    .#{$prefix}--structured-list-th:first-child {
+    inline-size: 5%;
+
+    span {
+      display: none;
+    }
+  }
+
+  .#{$prefix}--structured-list__icon {
+    margin-block-start: $spacing-01;
+    vertical-align: top;
+  }
+
+  .#{$prefix}--structured-list--selection
+    .#{$prefix}--structured-list-td:first-child:has(
+      .#{$prefix}--structured-list__icon
+    ) {
+    inline-size: $spacing-07;
+    padding-inline-end: 0;
+  }
+}

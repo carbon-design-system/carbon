@@ -1,0 +1,83 @@
+/**
+ * Copyright IBM Corp. 2016, 2026
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+import { Settings } from '@carbon/icons-react';
+import cx from 'classnames';
+import PropTypes from 'prop-types';
+import React from 'react';
+import { usePrefix } from '../../internal/usePrefix';
+import OverflowMenu, { OverflowMenuProps } from '../OverflowMenu';
+import { useTableToolbar } from './TableToolbar';
+
+const defaultIconDescription = 'Settings';
+
+export type TableToolbarMenuProps = OverflowMenuProps;
+
+const TableToolbarMenu = ({
+  className,
+  renderIcon = Settings,
+  iconDescription = defaultIconDescription,
+  children,
+  menuOptionsClass,
+  size: sizeProp,
+  ...rest
+}: TableToolbarMenuProps) => {
+  const toolbarContext = useTableToolbar();
+  const size = sizeProp ?? toolbarContext.size;
+  const prefix = usePrefix();
+  const toolbarActionClasses = cx(
+    className,
+    `${prefix}--toolbar-action ${prefix}--overflow-menu`
+  );
+  const menuOptionsClasses = cx(
+    menuOptionsClass,
+    `${prefix}--toolbar-action__menu`
+  );
+  return (
+    <OverflowMenu
+      renderIcon={renderIcon}
+      className={toolbarActionClasses}
+      iconDescription={iconDescription}
+      menuOptionsClass={menuOptionsClasses}
+      size={size}
+      flipped
+      {...rest}>
+      {children}
+    </OverflowMenu>
+  );
+};
+
+TableToolbarMenu.propTypes = {
+  children: PropTypes.node.isRequired,
+
+  /**
+   * Provide an optional class name for the toolbar menu
+   */
+  className: PropTypes.string,
+
+  /**
+   * The description of the menu icon.
+   */
+  iconDescription: PropTypes.string,
+
+  /**
+   * Provide an optional class name for the toolbar menu
+   */
+  menuOptionsClass: PropTypes.string,
+
+  /**
+   * A component used to render an icon.
+   */
+  renderIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
+
+  /**
+   * Specify the size of the ToolbarMenu.
+   */
+  size: PropTypes.oneOf(['xs', 'sm', 'md', 'lg']),
+};
+
+export default TableToolbarMenu;

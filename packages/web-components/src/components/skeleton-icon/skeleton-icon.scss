@@ -1,0 +1,16 @@
+//
+// Copyright IBM Corp. 2019, 2024
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use '@carbon/styles/scss/config' as *;
+@use '@carbon/styles/scss/components/skeleton-styles';
+@use '@carbon/styles/scss/utilities/skeleton' as *;
+
+:host(#{$prefix}-skeleton-icon) {
+  @include skeleton;
+
+  @extend .#{$prefix}--icon--skeleton;
+}

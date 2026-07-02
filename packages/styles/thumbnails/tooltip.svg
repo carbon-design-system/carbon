@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="320px" height="180px" viewBox="0 0 320 180" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>tooltip</title>
+    <defs>
+        <path d="M7.03125,8.90625 L7.03125,4.6875 L5.15625,4.6875 L5.15625,5.625 L6.09375,5.625 L6.09375,8.90625 L4.6875,8.90625 L4.6875,9.84375 L8.4375,9.84375 L8.4375,8.90625 L7.03125,8.90625 L7.03125,8.90625 Z M6.5625,2.34375 C6.17417479,2.34375 5.859375,2.65854979 5.859375,3.046875 C5.859375,3.43520021 6.17417479,3.75 6.5625,3.75 C6.95082521,3.75 7.265625,3.43520021 7.265625,3.046875 C7.265625,2.65854979 6.95082521,2.34375 6.5625,2.34375 L6.5625,2.34375 Z M6.5625,13.125 C2.93813133,13.125 0,10.1868687 0,6.5625 C0,2.93813133 2.93813133,0 6.5625,0 C10.1868687,0 13.125,2.93813133 13.125,6.5625 C13.1209442,10.1851874 10.1851874,13.1209442 6.5625,13.125 Z M6.5625,0.9375 C3.45589828,0.9375 0.9375,3.45589828 0.9375,6.5625 C0.9375,9.66910172 3.45589828,12.1875 6.5625,12.1875 C9.66910172,12.1875 12.1875,9.66910172 12.1875,6.5625 C12.1840384,3.45733327 9.66766673,0.940961641 6.5625,0.9375 Z" id="path-1"></path>
+    </defs>
+    <g id="tooltip" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Group" transform="translate(70.000000, 32.000000)">
+            <g id="Group-56-Copy">
+                <path d="M174.5,22.4 C175.328427,22.4 176,23.0715729 176,23.9 L176,85.3 C176,86.1284271 175.328427,86.8 174.5,86.8 L92.65,86.8 L88.1,92 L83.55,86.8 L1.5,86.8 C0.671572875,86.8 3.23497668e-16,86.1284271 0,85.3 L0,23.9 C1.20591542e-16,23.0715729 0.671572875,22.4 1.5,22.4 L174.5,22.4 Z" id="Rectangle-24" fill="#3D3D3D" transform="translate(88.000000, 57.200000) rotate(-180.000000) translate(-88.000000, -57.200000) "></path>
+                <g id="Group" transform="translate(80.000000, 0.000000)">
+                    <g id="information" transform="translate(0.937500, 0.937500)">
+                        <mask id="mask-2" fill="white">
+                            <use xlink:href="#path-1"></use>
+                        </mask>
+                        <use id="Mask" fill="#000000" fill-rule="nonzero" xlink:href="#path-1"></use>
+                        <g id="Group" mask="url(#mask-2)">
+                            <g transform="translate(-0.937500, -0.937500)" id="icon-color">
+                                <rect id="Rectangle-3-Copy" fill="#161616" x="0" y="0" width="37.5" height="37.5"></rect>
+                            </g>
+                        </g>
+                    </g>
+                    <rect id="transparent-rectangle" x="0" y="0" width="15" height="15"></rect>
+                </g>
+                <rect id="Rectangle" fill="#BEBEBE" x="14" y="42" width="115" height="5"></rect>
+                <rect id="Rectangle-Copy-2" fill="#BEBEBE" x="14" y="62" width="115" height="5"></rect>
+                <rect id="Rectangle-Copy" fill="#BEBEBE" x="14" y="52" width="87" height="5"></rect>
+                <rect id="Rectangle-Copy-3" fill="#BEBEBE" x="14" y="72" width="87" height="5"></rect>
+            </g>
+            <rect id="Rectangle-Copy-2" x="11" y="92" width="24" height="24"></rect>
+        </g>
+    </g>
+</svg>

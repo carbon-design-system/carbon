@@ -1,0 +1,95 @@
+//
+// Copyright IBM Corp. 2024
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+$css--plex: true !default;
+
+@use '@carbon/styles/scss/config' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/motion' as *;
+@use '@carbon/styles/scss/utilities' as *;
+@use '@carbon/styles/scss/components/menu' as *;
+@use './menu-variables' as *;
+
+:host(#{$prefix}-menu) {
+  position: fixed;
+  z-index: z('modal');
+  --grid-template: 1fr max-content;
+  --display-icon-item: none;
+  --display-selection-icon: none;
+  --block-size-value: #{$spacing-07};
+
+  &:not([open]) {
+    pointer-events: none;
+  }
+}
+.#{$prefix}--menu--with-icons {
+  --grid-template: #{$spacing-05} 1fr max-content;
+  --display-icon-item: flex;
+}
+.#{$prefix}--menu--with-selectable-items {
+  --grid-template: #{$spacing-05} 1fr max-content;
+  --display-selection-icon: flex;
+}
+
+.#{$prefix}--menu--with-icons.#{$prefix}--menu--with-selectable-items {
+  --grid-template: #{$spacing-05} #{$spacing-05} 1fr max-content;
+}
+
+.#{$prefix}--menu {
+  @extend .#{$prefix}--menu;
+
+  opacity: 0;
+  overflow-y: auto;
+  pointer-events: none;
+  visibility: hidden;
+
+  &--shown {
+    opacity: 1;
+  }
+
+  &--open {
+    visibility: visible;
+
+    &:focus {
+      @include focus-outline('border');
+    }
+  }
+
+  &--with-icons {
+    min-inline-size: 12rem;
+  }
+
+  // Only allow interaction once the menu is both open and positioned.
+  &--open.#{$prefix}--menu--shown {
+    pointer-events: auto;
+  }
+
+  &--border {
+    @extend .#{$prefix}--menu--border;
+  }
+
+  &--background-token__background {
+    @extend .#{$prefix}--menu--background-token__background;
+  }
+}
+.#{$prefix}--menu--with-icons {
+  min-inline-size: 12rem;
+}
+
+.#{$prefix}--menu--xs {
+  --block-size-value: 1.5rem;
+}
+.#{$prefix}--menu--sm {
+  --block-size-value: 2rem;
+}
+.#{$prefix}--menu--md {
+  --block-size-value: 2.5rem;
+}
+.#{$prefix}--menu--lg {
+  --block-size-value: 3rem;
+}

@@ -1,0 +1,149 @@
+/**
+ * Copyright IBM Corp. 2016, 2026
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+import React from 'react';
+
+import { WithLayer } from '../../../.storybook/templates/WithLayer';
+import { ContentSwitcher } from './ContentSwitcher';
+import { Switch, IconSwitch } from '../Switch';
+import mdx from './ContentSwitcher.mdx';
+import { TableOfContents, Workspace, ViewMode_2 } from '@carbon/icons-react';
+
+export default {
+  title: 'Components/ContentSwitcher',
+  component: ContentSwitcher,
+  subcomponents: {
+    IconSwitch,
+    Switch,
+  },
+  argTypes: {
+    light: {
+      table: {
+        disable: true,
+      },
+    },
+  },
+  parameters: {
+    docs: {
+      page: mdx,
+    },
+  },
+};
+
+const sharedArgTypes = {
+  children: {
+    control: false,
+  },
+  className: {
+    control: false,
+  },
+  onChange: {
+    action: 'onChange',
+  },
+  size: {
+    options: ['sm', 'md', 'lg'],
+  },
+  disabled: {
+    table: {
+      type: { summary: 'bool' },
+      defaultValue: { summary: false },
+    },
+    description: 'Specify disabled attribute to true to disable a button.',
+    control: 'boolean',
+  },
+};
+
+export const Default = (args) => (
+  <ContentSwitcher {...args}>
+    <Switch name="one" text="First section" disabled={args.disabled} />
+    <Switch name="two" text="Second section" disabled={args.disabled} />
+    <Switch name="three" text="Third section" disabled={args.disabled} />
+  </ContentSwitcher>
+);
+
+Default.argTypes = {
+  ...sharedArgTypes,
+};
+
+export const _WithLayer = (args) => (
+  <WithLayer>
+    <ContentSwitcher onChange={() => {}} {...args}>
+      <Switch name="one" text="First section" disabled={args.disabled} />
+      <Switch name="two" text="Second section" disabled={args.disabled} />
+      <Switch name="three" text="Third section" disabled={args.disabled} />
+    </ContentSwitcher>
+  </WithLayer>
+);
+
+_WithLayer.argTypes = {
+  ...sharedArgTypes,
+};
+
+export const IconOnly = (args) => (
+  <ContentSwitcher onChange={() => {}} {...args}>
+    <IconSwitch name="one" text="Table of Contents" disabled={args.disabled}>
+      <TableOfContents />
+    </IconSwitch>
+    <IconSwitch name="two" text="Workspace Test" disabled={args.disabled}>
+      <Workspace />
+    </IconSwitch>
+    <IconSwitch name="three" text="View Mode" disabled={args.disabled}>
+      <ViewMode_2 />
+    </IconSwitch>
+  </ContentSwitcher>
+);
+
+IconOnly.argTypes = {
+  ...sharedArgTypes,
+};
+
+export const IconOnlyWithLayer = (args) => (
+  <WithLayer>
+    <ContentSwitcher onChange={() => {}} {...args}>
+      <IconSwitch name="one" text="Table of Contents" disabled={args.disabled}>
+        <TableOfContents />
+      </IconSwitch>
+      <IconSwitch name="two" text="Workspace Test" disabled={args.disabled}>
+        <Workspace />
+      </IconSwitch>
+      <IconSwitch name="three" text="View Mode" disabled={args.disabled}>
+        <ViewMode_2 />
+      </IconSwitch>
+    </ContentSwitcher>
+  </WithLayer>
+);
+
+export const lowContrast = (args) => (
+  <ContentSwitcher lowContrast {...args}>
+    <Switch name="one" text="First section" disabled={args.disabled} />
+    <Switch name="two" text="Second section" disabled={args.disabled} />
+    <Switch name="three" text="Third section" disabled={args.disabled} />
+  </ContentSwitcher>
+);
+lowContrast.argTypes = {
+  ...sharedArgTypes,
+};
+
+export const lowContrastIconOnly = (args) => (
+  <ContentSwitcher lowContrast onChange={() => {}} {...args}>
+    <IconSwitch name="one" text="Table of Contents" disabled={args.disabled}>
+      <TableOfContents />
+    </IconSwitch>
+    <IconSwitch name="two" text="Workspace Test" disabled={args.disabled}>
+      <Workspace />
+    </IconSwitch>
+    <IconSwitch name="three" text="View Mode" disabled={args.disabled}>
+      <ViewMode_2 />
+    </IconSwitch>
+  </ContentSwitcher>
+);
+lowContrastIconOnly.argTypes = {
+  ...sharedArgTypes,
+};
+IconOnlyWithLayer.argTypes = {
+  ...sharedArgTypes,
+};

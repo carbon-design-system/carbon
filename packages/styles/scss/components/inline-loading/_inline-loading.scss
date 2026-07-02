@@ -1,0 +1,108 @@
+//
+// Copyright IBM Corp. 2016, 2023
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use 'keyframes';
+@use '../loading';
+@use '../../config' as *;
+@use '../../spacing' as *;
+@use '../../theme' as *;
+@use '../../type' as *;
+@use '../../utilities/convert';
+
+/// @type Number
+/// @access private
+/// @group loading
+$-loading-gap-small: 110;
+
+/// Inline loading styles
+/// @access public
+/// @group inline-loading
+@mixin inline-loading {
+  .#{$prefix}--inline-loading {
+    display: flex;
+    align-items: center;
+    color: $text-secondary;
+    inline-size: 100%;
+    min-block-size: 2rem;
+  }
+
+  .#{$prefix}--inline-loading__text {
+    @include type-style('label-02');
+  }
+
+  .#{$prefix}--inline-loading__animation {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-inline-end: $spacing-03;
+  }
+
+  .#{$prefix}--inline-loading__checkmark-container {
+    fill: $support-success;
+
+    // For deprecated older markup
+    &.#{$prefix}--inline-loading__svg {
+      position: absolute;
+      inline-size: 0.75rem;
+      inset-block-start: 0.75rem;
+    }
+
+    &[hidden] {
+      display: none;
+    }
+  }
+
+  .#{$prefix}--inline-loading__checkmark {
+    animation-duration: 250ms;
+    animation-fill-mode: forwards;
+    animation-name: #{$prefix}--stroke;
+    fill: none;
+    stroke: $interactive;
+    stroke-dasharray: 12;
+    stroke-dashoffset: 12;
+    stroke-width: 1.8;
+    transform-origin: 50% 50%;
+  }
+
+  .#{$prefix}--inline-loading--error {
+    block-size: convert.to-rem(16px);
+    fill: $support-error;
+    inline-size: convert.to-rem(16px);
+
+    &[hidden] {
+      display: none;
+    }
+  }
+
+  .#{$prefix}--loading--small .#{$prefix}--inline-loading__svg {
+    stroke: $interactive;
+  }
+
+  .#{$prefix}--btn .#{$prefix}--inline-loading--btn {
+    min-block-size: 0;
+
+    .#{$prefix}--inline-loading__text {
+      @include type-style('body-short-01');
+    }
+  }
+
+  /* If IE11 Don't show check animation */
+  @media screen and (-ms-high-contrast: active),
+    screen and (-ms-high-contrast: none) {
+    .#{$prefix}--inline-loading__checkmark-container {
+      inset-block-start: 1px;
+      inset-inline-end: 0.5rem;
+    }
+
+    .#{$prefix}--inline-loading__checkmark {
+      animation: none;
+      stroke-dasharray: 0;
+      stroke-dashoffset: 0;
+    }
+  }
+}

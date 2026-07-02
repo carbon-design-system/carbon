@@ -1,0 +1,48 @@
+//
+// Copyright IBM Corp. 2025
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+//-----------------------------
+// Badge indicator
+//-----------------------------
+
+@use '../../config' as *;
+@use '../../spacing' as *;
+@use '../../theme' as *;
+@use '../../type';
+@use '../../utilities/component-reset';
+@use '../../utilities/convert';
+
+/// Badge indicator styles
+/// @access public
+/// @group badge-indicator
+@mixin badge-indicator {
+  .#{$prefix}--badge-indicator {
+    @include type.type-style('helper-text-01');
+
+    position: absolute;
+    display: flex;
+    padding: 0 $spacing-02 $spacing-01;
+    border-radius: 100px;
+    background: $support-error;
+    color: $text-on-color;
+
+    inset-block-start: 0;
+    inset-inline-end: 0;
+
+    margin-block-start: $spacing-03;
+    margin-inline-end: $spacing-03;
+
+    max-block-size: $spacing-05;
+    min-block-size: $spacing-03;
+    min-inline-size: $spacing-03;
+  }
+
+  .#{$prefix}--badge-indicator--count {
+    margin-block-start: $spacing-02;
+    margin-inline-end: $spacing-02;
+  }
+}

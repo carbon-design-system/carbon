@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="320px" height="180px" viewBox="0 0 320 180" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>modal</title>
+    <defs>
+        <rect id="path-1" x="61" y="36" width="200" height="107"></rect>
+        <filter x="-5.0%" y="-7.5%" width="110.0%" height="118.7%" filterUnits="objectBoundingBox" id="filter-2">
+            <feOffset dx="0" dy="2" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="3" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0.862745106   0 0 0 0 0.862745106   0 0 0 0 0.862745106  0 0 0 1 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
+        </filter>
+        <polygon id="path-3" points="6.53025 6 9 3.53025 8.46975 3 6 5.46975 3.53025 3 3 3.53025 5.46975 6 3 8.46975 3.53025 9 6 6.53025 8.46975 9 9 8.46975"></polygon>
+    </defs>
+    <g id="modal" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Rectangle-Copy" fill="black" fill-opacity="1">
+            <use filter="url(#filter-2)" xlink:href="#path-1"></use>
+        </g>
+        <g id="color/gray/10-copy-11" transform="translate(61.000000, 36.000000)" fill="#F3F3F3">
+            <rect id="Rectangle" x="0" y="0" width="200" height="106"></rect>
+        </g>
+        <g id="icon/navigation/close/16-copy-3" transform="translate(240.000000, 45.000000)">
+            <mask id="mask-4" fill="white">
+                <use xlink:href="#path-3"></use>
+            </mask>
+            <use id="icon-color" fill="#000000" xlink:href="#path-3"></use>
+        </g>
+        <rect id="Rectangle-Copy-5" fill="#8D8D8D" x="70" y="49" width="58" height="7"></rect>
+        <rect id="Rectangle-Copy-13" fill="#A8A8A8" x="70" y="65" width="137" height="5"></rect>
+        <rect id="Rectangle-Copy-19" fill="#A8A8A8" x="70" y="85" width="137" height="5"></rect>
+        <rect id="Rectangle-Copy-20" fill="#0F6DFF" x="161" y="117" width="101" height="26"></rect>
+        <rect id="Rectangle-Copy-22" fill="#3D3D3D" x="60" y="117" width="100" height="26"></rect>
+        <rect id="Rectangle-Copy-21" fill="#A8A8A8" x="70" y="75" width="112" height="5"></rect>
+    </g>
+</svg>

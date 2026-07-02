@@ -1,0 +1,74 @@
+//
+// Copyright IBM Corp. 2023
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use '../button';
+@use '../menu';
+@use '../../config' as *;
+@use '../../motion' as *;
+@use '../../utilities/convert';
+@use '../../utilities/custom-property';
+
+/// Combo Button styles
+/// @access public
+/// @group combo-button
+@mixin combo-button {
+  .#{$prefix}--combo-button__container {
+    display: inline-flex;
+    column-gap: convert.to-rem(1px);
+  }
+
+  $triggerSizes: (
+    'sm': convert.to-rem(32px),
+    'md': convert.to-rem(40px),
+    'lg': convert.to-rem(48px),
+  );
+
+  @each $size, $trigger in $triggerSizes {
+    .#{$prefix}--combo-button__container--#{$size}
+      .#{$prefix}--combo-button__primary-action {
+      min-inline-size: 10rem - convert.to-rem(1px) - $trigger;
+    }
+  }
+
+  .#{$prefix}--combo-button__primary-action .#{$prefix}--btn {
+    inline-size: 100%;
+    max-inline-size: convert.to-rem(239px);
+    min-inline-size: convert.to-rem(111px);
+  }
+
+  .#{$prefix}--combo-button__primary-action button {
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .#{$prefix}--combo-button__trigger svg {
+    transition: transform $duration-fast-02 motion(standard, productive);
+  }
+
+  .#{$prefix}--combo-button__container--open
+    .#{$prefix}--combo-button__trigger
+    svg {
+    transform: rotate(180deg);
+  }
+
+  // Menu alignment classes
+  $popover-offset: custom-property.get-var('popover-offset', 3rem);
+
+  .#{$prefix}--combo-button__top {
+    transform: translate(0, calc(-100% - $popover-offset));
+  }
+
+  .#{$prefix}--combo-button__top-start {
+    transform: translate(0, calc(-100% - $popover-offset));
+  }
+
+  .#{$prefix}--combo-button__top-end {
+    transform: translate(0, calc(-100% - $popover-offset));
+  }
+}

@@ -1,0 +1,79 @@
+#
+# Copyright IBM Corp. 2015, 2023
+#
+# This source code is licensed under the Apache-2.0 license found in the
+# LICENSE file in the root directory of this source tree.
+#
+
+feature-flags:
+  - name: enable-css-custom-properties
+    description: Describe what the flag does
+    enabled: false
+  - name: enable-css-grid
+    description: >
+      Enable CSS Grid Layout in the Grid and Column React components
+    enabled: false
+  - name: enable-v11-release
+    description: >
+      Enable the features and functionality for the v11 Release
+    enabled: true
+  - name: enable-experimental-tile-contrast
+    description: >
+      Deprecated, use enable-tile-contrast instead
+    enabled: false
+  - name: enable-tile-contrast
+    description: >
+      Enable the experimental tile improved contrast styles
+    enabled: false
+  - name: enable-v12-tile-default-icons
+    description: >
+      Enable rendering of default icons in the tile components
+    enabled: false
+  - name: enable-v12-tile-radio-icons
+    description: >
+      Enable rendering of radio icons in the RadioTile component
+    enabled: false
+  - name: enable-v12-overflowmenu
+    description: >
+      Enable the use of the v12 OverflowMenu leveraging the Menu subcomponents
+    enabled: false
+  - name: enable-treeview-controllable
+    description: >
+      Enable the new TreeView controllable API
+    enabled: false
+  - name: enable-v12-structured-list-visible-icons
+    description: >
+      Enable rendering of radio icons in the StructuredList component
+    enabled: false
+  - name: enable-experimental-focus-wrap-without-sentinels
+    description: >
+      Deprecated, use enable-focus-wrap-without-sentinels instead
+    enabled: false
+  - name: enable-focus-wrap-without-sentinels
+    description: >
+      Enable the new focus wrap behavior that doesn't use sentinel nodes
+    enabled: false
+  - name: enable-dialog-element
+    description: >
+      Enable components to utilize the native dialog element
+    enabled: false
+  - name: enable-v12-dynamic-floating-styles
+    description: >
+      Enable dynamic setting of floating styles for components like Popover,
+      Tooltip, etc.
+    enabled: false
+  - name: enable-v12-toggle-reduced-label-spacing
+    description: >
+      Enable a reduced spacing between the toggle control and its label
+    enabled: false
+  - name: enable-enhanced-file-uploader
+    description: >
+      Enable enhanced functionality for the FileUploader component, including
+      richer callback data and expanded trigger events for onChange and
+      onDelete.
+    enabled: false
+  - name: enable-presence
+    description: >
+      Enable components to remain unmounted in closed state and mount in open
+      state.
+    enabled: false

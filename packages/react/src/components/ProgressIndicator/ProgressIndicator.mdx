@@ -1,0 +1,85 @@
+import { Story, Canvas, ArgTypes, Meta } from '@storybook/addon-docs/blocks';
+import * as ProgressIndicatorStories from './ProgressIndicator.stories';
+import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
+
+<Meta isTemplate />
+
+# ProgressIndicator
+
+[Source code](https://github.com/carbon-design-system/carbon/tree/main/packages/react/src/components/ProgressIndicator)
+&nbsp;|&nbsp;
+[Usage guidelines](https://www.carbondesignsystem.com/components/progress-indicator/usage)
+&nbsp;|&nbsp;
+[Accessibility](https://www.carbondesignsystem.com/components/progress-indicator/accessibility)
+
+{/* <!-- START doctoc generated TOC please keep comment here to allow auto update --> <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE --> */}
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Interactive](#interactive)
+- [Skeleton](#skeleton)
+- [Component API](#component-api)
+- [Feedback](#feedback)
+
+{/* <!-- END doctoc generated TOC please keep comment here to allow auto update --> */}
+
+## Overview
+
+<Canvas
+  of={ProgressIndicatorStories.Default}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(ProgressIndicatorStories.Default),
+    },
+  ]}
+/>
+
+## Interactive
+
+<Canvas
+  of={ProgressIndicatorStories.Interactive}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () =>
+        stackblitzPrefillConfig(ProgressIndicatorStories.Interactive),
+    },
+  ]}
+/>
+
+## Skeleton
+
+<Canvas
+  of={ProgressIndicatorStories.Skeleton}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(ProgressIndicatorStories.Skeleton),
+    },
+  ]}
+/>
+
+For React usage, `ProgressIndicator` holds the `currentIndex` state to indicate
+which `ProgressStep` is the current step. The `ProgressIndicator` component
+should always be used with `ProgressStep` components as its children.
+
+Changing the `currentIndex` prop will automatically set the `ProgressStep`
+components props (`complete`, `incomplete`, `current`). For general usage,
+Progress Indicators display steps in a process. It should indicate when steps
+have been complete, the active step, and the steps to come.
+
+If you register an `onChange` handler, the Progress Indicator will become
+interactive. Your parent component should update the `currentIndex` prop within
+the `onChange` handler.
+
+## Component API
+
+<ArgTypes />
+
+## Feedback
+
+Help us improve this component by providing feedback, asking questions on Slack,
+or updating this file on
+[GitHub](https://github.com/carbon-design-system/carbon/edit/main/packages/react/src/components/ProgressIndicator/ProgressIndicator.mdx).

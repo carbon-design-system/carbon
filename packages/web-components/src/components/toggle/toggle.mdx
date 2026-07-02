@@ -1,0 +1,51 @@
+import { ArgTypes, Canvas, Markdown, Meta } from '@storybook/addon-docs/blocks';
+import { cdnJs } from '../../globals/internal/storybook-cdn';
+import * as ToggleStories from './toggle.stories';
+
+<Meta of={ToggleStories} />
+
+# Toggle
+
+[Source code](https://github.com/carbon-design-system/carbon/tree/main/packages/web-components/src/components/toggle)
+&nbsp;|&nbsp;
+[Usage guidelines](https://www.carbondesignsystem.com/components/toggle/usage)
+&nbsp;|&nbsp;
+[Accessibility](https://www.carbondesignsystem.com/components/toggle/accessibility)
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Small Toggle](#small-toggle)
+- [Skeleon Toggle](#skeleton)
+- [With Accessible Labels](#with-accessible-labels)
+- [Component API](#component-api)
+- [CDN](#cdn)
+- [Feedback](#feedback)
+
+## Overview
+
+<Canvas of={ToggleStories.Default} />
+
+## Small Toggle
+
+<Canvas of={ToggleStories.SmallToggle} />
+
+## Skeleton
+
+<Canvas of={ToggleStories.Skeleton} />
+
+## With Accessible Labels
+
+<Canvas of={ToggleStories.WithAccessibleLabels} />
+
+## Component API
+
+<ArgTypes of="cds-toggle" />
+
+<Markdown>{`${cdnJs({ components: ['toggle'] })}`}</Markdown>
+
+## Feedback
+
+Help us improve this component by providing feedback, asking questions on Slack,
+or updating this file on
+[GitHub](https://github.com/carbon-design-system/carbon/edit/main/packages/web-components/src/components/toggle/toggle.mdx).

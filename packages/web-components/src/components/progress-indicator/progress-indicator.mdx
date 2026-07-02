@@ -1,0 +1,52 @@
+import { ArgTypes, Canvas, Markdown, Meta } from '@storybook/addon-docs/blocks';
+import { cdnJs } from '../../globals/internal/storybook-cdn';
+import * as ProgressIndicatorStories from './progress-indicator.stories';
+
+<Meta of={ProgressIndicatorStories} />
+
+# ProgressIndicator
+
+[Source code](https://github.com/carbon-design-system/carbon/tree/main/packages/web-components/src/components/progress-indicator)
+&nbsp;|&nbsp;
+[Usage guidelines](https://www.carbondesignsystem.com/components/progress-indicator/usage)
+&nbsp;|&nbsp;
+[Accessibility](https://www.carbondesignsystem.com/components/progress-indicator/accessibility)
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Interactive](#interactive)
+- [Skeleton](#skeleton)
+- [Component API](#component-api)
+- [CDN](#cdn)
+- [Feedback](#feedback)
+
+## Overview
+
+<Canvas of={ProgressIndicatorStories.Default} />
+
+## Interactive
+
+<Canvas of={ProgressIndicatorStories.Interactive} />
+
+## Skeleton
+
+<Canvas of={ProgressIndicatorStories.Skeleton} />
+
+## Component API
+
+## `cds-progress-indicator`
+
+<ArgTypes of="cds-progress-indicator" />
+
+## `cds-progress-step`
+
+<ArgTypes of="cds-progress-step" />
+
+<Markdown>{`${cdnJs({ components: ['progress-indicator'] })}`}</Markdown>
+
+## Feedback
+
+Help us improve this component by providing feedback, asking questions on Slack,
+or updating this file on
+[GitHub](https://github.com/carbon-design-system/carbon/edit/main/packages/web-components/src/components/progress-indicator/progress-indicator.mdx).

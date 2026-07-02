@@ -1,0 +1,154 @@
+//
+// Copyright IBM Corp. 2016, 2026
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use 'sass:map';
+
+@use 'vars' as *;
+@use '../../config' as *;
+@use '../../motion' as *;
+@use '../../spacing' as *;
+@use '../../theme' as *;
+@use '../../type' as *;
+@use '../../utilities/component-reset';
+@use '../../utilities/convert';
+@use '../../utilities/custom-property';
+@use '../../utilities/layout';
+@use 'tokens' as *;
+
+$button-focus-color: custom-property.get-var('button-focus-color', $focus);
+
+@mixin button-base {
+  // https://caniuse.com/mdn-css_types_length_lh
+  --temp-1lh: (
+    #{custom-property.get-var(
+        'body-compact-01-line-height',
+        map.get($body-compact-01, line-height)
+      )} * 1em
+  );
+  --temp-expressive-1lh: (
+    #{custom-property.get-var(
+        'body-compact-02-line-height',
+        map.get($body-compact-02, line-height)
+      )} * 1em
+  );
+  // -1px to compensate for border width
+  --temp-padding-block-max: calc(
+    (#{custom-property.get-var('layout-size-height-lg')} - var(--temp-1lh)) / 2 -
+      #{convert.to-rem(1px)}
+  );
+
+  @include component-reset.reset;
+  @include type-style('body-compact-01');
+
+  position: relative;
+  display: inline-flex;
+  flex-shrink: 0;
+  justify-content: space-between;
+  border-radius: $button-border-radius;
+  // Fix to remove added margins on buttons in safari (see #5155)
+  margin: 0;
+  cursor: pointer;
+  inline-size: max-content;
+  max-inline-size: convert.to-rem(320px);
+  min-block-size: layout.size('height');
+  outline: none;
+  // -1px to compensate for border width
+  padding-block: min(
+    calc((layout.size('height') - var(--temp-1lh)) / 2 - convert.to-rem(1px)),
+    var(--temp-padding-block-max)
+  );
+  padding-inline: calc(layout.density('padding-inline') - convert.to-rem(1px))
+    calc(
+      layout.density('padding-inline') * 3 + convert.to-rem(16px) - convert.to-rem(
+          1px
+        )
+    );
+  text-align: start;
+  text-decoration: none;
+  transition:
+    background $duration-fast-01 motion(entrance, productive),
+    box-shadow $duration-fast-01 motion(entrance, productive),
+    border-color $duration-fast-01 motion(entrance, productive),
+    outline $duration-fast-01 motion(entrance, productive);
+  vertical-align: top;
+
+  &:disabled,
+  &:hover:disabled,
+  &:focus:disabled,
+  &.#{$prefix}--btn--disabled,
+  &.#{$prefix}--btn--disabled:hover,
+  &.#{$prefix}--btn--disabled:focus {
+    border-color: $button-disabled;
+    background: $button-disabled;
+    box-shadow: none;
+    color: $text-on-color-disabled;
+    cursor: not-allowed;
+  }
+
+  .#{$prefix}--btn__icon {
+    position: absolute;
+    flex-shrink: 0;
+    block-size: convert.to-rem(16px);
+    inline-size: convert.to-rem(16px);
+    // -1px to compensate for border width
+    inset-block-start: min(
+      calc(
+        (layout.size('height') - convert.to-rem(16px)) / 2 - convert.to-rem(1px)
+      ),
+      var(--temp-padding-block-max)
+    );
+    inset-inline-end: layout.density('padding-inline');
+    margin-block-start: convert.to-rem(1px);
+  }
+}
+
+/// Button variant styles
+/// @access private
+/// @group button
+@mixin button-theme(
+  $bg-color,
+  $border-color,
+  $font-color,
+  $hover-bg-color,
+  $icon-color,
+  $active-color
+) {
+  border-width: $button-outline-width;
+  border-style: solid;
+  border-color: $border-color;
+  background-color: $bg-color;
+  color: $font-color;
+
+  // Apply hover styles only on devices that support hover
+  @media (any-hover: hover) {
+    &:hover {
+      background-color: $hover-bg-color;
+    }
+  }
+
+  &:focus {
+    border-color: $button-focus-color;
+    box-shadow:
+      inset 0 0 0 $button-outline-width $button-focus-color,
+      inset 0 0 0 $button-border-width $background;
+  }
+
+  &:active {
+    background-color: $active-color;
+  }
+
+  .#{$prefix}--btn__icon,
+  .#{$prefix}--btn__icon path:not([data-icon-path]):not([fill='none']) {
+    fill: $icon-color;
+  }
+}
+
+@mixin button-padding-large {
+  align-items: baseline;
+  padding-block-start: $spacing-05;
+  padding-inline: $spacing-05 $spacing-10;
+}

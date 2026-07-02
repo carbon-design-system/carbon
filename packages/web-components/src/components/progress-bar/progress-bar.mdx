@@ -1,0 +1,36 @@
+import { ArgTypes, Canvas, Markdown, Meta } from '@storybook/addon-docs/blocks';
+import { cdnJs } from '../../globals/internal/storybook-cdn';
+import * as ProgressBarStories from './progress-bar.stories';
+
+<Meta of={ProgressBarStories} />
+
+# Progress bar
+
+[Source code](https://github.com/carbon-design-system/carbon/tree/main/packages/web-components/src/components/progress-bar)
+&nbsp;|&nbsp;
+[Usage guidelines](https://www.carbondesignsystem.com/components/progress-bar/usage)
+&nbsp;|&nbsp;
+[Accessibility](https://www.carbondesignsystem.com/components/progress-bar/accessibility)
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Component API](#component-api)
+- [CDN](#cdn)
+- [Feedback](#feedback)
+
+## Overview
+
+<Canvas of={ProgressBarStories.Default} />
+
+## Component API
+
+<ArgTypes of="cds-progress-bar" />
+
+<Markdown>{`${cdnJs({ components: ['progress-bar'] })}`}</Markdown>
+
+## Feedback
+
+Help us improve this component by providing feedback, asking questions on Slack,
+or updating this file on
+[GitHub](https://github.com/carbon-design-system/carbon/tree/main/packages/web-components/src/components/progress-bar/progress-bar.mdx).

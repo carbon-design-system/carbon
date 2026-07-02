@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="icon" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: none;
+      }
+
+      .cls-1, .cls-2 {
+        stroke-width: 0px;
+      }
+    </style>
+  </defs>
+  <path class="cls-2" d="m30,30h-2v-2c0-.5513-.4482-1-1-1h-6c-.5518,0-1,.4487-1,1v2h-2v-2c0-1.6543,1.3457-3,3-3h6c1.6543,0,3,1.3457,3,3v2Z"/>
+  <path class="cls-2" d="m24,24c-2.2061,0-4-1.7944-4-4s1.7939-4,4-4,4,1.7944,4,4-1.7939,4-4,4Zm0-6c-1.1025,0-2,.897-2,2s.8975,2,2,2,2-.897,2-2-.8975-2-2-2Z"/>
+  <rect class="cls-2" x="8" y="20" width="2" height="2"/>
+  <rect class="cls-2" x="12" y="20" width="6" height="2"/>
+  <rect class="cls-2" x="8" y="16" width="2" height="2"/>
+  <rect class="cls-2" x="12" y="16" width="6" height="2"/>
+  <rect class="cls-2" x="8" y="12" width="2" height="2"/>
+  <rect class="cls-2" x="12" y="12" width="6" height="2"/>
+  <path class="cls-2" d="m21,5h-3v-1c0-1.103-.8975-2-2-2h-6c-1.1025,0-2,.897-2,2v1h-3c-1.1025,0-2,.897-2,2v19c0,1.103.8975,2,2,2h9v-2H5V7h3v2h10v-2h3v6.9999h2v-6.9999c0-1.103-.8975-2-2-2Zm-5,2h-6v-3h6v3Z"/>
+  <rect id="_Transparent_Rectangle_" data-name="&amp;lt;Transparent Rectangle&amp;gt;" class="cls-1" width="32" height="32"/>
+</svg>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="320px" height="180px" viewBox="0 0 320 180" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>icon-button</title>
+    <defs>
+        <polygon id="path-1" points="10.625 9.375 10.625 4.375 9.375 4.375 9.375 9.375 4.375 9.375 4.375 10.625 9.375 10.625 9.375 15.625 10.625 15.625 10.625 10.625 15.625 10.625 15.625 9.375"></polygon>
+    </defs>
+    <g id="icon-button" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <rect id="Rectangle" fill="#0F62FE" x="136" y="66" width="48" height="48"></rect>
+        <g id="icon/navigation/add/20" transform="translate(150.000000, 80.000000)">
+            <mask id="mask-2" fill="white">
+                <use xlink:href="#path-1"></use>
+            </mask>
+            <use id="icon-color" fill="#FFFFFF" xlink:href="#path-1"></use>
+        </g>
+    </g>
+</svg>

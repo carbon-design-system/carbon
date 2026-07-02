@@ -1,0 +1,64 @@
+//
+// Copyright IBM Corp. 2015, 2023
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use 'sass:map';
+@use 'scss/generated/feature-flags';
+
+$feature-flags: () !default;
+$feature-flags: map.merge(
+  feature-flags.$generated-feature-flags,
+  $feature-flags
+);
+
+@function check-for-flag($name) {
+  @if map.has-key($feature-flags, $name) == true {
+    @return true;
+  }
+  @error 'Unable to find a feature flag named: #{$name}';
+}
+
+@mixin add($name, $enabled: false) {
+  @if map.has-key($feature-flags, $name) == true {
+    @error 'A feature flag named #{$name} already exists';
+  }
+
+  $feature-flags: map.set($feature-flags, $name, $enabled) !global;
+}
+
+@mixin enable($name) {
+  @if check-for-flag($name) == true {
+    $feature-flags: map.set($feature-flags, $name, true) !global;
+  }
+}
+
+@mixin disable($name) {
+  @if check-for-flag($name) == true {
+    $feature-flags: map.set($feature-flags, $name, false) !global;
+  }
+}
+
+@mixin merge($flags) {
+  $feature-flags: map.merge($feature-flags, $flags) !global;
+}
+
+/// Check if a feature flag is enabled
+/// @param {String} $name
+/// @returns {Boolean}
+@function enabled($name) {
+  @if check-for-flag($name) == true {
+    @return map.get($feature-flags, $name);
+  }
+}
+
+/// Emit the content of the mixin if the feature flag is enabled
+/// @param {String} $name
+/// @content
+@mixin enabled($name) {
+  @if enabled($name) {
+    @content;
+  }
+}

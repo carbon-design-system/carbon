@@ -1,0 +1,378 @@
+/**
+ * Copyright IBM Corp. 2025, 2026
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+import { LitElement, html } from 'lit';
+import { property, query } from 'lit/decorators.js';
+import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
+import { classMap } from 'lit/directives/class-map.js';
+import { prefix } from '../../globals/settings';
+import View16 from '@carbon/icons/es/view/16.js';
+import ViewOff16 from '@carbon/icons/es/view--off/16.js';
+import WarningFilled16 from '@carbon/icons/es/warning--filled/16.js';
+import WarningAltFilled16 from '@carbon/icons/es/warning--alt--filled/16.js';
+import { iconLoader } from '../../globals/internal/icon-loader';
+import ifNonEmpty from '../../globals/directives/if-non-empty';
+import '../tooltip';
+import '../tooltip/tooltip-content';
+import styles from './password-input.scss?lit';
+import CDSTextInput from '../text-input/text-input';
+import CDSTooltip from '../tooltip/tooltip';
+
+import {
+  INPUT_COLOR_SCHEME,
+  INPUT_SIZE,
+  INPUT_TOOLTIP_ALIGNMENT,
+  INPUT_TOOLTIP_DIRECTION,
+  INPUT_TYPE,
+} from './defs';
+
+export {
+  INPUT_COLOR_SCHEME,
+  INPUT_SIZE,
+  INPUT_TOOLTIP_ALIGNMENT,
+  INPUT_TOOLTIP_DIRECTION,
+  INPUT_TYPE,
+};
+/**
+ * Password Input element. Supports all the usual attributes for textual input types
+ *
+ * @element cds-password-input
+ * @slot helper-text - The helper text.
+ * @slot label-text - The label text.
+ * @slot validity-message - The validity message. If present and non-empty, this input shows the UI of its invalid state.
+ */
+@customElement(`${prefix}-password-input`)
+class CDSPasswordInput extends CDSTextInput {
+  /**
+   * The Show/Hide Password tooltip
+   */
+  @query(`${prefix}-tooltip`)
+  private _passwordTooltip?: HTMLElement;
+
+  /**
+   * Handles `oninput` event on the `input`.
+   *
+   * @param event The event.
+   * @param event.target The event target.
+   */
+  protected _handleInput({ target }: Event) {
+    this.value = (target as HTMLInputElement).value;
+  }
+
+  /**
+   * "Hide password" tooltip text on password visibility toggle
+   */
+  @property({
+    type: String,
+    attribute: 'hide-password-label',
+    reflect: true,
+  })
+  hidePasswordLabel = 'Hide password';
+
+  /**
+   * "Show password" tooltip text on password visibility toggle
+   */
+  @property({
+    type: String,
+    attribute: 'show-password-label',
+    reflect: true,
+  })
+  showPasswordLabel = 'Show password';
+
+  /**
+   * The native `<input>` type. Defaults to “password”.
+   */
+  @property({ reflect: true })
+  type: INPUT_TYPE = INPUT_TYPE.PASSWORD;
+
+  /**
+   * Specify the alignment of the tooltip to the icon-only button.
+   * Can be one of: start, center, or end.
+   */
+  @property({
+    type: String,
+    attribute: 'tooltip-alignment',
+    reflect: true,
+  })
+  tooltipAlignment = INPUT_TOOLTIP_ALIGNMENT.END;
+
+  /**
+   * Set to true to use the fluid version.
+   */
+  @property({ type: Boolean })
+  isFluid = false;
+
+  /**
+   * Specify the direction of the tooltip for icon-only buttons.
+   * Can be either top, right, bottom, or left.
+   */
+  @property({
+    type: String,
+    attribute: 'tooltip-position',
+    reflect: true,
+  })
+  tooltipDirection = INPUT_TOOLTIP_DIRECTION.BOTTOM;
+
+  /**
+   * Handles password visibility toggle button click
+   */
+  private handleTogglePasswordVisibility() {
+    if (this.disabled) return;
+    this.type =
+      this.type === INPUT_TYPE.PASSWORD ? INPUT_TYPE.TEXT : INPUT_TYPE.PASSWORD;
+  }
+
+  render() {
+    const {
+      disabled,
+      helperText,
+      hideLabel,
+      inline,
+      invalid,
+      invalidText,
+      label,
+      readonly,
+      required,
+      isFluid,
+      size,
+      type,
+      warn,
+      warnText,
+      _handleInput: handleInput,
+      _handleSlotChange: handleSlotChange,
+    } = this;
+
+    const invalidIcon = iconLoader(WarningFilled16, {
+      class: `${prefix}--text-input__invalid-icon`,
+    });
+
+    const warnIcon = iconLoader(WarningAltFilled16, {
+      class: `${prefix}--text-input__invalid-icon ${prefix}--text-input__invalid-icon--warning`,
+    });
+
+    const normalizedProps: {
+      disabled: boolean;
+      invalid: boolean;
+      warn: boolean;
+      'slot-name': string;
+      'slot-text': string;
+      icon: ReturnType<typeof iconLoader>;
+    } = {
+      disabled: !readonly && disabled,
+      invalid: !readonly && invalid,
+      warn: !readonly && !invalid && warn,
+      'slot-name': '',
+      'slot-text': '',
+      icon: null,
+    };
+
+    if (normalizedProps.invalid) {
+      normalizedProps.icon = invalidIcon;
+      normalizedProps['slot-name'] = 'invalid-text';
+      normalizedProps['slot-text'] = invalidText;
+    } else if (normalizedProps.warn) {
+      normalizedProps.icon = warnIcon;
+      normalizedProps['slot-name'] = 'warn-text';
+      normalizedProps['slot-text'] = warnText;
+    }
+
+    const inputWrapperClasses = classMap({
+      [`${prefix}--form-item`]: true,
+      [`${prefix}--text-input-wrapper`]: true,
+      [`${prefix}--password-input-wrapper`]: true,
+      [`${prefix}--text-input-wrapper--inline`]: inline,
+      [`${prefix}--text-input-wrapper--readonly`]: readonly,
+      [`${prefix}--text-input-wrapper--inline--invalid`]:
+        inline && normalizedProps.invalid,
+    });
+
+    const inputClasses = classMap({
+      [`${prefix}--text-input`]: true,
+      [`${prefix}--text-input--invalid`]: normalizedProps.invalid,
+      [`${prefix}--text-input--warning`]: normalizedProps.warn,
+      [`${prefix}--text-input--${size}`]: size !== undefined, // TODO v12 - remove this class
+      [`${prefix}--password-input`]: true,
+    });
+
+    const fieldOuterWrapperClasses = classMap({
+      [`${prefix}--text-input__field-outer-wrapper`]: true,
+      [`${prefix}--text-input__field-outer-wrapper--inline`]: inline,
+    });
+
+    const fieldWrapperClasses = classMap({
+      [`${prefix}--text-input__field-wrapper`]: true,
+      [`${prefix}--text-input__field-wrapper--warning`]: normalizedProps.warn,
+      [`${prefix}--layout--size-${size}`]: size !== undefined,
+    });
+
+    const labelClasses = classMap({
+      [`${prefix}--label`]: true,
+      [`${prefix}--visually-hidden`]: hideLabel,
+      [`${prefix}--label--disabled`]: normalizedProps.disabled,
+      [`${prefix}--label--inline`]: inline,
+    });
+
+    const helperTextClasses = classMap({
+      [`${prefix}--form__helper-text`]: true,
+      [`${prefix}--form__helper-text--disabled`]: normalizedProps.disabled,
+      [`${prefix}--form__helper-text--inline`]: inline,
+    });
+
+    const passwordIsVisible = type !== INPUT_TYPE.PASSWORD;
+    const passwordVisibilityIcon = passwordIsVisible
+      ? iconLoader(ViewOff16, { class: `${prefix}--icon-visibility-off` })
+      : iconLoader(View16, { class: `${prefix}--icon-visibility-on` });
+
+    const passwordVisibilityTooltipClasses = classMap({
+      [`${prefix}--toggle-password-tooltip`]: true,
+      [`${prefix}--tooltip--${this.tooltipDirection}`]: this.tooltipDirection,
+      [`${prefix}--tooltip--align-${this.tooltipAlignment}`]:
+        this.tooltipAlignment,
+    });
+
+    const passwordVisibilityButtonClasses = classMap({
+      [`${prefix}--text-input--password__visibility__toggle`]: true,
+      [`${prefix}--btn`]: true,
+      [`${prefix}--tooltip__trigger`]: true,
+      [`${prefix}--tooltip--a11y`]: true,
+      [`${prefix}--btn--disabled`]: normalizedProps.disabled || readonly,
+    });
+
+    const labelWrapper = html`<div class="${prefix}--text-input__label-wrapper">
+      <label class="${labelClasses}"> ${label} </label>
+    </div>`;
+
+    const helper = helperText
+      ? html`<div
+          class="${helperTextClasses}"
+          id="helper-text"
+          ?hidden="${normalizedProps.invalid || normalizedProps.warn}">
+          <slot name="helper-text"> ${helperText} </slot>
+        </div>`
+      : null;
+
+    const validationMessage =
+      normalizedProps.invalid || normalizedProps.warn
+        ? html`<div
+            class="${prefix}--form-requirement"
+            ?hidden="${!normalizedProps.invalid && !normalizedProps.warn}">
+            <slot name="${normalizedProps['slot-name']}">
+              ${normalizedProps['slot-text']}
+            </slot>
+          </div>`
+        : null;
+
+    let align = '';
+
+    if (
+      this.tooltipDirection === INPUT_TOOLTIP_DIRECTION.TOP ||
+      this.tooltipDirection === INPUT_TOOLTIP_DIRECTION.BOTTOM
+    ) {
+      if (this.tooltipAlignment === INPUT_TOOLTIP_ALIGNMENT.CENTER) {
+        align = this.tooltipDirection;
+      }
+      if (this.tooltipAlignment === INPUT_TOOLTIP_ALIGNMENT.END) {
+        align = `${this.tooltipDirection}-right`;
+      }
+      if (this.tooltipAlignment === INPUT_TOOLTIP_ALIGNMENT.START) {
+        align = `${this.tooltipDirection}-left`;
+      }
+    }
+
+    if (this.tooltipDirection === 'right' || this.tooltipDirection === 'left') {
+      align = this.tooltipDirection;
+    }
+
+    return html`
+      <div class="${inputWrapperClasses}">
+        ${!inline
+          ? labelWrapper
+          : html`<div class="${prefix}--text-input__label-helper-wrapper">
+              ${labelWrapper}
+            </div>`}
+        <div class="${fieldOuterWrapperClasses}">
+          <div class="${fieldWrapperClasses}" ?data-invalid="${invalid}">
+            ${normalizedProps.icon}
+            <input
+              ?autofocus="${this.autofocus}"
+              class="${inputClasses}"
+              ?data-invalid="${invalid}"
+              ?disabled="${disabled}"
+              aria-describedby="helper-text"
+              id="input"
+              name="${ifNonEmpty(this.name)}"
+              pattern="${ifNonEmpty(this.pattern)}"
+              placeholder="${ifNonEmpty(this.placeholder)}"
+              ?readonly="${readonly}"
+              ?required="${required}"
+              type="${ifNonEmpty(type)}"
+              .value="${this._value}"
+              @input="${handleInput}" />
+            <slot name="slug" @slotchange="${handleSlotChange}"></slot>
+            <cds-tooltip
+              align="${align}"
+              class="${passwordVisibilityTooltipClasses}"
+              .dropShadow="${false}"
+              ?disabled="${normalizedProps.disabled}">
+              <button
+                ?disabled="${normalizedProps.disabled}"
+                type="button"
+                role="button"
+                class="${passwordVisibilityButtonClasses}"
+                aria-labelledby="content"
+                @click="${this.handleTogglePasswordVisibility}">
+                ${passwordVisibilityIcon}
+              </button>
+              <cds-tooltip-content
+                id="content"
+                ?toggle-password-tooltip-content="${!isFluid}"
+                ?hidden="${normalizedProps.disabled}">
+                ${passwordIsVisible
+                  ? this.hidePasswordLabel
+                  : this.showPasswordLabel}
+              </cds-tooltip-content>
+            </cds-tooltip>
+            ${isFluid
+              ? html`<hr class="${prefix}--text-input__divider" />`
+              : null}
+            ${isFluid && !inline ? validationMessage : null}
+          </div>
+          ${/* Non-fluid: validation and helper outside field wrapper */ ''}
+          ${!isFluid && !inline ? validationMessage || helper : null}
+        </div>
+        ${inline && !isFluid
+          ? html`<div class="${prefix}--text-input__label-helper-wrapper">
+              ${!isFluid ? validationMessage || helper : null}
+            </div>`
+          : null}
+      </div>
+    `;
+  }
+
+  async firstUpdated() {
+    await (this._passwordTooltip as CDSTooltip)?.updateComplete;
+    this._passwordTooltip?.shadowRoot
+      ?.querySelector(`.${prefix}--tooltip`)
+      ?.classList.add(`${prefix}--icon-tooltip`);
+  }
+  /**
+   * A selector that will return the slug item.
+   *
+   * remove in v12
+   */
+  static get slugItem() {
+    return `${prefix}-slug`;
+  }
+
+  static shadowRootOptions = {
+    ...LitElement.shadowRootOptions,
+    delegatesFocus: true,
+  };
+  static styles = styles;
+}
+
+export default CDSPasswordInput;

@@ -1,0 +1,38 @@
+import { ArgTypes, Canvas, Markdown, Meta } from '@storybook/addon-docs/blocks';
+import { cdnJs } from '../../globals/internal/storybook-cdn';
+import * as InlineLoadingStories from './inline-loading.stories';
+
+<Meta of={InlineLoadingStories} />
+
+# Inline loading
+
+[Source code](https://github.com/carbon-design-system/carbon/tree/main/packages/web-components/src/components/inline-loading)
+&nbsp;|&nbsp;
+[Usage guidelines](https://www.carbondesignsystem.com/components/inline-loading/usage)
+&nbsp;|&nbsp;
+[Accessibility](https://www.carbondesignsystem.com/components/inline-loading/accessibility)
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Component API](#component-api)
+- [CDN](#cdn)
+- [Feedback](#feedback)
+
+## Overview
+
+<Canvas of={InlineLoadingStories.Default} />
+
+<Canvas of={InlineLoadingStories.UxExample} />
+
+## Component API
+
+<ArgTypes of="cds-inline-loading" />
+
+<Markdown>{`${cdnJs({ components: ['inline-loading'] })}`}</Markdown>
+
+## Feedback
+
+Help us improve this component by providing feedback, asking questions on Slack,
+or updating this file on
+[GitHub](https://github.com/carbon-design-system/carbon/edit/main/packages/react/src/components/InlineLoading/InlineLoading.mdx).

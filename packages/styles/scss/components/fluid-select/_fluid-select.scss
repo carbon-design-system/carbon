@@ -1,0 +1,258 @@
+//
+// Copyright IBM Corp. 2022
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+//-----------------------------
+// Fluid Select
+//-----------------------------
+@use '../../config' as *;
+@use '../../motion' as *;
+@use '../../spacing' as *;
+@use '../../theme' as *;
+@use '../../utilities/convert';
+@use '../../utilities/focus-outline' as *;
+@use '../select';
+
+@mixin fluid-select {
+  .#{$prefix}--select--fluid .#{$prefix}--select {
+    position: relative;
+    background: $field;
+    block-size: 100%;
+    transition:
+      background-color $duration-fast-01 motion(standard, productive),
+      outline $duration-fast-01 motion(standard, productive);
+  }
+
+  .#{$prefix}--select--fluid .#{$prefix}--label {
+    position: absolute;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    margin: 0;
+    block-size: convert.to-rem(16px);
+    inline-size: calc(100% - 2rem);
+    inset-block-start: convert.to-rem(13px);
+    inset-inline-start: $spacing-05;
+  }
+
+  .#{$prefix}--select--fluid .#{$prefix}--label::-webkit-scrollbar,
+  .#{$prefix}--select--fluid
+    .#{$prefix}--label
+    .#{$prefix}--toggletip-label::-webkit-scrollbar {
+    display: none;
+  }
+
+  .#{$prefix}--select--fluid
+    .#{$prefix}--label:not(:has(.#{$prefix}--toggletip-label)),
+  .#{$prefix}--select--fluid .#{$prefix}--label .#{$prefix}--toggletip-label {
+    -ms-overflow-style: none;
+    overflow-x: scroll;
+    scrollbar-width: none;
+    white-space: nowrap;
+  }
+
+  .#{$prefix}--select--fluid .#{$prefix}--select-input {
+    padding: convert.to-rem(32px) convert.to-rem(32px) convert.to-rem(13px)
+      $spacing-05;
+    min-block-size: convert.to-rem(64px);
+    outline: none;
+    text-overflow: ellipsis;
+  }
+
+  .#{$prefix}--select--fluid .#{$prefix}--select__arrow {
+    block-size: 1rem;
+    inset-block-start: convert.to-rem(34px);
+    inset-inline-end: $spacing-04;
+  }
+
+  .#{$prefix}--select--fluid .#{$prefix}--select__divider {
+    display: none;
+    transition: border-color $duration-fast-01 motion(standard, productive);
+  }
+
+  // Invalid + Warn states
+  .#{$prefix}--select--fluid
+    .#{$prefix}--select--invalid
+    .#{$prefix}--select-input__wrapper {
+    @include focus-outline('invalid');
+  }
+
+  .#{$prefix}--select--fluid
+    .#{$prefix}--select--invalid
+    .#{$prefix}--select__divider,
+  .#{$prefix}--select--fluid
+    .#{$prefix}--select--warning
+    .#{$prefix}--select__divider {
+    display: block;
+    border: none;
+    margin: 0 1rem;
+    border-block-end: 1px solid $border-subtle;
+    inline-size: calc(100% - 2rem);
+  }
+
+  .#{$prefix}--select--fluid
+    .#{$prefix}--select-input__wrapper[data-invalid]
+    .#{$prefix}--select-input,
+  .#{$prefix}--select--fluid
+    .#{$prefix}--select--warning
+    .#{$prefix}--select-input {
+    border-block-end: 1px solid transparent;
+    padding-inline-end: convert.to-rem(32px);
+  }
+
+  .#{$prefix}--select--fluid .#{$prefix}--select--warning {
+    border-block-end: 1px solid $border-strong;
+  }
+
+  .#{$prefix}--select--fluid .#{$prefix}--select-input__wrapper {
+    display: block;
+  }
+
+  .#{$prefix}--select--fluid
+    .#{$prefix}--select-input__wrapper[data-invalid]
+    .#{$prefix}--select-input:not(:focus),
+  .#{$prefix}--select--fluid
+    .#{$prefix}--select--warning
+    .#{$prefix}--select-input:not(:focus) {
+    outline: none;
+  }
+
+  .#{$prefix}--select--fluid
+    .#{$prefix}--select-input__wrapper[data-invalid]
+    .#{$prefix}--form-requirement,
+  .#{$prefix}--select--fluid
+    .#{$prefix}--select--warning
+    .#{$prefix}--form-requirement {
+    display: block;
+    overflow: visible;
+    max-block-size: 100%;
+  }
+
+  .#{$prefix}--select--fluid
+    .#{$prefix}--select-input__wrapper[data-invalid]
+    .#{$prefix}--form-requirement {
+    color: $text-error;
+  }
+
+  .#{$prefix}--select--fluid .#{$prefix}--form-requirement {
+    padding: $spacing-03 convert.to-rem(40px) $spacing-03 $spacing-05;
+    margin: 0;
+  }
+
+  .#{$prefix}--select--fluid
+    .#{$prefix}--select-input__wrapper[data-invalid]:hover
+    + .#{$prefix}--select__divider,
+  .#{$prefix}--select--fluid
+    .#{$prefix}--select--warning
+    .#{$prefix}--select-input__wrapper:hover
+    + .#{$prefix}--select__divider {
+    border-color: transparent;
+  }
+
+  .#{$prefix}--select--fluid
+    .#{$prefix}--select--invalid
+    .#{$prefix}--select-input__wrapper[data-invalid]
+    .#{$prefix}--select__invalid-icon,
+  .#{$prefix}--select--fluid
+    .#{$prefix}--select--warning
+    .#{$prefix}--select-input__wrapper
+    .#{$prefix}--select__invalid-icon {
+    inset-block-start: convert.to-rem(73px);
+    inset-inline-end: $spacing-05;
+    pointer-events: none;
+  }
+
+  // Focus styles
+  .#{$prefix}--select--fluid
+    .#{$prefix}--select--fluid--focus
+    .#{$prefix}--select-input__wrapper {
+    @include focus-outline('outline');
+  }
+
+  .#{$prefix}--select--fluid
+    .#{$prefix}--select--fluid--focus
+    .#{$prefix}--select-input,
+  .#{$prefix}--select--fluid
+    .#{$prefix}--select--fluid--focus.#{$prefix}--select--warning {
+    border-block-end: 1px solid transparent;
+  }
+
+  // Disabled state
+  .#{$prefix}--select--fluid
+    .#{$prefix}--select--disabled
+    .#{$prefix}--toggletip-label {
+    color: $text-disabled;
+  }
+
+  .#{$prefix}--select--fluid
+    .#{$prefix}--select--disabled
+    .#{$prefix}--toggletip-button {
+    pointer-events: none;
+  }
+
+  .#{$prefix}--select--fluid
+    .#{$prefix}--select--disabled
+    .#{$prefix}--toggletip-button
+    svg {
+    fill: $icon-disabled;
+  }
+
+  // AILabel styles
+  .#{$prefix}--select--fluid
+    .#{$prefix}--select--decorator
+    .#{$prefix}--select__inner-wrapper--decorator
+    > *,
+  .#{$prefix}--select--fluid .#{$prefix}--select--slug .#{$prefix}--ai-label,
+  .#{$prefix}--select--fluid .#{$prefix}--select--slug .#{$prefix}--slug {
+    inset-block-start: convert.to-rem(42px);
+    inset-inline-end: $spacing-09;
+  }
+
+  .#{$prefix}--select--fluid
+    .#{$prefix}--select--slug
+    .#{$prefix}--select-input {
+    padding-inline-end: $spacing-10;
+  }
+
+  // remove ai-label divider when element is invalid and fluid
+  .#{$prefix}--select--fluid
+    .#{$prefix}--select--decorator
+    .#{$prefix}--select__inner-wrapper--decorator
+    > .#{$prefix}--ai-label::before,
+  .#{$prefix}--select--fluid
+    .#{$prefix}--select--slug:has(.#{$prefix}--select__invalid-icon)
+    .#{$prefix}--ai-label::before,
+  .#{$prefix}--select--fluid
+    .#{$prefix}--select--slug:has(.#{$prefix}--select__invalid-icon)
+    .#{$prefix}--slug::before {
+    display: none;
+  }
+
+  // Skeleton
+  .#{$prefix}--select--fluid__skeleton {
+    position: relative;
+    background: $skeleton-background;
+    block-size: convert.to-rem(64px);
+    border-block-end: 1px solid $skeleton-element;
+  }
+
+  .#{$prefix}--select--fluid__skeleton .#{$prefix}--skeleton {
+    position: absolute;
+    block-size: convert.to-rem(8px);
+    inline-size: 25%;
+    inset-block-start: $spacing-05;
+    inset-inline-start: $spacing-05;
+  }
+
+  .#{$prefix}--select--fluid__skeleton .#{$prefix}--label {
+    position: absolute;
+    padding: 0;
+    block-size: convert.to-rem(8px);
+    inline-size: 50%;
+    inset-block-start: convert.to-rem(36px);
+    inset-inline-start: $spacing-05;
+  }
+}

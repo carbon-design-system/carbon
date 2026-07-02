@@ -1,0 +1,11 @@
+//
+// Copyright IBM Corp. 2018, 2023
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+$prefix: 'cds' !default;
+
+/// Specify if a fallback value should be provided for the CSS Custom Property
+$use-fallback-value: true !default;

@@ -1,0 +1,229 @@
+//
+// Copyright IBM Corp. 2018, 2023
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use '../overflow-menu';
+@use '../../config' as *;
+@use '../../breakpoint' as *;
+@use '../../motion' as *;
+@use '../../spacing' as *;
+@use '../../theme' as *;
+@use '../../type' as *;
+@use '../../layer' as *;
+@use '../../utilities/component-reset';
+@use '../../utilities/convert';
+@use '../../utilities/skeleton' as *;
+
+@mixin breadcrumb {
+  .#{$prefix}--breadcrumb {
+    @include component-reset.reset;
+    @include type-style('body-compact-01');
+
+    display: inline;
+
+    @include breakpoint(md) {
+      display: flex;
+      flex-wrap: wrap;
+    }
+  }
+
+  .#{$prefix}--breadcrumb--sm {
+    @include type-style('label-01');
+  }
+
+  .#{$prefix}--breadcrumb .#{$prefix}--link {
+    font: inherit;
+  }
+
+  .#{$prefix}--breadcrumb-item {
+    position: relative;
+    display: flex;
+    align-items: center;
+    margin-inline-end: $spacing-03;
+  }
+
+  .#{$prefix}--breadcrumb--sm .#{$prefix}--breadcrumb-item {
+    margin-inline-end: $spacing-02;
+  }
+
+  .#{$prefix}--breadcrumb--sm .#{$prefix}--breadcrumb-item .#{$prefix}--link {
+    justify-content: center;
+    min-inline-size: $spacing-04;
+  }
+
+  .#{$prefix}--breadcrumb-item .#{$prefix}--link:visited {
+    color: $link-primary;
+
+    &:hover {
+      color: $link-primary-hover;
+    }
+  }
+
+  .#{$prefix}--breadcrumb-item .#{$prefix}--link:active,
+  .#{$prefix}--breadcrumb-item .#{$prefix}--link:visited:active:hover {
+    color: $text-primary;
+  }
+
+  .#{$prefix}--breadcrumb-item::after {
+    color: $text-primary;
+    content: '/';
+    margin-inline-start: $spacing-03;
+  }
+
+  .#{$prefix}--breadcrumb--sm .#{$prefix}--breadcrumb-item::after {
+    margin-inline-start: $spacing-02;
+  }
+
+  .#{$prefix}--breadcrumb--no-trailing-slash
+    .#{$prefix}--breadcrumb-item:last-child::after {
+    content: '';
+  }
+
+  .#{$prefix}--breadcrumb-item:last-child,
+  .#{$prefix}--breadcrumb-item:last-child::after {
+    margin-inline-end: 0;
+  }
+
+  .#{$prefix}--breadcrumb .#{$prefix}--link {
+    white-space: nowrap;
+  }
+
+  .#{$prefix}--breadcrumb-item [aria-current='page'],
+  .#{$prefix}--breadcrumb-item.#{$prefix}--breadcrumb-item--current
+    .#{$prefix}--link {
+    color: $text-primary;
+    cursor: auto;
+
+    &:hover {
+      text-decoration: none;
+    }
+  }
+
+  // Overflow Menu overrides
+  .#{$prefix}--breadcrumb-item .#{$prefix}--overflow-menu {
+    position: relative;
+    block-size: convert.to-rem(18px);
+    inline-size: $spacing-05;
+
+    &:focus {
+      border: none;
+      box-shadow: none;
+      outline: 1px solid $focus;
+      outline-offset: 0;
+    }
+
+    &:hover {
+      background: transparent;
+
+      &::after {
+        background: $link-primary-hover;
+      }
+    }
+
+    &:active {
+      &::after {
+        background: $text-primary;
+      }
+    }
+
+    &:focus,
+    &:hover {
+      &::after {
+        opacity: 1;
+      }
+    }
+
+    // Used to mimic link underline
+    &::after {
+      position: absolute;
+      background: $focus;
+      block-size: 1px;
+      content: '';
+      inline-size: convert.to-rem(12px);
+      inset-block-end: 2px;
+      opacity: 0;
+      transition: opacity $duration-fast-01 motion(standard, productive);
+
+      @media screen and (prefers-reduced-motion: reduce) {
+        transition: none;
+      }
+    }
+  }
+
+  .#{$prefix}--breadcrumb-item
+    .#{$prefix}--overflow-menu.#{$prefix}--overflow-menu--open {
+    background: transparent;
+    box-shadow: none;
+  }
+
+  .#{$prefix}--breadcrumb-item
+    .#{$prefix}--overflow-menu
+    .#{$prefix}--overflow-menu__icon {
+    position: relative;
+    fill: $link-primary;
+    transform: translateY(4px);
+  }
+
+  .#{$prefix}--breadcrumb-item
+    .#{$prefix}--overflow-menu:hover
+    .#{$prefix}--overflow-menu__icon {
+    fill: $link-primary-hover;
+  }
+
+  .#{$prefix}--breadcrumb-item
+    .#{$prefix}--overflow-menu:active
+    .#{$prefix}--overflow-menu__icon {
+    fill: $icon-primary;
+  }
+
+  .#{$prefix}--breadcrumb-menu-options:focus {
+    outline: none;
+  }
+
+  $caret-size: convert.to-rem(7px);
+  .#{$prefix}--breadcrumb-menu-options.#{$prefix}--overflow-menu-options::after {
+    margin: 0 auto;
+    background: transparent;
+    block-size: 0;
+    border-block-end: $caret-size solid $field;
+    border-inline-end: $caret-size solid transparent;
+    border-inline-start: $caret-size solid transparent;
+    inline-size: 0;
+    inset-block-start: -$caret-size;
+    inset-inline-start: $caret-size * 2;
+  }
+
+  [dir='rtl']
+    .#{$prefix}--breadcrumb-menu-options.#{$prefix}--overflow-menu-options::after {
+    inset-inline-end: $caret-size * 2;
+    inset-inline-start: initial;
+  }
+
+  .#{$prefix}--breadcrumb
+    .#{$prefix}--overflow-menu.#{$prefix}--btn--icon-only {
+    min-block-size: 1.125rem;
+    padding-inline: 0;
+  }
+
+  .#{$prefix}--breadcrumb--sm
+    .#{$prefix}--breadcrumb-item
+    .#{$prefix}--overflow-menu {
+    block-size: $spacing-05;
+    inline-size: $spacing-05;
+    min-block-size: $spacing-05;
+    .#{$prefix}--overflow-menu__icon {
+      transform: translateY(3px);
+    }
+  }
+
+  // Skeleton State
+  .#{$prefix}--breadcrumb.#{$prefix}--skeleton .#{$prefix}--link {
+    @include skeleton;
+
+    block-size: 1rem;
+    inline-size: convert.to-rem(100px);
+  }
+}

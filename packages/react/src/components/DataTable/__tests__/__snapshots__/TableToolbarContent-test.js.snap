@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TableToolbarContent renders as expected - Component API should render 1`] = `
+<div>
+  <div
+    class="cds--toolbar-content"
+  />
+</div>
+`;

@@ -1,0 +1,51 @@
+import { ArgTypes, Canvas, Markdown, Meta } from '@storybook/addon-docs/blocks';
+import { cdnJs } from '../../globals/internal/storybook-cdn';
+import * as PaginationStories from './pagination.stories';
+
+<Meta of={PaginationStories} />
+
+# Pagination
+
+[Source code](https://github.com/carbon-design-system/carbon/tree/main/packages/web-components/src/components/pagination)
+&nbsp;|&nbsp;
+[Usage guidelines](https://www.carbondesignsystem.com/components/pagination/usage)
+&nbsp;|&nbsp;
+[Accessibility](https://www.carbondesignsystem.com/components/pagination/accessibility)
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Multiple pagination components](#multiple-pagination-components)
+- [Pagination unknown pages](#pagination-unknown-pages)
+- [Pagination with custom page sizes label](#pagination-with-custom-page-sizes-label)
+- [Component API](#component-api)
+- [CDN](#cdn)
+- [Feedback](#feedback)
+
+## Overview
+
+<Canvas of={PaginationStories.Default} />
+
+## Multiple pagination components
+
+<Canvas of={PaginationStories.MultiplePaginationComponents} />
+
+## Pagination unknown pages
+
+<Canvas of={PaginationStories.PaginationUnknownPages} />
+
+## Pagination with custom page sizes label
+
+<Canvas of={PaginationStories.PaginationWithCustomPageSizesLabel} />
+
+## Component API
+
+<ArgTypes of="cds-pagination" />
+
+<Markdown>{`${cdnJs({ components: ['pagination'] })}`}</Markdown>
+
+## Feedback
+
+Help us improve this component by providing feedback, asking questions on Slack,
+or updating this file on
+[GitHub](https://github.com/carbon-design-system/carbon/edit/main/packages/web-components/src/components/pagination/pagination.mdx).

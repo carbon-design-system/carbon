@@ -1,0 +1,199 @@
+//
+// Copyright IBM Corp. 2025
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use '../../config' as *;
+@use '../../breakpoint' as *;
+@use '../../colors' as *;
+@use '../../spacing' as *;
+@use '../../theme' as *;
+@use '../../type' as *;
+@use '../../utilities/convert';
+
+/// Page header styles
+/// @access public
+/// @group page-header
+@mixin page-header {
+  .#{$prefix}--page-header {
+    background-color: $layer-01;
+    border-block-end: 1px solid $border-subtle-01;
+  }
+
+  .#{$prefix}--page-header__breadcrumb-bar {
+    block-size: convert.to-rem(40px);
+  }
+
+  .#{$prefix}--page-header__breadcrumb-bar .#{$prefix}--subgrid {
+    block-size: 100%;
+  }
+
+  .#{$prefix}--page-header__breadcrumb-container {
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    block-size: 100%;
+    inline-size: 100%;
+  }
+
+  .#{$prefix}--page-header__breadcrumb__actions-flush {
+    .#{$prefix}--css-grid {
+      padding-inline-end: 0;
+    }
+
+    .#{$prefix}--css-grid-column {
+      margin-inline-end: 0;
+    }
+  }
+
+  .#{$prefix}--page-header__breadcrumb-bar-border {
+    border-block-end: 1px solid $border-subtle-01;
+  }
+
+  .#{$prefix}--page-header__breadcrumb__icon {
+    margin-inline-end: $spacing-03;
+  }
+
+  .#{$prefix}--page-header__breadcrumb__actions {
+    display: inline-flex;
+  }
+
+  .#{$prefix}--page-header__breadcrumb__content-actions {
+    margin-inline-end: $spacing-04;
+  }
+
+  .#{$prefix}--page-header__breadcrumb-wrapper {
+    display: inline-flex;
+  }
+
+  .#{$prefix}--page-header__content {
+    padding: $spacing-06 0;
+  }
+
+  .#{$prefix}--page-header__content__title-wrapper {
+    @include breakpoint-down(md) {
+      display: flex;
+      flex-direction: column;
+      grid-gap: $spacing-05;
+    }
+
+    display: grid;
+    gap: $spacing-05;
+    grid-template-columns: auto minmax(
+        var(--pageheader-title-grid-width, 0),
+        1fr
+      );
+    margin-block-end: 1rem;
+    min-block-size: convert.to-rem(40px);
+  }
+
+  .#{$prefix}--page-header__content__start {
+    display: flex;
+    flex-wrap: wrap;
+    gap: $spacing-05;
+  }
+
+  .#{$prefix}--page-header__content__title-container {
+    display: flex;
+  }
+
+  .#{$prefix}--page-header__content__title-container
+    .#{$prefix}--definition-term {
+    border-block-end: none;
+  }
+
+  .#{$prefix}--page-header__content__contextual-actions {
+    display: flex;
+  }
+
+  .#{$prefix}--page-header__content__title {
+    @include type-style('productive-heading-04');
+
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    max-inline-size: convert.to-rem(640px);
+    text-overflow: ellipsis;
+    white-space: normal;
+  }
+
+  .#{$prefix}--page-header__content:has(
+      .#{$prefix}--page-header__content__contextual-actions
+    )
+    .#{$prefix}--page-header__content__title {
+    -webkit-line-clamp: 1;
+  }
+
+  .#{$prefix}--page-header__content__icon {
+    margin-inline-end: $spacing-05;
+  }
+
+  .#{$prefix}--page-header__content__page-actions {
+    display: flex;
+    justify-content: right;
+
+    @include breakpoint-down('md') {
+      justify-content: left;
+      margin-block-start: 0;
+    }
+  }
+
+  .#{$prefix}--page-header__content__page-actions
+    .#{$prefix}--menu-button__trigger:not(.#{$prefix}--btn--ghost) {
+    min-inline-size: 0;
+  }
+
+  .#{$prefix}--page-header__content__subtitle {
+    @include type-style('productive-heading-03');
+
+    margin-block-end: $spacing-03;
+  }
+
+  .#{$prefix}--page-header__content__body {
+    @include type-style('body-01');
+
+    margin-block-start: $spacing-03;
+    max-inline-size: convert.to-rem(640px);
+  }
+
+  [data-hidden]:not([data-fixed]) {
+    display: none;
+  }
+
+  .#{$prefix}--page-header__hero-image {
+    display: flex;
+    overflow: hidden;
+    align-items: center;
+    justify-content: flex-end;
+    block-size: 100%;
+  }
+
+  .#{$prefix}--page-header__tab-bar {
+    margin-inline-start: -$spacing-05;
+  }
+
+  .#{$prefix}--page-header__tab-bar--tablist {
+    display: grid;
+    grid-gap: $spacing-10;
+    grid-template-columns: auto minmax(0, 1fr);
+  }
+
+  .#{$prefix}--page-header__tags {
+    display: flex;
+    align-items: center;
+    justify-content: right;
+  }
+
+  .#{$prefix}--page-header__tags-popover-list {
+    display: flex;
+    flex-direction: column;
+    padding: $spacing-05;
+  }
+
+  .#{$prefix}--page-header__tag-item {
+    flex-shrink: 0;
+  }
+}

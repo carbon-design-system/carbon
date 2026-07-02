@@ -1,0 +1,66 @@
+import { ArgTypes, Canvas, Markdown, Meta } from '@storybook/addon-docs/blocks';
+import { cdnJs } from '../../globals/internal/storybook-cdn';
+import * as TextInputStories from './text-input.stories';
+
+<Meta of={TextInputStories} />
+
+# Text Input
+
+[Source code](https://github.com/carbon-design-system/carbon/tree/main/packages/web-components/src/components/text-input)
+&nbsp;|&nbsp;
+[Usage guidelines](https://www.carbondesignsystem.com/components/text-input/usage)
+&nbsp;|&nbsp;
+[Accessibility](https://www.carbondesignsystem.com/components/text-input/accessibility)
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Read Only](#read-only)
+- [Skeleton](#skeleton)
+- [AI Label](#ai-label)
+- [With Layer](#with-layer)
+- [Component API](#component-api)
+- [CDN](#cdn)
+- [Feedback](#feedback)
+
+## Overview
+
+The `cds-text-input` component enables users to enter free-form text data. The
+type of text field used should reflect the length of the content you expect the
+user to enter. The default text input is for short, one-line content.
+
+<Canvas of={TextInputStories.Default} />
+
+### Read Only
+
+<Canvas of={TextInputStories.ReadOnly} />
+
+### Skeleton
+
+<Canvas of={TextInputStories.Skeleton} />
+
+### AI Label
+
+<Canvas of={TextInputStories.WithAILabel} />
+
+### With Layer
+
+<Canvas of={TextInputStories.WithLayer} />
+
+## Component API
+
+## `cds-text-input`
+
+<ArgTypes of="cds-text-input" />
+
+## `cds-text-input-skeleton`
+
+<ArgTypes of="cds-text-input-skeleton" />
+
+<Markdown>{`${cdnJs({ components: ['text-input'] })}`}</Markdown>
+
+## Feedback
+
+Help us improve this component by providing feedback, asking questions on Slack,
+or updating this file on
+[GitHub](https://github.com/carbon-design-system/carbon/edit/main/packages/web-components/src/components/text-input/text-input.mdx).

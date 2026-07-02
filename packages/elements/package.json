@@ -1,0 +1,60 @@
+{
+  "name": "@carbon/elements",
+  "description": "A collection of design elements in code for the IBM Design Language",
+  "version": "11.92.0",
+  "license": "Apache-2.0",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "module": "es/index.js",
+  "sass": "index.scss",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/carbon-design-system/carbon.git",
+    "directory": "packages/elements"
+  },
+  "bugs": "https://github.com/carbon-design-system/carbon/issues",
+  "files": [
+    "es",
+    "lib",
+    "umd",
+    "index.scss",
+    "telemetry.yml"
+  ],
+  "keywords": [
+    "ibm",
+    "elements",
+    "carbon",
+    "carbon-elements",
+    "carbon-design-system",
+    "components",
+    "react"
+  ],
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  },
+  "scripts": {
+    "build:types": "tsc -p tsconfig.types.json",
+    "build": "yarn clean && carbon-cli bundle src/index.ts --name CarbonElements && yarn build:types",
+    "clean": "rimraf es lib umd",
+    "postinstall": "ibmtelemetry --config=telemetry.yml"
+  },
+  "dependencies": {
+    "@carbon/colors": "^11.53.0",
+    "@carbon/grid": "^11.57.0",
+    "@carbon/icons": "^11.83.0",
+    "@carbon/layout": "^11.54.0",
+    "@carbon/motion": "^11.47.0",
+    "@carbon/themes": "^11.76.0",
+    "@carbon/type": "^11.62.0",
+    "@ibm/telemetry-js": "^1.5.0"
+  },
+  "devDependencies": {
+    "@carbon/cli": "^11.45.0",
+    "fs-extra": "^11.0.0",
+    "klaw-sync": "^6.0.0",
+    "rimraf": "^6.0.1",
+    "typescript": "^6.0.3",
+    "typescript-config-carbon": "workspace:^0.10.0"
+  }
+}

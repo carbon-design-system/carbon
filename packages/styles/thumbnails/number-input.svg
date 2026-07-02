@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="320px" height="180px" viewBox="0 0 320 180" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>number-input</title>
+    <defs>
+        <polygon id="path-1" points="7 0 3.5 4 0 0"></polygon>
+        <polygon id="path-3" points="0 4 3.5 0 7 4"></polygon>
+    </defs>
+    <g id="number-input" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <rect id="Rectangle-2-Copy-61" fill="#F3F3F3" x="94" y="74" width="132" height="32"></rect>
+        <g id="icon/navigation/caret/down/16-copy-31" transform="translate(200.000000, 88.000000)">
+            <g id="caret--down" transform="translate(4.500000, 6.000000)">
+                <mask id="mask-2" fill="white">
+                    <use xlink:href="#path-1"></use>
+                </mask>
+                <use id="Mask" fill="#000000" fill-rule="nonzero" xlink:href="#path-1"></use>
+                <g id="Group" mask="url(#mask-2)">
+                    <g transform="translate(-4.500000, -6.000000)" id="icon-color">
+                        <rect id="Rectangle" fill="#565656" x="0" y="0" width="40" height="40"></rect>
+                    </g>
+                </g>
+            </g>
+            <rect id="transparent-rectangle" x="0" y="0" width="16" height="16"></rect>
+        </g>
+        <g id="icon/navigation/caret/up/16-copy-31" transform="translate(200.000000, 76.000000)">
+            <g id="caret--up" transform="translate(4.500000, 6.000000)">
+                <mask id="mask-4" fill="white">
+                    <use xlink:href="#path-3"></use>
+                </mask>
+                <use id="Mask" fill="#000000" fill-rule="nonzero" xlink:href="#path-3"></use>
+                <g id="Group" mask="url(#mask-4)">
+                    <g transform="translate(-4.500000, -6.000000)" id="icon-color">
+                        <rect id="Rectangle" fill="#565656" x="0" y="0" width="40" height="40"></rect>
+                    </g>
+                </g>
+            </g>
+            <rect id="transparent-rectangle" x="0" y="0" width="16" height="16"></rect>
+        </g>
+        <line x1="95.4882812" y1="106" x2="225.441406" y2="106" id="Path-4" stroke="#979797"></line>
+        <rect id="Rectangle-3-Copy-12" fill="#A8A8A8" x="107" y="87" width="34" height="7"></rect>
+    </g>
+</svg>

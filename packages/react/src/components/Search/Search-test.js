@@ -1,0 +1,353 @@
+/**
+ * Copyright IBM Corp. 2022, 2026
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+import React from 'react';
+import Search from './Search';
+import SearchSkeleton from './Search.Skeleton';
+import userEvent from '@testing-library/user-event';
+import { render, screen } from '@testing-library/react';
+
+const prefix = 'cds';
+const contentScenarios = [
+  { label: 'empty string', value: '', hasContent: false },
+  { label: 'zero', value: 0, hasContent: true },
+  { label: 'non-empty string', value: 'hmm', hasContent: true },
+  { label: 'undefined', value: undefined, hasContent: false },
+];
+
+describe('Search', () => {
+  describe('renders as expected - Component API', () => {
+    it('should label the search landmark using labelText via aria-labelledby', () => {
+      render(<Search labelText="Search A" />);
+
+      expect(
+        screen.getByRole('search', { name: 'Search A' })
+      ).toBeInTheDocument();
+    });
+
+    it('should give each search landmark a unique accessible name when labelText differs', () => {
+      render(
+        <>
+          <Search labelText="Search A" />
+          <Search labelText="Search B" />
+        </>
+      );
+
+      expect(
+        screen.getByRole('search', { name: 'Search A' })
+      ).toBeInTheDocument();
+      expect(
+        screen.getByRole('search', { name: 'Search B' })
+      ).toBeInTheDocument();
+    });
+
+    it('should spread extra props onto the input element', () => {
+      render(<Search labelText="test-search" data-testid="test-id" />);
+
+      expect(screen.getByRole('searchbox')).toHaveAttribute(
+        'data-testid',
+        'test-id'
+      );
+    });
+
+    it('should respect autoComplete prop', () => {
+      render(<Search labelText="test-search" autoComplete="test" />);
+
+      expect(screen.getByRole('searchbox')).toHaveAttribute(
+        'autoComplete',
+        'test'
+      );
+    });
+
+    it('should support a custom `className` prop on the outermost element', () => {
+      const { container } = render(
+        <Search labelText="test-search" className="custom-class" />
+      );
+
+      expect(container.firstChild).toHaveClass('custom-class');
+    });
+
+    it('should respect closeButtonLabelText prop', () => {
+      render(<Search labelText="test-search" closeButtonLabelText="clear" />);
+
+      expect(screen.getByLabelText('clear')).toBeInTheDocument();
+    });
+
+    it('should respect defaultValue prop', () => {
+      render(<Search labelText="test-search" defaultValue="test-value" />);
+
+      expect(screen.getByRole('searchbox')).toHaveValue('test-value');
+    });
+
+    it.each(contentScenarios)(
+      'should treat a defaultValue of $label as content',
+      ({ value, hasContent }) => {
+        render(<Search labelText="test-search" defaultValue={value} />);
+
+        if (hasContent) {
+          expect(screen.getByLabelText('Clear search input')).not.toHaveClass(
+            `${prefix}--search-close--hidden`
+          );
+        } else {
+          expect(screen.getByLabelText('Clear search input')).toHaveClass(
+            `${prefix}--search-close--hidden`
+          );
+        }
+      }
+    );
+
+    it('should respect disabled prop', () => {
+      render(<Search labelText="test-search" disabled />);
+
+      expect(screen.getByRole('searchbox')).toBeDisabled();
+    });
+
+    it('should respect id prop', () => {
+      render(<Search labelText="test-search" id="test-id" />);
+
+      expect(screen.getByRole('searchbox')).toHaveAttribute('id', 'test-id');
+    });
+
+    it('should respect labelText prop', () => {
+      render(<Search labelText="test-search" />);
+
+      expect(screen.getByRole('searchbox').labels[0]).toHaveTextContent(
+        'test-search'
+      );
+    });
+
+    it('should call onChange when expected', async () => {
+      const onChange = jest.fn();
+      render(<Search labelText="test-search" onChange={onChange} />);
+
+      await userEvent.type(screen.getByRole('searchbox'), 'test');
+
+      expect(onChange).toHaveBeenCalled();
+    });
+
+    it('should respect onClear prop', async () => {
+      const onClear = jest.fn();
+      render(
+        <Search
+          labelText="test-search"
+          closeButtonLabelText="clear"
+          onClear={onClear}
+        />
+      );
+
+      await userEvent.click(screen.getByLabelText('clear'));
+
+      expect(onClear).toHaveBeenCalled();
+    });
+
+    it('should respect onExpand prop', async () => {
+      const onExpand = jest.fn();
+      render(<Search labelText="test-search" onExpand={onExpand} />);
+
+      await userEvent.click(screen.getAllByRole('button')[0]);
+
+      expect(onExpand).toHaveBeenCalled();
+
+      await screen.getAllByRole('button')[0].focus();
+
+      await userEvent.keyboard('[Space]');
+
+      expect(onExpand).toHaveBeenCalledTimes(2);
+
+      await screen.getAllByRole('button')[0].focus();
+
+      await userEvent.keyboard('[Enter]');
+
+      expect(onExpand).toHaveBeenCalledTimes(3);
+    });
+
+    it('should call onKeyDown when expected', async () => {
+      const onKeyDown = jest.fn();
+      render(<Search labelText="test-search" onKeyDown={onKeyDown} />);
+
+      await userEvent.type(screen.getByRole('searchbox'), 'test');
+
+      expect(onKeyDown).toHaveBeenCalled();
+    });
+
+    it('should call focus expand button on Escape when expanded', async () => {
+      render(
+        <Search labelText="test-search" onExpand={() => {}} isExpanded={true} />
+      );
+
+      await screen.getByRole('searchbox').focus();
+
+      await userEvent.keyboard('[Escape]');
+
+      expect(screen.getAllByRole('button')[0]).toHaveFocus();
+    });
+
+    it('should have tabbable button and untabbable input if expandable and not expanded', async () => {
+      const { container } = render(
+        <Search
+          labelText="test-search"
+          onExpand={() => {}}
+          isExpanded={false}
+        />
+      );
+      const input = container.querySelector('input');
+
+      expect(screen.getAllByRole('button')[0]).toHaveAttribute('tabIndex', '0');
+      expect(input).toHaveAttribute('inert');
+      expect(input).toHaveAttribute('tabIndex', '-1');
+    });
+
+    it('should not make the input inert if expandable and expanded', () => {
+      const { container } = render(
+        <Search labelText="test-search" onExpand={() => {}} isExpanded />
+      );
+
+      expect(container.querySelector('input')).not.toHaveAttribute('inert');
+    });
+
+    it('should respect input tabIndex and inert props if not expandable', () => {
+      const { container } = render(
+        <Search labelText="test-search" inert tabIndex={-1} />
+      );
+      const input = container.querySelector('input');
+
+      expect(input).toHaveAttribute('inert');
+      expect(input).toHaveAttribute('tabIndex', '-1');
+    });
+
+    it('should respect input tabIndex and inert props if expandable and expanded', () => {
+      const { container } = render(
+        <Search
+          labelText="test-search"
+          onExpand={() => {}}
+          isExpanded
+          inert
+          tabIndex={-1}
+        />
+      );
+      const input = container.querySelector('input');
+
+      expect(input).toHaveAttribute('inert');
+      expect(input).toHaveAttribute('tabIndex', '-1');
+    });
+
+    it('should enforce collapsed input a11y state even if input props attempt to override it', () => {
+      const { container } = render(
+        <Search
+          labelText="test-search"
+          onExpand={() => {}}
+          isExpanded={false}
+          inert={false}
+          tabIndex={0}
+        />
+      );
+      const input = container.querySelector('input');
+
+      expect(input).toHaveAttribute('inert');
+      expect(input).toHaveAttribute('tabIndex', '-1');
+    });
+
+    it('should have tabbable input and untabbable button if not expandable', async () => {
+      render(<Search labelText="test-search" />);
+
+      // will have 1 button which is the close button
+      expect(screen.getAllByRole('button').length).toBe(1);
+      // search icon not tabbable if not expandable
+      expect(screen.getByRole('searchbox')).not.toHaveAttribute(
+        'tabIndex',
+        '-1'
+      );
+    });
+
+    it('should respect placeholder prop', () => {
+      render(<Search labelText="test-search" placeholder="test-placeholder" />);
+
+      expect(
+        screen.getByPlaceholderText('test-placeholder')
+      ).toBeInTheDocument();
+    });
+
+    it('should respect renderIcon prop', () => {
+      const CustomIcon = jest.fn(() => <svg data-testid="test-icon" />);
+      render(<Search labelText="test-search" renderIcon={CustomIcon} />);
+
+      expect(screen.getByRole('search')).toContainElement(
+        screen.getByTestId('test-icon')
+      );
+      expect(screen.getByTestId('test-icon')).toBeInTheDocument();
+    });
+
+    it('should respect role prop', () => {
+      render(<Search labelText="test-search" role="combobox" />);
+
+      expect(screen.getByRole('combobox')).toBeInTheDocument();
+    });
+
+    it('should respect size prop', () => {
+      render(<Search labelText="test-search" size="sm" />);
+
+      expect(screen.getByRole('search')).toHaveClass(`${prefix}--search--sm`); // TODO: V12 - Remove this check
+      expect(screen.getByRole('search')).toHaveClass(
+        `${prefix}--layout--size-sm`
+      );
+    });
+
+    it('should respect type prop', () => {
+      render(<Search labelText="test-search" type="search" />);
+
+      expect(screen.getByRole('searchbox')).toHaveAttribute('type', 'search');
+    });
+
+    it('should respect value prop', () => {
+      render(<Search labelText="test-search" value="test-value" />);
+
+      expect(screen.getByRole('searchbox')).toHaveValue('test-value');
+    });
+
+    it.each(contentScenarios)(
+      'should treat a value of $label as content',
+      ({ value, hasContent }) => {
+        render(<Search labelText="test-search" value={value} />);
+
+        if (hasContent) {
+          expect(screen.getByLabelText('Clear search input')).not.toHaveClass(
+            `${prefix}--search-close--hidden`
+          );
+        } else {
+          expect(screen.getByLabelText('Clear search input')).toHaveClass(
+            `${prefix}--search-close--hidden`
+          );
+        }
+      }
+    );
+
+    it('should sync clear button visibility when controlled value changes', () => {
+      const { rerender } = render(
+        <Search labelText="test-search" value="test-value" />
+      );
+
+      expect(screen.getByLabelText('Clear search input')).not.toHaveClass(
+        `${prefix}--search-close--hidden`
+      );
+
+      rerender(<Search labelText="test-search" value="" />);
+
+      expect(screen.getByLabelText('Clear search input')).toHaveClass(
+        `${prefix}--search-close--hidden`
+      );
+    });
+  });
+
+  describe('SearchSkeleton', () => {
+    it('should apply the small layout size class when small is true', () => {
+      const { container } = render(<SearchSkeleton small />);
+
+      expect(container.firstChild).toHaveClass(`${prefix}--search--sm`);
+      expect(container.firstChild).toHaveClass(`${prefix}--layout--size-sm`);
+    });
+  });
+});

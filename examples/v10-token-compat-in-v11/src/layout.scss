@@ -1,0 +1,63 @@
+@use '@carbon/react/scss/spacing';
+@use '@carbon/react/scss/type';
+
+body {
+  padding: spacing.$layout-03;
+  max-width: 1000px;
+}
+
+h3,
+h4 {
+  margin: spacing.$layout-02 0;
+}
+
+.layout-row {
+  display: flex;
+  align-items: flex-start;
+  margin: spacing.$layout-01 0;
+}
+
+.layout-row p {
+  @include type.type-style('code-01');
+
+  padding: 0 0.5rem;
+}
+
+.layout-row div {
+  background-color: #0f62fe;
+}
+
+.layout-01 {
+  height: spacing.$layout-01;
+  width: spacing.$layout-01;
+}
+
+.layout-02 {
+  height: spacing.$layout-02;
+  width: spacing.$layout-02;
+}
+
+.layout-03 {
+  height: spacing.$layout-03;
+  width: spacing.$layout-03;
+}
+
+.layout-04 {
+  height: spacing.$layout-04;
+  width: spacing.$layout-04;
+}
+
+.layout-05 {
+  height: spacing.$layout-05;
+  width: spacing.$layout-05;
+}
+
+.layout-06 {
+  height: spacing.$layout-06;
+  width: spacing.$layout-06;
+}
+
+.layout-07 {
+  height: spacing.$layout-07;
+  width: spacing.$layout-07;
+}

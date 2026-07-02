@@ -1,0 +1,18 @@
+//
+// Copyright IBM Corp. 2018, 2023
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use 'sass:map';
+
+/// @access private
+/// @group @carbon/themes
+@function merge($map, $maps...) {
+  $result: $map;
+  @each $map in $maps {
+    $result: map.merge($result, $map);
+  }
+  @return $result;
+}

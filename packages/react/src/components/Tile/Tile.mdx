@@ -1,0 +1,188 @@
+import { Story, ArgTypes, Canvas, Meta } from '@storybook/addon-docs/blocks';
+import * as TileStories from './Tile.stories';
+import * as TileFeatureFlagStories from './Tile.featureflag.stories';
+import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
+
+<Meta isTemplate />
+
+# Tile
+
+[Source code](https://github.com/carbon-design-system/carbon/tree/main/packages/react/src/components/Tile)
+&nbsp;|&nbsp;
+[Usage guidelines](https://www.carbondesignsystem.com/components/tile/usage)
+&nbsp;|&nbsp;
+[Accessibility](https://www.carbondesignsystem.com/components/tile/accessibility)
+
+{/* <!-- START doctoc generated TOC please keep comment here to allow auto update --> <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE --> */}
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Clickable](#clickable)
+  - [With Custom Icon](#with-custom-icon)
+- [Expandable](#expandable)
+- [Expandable with Interactive](#expandable-with-interactive)
+- [Selectable](#selectable)
+- [Multi Select](#multi-select)
+- [Radio](#radio)
+- [Experimental Improved Contrast](#experimental-improved-contrast)
+- [Component API](#component-api)
+- [Feedback](#feedback)
+
+{/* <!-- END doctoc generated TOC please keep comment here to allow auto update --> */}
+
+## Overview
+
+<Canvas
+  of={TileStories.Default}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(TileStories.Default),
+    },
+  ]}
+/>
+
+## Clickable
+
+<Canvas
+  of={TileStories.Clickable}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(TileStories.Clickable),
+    },
+  ]}
+/>
+
+#### With Custom Icon
+
+<Canvas
+  of={TileStories.ClickableWithCustomIcon}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () =>
+        stackblitzPrefillConfig(TileStories.ClickableWithCustomIcon),
+    },
+  ]}
+/>
+
+## Expandable
+
+<Canvas
+  of={TileStories.Expandable}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(TileStories.Expandable),
+    },
+  ]}
+/>
+
+## Expandable with Interactive
+
+<Canvas
+  of={TileStories.ExpandableWithInteractive}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () =>
+        stackblitzPrefillConfig(TileStories.ExpandableWithInteractive),
+    },
+  ]}
+/>
+
+## Selectable
+
+<Canvas
+  of={TileStories.Selectable}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(TileStories.Selectable),
+    },
+  ]}
+/>
+
+## Multi Select
+
+<Canvas
+  of={TileStories.MultiSelect}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(TileStories.MultiSelect),
+    },
+  ]}
+/>
+
+## Radio
+
+<Canvas
+  of={TileStories.Radio}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(TileStories.Radio),
+    },
+  ]}
+/>
+
+## Improved Contrast Flag
+
+In Sass, you can enable the improved contrast tiles via a feature flag.
+
+```scss
+@include feature-flags.enable('enable-tile-contrast');
+```
+
+or if you have multiple feature flags you can enable them this way.
+
+```scss
+@use '@carbon/react' with (
+  $feature-flags: (
+    'enable-tile-contrast': true,
+  )
+);
+```
+
+<Canvas>
+  <div style={{ width: '1018px', maxWidth: '100%' }}>
+    <Canvas
+      of={TileFeatureFlagStories.Clickable}
+      meta={TileFeatureFlagStories}
+    />
+  </div>
+  <div style={{ width: '1018px', maxWidth: '100%' }}>
+    <Canvas
+      of={TileFeatureFlagStories.Expandable}
+      meta={TileFeatureFlagStories}
+    />
+  </div>
+  <div style={{ width: '1018px', maxWidth: '100%' }}>
+    <Canvas
+      of={TileFeatureFlagStories.MultiSelect}
+      meta={TileFeatureFlagStories}
+    />
+  </div>
+  <div style={{ width: '1018px', maxWidth: '100%' }}>
+    <Canvas of={TileFeatureFlagStories.Radio} meta={TileFeatureFlagStories} />
+  </div>
+  <div style={{ width: '1018px', maxWidth: '100%' }}>
+    <Canvas
+      of={TileFeatureFlagStories.Selectable}
+      meta={TileFeatureFlagStories}
+    />
+  </div>
+</Canvas>
+
+## Component API
+
+<ArgTypes />
+
+## Feedback
+
+Help us improve this component by providing feedback, asking questions on Slack,
+or updating this file on
+[GitHub](https://github.com/carbon-design-system/carbon/edit/main/packages/react/src/components/Tile/Tile.mdx).

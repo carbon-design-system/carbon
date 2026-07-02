@@ -1,0 +1,744 @@
+/**
+ * Copyright IBM Corp. 2016, 2026
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+import React, { useEffect, useRef, useState } from 'react';
+import { View, FolderOpen, Folders, Information } from '@carbon/icons-react';
+import { action } from 'storybook/actions';
+import { WithLayer } from '../../../.storybook/templates/WithLayer';
+import mdx from './MultiSelect.mdx';
+
+import { FilterableMultiSelect, MultiSelect } from '.';
+import Button from '../Button';
+import ButtonSet from '../ButtonSet';
+import { AILabel, AILabelContent, AILabelActions } from '../AILabel';
+import { IconButton } from '../IconButton';
+import {
+  Toggletip,
+  ToggletipActions,
+  ToggletipButton,
+  ToggletipContent,
+  ToggletipLabel,
+} from '../Toggletip';
+import Link from '../Link';
+import TextInput from '../TextInput';
+
+export default {
+  title: 'Components/MultiSelect',
+  component: MultiSelect,
+  subcomponents: {
+    FilterableMultiSelect,
+  },
+  argTypes: {
+    size: {
+      options: ['xs', 'sm', 'md', 'lg'],
+      control: { type: 'select' },
+    },
+    light: {
+      table: {
+        disable: true,
+      },
+    },
+    selectionFeedback: {
+      options: ['top', 'fixed', 'top-after-reopen'],
+      control: { type: 'select' },
+    },
+    direction: {
+      options: ['top', 'bottom'],
+      control: { type: 'radio' },
+    },
+    type: {
+      options: ['inline', 'default'],
+      control: { type: 'radio' },
+    },
+    titleText: {
+      control: {
+        type: 'text',
+      },
+    },
+    disabled: {
+      control: {
+        type: 'boolean',
+      },
+    },
+    hideLabel: {
+      control: {
+        type: 'boolean',
+      },
+    },
+    helperText: {
+      control: {
+        type: 'text',
+      },
+    },
+    invalid: {
+      control: {
+        type: 'boolean',
+      },
+    },
+    warn: {
+      control: {
+        type: 'boolean',
+      },
+    },
+    warnText: {
+      control: {
+        type: 'text',
+      },
+    },
+    invalidText: {
+      control: {
+        type: 'text',
+      },
+    },
+    label: {
+      control: {
+        type: 'text',
+      },
+    },
+    clearSelectionDescription: {
+      control: {
+        type: 'text',
+      },
+    },
+    useTitleInItem: {
+      control: {
+        type: 'boolean',
+      },
+    },
+    clearSelectionText: {
+      control: {
+        type: 'text',
+      },
+    },
+    readOnly: {
+      control: { type: 'boolean' },
+    },
+  },
+  parameters: {
+    docs: {
+      page: mdx,
+    },
+    controls: {
+      exclude: [
+        'filterItems',
+        'translateWithId',
+        'titleText',
+        'open',
+        'selectedItems',
+        'itemToString',
+        'itemToElement',
+        'locale',
+        'items',
+        'id',
+        'initialSelectedItems',
+        'sortItems',
+        'compareItems',
+        'downshiftProps',
+      ],
+    },
+  },
+};
+
+const items = [
+  {
+    id: 'downshift-1-item-0',
+    text: 'Option 1',
+  },
+  {
+    id: 'downshift-1-item-1',
+    text: 'Option 2',
+  },
+  {
+    id: 'downshift-1-item-2',
+    text: 'Option 3 - a disabled item',
+    disabled: true,
+  },
+  {
+    id: 'downshift-1-item-3',
+    text: 'Option 4',
+  },
+  {
+    id: 'downshift-1-item-4',
+    text: 'An example option that is really long to show what should be done to handle long text',
+  },
+  {
+    id: 'downshift-1-item-5',
+    text: 'Option 5',
+  },
+];
+
+const sharedArgs = {
+  size: 'md',
+  autoAlign: false,
+  type: 'default',
+  titleText: 'Label',
+  disabled: false,
+  hideLabel: false,
+  invalid: false,
+  warn: false,
+  open: false,
+  helperText: 'This is helper text',
+  warnText: 'Warning message goes here',
+  invalidText: 'Error message goes here',
+  label: 'This is a label',
+  clearSelectionDescription: 'Total items selected: ',
+  useTitleInItem: false,
+  clearSelectionText: 'To clear selection, press Delete or Backspace,',
+};
+
+const filterableArgTypes = {
+  placeholder: {
+    control: {
+      type: 'text',
+    },
+    description:
+      'Generic `placeholder` that will be used as the textual representation of what this field is for',
+    table: {
+      type: { summary: 'string' },
+    },
+  },
+};
+export const Default = (args) => {
+  const items = [
+    {
+      id: 'downshift-1-item-0',
+      text: 'Option 1',
+    },
+    {
+      id: 'downshift-1-item-1',
+      text: 'Option 2',
+    },
+    {
+      id: 'downshift-1-item-2',
+      text: 'Option 3 - a disabled item',
+      disabled: true,
+    },
+    {
+      id: 'downshift-1-item-3',
+      text: 'Option 4',
+    },
+    {
+      id: 'downshift-1-item-4',
+      text: 'An example option that is really long to show what should be done to handle long text',
+    },
+    {
+      id: 'downshift-1-item-5',
+      text: 'Option 5',
+    },
+  ];
+  return (
+    <div
+      style={{
+        width: 300,
+      }}>
+      <MultiSelect
+        label="Multiselect Label"
+        id="carbon-multiselect-example"
+        titleText="Multiselect title"
+        helperText="This is helper text"
+        items={items}
+        itemToString={(item) => (item ? item.text : '')}
+        selectionFeedback="top-after-reopen"
+        {...args}
+      />
+    </div>
+  );
+};
+
+Default.args = { ...sharedArgs };
+
+export const WithInitialSelectedItems = (args) => {
+  const items = [
+    {
+      id: 'downshift-1-item-0',
+      text: 'Option 1',
+    },
+    {
+      id: 'downshift-1-item-1',
+      text: 'Option 2',
+    },
+    {
+      id: 'downshift-1-item-2',
+      text: 'Option 3 - a disabled item',
+      disabled: true,
+    },
+    {
+      id: 'downshift-1-item-3',
+      text: 'Option 4',
+    },
+    {
+      id: 'downshift-1-item-4',
+      text: 'An example option that is really long to show what should be done to handle long text',
+    },
+    {
+      id: 'downshift-1-item-5',
+      text: 'Option 5',
+    },
+  ];
+  return (
+    <div
+      style={{
+        width: 300,
+      }}>
+      <MultiSelect
+        label="Multiselect Label"
+        id="carbon-multiselect-example-2"
+        titleText="Multiselect title"
+        helperText="This is helper text"
+        items={items}
+        itemToString={(item) => (item ? item.text : '')}
+        initialSelectedItems={[items[0], items[1]]}
+        selectionFeedback="top-after-reopen"
+        {...args}
+      />
+    </div>
+  );
+};
+
+WithInitialSelectedItems.args = { ...sharedArgs };
+
+export const Filterable = (args) => {
+  const items = [
+    {
+      id: 'downshift-1-item-0',
+      text: 'Option 1',
+    },
+    {
+      id: 'downshift-1-item-1',
+      text: 'Option 2',
+    },
+    {
+      id: 'downshift-1-item-2',
+      text: 'Option 3 - a disabled item',
+      disabled: true,
+    },
+    {
+      id: 'downshift-1-item-3',
+      text: 'Option 4',
+    },
+    {
+      id: 'downshift-1-item-4',
+      text: 'An example option that is really long to show what should be done to handle long text',
+    },
+    {
+      id: 'downshift-1-item-5',
+      text: 'Option 5',
+    },
+  ];
+
+  return (
+    <div
+      style={{
+        width: 300,
+      }}>
+      <FilterableMultiSelect
+        id="carbon-multiselect-example-3"
+        titleText="FilterableMultiSelect title"
+        helperText="This is helper text"
+        items={items}
+        itemToString={(item) => (item ? item.text : '')}
+        selectionFeedback="top-after-reopen"
+        {...args}
+      />
+    </div>
+  );
+};
+
+Filterable.args = { ...sharedArgs };
+
+export const FilterableWithSelectAll = (args) => {
+  return (
+    <div
+      style={{
+        width: 300,
+      }}>
+      <FilterableMultiSelect
+        id="carbon-multiselect-example-3"
+        titleText="FilterableMultiSelect title"
+        helperText="This is helper text"
+        items={itemsWithSelectAll}
+        itemToString={(item) => (item ? item.text : '')}
+        selectionFeedback="top-after-reopen"
+        {...args}
+      />
+    </div>
+  );
+};
+
+FilterableWithSelectAll.args = { ...sharedArgs };
+
+FilterableWithSelectAll.argTypes = {
+  ...filterableArgTypes,
+};
+FilterableWithSelectAll.parameters = {
+  controls: {
+    exclude: ['label'],
+  },
+};
+Filterable.argTypes = {
+  ...filterableArgTypes,
+  onChange: {
+    action: 'onChange',
+  },
+  onMenuChange: {
+    action: 'onMenuChange',
+  },
+};
+Filterable.parameters = {
+  controls: {
+    exclude: ['label'],
+  },
+};
+
+export const WithLayerMultiSelect = (args) => (
+  <WithLayer>
+    {(layer) => (
+      <div style={{ width: 300 }}>
+        <MultiSelect
+          label="Multiselect Label"
+          id={`carbon-multiselect-example-${layer}`}
+          titleText="Multiselect title"
+          helperText="This is helper text"
+          items={items}
+          itemToString={(item) => (item ? item.text : '')}
+          selectionFeedback="top-after-reopen"
+          {...args}
+        />
+      </div>
+    )}
+  </WithLayer>
+);
+WithLayerMultiSelect.args = { ...sharedArgs };
+export const _FilterableWithLayer = (args) => (
+  <WithLayer>
+    {(layer) => (
+      <div style={{ width: 300 }}>
+        <FilterableMultiSelect
+          id={`carbon-multiselect-example-${layer}`}
+          titleText="Multiselect title"
+          helperText="This is helper text"
+          items={items}
+          itemToString={(item) => (item ? item.text : '')}
+          selectionFeedback="top-after-reopen"
+          {...args}
+        />
+      </div>
+    )}
+  </WithLayer>
+);
+
+_FilterableWithLayer.args = { ...sharedArgs };
+
+_FilterableWithLayer.argTypes = {
+  ...filterableArgTypes,
+};
+_FilterableWithLayer.parameters = {
+  controls: {
+    exclude: ['label'],
+  },
+};
+export const _Controlled = (args) => {
+  const [selectedItems, setSelectedItems] = useState(
+    items.filter((item) => item.id === 'downshift-1-item-0')
+  );
+
+  const onSelectionChanged = (value) => {
+    action('changed items')(value);
+    setSelectedItems(value);
+  };
+
+  return (
+    <div style={{ width: 300 }}>
+      <MultiSelect
+        id="carbon-multiselect-example-controlled"
+        titleText="Multiselect title"
+        label="Multiselect label"
+        items={items}
+        selectedItems={selectedItems}
+        onChange={(data) => onSelectionChanged(data.selectedItems)}
+        itemToString={(item) => (item ? item.text : '')}
+        selectionFeedback="top-after-reopen"
+        {...args}
+      />
+      <br />
+      <ButtonSet>
+        <Button
+          id="all"
+          onClick={() =>
+            setSelectedItems(items.filter((item) => !item.disabled))
+          }>
+          Select all
+        </Button>
+        <Button
+          id="clear"
+          kind="secondary"
+          onClick={() => setSelectedItems([])}>
+          Clear
+        </Button>
+      </ButtonSet>
+    </div>
+  );
+};
+
+_Controlled.args = { ...sharedArgs };
+const itemsWithSelectAll = [
+  {
+    id: 'downshift-1-item-0',
+    text: 'Editor',
+  },
+  {
+    id: 'downshift-1-item-1',
+    text: 'Owner',
+  },
+  {
+    id: 'downshift-1-item-2',
+    text: 'Uploader',
+  },
+  {
+    id: 'downshift-1-item-3',
+    text: 'Reader - a disabled item',
+    disabled: true,
+  },
+  {
+    id: 'select-all',
+    text: 'All roles',
+    isSelectAll: true,
+  },
+];
+
+export const SelectAll = (args) => {
+  const [label, setLabel] = useState('Choose options');
+
+  const onChange = (value) => {
+    if (value.selectedItems.length == 1) {
+      setLabel('Option selected');
+    } else if (value.selectedItems.length > 1) {
+      setLabel('Options selected');
+    } else {
+      setLabel('Choose options');
+    }
+  };
+
+  return (
+    <div style={{ width: 300 }}>
+      <MultiSelect
+        label={label}
+        id="carbon-multiselect-example"
+        titleText="Multiselect title"
+        helperText="This is helper text"
+        items={itemsWithSelectAll}
+        itemToString={(item) => (item ? item.text : '')}
+        selectionFeedback="top-after-reopen"
+        onChange={onChange}
+        {...args}
+      />
+    </div>
+  );
+};
+
+SelectAll.args = { ...sharedArgs };
+
+const aiLabel = (
+  <AILabel className="ai-label-container">
+    <AILabelContent>
+      <div>
+        <p className="secondary">AI Explained</p>
+        <h2 className="ai-label-heading">84%</h2>
+        <p className="secondary bold">Confidence score</p>
+        <p className="secondary">
+          Lorem ipsum dolor sit amet, di os consectetur adipiscing elit, sed do
+          eiusmod tempor incididunt ut fsil labore et dolore magna aliqua.
+        </p>
+        <hr />
+        <p className="secondary">Model type</p>
+        <p className="bold">Foundation model</p>
+      </div>
+      <AILabelActions>
+        <IconButton kind="ghost" label="View">
+          <View />
+        </IconButton>
+        <IconButton kind="ghost" label="Open Folder">
+          <FolderOpen />
+        </IconButton>
+        <IconButton kind="ghost" label="Folders">
+          <Folders />
+        </IconButton>
+        <Button>View details</Button>
+      </AILabelActions>
+    </AILabelContent>
+  </AILabel>
+);
+
+export const withAILabel = (args) => (
+  <div style={{ width: 400 }}>
+    <MultiSelect
+      label="Multiselect Label"
+      id="carbon-multiselect-example"
+      titleText="Multiselect title"
+      helperText="This is helper text"
+      items={items}
+      itemToString={(item) => (item ? item.text : '')}
+      selectionFeedback="top-after-reopen"
+      decorator={aiLabel}
+      {...args}
+    />
+  </div>
+);
+
+withAILabel.args = { ...sharedArgs };
+export const FilterableWithAILabel = (args) => (
+  <div style={{ width: 400 }}>
+    <FilterableMultiSelect
+      label="Multiselect Label"
+      id="carbon-multiselect-example"
+      titleText="Multiselect title"
+      helperText="This is helper text"
+      items={items}
+      itemToString={(item) => (item ? item.text : '')}
+      selectionFeedback="top-after-reopen"
+      decorator={aiLabel}
+      {...args}
+    />
+  </div>
+);
+
+FilterableWithAILabel.args = { ...sharedArgs };
+FilterableWithAILabel.argTypes = {
+  ...filterableArgTypes,
+};
+FilterableWithAILabel.parameters = {
+  controls: {
+    exclude: ['label'],
+  },
+};
+export const ExperimentalAutoAlign = (args) => {
+  const ref = useRef();
+  useEffect(() => {
+    ref?.current?.scrollIntoView({ block: 'center', inline: 'center' });
+  });
+  return (
+    <div style={{ width: '5000px', height: '5000px' }}>
+      <div
+        style={{
+          position: 'absolute',
+          top: '2500px',
+          left: '2500px',
+          width: 300,
+        }}>
+        <MultiSelect
+          label="Multiselect Label"
+          id="carbon-multiselect-example"
+          titleText="Multiselect title"
+          helperText="This is helper text"
+          items={items}
+          itemToString={(item) => (item ? item.text : '')}
+          selectionFeedback="top-after-reopen"
+          ref={ref}
+          autoAlign
+          {...args}
+        />
+      </div>
+    </div>
+  );
+};
+
+ExperimentalAutoAlign.argTypes = {
+  autoAlign: {
+    control: false,
+  },
+};
+
+ExperimentalAutoAlign.args = { ...sharedArgs, autoAlign: true };
+export const withToggletipLabel = (args) => {
+  return (
+    <div>
+      <MultiSelect
+        label="Multiselect Label"
+        id="carbon-multiselect-example"
+        titleText={
+          <div style={{ display: 'flex', alignItems: 'center' }}>
+            <ToggletipLabel>Multiselect title</ToggletipLabel>
+            <Toggletip>
+              <ToggletipButton label="Show information">
+                <Information />
+              </ToggletipButton>
+              <ToggletipContent>
+                <p>
+                  Lorem ipsum dolor sit amet, di os consectetur adipiscing elit,
+                  sed do eiusmod tempor incididunt ut fsil labore et dolore
+                  magna aliqua.
+                </p>
+                <ToggletipActions>
+                  <Link href="#">Link action</Link>
+                  <Button size="sm">Button</Button>
+                </ToggletipActions>
+              </ToggletipContent>
+            </Toggletip>
+          </div>
+        }
+        helperText="This is helper text"
+        items={items}
+        itemToString={(item) => (item ? item.text : '')}
+        selectionFeedback="top-after-reopen"
+        {...args}
+      />
+    </div>
+  );
+};
+
+withToggletipLabel.args = { ...sharedArgs };
+
+export const SelectAllWithDynamicItems = (args) => {
+  const [label, setLabel] = useState('Choose options');
+  const [items, setItems] = useState(itemsWithSelectAll);
+
+  const onChange = (value) => {
+    if (value.selectedItems.length == 1) {
+      setLabel('Option selected');
+    } else if (value.selectedItems.length > 1) {
+      setLabel('Options selected');
+    } else {
+      setLabel('Choose options');
+    }
+  };
+
+  function addItems() {
+    setItems((prevItems) => {
+      const now = Date.now();
+      return [
+        ...prevItems,
+        {
+          id: `item-added-via-button-1${now}`,
+          text: `item-added-via-button-1${now}`,
+        },
+        {
+          id: `item-added-via-button-2${now}`,
+          text: `item-added-via-button-2${now}`,
+        },
+      ];
+    });
+  }
+
+  return (
+    <div style={{ width: 300 }}>
+      <MultiSelect
+        label={label}
+        id="carbon-multiselect-example"
+        titleText="Multiselect title"
+        helperText="This is helper text"
+        items={items}
+        itemToString={(item) => (item ? item.text : '')}
+        selectionFeedback="top-after-reopen"
+        onChange={onChange}
+        {...args}
+      />
+      <Button onClick={addItems}>Add 2 items to the list</Button>
+    </div>
+  );
+};
+
+SelectAllWithDynamicItems.args = { ...sharedArgs };

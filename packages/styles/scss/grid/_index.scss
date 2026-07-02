@@ -1,0 +1,17 @@
+//
+// Copyright IBM Corp. 2018, 2023
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use '../config';
+@forward '@carbon/grid' show $grid-gutter, $grid-gutter-condensed,
+  $grid-breakpoints, flex-grid, css-grid;
+@use '@carbon/grid';
+
+@if config.$use-flexbox-grid == true {
+  @include grid.flex-grid();
+}
+
+@include grid.css-grid();

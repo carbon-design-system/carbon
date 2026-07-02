@@ -1,0 +1,56 @@
+//
+// Copyright IBM Corp. 2018, 2023
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use 'sass:meta';
+@use 'sass:math';
+
+/// Default font size
+/// @type Number
+/// @access public
+/// @group @carbon/layout
+$base-font-size: 16px !default;
+
+/// Convert a given px unit to a rem unit
+/// @param {Number} $px - Number with px unit
+/// @return {Number} Number with rem unit
+/// @access public
+/// @group @carbon/layout
+@function to-rem($px) {
+  @if math.unit($px) != 'px' {
+    @error "Expected argument $px to be of type `px`, instead received: `#{math.unit($px)}`";
+  }
+
+  @return math.div($px, $base-font-size) * 1rem;
+}
+
+/// This function causes an error when using sass > 1.65.0
+/// Replaced with `to-rem` function
+/// @param {Number} $px - Number with px unit
+/// @return {Number} Number with rem unit
+/// @access public
+/// @deprecated
+/// @group @carbon/layout
+@function rem($px) {
+  @if math.unit($px) != 'px' {
+    @error "Expected argument $px to be of type `px`, instead received: `#{math.unit($px)}`";
+  }
+
+  @return math.div($px, $base-font-size) * 1rem;
+}
+
+/// Convert a given px unit to a em unit
+/// @param {Number} $px - Number with px unit
+/// @return {Number} Number with em unit
+/// @access public
+/// @group @carbon/layout
+@function em($px) {
+  @if math.unit($px) != 'px' {
+    @error "Expected argument $px to be of type `px`, instead received: `#{math.unit($px)}`";
+  }
+
+  @return math.div($px, $base-font-size) * 1em;
+}

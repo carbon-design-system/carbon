@@ -1,0 +1,56 @@
+//
+// Copyright IBM Corp. 2018, 2023
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use '../../config' as *;
+
+/// Helper to add in text overflow styles to a particular node. Useful if we
+/// don't want to have display-inline: block from the text helper classes
+/// @access private
+/// @group ui-shell
+/// @example
+///   .my-custom-selector {
+///     @include text-overflow();
+///   }
+@mixin text-overflow {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/// Helper for handling selectors for the expansion state of the side-nav.
+/// This helper makes it easier to write code for children that need to respond
+/// to whether the side-nav is open, or closed. For convenience, we also
+/// optionally set properties for opacity and visibility to help with the
+/// transition animation.
+/// @access private
+/// @group ui-shell
+/// @param {Bool} $opacity [false]
+/// @param {Bool} $visibility [false]
+/// @content
+@mixin expanded($opacity: false, $visibility: false) {
+  @if $opacity == true {
+    opacity: 0;
+  }
+
+  @if $visibility == true {
+    visibility: hidden;
+  }
+
+  .#{$prefix}--side-nav:hover &,
+  // Include the fixed variant here so components can render in both expandable
+  // and fixed side navs
+  .#{$prefix}--side-nav--fixed &,
+  .#{$prefix}--side-nav--expanded & {
+    @if $visibility == true {
+      visibility: inherit;
+    }
+    @if $opacity == true {
+      opacity: 1;
+    }
+    @content;
+  }
+}

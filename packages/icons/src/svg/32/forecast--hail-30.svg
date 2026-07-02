@@ -1,0 +1,18 @@
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: none;
+      }
+    </style>
+  </defs>
+  <rect x="8.9644" y="13.5001" width="5.0716" height="1.9994" transform="translate(-6.8846 12.3788) rotate(-45)"/>
+  <rect x="15.3786" y="14.5002" width="2.2432" height="1.9994" transform="translate(-6.1273 16.2053) rotate(-44.9951)"/>
+  <circle cx="10.5" cy="22.5" r="1.5"/>
+  <circle cx="7.5" cy="18.5" r="1.5"/>
+  <circle cx="13.5" cy="18.5" r="1.5"/>
+  <path d="M14,28A10,10,0,0,1,14,8h4v5l6-6L18,1V6H14a12,12,0,0,0,0,24Z" transform="translate(0 0)"/>
+  <path d="M20,20H16v2h4v2H17v2h3v2H16v2h4a2.0027,2.0027,0,0,0,2-2V22A2.0023,2.0023,0,0,0,20,20Z" transform="translate(0 0)"/>
+  <path d="M28,30H26a2.0021,2.0021,0,0,1-2-2V22a2.0021,2.0021,0,0,1,2-2h2a2.0021,2.0021,0,0,1,2,2v6A2.0021,2.0021,0,0,1,28,30Zm-2-8v6h2V22Z" transform="translate(0 0)"/>
+  <rect id="_Transparent_Rectangle_" data-name="&lt;Transparent Rectangle&gt;" class="cls-1" width="32" height="32"/>
+</svg>

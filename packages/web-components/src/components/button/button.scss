@@ -1,0 +1,242 @@
+//
+// Copyright IBM Corp. 2019, 2026
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+$css--plex: true !default;
+
+@use '@carbon/styles/scss/config' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/utilities/convert' as *;
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/components/button' as *;
+@use '@carbon/styles/scss/components/code-snippet/code-snippet' as *;
+@use '@carbon/styles/scss/components/chat-button' as *;
+@use '@carbon/styles/scss/layout' as *;
+@use '@carbon/styles/scss/motion' as *;
+@use '@carbon/styles/scss/components/button/tokens' as button-tokens;
+
+@include code-snippet;
+
+:host(#{$prefix}-button),
+:host(#{$prefix}-modal-footer-button),
+:host(#{$prefix}-dialog-footer-button) {
+  @include emit-layout-tokens();
+
+  display: inline-flex;
+
+  ::slotted([slot='icon']) {
+    @extend .#{$prefix}--btn__icon;
+  }
+
+  .#{$prefix}--btn {
+    flex-grow: 1;
+    max-inline-size: 100%;
+  }
+}
+
+:host(#{$prefix}-button-skeleton) {
+  @include emit-layout-tokens();
+
+  display: inline-flex;
+}
+
+:host(#{$prefix}-button[isExpressive]) ::slotted([slot='icon']),
+:host(#{$prefix}-modal-footer-button[isExpressive]) ::slotted([slot='icon']),
+:host(#{$prefix}-dialog-footer-button[isExpressive]) ::slotted([slot='icon']) {
+  block-size: rem(20px);
+  inline-size: rem(20px);
+}
+
+:host(#{$prefix}-button[pagination]),
+:host(#{$prefix}-modal-footer-button[pagination]),
+:host(#{$prefix}-dialog-footer-button[pagination]) {
+  .#{$prefix}--btn {
+    padding: 0;
+    border: none;
+    border-inline-start: 1px solid $border-subtle;
+    transition: none;
+
+    &:focus {
+      border-inline-start: 0;
+      box-shadow: none;
+      outline: $spacing-01 solid $focus;
+      outline-offset: -#{$spacing-01};
+    }
+  }
+}
+
+:host(#{$prefix}-button[pagination]:not([disabled])),
+:host(#{$prefix}-modal-footer-button[pagination]:not([disabled])),
+:host(#{$prefix}-dialog-footer-button[pagination]:not([disabled])) {
+  .#{$prefix}--btn {
+    color: $icon-primary;
+
+    &:active {
+      background-color: $layer-hover;
+    }
+  }
+}
+
+:host(#{$prefix}-button[pagination][batch-action]:not([disabled])),
+:host(#{$prefix}-modal-footer-button[pagination][batch-action]:not([disabled])),
+:host(
+    #{$prefix}-dialog-footer-button[pagination][batch-action]:not([disabled])
+  ) {
+  .#{$prefix}--btn {
+    padding: $button-padding-ghost;
+
+    &:focus {
+      outline: $spacing-01 solid $layer;
+      outline-offset: -#{$spacing-01};
+    }
+  }
+
+  :host(#{$prefix}-button[pagination][has-main-content]:not([disabled])),
+  :host(
+      #{$prefix}-modal-footer-button[pagination][has-main-content]:not(
+          [disabled]
+        )
+    ),
+  :host(
+      #{$prefix}-dialog-footer-button[pagination][has-main-content]:not(
+          [disabled]
+        )
+    ) {
+    ::slotted([slot='icon']) {
+      position: static;
+      margin-inline-start: $spacing-02;
+    }
+  }
+}
+
+:host(#{$prefix}-button) {
+  .#{$prefix}--btn--icon-only {
+    align-items: center;
+    padding-block-start: 0;
+
+    &.#{$prefix}--btn--selected,
+    &.#{$prefix}--btn--expressive {
+      padding: $spacing-03;
+    }
+  }
+  .#{$prefix}--btn--ghost:not([disabled]) ::slotted([slot='icon']) {
+    fill: $icon-primary;
+  }
+}
+
+:host(#{$prefix}-button[kind='ghost']) {
+  .#{$prefix}--btn--ghost {
+    &:hover,
+    &:active {
+      outline: none;
+    }
+
+    &:not(:focus) {
+      box-shadow: none;
+    }
+  }
+}
+
+:host(#{$prefix}-button[kind='danger-ghost']) {
+  .#{$prefix}--btn--danger-ghost {
+    &:not(:focus) {
+      box-shadow: none;
+    }
+  }
+}
+
+:host(#{$prefix}-button-set),
+:host(#{$prefix}-side-panel-button-set) {
+  @extend .#{$prefix}--btn-set;
+
+  ::slotted(#{$prefix}-button) {
+    inline-size: 100%;
+    // 196px from design kit
+    max-inline-size: rem(196px);
+  }
+  ::slotted(#{$prefix}-button:not(:first-of-type)) {
+    z-index: 1;
+    box-shadow: to-rem(-1px) 0 0 0 button-tokens.$button-separator;
+  }
+
+  ::slotted(#{$prefix}-button:focus-within) {
+    box-shadow: inherit;
+  }
+
+  ::slotted(#{$prefix}-button:not(:first-of-type)[hide-margin]) {
+    box-shadow: inherit;
+  }
+}
+
+:host(#{$prefix}-button-set[stacked]) {
+  @extend .#{$prefix}--btn-set--stacked;
+
+  ::slotted(#{$prefix}-button:not(:first-of-type)) {
+    z-index: 1;
+    box-shadow: 0 to-rem(-1px) 0 0 button-tokens.$button-separator;
+  }
+
+  ::slotted(#{$prefix}-button:focus-within) {
+    box-shadow: inherit;
+  }
+
+  ::slotted(#{$prefix}-button:not(:first-of-type)[hide-margin]) {
+    box-shadow: inherit;
+  }
+}
+
+:host(#{$prefix}-button[data-context='data-table']) {
+  .#{$prefix}--btn {
+    padding-inline: $spacing-05;
+  }
+
+  .#{$prefix}--btn__icon {
+    position: static;
+    fill: $icon-on-color;
+    margin-inline-start: $spacing-03;
+
+    .st0 {
+      fill: none;
+    }
+  }
+}
+
+:host(#{$prefix}-button.#{$prefix}--batch-summary__cancel) {
+  --divider-opacity: 1;
+
+  button.#{$prefix}--btn {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    block-size: 100%;
+    min-block-size: 100%;
+    padding-inline-end: $spacing-05;
+    padding-inline-start: $spacing-05;
+
+    &::before {
+      @media (prefers-reduced-motion: reduce) {
+        transition: none;
+      }
+
+      position: absolute;
+      display: block;
+      border: none;
+      background-color: $text-on-color;
+      block-size: $spacing-05;
+      content: '';
+      inline-size: rem(1px);
+      inset-inline-start: 0;
+      opacity: var(--divider-opacity);
+      transition: opacity $duration-fast-02 motion(standard, productive);
+    }
+
+    &:hover::before {
+      opacity: 0;
+    }
+  }
+}

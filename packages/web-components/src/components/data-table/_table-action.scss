@@ -1,0 +1,103 @@
+//
+// Copyright IBM Corp. 2019, 2026
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use '@carbon/styles/scss/config' as *;
+@use '@carbon/styles/scss/utilities' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/motion' as *;
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/components/button';
+@use '@carbon/styles/scss/components/search';
+@use '@carbon/styles/scss/components/data-table/data-table';
+@use '@carbon/styles/scss/components/data-table/action';
+@use '@carbon/styles/scss/layout' as *;
+@use '@carbon/styles/scss/utilities/layout';
+//
+// Table toolbar
+//
+
+:host(#{$prefix}-table-toolbar) {
+  @extend .#{$prefix}--table-toolbar;
+  @include emit-layout-tokens();
+
+  z-index: 1;
+}
+
+:host(#{$prefix}-table-toolbar-content) {
+  @extend .#{$prefix}--toolbar-content;
+
+  ::slotted(#{$prefix}-overflow-menu) {
+    display: flex;
+    block-size: layout.size('height');
+    cursor: pointer;
+    inline-size: layout.size('height');
+    transition: background-color $duration-fast-02 motion(entrance, productive);
+  }
+}
+
+:host(#{$prefix}-table-toolbar-content[has-batch-actions]) {
+  clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+  transform: translate3d(0, layout.size('height'), 0);
+  transition:
+    transform $duration-fast-02 motion(standard, productive),
+    clip-path $duration-fast-02 motion(standard, productive);
+}
+
+:host(#{$prefix}-table-toolbar-search) {
+  @extend .#{$prefix}--toolbar-action;
+  @extend .#{$prefix}--toolbar-search-container-expandable;
+
+  flex: none;
+  block-size: layout.size('height');
+  inline-size: layout.size('height');
+  transition: flex 175ms $standard-easing;
+
+  .#{$prefix}--search-input {
+    border-block-end: 0;
+  }
+}
+
+:host(#{$prefix}-table-toolbar-search[expanded]) {
+  @extend .#{$prefix}--toolbar-search-container-active;
+
+  flex: auto;
+}
+
+:host(#{$prefix}-table-toolbar-search:hover) {
+  .#{$prefix}--search {
+    background-color: $field-hover;
+  }
+}
+
+:host(#{$prefix}-table-batch-actions) {
+  @extend .#{$prefix}--batch-actions;
+
+  box-sizing: border-box;
+  block-size: layout.size('height');
+  min-block-size: layout.size('height');
+  overflow-x: auto;
+
+  .#{$prefix}--batch-summary {
+    block-size: layout.size('height');
+    min-block-size: layout.size('height');
+
+    &__para {
+      block-size: layout.size('height');
+      line-height: layout.size('height');
+    }
+  }
+
+  .#{$prefix}--action-list {
+    block-size: layout.size('height');
+  }
+}
+
+:host(#{$prefix}-table-batch-actions[active]) {
+  @extend .#{$prefix}--batch-actions--active;
+}
+
+@include emit-layout-tokens-to-shadow-host(#{$prefix}-table-toolbar);

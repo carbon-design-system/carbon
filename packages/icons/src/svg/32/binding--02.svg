@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="icon" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: none;
+      }
+
+      .cls-1, .cls-2 {
+        stroke-width: 0px;
+      }
+    </style>
+  </defs>
+  <polygon class="cls-2" points="25 8 23.3721 9.1621 28.542 16 23.386 22.8379 25.0139 24 31 16 25 8"/>
+  <polygon class="cls-2" points="20 8 18.3721 9.1621 23.542 16 18.386 22.8379 20.0139 24 26 16 20 8"/>
+  <polygon class="cls-2" points="8.6279 9.1621 7 8 1 16 6.9861 24 8.614 22.8379 3.458 16 8.6279 9.1621"/>
+  <polygon class="cls-2" points="12 8 6 16 11.9861 24 13.614 22.8379 8.458 16 13.6279 9.1621 12 8"/>
+  <rect id="_Transparent_Rectangle_" data-name="&amp;lt;Transparent Rectangle&amp;gt;" class="cls-1" width="32" height="32"/>
+</svg>

@@ -1,0 +1,215 @@
+/**
+ * Copyright IBM Corp. 2016, 2023
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+import React from 'react';
+import mdx from './StructuredList.mdx';
+import { WithLayer } from '../../../.storybook/templates/WithLayer';
+
+import {
+  StructuredListWrapper,
+  StructuredListHead,
+  StructuredListBody,
+  StructuredListRow,
+  StructuredListInput,
+  StructuredListCell,
+} from './';
+import { CheckmarkFilled } from '@carbon/icons-react';
+const prefix = 'cds';
+import StructuredListSkeleton from './StructuredList.Skeleton';
+
+export default {
+  title: 'Components/StructuredList',
+  component: StructuredListWrapper,
+  subcomponents: {
+    StructuredListHead,
+    StructuredListBody,
+    StructuredListRow,
+    StructuredListInput,
+    StructuredListCell,
+  },
+  parameters: {
+    docs: {
+      page: mdx,
+    },
+  },
+};
+
+export const Default = (args) => {
+  return (
+    <StructuredListWrapper {...args}>
+      <StructuredListHead>
+        <StructuredListRow head>
+          <StructuredListCell head>ColumnA</StructuredListCell>
+          <StructuredListCell head>ColumnB</StructuredListCell>
+          <StructuredListCell head>ColumnC</StructuredListCell>
+        </StructuredListRow>
+      </StructuredListHead>
+      <StructuredListBody>
+        <StructuredListRow>
+          <StructuredListCell noWrap>Row 1</StructuredListCell>
+          <StructuredListCell>Row 1</StructuredListCell>
+          <StructuredListCell>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc dui
+            magna, finibus id tortor sed, aliquet bibendum augue. Aenean posuere
+            sem vel euismod dignissim. Nulla ut cursus dolor. Pellentesque
+            vulputate nisl a porttitor interdum.
+          </StructuredListCell>
+        </StructuredListRow>
+        <StructuredListRow>
+          <StructuredListCell noWrap>Row 2</StructuredListCell>
+          <StructuredListCell>Row 2</StructuredListCell>
+          <StructuredListCell>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc dui
+            magna, finibus id tortor sed, aliquet bibendum augue. Aenean posuere
+            sem vel euismod dignissim. Nulla ut cursus dolor. Pellentesque
+            vulputate nisl a porttitor interdum.
+          </StructuredListCell>
+        </StructuredListRow>
+      </StructuredListBody>
+    </StructuredListWrapper>
+  );
+};
+
+Default.args = {
+  isCondensed: false,
+  isFlush: false,
+};
+
+Default.parameters = {
+  controls: {
+    exclude: ['selection'],
+  },
+};
+Default.argTypes = {
+  isCondensed: {
+    control: {
+      type: 'boolean',
+    },
+  },
+  isFlush: {
+    control: {
+      type: 'boolean',
+    },
+  },
+};
+const structuredListBodyRowGenerator = (numRows) => {
+  return Array.apply(null, Array(numRows)).map((n, i) => (
+    <StructuredListRow key={`row-${i}`} id={`row-${i}`}>
+      <StructuredListCell>Row {i}</StructuredListCell>
+      <StructuredListCell>Row {i}</StructuredListCell>
+      <StructuredListCell>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc dui magna,
+        finibus id tortor sed, aliquet bibendum augue. Aenean posuere sem vel
+        euismod dignissim. Nulla ut cursus dolor. Pellentesque vulputate nisl a
+        porttitor interdum.
+      </StructuredListCell>
+      <StructuredListInput
+        id={`row-${i}`}
+        value={`row-${i}`}
+        title={`row-${i}`}
+        name="row-0"
+        aria-label={`row-${i}`}
+      />
+      <StructuredListCell>
+        <CheckmarkFilled
+          className={`${prefix}--structured-list-svg`}
+          aria-label="select an option">
+          <title>select an option</title>
+        </CheckmarkFilled>
+      </StructuredListCell>
+    </StructuredListRow>
+  ));
+};
+
+export const Selection = (args) => {
+  return (
+    <StructuredListWrapper selection {...args}>
+      <StructuredListHead>
+        <StructuredListRow head>
+          <StructuredListCell head>ColumnA</StructuredListCell>
+          <StructuredListCell head>ColumnB</StructuredListCell>
+          <StructuredListCell head>ColumnC</StructuredListCell>
+        </StructuredListRow>
+      </StructuredListHead>
+      <StructuredListBody>
+        {structuredListBodyRowGenerator(4)}
+      </StructuredListBody>
+    </StructuredListWrapper>
+  );
+};
+
+export const InitialSelection = (args) => {
+  return (
+    <StructuredListWrapper selection {...args} selectedInitialRow="row-2">
+      <StructuredListHead>
+        <StructuredListRow head>
+          <StructuredListCell head>ColumnA</StructuredListCell>
+          <StructuredListCell head>ColumnB</StructuredListCell>
+          <StructuredListCell head>ColumnC</StructuredListCell>
+        </StructuredListRow>
+      </StructuredListHead>
+      <StructuredListBody>
+        {structuredListBodyRowGenerator(4)}
+      </StructuredListBody>
+    </StructuredListWrapper>
+  );
+};
+
+const sharedParameters = {
+  controls: {
+    exclude: ['isFlush', 'selection'],
+  },
+};
+
+Selection.parameters = { ...sharedParameters };
+
+InitialSelection.parameters = { ...sharedParameters };
+
+export const WithBackgroundLayer = () => {
+  return (
+    <WithLayer>
+      <StructuredListWrapper selection>
+        <StructuredListHead>
+          <StructuredListRow head>
+            <StructuredListCell head>ColumnA</StructuredListCell>
+            <StructuredListCell head>ColumnB</StructuredListCell>
+            <StructuredListCell head>ColumnC</StructuredListCell>
+          </StructuredListRow>
+        </StructuredListHead>
+        <StructuredListBody>
+          {structuredListBodyRowGenerator(4)}
+        </StructuredListBody>
+      </StructuredListWrapper>
+    </WithLayer>
+  );
+};
+
+WithBackgroundLayer.parameters = { ...sharedParameters };
+
+export const Skeleton = (args) => (
+  <div style={{ width: '800px' }}>
+    <StructuredListSkeleton {...args} />
+  </div>
+);
+
+Skeleton.args = {
+  rowCount: 5,
+};
+
+Skeleton.parameters = {
+  controls: {
+    include: ['rowCount', 'selectedInitialRow'],
+  },
+};
+
+Skeleton.argTypes = {
+  rowCount: {
+    control: {
+      type: 'number',
+    },
+  },
+};

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="320px" height="180px" viewBox="0 0 320 180" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>tile</title>
+    <defs>
+        <polygon id="path-1" points="5 0 10 5 9.293 5.707 5 1.414 0.707 5.707 0 5"></polygon>
+    </defs>
+    <g id="tile" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <rect id="Rectangle" fill="#F4F4F4" x="72" y="41" width="176" height="98"></rect>
+        <g id="Group" transform="translate(216.000000, 112.000000)">
+            <g id="Group" transform="translate(8.000000, 8.000000) scale(1, -1) translate(-8.000000, -8.000000) ">
+                <g id="chevron--up" transform="translate(3.000000, 5.000000)">
+                    <mask id="mask-2" fill="white">
+                        <use xlink:href="#path-1"></use>
+                    </mask>
+                    <use id="Mask" fill="#000000" fill-rule="nonzero" xlink:href="#path-1"></use>
+                    <g id="Group" mask="url(#mask-2)">
+                        <g transform="translate(-3.000000, -5.000000)" id="icon-color">
+                            <rect id="Rectangle" fill="#000000" x="0" y="0" width="40" height="40"></rect>
+                        </g>
+                    </g>
+                </g>
+                <polygon id="transparent-rectangle" transform="translate(8.000000, 8.000000) rotate(-90.000000) translate(-8.000000, -8.000000) " points="1.77635684e-15 -7.90206676e-15 16 -7.90206676e-15 16 16 1.77635684e-15 16"></polygon>
+            </g>
+        </g>
+    </g>
+</svg>

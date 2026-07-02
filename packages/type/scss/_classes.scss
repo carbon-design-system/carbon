@@ -1,0 +1,42 @@
+//
+// Copyright IBM Corp. 2018, 2023
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use 'sass:map';
+@use 'font-family' as *;
+@use 'prefix' as *;
+@use 'styles' as *;
+
+/// Create type classes for font families, weights, styles
+/// @access public
+/// @group @carbon/type
+@mixin type-classes {
+  // Font families
+  @each $name, $value in $font-families {
+    .#{$prefix}--type-#{$name} {
+      font-family: $value;
+    }
+  }
+
+  // Font weights
+  @each $name, $value in $font-weights {
+    .#{$prefix}--type-#{$name} {
+      font-weight: $value;
+    }
+  }
+
+  // Font styles
+  .#{$prefix}--type-italic {
+    font-style: italic;
+  }
+
+  // Type styles
+  @each $name, $value in $tokens {
+    .#{$prefix}--type-#{$name} {
+      @include type-style($name, map.has-key($value, breakpoints));
+    }
+  }
+}

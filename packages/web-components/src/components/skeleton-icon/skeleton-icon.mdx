@@ -1,0 +1,29 @@
+import { ArgTypes, Canvas, Markdown, Meta } from '@storybook/addon-docs/blocks';
+import { cdnJs } from '../../globals/internal/storybook-cdn';
+import * as SkeletonIconStories from './skeleton-icon.stories';
+
+<Meta of={SkeletonIconStories} />
+
+# Skeleton icon
+
+[Source code](https://github.com/carbon-design-system/carbon/tree/main/packages/web-components/src/components/skeleton-icon)
+&nbsp;|&nbsp;
+[Usage guidelines](https://www.carbondesignsystem.com/patterns/loading-pattern/#skeleton-states)
+
+## Table of Contents
+
+- [Overview](#overview)
+- [CDN](#cdn)
+- [Feedback](#feedback)
+
+## Overview
+
+<Canvas of={SkeletonIconStories.Default} />
+
+<Markdown>{`${cdnJs({ components: ['skeleton-icon'] })}`}</Markdown>
+
+## Feedback
+
+Help us improve this component by providing feedback, asking questions on Slack,
+or updating this file on
+[GitHub](https://github.com/carbon-design-system/carbon/edit/main/packages/web-components/src/components/skeleton-icon/skeleton-icon.mdx).

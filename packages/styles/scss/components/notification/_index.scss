@@ -1,0 +1,22 @@
+//
+// Copyright IBM Corp. 2018, 2023
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@forward './tokens';
+@forward 'inline-notification';
+@forward 'toast-notification';
+@forward 'actionable-notification';
+
+@use '../../theme';
+@use './tokens';
+@use './inline-notification';
+@use './toast-notification';
+@use './actionable-notification';
+
+@include theme.add-component-tokens(tokens.$notification-tokens);
+@include inline-notification.inline-notification;
+@include toast-notification.toast-notification;
+@include actionable-notification.actionable-notification;

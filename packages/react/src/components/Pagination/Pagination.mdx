@@ -1,0 +1,90 @@
+import { ArgTypes, Meta, Canvas } from '@storybook/addon-docs/blocks';
+import * as PaginationStories from './Pagination.stories';
+import Pagination from '../Pagination';
+import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
+
+<Meta isTemplate />
+
+# Pagination
+
+[Source code](https://github.com/carbon-design-system/carbon/tree/main/packages/react/src/components/Pagination)
+&nbsp;|&nbsp;
+[Usage guidelines](https://www.carbondesignsystem.com/components/pagination/usage)
+&nbsp;|&nbsp;
+[Accessibility](https://www.carbondesignsystem.com/components/pagination/accessibility)
+
+{/* <!-- START doctoc generated TOC please keep comment here to allow auto update --> <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE --> */}
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Multiple pagination components](#multiple-pagination-components)
+- [Pagination unknown pages](#pagination-unknown-pages)
+- [Pagination with custom page sizes label](#pagination-with-custom-page-sizes-label)
+- [Component API](#component-api)
+- [Feedback](#feedback)
+
+{/* <!-- END doctoc generated TOC please keep comment here to allow auto update --> */}
+
+## Overview
+
+<Canvas
+  of={PaginationStories.Default}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(PaginationStories.Default),
+    },
+  ]}
+/>
+
+## Multiple pagination components
+
+<Canvas
+  of={PaginationStories.MultiplePaginationComponents}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () =>
+        stackblitzPrefillConfig(PaginationStories.MultiplePaginationComponents),
+    },
+  ]}
+/>
+
+## Pagination unknown pages
+
+<Canvas
+  of={PaginationStories.PaginationUnknownPages}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () =>
+        stackblitzPrefillConfig(PaginationStories.PaginationUnknownPages),
+    },
+  ]}
+/>
+
+## Pagination with custom page sizes label
+
+<Canvas
+  of={PaginationStories.PaginationWithCustomPageSizesLabel}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () =>
+        stackblitzPrefillConfig(
+          PaginationStories.PaginationWithCustomPageSizesLabel
+        ),
+    },
+  ]}
+/>
+
+## Component API
+
+<ArgTypes />
+
+## Feedback
+
+Help us improve this component by providing feedback, asking questions on Slack,
+or updating this file on
+[GitHub](https://github.com/carbon-design-system/carbon/edit/main/packages/react/src/components/Pagination/Pagination.mdx).

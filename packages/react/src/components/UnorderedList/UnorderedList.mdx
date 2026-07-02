@@ -1,0 +1,58 @@
+import { ArgTypes, Meta, Canvas } from '@storybook/addon-docs/blocks';
+import * as UnorderedList from './UnorderedList.stories';
+import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
+
+<Meta isTemplate />
+
+# UnorderedList
+
+[Source code](https://github.com/carbon-design-system/carbon/tree/main/packages/react/src/components/UnorderedList)
+&nbsp;|&nbsp;
+[Usage guidelines](https://www.carbondesignsystem.com/components/list/usage)
+&nbsp;|&nbsp;
+[Accessibility](https://www.carbondesignsystem.com/components/list/accessibility)
+
+{/* <!-- START doctoc generated TOC please keep comment here to allow auto update --> <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE --> */}
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Nested](#nested)
+- [Component API](#component-api)
+- [Feedback](#feedback)
+
+{/* <!-- END doctoc generated TOC please keep comment here to allow auto update --> */}
+
+## Overview
+
+<Canvas
+  of={UnorderedList.Default}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(UnorderedList.Default),
+    },
+  ]}
+/>
+
+## Nested
+
+<Canvas
+  of={UnorderedList.Nested}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(UnorderedList.Nested),
+    },
+  ]}
+/>
+
+## Component API
+
+<ArgTypes />
+
+## Feedback
+
+Help us improve this component by providing feedback, asking questions on Slack,
+or updating this file on
+[GitHub](https://github.com/carbon-design-system/carbon/edit/main/packages/react/src/components/UnorderedList/UnorderedList.mdx).

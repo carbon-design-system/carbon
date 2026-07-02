@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="icon" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: none;
+      }
+    </style>
+  </defs>
+  <g id="_Compound_Path_" data-name="&amp;lt;Compound Path&amp;gt;">
+    <path d="M29.9916,19h-2v-7c0-2.7614-2.2386-5-5-5h-8.9948v-2h8.9948c3.866,0,7,3.134,7,7v7ZM11.9916,28h-3c-3.86,0-7-3.14-7-7v-5h2v5c0,2.757,2.243,5,5,5h3v2Z"/>
+    <path d="M9.9916,14h-4c-1.103,0-2-.897-2-2v-2h2v2h4V2h2v10c0,1.103-.897,2-2,2Z"/>
+    <path d="M28.15,26l-2.58,2.58,1.41,1.42,4-4-4-4-1.42,1.41,2.59,2.59ZM16.81,26l2.58-2.58-1.41-1.42-4,4,4,4,1.42-1.41-2.59-2.59ZM21.98,31l-1.915-.577,2.915-9.423,1.915.577-2.915,9.423Z"/>
+  </g>
+  <rect id="_Tansparent_Rectangle_" data-name="&amp;lt;Tansparent Rectangle&amp;gt;" class="cls-1" width="32" height="32"/>
+</svg>

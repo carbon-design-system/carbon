@@ -1,0 +1,382 @@
+/**
+ * Copyright IBM Corp. 2024, 2026
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+import { fireEvent, render, screen } from '@testing-library/react';
+
+import ControlledPasswordInput from '../ControlledPasswordInput';
+import React from 'react';
+
+const prefix = 'cds';
+
+describe('ControlledPasswordInput Component', () => {
+  beforeEach(() => {
+    // Mock console.warn before each test
+    jest.spyOn(console, 'warn').mockImplementation(() => {});
+  });
+
+  afterEach(() => {
+    jest.restoreAllMocks();
+  });
+
+  it('renders the component properly', () => {
+    render(
+      <ControlledPasswordInput
+        id="password-input"
+        labelText="Password"
+        placeholder="Enter password"
+      />
+    );
+
+    const input = screen.getByPlaceholderText('Enter password');
+    expect(input).toBeInTheDocument();
+  });
+
+  it('renders the component with initial type as password', () => {
+    render(
+      <ControlledPasswordInput
+        id="password-input"
+        labelText="Password"
+        placeholder="Enter password"
+        showPasswordLabel="Show password"
+        hidePasswordLabel="Hide password"
+      />
+    );
+
+    const input = screen.getByPlaceholderText('Enter password');
+    expect(input).toBeInTheDocument();
+    expect(input).toHaveAttribute('type', 'password');
+  });
+
+  it('allows user to enter text into the input field', () => {
+    render(
+      <ControlledPasswordInput
+        id="password-input"
+        labelText="Password"
+        placeholder="Enter password"
+        showPasswordLabel="Show password"
+        hidePasswordLabel="Hide password"
+      />
+    );
+
+    const input = screen.getByPlaceholderText('Enter password');
+    fireEvent.change(input, { target: { value: 'mypassword' } });
+
+    expect(input).toHaveValue('mypassword');
+  });
+
+  it('calls onChange handler when value changes', () => {
+    const handleChange = jest.fn();
+
+    render(
+      <ControlledPasswordInput
+        id="password-input"
+        labelText="Password"
+        placeholder="Enter password"
+        showPasswordLabel="Show password"
+        hidePasswordLabel="Hide password"
+        onChange={handleChange}
+      />
+    );
+
+    const input = screen.getByPlaceholderText('Enter password');
+    fireEvent.change(input, { target: { value: 'newpassword' } });
+
+    expect(handleChange).toHaveBeenCalledTimes(1);
+  });
+
+  it('calls onBlur handler when input loses focus', () => {
+    const handleBlur = jest.fn();
+
+    render(
+      <ControlledPasswordInput
+        id="password-input"
+        labelText="Password"
+        placeholder="Enter password"
+        showPasswordLabel="Show password"
+        hidePasswordLabel="Hide password"
+        onBlur={handleBlur}
+      />
+    );
+
+    const input = screen.getByPlaceholderText('Enter password');
+    input.focus();
+    input.blur();
+
+    expect(handleBlur).toHaveBeenCalledTimes(1);
+  });
+
+  it('has a button with accessible role and label', () => {
+    render(
+      <ControlledPasswordInput
+        id="password-input"
+        labelText="Password"
+        placeholder="Enter password"
+        showPasswordLabel="Show password"
+        hidePasswordLabel="Hide password"
+      />
+    );
+
+    const toggleButton = screen.getByRole('button', { name: /show password/i });
+    expect(toggleButton).toBeInTheDocument();
+    expect(toggleButton).toHaveAccessibleName('Show password');
+  });
+
+  it('renders controlled input with value from props', () => {
+    const { rerender } = render(
+      <ControlledPasswordInput
+        id="password-input"
+        labelText="Password"
+        placeholder="Enter password"
+        showPasswordLabel="Show password"
+        hidePasswordLabel="Hide password"
+        value="initialValue"
+      />
+    );
+
+    const input = screen.getByPlaceholderText('Enter password');
+    expect(input).toHaveValue('initialValue');
+
+    rerender(
+      <ControlledPasswordInput
+        id="password-input"
+        labelText="Password"
+        placeholder="Enter password"
+        showPasswordLabel="Show password"
+        hidePasswordLabel="Hide password"
+        value="newValue"
+      />
+    );
+
+    expect(input).toHaveValue('newValue');
+  });
+
+  it('does not toggle visibility when disabled', () => {
+    render(
+      <ControlledPasswordInput
+        id="password-input"
+        labelText="Password"
+        placeholder="Enter password"
+        showPasswordLabel="Show password"
+        hidePasswordLabel="Hide password"
+        disabled
+      />
+    );
+
+    const input = screen.getByPlaceholderText('Enter password');
+    const toggleButton = screen.getByRole('button', { name: /show password/i });
+
+    fireEvent.click(toggleButton);
+
+    expect(input).toHaveAttribute('type', 'password');
+    expect(toggleButton).toHaveTextContent('Show password');
+  });
+
+  it('handles input without value prop (uncontrolled)', () => {
+    render(
+      <ControlledPasswordInput
+        id="password-input"
+        labelText="Password"
+        placeholder="Enter password"
+        showPasswordLabel="Show password"
+        hidePasswordLabel="Hide password"
+      />
+    );
+
+    const input = screen.getByPlaceholderText('Enter password');
+    fireEvent.change(input, { target: { value: 'uncontrolledValue' } });
+
+    expect(input).toHaveValue('uncontrolledValue');
+  });
+
+  it('associates the label with the input field', () => {
+    render(
+      <ControlledPasswordInput
+        id="password-input"
+        labelText="Password"
+        placeholder="Enter password"
+      />
+    );
+
+    const label = screen.getByText('Password');
+    const input = screen.getByPlaceholderText('Enter password');
+
+    expect(label).toHaveAttribute('for', 'password-input');
+    expect(input).toHaveAttribute('id', 'password-input');
+  });
+
+  it('calls onFocus handler when input gains focus', () => {
+    const handleFocus = jest.fn();
+
+    render(
+      <ControlledPasswordInput
+        id="password-input"
+        labelText="Password"
+        placeholder="Enter password"
+        showPasswordLabel="Show password"
+        hidePasswordLabel="Hide password"
+        onFocus={handleFocus}
+      />
+    );
+
+    const input = screen.getByPlaceholderText('Enter password');
+    input.focus();
+
+    expect(handleFocus).toHaveBeenCalledTimes(1);
+  });
+
+  it('renders correctly without show/hide password labels', () => {
+    render(
+      <ControlledPasswordInput
+        id="password-input"
+        labelText="Password"
+        placeholder="Enter password"
+      />
+    );
+
+    const input = screen.getByPlaceholderText('Enter password');
+    expect(input).toBeInTheDocument();
+
+    const toggleButton = screen.getByRole('button');
+    expect(toggleButton).toBeInTheDocument();
+  });
+
+  it('does not call onChange when input is disabled', () => {
+    const handleChange = jest.fn();
+
+    render(
+      <ControlledPasswordInput
+        id="password-input"
+        labelText="Password"
+        placeholder="Enter password"
+        showPasswordLabel="Show password"
+        hidePasswordLabel="Hide password"
+        disabled
+        onChange={handleChange}
+      />
+    );
+
+    const input = screen.getByPlaceholderText('Enter password');
+    fireEvent.change(input, { target: { value: 'newpassword' } });
+
+    expect(handleChange).not.toHaveBeenCalled();
+  });
+
+  it('should render helperText with value 0', () => {
+    render(
+      <ControlledPasswordInput
+        id="password-input"
+        labelText="label"
+        helperText={0}
+      />
+    );
+    expect(screen.getByText('0')).toBeInTheDocument();
+  });
+
+  it('should not render helperText when helperText is an empty string', () => {
+    const { container } = render(
+      <ControlledPasswordInput
+        id="password-input"
+        labelText="Password"
+        helperText=""
+      />
+    );
+
+    expect(
+      container.querySelector(`.${prefix}--form__helper-text`)
+    ).not.toBeInTheDocument();
+    expect(screen.getByLabelText('Password')).not.toHaveAttribute(
+      'aria-describedby'
+    );
+  });
+
+  it('should not set `aria-describedby` when `helperText` is omitted', () => {
+    render(
+      <ControlledPasswordInput id="password-input" labelText="Password" />
+    );
+
+    expect(screen.getByLabelText('Password')).not.toHaveAttribute(
+      'aria-describedby'
+    );
+  });
+
+  it('should set `aria-describedby` when `helperText` is `0`', () => {
+    render(
+      <ControlledPasswordInput
+        id="password-input"
+        labelText="label"
+        helperText={0}
+      />
+    );
+
+    const input = screen.getByLabelText('label');
+    const helperId = input.getAttribute('aria-describedby');
+
+    expect(helperId).toMatch(/^controlled-password-helper-text-/);
+    expect(document.getElementById(helperId)).toHaveTextContent('0');
+  });
+
+  it('should set `aria-errormessage` to the invalid message element id', () => {
+    render(
+      <ControlledPasswordInput
+        id="password-input"
+        labelText="Password"
+        invalid
+        invalidText="This is invalid text"
+      />
+    );
+
+    const input = screen.getByLabelText('Password');
+    expect(input).toHaveAttribute(
+      'aria-errormessage',
+      'password-input-error-msg'
+    );
+    expect(input).toHaveAttribute('aria-invalid', 'true');
+    expect(screen.getByText('This is invalid text')).toHaveAttribute(
+      'id',
+      'password-input-error-msg'
+    );
+  });
+
+  it('should use `aria-describedby` for helper text when not invalid', () => {
+    render(
+      <ControlledPasswordInput
+        id="password-input"
+        labelText="Password"
+        helperText="Helper copy"
+      />
+    );
+
+    const helper = screen.getByText('Helper copy');
+    const input = screen.getByLabelText('Password');
+    expect(input).toHaveAttribute('aria-describedby', helper.id);
+    expect(input).not.toHaveAttribute('aria-errormessage');
+  });
+
+  it('should not set `aria-describedby` to helper id when invalid', () => {
+    render(
+      <ControlledPasswordInput
+        id="password-input"
+        labelText="Password"
+        invalid
+        invalidText="Error"
+        helperText="Helper copy"
+      />
+    );
+
+    const input = screen.getByLabelText('Password');
+    expect(input).toHaveAttribute(
+      'aria-errormessage',
+      'password-input-error-msg'
+    );
+    expect(input).not.toHaveAttribute('aria-describedby');
+  });
+
+  it('should render labelText with value 0', () => {
+    render(<ControlledPasswordInput id="password-input" labelText={0} />);
+    expect(screen.getByText('0')).toBeInTheDocument();
+  });
+});

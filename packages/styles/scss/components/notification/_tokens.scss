@@ -1,0 +1,356 @@
+//
+// Copyright IBM Corp. 2018, 2023
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use 'sass:color';
+@use 'sass:map';
+@use 'sass:list';
+@use '../../config';
+@use '../../colors';
+@use '../../themes';
+@use '../../theme';
+@use '../../utilities/component-tokens';
+@use '@carbon/themes/scss/component-tokens' as notification;
+
+@use '../button/tokens' as button-tokens;
+
+$notification-background-error: (
+  fallback: map.get(notification.$notification-background-error, white-theme),
+  values: (
+    (
+      theme: themes.$white,
+      value: map.get(notification.$notification-background-error, white-theme),
+    ),
+    (
+      theme: themes.$g10,
+      value: map.get(notification.$notification-background-error, g-10),
+    ),
+    (
+      theme: themes.$g90,
+      value: map.get(notification.$notification-background-error, g-90),
+    ),
+    (
+      theme: themes.$g100,
+      value: map.get(notification.$notification-background-error, g-100),
+    ),
+  ),
+) !default;
+
+$notification-background-success: (
+  fallback: map.get(notification.$notification-background-success, white-theme),
+  values: (
+    (
+      theme: themes.$white,
+      value: map.get(notification.$notification-background-success, white-theme),
+    ),
+    (
+      theme: themes.$g10,
+      value: map.get(notification.$notification-background-success, g-10),
+    ),
+    (
+      theme: themes.$g90,
+      value: map.get(notification.$notification-background-success, g-90),
+    ),
+    (
+      theme: themes.$g100,
+      value: map.get(notification.$notification-background-success, g-100),
+    ),
+  ),
+) !default;
+
+$notification-background-info: (
+  fallback: map.get(notification.$notification-background-info, white-theme),
+  values: (
+    (
+      theme: themes.$white,
+      value: map.get(notification.$notification-background-info, white-theme),
+    ),
+    (
+      theme: themes.$g10,
+      value: map.get(notification.$notification-background-info, g-10),
+    ),
+    (
+      theme: themes.$g90,
+      value: map.get(notification.$notification-background-info, g-90),
+    ),
+    (
+      theme: themes.$g100,
+      value: map.get(notification.$notification-background-info, g-100),
+    ),
+  ),
+) !default;
+
+$notification-background-warning: (
+  fallback: map.get(notification.$notification-background-warning, white-theme),
+  values: (
+    (
+      theme: themes.$white,
+      value: map.get(notification.$notification-background-warning, white-theme),
+    ),
+    (
+      theme: themes.$g10,
+      value: map.get(notification.$notification-background-warning, g-10),
+    ),
+    (
+      theme: themes.$g90,
+      value: map.get(notification.$notification-background-warning, g-90),
+    ),
+    (
+      theme: themes.$g100,
+      value: map.get(notification.$notification-background-warning, g-100),
+    ),
+  ),
+) !default;
+
+$notification-action-hover: (
+  fallback: map.get(notification.$notification-background-info, white-theme),
+  values: (
+    (
+      theme: themes.$white,
+      value: map.get(notification.$notification-action-hover, white-theme),
+    ),
+    (
+      theme: themes.$g10,
+      value: map.get(notification.$notification-action-hover, g-10),
+    ),
+    (
+      theme: themes.$g90,
+      value: theme.$layer-hover,
+    ),
+    (
+      theme: themes.$g100,
+      value: theme.$layer-hover,
+    ),
+  ),
+) !default;
+
+$notification-action-tertiary-inverse: (
+  fallback: map.get(button-tokens.$button-tokens, button-tertiary, fallback),
+  values: (
+    (
+      theme: themes.$white,
+      value:
+        map.get(notification.$notification-action-tertiary-inverse, white-theme),
+    ),
+    (
+      theme: themes.$g10,
+      value: map.get(notification.$notification-action-tertiary-inverse, g-10),
+    ),
+    (
+      theme: themes.$g90,
+      value: map.get(notification.$notification-action-tertiary-inverse, g-90),
+    ),
+    (
+      theme: themes.$g100,
+      value: map.get(notification.$notification-action-tertiary-inverse, g-100),
+    ),
+  ),
+) !default;
+
+$notification-action-tertiary-inverse-active: (
+  fallback:
+    map.get(button-tokens.$button-tokens, button-tertiary-active, fallback),
+  values: (
+    (
+      theme: themes.$white,
+      value:
+        map.get(
+          notification.$notification-action-tertiary-inverse-active,
+          white-theme
+        ),
+    ),
+    (
+      theme: themes.$g10,
+      value:
+        map.get(notification.$notification-action-tertiary-inverse-active, g-10),
+    ),
+    (
+      theme: themes.$g90,
+      value:
+        map.get(notification.$notification-action-tertiary-inverse-active, g-90),
+    ),
+    (
+      theme: themes.$g100,
+      value:
+        map.get(
+          notification.$notification-action-tertiary-inverse-active,
+          g-100
+        ),
+    ),
+  ),
+) !default;
+
+$notification-action-tertiary-inverse-hover: (
+  fallback:
+    map.get(button-tokens.$button-tokens, button-tertiary-hover, fallback),
+  values: (
+    (
+      theme: themes.$white,
+      value:
+        map.get(
+          notification.$notification-action-tertiary-inverse-hover,
+          white-theme
+        ),
+    ),
+    (
+      theme: themes.$g10,
+      value:
+        map.get(notification.$notification-action-tertiary-inverse-hover, g-10),
+    ),
+    (
+      theme: themes.$g90,
+      value:
+        map.get(notification.$notification-action-tertiary-inverse-hover, g-90),
+    ),
+    (
+      theme: themes.$g100,
+      value:
+        map.get(notification.$notification-action-tertiary-inverse-hover, g-100),
+    ),
+  ),
+) !default;
+
+$notification-action-tertiary-inverse-text: (
+  fallback:
+    map.get(
+      notification.$notification-action-tertiary-inverse-text,
+      white-theme
+    ),
+  values: (
+    (
+      theme: themes.$white,
+      value:
+        map.get(
+          notification.$notification-action-tertiary-inverse-text,
+          white-theme
+        ),
+    ),
+    (
+      theme: themes.$g10,
+      value:
+        map.get(notification.$notification-action-tertiary-inverse-text, g-10),
+    ),
+    (
+      theme: themes.$g90,
+      value:
+        map.get(notification.$notification-action-tertiary-inverse-text, g-90),
+    ),
+    (
+      theme: themes.$g100,
+      value:
+        map.get(notification.$notification-action-tertiary-inverse-text, g-100),
+    ),
+  ),
+) !default;
+
+$notification-action-tertiary-inverse-text-on-color-disabled: (
+  fallback:
+    map.get(
+      notification.$notification-action-tertiary-inverse-text-on-color-disabled,
+      white-theme
+    ),
+  values: (
+    (
+      theme: themes.$white,
+      value:
+        map.get(
+          notification.$notification-action-tertiary-inverse-text-on-color-disabled,
+          white-theme
+        ),
+    ),
+    (
+      theme: themes.$g10,
+      value:
+        map.get(
+          notification.$notification-action-tertiary-inverse-text-on-color-disabled,
+          g-10
+        ),
+    ),
+    (
+      theme: themes.$g90,
+      value:
+        map.get(
+          notification.$notification-action-tertiary-inverse-text-on-color-disabled,
+          g-90
+        ),
+    ),
+    (
+      theme: themes.$g100,
+      value:
+        map.get(
+          notification.$notification-action-tertiary-inverse-text-on-color-disabled,
+          g-100
+        ),
+    ),
+  ),
+) !default;
+
+$notification-tokens: (
+  notification-background-error: $notification-background-error,
+  notification-background-success: $notification-background-success,
+  notification-background-info: $notification-background-info,
+  notification-background-warning: $notification-background-warning,
+  notification-action-hover: $notification-action-hover,
+  notification-action-tertiary-inverse: $notification-action-tertiary-inverse,
+  notification-action-tertiary-inverse-active:
+    $notification-action-tertiary-inverse-active,
+  notification-action-tertiary-inverse-hover:
+    $notification-action-tertiary-inverse-hover,
+  notification-action-tertiary-inverse-text:
+    $notification-action-tertiary-inverse-text,
+  notification-action-tertiary-inverse-text-on-color-disabled:
+    $notification-action-tertiary-inverse-text-on-color-disabled,
+);
+
+$notification-background-error: component-tokens.get-var(
+  $notification-background-error,
+  'notification-background-error'
+);
+
+$notification-background-success: component-tokens.get-var(
+  $notification-background-success,
+  'notification-background-success'
+);
+
+$notification-background-info: component-tokens.get-var(
+  $notification-background-info,
+  'notification-background-info'
+);
+
+$notification-background-warning: component-tokens.get-var(
+  $notification-background-warning,
+  'notification-background-warning'
+);
+
+$notification-action-hover: component-tokens.get-var(
+  $notification-action-hover,
+  'notification-action-hover'
+);
+
+$notification-action-tertiary-inverse: component-tokens.get-var(
+  $notification-action-tertiary-inverse,
+  'notification-action-tertiary-inverse'
+);
+
+$notification-action-tertiary-inverse-active: component-tokens.get-var(
+  $notification-action-tertiary-inverse-active,
+  'notification-action-tertiary-inverse-active'
+);
+
+$notification-action-tertiary-inverse-hover: component-tokens.get-var(
+  $notification-action-tertiary-inverse-hover,
+  'notification-action-tertiary-inverse-hover'
+);
+
+$notification-action-tertiary-inverse-text: component-tokens.get-var(
+  $notification-action-tertiary-inverse-text,
+  'notification-action-tertiary-inverse-text'
+);
+
+$notification-action-tertiary-inverse-text-on-color-disabled: component-tokens.get-var(
+  $notification-action-tertiary-inverse-text-on-color-disabled,
+  'notification-action-tertiary-inverse-text-on-color-disabled'
+);

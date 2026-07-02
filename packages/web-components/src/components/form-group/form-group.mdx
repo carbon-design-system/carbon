@@ -1,0 +1,36 @@
+import { ArgTypes, Canvas, Markdown, Meta } from '@storybook/addon-docs/blocks';
+import { cdnJs } from '../../globals/internal/storybook-cdn';
+import * as FormGroupStories from './form-group.stories';
+
+<Meta of={FormGroupStories} />
+
+# Form group
+
+[Source code](https://github.com/carbon-design-system/carbon/tree/master/packages/web-components/src/components/form-group)
+&nbsp;|&nbsp;
+[Usage guidelines](https://www.carbondesignsystem.com/components/form/usage)
+&nbsp;|&nbsp;
+[Accessibility](https://www.carbondesignsystem.com/components/form/accessibility)
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Component API](#component-api)
+- [CDN](#cdn)
+- [Feedback](#feedback)
+
+## Overview
+
+<Canvas of={FormGroupStories.Default} />
+
+## Component API
+
+<ArgTypes of="cds-form-group" />
+
+<Markdown>{`${cdnJs({ components: ['form-group'] })}`}</Markdown>
+
+## Feedback
+
+Help us improve this component by providing feedback through, asking questions
+on Slack, or updating this file on GitHub
+[GitHub](https://github.com/carbon-design-system/carbon/edit/main/packages/web-components/src/components/form-group/form-group.mdx).

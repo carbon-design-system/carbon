@@ -1,0 +1,9 @@
+{
+  "name": "release-notifications",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "@actions/core": "^3.0.0",
+    "@actions/github": "9.1.1"
+  }
+}

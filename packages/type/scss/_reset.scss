@@ -1,0 +1,42 @@
+//
+// Copyright IBM Corp. 2018, 2023
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use 'sass:map';
+@use 'sass:meta';
+@use '@carbon/layout';
+@use 'font-family' as *;
+
+/// Include a type reset for a given body and mono font family
+/// @param {String} $body-font-family [font-family('sans')] - The font family used on the `<body>` element
+/// @param {String} $mono-font-family [font-family('mono')] - The font family used on elements that require mono fonts, like the `<code>` element
+/// @access public
+/// @group @carbon/type
+@mixin reset(
+  $body-font-family: font-family('sans'),
+  $mono-font-family: font-family('mono')
+) {
+  html {
+    font-size: 100%;
+  }
+
+  body {
+    @include font-weight('regular');
+
+    font-family: $body-font-family;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  code {
+    font-family: $mono-font-family;
+  }
+
+  strong {
+    @include font-weight('semibold');
+  }
+}

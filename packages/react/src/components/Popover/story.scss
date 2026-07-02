@@ -1,0 +1,124 @@
+//
+// Copyright IBM Corp. 2016, 2023
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use '@carbon/styles/scss/spacing';
+@use '@carbon/styles/scss/theme';
+@use '@carbon/styles/scss/type';
+@use '@carbon/styles/scss/utilities/component-reset';
+
+/// Utilities
+.flex {
+  display: flex;
+}
+
+.flex-column {
+  flex-direction: column;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.justify-end {
+  justify-content: flex-end;
+}
+
+.align-center {
+  align-items: center;
+}
+
+.align-end {
+  align-items: flex-end;
+}
+
+.justify-items-end {
+  justify-items: end;
+}
+
+.position-relative {
+  position: relative;
+}
+
+.display-inline-block {
+  display: inline-block;
+}
+
+.grid {
+  display: grid;
+}
+
+.grid-cols-3 {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.mb-3 {
+  margin-block-end: 1rem;
+}
+
+.mt-9 {
+  padding-block-start: 3rem;
+}
+
+.mt-10 {
+  padding-block-start: 4rem;
+}
+
+.p-3 {
+  padding: 1rem;
+}
+
+.playground-trigger {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid theme.$border-subtle;
+  background: theme.$background;
+  block-size: 2rem;
+  inline-size: 2rem;
+}
+
+.playground-trigger svg {
+  fill: theme.$background-inverse;
+}
+
+.popover-title {
+  @include component-reset.reset;
+  @include type.type-style('heading-compact-01');
+
+  margin-block-end: spacing.$spacing-01;
+}
+
+.popover-details {
+  @include component-reset.reset;
+  @include type.type-style('body-compact-01');
+}
+
+.popover-story {
+  display: flex;
+  flex-direction: column;
+  block-size: 100%;
+  inline-size: 100%;
+}
+
+.popover-tabtip-story .cds--popover-content.p-3 {
+  inline-size: 16rem;
+}
+
+.popover-tabtip-story .cds--radio-button-wrapper {
+  margin-block-end: 0.5rem;
+}
+
+.popover-tabtip-story hr {
+  border: none;
+  margin: 8px 0 16px;
+  background: theme.$border-subtle;
+  block-size: 1px;
+}
+
+.popover-tabtip-story .cds--popover-container:last-of-type {
+  margin-inline-start: 15rem;
+}

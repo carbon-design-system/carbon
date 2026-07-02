@@ -1,0 +1,27 @@
+//
+// Copyright IBM Corp. 2024
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+// Style to match design spec
+
+#operational-tag > .cds--popover--caret {
+  --cds-popover-offset: 5px;
+}
+
+#operational-tag > .cds--popover-caret,
+.cds--popover {
+  --cds-popover-offset: 5px;
+  --cds-popover-caret-height: 5px;
+}
+
+.popover-content {
+  line-height: 0;
+  padding: 1rem;
+
+  p {
+    font-size: 14px;
+  }
+}

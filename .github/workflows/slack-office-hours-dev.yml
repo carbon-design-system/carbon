@@ -1,0 +1,284 @@
+name: Slack Office Hours Reminder - Dev
+
+on:
+  schedule:
+    # Run every Tuesday at 09:00AM CT, 02:00PM UTC
+    - cron: '0 14 * * TUE'
+      timezone: 'America/New_York'
+
+jobs:
+  post-reminder-to-carbon-react:
+    name: Post dev reminder to carbon-react
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send custom JSON data to Slack workflow
+        id: slack
+        uses: slackapi/slack-github-action@45a88b9581bfab2566dc881e2cd66d334e621e2c # v3.0.3
+        with:
+          webhook: ${{ secrets.SLACK_WEBHOOK_URL }}
+          webhook-type: incoming-webhook
+          payload: |
+            {
+              "username": "Carbon Design System",
+              "icon_url": "https://user-images.githubusercontent.com/3360588/192045905-5d9705af-92e2-4432-805e-15db98571e8b.png",
+              "channel": "#carbon-react",
+              "text": "Join us for Carbon Developer Office Hours (Americas)!",
+              "blocks": [
+                {
+                  "type": "header",
+                  "text": {
+                    "type": "plain_text",
+                    "text": "Join us for Carbon Developer Office Hours (Americas)!",
+                    "emoji": true
+                  }
+                },
+                {
+                  "type": "divider"
+                },
+                {
+                  "type": "image",
+                  "image_url": "https://github.com/user-attachments/assets/e12fb5b9-9657-4e7b-b1a1-e1149cca8956",
+                  "alt_text": "A terminal prompt symbol"
+                },
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "mrkdwn",
+                    "text": ":thinking_face:   _Are you running into a weird bug you can’t resolve?_  \n\n_:question:  Do you have questions about using Carbon?_  \n\n :rocket:  _Would you like to discuss migrating from v10 to v11?_"
+                  }
+                },
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "mrkdwn",
+                    "text": "*Carbon Developer Office Hours (Americas)* is a bi-weekly opportunity on Tuesdays at 11:30 am ET to discuss topics like these and get help from the team, scheduled for American time zones (ET, CT, MT, PT, UTC). Developers from the Carbon team will be available to help and answer questions. While it's very informal, please be prepared to share your screen and show your issue!"
+                  }
+                },
+                {
+                  "type": "divider"
+                },
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "mrkdwn",
+                    "text": ":yourlearning:  *Subscribe and add to your calendar*     :ibm-arrow-right::ibm-arrow-right::ibm-arrow-right:"
+                  },
+                  "accessory": {
+                    "type": "button",
+                    "text": {
+                      "type": "plain_text",
+                      "text": "Subscribe",
+                      "emoji": true
+                    },
+                    "value": "click_me_123",
+                    "url": "https://ec.yourlearning.ibm.com/w3/event/10547775",
+                    "action_id": "button-action"
+                  }
+                },
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "mrkdwn",
+                    "text": ":memo:  *Sign up to get help in a future session*     :ibm-arrow-right::ibm-arrow-right::ibm-arrow-right:"
+                  },
+                  "accessory": {
+                    "type": "button",
+                    "text": {
+                      "type": "plain_text",
+                      "text": "View the agenda",
+                      "emoji": true
+                    },
+                    "value": "click_me_123",
+                    "url": "https://ibm.biz/carbon-dev-office-hours",
+                    "action_id": "button-action"
+                  }
+                },
+                {
+                  "type": "divider"
+                }
+              ]
+            }
+
+  post-reminder-to-carbon-web-components:
+    name: Post dev reminder to carbon-web-components
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send custom JSON data to Slack workflow
+        id: slack
+        uses: slackapi/slack-github-action@45a88b9581bfab2566dc881e2cd66d334e621e2c # v3.0.3
+        with:
+          webhook: ${{ secrets.SLACK_WEBHOOK_URL }}
+          webhook-type: incoming-webhook
+          payload: |
+            {
+              "username": "Carbon Design System",
+              "icon_url": "https://user-images.githubusercontent.com/3360588/192045905-5d9705af-92e2-4432-805e-15db98571e8b.png",
+              "channel": "#carbon-web-components",
+              "text": "Join us for Carbon Developer Office Hours (Americas)!",
+              "blocks": [
+                {
+                  "type": "header",
+                  "text": {
+                    "type": "plain_text",
+                    "text": "Join us for Carbon Developer Office Hours (Americas)!",
+                    "emoji": true
+                  }
+                },
+                {
+                  "type": "divider"
+                },
+                {
+                  "type": "image",
+                  "image_url": "https://github.com/user-attachments/assets/e12fb5b9-9657-4e7b-b1a1-e1149cca8956",
+                  "alt_text": "A terminal prompt symbol"
+                },
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "mrkdwn",
+                    "text": ":thinking_face:   _Are you running into a weird bug you can’t resolve?_  \n\n_:question:  Do you have questions about using Carbon?_  \n\n :rocket:  _Would you like to discuss migrating from v10 to v11?_"
+                  }
+                },
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "mrkdwn",
+                    "text": "*Carbon Developer Office Hours (Americas)* is a bi-weekly opportunity on Tuesdays at 11:30 am ET to discuss topics like these and get help from the team, scheduled for American time zones (ET, CT, MT, PT, UTC). Developers from the Carbon team will be available to help and answer questions. While it's very informal, please be prepared to share your screen and show your issue!"
+                  }
+                },
+                {
+                  "type": "divider"
+                },
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "mrkdwn",
+                    "text": ":yourlearning:  *Subscribe and add to your calendar*     :ibm-arrow-right::ibm-arrow-right::ibm-arrow-right:"
+                  },
+                  "accessory": {
+                    "type": "button",
+                    "text": {
+                      "type": "plain_text",
+                      "text": "Subscribe",
+                      "emoji": true
+                    },
+                    "value": "click_me_123",
+                    "url": "https://ec.yourlearning.ibm.com/w3/event/10547775",
+                    "action_id": "button-action"
+                  }
+                },
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "mrkdwn",
+                    "text": ":memo:  *Sign up to get help in a future session*     :ibm-arrow-right::ibm-arrow-right::ibm-arrow-right:"
+                  },
+                  "accessory": {
+                    "type": "button",
+                    "text": {
+                      "type": "plain_text",
+                      "text": "View the agenda",
+                      "emoji": true
+                    },
+                    "value": "click_me_123",
+                    "url": "https://ibm.biz/carbon-dev-office-hours",
+                    "action_id": "button-action"
+                  }
+                },
+                {
+                  "type": "divider"
+                }
+              ]
+            }
+
+  post-reminder-to-carbon-for-ibmproducts:
+    name: Post dev reminder to carbon-for-ibmproducts
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send custom JSON data to Slack workflow
+        id: slack
+        uses: slackapi/slack-github-action@45a88b9581bfab2566dc881e2cd66d334e621e2c # v3.0.3
+        with:
+          webhook: ${{ secrets.SLACK_WEBHOOK_URL }}
+          webhook-type: incoming-webhook
+          payload: |
+            {
+              "username": "Carbon Design System",
+              "icon_url": "https://user-images.githubusercontent.com/3360588/192045905-5d9705af-92e2-4432-805e-15db98571e8b.png",
+              "channel": "#carbon-for-ibmproducts",
+              "text": "Join us for Carbon Developer Office Hours (Americas)!",
+              "blocks": [
+                {
+                  "type": "header",
+                  "text": {
+                    "type": "plain_text",
+                    "text": "Join us for Carbon Developer Office Hours (Americas)!",
+                    "emoji": true
+                  }
+                },
+                {
+                  "type": "divider"
+                },
+                {
+                  "type": "image",
+                  "image_url": "https://github.com/user-attachments/assets/e12fb5b9-9657-4e7b-b1a1-e1149cca8956",
+                  "alt_text": "A terminal prompt symbol"
+                },
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "mrkdwn",
+                    "text": ":thinking_face:   _Are you running into a weird bug you can’t resolve?_  \n\n_:question:  Do you have questions about using Carbon?_  \n\n :rocket:  _Would you like to discuss migrating from v10 to v11?_"
+                  }
+                },
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "mrkdwn",
+                    "text": "*Carbon Developer Office Hours (Americas)* is a bi-weekly opportunity on Tuesdays at 11:30 am ET to discuss topics like these and get help from the team, scheduled for American time zones (ET, CT, MT, PT, UTC). Developers from the Carbon team will be available to help and answer questions. While it's very informal, please be prepared to share your screen and show your issue!"
+                  }
+                },
+                {
+                  "type": "divider"
+                },
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "mrkdwn",
+                    "text": ":yourlearning:  *Subscribe and add to your calendar*     :ibm-arrow-right::ibm-arrow-right::ibm-arrow-right:"
+                  },
+                  "accessory": {
+                    "type": "button",
+                    "text": {
+                      "type": "plain_text",
+                      "text": "Subscribe",
+                      "emoji": true
+                    },
+                    "value": "click_me_123",
+                    "url": "https://ec.yourlearning.ibm.com/w3/event/10547775",
+                    "action_id": "button-action"
+                  }
+                },
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "mrkdwn",
+                    "text": ":memo:  *Sign up to get help in a future session*     :ibm-arrow-right::ibm-arrow-right::ibm-arrow-right:"
+                  },
+                  "accessory": {
+                    "type": "button",
+                    "text": {
+                      "type": "plain_text",
+                      "text": "View the agenda",
+                      "emoji": true
+                    },
+                    "value": "click_me_123",
+                    "url": "https://ibm.biz/carbon-dev-office-hours",
+                    "action_id": "button-action"
+                  }
+                },
+                {
+                  "type": "divider"
+                }
+              ]
+            }

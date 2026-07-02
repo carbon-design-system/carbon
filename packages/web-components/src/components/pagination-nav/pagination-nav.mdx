@@ -1,0 +1,36 @@
+import { ArgTypes, Canvas, Markdown, Meta } from '@storybook/addon-docs/blocks';
+import { cdnJs } from '../../globals/internal/storybook-cdn';
+import * as PaginationNavStories from './pagination-nav.stories';
+
+<Meta of={PaginationNavStories} />
+
+# Pagination Nav
+
+[Source code](https://github.com/carbon-design-system/carbon/tree/main/packages/web-components/src/components/pagination-nav)
+&nbsp;|&nbsp;
+[Usage guidelines](https://www.carbondesignsystem.com/components/pagination/usage)
+&nbsp;|&nbsp;
+[Accessibility](https://www.carbondesignsystem.com/components/pagination/accessibility)
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Component API](#component-api)
+- [CDN](#cdn)
+- [Feedback](#feedback)
+
+## Overview
+
+<Canvas of={PaginationNavStories.Default} />
+
+## Component API
+
+<ArgTypes of="cds-pagination-nav" />
+
+<Markdown>{`${cdnJs({ components: ['pagination-nav'] })}`}</Markdown>
+
+## Feedback
+
+Help us improve this component by providing feedback, asking questions on Slack,
+or updating this file on
+[GitHub](https://github.com/carbon-design-system/carbon/edit/main/packages/web-components/src/components/pagination-nav/pagination-nav.mdx).

@@ -1,0 +1,43 @@
+/**
+ * Copyright IBM Corp. 2026
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+import { prefix } from '../../globals/settings';
+import { html } from 'lit';
+import { query } from 'lit/decorators.js';
+import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
+import styles from './fluid-password-input.scss?lit';
+import CDSPasswordInput from '../password-input/password-input';
+
+/**
+ * Fluid password input.
+ *
+ * @element cds-fluid-password-input
+ */
+@customElement(`${prefix}-fluid-password-input`)
+class CDSFluidPasswordInput extends CDSPasswordInput {
+  @query(`.${prefix}--form-item`)
+  private _formItem!: HTMLElement | null;
+
+  connectedCallback() {
+    this.setAttribute('isFluid', 'true');
+    super.connectedCallback();
+  }
+  updated() {
+    super.updated();
+    if (this._formItem) {
+      this._formItem.classList.add(`${prefix}--text-input--fluid`);
+    }
+  }
+
+  render() {
+    return html`${super.render()}`;
+  }
+
+  static styles = [CDSPasswordInput.styles, styles];
+}
+
+export default CDSFluidPasswordInput;

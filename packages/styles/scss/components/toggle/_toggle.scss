@@ -1,0 +1,249 @@
+//
+// Copyright IBM Corp. 2016, 2023
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//3
+
+@use '../../config' as *;
+@use '../../feature-flags' as *;
+@use '../../motion' as *;
+@use '../../spacing' as *;
+@use '../../theme' as *;
+@use '../../type' as *;
+@use '../button/tokens' as button;
+@use '../../utilities/convert';
+@use '../../utilities/high-contrast-mode' as *;
+@use '../../utilities/visually-hidden' as *;
+@use '../../utilities/skeleton' as *;
+
+/// Toggle styles
+/// @access public
+/// @group toggle
+@mixin toggle($enable-v12-toggle-reduced-label-spacing: false) {
+  .#{$prefix}--toggle {
+    display: inline-block;
+    user-select: none;
+  }
+
+  .#{$prefix}--toggle__label-text {
+    @include type-style('label-01');
+
+    display: block;
+    color: $text-secondary;
+    margin-block-end: $spacing-05;
+    @if (
+      enabled('enable-v12-toggle-reduced-label-spacing') or
+        $enable-v12-toggle-reduced-label-spacing
+    ) {
+      margin-block-end: $spacing-03;
+    }
+  }
+
+  .#{$prefix}--toggle__button {
+    @include visually-hidden;
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  .#{$prefix}--toggle__appearance {
+    display: inline-grid;
+    align-items: center;
+    column-gap: $spacing-03;
+    cursor: pointer;
+    grid-template-columns: max-content max-content;
+  }
+
+  .#{$prefix}--toggle__switch {
+    position: relative;
+    border-radius: convert.to-rem(12px);
+    background-color: $toggle-off;
+    block-size: convert.to-rem(24px);
+    inline-size: convert.to-rem(48px);
+    transition: background-color $duration-fast-01 motion(exit, productive);
+
+    &::before {
+      position: absolute;
+      border-radius: 50%;
+      background-color: $icon-on-color;
+      block-size: convert.to-rem(18px);
+      content: '';
+      inline-size: convert.to-rem(18px);
+      inset-block-start: convert.to-rem(3px);
+      inset-inline-start: convert.to-rem(3px);
+      transition: transform $duration-fast-01 motion(exit, productive);
+
+      @media screen and (prefers-reduced-motion: reduce) {
+        transition: none;
+      }
+    }
+  }
+
+  .#{$prefix}--toggle__button:focus
+    + .#{$prefix}--toggle__label
+    .#{$prefix}--toggle__switch,
+  .#{$prefix}--toggle:not(.#{$prefix}--toggle--disabled):active
+    .#{$prefix}--toggle__switch {
+    &::after {
+      display: block;
+      border-radius: convert.to-rem(16px);
+      block-size: 100%;
+      content: '';
+      outline: 2px solid $focus;
+      outline-offset: 1px;
+    }
+  }
+
+  .#{$prefix}--toggle__switch--checked {
+    background-color: $support-success;
+
+    &::before {
+      transform: translateX(convert.to-rem(24px));
+    }
+  }
+
+  @media screen and (-ms-high-contrast: active), (forced-colors: active) {
+    .#{$prefix}--toggle__switch--checked {
+      background-color: Highlight;
+    }
+  }
+
+  .#{$prefix}--toggle__text {
+    @include type-style('body-01');
+
+    color: $text-primary;
+  }
+
+  .#{$prefix}--toggle__appearance--sm .#{$prefix}--toggle__switch {
+    block-size: convert.to-rem(16px);
+    inline-size: convert.to-rem(32px);
+
+    &::before {
+      block-size: convert.to-rem(10px);
+      inline-size: convert.to-rem(10px);
+    }
+  }
+
+  .#{$prefix}--toggle__appearance--sm
+    .#{$prefix}--toggle__switch--checked::before {
+    transform: translateX(convert.to-rem(16px));
+  }
+
+  .#{$prefix}--toggle__check {
+    position: absolute;
+    block-size: convert.to-rem(5px);
+    fill: $support-success;
+    inline-size: convert.to-rem(6px);
+    inset-block-start: convert.to-rem(6px);
+    inset-inline-end: convert.to-rem(5px);
+    visibility: hidden;
+  }
+
+  .#{$prefix}--toggle__switch--checked .#{$prefix}--toggle__check {
+    visibility: visible;
+  }
+
+  // ----------------------------------------
+  // disabled
+  // ----------------------------------------
+
+  .#{$prefix}--toggle--disabled .#{$prefix}--toggle__appearance {
+    cursor: not-allowed;
+  }
+
+  .#{$prefix}--toggle--disabled .#{$prefix}--toggle__label-text,
+  .#{$prefix}--toggle--disabled .#{$prefix}--toggle__text {
+    color: $text-disabled;
+  }
+
+  .#{$prefix}--toggle--disabled .#{$prefix}--toggle__switch {
+    background-color: button.$button-disabled;
+
+    &::before {
+      background-color: $icon-on-color-disabled;
+    }
+  }
+
+  .#{$prefix}--toggle--disabled .#{$prefix}--toggle__check {
+    fill: button.$button-disabled;
+  }
+
+  // ----------------------------------------
+  // readonly
+  // ----------------------------------------
+  .#{$prefix}--toggle--readonly .#{$prefix}--toggle__appearance {
+    cursor: default;
+  }
+
+  .#{$prefix}--toggle--readonly .#{$prefix}--toggle__switch {
+    border: 1px solid $icon-disabled;
+    background-color: transparent;
+
+    &::before {
+      background-color: $icon-primary;
+      inset-block-start: convert.to-rem(2px);
+      inset-inline-start: convert.to-rem(2px);
+    }
+  }
+
+  .#{$prefix}--toggle--readonly .#{$prefix}--toggle__check {
+    fill: $background;
+    inset-block-start: convert.to-rem(5px);
+    inset-inline-end: convert.to-rem(4px);
+  }
+
+  .#{$prefix}--toggle--readonly .#{$prefix}--toggle__text {
+    cursor: text;
+    user-select: text;
+  }
+
+  // HCM
+
+  .#{$prefix}--toggle__switch,
+  .#{$prefix}--toggle__switch::before {
+    @include high-contrast-mode('outline');
+  }
+
+  .#{$prefix}--toggle__button:focus
+    + .#{$prefix}--toggle__label
+    .#{$prefix}--toggle__switch,
+  .#{$prefix}--toggle:not(.#{$prefix}--toggle--disabled):active
+    .#{$prefix}--toggle__switch {
+    @include high-contrast-mode('focus');
+  }
+
+  // Skeleton state
+  .#{$prefix}--toggle--skeleton {
+    display: flex;
+    align-items: center;
+  }
+
+  .#{$prefix}--toggle--skeleton .#{$prefix}--toggle__skeleton-circle {
+    @include circular-skeleton;
+
+    border-radius: 50%;
+    block-size: convert.to-rem(18px);
+    inline-size: convert.to-rem(18px);
+  }
+
+  .#{$prefix}--toggle--skeleton .#{$prefix}--toggle__skeleton-rectangle {
+    @include skeleton;
+
+    block-size: convert.to-rem(8px);
+    inline-size: convert.to-rem(24px);
+    margin-inline-start: convert.to-rem(8px);
+  }
+
+  // RTL overrides
+  [dir='rtl'] .#{$prefix}--toggle__switch--checked::before {
+    transform: translateX(convert.to-rem(-24px));
+  }
+
+  [dir='rtl']
+    .#{$prefix}--toggle__appearance--sm
+    .#{$prefix}--toggle__switch--checked::before {
+    transform: translateX(convert.to-rem(-16px));
+  }
+}

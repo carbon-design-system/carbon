@@ -1,0 +1,20 @@
+{
+  extends: [
+    "config:js-lib",
+    ":maintainLockFilesWeekly",
+    ":preserveSemverRanges",
+    "security:minimumReleaseAgeNpm",
+  ],
+  schedule: [
+    "after 10pm every weekday",
+    "before 5am every weekday",
+    "every weekend",
+  ],
+  vulnerabilityAlerts: {
+    enabled: true,
+  },
+  rebaseWhen: "never",
+  lockFileMaintenance: {
+    enabled: false,
+  },
+}

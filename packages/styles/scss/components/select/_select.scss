@@ -1,0 +1,433 @@
+//
+// Copyright IBM Corp. 2016, 2023
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use '../form';
+@use '../../colors' as *;
+@use '../../config' as *;
+@use '../../spacing' as *;
+@use '../../motion' as *;
+@use '../../type' as *;
+@use '../../breakpoint' as *;
+@use '../../theme' as *;
+@use '../../utilities/ai-gradient' as *;
+@use '../../utilities/component-reset';
+@use '../../utilities/convert';
+@use '../../utilities/focus-outline' as *;
+@use '../../utilities/layout';
+@use '../../utilities/skeleton' as *;
+
+/// Select styles
+/// @access public
+/// @group select
+@mixin select {
+  .#{$prefix}--select {
+    @include component-reset.reset;
+    @include layout.use('size', $default: 'md', $min: 'xs', $max: 'lg');
+
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    inline-size: 100%;
+  }
+
+  .#{$prefix}--select-input__wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    inline-size: 100%;
+  }
+
+  .#{$prefix}--select-input {
+    @include type-style('body-compact-01');
+    @include focus-outline('reset');
+    @include layout.use('size', $default: 'md', $min: 'xs', $max: 'lg');
+    @include layout.use('density', $default: 'normal');
+
+    display: block;
+    border: none;
+    border-radius: 0;
+    appearance: none;
+    background-color: $field;
+    block-size: layout.size('height');
+    border-block-end: 1px solid $border-strong;
+    color: $text-primary;
+    cursor: pointer;
+    font-family: inherit;
+    inline-size: 100%;
+    // reset disabled <select> opacity
+    opacity: 1;
+    padding-block: 0;
+    padding-inline: $spacing-05 $spacing-09;
+    text-overflow: ellipsis;
+
+    // Do not transition on background-color (see: https://github.com/carbon-design-system/carbon/issues/4464)
+    transition: outline $duration-fast-01 motion(standard, productive);
+
+    &:hover {
+      background-color: $field-hover;
+    }
+
+    // Hide default select arrow in IE10+
+    &::-ms-expand {
+      display: none;
+    }
+
+    //
+    /* This is for targeting styles specific to firefox */
+    /* Removes dotted inner focus */
+    /* https://sass-lang.com/documentation/breaking-changes/moz-document/ */
+    /* stylelint-disable-next-line at-rule-no-vendor-prefix */
+    @-moz-document url-prefix() {
+      &:-moz-focusring,
+      &::-moz-focus-inner {
+        background-image: none;
+        color: transparent;
+        text-shadow: 0 0 0 #000000;
+      }
+    }
+
+    &:focus {
+      @include focus-outline('outline');
+
+      color: $text-primary;
+    }
+
+    &:disabled,
+    &:hover:disabled {
+      background-color: $field;
+      border-block-end-color: transparent;
+      color: $text-disabled;
+      cursor: not-allowed;
+    }
+  }
+
+  .#{$prefix}--select--disabled .#{$prefix}--label,
+  .#{$prefix}--select--disabled .#{$prefix}--form__helper-text {
+    color: $text-disabled;
+  }
+
+  .#{$prefix}--select-input__wrapper[data-invalid] .#{$prefix}--select-input,
+  .#{$prefix}--select--warning .#{$prefix}--select-input {
+    padding-inline-end: $spacing-10;
+  }
+
+  .#{$prefix}--select-input:disabled ~ .#{$prefix}--select__arrow {
+    fill: $icon-disabled;
+  }
+
+  .#{$prefix}--select--light .#{$prefix}--select-input {
+    background-color: $field-02;
+
+    &:hover {
+      background-color: $field-hover;
+    }
+
+    &:disabled,
+    &:hover:disabled {
+      background-color: $field-02;
+      color: $text-disabled;
+      cursor: not-allowed;
+    }
+  }
+
+  .#{$prefix}--select__arrow {
+    position: absolute;
+    block-size: 100%;
+    fill: $icon-primary;
+    inset-block-start: 0;
+    inset-inline-end: $spacing-05;
+    pointer-events: none;
+
+    // Windows, Firefox HCM Fix
+    @media screen and (-ms-high-contrast: active),
+      screen and (prefers-contrast) {
+      // `ButtonText` is a CSS2 system color to help improve colors in HCM
+      path {
+        fill: ButtonText;
+      }
+    }
+  }
+
+  .#{$prefix}--select__invalid-icon {
+    position: absolute;
+    inset-inline-end: $spacing-08;
+  }
+
+  .#{$prefix}--select-input__wrapper[data-invalid]
+    .#{$prefix}--select-input
+    ~ .#{$prefix}--select__invalid-icon {
+    fill: $support-error;
+  }
+
+  .#{$prefix}--select-input--inline__wrapper[data-invalid] {
+    .#{$prefix}--select__invalid-icon {
+      fill: $support-error;
+    }
+  }
+
+  .#{$prefix}--select__invalid-icon--warning {
+    fill: $support-warning;
+  }
+
+  .#{$prefix}--select__invalid-icon--warning path[fill] {
+    fill: $black-100;
+    opacity: 1;
+  }
+
+  optgroup.#{$prefix}--select-optgroup,
+  .#{$prefix}--select-option {
+    // For the options to show in IE11
+    background-color: $layer-hover;
+    color: $text-primary;
+
+    &:disabled {
+      color: $text-disabled;
+    }
+  }
+
+  .#{$prefix}--select--inline {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .#{$prefix}--select--inline .#{$prefix}--form__helper-text {
+    margin-block-end: 0;
+    margin-inline-start: $spacing-03;
+  }
+
+  .#{$prefix}--select--inline .#{$prefix}--label {
+    margin: 0 $spacing-03 0 0;
+    white-space: nowrap;
+  }
+
+  .#{$prefix}--select--inline .#{$prefix}--select-input {
+    background-color: transparent;
+    border-block-end: none;
+    color: $text-primary;
+    inline-size: 100%;
+    padding-inline: $spacing-03 $spacing-09;
+
+    &:hover {
+      background-color: $field-hover;
+    }
+  }
+
+  .#{$prefix}--select--inline .#{$prefix}--select-input:focus,
+  .#{$prefix}--select--inline .#{$prefix}--select-input:focus option,
+  .#{$prefix}--select--inline .#{$prefix}--select-input:focus optgroup {
+    background-color: $background;
+
+    &:hover {
+      background-color: $field-hover;
+    }
+  }
+
+  .#{$prefix}--select--inline .#{$prefix}--select-input[disabled],
+  .#{$prefix}--select--inline .#{$prefix}--select-input[disabled]:hover {
+    background-color: $background;
+  }
+
+  .#{$prefix}--select--inline .#{$prefix}--select__arrow {
+    inset-inline-end: $spacing-03;
+  }
+
+  .#{$prefix}--select--inline.#{$prefix}--select--invalid
+    .#{$prefix}--select-input {
+    padding-inline-end: convert.to-rem(56px);
+  }
+
+  .#{$prefix}--select--inline.#{$prefix}--select--invalid
+    .#{$prefix}--select-input
+    ~ .#{$prefix}--select__invalid-icon,
+  .#{$prefix}--select--inline.#{$prefix}--select--warning
+    .#{$prefix}--select-input
+    ~ .#{$prefix}--select__invalid-icon--warning {
+    inset-inline-end: $spacing-07;
+  }
+
+  .#{$prefix}--select--inline .#{$prefix}--select-input:disabled {
+    color: $text-disabled;
+    cursor: not-allowed;
+
+    ~ * {
+      cursor: not-allowed;
+    }
+  }
+
+  // readonly
+  .#{$prefix}--select--readonly .#{$prefix}--select-input {
+    background-color: transparent;
+    border-block-end-color: $border-subtle;
+    cursor: default;
+  }
+
+  .#{$prefix}--select--readonly .#{$prefix}--select__arrow {
+    fill: $icon-disabled;
+  }
+
+  .#{$prefix}--select--readonly.#{$prefix}--select--inline
+    .#{$prefix}--select-input:hover {
+    background-color: transparent;
+  }
+
+  // Skeleton State
+  .#{$prefix}--select.#{$prefix}--skeleton {
+    @include skeleton;
+
+    block-size: 2.5rem;
+
+    inline-size: 100%;
+  }
+
+  .#{$prefix}--select.#{$prefix}--skeleton .#{$prefix}--select-input {
+    display: none;
+  }
+
+  // AILabel styles
+
+  $divider-width: 1px;
+
+  .#{$prefix}--select--decorator
+    .#{$prefix}--select__inner-wrapper--decorator
+    > *,
+  .#{$prefix}--select--slug .#{$prefix}--ai-label,
+  .#{$prefix}--select--slug .#{$prefix}--slug {
+    position: absolute;
+    inset-block-start: 50%;
+    inset-inline-end: calc($spacing-08 + 8px + $divider-width);
+    margin-block-start: convert.to-rem(0.5px);
+    transform: translateY(-50%);
+  }
+
+  .#{$prefix}--select--decorator
+    .#{$prefix}--select__inner-wrapper--decorator
+    > *::after,
+  .#{$prefix}--select--decorator
+    .#{$prefix}--select__inner-wrapper--decorator
+    > *::before,
+  .#{$prefix}--select--slug .#{$prefix}--ai-label::after,
+  .#{$prefix}--select--slug .#{$prefix}--ai-label::before,
+  .#{$prefix}--select--slug .#{$prefix}--slug::after,
+  .#{$prefix}--select--slug .#{$prefix}--slug::before {
+    position: absolute;
+    background-color: $border-subtle-01;
+    block-size: convert.to-rem(16px);
+    content: '';
+    inline-size: convert.to-rem(1px);
+  }
+
+  .#{$prefix}--select--decorator
+    .#{$prefix}--select__inner-wrapper--decorator
+    > *::before,
+  .#{$prefix}--select--slug .#{$prefix}--ai-label::before,
+  .#{$prefix}--select--slug .#{$prefix}--slug::before {
+    display: none;
+    inset-inline-start: calc(-#{$spacing-03} - #{$divider-width});
+  }
+
+  .#{$prefix}--select--decorator
+    .#{$prefix}--select__inner-wrapper--decorator
+    > *::after,
+  .#{$prefix}--select--slug .#{$prefix}--ai-label::after,
+  .#{$prefix}--select--slug .#{$prefix}--slug::after {
+    display: block;
+    inset-block-start: 0;
+    inset-inline-end: calc(-#{$spacing-03} - #{$divider-width});
+  }
+
+  .#{$prefix}--select--decorator
+    .#{$prefix}--select__inner-wrapper--decorator
+    > .#{$prefix}--ai-label--revert::before,
+  .#{$prefix}--select--slug .#{$prefix}--ai-label--revert::before,
+  .#{$prefix}--select--slug .#{$prefix}--slug--revert::before {
+    inset-block-start: 0.5rem;
+    inset-inline-start: 0;
+  }
+
+  .#{$prefix}--select--decorator
+    .#{$prefix}--select__inner-wrapper--decorator
+    > .#{$prefix}--ai-label--revert,
+  .#{$prefix}--select--slug .#{$prefix}--ai-label--revert {
+    inset-inline-end: convert.to-rem(41px);
+  }
+
+  .#{$prefix}--select--decorator .#{$prefix}--ai-label--revert::after,
+  .#{$prefix}--select--slug .#{$prefix}--ai-label--revert::after,
+  .#{$prefix}--select--slug .#{$prefix}--slug--revert::after {
+    inset-block-start: convert.to-rem(8px);
+    inset-inline-end: -($divider-width);
+  }
+
+  .#{$prefix}--select--decorator
+    .#{$prefix}--select-input__wrapper
+    .#{$prefix}--select-input
+    ~ .#{$prefix}--select__invalid-icon,
+  .#{$prefix}--select--slug
+    .#{$prefix}--select-input__wrapper[data-invalid]
+    .#{$prefix}--select-input
+    ~ .#{$prefix}--select__invalid-icon,
+  .#{$prefix}--select--slug
+    .#{$prefix}--select-input__wrapper
+    .#{$prefix}--select-input
+    ~ .#{$prefix}--select__invalid-icon {
+    inset-inline-end: $spacing-11;
+  }
+
+  .#{$prefix}--select--decorator
+    .#{$prefix}--select-input:has(
+      ~ .#{$prefix}--select__inner-wrapper--decorator
+    ),
+  .#{$prefix}--select--slug
+    .#{$prefix}--select-input:has(~ .#{$prefix}--ai-label),
+  .#{$prefix}--select--slug .#{$prefix}--select-input:has(~ .#{$prefix}--slug) {
+    padding-inline-end: $spacing-10;
+  }
+
+  .#{$prefix}--select--decorator:has(.#{$prefix}--select__invalid-icon)
+    .#{$prefix}--select-input:has(
+      ~ .#{$prefix}--select__inner-wrapper--decorator
+    ),
+  .#{$prefix}--select--slug:has(.#{$prefix}--select__invalid-icon)
+    .#{$prefix}--select-input:has(~ .#{$prefix}--ai-label),
+  .#{$prefix}--select--slug:has(.#{$prefix}--select__invalid-icon)
+    .#{$prefix}--select-input:has(~ .#{$prefix}--slug) {
+    padding-inline-end: $spacing-12;
+  }
+
+  .#{$prefix}--select--decorator
+    .#{$prefix}--select-input:has(
+      ~ .#{$prefix}--select__inner-wrapper--decorator .#{$prefix}--ai-label
+    ):not(
+      :has(
+          ~ .#{$prefix}--select__inner-wrapper--decorator
+            .#{$prefix}--ai-label--revert
+        )
+    ),
+  .#{$prefix}--select--slug
+    .#{$prefix}--select-input:has(~ .#{$prefix}--ai-label):not(
+      :has(~ .#{$prefix}--ai-label--revert)
+    ),
+  .#{$prefix}--select--slug
+    .#{$prefix}--select-input:has(~ .#{$prefix}--slug):not(
+      :has(~ .#{$prefix}--slug--revert)
+    ),
+  .#{$prefix}--select-input-has--ai-label {
+    @include ai-gradient;
+  }
+
+  .#{$prefix}--select--decorator:has(.#{$prefix}--select__invalid-icon)
+    .#{$prefix}--select__inner-wrapper--decorator
+    > *::before,
+  .#{$prefix}--select--slug:has(.#{$prefix}--select__invalid-icon)
+    .#{$prefix}--ai-label::before,
+  .#{$prefix}--select--slug:has(.#{$prefix}--select__invalid-icon)
+    .#{$prefix}--slug::before {
+    display: block;
+  }
+}

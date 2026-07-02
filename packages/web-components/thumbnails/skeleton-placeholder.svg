@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="320px" height="180px" viewBox="0 0 320 180" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>skeleton-placeholder</title>
+    <defs>
+        <linearGradient x1="-21.9775656%" y1="50%" x2="113.47099%" y2="50%" id="linearGradient-1">
+            <stop stop-color="#C6C6C6" stop-opacity="0" offset="0%"></stop>
+            <stop stop-color="#C6C6C6" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="skeleton-placeholder" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <rect id="Rectangle" fill="#E0E0E0" x="118" y="48" width="85" height="85"></rect>
+        <rect id="Rectangle" fill="#C6C6C6" x="117" y="48" width="56.4662577" height="85"></rect>
+        <rect id="Rectangle" fill="url(#linearGradient-1)" transform="translate(177.733129, 90.500000) scale(-1, 1) translate(-177.733129, -90.500000) " x="173.466258" y="48" width="8.533742" height="85"></rect>
+    </g>
+</svg>

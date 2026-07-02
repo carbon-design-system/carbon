@@ -1,0 +1,166 @@
+import { ArgTypes, Canvas, Story, Meta } from '@storybook/addon-docs/blocks';
+import * as PopoverStories from './Popover.stories';
+import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
+
+<Meta isTemplate />
+
+# Popover
+
+[Source code](https://github.com/carbon-design-system/carbon/tree/main/packages/react/src/components/Popover)
+&nbsp;|&nbsp;
+[Usage guidelines](https://www.carbondesignsystem.com/components/popover/usage)
+&nbsp;|&nbsp;
+[Accessibility](https://www.carbondesignsystem.com/components/popover/accessibility)
+
+{/* <!-- START doctoc generated TOC please keep comment here to allow auto update --> <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE --> */}
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Visibility](#visibility)
+- [Alignment](#alignment)
+- [Appearance](#appearance)
+- [Component API](#component-api)
+- [Feedback](#feedback)
+
+{/* <!-- END doctoc generated TOC please keep comment here to allow auto update --> */}
+
+## Overview
+
+`Popover` is a primitive component used to build custom components which render
+over other elements on the page.
+
+The `Popover` component accepts two items as `children`: a trigger element and a
+`PopoverContent` component which contains the content to be rendered inside of
+the `Popover`.
+
+```jsx
+import { Popover, PopoverContent } from '@carbon/react';
+import React from 'react';
+
+function CustomComponent() {
+  const [open, setOpen] = React.useState(false);
+
+  return (
+    <Popover open={open}>
+      <button
+        type="button"
+        onClick={() => {
+          setOpen(!open);
+        }}>
+        Toggle
+      </button>
+      <PopoverContent>
+        The content that is revealed by interacting with the Toggle button
+      </PopoverContent>
+    </Popover>
+  );
+}
+```
+
+<Canvas
+  of={PopoverStories.Default}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(PopoverStories.Default),
+    },
+  ]}
+/>
+
+## Visibility
+
+The `open` prop allows you to control the visibility of the `Popover`. This is
+often tracked in state and is toggled based on the trigger render inside of the
+`Popover`. A trigger must be an interactive element and in most cases it will be
+a `<button>`.
+
+The `onRequestClose` callback prop can be used to ensure that only a single
+popover is open on the screen at a time. It also can be used to ensure that any
+clicks outside of a popover will close the popover. This is achieved by using
+state in conjunction with the callback prop to set `open` to false when
+`onRequestClose` is called.
+
+<Canvas
+  of={PopoverStories.TabTip}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(PopoverStories.TabTip),
+    },
+  ]}
+/>
+
+## Alignment
+
+The `align` prop allows you to specify where your content should be placed
+relative to the popover. For example, if you provide `align="top"` to the
+`Popover` component then the popover will render above your component.
+Similarly, if you provide `align="bottom"` then the popover will render below
+your component.
+
+You can also configure the placement of the caret, if it is enabled, by choosing
+between `left` and `right` or `bottom` and `top`, depending on where your
+popover is being rendered.
+
+If you are using `align="top"`, then you can choose between `align="top-left"`
+and `align="top-right"`. These options will place the caret closer to the left
+or right edges of the popover.
+
+If you are using `align="left"` or `align="right"`, you can use `top` or
+`bottom` to control this alignment.
+
+<Canvas
+  of={PopoverStories.ExperimentalAutoAlign}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () =>
+        stackblitzPrefillConfig(PopoverStories.ExperimentalAutoAlign),
+    },
+  ]}
+/>
+
+<Canvas
+  of={PopoverStories.ExperimentalAutoAlignBoundary}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () =>
+        stackblitzPrefillConfig(PopoverStories.ExperimentalAutoAlignBoundary),
+    },
+  ]}
+/>
+
+<Canvas
+  of={PopoverStories.TabTipExperimentalAutoAlign}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () =>
+        stackblitzPrefillConfig(PopoverStories.TabTipExperimentalAutoAlign),
+    },
+  ]}
+/>
+
+## Appearance
+
+The `Popover` component has several props which you can use to customize its
+appearance, including:
+
+- `caret`: to conditionally display a `caret` or render the popover directly
+  beside the trigger element
+- `dropShadow`: to display a drop shadow on the popover content
+- `highContrast`: to display a high contrast variant of the popover
+- `border`: to display a border on the popover
+- `backgroundToken`: to change the token for the color of the background
+
+## Component API
+
+<ArgTypes />
+
+## Feedback
+
+Help us improve this component by providing feedback, asking questions on Slack,
+or updating this file on
+[GitHub](https://github.com/carbon-design-system/carbon/edit/main/packages/react/src/components/Popover/Popover.mdx).

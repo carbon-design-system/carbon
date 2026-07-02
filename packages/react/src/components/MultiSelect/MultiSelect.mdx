@@ -1,0 +1,155 @@
+import { ArgTypes, Canvas, Story, Meta } from '@storybook/addon-docs/blocks';
+
+import * as MultiSelect from './MultiSelect.stories';
+import { Filterable } from './MultiSelect.stories';
+import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
+
+<Meta isTemplate />
+
+# MultiSelect
+
+[Source code](https://github.com/carbon-design-system/carbon/tree/main/packages/react/src/components/MultiSelect)
+&nbsp;|&nbsp;
+[Usage guidelines](https://www.carbondesignsystem.com/components/dropdown/usage#multiselect)
+&nbsp;|&nbsp;
+[Accessibility](https://www.carbondesignsystem.com/components/dropdown/accessibility)
+
+{/* <!-- START doctoc generated TOC please keep comment here to allow auto update --> <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE --> */}
+
+## Table of Contents
+
+- [Overview](#overview)
+  - [With initial selected items](#with-initial-selected-items)
+  - [Select all](#select-all)
+  - [Filtering](#filtering)
+  - [With layer](#with-layer)
+- [Component API](#component-api)
+  - [`downshiftProps`](#downshiftprops)
+- [`inputProps`](#inputprops)
+  - [Using `maxLength`](#using-maxlength)
+- [Feedback](#feedback)
+
+{/* <!-- END doctoc generated TOC please keep comment here to allow auto update --> */}
+
+## Overview
+
+The `MultiSelect` component is a variant of the `Dropdown` component that allows
+for multiple items to be selected. `MultiSelect` stays open while items are
+being selected.
+
+<Canvas
+  of={MultiSelect.Default}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(MultiSelect.Default),
+    },
+  ]}
+/>
+
+### With initial selected items
+
+By passing items into the `initialSelectedItems` prop, they can be pre-selected.
+
+<Canvas
+  of={MultiSelect.WithInitialSelectedItems}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () =>
+        stackblitzPrefillConfig(MultiSelect.WithInitialSelectedItems),
+    },
+  ]}
+/>
+
+### Select all
+
+The MultiSelect component includes a "Select All" feature, allowing users to
+easily select or deselect all options with a single action.
+
+To implement the "Select All" feature in your MultiSelect component, add a new
+option to your options array with these properties:
+
+- `id`: A unique identifier (e.g., 'select-all')
+- `text`: The label for the option
+- `isSelectAll`: Set to `true`
+
+```
+const options = [
+  {
+    id: 'select-all',
+    text: 'All roles',
+    isSelectAll: true,
+  },
+  // ... other options
+];
+```
+
+### Filtering
+
+The `FilterableMultiSelect` component allows for filtering the list of
+selectable items to a subset.
+
+<Canvas
+  of={Filterable}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(Filterable),
+    },
+  ]}
+/>
+
+### With layer
+
+<Canvas of={MultiSelect.WithLayerMultiSelect} />
+
+## Component API
+
+### `downshiftProps`
+
+This component utilizes [Downshift](https://www.downshift-js.com/) under the
+hood to help provide complex yet accessible custom dropdown components. We
+provide access to the built in Downshift features with this prop.
+
+Use with caution: anything you define here overrides the components' internal
+handling of that prop. Downshift internals are subject to change, and in some
+cases they can not be shimmed to shield you from potentially breaking changes.
+
+For more information, checkout the Downshift prop
+[documentation](https://www.downshift-js.com/downshift#props-used-in-examples)
+
+<ArgTypes />
+
+## `inputProps`
+
+Use `inputProps` to specify native input attributes to place on the `<input>`.
+These are passed to
+[Downshift's `getInputProps()`](https://github.com/downshift-js/downshift?tab=readme-ov-file#getinputprops)
+and will override the internal input props.
+
+### Using `maxLength`
+
+The native `maxLength` attribute can be included in `inputProps` to define the
+maximum string length that the user can enter into the input.
+
+When using `maxLength`, ensure the limit is communicated to the user through
+both `helperText` and `invalidText`/`warnText`.
+
+```jsx
+<FilterableMultiSelect
+  inputProps={{ maxLength: 5 }}
+  id="test-combo"
+  items={[{ label: 'Item 1' }]}
+  titleText="Abbreviation"
+  helperText="Provide an abbreviation that is 5 characters or less"
+  invalidText="Abbreviations must be 5 characters or less"
+  warnText="Abbreviations must be 5 characters or less"
+/>
+```
+
+## Feedback
+
+Help us improve this component by providing feedback, asking questions on Slack,
+or updating this file on
+[GitHub](https://github.com/carbon-design-system/carbon/edit/main/packages/react/src/components/MultiSelect/MultiSelect.mdx).

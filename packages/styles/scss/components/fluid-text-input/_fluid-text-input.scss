@@ -1,0 +1,282 @@
+//
+// Copyright IBM Corp. 2018, 2025
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+//-----------------------------
+// Fluid Text Input
+//-----------------------------
+@use '../../config' as *;
+@use '../../motion' as *;
+@use '../../spacing' as *;
+@use '../../theme' as *;
+@use '../../utilities/convert';
+@use '../../utilities/focus-outline' as *;
+@use '../text-input';
+
+@mixin fluid-text-input {
+  .#{$prefix}--text-input--fluid.#{$prefix}--text-input-wrapper {
+    position: relative;
+    background: $field;
+    block-size: 100%;
+    transition:
+      background-color $duration-fast-01 motion(standard, productive),
+      outline $duration-fast-01 motion(standard, productive);
+  }
+
+  .#{$prefix}--text-input--fluid .#{$prefix}--label {
+    position: absolute;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    margin: 0;
+    block-size: convert.to-rem(16px);
+    inset-block-start: convert.to-rem(13px);
+
+    // For the main label
+    &:not(.#{$prefix}--text-input__label-counter) {
+      inline-size: auto;
+      inset-inline-end: auto;
+      inset-inline-start: $spacing-05;
+    }
+
+    // For the counter
+    &.#{$prefix}--text-input__label-counter {
+      inline-size: auto;
+      inset-inline-end: $spacing-05;
+      inset-inline-start: auto;
+    }
+  }
+  .#{$prefix}--text-input--fluid.#{$prefix}--text-input-wrapper--readonly
+    .#{$prefix}--text-input__field-wrapper
+    .#{$prefix}--text-input {
+    color: $text-secondary;
+  }
+
+  .#{$prefix}--text-input--fluid .#{$prefix}--label::-webkit-scrollbar,
+  .#{$prefix}--text-input--fluid
+    .#{$prefix}--label
+    .#{$prefix}--toggletip-label::-webkit-scrollbar {
+    display: none;
+  }
+
+  .#{$prefix}--text-input--fluid
+    .#{$prefix}--label:not(:has(.#{$prefix}--toggletip-label)),
+  .#{$prefix}--text-input--fluid
+    .#{$prefix}--label
+    .#{$prefix}--toggletip-label {
+    -ms-overflow-style: none;
+    overflow-x: scroll;
+    scrollbar-width: none;
+    white-space: nowrap;
+  }
+
+  .#{$prefix}--text-input--fluid .#{$prefix}--form__helper-text {
+    display: none;
+  }
+
+  .#{$prefix}--text-input--fluid .#{$prefix}--text-input {
+    padding: convert.to-rem(32px) $spacing-05 convert.to-rem(13px);
+    min-block-size: convert.to-rem(64px);
+  }
+
+  .#{$prefix}--text-input__divider,
+  .#{$prefix}--text-input--fluid .#{$prefix}--text-input__divider {
+    display: none;
+  }
+
+  .#{$prefix}--text-input--fluid
+    .#{$prefix}--text-input__field-wrapper[data-invalid],
+  .#{$prefix}--text-input--fluid
+    .#{$prefix}--text-input__field-wrapper--warning {
+    display: block;
+  }
+
+  .#{$prefix}--text-input--fluid input[data-invalid] {
+    outline: none;
+  }
+
+  .#{$prefix}--text-input--fluid .#{$prefix}--form-requirement {
+    padding: $spacing-03 convert.to-rem(40px) $spacing-03 $spacing-05;
+    margin: 0;
+  }
+
+  .#{$prefix}--text-input--fluid .#{$prefix}--text-input--invalid,
+  .#{$prefix}--text-input--fluid .#{$prefix}--text-input--warning {
+    border-block-end: none;
+  }
+
+  .#{$prefix}--text-input--fluid
+    .#{$prefix}--text-input--invalid
+    ~ .#{$prefix}--text-input__divider,
+  .#{$prefix}--text-input--fluid
+    .#{$prefix}--text-input--warning
+    ~ .#{$prefix}--text-input__divider {
+    display: block;
+    border-style: solid;
+    border-color: $border-subtle;
+    margin: 0 1rem;
+    border-block-end: none;
+  }
+
+  .#{$prefix}--text-input--fluid .#{$prefix}--text-input__invalid-icon {
+    inset-block-start: convert.to-rem(80px);
+  }
+
+  .#{$prefix}--text-input--fluid
+    .#{$prefix}--text-input__field-wrapper[data-invalid]
+    > .#{$prefix}--text-input--invalid,
+  .#{$prefix}--text-input--fluid
+    .#{$prefix}--text-input__field-wrapper--warning
+    > .#{$prefix}--text-input--warning {
+    outline: none;
+  }
+
+  .#{$prefix}--text-input--fluid
+    .#{$prefix}--text-input__field-wrapper--warning {
+    border-block-end: 1px solid $border-strong;
+  }
+
+  .#{$prefix}--text-input--fluid
+    .#{$prefix}--text-input__field-wrapper[data-invalid]:not(:focus) {
+    @include focus-outline('invalid');
+  }
+
+  .#{$prefix}--text-input--fluid
+    .#{$prefix}--text-input__field-wrapper[data-invalid]:focus-within,
+  .#{$prefix}--text-input--fluid
+    .#{$prefix}--text-input__field-wrapper--warning:focus-within {
+    @include focus-outline('outline');
+  }
+
+  .#{$prefix}--text-input--fluid
+    .#{$prefix}--text-input__field-wrapper[data-invalid]
+    > .#{$prefix}--text-input--invalid:focus,
+  .#{$prefix}--text-input--fluid
+    .#{$prefix}--text-input__field-wrapper--warning
+    > .#{$prefix}--text-input--warning:focus {
+    outline: none;
+  }
+
+  // Password Input
+  .#{$prefix}--text-input--fluid
+    .#{$prefix}--text-input.#{$prefix}--password-input {
+    padding-inline-end: $spacing-08;
+  }
+
+  .#{$prefix}--text-input--fluid.#{$prefix}--password-input-wrapper
+    .#{$prefix}--text-input__invalid-icon {
+    inset-inline-end: $spacing-05;
+  }
+
+  .#{$prefix}--text-input--fluid .#{$prefix}--toggle-password-tooltip {
+    @include focus-outline('reset');
+
+    position: absolute;
+    block-size: convert.to-rem(64px);
+    cursor: pointer;
+    inline-size: convert.to-rem(48px);
+    inset-block-start: 0;
+    inset-inline-end: 0;
+    transition: outline $duration-fast-01 motion(standard, productive);
+  }
+
+  .#{$prefix}--text-input--fluid
+    .#{$prefix}--toggle-password-tooltip
+    .#{$prefix}--popover {
+    inset-inline-start: 0;
+  }
+
+  .#{$prefix}--text-input--fluid
+    .#{$prefix}--btn.#{$prefix}--text-input--password__visibility__toggle.#{$prefix}--tooltip__trigger {
+    block-size: convert.to-rem(32px);
+    inline-size: convert.to-rem(32px);
+    inset-block-start: convert.to-rem(26px);
+    inset-inline-end: $spacing-03;
+  }
+
+  // Skeleton
+  .#{$prefix}--text-input--fluid__skeleton {
+    position: relative;
+    background: $skeleton-background;
+    block-size: convert.to-rem(64px);
+    border-block-end: 1px solid $skeleton-element;
+  }
+
+  .#{$prefix}--text-input--fluid__skeleton .#{$prefix}--skeleton {
+    position: absolute;
+    block-size: convert.to-rem(8px);
+    inline-size: 25%;
+    inset-block-start: $spacing-05;
+    inset-inline-start: $spacing-05;
+  }
+
+  .#{$prefix}--text-input--fluid__skeleton .#{$prefix}--label {
+    position: absolute;
+    padding: 0;
+    block-size: convert.to-rem(8px);
+    inline-size: 50%;
+    inset-block-start: convert.to-rem(36px);
+    inset-inline-start: $spacing-05;
+  }
+
+  // AILabel styles
+  .#{$prefix}--text-input--fluid
+    .#{$prefix}--text-input__field-wrapper--decorator
+    .#{$prefix}--text-input__field-inner-wrapper--decorator
+    > *,
+  .#{$prefix}--text-input--fluid
+    .#{$prefix}--text-input__field-wrapper--slug
+    .#{$prefix}--ai-label,
+  .#{$prefix}--text-input--fluid
+    .#{$prefix}--text-input__field-wrapper--slug
+    .#{$prefix}--slug {
+    inset-block-start: convert.to-rem(42px);
+  }
+
+  .#{$prefix}--text-input--fluid
+    .#{$prefix}--text-input--invalid
+    ~ .#{$prefix}--text-input__field-inner-wrapper--decorator
+    > *,
+  .#{$prefix}--text-input--fluid
+    .#{$prefix}--text-input--warning
+    ~ .#{$prefix}--text-input__field-inner-wrapper--decorator
+    > *,
+  .#{$prefix}--text-input--fluid
+    .#{$prefix}--text-input--invalid
+    ~ .#{$prefix}--ai-label,
+  .#{$prefix}--text-input--fluid
+    .#{$prefix}--text-input--warning
+    ~ .#{$prefix}--ai-label,
+  .#{$prefix}--text-input--fluid
+    .#{$prefix}--text-input--invalid
+    ~ .#{$prefix}--slug,
+  .#{$prefix}--text-input--fluid
+    .#{$prefix}--text-input--warning
+    ~ .#{$prefix}--slug {
+    inset-inline-end: $spacing-05;
+  }
+
+  .#{$prefix}--text-input--fluid
+    .#{$prefix}--text-input__field-wrapper--decorator
+    .#{$prefix}--text-input,
+  .#{$prefix}--text-input--fluid
+    .#{$prefix}--text-input__field-wrapper--decorator
+    .#{$prefix}--text-input--invalid,
+  .#{$prefix}--text-input--fluid
+    .#{$prefix}--text-input__field-wrapper--decorator
+    .#{$prefix}--text-input--warning,
+  .#{$prefix}--text-input--fluid
+    .#{$prefix}--text-input__field-wrapper--slug
+    .#{$prefix}--text-input,
+  .#{$prefix}--text-input--fluid
+    .#{$prefix}--text-input__field-wrapper--slug
+    .#{$prefix}--text-input--invalid,
+  .#{$prefix}--text-input--fluid
+    .#{$prefix}--text-input__field-wrapper--slug
+    .#{$prefix}--text-input--warning {
+    padding-inline-end: $spacing-08;
+  }
+}

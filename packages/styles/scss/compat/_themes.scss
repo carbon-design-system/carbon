@@ -1,0 +1,35 @@
+//
+// Copyright IBM Corp. 2018, 2023
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use 'sass:map';
+@use '@carbon/themes/scss/compat/themes' as compat;
+@use '../themes';
+
+// For our compatability themes, we will merge the themes from v10 and v11 and
+// provide this combination as one of our four default themes.
+//
+// This is useful for situations where a user is trying to use the compatability
+// theme, for example:
+//
+// ```scss
+// @use '@carbon/styles/scss/reset';
+// @use '@carbon/styles/scss/compat/themes';
+// @use '@carbon/styles/scss/compat/theme' with (
+//   $theme: themes.$g100
+// );
+// ```
+//
+// Without merging these themes, then the value of a token in v11 would default
+// to our $white theme. As a result, the user would need to specify both the
+// `$theme` and the `$fallback` to the `scss/compat/theme` module.
+//
+// Now that we merge the themes, this code snippet will function as expected.
+
+$white: map.merge(themes.$white, compat.$white);
+$g10: map.merge(themes.$g10, compat.$g10);
+$g90: map.merge(themes.$g90, compat.$g90);
+$g100: map.merge(themes.$g100, compat.$g100);

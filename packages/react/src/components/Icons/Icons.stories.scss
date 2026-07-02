@@ -1,0 +1,24 @@
+//
+// Copyright IBM Corp. 2021
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+.demo-icon-example {
+  display: flex;
+  justify-content: space-between;
+  margin: 2rem;
+  inline-size: 15rem;
+}
+
+.demo-icon-example:nth-child(1) svg {
+  min-inline-size: 1rem;
+}
+
+.demo-icon-example:nth-child(2) svg {
+  min-inline-size: 1.25rem;
+}
+
+.demo-icon-example:nth-child(3) svg {
+  min-inline-size: 2rem;
+}

@@ -1,0 +1,1155 @@
+//
+// Copyright IBM Corp. 2016, 2026
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use '../button/tokens' as *;
+@use '../text-input';
+@use '../tag';
+@use '../tag/mixins' as *;
+@use '../../config' as *;
+@use '../../colors' as *;
+@use '../../theme' as *;
+@use '../../type' as *;
+@use '../../spacing' as *;
+@use '../../motion' as *;
+@use '../../layer' as *;
+@use '../../utilities/layout';
+@use '../../utilities/ai-gradient' as *;
+@use '../../utilities/box-shadow' as *;
+@use '../../utilities/button-reset';
+@use '../../utilities/component-reset';
+@use '../../utilities/convert';
+@use '../../utilities/focus-outline' as *;
+@use '../../utilities/high-contrast-mode' as *;
+@use '../../utilities/z-index' as *;
+
+/// @type Number
+/// @access public
+/// @group list-box
+$list-box-width: 100%;
+
+/// @type Number
+/// @access public
+/// @group list-box
+$list-box-height: convert.to-rem(40px);
+
+/// @type Number
+/// @access public
+/// @group list-box
+$list-box-inline-height: $list-box-height;
+
+/// @type Number
+/// @access public
+/// @group list-box
+$list-box-menu-width: convert.to-rem(300px);
+
+/// List box styles
+/// @access public
+/// @group list-box
+@mixin list-box {
+  // The overall container element for a `list-box`. Has two variants,
+  // `disabled` and `inline`.
+  .#{$prefix}--list-box__wrapper {
+    display: block;
+  }
+
+  .#{$prefix}--list-box__wrapper--inline {
+    display: inline-grid;
+    align-items: center;
+    grid-gap: convert.to-rem(4px);
+    grid-template: auto auto / auto auto;
+
+    .#{$prefix}--label {
+      @include type-style('body-compact-01');
+    }
+
+    .#{$prefix}--label,
+    .#{$prefix}--form__helper-text,
+    .#{$prefix}--form-requirement {
+      margin: 0;
+    }
+
+    .#{$prefix}--form__helper-text {
+      max-inline-size: none;
+    }
+
+    .#{$prefix}--form-requirement {
+      grid-column: 3;
+    }
+  }
+
+  .#{$prefix}--list-box {
+    @include reset;
+    @include layout.use('size', $default: 'md', $min: 'xs', $max: 'lg');
+
+    position: relative;
+    border: none;
+    background-color: $field;
+    block-size: layout.size('height');
+    border-block-end: 1px solid $border-strong;
+    color: $text-primary;
+    cursor: pointer;
+    inline-size: $list-box-width;
+    max-block-size: layout.size('height');
+    transition: all $duration-fast-01 motion(standard, productive);
+
+    &:hover {
+      background-color: $field-hover;
+    }
+  }
+
+  .#{$prefix}--multi-select.#{$prefix}--multi-select--readonly.#{$prefix}--list-box {
+    cursor: default;
+  }
+
+  .#{$prefix}--list-box--expanded {
+    border-block-end-color: $border-subtle-01;
+  }
+
+  .#{$prefix}--layer-two .#{$prefix}--list-box--expanded {
+    border-block-end-color: $border-subtle-02;
+  }
+
+  .#{$prefix}--layer-three .#{$prefix}--list-box--expanded {
+    border-block-end-color: $border-subtle-03;
+  }
+
+  .#{$prefix}--list-box--expanded:hover {
+    background-color: $field;
+  }
+
+  // V11: Possibly deprecate
+  .#{$prefix}--list-box--expanded:hover.#{$prefix}--list-box--light:hover {
+    background-color: $field-02;
+  }
+
+  .#{$prefix}--list-box .#{$prefix}--text-input {
+    block-size: 100%;
+    min-inline-size: 0;
+  }
+
+  // invalid states
+  .#{$prefix}--list-box__invalid-icon {
+    position: absolute;
+    fill: $support-error;
+    inset-block-start: 50%;
+    inset-inline-end: $spacing-08;
+    transform: translateY(-50%);
+  }
+
+  .#{$prefix}--list-box__invalid-icon--warning {
+    fill: $support-warning;
+  }
+
+  .#{$prefix}--list-box__invalid-icon--warning path[fill] {
+    fill: $black-100;
+    opacity: 1;
+  }
+
+  .#{$prefix}--list-box[data-invalid] .#{$prefix}--list-box__field,
+  .#{$prefix}--list-box.#{$prefix}--list-box--warning
+    .#{$prefix}--list-box__field {
+    border-block-end: 0;
+    padding-inline-end: $spacing-10;
+  }
+
+  .#{$prefix}--list-box[data-invalid].#{$prefix}--list-box--inline
+    .#{$prefix}--list-box__field,
+  .#{$prefix}--list-box.#{$prefix}--list-box--warning.#{$prefix}--list-box--inline
+    .#{$prefix}--list-box__field {
+    padding-inline-end: convert.to-rem(56px);
+  }
+
+  // V11: Possibly deprecate
+  // Light variation for 'list-box'
+  .#{$prefix}--list-box--light {
+    background-color: $field-02;
+
+    &:hover {
+      background-color: $field-hover;
+    }
+  }
+
+  // V11: Possibly deprecate
+  .#{$prefix}--list-box--light .#{$prefix}--list-box__menu {
+    background: $layer;
+  }
+
+  // V11: Possibly deprecate
+  .#{$prefix}--list-box--light .#{$prefix}--list-box__menu-item__option {
+    border-block-start-color: $border-subtle;
+  }
+
+  .#{$prefix}--list-box--light.#{$prefix}--list-box--expanded {
+    border-block-end-color: transparent;
+  }
+
+  // Disabled state for `list-box`
+  .#{$prefix}--list-box--disabled:hover {
+    background-color: $field;
+  }
+
+  // V11: Possibly deprecate
+  .#{$prefix}--list-box--light.#{$prefix}--list-box--disabled {
+    background-color: $field-02;
+  }
+
+  .#{$prefix}--list-box--disabled,
+  .#{$prefix}--list-box--disabled .#{$prefix}--list-box__field,
+  .#{$prefix}--list-box--disabled .#{$prefix}--list-box__field:focus {
+    border-block-end-color: transparent;
+    outline: none;
+  }
+
+  .#{$prefix}--list-box--disabled .#{$prefix}--list-box__label,
+  .#{$prefix}--list-box--disabled.#{$prefix}--list-box--inline
+    .#{$prefix}--list-box__label {
+    color: $text-disabled;
+  }
+
+  .#{$prefix}--list-box--disabled .#{$prefix}--list-box__menu-icon > svg,
+  .#{$prefix}--list-box--disabled .#{$prefix}--list-box__selection > svg {
+    fill: $icon-disabled;
+  }
+
+  .#{$prefix}--list-box--disabled,
+  .#{$prefix}--list-box--disabled .#{$prefix}--list-box__field,
+  .#{$prefix}--list-box--disabled .#{$prefix}--list-box__menu-icon {
+    cursor: not-allowed;
+  }
+
+  .#{$prefix}--list-box--disabled .#{$prefix}--list-box__menu-item,
+  .#{$prefix}--list-box--disabled .#{$prefix}--list-box__menu-item:hover,
+  .#{$prefix}--list-box--disabled
+    .#{$prefix}--list-box__menu-item--highlighted {
+    color: $text-disabled;
+    text-decoration: none;
+  }
+
+  .#{$prefix}--list-box--disabled .#{$prefix}--list-box__selection:hover {
+    cursor: not-allowed;
+  }
+
+  // disabled && invalid
+  .#{$prefix}--list-box--disabled.#{$prefix}--list-box[data-invalid]
+    .#{$prefix}--list-box__field {
+    padding-inline-end: $spacing-09;
+  }
+
+  .#{$prefix}--list-box--disabled.#{$prefix}--list-box[data-invalid].#{$prefix}--list-box--inline
+    .#{$prefix}--list-box__field {
+    padding-inline-end: $spacing-07;
+  }
+
+  // Inline variant for a `list-box`
+  .#{$prefix}--list-box.#{$prefix}--list-box--inline {
+    border-width: 0;
+    background-color: transparent;
+
+    &:hover {
+      background-color: $layer-hover;
+    }
+  }
+
+  .#{$prefix}--list-box.#{$prefix}--list-box--inline.#{$prefix}--list-box--expanded {
+    border-block-end-width: 0;
+  }
+
+  .#{$prefix}--list-box.#{$prefix}--list-box--inline.#{$prefix}--list-box--expanded
+    .#{$prefix}--list-box__field[aria-expanded='true'] {
+    border-width: 0;
+  }
+
+  .#{$prefix}--list-box.#{$prefix}--list-box--inline.#{$prefix}--list-box--expanded:hover,
+  .#{$prefix}--list-box.#{$prefix}--list-box--inline.#{$prefix}--list-box--disabled:hover {
+    background-color: transparent;
+  }
+
+  .#{$prefix}--list-box.#{$prefix}--list-box--inline
+    .#{$prefix}--list-box__field {
+    padding: 0 $spacing-07 0 $spacing-03;
+  }
+
+  .#{$prefix}--list-box.#{$prefix}--list-box--inline
+    .#{$prefix}--list-box__menu-icon {
+    inset-inline-end: $spacing-03;
+  }
+
+  .#{$prefix}--list-box.#{$prefix}--list-box--inline
+    .#{$prefix}--list-box__invalid-icon {
+    inset-inline-end: $spacing-07;
+  }
+
+  .#{$prefix}--list-box--inline .#{$prefix}--list-box__label {
+    color: $text-primary;
+  }
+
+  .#{$prefix}--list-box--inline .#{$prefix}--list-box__field {
+    block-size: 100%;
+  }
+
+  .#{$prefix}--dropdown--inline .#{$prefix}--list-box__field {
+    max-inline-size: convert.to-rem(480px);
+  }
+
+  .#{$prefix}--dropdown--inline .#{$prefix}--list-box__menu {
+    max-inline-size: convert.to-rem(480px);
+    min-inline-size: convert.to-rem(288px);
+  }
+
+  // The field we use for input, showing selection, etc.
+  .#{$prefix}--list-box__field {
+    @include button-reset.reset;
+
+    position: relative;
+    display: inline-flex;
+    overflow: hidden;
+    align-items: center;
+    // Account for the border in `.cds--list-box`
+    block-size: calc(100% + 1px);
+    cursor: pointer;
+    outline: none;
+    padding-block: 0;
+    padding-inline: $spacing-05 $spacing-09;
+    text-overflow: ellipsis;
+    vertical-align: top;
+    white-space: nowrap;
+  }
+
+  .#{$prefix}--list-box__field:focus {
+    @include focus-outline('outline');
+  }
+
+  .#{$prefix}--list-box__field[disabled] {
+    color: $text-disabled;
+    outline: none;
+  }
+
+  // populated input field
+  .#{$prefix}--list-box__field .#{$prefix}--text-input {
+    padding-inline-end: convert.to-rem(70px);
+  }
+
+  // invalid && populated input field
+  .#{$prefix}--list-box[data-invalid]
+    .#{$prefix}--list-box__field
+    .#{$prefix}--text-input,
+  .#{$prefix}--list-box--warning
+    .#{$prefix}--list-box__field
+    .#{$prefix}--text-input {
+    // to account for clear input button outline
+    padding-inline-end: convert.to-rem(105px);
+  }
+
+  .#{$prefix}--list-box[data-invalid]
+    .#{$prefix}--list-box__field
+    .#{$prefix}--text-input
+    + .#{$prefix}--list-box__invalid-icon,
+  .#{$prefix}--list-box--warning
+    .#{$prefix}--list-box__field
+    .#{$prefix}--text-input
+    + .#{$prefix}--list-box__invalid-icon {
+    // to account for clear input button outline
+    inset-inline-end: convert.to-rem(82px);
+  }
+
+  // empty input field
+  .#{$prefix}--list-box__field .#{$prefix}--text-input--empty {
+    padding-inline-end: $spacing-09;
+  }
+
+  // invalid && empty input field
+  .#{$prefix}--list-box[data-invalid]
+    .#{$prefix}--list-box__field
+    .#{$prefix}--text-input--empty,
+  .#{$prefix}--list-box--warning
+    .#{$prefix}--list-box__field
+    .#{$prefix}--text-input--empty {
+    padding-inline-end: $spacing-10;
+  }
+
+  .#{$prefix}--list-box[data-invalid]
+    .#{$prefix}--list-box__field
+    .#{$prefix}--text-input--empty
+    + .#{$prefix}--list-box__invalid-icon,
+  .#{$prefix}--list-box--warning
+    .#{$prefix}--list-box__field
+    .#{$prefix}--text-input--empty
+    + .#{$prefix}--list-box__invalid-icon {
+    // to account for clear input button outline
+    inset-inline-end: convert.to-rem(40px);
+  }
+
+  // Label for a `list-box__field`
+  .#{$prefix}--list-box__label {
+    @include type-style('body-compact-01');
+
+    overflow: hidden;
+    color: $text-primary;
+    text-overflow: ellipsis;
+    user-select: none;
+    white-space: nowrap;
+  }
+
+  // Menu status inside of a `list-box__field`
+  .#{$prefix}--list-box__menu-icon {
+    @include button-reset.reset($width: false);
+
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    block-size: convert.to-rem(24px);
+    cursor: pointer;
+    inline-size: convert.to-rem(24px);
+    inset-inline-end: $spacing-04;
+    outline: none;
+    transition: transform $duration-fast-01 motion(standard, productive);
+  }
+
+  .#{$prefix}--list-box__menu-icon > svg {
+    fill: $icon-primary;
+  }
+
+  .#{$prefix}--list-box__menu-icon--open {
+    justify-content: center;
+    inline-size: convert.to-rem(24px);
+    transform: rotate(180deg);
+  }
+
+  // Selection indicator for a `list-box__field`
+  .#{$prefix}--list-box__selection {
+    @include button-reset.reset($width: false);
+
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    block-size: convert.to-rem(24px);
+    cursor: pointer;
+    inline-size: convert.to-rem(24px);
+    inset-block-start: 50%;
+    /* to preserve .5rem space between icons according to spec top/transform used to center the combobox clear selection icon in IE11 */
+    inset-inline-end: convert.to-rem(45px);
+    transform: translateY(-50%);
+    transition: background-color $duration-fast-01 motion(standard, productive);
+    user-select: none;
+
+    &:focus {
+      @include focus-outline('outline');
+
+      &:hover {
+        @include focus-outline('outline');
+      }
+    }
+  }
+
+  .#{$prefix}--list-box__selection > svg {
+    fill: $icon-primary;
+  }
+
+  .#{$prefix}--list-box--disabled .#{$prefix}--list-box__selection:focus {
+    outline: none;
+  }
+
+  // Modifier for a selection to show that multiple selections have been made
+  .#{$prefix}--list-box__selection--multi {
+    @include type-style('label-01');
+
+    position: static;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: convert.to-rem(8px);
+    border-radius: convert.to-rem(12px);
+    background-color: $background-inverse;
+    block-size: convert.to-rem(24px);
+    color: $text-inverse;
+    inline-size: auto;
+    inset-block-start: auto;
+    line-height: 0;
+    margin-inline-end: convert.to-rem(10px);
+    // Align with hover circle of X button
+    padding-inline-end: convert.to-rem(2px);
+    transform: none;
+  }
+
+  .#{$prefix}--list-box__selection--multi > svg {
+    padding: convert.to-rem(2px);
+    block-size: convert.to-rem(20px);
+    fill: $icon-inverse;
+    inline-size: convert.to-rem(20px);
+    margin-inline-start: convert.to-rem(4px);
+
+    &:hover {
+      border-radius: 50%;
+      background-color: $button-secondary-hover;
+    }
+  }
+
+  .#{$prefix}--list-box--disabled .#{$prefix}--list-box__selection--multi {
+    @include tag-theme($text-disabled, $layer);
+
+    > svg {
+      fill: $icon-disabled;
+
+      &:hover {
+        background-color: initial;
+      }
+    }
+  }
+
+  .#{$prefix}--list-box__selection--multi:hover {
+    outline: none;
+  }
+
+  // Descendant of a `list-box` that displays a list of options to select
+  .#{$prefix}--list-box__menu {
+    @include box-shadow();
+
+    position: absolute;
+    z-index: z('dropdown');
+    display: none;
+    background-color: $layer;
+    inline-size: $list-box-width;
+    inset-inline: 0;
+    overflow-y: auto;
+    transition: max-height $duration-fast-02 motion(standard, productive);
+
+    &:focus {
+      // remove default browser focus in firefox
+      @include focus-outline('border');
+    }
+  }
+
+  // Allow auto-alignment to control inline placement
+  .#{$prefix}--autoalign .#{$prefix}--list-box__menu {
+    inset-inline: auto;
+  }
+
+  .#{$prefix}--list-box .#{$prefix}--list-box__field[aria-expanded='false'] {
+    .#{$prefix}--list-box__menu {
+      display: none;
+      max-block-size: 0;
+      visibility: hidden;
+    }
+  }
+
+  .#{$prefix}--list-box--expanded .#{$prefix}--list-box__menu {
+    display: block;
+    // item height * 5.5 items shown
+    max-block-size: calc(layout.size('height') * 5.5);
+  }
+
+  // Descendant of a `list-box__menu` that represents a selection for a control
+  .#{$prefix}--list-box__menu-item {
+    @include type-style('body-compact-01');
+
+    position: relative;
+    block-size: layout.size('height');
+    color: $text-secondary;
+    cursor: pointer;
+    transition: background $duration-fast-01 motion(standard, productive);
+    user-select: none;
+
+    &:hover {
+      background-color: $layer-hover;
+    }
+
+    &:active {
+      background-color: $layer-selected;
+    }
+  }
+
+  // V11: Possibly deprecate
+  .#{$prefix}--list-box--light .#{$prefix}--list-box__menu-item:hover {
+    background-color: $layer-hover;
+  }
+
+  .#{$prefix}--list-box--disabled .#{$prefix}--list-box__menu-item:hover {
+    background-color: transparent;
+  }
+
+  // V11: Possibly deprecate
+  .#{$prefix}--list-box--light .#{$prefix}--list-box__menu-item:active {
+    background-color: $layer-selected;
+  }
+
+  .#{$prefix}--list-box--disabled
+    .#{$prefix}--list-box__menu-item__option:hover {
+    border-block-start-color: $border-subtle-01;
+  }
+
+  .#{$prefix}--layer-two
+    .#{$prefix}--list-box--disabled
+    .#{$prefix}--list-box__menu-item__option:hover {
+    border-block-start-color: $border-subtle-02;
+  }
+
+  .#{$prefix}--layer-three
+    .#{$prefix}--list-box--disabled
+    .#{$prefix}--list-box__menu-item__option:hover {
+    border-block-start-color: $border-subtle-03;
+  }
+
+  .#{$prefix}--list-box__menu-item:first-of-type
+    .#{$prefix}--list-box__menu-item__option {
+    border-block-start-color: transparent;
+  }
+
+  .#{$prefix}--list-box__menu-item:hover
+    .#{$prefix}--list-box__menu-item__option {
+    color: $text-primary;
+  }
+
+  .#{$prefix}--list-box--disabled
+    .#{$prefix}--list-box__menu-item:hover
+    + .#{$prefix}--list-box__menu-item
+    .#{$prefix}--list-box__menu-item__option {
+    border-block-start-color: $border-subtle-01;
+  }
+
+  .#{$prefix}--layer-two
+    .#{$prefix}--list-box--disabled
+    .#{$prefix}--list-box__menu-item:hover
+    + .#{$prefix}--list-box__menu-item
+    .#{$prefix}--list-box__menu-item__option {
+    border-block-start-color: $border-subtle-02;
+  }
+
+  .#{$prefix}--layer-three
+    .#{$prefix}--list-box--disabled
+    .#{$prefix}--list-box__menu-item:hover
+    + .#{$prefix}--list-box__menu-item
+    .#{$prefix}--list-box__menu-item__option {
+    border-block-start-color: $border-subtle-03;
+  }
+
+  .#{$prefix}--layer-two .#{$prefix}--list-box__menu-item__option {
+    border-block-start-color: $border-subtle-02;
+  }
+
+  .#{$prefix}--layer-three .#{$prefix}--list-box__menu-item__option {
+    border-block-start-color: $border-subtle-03;
+  }
+
+  .#{$prefix}--list-box__menu-item__option {
+    @include component-reset.reset;
+    @include focus-outline('reset');
+
+    display: block;
+    overflow: hidden;
+    padding: calc((layout.size('height') - 1rem) / 2 - 1px) 0;
+    margin: 0 $spacing-05;
+    block-size: layout.size('height');
+    border-block-end: 1px solid transparent;
+    border-block-start: 1px solid transparent;
+    border-block-start-color: $border-subtle-01;
+    color: $text-secondary;
+    font-weight: normal;
+    line-height: 1rem;
+    padding-inline-end: $spacing-06;
+    text-decoration: none;
+    text-overflow: ellipsis;
+    transition:
+      border-color $duration-fast-01 motion(standard, productive),
+      color $duration-fast-01 motion(standard, productive);
+    white-space: nowrap;
+
+    &:focus {
+      @include focus-outline('outline');
+
+      padding: calc((layout.size('height') - 1rem) / 2) convert.to-rem(16px);
+      border-color: transparent;
+      margin: 0;
+    }
+
+    &:hover {
+      border-color: transparent;
+      color: $text-primary;
+    }
+  }
+
+  .#{$prefix}--list-box--disabled
+    .#{$prefix}--list-box__menu-item:hover
+    .#{$prefix}--list-box__menu-item__option,
+  .#{$prefix}--list-box--disabled .#{$prefix}--list-box__menu-item__option {
+    color: $text-disabled;
+  }
+
+  .#{$prefix}--list-box__menu-item[disabled],
+  .#{$prefix}--list-box__menu-item[disabled] *,
+  .#{$prefix}--list-box__menu-item[disabled]
+    .#{$prefix}--list-box__menu-item__option,
+  .#{$prefix}--list-box__menu-item[disabled]:hover {
+    color: $text-disabled;
+    cursor: not-allowed;
+    outline: none;
+  }
+
+  .#{$prefix}--list-box__menu-item[disabled]:hover {
+    background-color: revert;
+  }
+
+  .#{$prefix}--list-box__menu-item[disabled]
+    .#{$prefix}--checkbox-label::before {
+    border-color: $text-disabled;
+  }
+
+  .#{$prefix}--list-box__menu-item[disabled]
+    .#{$prefix}--list-box__menu-item__option,
+  .#{$prefix}--list-box__menu-item[disabled]:hover
+    + .#{$prefix}--list-box__menu-item
+    .#{$prefix}--list-box__menu-item__option {
+    border-block-start-color: $border-subtle-01;
+  }
+
+  .#{$prefix}--layer-two
+    .#{$prefix}--list-box__menu-item[disabled]
+    .#{$prefix}--list-box__menu-item__option,
+  .#{$prefix}--layer-two
+    .#{$prefix}--list-box__menu-item[disabled]:hover
+    + .#{$prefix}--list-box__menu-item
+    .#{$prefix}--list-box__menu-item__option {
+    border-block-start-color: $border-subtle-02;
+  }
+
+  .#{$prefix}--layer-three
+    .#{$prefix}--list-box__menu-item[disabled]
+    .#{$prefix}--list-box__menu-item__option,
+  .#{$prefix}--layer-three
+    .#{$prefix}--list-box__menu-item[disabled]:hover
+    + .#{$prefix}--list-box__menu-item
+    .#{$prefix}--list-box__menu-item__option {
+    border-block-start-color: $border-subtle-03;
+  }
+
+  .#{$prefix}--list-box__menu-item--active
+    + .#{$prefix}--list-box__menu-item[disabled]
+    .#{$prefix}--list-box__menu-item__option,
+  .#{$prefix}--list-box__menu-item:hover
+    + .#{$prefix}--list-box__menu-item
+    .#{$prefix}--list-box__menu-item__option {
+    border-block-start-color: transparent;
+  }
+
+  .#{$prefix}--list-box.#{$prefix}--list-box--inline
+    .#{$prefix}--list-box__menu-item__option {
+    margin: 0 $spacing-03;
+
+    &:focus {
+      margin: 0;
+      padding-inline: $spacing-03 $spacing-03;
+    }
+  }
+
+  .#{$prefix}--list-box__menu-item--highlighted {
+    @include focus-outline('outline');
+
+    color: $text-primary;
+  }
+
+  .#{$prefix}--list-box__menu-item--highlighted
+    .#{$prefix}--list-box__menu-item__option,
+  .#{$prefix}--list-box__menu-item--highlighted
+    + .#{$prefix}--list-box__menu-item
+    .#{$prefix}--list-box__menu-item__option {
+    border-block-start-color: transparent;
+  }
+
+  .#{$prefix}--list-box__menu-item--highlighted
+    .#{$prefix}--list-box__menu-item__option {
+    color: $text-primary;
+  }
+
+  .#{$prefix}--list-box__menu-item--active {
+    background-color: $layer-selected;
+    border-block-end-color: $layer-selected;
+    color: $text-primary;
+  }
+
+  // V11: Possibly deprecate
+  .#{$prefix}--list-box--light .#{$prefix}--list-box__menu-item--active {
+    background-color: $layer-selected;
+    border-block-end-color: $layer-selected;
+  }
+
+  .#{$prefix}--list-box__menu-item--active:hover {
+    background-color: $layer-selected-hover;
+    border-block-end-color: $layer-selected-hover;
+  }
+
+  .#{$prefix}--list-box__menu-item--active
+    .#{$prefix}--list-box__menu-item__option {
+    color: $text-primary;
+  }
+
+  // Hide top border if previous list item is selected
+  .#{$prefix}--list-box__menu-item--active
+    + .#{$prefix}--list-box__menu-item
+    > .#{$prefix}--list-box__menu-item__option {
+    border-block-start-color: transparent;
+  }
+
+  .#{$prefix}--list-box__menu-item__selected-icon {
+    position: absolute;
+    display: none;
+    fill: $icon-primary;
+    inset-block-start: 50%;
+    inset-inline-end: convert.to-rem(16px);
+    transform: translateY(-50%);
+  }
+
+  .#{$prefix}--list-box--inline
+    .#{$prefix}--list-box__menu-item__selected-icon {
+    inset-inline-end: convert.to-rem(8px);
+  }
+
+  .#{$prefix}--list-box__menu-item--active
+    .#{$prefix}--list-box__menu-item__selected-icon {
+    display: block;
+  }
+
+  .#{$prefix}--list-box__menu-item .#{$prefix}--checkbox-label {
+    inline-size: 100%;
+  }
+
+  .#{$prefix}--list-box__menu-item .#{$prefix}--checkbox-label-text {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  // Dropdown top orientation modifiers
+  .#{$prefix}--list-box--up .#{$prefix}--list-box__menu {
+    inset-block-end: layout.size('height');
+  }
+
+  // Tweaks for descendants
+  // When handling input, we need to target nodes that specifically opt-in to
+  // the type text in order to make sure the text input is styled
+  // correctly.
+  .#{$prefix}--list-box .#{$prefix}--text-input {
+    background-color: inherit;
+    min-inline-size: 0;
+    text-overflow: ellipsis;
+  }
+
+  // AILabel styles
+  .#{$prefix}--list-box__wrapper--decorator
+    .#{$prefix}--list-box__inner-wrapper--decorator
+    > *,
+  .#{$prefix}--list-box__wrapper--slug .#{$prefix}--ai-label,
+  .#{$prefix}--list-box__wrapper--slug .#{$prefix}--slug {
+    position: absolute;
+    inset-block-start: 50%;
+    inset-inline-end: calc($spacing-08 + 9px);
+    margin-block-start: convert.to-rem(0.5px);
+    transform: translateY(-50%);
+  }
+
+  .#{$prefix}--list-box__wrapper--decorator:has(
+      .#{$prefix}--list-box__invalid-icon
+    )
+    .#{$prefix}--list-box__inner-wrapper--decorator
+    > *::before,
+  .#{$prefix}--list-box__wrapper--slug:has(.#{$prefix}--list-box__invalid-icon)
+    .#{$prefix}--ai-label::before,
+  .#{$prefix}--list-box__wrapper--slug:has(.#{$prefix}--list-box__invalid-icon)
+    .#{$prefix}--slug::before,
+  .#{$prefix}--list-box__wrapper--decorator
+    .#{$prefix}--list-box__inner-wrapper--decorator
+    > *::after,
+  .#{$prefix}--list-box__wrapper--slug .#{$prefix}--ai-label::after,
+  .#{$prefix}--list-box__wrapper--slug .#{$prefix}--slug::after {
+    position: absolute;
+    background-color: $border-subtle-01;
+    block-size: convert.to-rem(16px);
+    content: '';
+    inline-size: convert.to-rem(1px);
+  }
+
+  .#{$prefix}--list-box__wrapper--decorator
+    .#{$prefix}--list-box__inner-wrapper--decorator
+    > *::before,
+  .#{$prefix}--list-box__wrapper--slug .#{$prefix}--ai-label::before,
+  .#{$prefix}--list-box__wrapper--slug .#{$prefix}--slug::before {
+    display: none;
+    inset-inline-start: convert.to-rem(-9px);
+  }
+
+  .#{$prefix}--list-box__wrapper--decorator
+    .#{$prefix}--list-box__inner-wrapper--decorator
+    > *::before,
+  .#{$prefix}--list-box__wrapper--slug .#{$prefix}--ai-label::before,
+  .#{$prefix}--list-box__wrapper--slug .#{$prefix}--slug::before,
+  .#{$prefix}--list-box__wrapper--decorator
+    .#{$prefix}--list-box__inner-wrapper--decorator
+    .#{$prefix}--ai-label--revert::before,
+  .#{$prefix}--list-box__wrapper--slug .#{$prefix}--ai-label--revert::before,
+  .#{$prefix}--list-box__wrapper--slug .#{$prefix}--slug--revert::before,
+  .#{$prefix}--list-box__wrapper--decorator
+    .#{$prefix}--list-box__inner-wrapper--decorator
+    > *::after,
+  .#{$prefix}--list-box__wrapper--slug .#{$prefix}--ai-label::after,
+  .#{$prefix}--list-box__wrapper--slug .#{$prefix}--slug::after {
+    display: block;
+    inset-block-start: convert.to-rem(1px);
+    inset-inline-end: convert.to-rem(-9px);
+  }
+
+  .#{$prefix}--list-box__wrapper--decorator
+    .#{$prefix}--list-box__inner-wrapper--decorator
+    .#{$prefix}--ai-label--revert::before,
+  .#{$prefix}--list-box__wrapper--slug .#{$prefix}--ai-label--revert::before,
+  .#{$prefix}--list-box__wrapper--slug .#{$prefix}--slug--revert::before,
+  .#{$prefix}--list-box__wrapper--decorator
+    .#{$prefix}--list-box__inner-wrapper--decorator
+    .#{$prefix}--ai-label--revert::after,
+  .#{$prefix}--list-box__wrapper--slug .#{$prefix}--ai-label--revert::after,
+  .#{$prefix}--list-box__wrapper--slug .#{$prefix}--slug--revert::after {
+    inset-block-start: convert.to-rem(8px);
+    inset-inline-end: convert.to-rem(-1px);
+  }
+
+  .#{$prefix}--list-box__wrapper--decorator
+    .#{$prefix}--list-box:has(
+      .#{$prefix}--list-box__inner-wrapper--decorator .#{$prefix}--ai-label
+    ):not(
+      :has(
+          .#{$prefix}--list-box__inner-wrapper--decorator
+            .#{$prefix}--ai-label--revert
+        )
+    ),
+  .#{$prefix}--list-box__wrapper--slug
+    .#{$prefix}--list-box:has(.#{$prefix}--ai-label):not(
+      :has(.#{$prefix}--ai-label--revert)
+    ),
+  .#{$prefix}--list-box__wrapper--slug
+    .#{$prefix}--list-box:has(.#{$prefix}--slug):not(
+      :has(.#{$prefix}--slug--revert)
+    ) {
+    @include ai-gradient;
+  }
+
+  .#{$prefix}--list-box__wrapper--decorator
+    .#{$prefix}--list-box
+    input[role='combobox'],
+  .#{$prefix}--list-box__wrapper--slug
+    .#{$prefix}--list-box
+    input[role='combobox'] {
+    border-block-end-color: transparent;
+  }
+
+  .#{$prefix}--list-box__wrapper--decorator .#{$prefix}--list-box__field,
+  .#{$prefix}--list-box__wrapper--decorator .#{$prefix}--text-input--empty,
+  .#{$prefix}--list-box__wrapper--slug .#{$prefix}--list-box__field,
+  .#{$prefix}--list-box__wrapper--slug .#{$prefix}--text-input--empty {
+    padding-inline-end: $spacing-10;
+  }
+
+  .#{$prefix}--list-box__wrapper--decorator
+    .#{$prefix}--text-input:not(.#{$prefix}--text-input--empty),
+  .#{$prefix}--list-box__wrapper--slug
+    .#{$prefix}--text-input:not(.#{$prefix}--text-input--empty) {
+    padding-inline-end: convert.to-rem(105px);
+  }
+
+  .#{$prefix}--list-box__wrapper--decorator
+    .#{$prefix}--list-box--invalid[data-invalid]
+    .#{$prefix}--text-input--empty,
+  .#{$prefix}--list-box__wrapper--decorator
+    .#{$prefix}--list-box--invalid[data-invalid]
+    .#{$prefix}--list-box__field,
+  .#{$prefix}--list-box__wrapper--decorator
+    .#{$prefix}--list-box--warning
+    .#{$prefix}--text-input--empty,
+  .#{$prefix}--list-box__wrapper--decorator
+    .#{$prefix}--list-box--warning
+    .#{$prefix}--list-box__field,
+  .#{$prefix}--list-box__wrapper--slug
+    .#{$prefix}--list-box--invalid[data-invalid]
+    .#{$prefix}--text-input--empty,
+  .#{$prefix}--list-box__wrapper--slug
+    .#{$prefix}--list-box--invalid[data-invalid]
+    .#{$prefix}--list-box__field,
+  .#{$prefix}--list-box__wrapper--slug
+    .#{$prefix}--list-box--warning
+    .#{$prefix}--text-input--empty,
+  .#{$prefix}--list-box__wrapper--slug
+    .#{$prefix}--list-box--warning
+    .#{$prefix}--list-box__field {
+    padding-inline-end: $spacing-12;
+  }
+
+  .#{$prefix}--list-box__wrapper--decorator
+    .#{$prefix}--list-box--invalid[data-invalid]
+    .#{$prefix}--text-input:not(.#{$prefix}--text-input--empty),
+  .#{$prefix}--list-box__wrapper--decorator
+    .#{$prefix}--list-box--warning
+    .#{$prefix}--text-input:not(.#{$prefix}--text-input--empty),
+  .#{$prefix}--list-box__wrapper--slug
+    .#{$prefix}--list-box--invalid[data-invalid]
+    .#{$prefix}--text-input:not(.#{$prefix}--text-input--empty),
+  .#{$prefix}--list-box__wrapper--slug
+    .#{$prefix}--list-box--warning
+    .#{$prefix}--text-input:not(.#{$prefix}--text-input--empty) {
+    padding-inline-end: convert.to-rem(137px);
+  }
+
+  .#{$prefix}--list-box__wrapper--decorator
+    .#{$prefix}--list-box--invalid[data-invalid]
+    .#{$prefix}--text-input--empty
+    + .#{$prefix}--list-box__invalid-icon,
+  .#{$prefix}--list-box__wrapper--decorator
+    .#{$prefix}--list-box--invalid[data-invalid]
+    .#{$prefix}--list-box__invalid-icon,
+  .#{$prefix}--list-box__wrapper--decorator
+    .#{$prefix}--list-box--warning
+    .#{$prefix}--list-box__invalid-icon.#{$prefix}--list-box__invalid-icon--warning,
+  .#{$prefix}--list-box__wrapper--slug
+    .#{$prefix}--list-box--invalid[data-invalid]
+    .#{$prefix}--text-input--empty
+    + .#{$prefix}--list-box__invalid-icon,
+  .#{$prefix}--list-box__wrapper--slug
+    .#{$prefix}--list-box--invalid[data-invalid]
+    .#{$prefix}--list-box__invalid-icon,
+  .#{$prefix}--list-box__wrapper--slug
+    .#{$prefix}--list-box--warning
+    .#{$prefix}--list-box__invalid-icon.#{$prefix}--list-box__invalid-icon--warning {
+    inset-inline-end: convert.to-rem(81px);
+  }
+
+  .#{$prefix}--list-box__wrapper--decorator
+    .#{$prefix}--list-box--invalid[data-invalid]
+    > *::before,
+  .#{$prefix}--list-box__wrapper--decorator
+    .#{$prefix}--list-box--warning
+    > *::before,
+  .#{$prefix}--list-box__wrapper--slug
+    .#{$prefix}--list-box--invalid[data-invalid]
+    .#{$prefix}--ai-label::before,
+  .#{$prefix}--list-box__wrapper--slug
+    .#{$prefix}--list-box--warning
+    .#{$prefix}--ai-label::before,
+  .#{$prefix}--list-box__wrapper--slug
+    .#{$prefix}--list-box--invalid[data-invalid]
+    .#{$prefix}--ai-label::before,
+  .#{$prefix}--list-box__wrapper--slug
+    .#{$prefix}--list-box--warning
+    .#{$prefix}--ai-label::before,
+  .#{$prefix}--list-box__wrapper--slug
+    .#{$prefix}--list-box--invalid[data-invalid]
+    .#{$prefix}--slug::before,
+  .#{$prefix}--list-box__wrapper--slug
+    .#{$prefix}--list-box--warning
+    .#{$prefix}--slug::before {
+    display: block;
+  }
+
+  .#{$prefix}--list-box__wrapper--decorator
+    .#{$prefix}--list-box__field:has(.#{$prefix}--list-box__selection)
+    ~ .#{$prefix}--list-box__inner-wrapper--decorator
+    .#{$prefix}--ai-label,
+  .#{$prefix}--list-box__wrapper--decorator
+    .#{$prefix}--list-box--warning
+    .#{$prefix}--list-box__field:has(.#{$prefix}--list-box__selection)
+    ~ .#{$prefix}--list-box__inner-wrapper--decorator
+    .#{$prefix}--ai-label,
+  .#{$prefix}--list-box__wrapper--slug
+    .#{$prefix}--list-box__field:has(.#{$prefix}--list-box__selection)
+    ~ .#{$prefix}--ai-label,
+  .#{$prefix}--list-box__wrapper--slug
+    .#{$prefix}--list-box--warning
+    .#{$prefix}--list-box__field:has(.#{$prefix}--list-box__selection)
+    ~ .#{$prefix}--ai-label,
+  .#{$prefix}--list-box__wrapper--slug
+    .#{$prefix}--list-box__field:has(.#{$prefix}--list-box__selection)
+    ~ .#{$prefix}--slug,
+  .#{$prefix}--list-box__wrapper--slug
+    .#{$prefix}--list-box--warning
+    .#{$prefix}--list-box__field:has(.#{$prefix}--list-box__selection)
+    ~ .#{$prefix}--slug {
+    inset-inline-end: calc($spacing-10 + 18px);
+  }
+
+  .#{$prefix}--list-box__wrapper--decorator
+    .#{$prefix}--list-box__field:has(.#{$prefix}--list-box__selection)
+    ~ .#{$prefix}--list-box__inner-wrapper--decorator
+    > * {
+    inset-inline-end: calc($spacing-10 + 18px);
+  }
+
+  .#{$prefix}--list-box__wrapper--decorator
+    .#{$prefix}--list-box--invalid
+    .#{$prefix}--list-box__field:has(.#{$prefix}--list-box__selection)
+    .#{$prefix}--list-box__invalid-icon,
+  .#{$prefix}--list-box__wrapper--decorator
+    .#{$prefix}--list-box--warning
+    .#{$prefix}--list-box__field:has(.#{$prefix}--list-box__selection)
+    .#{$prefix}--list-box__invalid-icon,
+  .#{$prefix}--list-box__wrapper--slug
+    .#{$prefix}--list-box--invalid
+    .#{$prefix}--list-box__field:has(.#{$prefix}--list-box__selection)
+    .#{$prefix}--list-box__invalid-icon,
+  .#{$prefix}--list-box__wrapper--slug
+    .#{$prefix}--list-box--warning
+    .#{$prefix}--list-box__field:has(.#{$prefix}--list-box__selection)
+    .#{$prefix}--list-box__invalid-icon {
+    inset-inline-end: convert.to-rem(114px);
+  }
+
+  // Windows HCM fix
+  .#{$prefix}--list-box__field,
+  .#{$prefix}--list-box__menu,
+  .#{$prefix}--multi-select .#{$prefix}--tag--filter {
+    @include high-contrast-mode('outline');
+  }
+
+  .#{$prefix}--list-box__field:focus,
+  .#{$prefix}--multi-select .#{$prefix}--tag__close-icon:focus,
+  .#{$prefix}--list-box__menu-item--highlighted
+    .#{$prefix}--list-box__menu-item__option {
+    @include high-contrast-mode('focus');
+  }
+
+  .#{$prefix}--list-box__field:has(.#{$prefix}--list-box__menu-icon)
+    .#{$prefix}--list-box__selection::after {
+    position: absolute;
+    background-color: $border-subtle-01;
+    block-size: convert.to-rem(16px);
+    content: '';
+    inline-size: convert.to-rem(1px);
+    margin-inline-start: convert.to-rem(33px);
+  }
+
+  .#{$prefix}--list-box--warning,
+  .#{$prefix}--list-box--invalid[data-invalid] {
+    .#{$prefix}--list-box__field:has(.#{$prefix}--list-box__menu-icon)
+      .#{$prefix}--list-box__selection::before {
+      position: absolute;
+      background-color: $border-subtle-01;
+      block-size: convert.to-rem(16px);
+      content: '';
+      inline-size: convert.to-rem(1px);
+      margin-inline-end: convert.to-rem(33px);
+    }
+  }
+
+  .#{$prefix}--list-box__wrapper--decorator:has(.#{$prefix}--multi-select)
+    .#{$prefix}--list-box__menu-icon,
+  .#{$prefix}--list-box__wrapper--slug:has(.#{$prefix}--multi-select)
+    .#{$prefix}--list-box__menu-icon {
+    inset-inline-end: $spacing-04;
+  }
+
+  .#{$prefix}--list-box__wrapper--decorator:has(.#{$prefix}--dropdown)
+    .#{$prefix}--list-box__menu-icon,
+  .#{$prefix}--list-box__wrapper--slug:has(.#{$prefix}--dropdown)
+    .#{$prefix}--list-box__menu-icon {
+    inset-inline-end: $spacing-04;
+  }
+}

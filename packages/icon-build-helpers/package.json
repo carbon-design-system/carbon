@@ -1,0 +1,44 @@
+{
+  "name": "@carbon/icon-build-helpers",
+  "private": true,
+  "description": "Build helpers for the Carbon Design System icon library",
+  "version": "1.60.0",
+  "license": "Apache-2.0",
+  "main": "src/index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/carbon-design-system/carbon.git",
+    "directory": "packages/icon-build-helpers"
+  },
+  "bugs": "https://github.com/carbon-design-system/carbon/issues",
+  "keywords": [
+    "ibm",
+    "carbon",
+    "carbon-design-system",
+    "components",
+    "react"
+  ],
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  },
+  "devDependencies": {
+    "@babel/generator": "^7.27.3",
+    "@babel/template": "^7.27.2",
+    "@babel/types": "^7.27.3",
+    "@carbon/cli-reporter": "^10.8.0",
+    "@carbon/icon-helpers": "^10.77.0",
+    "@hapi/joi": "^17.1.1",
+    "change-case-all": "^2.1.0",
+    "fs-extra": "^11.0.0",
+    "js-yaml": "^4.1.0",
+    "memfs": "^4.0.0",
+    "prettier": "^3.3.3",
+    "prop-types": "^15.8.1",
+    "react": "^19.2.3",
+    "svgo": "^4.0.0",
+    "svgson": "^5.2.1",
+    "tsdown": "^0.22.0",
+    "typescript-config-carbon": "workspace:^0.10.0"
+  }
+}

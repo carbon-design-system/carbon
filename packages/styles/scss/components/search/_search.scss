@@ -1,0 +1,321 @@
+//
+// Copyright IBM Corp. 2016, 2026
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+//-----------------------------
+// Search
+//-----------------------------
+
+@use '../text-input';
+@use '../../theme' as *;
+@use '../../config' as *;
+@use '../../type';
+@use '../../motion' as *;
+@use '../../spacing' as *;
+@use '../../utilities/placeholder-colors' as *;
+@use '../../utilities/focus-outline' as *;
+@use '../../utilities/visually-hidden' as *;
+@use '../../utilities/component-reset' as *;
+@use '../../utilities/skeleton' as *;
+@use '../../utilities/convert';
+@use '../../utilities/button-reset';
+@use '../../utilities/layout';
+
+/// Search styles
+/// @access public
+/// @group search
+@mixin search {
+  .#{$prefix}--search {
+    @include layout.use('size', $default: 'md', $min: 'xs', $max: 'lg');
+
+    position: relative;
+    display: flex;
+    align-items: center;
+    inline-size: 100%;
+
+    .#{$prefix}--search-close,
+    ~ .#{$prefix}--search-button {
+      block-size: layout.size('height');
+      inline-size: layout.size('height');
+    }
+
+    &.#{$prefix}--search--expandable,
+    &.#{$prefix}--search--expandable .#{$prefix}--search-magnifier {
+      block-size: layout.size('height');
+      inline-size: layout.size('height');
+    }
+  }
+
+  .#{$prefix}--search .#{$prefix}--label {
+    @include visually-hidden;
+  }
+
+  .#{$prefix}--search-input {
+    @include layout.use('size', $default: 'md', $min: 'xs', $max: 'lg');
+    @include layout.use('density', $default: 'normal');
+    @include reset;
+    @include type.type-style('body-compact-01');
+    @include focus-outline('reset');
+
+    order: 1;
+    padding: 0 layout.size('height');
+    border: none;
+    appearance: none;
+    background-color: $field;
+    block-size: layout.size('height');
+    border-block-end: 1px solid $border-strong;
+    color: $text-primary;
+
+    inline-size: 100%;
+    text-overflow: ellipsis;
+    transition:
+      background-color $duration-fast-02 motion(standard, productive),
+      outline $duration-fast-02 motion(standard, productive);
+
+    &:focus {
+      @include focus-outline('outline');
+    }
+
+    &::placeholder {
+      @include placeholder-colors;
+    }
+
+    &::-ms-clear {
+      display: none;
+    }
+
+    &::-webkit-search-decoration,
+    &::-webkit-search-cancel-button,
+    &::-webkit-search-results-button,
+    &::-webkit-search-results-decoration {
+      display: none;
+      -webkit-appearance: none;
+      appearance: none;
+    }
+  }
+
+  .#{$prefix}--search-input[disabled] {
+    background-color: $field;
+    border-block-end: 1px solid transparent;
+    color: $text-disabled;
+    cursor: not-allowed;
+
+    &::placeholder {
+      color: $field;
+    }
+  }
+  .#{$prefix}--search--light .#{$prefix}--search-input {
+    background: $field-02;
+  }
+
+  .#{$prefix}--search--light .#{$prefix}--search-close::before {
+    background: $field-02;
+  }
+
+  .#{$prefix}--search-magnifier-icon {
+    @include layout.use('size', $default: 'md', $min: 'xs', $max: 'lg');
+    @include reset;
+
+    position: absolute;
+    z-index: 2;
+    block-size: convert.to-rem(16px);
+    fill: $icon-secondary;
+    inline-size: convert.to-rem(16px);
+    inset-block-start: 50%;
+    inset-inline-start: calc((layout.size('height') - 1rem) / 2);
+    pointer-events: none;
+    transform: translateY(-50%);
+  }
+
+  .#{$prefix}--search-close {
+    @include button-reset.reset(false);
+    @include focus-outline('reset');
+
+    position: absolute;
+    inset-block-start: 0;
+    inset-inline-end: 0;
+
+    &:hover {
+      border-block-end: 1px solid $border-strong;
+    }
+  }
+
+  .#{$prefix}--search-button {
+    flex-shrink: 0;
+    background-color: $field;
+    margin-inline-start: $spacing-01;
+
+    svg {
+      fill: currentColor;
+      vertical-align: middle;
+    }
+  }
+
+  // Keep the clear icon above the hover fill overlay.
+  .#{$prefix}--search-close svg {
+    position: relative;
+    z-index: 1;
+    fill: inherit;
+  }
+
+  .#{$prefix}--search-close,
+  .#{$prefix}--search-button {
+    @include layout.use('size', $default: 'md', $min: 'xs', $max: 'lg');
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-width: 0 0 1px;
+    border-style: solid;
+    border-color: transparent;
+    block-size: layout.size('height');
+    cursor: pointer;
+    fill: $icon-primary;
+    inline-size: layout.size('height');
+    opacity: 1;
+    visibility: inherit;
+
+    &:hover {
+      background-color: $field-hover;
+    }
+
+    &:focus {
+      @include focus-outline('outline');
+    }
+
+    &:active {
+      @include focus-outline('outline');
+
+      background-color: $background-selected;
+    }
+  }
+
+  // Preserve the field focus outline while the clear button is hovered.
+  .#{$prefix}--search-input:focus ~ .#{$prefix}--search-close:hover {
+    background-color: transparent;
+    border-block-end-color: transparent;
+    outline: none;
+
+    &::after {
+      position: absolute;
+      background-color: $field-hover;
+      content: '';
+      inset-block: $spacing-01;
+      inset-inline: 0 $spacing-01;
+      pointer-events: none;
+    }
+  }
+
+  .#{$prefix}--search--disabled .#{$prefix}--search-close,
+  .#{$prefix}--search--disabled.#{$prefix}--search--expandable
+    .#{$prefix}--search-magnifier {
+    cursor: not-allowed;
+    outline: none;
+
+    &:hover {
+      background-color: transparent;
+      border-block-end-color: transparent;
+    }
+
+    &:hover::before {
+      background-color: transparent;
+    }
+  }
+
+  .#{$prefix}--search--disabled svg {
+    fill: $icon-on-color-disabled;
+  }
+
+  .#{$prefix}--search-close--hidden {
+    opacity: 0;
+    visibility: hidden;
+  }
+
+  .#{$prefix}--skeleton .#{$prefix}--search-input {
+    @include skeleton;
+
+    inline-size: 100%;
+
+    &::placeholder {
+      color: transparent;
+    }
+  }
+
+  .#{$prefix}--search--expandable {
+    transition: width $duration-fast-01 motion(standard, productive);
+  }
+
+  .#{$prefix}--search--expandable.#{$prefix}--search--expanded {
+    inline-size: 100%;
+  }
+
+  .#{$prefix}--search--expandable .#{$prefix}--search-input {
+    padding: 0;
+    inline-size: 0;
+    transition: transform $duration-fast-01 motion(standard, productive);
+
+    &::placeholder {
+      position: relative;
+      opacity: 0;
+      transition-duration: $duration-fast-01;
+      transition-property: padding, opacity;
+      transition-timing-function: motion(standard, productive);
+    }
+  }
+
+  .#{$prefix}--search--expandable.#{$prefix}--search--expanded
+    .#{$prefix}--search-input {
+    padding: 0 layout.size('height');
+    inline-size: 100%;
+    transition: padding $duration-fast-01 motion(standard, productive);
+
+    &::placeholder {
+      position: relative;
+      padding: 0;
+      opacity: 1;
+    }
+  }
+
+  .#{$prefix}--search--expandable .#{$prefix}--search-magnifier {
+    position: absolute;
+    cursor: pointer;
+
+    &:focus {
+      outline: 2px solid $focus;
+    }
+  }
+
+  .#{$prefix}--search--expandable .#{$prefix}--search-magnifier:hover {
+    background-color: $background-hover;
+  }
+
+  .#{$prefix}--search--expandable.#{$prefix}--search--expanded
+    .#{$prefix}--search-magnifier {
+    pointer-events: none;
+  }
+
+  .#{$prefix}--search--expandable .#{$prefix}--search-magnifier-icon {
+    fill: $icon-primary;
+  }
+
+  .#{$prefix}--search--expandable.#{$prefix}--search--expanded
+    .#{$prefix}--search-magnifier-icon {
+    fill: $icon-secondary;
+  }
+
+  .#{$prefix}--search--expandable.#{$prefix}--search--disabled svg {
+    fill: $icon-disabled;
+  }
+
+  .#{$prefix}--search-magnifier-tooltip {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .#{$prefix}--search-magnifier {
+      position: relative;
+    }
+  }
+}

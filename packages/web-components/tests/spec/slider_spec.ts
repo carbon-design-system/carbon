@@ -1,0 +1,123 @@
+/**
+ * Copyright IBM Corp. 2019, 2026
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+import { html, render } from 'lit';
+import { Playground } from '../../src/components/slider/slider-story';
+
+// JSDOM's DOM implementation does not provide `FormDataEvent`.
+type FormDataEventLike = Event & { formData: FormData };
+
+/**
+ * @param formData A `FormData` instance.
+ * @returns The given `formData` converted to a classic key-value pair.
+ */
+const getValues = (formData: FormData) => {
+  const values = {};
+
+  for (const [key, value] of formData.entries()) {
+    values[key] = value;
+  }
+  return values;
+};
+
+const template = (props?) =>
+  Playground({
+    'cds-slider': props,
+  });
+
+xdescribe('cds-slider', () => {
+  describe('Rendering', () => {
+    it('Should render with minimum attributes', async () => {
+      render(template(), document.body);
+      await Promise.resolve();
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
+      expect(document.body.querySelector('cds-slider' as any)).toMatchSnapshot({
+        mode: 'shadow',
+      });
+    });
+
+    it('Should render with various attributes', async () => {
+      render(
+        template({
+          disabled: true,
+          labelText: 'label-text-foo',
+          max: 100,
+          min: 0,
+          name: 'name-foo',
+          step: 5,
+          value: 50,
+        }),
+        document.body
+      );
+      await Promise.resolve();
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
+      expect(document.body.querySelector('cds-slider' as any)).toMatchSnapshot({
+        mode: 'shadow',
+      });
+    });
+  });
+
+  describe('Event-based form participation', () => {
+    it('Should respond to `formdata` event', async () => {
+      render(
+        html`
+          <form>
+            ${template({
+              name: 'name-foo',
+              value: 5,
+            })}
+          </form>
+        `,
+        document.body
+      );
+      await Promise.resolve();
+      const formData = new FormData();
+      const event = new CustomEvent('formdata', {
+        bubbles: true,
+        cancelable: false,
+        composed: false,
+      }) as unknown as FormDataEventLike;
+      event.formData = formData;
+      const form = document.querySelector('form');
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
+      form!.dispatchEvent(event);
+      expect(getValues(formData)).toEqual({ 'name-foo': '5' });
+    });
+
+    it('Should not respond to `formdata` event if disabled', async () => {
+      render(
+        html`
+          <form>
+            ${template({
+              disabled: true,
+              name: 'name-foo',
+              value: 5,
+            })}
+          </form>
+        `,
+        document.body
+      );
+      await Promise.resolve();
+      const formData = new FormData();
+      const event = new CustomEvent('formdata', {
+        bubbles: true,
+        cancelable: false,
+        composed: false,
+      }) as unknown as FormDataEventLike;
+      event.formData = formData;
+      const form = document.querySelector('form');
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
+      form!.dispatchEvent(event);
+      expect(getValues(formData)).toEqual({});
+    });
+  });
+
+  afterEach(async () => {
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
+    await render(undefined!, document.body);
+  });
+});

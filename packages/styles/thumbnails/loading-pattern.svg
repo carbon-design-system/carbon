@@ -1,0 +1,37 @@
+<svg width="320" height="180" viewBox="0 0 320 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect x="60" y="41" width="200" height="109" fill="white"/>
+<rect x="60" y="29" width="200" height="13" fill="#171717"/>
+<rect opacity="0.844385" x="94" y="34.5" width="22" height="3" fill="#C6C6C6"/>
+<rect opacity="0.844385" x="67" y="34.5" width="22" height="3" fill="#C6C6C6"/>
+<rect opacity="0.844385" x="121" y="34.5" width="22" height="3" fill="#C6C6C6"/>
+<rect opacity="0.844385" x="239" y="33" width="5" height="5" fill="#C6C6C6"/>
+<rect opacity="0.844385" x="249" y="33" width="5" height="5" fill="#C6C6C6"/>
+<g style="mix-blend-mode:multiply">
+<rect x="60.5" y="29.5" width="199" height="121" fill="white"/>
+<rect x="60.5" y="29.5" width="199" height="121" stroke="#C6C6C6"/>
+</g>
+<g style="mix-blend-mode:multiply">
+<rect x="91" y="53" width="22" height="2" fill="#A8A8A8"/>
+</g>
+<g style="mix-blend-mode:multiply">
+<rect x="91" y="82" width="22" height="2" fill="#A8A8A8"/>
+</g>
+<rect x="90" y="62" width="43.75" height="9" fill="#F4F4F4"/>
+<rect x="90" y="91" width="55.75" height="9" fill="#F4F4F4"/>
+<rect x="90" y="107" width="43.75" height="9" fill="#F4F4F4"/>
+<rect opacity="0.86367" x="90" y="127" width="43.75" height="9" fill="#0F62FE"/>
+<rect x="139.75" y="62" width="43.75" height="9" fill="#F4F4F4"/>
+<rect x="139.75" y="91" width="43.75" height="9" fill="#F4F4F4"/>
+<rect x="139.75" y="107" width="43.75" height="9" fill="#F4F4F4"/>
+<rect x="90" y="70" width="43.75" height="0.5" fill="#A8A8A8"/>
+<rect x="90" y="99" width="51.75" height="0.5" fill="#A8A8A8"/>
+<rect x="90" y="115" width="43.75" height="0.5" fill="#A8A8A8"/>
+<rect x="139.75" y="70" width="43.75" height="0.5" fill="#A8A8A8"/>
+<rect x="139.75" y="99" width="43.75" height="0.5" fill="#A8A8A8"/>
+<rect x="139.75" y="115" width="43.75" height="0.5" fill="#A8A8A8"/>
+<g style="mix-blend-mode:multiply" opacity="0.892568">
+<rect x="60.5" y="29.5" width="199" height="121" fill="#8D8D8D"/>
+<rect x="60.5" y="29.5" width="199" height="121" stroke="#C6C6C6"/>
+</g>
+<path d="M146 93C146 89.893 147.034 86.8743 148.938 84.4193C150.842 81.9643 153.509 80.2125 156.518 79.4398C159.528 78.6672 162.709 78.9175 165.56 80.1514C168.412 81.3854 170.771 83.5328 172.268 86.2554C173.765 88.9781 174.314 92.1213 173.828 95.1901C173.342 98.2588 171.849 101.079 169.584 103.206C167.319 105.332 164.411 106.645 161.318 106.938C158.224 107.23 155.122 106.485 152.498 104.821" stroke="#0F62FE" stroke-width="4"/>
+</svg>

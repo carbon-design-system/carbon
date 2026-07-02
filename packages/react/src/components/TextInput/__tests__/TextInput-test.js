@@ -1,0 +1,484 @@
+/**
+ * Copyright IBM Corp. 2016, 2023
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+import React from 'react';
+import TextInput from '../TextInput';
+import userEvent from '@testing-library/user-event';
+import { render, screen } from '@testing-library/react';
+import { AILabel } from '../../AILabel';
+
+const prefix = 'cds';
+
+describe('TextInput', () => {
+  describe('renders as expected - Component API', () => {
+    it('should spread extra props onto the input element', () => {
+      render(
+        <TextInput
+          data-testid="test-id"
+          id="input-1"
+          labelText="TextInput label"
+        />
+      );
+
+      expect(screen.getByRole('textbox')).toHaveAttribute(
+        'data-testid',
+        'test-id'
+      );
+    });
+
+    it('should support a custom `className` prop on the outermost element', () => {
+      const { container } = render(
+        <TextInput
+          id="input-1"
+          labelText="TextInput label"
+          className="custom-class"
+        />
+      );
+
+      expect(container.firstChild).toHaveClass('custom-class');
+    });
+
+    it('should respect defaultValue prop', () => {
+      render(
+        <TextInput
+          id="input-1"
+          labelText="TextInput label"
+          defaultValue="This is default text"
+        />
+      );
+
+      expect(screen.getByRole('textbox')).toHaveValue('This is default text');
+    });
+
+    it('should respect disabled prop', () => {
+      render(<TextInput id="input-1" labelText="TextInput label" disabled />);
+
+      expect(screen.getByRole('textbox')).toBeDisabled();
+    });
+
+    it('should respect helperText prop', () => {
+      render(
+        <TextInput
+          id="input-1"
+          labelText="TextInput label"
+          helperText="This is helper text"
+        />
+      );
+
+      expect(screen.getByText('This is helper text')).toBeInTheDocument();
+      expect(screen.getByText('This is helper text')).toHaveClass(
+        `${prefix}--form__helper-text`
+      );
+    });
+
+    it('should render helperText with value 0', () => {
+      render(<TextInput id="input-1" labelText="label" helperText={0} />);
+      expect(screen.getByText('0')).toBeInTheDocument();
+    });
+
+    it('should not render helperText when helperText is an empty string', () => {
+      const { container } = render(
+        <TextInput id="input-1" labelText="TextInput label" helperText="" />
+      );
+
+      expect(
+        container.querySelector(`.${prefix}--form__helper-text`)
+      ).not.toBeInTheDocument();
+      expect(screen.getByRole('textbox')).not.toHaveAttribute(
+        'aria-describedby'
+      );
+    });
+
+    it('should respect hideLabel prop', () => {
+      render(<TextInput id="input-1" labelText="TextInput label" hideLabel />);
+
+      expect(screen.getByText('TextInput label')).toBeInTheDocument();
+      expect(screen.getByText('TextInput label')).toHaveClass(
+        `${prefix}--visually-hidden`
+      );
+    });
+
+    it('should respect id prop', () => {
+      render(<TextInput id="input-1" labelText="TextInput label" />);
+
+      expect(screen.getByRole('textbox')).toHaveAttribute('id', 'input-1');
+    });
+
+    it('should respect inline prop', () => {
+      const { container } = render(
+        <TextInput id="input-1" labelText="TextInput label" inline />
+      );
+
+      expect(container.firstChild).toHaveClass(
+        `${prefix}--text-input-wrapper--inline`
+      );
+    });
+
+    it('should respect invalid prop', () => {
+      const { container } = render(
+        <TextInput
+          id="input-1"
+          labelText="TextInput"
+          invalid
+          invalidText="Invalid"
+        />
+      );
+
+      // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
+      const invalidIcon = container.querySelector(
+        `svg.${prefix}--text-input__invalid-icon`
+      );
+
+      expect(screen.getByRole('textbox')).toHaveAttribute('data-invalid');
+      expect(screen.getByRole('textbox')).toHaveClass(
+        `${prefix}--text-input--invalid`
+      );
+      expect(invalidIcon).toBeInTheDocument();
+    });
+
+    it('should respect invalidText prop', () => {
+      render(
+        <TextInput
+          id="input-1"
+          labelText="TextInput"
+          invalid
+          invalidText="This is invalid text"
+        />
+      );
+
+      expect(screen.getByText('This is invalid text')).toBeInTheDocument();
+      expect(screen.getByText('This is invalid text')).toHaveClass(
+        `${prefix}--form-requirement`
+      );
+    });
+
+    it('should set aria-errormessage to the invalid message element id', () => {
+      render(
+        <TextInput
+          id="input-1"
+          labelText="TextInput"
+          invalid
+          invalidText="This is invalid text"
+        />
+      );
+
+      const input = screen.getByRole('textbox');
+      expect(input).toHaveAttribute('aria-errormessage', 'input-1-error-msg');
+      expect(input).toHaveAttribute('aria-invalid', 'true');
+      expect(screen.getByText('This is invalid text')).toHaveAttribute(
+        'id',
+        'input-1-error-msg'
+      );
+    });
+
+    it('should use aria-describedby for helper text when not invalid', () => {
+      render(
+        <TextInput
+          id="input-1"
+          labelText="TextInput"
+          helperText="Helper copy"
+        />
+      );
+
+      const helper = screen.getByText('Helper copy');
+      const input = screen.getByRole('textbox');
+      expect(input).toHaveAttribute('aria-describedby', helper.id);
+      expect(input).not.toHaveAttribute('aria-errormessage');
+    });
+
+    it('should not set aria-describedby to helper id when invalid', () => {
+      render(
+        <TextInput
+          id="input-1"
+          labelText="TextInput"
+          invalid
+          invalidText="Error"
+          helperText="Helper copy"
+        />
+      );
+
+      const input = screen.getByRole('textbox');
+      expect(input).toHaveAttribute('aria-errormessage', 'input-1-error-msg');
+      expect(input).not.toHaveAttribute('aria-describedby');
+    });
+
+    it('should respect labelText prop', () => {
+      render(<TextInput id="input-1" labelText="TextInput label" />);
+
+      expect(screen.getByText('TextInput label')).toBeInTheDocument();
+      expect(screen.getByText('TextInput label')).toHaveClass(
+        `${prefix}--label`
+      );
+    });
+
+    it('should render labelText with value 0', () => {
+      render(<TextInput id="input-1" labelText={0} />);
+      expect(screen.getByText('0')).toBeInTheDocument();
+    });
+
+    it('should respect placeholder prop', () => {
+      render(
+        <TextInput
+          id="input-1"
+          labelText="TextInput label"
+          placeholder="Placeholder text"
+        />
+      );
+
+      expect(
+        screen.getByPlaceholderText('Placeholder text')
+      ).toBeInTheDocument();
+    });
+
+    it('should respect size prop', () => {
+      render(<TextInput id="input-1" labelText="TextInput label" size="sm" />);
+
+      expect(screen.getByRole('textbox')).toHaveClass(
+        `${prefix}--text-input--sm`
+      );
+    });
+
+    it('should respect type prop', () => {
+      render(
+        <TextInput id="input-1" labelText="TextInput label" type="text" />
+      );
+
+      expect(screen.getByRole('textbox')).toHaveAttribute(`type`, 'text');
+    });
+
+    it('should respect value prop', () => {
+      render(
+        <TextInput
+          id="input-1"
+          labelText="TextInput label"
+          value="This is a test value"
+        />
+      );
+
+      expect(screen.getByRole('textbox')).toHaveValue('This is a test value');
+    });
+
+    it('should respect warn prop', () => {
+      const { container } = render(
+        <TextInput
+          id="input-1"
+          labelText="TextInput label"
+          warn
+          warnText="Warning"
+        />
+      );
+
+      // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
+      const warnIcon = container.querySelector(
+        `svg.${prefix}--text-input__invalid-icon--warning`
+      );
+
+      expect(screen.getByRole('textbox')).toHaveClass(
+        `${prefix}--text-input--warning`
+      );
+      expect(warnIcon).toBeInTheDocument();
+    });
+
+    it('should respect warnText prop', () => {
+      render(
+        <TextInput
+          id="input-1"
+          labelText="TextInput label"
+          warn
+          warnText="This is warning text"
+        />
+      );
+
+      expect(screen.getByText('This is warning text')).toBeInTheDocument();
+      expect(screen.getByText('This is warning text')).toHaveClass(
+        `${prefix}--form-requirement`
+      );
+    });
+
+    it('should respect decorator prop', () => {
+      render(
+        <TextInput
+          id="textarea-1"
+          labelText="TextArea label"
+          decorator={<AILabel />}
+        />
+      );
+      expect(
+        screen.getByRole('button', { name: 'AI Show information' })
+      ).toBeInTheDocument();
+    });
+
+    it('should respect deprecated slug prop', () => {
+      const spy = jest.spyOn(console, 'warn').mockImplementation(() => {});
+      render(
+        <TextInput
+          id="textarea-1"
+          labelText="TextArea label"
+          slug={<AILabel />}
+        />
+      );
+      expect(
+        screen.getByRole('button', { name: 'AI Show information' })
+      ).toBeInTheDocument();
+      spy.mockRestore();
+    });
+  });
+
+  describe('behaves as expected - Component API', () => {
+    it('should respect onChange prop', async () => {
+      const onChange = jest.fn();
+      render(
+        <TextInput
+          id="input-1"
+          labelText="TextInput label"
+          data-testid-="input-1"
+          onChange={onChange}
+        />
+      );
+
+      await userEvent.type(screen.getByRole('textbox'), 'x');
+      expect(screen.getByRole('textbox')).toHaveValue('x');
+      expect(onChange).toHaveBeenCalledTimes(1);
+      expect(onChange).toHaveBeenCalledWith(
+        expect.objectContaining({
+          target: expect.any(Object),
+        })
+      );
+    });
+
+    it('should respect onClick prop', async () => {
+      const onClick = jest.fn();
+      render(
+        <TextInput
+          id="input-1"
+          labelText="TextInput label"
+          data-testid-="input-1"
+          onClick={onClick}
+        />
+      );
+
+      await userEvent.click(screen.getByRole('textbox'));
+      expect(onClick).toHaveBeenCalledTimes(1);
+      expect(onClick).toHaveBeenCalledWith(
+        expect.objectContaining({
+          target: expect.any(Object),
+        })
+      );
+    });
+
+    it('should not call `onClick` when the `<input>` is clicked but disabled', async () => {
+      const onClick = jest.fn();
+      render(
+        <TextInput
+          id="input-1"
+          labelText="TextInput label"
+          onClick={onClick}
+          disabled
+        />
+      );
+
+      await userEvent.click(screen.getByRole('textbox'));
+      expect(onClick).not.toHaveBeenCalled();
+    });
+
+    it('should respect readOnly prop', async () => {
+      const onChange = jest.fn();
+      const onClick = jest.fn();
+      render(
+        <TextInput
+          id="input-1"
+          labelText="TextInput label"
+          onClick={onClick}
+          onChange={onChange}
+          readOnly
+        />
+      );
+
+      // Click events should fire
+      await userEvent.click(screen.getByRole('textbox'));
+      expect(onClick).toHaveBeenCalledTimes(1);
+
+      // Change events should *not* fire
+      await userEvent.type(screen.getByRole('textbox'), 'x');
+      expect(screen.getByRole('textbox')).not.toHaveValue('x');
+      expect(onChange).toHaveBeenCalledTimes(0);
+    });
+
+    it('should not render counter with only enableCounter prop passed in', () => {
+      render(
+        <TextInput id="input-1" labelText="TextInput label" enableCounter />
+      );
+
+      const counter = screen.queryByText('0/5');
+
+      expect(counter).not.toBeInTheDocument();
+    });
+
+    it('should not render counter with only maxCount prop passed in', () => {
+      render(
+        <TextInput id="input-1" labelText="TextInput label" enableCounter />
+      );
+
+      const counter = screen.queryByText('0/5');
+
+      expect(counter).not.toBeInTheDocument();
+    });
+
+    it('should have the expected classes for counter', () => {
+      render(
+        <TextInput
+          id="input-1"
+          labelText="TextInput label"
+          enableCounter
+          maxCount={5}
+        />
+      );
+
+      const counter = screen.queryByText('0/5');
+
+      expect(counter).toBeInTheDocument();
+    });
+
+    it('should count ref value when enableCounter is toggled)', async () => {
+      // Test for issue #18520: TextInput missing ref check for initial value
+      const TestComponent = () => {
+        const [enableCounter, setEnableCounter] = React.useState(false);
+        const inputRef = React.useRef(null);
+
+        React.useEffect(() => {
+          if (inputRef.current) {
+            inputRef.current.value = 'FormValue';
+          }
+        }, []);
+
+        return (
+          <div>
+            <TextInput
+              ref={inputRef}
+              id="input-1"
+              labelText="TextInput label"
+              enableCounter={enableCounter}
+              maxCount={15}
+            />
+            <button onClick={() => setEnableCounter(true)}>
+              Enable Counter
+            </button>
+          </div>
+        );
+      };
+
+      render(<TestComponent />);
+
+      await new Promise((resolve) => setTimeout(resolve, 0));
+      expect(screen.queryByText(/\/15/)).not.toBeInTheDocument();
+
+      // Enable counter
+      await userEvent.click(screen.getByText('Enable Counter'));
+      expect(screen.getByText('9/15')).toBeInTheDocument();
+    });
+  });
+});

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="320px" height="180px" viewBox="0 0 320 180" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>tooltip-definition</title>
+    <g id="tooltip-definition" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Group" transform="translate(70.000000, 39.000000)">
+            <g id="Group-56-Copy" transform="translate(0.000000, 19.400000)">
+                <path d="M174.5,7.10542736e-14 C175.328427,7.11241386e-14 176,0.671572875 176,1.5 L176,62.9 C176,63.7284271 175.328427,64.4 174.5,64.4 L92.65,64.4 L88.1,69.6 L83.55,64.4 L1.5,64.4 C0.671572875,64.4 3.23497668e-16,63.7284271 0,62.9 L0,1.5 C1.20591542e-16,0.671572875 0.671572875,7.14284978e-14 1.5,7.10542736e-14 L174.5,7.10542736e-14 Z" id="Rectangle-24" fill="#3D3D3D" transform="translate(88.000000, 34.800000) rotate(-180.000000) translate(-88.000000, -34.800000) "></path>
+                <rect id="Rectangle" fill="#BEBEBE" x="14" y="19.6" width="115" height="5"></rect>
+                <rect id="Rectangle-Copy-2" fill="#BEBEBE" x="14" y="39.6" width="115" height="5"></rect>
+                <rect id="Rectangle-Copy" fill="#BEBEBE" x="14" y="29.6" width="87" height="5"></rect>
+                <rect id="Rectangle-Copy-3" fill="#BEBEBE" x="14" y="49.6" width="87" height="5"></rect>
+            </g>
+            <rect id="Rectangle-Copy-2" x="11" y="89" width="15" height="15"></rect>
+            <rect id="Rectangle-3-Copy-11" fill="#8D8D8D" x="54" y="0" width="68" height="5"></rect>
+            <line x1="54" y1="8.5" x2="123" y2="8.5" id="Path-3-Copy-11" stroke="#0F62FE" stroke-width="1.2" stroke-dasharray="2,2"></line>
+        </g>
+    </g>
+</svg>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="320px" height="180px" viewBox="0 0 320 180" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>pagination-unstable</title>
+    <defs>
+        <polygon id="path-1" points="0 0 2.5 2.1875 0 4.375"></polygon>
+        <polygon id="path-3" points="0 0 2.5 2.1875 0 4.375"></polygon>
+    </defs>
+    <g id="pagination-unstable" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Group" transform="translate(56.000000, 77.000000)">
+            <rect id="Rectangle-2-Copy-486" fill="#F4F4F4" x="0" y="0" width="161" height="24"></rect>
+            <rect id="Rectangle-2-Copy-487" fill="#F4F4F4" x="184" y="0" width="24" height="24"></rect>
+            <rect id="Rectangle-2-Copy-488" fill="#F4F4F4" transform="translate(172.000000, 12.000000) scale(-1, 1) translate(-172.000000, -12.000000) " x="160" y="0" width="24" height="24"></rect>
+            <g transform="translate(192.000000, 8.000000)" id="icon/navigation/caret/right/20-copy-24">
+                <g id="caret--right" transform="translate(4.062500, 2.812500)">
+                    <mask id="mask-2" fill="white">
+                        <use xlink:href="#path-1"></use>
+                    </mask>
+                    <use id="Mask" fill="#000000" fill-rule="nonzero" xlink:href="#path-1"></use>
+                    <g id="Group" mask="url(#mask-2)">
+                        <g transform="translate(-4.062500, -2.812500)" id="icon-color">
+                            <rect id="Rectangle" fill="#000000" x="0" y="0" width="20" height="20"></rect>
+                        </g>
+                    </g>
+                </g>
+                <polygon id="transparent-rectangle" transform="translate(5.000000, 5.000000) rotate(-90.000000) translate(-5.000000, -5.000000) " points="-2.22044605e-16 6.123234e-16 10 6.123234e-16 10 10 -2.22044605e-16 10"></polygon>
+            </g>
+            <g transform="translate(168.000000, 8.000000)" id="icon/navigation/caret/right/20-copy-25">
+                <g transform="translate(5.000000, 5.000000) scale(-1, 1) translate(-5.000000, -5.000000) ">
+                    <g id="caret--right" transform="translate(4.062500, 2.812500)">
+                        <mask id="mask-4" fill="white">
+                            <use xlink:href="#path-3"></use>
+                        </mask>
+                        <use id="Mask" fill="#000000" fill-rule="nonzero" xlink:href="#path-3"></use>
+                        <g id="Group" mask="url(#mask-4)">
+                            <g transform="translate(-4.062500, -2.812500)" id="icon-color">
+                                <rect id="Rectangle" fill="#000000" x="0" y="0" width="20" height="20"></rect>
+                            </g>
+                        </g>
+                    </g>
+                    <polygon id="transparent-rectangle" transform="translate(5.000000, 5.000000) rotate(-90.000000) translate(-5.000000, -5.000000) " points="-2.22044605e-16 6.123234e-16 10 6.123234e-16 10 10 -2.22044605e-16 10"></polygon>
+                </g>
+            </g>
+            <rect id="Rectangle-8-Copy-2" fill="#C6C6C6" x="160" y="0" width="1" height="24"></rect>
+            <rect id="Rectangle-8-Copy-3" fill="#C6C6C6" x="184" y="0" width="1" height="24"></rect>
+        </g>
+        <rect id="Rectangle-3-Copy-18" fill="#BEBEBE" x="67.45" y="87" width="40" height="4"></rect>
+    </g>
+</svg>

@@ -1,0 +1,298 @@
+//
+// Copyright IBM Corp. 2018, 2023
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+//-----------------------------
+// Fluid Text Area
+//-----------------------------
+@use '../text-area';
+@use '../../config' as *;
+@use '../../spacing' as *;
+@use '../../theme' as *;
+@use '../../utilities/ai-gradient' as *;
+@use '../../utilities/convert';
+@use '../../utilities/focus-outline' as *;
+
+@mixin fluid-text-area {
+  .#{$prefix}--text-area--fluid .#{$prefix}--text-area__wrapper {
+    position: relative;
+    flex-direction: column;
+    background: $field;
+    block-size: 100%;
+  }
+
+  .#{$prefix}--modal
+    .#{$prefix}--text-area--fluid
+    .#{$prefix}--text-area__wrapper {
+    background: $field-02;
+  }
+
+  .#{$prefix}--text-area--fluid .#{$prefix}--text-area__label-wrapper {
+    position: relative;
+    block-size: 100%;
+  }
+
+  .#{$prefix}--text-area--fluid .#{$prefix}--label {
+    position: absolute;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    margin: 0;
+    block-size: convert.to-rem(16px);
+    inset-block-start: convert.to-rem(13px);
+
+    // For the main label
+    &:not(.#{$prefix}--text-area__label-counter) {
+      inline-size: auto;
+      inset-inline-end: auto;
+      inset-inline-start: $spacing-05;
+    }
+
+    // For the counter
+    &.#{$prefix}--text-area__label-counter {
+      inline-size: auto;
+      inset-inline-end: $spacing-05;
+      inset-inline-start: auto;
+    }
+    .#{$prefix}--toggletip-button {
+      padding: $spacing-02;
+      margin-inline-start: -$spacing-02;
+      min-block-size: $spacing-06;
+      min-inline-size: $spacing-06;
+    }
+  }
+
+  .#{$prefix}--text-area--fluid .#{$prefix}--label::-webkit-scrollbar,
+  .#{$prefix}--text-area--fluid
+    .#{$prefix}--label
+    .#{$prefix}--toggletip-label::-webkit-scrollbar {
+    display: none;
+  }
+
+  .#{$prefix}--text-area--fluid
+    .#{$prefix}--label:not(:has(.#{$prefix}--toggletip-label)),
+  .#{$prefix}--text-area--fluid
+    .#{$prefix}--label
+    .#{$prefix}--toggletip-label {
+    -ms-overflow-style: none;
+    overflow-x: scroll;
+    scrollbar-width: none;
+    white-space: nowrap;
+  }
+
+  //counter
+  .#{$prefix}--text-area--fluid div.#{$prefix}--label {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .#{$prefix}--text-area--fluid .#{$prefix}--text-area {
+    padding: 0 $spacing-05 convert.to-rem(13px);
+    margin-block-start: 2rem;
+    min-block-size: convert.to-rem(64px);
+    outline: none;
+  }
+
+  .#{$prefix}--text-area--fluid .#{$prefix}--form__helper-text {
+    display: none;
+  }
+
+  // invalid
+  .#{$prefix}--text-area--fluid .#{$prefix}--text-area--invalid,
+  .#{$prefix}--text-area--fluid .#{$prefix}--text-area:focus {
+    border-block-end: 1px solid transparent;
+  }
+
+  .#{$prefix}--text-area__divider,
+  .#{$prefix}--text-area--fluid .#{$prefix}--text-area__divider {
+    display: none;
+  }
+
+  .#{$prefix}--text-area--fluid .#{$prefix}--text-area--invalid,
+  .#{$prefix}--text-area--fluid .#{$prefix}--text-area--warn {
+    resize: none;
+  }
+
+  // accounts for 2px of border when invalid
+  .#{$prefix}--text-area--fluid .#{$prefix}--text-area--invalid {
+    padding: 0 convert.to-rem(14px) convert.to-rem(13px);
+    margin-block-start: convert.to-rem(30px);
+  }
+
+  .#{$prefix}--text-area--fluid
+    .#{$prefix}--text-area__wrapper[data-invalid]
+    .#{$prefix}--text-area__divider,
+  .#{$prefix}--text-area--fluid
+    .#{$prefix}--text-area__wrapper--warn
+    .#{$prefix}--text-area__divider {
+    display: block;
+    border-style: solid;
+    border-color: $border-subtle;
+    margin: 0 1rem;
+    border-block-end: none;
+  }
+
+  // invalid & warning error message container
+  .#{$prefix}--text-area--fluid
+    .#{$prefix}--text-area__wrapper[data-invalid]
+    .#{$prefix}--form-requirement.#{$prefix}--form-requirement,
+  .#{$prefix}--text-area--fluid
+    .#{$prefix}--text-area__wrapper--warn
+    .#{$prefix}--form-requirement.#{$prefix}--form-requirement {
+    position: relative;
+    display: block;
+    overflow: visible;
+    padding: 0.5rem 2.5rem 0.5rem 1rem;
+    margin: 0;
+    background: $field;
+    max-block-size: 12.5rem;
+  }
+
+  .#{$prefix}--text-area--fluid
+    .#{$prefix}--text-area__wrapper--warn
+    .#{$prefix}--form-requirement.#{$prefix}--form-requirement {
+    border-block-end: 1px solid $border-strong;
+    color: $text-primary;
+  }
+
+  .#{$prefix}--text-area--fluid
+    .#{$prefix}--text-area__wrapper[data-invalid]
+    .#{$prefix}--form-requirement.#{$prefix}--form-requirement {
+    border-block-end: none;
+    color: $text-error;
+  }
+
+  .#{$prefix}--text-area--fluid .#{$prefix}--text-area--warn {
+    border-block-end: none;
+  }
+
+  .#{$prefix}--modal
+    .#{$prefix}--text-area--fluid
+    .#{$prefix}--text-area__wrapper[data-invalid]
+    .#{$prefix}--text-area__divider
+    + .#{$prefix}--form-requirement {
+    background: $field-02;
+  }
+
+  .#{$prefix}--text-area--fluid .#{$prefix}--text-area__invalid-icon {
+    inset-block-start: 0.5rem;
+  }
+
+  //invalid outline
+  // needs to be a border for some weirdness when in a modal
+  .#{$prefix}--text-area--fluid
+    .#{$prefix}--text-area__wrapper[data-invalid]:not(:focus) {
+    border: 2px solid $support-error;
+  }
+
+  // focus
+  .#{$prefix}--text-area--fluid
+    .#{$prefix}--text-area__wrapper[data-invalid]:focus-within,
+  .#{$prefix}--text-area--fluid .#{$prefix}--text-area__wrapper:focus-within {
+    @include focus-outline('outline');
+  }
+
+  // end weirdness
+
+  .#{$prefix}--text-area--fluid
+    .#{$prefix}--text-area__wrapper[data-invalid]
+    > .#{$prefix}--text-area--invalid:focus,
+  .#{$prefix}--text-area--fluid
+    .#{$prefix}--text-area__wrapper
+    > .#{$prefix}--text-area:focus,
+  .#{$prefix}--text-area--fluid
+    .#{$prefix}--text-area__wrapper
+    > .#{$prefix}--text-area:active,
+  .#{$prefix}--text-area--fluid
+    .#{$prefix}--text-area__wrapper[data-invalid]
+    > .#{$prefix}--text-area--invalid {
+    outline: none;
+    transition: none;
+  }
+
+  // Skeleton
+  .#{$prefix}--text-area--fluid__skeleton {
+    padding: $spacing-05;
+    background: $skeleton-background;
+    border-block-end: 1px solid $skeleton-element;
+  }
+
+  .#{$prefix}--text-area--fluid__skeleton .#{$prefix}--skeleton,
+  .#{$prefix}--text-area--fluid__skeleton
+    .#{$prefix}--text-area.#{$prefix}--skeleton::before {
+    block-size: 0.5rem;
+  }
+
+  .#{$prefix}--text-area--fluid__skeleton .#{$prefix}--label {
+    margin-block-end: $spacing-04;
+  }
+
+  .#{$prefix}--text-area--fluid__skeleton
+    .#{$prefix}--text-area.#{$prefix}--skeleton {
+    block-size: 4rem;
+    inline-size: 80%;
+  }
+
+  // AILabel styles
+  .#{$prefix}--text-area--fluid
+    .#{$prefix}--text-area__wrapper--decorator:has(
+      .#{$prefix}--text-area__inner-wrapper--decorator .#{$prefix}--ai-label
+    ):not(
+      :has(
+          .#{$prefix}--text-area__inner-wrapper--decorator
+            .#{$prefix}--ai-label--revert
+        )
+    ),
+  .#{$prefix}--text-area--fluid
+    .#{$prefix}--text-area__wrapper--slug:has(.#{$prefix}--ai-label):not(
+      :has(.#{$prefix}--ai-label--revert)
+    ),
+  .#{$prefix}--text-area--fluid
+    .#{$prefix}--text-area__wrapper--slug:has(.#{$prefix}--slug):not(
+      :has(.#{$prefix}--slug--revert)
+    ) {
+    @include ai-gradient;
+  }
+
+  .#{$prefix}--text-area--fluid
+    .#{$prefix}--text-area__wrapper--decorator
+    .#{$prefix}--text-area--invalid
+    ~ .#{$prefix}--text-area__inner-wrapper--decorator
+    > *,
+  .#{$prefix}--text-area--fluid
+    .#{$prefix}--text-area__wrapper--decorator
+    .#{$prefix}--text-area--warn
+    ~ .#{$prefix}--text-area__inner-wrapper--decorator
+    > *,
+  .#{$prefix}--text-area--fluid
+    .#{$prefix}--text-area__wrapper--slug
+    .#{$prefix}--text-area--invalid
+    ~ .#{$prefix}--ai-label,
+  .#{$prefix}--text-area--fluid
+    .#{$prefix}--text-area__wrapper--slug
+    .#{$prefix}--text-area--warn
+    ~ .#{$prefix}--ai-label,
+  .#{$prefix}--text-area--fluid
+    .#{$prefix}--text-area__wrapper--slug
+    .#{$prefix}--text-area--invalid
+    ~ .#{$prefix}--slug,
+  .#{$prefix}--text-area--fluid
+    .#{$prefix}--text-area__wrapper--slug
+    .#{$prefix}--text-area--warn
+    ~ .#{$prefix}--slug {
+    inset-inline-end: $spacing-05;
+  }
+
+  // Remove ai border when invalid
+  .#{$prefix}--text-area--fluid
+    .#{$prefix}--text-area__wrapper--decorator
+    .#{$prefix}--text-area--invalid,
+  .#{$prefix}--text-area--fluid
+    .#{$prefix}--text-area__wrapper--slug
+    .#{$prefix}--text-area--invalid {
+    border-block-end-color: transparent;
+  }
+}

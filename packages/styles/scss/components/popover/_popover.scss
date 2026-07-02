@@ -1,0 +1,1570 @@
+//
+// Copyright IBM Corp. 2016, 2025
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use '../../config' as *;
+@use '../../layer' as *;
+@use '../../spacing' as *;
+@use '../../theme';
+@use '../../utilities/box-shadow' as *;
+@use '../../utilities/button-reset';
+@use '../../utilities/component-reset';
+@use '../../utilities/custom-property';
+@use '../../utilities/focus-outline' as *;
+@use '../../utilities/' as *;
+@use '../../utilities/convert';
+@use '../../utilities/layout';
+
+/// The Popover component is used for triggering a pop-up next to a trigger
+/// element, typically a button, in a given direction. It is made up of several
+/// parts and includes a handful of modifiers to change the appearance.
+///
+/// The parts of a popover include:
+///   The popover container `.cds-popover-container`
+///   This container contains the trigger and the popover and is used to
+///   coordinate positioning relative to the trigger button
+///
+///   The popover
+///   This is an intermediate container that is used for the
+///   `filter: drop-shadow()` effect on the popover content and the caret. It is
+///   an absolutely positioned container that matches the dimensions of the
+///   container so that popover content and caret can be positioned absolutely.
+///
+///   Popover content
+///   This is the containing element for user-provided content and sets the
+///   background and text color for the area.
+///
+///   Popover caret
+///   This caret is an optional modifier that displays a character centered with
+///   respect to the trigger element
+
+// The background color for the popover container
+$popover-background-color: custom-property.get-var(
+  'popover-background-color',
+  theme.$layer
+);
+
+// The drop shadow value used for the popover container
+$popover-drop-shadow: custom-property.get-var(
+  'popover-drop-shadow',
+  drop-shadow(0 $spacing-01 $spacing-01 rgba(0, 0, 0, 0.2))
+);
+
+// The border value used for the popover container
+$popover-border-color: custom-property.get-var(
+  'popover-border-color',
+  theme.$border-subtle
+);
+
+// The border radius value for the popover container
+$popover-border-radius: custom-property.get-var('popover-border-radius', 2px);
+
+// The text color used for text placed inside of the popover
+$popover-text-color: custom-property.get-var(
+  'popover-text-color',
+  theme.$text-primary
+);
+
+// The distance between the popover container and the triggering element
+// Specify the distance between the popover and the trigger. This value must
+// have a unit otherwise the `calc()` expression will not work
+$popover-offset: custom-property.get-var('popover-offset', 0rem);
+
+// Customize the dimensions of the caret by specifying its width or height.
+// These values will be flipped in left or right directions to have the
+// correct dimensions
+$popover-caret-width: custom-property.get-var(
+  'popover-caret-width',
+  convert.to-rem(12px)
+);
+$popover-caret-height: custom-property.get-var(
+  'popover-caret-height',
+  convert.to-rem(6px)
+);
+
+/// Mixin for applying base popover styles
+@mixin popover-base {
+  position: absolute;
+  z-index: z('floating');
+  inset: 0;
+  pointer-events: none;
+}
+
+/// Mixin for applying base highcontrast popover styles
+@mixin popover-highcontrast-base {
+  @include custom-property.declaration(
+    'popover-background-color',
+    theme.$background-inverse
+  );
+  @include custom-property.declaration(
+    'popover-text-color',
+    theme.$text-inverse
+  );
+}
+
+/// Mixin for applying popover tab-tip button styles
+@mixin popover-tab-tip-button {
+  @include button-reset.reset;
+
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  block-size: convert.to-rem(32px);
+  inline-size: convert.to-rem(32px);
+
+  &:focus {
+    @include focus-outline('outline');
+  }
+
+  @media (any-hover: hover) {
+    &:hover {
+      background-color: theme.$layer-hover;
+    }
+  }
+
+  svg {
+    fill: theme.$icon-primary;
+  }
+}
+
+@mixin popover {
+  // Container
+  .#{$prefix}--popover-container {
+    display: inline-block;
+  }
+
+  // Do not set position: relative on autoAlign popovers.
+  // Without this, autoAlign popovers will be clipped by containing elements
+  // (using overflow: hidden, etc) if position: relative is set on the container.
+  .#{$prefix}--popover-container:not(.#{$prefix}--popover--auto-align) {
+    position: relative;
+  }
+
+  /// Modifiers
+
+  // High contrast modifier
+  .#{$prefix}--popover--high-contrast .#{$prefix}--popover {
+    @include popover-highcontrast-base;
+
+    .#{$prefix}--skeleton,
+    .#{$prefix}--skeleton__text,
+    .#{$prefix}--skeleton__placeholder,
+    .#{$prefix}--icon--skeleton {
+      background: theme.$background-inverse-hover;
+    }
+
+    .#{$prefix}--skeleton::before,
+    .#{$prefix}--skeleton__text::before,
+    .#{$prefix}--skeleton__placeholder::before,
+    .#{$prefix}--icon--skeleton::before {
+      background: theme.$background-inverse;
+    }
+  }
+
+  // Drop shadow modifier
+  .#{$prefix}--popover--drop-shadow .#{$prefix}--popover {
+    filter: $popover-drop-shadow;
+  }
+
+  // Border modifier
+  .#{$prefix}--popover--border
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-content {
+    outline: 1px solid $popover-border-color;
+    outline-offset: -1px;
+  }
+
+  // Caret tip modifier
+  .#{$prefix}--popover--caret {
+    @include custom-property.declaration(
+      'popover-offset',
+      convert.to-rem(10px)
+    );
+  }
+
+  // Popover, this element contains both the caret and the popover content
+  .#{$prefix}--popover {
+    @include popover-base;
+  }
+
+  // Popover content
+  .#{$prefix}--popover-content {
+    // The layout.redefine-tokens is been included here because it is been redefined in _tag.scss
+    @include layout.redefine-tokens(
+      (
+        size: (
+          height: (
+            sm: convert.to-rem(32px),
+            md: convert.to-rem(40px),
+            lg: convert.to-rem(48px),
+          ),
+        ),
+      )
+    );
+    @include component-reset.reset;
+
+    position: absolute;
+    z-index: z('floating');
+    display: none;
+    border-radius: $popover-border-radius;
+    background-color: $popover-background-color;
+    color: $popover-text-color;
+    inline-size: max-content;
+    max-inline-size: convert.to-rem(368px);
+    pointer-events: auto;
+  }
+
+  .#{$prefix}--popover--open
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-content {
+    display: block;
+  }
+
+  .#{$prefix}--popover--background-token__background
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-content {
+    background-color: theme.$background;
+  }
+
+  // We use a pseudo element inside of the popover to create a space between the
+  // target and the popover. This helps in situations like toolcarets where you do
+  // not want the toolcaret to disappear when the user moves from the target to
+  // the popover.
+  .#{$prefix}--popover-content::before {
+    position: absolute;
+    display: none;
+    content: '';
+  }
+
+  .#{$prefix}--popover--open
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-content::before {
+    display: block;
+  }
+
+  // Popover caret
+  .#{$prefix}--popover-caret,
+  .#{$prefix}--popover--auto-align.#{$prefix}--popover-caret {
+    position: absolute;
+    z-index: z('floating');
+    display: none;
+
+    // We use `will-change: transform` to prevent antialiasing when our caret
+    // has subpixel rendering. When this happens, a single pixel line appears
+    // between the caret and popover-content that we would like to avoid
+    will-change: transform;
+
+    // caret background
+    &::after {
+      position: absolute;
+      display: block;
+      background-color: $popover-background-color;
+      content: '';
+    }
+
+    // caret border
+    &::before {
+      position: absolute;
+      display: none;
+      background-color: $popover-border-color;
+      content: '';
+    }
+  }
+
+  .#{$prefix}--popover--background-token__background
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-caret::after {
+    background-color: theme.$background;
+  }
+
+  .#{$prefix}--popover--border .#{$prefix}--popover-caret::before,
+  .#{$prefix}--popover--border
+    .#{$prefix}--popover--auto-align.#{$prefix}--popover-caret::before {
+    display: block;
+  }
+
+  .#{$prefix}--popover--caret.#{$prefix}--popover--open
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-caret {
+    display: block;
+  }
+
+  // autoAlign uses a different dom structure where the caret is within the content instead of a sibling
+  .#{$prefix}--popover--auto-align.#{$prefix}--popover--caret.#{$prefix}--popover--open
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-content
+    > .#{$prefix}--popover-caret {
+    display: block;
+  }
+
+  .#{$prefix}--popover--tab-tip
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-caret {
+    display: none;
+  }
+
+  //-----------------------------------------------------------------------------
+  // Bottom
+  //-----------------------------------------------------------------------------
+
+  // Popover content placement
+  .#{$prefix}--popover--bottom:not(.#{$prefix}--popover--auto-align)
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-content {
+    inset-block-end: 0;
+    inset-inline-start: 50%;
+    transform: translate(-50%, calc(100% + $popover-offset));
+  }
+
+  .#{$prefix}--popover--bottom:not(.#{$prefix}--popover--caret):not(
+      .#{$prefix}--popover--auto-align
+    ):not(.#{$prefix}--popover--tab-tip)
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-content,
+  .#{$prefix}--popover--bottom-start:not(.#{$prefix}--popover--caret):not(
+      .#{$prefix}--popover--auto-align
+    ):not(.#{$prefix}--popover--tab-tip)
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-content,
+  .#{$prefix}--popover--bottom-end:not(.#{$prefix}--popover--caret):not(
+      .#{$prefix}--popover--auto-align
+    ):not(.#{$prefix}--popover--tab-tip)
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-content {
+    inset-block-end: -$spacing-02;
+  }
+
+  .#{$prefix}--popover--top:not(.#{$prefix}--popover--caret):not(
+      .#{$prefix}--popover--auto-align
+    ):not(.#{$prefix}--popover--tab-tip)
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-content,
+  .#{$prefix}--popover--top-start:not(.#{$prefix}--popover--caret):not(
+      .#{$prefix}--popover--auto-align
+    ):not(.#{$prefix}--popover--tab-tip)
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-content,
+  .#{$prefix}--popover--top-end:not(.#{$prefix}--popover--caret):not(
+      .#{$prefix}--popover--auto-align
+    ):not(.#{$prefix}--popover--tab-tip)
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-content {
+    inset-block-start: -$spacing-02;
+  }
+
+  .#{$prefix}--popover--top-start:not(.#{$prefix}--popover--caret):not(
+      .#{$prefix}--popover--auto-align
+    ):not(.#{$prefix}--popover--tab-tip)
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-content,
+  .#{$prefix}--popover--bottom-start:not(.#{$prefix}--popover--caret):not(
+      .#{$prefix}--popover--auto-align
+    ):not(.#{$prefix}--popover--tab-tip)
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-content {
+    inset-inline-start: calc(50% - $popover-offset - 1rem);
+  }
+  .#{$prefix}--popover--top-end:not(.#{$prefix}--popover--caret):not(
+      .#{$prefix}--popover--auto-align
+    ):not(.#{$prefix}--popover--tab-tip)
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-content,
+  .#{$prefix}--popover--bottom-end:not(.#{$prefix}--popover--caret):not(
+      .#{$prefix}--popover--auto-align
+    ):not(.#{$prefix}--popover--tab-tip)
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-content {
+    inset-inline-end: calc(50% - $popover-offset - 1rem);
+  }
+
+  .#{$prefix}--popover--right:not(.#{$prefix}--popover--caret):not(
+      .#{$prefix}--popover--auto-align
+    ):not(.#{$prefix}--popover--tab-tip)
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-content,
+  .#{$prefix}--popover--right-start:not(.#{$prefix}--popover--caret):not(
+      .#{$prefix}--popover--auto-align
+    ):not(.#{$prefix}--popover--tab-tip)
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-content,
+  .#{$prefix}--popover--right-end:not(.#{$prefix}--popover--caret):not(
+      .#{$prefix}--popover--auto-align
+    ):not(.#{$prefix}--popover--tab-tip)
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-content {
+    inset-inline-start: calc(100% + $spacing-02);
+  }
+
+  .#{$prefix}--popover--left:not(.#{$prefix}--popover--caret):not(
+      .#{$prefix}--popover--auto-align
+    ):not(.#{$prefix}--popover--tab-tip)
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-content,
+  .#{$prefix}--popover--left-start:not(.#{$prefix}--popover--caret):not(
+      .#{$prefix}--popover--auto-align
+    ):not(.#{$prefix}--popover--tab-tip)
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-content,
+  .#{$prefix}--popover--left-end:not(.#{$prefix}--popover--caret):not(
+      .#{$prefix}--popover--auto-align
+    ):not(.#{$prefix}--popover--tab-tip)
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-content {
+    inset-inline-end: calc(100% + $spacing-02);
+  }
+
+  .#{$prefix}--popover--bottom:not(.#{$prefix}--popover--auto-align):dir(rtl)
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-content {
+    transform: translate(50%, calc(100% + $popover-offset));
+  }
+
+  .#{$prefix}--popover--bottom-left:not(.#{$prefix}--popover--auto-align)
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-content,
+  .#{$prefix}--popover--bottom-start:not(.#{$prefix}--popover--auto-align)
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-content {
+    inset-block-end: 0;
+    inset-inline-start: calc(50% - $popover-offset);
+    transform: translate(
+      calc(-1 * $popover-offset),
+      calc(100% + $popover-offset)
+    );
+  }
+
+  .#{$prefix}--popover--bottom-left:not(.#{$prefix}--popover--auto-align):dir(
+      rtl
+    )
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-content,
+  .#{$prefix}--popover--bottom-start:not(.#{$prefix}--popover--auto-align):dir(
+      rtl
+    )
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-content {
+    inset-inline-end: calc(50% - $popover-offset);
+    inset-inline-start: initial;
+  }
+
+  .#{$prefix}--popover--bottom-right:not(.#{$prefix}--popover--auto-align)
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-content,
+  .#{$prefix}--popover--bottom-end:not(.#{$prefix}--popover--auto-align)
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-content {
+    inset-block-end: 0;
+    inset-inline-end: calc(50% - $popover-offset);
+    transform: translate($popover-offset, calc(100% + $popover-offset));
+  }
+
+  .#{$prefix}--popover--bottom-right:not(.#{$prefix}--popover--auto-align):dir(
+      rtl
+    )
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-content,
+  .#{$prefix}--popover--bottom-end:not(.#{$prefix}--popover--auto-align):dir(
+      rtl
+    )
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-content {
+    inset-inline-start: calc(50% - $popover-offset);
+  }
+
+  // Popover hover area placement
+  .#{$prefix}--popover--bottom
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-content::before,
+  .#{$prefix}--popover--bottom-left
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-content::before,
+  .#{$prefix}--popover--bottom-start
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-content::before,
+  .#{$prefix}--popover--bottom-right
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-content::before,
+  .#{$prefix}--popover--bottom-end
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-content::before {
+    block-size: $popover-offset;
+    inset-block-start: 0;
+    inset-inline: 0;
+    transform: translateY(-100%);
+  }
+
+  // Caret placement
+  .#{$prefix}--popover--bottom
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-caret,
+  .#{$prefix}--popover--bottom-left
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-caret,
+  .#{$prefix}--popover--bottom-start
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-caret,
+  .#{$prefix}--popover--bottom-right
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-caret,
+  .#{$prefix}--popover--bottom-end
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-caret {
+    block-size: $popover-caret-height;
+    inline-size: $popover-caret-width;
+    inset-block-end: 0;
+    inset-inline-start: 50%;
+    transform: translate(-50%, $popover-offset);
+
+    &::after {
+      block-size: $popover-caret-height;
+      clip-path: polygon(0% 100%, 50% 0%, 100% 100%);
+      inline-size: $popover-caret-width;
+    }
+  }
+
+  // Caret placement with border
+  .#{$prefix}--popover--border.#{$prefix}--popover--bottom
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-caret,
+  .#{$prefix}--popover--border.#{$prefix}--popover--bottom-left
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-caret,
+  .#{$prefix}--popover--border.#{$prefix}--popover--bottom-start
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-caret,
+  .#{$prefix}--popover--border.#{$prefix}--popover--bottom-right
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-caret,
+  .#{$prefix}--popover--border.#{$prefix}--popover--bottom-end
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-caret {
+    &::before {
+      block-size: $popover-caret-height;
+      clip-path: polygon(0% 100%, 50% 0%, 100% 100%);
+      inline-size: $popover-caret-width;
+    }
+
+    &::after {
+      inline-size: calc($popover-caret-width - 1px);
+      inset-block-start: 1px;
+      inset-inline-start: 0.5px;
+    }
+  }
+
+  .#{$prefix}--popover--bottom:dir(rtl)
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-caret,
+  .#{$prefix}--popover--bottom-left:dir(rtl)
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-caret,
+  .#{$prefix}--popover--bottom-start:dir(rtl)
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-caret,
+  .#{$prefix}--popover--bottom-right:dir(rtl)
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-caret,
+  .#{$prefix}--popover--bottom-end:dir(rtl)
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-caret {
+    transform: translate(50%, $popover-offset);
+  }
+
+  // Caret placement for autoAlign
+  .#{$prefix}--popover--bottom.#{$prefix}--popover--auto-align
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-content
+    > .#{$prefix}--popover-caret,
+  .#{$prefix}--popover--bottom-left.#{$prefix}--popover--auto-align
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-content
+    > .#{$prefix}--popover-caret,
+  .#{$prefix}--popover--bottom-start.#{$prefix}--popover--auto-align
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-content
+    > .#{$prefix}--popover-caret,
+  .#{$prefix}--popover--bottom-right.#{$prefix}--popover--auto-align
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-content
+    > .#{$prefix}--popover-caret,
+  .#{$prefix}--popover--bottom-end.#{$prefix}--popover--auto-align
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-content
+    > .#{$prefix}--popover-caret {
+    block-size: $popover-caret-height;
+    inline-size: $popover-caret-width;
+
+    &::after {
+      block-size: $popover-caret-height;
+      clip-path: polygon(0% 100%, 50% 0%, 100% 100%);
+      inline-size: $popover-caret-width;
+    }
+  }
+
+  // Caret placement for autoAlign with border
+  .#{$prefix}--popover--border.#{$prefix}--popover--bottom.#{$prefix}--popover--auto-align
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-content
+    > .#{$prefix}--popover-caret,
+  .#{$prefix}--popover--border.#{$prefix}--popover--bottom-left.#{$prefix}--popover--auto-align
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-content
+    > .#{$prefix}--popover-caret,
+  .#{$prefix}--popover--border.#{$prefix}--popover--bottom-start.#{$prefix}--popover--auto-align
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-content
+    > .#{$prefix}--popover-caret,
+  .#{$prefix}--popover--border.#{$prefix}--popover--bottom-right.#{$prefix}--popover--auto-align
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-content
+    > .#{$prefix}--popover-caret,
+  .#{$prefix}--popover--border.#{$prefix}--popover--bottom-end.#{$prefix}--popover--auto-align
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-content
+    > .#{$prefix}--popover-caret {
+    &::before {
+      block-size: $popover-caret-height;
+      clip-path: polygon(0% 100%, 50% 0%, 100% 100%);
+      inline-size: $popover-caret-width;
+    }
+
+    &::after {
+      inline-size: calc($popover-caret-width - 1px);
+      inset-block-start: 1px;
+      inset-inline-start: 0.5px;
+    }
+  }
+
+  //-----------------------------------------------------------------------------
+  // Top
+  //-----------------------------------------------------------------------------
+
+  // Popover content placement
+  .#{$prefix}--popover--top:not(.#{$prefix}--popover--auto-align)
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-content {
+    inset-block-start: 0;
+    inset-inline-start: 50%;
+    transform: translate(-50%, calc(-100% - $popover-offset));
+  }
+
+  .#{$prefix}--popover--top:not(.#{$prefix}--popover--auto-align):dir(rtl)
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-content {
+    transform: translate(50%, calc(-100% - $popover-offset));
+  }
+
+  .#{$prefix}--popover--top-left:not(.#{$prefix}--popover--auto-align)
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-content,
+  .#{$prefix}--popover--top-start:not(.#{$prefix}--popover--auto-align)
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-content {
+    inset-block-start: 0;
+    inset-inline-start: calc(50% - $popover-offset);
+    transform: translate(
+      calc(-1 * $popover-offset),
+      calc(-100% - $popover-offset)
+    );
+  }
+
+  .#{$prefix}--popover--top-left:not(.#{$prefix}--popover--auto-align):dir(rtl)
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-content,
+  .#{$prefix}--popover--top-start:not(.#{$prefix}--popover--auto-align):dir(rtl)
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-content {
+    inset-inline-end: calc(50% - $popover-offset);
+    inset-inline-start: initial;
+  }
+
+  .#{$prefix}--popover--top-right:not(.#{$prefix}--popover--auto-align)
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-content,
+  .#{$prefix}--popover--top-end:not(.#{$prefix}--popover--auto-align)
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-content {
+    inset-block-start: 0;
+    inset-inline-end: calc(50% - $popover-offset);
+    transform: translate($popover-offset, calc(-100% - $popover-offset));
+  }
+
+  .#{$prefix}--popover--top-right:not(.#{$prefix}--popover--auto-align):dir(rtl)
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-content,
+  .#{$prefix}--popover--top-end:not(.#{$prefix}--popover--auto-align):dir(rtl)
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-content {
+    inset-inline-start: calc(50% - $popover-offset);
+  }
+
+  // Popover hover area placement
+  .#{$prefix}--popover--top
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-content::before,
+  .#{$prefix}--popover--top-left
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-content::before,
+  .#{$prefix}--popover--top-start
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-content::before,
+  .#{$prefix}--popover--top-right
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-content::before,
+  .#{$prefix}--popover--top-end
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-content::before {
+    block-size: $popover-offset;
+    inset-block-end: 0;
+    inset-inline: 0;
+    transform: translateY(100%);
+  }
+
+  // Caret placement
+  .#{$prefix}--popover--top > .#{$prefix}--popover > .#{$prefix}--popover-caret,
+  .#{$prefix}--popover--top-left
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-caret,
+  .#{$prefix}--popover--top-start
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-caret,
+  .#{$prefix}--popover--top-right
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-caret,
+  .#{$prefix}--popover--top-end
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-caret {
+    block-size: $popover-caret-height;
+    inline-size: $popover-caret-width;
+    inset-block-start: 0;
+    inset-inline-start: 50%;
+    transform: translate(-50%, calc(-1 * $popover-offset));
+
+    &::after {
+      block-size: $popover-caret-height;
+      clip-path: polygon(0% 0%, 50% 100%, 100% 0%);
+      inline-size: $popover-caret-width;
+    }
+  }
+
+  // Caret placement with border
+  .#{$prefix}--popover--border.#{$prefix}--popover--top
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-caret,
+  .#{$prefix}--popover--border.#{$prefix}--popover--top-left
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-caret,
+  .#{$prefix}--popover--border.#{$prefix}--popover--top-start
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-caret,
+  .#{$prefix}--popover--border.#{$prefix}--popover--top-right
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-caret,
+  .#{$prefix}--popover--border.#{$prefix}--popover--top-end
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-caret {
+    &::before {
+      block-size: $popover-caret-height;
+      clip-path: polygon(0% 0%, 50% 100%, 100% 0%);
+      inline-size: $popover-caret-width;
+    }
+
+    &::after {
+      inline-size: calc($popover-caret-width - 1px);
+      inset-block-start: -1px;
+      inset-inline-start: 0.5px;
+    }
+  }
+
+  .#{$prefix}--popover--top:not(.#{$prefix}--popover--auto-align):dir(rtl)
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-caret,
+  .#{$prefix}--popover--top-left:not(.#{$prefix}--popover--auto-align):dir(rtl)
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-caret,
+  .#{$prefix}--popover--top-start:not(.#{$prefix}--popover--auto-align):dir(rtl)
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-caret,
+  .#{$prefix}--popover--top-right:not(.#{$prefix}--popover--auto-align):dir(rtl)
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-caret,
+  .#{$prefix}--popover--top-end:not(.#{$prefix}--popover--auto-align):dir(rtl)
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-caret {
+    transform: translate(50%, calc(-1 * $popover-offset));
+  }
+
+  // Caret placement for autoAlign
+  .#{$prefix}--popover--top.#{$prefix}--popover--auto-align
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-content
+    > .#{$prefix}--popover-caret,
+  .#{$prefix}--popover--top-left.#{$prefix}--popover--auto-align
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-content
+    > .#{$prefix}--popover-caret,
+  .#{$prefix}--popover--top-start.#{$prefix}--popover--auto-align
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-content
+    > .#{$prefix}--popover-caret,
+  .#{$prefix}--popover--top-right.#{$prefix}--popover--auto-align
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-content
+    > .#{$prefix}--popover-caret,
+  .#{$prefix}--popover--top-end.#{$prefix}--popover--auto-align
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-content
+    > .#{$prefix}--popover-caret {
+    block-size: $popover-caret-height;
+    inline-size: $popover-caret-width;
+
+    &::after {
+      block-size: $popover-caret-height;
+      clip-path: polygon(0% 0%, 50% 100%, 100% 0%);
+      inline-size: $popover-caret-width;
+    }
+  }
+
+  // Caret placement for autoAlign with border
+  .#{$prefix}--popover--border.#{$prefix}--popover--top.#{$prefix}--popover--auto-align
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-content
+    > .#{$prefix}--popover-caret,
+  .#{$prefix}--popover--border.#{$prefix}--popover--top-left.#{$prefix}--popover--auto-align
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-content
+    > .#{$prefix}--popover-caret,
+  .#{$prefix}--popover--border.#{$prefix}--popover--top-start.#{$prefix}--popover--auto-align
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-content
+    > .#{$prefix}--popover-caret,
+  .#{$prefix}--popover--border.#{$prefix}--popover--top-right.#{$prefix}--popover--auto-align
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-content
+    > .#{$prefix}--popover-caret,
+  .#{$prefix}--popover--border.#{$prefix}--popover--top-end.#{$prefix}--popover--auto-align
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-content
+    > .#{$prefix}--popover-caret {
+    &::before {
+      block-size: $popover-caret-height;
+      clip-path: polygon(0% 0%, 50% 100%, 100% 0%);
+      inline-size: $popover-caret-width;
+    }
+
+    &::after {
+      inline-size: calc($popover-caret-width - 1px);
+      inset-block-start: -1px;
+      inset-inline-start: 0.5px;
+    }
+  }
+
+  //-----------------------------------------------------------------------------
+  // Right
+  //-----------------------------------------------------------------------------
+
+  // Popover content placement
+  .#{$prefix}--popover--right:not(.#{$prefix}--popover--auto-align)
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-content {
+    inset-block-start: 50%;
+    inset-inline-start: 100%;
+    // Add in 0.1px to prevent rounding errors where the content is
+    // moved farther than the caret
+    transform: translate($popover-offset, -50%);
+  }
+
+  .#{$prefix}--popover--right-top:not(.#{$prefix}--popover--auto-align)
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-content,
+  .#{$prefix}--popover--right-start:not(.#{$prefix}--popover--auto-align)
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-content {
+    inset-block-start: 50%;
+    inset-inline-start: 100%;
+    transform: translate(
+      $popover-offset,
+      calc(0.5 * $popover-offset * -1 - 16px)
+    );
+  }
+
+  .#{$prefix}--popover--right-bottom:not(.#{$prefix}--popover--auto-align)
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-content,
+  .#{$prefix}--popover--right-end:not(.#{$prefix}--popover--auto-align)
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-content {
+    inset-block-end: 50%;
+    inset-inline-start: 100%;
+    transform: translate($popover-offset, calc(0.5 * $popover-offset + 16px));
+  }
+
+  .#{$prefix}--popover--right:not(.#{$prefix}--popover--auto-align):dir(rtl)
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-content,
+  .#{$prefix}--popover--right-bottom:not(.#{$prefix}--popover--auto-align):dir(
+      rtl
+    )
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-content,
+  .#{$prefix}--popover--right-end:not(.#{$prefix}--popover--auto-align):dir(rtl)
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-content,
+  .#{$prefix}--popover--right-top:not(.#{$prefix}--popover--auto-align):dir(rtl)
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-content,
+  .#{$prefix}--popover--right-start:not(.#{$prefix}--popover--auto-align):dir(
+      rtl
+    )
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-content {
+    inset-inline-end: 100%;
+    inset-inline-start: initial;
+  }
+
+  // Popover hover area placement
+  .#{$prefix}--popover--right
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-content::before,
+  .#{$prefix}--popover--right-top
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-content::before,
+  .#{$prefix}--popover--right-start
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-content::before,
+  .#{$prefix}--popover--right-bottom
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-content::before,
+  .#{$prefix}--popover--right-end
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-content::before {
+    inline-size: $popover-offset;
+    inset-block: 0;
+    inset-inline-start: 0;
+    transform: translateX(-100%);
+  }
+
+  // Caret placement
+  .#{$prefix}--popover--right:not(.#{$prefix}--popover--auto-align)
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-caret,
+  .#{$prefix}--popover--right-top:not(.#{$prefix}--popover--auto-align)
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-caret,
+  .#{$prefix}--popover--right-start:not(.#{$prefix}--popover--auto-align)
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-caret,
+  .#{$prefix}--popover--right-bottom:not(.#{$prefix}--popover--auto-align)
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-caret,
+  .#{$prefix}--popover--right-end:not(.#{$prefix}--popover--auto-align)
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-caret {
+    block-size: $popover-caret-width;
+    inline-size: $popover-caret-height;
+    inset-block-start: 50%;
+    inset-inline-start: 100%;
+    transform: translate(calc($popover-offset - 100%), -50%);
+
+    &::after {
+      block-size: $popover-caret-width;
+      clip-path: polygon(0% 50%, 100% 0%, 100% 100%);
+      inline-size: $popover-caret-height;
+    }
+  }
+
+  .#{$prefix}--popover--right:not(.#{$prefix}--popover--auto-align):dir(rtl)
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-caret,
+  .#{$prefix}--popover--right-top:not(.#{$prefix}--popover--auto-align):dir(rtl)
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-caret,
+  .#{$prefix}--popover--right-start:not(.#{$prefix}--popover--auto-align):dir(
+      rtl
+    )
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-caret,
+  .#{$prefix}--popover--right-bottom:not(.#{$prefix}--popover--auto-align):dir(
+      rtl
+    )
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-caret,
+  .#{$prefix}--popover--right-end:not(.#{$prefix}--popover--auto-align):dir(rtl)
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-caret {
+    inset-inline-end: 100%;
+    inset-inline-start: initial;
+  }
+
+  // Caret placement with border
+  .#{$prefix}--popover--border.#{$prefix}--popover--right:not(
+      .#{$prefix}--popover--auto-align
+    )
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-caret,
+  .#{$prefix}--popover--border.#{$prefix}--popover--right-top:not(
+      .#{$prefix}--popover--auto-align
+    )
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-caret,
+  .#{$prefix}--popover--border.#{$prefix}--popover--right-start:not(
+      .#{$prefix}--popover--auto-align
+    )
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-caret,
+  .#{$prefix}--popover--border.#{$prefix}--popover--right-bottom:not(
+      .#{$prefix}--popover--auto-align
+    )
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-caret,
+  .#{$prefix}--popover--border.#{$prefix}--popover--right-end:not(
+      .#{$prefix}--popover--auto-align
+    )
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-caret {
+    &::before {
+      block-size: $popover-caret-width;
+      clip-path: polygon(0% 50%, 100% 0%, 100% 100%);
+      inline-size: $popover-caret-height;
+    }
+
+    &::after {
+      inset-inline-start: 1px;
+    }
+  }
+
+  .#{$prefix}--popover--border.#{$prefix}--popover--right:not(
+      .#{$prefix}--popover--auto-align
+    ):dir(rtl)
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-caret,
+  .#{$prefix}--popover--border.#{$prefix}--popover--right-top:not(
+      .#{$prefix}--popover--auto-align
+    ):dir(rtl)
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-caret,
+  .#{$prefix}--popover--border.#{$prefix}--popover--right-start:not(
+      .#{$prefix}--popover--auto-align
+    ):dir(rtl)
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-caret,
+  .#{$prefix}--popover--border.#{$prefix}--popover--right-bottom:not(
+      .#{$prefix}--popover--auto-align
+    ):dir(rtl)
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-caret,
+  .#{$prefix}--popover--border.#{$prefix}--popover--right-end:not(
+      .#{$prefix}--popover--auto-align
+    ):dir(rtl)
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-caret {
+    &::after {
+      inset-inline-start: -1px;
+    }
+  }
+
+  // Caret placement for autoAlign
+  .#{$prefix}--popover--right.#{$prefix}--popover--auto-align
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-content
+    > .#{$prefix}--popover-caret,
+  .#{$prefix}--popover--right-top.#{$prefix}--popover--auto-align
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-content
+    > .#{$prefix}--popover-caret,
+  .#{$prefix}--popover--right-start.#{$prefix}--popover--auto-align
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-content
+    > .#{$prefix}--popover-caret,
+  .#{$prefix}--popover--right-bottom.#{$prefix}--popover--auto-align
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-content
+    > .#{$prefix}--popover-caret,
+  .#{$prefix}--popover--right-end.#{$prefix}--popover--auto-align
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-content
+    > .#{$prefix}--popover-caret {
+    block-size: $popover-caret-width;
+    inline-size: $popover-caret-height;
+
+    &::after {
+      block-size: $popover-caret-width;
+      clip-path: polygon(0% 50%, 100% 0%, 100% 100%);
+      inline-size: $popover-caret-height;
+      // margin-block-start: calc(-1 * #{$popover-caret-height});
+    }
+  }
+
+  // Caret placement for autoAlign with border
+  .#{$prefix}--popover--border.#{$prefix}--popover--right.#{$prefix}--popover--auto-align
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-content
+    > .#{$prefix}--popover-caret,
+  .#{$prefix}--popover--border.#{$prefix}--popover--right-top.#{$prefix}--popover--auto-align
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-content
+    > .#{$prefix}--popover-caret,
+  .#{$prefix}--popover--border.#{$prefix}--popover--right-start.#{$prefix}--popover--auto-align
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-content
+    > .#{$prefix}--popover-caret,
+  .#{$prefix}--popover--border.#{$prefix}--popover--right-bottom.#{$prefix}--popover--auto-align
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-content
+    > .#{$prefix}--popover-caret,
+  .#{$prefix}--popover--border.#{$prefix}--popover--right-end.#{$prefix}--popover--auto-align
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-content
+    > .#{$prefix}--popover-caret {
+    &::before {
+      block-size: $popover-caret-width;
+      clip-path: polygon(0% 50%, 100% 0%, 100% 100%);
+      inline-size: $popover-caret-height;
+      // margin-block-start: calc(-1 * #{$popover-caret-height});
+    }
+
+    &::after {
+      inset-inline-start: 1px;
+    }
+  }
+
+  .#{$prefix}--popover--border.#{$prefix}--popover--right.#{$prefix}--popover--auto-align:dir(
+      rtl
+    )
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-content
+    > .#{$prefix}--popover-caret,
+  .#{$prefix}--popover--border.#{$prefix}--popover--right-top.#{$prefix}--popover--auto-align:dir(
+      rtl
+    )
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-content
+    > .#{$prefix}--popover-caret,
+  .#{$prefix}--popover--border.#{$prefix}--popover--right-start.#{$prefix}--popover--auto-align:dir(
+      rtl
+    )
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-content
+    > .#{$prefix}--popover-caret,
+  .#{$prefix}--popover--border.#{$prefix}--popover--right-bottom.#{$prefix}--popover--auto-align:dir(
+      rtl
+    )
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-content
+    > .#{$prefix}--popover-caret,
+  .#{$prefix}--popover--border.#{$prefix}--popover--right-end.#{$prefix}--popover--auto-align:dir(
+      rtl
+    )
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-content
+    > .#{$prefix}--popover-caret {
+    &::before {
+      margin-inline-start: 1px;
+    }
+
+    &::after {
+      inset-inline-start: 0;
+    }
+  }
+
+  //-----------------------------------------------------------------------------
+  // Left
+  //-----------------------------------------------------------------------------
+
+  // Popover content placement
+  .#{$prefix}--popover--left:not(.#{$prefix}--popover--auto-align)
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-content {
+    inset-block-start: 50%;
+    inset-inline-end: 100%;
+    // Add in 0.1px to prevent rounding errors where the content is
+    // moved farther than the caret
+    transform: translate(calc(-1 * $popover-offset + 0.1px), -50%);
+  }
+
+  .#{$prefix}--popover--left-top:not(.#{$prefix}--popover--auto-align)
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-content,
+  .#{$prefix}--popover--left-start:not(.#{$prefix}--popover--auto-align)
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-content {
+    inset-block-start: 50%;
+    inset-inline-end: 100%;
+    // Add in 0.1px to prevent rounding errors where the content is
+    // moved farther than the caret
+    transform: translate(
+      calc(-1 * $popover-offset),
+      calc(-1 * 0.5 * $popover-offset - 16px)
+    );
+  }
+
+  .#{$prefix}--popover--left-bottom:not(.#{$prefix}--popover--auto-align)
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-content,
+  .#{$prefix}--popover--left-end:not(.#{$prefix}--popover--auto-align)
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-content {
+    inset-block-end: 50%;
+    inset-inline-end: 100%;
+    // Add in 0.1px to prevent rounding errors where the content is
+    // moved farther than the caret
+    transform: translate(
+      calc(-1 * $popover-offset),
+      calc(0.5 * $popover-offset + 16px)
+    );
+  }
+
+  .#{$prefix}--popover--left:not(.#{$prefix}--popover--auto-align):dir(rtl)
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-content,
+  .#{$prefix}--popover--left-bottom:not(.#{$prefix}--popover--auto-align):dir(
+      rtl
+    )
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-content,
+  .#{$prefix}--popover--left-end:not(.#{$prefix}--popover--auto-align):dir(rtl)
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-content,
+  .#{$prefix}--popover--left-top:not(.#{$prefix}--popover--auto-align):dir(rtl)
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-content,
+  .#{$prefix}--popover--left-start:not(.#{$prefix}--popover--auto-align):dir(
+      rtl
+    )
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-content {
+    inset-inline-end: initial;
+    inset-inline-start: 100%;
+  }
+
+  // Popover hover area placement
+  .#{$prefix}--popover--left
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-content::before,
+  .#{$prefix}--popover--left-top
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-content::before,
+  .#{$prefix}--popover--left-start
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-content::before,
+  .#{$prefix}--popover--left-bottom
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-content::before,
+  .#{$prefix}--popover--left-end
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-content::before {
+    inline-size: $popover-offset;
+    inset-block: 0;
+    inset-inline-end: 0;
+    transform: translateX(100%);
+  }
+
+  // Caret placement
+  .#{$prefix}--popover--left:not(.#{$prefix}--popover--auto-align)
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-caret,
+  .#{$prefix}--popover--left-top:not(.#{$prefix}--popover--auto-align)
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-caret,
+  .#{$prefix}--popover--left-start:not(.#{$prefix}--popover--auto-align)
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-caret,
+  .#{$prefix}--popover--left-bottom:not(.#{$prefix}--popover--auto-align)
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-caret,
+  .#{$prefix}--popover--left-end:not(.#{$prefix}--popover--auto-align)
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-caret {
+    block-size: $popover-caret-width;
+    inline-size: $popover-caret-height;
+    inset-block-start: 50%;
+    inset-inline-end: 100%;
+    transform: translate(calc(-1 * $popover-offset + 100%), -50%);
+
+    &::after {
+      block-size: $popover-caret-width;
+      clip-path: polygon(0% 0%, 100% 50%, 0% 100%);
+      inline-size: $popover-caret-height;
+    }
+  }
+
+  .#{$prefix}--popover--left:not(.#{$prefix}--popover--auto-align):dir(rtl)
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-caret,
+  .#{$prefix}--popover--left-top:not(.#{$prefix}--popover--auto-align):dir(rtl)
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-caret,
+  .#{$prefix}--popover--left-start:not(.#{$prefix}--popover--auto-align):dir(
+      rtl
+    )
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-caret,
+  .#{$prefix}--popover--left-bottom:not(.#{$prefix}--popover--auto-align):dir(
+      rtl
+    )
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-caret,
+  .#{$prefix}--popover--left-end:not(.#{$prefix}--popover--auto-align):dir(rtl)
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-caret {
+    inset-inline-end: initial;
+    inset-inline-start: 100%;
+  }
+
+  // Caret placement with border
+  .#{$prefix}--popover--border.#{$prefix}--popover--left:not(
+      .#{$prefix}--popover--auto-align
+    )
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-caret,
+  .#{$prefix}--popover--border.#{$prefix}--popover--left-top:not(
+      .#{$prefix}--popover--auto-align
+    )
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-caret,
+  .#{$prefix}--popover--border.#{$prefix}--popover--left-start:not(
+      .#{$prefix}--popover--auto-align
+    )
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-caret,
+  .#{$prefix}--popover--border.#{$prefix}--popover--left-bottom:not(
+      .#{$prefix}--popover--auto-align
+    )
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-caret,
+  .#{$prefix}--popover--border.#{$prefix}--popover--left-end:not(
+      .#{$prefix}--popover--auto-align
+    )
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-caret {
+    &::before {
+      block-size: $popover-caret-width;
+      clip-path: polygon(0% 0%, 100% 50%, 0% 100%);
+      inline-size: $popover-caret-height;
+    }
+
+    &::after {
+      inset-inline-start: -1px;
+    }
+  }
+
+  .#{$prefix}--popover--border.#{$prefix}--popover--left:not(
+      .#{$prefix}--popover--auto-align
+    ):dir(rtl)
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-caret,
+  .#{$prefix}--popover--border.#{$prefix}--popover--left-top:not(
+      .#{$prefix}--popover--auto-align
+    ):dir(rtl)
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-caret,
+  .#{$prefix}--popover--border.#{$prefix}--popover--left-start:not(
+      .#{$prefix}--popover--auto-align
+    ):dir(rtl)
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-caret,
+  .#{$prefix}--popover--border.#{$prefix}--popover--left-bottom:not(
+      .#{$prefix}--popover--auto-align
+    ):dir(rtl)
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-caret,
+  .#{$prefix}--popover--border.#{$prefix}--popover--left-end:not(
+      .#{$prefix}--popover--auto-align
+    ):dir(rtl)
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-caret {
+    &::after {
+      inset-inline-start: 1px;
+    }
+  }
+
+  // Caret placement for autoAlign
+  .#{$prefix}--popover--left.#{$prefix}--popover--auto-align
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-content
+    > .#{$prefix}--popover-caret,
+  .#{$prefix}--popover--left-top.#{$prefix}--popover--auto-align
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-content
+    > .#{$prefix}--popover-caret,
+  .#{$prefix}--popover--left-start.#{$prefix}--popover--auto-align
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-content
+    > .#{$prefix}--popover-caret,
+  .#{$prefix}--popover--left-bottom.#{$prefix}--popover--auto-align
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-content
+    > .#{$prefix}--popover-caret,
+  .#{$prefix}--popover--left-end.#{$prefix}--popover--auto-align
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-content
+    > .#{$prefix}--popover-caret {
+    block-size: $popover-caret-width;
+    inline-size: $popover-caret-height;
+
+    &::after {
+      block-size: $popover-caret-width;
+      clip-path: polygon(0% 0%, 100% 50%, 0% 100%);
+      inline-size: $popover-caret-height;
+    }
+  }
+
+  // Caret placement for autoAlign with border
+  .#{$prefix}--popover--border.#{$prefix}--popover--left.#{$prefix}--popover--auto-align
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-content
+    > .#{$prefix}--popover-caret,
+  .#{$prefix}--popover--border.#{$prefix}--popover--left-top.#{$prefix}--popover--auto-align
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-content
+    > .#{$prefix}--popover-caret,
+  .#{$prefix}--popover--border.#{$prefix}--popover--left-start.#{$prefix}--popover--auto-align
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-content
+    > .#{$prefix}--popover-caret,
+  .#{$prefix}--popover--border.#{$prefix}--popover--left-bottom.#{$prefix}--popover--auto-align
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-content
+    > .#{$prefix}--popover-caret,
+  .#{$prefix}--popover--border.#{$prefix}--popover--left-end.#{$prefix}--popover--auto-align
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-content
+    > .#{$prefix}--popover-caret {
+    &::before {
+      block-size: $popover-caret-width;
+      clip-path: polygon(0% 0%, 100% 50%, 0% 100%);
+      inline-size: $popover-caret-height;
+    }
+
+    &::after {
+      inset-inline-start: -1px;
+    }
+  }
+
+  .#{$prefix}--popover--border.#{$prefix}--popover--left.#{$prefix}--popover--auto-align:dir(
+      rtl
+    )
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-content
+    > .#{$prefix}--popover-caret,
+  .#{$prefix}--popover--border.#{$prefix}--popover--left-top.#{$prefix}--popover--auto-align:dir(
+      rtl
+    )
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-content
+    > .#{$prefix}--popover-caret,
+  .#{$prefix}--popover--border.#{$prefix}--popover--left-start.#{$prefix}--popover--auto-align:dir(
+      rtl
+    )
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-content
+    > .#{$prefix}--popover-caret,
+  .#{$prefix}--popover--border.#{$prefix}--popover--left-bottom.#{$prefix}--popover--auto-align:dir(
+      rtl
+    )
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-content
+    > .#{$prefix}--popover-caret,
+  .#{$prefix}--popover--border.#{$prefix}--popover--left-end.#{$prefix}--popover--auto-align:dir(
+      rtl
+    )
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-content
+    > .#{$prefix}--popover-caret {
+    &::before {
+      margin-inline-start: -1px;
+    }
+
+    &::after {
+      inset-inline-start: 0;
+    }
+  }
+
+  //-----------------------------------------------------------------------------
+  // Tab Tip Variant
+  //-----------------------------------------------------------------------------
+  .#{$prefix}--popover--tab-tip
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-content {
+    border-radius: 0;
+  }
+
+  .#{$prefix}--popover--tab-tip.#{$prefix}--popover--top-start:not(
+      .#{$prefix}--popover--auto-align
+    )
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-content,
+  .#{$prefix}--popover--tab-tip.#{$prefix}--popover--bottom-start:not(
+      .#{$prefix}--popover--auto-align
+    )
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-content,
+  .#{$prefix}--popover--tab-tip.#{$prefix}--popover--top-end:not(
+      .#{$prefix}--popover--auto-align
+    ):dir(rtl)
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-content,
+  .#{$prefix}--popover--tab-tip.#{$prefix}--popover--bottom-end:not(
+      .#{$prefix}--popover--auto-align
+    ):dir(rtl)
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-content {
+    inset-inline-start: 0;
+  }
+
+  .#{$prefix}--popover--tab-tip.#{$prefix}--popover--top-end:not(
+      .#{$prefix}--popover--auto-align
+    )
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-content,
+  .#{$prefix}--popover--tab-tip.#{$prefix}--popover--bottom-end:not(
+      .#{$prefix}--popover--auto-align
+    )
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-content,
+  .#{$prefix}--popover--tab-tip.#{$prefix}--popover--top-start:not(
+      .#{$prefix}--popover--auto-align
+    ):dir(rtl)
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-content,
+  .#{$prefix}--popover--tab-tip.#{$prefix}--popover--bottom-start:not(
+      .#{$prefix}--popover--auto-align
+    ):dir(rtl)
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-content {
+    inset-inline-end: 0;
+    inset-inline-start: initial;
+  }
+
+  .#{$prefix}--popover--tab-tip .#{$prefix}--popover {
+    will-change: filter;
+  }
+
+  .#{$prefix}--popover--tab-tip__button {
+    @include popover-tab-tip-button;
+  }
+
+  .#{$prefix}--popover--tab-tip.#{$prefix}--popover--open
+    .#{$prefix}--popover--tab-tip__button {
+    background: theme.$layer;
+    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
+  }
+
+  .#{$prefix}--popover--tab-tip.#{$prefix}--popover--open
+    .#{$prefix}--popover--tab-tip__button:not(:focus)::after {
+    position: absolute;
+    z-index: z('floating') + 1;
+    background: theme.$layer;
+    block-size: 2px;
+    content: '';
+    inline-size: 100%;
+    inset-block-end: 0;
+  }
+
+  .#{$prefix}--popover--tab-tip__button svg {
+    fill: theme.$icon-primary;
+  }
+}

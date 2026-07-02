@@ -1,0 +1,160 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`normalize should return a normalized map of cells by id 1`] = `
+{
+  "a:fieldA": {
+    "errors": null,
+    "hasAILabelHeader": false,
+    "id": "a:fieldA",
+    "info": {
+      "header": "fieldA",
+    },
+    "isEditable": false,
+    "isEditing": false,
+    "isValid": true,
+    "value": "fieldA",
+  },
+  "a:fieldB": {
+    "errors": null,
+    "hasAILabelHeader": false,
+    "id": "a:fieldB",
+    "info": {
+      "header": "fieldB",
+    },
+    "isEditable": false,
+    "isEditing": false,
+    "isValid": true,
+    "value": "fieldB",
+  },
+  "a:fieldC": {
+    "errors": null,
+    "hasAILabelHeader": false,
+    "id": "a:fieldC",
+    "info": {
+      "header": "fieldC",
+    },
+    "isEditable": false,
+    "isEditing": false,
+    "isValid": true,
+    "value": "fieldC",
+  },
+  "b:fieldA": {
+    "errors": null,
+    "hasAILabelHeader": false,
+    "id": "b:fieldA",
+    "info": {
+      "header": "fieldA",
+    },
+    "isEditable": false,
+    "isEditing": false,
+    "isValid": true,
+    "value": "fieldA",
+  },
+  "b:fieldB": {
+    "errors": null,
+    "hasAILabelHeader": false,
+    "id": "b:fieldB",
+    "info": {
+      "header": "fieldB",
+    },
+    "isEditable": false,
+    "isEditing": false,
+    "isValid": true,
+    "value": "fieldB",
+  },
+  "b:fieldC": {
+    "errors": null,
+    "hasAILabelHeader": false,
+    "id": "b:fieldC",
+    "info": {
+      "header": "fieldC",
+    },
+    "isEditable": false,
+    "isEditing": false,
+    "isValid": true,
+    "value": "fieldC",
+  },
+  "c:fieldA": {
+    "errors": null,
+    "hasAILabelHeader": false,
+    "id": "c:fieldA",
+    "info": {
+      "header": "fieldA",
+    },
+    "isEditable": false,
+    "isEditing": false,
+    "isValid": true,
+    "value": "fieldA",
+  },
+  "c:fieldB": {
+    "errors": null,
+    "hasAILabelHeader": false,
+    "id": "c:fieldB",
+    "info": {
+      "header": "fieldB",
+    },
+    "isEditable": false,
+    "isEditing": false,
+    "isValid": true,
+    "value": "fieldB",
+  },
+  "c:fieldC": {
+    "errors": null,
+    "hasAILabelHeader": false,
+    "id": "c:fieldC",
+    "info": {
+      "header": "fieldC",
+    },
+    "isEditable": false,
+    "isEditing": false,
+    "isValid": true,
+    "value": "fieldC",
+  },
+}
+`;
+
+exports[`normalize should return a normalized map of rows by id 1`] = `
+{
+  "a": {
+    "cells": [
+      "a:fieldA",
+      "a:fieldB",
+      "a:fieldC",
+    ],
+    "disabled": false,
+    "id": "a",
+    "isExpanded": false,
+    "isSelected": false,
+  },
+  "b": {
+    "cells": [
+      "b:fieldA",
+      "b:fieldB",
+      "b:fieldC",
+    ],
+    "disabled": false,
+    "id": "b",
+    "isExpanded": false,
+    "isSelected": false,
+  },
+  "c": {
+    "cells": [
+      "c:fieldA",
+      "c:fieldB",
+      "c:fieldC",
+    ],
+    "disabled": false,
+    "id": "c",
+    "isExpanded": false,
+    "isSelected": false,
+  },
+}
+`;
+
+exports[`normalize should return an array of the row ids 1`] = `
+[
+  "a",
+  "b",
+  "c",
+]
+`;

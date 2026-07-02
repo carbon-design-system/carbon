@@ -1,0 +1,24 @@
+# Each line is a file pattern followed by one or more owners.
+# Order is important; the last matching pattern takes the most
+# precedence.
+
+# These owners will be the default owners for everything in the
+# repo. Unless a later match takes precedence, this team will
+# be requested for review when someone opens a pull request.
+* @carbon-design-system/monorepo-reviewers
+
+
+# Core icons and pictograms
+/packages/icons/src/svg/        @laurenmrice @carbon-design-system/brand-icons @carbon-design-system/monorepo-reviewers
+/packages/pictograms/src/svg/   @laurenmrice @carbon-design-system/brand-pictograms @carbon-design-system/monorepo-reviewers
+
+# Admins and leads should be notified of Public API changes in
+# the system
+**/PublicAPI-test.js        @carbon-design-system/developers-system-admins @carbon-design-system/monorepo-reviewers
+**/PublicAPI-test.js.snap   @carbon-design-system/developers-system-admins @carbon-design-system/monorepo-reviewers
+
+# Admins and leads should be notified of changes to these.
+# This should always be the last entry in this file.
+/.github/           @carbon-design-system/developers-system-admins @carbon-design-system/monorepo-reviewers
+/.github/CODEOWNERS @carbon-design-system/developers-system-admins @carbon-design-system/monorepo-reviewers
+**/AGENTS.md @carbon-design-system/developers-system-admins @carbon-design-system/monorepo-reviewers

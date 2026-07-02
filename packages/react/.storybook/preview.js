@@ -1,0 +1,440 @@
+/**
+ * Copyright IBM Corp. 2016, 2026
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+import {
+  Title,
+  Subtitle,
+  Description,
+  Primary,
+  Stories,
+  ArgTypes,
+} from '@storybook/addon-docs/blocks';
+import { allModes } from './modes';
+
+import './styles.scss';
+import '../src/feature-flags';
+
+import { white, g10, g90, g100 } from '@carbon/themes';
+import React, { useEffect, useState } from 'react';
+import useIsomorphicEffect from '../src/internal/useIsomorphicEffect';
+import { breakpoints } from '@carbon/layout';
+import { GlobalTheme } from '../src/components/Theme';
+import { Layout } from '../src/components/Layout';
+import { TextDirection } from '../src/components/Text';
+
+import theme from './theme';
+
+const devTools = {
+  layoutSize: {
+    description: "Set the layout context's size",
+    defaultValue: false,
+    toolbar: {
+      title: 'dev :: preview__Layout size',
+      items: [
+        {
+          value: false,
+          title: 'None',
+        },
+        'xs',
+        'sm',
+        'md',
+        'lg',
+        'xl',
+        '2xl',
+      ],
+    },
+  },
+  layoutDensity: {
+    description: "Set the layout context's density",
+    defaultValue: false,
+    toolbar: {
+      title: 'dev :: preview__Layout density',
+      items: [
+        {
+          value: false,
+          title: 'None',
+        },
+        'condensed',
+        'normal',
+      ],
+    },
+  },
+};
+
+// always use full locale code strings for values
+const globalTypes = {
+  locale: {
+    name: 'Locale',
+    description: 'Set the localization for the storybook',
+    defaultValue: 'en-US',
+    toolbar: {
+      icon: 'globe',
+      title: 'Locale',
+      items: [
+        {
+          right: '🇺🇸',
+          title: 'English',
+          value: 'en-US',
+        },
+        {
+          right: '🇩🇪',
+          title: 'German',
+          value: 'de-DE',
+        },
+        {
+          right: '🇵🇸',
+          title: 'Arabic',
+          value: 'ar-SA',
+        },
+        {
+          right: '🇯🇵',
+          title: 'Japanese',
+          value: 'ja-JP',
+        },
+      ],
+    },
+  },
+  dir: {
+    name: 'Text direction',
+    description: 'Set the text direction for the story',
+    defaultValue: 'ltr',
+    toolbar: {
+      icon: 'transfer',
+      title: 'Text direction',
+      items: [
+        {
+          right: '🔄',
+          title: 'auto',
+          value: 'auto',
+        },
+        {
+          right: '➡️',
+          title: 'left-to-right (ltr)',
+          value: 'ltr',
+        },
+        {
+          right: '⬅️',
+          title: 'right-to-left (rtl)',
+          value: 'rtl',
+        },
+      ],
+    },
+  },
+  ...(process.env.NODE_ENV === 'development' ? devTools : {}),
+};
+
+const parameters = {
+  a11y: {
+    // Can specify engine as "axe" or "accessibility-checker" (axe default)
+    engine: 'accessibility-checker',
+    config: {
+      rules: [
+        {
+          // To disable a rule across all stories, set `enabled` to `false`.
+          // Use with caution: all violations of this rule will be ignored!
+          id: 'html_lang_exists',
+          enabled: false,
+        },
+        { id: 'page_title_exists', enabled: false },
+        { id: 'skip_main_exists', enabled: false },
+        { id: 'html_skipnav_exists', enabled: false },
+        { id: 'aria_content_in_landmark', enabled: false },
+        { id: 'aria_child_tabbable', enabled: false },
+      ],
+    },
+  },
+  backgrounds: {
+    // https://storybook.js.org/docs/react/essentials/backgrounds#grid
+    grid: {
+      cellSize: 8,
+      opacity: 0.5,
+    },
+    options: {
+      white: { name: 'white', value: white.background },
+      g10: { name: 'g10', value: g10.background },
+      g90: { name: 'g90', value: g90.background },
+      g100: { name: 'g100', value: g100.background },
+    },
+  },
+  controls: {
+    // https://storybook.js.org/docs/react/essentials/controls#show-full-documentation-for-each-property
+    expanded: true,
+
+    // https://storybook.js.org/docs/react/essentials/controls#specify-initial-preset-color-swatches
+    // presetColors: [],
+
+    // https://storybook.js.org/docs/react/essentials/controls#sorting-controls
+    sort: 'alpha',
+
+    hideNoControlsWarning: true,
+  },
+  darkMode: {
+    current: 'light',
+  },
+  docs: {
+    theme,
+    page: () => (
+      <>
+        <Title />
+        <Subtitle />
+        <Description />
+        <Primary />
+        <ArgTypes />
+        <Stories includePrimary={false} />
+      </>
+    ),
+    codePanel: true,
+  },
+  viewport: {
+    options: {
+      sm: {
+        name: 'Small',
+        styles: {
+          width: breakpoints.sm.width,
+          height: '100%',
+        },
+      },
+      md: {
+        name: 'Medium',
+        styles: {
+          width: breakpoints.md.width,
+          height: '100%',
+        },
+      },
+      lg: {
+        name: 'Large',
+        styles: {
+          width: breakpoints.lg.width,
+          height: '100%',
+        },
+      },
+      xlg: {
+        name: 'X-Large',
+        styles: {
+          width: breakpoints.xlg.width,
+          height: '100%',
+        },
+      },
+      Max: {
+        name: 'Max',
+        styles: {
+          width: breakpoints.max.width,
+          height: '100%',
+        },
+      },
+    },
+  },
+  options: {
+    storySort: (storyA, storyB) => {
+      const idA = storyA.id;
+      const idB = storyB.id;
+      const titleA = storyA.title;
+      const titleB = storyB.title;
+
+      if (idA.includes('welcome')) {
+        return -1;
+      }
+      if (idB.includes('welcome')) {
+        return 1;
+      }
+
+      // By default, sort by the top-level title of the story
+      if (titleA !== titleB) {
+        if (idA.includes('overview') && !idB.includes('overview')) {
+          return -1;
+        }
+        if (idB.includes('overview') && !idA.includes('overview')) {
+          return 1;
+        }
+        return titleA.localeCompare(titleB);
+      }
+
+      if (titleA !== titleB) {
+        if (idA.includes('flag-details') && !idB.includes('flag-details')) {
+          return -1;
+        }
+        if (idB.includes('flag-details') && !idA.includes('flag-details')) {
+          return 1;
+        }
+        return titleA.localeCompare(titleB);
+      }
+
+      // To sort the stories, we first build up a list of matches based on
+      // keywords. Each keyword has a specific weight that will be used to
+      // determine order later on.
+      const UNKNOWN_KEYWORD = 5;
+      const keywords = new Map([
+        ['welcome', 0],
+        ['overview', 1],
+        ['default', 2],
+        ['usage', 3],
+        ['flag-details', 4],
+        ['playground', 6],
+        ['development', 7],
+        ['deprecated', 8],
+        ['unstable', 9],
+      ]);
+      const matches = new Map();
+
+      // We use this list of keywords to determine a collection of matches. By
+      // default, we will look for the greatest valued matched
+      for (const [keyword, weight] of keywords) {
+        // If we already have a match for a given id that is lesser than the
+        // specific keyword we're looking for, break early
+        if (matches.get(idA) < weight || matches.get(idB) < weight) {
+          break;
+        }
+
+        // If we don't have a match already for either id, we check to see if
+        // the id includes the keyword and assigns the relevant weight, if so
+        if (idA.includes(keyword)) {
+          matches.set(idA, weight);
+        }
+
+        if (idB.includes(keyword)) {
+          matches.set(idB, weight);
+        }
+      }
+
+      // If we have matches for either id, then we will compare the ids based on
+      // the weight assigned to the matching keyword
+      if (matches.size > 0) {
+        const weightA = matches.get(idA) ?? UNKNOWN_KEYWORD;
+        const weightB = matches.get(idB) ?? UNKNOWN_KEYWORD;
+        // If we have the same weight for the ids, then we should compare them
+        // using locale compare instead of by weight
+        if (weightA === weightB) {
+          return idA.localeCompare(idB);
+        }
+        return weightA - weightB;
+      }
+
+      // By default, if we have no matches we'll do a locale compare between the
+      // two ids
+      return idA.localeCompare(idB);
+    },
+  },
+  chromatic: {
+    // g90 is intentionally excluded from global Chromatic coverage to reduce
+    // snapshot volume. Individual stories can opt into g90 coverage by setting
+    // parameters.chromatic.modes to include allModes.g90
+    modes: {
+      g10: allModes['g10'],
+      g100: allModes['g100'],
+      'breakpoint-sm': allModes['breakpoint-sm'],
+    },
+  },
+};
+
+// Helper function to map background values to theme names
+function getThemeFromBackground(backgroundValue) {
+  const backgroundThemeMap = {
+    [white.background]: 'white',
+    white: 'white',
+    [g10.background]: 'g10',
+    g10: 'g10',
+    [g90.background]: 'g90',
+    g90: 'g90',
+    [g100.background]: 'g100',
+    g100: 'g100',
+  };
+  return backgroundThemeMap[backgroundValue] ?? 'white';
+}
+
+const decorators = [
+  (Story, context) => {
+    const { layoutDensity, layoutSize, locale, dir } = context.globals;
+    const backgroundValue = context.globals.backgrounds?.value;
+    const [randomKey, setRandomKey] = useState(1);
+    const theme = getThemeFromBackground(backgroundValue);
+
+    useEffect(() => {
+      document.documentElement.setAttribute('data-carbon-theme', theme);
+    }, [theme]);
+
+    useIsomorphicEffect(() => {
+      document.documentElement.lang = locale;
+      document.documentElement.dir = dir;
+      // Need to set random key to recalculate Popover coordinates
+      setRandomKey(Math.floor(Math.random() * 10));
+    }, [locale, dir]);
+
+    return (
+      <GlobalTheme theme={theme}>
+        <Layout size={layoutSize || null} density={layoutDensity || null}>
+          <TextDirection
+            getTextDirection={(text) => {
+              return dir;
+            }}>
+            <Story key={randomKey} {...context} />
+          </TextDirection>
+        </Layout>
+      </GlobalTheme>
+    );
+  },
+];
+
+const preview = {
+  parameters,
+  decorators,
+  globalTypes,
+  tags: ['autodocs'],
+};
+
+// Array that stores strings and regexes of controls that should be hidden in all stories
+const GLOBAL_EXCLUDED_CONTROLS = [
+  'className',
+  'children',
+  'as',
+  'decorator',
+  'slug',
+  'ref',
+  'ariaLabel',
+  /^(?:on[A-Z]\w*)$/,
+];
+
+/**
+ * ArgTypes enhancer that enforces a global control filter across all stories.
+ * Args matching elements in the GLOBAL_EXCLUDED_CONTROLS array are not shown in the
+ * `controls` table
+ */
+export const argTypesEnhancers = [
+  (context) => {
+    const current = context.argTypes || {};
+    const next = { ...current };
+
+    // Do not hide in the ArgTypes table in Overview page,
+    // let them be visible for documentation purposes
+    if (context?.name === '__meta') return current;
+
+    const strings = new Set();
+    const regexes = [];
+    for (const p of GLOBAL_EXCLUDED_CONTROLS) {
+      if (typeof p === 'string') strings.add(p);
+      else if (p instanceof RegExp) regexes.push(p);
+    }
+
+    // helper function to hide controls
+    const disable = (name) => {
+      const prev = next[name] || {};
+      next[name] = { ...prev, table: { ...(prev.table || {}), disable: true } };
+    };
+
+    strings.forEach((name) => {
+      if (name in next) disable(name);
+    });
+    if (regexes.length) {
+      Object.keys(next).forEach((name) => {
+        if (strings.has(name)) return;
+        if (regexes.some((re) => re.test(name))) disable(name);
+      });
+    }
+
+    return next;
+  },
+];
+
+export default preview;

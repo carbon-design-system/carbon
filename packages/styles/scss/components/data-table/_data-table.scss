@@ -1,0 +1,1191 @@
+//
+// Copyright IBM Corp. 2016, 2025
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use 'mixins' as *;
+@use 'vars' as *;
+@use '../checkbox';
+@use '../radio-button';
+@use '../../config' as *;
+@use '../../breakpoint' as *;
+@use '../../motion' as *;
+@use '../../spacing' as *;
+@use '../../theme' as *;
+@use '../../type' as *;
+@use '../../layer' as *;
+@use '../../utilities/ai-gradient' as *;
+@use '../../utilities/convert';
+@use '../../utilities/focus-outline' as *;
+@use '../../utilities/high-contrast-mode' as *;
+@use '../../utilities/text-overflow' as *;
+
+/// Data table core styles
+/// @access public
+/// @group data-table
+@mixin data-table {
+  //----------------------------------------------------------------------------
+  // Container
+  //----------------------------------------------------------------------------
+  .#{$prefix}--data-table-container {
+    position: relative;
+    // Allow space for focus styles
+    padding-block-start: $spacing-01;
+  }
+
+  .#{$prefix}--data-table-content {
+    display: block;
+    overflow-x: auto;
+  }
+
+  .#{$prefix}--data-table-content:focus {
+    @include focus-outline('outline');
+  }
+
+  //----------------------------------------------------------------------------
+  // Container, full table ai
+  //----------------------------------------------------------------------------
+  .#{$prefix}--data-table-container--ai-enabled {
+    position: relative;
+    // Allow for pseudo element to show for gradient border effect
+    padding: 1px;
+    border: none;
+  }
+
+  .#{$prefix}--data-table-container--ai-enabled::after {
+    position: absolute;
+    z-index: -1;
+    // Used for gradient border effect
+    background-image: linear-gradient(to top, $ai-border-end, $ai-border-start);
+    block-size: 100%;
+    content: '';
+    inline-size: 100%;
+    inset: 0;
+    pointer-events: none;
+  }
+
+  .#{$prefix}--data-table-container--ai-enabled tbody {
+    position: relative;
+  }
+
+  .#{$prefix}--data-table-container--ai-enabled tbody::before {
+    position: absolute;
+    block-size: 100%;
+    content: '';
+    inline-size: 100%;
+    inset: 0;
+    // Prevents the pseudo element overlay from obstructing click on elements below the overlay
+    pointer-events: none;
+
+    @include ai-table-gradient('full-table');
+  }
+
+  //----------------------------------------------------------------------------
+  // Table title text
+  //----------------------------------------------------------------------------
+  .#{$prefix}--data-table-header {
+    background-color: $layer;
+    padding-block: $spacing-05 $spacing-06;
+    padding-inline: $spacing-05;
+  }
+
+  .#{$prefix}--data-table-header.#{$prefix}--data-table-header__with-decorator {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .#{$prefix}--data-table-header.#{$prefix}--data-table-header__with-decorator.#{$prefix}--data-table-header__with-decorator--standalone {
+    justify-content: flex-end;
+  }
+
+  .#{$prefix}--data-table-header__title {
+    @include type-style('heading-03');
+
+    color: $text-primary;
+  }
+
+  .#{$prefix}--data-table-header__description {
+    @include type-style('body-compact-01');
+
+    color: $text-secondary;
+
+    @include breakpoint(md) {
+      max-inline-size: 50ch;
+    }
+
+    @include breakpoint(lg) {
+      max-inline-size: 80ch;
+    }
+  }
+
+  //----------------------------------------------------------------------------
+  // Data table
+  //----------------------------------------------------------------------------
+  .#{$prefix}--data-table {
+    border-collapse: collapse;
+    border-spacing: 0;
+    inline-size: 100%;
+  }
+
+  .#{$prefix}--data-table thead {
+    @include type-style('heading-compact-01');
+
+    background-color: $layer-accent;
+  }
+
+  .#{$prefix}--data-table tbody {
+    @include type-style('body-compact-01');
+
+    background-color: $layer;
+    inline-size: 100%;
+  }
+
+  .#{$prefix}--data-table tr {
+    border: none;
+    block-size: $spacing-09;
+    inline-size: 100%;
+  }
+
+  .#{$prefix}--data-table tbody tr,
+  .#{$prefix}--data-table tbody tr td,
+  .#{$prefix}--data-table tbody tr th {
+    transition: background-color $duration-fast-01 motion(entrance, productive);
+  }
+
+  .#{$prefix}--data-table tbody tr:not([data-child-row]):hover,
+  .#{$prefix}--data-table tbody tr[data-child-row]:hover > td {
+    background-color: $layer-hover;
+  }
+
+  .#{$prefix}--data-table tbody tr:hover td,
+  .#{$prefix}--data-table tbody tr:hover th {
+    border-block-end: 1px solid $layer-hover;
+    border-block-start: 1px solid $layer-hover;
+    color: $text-primary;
+  }
+
+  .#{$prefix}--data-table
+    tr:hover
+    .#{$prefix}--link:not(.#{$prefix}--popover-container .#{$prefix}--link) {
+    color: $link-secondary;
+  }
+
+  .#{$prefix}--data-table
+    tr:hover
+    .#{$prefix}--link--disabled:not(
+      .#{$prefix}--popover-container .#{$prefix}--link
+    ) {
+    color: $text-disabled;
+  }
+
+  .#{$prefix}--data-table th,
+  .#{$prefix}--data-table td {
+    text-align: start;
+    vertical-align: middle;
+  }
+  .#{$prefix}--data-table.#{$prefix}--data-table--top-aligned-body {
+    &.#{$prefix}--data-table--lg
+      tr:not([data-child-row])
+      td:not(.#{$prefix}--table-expand) {
+      padding-block: $spacing-05 $spacing-05;
+
+      &.#{$prefix}--table-column-menu {
+        padding-block-start: $spacing-03;
+      }
+
+      &.#{$prefix}--table-column-checkbox:not(.#{$prefix}--table-column-radio) {
+        padding-block-start: convert.to-rem(13px);
+      }
+    }
+
+    td {
+      vertical-align: top;
+    }
+  }
+
+  .#{$prefix}--data-table.#{$prefix}--data-table--top-aligned-header {
+    &.#{$prefix}--data-table--lg
+      th:not(.#{$prefix}--table-expand):not(.#{$prefix}--table-sort__header) {
+      padding-block: $spacing-05 $spacing-05;
+
+      &.#{$prefix}--table-column-menu {
+        padding-block-start: $spacing-03;
+      }
+
+      &.#{$prefix}--table-column-checkbox {
+        padding-block-start: convert.to-rem(13px);
+      }
+    }
+
+    th {
+      vertical-align: top;
+    }
+  }
+
+  .#{$prefix}--data-table th[align='right'],
+  .#{$prefix}--data-table td[align='right'] {
+    text-align: end;
+  }
+
+  .#{$prefix}--data-table th[align='center'],
+  .#{$prefix}--data-table td[align='center'] {
+    text-align: center;
+  }
+
+  .#{$prefix}--data-table th {
+    background-color: $layer-accent;
+    color: $text-primary;
+    padding-inline: $spacing-05 $spacing-05;
+  }
+
+  .#{$prefix}--data-table th:last-of-type {
+    // Do not use `position: relative`, as its behavior is undefined for many table elements: https://www.w3.org/TR/CSS21/visuren.html#propdef-position
+    position: static;
+    inline-size: auto;
+  }
+
+  .#{$prefix}--data-table .#{$prefix}--table-header-label {
+    text-align: start;
+  }
+
+  .#{$prefix}--data-table td,
+  .#{$prefix}--data-table tbody th {
+    border-block-end: 1px solid $border-subtle-01;
+    border-block-start: 1px solid $layer;
+    color: $text-secondary;
+    padding-inline: $spacing-05 $spacing-05;
+
+    + td:first-of-type {
+      padding-inline-start: $spacing-04;
+    }
+  }
+
+  .#{$prefix}--layer-two .#{$prefix}--data-table td,
+  .#{$prefix}--layer-two .#{$prefix}--data-table tbody th {
+    border-block-end: 1px solid $border-subtle-02;
+  }
+
+  .#{$prefix}--layer-three .#{$prefix}--data-table td,
+  .#{$prefix}--layer-three .#{$prefix}--data-table tbody th {
+    border-block-end: 1px solid $border-subtle-03;
+  }
+
+  @supports (-moz-appearance: none) {
+    .#{$prefix}--data-table td {
+      // Fix to show borders in ff
+      background-clip: padding-box;
+    }
+  }
+
+  // Form Control Overrides
+
+  .#{$prefix}--data-table .#{$prefix}--list-box input[role='combobox'],
+  .#{$prefix}--data-table .#{$prefix}--list-box input[type='text'],
+  .#{$prefix}--data-table .#{$prefix}--dropdown,
+  .#{$prefix}--data-table .#{$prefix}--list-box,
+  .#{$prefix}--data-table .#{$prefix}--number input[type='number'],
+  .#{$prefix}--data-table .#{$prefix}--number input[type='text'],
+  .#{$prefix}--data-table .#{$prefix}--number__control-btn::before,
+  .#{$prefix}--data-table .#{$prefix}--number__control-btn::after,
+  .#{$prefix}--data-table .#{$prefix}--text-input,
+  .#{$prefix}--data-table .#{$prefix}--select-input {
+    background-color: $field-02;
+  }
+
+  // Overflow Menu Overrides
+  .#{$prefix}--data-table
+    td.#{$prefix}--table-column-menu
+    .#{$prefix}--overflow-menu[aria-expanded='false']:focus {
+    @include focus-outline('outline');
+  }
+
+  .#{$prefix}--data-table
+    td.#{$prefix}--table-column-menu
+    .#{$prefix}--overflow-menu[aria-expanded='true']:focus {
+    outline: none;
+  }
+
+  @media screen and (hover: hover),
+    (-ms-high-contrast: active),
+    (-ms-high-contrast: none) {
+    .#{$prefix}--data-table
+      td.#{$prefix}--table-column-menu
+      .#{$prefix}--overflow-menu
+      .#{$prefix}--overflow-menu__icon {
+      opacity: 0;
+    }
+  }
+
+  .#{$prefix}--data-table
+    td.#{$prefix}--table-column-menu
+    .#{$prefix}--overflow-menu.#{$prefix}--overflow-menu--open
+    .#{$prefix}--overflow-menu__icon {
+    opacity: 1;
+  }
+
+  .#{$prefix}--data-table.#{$prefix}--data-table--visible-overflow-menu
+    td.#{$prefix}--table-column-menu
+    .#{$prefix}--overflow-menu
+    .#{$prefix}--overflow-menu__icon,
+  .#{$prefix}--data-table
+    td.#{$prefix}--table-column-menu
+    .#{$prefix}--overflow-menu:hover
+    .#{$prefix}--overflow-menu__icon,
+  .#{$prefix}--data-table
+    td.#{$prefix}--table-column-menu
+    .#{$prefix}--overflow-menu:focus
+    .#{$prefix}--overflow-menu__icon,
+  .#{$prefix}--data-table
+    tr:hover
+    td.#{$prefix}--table-column-menu
+    .#{$prefix}--overflow-menu
+    .#{$prefix}--overflow-menu__icon {
+    opacity: 1;
+  }
+
+  .#{$prefix}--table-row--menu-option
+    .#{$prefix}--overflow-menu-options__btn
+    .#{$prefix}--overflow-menu-options__option-content
+    svg {
+    position: relative;
+    // Used to center svg without setting display flex //display block needed for overflow text truncation
+    inset-block-start: convert.to-rem(3px);
+    margin-inline-end: $spacing-03;
+  }
+
+  .#{$prefix}--data-table .#{$prefix}--overflow-menu,
+  .#{$prefix}--data-table .#{$prefix}--overflow-menu__trigger {
+    &:hover {
+      background-color: $layer-selected-hover;
+    }
+  }
+
+  .#{$prefix}--data-table--selected .#{$prefix}--overflow-menu,
+  .#{$prefix}--data-table--selected .#{$prefix}--overflow-menu__trigger {
+    &:hover {
+      background-color: $layer-hover;
+    }
+  }
+
+  .#{$prefix}--data-table--selected
+    .#{$prefix}--link:not(.#{$prefix}--link--disabled) {
+    color: $link-secondary;
+  }
+
+  .#{$prefix}--data-table--xs td.#{$prefix}--table-column-menu,
+  .#{$prefix}--data-table--sm td.#{$prefix}--table-column-menu {
+    block-size: convert.to-rem(24px);
+    padding-block: 0;
+  }
+
+  .#{$prefix}--data-table--sm td.#{$prefix}--table-column-menu {
+    block-size: convert.to-rem(32px);
+  }
+
+  .#{$prefix}--data-table--md td.#{$prefix}--table-column-menu {
+    block-size: convert.to-rem(40px);
+  }
+
+  .#{$prefix}--data-table--xl .#{$prefix}--table-column-menu {
+    padding-block-start: $spacing-03;
+  }
+
+  //----------------------------------------------------------------------------
+  //ZEBRA
+  //----------------------------------------------------------------------------
+
+  .#{$prefix}--data-table--zebra
+    tbody
+    tr:not(.#{$prefix}--parent-row):nth-child(odd)
+    td {
+    border-block-end: 1px solid $layer;
+  }
+
+  .#{$prefix}--data-table--zebra
+    tbody
+    tr:not(.#{$prefix}--parent-row):nth-child(even)
+    td {
+    border-block-end: 1px solid $layer-accent;
+    border-block-start: 1px solid $layer-accent;
+  }
+
+  .#{$prefix}--data-table--zebra
+    tbody
+    tr:not(.#{$prefix}--parent-row):not(
+      .#{$prefix}--data-table--selected
+    ):nth-child(even) {
+    background-color: $layer-accent;
+  }
+
+  .#{$prefix}--data-table--zebra
+    tbody
+    tr:not(.#{$prefix}--parent-row):hover
+    td {
+    border-block-end: 1px solid $layer-hover;
+    border-block-start: 1px solid $layer-hover;
+  }
+
+  .#{$prefix}--data-table--zebra
+    tbody
+    tr:not(.#{$prefix}--parent-row):not(
+      .#{$prefix}--data-table--selected
+    ):hover {
+    background-color: $layer-hover;
+  }
+
+  //----------------------------------------------------------------------------
+  // Select
+  //----------------------------------------------------------------------------
+  .#{$prefix}--table-column-checkbox .#{$prefix}--checkbox-label {
+    min-block-size: $spacing-06;
+    padding-inline-start: 0;
+  }
+
+  .#{$prefix}--table-column-checkbox .#{$prefix}--checkbox-label::before {
+    margin-block-start: convert.to-rem(2px);
+  }
+
+  .#{$prefix}--table-column-checkbox .#{$prefix}--checkbox-label::after {
+    inset-block-start: convert.to-rem(7.5px);
+  }
+
+  .#{$prefix}--data-table th.#{$prefix}--table-column-checkbox {
+    // Do not use `position: relative`, as its behavior is undefined for many table elements: https://www.w3.org/TR/CSS21/visuren.html#propdef-position
+    position: static;
+    background-color: $layer-accent;
+    inline-size: convert.to-rem(32px);
+    transition: background-color $duration-fast-01 motion(entrance, productive);
+  }
+
+  .#{$prefix}--data-table thead th.#{$prefix}--table-column-checkbox,
+  .#{$prefix}--data-table tbody td.#{$prefix}--table-column-checkbox,
+  .#{$prefix}--data-table thead th.#{$prefix}--table-expand,
+  .#{$prefix}--data-table tbody td.#{$prefix}--table-expand {
+    min-inline-size: 0;
+  }
+
+  .#{$prefix}--data-table thead th.#{$prefix}--table-column-checkbox,
+  .#{$prefix}--data-table tbody td.#{$prefix}--table-column-checkbox {
+    min-inline-size: 2.5rem;
+    // spacing between checkbox / chevron and next cell should be 8px / 0.5rem
+    padding-inline: 1rem convert.to-rem(4px);
+  }
+
+  .#{$prefix}--data-table thead th.#{$prefix}--table-expand,
+  .#{$prefix}--data-table tbody td.#{$prefix}--table-expand {
+    block-size: convert.to-rem(32px);
+    inline-size: convert.to-rem(32px);
+  }
+
+  .#{$prefix}--data-table--xs thead th.#{$prefix}--table-expand,
+  .#{$prefix}--data-table--xs tbody td.#{$prefix}--table-expand {
+    padding: 0 0 0 0.5rem;
+    block-size: convert.to-rem(24px);
+    inline-size: convert.to-rem(24px);
+  }
+
+  .#{$prefix}--data-table--sm thead th.#{$prefix}--table-expand,
+  .#{$prefix}--data-table--sm tbody td.#{$prefix}--table-expand {
+    padding: 0;
+    block-size: convert.to-rem(32px);
+    inline-size: convert.to-rem(32px);
+    padding-inline-start: 0.5rem;
+  }
+
+  .#{$prefix}--data-table--md thead th.#{$prefix}--table-expand,
+  .#{$prefix}--data-table--md tbody td.#{$prefix}--table-expand {
+    padding: convert.to-rem(4px) 0 convert.to-rem(4px) convert.to-rem(8px);
+    block-size: convert.to-rem(40px);
+    inline-size: convert.to-rem(40px);
+  }
+
+  .#{$prefix}--data-table--xl thead th.#{$prefix}--table-expand,
+  .#{$prefix}--data-table--xl tbody td.#{$prefix}--table-expand {
+    block-size: convert.to-rem(64px);
+    padding-block: convert.to-rem(10px) convert.to-rem(22px);
+  }
+
+  .#{$prefix}--data-table--xl .#{$prefix}--table-column-checkbox {
+    padding-block-start: convert.to-rem(13px);
+  }
+
+  .#{$prefix}--data-table--xl .#{$prefix}--table-column-radio {
+    padding-block-start: $spacing-05;
+  }
+
+  //----------------------------------------------------------------------------
+  // Radio
+  //----------------------------------------------------------------------------
+  .#{$prefix}--table-column-radio {
+    inline-size: 48px;
+  }
+
+  .#{$prefix}--table-column-radio .#{$prefix}--radio-button__appearance {
+    margin-inline-end: convert.to-rem(-2px);
+  }
+
+  // default selected row + zebra select - even child
+  .#{$prefix}--data-table--zebra
+    tbody
+    tr:nth-child(odd).#{$prefix}--data-table--selected
+    td,
+  tr.#{$prefix}--data-table--selected td {
+    // Bottom border acts as separator from other rows
+    border-block-end: 1px solid $layer-active;
+    border-block-start: 1px solid $layer-selected;
+    color: $text-primary;
+  }
+
+  .#{$prefix}--data-table--zebra
+    tbody
+    tr:nth-child(odd).#{$prefix}--data-table--selected,
+  tr.#{$prefix}--data-table--selected {
+    background-color: $layer-selected;
+  }
+
+  // First row
+  .#{$prefix}--data-table--zebra
+    tbody
+    tr:first-of-type:nth-child(odd).#{$prefix}--data-table--selected
+    td,
+  tr.#{$prefix}--data-table--selected:first-of-type td {
+    // Top border acts as separator from thead
+    border-block-start: 1px solid $border-subtle-selected;
+  }
+
+  // last row + zebra select last
+  .#{$prefix}--data-table--zebra
+    tbody
+    tr:last-of-type:nth-child(odd).#{$prefix}--data-table--selected
+    td,
+  .#{$prefix}--data-table--zebra
+    tbody
+    tr:last-of-type:nth-child(even).#{$prefix}--data-table--selected
+    td,
+  tr.#{$prefix}--data-table--selected:last-of-type td {
+    border-block-end: 1px solid $layer-selected;
+    // Doesn't need separators
+    border-block-start: 1px solid $layer-selected;
+  }
+
+  // zebra select - odd child
+  .#{$prefix}--data-table--zebra
+    tbody
+    tr:nth-child(even).#{$prefix}--data-table--selected
+    td {
+    border-block-end: 1px solid $layer-active;
+  }
+
+  .#{$prefix}--data-table--zebra
+    tbody
+    tr:nth-child(even).#{$prefix}--data-table--selected:hover
+    td {
+    border-block-end: 1px solid $data-table-column-hover;
+  }
+
+  // hover + zebra select - even child
+  .#{$prefix}--data-table--zebra
+    tbody
+    tr:nth-child(odd).#{$prefix}--data-table--selected:hover
+    td,
+  .#{$prefix}--data-table tbody .#{$prefix}--data-table--selected:hover td {
+    border-block-end: 1px solid $data-table-column-hover;
+    border-block-start: 1px solid $data-table-column-hover;
+    color: $text-primary;
+  }
+
+  .#{$prefix}--data-table--zebra
+    tbody
+    tr:nth-child(odd).#{$prefix}--data-table--selected:hover,
+  .#{$prefix}--data-table tbody .#{$prefix}--data-table--selected:hover {
+    background-color: $data-table-column-hover;
+  }
+
+  // selected overflow menu
+  .#{$prefix}--data-table--selected
+    .#{$prefix}--overflow-menu
+    .#{$prefix}--overflow-menu__icon {
+    opacity: 1;
+  }
+
+  //----------------------------------------------------------------------------
+  // Extra Small
+  //----------------------------------------------------------------------------
+  .#{$prefix}--data-table--xs thead tr,
+  .#{$prefix}--data-table--xs tbody tr,
+  .#{$prefix}--data-table--xs tbody tr th {
+    block-size: convert.to-rem(24px);
+  }
+
+  .#{$prefix}--data-table--xs .#{$prefix}--table-header-label {
+    padding-block: convert.to-rem(2px) convert.to-rem(2px);
+  }
+
+  .#{$prefix}--data-table--xs td,
+  .#{$prefix}--data-table--xs tbody tr th {
+    padding-block: convert.to-rem(2px) convert.to-rem(2px);
+  }
+
+  .#{$prefix}--data-table--xs .#{$prefix}--overflow-menu {
+    block-size: calc(100% + 1px);
+    inline-size: convert.to-rem(32px);
+  }
+
+  .#{$prefix}--data-table.#{$prefix}--data-table--xs:not(
+      .#{$prefix}--data-table--top-aligned-body
+    )
+    td.#{$prefix}--table-column-checkbox,
+  .#{$prefix}--data-table.#{$prefix}--data-table--xs:not(
+      .#{$prefix}--data-table--top-aligned-header
+    )
+    th.#{$prefix}--table-column-checkbox {
+    padding-block: 0;
+  }
+
+  .#{$prefix}--data-table.#{$prefix}--data-table--xs
+    .#{$prefix}--table-column-checkbox
+    .#{$prefix}--checkbox-label {
+    block-size: convert.to-rem(23px);
+    // 24px row - 1px border
+    min-block-size: convert.to-rem(23px);
+  }
+
+  //----------------------------------------------------------------------------
+  // Small
+  //----------------------------------------------------------------------------
+  .#{$prefix}--data-table--sm thead tr,
+  .#{$prefix}--data-table--sm tbody tr,
+  .#{$prefix}--data-table--sm tbody tr th {
+    block-size: convert.to-rem(32px);
+  }
+
+  .#{$prefix}--data-table--sm .#{$prefix}--table-header-label {
+    padding-block: convert.to-rem(7px) convert.to-rem(7px);
+  }
+
+  .#{$prefix}--data-table--sm td,
+  .#{$prefix}--data-table--sm tbody tr th,
+  .#{$prefix}--data-table--sm.#{$prefix}--data-table--top-aligned-header
+    th.#{$prefix}--table-column-checkbox {
+    padding-block: convert.to-rem(7px) convert.to-rem(6px);
+  }
+
+  .#{$prefix}--data-table.#{$prefix}--data-table--sm:not(
+      .#{$prefix}--data-table--top-aligned-body
+    )
+    td.#{$prefix}--table-column-checkbox,
+  .#{$prefix}--data-table.#{$prefix}--data-table--sm:not(
+      .#{$prefix}--data-table--top-aligned-header
+    )
+    th.#{$prefix}--table-column-checkbox {
+    padding-block: convert.to-rem(3px) convert.to-rem(3px);
+  }
+
+  .#{$prefix}--data-table--sm .#{$prefix}--overflow-menu {
+    block-size: calc(100% + 1px);
+  }
+
+  //----------------------------------------------------------------------------
+  // Medium
+  //----------------------------------------------------------------------------
+  .#{$prefix}--data-table--md thead tr,
+  .#{$prefix}--data-table--md tbody tr,
+  .#{$prefix}--data-table--md tbody tr th {
+    block-size: convert.to-rem(40px);
+  }
+
+  .#{$prefix}--data-table--md .#{$prefix}--table-header-label,
+  .#{$prefix}--data-table--md.#{$prefix}--data-table--top-aligned-header
+    th.#{$prefix}--table-column-checkbox {
+    padding-block: convert.to-rem(7px) convert.to-rem(7px);
+  }
+
+  .#{$prefix}--data-table--md td,
+  .#{$prefix}--data-table--md tbody tr th {
+    padding-block: convert.to-rem(7px) convert.to-rem(6px);
+  }
+
+  .#{$prefix}--data-table.#{$prefix}--data-table--md:not(
+      .#{$prefix}--data-table--top-aligned-body
+    )
+    td.#{$prefix}--table-column-checkbox,
+  .#{$prefix}--data-table.#{$prefix}--data-table--md:not(
+      .#{$prefix}--data-table--top-aligned-header
+    )
+    th.#{$prefix}--table-column-checkbox {
+    padding-block: convert.to-rem(3px) convert.to-rem(3px);
+  }
+
+  .#{$prefix}--data-table--md .#{$prefix}--table-column-menu {
+    padding-block: convert.to-rem(3px) convert.to-rem(3px);
+  }
+
+  //----------------------------------------------------------------------------
+  // Extra Large
+  //----------------------------------------------------------------------------
+  .#{$prefix}--data-table--xl thead tr,
+  .#{$prefix}--data-table--xl tbody tr,
+  .#{$prefix}--data-table--xl tbody tr th {
+    block-size: convert.to-rem(64px);
+  }
+
+  .#{$prefix}--data-table--xl .#{$prefix}--table-header-label {
+    padding-block: $spacing-05 $spacing-05;
+  }
+
+  .#{$prefix}--data-table--xl td,
+  .#{$prefix}--data-table--xl tbody tr th {
+    padding-block: $spacing-05 $spacing-05;
+  }
+
+  .#{$prefix}--data-table--xl th,
+  .#{$prefix}--data-table--xl td {
+    vertical-align: top;
+  }
+
+  .#{$prefix}--data-table--xl .#{$prefix}--data-table--cell-secondary-text {
+    @include type-style('label-01');
+  }
+
+  //----------------------------------------------------------------------------
+  // Static
+  //----------------------------------------------------------------------------
+  .#{$prefix}--data-table--static {
+    inline-size: auto;
+  }
+
+  .#{$prefix}--data-table-container--static {
+    inline-size: fit-content;
+  }
+
+  // -------------
+  // Sticky header
+  // -------------
+  .#{$prefix}--data-table_inner-container {
+    background-color: $layer-accent;
+    transform: translateZ(0);
+  }
+
+  .#{$prefix}--data-table--sticky-header {
+    display: block;
+    overflow-y: scroll;
+
+    thead,
+    tbody,
+    tr,
+    th,
+    td {
+      display: flex;
+    }
+
+    thead {
+      position: sticky;
+      z-index: 1;
+      overflow: scroll;
+      inline-size: 100%;
+      inset-block-start: 0;
+      // Hides ie scrollbar
+      -ms-overflow-style: none;
+      will-change: transform;
+    }
+
+    thead tr th {
+      border-block-end: 1px solid $layer-active;
+    }
+
+    tbody {
+      flex-direction: column;
+      // Hides ie scrollbar
+      -ms-overflow-style: none;
+      overflow-x: scroll;
+      will-change: transform;
+    }
+
+    tr.#{$prefix}--parent-row.#{$prefix}--expandable-row {
+      block-size: auto;
+      min-block-size: 3rem;
+    }
+
+    tr.#{$prefix}--expandable-row:not(.#{$prefix}--parent-row) {
+      block-size: auto;
+    }
+
+    .#{$prefix}--table-expand {
+      max-inline-size: convert.to-rem(48px);
+    }
+
+    thead .#{$prefix}--table-expand {
+      align-items: center;
+    }
+
+    .#{$prefix}--parent-row {
+      min-block-size: 3rem;
+    }
+
+    &:not(.#{$prefix}--data-table--xs):not(.#{$prefix}--data-table--xl):not(
+        .#{$prefix}--data-table--sm
+      )
+      td:not(.#{$prefix}--table-column-menu):not(
+        .#{$prefix}--table-column-checkbox
+      ) {
+      padding-block-start: convert.to-rem(14px);
+    }
+
+    // Taken from L125 _data-table-expandable
+    // Used to hide white line when parent row is hovered when child is expanded
+    tr.#{$prefix}--parent-row.#{$prefix}--expandable-row:hover
+      + tr[data-child-row]
+      td {
+      border-block-start: 1px solid $layer-hover;
+    }
+
+    tr.#{$prefix}--expandable-row:last-of-type {
+      overflow: hidden;
+    }
+
+    tr.#{$prefix}--data-table--selected:first-of-type td {
+      border-block-start: none;
+    }
+
+    // Selectable fix
+    thead th.#{$prefix}--table-column-checkbox,
+    tbody tr td.#{$prefix}--table-column-checkbox {
+      align-items: center;
+      inline-size: convert.to-rem(36px);
+      min-inline-size: convert.to-rem(36px);
+    }
+
+    &.#{$prefix}--data-table--xl thead th.#{$prefix}--table-column-checkbox,
+    &.#{$prefix}--data-table--xl td.#{$prefix}--table-column-checkbox {
+      align-items: flex-start;
+    }
+
+    // Overflow fix
+    /* When using sticky header, with a selection element in the first column, we need to set the last item to a fixed width to match the table body. We only want this to happen when the last table header does not have any text */
+    th.#{$prefix}--table-column-checkbox ~ th:last-of-type:empty {
+      max-inline-size: convert.to-rem(64px);
+    }
+
+    th:empty:not(.#{$prefix}--table-expand) {
+      max-inline-size: 2.25rem;
+    }
+
+    td.#{$prefix}--table-column-menu {
+      align-items: center;
+      block-size: auto;
+      padding-block-start: 0;
+    }
+
+    //hides webkit scrollbar
+    thead::-webkit-scrollbar,
+    tbody::-webkit-scrollbar {
+      display: none;
+    }
+
+    /* This is for targeting styles specific to firefox */
+    /* To hide the firefox scrollbar */
+    /* https://sass-lang.com/documentation/breaking-changes/moz-document/ */
+    /* stylelint-disable-next-line at-rule-no-vendor-prefix */
+    @-moz-document url-prefix() {
+      thead,
+      tbody {
+        scrollbar-width: none;
+      }
+    }
+
+    tbody tr:last-of-type {
+      border-block-end: 0;
+    }
+
+    th:not(.#{$prefix}--table-column-checkbox):not(
+        .#{$prefix}--table-column-menu
+      ):not(.#{$prefix}--table-expand):not(.#{$prefix}--table-column-icon),
+    td:not(.#{$prefix}--table-column-checkbox):not(
+        .#{$prefix}--table-column-menu
+      ):not(.#{$prefix}--table-expand):not(.#{$prefix}--table-column-icon) {
+      inline-size: 100%;
+      min-inline-size: 0;
+    }
+
+    &.#{$prefix}--data-table--xs tr:not(.#{$prefix}--expandable-row),
+    &.#{$prefix}--data-table--sm tr:not(.#{$prefix}--expandable-row),
+    &.#{$prefix}--data-table--xl tr:not(.#{$prefix}--expandable-row) {
+      block-size: auto;
+    }
+
+    &.#{$prefix}--data-table--xs tr:not(.#{$prefix}--expandable-row) {
+      min-block-size: convert.to-rem(24px);
+    }
+
+    &.#{$prefix}--data-table--sm tr:not(.#{$prefix}--expandable-row) {
+      min-block-size: convert.to-rem(32px);
+    }
+
+    &.#{$prefix}--data-table--xl tr:not(.#{$prefix}--expandable-row) {
+      min-block-size: convert.to-rem(64px);
+    }
+
+    // Expansion overrides
+    &.#{$prefix}--data-table--xs tr td.#{$prefix}--table-expand {
+      padding-block-start: convert.to-rem(4px);
+    }
+
+    &.#{$prefix}--data-table--sm tr td.#{$prefix}--table-expand {
+      padding-block-start: convert.to-rem(8px);
+    }
+
+    .#{$prefix}--table-header-label {
+      @include text-overflow;
+
+      max-inline-size: calc(100% - 10px);
+      overflow-y: hidden;
+      padding-block: convert.to-rem(15px) 1rem;
+      // Needed to reduce 1px jump when toggling between variations
+    }
+
+    &.#{$prefix}--data-table--xs th .#{$prefix}--table-header-label {
+      padding-block: convert.to-rem(3px) 0;
+    }
+
+    &.#{$prefix}--data-table--sm th .#{$prefix}--table-header-label {
+      padding-block: convert.to-rem(8px) 0;
+    }
+
+    &.#{$prefix}--data-table--xl th .#{$prefix}--table-header-label {
+      padding-block-start: 1rem;
+    }
+
+    &.#{$prefix}--data-table--xl th.#{$prefix}--table-expand {
+      display: flex;
+      align-items: flex-start;
+    }
+
+    &.#{$prefix}--data-table--xs
+      tr.#{$prefix}--parent-row
+      .#{$prefix}--table-column-checkbox,
+    &.#{$prefix}--data-table--sm
+      tr.#{$prefix}--parent-row
+      .#{$prefix}--table-column-checkbox {
+      align-items: flex-start;
+    }
+  }
+
+  @include sticky-header($max-width: 100%);
+
+  // -------------------
+  // with boolean column
+  // -------------------
+  .#{$prefix}--data-table
+    .#{$prefix}--form-item.#{$prefix}--checkbox-wrapper:last-of-type {
+    margin: 0;
+  }
+
+  .#{$prefix}--data-table--xs
+    .#{$prefix}--form-item.#{$prefix}--checkbox-wrapper:last-of-type,
+  .#{$prefix}--data-table--sm
+    .#{$prefix}--form-item.#{$prefix}--checkbox-wrapper:last-of-type {
+    margin: convert.to-rem(-3px) 0;
+  }
+
+  // -------------------
+  // Slug styles
+  // -------------------
+  .#{$prefix}--data-table .#{$prefix}--table-column-slug,
+  .#{$prefix}--data-table .#{$prefix}--table-column-decorator {
+    inline-size: $spacing-05;
+    padding-inline-end: 0;
+  }
+
+  tr.#{$prefix}--data-table--slug-row,
+  tr.#{$prefix}--data-table--slug-row + .#{$prefix}--expandable-row,
+  tr.#{$prefix}--data-table--ai-label-row,
+  tr.#{$prefix}--data-table--ai-label-row + .#{$prefix}--expandable-row {
+    @include ai-table-gradient();
+
+    background-attachment: fixed;
+  }
+
+  .#{$prefix}--data-table--slug-row,
+  .#{$prefix}--data-table--ai-label-row {
+    box-shadow: inset 1px 0 $ai-border-strong;
+  }
+
+  // Remove table cell backgrounds that are overriding gradient background on row
+  .#{$prefix}--data-table
+    tbody
+    tr.#{$prefix}--data-table--ai-label-row:hover
+    td,
+  tr.#{$prefix}--data-table--ai-label-row.#{$prefix}--expandable-row:hover
+    + .#{$prefix}--expandable-row[data-child-row]
+    td,
+  tr.#{$prefix}--data-table--ai-label-row.#{$prefix}--expandable-row--hover
+    + .#{$prefix}--expandable-row[data-child-row]:hover
+    > td,
+  tr.#{$prefix}--data-table--ai-label-row.#{$prefix}--expandable-row--hover
+    > td,
+  tr.#{$prefix}--data-table--selected.#{$prefix}--data-table--ai-label-row.#{$prefix}--expandable-row
+    + tr.#{$prefix}--expandable-row[data-child-row]
+    > td,
+  tr.#{$prefix}--data-table--ai-label-row.#{$prefix}--parent-row.#{$prefix}--data-table--selected.#{$prefix}--expandable-row:hover
+    td,
+  tr.#{$prefix}--data-table--ai-label-row.#{$prefix}--parent-row.#{$prefix}--data-table--selected.#{$prefix}--expandable-row:hover
+    td:first-of-type,
+  tr.#{$prefix}--data-table--ai-label-row.#{$prefix}--parent-row.#{$prefix}--data-table--selected:not(
+      .#{$prefix}--expandable-row
+    ):hover
+    > td,
+  tr.#{$prefix}--data-table--ai-label-row.#{$prefix}--parent-row.#{$prefix}--data-table--selected.#{$prefix}--expandable-row:hover
+    + tr[data-child-row]
+    > td,
+  tr.#{$prefix}--data-table--ai-label-row.#{$prefix}--parent-row.#{$prefix}--data-table--selected.#{$prefix}--expandable-row--hover
+    > td,
+  tr.#{$prefix}--data-table--ai-label-row.#{$prefix}--parent-row.#{$prefix}--data-table--selected.#{$prefix}--expandable-row--hover
+    > td:first-of-type {
+    background-color: transparent;
+  }
+
+  .#{$prefix}--data-table tbody tr.#{$prefix}--data-table--ai-label-row:hover,
+  tr.#{$prefix}--data-table--ai-label-row:hover
+    + .#{$prefix}--expandable-row[data-child-row],
+  tr.#{$prefix}--data-table--ai-label-row.#{$prefix}--expandable-row--hover
+    + .#{$prefix}--expandable-row[data-child-row]:hover,
+  tr.#{$prefix}--expandable-row--hover.#{$prefix}--data-table--ai-label-row,
+  tr.#{$prefix}--data-table--selected.#{$prefix}--parent-row.#{$prefix}--expandable-row--hover.#{$prefix}--data-table--ai-label-row {
+    @include ai-table-gradient('hover');
+
+    background-attachment: fixed;
+  }
+
+  tr.#{$prefix}--parent-row.#{$prefix}--data-table--selected.#{$prefix}--data-table--slug-row,
+  .#{$prefix}--data-table--selected.#{$prefix}--data-table--slug-row,
+  tr.#{$prefix}--data-table--selected.#{$prefix}--data-table--slug-row
+    + .#{$prefix}--expandable-row,
+  tr.#{$prefix}--parent-row.#{$prefix}--data-table--selected.#{$prefix}--data-table--ai-label-row,
+  .#{$prefix}--data-table--selected.#{$prefix}--data-table--ai-label-row,
+  tr.#{$prefix}--data-table--selected.#{$prefix}--data-table--ai-label-row
+    + .#{$prefix}--expandable-row {
+    @include ai-table-gradient('selected');
+
+    background-attachment: fixed;
+  }
+
+  tr.#{$prefix}--data-table--ai-label-row.#{$prefix}--data-table--selected td,
+  tr.#{$prefix}--data-table--ai-label-row.#{$prefix}--data-table--selected:hover
+    td,
+  tbody tr.#{$prefix}--data-table--ai-label-row:hover td,
+  tr.#{$prefix}--data-table--ai-label-row.#{$prefix}--parent-row.#{$prefix}--data-table--selected.#{$prefix}--expandable-row:hover
+    td:not(.#{$prefix}--table-expand):not(
+      .#{$prefix}--table-column-checkbox
+    ):not(.#{$prefix}--table-column-slug) {
+    border-block-end-color: $border-subtle;
+  }
+
+  tr.#{$prefix}--expandable-row.#{$prefix}--data-table--selected.#{$prefix}--data-table--slug-row[data-parent-row]
+    > td:not(.#{$prefix}--table-expand):not(
+      .#{$prefix}--table-column-checkbox
+    ):not(.#{$prefix}--table-column-slug),
+  tr.#{$prefix}--expandable-row.#{$prefix}--data-table--selected.#{$prefix}--data-table--slug-row[data-parent-row]
+    > td:not(.#{$prefix}--table-expand):not(
+      .#{$prefix}--table-column-checkbox
+    ):not(.#{$prefix}--table-column-slug) {
+    border-block-end: 1px solid $layer-selected;
+  }
+
+  tr.#{$prefix}--parent-row.#{$prefix}--data-table--slug-row.#{$prefix}--expandable-row:hover
+    td:first-of-type,
+  tr.#{$prefix}--parent-row.#{$prefix}--data-table--ai-label-row.#{$prefix}--expandable-row:hover
+    td:first-of-type,
+  tr.#{$prefix}--parent-row.#{$prefix}--data-table--decoratorß-row.#{$prefix}--expandable-row:hover
+    td:first-of-type {
+    border-block-end: 1px solid transparent;
+  }
+
+  .#{$prefix}--data-table
+    thead
+    th.#{$prefix}--table-sort__header--slug
+    .#{$prefix}--table-sort,
+  .#{$prefix}--data-table thead th:has(> .#{$prefix}--table-header-label--slug),
+  .#{$prefix}--data-table
+    thead
+    th.#{$prefix}--table-sort__header--ai-label
+    .#{$prefix}--table-sort,
+  .#{$prefix}--data-table
+    thead
+    th:has(> .#{$prefix}--table-header-label--ai-label) {
+    @include ai-table-gradient();
+  }
+
+  .#{$prefix}--table-column-slug .#{$prefix}--ai-label,
+  .#{$prefix}--table-column-slug .#{$prefix}--slug,
+  .#{$prefix}--table-column-decorator .#{$prefix}--decorator {
+    position: absolute;
+    z-index: 2;
+    transform: translateY(-50%);
+  }
+
+  .#{$prefix}--data-table--xl
+    .#{$prefix}--table-column-slug
+    .#{$prefix}--ai-label,
+  .#{$prefix}--data-table--xl .#{$prefix}--table-column-slug .#{$prefix}--slug,
+  .#{$prefix}--data-table--xl
+    .#{$prefix}--table-column-decorator
+    .#{$prefix}--decorator {
+    transform: translateY(1px);
+  }
+
+  // AILabel inside header styles
+  th .#{$prefix}--table-header-label.#{$prefix}--table-header-label--slug,
+  th .#{$prefix}--table-header-label.#{$prefix}--table-header-label--ai-label,
+  th .#{$prefix}--table-header-label.#{$prefix}--table-header-label--decorator {
+    display: flex;
+    align-items: center;
+  }
+
+  th
+    .#{$prefix}--table-header-label.#{$prefix}--table-header-label--ai-label
+    .#{$prefix}--ai-label,
+  th
+    .#{$prefix}--table-header-label.#{$prefix}--table-header-label--ai-label
+    .#{$prefix}--slug,
+  th
+    .#{$prefix}--table-header-label.#{$prefix}--table-header-label--decorator
+    .#{$prefix}--table-header-label--decorator-inner,
+  th
+    .#{$prefix}--table-header-label.#{$prefix}--table-header-label--ai-label
+    .#{$prefix}--table-header-label--decorator-inner {
+    margin-inline-start: auto;
+  }
+
+  th.#{$prefix}--table-sort__header--slug,
+  th:has(.#{$prefix}--table-header-label--slug),
+  th.#{$prefix}--table-sort__header--ai-label,
+  th:has(.#{$prefix}--table-header-label--ai-label) {
+    box-shadow: inset 0 1px $ai-border-strong;
+  }
+
+  td.#{$prefix}--table-cell--column-slug {
+    @include ai-table-gradient();
+  }
+
+  tr.#{$prefix}--parent-row:not(.#{$prefix}--expandable-row):not(:first-of-type)
+    td.#{$prefix}--table-cell--column-slug {
+    // Same gradient as background
+    border-block-start: linear-gradient(
+      to right,
+      $ai-aura-start-sm 0%,
+      $ai-aura-end 50%,
+      transparent 50%
+    );
+  }
+
+  tr.#{$prefix}--parent-row:not(.#{$prefix}--expandable-row):not(:first-of-type)
+    td.#{$prefix}--table-cell--column-slug,
+
+  // Windows HCM fix
+
+  .#{$prefix}--data-table-content {
+    @include high-contrast-mode('outline');
+  }
+}

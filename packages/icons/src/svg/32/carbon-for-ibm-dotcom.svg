@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 25.4.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="icon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 width="32px" height="32px" viewBox="0 0 32 32" style="enable-background:new 0 0 32 32;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:none;}
+</style>
+<path d="M29.509,17.689l-6-3.55C23.352,14.046,23.176,14,23,14s-0.352,0.046-0.509,0.14l-6,3.55C16.187,17.869,16,18.196,16,18.55
+	v6.9c0,0.354,0.187,0.681,0.491,0.86l6,3.55C22.648,29.954,22.824,30,23,30s0.352-0.046,0.509-0.14l6-3.55
+	C29.813,26.131,30,25.804,30,25.45v-6.9C30,18.196,29.813,17.869,29.509,17.689z M28,24.88l-5,2.958l-5-2.958v-5.76l5-2.958l5,2.958
+	V24.88z"/>
+<circle cx="6" cy="6" r="1"/>
+<circle cx="9" cy="6" r="1"/>
+<path d="M28,2H4C2.897,2,2,2.897,2,4v20c0,1.103,0.897,2,2,2h9v-2H4V10h24v4h2V4C30,2.897,29.103,2,28,2z M4,8V4h24v4H4z"/>
+<rect id="_x3C_Transparent_Rectangle_x3E__589_" class="st0" width="32" height="32"/>
+</svg>

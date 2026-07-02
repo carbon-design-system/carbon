@@ -1,0 +1,198 @@
+/**
+ * Copyright IBM Corp. 2026
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+$css--plex: true !default;
+@use '@carbon/styles/scss/components/fluid-time-picker/index' as
+  fluid-time-picker;
+@use '@carbon/styles/scss/config' as *;
+@use '@carbon/styles/scss/layout' as *;
+@use '@carbon/styles/scss/motion' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/utilities/convert';
+
+:host(#{$prefix}-fluid-time-picker) {
+  @include emit-layout-tokens();
+}
+
+:host(#{$prefix}-fluid-time-picker)
+  .#{$prefix}--time-picker--fluid__wrapper
+  > slot {
+  display: contents;
+}
+
+:host(#{$prefix}-fluid-time-picker)
+  .#{$prefix}--time-picker--fluid__wrapper
+  > .#{$prefix}--time-picker__input {
+  flex-basis: 25%;
+}
+
+:host(#{$prefix}-fluid-time-picker)
+  .#{$prefix}--time-picker--fluid__wrapper
+  ::slotted(#{$prefix}-fluid-time-picker-select) {
+  box-sizing: border-box;
+  flex: 1 1 auto;
+  align-self: stretch;
+}
+
+:host(#{$prefix}-fluid-time-picker)
+  .#{$prefix}--time-picker--fluid__wrapper
+  ::slotted(
+    #{$prefix}-fluid-time-picker-select[data-fluid-time-picker-position='first']
+  ),
+:host(#{$prefix}-fluid-time-picker)
+  .#{$prefix}--time-picker--fluid__wrapper
+  ::slotted(
+    #{$prefix}-fluid-time-picker-select[data-fluid-time-picker-position='middle']
+  ) {
+  flex-basis: 25%;
+}
+
+:host(#{$prefix}-fluid-time-picker)
+  .#{$prefix}--time-picker--fluid__wrapper
+  ::slotted(
+    #{$prefix}-fluid-time-picker-select[data-fluid-time-picker-position='last']
+  ) {
+  flex-basis: 50%;
+}
+
+:host(#{$prefix}-fluid-time-picker)
+  .#{$prefix}--time-picker--equal-width
+  .#{$prefix}--time-picker--fluid__wrapper
+  > .#{$prefix}--time-picker__input,
+:host(#{$prefix}-fluid-time-picker)
+  .#{$prefix}--time-picker--equal-width
+  .#{$prefix}--time-picker--fluid__wrapper
+  ::slotted(#{$prefix}-fluid-time-picker-select) {
+  flex-basis: 50%;
+}
+
+:host(#{$prefix}-fluid-time-picker) .#{$prefix}--time-picker--fluid--invalid {
+  outline-offset: 0;
+}
+
+:host(#{$prefix}-fluid-time-picker-select) {
+  @extend .#{$prefix}--select--fluid;
+  @extend .#{$prefix}--select--invalid;
+
+  display: block;
+
+  @include emit-layout-tokens();
+
+  .#{$prefix}--select-input__wrapper::before {
+    position: absolute;
+    display: block;
+    background-color: $border-strong;
+    block-size: calc(100% - 1px);
+    content: '';
+    inline-size: convert.to-rem(1px);
+    inset-inline-start: 0;
+    opacity: 1;
+    transition: opacity $duration-fast-01 motion(standard, productive);
+  }
+
+  &:not([disabled]):hover .#{$prefix}--select-input__wrapper::before {
+    opacity: 0;
+  }
+
+  &[readonly] .#{$prefix}--select-input__wrapper::before {
+    background-color: $border-subtle !important; /* stylelint-disable-line declaration-no-important */
+    opacity: 1 !important; /* stylelint-disable-line declaration-no-important */
+    transition: none;
+  }
+
+  &[data-fluid-time-picker-invalid] .#{$prefix}--select,
+  &[data-fluid-time-picker-invalid] .#{$prefix}--select-input {
+    background: transparent;
+  }
+
+  &[data-fluid-time-picker-invalid] .#{$prefix}--select-input,
+  &[data-fluid-time-picker-warn] .#{$prefix}--select-input {
+    border-block-end: convert.to-rem(1px) solid transparent;
+  }
+
+  &[data-fluid-time-picker-invalid] .#{$prefix}--select-input {
+    border-block-start: 2px solid transparent;
+    padding-block-start: convert.to-rem(30px);
+  }
+
+  &[data-fluid-time-picker-position='last'] .#{$prefix}--select-input {
+    border-inline-end: 2px solid transparent;
+  }
+
+  &[data-fluid-time-picker-invalid]
+    .#{$prefix}--select-input:hover:not([disabled]) {
+    background: $field-hover;
+  }
+
+  &[data-fluid-time-picker-invalid] .#{$prefix}--select-input:hover {
+    border-block-start: 2px solid $support-error;
+  }
+
+  &[data-fluid-time-picker-invalid][data-fluid-time-picker-position='last']
+    .#{$prefix}--select-input:hover {
+    border-inline-end: 2px solid $support-error;
+  }
+}
+
+:host([data-fluid-time-picker-invalid])
+  .#{$prefix}--select-input__wrapper::before,
+:host([data-fluid-time-picker-warn])
+  .#{$prefix}--select-input__wrapper::before {
+  block-size: calc(100% - 1rem);
+  inset-block-start: $spacing-03;
+}
+
+:host([data-fluid-time-picker-hide-divider])
+  .#{$prefix}--select-input__wrapper::before {
+  opacity: 0;
+}
+
+:host([data-fluid-time-picker-invalid]) .#{$prefix}--select-input,
+:host([data-fluid-time-picker-warn]) .#{$prefix}--select-input {
+  border-block-end: 1px solid transparent;
+}
+
+:host(#{$prefix}-fluid-time-picker-select) .#{$prefix}--select {
+  inline-size: 100%;
+}
+
+:host(#{$prefix}-fluid-time-picker-select[readonly]) select {
+  pointer-events: none;
+}
+
+:host(#{$prefix}-fluid-time-picker-select[disabled])
+  .#{$prefix}--select-input__wrapper::before {
+  background-color: $border-disabled;
+}
+
+:host(#{$prefix}-fluid-time-picker-select[disabled]) .#{$prefix}--select-input {
+  border-block-end: convert.to-rem(1px) solid transparent;
+}
+
+:host(#{$prefix}-fluid-time-picker-select[disabled])
+  .#{$prefix}--select--fluid--focus
+  .#{$prefix}--select-input__wrapper {
+  box-shadow: none;
+  outline: none;
+}
+
+:host(#{$prefix}-fluid-time-picker-select[disabled])
+  ::slotted(#{$prefix}-toggletip) {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+:host(#{$prefix}-fluid-time-picker)
+  .#{$prefix}--time-picker--fluid--disabled
+  .#{$prefix}--text-input:disabled {
+  border-block-end: convert.to-rem(1px) solid transparent;
+}
+
+:host(#{$prefix}-fluid-time-picker-skeleton) {
+  display: block;
+}

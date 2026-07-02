@@ -1,0 +1,102 @@
+//
+// Copyright IBM Corp. 2018, 2023
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use 'sass:map';
+@use 'sass:meta';
+@use 'sass:list';
+@use '../config';
+@use '../themes';
+@use '../theme';
+@use './custom-property';
+
+/// Extract the component tokens from a given theme
+/// @param {SassMap} $tokens
+/// @param {SassMap} $theme
+/// @returns {SassMap}
+@function get-tokens($tokens, $theme) {
+  $result: ();
+
+  @each $key, $descriptor in $tokens {
+    $theme-values: map.get($descriptor, values);
+    @each $theme-value in $theme-values {
+      @if map.get($theme-value, theme) == $theme {
+        $result: map.set($result, $key, map.get($theme-value, value));
+      }
+    }
+  }
+
+  @return $result;
+}
+
+/// Get the CSS Custom Property value for a given token map
+/// @param {any} $token-map The possible values for the token, this value can
+/// be a plain value used as a CSS value or a Sass Map
+/// @param {String} $name The name of the CSS Custom Property
+@function get-var($token-map, $name) {
+  @if meta.type-of($token-map) == map {
+    $fallback: map.get($token-map, fallback);
+    $theme-values: map.get($token-map, values);
+
+    @each $theme-value in $theme-values {
+      $theme: map.get($theme-value, theme);
+      $value: map.get($theme-value, value);
+
+      @if theme.matches($theme, theme.$theme) {
+        @return custom-property.get-var($name, $value);
+      }
+    }
+
+    @return custom-property.get-var($name, $fallback);
+  }
+
+  @return custom-property.get-var($name, $token-map);
+}
+
+/// Get inverse theme values for a given component token.
+/// @param {any} $token-map The possible values for the token, this value can
+/// be a plain value used as a CSS value or a Sass Map
+@function get-inverse-theme-values($token-map) {
+  $inverse-theme-values: ();
+  $inverse-value: ();
+
+  @each $theme-value in map.get($token-map, values) {
+    $theme: map.get($theme-value, theme);
+    $value: map.get($theme-value, value);
+
+    @if $theme == themes.$g100 {
+      $inverse-value: (
+        theme: themes.$white,
+        value: $value,
+      );
+    }
+
+    @if $theme == themes.$g90 {
+      $inverse-value: (
+        theme: themes.$g10,
+        value: $value,
+      );
+    }
+
+    @if $theme == themes.$g10 {
+      $inverse-value: (
+        theme: themes.$g90,
+        value: $value,
+      );
+    }
+
+    @if $theme == themes.$white {
+      $inverse-value: (
+        theme: themes.$g100,
+        value: $value,
+      );
+    }
+
+    $inverse-theme-values: list.append($inverse-theme-values, $inverse-value);
+  }
+
+  @return $inverse-theme-values;
+}

@@ -1,0 +1,566 @@
+/**
+ * Copyright IBM Corp. 2016, 2026
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+import { render, screen } from '@testing-library/react';
+import React, { forwardRef } from 'react';
+import { Popover, PopoverContent } from '../../Popover';
+import userEvent from '@testing-library/user-event';
+import { waitForPosition } from '../../ListBox/test-helpers';
+import RadioButton from '../../RadioButton';
+import RadioButtonGroup from '../../RadioButtonGroup';
+import { default as Checkbox } from '../../Checkbox';
+
+const prefix = 'cds';
+
+describe('Popover', () => {
+  const TriggerWithPopoverContentDisplayName = forwardRef((props, ref) => (
+    <button type="button" ref={ref} {...props} />
+  ));
+  TriggerWithPopoverContentDisplayName.displayName = 'PopoverContent';
+
+  it('should support a ref on the outermost element', () => {
+    const ref = jest.fn();
+    const { container } = render(
+      <Popover open ref={ref}>
+        <PopoverContent>test</PopoverContent>
+      </Popover>
+    );
+    expect(ref).toHaveBeenCalledWith(container.firstChild);
+  });
+
+  it('should support custom rendering with the `as` prop', () => {
+    const { container } = render(
+      <Popover as="article" open data-testid="test">
+        <PopoverContent>test</PopoverContent>
+      </Popover>
+    );
+    expect(container.firstChild.tagName).toBe('ARTICLE');
+  });
+
+  it('should support a custom class name on the outermost element', () => {
+    const { container } = render(
+      <Popover className="test" open>
+        <PopoverContent>test</PopoverContent>
+      </Popover>
+    );
+    expect(container.firstChild).toHaveClass('test');
+  });
+
+  it('should forward additional props on the outermost element', () => {
+    const { container } = render(
+      <Popover data-testid="test" open>
+        <PopoverContent>test</PopoverContent>
+      </Popover>
+    );
+    expect(container.firstChild).toHaveAttribute('data-testid', 'test');
+  });
+
+  describe('PopoverContent', () => {
+    it('should support a ref on the popover-content element', () => {
+      const ref = jest.fn();
+      const { container } = render(
+        <PopoverContent ref={ref}>test</PopoverContent>
+      );
+      expect(ref).toHaveBeenCalledWith(container.firstChild.firstChild);
+    });
+
+    it('should support a custom class name on the popover content', () => {
+      render(
+        <PopoverContent className="test" data-testid="test">
+          test
+        </PopoverContent>
+      );
+      // NOTE: the popover should render popover-content as the first child and
+      // popover-caret as the second child
+      expect(screen.getByTestId('test').firstChild).toHaveClass('test');
+    });
+
+    it('should have default caret height', async () => {
+      render(
+        <Popover
+          open
+          align="bottom"
+          data-testid="test"
+          autoAlign
+          className="test ai-label">
+          <button type="button">Settings</button>
+          <PopoverContent className="test"></PopoverContent>
+        </Popover>
+      );
+
+      await waitForPosition();
+      const caretContainer =
+        screen.getByTestId('test').lastChild.lastChild.firstChild;
+      expect(caretContainer).toHaveStyle({ left: '0px', top: '-6px' });
+    });
+
+    it('should change caret height in case of ai-label', async () => {
+      render(
+        <Popover
+          open
+          align="bottom"
+          data-testid="test"
+          autoAlign
+          className="test ai-label">
+          <button type="button">Settings</button>
+          <PopoverContent className="test ai-label"></PopoverContent>
+        </Popover>
+      );
+
+      await waitForPosition();
+      const caretContainer =
+        screen.getByTestId('test').lastChild.lastChild.firstChild;
+      expect(caretContainer).toHaveStyle({ left: '0px', top: '-7px' });
+    });
+
+    it('should auto align when trigger component shares `PopoverContent` `displayName`', async () => {
+      render(
+        <Popover open align="bottom" data-testid="test" autoAlign>
+          <TriggerWithPopoverContentDisplayName>
+            Settings
+          </TriggerWithPopoverContentDisplayName>
+          <PopoverContent />
+        </Popover>
+      );
+
+      await waitForPosition();
+
+      const caretContainer =
+        screen.getByTestId('test').lastChild.lastChild.firstChild;
+
+      expect(caretContainer).toHaveStyle({ left: '0px', top: '-6px' });
+    });
+
+    it('should forward additional props on the outermost element', () => {
+      const { container } = render(
+        <PopoverContent id="test" data-testid="test">
+          test
+        </PopoverContent>
+      );
+      expect(container.firstChild).toHaveAttribute('id', 'test');
+    });
+
+    // Tab Tip tests
+    it('should respect isTabTip prop', () => {
+      const { container } = render(
+        <Popover open isTabTip>
+          <button type="button">Settings</button>
+          <PopoverContent>test</PopoverContent>
+        </Popover>
+      );
+      expect(container.firstChild).toHaveClass(`${prefix}--popover--tab-tip`);
+    });
+
+    it('should respect border prop', () => {
+      const { container } = render(
+        <Popover open border>
+          <button type="button">Settings</button>
+          <PopoverContent>test</PopoverContent>
+        </Popover>
+      );
+      expect(container.firstChild).toHaveClass(`${prefix}--popover--border`);
+    });
+
+    it('should respect dropShadow prop', () => {
+      const { container } = render(
+        <Popover open dropShadow>
+          <button type="button">Settings</button>
+          <PopoverContent>test</PopoverContent>
+        </Popover>
+      );
+      expect(container.firstChild).toHaveClass(
+        `${prefix}--popover--drop-shadow`
+      );
+    });
+
+    it('should respect backgroundToken prop when set to "background" and highContrast is false', () => {
+      const { container } = render(
+        <Popover open backgroundToken="background" highContrast={false}>
+          <button type="button">Settings</button>
+          <PopoverContent>test</PopoverContent>
+        </Popover>
+      );
+      expect(container.firstChild).toHaveClass(
+        `${prefix}--popover--background-token__background`
+      );
+    });
+
+    it('should not add background token class when backgroundToken is "layer"', () => {
+      const { container } = render(
+        <Popover open backgroundToken="layer">
+          <button type="button">Settings</button>
+          <PopoverContent>test</PopoverContent>
+        </Popover>
+      );
+      expect(container.firstChild).not.toHaveClass(
+        `${prefix}--popover--background-token__background`
+      );
+    });
+
+    it('should not add background token class when highContrast is true, even if backgroundToken is "background"', () => {
+      const { container } = render(
+        <Popover open backgroundToken="background" highContrast={true}>
+          <button type="button">Settings</button>
+          <PopoverContent>test</PopoverContent>
+        </Popover>
+      );
+      expect(container.firstChild).not.toHaveClass(
+        `${prefix}--popover--background-token__background`
+      );
+    });
+
+    it('should not allow other alignments than bottom-start or bottom-end when isTabTip is present', () => {
+      const { container } = render(
+        <Popover open isTabTip align="top-start">
+          <button type="button">Settings</button>
+          <PopoverContent data-testid="test">test</PopoverContent>
+        </Popover>
+      );
+      expect(container.firstChild).not.toHaveClass(
+        `${prefix}--popover--top-start`
+      );
+      expect(container.firstChild).toHaveClass(
+        `${prefix}--popover--bottom-start`
+      );
+    });
+
+    it('should shim legacy align prop top-left to top-start', () => {
+      const { container } = render(
+        <Popover open align="top-left">
+          <button type="button">Settings</button>
+          <PopoverContent>Test</PopoverContent>
+        </Popover>
+      );
+      expect(container.firstChild).not.toHaveClass(
+        `${prefix}--popover--top-left`
+      );
+      expect(container.firstChild).toHaveClass(`${prefix}--popover--top-start`);
+    });
+
+    it('should shim legacy align prop top-right to top-end', () => {
+      const { container } = render(
+        <Popover open align="top-right">
+          <button type="button">Settings</button>
+          <PopoverContent>Test</PopoverContent>
+        </Popover>
+      );
+      expect(container.firstChild).not.toHaveClass(
+        `${prefix}--popover--top-right`
+      );
+      expect(container.firstChild).toHaveClass(`${prefix}--popover--top-end`);
+    });
+
+    it('should shim legacy align prop bottom-left to bottom-start', () => {
+      const { container } = render(
+        <Popover open align="bottom-left">
+          <button type="button">Settings</button>
+          <PopoverContent>Test</PopoverContent>
+        </Popover>
+      );
+      expect(container.firstChild).not.toHaveClass(
+        `${prefix}--popover--bottom-left`
+      );
+      expect(container.firstChild).toHaveClass(
+        `${prefix}--popover--bottom-start`
+      );
+    });
+
+    it('should shim legacy align prop bottom-right to bottom-end', () => {
+      const { container } = render(
+        <Popover open align="bottom-right">
+          <button type="button">Settings</button>
+          <PopoverContent>Test</PopoverContent>
+        </Popover>
+      );
+      expect(container.firstChild).not.toHaveClass(
+        `${prefix}--popover--bottom-right`
+      );
+      expect(container.firstChild).toHaveClass(
+        `${prefix}--popover--bottom-end`
+      );
+    });
+
+    it('should shim legacy align prop left-bottom to left-end', () => {
+      const { container } = render(
+        <Popover open align="left-bottom">
+          <button type="button">Settings</button>
+          <PopoverContent>Test</PopoverContent>
+        </Popover>
+      );
+      expect(container.firstChild).not.toHaveClass(
+        `${prefix}--popover--left-bottom`
+      );
+      expect(container.firstChild).toHaveClass(`${prefix}--popover--left-end`);
+    });
+
+    it('should shim legacy align prop left-top to left-start', () => {
+      const { container } = render(
+        <Popover open align="left-top">
+          <button type="button">Settings</button>
+          <PopoverContent>Test</PopoverContent>
+        </Popover>
+      );
+      expect(container.firstChild).not.toHaveClass(
+        `${prefix}--popover--left-top`
+      );
+      expect(container.firstChild).toHaveClass(
+        `${prefix}--popover--left-start`
+      );
+    });
+
+    it('should shim legacy align prop right-bottom to right-end', () => {
+      const { container } = render(
+        <Popover open align="right-bottom">
+          <button type="button">Settings</button>
+          <PopoverContent>Test</PopoverContent>
+        </Popover>
+      );
+      expect(container.firstChild).not.toHaveClass(
+        `${prefix}--popover--right-bottom`
+      );
+      expect(container.firstChild).toHaveClass(`${prefix}--popover--right-end`);
+    });
+
+    it('should shim legacy align prop right-top to right-start', () => {
+      const { container } = render(
+        <Popover open align="right-top">
+          <button type="button">Settings</button>
+          <PopoverContent>Test</PopoverContent>
+        </Popover>
+      );
+      expect(container.firstChild).not.toHaveClass(
+        `${prefix}--popover--right-top`
+      );
+      expect(container.firstChild).toHaveClass(
+        `${prefix}--popover--right-start`
+      );
+    });
+
+    it('should call onRequestClose when click happens outside the popover', async () => {
+      const onRequestClose = jest.fn();
+      const { container } = render(
+        <Popover open onRequestClose={() => onRequestClose()}>
+          <button type="button">Settings</button>
+          <PopoverContent>test</PopoverContent>
+        </Popover>
+      );
+      await userEvent.click(container);
+      expect(onRequestClose).toHaveBeenCalled();
+    });
+
+    it('should call onRequestClose when tabbing out of popover via keyboard', async () => {
+      const onRequestClose = jest.fn();
+      render(
+        <Popover open onRequestClose={() => onRequestClose()}>
+          <button type="button">Settings</button>
+          <PopoverContent>
+            <button data-testid="inside-button">Inside Button</button>
+            <input data-testid="inside-input" placeholder="Inside Input" />
+          </PopoverContent>
+        </Popover>
+      );
+
+      // Focus on the first focusable element inside the popover
+      screen.getByTestId('inside-button').focus();
+
+      // Tab to the next focusable element
+      await userEvent.tab();
+
+      // Tab out of the popover (should trigger onRequestClose)
+      await userEvent.tab();
+
+      expect(onRequestClose).toHaveBeenCalled();
+    });
+  });
+
+  it('should NOT call onRequestClose when clicking inside the popover content', async () => {
+    const onRequestClose = jest.fn();
+    render(
+      <Popover open onRequestClose={onRequestClose}>
+        <button type="button">Settings</button>
+        <PopoverContent data-testid="popover-content">
+          <button data-testid="inside-button">Inside Button</button>
+          <input data-testid="inside-input" placeholder="Inside Input" />
+        </PopoverContent>
+      </Popover>
+    );
+
+    // Click on button inside popover - should NOT close
+    await userEvent.click(screen.getByTestId('inside-button'));
+    expect(onRequestClose).not.toHaveBeenCalled();
+
+    // Click on input inside popover - should NOT close
+    await userEvent.click(screen.getByTestId('inside-input'));
+    expect(onRequestClose).not.toHaveBeenCalled();
+  });
+
+  it('should NOT call onRequestClose when clicking inside the popover content with a popover inside an interactive element', async () => {
+    const onRequestClose = jest.fn();
+    render(
+      <div tabIndex={0}>
+        <Popover open onRequestClose={onRequestClose}>
+          <button type="button">Settings</button>
+          <PopoverContent data-testid="popover-content">
+            <button data-testid="inside-button">Inside Button</button>
+            <input data-testid="inside-input" placeholder="Inside Input" />
+          </PopoverContent>
+        </Popover>
+      </div>
+    );
+
+    // Click on button inside popover - should NOT close
+    await userEvent.click(screen.getByTestId('inside-button'));
+    expect(onRequestClose).not.toHaveBeenCalled();
+
+    // Click on input inside popover - should NOT close
+    await userEvent.click(screen.getByTestId('inside-input'));
+    expect(onRequestClose).not.toHaveBeenCalled();
+  });
+
+  it('should not close TabTip when interacting with form elements inside', async () => {
+    const onRequestClose = jest.fn();
+    render(
+      <Popover open isTabTip onRequestClose={onRequestClose}>
+        <button type="button">Settings</button>
+        <PopoverContent>
+          <RadioButtonGroup legendText="Test options">
+            <RadioButton
+              labelText="Option 1"
+              value="option1"
+              id="tabtip-radio-1"
+              data-testid="tabtip-radio-1"
+            />
+            <RadioButton
+              labelText="Option 2"
+              value="option2"
+              id="tabtip-radio-2"
+              data-testid="tabtip-radio-2"
+            />
+          </RadioButtonGroup>
+          <Checkbox
+            labelText="Test checkbox"
+            id="tabtip-checkbox"
+            data-testid="tabtip-checkbox"
+          />
+        </PopoverContent>
+      </Popover>
+    );
+
+    await userEvent.click(screen.getByTestId('tabtip-radio-1'));
+    expect(onRequestClose).not.toHaveBeenCalled();
+
+    await userEvent.click(screen.getByTestId('tabtip-radio-2'));
+    expect(onRequestClose).not.toHaveBeenCalled();
+
+    await userEvent.click(screen.getByTestId('tabtip-checkbox'));
+    expect(onRequestClose).not.toHaveBeenCalled();
+  });
+
+  it('should NOT call onRequestClose when clicking DatePicker calendar rendered in body', async () => {
+    const onRequestClose = jest.fn();
+    render(
+      <Popover open autoAlign onRequestClose={onRequestClose}>
+        <button type="button">Open</button>
+        <PopoverContent>
+          <input id="date-picker-input" aria-label="Date input" readOnly />
+        </PopoverContent>
+      </Popover>
+    );
+
+    const input = screen.getByLabelText('Date input');
+    const calendar = document.createElement('div');
+    calendar.className = 'flatpickr-calendar open';
+    calendar.innerHTML = '<span class="flatpickr-day">26</span>';
+    document.body.appendChild(calendar);
+
+    try {
+      Object.defineProperty(input, '_flatpickr', {
+        value: { calendarContainer: calendar },
+        configurable: true,
+      });
+
+      await userEvent.click(calendar.querySelector('.flatpickr-day'));
+
+      expect(onRequestClose).not.toHaveBeenCalled();
+    } finally {
+      document.body.removeChild(calendar);
+    }
+  });
+
+  it('should NOT call onRequestClose when focus moves to DatePicker calendar', async () => {
+    const onRequestClose = jest.fn();
+    const { container } = render(
+      <Popover open autoAlign onRequestClose={onRequestClose}>
+        <button type="button">Open</button>
+        <PopoverContent>
+          <input id="date-picker-input" aria-label="Date input" readOnly />
+        </PopoverContent>
+      </Popover>
+    );
+
+    const input = screen.getByLabelText('Date input');
+    const calendar = document.createElement('div');
+    calendar.className = 'flatpickr-calendar open';
+    calendar.innerHTML = '<span class="flatpickr-day" tabindex="0">26</span>';
+    document.body.appendChild(calendar);
+
+    try {
+      Object.defineProperty(input, '_flatpickr', {
+        value: { calendarContainer: calendar },
+        configurable: true,
+      });
+
+      input.focus();
+      const popoverEl = container.firstChild;
+      const focusoutEvent = new FocusEvent('focusout', {
+        bubbles: true,
+        relatedTarget: calendar.querySelector('.flatpickr-day'),
+      });
+      popoverEl.dispatchEvent(focusoutEvent);
+
+      expect(onRequestClose).not.toHaveBeenCalled();
+    } finally {
+      document.body.removeChild(calendar);
+    }
+  });
+
+  it('should call onRequestClose when clicking DatePicker calendar outside popover', async () => {
+    const onRequestClose = jest.fn();
+    render(
+      <Popover open autoAlign onRequestClose={onRequestClose}>
+        <button type="button">Open</button>
+        <PopoverContent>
+          <input id="popover-input" aria-label="Popover input" readOnly />
+        </PopoverContent>
+      </Popover>
+    );
+
+    const outsideInput = document.createElement('input');
+    outsideInput.setAttribute('aria-label', 'Outside input');
+    outsideInput.readOnly = true;
+    document.body.appendChild(outsideInput);
+
+    const calendar = document.createElement('div');
+    calendar.className = 'flatpickr-calendar open';
+    calendar.innerHTML = '<span class="flatpickr-day">26</span>';
+    document.body.appendChild(calendar);
+
+    try {
+      Object.defineProperty(outsideInput, '_flatpickr', {
+        value: { calendarContainer: calendar },
+        configurable: true,
+      });
+
+      await userEvent.click(calendar.querySelector('.flatpickr-day'));
+
+      expect(onRequestClose).toHaveBeenCalled();
+    } finally {
+      document.body.removeChild(calendar);
+      document.body.removeChild(outsideInput);
+    }
+  });
+});

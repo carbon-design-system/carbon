@@ -1,0 +1,5 @@
+{
+  "extends": "typescript-config-carbon/tsconfig.base.json",
+  "include": ["src/**/*"],
+  "exclude": ["src/**/*-test.js"]
+}

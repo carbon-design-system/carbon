@@ -1,0 +1,33 @@
+//
+// Copyright IBM Corp. 2023
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use '../button';
+@use '../menu';
+@use '../../config' as *;
+@use '../../motion' as *;
+@use '../../utilities/custom-property';
+
+/// Menu Button styles
+/// @access public
+/// @group menu-button
+@mixin menu-button {
+  .#{$prefix}--menu-button__container {
+    display: inline-flex;
+  }
+
+  .#{$prefix}--menu-button__trigger:not(.#{$prefix}--btn--ghost) {
+    min-inline-size: 12rem;
+  }
+
+  .#{$prefix}--menu-button__trigger svg {
+    transition: transform $duration-fast-02 motion(standard, productive);
+  }
+
+  .#{$prefix}--menu-button__trigger--open svg {
+    transform: rotate(180deg);
+  }
+}

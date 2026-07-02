@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="320px" height="180px" viewBox="0 0 320 180" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>structured-list</title>
+    <defs>
+        <circle id="path-1" cx="5.25" cy="5.25" r="5.25"></circle>
+        <polygon id="path-3" points="1.875 3.9375 0 2.0625 0.59625 1.5 1.875 2.75625 4.65375 0 5.25 0.5925"></polygon>
+    </defs>
+    <g id="structured-list" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Group-25-Copy-3" transform="translate(56.000000, 41.000000)">
+            <polygon id="Shape" fill="#FFFFFF" fill-rule="nonzero" points="135.875 15.625 135.875 10 134.625 10 134.625 15.625 129 15.625 129 16.875 134.625 16.875 134.625 22.5 135.875 22.5 135.875 16.875 141.5 16.875 141.5 15.625"></polygon>
+            <polygon id="Rectangle-Copy-22" fill="#F3F3F3" points="0 0 210 0 210 24 0 24"></polygon>
+            <polygon id="Rectangle-Copy-24" fill="#F3F3F3" points="0 24 210 24 210 48 0 48"></polygon>
+            <polygon id="Rectangle-Copy-23" fill="#E0E0E0" points="0 48 210 48 210 72 0 72"></polygon>
+            <rect id="Rectangle-3-Copy-7" fill="#8D8D8D" x="14" y="58" width="24" height="5"></rect>
+            <rect id="Rectangle-3-Copy-13" fill="#8D8D8D" x="52" y="58" width="24" height="5"></rect>
+            <rect id="Rectangle-3-Copy-14" fill="#8D8D8D" x="90" y="58" width="81" height="5"></rect>
+            <rect id="Rectangle-8-Copy-2" fill="#C6C6C6" x="1" y="23" width="210" height="1"></rect>
+            <polygon id="Rectangle-Copy-29" fill="#F3F3F3" points="0 72 210 72 210 96 0 96"></polygon>
+            <rect id="Rectangle-3-Copy-5" fill="#8D8D8D" x="14" y="10" width="24" height="5"></rect>
+            <rect id="Rectangle-3-Copy-6" fill="#A8A8A8" opacity="0.75" x="14" y="34" width="24" height="5"></rect>
+            <rect id="Rectangle-3-Copy-8" fill="#A8A8A8" opacity="0.75" x="14" y="82" width="24" height="5"></rect>
+            <rect id="Rectangle-3-Copy-9" fill="#8D8D8D" x="52" y="10" width="24" height="5"></rect>
+            <rect id="Rectangle-3-Copy-11" fill="#A8A8A8" opacity="0.75" x="52" y="34" width="24" height="5"></rect>
+            <rect id="Rectangle-3-Copy-15" fill="#A8A8A8" opacity="0.75" x="52" y="82" width="24" height="5"></rect>
+            <rect id="Rectangle-3-Copy-10" fill="#8D8D8D" x="90" y="10" width="24" height="5"></rect>
+            <rect id="Rectangle-3-Copy-12" fill="#A8A8A8" opacity="0.75" x="90" y="34" width="81" height="5"></rect>
+            <rect id="Rectangle-3-Copy-16" fill="#A8A8A8" opacity="0.75" x="90" y="82" width="81" height="5"></rect>
+        </g>
+        <g id="Group" transform="translate(243.000000, 95.000000)">
+            <g id="checkmark--filled" transform="translate(0.750000, 0.750000)">
+                <g id="icon-2">
+                    <mask id="mask-2" fill="white">
+                        <use xlink:href="#path-1"></use>
+                    </mask>
+                    <use id="Mask" fill="#000000" fill-rule="nonzero" xlink:href="#path-1"></use>
+                    <g id="Group" mask="url(#mask-2)">
+                        <g transform="translate(-0.750000, -0.750000)" id="icon-color-2">
+                            <rect id="Rectangle" fill="#13171A" x="0" y="0" width="12" height="12"></rect>
+                        </g>
+                    </g>
+                </g>
+                <g id="icon-1" transform="translate(2.625000, 3.375000)">
+                    <mask id="mask-4" fill="white">
+                        <use xlink:href="#path-3"></use>
+                    </mask>
+                    <use id="Mask" fill="#FFFFFF" fill-rule="nonzero" xlink:href="#path-3"></use>
+                    <g id="Group" mask="url(#mask-4)">
+                        <g transform="translate(-3.375000, -4.125000)" id="icon-color-1">
+                            <rect id="Rectangle" fill="#FFFFFF" x="0" y="0" width="12" height="12"></rect>
+                        </g>
+                    </g>
+                </g>
+            </g>
+            <rect id="transparent-rectangle" x="0" y="0" width="12" height="12"></rect>
+        </g>
+    </g>
+</svg>

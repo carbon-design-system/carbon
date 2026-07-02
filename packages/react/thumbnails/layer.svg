@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="320px" height="180px" viewBox="0 0 320 180" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>layer</title>
+    <g id="layer" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <rect id="Rectangle" fill="#F4F4F4" x="102" y="32" width="116" height="116"></rect>
+        <rect id="Rectangle" fill="#FFFFFF" x="118" y="48" width="84" height="84"></rect>
+        <rect id="Rectangle" fill="#F4F4F4" x="134" y="64" width="52" height="52"></rect>
+        <rect id="Rectangle" fill="#FFFFFF" x="150" y="80" width="20" height="20"></rect>
+    </g>
+</svg>

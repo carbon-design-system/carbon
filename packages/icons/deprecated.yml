@@ -1,0 +1,78 @@
+deprecated:
+  - name: kubernetes
+    reason: The current kubernetes icon has been replaced by logo--kubernetes
+  - name: direct-link
+    reason:
+      The current icon has been replaced with the correct version of the App
+      icon, use the most appropriate ibm-cloud--direct-link icon variant instead
+  - name: database--enterprise-db2
+    reason:
+      Icon name was requested by the product team to be renamed to and replaced
+      by database--enterprisedb
+  - name: virtual-private-cloud--alt
+    reason:
+      Icon name was requested by the product team to be renamed to and replaced
+      by ibm-cloud--vpc
+  - name: ibm-watson--assistant
+    reason:
+      Icon renamed and replaced by ibm-watsonx--assistant to correspond with the
+      new watsonx platform and product suite
+  - name: watson--machine-learning
+    reason:
+      Icon design is defunct, replaced with the existing icon
+      ibm-watson--machine-learning
+  - name: watson
+    reason:
+      Icon represents the old avatar for the Watson brand, which is retired
+      since the watsonx brand launch. Replaced by the icon watsonx
+  - name: AI
+    reason:
+      Icon should not be used. Teams should use the Carbon AILabel component.
+  - name: machine-learning
+    reason:
+      Icon should not be used. Teams should use machine-learning-model instead
+  - name: ibm-watson--knowledge-catalog
+    reason:
+      Icon renamed, slightly redesigned and replaced by ibm--knowledge-catalog
+  - name: ai-results
+    reason:
+      Icon no longer relevant to how we represent AI moments
+  - name: ai-results--high
+    reason:
+      Icon no longer relevant to how we represent AI moments
+  - name: ai-results--low
+    reason:
+      Icon no longer relevant to how we represent AI moments
+  - name: ai-results--medium
+    reason:
+      Icon no longer relevant to how we represent AI moments
+  - name: ai-results--urgent
+    reason:
+      Icon no longer relevant to how we represent AI moments
+  - name: ai-results--very-high
+    reason:
+      Icon no longer relevant to how we represent AI moments
+  - name: ai-status
+    reason:
+      Icon no longer relevant to how we represent AI moments
+  - name: ai-status--complete
+    reason:
+      Icon no longer relevant to how we represent AI moments
+  - name: ai-status--failed
+    reason:
+      Icon no longer relevant to how we represent AI moments
+  - name: ai-status--in-progress
+    reason:
+      Icon no longer relevant to how we represent AI moments
+  - name: ai-status--queued
+    reason:
+      Icon no longer relevant to how we represent AI moments
+  - name: ai-status--rejected
+    reason:
+      Icon no longer relevant to how we represent AI moments
+  - name: database--redis
+    reason:
+      Icon no longer relevant. IBM Cloud Databases for Redis UI icon is retired. New icon with new name was requested
+  - name: ibm-watsonx--code-assistant-for-z--refactor
+    reason:
+      Icon no longer relevant. watsonx Code Assistant for Z Refactoring Assistant has been merged into an existing product.

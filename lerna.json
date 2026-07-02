@@ -1,0 +1,19 @@
+{
+  "version": "independent",
+  "npmClient": "yarn",
+  "ignoreChanges": [
+    "actions/**",
+    "**/__fixtures__/**",
+    "**/__tests__/**",
+    "**/docs/**",
+    "**/e2e/**",
+    "**/examples/**",
+    "**/*.md"
+  ],
+  "command": {
+    "version": {
+      "message": "chore(release): %s"
+    }
+  },
+  "$schema": "node_modules/lerna/schemas/lerna-schema.json"
+}

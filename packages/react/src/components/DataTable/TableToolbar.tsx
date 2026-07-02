@@ -1,0 +1,99 @@
+/**
+ * Copyright IBM Corp. 2016, 2026
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+import cx from 'classnames';
+import PropTypes from 'prop-types';
+import React, { createContext, useContext } from 'react';
+import { usePrefix } from '../../internal/usePrefix';
+import { deprecate } from '../../prop-types/deprecate';
+
+export const TableToolbarContext = createContext<{
+  size?: 'xs' | 'sm' | 'lg';
+}>({});
+
+export const useTableToolbar = () => useContext(TableToolbarContext);
+
+export interface TableToolbarProps
+  extends React.HTMLAttributes<HTMLDivElement> {
+  /**
+   * Specify a label to be read by screen readers on the container node
+   * 'aria-label' of the TableToolbar component.
+   */
+  ['aria-label']?: string;
+
+  /**
+   * @deprecated please use `aria-label` instead.
+   * 'aria-label' of the TableToolbar component.
+   */
+  ariaLabel?: string;
+
+  /**
+   * Pass in the children that will be rendered inside the TableToolbar
+   */
+  children: React.ReactNode;
+
+  /**
+   * `lg` Change the row height of table
+   */
+  size?: 'xs' | 'sm' | 'lg';
+}
+
+const TableToolbar = ({
+  ['aria-label']: ariaLabel = 'data table toolbar',
+  ariaLabel: deprecatedAriaLabel,
+  children,
+  size,
+  ...rest
+}: TableToolbarProps) => {
+  const prefix = usePrefix();
+  const className = cx({
+    [`${prefix}--table-toolbar`]: true,
+    [`${prefix}--table-toolbar--${size}`]: size, // TODO: V12 - Remove this class
+    [`${prefix}--layout--size-${size}`]: size,
+  });
+  return (
+    <TableToolbarContext.Provider value={{ size }}>
+      <section
+        role="group"
+        aria-label={deprecatedAriaLabel || ariaLabel}
+        {...rest}
+        className={className}>
+        {children}
+      </section>
+    </TableToolbarContext.Provider>
+  );
+};
+
+TableToolbar.propTypes = {
+  /**
+   * 'aria-label' of the TableToolbar component.
+   * Specify a label to be read by screen readers on the container node
+   */
+  ['aria-label']: PropTypes.string,
+
+  /**
+   * Deprecated, please use `aria-label` instead.
+   * Specify a label to be read by screen readers on the container node.
+   * 'aria-label' of the TableToolbar component.
+   */
+  ariaLabel: deprecate(
+    PropTypes.string,
+    'This prop syntax has been deprecated. Please use the new `aria-label`.'
+  ),
+
+  /**
+   * Pass in the children that will be rendered inside the TableToolbar
+   */
+  children: PropTypes.node,
+
+  /**
+   * `lg` Change the row height of table
+   */
+  size: PropTypes.oneOf(['xs', 'sm', 'lg']),
+};
+
+export default TableToolbar;

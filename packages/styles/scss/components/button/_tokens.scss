@@ -1,0 +1,426 @@
+//
+// Copyright IBM Corp. 2018, 2023
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use 'sass:map';
+@use '../../config';
+@use '../../themes';
+@use '../../utilities/component-tokens';
+@use '@carbon/themes/scss/component-tokens' as button;
+
+$button-separator: (
+  fallback: map.get(button.$button-separator, white-theme),
+  values: (
+    (
+      theme: themes.$white,
+      value: map.get(button.$button-separator, white-theme),
+    ),
+    (
+      theme: themes.$g10,
+      value: map.get(button.$button-separator, g-10),
+    ),
+    (
+      theme: themes.$g90,
+      value: map.get(button.$button-separator, g-90),
+    ),
+    (
+      theme: themes.$g100,
+      value: map.get(button.$button-separator, g-100),
+    ),
+  ),
+) !default;
+
+$button-primary: (
+  fallback: map.get(button.$button-primary, white-theme),
+  values: (
+    (
+      theme: themes.$white,
+      value: map.get(button.$button-primary, white-theme),
+    ),
+    (
+      theme: themes.$g10,
+      value: map.get(button.$button-primary, g-10),
+    ),
+    (
+      theme: themes.$g90,
+      value: map.get(button.$button-primary, g-90),
+    ),
+    (
+      theme: themes.$g100,
+      value: map.get(button.$button-primary, g-100),
+    ),
+  ),
+) !default;
+
+$button-secondary: (
+  fallback: map.get(button.$button-secondary, white-theme),
+  values: (
+    (
+      theme: themes.$white,
+      value: map.get(button.$button-secondary, white-theme),
+    ),
+    (
+      theme: themes.$g10,
+      value: map.get(button.$button-secondary, g-10),
+    ),
+    (
+      theme: themes.$g90,
+      value: map.get(button.$button-secondary, g-90),
+    ),
+    (
+      theme: themes.$g100,
+      value: map.get(button.$button-secondary, g-100),
+    ),
+  ),
+) !default;
+
+$button-tertiary: (
+  fallback: map.get(button.$button-tertiary, white-theme),
+  values: (
+    (
+      theme: themes.$white,
+      value: map.get(button.$button-tertiary, white-theme),
+    ),
+    (
+      theme: themes.$g10,
+      value: map.get(button.$button-tertiary, g-10),
+    ),
+    (
+      theme: themes.$g90,
+      value: map.get(button.$button-tertiary, g-90),
+    ),
+    (
+      theme: themes.$g100,
+      value: map.get(button.$button-tertiary, g-100),
+    ),
+  ),
+) !default;
+
+$button-danger-primary: (
+  fallback: map.get(button.$button-danger-primary, white-theme),
+  values: (
+    (
+      theme: themes.$white,
+      value: map.get(button.$button-danger-primary, white-theme),
+    ),
+    (
+      theme: themes.$g10,
+      value: map.get(button.$button-danger-primary, g-10),
+    ),
+    (
+      theme: themes.$g90,
+      value: map.get(button.$button-danger-primary, g-90),
+    ),
+    (
+      theme: themes.$g100,
+      value: map.get(button.$button-danger-primary, g-100),
+    ),
+  ),
+) !default;
+
+$button-danger-secondary: (
+  fallback: map.get(button.$button-danger-secondary, white-theme),
+  values: (
+    (
+      theme: themes.$white,
+      value: map.get(button.$button-danger-secondary, white-theme),
+    ),
+    (
+      theme: themes.$g10,
+      value: map.get(button.$button-danger-secondary, g-10),
+    ),
+    (
+      theme: themes.$g90,
+      value: map.get(button.$button-danger-secondary, g-90),
+    ),
+    (
+      theme: themes.$g100,
+      value: map.get(button.$button-danger-secondary, g-100),
+    ),
+  ),
+) !default;
+
+$button-danger-active: (
+  fallback: map.get(button.$button-danger-active, white-theme),
+  values: (
+    (
+      theme: themes.$white,
+      value: map.get(button.$button-danger-active, white-theme),
+    ),
+    (
+      theme: themes.$g10,
+      value: map.get(button.$button-danger-active, g-10),
+    ),
+    (
+      theme: themes.$g90,
+      value: map.get(button.$button-danger-active, g-90),
+    ),
+    (
+      theme: themes.$g100,
+      value: map.get(button.$button-danger-active, g-100),
+    ),
+  ),
+) !default;
+
+$button-primary-active: (
+  fallback: map.get(button.$button-primary-active, white-theme),
+  values: (
+    (
+      theme: themes.$white,
+      value: map.get(button.$button-primary-active, white-theme),
+    ),
+    (
+      theme: themes.$g10,
+      value: map.get(button.$button-primary-active, g-10),
+    ),
+    (
+      theme: themes.$g90,
+      value: map.get(button.$button-primary-active, g-90),
+    ),
+    (
+      theme: themes.$g100,
+      value: map.get(button.$button-primary-active, g-100),
+    ),
+  ),
+) !default;
+
+$button-secondary-active: (
+  fallback: map.get(button.$button-secondary-active, white-theme),
+  values: (
+    (
+      theme: themes.$white,
+      value: map.get(button.$button-secondary-active, white-theme),
+    ),
+    (
+      theme: themes.$g10,
+      value: map.get(button.$button-secondary-active, g-10),
+    ),
+    (
+      theme: themes.$g90,
+      value: map.get(button.$button-secondary-active, g-90),
+    ),
+    (
+      theme: themes.$g100,
+      value: map.get(button.$button-secondary-active, g-100),
+    ),
+  ),
+) !default;
+
+$button-tertiary-active: (
+  fallback: map.get(button.$button-tertiary-active, white-theme),
+  values: (
+    (
+      theme: themes.$white,
+      value: map.get(button.$button-tertiary-active, white-theme),
+    ),
+    (
+      theme: themes.$g10,
+      value: map.get(button.$button-tertiary-active, g-10),
+    ),
+    (
+      theme: themes.$g90,
+      value: map.get(button.$button-tertiary-active, g-90),
+    ),
+    (
+      theme: themes.$g100,
+      value: map.get(button.$button-tertiary-active, g-100),
+    ),
+  ),
+) !default;
+
+$button-danger-hover: (
+  fallback: map.get(button.$button-danger-hover, white-theme),
+  values: (
+    (
+      theme: themes.$white,
+      value: map.get(button.$button-danger-hover, white-theme),
+    ),
+    (
+      theme: themes.$g10,
+      value: map.get(button.$button-danger-hover, g-10),
+    ),
+    (
+      theme: themes.$g90,
+      value: map.get(button.$button-danger-hover, g-90),
+    ),
+    (
+      theme: themes.$g100,
+      value: map.get(button.$button-danger-hover, g-100),
+    ),
+  ),
+) !default;
+
+$button-primary-hover: (
+  fallback: map.get(button.$button-primary-hover, white-theme),
+  values: (
+    (
+      theme: themes.$white,
+      value: map.get(button.$button-primary-hover, white-theme),
+    ),
+    (
+      theme: themes.$g10,
+      value: map.get(button.$button-primary-hover, g-10),
+    ),
+    (
+      theme: themes.$g90,
+      value: map.get(button.$button-primary-hover, g-90),
+    ),
+    (
+      theme: themes.$g100,
+      value: map.get(button.$button-primary-hover, g-100),
+    ),
+  ),
+) !default;
+
+$button-secondary-hover: (
+  fallback: map.get(button.$button-secondary-hover, white-theme),
+  values: (
+    (
+      theme: themes.$white,
+      value: map.get(button.$button-secondary-hover, white-theme),
+    ),
+    (
+      theme: themes.$g10,
+      value: map.get(button.$button-secondary-hover, g-10),
+    ),
+    (
+      theme: themes.$g90,
+      value: map.get(button.$button-secondary-hover, g-90),
+    ),
+    (
+      theme: themes.$g100,
+      value: map.get(button.$button-secondary-hover, g-100),
+    ),
+  ),
+) !default;
+
+$button-tertiary-hover: (
+  fallback: map.get(button.$button-tertiary-hover, white-theme),
+  values: (
+    (
+      theme: themes.$white,
+      value: map.get(button.$button-tertiary-hover, white-theme),
+    ),
+    (
+      theme: themes.$g10,
+      value: map.get(button.$button-tertiary-hover, g-10),
+    ),
+    (
+      theme: themes.$g90,
+      value: map.get(button.$button-tertiary-hover, g-90),
+    ),
+    (
+      theme: themes.$g100,
+      value: map.get(button.$button-tertiary-hover, g-100),
+    ),
+  ),
+) !default;
+
+$button-disabled: (
+  fallback: map.get(button.$button-disabled, white-theme),
+  values: (
+    (
+      theme: themes.$white,
+      value: map.get(button.$button-disabled, white-theme),
+    ),
+    (
+      theme: themes.$g10,
+      value: map.get(button.$button-disabled, g-10),
+    ),
+    (
+      theme: themes.$g90,
+      value: map.get(button.$button-disabled, g-90),
+    ),
+    (
+      theme: themes.$g100,
+      value: map.get(button.$button-disabled, g-100),
+    ),
+  ),
+) !default;
+
+$button-tokens: (
+  button-separator: $button-separator,
+  button-primary: $button-primary,
+  button-secondary: $button-secondary,
+  button-tertiary: $button-tertiary,
+  button-danger-primary: $button-danger-primary,
+  button-danger-secondary: $button-danger-secondary,
+  button-danger-active: $button-danger-active,
+  button-primary-active: $button-primary-active,
+  button-secondary-active: $button-secondary-active,
+  button-tertiary-active: $button-tertiary-active,
+  button-danger-hover: $button-danger-hover,
+  button-primary-hover: $button-primary-hover,
+  button-secondary-hover: $button-secondary-hover,
+  button-tertiary-hover: $button-tertiary-hover,
+  button-disabled: $button-disabled,
+);
+
+$button-separator: component-tokens.get-var(
+  $button-separator,
+  'button-separator'
+);
+
+$button-primary: component-tokens.get-var($button-primary, 'button-primary');
+
+$button-secondary: component-tokens.get-var(
+  $button-secondary,
+  'button-secondary'
+);
+
+$button-tertiary: component-tokens.get-var($button-tertiary, 'button-tertiary');
+
+$button-danger-primary: component-tokens.get-var(
+  $button-danger-primary,
+  'button-danger-primary'
+);
+
+$button-danger-secondary: component-tokens.get-var(
+  $button-danger-secondary,
+  'button-danger-secondary'
+);
+
+$button-danger-active: component-tokens.get-var(
+  $button-danger-active,
+  'button-danger-active'
+);
+
+$button-primary-active: component-tokens.get-var(
+  $button-primary-active,
+  'button-primary-active'
+);
+
+$button-secondary-active: component-tokens.get-var(
+  $button-secondary-active,
+  'button-secondary-active'
+);
+
+$button-tertiary-active: component-tokens.get-var(
+  $button-tertiary-active,
+  'button-tertiary-active'
+);
+
+$button-danger-hover: component-tokens.get-var(
+  $button-danger-hover,
+  'button-danger-hover'
+);
+
+$button-primary-hover: component-tokens.get-var(
+  $button-primary-hover,
+  'button-primary-hover'
+);
+
+$button-secondary-hover: component-tokens.get-var(
+  $button-secondary-hover,
+  'button-secondary-hover'
+);
+
+$button-tertiary-hover: component-tokens.get-var(
+  $button-tertiary-hover,
+  'button-tertiary-hover'
+);
+
+$button-disabled: component-tokens.get-var($button-disabled, 'button-disabled');

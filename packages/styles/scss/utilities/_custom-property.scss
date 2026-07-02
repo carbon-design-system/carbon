@@ -1,0 +1,56 @@
+//
+// Copyright IBM Corp. 2018, 2023
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use '../config';
+
+// Some CSS Custom Property terminology
+// @see https://www.w3.org/TR/css-variables-1/
+//
+// <custom-property-name>:
+//   Any valid identifer that starts with two dashes (--)
+//
+// A declaration:
+//   CSS Custom Properties can be used as declarations in a CSS selector. They
+//   take on the form of:
+//
+//   <custom-property-name>: <declaration-value>;
+//
+// The var() notation:
+//   You can use a CSS Custom Property as a substitute for a value of another
+//   property using the var() function. This function has the following syntax:
+//
+//   var( <custom-property-name> [, <declarative-value> ]? )
+//
+//   This function takes in an optional fallback value if the CSS Custom
+//   Property has not been previously defined
+
+/// Get the <custom-property-name> for a given string
+/// @param {String} $name
+/// @returns {String}
+@function get-name($name) {
+  @return --#{config.$prefix}-#{$name};
+}
+
+/// Get the var() representation for a given token
+/// @param {String} $name
+/// @param {Any} $fallback
+/// @returns var()
+@function get-var($name, $fallback: false) {
+  @if $fallback {
+    @return var(--#{config.$prefix}-#{$name}, #{$fallback});
+  }
+  @return var(--#{config.$prefix}-#{$name});
+}
+
+/// Emit a declaration which sets the value of a CSS Custom Property using the
+/// $name as the <custom-property-name> and the $value as the
+/// <declaration-value>
+/// @param {String} $name
+/// @param {any} $value
+@mixin declaration($name, $value) {
+  #{get-name($name)}: #{$value};
+}

@@ -1,0 +1,48 @@
+{
+  "name": "@carbon/icon-helpers",
+  "description": "Helpers used alongside icons for digital and software products using the Carbon Design System",
+  "version": "10.77.0",
+  "license": "Apache-2.0",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "module": "es/index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/carbon-design-system/carbon.git",
+    "directory": "packages/icon-helpers"
+  },
+  "bugs": "https://github.com/carbon-design-system/carbon/issues",
+  "files": [
+    "es",
+    "lib",
+    "umd",
+    "telemetry.yml"
+  ],
+  "keywords": [
+    "ibm",
+    "elements",
+    "carbon",
+    "carbon-elements",
+    "carbon-design-system",
+    "components",
+    "react"
+  ],
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  },
+  "scripts": {
+    "build": "yarn clean && carbon-cli bundle src/index.ts --name CarbonIconHelpers --dts",
+    "clean": "rimraf es lib umd",
+    "postinstall": "ibmtelemetry --config=telemetry.yml"
+  },
+  "devDependencies": {
+    "@carbon/cli": "^11.45.0",
+    "rimraf": "^6.0.1",
+    "typescript-config-carbon": "workspace:^0.10.0"
+  },
+  "sideEffects": false,
+  "dependencies": {
+    "@ibm/telemetry-js": "^1.5.0"
+  }
+}

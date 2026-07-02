@@ -1,0 +1,73 @@
+/**
+ * Copyright IBM Corp. 2019, 2025
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+import glob from 'fast-glob';
+import path from 'path';
+import { createLogger } from '../logger.js';
+import compile from '../compile.js';
+
+const logger = createLogger('check');
+
+async function check({ glob: pattern, ignore = [], list = false }) {
+  const cwd = process.cwd();
+
+  logger.start('check');
+  logger.info(`Running in: ${cwd}`);
+  logger.info(`Checking pattern: '${pattern}', ignoring: '${ignore}'`);
+
+  // fast-glob's ignore option only accepts an array of strings, not a string
+  // See: https://github.com/mrmlnc/fast-glob/issues/404#issuecomment-1624832288
+  if (typeof ignore === 'string') {
+    ignore = [ignore];
+  }
+
+  const files = await glob(pattern, {
+    cwd,
+    ignore,
+  });
+
+  logger.info(`Compiling ${files.length} files...`);
+
+  try {
+    compile(files.map((file) => path.join(cwd, file)));
+
+    if (list) {
+      logger.info('Compiled the following files:');
+      console.log(files);
+    }
+
+    logger.info(`Successfully compiled ${files.length} files! 🎉`);
+  } catch (error) {
+    console.log(error);
+    process.exit(1);
+  } finally {
+    logger.stop();
+  }
+}
+
+export const builder = (yargs) => {
+  yargs.positional('glob', {
+    type: 'string',
+    describe: 'glob pattern for files to check',
+  });
+
+  yargs.options({
+    i: {
+      alias: 'ignore',
+      describe: 'provide a glob pattern of files to ignore',
+      type: 'string',
+    },
+    l: {
+      alias: 'list',
+      describe: 'list all the files that were compiled',
+      type: 'boolean',
+    },
+  });
+};
+export const command = 'check <glob>';
+export const desc = 'check that each file can be compiled';
+export const handler = check;

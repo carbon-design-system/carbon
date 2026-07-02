@@ -1,0 +1,47 @@
+import { ArgTypes, Canvas, Markdown, Meta } from '@storybook/addon-docs/blocks';
+import { cdnJs } from '../../globals/internal/storybook-cdn';
+import * as UnorderedListStories from './unordered-list.stories';
+
+<Meta of={UnorderedListStories} />
+
+# Unordered list
+
+[Source code](https://github.com/carbon-design-system/carbon/tree/main/packages/web-components/src/components/list)
+&nbsp;|&nbsp;
+[Usage guidelines](https://www.carbondesignsystem.com/components/list/usage)
+&nbsp;|&nbsp;
+[Accessibility](https://www.carbondesignsystem.com/components/list/accessibility)
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Nested](#Nested)
+- [Component API](#component-api)
+- [CDN](#cdn)
+- [Feedback](#feedback)
+
+## Overview
+
+<Canvas of={UnorderedListStories.Default} />
+
+## Nested
+
+<Canvas of={UnorderedListStories.Nested} />
+
+## Component API
+
+## `cds-unordered-list`
+
+<ArgTypes of="cds-unordered-list" />
+
+## `cds-list-item`
+
+<ArgTypes of="cds-list-item" />
+
+<Markdown>{`${cdnJs({ components: ['list'] })}`}</Markdown>
+
+## Feedback
+
+Help us improve this component by providing feedback, asking questions on Slack,
+or updating this file on
+[GitHub](https://github.com/carbon-design-system/carbon/edit/main/packages/web-components/src/components/list/unordered-list.mdx).

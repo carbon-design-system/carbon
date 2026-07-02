@@ -1,0 +1,261 @@
+//
+// Copyright IBM Corp. 2025
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+$css--plex: true !default;
+
+@use '@carbon/styles/scss/config' as *;
+@use '@carbon/styles/scss/colors' as *;
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/components/notification/index' as *;
+@use '@carbon/styles/scss/components/button';
+@use '@carbon/styles/scss/components/button/mixins' as button-mixins;
+@use '@carbon/styles/scss/components/button/vars' as button-vars;
+@use '@carbon/styles/scss/layout' as *;
+
+@include actionable-notification;
+
+:host(#{$prefix}-actionable-notification) {
+  @include actionable-notification-base;
+  @include emit-layout-tokens();
+
+  display: none;
+  outline: none;
+}
+
+:host(
+    #{$prefix}-actionable-notification-button:not(
+        [low-contrast]
+      )[kind='tertiary']
+  )
+  button {
+  @include button-mixins.button-theme(
+    transparent,
+    $notification-action-tertiary-inverse,
+    $notification-action-tertiary-inverse,
+    $notification-action-tertiary-inverse-hover,
+    currentColor,
+    $notification-action-tertiary-inverse-active
+  );
+
+  &:focus {
+    border-color: $focus-inverse;
+    background-color: $notification-action-tertiary-inverse;
+    box-shadow:
+      inset 0 0 0 button-vars.$button-outline-width $focus-inverse,
+      inset 0 0 0 button-vars.$button-border-width $background-inverse;
+    color: $notification-action-tertiary-inverse-text;
+  }
+
+  &:hover {
+    color: $notification-action-tertiary-inverse-text;
+  }
+
+  &:active {
+    border-color: transparent;
+    background-color: $notification-action-tertiary-inverse-active;
+    color: $notification-action-tertiary-inverse-text;
+  }
+}
+
+:host(#{$prefix}-actionable-notification-button[low-contrast][kind='ghost'])
+  button {
+  &:hover,
+  &:active {
+    background-color: $notification-action-hover;
+  }
+
+  &:focus {
+    outline-color: $focus;
+  }
+}
+
+:host(
+    #{$prefix}-actionable-notification-button:not([low-contrast])[kind='ghost']
+  )
+  button {
+  color: $link-inverse;
+}
+
+:host(
+    #{$prefix}-actionable-notification-button[hide-close-button][kind='ghost']
+  )
+  button {
+  margin-inline-end: $spacing-03;
+}
+
+:host(#{$prefix}-actionable-notification:not([inline])) {
+  @include actionable-notification-toast-base;
+
+  .#{$prefix}--actionable-notification__content {
+    flex-direction: column;
+  }
+}
+
+:host(#{$prefix}-actionable-notification[inline][low-contrast])::before,
+:host(#{$prefix}-callout-notification[inline][low-contrast])::before {
+  @include actionable-notification-low-contrast-inline-before;
+}
+
+:host(#{$prefix}-actionable-notification[low-contrast]),
+:host(#{$prefix}-callout-notification[low-contrast]) {
+  @include actionable-notification-low-contrast-base;
+}
+
+:host(#{$prefix}-actionable-notification[open]) {
+  display: flex;
+}
+
+:host(#{$prefix}-actionable-notification:not([inline]))
+  .#{$prefix}--actionable-notification__close-button {
+  position: absolute;
+}
+
+:host(#{$prefix}-actionable-notification[hide-close-button])
+  .#{$prefix}--actionable-notification__close-button {
+  display: none;
+}
+
+:host(#{$prefix}-actionable-notification[kind='success']) {
+  @include actionable-notification-success-base;
+}
+
+:host(#{$prefix}-actionable-notification[kind='success'][low-contrast]) {
+  @include actionable-notification-low-contrast-success;
+}
+
+:host(#{$prefix}-actionable-notification[kind='info']) {
+  @include actionable-notification-info-base;
+}
+
+:host(#{$prefix}-actionable-notification[kind='info-square']) {
+  @include actionable-notification-info-base;
+}
+
+:host(#{$prefix}-actionable-notification[kind='info'][low-contrast]),
+:host(#{$prefix}-actionable-notification[kind='info-square'][low-contrast]) {
+  @include actionable-notification-low-contrast-info;
+}
+
+:host(#{$prefix}-actionable-notification[kind='warning']) {
+  @include actionable-notification-warning-base;
+
+  /* TODO: Remove this once the following issue with icon fill is resolved:
+  ** https://github.com/carbon-design-system/carbon/issues/13616
+  */
+  .#{$prefix}--inline-notification__icon path[data-icon-path='inner-path'] {
+    fill: $black-100;
+    opacity: 1;
+  }
+}
+
+:host(#{$prefix}-actionable-notification[kind='warning-alt']) {
+  @include actionable-notification-warning-base;
+
+  /* TODO: Remove this once the following issue with icon fill is resolved:
+  ** https://github.com/carbon-design-system/carbon/issues/13616
+  */
+  .#{$prefix}--inline-notification__icon,
+  .#{$prefix}--toast-notification__icon {
+    path[data-icon-path='inner-path'] {
+      fill: $black-100;
+      opacity: 1;
+    }
+  }
+}
+
+:host(#{$prefix}-actionable-notification[kind='warning'][low-contrast]),
+:host(#{$prefix}-actionable-notification[kind='warning-alt'][low-contrast]) {
+  @include actionable-notification-low-contrast-warning;
+}
+
+:host(#{$prefix}-actionable-notification[kind='error']) {
+  @include actionable-notification-error-base;
+}
+
+:host(#{$prefix}-actionable-notification[kind='error'][low-contrast]) {
+  @include actionable-notification-low-contrast-error;
+}
+:host(#{$prefix}-callout-notification) {
+  @include actionable-notification-base;
+  @include emit-layout-tokens();
+
+  display: flex;
+  outline: none;
+}
+
+:host(#{$prefix}-callout-notification)
+  .#{$prefix}--actionable-notification__close-button {
+  display: none;
+}
+
+:host(#{$prefix}-callout-notification[inline][low-contrast])::before {
+  @include actionable-notification-low-contrast-inline-before;
+}
+
+:host(#{$prefix}-callout-notification[kind='success']) {
+  @include actionable-notification-success-base;
+}
+
+:host(#{$prefix}-callout-notification[kind='success'][low-contrast]) {
+  @include actionable-notification-low-contrast-success;
+}
+
+:host(#{$prefix}-callout-notification[kind='info']) {
+  @include actionable-notification-info-base;
+}
+
+:host(#{$prefix}-callout-notification[kind='info-square']) {
+  @include actionable-notification-info-base;
+}
+
+:host(#{$prefix}-callout-notification[kind='info'][low-contrast]),
+:host(#{$prefix}-callout-notification[kind='info-square'][low-contrast]) {
+  @include actionable-notification-low-contrast-info;
+}
+
+:host(#{$prefix}-callout-notification[kind='warning']) {
+  @include actionable-notification-warning-base;
+
+  /* TODO: Remove this once the following issue with icon fill is resolved:
+  ** https://github.com/carbon-design-system/carbon/issues/13616
+  */
+  .#{$prefix}--inline-notification__icon path[data-icon-path='inner-path'] {
+    fill: $black-100;
+    opacity: 1;
+  }
+}
+
+:host(#{$prefix}-callout-notification[kind='warning-alt']) {
+  @include actionable-notification-warning-base;
+
+  /* TODO: Remove this once the following issue with icon fill is resolved:
+  ** https://github.com/carbon-design-system/carbon/issues/13616
+  */
+  .#{$prefix}--inline-notification__icon path[data-icon-path='inner-path'] {
+    fill: $black-100;
+    opacity: 1;
+  }
+}
+
+:host(#{$prefix}-callout-notification[kind='warning'][low-contrast]),
+:host(#{$prefix}-callout-notification[kind='warning-alt'][low-contrast]) {
+  @include actionable-notification-low-contrast-warning;
+}
+
+:host(#{$prefix}-callout-notification[kind='error']) {
+  @include actionable-notification-error-base;
+}
+
+:host(#{$prefix}-callout-notification[kind='error'][low-contrast]) {
+  @include actionable-notification-low-contrast-error;
+}
+
+:host(#{$prefix}-callout-notification)
+  .#{$prefix}--actionable-notification__action-button.#{$prefix}--btn--ghost {
+  margin-inline-end: $spacing-03;
+}

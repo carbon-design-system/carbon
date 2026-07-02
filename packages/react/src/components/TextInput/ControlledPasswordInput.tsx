@@ -1,0 +1,383 @@
+/**
+ * Copyright IBM Corp. 2023, 2026
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+import React, { forwardRef, type HTMLAttributes } from 'react';
+import classNames from 'classnames';
+import PropTypes from 'prop-types';
+import { View, ViewOff, WarningFilled } from '@carbon/icons-react';
+import { getTextInputProps } from './util';
+import { deprecate } from '../../prop-types/deprecate';
+import { usePrefix } from '../../internal/usePrefix';
+import { useId } from '../../internal/useId';
+import { hasHelperText } from '../../internal/hasHelperText';
+import { noopFn } from '../../internal/noopFn';
+
+export interface ControlledPasswordInputProps
+  extends HTMLAttributes<HTMLInputElement> {
+  /**
+   * Provide a custom className that is applied directly to the underlying
+   * `<input>` node
+   */
+  className?: string;
+
+  /**
+   * Optionally provide the default value of the `<input>`
+   */
+  defaultValue?: string | number;
+
+  /**
+   * Specify whether the control is disabled
+   */
+  disabled?: boolean;
+
+  /**
+   * Provide text that is used alongside the control label for additional help
+   */
+  helperText?: React.ReactNode;
+
+  /**
+   * Specify whether or not the underlying label is visually hidden
+   */
+  hideLabel?: boolean;
+
+  /**
+   * "Hide password" tooltip text on password visibility toggle
+   */
+  hidePasswordLabel?: string;
+
+  /**
+   * Provide a unique identifier for the input field
+   */
+  id: string;
+
+  /**
+   * Specify whether the control is currently invalid
+   */
+  invalid?: boolean;
+
+  /**
+   * Provide the text that is displayed when the control is in an invalid state
+   */
+  invalidText?: React.ReactNode;
+
+  /**
+   * Provide the text that will be read by a screen reader when visiting this
+   * control
+   */
+  labelText: React.ReactNode;
+
+  /**
+   * @deprecated The `light` prop for `ControlledPasswordInput` has been deprecated in favor of the new `Layer` component. It will be removed in the next major release.
+   */
+  light?: boolean;
+
+  /**
+   * Optionally provide an `onChange` handler that is called whenever `<input>`
+   * is updated
+   */
+  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
+
+  /**
+   * Optionally provide an `onClick` handler that is called whenever the
+   * `<input>` is clicked
+   */
+  onClick?: (event: React.MouseEvent<HTMLInputElement>) => void;
+
+  /**
+   * Specify the placeholder attribute for the `<input>`
+   */
+  placeholder?: string;
+
+  /**
+   * "Show password" tooltip text on password visibility toggle
+   */
+  showPasswordLabel?: string;
+
+  /**
+   * Specify the size of the Text Input.
+   */
+  size?: 'sm' | 'md' | 'lg';
+
+  /**
+   * Specify the alignment of the tooltip to the icon-only button.
+   * Can be one of?: start, center, or end.
+   */
+  tooltipAlignment?: 'start' | 'center' | 'end';
+
+  /**
+   * Specify the direction of the tooltip for icon-only buttons.
+   * Can be either top, right, bottom, or left.
+   */
+  tooltipPosition?: 'top' | 'right' | 'bottom' | 'left';
+
+  /**
+   * Provide the current value of the `<input>`
+   */
+  value?: string | number;
+  togglePasswordVisibility?(event: React.MouseEvent<HTMLButtonElement>): void;
+  type?: string;
+}
+
+const ControlledPasswordInput = forwardRef<
+  unknown,
+  ControlledPasswordInputProps
+>(
+  (
+    {
+      labelText,
+      className,
+      id,
+      placeholder,
+      onChange = noopFn,
+      onClick = noopFn,
+      disabled = false,
+      hideLabel,
+      invalid = false,
+      invalidText = '',
+      helperText,
+      light,
+      type = 'password',
+      togglePasswordVisibility,
+      tooltipPosition = 'bottom',
+      tooltipAlignment = 'center',
+      hidePasswordLabel = 'Hide password',
+      showPasswordLabel = 'Show password',
+      size = undefined,
+      ...other
+    },
+    ref
+  ) => {
+    const prefix = usePrefix();
+    const controlledPasswordInstanceId = useId();
+
+    const errorId = id + '-error-msg';
+    const textInputClasses = classNames(
+      `${prefix}--text-input`,
+      `${prefix}--password-input`,
+      className,
+      {
+        [`${prefix}--text-input--light`]: light,
+        [`${prefix}--text-input--invalid`]: invalid,
+        [`${prefix}--text-input--${size}`]: size,
+      }
+    );
+    const sharedTextInputProps = {
+      id,
+      onChange: (evt: React.ChangeEvent<HTMLInputElement>) => {
+        if (!disabled) {
+          onChange?.(evt);
+        }
+      },
+      onClick: (evt: React.MouseEvent<HTMLInputElement>) => {
+        if (!disabled) {
+          onClick?.(evt);
+        }
+      },
+      placeholder,
+      type,
+      ref,
+      className: textInputClasses,
+      ...other,
+    };
+    const labelClasses = classNames(`${prefix}--label`, {
+      [`${prefix}--visually-hidden`]: hideLabel,
+      [`${prefix}--label--disabled`]: disabled,
+    });
+    const helperTextClasses = classNames(`${prefix}--form__helper-text`, {
+      [`${prefix}--form__helper-text--disabled`]: disabled,
+    });
+    const label = typeof labelText !== 'undefined' && labelText !== null && (
+      <label htmlFor={id} className={labelClasses}>
+        {labelText}
+      </label>
+    );
+    const error = invalid ? (
+      <div className={`${prefix}--form-requirement`} id={errorId}>
+        {invalidText}
+      </div>
+    ) : null;
+    const passwordIsVisible = type === 'text';
+    const passwordVisibilityIcon = passwordIsVisible ? (
+      <ViewOff className={`${prefix}--icon-visibility-off`} />
+    ) : (
+      <View className={`${prefix}--icon-visibility-on`} />
+    );
+    const passwordVisibilityToggleClasses = classNames(
+      `${prefix}--text-input--password__visibility__toggle`,
+      `${prefix}--btn`,
+      `${prefix}--btn--icon-only`,
+      `${prefix}--tooltip__trigger`,
+      `${prefix}--tooltip--a11y`,
+      {
+        [`${prefix}--tooltip--${tooltipPosition}`]: tooltipPosition,
+        [`${prefix}--tooltip--align-${tooltipAlignment}`]: tooltipAlignment,
+      }
+    );
+
+    const hasHelper = hasHelperText(helperText);
+    const helperId = !hasHelper
+      ? undefined
+      : `controlled-password-helper-text-${controlledPasswordInstanceId}`;
+
+    const input = (
+      <>
+        <input
+          {...getTextInputProps({
+            invalid,
+            sharedTextInputProps,
+            invalidId: errorId,
+            hasHelper: !error && hasHelper,
+            helperId,
+          })}
+          data-toggle-password-visibility={type === 'password'}
+        />
+        <button
+          type="button"
+          className={passwordVisibilityToggleClasses}
+          onClick={togglePasswordVisibility}>
+          <span className={`${prefix}--assistive-text`}>
+            {passwordIsVisible ? hidePasswordLabel : showPasswordLabel}
+          </span>
+          {passwordVisibilityIcon}
+        </button>
+      </>
+    );
+
+    const helper = hasHelper && (
+      <div id={helperId} className={helperTextClasses}>
+        {helperText}
+      </div>
+    );
+
+    return (
+      <div
+        className={`${prefix}--form-item ${prefix}--text-input-wrapper ${prefix}--password-input-wrapper`}>
+        {label}
+        <div
+          className={`${prefix}--text-input__field-wrapper`}
+          data-invalid={invalid || null}>
+          {invalid && (
+            <WarningFilled className={`${prefix}--text-input__invalid-icon`} />
+          )}
+          {input}
+        </div>
+        {error ? error : helper}
+      </div>
+    );
+  }
+);
+
+ControlledPasswordInput.displayName = 'ControlledPasswordInput';
+ControlledPasswordInput.propTypes = {
+  /**
+   * Provide a custom className that is applied directly to the underlying
+   * `<input>` node
+   */
+  className: PropTypes.string,
+
+  /**
+   * Optionally provide the default value of the `<input>`
+   */
+  defaultValue: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+
+  /**
+   * Specify whether the control is disabled
+   */
+  disabled: PropTypes.bool,
+
+  /**
+   * Provide text that is used alongside the control label for additional help
+   */
+  helperText: PropTypes.node,
+
+  /**
+   * Specify whether or not the underlying label is visually hidden
+   */
+  hideLabel: PropTypes.bool,
+
+  /**
+   * "Hide password" tooltip text on password visibility toggle
+   */
+  hidePasswordLabel: PropTypes.string,
+
+  /**
+   * Provide a unique identifier for the input field
+   */
+  id: PropTypes.string.isRequired,
+
+  /**
+   * Specify whether the control is currently invalid
+   */
+  invalid: PropTypes.bool,
+
+  /**
+   * Provide the text that is displayed when the control is in an invalid state
+   */
+  invalidText: PropTypes.node,
+
+  /**
+   * Provide the text that will be read by a screen reader when visiting this
+   * control
+   */
+  labelText: PropTypes.node.isRequired,
+
+  /**
+   * `true` to use the light version. For use on $ui-01 backgrounds only.
+   * Don't use this to make tile background color same as container background color.
+   */
+  light: deprecate(
+    PropTypes.bool,
+    'The `light` prop for `ControlledPasswordInput` has ' +
+      'been deprecated in favor of the new `Layer` component. It will be removed in the next major release.'
+  ),
+
+  /**
+   * Optionally provide an `onChange` handler that is called whenever `<input>`
+   * is updated
+   */
+  onChange: PropTypes.func,
+
+  /**
+   * Optionally provide an `onClick` handler that is called whenever the
+   * `<input>` is clicked
+   */
+  onClick: PropTypes.func,
+
+  /**
+   * Specify the placeholder attribute for the `<input>`
+   */
+  placeholder: PropTypes.string,
+
+  /**
+   * "Show password" tooltip text on password visibility toggle
+   */
+  showPasswordLabel: PropTypes.string,
+
+  /**
+   * Specify the size of the Text Input.
+   */
+  size: PropTypes.oneOf(['sm', 'md', 'lg']),
+
+  /**
+   * Specify the alignment of the tooltip to the icon-only button.
+   * Can be one of: start, center, or end.
+   */
+  tooltipAlignment: PropTypes.oneOf(['start', 'center', 'end']),
+
+  /**
+   * Specify the direction of the tooltip for icon-only buttons.
+   * Can be either top, right, bottom, or left.
+   */
+  tooltipPosition: PropTypes.oneOf(['top', 'right', 'bottom', 'left']),
+
+  /**
+   * Provide the current value of the `<input>`
+   */
+  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+};
+
+export default ControlledPasswordInput;

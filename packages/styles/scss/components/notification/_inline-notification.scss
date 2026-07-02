@@ -1,0 +1,394 @@
+//
+// Copyright IBM Corp. 2016, 2023
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+@use 'mixins' as *;
+@use '../../breakpoint' as *;
+@use '../../colors' as *;
+@use '../../config' as *;
+@use '../../feature-flags';
+@use '../../motion' as *;
+@use '../../spacing' as *;
+@use '../../theme' as *;
+@use '../../themes' as *;
+@use '../../type' as *;
+@use '../../utilities/convert';
+@use '../../utilities/high-contrast-mode' as *;
+@use '../../utilities/focus-outline' as *;
+@use './tokens' as *;
+
+/// Inline notification base styles
+/// @access public
+/// @group notification
+@mixin inline-notification-base {
+  @include reset;
+
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  block-size: auto;
+
+  color: $text-inverse;
+  inline-size: 100%;
+  max-inline-size: convert.to-rem(288px);
+  min-block-size: convert.to-rem(48px);
+  min-inline-size: convert.to-rem(288px);
+
+  @include breakpoint(md) {
+    flex-wrap: nowrap;
+    max-inline-size: convert.to-rem(608px);
+  }
+
+  @include breakpoint(lg) {
+    max-inline-size: convert.to-rem(736px);
+  }
+
+  @include breakpoint(max) {
+    max-inline-size: convert.to-rem(832px);
+  }
+}
+
+/// Inline notification low contrast ::before styles
+/// @access public
+/// @group notification
+@mixin inline-notification-low-contrast-before {
+  position: absolute;
+  box-sizing: border-box;
+  border-width: 1px 1px 1px 0;
+  border-style: solid;
+  block-size: 100%;
+  content: '';
+  filter: opacity(0.4);
+  inline-size: 100%;
+  inset-block-start: 0;
+  inset-inline-start: 0;
+  pointer-events: none;
+}
+
+/// Inline notification low-contrast error variant styles
+/// @access public
+/// @group notification
+@mixin inline-notification-low-contrast-error {
+  @include notification--experimental(
+    $support-error,
+    $notification-background-error
+  );
+
+  &::before {
+    border-color: $support-error;
+  }
+}
+
+/// Inline notification low-contrast success variant styles
+/// @access public
+/// @group notification
+@mixin inline-notification-low-contrast-success {
+  @include notification--experimental(
+    $support-success,
+    $notification-background-success
+  );
+
+  &::before {
+    border-color: $support-success;
+  }
+}
+
+/// Inline notification low-contrast info variant styles
+/// @access public
+/// @group notification
+@mixin inline-notification-low-contrast-info {
+  @include notification--experimental(
+    $support-info,
+    $notification-background-info
+  );
+
+  &::before {
+    border-color: $support-info;
+  }
+}
+
+/// Inline notification low-contrast warning variant styles
+/// @access public
+/// @group notification
+@mixin inline-notification-low-contrast-warning {
+  @include notification--experimental(
+    $support-warning,
+    $notification-background-warning
+  );
+
+  &::before {
+    border-color: $support-warning;
+  }
+}
+
+/// Inline notification low-contrast base styles
+/// @access public
+/// @group notification
+@mixin inline-notification-low-contrast-base {
+  color: $text-primary;
+
+  .#{$prefix}--inline-notification__close-button:focus {
+    @include focus-outline('outline');
+  }
+
+  .#{$prefix}--inline-notification__close-button
+    .#{$prefix}--inline-notification__close-icon {
+    fill: $icon-primary;
+  }
+
+  &::before {
+    @include inline-notification-low-contrast-before;
+  }
+}
+
+/// Inline notification error variant base styles
+/// @access public
+/// @group notification
+@mixin inline-notification-error-base {
+  @include notification--experimental(
+    $support-error-inverse,
+    $background-inverse
+  );
+}
+
+/// Inline notification success variant base styles
+/// @access public
+/// @group notification
+@mixin inline-notification-success-base {
+  @include notification--experimental(
+    $support-success-inverse,
+    $background-inverse
+  );
+}
+
+/// Inline notification info variant base styles
+/// @access public
+/// @group notification
+@mixin inline-notification-info-base {
+  @include notification--experimental(
+    $support-info-inverse,
+    $background-inverse
+  );
+}
+
+/// Inline notification warning variant base styles
+/// @access public
+/// @group notification
+@mixin inline-notification-warning-base {
+  @include notification--experimental(
+    $support-warning-inverse,
+    $background-inverse
+  );
+}
+
+/// Inline notification styles
+/// @access public
+/// @group notification
+@mixin inline-notification {
+  .#{$prefix}--inline-notification {
+    @include inline-notification-base;
+  }
+
+  .#{$prefix}--inline-notification:not(
+      .#{$prefix}--inline-notification--low-contrast
+    )
+    a {
+    color: $link-inverse;
+  }
+
+  .#{$prefix}--inline-notification a {
+    text-decoration: none;
+  }
+
+  .#{$prefix}--inline-notification a:hover {
+    text-decoration: underline;
+  }
+
+  .#{$prefix}--inline-notification a:focus {
+    outline: 1px solid $link-inverse;
+  }
+
+  .#{$prefix}--inline-notification.#{$prefix}--inline-notification--low-contrast
+    a:focus {
+    @include focus-outline;
+  }
+
+  .#{$prefix}--inline-notification--low-contrast {
+    @include inline-notification-low-contrast-base;
+  }
+
+  .#{$prefix}--inline-notification--error {
+    @include inline-notification-error-base;
+  }
+
+  .#{$prefix}--inline-notification--low-contrast.#{$prefix}--inline-notification--error {
+    @include inline-notification-low-contrast-error;
+  }
+
+  .#{$prefix}--inline-notification--success {
+    @include inline-notification-success-base;
+  }
+
+  .#{$prefix}--inline-notification--low-contrast.#{$prefix}--inline-notification--success {
+    @include inline-notification-low-contrast-success;
+  }
+
+  .#{$prefix}--inline-notification--info,
+  .#{$prefix}--inline-notification--info-square {
+    @include inline-notification-info-base;
+  }
+
+  .#{$prefix}--inline-notification--low-contrast.#{$prefix}--inline-notification--info,
+  .#{$prefix}--inline-notification--low-contrast.#{$prefix}--inline-notification--info-square {
+    @include inline-notification-low-contrast-info;
+  }
+
+  .#{$prefix}--inline-notification--warning,
+  .#{$prefix}--inline-notification--warning-alt {
+    @include inline-notification-warning-base;
+  }
+
+  .#{$prefix}--inline-notification--low-contrast.#{$prefix}--inline-notification--warning,
+  .#{$prefix}--inline-notification--low-contrast.#{$prefix}--inline-notification--warning-alt {
+    @include inline-notification-low-contrast-warning;
+  }
+
+  .#{$prefix}--inline-notification--warning
+    .#{$prefix}--inline-notification__icon
+    path[opacity='0'],
+  .#{$prefix}--inline-notification--warning-alt
+    .#{$prefix}--inline-notification__icon
+    path:first-of-type {
+    fill: $black-100;
+    opacity: 1;
+  }
+
+  .#{$prefix}--inline-notification__details {
+    display: flex;
+    flex-grow: 1;
+    margin-inline: convert.to-rem(13px) $spacing-09;
+
+    @include breakpoint(md) {
+      margin: 0 convert.to-rem(13px);
+    }
+  }
+
+  .#{$prefix}--inline-notification__icon {
+    flex-shrink: 0;
+    margin-block-start: convert.to-rem(14px);
+    margin-inline-end: $spacing-05;
+  }
+
+  .#{$prefix}--inline-notification__text-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    padding: convert.to-rem(15px) 0;
+  }
+
+  .#{$prefix}--inline-notification__title {
+    @include type-style('heading-compact-01');
+
+    margin-inline-end: $spacing-02;
+  }
+
+  .#{$prefix}--inline-notification__subtitle {
+    @include type-style('body-compact-01');
+
+    word-break: break-word;
+  }
+
+  .#{$prefix}--inline-notification__action-button.#{$prefix}--btn--ghost {
+    block-size: convert.to-rem(32px);
+    margin-block-end: $spacing-03;
+    margin-inline-start: $spacing-08;
+
+    @include breakpoint(md) {
+      margin: $spacing-03 0;
+    }
+  }
+
+  .#{$prefix}--inline-notification:not(
+      .#{$prefix}--inline-notification--low-contrast
+    )
+    .#{$prefix}--inline-notification__action-button.#{$prefix}--btn--ghost {
+    color: $link-inverse;
+  }
+
+  .#{$prefix}--inline-notification__action-button.#{$prefix}--btn--ghost:active,
+  .#{$prefix}--inline-notification__action-button.#{$prefix}--btn--ghost:hover {
+    background-color: $background-inverse-hover;
+  }
+
+  .#{$prefix}--inline-notification--low-contrast
+    .#{$prefix}--inline-notification__action-button.#{$prefix}--btn--ghost:active,
+  .#{$prefix}--inline-notification--low-contrast
+    .#{$prefix}--inline-notification__action-button.#{$prefix}--btn--ghost:hover {
+    background-color: $notification-action-hover;
+  }
+
+  .#{$prefix}--inline-notification__action-button.#{$prefix}--btn--ghost:focus {
+    border-color: transparent;
+    box-shadow: none;
+    outline: 2px solid $focus-inverse;
+    outline-offset: -2px;
+  }
+
+  .#{$prefix}--inline-notification--low-contrast
+    .#{$prefix}--inline-notification__action-button.#{$prefix}--btn--ghost:focus {
+    outline-color: $focus;
+  }
+
+  .#{$prefix}--inline-notification--hide-close-button
+    .#{$prefix}--inline-notification__action-button.#{$prefix}--btn--ghost {
+    margin-inline-end: $spacing-03;
+  }
+
+  .#{$prefix}--inline-notification__close-button {
+    @include focus-outline('reset');
+
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    border: none;
+    background: transparent;
+    block-size: convert.to-rem(48px);
+    cursor: pointer;
+    inline-size: convert.to-rem(48px);
+    inset-block-start: 0;
+    inset-inline-end: 0;
+    max-inline-size: convert.to-rem(48px);
+    min-inline-size: convert.to-rem(48px);
+    transition:
+      outline $duration-fast-02 motion(standard, productive),
+      background-color $duration-fast-02 motion(standard, productive);
+
+    &:focus {
+      outline: 2px solid $focus-inverse;
+      outline-offset: -2px;
+    }
+
+    .#{$prefix}--inline-notification__close-icon {
+      fill: $icon-inverse;
+    }
+
+    @include breakpoint(md) {
+      position: static;
+    }
+  }
+
+  // Windows HCM fix
+
+  .#{$prefix}--inline-notification {
+    @include high-contrast-mode('outline');
+  }
+
+  .#{$prefix}--inline-notification__close-button:focus,
+  .#{$prefix}--btn.#{$prefix}--btn--ghost.#{$prefix}--inline-notification__action-button:focus {
+    @include high-contrast-mode('focus');
+  }
+}

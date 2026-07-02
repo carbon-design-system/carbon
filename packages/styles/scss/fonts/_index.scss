@@ -1,0 +1,75 @@
+//
+// Copyright IBM Corp. 2018, 2023
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use 'sass:meta';
+@use 'sass:map';
+@use '../config';
+@use './mono';
+@use './sans-arabic';
+@use './sans-devanagari';
+@use './sans-hebrew';
+@use './sans-thai-looped';
+@use './sans-thai';
+@use './sans';
+@use './serif';
+
+$-fonts: (
+  IBM-Plex-Mono: true,
+  IBM-Plex-Sans-Arabic: false,
+  IBM-Plex-Sans-Devanagari: false,
+  IBM-Plex-Sans-Hebrew: false,
+  IBM-Plex-Sans-Thai-Looped: false,
+  IBM-Plex-Sans-Thai: false,
+  IBM-Plex-Sans: true,
+  IBM-Plex-Serif: true,
+);
+$fonts: () !default;
+$fonts: map.merge($-fonts, $fonts);
+
+/// Determine if the given font has been enabled or not
+/// @param String $name
+/// @returns Boolean
+@function enabled($name) {
+  @if map.has-key($fonts, $name) {
+    @return map.get($fonts, $name);
+  }
+  @return false;
+}
+
+@if config.$css--font-face == true {
+  @if enabled(mono.$name) {
+    @include mono.default();
+  }
+
+  @if enabled(sans-arabic.$name) {
+    @include sans-arabic.default();
+  }
+
+  @if enabled(sans-devanagari.$name) {
+    @include sans-devanagari.default();
+  }
+
+  @if enabled(sans-hebrew.$name) {
+    @include sans-hebrew.default();
+  }
+
+  @if enabled(sans-thai-looped.$name) {
+    @include sans-thai-looped.default();
+  }
+
+  @if enabled(sans-thai.$name) {
+    @include sans-thai.default();
+  }
+
+  @if enabled(sans.$name) {
+    @include sans.default();
+  }
+
+  @if enabled(serif.$name) {
+    @include serif.default();
+  }
+}

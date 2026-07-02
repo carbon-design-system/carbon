@@ -1,0 +1,116 @@
+//
+// Copyright IBM Corp. 2019, 2024
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+$css--plex: true !default;
+
+@use '@carbon/styles/scss/config' as *;
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/components/slider';
+@use '@carbon/styles/scss/type' as type;
+@use '@carbon/styles/scss/layout' as *;
+
+:host(#{$prefix}-slider),
+:host(#{$prefix}-slider-skeleton) {
+  outline: none;
+  @include emit-layout-tokens();
+
+  .#{$prefix}--slider {
+    transform: rotate(0) #{'/*rtl:rotate(180deg)*/'};
+  }
+
+  .#{$prefix}-ce--slider__filled-track-container {
+    transform: rotate(0) #{'/*rtl:rotate(180deg)*/'};
+  }
+
+  .#{$prefix}--slider > .#{$prefix}--slider__thumb {
+    z-index: 3;
+    block-size: 0.875rem;
+    inline-size: 0.875rem;
+    inset: inherit;
+
+    transform: translate(-50%, -50%) #{'/*rtl:ignore*/'};
+  }
+
+  #{$prefix}-tooltip.#{$prefix}--slider__thumb-wrapper {
+    --#{prefix}-tooltip-padding-block: 0.125rem;
+    --#{prefix}-popover-caret-width: 0.5rem;
+    --#{prefix}-popover-caret-height: 0.25rem;
+    --#{prefix}-popover-offset: 0.5rem;
+  }
+
+  #{$prefix}-tooltip.#{$prefix}--slider__thumb-wrapper
+    #{$prefix}-tooltip-content::part(content) {
+    @include type.type-style('body-compact-01');
+
+    padding: 0.125rem 0.5rem;
+  }
+
+  #{$prefix}-tooltip.#{$prefix}--slider__thumb-wrapper::part(
+      popover-container
+    ) {
+    display: block;
+    block-size: 100%;
+    inline-size: 100%;
+  }
+
+  .#{$prefix}--slider__thumb-wrapper:focus-within
+    ~ .#{$prefix}-ce--slider__filled-track-container
+    .#{$prefix}--slider__filled-track,
+  #{$prefix}-tooltip.#{$prefix}--slider__thumb-wrapper:focus-within
+    ~ .#{$prefix}-ce--slider__filled-track-container
+    .#{$prefix}--slider__filled-track {
+    // TODO: audit
+    background-color: $interactive;
+  }
+}
+
+:host(#{$prefix}-slider-input) {
+  position: relative;
+
+  input {
+    box-sizing: border-box;
+  }
+}
+
+:host(#{$prefix}-slider-input[readonly]) {
+  input {
+    background-color: transparent;
+  }
+}
+.#{$prefix}--slider__thumb-wrapper:focus-within .#{$prefix}--slider__thumb-icon,
+#{$prefix}-tooltip.#{$prefix}--slider__thumb-wrapper:focus-within
+  .#{$prefix}--slider__thumb-icon {
+  display: none;
+}
+.#{$prefix}--slider__thumb-wrapper:focus-within
+  .#{$prefix}--slider__thumb-icon--focus,
+#{$prefix}-tooltip.#{$prefix}--slider__thumb-wrapper:focus-within
+  .#{$prefix}--slider__thumb-icon--focus {
+  display: block;
+}
+.#{$prefix}--slider__thumb-disabled {
+  pointer-events: none;
+}
+
+:host(#{$prefix}-slider-skeleton) {
+  .#{$prefix}--slider > .#{$prefix}--slider__thumb {
+    inset-inline-start: 50%;
+  }
+  .#{$prefix}--slider__thumb--upper,
+  .#{$prefix}--slider__thumb--lower {
+    block-size: inherit;
+    inline-size: inherit;
+    inset: initial;
+    inset-inline-start: initial;
+    transform: unset;
+  }
+}
+.#{$prefix}--slider--readonly {
+  .#{$prefix}--slider__filled-track {
+    background: $border-inverse;
+  }
+}

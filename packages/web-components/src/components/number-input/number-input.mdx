@@ -1,0 +1,45 @@
+import { ArgTypes, Canvas, Markdown, Meta } from '@storybook/addon-docs/blocks';
+import { cdnJs } from '../../globals/internal/storybook-cdn';
+import * as NumberInputStories from './number-input.stories';
+
+<Meta of={NumberInputStories} />
+
+# Number input
+
+[Source code](https://github.com/carbon-design-system/carbon/tree/main/packages/web-components/src/components/number-input)
+&nbsp;|&nbsp;
+[Usage guidelines](https://www.carbondesignsystem.com/components/number-input/usage)
+&nbsp;|&nbsp;
+[Accessibility](https://www.carbondesignsystem.com/components/number-input/accessibility)
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Skeleton state](#skeleton-state)
+- [AI Label](#ai-label)
+- [Component API](#component-api)
+- [Feedback](#feedback)
+
+## Overview
+
+<Canvas of={NumberInputStories.Default} />
+
+## Skeleton state
+
+<Canvas of={NumberInputStories.Skeleton} />
+
+## AI Label
+
+<Canvas of={NumberInputStories.WithAILabel} />
+
+## Component API
+
+<ArgTypes of="cds-number-input" />
+
+<Markdown>{`${cdnJs({ components: ['number-input'] })}`}</Markdown>
+
+## Feedback
+
+Help us improve this component by providing feedback, asking questions on Slack,
+or updating this file on
+[GitHub](https://github.com/carbon-design-system/carbon/edit/main/packages/web-components/src/components/number-input/number-input.mdx).

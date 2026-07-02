@@ -1,0 +1,30 @@
+{
+  "name": "@carbon/cli-reporter",
+  "description": "Reporter for CLI-based tools in the Carbon Design System",
+  "version": "10.8.0",
+  "license": "Apache-2.0",
+  "type": "module",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/carbon-design-system/carbon.git",
+    "directory": "packages/cli-reporter"
+  },
+  "bugs": "https://github.com/carbon-design-system/carbon/issues",
+  "keywords": [
+    "ibm",
+    "elements",
+    "carbon",
+    "carbon-elements",
+    "carbon-design-system",
+    "components",
+    "react"
+  ],
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  },
+  "dependencies": {
+    "chalk": "^5.4.1"
+  }
+}

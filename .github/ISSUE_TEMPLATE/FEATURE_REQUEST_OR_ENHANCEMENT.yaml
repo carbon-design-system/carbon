@@ -1,0 +1,148 @@
+name: Feature request or enhancement 💡
+description: Suggest an idea for a new or existing component or pattern.
+title: '[Feature Request]: '
+type: 'enhancement'
+labels: ['type: enhancement 💡', 'status: needs triage :female_detective:']
+body:
+  - type: markdown
+    attributes:
+      value: '## Welcome!'
+  - type: markdown
+    attributes:
+      value:
+        Use this template if you want to request a new feature, or a change to
+        an existing feature. If you are reporting a bug or problem, please use
+        the bug template instead.
+  - type: textarea
+    id: problem
+    attributes:
+      label: The problem
+      description:
+        'Provide a clear and concise description of what the problem this new
+        feature is trying to solve. (For example, I find it frustrating
+        when...). Be sure to attach screenshots or videos to illustrate the
+        problem.'
+    validations:
+      required: true
+  - type: textarea
+    id: solution
+    attributes:
+      label: The solution
+      description:
+        'Provide a clear and concise description of what you would like to
+        happen instead. Be sure to attach screenshots or videos to illustrate
+        the solution if possible. Design specs are highly encouraged.'
+    validations:
+      required: true
+  - type: textarea
+    id: user-research
+    attributes:
+      label: Examples
+      description:
+        Provide sample content, references, or audits of solutions solving the
+        same problem in other applications/websites.
+  - type: dropdown
+    id: needs-design-spec
+    attributes:
+      label: Design impact
+      description:
+        Will this enhancement affect the visual design (how it looks) or user
+        interaction (how it behaves)?
+      options:
+        # NOTE: The text in these options is used to automatically label the
+        # issue with it's corresponding label. If these are modified,
+        # .github/labeler.yml must be updated as well.
+        - 'Yes, visual design'
+        - 'Yes, user interaction'
+        - 'Yes, both visual and interaction'
+        - "I'm not sure"
+        - 'No'
+    validations:
+      required: true
+  - type: checkboxes
+    id: needs-documentation-updates
+    attributes:
+      label: Documentation impact
+      description:
+        What documentation will need to be updated for this enhancement?
+      options:
+        # NOTE: The text in these options is used to automatically label the
+        # issue with it's corresponding label. If these are modified,
+        # .github/labeler.yml must be updated as well.
+        - label: The website documentation (carbondesignsystem.com)
+        - label: Figma kit documentation
+        - label: Storybook(s) documentation
+        - label: "I'm not sure"
+  - type: dropdown
+    id: package
+    attributes:
+      label: Package
+      description:
+        Which package(s) does this request apply to? You can select more than
+        one.
+      multiple: true
+      options:
+        - '@carbon/react'
+        - '@carbon/web-components'
+        - '@carbon/styles'
+        - '@carbon/colors'
+        - '@carbon/elements'
+        - '@carbon/grid'
+        - '@carbon/icons'
+        - '@carbon/icons-react'
+        - '@carbon/icons-vue'
+        - '@carbon/layout'
+        - '@carbon/motion'
+        - '@carbon/pictograms'
+        - '@carbon/pictograms-react'
+        - '@carbon/themes'
+        - '@carbon/type'
+        - '@carbon/upgrade'
+        - "I'm not sure"
+    validations:
+      required: true
+  - type: input
+    id: project
+    attributes:
+      label: Project name
+      description: 'What project, team, or product do you work on?'
+    validations:
+      required: true
+  - type: dropdown
+    id: priority
+    attributes:
+      label: Business priority
+      options:
+        - 'High Priority = pressing release'
+        - 'Medium Priority = upcoming release but is not pressing'
+        - 'Low Priority = release date is not dependent on fix or not upcoming'
+  - type: input
+    id: resources
+    attributes:
+      label: Available extra resources
+      description: 'What resources do you have to assist this effort?'
+  - type: markdown
+    attributes:
+      value:
+        '_Carbon is a collaborative system. We encourage teams to build
+        components and submit them for integration as either add-ons or core
+        components. To better understand our feature request process and what
+        happends after you submit this issue, [check out the
+        docs](https://github.com/carbon-design-system/carbon/blob/main/docs/guides/support.md#type-enhancement-)
+        on Github._'
+  - type: checkboxes
+    id: terms
+    attributes:
+      label: Code of Conduct
+      description: Please confirm the following
+      options:
+        - label:
+            I agree to follow this project's [Code of
+            Conduct](https://github.com/carbon-design-system/carbon/blob/f555616971a03fd454c0f4daea184adf41fff05b/.github/CODE_OF_CONDUCT.md)
+          required: true
+  - type: markdown
+    attributes:
+      value: |
+        > [!TIP]
+        >
+        > You do not need to apply labels. Labels are applied automatically and by the Carbon team when your issue is triaged.

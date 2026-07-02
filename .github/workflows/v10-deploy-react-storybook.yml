@@ -1,0 +1,48 @@
+name: v10 - Deploy React storybook to GitHub Pages
+
+on:
+  workflow_dispatch:
+  push:
+    tags:
+      # Matches tags that have the shape `v10.Y.Z`. Reference:
+      # https://help.github.com/en/articles/workflow-syntax-for-github-actions#onpushpull_requesttagsbranches
+      - 'v10.[0-9]+.[0-9]+'
+
+      # Ignore tags that use a preid after `vX.Y.Z`, for example: vX.Y.Z-alpha.0
+      # https://help.github.com/en/articles/workflow-syntax-for-github-actions#example-using-positive-and-negative-patterns
+      - '!v[0-9]+.[0-9]+.[0-9]+-*'
+
+jobs:
+  build-ibmcloud:
+    runs-on: ubuntu-latest-larger-disk
+    steps:
+      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+
+      - name: Use Node.js version from .nvmrc
+        uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6.4.0
+        with:
+          node-version-file: '.nvmrc'
+      - name: Install dependencies
+        run: yarn install --immutable
+      - name: Build project
+        run: yarn build
+      - name: Build static React storybook
+        run: |
+          cd packages/react
+          yarn build-storybook
+      - name: Create CNAME
+        run: |
+          touch packages/react/storybook-static/CNAME
+          echo "v7-react.carbondesignsystem.com" > packages/react/storybook-static/CNAME
+      - name: Push to v7 repo
+        uses: cpina/github-action-push-to-another-repository@55306faa4ed53b815ae49e564af8cfb359d32ae2 #v1.7.3
+        env:
+          API_TOKEN_GITHUB: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+        with:
+          source-directory: 'packages/react/storybook-static'
+          destination-github-username: 'carbon-design-system'
+          destination-repository-name: 'carbon-storybook-v7'
+          user-name: carbon-bot
+          user-email: carbon@us.ibm.com
+          target-branch: main
+          commit-message: 'chore(release):  ${{ github.ref }}'

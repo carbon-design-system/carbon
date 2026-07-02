@@ -1,0 +1,125 @@
+/**
+ * Copyright IBM Corp. 2016, 2026
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+// TODO: This entire file is a duplicate of useNoInteractiveChildren.js. Is
+// there a way to avoid duplicating this file? Could we just `import` the
+// functions from that file instead?
+
+import { useEffect } from 'react';
+
+export function useNoInteractiveChildren(
+  ref,
+  message = 'component should have no interactive child nodes'
+) {
+  useEffect(() => {
+    if (process.env.NODE_ENV === 'production') return;
+
+    const { current } = ref;
+    const node = current ? getInteractiveContent(current) : null;
+
+    if (node) {
+      const errorMessage = `Error: ${message}.\n\nInstead found: ${node.outerHTML}`;
+      // eslint-disable-next-line no-console
+      console.error(errorMessage);
+      throw new Error(errorMessage);
+    }
+  }, [message, ref]);
+}
+
+export function useInteractiveChildrenNeedDescription(
+  ref,
+  message = `interactive child node(s) should have an \`aria-describedby\` property`
+) {
+  useEffect(() => {
+    if (process.env.NODE_ENV === 'production') return;
+
+    const { current } = ref;
+    const node = current ? getInteractiveContent(current) : null;
+
+    if (node && !node.hasAttribute('aria-describedby')) {
+      throw new Error(`Error: ${message}.\n\nInstead found: ${node.outerHTML}`);
+    }
+  }, [message, ref]);
+}
+
+/**
+ * Determines if a given DOM node has interactive content, or is itself
+ * interactive. It returns the interactive node if one is found
+ *
+ * @param {HTMLElement} node
+ * @returns {HTMLElement}
+ */
+export function getInteractiveContent(node) {
+  if (!node || !node.childNodes) {
+    return null;
+  }
+
+  if (isFocusable(node)) {
+    return node;
+  }
+
+  for (const childNode of node.childNodes) {
+    const interactiveNode = getInteractiveContent(childNode);
+    if (interactiveNode) {
+      return interactiveNode;
+    }
+  }
+
+  return null;
+}
+
+/**
+ * Determines if a given DOM node has a role, or has itself a role.
+ * It returns the node with a role if one is found
+ *
+ * @param {HTMLElement} node
+ * @returns {HTMLElement}
+ */
+export function getRoleContent(node) {
+  if (!node || !node.childNodes) {
+    return null;
+  }
+
+  if (node?.getAttribute?.('role') && node.getAttribute('role') !== '') {
+    return node;
+  }
+
+  for (const childNode of node.childNodes) {
+    const roleNode = getRoleContent(childNode);
+    if (roleNode) {
+      return roleNode;
+    }
+  }
+
+  return null;
+}
+
+/**
+ * Determines if the given element is focusable, or not
+ *
+ * @param {HTMLElement} element
+ * @returns {boolean}
+ * @see https://github.com/w3c/aria-practices/blob/0553bb51588ffa517506e2a1b2ca1422ed438c5f/examples/js/utils.js#L68
+ */
+function isFocusable(element) {
+  if (element.tabIndex === undefined || element.tabIndex < 0) {
+    return false;
+  }
+
+  if (element.disabled) {
+    return false;
+  }
+
+  switch (element.nodeName) {
+    case 'A':
+      return !!element.href && element.rel !== 'ignore';
+    case 'INPUT':
+      return element.type !== 'hidden';
+    default:
+      return true;
+  }
+}

@@ -1,0 +1,272 @@
+//
+// Copyright IBM Corp. 2016, 2023
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+@use '../vars' as *;
+@use '../../../config' as *;
+@use '../../../motion' as *;
+@use '../../../spacing' as *;
+@use '../../../theme' as *;
+@use '../../../utilities/button-reset';
+@use '../../../utilities/convert';
+@use '../../../utilities/focus-outline' as *;
+
+/// Data table sort styles
+/// @access public
+/// @group data-table
+@mixin data-table-sort {
+  // -------------------------------------
+  // Sortable table
+  // -------------------------------------
+  .#{$prefix}--data-table--sort th,
+  .#{$prefix}--data-table th[aria-sort] {
+    padding: 0;
+    block-size: $spacing-09;
+    border-block-end: none;
+    border-block-start: none;
+  }
+
+  // hidden sort description
+  .#{$prefix}--table-sort__description {
+    display: none;
+  }
+
+  // -------------------------------------
+  // Th > Button
+  // -------------------------------------
+  .#{$prefix}--table-sort {
+    @include button-reset.reset(false);
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: $layer-accent;
+    color: $text-primary;
+    font: inherit;
+    inline-size: 100%;
+    line-height: 1;
+    min-block-size: 100%;
+    padding-inline-start: $spacing-05;
+    text-align: start;
+    transition:
+      background-color $duration-fast-01 motion(entrance, productive),
+      outline $duration-fast-01 motion(entrance, productive);
+  }
+
+  .#{$prefix}--table-sort:focus {
+    @include focus-outline('outline');
+  }
+
+  .#{$prefix}--table-sort:hover {
+    background: $data-table-column-hover;
+  }
+
+  // changes opacity when th is inactive (see line 161)
+  .#{$prefix}--table-sort:focus svg,
+  .#{$prefix}--table-sort:hover svg {
+    opacity: 1;
+  }
+
+  // Override for when `isSortable` is set on `DataTable` as well as `TableHeader`
+  .#{$prefix}--data-table.#{$prefix}--data-table--sort
+    th
+    > .#{$prefix}--table-header-label {
+    line-height: 1;
+    padding-inline: $spacing-05 $spacing-05;
+  }
+
+  // -------------------------------------
+  // Th > Button > Span (span required for flex bugs in Safari)
+  // -------------------------------------
+  th .#{$prefix}--table-sort__flex {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    block-size: 100%;
+    inline-size: 100%;
+    min-block-size: 3rem;
+  }
+
+  .#{$prefix}--data-table--top-aligned-header th .#{$prefix}--table-sort__flex {
+    align-items: start;
+  }
+
+  .#{$prefix}--data-table.#{$prefix}--data-table--top-aligned-header.#{$prefix}--data-table--lg
+    th.#{$prefix}--table-sort__header {
+    padding-block-start: $spacing-05;
+  }
+
+  .#{$prefix}--data-table.#{$prefix}--data-table--top-aligned-header.#{$prefix}--data-table--sm
+    th.#{$prefix}--table-sort__header
+    .#{$prefix}--table-sort__flex
+    .#{$prefix}--table-header-label,
+  .#{$prefix}--data-table.#{$prefix}--data-table--top-aligned-header.#{$prefix}--data-table--xs
+    th.#{$prefix}--table-sort__header
+    .#{$prefix}--table-sort__flex
+    .#{$prefix}--table-header-label {
+    padding-block: 0;
+  }
+
+  .#{$prefix}--data-table.#{$prefix}--data-table--top-aligned-header.#{$prefix}--data-table--sm
+    th.#{$prefix}--table-sort__header {
+    padding-block: convert.to-rem(7px) convert.to-rem(7px);
+  }
+
+  .#{$prefix}--data-table.#{$prefix}--data-table--top-aligned-header.#{$prefix}--data-table--xs
+    th.#{$prefix}--table-sort__header {
+    padding-block: convert.to-rem(2px) convert.to-rem(2px);
+  }
+
+  .#{$prefix}--data-table--sort:not(.#{$prefix}--data-table--xs):not(
+      .#{$prefix}--data-table--sm
+    ):not(.#{$prefix}--data-table--md):not(.#{$prefix}--data-table--xl)
+    th
+    .#{$prefix}--table-sort__flex {
+    /* IE11 workaround for align-items: center and min-height
+        https://github.com/philipwalton/flexbugs/issues/231 */
+    @media screen and (-ms-high-contrast: active),
+      screen and (-ms-high-contrast: none) {
+      block-size: 2.99rem;
+    }
+  }
+
+  .#{$prefix}--data-table--xs.#{$prefix}--data-table--sort
+    th
+    .#{$prefix}--table-sort__flex {
+    min-block-size: 1.5rem;
+  }
+
+  .#{$prefix}--data-table--sm.#{$prefix}--data-table--sort
+    th
+    .#{$prefix}--table-sort__flex {
+    min-block-size: 2rem;
+  }
+
+  .#{$prefix}--data-table--md.#{$prefix}--data-table--sort
+    th
+    .#{$prefix}--table-sort__flex {
+    min-block-size: 2.5rem;
+  }
+
+  .#{$prefix}--data-table--xl.#{$prefix}--data-table--sort
+    th
+    .#{$prefix}--table-sort__flex {
+    align-items: flex-start;
+    min-block-size: 4rem;
+  }
+
+  // -------------------------------------
+  //Th > Button > Svg (Sort Icons)
+  // -------------------------------------
+  // inactive icons
+  .#{$prefix}--table-sort .#{$prefix}--table-sort__icon-inactive {
+    display: block;
+  }
+
+  .#{$prefix}--table-sort .#{$prefix}--table-sort__icon {
+    display: none;
+  }
+
+  .#{$prefix}--table-sort__icon-unsorted {
+    fill: $icon-primary;
+    inline-size: convert.to-rem(20px);
+    margin-inline: $spacing-03 $spacing-03;
+    min-inline-size: $spacing-05;
+    opacity: 0;
+  }
+
+  .#{$prefix}--table-sort.#{$prefix}--table-sort--active {
+    background: $data-table-column-hover;
+  }
+
+  // active icons
+  .#{$prefix}--table-sort.#{$prefix}--table-sort--active
+    .#{$prefix}--table-sort__icon-unsorted {
+    display: none;
+  }
+
+  .#{$prefix}--table-sort.#{$prefix}--table-sort--active
+    .#{$prefix}--table-sort__icon {
+    display: block;
+    opacity: 1;
+  }
+
+  .#{$prefix}--table-sort--descending .#{$prefix}--table-sort__icon {
+    transform: rotate(180deg);
+  }
+
+  .#{$prefix}--table-sort__icon {
+    fill: $icon-primary;
+    inline-size: convert.to-rem(20px);
+    margin-inline: $spacing-03 $spacing-03;
+    min-inline-size: $spacing-05;
+    opacity: 1;
+    transform: rotate(0);
+    transition: transform $transition-base $standard-easing;
+  }
+
+  //----------------------------------------------------------------------------
+  // Extra small, Short, Tall Sortable
+  //----------------------------------------------------------------------------
+  // Sortable Extra small
+  .#{$prefix}--data-table--xs.#{$prefix}--data-table--sort th {
+    block-size: convert.to-rem(24px);
+  }
+
+  // Sortable Short
+  .#{$prefix}--data-table--sm.#{$prefix}--data-table--sort th {
+    block-size: convert.to-rem(32px);
+  }
+
+  // Sortable Medium
+  .#{$prefix}--data-table--md.#{$prefix}--data-table--sort th {
+    block-size: convert.to-rem(40px);
+  }
+
+  // Sortable Tall
+  .#{$prefix}--data-table--xl.#{$prefix}--data-table--sort th {
+    block-size: convert.to-rem(64px);
+  }
+
+  .#{$prefix}--data-table--xl.#{$prefix}--data-table--sort
+    th
+    .#{$prefix}--table-sort {
+    display: inline-block;
+    block-size: convert.to-rem(64px);
+  }
+
+  .#{$prefix}--data-table--xl .#{$prefix}--table-sort__icon-unsorted,
+  .#{$prefix}--data-table--xl .#{$prefix}--table-sort__icon {
+    margin-block-start: convert.to-rem(13px);
+  }
+
+  // AILabel styles
+  .#{$prefix}--table-sort__header .#{$prefix}--ai-label,
+  .#{$prefix}--table-sort__header .#{$prefix}--slug,
+  .#{$prefix}--table-sort__header
+    .#{$prefix}--table-header-label--decorator-inner {
+    display: none;
+  }
+
+  .#{$prefix}--table-sort__header--slug .#{$prefix}--table-sort__icon,
+  .#{$prefix}--table-sort__header--slug .#{$prefix}--table-sort__icon-unsorted,
+  .#{$prefix}--table-sort__header--ai-label .#{$prefix}--table-sort__icon,
+  .#{$prefix}--table-sort__header--ai-label
+    .#{$prefix}--table-sort__icon-unsorted,
+  .#{$prefix}--table-sort__header--decorator .#{$prefix}--table-sort__icon,
+  .#{$prefix}--table-sort__header--decorator
+    .#{$prefix}--table-sort__icon-unsorted {
+    margin-inline: auto convert.to-rem(8px);
+  }
+  .#{$prefix}--table-sort__header--ai-label .#{$prefix}--ai-label,
+  .#{$prefix}--table-sort__header--ai-label .#{$prefix}--slug,
+  .#{$prefix}--table-sort__header--decorator
+    .#{$prefix}--table-header-label--decorator-inner,
+  .#{$prefix}--table-sort__header--ai-label
+    .#{$prefix}--table-header-label--decorator-inner {
+    display: block;
+    margin-inline-end: convert.to-rem(8px);
+  }
+}

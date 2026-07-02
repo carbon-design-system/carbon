@@ -1,0 +1,67 @@
+//
+// Copyright IBM Corp. 2021
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use '../config' as *;
+@use '../theme' as *;
+
+/// Update tokens when fields are placed on `layer`
+/// @access public
+/// @group utilities
+@mixin update_fields_on_layer {
+  // Fluid inputs
+  .#{$prefix}--text-input--fluid .#{$prefix}--text-input,
+  .#{$prefix}--text-area--fluid .#{$prefix}--text-area__wrapper,
+  .#{$prefix}--text-area--fluid .#{$prefix}--text-area,
+  .#{$prefix}--search--fluid .#{$prefix}--search-input,
+  .#{$prefix}--select--fluid .#{$prefix}--select-input,
+  .#{$prefix}--text-area--fluid
+    .#{$prefix}--text-area__wrapper[data-invalid]
+    .#{$prefix}--text-area__divider
+    + .#{$prefix}--form-requirement,
+  .#{$prefix}--list-box__wrapper--fluid .#{$prefix}--list-box,
+  .#{$prefix}--list-box__wrapper--fluid.#{$prefix}--list-box__wrapper,
+  .#{$prefix}--number-input--fluid input[type='number'],
+  .#{$prefix}--number-input--fluid input[type='text'],
+  .#{$prefix}--number-input--fluid .#{$prefix}--number__control-btn::before,
+  .#{$prefix}--number-input--fluid .#{$prefix}--number__control-btn::after,
+  .#{$prefix}--date-picker--fluid
+    .c#{$prefix}ds--date-picker-input__wrapper
+    .#{$prefix}--date-picker__input {
+    background-color: $field-01;
+  }
+
+  // Override to align layer token with field
+  .#{$prefix}--list-box__wrapper--fluid .#{$prefix}--list-box__menu {
+    background-color: $layer-01;
+  }
+
+  .#{$prefix}--list-box__menu-item:hover {
+    background-color: $layer-hover-02;
+  }
+
+  .#{$prefix}--list-box__menu-item--active {
+    background-color: $layer-selected-02;
+  }
+
+  .#{$prefix}--list-box__menu-item--active:hover {
+    background-color: $layer-selected-hover-02;
+  }
+
+  .#{$prefix}--number-input--fluid
+    .#{$prefix}--number__control-btn:hover::before,
+  .#{$prefix}--number-input--fluid
+    .#{$prefix}--number__control-btn:hover::after {
+    background-color: $field-hover;
+  }
+
+  .#{$prefix}--number-input--fluid
+    .#{$prefix}--number__control-btn:focus::before,
+  .#{$prefix}--number-input--fluid
+    .#{$prefix}--number__control-btn:focus::after {
+    border-inline-start: 2px solid $focus;
+  }
+}

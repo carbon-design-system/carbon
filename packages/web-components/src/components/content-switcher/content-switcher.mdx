@@ -1,0 +1,135 @@
+import {
+  ArgTypes,
+  Canvas,
+  Markdown,
+  Meta,
+  Unstyled,
+} from '@storybook/addon-docs/blocks';
+import { cdnJs } from '../../globals/internal/storybook-cdn';
+import * as ContentSwitcherStories from './content-switcher.stories';
+
+<Meta of={ContentSwitcherStories} />
+
+# Content switcher
+
+[Source code](https://github.com/carbon-design-system/carbon/tree/main/packages/web-components/src/components/content-switcher)
+&nbsp;|&nbsp;
+[Usage guidelines](https://www.carbondesignsystem.com/components/content-switcher/usage)
+&nbsp;|&nbsp;
+[Accessibility](https://www.carbondesignsystem.com/components/content-switcher/accessibility)
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Icon Only](#icon-only)
+- [Icon Only With Layer](#icon-only-with-layer)
+- [With Layer](#with-layer)
+- [Component API](#component-api)
+- [CDN](#cdn)
+- [Accessibility concerns](#accessibility-concerns)
+- [References](#references)
+- [Feedback](#feedback)
+
+## Overview
+
+Content switchers allow users to toggle between two or more content sections
+within the same space on screen. Only one content section is shown at a time.
+Create Switch components for each section in the content switcher.
+
+<Canvas of={ContentSwitcherStories.Default} />
+
+## Icon Only
+
+<Canvas of={ContentSwitcherStories.IconOnly} />
+
+## Icon Only With Layer
+
+<Canvas of={ContentSwitcherStories.IconOnlyWithLayer} />
+
+## With Layer
+
+<Canvas of={ContentSwitcherStories.WithLayer} />
+
+## Component API
+
+<ArgTypes of="cds-content-switcher" />
+
+<ArgTypes of="cds-content-switcher-item" />
+
+### ContentSwitcher `onChange`
+
+You can use the `cds-content-switcher-selected` or
+`cds-content-switcher-beingselected` custom events to call a custom function for
+event handling.
+
+```javascript
+document.addEventListener('cds-content-switcher-selected', (event) => {
+  const { currentTarget } = event;
+  const { detail } = event as CustomEvent;
+  const { evt } = detail;
+  console.log('details:', currentTarget, evt);
+});
+```
+
+### Switch `disabled`
+
+You can disable the content switcher items by adding the `disabled` attribute to
+`cds-content-switcher-item` elements directly.
+
+<Unstyled
+  style={{
+    padding: '1rem',
+    background: 'var(--cds-background)',
+  }}>
+  <cds-content-switcher>
+    <cds-content-switcher-item disabled value="all" name="one">
+      First section
+    </cds-content-switcher-item>
+    <cds-content-switcher-item disabled value="cloudFoundry " name="two">
+      Second section
+    </cds-content-switcher-item>
+    <cds-content-switcher-item disabled value="staging" name="three">
+      Third section
+    </cds-content-switcher-item>
+  </cds-content-switcher>
+</Unstyled>
+
+```html
+<cds-content-switcher>
+  <cds-content-switcher-item disabled value="all" name="one">
+    First section
+  </cds-content-switcher-item>
+  <cds-content-switcher-item disabled value="cloudFoundry" name="two">
+    Second section
+  </cds-content-switcher-item>
+  <cds-content-switcher-item disabled value="staging" name="three">
+    Third section
+  </cds-content-switcher-item>
+</cds-content-switcher>
+```
+
+<Markdown>{`${cdnJs({ components: ['content-switcher'] })}`}</Markdown>
+
+## References
+
+### Accessibility concerns
+
+Each content switcher tab must have a unique title that clearly describes the
+content panel. This is particularly helpful for users of assistive technologies
+so they have the necessary information to efficiently navigate the content.
+
+Content authors need to ensure the content that is added to the tab panel is
+accessible. For example, if you add an image to the panel you need to include
+alternative text to pass accessibility testing.
+
+[W3C WAI-ARIA Tab Design Pattern](https://www.w3.org/TR/wai-aria-practices-1.1/#tabpanel)
+covers the usage of ARIA names, state and roles, as well as the expected
+keyboard interactions.
+
+[Carbon Usage Guidelines](https://www.carbondesignsystem.com/components/content-switcher/usage/)
+
+## Feedback
+
+Help us improve this component by providing feedback, asking questions, and
+leaving any other comments on
+[GitHub](https://github.com/carbon-design-system/carbon/edit/main/packages/web-components/src/components/content-switcher/content-switcher.mdx).

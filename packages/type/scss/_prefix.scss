@@ -1,0 +1,28 @@
+//
+// Copyright IBM Corp. 2018, 2023
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use 'sass:map';
+
+/// @type String
+/// @access public
+/// @group @carbon/type
+$prefix: 'cds' !default;
+
+/// @type String
+/// @access public
+/// @group @carbon/type
+$custom-property-prefix: 'cds' !default;
+
+@mixin configure($values) {
+  @if map.has-key($values, 'prefix') {
+    $prefix: map.get($values, 'prefix') !global;
+  }
+
+  @if map.has-key($values, 'custom-property-prefix') {
+    $custom-property-prefix: map.get($values, 'custom-property-prefix') !global;
+  }
+}

@@ -1,0 +1,512 @@
+//
+// Copyright IBM Corp. 2016, 2026
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+//-----------------------------
+// Text
+//-----------------------------
+@use '../form';
+@use '../../config' as *;
+@use '../../colors' as *;
+@use '../../theme' as *;
+@use '../../type' as *;
+@use '../../spacing' as *;
+@use '../../motion' as *;
+@use '../../utilities/ai-gradient' as *;
+@use '../../utilities/component-reset';
+@use '../../utilities/placeholder-colors' as *;
+@use '../../utilities/tooltip' as *;
+@use '../../utilities/skeleton' as *;
+@use '../../utilities/convert';
+@use '../../utilities/layout';
+@use '../../utilities/focus-outline' as *;
+@use '../../utilities/button-reset';
+@use '../../utilities/visually-hidden' as *;
+
+/// Text input styles
+/// @access public
+/// @group text-input
+@mixin text-input {
+  .#{$prefix}--text-input {
+    @include layout.use('size', $default: 'md', $min: 'xs', $max: 'lg');
+    @include layout.use('density', $default: 'normal');
+    @include component-reset.reset;
+    @include type-style('body-compact-01');
+    @include focus-outline('reset');
+
+    padding: 0 layout.density('padding-inline');
+    border: none;
+    background-color: $field;
+    block-size: layout.size('height');
+    border-block-end: 1px solid $border-strong;
+    color: $text-primary;
+    font-family: inherit;
+
+    inline-size: 100%;
+    transition:
+      background-color $duration-fast-01 motion(standard, productive),
+      outline $duration-fast-01 motion(standard, productive);
+
+    &:focus,
+    &:active {
+      @include focus-outline('outline');
+    }
+
+    &-wrapper svg[hidden] {
+      display: none;
+    }
+  }
+
+  .#{$prefix}--password-input {
+    padding-inline-end: layout.size('height');
+  }
+
+  .#{$prefix}--text-input::placeholder {
+    @include placeholder-colors;
+  }
+
+  // V11: Possibly deprecate
+  .#{$prefix}--text-input--light {
+    background-color: $field-02;
+  }
+
+  //-----------------------------
+  // Disabled & Error icon spacing
+  //-----------------------------
+  .#{$prefix}--text-input__field-wrapper {
+    position: relative;
+    display: flex;
+    inline-size: 100%;
+  }
+
+  .#{$prefix}--text-input__invalid-icon {
+    position: absolute;
+    fill: $support-error;
+    // top/transform used to center invalid icon in IE11
+    inset-block-start: 50%;
+    inset-inline-end: $spacing-05;
+    transform: translateY(-50%);
+  }
+
+  .#{$prefix}--text-input__invalid-icon--warning {
+    fill: $support-warning;
+  }
+
+  .#{$prefix}--text-input__invalid-icon--warning path:first-of-type {
+    fill: $black-100;
+    opacity: 1;
+  }
+
+  // TODO: deprecate this style block
+  .#{$prefix}--text-input--password__visibility {
+    @include tooltip--trigger('icon', 'bottom');
+    @include tooltip--placement('icon', 'bottom', 'center');
+  }
+
+  .#{$prefix}--btn.#{$prefix}--text-input--password__visibility__toggle.#{$prefix}--tooltip__trigger {
+    @include focus-outline('reset');
+
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    border: 0;
+    aspect-ratio: 1;
+    background: none;
+    block-size: 100%;
+    cursor: pointer;
+    inset-inline-end: 0;
+    min-block-size: auto;
+    transition: outline $duration-fast-01 motion(standard, productive);
+  }
+
+  .#{$prefix}--toggle-password-tooltip .#{$prefix}--popover {
+    @include layout.use('size', $default: 'md', $min: 'xs', $max: 'lg');
+
+    gap: $spacing-02;
+    inset-inline-start: calc(-1 * (layout.size('height')));
+  }
+
+  .#{$prefix}--toggle-password-tooltip .#{$prefix}--popover-content {
+    min-inline-size: $spacing-08;
+  }
+
+  .#{$prefix}--btn.#{$prefix}--text-input--password__visibility__toggle.#{$prefix}--tooltip__trigger
+    svg {
+    fill: $icon-primary;
+  }
+
+  .#{$prefix}--btn.#{$prefix}--text-input--password__visibility__toggle.#{$prefix}--tooltip__trigger:focus {
+    @include focus-outline('outline');
+  }
+
+  .#{$prefix}--text-input--invalid,
+  .#{$prefix}--text-input--warning {
+    padding-inline-end: $spacing-08;
+  }
+
+  .#{$prefix}--text-input--invalid.#{$prefix}--password-input,
+  .#{$prefix}--text-input--warning.#{$prefix}--password-input {
+    padding-inline-end: calc(layout.size('height') + 1.5rem);
+  }
+
+  .#{$prefix}--password-input-wrapper .#{$prefix}--text-input__invalid-icon {
+    @include layout.use('size', $default: 'md', $min: 'xs', $max: 'lg');
+
+    inset-inline-end: layout.size('height');
+  }
+
+  .#{$prefix}--text-input:disabled
+    ~ .#{$prefix}--text-input--password__visibility__toggle.#{$prefix}--tooltip__trigger {
+    cursor: not-allowed;
+  }
+
+  .#{$prefix}--text-input:disabled
+    ~ .#{$prefix}--text-input--password__visibility__toggle.#{$prefix}--tooltip__trigger
+    svg {
+    fill: $icon-disabled;
+
+    &:hover {
+      fill: $icon-disabled;
+    }
+  }
+
+  .#{$prefix}--text-input--password__visibility__toggle:disabled.#{$prefix}--tooltip__trigger {
+    svg {
+      fill: $icon-disabled;
+    }
+
+    cursor: default;
+  }
+
+  .#{$prefix}--text-input--password__visibility__toggle:disabled.#{$prefix}--tooltip__trigger:hover {
+    svg {
+      fill: $icon-disabled;
+    }
+
+    cursor: default;
+  }
+
+  .#{$prefix}--text-input__counter-alert {
+    position: absolute;
+    overflow: hidden;
+    padding: 0;
+    border: 0;
+    margin: -1px;
+    block-size: 1px;
+    clip: rect(0, 0, 0, 0);
+    inline-size: 1px;
+  }
+
+  //-----------------------------
+  // Disabled
+  //-----------------------------
+  .#{$prefix}--text-input:disabled {
+    @include focus-outline('reset');
+
+    background-color: $field;
+
+    border-block-end: 1px solid transparent;
+    color: $text-disabled;
+    cursor: not-allowed;
+    // Needed to fix disabled text in Safari #6673
+    -webkit-text-fill-color: $text-disabled;
+  }
+
+  // V11: Possibly deprecate
+  .#{$prefix}--text-input--light:disabled {
+    background-color: $field-02;
+  }
+
+  .#{$prefix}--text-input:disabled::placeholder {
+    color: $text-disabled;
+    opacity: 1;
+  }
+
+  //-----------------------------
+  // Error
+  //-----------------------------
+  .#{$prefix}--text-input--invalid {
+    @include focus-outline('invalid');
+
+    box-shadow: none;
+  }
+
+  //-----------------------------
+  // Skeleton
+  //-----------------------------
+  .#{$prefix}--skeleton.#{$prefix}--text-input {
+    @include skeleton;
+  }
+
+  // Deprecated -- Styles have been moved to `fluid-text-input.scss`
+  // V12 - Remove this block
+  //-----------------------------
+  // Fluid Text Input
+  //-----------------------------
+  .#{$prefix}--form--fluid .#{$prefix}--text-input-wrapper {
+    position: relative;
+    background: $field;
+    transition:
+      background-color $duration-fast-01 motion(standard, productive),
+      outline $duration-fast-01 motion(standard, productive);
+  }
+
+  .#{$prefix}--form--fluid .#{$prefix}--label {
+    position: absolute;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    margin: 0;
+    block-size: convert.to-rem(16px);
+    inset-block-start: convert.to-rem(13px);
+    inset-inline-start: $spacing-05;
+  }
+
+  .#{$prefix}--form--fluid .#{$prefix}--form__helper-text {
+    display: none;
+  }
+
+  .#{$prefix}--form--fluid .#{$prefix}--text-input {
+    padding: convert.to-rem(32px) $spacing-05 convert.to-rem(13px);
+    min-block-size: convert.to-rem(64px);
+  }
+
+  .#{$prefix}--text-input__divider,
+  .#{$prefix}--form--fluid .#{$prefix}--text-input__divider {
+    display: none;
+  }
+
+  .#{$prefix}--form--fluid .#{$prefix}--text-input--invalid,
+  .#{$prefix}--form--fluid .#{$prefix}--text-input--warning {
+    border-block-end: none;
+  }
+
+  .#{$prefix}--form--fluid
+    .#{$prefix}--text-input--invalid
+    + .#{$prefix}--text-input__divider,
+  .#{$prefix}--form--fluid
+    .#{$prefix}--text-input--warning
+    + .#{$prefix}--text-input__divider {
+    display: block;
+    border-style: solid;
+    border-color: $border-subtle;
+    margin: 0 1rem;
+    border-block-end: none;
+  }
+
+  .#{$prefix}--form--fluid .#{$prefix}--text-input__invalid-icon {
+    inset-block-start: convert.to-rem(80px);
+  }
+
+  .#{$prefix}--form--fluid
+    .#{$prefix}--text-input__field-wrapper[data-invalid]
+    > .#{$prefix}--text-input--invalid,
+  .#{$prefix}--form--fluid
+    .#{$prefix}--text-input__field-wrapper--warning
+    > .#{$prefix}--text-input--warning {
+    outline: none;
+  }
+
+  .#{$prefix}--form--fluid .#{$prefix}--text-input__field-wrapper--warning {
+    border-block-end: 1px solid $border-strong;
+  }
+
+  .#{$prefix}--form--fluid
+    .#{$prefix}--text-input__field-wrapper[data-invalid]:not(:focus) {
+    @include focus-outline('invalid');
+  }
+
+  .#{$prefix}--form--fluid
+    .#{$prefix}--text-input__field-wrapper[data-invalid]:focus-within,
+  .#{$prefix}--form--fluid
+    .#{$prefix}--text-input__field-wrapper--warning:focus-within {
+    @include focus-outline('outline');
+  }
+
+  .#{$prefix}--form--fluid
+    .#{$prefix}--text-input__field-wrapper[data-invalid]
+    > .#{$prefix}--text-input--invalid:focus,
+  .#{$prefix}--form--fluid
+    .#{$prefix}--text-input__field-wrapper--warning
+    > .#{$prefix}--text-input--warning:focus {
+    outline: none;
+  }
+
+  //-----------------------------
+  // Inline Text Input
+  //-----------------------------
+
+  .#{$prefix}--text-input-wrapper.#{$prefix}--text-input-wrapper--inline {
+    flex-flow: row nowrap;
+    align-items: center;
+  }
+
+  .#{$prefix}--text-input-wrapper .#{$prefix}--label--inline {
+    flex: 0 1 auto;
+    margin: 0;
+    overflow-wrap: break-word;
+    word-break: break-word;
+  }
+
+  .#{$prefix}--text-input__label-helper-wrapper {
+    flex: 0 1 auto;
+    flex-direction: column;
+    max-inline-size: convert.to-rem(142px);
+    overflow-wrap: break-word;
+
+    &:first-of-type {
+      margin-inline-end: $spacing-03;
+    }
+
+    &:last-of-type {
+      margin-inline-start: $spacing-03;
+    }
+  }
+
+  .#{$prefix}--text-input-wrapper .#{$prefix}--form__helper-text--inline {
+    margin-block-start: convert.to-rem(2px);
+  }
+
+  .#{$prefix}--text-input-wrapper--inline {
+    .#{$prefix}--form__helper-text--inline,
+    .#{$prefix}--form-requirement {
+      margin: 0;
+    }
+  }
+
+  .#{$prefix}--text-input__field-outer-wrapper {
+    display: flex;
+    flex: 1 1 auto;
+    flex-direction: column;
+    align-items: flex-start;
+    inline-size: 100%;
+  }
+
+  .#{$prefix}--text-input__field-outer-wrapper--inline {
+    flex: 8;
+    flex-direction: column;
+  }
+
+  .#{$prefix}--text-input-wrapper--inline .#{$prefix}--form-requirement {
+    display: block;
+    overflow: visible;
+    font-weight: 400;
+    max-block-size: convert.to-rem(200px);
+  }
+
+  .#{$prefix}--text-input-wrapper--inline--invalid
+    .#{$prefix}--form-requirement {
+    color: $text-error;
+  }
+
+  //-----------------------------
+  // Readonly
+  //-----------------------------
+
+  .#{$prefix}--form--fluid .#{$prefix}--text-input-wrapper--readonly,
+  .#{$prefix}--text-input-wrapper--readonly .#{$prefix}--text-input {
+    background: transparent;
+    border-block-end-color: $border-subtle;
+  }
+
+  // Styles for AILabel rendered inside TextInput
+  .#{$prefix}--text-input__field-wrapper--decorator
+    .#{$prefix}--text-input__field-inner-wrapper--decorator
+    > *,
+  .#{$prefix}--text-input__field-wrapper .#{$prefix}--ai-label,
+  .#{$prefix}--text-input__field-wrapper .#{$prefix}--slug {
+    position: absolute;
+    inset-block-start: 50%;
+    inset-inline-end: $spacing-05;
+    transform: translateY(-50%);
+  }
+
+  .#{$prefix}--text-input__field-wrapper--decorator
+    .#{$prefix}--text-input:has(
+      ~ .#{$prefix}--text-input__field-inner-wrapper--decorator
+        .#{$prefix}--ai-label
+    ):not(
+      :has(
+          ~ .#{$prefix}--text-input__field-inner-wrapper--decorator
+            .#{$prefix}--ai-label--revert
+        )
+    ),
+  .#{$prefix}--text-input__field-wrapper--slug
+    .#{$prefix}--text-input:has(~ .#{$prefix}--ai-label):not(
+      :has(~ .#{$prefix}--ai-label--revert)
+    ),
+  .#{$prefix}--text-input__field-wrapper--slug
+    .#{$prefix}--text-input:has(~ .#{$prefix}--slug):not(
+      :has(~ .#{$prefix}--slug--revert)
+    ) {
+    @include ai-gradient;
+  }
+  .#{$prefix}--text-input__field-wrapper--decorator
+    .#{$prefix}--text-input:not(.#{$prefix}--text-input--invalid):not(
+      .#{$prefix}--text-input--warning
+    ):has(~ .#{$prefix}--text-input__field-inner-wrapper--decorator > *),
+  .#{$prefix}--text-input__field-wrapper--slug
+    .#{$prefix}--text-input:not(.#{$prefix}--text-input--invalid):not(
+      .#{$prefix}--text-input--warning
+    ):has(~ .#{$prefix}--ai-label),
+  .#{$prefix}--text-input__field-wrapper--slug
+    .#{$prefix}--text-input:not(.#{$prefix}--text-input--invalid):not(
+      .#{$prefix}--text-input--warning
+    ):has(~ .#{$prefix}--slug) {
+    padding-inline-end: $spacing-08;
+  }
+
+  .#{$prefix}--text-input--invalid:has(
+      ~ .#{$prefix}--text-input__field-inner-wrapper--decorator > *
+    ),
+  .#{$prefix}--text-input--warning:has(
+      ~ .#{$prefix}--text-input__field-inner-wrapper--decorator > *
+    ),
+  .#{$prefix}--text-input--invalid:has(~ .#{$prefix}--ai-label),
+  .#{$prefix}--text-input--warning:has(~ .#{$prefix}--ai-label),
+  .#{$prefix}--text-input--invalid:has(~ .#{$prefix}--slug),
+  .#{$prefix}--text-input--warning:has(~ .#{$prefix}--slug) {
+    padding-inline-end: $spacing-10;
+  }
+
+  .#{$prefix}--text-input__field-wrapper--decorator,
+  .#{$prefix}--text-input__field-wrapper--slug {
+    .#{$prefix}--text-input--invalid ~ .#{$prefix}--text-input__invalid-icon,
+    .#{$prefix}--text-input--warning ~ .#{$prefix}--text-input__invalid-icon {
+      inset-inline-end: $spacing-08;
+    }
+
+    .#{$prefix}--text-input--invalid
+      ~ .#{$prefix}--text-input__field-inner-wrapper--decorator
+      > *,
+    .#{$prefix}--text-input--warning
+      ~ .#{$prefix}--text-input__field-inner-wrapper--decorator
+      > *,
+    .#{$prefix}--text-input--invalid ~ .#{$prefix}--ai-label,
+    .#{$prefix}--text-input--warning ~ .#{$prefix}--ai-label,
+    .#{$prefix}--text-input--invalid ~ .#{$prefix}--slug,
+    .#{$prefix}--text-input--warning ~ .#{$prefix}--slug {
+      inset-inline-end: $spacing-05;
+    }
+  }
+
+  // Decorator
+  .#{$prefix}--text-input__field-wrapper--decorator
+    .#{$prefix}--text-input__field-inner-wrapper--decorator:not(
+      :has(.#{$prefix}--ai-label)
+    )
+    > * {
+    block-size: 1rem;
+  }
+
+  .#{$prefix}--text-input__label-wrapper {
+    display: flex;
+    justify-content: space-between;
+    inline-size: 100%;
+  }
+}

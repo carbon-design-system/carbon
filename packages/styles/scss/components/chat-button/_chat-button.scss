@@ -1,0 +1,87 @@
+//
+// Copyright IBM Corp. 2016, 2024
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use '../button';
+@use '../../config' as *;
+@use '../../theme' as *;
+@use '../../type' as *;
+@use '../../utilities/convert';
+
+@mixin chat-button {
+  .#{$prefix}--chat-btn {
+    border-radius: convert.to-rem(24px);
+  }
+
+  .#{$prefix}--chat-btn:not(.#{$prefix}--chat-btn--with-icon) {
+    padding-inline-end: convert.to-rem(15px);
+  }
+
+  .#{$prefix}--chat-btn.#{$prefix}--btn--md {
+    border-radius: convert.to-rem(20px);
+  }
+
+  .#{$prefix}--chat-btn.#{$prefix}--btn--sm {
+    border-radius: convert.to-rem(16px);
+  }
+
+  // Quick action button
+  .#{$prefix}--chat-btn--quick-action {
+    align-items: center;
+    border: 1px solid $chat-button;
+    background: transparent;
+    color: $chat-button;
+  }
+
+  .#{$prefix}--chat-btn--quick-action:hover:not(:active):not([disabled]) {
+    border-color: transparent;
+    background: $chat-button-hover;
+    color: $chat-button-text-hover;
+  }
+
+  .#{$prefix}--chat-btn--quick-action:active {
+    border-color: transparent;
+    background: $chat-button-active;
+    color: $chat-button-text-hover;
+  }
+
+  .#{$prefix}--chat-btn--quick-action.#{$prefix}--btn--ghost:focus {
+    border-color: $focus;
+    box-shadow: inset 0 0 0 1px $focus;
+  }
+
+  .#{$prefix}--chat-btn--quick-action.#{$prefix}--btn--ghost:hover:focus {
+    border-color: $focus;
+    box-shadow: inset 0 0 0 1px $focus-inset;
+  }
+
+  .#{$prefix}--chat-btn--quick-action[disabled],
+  .#{$prefix}--chat-btn--quick-action[disabled]:hover {
+    border-color: button.$button-disabled;
+    color: button.$button-disabled;
+  }
+
+  .#{$prefix}--chat-btn--quick-action--selected,
+  .#{$prefix}--chat-btn--quick-action--selected[disabled],
+  .#{$prefix}--chat-btn--quick-action--selected[disabled]:hover {
+    border-color: transparent;
+    background: $chat-button-selected;
+    color: $chat-button-text-selected;
+  }
+
+  .#{$prefix}--chat-btn--quick-action.#{$prefix}--chat-btn--quick-action--selected:not(
+      [disabled]
+    ):hover,
+  .#{$prefix}--chat-btn--quick-action.#{$prefix}--chat-btn--quick-action--selected:not(
+      [disabled]
+    ):active {
+    color: $chat-button-text-selected;
+  }
+
+  .#{$prefix}--chat-btn.#{$prefix}--skeleton {
+    overflow: hidden;
+  }
+}

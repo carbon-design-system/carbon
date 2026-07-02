@@ -1,0 +1,40 @@
+//
+// Copyright IBM Corp. 2021, 2025
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use '@carbon/styles/scss/type';
+@use '@carbon/styles/scss/colors';
+
+.welcome__container {
+  position: fixed;
+  padding: 3rem;
+  background: url('./carbon_bg.png') no-repeat center center fixed;
+  background-size: cover;
+  block-size: 100vh;
+  inline-size: 100vw;
+  inset-block-start: 0;
+  inset-inline-start: 0;
+}
+
+.welcome__heading {
+  @include type.type-style('productive-heading-07');
+
+  color: colors.$white;
+}
+
+.welcome__heading--subtitle {
+  font-weight: 600;
+}
+
+.welcome__link,
+.welcome__link:hover,
+.welcome__link.cds--link:visited {
+  color: colors.$blue-40;
+}
+
+.welcome__links {
+  margin-block-start: 2rem;
+}

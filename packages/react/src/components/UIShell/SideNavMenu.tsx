@@ -1,0 +1,264 @@
+/**
+ * Copyright IBM Corp. 2016, 2026
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+import { ChevronDown } from '@carbon/icons-react';
+import cx from 'classnames';
+import PropTypes from 'prop-types';
+import React, {
+  forwardRef,
+  useEffect,
+  useContext,
+  useRef,
+  useState,
+  type LiHTMLAttributes,
+  type KeyboardEvent,
+  type ReactNode,
+  type Ref,
+} from 'react';
+import SideNavIcon from './SideNavIcon';
+import { keys, match } from '../../internal/keyboard';
+import { usePrefix } from '../../internal/usePrefix';
+import { composeEventHandlers } from '../../tools/events';
+import { SideNavContext } from './SideNavContext';
+
+export interface SideNavMenuProps extends LiHTMLAttributes<HTMLLIElement> {
+  /**
+   * An optional CSS class to apply to the component.
+   */
+  className?: string;
+
+  /**
+   * The content to render within the SideNavMenu component.
+   */
+  children?: React.ReactNode;
+
+  /**
+   * Specifies whether the menu should be expanded by default.
+   */
+  defaultExpanded?: boolean;
+
+  /**
+   * Indicates whether the SideNavMenu is active.
+   */
+  isActive?: boolean;
+
+  /**
+   * Specifies whether the SideNavMenu is in a large variation.
+   */
+  large?: boolean;
+
+  /**
+   * A component used to render an icon.
+   */
+  renderIcon?: React.ComponentType;
+
+  /**
+   * Indicates if the side navigation container is expanded or collapsed.
+   */
+  isSideNavExpanded?: boolean;
+
+  /**
+   * The tabIndex for the button element.
+   * If not specified, the default validation will be applied.
+   */
+  tabIndex?: number;
+
+  // The title for the overall menu name.
+
+  title: string;
+}
+
+const SideNavMenu = forwardRef<HTMLElement, SideNavMenuProps>(
+  (
+    {
+      className: customClassName,
+      children,
+      defaultExpanded = false,
+      isActive = false,
+      large = false,
+      renderIcon: IconElement,
+      isSideNavExpanded,
+      tabIndex,
+      title,
+      onKeyDown,
+      ...rest
+    },
+    ref
+  ) => {
+    const { isRail, isSideNavExpanded: contextIsSideNavExpanded } =
+      useContext(SideNavContext);
+    const currentIsSideNavExpanded =
+      isSideNavExpanded ?? contextIsSideNavExpanded;
+    const prefix = usePrefix();
+    const [isExpanded, setIsExpanded] = useState<boolean>(defaultExpanded);
+    const prevExpandedRef = useRef(false);
+    const className = cx({
+      [`${prefix}--side-nav__item`]: true,
+      [`${prefix}--side-nav__item--active`]:
+        isActive || (hasActiveDescendant(children) && !isExpanded),
+      [`${prefix}--side-nav__item--icon`]: IconElement,
+      [`${prefix}--side-nav__item--large`]: large,
+      [customClassName as string]: !!customClassName,
+    });
+
+    useEffect(() => {
+      if (!isRail) return;
+
+      if (!currentIsSideNavExpanded && isExpanded) {
+        setIsExpanded(false);
+        prevExpandedRef.current = true;
+      } else if (currentIsSideNavExpanded && prevExpandedRef.current) {
+        setIsExpanded(true);
+        prevExpandedRef.current = false;
+      }
+    }, [currentIsSideNavExpanded, isExpanded, isRail]);
+
+    const handleOnKeyDown = (event: KeyboardEvent<HTMLLIElement>) => {
+      if (match(event, keys.Escape)) {
+        setIsExpanded(false);
+      }
+    };
+
+    return (
+      // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
+      <li
+        {...rest}
+        className={className}
+        onKeyDown={composeEventHandlers([onKeyDown, handleOnKeyDown])}>
+        <button
+          aria-expanded={isExpanded}
+          className={`${prefix}--side-nav__submenu`}
+          onClick={() => {
+            setIsExpanded(!isExpanded);
+          }}
+          ref={ref as Ref<HTMLButtonElement>}
+          type="button"
+          tabIndex={
+            tabIndex === undefined
+              ? !currentIsSideNavExpanded && !isRail
+                ? -1
+                : 0
+              : tabIndex
+          }>
+          {IconElement && (
+            <SideNavIcon>
+              <IconElement />
+            </SideNavIcon>
+          )}
+          <span className={`${prefix}--side-nav__submenu-title`}>{title}</span>
+          <SideNavIcon className={`${prefix}--side-nav__submenu-chevron`} small>
+            <ChevronDown size={20} />
+          </SideNavIcon>
+        </button>
+        <ul className={`${prefix}--side-nav__menu`}>{children}</ul>
+      </li>
+    );
+  }
+);
+SideNavMenu.displayName = 'SideNavMenu';
+
+SideNavMenu.propTypes = {
+  /**
+   * Provide <SideNavMenuItem>'s inside of the `SideNavMenu`
+   */
+  children: PropTypes.node,
+
+  /**
+   * Provide an optional class to be applied to the containing node
+   */
+  className: PropTypes.string,
+
+  /**
+   * Specify whether the menu should default to expanded. By default, it will
+   * be closed.
+   */
+  defaultExpanded: PropTypes.bool,
+
+  /**
+   * Specify whether the `SideNavMenu` is "active". `SideNavMenu` should be
+   * considered active if one of its menu items are a link for the current
+   * page.
+   */
+  isActive: PropTypes.bool,
+
+  /**
+   * Property to indicate if the side nav container is open (or not). Use to
+   * keep local state and styling in step with the SideNav expansion state.
+   */
+  isSideNavExpanded: PropTypes.bool,
+
+  /**
+   * Specify if this is a large variation of the SideNavMenu
+   */
+  large: PropTypes.bool,
+
+  /**
+   * A component used to render an icon.
+   */
+  renderIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
+
+  /**
+   * Optional prop to specify the tabIndex of the button. If undefined, it will be applied default validation
+   */
+  tabIndex: PropTypes.number,
+
+  /**
+   * Provide the text for the overall menu name
+   */
+  title: PropTypes.string.isRequired,
+};
+
+/**
+Defining the children parameter with the type ReactNode | ReactNode[]. This allows for various possibilities:
+a single element, an array of elements, or null or undefined.
+**/
+function hasActiveDescendant(children: ReactNode | ReactNode[]): boolean {
+  if (Array.isArray(children)) {
+    return children.some((child) => {
+      if (!React.isValidElement(child)) {
+        return false;
+      }
+
+      /** Explicitly defining the expected prop types (isActive and 'aria-current) for the children to ensure type
+  safety when accessing their props.
+  **/
+      const props = child.props as {
+        isActive?: boolean;
+        'aria-current'?: string;
+        children: ReactNode | ReactNode[];
+      };
+
+      if (
+        props.isActive === true ||
+        props['aria-current'] ||
+        (props.children instanceof Array && hasActiveDescendant(props.children))
+      ) {
+        return true;
+      }
+
+      return false;
+    });
+  }
+
+  // We use React.isValidElement(child) to check if the child is a valid React element before accessing its props
+
+  if (React.isValidElement(children)) {
+    const props = children.props as {
+      isActive?: boolean;
+      'aria-current'?: string;
+    };
+
+    if (props.isActive === true || props['aria-current']) {
+      return true;
+    }
+  }
+
+  return false;
+}
+
+export default SideNavMenu;
+export { SideNavMenu };

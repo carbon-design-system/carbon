@@ -1,0 +1,308 @@
+//
+// Copyright IBM Corp. 2016, 2025
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use '../form';
+@use '../../config' as *;
+@use '../../motion' as *;
+@use '../../spacing' as *;
+@use '../../theme' as *;
+@use '../../type' as *;
+@use '../../utilities/convert';
+@use '../../utilities/component-reset';
+@use '../../utilities/focus-outline' as *;
+@use '../../utilities/skeleton' as *;
+
+/// Treeview styles
+/// @access public
+/// @group treeview
+@mixin treeview {
+  .#{$prefix}--tree {
+    @include component-reset.reset;
+
+    overflow: hidden;
+  }
+
+  .#{$prefix}--tree-node {
+    background-color: $layer-01;
+    color: $text-secondary;
+    padding-inline-start: $spacing-05;
+
+    &:focus {
+      outline: none;
+    }
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  .#{$prefix}--tree-node--hidden {
+    display: none;
+  }
+
+  .#{$prefix}--tree-node__children {
+    @include component-reset.reset;
+
+    list-style-type: none;
+  }
+
+  .#{$prefix}--tree-node--with-icon .#{$prefix}--tree-node {
+    margin-inline-start: $spacing-03;
+  }
+
+  .#{$prefix}--tree-node:focus > .#{$prefix}--tree-node__label {
+    @include focus-outline('outline');
+  }
+  .#{$prefix}--tree-node.#{$prefix}--tree-parent-node
+    > .#{$prefix}--tree-node__label {
+    inline-size: auto;
+  }
+  .#{$prefix}--tree-node--disabled:focus > .#{$prefix}--tree-node__label {
+    outline: none;
+  }
+
+  .#{$prefix}--tree-node--disabled,
+  .#{$prefix}--tree-node--disabled .#{$prefix}--tree-node__label:hover,
+  .#{$prefix}--tree-node--disabled
+    .#{$prefix}--tree-node__label:hover
+    .#{$prefix}--tree-node__label__details {
+    background-color: $field-01;
+    color: $text-disabled;
+  }
+
+  .#{$prefix}--tree-node--disabled .#{$prefix}--tree-parent-node__toggle-icon,
+  .#{$prefix}--tree-node--disabled .#{$prefix}--tree-node__icon,
+  .#{$prefix}--tree-node--disabled
+    .#{$prefix}--tree-node__label:hover
+    .#{$prefix}--tree-parent-node__toggle-icon,
+  .#{$prefix}--tree-node--disabled
+    .#{$prefix}--tree-node__label:hover
+    .#{$prefix}--tree-node__icon {
+    fill: $icon-disabled;
+  }
+
+  .#{$prefix}--tree-node--disabled,
+  .#{$prefix}--tree-node--disabled
+    .#{$prefix}--tree-parent-node__toggle-icon:hover {
+    cursor: not-allowed;
+  }
+
+  // Overrides link styling
+  li a.#{$prefix}--tree-node {
+    text-decoration: none;
+
+    &:not(.#{$prefix}--tree-node--disabled) {
+      color: $text-secondary;
+    }
+  }
+
+  li.#{$prefix}--tree-node-link-parent {
+    display: flex;
+    flex-direction: column;
+    background-color: $layer-01;
+
+    > .#{$prefix}--tree-node__children {
+      padding-inline-start: $spacing-05;
+    }
+  }
+
+  .#{$prefix}--tree-node__label {
+    @include type-style('body-compact-01');
+
+    position: relative;
+    display: flex;
+    box-sizing: border-box;
+    flex: 1;
+    align-items: center;
+    inline-size: 100%;
+    min-block-size: convert.to-rem(32px);
+    padding-inline-end: 1rem;
+
+    &:hover {
+      background-color: $layer-hover-01;
+      color: $text-primary;
+    }
+  }
+
+  .#{$prefix}--tree-node:not(.#{$prefix}--tree-parent-node)
+    .#{$prefix}--tree-node__label {
+    padding-block: convert.to-rem(7px) convert.to-rem(7px);
+    // (min-height 32px - single line text height 18px) / 2 = 7px
+  }
+
+  .#{$prefix}--tree-node__label:hover .#{$prefix}--tree-node__label__details {
+    color: $text-primary;
+  }
+
+  .#{$prefix}--tree-node__label:hover
+    .#{$prefix}--tree-parent-node__toggle-icon,
+  .#{$prefix}--tree-node__label:hover .#{$prefix}--tree-node__icon {
+    fill: $icon-primary;
+  }
+
+  .#{$prefix}--tree-leaf-node {
+    display: flex;
+    padding-inline-start: $spacing-08;
+  }
+
+  .#{$prefix}--tree-leaf-node.#{$prefix}--tree-node--with-icon {
+    padding-inline-start: $spacing-07;
+  }
+
+  .#{$prefix}--tree-leaf-node.#{$prefix}--tree-node--with-icon
+    .#{$prefix}--tree-leaf-node {
+    padding-inline-start: $spacing-06;
+  }
+
+  .#{$prefix}--tree-node__label__details {
+    display: flex;
+    align-items: center;
+    min-inline-size: 0;
+  }
+
+  .#{$prefix}--tree-node--with-icon .#{$prefix}--tree-parent-node__toggle {
+    margin-inline-end: 0;
+  }
+
+  .#{$prefix}--tree-parent-node__toggle {
+    display: flex;
+    align-items: center;
+    border: 0;
+    block-size: convert.to-rem(24px);
+    inline-size: convert.to-rem(24px);
+    margin-inline: -$spacing-02 $spacing-02;
+    padding-inline-start: $spacing-02;
+
+    &:hover {
+      cursor: pointer;
+    }
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  .#{$prefix}--tree-parent-node__toggle-icon {
+    fill: $icon-secondary;
+    transform: rotate(-90deg);
+    transition: all $duration-fast-02 motion(standard, productive);
+  }
+
+  .#{$prefix}--tree-parent-node__toggle-icon--expanded {
+    transform: rotate(0);
+  }
+
+  .#{$prefix}--tree-node__icon {
+    fill: $icon-secondary;
+    margin-inline: $spacing-03 $spacing-03;
+    min-block-size: 1rem;
+    min-inline-size: 1rem;
+  }
+
+  .#{$prefix}--tree-parent-node__toggle
+    + .#{$prefix}--tree-node__label__details
+    .#{$prefix}--tree-node__icon {
+    margin-inline-start: $spacing-02;
+  }
+
+  .#{$prefix}--tree-node--selected > .#{$prefix}--tree-node__label {
+    background-color: $layer-selected-01;
+    color: $text-primary;
+
+    &:hover {
+      background-color: $layer-selected-hover-01;
+    }
+  }
+
+  .#{$prefix}--tree-node--selected
+    > .#{$prefix}--tree-node__label
+    .#{$prefix}--tree-parent-node__toggle-icon,
+  .#{$prefix}--tree-node--selected
+    > .#{$prefix}--tree-node__label
+    .#{$prefix}--tree-node__icon {
+    fill: $icon-primary;
+  }
+
+  .#{$prefix}--tree-node--active > .#{$prefix}--tree-node__label {
+    position: relative;
+
+    &::before {
+      position: absolute;
+      background-color: $interactive;
+      block-size: 100%;
+      content: '';
+      inline-size: convert.to-rem(4px);
+      inset-block-start: 0;
+      inset-inline-start: 0;
+    }
+  }
+
+  // xs size variant
+  .#{$prefix}--tree--xs .#{$prefix}--tree-node__label {
+    min-block-size: convert.to-rem(24px);
+  }
+
+  .#{$prefix}--tree--xs
+    .#{$prefix}--tree-node:not(.#{$prefix}--tree-parent-node)
+    .#{$prefix}--tree-node__label {
+    padding: 0;
+  }
+
+  .#{$prefix}--tree--xs .#{$prefix}--tree-parent-node__toggle {
+    margin-block-start: 0;
+  }
+  .#{$prefix}--tree-node__label__text {
+    @include type-style('body-compact-01');
+
+    display: block;
+    overflow: hidden;
+    line-height: 1.2;
+    padding-inline-start: convert.to-rem(4px);
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .#{$prefix}--tree-node__label .#{$prefix}--icon-tooltip {
+    inline-size: 100%;
+  }
+
+  .#{$prefix}--tree-node__label
+    .#{$prefix}--icon-tooltip
+    .#{$prefix}--btn--icon-only {
+    padding: 0;
+    border: none;
+    background: transparent;
+    block-size: auto;
+    color: inherit;
+    inline-size: 100%;
+    min-block-size: unset;
+    text-align: start;
+  }
+
+  .#{$prefix}--tree-node__label
+    .#{$prefix}--icon-tooltip
+    .#{$prefix}--btn--icon-only
+    .#{$prefix}--tree-node__label__text {
+    color: inherit;
+    inline-size: 100%;
+  }
+
+  .#{$prefix}--tree-node__label .#{$prefix}--tooltip-content {
+    padding: 1rem;
+  }
+
+  .#{$prefix}--tree-node__label .#{$prefix}--popover-container {
+    inline-size: 100%;
+  }
+  .#{$prefix}--tree
+    .#{$prefix}--tree-node__label
+    .#{$prefix}--tooltip-trigger__wrapper
+    .#{$prefix}--btn--ghost:focus {
+    box-shadow: none;
+    outline: 2px solid $focus;
+  }
+}

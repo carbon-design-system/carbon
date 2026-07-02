@@ -1,0 +1,336 @@
+//
+// Copyright IBM Corp. 2016, 2023
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+//-----------------------------
+// Radio
+//-----------------------------
+
+@use '../form';
+@use '../button/tokens' as *;
+@use '../../config' as *;
+@use '../../spacing' as *;
+@use '../../theme' as *;
+@use '../../type';
+@use '../../utilities/focus-outline' as *;
+@use '../../utilities/component-reset' as *;
+@use '../../utilities/visually-hidden' as *;
+@use '../../utilities/high-contrast-mode' as *;
+@use '../../utilities/skeleton' as *;
+@use '../../utilities/convert';
+
+/// @type Number
+/// @access public
+/// @group radio-button
+$radio-border-width: 1px !default;
+
+/// Radio button styles
+/// @access private
+/// @group radio-button
+@mixin radio-button {
+  .#{$prefix}--radio-button-group {
+    @include reset;
+
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+
+  // Remove spacing above collection of radio buttons if label is present
+  .#{$prefix}--label + .#{$prefix}--form-item .#{$prefix}--radio-button-group {
+    margin-block-start: 0;
+  }
+
+  // vertical radio button
+  .#{$prefix}--radio-button-group--vertical {
+    flex-direction: column;
+    align-items: flex-start;
+
+    &.#{$prefix}--radio-button-group--label-left {
+      align-items: flex-end;
+    }
+
+    .#{$prefix}--radio-button__label {
+      margin-inline-end: 0;
+    }
+
+    .#{$prefix}--radio-button__label:not(:last-of-type) {
+      margin-block-end: $spacing-03;
+    }
+  }
+
+  .#{$prefix}--radio-button {
+    @include visually-hidden;
+
+    margin-block-start: 0.9rem;
+    margin-inline-start: 0.63rem;
+    visibility: inherit;
+  }
+
+  .#{$prefix}--radio-button__label {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    margin-inline-end: $spacing-05;
+  }
+
+  .#{$prefix}--radio-button__label-text {
+    @include type.type-style('body-compact-01');
+
+    flex: 1;
+  }
+
+  .#{$prefix}--radio-button__appearance {
+    @include reset;
+
+    flex-shrink: 0;
+    border: $radio-border-width solid $icon-primary;
+    border-radius: 50%;
+    background-color: transparent;
+    block-size: convert.to-rem(18px);
+    inline-size: convert.to-rem(18px);
+    margin-block: convert.to-rem(1px) convert.to-rem(2px);
+    margin-inline: convert.to-rem(2px) convert.to-rem(10px);
+  }
+
+  .#{$prefix}--radio-button-group--vertical
+    .#{$prefix}--radio-button__appearance {
+    margin-block: 0;
+  }
+
+  .#{$prefix}--radio-button:checked
+    + .#{$prefix}--radio-button__label
+    .#{$prefix}--radio-button__appearance {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-color: $icon-primary;
+
+    &::before {
+      position: relative;
+      display: inline-block;
+      border-radius: 50%;
+      background-color: $icon-primary;
+      block-size: 100%;
+      content: '';
+      inline-size: 100%;
+      transform: scale(0.5);
+
+      // Allow the selected button to be seen in Windows HCM for IE/Edge
+      @include high-contrast-mode {
+        background-color: ButtonText;
+      }
+
+      @media print {
+        print-color-adjust: exact;
+      }
+    }
+  }
+
+  .#{$prefix}--radio-button:disabled + .#{$prefix}--radio-button__label {
+    color: $text-disabled;
+    cursor: not-allowed;
+  }
+
+  .#{$prefix}--radio-button:disabled
+    + .#{$prefix}--radio-button__label
+    .#{$prefix}--radio-button__appearance,
+  .#{$prefix}--radio-button:disabled:checked
+    + .#{$prefix}--radio-button__label
+    .#{$prefix}--radio-button__appearance {
+    // Disabled radio button, checkbox fix #10913
+    border-color: $icon-disabled;
+
+    &::before {
+      background-color: $text-disabled;
+    }
+  }
+
+  // readonly
+  .#{$prefix}--radio-button-group--readonly
+    .#{$prefix}--radio-button
+    + .#{$prefix}--radio-button__label
+    .#{$prefix}--radio-button__appearance {
+    border-color: $icon-disabled;
+  }
+
+  .#{$prefix}--radio-button-group--readonly .#{$prefix}--radio-button__label {
+    cursor: default;
+  }
+
+  .#{$prefix}--radio-button-group--readonly
+    .#{$prefix}--radio-button__label-text {
+    cursor: text;
+    user-select: text;
+  }
+
+  // invalid + warn
+  .#{$prefix}--radio-button-group--invalid
+    .#{$prefix}--radio-button
+    + .#{$prefix}--radio-button__label
+    .#{$prefix}--radio-button__appearance {
+    border-color: $support-error;
+  }
+
+  .#{$prefix}--radio-button__validation-msg {
+    display: none;
+    align-items: flex-end;
+    margin-block-start: convert.to-rem(6px);
+  }
+
+  .#{$prefix}--radio-button__invalid-icon {
+    fill: $support-error;
+    margin-inline: convert.to-rem(3px) convert.to-rem(1px);
+  }
+
+  .#{$prefix}--radio-button__invalid-icon--warning {
+    fill: $support-warning;
+  }
+
+  .#{$prefix}--radio-button__invalid-icon--warning path:first-of-type {
+    fill: #000000;
+  }
+
+  .#{$prefix}--radio-button-group--invalid
+    + .#{$prefix}--radio-button__validation-msg,
+  .#{$prefix}--radio-button-group--warning
+    + .#{$prefix}--radio-button__validation-msg {
+    display: flex;
+  }
+
+  .#{$prefix}--radio-button-group--invalid
+    + .#{$prefix}--radio-button__validation-msg
+    .#{$prefix}--form-requirement,
+  .#{$prefix}--radio-button-group--warning
+    + .#{$prefix}--radio-button__validation-msg
+    .#{$prefix}--form-requirement {
+    display: block;
+    overflow: visible;
+    margin-block-start: 0;
+    margin-inline-start: $spacing-03;
+    max-block-size: 100%;
+  }
+
+  .#{$prefix}--radio-button-group--invalid
+    + .#{$prefix}--radio-button__validation-msg
+    .#{$prefix}--form-requirement {
+    color: $text-error;
+  }
+
+  .#{$prefix}--radio-button-group ~ .#{$prefix}--form__helper-text {
+    margin-block-start: convert.to-rem(6px);
+  }
+
+  // Focus
+
+  .#{$prefix}--radio-button:focus
+    + .#{$prefix}--radio-button__label
+    .#{$prefix}--radio-button__appearance {
+    outline: 2px solid $focus;
+    outline-offset: 1.5px;
+  }
+
+  // Skeleton State
+  .#{$prefix}--radio-button__label.#{$prefix}--skeleton {
+    @include skeleton;
+
+    block-size: convert.to-rem(18px);
+
+    inline-size: convert.to-rem(100px);
+  }
+
+  .#{$prefix}--radio-button__label.#{$prefix}--skeleton
+    .#{$prefix}--radio-button__appearance {
+    display: none;
+  }
+
+  .#{$prefix}--radio-button-wrapper .#{$prefix}--radio-button__label {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    margin: 0;
+  }
+
+  .#{$prefix}--radio-button-wrapper:not(:last-of-type) {
+    margin-inline-end: $spacing-05;
+  }
+
+  .#{$prefix}--radio-button-group--vertical .#{$prefix}--radio-button-wrapper {
+    margin-block-end: convert.to-rem(6px);
+    margin-inline-end: 0;
+  }
+
+  .#{$prefix}--radio-button-group--vertical
+    .#{$prefix}--radio-button-wrapper
+    .#{$prefix}--radio-button__label {
+    padding-block-start: convert.to-rem(2px);
+  }
+
+  .#{$prefix}--radio-button-group--label-right .#{$prefix}--radio-button__label,
+  .#{$prefix}--radio-button-wrapper.#{$prefix}--radio-button-wrapper--label-right
+    .#{$prefix}--radio-button__label {
+    flex-direction: row;
+  }
+
+  .#{$prefix}--radio-button-group--label-left .#{$prefix}--radio-button__label,
+  .#{$prefix}--radio-button-wrapper.#{$prefix}--radio-button-wrapper--label-left
+    .#{$prefix}--radio-button__label {
+    flex-direction: row-reverse;
+  }
+
+  .#{$prefix}--radio-button-group--label-left
+    .#{$prefix}--radio-button__appearance,
+  .#{$prefix}--radio-button-wrapper.#{$prefix}--radio-button-wrapper--label-left
+    .#{$prefix}--radio-button__appearance {
+    margin-inline: $spacing-03 0;
+  }
+
+  // AILabel styles
+  .#{$prefix}--radio-button-group--decorator legend.#{$prefix}--label,
+  .#{$prefix}--radio-button-wrapper--decorator
+    .#{$prefix}--radio-button__label-text,
+  .#{$prefix}--radio-button-group--slug legend.#{$prefix}--label,
+  .#{$prefix}--radio-button-wrapper--slug
+    .#{$prefix}--radio-button__label-text {
+    display: flex;
+  }
+
+  .#{$prefix}--radio-button-group--decorator
+    legend.#{$prefix}--label
+    .#{$prefix}--radio-button-group-inner--decorator
+    > *,
+  .#{$prefix}--radio-button-wrapper--decorator
+    .#{$prefix}--radio-button__label-text
+    .#{$prefix}--radio-button-wrapper-inner--decorator
+    > *,
+  .#{$prefix}--radio-button-group--slug
+    legend.#{$prefix}--label
+    .#{$prefix}--ai-label,
+  .#{$prefix}--radio-button-wrapper--slug
+    .#{$prefix}--radio-button__label-text
+    .#{$prefix}--ai-label,
+  .#{$prefix}--radio-button-group--slug
+    legend.#{$prefix}--label
+    .#{$prefix}--slug,
+  .#{$prefix}--radio-button-wrapper--slug
+    .#{$prefix}--radio-button__label-text
+    .#{$prefix}--slug {
+    margin-inline-start: $spacing-03;
+  }
+
+  .#{$prefix}--radio-button-wrapper--decorator
+    .#{$prefix}--radio-button__label-text
+    .#{$prefix}--ai-label__button--inline,
+  .#{$prefix}--radio-button-wrapper--slug
+    .#{$prefix}--radio-button__label-text
+    .#{$prefix}--ai-label__button--inline,
+  .#{$prefix}--radio-button-wrapper--slug
+    .#{$prefix}--radio-button__label-text
+    .#{$prefix}--slug__button--inline {
+    line-height: inherit;
+    margin-block-start: convert.to-rem(-1px);
+  }
+}

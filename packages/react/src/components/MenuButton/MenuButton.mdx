@@ -1,0 +1,167 @@
+import { ArgTypes, Meta, Canvas } from '@storybook/addon-docs/blocks';
+import * as MenuButtonStories from './MenuButton.stories.js';
+import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
+
+<Meta isTemplate />
+
+# MenuButton
+
+[Source code](https://github.com/carbon-design-system/carbon/tree/main/packages/react/src/components/MenuButton)
+
+{/* <!-- START doctoc generated TOC please keep comment here to allow auto update --> <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE --> */}
+
+## Table of Contents
+
+- [Overview](#overview)
+  - [With Danger](#with-danger)
+  - [With Dividers](#with-dividers)
+  - [With Icons](#with-icons)
+- [Menu Alignment](#menu-alignment)
+- [menuTarget Prop](#menutarget-prop)
+- [Managing the `menuTarget` prop with React refs](#managing-the-menutarget-prop-with-react-refs)
+- [Experimental Auto Align](#experimental-auto-align)
+- [Component API](#component-api)
+- [Feedback](#feedback)
+
+{/* <!-- END doctoc generated TOC please keep comment here to allow auto update --> */}
+
+## Overview
+
+A `MenuButton` can be used to group a set of actions that are related. These
+actions must be `MenuItem`s passed as `children`. The trigger buttons's label is
+passed as `props.label`.
+
+```jsx
+<MenuButton label="Actions">
+  <MenuItem label="First action" />
+  <MenuItem label="Second action" />
+  <MenuItem label="Third action" />
+</MenuButton>
+```
+
+<Canvas
+  of={MenuButtonStories.Default}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(MenuButtonStories.Default),
+    },
+  ]}
+/>
+
+#### With Danger
+
+<Canvas
+  of={MenuButtonStories.WithDanger}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(MenuButtonStories.WithDanger),
+    },
+  ]}
+/>
+
+#### With Dividers
+
+<Canvas
+  of={MenuButtonStories.WithDividers}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(MenuButtonStories.WithDividers),
+    },
+  ]}
+/>
+
+#### With Icons
+
+<Canvas
+  of={MenuButtonStories.WithIcons}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(MenuButtonStories.WithIcons),
+    },
+  ]}
+/>
+
+## Menu Alignment
+
+The `menuAlignment` prop enables you to define the placement of the Menu in
+relation to the `MenuButton`. For instance, setting `menuAlignment="top"` on the
+`MenuButton` will render the Menu above the button.
+
+If it seems your specified `menuAlignment` isn't working, it's because we
+prioritize ensuring the Menu remains visible. We calculate the optimal position
+to display the Menu in case the provided `menuAlignment` obscures it.
+
+We encourage you to play around in the Storybook Default stories to better
+understand the `menuAlignment` prop.
+
+<Canvas
+  of={MenuButtonStories.WithMenuAlignment}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () =>
+        stackblitzPrefillConfig(MenuButtonStories.WithMenuAlignment),
+    },
+  ]}
+/>
+
+## menuTarget Prop
+
+The `menuTarget` prop specifies where the `Menu` should render, which is
+particularly useful when using `MenuButton` inside a modal. By default, the menu
+renders in `document.body`, but this can disrupt focus order in modals or other
+components with focus management.
+
+Pass the `menuTarget` prop to render the `Menu` inside the modal or any specific
+element where you want it to render:
+
+## Managing the `menuTarget` prop with React refs
+
+Because React does not trigger re-renders when a ref's `.current` value changes,
+you must capture the ref value in state to update the `menuTarget` prop.
+
+```tsx
+const Component = () => {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [target, setTarget] = useState<HTMLDivElement | undefined>(undefined);
+  useEffect(() => {
+    if (containerRef.current) {
+      setTarget(containerRef.current);
+    }
+  }, []);
+  return (
+    <div ref={containerRef}>
+      <MenuButton label="Actions" menuTarget={target}>
+        <MenuItem label="First action" />
+      </MenuButton>
+    </div>
+  );
+};
+```
+
+## Experimental Auto Align
+
+<Canvas
+  of={MenuButtonStories.ExperimentalAutoAlign}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () =>
+        stackblitzPrefillConfig(MenuButtonStories.ExperimentalAutoAlign),
+    },
+  ]}
+/>
+
+## Component API
+
+<ArgTypes />
+
+## Feedback
+
+Help us improve this component by providing feedback, asking questions on Slack,
+or updating this file on
+[GitHub](https://github.com/carbon-design-system/carbon/edit/main/packages/react/src/components/MenuButton/MenuButton.mdx).

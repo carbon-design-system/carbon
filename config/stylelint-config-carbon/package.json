@@ -1,0 +1,46 @@
+{
+  "name": "stylelint-config-carbon",
+  "description": "Stylelint configuration for Carbon",
+  "version": "1.22.0",
+  "license": "Apache-2.0",
+  "type": "module",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/carbon-design-system/carbon.git",
+    "directory": "config/stylelint-config-carbon"
+  },
+  "bugs": "https://github.com/carbon-design-system/carbon/issues",
+  "keywords": [
+    "ibm",
+    "elements",
+    "carbon",
+    "carbon-elements",
+    "carbon-design-system",
+    "components",
+    "react"
+  ],
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  },
+  "peerDependencies": {
+    "stylelint": "^17.0.0"
+  },
+  "dependencies": {
+    "@double-great/stylelint-a11y": "^3.4.10",
+    "stylelint-config-idiomatic-order": "^10.0.0",
+    "stylelint-config-prettier": "^9.0.3",
+    "stylelint-config-standard": "^36.0.0",
+    "stylelint-config-standard-scss": "^13.1.0",
+    "stylelint-no-unsupported-browser-features": "^8.0.4",
+    "stylelint-order": "^6.0.0",
+    "stylelint-prettier": "^5.0.0",
+    "stylelint-scss": "^6.2.1",
+    "stylelint-use-logical": "^2.1.0"
+  },
+  "devDependencies": {
+    "prettier": "^3.3.3",
+    "stylelint": "^17.0.0"
+  }
+}

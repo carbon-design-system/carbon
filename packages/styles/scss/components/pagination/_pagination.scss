@@ -1,0 +1,285 @@
+//
+// Copyright IBM Corp. 2016, 2023
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use '../button';
+@use '../select';
+@use '../../layer' as *;
+@use '../../config' as *;
+@use '../../spacing' as *;
+@use '../../motion' as *;
+@use '../../type' as *;
+@use '../../breakpoint' as *;
+@use '../../theme' as *;
+@use '../../utilities/component-reset';
+@use '../../utilities/convert';
+@use '../../utilities/focus-outline' as *;
+@use '../../utilities/high-contrast-mode' as *;
+@use '../../utilities/layout';
+
+/// Pagination styles
+/// @access public
+/// @group pagination
+@mixin pagination {
+  .#{$prefix}--data-table-container + .#{$prefix}--pagination {
+    border-block-start: 0;
+  }
+
+  .#{$prefix}--pagination {
+    @include component-reset.reset;
+    @include type-style('body-compact-01');
+    @include layout.use('size', $default: 'md', $min: 'xs', $max: 'lg');
+
+    display: flex;
+    overflow: initial;
+    align-items: center;
+    justify-content: space-between;
+    background-color: $layer;
+    border-block-start: 1px solid $border-subtle;
+    container-name: pagination;
+    container-type: inline-size;
+    inline-size: calc(100% - 1px);
+    min-block-size: layout.size('height');
+
+    // 42rem = 'md' breakpoint
+    @container pagination (min-width: 42rem) {
+      .#{$prefix}--pagination__control-buttons {
+        display: flex;
+      }
+    }
+
+    // mobile friendly pagination
+    @container pagination (max-width: 42rem) {
+      .#{$prefix}--pagination__left > *,
+      .#{$prefix}--pagination__right > * {
+        display: none;
+      }
+
+      .#{$prefix}--pagination__items-count {
+        display: initial;
+      }
+
+      .#{$prefix}--pagination__control-buttons {
+        display: flex;
+      }
+    }
+  }
+
+  .#{$prefix}--pagination .#{$prefix}--select {
+    align-items: center;
+    block-size: 100%;
+  }
+
+  .#{$prefix}--pagination .#{$prefix}--select-input--inline__wrapper {
+    display: flex;
+    block-size: 100%;
+  }
+
+  .#{$prefix}--pagination .#{$prefix}--select-input {
+    @include type-style('body-compact-01');
+
+    block-size: 100%;
+    inline-size: auto;
+    line-height: layout.size('height');
+    min-inline-size: auto;
+
+    // Firefox-specific fix for three-digit numbers
+    // stylelint-disable-next-line at-rule-no-vendor-prefix
+    @-moz-document url-prefix() {
+      padding-inline-end: $spacing-05;
+      text-overflow: clip;
+    }
+  }
+
+  // Extra specificity is needed to preserve padding
+  .#{$prefix}--pagination
+    .#{$prefix}--select--inline
+    .#{$prefix}--select-input {
+    padding-inline: $spacing-05 2.25rem;
+  }
+
+  .#{$prefix}--pagination .#{$prefix}--select-input:hover {
+    background: $layer-hover;
+  }
+
+  .#{$prefix}--pagination
+    .#{$prefix}--select--inline
+    .#{$prefix}--select-input:focus,
+  .#{$prefix}--pagination
+    .#{$prefix}--select--inline
+    .#{$prefix}--select-input:focus
+    option,
+  .#{$prefix}--pagination
+    .#{$prefix}--select--inline
+    .#{$prefix}--select-input:focus
+    optgroup {
+    background-color: $layer;
+  }
+
+  .#{$prefix}--pagination .#{$prefix}--select__arrow {
+    inset-block-start: 50%;
+    transform: translate(-0.5rem, -50%);
+  }
+
+  .#{$prefix}--pagination
+    .#{$prefix}--select__item-count
+    .#{$prefix}--select-input {
+    border-inline-end: 1px solid $border-subtle;
+  }
+
+  .#{$prefix}--pagination__right {
+    border-inline-start: 1px solid $border-subtle;
+  }
+
+  .#{$prefix}--pagination__left,
+  .#{$prefix}--pagination__right {
+    display: flex;
+    align-items: center;
+    block-size: 100%;
+  }
+
+  .#{$prefix}--pagination__left > .#{$prefix}--form-item,
+  .#{$prefix}--pagination__right > .#{$prefix}--form-item {
+    block-size: 100%;
+  }
+
+  .#{$prefix}--pagination__left .#{$prefix}--pagination__text,
+  .#{$prefix}--pagination__right .#{$prefix}--pagination__text {
+    white-space: nowrap;
+  }
+
+  .#{$prefix}--pagination__left .#{$prefix}--pagination__text {
+    margin-inline-end: convert.to-rem(1px);
+  }
+
+  .#{$prefix}--pagination__right .#{$prefix}--pagination__text {
+    margin-inline: convert.to-rem(1px) 1rem;
+  }
+
+  .#{$prefix}--pagination__right
+    .#{$prefix}--pagination__text.#{$prefix}--pagination__page-text {
+    margin-inline: 1rem convert.to-rem(1px);
+  }
+
+  .#{$prefix}--pagination__right
+    .#{$prefix}--pagination__text.#{$prefix}--pagination__page-text.#{$prefix}--pagination__unknown-pages-text {
+    margin-inline-end: $spacing-05;
+  }
+
+  .#{$prefix}--pagination__right .#{$prefix}--pagination__text:empty {
+    margin: 0;
+  }
+
+  .#{$prefix}--pagination__left {
+    padding: 0 $spacing-05 0 0;
+
+    // 42rem = 'md' breakpoint width
+    @container pagination (min-width: 42rem) {
+      padding: 0 $spacing-05;
+    }
+  }
+
+  .#{$prefix}--pagination__text {
+    @container pagination (min-width: 42rem) {
+      display: inline-block;
+    }
+  }
+
+  span.#{$prefix}--pagination__text {
+    color: $text-primary;
+  }
+
+  span.#{$prefix}--pagination__text.#{$prefix}--pagination__items-count {
+    color: $text-secondary;
+    margin-inline-start: $spacing-05;
+  }
+
+  .#{$prefix}--pagination__button,
+  .#{$prefix}--btn--ghost.#{$prefix}--pagination__button {
+    @include component-reset.reset;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    margin: 0;
+    background: none;
+    block-size: layout.size('height');
+    border-inline-start: 1px solid $border-subtle;
+    cursor: pointer;
+    fill: $icon-primary;
+    inline-size: layout.size('height');
+    min-block-size: convert.to-rem(24px);
+    transition:
+      outline $duration-fast-02 motion(standard, productive),
+      background-color $duration-fast-02 motion(standard, productive);
+  }
+
+  .#{$prefix}--pagination__button > svg,
+  .#{$prefix}--btn--ghost.#{$prefix}--pagination__button > svg {
+    margin-block-start: 0;
+  }
+
+  [dir='rtl'] .#{$prefix}--pagination__button > svg,
+  [dir='rtl'] .#{$prefix}--btn--ghost.#{$prefix}--pagination__button > svg {
+    transform: rotate(0.5turn);
+  }
+
+  .#{$prefix}--pagination__button:focus,
+  .#{$prefix}--btn--ghost:focus.#{$prefix}--pagination__button {
+    @include focus-outline('outline');
+
+    border-inline-start: 0;
+  }
+
+  .#{$prefix}--pagination__button:hover,
+  .#{$prefix}--btn--ghost:hover.#{$prefix}--pagination__button {
+    background: $layer-hover;
+  }
+
+  .#{$prefix}--pagination__button--no-index,
+  .#{$prefix}--btn--ghost.#{$prefix}--pagination__button--no-index {
+    cursor: not-allowed;
+    fill: $icon-disabled;
+  }
+
+  .#{$prefix}--pagination__button:disabled:hover,
+  .#{$prefix}--pagination__button--no-index:hover,
+  .#{$prefix}--btn--ghost:disabled:hover.#{$prefix}--pagination__button,
+  .#{$prefix}--btn--ghost:hover.#{$prefix}--pagination__button--no-index {
+    border-color: $border-subtle;
+    background: $layer;
+    cursor: not-allowed;
+    fill: $icon-disabled;
+  }
+
+  // Skeleton state
+  .#{$prefix}--pagination.#{$prefix}--skeleton .#{$prefix}--skeleton__text {
+    margin-block-end: 0;
+    margin-inline-end: 1rem;
+  }
+
+  // Windows HCM fix
+
+  .#{$prefix}--pagination__button,
+  .#{$prefix}--btn--ghost.#{$prefix}--pagination__button {
+    @include high-contrast-mode('outline');
+  }
+
+  // RTL overrides
+  [dir='rtl'] .#{$prefix}--pagination .#{$prefix}--select__arrow {
+    transform: translate(0.5rem, -50%);
+  }
+  // Override for disabled select inputs to maintain layer background color
+  .#{$prefix}--pagination
+    .#{$prefix}--select--inline
+    .#{$prefix}--select-input[disabled],
+  .#{$prefix}--pagination
+    .#{$prefix}--select--inline
+    .#{$prefix}--select-input[disabled]:hover {
+    background-color: $layer;
+  }
+}

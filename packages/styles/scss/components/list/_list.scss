@@ -1,0 +1,98 @@
+//
+// Copyright IBM Corp. 2016, 2023
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+//-----------------------------
+// List
+//-----------------------------
+
+@use '../../config' as *;
+@use '../../spacing' as *;
+@use '../../theme' as *;
+@use '../../type';
+@use '../../utilities/component-reset';
+@use '../../utilities/convert';
+
+/// List styles
+/// @access public
+/// @group list
+@mixin list {
+  .#{$prefix}--list--nested,
+  .#{$prefix}--list--unordered,
+  .#{$prefix}--list--ordered,
+  .#{$prefix}--list--ordered--native {
+    @include component-reset.reset;
+    @include type.type-style('body-01');
+
+    list-style: none;
+  }
+
+  .#{$prefix}--list--unordered:not(.#{$prefix}--list--nested) {
+    margin-inline-start: $spacing-05;
+  }
+
+  .#{$prefix}--list--expressive,
+  .#{$prefix}--list--expressive .#{$prefix}--list--nested {
+    @include type.type-style('body-02');
+  }
+
+  .#{$prefix}--list--ordered--native {
+    list-style: decimal;
+  }
+
+  .#{$prefix}--list__item {
+    color: $text-primary;
+  }
+
+  .#{$prefix}--list--nested {
+    margin-inline-start: convert.to-rem(32px);
+  }
+
+  .#{$prefix}--list--nested .#{$prefix}--list__item {
+    padding-inline-start: $spacing-02;
+  }
+
+  .#{$prefix}--list--ordered:not(.#{$prefix}--list--nested) {
+    counter-reset: item;
+  }
+
+  .#{$prefix}--list--ordered:not(.#{$prefix}--list--nested)
+    > .#{$prefix}--list__item {
+    position: relative;
+  }
+
+  .#{$prefix}--list--ordered:not(.#{$prefix}--list--nested)
+    > .#{$prefix}--list__item::before {
+    position: absolute;
+    content: counter(item) '.';
+    counter-increment: item;
+    inset-inline-start: convert.to-rem(-24px);
+  }
+
+  .#{$prefix}--list--ordered.#{$prefix}--list--nested,
+  .#{$prefix}--list--ordered--native.#{$prefix}--list--nested {
+    list-style-type: lower-latin;
+  }
+
+  .#{$prefix}--list--unordered > .#{$prefix}--list__item {
+    position: relative;
+
+    &::before {
+      position: absolute;
+      // – en dash
+      content: '\002013';
+      inset-inline-start: calc(-1 * #{$spacing-05});
+    }
+  }
+
+  .#{$prefix}--list--unordered.#{$prefix}--list--nested
+    > .#{$prefix}--list__item::before {
+    // ▪ square
+    content: '\0025AA\00FE0E';
+    // offset to account for smaller ▪ vs –
+    inset-inline-start: calc(-1 * #{$spacing-04});
+  }
+}

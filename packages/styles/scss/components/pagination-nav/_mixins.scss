@@ -1,0 +1,42 @@
+//
+// Copyright IBM Corp. 2016, 2023
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use '../../config' as *;
+@use '../../spacing' as *;
+@use '../../theme' as *;
+@use '../../motion' as *;
+
+/// Pseudo underline
+/// @access public
+/// @group pagination-nav
+@mixin pseudo-underline() {
+  &:not(.#{$prefix}--pagination-nav__page--direction) {
+    &::after {
+      position: absolute;
+      display: block;
+      background-color: $border-interactive;
+      block-size: $spacing-02;
+      content: '';
+      inline-size: 0;
+      inset-block-end: 0;
+      inset-inline-start: 50%;
+      opacity: 0;
+      transition: width $duration-fast-02 motion(standard, productive);
+
+      @media screen and (prefers-reduced-motion: reduce) {
+        transition: none;
+      }
+    }
+  }
+
+  .#{$prefix}--pagination-nav__page--active + &::after,
+  &.#{$prefix}--pagination-nav__page--active::after {
+    inline-size: $spacing-05;
+    inset-inline-start: calc(50% - #{$spacing-05 * 0.5});
+    opacity: 1;
+  }
+}

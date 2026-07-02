@@ -1,0 +1,34 @@
+//
+// Copyright IBM Corp. 2018, 2023
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use '../../config' as *;
+@use '../../spacing';
+@use '../../utilities/custom-property';
+
+@mixin stack() {
+  .#{$prefix}--stack-horizontal {
+    display: inline-grid;
+    column-gap: custom-property.get-var('stack-gap', 0);
+    grid-auto-flow: column;
+  }
+
+  .#{$prefix}--stack-vertical {
+    display: grid;
+    grid-auto-flow: row;
+    row-gap: custom-property.get-var('stack-gap', 0);
+  }
+
+  $index: 1;
+
+  @each $step, $value in spacing.$spacing {
+    .#{$prefix}--stack-scale-#{$index} {
+      @include custom-property.declaration('stack-gap', $value);
+    }
+
+    $index: $index + 1;
+  }
+}

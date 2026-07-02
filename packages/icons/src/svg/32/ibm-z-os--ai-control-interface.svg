@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="icon" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: none;
+      }
+    </style>
+  </defs>
+  <circle cx="12" cy="21" r="1"/>
+  <path d="m23,25h-14c-1.1028,0-2-.8972-2-2v-4c0-1.1028.8972-2,2-2h14c1.1028,0,2,.8972,2,2v4c0,1.1028-.8972,2-2,2Zm-14-6v4h14v-4h-14Z"/>
+  <circle cx="12" cy="11" r="1"/>
+  <path d="m23,15h-14c-1.1028,0-2-.8972-2-2v-4c0-1.1028.8972-2,2-2h14c1.1028,0,2,.8972,2,2v4c0,1.1028-.8972,2-2,2Zm-14-6v4h14v-4h-14Z"/>
+  <path d="m28,30H4c-1.103,0-2-.897-2-2v-12h2v12h24V4h-12v-2h12c1.103,0,2,.897,2,2v24c0,1.103-.897,2-2,2Z"/>
+  <rect x="8.5" y="1.5" width="5" height="2" transform="translate(13.5 -8.5) rotate(90)"/>
+  <rect x="1.9749" y="3.4749" width="5" height="2" transform="translate(4.4749 -1.8536) rotate(45)"/>
+  <rect y="10" width="5" height="2"/>
+  <rect id="_Transparent_Rectangle_" data-name="&amp;lt;Transparent Rectangle&amp;gt;" class="cls-1" width="32" height="32"/>
+</svg>

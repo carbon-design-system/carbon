@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TableHeader renders as expected - Component API should render 1`] = `
+<div>
+  <div
+    class="cds--data-table-content"
+  >
+    <table
+      class="cds--data-table cds--data-table--lg"
+    >
+      <thead>
+        <tr>
+          <th
+            data-testid="test-id"
+            scope="col"
+          >
+            <div
+              class="cds--table-header-label"
+            >
+              Header
+              <div
+                class="cds--table-header-label--decorator-inner"
+              />
+            </div>
+          </th>
+        </tr>
+      </thead>
+    </table>
+  </div>
+</div>
+`;

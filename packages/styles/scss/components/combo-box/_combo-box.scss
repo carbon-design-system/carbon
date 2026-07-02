@@ -1,0 +1,94 @@
+//
+// Copyright IBM Corp. 2016, 2023
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use '../list-box';
+@use '../../config' as *;
+@use '../../theme' as *;
+@use '../../utilities/convert';
+@use '../../utilities/focus-outline' as *;
+
+/// Combo box styles
+/// @access public
+/// @group combo-box
+@mixin combo-box {
+  .#{$prefix}--combo-box:hover {
+    background-color: $field;
+  }
+
+  .#{$prefix}--combo-box
+    .#{$prefix}--list-box__menu-item:first-child.#{$prefix}--list-box__menu-item--highlighted::before {
+    position: absolute;
+    border: 2px solid $focus;
+    block-size: 100%;
+    border-block-start: 1px solid $focus;
+    content: '';
+    inline-size: 100%;
+  }
+
+  .#{$prefix}--combo-box
+    .#{$prefix}--list-box__menu-item:first-child.#{$prefix}--list-box__menu-item--highlighted {
+    @include focus-outline('reset');
+  }
+
+  // V11: Possibly deprecate
+  .#{$prefix}--combo-box.#{$prefix}--list-box--light:hover {
+    background-color: $field-02;
+  }
+
+  .#{$prefix}--combo-box .#{$prefix}--text-input::-ms-clear {
+    display: none;
+  }
+
+  .#{$prefix}--combo-box.#{$prefix}--list-box--expanded
+    .#{$prefix}--text-input {
+    border-block-end-color: $border-subtle;
+  }
+
+  .#{$prefix}--combo-box--input--focus.#{$prefix}--text-input {
+    @include focus-outline('outline');
+  }
+
+  .#{$prefix}--combo-box.#{$prefix}--list-box--expanded:has(
+      input[aria-activedescendant]:not([aria-activedescendant=''])
+    )
+    .#{$prefix}--combo-box--input--focus.#{$prefix}--text-input {
+    outline-offset: convert.to-rem(-1px);
+    outline-width: convert.to-rem(1px);
+  }
+
+  .#{$prefix}--combo-box .#{$prefix}--list-box__field,
+  .#{$prefix}--combo-box.#{$prefix}--list-box[data-invalid]
+    .#{$prefix}--list-box__field,
+  .#{$prefix}--combo-box.#{$prefix}--list-box--warning
+    .#{$prefix}--list-box__field,
+  .#{$prefix}--combo-box.#{$prefix}--list-box--disabled.#{$prefix}--list-box[data-invalid]
+    .#{$prefix}--list-box__field,
+  .#{$prefix}--combo-box.#{$prefix}--list-box--disabled.#{$prefix}--list-box--warning
+    .#{$prefix}--list-box__field {
+    padding: 0;
+  }
+
+  // readonly
+  .#{$prefix}--combo-box--readonly,
+  .#{$prefix}--combo-box--readonly:hover {
+    background-color: transparent;
+  }
+
+  .#{$prefix}--combo-box--readonly .#{$prefix}--text-input {
+    border-block-end-color: $border-subtle;
+  }
+
+  .#{$prefix}--combo-box--readonly .#{$prefix}--list-box__menu-icon,
+  .#{$prefix}--combo-box--readonly .#{$prefix}--list-box__selection {
+    cursor: default;
+  }
+
+  .#{$prefix}--combo-box--readonly .#{$prefix}--list-box__menu-icon svg,
+  .#{$prefix}--combo-box--readonly .#{$prefix}--list-box__selection svg {
+    fill: $icon-disabled;
+  }
+}

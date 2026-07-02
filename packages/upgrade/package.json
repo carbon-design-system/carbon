@@ -1,0 +1,63 @@
+{
+  "name": "@carbon/upgrade",
+  "description": "A tool for upgrading Carbon versions",
+  "version": "11.41.0",
+  "license": "Apache-2.0",
+  "bin": {
+    "carbon-upgrade": "./bin/carbon-upgrade.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/carbon-design-system/carbon.git",
+    "directory": "packages/upgrade"
+  },
+  "bugs": "https://github.com/carbon-design-system/carbon/issues",
+  "files": [
+    "bin",
+    "cli.js",
+    "transforms",
+    "telemetry.yml"
+  ],
+  "keywords": [
+    "carbon",
+    "carbon-addons",
+    "carbon-components",
+    "carbon-components-react",
+    "carbon-design-system",
+    "ibm",
+    "components",
+    "react"
+  ],
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  },
+  "scripts": {
+    "build": "yarn clean && tsdown --config tsdown.config.mts --format cjs --out-dir .",
+    "clean": "rimraf cli.js",
+    "watch": "tsdown --config tsdown.config.mts --format cjs --out-dir . --watch",
+    "postinstall": "ibmtelemetry --config=telemetry.yml"
+  },
+  "devDependencies": {
+    "chalk": "^5.4.1",
+    "execa": "^9.6.0",
+    "fast-glob": "^3.3.3",
+    "fs-extra": "^11.0.0",
+    "inquirer": "^12.5.0",
+    "is-git-clean": "^1.1.0",
+    "jest-diff": "^30.0.0",
+    "lodash.clonedeep": "^4.5.0",
+    "lodash.merge": "^4.6.2",
+    "memfs": "^4.0.0",
+    "nanoid": "^5.0.0",
+    "npm-which": "^3.0.1",
+    "rimraf": "^6.0.1",
+    "semver": "^7.7.2",
+    "tsdown": "^0.22.0",
+    "yargs": "^17.0.1"
+  },
+  "dependencies": {
+    "@ibm/telemetry-js": "^1.5.0",
+    "jscodeshift": "^17.0.0"
+  }
+}

@@ -1,0 +1,246 @@
+//
+// Copyright IBM Corp. 2016, 2025
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use '../form';
+@use '../../colors' as *;
+@use '../../config' as *;
+@use '../../motion' as *;
+@use '../../spacing' as *;
+@use '../../theme' as *;
+@use '../../type' as *;
+@use '../../utilities/ai-gradient' as *;
+@use '../../utilities/component-reset';
+@use '../../utilities/convert';
+@use '../../utilities/focus-outline' as *;
+@use '../../utilities/placeholder-colors' as *;
+@use '../../utilities/skeleton' as *;
+@use '../../utilities/layout';
+@use '../../utilities/visually-hidden' as *;
+
+/// Text area styles
+/// @access public
+/// @group text-area
+@mixin text-area {
+  .#{$prefix}--text-area {
+    @include component-reset.reset;
+    @include type-style('body-01');
+    @include focus-outline('reset');
+
+    padding: convert.to-rem(11px) layout.density('padding-inline');
+    border: none;
+    background-color: $field;
+    block-size: 100%;
+    border-block-end: 1px solid $border-strong;
+    color: $text-primary;
+    font-family: inherit;
+    min-block-size: convert.to-rem(40px);
+
+    min-inline-size: 10rem;
+    resize: vertical;
+    transition:
+      background-color $duration-fast-01 motion(standard, productive),
+      outline $duration-fast-01 motion(standard, productive);
+  }
+
+  .#{$prefix}--text-area:focus,
+  .#{$prefix}--text-area:active {
+    @include focus-outline('outline');
+  }
+
+  .#{$prefix}--text-area::placeholder {
+    @include placeholder-colors;
+    @include type-style('body-01');
+  }
+
+  // V11: Possibly deprecate
+  .#{$prefix}--text-area--light {
+    background-color: $field-02;
+  }
+
+  .#{$prefix}--text-area__wrapper {
+    @include layout.use('density', $default: 'normal');
+
+    position: relative;
+    display: flex;
+    inline-size: 100%;
+    max-inline-size: 100%;
+  }
+
+  .#{$prefix}--text-area__wrapper--cols {
+    inline-size: auto;
+  }
+
+  .#{$prefix}--text-area__invalid-icon {
+    position: absolute;
+    fill: $support-error;
+    inset-block-start: $spacing-04;
+    inset-inline-end: layout.density('padding-inline');
+  }
+
+  .#{$prefix}--text-area__invalid-icon--warning {
+    fill: $support-warning;
+  }
+
+  .#{$prefix}--text-area__invalid-icon--warning path[fill] {
+    fill: $black-100;
+    opacity: 1;
+  }
+
+  .#{$prefix}--text-area__counter-alert {
+    position: absolute;
+    overflow: hidden;
+    padding: 0;
+    border: 0;
+    margin: -1px;
+    block-size: 1px;
+    clip: rect(0, 0, 0, 0);
+    inline-size: 1px;
+  }
+
+  .#{$prefix}--form-item {
+    &:has(.#{$prefix}--text-area__wrapper--cols) {
+      inline-size: fit-content;
+    }
+  }
+
+  //-----------------------------
+  // Disabled
+  //-----------------------------
+  .#{$prefix}--text-area:disabled {
+    background-color: $field;
+    border-block-end: 1px solid transparent;
+    color: $text-disabled;
+    cursor: not-allowed;
+    outline: none;
+    resize: none;
+  }
+
+  .#{$prefix}--text-area:disabled::placeholder {
+    color: $text-disabled;
+  }
+
+  //-----------------------------
+  // Readonly
+  //-----------------------------
+  .#{$prefix}--text-area__wrapper--readonly .#{$prefix}--text-area {
+    background: transparent;
+    border-block-end-color: $border-subtle;
+  }
+
+  // Styles for `AILabel` rendered inside `TextArea`
+  .#{$prefix}--text-area__wrapper--decorator
+    .#{$prefix}--text-area__inner-wrapper--decorator
+    > *,
+  .#{$prefix}--text-area__wrapper--slug .#{$prefix}--ai-label,
+  .#{$prefix}--text-area__wrapper--slug .#{$prefix}--slug {
+    position: absolute;
+    inset-block-start: $spacing-04;
+    inset-inline-end: $spacing-05;
+  }
+
+  .#{$prefix}--text-area__wrapper--decorator
+    .#{$prefix}--ai-label.#{$prefix}--ai-label--revert,
+  .#{$prefix}--text-area__wrapper--slug
+    .#{$prefix}--ai-label.#{$prefix}--ai-label--revert,
+  .#{$prefix}--text-area__wrapper--slug
+    .#{$prefix}--slug.#{$prefix}--slug--revert {
+    inset-block-start: $spacing-02;
+    inset-inline-end: $spacing-03;
+    transform: translate(0);
+  }
+
+  .#{$prefix}--text-area__wrapper--decorator
+    .#{$prefix}--text-area:has(
+      ~ .#{$prefix}--text-area__inner-wrapper--decorator .#{$prefix}--ai-label
+    ):not(
+      :has(
+          ~ .#{$prefix}--text-area__inner-wrapper--decorator
+            .#{$prefix}--ai-label--revert
+        )
+    ),
+  .#{$prefix}--text-area__wrapper--slug
+    .#{$prefix}--text-area:has(~ .#{$prefix}--ai-label):not(
+      :has(~ .#{$prefix}--ai-label--revert)
+    ),
+  .#{$prefix}--text-area__wrapper--slug
+    .#{$prefix}--text-area:has(~ .#{$prefix}--slug):not(
+      :has(~ .#{$prefix}--slug--revert)
+    ) {
+    @include ai-gradient;
+  }
+
+  .#{$prefix}--text-area__wrapper--decorator
+    .#{$prefix}--text-area:has(
+      ~ .#{$prefix}--text-area__inner-wrapper--decorator > *
+    ),
+  .#{$prefix}--text-area__wrapper--slug
+    .#{$prefix}--text-area:has(~ .#{$prefix}--ai-label),
+  .#{$prefix}--text-area__wrapper--slug
+    .#{$prefix}--text-area:has(~ .#{$prefix}--slug) {
+    padding-inline-end: $spacing-08;
+  }
+
+  .#{$prefix}--text-area--invalid:has(
+      ~ .#{$prefix}--text-area__inner-wrapper--decorator > *
+    ),
+  .#{$prefix}--text-area--warn:has(
+      ~ .#{$prefix}--text-area__inner-wrapper--decorator > *
+    ),
+  .#{$prefix}--text-area--invalid:has(~ .#{$prefix}--ai-label),
+  .#{$prefix}--text-area--warn:has(~ .#{$prefix}--ai-label),
+  .#{$prefix}--text-area--invalid:has(~ .#{$prefix}--slug),
+  .#{$prefix}--text-area--warn:has(~ .#{$prefix}--slug) {
+    padding-inline-end: $spacing-10;
+  }
+
+  .#{$prefix}--text-area--invalid
+    ~ .#{$prefix}--text-area__inner-wrapper--decorator
+    > *,
+  .#{$prefix}--text-area--warn
+    ~ .#{$prefix}--text-area__inner-wrapper--decorator
+    > *,
+  .#{$prefix}--text-area--invalid ~ .#{$prefix}--ai-label,
+  .#{$prefix}--text-area--warn ~ .#{$prefix}--ai-label,
+  .#{$prefix}--text-area--invalid ~ .#{$prefix}--slug,
+  .#{$prefix}--text-area--warn ~ .#{$prefix}--slug {
+    inset-inline-end: $spacing-08;
+  }
+
+  .#{$prefix}--text-area--invalid
+    ~ .#{$prefix}--text-area__inner-wrapper--decorator
+    > .#{$prefix}--ai-label.#{$prefix}--ai-label--revert,
+  .#{$prefix}--text-area--warn
+    ~ .#{$prefix}--text-area__inner-wrapper--decorator
+    > .#{$prefix}--ai-label.#{$prefix}--ai-label--revert,
+  .#{$prefix}--text-area--invalid
+    ~ .#{$prefix}--ai-label.#{$prefix}--ai-label--revert,
+  .#{$prefix}--text-area--warn
+    ~ .#{$prefix}--ai-label.#{$prefix}--ai-label--revert,
+  .#{$prefix}--text-area--invalid ~ .#{$prefix}--slug.#{$prefix}--slug--revert,
+  .#{$prefix}--text-area--warn ~ .#{$prefix}--slug.#{$prefix}--slug--revert {
+    inset-inline-end: $spacing-07;
+  }
+
+  // Skeleton State
+  .#{$prefix}--text-area.#{$prefix}--skeleton {
+    @include skeleton;
+
+    block-size: convert.to-rem(100px);
+    inline-size: 100%;
+
+    &::placeholder {
+      color: transparent;
+    }
+  }
+
+  .#{$prefix}--text-area__label-wrapper {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    inline-size: 100%;
+  }
+}

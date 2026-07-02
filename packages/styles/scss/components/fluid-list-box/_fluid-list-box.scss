@@ -1,0 +1,465 @@
+//
+// Copyright IBM Corp. 2022
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+//-----------------------------
+// Fluid List-box
+//-----------------------------
+@use '../../config' as *;
+@use '../../motion' as *;
+@use '../../spacing' as *;
+@use '../../theme' as *;
+@use '../../utilities/convert';
+@use '../../utilities/focus-outline' as *;
+@use '../../utilities/skeleton' as *;
+
+@mixin fluid-list-box {
+  .#{$prefix}--list-box__wrapper--fluid.#{$prefix}--list-box__wrapper {
+    position: relative;
+    background: $field;
+    block-size: 100%;
+    transition:
+      background-color $duration-fast-01 motion(standard, productive),
+      outline $duration-fast-01 motion(standard, productive);
+  }
+
+  .#{$prefix}--list-box__wrapper--fluid .#{$prefix}--list-box {
+    padding: 0;
+    min-block-size: convert.to-rem(64px);
+  }
+
+  .#{$prefix}--list-box__wrapper--fluid .#{$prefix}--label {
+    position: absolute;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    margin: 0;
+    block-size: convert.to-rem(16px);
+    inline-size: calc(100% - 2rem);
+    inset-block-start: convert.to-rem(13px);
+    inset-inline-start: $spacing-05;
+  }
+
+  .#{$prefix}--list-box__wrapper--fluid .#{$prefix}--label::-webkit-scrollbar,
+  .#{$prefix}--list-box__wrapper--fluid
+    .#{$prefix}--label
+    .#{$prefix}--toggletip-label::-webkit-scrollbar {
+    display: none;
+  }
+
+  .#{$prefix}--list-box__wrapper--fluid
+    .#{$prefix}--label:not(:has(.#{$prefix}--toggletip-label)),
+  .#{$prefix}--list-box__wrapper--fluid
+    .#{$prefix}--label
+    .#{$prefix}--toggletip-label {
+    -ms-overflow-style: none;
+    overflow-x: scroll;
+    scrollbar-width: none;
+    white-space: nowrap;
+  }
+
+  .#{$prefix}--list-box__wrapper--fluid .#{$prefix}--list-box__field {
+    padding-block: convert.to-rem(33px) convert.to-rem(13px);
+    padding-inline-start: $spacing-05;
+  }
+
+  .#{$prefix}--list-box__wrapper--fluid .#{$prefix}--list-box__menu-icon {
+    block-size: 1rem;
+    inline-size: 1rem;
+  }
+
+  .#{$prefix}--list-box__wrapper--fluid:not(
+      .#{$prefix}--list-box__wrapper--fluid--condensed
+    )
+    .#{$prefix}--list-box__menu-item {
+    block-size: $spacing-10;
+  }
+
+  .#{$prefix}--list-box__wrapper--fluid:not(
+      .#{$prefix}--list-box__wrapper--fluid--condensed
+    )
+    .#{$prefix}--list-box__menu-item__selected-icon {
+    inset-block-start: convert.to-rem(20px);
+  }
+
+  // Disabled styles
+  .#{$prefix}--list-box__wrapper--fluid
+    .#{$prefix}--label--disabled
+    .#{$prefix}--toggletip-label {
+    color: $text-disabled;
+  }
+
+  .#{$prefix}--list-box__wrapper--fluid
+    .#{$prefix}--label--disabled
+    .#{$prefix}--toggletip-button {
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+
+  .#{$prefix}--list-box__wrapper--fluid
+    .#{$prefix}--label--disabled
+    .#{$prefix}--toggletip-button
+    svg {
+    fill: $icon-disabled;
+  }
+
+  // Focus styles
+  .#{$prefix}--list-box__wrapper--fluid.#{$prefix}--list-box__wrapper--fluid--focus {
+    @include focus-outline('outline');
+
+    z-index: 2;
+    outline-offset: 0;
+  }
+
+  .#{$prefix}--list-box__wrapper--fluid.#{$prefix}--list-box__wrapper--fluid--focus:has(
+      .#{$prefix}--list-box--expanded.#{$prefix}--multi-select--selected
+    ) {
+    outline-width: convert.to-rem(1px);
+  }
+
+  .#{$prefix}--list-box__wrapper--fluid--focus
+    .#{$prefix}--list-box__field:focus {
+    outline: none;
+    outline-offset: 0;
+  }
+
+  // Invalid / Warning styles
+  .#{$prefix}--list-box__wrapper--fluid.#{$prefix}--list-box__wrapper--fluid--invalid:not(
+      .#{$prefix}--list-box__wrapper--fluid--focus
+    ) {
+    @include focus-outline('invalid');
+
+    z-index: 2;
+    outline-offset: 0;
+  }
+
+  .#{$prefix}--list-box__wrapper--fluid.#{$prefix}--list-box__wrapper--fluid--focus
+    .#{$prefix}--list-box:not(.#{$prefix}--list-box--invalid),
+  .#{$prefix}--list-box__wrapper--fluid.#{$prefix}--list-box__wrapper--fluid--focus
+    .#{$prefix}--list-box
+    .#{$prefix}--text-input,
+  .#{$prefix}--list-box__wrapper--fluid.#{$prefix}--list-box__wrapper--fluid--invalid
+    .#{$prefix}--list-box
+    .#{$prefix}--text-input,
+  .#{$prefix}--list-box__wrapper--fluid
+    .#{$prefix}--combo-box.#{$prefix}--list-box--warning
+    .#{$prefix}--text-input {
+    border-block-end: 1px solid transparent;
+  }
+
+  .#{$prefix}--list-box__wrapper--fluid.#{$prefix}--list-box__wrapper--fluid--invalid
+    .#{$prefix}--list-box,
+  .#{$prefix}--list-box__wrapper--fluid.#{$prefix}--list-box__wrapper--fluid--invalid
+    .#{$prefix}--list-box__field:focus,
+  .#{$prefix}--list-box__wrapper--fluid.#{$prefix}--list-box__wrapper--fluid--invalid
+    .#{$prefix}--combo-box[data-invalid]
+    .#{$prefix}--text-input {
+    outline: none;
+    outline-offset: 0;
+  }
+
+  .#{$prefix}--list-box__wrapper--fluid.#{$prefix}--list-box__wrapper--fluid--invalid:focus-within {
+    outline-offset: 0;
+  }
+
+  .#{$prefix}--list-box__wrapper--fluid.#{$prefix}--list-box__wrapper--fluid--invalid
+    .#{$prefix}--list-box,
+  .#{$prefix}--list-box__wrapper--fluid .#{$prefix}--list-box--warning {
+    border-block-end: 1px solid transparent;
+  }
+
+  .#{$prefix}--list-box__wrapper--fluid.#{$prefix}--list-box__wrapper--fluid--invalid
+    .#{$prefix}--form-requirement,
+  .#{$prefix}--list-box__wrapper--fluid
+    .#{$prefix}--list-box--warning
+    ~ .#{$prefix}--form-requirement {
+    padding: convert.to-rem(8px) 4rem convert.to-rem(8px) $spacing-05;
+    margin-block-start: 0;
+  }
+
+  .#{$prefix}--list-box__wrapper--fluid
+    .#{$prefix}--list-box--warning
+    ~ .#{$prefix}--form-requirement {
+    border-block-end: 1px solid $border-strong;
+  }
+
+  .#{$prefix}--list-box__wrapper--fluid.#{$prefix}--list-box__wrapper--fluid--invalid
+    .#{$prefix}--form-requirement:empty,
+  .#{$prefix}--list-box__wrapper--fluid
+    .#{$prefix}--list-box--warning
+    ~ .#{$prefix}--form-requirement:empty {
+    block-size: convert.to-rem(32px);
+  }
+
+  .#{$prefix}--list-box__wrapper--fluid.#{$prefix}--list-box__wrapper--fluid--invalid
+    .#{$prefix}--list-box[data-invalid]
+    .#{$prefix}--list-box__invalid-icon,
+  .#{$prefix}--list-box__wrapper--fluid
+    .#{$prefix}--list-box.#{$prefix}--list-box--warning
+    .#{$prefix}--list-box__invalid-icon {
+    inset-block-start: convert.to-rem(81px);
+    inset-inline-end: $spacing-05;
+    pointer-events: none;
+  }
+
+  .#{$prefix}--list-box__wrapper--fluid.#{$prefix}--list-box__wrapper--fluid--invalid
+    .#{$prefix}--list-box[data-invalid]:not(.#{$prefix}--combo-box)
+    .#{$prefix}--list-box__field {
+    padding-inline-end: $spacing-09;
+  }
+
+  .#{$prefix}--list-box__wrapper--fluid.#{$prefix}--list-box__wrapper--fluid--invalid
+    .#{$prefix}--list-box[data-invalid].#{$prefix}--combo-box
+    .#{$prefix}--text-input {
+    padding-inline-end: $spacing-10;
+  }
+
+  // Error + Warning divider
+  .#{$prefix}--list-box__wrapper--fluid .#{$prefix}--list-box__divider {
+    display: none;
+    transition: border-color $duration-fast-01 motion(standard, productive);
+  }
+
+  .#{$prefix}--list-box__wrapper--fluid
+    .#{$prefix}--list-box--invalid
+    ~ .#{$prefix}--list-box__divider,
+  .#{$prefix}--list-box__wrapper--fluid
+    .#{$prefix}--list-box--warning
+    ~ .#{$prefix}--list-box__divider {
+    display: block;
+    border: none;
+    margin: 0 1rem;
+    border-block-end: 1px solid $border-subtle;
+  }
+
+  .#{$prefix}--list-box__wrapper--fluid
+    .#{$prefix}--list-box--invalid:hover:not(.#{$prefix}--combo-box)
+    ~ .#{$prefix}--list-box__divider,
+  .#{$prefix}--list-box__wrapper--fluid
+    .#{$prefix}--list-box--warning:hover:not(.#{$prefix}--combo-box)
+    ~ .#{$prefix}--list-box__divider {
+    border-color: transparent;
+  }
+
+  // direction - top
+  .#{$prefix}--list-box__wrapper--fluid.#{$prefix}--list-box--up
+    .#{$prefix}--list-box__menu {
+    inset-block-end: $spacing-10;
+  }
+
+  // Skeleton styles
+  .#{$prefix}--list-box__wrapper--fluid .#{$prefix}--skeleton {
+    background: $skeleton-background;
+    border-block-end: 1px solid $skeleton-element;
+  }
+
+  .#{$prefix}--list-box__wrapper--fluid
+    .#{$prefix}--skeleton
+    .#{$prefix}--list-box__field {
+    @include skeleton;
+
+    position: absolute;
+    padding: 0;
+    block-size: convert.to-rem(8px);
+    inline-size: 50%;
+    inset-block-start: convert.to-rem(36px);
+    inset-inline-start: $spacing-05;
+  }
+
+  .#{$prefix}--list-box__wrapper--fluid
+    .#{$prefix}--skeleton
+    .#{$prefix}--list-box__label {
+    @include skeleton;
+
+    position: absolute;
+    block-size: convert.to-rem(8px);
+    inline-size: 25%;
+    inset-block-start: $spacing-05;
+    inset-inline-start: $spacing-05;
+  }
+
+  // AILabel styles
+  .#{$prefix}--list-box__wrapper--fluid.#{$prefix}--list-box__wrapper--decorator
+    .#{$prefix}--list-box__inner-wrapper--decorator
+    > *,
+  .#{$prefix}--list-box__wrapper--fluid.#{$prefix}--list-box__wrapper--slug
+    .#{$prefix}--ai-label,
+  .#{$prefix}--list-box__wrapper--fluid.#{$prefix}--list-box__wrapper--slug
+    .#{$prefix}--slug {
+    inset-block-start: convert.to-rem(42px);
+  }
+
+  .#{$prefix}--list-box__wrapper--fluid.#{$prefix}--list-box__wrapper--decorator
+    .#{$prefix}--list-box--warning
+    .#{$prefix}--list-box__wrapper--decorator-inner
+    > *,
+  .#{$prefix}--list-box__wrapper--fluid.#{$prefix}--list-box__wrapper--decorator
+    .#{$prefix}--list-box--invalid
+    .#{$prefix}--list-box__wrapper--decorator-inner
+    > *,
+  .#{$prefix}--list-box__wrapper--fluid.#{$prefix}--list-box__wrapper--slug
+    .#{$prefix}--list-box--warning
+    .#{$prefix}--ai-label,
+  .#{$prefix}--list-box__wrapper--fluid.#{$prefix}--list-box__wrapper--slug
+    .#{$prefix}--list-box--invalid
+    .#{$prefix}--ai-label,
+  .#{$prefix}--list-box__wrapper--fluid.#{$prefix}--list-box__wrapper--slug
+    .#{$prefix}--list-box--warning
+    .#{$prefix}--ai-label,
+  .#{$prefix}--list-box__wrapper--fluid.#{$prefix}--list-box__wrapper--slug
+    .#{$prefix}--list-box--invalid
+    .#{$prefix}--ai-label,
+  .#{$prefix}--list-box__wrapper--fluid.#{$prefix}--list-box__wrapper--slug
+    .#{$prefix}--list-box--warning
+    .#{$prefix}--slug,
+  .#{$prefix}--list-box__wrapper--fluid.#{$prefix}--list-box__wrapper--slug
+    .#{$prefix}--list-box--invalid
+    .#{$prefix}--slug {
+    inset-inline-end: $spacing-08;
+  }
+
+  .#{$prefix}--list-box__wrapper--fluid.#{$prefix}--list-box__wrapper--decorator
+    .#{$prefix}--list-box--warning
+    button.#{$prefix}--list-box__field,
+  .#{$prefix}--list-box__wrapper--fluid.#{$prefix}--list-box__wrapper--fluid--invalid.#{$prefix}--list-box__wrapper--decorator
+    .#{$prefix}--list-box--invalid[data-invalid]
+    button.#{$prefix}--list-box__field,
+  .#{$prefix}--list-box__wrapper--fluid.#{$prefix}--list-box__wrapper--slug
+    .#{$prefix}--list-box--warning
+    button.#{$prefix}--list-box__field,
+  .#{$prefix}--list-box__wrapper--fluid.#{$prefix}--list-box__wrapper--fluid--invalid.#{$prefix}--list-box__wrapper--slug
+    .#{$prefix}--list-box--invalid[data-invalid]
+    button.#{$prefix}--list-box__field {
+    padding-inline-end: $spacing-10;
+  }
+
+  .#{$prefix}--list-box__wrapper--fluid.#{$prefix}--list-box__wrapper--decorator
+    .#{$prefix}--list-box--warning
+    .#{$prefix}--text-input:not(.#{$prefix}--text-input--empty),
+  .#{$prefix}--list-box__wrapper--fluid.#{$prefix}--list-box__wrapper--decorator.#{$prefix}--list-box__wrapper--fluid--invalid
+    .#{$prefix}--list-box--invalid
+    .#{$prefix}--text-input:not(.#{$prefix}--text-input--empty),
+  .#{$prefix}--list-box__wrapper--fluid.#{$prefix}--list-box__wrapper--slug
+    .#{$prefix}--list-box--warning
+    .#{$prefix}--text-input:not(.#{$prefix}--text-input--empty),
+  .#{$prefix}--list-box__wrapper--fluid.#{$prefix}--list-box__wrapper--slug.#{$prefix}--list-box__wrapper--fluid--invalid
+    .#{$prefix}--list-box--invalid
+    .#{$prefix}--text-input:not(.#{$prefix}--text-input--empty) {
+    padding-inline-end: convert.to-rem(88px);
+  }
+
+  .#{$prefix}--list-box__wrapper--fluid.#{$prefix}--list-box__wrapper--decorator
+    .#{$prefix}--list-box--warning
+    .#{$prefix}--list-box__field:has(
+      .#{$prefix}--text-input:not(.#{$prefix}--text-input--empty)
+    )
+    ~ .#{$prefix}--list-box__wrapper--decorator-inner
+    > *,
+  .#{$prefix}--list-box__wrapper--fluid.#{$prefix}--list-box__wrapper--decorator
+    .#{$prefix}--list-box--invalid
+    .#{$prefix}--list-box__field:has(
+      .#{$prefix}--text-input:not(.#{$prefix}--text-input--empty)
+    )
+    ~ .#{$prefix}--list-box__wrapper--decorator-inner
+    > *,
+  .#{$prefix}--list-box__wrapper--fluid.#{$prefix}--list-box__wrapper--slug
+    .#{$prefix}--list-box--warning
+    .#{$prefix}--list-box__field:has(
+      .#{$prefix}--text-input:not(.#{$prefix}--text-input--empty)
+    )
+    ~ .#{$prefix}--ai-label,
+  .#{$prefix}--list-box__wrapper--fluid.#{$prefix}--list-box__wrapper--slug
+    .#{$prefix}--list-box--invalid
+    .#{$prefix}--list-box__field:has(
+      .#{$prefix}--text-input:not(.#{$prefix}--text-input--empty)
+    )
+    ~ .#{$prefix}--ai-label,
+  .#{$prefix}--list-box__wrapper--fluid.#{$prefix}--list-box__wrapper--slug
+    .#{$prefix}--list-box--warning
+    .#{$prefix}--list-box__field:has(
+      .#{$prefix}--text-input:not(.#{$prefix}--text-input--empty)
+    )
+    ~ .#{$prefix}--ai-label,
+  .#{$prefix}--list-box__wrapper--fluid.#{$prefix}--list-box__wrapper--slug
+    .#{$prefix}--list-box--invalid
+    .#{$prefix}--list-box__field:has(
+      .#{$prefix}--text-input:not(.#{$prefix}--text-input--empty)
+    )
+    ~ .#{$prefix}--ai-label,
+  .#{$prefix}--list-box__wrapper--fluid.#{$prefix}--list-box__wrapper--slug
+    .#{$prefix}--list-box--warning
+    .#{$prefix}--list-box__field:has(
+      .#{$prefix}--text-input:not(.#{$prefix}--text-input--empty)
+    )
+    ~ .#{$prefix}--slug,
+  .#{$prefix}--list-box__wrapper--fluid.#{$prefix}--list-box__wrapper--slug
+    .#{$prefix}--list-box--invalid
+    .#{$prefix}--list-box__field:has(
+      .#{$prefix}--text-input:not(.#{$prefix}--text-input--empty)
+    )
+    ~ .#{$prefix}--slug {
+    inset-inline-end: $spacing-10;
+  }
+
+  .#{$prefix}--list-box__wrapper--fluid.#{$prefix}--list-box__wrapper--decorator
+    .#{$prefix}--text-input:not(.#{$prefix}--text-input--empty),
+  .#{$prefix}--list-box__wrapper--fluid.#{$prefix}--list-box__wrapper--slug
+    .#{$prefix}--text-input:not(.#{$prefix}--text-input--empty) {
+    padding-inline-end: $spacing-12;
+  }
+
+  .#{$prefix}--list-box__wrapper--fluid .#{$prefix}--list-box__selection {
+    inset-inline-end: convert.to-rem(41px);
+  }
+
+  .#{$prefix}--list-box__wrapper--fluid .#{$prefix}--list-box--warning,
+  .#{$prefix}--list-box__wrapper--fluid
+    .#{$prefix}--list-box--invalid[data-invalid] {
+    .#{$prefix}--list-box__field:has(.#{$prefix}--list-box__menu-icon)
+      .#{$prefix}--list-box__selection::before {
+      position: absolute;
+      background-color: transparent;
+      block-size: convert.to-rem(16px);
+      content: '';
+      inline-size: convert.to-rem(1px);
+      margin-inline-end: convert.to-rem(33px);
+    }
+  }
+
+  .#{$prefix}--list-box__wrapper--fluid:has(.#{$prefix}--multi-select)
+    .#{$prefix}--list-box__menu-icon {
+    inset-inline-end: $spacing-04;
+  }
+
+  .#{$prefix}--list-box__wrapper--fluid:has(.#{$prefix}--dropdown)
+    .#{$prefix}--list-box__menu-icon {
+    inset-inline-end: $spacing-05;
+  }
+
+  // remove ai-label divider when element is invalid and fluid
+  .#{$prefix}--list-box__wrapper--fluid.#{$prefix}--list-box__wrapper--decorator
+    .#{$prefix}--list-box--invalid[data-invalid]
+    .#{$prefix}--list-box__wrapper--decorator-inner
+    > *::before,
+  .#{$prefix}--list-box__wrapper--decorator
+    .#{$prefix}--list-box--warning
+    .#{$prefix}--list-box__wrapper--decorator-inner
+    > *::before,
+  .#{$prefix}--list-box__wrapper--fluid.#{$prefix}--list-box__wrapper--slug
+    .#{$prefix}--list-box--invalid[data-invalid]
+    .#{$prefix}--ai-label::before,
+  .#{$prefix}--list-box__wrapper--slug
+    .#{$prefix}--list-box--warning
+    .#{$prefix}--ai-label::before,
+  .#{$prefix}--list-box__wrapper--fluid.#{$prefix}--list-box__wrapper--slug
+    .#{$prefix}--list-box--invalid[data-invalid]
+    .#{$prefix}--slug::before,
+  .#{$prefix}--list-box__wrapper--slug
+    .#{$prefix}--list-box--warning
+    .#{$prefix}--slug::before {
+    display: none;
+  }
+}

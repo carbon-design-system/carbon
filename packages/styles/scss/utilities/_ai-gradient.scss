@@ -1,0 +1,154 @@
+//
+// Copyright IBM Corp. 2023, 2025
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use '../theme';
+@use './custom-property';
+
+/// Experimental - name and structure subject to change. Use at your own risk!
+/// Adds AI gradient styles to a component
+/// @access private
+/// @param {String} $direction  - Direction of gradient from: `left`, `right`, `top`, and `bottom`
+/// @param {Number} $span - Percentage span of gradient with regards to parent component
+/// @example @include ai-gradient('right', '33%');
+/// @group utilities
+@mixin ai-gradient($direction: 'bottom', $span: 50%) {
+  $deg: 0;
+  @if $direction == 'bottom' {
+    $deg: 0deg;
+  } @else if $direction == 'left' {
+    $deg: 90deg;
+  } @else if $direction == 'top' {
+    $deg: 180deg;
+  } @else if $direction == 'right' {
+    $deg: 270deg;
+  }
+
+  background-image: linear-gradient(
+    $deg,
+    theme.$ai-aura-start-sm 0%,
+    15%,
+    theme.$ai-aura-end $span,
+    transparent 100%
+  );
+
+  border-block-end-color: theme.$ai-border-strong;
+}
+
+@mixin ai-table-gradient($type: 'default', $span: 50%) {
+  @if $type == 'hover' {
+    background: linear-gradient(
+        to right,
+        theme.$ai-aura-hover-start 0%,
+        15%,
+        theme.$ai-aura-hover-end 50%
+      ),
+      theme.$ai-aura-hover-background;
+  } @else if $type == 'selected' {
+    background: linear-gradient(
+        to right,
+        theme.$ai-aura-start-sm 0%,
+        theme.$ai-aura-end 50%,
+        transparent 50%
+      ),
+      theme.$layer-selected;
+  } @else if $type == 'full-table' {
+    background: linear-gradient(
+      to top,
+      theme.$ai-aura-start 0%,
+      theme.$ai-aura-end 50%,
+      transparent 50%
+    );
+  } @else {
+    background: linear-gradient(
+      to right,
+      theme.$ai-aura-start-sm 0%,
+      theme.$ai-aura-end $span,
+      transparent 50%
+    );
+  }
+}
+
+/// Experimental - name and structure subject to change. Use at your own risk!
+/// Adds callout gradient styles to a component
+/// @access private
+/// @example @include ai-popover-gradient();
+/// @param {String} $type  - Type of gradient, either 'default', 'selected' or 'hover'
+/// @param {Number} $offset  - specify a pixel offset the callout should start from the bottom
+/// @param {String} $background  - specify the token to be used as the background
+/// @group utilities
+@mixin ai-popover-gradient(
+  $type: 'default',
+  $offset: 0,
+  $background: 'ai-popover-background'
+) {
+  $start: 0%;
+  @if $offset != 0 {
+    $start: calc(0% + #{$offset});
+  }
+
+  $background: custom-property.get-var(
+    #{$background},
+    theme.$ai-popover-background
+  );
+
+  @if $type == 'hover' {
+    background:
+      linear-gradient(
+          to top,
+          theme.$ai-aura-hover-start $start,
+          15%,
+          theme.$ai-aura-hover-end 50%
+        )
+        padding-box,
+      linear-gradient(
+          to top,
+          theme.$ai-aura-hover-background,
+          theme.$ai-aura-hover-background
+        )
+        padding-box,
+      linear-gradient(to bottom, theme.$ai-border-start, theme.$ai-border-end)
+        border-box,
+      // Needed to underlay the transparent border
+      linear-gradient(
+          to top,
+          theme.$ai-aura-hover-background,
+          theme.$ai-aura-hover-background
+        )
+        border-box;
+  } @else if $type == 'selected' {
+    background:
+      linear-gradient(
+          to top,
+          theme.$ai-aura-start $start,
+          15%,
+          theme.$ai-aura-end 50%
+        )
+        padding-box,
+      linear-gradient(to top, theme.$layer, theme.$layer) padding-box,
+      linear-gradient(to bottom, theme.$border-inverse, theme.$border-inverse)
+        border-box,
+      // Needed to underlay the transparent border
+      linear-gradient(to top, theme.$layer, theme.$layer)
+        border-box;
+  } @else {
+    background:
+      linear-gradient(
+          to top,
+          $background $start,
+          theme.$ai-aura-start $start,
+          15%,
+          theme.$ai-aura-end 50%
+        )
+        padding-box,
+      linear-gradient(to top, $background, $background) padding-box,
+      linear-gradient(to bottom, theme.$ai-border-start, theme.$ai-border-end)
+        border-box,
+      // Needed to underlay the transparent border
+      linear-gradient(to top, $background, $background)
+        border-box;
+  }
+}

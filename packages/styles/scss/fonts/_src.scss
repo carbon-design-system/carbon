@@ -1,0 +1,212 @@
+//
+// Copyright IBM Corp. 2018, 2023
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use '../config';
+@use 'sass:list';
+@use 'sass:map';
+@use 'sass:meta';
+
+$-filenames: (
+  IBM-Plex-Mono: 'IBMPlexMono',
+  IBM-Plex-Sans-Arabic: 'IBMPlexSansArabic',
+  IBM-Plex-Sans-Devanagari: 'IBMPlexSansDevanagari',
+  IBM-Plex-Sans-Hebrew: 'IBMPlexSansHebrew',
+  IBM-Plex-Sans-Thai-Looped: 'IBMPlexSansThaiLooped',
+  IBM-Plex-Sans-Thai: 'IBMPlexSansThai',
+  IBM-Plex-Sans: 'IBMPlexSans',
+  IBM-Plex-Serif: 'IBMPlexSerif',
+);
+
+$-akamai-filenames: (
+  IBM-Plex-Mono: (
+    name: 'IBM-Plex-Mono',
+    filename: 'IBMPlexMono',
+  ),
+  IBM-Plex-Sans-Arabic: (
+    name: 'IBM-Plex-Sans-Arabic',
+    filename: 'IBMPlexSansArabic',
+  ),
+  IBM-Plex-Sans-Devanagari: (
+    name: 'IBM-Plex-Sans-Devanagari',
+    filename: 'IBMPlexSansDevanagari',
+  ),
+  IBM-Plex-Sans-Hebrew: (
+    name: 'IBM-Plex-Sans-Hebrew',
+    filename: 'IBMPlexSansHebrew',
+  ),
+  IBM-Plex-Sans-Thai-Looped: (
+    name: 'IBM-Plex-Sans-Thai-Looped',
+    filename: 'IBMPlexSansThaiLooped',
+  ),
+  IBM-Plex-Sans-Thai: (
+    name: 'IBM-Plex-Sans-Thai',
+    filename: 'IBMPlexSansThai',
+  ),
+  IBM-Plex-Sans: (
+    name: 'IBM-Plex-Sans',
+    filename: 'IBMPlexSans',
+  ),
+  IBM-Plex-Serif: (
+    name: 'IBM-Plex-Serif',
+    filename: 'IBMPlexSerif',
+  ),
+);
+
+@function -get-akamai-filename($map, $keys...) {
+  @each $key in $keys {
+    $map: map.get($map, $key);
+  }
+
+  @return $map;
+}
+
+@function -get-base-filename($name) {
+  @return map.get($-filenames, $name);
+}
+
+/// The default resolver for locating a font file in the `@ibm/plex` package.
+/// This function will return a path that will work in bundling tools like
+/// webpack but will not work without a tool that understands paths that are
+/// prefixed with `~`
+///
+/// @param {String} $name
+/// @param {String} $weight
+/// @param {String} $style
+/// @param {String} $unicode-range
+/// @param {List} $formats
+/// @returns List
+@function -default-resolver(
+  $name,
+  $weight,
+  $style,
+  $unicode-range,
+  $formats,
+  $package-name
+) {
+  @if (config.$use-akamai-cdn) {
+    $name: -get-akamai-filename($-akamai-filenames, $name, 'name');
+    $filename: -get-akamai-filename($-akamai-filenames, $name, 'filename');
+
+    // Special case for weight = Regular (400)
+    @if $weight ==Regular {
+      @if $style ==italic {
+        $filename: '#{$filename}-Italic';
+      } @else {
+        $filename: '#{$filename}-Regular';
+      }
+    } @else {
+      // Otherwise add weight + optional style (italic)
+      $filename: '#{$filename}-#{$weight}';
+
+      @if $style ==italic {
+        $filename: '#{$filename}Italic';
+      }
+    }
+
+    $filenames: ();
+
+    @each $format in $formats {
+      $url: 'https://1.www.s81c.com/common/carbon/plex/fonts/#{$name}';
+
+      @if $unicode-range {
+        $url: 'https://1.www.s81c.com/common/carbon/plex/fonts/#{$name}/fonts/split/#{$format}/#{$filename}-#{$unicode-range}';
+      } @else {
+        $url: 'https://1.www.s81c.com/common/carbon/plex/fonts/#{$name}/fonts/complete/#{$format}/#{$filename}';
+      }
+
+      // Add extension
+      $url: '#{$url}.#{$format}';
+      $filenames: list.append(
+        $filenames,
+        url('#{$url}') format('#{$format}'),
+        $separator: comma
+      );
+    }
+
+    @return $filenames;
+  } @else {
+    $filename: -get-base-filename($name);
+
+    // Special case for weight = Regular (400)
+    @if $weight ==Regular {
+      @if $style ==italic {
+        $filename: '#{$filename}-Italic';
+      } @else {
+        $filename: '#{$filename}-Regular';
+      }
+    } @else {
+      // Otherwise add weight + optional style (italic)
+      $filename: '#{$filename}-#{$weight}';
+
+      @if $style ==italic {
+        $filename: '#{$filename}Italic';
+      }
+    }
+
+    $filenames: ();
+
+    @each $format in $formats {
+      $url: $filename;
+
+      @if config.$use-per-family-plex {
+        @if $unicode-range {
+          $url: '#{config.$font-path}-#{$package-name}/fonts/split/#{$format}/#{$filename}-#{$unicode-range}';
+        } @else {
+          $url: '#{config.$font-path}-#{$package-name}/fonts/complete/#{$format}/#{$filename}';
+        }
+      } @else {
+        @if $unicode-range {
+          $url: '#{config.$font-path}/#{$name}/fonts/split/#{$format}/#{$filename}-#{$unicode-range}';
+        } @else {
+          $url: '#{config.$font-path}/#{$name}/fonts/complete/#{$format}/#{$filename}';
+        }
+      }
+
+      // Add extension
+      $url: '#{$url}.#{$format}';
+      $filenames: list.append(
+        $filenames,
+        url('#{$url}') format('#{$format}'),
+        $separator: comma
+      );
+    }
+
+    @return $filenames;
+  }
+}
+
+/// The resolver used for locating the filepaths in `url() format()` values in
+/// @font-face blocks
+$resolver: meta.get-function('-default-resolver') !default;
+
+/// Retrieve the list of `url() format()` values used in the `src` property in
+/// an `@font-face` block
+
+/// @param {String} $name
+/// @param {String} $weight
+/// @param {String} $style
+/// @param {String} $unicode-range
+/// @param {List} $formats
+/// @returns List
+@function get(
+  $name,
+  $weight,
+  $style,
+  $unicode-range: null,
+  $formats,
+  $package-name
+) {
+  @return meta.call(
+    $resolver,
+    $name: $name,
+    $weight: $weight,
+    $style: $style,
+    $unicode-range: $unicode-range,
+    $formats: $formats,
+    $package-name: $package-name
+  );
+}

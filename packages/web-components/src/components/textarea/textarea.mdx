@@ -1,0 +1,48 @@
+import { ArgTypes, Canvas, Markdown, Meta } from '@storybook/addon-docs/blocks';
+import { cdnJs } from '../../globals/internal/storybook-cdn';
+import * as TextAreaStories from './textarea.stories';
+
+<Meta of={TextAreaStories} />
+
+# Text Area
+
+[Source code](https://github.com/carbon-design-system/carbon/tree/main/packages/web-components/src/components/textarea)
+&nbsp;|&nbsp;
+[Usage guidelines](https://carbondesignsystem.com/components/text-input/usage/#text-area)
+&nbsp;|&nbsp;
+[Accessibility](https://www.carbondesignsystem.com/components/text-input/accessibility)
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Skeleton](#skeleton)
+- [AI Label](#ai-label)
+- [Component API](#component-api)
+- [CDN](#cdn)
+- [Feedback](#feedback)
+
+## Overview
+
+<Canvas of={TextAreaStories.Default} />
+
+## Skeleton
+
+<Canvas of={TextAreaStories.Skeleton} />
+
+## AI Label
+
+<Canvas of={TextAreaStories.WithAILabel} />
+
+## Component API
+
+## `cds-textarea`
+
+<ArgTypes of="cds-textarea" />
+
+<Markdown>{`${cdnJs({ components: ['textarea'] })}`}</Markdown>
+
+## Feedback
+
+Help us improve this component by providing feedback, asking questions on Slack,
+or updating this file on
+[GitHub](https://github.com/carbon-design-system/carbon/edit/main/packages/web-components/src/components/textarea/textarea.mdx).

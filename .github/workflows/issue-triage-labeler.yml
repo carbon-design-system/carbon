@@ -1,0 +1,21 @@
+name: 'Issue Labeler'
+on:
+  issues:
+    types: [opened, edited]
+
+permissions:
+  issues: write
+  contents: read
+
+jobs:
+  label-issues:
+    # do not run on forks
+    if: github.repository == 'carbon-design-system/carbon'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: github/issue-labeler@c1b0f9f52a63158c4adc09425e858e87b32e9685 # v3.4
+        with:
+          configuration-path: .github/labeler.yml
+          not-before: 2025-08-14T00:00:00Z
+          enable-versioned-regex: 0
+          repo-token: '${{ secrets.GITHUB_TOKEN }}'

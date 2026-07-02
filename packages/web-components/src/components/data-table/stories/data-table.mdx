@@ -1,0 +1,325 @@
+import { ArgTypes, Canvas, Markdown, Meta } from '@storybook/addon-docs/blocks';
+import { cdnJs } from '../../../globals/internal/storybook-cdn';
+
+<Meta isTemplate />
+
+# Data table
+
+[Source code](https://github.com/carbon-design-system/carbon/tree/main/packages/web-components/src/components/data-table)
+&nbsp;|&nbsp;
+[Usage guidelines](https://www.carbondesignsystem.com/components/data-table/usage)
+&nbsp;|&nbsp;
+[Accessibility](https://www.carbondesignsystem.com/components/data-table/accessibility)
+
+<Canvas id="components-datatable-sorting--default" />
+
+## Table of Contents
+
+- [Getting started](#getting-started)
+- [Sorting](#sorting)
+  - [Programmatic sorting](#programmatic-sorting)
+  - [Custom sorting](#custom-sorting)
+- [Expansion](#expansion)
+  - [Programmatic expansion](#programmatic-expansion)
+- [Selection](#selection)
+  - [Programmatic selection](#programmatic-selection)
+- [Filtering](#filtering)
+- [Batch actions](#batch-actions)
+- [Toolbar](#toolbar)
+  - [Overflow Menu](#overflow-menu)
+- [Accessibility Considerations](#accessibility-considerations)
+  - [Accessible Name](#accessible-name)
+- [Component API](#component-api)
+- [CDN](#cdn)
+- [Feedback](#feedback)
+
+## Getting started
+
+You can implement a data table in your project by importing the `cds-table`
+component and using it along with any additional table components that you need.
+
+The data table component needs two additional components to be provided:
+`cds-table-row` and `cds-table-head`. The `cds-table-row` component is the data
+you would like to display in the rows of your table, whereas `cds-table-head`
+specifies which table column headings should be displayed.
+
+```html
+<cds-table>
+  <cds-table-head>
+    <cds-table-header-row>
+      <cds-table-header-cell>Name</cds-table-header-cell>
+      <cds-table-header-cell>Status</cds-table-header-cell>
+    </cds-table-header-row>
+  </cds-table-head>
+  <cds-table-body>
+    <cds-table-row>
+      <cds-table-cell>Load Balancer 1</cds-table-cell>
+      <cds-table-cell>Disabled</cds-table-cell>
+    </cds-table-row>
+    <cds-table-row>
+      <cds-table-cell>Load Balancer 2</cds-table-cell>
+      <cds-table-cell>Starting</cds-table-cell>
+    </cds-table-row>
+    <cds-table-row>
+      <cds-table-cell>Load Balancer 3</cds-table-cell>
+      <cds-table-cell>Active</cds-table-cell>
+    </cds-table-row>
+  </cds-table-body>
+</cds-table>
+```
+
+After rendering a data table component using the code snippet above, you can
+optionally add any number of features including sorting, row expansion,
+filtering, row selection, batch actions.
+
+For more information, see each usage section below for the functionality that
+you're interested in. If you want to see a full list of options, visit the
+[component API](#component-api) section.
+
+## Sorting
+
+In order to sort the rows in your data table, you will need to use the
+`is-sortable` attribute in the `cds-table` component.
+
+<Canvas id="components-datatable-sorting--default" />
+
+Optionally, you can add `is-sortable` to each `cds-table-header-cell` that you
+want to be sorted, or not sorted. This is useful if you only want to enable
+sorting on some table column headers, but not all.
+
+```html
+<cds-table-header-cell is-sortable> ... </cds-table-header-cell>
+```
+
+### Programmatic sorting
+
+You can also change the sort status of the table by querying the specific
+`cds-table-header-cell` you would like to sort.
+
+```js
+// sorting the first column
+document
+  .querySelectorAll('cds-table-header-cell')[0]
+  .shadowRoot.querySelector('button')
+  .click();
+```
+
+### Custom sorting
+
+If the default sorting logic doesn't match your use-case, you can use a custom
+sort method.
+
+`sortRow` is a method that takes in the values of two cells, in addition to some
+info, and should return -1, 0, or 1 as a result (mirroring the native sort
+behavior in JavaScript).
+
+The component uses a default `Intl.Collator` object created with the current set
+locale to sort the rows. The default sorting row function uses this collator,
+and as such it is needed in the custom sorting function.
+
+For example, this `customSortRow` function would take on the following shape:
+
+```js
+customSortRow(lhs, rhs, collator) {
+  if (typeof lhs === 'number' && typeof rhs === 'number') {
+    return lhs - rhs;
+  }
+  return collator.compare(lhs, rhs);
+}
+
+document.querySelector('cds-table').customSortRow = customSortRow;
+```
+
+## Expansion
+
+The `cds-table` component supports row-level expansion when using the
+`expandable` attribute. Setting the attribute will apply the `expandable`
+attribute to every row. In order to make a row be expandable, it is necessary
+for the row to have a `cds-table-expanded-row` component directly following it.
+
+<Canvas id="components-datatable-expansion--default" />
+
+In case you'd like a button to expand all the rows at once, you can use the
+`batch-expansion` attribute in `cds-table`.
+
+In case you only want to set specific rows to be expandable, be sure to set the
+`expandable` attribute only on that specific `cds-table-row` component, and have
+its adjacent sibling `cds-table-expanded-row` directly following it.
+
+### Programmatic expansion
+
+You can programmatically trigger a row expansion by querying the desired row as
+such:
+
+```js
+document
+  .querySelectorAll('cds-table-row')[0]
+  .shadowRoot.querySelector('.cds--table-expand__button')
+  .click();
+```
+
+## Selection
+
+The `cds-table` component supports row selection when using the `is-selectable`
+attribute. Using `is-selectable` will automatically set a numerical
+`selection-name` attribute to every row, though this can also be customized with
+your own custom name.
+
+<Canvas id="components-datatable-selection--default" />
+
+## Filtering
+
+Filtering in a `cds-table` is provided through usage of the `cds-table-toolbar`
+and the `cds-table-toolbar-search` component. Any input entered through
+`cds-table-toolbar-search` will be used in the built-in filtering function.
+
+```html
+<cds-table>
+  <cds-table-toolbar slot="toolbar">
+    <cds-table-toolbar-content>
+      <cds-table-toolbar-search
+        placeholder="Filter table"></cds-table-toolbar-search>
+    </cds-table-toolbar-content>
+  </cds-table-toolbar>
+  <cds-table-head> ... header </cds-table-head>
+  ... body and rows
+</cds-table>
+```
+
+### Multiple filters with batch updates
+
+The filtering story shows an example of how to implement the
+[batch filtering](https://carbondesignsystem.com/patterns/filtering/#multiple-filters-with-batch-updates)
+pattern.
+
+## Batch actions
+
+You can combine batch actions with the `cds-table` component to allow the user
+to perform a single action on multiple selected rows.
+
+This toolbar is highly customizable, as any action can be adhered to a
+`cds-button` and inserted into the toolbar.
+
+In the example below, we have custom `cds-button`s that we can customize to our
+liking by using the `onclick` property and passing it any custom functions.
+
+The component has a built-in download function, that is called whenever one of
+the `cds-button`s has a `download` attribute. The component will create a JSON
+object containing the currently selected rows, and trigger its download within
+the browser.
+
+```js
+const alertFunction = () => alert('Alert!');
+```
+
+## Toolbar
+
+<Canvas id="components-datatable-toolbar--default" />
+
+### Overflow Menu
+
+An overflow menu can be added to the toolbar table row. To add an overflow menu,
+simply add a `cds-table-cell` containing the `cds-overflow-menu`.
+
+```html
+<cds-table-row>
+  <cds-table-cell>Load Balancer 4</cds-table-cell>
+  <cds-table-cell>HTTP</cds-table-cell>
+  <cds-table-cell>443</cds-table-cell>
+  <cds-table-cell>Round robin</cds-table-cell>
+  <cds-table-cell>Mel's VM Groups</cds-table-cell>
+  <cds-table-cell><cds-link>Starting</cds-link></cds-table-cell>
+  <cds-table-cell>
+    <cds-overflow-menu toolbar-action>
+      <svg
+        focusable="false"
+        preserveAspectRatio="xMidYMid meet"
+        xmlns="http://www.w3.org/2000/svg"
+        fill="currentColor"
+        aria-hidden="true"
+        width="16"
+        height="16"
+        viewBox="0 0 32 32"
+        slot="icon">
+        <circle cx="16" cy="8" r="2"></circle>
+        <circle cx="16" cy="16" r="2"></circle>
+        <circle cx="16" cy="24" r="2"></circle>
+      </svg>
+      <span slot="tooltip-content"> Options </span>
+      <cds-overflow-menu-body>
+        <cds-overflow-menu-item> Stop app </cds-overflow-menu-item>
+        <cds-overflow-menu-item> Restart app </cds-overflow-menu-item>
+        <cds-overflow-menu-item> Rename </cds-overflow-menu-item>
+      </cds-overflow-menu-body>
+    </cds-overflow-menu>
+  </cds-table-cell>
+</cds-table-row>
+```
+
+## Accessibility Considerations
+
+### Accessible Name
+
+To comply with accessibility requirements, make sure to supply the component
+with an accessible name by providing either the `aria-label`, `aria-labelledby`
+or `title` attribute to the `Table` component. Read more on the accessible
+naming rule
+[here](https://able.ibm.com/rules/archives/latest/doc/en-US/aria_accessiblename_exists.html).
+
+## Component API
+
+### `cds-table`
+
+<ArgTypes of="cds-table" />
+
+### `cds-table-header-row`
+
+<ArgTypes of="cds-table-header-row" />
+
+### `cds-table-header-cell`
+
+<ArgTypes of="cds-table-header-cell" />
+
+### `cds-table-body`
+
+<ArgTypes of="cds-table-body" />
+
+### `cds-table-row`
+
+<ArgTypes of="cds-table-row" />
+
+### `cds-table-expanded-row`
+
+<ArgTypes of="cds-table-expanded-row" />
+
+### `cds-table-cell`
+
+<ArgTypes of="cds-table-cell" />
+
+### `cds-table-batch-actions`
+
+<ArgTypes of="cds-table-batch-actions" />
+
+### `cds-table-toolbar`
+
+<ArgTypes of="cds-table-toolbar" />
+
+### `cds-table-toolbar-content`
+
+<ArgTypes of="cds-table-toolbar-content" />
+
+### `cds-table-toolbar-search`
+
+<ArgTypes of="cds-table-toolbar-search" />
+
+### `cds-table-skeleton`
+
+<ArgTypes of="cds-table-skeleton" />
+
+<Markdown>{`${cdnJs({ components: ['data-table'] })}`}</Markdown>
+
+## Feedback
+
+Help us improve this component by providing feedback, asking questions on Slack,
+or updating this file on
+[GitHub](https://github.com/carbon-design-system/carbon/edit/main/packages/web-components/src/components/data-table/data-table.mdx).

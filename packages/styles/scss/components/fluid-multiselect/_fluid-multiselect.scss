@@ -1,0 +1,54 @@
+//
+// Copyright IBM Corp. 2022
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+//-----------------------------
+// Fluid Multiselect
+//-----------------------------
+@use '../../config' as *;
+@use '../../motion' as *;
+@use '../../spacing' as *;
+@use '../../theme' as *;
+@use '../../utilities/convert';
+@use '../../utilities/focus-outline' as *;
+@use '../multiselect';
+@use '../fluid-list-box';
+@use '../fluid-combo-box';
+
+@mixin fluid-multiselect {
+  .#{$prefix}--multi-select__wrapper.#{$prefix}--list-box__wrapper--fluid--focus:not(
+      .#{$prefix}--multi-select--filterable__wrapper
+    )
+    .#{$prefix}--list-box__field--wrapper--input-focused {
+    outline: none;
+  }
+
+  .#{$prefix}--list-box__wrapper--fluid
+    .#{$prefix}--tag.#{$prefix}--tag--filter {
+    margin-block-start: 1.25rem;
+  }
+
+  // Filterable
+  .#{$prefix}--list-box__wrapper--fluid
+    .#{$prefix}--multi-select--filterable
+    .#{$prefix}--list-box__field
+    .#{$prefix}--text-input {
+    border-block-end: 1px solid transparent;
+  }
+
+  .#{$prefix}--list-box__wrapper--fluid
+    .#{$prefix}--multi-select--filterable.#{$prefix}--combo-box
+    .#{$prefix}--list-box__field {
+    align-items: baseline;
+  }
+
+  .#{$prefix}--list-box__wrapper--fluid.#{$prefix}--multi-select--filterable__wrapper:not(
+      .#{$prefix}--list-box--up
+    )
+    .#{$prefix}--list-box__menu {
+    inset-block-start: calc(100% + convert.to-rem(1px));
+  }
+}

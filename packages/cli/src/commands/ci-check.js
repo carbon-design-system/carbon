@@ -1,0 +1,44 @@
+/**
+ * Copyright IBM Corp. 2019, 2025
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+import { reporter } from '@carbon/cli-reporter';
+import { exec } from 'child-process-promise';
+import { workspace } from '../workspace.js';
+
+async function check(args, env) {
+  reporter.info('Running checks in CI...');
+
+  const options = {
+    cwd: env.root.directory,
+    stdio: 'inherit',
+  };
+  const tasks = [
+    `yarn carbon-cli check --ignore '**/@(node_modules|examples|components|react|fixtures|compat)/**' 'packages/**/*.scss'`,
+    `cross-env BABEL_ENV=test yarn test --ci --maxWorkers 2 --reporters=default --reporters=jest-junit`,
+    `cross-env BABEL_ENV=test yarn test:e2e --ci --maxWorkers 2 --reporters=default --reporters=jest-junit`,
+  ];
+
+  try {
+    for (const task of tasks) {
+      const now = Date.now();
+
+      reporter.info(`Running: ${task}`);
+      await exec(task, options);
+      reporter.success(`Done in: ${Date.now() - now}ms`);
+    }
+  } catch (error) {
+    console.log(error.stdout);
+    console.log(error.stderr);
+    console.log(error);
+    process.exit(1);
+  }
+}
+
+export const builder = {};
+export const command = 'ci-check';
+export const desc = 'run CI checks';
+export const handler = workspace(check);

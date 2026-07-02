@@ -1,0 +1,23 @@
+//
+// Copyright IBM Corp. 2016, 2023
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use 'content';
+@use 'header';
+@use 'header-panel';
+@use 'side-nav';
+@use 'switcher';
+
+/// UI shell content
+/// @access private
+/// @group ui-shell
+@mixin ui-shell {
+  @include content.content;
+  @include header.header;
+  @include header-panel.header-panel;
+  @include side-nav.side-nav;
+  @include switcher.switcher;
+}

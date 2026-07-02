@@ -1,0 +1,30 @@
+//
+// Copyright IBM Corp. 2021
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+// Tabs
+
+@use '../../theme' as *;
+
+/// @type Value
+/// @access public
+/// @group tabs
+$tab-underline-color: 2px solid $border-subtle !default;
+
+/// @type Value
+/// @access public
+/// @group tabs
+$tab-underline-color-hover: 2px solid $border-strong !default;
+
+/// @type Color
+/// @access public
+/// @group tabs
+$tab-text-disabled: $text-disabled !default;
+
+/// @type Value
+/// @access public
+/// @group tabs
+$tab-underline-disabled: 2px solid $border-disabled !default;

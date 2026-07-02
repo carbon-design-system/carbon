@@ -1,0 +1,72 @@
+//
+// Copyright IBM Corp. 2022
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+//-----------------------------
+// Fluid ComboBox
+//-----------------------------
+@use '../../config' as *;
+@use '../../motion' as *;
+@use '../../spacing' as *;
+@use '../../theme' as *;
+@use '../../utilities/convert';
+@use '../../utilities/focus-outline' as *;
+@use '../dropdown';
+@use '../fluid-list-box';
+
+@mixin fluid-combo-box {
+  // Style overrides can be added here as needed
+  .#{$prefix}--list-box__wrapper--fluid
+    .#{$prefix}--combo-box
+    .#{$prefix}--list-box__field {
+    overflow: visible;
+    padding: 0;
+  }
+
+  .#{$prefix}--list-box__wrapper--fluid
+    .#{$prefix}--combo-box
+    .#{$prefix}--text-input {
+    overflow: hidden;
+    padding-block: convert.to-rem(33px) convert.to-rem(13px);
+    padding-inline: $spacing-05 $spacing-10;
+    text-overflow: ellipsis;
+    transition: none;
+    white-space: nowrap;
+  }
+
+  .#{$prefix}--list-box__wrapper--fluid
+    .#{$prefix}--combo-box
+    .#{$prefix}--list-box__selection {
+    inset-block: auto convert.to-rem(10px);
+    transform: none;
+  }
+
+  .#{$prefix}--list-box__wrapper--fluid
+    .#{$prefix}--combo-box
+    .#{$prefix}--list-box__menu-icon {
+    inset-block-end: convert.to-rem(14px);
+  }
+
+  .#{$prefix}--list-box__wrapper--fluid
+    .#{$prefix}--list-box[data-invalid]
+    .#{$prefix}--list-box__field
+    .#{$prefix}--text-input
+    + .#{$prefix}--list-box__invalid-icon,
+  .#{$prefix}--list-box__wrapper--fluid
+    .#{$prefix}--list-box--warning
+    .#{$prefix}--list-box__field
+    .#{$prefix}--text-input
+    + .#{$prefix}--list-box__invalid-icon {
+    inset-inline-end: 1rem;
+  }
+
+  .#{$prefix}--list-box__wrapper--fluid
+    :not(.#{$prefix}--list-box--up)
+    .#{$prefix}--combo-box
+    .#{$prefix}--list-box__menu {
+    inset-block-start: calc(100% + convert.to-rem(1px));
+  }
+}

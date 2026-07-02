@@ -1,0 +1,929 @@
+# yaml-language-server: $schema=https://unpkg.com/@carbon-platform/schemas@v1/carbon-resources.schema.json
+library:
+  id: carbon-styles
+  name: Carbon Core
+  description: Build user interfaces with Carbon's framework-agnostic asset documentation and styles.
+  noIndex: true
+  externalDocsUrl: https://www.carbondesignsystem.com
+  designKits:
+    carbon-white-sketch:
+      $ref: https://unpkg.com/@carbon-platform/resources/carbon.yml#/designKits/carbon-white-sketch
+    carbon-g10-sketch:
+      $ref: https://unpkg.com/@carbon-platform/resources/carbon.yml#/designKits/carbon-g10-sketch
+    carbon-g90-sketch:
+      $ref: https://unpkg.com/@carbon-platform/resources/carbon.yml#/designKits/carbon-g90-sketch
+    carbon-g100-sketch:
+      $ref: https://unpkg.com/@carbon-platform/resources/carbon.yml#/designKits/carbon-g100-sketch
+    carbon-shell-sketch:
+      $ref: https://unpkg.com/@carbon-platform/resources/carbon.yml#/designKits/carbon-shell-sketch
+    carbon-white-adobe-xd:
+      $ref: https://unpkg.com/@carbon-platform/resources/carbon.yml#/designKits/carbon-white-adobe-xd
+    carbon-g10-adobe-xd:
+      $ref: https://unpkg.com/@carbon-platform/resources/carbon.yml#/designKits/carbon-g10-adobe-xd
+    carbon-g90-adobe-xd:
+      $ref: https://unpkg.com/@carbon-platform/resources/carbon.yml#/designKits/carbon-g90-adobe-xd
+    carbon-g100-adobe-xd:
+      $ref: https://unpkg.com/@carbon-platform/resources/carbon.yml#/designKits/carbon-g100-adobe-xd
+    axure-widget-library:
+      $ref: https://unpkg.com/@carbon-platform/resources/carbon.yml#/designKits/axure-widget-library
+    text-toolbar-sketch:
+      $ref: https://unpkg.com/@carbon-platform/resources/carbon.yml#/designKits/text-toolbar-sketch
+    carbon-mid-fi-sketch:
+      $ref: https://unpkg.com/@carbon-platform/resources/carbon.yml#/designKits/carbon-mid-fi-sketch
+    carbon-wireframe-invision-freehand:
+      $ref: https://unpkg.com/@carbon-platform/resources/carbon.yml#/designKits/carbon-wireframe-invision-freehand
+    figma-v11-white-theme:
+      $ref: https://unpkg.com/@carbon-platform/resources/carbon.yml#/designKits/figma-v11-white-theme
+    figma-v11-gray-10-theme:
+      $ref: https://unpkg.com/@carbon-platform/resources/carbon.yml#/designKits/figma-v11-gray-10-theme
+    figma-v11-gray-90-theme:
+      $ref: https://unpkg.com/@carbon-platform/resources/carbon.yml#/designKits/figma-v11-gray-90-theme
+    figma-v11-gray-100-theme:
+      $ref: https://unpkg.com/@carbon-platform/resources/carbon.yml#/designKits/figma-v11-gray-100-theme
+assets:
+  accordion:
+    name: Accordion
+    description: An accordion is a vertically stacked list of headers that reveal or hide associated sections of content.
+    externalDocsUrl: https://www.carbondesignsystem.com/components/accordion/usage
+    status: stable
+    type: component
+    platform: web
+    noIndex: true
+    thumbnailPath: ./thumbnails/accordion.svg
+    tags:
+      - data-display
+      - content-element
+    docs:
+      usagePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/accordion/usage.mdx
+      stylePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/accordion/style.mdx
+      accessibilityPath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/accordion/accessibility.mdx
+  aspect-ratio:
+    name: Aspect ratio
+    description: The AspectRatio component supports rendering your content in a specific aspect ratio through the ratio prop. This prop will specify the proportion between the width and the height of your content. The width will be determined by spanning 100% of the space available in your layout, and the height will be determined by the ratio that you specified.
+    status: stable
+    type: component
+    platform: web
+    noIndex: true
+    thumbnailPath: ./thumbnails/aspect-ratio.svg
+    tags:
+      - content-element
+  breadcrumb:
+    name: Breadcrumb
+    description: The breadcrumb is a secondary navigation pattern that helps a user understand the hierarchy among levels and navigate back through them.
+    externalDocsUrl: https://www.carbondesignsystem.com/components/breadcrumb/usage
+    status: stable
+    type: component
+    platform: web
+    noIndex: true
+    thumbnailPath: ./thumbnails/breadcrumb.svg
+    tags:
+      - structural-navigation
+      - contextual-navigation
+    docs:
+      usagePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/breadcrumb/usage.mdx
+      stylePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/breadcrumb/style.mdx
+      accessibilityPath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/breadcrumb/accessibility.mdx
+  button:
+    name: Button
+    description: Buttons are used to initialize an action. Button labels express what action will occur when the user interacts with it.
+    externalDocsUrl: https://www.carbondesignsystem.com/components/button/usage
+    status: stable
+    type: component
+    platform: web
+    noIndex: true
+    thumbnailPath: ./thumbnails/button.svg
+    tags:
+      - input-control
+    docs:
+      usagePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/button/usage.mdx
+      stylePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/button/style.mdx
+      accessibilityPath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/button/accessibility.mdx
+  checkbox:
+    name: Checkbox
+    description: Checkboxes are used when there are multiple items to select in a list. Users can select zero, one, or any number of items.
+    externalDocsUrl: https://www.carbondesignsystem.com/components/checkbox/usage
+    status: stable
+    type: component
+    platform: web
+    noIndex: true
+    thumbnailPath: ./thumbnails/checkbox.svg
+    tags:
+      - input-control
+    docs:
+      usagePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/checkbox/usage.mdx
+      stylePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/checkbox/style.mdx
+      accessibilityPath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/checkbox/accessibility.mdx
+  code-snippet:
+    name: Code snippet
+    description: Code snippets are strings or small blocks of reusable code that can be copied and inserted in a code file.
+    externalDocsUrl: https://www.carbondesignsystem.com/components/code-snippet/usage
+    status: stable
+    type: component
+    platform: web
+    noIndex: true
+    thumbnailPath: ./thumbnails/code-snippet.svg
+    tags:
+      - content-element
+    docs:
+      usagePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/code-snippet/usage.mdx
+      stylePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/code-snippet/style.mdx
+      accessibilityPath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/code-snippet/accessibility.mdx
+  combo-box:
+    name: Combo box
+    description: A combobox allows the user to make a selection from a predefined list of options and is typically used when there are a large amount of options to choose from.
+    status: stable
+    type: component
+    platform: web
+    noIndex: true
+    thumbnailPath: ./thumbnails/combo-box.svg
+    tags:
+      - input-control
+  common-actions:
+    name: Common actions
+    description: Frequently used actions that appear multiple times across different components and workflows.
+    externalDocsUrl: https://carbondesignsystem.com/patterns/common-actions
+    status: stable
+    type: pattern
+    platform: web
+    thumbnailPath: ./thumbnails/common-actions.svg
+    noIndex: false
+    docs:
+      usagePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/patterns/common-actions/index.mdx
+  content-switcher:
+    name: Content switcher
+    description: Content switchers allow users to toggle between two or more content sections within the same space on screen.
+    externalDocsUrl: https://www.carbondesignsystem.com/components/content-switcher/usage
+    status: stable
+    type: component
+    platform: web
+    noIndex: true
+    thumbnailPath: ./thumbnails/content-switcher.svg
+    tags:
+      - input-control
+      - contextual-navigation
+    docs:
+      usagePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/content-switcher/usage.mdx
+      stylePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/content-switcher/style.mdx
+      accessibilityPath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/content-switcher/accessibility.mdx
+  copy-button:
+    name: Copy button
+    description: The copy button should be accompanied by a tooltip. Tooltip feedback text should be concise and describe the action taken when the user clicks the copy button. By default we display the text “Copied!”.
+    status: stable
+    type: component
+    platform: web
+    noIndex: true
+    thumbnailPath: ./thumbnails/copy-button.svg
+    tags:
+      - input-control
+  data-table:
+    name: Data table
+    description: Data tables are used to organize and display data efficiently. The data table component allows for customization with additional functionality, as needed by your product’s users.
+    externalDocsUrl: https://www.carbondesignsystem.com/components/data-table/usage
+    status: stable
+    type: component
+    platform: web
+    noIndex: true
+    thumbnailPath: ./thumbnails/data-table.svg
+    tags:
+      - input-control
+    docs:
+      usagePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/data-table/usage.mdx
+      stylePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/data-table/style.mdx
+      accessibilityPath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/data-table/accessibility.mdx
+  date-picker:
+    name: Date picker
+    description: Date and time pickers allow users to select a single or a range of dates and times.
+    externalDocsUrl: https://www.carbondesignsystem.com/components/date-picker/usage
+    status: stable
+    type: component
+    platform: web
+    noIndex: true
+    thumbnailPath: ./thumbnails/date-picker.svg
+    tags:
+      - input-control
+    docs:
+      usagePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/date-picker/usage.mdx
+      stylePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/date-picker/style.mdx
+      accessibilityPath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/date-picker/accessibility.mdx
+  dialogs:
+    name: Dialogs
+    description: Prompted when the system needs input from the user or to give the user urgent information concerning their current workflow.
+    externalDocsUrl: https://carbondesignsystem.com/patterns/dialog-pattern
+    status: stable
+    type: pattern
+    platform: web
+    thumbnailPath: ./thumbnails/dialogs.svg
+    noIndex: false
+    docs:
+      usagePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/patterns/dialog-pattern/index.mdx
+  disabled-states:
+    name: Disabled states
+    description: Used to completely remove the interactive function of a component.
+    externalDocsUrl: https://carbondesignsystem.com/patterns/disabled-states
+    status: stable
+    type: pattern
+    platform: web
+    thumbnailPath: ./thumbnails/disabled-states.svg
+    noIndex: false
+    docs:
+      usagePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/patterns/disabled-states/index.mdx
+  disclosures:
+    name: Disclosures
+    description: Used to disclose additional content or information about part of a UI.
+    externalDocsUrl: https://carbondesignsystem.com/patterns/disclosures-pattern
+    status: stable
+    type: pattern
+    platform: web
+    thumbnailPath: ./thumbnails/disclosure.svg
+    noIndex: false
+    docs:
+      usagePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/patterns/disclosures-pattern/index.mdx
+  dropdown:
+    name: Dropdown
+    description: Dropdowns present a list of options from which a user can select one option, or several. A selected option can represent a value in a form, or can be used as an action to filter or sort existing content.
+    externalDocsUrl: https://www.carbondesignsystem.com/components/dropdown/usage/
+    status: stable
+    type: component
+    platform: web
+    noIndex: true
+    thumbnailPath: ./thumbnails/dropdown.svg
+    tags:
+      - input-control
+    docs:
+      usagePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/dropdown/usage.mdx
+      stylePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/dropdown/style.mdx
+      accessibilityPath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/dropdown/accessibility.mdx
+  empty-states:
+    name: Empty states
+    description: How to address moments in an app where there is no data to display to the user.
+    externalDocsUrl: https://carbondesignsystem.com/patterns/empty-states-pattern
+    status: stable
+    type: pattern
+    platform: web
+    thumbnailPath: ./thumbnails/empty-states.svg
+    noIndex: false
+    docs:
+      usagePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/patterns/empty-states-pattern/index.mdx
+  file-uploader:
+    name: File uploader
+    description: File uploaders allow users to select one or more files to upload to a specific location.
+    externalDocsUrl: https://www.carbondesignsystem.com/components/file-uploader/usage
+    status: stable
+    type: component
+    platform: web
+    noIndex: true
+    thumbnailPath: ./thumbnails/file-uploader.svg
+    tags:
+      - input-control
+    docs:
+      usagePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/file-uploader/usage.mdx
+      stylePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/file-uploader/style.mdx
+      accessibilityPath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/file-uploader/accessibility.mdx
+  filtering:
+    name: Filtering
+    description: The mechanism by which a user adds or removes data items from a displayed data set.
+    externalDocsUrl: https://carbondesignsystem.com/patterns/filtering
+    status: stable
+    type: pattern
+    platform: web
+    thumbnailPath: ./thumbnails/filtering.svg
+    noIndex: false
+    docs:
+      usagePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/patterns/filtering/index.mdx
+  fluid-styles:
+    name: Fluid styles
+    description: Fluid versions of certain familiar components offer alternative stylistic expressions that differentiate them from their default counterparts.
+    externalDocsUrl: https://carbondesignsystem.com/patterns/fluid-styles
+    status: stable
+    type: pattern
+    platform: web
+    thumbnailPath: ./thumbnails/fluid-styles.svg
+    noIndex: false
+    docs:
+      usagePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/patterns/fluid-styles/index.mdx
+  form:
+    name: Form
+    description: A form is a group of related input controls that allows users to provide data or configure options.
+    externalDocsUrl: https://www.carbondesignsystem.com/components/form/usage
+    status: stable
+    type: component
+    platform: web
+    noIndex: true
+    thumbnailPath: ./thumbnails/form.svg
+    tags:
+      - form
+    docs:
+      usagePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/form/usage.mdx
+      stylePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/form/style.mdx
+      accessibilityPath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/form/accessibility.mdx
+  forms:
+    name: Forms
+    description: A group of related input controls that allows users to provide data or configure options.
+    externalDocsUrl: https://carbondesignsystem.com/patterns/forms-pattern
+    status: stable
+    type: pattern
+    platform: web
+    thumbnailPath: ./thumbnails/forms.svg
+    noIndex: false
+    docs:
+      usagePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/patterns/forms-pattern/index.mdx
+  global-header:
+    name: Global header
+    description: Covers using UI Shell components for within and between product navigation; introduces techniques for achieving consistency in products.
+    externalDocsUrl: https://carbondesignsystem.com/patterns/global-header
+    status: stable
+    type: pattern
+    platform: web
+    thumbnailPath: ./thumbnails/global-header.svg
+    noIndex: false
+    docs:
+      usagePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/patterns/global-header/index.mdx
+  grid:
+    name: Grid
+    description: Carbon's grid components help developers use the 2x Grid. The project provides Grid and Column components which can be used to build a variety of layouts. You can import these components from @carbon/react
+    status: stable
+    type: component
+    platform: web
+    noIndex: true
+    thumbnailPath: ./thumbnails/grid.svg
+    tags:
+      - content-block
+  inline-loading:
+    name: Inline loading
+    description: The inline loading component provides visual feedback that data is being processed.
+    externalDocsUrl: https://www.carbondesignsystem.com/components/inline-loading/usage
+    status: stable
+    type: component
+    platform: web
+    noIndex: true
+    thumbnailPath: ./thumbnails/inline-loading.svg
+    tags:
+      - system-feedback
+    docs:
+      usagePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/inline-loading/usage.mdx
+      stylePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/inline-loading/style.mdx
+      accessibilityPath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/inline-loading/accessibility.mdx
+  link:
+    name: Link
+    description: Links are used as navigational elements. They may appear on their own, within a sentence or paragraph, or directly following the content.
+    externalDocsUrl: https://www.carbondesignsystem.com/components/link/usage
+    status: stable
+    type: component
+    platform: web
+    noIndex: true
+    thumbnailPath: ./thumbnails/link.svg
+    tags:
+      - contextual-navigation
+      - content-element
+    docs:
+      usagePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/link/usage.mdx
+      stylePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/link/style.mdx
+      accessibilityPath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/link/accessibility.mdx
+  list:
+    name: List
+    description: Lists are vertical groupings of related content. List items begin with either a number or a bullet.
+    externalDocsUrl: https://www.carbondesignsystem.com/components/list/usage
+    status: stable
+    type: component
+    platform: web
+    noIndex: true
+    thumbnailPath: ./thumbnails/list.svg
+    tags:
+      - data-display
+      - content-element
+    docs:
+      usagePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/list/usage.mdx
+      stylePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/list/style.mdx
+      accessibilityPath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/list/accessibility.mdx
+  loading:
+    name: Loading
+    description: Loading spinners are used when retrieving data or performing slow computations, and help to notify users that loading is underway.
+    externalDocsUrl: https://www.carbondesignsystem.com/components/loading/usage
+    status: stable
+    type: component
+    platform: web
+    noIndex: true
+    thumbnailPath: ./thumbnails/loading.svg
+    tags:
+      - system-feedback
+    docs:
+      usagePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/loading/usage.mdx
+      stylePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/loading/style.mdx
+      accessibilityPath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/loading/accessibility.mdx
+  loading-pattern:
+    name: Loading
+    description: Used when information takes an extended amount of time to process and appear on screen.
+    externalDocsUrl: https://carbondesignsystem.com/patterns/loading-pattern
+    status: stable
+    type: pattern
+    platform: web
+    thumbnailPath: ./thumbnails/loading-pattern.svg
+    noIndex: false
+    docs:
+      usagePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/patterns/loading-pattern/index.mdx
+  login:
+    name: Login
+    description: Allows a user to gain access to an application by entering their user ID and password.
+    externalDocsUrl: https://carbondesignsystem.com/patterns/login-pattern
+    status: stable
+    type: pattern
+    platform: web
+    thumbnailPath: ./thumbnails/login.svg
+    noIndex: false
+    docs:
+      usagePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/patterns/login-pattern/index.mdx
+  modal:
+    name: Modal
+    description: Modals focus the user’s attention exclusively on one task or piece of information via a window that sits on top of the page content.
+    externalDocsUrl: https://www.carbondesignsystem.com/components/modal/usage
+    status: stable
+    type: component
+    platform: web
+    noIndex: true
+    thumbnailPath: ./thumbnails/modal.svg
+    tags:
+      - system-feedback
+    docs:
+      usagePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/modal/usage.mdx
+      stylePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/modal/style.mdx
+      accessibilityPath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/modal/accessibility.mdx
+  multiselect:
+    name: Multiselect
+    description: Use when you can select multiple options from a list or to filter information.
+    externalDocsUrl: https://www.carbondesignsystem.com/components/dropdown/usage/#multiselect
+    status: stable
+    type: component
+    platform: web
+    noIndex: true
+    thumbnailPath: ./thumbnails/multiselect.svg
+    tags:
+      - input-control
+  notification:
+    name: Notification
+    description: Notifications are messages that communicate information to the user. The three variants of notifications are toast notifications, inline notifications, and actionable notifications.
+    externalDocsUrl: https://www.carbondesignsystem.com/components/notification/usage
+    status: stable
+    type: component
+    platform: web
+    noIndex: true
+    thumbnailPath: ./thumbnails/notification.svg
+    tags:
+      - system-feedback
+    docs:
+      usagePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/notification/usage.mdx
+      stylePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/notification/style.mdx
+      accessibilityPath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/notification/accessibility.mdx
+  notifications:
+    name: Notifications
+    description: An important method of communicating with users and providing feedback.
+    externalDocsUrl: https://carbondesignsystem.com/patterns/notification-pattern
+    status: stable
+    type: pattern
+    platform: web
+    thumbnailPath: ./thumbnails/notifications.svg
+    noIndex: false
+    docs:
+      usagePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/patterns/notification-pattern/index.mdx
+  number-input:
+    name: Number input
+    description: The number input component is used for entering numeric values and includes controls for incrementally increasing or decreasing the value.
+    externalDocsUrl: https://www.carbondesignsystem.com/components/number-input/usage
+    status: stable
+    type: component
+    platform: web
+    noIndex: true
+    thumbnailPath: ./thumbnails/number-input.svg
+    tags:
+      - input-control
+    docs:
+      usagePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/number-input/usage.mdx
+      stylePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/number-input/style.mdx
+      accessibilityPath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/number-input/accessibility.mdx
+  overflow-content:
+    name: Overflow content
+    description: Text, such as a paragraph or a text string, that exceeds a desired space.
+    externalDocsUrl: https://carbondesignsystem.com/patterns/overflow-content
+    status: stable
+    type: pattern
+    platform: web
+    thumbnailPath: ./thumbnails/overflow-content.svg
+    noIndex: false
+    docs:
+      usagePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/patterns/overflow-content/index.mdx
+  overflow-menu:
+    name: Overflow menu
+    description: Use the overflow menu component when additional options are available to the user but there is a space constraint.
+    externalDocsUrl: https://www.carbondesignsystem.com/components/overflow-menu/usage
+    status: stable
+    type: component
+    platform: web
+    noIndex: true
+    thumbnailPath: ./thumbnails/overflow-menu.svg
+    tags:
+      - input-control
+    docs:
+      usagePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/overflow-menu/usage.mdx
+      stylePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/overflow-menu/style.mdx
+      accessibilityPath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/overflow-menu/accessibility.mdx
+  overflow-menu-v2:
+    name: Overflow menu v2
+    status: experimental
+    type: component
+    platform: web
+    noIndex: true
+    thumbnailPath: ./thumbnails/overflow-menu.svg
+    tags:
+      - input-control
+  pagination:
+    name: Pagination
+    description: Pagination is used for splitting up content or data into several pages, with a control for navigating to the next or previous page.
+    externalDocsUrl: https://www.carbondesignsystem.com/components/pagination/usage
+    status: stable
+    type: component
+    platform: web
+    noIndex: true
+    thumbnailPath: ./thumbnails/pagination.svg
+    tags:
+      - data-display
+      - contextual-navigation
+    docs:
+      usagePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/pagination/usage.mdx
+      stylePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/pagination/style.mdx
+      accessibilityPath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/pagination/accessibility.mdx
+  pagination-nav:
+    name: Pagination nav
+    status: stable
+    type: component
+    platform: web
+    noIndex: true
+    thumbnailPath: ./thumbnails/pagination-nav.svg
+    tags:
+      - data-display
+      - contextual-navigation
+  popover:
+    name: Popover
+    description: Popover is a primitive component used to build custom components which render over other elements on the page. For example, Popover is used to build our popover components in Carbon.
+    status: stable
+    type: component
+    platform: web
+    noIndex: true
+    thumbnailPath: ./thumbnails/popover.svg
+    tags:
+      - content-block
+      - data-display
+    docs:
+      usagePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/popover/usage.mdx
+      stylePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/popover/style.mdx
+  progress-bar:
+    name: Progress bar
+    description: A progress bar provides feedback about the duration and progression of a process, such as a download, file transfer, or installation, to indicate how long a user will be waiting.
+    externalDocsUrl: https://www.carbondesignsystem.com/components/progress-bar/usage
+    status: stable
+    type: component
+    platform: web
+    noIndex: true
+    thumbnailPath: ./thumbnails/progress-bar.svg
+    tags:
+      - content-element
+    docs:
+      usagePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/progress-bar/usage.mdx
+      stylePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/progress-bar/style.mdx
+  progress-indicator:
+    name: Progress indicator
+    description: A progress indicator is a visual representation of a user’s progress through a set of steps, guiding toward the completion of a specified process.
+    externalDocsUrl: https://www.carbondesignsystem.com/components/progress-indicator/usage
+    status: stable
+    type: component
+    platform: web
+    noIndex: true
+    thumbnailPath: ./thumbnails/progress-indicator.svg
+    tags:
+      - system-feedback
+    docs:
+      usagePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/progress-indicator/usage.mdx
+      stylePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/progress-indicator/style.mdx
+      accessibilityPath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/progress-indicator/accessibility.mdx
+  radio-button:
+    name: Radio button
+    description: Use radio buttons when you have a group of mutually exclusive choices and only one selection from the group is allowed.
+    externalDocsUrl: https://www.carbondesignsystem.com/components/radio-button/usage
+    status: stable
+    type: component
+    platform: web
+    noIndex: true
+    thumbnailPath: ./thumbnails/radio-button.svg
+    tags:
+      - input-control
+    docs:
+      usagePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/radio-button/usage.mdx
+      stylePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/radio-button/style.mdx
+      accessibilityPath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/radio-button/accessibility.mdx
+  read-only-states:
+    name: Read-only states
+    description: Read-only states are applied to components when the user is allowed to review but not modify the component. It removes all interactive functions from the component.
+    externalDocsUrl: https://carbondesignsystem.com/patterns/read-only-states-pattern
+    status: stable
+    type: pattern
+    platform: web
+    thumbnailPath: ./thumbnails/read-only.svg
+    noIndex: false
+    docs:
+      usagePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/patterns/read-only-states-pattern/index.mdx
+  search:
+    name: Search
+    description: Search enables users to specify a word or a phrase to find relevant pieces of content without the use of navigation.
+    externalDocsUrl: https://www.carbondesignsystem.com/components/search/usage
+    status: stable
+    type: component
+    platform: web
+    noIndex: true
+    thumbnailPath: ./thumbnails/search.svg
+    tags:
+      - input-control
+    docs:
+      usagePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/search/usage.mdx
+      stylePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/search/style.mdx
+      accessibilityPath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/search/accessibility.mdx
+  search-pattern:
+    name: Search
+    description: An intuitive method of discovery, offering users a way to explore a website or application using keywords.
+    externalDocsUrl: https://carbondesignsystem.com/patterns/search-pattern
+    status: stable
+    type: pattern
+    platform: web
+    thumbnailPath: ./thumbnails/search-pattern.svg
+    noIndex: false
+    docs:
+      usagePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/patterns/search-pattern/index.mdx
+  select:
+    name: Select
+    description: The select component allows users to choose one option from a list. It is used in forms for users to submit data.
+    externalDocsUrl: https://www.carbondesignsystem.com/components/select/usage
+    status: stable
+    type: component
+    platform: web
+    noIndex: true
+    thumbnailPath: ./thumbnails/select.svg
+    tags:
+      - input-control
+    docs:
+      usagePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/select/usage.mdx
+      stylePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/select/style.mdx
+      accessibilityPath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/select/accessibility.mdx
+  slider:
+    name: Slider
+    description: Sliders provide a visual indication of adjustable content, where the user can increase or decrease the value by moving the handle along a horizontal track.
+    externalDocsUrl: https://www.carbondesignsystem.com/components/slider/usage
+    status: stable
+    type: component
+    platform: web
+    noIndex: true
+    thumbnailPath: ./thumbnails/slider.svg
+    tags:
+      - input-control
+    docs:
+      usagePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/slider/usage.mdx
+      stylePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/slider/style.mdx
+      accessibilityPath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/slider/accessibility.mdx
+  status-indicators:
+    name: Status indicators
+    description: Status indicators are an important method of communicating severity level information to users.
+    externalDocsUrl: https://carbondesignsystem.com/patterns/status-indicator-pattern
+    status: stable
+    type: pattern
+    platform: web
+    thumbnailPath: ./thumbnails/status-indicators.svg
+    noIndex: false
+    docs:
+      usagePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/patterns/status-indicator-pattern/index.mdx
+  structured-list:
+    name: Structured list
+    description: Structured lists group content that is similar or related, such as terms and definitions.
+    externalDocsUrl: https://www.carbondesignsystem.com/components/structured-list/usage
+    status: stable
+    type: component
+    platform: web
+    noIndex: true
+    thumbnailPath: ./thumbnails/structured-list.svg
+    tags:
+      - data-display
+    docs:
+      usagePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/structured-list/usage.mdx
+      stylePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/structured-list/style.mdx
+      accessibilityPath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/structured-list/accessibility.mdx
+  tabs:
+    name: Tabs
+    description: Tabs are used to organize related content. They allow the user to navigate between groups of information that appear within the same context.
+    externalDocsUrl: https://www.carbondesignsystem.com/components/tabs/usage
+    status: stable
+    type: component
+    platform: web
+    noIndex: true
+    thumbnailPath: ./thumbnails/tabs.svg
+    tags:
+      - structural-navigation
+    docs:
+      usagePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/tabs/usage.mdx
+      stylePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/tabs/style.mdx
+      accessibilityPath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/tabs/accessibility.mdx
+  tag:
+    name: Tag
+    description: Use tags to label, categorize, or organize items using keywords that describe them.
+    externalDocsUrl: https://www.carbondesignsystem.com/components/tag/usage
+    status: stable
+    type: component
+    platform: web
+    noIndex: true
+    thumbnailPath: ./thumbnails/tag.svg
+    tags:
+      - contextual-navigation
+      - data-display
+      - input-control
+    docs:
+      usagePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/tag/usage.mdx
+      stylePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/tag/style.mdx
+      accessibilityPath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/tag/accessibility.mdx
+  text-area:
+    name: Text area
+    status: stable
+    type: component
+    platform: web
+    noIndex: true
+    thumbnailPath: ./thumbnails/text-area.svg
+    tags:
+      - input-control
+  text-input:
+    name: Text input
+    description: Text inputs enable the user to interact with and input content and data. This component can be used for long and short form entries.
+    externalDocsUrl: https://www.carbondesignsystem.com/components/text-input/usage
+    status: stable
+    type: component
+    platform: web
+    noIndex: true
+    thumbnailPath: ./thumbnails/text-input.svg
+    tags:
+      - input-control
+    docs:
+      usagePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/text-input/usage.mdx
+      stylePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/text-input/style.mdx
+      accessibilityPath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/text-input/accessibility.mdx
+  text-toolbar:
+    name: Text toolbar
+    description: A set of buttons and menus that allows users to edit text.
+    externalDocsUrl: https://carbondesignsystem.com/patterns/text-toolbar-pattern
+    status: stable
+    type: pattern
+    platform: web
+    thumbnailPath: ./thumbnails/text-toolbar.svg
+    noIndex: false
+    docs:
+      usagePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/patterns/text-toolbar-pattern/index.mdx
+  theme:
+    name: Theme
+    description: The GlobalTheme and Theme components allow you to specify the theme for a page, or for a part of a page, respectively. Theme is most often used to implement inline theming where you can style a portion of your page with a particular theme.
+    status: stable
+    type: component
+    platform: web
+    noIndex: true
+    thumbnailPath: ./thumbnails/theme.svg
+    tags:
+      - data-display
+  tile:
+    name: Tile
+    description: Tiles are a highly flexible component for displaying a wide variety of content, including information, getting started, how-to, next steps, and more.
+    externalDocsUrl: https://www.carbondesignsystem.com/components/tile/usage
+    status: stable
+    type: component
+    platform: web
+    noIndex: true
+    thumbnailPath: ./thumbnails/tile.svg
+    tags:
+      - content-element
+    docs:
+      usagePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/tile/usage.mdx
+      stylePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/tile/style.mdx
+      accessibilityPath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/tile/accessibility.mdx
+  time-picker:
+    name: Time picker
+    status: stable
+    type: component
+    platform: web
+    noIndex: true
+    thumbnailPath: ./thumbnails/time-picker.svg
+    tags:
+     - input-control
+  toggle:
+    name: Toggle
+    description: A toggle is used to quickly switch between two possible states. They are commonly used for “on/off” switches.
+    externalDocsUrl: https://www.carbondesignsystem.com/components/toggle/usage
+    status: stable
+    type: component
+    platform: web
+    noIndex: true
+    thumbnailPath: ./thumbnails/toggle.svg
+    tags:
+      - input-control
+    docs:
+      usagePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/toggle/usage.mdx
+      stylePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/toggle/style.mdx
+      accessibilityPath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/toggle/accessibility.mdx
+  toggletip:
+    name: Toggletip
+    description: Toggletips use the disclosure pattern to toggle the visibility of a popover. They display additional, hidden information upon the click of a UI trigger element and can contain interactive elements.
+    externalDocsUrl: https://carbondesignsystem.com/components/toggletip/usage/
+    status: stable
+    type: component
+    platform: web
+    noIndex: true
+    thumbnailPath: ./thumbnails/toggletip.svg
+    tags:
+      - content-element
+    docs:
+      accessibilityPath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/toggletip/accessibility.mdx
+      usagePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/toggletip/usage.mdx
+      stylePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/toggletip/style.mdx
+  tooltip:
+    name: Tooltip
+    description: Tooltips display additional information upon hover or focus. The information included should be contextual, helpful, and nonessential while providing that extra ability to communicate and give clarity to a user.
+    externalDocsUrl: https://www.carbondesignsystem.com/components/tooltip/usage
+    status: stable
+    type: component
+    platform: web
+    noIndex: true
+    thumbnailPath: ./thumbnails/tooltip.svg
+    tags:
+      - content-element
+    docs:
+      usagePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/tooltip/usage.mdx
+      stylePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/tooltip/style.mdx
+      accessibilityPath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/tooltip/accessibility.mdx
+  definition-tooltip:
+    name: Definition tooltip
+    description: The DefinitionTooltip component is used to provide additional information about a particular term or phrase in text content. It is similar to a Tooltip component but has fewer alignment options and has a slightly different interaction pattern.
+    status: stable
+    type: component
+    platform: web
+    noIndex: true
+    thumbnailPath: ./thumbnails/tooltip-definition.svg
+    tags:
+      - content-element
+  tree-view:
+    name: Tree view
+    status: experimental
+    type: component
+    platform: web
+    noIndex: true
+    externalDocsUrl: https://carbondesignsystem.com/components/tree-view/usage
+    thumbnailPath: ./thumbnails/tree-view.svg
+    tags:
+      - contextual-navigation
+    docs:
+      usagePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/tree-view/usage.mdx
+      stylePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/tree-view/style.mdx
+      accessibilityPath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/tree-view/accessibility.mdx
+  ui-shell-header:
+    name: UI shell header
+    description: This header is part of the Carbon UI shell. A shell is a collection of components shared by all products within a platform. It provides a common set of interaction patterns that persist between and across products.
+    externalDocsUrl: https://www.carbondesignsystem.com/components/UI-shell-header/usage
+    status: stable
+    type: component
+    platform: web
+    noIndex: true
+    thumbnailPath: ./thumbnails/ui-shell-header.svg
+    tags:
+      - structural-navigation
+      - shell
+    docs:
+      usagePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/UI-shell-header/usage.mdx
+      stylePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/UI-shell-header/style.mdx
+      accessibilityPath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/UI-shell-header/accessibility.mdx
+  ui-shell-left-panel:
+    name: UI shell left panel
+    description: This left panel is part of the Carbon UI shell. A shell is a collection of components shared by all products within a platform. It provides a common set of interaction patterns that persist between and across products.
+    externalDocsUrl: https://www.carbondesignsystem.com/components/UI-shell-left-panel/usage
+    status: stable
+    type: component
+    platform: web
+    noIndex: true
+    thumbnailPath: ./thumbnails/ui-shell-left-panel.svg
+    tags:
+      - shell
+    docs:
+      accessibilityPath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/UI-shell-left-panel/accessibility.mdx
+      usagePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/UI-shell-left-panel/usage.mdx
+      stylePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/UI-shell-left-panel/style.mdx
+  ui-shell-right-panel:
+    name: UI shell right panel
+    description: The right panel is part of the Carbon UI shell. A shell is a collection of components shared by all products within a platform. It provides a common set of interaction patterns that persist between and across products.
+    externalDocsUrl: https://www.carbondesignsystem.com/components/UI-shell-right-panel/usage
+    status: stable
+    type: component
+    platform: web
+    noIndex: true
+    thumbnailPath: ./thumbnails/ui-shell-right-panel.svg
+    tags:
+      - shell
+    docs:
+      accessibilityPath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/UI-shell-right-panel/accessibility.mdx
+      usagePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/UI-shell-right-panel/usage.mdx
+      stylePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/UI-shell-right-panel/style.mdx

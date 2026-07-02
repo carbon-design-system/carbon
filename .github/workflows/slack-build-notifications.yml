@@ -1,0 +1,53 @@
+name: Slack Build Notifications
+
+on:
+  workflow_run:
+    workflows:
+      [
+        Version,
+        Release,
+        Deploy React storybook to GitHub Pages,
+        promote,
+      ]
+    types: [completed]
+    branches: [main]
+
+jobs:
+  on-success:
+    runs-on: ubuntu-latest
+    # We only want notifications for successful runs for certain workflows
+    if:
+      ${{ github.event.workflow_run.conclusion == 'success' &&
+      contains(fromJson('["Version", "Release", "Deploy React storybook to
+      GitHub Pages", "promote"]'), github.event.workflow.name) }}
+    steps:
+      - name: Send custom JSON data to Slack
+        id: slack-success
+        uses: slackapi/slack-github-action@45a88b9581bfab2566dc881e2cd66d334e621e2c # v3.0.3
+        with:
+          webhook: ${{ secrets.SLACK_WEBHOOK_URL }}
+          webhook-type: incoming-webhook
+          payload: |
+            {
+              "username": "Workflow succeeded ✅",
+              "icon_url": "https://user-images.githubusercontent.com/3360588/192045905-5d9705af-92e2-4432-805e-15db98571e8b.png",
+              "channel": "#carbon-system-notifications",
+              "text": "The ${{ github.event.workflow.name }} workflow succeeded: ${{ github.event.workflow_run.url }}"
+            }
+  on-failure:
+    runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'failure' }}
+    steps:
+      - name: Send custom JSON data to Slack
+        id: slack-failure
+        uses: slackapi/slack-github-action@45a88b9581bfab2566dc881e2cd66d334e621e2c # v3.0.3
+        with:
+          webhook: ${{ secrets.SLACK_WEBHOOK_URL }}
+          webhook-type: incoming-webhook
+          payload: |
+            {
+              "username": "Workflow failed 🚫",
+              "icon_url": "https://user-images.githubusercontent.com/3360588/192045905-5d9705af-92e2-4432-805e-15db98571e8b.png",
+              "channel": "#carbon-system-notifications",
+              "text": "The ${{ github.event.workflow.name }} workflow failed: ${{ github.event.workflow_run.url }}"
+            }

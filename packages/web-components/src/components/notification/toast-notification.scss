@@ -1,0 +1,88 @@
+//
+// Copyright IBM Corp. 2019, 2023
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+$css--plex: true !default;
+
+@use '@carbon/styles/scss/config' as *;
+@use '@carbon/styles/scss/colors' as *;
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/components/notification/index' as *;
+@use '@carbon/styles/scss/components/button';
+@use '@carbon/styles/scss/layout' as *;
+
+// https://github.com/carbon-design-system/carbon/issues/11408
+@include toast-notification;
+
+:host(#{$prefix}-toast-notification) {
+  @include toast-notification-base;
+  @include emit-layout-tokens();
+
+  display: none;
+  outline: none;
+}
+
+:host(#{$prefix}-toast-notification[open]) {
+  display: flex;
+}
+
+:host(#{$prefix}-toast-notification[hide-close-button])
+  .#{$prefix}--toast-notification__close-button {
+  display: none;
+}
+
+:host(#{$prefix}-toast-notification[kind='success']) {
+  @include toast-notification-success-base;
+}
+
+:host(#{$prefix}-toast-notification[low-contrast]) {
+  @include toast-notification-low-contrast-base;
+}
+
+:host(#{$prefix}-toast-notification[kind='success'][low-contrast]) {
+  @include toast-notification-low-contrast-success;
+}
+
+:host(#{$prefix}-toast-notification[kind='info']) {
+  @include toast-notification-info-base;
+}
+
+:host(#{$prefix}-toast-notification[kind='info-square']) {
+  @include toast-notification-info-base;
+}
+
+:host(#{$prefix}-toast-notification[kind='info'][low-contrast]),
+:host(#{$prefix}-toast-notification[kind='info-square'][low-contrast]) {
+  @include toast-notification-low-contrast-info;
+}
+
+:host(#{$prefix}-toast-notification[kind='warning']) {
+  @include toast-notification-warning-base;
+}
+
+:host(#{$prefix}-toast-notification[kind='warning-alt']) {
+  @include toast-notification-warning-base;
+
+  /* TODO: Remove this once the following issue with icon fill is resolved:
+  ** https://github.com/carbon-design-system/carbon/issues/13616
+  */
+  .#{$prefix}--toast-notification__icon path[data-icon-path='inner-path'] {
+    fill: $black-100;
+  }
+}
+
+:host(#{$prefix}-toast-notification[kind='warning'][low-contrast]),
+:host(#{$prefix}-toast-notification[kind='warning-alt'][low-contrast]) {
+  @include toast-notification-low-contrast-warning;
+}
+
+:host(#{$prefix}-toast-notification[kind='error']) {
+  @include toast-notification-error-base;
+}
+
+:host(#{$prefix}-toast-notification[kind='error'][low-contrast]) {
+  @include toast-notification-low-contrast-error;
+}
