@@ -7,7 +7,7 @@
 
 import { LitElement, html } from 'lit';
 import { prefix } from '../../globals/settings';
-import { property, state } from 'lit/decorators.js';
+import { property, state, query } from 'lit/decorators.js';
 import styles from './menu.scss?lit';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import HostListener from '../../globals/decorators/host-listener';
@@ -53,6 +53,18 @@ class CDSMenu extends HostListenerMixin(LitElement) {
   readonly spacing: number = 8; // distance to keep to window edges, in px
 
   /**
+   * The menu element in the shadow DOM.
+   */
+  @query(`.${prefix}--menu`)
+  private _menuElement?: HTMLElement;
+
+  /**
+   * The default slot element in the shadow DOM.
+   */
+  @query('slot')
+  private _slotElement?: HTMLSlotElement;
+
+  /**
    * Items.
    */
   @state()
@@ -96,22 +108,22 @@ class CDSMenu extends HostListenerMixin(LitElement) {
   @property({ type: String })
   direction = 'ltr';
   /**
-   * Open value for the menu .
+   * Open value for the menu.
    */
   @property({ type: Boolean, reflect: true })
-  open = true;
+  open = false;
   /**
-   * Active element in the DOM .
+   * Active element in the DOM.
    */
   @property({ type: HTMLElement })
   focusreturn;
   /**
-   * Position of the Menu .
+   * Position of the Menu.
    */
   @property()
   position = [-1, -1];
   /**
-   * Size attribute .
+   * Size attribute.
    */
   @property({ attribute: true })
   size = MENU_SIZE.SMALL;
@@ -141,12 +153,12 @@ class CDSMenu extends HostListenerMixin(LitElement) {
   @property({ type: String })
   menuAlignment;
   /**
-   * Position of the Menu in X axis .
+   * Position of the Menu in X axis.
    */
   @property()
   x: number | number[] = 0;
   /**
-   * Position of the Menu in Y axis .
+   * Position of the Menu in Y axis.
    */
   @property()
   y: number | number[] = 0;
@@ -189,9 +201,7 @@ class CDSMenu extends HostListenerMixin(LitElement) {
   connectedCallback() {
     super.connectedCallback();
     this.addEventListener('icon-detect', () => {
-      this.shadowRoot
-        ?.querySelector('.cds--menu')
-        ?.classList.add(`${prefix}--menu--with-icons`);
+      this._menuElement?.classList.add(`${prefix}--menu--with-icons`);
     });
     this.addEventListener(
       MENU_CLOSE_ROOT_EVENT,
@@ -217,8 +227,7 @@ class CDSMenu extends HostListenerMixin(LitElement) {
     this._registerMenuItems();
     this._setActiveItems();
 
-    const slot = this.shadowRoot?.querySelector('slot');
-    slot?.addEventListener('slotchange', () => {
+    this._slotElement?.addEventListener('slotchange', () => {
       this._registerMenuItems();
       this._setActiveItems();
     });
@@ -333,8 +342,9 @@ class CDSMenu extends HostListenerMixin(LitElement) {
     const { isRoot } = this.context;
 
     // const isRoot =  false
-    const menuElement = this.shadowRoot?.querySelector(`.${prefix}--menu`);
-    const { width, height } = (menuElement ?? this).getBoundingClientRect();
+    const { width, height } = (
+      this._menuElement ?? this
+    ).getBoundingClientRect();
     const alignment = isRoot ? 'vertical' : 'horizontal';
     const axes = {
       x: {
@@ -519,7 +529,7 @@ class CDSMenu extends HostListenerMixin(LitElement) {
       ) as HTMLSlotElement | null;
       items = submenuSlot?.assignedElements() ?? [];
     } else {
-      items = this.shadowRoot?.querySelector('slot')?.assignedElements() ?? [];
+      items = this._slotElement?.assignedElements() ?? [];
     }
     this.items = items?.filter((item) => {
       if (item.tagName === 'CDS-MENU-ITEM') {
