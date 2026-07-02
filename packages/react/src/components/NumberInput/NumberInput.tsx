@@ -300,6 +300,11 @@ export interface NumberInputProps
    * Provide the text that is displayed when the control is in warning state
    */
   warnText?: ReactNode;
+
+  /**
+   * WebMCP: Map elements to a property description within the JSON Schema
+   */
+  toolParamDescription?: string;
 }
 
 const getSeparators = (locale: string) => {
@@ -583,6 +588,7 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
       size = 'md',
       slug,
       step = 1,
+      toolParamDescription,
       translateWithId: t = defaultTranslateWithId,
       type = 'number',
       defaultValue = type === 'number' ? 0 : NaN,
@@ -926,6 +932,9 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
               onClick={onClick}
               onChange={handleOnChange}
               onKeyUp={onKeyUp}
+              {...(toolParamDescription && {
+                toolparamdescription: toolParamDescription,
+              })}
               onKeyDown={(e) => {
                 if (type === 'text' && !readOnly && !disabled) {
                   if (match(e, keys.ArrowUp)) {
@@ -1279,6 +1288,11 @@ NumberInput.propTypes = {
    * up/down button
    */
   step: PropTypes.number,
+
+  /**
+   * WebMCP: Map elements to a property description within the JSON Schema
+   */
+  toolParamDescription: PropTypes.string,
 
   /**
    * Translates component strings using your i18n tool.

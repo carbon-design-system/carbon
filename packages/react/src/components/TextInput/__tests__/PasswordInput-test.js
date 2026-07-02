@@ -13,6 +13,29 @@ import { render, screen } from '@testing-library/react';
 const prefix = 'cds';
 
 describe('PasswordInput', () => {
+  describe('WebMCP attributes', () => {
+    it('should render toolparamdescription attribute when provided', () => {
+      render(
+        <PasswordInput
+          id="input-1"
+          labelText="PasswordInput label"
+          toolParamDescription="Test description for WebMCP"
+        />
+      );
+      expect(screen.getByLabelText('PasswordInput label')).toHaveAttribute(
+        'toolparamdescription',
+        'Test description for WebMCP'
+      );
+    });
+
+    it('should not render toolparamdescription attribute when not provided', () => {
+      render(<PasswordInput id="input-1" labelText="PasswordInput label" />);
+      expect(screen.getByLabelText('PasswordInput label')).not.toHaveAttribute(
+        'toolparamdescription'
+      );
+    });
+  });
+
   describe('renders as expected - Component API', () => {
     it('should spread extra props onto input element', () => {
       render(<PasswordInput id="input-1" labelText="PasswordInput label" />);

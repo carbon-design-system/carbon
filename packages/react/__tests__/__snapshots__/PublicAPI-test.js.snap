@@ -796,6 +796,9 @@ Map {
       "title": {
         "type": "string",
       },
+      "toolParamDescription": {
+        "type": "string",
+      },
       "warn": {
         "type": "bool",
       },
@@ -1528,6 +1531,9 @@ Map {
       "slug": [Function],
       "titleText": {
         "type": "node",
+      },
+      "toolParamDescription": {
+        "type": "string",
       },
       "translateWithId": {
         "type": "func",
@@ -3041,6 +3047,9 @@ Map {
         "type": "oneOf",
       },
       "slug": [Function],
+      "toolParamDescription": {
+        "type": "string",
+      },
       "type": {
         "type": "string",
       },
@@ -3480,6 +3489,9 @@ Map {
         ],
         "type": "oneOf",
       },
+      "toolParamDescription": {
+        "type": "string",
+      },
       "type": {
         "type": "string",
       },
@@ -3741,6 +3753,9 @@ Map {
         "type": "oneOf",
       },
       "tabIndex": [Function],
+      "toolParamDescription": {
+        "type": "string",
+      },
     },
   },
   "FileUploaderDropContainer" => {
@@ -3786,6 +3801,9 @@ Map {
       },
       "role": [Function],
       "tabIndex": [Function],
+      "toolParamDescription": {
+        "type": "string",
+      },
     },
   },
   "FileUploaderItem" => {
@@ -4117,6 +4135,9 @@ Map {
       "titleText": {
         "type": "node",
       },
+      "toolParamDescription": {
+        "type": "string",
+      },
       "translateWithId": {
         "type": "func",
       },
@@ -4373,6 +4394,9 @@ Map {
         "type": "oneOf",
       },
       "slug": [Function],
+      "toolParamDescription": {
+        "type": "string",
+      },
       "type": {
         "type": "string",
       },
@@ -5389,6 +5413,18 @@ Map {
         "type": "node",
       },
       "className": {
+        "type": "string",
+      },
+      "onToolactivated": {
+        "type": "func",
+      },
+      "onToolcancel": {
+        "type": "func",
+      },
+      "toolDescription": {
+        "type": "string",
+      },
+      "toolName": {
         "type": "string",
       },
     },
@@ -7448,6 +7484,9 @@ Map {
       "stepStartValue": {
         "type": "number",
       },
+      "toolParamDescription": {
+        "type": "string",
+      },
       "translateWithId": {
         "type": "func",
       },
@@ -8088,6 +8127,9 @@ Map {
         ],
         "type": "oneOf",
       },
+      "toolParamDescription": {
+        "type": "string",
+      },
       "tooltipAlignment": {
         "args": [
           [
@@ -8457,6 +8499,9 @@ Map {
         "type": "bool",
       },
       "slug": [Function],
+      "toolParamDescription": {
+        "type": "string",
+      },
       "value": {
         "args": [
           [
@@ -8743,6 +8788,9 @@ Map {
         ],
         "type": "oneOf",
       },
+      "toolParamDescription": {
+        "type": "string",
+      },
       "type": {
         "type": "string",
       },
@@ -8862,6 +8910,9 @@ Map {
         "type": "oneOf",
       },
       "slug": [Function],
+      "toolParamDescription": {
+        "type": "string",
+      },
       "warn": {
         "type": "bool",
       },
@@ -9450,6 +9501,9 @@ Map {
       },
       "stepMultiplier": {
         "type": "number",
+      },
+      "toolParamDescription": {
+        "type": "string",
       },
       "translateWithId": {
         "type": "func",
@@ -10767,6 +10821,9 @@ Map {
         "type": "number",
       },
       "slug": [Function],
+      "toolParamDescription": {
+        "type": "string",
+      },
       "value": {
         "args": [
           [
@@ -10878,6 +10935,9 @@ Map {
         "type": "oneOf",
       },
       "slug": [Function],
+      "toolParamDescription": {
+        "type": "string",
+      },
       "type": {
         "type": "string",
       },
@@ -11151,6 +11211,9 @@ Map {
         "isRequired": true,
         "type": "string",
       },
+      "toolParamDescription": {
+        "type": "string",
+      },
     },
     "render": [Function],
   },
@@ -11268,6 +11331,9 @@ Map {
       },
       "toggled": {
         "type": "bool",
+      },
+      "toolParamDescription": {
+        "type": "string",
       },
     },
   },
@@ -12598,6 +12664,9 @@ Map {
         "type": "oneOf",
       },
       "slug": [Function],
+      "toolParamDescription": {
+        "type": "string",
+      },
       "type": {
         "type": "string",
       },
@@ -14581,6 +14650,9 @@ Map {
         "type": "oneOf",
       },
       "slug": [Function],
+      "toolParamDescription": {
+        "type": "string",
+      },
       "type": {
         "type": "string",
       },

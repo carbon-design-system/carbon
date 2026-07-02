@@ -14,6 +14,31 @@ import { AILabel } from '../../AILabel';
 const prefix = 'cds';
 
 describe('Checkbox', () => {
+  describe('WebMCP attributes', () => {
+    it('should render toolparamdescription attribute when provided', () => {
+      render(
+        <Checkbox
+          id="checkbox-1"
+          labelText="Checkbox label"
+          toolParamDescription="Description for AI agent"
+        />
+      );
+
+      expect(screen.getByRole('checkbox')).toHaveAttribute(
+        'toolparamdescription',
+        'Description for AI agent'
+      );
+    });
+
+    it('should not render toolparamdescription attribute when not provided', () => {
+      render(<Checkbox id="checkbox-1" labelText="Checkbox label" />);
+
+      expect(screen.getByRole('checkbox')).not.toHaveAttribute(
+        'toolparamdescription'
+      );
+    });
+  });
+
   it('should set the `id` on the <input> element', () => {
     render(<Checkbox id="test" labelText="test-label" />);
     expect(screen.getByRole('checkbox')).toHaveAttribute('id', 'test');

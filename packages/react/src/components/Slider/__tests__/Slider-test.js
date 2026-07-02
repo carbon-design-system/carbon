@@ -92,6 +92,26 @@ describe('Slider', () => {
     jest.resetAllMocks();
   });
 
+  describe('WebMCP attributes', () => {
+    it('should render toolparamdescription attribute when provided', () => {
+      renderSlider({
+        ariaLabelInput: inputAriaValue,
+        toolParamDescription: 'Test description for WebMCP',
+      });
+      expect(screen.getByLabelText(inputAriaValue)).toHaveAttribute(
+        'toolparamdescription',
+        'Test description for WebMCP'
+      );
+    });
+
+    it('should not render toolparamdescription attribute when not provided', () => {
+      renderSlider({ ariaLabelInput: inputAriaValue });
+      expect(screen.getByLabelText(inputAriaValue)).not.toHaveAttribute(
+        'toolparamdescription'
+      );
+    });
+  });
+
   describe('behaves as expected - Component API', () => {
     it('should render children as expected', () => {
       renderSlider({ ariaLabelInput: inputAriaValue });

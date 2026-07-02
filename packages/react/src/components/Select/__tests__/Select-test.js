@@ -16,6 +16,36 @@ import { AILabel } from '../../AILabel';
 const prefix = 'cds';
 
 describe('Select', () => {
+  describe('WebMCP attributes', () => {
+    it('should render toolparamdescription attribute when provided', () => {
+      render(
+        <Select
+          id="select"
+          labelText="Select"
+          toolParamDescription="Description for AI agent">
+          <SelectItem value="option-1" text="Option 1" />
+        </Select>
+      );
+
+      expect(screen.getByRole('combobox')).toHaveAttribute(
+        'toolparamdescription',
+        'Description for AI agent'
+      );
+    });
+
+    it('should not render toolparamdescription attribute when not provided', () => {
+      render(
+        <Select id="select" labelText="Select">
+          <SelectItem value="option-1" text="Option 1" />
+        </Select>
+      );
+
+      expect(screen.getByRole('combobox')).not.toHaveAttribute(
+        'toolparamdescription'
+      );
+    });
+  });
+
   describe('renders as expected - Component API', () => {
     it('should render the correct elements by default', () => {
       render(<Select id="select" labelText="Select" />);

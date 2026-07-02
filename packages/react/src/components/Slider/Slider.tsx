@@ -327,6 +327,11 @@ export interface SliderProps
    * Provide the text displayed when the Slider is in a warning state.
    */
   warnText?: ReactNode;
+
+  /**
+   * WebMCP: Map elements to a property description within the JSON Schema
+   */
+  toolParamDescription?: string;
 }
 
 type State = {
@@ -377,6 +382,7 @@ const Slider = (props: SliderProps) => {
     warn = false,
     warnText,
     translateWithId: t = defaultTranslateWithId,
+    toolParamDescription,
     ...other
   } = props;
 
@@ -1407,6 +1413,9 @@ const Slider = (props: SliderProps) => {
               data-handle-position={HandlePosition.LOWER}
               aria-invalid={normalizedProps.invalid ? true : undefined}
               readOnly={readOnly}
+              {...(toolParamDescription && {
+                toolparamdescription: toolParamDescription,
+              })}
             />
             {normalizedProps.invalid && (
               <WarningFilled className={`${prefix}--slider__invalid-icon`} />
@@ -1565,6 +1574,9 @@ const Slider = (props: SliderProps) => {
                 : undefined
             }
             readOnly={readOnly}
+            {...(toolParamDescription && {
+              toolparamdescription: toolParamDescription,
+            })}
           />
           {(twoHandles
             ? normalizedUpperProps.invalid
@@ -1791,6 +1803,11 @@ Slider.propTypes = {
    * Provide the text displayed when the Slider is in a warning state.
    */
   warnText: PropTypes.node,
+
+  /**
+   * WebMCP: Map elements to a property description within the JSON Schema
+   */
+  toolParamDescription: PropTypes.string,
 };
 
 export default Slider as (props: SliderProps) => ReactNode;

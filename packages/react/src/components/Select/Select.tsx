@@ -141,6 +141,11 @@ export interface SelectProps
    * Provide the text that is displayed when the control is in warning state
    */
   warnText?: ReactNode;
+
+  /**
+   * WebMCP: Map elements to a property description within the JSON Schema
+   */
+  toolParamDescription?: string;
 }
 
 const Select = forwardRef<HTMLSelectElement, SelectProps>(
@@ -162,6 +167,7 @@ const Select = forwardRef<HTMLSelectElement, SelectProps>(
       light = false,
       readOnly,
       size,
+      toolParamDescription,
       warn = false,
       warnText,
       onChange,
@@ -302,6 +308,9 @@ const Select = forwardRef<HTMLSelectElement, SelectProps>(
             title={title}
             onChange={composeEventHandlers([onChange, handleChange])}
             {...readOnlyEventHandlers}
+            {...(toolParamDescription && {
+              toolparamdescription: toolParamDescription,
+            })}
             ref={ref}>
             {children}
           </select>
@@ -462,6 +471,12 @@ Select.propTypes = {
     PropTypes.node,
     'The `slug` prop has been deprecated and will be removed in the next major version. Use the decorator prop instead.'
   ),
+
+  /**
+   * WebMCP: Map elements to a property description within the JSON Schema
+   */
+  toolParamDescription: PropTypes.string,
+
   /**
    * Specify whether the control is currently in warning state
    */

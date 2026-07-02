@@ -37,6 +37,11 @@ export type TimePickerSelectProps = {
    * Specify a custom `id` for the `<select>`
    */
   id: string;
+
+  /**
+   * WebMCP: Map elements to a property description within the JSON Schema
+   */
+  toolParamDescription?: string;
 } & React.SelectHTMLAttributes<HTMLSelectElement> &
   React.InputHTMLAttributes<HTMLSelectElement>;
 
@@ -49,6 +54,7 @@ const TimePickerSelect = frFn((props, ref) => {
     id,
     disabled = false,
     className,
+    toolParamDescription,
     ...rest
   } = props;
   const prefix = usePrefix();
@@ -67,6 +73,9 @@ const TimePickerSelect = frFn((props, ref) => {
         disabled={disabled}
         id={id}
         ref={ref}
+        {...(toolParamDescription && {
+          toolparamdescription: toolParamDescription,
+        })}
         {...rest}>
         {children}
       </select>
@@ -100,6 +109,11 @@ TimePickerSelect.propTypes = {
    * Specify a custom `id` for the `<select>`
    */
   id: PropTypes.string.isRequired,
+
+  /**
+   * WebMCP: Map elements to a property description within the JSON Schema
+   */
+  toolParamDescription: PropTypes.string,
 };
 
 export default TimePickerSelect;
