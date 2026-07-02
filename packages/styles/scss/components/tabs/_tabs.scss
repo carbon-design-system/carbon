@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2016, 2023
+// Copyright IBM Corp. 2016, 2026
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -140,7 +140,7 @@
         @include focus-outline('outline');
       }
 
-      @media (hover: hover) {
+      @media (any-hover: hover) {
         &:hover {
           background-color: $background-hover;
         }
@@ -160,7 +160,7 @@
       background-color: $layer-accent;
       inline-size: $spacing-09;
 
-      @media (hover: hover) {
+      @media (any-hover: hover) {
         &:hover {
           background-color: $layer-accent-hover;
         }
@@ -179,7 +179,7 @@
         fill: $icon-primary;
       }
 
-      @media (hover: hover) {
+      @media (any-hover: hover) {
         &:hover {
           fill: $icon-primary;
         }
@@ -419,7 +419,7 @@
         inline-size: convert.to-rem(16px);
       }
 
-      @media (hover: hover) {
+      @media (any-hover: hover) {
         svg:hover {
           fill: $icon-primary;
         }
@@ -435,7 +435,7 @@
       }
     }
 
-    @media (hover: hover) {
+    @media (any-hover: hover) {
       .#{$prefix}--tabs__nav-item:hover
         + .#{$prefix}--tabs__nav-item--close
         .#{$prefix}--tabs__nav-item--close-icon
@@ -450,7 +450,7 @@
       }
     }
 
-    @media (hover: hover) {
+    @media (any-hover: hover) {
       .#{$prefix}--tabs__nav-item:hover
         + .#{$prefix}--tabs__nav-item--close
         .#{$prefix}--tabs__nav-item--close-icon--disabled,
@@ -579,7 +579,7 @@
     //-----------------------------
     // Item Hover
     //-----------------------------
-    @media (hover: hover) {
+    @media (any-hover: hover) {
       &:not(.#{$prefix}--tabs--contained)
         .#{$prefix}--tabs__nav-item:not(
           .#{$prefix}--tabs__nav-item--selected
@@ -653,7 +653,7 @@
       line-height: calc(#{convert.to-rem(48px)} - (#{$spacing-03} * 2));
     }
 
-    @media (hover: hover) {
+    @media (any-hover: hover) {
       &.#{$prefix}--tabs--contained:not(.#{$prefix}--tabs--tall)
         .#{$prefix}--tabs__nav-item--selected:hover {
         // height - vertical padding
@@ -670,7 +670,7 @@
       }
     }
 
-    @media (hover: hover) {
+    @media (any-hover: hover) {
       &.#{$prefix}--tabs--contained
         .#{$prefix}--tabs__nav-item--selected:hover {
         background-color: $layer;
@@ -682,7 +682,7 @@
       background-color: $background;
     }
 
-    @media (hover: hover) {
+    @media (any-hover: hover) {
       &.#{$prefix}--tabs--light.#{$prefix}--tabs--contained
         .#{$prefix}--tabs__nav-item--selected:hover {
         background-color: $background;
@@ -700,7 +700,7 @@
       outline: none;
     }
 
-    @media (hover: hover) {
+    @media (any-hover: hover) {
       .#{$prefix}--tabs__nav-item--disabled:hover {
         border-block-end: 2px solid $border-subtle;
         color: $tab-text-disabled;
@@ -743,7 +743,7 @@
       border-block-end-color: $border-subtle;
     }
 
-    @media (hover: hover) {
+    @media (any-hover: hover) {
       .#{$prefix}--tabs--light
         .#{$prefix}--tabs__nav-item--disabled:hover
         .#{$prefix}--tabs__nav-link {
