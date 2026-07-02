@@ -1,0 +1,53 @@
+<!--
+Copyright IBM Corp. 2026
+
+This source code is licensed under the Apache-2.0 license found in the
+LICENSE file in the root directory of this source tree.
+-->
+
+<html>
+<head>
+  <title>carbon-web-components scoped custom registry example</title>
+  <meta charset="UTF-8" />
+  <link rel="stylesheet"
+        href="https://1.www.s81c.com/common/carbon-for-ibm-dotcom/tag/v1/latest/plex.css"/>
+        
+  <link rel="stylesheet" href="src/styles.scss" />
+  <style>
+    /* Suppress custom element until styles are loaded */
+    cds-accordion:not(:defined) {
+      display: none;
+    }
+
+    body {
+      font-family: 'IBM Plex Sans', Arial, sans-serif;
+      margin: 2rem;
+    }
+
+    section + section {
+      margin-top: 2rem;
+    }
+  </style>
+  <script type="module" src="src/index.js"></script>
+</head>
+<body>
+  <section>
+    <div data-scoped-accordion-root>
+      <cds-accordion-skeleton count="3" open></cds-accordion-skeleton>
+      <cds-accordion>
+        <cds-accordion-item title="Scoped section 1 title">
+          <p>
+            This accordion is created with a scoped CustomElementRegistry from
+            src/index.js.
+          </p>
+        </cds-accordion-item>
+        <cds-accordion-item title="Scoped section 2 title">
+          <p>
+            It does not rely on the global customElements registry.
+          </p>
+        </cds-accordion-item>
+      </cds-accordion>
+    </div>
+  </section>
+</body>
+</html>
