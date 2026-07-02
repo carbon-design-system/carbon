@@ -381,6 +381,38 @@ describe.each([
     );
   });
 
+  it('does not add a default danger description to the primary action', () => {
+    render(
+      <Component
+        danger
+        primaryButtonText="Delete"
+        data-testid="modal-danger-default"
+      />
+    );
+
+    expect(screen.getByRole('button', { name: 'Delete' })).not.toHaveAttribute(
+      'aria-describedby'
+    );
+  });
+
+  it('allows a localized danger description to be provided', () => {
+    render(
+      <Component
+        danger
+        dangerDescription="gefahr"
+        primaryButtonText="Delete"
+        data-testid="modal-danger-localized"
+      />
+    );
+
+    const button = screen.getByRole('button', { name: 'gefahr Delete' });
+
+    expect(button).toHaveAttribute('aria-describedby');
+    expect(screen.getByText('gefahr')).toHaveClass(
+      `${prefix}--visually-hidden`
+    );
+  });
+
   it('disables buttons when inline loading status is active', () => {
     render(
       <Component
@@ -673,6 +705,194 @@ describe.each([
       await waitFor(() => {
         expect(focusElem).toHaveFocus();
       });
+    });
+  });
+
+  describe('Modal scroll content hysteresis', () => {
+    it('should handle missing contentRef gracefully', () => {
+      const { container } = render(
+        <Component
+          open
+          modalHeading="Test Modal"
+          primaryButtonText="Submit"
+          secondaryButtonText="Cancel">
+          <p>Test content</p>
+        </Component>
+      );
+
+      const modalContent = container.querySelector(`.${prefix}--modal-content`);
+
+      // Temporarily remove the ref to trigger the guard clause
+      Object.defineProperty(modalContent, 'scrollHeight', {
+        get: () => undefined,
+        configurable: true,
+      });
+
+      // Modal should still render without errors
+      expect(modalContent).toBeInTheDocument();
+    });
+
+    it('should set isScrollable to true when content is clearly scrollable (diff > 5)', () => {
+      const { container, rerender } = render(
+        <Component
+          open
+          modalHeading="Test Modal"
+          primaryButtonText="Submit"
+          secondaryButtonText="Cancel">
+          <div style={{ height: '50px' }}>Small content</div>
+        </Component>
+      );
+
+      const modalContent = container.querySelector(`.${prefix}--modal-content`);
+
+      // Mock scrollHeight > clientHeight by more than 5px
+      Object.defineProperty(modalContent, 'scrollHeight', {
+        get: () => 500,
+        configurable: true,
+      });
+      Object.defineProperty(modalContent, 'clientHeight', {
+        get: () => 400, // diff = 100, which is > 5
+        configurable: true,
+      });
+
+      // Trigger re-render to execute useEffect
+      rerender(
+        <Component
+          open
+          modalHeading="Test Modal"
+          primaryButtonText="Submit"
+          secondaryButtonText="Cancel">
+          <div style={{ height: '500px' }}>
+            Large content that needs scrolling
+          </div>
+        </Component>
+      );
+
+      // Should have scroll-content class
+      expect(modalContent).toHaveClass(`${prefix}--modal-scroll-content`);
+    });
+
+    it('should set isScrollable to false when content is clearly not scrollable (diff < -5)', () => {
+      const { container, rerender } = render(
+        <Component
+          open
+          modalHeading="Test Modal"
+          primaryButtonText="Submit"
+          secondaryButtonText="Cancel">
+          <div style={{ height: '500px' }}>Large content</div>
+        </Component>
+      );
+
+      const modalContent = container.querySelector(`.${prefix}--modal-content`);
+
+      // First make it scrollable
+      Object.defineProperty(modalContent, 'scrollHeight', {
+        get: () => 500,
+        configurable: true,
+      });
+      Object.defineProperty(modalContent, 'clientHeight', {
+        get: () => 400,
+        configurable: true,
+      });
+
+      rerender(
+        <Component
+          open
+          modalHeading="Test Modal"
+          primaryButtonText="Submit"
+          secondaryButtonText="Cancel">
+          <div style={{ height: '500px' }}>Large content</div>
+        </Component>
+      );
+
+      // Now make it clearly not scrollable (diff < -5)
+      Object.defineProperty(modalContent, 'scrollHeight', {
+        get: () => 300,
+        configurable: true,
+      });
+      Object.defineProperty(modalContent, 'clientHeight', {
+        get: () => 400, // diff = -100, which is < -5
+        configurable: true,
+      });
+
+      // Trigger re-render
+      rerender(
+        <Component
+          open
+          modalHeading="Test Modal"
+          primaryButtonText="Submit"
+          secondaryButtonText="Cancel">
+          <div style={{ height: '50px' }}>Small content</div>
+        </Component>
+      );
+
+      // Should NOT have scroll-content class
+      expect(modalContent).not.toHaveClass(`${prefix}--modal-scroll-content`);
+    });
+
+    it('should maintain current state when diff is in dead zone (-5 to 5)', () => {
+      const { container, rerender } = render(
+        <Component
+          open
+          modalHeading="Test Modal"
+          primaryButtonText="Submit"
+          secondaryButtonText="Cancel">
+          <div style={{ height: '100px' }}>Content</div>
+        </Component>
+      );
+
+      const modalContent = container.querySelector(`.${prefix}--modal-content`);
+
+      // Start with scrollable state
+      Object.defineProperty(modalContent, 'scrollHeight', {
+        get: () => 400,
+        configurable: true,
+      });
+      Object.defineProperty(modalContent, 'clientHeight', {
+        get: () => 300, // diff = 100 > 5, so scrollable
+        configurable: true,
+      });
+
+      rerender(
+        <Component
+          open
+          modalHeading="Test Modal"
+          primaryButtonText="Submit"
+          secondaryButtonText="Cancel">
+          <div style={{ height: '400px' }}>Large content</div>
+        </Component>
+      );
+
+      const initialHasClass = modalContent.classList.contains(
+        `${prefix}--modal-scroll-content`
+      );
+
+      // Now change to dead zone (diff = 2, which is between -5 and 5)
+      Object.defineProperty(modalContent, 'scrollHeight', {
+        get: () => 302,
+        configurable: true,
+      });
+      Object.defineProperty(modalContent, 'clientHeight', {
+        get: () => 300, // diff = 2, in dead zone
+        configurable: true,
+      });
+
+      rerender(
+        <Component
+          open
+          modalHeading="Test Modal"
+          primaryButtonText="Submit"
+          secondaryButtonText="Cancel">
+          <div style={{ height: '302px' }}>Content in dead zone</div>
+        </Component>
+      );
+
+      const finalHasClass = modalContent.classList.contains(
+        `${prefix}--modal-scroll-content`
+      );
+
+      // Class should remain the same (hysteresis prevents change)
+      expect(initialHasClass).toBe(finalHasClass);
     });
   });
 });

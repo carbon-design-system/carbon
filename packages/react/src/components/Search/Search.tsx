@@ -135,6 +135,7 @@ const Search = React.forwardRef<HTMLInputElement, SearchProps>(
       defaultValue,
       disabled,
       isExpanded = true,
+      inert,
       id,
       labelText,
       // @ts-expect-error: deprecated prop
@@ -147,6 +148,7 @@ const Search = React.forwardRef<HTMLInputElement, SearchProps>(
       renderIcon,
       role,
       size,
+      tabIndex,
       type = 'search',
       value,
       ...rest
@@ -164,6 +166,7 @@ const Search = React.forwardRef<HTMLInputElement, SearchProps>(
     const uniqueId = id || inputId;
     const searchId = `${uniqueId}-search`;
     const [hasContent, setHasContent] = useState(hasPropValue || false);
+    const isExpandableCollapsed = !!onExpand && !isExpanded;
     const searchClasses = cx(
       {
         [`${prefix}--search`]: true,
@@ -254,7 +257,7 @@ const Search = React.forwardRef<HTMLInputElement, SearchProps>(
         className={`${prefix}--search-magnifier`}
         onClick={onExpand}
         onKeyDown={handleExpandButtonKeyDown}
-        tabIndex={onExpand && !isExpanded ? 0 : -1}
+        tabIndex={isExpandableCollapsed ? 0 : -1}
         ref={expandButtonRef}
         aria-expanded={
           onExpand && isExpanded
@@ -282,7 +285,7 @@ const Search = React.forwardRef<HTMLInputElement, SearchProps>(
       );
 
     return (
-      <div role="search" aria-label={placeholder} className={searchClasses}>
+      <div role="search" aria-labelledby={searchId} className={searchClasses}>
         {magnifierWithTooltip}
         {/* the magnifier is used in ExpandableSearch as a click target to expand,
       however, it does not need a keyboard event bc the input element gets focus on keyboard nav and expands that way*/}
@@ -303,8 +306,9 @@ const Search = React.forwardRef<HTMLInputElement, SearchProps>(
           placeholder={placeholder}
           type={type}
           value={value}
-          tabIndex={onExpand && !isExpanded ? -1 : undefined}
           {...rest}
+          inert={isExpandableCollapsed ? true : inert}
+          tabIndex={isExpandableCollapsed ? -1 : tabIndex}
         />
         <button
           aria-label={closeButtonLabelText}
