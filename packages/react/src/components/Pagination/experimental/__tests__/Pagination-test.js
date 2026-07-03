@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2024
+ * Copyright IBM Corp. 2024, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -9,6 +9,7 @@ import React from 'react';
 import userEvent from '@testing-library/user-event';
 import { render, screen } from '@testing-library/react';
 import Pagination from '../Pagination';
+import PageSelector from '../PageSelector';
 
 describe('Preview Pagination', () => {
   let consoleWarnSpy;
@@ -111,5 +112,30 @@ describe('Preview Pagination', () => {
 
       expect(screen.getByText('1–20 of 40 items')).toBeInTheDocument();
     });
+  });
+});
+
+describe('PageSelector', () => {
+  let consoleWarnSpy;
+
+  beforeEach(() => {
+    consoleWarnSpy = jest.spyOn(console, 'warn').mockImplementation(() => {});
+  });
+
+  afterEach(() => {
+    consoleWarnSpy.mockRestore();
+  });
+
+  it('should emit a deprecation warning on mount in non-production', () => {
+    const originalEnv = process.env.NODE_ENV;
+    process.env.NODE_ENV = 'development';
+
+    render(<PageSelector currentPage={1} totalPages={2} />);
+
+    expect(consoleWarnSpy).toHaveBeenCalledWith(
+      expect.stringContaining('renderPageSelect')
+    );
+
+    process.env.NODE_ENV = originalEnv;
   });
 });
