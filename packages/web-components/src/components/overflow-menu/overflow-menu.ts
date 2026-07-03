@@ -6,7 +6,7 @@
  */
 
 import { adoptStyles, html } from 'lit';
-import { property } from 'lit/decorators.js';
+import { property, query } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
 import FocusMixin from '../../globals/mixins/focus';
 import HostListenerMixin from '../../globals/mixins/host-listener';
@@ -67,6 +67,18 @@ class CDSOverflowMenu
   implements CDSFloatingMenuTrigger
 {
   private _menuController = new FloatingUIController(this);
+
+  /**
+   * The tooltip element in the shadow DOM.
+   */
+  @query(`${prefix}-tooltip`)
+  private _tooltip?: HTMLElement;
+
+  /**
+   * The tooltip content element in the shadow DOM.
+   */
+  @query(`${prefix}-tooltip-content`)
+  private _tooltipContent?: HTMLElement;
 
   /**
    * The menu body.
@@ -318,9 +330,7 @@ class CDSOverflowMenu
     super.updated(changedProperties);
     const menuCompositionEnabled = this._isMenuCompositionEnabled();
 
-    const button = this.shadowRoot
-      ?.querySelector(`${prefix}-tooltip`)
-      ?.querySelector('button');
+    const button = this._tooltip?.querySelector('button');
     button?.classList.add(
       `${prefix}--btn--icon-only`,
       `${prefix}--overflow-menu`
@@ -357,8 +367,7 @@ class CDSOverflowMenu
     }
 
     if (changedProperties.has('dataTable')) {
-      const tooltip = this.shadowRoot?.querySelector(`${prefix}-tooltip`);
-      tooltip?.toggleAttribute('data-table', this.dataTable);
+      this._tooltip?.toggleAttribute('data-table', this.dataTable);
     }
 
     if (changedProperties.has('size')) {
@@ -378,16 +387,13 @@ class CDSOverflowMenu
         this.classList.add(`${prefix}--layout--size-${this.size}`);
       }
 
-      const tooltip = this.shadowRoot?.querySelector(`${prefix}-tooltip`);
       if (this.size) {
-        tooltip?.setAttribute('size', this.size);
+        this._tooltip?.setAttribute('size', this.size);
       }
     }
 
     if (changedProperties.has('toolbarAction') && this.toolbarAction) {
-      this.shadowRoot
-        ?.querySelector(`${prefix}-tooltip`)
-        ?.setAttribute('toolbar-action', '');
+      this._tooltip?.setAttribute('toolbar-action', '');
     }
 
     const labelText = this._getLabelText();
@@ -438,9 +444,7 @@ class CDSOverflowMenu
   }
 
   private _getTriggerButton() {
-    return this.shadowRoot
-      ?.querySelector(`${prefix}-tooltip`)
-      ?.querySelector('button') as HTMLButtonElement | null;
+    return this._tooltip?.querySelector('button') as HTMLButtonElement | null;
   }
 
   private _isTriggerEvent(event: Event) {
@@ -688,19 +692,16 @@ class CDSOverflowMenu
    * Suppresses trigger tooltip interactions while the menu is open.
    */
   private _syncTriggerTooltipState() {
-    const tooltip = this.shadowRoot?.querySelector(`${prefix}-tooltip`) as
+    const tooltip = this._tooltip as
       | (HTMLElement & { open?: boolean; keyboardOnly?: boolean })
-      | null;
-    const tooltipContent = this.shadowRoot?.querySelector(
-      `${prefix}-tooltip-content`
-    ) as HTMLElement | null;
+      | undefined;
 
     if (!tooltip) {
       return;
     }
 
     tooltip.keyboardOnly = this.open;
-    tooltipContent?.toggleAttribute('hidden', this.disabled || this.open);
+    this._tooltipContent?.toggleAttribute('hidden', this.disabled || this.open);
 
     if (this.open) {
       tooltip.open = false;
