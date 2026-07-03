@@ -120,9 +120,8 @@ export const Default = (args) => {
     setPageSize(pageSize);
   };
 
-  const handleSearchChange = (event, onInputChange) => {
+  const handleSearchChange = (event) => {
     action('toolbar search input')(event);
-    onInputChange(event);
     setSearchValue(event.target.value);
     setPage(1);
   };
@@ -142,7 +141,6 @@ export const Default = (args) => {
           getRowProps,
           getTableProps,
           getToolbarProps,
-          onInputChange,
           getCellProps,
         }) => (
           <TableContainer
@@ -150,10 +148,7 @@ export const Default = (args) => {
             description="Paginated data table with persistent toolbar">
             <TableToolbar {...getToolbarProps()}>
               <TableToolbarContent>
-                <TableToolbarSearch
-                  onChange={(event) => handleSearchChange(event, onInputChange)}
-                  persistent
-                />
+                <TableToolbarSearch onChange={handleSearchChange} persistent />
                 <TableToolbarMenu>
                   <TableToolbarAction onClick={action('Action 1 Click')}>
                     Action 1
