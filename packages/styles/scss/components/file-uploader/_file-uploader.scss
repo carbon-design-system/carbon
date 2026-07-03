@@ -72,13 +72,18 @@
     outline-offset: -2px;
     transition: $duration-fast-02 motion(standard, productive);
 
-    &:focus,
-    &:hover {
-      outline: 2px solid $focus;
+    @media (any-hover: hover) {
+      &:hover {
+        outline: 2px solid $focus;
+        text-decoration: underline;
+      }
     }
 
-    &:hover,
-    &:focus,
+    &:focus {
+      outline: 2px solid $focus;
+      text-decoration: underline;
+    }
+
     &:active,
     &:active:visited {
       text-decoration: underline;
@@ -94,8 +99,14 @@
     cursor: no-drop;
     text-decoration: none;
     transition: none;
+    @media (any-hover: hover) {
+      &:hover {
+        color: $text-disabled;
+        outline: none;
+        text-decoration: none;
+      }
+    }
 
-    &:hover,
     &:focus {
       color: $text-disabled;
       outline: none;
