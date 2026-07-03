@@ -92,6 +92,10 @@ $css--plex: true !default;
   color: $text-on-color;
 }
 
+:host(.#{$prefix}--menu-item--danger:focus) {
+  box-shadow: inset 0 0 0 to-rem(3px) $background;
+}
+
 .#{$prefix}--menu-item__icon,
 .#{$prefix}--menu-item__selection-icon {
   display: none;

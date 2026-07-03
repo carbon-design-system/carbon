@@ -7,7 +7,7 @@
 
 import { classMap } from 'lit/directives/class-map.js';
 import { html } from 'lit';
-import { property } from 'lit/decorators.js';
+import { property, query } from 'lit/decorators.js';
 import { BUTTON_KIND } from './defs';
 import styles from './button.scss?lit';
 import { prefix } from '../../globals/settings';
@@ -21,6 +21,12 @@ import { carbonElement as customElement } from '../../globals/decorators/carbon-
  */
 @customElement(`${prefix}-button-set`)
 class CDSButtonSet extends CDSButtonSetBase {
+  /**
+   * The slot element
+   */
+  @query('slot')
+  private _slotElement?: HTMLSlotElement;
+
   /**
    * `true` if the buttons should be stacked. Only applies to the button-set variant.
    */
@@ -66,9 +72,8 @@ class CDSButtonSet extends CDSButtonSetBase {
    * @private
    */
   private _hideSiblingMargin = () => {
-    const slot = this.shadowRoot?.querySelector('slot');
-    if (!slot) return;
-    const items = slot
+    if (!this._slotElement) return;
+    const items = this._slotElement
       .assignedElements()
       .filter(
         (el) => el.tagName.toLowerCase() === `${prefix}-button`
