@@ -69,6 +69,8 @@ describe('IconIndicator', () => {
       render(<IconIndicator kind="pending" label="Pending Status" compact />);
       const trigger = screen.getByRole('button');
 
+      expect(trigger).toHaveAccessibleName('Icon');
+
       // Hover over the trigger to open the tooltip
       await user.hover(trigger);
 
