@@ -107,7 +107,8 @@ export interface ShapeIndicatorProps {
   label: string;
 
   /**
-   * Additional Description for the shape, used for screen readers in compact mode
+   * Description for the shape announced to screen readers in compact mode.
+   * Defaults to `label` when not provided.
    */
   shapeDescription?: string;
 
@@ -127,7 +128,7 @@ export const ShapeIndicator = React.forwardRef(
       compact = false,
       kind,
       label,
-      shapeDescription = 'Shape',
+      shapeDescription,
       textSize = 12,
     }: ShapeIndicatorProps,
     ref: React.Ref<HTMLDivElement>
@@ -157,7 +158,9 @@ export const ShapeIndicator = React.forwardRef(
         definition={label}
         triggerClassName={`${prefix}--shape-indicator__button`}>
         {shapeElement}
-        <span className={`${prefix}--visually-hidden`}>{shapeDescription}</span>
+        <span className={`${prefix}--visually-hidden`}>
+          {shapeDescription ?? label}
+        </span>
       </DefinitionTooltip>
     ) : (
       <>
@@ -219,7 +222,8 @@ ShapeIndicator.propTypes = {
   label: PropTypes.string.isRequired,
 
   /**
-   * Description for the shape, used for accessibility
+   * Description for the shape announced to screen readers in compact mode.
+   * Defaults to `label` when not provided.
    */
   shapeDescription: PropTypes.string,
 

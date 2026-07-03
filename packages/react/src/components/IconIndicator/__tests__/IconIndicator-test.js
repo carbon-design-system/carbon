@@ -52,6 +52,8 @@ describe('IconIndicator', () => {
       const trigger = screen.getByRole('button');
       expect(trigger).toBeInTheDocument();
       expect(trigger).toHaveClass('cds--definition-term');
+      // label is used as the default accessible name
+      expect(trigger).toHaveAccessibleName('Test Label');
     });
 
     it('should render with tooltip trigger when compact is true', () => {
@@ -69,7 +71,7 @@ describe('IconIndicator', () => {
       render(<IconIndicator kind="pending" label="Pending Status" compact />);
       const trigger = screen.getByRole('button');
 
-      expect(trigger).toHaveAccessibleName('Icon');
+      expect(trigger).toHaveAccessibleName('Pending Status');
 
       // Hover over the trigger to open the tooltip
       await user.hover(trigger);

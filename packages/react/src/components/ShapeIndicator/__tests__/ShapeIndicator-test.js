@@ -42,9 +42,11 @@ describe('ShapeIndicator', () => {
     expect(ref).toHaveBeenCalledWith(container.firstChild);
   });
 
-  it('should render compact mode with tooltip', () => {
+  it('should render compact mode with tooltip using label as default accessible name', () => {
     render(<ShapeIndicator kind="failed" label="label" compact />);
-    expect(screen.getByText('Shape')).toBeInTheDocument();
+    // label is used as the default visually-hidden accessible name
+    const trigger = document.querySelector('.cds--shape-indicator__button');
+    expect(trigger).toHaveAccessibleName('label');
   });
 
   it('should use custom shapeDescription in compact mode', () => {

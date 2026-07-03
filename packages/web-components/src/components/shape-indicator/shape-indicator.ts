@@ -86,10 +86,11 @@ class CDSShapeIndicator extends LitElement {
   compact = false;
 
   /**
-   * Additional Description for the shape, used for screen readers in compact mode
+   * Description for the shape announced to screen readers in compact mode.
+   * Defaults to `label` when not provided.
    */
   @property({ attribute: 'shape-description' })
-  shapeDescription = 'Shape';
+  shapeDescription?: string;
 
   /**
    * Shape indicator size (12 or 14)
@@ -130,7 +131,7 @@ class CDSShapeIndicator extends LitElement {
           open-on-hover>
           ${shapeElement}
           <span class="${prefix}--visually-hidden"
-            >${this.shapeDescription}</span
+            >${this.shapeDescription ?? this.label}</span
           >
           <span slot="definition">${this.label}</span>
         </cds-definition-tooltip>

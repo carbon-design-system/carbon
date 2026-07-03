@@ -69,7 +69,8 @@ export interface IconIndicatorProps {
   compact?: boolean;
 
   /**
-   * Additional Description for the icon, used for screen readers in compact mode.
+   * Description for the icon announced to screen readers in compact mode.
+   * Defaults to `label` when not provided.
    */
   iconDescription?: string;
 
@@ -97,7 +98,7 @@ export const IconIndicator = React.forwardRef(
       autoAlign = false,
       className: customClassName,
       compact = false,
-      iconDescription = 'Icon',
+      iconDescription,
       kind,
       label,
       size = 16,
@@ -129,7 +130,9 @@ export const IconIndicator = React.forwardRef(
         definition={label}
         triggerClassName={`${prefix}--icon-indicator__button`}>
         {iconElement}
-        <span className={`${prefix}--visually-hidden`}>{iconDescription}</span>
+        <span className={`${prefix}--visually-hidden`}>
+          {iconDescription ?? label}
+        </span>
       </DefinitionTooltip>
     ) : (
       <>
@@ -181,7 +184,8 @@ IconIndicator.propTypes = {
   compact: PropTypes.bool,
 
   /**
-   * Description for the icon, used for accessibility
+   * Description for the icon announced to screen readers in compact mode.
+   * Defaults to `label` when not provided.
    */
   iconDescription: PropTypes.string,
 

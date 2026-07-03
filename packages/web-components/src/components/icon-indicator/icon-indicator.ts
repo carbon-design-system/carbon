@@ -118,10 +118,11 @@ class CDSIconIndicator extends LitElement {
   compact = false;
 
   /**
-   * Additional Description for the icon, used for screen readers in compact mode
+   * Description for the icon announced to screen readers in compact mode.
+   * Defaults to `label` when not provided.
    */
   @property({ attribute: 'icon-description' })
-  iconDescription = 'Icon';
+  iconDescription?: string;
 
   /**
    * Icon indicator should be size 16 or 20
@@ -153,7 +154,7 @@ class CDSIconIndicator extends LitElement {
           open-on-hover>
           ${iconElement}
           <span class="${prefix}--visually-hidden"
-            >${this.iconDescription}</span
+            >${this.iconDescription ?? this.label}</span
           >
           <span slot="definition">${this.label}</span>
         </cds-definition-tooltip>
