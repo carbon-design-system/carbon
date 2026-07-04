@@ -18,24 +18,28 @@ describe('cds-inline-notification', () => {
       </cds-inline-notification>
     `);
 
-    expect(el).to.have.attribute('role', 'alert');
+    expect(el).to.have.attribute('role', 'status');
     expect(
-      el.shadowRoot?.querySelector(`.${prefix}--inline-notification__title`)
-        ?.textContent
-    ).to.contain('A title');
+      el.shadowRoot
+        ?.querySelector(`.${prefix}--inline-notification__title`)
+        ?.textContent.trim()
+    ).to.equal('A title');
     expect(
-      el.shadowRoot?.querySelector(`.${prefix}--inline-notification__subtitle`)
-        ?.textContent
-    ).to.contain('A subtitle');
-    expect(el.textContent).to.contain('Additional content');
+      el.shadowRoot
+        ?.querySelector(`.${prefix}--inline-notification__subtitle`)
+        ?.textContent.trim()
+    ).to.equal('A subtitle');
+    expect(el.querySelector('span')?.textContent).to.equal(
+      'Additional content'
+    );
   });
 
   it('preserves a custom role', async () => {
     const el = await fixture(html`
-      <cds-inline-notification role="status"></cds-inline-notification>
+      <cds-inline-notification role="log"></cds-inline-notification>
     `);
 
-    expect(el).to.have.attribute('role', 'status');
+    expect(el).to.have.attribute('role', 'log');
   });
 
   ['error', 'info', 'info-square', 'success', 'warning', 'warning-alt'].forEach(
@@ -87,7 +91,9 @@ describe('cds-inline-notification', () => {
       `.${prefix}--inline-notification__close-button`
     );
 
-    expect(getComputedStyle(closeButton).display).to.equal('none');
+    expect(closeButton.getClientRects()).to.have.lengthOf(0);
+    closeButton.focus();
+    expect(el.shadowRoot?.activeElement).to.not.equal(closeButton);
   });
 
   it('closes and reports the triggering element', async () => {

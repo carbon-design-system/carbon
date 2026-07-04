@@ -46,12 +46,12 @@ describe('cds-callout-notification', () => {
     );
 
     expect(title).to.have.attribute('id', 'callout-title');
-    expect(title?.textContent).to.contain('A title');
+    expect(title?.textContent.trim()).to.equal('A title');
     expect(
-      el.shadowRoot?.querySelector(
-        `.${prefix}--actionable-notification__subtitle`
-      )?.textContent
-    ).to.contain('A subtitle');
+      el.shadowRoot
+        ?.querySelector(`.${prefix}--actionable-notification__subtitle`)
+        ?.textContent.trim()
+    ).to.equal('A subtitle');
     expect(el.querySelector('p')?.textContent).to.equal('Additional content');
   });
 
@@ -106,13 +106,20 @@ describe('cds-callout-notification', () => {
     expect(actionButton).to.have.attribute('low-contrast', 'true');
   });
 
-  it('reflects changes to kind and low contrast', async () => {
+  it('reflects changes to kind and low contrast from their defaults', async () => {
     const el = await createCallout();
+
+    expect(el.kind).to.equal('info');
+    expect(el.lowContrast).to.be.false;
+    expect(el).to.have.attribute('kind', 'info');
+    expect(el).to.not.have.attribute('low-contrast');
 
     el.kind = 'warning';
     el.lowContrast = true;
     await el.updateComplete;
 
+    expect(el.kind).to.equal('warning');
+    expect(el.lowContrast).to.be.true;
     expect(el).to.have.attribute('kind', 'warning');
     expect(el).to.have.attribute('low-contrast');
   });

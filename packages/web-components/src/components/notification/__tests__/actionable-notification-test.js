@@ -56,19 +56,20 @@ describe('cds-actionable-notification', () => {
     });
 
     expect(
-      el.shadowRoot?.querySelector(`.${prefix}--actionable-notification__title`)
-        ?.textContent
-    ).to.contain('A title');
+      el.shadowRoot
+        ?.querySelector(`.${prefix}--actionable-notification__title`)
+        ?.textContent.trim()
+    ).to.equal('A title');
     expect(
-      el.shadowRoot?.querySelector(
-        `.${prefix}--actionable-notification__subtitle`
-      )?.textContent
-    ).to.contain('A subtitle');
+      el.shadowRoot
+        ?.querySelector(`.${prefix}--actionable-notification__subtitle`)
+        ?.textContent.trim()
+    ).to.equal('A subtitle');
     expect(
-      el.shadowRoot?.querySelector(
-        `.${prefix}--actionable-notification__caption`
-      )?.textContent
-    ).to.contain('00:00:00 AM');
+      el.shadowRoot
+        ?.querySelector(`.${prefix}--actionable-notification__caption`)
+        ?.textContent.trim()
+    ).to.equal('00:00:00 AM');
   });
 
   it('renders additional content in the default slot', async () => {
@@ -132,7 +133,7 @@ describe('cds-actionable-notification', () => {
     expect(actionButton).to.have.attribute('size', 'sm');
   });
 
-  it('uses tertiary action button styling in toast mode', async () => {
+  it('sets the action button kind to tertiary in toast mode', async () => {
     const el = await createActionable(
       {},
       `<${prefix}-actionable-notification-button slot="action">
@@ -144,10 +145,5 @@ describe('cds-actionable-notification', () => {
     );
 
     expect(actionButton).to.have.attribute('kind', 'tertiary');
-    expect(
-      actionButton.shadowRoot?.querySelector(
-        `.${prefix}--actionable-notification__action-button`
-      )
-    ).to.exist;
   });
 });

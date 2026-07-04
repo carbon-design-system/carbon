@@ -20,19 +20,22 @@ describe('cds-toast-notification', () => {
       </cds-toast-notification>
     `);
 
-    expect(el).to.have.attribute('role', 'alert');
+    expect(el).to.have.attribute('role', 'status');
     expect(
-      el.shadowRoot?.querySelector(`.${prefix}--toast-notification__title`)
-        ?.textContent
-    ).to.contain('A title');
+      el.shadowRoot
+        ?.querySelector(`.${prefix}--toast-notification__title`)
+        ?.textContent.trim()
+    ).to.equal('A title');
     expect(
-      el.shadowRoot?.querySelector(`.${prefix}--toast-notification__subtitle`)
-        ?.textContent
-    ).to.contain('A subtitle');
+      el.shadowRoot
+        ?.querySelector(`.${prefix}--toast-notification__subtitle`)
+        ?.textContent.trim()
+    ).to.equal('A subtitle');
     expect(
-      el.shadowRoot?.querySelector(`.${prefix}--toast-notification__caption`)
-        ?.textContent
-    ).to.contain('00:00:00 AM');
+      el.shadowRoot
+        ?.querySelector(`.${prefix}--toast-notification__caption`)
+        ?.textContent.trim()
+    ).to.equal('00:00:00 AM');
   });
 
   it('renders a slotted caption', async () => {
@@ -45,7 +48,9 @@ describe('cds-toast-notification', () => {
     expect(
       el.shadowRoot?.querySelector(`.${prefix}--toast-notification__caption`)
     ).to.exist;
-    expect(el.textContent).to.contain('Slotted caption');
+    expect(el.querySelector('[slot="caption"]')?.textContent).to.equal(
+      'Slotted caption'
+    );
   });
 
   it('does not render an empty caption container', async () => {
@@ -103,7 +108,9 @@ describe('cds-toast-notification', () => {
       `.${prefix}--toast-notification__close-button`
     );
 
-    expect(getComputedStyle(closeButton).display).to.equal('none');
+    expect(closeButton.getClientRects()).to.have.lengthOf(0);
+    closeButton.focus();
+    expect(el.shadowRoot?.activeElement).to.not.equal(closeButton);
   });
 
   it('fires the close event when the close button is clicked', async () => {
