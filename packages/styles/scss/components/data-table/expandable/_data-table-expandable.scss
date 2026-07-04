@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2016, 2023
+// Copyright IBM Corp. 2016, 2026
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -139,33 +139,38 @@
       border-color $duration-fast-01 motion(standard, productive);
   }
 
-  // hovering on collapsed parent
-  tr.#{$prefix}--parent-row:not(.#{$prefix}--expandable-row):first-of-type:hover
-    td {
-    border-block-end: 1px solid $border-subtle;
-    border-block-start: 1px solid $border-subtle;
-  }
+  @media (any-hover: hover) {
+    // hovering on collapsed parent
+    tr.#{$prefix}--parent-row:not(
+        .#{$prefix}--expandable-row
+      ):first-of-type:hover
+      td {
+      border-block-end: 1px solid $border-subtle;
+      border-block-start: 1px solid $border-subtle;
+    }
 
-  // hovering on expanded parent
-  tr.#{$prefix}--parent-row.#{$prefix}--expandable-row:hover td {
-    background-color: $layer-hover;
-    border-block-end: 1px solid $border-subtle;
-    border-block-start: 1px solid $border-subtle;
-    color: $text-primary;
-  }
+    // hovering on expanded parent
+    tr.#{$prefix}--parent-row.#{$prefix}--expandable-row:hover td {
+      background-color: $layer-hover;
+      border-block-end: 1px solid $border-subtle;
+      border-block-start: 1px solid $border-subtle;
+      color: $text-primary;
+    }
 
-  tr.#{$prefix}--parent-row.#{$prefix}--expandable-row:hover td:first-of-type {
-    // First td doesn't have a visible border
-    border-block-end: 1px solid $layer-hover;
-  }
+    tr.#{$prefix}--parent-row.#{$prefix}--expandable-row:hover
+      td:first-of-type {
+      // First td doesn't have a visible border
+      border-block-end: 1px solid $layer-hover;
+    }
 
-  // Child row when hovering on expanded parent
-  tr.#{$prefix}--parent-row.#{$prefix}--expandable-row:hover
-    + tr[data-child-row]
-    td {
-    background-color: $layer-hover;
-    border-block-end: 1px solid $border-subtle;
-    color: $text-primary;
+    // Child row when hovering on expanded parent
+    tr.#{$prefix}--parent-row.#{$prefix}--expandable-row:hover
+      + tr[data-child-row]
+      td {
+      background-color: $layer-hover;
+      border-block-end: 1px solid $border-subtle;
+      color: $text-primary;
+    }
   }
 
   //hovering on expanded child row
@@ -336,16 +341,18 @@
       border-top $duration-fast-01 motion(standard, productive);
   }
 
-  .#{$prefix}--data-table--zebra tbody tr[data-parent-row]:hover td,
-  .#{$prefix}--data-table--zebra
-    tbody
-    tr[data-parent-row]:hover
-    + tr[data-child-row]
-    td,
-  .#{$prefix}--data-table--zebra tbody tr[data-child-row]:hover td {
-    background-color: $layer-hover;
-    border-block-end: 1px solid $layer-hover;
-    border-block-start: 1px solid $layer-hover;
+  @media (any-hover: hover) {
+    .#{$prefix}--data-table--zebra tbody tr[data-parent-row]:hover td,
+    .#{$prefix}--data-table--zebra
+      tbody
+      tr[data-parent-row]:hover
+      + tr[data-child-row]
+      td,
+    .#{$prefix}--data-table--zebra tbody tr[data-child-row]:hover td {
+      background-color: $layer-hover;
+      border-block-end: 1px solid $layer-hover;
+      border-block-start: 1px solid $layer-hover;
+    }
   }
 
   .#{$prefix}--data-table--zebra
@@ -381,15 +388,17 @@
     box-shadow: 0 1px $border-subtle;
   }
 
-  // Parent collapsed hover
-  tr.#{$prefix}--parent-row.#{$prefix}--data-table--selected:not(
-      .#{$prefix}--expandable-row
-    ):hover
-    td {
-    background-color: $layer-selected-hover;
-    border-block-end: 1px solid $border-subtle;
-    border-block-start: 1px solid $layer-selected-hover;
-    box-shadow: 0 1px $layer-selected-hover;
+  @media (any-hover: hover) {
+    // Parent collapsed hover
+    tr.#{$prefix}--parent-row.#{$prefix}--data-table--selected:not(
+        .#{$prefix}--expandable-row
+      ):hover
+      td {
+      background-color: $layer-selected-hover;
+      border-block-end: 1px solid $border-subtle;
+      border-block-start: 1px solid $layer-selected-hover;
+      box-shadow: 0 1px $layer-selected-hover;
+    }
   }
 
   // Parent expanded
@@ -402,11 +411,6 @@
     box-shadow: 0 1px $layer-selected;
   }
 
-  // Parent expanded hover
-  tr.#{$prefix}--parent-row.#{$prefix}--data-table--selected.#{$prefix}--expandable-row:hover
-    td,
-  tr.#{$prefix}--parent-row.#{$prefix}--data-table--selected.#{$prefix}--expandable-row:hover
-    td:first-of-type,
   tr.#{$prefix}--parent-row.#{$prefix}--data-table--selected.#{$prefix}--expandable-row--hover
     td,
   tr.#{$prefix}--parent-row.#{$prefix}--data-table--selected.#{$prefix}--expandable-row--hover
@@ -415,6 +419,19 @@
     border-block-end: 1px solid transparent;
     border-block-start: 1px solid $layer-selected-hover;
     box-shadow: 0 1px $layer-selected-hover;
+  }
+
+  @media (any-hover: hover) {
+    // Parent expanded hover
+    tr.#{$prefix}--parent-row.#{$prefix}--data-table--selected.#{$prefix}--expandable-row:hover
+      td,
+    tr.#{$prefix}--parent-row.#{$prefix}--data-table--selected.#{$prefix}--expandable-row:hover
+      td:first-of-type {
+      background-color: $layer-selected-hover;
+      border-block-end: 1px solid transparent;
+      border-block-start: 1px solid $layer-selected-hover;
+      box-shadow: 0 1px $layer-selected-hover;
+    }
   }
 
   // Child row expanded
@@ -435,14 +452,19 @@
     padding-block-end: convert.to-rem(24px);
   }
 
-  // Child row expanded hover
-  tr.#{$prefix}--parent-row.#{$prefix}--data-table--selected.#{$prefix}--expandable-row:hover
-    + tr[data-child-row]
-    td,
   tr.#{$prefix}--parent-row.#{$prefix}--data-table--selected.#{$prefix}--expandable-row--hover
     + tr[data-child-row]
     td {
     background-color: $layer-selected;
+  }
+
+  @media (any-hover: hover) {
+    // Child row expanded hover
+    tr.#{$prefix}--parent-row.#{$prefix}--data-table--selected.#{$prefix}--expandable-row:hover
+      + tr[data-child-row]
+      td {
+      background-color: $layer-selected;
+    }
   }
 
   // Slug styles
@@ -471,10 +493,15 @@
   }
 
   .#{$prefix}--data-table--slug-row td,
-  .#{$prefix}--data-table tr.#{$prefix}--data-table--slug-row:hover td,
-  .#{$prefix}--data-table--ai-label-row td,
-  .#{$prefix}--data-table tr.#{$prefix}--data-table--ai-label-row:hover td {
+  .#{$prefix}--data-table--ai-label-row td {
     border-block-start: 1px solid transparent;
+  }
+
+  @media (any-hover: hover) {
+    .#{$prefix}--data-table tr.#{$prefix}--data-table--slug-row:hover td,
+    .#{$prefix}--data-table tr.#{$prefix}--data-table--ai-label-row:hover td {
+      border-block-start: 1px solid transparent;
+    }
   }
 
   // Windows HCM fix
