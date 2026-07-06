@@ -80,6 +80,12 @@ export interface ListBoxSelectionProps extends TranslateWithId<TranslationKey> {
    * clear selection element fires a mouseup event
    */
   onMouseUp?: React.MouseEventHandler<HTMLButtonElement>;
+
+  /**
+   * Specify an optional `onMouseDown` handler that is called when the underlying
+   * clear selection element fires a mousedown event
+   */
+  onMouseDown?: React.MouseEventHandler<HTMLButtonElement>;
 }
 
 function ListBoxSelection({
@@ -186,8 +192,14 @@ ListBoxSelection.propTypes = {
   onClick: PropTypes.func,
 
   /**
-   * Specify an optional `onClick` handler that is called when the underlying
-   * clear selection element is clicked
+   * Specify an optional `onMouseDown` handler that is called when the underlying
+   * clear selection element fires a mousedown event
+   */
+  onMouseDown: PropTypes.func,
+
+  /**
+   * Specify an optional `onMouseUp` handler that is called when the underlying
+   * clear selection element fires a mouseup event
    */
   onMouseUp: PropTypes.func,
 

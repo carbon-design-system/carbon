@@ -435,6 +435,33 @@ describe('FilterableMultiSelect', () => {
     );
   });
 
+  it('should call onInputValueChange with empty string when clear icon is clicked', async () => {
+    const onInputValueChange = jest.fn();
+    render(
+      <FilterableMultiSelect
+        {...mockProps}
+        placeholder="test"
+        onInputValueChange={onInputValueChange}
+      />
+    );
+    await waitForPosition();
+
+    await openMenu();
+    await userEvent.type(screen.getByPlaceholderText('test'), 'abc');
+
+    onInputValueChange.mockClear();
+
+    const clearButton = screen.getByRole('button', {
+      name: 'Clear selected item',
+    });
+    await userEvent.click(clearButton);
+
+    expect(screen.getByPlaceholderText('test')).toHaveDisplayValue('');
+    expect(onInputValueChange).toHaveBeenCalledWith(
+      expect.objectContaining({ inputValue: '' })
+    );
+  });
+
   it('should clear all selections when clicking clear all button', async () => {
     const initialSelectedItems = [mockProps.items[0], mockProps.items[1]];
     render(

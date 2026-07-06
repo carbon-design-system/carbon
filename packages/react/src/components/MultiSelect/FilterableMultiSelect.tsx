@@ -10,6 +10,7 @@ import cx from 'classnames';
 import Downshift, {
   useCombobox,
   useMultipleSelection,
+  type UseComboboxInputValueChange,
   type UseComboboxProps,
   type UseMultipleSelectionProps,
   UseComboboxInterface,
@@ -817,11 +818,13 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
     event?: KeyboardEvent<Element> | MouseEvent<HTMLButtonElement>
   ) {
     const value = textInput.current?.value;
-    if (
-      value?.length === 1 ||
-      (event && 'key' in event && match(event, keys.Escape))
-    ) {
+    const isEscape = event && 'key' in event && match(event, keys.Escape);
+    const isClick = value && !(event && 'key' in event);
+    if (value?.length === 1 || isEscape || isClick) {
       setInputValue('');
+      onInputValueChange?.({
+        inputValue: '',
+      } as UseComboboxInputValueChange<ItemType>);
     } else {
       setInputValue(value ?? '');
     }
@@ -1045,6 +1048,9 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
               disabled={disabled}
               translateWithId={translateWithId}
               readOnly={readOnly}
+              onMouseDown={(event: MouseEvent<HTMLButtonElement>) => {
+                event.preventDefault();
+              }}
               onMouseUp={(event: MouseEvent) => {
                 // If we do not stop this event from propagating,
                 // it seems like Downshift takes our event and
