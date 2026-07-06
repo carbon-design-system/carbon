@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -21,6 +21,40 @@ export default {
 };
 
 const sharedArgTypes = {
+  align: {
+    control: {
+      type: 'select',
+    },
+    options: [
+      'top',
+      'top-start',
+      'top-end',
+      'bottom',
+      'bottom-start',
+      'bottom-end',
+      'left',
+      'left-start',
+      'left-end',
+      'right',
+      'right-start',
+      'right-end',
+    ],
+  },
+  autoAlign: {
+    control: {
+      type: 'boolean',
+    },
+  },
+  compact: {
+    control: {
+      type: 'boolean',
+    },
+  },
+  iconDescription: {
+    control: {
+      type: 'text',
+    },
+  },
   label: {
     control: {
       type: 'text',
@@ -41,7 +75,7 @@ export const Default = (props) => {
   return (
     <div
       style={{
-        display: 'flex',
+        display: 'inline-flex',
         flexFlow: 'column',
         rowGap: '.5rem',
       }}>
@@ -62,6 +96,10 @@ export const Default = (props) => {
 };
 
 Default.args = {
+  align: 'right',
+  autoAlign: false,
+  iconDescription: 'Icon',
+  compact: false,
   size: 16,
 };
 Default.argTypes = sharedArgTypes;
@@ -70,7 +108,7 @@ export const DefaultWithSize20 = (props) => {
   return (
     <div
       style={{
-        display: 'flex',
+        display: 'inline-flex',
         flexFlow: 'column',
         rowGap: '.5rem',
       }}>
@@ -91,6 +129,9 @@ export const DefaultWithSize20 = (props) => {
 };
 
 DefaultWithSize20.args = {
+  align: 'top',
+  autoAlign: true,
+  compact: false,
   size: 20,
 };
 
