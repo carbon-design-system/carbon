@@ -40,7 +40,8 @@ function toSource(value) {
 
 /**
  * Generate a JS module for one theme from its DTCG JSON file and write it to
- * `src/generated/themes/<themeName>.js`.
+ * `js/generated/themes/<themeName>.js`, plus a sibling `.d.ts` so that
+ * TypeScript can resolve types without needing to compile the JS file.
  *
  * @param {string} themeName - e.g. 'white', 'g10', 'g90', 'g100'
  * @param {string} outDir    - Absolute path to the output directory
@@ -56,17 +57,24 @@ function buildDTCGJsThemeFile(themeName, outDir) {
   const dtcgTokens = JSON.parse(fs.readFileSync(dtcgPath, 'utf8'));
   const theme = convertDTCGToTheme(dtcgTokens);
 
-  const lines = [FILE_BANNER];
+  const jsLines = [FILE_BANNER];
+  const dtsLines = [FILE_BANNER];
 
   for (const [kebabKey, value] of Object.entries(theme)) {
     const camelKey = kebabToCamel(kebabKey);
-    lines.push(`export const ${camelKey} = ${toSource(value)};`);
+    const tsType = typeof value === 'string' ? 'string' : 'number';
+    jsLines.push(`export const ${camelKey} = ${toSource(value)};`);
+    dtsLines.push(`export declare const ${camelKey}: ${tsType};`);
   }
 
   fs.ensureDirSync(outDir);
   fs.writeFileSync(
     path.join(outDir, `${themeName}.js`),
-    lines.join('\n') + '\n'
+    jsLines.join('\n') + '\n'
+  );
+  fs.writeFileSync(
+    path.join(outDir, `${themeName}.d.ts`),
+    dtsLines.join('\n') + '\n'
   );
 }
 
