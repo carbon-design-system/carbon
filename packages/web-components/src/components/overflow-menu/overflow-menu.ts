@@ -389,6 +389,8 @@ class CDSOverflowMenu
 
       if (this.size) {
         this._tooltip?.setAttribute('size', this.size);
+      } else {
+        this._tooltip?.removeAttribute('size');
       }
     }
 
