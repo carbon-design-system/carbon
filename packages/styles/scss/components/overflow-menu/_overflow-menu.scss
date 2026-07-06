@@ -374,11 +374,6 @@
     box-shadow: inset 0 0 0 convert.to-rem(3px) $background;
   }
 
-  .#{$prefix}--overflow-menu-options__option--disabled:hover {
-    background-color: $layer;
-    cursor: not-allowed;
-  }
-
   .#{$prefix}--overflow-menu-options__option--disabled
     .#{$prefix}--overflow-menu-options__btn {
     color: $text-disabled;
