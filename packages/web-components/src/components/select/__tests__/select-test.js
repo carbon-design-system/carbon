@@ -309,4 +309,18 @@ describe('cds-select', () => {
       'readonly-text'
     );
   });
+
+  it('should support a custom read-only text for screen readers', async () => {
+    const el = await fixture(html`
+      <cds-select
+        label-text="Select"
+        readonly
+        read-only-text="Schreibgeschützt">
+        <cds-select-item value="1">One</cds-select-item>
+      </cds-select>
+    `);
+    const hidden = el.shadowRoot.querySelector('.cds--visually-hidden');
+    expect(hidden).to.exist;
+    expect(hidden.textContent.trim()).to.equal('Schreibgeschützt');
+  });
 });

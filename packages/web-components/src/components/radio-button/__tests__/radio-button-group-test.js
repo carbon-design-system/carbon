@@ -143,6 +143,21 @@ describe('cds-radio-button-group', () => {
     );
   });
 
+  it('should support a custom read-only-text', async () => {
+    const el = await fixture(html`
+      <cds-radio-button-group
+        readonly
+        read-only-text="Solo lectura"
+        legend-text="test">
+        <cds-radio-button value="test-1"></cds-radio-button>
+        <cds-radio-button value="test-2"></cds-radio-button>
+      </cds-radio-button-group>
+    `);
+    const hidden = el.shadowRoot.querySelector('.cds--visually-hidden');
+    expect(hidden).to.exist;
+    expect(hidden?.textContent.trim()).to.equal('Solo lectura');
+  });
+
   it('selects initial value', async () => {
     const el = await fixture(html`
       <cds-radio-button-group value="test-1">

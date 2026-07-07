@@ -552,6 +552,22 @@ describe('Slider', () => {
       expect(theSlider).toHaveAttribute('aria-describedby', readOnlyText.id);
     });
 
+    it('should support custom translation of the readOnly state via translateWithId', () => {
+      const translateWithId = (id) =>
+        id === 'carbon.slider.read-only' ? 'Nur lesen' : id;
+      const { container } = renderSlider({
+        ariaLabelInput: inputAriaValue,
+        readOnly: true,
+        translateWithId,
+      });
+
+      const readOnlyText = container.querySelector(
+        `.${prefix}--visually-hidden`
+      );
+      expect(readOnlyText).toBeInTheDocument();
+      expect(readOnlyText).toHaveTextContent('Nur lesen');
+    });
+
     it('should ignore direct change events when `readOnly` is `true`', () => {
       renderSlider({
         ariaLabelInput: inputAriaValue,

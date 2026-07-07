@@ -353,6 +353,12 @@ class CDSRadioButton extends HostListenerMixin(FocusMixin(LitElement)) {
   readOnly = false;
 
   /**
+   * The text announced to screen readers when the component is read-only.
+   */
+  @property({ attribute: 'read-only-text' })
+  readOnlyText = 'Read only';
+
+  /**
    * `true` if the radio button is required.
    */
   @property({ type: Boolean, reflect: true })
@@ -493,7 +499,7 @@ class CDSRadioButton extends HostListenerMixin(FocusMixin(LitElement)) {
         value=${ifDefined(value)} />
       ${readOnly
         ? html`<span id="readonly-text" class="${prefix}--visually-hidden"
-            >Read only</span
+            >${this.readOnlyText}</span
           >`
         : null}
       <label

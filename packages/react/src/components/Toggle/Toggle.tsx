@@ -15,6 +15,21 @@ import classNames from 'classnames';
 import { useControllableState } from '../../internal/useControllableState';
 import { usePrefix } from '../../internal/usePrefix';
 import { Text } from '../Text';
+import type { TFunc, TranslateWithId } from '../../types/common';
+
+const translationIds = {
+  'carbon.toggle.read-only': 'carbon.toggle.read-only',
+} as const;
+
+type TranslationKey = keyof typeof translationIds;
+
+const defaultTranslations: Record<TranslationKey, string> = {
+  [translationIds['carbon.toggle.read-only']]: 'Read only',
+};
+
+const defaultTranslateWithId: TFunc<TranslationKey> = (messageId) => {
+  return defaultTranslations[messageId];
+};
 
 type ExcludedAttributes =
   | 'aria-labelledby'
@@ -28,9 +43,10 @@ type ExcludedAttributes =
 
 export interface ToggleProps
   extends Omit<
-    React.ButtonHTMLAttributes<HTMLButtonElement>,
-    ExcludedAttributes
-  > {
+      React.ButtonHTMLAttributes<HTMLButtonElement>,
+      ExcludedAttributes
+    >,
+    TranslateWithId<TranslationKey> {
   /**
    * Specify another element's id to be used as the label for this toggle
    */
@@ -114,6 +130,7 @@ export function Toggle({
   readOnly,
   size = 'md',
   toggled,
+  translateWithId: t = defaultTranslateWithId,
   ...other
 }: ToggleProps) {
   const prefix = usePrefix();
@@ -208,7 +225,7 @@ export function Toggle({
           as="span"
           id={readOnlyId}
           className={`${prefix}--visually-hidden`}>
-          Read only
+          {t('carbon.toggle.read-only')}
         </Text>
       )}
       <LabelComponent
@@ -315,6 +332,12 @@ Toggle.propTypes = {
    * Specify whether the control is toggled
    */
   toggled: PropTypes.bool,
+
+  /**
+   * Optional prop to specify the translation function for internationalization.
+   * Currently used to translate the read-only screen reader announcement.
+   */
+  translateWithId: PropTypes.func,
 };
 
 export default Toggle;

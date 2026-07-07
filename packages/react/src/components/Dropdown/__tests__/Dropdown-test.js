@@ -744,3 +744,25 @@ describe('Validation message ids', () => {
     );
   });
 });
+
+describe('Dropdown readOnly translation', () => {
+  it('should support a custom translateWithId for the read-only text', async () => {
+    render(
+      <Dropdown
+        id="my-dropdown"
+        titleText="Dropdown label"
+        label="input"
+        items={generateItems(5, generateGenericItem)}
+        readOnly
+        translateWithId={(id) =>
+          id === 'carbon.dropdown.read-only' ? 'Custom read only' : ''
+        }
+      />
+    );
+    await waitForPosition();
+
+    const readOnlyText = document.querySelector('.cds--visually-hidden');
+    expect(readOnlyText).toBeInTheDocument();
+    expect(readOnlyText).toHaveTextContent('Custom read only');
+  });
+});

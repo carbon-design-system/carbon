@@ -468,6 +468,23 @@ describe('NumberInput', () => {
       );
     });
 
+    it('should support custom translation of the readonly state via translateWithId', () => {
+      const translateWithId = (id) =>
+        id === 'carbon.number-input.read-only' ? 'Nur lesen' : id;
+      render(
+        <NumberInput
+          label="test-label"
+          id="test"
+          readOnly
+          translateWithId={translateWithId}
+        />
+      );
+
+      const readOnlyText = screen.getByText('Nur lesen');
+      expect(readOnlyText).toBeInTheDocument();
+      expect(readOnlyText).toHaveClass('cds--visually-hidden');
+    });
+
     it('should set the defaultValue of the <input> with `defaultValue`', () => {
       render(<NumberInput label="test-label" id="test" defaultValue={5} />);
       expect(screen.getByLabelText('test-label')).toHaveValue(5);

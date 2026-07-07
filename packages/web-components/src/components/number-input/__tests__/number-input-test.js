@@ -63,6 +63,18 @@ describe('<cds-number-input>', () => {
     expect(input.getAttribute('aria-describedby')).to.include('readonly-text');
   });
 
+  it('should support a custom read-only text for screen readers', async () => {
+    const el = await fixture(
+      html`<cds-number-input
+        readonly
+        label="Label"
+        read-only-text="Schreibgeschützt"></cds-number-input>`
+    );
+    const hidden = el.shadowRoot.querySelector('.cds--visually-hidden');
+    expect(hidden).to.exist;
+    expect(hidden.textContent.trim()).to.equal('Schreibgeschützt');
+  });
+
   // Checks readonly behavior blocks interaction
   it('should not allow value change or emit event in readonly mode', async () => {
     const el = await fixture(

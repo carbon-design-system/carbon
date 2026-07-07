@@ -1716,3 +1716,25 @@ describe('MultiSelect', () => {
     });
   });
 });
+
+describe('MultiSelect readOnly translation', () => {
+  it('should support a custom translateWithId for the read-only text', async () => {
+    const items = generateItems(4, generateGenericItem);
+    const { container } = render(
+      <MultiSelect
+        id="test"
+        readOnly
+        label="test-label"
+        items={items}
+        translateWithId={(id) =>
+          id === 'carbon.multi-select.read-only' ? 'Custom read only' : ''
+        }
+      />
+    );
+    await waitForPosition();
+
+    const readOnlyText = container.querySelector(`.${prefix}--visually-hidden`);
+    expect(readOnlyText).toBeInTheDocument();
+    expect(readOnlyText).toHaveTextContent('Custom read only');
+  });
+});

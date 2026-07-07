@@ -237,6 +237,22 @@ describe('cds-dropdown', function () {
       );
     });
 
+    it('should support a custom read-only text for screen readers', async () => {
+      const el = await fixture(html`
+        <cds-dropdown
+          read-only
+          title-text="Dropdown Label"
+          read-only-text="Schreibgeschützt">
+          <cds-dropdown-item value="option-1">Option 1</cds-dropdown-item>
+        </cds-dropdown>
+      `);
+      await el.updateComplete;
+
+      const readonlyText = el.shadowRoot.querySelector('.cds--visually-hidden');
+      expect(readonlyText).to.exist;
+      expect(readonlyText.textContent.trim()).to.equal('Schreibgeschützt');
+    });
+
     it('should display helper text', async () => {
       const el = await fixture(html`
         <cds-dropdown

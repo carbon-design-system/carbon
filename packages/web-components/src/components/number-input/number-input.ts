@@ -357,6 +357,12 @@ class CDSNumberInput extends CDSTextInput {
   hideSteppers = false;
 
   /**
+   * The text announced to screen readers when the component is read-only.
+   */
+  @property({ attribute: 'read-only-text' })
+  readOnlyText = 'Read only';
+
+  /**
    * `true` to allow empty string.
    */
   @property({ type: Boolean, attribute: 'allow-empty', reflect: true })
@@ -994,7 +1000,7 @@ class CDSNumberInput extends CDSTextInput {
           ${normalizedProps.icon} ${input}
           ${this.readonly
             ? html`<span id="readonly-text" class="${prefix}--visually-hidden"
-                >Read only</span
+                >${this.readOnlyText}</span
               >`
             : null}
           <slot name="ai-label" @slotchange="${this._handleSlotChange}"></slot>

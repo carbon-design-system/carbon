@@ -31,11 +31,27 @@ import { AILabel } from '../AILabel';
 import { isComponentElement } from '../../internal';
 import { useNormalizedInputProps } from '../../internal/useNormalizedInputProps';
 import { hasHelperText } from '../../internal/hasHelperText';
+import type { TFunc, TranslateWithId } from '../../types/common';
+
+const translationIds = {
+  'carbon.select.read-only': 'carbon.select.read-only',
+} as const;
+
+type TranslationKey = keyof typeof translationIds;
+
+const defaultTranslations: Record<TranslationKey, string> = {
+  [translationIds['carbon.select.read-only']]: 'Read only',
+};
+
+const defaultTranslateWithId: TFunc<TranslationKey> = (messageId) => {
+  return defaultTranslations[messageId];
+};
 
 type ExcludedAttributes = 'size';
 
 export interface SelectProps
-  extends Omit<ComponentPropsWithRef<'select'>, ExcludedAttributes> {
+  extends Omit<ComponentPropsWithRef<'select'>, ExcludedAttributes>,
+    TranslateWithId<TranslationKey> {
   /**
    * Provide the contents of your Select
    */
@@ -166,6 +182,7 @@ const Select = forwardRef<HTMLSelectElement, SelectProps>(
       warnText,
       onChange,
       slug,
+      translateWithId: t = defaultTranslateWithId,
       ...other
     },
     ref
@@ -314,7 +331,7 @@ const Select = forwardRef<HTMLSelectElement, SelectProps>(
           </select>
           {readOnly && (
             <span id={readOnlyId} className={`${prefix}--visually-hidden`}>
-              Read only
+              {t('carbon.select.read-only')}
             </span>
           )}
           <ChevronDown className={`${prefix}--select__arrow`} />
@@ -474,6 +491,13 @@ Select.propTypes = {
     PropTypes.node,
     'The `slug` prop has been deprecated and will be removed in the next major version. Use the decorator prop instead.'
   ),
+
+  /**
+   * Optional prop to specify the translation function for internationalization.
+   * Currently used to translate the read-only screen reader announcement.
+   */
+  translateWithId: PropTypes.func,
+
   /**
    * Specify whether the control is currently in warning state
    */

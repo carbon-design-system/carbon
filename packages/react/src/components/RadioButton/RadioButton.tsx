@@ -16,14 +16,27 @@ import { mergeRefs } from '../../tools/mergeRefs';
 import { AILabel } from '../AILabel';
 import { isComponentElement } from '../../internal';
 import { useNormalizedInputProps } from '../../internal/useNormalizedInputProps';
+import type { TFunc, TranslateWithId } from '../../types/common';
+
+const translationIds = {
+  'carbon.radio-button.read-only': 'carbon.radio-button.read-only',
+} as const;
+
+type TranslationKey = keyof typeof translationIds;
+
+const defaultTranslations: Record<TranslationKey, string> = {
+  [translationIds['carbon.radio-button.read-only']]: 'Read only',
+};
+
+const defaultTranslateWithId: TFunc<TranslationKey> = (messageId) => {
+  return defaultTranslations[messageId];
+};
 
 type ExcludedAttributes = 'onChange';
 
 export interface RadioButtonProps
-  extends Omit<
-    React.InputHTMLAttributes<HTMLInputElement>,
-    ExcludedAttributes
-  > {
+  extends Omit<React.InputHTMLAttributes<HTMLInputElement>, ExcludedAttributes>,
+    TranslateWithId<TranslationKey> {
   /**
    * Specify whether the `<RadioButton>` is currently checked
    */
@@ -153,6 +166,7 @@ const RadioButton = React.forwardRef<HTMLInputElement, RadioButtonProps>(
       warn = false,
       warnText,
       readOnly,
+      translateWithId: t = defaultTranslateWithId,
       ...rest
     } = props;
 
@@ -227,7 +241,7 @@ const RadioButton = React.forwardRef<HTMLInputElement, RadioButtonProps>(
         />
         {readOnly && (
           <span id={readOnlyId} className={`${prefix}--visually-hidden`}>
-            Read only
+            {t('carbon.radio-button.read-only')}
           </span>
         )}
         <label htmlFor={uniqueId} className={`${prefix}--radio-button__label`}>
@@ -349,6 +363,12 @@ RadioButton.propTypes = {
    * Specify whether the RadioButton should be read-only
    */
   readOnly: PropTypes.bool,
+
+  /**
+   * Optional prop to specify the translation function for internationalization.
+   * Currently used to translate the read-only screen reader announcement.
+   */
+  translateWithId: PropTypes.func,
 
   /**
    * **Experimental**: Provide a `Slug` component to be rendered inside the `RadioButton` component

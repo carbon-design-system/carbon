@@ -200,6 +200,21 @@ describe('cds-checkbox-group', function () {
     expect(fieldsetElement.getAttribute('aria-disabled')).not.to.equal('true');
   });
 
+  it('should support a custom read-only-text', async () => {
+    const group = html` <cds-checkbox-group
+      legend-text="Checkbox heading"
+      readOnly
+      read-only-text="Solo lectura">
+      <cds-checkbox default-checked>Checkbox label</cds-checkbox>
+      <cds-checkbox>Checkbox label</cds-checkbox>
+    </cds-checkbox-group>`;
+    const el = await fixture(group);
+
+    const visuallyHidden = el.shadowRoot.querySelector('.cds--visually-hidden');
+    expect(visuallyHidden).to.exist;
+    expect(visuallyHidden.textContent.trim()).to.equal('Solo lectura');
+  });
+
   it('should respect warn prop', async () => {
     const group = html` <cds-checkbox-group legend-text="Checkbox heading" warn>
       <cds-checkbox default-checked>Checkbox label</cds-checkbox>

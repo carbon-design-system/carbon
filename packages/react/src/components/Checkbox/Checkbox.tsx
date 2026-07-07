@@ -18,14 +18,27 @@ import { noopFn } from '../../internal/noopFn';
 import { useNormalizedInputProps } from '../../internal/useNormalizedInputProps';
 import { AILabel } from '../AILabel';
 import { isComponentElement } from '../../internal';
+import type { TFunc, TranslateWithId } from '../../types/common';
+
+const translationIds = {
+  'carbon.checkbox.read-only': 'carbon.checkbox.read-only',
+} as const;
+
+type TranslationKey = keyof typeof translationIds;
+
+const defaultTranslations: Record<TranslationKey, string> = {
+  [translationIds['carbon.checkbox.read-only']]: 'Read only',
+};
+
+const defaultTranslateWithId: TFunc<TranslationKey> = (messageId) => {
+  return defaultTranslations[messageId];
+};
 
 type ExcludedAttributes = 'id' | 'onChange' | 'onClick' | 'type';
 
 export interface CheckboxProps
-  extends Omit<
-    React.InputHTMLAttributes<HTMLInputElement>,
-    ExcludedAttributes
-  > {
+  extends Omit<React.InputHTMLAttributes<HTMLInputElement>, ExcludedAttributes>,
+    TranslateWithId<TranslationKey> {
   /**
    * Provide an `id` to uniquely identify the Checkbox input
    */
@@ -124,6 +137,7 @@ const Checkbox = React.forwardRef(
       invalidText,
       hideLabel,
       readOnly,
+      translateWithId: t = defaultTranslateWithId,
       title = '',
       warn,
       warnText,
@@ -249,7 +263,7 @@ const Checkbox = React.forwardRef(
         </label>
         {readOnly && (
           <span id={readOnlyId} className={`${prefix}--visually-hidden`}>
-            Read only
+            {t('carbon.checkbox.read-only')}
           </span>
         )}
         <div className={`${prefix}--checkbox__validation-msg`}>
@@ -347,6 +361,12 @@ Checkbox.propTypes = {
    * Specify whether the Checkbox is read-only
    */
   readOnly: PropTypes.bool,
+
+  /**
+   * Optional prop to specify the translation function for internationalization.
+   * Currently used to translate the read-only screen reader announcement.
+   */
+  translateWithId: PropTypes.func,
 
   /**
    * **Experimental**: Provide a `Slug` component to be rendered inside the `Checkbox` component

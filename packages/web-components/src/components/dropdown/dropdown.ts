@@ -1018,6 +1018,12 @@ class CDSDropdown extends ValidityMixin(
   readOnly = false;
 
   /**
+   * The text announced to screen readers when the component is read-only.
+   */
+  @property({ attribute: 'read-only-text' })
+  readOnlyText = 'Read only';
+
+  /**
    * `true` if the value is required.
    */
   @property({ type: Boolean, reflect: true })
@@ -1276,6 +1282,7 @@ class CDSDropdown extends ValidityMixin(
       _classes: classes,
       disabled,
       readOnly,
+      readOnlyText,
       helperText,
       invalidText,
       open,
@@ -1397,7 +1404,7 @@ class CDSDropdown extends ValidityMixin(
           )}">
           ${readOnly
             ? html`<span id="readonly-text" class="${prefix}--visually-hidden"
-                >Read only</span
+                >${readOnlyText}</span
               >`
             : null}
           ${this._renderPrecedingLabel()}${this._renderLabel()}${this._renderFollowingLabel()}

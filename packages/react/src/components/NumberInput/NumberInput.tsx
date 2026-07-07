@@ -41,6 +41,7 @@ import { isComponentElement } from '../../internal';
 const translationIds = {
   'increment.number': 'increment.number',
   'decrement.number': 'decrement.number',
+  'carbon.number-input.read-only': 'carbon.number-input.read-only',
 } as const;
 
 type TranslationKey = keyof typeof translationIds;
@@ -48,6 +49,7 @@ type TranslationKey = keyof typeof translationIds;
 const defaultTranslations: Record<TranslationKey, string> = {
   [translationIds['increment.number']]: 'Increment number',
   [translationIds['decrement.number']]: 'Decrement number',
+  [translationIds['carbon.number-input.read-only']]: 'Read only',
 };
 
 const defaultTranslateWithId: TFunc<TranslationKey> = (messageId) => {
@@ -1040,7 +1042,7 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
             />
             {readOnly && (
               <span id={readOnlyId} className={`${prefix}--visually-hidden`}>
-                Read only
+                {t('carbon.number-input.read-only')}
               </span>
             )}
             {slug ? (

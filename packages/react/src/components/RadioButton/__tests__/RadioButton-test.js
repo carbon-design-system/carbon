@@ -214,4 +214,20 @@ describe('RadioButton', () => {
       readOnlyText.getAttribute('id')
     );
   });
+
+  it('supports translateWithId for the read-only screen reader text', () => {
+    const { container } = render(
+      <RadioButton
+        name="test-name"
+        value="test-value"
+        labelText="test-label"
+        readOnly
+        translateWithId={() => 'Solo lectura'}
+      />
+    );
+
+    const readOnlyText = container.querySelector(`.${prefix}--visually-hidden`);
+    expect(readOnlyText).toBeInTheDocument();
+    expect(readOnlyText).toHaveTextContent('Solo lectura');
+  });
 });

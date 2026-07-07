@@ -124,4 +124,16 @@ describe('cds-radio-button', () => {
     const input = el.shadowRoot.querySelector('input[type="radio"]');
     expect(input?.getAttribute('aria-describedby')).to.contain('readonly-text');
   });
+
+  it('should support a custom read-only-text', async () => {
+    const el = await fixture(
+      html`<cds-radio-button
+        readOnly
+        read-only-text="Solo lectura"
+        value="test-value"></cds-radio-button>`
+    );
+    const hidden = el.shadowRoot.querySelector('.cds--visually-hidden');
+    expect(hidden).to.exist;
+    expect(hidden?.textContent.trim()).to.equal('Solo lectura');
+  });
 });

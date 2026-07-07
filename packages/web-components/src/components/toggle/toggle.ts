@@ -132,6 +132,12 @@ class CDSToggle extends HostListenerMixin(CDSCheckbox) {
   readOnly = false;
 
   /**
+   * The text announced to screen readers when the component is read-only.
+   */
+  @property({ attribute: 'read-only-text' })
+  readOnlyText = 'Read only';
+
+  /**
    * Toggle size.
    */
   @property({ reflect: true })
@@ -246,7 +252,7 @@ class CDSToggle extends HostListenerMixin(CDSCheckbox) {
         @click=${handleChange}></button>
       ${readOnly
         ? html`<span id="readonly-text" class="${prefix}--visually-hidden"
-            >Read only</span
+            >${this.readOnlyText}</span
           >`
         : null}
       <label for="${id}" class="${prefix}--toggle__label">

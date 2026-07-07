@@ -80,6 +80,7 @@ const ThumbWrapper = ({
 const translationIds = {
   'carbon.slider.auto-correct-announcement':
     'carbon.slider.auto-correct-announcement',
+  'carbon.slider.read-only': 'carbon.slider.read-only',
 } as const;
 
 type TranslationKey = keyof typeof translationIds;
@@ -87,6 +88,7 @@ type TranslationKey = keyof typeof translationIds;
 const defaultTranslations: Record<TranslationKey, string> = {
   [translationIds['carbon.slider.auto-correct-announcement']]:
     'The inputted value "{correctedValue}" was corrected to the nearest allowed digit.',
+  [translationIds['carbon.slider.read-only']]: 'Read only',
 };
 
 type TranslationArgs = { correctedValue?: string };
@@ -1521,7 +1523,7 @@ const Slider = (props: SliderProps) => {
           />
           {readOnly && (
             <span id={readOnlyId} className={`${prefix}--visually-hidden`}>
-              Read only
+              {t('carbon.slider.read-only')}
             </span>
           )}
         </div>

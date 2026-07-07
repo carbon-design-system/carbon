@@ -1528,3 +1528,26 @@ describe('FilterableMultiSelect', () => {
       .forEach((opt) => expect(opt).toHaveAttribute('aria-selected', 'false'));
   });
 });
+
+describe('FilterableMultiSelect readOnly translation', () => {
+  it('should support a custom translateWithId for the read-only text', async () => {
+    const items = generateItems(4, generateGenericItem);
+    const { container } = render(
+      <FilterableMultiSelect
+        id="test"
+        readOnly={true}
+        label="test-label"
+        items={items}
+        translateWithId={(id) =>
+          id === 'carbon.multi-select.read-only' ? 'Custom read only' : ''
+        }
+      />
+    );
+    await waitForPosition();
+
+    // eslint-disable-next-line testing-library/no-node-access
+    const readOnlyText = container.querySelector('#test-readonly-text');
+    expect(readOnlyText).toBeInTheDocument();
+    expect(readOnlyText).toHaveTextContent('Custom read only');
+  });
+});

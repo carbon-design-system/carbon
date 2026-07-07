@@ -105,7 +105,9 @@ export interface FilterableMultiSelectProps<ItemType>
   extends MultiSelectSortingProps<ItemType>,
     React.RefAttributes<HTMLDivElement>,
     TranslateWithId<
-      ListBoxSelectionTranslationKey | ListBoxMenuIconTranslationKey
+      | ListBoxSelectionTranslationKey
+      | ListBoxMenuIconTranslationKey
+      | 'carbon.multi-select.read-only'
     > {
   /**
    * Specify a label to be read by screen readers on the container node
@@ -1148,7 +1150,7 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
       {!inline && showHelperText ? helper : null}
       {readOnly && (
         <span id={readOnlyId} className={`${prefix}--visually-hidden`}>
-          Read only
+          {translateWithId?.('carbon.multi-select.read-only') ?? 'Read only'}
         </span>
       )}
     </div>

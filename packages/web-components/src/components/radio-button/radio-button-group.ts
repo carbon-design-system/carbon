@@ -197,6 +197,12 @@ class CDSRadioButtonGroup extends FormMixin(HostListenerMixin(LitElement)) {
   readOnly = false;
 
   /**
+   * The text announced to screen readers when the component is read-only.
+   */
+  @property({ attribute: 'read-only-text' })
+  readOnlyText = 'Read only';
+
+  /**
    * `true` to specify if input selection in group is required.
    */
   @property({ type: Boolean, reflect: true })
@@ -304,7 +310,7 @@ class CDSRadioButtonGroup extends FormMixin(HostListenerMixin(LitElement)) {
         )}">
         ${readOnly
           ? html`<span id="readonly-text" class="${prefix}--visually-hidden"
-              >Read only</span
+              >${this.readOnlyText}</span
             >`
           : null}
         ${legendText

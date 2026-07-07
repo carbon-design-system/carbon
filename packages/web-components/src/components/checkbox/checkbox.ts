@@ -137,6 +137,12 @@ class CDSCheckbox extends FocusMixin(FormMixin(LitElement)) {
   readonly = false;
 
   /**
+   * The text announced to screen readers when the component is read-only.
+   */
+  @property({ attribute: 'read-only-text' })
+  readOnlyText = 'Read only';
+
+  /**
    * Specify whether the Checkbox is currently invalid
    */
   @property({ type: Boolean, reflect: true })
@@ -286,7 +292,7 @@ class CDSCheckbox extends FocusMixin(FormMixin(LitElement)) {
         @click="${handleClick}" />
       ${readonly
         ? html`<span id="readonly-text" class="${prefix}--visually-hidden"
-            >Read only</span
+            >${this.readOnlyText}</span
           >`
         : null}
       <label

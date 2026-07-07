@@ -56,6 +56,28 @@ describe('cds-slider', () => {
     expect(thumb.getAttribute('aria-describedby')).to.contain('readonly-text');
   });
 
+  it('should support a custom read-only text for screen readers', async () => {
+    const el = await fixture(
+      html` <cds-slider
+        label-text="Slider Label"
+        max="100"
+        min="0"
+        step="1"
+        value="50"
+        readonly
+        read-only-text="Schreibgeschützt">
+        <cds-slider-input
+          aria-label="Slider value"
+          type="number"></cds-slider-input>
+      </cds-slider>`
+    );
+    await el.updateComplete;
+
+    const readonlyText = el?.shadowRoot?.querySelector('.cds--visually-hidden');
+    expect(readonlyText).to.exist;
+    expect(readonlyText.textContent.trim()).to.equal('Schreibgeschützt');
+  });
+
   it('should announce readonly state on a range (two-handle) slider', async () => {
     const el = await fixture(
       html` <cds-slider

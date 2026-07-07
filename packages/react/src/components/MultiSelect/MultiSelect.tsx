@@ -98,7 +98,9 @@ interface OnChangeData<ItemType> {
 export interface MultiSelectProps<ItemType>
   extends MultiSelectSortingProps<ItemType>,
     TranslateWithId<
-      ListBoxMenuIconTranslationKey | ListBoxSelectionTranslationKey
+      | ListBoxMenuIconTranslationKey
+      | ListBoxSelectionTranslationKey
+      | 'carbon.multi-select.read-only'
     > {
   /**
    * **Experimental**: Will attempt to automatically align the floating
@@ -899,7 +901,7 @@ export const MultiSelect = React.forwardRef(
         )}
         {readOnly && (
           <span id={readOnlyId} className={`${prefix}--visually-hidden`}>
-            Read only
+            {translateWithId?.('carbon.multi-select.read-only') ?? 'Read only'}
           </span>
         )}
       </div>

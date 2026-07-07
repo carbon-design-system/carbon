@@ -82,6 +82,12 @@ class CDSCheckboxGroup extends LitElement {
   readonly = false;
 
   /**
+   * The text announced to screen readers when the component is read-only.
+   */
+  @property({ attribute: 'read-only-text' })
+  readOnlyText = 'Read only';
+
+  /**
    * Specify whether the form group is currently in warning state
    */
   @property({ type: Boolean, reflect: true })
@@ -225,7 +231,7 @@ class CDSCheckboxGroup extends LitElement {
         </legend>
         ${readonly
           ? html`<span id="readonly-text" class="${prefix}--visually-hidden"
-              >Read only</span
+              >${this.readOnlyText}</span
             >`
           : null}
         <slot></slot>

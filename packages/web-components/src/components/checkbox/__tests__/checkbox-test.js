@@ -186,6 +186,17 @@ describe('cds-checkbox', function () {
     );
   });
 
+  it('should support a custom read-only-text', async () => {
+    const checkbox = html`<cds-checkbox readOnly read-only-text="Solo lectura"
+      >Checkbox Label</cds-checkbox
+    >`;
+    const el = await fixture(checkbox);
+
+    const visuallyHidden = el.shadowRoot.querySelector('.cds--visually-hidden');
+    expect(visuallyHidden).to.exist;
+    expect(visuallyHidden.textContent.trim()).to.equal('Solo lectura');
+  });
+
   it('should remain disabled when readOnly and disabled are both true', async () => {
     const checkbox = html`<cds-checkbox readOnly disabled
       >Checkbox Label</cds-checkbox

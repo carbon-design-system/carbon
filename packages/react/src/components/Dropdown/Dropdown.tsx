@@ -77,7 +77,9 @@ export interface OnChangeData<ItemType> {
 
 export interface DropdownProps<ItemType>
   extends Omit<HTMLAttributes<HTMLDivElement>, ExcludedAttributes>,
-    TranslateWithId<ListBoxMenuIconTranslationKey> {
+    TranslateWithId<
+      ListBoxMenuIconTranslationKey | 'carbon.dropdown.read-only'
+    > {
   /**
    * Specify a label to be read by screen readers on the container node
    * 'aria-label' of the ListBox component.
@@ -691,7 +693,7 @@ const Dropdown = React.forwardRef(
           </button>
           {readOnly && (
             <span id={readOnlyId} className={`${prefix}--visually-hidden`}>
-              Read only
+              {translateWithId?.('carbon.dropdown.read-only') ?? 'Read only'}
             </span>
           )}
           {slug ? (

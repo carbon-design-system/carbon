@@ -322,6 +322,24 @@ describe('Select', () => {
       );
     });
 
+    it('supports translateWithId for the read-only screen reader text', () => {
+      const { container } = render(
+        <Select
+          id="select-readonly"
+          labelText="Select label"
+          readOnly
+          translateWithId={() => 'Solo lectura'}>
+          <SelectItem text="Option 1" value="option-1" />
+        </Select>
+      );
+
+      const readOnlyText = container.querySelector(
+        `.${prefix}--visually-hidden`
+      );
+      expect(readOnlyText).toBeInTheDocument();
+      expect(readOnlyText).toHaveTextContent('Solo lectura');
+    });
+
     it('should respect size prop', () => {
       const { container } = render(
         <Select id="select" labelText="Select" size="sm" />
