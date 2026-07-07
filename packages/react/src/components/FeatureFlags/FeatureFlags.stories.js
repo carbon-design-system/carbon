@@ -16,7 +16,6 @@ export default {
   component: FeatureFlags,
   parameters: {
     controls: { disable: true },
-    // docs: { disable: true },
   },
   tags: ['!autodocs'],
 };
