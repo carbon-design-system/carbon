@@ -31,3 +31,26 @@
 .sb-notification p {
   line-height: 1;
 }
+
+.potential-fix {
+  .cds--modal-footer .cds--btn:first-child:not(:only-child) {
+    border-top-right-radius: 0;
+    border-top-left-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+
+  .cds--modal-footer .cds--btn:last-child:not(:only-child) {
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+
+    border-bottom-left-radius: 0;
+  }
+
+  .cds--modal-footer .cds--btn:not(:first-child):not(:last-child) {
+    border-radius: 0;
+  }
+  .cds--modal-close-button {
+    padding-top: 6px;
+    padding-right: 6px;
+  }
+}

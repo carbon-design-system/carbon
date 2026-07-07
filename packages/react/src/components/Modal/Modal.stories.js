@@ -233,6 +233,110 @@ export const Default = ({ numberOfButtons, ...args }) => {
   );
 };
 
+export const WithPotentialFix = ({ numberOfButtons, ...args }) => {
+  const [open, setOpen] = useState(true);
+  const [popoverOpen, setPopoverOpen] = useState(false);
+  return (
+    <>
+      <Button onClick={() => setOpen(true)}>Launch modal</Button>
+      <div className="potential-fix">
+        <Modal
+          onRequestClose={(e) => {
+            action(e);
+            setOpen(false);
+          }}
+          modalHeading="Add a custom domain"
+          primaryButtonText="Add"
+          secondaryButtonText="Cancel"
+          aria-label="Modal content"
+          open={open}
+          {...args}
+          {...modalFooter(numberOfButtons)}>
+          <p style={{ marginBottom: '2rem' }}>
+            Set rounded border-radius tokens for "Box" and "Button" to see
+            potential spacing fixes for the action buttons and close icon
+            button.
+          </p>
+          <TextInput
+            data-modal-primary-focus
+            id="text-input-1"
+            labelText="Domain name"
+            placeholder="For example, GitHub.com"
+            style={{ marginBottom: '24px' }}
+          />
+          <div style={{ marginBottom: '24px' }}>
+            <Select id="select-1" defaultValue="us-south" labelText="Region">
+              <SelectItem value="us-south" text="US South" />
+              <SelectItem value="us-east" text="US East" />
+            </Select>
+          </div>
+          <div style={{ marginBottom: '24px' }}>
+            <ComboBox
+              allowCustomValue
+              autoAlign={true}
+              id="carbon-combobox"
+              items={['Viewer', 'Editor', 'Manager']}
+              titleText="Permissions (Example of Floating UI)"
+            />
+          </div>
+          <div style={{ marginBottom: '24px' }}>
+            <Dropdown
+              autoAlign={true}
+              id="default"
+              titleText="TLS (Example of Floating UI)"
+              label="Option 1"
+              items={[
+                {
+                  id: 'option-0',
+                  text: '1.0',
+                },
+                {
+                  id: 'option-1',
+                  text: '1.1',
+                },
+                {
+                  id: 'option-2',
+                  text: '1.2',
+                },
+              ]}
+              itemToString={(item) => (item ? item.text : '')}
+            />
+          </div>
+          <div style={{ marginBottom: '24px' }}>
+            <MultiSelect
+              id="test"
+              label="Choose options"
+              titleText="Mapping domain"
+              autoAlign
+              items={[
+                {
+                  id: 'downshift-1-item-0',
+                  text: 'Cloud Foundry',
+                },
+                {
+                  id: 'downshift-1-item-1',
+                  text: 'Kubernetes Ingress',
+                },
+                {
+                  id: 'downshift-1-item-2',
+                  text: 'VPC Load Balancer',
+                },
+              ]}
+              itemToString={(item) => (item ? item.text : '')}
+            />
+          </div>
+          <CheckboxGroup legendText="Terms of Agreement">
+            <Checkbox
+              id="checkbox-label-1"
+              labelText="I confirm domain ownership and accept IBM service terms and applicable charges."
+            />
+          </CheckboxGroup>
+        </Modal>
+      </div>
+    </>
+  );
+};
+
 Default.argTypes = {
   onSecondarySubmit: {
     action: 'onSecondarySubmit',

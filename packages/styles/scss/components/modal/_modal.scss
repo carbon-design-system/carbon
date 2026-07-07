@@ -326,13 +326,22 @@
   .#{$prefix}--modal-footer {
     display: flex;
     justify-content: flex-end;
-    padding: $spacing-05;
+    block-size: convert.to-rem(64px);
+    grid-column: 1/-1;
+    grid-row: -1/-1;
     margin-block-start: auto;
   }
 
   .#{$prefix}--modal-footer .#{$prefix}--btn {
     flex: 0 1 50%;
+    align-items: baseline;
+    margin: 0;
+    block-size: convert.to-rem(64px);
     max-inline-size: none;
+  }
+
+  .#{$prefix}--modal-footer .#{$prefix}--btn:not(.#{$prefix}--skeleton) {
+    padding-block: calc($spacing-05 - convert.to-rem(2px)) $spacing-07;
   }
 
   .#{$prefix}--modal-footer--three-button .#{$prefix}--btn {
@@ -345,17 +354,38 @@
   // -----------------------------
 
   .#{$prefix}--modal-close-button {
-    @include layout.use('size', $min: 'xs', $default: 'lg', $max: 'lg');
-    @include layout.use('density', $default: 'normal');
-
     position: absolute;
-    inset-block-start: layout.density('padding-inline');
-    inset-inline-end: layout.density('padding-inline');
+    inset-block-start: 0;
+    inset-inline-end: 0;
   }
 
   .#{$prefix}--modal-close {
-    @include layout.use('size', $min: 'xs', $default: 'lg', $max: 'lg');
-    @include layout.use('density', $default: 'normal');
+    padding: convert.to-rem(12px);
+    border: 2px solid transparent;
+    background-color: transparent;
+    block-size: 3rem;
+    cursor: pointer;
+    inline-size: 3rem;
+    transition: background-color $duration-fast-02 motion(standard, productive);
+
+    &:hover {
+      background-color: $layer-hover;
+    }
+
+    &:focus {
+      border-color: $focus;
+      outline: none;
+    }
+  }
+
+  .#{$prefix}--modal-close::-moz-focus-inner {
+    border: 0;
+  }
+
+  .#{$prefix}--modal-close__icon {
+    block-size: convert.to-rem(20px);
+    fill: $icon-primary;
+    inline-size: convert.to-rem(20px);
   }
 
   .#{$prefix}--body--with-modal-open {
@@ -395,13 +425,25 @@
   }
 
   .#{$prefix}--modal--slug
+    .#{$prefix}--modal-container:has(.#{$prefix}--modal-footer),
+  .#{$prefix}--modal--decorator:has(.#{$prefix}--ai-label)
+    .#{$prefix}--modal-container:has(.#{$prefix}--modal-footer) {
+    @include ai-popover-gradient('default', 64px, 'layer');
+
+    box-shadow:
+      inset 0 -80px 0 -16px $layer,
+      inset 0 -160px 70px -65px $ai-inner-shadow,
+      0 24px 40px -24px $ai-drop-shadow;
+  }
+
+  .#{$prefix}--modal--slug
     .#{$prefix}--modal-content.#{$prefix}--modal-scroll-content,
   .#{$prefix}--modal--decorator
     .#{$prefix}--modal-content.#{$prefix}--modal-scroll-content {
     mask-image: linear-gradient(
         to bottom,
         $layer calc(100% - 80px),
-        transparent 100%,
+        transparent calc(100% - 48px),
         transparent 100%
       ),
       linear-gradient(to left, $layer 0, 16px, transparent 16px),
@@ -459,6 +501,11 @@
     .#{$prefix}--modal-content--overflow-indicator::before,
   .#{$prefix}--modal--decorator .#{$prefix}--modal-content--overflow-indicator {
     display: none;
+  }
+
+  // Windows HCM fix
+  .#{$prefix}--modal-close:focus {
+    @include high-contrast-mode('focus');
   }
 }
 
