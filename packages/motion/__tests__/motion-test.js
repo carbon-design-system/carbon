@@ -28,7 +28,7 @@ describe('@carbon/motion', () => {
     expect(Object.keys(variables)).toMatchSnapshot();
   });
 
-  // Confirm that Sass receives the same expand values as TypeScript.
+  // Confirm that Sass receives the same shared-element values as TypeScript.
   test('exposes the expand surface through Sass', async () => {
     const surface = CarbonMotion.getMotionSurface('expand');
     const { getValue } = await render(`
@@ -39,7 +39,6 @@ describe('@carbon/motion', () => {
         duration: motion.surface(expand, duration),
         enter-easing: motion.surface(expand, enter-easing),
         exit-easing: motion.surface(expand, exit-easing),
-        reduced-motion: motion.surface(expand, reduced-motion),
       ));
     `);
 
@@ -48,31 +47,28 @@ describe('@carbon/motion', () => {
       duration: surface.duration,
       'enter-easing': [...surface.enterEasing],
       'exit-easing': [...surface.exitEasing],
-      'reduced-motion': surface.reducedMotion,
     });
   });
 
-  // Confirm that Sass receives the same invoke values as TypeScript.
-  test('exposes the invoke surface through Sass', async () => {
-    const surface = CarbonMotion.getMotionSurface('invoke');
+  // Confirm that Sass receives the same reveal values as TypeScript.
+  test('exposes the disclosure surface through Sass', async () => {
+    const surface = CarbonMotion.getMotionSurface('disclosure');
     const { getValue } = await render(`
       @use '../index.scss' as motion;
 
       $_: get-value((
-        kind: motion.surface(invoke, kind),
-        duration: motion.surface(invoke, duration),
-        enter-easing: motion.surface(invoke, enter-easing),
-        exit-easing: motion.surface(invoke, exit-easing),
-        reduced-motion: motion.surface(invoke, reduced-motion),
+        kind: motion.surface(disclosure, kind),
+        duration: motion.surface(disclosure, duration),
+        enter-opacity: map-get(motion.surface(disclosure, enter), opacity),
+        exit-opacity: map-get(motion.surface(disclosure, exit), opacity),
       ));
     `);
 
     expect(getValue(0)).toEqual({
       kind: surface.kind,
       duration: surface.duration,
-      'enter-easing': [...surface.enterEasing],
-      'exit-easing': [...surface.exitEasing],
-      'reduced-motion': surface.reducedMotion,
+      'enter-opacity': surface.enter.opacity,
+      'exit-opacity': surface.exit.opacity,
     });
   });
 
@@ -90,45 +86,62 @@ describe('@carbon/motion', () => {
   });
 
   // Resolve the shared surface tokens without choosing an animation engine.
-  test('resolves engine-neutral surface tokens for expand', () => {
-    const surface = CarbonMotion.getMotionSurface('expand');
-
-    expect(surface).toEqual({
+  test('resolves engine-neutral surface tokens for shared-element surfaces', () => {
+    const expand = CarbonMotion.getMotionSurface('expand');
+    expect(expand).toEqual({
       kind: 'shared-element',
-      duration: 'slow-01',
-      enterEasing: ['entrance', 'expressive'],
-      exitEasing: ['exit', 'expressive'],
-      reducedMotion: 'fade',
+      duration: 'moderate-02',
+      enterEasing: ['standard', 'productive'],
+      exitEasing: ['standard', 'productive'],
     });
-    expect(CarbonMotion.resolveDuration(surface.duration)).toBe('400ms');
-    expect(CarbonMotion.resolveEasing(...surface.enterEasing)).toEqual([
-      0, 0, 0.3, 1,
+
+    const invoke = CarbonMotion.getMotionSurface('invoke');
+    expect(invoke).toEqual({
+      kind: 'shared-element',
+      origin: 'trigger',
+      duration: 'moderate-02',
+      enterEasing: ['standard', 'expressive'],
+      exitEasing: ['standard', 'expressive'],
+    });
+
+    expect(CarbonMotion.resolveDuration(expand.duration)).toBe('240ms');
+    expect(CarbonMotion.resolveEasing(...expand.enterEasing)).toEqual([
+      0.2, 0, 0.38, 0.9,
     ]);
   });
 
-  // Resolve the invoke surface tokens without choosing an animation engine.
-  test('resolves engine-neutral surface tokens for invoke', () => {
-    const surface = CarbonMotion.getMotionSurface('invoke');
-
-    expect(surface).toEqual({
+  // Resolve the reveal surface tokens without choosing an animation engine.
+  test('resolves engine-neutral surface tokens for reveal surfaces', () => {
+    const disclosure = CarbonMotion.getMotionSurface('disclosure');
+    expect(disclosure).toEqual({
       kind: 'reveal',
-      duration: 'slow-01',
-      enter: { opacity: 1, clipPath: 'inset(0 0 0 0)' },
-      exit: { opacity: 0, clipPath: 'inset(50% 0 50% 0)' },
+      duration: 'moderate-01',
+      enter: { blockSize: 'auto', opacity: 1 },
+      exit: { blockSize: 0, opacity: 0 },
+      enterEasing: ['entrance', 'productive'],
+      exitEasing: ['exit', 'productive'],
+    });
+
+    const contextual = CarbonMotion.getMotionSurface('contextual');
+    expect(contextual).toEqual({
+      kind: 'reveal',
+      duration: 'fast-02',
+      enter: { opacity: 1, transform: 'scale(1)' },
+      exit: { opacity: 0, transform: 'scale(0.96)' },
       enterEasing: ['entrance', 'expressive'],
       exitEasing: ['exit', 'expressive'],
-      reducedMotion: 'fade',
     });
-    expect(CarbonMotion.resolveDuration(surface.duration)).toBe('400ms');
-    expect(CarbonMotion.resolveEasing(...surface.enterEasing)).toEqual([
-      0, 0, 0.3, 1,
+
+    expect(CarbonMotion.resolveDuration(disclosure.duration)).toBe('150ms');
+    expect(CarbonMotion.resolveEasing(...disclosure.enterEasing)).toEqual([
+      0, 0, 0.38, 0.9,
     ]);
   });
 
   // Explain which surface names are available when a name is not valid.
   test('should throw for an unknown motion surface', () => {
     expect(() => CarbonMotion.getMotionSurface('nope')).toThrow(
-      'Unable to find motion surface `nope`. Expected one of: expand, invoke'
+      'Unable to find motion surface `nope`. Expected one of: disclosure, contextual, expand, invoke'
     );
   });
 });
