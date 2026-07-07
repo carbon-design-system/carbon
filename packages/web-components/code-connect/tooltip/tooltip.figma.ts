@@ -43,3 +43,38 @@ figma.connect(
     imports: ["import '@carbon/web-components/es/components/tooltip/index.js'"],
   }
 );
+
+figma.connect(
+  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=3684-40507&t=Z5rlxC6sD11qtIsk-4',
+  {
+    variant: { Type: 'Definition' },
+    props: {
+      align: figma.enum('Position', {
+        Top: figma.enum('Alignment', {
+          Start: 'top-start',
+          Center: 'top',
+          End: 'top-end',
+        }),
+        Bottom: figma.enum('Alignment', {
+          Start: 'bottom-start',
+          Center: 'bottom',
+          End: 'bottom-end',
+        }),
+        Left: 'left',
+        Right: 'right',
+      }),
+      item: figma.nestedProps('_Tooltip definition item', {
+        children: figma.textContent('Definition tooltip'),
+      }),
+      tooltip: figma.nestedProps('Tooltip content', {
+        definition: figma.textContent('Tooltip text'),
+      }),
+    },
+    example: (props) =>
+      html`<cds-definition-tooltip align=${props.align}>
+        <span slot="definition">${props.tooltip.definition}</span>
+        ${props.item.children}
+      </cds-definition-tooltip>`,
+    imports: ["import '@carbon/web-components/es/components/tooltip/index.js'"],
+  }
+);

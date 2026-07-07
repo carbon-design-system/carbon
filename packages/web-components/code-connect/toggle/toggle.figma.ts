@@ -26,12 +26,16 @@ figma.connect(
         false: true,
       }),
       labelText: figma.string('Label text'),
+      labelA: figma.string('State text'),
+      labelB: figma.string('State text'),
       toggled: figma.boolean('Toggled'),
     },
     example: (props) =>
       html`<cds-toggle
         disabled=${props.disabled}
         hideLabel=${props.hideLabel}
+        label-a=${props.labelA}
+        label-b=${props.labelB}
         label-text=${props.labelText}
         read-only=${props.readOnly}
         size=${props.size}
