@@ -42,7 +42,9 @@ function toSource(value) {
 
 /**
  * Generate a JS module for one component's tokens from its DTCG JSON file and
- * write it to `src/generated/component-tokens/<componentName>.js`.
+ * write it to `js/generated/component-tokens/<componentName>.js`, plus a
+ * sibling `.d.ts` so that TypeScript can resolve types without needing to
+ * compile the JS file.
  *
  * The exported shape matches the existing hand-authored tokens exactly:
  *   export const buttonDangerActive = { whiteTheme: '...', g10: '...', ... };
@@ -67,7 +69,8 @@ function buildDTCGJsComponentTokensFile(componentName, outDir) {
   // Returns { 'button-danger-active': { white: '#...', g10: '#...', ... }, ... }
   const componentTokens = convertDTCGComponentTokens(dtcgTokens);
 
-  const lines = [FILE_BANNER];
+  const jsLines = [FILE_BANNER];
+  const dtsLines = [FILE_BANNER];
 
   for (const [kebabName, themeValues] of Object.entries(componentTokens).sort(
     ([a], [b]) => a.localeCompare(b)
@@ -86,14 +89,22 @@ function buildDTCGJsComponentTokensFile(componentName, outDir) {
     const props = Object.entries(normalisedValues)
       .map(([k, v]) => `  ${k}: ${toSource(v)}`)
       .join(',\n');
+    const dtsProps = Object.keys(normalisedValues)
+      .map((k) => `  ${k}: string`)
+      .join(';\n');
 
-    lines.push(`export const ${camelName} = {\n${props},\n};`);
+    jsLines.push(`export const ${camelName} = {\n${props},\n};`);
+    dtsLines.push(`export declare const ${camelName}: {\n${dtsProps};\n};`);
   }
 
   fs.ensureDirSync(outDir);
   fs.writeFileSync(
     path.join(outDir, `${componentName}.js`),
-    lines.join('\n') + '\n'
+    jsLines.join('\n') + '\n'
+  );
+  fs.writeFileSync(
+    path.join(outDir, `${componentName}.d.ts`),
+    dtsLines.join('\n') + '\n'
   );
 }
 
