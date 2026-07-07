@@ -37,6 +37,7 @@ keys:
   `"fontFamily"`). This enables proper validation and tooling support.
 
 - **`$value`** - The actual token value. Can be:
+
   - A reference to another token: `"{blue.60}"`, `"{gray.80}"`
   - References use curly brace syntax and resolve during build
 
@@ -132,7 +133,6 @@ Each theme file contains 250+ tokens organized into categories:
 - **Semantic tokens**: Focus, interactive, highlight, overlay, skeleton
 - **AI tokens**: AI-specific colors for popover, chat, and skeleton states
 
-
 ## Using These Tokens
 
 ### Build Process
@@ -175,7 +175,6 @@ Manual validation can be performed using any JSON Schema validator:
 ajv validate -s https://tr.designtokens.org/format/schema.json -d white.json
 ```
 
-
 ## Contributing
 
 When adding or modifying tokens:
@@ -186,8 +185,8 @@ When adding or modifying tokens:
    `$description`
 3. **Use appropriate types** - Set correct `$type` values (color, dimension,
    etc.)
-4. **Add theme-specific values** - Use `$extensions.carbon.themes` for
-   component tokens
+4. **Add theme-specific values** - Use `$extensions.carbon.themes` for component
+   tokens
 5. **Validate your changes** - Run `yarn build` to validate against DTCG schema
 6. **Test generated output** - Verify SCSS generation works correctly
 7. **Update documentation** - Update this README if adding new token categories
@@ -209,5 +208,3 @@ When adding or modifying tokens:
   Schema for validation
 - [Design Tokens Community Group](https://www.w3.org/community/design-tokens/) -
   W3C Community Group
-
-
