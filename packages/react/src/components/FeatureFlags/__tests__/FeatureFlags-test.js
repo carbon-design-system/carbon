@@ -235,7 +235,6 @@ describe('FeatureFlags', () => {
   });
 
   it('should inherit parent scope flags not specified by a nested FeatureFlags scope', () => {
-    // Regression test for https://github.com/carbon-design-system/carbon/issues/22181
     // When a component wraps itself in a FeatureFlags to enable an internal flag,
     // it should not shadow flags set by the consumer in an outer FeatureFlags scope.
     const checkFlag = jest.fn();
