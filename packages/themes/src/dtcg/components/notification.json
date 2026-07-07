@@ -1,10 +1,10 @@
 {
   "$schema": "https://tr.designtokens.org/format/",
-  "$description": "notification component tokens",
+  "$description": "Notification component color tokens for inline and toast notifications across all severity levels.",
   "notification": {
     "action-hover": {
       "$type": "color",
-      "$description": "action-hover token",
+      "$description": "Background color for notification action buttons on hover. Use for interactive elements within light-themed notifications.",
       "$extensions": {
         "carbon.themes": {
           "white": "{white.default}",
@@ -14,7 +14,7 @@
     },
     "action-tertiary-inverse": {
       "$type": "color",
-      "$description": "action-tertiary-inverse token",
+      "$description": "Background color for tertiary action buttons in inverse (dark) notifications. Use for low-emphasis actions in dark notification variants.",
       "$extensions": {
         "carbon.themes": {
           "white": "{white.default}",
@@ -26,7 +26,7 @@
     },
     "action-tertiary-inverse-active": {
       "$type": "color",
-      "$description": "action-tertiary-inverse-active token",
+      "$description": "Background color for tertiary action buttons in active/pressed state within inverse notifications. Use when user clicks action in dark notifications.",
       "$extensions": {
         "carbon.themes": {
           "white": "{gray.30}",
@@ -38,7 +38,7 @@
     },
     "action-tertiary-inverse-hover": {
       "$type": "color",
-      "$description": "action-tertiary-inverse-hover token",
+      "$description": "Background color for tertiary action buttons on hover within inverse notifications. Use to provide feedback in dark notification variants.",
       "$extensions": {
         "carbon.themes": {
           "white": "{gray.10}",
@@ -50,7 +50,7 @@
     },
     "action-tertiary-inverse-text": {
       "$type": "color",
-      "$description": "action-tertiary-inverse-text token",
+      "$description": "Text color for tertiary action buttons in inverse notifications. Ensures readable contrast for action text in dark notification variants.",
       "$extensions": {
         "carbon.themes": {
           "white": "{gray.100}",
@@ -62,7 +62,7 @@
     },
     "action-tertiary-inverse-text-on-color-disabled": {
       "$type": "color",
-      "$description": "action-tertiary-inverse-text-on-color-disabled token",
+      "$description": "Text color for disabled tertiary action buttons in inverse notifications. Use when actions are temporarily unavailable in dark notifications.",
       "$extensions": {
         "carbon.themes": {
           "white": "{white.default}",
@@ -80,7 +80,7 @@
     },
     "background-error": {
       "$type": "color",
-      "$description": "background-error token",
+      "$description": "Background color for error notifications. Use to alert users of critical issues, failures, or actions that require immediate attention.",
       "$extensions": {
         "carbon.themes": {
           "white": "{red.10}",
@@ -92,7 +92,7 @@
     },
     "background-info": {
       "$type": "color",
-      "$description": "background-info token",
+      "$description": "Background color for informational notifications. Use to provide helpful context, tips, or non-critical updates to users.",
       "$extensions": {
         "carbon.themes": {
           "white": "{blue.10}",
@@ -104,7 +104,7 @@
     },
     "background-success": {
       "$type": "color",
-      "$description": "background-success token",
+      "$description": "Background color for success notifications. Use to confirm successful actions, completed processes, or positive outcomes.",
       "$extensions": {
         "carbon.themes": {
           "white": "{green.10}",
@@ -116,7 +116,7 @@
     },
     "background-warning": {
       "$type": "color",
-      "$description": "background-warning token",
+      "$description": "Background color for warning notifications. Use to alert users of potential issues, cautions, or actions that need attention but aren't critical.",
       "$extensions": {
         "carbon.themes": {
           "white": "{yellow.10}",

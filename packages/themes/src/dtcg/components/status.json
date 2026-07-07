@@ -1,10 +1,10 @@
 {
   "$schema": "https://tr.designtokens.org/format/",
-  "$description": "status component tokens",
+  "$description": "Status indicator component color tokens for displaying system and content states.",
   "status": {
     "accessibility-background": {
       "$type": "color",
-      "$description": "accessibility-background token",
+      "$description": "Background color for accessibility status indicators. Use to highlight accessibility-related features or compliance status.",
       "$extensions": {
         "carbon.themes": {
           "white": "{white.default}",
@@ -16,7 +16,7 @@
     },
     "blue": {
       "$type": "color",
-      "$description": "blue token",
+      "$description": "Color for blue status indicators. Use for informational states, in-progress items, or neutral status without specific semantic meaning.",
       "$extensions": {
         "carbon.themes": {
           "white": "{blue.70}",
@@ -28,7 +28,7 @@
     },
     "gray": {
       "$type": "color",
-      "$description": "gray token",
+      "$description": "Color for gray status indicators. Use for inactive, disabled, or neutral states that don't require color semantics.",
       "$extensions": {
         "carbon.themes": {
           "white": "{gray.60}",
@@ -40,7 +40,7 @@
     },
     "green": {
       "$type": "color",
-      "$description": "green token",
+      "$description": "Color for green status indicators. Use for success states, completed items, active/running status, or positive conditions.",
       "$extensions": {
         "carbon.themes": {
           "white": "{green.50}",
@@ -52,7 +52,7 @@
     },
     "orange": {
       "$type": "color",
-      "$description": "orange token",
+      "$description": "Color for orange status indicators. Use for warning states, items needing attention, or moderate priority issues.",
       "$extensions": {
         "carbon.themes": {
           "white": "{orange.40}",
@@ -64,7 +64,7 @@
     },
     "orange-outline": {
       "$type": "color",
-      "$description": "orange-outline token",
+      "$description": "Outline/border color for orange status indicators in light themes. Provides visual definition for outlined warning status variants.",
       "$extensions": {
         "carbon.themes": {
           "white": "{orange.60}",
@@ -74,7 +74,7 @@
     },
     "purple": {
       "$type": "color",
-      "$description": "purple token",
+      "$description": "Color for purple status indicators. Use for special states, premium features, or custom priority levels.",
       "$extensions": {
         "carbon.themes": {
           "white": "{purple.60}",
@@ -86,7 +86,7 @@
     },
     "red": {
       "$type": "color",
-      "$description": "red token",
+      "$description": "Color for red status indicators. Use for error states, failed items, critical issues, or stopped/inactive status.",
       "$extensions": {
         "carbon.themes": {
           "white": "{red.60}",
@@ -98,7 +98,7 @@
     },
     "yellow": {
       "$type": "color",
-      "$description": "yellow token",
+      "$description": "Color for yellow status indicators. Use for caution states, pending items, or situations requiring user awareness.",
       "$extensions": {
         "carbon.themes": {
           "white": "{yellow.30}",
@@ -110,7 +110,7 @@
     },
     "yellow-outline": {
       "$type": "color",
-      "$description": "yellow-outline token",
+      "$description": "Outline/border color for yellow status indicators in light themes. Provides visual definition for outlined caution status variants.",
       "$extensions": {
         "carbon.themes": {
           "white": "{yellow.60}",
