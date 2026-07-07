@@ -528,8 +528,8 @@
   .#{$prefix}--btn:focus {
     @include high-contrast-mode('focus');
   }
-  // RTL overrides
 
+  // RTL overrides
   [dir='rtl'] .#{$prefix}--btn-set .#{$prefix}--btn:not(:focus) {
     box-shadow: convert.to-rem(1px) 0 0 0 $button-separator;
   }
