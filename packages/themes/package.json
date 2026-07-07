@@ -32,7 +32,6 @@
     "build:types": "tsc -p tsconfig.types.json",
     "build:js-tokens": "babel-node --extensions '.js,.ts' --presets '@babel/preset-env,@babel/preset-typescript' tasks/generate-js-tokens.js",
     "build": "yarn clean && yarn build:js-tokens && carbon-cli bundle src/index.ts --name CarbonThemes && babel-node --extensions '.js,.ts' --presets '@babel/preset-env,@babel/preset-typescript' tasks/build.js && yarn build:types && carbon-cli check \"scss/*.scss\"",
-    "test:dtcg": "jest __tests__/dtcg-schema-validation-test.js",
     "postinstall": "ibmtelemetry --config=telemetry.yml"
   },
   "dependencies": {
