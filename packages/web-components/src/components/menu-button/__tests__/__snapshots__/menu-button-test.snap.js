@@ -10,10 +10,7 @@ snapshots['cds-menu-button should render and match snapshot'] =
   size="lg"
   tab-index="0"
 >
-  <cds-menu
-    size="lg"
-    style=""
-  >
+  <cds-menu size="lg">
     <cds-menu-item
       label="First action"
       role="menuitem"
@@ -49,10 +46,7 @@ snapshots[
   size="lg"
   tab-index="0"
 >
-  <cds-menu
-    size="lg"
-    style=""
-  >
+  <cds-menu size="lg">
     <cds-menu-item
       label="First action"
       role="menuitem"
@@ -84,10 +78,7 @@ snapshots[
   size="lg"
   tab-index="0"
 >
-  <cds-menu
-    size="lg"
-    style=""
-  >
+  <cds-menu size="lg">
     <cds-menu-item
       aria-expanded="true"
       aria-haspopup="true"
@@ -109,21 +100,6 @@ snapshots[
 `;
 /* end snapshot cds-menu-button Children/slots and special menu content Snapshot variants should render with nested menu and match snapshot */
 
-snapshots['cds-menu-button should support xs size'] = `<cds-button
-  has-main-content=""
-  kind="primary"
-  size="xs"
-  tab-index="0"
-  tooltip-alignment=""
-  tooltip-position="top"
-  type="button"
->
-  Actions
-</cds-button>
-<slot>
-</slot>
-`;
-/* end snapshot cds-menu-button should support xs size */
 snapshots['cds-menu-button should support xs size'] = `<cds-button
   danger-description=""
   has-main-content=""
