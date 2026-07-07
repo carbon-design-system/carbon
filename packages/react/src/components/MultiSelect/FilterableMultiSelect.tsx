@@ -1048,7 +1048,7 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
               disabled={disabled}
               translateWithId={translateWithId}
               readOnly={readOnly}
-              onMouseDown={(event: MouseEvent<HTMLButtonElement>) => {
+              onMouseDown={(event) => {
                 event.preventDefault();
               }}
               onMouseUp={(event: MouseEvent) => {
