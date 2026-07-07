@@ -190,6 +190,12 @@ const RadioButtonGroup = React.forwardRef(
           onChange: handleOnChange,
           checked: radioButton.props.value === selected,
           required: required,
+          // Propagate the group's read-only state so each focusable radio
+          // input carries the read-only announcement, unless the child opts out.
+          ...(typeof readOnly !== 'undefined' &&
+          typeof radioButton.props.readOnly === 'undefined'
+            ? { readOnly }
+            : {}),
         };
 
         if (!selected && radioButton.props.checked) {
@@ -247,8 +253,6 @@ const RadioButtonGroup = React.forwardRef(
       </div>
     );
 
-    const readOnlyId = `radio-button-group-readonly-text-${radioButtonGroupInstanceId}`;
-
     const divRef = useRef<HTMLDivElement>(null);
 
     // AILabel is always size `mini`
@@ -267,22 +271,11 @@ const RadioButtonGroup = React.forwardRef(
           {...rest}
           aria-readonly={readOnly || undefined}
           aria-describedby={
-            readOnly
-              ? classNames(
-                  readOnlyId,
-                  showHelper && hasHelper ? helperId : undefined,
-                  rest['aria-describedby']
-                )
-              : classNames(
-                  showHelper && hasHelper ? helperId : undefined,
-                  rest['aria-describedby']
-                ) || undefined
+            classNames(
+              showHelper && hasHelper ? helperId : undefined,
+              rest['aria-describedby']
+            ) || undefined
           }>
-          {readOnly && (
-            <span id={readOnlyId} className={`${prefix}--visually-hidden`}>
-              Read only
-            </span>
-          )}
           {legendText && (
             <Legend className={`${prefix}--label`}>
               {legendText}

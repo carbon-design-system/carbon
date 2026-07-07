@@ -190,16 +190,19 @@ describe('RadioButtonGroup', () => {
       );
 
       const fieldset = container.querySelector('fieldset');
-      const readOnlyText = fieldset.querySelector(
-        `.${prefix}--visually-hidden`
-      );
-
-      expect(readOnlyText).toBeInTheDocument();
-      expect(readOnlyText).toHaveTextContent('Read only');
       expect(fieldset).toHaveAttribute('aria-readonly', 'true');
-      expect(fieldset.getAttribute('aria-describedby')).toContain(
-        readOnlyText.getAttribute('id')
-      );
+
+      // The read-only announcement is carried by each focusable radio input
+      // (propagated from the group), not duplicated on the fieldset.
+      const radios = container.querySelectorAll('input[type="radio"]');
+      expect(radios.length).toBe(2);
+      radios.forEach((radio) => {
+        const describedBy = radio.getAttribute('aria-describedby');
+        expect(describedBy).toBeTruthy();
+        const readOnlyText = document.getElementById(describedBy);
+        expect(readOnlyText).toHaveClass(`${prefix}--visually-hidden`);
+        expect(readOnlyText).toHaveTextContent('Read only');
+      });
     });
 
     it('should support `defaultSelected` as a way to select a radio button', () => {
