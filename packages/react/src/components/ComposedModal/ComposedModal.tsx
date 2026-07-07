@@ -173,6 +173,24 @@ ModalBody.propTypes = {
   hasScrollingContent: PropTypes.bool,
 };
 
+/**
+ * @remarks
+ * **Feature flags that affect this component:**
+ *
+ * - `enable-dialog-element` — renders using the native `<dialog>` element,
+ *   enabling browser-native focus management and accessibility semantics.
+ *   Enable via `<FeatureFlags enableDialogElement>`.
+ *
+ * - `enable-presence` — keeps the modal unmounted when closed and mounts it
+ *   only when opened, reducing the initial DOM footprint.
+ *   Enable via `<FeatureFlags enablePresence>`.
+ *
+ * - `enable-focus-wrap-without-sentinels` — uses a sentinel-free focus-trap
+ *   implementation. Mutually exclusive with `enable-dialog-element`.
+ *   Enable via `<FeatureFlags enableFocusWrapWithoutSentinels>`.
+ *
+ * @see https://github.com/carbon-design-system/carbon/blob/main/docs/feature-flags.md
+ */
 export interface ComposedModalProps extends HTMLAttributes<HTMLDivElement> {
   /**
    * Specify the aria-label for cds--modal-container

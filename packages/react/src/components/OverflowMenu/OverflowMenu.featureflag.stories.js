@@ -68,11 +68,7 @@ export const AutoAlign = () => {
 
 export const Nested = () => {
   return (
-    <FeatureFlags
-      flags={{
-        'enable-v12-overflowmenu': true,
-        'enable-v12-dynamic-floating-styles': false,
-      }}>
+    <FeatureFlags enableV12Overflowmenu enableV12DynamicFloatingStyles={false}>
       <OverflowMenu>
         <MenuItem label="Level 1" />
         <MenuItem label="Level 1" />

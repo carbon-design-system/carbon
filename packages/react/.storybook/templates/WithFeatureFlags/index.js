@@ -9,18 +9,41 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import LinkTo from '@storybook/addon-links/react';
 
-import { FeatureFlags as FeatureFlagScope } from '@carbon/feature-flags';
 import { FeatureFlags } from '../../../src/components/FeatureFlags';
 
 import { Annotation } from '../Annotation';
 
-const allFlagsEnabled = Object.fromEntries(
-  Array.from(FeatureFlagScope.flags.keys()).map((k) => [k, true])
-);
-
-function WithFeatureFlags({ children }) {
+function WithFeatureFlags({
+  children,
+  enableV12TileDefaultIcons = true,
+  enableV12TileRadioIcons = true,
+  enableV12Overflowmenu = true,
+  enableTreeviewControllable = true,
+  enableFocusWrapWithoutSentinels = true,
+  enableDialogElement = true,
+  enableV12DynamicFloatingStyles = true,
+  enableEnhancedFileUploader = true,
+  enablePresence = true,
+  enableTileContrast = true,
+  enableV12StructuredListVisibleIcons = true,
+  enableV12ToggleReducedLabelSpacing = true,
+  ...rest
+}) {
   return (
-    <FeatureFlags flags={allFlagsEnabled}>
+    <FeatureFlags
+      enableV12TileDefaultIcons={enableV12TileDefaultIcons}
+      enableV12TileRadioIcons={enableV12TileRadioIcons}
+      enableV12Overflowmenu={enableV12Overflowmenu}
+      enableTreeviewControllable={enableTreeviewControllable}
+      enableFocusWrapWithoutSentinels={enableFocusWrapWithoutSentinels}
+      enableDialogElement={enableDialogElement}
+      enableV12DynamicFloatingStyles={enableV12DynamicFloatingStyles}
+      enableEnhancedFileUploader={enableEnhancedFileUploader}
+      enablePresence={enablePresence}
+      enableTileContrast={enableTileContrast}
+      enableV12StructuredListVisibleIcons={enableV12StructuredListVisibleIcons}
+      enableV12ToggleReducedLabelSpacing={enableV12ToggleReducedLabelSpacing}
+      {...rest}>
       <Annotation
         type="feature-flags"
         text={
@@ -44,10 +67,18 @@ WithFeatureFlags.propTypes = {
    */
   children: PropTypes.node,
 
-  /**
-   * Provide the feature flags to enabled or disabled in the current React tree
-   */
-  flags: PropTypes.objectOf(PropTypes.bool),
+  enableV12TileDefaultIcons: PropTypes.bool,
+  enableV12TileRadioIcons: PropTypes.bool,
+  enableV12Overflowmenu: PropTypes.bool,
+  enableTreeviewControllable: PropTypes.bool,
+  enableFocusWrapWithoutSentinels: PropTypes.bool,
+  enableDialogElement: PropTypes.bool,
+  enableV12DynamicFloatingStyles: PropTypes.bool,
+  enableEnhancedFileUploader: PropTypes.bool,
+  enablePresence: PropTypes.bool,
+  enableTileContrast: PropTypes.bool,
+  enableV12StructuredListVisibleIcons: PropTypes.bool,
+  enableV12ToggleReducedLabelSpacing: PropTypes.bool,
 };
 
 export { WithFeatureFlags };

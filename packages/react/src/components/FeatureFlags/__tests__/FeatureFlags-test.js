@@ -834,5 +834,163 @@ describe('FeatureFlags', () => {
         enablePresence: true,
       });
     });
+
+    it('enable-tile-contrast - enableTileContrast', () => {
+      const checkFlags = jest.fn();
+      const checkFlag = jest.fn();
+
+      function TestComponent() {
+        const featureFlags = useFeatureFlags();
+        const enableTileContrast = useFeatureFlag('enable-tile-contrast');
+
+        checkFlags({
+          enableTileContrast: featureFlags.enabled('enable-tile-contrast'),
+        });
+
+        checkFlag({
+          enableTileContrast,
+        });
+
+        return null;
+      }
+
+      // Render the default
+      const { rerender } = render(
+        <FeatureFlags>
+          <TestComponent />
+        </FeatureFlags>
+      );
+
+      // Ensure the default value is as defined and as expected
+      expect(checkFlags).toHaveBeenLastCalledWith({
+        enableTileContrast: false,
+      });
+      expect(checkFlag).toHaveBeenLastCalledWith({
+        enableTileContrast: false,
+      });
+
+      // Enable the flag
+      rerender(
+        <FeatureFlags enableTileContrast>
+          <TestComponent />
+        </FeatureFlags>
+      );
+
+      // Ensure that when enabled, this flag does not error
+      expect(checkFlags).toHaveBeenLastCalledWith({
+        enableTileContrast: true,
+      });
+      expect(checkFlag).toHaveBeenLastCalledWith({
+        enableTileContrast: true,
+      });
+    });
+
+    it('enable-v12-structured-list-visible-icons - enableV12StructuredListVisibleIcons', () => {
+      const checkFlags = jest.fn();
+      const checkFlag = jest.fn();
+
+      function TestComponent() {
+        const featureFlags = useFeatureFlags();
+        const enableV12StructuredListVisibleIcons = useFeatureFlag(
+          'enable-v12-structured-list-visible-icons'
+        );
+
+        checkFlags({
+          enableV12StructuredListVisibleIcons: featureFlags.enabled(
+            'enable-v12-structured-list-visible-icons'
+          ),
+        });
+
+        checkFlag({
+          enableV12StructuredListVisibleIcons,
+        });
+
+        return null;
+      }
+
+      // Render the default
+      const { rerender } = render(
+        <FeatureFlags>
+          <TestComponent />
+        </FeatureFlags>
+      );
+
+      // Ensure the default value is as defined and as expected
+      expect(checkFlags).toHaveBeenLastCalledWith({
+        enableV12StructuredListVisibleIcons: false,
+      });
+      expect(checkFlag).toHaveBeenLastCalledWith({
+        enableV12StructuredListVisibleIcons: false,
+      });
+
+      // Enable the flag
+      rerender(
+        <FeatureFlags enableV12StructuredListVisibleIcons>
+          <TestComponent />
+        </FeatureFlags>
+      );
+
+      // Ensure that when enabled, this flag does not error
+      expect(checkFlags).toHaveBeenLastCalledWith({
+        enableV12StructuredListVisibleIcons: true,
+      });
+      expect(checkFlag).toHaveBeenLastCalledWith({
+        enableV12StructuredListVisibleIcons: true,
+      });
+    });
+
+    it('enable-v12-toggle-reduced-label-spacing - enableV12ToggleReducedLabelSpacing', () => {
+      const checkFlags = jest.fn();
+      const checkFlag = jest.fn();
+
+      function TestComponent() {
+        const featureFlags = useFeatureFlags();
+        const enableV12ToggleReducedLabelSpacing = useFeatureFlag(
+          'enable-v12-toggle-reduced-label-spacing'
+        );
+
+        checkFlags({
+          enableV12ToggleReducedLabelSpacing: featureFlags.enabled(
+            'enable-v12-toggle-reduced-label-spacing'
+          ),
+        });
+
+        checkFlag({
+          enableV12ToggleReducedLabelSpacing,
+        });
+
+        return null;
+      }
+
+      // Render the default
+      const { rerender } = render(
+        <FeatureFlags>
+          <TestComponent />
+        </FeatureFlags>
+      );
+
+      // Ensure the default value is as defined and as expected
+      expect(checkFlags).toHaveBeenLastCalledWith({
+        enableV12ToggleReducedLabelSpacing: false,
+      });
+      expect(checkFlag).toHaveBeenLastCalledWith({
+        enableV12ToggleReducedLabelSpacing: false,
+      });
+
+      // Enable the flag
+      rerender(
+        <FeatureFlags enableV12ToggleReducedLabelSpacing>
+          <TestComponent />
+        </FeatureFlags>
+      );
+
+      // Ensure that when enabled, this flag does not error
+      expect(checkFlags).toHaveBeenLastCalledWith({
+        enableV12ToggleReducedLabelSpacing: true,
+      });
+      expect(checkFlag).toHaveBeenLastCalledWith({
+        enableV12ToggleReducedLabelSpacing: true,
+      });
+    });
   });
 });

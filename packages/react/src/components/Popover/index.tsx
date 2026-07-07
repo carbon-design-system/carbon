@@ -100,6 +100,13 @@ export interface PopoverBaseProps {
    * is currently experimental and is subject to future changes. Requires
    * React v17+
    * @see https://github.com/carbon-design-system/carbon/issues/18714
+   *
+   * The `enable-v12-dynamic-floating-styles` feature flag enables floating-ui
+   * styles globally for all Popover-based components, making `autoAlign`
+   * behaviour the default regardless of this prop.
+   *
+   * Enable via `<FeatureFlags enableV12DynamicFloatingStyles>`.
+   * @see https://github.com/carbon-design-system/carbon/blob/main/docs/feature-flags.md
    */
   autoAlign?: boolean;
 

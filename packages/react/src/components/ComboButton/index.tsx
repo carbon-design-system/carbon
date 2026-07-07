@@ -69,7 +69,13 @@ interface ComboButtonProps extends TranslateWithId<TranslationKey> {
   label: React.ComponentProps<typeof Button>['title'];
 
   /**
-   * Experimental property. Specify how the menu should align with the button element
+   * Experimental property. Specify how the menu should align with the button element.
+   *
+   * The `enable-v12-dynamic-floating-styles` feature flag enables precise
+   * viewport-collision avoidance for the menu's floating position globally.
+   *
+   * Enable via `<FeatureFlags enableV12DynamicFloatingStyles>`.
+   * @see https://github.com/carbon-design-system/carbon/blob/main/docs/feature-flags.md
    */
   menuAlignment?: MenuAlignment;
 

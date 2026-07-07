@@ -152,6 +152,17 @@ Tile.propTypes = {
   ),
 };
 
+/**
+ * @remarks
+ * **Feature flags that affect this component:**
+ *
+ * - `enable-v12-tile-default-icons` — when no `renderIcon` is provided, an
+ *   `ArrowRight` icon is rendered by default; when `disabled`, an `Error` icon
+ *   is shown instead.
+ *   Enable via `<FeatureFlags enableV12TileDefaultIcons>`.
+ *
+ * @see https://github.com/carbon-design-system/carbon/blob/main/docs/feature-flags.md
+ */
 export interface ClickableTileProps extends HTMLAttributes<HTMLAnchorElement> {
   children?: ReactNode;
   className?: string;

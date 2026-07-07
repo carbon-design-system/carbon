@@ -15,10 +15,7 @@ export default {
   tags: ['!autodocs'],
   decorators: [
     (Story) => (
-      <WithFeatureFlags
-        flags={{
-          'enable-enhanced-file-uploader': true,
-        }}>
+      <WithFeatureFlags enableEnhancedFileUploader>
         <Story />
       </WithFeatureFlags>
     ),

@@ -42,6 +42,20 @@ export interface FileDeleteData {
   remainingFiles: FileItem[];
 }
 
+/**
+ * @remarks
+ * **Feature flags that affect this component:**
+ *
+ * - `enable-enhanced-file-uploader` — enables richer callbacks and expanded
+ *   trigger coverage:
+ *   - `onChange` also fires on file deletions and `clearFiles` operations,
+ *     receiving a `FileChangeData` object as the second argument.
+ *   - `onDelete` receives a `FileDeleteData` object with deleted file info.
+ *   - Exposes `getCurrentFiles` and `setCurrentFiles` on the imperative ref.
+ *   Enable via `<FeatureFlags enableEnhancedFileUploader>`.
+ *
+ * @see https://github.com/carbon-design-system/carbon/blob/main/docs/feature-flags.md
+ */
 export interface FileUploaderProps extends HTMLAttributes<HTMLSpanElement> {
   /**
    * Specify the types of files that this input should be able to receive

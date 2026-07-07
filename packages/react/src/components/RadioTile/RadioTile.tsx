@@ -23,6 +23,16 @@ import { useFeatureFlag } from '../FeatureFlags';
 import { AILabel } from '../AILabel';
 import { isComponentElement } from '../../internal';
 
+/**
+ * @remarks
+ * **Feature flags that affect this component:**
+ *
+ * - `enable-v12-tile-radio-icons` — renders a `RadioButtonChecked` icon on
+ *   selected tiles and a `RadioButton` icon on unselected tiles.
+ *   Enable via `<FeatureFlags enableV12TileRadioIcons>`.
+ *
+ * @see https://github.com/carbon-design-system/carbon/blob/main/docs/feature-flags.md
+ */
 export interface RadioTileProps {
   /**
    * Specify whether the `RadioTile` should be checked.

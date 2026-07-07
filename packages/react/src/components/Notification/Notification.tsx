@@ -818,6 +818,16 @@ InlineNotification.propTypes = {
  * ======================
  */
 
+/**
+ * @remarks
+ * **Feature flags that affect this component:**
+ *
+ * - `enable-focus-wrap-without-sentinels` — uses a sentinel-free focus-trap
+ *   implementation when `role="alertdialog"`.
+ *   Enable via `<FeatureFlags enableFocusWrapWithoutSentinels>`.
+ *
+ * @see https://github.com/carbon-design-system/carbon/blob/main/docs/feature-flags.md
+ */
 export interface ActionableNotificationProps
   extends HTMLAttributes<HTMLDivElement> {
   /**

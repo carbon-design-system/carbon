@@ -8,6 +8,16 @@
 import { PolymorphicComponentPropWithRef } from '../../internal/PolymorphicProps';
 import PropTypes from 'prop-types';
 
+/**
+ * @remarks
+ * **Feature flags that affect this component:**
+ *
+ * - `enable-css-grid` — switches the `Grid` implementation from the legacy
+ *   flexbox-based `FlexGrid` to the CSS Grid-based `CSSGrid`.
+ *   Enable via `<FeatureFlags flags={{ 'enable-css-grid': true }}>`.
+ *
+ * @see https://github.com/carbon-design-system/carbon/blob/main/docs/feature-flags.md
+ */
 export interface GridBaseProps {
   /**
    * Specify grid alignment. Default is center

@@ -15,10 +15,7 @@ export default {
   tags: ['!autodocs'],
   decorators: [
     (Story) => (
-      <WithFeatureFlags
-        flags={{
-          'enable-v12-dynamic-floating-styles': true,
-        }}>
+      <WithFeatureFlags enableV12DynamicFloatingStyles>
         <Story />
       </WithFeatureFlags>
     ),

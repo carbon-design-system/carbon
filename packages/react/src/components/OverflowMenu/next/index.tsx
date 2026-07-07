@@ -31,6 +31,17 @@ interface OverflowMenuProps {
    * to avoid collisions with the viewport and being clipped by ancestor
    * elements. Requires React v17+
    * @see https://github.com/carbon-design-system/carbon/issues/18714
+   *
+   * The `enable-v12-dynamic-floating-styles` feature flag enables this
+   * behaviour globally without needing to set `autoAlign` on each instance.
+   *
+   * The `enable-v12-overflowmenu` feature flag replaces the legacy
+   * `OverflowMenu` implementation with this v12 variant (using `Menu`
+   * subcomponents) as the default.
+   *
+   * Enable via `<FeatureFlags enableV12DynamicFloatingStyles>` or
+   * `<FeatureFlags enableV12Overflowmenu>`.
+   * @see https://github.com/carbon-design-system/carbon/blob/main/docs/feature-flags.md
    */
   autoAlign?: boolean;
 

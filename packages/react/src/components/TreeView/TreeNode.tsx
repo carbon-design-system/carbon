@@ -36,6 +36,16 @@ type UncontrolledOnToggle = (
 
 type ControlledOnToggle = (isExpanded: TreeNodeProps['isExpanded']) => void;
 
+/**
+ * @remarks
+ * **Feature flags that affect this component:**
+ *
+ * - `enable-treeview-controllable` — enables `defaultIsExpanded` on
+ *   `TreeNode` for setting an initial expansion state without controlling it.
+ *   Enable via `<FeatureFlags enableTreeviewControllable>`.
+ *
+ * @see https://github.com/carbon-design-system/carbon/blob/main/docs/feature-flags.md
+ */
 export type TreeNodeProps = {
   /**
    * **Note:** this is controlled by the parent TreeView component, do not set manually.

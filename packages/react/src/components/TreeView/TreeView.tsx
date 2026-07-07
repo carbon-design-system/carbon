@@ -25,6 +25,18 @@ type UncontrolledOnSelect = (
 
 type ControlledOnSelect = (selected: TreeViewProps['selected']) => void;
 
+/**
+ * @remarks
+ * **Feature flags that affect this component:**
+ *
+ * - `enable-treeview-controllable` — enables a controllable API where
+ *   `selected` and `active` state can be managed externally. Also enables the
+ *   `onActivate` callback. When disabled, the component uses uncontrolled
+ *   internal state for selection.
+ *   Enable via `<FeatureFlags enableTreeviewControllable>`.
+ *
+ * @see https://github.com/carbon-design-system/carbon/blob/main/docs/feature-flags.md
+ */
 export type TreeViewProps = {
   /**
    * Mark the active node in the tree, represented by its ID
