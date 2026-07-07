@@ -49,6 +49,21 @@ const FeatureFlagContext = createContext<FeatureFlagScope>(GlobalFeatureFlags);
  * along with the current `FeatureFlagContext` to provide consumers to check if
  * a feature flag is enabled or disabled in a given React tree
  */
+// Maps each camelCase prop name to its kebab-case feature flag key.
+const PROP_TO_FLAG: Record<string, string> = {
+  enableV12TileDefaultIcons: 'enable-v12-tile-default-icons',
+  enableV12TileRadioIcons: 'enable-v12-tile-radio-icons',
+  enableV12Overflowmenu: 'enable-v12-overflowmenu',
+  enableTreeviewControllable: 'enable-treeview-controllable',
+  enableExperimentalFocusWrapWithoutSentinels:
+    'enable-experimental-focus-wrap-without-sentinels',
+  enableFocusWrapWithoutSentinels: 'enable-focus-wrap-without-sentinels',
+  enableDialogElement: 'enable-dialog-element',
+  enableV12DynamicFloatingStyles: 'enable-v12-dynamic-floating-styles',
+  enableEnhancedFileUploader: 'enable-enhanced-file-uploader',
+  enablePresence: 'enable-presence',
+};
+
 export const FeatureFlags = ({
   children,
   flags,
@@ -69,44 +84,27 @@ export const FeatureFlags = ({
     // Only include flags that were explicitly provided (not undefined). This
     // ensures that unspecified props do not shadow flags set by a parent
     // FeatureFlags scope, which is the correct behaviour for nested scopes.
+    const flagProps = {
+      enableV12TileDefaultIcons,
+      enableV12TileRadioIcons,
+      enableV12Overflowmenu,
+      enableTreeviewControllable,
+      enableExperimentalFocusWrapWithoutSentinels,
+      enableFocusWrapWithoutSentinels,
+      enableDialogElement,
+      enableV12DynamicFloatingStyles,
+      enableEnhancedFileUploader,
+      enablePresence,
+    };
     const explicitFlags: Record<string, boolean> = {};
 
-    if (enableV12TileDefaultIcons !== undefined) {
-      explicitFlags['enable-v12-tile-default-icons'] =
-        enableV12TileDefaultIcons;
+    for (const [prop, flagKey] of Object.entries(PROP_TO_FLAG)) {
+      const value = (flagProps as Record<string, boolean | undefined>)[prop];
+      if (value !== undefined) {
+        explicitFlags[flagKey] = value;
+      }
     }
-    if (enableV12TileRadioIcons !== undefined) {
-      explicitFlags['enable-v12-tile-radio-icons'] = enableV12TileRadioIcons;
-    }
-    if (enableV12Overflowmenu !== undefined) {
-      explicitFlags['enable-v12-overflowmenu'] = enableV12Overflowmenu;
-    }
-    if (enableTreeviewControllable !== undefined) {
-      explicitFlags['enable-treeview-controllable'] =
-        enableTreeviewControllable;
-    }
-    if (enableExperimentalFocusWrapWithoutSentinels !== undefined) {
-      explicitFlags['enable-experimental-focus-wrap-without-sentinels'] =
-        enableExperimentalFocusWrapWithoutSentinels;
-    }
-    if (enableFocusWrapWithoutSentinels !== undefined) {
-      explicitFlags['enable-focus-wrap-without-sentinels'] =
-        enableFocusWrapWithoutSentinels;
-    }
-    if (enableDialogElement !== undefined) {
-      explicitFlags['enable-dialog-element'] = enableDialogElement;
-    }
-    if (enableV12DynamicFloatingStyles !== undefined) {
-      explicitFlags['enable-v12-dynamic-floating-styles'] =
-        enableV12DynamicFloatingStyles;
-    }
-    if (enableEnhancedFileUploader !== undefined) {
-      explicitFlags['enable-enhanced-file-uploader'] =
-        enableEnhancedFileUploader;
-    }
-    if (enablePresence !== undefined) {
-      explicitFlags['enable-presence'] = enablePresence;
-    }
+
     if (flags) {
       Object.assign(explicitFlags, flags);
     }
