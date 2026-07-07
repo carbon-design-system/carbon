@@ -223,7 +223,11 @@ class CDSOverflowMenuBody extends CDSFloatingMenu {
         .constructor as typeof CDSOverflowMenuBody;
       const menuItems = this.querySelectorAll(selectorMenuItem);
       menuItems.forEach((item) => {
-        if (this.size) item.setAttribute('size', this.size);
+        if (this.size) {
+          item.setAttribute('size', this.size);
+        } else {
+          item.removeAttribute('size');
+        }
       });
     }
 

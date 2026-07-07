@@ -353,7 +353,7 @@ class CDSOverflowMenu
           menuBody.id ||= this._menuId;
           menuBody.setAttribute('breadcrumb', String(this.breadcrumb));
           menuBody.open = open;
-          if (this.size) menuBody.size = size as OVERFLOW_MENU_SIZE;
+          menuBody.size = size as OVERFLOW_MENU_SIZE;
         }
       }
     }
@@ -391,6 +391,10 @@ class CDSOverflowMenu
         this._tooltip?.setAttribute('size', this.size);
       } else {
         this._tooltip?.removeAttribute('size');
+      }
+
+      if (this._menuBody) {
+        this._menuBody.size = this.size as OVERFLOW_MENU_SIZE;
       }
     }
 
