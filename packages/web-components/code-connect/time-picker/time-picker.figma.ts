@@ -33,14 +33,16 @@ figma.connect(
         <cds-time-picker-select
           default-value="AM"
           disabled=${props.disabled}
-          id="time-picker-select-1">
+          id="time-picker-select-1"
+          aria-label="Select AM/PM">
           <cds-select-item value="AM">AM</cds-select-item>
           <cds-select-item value="PM">PM</cds-select-item>
         </cds-time-picker-select>
         <cds-time-picker-select
           default-value="Time zone 1"
           disabled=${props.disabled}
-          id="time-picker-select-2">
+          id="time-picker-select-2"
+          aria-label="Select timezone">
           <cds-select-item value="Time zone 1">Time zone 1</cds-select-item>
           <cds-select-item value="Time zone 2">Time zone 2</cds-select-item>
         </cds-time-picker-select>

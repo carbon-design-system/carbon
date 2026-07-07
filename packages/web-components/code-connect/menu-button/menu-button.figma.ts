@@ -51,24 +51,3 @@ figma.connect(
     ],
   }
 );
-
-figma.connect(
-  'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=31420-317548&t=KXgYpEhuz2XzSITV-4',
-  {
-    variant: { Open: 'True' },
-    props: sharedMenuButtonProps,
-    example: (props) =>
-      html`<cds-menu-button
-        disabled=${props.button.disabled}
-        kind=${props.button.kind}
-        label="Actions"
-        menu-alignment=${props.menuAlignment}
-        size=${props.size}>
-        <cds-menu>${props.menu.menuItem}</cds-menu>
-      </cds-menu-button>`,
-    imports: [
-      "import '@carbon/web-components/es/components/menu-button/index.js'",
-      "import '@carbon/web-components/es/components/menu/index.js'",
-    ],
-  }
-);

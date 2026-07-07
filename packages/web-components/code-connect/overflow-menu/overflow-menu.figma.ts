@@ -33,12 +33,13 @@ figma.connect(
     example: (props) =>
       html`<cds-overflow-menu
         disabled=${props.disabled}
-        menu-alignment=${props.direction}
         open=${props.open}
         size=${props.size}>
         <span slot="icon">${props.button.renderIcon}</span>
         <span slot="tooltip-content">Options</span>
-        <cds-overflow-menu-body flipped=${props.flipped}>
+        <cds-overflow-menu-body
+          direction=${props.direction}
+          flipped=${props.flipped}>
           <cds-overflow-menu-item>Stop app</cds-overflow-menu-item>
           <cds-overflow-menu-item>Restart app</cds-overflow-menu-item>
           <cds-overflow-menu-item>Rename app</cds-overflow-menu-item>
