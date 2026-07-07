@@ -51,37 +51,67 @@ const FeatureFlagContext = createContext<FeatureFlagScope>(GlobalFeatureFlags);
  */
 export const FeatureFlags = ({
   children,
-  flags = {},
-  enableV12TileDefaultIcons = false,
-  enableV12TileRadioIcons = false,
-  enableV12Overflowmenu = false,
-  enableTreeviewControllable = false,
-  enableExperimentalFocusWrapWithoutSentinels = false,
-  enableFocusWrapWithoutSentinels = false,
-  enableDialogElement = false,
-  enableV12DynamicFloatingStyles = false,
-  enableEnhancedFileUploader = false,
-  enablePresence = false,
+  flags,
+  enableV12TileDefaultIcons,
+  enableV12TileRadioIcons,
+  enableV12Overflowmenu,
+  enableTreeviewControllable,
+  enableExperimentalFocusWrapWithoutSentinels,
+  enableFocusWrapWithoutSentinels,
+  enableDialogElement,
+  enableV12DynamicFloatingStyles,
+  enableEnhancedFileUploader,
+  enablePresence,
 }: FeatureFlagsProps) => {
   const parentScope = useContext(FeatureFlagContext);
 
   const scope = useMemo(() => {
-    const combinedFlags = {
-      'enable-v12-tile-default-icons': enableV12TileDefaultIcons,
-      'enable-v12-tile-radio-icons': enableV12TileRadioIcons,
-      'enable-v12-overflowmenu': enableV12Overflowmenu,
-      'enable-treeview-controllable': enableTreeviewControllable,
-      'enable-experimental-focus-wrap-without-sentinels':
-        enableExperimentalFocusWrapWithoutSentinels,
-      'enable-focus-wrap-without-sentinels': enableFocusWrapWithoutSentinels,
-      'enable-dialog-element': enableDialogElement,
-      'enable-v12-dynamic-floating-styles': enableV12DynamicFloatingStyles,
-      'enable-enhanced-file-uploader': enableEnhancedFileUploader,
-      'enable-presence': enablePresence,
-      ...flags,
-    };
+    // Only include flags that were explicitly provided (not undefined). This
+    // ensures that unspecified props do not shadow flags set by a parent
+    // FeatureFlags scope, which is the correct behaviour for nested scopes.
+    const explicitFlags: Record<string, boolean> = {};
 
-    const scope = createScope(combinedFlags) as FeatureFlagScope;
+    if (enableV12TileDefaultIcons !== undefined) {
+      explicitFlags['enable-v12-tile-default-icons'] =
+        enableV12TileDefaultIcons;
+    }
+    if (enableV12TileRadioIcons !== undefined) {
+      explicitFlags['enable-v12-tile-radio-icons'] = enableV12TileRadioIcons;
+    }
+    if (enableV12Overflowmenu !== undefined) {
+      explicitFlags['enable-v12-overflowmenu'] = enableV12Overflowmenu;
+    }
+    if (enableTreeviewControllable !== undefined) {
+      explicitFlags['enable-treeview-controllable'] =
+        enableTreeviewControllable;
+    }
+    if (enableExperimentalFocusWrapWithoutSentinels !== undefined) {
+      explicitFlags['enable-experimental-focus-wrap-without-sentinels'] =
+        enableExperimentalFocusWrapWithoutSentinels;
+    }
+    if (enableFocusWrapWithoutSentinels !== undefined) {
+      explicitFlags['enable-focus-wrap-without-sentinels'] =
+        enableFocusWrapWithoutSentinels;
+    }
+    if (enableDialogElement !== undefined) {
+      explicitFlags['enable-dialog-element'] = enableDialogElement;
+    }
+    if (enableV12DynamicFloatingStyles !== undefined) {
+      explicitFlags['enable-v12-dynamic-floating-styles'] =
+        enableV12DynamicFloatingStyles;
+    }
+    if (enableEnhancedFileUploader !== undefined) {
+      explicitFlags['enable-enhanced-file-uploader'] =
+        enableEnhancedFileUploader;
+    }
+    if (enablePresence !== undefined) {
+      explicitFlags['enable-presence'] = enablePresence;
+    }
+    if (flags) {
+      Object.assign(explicitFlags, flags);
+    }
+
+    const scope = createScope(explicitFlags) as FeatureFlagScope;
     scope.mergeWithScope(parentScope);
     return scope;
   }, [
