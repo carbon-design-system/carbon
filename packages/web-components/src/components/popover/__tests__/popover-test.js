@@ -561,6 +561,71 @@ describe('cds-popover focusout/outsideclick', () => {
     expect(document.activeElement).to.equal(outside);
   });
 
+  it('closes when pressing Escape while focus is inside the popover content', async () => {
+    const el = await fixture(html`
+      <div>
+        <cds-popover open id="popover">
+          <button id="trigger" type="button">Test</button>
+          <cds-popover-content>
+            <button id="inside">Inside</button>
+          </cds-popover-content>
+        </cds-popover>
+      </div>
+    `);
+
+    await el.updateComplete;
+    const popover = el.querySelector('#popover');
+    const trigger = popover.querySelector('#trigger');
+    const inside = popover.querySelector('#inside');
+
+    let eventFired = false;
+    popover.addEventListener('cds-popover-closed', () => {
+      eventFired = true;
+    });
+
+    expect(popover.hasAttribute('open')).to.be.true;
+
+    inside.focus();
+    await el.updateComplete;
+
+    await sendKeys({ press: 'Escape' });
+    await el.updateComplete;
+
+    expect(eventFired).to.be.true;
+    expect(popover.hasAttribute('open')).to.be.false;
+
+    // focus should return to trigger
+    expect(document.activeElement).to.equal(trigger);
+  });
+
+  it('does NOT close when pressing Escape while the trigger is focused', async () => {
+    const el = await fixture(html`
+      <div>
+        <cds-popover open id="popover">
+          <button id="trigger" type="button">Test</button>
+          <cds-popover-content></cds-popover-content>
+        </cds-popover>
+      </div>
+    `);
+
+    await el.updateComplete;
+    const popover = el.querySelector('#popover');
+    const trigger = popover.querySelector('#trigger');
+
+    expect(popover.hasAttribute('open')).to.be.true;
+
+    trigger.focus();
+    await el.updateComplete;
+
+    await sendKeys({ press: 'Escape' });
+    await el.updateComplete;
+
+    expect(popover.hasAttribute('open')).to.be.true;
+
+    // focus should remain on trigger
+    expect(document.activeElement).to.equal(trigger);
+  });
+
   it('should properly handle keyboard nav within elements inside popover', async () => {
     const el = await fixture(html`
       <cds-popover open id="popover">

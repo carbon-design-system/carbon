@@ -150,6 +150,48 @@ class CDSPopover extends HostListenerMixin(LitElement) {
     } else {
       this._tabKeyPressed = false;
     }
+
+    if (event.key === 'Escape') {
+      // Esc should only close the popover if focus lives inside the popover content
+      const content = this.querySelector(
+        (this.constructor as typeof CDSPopover).selectorPopoverContent
+      );
+      if (!content || !deepShadowContains(content, event.target)) {
+        return;
+      }
+
+      if (
+        this.dispatchEvent(
+          new CustomEvent(
+            (this.constructor as typeof CDSPopover).eventBeforeClose,
+            {
+              bubbles: true,
+              cancelable: true,
+              composed: true,
+              detail: {
+                triggeredBy: event.target,
+              },
+            }
+          )
+        )
+      ) {
+        this.open = false;
+        this.dispatchEvent(
+          new CustomEvent(
+            (this.constructor as typeof CDSPopover).eventOnClose,
+            {
+              bubbles: true,
+              composed: true,
+            }
+          )
+        );
+
+        // return focus to the trigger
+        const trigger =
+          this._triggerSlotNode.assignedElements()[0] as HTMLElement;
+        trigger?.focus();
+      }
+    }
   }
 
   @HostListener('focusout')
