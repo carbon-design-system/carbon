@@ -124,7 +124,7 @@ class CDSHeaderGlobalAction extends CDSButton {
       // see if there is related panel for header-global-action button first
       // and then set the expanded attr of it accordingly
       if (panel) {
-        const expanded = panel.getAttribute('expanded');
+        const expanded = panel.hasAttribute('expanded');
 
         if (expanded) {
           panel.removeAttribute('expanded');
