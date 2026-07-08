@@ -24,15 +24,9 @@ type SafeDivProps = Omit<
 >;
 
 export interface MotionSurfaceProps extends SafeDivProps {
-  // the named motion intent from `@carbon/motion`
   surface: MotionSurfaceName;
-  // shared-element target (`MotionSurfaceOrigin`) - required for
-  // shared-element surfaces only
   surfaceId?: string;
-  // presence - exit animation runs before children unmount when this flips
-  // to false
   open?: boolean;
-  // called after exit and children have unmounted
   onExitComplete?: () => void;
   children?: ReactNode;
 }
@@ -111,9 +105,7 @@ export const MotionSurface = forwardRef<HTMLDivElement, MotionSurfaceProps>(
 );
 
 export interface MotionSurfaceOriginProps extends SafeDivProps {
-  // named motion intent - must be shared-element surface
   surface: MotionSurfaceName;
-  // pair this origin with `MotionSurface` it morphs into
   surfaceId: string;
   children?: ReactNode;
 }

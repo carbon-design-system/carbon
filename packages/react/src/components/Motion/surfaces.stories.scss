@@ -1,0 +1,32 @@
+//
+// Copyright IBM Corp. 2026
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use '@carbon/styles/scss/spacing' as *;
+
+.motion-surface-demo__grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $spacing-05;
+}
+
+.motion-surface-demo__origin {
+  inline-size: 18rem;
+}
+
+.motion-surface-demo__trigger {
+  display: inline-block;
+}
+
+// Motion owns the container's transform and opacity while a morph runs.
+// Neutralize the stock modal container transitions/animations so the CSS
+// engine does not fight the inline values Motion writes each frame.
+// stylelint-disable declaration-no-important
+.motion-surface-demo__container {
+  animation: none !important;
+  transition: none !important;
+}
+// stylelint-enable declaration-no-important
