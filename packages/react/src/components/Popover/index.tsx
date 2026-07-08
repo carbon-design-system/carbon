@@ -280,15 +280,13 @@ export const Popover: PopoverComponent & {
   useEvent(popover, 'keydown', (event) => {
     if (event.key !== 'Escape') return;
 
-    // Esc should only close the popover if focus lives inside the popover content
+    // Esc should only close the popover if focus is inside the popover content
     if (!refs.floating.current?.contains(document.activeElement)) {
       return;
     }
     onRequestClose?.();
 
-    // Return focus to the trigger. It's rendered before `PopoverContent`, so
-    // the first tabbable element in the container is the trigger's focusable
-    // element.
+    // return focus to the trigger while making sure it is tabbable
     const trigger =
       popover.current?.querySelector<HTMLElement>(selectorTabbable);
     trigger?.focus();

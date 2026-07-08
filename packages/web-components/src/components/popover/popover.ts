@@ -152,7 +152,7 @@ class CDSPopover extends HostListenerMixin(LitElement) {
     }
 
     if (event.key === 'Escape') {
-      // Esc should only close the popover if focus lives inside the popover content
+      // Esc should only close the popover if focus is inside the popover content
       const content = this.querySelector(
         (this.constructor as typeof CDSPopover).selectorPopoverContent
       );
