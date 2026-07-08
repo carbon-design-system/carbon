@@ -323,9 +323,9 @@ class CDSDatePickerInput extends FocusMixin(LitElement) {
     const formRequirement = html`
       <div
         class="${prefix}--form-requirement"
-        ?hidden="${!normalizedProps.invalid &&
-        !normalizedProps.warn &&
-        !normalizedProps.disabled}">
+        ?hidden="${(!normalizedProps.invalid && !normalizedProps.warn) ||
+        disabled ||
+        readonly}">
         <slot name="${normalizedProps['slot-name']}">
           ${normalizedProps['slot-text']}
         </slot>
@@ -362,7 +362,9 @@ class CDSDatePickerInput extends FocusMixin(LitElement) {
         ? html`
             <hr
               class="${prefix}--date-picker__divider"
-              ?hidden="${!normalizedProps.invalid && !normalizedProps.warn}" />
+              ?hidden="${(!normalizedProps.invalid && !normalizedProps.warn) ||
+              disabled ||
+              readonly}" />
             ${formRequirement}
           `
         : formRequirement}

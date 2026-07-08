@@ -73,6 +73,10 @@ export const Simple = {
             invalid-text="${invalidText}"
             ?warn="${warn}"
             warn-text="${warnText}">
+            <cds-toggletip autoAlign="true" slot="label-text">
+              Label
+              <p slot="body-text">Additional field information here.</p>
+            </cds-toggletip>
           </cds-fluid-date-picker-input>
         </cds-fluid-date-picker>
       </div>
