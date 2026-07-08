@@ -49,7 +49,7 @@ const controls = {
   closeOnActivation: {
     control: 'boolean',
     description:
-      'Determines wether the tooltip should close when inner content is activated (click, Enter or Space)',
+      'Determines whether the tooltip should close when inner content is activated (click, Enter or Space)',
   },
   defaultOpen: {
     control: 'boolean',
