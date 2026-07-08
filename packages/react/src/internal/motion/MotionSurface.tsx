@@ -7,6 +7,8 @@
 
 import React, {
   forwardRef,
+  useCallback,
+  useContext,
   useEffect,
   useRef,
   type HTMLAttributes,
@@ -14,6 +16,7 @@ import React, {
 } from 'react';
 import { AnimatePresence, motion } from 'motion/react';
 import type { MotionSurfaceName } from '@carbon/motion';
+import { PresenceHoldContext } from '../usePresenceContext';
 import { warning } from '../warning';
 import { useMotionSurface } from './useMotionSurface';
 
@@ -47,6 +50,9 @@ export const MotionSurface = forwardRef<HTMLDivElement, MotionSurfaceProps>(
   ) {
     const resolved = useMotionSurface(surface);
     const { enabled } = resolved;
+    // enclosing Carbon presence (ModalPresence etc.), if any
+    const presence = useContext(PresenceHoldContext);
+    const releaseHoldRef = useRef<(() => void) | null>(null);
 
     warning(
       !(resolved.kind === 'shared-element' && !surfaceId),
@@ -54,14 +60,46 @@ export const MotionSurface = forwardRef<HTMLDivElement, MotionSurfaceProps>(
         'needs a `surfaceId` that matches a `MotionSurfaceOrigin`.'
     );
 
-    // is never rendered - `onExitComplete` by hand
+    // Carbon presence only watches CSS animations, so it can't see Motion's
+    // rAF-driven exit - hold it open until the exit finishes. With motion
+    // disabled AnimatePresence never renders, so honor `onExitComplete` by
+    // hand instead.
     const wasOpen = useRef(open);
     useEffect(() => {
-      if (!enabled && wasOpen.current && !open) {
-        onExitComplete?.();
-      }
+      const wasOpenBefore = wasOpen.current;
       wasOpen.current = open;
-    }, [enabled, onExitComplete, open]);
+
+      if (!enabled) {
+        releaseHoldRef.current?.();
+        releaseHoldRef.current = null;
+        if (wasOpenBefore && !open) {
+          onExitComplete?.();
+        }
+        return;
+      }
+
+      if (!open && wasOpenBefore && presence) {
+        releaseHoldRef.current ??= presence.holdExit();
+      } else if (open) {
+        // reopened before the exit finished
+        releaseHoldRef.current?.();
+        releaseHoldRef.current = null;
+      }
+    }, [enabled, onExitComplete, open, presence]);
+
+    // release an outstanding hold if this surface unmounts mid-exit
+    useEffect(
+      () => () => {
+        releaseHoldRef.current?.();
+      },
+      []
+    );
+
+    const handleExitComplete = useCallback(() => {
+      releaseHoldRef.current?.();
+      releaseHoldRef.current = null;
+      onExitComplete?.();
+    }, [onExitComplete]);
 
     if (!enabled) {
       return open ? (
@@ -73,7 +111,7 @@ export const MotionSurface = forwardRef<HTMLDivElement, MotionSurfaceProps>(
 
     if (resolved.kind === 'shared-element') {
       return (
-        <AnimatePresence initial={false} onExitComplete={onExitComplete}>
+        <AnimatePresence initial={false} onExitComplete={handleExitComplete}>
           {open && (
             <motion.div
               ref={ref}
@@ -88,7 +126,7 @@ export const MotionSurface = forwardRef<HTMLDivElement, MotionSurfaceProps>(
     }
 
     return (
-      <AnimatePresence initial={false} onExitComplete={onExitComplete}>
+      <AnimatePresence initial={false} onExitComplete={handleExitComplete}>
         {open && (
           <motion.div
             ref={ref}
