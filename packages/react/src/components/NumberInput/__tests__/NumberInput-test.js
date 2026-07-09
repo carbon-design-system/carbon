@@ -27,6 +27,10 @@ function translateWithId(id) {
     return 'decrement';
   }
 
+  if (id === 'carbon.number-input.read-only') {
+    return 'Read only';
+  }
+
   throw new Error(`Unknown message id: ${id}`);
 }
 
