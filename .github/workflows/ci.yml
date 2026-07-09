@@ -111,9 +111,14 @@ jobs:
           yarn carbon-cli check --ignore '**/@(node_modules|examples|components|react|fixtures|compat)/**' 'packages/**/*.scss'
       - name: Run tests
         run: yarn test --ci --collectCoverage
+      - name: Run scss-generator tests
+        run: yarn test:scss-generator --ci
+      - name: Merge coverage reports
+        run: cat coverage/scss-generator/lcov.info >> coverage/lcov.info
       - name: Upload coverage reports to Codecov with GitHub Action
         uses: codecov/codecov-action@fb8b3582c8e4def4969c97caa2f19720cb33a72f # v7.0.0
         with:
+          files: ./coverage/lcov.info
           flags: main-packages
         env:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
@@ -212,7 +217,7 @@ jobs:
         env:
           YARN_ENABLE_HARDENED_MODE: 0
         run: yarn install --immutable
-      - uses: dorny/paths-filter@fbd0ab8f3e69293af611ebaee6363fc25e6d187d # v4.0.1
+      - uses: dorny/paths-filter@7b450fff21473bca461d4b92ce414b9d0420d706 # v4.0.2
         id: filter
         with:
           token: ${{ github.token }}
@@ -436,7 +441,7 @@ jobs:
         run: yarn workspace @carbon/react storybook:build --stats-json
       - id: chromatic
         name: Run Chromatic
-        uses: chromaui/action@98132da0fca2211fb41b3af7b49ce85176007851 # v17.8.0
+        uses: chromaui/action@94713c544284a14195de3b50ef24301579f1877e # v18.0.1
         with:
           # 👇 Token is intentionally plaintext
           # https://www.chromatic.com/docs/github-actions/#run-chromatic-on-external-forks-of-open-source-projects

@@ -25,6 +25,7 @@
     "postinstall": "husky",
     "telemetry:config": "lerna run telemetry:config",
     "test": "cross-env BABEL_ENV=test jest",
+    "test:scss-generator": "cross-env BABEL_ENV=test NODE_OPTIONS=--experimental-vm-modules jest --runTestsByPath packages/scss-generator/__tests__/scss-test.js --runInBand --testPathIgnorePatterns=packages/web-components/ --collectCoverage --collectCoverageFrom='packages/scss-generator/src/**/*.js' --coverageDirectory=coverage/scss-generator --coveragePathIgnorePatterns=packages/web-components/",
     "test:e2e": "cross-env BABEL_ENV=test jest -c jest.e2e.config.js"
   },
   "resolutions": {
