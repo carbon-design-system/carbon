@@ -6,26 +6,14 @@
   document.documentElement.setAttribute('lang', 'en');
 </script>
 <style type="text/css">
+  body {
+    color-scheme: light dark;
+  }
+
   .cds-ce-doc--demo-iframe {
     width: 100%;
     height: 120px;
     border: 1px solid var(--cds-ui-03, #e0e0e0);
-  }
-  .sbdocs-li {
-    list-style: circle;
-  }
-
-  .sbdocs-wrapper .sbdocs-a {
-    color: #0f62fe;
-  }
-
-  .sbdocs-wrapper .sbdocs-a:hover {
-    color: #0353e9;
-  }
-
-  .sbdocs-wrapper .sbdocs-h2 {
-    padding-bottom: 12px;
-    margin-bottom: 0;
   }
 
   .sb-show-main.sb-main-padded {
@@ -33,6 +21,7 @@
     flex-direction: column;
     align-items: center;
     padding: 42px;
+    transition: initial;
   }
 
   body #storybook-root {
