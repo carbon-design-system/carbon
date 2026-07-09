@@ -13590,7 +13590,35 @@ Map {
   "preview__IconIndicator" => {
     "$$typeof": Symbol(react.forward_ref),
     "propTypes": {
+      "align": {
+        "args": [
+          [
+            "top",
+            "top-start",
+            "top-end",
+            "bottom",
+            "bottom-start",
+            "bottom-end",
+            "left",
+            "left-start",
+            "left-end",
+            "right",
+            "right-start",
+            "right-end",
+          ],
+        ],
+        "type": "oneOf",
+      },
+      "autoAlign": {
+        "type": "bool",
+      },
       "className": {
+        "type": "string",
+      },
+      "compact": {
+        "type": "bool",
+      },
+      "iconDescription": {
         "type": "string",
       },
       "kind": {
@@ -13838,8 +13866,33 @@ Map {
   "preview__ShapeIndicator" => {
     "$$typeof": Symbol(react.forward_ref),
     "propTypes": {
+      "align": {
+        "args": [
+          [
+            "top",
+            "top-start",
+            "top-end",
+            "bottom",
+            "bottom-start",
+            "bottom-end",
+            "left",
+            "left-start",
+            "left-end",
+            "right",
+            "right-start",
+            "right-end",
+          ],
+        ],
+        "type": "oneOf",
+      },
+      "autoAlign": {
+        "type": "bool",
+      },
       "className": {
         "type": "string",
+      },
+      "compact": {
+        "type": "bool",
       },
       "kind": {
         "args": [
@@ -13862,6 +13915,9 @@ Map {
       },
       "label": {
         "isRequired": true,
+        "type": "string",
+      },
+      "shapeDescription": {
         "type": "string",
       },
       "textSize": {
@@ -15576,7 +15632,35 @@ Map {
   "unstable__IconIndicator" => {
     "$$typeof": Symbol(react.forward_ref),
     "propTypes": {
+      "align": {
+        "args": [
+          [
+            "top",
+            "top-start",
+            "top-end",
+            "bottom",
+            "bottom-start",
+            "bottom-end",
+            "left",
+            "left-start",
+            "left-end",
+            "right",
+            "right-start",
+            "right-end",
+          ],
+        ],
+        "type": "oneOf",
+      },
+      "autoAlign": {
+        "type": "bool",
+      },
       "className": {
+        "type": "string",
+      },
+      "compact": {
+        "type": "bool",
+      },
+      "iconDescription": {
         "type": "string",
       },
       "kind": {
@@ -15824,8 +15908,33 @@ Map {
   "unstable__ShapeIndicator" => {
     "$$typeof": Symbol(react.forward_ref),
     "propTypes": {
+      "align": {
+        "args": [
+          [
+            "top",
+            "top-start",
+            "top-end",
+            "bottom",
+            "bottom-start",
+            "bottom-end",
+            "left",
+            "left-start",
+            "left-end",
+            "right",
+            "right-start",
+            "right-end",
+          ],
+        ],
+        "type": "oneOf",
+      },
+      "autoAlign": {
+        "type": "bool",
+      },
       "className": {
         "type": "string",
+      },
+      "compact": {
+        "type": "bool",
       },
       "kind": {
         "args": [
@@ -15848,6 +15957,9 @@ Map {
       },
       "label": {
         "isRequired": true,
+        "type": "string",
+      },
+      "shapeDescription": {
         "type": "string",
       },
       "textSize": {
