@@ -796,6 +796,9 @@ Map {
       "title": {
         "type": "string",
       },
+      "translateWithId": {
+        "type": "func",
+      },
       "warn": {
         "type": "bool",
       },
@@ -8457,6 +8460,9 @@ Map {
         "type": "bool",
       },
       "slug": [Function],
+      "translateWithId": {
+        "type": "func",
+      },
       "value": {
         "args": [
           [
@@ -8862,6 +8868,9 @@ Map {
         "type": "oneOf",
       },
       "slug": [Function],
+      "translateWithId": {
+        "type": "func",
+      },
       "warn": {
         "type": "bool",
       },
@@ -11268,6 +11277,9 @@ Map {
       },
       "toggled": {
         "type": "bool",
+      },
+      "translateWithId": {
+        "type": "func",
       },
     },
   },
