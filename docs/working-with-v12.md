@@ -8,7 +8,7 @@ Storybook environment.
 
 ## v12 Storybooks
 
-The v12 storybooks are ran separately from the existing ones and use different
+The v12 storybooks are run separately from the existing ones and use different
 ports so they can be open at the same time.
 
 ```sh

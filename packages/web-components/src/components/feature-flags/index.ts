@@ -102,7 +102,7 @@ class FeatureFlagsElement extends LitElement {
     for (const [flag, relatedComponent] of Object.entries(
       FeatureFlagsElement.flagComponentMap
     )) {
-      if (!relatedComponent || flag === 'enable-v12-release') {
+      if (!relatedComponent) {
         continue;
       }
 
@@ -113,27 +113,50 @@ class FeatureFlagsElement extends LitElement {
         isEnabled = false;
       }
 
-      if (!isEnabled) {
-        continue;
-      }
-
       for (const element of this.querySelectorAll(
         relatedComponent.toLowerCase()
       )) {
-        element.setAttribute(flag, '');
+        if (findParentFeatureFlags(element as HTMLElement) !== this) {
+          continue;
+        }
+
+        if (isEnabled) {
+          element.setAttribute(flag, '');
+        } else {
+          element.removeAttribute(flag);
+        }
       }
     }
   }
 
-  private getParentScope() {
-    let parent = this.parentNode;
+  private getParentFeatureFlagsElement() {
+    let parent: Node | null = this.parentNode;
     while (parent) {
+      if (parent instanceof ShadowRoot) {
+        parent = parent.host;
+        continue;
+      }
       if (parent instanceof FeatureFlagsElement) {
-        return parent.getScope();
+        return parent;
       }
       parent = parent.parentNode;
     }
     return null;
+  }
+
+  private getParentScope() {
+    return this.getParentFeatureFlagsElement()?.getScope() ?? null;
+  }
+
+  private syncChildFeatureFlagScopes() {
+    for (const element of this.querySelectorAll('feature-flags')) {
+      if (
+        element instanceof FeatureFlagsElement &&
+        element.getParentFeatureFlagsElement() === this
+      ) {
+        element.updateScope();
+      }
+    }
   }
 
   private updateScope() {
@@ -144,6 +167,7 @@ class FeatureFlagsElement extends LitElement {
     }
     this.scope = newScope;
     this.syncFeatureFlagAttributes();
+    this.syncChildFeatureFlagScopes();
   }
 
   render() {
