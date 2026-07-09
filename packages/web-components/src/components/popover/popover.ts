@@ -152,6 +152,9 @@ class CDSPopover extends HostListenerMixin(LitElement) {
     }
 
     if (event.key === 'Escape') {
+      if (event.defaultPrevented) {
+        return;
+      }
       // Esc should only close the popover if focus is inside the popover content
       const content = this.querySelector(
         (this.constructor as typeof CDSPopover).selectorPopoverContent
@@ -187,9 +190,10 @@ class CDSPopover extends HostListenerMixin(LitElement) {
         );
 
         // return focus to the trigger
-        const trigger =
-          this._triggerSlotNode.assignedElements()[0] as HTMLElement;
-        trigger?.focus();
+        const trigger = this._triggerSlotNode.assignedElements()[0];
+        if (trigger instanceof HTMLElement) {
+          trigger.focus();
+        }
       }
     }
   }

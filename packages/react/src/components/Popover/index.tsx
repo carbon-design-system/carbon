@@ -277,8 +277,8 @@ export const Popover: PopoverComponent & {
     }
   });
 
-  useEvent(popover, 'keydown', (event) => {
-    if (event.key !== 'Escape') return;
+  useWindowEvent('keydown', (event) => {
+    if (!open || event.key !== 'Escape' || event.defaultPrevented) return;
 
     // Esc should only close the popover if focus is inside the popover content
     if (!refs.floating.current?.contains(document.activeElement)) {

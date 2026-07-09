@@ -626,6 +626,37 @@ describe('cds-popover focusout/outsideclick', () => {
     expect(document.activeElement).to.equal(trigger);
   });
 
+  it('does NOT close when a control inside the content handles Escape via preventDefault', async () => {
+    const el = await fixture(html`
+      <div>
+        <cds-popover open id="popover">
+          <button id="trigger" type="button">Test</button>
+          <cds-popover-content>
+            <button id="inside">Inside</button>
+          </cds-popover-content>
+        </cds-popover>
+      </div>
+    `);
+
+    await el.updateComplete;
+    const popover = el.querySelector('#popover');
+    const inside = popover.querySelector('#inside');
+
+    inside.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape') {
+        event.preventDefault();
+      }
+    });
+
+    inside.focus();
+    await el.updateComplete;
+
+    await sendKeys({ press: 'Escape' });
+    await el.updateComplete;
+
+    expect(popover.hasAttribute('open')).to.be.true;
+  });
+
   it('should properly handle keyboard nav within elements inside popover', async () => {
     const el = await fixture(html`
       <cds-popover open id="popover">
