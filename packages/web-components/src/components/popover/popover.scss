@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2019, 2025
+ * Copyright IBM Corp. 2019, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -47,7 +47,7 @@ $popover-border-color: custom-property.get-var(
   ::slotted(.#{$prefix}--popover--tab-tip__button) {
     @include popover-tab-tip-button;
 
-    color: theme.$icon-primary;
+    // color: theme.$icon-primary;
   }
 }
 
