@@ -637,6 +637,8 @@ class CDSOverflowMenu
       case OVERFLOW_MENU_SIZE.LARGE:
         return MENU_SIZE.LARGE;
       default:
+        // TODO: Remove fallback to `md` when contextual layout token support
+        // is implemented for `cds-menu`.
         return MENU_SIZE.MEDIUM;
     }
   }
