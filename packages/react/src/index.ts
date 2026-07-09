@@ -722,5 +722,9 @@ export type { BaseSwitcherProps } from './components/UIShell/Switcher';
 export type { SwitcherDividerProps } from './components/UIShell/SwitcherDivider';
 export type { SwitcherItemProps } from './components/UIShell/SwitcherItem';
 
+//truncated text
+export { TruncatedText } from './components/ibm-products/TruncatedText';
+export type { TruncatedTextProps } from './components/ibm-products/TruncatedText';
+
 //unordered list
 export type { UnorderedListProps } from './components/UnorderedList/UnorderedList';

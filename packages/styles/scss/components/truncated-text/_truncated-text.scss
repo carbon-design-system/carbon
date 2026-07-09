@@ -1,0 +1,55 @@
+//
+// Copyright IBM Corp. 2025
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+//-----------------------------
+// Truncated text
+//-----------------------------
+
+@use '../../config' as *;
+@use '../../theme';
+
+/// Truncated text styles
+/// @access public
+/// @group truncated-text
+@mixin truncated-text {
+  .#{$prefix}--truncated-text {
+    &__text-content {
+      display: -webkit-box;
+      overflow: hidden;
+      -webkit-box-orient: vertical;
+      line-height: initial;
+      text-overflow: clip;
+    }
+
+    &__expand-toggle {
+      color: theme.$link-primary;
+      cursor: pointer;
+
+      &:focus-visible {
+        outline: 2px solid theme.$focus;
+        outline-offset: 2px;
+      }
+    }
+
+    &__tooltip-trigger {
+      display: inline;
+      padding: 0;
+      border: 0;
+      background: none;
+      color: inherit;
+      cursor: default;
+      font: inherit;
+      text-align: inherit;
+
+      &:focus-visible {
+        display: inline-block;
+        outline: 2px solid theme.$focus;
+        outline-offset: 2px;
+      }
+    }
+  }
+}
