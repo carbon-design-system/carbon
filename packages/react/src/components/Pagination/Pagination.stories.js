@@ -274,10 +274,7 @@ export const WithRenderPageSelect = (args) => (
         max={totalPages}
         value={currentPage}
         onChange={(_e, { value }) => {
-          const next = Number(value);
-          if (next >= 1 && next <= totalPages) {
-            onSetPage(next);
-          }
+          onSetPage(Number(value));
         }}
       />
     )}

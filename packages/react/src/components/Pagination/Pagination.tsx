@@ -128,7 +128,7 @@ export interface PaginationProps
     totalPages: number;
     /** Current page size. */
     currentPageSize: number;
-    /** Call this to change the active page. */
+    /** Sets the active page (clamped to valid range). */
     onSetPage: (page: number) => void;
   }) => React.ReactNode;
 
@@ -428,6 +428,16 @@ const Pagination = React.forwardRef(
       }
     }
 
+    function handleSetPage(nextPage: number) {
+      if (disabled || pageInputDisabled) return;
+      const clamped = Math.min(Math.max(nextPage, 1), totalPages);
+      if (clamped === page) return;
+      setPage(clamped);
+      if (onChange) {
+        onChange({ page: clamped, pageSize });
+      }
+    }
+
     function incrementPage() {
       const nextPage = page + 1;
       setPage(nextPage);
@@ -523,12 +533,7 @@ const Pagination = React.forwardRef(
                   currentPage: page,
                   totalPages,
                   currentPageSize: pageSize,
-                  onSetPage: (nextPage: number) => {
-                    setPage(nextPage);
-                    if (onChange) {
-                      onChange({ page: nextPage, pageSize });
-                    }
-                  },
+                  onSetPage: handleSetPage,
                 })
               ) : (
                 <Select

@@ -225,7 +225,7 @@ export {
   OverflowMenuV2 as preview_OverflowMenuV2,
 } from './components/OverflowMenuV2';
 // unstable_Pagination / preview_Pagination are deprecated. Use the stable
-// `Pagination` component with the `pageSelectRenderer` prop instead.
+// `Pagination` component with the `renderPageSelect` prop instead.
 // TODO: These exports will be removed in v12.
 export {
   PageSelector as unstable_PageSelector,
