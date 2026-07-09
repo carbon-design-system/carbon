@@ -22,6 +22,9 @@
 @use '@carbon/styles/scss/utilities/skeleton' as *;
 @use '@carbon/styles/scss/utilities/update_fields_on_layer' as *;
 
+@include emit-layout-context-classes();
+@include emit-layout-context-classes('density');
+
 $inset-transition: inset 110ms motion(standard, productive);
 
 :host(#{$prefix}-tabs),
