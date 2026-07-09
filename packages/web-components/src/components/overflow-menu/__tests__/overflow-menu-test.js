@@ -30,9 +30,109 @@ describe('cds-overflow-menu', () => {
     </cds-overflow-menu-body>
   </cds-overflow-menu>`;
 
+  const emulateMissingFocusPseudoClass = (el) => {
+    const triggerButton = el.shadowRoot.querySelector('button');
+    const matches = triggerButton.matches.bind(triggerButton);
+    triggerButton.matches = (selector) =>
+      selector === ':focus' ? false : matches(selector);
+  };
+
+  const emulateNativeFocusPseudoClass = (el) => {
+    const triggerButton = el.shadowRoot.querySelector('button');
+    const matches = triggerButton.matches.bind(triggerButton);
+    triggerButton.matches = (selector) =>
+      selector === ':focus' ? true : matches(selector);
+  };
+
   it('should render', async () => {
     const el = await fixture(basicOverflowMenu);
     expect(el);
+  });
+
+  it('should use the native programmatic focus state when available', async () => {
+    const el = await fixture(basicOverflowMenu);
+    const tooltip = el.shadowRoot.querySelector('cds-tooltip');
+    const triggerButton = el.shadowRoot.querySelector('button');
+    tooltip.keyboardOnly = true;
+    emulateNativeFocusPseudoClass(el);
+
+    el.focus();
+
+    expect(document.activeElement).to.equal(el);
+    expect(el.shadowRoot?.activeElement).to.equal(triggerButton);
+    expect(el).not.to.have.attribute('data-programmatic-focus');
+    el.shadowRoot.querySelector('button').blur();
+  });
+
+  it('should remove programmatic focus styling on outside pointerdown', async () => {
+    const el = await fixture(basicOverflowMenu);
+    const tooltip = el.shadowRoot.querySelector('cds-tooltip');
+    tooltip.keyboardOnly = true;
+
+    emulateMissingFocusPseudoClass(el);
+    el.focus();
+    expect(el).to.have.attribute('data-programmatic-focus');
+
+    document.body.dispatchEvent(
+      new PointerEvent('pointerdown', { bubbles: true, composed: true })
+    );
+
+    expect(el).not.to.have.attribute('data-programmatic-focus');
+    el.shadowRoot.querySelector('button').blur();
+  });
+
+  it('should remove programmatic focus styling when focus moves outside', async () => {
+    const el = await fixture(basicOverflowMenu);
+    const tooltip = el.shadowRoot.querySelector('cds-tooltip');
+    tooltip.keyboardOnly = true;
+
+    emulateMissingFocusPseudoClass(el);
+    el.focus();
+    expect(el).to.have.attribute('data-programmatic-focus');
+
+    document.body.dispatchEvent(
+      new FocusEvent('focusin', { bubbles: true, composed: true })
+    );
+
+    expect(el).not.to.have.attribute('data-programmatic-focus');
+    el.shadowRoot.querySelector('button').blur();
+  });
+
+  it('should open the tooltip when the native focus event is missing', async () => {
+    const el = await fixture(html`
+      <cds-overflow-menu enter-delay-ms="0">
+        <span slot="tooltip-content">Options</span>
+        <cds-overflow-menu-body>
+          <cds-overflow-menu-item>Filter A</cds-overflow-menu-item>
+        </cds-overflow-menu-body>
+      </cds-overflow-menu>
+    `);
+    const tooltip = el.shadowRoot.querySelector('cds-tooltip');
+
+    emulateMissingFocusPseudoClass(el);
+    el.focus();
+    await new Promise((resolve) => setTimeout(resolve, 0));
+    await tooltip.updateComplete;
+
+    expect(tooltip.open).to.be.true;
+    el.shadowRoot.querySelector('button').blur();
+  });
+
+  it('should not style programmatic focus when disabled', async () => {
+    const el = await fixture(html`
+      <cds-overflow-menu disabled>
+        <span slot="tooltip-content">Options</span>
+        <cds-overflow-menu-body>
+          <cds-overflow-menu-item>Filter A</cds-overflow-menu-item>
+        </cds-overflow-menu-body>
+      </cds-overflow-menu>
+    `);
+    const tooltip = el.shadowRoot.querySelector('cds-tooltip');
+    tooltip.keyboardOnly = true;
+
+    el.focus();
+
+    expect(el).not.to.have.attribute('data-programmatic-focus');
   });
 
   describe('supports size', () => {
