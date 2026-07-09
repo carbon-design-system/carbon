@@ -126,11 +126,7 @@ class CDSHeaderGlobalAction extends CDSButton {
       if (panel) {
         const expanded = panel.hasAttribute('expanded');
 
-        if (expanded) {
-          panel.removeAttribute('expanded');
-        } else {
-          panel.setAttribute('expanded', '');
-        }
+        panel.toggleAttribute('expanded', !expanded);
 
         const active = !this.active;
         this.active = active;
