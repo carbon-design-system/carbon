@@ -153,7 +153,7 @@ export interface PaginationProps
   pageText?: (page: number, pagesUnknown?: boolean) => string;
 
   /**
-   * `true` if the total number of items is unknown.
+   * `true` if the total number of items is unknown. Does not render the page selector.
    */
   pagesUnknown?: boolean;
 
