@@ -1,6 +1,6 @@
 // prettier-ignore
 import {
-  Tearsheet,
+  preview__Tearsheet as Tearsheet,
   previewCandidate__InlineTip as InlineTip,
   previewCandidate__SearchBar as SearchBar,
 } from '@carbon/ibm-products';

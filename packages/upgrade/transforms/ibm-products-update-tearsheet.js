@@ -310,13 +310,12 @@ function transform(fileInfo, api) {
   const j = api.jscodeshift;
   const root = j(fileInfo.source);
 
-  let importsTransformed = false;
   let jsxTransformed = false;
 
-  // Track local names for Tearsheet imports
-  const tearsheetLocalNames = new Map();
+  // Track local names for Tearsheet imports and their original imported names
+  const tearsheetLocalNames = new Map(); // localName -> importedName
 
-  // Transform imports
+  // First pass: identify Tearsheet imports and track local names
   root
     .find(j.ImportDeclaration, {
       source: {
@@ -324,9 +323,6 @@ function transform(fileInfo, api) {
       },
     })
     .forEach((path) => {
-      const seen = new Set();
-      const newSpecifiers = [];
-
       path.node.specifiers.forEach((specifier) => {
         if (specifier.type === 'ImportSpecifier') {
           const importedName = specifier.imported.name;
@@ -334,42 +330,18 @@ function transform(fileInfo, api) {
             ? specifier.local.name
             : importedName;
 
-          // Check if this is Tearsheet
+          // Track Tearsheet imports
           if (
             importedName === 'Tearsheet' ||
             importedName === 'preview__Tearsheet'
           ) {
-            // Transform to preview__Tearsheet as localName
-            const newImported = j.identifier('preview__Tearsheet');
-            const newLocal = j.identifier(localName);
-            const newSpecifier = j.importSpecifier(newImported, newLocal);
-
-            if (!seen.has(localName)) {
-              newSpecifiers.push(newSpecifier);
-              seen.add(localName);
-              tearsheetLocalNames.set(localName, true);
-              // Only mark as transformed if we're actually changing the import
-              if (importedName === 'Tearsheet') {
-                importsTransformed = true;
-              }
-            }
-          } else {
-            // Keep other imports as-is
-            if (!seen.has(localName)) {
-              newSpecifiers.push(specifier);
-              seen.add(localName);
-            }
+            tearsheetLocalNames.set(localName, importedName);
           }
-        } else {
-          // Keep default imports and namespace imports
-          newSpecifiers.push(specifier);
         }
       });
-
-      path.node.specifiers = newSpecifiers;
     });
 
-  // Transform Tearsheet JSX elements
+  // Second pass: Transform Tearsheet JSX elements
   root.find(j.JSXElement).forEach((path) => {
     const openingElement = path.node.openingElement;
     if (openingElement.name.type === 'JSXIdentifier') {
@@ -384,7 +356,55 @@ function transform(fileInfo, api) {
     }
   });
 
-  if (importsTransformed || jsxTransformed) {
+  // Third pass: Only transform imports if JSX was transformed
+  if (jsxTransformed) {
+    root
+      .find(j.ImportDeclaration, {
+        source: {
+          value: '@carbon/ibm-products',
+        },
+      })
+      .forEach((path) => {
+        const seen = new Set();
+        const newSpecifiers = [];
+
+        path.node.specifiers.forEach((specifier) => {
+          if (specifier.type === 'ImportSpecifier') {
+            const importedName = specifier.imported.name;
+            const localName = specifier.local
+              ? specifier.local.name
+              : importedName;
+
+            // Check if this is Tearsheet
+            if (
+              importedName === 'Tearsheet' ||
+              importedName === 'preview__Tearsheet'
+            ) {
+              // Transform to preview__Tearsheet as localName
+              const newImported = j.identifier('preview__Tearsheet');
+              const newLocal = j.identifier(localName);
+              const newSpecifier = j.importSpecifier(newImported, newLocal);
+
+              if (!seen.has(localName)) {
+                newSpecifiers.push(newSpecifier);
+                seen.add(localName);
+              }
+            } else {
+              // Keep other imports as-is
+              if (!seen.has(localName)) {
+                newSpecifiers.push(specifier);
+                seen.add(localName);
+              }
+            }
+          } else {
+            // Keep default imports and namespace imports
+            newSpecifiers.push(specifier);
+          }
+        });
+
+        path.node.specifiers = newSpecifiers;
+      });
+
     return root.toSource({ quote: 'single', trailingComma: true });
   }
 
