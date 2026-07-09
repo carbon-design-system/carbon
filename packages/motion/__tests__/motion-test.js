@@ -144,4 +144,40 @@ describe('@carbon/motion', () => {
       'Unable to find motion surface `nope`. Expected one of: disclosure, contextual, expand, invoke'
     );
   });
+
+  // the mixin emits resting styles plus entrance transitions. also includes
+  // starting styles behind reduce-motion preference guard
+  test('surface mixin emits reveal styles behind a reduced-motion guard', async () => {
+    const { result } = await render(`
+      @use '../index.scss' as motion;
+
+      .surface {
+        @include motion.surface(contextual);
+      }
+    `);
+    const css = result.css;
+
+    expect(css).toContain('opacity: 1');
+    expect(css).toContain('transform: scale(1)');
+    expect(css).toContain('@media (prefers-reduced-motion: no-preference)');
+    expect(css).toContain('transition-duration: 110ms');
+    expect(css).toContain('transition-property: opacity, transform');
+    expect(css).toContain(
+      'transition-timing-function: cubic-bezier(0, 0, 0.3, 1)'
+    );
+    expect(css).toContain('@starting-style');
+    expect(css).toContain('transform: scale(0.96)');
+  });
+
+  test('surface mixin rejects shared-element surfaces', async () => {
+    await expect(
+      render(`
+        @use '../index.scss' as motion;
+
+        .surface {
+          @include motion.surface(expand);
+        }
+      `)
+    ).rejects.toThrow(/shared-element morph with no CSS-only form/);
+  });
 });

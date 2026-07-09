@@ -5,6 +5,7 @@
 // LICENSE file in the root directory of this source tree.
 //
 
+@use 'sass:list';
 @use 'sass:map';
 @use 'scss/generated/surfaces' as generated;
 
@@ -151,4 +152,70 @@ $surfaces: generated.$surfaces;
   }
 
   @return map.get($definition, $property);
+}
+
+/// Surface duration tokens mapped to their duration values
+/// @access private
+/// @group @carbon/motion
+$-durations: (
+  'fast-01': $duration-fast-01,
+  'fast-02': $duration-fast-02,
+  'moderate-01': $duration-moderate-01,
+  'moderate-02': $duration-moderate-02,
+  'slow-01': $duration-slow-01,
+  'slow-02': $duration-slow-02,
+);
+
+/// Apply a named reveal surface in CSS: the resting enter styles, plus the
+/// entrance transition and `@starting-style` guarded behind
+/// `prefers-reduced-motion: no-preference` - users who prefer reduced motion
+/// get the resting styles with no animation at all
+///
+/// Shared-element surfaces morph one element into another and have no
+/// CSS-only form; they need a JavaScript engine (Motion in React, View
+/// Transitions for web components), so this mixin rejects them
+/// @param {String} $name - The motion surface name
+/// @access public
+/// @group @carbon/motion
+@mixin surface($name) {
+  $definition: surface($name);
+  $kind: map.get($definition, kind);
+
+  @if $kind != 'reveal' {
+    @error 'The #{$name} surface is a shared-element morph with no CSS-only form. Pair it with a JavaScript engine instead.';
+  }
+
+  $enter: map.get($definition, enter);
+  $exit: map.get($definition, exit);
+  $duration: map.get($-durations, map.get($definition, duration));
+  $enter-easing: map.get($definition, enter-easing);
+  $properties: ();
+
+  @each $property, $value in $enter {
+    $properties: list.append($properties, $property, $separator: comma);
+  }
+
+  // resting/open styles apply regardless of motion preference
+  @each $property, $value in $enter {
+    #{$property}: #{$value};
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    // `auto` sizes, e.g. disclosure block-size, interpolate where
+    // supported
+    interpolate-size: allow-keywords;
+    transition-duration: $duration;
+    transition-property: $properties;
+    transition-timing-function: motion(
+      list.nth($enter-easing, 1),
+      list.nth($enter-easing, 2)
+    );
+
+    // the styles the element enters from when it is first rendered
+    @starting-style {
+      @each $property, $value in $exit {
+        #{$property}: #{$value};
+      }
+    }
+  }
 }
