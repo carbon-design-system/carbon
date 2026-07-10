@@ -109,7 +109,7 @@ export const FeatureFlags = ({
       Object.assign(explicitFlags, flags);
     }
 
-    const scope = createScope(explicitFlags) as FeatureFlagScope;
+    const scope = createScope(explicitFlags);
     scope.mergeWithScope(parentScope);
     return scope;
   }, [
