@@ -133,7 +133,7 @@ describe('PageSelector', () => {
     render(<PageSelector currentPage={1} totalPages={2} />);
 
     expect(consoleWarnSpy).toHaveBeenCalledWith(
-      expect.stringContaining('renderPageSelect')
+      '[Carbon] `unstable_PageSelector` / `preview_PageSelector` is deprecated and will be removed in v12. Use `Pagination` with the `renderPageSelect` prop instead.'
     );
 
     process.env.NODE_ENV = originalEnv;

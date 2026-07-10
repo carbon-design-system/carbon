@@ -9,6 +9,7 @@ import { CaretLeft, CaretRight } from '@carbon/icons-react';
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 
 import { IconButton } from '../IconButton';
+import { clamp } from '../../internal/clamp';
 import PropTypes from 'prop-types';
 import Select from '../Select';
 import SelectItem from '../SelectItem';
@@ -429,8 +430,8 @@ const Pagination = React.forwardRef(
     }
 
     function handleSetPage(nextPage: number) {
-      if (disabled || pageInputDisabled) return;
-      const clamped = Math.min(Math.max(nextPage, 1), totalPages);
+      if (disabled || pageInputDisabled || !Number.isInteger(nextPage)) return;
+      const clamped = clamp(nextPage, 1, totalPages);
       if (clamped === page) return;
       setPage(clamped);
       if (onChange) {

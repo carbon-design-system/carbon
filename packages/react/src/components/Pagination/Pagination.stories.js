@@ -264,6 +264,7 @@ export const WithRenderPageSelect = (args) => (
         label="Page number"
         hideLabel
         size={args.size}
+        disabled={args.disabled || args.pageInputDisabled}
         style={{
           minInlineSize: 'unset',
           paddingInline: '1rem',

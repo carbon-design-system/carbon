@@ -706,6 +706,27 @@ describe('Pagination', () => {
       expect(onChange).not.toHaveBeenCalled();
     });
 
+    it('should not call onChange when renderPageSelect calls onSetPage with a non-integer', async () => {
+      const onChange = jest.fn();
+
+      render(
+        <Pagination
+          totalItems={30}
+          pageSizes={[10]}
+          pageSize={10}
+          page={1}
+          onChange={onChange}
+          renderPageSelect={({ onSetPage }) => (
+            <button onClick={() => onSetPage(1.5)}>Go to 1.5</button>
+          )}
+        />
+      );
+
+      await userEvent.click(screen.getByText('Go to 1.5'));
+
+      expect(onChange).not.toHaveBeenCalled();
+    });
+
     it('should not render renderPageSelect when pagesUnknown is true', () => {
       const renderPageSelect = jest.fn(() => <div>custom select</div>);
 

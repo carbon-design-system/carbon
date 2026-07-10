@@ -49,7 +49,6 @@ function Pagination({
           'Use the stable `Pagination` component with the `renderPageSelect` prop instead.'
       );
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const totalPages = totalItems
