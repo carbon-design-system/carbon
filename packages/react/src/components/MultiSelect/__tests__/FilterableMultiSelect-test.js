@@ -7,6 +7,7 @@
 
 import React, { StrictMode } from 'react';
 import { act, render, screen } from '@testing-library/react';
+import { useCombobox } from 'downshift';
 import { getByText } from '@carbon/test-utils/dom';
 import userEvent from '@testing-library/user-event';
 import { FilterableMultiSelect } from '../';
@@ -457,9 +458,10 @@ describe('FilterableMultiSelect', () => {
     await userEvent.click(clearButton);
 
     expect(screen.getByPlaceholderText('test')).toHaveDisplayValue('');
-    expect(onInputValueChange).toHaveBeenCalledWith(
-      expect.objectContaining({ inputValue: '' })
-    );
+    expect(onInputValueChange).toHaveBeenCalledWith({
+      inputValue: '',
+      type: useCombobox.stateChangeTypes.FunctionSetInputValue,
+    });
   });
 
   it('should clear all selections when clicking clear all button', async () => {

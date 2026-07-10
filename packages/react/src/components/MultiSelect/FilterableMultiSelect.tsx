@@ -10,11 +10,8 @@ import cx from 'classnames';
 import Downshift, {
   useCombobox,
   useMultipleSelection,
-  type UseComboboxInputValueChange,
   type UseComboboxProps,
   type UseMultipleSelectionProps,
-  UseComboboxInterface,
-  UseComboboxStateChangeTypes,
   UseMultipleSelectionInterface,
 } from 'downshift';
 import isEqual from 'react-fast-compare';
@@ -90,9 +87,8 @@ const {
   InputChange,
   InputKeyDownEscape,
   FunctionSetHighlightedIndex,
-} = useCombobox.stateChangeTypes as UseComboboxInterface['stateChangeTypes'] & {
-  ToggleButtonClick: UseComboboxStateChangeTypes.ToggleButtonClick;
-};
+  FunctionSetInputValue,
+} = useCombobox.stateChangeTypes;
 
 const {
   SelectedItemKeyDownBackspace,
@@ -824,7 +820,8 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
       setInputValue('');
       onInputValueChange?.({
         inputValue: '',
-      } as UseComboboxInputValueChange<ItemType>);
+        type: FunctionSetInputValue,
+      });
     } else {
       setInputValue(value ?? '');
     }
