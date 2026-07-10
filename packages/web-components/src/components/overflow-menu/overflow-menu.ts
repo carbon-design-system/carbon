@@ -336,7 +336,11 @@ class CDSOverflowMenu
   };
 
   private _clearProgrammaticFocus() {
+    const triggerButton = this._getTriggerButton();
+    const hadProgrammaticFocus = this.hasAttribute('data-programmatic-focus');
+
     this.toggleAttribute('data-programmatic-focus', false);
+    triggerButton?.removeEventListener('blur', this._handleTriggerBlur);
     this.ownerDocument.removeEventListener(
       'pointerdown',
       this._handleDocumentInteraction,
@@ -347,6 +351,10 @@ class CDSOverflowMenu
       this._handleDocumentInteraction,
       true
     );
+
+    if (hadProgrammaticFocus) {
+      triggerButton?.dispatchEvent(new FocusEvent('focusout'));
+    }
   }
 
   connectedCallback() {
@@ -354,9 +362,7 @@ class CDSOverflowMenu
       this.setAttribute('aria-haspopup', 'true');
     }
     if (!this.shadowRoot) {
-      this.attachShadow(
-        (this.constructor as typeof CDSOverflowMenu).shadowRootOptions
-      );
+      this.attachShadow({ mode: 'open' });
     }
     super.connectedCallback();
 
