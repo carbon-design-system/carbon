@@ -156,8 +156,7 @@ class CDSPopover extends HostListenerMixin(LitElement) {
         return;
       }
 
-      // Esc should only close the popover if focus is inside the popover content,
-      // it should also only close its direct parent in the case of nesting
+      // Esc should only close the popover if focus is inside the popover content
       const selectorPopoverContent = (this.constructor as typeof CDSPopover)
         .selectorPopoverContent;
 
