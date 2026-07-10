@@ -125,14 +125,49 @@ describe('AccordionItem', () => {
   });
 
   describe('behaves as expected', () => {
-    it('should close an open AccordionItem panel when the Esc key is pressed', async () => {
+    it('should not close an open AccordionItem panel when the Esc key is pressed', async () => {
       render(
         <AccordionItem title="A heading" open>
           Lorem ipsum.
         </AccordionItem>
       );
-      await userEvent.type(screen.getByRole('button'), '{Escape}');
+      screen.getByRole('button').focus();
+      await userEvent.keyboard('{Escape}');
 
+      expect(screen.getByRole('button')).toHaveAttribute(
+        'aria-expanded',
+        'true'
+      );
+    });
+
+    it('should keep a controlled AccordionItem in sync when the Esc key is pressed', async () => {
+      const onHeadingClick = jest.fn();
+      const { rerender } = render(
+        <AccordionItem title="A heading" open onHeadingClick={onHeadingClick}>
+          Lorem ipsum.
+        </AccordionItem>
+      );
+
+      screen.getByRole('button').focus();
+      await userEvent.keyboard('{Escape}');
+
+      // Escape no longer toggles the panel, so the internal state cannot
+      // drift away from the `open` prop of a controlled parent.
+      expect(onHeadingClick).not.toHaveBeenCalled();
+      expect(screen.getByRole('button')).toHaveAttribute(
+        'aria-expanded',
+        'true'
+      );
+
+      // Updates from the controlled parent should still apply afterwards.
+      rerender(
+        <AccordionItem
+          title="A heading"
+          open={false}
+          onHeadingClick={onHeadingClick}>
+          Lorem ipsum.
+        </AccordionItem>
+      );
       expect(screen.getByRole('button')).toHaveAttribute(
         'aria-expanded',
         'false'
