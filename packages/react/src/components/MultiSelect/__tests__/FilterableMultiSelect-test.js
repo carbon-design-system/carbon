@@ -436,7 +436,7 @@ describe('FilterableMultiSelect', () => {
     );
   });
 
-  it('should call onInputValueChange with empty string when clear icon is clicked', async () => {
+  it('should call onInputValueChange with empty string when clear button is clicked', async () => {
     const onInputValueChange = jest.fn();
     render(
       <FilterableMultiSelect
