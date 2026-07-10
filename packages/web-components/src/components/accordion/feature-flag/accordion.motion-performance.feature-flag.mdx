@@ -1,0 +1,71 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Components/Accordion/Feature Flag" name="Performance Overview" />
+
+# Motion performance
+
+The `Performance playground` story is a standalone story to evaluate the
+performance of motion-vs-native animations.
+
+It is not tied to the Accordion component — it animates simple boxes so the
+rendering-pipeline cost is isolated from component complexity.
+
+## How it works
+
+Pick an `engine`: native CSS, `motion/mini` (~3.2 KB), or full `motion` (~22.7
+KB), an `animate` target, and an `instance count`, then press `Run`. All
+instances animate at once while the harness samples the page's frame timing and
+long-tasks, and reports:
+
+- `FPS` — average frames per second during the run
+- `Jank frames` — frames that took >1.5x at 60fps
+- `Max frame gap` — the worst single frame (ms); spikes = hitches
+- `Long-task time` — total main-thread blocking >50ms (where a JS engine would
+  cost more than CSS)
+
+Pair it with the browser `Performance` panel, and throttle CPU 4-6x to ovserve
+differences.
+
+## The `animate` control = one pipeline tier
+
+The single most important idea: the property animated matters more than the
+engine. Each option maps to a distinct stage of the browser's rendering
+pipeline:
+
+| Option                                              | Pipeline tier | Cost                                                    |
+| --------------------------------------------------- | ------------- | ------------------------------------------------------- |
+| `opacity` (transform + opacity)                     | Composite     | cheapest — GPU fast-path, can run off the main thread   |
+| `box-shadow`                                        | Paint         | repaints every frame (no compositor fast-path)          |
+| `shadow-layer` (opacity of a static-shadow overlay) | Composite     | the performant way to animate elevation                 |
+| `height`                                            | Layout        | reflow + paint + composite every frame (most expensive) |
+
+> Note: there is no `size`/FLIP option for Web Components. Layout/shared-element
+> animations are a `motion/react` feature; the vanilla and `motion/mini` APIs
+> used here can't do them.
+
+`box-shadow` vs `shadow-layer` is the designers' drop-shadow question made
+measurable: animating the shadow (Paint) vs animating a shadow layer's opacity
+(Composite). On a _resizing_ element the layer trick can't help — the overlay
+repaints anyway.
+
+## What the data shows (provisional)
+
+- Up to ~40 simultaneous animations, all engines hold a flat 60fps — at
+  realistic scale, engine choice has no performance impact.
+- Degradation appears only under heavy stress (100-200 at once).
+- Heavy lifting is done at animated properties (`height` = Layout), not the
+  engine. Long-task time stayed 0ms in every run - the motion JS engines added
+  no blocking tasks.
+- Native CSS was _not_ the runtime winner at 200 instances.
+
+At realistic scale, performance is a non-differentiator between native and
+Motion. The decision rests on bundle size, developer experience, and migration -
+see the spike findings docs in this folder.
+
+## Further reading
+
+- [CSS Triggers](https://csstriggers.com/)
+- [Rendering performance](https://web.dev/articles/rendering-performance)
+- [`prefers-reduced-motion`: Sometimes less is movement is more](https://web.dev/articles/prefers-reduced-motion)
+- [How to create high-performance CSS animation](https://web.dev/articles/animations-guide)
+- [Web Animations API Concepts](https://developer.mozilla.org/en-US/docs/Web/API/Web_Animations_API/Web_Animations_API_Concepts)
