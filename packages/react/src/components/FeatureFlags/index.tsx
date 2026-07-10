@@ -44,11 +44,6 @@ type FeatureFlagScope = typeof GlobalFeatureFlags;
  */
 const FeatureFlagContext = createContext<FeatureFlagScope>(GlobalFeatureFlags);
 
-/**
- * Supports an object of feature flag values with the `flags` prop, merging them
- * along with the current `FeatureFlagContext` to provide consumers to check if
- * a feature flag is enabled or disabled in a given React tree
- */
 // Maps each camelCase prop name to its kebab-case feature flag key.
 const PROP_TO_FLAG: Record<string, string> = {
   enableV12TileDefaultIcons: 'enable-v12-tile-default-icons',
@@ -64,6 +59,11 @@ const PROP_TO_FLAG: Record<string, string> = {
   enablePresence: 'enable-presence',
 };
 
+/**
+ * Supports an object of feature flag values with the `flags` prop, merging them
+ * along with the current `FeatureFlagContext` to provide consumers to check if
+ * a feature flag is enabled or disabled in a given React tree
+ */
 export const FeatureFlags = ({
   children,
   flags,

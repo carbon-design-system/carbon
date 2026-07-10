@@ -5,8 +5,9 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import PropTypes from 'prop-types';
 import React from 'react';
-import { FeatureFlags, useFeatureFlags } from '../FeatureFlags';
+import { FeatureFlags, useFeatureFlags } from '.';
 import { Annotation } from '../../../.storybook/templates/Annotation';
 import Tag from '../Tag';
 import { CheckmarkOutline, CloseOutline } from '@carbon/icons-react';
@@ -60,6 +61,10 @@ function FlagList({ overrides = [] }) {
   );
 }
 
+FlagList.propTypes = {
+  overrides: PropTypes.arrayOf(PropTypes.string),
+};
+
 function ScopeView({ label, overrides, children }) {
   return (
     <Annotation type="feature-flags" text={<code>{label}</code>}>
@@ -68,6 +73,12 @@ function ScopeView({ label, overrides, children }) {
     </Annotation>
   );
 }
+
+ScopeView.propTypes = {
+  children: PropTypes.node,
+  label: PropTypes.string,
+  overrides: PropTypes.arrayOf(PropTypes.string),
+};
 
 export const SingleScope = () => (
   <FeatureFlags
