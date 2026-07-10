@@ -281,7 +281,11 @@ export const Popover: PopoverComponent & {
     if (!open || event.key !== 'Escape' || event.defaultPrevented) return;
 
     // Esc should only close the popover if focus is inside the popover content
-    if (!refs.floating.current?.contains(document.activeElement)) {
+    const target = event.target;
+    if (
+      !(target instanceof Element) ||
+      target.closest(`.${prefix}--popover-content`) !== refs.floating.current
+    ) {
       return;
     }
     onRequestClose?.();

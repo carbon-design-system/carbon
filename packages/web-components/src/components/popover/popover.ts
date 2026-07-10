@@ -163,6 +163,16 @@ class CDSPopover extends HostListenerMixin(LitElement) {
         return;
       }
 
+      const target = event.target;
+      if (
+        target instanceof Element &&
+        target.closest(
+          (this.constructor as typeof CDSPopover).selectorPopoverContent
+        ) !== content
+      ) {
+        return;
+      }
+
       if (
         this.dispatchEvent(
           new CustomEvent(

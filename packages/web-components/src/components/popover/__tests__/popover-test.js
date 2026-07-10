@@ -657,6 +657,38 @@ describe('cds-popover focusout/outsideclick', () => {
     expect(popover.hasAttribute('open')).to.be.true;
   });
 
+  it('only closes the innermost popover when nested and pressing Escape', async () => {
+    const el = await fixture(html`
+      <div>
+        <cds-popover open id="outer">
+          <button id="outer-trigger" type="button">Outer</button>
+          <cds-popover-content>
+            <cds-popover open id="inner">
+              <button id="inner-trigger" type="button">Inner</button>
+              <cds-popover-content>
+                <button id="inner-button">Inner button</button>
+              </cds-popover-content>
+            </cds-popover>
+          </cds-popover-content>
+        </cds-popover>
+      </div>
+    `);
+
+    await el.updateComplete;
+    const outer = el.querySelector('#outer');
+    const inner = el.querySelector('#inner');
+    const innerButton = el.querySelector('#inner-button');
+
+    innerButton.focus();
+    await el.updateComplete;
+
+    await sendKeys({ press: 'Escape' });
+    await el.updateComplete;
+
+    expect(inner.hasAttribute('open')).to.be.false;
+    expect(outer.hasAttribute('open')).to.be.true;
+  });
+
   it('should properly handle keyboard nav within elements inside popover', async () => {
     const el = await fixture(html`
       <cds-popover open id="popover">

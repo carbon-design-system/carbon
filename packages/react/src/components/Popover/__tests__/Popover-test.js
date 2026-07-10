@@ -444,6 +444,31 @@ describe('Popover', () => {
 
       expect(onRequestClose).not.toHaveBeenCalled();
     });
+
+    it('should only call onRequestClose for the innermost nested popover on Escape', async () => {
+      const onOuterRequestClose = jest.fn();
+      const onInnerRequestClose = jest.fn();
+
+      render(
+        <Popover open onRequestClose={onOuterRequestClose}>
+          <button>Outer trigger</button>
+          <PopoverContent>
+            <Popover open onRequestClose={onInnerRequestClose}>
+              <button>Inner trigger</button>
+              <PopoverContent>
+                <button data-testid="inner-button">Inner button</button>
+              </PopoverContent>
+            </Popover>
+          </PopoverContent>
+        </Popover>
+      );
+
+      screen.getByTestId('inner-button').focus();
+      await userEvent.keyboard('{Escape}');
+
+      expect(onInnerRequestClose).toHaveBeenCalled();
+      expect(onOuterRequestClose).not.toHaveBeenCalled();
+    });
   });
 
   it('should NOT call onRequestClose when clicking inside the popover content', async () => {
