@@ -10,6 +10,7 @@
 @use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/styles/scss/motion' as *;
 @use '@carbon/styles/scss/utilities/convert';
+@use '@carbon/styles/scss/layout' as *;
 @use '@carbon/styles/scss/components/overflow-menu/overflow-menu' as *;
 
 // https://github.com/carbon-design-system/carbon/issues/11408
@@ -17,26 +18,12 @@
 
 :host(#{$prefix}-overflow-menu),
 :host(#{$prefix}-breadcrumb-overflow-menu) {
+  @include emit-layout-tokens();
   @extend .#{$prefix}--overflow-menu;
 
   ::slotted(.#{$prefix}--overflow-menu__icon) {
     @extend .#{$prefix}--overflow-menu__icon;
   }
-}
-
-:host(#{$prefix}-overflow-menu[size='xs']),
-:host(#{$prefix}-breadcrumb-overflow-menu[size='xs']) {
-  @extend .#{$prefix}--overflow-menu--xs;
-}
-
-:host(#{$prefix}-overflow-menu[size='sm']),
-:host(#{$prefix}-breadcrumb-overflow-menu[size='sm']) {
-  @extend .#{$prefix}--overflow-menu--sm;
-}
-
-:host(#{$prefix}-overflow-menu[size='lg']),
-:host(#{$prefix}-breadcrumb-overflow-menu[size='lg']) {
-  @extend .#{$prefix}--overflow-menu--lg;
 }
 
 :host(#{$prefix}-overflow-menu[disabled]),
@@ -66,6 +53,7 @@
 }
 
 :host(#{$prefix}-overflow-menu-body) {
+  @include emit-layout-tokens();
   @extend .#{$prefix}--overflow-menu-options;
 
   &::after {
@@ -89,18 +77,6 @@
   @extend .#{$prefix}--overflow-menu-options--open;
 }
 
-:host(#{$prefix}-overflow-menu-body[size='xs']) {
-  @extend .#{$prefix}--overflow-menu-options--xs;
-}
-
-:host(#{$prefix}-overflow-menu-body[size='sm']) {
-  @extend .#{$prefix}--overflow-menu-options--sm;
-}
-
-:host(#{$prefix}-overflow-menu-body[size='lg']) {
-  @extend .#{$prefix}--overflow-menu-options--lg;
-}
-
 :host(#{$prefix}-overflow-menu-item) {
   @extend .#{$prefix}--overflow-menu-options__option;
 
@@ -113,18 +89,6 @@
   button:hover {
     background-color: $layer-hover;
   }
-}
-
-:host(#{$prefix}-overflow-menu-item[size='xs']) {
-  block-size: $spacing-06;
-}
-
-:host(#{$prefix}-overflow-menu-item[size='sm']) {
-  block-size: $spacing-07;
-}
-
-:host(#{$prefix}-overflow-menu-item[size='lg']) {
-  block-size: $spacing-09;
 }
 
 :host(#{$prefix}-overflow-menu-item[danger]) {
@@ -245,3 +209,6 @@ $caret-size: convert.to-rem(7px);
     direction: ltr;
   }
 }
+@include emit-layout-tokens-to-shadow-host(#{$prefix}-overflow-menu-body);
+@include emit-layout-tokens-to-shadow-host(#{$prefix}-overflow-menu);
+@include emit-layout-tokens-to-shadow-host(#{$prefix}-breadcrumb-overflow-menu);
