@@ -260,7 +260,7 @@ class CDSOverflowMenu
    * Overflow menu size.
    */
   @property({ reflect: true })
-  size = OVERFLOW_MENU_SIZE.MEDIUM;
+  size?: OVERFLOW_MENU_SIZE | string = undefined;
 
   /**
    * `true` if this menu is a toolbar action
@@ -424,7 +424,7 @@ class CDSOverflowMenu
           menuBody.id ||= this._menuId;
           menuBody.setAttribute('breadcrumb', String(this.breadcrumb));
           menuBody.open = open;
-          menuBody.size = size;
+          menuBody.size = size as OVERFLOW_MENU_SIZE;
         }
       }
     }
@@ -447,9 +447,26 @@ class CDSOverflowMenu
           button?.classList.remove(item);
         }
       });
-      button?.classList.add(`${prefix}--overflow-menu--${this.size}`);
+      this.classList.forEach((item) => {
+        if (item.startsWith(`${prefix}--layout--size-`)) {
+          this.classList.remove(item);
+        }
+      });
 
-      this._tooltip?.setAttribute('size', this.size);
+      if (this.size) {
+        button?.classList.add(`${prefix}--overflow-menu--${this.size}`); // TODO: V12 - Remove this class
+        this.classList.add(`${prefix}--layout--size-${this.size}`);
+      }
+
+      if (this.size) {
+        this._tooltip?.setAttribute('size', this.size);
+      } else {
+        this._tooltip?.removeAttribute('size');
+      }
+
+      if (this._menuBody) {
+        this._menuBody.size = this.size as OVERFLOW_MENU_SIZE;
+      }
     }
 
     if (changedProperties.has('toolbarAction') && this.toolbarAction) {
@@ -678,7 +695,9 @@ class CDSOverflowMenu
     menu.y = [top, bottom];
   }
 
-  private _toMenuSize(size: OVERFLOW_MENU_SIZE | string): CDSMenu['size'] {
+  private _toMenuSize(
+    size: OVERFLOW_MENU_SIZE | string | undefined
+  ): CDSMenu['size'] {
     switch (size) {
       case OVERFLOW_MENU_SIZE.EXTRA_SMALL:
         return MENU_SIZE.EXTRA_SMALL;
@@ -689,6 +708,8 @@ class CDSOverflowMenu
       case OVERFLOW_MENU_SIZE.LARGE:
         return MENU_SIZE.LARGE;
       default:
+        // TODO: Remove fallback to `md` when contextual layout token support
+        // is implemented for `cds-menu`.
         return MENU_SIZE.MEDIUM;
     }
   }
