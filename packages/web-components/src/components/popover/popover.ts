@@ -155,21 +155,20 @@ class CDSPopover extends HostListenerMixin(LitElement) {
       if (event.defaultPrevented) {
         return;
       }
-      // Esc should only close the popover if focus is inside the popover content
-      const content = this.querySelector(
-        (this.constructor as typeof CDSPopover).selectorPopoverContent
-      );
-      if (!content || !deepShadowContains(content, event.target)) {
-        return;
-      }
 
-      const target = event.target;
-      if (
-        target instanceof Element &&
-        target.closest(
-          (this.constructor as typeof CDSPopover).selectorPopoverContent
-        ) !== content
-      ) {
+      // Esc should only close the popover if focus is inside the popover content,
+      // it should also only close the innermost popover in the case of nesting
+      const selectorPopoverContent = (this.constructor as typeof CDSPopover)
+        .selectorPopoverContent;
+
+      const parentPopoverContent = event
+        .composedPath()
+        .find(
+          (node) =>
+            node instanceof Element && node.matches(selectorPopoverContent)
+        );
+
+      if (parentPopoverContent !== this.querySelector(selectorPopoverContent)) {
         return;
       }
 
