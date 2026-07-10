@@ -447,8 +447,11 @@ describe('FilterableMultiSelect', () => {
     );
     await waitForPosition();
 
+    const input = screen.getByPlaceholderText('test');
+
     await openMenu();
-    await userEvent.type(screen.getByPlaceholderText('test'), 'abc');
+    await userEvent.type(input, 'abc');
+    expect(input).toHaveDisplayValue('abc');
 
     onInputValueChange.mockClear();
 
@@ -457,11 +460,12 @@ describe('FilterableMultiSelect', () => {
     });
     await userEvent.click(clearButton);
 
-    expect(screen.getByPlaceholderText('test')).toHaveDisplayValue('');
+    expect(input).toHaveDisplayValue('');
     expect(onInputValueChange).toHaveBeenCalledWith({
       inputValue: '',
       type: useCombobox.stateChangeTypes.FunctionSetInputValue,
     });
+    expect(onInputValueChange).toHaveBeenCalledTimes(1);
   });
 
   it('should clear all selections when clicking clear all button', async () => {
