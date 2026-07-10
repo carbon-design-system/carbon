@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -99,6 +99,39 @@ describe('OverflowMenuItem - RTL', () => {
       );
 
       expect(container.firstChild.firstChild).toHaveProperty('disabled', true);
+    });
+
+    it('should set aria-disabled on the button node when disabled', () => {
+      render(
+        <OverflowMenuItem closeMenu={jest.fn()} itemText="one" disabled />
+      );
+
+      expect(screen.getByRole('menuitem')).toHaveAttribute(
+        'aria-disabled',
+        'true'
+      );
+    });
+
+    it('should set aria-disabled on the anchor node when disabled', () => {
+      render(
+        <OverflowMenuItem
+          closeMenu={jest.fn()}
+          href="https://carbondesignsystem.com"
+          itemText="one"
+          disabled
+        />
+      );
+
+      expect(screen.getByRole('menuitem')).toHaveAttribute(
+        'aria-disabled',
+        'true'
+      );
+    });
+
+    it('should not set aria-disabled when not disabled', () => {
+      render(<OverflowMenuItem closeMenu={jest.fn()} itemText="one" />);
+
+      expect(screen.getByRole('menuitem')).not.toHaveAttribute('aria-disabled');
     });
 
     it('should have divider', () => {
