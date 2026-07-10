@@ -99,7 +99,7 @@ export interface MenuButtonProps extends ComponentProps<'div'> {
   menuTarget?: Element;
 }
 
-// eslint-disable-next-line react/display-name -- https://github.com/carbon-design-system/carbon/issues/20452
+ 
 const MenuButton = forwardRef<HTMLDivElement, MenuButtonProps>(
   (
     {
@@ -317,5 +317,7 @@ MenuButton.propTypes = {
     typeof Element !== 'undefined' ? Element : Object
   ) as PropTypes.Validator<Element | null | undefined>,
 };
+
+MenuButton.displayName = 'MenuButton';
 
 export { MenuButton };

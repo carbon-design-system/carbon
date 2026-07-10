@@ -299,12 +299,86 @@ FeatureFlags.propTypes = {
 };
 
 /**
+ * Tracks which (flag, component) pairs have already been warned about so
+ * each warning appears at most once per flag per component.
+ */
+const warnedFlags = new Set<string>();
+
+/**
+ * Best-effort extraction of the calling React component name from the current
+ * call stack. Returns an empty string when the name cannot be determined.
+ */
+function getCallerComponentName(): string {
+  try {
+    const stack = new Error().stack ?? '';
+    // Drop the "Error" header line, then skip the useFeatureFlag frame itself.
+    const frames = stack.split('\n').slice(1);
+    let pastOwnFrame = false;
+    for (const frame of frames) {
+      // Skip frames until we're past useFeatureFlag's own source file.
+      if (!pastOwnFrame) {
+        if (frame.includes('FeatureFlags')) {
+          pastOwnFrame = true;
+        }
+        continue;
+      }
+
+      // 1. PascalCase function name — regular function components and named forwardRef.
+      const namedMatch = frame.match(/^\s+at\s+([A-Z][A-Za-z0-9$_.]+)/);
+      if (namedMatch) {
+        const name = namedMatch[1];
+        if (
+          name.startsWith('Object.') ||
+          name.startsWith('React.') ||
+          name.startsWith('ReactDOM')
+        ) {
+          continue;
+        }
+        return name;
+      }
+
+      // 2. Anonymous render function inside a named directory (forwardRef pattern).
+      //    e.g. ".../MenuButton/index.tsx" → "MenuButton".
+      //    Skip FeatureFlags itself to avoid reporting the wrapper as the caller.
+      const fileMatch = frame.match(
+        /[/\\]([A-Z][A-Za-z0-9$_]+)[/\\]index\.[jt]sx?/
+      );
+      if (fileMatch && fileMatch[1] !== 'FeatureFlags') {
+        return fileMatch[1];
+      }
+    }
+  } catch {
+    // Ignore — stack traces are not guaranteed
+  }
+  return '';
+}
+
+/**
  * Access whether a given flag is enabled or disabled in a given
  * FeatureFlagContext
  */
 export const useFeatureFlag = (flag: string) => {
   const scope = useContext(FeatureFlagContext);
-  return scope.enabled(flag);
+  const enabled = scope.enabled(flag);
+
+  // update the version numbers per each major release.
+  // this will auto announce all next major flags without additional setup.
+  if (flag.startsWith('enable-v12-') && !enabled) {
+    const component = getCallerComponentName();
+    const warnKey = `${flag}::${component}`;
+    if (!warnedFlags.has(warnKey)) {
+      warnedFlags.add(warnKey);
+      const location = component ? ` (called from <${component}>)` : '';
+      // eslint-disable-next-line no-console
+      console.warn(
+        `[Carbon] The feature flag "${flag}" will be enabled by default in v12. ` +
+          `Consider adopting it early for a smoother migration${location}. ` +
+          `See https://github.com/carbon-design-system/carbon/blob/main/docs/feature-flags.md`
+      );
+    }
+  }
+
+  return enabled;
 };
 
 /**
