@@ -280,7 +280,8 @@ export const Popover: PopoverComponent & {
   useWindowEvent('keydown', (event) => {
     if (!open || event.key !== 'Escape' || event.defaultPrevented) return;
 
-    // Esc should only close the popover if focus is inside the popover content
+    // Esc should only close the popover if focus is inside the popover content,
+    // it should also only close its direct parent in the case of nesting
     const target = event.target;
     if (
       !(target instanceof Element) ||
