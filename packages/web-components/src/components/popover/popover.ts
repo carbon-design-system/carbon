@@ -199,7 +199,9 @@ class CDSPopover extends HostListenerMixin(LitElement) {
         );
 
         // return focus to the trigger
-        const trigger = this._triggerSlotNode.assignedElements()[0];
+        const trigger = this._triggerSlotNode.assignedElements({
+          flatten: true,
+        })[0];
         if (trigger instanceof HTMLElement) {
           trigger.focus();
         }
