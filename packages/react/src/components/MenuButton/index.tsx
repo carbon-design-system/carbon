@@ -99,7 +99,6 @@ export interface MenuButtonProps extends ComponentProps<'div'> {
   menuTarget?: Element;
 }
 
- 
 const MenuButton = forwardRef<HTMLDivElement, MenuButtonProps>(
   (
     {
