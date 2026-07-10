@@ -16,6 +16,7 @@ import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
 - [Overview](#overview)
 - [Kind](#kind)
 - [Text Size](#text-size)
+- [Compact mode](#compact-mode)
 - [Customizing the label](#customizing-the-label)
 - [Component API](#component-api)
 - [Feedback](#feedback)
@@ -54,6 +55,17 @@ cautious, undefined, stable, informative, incomplete, and draft.
 ## Text Size
 
 Shape indicators have two text size options 12 and 14. The default is 12.
+
+## Compact mode
+
+When the `compact` prop is set to `true`, the shape indicator displays only the
+shape with the label shown in a tooltip on hover/focus. This is useful when
+space is limited or when you want to display multiple indicators in a space
+constrained layout.
+
+```jsx
+<ShapeIndicator kind="failed" label="Failed" compact />
+```
 
 ## Customizing the label
 

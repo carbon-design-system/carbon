@@ -54,7 +54,8 @@ describe('cds-overflow-menu', () => {
 
         const button = el.shadowRoot?.querySelector('button');
 
-        expect(button).to.have.class(`cds--overflow-menu--${size}`);
+        expect(button).to.have.class(`cds--overflow-menu--${size}`); // TODO: V12 - Remove this check
+        expect(button).to.have.class(`cds--layout--size-${size}`);
       });
     });
   });
