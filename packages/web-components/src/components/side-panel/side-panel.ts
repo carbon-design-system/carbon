@@ -9,6 +9,7 @@ import { LitElement, html } from 'lit';
 import {
   property,
   query,
+  queryAll,
   queryAssignedElements,
   state,
 } from 'lit/decorators.js';
@@ -147,6 +148,12 @@ class CDSSidePanel extends HostListenerMixin(LitElement) {
 
   @query(`.${blockClass}__inner-content`)
   private _innerContent!: HTMLElement;
+
+  @queryAll('#nav-back-button, #close-button')
+  private _iconButtons!: NodeListOf<HTMLElement>;
+
+  @queryAssignedElements({ slot: 'slug', selector: `${prefix}-slug` })
+  private _slug!: Array<HTMLElement>;
 
   @queryAssignedElements({ slot: 'actions', selector: `${prefix}-button` })
   private _actions!: Array<HTMLElement>;
@@ -373,17 +380,13 @@ class CDSSidePanel extends HostListenerMixin(LitElement) {
   };
 
   private _checkUpdateIconButtonSizes = () => {
-    const slug = this.querySelector(`${prefix}-slug`);
-    const otherButtons = this?.shadowRoot?.querySelectorAll(
-      '#nav-back-button, #close-button'
-    );
+    const slug = this._slug?.[0];
+    const otherButtons = this._iconButtons;
 
     let iconButtonSize = 'sm';
 
     if (slug || otherButtons?.length) {
-      const actions = this?.querySelectorAll?.(
-        `${prefix}-button[slot='actions']`
-      );
+      const actions = this._actions;
 
       if (actions?.length && /l/.test(this.size)) {
         iconButtonSize = 'md';
