@@ -43,9 +43,11 @@
   }
 }
 
-:host(#{$prefix}-overflow-menu[disabled]:hover),
-:host(#{$prefix}-breadcrumb-overflow-menu[disabled]:hover) {
-  background-color: transparent;
+@media (any-hover: hover) {
+  :host(#{$prefix}-overflow-menu[disabled]:hover),
+  :host(#{$prefix}-breadcrumb-overflow-menu[disabled]:hover) {
+    background-color: transparent;
+  }
 }
 
 :host(#{$prefix}-overflow-menu[open]),
@@ -54,8 +56,10 @@
   box-shadow: 0 $spacing-01 6px 0 rgba(0, 0, 0, 0.3);
   transition: none;
 
-  :hover {
-    background-color: $layer;
+  @media (any-hover: hover) {
+    :hover {
+      background-color: $layer;
+    }
   }
 }
 
@@ -124,7 +128,6 @@
     inline-size: $spacing-05;
     min-block-size: 1.125rem;
 
-    &:hover,
     &:active,
     &:focus {
       box-sizing: border-box;
@@ -137,14 +140,29 @@
       }
     }
 
+    @media (any-hover: hover) {
+      &:hover {
+        box-sizing: border-box;
+        background: none;
+        box-shadow: none;
+        outline-offset: 0;
+
+        &::after {
+          opacity: 1;
+        }
+      }
+    }
+
     &:active,
     &:focus {
       outline: 1px solid $focus;
     }
 
-    &:hover {
-      &::after {
-        background: $link-primary-hover;
+    @media (any-hover: hover) {
+      &:hover {
+        &::after {
+          background: $link-primary-hover;
+        }
       }
     }
 
@@ -176,8 +194,10 @@
   transform: translateY(4px);
 }
 
-:host(#{$prefix}-overflow-menu[breadcrumb]:hover) ::slotted([slot='icon']) {
-  fill: $link-primary-hover;
+@media (any-hover: hover) {
+  :host(#{$prefix}-overflow-menu[breadcrumb]:hover) ::slotted([slot='icon']) {
+    fill: $link-primary-hover;
+  }
 }
 
 :host(#{$prefix}-overflow-menu[breadcrumb]:active) ::slotted([slot='icon']) {
