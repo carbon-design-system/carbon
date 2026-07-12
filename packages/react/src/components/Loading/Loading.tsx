@@ -53,23 +53,21 @@ function Loading({
 }: LoadingProps) {
   const prefix = usePrefix();
   const overlayRef = useRef<HTMLDivElement>(null);
-  const savedFocusRef = useRef<Element | null>(null);
+  const savedFocusRef = useRef<HTMLElement | null>(null);
 
-  const trapActive = !!(withOverlay && active);
+  const trapActive = withOverlay && active;
 
   useEffect(() => {
     if (!trapActive) return;
 
-    savedFocusRef.current = document.activeElement;
+    savedFocusRef.current =
+      document.activeElement instanceof HTMLElement
+        ? document.activeElement
+        : null;
     overlayRef.current?.focus();
 
     return () => {
-      if (
-        savedFocusRef.current &&
-        typeof (savedFocusRef.current as HTMLElement).focus === 'function'
-      ) {
-        (savedFocusRef.current as HTMLElement).focus();
-      }
+      savedFocusRef.current?.focus();
       savedFocusRef.current = null;
     };
   }, [trapActive]);
@@ -133,10 +131,10 @@ function Loading({
     <div className={overlayClassName} role="presentation">
       <div
         ref={overlayRef}
-        role="dialog"
-        aria-modal="true"
-        aria-label={description}
-        tabIndex={-1}>
+        role={active ? 'dialog' : undefined}
+        aria-modal={active ? 'true' : undefined}
+        aria-label={active ? description : undefined}
+        tabIndex={active ? -1 : undefined}>
         {loading}
       </div>
     </div>
