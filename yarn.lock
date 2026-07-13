@@ -1806,9 +1806,9 @@ __metadata:
     "@babel/types": "npm:^7.27.3"
     "@carbon/cli-reporter": "npm:^10.8.0"
     "@carbon/icon-helpers": "npm:^10.78.0-rc.0"
-    "@hapi/joi": "npm:^17.1.1"
     change-case-all: "npm:^2.1.0"
     fs-extra: "npm:^11.0.0"
+    joi: "npm:^17.1.1"
     js-yaml: "npm:^4.1.0"
     memfs: "npm:^4.0.0"
     prettier: "npm:^3.3.3"
@@ -3220,15 +3220,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@hapi/address@npm:^4.0.1":
-  version: 4.1.0
-  resolution: "@hapi/address@npm:4.1.0"
-  dependencies:
-    "@hapi/hoek": "npm:^9.0.0"
-  checksum: 10/89da7cdcbaef078c6aec69ec167f12bbc3ba61f339678b5cf566b722cafe3e8f63af535a0dc95ba1c1fa3f125ead84821287c1e543b99cd215f58ef718f7da5b
-  languageName: node
-  linkType: hard
-
 "@hapi/bourne@npm:^3.0.0":
   version: 3.0.0
   resolution: "@hapi/bourne@npm:3.0.0"
@@ -3236,41 +3227,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@hapi/formula@npm:^2.0.0":
-  version: 2.0.0
-  resolution: "@hapi/formula@npm:2.0.0"
-  checksum: 10/13c1e066f237bfa2410ff19686e0ac08d48dceffcd51903acb2859644bddf4b313dc4bcc785a1f89690ec7d7e0eceb90c26473335117a09cc5b8d3202868f508
-  languageName: node
-  linkType: hard
-
-"@hapi/hoek@npm:^9.0.0":
+"@hapi/hoek@npm:^9.0.0, @hapi/hoek@npm:^9.3.0":
   version: 9.3.0
   resolution: "@hapi/hoek@npm:9.3.0"
   checksum: 10/ad83a223787749f3873bce42bd32a9a19673765bf3edece0a427e138859ff729469e68d5fdf9ff6bbee6fb0c8e21bab61415afa4584f527cfc40b59ea1957e70
   languageName: node
   linkType: hard
 
-"@hapi/joi@npm:^17.1.1":
-  version: 17.1.1
-  resolution: "@hapi/joi@npm:17.1.1"
-  dependencies:
-    "@hapi/address": "npm:^4.0.1"
-    "@hapi/formula": "npm:^2.0.0"
-    "@hapi/hoek": "npm:^9.0.0"
-    "@hapi/pinpoint": "npm:^2.0.0"
-    "@hapi/topo": "npm:^5.0.0"
-  checksum: 10/ee454f653f6dc973fd6500529a84b7a01cef145b9b50e126ea8db3099c7600002c92345909970947f844b7d02ca78b452ce43ec03772220a5aaae76b68f92537
-  languageName: node
-  linkType: hard
-
-"@hapi/pinpoint@npm:^2.0.0":
-  version: 2.0.1
-  resolution: "@hapi/pinpoint@npm:2.0.1"
-  checksum: 10/28e72305c13de10893be33273cd33c7d7b1c89cfcf707de5a7e214b08f8e3c440adf7df0ff1c9ab4d86744eefdab3ae549456b641f66a2af47ed862f764d6c49
-  languageName: node
-  linkType: hard
-
-"@hapi/topo@npm:^5.0.0":
+"@hapi/topo@npm:^5.1.0":
   version: 5.1.0
   resolution: "@hapi/topo@npm:5.1.0"
   dependencies:
@@ -5645,6 +5609,29 @@ __metadata:
   version: 0.4.1
   resolution: "@sec-ant/readable-stream@npm:0.4.1"
   checksum: 10/aac89581652ac85debe7c5303451c2ebf8bf25ca25db680e4b9b73168f6940616d9a4bbe3348981827b1159b14e2f2e6af4b7bd5735cac898c12d5c51909c102
+  languageName: node
+  linkType: hard
+
+"@sideway/address@npm:^4.1.5":
+  version: 4.1.5
+  resolution: "@sideway/address@npm:4.1.5"
+  dependencies:
+    "@hapi/hoek": "npm:^9.0.0"
+  checksum: 10/c4c73ac0339504f34e016d3a687118e7ddf197c1c968579572123b67b230be84caa705f0f634efdfdde7f2e07a6e0224b3c70665dc420d8bc95bf400cfc4c998
+  languageName: node
+  linkType: hard
+
+"@sideway/formula@npm:^3.0.1":
+  version: 3.0.1
+  resolution: "@sideway/formula@npm:3.0.1"
+  checksum: 10/8d3ee7f80df4e5204b2cbe92a2a711ca89684965a5c9eb3b316b7051212d3522e332a65a0bb2a07cc708fcd1d0b27fcb30f43ff0bcd5089d7006c7160a89eefe
+  languageName: node
+  linkType: hard
+
+"@sideway/pinpoint@npm:^2.0.0":
+  version: 2.0.0
+  resolution: "@sideway/pinpoint@npm:2.0.0"
+  checksum: 10/1ed21800128b2b23280ba4c9db26c8ff6142b97a8683f17639fd7f2128aa09046461574800b30fb407afc5b663c2331795ccf3b654d4b38fa096e41a5c786bf8
   languageName: node
   linkType: hard
 
@@ -15419,6 +15406,19 @@ __metadata:
   bin:
     jiti: lib/jiti-cli.mjs
   checksum: 10/8cd72c5fd03a0502564c3f46c49761090f6dadead21fa191b73535724f095ad86c2fa89ee6fe4bc3515337e8d406cc8fb2d37b73fa0c99a34584bac35cd4a4de
+  languageName: node
+  linkType: hard
+
+"joi@npm:^17.1.1":
+  version: 17.13.4
+  resolution: "joi@npm:17.13.4"
+  dependencies:
+    "@hapi/hoek": "npm:^9.3.0"
+    "@hapi/topo": "npm:^5.1.0"
+    "@sideway/address": "npm:^4.1.5"
+    "@sideway/formula": "npm:^3.0.1"
+    "@sideway/pinpoint": "npm:^2.0.0"
+  checksum: 10/0e407d4cc6cb0830b93c2d107f8b85113338473296025c31a931589359b58883e61fd183dd7532d3ab1ee014a01a20830a8fca90d9f0217d0c0894ee2cbf9ff5
   languageName: node
   linkType: hard
 
