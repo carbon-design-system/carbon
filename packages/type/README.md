@@ -179,13 +179,24 @@ This reset sets some top-level properties on `html` and `body`, namely
 
 ### Replacing the typeface
 
-Carbon is designed, tested, and tuned for IBM Plex. We do not recommend replacing the Carbon typeface. If you absolutely need to use a different typeface, you'll need to treat it as a build-time Sass customization that your application owns. There is no support for runtime typeface overrides on prebuilt/CDN Carbon styles.
+Carbon is designed, tested, and tuned for IBM Plex. We do not recommend
+replacing the Carbon typeface. If you absolutely need to use a different
+typeface, you'll need to treat it as a build-time Sass customization that your
+application owns. There is no support for runtime typeface overrides on
+prebuilt/CDN Carbon styles.
 
-> [!WARNING]  
+<!-- prettier-ignore-start -->
+> [!WARNING]
 > **Use at your own risk**
-> 
-> Overriding the Carbon typeface has broad design and accessibility implications. Carbon type styles are tuned with IBM Plex metrics in mind, including line heights, letter spacing, weight, glyph proportions,
-ligatures, and fallback behavior. A replacement typeface can change layout, wrapping, density, readability, and interaction states. It can be a significant design and engineering effort to make another typeface work correctly across an application.
+>
+> Overriding the Carbon typeface has broad design and accessibility
+> implications. Carbon type styles are tuned with IBM Plex metrics in mind,
+> including line heights, letter spacing, weight, glyph proportions, ligatures,
+> and fallback behavior. A replacement typeface can change layout, wrapping,
+> density, readability, and interaction states. It can be a significant design
+> and engineering effort to make another typeface work correctly across an
+> application.
+<!-- prettier-ignore-end -->
 
 To use carbon with a different typeface, three things are needed:
 
@@ -193,7 +204,9 @@ To use carbon with a different typeface, three things are needed:
 2. Change the root `font-family` definition(s)
 3. Supply your own `@font-face` rules
 
-You can accomplish the first two by configuring the sass entrypoint that your application compiles. This configuration must happen before any other `@use` of Carbon Sass modules.
+You can accomplish the first two by configuring the sass entrypoint that your
+application compiles. This configuration must happen before any other `@use` of
+Carbon Sass modules.
 
 ```scss
 @use 'sass:string';
@@ -203,21 +216,22 @@ You can accomplish the first two by configuring the sass entrypoint that your ap
   $css--font-face: false,
 
   // Change the root `font-family` definition(s)
-  $font-families: (
-    'sans':
-      string.unquote(
-        "'Inter Local', system-ui, -apple-system, BlinkMacSystemFont, '.SFNSText-Regular', sans-serif"
-      ),
-    'mono':
-      string.unquote(
-        "'IBM Plex Mono', system-ui, -apple-system, BlinkMacSystemFont, '.SFNSText-Regular', monospace"
-      ),
-    'serif':
-      string.unquote(
-        "'IBM Plex Serif', system-ui, -apple-system, BlinkMacSystemFont, '.SFNSText-Regular', serif"
-      ),
-    // Include any other Carbon font family keys your application compiles.
-  )
+  $font-families:
+    (
+      'sans':
+        string.unquote(
+          "'Inter Local', system-ui, -apple-system, BlinkMacSystemFont, '.SFNSText-Regular', sans-serif"
+        ),
+      'mono':
+        string.unquote(
+          "'IBM Plex Mono', system-ui, -apple-system, BlinkMacSystemFont, '.SFNSText-Regular', monospace"
+        ),
+      'serif':
+        string.unquote(
+          "'IBM Plex Serif', system-ui, -apple-system, BlinkMacSystemFont, '.SFNSText-Regular', serif"
+        ),
+      // Include any other Carbon font family keys your application compiles.
+    )
 );
 ```
 
@@ -246,7 +260,11 @@ Then, supply your own `@font-face` rules to load your replacement font assets.
 }
 ```
 
-Only load the weights, styles, and unicode ranges that your application needs, but make sure they cover the font weights and styles your Carbon usage emits. If you use a third-party font service, review its privacy and regional compliance implications carefully, including whether font requests expose user data in ways your application cannot accept.
+Only load the weights, styles, and unicode ranges that your application needs,
+but make sure they cover the font weights and styles your Carbon usage emits. If
+you use a third-party font service, review its privacy and regional compliance
+implications carefully, including whether font requests expose user data in ways
+your application cannot accept.
 
 ### Type scale
 
