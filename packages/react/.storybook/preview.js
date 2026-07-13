@@ -12,6 +12,7 @@ import {
   Stories,
   ArgTypes,
 } from '@storybook/addon-docs/blocks';
+import { withPerformanceMonitor } from '@github-ui/storybook-addon-performance-panel';
 import { allModes } from './modes';
 
 import './styles.scss';
@@ -345,6 +346,7 @@ function getThemeFromBackground(backgroundValue) {
 }
 
 const decorators = [
+  withPerformanceMonitor,
   (Story, context) => {
     const { layoutDensity, layoutSize, locale, dir } = context.globals;
     const backgroundValue = context.globals.backgrounds?.value;

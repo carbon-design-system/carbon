@@ -6,6 +6,7 @@
  */
 
 import { setCustomElementsManifest } from '@storybook/web-components-vite';
+import { withPerformanceMonitor } from '@github-ui/storybook-addon-performance-panel/universal';
 import customElements from '../custom-elements.json';
 import container from './container';
 import { white, g10, g90, g100 } from '@carbon/themes';
@@ -226,6 +227,7 @@ function getThemeFromBackground(backgroundValue) {
 }
 
 export const decorators = [
+  withPerformanceMonitor,
   function decoratorContainer(story, context) {
     const result = story();
     const { hasMainTag } = result;
