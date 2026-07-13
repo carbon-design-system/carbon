@@ -139,9 +139,15 @@ will need to patch yourself or submit a fix by
 ## Assets managed under this release schedule
 
 This plan covers the design and development assets under maintenance of the
-Carbon Design System core team. This includes the `@carbon/react` and
-`@carbon/styles` packages, as well as all other packages within the
-[`carbon` monorepo](https://github.com/carbon-design-system/carbon).
+Carbon Design System core team, including:
+
+- `@carbon/react`
+- `@carbon/web-components`
+- `@carbon/styles`
+- All other packages within the
+  [`carbon` monorepo](https://github.com/carbon-design-system/carbon)
+- `@carbon/ibm-products`
+- `@carbon/ibm-products-web-components`
 
 This plan also includes all design guidance and design kit assets (figma, etc.)
 present in the
