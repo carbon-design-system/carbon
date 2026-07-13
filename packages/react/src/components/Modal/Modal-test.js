@@ -1672,27 +1672,37 @@ describe.each([
 });
 
 describe('enableDialogElement role attribute', () => {
-  it('should preserve the native dialog role for non-alert modals', () => {
+  it('should preserve native dialog attributes for non-alert modals', () => {
     render(
       <FeatureFlags enableDialogElement>
-        <Modal open aria-label="Non-alert modal" modalHeading="Heading">
+        <Modal open>
           <p>Body</p>
         </Modal>
       </FeatureFlags>
     );
 
-    expect(screen.getByRole('dialog')).toBeInTheDocument();
+    const modal = screen.getByRole('dialog');
+
+    expect(modal).toBeInTheDocument();
+    expect(modal).not.toHaveAttribute('role');
+    expect(modal).not.toHaveAttribute('aria-describedby');
   });
 
-  it('should set role="alertdialog" for alert modals', () => {
+  it('should set alertdialog attributes for alert modals', () => {
     render(
       <FeatureFlags enableDialogElement>
-        <Modal open danger alert aria-label="Alert modal" modalHeading="Heading">
+        <Modal open danger alert>
           <p>Body</p>
         </Modal>
       </FeatureFlags>
     );
 
-    expect(screen.getByRole('alertdialog')).toBeInTheDocument();
+    const modal = screen.getByRole('alertdialog');
+    const modalBodyId = modal.getAttribute('aria-describedby');
+
+    expect(modal).toBeInTheDocument();
+    expect(modal).toHaveAttribute('role', 'alertdialog');
+    expect(modalBodyId).toMatch(/^cds--modal-body--modal-id-/);
+    expect(document.getElementById(modalBodyId)).toHaveTextContent('Body');
   });
 });
