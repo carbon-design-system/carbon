@@ -10,3 +10,21 @@
 const { defineTest } = require('jscodeshift/dist/testUtils');
 
 defineTest(__dirname, 'ibm-products-update-tearsheet');
+defineTest(
+  __dirname,
+  'ibm-products-update-tearsheet',
+  null,
+  'ibm-products-update-tearsheet-alias'
+);
+defineTest(
+  __dirname,
+  'ibm-products-update-tearsheet',
+  null,
+  'ibm-products-update-tearsheet-idempotent'
+);
+defineTest(
+  __dirname,
+  'ibm-products-update-tearsheet',
+  null,
+  'ibm-products-update-tearsheet-edge-cases'
+);

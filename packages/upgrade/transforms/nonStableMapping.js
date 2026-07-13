@@ -75,7 +75,6 @@ exports.productsPreviewMap = {
   InlineTipLink: 'previewCandidate__InlineTipLink',
   NonLinearReading: 'previewCandidate__NonLinearReading',
   SearchBar: 'previewCandidate__SearchBar',
-  Tearsheet: 'preview__Tearsheet',
   Toolbar: 'previewCandidate__Toolbar',
   ToolbarButton: 'previewCandidate__ToolbarButton',
   ToolbarGroup: 'previewCandidate__ToolbarGroup',

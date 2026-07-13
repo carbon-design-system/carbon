@@ -349,9 +349,35 @@ function transform(fileInfo, api) {
 
       // Check if this element uses a Tearsheet local name
       if (tearsheetLocalNames.has(elementName)) {
-        const newElement = transformTearsheetElement(j, path, elementName);
-        j(path).replaceWith(newElement);
-        jsxTransformed = true;
+        // Check if already using composable API (idempotency check)
+        const hasComposableChildren = path.node.children?.some((child) => {
+          if (child.type === 'JSXElement') {
+            const childName = child.openingElement.name;
+            if (childName.type === 'JSXMemberExpression') {
+              const objectName = childName.object.name;
+              const propertyName = childName.property.name;
+              // Check if child is Tearsheet.Header, Tearsheet.Body, etc.
+              return (
+                objectName === elementName &&
+                [
+                  'Header',
+                  'Body',
+                  'Footer',
+                  'Influencer',
+                  'NavigationBar',
+                ].includes(propertyName)
+              );
+            }
+          }
+          return false;
+        });
+
+        // Only transform if not already using composable API
+        if (!hasComposableChildren) {
+          const newElement = transformTearsheetElement(j, path, elementName);
+          j(path).replaceWith(newElement);
+          jsxTransformed = true;
+        }
       }
     }
   });
@@ -408,7 +434,8 @@ function transform(fileInfo, api) {
     return root.toSource({ quote: 'single', trailingComma: true });
   }
 
-  return null;
+  // Return original source if no transformations were made
+  return fileInfo.source;
 }
 
 module.exports = transform;
