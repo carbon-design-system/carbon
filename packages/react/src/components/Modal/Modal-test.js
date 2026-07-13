@@ -1671,33 +1671,28 @@ describe.each([
   });
 });
 
-describe('Modal - enableDialogElement role attribute', () => {
-  // Regression for #22666: with the enableDialogElement flag, a non-alert Modal set
-  // role="" on the <dialog>, hiding its implicit "dialog" role from assistive tech and
-  // breaking *ByRole('dialog') queries. The attribute should be omitted (undefined) so
-  // the native dialog role is preserved; only alert modals get role="alertdialog".
-  it('does not set an empty role on the dialog element for non-alert modals', () => {
-    const { container } = render(
+describe('enableDialogElement role attribute', () => {
+  it('should preserve the native dialog role for non-alert modals', () => {
+    render(
       <FeatureFlags enableDialogElement>
         <Modal open aria-label="Non-alert modal" modalHeading="Heading">
           <p>Body</p>
         </Modal>
       </FeatureFlags>
     );
-    const dialog = container.querySelector('dialog');
-    expect(dialog).toBeInTheDocument();
-    expect(dialog).not.toHaveAttribute('role');
+
+    expect(screen.getByRole('dialog')).toBeInTheDocument();
   });
 
-  it('sets role="alertdialog" on the dialog element for alert modals', () => {
-    const { container } = render(
+  it('should set role="alertdialog" for alert modals', () => {
+    render(
       <FeatureFlags enableDialogElement>
         <Modal open danger alert aria-label="Alert modal" modalHeading="Heading">
           <p>Body</p>
         </Modal>
       </FeatureFlags>
     );
-    const dialog = container.querySelector('dialog');
-    expect(dialog).toHaveAttribute('role', 'alertdialog');
+
+    expect(screen.getByRole('alertdialog')).toBeInTheDocument();
   });
 });
