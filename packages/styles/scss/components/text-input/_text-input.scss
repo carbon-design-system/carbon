@@ -170,8 +170,10 @@
     svg {
     fill: $icon-disabled;
 
-    &:hover {
-      fill: $icon-disabled;
+    @media (any-hover: hover) {
+      &:hover {
+        fill: $icon-disabled;
+      }
     }
   }
 
@@ -183,12 +185,14 @@
     cursor: default;
   }
 
-  .#{$prefix}--text-input--password__visibility__toggle:disabled.#{$prefix}--tooltip__trigger:hover {
-    svg {
-      fill: $icon-disabled;
-    }
+  @media (any-hover: hover) {
+    .#{$prefix}--text-input--password__visibility__toggle:disabled.#{$prefix}--tooltip__trigger:hover {
+      svg {
+        fill: $icon-disabled;
+      }
 
-    cursor: default;
+      cursor: default;
+    }
   }
 
   .#{$prefix}--text-input__counter-alert {
