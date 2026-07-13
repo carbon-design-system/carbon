@@ -79,6 +79,7 @@
   "devDependencies": {
     "@carbon/layout": "^11.54.0",
     "@carbon/motion": "^11.47.0",
+    "@github-ui/storybook-addon-performance-panel": "^1.1.4",
     "@juggle/resize-observer": "^3.4.0",
     "@mordech/vite-lit-loader": "^0.40.0",
     "@open-wc/testing": "^4.0.0",
