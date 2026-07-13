@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2016, 2023
+// Copyright IBM Corp. 2016, 2026
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -103,9 +103,11 @@
     @include focus-outline('outline');
   }
 
-  .#{$prefix}--unstable-pagination__button:hover {
-    background: $layer-hover;
-    color: $icon-primary;
+  @media (any-hover: hover) {
+    .#{$prefix}--unstable-pagination__button:hover {
+      background: $layer-hover;
+      color: $icon-primary;
+    }
   }
 
   .#{$prefix}--unstable-pagination__button--no-index {
@@ -118,11 +120,13 @@
     background: transparent;
   }
 
-  .#{$prefix}--unstable-pagination__button:disabled:hover,
-  .#{$prefix}--unstable-pagination__button--no-index:hover {
-    background: transparent;
-    cursor: not-allowed;
-    fill: $icon-disabled;
+  @media (any-hover: hover) {
+    .#{$prefix}--unstable-pagination__button:disabled:hover,
+    .#{$prefix}--unstable-pagination__button--no-index:hover {
+      background: transparent;
+      cursor: not-allowed;
+      fill: $icon-disabled;
+    }
   }
 
   .#{$prefix}--unstable-pagination__page-selector,
@@ -152,10 +156,13 @@
     min-inline-size: auto;
   }
 
-  .#{$prefix}--unstable-pagination__page-selector
-    .#{$prefix}--select-input:hover,
-  .#{$prefix}--unstable-pagination__page-sizer .#{$prefix}--select-input:hover {
-    background: $layer-hover;
+  @media (any-hover: hover) {
+    .#{$prefix}--unstable-pagination__page-selector
+      .#{$prefix}--select-input:hover,
+    .#{$prefix}--unstable-pagination__page-sizer
+      .#{$prefix}--select-input:hover {
+      background: $layer-hover;
+    }
   }
 
   .#{$prefix}--unstable-pagination__page-selector .#{$prefix}--select__arrow,
