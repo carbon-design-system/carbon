@@ -120,7 +120,6 @@ export interface PaginationProps
   /**
    * Provide a custom render function for the page-selection control.
    * When provided, the default `<Select>` is replaced with the returned node.
-   * Receives `{ currentPage, totalPages, currentPageSize, onSetPage }`.
    */
   renderPageSelect?: (props: {
     /** The currently active page. */
@@ -129,8 +128,10 @@ export interface PaginationProps
     totalPages: number;
     /** Current page size. */
     currentPageSize: number;
+    /** The computed accessible label for the page-selection control. */
+    pageSelectLabelText: string;
     /** Sets the active page (clamped to valid range). */
-    onSetPage: (page: number) => void;
+    onSetPage: (page: number | string) => void;
   }) => React.ReactNode;
 
   /**
@@ -429,9 +430,11 @@ const Pagination = React.forwardRef(
       }
     }
 
-    function handleSetPage(nextPage: number) {
-      if (disabled || pageInputDisabled || !Number.isInteger(nextPage)) return;
-      const clamped = clamp(nextPage, 1, totalPages);
+    function handleSetPage(nextPage: number | string) {
+      if (disabled || pageInputDisabled) return;
+      const numericPage = Number(nextPage);
+      if (!Number.isInteger(numericPage)) return;
+      const clamped = clamp(numericPage, 1, totalPages);
       if (clamped === page) return;
       setPage(clamped);
       if (onChange) {
@@ -534,6 +537,7 @@ const Pagination = React.forwardRef(
                   currentPage: page,
                   totalPages,
                   currentPageSize: pageSize,
+                  pageSelectLabelText: pageSelectLabelText(totalPages),
                   onSetPage: handleSetPage,
                 })
               ) : (
@@ -683,7 +687,6 @@ Pagination.propTypes = {
   /**
    * Provide a custom render function for the page-selection control.
    * When provided, the default `<Select>` is replaced with the returned node.
-   * Receives `{ currentPage, totalPages, currentPageSize, onSetPage }`.
    */
   renderPageSelect: PropTypes.func,
 

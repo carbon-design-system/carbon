@@ -243,8 +243,7 @@ PaginationUnknownPages.parameters = {
 
 /**
  * `renderPageSelect` lets you replace the default page-select control with
- * any React node. The render function receives `{ currentPage, totalPages,
- * currentPageSize, onSetPage }`.
+ * any React node.
  *
  * This story uses Carbon's `NumberInput` with `hideSteppers` to replace the
  * default page-select `<Select>`, illustrating how any custom control can be
@@ -257,11 +256,16 @@ export const WithRenderPageSelect = (args) => (
     totalItems={350}
     pageSizes={[10, 20, 30]}
     {...args}
-    renderPageSelect={({ currentPage, totalPages, onSetPage }) => (
+    renderPageSelect={({
+      currentPage,
+      totalPages,
+      pageSelectLabelText,
+      onSetPage,
+    }) => (
       <NumberInput
         hideSteppers
         id="page-select-number-input"
-        label="Page number"
+        label={pageSelectLabelText}
         hideLabel
         size={args.size}
         disabled={args.disabled || args.pageInputDisabled}
@@ -275,7 +279,7 @@ export const WithRenderPageSelect = (args) => (
         max={totalPages}
         value={currentPage}
         onChange={(_e, { value }) => {
-          onSetPage(Number(value));
+          onSetPage(value);
         }}
       />
     )}

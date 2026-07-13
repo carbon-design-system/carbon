@@ -662,6 +662,27 @@ describe('Pagination', () => {
       expect(onChange).toHaveBeenCalledWith({ page: 3, pageSize: 10 });
     });
 
+    it('should call onChange when renderPageSelect calls onSetPage with a string', async () => {
+      const onChange = jest.fn();
+
+      render(
+        <Pagination
+          totalItems={30}
+          pageSizes={[10]}
+          pageSize={10}
+          page={1}
+          onChange={onChange}
+          renderPageSelect={({ onSetPage }) => (
+            <button onClick={() => onSetPage('3')}>Go to 3</button>
+          )}
+        />
+      );
+
+      await userEvent.click(screen.getByText('Go to 3'));
+
+      expect(onChange).toHaveBeenCalledWith({ page: 3, pageSize: 10 });
+    });
+
     it('should not call onChange when disabled and renderPageSelect calls onSetPage', async () => {
       const onChange = jest.fn();
 
