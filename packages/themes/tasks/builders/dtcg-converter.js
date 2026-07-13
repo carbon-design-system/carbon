@@ -135,8 +135,8 @@ function resolveDTCGColorValue(dtcgValue) {
 function resolveWithExtensions(dtcgValue, extensions) {
   const alphaModifier =
     extensions &&
-    extensions['com.ibm.carbon'] &&
-    extensions['com.ibm.carbon'].alphaModifier;
+    extensions['org.carbon'] &&
+    extensions['org.carbon'].alphaModifier;
 
   if (alphaModifier !== undefined) {
     // $value must be a palette alias string — resolve it then apply alpha
@@ -164,8 +164,8 @@ function resolveWithExtensions(dtcgValue, extensions) {
 function resolveComponentValueWithExtensions(themeValue, extensions, theme) {
   const alphaModifiers =
     extensions &&
-    extensions['com.ibm.carbon'] &&
-    extensions['com.ibm.carbon'].alphaModifiers;
+    extensions['org.carbon'] &&
+    extensions['org.carbon'].alphaModifiers;
 
   const alpha = alphaModifiers && alphaModifiers[theme];
 
@@ -193,8 +193,8 @@ function convertDTCGToTheme(dtcgTokens) {
 
   // Extract color-scheme from top-level $extensions (DTCG metadata)
   const extensions = dtcgTokens.$extensions;
-  if (extensions && extensions['com.ibm.carbon']) {
-    const carbonExt = extensions['com.ibm.carbon'];
+  if (extensions && extensions['org.carbon']) {
+    const carbonExt = extensions['org.carbon'];
     if (carbonExt['color-scheme']) {
       theme['color-scheme'] = carbonExt['color-scheme'];
     }

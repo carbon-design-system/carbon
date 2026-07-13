@@ -60,7 +60,7 @@ keys:
       }
     }
     ```
-  - **`com.ibm.carbon`** - Carbon-specific metadata like alpha modifiers:
+  - **`org.carbon`** - Carbon-specific metadata like alpha modifiers:
     ```json
     "$extensions": {
       "org.carbon": {
