@@ -145,7 +145,7 @@ class CDSButton extends HostListenerMixin(FocusMixin(LitElement)) {
    * Specify the message read by screen readers for the danger button variants
    */
   @property({ type: String, reflect: true, attribute: 'danger-description' })
-  dangerDescription = 'danger';
+  dangerDescription = '';
 
   /**
    * Specify whether the Button should be disabled, or not
@@ -223,7 +223,7 @@ class CDSButton extends HostListenerMixin(FocusMixin(LitElement)) {
    * Specify the size of the button, from the following list of sizes: `xs`, `sm`, `md`, `lg`, `xl`, `2xl`
    */
   @property({ type: String, reflect: true })
-  size = 'lg';
+  size?: BUTTON_SIZE | string = 'lg';
 
   /**
    * Optional prop to specify the tabIndex of the Button
@@ -300,8 +300,8 @@ class CDSButton extends HostListenerMixin(FocusMixin(LitElement)) {
       [`${prefix}--btn--danger--ghost`]: kind === BUTTON_KIND.DANGER_GHOST,
       [`${prefix}--btn--disabled`]: disabled,
       [`${prefix}--btn--icon-only`]: hasIcon && !hasMainContent,
-      [`${prefix}--btn--${size}`]: size,
-      [`${prefix}--layout--size-${size}`]: size,
+      [`${prefix}--btn--${size}`]: !!size,
+      [`${prefix}--layout--size-${size}`]: !!size,
       [`${prefix}-ce--btn--has-icon`]: hasIcon,
       [`${prefix}--btn--expressive`]: isExpressive,
       [`${prefix}--btn--selected`]: isSelected && kind === 'ghost',
@@ -317,6 +317,7 @@ class CDSButton extends HostListenerMixin(FocusMixin(LitElement)) {
     const classes = classMap(defaultClasses);
 
     const isDanger = kind?.includes('danger');
+    const hasDangerDescription = isDanger && Boolean(dangerDescription);
 
     if (href) {
       return disabled
@@ -403,9 +404,13 @@ class CDSButton extends HostListenerMixin(FocusMixin(LitElement)) {
             tabindex="${tabIndex}"
             type="${ifDefined(type)}"
             aria-label="${ifDefined(tooltipText)}"
-            aria-describedby="badge-indicator">
-            ${isDanger
-              ? html`<span class="${prefix}--visually-hidden"
+            aria-describedby="${ifDefined(
+              hasDangerDescription ? 'danger-description' : undefined
+            )}">
+            ${hasDangerDescription
+              ? html`<span
+                  id="danger-description"
+                  class="${prefix}--visually-hidden"
                   >${dangerDescription}</span
                 >`
               : ``}

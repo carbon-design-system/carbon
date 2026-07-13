@@ -38,6 +38,7 @@ import {
   type MultiSelectSortingProps,
   sortingPropTypes,
 } from './MultiSelectPropTypes';
+import { isSelectAllItem } from './tools/isSelectAllItem';
 import ListBox, {
   ListBoxSizePropType,
   ListBoxTypePropType,
@@ -52,7 +53,7 @@ import { match, keys } from '../../internal/keyboard';
 import { mergeRefs } from '../../tools/mergeRefs';
 import { deprecate } from '../../prop-types/deprecate';
 import { useId } from '../../internal/useId';
-import { defaultSortItems, defaultCompareItems } from './tools/sorting';
+import { defaultCompareItems, defaultSortItems } from './tools/sorting';
 import { usePrefix } from '../../internal/usePrefix';
 import { FormContext } from '../FluidForm';
 import { useSelection } from '../../internal/Selection';
@@ -65,7 +66,11 @@ import {
 } from '@floating-ui/react';
 import type { TranslateWithId } from '../../types/common';
 import { AILabel } from '../AILabel';
-import { defaultItemToString, isComponentElement } from '../../internal';
+import {
+  defaultItemToString,
+  isComponentElement,
+  isItemDisabled,
+} from '../../internal';
 import { hasHelperText } from '../../internal/hasHelperText';
 import { useNormalizedInputProps } from '../../internal/useNormalizedInputProps';
 import useIsomorphicEffect from '../../internal/useIsomorphicEffect';
@@ -385,12 +390,10 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
   );
 
   const nonSelectAllItems = useMemo(
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
-    () => filteredItems.filter((item) => !(item as any).isSelectAll),
+    () => filteredItems.filter((item) => !isSelectAllItem(item)),
     [filteredItems]
   );
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
-  const selectAll = filteredItems.some((item) => (item as any).isSelectAll);
+  const selectAll = filteredItems.some(isSelectAllItem);
 
   const {
     selectedItems: controlledSelectedItems,
@@ -408,8 +411,7 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
 
   const selectAllStatus = useMemo(() => {
     const selectable = nonSelectAllItems.filter(
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
-      (item) => !(item as any).disabled
+      (item) => !isItemDisabled(item)
     );
 
     const nonSelectedCount = selectable.filter(
@@ -424,8 +426,9 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
   }, [controlledSelectedItems, nonSelectAllItems]);
 
   const handleSelectAllClick = useCallback(() => {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
-    const selectable = nonSelectAllItems.filter((i) => !(i as any).disabled);
+    const selectable = nonSelectAllItems.filter(
+      (item) => !isItemDisabled(item)
+    );
     const { checked, indeterminate } = selectAllStatus;
 
     // clear all options if select-all state is checked or indeterminate
@@ -498,12 +501,10 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
 
   // memoize sorted items to reduce unnecessary expensive sort on rerender
   const sortedItems = useMemo(() => {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
-    const selectAllItem = items.find((item) => (item as any).isSelectAll);
+    const selectAllItem = items.find(isSelectAllItem);
 
     const selectableRealItems = nonSelectAllItems.filter(
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
-      (item) => !(item as any).disabled
+      (item) => !isItemDisabled(item)
     );
 
     // Sort only non-select-all items, select-all item must stay at the top
@@ -679,10 +680,7 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
     inputId,
     inputValue,
     stateReducer,
-    isItemDisabled(item) {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
-      return (item as any)?.disabled;
-    },
+    isItemDisabled,
   });
   function stateReducer(state, actionAndChanges) {
     const { type, props, changes } = actionAndChanges;
@@ -696,8 +694,8 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
         if (sortedItems.length === 0) {
           return changes;
         }
-        if (changes.selectedItem && changes.selectedItem.disabled !== true) {
-          if (changes.selectedItem.isSelectAll) {
+        if (changes.selectedItem && !isItemDisabled(changes.selectedItem)) {
+          if (isSelectAllItem(changes.selectedItem)) {
             handleSelectAllClick();
           } else {
             onItemChange(changes.selectedItem);
@@ -707,7 +705,7 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
 
         return { ...changes, highlightedIndex: state.highlightedIndex };
       case ItemClick:
-        if (changes.selectedItem.isSelectAll) {
+        if (isSelectAllItem(changes.selectedItem)) {
           handleSelectAllClick();
         } else {
           onItemChange(changes.selectedItem);
@@ -842,8 +840,7 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
 
   // exclude the select-all item from the count
   const selectedItemsLength = controlledSelectedItems.filter(
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
-    (item: any) => !(item as any).isSelectAll
+    (item) => !isSelectAllItem(item)
   ).length;
 
   const className = cx(
@@ -1083,8 +1080,7 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
             ? sortedItems.map((item, index) => {
                 let isChecked: boolean;
                 let isIndeterminate = false;
-                // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
-                if ((item as any).isSelectAll) {
+                if (isSelectAllItem(item)) {
                   isChecked = selectAllStatus.checked;
                   isIndeterminate = selectAllStatus.indeterminate;
                 } else {
@@ -1114,7 +1110,7 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
                     key={itemProps.id}
                     aria-label={itemText}
                     aria-checked={isIndeterminate ? 'mixed' : isChecked}
-                    isActive={isChecked && !item['isSelectAll']}
+                    isActive={isChecked && !isSelectAllItem(item)}
                     isHighlighted={highlightedIndex === index}
                     title={itemText}
                     disabled={disabled}
@@ -1225,8 +1221,6 @@ FilterableMultiSelect.propTypes = {
    * change, and in some cases they can not be shimmed by Carbon to shield you
    * from potentially breaking changes.
    */
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20452
-  // @ts-ignore
   downshiftProps: PropTypes.shape(Downshift.propTypes),
 
   /**
