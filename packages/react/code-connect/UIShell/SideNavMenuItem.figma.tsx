@@ -7,7 +7,7 @@
 
 // @ts-nocheck
 import React from 'react';
-import { SideNavMenu, SideNavMenuItem } from '@carbon/react';
+import { SideNavLink, SideNavMenu, SideNavMenuItem } from '@carbon/react';
 import figma from '@figma/code-connect';
 
 figma.connect(
@@ -29,7 +29,7 @@ figma.connect(
 );
 
 figma.connect(
-  SideNavMenuItem,
+  SideNavLink,
   'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=2346-16194&t=wcK3P98b09VsrxXF-4',
   {
     variant: { 'Icon left': 'True' },
@@ -38,11 +38,12 @@ figma.connect(
       isActive: figma.enum('State', {
         Active: true,
       }),
+      renderIcon: figma.instance('Swap icon'),
     },
-    example: ({ linkText, isActive }) => (
-      <SideNavMenuItem renderIcon={IconName} isActive={isActive} href="#">
+    example: ({ linkText, isActive, renderIcon }) => (
+      <SideNavLink renderIcon={renderIcon} isActive={isActive} href="#">
         {linkText}
-      </SideNavMenuItem>
+      </SideNavLink>
     ),
   }
 );
@@ -76,9 +77,10 @@ figma.connect(
       isActive: figma.enum('State', {
         Active: true,
       }),
+      renderIcon: figma.instance('Swap icon'),
     },
-    example: ({ linkText, isActive }) => (
-      <SideNavMenu renderIcon={IconName} title={linkText} isActive={isActive}>
+    example: ({ linkText, isActive, renderIcon }) => (
+      <SideNavMenu renderIcon={renderIcon} title={linkText} isActive={isActive}>
         <SideNavMenuItem href="#">Nested link</SideNavMenuItem>
       </SideNavMenu>
     ),
