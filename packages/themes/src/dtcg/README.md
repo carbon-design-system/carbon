@@ -63,7 +63,7 @@ keys:
   - **`com.ibm.carbon`** - Carbon-specific metadata like alpha modifiers:
     ```json
     "$extensions": {
-      "com.ibm.carbon": {
+      "org.carbon": {
         "alphaModifier": 0.5,
         "color-scheme": "light"
       }
@@ -86,7 +86,7 @@ keys:
     "$value": "{gray.50}",
     "$description": "Background color for hover state. Use when user hovers over interactive elements.",
     "$extensions": {
-      "com.ibm.carbon": {
+      "org.carbon": {
         "alphaModifier": 0.12
       }
     }

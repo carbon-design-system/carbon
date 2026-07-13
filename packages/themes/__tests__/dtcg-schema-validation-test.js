@@ -11,7 +11,6 @@
 
 const Ajv = require('ajv');
 const addFormats = require('ajv-formats');
-const axios = require('axios');
 const fs = require('fs');
 const path = require('path');
 const glob = require('glob');
@@ -89,10 +88,8 @@ describe('DTCG Schema Validation', () => {
 
   beforeAll(async () => {
     try {
-      const response = await axios.get(GLOBAL_DTCG_SCHEMA_URL, {
-        timeout: SCHEMA_FETCH_TIMEOUT,
-      });
-      globalSchema = response.data;
+      const response = await fetch(GLOBAL_DTCG_SCHEMA_URL);
+      globalSchema = await response.json();
 
       ajv = new Ajv({
         allErrors: true,

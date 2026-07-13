@@ -51,7 +51,6 @@
     "@types/color": "^4.2.1",
     "ajv": "^8.20.0",
     "ajv-formats": "^3.0.1",
-    "axios": "^1.18.1",
     "change-case-all": "^2.1.0",
     "core-js": "^3.16.0",
     "fs-extra": "^11.0.0",

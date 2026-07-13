@@ -2,7 +2,7 @@
   "$schema": "https://tr.designtokens.org/format/",
   "$description": "g90 theme - Dark theme",
   "$extensions": {
-    "com.ibm.carbon": {
+    "org.carbon": {
       "color-scheme": "dark"
     }
   },
@@ -13,7 +13,7 @@
         "$value": "{black.default}",
         "$description": "End color for AI aura gradient effect. Creates a fade-to-transparent effect at the edge of AI-enhanced elements.",
         "$extensions": {
-          "com.ibm.carbon": {
+          "org.carbon": {
             "alphaModifier": 0
           }
         }
@@ -29,7 +29,7 @@
           "$value": "{black.default}",
           "$description": "End color for AI aura gradient on hover. Creates hover state fade effect for AI elements.",
           "$extensions": {
-            "com.ibm.carbon": {
+            "org.carbon": {
               "alphaModifier": 0
             }
           }
@@ -39,7 +39,7 @@
           "$value": "{blue.50}",
           "$description": "Start color for AI aura gradient on hover. Provides the vibrant blue beginning of the hover gradient.",
           "$extensions": {
-            "com.ibm.carbon": {
+            "org.carbon": {
               "alphaModifier": 0.4
             }
           }
@@ -54,13 +54,13 @@
           "$value": "{blue.50}",
           "$description": "Start color for small AI aura gradient. Use for compact AI indicators or smaller UI elements.",
           "$extensions": {
-            "com.ibm.carbon": {
+            "org.carbon": {
               "alphaModifier": 0.16
             }
           }
         },
         "$extensions": {
-          "com.ibm.carbon": {
+          "org.carbon": {
             "alphaModifier": 0.1
           }
         }
@@ -77,7 +77,7 @@
         "$value": "{blue.30}",
         "$description": "Start color for AI border gradient. Creates the darker edge of gradient borders on AI elements.",
         "$extensions": {
-          "com.ibm.carbon": {
+          "org.carbon": {
             "alphaModifier": 0.36
           }
         }
@@ -94,7 +94,7 @@
         "$value": "{black.default}",
         "$description": "Drop shadow color for AI elements. Provides depth and elevation for AI-enhanced components.",
         "$extensions": {
-          "com.ibm.carbon": {
+          "org.carbon": {
             "alphaModifier": 0.28
           }
         }
@@ -106,7 +106,7 @@
         "$value": "{blue.50}",
         "$description": "Inner shadow color for AI elements. Creates inset depth effect for AI-enhanced surfaces.",
         "$extensions": {
-          "com.ibm.carbon": {
+          "org.carbon": {
             "alphaModifier": 0.16
           }
         }
@@ -117,7 +117,7 @@
       "$value": "{black.default}",
       "$description": "Overlay color for AI modal backgrounds. Use to dim content behind AI dialogs or popovers.",
       "$extensions": {
-        "com.ibm.carbon": {
+        "org.carbon": {
           "alphaModifier": 0.5
         }
       }
@@ -181,7 +181,7 @@
             "$value": "{black.default}",
             "$description": "Primary outer shadow for AI popovers. Provides the first layer of depth for elevated AI elements.",
             "$extensions": {
-              "com.ibm.carbon": {
+              "org.carbon": {
                 "alphaModifier": 0.12
               }
             }
@@ -191,7 +191,7 @@
             "$value": "{black.default}",
             "$description": "Secondary outer shadow for AI popovers. Adds additional depth layer for AI element elevation.",
             "$extensions": {
-              "com.ibm.carbon": {
+              "org.carbon": {
                 "alphaModifier": 0.08
               }
             }
@@ -205,7 +205,7 @@
         "$value": "{blue.40}",
         "$description": "Background color for AI skeleton loaders. Use while AI-generated content is loading.",
         "$extensions": {
-          "com.ibm.carbon": {
+          "org.carbon": {
             "alphaModifier": 0.5
           }
         }
@@ -216,7 +216,7 @@
           "$value": "{blue.40}",
           "$description": "Element background color for AI skeleton loaders. Provides the animated shimmer effect for loading AI content.",
           "$extensions": {
-            "com.ibm.carbon": {
+            "org.carbon": {
               "alphaModifier": 0.3
             }
           }
@@ -233,7 +233,7 @@
       "$value": "{gray.50}",
       "$description": "Background color for active/pressed state. Use when user clicks or presses interactive elements.",
       "$extensions": {
-        "com.ibm.carbon": {
+        "org.carbon": {
           "alphaModifier": 0.4
         }
       }
@@ -248,7 +248,7 @@
       "$value": "{gray.50}",
       "$description": "Background color for hover state. Use when user hovers over interactive elements to provide visual feedback.",
       "$extensions": {
-        "com.ibm.carbon": {
+        "org.carbon": {
           "alphaModifier": 0.16
         }
       }
@@ -272,13 +272,13 @@
         "$value": "{gray.50}",
         "$description": "Hover state for selected backgrounds. Use when user hovers over already-selected items.",
         "$extensions": {
-          "com.ibm.carbon": {
+          "org.carbon": {
             "alphaModifier": 0.32
           }
         }
       },
       "$extensions": {
-        "com.ibm.carbon": {
+        "org.carbon": {
           "alphaModifier": 0.24
         }
       }
@@ -290,7 +290,7 @@
       "$value": "{gray.50}",
       "$description": "Border color for disabled elements. Use when borders need to indicate unavailable or inactive state.",
       "$extensions": {
-        "com.ibm.carbon": {
+        "org.carbon": {
           "alphaModifier": 0.5
         }
       }
@@ -433,7 +433,7 @@
         "$value": "{gray.50}",
         "$description": "Active. Token for active in the design system.",
         "$extensions": {
-          "com.ibm.carbon": {
+          "org.carbon": {
             "alphaModifier": 0.4
           }
         }
@@ -443,7 +443,7 @@
         "$value": "{gray.50}",
         "$description": "Hover. Token for hover in the design system.",
         "$extensions": {
-          "com.ibm.carbon": {
+          "org.carbon": {
             "alphaModifier": 0.16
           }
         }
@@ -453,7 +453,7 @@
         "$value": "{gray.50}",
         "$description": "Selected. Token for selected in the design system.",
         "$extensions": {
-          "com.ibm.carbon": {
+          "org.carbon": {
             "alphaModifier": 0.24
           }
         }
@@ -495,7 +495,7 @@
           "$value": "{gray.90}",
           "$description": "End. Token for end in the design system.",
           "$extensions": {
-            "com.ibm.carbon": {
+            "org.carbon": {
               "alphaModifier": 0
             }
           }
@@ -580,7 +580,7 @@
       "$value": "{gray.10}",
       "$description": "Disabled. Token for disabled in the design system.",
       "$extensions": {
-        "com.ibm.carbon": {
+        "org.carbon": {
           "alphaModifier": 0.25
         }
       }
@@ -605,7 +605,7 @@
           "$value": "{white.default}",
           "$description": "Disabled. Token for disabled in the design system.",
           "$extensions": {
-            "com.ibm.carbon": {
+            "org.carbon": {
               "alphaModifier": 0.25
             }
           }
@@ -838,7 +838,7 @@
     "$value": "{black.default}",
     "$description": "Overlay color for modal backgrounds. Use to dim content behind dialogs and modals.",
     "$extensions": {
-      "com.ibm.carbon": {
+      "org.carbon": {
         "alphaModifier": 0.6
       }
     }
@@ -848,7 +848,7 @@
     "$value": "{black.default}",
     "$description": "Shadow color for elevation. Provides depth and layering for elevated components.",
     "$extensions": {
-      "com.ibm.carbon": {
+      "org.carbon": {
         "alphaModifier": 0.8
       }
     }
@@ -1410,7 +1410,7 @@
       "$value": "{gray.10}",
       "$description": "Disabled. Token for disabled in the design system.",
       "$extensions": {
-        "com.ibm.carbon": {
+        "org.carbon": {
           "alphaModifier": 0.25
         }
       }
@@ -1440,7 +1440,7 @@
           "$value": "{white.default}",
           "$description": "Disabled. Token for disabled in the design system.",
           "$extensions": {
-            "com.ibm.carbon": {
+            "org.carbon": {
               "alphaModifier": 0.25
             }
           }
@@ -1452,7 +1452,7 @@
       "$value": "{gray.10}",
       "$description": "Placeholder. Token for placeholder in the design system.",
       "$extensions": {
-        "com.ibm.carbon": {
+        "org.carbon": {
           "alphaModifier": 0.4
         }
       }

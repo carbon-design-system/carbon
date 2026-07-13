@@ -2081,7 +2081,6 @@ __metadata:
     "@types/color": "npm:^4.2.1"
     ajv: "npm:^8.20.0"
     ajv-formats: "npm:^3.0.1"
-    axios: "npm:^1.18.1"
     change-case-all: "npm:^2.1.0"
     color: "npm:^4.0.0"
     core-js: "npm:^3.16.0"
@@ -8403,7 +8402,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"axios@npm:^1.12.0, axios@npm:^1.18.1":
+"axios@npm:^1.12.0":
   version: 1.18.1
   resolution: "axios@npm:1.18.1"
   dependencies:

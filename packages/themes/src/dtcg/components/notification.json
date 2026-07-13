@@ -70,7 +70,7 @@
           "g90": "{gray.50}",
           "g100": "{gray.50}"
         },
-        "com.ibm.carbon": {
+        "org.carbon": {
           "alphaModifiers": {
             "white": 0.25,
             "g10": 0.25

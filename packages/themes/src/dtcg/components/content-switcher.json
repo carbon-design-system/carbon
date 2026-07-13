@@ -12,7 +12,7 @@
           "g90": "{black.default}",
           "g100": "{black.default}"
         },
-        "com.ibm.carbon": {
+        "org.carbon": {
           "alphaModifiers": {
             "g90": 0,
             "g100": 0
@@ -30,7 +30,7 @@
           "g90": "{gray.50}",
           "g100": "{gray.50}"
         },
-        "com.ibm.carbon": {
+        "org.carbon": {
           "alphaModifiers": {
             "g90": 0.12,
             "g100": 0.12
@@ -48,7 +48,7 @@
           "g90": "{gray.50}",
           "g100": "{gray.50}"
         },
-        "com.ibm.carbon": {
+        "org.carbon": {
           "alphaModifiers": {
             "g90": 0.24,
             "g100": 0.24
