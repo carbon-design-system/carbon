@@ -11,7 +11,7 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/theme' as *;
 @use '@carbon/styles/scss/components/slider';
 @use '@carbon/styles/scss/type' as type;
-@use '@carbon/styles/scss/layout' as *;
+@use '@carbon/styles/scss/utilities/layout' as *;
 
 :host(#{$prefix}-slider),
 :host(#{$prefix}-slider-skeleton) {
