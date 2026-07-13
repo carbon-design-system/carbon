@@ -8,7 +8,7 @@ Storybook environment.
 
 ## v12 Storybooks
 
-The v12 storybooks are run separately from the existing ones and use different
+The v12 Storybooks are run separately from the existing ones and use different
 ports so they can be open at the same time.
 
 ```sh
@@ -50,7 +50,7 @@ needs to isolate one behavior.
 
 ## React usage
 
-The React v12 storybook has the `enable-v12-release` flag turned on globally for
+The React v12 Storybook has the `enable-v12-release` flag turned on globally for
 every story.
 
 A global decorator is configured in `.storybook-v12/preview.js` that wraps every
@@ -63,14 +63,14 @@ see the same v12 state.
 > [!IMPORTANT]
 > You do not need to wrap stories with `<FeatureFlags enableV12Release>`
 >
-> Component-level `<FeatureFlag>` wrappers are still useful though, especially
+> Component-level `<FeatureFlags>` wrappers are still useful though, especially
 > when a story demonstrates a non-v12 flag or a focused migration case.
 
 <!-- prettier-ignore-end -->
 
 ## Web Components usage
 
-The Web Components v12 storybook has the `enable-v12-release` flag turned on
+The Web Components v12 Storybook has the `enable-v12-release` flag turned on
 globally for every story.
 
 A global decorator is configured in `.storybook-v12/preview.js` that wraps every

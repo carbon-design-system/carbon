@@ -22,8 +22,8 @@ export const Welcome = () => {
         lowContrast
         statusIconDescription="notification"
         subtitle="Every story has the enable-v12-release flag set to true. Stories
-with 🚀 are v12-specific stories not present in the v11 storybook."
-        title="This storybook reflects work in progress for v12"
+with 🚀 are v12-specific stories not present in the v11 Storybook."
+        title="This Storybook reflects work in progress for v12"
       />
       <Stack className="welcome__links" gap={5}>
         <Link

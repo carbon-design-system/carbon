@@ -24,7 +24,7 @@ const v12ReleaseToolbar = {
       {
         value: true,
         title:
-          'This storybook reflects work in progress for v12. Every story here has the enable-v12-release flag set to true. Stories with 🚀 are v12-specific stories not present in the v11 storybook.',
+          'This Storybook reflects work in progress for v12. Every story here has the enable-v12-release flag set to true. Stories with 🚀 are v12-specific stories not present in the v11 Storybook.',
       },
     ],
     dynamicTitle: false,

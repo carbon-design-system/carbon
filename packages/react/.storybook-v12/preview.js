@@ -23,7 +23,7 @@ const v12ReleaseToolbar = {
     items: [
       {
         value: true,
-        title: 'This storybook reflects work in progress for v12.',
+        title: 'This Storybook reflects work in progress for v12.',
       },
     ],
     dynamicTitle: false,

@@ -43,14 +43,14 @@ jobs:
       - name: Prepare static output
         run: |
           touch packages/${{ matrix.package }}/storybook-static-v12/.nojekyll
-          touch packages/${{ matrix.package }}/storybook-static-v12/CNAME
           echo "${{ matrix.cname }}" > packages/${{ matrix.package }}/storybook-static-v12/CNAME
       - name: Push ${{ matrix.name }} v12 storybook
         uses: cpina/github-action-push-to-another-repository@55306faa4ed53b815ae49e564af8cfb359d32ae2 # v1.7.3
         env:
           API_TOKEN_GITHUB: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
         with:
-          source-directory: 'packages/${{ matrix.package }}/storybook-static-v12'
+          source-directory:
+            'packages/${{ matrix.package }}/storybook-static-v12'
           destination-github-username: 'carbon-design-system'
           destination-repository-name: ${{ matrix.destination }}
           user-name: carbon-bot

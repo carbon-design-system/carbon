@@ -38,7 +38,7 @@ Unless otherwise specified, flags are `false` by default.
 | `enable-treeview-controllable`                     | Enable the new TreeView controllable API                                             | React                       |                                                                                                                                                                |
 | `enable-v12-dynamic-floating-styles`               | Enable dynamic setting of floating styles for components like Popover, Tooltip, etc. | React                       |                                                                                                                                                                |
 | `enable-v12-overflowmenu`                          | Enable the use of the v12 OverflowMenu leveraging the Menu subcomponents             | React                       | [enable-v12-overflowmenu](https://github.com/carbon-design-system/carbon/tree/main/packages/upgrade#enable-v12-overflowmenu)                                   |
-| `enable-v12-release`                               | Enable all v12 feature flags                                                         | React, Sass, Web components |                                                                                                                                                                |
+| `enable-v12-release`                               | Enable all v12 feature flags                                                         | React, Sass, Web Components |                                                                                                                                                                |
 | `enable-v12-structured-list-visible-icons`         | Enable icon components within StructuredList to always be visible                    | Sass                        | [enable-v12-structured-list-visible-icons](https://github.com/carbon-design-system/carbon/tree/main/packages/upgrade#enable-v12-structured-list-visible-icons) |
 | `enable-v12-tile-default-icons`                    | Enable default icons for Tile components                                             | React                       | [enable-v12-tile-default-icons](https://github.com/carbon-design-system/carbon/tree/main/packages/upgrade#enable-v12-tile-default-icons)                       |
 | `enable-v12-tile-radio-icons`                      | Enable rendering of updated radio icon in the tile components                        | React, Sass                 | [enable-v12-tile-radio-icons](https://github.com/carbon-design-system/carbon/tree/main/packages/upgrade#enable-v12-tile-radio-icons)                           |
@@ -49,10 +49,9 @@ Unless otherwise specified, flags are `false` by default.
 
 ## Documentation
 
-In addition to this document, within each storybook there are "Feature flags"
-folders for some components. Docs page(s) within this folder cover the flag
-specifics and usage. The stories within in the folder showcase the impact of
-when the flag(s) are turned on.
+In addition to this document, some components include `Feature flags` folders
+within Storybook. The docs pages in those folders cover flag specifics and
+usage. The stories in those folders showcase the impact of turning the flags on.
 
 ## Using Codemods for Migration
 
@@ -101,7 +100,7 @@ All feature flags follow a prefix naming convention that indicate status.
 - Are generally stable and unlikely to change but may change based on user
   feedback
 - May require some manual migration or code changes within your project
-- Are documented in storybook
+- Are documented in Storybook
 - May not be documented on https://www.carbondesignsystem.com
 - Need user feedback to ensure we've met all concerns relating to this feature
 
