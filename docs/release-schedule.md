@@ -80,35 +80,31 @@ that are not End-of-Life.
 
 ### Long-term support
 
-Long-term support, or LTS, is an additional designation given to selected
-majorreleases that require an extended support window. Not every major release
-isexpected to become an LTS release.
+Long-term support, or LTS, is an additional designation given to selected major
+releases that require an extended support window. Not every major release is
+expected to become an LTS release.
 
-LTS is intended for consumers whose delivery models do not allow them
-toregularly upgrade to the latest Carbon major. This is particularly important
-foron-premises products and products that support on-premises customers.
-Theseprojects may have a concentrated period of feature development followed by
-along maintenance period during which upgrading Carbon would be difficult
-orimpractical.
+LTS is intended for consumers whose delivery models do not allow them to
+regularly upgrade to the latest Carbon major. This is particularly important for
+on-premises products and products that support on-premises customers. These
+projects may have a concentrated period of feature development followed by a
+long maintenance period during which upgrading Carbon would be difficult or
+impractical.
 
-An LTS release receives the same types of fixes as a Maintenance
-release,including security patches, critical bug fixes, and requested
-non-critical bugfixes when there is a demonstrated business need. The primary
-difference is thelength and intent of the support commitment.
+An LTS release receives the same types of fixes as a Maintenance release,
+including security patches, critical bug fixes, and requested non-critical
+bugfixes when there is a demonstrated need. The primary difference is the length
+and intent of the support commitment.
 
-Rather than assigning an arbitrary end date when an LTS release is
-designated,the Carbon team intends to maintain its release infrastructure and
-considerrequested fixes for as long as supported products and customers have
-anestablished business need for that release line.
+Rather than assigning an arbitrary end date when an LTS release is designated,
+the Carbon team intends to maintain its release infrastructure and consider
+requested fixes for as long as supported products and customers have an
+established business need for that release line.
 
-LTS does not include ongoing feature development and should not be treated as
-analternative to adopting the current Active release when an upgrade is
-practical.Its purpose is to preserve the stability and viability of products
-that cannotfollow Carbon's standard release cadence.
-
-The term **supported release lines** refers to all release lines that are
-Active,in Maintenance, or designated for Long-term support and have not
-reachedEnd-of-Life.
+LTS does not include ongoing feature development and should not be treated as an
+alternative to adopting the current Active release when an upgrade is practical.
+Its purpose is to preserve the stability and viability of products that cannot
+follow Carbon's standard release cadence.
 
 ## Accessibility
 
