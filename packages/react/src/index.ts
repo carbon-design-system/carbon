@@ -12,6 +12,8 @@ import './feature-flags';
 import './internal/warnAboutDeprecatedReactVersion';
 
 export * from './components/Accordion';
+export { ActionSet } from './components/ibm-products/ActionSet';
+export type { ActionSetProps } from './components/ibm-products/ActionSet';
 export * from './components/AccordionItem';
 export * from './components/AspectRatio';
 export * from './components/Breadcrumb';
