@@ -43,6 +43,7 @@ collect:
         - closeOnActivation
         - cols
         - colSpan
+        - compact
         - compareItems
         - condensed
         - contained
@@ -531,6 +532,7 @@ collect:
         # SelectItem
         - hidden
         # ShapeIndicator
+        - shapeDescription
         - textSize
         # SideNav
         - addMouseListeners
