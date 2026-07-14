@@ -81,4 +81,66 @@ describe('scss/components/ui-shell', () => {
         .map((rule) => rule.selector)
     ).toEqual([]);
   });
+
+  test('nav item hover styles are only applied on devices that support hover', async () => {
+    const { result } = await render(`
+      @use '../ui-shell/side-nav';
+      @use '../ui-shell/switcher';
+    `);
+    const navItemMarkers = [
+      '.cds--side-nav__link',
+      '.cds--side-nav__submenu',
+      '.cds--header__menu-item',
+      '.cds--header__menu-title',
+      '.cds--switcher__item-link',
+    ];
+    const hoverRules = [];
+
+    postcss.parse(result.css.toString()).walkRules((rule) => {
+      if (
+        rule.selector.includes(':hover') &&
+        navItemMarkers.some((marker) => rule.selector.includes(marker))
+      ) {
+        hoverRules.push(rule);
+      }
+    });
+
+    expect(hoverRules.length).toBeGreaterThan(0);
+    expect(
+      hoverRules.some((rule) =>
+        rule.selector.includes('.cds--side-nav__link:hover')
+      )
+    ).toBe(true);
+    expect(
+      hoverRules.some((rule) =>
+        rule.selector.includes('.cds--side-nav__submenu:hover')
+      )
+    ).toBe(true);
+    expect(
+      hoverRules.some((rule) =>
+        rule.selector.includes('.cds--switcher__item-link:hover')
+      )
+    ).toBe(true);
+    expect(
+      hoverRules
+        .filter((rule) => {
+          let parent = rule.parent;
+
+          while (parent) {
+            if (
+              parent.type === 'atrule' &&
+              parent.name === 'media' &&
+              parent.params.includes('(any-hover: hover)')
+            ) {
+              return false;
+            }
+
+            parent = parent.parent;
+          }
+
+          return true;
+        })
+        .map((rule) => rule.selector)
+    ).toEqual([]);
+  });
 });

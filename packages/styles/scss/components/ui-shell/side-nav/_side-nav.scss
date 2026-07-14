@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2016, 2023
+// Copyright IBM Corp. 2016, 2026
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -154,31 +154,33 @@
     inline-size: auto;
   }
 
-  .#{$prefix}--side-nav__item:not(.#{$prefix}--side-nav__item--active):hover
+  @media (any-hover: hover) {
+    .#{$prefix}--side-nav__item:not(.#{$prefix}--side-nav__item--active):hover
+      .#{$prefix}--side-nav__item:not(.#{$prefix}--side-nav__item--active)
+      > .#{$prefix}--side-nav__submenu:hover,
     .#{$prefix}--side-nav__item:not(.#{$prefix}--side-nav__item--active)
-    > .#{$prefix}--side-nav__submenu:hover,
-  .#{$prefix}--side-nav__item:not(.#{$prefix}--side-nav__item--active)
-    > .#{$prefix}--side-nav__link:hover,
-  .#{$prefix}--side-nav__menu
-    a.#{$prefix}--side-nav__link:not(.#{$prefix}--side-nav__link--current):not(
-      [aria-current='page']
-    ):hover,
-  .#{$prefix}--side-nav a.#{$prefix}--header__menu-item:hover,
-  .#{$prefix}--side-nav
-    .#{$prefix}--header__menu-title[aria-expanded='true']:hover {
-    // TODO: sync color
-    background-color: $background-hover;
-    color: $text-primary;
-  }
+      > .#{$prefix}--side-nav__link:hover,
+    .#{$prefix}--side-nav__menu
+      a.#{$prefix}--side-nav__link:not(
+        .#{$prefix}--side-nav__link--current
+      ):not([aria-current='page']):hover,
+    .#{$prefix}--side-nav a.#{$prefix}--header__menu-item:hover,
+    .#{$prefix}--side-nav
+      .#{$prefix}--header__menu-title[aria-expanded='true']:hover {
+      // TODO: sync color
+      background-color: $background-hover;
+      color: $text-primary;
+    }
 
-  .#{$prefix}--side-nav__item:not(.#{$prefix}--side-nav__item--active)
-    > .#{$prefix}--side-nav__link:hover
-    > span,
-  .#{$prefix}--side-nav__item:not(.#{$prefix}--side-nav__item--active)
-    .#{$prefix}--side-nav__menu-item
-    > .#{$prefix}--side-nav__link:hover
-    > span {
-    color: $text-primary;
+    .#{$prefix}--side-nav__item:not(.#{$prefix}--side-nav__item--active)
+      > .#{$prefix}--side-nav__link:hover
+      > span,
+    .#{$prefix}--side-nav__item:not(.#{$prefix}--side-nav__item--active)
+      .#{$prefix}--side-nav__menu-item
+      > .#{$prefix}--side-nav__link:hover
+      > span {
+      color: $text-primary;
+    }
   }
 
   .#{$prefix}--side-nav__item--large {
@@ -220,9 +222,11 @@
     user-select: none;
   }
 
-  .#{$prefix}--side-nav__submenu:hover {
-    background-color: $background-hover;
-    color: $text-primary;
+  @media (any-hover: hover) {
+    .#{$prefix}--side-nav__submenu:hover {
+      background-color: $background-hover;
+      color: $text-primary;
+    }
   }
 
   .#{$prefix}--side-nav__submenu:focus {
@@ -257,10 +261,12 @@
     block-size: mini-units(6);
   }
 
-  .#{$prefix}--side-nav__item--active .#{$prefix}--side-nav__submenu:hover {
-    //the active className is used for selected styles, hence using the selected tokens
-    background-color: $background-selected;
-    color: $text-primary;
+  @media (any-hover: hover) {
+    .#{$prefix}--side-nav__item--active .#{$prefix}--side-nav__submenu:hover {
+      //the active className is used for selected styles, hence using the selected tokens
+      background-color: $background-selected;
+      color: $text-primary;
+    }
   }
 
   .#{$prefix}--side-nav__item--active
@@ -505,14 +511,16 @@
       padding-inline-start: 4.25rem;
     }
 
-    a.#{$prefix}--header__menu-item:hover {
-      background-color: $background-hover;
-      color: $text-primary;
-    }
+    @media (any-hover: hover) {
+      a.#{$prefix}--header__menu-item:hover {
+        background-color: $background-hover;
+        color: $text-primary;
+      }
 
-    // non-hover, selected state inherited from `_header.scss`
-    a.#{$prefix}--header__menu-item--current:hover {
-      background-color: $layer-selected-hover;
+      // non-hover, selected state inherited from `_header.scss`
+      a.#{$prefix}--header__menu-item--current:hover {
+        background-color: $layer-selected-hover;
+      }
     }
   }
 
@@ -533,12 +541,17 @@
   }
 
   .#{$prefix}--side-nav
-    a.#{$prefix}--header__menu-item:hover
-    .#{$prefix}--header__menu-arrow,
-  .#{$prefix}--side-nav
     a.#{$prefix}--header__menu-item:focus
     .#{$prefix}--header__menu-arrow,
   .#{$prefix}--side-nav .#{$prefix}--header__menu-arrow {
     fill: $icon-secondary;
+  }
+
+  @media (any-hover: hover) {
+    .#{$prefix}--side-nav
+      a.#{$prefix}--header__menu-item:hover
+      .#{$prefix}--header__menu-arrow {
+      fill: $icon-secondary;
+    }
   }
 }
