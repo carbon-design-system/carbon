@@ -1,0 +1,11 @@
+import { Markdown, Meta } from '@storybook/addon-docs/blocks';
+import Source from '../docs/styling.mdx?raw';
+
+export const content = Source.replace(
+  /import\s+\{[^}]+\}\s+from\s+['"]@storybook\/addon-docs\/blocks['"];\n\n<Meta[^>]+>\n\n/,
+  ''
+);
+
+<Meta title="Getting Started/Custom styles" />
+
+<Markdown>{content}</Markdown>
