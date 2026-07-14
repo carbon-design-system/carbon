@@ -333,6 +333,16 @@
     - tracking
   sizes:
     - 32
+- name: activity--task
+  friendly_name: Activity task
+  aliases:
+    - activity
+    - rectangle
+    - task
+    - process
+    - workflow
+  sizes:
+    - 32
 - name: adapter-notification
   friendly_name: Adapter notification
   aliases:
@@ -5264,6 +5274,26 @@
     - classify
   sizes:
     - 32
+- name: classification--groups
+  friendly_name: Classification groups
+  aliases:
+    - classification
+    - group
+    - hierarchy
+    - primary
+    - primary hierarchy
+    - reporting
+    - enterprise reporting
+    - location
+    - location grouping
+    - full inclusion
+    - file
+    - document
+    - tag
+    - tagging
+    - frame
+  sizes:
+    - 32
 - name: classifier--language
   friendly_name: Classifier language
   sizes:
@@ -7301,6 +7331,24 @@
     - dots
   sizes:
     - 32
+- name: database--backups
+  friendly_name: Database backups
+  aliases:
+    - database
+    - backup
+    - independent backup
+    - automatic backup
+    - on-demand backup
+    - hub
+    - backup hub
+    - server
+    - stack
+    - cloud
+    - recover
+    - data
+    - recover data
+  sizes:
+    - 32
 - name: database--datastax
   friendly_name: IBM Cloud® Databases for DataStax
   aliases:
@@ -9164,6 +9212,20 @@
     - secure
   sizes:
     - 32
+- name: end-to-end--monitoring
+  friendly_name: End-to-end monitoring
+  aliases:
+    - end-to-end
+    - monitoring
+    - observability
+    - tracing
+    - distributed tracing
+    - flow
+    - transaction flow
+    - integration
+    - integration monitoring
+  sizes:
+    - 32
 - name: energy--renewable
   friendly_name: Energy renewable
   aliases:
@@ -9761,6 +9823,22 @@
     - legend
     - location
     - travel
+  sizes:
+    - 32
+- name: facility--groups
+  friendly_name: Facility groups
+  aliases:
+    - facility
+    - group
+    - grouping
+    - optional grouping
+    - virtual meters
+    - location
+    - location grouping
+    - reporting
+    - facility reporting
+    - pin
+    - place
   sizes:
     - 32
 - name: facility--group--alternate
@@ -10831,6 +10909,67 @@
     - app
   sizes:
     - 32
+- name: gateway--exclusive
+  friendly_name: Gateway exclusive
+  aliases:
+    - gateway
+    - exclusive
+    - path
+    - singular
+    - split
+    - routing
+    - decision
+    - point
+    - decision point
+    - conditional
+    - branch
+    - conditional branch
+    - process
+    - process branching
+    - diamond
+    - cross
+  sizes:
+    - 32
+- name: gateway--inclusive
+  friendly_name: Gateway inclusive
+  aliases:
+    - gateway
+    - inclusive
+    - split
+    - routing
+    - decision
+    - point
+    - decision point
+    - conditional
+    - branch
+    - conditional branch
+    - process
+    - process branching
+    - diamond
+    - circle
+  sizes:
+    - 32
+- name: gateway--inclusive--alt
+  friendly_name: Gateway inclusive alt
+  aliases:
+    - gateway
+    - inclusive
+    - patch
+    - combination
+    - split
+    - routing
+    - decision
+    - point
+    - decision point
+    - conditional
+    - branch
+    - conditional branch
+    - process
+    - process branching
+    - diamond
+    - circle
+  sizes:
+    - 32
 - name: gateway--mail
   friendly_name: Gateway mail
   aliases:
@@ -10839,6 +10978,38 @@
     - mail
     - send
     - message
+  sizes:
+    - 32
+- name: gateway--parallel
+  friendly_name: Gateway parallel
+  aliases:
+    - gateway
+    - parallel
+    - path
+    - simultaneous
+    - split
+    - routing
+    - decision
+    - point
+    - decision point
+    - diamond
+    - plus
+  sizes:
+    - 32
+- name: gateway--parallel--alt
+  friendly_name: Gateway parallel alt
+  aliases:
+    - gateway
+    - parallel
+    - path
+    - simultaneous
+    - split
+    - routing
+    - decision
+    - point
+    - decision point
+    - diamond
+    - plus
   sizes:
     - 32
 - name: gateway--public
@@ -12621,6 +12792,21 @@
     - doctor
     - healthcare
     - remote
+  sizes:
+    - 32
+- name: portfolio--groups
+  friendly_name: Portfolio groups
+  aliases:
+    - portfolio
+    - group
+    - hierarchy
+    - secondary hierarchy
+    - locations
+    - subset
+    - percentages
+    - reporting
+    - briefcase
+    - frame
   sizes:
     - 32
 - name: portfolio--management
@@ -16645,6 +16831,22 @@
     - filled
   sizes:
     - 32
+- name: location--switch
+  friendly_name: Location switch
+  aliases:
+    - location
+    - pin
+    - place
+    - switch
+    - hierarchy
+    - location hierarchy
+    - change
+    - switch location
+    - cange location
+    - change parent location
+    - Maximo
+  sizes:
+    - 32
 - name: locked
   friendly_name: Locked
   aliases:
@@ -17930,6 +18132,19 @@
     - expand/collapse
     - toggle
     - modify
+  sizes:
+    - 32
+- name: unassigned--work-order
+  friendly_name: Unassigned work order
+  aliases:
+    - unassigned
+    - work
+    - order
+    - user
+    - task
+    - unassigned task
+    - clipboard
+    - exclamation mark
   sizes:
     - 32
 - name: misuse
@@ -20953,6 +21168,24 @@
     - product
   sizes:
     - 32
+- name: product-categories
+  friendly_name: Product categories
+  aliases:
+    - product
+    - category
+    - scope
+    - scope 3
+    - classification
+    - label
+    - taxonomy
+    - supply chain
+    - supply chain taxonomy
+    - box
+    - container
+    - label
+    - tag
+  sizes:
+    - 32
 - name: production-environment
   friendly_name: Production environment
   aliases:
@@ -21082,6 +21315,22 @@
     - card
     - credit card
     - debit
+  sizes:
+    - 32
+- name: purchasing-organizations
+  friendly_name: Purchasing organizations
+  aliases:
+    - purchase
+    - organization
+    - entity
+    - buying entity
+    - procurement
+    - procurement organization
+    - process
+    - flow
+    - pin
+    - place
+    - location
   sizes:
     - 32
 - name: QC-launch
@@ -24590,6 +24839,22 @@
     - hierarchy
   sizes:
     - 32
+- name: subprocess
+  friendly_name: Subprocess
+  aliases:
+    - subprocess
+    - process
+    - secondary
+    - workflow
+    - folder
+    - process folder
+    - group process
+    - nested process
+    - rectangle
+    - add
+    - plus
+  sizes:
+    - 32
 - name: subtract
   friendly_name: Subtract
   aliases:
@@ -25972,6 +26237,31 @@
     - watch
   sizes:
     - 20
+    - 32
+- name: tilde
+  friendly_name: Tilde
+  aliases:
+    - tilde
+    - change
+    - update
+    - updated
+    - edited
+    - modified
+    - revision
+  sizes:
+    - 32
+- name: tilde--large
+  friendly_name: Tilde large
+  aliases:
+    - tilde
+    - large
+    - change
+    - update
+    - updated
+    - edited
+    - modified
+    - revision
+  sizes:
     - 32
 - name: time--filled
   friendly_name: Time filled
