@@ -319,8 +319,6 @@ categories:
           - down-to-bottom
           - draggable
           - fragments
-          - gateway--inclusive
-          - gateway--parallel
           - home
           - menu
           - notification-counter
@@ -2011,8 +2009,10 @@ categories:
           - gateway
           - gateway--api
           - gateway--exclusive
+          - gateway--inclusive
           - gateway--inclusive--alt
           - gateway--mail
+          - gateway--parallel
           - gateway--parallel--alt
           - gateway--public
           - gateway--security
