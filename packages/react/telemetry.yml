@@ -43,6 +43,7 @@ collect:
         - closeOnActivation
         - cols
         - colSpan
+        - compact
         - compareItems
         - condensed
         - contained
@@ -358,6 +359,7 @@ collect:
         - enableTreeviewControllable
         - enableV12DynamicFloatingStyles
         - enableV12Overflowmenu
+        - enableV12Release
         - enableV12TileDefaultIcons
         - enableV12TileRadioIcons
         - flags
@@ -531,6 +533,7 @@ collect:
         # SelectItem
         - hidden
         # ShapeIndicator
+        - shapeDescription
         - textSize
         # SideNav
         - addMouseListeners
