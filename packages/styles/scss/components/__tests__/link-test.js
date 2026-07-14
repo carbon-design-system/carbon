@@ -43,6 +43,24 @@ describe('scss/components/link', () => {
     expect(hoverRules.length).toBeGreaterThan(0);
     expect(
       hoverRules
+        .filter((rule) => rule.selector.includes('.cds--link--disabled:hover'))
+        .map((rule) =>
+          rule.nodes.map(({ prop, value }) => ({
+            prop,
+            value,
+          }))
+        )
+    ).toEqual([
+      expect.arrayContaining([
+        {
+          prop: 'color',
+          value: expect.stringContaining('--cds-text-disabled'),
+        },
+        { prop: 'text-decoration', value: 'none' },
+      ]),
+    ]);
+    expect(
+      hoverRules
         .filter((rule) => {
           let parent = rule.parent;
 

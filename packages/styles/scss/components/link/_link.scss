@@ -85,6 +85,13 @@ $link-focus-text-color: custom-property.get-var(
     cursor: not-allowed;
     font-weight: 400;
     text-decoration: none;
+
+    @media (any-hover: hover) {
+      &:hover {
+        color: $text-disabled;
+        text-decoration: none;
+      }
+    }
   }
 
   .#{$prefix}--link.#{$prefix}--link--visited:visited {
