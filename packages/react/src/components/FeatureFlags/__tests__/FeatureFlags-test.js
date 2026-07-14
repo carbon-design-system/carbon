@@ -199,6 +199,8 @@ describe('FeatureFlags', () => {
       enableTreeviewControllable: true,
     });
 
+    // Inner scope adds enableV12Overflowmenu but does not specify
+    // enableTreeviewControllable, so the parent's true value is inherited.
     render(
       <FeatureFlags enableTreeviewControllable>
         <FeatureFlags enableV12Overflowmenu>
@@ -209,9 +211,11 @@ describe('FeatureFlags', () => {
 
     expect(checkFlag).toHaveBeenLastCalledWith({
       enableV12Overflowmenu: true,
-      enableTreeviewControllable: false,
+      enableTreeviewControllable: true,
     });
 
+    // Explicitly setting a flag to false in an inner scope overrides the
+    // parent scope's true value.
     render(
       <FeatureFlags enableTreeviewControllable>
         <FeatureFlags enableV12Overflowmenu>
@@ -227,6 +231,40 @@ describe('FeatureFlags', () => {
     expect(checkFlag).toHaveBeenLastCalledWith({
       enableV12Overflowmenu: false,
       enableTreeviewControllable: false,
+    });
+  });
+
+  it('should inherit parent scope flags not specified by a nested FeatureFlags scope', () => {
+    // When a component wraps itself in a FeatureFlags to enable an internal flag,
+    // it should not shadow flags set by the consumer in an outer FeatureFlags scope.
+    const checkFlag = jest.fn();
+
+    function TestComponent() {
+      const enableDialogElement = useFeatureFlag('enable-dialog-element');
+      const enableFocusWrapWithoutSentinels = useFeatureFlag(
+        'enable-focus-wrap-without-sentinels'
+      );
+
+      checkFlag({ enableDialogElement, enableFocusWrapWithoutSentinels });
+
+      return null;
+    }
+
+    render(
+      // Consumer enables enableDialogElement in an outer scope
+      <FeatureFlags enableDialogElement>
+        {/* Component internally wraps with FeatureFlags to set enableFocusWrapWithoutSentinels */}
+        <FeatureFlags enableFocusWrapWithoutSentinels>
+          <TestComponent />
+        </FeatureFlags>
+      </FeatureFlags>
+    );
+
+    // Both flags should be true: enableDialogElement inherited from outer scope,
+    // enableFocusWrapWithoutSentinels set by inner scope.
+    expect(checkFlag).toHaveBeenLastCalledWith({
+      enableDialogElement: true,
+      enableFocusWrapWithoutSentinels: true,
     });
   });
 
