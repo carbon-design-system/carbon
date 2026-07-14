@@ -160,7 +160,8 @@ export interface FilterableMultiSelectProps<ItemType>
   /**
    * Provide a method that filters the dropdown options based on the current input. Overriding this
    * prop means that you have to handle the filtering logic when the user types in the text input.
-   * Otherwise, a default built-in filtering function will be used.
+   * Otherwise, a default built-in filtering function will be used. To display items filtered by an
+   * external service without additional client-side filtering, return `items` unchanged.
    */
   filterItems?(
     items: readonly ItemType[],
@@ -242,8 +243,9 @@ export interface FilterableMultiSelectProps<ItemType>
   onChange?(changes: { selectedItems: ItemType[] }): void;
 
   /**
-   * A utility for this controlled component
-   * to communicate to the currently typed input.
+   * A utility for this controlled component to communicate the currently typed input. Use this to
+   * request externally filtered items and return `items` unchanged from `filterItems` to prevent
+   * additional client-side filtering.
    */
   onInputValueChange?: UseComboboxProps<ItemType>['onInputValueChange'];
 
@@ -676,6 +678,7 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
     menuId,
     inputId,
     inputValue,
+    onInputValueChange,
     stateReducer,
     isItemDisabled,
   });
@@ -725,9 +728,6 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
           highlightedIndex: controlledSelectedItems.length > 0 ? 0 : -1,
         };
       case InputChange:
-        if (onInputValueChange) {
-          onInputValueChange(changes);
-        }
         setInputValue(changes.inputValue ?? '');
         setIsOpen(true);
         return { ...changes, highlightedIndex: 0 };
@@ -1202,7 +1202,8 @@ FilterableMultiSelect.propTypes = {
   /**
    * Provide a method that filters the dropdown options based on the current input. Overriding this
    * prop means that you have to handle the filtering logic when the user types in the text input.
-   * Otherwise, a default built-in filtering function will be used.
+   * Otherwise, a default built-in filtering function will be used. To display items filtered by an
+   * external service without additional client-side filtering, return `items` unchanged.
    */
   filterItems: PropTypes.func,
 
@@ -1293,8 +1294,9 @@ FilterableMultiSelect.propTypes = {
   onChange: PropTypes.func,
 
   /**
-   * `onInputValueChange` is a utility for this controlled component to communicate to
-   * the currently typed input.
+   * A utility for this controlled component to communicate the currently typed input. Use this to
+   * request externally filtered items and return `items` unchanged from `filterItems` to prevent
+   * additional client-side filtering.
    */
   onInputValueChange: PropTypes.func,
 

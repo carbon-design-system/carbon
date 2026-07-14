@@ -171,6 +171,28 @@ const items = [
   },
 ];
 
+const customSearchItems = [
+  {
+    id: 'custom-search-item-0',
+    text: 'Apple',
+    searchTerms: ['fruit', 'red'],
+  },
+  {
+    id: 'custom-search-item-1',
+    text: 'Orange',
+    searchTerms: ['fruit', 'orange'],
+  },
+  {
+    id: 'custom-search-item-2',
+    text: 'Broccoli',
+    searchTerms: ['vegetable', 'green'],
+  },
+];
+
+function bypassClientFiltering(items) {
+  return items;
+}
+
 const sharedArgs = {
   size: 'md',
   autoAlign: false,
@@ -389,6 +411,48 @@ Filterable.argTypes = {
   },
 };
 Filterable.parameters = {
+  controls: {
+    exclude: ['label'],
+  },
+};
+
+export const FilterableWithCustomSearch = (args) => {
+  const [searchResults, setSearchResults] = useState(customSearchItems);
+
+  function handleInputValueChange(changes) {
+    action('onInputValueChange')(changes);
+    const query = changes.inputValue?.trim().toLocaleLowerCase();
+
+    setSearchResults(
+      query
+        ? customSearchItems.filter((item) => {
+            return item.searchTerms.some((term) => term.includes(query));
+          })
+        : customSearchItems
+    );
+  }
+
+  return (
+    <div style={{ width: 300 }}>
+      <FilterableMultiSelect
+        {...args}
+        id="carbon-multiselect-custom-search"
+        titleText="Filter by category or color"
+        helperText='Try searching for "fruit" or "green"'
+        items={searchResults}
+        itemToString={(item) => (item ? item.text : '')}
+        filterItems={bypassClientFiltering}
+        onInputValueChange={handleInputValueChange}
+      />
+    </div>
+  );
+};
+
+FilterableWithCustomSearch.args = { ...sharedArgs };
+FilterableWithCustomSearch.argTypes = {
+  ...filterableArgTypes,
+};
+FilterableWithCustomSearch.parameters = {
   controls: {
     exclude: ['label'],
   },

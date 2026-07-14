@@ -436,6 +436,38 @@ describe('FilterableMultiSelect', () => {
     );
   });
 
+  it('should support items filtered by an external search', async () => {
+    const externallyFilteredItems = [
+      { id: 'external-result', label: 'Server result' },
+    ];
+
+    function CustomSearchMultiSelect() {
+      const [items, setItems] = React.useState(mockProps.items);
+
+      return (
+        <FilterableMultiSelect
+          {...mockProps}
+          items={items}
+          filterItems={(items) => items}
+          onInputValueChange={({ inputValue }) => {
+            if (inputValue === 'remote') {
+              setItems(externallyFilteredItems);
+            }
+          }}
+        />
+      );
+    }
+
+    render(<CustomSearchMultiSelect />);
+    await waitForPosition();
+
+    await openMenu();
+    await userEvent.type(screen.getByRole('combobox'), 'remote');
+
+    expect(screen.getByText('Server result')).toBeInTheDocument();
+    expect(screen.queryByText('Item 0')).not.toBeInTheDocument();
+  });
+
   it('should call onInputValueChange with empty string when clear button is clicked', async () => {
     const onInputValueChange = jest.fn();
     render(
