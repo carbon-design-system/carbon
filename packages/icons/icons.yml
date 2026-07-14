@@ -18147,6 +18147,14 @@
     - exclamation mark
   sizes:
     - 32
+- name: missing-data--warning
+  friendly_name: Missing data warning
+  aliases:
+    - missing data warning
+    - status
+    - warning
+  sizes:
+    - 32
 - name: misuse
   friendly_name: Misuse
   aliases:
