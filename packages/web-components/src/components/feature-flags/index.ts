@@ -50,6 +50,7 @@ class FeatureFlagsElement extends LitElement {
    * Mapping of feature flag attributes to their related component names.
    */
   private static readonly flagComponentMap = {
+    'enable-v12-release': null,
     'enable-v12-tile-default-icons': 'CDS-CLICKABLE-TILE',
     'enable-v12-tile-radio-icons': 'CDS-TILE',
     'enable-v12-overflowmenu': 'CDS-OVERFLOW-MENU',
@@ -86,23 +87,76 @@ class FeatureFlagsElement extends LitElement {
     // Set feature flag to top component level
     const relatedComponent = hasOwn(FeatureFlagsElement.flagComponentMap, name)
       ? FeatureFlagsElement.flagComponentMap[name]
-      : 'unknown';
-    if (this.firstElementChild?.tagName === relatedComponent) {
+      : null;
+    if (
+      relatedComponent &&
+      this.firstElementChild?.tagName === relatedComponent
+    ) {
       this.firstElementChild.setAttribute(name, '');
     }
 
     this.updateScope();
   }
 
-  private getParentScope() {
-    let parent = this.parentNode;
+  private syncFeatureFlagAttributes() {
+    for (const [flag, relatedComponent] of Object.entries(
+      FeatureFlagsElement.flagComponentMap
+    )) {
+      if (!relatedComponent) {
+        continue;
+      }
+
+      let isEnabled = false;
+      try {
+        isEnabled = this.scope.enabled(flag);
+      } catch {
+        isEnabled = false;
+      }
+
+      for (const element of this.querySelectorAll(
+        relatedComponent.toLowerCase()
+      )) {
+        if (findParentFeatureFlags(element as HTMLElement) !== this) {
+          continue;
+        }
+
+        if (isEnabled) {
+          element.setAttribute(flag, '');
+        } else {
+          element.removeAttribute(flag);
+        }
+      }
+    }
+  }
+
+  private getParentFeatureFlagsElement() {
+    let parent: Node | null = this.parentNode;
     while (parent) {
+      if (parent instanceof ShadowRoot) {
+        parent = parent.host;
+        continue;
+      }
       if (parent instanceof FeatureFlagsElement) {
-        return parent.getScope();
+        return parent;
       }
       parent = parent.parentNode;
     }
     return null;
+  }
+
+  private getParentScope() {
+    return this.getParentFeatureFlagsElement()?.getScope() ?? null;
+  }
+
+  private syncChildFeatureFlagScopes() {
+    for (const element of this.querySelectorAll('feature-flags')) {
+      if (
+        element instanceof FeatureFlagsElement &&
+        element.getParentFeatureFlagsElement() === this
+      ) {
+        element.updateScope();
+      }
+    }
   }
 
   private updateScope() {
@@ -112,6 +166,8 @@ class FeatureFlagsElement extends LitElement {
       newScope.mergeWithScope(parentScope);
     }
     this.scope = newScope;
+    this.syncFeatureFlagAttributes();
+    this.syncChildFeatureFlagScopes();
   }
 
   render() {
@@ -119,9 +175,6 @@ class FeatureFlagsElement extends LitElement {
   }
 
   public isFeatureFlagEnabled(flag: string) {
-    if (Object.prototype.hasOwnProperty.call(this.flags, flag)) {
-      return this.flags[flag];
-    }
     return this.scope.enabled(flag);
   }
 
