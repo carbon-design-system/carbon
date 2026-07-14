@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2025
+ * Copyright IBM Corp. 2025, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -48,6 +48,81 @@ describe('cds-search', () => {
 
       const input = el.shadowRoot?.querySelector('input');
       expect(input).to.have.attribute('disabled');
+    });
+
+    it('should render an opt-in submit button', async () => {
+      const el = await fixture(html`
+        <cds-search
+          label-text="test-search"
+          enable-submit
+          submit-button-label-text="Run search"></cds-search>
+      `);
+
+      const submitButton = el.shadowRoot?.querySelector(
+        'button.cds--search-button'
+      );
+      expect(submitButton).to.exist;
+      expect(submitButton).to.have.attribute('aria-label', 'Run search');
+      expect(submitButton).to.have.attribute('disabled');
+    });
+
+    it('should submit the current value from the button and Enter key', async () => {
+      const el = await fixture(html`
+        <cds-search label-text="test-search" enable-submit></cds-search>
+      `);
+      const input = el.shadowRoot?.querySelector('input');
+      const submitButton = el.shadowRoot?.querySelector(
+        'button.cds--search-button'
+      );
+      const submittedValues = [];
+      el.addEventListener('cds-search-submit', (event) => {
+        submittedValues.push(event.detail.value);
+      });
+
+      input.value = 'carbon';
+      input.dispatchEvent(new Event('input', { bubbles: true }));
+      await el.updateComplete;
+
+      expect(submitButton).to.not.have.attribute('disabled');
+      submitButton.click();
+      expect(submittedValues).to.deep.equal(['carbon']);
+
+      input.focus();
+      input.dispatchEvent(
+        new KeyboardEvent('keydown', {
+          key: 'Enter',
+          bubbles: true,
+          composed: true,
+        })
+      );
+      expect(submittedValues).to.deep.equal(['carbon', 'carbon']);
+    });
+
+    it('should only submit values accepted by validate', async () => {
+      const el = await fixture(html`
+        <cds-search label-text="test-search" enable-submit></cds-search>
+      `);
+      el.validate = (searchValue) => searchValue.length >= 3;
+      const input = el.shadowRoot?.querySelector('input');
+      const submitButton = el.shadowRoot?.querySelector(
+        'button.cds--search-button'
+      );
+      let submitCount = 0;
+      el.addEventListener('cds-search-submit', () => {
+        submitCount++;
+      });
+
+      input.value = 'ab';
+      input.dispatchEvent(new Event('input', { bubbles: true }));
+      await el.updateComplete;
+      expect(submitButton).to.have.attribute('disabled');
+
+      input.value = 'abc';
+      input.dispatchEvent(new Event('input', { bubbles: true }));
+      await el.updateComplete;
+      expect(submitButton).to.not.have.attribute('disabled');
+      submitButton.click();
+      expect(submitCount).to.equal(1);
     });
 
     it('should respect the autofocus attribute', async () => {

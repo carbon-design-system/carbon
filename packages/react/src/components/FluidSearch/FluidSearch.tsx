@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2022, 2025
+ * Copyright IBM Corp. 2022, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -11,6 +11,7 @@ import classnames from 'classnames';
 import Search from '../Search';
 import { usePrefix } from '../../internal/usePrefix';
 import { FormContext } from '../FluidForm/FormContext';
+import type { SearchSubmitEvent } from '../Search/Search';
 
 export interface FluidSearchProps {
   /**
@@ -35,6 +36,10 @@ export interface FluidSearchProps {
    */
   disabled?: boolean;
   /**
+   * Specify whether the Search should render a submit button.
+   */
+  enableSubmit?: boolean;
+  /**
    * Specify a custom `id` for the input
    */
   id?: string;
@@ -55,6 +60,10 @@ export interface FluidSearchProps {
    */
   onKeyDown?: React.KeyboardEventHandler<HTMLInputElement>;
   /**
+   * Optional callback called when a valid search is submitted.
+   */
+  onSubmit?: (event: SearchSubmitEvent, value: string) => void;
+  /**
    * Provide an optional placeholder text for the Search.
    * Note: if the label and placeholder differ,
    * VoiceOver on Mac will read both
@@ -65,6 +74,10 @@ export interface FluidSearchProps {
    */
   role?: string;
   /**
+   * Specify a label to be read by screen readers on the submit button.
+   */
+  submitButtonLabelText?: string;
+  /**
    * Optional prop to specify the type of the `<input>`
    */
   type?: string;
@@ -72,6 +85,11 @@ export interface FluidSearchProps {
    * Specify the value of the `<input>`
    */
   value?: string | number;
+  /**
+   * Optional function used to determine whether the search value can be
+   * submitted. By default, any non-empty value is valid.
+   */
+  validate?: (value: string) => boolean;
 }
 
 const frFn = forwardRef<HTMLInputElement, FluidSearchProps>;
@@ -115,6 +133,11 @@ FluidSearch.propTypes = {
   disabled: PropTypes.bool,
 
   /**
+   * Specify whether the Search should render a submit button.
+   */
+  enableSubmit: PropTypes.bool,
+
+  /**
    * Specify a custom `id` for the input
    */
   id: PropTypes.string,
@@ -140,6 +163,11 @@ FluidSearch.propTypes = {
   onKeyDown: PropTypes.func,
 
   /**
+   * Optional callback called when a valid search is submitted.
+   */
+  onSubmit: PropTypes.func,
+
+  /**
    * Provide an optional placeholder text for the Search.
    * Note: if the label and placeholder differ,
    * VoiceOver on Mac will read both
@@ -152,6 +180,11 @@ FluidSearch.propTypes = {
   role: PropTypes.string,
 
   /**
+   * Specify a label to be read by screen readers on the submit button.
+   */
+  submitButtonLabelText: PropTypes.string,
+
+  /**
    * Optional prop to specify the type of the `<input>`
    */
   type: PropTypes.string,
@@ -160,6 +193,12 @@ FluidSearch.propTypes = {
    * Specify the value of the `<input>`
    */
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+
+  /**
+   * Optional function used to determine whether the search value can be
+   * submitted. By default, any non-empty value is valid.
+   */
+  validate: PropTypes.func,
 };
 
 export default FluidSearch;

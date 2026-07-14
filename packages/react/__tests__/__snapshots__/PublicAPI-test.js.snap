@@ -3429,6 +3429,9 @@ Map {
       "disabled": {
         "type": "bool",
       },
+      "enableSubmit": {
+        "type": "bool",
+      },
       "id": {
         "type": "string",
       },
@@ -3450,6 +3453,9 @@ Map {
         "type": "func",
       },
       "onKeyDown": {
+        "type": "func",
+      },
+      "onSubmit": {
         "type": "func",
       },
       "placeholder": {
@@ -3480,8 +3486,14 @@ Map {
         ],
         "type": "oneOf",
       },
+      "submitButtonLabelText": {
+        "type": "string",
+      },
       "type": {
         "type": "string",
+      },
+      "validate": {
+        "type": "func",
       },
       "value": {
         "args": [
@@ -5034,6 +5046,9 @@ Map {
       "disabled": {
         "type": "bool",
       },
+      "enableSubmit": {
+        "type": "bool",
+      },
       "id": {
         "type": "string",
       },
@@ -5050,14 +5065,23 @@ Map {
       "onKeyDown": {
         "type": "func",
       },
+      "onSubmit": {
+        "type": "func",
+      },
       "placeholder": {
         "type": "string",
       },
       "role": {
         "type": "string",
       },
+      "submitButtonLabelText": {
+        "type": "string",
+      },
       "type": {
         "type": "string",
+      },
+      "validate": {
+        "type": "func",
       },
       "value": {
         "args": [
@@ -8695,6 +8719,9 @@ Map {
       "disabled": {
         "type": "bool",
       },
+      "enableSubmit": {
+        "type": "bool",
+      },
       "id": {
         "type": "string",
       },
@@ -8716,6 +8743,9 @@ Map {
         "type": "func",
       },
       "onKeyDown": {
+        "type": "func",
+      },
+      "onSubmit": {
         "type": "func",
       },
       "placeholder": {
@@ -8746,8 +8776,14 @@ Map {
         ],
         "type": "oneOf",
       },
+      "submitButtonLabelText": {
+        "type": "string",
+      },
       "type": {
         "type": "string",
+      },
+      "validate": {
+        "type": "func",
       },
       "value": {
         "args": [
@@ -13172,6 +13208,9 @@ Map {
       "disabled": {
         "type": "bool",
       },
+      "enableSubmit": {
+        "type": "bool",
+      },
       "id": {
         "type": "string",
       },
@@ -13188,14 +13227,23 @@ Map {
       "onKeyDown": {
         "type": "func",
       },
+      "onSubmit": {
+        "type": "func",
+      },
       "placeholder": {
         "type": "string",
       },
       "role": {
         "type": "string",
       },
+      "submitButtonLabelText": {
+        "type": "string",
+      },
       "type": {
         "type": "string",
+      },
+      "validate": {
+        "type": "func",
       },
       "value": {
         "args": [
@@ -15214,6 +15262,9 @@ Map {
       "disabled": {
         "type": "bool",
       },
+      "enableSubmit": {
+        "type": "bool",
+      },
       "id": {
         "type": "string",
       },
@@ -15230,14 +15281,23 @@ Map {
       "onKeyDown": {
         "type": "func",
       },
+      "onSubmit": {
+        "type": "func",
+      },
       "placeholder": {
         "type": "string",
       },
       "role": {
         "type": "string",
       },
+      "submitButtonLabelText": {
+        "type": "string",
+      },
       "type": {
         "type": "string",
+      },
+      "validate": {
+        "type": "func",
       },
       "value": {
         "args": [

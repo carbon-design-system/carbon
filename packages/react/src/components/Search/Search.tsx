@@ -31,7 +31,14 @@ import { noopFn } from '../../internal/noopFn';
 import { Tooltip } from '../Tooltip';
 import { isSearchValuePresent } from './utils';
 
-type InputPropsBase = Omit<HTMLAttributes<HTMLInputElement>, 'onChange'>;
+type InputPropsBase = Omit<
+  HTMLAttributes<HTMLInputElement>,
+  'onChange' | 'onSubmit'
+>;
+export type SearchSubmitEvent =
+  | MouseEvent<HTMLButtonElement>
+  | KeyboardEvent<HTMLInputElement>;
+
 export interface SearchProps extends InputPropsBase {
   /**
    * Specify an optional value for the `autocomplete` property on the underlying
@@ -58,6 +65,11 @@ export interface SearchProps extends InputPropsBase {
    * Specify whether the `<input>` should be disabled
    */
   disabled?: boolean;
+
+  /**
+   * Specify whether the Search should render a submit button.
+   */
+  enableSubmit?: boolean;
 
   /**
    * Specify whether or not ExpandableSearch should render expanded or not
@@ -92,6 +104,11 @@ export interface SearchProps extends InputPropsBase {
   ): void;
 
   /**
+   * Optional callback called when a valid search is submitted.
+   */
+  onSubmit?: (event: SearchSubmitEvent, value: string) => void;
+
+  /**
    * Provide an optional placeholder text for the Search.
    * Note: if the label and placeholder differ,
    * VoiceOver on Mac will read both
@@ -116,6 +133,11 @@ export interface SearchProps extends InputPropsBase {
   size?: 'xs' | 'sm' | 'md' | 'lg';
 
   /**
+   * Specify a label to be read by screen readers on the submit button.
+   */
+  submitButtonLabelText?: string;
+
+  /**
    * Specify the type of the `<input>`
    */
   type?: string;
@@ -124,6 +146,12 @@ export interface SearchProps extends InputPropsBase {
    * Specify the value of the `<input>`
    */
   value?: string | number;
+
+  /**
+   * Optional function used to determine whether the search value can be
+   * submitted. By default, any non-empty value is valid.
+   */
+  validate?: (value: string) => boolean;
 }
 
 const Search = React.forwardRef<HTMLInputElement, SearchProps>(
@@ -134,6 +162,7 @@ const Search = React.forwardRef<HTMLInputElement, SearchProps>(
       closeButtonLabelText = 'Clear search input',
       defaultValue,
       disabled,
+      enableSubmit = false,
       isExpanded = true,
       inert,
       id,
@@ -144,19 +173,25 @@ const Search = React.forwardRef<HTMLInputElement, SearchProps>(
       onClear = () => {},
       onKeyDown,
       onExpand,
+      onSubmit,
       placeholder = 'Search',
       renderIcon,
       role,
       size,
+      submitButtonLabelText = 'Submit search',
       tabIndex,
       type = 'search',
+      validate,
       value,
       ...rest
     },
     forwardRef
   ) => {
-    const hasPropValue =
-      isSearchValuePresent(value) || isSearchValuePresent(defaultValue);
+    const initialSearchValue = isSearchValuePresent(value)
+      ? String(value)
+      : isSearchValuePresent(defaultValue)
+        ? String(defaultValue)
+        : '';
     const prefix = usePrefix();
     const { isFluid } = useContext(FormContext);
     const inputRef = useRef<HTMLInputElement>(null);
@@ -165,7 +200,10 @@ const Search = React.forwardRef<HTMLInputElement, SearchProps>(
     const inputId = useId('search-input');
     const uniqueId = id || inputId;
     const searchId = `${uniqueId}-search`;
-    const [hasContent, setHasContent] = useState(hasPropValue || false);
+    const [searchValue, setSearchValue] = useState(initialSearchValue);
+    const hasContent = isSearchValuePresent(searchValue);
+    const isSubmitValid =
+      hasContent && (validate ? validate(searchValue) : true);
     const isExpandableCollapsed = !!onExpand && !isExpanded;
     const searchClasses = cx(
       {
@@ -175,6 +213,7 @@ const Search = React.forwardRef<HTMLInputElement, SearchProps>(
         [`${prefix}--search--light`]: light,
         [`${prefix}--search--disabled`]: disabled,
         [`${prefix}--search--fluid`]: isFluid,
+        [`${prefix}--search--with-submit`]: enableSubmit,
       },
       className
     );
@@ -187,7 +226,7 @@ const Search = React.forwardRef<HTMLInputElement, SearchProps>(
     useEffect(() => {
       // Sync content state when used as a controlled input.
       if (typeof value !== 'undefined') {
-        setHasContent(isSearchValuePresent(value));
+        setSearchValue(isSearchValuePresent(value) ? String(value) : '');
       }
     }, [value]);
 
@@ -220,12 +259,18 @@ const Search = React.forwardRef<HTMLInputElement, SearchProps>(
       }
 
       onClear();
-      setHasContent(false);
+      setSearchValue('');
       inputRef.current?.focus();
     }
 
     function handleChange(event: ChangeEvent<HTMLInputElement>) {
-      setHasContent(event.target.value !== '');
+      setSearchValue(event.target.value);
+    }
+
+    function submitSearch(event: SearchSubmitEvent) {
+      if (isSubmitValid) {
+        onSubmit?.(event, searchValue);
+      }
     }
 
     function handleKeyDown(event: KeyboardEvent<HTMLInputElement>) {
@@ -238,6 +283,9 @@ const Search = React.forwardRef<HTMLInputElement, SearchProps>(
         else if (onExpand && isExpanded) {
           expandButtonRef.current?.focus();
         }
+      } else if (enableSubmit && match(event, keys.Enter)) {
+        event.preventDefault();
+        submitSearch(event);
       }
     }
 
@@ -319,6 +367,17 @@ const Search = React.forwardRef<HTMLInputElement, SearchProps>(
           type="button">
           <Close />
         </button>
+        {enableSubmit && (
+          <button
+            aria-label={submitButtonLabelText}
+            className={`${prefix}--search-button`}
+            disabled={disabled || !isSubmitValid}
+            onClick={submitSearch}
+            title={submitButtonLabelText}
+            type="button">
+            <CustomSearchIcon icon={renderIcon} />
+          </button>
+        )}
       </div>
     );
   }
@@ -351,6 +410,11 @@ Search.propTypes = {
    * Specify whether the `<input>` should be disabled
    */
   disabled: PropTypes.bool,
+
+  /**
+   * Specify whether the Search should render a submit button.
+   */
+  enableSubmit: PropTypes.bool,
 
   /**
    * Specify a custom `id` for the input
@@ -392,6 +456,11 @@ Search.propTypes = {
   onExpand: PropTypes.func,
 
   /**
+   * Optional callback called when a valid search is submitted.
+   */
+  onSubmit: PropTypes.func,
+
+  /**
    * Provide a handler that is invoked on the key down event for the input
    */
   onKeyDown: PropTypes.func,
@@ -424,6 +493,11 @@ Search.propTypes = {
   size: PropTypes.oneOf(['xs', 'sm', 'md', 'lg']),
 
   /**
+   * Specify a label to be read by screen readers on the submit button.
+   */
+  submitButtonLabelText: PropTypes.string,
+
+  /**
    * Specify the type of the `<input>`
    */
   type: PropTypes.string,
@@ -432,6 +506,12 @@ Search.propTypes = {
    * Specify the value of the `<input>`
    */
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+
+  /**
+   * Optional function used to determine whether the search value can be
+   * submitted. By default, any non-empty value is valid.
+   */
+  validate: PropTypes.func,
 };
 
 function CustomSearchIcon({ icon: Icon }) {

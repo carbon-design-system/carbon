@@ -154,6 +154,29 @@
     }
   }
 
+  .#{$prefix}--search--with-submit {
+    .#{$prefix}--search-magnifier {
+      display: none;
+    }
+
+    .#{$prefix}--search-input {
+      padding-inline-end: calc(layout.size('height') * 2);
+      padding-inline-start: $spacing-05;
+    }
+
+    .#{$prefix}--search-close {
+      inset-inline-end: layout.size('height');
+    }
+
+    .#{$prefix}--search-button {
+      position: absolute;
+      z-index: 2;
+      inset-block-start: 0;
+      inset-inline-end: 0;
+      margin-inline-start: 0;
+    }
+  }
+
   // Keep the clear icon above the hover fill overlay.
   .#{$prefix}--search-close svg {
     position: relative;
@@ -190,6 +213,19 @@
       @include focus-outline('outline');
 
       background-color: $background-selected;
+    }
+  }
+
+  .#{$prefix}--search-button:disabled {
+    background-color: $field;
+    cursor: not-allowed;
+    fill: $icon-disabled;
+
+    &:hover,
+    &:active {
+      border-color: transparent;
+      background-color: $field;
+      outline: none;
     }
   }
 

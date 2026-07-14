@@ -15,6 +15,7 @@ import * as SearchStories from './search.stories';
 ## Table of Contents
 
 - [Overview](#overview)
+- [Submit a search](#submit-a-search)
 - [Expandable](#expandable)
 - [Component API](#component-api)
 - [CDN](#cdn)
@@ -23,6 +24,14 @@ import * as SearchStories from './search.stories';
 ## Overview
 
 <Canvas of={SearchStories.Default} />
+
+## Submit a search
+
+Set `enable-submit` to render a submit button. The button and Enter key emit
+`cds-search-submit` only when the current value is non-empty and, when provided,
+accepted by the `validate` property.
+
+<Canvas of={SearchStories.WithSubmit} />
 
 ## Expandable
 

@@ -29,6 +29,10 @@ $css--plex: true !default;
   @extend .#{$prefix}--search--expandable;
 }
 
+:host(#{$prefix}-search[enable-submit]) {
+  @extend .#{$prefix}--search--with-submit;
+}
+
 :host([expandable]:focus-within) .#{$prefix}--search-magnifier {
   outline: $spacing-01 solid var(--cds-focus);
 

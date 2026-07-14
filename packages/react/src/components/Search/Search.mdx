@@ -17,6 +17,7 @@ import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
 ## Table of Contents
 
 - [Overview](#overview)
+- [Submit a search](#submit-a-search)
 - [Expandable](#expandable)
 - [Component API](#component-api)
 - [Feedback](#feedback)
@@ -34,6 +35,14 @@ import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
     },
   ]}
 />
+
+## Submit a search
+
+Set `enableSubmit` to render a submit button. The button and Enter key call
+`onSubmit` only when the current value is non-empty and, when provided, accepted
+by `validate`.
+
+<Canvas of={SearchStories.WithSubmit} />
 
 ## Expandable
 
