@@ -5,6 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import React from 'react';
 import FluidTextArea from '../FluidTextArea';
 import userEvent from '@testing-library/user-event';
 import { render, screen } from '@testing-library/react';
