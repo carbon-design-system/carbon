@@ -1,7 +1,7 @@
 {
   "name": "typescript-config-carbon",
   "description": "TypeScript configuration for Carbon",
-  "version": "0.10.0",
+  "version": "0.11.0-rc.0",
   "license": "Apache-2.0",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -31,7 +31,8 @@
     "build": "yarn clean && tsc -p tsconfig.json"
   },
   "dependencies": {
-    "typescript": "^5.7.3"
+    "@types/node": "^25.9.3",
+    "typescript": "^6.0.3"
   },
   "devDependencies": {
     "rimraf": "^6.0.1"
