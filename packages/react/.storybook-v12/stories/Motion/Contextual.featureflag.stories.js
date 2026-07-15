@@ -12,7 +12,7 @@ import { DemoDialog } from './DemoDialog';
 import './surfaces.stories.scss';
 
 export default {
-  title: 'Elements/Motion',
+  title: 'Elements/Motion/Contextual',
   tags: ['!autodocs'],
 };
 
