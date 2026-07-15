@@ -38,10 +38,9 @@ figma.connect(
       isActive: figma.enum('State', {
         Active: true,
       }),
-      renderIcon: figma.instance('Swap icon'),
     },
-    example: ({ linkText, isActive, renderIcon }) => (
-      <SideNavLink renderIcon={renderIcon} isActive={isActive} href="#">
+    example: ({ linkText, isActive }) => (
+      <SideNavLink renderIcon={IconName} isActive={isActive} href="#">
         {linkText}
       </SideNavLink>
     ),
@@ -77,10 +76,9 @@ figma.connect(
       isActive: figma.enum('State', {
         Active: true,
       }),
-      renderIcon: figma.instance('Swap icon'),
     },
-    example: ({ linkText, isActive, renderIcon }) => (
-      <SideNavMenu renderIcon={renderIcon} title={linkText} isActive={isActive}>
+    example: ({ linkText, isActive }) => (
+      <SideNavMenu renderIcon={IconName} title={linkText} isActive={isActive}>
         <SideNavMenuItem href="#">Nested link</SideNavMenuItem>
       </SideNavMenu>
     ),

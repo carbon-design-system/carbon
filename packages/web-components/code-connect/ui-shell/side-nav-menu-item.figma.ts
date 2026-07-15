@@ -35,11 +35,10 @@ figma.connect(
       isActive: figma.enum('State', {
         Active: true,
       }),
-      icon: figma.instance('Swap icon'),
     },
     example: (props) =>
       html`<cds-side-nav-link href="#" active=${props.isActive}>
-        <span slot="title-icon">${props.icon}</span>
+        <span slot="title-icon">IconName</span>
         ${props.linkText}
       </cds-side-nav-link>`,
     imports: [
@@ -77,11 +76,10 @@ figma.connect(
       isActive: figma.enum('State', {
         Active: true,
       }),
-      icon: figma.instance('Swap icon'),
     },
     example: (props) =>
       html`<cds-side-nav-menu title=${props.linkText} active=${props.isActive}>
-        <span slot="title-icon">${props.icon}</span>
+        <span slot="title-icon">IconName</span>
         <cds-side-nav-menu-item href="#">Nested link</cds-side-nav-menu-item>
       </cds-side-nav-menu>`,
     imports: [
