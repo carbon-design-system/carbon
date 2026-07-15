@@ -154,9 +154,9 @@ class CDSComboBox extends CDSDropdown {
 
     if (this.allowCustomValue) {
       const selected = this._getSelectedItem();
-      const selectedDisplayText = (selected?.textContent ?? '').trim();
+      const selectedDisplayText = selected?.textContent ?? '';
       const isDisplayingSelectedItem =
-        selected !== null && selectedDisplayText === rawQueryText.trim();
+        selected !== null && selectedDisplayText === rawQueryText;
 
       if (!isDisplayingSelectedItem) {
         const previousValue = this.value;
