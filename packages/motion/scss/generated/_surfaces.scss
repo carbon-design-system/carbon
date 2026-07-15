@@ -7,29 +7,36 @@
 //
 
 $surfaces: (
-  expand: (
-    kind: 'shared-element',
-    duration: 'slow-01',
+  disclosure: (
+    kind: 'reveal',
+    duration: 'moderate-01',
+    enter: (
+      block-size: 'auto',
+      opacity: 1,
+    ),
+    exit: (
+      block-size: 0,
+      opacity: 0,
+    ),
     enter-easing: (
       'entrance',
-      'expressive',
+      'productive',
     ),
     exit-easing: (
       'exit',
-      'expressive',
+      'productive',
     ),
-    reduced-motion: 'fade',
   ),
-  invoke: (
+  contextual: (
     kind: 'reveal',
-    duration: 'slow-01',
+    duration: 'fast-02',
     enter: (
       opacity: 1,
-      clip-path: 'inset(0 0 0 0)',
+      transform: 'scale(1)',
     ),
     exit: (
       opacity: 0,
-      clip-path: 'inset(50% 0 50% 0)',
+      transform: 'scale(0.96)',
     ),
     enter-easing: (
       'entrance',
@@ -39,6 +46,30 @@ $surfaces: (
       'exit',
       'expressive',
     ),
-    reduced-motion: 'fade',
+  ),
+  expand: (
+    kind: 'shared-element',
+    duration: 'moderate-02',
+    enter-easing: (
+      'standard',
+      'productive',
+    ),
+    exit-easing: (
+      'standard',
+      'productive',
+    ),
+  ),
+  invoke: (
+    kind: 'shared-element',
+    origin: 'trigger',
+    duration: 'moderate-02',
+    enter-easing: (
+      'standard',
+      'expressive',
+    ),
+    exit-easing: (
+      'standard',
+      'expressive',
+    ),
   ),
 );

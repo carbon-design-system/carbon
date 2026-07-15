@@ -5,153 +5,71 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { act, renderHook } from '@testing-library/react';
-import * as matchMedia from '../../useMatchMedia';
-import { createMotionAdapter } from '../adapters/motion';
+import { renderHook } from '@testing-library/react';
+import { useMotionEnabled } from '../useMotionEnabled';
 import { useMotionSurface } from '../useMotionSurface';
 
-jest.mock('../adapters/motion', () => ({
-  createMotionAdapter: jest.fn(),
+jest.mock('../useMotionEnabled', () => ({
+  useMotionEnabled: jest.fn(() => true),
 }));
-
-const createRun = (finished = Promise.resolve()) => {
-  const animation = { stop: jest.fn() };
-  return {
-    animation,
-    run: { animations: [animation], finished },
-  };
-};
 
 describe('useMotionSurface', () => {
   afterEach(() => {
-    jest.clearAllMocks();
-    jest.restoreAllMocks();
+    useMotionEnabled.mockReturnValue(true);
   });
 
-  // Pass the user preference to the animation engine.
-  it('passes the reduced-motion media query preference to the adapter', () => {
-    jest.spyOn(matchMedia, 'useMatchMedia').mockReturnValue(true);
-    createMotionAdapter.mockReturnValue({
-      enter: jest.fn(),
-      exit: jest.fn(),
+  it('resolves shared-element surfaces into Motion transitions', () => {
+    const { result } = renderHook(() => useMotionSurface('expand'));
+
+    expect(result.current.kind).toBe('shared-element');
+    expect(result.current.enabled).toBe(true);
+    expect(result.current.origin).toBeUndefined();
+    expect(result.current.enterTransition).toEqual({
+      duration: 0.24,
+      ease: [0.2, 0, 0.38, 0.9],
     });
-
-    renderHook(() =>
-      useMotionSurface('expand', {
-        open: false,
-        originRef: { current: null },
-        targetRef: { current: null },
-      })
-    );
-
-    expect(createMotionAdapter).toHaveBeenCalledWith('expand', true);
-  });
-
-  // Stop the old animation when open changes before it can finish.
-  it('coordinates controlled state and interrupted animations', async () => {
-    jest.spyOn(matchMedia, 'useMatchMedia').mockReturnValue(false);
-    let resolveEnter;
-    const enter = createRun(
-      new Promise((resolve) => {
-        resolveEnter = resolve;
-      })
-    );
-    const exit = createRun();
-    const motionAdapter = {
-      enter: jest.fn(() => enter.run),
-      exit: jest.fn(() => exit.run),
-    };
-    createMotionAdapter.mockReturnValue(motionAdapter);
-
-    const origin = {
-      focus: jest.fn(),
-      style: {
-        transition: 'color 1s',
-        visibility: 'visible',
-      },
-    };
-    const refs = {
-      contentRef: { current: [] },
-      originRef: { current: origin },
-      overlayRef: { current: { style: {} } },
-      targetRef: { current: { style: {} } },
-    };
-    const onExitComplete = jest.fn();
-    const { result, rerender } = renderHook(
-      ({ open }) =>
-        useMotionSurface('expand', {
-          adapter: 'motion',
-          onExitComplete,
-          open,
-          ...refs,
-        }),
-      { initialProps: { open: false } }
-    );
-
-    expect(result.current.isPresent).toBe(false);
-    rerender({ open: true });
-    expect(result.current.isPresent).toBe(true);
-    expect(origin.style.transition).toBe('none');
-    expect(origin.style.visibility).toBe('hidden');
-    expect(motionAdapter.enter).toHaveBeenCalledWith(
-      expect.objectContaining({ fromOrigin: true, origin })
-    );
-
-    rerender({ open: false });
-    expect(enter.animation.stop).toHaveBeenCalled();
-    expect(motionAdapter.exit).toHaveBeenCalled();
-
-    await act(async () => {
-      await exit.run.finished;
-    });
-    expect(result.current.isPresent).toBe(false);
-    expect(onExitComplete).toHaveBeenCalledTimes(1);
-    expect(origin.focus).not.toHaveBeenCalled();
-    expect(origin.style.transition).toBe('color 1s');
-    expect(origin.style.visibility).toBe('visible');
-
-    await act(async () => {
-      resolveEnter();
+    expect(result.current.exitTransition).toEqual({
+      duration: 0.24,
+      ease: [0.2, 0, 0.38, 0.9],
     });
   });
 
-  // Restore the Tile when React removes the component during an animation.
-  it('stops animations and restores origin styles on unmount', () => {
-    jest.spyOn(matchMedia, 'useMatchMedia').mockReturnValue(false);
-    const enter = createRun(new Promise(() => {}));
-    createMotionAdapter.mockReturnValue({
-      enter: jest.fn(() => enter.run),
-      exit: jest.fn(),
+  it('keeps the trigger origin of the invoke surface', () => {
+    const { result } = renderHook(() => useMotionSurface('invoke'));
+
+    expect(result.current.kind).toBe('shared-element');
+    expect(result.current.origin).toBe('trigger');
+    // standard/expressive
+    expect(result.current.enterTransition.ease).toEqual([0.4, 0.14, 0.3, 1]);
+  });
+
+  it('resolves reveal surfaces into enter/exit targets', () => {
+    const { result } = renderHook(() => useMotionSurface('contextual'));
+
+    expect(result.current.kind).toBe('reveal');
+    expect(result.current.initial).toEqual({
+      opacity: 0,
+      transform: 'scale(0.96)',
     });
+    expect(result.current.animate).toEqual({
+      opacity: 1,
+      transform: 'scale(1)',
+      // fast-02 = 110ms, entrance/expressive
+      transition: { duration: 0.11, ease: [0, 0, 0.3, 1] },
+    });
+    expect(result.current.exit).toEqual({
+      opacity: 0,
+      transform: 'scale(0.96)',
+      // exit/expressive
+      transition: { duration: 0.11, ease: [0.4, 0.14, 1, 1] },
+    });
+  });
 
-    const origin = {
-      style: {
-        transition: 'color 1s',
-        visibility: 'visible',
-      },
-    };
-    const refs = {
-      contentRef: { current: [] },
-      originRef: { current: origin },
-      overlayRef: { current: { style: {} } },
-      targetRef: { current: { style: {} } },
-    };
-    const { rerender, unmount } = renderHook(
-      ({ open }) =>
-        useMotionSurface('expand', {
-          open,
-          ...refs,
-        }),
-      { initialProps: { open: false } }
-    );
+  it('reports the accessibility gate', () => {
+    useMotionEnabled.mockReturnValue(false);
 
-    rerender({ open: true });
-    expect(origin.style.transition).toBe('none');
-    expect(origin.style.visibility).toBe('hidden');
+    const { result } = renderHook(() => useMotionSurface('expand'));
 
-    unmount();
-    expect(enter.animation.stop).toHaveBeenCalledTimes(1);
-    expect(origin.style.transition).toBe('color 1s');
-    expect(origin.style.visibility).toBe('visible');
+    expect(result.current.enabled).toBe(false);
   });
 });
