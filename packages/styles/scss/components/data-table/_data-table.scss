@@ -805,15 +805,26 @@
 
     tr.#{$prefix}--parent-row.#{$prefix}--expandable-row {
       block-size: auto;
-      min-block-size: 3rem;
     }
 
     tr.#{$prefix}--expandable-row:not(.#{$prefix}--parent-row) {
       block-size: auto;
     }
 
-    .#{$prefix}--table-expand {
-      max-inline-size: convert.to-rem(48px);
+    .#{$prefix}--child-row-inner-container {
+      inline-size: 100%;
+    }
+
+    // Match the rendered table column and prevent the flex item from shrinking
+    thead th.#{$prefix}--table-expand,
+    tbody td.#{$prefix}--table-expand {
+      flex: 0 0 convert.to-rem(40px);
+      block-size: auto;
+    }
+
+    // Keep the cell border inside the compact row height
+    &.#{$prefix}--data-table--sm tbody td.#{$prefix}--table-expand {
+      block-size: convert.to-rem(32px);
     }
 
     thead .#{$prefix}--table-expand {
@@ -827,9 +838,10 @@
     &:not(.#{$prefix}--data-table--xs):not(.#{$prefix}--data-table--xl):not(
         .#{$prefix}--data-table--sm
       )
-      td:not(.#{$prefix}--table-column-menu):not(
+      tr:not([data-child-row])
+      > td:not(.#{$prefix}--table-column-menu):not(
         .#{$prefix}--table-column-checkbox
-      ) {
+      ):not(.#{$prefix}--table-expand) {
       padding-block-start: convert.to-rem(14px);
     }
 
@@ -909,31 +921,31 @@
       min-inline-size: 0;
     }
 
-    &.#{$prefix}--data-table--xs tr:not(.#{$prefix}--expandable-row),
-    &.#{$prefix}--data-table--sm tr:not(.#{$prefix}--expandable-row),
-    &.#{$prefix}--data-table--xl tr:not(.#{$prefix}--expandable-row) {
+    &.#{$prefix}--data-table--xs tr:not([data-child-row]),
+    &.#{$prefix}--data-table--sm tr:not([data-child-row]),
+    &.#{$prefix}--data-table--md tr:not([data-child-row]),
+    &.#{$prefix}--data-table--xl tr:not([data-child-row]) {
       block-size: auto;
     }
 
-    &.#{$prefix}--data-table--xs tr:not(.#{$prefix}--expandable-row) {
+    &.#{$prefix}--data-table--xs tr:not([data-child-row]) {
       min-block-size: convert.to-rem(24px);
     }
 
-    &.#{$prefix}--data-table--sm tr:not(.#{$prefix}--expandable-row) {
+    &.#{$prefix}--data-table--sm tr:not([data-child-row]) {
       min-block-size: convert.to-rem(32px);
     }
 
-    &.#{$prefix}--data-table--xl tr:not(.#{$prefix}--expandable-row) {
+    &.#{$prefix}--data-table--sm tr.#{$prefix}--parent-row {
+      block-size: convert.to-rem(32px);
+    }
+
+    &.#{$prefix}--data-table--md tr:not([data-child-row]) {
+      min-block-size: convert.to-rem(40px);
+    }
+
+    &.#{$prefix}--data-table--xl tr:not([data-child-row]) {
       min-block-size: convert.to-rem(64px);
-    }
-
-    // Expansion overrides
-    &.#{$prefix}--data-table--xs tr td.#{$prefix}--table-expand {
-      padding-block-start: convert.to-rem(4px);
-    }
-
-    &.#{$prefix}--data-table--sm tr td.#{$prefix}--table-expand {
-      padding-block-start: convert.to-rem(8px);
     }
 
     .#{$prefix}--table-header-label {
