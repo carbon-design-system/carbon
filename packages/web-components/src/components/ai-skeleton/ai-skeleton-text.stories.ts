@@ -38,11 +38,6 @@ const argTypes = {
 export const AISkeletonText = {
   args,
   argTypes,
-  parameters: {
-    percy: {
-      skip: true,
-    },
-  },
   render: (args) => {
     const { heading, paragraph, width, lineCount } = args ?? {};
 

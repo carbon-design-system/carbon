@@ -15,7 +15,7 @@ import {
 } from '../MultiSelect';
 import { usePrefix } from '../../internal/usePrefix';
 import { FormContext } from '../FluidForm/FormContext';
-import { UseSelectProps } from 'downshift';
+import { UseComboboxProps, UseSelectProps } from 'downshift';
 
 interface OnChangeData<ItemType> {
   selectedItems: ItemType[] | null;
@@ -110,7 +110,7 @@ export interface FluidMultiSelectProps<ItemType>
    * **Filterable variant only** - `onInputValueChange` is a utility for this controlled component to communicate to
    * the currently typed input.
    */
-  onInputValueChange?: (inputValue: string) => void;
+  onInputValueChange?: UseComboboxProps<ItemType>['onInputValueChange'];
   /**
    * `onMenuChange` is a utility for this controlled component to communicate to a
    * consuming component that the menu was open(`true`)/closed(`false`).
@@ -178,8 +178,6 @@ const FluidMultiSelect = React.forwardRef(function FluidMultiSelect<ItemType>(
           {...other}
         />
       ) : (
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20452
-        // @ts-ignore
         <MultiSelect ref={ref} className={classNames} {...other} />
       )}
     </FormContext.Provider>

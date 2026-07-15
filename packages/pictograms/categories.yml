@@ -90,9 +90,11 @@ categories:
     members:
       - alarm
       - apartment
+      - bin--compost
+      - bin--recycle
+      - bin--sanitary
       - broom
       - building
-      - compost--bin
       - elevator
       - emergency--exit
       - escalator--down
@@ -104,7 +106,6 @@ categories:
       - intelligent-infrastructure
       - no--smoking
       - office
-      - recycle--bin
       - stairs
       - stairs--down
       - stairs--plan--view
@@ -141,6 +142,7 @@ categories:
       - cairo--giza-plateau
       - cairo--giza-sphinx
       - canada--maple-leaf
+      - chennai
       - chicago
       - chile--easter-island
       - chile--hand-of-the-desert
@@ -149,6 +151,7 @@ categories:
       - copenhagen--snekkja
       - dallas--reunion-tower
       - dallas--skyline
+      - denver
       - dubai--palm-islands
       - dubai--skyscraper
       - dublin--brewery
@@ -156,12 +159,14 @@ categories:
       - ecuador--quito
       - ehningen--tech-campus-01
       - ehningen--tech-campus-02
+      - frankfurt
       - frost-tower
       - geodesic-montreal-biosphere
       - guadalajara--seal
       - hamburg--philharmone
       - hong-kong--cityscape
       - hong-kong
+      - ibm--atx-office
       - ibm--one-madison-avenue
       - ibm--uk-labs-hursley
       - japan--mt-fuji
@@ -169,6 +174,7 @@ categories:
       - kuala-lumpur
       - london
       - london--big-ben
+      - los-angeles
       - madrid--cathedral
       - madrid--skyscrapers
       - madrid--statue
@@ -176,6 +182,7 @@ categories:
       - melbourne
       - mexico-city--angel-of-independence
       - mexico-city--museo-soumaya
+      - miami
       - milan--duomo-di-milano
       - milan--skyscrapers
       - montreal--olympic-stadium
@@ -191,11 +198,13 @@ categories:
       - nyc--world-trade-center
       - okinawa
       - osaka--tsutenkaku-tower
+      - oslo
       - paris--arc-de-triomphe
       - paris--eiffel-tower
       - paris--louvre
       - paris--notre-dame
       - paris--pompidou-center
+      - perth
       - peru--machu-picchu
       - portland--building
       - poughkeepsie--bridge
@@ -210,6 +219,7 @@ categories:
       - rome
       - san-francisco
       - san-francisco--fog
+      - san-jose
       - sao-paulo
       - seattle
       - seoul--gyeongbokgung-palace
@@ -221,6 +231,7 @@ categories:
       - stuttgart--tv-tower
       - sydney--mlc-centre
       - sydney--opera-house
+      - taipei
       - taipei--bubble-tea
       - tel-aviv
       - tokyo--cherry-blossom
@@ -734,6 +745,7 @@ categories:
       - software--02
       - software--development
       - systems-and-tools
+      - technology-zone--finger
       - universal-experiences
       - user--experience-design
       - user--insights
@@ -745,6 +757,7 @@ categories:
       - windows
   - name: Device interaction
     members:
+      - add-comments--mobile
       - add--device
       - augmented--reality
       - color--contrast
@@ -803,6 +816,7 @@ categories:
       - drone
       - electric
       - headphones
+      - laptop
       - microphone
       - mouse
       - printer
@@ -918,7 +932,12 @@ categories:
       - enterprise--design--thinking--01
       - enterprise--design--thinking--02
       - eye
+      - hashicorp--terraform
+      - ibm--aptio
+      - ibm--bob
+      - ibm--concert
       - ibm--ibv
+      - ibm--instana
       - ibm--ix
       - ibm--z
       - ibm--z-and-cloud-modernization-stack-provisioning
@@ -940,8 +959,10 @@ categories:
       - cargo--crane
       - cargo--ship
       - cheese
+      - complete-work--technician
       - construction-worker--mask
       - construction-worker
+      - create-work
       - farm--01
       - farm--02
       - farmer--01
@@ -957,13 +978,18 @@ categories:
       - power
       - recycle
       - refinery
+      - report-time--technician
+      - review-checklist
       - satellite
       - satellite--dish
       - solar--field
       - solar--panel
       - sprout
       - stack-limitation
+      - start-work--technician
       - steel
+      - supervisor
+      - supervisor-close--work
       - sustainability
       - telecom
       - this-side-up
@@ -1034,8 +1060,6 @@ categories:
       - dog--02
       - dog--walking
       - face--melting
-      - half-note
-      - hard--ice--cream
       - firecracker
       - fish
       - flower--01
@@ -1044,12 +1068,15 @@ categories:
       - frozen--pipe
       - gramophone
       - guitar
+      - half-note
+      - hard--ice--cream
       - hiking
       - horse
       - juice
       - lantern
       - limes
       - longhorn
+      - lotus--flower
       - mandolin
       - margarita-glass
       - martini-glass
@@ -1241,6 +1268,7 @@ categories:
       - manage-applications-anywhere
       - open-source
       - quantum-computing
+      - red-hat--ansible
       - red-hat--applications
       - synergy
       - virtual--server
@@ -1491,6 +1519,7 @@ categories:
       - speedometer
       - time
       - time--lapse
+      - timesheet
   - name: Transportation
     members:
       - airplane
@@ -1558,6 +1587,7 @@ categories:
       - watsonx--code-assistant-for-z-refactor
       - watsonx--data
       - watsonx--governance
+      - watsonx--orchestrate
       - watsonx
   - name: Weather
     members:
@@ -1611,6 +1641,7 @@ categories:
       - literature
       - lockers
       - loop--hearing
+      - men--showers
       - metal-can
       - no--food
       - no--liquids
@@ -1632,3 +1663,4 @@ categories:
       - urinal--02
       - washing-hands
       - waste--electronic
+      - women--showers

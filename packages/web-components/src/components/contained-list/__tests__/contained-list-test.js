@@ -238,6 +238,41 @@ describe('cds-contained-list-item', function () {
     expect(icon?.getAttribute('slot')).to.equal('icon');
   });
 
+  it('applies --with-icon class and layout when icon is present', async () => {
+    const el = await fixture(html`
+      <cds-contained-list label="Heading">
+        <cds-contained-list-item>
+          <svg slot="icon" data-testid="test-icon">
+            <circle cx="8" cy="8" r="8" />
+          </svg>
+          List item
+        </cds-contained-list-item>
+      </cds-contained-list>
+    `);
+
+    const item = el.querySelector('cds-contained-list-item');
+    await item?.updateComplete;
+
+    const itemContainer = item?.shadowRoot?.querySelector(
+      `.${prefix}--contained-list-item`
+    );
+    expect(itemContainer).to.exist;
+    expect(
+      itemContainer?.classList.contains(
+        `${prefix}--contained-list-item--with-icon`
+      )
+    ).to.be.true;
+
+    // Verify icon and content slots are both present in the content element
+    const content = item?.shadowRoot?.querySelector(
+      `.${prefix}--contained-list-item__content`
+    );
+    const iconSlot = content?.querySelector('slot[name="icon"]');
+    const defaultSlot = content?.querySelector('slot:not([name])');
+    expect(iconSlot).to.exist;
+    expect(defaultSlot).to.exist;
+  });
+
   describe('interactive', () => {
     it('renders content as button when clickable', async () => {
       const el = await fixture(html`

@@ -1,4 +1,17 @@
+import { puppeteerLauncher } from '@web/test-runner-puppeteer';
+
+const chromeLaunchArgs = process.env.CI
+  ? ['--no-sandbox', '--disable-setuid-sandbox']
+  : [];
+
 export default {
+  browsers: [
+    puppeteerLauncher({
+      launchOptions: {
+        args: chromeLaunchArgs,
+      },
+    }),
+  ],
   files: 'src/components/**/__tests__/**/*.js',
   nodeResolve: {
     extensions: ['.js', '.ts'],

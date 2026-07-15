@@ -21,6 +21,7 @@ collect:
         - allowEmpty
         - aria-controls
         - aria-current
+        - aria-describedby
         - aria-label
         - aria-labelledby
         - ariaLabel
@@ -42,6 +43,7 @@ collect:
         - closeOnActivation
         - cols
         - colSpan
+        - compact
         - compareItems
         - condensed
         - contained
@@ -251,6 +253,7 @@ collect:
         - warn
         - warnText
         - width
+        - withRowGap
         # AccordionItem
         - handleAnimationEnd
         - onHeadingClick
@@ -356,11 +359,10 @@ collect:
         - enableTreeviewControllable
         - enableV12DynamicFloatingStyles
         - enableV12Overflowmenu
+        - enableV12Release
         - enableV12TileDefaultIcons
         - enableV12TileRadioIcons
         - flags
-        # Filename
-        - aria-describedby
         # FileUploader
         - buttonLabel
         - filenameStatus
@@ -493,7 +495,9 @@ collect:
         - totalPages
         # Pagination
         - backwardText
+        - backwardTextTooltipPosition
         - forwardText
+        - forwardTextTooltipPosition
         - initialPage
         - isLastPage
         - itemRangeText
@@ -529,6 +533,7 @@ collect:
         # SelectItem
         - hidden
         # ShapeIndicator
+        - shapeDescription
         - textSize
         # SideNav
         - addMouseListeners
@@ -948,6 +953,16 @@ collect:
         - actionable
         - inline
         - toast
+        # Pagination - backwardTextTooltipPosition
+        - bottom
+        - left
+        - right
+        - top
+        # Pagination - forwardTextTooltipPosition
+        - bottom
+        - left
+        - right
+        - top
         # Popover - autoAlignBoundary
         - clippingAncestors
         # ShapeIndicator - textSize

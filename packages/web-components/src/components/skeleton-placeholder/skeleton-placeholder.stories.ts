@@ -9,11 +9,6 @@ import { html } from 'lit';
 import './skeleton-placeholder';
 
 export const Default = {
-  parameters: {
-    percy: {
-      skip: true,
-    },
-  },
   render: () => html`<cds-skeleton-placeholder></cds-skeleton-placeholder>`,
 };
 

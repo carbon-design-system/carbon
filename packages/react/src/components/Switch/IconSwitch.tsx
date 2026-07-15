@@ -217,9 +217,8 @@ IconSwitch.propTypes = {
    */
   selected: PropTypes.bool,
 
-  // TODO: Icon only variant of what? Isn't the `IconSwitch` always icon only?
   /**
-   * Passed in from `ContentSwitcher` to render icon-only variant
+   * Specify the size of the underlying icon-only button.
    */
   size: PropTypes.oneOf(['sm', 'md', 'lg']),
 

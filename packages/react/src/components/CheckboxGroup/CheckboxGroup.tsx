@@ -17,6 +17,8 @@ import { deprecate } from '../../prop-types/deprecate';
 import { usePrefix } from '../../internal/usePrefix';
 import { WarningFilled, WarningAltFilled } from '@carbon/icons-react';
 import { useId } from '../../internal/useId';
+import { hasHelperText } from '../../internal/hasHelperText';
+import { useNormalizedInputProps } from '../../internal/useNormalizedInputProps';
 import { AILabel } from '../AILabel';
 import { isComponentElement } from '../../internal';
 import { Checkbox } from '../Checkbox';
@@ -32,6 +34,7 @@ export interface CheckboxGroupProps {
   orientation?: 'horizontal' | 'vertical';
   legendText: ReactNode;
   readOnly?: boolean;
+  disabled?: boolean;
   /**
    * * @deprecated please use decorator instead.
    * **Experimental**: Provide a `Slug` component to be rendered inside the `Checkbox` component
@@ -56,6 +59,7 @@ const CheckboxGroup = ({
   legendId,
   legendText,
   readOnly,
+  disabled,
   warn,
   warnText,
   slug,
@@ -63,13 +67,21 @@ const CheckboxGroup = ({
   ...rest
 }: CheckboxGroupProps) => {
   const prefix = usePrefix();
-
-  const showWarning = !readOnly && !invalid && warn;
-  const showHelper = !invalid && !warn;
-
   const checkboxGroupInstanceId = useId();
+  const normalizedProps = useNormalizedInputProps({
+    id: `checkbox-group-${checkboxGroupInstanceId}`,
+    readOnly,
+    disabled: disabled ?? false,
+    invalid: invalid ?? false,
+    invalidText,
+    warn: warn ?? false,
+    warnText,
+  });
 
-  const hasHelper = typeof helperText !== 'undefined' && helperText !== null;
+  const showWarning = normalizedProps.warn;
+  const showHelper = !normalizedProps.invalid && !normalizedProps.warn;
+
+  const hasHelper = hasHelperText(helperText);
   const helperId = !hasHelper
     ? undefined
     : `checkbox-group-helper-text-${checkboxGroupInstanceId}`;
@@ -83,7 +95,7 @@ const CheckboxGroup = ({
   const fieldsetClasses = cx(`${prefix}--checkbox-group`, className, {
     [`${prefix}--checkbox-group--${orientation}`]: orientation === 'horizontal',
     [`${prefix}--checkbox-group--readonly`]: readOnly,
-    [`${prefix}--checkbox-group--invalid`]: !readOnly && invalid,
+    [`${prefix}--checkbox-group--invalid`]: normalizedProps.invalid,
     [`${prefix}--checkbox-group--warning`]: showWarning,
     [`${prefix}--checkbox-group--slug`]: slug,
     [`${prefix}--checkbox-group--decorator`]: decorator,
@@ -100,11 +112,11 @@ const CheckboxGroup = ({
     if (isComponentElement(child, Checkbox)) {
       const childProps: Pick<
         ComponentProps<typeof Checkbox>,
-        'invalid' | 'readOnly' | 'warn'
+        'invalid' | 'readOnly' | 'warn' | 'disabled'
       > = {
         ...(typeof invalid !== 'undefined' &&
         typeof child.props.invalid === 'undefined'
-          ? { invalid }
+          ? { invalid: normalizedProps.invalid }
           : {}),
         ...(typeof readOnly !== 'undefined' &&
         typeof child.props.readOnly === 'undefined'
@@ -112,7 +124,11 @@ const CheckboxGroup = ({
           : {}),
         ...(typeof warn !== 'undefined' &&
         typeof child.props.warn === 'undefined'
-          ? { warn }
+          ? { warn: normalizedProps.warn }
+          : {}),
+        ...(typeof disabled !== 'undefined' &&
+        typeof child.props.disabled === 'undefined'
+          ? { disabled }
           : {}),
       };
 
@@ -127,10 +143,16 @@ const CheckboxGroup = ({
   return (
     <fieldset
       className={fieldsetClasses}
-      data-invalid={invalid ? true : undefined}
+      disabled={disabled}
+      data-invalid={normalizedProps.invalid ? true : undefined}
       aria-labelledby={rest['aria-labelledby'] || legendId}
       aria-readonly={readOnly}
-      aria-describedby={!invalid && !warn && helper ? helperId : undefined}
+      aria-disabled={disabled}
+      aria-describedby={
+        !normalizedProps.invalid && !normalizedProps.warn && helper
+          ? helperId
+          : undefined
+      }
       {...rest}>
       <legend
         className={`${prefix}--label`}
@@ -148,7 +170,7 @@ const CheckboxGroup = ({
       </legend>
       {clonedChildren}
       <div className={`${prefix}--checkbox-group__validation-msg`}>
-        {!readOnly && invalid && (
+        {normalizedProps.invalid && (
           <>
             <WarningFilled className={`${prefix}--checkbox__invalid-icon`} />
             <div className={`${prefix}--form-requirement`}>{invalidText}</div>

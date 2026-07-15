@@ -12,7 +12,17 @@ import Handle from '../internal/handle';
  * @param Base The base class.
  * @returns A mix-in to handle `formdata` event on the containing form.
  */
-const FormMixin = <T extends Constructor<HTMLElement>>(Base: T) => {
+const FormMixin = <T extends Constructor<HTMLElement>>(
+  Base: T
+): {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  new (...args: any[]): {
+    _hFormdata: Handle | null;
+    _handleFormdata(event: Event): void;
+    connectedCallback(): void;
+    disconnectedCallback(): void;
+  };
+} & T => {
   /**
    * A mix-in class to handle `formdata` event on the containing form.
    */
@@ -50,7 +60,8 @@ const FormMixin = <T extends Constructor<HTMLElement>>(Base: T) => {
       super.disconnectedCallback();
     }
   }
-  return FormMixinImpl;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  return FormMixinImpl as any;
 };
 
 export default FormMixin;

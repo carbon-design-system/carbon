@@ -149,11 +149,6 @@ export const Selection = {
 
 export const Skeleton = {
   decorators: [(story) => html`<div style="width: 800px">${story()}</div>`],
-  parameters: {
-    percy: {
-      skip: true,
-    },
-  },
   render: () => html`
     ${Array.apply(null, Array(2)).map(
       () => html`

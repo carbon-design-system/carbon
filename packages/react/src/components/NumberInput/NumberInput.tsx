@@ -604,13 +604,7 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
       if (controlledValue !== undefined) {
         return controlledValue;
       }
-      if (defaultValue !== undefined) {
-        return defaultValue;
-      }
-      if (allowEmpty) {
-        return '';
-      }
-      return 0;
+      return defaultValue;
     });
 
     const numberParser = useMemo(
@@ -755,7 +749,11 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
               : Number(event.target.value),
           direction: value < event.target.value ? 'up' : 'down',
         };
-        setValue(state.value);
+
+        // Only update internal state if component is uncontrolled
+        if (controlledValue === undefined) {
+          setValue(state.value);
+        }
 
         if (onChange) {
           onChange(event, state);
@@ -820,8 +818,6 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
             if (direction === `down`) rawValue = -1;
           } else if ((min && min > 0 && max && max > 0) || min) {
             rawValue = min;
-          } else {
-            rawValue = 0;
           }
         } else if (direction === 'up') {
           rawValue = currentValue + step;
@@ -841,7 +837,10 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
         };
 
         if (type === 'number') {
-          setValue(state.value);
+          // Only update internal state if component is uncontrolled
+          if (controlledValue === undefined) {
+            setValue(state.value);
+          }
         }
 
         if (type === 'text') {
@@ -928,7 +927,7 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
               onChange={handleOnChange}
               onKeyUp={onKeyUp}
               onKeyDown={(e) => {
-                if (type === 'text') {
+                if (type === 'text' && !readOnly && !disabled) {
                   if (match(e, keys.ArrowUp)) {
                     handleStep(e, 'up');
                   } else if (match(e, keys.ArrowDown)) {

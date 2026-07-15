@@ -148,20 +148,6 @@ yarn test
 For detailed testing information, see the
 [style guide](../docs/style.md#testing).
 
-#### Add yourself to the contributor list
-
-To ensure you are recognized for your contributions, add yourself to the
-Contributors table in the [README](../README.md#contributors) by running the
-following commands:
-
-```sh
-yarn all-contributors add <your_github_username> <contribution>
-yarn all-contributors generate
-```
-
-Visit https://allcontributors.org/docs/en/cli/usage#all-contributors-add for
-more details.
-
 #### Create a pull request
 
 When you're ready to submit your changes for review, commit and push your
@@ -174,6 +160,24 @@ Then, create a PR to the main Carbon repo by following GitHub's
 See
 [How to write the perfect pull request](https://github.com/blog/1943-how-to-write-the-perfect-pull-request)
 for tips on writing a good PR description.
+
+Before a PR is merged, make sure the required reviews are complete:
+
+- If your PR changes anything visual (layout, styles, components, or user
+  interaction), it requires design review.
+  - Assign a designer reviewer.
+  - Add the
+    https://github.com/carbon-design-system/carbon/labels/status%3A%20visual%20review%20%F0%9F%94%8D
+    label.
+  - After design approval, remove the
+    https://github.com/carbon-design-system/carbon/labels/status%3A%20visual%20review%20%F0%9F%94%8D
+    label (preferably by the designer; developers can remove it after approval).
+- If your PR does not require design review, it needs 2 developer approvals.
+- If your PR requires design review, it needs 2 developer approvals and 1 design
+  approval.
+- After all required approvals are in place, add `status: ready to merge`.
+- Do not use **Enable auto-merge** or **Merge when ready** when the button turns
+  green unless all required approvals are complete.
 
 #### Sign the DCO
 
@@ -212,10 +216,13 @@ on GitHub. Sign up on https://github.com.
   practices.
 - **Design:** Contribute visual assets, UX interactions, motion design, Figma
   kit fixes, and more.
-- **Content:** Whether updating docs or adding new
-  [patterns](https://carbondesignsystem.com/patterns/overview/), anyone can
-  contribute to our contributions to our
-  [website content](https://github.com/carbon-design-system/carbon-website).
+- **Content:** If you want to contribute content for
+  [carbondesignsystem.com](https://carbondesignsystem.com), such as
+  [patterns](https://carbondesignsystem.com/patterns/overview/), please
+  contribute in
+  [carbon-design-system/carbon-website](https://github.com/carbon-design-system/carbon-website).
+  Documentation that lives in this repository (e.g., package READMEs, `docs/`,
+  and component `.mdx` files) should still be contributed here.
   - **Research:** If you have findings to improve the Carbon user experience,
     share them — ideally with supporting design and development details in a
     GitHub issue and subsequent PR.
