@@ -18,7 +18,7 @@ import { DemoDialog } from './DemoDialog';
 import './surfaces.stories.scss';
 
 export default {
-  title: 'Elements/Motion/Expand',
+  title: 'Elements/Motion',
   tags: ['!autodocs'],
 };
 

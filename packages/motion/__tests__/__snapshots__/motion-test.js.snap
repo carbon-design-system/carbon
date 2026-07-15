@@ -55,16 +55,16 @@ exports[`@carbon/motion Public API 1`] = `
     "contextual": {
       "duration": "fast-02",
       "enter": {
+        "clipPath": "inset(0 0 0 0)",
         "opacity": 1,
-        "transform": "scale(1)",
       },
       "enterEasing": [
         "entrance",
         "expressive",
       ],
       "exit": {
+        "clipPath": "inset(50% 0 50% 0)",
         "opacity": 0,
-        "transform": "scale(0.96)",
       },
       "exitEasing": [
         "exit",

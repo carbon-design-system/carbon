@@ -132,8 +132,8 @@ describe('@carbon/motion', () => {
     expect(contextual).toEqual({
       kind: 'reveal',
       duration: 'fast-02',
-      enter: { opacity: 1, transform: 'scale(1)' },
-      exit: { opacity: 0, transform: 'scale(0.96)' },
+      enter: { opacity: 1, clipPath: 'inset(0 0 0 0)' },
+      exit: { opacity: 0, clipPath: 'inset(50% 0 50% 0)' },
       enterEasing: ['entrance', 'expressive'],
       exitEasing: ['exit', 'expressive'],
     });
@@ -164,15 +164,15 @@ describe('@carbon/motion', () => {
     const css = result.css;
 
     expect(css).toContain('opacity: 1');
-    expect(css).toContain('transform: scale(1)');
+    expect(css).toContain('clip-path: inset(0 0 0 0)');
     expect(css).toContain('@media (prefers-reduced-motion: no-preference)');
     expect(css).toContain('transition-duration: 110ms');
-    expect(css).toContain('transition-property: opacity, transform');
+    expect(css).toContain('transition-property: opacity, clip-path');
     expect(css).toContain(
       'transition-timing-function: cubic-bezier(0, 0, 0.3, 1)'
     );
     expect(css).toContain('@starting-style');
-    expect(css).toContain('transform: scale(0.96)');
+    expect(css).toContain('clip-path: inset(50% 0 50% 0)');
   });
 
   test('surface mixin rejects shared-element surfaces', async () => {
