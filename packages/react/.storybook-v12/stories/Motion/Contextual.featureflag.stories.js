@@ -34,19 +34,6 @@ export const ContextualWithNativeCSS = () => {
     }
   }, [open]);
 
-  useEffect(() => {
-    if (open || !present) {
-      return;
-    }
-
-    const reducedMotion = window.matchMedia(
-      '(prefers-reduced-motion: reduce)'
-    ).matches;
-    if (reducedMotion) {
-      setPresent(false);
-    }
-  }, [open, present]);
-
   return (
     <>
       <Button
