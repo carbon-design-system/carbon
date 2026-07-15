@@ -39,6 +39,13 @@
   margin-block-end: 1px;
 }
 
+// stylelint-disable declaration-no-important
+.motion-surface-tile:active {
+  color: inherit !important;
+  text-decoration: none !important;
+}
+// stylelint-enable declaration-no-important
+
 @media (prefers-reduced-motion: no-preference) {
   .motion-surface-tile:hover {
     z-index: 1000;

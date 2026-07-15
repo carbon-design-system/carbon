@@ -175,13 +175,14 @@ export const MotionSurfaceOrigin = forwardRef<
   }
 
   // reverse morph when target exits - use surface exit transition
+  // wrap the children in a motion.div with layout to ensure the children are animated without distortion
   return (
     <motion.div
       ref={ref}
       layoutId={surfaceId}
       transition={resolved.exitTransition}
       {...rest}>
-      {children}
+      <motion.div layout>{children}</motion.div>
     </motion.div>
   );
 });
