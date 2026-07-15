@@ -24,18 +24,18 @@ export default {
   ],
   coveragePathIgnorePatterns: [
     'packages/web-components/*',
-    // TODO: remove scss-generator once issue is resolved
-    // https://github.com/carbon-design-system/carbon/issues/20115
+    // scss-generator coverage is collected by `yarn test:scss-generator`,
+    // which scopes VM modules to the Prettier 3 dynamic imports in that package.
     'packages/scss-generator/*',
   ],
   testPathIgnorePatterns: [
     'packages/web-components/*',
-    // TODO: remove scss-generator once issue is resolved
-    // https://github.com/carbon-design-system/carbon/issues/20115
+    // scss-generator is covered by `yarn test:scss-generator`, which scopes
+    // VM modules to the Prettier 3 dynamic imports in that package.
     'packages/scss-generator/*',
   ],
   transformIgnorePatterns: [
-    '<rootDir>/node_modules/(?!lodash-es|nanoid|chalk|color)',
+    '<rootDir>/node_modules/(?!lodash-es|nanoid|chalk)',
   ],
   moduleNameMapper: {
     // Jest uses identity-obj-proxy to mock CSS/SCSS imports.

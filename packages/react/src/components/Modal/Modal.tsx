@@ -738,8 +738,8 @@ const ModalDialog = React.forwardRef(function ModalDialog(
       focusAfterCloseRef={launcherButtonRef}
       modal
       ref={innerModal}
-      role={isAlertDialog ? 'alertdialog' : ''}
-      aria-describedby={isAlertDialog ? modalBodyId : ''}
+      role={isAlertDialog ? 'alertdialog' : undefined}
+      aria-describedby={isAlertDialog ? modalBodyId : undefined}
       className={containerClasses}
       aria-label={ariaLabel}
       data-exiting={presenceContext?.isExiting || undefined}>
