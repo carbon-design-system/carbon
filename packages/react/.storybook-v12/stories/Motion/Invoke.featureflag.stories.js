@@ -6,14 +6,14 @@
  */
 
 import React, { useState } from 'react';
-import Button from '../Button';
-import { ClickableTile } from '../Tile';
-import { MotionSurfaceOrigin } from '../../internal/motion/MotionSurface';
+import Button from '../../../src/components/Button';
+import { ClickableTile } from '../../../src/components/Tile';
+import { MotionSurfaceOrigin } from '../../../src/internal/motion/MotionSurface';
 import { DemoDialog } from './DemoDialog';
 import './surfaces.stories.scss';
 
 export default {
-  title: 'Motion/Surfaces/Invoke',
+  title: 'Elements/Motion/Invoke',
   tags: ['!autodocs'],
 };
 

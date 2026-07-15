@@ -6,19 +6,19 @@
  */
 
 import React, { useState } from 'react';
-import { AspectRatio } from '../AspectRatio';
-import { ClickableTile } from '../Tile';
-import { Column, Grid } from '../Grid';
+import { AspectRatio } from '../../../src/components/AspectRatio';
+import { ClickableTile } from '../../../src/components/Tile';
+import { Column, Grid } from '../../../src/components/Grid';
 import { ArrowRight } from '@carbon/icons-react';
 import {
   MotionSurfaceOrigin,
   MotionSurface,
-} from '../../internal/motion/MotionSurface';
+} from '../../../src/internal/motion/MotionSurface';
 import { DemoDialog } from './DemoDialog';
 import './surfaces.stories.scss';
 
 export default {
-  title: 'Motion/Surfaces/Expand',
+  title: 'Elements/Motion/Expand',
   tags: ['!autodocs'],
 };
 

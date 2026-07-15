@@ -37,11 +37,13 @@
 // want to standardize it.
 .motion-surface-tile {
   margin-block-end: 1px;
+}
 
-  &:hover {
-    transform: scale(1.025);
+@media (prefers-reduced-motion: no-preference) {
+  .motion-surface-tile:hover {
     z-index: 1000;
     border-radius: $spacing-03;
+    transform: scale(1.025);
     @include box-shadow();
 
     transition:
@@ -52,6 +54,6 @@
 }
 
 .motion-surface-demo__container--expand {
-  inline-size: 95%;
   block-size: 100%;
+  inline-size: 95%;
 }

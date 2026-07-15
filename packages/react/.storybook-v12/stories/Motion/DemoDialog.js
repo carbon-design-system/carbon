@@ -8,9 +8,9 @@
 import React, { useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import Button from '../Button';
-import { MotionSurface } from '../../internal/motion/MotionSurface';
-import { usePrefix } from '../../internal/usePrefix';
+import Button from '../../../src/components/Button';
+import { MotionSurface } from '../../../src/internal/motion/MotionSurface';
+import { usePrefix } from '../../../src/internal/usePrefix';
 
 /**
  * Story-only dialog chrome for the surface demos.
