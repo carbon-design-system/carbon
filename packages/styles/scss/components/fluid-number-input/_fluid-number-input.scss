@@ -22,6 +22,10 @@
     position: relative;
     background: $field;
     block-size: 100%;
+    border-end-end-radius: var(--cds-border-radius-input, 0);
+    border-end-start-radius: var(--cds-border-radius-input, 0);
+    border-start-end-radius: var(--cds-border-radius-input, 0);
+    border-start-start-radius: var(--cds-border-radius-input, 0);
   }
 
   .#{$prefix}--number-input--fluid .#{$prefix}--label {
@@ -166,6 +170,11 @@
   .#{$prefix}--number-input--fluid.#{$prefix}--number-input--fluid--focus
     .#{$prefix}--number {
     @include focus-outline('outline');
+
+    border-end-end-radius: var(--cds-border-radius-input, 0);
+    border-end-start-radius: var(--cds-border-radius-input, 0);
+    border-start-end-radius: var(--cds-border-radius-input, 0);
+    border-start-start-radius: var(--cds-border-radius-input, 0);
   }
 
   .#{$prefix}--number-input--fluid:not(

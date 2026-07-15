@@ -32,6 +32,10 @@
     z-index: z('modal');
     padding: $spacing-02 0;
     background-color: $layer;
+    border-end-end-radius: var(--cds-border-radius-box, 0);
+    border-end-start-radius: var(--cds-border-radius-box, 0);
+    border-start-end-radius: var(--cds-border-radius-box, 0);
+    border-start-start-radius: var(--cds-border-radius-box, 0);
     max-inline-size: 18rem;
     min-inline-size: 10rem;
     opacity: 0;
@@ -86,6 +90,15 @@
     &:focus {
       @include focus-outline('outline');
     }
+  }
+
+  .#{$prefix}--menu-item,
+  .#{$prefix}--combo-button__container .#{$prefix}--menu-item,
+  .#{$prefix}--menu-button__container .#{$prefix}--menu-item {
+    border-end-end-radius: var(--cds-border-radius-button, 0);
+    border-end-start-radius: var(--cds-border-radius-button, 0);
+    border-start-end-radius: var(--cds-border-radius-button, 0);
+    border-start-start-radius: var(--cds-border-radius-button, 0);
   }
 
   .#{$prefix}--menu-item:hover {

@@ -67,6 +67,14 @@ $content-padding: 0 0 0 $spacing-05 !default;
     }
   }
 
+  .#{$prefix}--accordion__item,
+  .#{$prefix}--accordion__item button {
+    border-end-end-radius: var(--cds-border-radius-button, 0);
+    border-end-start-radius: var(--cds-border-radius-button, 0);
+    border-start-end-radius: var(--cds-border-radius-button, 0);
+    border-start-start-radius: var(--cds-border-radius-button, 0);
+  }
+
   .#{$prefix}--accordion__item:not(.#{$prefix}--accordion__item--active) {
     @media (any-hover: hover) {
       // Blend border on hover

@@ -21,6 +21,10 @@
   .#{$prefix}--date-picker--fluid {
     display: inline-flex;
     background: $field;
+    border-end-end-radius: var(--cds-border-radius-input, 0);
+    border-end-start-radius: var(--cds-border-radius-input, 0);
+    border-start-end-radius: var(--cds-border-radius-input, 0);
+    border-start-start-radius: var(--cds-border-radius-input, 0);
   }
 
   .#{$prefix}--date-picker--fluid .#{$prefix}--date-picker {
@@ -118,6 +122,13 @@
     ),
   .#{$prefix}--date-picker--single .#{$prefix}--date-picker--fluid--warn {
     border-block-end: 1px solid $border-strong;
+  }
+
+  .#{$prefix}--date-picker-container {
+    border-end-end-radius: var(--cds-border-radius-input, 0);
+    border-end-start-radius: var(--cds-border-radius-input, 0);
+    border-start-end-radius: var(--cds-border-radius-input, 0);
+    border-start-start-radius: var(--cds-border-radius-input, 0);
   }
 
   // Range
@@ -318,6 +329,10 @@
     background: $skeleton-background;
     block-size: convert.to-rem(64px);
     border-block-end: 1px solid $skeleton-element;
+    border-end-end-radius: var(--cds-border-radius-input, 0);
+    border-end-start-radius: var(--cds-border-radius-input, 0);
+    border-start-end-radius: var(--cds-border-radius-input, 0);
+    border-start-start-radius: var(--cds-border-radius-input, 0);
   }
 
   .#{$prefix}--date-picker--fluid__skeleton--container {

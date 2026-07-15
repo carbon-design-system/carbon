@@ -90,6 +90,10 @@ $list-box-menu-width: convert.to-rem(300px);
     background-color: $field;
     block-size: layout.size('height');
     border-block-end: 1px solid $border-strong;
+    border-end-end-radius: var(--cds-border-radius-input, 0);
+    border-end-start-radius: var(--cds-border-radius-input, 0);
+    border-start-end-radius: var(--cds-border-radius-input, 0);
+    border-start-start-radius: var(--cds-border-radius-input, 0);
     color: $text-primary;
     cursor: pointer;
     inline-size: $list-box-width;
@@ -147,6 +151,13 @@ $list-box-menu-width: convert.to-rem(300px);
   .#{$prefix}--list-box__invalid-icon--warning path[fill] {
     fill: $black-100;
     opacity: 1;
+  }
+
+  .#{$prefix}--list-box__field {
+    border-end-end-radius: var(--cds-border-radius-input, 0);
+    border-end-start-radius: var(--cds-border-radius-input, 0);
+    border-start-end-radius: var(--cds-border-radius-input, 0);
+    border-start-start-radius: var(--cds-border-radius-input, 0);
   }
 
   .#{$prefix}--list-box[data-invalid] .#{$prefix}--list-box__field,
@@ -429,6 +440,10 @@ $list-box-menu-width: convert.to-rem(300px);
     align-items: center;
     justify-content: center;
     block-size: convert.to-rem(24px);
+    border-end-end-radius: var(--cds-border-radius-button, 0);
+    border-end-start-radius: var(--cds-border-radius-button, 0);
+    border-start-end-radius: var(--cds-border-radius-button, 0);
+    border-start-start-radius: var(--cds-border-radius-button, 0);
     cursor: pointer;
     inline-size: convert.to-rem(24px);
     inset-block-start: 50%;
@@ -514,6 +529,10 @@ $list-box-menu-width: convert.to-rem(300px);
     z-index: z('dropdown');
     display: none;
     background-color: $layer;
+    border-end-end-radius: var(--cds-border-radius-box, 0);
+    border-end-start-radius: var(--cds-border-radius-box, 0);
+    border-start-end-radius: var(--cds-border-radius-box, 0);
+    border-start-start-radius: var(--cds-border-radius-box, 0);
     inline-size: $list-box-width;
     inset-inline: 0;
     overflow-y: auto;
