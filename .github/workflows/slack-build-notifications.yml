@@ -3,12 +3,7 @@ name: Slack Build Notifications
 on:
   workflow_run:
     workflows:
-      [
-        Version,
-        Release,
-        Deploy React storybook to GitHub Pages,
-        promote,
-      ]
+      [ci, Version, Release, Deploy React storybook to GitHub Pages, promote]
     types: [completed]
     branches: [main]
 
