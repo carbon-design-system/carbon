@@ -130,7 +130,7 @@ export interface PaginationProps
     currentPageSize: number;
     /** The computed accessible label for the page-selection control. */
     pageSelectLabelText: string;
-    /** Sets the active page (clamped to valid range). */
+    /** Sets the active page. */
     onSetPage: (page: number | string) => void;
   }) => React.ReactNode;
 
