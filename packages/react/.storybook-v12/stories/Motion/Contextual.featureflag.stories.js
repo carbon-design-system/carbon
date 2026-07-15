@@ -5,9 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Button from '../../../src/components/Button';
-import { ClickableTile } from '../../../src/components/Tile';
 import { MotionSurfaceOrigin } from '../../../src/internal/motion/MotionSurface';
 import { DemoDialog } from './DemoDialog';
 import './surfaces.stories.scss';
@@ -17,51 +16,104 @@ export default {
   tags: ['!autodocs'],
 };
 
-const plans = [
-  {
-    id: 'lite',
-    name: 'Lite',
-    summary: '2 vCPUs | 4GB RAM',
-    price: '$0.12 USD / hourly',
-  },
-  {
-    id: 'graduated',
-    name: 'Graduated tier',
-    summary: '2 vCPUs | 8GB RAM',
-    price: '$0.13 USD / hourly',
-  },
-  {
-    id: 'premium',
-    name: 'Premium',
-    summary: '4 vCPUs | 10GB RAM',
-    price: '$0.20 USD / hourly',
-  },
-];
+/**
+ * Contextual reveal via native CSS.
+ * `DemoDialog` skips `MotionSurface` for this surface; the story sets
+ * `data-carbon-surface` / `data-carbon-surface-state` and holds the dialog
+ * mounted until the exit transition finishes. Styles come from
+ * `@include motion.surface(contextual)`.
+ */
+export const ContextualWithNativeCSS = () => {
+  const [open, setOpen] = useState(false);
+  // Keep the dialog mounted while the exit transition runs
+  const [present, setPresent] = useState(false);
+
+  useEffect(() => {
+    if (open) {
+      setPresent(true);
+    }
+  }, [open]);
+
+  useEffect(() => {
+    if (open || !present) {
+      return;
+    }
+
+    const reducedMotion = window.matchMedia(
+      '(prefers-reduced-motion: reduce)'
+    ).matches;
+    if (reducedMotion) {
+      setPresent(false);
+    }
+  }, [open, present]);
+
+  return (
+    <>
+      <Button
+        className="motion-surface-demo__trigger"
+        onClick={() => setOpen(true)}>
+        Create resource
+      </Button>
+      <DemoDialog
+        surface="contextual"
+        open={present}
+        useNativeCSS
+        onClose={() => setOpen(false)}
+        heading="Create resource"
+        data-carbon-surface="contextual"
+        data-carbon-surface-state={open ? 'enter' : 'exit'}
+        onTransitionEnd={(event) => {
+          if (event.target !== event.currentTarget) {
+            return;
+          }
+          // opacity and clip-path both fire; complete once on opacity
+          if (event.propertyName !== 'opacity') {
+            return;
+          }
+          if (!open) {
+            setPresent(false);
+          }
+        }}>
+        <p>
+          This dialog uses the native CSS path for the <code>contextual</code>{' '}
+          reveal: <code>data-carbon-surface</code> and{' '}
+          <code>data-carbon-surface-state</code> drive enter/exit styles from
+          the shared surface map via the Sass mixin. With reduced motion enabled
+          the dialog opens and closes with no transition.
+        </p>
+      </DemoDialog>
+    </>
+  );
+};
 
 /**
- * Button > dialog. The contextual surface is a reveal animation.
+ * Contextual reveal via Motion (`MotionSurface` + motion/react).
+ * The trigger is wrapped in `MotionSurfaceOrigin` for parity with shared-
+ * element demos; for a reveal surface the origin is a plain wrapper and the
+ * dialog animates from the shared `contextual` keyframes.
  */
-export const Contextual = () => {
+export const ContextualWithMotion = () => {
   const [open, setOpen] = useState(false);
 
   return (
     <>
       <MotionSurfaceOrigin
         surface="contextual"
-        surfaceId="contextual-demo"
+        surfaceId="contextual-motion-demo"
         className="motion-surface-demo__trigger">
         <Button onClick={() => setOpen(true)}>Create resource</Button>
       </MotionSurfaceOrigin>
       <DemoDialog
         surface="contextual"
-        surfaceId="contextual-demo"
+        surfaceId="contextual-motion-demo"
         open={open}
         onClose={() => setOpen(false)}
         heading="Create resource">
         <p>
-          The launcher button morphs into this dialog through the invoke surface
-          and collapses back into the button on close. With reduced motion
-          enabled the dialog opens and closes with no morph at all.
+          This dialog uses the Motion path: <code>MotionSurface</code> resolves
+          the <code>contextual</code> reveal surface and animates with
+          motion/react. With reduced motion enabled the dialog opens and closes
+          with no animation.
         </p>
       </DemoDialog>
     </>

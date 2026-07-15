@@ -22,23 +22,44 @@
   display: inline-block;
 }
 
-// Motion owns the container's transform and opacity while a morph runs.
-// Neutralize the stock modal container transitions/animations so the CSS
-// engine does not fight the inline values Motion writes each frame.
+// Neutralize stock modal container animations so neither path fights the
+// modal stylesheet. Motion path also kills transitions (Motion writes inline
+// values each frame). CSS reveal path keeps transitions from `surface()`.
 // stylelint-disable declaration-no-important
 .motion-surface-demo__container {
   animation: none !important;
+}
+
+.motion-surface-demo__container:not([data-carbon-surface]) {
   transition: none !important;
 }
-// stylelint-enable declaration-no-important
 
-// This adds a subtle hover effect to the tile for the expand story, this
-// is not part of the expand surface definition but we could add it if we
-// want to standardize it.
+// Stock modal fades the overlay and slides the container with a `transition`
+// shorthand that would override the surface mixin's clip-path transition.
+// Kill those so only the shared contextual surface styles drive the reveal.
+// Keep the closed overlay hidden so it doesn't block the trigger.
+.motion-surface-demo__modal--css {
+  transition: none !important;
+}
+
+.motion-surface-demo__modal--css .motion-surface-demo__container {
+  transform: none !important;
+}
+
+// Native CSS reveal for contextual surface variant— tokens from @carbon/motion.
+.motion-surface-demo__modal--css
+  .motion-surface-demo__container[data-carbon-surface='contextual'] {
+  @include motion.surface(contextual);
+}
+// stylelint-enable declaration-no-important
 .motion-surface-tile {
   margin-block-end: 1px;
 }
 
+.motion-surface-demo__container--expand {
+  block-size: 100%;
+  inline-size: 95%;
+}
 // stylelint-disable declaration-no-important
 .motion-surface-tile:active {
   color: inherit !important;
@@ -46,6 +67,9 @@
 }
 // stylelint-enable declaration-no-important
 
+// This adds a subtle hover effect to the tile for the expand story, this
+// is not part of the expand surface definition but we could add it if we
+// want to standardize it.
 @media (prefers-reduced-motion: no-preference) {
   .motion-surface-tile:hover {
     z-index: 1000;
@@ -58,9 +82,4 @@
       border-radius motion.$duration-moderate-01 motion(standard, productive),
       box-shadow motion.$duration-moderate-01 motion(standard, productive);
   }
-}
-
-.motion-surface-demo__container--expand {
-  block-size: 100%;
-  inline-size: 95%;
 }

@@ -131,7 +131,7 @@ describe('@carbon/motion', () => {
     const contextual = CarbonMotion.getMotionSurface('contextual');
     expect(contextual).toEqual({
       kind: 'reveal',
-      duration: 'fast-02',
+      duration: 'slow-01',
       enter: { opacity: 1, clipPath: 'inset(0 0 0 0)' },
       exit: { opacity: 0, clipPath: 'inset(50% 0 50% 0)' },
       enterEasing: ['entrance', 'expressive'],
@@ -151,8 +151,8 @@ describe('@carbon/motion', () => {
     );
   });
 
-  // the mixin emits resting styles plus entrance transitions. also includes
-  // starting styles behind reduce-motion preference guard
+  // the mixin emits enter/exit attribute states plus transitions behind a
+  // reduced-motion preference guard
   test('surface mixin emits reveal styles behind a reduced-motion guard', async () => {
     const { result } = await render(`
       @use '../index.scss' as motion;
@@ -165,11 +165,16 @@ describe('@carbon/motion', () => {
 
     expect(css).toContain('opacity: 1');
     expect(css).toContain('clip-path: inset(0 0 0 0)');
+    expect(css).toContain('[data-carbon-surface-state=enter]');
+    expect(css).toContain('[data-carbon-surface-state=exit]');
     expect(css).toContain('@media (prefers-reduced-motion: no-preference)');
-    expect(css).toContain('transition-duration: 110ms');
+    expect(css).toContain('transition-duration: 400ms');
     expect(css).toContain('transition-property: opacity, clip-path');
     expect(css).toContain(
       'transition-timing-function: cubic-bezier(0, 0, 0.3, 1)'
+    );
+    expect(css).toContain(
+      'transition-timing-function: cubic-bezier(0.4, 0.14, 1, 1)'
     );
     expect(css).toContain('@starting-style');
     expect(css).toContain('clip-path: inset(50% 0 50% 0)');

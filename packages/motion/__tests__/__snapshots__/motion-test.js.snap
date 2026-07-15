@@ -53,7 +53,7 @@ exports[`@carbon/motion Public API 1`] = `
   "slow02": "700ms",
   "surfaces": {
     "contextual": {
-      "duration": "fast-02",
+      "duration": "slow-01",
       "enter": {
         "clipPath": "inset(0 0 0 0)",
         "opacity": 1,

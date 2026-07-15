@@ -166,10 +166,21 @@ $-durations: (
   'slow-02': $duration-slow-02,
 );
 
-/// Apply a named reveal surface in CSS: the resting enter styles, plus the
-/// entrance transition and `@starting-style` guarded behind
-/// `prefers-reduced-motion: no-preference` - users who prefer reduced motion
-/// get the resting styles with no animation at all
+/// Apply a named reveal surface in CSS from the shared surface map.
+///
+/// Resting / `[data-carbon-surface-state='enter']` use the surface enter
+/// keyframes. `[data-carbon-surface-state='exit']` uses the exit keyframes.
+/// Transitions (and `@starting-style` for first-mount enter) are guarded
+/// behind `prefers-reduced-motion: no-preference` - users who prefer reduced
+/// motion get the resting styles with no animation at all.
+///
+/// Typical usage with controlled open/close:
+///
+/// ```scss
+/// [data-carbon-surface='contextual'] {
+///   @include motion.surface(contextual);
+/// }
+/// ```
 ///
 /// Shared-element surfaces morph one element into another and have no
 /// CSS-only form; they need a JavaScript engine (Motion in React, View
@@ -189,15 +200,25 @@ $-durations: (
   $exit: map.get($definition, exit);
   $duration: map.get($-durations, map.get($definition, duration));
   $enter-easing: map.get($definition, enter-easing);
+  $exit-easing: map.get($definition, exit-easing);
   $properties: ();
 
   @each $property, $value in $enter {
     $properties: list.append($properties, $property, $separator: comma);
   }
 
-  // resting/open styles apply regardless of motion preference
-  @each $property, $value in $enter {
-    #{$property}: #{$value};
+  // resting / enter styles apply regardless of motion preference
+  &,
+  &[data-carbon-surface-state='enter'] {
+    @each $property, $value in $enter {
+      #{$property}: #{$value};
+    }
+  }
+
+  &[data-carbon-surface-state='exit'] {
+    @each $property, $value in $exit {
+      #{$property}: #{$value};
+    }
   }
 
   @media (prefers-reduced-motion: no-preference) {
@@ -206,15 +227,29 @@ $-durations: (
     interpolate-size: allow-keywords;
     transition-duration: $duration;
     transition-property: $properties;
-    transition-timing-function: motion(
-      list.nth($enter-easing, 1),
-      list.nth($enter-easing, 2)
-    );
+
+    &,
+    &[data-carbon-surface-state='enter'] {
+      transition-timing-function: motion(
+        list.nth($enter-easing, 1),
+        list.nth($enter-easing, 2)
+      );
+    }
+
+    &[data-carbon-surface-state='exit'] {
+      transition-timing-function: motion(
+        list.nth($exit-easing, 1),
+        list.nth($exit-easing, 2)
+      );
+    }
 
     // the styles the element enters from when it is first rendered
     @starting-style {
-      @each $property, $value in $exit {
-        #{$property}: #{$value};
+      &,
+      &[data-carbon-surface-state='enter'] {
+        @each $property, $value in $exit {
+          #{$property}: #{$value};
+        }
       }
     }
   }
