@@ -1,4 +1,10 @@
-import { Story, ArgTypes, Canvas, Meta } from '@storybook/addon-docs/blocks';
+import {
+  Story,
+  ArgTypes,
+  Canvas,
+  Meta,
+  Unstyled,
+} from '@storybook/addon-docs/blocks';
 import DatePicker from '../DatePicker';
 import DatePickerInput from '../DatePickerInput';
 import * as DatePickerStories from './DatePicker.stories';
@@ -159,13 +165,19 @@ When configuring `dateFormat`, a `parseDate` function can be specified to modify
 the date correction behavior that is sometimes undesirable due to
 [oddities in how the native date methods work](https://github.com/carbon-design-system/carbon/issues/15432#issuecomment-1967447677).
 
-<DatePicker datePickerType="single" dateFormat="Y-m-d">
-  <DatePickerInput
-    placeholder="yyyy-mm-dd"
-    id="date-picker-1"
-    labelText="Date format example"
-  />
-</DatePicker>
+<Unstyled
+  style={{
+    padding: '1rem',
+    background: 'var(--cds-background)',
+  }}>
+  <DatePicker datePickerType="single" dateFormat="Y-m-d">
+    <DatePickerInput
+      placeholder="yyyy-mm-dd"
+      id="date-picker-1"
+      labelText="Date format example"
+    />
+  </DatePicker>
+</Unstyled>
 
 ```jsx
 <DatePicker datePickerType="single" dateFormat="Y-m-d">
@@ -219,13 +231,19 @@ results, combine with the `dateFormat` prop. We pass this under the hood to the
 FlatPickr instance. A complete list of valid locales can be found in the
 [component API](#component-api) section
 
-<DatePicker locale="no" dateFormat="d/m/Y" datePickerType="single">
-  <DatePickerInput
-    placeholder="dd/mm/yyyy"
-    id="date-picker-2"
-    labelText="Locale example"
-  />
-</DatePicker>
+<Unstyled
+  style={{
+    padding: '1rem',
+    background: 'var(--cds-background)',
+  }}>
+  <DatePicker locale="no" dateFormat="d/m/Y" datePickerType="single">
+    <DatePickerInput
+      placeholder="dd/mm/yyyy"
+      id="date-picker-2"
+      labelText="Locale example"
+    />
+  </DatePicker>
+</Unstyled>
 
 ```jsx
 // Load Norwegian text with the proper date format
@@ -242,25 +260,31 @@ using the default US date format, and the one below it is using the same format
 as the `locale` prop example. One is setting it as September 1st, and the other
 is setting it as January 9th.
 
-<DatePicker maxDate="09/01/2020" datePickerType="single">
-  <DatePickerInput
-    placeholder="dd/mm/yyyy"
-    id="date-picker-3"
-    labelText="US format"
-  />
-</DatePicker>
-<br />
-<DatePicker
-  maxDate="09/01/2020"
-  datePickerType="single"
-  locale="no"
-  dateFormat="d/m/Y">
-  <DatePickerInput
-    placeholder="mm/dd/yyyy"
-    id="date-picker-4"
-    labelText="European format"
-  />
-</DatePicker>
+<Unstyled
+  style={{
+    padding: '1rem',
+    background: 'var(--cds-background)',
+  }}>
+  <DatePicker maxDate="09/01/2020" datePickerType="single">
+    <DatePickerInput
+      placeholder="dd/mm/yyyy"
+      id="date-picker-3"
+      labelText="US format"
+    />
+  </DatePicker>
+  <br />
+  <DatePicker
+    maxDate="09/01/2020"
+    datePickerType="single"
+    locale="no"
+    dateFormat="d/m/Y">
+    <DatePickerInput
+      placeholder="mm/dd/yyyy"
+      id="date-picker-4"
+      labelText="European format"
+    />
+  </DatePicker>
+</Unstyled>
 
 ```jsx
 <DatePicker maxDate="09/01/2020">
@@ -280,16 +304,22 @@ is setting it as January 9th.
 
 Works similarly to the `maxDate` prop. [See above](#datepicker-maxdate).
 
-<DatePicker
-  minDate={new Date().setDate(new Date().getDate() - 5)}
-  datePickerType="single"
-  value={new Date()}>
-  <DatePickerInput
-    placeholder="dd/mm/yyyy"
-    id="date-picker-5"
-    labelText="minDate example"
-  />
-</DatePicker>
+<Unstyled
+  style={{
+    padding: '1rem',
+    background: 'var(--cds-background)',
+  }}>
+  <DatePicker
+    minDate={new Date().setDate(new Date().getDate() - 5)}
+    datePickerType="single"
+    value={new Date()}>
+    <DatePickerInput
+      placeholder="dd/mm/yyyy"
+      id="date-picker-5"
+      labelText="minDate example"
+    />
+  </DatePicker>
+</Unstyled>
 
 ```jsx
 <DatePicker
@@ -311,15 +341,21 @@ dates. The disable takes in a array of date strings, or you can pass in a date
 function to the array that will disable dates that returns true.
 [See the Flatpickr documentation for more info](https://flatpickr.js.org/examples/#disabling-dates).
 
-<DatePicker
-  datePickerType="single"
-  disable={[(date) => date.getDay() === 0 || date.getDay() === 6]}>
-  <DatePickerInput
-    placeholder="dd/mm/yyyy"
-    id="date-picker-8"
-    labelText="minDate example"
-  />
-</DatePicker>
+<Unstyled
+  style={{
+    padding: '1rem',
+    background: 'var(--cds-background)',
+  }}>
+  <DatePicker
+    datePickerType="single"
+    disable={[(date) => date.getDay() === 0 || date.getDay() === 6]}>
+    <DatePickerInput
+      placeholder="dd/mm/yyyy"
+      id="date-picker-8"
+      labelText="minDate example"
+    />
+  </DatePicker>
+</Unstyled>
 
 ```jsx
 <DatePicker
@@ -337,21 +373,27 @@ The `enable` option works the same, but will disable all dates that are not
 explicitly added to the array.
 [See the flatpickr documentation for more info](https://flatpickr.js.org/examples/#disabling-all-dates-except-select-few).
 
-<DatePicker
-  datePickerType="single"
-  value="04/20/2023"
-  enable={[
-    {
-      from: '04/10/2023',
-      to: '04/25/2023',
-    },
-  ]}>
-  <DatePickerInput
-    placeholder="dd/mm/yyyy"
-    id="date-picker-8"
-    labelText="minDate example"
-  />
-</DatePicker>
+<Unstyled
+  style={{
+    padding: '1rem',
+    background: 'var(--cds-background)',
+  }}>
+  <DatePicker
+    datePickerType="single"
+    value="04/20/2023"
+    enable={[
+      {
+        from: '04/10/2023',
+        to: '04/25/2023',
+      },
+    ]}>
+    <DatePickerInput
+      placeholder="dd/mm/yyyy"
+      id="date-picker-8"
+      labelText="minDate example"
+    />
+  </DatePicker>
+</Unstyled>
 
 ```jsx
 <DatePicker
@@ -376,21 +418,27 @@ explicitly added to the array.
 By default `DatePicker` will set the current date as its value. If you'd like to
 start this at a different date, you can pass in a date string or date object.
 
-<DatePicker datePickerType="single" value="07/15/1988">
-  <DatePickerInput
-    placeholder="dd/mm/yyyy"
-    id="date-picker-6"
-    labelText="Value as string example"
-  />
-</DatePicker>
-<br />
-<DatePicker datePickerType="single" value={new Date()}>
-  <DatePickerInput
-    placeholder="dd/mm/yyyy"
-    id="date-picker-7"
-    labelText="Value as object example"
-  />
-</DatePicker>
+<Unstyled
+  style={{
+    padding: '1rem',
+    background: 'var(--cds-background)',
+  }}>
+  <DatePicker datePickerType="single" value="07/15/1988">
+    <DatePickerInput
+      placeholder="dd/mm/yyyy"
+      id="date-picker-6"
+      labelText="Value as string example"
+    />
+  </DatePicker>
+  <br />
+  <DatePicker datePickerType="single" value={new Date()}>
+    <DatePickerInput
+      placeholder="dd/mm/yyyy"
+      id="date-picker-7"
+      labelText="Value as object example"
+    />
+  </DatePicker>
+</Unstyled>
 
 ```jsx
 <DatePicker datePickerType="single" value="07/15/1988">
