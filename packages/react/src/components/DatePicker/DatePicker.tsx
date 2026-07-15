@@ -20,7 +20,7 @@ import flatpickr from 'flatpickr';
 import l10n from 'flatpickr/dist/l10n/index';
 import DatePickerInput from '../DatePickerInput';
 import { appendToPlugin } from './plugins/appendToPlugin';
-import carbonFlatpickrFixEventsPlugin from './plugins/fixEventsPlugin';
+import { fixEventsPlugin } from './plugins/fixEventsPlugin';
 import { rangePlugin } from './plugins/rangePlugin';
 import { deprecate } from '../../prop-types/deprecate';
 import { match, keys } from '../../internal/keyboard';
@@ -633,10 +633,9 @@ const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>((props, ref) => {
           classFlatpickrCurrentMonth: 'cur-month',
           locale: locale,
         }) as unknown as Plugin,
-        carbonFlatpickrFixEventsPlugin({
+        fixEventsPlugin({
           inputFrom: startInputField.current,
           inputTo: endInputField.current,
-          lastStartValue,
           container: wrapperRef.current,
         }) as unknown as Plugin,
       ],

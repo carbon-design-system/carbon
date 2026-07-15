@@ -101,16 +101,6 @@ export const globalTypes = {
       ],
     },
   },
-  theme: {
-    name: 'Theme',
-    description: 'Set the global theme for displaying components',
-    defaultValue: 'white',
-    toolbar: {
-      icon: 'paintbrush',
-      title: 'Theme',
-      items: ['white', 'g10', 'g90', 'g100'],
-    },
-  },
   ...(process.env.NODE_ENV === 'development' ? devTools : {}),
 };
 
@@ -141,24 +131,12 @@ export const parameters = {
       cellSize: 8,
       opacity: 0.5,
     },
-    values: [
-      {
-        name: 'white',
-        value: white.background,
-      },
-      {
-        name: 'g10',
-        value: g10.background,
-      },
-      {
-        name: 'g90',
-        value: g90.background,
-      },
-      {
-        name: 'g100',
-        value: g100.background,
-      },
-    ],
+    options: {
+      white: { name: 'white', value: white.background },
+      g10: { name: 'g10', value: g10.background },
+      g90: { name: 'g90', value: g90.background },
+      g100: { name: 'g100', value: g100.background },
+    },
   },
   controls: {
     expanded: true,
@@ -232,11 +210,28 @@ export const parameters = {
   },
 };
 
+// Helper function to map background values to theme names
+function getThemeFromBackground(backgroundValue) {
+  const backgroundThemeMap = {
+    [white.background]: 'white',
+    white: 'white',
+    [g10.background]: 'g10',
+    g10: 'g10',
+    [g90.background]: 'g90',
+    g90: 'g90',
+    [g100.background]: 'g100',
+    g100: 'g100',
+  };
+  return backgroundThemeMap[backgroundValue] ?? 'white';
+}
+
 export const decorators = [
   function decoratorContainer(story, context) {
     const result = story();
     const { hasMainTag } = result;
-    const { locale, dir, theme, layoutSize, layoutDensity } = context.globals;
+    const { locale, dir, layoutSize, layoutDensity } = context.globals;
+    const backgroundValue = context.globals.backgrounds?.value;
+    const theme = getThemeFromBackground(backgroundValue);
 
     if (process.env.STORYBOOK_USE_RTL === 'true') {
       document.documentElement.setAttribute('dir', 'rtl');
