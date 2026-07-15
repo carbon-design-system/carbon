@@ -75,11 +75,6 @@ const config: StorybookConfig = {
   },
   async viteFinal(config) {
     return mergeConfig(config, {
-      esbuild: {
-        include: /\.[jt]sx?$/,
-        exclude: [],
-        loader: 'tsx',
-      },
       css: {
         preprocessorOptions: {
           scss: {
@@ -99,8 +94,8 @@ const config: StorybookConfig = {
       },
       optimizeDeps: {
         exclude: ['@carbon/motion'],
-        esbuildOptions: {
-          loader: {
+        rolldownOptions: {
+          moduleTypes: {
             '.js': 'jsx',
           },
         },
