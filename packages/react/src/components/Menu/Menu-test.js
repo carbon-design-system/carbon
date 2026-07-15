@@ -7,6 +7,7 @@
 
 import React from 'react';
 import { useState } from 'react';
+import { Checkmark } from '@carbon/icons-react';
 import { Menu, MenuItem, MenuItemSelectable, MenuItemRadioGroup } from './';
 import {
   act,
@@ -229,6 +230,59 @@ describe('Menu', () => {
       expect(menus[0]).toHaveClass('cds--menu--open');
       expect(menus[1]).toHaveClass('cds--menu--open');
     });
+
+    it('should close submenu and keep root menu open when submenu is blurred', async () => {
+      const menus = screen.getAllByRole('menu');
+
+      const submenu = screen.getByRole('menuitem', {
+        name: 'Submenu Submenu',
+      });
+
+      // hover over submenu to open it
+      await act(() => {
+        fireEvent.mouseEnter(submenu);
+        jest.runOnlyPendingTimers();
+      });
+      expect(menus[0]).toHaveClass('cds--menu--open');
+      expect(menus[1]).toHaveClass('cds--menu--open');
+
+      // blur the submenu to close it, root menu should stay open
+      await act(() => {
+        fireEvent.mouseLeave(submenu);
+        jest.runOnlyPendingTimers();
+      });
+
+      expect(menus[0]).toHaveClass('cds--menu--open');
+      expect(menus[1]).not.toHaveClass('cds--menu--open');
+    });
+
+    it('should not close submenu when hovering back to parent menu item', async () => {
+      const menus = screen.getAllByRole('menu');
+
+      const submenu = screen.getByRole('menuitem', {
+        name: 'Submenu Submenu',
+      });
+
+      // hover over submenu to open it
+      await act(() => {
+        fireEvent.mouseEnter(submenu);
+        jest.runOnlyPendingTimers();
+      });
+      expect(menus[0]).toHaveClass('cds--menu--open');
+      expect(menus[1]).toHaveClass('cds--menu--open');
+
+      // simulate mouse leaving child and entering parent
+      const childMenuItem = screen.getByRole('menuitem', { name: 'Item' });
+      await act(() => {
+        fireEvent.mouseLeave(childMenuItem, {
+          relatedTarget: submenu,
+        });
+        jest.runOnlyPendingTimers();
+      });
+
+      expect(menus[0]).toHaveClass('cds--menu--open');
+      expect(menus[1]).toHaveClass('cds--menu--open');
+    });
   });
 });
 
@@ -271,6 +325,40 @@ describe('MenuItem', () => {
       );
 
       expect(screen.getByText('item')).toBeInTheDocument();
+    });
+
+    it('should mark the menu as having icons when a menu item renders an icon', () => {
+      render(
+        <Menu open>
+          <MenuItem label="item" renderIcon={Checkmark} />
+        </Menu>
+      );
+
+      expect(screen.getByRole('menu')).toHaveClass(
+        'cds--menu',
+        'cds--menu--sm',
+        'cds--menu--open',
+        'cds--menu--shown',
+        'cds--menu--with-icons',
+        { exact: true }
+      );
+    });
+
+    it('should mark the menu as having selectable items when a selectable item is rendered', () => {
+      render(
+        <Menu open>
+          <MenuItemSelectable label="item" />
+        </Menu>
+      );
+
+      expect(screen.getByRole('menu')).toHaveClass(
+        'cds--menu',
+        'cds--menu--sm',
+        'cds--menu--open',
+        'cds--menu--shown',
+        'cds--menu--with-selectable-items',
+        { exact: true }
+      );
     });
   });
 
