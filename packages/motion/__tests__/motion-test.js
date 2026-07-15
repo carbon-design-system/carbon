@@ -37,6 +37,8 @@ describe('@carbon/motion', () => {
       $_: get-value((
         kind: motion.surface(expand, kind),
         duration: motion.surface(expand, duration),
+        enter-opacity: map-get(motion.surface(expand, enter), opacity),
+        exit-opacity: map-get(motion.surface(expand, exit), opacity),
         enter-easing: motion.surface(expand, enter-easing),
         exit-easing: motion.surface(expand, exit-easing),
       ));
@@ -45,6 +47,8 @@ describe('@carbon/motion', () => {
     expect(getValue(0)).toEqual({
       kind: surface.kind,
       duration: surface.duration,
+      'enter-opacity': surface.enter.opacity,
+      'exit-opacity': surface.exit.opacity,
       'enter-easing': [...surface.enterEasing],
       'exit-easing': [...surface.exitEasing],
     });
@@ -91,6 +95,8 @@ describe('@carbon/motion', () => {
     expect(expand).toEqual({
       kind: 'shared-element',
       duration: 'moderate-02',
+      enter: { opacity: 1, transform: 'scale(1)' },
+      exit: { opacity: 0, transform: 'scale(0.96)' },
       enterEasing: ['standard', 'productive'],
       exitEasing: ['standard', 'productive'],
     });

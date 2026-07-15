@@ -32,6 +32,16 @@ describe('useMotionSurface', () => {
       duration: 0.24,
       ease: [0.2, 0, 0.38, 0.9],
     });
+    expect(result.current.animate).toEqual({
+      opacity: 1,
+      transform: 'scale(1)',
+      transition: { duration: 0.24, ease: [0.2, 0, 0.38, 0.9] },
+    });
+    expect(result.current.exit).toEqual({
+      opacity: 0,
+      transform: 'scale(0.96)',
+      transition: { duration: 0.24, ease: [0.2, 0, 0.38, 0.9] },
+    });
   });
 
   it('keeps the trigger origin of the invoke surface', () => {
@@ -41,6 +51,9 @@ describe('useMotionSurface', () => {
     expect(result.current.origin).toBe('trigger');
     // standard/expressive
     expect(result.current.enterTransition.ease).toEqual([0.4, 0.14, 0.3, 1]);
+    // invoke has no enter/exit keyframes - morph timing only
+    expect(result.current.animate).toBeUndefined();
+    expect(result.current.exit).toBeUndefined();
   });
 
   it('resolves reveal surfaces into enter/exit targets', () => {

@@ -40,6 +40,9 @@ export interface ResolvedRevealSurface extends ResolvedSurfaceBase {
 export interface ResolvedSharedElementSurface extends ResolvedSurfaceBase {
   kind: 'shared-element';
   origin?: 'trigger';
+  // present when the surface definition includes CSS-replicable keyframes
+  animate?: TargetAndTransition;
+  exit?: TargetAndTransition;
 }
 
 export type ResolvedMotionSurface =
@@ -88,12 +91,29 @@ export function useMotionSurface(
       };
     }
 
-    return {
+    const sharedElement: ResolvedSharedElementSurface = {
       kind: 'shared-element',
       enabled,
       enterTransition,
       exitTransition,
       origin: 'origin' in surface ? surface.origin : undefined,
     };
+
+    // optional enter/exit keyframes layer opacity/scale on top of the
+    // layoutId morph (expand); invoke has neither and stays morph-only
+    if ('enter' in surface && surface.enter) {
+      sharedElement.animate = {
+        ...surface.enter,
+        transition: enterTransition,
+      } as TargetAndTransition;
+    }
+    if ('exit' in surface && surface.exit) {
+      sharedElement.exit = {
+        ...surface.exit,
+        transition: exitTransition,
+      } as TargetAndTransition;
+    }
+
+    return sharedElement;
   }, [enabled, name]);
 }

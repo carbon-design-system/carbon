@@ -60,7 +60,8 @@ export function DemoDialog({
         aria-label={heading}
         className={cx(
           `${prefix}--modal-container`,
-          'motion-surface-demo__container'
+          'motion-surface-demo__container',
+          { 'motion-surface-demo__container--expand': surface === 'expand' }
         )}>
         <div className={`${prefix}--modal-header`}>
           <h3 className={`${prefix}--modal-header__heading`}>{heading}</h3>

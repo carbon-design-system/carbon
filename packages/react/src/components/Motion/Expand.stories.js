@@ -6,8 +6,14 @@
  */
 
 import React, { useState } from 'react';
+import { AspectRatio } from '../AspectRatio';
 import { ClickableTile } from '../Tile';
-import { MotionSurfaceOrigin } from '../../internal/motion/MotionSurface';
+import { Column, Grid } from '../Grid';
+import { ArrowRight } from '@carbon/icons-react';
+import {
+  MotionSurfaceOrigin,
+  MotionSurface,
+} from '../../internal/motion/MotionSurface';
 import { DemoDialog } from './DemoDialog';
 import './surfaces.stories.scss';
 
@@ -16,24 +22,42 @@ export default {
   tags: ['!autodocs'],
 };
 
-const plans = [
+const solutionTiles = [
   {
-    id: 'lite',
-    name: 'Lite',
-    summary: '2 vCPUs | 4GB RAM',
-    price: '$0.12 USD / hourly',
+    id: 'multicloud-management',
+    name: 'Multicloud management',
+    description:
+      'Increase operational efficiency with intelligent data analysis and built-in support for compliance management.',
   },
   {
-    id: 'graduated',
-    name: 'Graduated tier',
-    summary: '2 vCPUs | 8GB RAM',
-    price: '$0.13 USD / hourly',
+    id: 'cloud-pak-integration',
+    name: 'Cloud Pak for integration',
+    description:
+      'Integrate applications and data across on-premises and cloud environments.',
   },
   {
-    id: 'premium',
-    name: 'Premium',
-    summary: '4 vCPUs | 10GB RAM',
-    price: '$0.20 USD / hourly',
+    id: 'cloud-pak-automation',
+    name: 'Cloud Pak for automation',
+    description:
+      'Design, build, and run automation applications and services on any cloud.',
+  },
+  {
+    id: 'cloud-pak-applications',
+    name: 'Cloud Pak for applications',
+    description:
+      'Modernize existing applications and develop cloud-native apps with continuous compliance.',
+  },
+  {
+    id: 'cloud-pak-data',
+    name: 'Cloud Pak for data',
+    description:
+      'Collect, organize, analyze, and operationalize data and AI across your business.',
+  },
+  {
+    id: 'all-solutions',
+    name: 'View all IBM solutions',
+    description:
+      'Explore products and services designed to solve complex business challenges.',
   },
 ];
 
@@ -48,26 +72,37 @@ export const Expand = () => {
 
   return (
     <>
-      <div className="motion-surface-demo__grid">
-        {plans.map((plan) => (
-          <MotionSurfaceOrigin
-            key={plan.id}
-            surface="expand"
-            surfaceId={`expand-${plan.id}`}
-            className="motion-surface-demo__origin">
-            <ClickableTile
-              id={plan.id}
-              onClick={() => {
-                setSelected(plan);
-                setOpen(true);
-              }}>
-              <h4>{plan.name}</h4>
-              <p>{plan.summary}</p>
-              <p>{plan.price}</p>
-            </ClickableTile>
-          </MotionSurfaceOrigin>
+      <Grid condensed>
+        {solutionTiles.map((tile, index) => (
+          <Column key={tile.id} sm={4} md={4} lg={5}>
+            <MotionSurfaceOrigin
+              key={tile.id}
+              surface="expand"
+              surfaceId={`expand-${tile.id}`}>
+              <AspectRatio
+                layout
+                as={ClickableTile}
+                aria-expanded={open && selected?.id === tile.id}
+                aria-haspopup="dialog"
+                className="motion-surface-tile"
+                clicked={open && selected?.id === tile.id}
+                onClick={() => {
+                  setSelected(tile);
+                  setOpen(true);
+                }}
+                ratio="1x1"
+                renderIcon={ArrowRight}>
+                <div className="motion-surface-tile__content">
+                  <h3 className="motion-surface-tile__heading">{tile.name}</h3>
+                  <p className="motion-surface-tile__description">
+                    {tile.description}
+                  </p>
+                </div>
+              </AspectRatio>
+            </MotionSurfaceOrigin>
+          </Column>
         ))}
-      </div>
+      </Grid>
       <DemoDialog
         surface="expand"
         // Fall back to an unpaired id while nothing is selected; the dialog

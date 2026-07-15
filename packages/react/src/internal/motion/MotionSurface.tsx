@@ -38,7 +38,9 @@ export interface MotionSurfaceProps extends SafeDivProps {
  * Animates its children according to a named @carbon/motion surface
  *
  * Reveal surfaces enter/exit between surface keyframes. Shared-element
- * surfaces morph from the `MotionSurfaceOrigin` with the same `surfaceId`
+ * surfaces morph from the `MotionSurfaceOrigin` with the same `surfaceId`.
+ * When a shared-element surface also defines enter/exit keyframes, those
+ * are applied as `animate`/`exit` on top of the layout morph.
  *
  * When users prefer reduced motion, render as plain element and
  * mount/unmount immediately - no Motion runs at all
@@ -117,6 +119,8 @@ export const MotionSurface = forwardRef<HTMLDivElement, MotionSurfaceProps>(
               ref={ref}
               layoutId={surfaceId}
               transition={resolved.enterTransition}
+              animate={resolved.animate}
+              exit={resolved.exit}
               {...rest}>
               {children}
             </motion.div>

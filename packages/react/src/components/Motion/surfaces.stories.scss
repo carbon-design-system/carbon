@@ -4,8 +4,9 @@
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
 //
-
+@use '@carbon/styles/scss/motion' as motion;
 @use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/utilities/box-shadow' as *;
 
 .motion-surface-demo__grid {
   display: flex;
@@ -30,3 +31,27 @@
   transition: none !important;
 }
 // stylelint-enable declaration-no-important
+
+// This adds a subtle hover effect to the tile for the expand story, this
+// is not part of the expand surface definition but we could add it if we
+// want to standardize it.
+.motion-surface-tile {
+  margin-block-end: 1px;
+
+  &:hover {
+    transform: scale(1.025);
+    z-index: 1000;
+    border-radius: $spacing-03;
+    @include box-shadow();
+
+    transition:
+      transform motion.$duration-moderate-01 motion(standard, productive),
+      border-radius motion.$duration-moderate-01 motion(standard, productive),
+      box-shadow motion.$duration-moderate-01 motion(standard, productive);
+  }
+}
+
+.motion-surface-demo__container--expand {
+  inline-size: 95%;
+  block-size: 100%;
+}
