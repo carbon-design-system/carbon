@@ -1,5 +1,9 @@
 import React from 'react';
-import { preview__Tearsheet as Tearsheet, preview__Tearsheet as MyTearsheet, preview__Tearsheet as AnotherSheet } from '@carbon/ibm-products';
+import {
+  preview__Tearsheet as Tearsheet,
+  preview__Tearsheet as MyTearsheet,
+  preview__Tearsheet as AnotherSheet,
+} from '@carbon/ibm-products';
 import { Button } from '@carbon/react';
 
 // Edge Case 1: Multiple imports with different aliases
