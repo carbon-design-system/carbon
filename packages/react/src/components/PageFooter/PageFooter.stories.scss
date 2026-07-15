@@ -1,0 +1,18 @@
+/**
+ * Copyright IBM Corp. 2026
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+.page-footer-story {
+  display: flex;
+  flex-direction: column;
+  background: var(--cds-layer-01);
+  min-block-size: 100vh;
+}
+
+.page-footer-story__content {
+  flex: 1;
+  padding: 1rem;
+}

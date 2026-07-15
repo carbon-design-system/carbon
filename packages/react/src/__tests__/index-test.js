@@ -282,6 +282,7 @@ describe('Carbon Components React', () => {
         "preview_Layout",
         "preview_LayoutDirection",
         "preview_OverflowMenuV2",
+        "preview_PageFooter",
         "preview_PageSelector",
         "preview_Pagination",
         "preview_Text",

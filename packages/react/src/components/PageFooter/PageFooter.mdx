@@ -1,0 +1,76 @@
+import { ArgTypes, Canvas, Meta } from '@storybook/addon-docs/blocks';
+import * as PageFooterStories from './PageFooter.stories';
+import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
+
+<Meta isTemplate />
+
+# Page footer
+
+[Source code](https://github.com/carbon-design-system/carbon/tree/main/packages/react/src/components/PageFooter)
+
+{/* <!-- START doctoc generated TOC please keep comment here to allow auto update --> <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE --> */}
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Usage](#usage)
+- [Accessibility](#accessibility)
+- [Component API](#component-api)
+- [Feedback](#feedback)
+
+{/* <!-- END doctoc generated TOC please keep comment here to allow auto update --> */}
+
+## Overview
+
+Page footer presents the actions for a page-level flow and remains sticky at the
+bottom of its nearest scrolling container. It uses the background and subtle
+border theme tokens to remain distinct from scrolling page content.
+
+<Canvas
+  of={PageFooterStories.Default}
+  additionalActions={[
+    {
+      title: 'Open in Stackblitz',
+      onClick: () => stackblitzPrefillConfig(PageFooterStories.Default),
+    },
+  ]}
+/>
+
+## Usage
+
+Import the preview component and provide up to four Carbon buttons as direct
+children. Buttons inherit the 80px `2xl` layout size. A ghost button is placed
+16px from the inline start while the remaining actions align to the inline end.
+At narrow widths, the actions stack using the responsive behavior from
+`ButtonSet`.
+
+```jsx
+import { Button, preview_PageFooter as PageFooter } from '@carbon/react';
+
+<PageFooter aria-label="Creation flow actions">
+  <Button kind="ghost">Cancel</Button>
+  <Button kind="secondary">Previous</Button>
+  <Button kind="primary">Next</Button>
+</PageFooter>;
+```
+
+Avoid setting an explicit `size` on the child buttons unless the design calls
+for a deliberate exception, because an explicit size overrides the footer's
+`2xl` layout context.
+
+## Accessibility
+
+Use concise, localized labels that describe each action. Page footer renders an
+ARIA `group`; provide an `aria-label` that identifies the group when the page
+contains other sets of actions.
+
+## Component API
+
+<ArgTypes />
+
+## Feedback
+
+Help us improve this preview component by commenting on
+[issue #7004](https://github.com/carbon-design-system/carbon/issues/7004) or
+updating this file on
+[GitHub](https://github.com/carbon-design-system/carbon/edit/main/packages/react/src/components/PageFooter/PageFooter.mdx).
