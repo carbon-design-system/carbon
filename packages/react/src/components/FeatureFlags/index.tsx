@@ -21,6 +21,7 @@ import { deprecate } from '../../prop-types/deprecate';
 export interface FeatureFlagsProps {
   children?: ReactNode;
   flags?: Record<string, boolean>;
+  enableV12Release?: boolean;
   enableV12TileDefaultIcons?: boolean;
   enableV12TileRadioIcons?: boolean;
   enableV12Overflowmenu?: boolean;
@@ -46,6 +47,7 @@ const FeatureFlagContext = createContext<FeatureFlagScope>(GlobalFeatureFlags);
 
 // Maps each camelCase prop name to its kebab-case feature flag key.
 const PROP_TO_FLAG: Record<string, string> = {
+  enableV12Release: 'enable-v12-release',
   enableV12TileDefaultIcons: 'enable-v12-tile-default-icons',
   enableV12TileRadioIcons: 'enable-v12-tile-radio-icons',
   enableV12Overflowmenu: 'enable-v12-overflowmenu',
@@ -67,6 +69,7 @@ const PROP_TO_FLAG: Record<string, string> = {
 export const FeatureFlags = ({
   children,
   flags,
+  enableV12Release,
   enableV12TileDefaultIcons,
   enableV12TileRadioIcons,
   enableV12Overflowmenu,
@@ -85,6 +88,7 @@ export const FeatureFlags = ({
     // ensures that unspecified props do not shadow flags set by a parent
     // FeatureFlags scope, which is the correct behaviour for nested scopes.
     const flagProps = {
+      enableV12Release,
       enableV12TileDefaultIcons,
       enableV12TileRadioIcons,
       enableV12Overflowmenu,
@@ -113,6 +117,7 @@ export const FeatureFlags = ({
     scope.mergeWithScope(parentScope);
     return scope;
   }, [
+    enableV12Release,
     enableV12TileDefaultIcons,
     enableV12TileRadioIcons,
     enableV12Overflowmenu,
@@ -145,6 +150,7 @@ FeatureFlags.propTypes = {
       'been deprecated. Please run the `featureflag-deprecate-flags-prop` codemod to migrate to individual boolean props.' +
       `npx @carbon/upgrade migrate featureflag-deprecate-flags-prop --write`
   ),
+  enableV12Release: PropTypes.bool,
   enableV12TileDefaultIcons: PropTypes.bool,
   enableV12TileRadioIcons: PropTypes.bool,
   enableV12Overflowmenu: PropTypes.bool,
