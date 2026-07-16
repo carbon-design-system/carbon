@@ -818,13 +818,13 @@
     // Match the rendered table column and prevent the flex item from shrinking
     thead th.#{$prefix}--table-expand,
     tbody td.#{$prefix}--table-expand {
-      flex: 0 0 convert.to-rem(40px);
+      flex: 0 0 $spacing-08;
       block-size: auto;
     }
 
     // Keep the cell border inside the compact row height
     &.#{$prefix}--data-table--sm tbody td.#{$prefix}--table-expand {
-      block-size: convert.to-rem(32px);
+      block-size: $spacing-07;
     }
 
     thead .#{$prefix}--table-expand {
@@ -937,15 +937,15 @@
     }
 
     &.#{$prefix}--data-table--sm tr.#{$prefix}--parent-row {
-      block-size: convert.to-rem(32px);
+      block-size: $spacing-07;
     }
 
     &.#{$prefix}--data-table--md tr:not([data-child-row]) {
-      min-block-size: convert.to-rem(40px);
+      min-block-size: $spacing-08;
     }
 
     &.#{$prefix}--data-table--xl tr:not([data-child-row]) {
-      min-block-size: convert.to-rem(64px);
+      min-block-size: $spacing-10;
     }
 
     .#{$prefix}--table-header-label {
