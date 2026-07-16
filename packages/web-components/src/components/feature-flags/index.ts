@@ -13,10 +13,8 @@
  *   <component></component>
  * </feature-flags>
  *
- * Available flags:
- * - enable-dialog-element
- * - enable-treeview-controllable
- * - ... (and others listed in observedAttributes)
+ * The supported flags are documented as `@attr` tags on `FeatureFlagsElement`
+ * below, which is also what surfaces them in `custom-elements.json`.
  *
  * How to check a Flag in your component:
  *   import { isFeatureFlagEnabled } from './feature-flags';
@@ -27,20 +25,53 @@
 import {
   FeatureFlags as GlobalFeatureFlags,
   createScope,
+  notifyAvailableFlag,
 } from '@carbon/feature-flags';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import { LitElement, html } from 'lit';
 
-/**
- * Feature Flags
- *
- * @element feature-flags
- */
 type FeatureFlags = Record<string, boolean>;
 
 const hasOwn = <T extends object>(obj: T, key: PropertyKey): key is keyof T =>
   Object.prototype.hasOwnProperty.call(obj, key);
 
+/**
+ * Feature Flags
+ *
+ * Provides scoped feature flags to child components. Flags are read from the
+ * nearest `<feature-flags>` ancestor, and nested elements inherit any flag they
+ * do not set themselves.
+ *
+ * Attributes are declared below rather than inferred, because the flag list is
+ * built at runtime from `observedAttributes` and cannot be read statically.
+ *
+ * @element feature-flags
+ *
+ * @attr {boolean} enable-v12-release - Enable the features and functionality
+ * for the v12 Release. Enabling this turns on every `enable-v12-*` flag at
+ * once.
+ * @attr {boolean} enable-v12-tile-default-icons - Enable rendering of default
+ * icons in the tile components. Becomes the default behavior in v12.
+ * @attr {boolean} enable-v12-tile-radio-icons - Enable rendering of radio icons
+ * in the `cds-radio-tile` component. Becomes the default behavior in v12.
+ * @attr {boolean} enable-v12-overflowmenu - Enable the use of the v12
+ * `cds-overflow-menu` leveraging the menu subcomponents. Becomes the default
+ * behavior in v12.
+ * @attr {boolean} enable-v12-dynamic-floating-styles - Enable dynamic setting
+ * of floating styles for components like `cds-popover`, `cds-tooltip`, etc.
+ * Becomes the default behavior in v12.
+ * @attr {boolean} enable-v12-toggle-reduced-label-spacing - Enable a reduced
+ * spacing between the toggle control and its label. Becomes the default
+ * behavior in v12.
+ * @attr {boolean} enable-treeview-controllable - Enable the new `cds-treeview`
+ * controllable API.
+ * @attr {boolean} enable-dialog-element - Enable components to utilize the
+ * native `dialog` element.
+ * @attr {boolean} enable-focus-wrap-without-sentinels - Enable the new focus
+ * wrap behavior that doesn't use sentinel nodes.
+ * @attr {boolean} enable-experimental-focus-wrap-without-sentinels - Deprecated,
+ * use `enable-focus-wrap-without-sentinels` instead.
+ */
 @customElement('feature-flags')
 class FeatureFlagsElement extends LitElement {
   private scope = GlobalFeatureFlags;
@@ -211,5 +242,11 @@ export function isFeatureFlagEnabled(
   context: HTMLElement
 ): boolean {
   const instance = findParentFeatureFlags(context);
-  return instance?.isFeatureFlagEnabled(flag) ?? false;
+  const enabled = instance?.isFeatureFlagEnabled(flag) ?? false;
+
+  if (process.env.NODE_ENV !== 'production') {
+    notifyAvailableFlag(flag, enabled);
+  }
+
+  return enabled;
 }

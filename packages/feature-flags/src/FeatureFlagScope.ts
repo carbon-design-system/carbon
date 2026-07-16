@@ -10,8 +10,27 @@ export type FeatureFlagRecord = Record<string, boolean>;
 /** @deprecated Use `FeatureFlagRecord` instead. */
 export type FeatureFlags = FeatureFlagRecord;
 
-const v12ReleaseFlag = 'enable-v12-release';
+export const v12ReleaseFlag = 'enable-v12-release';
 const v12FlagPrefix = 'enable-v12-';
+
+// Flags that carry v12 behavior without the `enable-v12-` prefix. The prefix is
+// the convention, but some flags were named before it settled.
+//
+// Keep in sync with `$unprefixed-v12-flags` in `index.scss`. The two are
+// separate implementations of the same rule, and a flag that appears in only
+// one of them gets v12 behavior in JavaScript but not Sass, or the reverse.
+const unprefixedV12Flags = new Set([
+  'enable-focus-wrap-without-sentinels',
+  'enable-tile-contrast',
+]);
+
+/**
+ * Whether a flag becomes the default behavior in v12, and so is turned on by
+ * `enable-v12-release`.
+ */
+export const isV12Flag = (name: string) =>
+  name !== v12ReleaseFlag &&
+  (name.startsWith(v12FlagPrefix) || unprefixedV12Flags.has(name));
 
 export class FeatureFlagScope {
   flags: Map<string, boolean>;
@@ -88,11 +107,7 @@ export class FeatureFlagScope {
   enabled(name: string) {
     this.checkForFlag(name);
 
-    if (
-      name !== v12ReleaseFlag &&
-      name.startsWith(v12FlagPrefix) &&
-      this.flags.get(v12ReleaseFlag) === true
-    ) {
+    if (isV12Flag(name) && this.flags.get(v12ReleaseFlag) === true) {
       return true;
     }
 

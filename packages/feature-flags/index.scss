@@ -5,12 +5,23 @@
 // LICENSE file in the root directory of this source tree.
 //
 
+@use 'sass:list';
 @use 'sass:map';
 @use 'sass:string';
 @use 'scss/generated/feature-flags';
 
 $v12-release-flag: 'enable-v12-release';
 $v12-flag-prefix: 'enable-v12-';
+
+// Flags that carry v12 behavior without the `enable-v12-` prefix. The prefix is
+// the convention, but some flags were named before it settled.
+//
+// Keep in sync with `unprefixedV12Flags` in `src/FeatureFlagScope.ts`. The two
+// are separate implementations of the same rule, and a flag that appears in
+// only one of them gets v12 behavior in Sass but not JavaScript, or the
+// reverse.
+$unprefixed-v12-flags: 'enable-focus-wrap-without-sentinels',
+  'enable-tile-contrast';
 
 $feature-flags: () !default;
 $feature-flags: map.merge(
@@ -25,12 +36,22 @@ $feature-flags: map.merge(
   @error 'Unable to find a feature flag named: #{$name}';
 }
 
+/// Check if a flag becomes the default behavior in v12, and so is turned on by
+/// `enable-v12-release`
+/// @param {String} $name
+/// @returns {Boolean}
+@function is-v12-flag($name) {
+  @return $name != $v12-release-flag and
+    (
+      string.index($name, $v12-flag-prefix) == 1 or
+        list.index($unprefixed-v12-flags, $name) != null
+    );
+}
+
 @function enabled-by-v12-release($name) {
-  $is-v12-flag: string.index($name, $v12-flag-prefix) == 1;
   $is-v12-release-enabled: map.get($feature-flags, $v12-release-flag) == true;
 
-  @return $name != $v12-release-flag and $is-v12-flag and
-    $is-v12-release-enabled;
+  @return is-v12-flag($name) and $is-v12-release-enabled;
 }
 
 @mixin add($name, $enabled: false) {
