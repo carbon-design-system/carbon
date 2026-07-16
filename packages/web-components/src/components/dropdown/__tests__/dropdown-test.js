@@ -10,6 +10,7 @@ import { sendKeys } from '@web/test-runner-commands';
 import '@carbon/web-components/es/components/dropdown/index.js';
 import '@carbon/web-components/es/components/dropdown/dropdown-skeleton.js';
 import '@carbon/web-components/es/components/ai-label/index.js';
+import '@carbon/web-components/es/components/slug/index.js';
 
 const dropdown = html`
   <cds-dropdown title-text="Dropdown Label">
@@ -732,6 +733,98 @@ describe('Validation states with disabled/readonly', () => {
     });
 
     expect(el.open).to.be.false;
+  });
+});
+
+describe('AI label and slug slot (@query decorator)', () => {
+  it('should set ai-label attribute when cds-ai-label is slotted', async () => {
+    const el = await fixture(html`
+      <cds-dropdown title-text="Dropdown Label">
+        <cds-dropdown-item value="option-1">Option 1</cds-dropdown-item>
+        <cds-ai-label slot="ai-label"></cds-ai-label>
+      </cds-dropdown>
+    `);
+    await el.updateComplete;
+
+    expect(el.hasAttribute('ai-label')).to.be.true;
+  });
+
+  it('should resolve ai-label slot node via @query decorator', async () => {
+    const el = await fixture(html`
+      <cds-dropdown title-text="Dropdown Label">
+        <cds-dropdown-item value="option-1">Option 1</cds-dropdown-item>
+        <cds-ai-label slot="ai-label"></cds-ai-label>
+      </cds-dropdown>
+    `);
+    await el.updateComplete;
+
+    const slotNode = el.shadowRoot.querySelector("slot[name='ai-label']");
+    expect(slotNode).to.exist;
+  });
+
+  it('should resolve slug slot node via @query decorator', async () => {
+    const el = await fixture(html`
+      <cds-dropdown title-text="Dropdown Label">
+        <cds-dropdown-item value="option-1">Option 1</cds-dropdown-item>
+        <cds-slug slot="slug"></cds-slug>
+      </cds-dropdown>
+    `);
+    await el.updateComplete;
+
+    const slotNode = el.shadowRoot.querySelector("slot[name='slug']");
+    expect(slotNode).to.exist;
+  });
+
+  it('should toggle cds--slug--revert class on ai-label slot when revert-active is set', async () => {
+    const el = await fixture(html`
+      <cds-dropdown title-text="Dropdown Label">
+        <cds-dropdown-item value="option-1">Option 1</cds-dropdown-item>
+        <cds-ai-label slot="ai-label" revert-active></cds-ai-label>
+      </cds-dropdown>
+    `);
+    await el.updateComplete;
+
+    const aiLabelSlot = el.shadowRoot.querySelector("slot[name='ai-label']");
+    expect(aiLabelSlot.classList.contains('cds--slug--revert')).to.be.true;
+  });
+
+  it('should not add cds--slug--revert to slug slot when only cds-slug is present (ai-label slot takes precedence in shadow DOM)', async () => {
+    // The ai-label slot element always exists in shadow DOM, so the else-branch
+    // for the slug slot is never reached when only cds-slug is slotted.
+    const el = await fixture(html`
+      <cds-dropdown title-text="Dropdown Label">
+        <cds-dropdown-item value="option-1">Option 1</cds-dropdown-item>
+        <cds-slug slot="slug" revert-active></cds-slug>
+      </cds-dropdown>
+    `);
+    await el.updateComplete;
+
+    const slugSlot = el.shadowRoot.querySelector("slot[name='slug']");
+    expect(slugSlot.classList.contains('cds--slug--revert')).to.be.false;
+  });
+
+  it('should not set cds--slug--revert on ai-label slot when revert-active is absent', async () => {
+    const el = await fixture(html`
+      <cds-dropdown title-text="Dropdown Label">
+        <cds-dropdown-item value="option-1">Option 1</cds-dropdown-item>
+        <cds-ai-label slot="ai-label"></cds-ai-label>
+      </cds-dropdown>
+    `);
+    await el.updateComplete;
+
+    const aiLabelSlot = el.shadowRoot.querySelector("slot[name='ai-label']");
+    expect(aiLabelSlot.classList.contains('cds--slug--revert')).to.be.false;
+  });
+
+  it('should remove ai-label attribute when no cds-ai-label is slotted', async () => {
+    const el = await fixture(html`
+      <cds-dropdown title-text="Dropdown Label">
+        <cds-dropdown-item value="option-1">Option 1</cds-dropdown-item>
+      </cds-dropdown>
+    `);
+    await el.updateComplete;
+
+    expect(el.hasAttribute('ai-label')).to.be.false;
   });
 });
 

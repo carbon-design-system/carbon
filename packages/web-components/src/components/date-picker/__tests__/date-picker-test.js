@@ -1,11 +1,13 @@
 /**
- * Copyright IBM Corp. 2019, 2025
+ * Copyright IBM Corp. 2019, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
 import '@carbon/web-components/es/components/date-picker/index.js';
+import '@carbon/web-components/es/components/ai-label/index.js';
+import '@carbon/web-components/es/components/slug/index.js';
 import { fixture, html, expect } from '@open-wc/testing';
 
 describe('cds-date-picker', () => {
@@ -250,6 +252,81 @@ describe('cds-date-picker', () => {
         '.cds--form-requirement'
       );
       expect(formRequirement?.textContent?.trim()).to.equal(warnText);
+    });
+  });
+
+  describe('AI label and slug slot', () => {
+    it('should set ai-label attribute when cds-ai-label is slotted', async () => {
+      const el = await fixture(html`
+        <cds-date-picker-input label-text="Date" placeholder="mm/dd/yyyy">
+          <cds-ai-label slot="ai-label"></cds-ai-label>
+        </cds-date-picker-input>
+      `);
+      await el.updateComplete;
+
+      expect(el.hasAttribute('ai-label')).to.be.true;
+    });
+
+    it('should resolve ai-label slot node via @query decorator', async () => {
+      const el = await fixture(html`
+        <cds-date-picker-input label-text="Date" placeholder="mm/dd/yyyy">
+          <cds-ai-label slot="ai-label"></cds-ai-label>
+        </cds-date-picker-input>
+      `);
+      await el.updateComplete;
+
+      const slotNode = el.shadowRoot.querySelector("slot[name='ai-label']");
+      expect(slotNode).to.exist;
+    });
+
+    it('should resolve slug slot node via @query decorator', async () => {
+      const el = await fixture(html`
+        <cds-date-picker-input label-text="Date" placeholder="mm/dd/yyyy">
+          <cds-slug slot="slug"></cds-slug>
+        </cds-date-picker-input>
+      `);
+      await el.updateComplete;
+
+      const slotNode = el.shadowRoot.querySelector("slot[name='slug']");
+      expect(slotNode).to.exist;
+    });
+
+    it('should toggle cds--slug--revert class on ai-label slot when revert-active is set', async () => {
+      const el = await fixture(html`
+        <cds-date-picker-input label-text="Date" placeholder="mm/dd/yyyy">
+          <cds-ai-label slot="ai-label" revert-active></cds-ai-label>
+        </cds-date-picker-input>
+      `);
+      await el.updateComplete;
+
+      const aiLabelSlot = el.shadowRoot.querySelector("slot[name='ai-label']");
+      expect(aiLabelSlot.classList.contains('cds--slug--revert')).to.be.true;
+    });
+
+    it('should not add cds--slug--revert to slug slot when only cds-slug is present (ai-label slot takes precedence in shadow DOM)', async () => {
+      // The ai-label slot element always exists in shadow DOM, so the else-branch
+      // for the slug slot is never reached when only cds-slug is slotted.
+      const el = await fixture(html`
+        <cds-date-picker-input label-text="Date" placeholder="mm/dd/yyyy">
+          <cds-slug slot="slug" revert-active></cds-slug>
+        </cds-date-picker-input>
+      `);
+      await el.updateComplete;
+
+      const slugSlot = el.shadowRoot.querySelector("slot[name='slug']");
+      expect(slugSlot.classList.contains('cds--slug--revert')).to.be.false;
+    });
+
+    it('should not set cds--slug--revert on ai-label slot when revert-active is absent', async () => {
+      const el = await fixture(html`
+        <cds-date-picker-input label-text="Date" placeholder="mm/dd/yyyy">
+          <cds-ai-label slot="ai-label"></cds-ai-label>
+        </cds-date-picker-input>
+      `);
+      await el.updateComplete;
+
+      const aiLabelSlot = el.shadowRoot.querySelector("slot[name='ai-label']");
+      expect(aiLabelSlot.classList.contains('cds--slug--revert')).to.be.false;
     });
   });
 });
