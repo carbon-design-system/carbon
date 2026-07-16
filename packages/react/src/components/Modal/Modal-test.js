@@ -1670,3 +1670,39 @@ describe.each([
     expect(onRequestClose).toHaveBeenCalled();
   });
 });
+
+describe('enableDialogElement role attribute', () => {
+  it('should preserve native dialog attributes for non-alert modals', () => {
+    render(
+      <FeatureFlags enableDialogElement>
+        <Modal open>
+          <p>Body</p>
+        </Modal>
+      </FeatureFlags>
+    );
+
+    const modal = screen.getByRole('dialog');
+
+    expect(modal).toBeInTheDocument();
+    expect(modal).not.toHaveAttribute('role');
+    expect(modal).not.toHaveAttribute('aria-describedby');
+  });
+
+  it('should set alertdialog attributes for alert modals', () => {
+    render(
+      <FeatureFlags enableDialogElement>
+        <Modal open danger alert>
+          <p>Body</p>
+        </Modal>
+      </FeatureFlags>
+    );
+
+    const modal = screen.getByRole('alertdialog');
+    const modalBodyId = modal.getAttribute('aria-describedby');
+
+    expect(modal).toBeInTheDocument();
+    expect(modal).toHaveAttribute('role', 'alertdialog');
+    expect(modalBodyId).toMatch(/^cds--modal-body--modal-id-/);
+    expect(document.getElementById(modalBodyId)).toHaveTextContent('Body');
+  });
+});
