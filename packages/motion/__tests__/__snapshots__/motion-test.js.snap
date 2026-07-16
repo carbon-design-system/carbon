@@ -53,18 +53,18 @@ exports[`@carbon/motion Public API 1`] = `
   "slow02": "700ms",
   "surfaces": {
     "contextual": {
-      "duration": "slow-01",
+      "duration": "fast-02",
       "enter": {
-        "clipPath": "inset(0 0 0 0)",
         "opacity": 1,
+        "transform": "scale(1)",
       },
       "enterEasing": [
         "entrance",
         "expressive",
       ],
       "exit": {
-        "clipPath": "inset(50% 0 50% 0)",
         "opacity": 0,
+        "transform": "scale(0.96)",
       },
       "exitEasing": [
         "exit",
@@ -124,6 +124,26 @@ exports[`@carbon/motion Public API 1`] = `
       ],
       "kind": "shared-element",
       "origin": "trigger",
+    },
+    "stretch": {
+      "duration": "slow-01",
+      "enter": {
+        "clipPath": "inset(0 0 0 0)",
+        "opacity": 1,
+      },
+      "enterEasing": [
+        "entrance",
+        "expressive",
+      ],
+      "exit": {
+        "clipPath": "inset(50% 0 50% 0)",
+        "opacity": 0,
+      },
+      "exitEasing": [
+        "exit",
+        "expressive",
+      ],
+      "kind": "reveal",
     },
   },
   "unstable_tokens": [

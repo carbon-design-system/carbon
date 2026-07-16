@@ -65,6 +65,15 @@ export const surfaces = {
   // Icon > tooltip/popover
   contextual: {
     kind: 'reveal',
+    duration: 'fast-02',
+    enter: { opacity: 1, transform: 'scale(1)' },
+    exit: { opacity: 0, transform: 'scale(0.96)' },
+    enterEasing: ['entrance', 'expressive'],
+    exitEasing: ['exit', 'expressive'],
+  },
+  // Component reveal, "stretching" from vertical axis
+  stretch: {
+    kind: 'reveal',
     duration: 'slow-01',
     enter: { opacity: 1, clipPath: 'inset(0 0 0 0)' },
     exit: { opacity: 0, clipPath: 'inset(50% 0 50% 0)' },
