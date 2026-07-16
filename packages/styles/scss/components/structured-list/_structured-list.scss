@@ -207,7 +207,7 @@
   }
 
   @if not(
-    enabled('enable-v12-structured-list-visible-icons') and
+    enabled('enable-v12-structured-list-visible-icons') or
       $enable-v12-structured-list-visible-icons
   )
   {
