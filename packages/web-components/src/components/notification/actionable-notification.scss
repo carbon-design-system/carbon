@@ -15,7 +15,7 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/components/button';
 @use '@carbon/styles/scss/components/button/mixins' as button-mixins;
 @use '@carbon/styles/scss/components/button/vars' as button-vars;
-@use '@carbon/styles/scss/layout' as *;
+@use '@carbon/styles/scss/utilities/layout' as *;
 
 @include actionable-notification;
 
