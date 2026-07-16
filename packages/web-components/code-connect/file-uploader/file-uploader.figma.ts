@@ -1,22 +1,13 @@
 /**
- * Copyright IBM Corp. 2016, 2026
+ * Copyright IBM Corp. 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
-// @ts-nocheck
-import React from 'react';
-import {
-  FileUploader,
-  FileUploaderItem,
-  FileUploaderSkeleton,
-  FormItem,
-} from '@carbon/react';
-import figma from '@figma/code-connect';
+import figma, { html } from '@figma/code-connect/html';
 
 figma.connect(
-  FileUploader,
   'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=5465-294860&t=KAcDAMsePqspmo2e-4',
   {
     variant: { Type: 'Default' },
@@ -32,12 +23,22 @@ figma.connect(
         Disabled: true,
       }),
     },
-    example: ({ ...props }) => <FileUploader {...props} />,
+    example: (props) =>
+      html`<cds-file-uploader
+        label-title=${props.labelTitle}
+        label-description=${props.labelDescription}
+        disabled=${props.disabled}>
+        <cds-file-uploader-button size=${props.size}>
+          Add file
+        </cds-file-uploader-button>
+      </cds-file-uploader>`,
+    imports: [
+      "import '@carbon/web-components/es/components/file-uploader/index.js'",
+    ],
   }
 );
 
 figma.connect(
-  FileUploader,
   'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=5465-294860&t=KAcDAMsePqspmo2e-4',
   {
     variant: { Type: 'Drag and drop' },
@@ -46,34 +47,27 @@ figma.connect(
       labelDescription: figma.string('Desc. text'),
       labelTitle: figma.string('Label text'),
       disabled: figma.enum('State', {
-        Disabled: 'disabled',
+        Disabled: true,
       }),
     },
-    example: ({ children, labelDescription, labelTitle }) => (
-      <FormItem>
-        <p className="cds--file--label">{labelTitle}</p>
-        <p className="cds--label-description">{labelDescription}</p>
-        <FileUploaderDropContainer
-          accept={['image/jpeg', 'image/png']}
-          innerRef={{
-            current: '[Circular]',
-          }}
-          labelText="Drag and drop files here or click to upload"
-          multiple
-          name=""
-          onAddFiles={function noRefCheck() {}}
-          onChange={function noRefCheck() {}}
-          tabIndex={0}
-        />
-        <div className="cds--file-container cds--file-container--drop" />
-        {children}
-      </FormItem>
-    ),
+    example: (props) =>
+      html`<cds-file-uploader
+        label-title=${props.labelTitle}
+        label-description=${props.labelDescription}
+        disabled=${props.disabled}
+        multiple>
+        <cds-file-uploader-drop-container accept="image/jpeg image/png">
+          Drag and drop files here or click to upload
+        </cds-file-uploader-drop-container>
+        ${props.children}
+      </cds-file-uploader>`,
+    imports: [
+      "import '@carbon/web-components/es/components/file-uploader/index.js'",
+    ],
   }
 );
 
 figma.connect(
-  FileUploaderItem,
   'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=3199-35182&t=D2RGrtNnHWaB9r1F-4',
   {
     props: {
@@ -85,7 +79,7 @@ figma.connect(
         Medium: 'md',
         Small: 'sm',
       }),
-      status: figma.enum('State', {
+      state: figma.enum('State', {
         Uploaded: 'edit',
         Loading: 'uploading',
         Complete: 'complete',
@@ -95,15 +89,29 @@ figma.connect(
         'Error long': true,
       }),
     },
-    example: ({ ...props }) => <FileUploaderItem {...props} />,
+    example: (props) =>
+      html`<cds-file-uploader-item
+        state=${props.state}
+        size=${props.size}
+        invalid=${props.invalid}
+        error-subject=${props.errorSubject}
+        error-body=${props.errorBody}>
+        ${props.name}
+      </cds-file-uploader-item>`,
+    imports: [
+      "import '@carbon/web-components/es/components/file-uploader/index.js'",
+    ],
   }
 );
 
 figma.connect(
-  FileUploaderSkeleton,
   'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=5465-294860&t=KAcDAMsePqspmo2e-4',
   {
     variant: { State: 'Skeleton' },
-    example: () => <FileUploaderSkeleton />,
+    example: () =>
+      html`<cds-file-uploader-skeleton></cds-file-uploader-skeleton>`,
+    imports: [
+      "import '@carbon/web-components/es/components/file-uploader/index.js'",
+    ],
   }
 );
