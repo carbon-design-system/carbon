@@ -46,7 +46,7 @@ describe('Metadata', () => {
         validate: jest.fn(),
       };
       const mockSchema = jest.fn(() => {
-        const Joi = require('@hapi/joi');
+        const Joi = require('joi');
         return Joi.object({ foo: Joi.string() });
       });
       Object.defineProperty(mockExtension, 'schema', {
