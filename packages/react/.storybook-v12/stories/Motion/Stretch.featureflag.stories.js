@@ -12,18 +12,18 @@ import { DemoDialog } from './DemoDialog';
 import './surfaces.stories.scss';
 
 export default {
-  title: 'Elements/Motion/Contextual',
+  title: 'Elements/Motion/Stretch',
   tags: ['!autodocs'],
 };
 
 /**
- * Contextual reveal via native CSS.
+ * Stretch reveal via native CSS.
  * `DemoDialog` skips `MotionSurface` for this surface; the story sets
  * `data-carbon-surface` / `data-carbon-surface-state` and holds the dialog
  * mounted until the exit transition finishes. Styles come from
- * `@include motion.surface(contextual)`.
+ * `@include motion.surface(stretch)`.
  */
-export const ContextualWithNativeCSS = () => {
+export const StretchWithNativeCSS = () => {
   const [open, setOpen] = useState(false);
   // Keep the dialog mounted while the exit transition runs
   const [present, setPresent] = useState(false);
@@ -42,12 +42,12 @@ export const ContextualWithNativeCSS = () => {
         Create resource
       </Button>
       <DemoDialog
-        surface="contextual"
+        surface="stretch"
         open={present}
         useNativeCSS
         onClose={() => setOpen(false)}
         heading="Create resource"
-        data-carbon-surface="contextual"
+        data-carbon-surface="stretch"
         data-carbon-surface-state={open ? 'enter' : 'exit'}
         onTransitionEnd={(event) => {
           if (event.target !== event.currentTarget) {
@@ -62,7 +62,7 @@ export const ContextualWithNativeCSS = () => {
           }
         }}>
         <p>
-          This dialog uses the native CSS path for the <code>contextual</code>{' '}
+          This dialog uses the native CSS path for the <code>stretch</code>{' '}
           reveal: <code>data-carbon-surface</code> and{' '}
           <code>data-carbon-surface-state</code> drive enter/exit styles from
           the shared surface map via the Sass mixin. With reduced motion enabled
@@ -74,31 +74,31 @@ export const ContextualWithNativeCSS = () => {
 };
 
 /**
- * Contextual reveal via Motion (`MotionSurface` + motion/react).
+ * Stretch reveal via Motion (`MotionSurface` + motion/react).
  * The trigger is wrapped in `MotionSurfaceOrigin` for parity with shared-
  * element demos; for a reveal surface the origin is a plain wrapper and the
- * dialog animates from the shared `contextual` keyframes.
+ * dialog animates from the shared `stretch` keyframes.
  */
-export const ContextualWithMotion = () => {
+export const StretchWithMotion = () => {
   const [open, setOpen] = useState(false);
 
   return (
     <>
       <MotionSurfaceOrigin
-        surface="contextual"
-        surfaceId="contextual-motion-demo"
+        surface="stretch"
+        surfaceId="stretch-motion-demo"
         className="motion-surface-demo__trigger">
         <Button onClick={() => setOpen(true)}>Create resource</Button>
       </MotionSurfaceOrigin>
       <DemoDialog
-        surface="contextual"
-        surfaceId="contextual-motion-demo"
+        surface="stretch"
+        surfaceId="stretch-motion-demo"
         open={open}
         onClose={() => setOpen(false)}
         heading="Create resource">
         <p>
           This dialog uses the Motion path: <code>MotionSurface</code> resolves
-          the <code>contextual</code> reveal surface and animates with
+          the <code>stretch</code> reveal surface and animates with
           motion/react. With reduced motion enabled the dialog opens and closes
           with no animation.
         </p>

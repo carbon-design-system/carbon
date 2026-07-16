@@ -36,7 +36,7 @@
 
 // Stock modal fades the overlay and slides the container with a `transition`
 // shorthand that would override the surface mixin's clip-path transition.
-// Kill those so only the shared contextual surface styles drive the reveal.
+// Kill those so only the shared stretch surface styles drive the reveal.
 // Keep the closed overlay hidden so it doesn't block the trigger.
 .motion-surface-demo__modal--css {
   transition: none !important;
@@ -46,10 +46,10 @@
   transform: none !important;
 }
 
-// Native CSS reveal for contextual surface variant— tokens from @carbon/motion.
+// Native CSS reveal for stretch surface variant— tokens from @carbon/motion.
 .motion-surface-demo__modal--css
-  .motion-surface-demo__container[data-carbon-surface='contextual'] {
-  @include motion.surface(contextual);
+  .motion-surface-demo__container[data-carbon-surface='stretch'] {
+  @include motion.surface(stretch);
 }
 // stylelint-enable declaration-no-important
 .motion-surface-tile {
