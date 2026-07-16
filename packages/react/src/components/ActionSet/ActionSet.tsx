@@ -6,18 +6,18 @@
  */
 
 // Carbon and package components we use.
-import Button from '../../Button';
-import ButtonSet from '../../ButtonSet';
-import InlineLoading from '../../InlineLoading';
+import Button from '../Button';
+import ButtonSet from '../ButtonSet';
+import InlineLoading from '../InlineLoading';
 // Import portions of React that are needed.
 import React, { ComponentProps, PropsWithChildren } from 'react';
 
-import { ButtonProps } from '../../Button/Button';
-import { ButtonKind } from '../../Button/Button';
+import { ButtonProps } from '../Button/Button';
+import { ButtonKind } from '../Button/Button';
 // Other standard imports.
 import cx from 'classnames';
-import { usePrefix } from '../../../internal/usePrefix';
-import { warning } from '../../../internal/warning';
+import { usePrefix } from '../../internal/usePrefix';
+import { warning } from '../../internal/warning';
 
 const componentName = 'ActionSet';
 

@@ -12,8 +12,8 @@ import './feature-flags';
 import './internal/warnAboutDeprecatedReactVersion';
 
 export * from './components/Accordion';
-export { ActionSet } from './components/ibm-products/ActionSet';
-export type { ActionSetProps } from './components/ibm-products/ActionSet';
+export { ActionSet } from './components/ActionSet';
+export type { ActionSetProps } from './components/ActionSet';
 export * from './components/AccordionItem';
 export * from './components/AspectRatio';
 export * from './components/Breadcrumb';
@@ -727,9 +727,9 @@ export type { BaseSwitcherProps } from './components/UIShell/Switcher';
 export type { SwitcherDividerProps } from './components/UIShell/SwitcherDivider';
 export type { SwitcherItemProps } from './components/UIShell/SwitcherItem';
 
-//truncated text
-export { TruncatedText } from './components/ibm-products/TruncatedText';
-export type { TruncatedTextProps } from './components/ibm-products/TruncatedText';
+// TODO: ibm-products migration in progress — re-enable when component is ready
+// export { TruncatedText } from './components/TruncatedText';
+// export type { TruncatedTextProps } from './components/TruncatedText';
 
 //unordered list
 export type { UnorderedListProps } from './components/UnorderedList/UnorderedList';

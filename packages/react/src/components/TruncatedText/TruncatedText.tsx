@@ -8,10 +8,10 @@
 import React, { forwardRef, useState } from 'react';
 import cx from 'classnames';
 
-import { usePrefix } from '../../../internal/usePrefix';
+import { usePrefix } from '../../internal/usePrefix';
 import useTruncatedText from './useTruncatedText';
-import Tooltip from '../../Tooltip';
-import { PopoverAlignment } from '../../Popover';
+import Tooltip from '../Tooltip';
+import { PopoverAlignment } from '../Popover';
 
 export interface TruncatedTextProps {
   /**

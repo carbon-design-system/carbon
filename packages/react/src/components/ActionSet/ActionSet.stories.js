@@ -26,7 +26,7 @@ const actionsMappingWithLabels = actionsMapping(
 );
 
 export default {
-  title: 'IBM Products/Utilities/ActionSet',
+  title: 'Utilities/ActionSet',
   component: ActionSet,
   parameters: {
     layout: 'centered',

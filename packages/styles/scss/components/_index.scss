@@ -79,5 +79,6 @@
 @use 'toggle';
 @use 'tooltip';
 @use 'treeview';
-@use 'truncated-text';
+// TODO: ibm-products migration in progress — re-enable when component is ready
+// @use 'truncated-text';
 @use 'ui-shell';

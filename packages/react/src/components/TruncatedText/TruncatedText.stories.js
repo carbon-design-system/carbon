@@ -24,7 +24,7 @@ const defaultArgs = {
 };
 
 export default {
-  title: 'IBM Products/Utilities/TruncatedText',
+  title: 'Utilities/TruncatedText',
   component: TruncatedText,
   parameters: {
     layout: 'centered',

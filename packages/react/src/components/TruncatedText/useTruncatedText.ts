@@ -6,7 +6,7 @@
  */
 
 import { useEffect, useRef, useState } from 'react';
-import { checkHeightOverflow } from '../../../internal/checkForOverflow';
+import { checkHeightOverflow } from '../../internal/checkForOverflow';
 
 interface Params {
   lines?: number;
