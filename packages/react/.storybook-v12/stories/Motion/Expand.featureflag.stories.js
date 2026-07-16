@@ -15,11 +15,16 @@ import {
   MotionSurface,
 } from '../../../src/internal/motion/MotionSurface';
 import { DemoDialog } from './DemoDialog';
+import mdx from './Motion.mdx';
 import './surfaces.stories.scss';
 
 export default {
   title: 'Elements/Motion',
-  tags: ['!autodocs'],
+  parameters: {
+    docs: {
+      page: mdx,
+    },
+  },
 };
 
 const solutionTiles = [

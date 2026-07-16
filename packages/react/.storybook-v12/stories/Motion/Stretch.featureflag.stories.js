@@ -9,11 +9,16 @@ import React, { useEffect, useState } from 'react';
 import Button from '../../../src/components/Button';
 import { MotionSurfaceOrigin } from '../../../src/internal/motion/MotionSurface';
 import { DemoDialog } from './DemoDialog';
+import mdx from './Motion.mdx';
 import './surfaces.stories.scss';
 
 export default {
   title: 'Elements/Motion/Stretch',
-  tags: ['!autodocs'],
+  parameters: {
+    docs: {
+      page: mdx,
+    },
+  },
 };
 
 /**
