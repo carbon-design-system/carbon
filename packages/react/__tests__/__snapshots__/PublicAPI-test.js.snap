@@ -7928,6 +7928,9 @@ Map {
       "pagesUnknown": {
         "type": "bool",
       },
+      "renderPageSelect": {
+        "type": "func",
+      },
       "size": {
         "args": [
           [
