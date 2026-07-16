@@ -13,7 +13,6 @@
  */
 export const productMigratedStoryGlobs = [
   '../src/components/ActionSet/ActionSet.stories.js',
-  '../src/components/ActionSet/ActionSet.mdx',
   '../src/components/TruncatedText/TruncatedText.stories.js',
-  '../src/components/TruncatedText/TruncatedText.mdx',
+  '../src/components/Resizer/Resizer.stories.js',
 ];

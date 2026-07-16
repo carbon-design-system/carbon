@@ -1,0 +1,62 @@
+import { Controls, Canvas, Story, Meta } from '@storybook/addon-docs/blocks';
+import * as ResizerStories from './Resizer.stories';
+
+<Meta isTemplate />
+
+# Resizer
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Example usage](#example-usage)
+- [Component API](#component-api)
+
+## Overview
+
+`Resizer` is an atomic component extracted from `SplitPanel` and made into an
+independent component, which can be reused wherever there is a resizing
+requirement in the UI.
+
+The `Resizer` captures the sibling sizes internally and resets on double-click.
+This behavior can be overridden by using `onDoubleClick` to handle any custom
+functionality.
+
+The handle trigger cue can be enhanced if needed by writing a pseudo-class to
+make the trigger easier to grab, or any custom elements can be passed as
+children as seen in the `With Custom Handles` story. It can also be positioned
+relative to the thickness prop to appear centered on the handle.
+
+A gap can be added to the parent if the design demands.
+
+The minimum inline size or block size of the panels can be customized based on
+the design requirements.
+
+For any kind of custom functionality, the component provides a callback
+`onResize`, which gives access to `delta`, the difference in mouse or keyboard
+movements relative to the initial position. along with the `event`.
+
+Since most parts of this component are designed to be headless and
+unopinionated, it can be extensively tweaked, providing opportunities for
+various custom implementations.
+
+## A11y
+
+The resizer is primarily a visual enhancement and may offer limited benefit for
+screen-reader users, as the core UI elements remain accessible. However, for
+improved screen reader support, developers can apply their own custom aria-label
+to the resizer component ref available in `onResizeEnd` callback. This enables
+users to receive live feedback on layout changes. A reference implementation of
+this approach is included in the `Single Panel Bounded` example.
+
+Note: `aria-valuenow`, `aria-valuemin`, and `aria-valuemax` must be set
+manually, depending on how the resizer is used in the implementation.
+
+## Example usage
+
+<Canvas>
+  <Story of={ResizerStories.TwoPanelsVertical} />
+</Canvas>
+
+## Component API
+
+<Controls />
