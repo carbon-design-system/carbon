@@ -63,6 +63,15 @@ xdescribe('cds-textarea', () => {
       });
     });
 
+    it('Should associate the helper text with the textarea via aria-describedby', async () => {
+      render(template({ helperText: 'helper-text-foo' }), document.body);
+      await Promise.resolve();
+      const textarea = document.body
+        .querySelector('cds-textarea')!
+        .shadowRoot!.querySelector('textarea');
+      expect(textarea!.getAttribute('aria-describedby')).toBe('helper-text');
+    });
+
     it('Should reflect value in DOM', async () => {
       render(
         template({
