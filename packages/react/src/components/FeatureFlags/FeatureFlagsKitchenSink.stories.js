@@ -12,12 +12,13 @@ import React, { useState } from 'react';
 // reaches the v11 implementation directly and never checks the flag.
 import { OverflowMenu } from '../OverflowMenu';
 import { default as OverflowMenuItem } from '../OverflowMenuItem';
-import { ClickableTile, Tile } from '../Tile';
+import { ClickableTile } from '../Tile';
 import { default as RadioTile } from '../RadioTile';
 import { TileGroup } from '../TileGroup';
+import { CheckmarkFilled } from '@carbon/icons-react';
+const prefix = 'cds';
 import { default as Dropdown } from '../Dropdown';
 import { ComposedModal, ModalBody, ModalHeader } from '../ComposedModal';
-import { TreeView, TreeNode } from '../TreeView';
 import { default as Button } from '../Button';
 import { default as Toggle } from '../Toggle';
 import {
@@ -129,10 +130,12 @@ export const KitchenSink = () => {
 
       <Section
         kind="logs"
-        title="Tile"
+        title="ClickableTile"
         flag="enable-v12-tile-default-icons"
-        note="Renders default icons in v12.">
-        <Tile>Default tile</Tile>
+        note="Renders a default arrow icon in v12.">
+        <ClickableTile id="kitchen-sink-clickable" href="#">
+          Clickable tile
+        </ClickableTile>
       </Section>
 
       <Section
@@ -176,32 +179,75 @@ export const KitchenSink = () => {
 
       <Section
         kind="visual"
-        title="StructuredList"
+        title="StructuredList (old API)"
         flag="enable-v12-structured-list-visible-icons"
-        note="Sass only. v12 shows the selection icons without needing hover or focus.">
+        note="Old API: StructuredListRow with no selection prop. Requires a manual StructuredListCell containing CheckmarkFilled.">
         <StructuredListWrapper selection>
           <StructuredListHead>
             <StructuredListRow head>
-              <StructuredListCell head>Column</StructuredListCell>
+              <StructuredListCell head>ColumnA</StructuredListCell>
+              <StructuredListCell head>ColumnB</StructuredListCell>
+              <StructuredListCell head>ColumnC</StructuredListCell>
             </StructuredListRow>
           </StructuredListHead>
           <StructuredListBody>
-            <StructuredListRow label htmlFor="kitchen-sink-list-1">
-              <StructuredListCell>Row one</StructuredListCell>
-              <StructuredListInput
-                id="kitchen-sink-list-1"
-                value="row-1"
-                name="kitchen-sink-list"
-              />
+            {['row-0', 'row-1', 'row-2'].map((value, i) => (
+              <StructuredListRow key={value}>
+                <StructuredListCell>Row {i}</StructuredListCell>
+                <StructuredListCell>Row {i}</StructuredListCell>
+                <StructuredListCell>
+                  Lorem ipsum dolor sit amet
+                </StructuredListCell>
+                <StructuredListInput
+                  id={`kitchen-sink-list-old-${i}`}
+                  value={value}
+                  title={value}
+                  name="kitchen-sink-list-old"
+                  aria-label={value}
+                />
+                <StructuredListCell>
+                  <CheckmarkFilled
+                    className={`${prefix}--structured-list-svg`}
+                    aria-label="select an option">
+                    <title>select an option</title>
+                  </CheckmarkFilled>
+                </StructuredListCell>
+              </StructuredListRow>
+            ))}
+          </StructuredListBody>
+        </StructuredListWrapper>
+      </Section>
+
+      <Section
+        kind="visual"
+        title="StructuredList (new API)"
+        flag="enable-v12-structured-list-visible-icons"
+        note="New API: add selection to StructuredListRow. The icon cell is rendered automatically — no CheckmarkFilled needed.">
+        <StructuredListWrapper selection>
+          <StructuredListHead>
+            <StructuredListRow head selection>
+              <StructuredListCell head>ColumnA</StructuredListCell>
+              <StructuredListCell head>ColumnB</StructuredListCell>
+              <StructuredListCell head>ColumnC</StructuredListCell>
             </StructuredListRow>
-            <StructuredListRow label htmlFor="kitchen-sink-list-2">
-              <StructuredListCell>Row two</StructuredListCell>
-              <StructuredListInput
-                id="kitchen-sink-list-2"
-                value="row-2"
-                name="kitchen-sink-list"
-              />
-            </StructuredListRow>
+          </StructuredListHead>
+          <StructuredListBody>
+            {['row-0', 'row-1', 'row-2'].map((value, i) => (
+              <StructuredListRow key={value} selection>
+                <StructuredListCell>Row {i}</StructuredListCell>
+                <StructuredListCell>Row {i}</StructuredListCell>
+                <StructuredListCell>
+                  Lorem ipsum dolor sit amet
+                </StructuredListCell>
+                <StructuredListInput
+                  id={`kitchen-sink-list-new-${i}`}
+                  value={value}
+                  title={value}
+                  name="kitchen-sink-list-new"
+                  aria-label={value}
+                />
+              </StructuredListRow>
+            ))}
           </StructuredListBody>
         </StructuredListWrapper>
       </Section>
@@ -212,17 +258,6 @@ export const KitchenSink = () => {
         flag="enable-v12-toggle-reduced-label-spacing"
         note="Sass only. v12 reduces the gap between the control and its label.">
         <Toggle id="kitchen-sink-toggle" labelText="Toggle" />
-      </Section>
-
-      <Section
-        kind="silent"
-        title="TreeView"
-        flag="enable-treeview-controllable"
-        note="Read in JavaScript, but not a v12 flag. Must never log — it is opt-in with no deadline.">
-        <TreeView label="TreeView">
-          <TreeNode id="kitchen-sink-node-1" label="Node one" />
-          <TreeNode id="kitchen-sink-node-2" label="Node two" />
-        </TreeView>
       </Section>
     </div>
   );

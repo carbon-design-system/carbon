@@ -119,14 +119,42 @@ export const KitchenSink = {
         'visual',
         'cds-structured-list',
         'enable-v12-structured-list-visible-icons',
-        'Sass only. v12 shows the selection icons without needing hover or focus.',
-        html`<cds-structured-list selection>
+        'Sass only. v12 shows the selection icons without needing hover or focus. Use selection-name on cds-structured-list and selection-value on each row — the component renders the input and icon automatically.',
+        html`<cds-structured-list selection-name="kitchen-sink-sl">
+          <cds-structured-list-head>
+            <cds-structured-list-header-row>
+              <cds-structured-list-header-cell
+                >ColumnA</cds-structured-list-header-cell
+              >
+              <cds-structured-list-header-cell
+                >ColumnB</cds-structured-list-header-cell
+              >
+              <cds-structured-list-header-cell
+                >ColumnC</cds-structured-list-header-cell
+              >
+            </cds-structured-list-header-row>
+          </cds-structured-list-head>
           <cds-structured-list-body>
-            <cds-structured-list-row selection-name="kitchen-sink-list">
-              <cds-structured-list-cell>Row one</cds-structured-list-cell>
+            <cds-structured-list-row selection-value="row-0">
+              <cds-structured-list-cell>Row 0</cds-structured-list-cell>
+              <cds-structured-list-cell>Row 0</cds-structured-list-cell>
+              <cds-structured-list-cell
+                >Lorem ipsum dolor sit amet</cds-structured-list-cell
+              >
             </cds-structured-list-row>
-            <cds-structured-list-row selection-name="kitchen-sink-list">
-              <cds-structured-list-cell>Row two</cds-structured-list-cell>
+            <cds-structured-list-row selection-value="row-1">
+              <cds-structured-list-cell>Row 1</cds-structured-list-cell>
+              <cds-structured-list-cell>Row 1</cds-structured-list-cell>
+              <cds-structured-list-cell
+                >Lorem ipsum dolor sit amet</cds-structured-list-cell
+              >
+            </cds-structured-list-row>
+            <cds-structured-list-row selection-value="row-2">
+              <cds-structured-list-cell>Row 2</cds-structured-list-cell>
+              <cds-structured-list-cell>Row 2</cds-structured-list-cell>
+              <cds-structured-list-cell
+                >Lorem ipsum dolor sit amet</cds-structured-list-cell
+              >
             </cds-structured-list-row>
           </cds-structured-list-body>
         </cds-structured-list>`
