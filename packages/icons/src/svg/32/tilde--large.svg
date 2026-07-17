@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: none;
+      }
+    </style>
+  </defs>
+  <path id="tilde--large" d="M21.208,18.9814c-2.127,0-4.0459-.998-5.7681-2.1636-4.896-3.3105-7.396-1.4707-9.7295.8862l-1.4209-1.4077c2.7676-2.7935,6.3901-5.1123,12.2705-1.1348,3.3022,2.2329,6.0815,2.8696,9.7241-.8604l1.4316,1.3975c-2.3574,2.4136-4.5234,3.2827-6.5078,3.2827Z"/>
+  <rect id="Transparent_Rectangle" data-name="Transparent Rectangle" class="cls-1" width="32" height="32"/>
+</svg>
