@@ -20,6 +20,7 @@ import { isComponentElement } from '../../internal';
 import { useMergedRefs } from '../../internal/useMergedRefs';
 import { usePrefix } from '../../internal/usePrefix';
 import { useWindowEvent, useEvent } from '../../internal/useEvent';
+import { selectorTabbable } from '../../internal/keyboard/navigation';
 import { mapPopoverAlign } from '../../tools/mapPopoverAlign';
 import {
   useFloating,
@@ -293,6 +294,25 @@ export const Popover: PopoverComponent & {
         onRequestClose?.();
       }
     }
+  });
+
+  useWindowEvent('keydown', (event) => {
+    if (!open || event.key !== 'Escape' || event.defaultPrevented) return;
+
+    // Esc should only close the popover if focus is inside the popover content
+    const target = event.target;
+    if (
+      !(target instanceof Element) ||
+      target.closest(`.${prefix}--popover-content`) !== refs.floating.current
+    ) {
+      return;
+    }
+    onRequestClose?.();
+
+    // return focus to the trigger while making sure it is tabbable
+    const trigger =
+      popover.current?.querySelector<HTMLElement>(selectorTabbable);
+    trigger?.focus();
   });
 
   useWindowEvent('click', ({ target }) => {

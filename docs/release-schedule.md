@@ -78,6 +78,34 @@ included.
 The term 'supported release lines' will be used to refer to all release lines
 that are not End-of-Life.
 
+### Long-term support
+
+Long-term support, or LTS, is an additional designation given to selected major
+releases that require an extended support window. Not every major release is
+expected to become an LTS release.
+
+LTS is intended for consumers whose delivery models do not allow them to
+regularly upgrade to the latest Carbon major. This is particularly important for
+on-premises products and products that support on-premises customers. These
+projects may have a concentrated period of feature development followed by a
+long maintenance period during which upgrading Carbon would be difficult or
+impractical.
+
+An LTS release receives the same types of fixes as a Maintenance release,
+including security patches, critical bug fixes, and requested non-critical
+bugfixes when there is a demonstrated need. The primary difference is the length
+and intent of the support commitment.
+
+Rather than assigning an arbitrary end date when an LTS release is designated,
+the Carbon team intends to maintain its release infrastructure and consider
+requested fixes for as long as supported products and customers have an
+established business need for that release line.
+
+LTS does not include ongoing feature development and should not be treated as an
+alternative to adopting the current Active release when an upgrade is practical.
+Its purpose is to preserve the stability and viability of products that cannot
+follow Carbon's standard release cadence.
+
 ## Accessibility
 
 Active release lines are tested using IBMa's `accessibility-checker` in a real
@@ -111,9 +139,15 @@ will need to patch yourself or submit a fix by
 ## Assets managed under this release schedule
 
 This plan covers the design and development assets under maintenance of the
-Carbon Design System core team. This includes the `@carbon/react` and
-`@carbon/styles` packages, as well as all other packages within the
-[`carbon` monorepo](https://github.com/carbon-design-system/carbon).
+Carbon Design System core team, including:
+
+- `@carbon/react`
+- `@carbon/web-components`
+- `@carbon/styles`
+- All other packages within the
+  [`carbon` monorepo](https://github.com/carbon-design-system/carbon)
+- `@carbon/ibm-products`
+- `@carbon/ibm-products-web-components`
 
 This plan also includes all design guidance and design kit assets (figma, etc.)
 present in the
