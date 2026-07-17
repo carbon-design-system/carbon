@@ -38,6 +38,7 @@ will fall back to its default rendering.
 
 Components that are explicitly passed a `size` attribute are unaffected by the
 layout context. Example:
+
 ```html
 <div>
   <!-- This text input is always lg -->
@@ -67,6 +68,7 @@ used.
 An example of this use case is the icon-only content switcher. It uses
 `cds-icon-button` under the hood which supports all sizes and defaults to `lg`.
 The `cds-content-switcher` though only supports `sm`->`lg` and defaults to `md`.
+
 ```html
 <div>
   <cds-layout-constraint size-default="md" size-min="sm" size-max="lg">

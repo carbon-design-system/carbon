@@ -43,6 +43,7 @@ collect:
         - closeOnActivation
         - cols
         - colSpan
+        - compact
         - compareItems
         - condensed
         - contained
@@ -173,6 +174,7 @@ collect:
         - onKeyUp
         - onLoadingSuccess
         - onMenuChange
+        - onMouseDown
         - onMouseEnter
         - onMouseLeave
         - onMouseUp
@@ -252,6 +254,7 @@ collect:
         - warn
         - warnText
         - width
+        - withRowGap
         # AccordionItem
         - handleAnimationEnd
         - onHeadingClick
@@ -357,6 +360,7 @@ collect:
         - enableTreeviewControllable
         - enableV12DynamicFloatingStyles
         - enableV12Overflowmenu
+        - enableV12Release
         - enableV12TileDefaultIcons
         - enableV12TileRadioIcons
         - flags
@@ -473,7 +477,6 @@ collect:
         - closeMenu
         - handleOverflowMenuItemFocus
         - isDelete
-        - onMouseDown
         - requireTitle
         - wrapperClassName
         # PageHeaderBreadcrumbBar
@@ -492,7 +495,9 @@ collect:
         - totalPages
         # Pagination
         - backwardText
+        - backwardTextTooltipPosition
         - forwardText
+        - forwardTextTooltipPosition
         - initialPage
         - isLastPage
         - itemRangeText
@@ -528,6 +533,7 @@ collect:
         # SelectItem
         - hidden
         # ShapeIndicator
+        - shapeDescription
         - textSize
         # SideNav
         - addMouseListeners
@@ -947,6 +953,16 @@ collect:
         - actionable
         - inline
         - toast
+        # Pagination - backwardTextTooltipPosition
+        - bottom
+        - left
+        - right
+        - top
+        # Pagination - forwardTextTooltipPosition
+        - bottom
+        - left
+        - right
+        - top
         # Popover - autoAlignBoundary
         - clippingAncestors
         # ShapeIndicator - textSize

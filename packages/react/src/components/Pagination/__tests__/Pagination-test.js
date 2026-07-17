@@ -411,6 +411,35 @@ describe('Pagination', () => {
       const { container } = render(<Pagination size="sm" pageSizes={[10]} />);
 
       expect(container.firstChild).toHaveClass('cds--pagination--sm');
+      expect(container.firstChild).toHaveClass('cds--layout--size-sm');
+    });
+
+    it('should respect xs size prop', () => {
+      const { container } = render(<Pagination size="xs" pageSizes={[10]} />);
+
+      expect(container.firstChild).toHaveClass('cds--pagination--xs');
+      expect(container.firstChild).toHaveClass('cds--layout--size-xs');
+    });
+
+    it('should respect sm size prop', () => {
+      const { container } = render(<Pagination size="sm" pageSizes={[10]} />);
+
+      expect(container.firstChild).toHaveClass('cds--pagination--sm');
+      expect(container.firstChild).toHaveClass('cds--layout--size-sm');
+    });
+
+    it('should respect md size prop', () => {
+      const { container } = render(<Pagination size="md" pageSizes={[10]} />);
+
+      expect(container.firstChild).toHaveClass('cds--pagination--md');
+      expect(container.firstChild).toHaveClass('cds--layout--size-md');
+    });
+
+    it('should respect lg size prop', () => {
+      const { container } = render(<Pagination size="lg" pageSizes={[10]} />);
+
+      expect(container.firstChild).toHaveClass('cds--pagination--lg');
+      expect(container.firstChild).toHaveClass('cds--layout--size-lg');
     });
 
     it('should respect totalItems prop', () => {
@@ -591,6 +620,150 @@ describe('Pagination', () => {
       expect(onChange).toHaveBeenCalledWith(
         expect.objectContaining({ page: 1, pageSize: 3 })
       );
+    });
+
+    it('should map each tooltip position prop to the correct button', () => {
+      render(
+        <Pagination
+          pageSizes={[10]}
+          backwardTextTooltipPosition="right"
+          forwardTextTooltipPosition="bottom"
+        />
+      );
+
+      const previousButton = screen.getByLabelText('Previous page');
+      const nextButton = screen.getByLabelText('Next page');
+
+      expect(
+        previousButton.closest('.cds--popover--right')
+      ).toBeInTheDocument();
+
+      expect(nextButton.closest('.cds--popover--bottom')).toBeInTheDocument();
+    });
+
+    it('should call onChange when renderPageSelect calls onSetPage', async () => {
+      const onChange = jest.fn();
+
+      render(
+        <Pagination
+          totalItems={30}
+          pageSizes={[10]}
+          pageSize={10}
+          page={1}
+          onChange={onChange}
+          renderPageSelect={({ onSetPage }) => (
+            <button onClick={() => onSetPage(3)}>Go to 3</button>
+          )}
+        />
+      );
+
+      await userEvent.click(screen.getByText('Go to 3'));
+
+      expect(onChange).toHaveBeenCalledWith({ page: 3, pageSize: 10 });
+    });
+
+    it('should call onChange when renderPageSelect calls onSetPage with a string', async () => {
+      const onChange = jest.fn();
+
+      render(
+        <Pagination
+          totalItems={30}
+          pageSizes={[10]}
+          pageSize={10}
+          page={1}
+          onChange={onChange}
+          renderPageSelect={({ onSetPage }) => (
+            <button onClick={() => onSetPage('3')}>Go to 3</button>
+          )}
+        />
+      );
+
+      await userEvent.click(screen.getByText('Go to 3'));
+
+      expect(onChange).toHaveBeenCalledWith({ page: 3, pageSize: 10 });
+    });
+
+    it('should not call onChange when disabled and renderPageSelect calls onSetPage', async () => {
+      const onChange = jest.fn();
+
+      render(
+        <Pagination
+          totalItems={30}
+          pageSizes={[10]}
+          pageSize={10}
+          page={1}
+          disabled
+          onChange={onChange}
+          renderPageSelect={({ onSetPage }) => (
+            <button onClick={() => onSetPage(3)}>Go to 3</button>
+          )}
+        />
+      );
+
+      await userEvent.click(screen.getByText('Go to 3'));
+
+      expect(onChange).not.toHaveBeenCalled();
+    });
+
+    it('should not call onChange when pageInputDisabled and renderPageSelect calls onSetPage', async () => {
+      const onChange = jest.fn();
+
+      render(
+        <Pagination
+          totalItems={30}
+          pageSizes={[10]}
+          pageSize={10}
+          page={1}
+          pageInputDisabled
+          onChange={onChange}
+          renderPageSelect={({ onSetPage }) => (
+            <button onClick={() => onSetPage(3)}>Go to 3</button>
+          )}
+        />
+      );
+
+      await userEvent.click(screen.getByText('Go to 3'));
+
+      expect(onChange).not.toHaveBeenCalled();
+    });
+
+    it('should not call onChange when renderPageSelect calls onSetPage with a non-integer', async () => {
+      const onChange = jest.fn();
+
+      render(
+        <Pagination
+          totalItems={30}
+          pageSizes={[10]}
+          pageSize={10}
+          page={1}
+          onChange={onChange}
+          renderPageSelect={({ onSetPage }) => (
+            <button onClick={() => onSetPage(1.5)}>Go to 1.5</button>
+          )}
+        />
+      );
+
+      await userEvent.click(screen.getByText('Go to 1.5'));
+
+      expect(onChange).not.toHaveBeenCalled();
+    });
+
+    it('should not render renderPageSelect when pagesUnknown is true', () => {
+      const renderPageSelect = jest.fn(() => <div>custom select</div>);
+
+      render(
+        <Pagination
+          totalItems={30}
+          pageSizes={[10]}
+          pageSize={10}
+          page={1}
+          pagesUnknown
+          renderPageSelect={renderPageSelect}
+        />
+      );
+
+      expect(renderPageSelect).not.toHaveBeenCalled();
+      expect(screen.queryByText('custom select')).not.toBeInTheDocument();
     });
   });
 });

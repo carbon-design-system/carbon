@@ -8,7 +8,6 @@
 import React from 'react';
 
 import { WithLayer } from '../../../.storybook/templates/WithLayer';
-
 import { default as Select, SelectSkeleton } from '../Select';
 import SelectItem from '../SelectItem';
 import SelectItemGroup from '../SelectItemGroup';
