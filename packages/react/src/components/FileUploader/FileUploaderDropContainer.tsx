@@ -206,6 +206,17 @@ function FileUploaderDropContainer({
         }, [])
       : [...event.dataTransfer.files];
 
+    if (
+      inputRef.current &&
+      event.dataTransfer.files instanceof window.FileList
+    ) {
+      try {
+        inputRef.current.files = event.dataTransfer.files;
+      } catch {
+        // Some environments expose FileList-like objects that the native setter rejects.
+      }
+    }
+
     return handleFiles(event, files);
   };
 

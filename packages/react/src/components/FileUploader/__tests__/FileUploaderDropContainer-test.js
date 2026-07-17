@@ -558,6 +558,34 @@ describe('FileUploaderDropContainer', () => {
     });
   });
 
+  it('should set the input files when files are dropped', async () => {
+    const { container } = render(
+      <FileUploaderDropContainer multiple {...requiredProps} />
+    );
+    const dropArea = container.firstChild;
+    const input = container.querySelector('input');
+    const file = new File(['content'], 'example.png', { type: 'image/png' });
+    const sourceInput = document.createElement('input');
+    sourceInput.type = 'file';
+    await userEvent.upload(sourceInput, file);
+    const filesSetter = jest.spyOn(input, 'files', 'set');
+
+    fireEvent.drop(dropArea, {
+      dataTransfer: { files: sourceInput.files },
+    });
+
+    expect(filesSetter).toHaveBeenCalledWith(sourceInput.files);
+    const [droppedFiles] = filesSetter.mock.calls[0];
+    expect(droppedFiles).toHaveLength(1);
+    expect(droppedFiles[0]).toEqual(
+      expect.objectContaining({
+        name: 'example.png',
+        size: file.size,
+        type: 'image/png',
+      })
+    );
+  });
+
   it('should ignore directory items dropped via dataTransfer.items', () => {
     const onAddFiles = jest.fn();
     const { container } = render(
