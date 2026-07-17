@@ -14,7 +14,7 @@ import glob from 'fast-glob';
 import react from '@vitejs/plugin-react';
 import { mergeConfig } from 'vite';
 
-import { productMigratedStoryGlobs } from './product-migrated-story-globs.js';
+import { productMigratedStoryGlobs } from '../product-migrated-components.mjs';
 
 const configDir = fileURLToPath(new URL('.', import.meta.url));
 

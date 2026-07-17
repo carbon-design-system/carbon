@@ -13,7 +13,7 @@ import type { StorybookConfig } from '@storybook/react-vite';
 import { mergeConfig } from 'vite';
 
 import baseConfig from '../.storybook/main.ts';
-import { productMigratedStoryGlobs } from '../.storybook/product-migrated-story-globs.js';
+import { productMigratedStoryGlobs } from '../product-migrated-components.mjs';
 
 const configDir = fileURLToPath(new URL('.', import.meta.url));
 const manifestPath = path.join(configDir, 'generated', 'manifest.json');

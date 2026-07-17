@@ -19,28 +19,34 @@ import debounce from '../../internal/debounce';
 
 export const DEBOUNCE_DELAY = 100;
 
-export interface ResizerProps {
+export interface ResizerProps extends React.HTMLAttributes<HTMLDivElement> {
   /** Whether the resizer handle is oriented horizontally (resize up/down) or vertically (resize left/right). */
   orientation: 'horizontal' | 'vertical';
   /**
    * Called on every resize movement with the delta (px) from the drag/key start position.
    * When provided the component becomes fully controlled — sibling sizes are NOT updated automatically.
    */
-  onResize?: (event: MouseEvent | KeyboardEvent, delta: number) => void;
+  onResize?: (
+    event:
+      | React.MouseEvent<HTMLDivElement>
+      | React.KeyboardEvent<HTMLDivElement>,
+    delta: number
+  ) => void;
   /** Called once when a resize interaction ends (mouse-up or key-up debounced). Receives the resizer ref. */
   onResizeEnd?: (
-    event: MouseEvent | KeyboardEvent,
+    event:
+      | React.MouseEvent<HTMLDivElement>
+      | React.KeyboardEvent<HTMLDivElement>,
     ref: React.RefObject<HTMLDivElement>
   ) => void;
   /** Called on double-click. When provided the default reset-to-initial-sizes behavior is suppressed. */
-  onDoubleClick?: (event: MouseEvent) => void;
+  onDoubleClick?: (event: React.MouseEvent<HTMLDivElement>) => void;
   /** Additional className applied to the root element. */
   className?: string;
   /** Optional children rendered inside the handle (e.g. custom drag icons). */
   children?: React.ReactNode;
   /** Thickness of the handle in px. Defaults to 4. */
   thickness?: number;
-  [key: string]: unknown;
 }
 
 const componentName = 'Resizer';
