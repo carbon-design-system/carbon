@@ -23,6 +23,22 @@ import { isFeatureFlagEnabled } from '../feature-flags';
  * @element cds-radio-tile
  * @fires cds-radio-tile-selected
  *   The name of the custom event fired after this radio tile changes its selected state.
+ *
+ * @featureFlag enable-v12-tile-radio-icons - Renders radio selection icons
+ * inside the tile. **Will be on by default in v12.**
+ *
+ * Enable in your app:
+ * ```html
+ * import '@carbon/web-components/es/components/feature-flags/feature-flags.js';
+ *
+ * <feature-flags enable-v12-tile-radio-icons>
+ *   <cds-tile-group>
+ *     <cds-radio-tile value="option-1">Option 1</cds-radio-tile>
+ *   </cds-tile-group>
+ * </feature-flags>
+ * ```
+ *
+ * @see https://github.com/carbon-design-system/carbon/blob/main/docs/feature-flags.md
  */
 @customElement(`${prefix}-radio-tile`)
 class CDSRadioTile extends SelectableTile {

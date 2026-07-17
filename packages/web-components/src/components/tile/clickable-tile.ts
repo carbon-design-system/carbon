@@ -23,6 +23,20 @@ import { isFeatureFlagEnabled } from '../feature-flags';
  * Clickable tile.
  *
  * @element cds-clickable-tile
+ *
+ * @featureFlag enable-v12-tile-default-icons - Renders a default arrow icon
+ * inside the tile. **Will be on by default in v12.**
+ *
+ * Enable in your app:
+ * ```html
+ * import '@carbon/web-components/es/components/feature-flags/feature-flags.js';
+ *
+ * <feature-flags enable-v12-tile-default-icons>
+ *   <cds-clickable-tile href="#"></cds-clickable-tile>
+ * </feature-flags>
+ * ```
+ *
+ * @see https://github.com/carbon-design-system/carbon/blob/main/docs/feature-flags.md
  */
 @customElement(`${prefix}-clickable-tile`)
 class CDSClickableTile extends CDSLink {

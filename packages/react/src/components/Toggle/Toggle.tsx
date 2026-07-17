@@ -99,6 +99,23 @@ export interface ToggleProps
   toggled?: boolean;
 }
 
+/**
+ * Toggle component.
+ *
+ * @featureFlag enable-v12-toggle-reduced-label-spacing - Reduces the spacing
+ * between the toggle control and its label. **Will be on by default in v12.**
+ *
+ * Enable in your app:
+ * ```jsx
+ * import { FeatureFlags } from '@carbon/react';
+ *
+ * <FeatureFlags enableV12ToggleReducedLabelSpacing>
+ *   <Toggle labelText="Label" />
+ * </FeatureFlags>
+ * ```
+ *
+ * @see https://github.com/carbon-design-system/carbon/blob/main/docs/feature-flags.md
+ */
 export function Toggle({
   'aria-labelledby': ariaLabelledby,
   className,

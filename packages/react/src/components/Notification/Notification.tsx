@@ -925,6 +925,24 @@ export interface ActionableNotificationProps
   title?: string;
 }
 
+/**
+ * Actionable notification component.
+ *
+ * @featureFlag enable-focus-wrap-without-sentinels - Wraps focus inside the
+ * notification without relying on sentinel DOM nodes.
+ * **Will be on by default in v12.**
+ *
+ * Enable in your app:
+ * ```jsx
+ * import { FeatureFlags } from '@carbon/react';
+ *
+ * <FeatureFlags enableFocusWrapWithoutSentinels>
+ *   <ActionableNotification title="Title" subtitle="Subtitle" />
+ * </FeatureFlags>
+ * ```
+ *
+ * @see https://github.com/carbon-design-system/carbon/blob/main/docs/feature-flags.md
+ */
 export function ActionableNotification({
   actionButtonLabel,
   ['aria-label']: ariaLabel,

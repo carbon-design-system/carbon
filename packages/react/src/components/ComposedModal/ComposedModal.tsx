@@ -255,6 +255,24 @@ export interface ComposedModalProps extends HTMLAttributes<HTMLDivElement> {
    */
   slug?: ReactNode;
 }
+
+/**
+ * Composed modal component.
+ *
+ * @featureFlag enable-focus-wrap-without-sentinels - Enables a focus-wrapping
+ * strategy that does not rely on sentinel DOM nodes. **Will be on by default in v12.**
+ *
+ * Enable in your app:
+ * ```jsx
+ * import { FeatureFlags } from '@carbon/react';
+ *
+ * <FeatureFlags enableFocusWrapWithoutSentinels>
+ *   <ComposedModal open={open} onClose={handleClose} />
+ * </FeatureFlags>
+ * ```
+ *
+ * @see https://github.com/carbon-design-system/carbon/blob/main/docs/feature-flags.md
+ */
 const ComposedModal = React.forwardRef<HTMLDivElement, ComposedModalProps>(
   function ComposedModal({ open, ...props }, ref) {
     const id = useId();

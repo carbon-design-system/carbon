@@ -75,6 +75,24 @@ interface OverflowMenuProps {
   menuTarget?: Element;
 }
 
+/**
+ * v12 Menu-based overflow menu component. Active when `enable-v12-overflowmenu`
+ * is enabled.
+ *
+ * @featureFlag enable-v12-dynamic-floating-styles - Uses Floating UI for
+ * dynamic positioning of the menu. **Will be on by default in v12.**
+ *
+ * Enable in your app:
+ * ```jsx
+ * import { FeatureFlags } from '@carbon/react';
+ *
+ * <FeatureFlags enableV12Overflowmenu enableV12DynamicFloatingStyles>
+ *   <OverflowMenu />
+ * </FeatureFlags>
+ * ```
+ *
+ * @see https://github.com/carbon-design-system/carbon/blob/main/docs/feature-flags.md
+ */
 // eslint-disable-next-line react/display-name -- https://github.com/carbon-design-system/carbon/issues/20452
 const OverflowMenu = React.forwardRef<HTMLDivElement, OverflowMenuProps>(
   (

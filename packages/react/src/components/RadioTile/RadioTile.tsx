@@ -108,6 +108,25 @@ export interface RadioTileProps {
 }
 type AriaSupportedProps = React.AriaAttributes;
 
+/**
+ * Radio tile component.
+ *
+ * @featureFlag enable-v12-tile-radio-icons - Renders radio selection icons
+ * inside the tile. **Will be on by default in v12.**
+ *
+ * Enable in your app:
+ * ```jsx
+ * import { FeatureFlags } from '@carbon/react';
+ *
+ * <FeatureFlags enableV12TileRadioIcons>
+ *   <TileGroup>
+ *     <RadioTile value="option-1">Option 1</RadioTile>
+ *   </TileGroup>
+ * </FeatureFlags>
+ * ```
+ *
+ * @see https://github.com/carbon-design-system/carbon/blob/main/docs/feature-flags.md
+ */
 const RadioTile = React.forwardRef(
   (
     {

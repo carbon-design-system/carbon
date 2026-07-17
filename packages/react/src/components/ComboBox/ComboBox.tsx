@@ -372,6 +372,23 @@ export interface ComboBoxProps<ItemType>
   inputProps?: InputHTMLAttributes<HTMLInputElement>;
 }
 
+/**
+ * Combo box component.
+ *
+ * @featureFlag enable-v12-dynamic-floating-styles - Uses Floating UI for
+ * dynamic positioning of the dropdown menu. **Will be on by default in v12.**
+ *
+ * Enable in your app:
+ * ```jsx
+ * import { FeatureFlags } from '@carbon/react';
+ *
+ * <FeatureFlags enableV12DynamicFloatingStyles>
+ *   <ComboBox id="my-combo-box" items={items} />
+ * </FeatureFlags>
+ * ```
+ *
+ * @see https://github.com/carbon-design-system/carbon/blob/main/docs/feature-flags.md
+ */
 const ComboBox = forwardRef(
   <ItemType,>(
     props: ComboBoxProps<ItemType>,

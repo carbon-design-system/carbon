@@ -26,6 +26,20 @@ export { TOGGLE_SIZE };
  * @slot checked-text - The text for the checked state.
  * @slot unchecked-text - The text for the unchecked state.
  * @fires cds-toggle-changed - The custom event fired after this changebox changes its checked state.
+ *
+ * @featureFlag enable-v12-toggle-reduced-label-spacing - Reduces the spacing
+ * between the toggle control and its label. **Will be on by default in v12.**
+ *
+ * Enable in your app:
+ * ```html
+ * import '@carbon/web-components/es/components/feature-flags/feature-flags.js';
+ *
+ * <feature-flags enable-v12-toggle-reduced-label-spacing>
+ *   <cds-toggle label-text="Label"></cds-toggle>
+ * </feature-flags>
+ * ```
+ *
+ * @see https://github.com/carbon-design-system/carbon/blob/main/docs/feature-flags.md
  */
 @customElement(`${prefix}-toggle`)
 class CDSToggle extends HostListenerMixin(CDSCheckbox) {

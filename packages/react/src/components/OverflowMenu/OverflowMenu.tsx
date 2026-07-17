@@ -256,6 +256,23 @@ export interface OverflowMenuProps
   innerRef?: Ref<any>;
 }
 
+/**
+ * Overflow menu component.
+ *
+ * @featureFlag enable-v12-overflowmenu - Replaces this implementation with the
+ * newer `Menu`-based version. **Will be on by default in v12.**
+ *
+ * Enable in your app:
+ * ```jsx
+ * import { FeatureFlags } from '@carbon/react';
+ *
+ * <FeatureFlags enableV12Overflowmenu>
+ *   <OverflowMenu />
+ * </FeatureFlags>
+ * ```
+ *
+ * @see https://github.com/carbon-design-system/carbon/blob/main/docs/feature-flags.md
+ */
 // eslint-disable-next-line react/display-name -- https://github.com/carbon-design-system/carbon/issues/20452
 export const OverflowMenu = forwardRef<HTMLButtonElement, OverflowMenuProps>(
   (

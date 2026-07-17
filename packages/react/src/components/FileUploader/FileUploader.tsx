@@ -171,6 +171,24 @@ export interface FileUploaderHandle {
   setCurrentFiles?: (files: FileItem[]) => void;
 }
 
+/**
+ * File uploader component.
+ *
+ * @featureFlag enable-enhanced-file-uploader - Enables richer `onChange`/
+ * `onDelete` callbacks that provide file metadata, and expands the trigger
+ * events.
+ *
+ * Enable in your app:
+ * ```jsx
+ * import { FeatureFlags } from '@carbon/react';
+ *
+ * <FeatureFlags enableEnhancedFileUploader>
+ *   <FileUploader labelTitle="Upload files" buttonLabel="Add file" />
+ * </FeatureFlags>
+ * ```
+ *
+ * @see https://github.com/carbon-design-system/carbon/blob/main/docs/feature-flags.md
+ */
 const FileUploader = forwardRef<FileUploaderHandle, FileUploaderProps>(
   (
     {
