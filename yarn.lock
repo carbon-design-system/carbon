@@ -1933,6 +1933,7 @@ __metadata:
     "@figma/code-connect": "npm:^1.4.7"
     "@floating-ui/react": "npm:^0.27.4"
     "@ibm/telemetry-js": "npm:^1.5.0"
+    "@rolldown/plugin-babel": "npm:^0.1.7"
     "@stackblitz/sdk": "npm:^1.11.0"
     "@storybook/addon-a11y": "npm:^10.3.5"
     "@storybook/addon-docs": "npm:^10.3.5"
@@ -5386,6 +5387,22 @@ __metadata:
   version: 1.1.1
   resolution: "@rolldown/binding-win32-x64-msvc@npm:1.1.1"
   conditions: os=win32 & cpu=x64
+  languageName: node
+  linkType: hard
+
+"@rolldown/plugin-babel@npm:^0.1.7":
+  version: 0.1.8
+  resolution: "@rolldown/plugin-babel@npm:0.1.8"
+  dependencies:
+    picomatch: "npm:^4.0.3"
+  peerDependencies:
+    "@babel/core": ^7.29.0 || ^8.0.0-rc.1
+    rolldown: ^1.0.0-rc.5
+    vite: ^8.0.0
+  peerDependenciesMeta:
+    vite:
+      optional: true
+  checksum: 10/7d2bdf18b081f37b1d8b800c7237a12f2c70e8449006a250b245c2b4969362aa205e7b586e1348870e1e06e656a98923eee7e24441b3602d24b28dc589dd7bf2
   languageName: node
   linkType: hard
 

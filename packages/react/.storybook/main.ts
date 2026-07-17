@@ -11,6 +11,7 @@ import { fileURLToPath } from 'node:url';
 
 import remarkGfm from 'remark-gfm';
 import glob from 'fast-glob';
+import babel from '@rolldown/plugin-babel';
 import react from '@vitejs/plugin-react';
 import { mergeConfig } from 'vite';
 
@@ -107,11 +108,9 @@ const config: StorybookConfig = {
           // parse as JS. using regex matches the same set of files (and the
           // plugin's own default) without that bug
           include: /\.[jt]sx?$/,
-          babel: {
-            presets: ['babel-preset-carbon'],
-            babelrc: false,
-            configFile: false,
-          },
+        }),
+        babel({
+          presets: ['babel-preset-carbon'],
         }),
       ],
       resolve: {
