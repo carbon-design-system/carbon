@@ -50,11 +50,14 @@
 
     display: block;
     border: none;
-    border-radius: 0;
     appearance: none;
     background-color: $field;
     block-size: layout.size('height');
     border-block-end: 1px solid $border-strong;
+    border-end-end-radius: var(--cds-border-radius-input, 0);
+    border-end-start-radius: var(--cds-border-radius-input, 0);
+    border-start-end-radius: var(--cds-border-radius-input, 0);
+    border-start-start-radius: var(--cds-border-radius-input, 0);
     color: $text-primary;
     cursor: pointer;
     font-family: inherit;
@@ -281,6 +284,10 @@
     @include skeleton;
 
     block-size: 2.5rem;
+    border-end-end-radius: var(--cds-border-radius-input, 0);
+    border-end-start-radius: var(--cds-border-radius-input, 0);
+    border-start-end-radius: var(--cds-border-radius-input, 0);
+    border-start-start-radius: var(--cds-border-radius-input, 0);
 
     inline-size: 100%;
   }

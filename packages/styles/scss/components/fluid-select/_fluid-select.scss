@@ -21,6 +21,10 @@
     position: relative;
     background: $field;
     block-size: 100%;
+    border-end-end-radius: var(--cds-border-radius-input, 0);
+    border-end-start-radius: var(--cds-border-radius-input, 0);
+    border-start-end-radius: var(--cds-border-radius-input, 0);
+    border-start-start-radius: var(--cds-border-radius-input, 0);
     transition:
       background-color $duration-fast-01 motion(standard, productive),
       outline $duration-fast-01 motion(standard, productive);
@@ -237,6 +241,10 @@
     background: $skeleton-background;
     block-size: convert.to-rem(64px);
     border-block-end: 1px solid $skeleton-element;
+    border-end-end-radius: var(--cds-border-radius-input, 0);
+    border-end-start-radius: var(--cds-border-radius-input, 0);
+    border-start-end-radius: var(--cds-border-radius-input, 0);
+    border-start-start-radius: var(--cds-border-radius-input, 0);
   }
 
   .#{$prefix}--select--fluid__skeleton .#{$prefix}--skeleton {

@@ -20,6 +20,10 @@
 @mixin fluid-time-picker {
   .#{$prefix}--time-picker--fluid {
     background: $field;
+    border-end-end-radius: var(--cds-border-radius-input, 0);
+    border-end-start-radius: var(--cds-border-radius-input, 0);
+    border-start-end-radius: var(--cds-border-radius-input, 0);
+    border-start-start-radius: var(--cds-border-radius-input, 0);
   }
 
   .#{$prefix}--time-picker--fluid .#{$prefix}--time-picker--fluid__wrapper {
@@ -221,7 +225,12 @@
   // Skeleton styles
   .#{$prefix}--time-picker--fluid--skeleton {
     display: flex;
+    background: $skeleton-background;
     block-size: convert.to-rem(64px);
+    border-end-end-radius: var(--cds-border-radius-input, 0);
+    border-end-start-radius: var(--cds-border-radius-input, 0);
+    border-start-end-radius: var(--cds-border-radius-input, 0);
+    border-start-start-radius: var(--cds-border-radius-input, 0);
     inline-size: 100%;
   }
 

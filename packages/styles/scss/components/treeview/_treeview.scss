@@ -118,6 +118,10 @@
     box-sizing: border-box;
     flex: 1;
     align-items: center;
+    border-end-end-radius: var(--cds-border-radius-button, 0);
+    border-end-start-radius: var(--cds-border-radius-button, 0);
+    border-start-end-radius: var(--cds-border-radius-button, 0);
+    border-start-start-radius: var(--cds-border-radius-button, 0);
     inline-size: 100%;
     min-block-size: convert.to-rem(32px);
     padding-inline-end: 1rem;

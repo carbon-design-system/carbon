@@ -735,6 +735,10 @@
 
   .#{$prefix}--tabs--contained ~ .#{$prefix}--tab-content {
     background: $layer;
+    border-end-end-radius: var(--cds-border-radius-box, 0);
+    border-end-start-radius: var(--cds-border-radius-box, 0);
+    border-start-end-radius: var(--cds-border-radius-box, 0);
+    border-start-start-radius: var(--cds-border-radius-box, 0);
   }
 
   .#{$prefix}--tabs--vertical ~ .#{$prefix}--tab-content {
