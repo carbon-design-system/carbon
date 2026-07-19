@@ -9,7 +9,7 @@
 
 /// Adds outline styles depending on specific type
 /// @access public
-/// @param {String} $type ['border'] - Type of outline from: `border`, `blurred`, `outline`, `invalid`, `reset`
+/// @param {String} $type ['border'] - Type of outline from: `border`, `blurred`, `outline`, `outline-lg`, `invalid`, `reset`
 /// @example @include focus-outline('outline');
 /// @group utilities
 @mixin focus-outline($type: 'border') {
@@ -29,6 +29,15 @@
   @if ($type == 'outline') {
     outline: 2px solid theme.$focus;
     outline-offset: -2px;
+
+    @media screen and (prefers-contrast) {
+      outline-style: dotted;
+    }
+  }
+
+  @if ($type == 'outline-lg') {
+    outline: 4px solid theme.$focus;
+    outline-offset: -4px;
 
     @media screen and (prefers-contrast) {
       outline-style: dotted;

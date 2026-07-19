@@ -145,7 +145,10 @@
   }
 
   .#{$prefix}--text-input--fluid
-    .#{$prefix}--text-input__field-wrapper[data-invalid]:focus-within,
+    .#{$prefix}--text-input__field-wrapper[data-invalid]:focus-within {
+    @include focus-outline('outline-lg');
+  }
+
   .#{$prefix}--text-input--fluid
     .#{$prefix}--text-input__field-wrapper--warning:focus-within {
     @include focus-outline('outline');

@@ -24,4 +24,17 @@ describe('scss/components/fluid-text-input', () => {
     `);
     expect(unwrap('mixin')).toBe(true);
   });
+
+  test('invalid inputs have a distinct focus indicator', async () => {
+    const { result } = await render(`
+      @use '../fluid-text-input';
+
+      @include fluid-text-input.fluid-text-input;
+    `);
+    const cssText = result.css.toString();
+
+    expect(cssText).toMatch(
+      /\.cds--text-input--fluid \.cds--text-input__field-wrapper\[data-invalid\]:focus-within\s*{[^}]*outline: 4px solid[^}]*outline-offset: -4px;/
+    );
+  });
 });
