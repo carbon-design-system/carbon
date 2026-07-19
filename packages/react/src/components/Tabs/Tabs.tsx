@@ -527,6 +527,19 @@ function TabList({
       : false
   );
 
+  const updateOverflowState = useCallback(() => {
+    if (!ref.current) {
+      return;
+    }
+
+    // adding 1 in calculations for Firefox support
+    setIsNextButtonVisible(
+      ref.current.scrollLeft + ref.current.clientWidth + 1 <
+        ref.current.scrollWidth
+    );
+    setIsScrollable(ref.current.scrollWidth > ref.current.clientWidth + 1);
+  }, []);
+
   const isPreviousButtonVisible = ref.current
     ? isScrollable && scrollLeft > 0
     : false;
@@ -641,18 +654,8 @@ function TabList({
   }, []);
 
   useEffect(() => {
-    // adding 1 in calculation for firefox support
-    setIsNextButtonVisible(
-      ref.current
-        ? scrollLeft + ref.current.clientWidth + 1 < ref.current.scrollWidth
-        : false
-    );
-
-    if (dismissable && ref.current) {
-      // adding 1 in calculation for firefox support
-      setIsScrollable(ref.current.scrollWidth > ref.current.clientWidth + 1);
-    }
-  }, [children, dismissable, scrollLeft]);
+    updateOverflowState();
+  }, [children, scrollLeft, updateOverflowState]);
 
   useEffect(() => {
     if (tabs.current[selectedIndex]?.disabled) {
@@ -669,25 +672,20 @@ function TabList({
   }, []);
 
   useIsomorphicEffect(() => {
-    if (ref.current) {
-      // adding 1 in calculation for firefox support
-      setIsScrollable(ref.current.scrollWidth > ref.current.clientWidth + 1);
+    const element = ref.current;
+    if (!element) {
+      return;
     }
 
-    function handler() {
-      if (ref.current) {
-        // adding 1 in calculation for firefox support
-        setIsScrollable(ref.current.scrollWidth > ref.current.clientWidth + 1);
-      }
-    }
+    updateOverflowState();
 
-    const debouncedHandler = debounce(handler, 200);
-    window.addEventListener('resize', debouncedHandler);
+    const resizeObserver = new ResizeObserver(updateOverflowState);
+    resizeObserver.observe(element);
+
     return () => {
-      debouncedHandler.cancel();
-      window.removeEventListener('resize', debouncedHandler);
+      resizeObserver.disconnect();
     };
-  }, []);
+  }, [updateOverflowState]);
 
   // updates scroll location for all scroll behavior.
   useIsomorphicEffect(() => {

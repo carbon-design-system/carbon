@@ -651,6 +651,57 @@ describe('Tab', () => {
     }
   });
 
+  it('should recalculate overflow when the tab list width changes', () => {
+    let resizeCallback;
+    let clientWidth = 0;
+    const originalResizeObserver = window.ResizeObserver;
+    const clientWidthSpy = jest
+      .spyOn(HTMLElement.prototype, 'clientWidth', 'get')
+      .mockImplementation(function () {
+        return this.getAttribute?.('role') === 'tablist' ? clientWidth : 0;
+      });
+    const scrollWidthSpy = jest
+      .spyOn(HTMLElement.prototype, 'scrollWidth', 'get')
+      .mockImplementation(function () {
+        return this.getAttribute?.('role') === 'tablist' ? 200 : 0;
+      });
+    window.ResizeObserver = jest.fn((callback) => {
+      resizeCallback = callback;
+      return {
+        observe: jest.fn(),
+        disconnect: jest.fn(),
+      };
+    });
+
+    try {
+      render(
+        <Tabs>
+          <TabList aria-label="List of tabs">
+            <Tab>Tab Label 1</Tab>
+            <Tab>Tab Label 2</Tab>
+          </TabList>
+        </Tabs>
+      );
+
+      expect(screen.getByLabelText('Scroll right')).not.toHaveClass(
+        `${prefix}--tab--overflow-nav-button--hidden`
+      );
+
+      clientWidth = 300;
+      act(() => {
+        resizeCallback();
+      });
+
+      expect(screen.getByLabelText('Scroll right')).toHaveClass(
+        `${prefix}--tab--overflow-nav-button--hidden`
+      );
+    } finally {
+      window.ResizeObserver = originalResizeObserver;
+      clientWidthSpy.mockRestore();
+      scrollWidthSpy.mockRestore();
+    }
+  });
+
   it('should hide next overflow button when only 1px remains in the overflow threshold', () => {
     jest.useFakeTimers();
     const clientWidthSpy = jest
