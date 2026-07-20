@@ -201,30 +201,6 @@ export function Calendar({
     [mode, startDate, endDate, focusedDate]
   );
 
-  // these two are never used. remove?
-
-  // Check if a date is the range start (not currently used but kept for future range styling)
-  // const _isRangeStart = useCallback(
-  //   (date: Temporal.PlainDate): boolean => {
-  //     if (mode !== 'range' || !startDate) {
-  //       return false;
-  //     }
-  //     return Temporal.PlainDate.compare(date, startDate) === 0;
-  //   },
-  //   [mode, startDate]
-  // );
-
-  // // Check if a date is the range end (not currently used but kept for future range styling)
-  // const _isRangeEnd = useCallback(
-  //   (date: Temporal.PlainDate): boolean => {
-  //     if (mode !== 'range' || !endDate) {
-  //       return false;
-  //     }
-  //     return Temporal.PlainDate.compare(date, endDate) === 0;
-  //   },
-  //   [mode, endDate]
-  // );
-
   // Check if a date is focused
   const isDateFocused = useCallback(
     (date: Temporal.PlainDate): boolean => {
