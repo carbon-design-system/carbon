@@ -1,4 +1,10 @@
-import { Story, ArgTypes, Canvas, Meta } from '@storybook/addon-docs/blocks';
+import {
+  Story,
+  ArgTypes,
+  Canvas,
+  Meta,
+  Unstyled,
+} from '@storybook/addon-docs/blocks';
 import { ContentSwitcher } from '../ContentSwitcher';
 import Switch from '../Switch';
 import * as ContentSwitcherStories from './ContentSwitcher.stories.js';
@@ -119,11 +125,13 @@ This prop specifies which `ContentSwitcher` index should be selected. This
 number defaults to `0`, and updates to this prop will update the selected
 switch.
 
-<ContentSwitcher selectedIndex={2} onChange={() => {}}>
-  <Switch name="one" text="First section" />
-  <Switch name="two" text="Second section" />
-  <Switch name="three" text="Third section" />
-</ContentSwitcher>
+<Unstyled style={{ padding: '1rem', background: 'var(--cds-background)' }}>
+  <ContentSwitcher selectedIndex={2} onChange={() => {}}>
+    <Switch name="one" text="First section" />
+    <Switch name="two" text="Second section" />
+    <Switch name="three" text="Third section" />
+  </ContentSwitcher>
+</Unstyled>
 
 ```jsx
 <ContentSwitcher selectedIndex={2} onChange={() => {}}>
@@ -141,15 +149,17 @@ is preferable to change `selectedIndex` only once a selection has been made. To
 do this, set `selectionMode` to `manual`, and the `onChange` will only fire when
 a selection is made.
 
-<ContentSwitcher
-  selectionMode="manual"
-  onChange={() => {
-    console.log('change');
-  }}>
-  <Switch name="one" text="First section" />
-  <Switch name="two" text="Second section" />
-  <Switch name="three" text="Third section" />
-</ContentSwitcher>
+<Unstyled style={{ padding: '1rem', background: 'var(--cds-background)' }}>
+  <ContentSwitcher
+    selectionMode="manual"
+    onChange={() => {
+      console.log('change');
+    }}>
+    <Switch name="one" text="First section" />
+    <Switch name="two" text="Second section" />
+    <Switch name="three" text="Third section" />
+  </ContentSwitcher>
+</Unstyled>
 
 ```jsx
 <ContentSwitcher
@@ -180,11 +190,13 @@ underlying wrapper `button` element.
 The `ContentSwitcher` can be disabled by passing `disabled` to the `Switch`
 elements directly.
 
-<ContentSwitcher onChange={() => {}}>
-  <Switch disabled name="one" text="First section" />
-  <Switch disabled name="two" text="Second section" />
-  <Switch disabled name="three" text="Third section" />
-</ContentSwitcher>
+<Unstyled style={{ padding: '1rem', background: 'var(--cds-background)' }}>
+  <ContentSwitcher onChange={() => {}}>
+    <Switch disabled name="one" text="First section" />
+    <Switch disabled name="two" text="Second section" />
+    <Switch disabled name="three" text="Third section" />
+  </ContentSwitcher>
+</Unstyled>
 
 ```jsx
 <ContentSwitcher onChange={() => {}}>
@@ -198,15 +210,17 @@ elements directly.
 
 These are the values that will be returned in the `onChange` call.
 
-<ContentSwitcher
-  onChange={(obj) => {
-    const { index, name, text } = obj;
-    alert(`index: ${index} ||  name: ${name} || text: ${text}`);
-  }}>
-  <Switch name="one" text="First section" />
-  <Switch name="two" text="Second section" />
-  <Switch name="three" text="Third section" />
-</ContentSwitcher>
+<Unstyled style={{ padding: '1rem', background: 'var(--cds-background)' }}>
+  <ContentSwitcher
+    onChange={(obj) => {
+      const { index, name, text } = obj;
+      alert(`index: ${index} ||  name: ${name} || text: ${text}`);
+    }}>
+    <Switch name="one" text="First section" />
+    <Switch name="two" text="Second section" />
+    <Switch name="three" text="Third section" />
+  </ContentSwitcher>
+</Unstyled>
 
 ```jsx
 <ContentSwitcher

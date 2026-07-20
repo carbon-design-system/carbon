@@ -1,4 +1,10 @@
-import { ArgTypes, Canvas, Markdown, Meta } from '@storybook/addon-docs/blocks';
+import {
+  ArgTypes,
+  Canvas,
+  Markdown,
+  Meta,
+  Unstyled,
+} from '@storybook/addon-docs/blocks';
 import { cdnJs } from '../../globals/internal/storybook-cdn';
 import * as ContentSwitcherStories from './content-switcher.stories';
 
@@ -70,17 +76,23 @@ document.addEventListener('cds-content-switcher-selected', (event) => {
 You can disable the content switcher items by adding the `disabled` attribute to
 `cds-content-switcher-item` elements directly.
 
-<cds-content-switcher>
-  <cds-content-switcher-item disabled value="all" name="one">
-    First section
-  </cds-content-switcher-item>
-  <cds-content-switcher-item disabled value="cloudFoundry " name="two">
-    Second section
-  </cds-content-switcher-item>
-  <cds-content-switcher-item disabled value="staging" name="three">
-    Third section
-  </cds-content-switcher-item>
-</cds-content-switcher>
+<Unstyled
+  style={{
+    padding: '1rem',
+    background: 'var(--cds-background)',
+  }}>
+  <cds-content-switcher>
+    <cds-content-switcher-item disabled value="all" name="one">
+      First section
+    </cds-content-switcher-item>
+    <cds-content-switcher-item disabled value="cloudFoundry " name="two">
+      Second section
+    </cds-content-switcher-item>
+    <cds-content-switcher-item disabled value="staging" name="three">
+      Third section
+    </cds-content-switcher-item>
+  </cds-content-switcher>
+</Unstyled>
 
 ```html
 <cds-content-switcher>
