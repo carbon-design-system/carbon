@@ -7,6 +7,7 @@
 
 import React, { StrictMode } from 'react';
 import { act, render, screen } from '@testing-library/react';
+import { useCombobox } from 'downshift';
 import { getByText } from '@carbon/test-utils/dom';
 import userEvent from '@testing-library/user-event';
 import { FilterableMultiSelect } from '../';
@@ -462,6 +463,38 @@ describe('FilterableMultiSelect', () => {
     expect(onInputValueChange).toHaveBeenLastCalledWith(
       expect.objectContaining({ inputValue: 'test' })
     );
+  });
+
+  it('should call onInputValueChange with empty string when clear button is clicked', async () => {
+    const onInputValueChange = jest.fn();
+    render(
+      <FilterableMultiSelect
+        {...mockProps}
+        placeholder="test"
+        onInputValueChange={onInputValueChange}
+      />
+    );
+    await waitForPosition();
+
+    const input = screen.getByPlaceholderText('test');
+
+    await openMenu();
+    await userEvent.type(input, 'abc');
+    expect(input).toHaveDisplayValue('abc');
+
+    onInputValueChange.mockClear();
+
+    const clearButton = screen.getByRole('button', {
+      name: 'Clear selected item',
+    });
+    await userEvent.click(clearButton);
+
+    expect(input).toHaveDisplayValue('');
+    expect(onInputValueChange).toHaveBeenCalledWith({
+      inputValue: '',
+      type: useCombobox.stateChangeTypes.FunctionSetInputValue,
+    });
+    expect(onInputValueChange).toHaveBeenCalledTimes(1);
   });
 
   it('should clear all selections when clicking clear all button', async () => {
