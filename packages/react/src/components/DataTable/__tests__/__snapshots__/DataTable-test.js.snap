@@ -537,7 +537,7 @@ exports[`DataTable behaves as expected selection should render and match snapsho
         class="cds--toolbar-content"
       >
         <div
-          aria-label="Filter table"
+          aria-labelledby="custom-id-search"
           class="cds--search cds--toolbar-search-container-persistent"
           role="search"
         >
@@ -612,7 +612,7 @@ exports[`DataTable behaves as expected selection should render and match snapsho
                 aria-expanded="false"
                 aria-haspopup="true"
                 aria-labelledby="tooltip-_r_3d_"
-                class="cds--toolbar-action cds--overflow-menu cds--overflow-menu cds--overflow-menu--md cds--btn cds--btn--md cds--layout--size-md cds--btn--ghost cds--btn--icon-only"
+                class="cds--toolbar-action cds--overflow-menu cds--overflow-menu cds--btn cds--btn--ghost cds--btn--icon-only"
                 type="button"
               >
                 <svg
@@ -987,7 +987,7 @@ exports[`DataTable renders as expected - Component API should render and match s
         class="cds--toolbar-content"
       >
         <div
-          aria-label="Filter table"
+          aria-labelledby="custom-id-search"
           class="cds--search cds--toolbar-search-container-persistent"
           role="search"
         >
@@ -1062,7 +1062,7 @@ exports[`DataTable renders as expected - Component API should render and match s
                 aria-expanded="false"
                 aria-haspopup="true"
                 aria-labelledby="tooltip-_r_m_"
-                class="cds--toolbar-action cds--overflow-menu cds--overflow-menu cds--overflow-menu--md cds--btn cds--btn--md cds--layout--size-md cds--btn--ghost cds--btn--icon-only"
+                class="cds--toolbar-action cds--overflow-menu cds--overflow-menu cds--btn cds--btn--ghost cds--btn--icon-only"
                 type="button"
               >
                 <svg

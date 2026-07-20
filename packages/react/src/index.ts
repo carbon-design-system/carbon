@@ -9,6 +9,7 @@
 'use client'
 
 import './feature-flags';
+import './internal/warnAboutDeprecatedReactVersion';
 
 export * from './components/Accordion';
 export * from './components/AccordionItem';
@@ -223,6 +224,9 @@ export {
   OverflowMenuV2 as unstable_OverflowMenuV2,
   OverflowMenuV2 as preview_OverflowMenuV2,
 } from './components/OverflowMenuV2';
+// unstable_Pagination / preview_Pagination are deprecated. Use the stable
+// `Pagination` component with the `renderPageSelect` prop instead.
+// TODO: These exports will be removed in v12.
 export {
   PageSelector as unstable_PageSelector,
   Pagination as unstable_Pagination,
