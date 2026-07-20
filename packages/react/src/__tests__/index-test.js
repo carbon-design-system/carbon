@@ -24,7 +24,6 @@ describe('Carbon Components React', () => {
         "Accordion",
         "AccordionItem",
         "AccordionSkeleton",
-        "ActionSet",
         "ActionableNotification",
         "AspectRatio",
         "Breadcrumb",

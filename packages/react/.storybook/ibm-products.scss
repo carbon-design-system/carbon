@@ -1,0 +1,17 @@
+//
+// Copyright IBM Corp. 2025
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+// ---------------------------------------------------------------------------
+// IBM Products migrated component styles — Storybook only.
+// These are intentionally excluded from the published @carbon/styles bundle
+// until the components are officially promoted to the public API.
+// ---------------------------------------------------------------------------
+
+@use '../../styles/scss/components/action-set';
+@use '../../styles/scss/components/resizer';
+@use '../../styles/scss/components/side-panel';
+@use '../../styles/scss/components/truncated-text';
