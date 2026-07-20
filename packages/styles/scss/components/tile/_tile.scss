@@ -146,25 +146,6 @@ $-icon-container-size: calc(#{layout.density('padding-inline')} * 2 + 1rem);
     }
   }
 
-  @media (any-hover: hover) {
-    .#{$prefix}--tile--clickable:hover.#{$prefix}--link--disabled {
-      display: block;
-      padding: layout.density('padding-inline');
-      background-color: $layer;
-      color: $text-disabled;
-      cursor: not-allowed;
-
-      @if (
-        enabled('enable-experimental-tile-contrast') or
-          $enable-experimental-tile-contrast or
-          enabled('enable-tile-contrast') or
-          $enable-tile-contrast
-      ) {
-        border: 1px solid $border-disabled;
-      }
-    }
-  }
-
   .#{$prefix}--tile--clickable .#{$prefix}--tile--icon,
   .#{$prefix}--tile--clickable.#{$prefix}--link--disabled
     .#{$prefix}--tile--disabled-icon {
