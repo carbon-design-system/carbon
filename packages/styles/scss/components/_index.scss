@@ -61,8 +61,8 @@
 @use 'progress-bar';
 @use 'progress-indicator';
 @use 'radio-button';
-// TODO: ibm-products migration in progress — re-enable when component is ready
-// @use 'resizer';
+@use 'resizer';
+@use 'side-panel';
 @use 'search';
 @use 'select';
 @use 'shape-indicator';

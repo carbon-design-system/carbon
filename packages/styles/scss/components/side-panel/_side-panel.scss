@@ -1,0 +1,642 @@
+//
+// Copyright IBM Corp. 2020, 2025
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use 'sass:map';
+
+@use '../../config' as *;
+@use '../../theme' as *;
+@use '../../spacing' as *;
+@use '../../motion' as *;
+@use '../../type';
+@use '../../breakpoint' as *;
+@use '../../utilities';
+@use '../button/tokens' as *;
+@use './side-panel-variables' as *;
+@use './animations' as *;
+
+// ---------------------------------------------------------------------------
+// Private helper variables (file-scope so helpers can reference them)
+// ---------------------------------------------------------------------------
+
+$block-class: #{$prefix}--side-panel;
+$action-set-block-class: #{$prefix}--action-set;
+$resizer-class: #{$prefix}--resizer;
+
+// ---------------------------------------------------------------------------
+// Private helper mixins (must be declared outside the public mixin)
+// ---------------------------------------------------------------------------
+
+@mixin setPanelSize($size: map.get($side-panel-sizes, md)) {
+  inline-size: clamp(
+    16rem,
+    var(--#{$prefix}-side-panel-modified-size, $size),
+    100%
+  );
+}
+
+@mixin setDividerStyles() {
+  position: absolute;
+  background-color: $border-subtle-01;
+  block-size: 1px;
+  content: '';
+  inline-size: 100%;
+  inset-block-end: 0;
+  inset-inline-start: 0;
+  opacity: var(--#{$block-class}--scroll-animation-progress);
+}
+
+@mixin setCommonTitleStyles() {
+  padding-inline-end: var(--#{$block-class}--title-padding-right);
+}
+
+@mixin side-panel {
+  @property --panel-transform {
+    inherits: true;
+    initial-value: 320px;
+    syntax: '<length>';
+  }
+
+  .#{$block-class}--scrolls {
+    overflow: auto;
+    overflow-x: hidden;
+    @supports (overflow-inline: hidden) {
+      overflow-inline: hidden;
+    }
+  }
+
+  .#{$block-class} {
+    --panel-transform: 320px;
+    --#{$block-class}--title-stop: #{$spacing-05};
+    --#{$block-class}--scroll-animation-progress: 0;
+    --#{$block-class}--title-padding-right: #{$spacing-07};
+    --#{$block-class}--actions-height: #{$spacing-10};
+
+    position: fixed;
+    z-index: utilities.z('modal');
+    display: grid;
+    box-sizing: border-box;
+    background-color: $layer-01;
+    block-size: calc(100% - 3rem);
+    color: $text-primary;
+    /* if the title does not scroll then we have a child scrolling section. */
+    grid-template-rows: auto 1fr auto; /* titles content and actions */
+    inset-block-start: $spacing-09;
+    max-inline-size: 100%;
+    min-inline-size: map.get($side-panel-sizes, xs);
+
+    transform: translateX(0);
+    transition-behavior: allow-discrete;
+    transition-duration: $duration-moderate-01;
+    transition-property: display, opacity, transform;
+
+    &:not(.#{$block-class}--slide-in) {
+      &.#{$block-class}--resizable {
+        // Reserve a zero-width column for the resizer handle.
+        // Takes effect only when the Resizer child is present.
+        &:has(.#{$resizer-class}) {
+          grid-template-columns: 0 1fr;
+          @media (prefers-reduced-motion: no-preference) {
+            transition: all $duration-moderate-01 linear;
+          }
+        }
+      }
+    }
+
+    @starting-style {
+      opacity: 0;
+      transform: translateX(var(--panel-transform));
+    }
+
+    @include breakpoint(md) {
+      max-inline-size: 75vw;
+    }
+
+    @each $size, $size_value in $side-panel-sizes {
+      &.#{$block-class}--#{$size} {
+        @include setPanelSize($size_value);
+      }
+    }
+
+    &.#{$block-class}--open.#{$block-class}--right-placement {
+      animation: side-panel-entrance-right $duration-moderate-01
+        motion(entrance, productive) forwards;
+    }
+
+    // animation only set for older browsers that do not support `transition-behavior: allow-discrete;`
+    &.#{$block-class}--open.#{$block-class}--left-placement {
+      animation: side-panel-entrance-left $duration-moderate-01
+        motion(entrance, productive) forwards;
+    }
+
+    // animation only set for older browsers that do not support `transition-behavior: allow-discrete;`
+    &.#{$block-class}--closing.#{$block-class}--right-placement {
+      animation: side-panel-exit-right $duration-moderate-01
+        motion(exit, productive) forwards;
+    }
+
+    &.#{$block-class}--closing.#{$block-class}--left-placement {
+      animation: side-panel-exit-left $duration-moderate-01
+        motion(exit, productive) forwards;
+    }
+
+    @supports (transition-behavior: allow-discrete) {
+      &.#{$block-class}--closing {
+        opacity: 0;
+        transform: translateX(var(--panel-transform, 320px));
+        transition-duration: $duration-moderate-01;
+      }
+      &.#{$block-class}--closing.#{$block-class}--left-placement {
+        transform: translateX(calc(-1 * var(--panel-transform, 320px)));
+      }
+    }
+
+    @media (prefers-reduced-motion) {
+      /* styles to apply if a user's device settings are set to reduced motion */
+      &.#{$block-class}--open.#{$block-class}--right-placement,
+      &.#{$block-class}--open.#{$block-class}--left-placement {
+        animation: side-panel-entrance-reduced $duration-moderate-01
+          motion(exit, productive) forwards;
+        @starting-style {
+          opacity: 0;
+          transform: translateX(0);
+        }
+      }
+      &.#{$block-class}--closing.#{$block-class}--left-placement,
+      &.#{$block-class}--closing.#{$block-class}--right-placement {
+        animation: side-panel-exit-reduced $duration-moderate-01
+          motion(exit, productive) forwards;
+        @starting-style {
+          opacity: 1;
+          transform: translateX(0);
+        }
+      }
+    }
+
+    &.#{$block-class}--animated-title {
+      grid-template-rows: 1fr auto; /* titles and content (actions are external to this element) */
+    }
+
+    &.#{$block-class}--condensed-actions {
+      --#{$block-class}--actions-height: #{$spacing-09};
+    }
+
+    &:not(.#{$block-class}--has-overlay) {
+      box-shadow: 0 $spacing-01 $spacing-02 $overlay;
+    }
+
+    // Slide-in panels should use border not shadows since they don’t layer
+    &.#{$block-class}--slide-in,
+    &.#{$block-class}--slide-in:not(.#{$block-class}--has-overlay) {
+      box-shadow: none;
+    }
+
+    .#{$block-class}__actions-container {
+      inline-size: 100%;
+    }
+    &.#{$block-class}--right-placement {
+      border-inline-start: 1px solid $border-subtle-01;
+      inset-inline-end: 0;
+    }
+    &.#{$block-class}--left-placement {
+      .#{$resizer-class} {
+        grid-column: 2;
+        inset-inline-start: 0;
+
+        &::before {
+          inset-inline-start: 0;
+        }
+      }
+      &:not(.#{$block-class}--slide-in) {
+        &.#{$block-class}--resizable {
+          &:has(.#{$resizer-class}) {
+            grid-template-columns: 1fr 0;
+
+            @media (prefers-reduced-motion: no-preference) {
+              transition: all $duration-moderate-01 linear;
+            }
+          }
+        }
+      }
+
+      border-inline-end: 1px solid $border-subtle-01;
+      inset-inline-start: 0;
+    }
+    &.#{$block-class}.#{$block-class}--has-slug,
+    &.#{$block-class}.#{$block-class}--has-ai-label,
+    &.#{$block-class}.#{$block-class}--has-decorator {
+      border-color: transparent;
+      box-shadow:
+        inset 0 -80px 70px -65px $ai-inner-shadow,
+        0 4px 10px 2px $ai-drop-shadow;
+    }
+
+    .#{$resizer-class}--vertical::before {
+      position: absolute;
+      z-index: -1;
+      background-color: transparent;
+      block-size: 100%;
+      content: '';
+      inline-size: $spacing-01;
+      inset-block-end: 0;
+      inset-inline-end: 0;
+      transition: background-color $duration-moderate-01
+        motion(standard, productive);
+    }
+
+    &:hover {
+      .#{$resizer-class}--vertical::before {
+        background-color: $button-secondary-hover;
+      }
+    }
+
+    .#{$resizer-class} {
+      background-color: transparent;
+      grid-row: span 4 / span 3;
+      inset-inline-start: -$spacing-02;
+
+      &--vertical::after {
+        position: absolute;
+        z-index: 10;
+        block-size: 100%;
+        content: '';
+        inline-size: $spacing-03;
+        inset-inline-start: -$spacing-01;
+      }
+
+      &:hover,
+      &:focus {
+        background-color: $border-interactive;
+      }
+    }
+
+    .#{$block-class}__header {
+      --#{$block-class}--title-padding-bottom: #{$spacing-05};
+
+      position: sticky;
+      z-index: 4;
+      padding: $spacing-05;
+      background-color: $layer-01;
+      inset-block-start: calc(
+        -1px * var(--#{$block-class}--scroll-animation-distance)
+      );
+      min-block-size: $spacing-08;
+      padding-block-end: 0;
+
+      &.#{$block-class}__header--has-title {
+        min-block-size: auto;
+      }
+
+      &:has(.#{$block-class}__subtitle-text),
+      &.#{$block-class}__header--has-subtitle {
+        --#{$block-class}--title-padding-bottom: #{$spacing-03};
+      }
+
+      &:has(.#{$block-class}__navigation-back-button),
+      &.#{$block-class}__header--has-navigation-back {
+        padding-block-start: $spacing-07;
+      }
+
+      &:has(.#{$block-class}__navigation-back-button.#{$prefix}--btn--md),
+      &.#{$block-class}__header--has-navigation-back.#{$prefix}--btn--md {
+        padding-block-start: $spacing-08;
+      }
+
+      &::before {
+        @include setDividerStyles();
+
+        z-index: 9;
+      }
+
+      &.#{$block-class}__header--no-title-animation {
+        position: relative;
+        inset-block-start: 0;
+      }
+
+      &.#{$block-class}__header--no-title-animation::before {
+        opacity: 1;
+      }
+
+      &.#{$block-class}__header--reduced-motion {
+        z-index: 5;
+        border-block-end: 1px solid $border-subtle-01;
+        margin-block-end: $spacing-05;
+      }
+
+      &.#{$block-class}__header--reduced-motion.#{$block-class}__header--no-title-animation {
+        border-block-end: 0;
+        margin-block-end: 0;
+      }
+
+      &.#{$block-class}__header--on-detail-step
+        .#{$block-class}__navigation-back-button.#{$prefix}--btn--md
+        ~ .#{$block-class}__collapsed-title-text {
+        inset-block-start: $spacing-06;
+      }
+
+      &.#{$block-class}__header--on-detail-step:not(
+          .#{$block-class}__header--has-title
+        ) {
+        padding: $spacing-05 $spacing-05 $spacing-03 $spacing-05;
+        block-size: calc(#{$spacing-08} + #{$spacing-02});
+      }
+
+      &:not(.#{$block-class}__header--has-title)::before {
+        background-color: transparent;
+      }
+    }
+
+    // Remove min‑block‑size when the header contains no child elements to prevent unnecessary blank space
+    .#{$block-class}__header:empty {
+      min-block-size: unset;
+    }
+
+    &.#{$block-class}:has(.#{$block-class}__action-toolbar),
+    &.#{$block-class}--has-action-toolbar,
+    &.#{$block-class}--has-slug,
+    &.#{$block-class}--has-ai-label,
+    &.#{$block-class}--has-decorator {
+      --#{$block-class}--title-padding-right: #{$spacing-10};
+    }
+
+    &.#{$block-class}:has(.#{$block-class}__action-toolbar),
+    &.#{$block-class}--has-action-toolbar {
+      &.#{$block-class}--has-slug,
+      &.#{$block-class}--has-ai-label,
+      &.#{$block-class}--has-decorator {
+        --#{$block-class}--title-padding-right: #{$spacing-11};
+      }
+    }
+
+    .#{$block-class}__animated-scroll-wrapper {
+      display: grid;
+      grid-template-rows: auto 1fr;
+    }
+
+    .#{$block-class}__title {
+      position: sticky;
+      z-index: 4;
+      background-color: $layer-01;
+
+      /* border-bottom used instead of padding which wrapped text shows through */
+      border-block-end: var(--#{$block-class}--title-padding-bottom) solid
+        transparent;
+      inset-block-start: var(--#{$block-class}--title-stop);
+    }
+
+    .#{$block-class}__title-text {
+      @include type.type-style('heading-03');
+      @include setCommonTitleStyles();
+
+      opacity: calc(1 - var(--#{$block-class}--scroll-animation-progress));
+    }
+
+    .#{$block-class}__title--no-label .#{$block-class}__title-text {
+      transform: translateY(
+        calc(
+          -1 * #{$spacing-05} *
+            var(--#{$block-class}--scroll-animation-progress)
+        )
+      );
+    }
+
+    .#{$block-class}__header--no-title-animation .#{$block-class}__title-text {
+      position: static;
+    }
+
+    .#{$block-class}__label-text {
+      @include type.type-style('label-01');
+
+      opacity: calc(1 - var(--#{$block-class}--scroll-animation-progress));
+      padding-inline-end: var(--#{$block-class}--title-padding-right);
+    }
+
+    .#{$block-class}__collapsed-title-text {
+      @include type.type-style('heading-compact-02');
+      @include setCommonTitleStyles();
+
+      position: absolute;
+      inset-block-start: 0;
+      opacity: var(--#{$block-class}--scroll-animation-progress);
+    }
+
+    .#{$block-class}__title--no-label .#{$block-class}__collapsed-title-text {
+      transform: translateY(
+        calc(
+          #{$spacing-05} * (1 - var(
+                  --#{$block-class}--scroll-animation-progress
+                ))
+        )
+      );
+    }
+
+    .#{$block-class}__subtitle-text {
+      @include type.type-style('body-compact-01');
+
+      opacity: calc(1 - var(--#{$block-class}--scroll-animation-progress));
+      padding-block-end: $spacing-05;
+      padding-inline-end: var(--#{$block-class}--title-padding-right);
+    }
+
+    .#{$block-class}__header--no-title-animation
+      .#{$block-class}__subtitle-text {
+      z-index: 2;
+      background-color: $layer-01;
+    }
+
+    .#{$block-class}__title-text + .#{$block-class}__subtitle-text {
+      padding-block-start: $spacing-05;
+    }
+    .#{$block-class}__inner-content {
+      padding: 0 $spacing-05 $spacing-05;
+    }
+
+    .#{$block-class}__inner-content--no-animated-title {
+      padding-block-start: $spacing-05;
+    }
+
+    .#{$block-class}__header:has(.#{$block-class}__action-toolbar)
+      + .#{$block-class}__inner-content,
+    .#{$block-class}__header--has-action-toolbar
+      + .#{$block-class}__inner-content {
+      padding-block-start: $spacing-03;
+    }
+
+    &.#{$block-class}--has-slug .#{$block-class}--scrolls,
+    &.#{$block-class}--has-ai-label .#{$block-class}--scrolls,
+    &.#{$block-class}--has-decorator .#{$block-class}--scrolls {
+      @include utilities.ai-popover-gradient('default', 0, 'layer');
+
+      box-shadow:
+        inset 0 -80px 70px -65px $ai-inner-shadow,
+        0 4px 10px 2px $ai-drop-shadow;
+    }
+
+    .#{$block-class}__action-toolbar {
+      position: sticky;
+      z-index: 4;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      background-color: $layer-01;
+    }
+
+    .#{$block-class}__action-toolbar-leading-button {
+      margin-inline-end: $spacing-03;
+    }
+
+    .#{$prefix}--btn.#{$block-class}__navigation-back-button {
+      position: fixed;
+      z-index: 5;
+      inset-block-start: 0;
+      inset-inline-start: 0;
+    }
+    .#{$prefix}--btn.#{$block-class}__navigation-back-button,
+    .#{$prefix}--btn.#{$block-class}__close-button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0;
+      background-color: unset;
+      block-size: $spacing-07;
+      color: $text-primary;
+      inline-size: $spacing-07;
+      min-block-size: 0;
+
+      &:hover {
+        background-color: $background-hover;
+      }
+      .#{$block-class}--btn__icon {
+        margin: 0;
+      }
+    }
+
+    .#{$prefix}--btn--md.#{$block-class}__navigation-back-button,
+    .#{$prefix}--btn--md.#{$block-class}__close-button {
+      block-size: $spacing-08;
+      inline-size: $spacing-08;
+    }
+
+    .#{$block-class}__slug-and-close,
+    .#{$block-class}__ai-label-and-close,
+    .#{$block-class}__decorator-and-close {
+      position: absolute;
+      z-index: 10; /* must be higher than title container border bottom */
+      display: flex;
+      block-size: $spacing-07;
+      inset-block-start: 0;
+      inset-inline-end: 0;
+
+      @media (prefers-reduced-motion) {
+        position: absolute;
+      }
+    }
+    .#{$block-class}__decorator-and-close .#{$prefix}--ai-label__button--xs {
+      margin: $spacing-02;
+    }
+
+    .#{$block-class}__actions-container {
+      // stick to bottom
+      position: sticky;
+      background-color: $layer-01;
+      border-block-start: 1px solid $border-subtle-01;
+      inset-block-end: 0;
+
+      &.#{$action-set-block-class}--2xl {
+        .#{$action-set-block-class}__action-button {
+          inline-size: 100%;
+          max-inline-size: 100%;
+        }
+
+        @include breakpoint(md) {
+          flex-direction: row;
+          .#{$action-set-block-class}__action-button {
+            inline-size: 25%;
+          }
+        }
+      }
+
+      .#{$action-set-block-class}__action-button.#{$action-set-block-class}__action-button {
+        // extra class needed to override default size
+        block-size: var(--#{$block-class}--actions-height);
+      }
+    }
+    &.#{$block-class}.#{$block-class}--xs
+      .#{$block-class}__actions-container.#{$action-set-block-class}--sm {
+      @include setPanelSize(map.get($side-panel-sizes, xs));
+    }
+  }
+
+  // form fields should receive correct background color
+  .#{$block-class} .#{$prefix}--text-input,
+  .#{$block-class} .#{$prefix}--text-area,
+  .#{$block-class} .#{$prefix}--search-input,
+  .#{$block-class} .#{$prefix}--select-input,
+  .#{$block-class} .#{$prefix}--multi-select,
+  .#{$block-class} .#{$prefix}--dropdown,
+  .#{$block-class} .#{$prefix}--dropdown-list,
+  .#{$block-class} .#{$prefix}--number input[type='number'],
+  .#{$block-class} .#{$prefix}--date-picker__input {
+    background-color: $field-02;
+  }
+
+  @keyframes side-panel-overlay-entrance {
+    0% {
+      opacity: 0;
+    }
+
+    100% {
+      opacity: 1;
+    }
+  }
+
+  @keyframes side-panel-overlay-exit {
+    0% {
+      opacity: 1;
+    }
+
+    100% {
+      opacity: 0;
+    }
+  }
+
+  .#{$block-class}__visually-hidden {
+    position: absolute;
+    overflow: hidden;
+    padding: 0;
+    border: 0;
+    margin: -1px;
+    block-size: 1px;
+    clip: rect(0, 0, 0, 0);
+    inline-size: 1px;
+    visibility: inherit;
+    white-space: nowrap;
+  }
+
+  .#{$block-class}__overlay {
+    position: fixed;
+    z-index: utilities.z('overlay');
+    animation: side-panel-overlay-entrance $duration-moderate-01
+      motion(entrance, productive) forwards;
+    background-color: $overlay;
+    block-size: 100%;
+    inline-size: 100%;
+    inset: 0;
+  }
+
+  .#{$block-class}__overlay--closing {
+    animation: side-panel-overlay-exit $duration-moderate-01
+      motion(exit, productive) forwards;
+  }
+
+  .#{$block-class}--has-slug + .#{$block-class}__overlay,
+  .#{$block-class}--has-ai-label + .#{$block-class}__overlay,
+  .#{$block-class}--has-decorator + .#{$block-class}__overlay {
+    background-color: $ai-overlay;
+  }
+
+  // end @mixin side-panel
+}

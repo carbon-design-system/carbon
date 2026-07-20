@@ -594,6 +594,10 @@ export type { RadioTileProps } from './components/RadioTile/RadioTile';
 export type { SearchProps } from './components/Search/Search';
 export type { SearchSkeletonProps } from './components/Search/Search.Skeleton';
 
+//side panel (migrated from @carbon/ibm-products)
+// export { SidePanel } from './components/SidePanel';
+// export type { SidePanelProps } from './components/SidePanel';
+
 //select
 export type { SelectProps } from './components/Select/Select';
 export type { SelectSkeletonProps } from './components/Select/Select.Skeleton';
