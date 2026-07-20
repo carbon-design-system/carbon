@@ -8,3 +8,4 @@
 import './components/date-picker';
 import './components/date-picker-input';
 import './components/date-picker-input-skeleton';
+import './components/calendar-renderer';

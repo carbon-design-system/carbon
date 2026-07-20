@@ -5,18 +5,15 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-/* eslint-disable jsdoc/require-jsdoc */
-
-import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
 import { ClickOutsideHandler } from '../click-outside-handler';
 
 describe('ClickOutsideHandler', () => {
-  let container: HTMLDivElement;
-  let outsideElement: HTMLDivElement;
+  let container;
+  let outsideElement;
 
   beforeEach(() => {
     // Use fake timers so setTimeout(0) inside attach() is controllable
-    vi.useFakeTimers();
+    jest.useFakeTimers();
 
     // Create test DOM elements
     container = document.createElement('div');
@@ -30,7 +27,7 @@ describe('ClickOutsideHandler', () => {
 
   afterEach(() => {
     // Restore real timers and clean up DOM
-    vi.useRealTimers();
+    jest.useRealTimers();
     document.body.removeChild(container);
     document.body.removeChild(outsideElement);
   });
@@ -40,7 +37,7 @@ describe('ClickOutsideHandler', () => {
      * Test that onOutsideClick is called when clicking outside the container
      */
     it('should call onOutsideClick when clicking outside', () => {
-      const onOutsideClick = vi.fn();
+      const onOutsideClick = jest.fn();
       const handler = new ClickOutsideHandler({
         isOpen: true,
         containsNode: (node) => container.contains(node),
@@ -48,7 +45,7 @@ describe('ClickOutsideHandler', () => {
       });
 
       handler.attach();
-      vi.runAllTimers(); // flush the setTimeout(0) delay inside attach()
+      jest.runAllTimers(); // flush the setTimeout(0) delay inside attach()
 
       // Simulate click outside
       outsideElement.click();
@@ -61,7 +58,7 @@ describe('ClickOutsideHandler', () => {
      * Test that onOutsideClick is not called when clicking inside the container
      */
     it('should not call onOutsideClick when clicking inside', () => {
-      const onOutsideClick = vi.fn();
+      const onOutsideClick = jest.fn();
       const handler = new ClickOutsideHandler({
         isOpen: true,
         containsNode: (node) => container.contains(node),
@@ -69,7 +66,7 @@ describe('ClickOutsideHandler', () => {
       });
 
       handler.attach();
-      vi.runAllTimers(); // flush the setTimeout(0) delay inside attach()
+      jest.runAllTimers(); // flush the setTimeout(0) delay inside attach()
 
       // Simulate click inside
       container.click();
@@ -82,7 +79,7 @@ describe('ClickOutsideHandler', () => {
      * Test that onOutsideClick is not called when the handler is not open
      */
     it('should not call onOutsideClick when not open', () => {
-      const onOutsideClick = vi.fn();
+      const onOutsideClick = jest.fn();
       const handler = new ClickOutsideHandler({
         isOpen: false,
         containsNode: (node) => container.contains(node),
@@ -104,7 +101,7 @@ describe('ClickOutsideHandler', () => {
      * Test that the handler respects the attachDelay configuration
      */
     it('should respect attachDelay', () => {
-      const onOutsideClick = vi.fn();
+      const onOutsideClick = jest.fn();
       const handler = new ClickOutsideHandler({
         isOpen: true,
         containsNode: (node) => container.contains(node),
@@ -119,12 +116,12 @@ describe('ClickOutsideHandler', () => {
       expect(onOutsideClick).not.toHaveBeenCalled();
 
       // Advance time but not enough
-      vi.advanceTimersByTime(50);
+      jest.advanceTimersByTime(50);
       outsideElement.click();
       expect(onOutsideClick).not.toHaveBeenCalled();
 
       // Advance time past delay
-      vi.advanceTimersByTime(60);
+      jest.advanceTimersByTime(60);
       outsideElement.click();
       expect(onOutsideClick).toHaveBeenCalledTimes(1);
 
@@ -135,7 +132,7 @@ describe('ClickOutsideHandler', () => {
      * Test that the handler uses a default delay of 0 when not specified
      */
     it('should use default delay of 0', () => {
-      const onOutsideClick = vi.fn();
+      const onOutsideClick = jest.fn();
       const handler = new ClickOutsideHandler({
         isOpen: true,
         containsNode: (node) => container.contains(node),
@@ -149,7 +146,7 @@ describe('ClickOutsideHandler', () => {
       expect(onOutsideClick).not.toHaveBeenCalled();
 
       // Advance to next tick
-      vi.advanceTimersByTime(0);
+      jest.advanceTimersByTime(0);
       outsideElement.click();
       expect(onOutsideClick).toHaveBeenCalledTimes(1);
 
@@ -160,7 +157,7 @@ describe('ClickOutsideHandler', () => {
      * Test that the opening click doesn't immediately close the handler when using delay
      */
     it('should prevent opening click from closing when using delay', () => {
-      const onOutsideClick = vi.fn();
+      const onOutsideClick = jest.fn();
       const handler = new ClickOutsideHandler({
         isOpen: true,
         containsNode: (node) => container.contains(node),
@@ -180,7 +177,7 @@ describe('ClickOutsideHandler', () => {
       expect(onOutsideClick).not.toHaveBeenCalled();
 
       // Advance to next tick (after delay)
-      vi.advanceTimersByTime(0);
+      jest.advanceTimersByTime(0);
 
       // Now clicks should be detected
       openButton.click();
@@ -196,7 +193,7 @@ describe('ClickOutsideHandler', () => {
      * Test that the handler cleans up event listeners properly on detach
      */
     it('should clean up properly on detach', () => {
-      const onOutsideClick = vi.fn();
+      const onOutsideClick = jest.fn();
       const handler = new ClickOutsideHandler({
         isOpen: true,
         containsNode: (node) => container.contains(node),
@@ -215,7 +212,7 @@ describe('ClickOutsideHandler', () => {
      * Test that multiple attach calls don't create duplicate listeners
      */
     it('should handle multiple attach calls safely', () => {
-      const onOutsideClick = vi.fn();
+      const onOutsideClick = jest.fn();
       const handler = new ClickOutsideHandler({
         isOpen: true,
         containsNode: (node) => container.contains(node),
@@ -225,7 +222,7 @@ describe('ClickOutsideHandler', () => {
       handler.attach();
       handler.attach(); // Second attach should be ignored
       handler.attach(); // Third attach should be ignored
-      vi.runAllTimers(); // flush the setTimeout(0) delay inside attach()
+      jest.runAllTimers(); // flush the setTimeout(0) delay inside attach()
 
       outsideElement.click();
 
@@ -238,7 +235,7 @@ describe('ClickOutsideHandler', () => {
      * Test that multiple detach calls don't throw errors
      */
     it('should handle multiple detach calls safely', () => {
-      const onOutsideClick = vi.fn();
+      const onOutsideClick = jest.fn();
       const handler = new ClickOutsideHandler({
         isOpen: true,
         containsNode: (node) => container.contains(node),
@@ -258,7 +255,7 @@ describe('ClickOutsideHandler', () => {
      * Test that detaching cancels any pending attachment timers
      */
     it('should cancel pending attachment on detach', () => {
-      const onOutsideClick = vi.fn();
+      const onOutsideClick = jest.fn();
       const handler = new ClickOutsideHandler({
         isOpen: true,
         containsNode: (node) => container.contains(node),
@@ -270,7 +267,7 @@ describe('ClickOutsideHandler', () => {
       handler.detach(); // Detach before delay completes
 
       // Advance time past delay
-      vi.advanceTimersByTime(150);
+      jest.advanceTimersByTime(150);
 
       // Click should not trigger (attachment was cancelled)
       outsideElement.click();
@@ -283,7 +280,7 @@ describe('ClickOutsideHandler', () => {
      * Test that the isOpen state can be updated dynamically
      */
     it('should update isOpen state', () => {
-      const onOutsideClick = vi.fn();
+      const onOutsideClick = jest.fn();
       const handler = new ClickOutsideHandler({
         isOpen: true,
         containsNode: (node) => container.contains(node),
@@ -291,7 +288,7 @@ describe('ClickOutsideHandler', () => {
       });
 
       handler.attach();
-      vi.runAllTimers(); // flush the setTimeout(0) delay inside attach()
+      jest.runAllTimers(); // flush the setTimeout(0) delay inside attach()
 
       // Click when open - should trigger
       outsideElement.click();
@@ -318,7 +315,7 @@ describe('ClickOutsideHandler', () => {
      * Test that the containsNode function can be updated dynamically
      */
     it('should update containsNode function', () => {
-      const onOutsideClick = vi.fn();
+      const onOutsideClick = jest.fn();
       const secondContainer = document.createElement('div');
       document.body.appendChild(secondContainer);
 
@@ -329,7 +326,7 @@ describe('ClickOutsideHandler', () => {
       });
 
       handler.attach();
-      vi.runAllTimers(); // flush the setTimeout(0) delay inside attach()
+      jest.runAllTimers(); // flush the setTimeout(0) delay inside attach()
 
       // Click second container - should trigger (not in first container)
       secondContainer.click();
@@ -353,8 +350,8 @@ describe('ClickOutsideHandler', () => {
      * Test that the onOutsideClick callback can be updated dynamically
      */
     it('should update onOutsideClick callback', () => {
-      const firstCallback = vi.fn();
-      const secondCallback = vi.fn();
+      const firstCallback = jest.fn();
+      const secondCallback = jest.fn();
 
       const handler = new ClickOutsideHandler({
         isOpen: true,
@@ -363,7 +360,7 @@ describe('ClickOutsideHandler', () => {
       });
 
       handler.attach();
-      vi.runAllTimers(); // flush the setTimeout(0) delay inside attach()
+      jest.runAllTimers(); // flush the setTimeout(0) delay inside attach()
 
       // Click - should call first callback
       outsideElement.click();
@@ -385,8 +382,8 @@ describe('ClickOutsideHandler', () => {
      * Test that multiple configuration properties can be updated simultaneously
      */
     it('should update multiple config properties at once', () => {
-      const firstCallback = vi.fn();
-      const secondCallback = vi.fn();
+      const firstCallback = jest.fn();
+      const secondCallback = jest.fn();
 
       const handler = new ClickOutsideHandler({
         isOpen: true,
@@ -395,7 +392,7 @@ describe('ClickOutsideHandler', () => {
       });
 
       handler.attach();
-      vi.runAllTimers(); // flush the setTimeout(0) delay inside attach()
+      jest.runAllTimers(); // flush the setTimeout(0) delay inside attach()
 
       // Update multiple properties
       handler.updateConfig({
@@ -425,7 +422,7 @@ describe('ClickOutsideHandler', () => {
      * Test that the handler uses capture phase by default
      */
     it('should use capture phase by default', () => {
-      const onOutsideClick = vi.fn();
+      const onOutsideClick = jest.fn();
       const handler = new ClickOutsideHandler({
         isOpen: true,
         containsNode: (node) => container.contains(node),
@@ -433,7 +430,7 @@ describe('ClickOutsideHandler', () => {
       });
 
       handler.attach();
-      vi.runAllTimers(); // flush the setTimeout(0) delay inside attach()
+      jest.runAllTimers(); // flush the setTimeout(0) delay inside attach()
 
       // Create a nested element that stops propagation
       const nested = document.createElement('div');
@@ -456,7 +453,7 @@ describe('ClickOutsideHandler', () => {
      * Test that the handler respects useCapture: false configuration
      */
     it('should respect useCapture: false', () => {
-      const onOutsideClick = vi.fn();
+      const onOutsideClick = jest.fn();
       const handler = new ClickOutsideHandler({
         isOpen: true,
         containsNode: (node) => container.contains(node),
@@ -492,13 +489,13 @@ describe('ClickOutsideHandler', () => {
       const handler = new ClickOutsideHandler({
         isOpen: true,
         containsNode: (node) => container.contains(node),
-        onOutsideClick: vi.fn(),
+        onOutsideClick: jest.fn(),
       });
 
       expect(handler.isAttached()).toBe(false);
 
       handler.attach();
-      vi.runAllTimers(); // flush the setTimeout(0) delay inside attach()
+      jest.runAllTimers(); // flush the setTimeout(0) delay inside attach()
       expect(handler.isAttached()).toBe(true);
 
       handler.detach();
@@ -512,7 +509,7 @@ describe('ClickOutsideHandler', () => {
       const handler = new ClickOutsideHandler({
         isOpen: true,
         containsNode: (node) => container.contains(node),
-        onOutsideClick: vi.fn(),
+        onOutsideClick: jest.fn(),
         attachDelay: 100,
       });
 
@@ -522,7 +519,7 @@ describe('ClickOutsideHandler', () => {
       expect(handler.isPending()).toBe(true);
       expect(handler.isAttached()).toBe(false);
 
-      vi.advanceTimersByTime(100);
+      jest.advanceTimersByTime(100);
       expect(handler.isPending()).toBe(false);
       expect(handler.isAttached()).toBe(true);
 
@@ -535,7 +532,7 @@ describe('ClickOutsideHandler', () => {
      * Test that the handler handles null/undefined nodes gracefully
      */
     it('should handle null/undefined nodes gracefully', () => {
-      const onOutsideClick = vi.fn();
+      const onOutsideClick = jest.fn();
       const handler = new ClickOutsideHandler({
         isOpen: true,
         containsNode: (_node) => {
@@ -546,7 +543,7 @@ describe('ClickOutsideHandler', () => {
       });
 
       handler.attach();
-      vi.runAllTimers(); // flush the setTimeout(0) delay inside attach()
+      jest.runAllTimers(); // flush the setTimeout(0) delay inside attach()
 
       // Should not throw
       outsideElement.click();
@@ -566,7 +563,7 @@ describe('ClickOutsideHandler', () => {
       shadowRoot.appendChild(shadowChild);
       document.body.appendChild(customElement);
 
-      const onOutsideClick = vi.fn();
+      const onOutsideClick = jest.fn();
       const handler = new ClickOutsideHandler({
         isOpen: true,
         containsNode: (node) => {
@@ -576,7 +573,7 @@ describe('ClickOutsideHandler', () => {
       });
 
       handler.attach();
-      vi.runAllTimers(); // flush the setTimeout(0) delay inside attach()
+      jest.runAllTimers(); // flush the setTimeout(0) delay inside attach()
 
       // Click inside shadow DOM - should not trigger
       shadowChild.click();
@@ -594,7 +591,7 @@ describe('ClickOutsideHandler', () => {
      * Test that the handler handles rapid open/close cycles correctly
      */
     it('should handle rapid open/close cycles', () => {
-      const onOutsideClick = vi.fn();
+      const onOutsideClick = jest.fn();
       const handler = new ClickOutsideHandler({
         isOpen: true,
         containsNode: (node) => container.contains(node),
@@ -610,7 +607,7 @@ describe('ClickOutsideHandler', () => {
       handler.attach();
 
       // Advance time
-      vi.advanceTimersByTime(20);
+      jest.advanceTimersByTime(20);
 
       // Click should trigger (last attach succeeded)
       outsideElement.click();

@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { describe, it, expect } from 'vitest';
+import '../test-utils/temporal-mock.js';
 import { executeAction } from '../actions';
 import { DatePickerStateMachine } from '../machine';
 import { DatePickerEvent, DatePickerState } from '../states';

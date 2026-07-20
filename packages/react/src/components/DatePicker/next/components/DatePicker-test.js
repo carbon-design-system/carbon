@@ -5,13 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-/* eslint-disable @typescript-eslint/no-explicit-any */
-/* eslint-disable testing-library/no-node-access */
-/* eslint-disable testing-library/no-wait-for-multiple-assertions */
-/* eslint-disable testing-library/no-container */
-
 import React from 'react';
-import { describe, it, expect } from '@jest/globals';
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { DatePicker } from './DatePicker';
@@ -19,7 +13,7 @@ import { DatePickerInput } from './DatePickerInput';
 
 const mockTemporal = {
   PlainDate: {
-    from(input: string | { year: number; month: number; day: number }) {
+    from(input) {
       const date =
         typeof input === 'string'
           ? new Date(`${input}T00:00:00.000Z`)
@@ -29,7 +23,7 @@ const mockTemporal = {
 
       return createPlainDate(date);
     },
-    compare(a: any, b: any) {
+    compare(a, b) {
       return a.toString().localeCompare(b.toString());
     },
   },
@@ -40,7 +34,7 @@ const mockTemporal = {
   },
 };
 
-function createPlainDate(date: Date) {
+function createPlainDate(date) {
   const normalized = new Date(
     Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate())
   );
@@ -58,7 +52,7 @@ function createPlainDate(date: Date) {
       const day = String(normalized.getUTCDate()).padStart(2, '0');
       return `${year}-${month}-${day}`;
     },
-    with(dateLike: { year?: number; month?: number; day?: number }) {
+    with(dateLike) {
       return createPlainDate(
         new Date(
           Date.UTC(
@@ -69,7 +63,7 @@ function createPlainDate(date: Date) {
         )
       );
     },
-    add(duration: { days?: number; months?: number; years?: number }) {
+    add(duration) {
       const next = new Date(normalized);
       if (duration.years) {
         next.setUTCFullYear(next.getUTCFullYear() + duration.years);
@@ -82,7 +76,7 @@ function createPlainDate(date: Date) {
       }
       return createPlainDate(next);
     },
-    until(other: any) {
+    until(other) {
       const otherDate = new Date(`${other.toString()}T00:00:00.000Z`);
       const diffMs = otherDate.getTime() - normalized.getTime();
       return { days: Math.round(diffMs / 86400000) };
@@ -90,7 +84,11 @@ function createPlainDate(date: Date) {
   };
 }
 
-(globalThis as any).Temporal = mockTemporal;
+// Cast to `any` so TS doesn't infer a global `Temporal` declaration from this
+// assignment's shape. An inferred declaration here collides with the real
+// `Temporal.PlainDate` type used elsewhere and breaks declaration emit
+// (TS4078 "private name") for any exported signature that references it.
+/** @type {any} */ (globalThis).Temporal = mockTemporal;
 
 describe('DatePicker v12 focus restoration', () => {
   it('returns focus to the input after selecting a date', async () => {
@@ -239,9 +237,8 @@ describe('DatePicker v12 focus restoration', () => {
     // to the sentinel that is now tabbable.
     await user.tab();
 
-    const sentinel = container.querySelector(
-      'span[aria-hidden="true"]'
-    ) as HTMLElement;
+    // eslint-disable-next-line testing-library/no-node-access
+    const sentinel = container.querySelector('span[aria-hidden="true"]');
     expect(sentinel).toBeTruthy();
     // At this point the sentinel should have been activated by the keydown handler.
     expect(sentinel.tabIndex).toBe(0);
@@ -276,6 +273,7 @@ describe('DatePicker v12 focus restoration', () => {
 
     // The sentinel is always in the DOM (even when calendar is closed).
     // It should be aria-hidden and have tabIndex -1 by default.
+    // eslint-disable-next-line testing-library/no-node-access
     const sentinel = container.querySelector(
       'span[aria-hidden="true"][tabindex="-1"]'
     );
