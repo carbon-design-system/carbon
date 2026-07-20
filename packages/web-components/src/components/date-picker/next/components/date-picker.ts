@@ -5,7 +5,6 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-/* eslint-disable no-console */
 import { LitElement, html } from 'lit';
 import { property, query } from 'lit/decorators.js';
 import { prefix } from '../../../../globals/settings';
@@ -460,6 +459,7 @@ class CDSDatePicker extends HostListenerMixin(FormMixin(LitElement)) {
         popover.showPopover();
       } catch (e) {
         // Popover might already be showing
+        /* eslint-disable-next-line no-console */
         console.warn('Could not show popover:', e);
       }
     }
@@ -477,6 +477,7 @@ class CDSDatePicker extends HostListenerMixin(FormMixin(LitElement)) {
         popover.hidePopover();
       } catch (e) {
         // Popover might already be hidden
+        /* eslint-disable-next-line no-console */
         console.warn('Could not hide popover:', e);
       }
     }

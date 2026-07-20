@@ -5,8 +5,6 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-/* eslint-disable @typescript-eslint/no-explicit-any */
-
 import { DatePickerStateMachine } from '@carbon/utilities/date-picker';
 import {
   DatePickerState,
@@ -189,11 +187,6 @@ export class WebComponentAdapter {
       if (this.config.onCalendarOpen) {
         this.config.onCalendarOpen();
       }
-      // Open the calendar if available
-      const calendar = (this.component as any).calendar;
-      if (calendar && !calendar.isOpen) {
-        calendar.open();
-      }
     }
 
     // Handle calendar closing
@@ -203,11 +196,6 @@ export class WebComponentAdapter {
     ) {
       if (this.config.onCalendarClose) {
         this.config.onCalendarClose();
-      }
-      // Close calendar if available
-      const calendar = (this.component as any).calendar;
-      if (calendar && calendar.isOpen) {
-        calendar.close();
       }
     }
 

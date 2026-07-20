@@ -5,8 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { LitElement, html } from 'lit';
+import type { PropertyValues } from 'lit';
 import { property, state } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { prefix } from '../../../../globals/settings';
@@ -31,7 +31,8 @@ class CDSDatePickerCalendar extends LitElement {
    * The currently displayed month (Temporal.PlainYearMonth)
    */
   @state()
-  private _currentMonth: any = Temporal.Now.plainDateISO().toPlainYearMonth();
+  private _currentMonth: Temporal.PlainYearMonth =
+    Temporal.Now.plainDateISO().toPlainYearMonth();
 
   /**
    * The selected date(s)
@@ -425,9 +426,9 @@ class CDSDatePickerCalendar extends LitElement {
 
   /**
    * Lifecycle method called when properties change
-   * @param {Map<string, any>} changedProperties - Changed properties
+   * @param {PropertyValues} changedProperties - Changed properties
    */
-  updated(changedProperties: Map<string, any>) {
+  updated(changedProperties: PropertyValues) {
     // Sync calendar month with viewDate from state machine
     if (changedProperties.has('viewDate') && this.viewDate) {
       // Create PlainYearMonth from PlainDate

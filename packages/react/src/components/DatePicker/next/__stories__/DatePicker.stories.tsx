@@ -15,7 +15,7 @@ import { DatePicker } from '../components/DatePicker';
 import { DatePickerInput } from '../components/DatePickerInput';
 import { DatePickerSkeleton } from '../components/DatePickerSkeleton';
 import './with-layer.scss';
-import mdx from './date-picker-react.mdx';
+import mdx from './DatePicker.mdx';
 
 /**
  * Annotation component for layer visualization
@@ -150,23 +150,24 @@ const sharedArgTypes = {
   },
 };
 
-// eslint-disable-next-line
-export const Default = ({ readOnly, ...args }) => {
+export const Default = (args) => {
+  const { readOnly, ...restArgs } = args;
+
   return (
-    <DatePicker datePickerType="single" {...args} readOnly={readOnly}>
+    <DatePicker datePickerType="single" {...restArgs} readOnly={readOnly}>
       <DatePickerInput
         placeholder="mm/dd/yyyy"
         labelText="Date Picker label"
         id="date-picker-single"
-        {...args}
+        {...restArgs}
       />
-      {args.datePickerType === 'range' && (
+      {restArgs.datePickerType === 'range' && (
         <DatePickerInput
           placeholder="mm/dd/yyyy"
           labelText="End date"
           size="md"
           id="date-picker-input-2"
-          {...args}
+          {...restArgs}
         />
       )}
     </DatePicker>
