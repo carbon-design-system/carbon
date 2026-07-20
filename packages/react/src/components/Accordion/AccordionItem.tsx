@@ -21,7 +21,6 @@ import React, {
   useState,
 } from 'react';
 import { Text } from '../Text';
-import { match, keys } from '../../internal/keyboard';
 import { useId } from '../../internal/useId';
 import { deprecate } from '../../prop-types/deprecate';
 import { usePrefix } from '../../internal/usePrefix';
@@ -178,13 +177,6 @@ function AccordionItem({
     }
   }
 
-  // If the AccordionItem is open, and the user hits the ESC key, then close it
-  function onKeyDown(event) {
-    if (isOpen && match(event, keys.Escape)) {
-      setIsOpen(false);
-    }
-  }
-
   function onAnimationEnd(event) {
     if (handleAnimationEnd) {
       handleAnimationEnd(event);
@@ -200,7 +192,6 @@ function AccordionItem({
         aria-label={ariaLabel}
         className={`${prefix}--accordion__heading`}
         onClick={onClick}
-        onKeyDown={onKeyDown}
         type="button">
         <ChevronRight className={`${prefix}--accordion__arrow`} />
         <Text as="div" className={`${prefix}--accordion__title`}>
