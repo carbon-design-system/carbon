@@ -28,6 +28,11 @@ export interface FilenameProps
   iconDescription?: string;
 
   /**
+   * Specify whether the file uploader item is disabled
+   */
+  disabled?: boolean;
+
+  /**
    * Specify if the file is invalid
    */
   invalid?: boolean;
@@ -52,6 +57,7 @@ function Filename({
   iconDescription = 'Uploading file',
   status = 'uploading',
   invalid,
+  disabled,
   name,
   tabIndex = 0,
   ['aria-describedby']: ariaDescribedBy,
@@ -73,6 +79,7 @@ function Filename({
         <>
           {invalid && <WarningFilled className={`${prefix}--file-invalid`} />}
           <button
+            disabled={disabled}
             aria-label={`${iconDescription} - ${name}`}
             className={`${prefix}--file-close`}
             type="button"

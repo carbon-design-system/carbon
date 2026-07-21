@@ -53,9 +53,9 @@ collect:
         - collapse-mode
         - color-scheme
         - cols
+        - compact
         - condensed
         - contained
-        - container-class
         - counter-mode
         - danger-description
         - data-table
@@ -72,6 +72,7 @@ collect:
         - download
         - dropShadow
         - enable-counter
+        - enable-v12-overflowmenu
         - enter-delay-ms
         - even
         - expandable
@@ -88,7 +89,6 @@ collect:
         - has-focus
         - has-main-content
         - has-rounded-corners
-        - has-scrolling-content
         - has-three-buttons
         - hasCustomIcon
         - heading
@@ -163,8 +163,6 @@ collect:
         - oncds-dropdown-selected
         - oncds-dropdown-toggled
         - oncds-header-menu-button-toggled
-        - oncds-modal-beingclosed
-        - oncds-modal-closed
         - oncds-multi-select-beingselected
         - oncds-multi-select-beingtoggled
         - oncds-multi-select-selected
@@ -189,6 +187,8 @@ collect:
         - oncds-tag-closed
         - onchange
         - onClick
+        - onfocus
+        - onfocusout
         - oninput
         - oninvalid
         - open
@@ -215,6 +215,7 @@ collect:
         - revert-label
         - role
         - rows
+        - secondary-label
         - select-all
         - selected
         - selected-index
@@ -227,7 +228,6 @@ collect:
         - selector-initial-focus
         - shortcut
         - should-filter-item
-        - should-submit-on-enter
         - show-password-label
         - show-password-visibility-toggle
         - showPasswordLabel
@@ -408,6 +408,13 @@ collect:
         - selectedItem
         # cds-menu-item-selectable
         - renderIcon
+        # cds-modal
+        - container-class
+        - enable-dialog-element
+        - has-scrolling-content
+        - oncds-modal-beingclosed
+        - oncds-modal-closed
+        - should-submit-on-enter
         # cds-multi-select-item
         - is-select-all
         # cds-operational-tag
@@ -451,7 +458,6 @@ collect:
         - complete
         - current
         - icon-label
-        - secondary-label
         - secondary-label-text
         - spaceEqually
         # cds-radio-button
@@ -465,6 +471,7 @@ collect:
         - oncds-selectable-tag-beforeselected
         - oncds-selectable-tag-selected
         # cds-shape-indicator
+        - shape-description
         - text-size
         # cds-side-nav
         - is-not-persistent
@@ -549,6 +556,8 @@ collect:
         - oncds-tabs-selected
         - selected-item-assistive-text
         - selecting-items-assistive-text
+        # cds-tabs-vertical
+        - custom-height
         # cds-tearsheet
         - has-close-icon
         - influencer-placement
@@ -577,72 +586,15 @@ collect:
         - is-expanded
         - oneventSelected
         - oneventToggled
+        # tabs-story-wrapper
+        - with-icons
       allowedAttributeStringValues:
         # General - boolean attributes
         - "true"
         - "false"
-        # General - align
-        - bottom
-        - bottom-end
-        - bottom-left
-        - bottom-right
-        - bottom-start
-        - left
-        - left-bottom
-        - left-end
-        - left-start
-        - left-top
-        - right
-        - right-bottom
-        - right-end
-        - right-start
-        - right-top
-        - top
-        - top-end
-        - top-left
-        - top-right
-        - top-start
-        # General - alignment
-        - bottom
-        - bottom-end
-        - bottom-left
-        - bottom-right
-        - bottom-start
-        - END
-        - left
-        - left-bottom
-        - left-end
-        - left-start
-        - left-top
-        - right
-        - right-bottom
-        - right-end
-        - right-start
-        - right-top
-        - start
-        - top
-        - top-end
-        - top-left
-        - top-right
-        - top-start
-        # General - backgroundToken
-        - background
-        - layer
-        # General - collapse-mode
-        - fixed
-        - rail
-        - responsive
-        # General - color-scheme
-        - ""
-        - light
         # General - counter-mode
         - character
         - word
-        # General - direction
-        - bottom
-        - left
-        - right
-        - top
         # General - input-mode
         - decimal
         - email
@@ -653,179 +605,26 @@ collect:
         - text
         - url
         # General - kind
-        - ""
-        - caution-major
-        - caution-minor
-        - cautious
-        - critical
-        - danger
-        - danger-ghost
-        - danger-primary
-        - danger-tertiary
-        - default
         - disclosed
-        - draft
-        - error
-        - failed
-        - from
-        - ghost
-        - high
-        - in-progress
-        - incomplete
-        - info
-        - info-square
-        - informative
-        - inline
-        - low
-        - medium
-        - normal
-        - not-started
         - on-page
-        - pending
-        - primary
-        - secondary
-        - simple
-        - single
-        - stable
-        - succeeded
-        - success
-        - tertiary
-        - to
-        - undefined
-        - unknown
-        - warning
-        - warning-alt
-        # General - label-position
-        - left
-        - right
         # General - loading-status
         - active
         - error
         - finished
         - inactive
-        # General - menu-alignment
-        - bottom
-        - bottom-end
-        - bottom-left
-        - bottom-right
-        - bottom-start
-        - left
-        - left-bottom
-        - left-end
-        - left-start
-        - left-top
-        - right
-        - right-bottom
-        - right-end
-        - right-start
-        - right-top
-        - top
-        - top-end
-        - top-left
-        - top-right
-        - top-start
-        # General - orientation
-        - horizontal
-        - vertical
         # General - role
         - alertdialog
         - dialog
-        # General - selection-feedback
-        - fixed
-        - top
-        - top-after-reopen
         # General - size
-        - ""
         - 2xl
-        - 2xs
-        - big
         - lg
         - md
-        - mini
         - sm
-        - small
         - xl
         - xs
-        # General - state
-        - complete
-        - current
-        - edit
-        - incomplete
-        - invalid
-        - uploading
-        # General - status
-        - active
-        - error
-        - finished
-        - inactive
-        # General - tooltip-alignment
-        - ""
-        - bottom
-        - bottom-left
-        - bottom-right
-        - center
-        - end
-        - left
-        - right
-        - start
-        - top
-        - top-left
-        - top-right
-        # General - tooltip-position
-        - bottom
-        - left
-        - right
-        - top
-        # General - tooltipAlignment
-        - center
-        - end
-        - start
-        # General - tooltipDirection
-        - bottom
-        - left
-        - right
-        - top
         # General - type
-        - ""
-        - blue
-        - button
-        - contained
-        - container
-        - cool-gray
-        - cyan
-        - default
-        - email
-        - gray
-        - green
-        - heading
-        - indented
-        - inline
-        - magenta
-        - multi
         - number
-        - password
-        - purple
-        - red
-        - reset
-        - single
-        - submit
-        - teal
-        - tel
         - text
-        - url
-        - warm-gray
-        # General - width
-        - narrow
-        - wide
-        # cds-file-uploader-button - button-kind
-        - danger
-        - danger-ghost
-        - danger-primary
-        - danger-tertiary
-        - ghost
-        - primary
-        - secondary
-        - tertiary
         # cds-layout - density
         - condensed
         - normal
@@ -850,28 +649,6 @@ collect:
         - sm
         - xl
         - xs
-        # cds-menu-button - menu-background-token
-        - background
-        - layer
-        # cds-pagination - backward-text-tooltip-position
-        - bottom
-        - left
-        - right
-        - top
-        # cds-pagination - forward-text-tooltip-position
-        - bottom
-        - left
-        - right
-        - top
-        # cds-side-panel - placement
-        - left
-        - right
-        # cds-tearsheet - influencer-placement
-        - left
-        - right
-        # cds-tearsheet - influencer-width
-        - narrow
-        - wide
   npm:
     dependencies: null
   js:

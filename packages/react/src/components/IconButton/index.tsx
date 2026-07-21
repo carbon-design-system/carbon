@@ -183,7 +183,7 @@ const IconButton = forwardRef<unknown, IconButtonProps>(
     );
 
     if (badgeCount && (kind !== 'ghost' || size !== 'lg')) {
-      // eslint-disable-next-line no-console -- https://github.com/carbon-design-system/carbon/issues/20452
+      // eslint-disable-next-line no-console
       console.warn(
         "The prop BadgeCount must be used with hasIconOnly=true, kind='ghost' and size='lg'"
       );
@@ -366,7 +366,7 @@ IconButton.propTypes = {
   /**
    * Specify the size of the Button.
    */
-  size: PropTypes.oneOf(['sm', 'md', 'lg']),
+  size: PropTypes.oneOf(['xs', 'sm', 'md', 'lg']),
 
   /**
    * Optionally specify a `target` when using an `<a>` element.

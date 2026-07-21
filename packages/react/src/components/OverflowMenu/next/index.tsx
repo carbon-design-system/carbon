@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2020, 2025
+ * Copyright IBM Corp. 2020, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -180,7 +180,8 @@ const OverflowMenu = React.forwardRef<HTMLDivElement, OverflowMenuProps>(
       {
         [`${prefix}--overflow-menu--open`]: open,
       },
-      size !== defaultSize && `${prefix}--overflow-menu--${size}`
+      size !== defaultSize && `${prefix}--overflow-menu--${size}`, // TODO: V12 - Remove this class
+      size !== defaultSize && `${prefix}--layout--size-${size}`
     );
 
     const floatingRef = mergeRefs(triggerRef, refs.setReference);

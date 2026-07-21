@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
+import React, { Profiler } from 'react';
 import {
   act,
   fireEvent,
@@ -282,6 +282,25 @@ describe('FloatingMenu', () => {
     expect(menuRef).toHaveBeenLastCalledWith(null);
   });
 
+  it('should not detach and reattach the menu ref after initial placement', async () => {
+    const menuRef = jest.fn();
+
+    renderFloatingMenu({
+      menuRef,
+      menuOffset: defaultMenuOffset,
+    });
+
+    const menu = screen.getByTestId('menu');
+
+    await waitFor(() => {
+      expect(menu.style.left).toBe('-23px');
+      expect(menu.style.top).toBe('65px');
+    });
+
+    expect(menuRef).toHaveBeenCalledTimes(1);
+    expect(menuRef).toHaveBeenCalledWith(menu);
+  });
+
   it('should focus the menu body and call `onPlace` when no focusable child exists', async () => {
     const onPlace = jest.fn();
 
@@ -388,5 +407,64 @@ describe('FloatingMenu', () => {
       expect(menu.style.left).toBe('-40px');
       expect(menu.style.top).toBe('60px');
     });
+  });
+
+  it('should not commit again when repeated resizes keep the same updated menu position', async () => {
+    const remove = jest.fn();
+    let resizeCallback;
+    const onRender = jest.fn();
+    const trigger = document.createElement('button');
+    const triggerRef = { current: trigger };
+    const target = () => document.body;
+
+    trigger.setAttribute('data-testid', 'trigger');
+    document.body.appendChild(trigger);
+
+    jest.spyOn(OptimizedResize, 'add').mockImplementation((callback) => {
+      resizeCallback = callback;
+      return { remove };
+    });
+
+    render(
+      <Profiler id="floating-menu" onRender={onRender}>
+        <FloatingMenu
+          triggerRef={triggerRef}
+          menuOffset={defaultMenuOffset}
+          target={target}>
+          {defaultMenuChildren}
+        </FloatingMenu>
+      </Profiler>
+    );
+
+    await waitFor(() => {
+      expect(screen.getByTestId('menu').style.left).toBe('-23px');
+      expect(screen.getByTestId('menu').style.top).toBe('65px');
+    });
+
+    triggerRect = createRect({
+      left: 50,
+      top: 20,
+      right: 70,
+      bottom: 60,
+      width: 20,
+      height: 40,
+    });
+
+    act(() => {
+      resizeCallback();
+    });
+
+    await waitFor(() => {
+      expect(screen.getByTestId('menu').style.left).toBe('17px');
+      expect(screen.getByTestId('menu').style.top).toBe('65px');
+    });
+
+    const commitCountAfterPositionChange = onRender.mock.calls.length;
+
+    act(() => {
+      resizeCallback();
+    });
+
+    expect(onRender).toHaveBeenCalledTimes(commitCountAfterPositionChange);
   });
 });
