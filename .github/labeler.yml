@@ -1,8 +1,10 @@
-# This is the config file for the github/issue-labeler action, which is used in
-# the issue-triage-labeler.yml workflow.
+# Purpose: Configure the github/issue-labeler action used by issue-triage.yml.
+# It adds repository labels when issue titles or bodies match these rules.
+# The workflow enables title matching, so every expression below is evaluated
+# against both the issue title and body.
 #
 # Keys within this file are the name of the label in the repository that we want
-# to add (eg: "package: styles", "severity: 1") and the value is the regular
+# to add (eg: "package: styles", "browser: chrome") and the value is the regular
 # expression for when to apply the label. Should the regular expression not
 # match, the label will not be applied.
 #
@@ -15,6 +17,10 @@
 # of this file.
 #
 # @see https://github.com/marketplace/actions/regex-issue-labeler
+
+# Values wrapped in /.../ are regular expressions. The optional trailing `i`
+# makes a rule case-insensitive. Prefer precise component identifiers here:
+# generic words such as "form" and "link" would create many false positives.
 
 # a11y labels, case insensitive
 'a11y: high contrast mode':
@@ -51,6 +57,186 @@
   - '/(firefox)/i'
 'browser: safari':
   - '/(safari)/i'
+
+# Component labels. Match canonical React component names and the custom element
+# tag spelling used by @carbon/web-components. Keeping these patterns specific
+# avoids treating ordinary words such as "form" or "link" as component names.
+'component: accordion':
+  - '/\bAccordion(Item|Skeleton)?\b/'
+  - '/\bcds-accordion(?!-)/i'
+'component: ai-label':
+  - '/\bAILabel\b/'
+  - '/\bcds-ai-label(?!-)/i'
+'component: ai-skeleton':
+  - '/\bAISkeleton\b/'
+  - '/\bcds-ai-skeleton-(icon|placeholder|text)(?!-)/i'
+'component: breadcrumb':
+  - '/\bBreadcrumb(Item|Skeleton)?\b/'
+  - '/\bcds-breadcrumb(?!-)/i'
+'component: button':
+  - '/\b(Button|ButtonSet|DangerButton|PrimaryButton|SecondaryButton)\b/'
+  - '/\bcds-button(?!-)/i'
+'component: checkbox':
+  - '/\bCheckbox(Skeleton)?\b/'
+  - '/\bcds-checkbox(?!-)/i'
+'component: code-snippet':
+  - '/\bCodeSnippet(Skeleton)?\b/'
+  - '/\bcds-code-snippet(?!-)/i'
+'component: combobox':
+  - '/\bComboBox\b/'
+  - '/\bcds-combo-box(?!-)/i'
+'component: combo-button':
+  - '/\bComboButton\b/'
+  - '/\bcds-combo-button(?!-)/i'
+'component: contained-list':
+  - '/\bContainedList(Item)?\b/'
+  - '/\bcds-contained-list(?!-)/i'
+'component: content-switcher':
+  - '/\bContentSwitcher\b/'
+  - '/\bcds-content-switcher(?!-)/i'
+'component: context-menu':
+  - '/\bContextMenu\b/'
+  - '/\bcds-context-menu(?!-)/i'
+'component: copy-button':
+  - '/\bCopyButton\b/'
+  - '/\bcds-copy-button(?!-)/i'
+'component: data-table':
+  - '/\bDataTable\b/'
+  - '/\bcds-table(?!-)/i'
+'component: date-picker':
+  - '/\bDatePicker(Input|Skeleton)?\b/'
+  - '/\bcds-date-picker(?!-)/i'
+'component: dialog':
+  - '/\bDialog\b/'
+  - '/\bcds-dialog(?!-)/i'
+'component: dropdown':
+  - '/\bDropdown(Skeleton)?\b/'
+  - '/\bcds-dropdown(?!-)/i'
+'component: file-uploader':
+  - '/\bFileUploader(Button|DropContainer|Item)?\b/'
+  - '/\bcds-file-uploader(?!-)/i'
+'component: filterable-multiselect':
+  - '/\bFilterableMultiSelect\b/'
+  - '/\bcds-filterable-multi-select(?!-)/i'
+'component: flex-grid':
+  - '/\bFlexGrid\b/'
+'component: fluid-input':
+  - '/\bFluid(ComboBox|DatePicker|Dropdown|MultiSelect|NumberInput|PasswordInput|Search|Select|TextArea|TextInput|TimePicker)\b/'
+  - '/\bcds-fluid-(combo-box|date-picker|dropdown|multi-select|number-input|password-input|search|select|text-input|textarea|time-picker)(?!-)/i'
+'component: form':
+  - '/\bForm(Group|Item|Label|Legend)?\b/'
+  - '/\bcds-form(?!-)/i'
+'component: grid':
+  - '/\b(Grid|Column)\b/'
+  - '/\bcds-grid(?!-)/i'
+'component: icon-button':
+  - '/\bIconButton\b/'
+  - '/\bcds-icon-button(?!-)/i'
+'component: link':
+  - '/\bLink\b/'
+  - '/\bcds-link(?!-)/i'
+'component: list':
+  - '/\bList(Item)?\b/'
+  - '/\bcds-(unordered-list|list-item)(?!-)/i'
+'component: loading':
+  - '/\b(InlineLoading|Loading)\b/'
+  - '/\bcds-(inline-)?loading(?!-)/i'
+'component: menu':
+  - '/\bMenu(Item|ItemDivider|ItemGroup|ItemRadioGroup|ItemSelectable)?\b/'
+  - '/\bcds-menu(?!-)/i'
+'component: menu-button':
+  - '/\bMenuButton\b/'
+  - '/\bcds-menu-button(?!-)/i'
+'component: modal':
+  - '/\b(ComposedModal|Modal|ModalWrapper)\b/'
+  - '/\bcds-modal(?!-)/i'
+'component: multiselect':
+  - '/\bMultiSelect\b/'
+  - '/\bcds-multi-select(?!-)/i'
+'component: notification':
+  - '/\b(ActionableNotification|InlineNotification|ToastNotification)\b/'
+  - '/\bcds-(inline|toast|actionable)-notification(?!-)/i'
+'component: number-input':
+  - '/\bNumberInput(Skeleton)?\b/'
+  - '/\bcds-number-input(?!-)/i'
+'component: ordered-list':
+  - '/\bOrderedList\b/'
+  - '/\bcds-ordered-list(?!-)/i'
+'component: overflow-menu':
+  - '/\bOverflowMenu(Item)?\b/'
+  - '/\bcds-overflow-menu(?!-)/i'
+'component: pageheader':
+  - '/\bPageHeader\b/'
+  - '/\bcds-page-header(?!-)/i'
+'component: pagination':
+  - '/\bPagination(Nav|Skeleton)?\b/'
+  - '/\bcds-pagination(?!-)/i'
+'component: password-input':
+  - '/\bPasswordInput\b/'
+  - '/\bcds-password-input(?!-)/i'
+'component: popover':
+  - '/\bPopover(Content)?\b/'
+  - '/\bcds-popover(?!-)/i'
+'component: progress-bar':
+  - '/\bProgressBar\b/'
+  - '/\bcds-progress-bar(?!-)/i'
+'component: progress-indicator':
+  - '/\bProgressIndicator\b/'
+  - '/\bcds-progress-indicator(?!-)/i'
+'component: radio-button':
+  - '/\bRadioButton(Group|Skeleton)?\b/'
+  - '/\bcds-radio-button(?!-)/i'
+'component: search':
+  - '/\bSearch(Skeleton)?\b/'
+  - '/\bcds-search(?!-)/i'
+'component: select':
+  - '/\bSelect(Item|ItemGroup|Skeleton)?\b/'
+  - '/\bcds-select(?!-)/i'
+'component: skeleton':
+  - '/\bSkeleton(Icon|Placeholder|Text)\b/'
+  - '/\bcds-skeleton-(icon|placeholder|text)(?!-)/i'
+'component: slider':
+  - '/\bSlider(Skeleton)?\b/'
+  - '/\bcds-slider(?!-)/i'
+'component: stack':
+  - '/\bStack\b/'
+  - '/\bcds-stack(?!-)/i'
+'component: structured-list':
+  - '/\bStructuredList(Body|Cell|Head|Input|Row|Wrapper)\b/'
+  - '/\bcds-structured-list(?!-)/i'
+'component: tabs':
+  - '/\b(Tab(List|Panel|Panels)?|Tabs)\b/'
+  - '/\bcds-tabs(?!-)/i'
+'component: tags':
+  - '/\bTag(Skeleton)?\b/'
+  - '/\bcds-tag(?!-)/i'
+'component: text-area':
+  - '/\bTextArea\b/'
+  - '/\bcds-textarea(?!-)/i'
+'component: text-input':
+  - '/\bTextInput(Skeleton)?\b/'
+  - '/\bcds-text-input(?!-)/i'
+'component: tile':
+  - '/\b(ClickableTile|ExpandableTile|RadioTile|SelectableTile|Tile)\b/'
+  - '/\bcds-(clickable|expandable|radio|selectable)-tile(?!-)/i'
+'component: time-picker':
+  - '/\bTimePicker(Select)?\b/'
+  - '/\bcds-time-picker(?!-)/i'
+'component: toggle':
+  - '/\bToggle(Skeleton|Small)?\b/'
+  - '/\bcds-toggle(?!-)/i'
+'component: toggle-tip':
+  - '/\bToggletip(Button|Content|Label)?\b/'
+  - '/\bcds-toggletip(?!-)/i'
+'component: tooltip':
+  - '/\bTooltip\b/'
+  - '/\bcds-tooltip(?!-)/i'
+'component: treeview':
+  - '/\bTreeView\b/'
+  - '/\bcds-tree-view(?!-)/i'
+'component: ui-shell':
+  - '/\b(Header|HeaderContainer|SideNav|SkipToContent|Switcher)\b/'
+  - '/\bcds-(header|side-nav|skip-to-content|switcher)(?!-)/i'
 
 # Status labels
 'status: needs design spec':
@@ -137,13 +323,3 @@
   - '/(macos)/i'
 'platform: windows':
   - '/(windows)/i'
-
-# Severity labels
-'severity: 1':
-  - '(Severity 1 = Must be fixed ASAP)'
-'severity: 2':
-  - '(Severity 2 = User cannot complete task)'
-'severity: 3':
-  - '(Severity 3 = User can complete task)'
-'severity: 4':
-  - '(Severity 4 = Unrelated to a user task)'

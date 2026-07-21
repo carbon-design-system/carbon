@@ -1,8 +1,15 @@
+# Purpose: Public input and runtime contract for the Docker-based issue-triage
+# action. Keep these inputs aligned with .github/workflows/issue-triage.yml.
 name: Issue Triage
 description: A custom action for triaging issues
 inputs:
   GITHUB_TOKEN:
+    # Used by Octokit for every GitHub read and write; never passed to Bob.
     description: A GitHub token to execute GitHub tasks
+    required: true
+  BOBSHELL_API_KEY:
+    # Used only by the Bob subprocess to produce preliminary triage text.
+    description: API key used only by Bob to generate preliminary bug triage
     required: true
   enabled:
     description: Specify whether this action should run

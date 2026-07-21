@@ -1,6 +1,12 @@
+<!--
+  Purpose: Define the recurring sprint-planning process and the saved issue
+  searches maintainers review. Keep severity searches based on the Bug Severity
+  issue field rather than the retired severity labels.
+-->
+
+<!-- prettier-ignore-start -->
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
-
 ## Table of Contents
 
 - [Overview](#overview)
@@ -14,6 +20,7 @@
       - [In meeting](#in-meeting-1)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
+<!-- prettier-ignore-end -->
 
 ## Overview
 
@@ -55,8 +62,8 @@ devs.
         [ready to be picked up](https://github.com/orgs/carbon-design-system/projects/39/views/86)
         project board.
   - [ ] The standing list of
-        [support issues](https://github.com/carbon-design-system/carbon/issues?q=is%3Aopen+is%3Aissue+label%3A%22severity%3A+2%22),
-        prioritizing `Sev1`s and `Sev2`s.
+        [support issues](https://github.com/carbon-design-system/carbon/issues?q=is%3Aissue%20state%3Aopen%20type%3ABug%20field.severity%3ACritical%2CHigh),
+        prioritizing Critical and High severity bugs.
   - [ ] Umbrella issues that are planned for the
         [current quarter](https://github.com/orgs/carbon-design-system/projects/39/views/28?filterQuery=label%3Aepic%2C%22planning%3A+umbrella%22+milestone%3A%222023+Q2%22)
         (remember to adjust filter): Review the current state of the umbrella
@@ -112,8 +119,8 @@ devs.
     [ready to be picked up](https://github.com/orgs/carbon-design-system/projects/39/views/86)
     project board.
   - The standing list of
-    [support issues](https://github.com/carbon-design-system/carbon/issues?q=is%3Aopen+is%3Aissue+label%3A%22severity%3A+2%22),
-    prioritizing `Sev1`s and `Sev2`s.
+    [support issues](https://github.com/carbon-design-system/carbon/issues?q=is%3Aissue%20state%3Aopen%20type%3ABug%20field.severity%3ACritical%2CHigh),
+    prioritizing Critical and High severity bugs.
   - Other items you might have identified from the
     [previous to meeting](#previous-to-meeting) section.
 
