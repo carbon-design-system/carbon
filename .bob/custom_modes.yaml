@@ -15,6 +15,6 @@ customModes:
       a reproduction URL supplied in the issue.
     groups:
       # Keep capabilities read-only. GitHub mutations happen later through the
-      # Carbon Automation Octokit client, not through Bob.
+      # action's scoped Octokit clients, not through the Bob CLI.
       - read
       - browser

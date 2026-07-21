@@ -10,6 +10,10 @@ on:
         required: true
       APP_PRIVATE_KEY:
         required: true
+      BOB_AUTOMATION_APP_CLIENT_ID:
+        required: true
+      BOB_AUTOMATION_APP_PRIVATE_KEY:
+        required: true
       TAYLORS_BOB_API_KEY:
         required: true
 
@@ -34,7 +38,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Generate Carbon Automation token
-        # All GitHub API writes use the Carbon Automation installation token.
+        # Keyword labels are not Bob output, so they use Carbon Automation.
         uses: actions/create-github-app-token@bcd2ba49218906704ab6c1aa796996da409d3eb1 # v3.2.0
         id: generate_token
         with:
@@ -79,13 +83,25 @@ jobs:
         with:
           client-id: ${{ secrets.CARBON_AUTOMATION_APP_CLIENT_ID }}
           private-key: ${{ secrets.APP_PRIVATE_KEY }}
+      - name: Generate Bob Automation token
+        # This token is passed only to the Bob triage plugin, which uses it to
+        # create or update Bob's single managed output comment.
+        uses: actions/create-github-app-token@bcd2ba49218906704ab6c1aa796996da409d3eb1 # v3.2.0
+        id: generate_bob_token
+        with:
+          client-id: ${{ secrets.BOB_AUTOMATION_APP_CLIENT_ID }}
+          private-key: ${{ secrets.BOB_AUTOMATION_APP_PRIVATE_KEY }}
+          permission-issues: write
       - name: Run issue triage plugins
         uses: carbon-design-system/carbon/actions/issues@main
         with:
-          # The action uses this token for GitHub; it is removed from Bob's
-          # subprocess environment before Bob starts.
+          # This remains the default for labels, fields, projects, and every
+          # managed comment except Bob's preliminary triage comment.
           GITHUB_TOKEN: ${{ steps.generate_token.outputs.token }}
-          # Bob uses this key only to generate text. The Carbon client validates
-          # and posts that text afterward.
+          # Only the Bob plugin receives this GitHub client, so only Bob's output
+          # comment is attributed to the Bob Automation app.
+          BOB_GITHUB_TOKEN: ${{ steps.generate_bob_token.outputs.token }}
+          # The Bob CLI uses this API key only to generate text; neither GitHub
+          # token is included in the Bob subprocess environment.
           BOBSHELL_API_KEY: ${{ secrets.TAYLORS_BOB_API_KEY }}
           enabled: true

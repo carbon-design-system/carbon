@@ -30,6 +30,7 @@ following shape:
 interface ActionPlugin {
   name: string;
   conditions?: [ActionPluginCondition];
+  githubTokenInput?: string;
   run: (context: GitHubActionContext, octokit: Octokit) => Promise<void>;
 }
 
@@ -49,10 +50,11 @@ optional instance of `octokit` to use for API requests. A plugin can do any
 operations needed during its lifecycle to the issue in question.
 
 The registered plugins initialize formal Bug metadata, manage contribution
-comments, and run Bob's preliminary triage for newly opened formal Bugs. GitHub
-API operations use the Carbon Automation token. Bob receives only its API key
-and returns text; the action validates that text before the Carbon Automation
-client posts it.
+comments, and run Bob's preliminary triage for newly opened formal Bugs. Carbon
+Automation is the default GitHub client. The Bob plugin declares
+`BOB_GITHUB_TOKEN`, so only Bob's managed triage comment uses the Bob Automation
+client. The Bob CLI receives only its API key and returns text; it receives
+neither GitHub token.
 
 ## Managed comments
 

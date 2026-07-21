@@ -8,7 +8,7 @@
 /**
  * Plugin for a read-only Bob assessment of newly opened formal Bugs. Bob sees
  * issue context and repository guidance, returns plain text, and never receives
- * the GitHub token; the shared comment manager posts validated output afterward.
+ * a GitHub token; the Bob Automation client posts validated output afterward.
  */
 import * as core from '@actions/core';
 import { execFile } from 'node:child_process';
@@ -259,6 +259,9 @@ export async function runBobBugTriage(context, octokit, runBob = executeBob) {
 const plugin = {
   name: 'Generate preliminary Bob bug triage',
   conditions: [events.issues.opened],
+  // The runner creates an Octokit client from this input only for this plugin.
+  // That makes Bob's managed comment the Bob Automation app's only output.
+  githubTokenInput: 'BOB_GITHUB_TOKEN',
   run: runBobBugTriage,
 };
 

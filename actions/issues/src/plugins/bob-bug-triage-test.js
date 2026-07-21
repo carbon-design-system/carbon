@@ -9,6 +9,7 @@ import plugin, {
   createBobEnvironment,
   validateBobTriage,
 } from './bob-bug-triage.js';
+import { plugins } from './index.js';
 
 jest.mock(
   '@actions/core',
@@ -53,6 +54,7 @@ describe('createBobEnvironment', () => {
         {
           GH_TOKEN: 'carbon-gh-token',
           GITHUB_TOKEN: 'carbon-github-token',
+          INPUT_BOB_GITHUB_TOKEN: 'bob-github-token',
           INPUT_GITHUB_TOKEN: 'carbon-input-token',
           NPM_TOKEN: 'unrelated-secret',
           PATH: '/usr/bin',
@@ -67,6 +69,16 @@ describe('createBobEnvironment', () => {
 });
 
 describe('Bob bug triage plugin conditions', () => {
+  it('uses the dedicated Bob Automation token input', () => {
+    expect(plugin.githubTokenInput).toBe('BOB_GITHUB_TOKEN');
+  });
+
+  it('is the only registered plugin that uses an alternate GitHub token', () => {
+    expect(plugins.filter(({ githubTokenInput }) => githubTokenInput)).toEqual([
+      plugin,
+    ]);
+  });
+
   it('runs only for opened events', () => {
     expect(plugin.conditions[0].run({ payload: { action: 'opened' } })).toBe(
       true

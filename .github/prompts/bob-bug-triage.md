@@ -1,7 +1,7 @@
 <!--
   Purpose: Runtime instructions for Bob's read-only first pass on a newly opened
   formal Bug. The Node plugin separately validates length and structure before
-  posting Bob's output with the Carbon Automation token.
+  posting Bob's output with the Bob Automation token.
 -->
 
 # Preliminary bug triage

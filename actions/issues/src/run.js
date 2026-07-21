@@ -10,9 +10,9 @@ import * as core from '@actions/core';
 import { plugins } from './plugins/index.js';
 
 /**
- * Main Docker-action entrypoint. It builds one authenticated Octokit client,
- * filters out non-issue payloads, evaluates each plugin's conditions, and emits
- * enough structured logs to reconstruct the full decision path for a run.
+ * Main Docker-action entrypoint. It builds the default Carbon Automation
+ * Octokit client, creates an alternate client only when a plugin explicitly
+ * requests one, and logs the complete condition and token-routing decision path.
  */
 async function run() {
   core.info('[triage] Starting issue triage action');
@@ -27,11 +27,11 @@ async function run() {
   core.info(
     `[triage] Event=${context.eventName}; action=${context.payload.action ?? 'none'}`
   );
-  const token = core.getInput('GITHUB_TOKEN', {
+  const carbonToken = core.getInput('GITHUB_TOKEN', {
     required: true,
   });
-  core.info('[triage] GitHub token input is present');
-  const octokit = github.getOctokit(token);
+  core.info('[triage] Carbon Automation GitHub token input is present');
+  const carbonOctokit = github.getOctokit(carbonToken);
   const { issue } = context.payload;
 
   // workflow_call and future event types may not contain an issue. Treat those
@@ -61,7 +61,7 @@ async function run() {
       for (const condition of plugin.conditions) {
         // Conditions are intentionally evaluated in order and stop at the first
         // failure; the failed key explains exactly why the plugin was skipped.
-        const passed = condition.run(context, octokit);
+        const passed = condition.run(context, carbonOctokit);
         core.info(
           `[triage] Condition ${condition.key} ${passed ? 'passed' : 'failed'}`
         );
@@ -79,9 +79,26 @@ async function run() {
         continue;
       }
 
+      // Carbon Automation is the default. A plugin must opt in explicitly to a
+      // different token input, keeping alternate app identities narrowly scoped.
+      let pluginOctokit = carbonOctokit;
+      if (plugin.githubTokenInput) {
+        const pluginToken = core.getInput(plugin.githubTokenInput, {
+          required: true,
+        });
+        core.info(
+          `[triage] ${plugin.name} is using the dedicated ${plugin.githubTokenInput} GitHub client`
+        );
+        pluginOctokit = github.getOctokit(pluginToken);
+      } else {
+        core.info(
+          `[triage] ${plugin.name} is using the Carbon Automation GitHub client`
+        );
+      }
+
       const startedAt = Date.now();
       core.info(`[triage] Running ${plugin.name}`);
-      await plugin.run(context, octokit);
+      await plugin.run(context, pluginOctokit);
       core.info(
         `[triage] Completed ${plugin.name} in ${Date.now() - startedAt}ms`
       );
