@@ -211,7 +211,15 @@ function FileUploaderDropContainer({
       event.dataTransfer.files instanceof window.FileList
     ) {
       try {
-        inputRef.current.files = event.dataTransfer.files;
+        let droppedFiles = event.dataTransfer.files;
+
+        if (!multiple && files.length) {
+          const dataTransfer = new window.DataTransfer();
+          dataTransfer.items.add(files[0]);
+          droppedFiles = dataTransfer.files;
+        }
+
+        inputRef.current.files = droppedFiles;
       } catch {
         // Some environments expose FileList-like objects that the native setter rejects.
       }
