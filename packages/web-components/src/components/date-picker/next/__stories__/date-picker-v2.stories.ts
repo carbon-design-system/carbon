@@ -5,8 +5,6 @@
  * LICENSE file in the root directory of this source tree.
  */
 
- 
-
 import { html } from 'lit';
 import { prefix } from '../../../../globals/settings';
 import { iconLoader } from '../../../../globals/internal/icon-loader';
@@ -20,7 +18,7 @@ import '../components/date-picker-input-skeleton';
 import '../components/calendar-renderer';
 import '@carbon/web-components/es/components/layer/index.js';
 import '@carbon/web-components/es/components/ai-label/index.js';
-import '../../../../../.storybook/decorators/with-layers';
+import { withLayers } from '../../../../../.storybook/decorators/with-layers';
 
 const sizes = {
   [`Small (${INPUT_SIZE.SMALL})`]: INPUT_SIZE.SMALL,
@@ -265,6 +263,7 @@ export const RangeWithCalendar = {
 };
 
 export const RangeWithCalendarWithLayer = {
+  decorators: [withLayers],
   args: defaultArgs,
   argTypes: controls,
   /**
@@ -382,6 +381,7 @@ export const Simple = {
 };
 
 export const SimpleWithLayer = {
+  decorators: [withLayers],
   args: defaultArgs,
   argTypes: controls,
   /**
@@ -418,19 +418,20 @@ export const SimpleWithLayer = {
           date-format="${dateFormat}"
           max-date="${maxDate}"
           min-date="${minDate}">
-        <cds-date-picker-input
-          ?disabled="${disabled}"
-          label-text="Date Picker label"
-          placeholder="${placeholder}"
-          ?readonly="${readonly}"
-          size="${size}"
-          ?invalid="${invalid}"
-          invalid-text="${invalidText}"
-          ?warn="${warn}"
-          warn-text="${warnText}">
-        </cds-date-picker-input>
+          <cds-date-picker-input
+            ?disabled="${disabled}"
+            label-text="Date Picker label"
+            placeholder="${placeholder}"
+            ?readonly="${readonly}"
+            size="${size}"
+            ?invalid="${invalid}"
+            invalid-text="${invalidText}"
+            ?warn="${warn}"
+            warn-text="${warnText}">
+          </cds-date-picker-input>
+        </cds-date-picker>
       </sb-template-layers>
-  `;
+    `;
   },
 };
 
@@ -488,6 +489,7 @@ export const SingleWithCalendar = {
 };
 
 export const SingleWithCalendarWithLayer = {
+  decorators: [withLayers],
   args: defaultArgs,
   argTypes: controls,
   /**

@@ -6,62 +6,15 @@
  */
 
 import React from 'react';
-import { Layer } from '../../../Layer';
+import { WithLayer } from '../../../../../.storybook/templates/WithLayer';
 import { AILabel, AILabelContent, AILabelActions } from '../../../AILabel';
 import { IconButton } from '../../../IconButton';
 import Button from '../../../Button';
-import { View, FolderOpen, Folders, Layers } from '@carbon/icons-react';
+import { View, FolderOpen, Folders } from '@carbon/icons-react';
 import { DatePicker } from '../components/DatePicker';
 import { DatePickerInput } from '../components/DatePickerInput';
 import { DatePickerSkeleton } from '../components/DatePickerSkeleton';
-import './with-layer.scss';
-import mdx from './DatePicker.mdx';
-
-/**
- * Annotation component for layer visualization
- */
-const Annotation: React.FC<{
-  type: 'background' | 'layer';
-  text: string;
-  children: React.ReactNode;
-}> = ({ type, text, children }) => {
-  return (
-    <div className={`sb-annotation sb-annotation--${type}`}>
-      <div className="sb-annotation__label">
-        <Layers />
-        {text}
-      </div>
-      <div className="sb-annotation__content">{children}</div>
-    </div>
-  );
-};
-
-/**
- * WithLayer component for demonstrating components in different layer contexts
- */
-const WithLayer: React.FC<{ children: (layer: number) => React.ReactNode }> = ({
-  children,
-}) => {
-  function renderChild(layer: number) {
-    return typeof children === 'function' ? children(layer) : children;
-  }
-
-  return (
-    <Annotation type="background" text="$background">
-      {renderChild(0)}
-      <Layer>
-        <Annotation type="layer" text="$layer-01">
-          {renderChild(1)}
-          <Layer>
-            <Annotation type="layer" text="$layer-02">
-              {renderChild(2)}
-            </Annotation>
-          </Layer>
-        </Annotation>
-      </Layer>
-    </Annotation>
-  );
-};
+import mdx from './DatePickerV2.mdx';
 
 export default {
   title: 'Preview/preview__DatePicker',
