@@ -12219,6 +12219,16 @@ Map {
       },
     },
   },
+  "preview__DatePicker" => {
+    "DatePicker": {
+      "displayName": "DatePicker",
+    },
+    "DatePickerInput": {
+      "$$typeof": Symbol(react.forward_ref),
+      "render": [Function],
+    },
+    "DatePickerSkeleton": {},
+  },
   "preview__Dialog" => {
     "Dialog": {
       "$$typeof": Symbol(react.forward_ref),
