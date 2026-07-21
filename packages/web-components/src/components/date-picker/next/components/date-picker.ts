@@ -1039,8 +1039,10 @@ class CDSDatePicker extends HostListenerMixin(FormMixin(LitElement)) {
   render() {
     const { _handleSlotChange: handleSlotChange, _mode: mode, open } = this;
     const context = this._adapter?.getContext();
-    const selectedDates = context?.endDate
-      ? [context.startDate, context.endDate].filter(Boolean)
+    const selectedDates: Temporal.PlainDate[] = context?.endDate
+      ? [context.startDate, context.endDate].filter(
+          (date): date is Temporal.PlainDate => Boolean(date)
+        )
       : context?.startDate
         ? [context.startDate]
         : [];
@@ -1062,7 +1064,7 @@ class CDSDatePicker extends HostListenerMixin(FormMixin(LitElement)) {
                   ? Temporal.PlainDate.from(this.maxDate)
                   : undefined}"
                 .selectedDates="${selectedDates}"
-                .viewDate="${context?.viewDate || null}"
+                .viewDate="${context?.viewDate || undefined}"
                 .focusedDate="${context?.focusedDate || null}"
                 @cds-date-picker-calendar-date-select="${this
                   ._handleCalendarDateSelect}"
