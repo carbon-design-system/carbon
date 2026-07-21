@@ -16,8 +16,8 @@ import '../components/date-picker';
 import '../components/date-picker-input';
 import '../components/date-picker-input-skeleton';
 import '../components/calendar-renderer';
-import '@carbon/web-components/es/components/layer/index.js';
-import '@carbon/web-components/es/components/ai-label/index.js';
+import '../../../layer/index';
+import '../../../ai-label';
 import { withLayers } from '../../../../../.storybook/decorators/with-layers';
 
 const sizes = {
@@ -133,22 +133,6 @@ export const Default = {
     </ul>`,
     },
   },
-  /**
-   * Renders the default date picker story
-   * @param root0
-   * @param root0.dateFormat
-   * @param root0.disabled
-   * @param root0.invalid
-   * @param root0.invalidText
-   * @param root0.kind
-   * @param root0.maxDate
-   * @param root0.minDate
-   * @param root0.placeholder
-   * @param root0.readonly
-   * @param root0.size
-   * @param root0.warn
-   * @param root0.warnText
-   */
   render: ({
     dateFormat,
     disabled,
@@ -202,21 +186,6 @@ export const Default = {
 export const RangeWithCalendar = {
   args: defaultArgs,
   argTypes: controls,
-  /**
-   * Renders the range with calendar date picker story
-   * @param root0
-   * @param root0.dateFormat
-   * @param root0.disabled
-   * @param root0.invalid
-   * @param root0.invalidText
-   * @param root0.maxDate
-   * @param root0.minDate
-   * @param root0.placeholder
-   * @param root0.readonly
-   * @param root0.size
-   * @param root0.warn
-   * @param root0.warnText
-   */
   render: ({
     dateFormat,
     disabled,
@@ -266,21 +235,6 @@ export const RangeWithCalendarWithLayer = {
   decorators: [withLayers],
   args: defaultArgs,
   argTypes: controls,
-  /**
-   * Renders the range with calendar and layer date picker story
-   * @param root0
-   * @param root0.dateFormat
-   * @param root0.disabled
-   * @param root0.invalid
-   * @param root0.invalidText
-   * @param root0.maxDate
-   * @param root0.minDate
-   * @param root0.placeholder
-   * @param root0.readonly
-   * @param root0.size
-   * @param root0.warn
-   * @param root0.warnText
-   */
   render: ({
     dateFormat,
     disabled,
@@ -295,35 +249,33 @@ export const RangeWithCalendarWithLayer = {
     warnText,
   }) => {
     return html`
-      <sb-template-layers>
-        <cds-date-picker
-          date-format="${dateFormat}"
-          ?disabled="${disabled}"
-          max-date="${maxDate}"
-          min-date="${minDate}"
-          ?readonly="${readonly}">
-          <cds-date-picker-input
-            kind="from"
-            label-text="Start date"
-            placeholder="${placeholder}"
-            size="${size}"
-            ?invalid="${invalid}"
-            invalid-text="${invalidText}"
-            ?warn="${warn}"
-            warn-text="${warnText}">
-          </cds-date-picker-input>
-          <cds-date-picker-input
-            kind="to"
-            label-text="End date"
-            placeholder="${placeholder}"
-            size="${size}"
-            ?invalid="${invalid}"
-            invalid-text="${invalidText}"
-            ?warn="${warn}"
-            warn-text="${warnText}">
-          </cds-date-picker-input>
-        </cds-date-picker>
-      </sb-template-layers>
+      <cds-date-picker
+        date-format="${dateFormat}"
+        ?disabled="${disabled}"
+        max-date="${maxDate}"
+        min-date="${minDate}"
+        ?readonly="${readonly}">
+        <cds-date-picker-input
+          kind="from"
+          label-text="Start date"
+          placeholder="${placeholder}"
+          size="${size}"
+          ?invalid="${invalid}"
+          invalid-text="${invalidText}"
+          ?warn="${warn}"
+          warn-text="${warnText}">
+        </cds-date-picker-input>
+        <cds-date-picker-input
+          kind="to"
+          label-text="End date"
+          placeholder="${placeholder}"
+          size="${size}"
+          ?invalid="${invalid}"
+          invalid-text="${invalidText}"
+          ?warn="${warn}"
+          warn-text="${warnText}">
+        </cds-date-picker-input>
+      </cds-date-picker>
     `;
   },
 };
@@ -331,21 +283,6 @@ export const RangeWithCalendarWithLayer = {
 export const Simple = {
   args: defaultArgs,
   argTypes: controls,
-  /**
-   *
-   * @param root0
-   * @param root0.dateFormat
-   * @param root0.disabled
-   * @param root0.invalid
-   * @param root0.invalidText
-   * @param root0.maxDate
-   * @param root0.minDate
-   * @param root0.placeholder
-   * @param root0.readonly
-   * @param root0.size
-   * @param root0.warn
-   * @param root0.warnText
-   */
   render: ({
     dateFormat,
     disabled,
@@ -384,21 +321,6 @@ export const SimpleWithLayer = {
   decorators: [withLayers],
   args: defaultArgs,
   argTypes: controls,
-  /**
-   *
-   * @param root0
-   * @param root0.dateFormat
-   * @param root0.disabled
-   * @param root0.invalid
-   * @param root0.invalidText
-   * @param root0.maxDate
-   * @param root0.minDate
-   * @param root0.placeholder
-   * @param root0.readonly
-   * @param root0.size
-   * @param root0.warn
-   * @param root0.warnText
-   */
   render: ({
     dateFormat,
     disabled,
@@ -413,24 +335,22 @@ export const SimpleWithLayer = {
     warnText,
   }) => {
     return html`
-      <sb-template-layers>
-        <cds-date-picker
-          date-format="${dateFormat}"
-          max-date="${maxDate}"
-          min-date="${minDate}">
-          <cds-date-picker-input
-            ?disabled="${disabled}"
-            label-text="Date Picker label"
-            placeholder="${placeholder}"
-            ?readonly="${readonly}"
-            size="${size}"
-            ?invalid="${invalid}"
-            invalid-text="${invalidText}"
-            ?warn="${warn}"
-            warn-text="${warnText}">
-          </cds-date-picker-input>
-        </cds-date-picker>
-      </sb-template-layers>
+      <cds-date-picker
+        date-format="${dateFormat}"
+        max-date="${maxDate}"
+        min-date="${minDate}">
+        <cds-date-picker-input
+          ?disabled="${disabled}"
+          label-text="Date Picker label"
+          placeholder="${placeholder}"
+          ?readonly="${readonly}"
+          size="${size}"
+          ?invalid="${invalid}"
+          invalid-text="${invalidText}"
+          ?warn="${warn}"
+          warn-text="${warnText}">
+        </cds-date-picker-input>
+      </cds-date-picker>
     `;
   },
 };
@@ -438,21 +358,6 @@ export const SimpleWithLayer = {
 export const SingleWithCalendar = {
   args: defaultArgs,
   argTypes: controls,
-  /**
-   *
-   * @param root0
-   * @param root0.dateFormat
-   * @param root0.disabled
-   * @param root0.invalid
-   * @param root0.invalidText
-   * @param root0.maxDate
-   * @param root0.minDate
-   * @param root0.placeholder
-   * @param root0.readonly
-   * @param root0.size
-   * @param root0.warn
-   * @param root0.warnText
-   */
   render: ({
     dateFormat,
     disabled,
@@ -492,21 +397,6 @@ export const SingleWithCalendarWithLayer = {
   decorators: [withLayers],
   args: defaultArgs,
   argTypes: controls,
-  /**
-   *
-   * @param root0
-   * @param root0.disabled
-   * @param root0.dateFormat
-   * @param root0.invalid
-   * @param root0.invalidText
-   * @param root0.maxDate
-   * @param root0.minDate
-   * @param root0.placeholder
-   * @param root0.readonly
-   * @param root0.size
-   * @param root0.warn
-   * @param root0.warnText
-   */
   render: ({
     disabled,
     dateFormat,
@@ -521,25 +411,23 @@ export const SingleWithCalendarWithLayer = {
     warnText,
   }) => {
     return html`
-      <sb-template-layers>
-        <cds-date-picker
-          date-format="${dateFormat}"
-          ?disabled="${disabled}"
-          max-date="${maxDate}"
-          min-date="${minDate}"
-          ?readonly="${readonly}">
-          <cds-date-picker-input
-            kind="single"
-            label-text="Date Picker label"
-            placeholder="${placeholder}"
-            size="${size}"
-            ?invalid="${invalid}"
-            invalid-text="${invalidText}"
-            ?warn="${warn}"
-            warn-text="${warnText}">
-          </cds-date-picker-input>
-        </cds-date-picker>
-      </sb-template-layers>
+      <cds-date-picker
+        date-format="${dateFormat}"
+        ?disabled="${disabled}"
+        max-date="${maxDate}"
+        min-date="${minDate}"
+        ?readonly="${readonly}">
+        <cds-date-picker-input
+          kind="single"
+          label-text="Date Picker label"
+          placeholder="${placeholder}"
+          size="${size}"
+          ?invalid="${invalid}"
+          invalid-text="${invalidText}"
+          ?warn="${warn}"
+          warn-text="${warnText}">
+        </cds-date-picker-input>
+      </cds-date-picker>
     `;
   },
 };
@@ -558,12 +446,6 @@ const skeletonControls = {
 export const Skeleton = {
   args: { hideLabel: false, range: true },
   argTypes: skeletonControls,
-  /**
-   *
-   * @param root0
-   * @param root0.hideLabel
-   * @param root0.range
-   */
   render: ({ hideLabel, range }) => html`
     <cds-date-picker-input-skeleton
       ?hide-label="${hideLabel}"
@@ -612,21 +494,6 @@ const actions = html`
 export const WithAILabel = {
   args: defaultArgs,
   argTypes: controls,
-  /**
-   *
-   * @param root0
-   * @param root0.dateFormat
-   * @param root0.disabled
-   * @param root0.invalid
-   * @param root0.invalidText
-   * @param root0.maxDate
-   * @param root0.minDate
-   * @param root0.placeholder
-   * @param root0.readonly
-   * @param root0.size
-   * @param root0.warn
-   * @param root0.warnText
-   */
   render: ({
     dateFormat,
     disabled,
