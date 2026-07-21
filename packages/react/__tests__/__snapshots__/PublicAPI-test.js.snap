@@ -5894,6 +5894,7 @@ Map {
       "size": {
         "args": [
           [
+            "xs",
             "sm",
             "md",
             "lg",
@@ -7927,6 +7928,9 @@ Map {
       },
       "pagesUnknown": {
         "type": "bool",
+      },
+      "renderPageSelect": {
+        "type": "func",
       },
       "size": {
         "args": [
