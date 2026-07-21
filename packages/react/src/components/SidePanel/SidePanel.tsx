@@ -280,7 +280,7 @@ export const SidePanel = React.forwardRef<HTMLDivElement, SidePanelProps>(
       subtitle,
       title,
       launcherButtonRef,
-      resizable = true,
+      resizable = false,
       ...rest
     } = props;
     const prefix = usePrefix();
@@ -537,6 +537,7 @@ export const SidePanel = React.forwardRef<HTMLDivElement, SidePanelProps>(
     useEffect(() => {
       if (!title && labelText) {
         warning(
+          false,
           `${componentName}: The prop \`labelText\` was provided without a \`title\`. It is required to have a \`title\` when using the \`labelText\` prop.`
         );
       }
@@ -654,7 +655,7 @@ export const SidePanel = React.forwardRef<HTMLDivElement, SidePanelProps>(
     useEffect(() => {
       const handleOutsideClick = (event) => {
         if (
-          panelRefValue &&
+          sidePanelRef.current &&
           overlayRef.current &&
           overlayRef.current.contains(event.target) &&
           onRequestClose

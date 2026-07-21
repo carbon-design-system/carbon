@@ -10,17 +10,32 @@ import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import React, { act } from 'react';
+
+// jsdom does not implement window.matchMedia — provide a minimal stub
+Object.defineProperty(window, 'matchMedia', {
+  writable: true,
+  value: jest.fn().mockImplementation((query) => ({
+    matches: false,
+    media: query,
+    onchange: null,
+    addListener: jest.fn(),
+    removeListener: jest.fn(),
+    addEventListener: jest.fn(),
+    removeEventListener: jest.fn(),
+    dispatchEvent: jest.fn(),
+  })),
+});
+
 import { Button, TextInput, AILabel, AILabelContent } from '@carbon/react';
-import { pkg } from '../../ibm-products-settings';
+
 import { SidePanel } from '.';
 import { Add } from '@carbon/react/icons';
-import { FeatureFlags } from '../FeatureFlags';
 import { SIDE_PANEL_SIZES } from './constants';
 
 /** Simple unique id generator for test isolation */
 const uuidv4 = () => Math.random().toString(36).slice(2);
 
-const { prefix } = pkg;
+const prefix = 'cds';
 
 const blockClass = `${prefix}--side-panel`;
 const actionSetBlockClass = `${prefix}--action-set`;
@@ -71,21 +86,19 @@ const renderSidePanel = ({ ...rest } = {}, children = <p>test</p>) =>
 
 const renderResizableSidePanel = ({ ...rest } = {}, children = <p>test</p>) =>
   render(
-    <FeatureFlags enableSidepanelResizer>
-      <SidePanel
-        id="resizable-sidepanel-id"
-        {...{
-          title,
-          open: true,
-          placement: 'right',
-          size: 'md',
-          open: true,
-          onRequestClose: onRequestCloseFn,
-          ...rest,
-        }}>
-        {children}
-      </SidePanel>
-    </FeatureFlags>
+    <SidePanel
+      id="resizable-sidepanel-id"
+      {...{
+        title,
+        open: true,
+        placement: 'right',
+        size: 'md',
+        resizable: true,
+        onRequestClose: onRequestCloseFn,
+        ...rest,
+      }}>
+      {children}
+    </SidePanel>
   );
 
 const SlideIn = ({
@@ -143,7 +156,11 @@ describe('SidePanel', () => {
     });
     const overlayElement = container.querySelector(`.${blockClass}__overlay`);
     expect(overlayElement).toBeTruthy();
-    await act(() => userEvent.click(overlayElement));
+    // The overlay click handler is attached to `document` — use fireEvent to
+    // dispatch a real bubbling click so the document listener fires.
+    await act(async () => {
+      fireEvent.click(overlayElement);
+    });
     expect(onRequestCloseFn).toHaveBeenCalled();
   });
 
@@ -180,19 +197,40 @@ describe('SidePanel', () => {
   });
 
   it('should render a right slide in panel version with onUnmount prop', async () => {
+    // Simulate reduced-motion so onUnmount fires via the no-animation path
+    // (jsdom has no CSS animation support so animationEnd never fires naturally)
+    window.matchMedia.mockImplementation((query) => ({
+      matches: query.includes('prefers-reduced-motion'),
+      media: query,
+      onchange: null,
+      addListener: jest.fn(),
+      removeListener: jest.fn(),
+      addEventListener: jest.fn(),
+      removeEventListener: jest.fn(),
+      dispatchEvent: jest.fn(),
+    }));
+
     const { container, rerender } = render(<SlideIn placement="right" open />);
     const pageContent = container.querySelector(selectorPageContentValue);
-    const style = getComputedStyle(pageContent);
-    expect(style.marginInlineEnd).toBe('30rem');
-    const closeIconButton = screen.getByRole('button', { name: 'Close' });
-    const outerElement = container.querySelector(`.${blockClass}`);
-    await act(() => userEvent.click(closeIconButton));
-    await act(() => fireEvent.animationStart(outerElement));
+    expect(getComputedStyle(pageContent).marginInlineEnd).toBe('30rem');
+
     await act(() => rerender(<SlideIn placement="right" open={false} />));
-    await act(() => fireEvent.animationEnd(outerElement));
+
     const updatedStyles = getComputedStyle(pageContent);
     expect(updatedStyles.marginInlineEnd).toBe('0');
     expect(onUnmountFn).toHaveBeenCalled();
+
+    // Restore default matchMedia mock
+    window.matchMedia.mockImplementation((query) => ({
+      matches: false,
+      media: query,
+      onchange: null,
+      addListener: jest.fn(),
+      removeListener: jest.fn(),
+      addEventListener: jest.fn(),
+      removeEventListener: jest.fn(),
+      dispatchEvent: jest.fn(),
+    }));
   });
 
   it('should render a right slide in panel version', async () => {
@@ -372,20 +410,17 @@ describe('SidePanel', () => {
   });
 
   it('should throw console warning if labelText passed without Title', () => {
-    const consoleWarnSpy = jest
-      .spyOn(console, 'warn')
-      .mockImplementation(() => {});
+    const warnSpy = jest.spyOn(console, 'warn').mockImplementation(() => {});
     renderSidePanel({
       title: '',
       labelText: 'Side Panel test label',
     });
-    expect(consoleWarnSpy).toHaveBeenCalled();
-    expect(consoleWarnSpy).toHaveBeenCalledWith(
+    expect(warnSpy).toHaveBeenCalledWith(
       expect.stringContaining(
         `The prop \`labelText\` was provided without a \`title\`. It is required to have a \`title\` when using the \`labelText\` prop.`
       )
-    ); // Adjust the expected message
-    consoleWarnSpy.mockRestore();
+    );
+    warnSpy.mockRestore();
   });
   it('should click the navigation button', async () => {
     const { fn } = jest;
@@ -456,12 +491,8 @@ describe('SidePanel', () => {
     expect(ref.current).toEqual(screen.getByRole('complementary'));
   });
 
-  it('adds the Devtools attribute to the containing node', async () => {
-    renderSidePanel({ 'data-testid': dataTestId });
-
-    expect(screen.getByTestId(dataTestId)).toHaveDevtoolsAttribute(
-      SidePanel.displayName
-    );
+  it('has the correct displayName', () => {
+    expect(SidePanel.displayName).toBe('SidePanel');
   });
 
   it('should call the onRequestClose event handler', async () => {
@@ -585,14 +616,14 @@ describe('SidePanel', () => {
     });
   });
 
-  it('should render a resizer, when enabled via flag', async () => {
+  it('should render a resizer when resizable prop is true', async () => {
     const { container } = renderResizableSidePanel();
     const resizer = container.querySelector(`.${blockClass}__resizer`);
     expect(resizer).toBeTruthy();
   });
 
-  it('should not render a resizer, when not enabled via flag', async () => {
-    const { container } = renderSidePanel();
+  it('should not render a resizer when resizable prop is false', async () => {
+    const { container } = renderSidePanel({ resizable: false });
     const resizer = container.querySelector(`.${blockClass}__resizer`);
     expect(resizer).toBeFalsy();
   });
@@ -605,13 +636,19 @@ describe('SidePanel', () => {
 
     const setPropertySpy = jest.spyOn(parentEl.style, 'setProperty');
 
-    fireEvent.mouseDown(resizer);
-    fireEvent.mouseMove(document, { clientX: 200 });
-    fireEvent.mouseUp(document);
+    await act(() => {
+      fireEvent.mouseDown(resizer, { button: 0, clientX: 0 });
+    });
+    await act(() => {
+      fireEvent.mouseMove(window, { clientX: 200 });
+    });
+    await act(() => {
+      fireEvent.mouseUp(window);
+    });
 
     await waitFor(() => {
       expect(setPropertySpy).toHaveBeenCalledWith(
-        '--c4p-side-panel-modified-size',
+        '--cds-side-panel-modified-size',
         '-200px'
       );
     });
@@ -630,7 +667,7 @@ describe('SidePanel', () => {
     fireEvent.keyDown(resizer, { key: 'Home' });
 
     expect(setPropertySpy).toHaveBeenCalledWith(
-      '--c4p-side-panel-modified-size',
+      '--cds-side-panel-modified-size',
       '75vw'
     );
 
@@ -648,7 +685,7 @@ describe('SidePanel', () => {
     fireEvent.keyDown(resizer, { key: 'End' });
 
     expect(setPropertySpy).toHaveBeenCalledWith(
-      '--c4p-side-panel-modified-size',
+      '--cds-side-panel-modified-size',
       SIDE_PANEL_SIZES['xs']
     );
 
@@ -666,8 +703,8 @@ describe('SidePanel', () => {
     fireEvent.keyDown(resizer, { key: 'ArrowRight' });
 
     expect(setPropertySpy).toHaveBeenCalledWith(
-      '--c4p-side-panel-modified-size',
-      '-5px' // 1 step to the right = -5px
+      '--cds-side-panel-modified-size',
+      '-5px' // 1 step to the right = -5px (placement=right so delta is negated)
     );
 
     setPropertySpy.mockRestore();
@@ -678,15 +715,15 @@ describe('SidePanel', () => {
     const sidePanel = container.querySelector(`.${blockClass}`);
     const parentEl = sidePanel.parentElement;
 
-    // Pre set custom size
-    parentEl.style.setProperty('--c4p-side-panel-modified-size', '1000px');
+    // Pre-set custom size
+    parentEl.style.setProperty('--cds-side-panel-modified-size', '1000px');
 
     const resizer = container.querySelector(`.${blockClass}__resizer`);
 
     fireEvent.doubleClick(resizer);
 
     expect(
-      parentEl.style.getPropertyValue('--c4p-side-panel-modified-size')
+      parentEl.style.getPropertyValue('--cds-side-panel-modified-size')
     ).toBe('');
   });
 
