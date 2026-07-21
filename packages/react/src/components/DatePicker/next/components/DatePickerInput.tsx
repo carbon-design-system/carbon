@@ -232,7 +232,6 @@ export const DatePickerInput = forwardRef<
         })
       : candidate;
 
-  // Generate class names following Carbon Design System patterns
   const wrapperClasses = classNames(
     `${prefix}--date-picker-input__wrapper`,
     className,

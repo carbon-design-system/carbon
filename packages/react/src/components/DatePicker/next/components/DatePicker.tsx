@@ -19,22 +19,22 @@ import type { DatePickerInputProps } from './DatePickerInput';
  */
 export interface DatePickerProps {
   /**
-   * The type of date picker (Carbon API uses datePickerType, not mode)
+   * The type of date picker
    */
   datePickerType?: 'simple' | 'single' | 'range';
 
   /**
-   * The date format string (Flatpickr-compatible format)
+   * The date format string
    */
   dateFormat?: string;
 
   /**
-   * Minimum selectable date (mm/dd/yyyy format - Carbon API)
+   * Minimum selectable date (mm/dd/yyyy format)
    */
   minDate?: string;
 
   /**
-   * Maximum selectable date (mm/dd/yyyy format - Carbon API)
+   * Maximum selectable date (mm/dd/yyyy format)
    */
   maxDate?: string;
 
@@ -44,7 +44,7 @@ export interface DatePickerProps {
   locale?: string;
 
   /**
-   * Whether the picker is read-only (Carbon uses readOnly, not readonly)
+   * Whether the picker is read-only
    */
   readOnly?: boolean;
 
@@ -69,7 +69,7 @@ export interface DatePickerProps {
   closeOnSelect?: boolean;
 
   /**
-   * Change handler - receives array of Date objects (Carbon API)
+   * Change handler - receives array of Date objects
    */
   onChange?: (dates: Date[]) => void;
 
@@ -97,11 +97,6 @@ export interface DatePickerProps {
    * Initial value
    */
   value?: string;
-
-  /**
-   * Append the calendar to a specific element
-   */
-  appendTo?: HTMLElement;
 }
 
 /**
