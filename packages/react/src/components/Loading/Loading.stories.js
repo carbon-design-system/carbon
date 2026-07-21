@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import Loading from '.';
 import mdx from './Loading.mdx';
 import Button from '../Button';
@@ -62,14 +62,20 @@ Default.argTypes = { ...sharedArgTypes };
 
 export const UXExample = () => {
   const [isActive, setIsActive] = useState(false);
+  const timeoutRef = useRef(null);
 
-  const startLoading = () => setIsActive(true);
-  const stopLoading = () => setIsActive(false);
+  const startLoading = () => {
+    setIsActive(true);
+    timeoutRef.current = setTimeout(() => setIsActive(false), 2000);
+  };
+
+  useEffect(() => {
+    return () => clearTimeout(timeoutRef.current);
+  }, []);
 
   return (
     <main>
       <Button onClick={startLoading}>Start</Button>
-      <Button onClick={stopLoading}>Stop</Button>
       <Loading active={isActive} withOverlay />
     </main>
   );

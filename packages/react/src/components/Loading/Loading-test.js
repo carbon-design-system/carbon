@@ -14,7 +14,6 @@ describe('Loading', () => {
   describe('renders as expected - Component API', () => {
     it('should change classes based on active', () => {
       const { container, rerender } = render(<Loading active />);
-      // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
       const overlay = container.firstChild;
 
       expect(overlay).not.toHaveClass('cds--loading-overlay--stop');
@@ -140,6 +139,31 @@ describe('Loading', () => {
       expect(document.activeElement).toBe(dialog);
 
       await user.tab({ shift: true });
+      expect(document.activeElement).toBe(dialog);
+    });
+
+    it('should return focus to the dialog when focus moves outside overlay', async () => {
+      const user = userEvent.setup();
+
+      render(
+        <div>
+          <button data-testid="before">Before</button>
+          <Loading withOverlay active />
+          <button data-testid="after">After</button>
+        </div>
+      );
+
+      const dialog = screen.getByRole('dialog');
+      const after = screen.getByTestId('after');
+
+      await waitFor(() => {
+        expect(document.activeElement).toBe(dialog);
+      });
+
+      after.focus();
+      expect(document.activeElement).toBe(after);
+
+      await user.tab();
       expect(document.activeElement).toBe(dialog);
     });
 

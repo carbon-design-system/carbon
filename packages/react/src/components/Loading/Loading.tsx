@@ -53,7 +53,7 @@ function Loading({
 }: LoadingProps) {
   const prefix = usePrefix();
   const overlayRef = useRef<HTMLDivElement>(null);
-  const savedFocusRef = useRef<HTMLElement | null>(null);
+  const savedFocusRef = useRef<HTMLElement>(null);
 
   const trapActive = withOverlay && active;
 
@@ -78,7 +78,9 @@ function Loading({
     function handleKeyDown(e: KeyboardEvent) {
       if (e.key !== 'Tab') return;
       // Dialog has no tabbable children; keep focus on the dialog itself.
+      // Redirect too, so focus can't get stranded outside the overlay.
       e.preventDefault();
+      overlayRef.current?.focus();
     }
 
     document.addEventListener('keydown', handleKeyDown, true);
