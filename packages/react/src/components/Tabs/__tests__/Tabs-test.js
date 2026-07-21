@@ -612,7 +612,10 @@ describe('Tab', () => {
     const clientWidthSpy = jest
       .spyOn(HTMLElement.prototype, 'clientWidth', 'get')
       .mockImplementation(function () {
-        return this.getAttribute?.('role') === 'tablist' ? 100 : 0;
+        return this.getAttribute?.('role') === 'tablist' ||
+          this.classList?.contains(`${prefix}--tabs`)
+          ? 100
+          : 0;
       });
     const scrollWidthSpy = jest
       .spyOn(HTMLElement.prototype, 'scrollWidth', 'get')
@@ -651,14 +654,18 @@ describe('Tab', () => {
     }
   });
 
-  it('should recalculate overflow when the tab list width changes', () => {
+  it('should recalculate overflow when the tabs container width changes', () => {
     let resizeCallback;
-    let clientWidth = 0;
+    let containerWidth = 0;
+    let tabListWidth = 0;
     const originalResizeObserver = window.ResizeObserver;
     const clientWidthSpy = jest
       .spyOn(HTMLElement.prototype, 'clientWidth', 'get')
       .mockImplementation(function () {
-        return this.getAttribute?.('role') === 'tablist' ? clientWidth : 0;
+        if (this.classList?.contains(`${prefix}--tabs`)) {
+          return containerWidth;
+        }
+        return this.getAttribute?.('role') === 'tablist' ? tabListWidth : 0;
       });
     const scrollWidthSpy = jest
       .spyOn(HTMLElement.prototype, 'scrollWidth', 'get')
@@ -687,7 +694,10 @@ describe('Tab', () => {
         `${prefix}--tab--overflow-nav-button--hidden`
       );
 
-      clientWidth = 300;
+      // The tabs fit within the full container, even though the visible
+      // overflow buttons reduce the tab list's own available width.
+      containerWidth = 300;
+      tabListWidth = 150;
       act(() => {
         resizeCallback();
       });
@@ -707,7 +717,10 @@ describe('Tab', () => {
     const clientWidthSpy = jest
       .spyOn(HTMLElement.prototype, 'clientWidth', 'get')
       .mockImplementation(function () {
-        return this.getAttribute?.('role') === 'tablist' ? 100 : 0;
+        return this.getAttribute?.('role') === 'tablist' ||
+          this.classList?.contains(`${prefix}--tabs`)
+          ? 100
+          : 0;
       });
     const scrollWidthSpy = jest
       .spyOn(HTMLElement.prototype, 'scrollWidth', 'get')
@@ -776,7 +789,10 @@ describe('Tab', () => {
     const clientWidthSpy = jest
       .spyOn(HTMLElement.prototype, 'clientWidth', 'get')
       .mockImplementation(function () {
-        return this.getAttribute?.('role') === 'tablist' ? 100 : 0;
+        return this.getAttribute?.('role') === 'tablist' ||
+          this.classList?.contains(`${prefix}--tabs`)
+          ? 100
+          : 0;
       });
     const scrollWidthSpy = jest
       .spyOn(HTMLElement.prototype, 'scrollWidth', 'get')

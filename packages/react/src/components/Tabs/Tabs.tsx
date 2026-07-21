@@ -471,6 +471,7 @@ function TabList({
     dismissable,
   } = React.useContext(TabsContext);
   const prefix = usePrefix();
+  const containerRef = useRef<HTMLDivElement>(null);
   const ref = useRef<HTMLDivElement>(null);
   const previousButton = useRef<HTMLButtonElement>(null);
   const nextButton = useRef<HTMLButtonElement>(null);
@@ -528,16 +529,19 @@ function TabList({
   );
 
   const updateOverflowState = useCallback(() => {
-    if (!ref.current) {
+    if (!containerRef.current || !ref.current) {
       return;
     }
 
     // adding 1 in calculations for Firefox support
+    const hasOverflow =
+      ref.current.scrollWidth > containerRef.current.clientWidth + 1;
     setIsNextButtonVisible(
-      ref.current.scrollLeft + ref.current.clientWidth + 1 <
-        ref.current.scrollWidth
+      hasOverflow &&
+        ref.current.scrollLeft + ref.current.clientWidth + 1 <
+          ref.current.scrollWidth
     );
-    setIsScrollable(ref.current.scrollWidth > ref.current.clientWidth + 1);
+    setIsScrollable(hasOverflow);
   }, []);
 
   const isPreviousButtonVisible = ref.current
@@ -672,7 +676,7 @@ function TabList({
   }, []);
 
   useIsomorphicEffect(() => {
-    const element = ref.current;
+    const element = containerRef.current;
     if (!element) {
       return;
     }
@@ -743,7 +747,7 @@ function TabList({
   });
 
   return (
-    <div className={className}>
+    <div ref={containerRef} className={className}>
       <button
         aria-hidden="true"
         tabIndex={-1}
