@@ -11,10 +11,12 @@ const BANNER = `/**
 const sharedConfig = defineConfig({
   banner: BANNER,
   clean: false,
+  deps: {
+    neverBundle: ['@carbon/react'],
+  },
   dts: false,
   entry: ['src/index.js'],
-  external: ['@carbon/react'],
-  failOnWarn: false,
+  failOnWarn: true,
   logLevel: 'warn',
   outputOptions(options) {
     return {

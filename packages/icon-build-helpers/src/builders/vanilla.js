@@ -60,7 +60,7 @@ async function builder(metadata, { output }) {
       clean: false,
       dts: false,
       entry: input,
-      failOnWarn: false,
+      failOnWarn: true,
       format: format === 'commonjs' ? 'cjs' : 'esm',
       logLevel: 'warn',
       inputOptions(inputOptions) {
@@ -88,7 +88,7 @@ async function builder(metadata, { output }) {
     entry: {
       index: 'index.js',
     },
-    failOnWarn: false,
+    failOnWarn: true,
     format: 'iife',
     globalName: 'CarbonIcons',
     logLevel: 'warn',

@@ -74,10 +74,12 @@ async function builder(metadata, { output }) {
   for (const { directory, format } of bundles) {
     await tsdown({
       clean: false,
+      deps: {
+        neverBundle: external,
+      },
       dts: false,
       entry: input,
-      external,
-      failOnWarn: false,
+      failOnWarn: true,
       format: format === 'commonjs' ? 'cjs' : 'esm',
       logLevel: 'warn',
       inputOptions(inputOptions) {
@@ -101,12 +103,14 @@ async function builder(metadata, { output }) {
 
   await tsdown({
     clean: false,
+    deps: {
+      neverBundle: external,
+    },
     dts: false,
     entry: {
       index: 'index.js',
     },
-    external,
-    failOnWarn: false,
+    failOnWarn: true,
     format: 'iife',
     globalName: 'CarbonIconsVue',
     logLevel: 'warn',
