@@ -108,12 +108,9 @@ figma.connect(
   {
     props: {
       children: figma.children('Col*'),
-      disabled: figma.enum('State', {
-        Disabled: true,
-      }),
     },
-    example: ({ children, disabled }) => (
-      <StructuredListRow disabled={disabled}>{children}</StructuredListRow>
+    example: ({ children }) => (
+      <StructuredListRow>{children}</StructuredListRow>
     ),
   }
 );
