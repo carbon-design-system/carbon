@@ -537,7 +537,11 @@ const Pagination = React.forwardRef(
                 )}
           </span>
         </div>
-        <div className={`${prefix}--pagination__right`}>
+        <div
+          className={cx(`${prefix}--pagination__right`, {
+            [`${prefix}--pagination__right--no-content`]:
+              !pagesUnknown && !!renderPageSelect,
+          })}>
           {pagesUnknown ? (
             <span
               className={`${prefix}--pagination__text ${prefix}--pagination__page-text ${prefix}--pagination__unknown-pages-text`}>
@@ -554,22 +558,24 @@ const Pagination = React.forwardRef(
                   onSetPage: handleSetPage,
                 })
               ) : (
-                <Select
-                  id={`${prefix}-pagination-select-${inputId}-right`}
-                  className={`${prefix}--select__page-number`}
-                  labelText={pageSelectLabelText(totalPages)}
-                  inline
-                  hideLabel
-                  onChange={handlePageInputChange}
-                  value={page}
-                  key={page}
-                  disabled={pageInputDisabled || disabled}>
-                  {selectItems}
-                </Select>
+                <>
+                  <Select
+                    id={`${prefix}-pagination-select-${inputId}-right`}
+                    className={`${prefix}--select__page-number`}
+                    labelText={pageSelectLabelText(totalPages)}
+                    inline
+                    hideLabel
+                    onChange={handlePageInputChange}
+                    value={page}
+                    key={page}
+                    disabled={pageInputDisabled || disabled}>
+                    {selectItems}
+                  </Select>
+                  <span className={`${prefix}--pagination__text`}>
+                    {pageRangeText(page, totalPages)}
+                  </span>
+                </>
               )}
-              <span className={`${prefix}--pagination__text`}>
-                {pageRangeText(page, totalPages)}
-              </span>
             </>
           )}
           <div className={`${prefix}--pagination__control-buttons`}>

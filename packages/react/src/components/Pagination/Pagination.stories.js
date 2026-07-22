@@ -243,12 +243,21 @@ PaginationUnknownPages.parameters = {
 export const WithoutPageSizes = (args) => {
   // Omit `pageSizes` to hide the "items per page" selector. `pageSize` sets the
   // fixed page size (falls back to 10 when not provided).
+  // `renderPageSelect` replaces the default page-select <Select> — returning
+  // null hides it entirely.
   const { pageSizes, ...rest } = args ?? {};
 
-  return <Pagination pageSize={10} totalItems={103} {...rest} />;
+  return (
+    <Pagination
+      pageSize={10}
+      totalItems={103}
+      renderPageSelect={() => null}
+      {...rest}
+    />
+  );
 };
 
-WithoutPageSizes.storyName = 'Without page sizes';
+WithoutPageSizes.storyName = 'Without page sizes and render page select';
 WithoutPageSizes.parameters = {
   controls: {
     exclude: ['pageSizes', 'itemsPerPageText', 'pageSizeInputDisabled'],

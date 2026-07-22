@@ -136,6 +136,10 @@
     @container pagination (max-width: 42rem) {
       border-inline-start: 0;
     }
+
+    &.#{$prefix}--pagination__right--no-content {
+      border-inline-start: 0;
+    }
   }
 
   .#{$prefix}--pagination__left,
@@ -182,17 +186,11 @@
 
     &.#{$prefix}--pagination__left--no-sizer {
       padding: 0;
-
-      span.#{$prefix}--pagination__text.#{$prefix}--pagination__items-count {
-        margin-inline-start: 0;
-      }
     }
 
     // 42rem = 'md' breakpoint width
-    &:not(.#{$prefix}--pagination__left--no-sizer) {
-      @container pagination (min-width: 42rem) {
-        padding: 0 $spacing-05;
-      }
+    @container pagination (min-width: 42rem) {
+      padding: 0 $spacing-05;
     }
   }
 
