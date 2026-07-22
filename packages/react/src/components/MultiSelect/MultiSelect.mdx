@@ -1,7 +1,7 @@
 import { ArgTypes, Canvas, Story, Meta } from '@storybook/addon-docs/blocks';
 
 import * as MultiSelect from './MultiSelect.stories';
-import { Filterable, FilterableWithCustomSearch } from './MultiSelect.stories';
+import { Filterable } from './MultiSelect.stories';
 import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
 
 <Meta isTemplate />
@@ -22,7 +22,6 @@ import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
   - [With initial selected items](#with-initial-selected-items)
   - [Select all](#select-all)
   - [Filtering](#filtering)
-  - [Custom search](#custom-search)
   - [With layer](#with-layer)
 - [Component API](#component-api)
   - [`downshiftProps`](#downshiftprops)
@@ -97,20 +96,6 @@ selectable items to a subset.
     {
       title: 'Open in Stackblitz',
       onClick: () => stackblitzPrefillConfig(Filterable),
-    },
-  ]}
-/>
-
-### Custom search
-
-Use `onInputValueChange` to update custom search results.
-
-<Canvas
-  of={FilterableWithCustomSearch}
-  additionalActions={[
-    {
-      title: 'Open in Stackblitz',
-      onClick: () => stackblitzPrefillConfig(FilterableWithCustomSearch),
     },
   ]}
 />
