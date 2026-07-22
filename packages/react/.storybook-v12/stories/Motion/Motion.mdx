@@ -26,8 +26,8 @@ Two surface kinds are defined:
 1. reveal — animates a single element between two CSS states (e.g. block-size,
    opacity, clip-path). Works with the Motion library or can be done with the
    static CSS output from the `@carbon/motion` package.
-2. shared-element — morphs one element into another. Currently done with the
-   Motion library, with View Transitions support coming soon.
+2. shared-element — morphs one element into another. Currently implemented with
+   the Motion library.
 
 | Surface      | Kind             | Duration      | Use case                                                  |
 | ------------ | ---------------- | ------------- | --------------------------------------------------------- |
@@ -93,8 +93,7 @@ transitions, and `@starting-style` rules from the shared surface map.
 
 **`shared-element` surfaces (`expand`, `invoke`) currently don't have no
 CSS-only form** — they require the Motion library. The mixin will throw a Sass
-error if you pass one. We are working to include View Transitions so the
-`shared-element` surfaces are covered as well.
+error if you pass one.
 
 #### Sass setup
 
