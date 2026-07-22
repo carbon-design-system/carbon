@@ -168,13 +168,14 @@ function FileUploaderDropContainer({
     }, []);
   }
 
-  const handleFiles = (event: SyntheticEvent<HTMLElement>, files: File[]) => {
-    if (!files.length) return onAddFiles(event, { addedFiles: [] });
-
+  const getAddedFiles = (files: File[]) => {
+    if (!files.length) return [];
     const filesToValidate = multiple ? files : [files[0]];
-    const addedFiles = validateFiles(filesToValidate);
+    return validateFiles(filesToValidate);
+  };
 
-    return onAddFiles(event, { addedFiles });
+  const handleFiles = (event: SyntheticEvent<HTMLElement>, files: File[]) => {
+    return onAddFiles(event, { addedFiles: getAddedFiles(files) });
   };
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -205,27 +206,22 @@ function FileUploaderDropContainer({
           return acc;
         }, [])
       : [...event.dataTransfer.files];
+    const addedFiles = getAddedFiles(files);
 
     if (
       inputRef.current &&
       event.dataTransfer.files instanceof window.FileList
     ) {
       try {
-        let droppedFiles = event.dataTransfer.files;
-
-        if (!multiple && files.length) {
-          const dataTransfer = new window.DataTransfer();
-          dataTransfer.items.add(files[0]);
-          droppedFiles = dataTransfer.files;
-        }
-
-        inputRef.current.files = droppedFiles;
+        const dataTransfer = new window.DataTransfer();
+        addedFiles.forEach((file) => dataTransfer.items.add(file));
+        inputRef.current.files = dataTransfer.files;
       } catch {
         // Some environments expose FileList-like objects that the native setter rejects.
       }
     }
 
-    return handleFiles(event, files);
+    return onAddFiles(event, { addedFiles });
   };
 
   const handleClick = () => {
