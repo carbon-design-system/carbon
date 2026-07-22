@@ -256,7 +256,7 @@ async function emitDeclarations(tsconfigPath, outDir) {
   }
 
   if (diagnostics.length > 0) {
-    console.warn(formatDiagnostics(diagnostics));
+    throw new Error(formatDiagnostics(diagnostics));
   }
 }
 

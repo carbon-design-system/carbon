@@ -272,11 +272,7 @@ async function emitReactDeclarations(tsconfigPath, outDir) {
   }
 
   if (diagnostics.length > 0) {
-    // Some source files currently report type issues during declaration emit,
-    // but TypeScript can still write the declaration files we need. Surface the
-    // diagnostics so they are visible during builds without making this package
-    // fail to publish.
-    console.warn(formatDiagnostics(diagnostics));
+    throw new Error(formatDiagnostics(diagnostics));
   }
 }
 
