@@ -85,6 +85,11 @@ describe('Button', () => {
     expect(screen.getByRole('button')).toBeInTheDocument();
   });
 
+  it('should not pass tooltipPosition to the button element when hasIconOnly=false', () => {
+    render(<Button tooltipPosition="bottom" />);
+    expect(screen.getByRole('button')).not.toHaveAttribute('tooltipposition');
+  });
+
   it.each([
     ['primary', 'cds--btn'],
     ['secondary', 'cds--btn--secondary'],
