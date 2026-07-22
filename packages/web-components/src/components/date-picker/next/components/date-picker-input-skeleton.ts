@@ -15,7 +15,7 @@ import { carbonElement as customElement } from '../../../../globals/decorators/c
 /**
  * Skeleton version of the input box for date picker.
  */
-@customElement(`${prefix}-date-picker-input-skeleton`)
+@customElement(`${prefix}-date-picker-v2-input-skeleton`)
 class CDSDatePickerInputSkeleton extends LitElement {
   /**
    * Specify whether the label should be hidden, or not

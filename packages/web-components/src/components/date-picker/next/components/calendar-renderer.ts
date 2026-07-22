@@ -21,11 +21,11 @@ import styles from './date-picker.scss?lit';
  * Calendar renderer for date picker.
  * Replaces Flatpickr's calendar UI with a lightweight, framework-agnostic implementation.
  *
- * @element cds-date-picker-calendar
- * @fires cds-date-picker-calendar-date-select - Fired when a date is selected
- * @fires cds-date-picker-calendar-month-change - Fired when the month changes
+ * @element cds-date-picker-v2-calendar
+ * @fires cds-date-picker-v2-calendar-date-select - Fired when a date is selected
+ * @fires cds-date-picker-v2-calendar-month-change - Fired when the month changes
  */
-@customElement(`${prefix}-date-picker-calendar`)
+@customElement(`${prefix}-date-picker-v2-calendar`)
 class CDSDatePickerCalendar extends LitElement {
   /**
    * The currently displayed month (Temporal.PlainYearMonth)
@@ -114,7 +114,7 @@ class CDSDatePickerCalendar extends LitElement {
     }
 
     this.dispatchEvent(
-      new CustomEvent(`${prefix}-date-picker-calendar-date-select`, {
+      new CustomEvent(`${prefix}-date-picker-v2-calendar-date-select`, {
         bubbles: true,
         composed: true,
         detail: { date },
@@ -127,7 +127,7 @@ class CDSDatePickerCalendar extends LitElement {
    */
   private _dispatchMonthChange() {
     this.dispatchEvent(
-      new CustomEvent(`${prefix}-date-picker-calendar-month-change`, {
+      new CustomEvent(`${prefix}-date-picker-v2-calendar-month-change`, {
         bubbles: true,
         composed: true,
         detail: { month: this._currentMonth },

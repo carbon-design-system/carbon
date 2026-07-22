@@ -5,62 +5,66 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-// Import shared framework-agnostic styles from primitives (built output)
-@use '@carbon/styles/scss/components/date-picker/' as *;
+@use '@carbon/styles/scss/components/date-picker/date-picker' as *;
+@use '@carbon/styles/scss/components/date-picker/date-picker-next' as
+  date-picker-next;
 @use '@carbon/styles/scss/config' as *;
 @use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/styles/scss/theme' as *;
 @use '@carbon/styles/scss/utilities' as *;
+
+@include date-picker;
+@include date-picker-next.date-picker-next-rules;
 
 // =============================================================================
 // WEB COMPONENTS SPECIFIC STYLES
 // These styles add :host() selectors and ::slotted() for shadow DOM
 // =============================================================================
 
-:host(#{$prefix}-date-picker) {
+:host(#{$prefix}-date-picker-v2) {
   @extend .#{$prefix}--date-picker;
-  @extend .#{$prefix}--date-picker--next;
+
+  position: relative;
 }
 
-:host(#{$prefix}-date-picker-input),
-:host(#{$prefix}-date-picker-input-skeleton) {
+:host(#{$prefix}-date-picker-v2-input),
+:host(#{$prefix}-date-picker-v2-input-skeleton) {
   @extend .#{$prefix}--date-picker-container;
-  @extend .#{$prefix}--date-picker--next;
 }
 
-:host(#{$prefix}-date-picker-input[warn]:not([invalid])) {
+:host(#{$prefix}-date-picker-v2-input[warn]:not([invalid])) {
   @extend .#{$prefix}--date-picker-container--warn;
 }
 
-:host(#{$prefix}-date-picker-input[kind='simple']),
-:host(#{$prefix}-date-picker-input-skeleton[kind='simple']) {
+:host(#{$prefix}-date-picker-v2-input[kind='simple']),
+:host(#{$prefix}-date-picker-v2-input-skeleton[kind='simple']) {
   @extend .#{$prefix}--date-picker-container--simple;
 }
 
-:host(#{$prefix}-date-picker-input[kind='simple'][short]),
-:host(#{$prefix}-date-picker-input-skeleton[kind='simple'][short]) {
+:host(#{$prefix}-date-picker-v2-input[kind='simple'][short]),
+:host(#{$prefix}-date-picker-v2-input-skeleton[kind='simple'][short]) {
   @extend .#{$prefix}--date-picker-container--simple;
   @extend .#{$prefix}--date-picker-container--short;
 }
 
-:host(#{$prefix}-date-picker-input[kind='single']),
-:host(#{$prefix}-date-picker-input-skeleton[kind='single']) {
+:host(#{$prefix}-date-picker-v2-input[kind='single']),
+:host(#{$prefix}-date-picker-v2-input-skeleton[kind='single']) {
   @extend .#{$prefix}--date-picker-container--single;
 }
 
-:host(#{$prefix}-date-picker-input[kind='from']),
-:host(#{$prefix}-date-picker-input-skeleton[kind='from']) {
+:host(#{$prefix}-date-picker-v2-input[kind='from']),
+:host(#{$prefix}-date-picker-v2-input-skeleton[kind='from']) {
   @extend .#{$prefix}--date-picker-container--from;
 }
 
-:host(#{$prefix}-date-picker-input[kind='from']),
-:host(#{$prefix}-date-picker-input[kind='to']),
-:host(#{$prefix}-date-picker-input-skeleton[kind='from']),
-:host(#{$prefix}-date-picker-input-skeleton[kind='to']) {
+:host(#{$prefix}-date-picker-v2-input[kind='from']),
+:host(#{$prefix}-date-picker-v2-input[kind='to']),
+:host(#{$prefix}-date-picker-v2-input-skeleton[kind='from']),
+:host(#{$prefix}-date-picker-v2-input-skeleton[kind='to']) {
   @extend .#{$prefix}--date-picker-container--from;
 }
 
-:host(#{$prefix}-date-picker-input) {
+:host(#{$prefix}-date-picker-v2-input) {
   .#{$prefix}--date-picker__icon {
     @extend .#{$prefix}--date-picker__icon;
   }
@@ -87,22 +91,20 @@
   }
 }
 
-:host(#{$prefix}-date-picker-input-skeleton) {
+:host(#{$prefix}-date-picker-v2-input-skeleton) {
   @extend .#{$prefix}--date-picker-input-skeleton;
 }
 
-:host(#{$prefix}-date-picker-input-skeleton[range]) {
+:host(#{$prefix}-date-picker-v2-input-skeleton[range]) {
   @extend .#{$prefix}--date-picker-input-skeleton--range;
 }
 
-:host(#{$prefix}-date-picker-input[ai-label]) {
+:host(#{$prefix}-date-picker-v2-input[ai-label]) {
   @extend .#{$prefix}--date-picker-container--ai-label;
 }
 
 // Calendar component in shadow DOM
-:host(#{$prefix}-date-picker-calendar) {
-  @extend .#{$prefix}--date-picker--next;
-
+:host(#{$prefix}-date-picker-v2-calendar) {
   display: block;
   outline: none;
 

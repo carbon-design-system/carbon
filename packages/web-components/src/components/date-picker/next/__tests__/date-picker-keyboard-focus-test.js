@@ -6,7 +6,7 @@
  */
 
 /**
- * Keyboard focus regression tests for cds-date-picker (Issue #1174).
+ * Keyboard focus regression tests for cds-date-picker-v2 (Issue #1174).
  *
  * Bug: Tab from the open calendar caused focus to fall back to document.body
  * because _focusNextElement() used document.querySelectorAll, which cannot
@@ -23,13 +23,13 @@
 import '@carbon/web-components/es/components/date-picker/next/index.js';
 import { fixture, html, expect } from '@open-wc/testing';
 
-describe('cds-date-picker keyboard navigation – Tab from calendar (Issue #1174)', function () {
+describe('cds-date-picker-v2 keyboard navigation – Tab from calendar (Issue #1174)', function () {
   // Allow extra time for ES-module loading when multiple test files run concurrently.
   this.timeout(10000);
 
   /**
    * Build a page scaffold:
-   *   [button#sentinel-before] [cds-date-picker] [button#sentinel-after]
+   *   [button#sentinel-before] [cds-date-picker-v2] [button#sentinel-after]
    *
    * The sentinel buttons are plain light-DOM elements.  We verify that Tab
    * from the calendar ultimately results in focus leaving the date picker
@@ -39,13 +39,13 @@ describe('cds-date-picker keyboard navigation – Tab from calendar (Issue #1174
     const container = await fixture(html`
       <div>
         <button id="sentinel-before" type="button">Before date picker</button>
-        <cds-date-picker id="test-picker">
-          <cds-date-picker-input
+        <cds-date-picker-v2 id="test-picker">
+          <cds-date-picker-v2-input
             kind="single"
             label-text="Date"
             placeholder="mm/dd/yyyy">
-          </cds-date-picker-input>
-        </cds-date-picker>
+          </cds-date-picker-v2-input>
+        </cds-date-picker-v2>
         <button id="sentinel-after" type="button">After date picker</button>
       </div>
     `);
@@ -59,7 +59,7 @@ describe('cds-date-picker keyboard navigation – Tab from calendar (Issue #1174
 
   /**
    * Open the calendar programmatically via the adapter.
-   * @param {HTMLElement} picker - The cds-date-picker element under test.
+   * @param {HTMLElement} picker - The cds-date-picker-v2 element under test.
    */
   async function openCalendar(picker) {
     picker._adapter.send('INPUT_FOCUS', { inputType: 'from' });
@@ -69,12 +69,12 @@ describe('cds-date-picker keyboard navigation – Tab from calendar (Issue #1174
 
   /**
    * Return the focusable calendar div from inside the calendar renderer's shadow DOM.
-   * @param {HTMLElement} picker - The cds-date-picker element under test.
+   * @param {HTMLElement} picker - The cds-date-picker-v2 element under test.
    * @returns {HTMLElement|null} The calendar div, or null if not open.
    */
   function getCalendarDiv(picker) {
     const calendarElement = picker.shadowRoot?.querySelector(
-      'cds-date-picker-calendar'
+      'cds-date-picker-v2-calendar'
     );
     return (
       calendarElement?.shadowRoot?.querySelector(
@@ -85,7 +85,7 @@ describe('cds-date-picker keyboard navigation – Tab from calendar (Issue #1174
 
   /**
    * Return the exit sentinel span from the date picker's shadow root.
-   * @param {HTMLElement} picker - The cds-date-picker element under test.
+   * @param {HTMLElement} picker - The cds-date-picker-v2 element under test.
    * @returns {HTMLElement|null} The sentinel span.
    */
   function getExitSentinel(picker) {
@@ -149,7 +149,7 @@ describe('cds-date-picker keyboard navigation – Tab from calendar (Issue #1174
     // Calendar should be closed.
     expect(picker.open).to.be.false;
     expect(
-      picker.shadowRoot?.querySelector('cds-date-picker-calendar')
+      picker.shadowRoot?.querySelector('cds-date-picker-v2-calendar')
     ).to.equal(null);
 
     // Sentinel must be deactivated — invisible to Tab again.
@@ -226,7 +226,7 @@ describe('cds-date-picker keyboard navigation – Tab from calendar (Issue #1174
 
     expect(picker.open).to.be.false;
     expect(
-      picker.shadowRoot?.querySelector('cds-date-picker-calendar')
+      picker.shadowRoot?.querySelector('cds-date-picker-v2-calendar')
     ).to.equal(
       null,
       'Calendar element should be removed from the DOM after Tab-close'
@@ -256,7 +256,7 @@ describe('cds-date-picker keyboard navigation – Tab from calendar (Issue #1174
     await picker.updateComplete;
     await new Promise((resolve) => setTimeout(resolve, 50));
 
-    const datePickerInput = picker.querySelector('cds-date-picker-input');
+    const datePickerInput = picker.querySelector('cds-date-picker-v2-input');
     const innerInput = datePickerInput.shadowRoot?.querySelector('input');
     expect(innerInput).to.exist;
     expect(datePickerInput.shadowRoot?.activeElement).to.equal(

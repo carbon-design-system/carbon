@@ -101,7 +101,7 @@ const controls = {
       'Provide the text that is displayed when the control is in warning state.',
   },
   onChange: {
-    action: `${prefix}-date-picker-changed`,
+    action: `${prefix}-date-picker-v2-changed`,
   },
   onInput: {
     action: 'input',
@@ -148,13 +148,13 @@ export const Default = {
     warnText,
   }) => {
     return html`
-      <cds-date-picker
+      <cds-date-picker-v2
         date-format="${dateFormat}"
         ?disabled="${disabled}"
         max-date="${maxDate}"
         min-date="${minDate}"
         ?readonly="${readonly}">
-        <cds-date-picker-input
+        <cds-date-picker-v2-input
           kind="${kind === 'range' ? 'from' : kind}"
           label-text="Date Picker label"
           placeholder="${placeholder}"
@@ -163,10 +163,10 @@ export const Default = {
           invalid-text="${invalidText}"
           ?warn="${warn}"
           warn-text="${warnText}">
-        </cds-date-picker-input>
+        </cds-date-picker-v2-input>
         ${kind === 'range'
           ? html`
-              <cds-date-picker-input
+              <cds-date-picker-v2-input
                 kind="to"
                 label-text="End date"
                 placeholder="${placeholder}"
@@ -175,10 +175,10 @@ export const Default = {
                 invalid-text="${invalidText}"
                 ?warn="${warn}"
                 warn-text="${warnText}">
-              </cds-date-picker-input>
+              </cds-date-picker-v2-input>
             `
           : null}
-      </cds-date-picker>
+      </cds-date-picker-v2>
     `;
   },
 };
@@ -200,13 +200,13 @@ export const RangeWithCalendar = {
     warnText,
   }) => {
     return html`
-      <cds-date-picker
+      <cds-date-picker-v2
         date-format="${dateFormat}"
         ?disabled="${disabled}"
         max-date="${maxDate}"
         min-date="${minDate}"
         ?readonly="${readonly}">
-        <cds-date-picker-input
+        <cds-date-picker-v2-input
           kind="from"
           label-text="Start date"
           placeholder="${placeholder}"
@@ -215,8 +215,8 @@ export const RangeWithCalendar = {
           invalid-text="${invalidText}"
           ?warn="${warn}"
           warn-text="${warnText}">
-        </cds-date-picker-input>
-        <cds-date-picker-input
+        </cds-date-picker-v2-input>
+        <cds-date-picker-v2-input
           kind="to"
           label-text="End date"
           placeholder="${placeholder}"
@@ -225,8 +225,8 @@ export const RangeWithCalendar = {
           invalid-text="${invalidText}"
           ?warn="${warn}"
           warn-text="${warnText}">
-        </cds-date-picker-input>
-      </cds-date-picker>
+        </cds-date-picker-v2-input>
+      </cds-date-picker-v2>
     `;
   },
 };
@@ -249,13 +249,13 @@ export const RangeWithCalendarWithLayer = {
     warnText,
   }) => {
     return html`
-      <cds-date-picker
+      <cds-date-picker-v2
         date-format="${dateFormat}"
         ?disabled="${disabled}"
         max-date="${maxDate}"
         min-date="${minDate}"
         ?readonly="${readonly}">
-        <cds-date-picker-input
+        <cds-date-picker-v2-input
           kind="from"
           label-text="Start date"
           placeholder="${placeholder}"
@@ -264,8 +264,8 @@ export const RangeWithCalendarWithLayer = {
           invalid-text="${invalidText}"
           ?warn="${warn}"
           warn-text="${warnText}">
-        </cds-date-picker-input>
-        <cds-date-picker-input
+        </cds-date-picker-v2-input>
+        <cds-date-picker-v2-input
           kind="to"
           label-text="End date"
           placeholder="${placeholder}"
@@ -274,8 +274,8 @@ export const RangeWithCalendarWithLayer = {
           invalid-text="${invalidText}"
           ?warn="${warn}"
           warn-text="${warnText}">
-        </cds-date-picker-input>
-      </cds-date-picker>
+        </cds-date-picker-v2-input>
+      </cds-date-picker-v2>
     `;
   },
 };
@@ -297,11 +297,11 @@ export const Simple = {
     warnText,
   }) => {
     return html`
-      <cds-date-picker
+      <cds-date-picker-v2
         date-format="${dateFormat}"
         max-date="${maxDate}"
         min-date="${minDate}">
-        <cds-date-picker-input
+        <cds-date-picker-v2-input
           ?disabled="${disabled}"
           label-text="Date Picker label"
           placeholder="${placeholder}"
@@ -311,8 +311,8 @@ export const Simple = {
           invalid-text="${invalidText}"
           ?warn="${warn}"
           warn-text="${warnText}">
-        </cds-date-picker-input>
-      </cds-date-picker>
+        </cds-date-picker-v2-input>
+      </cds-date-picker-v2>
     `;
   },
 };
@@ -335,11 +335,11 @@ export const SimpleWithLayer = {
     warnText,
   }) => {
     return html`
-      <cds-date-picker
+      <cds-date-picker-v2
         date-format="${dateFormat}"
         max-date="${maxDate}"
         min-date="${minDate}">
-        <cds-date-picker-input
+        <cds-date-picker-v2-input
           ?disabled="${disabled}"
           label-text="Date Picker label"
           placeholder="${placeholder}"
@@ -349,8 +349,8 @@ export const SimpleWithLayer = {
           invalid-text="${invalidText}"
           ?warn="${warn}"
           warn-text="${warnText}">
-        </cds-date-picker-input>
-      </cds-date-picker>
+        </cds-date-picker-v2-input>
+      </cds-date-picker-v2>
     `;
   },
 };
@@ -372,13 +372,13 @@ export const SingleWithCalendar = {
     warnText,
   }) => {
     return html`
-      <cds-date-picker
+      <cds-date-picker-v2
         date-format="${dateFormat}"
         ?disabled="${disabled}"
         max-date="${maxDate}"
         min-date="${minDate}"
         ?readonly="${readonly}">
-        <cds-date-picker-input
+        <cds-date-picker-v2-input
           kind="single"
           label-text="Date Picker label"
           placeholder="${placeholder}"
@@ -387,8 +387,8 @@ export const SingleWithCalendar = {
           invalid-text="${invalidText}"
           ?warn="${warn}"
           warn-text="${warnText}">
-        </cds-date-picker-input>
-      </cds-date-picker>
+        </cds-date-picker-v2-input>
+      </cds-date-picker-v2>
     `;
   },
 };
@@ -411,13 +411,13 @@ export const SingleWithCalendarWithLayer = {
     warnText,
   }) => {
     return html`
-      <cds-date-picker
+      <cds-date-picker-v2
         date-format="${dateFormat}"
         ?disabled="${disabled}"
         max-date="${maxDate}"
         min-date="${minDate}"
         ?readonly="${readonly}">
-        <cds-date-picker-input
+        <cds-date-picker-v2-input
           kind="single"
           label-text="Date Picker label"
           placeholder="${placeholder}"
@@ -426,8 +426,8 @@ export const SingleWithCalendarWithLayer = {
           invalid-text="${invalidText}"
           ?warn="${warn}"
           warn-text="${warnText}">
-        </cds-date-picker-input>
-      </cds-date-picker>
+        </cds-date-picker-v2-input>
+      </cds-date-picker-v2>
     `;
   },
 };
@@ -447,10 +447,10 @@ export const Skeleton = {
   args: { hideLabel: false, range: true },
   argTypes: skeletonControls,
   render: ({ hideLabel, range }) => html`
-    <cds-date-picker-input-skeleton
+    <cds-date-picker-v2-input-skeleton
       ?hide-label="${hideLabel}"
       ?range="${range}">
-    </cds-date-picker-input-skeleton>
+    </cds-date-picker-v2-input-skeleton>
   `,
   decorators: [(story) => html` <div>${story()}</div> `],
   parameters: {
@@ -508,13 +508,13 @@ export const WithAILabel = {
     warnText,
   }) => {
     return html`
-      <cds-date-picker
+      <cds-date-picker-v2
         date-format="${dateFormat}"
         ?disabled="${disabled}"
         max-date="${maxDate}"
         min-date="${minDate}"
         ?readonly="${readonly}">
-        <cds-date-picker-input
+        <cds-date-picker-v2-input
           kind="single"
           label-text="Date Picker label"
           placeholder="${placeholder}"
@@ -526,8 +526,8 @@ export const WithAILabel = {
           <cds-ai-label alignment="bottom-left">
             ${content}${actions}</cds-ai-label
           >
-        </cds-date-picker-input>
-      </cds-date-picker>
+        </cds-date-picker-v2-input>
+      </cds-date-picker-v2>
     `;
   },
 };

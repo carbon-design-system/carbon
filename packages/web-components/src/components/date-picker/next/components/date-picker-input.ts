@@ -28,9 +28,9 @@ export { DATE_PICKER_INPUT_COLOR_SCHEME, DATE_PICKER_INPUT_KIND };
 /**
  * The input box for date picker.
  *
- * @element cds-date-picker-input
+ * @element cds-date-picker-v2-input
  */
-@customElement(`${prefix}-date-picker-input`)
+@customElement(`${prefix}-date-picker-v2-input`)
 class CDSDatePickerInput extends FocusMixin(LitElement) {
   /**
    * `true` if there is an AI Label.
@@ -73,7 +73,7 @@ class CDSDatePickerInput extends FocusMixin(LitElement) {
   private _handleIconButtonClick(event: MouseEvent) {
     event.stopPropagation();
     this.dispatchEvent(
-      new CustomEvent(`${prefix}-date-picker-icon-click`, {
+      new CustomEvent(`${prefix}-date-picker-v2-icon-click`, {
         bubbles: true,
         composed: true,
       })
@@ -88,7 +88,7 @@ class CDSDatePickerInput extends FocusMixin(LitElement) {
    */
   private _handleInputClick = () => {
     this.dispatchEvent(
-      new CustomEvent(`${prefix}-date-picker-input-click`, {
+      new CustomEvent(`${prefix}-date-picker-v2-input-click`, {
         bubbles: true,
         composed: true,
         detail: {
@@ -115,7 +115,7 @@ class CDSDatePickerInput extends FocusMixin(LitElement) {
   private _handleFocus = () => {
     // Dispatch custom event for input focus
     this.dispatchEvent(
-      new CustomEvent(`${prefix}-date-picker-input-focus`, {
+      new CustomEvent(`${prefix}-date-picker-v2-input-focus`, {
         bubbles: true,
         composed: true,
         detail: {
@@ -131,7 +131,7 @@ class CDSDatePickerInput extends FocusMixin(LitElement) {
   private _handleBlur = () => {
     // Dispatch custom event for input blur
     this.dispatchEvent(
-      new CustomEvent(`${prefix}-date-picker-input-blur`, {
+      new CustomEvent(`${prefix}-date-picker-v2-input-blur`, {
         bubbles: true,
         composed: true,
         detail: {
@@ -458,7 +458,7 @@ class CDSDatePickerInput extends FocusMixin(LitElement) {
    * A selector that will return the parent date picker.
    */
   static get selectorParent() {
-    return `${prefix}-date-picker`;
+    return `${prefix}-date-picker-v2`;
   }
 
   /**
@@ -481,7 +481,7 @@ class CDSDatePickerInput extends FocusMixin(LitElement) {
    * The name of the custom event fired when the input is clicked.
    */
   static get inputClickEventName() {
-    return `${prefix}-date-picker-input-click`;
+    return `${prefix}-date-picker-v2-input-click`;
   }
 
   static shadowRootOptions = {
