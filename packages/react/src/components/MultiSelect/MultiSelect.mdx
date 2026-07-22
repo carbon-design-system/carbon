@@ -103,10 +103,7 @@ selectable items to a subset.
 
 ### Custom search
 
-Use `onInputValueChange` to request or calculate custom search results. When the
-returned `items` are already filtered, provide a `filterItems` function that
-returns them unchanged so Carbon does not apply its default label-based filter a
-second time.
+Use `onInputValueChange` to update custom search results.
 
 <Canvas
   of={FilterableWithCustomSearch}

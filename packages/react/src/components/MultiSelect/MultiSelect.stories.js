@@ -189,7 +189,7 @@ const customSearchItems = [
   },
 ];
 
-function bypassClientFiltering(items) {
+function preserveCustomSearchResults(items) {
   return items;
 }
 
@@ -441,7 +441,7 @@ export const FilterableWithCustomSearch = (args) => {
         helperText='Try searching for "fruit" or "green"'
         items={searchResults}
         itemToString={(item) => (item ? item.text : '')}
-        filterItems={bypassClientFiltering}
+        filterItems={preserveCustomSearchResults}
         onInputValueChange={handleInputValueChange}
       />
     </div>

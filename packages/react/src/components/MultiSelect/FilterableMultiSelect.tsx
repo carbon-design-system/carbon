@@ -160,8 +160,7 @@ export interface FilterableMultiSelectProps<ItemType>
   /**
    * Provide a method that filters the dropdown options based on the current input. Overriding this
    * prop means that you have to handle the filtering logic when the user types in the text input.
-   * Otherwise, a default built-in filtering function will be used. To display items filtered by an
-   * external service without additional client-side filtering, return `items` unchanged.
+   * Otherwise, a default built-in filtering function will be used.
    */
   filterItems?(
     items: readonly ItemType[],
@@ -243,9 +242,7 @@ export interface FilterableMultiSelectProps<ItemType>
   onChange?(changes: { selectedItems: ItemType[] }): void;
 
   /**
-   * A utility for this controlled component to communicate the currently typed input. Use this to
-   * request externally filtered items and return `items` unchanged from `filterItems` to prevent
-   * additional client-side filtering.
+   * Called whenever the input value changes.
    */
   onInputValueChange?: UseComboboxProps<ItemType>['onInputValueChange'];
 
@@ -1202,8 +1199,7 @@ FilterableMultiSelect.propTypes = {
   /**
    * Provide a method that filters the dropdown options based on the current input. Overriding this
    * prop means that you have to handle the filtering logic when the user types in the text input.
-   * Otherwise, a default built-in filtering function will be used. To display items filtered by an
-   * external service without additional client-side filtering, return `items` unchanged.
+   * Otherwise, a default built-in filtering function will be used.
    */
   filterItems: PropTypes.func,
 
@@ -1294,9 +1290,7 @@ FilterableMultiSelect.propTypes = {
   onChange: PropTypes.func,
 
   /**
-   * A utility for this controlled component to communicate the currently typed input. Use this to
-   * request externally filtered items and return `items` unchanged from `filterItems` to prevent
-   * additional client-side filtering.
+   * Called whenever the input value changes.
    */
   onInputValueChange: PropTypes.func,
 
