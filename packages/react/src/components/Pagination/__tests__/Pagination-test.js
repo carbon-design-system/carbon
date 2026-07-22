@@ -766,4 +766,86 @@ describe('Pagination', () => {
       expect(screen.queryByText('custom select')).not.toBeInTheDocument();
     });
   });
+
+  describe('optional pageSizes', () => {
+    it('should not render the sizer when pageSizes is omitted', () => {
+      render(
+        <Pagination
+          totalItems={350}
+          pageSize={10}
+          page={1}
+          itemsPerPageText="Items per page:"
+        />
+      );
+
+      expect(
+        screen.queryByLabelText('Items per page:')
+      ).not.toBeInTheDocument();
+    });
+
+    it('should render without crashing when pageSizes is omitted', () => {
+      const { container } = render(
+        <Pagination totalItems={350} pageSize={10} page={1} />
+      );
+
+      expect(container.firstChild).toBeInTheDocument();
+    });
+
+    it('should show item-range text when pageSizes is omitted', () => {
+      render(<Pagination totalItems={350} pageSize={10} page={1} />);
+
+      expect(screen.getByText('1–10 of 350 items')).toBeInTheDocument();
+    });
+
+    it('should navigate pages with buttons when pageSizes is omitted', async () => {
+      const onChange = jest.fn();
+      render(
+        <Pagination
+          totalItems={350}
+          pageSize={10}
+          page={2}
+          onChange={onChange}
+        />
+      );
+
+      await userEvent.click(screen.getByLabelText('Previous page'));
+      expect(onChange).toHaveBeenCalledWith(
+        expect.objectContaining({ page: 1 })
+      );
+    });
+
+    it('should fall back to 10 items per page when neither pageSizes nor pageSize is provided', () => {
+      render(<Pagination totalItems={350} page={1} />);
+
+      // With DEFAULT_PAGE_SIZE=10, first page shows items 1–10
+      expect(screen.getByText('1–10 of 350 items')).toBeInTheDocument();
+    });
+
+    it('should hide the sizer when pageSizes is removed after initial render', async () => {
+      const { rerender } = render(
+        <Pagination
+          totalItems={350}
+          pageSizes={[10, 20]}
+          pageSize={10}
+          page={1}
+          itemsPerPageText="Items per page:"
+        />
+      );
+
+      expect(screen.getByLabelText('Items per page:')).toBeInTheDocument();
+
+      rerender(
+        <Pagination
+          totalItems={350}
+          pageSize={10}
+          page={1}
+          itemsPerPageText="Items per page:"
+        />
+      );
+
+      expect(
+        screen.queryByLabelText('Items per page:')
+      ).not.toBeInTheDocument();
+    });
+  });
 });
