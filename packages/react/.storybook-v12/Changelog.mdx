@@ -1,0 +1,33 @@
+{/\*
+
+- Copyright IBM Corp. 2026
+-
+- This source code is licensed under the Apache-2.0 license found in the
+- LICENSE file in the root directory of this source tree. \*/}
+
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Getting Started/Changelog" name="Changelog" />
+
+# Changelog
+
+### July 22, 2026
+
+Initial motion API has been added to `@carbon/motion` and `@carbon/react`
+packages. Stories along with documentation in the Overview page can be viewed in
+the `Elements/Motion` section of Storybook. The initial work covers definition
+of "surfaces" which are different motion animations we want to standardize
+(currently examples!) and new React wrapper components that implement the
+[Motion library](https://motion.dev/) under the hood. There is an option to also
+utilize native CSS for the "reveal" surfaces.
+
+In terms of accessibility, if use-prefer-reduced-motion is detected, the motion
+API will fallback to the current behavior in Carbon motion. Exploration of
+motion accessibility was done and captured in
+[issue #22686](https://github.com/carbon-design-system/carbon/issues/22686).
+
+We'd like feedback in #carbon-collective channel on Slack on the following:
+
+- Design concerns
+- Accessibility concerns
+- Developer ergonomics/api

@@ -92,6 +92,7 @@ const stories = (baseConfig.stories ?? [])
     );
   })
   .concat(
+    './Changelog.mdx',
     ...(fs.existsSync(deprecatedStoriesDir)
       ? ['./deprecated/**/*.mdx', './deprecated/**/*.stories.@(js|jsx|ts|tsx)']
       : []),
