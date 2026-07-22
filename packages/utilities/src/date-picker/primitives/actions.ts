@@ -16,6 +16,10 @@ import type {
   ValidationErrorPayload,
 } from './types.js';
 
+// TODO: REFACTOR, there is a lot of duplicate code in this file
+// Many states have the same actions, excluding few these should be combined to
+// ONE source of truth
+
 /**
  * Action map - updates context during transitions
  */
@@ -368,7 +372,15 @@ export const actions: ActionMap = {
         context.startDate ||
         context.viewDate ||
         Temporal.Now.plainDateISO();
-      const newFocusedDate = focusedDate.add({ days: -7 });
+      let newFocusedDate = focusedDate.add({ days: -7 });
+
+      // Clamp to minDate if set
+      if (
+        context.minDate &&
+        Temporal.PlainDate.compare(newFocusedDate, context.minDate) < 0
+      ) {
+        newFocusedDate = context.minDate;
+      }
 
       // If we moved to a different month, update viewDate
       const viewDate =
@@ -393,7 +405,15 @@ export const actions: ActionMap = {
         context.startDate ||
         context.viewDate ||
         Temporal.Now.plainDateISO();
-      const newFocusedDate = focusedDate.add({ days: 7 });
+      let newFocusedDate = focusedDate.add({ days: 7 });
+
+      // Clamp to maxDate if set
+      if (
+        context.maxDate &&
+        Temporal.PlainDate.compare(newFocusedDate, context.maxDate) > 0
+      ) {
+        newFocusedDate = context.maxDate;
+      }
 
       // If we moved to a different month, update viewDate
       const viewDate =
@@ -418,7 +438,15 @@ export const actions: ActionMap = {
         context.startDate ||
         context.viewDate ||
         Temporal.Now.plainDateISO();
-      const newFocusedDate = focusedDate.add({ days: -1 });
+      let newFocusedDate = focusedDate.add({ days: -1 });
+
+      // Clamp to minDate if set
+      if (
+        context.minDate &&
+        Temporal.PlainDate.compare(newFocusedDate, context.minDate) < 0
+      ) {
+        newFocusedDate = context.minDate;
+      }
 
       // If we moved to a different month, update viewDate
       const viewDate =
@@ -443,7 +471,15 @@ export const actions: ActionMap = {
         context.startDate ||
         context.viewDate ||
         Temporal.Now.plainDateISO();
-      const newFocusedDate = focusedDate.add({ days: 1 });
+      let newFocusedDate = focusedDate.add({ days: 1 });
+
+      // Clamp to maxDate if set
+      if (
+        context.maxDate &&
+        Temporal.PlainDate.compare(newFocusedDate, context.maxDate) > 0
+      ) {
+        newFocusedDate = context.maxDate;
+      }
 
       // If we moved to a different month, update viewDate
       const viewDate =
@@ -467,9 +503,18 @@ export const actions: ActionMap = {
         return {};
       }
       const newViewDate = context.viewDate.add({ months: -1 });
-      const focusedDate = context.focusedDate
+      let focusedDate = context.focusedDate
         ? context.focusedDate.add({ months: -1 })
         : null;
+
+      // Clamp to minDate if set
+      if (
+        focusedDate &&
+        context.minDate &&
+        Temporal.PlainDate.compare(focusedDate, context.minDate) < 0
+      ) {
+        focusedDate = context.minDate;
+      }
 
       return {
         viewDate: newViewDate,
@@ -487,9 +532,18 @@ export const actions: ActionMap = {
         return {};
       }
       const newViewDate = context.viewDate.add({ months: 1 });
-      const focusedDate = context.focusedDate
+      let focusedDate = context.focusedDate
         ? context.focusedDate.add({ months: 1 })
         : null;
+
+      // Clamp to maxDate if set
+      if (
+        focusedDate &&
+        context.maxDate &&
+        Temporal.PlainDate.compare(focusedDate, context.maxDate) > 0
+      ) {
+        focusedDate = context.maxDate;
+      }
 
       return {
         viewDate: newViewDate,
@@ -517,7 +571,15 @@ export const actions: ActionMap = {
       const dayOfWeek = jsDate.getDay();
       // Move to Sunday (start of week in US calendar)
       const daysToSubtract = dayOfWeek;
-      const newFocusedDate = focusedDate.add({ days: -daysToSubtract });
+      let newFocusedDate = focusedDate.add({ days: -daysToSubtract });
+
+      // Clamp to minDate if set
+      if (
+        context.minDate &&
+        Temporal.PlainDate.compare(newFocusedDate, context.minDate) < 0
+      ) {
+        newFocusedDate = context.minDate;
+      }
 
       // If we moved to a different month, update viewDate
       const viewDate =
@@ -551,7 +613,15 @@ export const actions: ActionMap = {
       const dayOfWeek = jsDate.getDay();
       // Move to Saturday (end of week in US calendar)
       const daysToAdd = 6 - dayOfWeek;
-      const newFocusedDate = focusedDate.add({ days: daysToAdd });
+      let newFocusedDate = focusedDate.add({ days: daysToAdd });
+
+      // Clamp to maxDate if set
+      if (
+        context.maxDate &&
+        Temporal.PlainDate.compare(newFocusedDate, context.maxDate) > 0
+      ) {
+        newFocusedDate = context.maxDate;
+      }
 
       // If we moved to a different month, update viewDate
       const viewDate =
@@ -681,7 +751,15 @@ export const actions: ActionMap = {
         context.startDate ||
         context.viewDate ||
         Temporal.Now.plainDateISO();
-      const newFocusedDate = focusedDate.add({ days: -7 });
+      let newFocusedDate = focusedDate.add({ days: -7 });
+
+      // Clamp to minDate if set
+      if (
+        context.minDate &&
+        Temporal.PlainDate.compare(newFocusedDate, context.minDate) < 0
+      ) {
+        newFocusedDate = context.minDate;
+      }
 
       // If we moved to a different month, update viewDate
       const viewDate =
@@ -706,7 +784,15 @@ export const actions: ActionMap = {
         context.startDate ||
         context.viewDate ||
         Temporal.Now.plainDateISO();
-      const newFocusedDate = focusedDate.add({ days: 7 });
+      let newFocusedDate = focusedDate.add({ days: 7 });
+
+      // Clamp to maxDate if set
+      if (
+        context.maxDate &&
+        Temporal.PlainDate.compare(newFocusedDate, context.maxDate) > 0
+      ) {
+        newFocusedDate = context.maxDate;
+      }
 
       // If we moved to a different month, update viewDate
       const viewDate =
@@ -731,7 +817,15 @@ export const actions: ActionMap = {
         context.startDate ||
         context.viewDate ||
         Temporal.Now.plainDateISO();
-      const newFocusedDate = focusedDate.add({ days: -1 });
+      let newFocusedDate = focusedDate.add({ days: -1 });
+
+      // Clamp to minDate if set (moving backward)
+      if (
+        context.minDate &&
+        Temporal.PlainDate.compare(newFocusedDate, context.minDate) < 0
+      ) {
+        newFocusedDate = context.minDate;
+      }
 
       // If we moved to a different month, update viewDate
       const viewDate =
@@ -756,7 +850,15 @@ export const actions: ActionMap = {
         context.startDate ||
         context.viewDate ||
         Temporal.Now.plainDateISO();
-      const newFocusedDate = focusedDate.add({ days: 1 });
+      let newFocusedDate = focusedDate.add({ days: 1 });
+
+      // Clamp to maxDate if set
+      if (
+        context.maxDate &&
+        Temporal.PlainDate.compare(newFocusedDate, context.maxDate) > 0
+      ) {
+        newFocusedDate = context.maxDate;
+      }
 
       // If we moved to a different month, update viewDate
       const viewDate =
@@ -781,7 +883,15 @@ export const actions: ActionMap = {
         context.startDate ||
         context.viewDate ||
         Temporal.Now.plainDateISO();
-      const newFocusedDate = focusedDate.add({ months: -1 });
+      let newFocusedDate = focusedDate.add({ months: -1 });
+
+      // Clamp to minDate if set
+      if (
+        context.minDate &&
+        Temporal.PlainDate.compare(newFocusedDate, context.minDate) < 0
+      ) {
+        newFocusedDate = context.minDate;
+      }
 
       return {
         focusedDate: newFocusedDate,
@@ -800,7 +910,15 @@ export const actions: ActionMap = {
         context.startDate ||
         context.viewDate ||
         Temporal.Now.plainDateISO();
-      const newFocusedDate = focusedDate.add({ months: 1 });
+      let newFocusedDate = focusedDate.add({ months: 1 });
+
+      // Clamp to maxDate if set
+      if (
+        context.maxDate &&
+        Temporal.PlainDate.compare(newFocusedDate, context.maxDate) > 0
+      ) {
+        newFocusedDate = context.maxDate;
+      }
 
       return {
         focusedDate: newFocusedDate,
@@ -827,7 +945,15 @@ export const actions: ActionMap = {
       );
       const dayOfWeek = jsDate.getDay(); // 0 = Sunday, 6 = Saturday
       const daysToSubtract = dayOfWeek; // Move to Sunday (0 days if already Sunday)
-      const newFocusedDate = focusedDate.add({ days: -daysToSubtract });
+      let newFocusedDate = focusedDate.add({ days: -daysToSubtract });
+
+      // Clamp to minDate if set
+      if (
+        context.minDate &&
+        Temporal.PlainDate.compare(newFocusedDate, context.minDate) < 0
+      ) {
+        newFocusedDate = context.minDate;
+      }
 
       // If we moved to a different month, update viewDate
       const viewDate =
@@ -860,7 +986,15 @@ export const actions: ActionMap = {
       );
       const dayOfWeek = jsDate.getDay(); // 0 = Sunday, 6 = Saturday
       const daysToAdd = dayOfWeek === 6 ? 0 : 6 - dayOfWeek; // Move to Saturday (0 days if already Saturday)
-      const newFocusedDate = focusedDate.add({ days: daysToAdd });
+      let newFocusedDate = focusedDate.add({ days: daysToAdd });
+
+      // Clamp to maxDate if set
+      if (
+        context.maxDate &&
+        Temporal.PlainDate.compare(newFocusedDate, context.maxDate) > 0
+      ) {
+        newFocusedDate = context.maxDate;
+      }
 
       // If we moved to a different month, update viewDate
       const viewDate =

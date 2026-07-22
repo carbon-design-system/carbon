@@ -214,6 +214,17 @@ class CDSDatePickerCalendar extends LitElement {
     // Case 2: One date selected, show preview range with hovered or focused date
     const previewDate = this._hoveredDate || this.focusedDate;
     if (this.selectedDates.length === 1 && previewDate) {
+      // Don't show range preview if the preview date is disabled
+      const isPreviewDisabled =
+        (this.minDate &&
+          Temporal.PlainDate.compare(previewDate, this.minDate) < 0) ||
+        (this.maxDate &&
+          Temporal.PlainDate.compare(previewDate, this.maxDate) > 0);
+
+      if (isPreviewDisabled) {
+        return false;
+      }
+
       const start = this.selectedDates[0];
       const end = previewDate;
 
@@ -275,11 +286,17 @@ class CDSDatePickerCalendar extends LitElement {
    */
   private _getCalendarDays(): Temporal.PlainDate[] {
     const firstDayOfMonth = this._currentMonth.toPlainDate({ day: 1 });
-    // Get the day of week for the first day (0 = Sunday, 6 = Saturday)
-    const firstDayOfWeek = firstDayOfMonth.dayOfWeek % 7;
+
+    // Convert to JS Date to get day of week (0 = Sunday, 6 = Saturday)
+    const jsDate = new Date(
+      firstDayOfMonth.year,
+      firstDayOfMonth.month - 1,
+      firstDayOfMonth.day
+    );
+    const firstDayOfWeek = jsDate.getDay();
 
     // Calculate the start date (may be in previous month)
-    const startDate = firstDayOfMonth.subtract({ days: firstDayOfWeek });
+    const startDate = firstDayOfMonth.add({ days: -firstDayOfWeek });
 
     // Generate 42 days (6 weeks) for consistent grid
     const days: Temporal.PlainDate[] = [];

@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useCallback, useMemo } from 'react';
+import React, { useCallback, useMemo, useState } from 'react';
 import classNames from 'classnames';
 import type { DatePickerContext } from '@carbon/utilities/date-picker';
 import { addDays, plainDateToDate } from '@carbon/utilities/date-picker';
@@ -120,6 +120,11 @@ export function Calendar({
   const { viewDate, startDate, endDate, minDate, maxDate, focusedDate, mode } =
     context;
 
+  // Track hovered date for range preview
+  const [hoveredDate, setHoveredDate] = useState<Temporal.PlainDate | null>(
+    null
+  );
+
   // Generate calendar grid
   const calendarGrid = useMemo(() => {
     if (!viewDate) {
@@ -178,16 +183,25 @@ export function Calendar({
         );
       }
 
-      // If endDate doesn't exist but focusedDate does (user is selecting end date),
-      // show the range between startDate and focusedDate
-      if (focusedDate) {
+      // If endDate doesn't exist, show preview range with hovered or focused date
+      const previewDate = hoveredDate || focusedDate;
+      if (previewDate) {
+        // Don't show range preview if the preview date is disabled
+        const isPreviewDisabled =
+          (minDate && Temporal.PlainDate.compare(previewDate, minDate) < 0) ||
+          (maxDate && Temporal.PlainDate.compare(previewDate, maxDate) > 0);
+
+        if (isPreviewDisabled) {
+          return false;
+        }
+
         const earlierDate =
-          Temporal.PlainDate.compare(startDate, focusedDate) < 0
+          Temporal.PlainDate.compare(startDate, previewDate) < 0
             ? startDate
-            : focusedDate;
+            : previewDate;
         const laterDate =
-          Temporal.PlainDate.compare(startDate, focusedDate) < 0
-            ? focusedDate
+          Temporal.PlainDate.compare(startDate, previewDate) < 0
+            ? previewDate
             : startDate;
 
         return (
@@ -198,7 +212,7 @@ export function Calendar({
 
       return false;
     },
-    [mode, startDate, endDate, focusedDate]
+    [mode, startDate, endDate, hoveredDate, focusedDate, minDate, maxDate]
   );
 
   // Check if a date is focused
@@ -327,6 +341,15 @@ export function Calendar({
               className={dayClasses}
               onMouseDown={(event) => {
                 event.preventDefault();
+              }}
+              onMouseEnter={() => {
+                // track hover in range mode when selecting end date
+                if (mode === 'range' && startDate && !endDate) {
+                  setHoveredDate(date);
+                }
+              }}
+              onMouseLeave={() => {
+                setHoveredDate(null);
               }}
               onClick={() => handleDateClick(date, isDisabled)}
               disabled={isDisabled}

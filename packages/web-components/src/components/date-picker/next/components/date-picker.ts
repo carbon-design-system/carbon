@@ -959,8 +959,8 @@ class CDSDatePicker extends HostListenerMixin(FormMixin(LitElement)) {
       ) {
         // Update context
         this._adapter.updateContext({
-          minDate: this.minDate ? Temporal.PlainDate.from(this.minDate) : null,
-          maxDate: this.maxDate ? Temporal.PlainDate.from(this.maxDate) : null,
+          minDate: parseDateToPlainDate(this.minDate),
+          maxDate: parseDateToPlainDate(this.maxDate),
         });
       }
 
@@ -1057,12 +1057,8 @@ class CDSDatePicker extends HostListenerMixin(FormMixin(LitElement)) {
               <cds-date-picker-v2-calendar
                 .rangeMode="${mode === DATE_PICKER_MODE.RANGE}"
                 .dateFormat="${this.dateFormat || 'm/d/Y'}"
-                .minDate="${this.minDate
-                  ? Temporal.PlainDate.from(this.minDate)
-                  : undefined}"
-                .maxDate="${this.maxDate
-                  ? Temporal.PlainDate.from(this.maxDate)
-                  : undefined}"
+                .minDate="${parseDateToPlainDate(this.minDate) || undefined}"
+                .maxDate="${parseDateToPlainDate(this.maxDate) || undefined}"
                 .selectedDates="${selectedDates}"
                 .viewDate="${context?.viewDate || undefined}"
                 .focusedDate="${context?.focusedDate || null}"
