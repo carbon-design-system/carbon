@@ -248,6 +248,9 @@ export function useDatePicker(
       return;
     }
 
+    // Track whether calendar was open to detect close transitions
+    let wasCalendarOpen = machine.getContext().isOpen;
+
     const unsubscribe = machine.subscribe((transition) => {
       setContext(transition.context);
       setState(transition.to as DatePickerState);
@@ -256,14 +259,13 @@ export function useDatePicker(
       if (transition.to === DatePickerState.CALENDAR_OPEN && onOpen) {
         onOpen();
       }
-      if (
-        (transition.to === DatePickerState.IDLE ||
-          transition.to === DatePickerState.FOCUSED) &&
-        transition.from === DatePickerState.CALENDAR_OPEN &&
-        onClose
-      ) {
+
+      // Call onClose when calendar closes (isOpen transitions from true to false)
+      if (wasCalendarOpen && !transition.context.isOpen && onClose) {
         onClose();
       }
+
+      wasCalendarOpen = transition.context.isOpen;
     });
 
     return unsubscribe;
