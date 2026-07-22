@@ -11,9 +11,9 @@ inputs:
     # Used only by the Bob plugin's managed-comment calls, never by the Bob CLI.
     description: Bob Automation token used only for Bob's triage comment
     required: true
-  BOBSHELL_API_KEY:
+  BOB_INFERENCE_API_KEY:
     # Used only by the Bob subprocess to produce preliminary triage text.
-    description: API key used only by Bob to generate preliminary bug triage
+    description: Bob Shell inference key used to generate preliminary bug triage
     required: true
   enabled:
     description: Specify whether this action should run

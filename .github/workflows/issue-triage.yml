@@ -14,7 +14,7 @@ on:
         required: true
       BOB_AUTOMATION_APP_PRIVATE_KEY:
         required: true
-      TAYLORS_BOB_API_KEY:
+      BOB_INFERENCE_API_KEY:
         required: true
 
 permissions:
@@ -103,5 +103,5 @@ jobs:
           BOB_GITHUB_TOKEN: ${{ steps.generate_bob_token.outputs.token }}
           # The Bob CLI uses this API key only to generate text; neither GitHub
           # token is included in the Bob subprocess environment.
-          BOBSHELL_API_KEY: ${{ secrets.TAYLORS_BOB_API_KEY }}
+          BOB_INFERENCE_API_KEY: ${{ secrets.BOB_INFERENCE_API_KEY }}
           enabled: true

@@ -54,7 +54,8 @@ comments, and run Bob's preliminary triage for newly opened formal Bugs. Carbon
 Automation is the default GitHub client. The Bob plugin declares
 `BOB_GITHUB_TOKEN`, so only Bob's managed triage comment uses the Bob Automation
 client. The Bob CLI receives only its API key and returns text; it receives
-neither GitHub token.
+neither GitHub token. That inference credential is passed through the
+`BOB_INFERENCE_API_KEY` action input and child-process environment variable.
 
 ## Managed comments
 

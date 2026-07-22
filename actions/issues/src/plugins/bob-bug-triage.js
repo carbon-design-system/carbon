@@ -146,7 +146,7 @@ export function createBobEnvironment(environment, apiKey) {
       bobEnvironment[name] = environment[name];
     }
   }
-  bobEnvironment.BOBSHELL_API_KEY = apiKey;
+  bobEnvironment.BOB_INFERENCE_API_KEY = apiKey;
   return bobEnvironment;
 }
 
@@ -205,7 +205,7 @@ export async function runBobBugTriage(context, octokit, runBob = executeBob) {
     return;
   }
 
-  const apiKey = core.getInput('BOBSHELL_API_KEY', { required: true });
+  const apiKey = core.getInput('BOB_INFERENCE_API_KEY', { required: true });
   core.info('[bob-triage] Bob API key input is present');
   const workspace = process.env.GITHUB_WORKSPACE || process.cwd();
   const contextDirectory = join(workspace, BOB_CONTEXT_DIRECTORY);
