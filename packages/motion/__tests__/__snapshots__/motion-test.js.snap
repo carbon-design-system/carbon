@@ -1,4 +1,4 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
 exports[`@carbon/motion @carbon/motion/scss/motion.scss 1`] = `
 [
@@ -48,18 +48,18 @@ exports[`@carbon/motion Public API 1`] = `
   "slow01": "400ms",
   "slow02": "700ms",
   "unstable_tokens": [
-    "fast01",
-    "fast02",
-    "moderate01",
-    "moderate02",
-    "slow01",
-    "slow02",
     "durationFast01",
     "durationFast02",
     "durationModerate01",
     "durationModerate02",
     "durationSlow01",
     "durationSlow02",
+    "fast01",
+    "fast02",
+    "moderate01",
+    "moderate02",
+    "slow01",
+    "slow02",
   ],
 }
 `;

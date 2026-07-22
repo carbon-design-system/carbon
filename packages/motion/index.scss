@@ -1,35 +1,40 @@
 //
-// Copyright IBM Corp. 2018, 2023
+// Copyright IBM Corp. 2018, 2026
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
 //
 
 @use 'sass:map';
+@use './scss/generated/tokens' as generated;
 
-/// Common component easings
-/// @type Map
-/// @access public
-/// @group @carbon/motion
-$easings: (
-  standard: (
-    productive: cubic-bezier(0.2, 0, 0.38, 0.9),
-    expressive: cubic-bezier(0.4, 0.14, 0.3, 1),
-  ),
-  entrance: (
-    productive: cubic-bezier(0, 0, 0.38, 0.9),
-    expressive: cubic-bezier(0, 0, 0.3, 1),
-  ),
-  exit: (
-    productive: cubic-bezier(0.2, 0, 1, 0.9),
-    expressive: cubic-bezier(0.4, 0.14, 1, 1),
-  ),
-);
+// Re-forward all generated token variables as public API
+$easings: generated.$easings !default;
+$duration-fast-01: generated.$duration-fast-01 !default;
+$duration-fast-02: generated.$duration-fast-02 !default;
+$duration-moderate-01: generated.$duration-moderate-01 !default;
+$duration-moderate-02: generated.$duration-moderate-02 !default;
+$duration-slow-01: generated.$duration-slow-01 !default;
+$duration-slow-02: generated.$duration-slow-02 !default;
+
+/// V10 backwards compatibility tokens
+/// @deprecated
+$fast-01: generated.$fast-01 !default;
+/// @deprecated
+$fast-02: generated.$fast-02 !default;
+/// @deprecated
+$moderate-01: generated.$moderate-01 !default;
+/// @deprecated
+$moderate-02: generated.$moderate-02 !default;
+/// @deprecated
+$slow-01: generated.$slow-01 !default;
+/// @deprecated
+$slow-02: generated.$slow-02 !default;
 
 /// Get the transition-timing-function for a given easing and motion mode
 /// @param {String} $name - Can be `standard`, `entrance`, or `exit`
 /// @param {String} $mode [productive] - Can be `productive` or `expressive`
-/// @param {Map} $easings [$carbon--easings] - Easings map
+/// @param {Map} $easings [$easings] - Easings map
 /// @access public
 /// @group @carbon/motion
 /// @return {Function} CSS `cubic-bezier()` function
@@ -54,70 +59,3 @@ $easings: (
 @mixin motion($name, $mode) {
   transition-timing-function: motion($name, $mode);
 }
-
-/// @access public
-/// @type Duration
-/// @group @carbon/motion
-$duration-fast-01: 70ms;
-
-/// @access public
-/// @type Duration
-/// @group @carbon/motion
-$duration-fast-02: 110ms;
-
-/// @access public
-/// @type Duration
-/// @group @carbon/motion
-$duration-moderate-01: 150ms;
-
-/// @access public
-/// @type Duration
-/// @group @carbon/motion
-$duration-moderate-02: 240ms;
-
-/// @access public
-/// @type Duration
-/// @group @carbon/motion
-$duration-slow-01: 400ms;
-
-/// @access public
-/// @type Duration
-/// @group @carbon/motion
-$duration-slow-02: 700ms;
-
-/// V10 backwards compatibility tokens
-/// @access public
-/// @deprecated
-/// @type Duration
-/// @group @carbon/motion
-$fast-01: $duration-fast-01;
-
-/// @access public
-/// @deprecated
-/// @type Duration
-/// @group @carbon/motion
-$fast-02: $duration-fast-02;
-
-/// @access public
-/// @deprecated
-/// @type Duration
-/// @group @carbon/motion
-$moderate-01: $duration-moderate-01;
-
-/// @access public
-/// @deprecated
-/// @type Duration
-/// @group @carbon/motion
-$moderate-02: $duration-moderate-02;
-
-/// @access public
-/// @deprecated
-/// @type Duration
-/// @group @carbon/motion
-$slow-01: $duration-slow-01;
-
-/// @access public
-/// @deprecated
-/// @type Duration
-/// @group @carbon/motion
-$slow-02: $duration-slow-02;

@@ -5,53 +5,31 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-export const fast01 = '70ms';
-export const fast02 = '110ms';
-export const moderate01 = '150ms';
-export const moderate02 = '240ms';
-export const slow01 = '400ms';
-export const slow02 = '700ms';
-// V11 Tokens
-export const durationFast01 = fast01;
-export const durationFast02 = fast02;
-export const durationModerate01 = moderate01;
-export const durationModerate02 = moderate02;
-export const durationSlow01 = slow01;
-export const durationSlow02 = slow02;
-
-export const unstable_tokens = [
-  'fast01',
-  'fast02',
-  'moderate01',
-  'moderate02',
-  'slow01',
-  'slow02',
-  'durationFast01',
-  'durationFast02',
-  'durationModerate01',
-  'durationModerate02',
-  'durationSlow01',
-  'durationSlow02',
-] as const;
+// Token values are generated from src/dtcg/motion.json by `yarn build:tokens`
+// (tasks/build.js) and written to js/generated/tokens.js before this file is
+// bundled. Run `yarn build` to regenerate them.
+export {
+  durationFast01,
+  durationFast02,
+  durationModerate01,
+  durationModerate02,
+  durationSlow01,
+  durationSlow02,
+  fast01,
+  fast02,
+  moderate01,
+  moderate02,
+  slow01,
+  slow02,
+  easings,
+  unstable_tokens,
+} from '../js/generated/tokens.js';
 
 export type EasingName = 'standard' | 'entrance' | 'exit';
 export type EasingMode = 'productive' | 'expressive';
 export type EasingMap = Record<EasingName, Record<EasingMode, string>>;
 
-export const easings: EasingMap = {
-  standard: {
-    productive: 'cubic-bezier(0.2, 0, 0.38, 0.9)',
-    expressive: 'cubic-bezier(0.4, 0.14, 0.3, 1)',
-  },
-  entrance: {
-    productive: 'cubic-bezier(0, 0, 0.38, 0.9)',
-    expressive: 'cubic-bezier(0, 0, 0.3, 1)',
-  },
-  exit: {
-    productive: 'cubic-bezier(0.2, 0, 1, 0.9)',
-    expressive: 'cubic-bezier(0.4, 0.14, 1, 1)',
-  },
-};
+import { easings } from '../js/generated/tokens.js';
 
 export const motion = (name: EasingName, mode: EasingMode) => {
   if (!easings[name]) {

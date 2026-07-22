@@ -27,28 +27,30 @@ either Sass or JavaScript.
 
 ### Sass
 
-`@carbon/motion` exports a `carbon--motion` function and `carbon--motion` mixin
-that you can use to access the value of a motion curve or include that curve as
-the `transition-timing-function` for a selector. To use these helpers, you can
-do the following in your project:
+`@carbon/motion` exports a `motion` function, `motion` mixin, duration
+variables, and an `$easings` map. To use these in your project:
 
 ```scss
-@import '@carbon/motion/scss/motion.scss';
+@use '@carbon/motion';
 
-.my-custom-selector {
-  // Supplies the standard easing curve, using the productive mode by default
-  transition-timing-function: carbon--motion(standard);
-}
+.my-selector {
+  // Use a duration token
+  transition: opacity motion.$duration-fast-02;
 
-.my-custom-selector-v2 {
-  // Supplies the standard easing curve, but with the expressive mode, on the
-  // transition-timing-function property for this selector
-  @include carbon--motion(standard, expressive);
+  // Use the motion() function to get a cubic-bezier curve
+  transition-timing-function: motion.motion(standard, productive);
+
+  // Or use the mixin to set transition-timing-function directly
+  @include motion.motion(standard, expressive);
 }
 ```
 
-Both the `motion` function and mixin support passing in the name of the motion
-curve and the mode you want to work in.
+Both the `motion` function and mixin accept an easing name (`standard`,
+`entrance`, `exit`) and a mode (`productive`, `expressive`).
+
+> **Note for monorepo contributors:** `scss/generated/` is a build artifact and
+> is not committed to git. Run `yarn build` (or `yarn build:tokens` in this
+> package) before using the Sass API locally.
 
 ### JavaScript
 
