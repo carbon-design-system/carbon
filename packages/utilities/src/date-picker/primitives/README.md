@@ -408,11 +408,11 @@ const machine = new DatePickerStateMachine({
 - Outside click detection and calendar closing
 - Proper Temporal API integration
 - AI label positioning
+- Range selection mode
+- Keyboard navigation (arrow keys, Enter, Escape, Tab)
 
 ### 🚧 Pending Features
 
-- Keyboard navigation (arrow keys, Enter, Escape, Tab)
-- Range selection mode
 - Localization support (date formats, RTL languages)
 - Accessibility enhancements (ARIA labels, screen reader support)
 - Performance optimizations for large date ranges
