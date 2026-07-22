@@ -15,7 +15,7 @@ const { SassRenderer } = require('@carbon/test-utils/scss');
 const { render } = SassRenderer.create(__dirname);
 
 describe('scss/components/ai-label', () => {
-  test('hover styles are only applied on devices that support hover', async () => {
+  test('emits AI Label hover selectors only inside any-hover media query', async () => {
     const { result } = await render(`
       @use '../ai-label';
     `);
