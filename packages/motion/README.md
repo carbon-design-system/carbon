@@ -27,28 +27,36 @@ either Sass or JavaScript.
 
 ### Sass
 
-`@carbon/motion` exports a `carbon--motion` function and `carbon--motion` mixin
-that you can use to access the value of a motion curve or include that curve as
-the `transition-timing-function` for a selector. To use these helpers, you can
-do the following in your project:
+`@carbon/motion` exports a `motion` function and `motion` mixin that you can use
+to access the value of a motion curve or include that curve as the
+`transition-timing-function` for a selector. To use these helpers, you can do
+the following in your project:
 
 ```scss
-@import '@carbon/motion/scss/motion.scss';
+@use '@carbon/motion' as motion;
 
 .my-custom-selector {
   // Supplies the standard easing curve, using the productive mode by default
-  transition-timing-function: carbon--motion(standard);
+  transition-timing-function: motion.motion(standard);
 }
 
 .my-custom-selector-v2 {
   // Supplies the standard easing curve, but with the expressive mode, on the
   // transition-timing-function property for this selector
-  @include carbon--motion(standard, expressive);
+  @include motion.motion(standard, expressive);
 }
 ```
 
 Both the `motion` function and mixin support passing in the name of the motion
 curve and the mode you want to work in.
+
+> **Note:** The legacy `@import '@carbon/motion/scss/motion.scss'` and
+> `carbon--motion()` aliases still work but are deprecated. Prefer `@use` in new
+> code.
+
+> **Build note:** Token values are generated at build time from
+> `src/dtcg/motion.json`. Run `yarn build` (or `npm run build`) once after
+> cloning so that `js/generated/` and `scss/generated/` are present.
 
 ### JavaScript
 
