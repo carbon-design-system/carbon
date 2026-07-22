@@ -19,3 +19,11 @@ defineTest(
   null,
   'preview-pagination-to-pagination'
 );
+
+// No `pageSizes` — migrated code must not crash on `sizes[0]`
+defineTest(
+  __dirname,
+  'unstable-pagination-to-pagination',
+  null,
+  'preview-pagination-no-sizer'
+);

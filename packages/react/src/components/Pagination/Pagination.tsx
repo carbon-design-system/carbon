@@ -174,11 +174,13 @@ export interface PaginationProps
 const mapPageSizesToObject = (
   sizes: PaginationProps['pageSizes']
 ): PaginationPageSize[] | undefined =>
-  sizes?.map((size) =>
-    typeof size === 'object' && size !== null
-      ? size
-      : { text: String(size), value: size }
-  );
+  sizes && sizes.length
+    ? sizes.map((size) =>
+        typeof size === 'object' && size !== null
+          ? size
+          : { text: String(size), value: size }
+      )
+    : undefined;
 
 const DEFAULT_PAGE_SIZE = 10;
 

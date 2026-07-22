@@ -821,6 +821,23 @@ describe('Pagination', () => {
       expect(screen.getByText('1–10 of 350 items')).toBeInTheDocument();
     });
 
+    it('should treat an empty pageSizes array as no sizer without crashing', () => {
+      render(
+        <Pagination
+          totalItems={350}
+          pageSizes={[]}
+          pageSize={10}
+          page={1}
+          itemsPerPageText="Items per page:"
+        />
+      );
+
+      expect(
+        screen.queryByLabelText('Items per page:')
+      ).not.toBeInTheDocument();
+      expect(screen.getByText('1–10 of 350 items')).toBeInTheDocument();
+    });
+
     it('should hide the sizer when pageSizes is removed after initial render', async () => {
       const { rerender } = render(
         <Pagination
