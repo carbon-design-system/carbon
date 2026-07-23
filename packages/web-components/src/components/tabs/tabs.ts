@@ -16,6 +16,7 @@ import { forEach } from '../../globals/internal/collection-helpers';
 import ChevronLeft16 from '@carbon/icons/es/chevron--left/16.js';
 import ChevronRight16 from '@carbon/icons/es/chevron--right/16.js';
 import CDSContentSwitcher, {
+  type ContentSwitcherSelectionInteractionType,
   NAVIGATION_DIRECTION,
 } from '../content-switcher/content-switcher';
 import {
@@ -407,8 +408,8 @@ export default class CDSTabs extends HostListenerMixin(CDSContentSwitcher) {
 
   protected _selectionDidChange(
     itemToSelect: CDSTab,
-    interactionType?: 'mouse' | 'keyboard' | undefined
-  ) {
+    interactionType?: ContentSwitcherSelectionInteractionType
+  ): void {
     super._selectionDidChange(itemToSelect, interactionType);
     this._assistiveStatusText = this.selectedItemAssistiveText;
   }
@@ -481,6 +482,14 @@ export default class CDSTabs extends HostListenerMixin(CDSContentSwitcher) {
    */
   @property({ type: Boolean, reflect: true })
   dismissable;
+
+  /**
+   * `true` to opt into moving keyboard focus to the selected tab on initial
+   * mount. By default `cds-tabs` does not move focus on mount (WCAG 2.4.3);
+   * Settable for the rare cases where mount-time focus is desired.
+   */
+  @property({ type: Boolean, reflect: true })
+  autofocus = false;
 
   /**
    * Specify the size of the tabs.
@@ -609,13 +618,27 @@ export default class CDSTabs extends HostListenerMixin(CDSContentSwitcher) {
     return true;
   }
 
-  firstUpdated() {
+  firstUpdated(): void {
     // Call super to run content-switcher init logic (initial selection)
     super.firstUpdated();
     this._tabInitialLoad();
     this._cleanAndCreateIntersectionObserverContainer({ create: true });
     this._syncSecondaryLabels();
     this._syncSizeToTabs();
+    if (this.autofocus) {
+      const { selectorItemEnabled } = this.constructor as typeof CDSTabs;
+      const selected =
+        Array.from(this.querySelectorAll<CDSTab>(selectorItemEnabled)).find(
+          (tab) => tab.selected
+        ) ?? null;
+      if (selected) {
+        // Wait for the selected tab's `tabindex` to reflect `selected` before
+        // focusing, mirroring the user-gesture focus path.
+        Promise.resolve().then(() => {
+          selected.focus();
+        });
+      }
+    }
   }
 
   updated(changedProperties) {
@@ -772,23 +795,25 @@ export default class CDSTabs extends HostListenerMixin(CDSContentSwitcher) {
     });
   }
 
-  protected _tabInitialLoad() {
+  protected _tabInitialLoad(): void {
     const { selectorTablist, selectorItemEnabled } = this
       .constructor as typeof CDSTabs;
-    const { selectionMode, selectedIndex } = this;
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
     const tablist = this.shadowRoot!.querySelector(selectorTablist)!;
     this.tablist = tablist;
-    const firstItem =
-      this.querySelectorAll<CDSTab>(selectorItemEnabled)[selectedIndex];
-    if (firstItem) {
-      if (selectionMode === 'manual') {
-        firstItem.highlighted = true;
+    if (this.selectionMode === 'manual') {
+      const items = this.querySelectorAll<CDSTab>(selectorItemEnabled);
+      // Highlight the consumer-selected tab if present, else the first enabled
+      // tab, so it becomes the roving-tabindex focus target. Selection itself is
+      // owned by the consumer-aware base init; do not force it here.
+      const highlighted =
+        Array.from(items).find((tab) => tab.selected) ?? items[0] ?? null;
+      if (highlighted) {
+        highlighted.highlighted = true;
       }
-      firstItem.selected = true;
-      this.value = firstItem.value;
     }
   }
+
   /**
    * Symbols of keys that triggers opening/closing menu and selecting/deselecting menu item.
    */
