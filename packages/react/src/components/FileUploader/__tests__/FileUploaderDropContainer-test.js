@@ -671,7 +671,7 @@ describe('FileUploaderDropContainer', () => {
     }
   });
 
-  it('should only set validated files on the input', async () => {
+  it('should only set valid files on the input', async () => {
     const onAddFiles = jest.fn();
     const { container } = render(
       <FileUploaderDropContainer
@@ -687,13 +687,20 @@ describe('FileUploaderDropContainer', () => {
     const acceptedFile = new File(['content'], 'accepted.txt', {
       type: 'text/plain',
     });
-    const rejectedFile = new File(['content'], 'README', {
+    const invalidFile = new File(['content'], 'invalid.pdf', {
+      type: 'application/pdf',
+    });
+    const filteredFile = new File(['content'], 'README', {
       type: 'text/plain',
     });
     const sourceInput = document.createElement('input');
     sourceInput.type = 'file';
     sourceInput.multiple = true;
-    await userEvent.upload(sourceInput, [acceptedFile, rejectedFile]);
+    await userEvent.upload(sourceInput, [
+      acceptedFile,
+      invalidFile,
+      filteredFile,
+    ]);
     const acceptedInput = document.createElement('input');
     acceptedInput.type = 'file';
     await userEvent.upload(acceptedInput, acceptedFile);
@@ -706,8 +713,9 @@ describe('FileUploaderDropContainer', () => {
       fireEvent(dropArea, createDropEvent(sourceInput.files));
 
       expect(onAddFiles).toHaveBeenCalledWith(expect.anything(), {
-        addedFiles: [acceptedFile],
+        addedFiles: [acceptedFile, invalidFile],
       });
+      expect(invalidFile.invalidFileType).toBe(true);
       expect(dataTransfer.add).toHaveBeenCalledTimes(1);
       expect(dataTransfer.add).toHaveBeenCalledWith(acceptedFile);
       expect(filesSetter).toHaveBeenCalledWith(acceptedInput.files);

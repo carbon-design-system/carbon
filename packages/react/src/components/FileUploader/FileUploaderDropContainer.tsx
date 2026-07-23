@@ -174,14 +174,10 @@ function FileUploaderDropContainer({
     return validateFiles(filesToValidate);
   };
 
-  const handleFiles = (event: SyntheticEvent<HTMLElement>, files: File[]) => {
-    return onAddFiles(event, { addedFiles: getAddedFiles(files) });
-  };
-
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     const files = [...(event.target.files ?? [])];
 
-    return handleFiles(event, files);
+    return onAddFiles(event, { addedFiles: getAddedFiles(files) });
   };
 
   const handleDrop = (event: DragEvent<HTMLDivElement>) => {
@@ -208,16 +204,15 @@ function FileUploaderDropContainer({
       : [...event.dataTransfer.files];
     const addedFiles = getAddedFiles(files);
 
-    if (
-      inputRef.current &&
-      event.dataTransfer.files instanceof window.FileList
-    ) {
+    if (inputRef.current) {
       try {
-        const dataTransfer = new window.DataTransfer();
-        addedFiles.forEach((file) => dataTransfer.items.add(file));
+        const dataTransfer = new DataTransfer();
+        addedFiles
+          .filter((file) => !file.invalidFileType)
+          .forEach((file) => dataTransfer.items.add(file));
         inputRef.current.files = dataTransfer.files;
       } catch {
-        // Some environments expose FileList-like objects that the native setter rejects.
+        // Some environments reject programmatic file input assignments.
       }
     }
 
