@@ -71,12 +71,12 @@ const controls = {
   maxDate: {
     control: 'text',
     description:
-      'The maximum date that a user can pick to (ISO format: YYYY-MM-DD).',
+      'The maximum date that a user can pick to (mm/dd/yyyy format).',
   },
   minDate: {
     control: 'text',
     description:
-      'The minimum date that a user can start picking from (ISO format: YYYY-MM-DD).',
+      'The minimum date that a user can start picking from (mm/dd/yyyy format).',
   },
   placeholder: {
     control: 'text',
