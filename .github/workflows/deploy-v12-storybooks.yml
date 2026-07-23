@@ -1,0 +1,59 @@
+name: Deploy v12 storybooks to GH pages
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest-larger-disk
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - package: react
+            name: React
+            destination: v12-react-storybook
+            cname: v2-react.carbondesignsystem.com
+          - package: web-components
+            name: Web Components
+            destination: v12-web-components-storybook
+            cname: v3-web-components.carbondesignsystem.com
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6.1.0
+
+      - name: Use Node.js version from .nvmrc
+        uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6.5.0
+        with:
+          node-version-file: '.nvmrc'
+      - name: Install dependencies
+        run: yarn install --immutable
+      - name: Build project
+        run: yarn build
+      - name: Build static ${{ matrix.name }} v12 storybook
+        run: |
+          cd packages/${{ matrix.package }}
+          yarn storybook:v12:build
+      - name: Prepare static output
+        run: |
+          touch packages/${{ matrix.package }}/storybook-static-v12/.nojekyll
+          echo "${{ matrix.cname }}" > packages/${{ matrix.package }}/storybook-static-v12/CNAME
+      - name: Push ${{ matrix.name }} v12 storybook
+        uses: cpina/github-action-push-to-another-repository@55306faa4ed53b815ae49e564af8cfb359d32ae2 # v1.7.3
+        env:
+          API_TOKEN_GITHUB: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+        with:
+          source-directory:
+            'packages/${{ matrix.package }}/storybook-static-v12'
+          destination-github-username: 'carbon-design-system'
+          destination-repository-name: ${{ matrix.destination }}
+          user-name: carbon-bot
+          user-email: carbon@us.ibm.com
+          target-branch: main
+          commit-message: 'chore(website): update v12 storybook'

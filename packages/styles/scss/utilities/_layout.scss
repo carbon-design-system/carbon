@@ -8,8 +8,28 @@
 @use 'sass:map';
 
 @use '../config';
-@use '../layout' as *;
 @use './custom-property';
+@use './convert';
+@use '../spacing' as *;
+
+$layout-tokens: (
+  size: (
+    height: (
+      xs: convert.to-rem(24px),
+      sm: convert.to-rem(32px),
+      md: convert.to-rem(40px),
+      lg: convert.to-rem(48px),
+      xl: convert.to-rem(64px),
+      2xl: convert.to-rem(80px),
+    ),
+  ),
+  density: (
+    padding-inline: (
+      condensed: $spacing-03,
+      normal: $spacing-05,
+    ),
+  ),
+);
 
 /// Enables the use of contextual layout tokens within a component. This mixin should be
 /// included on the outermost selector of the component.
@@ -112,4 +132,80 @@
 /// @access public
 @function density($property) {
   @return -group('density', $property);
+}
+
+/// Emits layout context class rules for a layout group.
+@mixin emit-layout-context-classes($group: size) {
+  $properties: map.get($layout-tokens, $group);
+
+  @if not $properties {
+    @error 'Unknown layout group: #{$group}';
+  }
+
+  @each $property, $steps in $properties {
+    @each $step, $value in $steps {
+      .#{config.$prefix}--layout--#{$group}-#{$step} {
+        @include custom-property.declaration(
+          'layout-#{$group}-#{$property}-context',
+          custom-property.get-var(
+            'layout-#{$group}-#{$property}-#{$step}',
+            $value
+          )
+        );
+        @include custom-property.declaration(
+          'layout-#{$group}-#{$property}',
+          custom-property.get-var('layout-#{$group}-#{$property}-context')
+        );
+      }
+    }
+  }
+}
+
+@mixin emit-layout-tokens {
+  @each $group, $properties in $layout-tokens {
+    @each $property, $steps in $properties {
+      @each $step, $value in $steps {
+        @include custom-property.declaration(
+          'layout-#{$group}-#{$property}-#{$step}',
+          $value
+        );
+      }
+
+      // CSS max() doesn't accept '0' as a value without a unit
+      // stylelint-disable length-zero-no-unit
+      @include custom-property.declaration(
+        'layout-#{$group}-#{$property}-min',
+        0px
+      );
+      // stylelint-enable length-zero-no-unit
+
+      @include custom-property.declaration(
+        'layout-#{$group}-#{$property}-max',
+        999999999px
+      );
+    }
+  }
+}
+
+/// Emits layout context tokens for shadow host elements.
+@mixin emit-layout-tokens-to-shadow-host($host-selector) {
+  @each $group, $properties in $layout-tokens {
+    @each $property, $steps in $properties {
+      @each $step, $value in $steps {
+        :host(#{$host-selector}[#{$group}='#{$step}']) {
+          @include custom-property.declaration(
+            'layout-#{$group}-#{$property}-context',
+            custom-property.get-var(
+              'layout-#{$group}-#{$property}-#{$step}',
+              $value
+            )
+          );
+          @include custom-property.declaration(
+            'layout-#{$group}-#{$property}',
+            custom-property.get-var('layout-#{$group}-#{$property}-context')
+          );
+        }
+      }
+    }
+  }
 }
