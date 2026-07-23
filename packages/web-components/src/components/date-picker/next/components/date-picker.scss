@@ -116,4 +116,9 @@
     inline-size: rem(288px);
     max-inline-size: rem(288px);
   }
+
+  .#{$prefix}--date-picker__day,
+  .#{$prefix}--date-picker__month-nav {
+    font-family: inherit;
+  }
 }
