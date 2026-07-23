@@ -1,3 +1,7 @@
+ignore:
+  - 'packages/react/src/components/DatePicker/next/**'
+  - 'packages/web-components/src/components/date-picker/next/**'
+  - 'packages/utilities/src/date-picker/primitives/**'
 fixes:
   - 'es/components/::packages/web-components/src/components/'
   - 'src/components/::packages/web-components/src/components/'
