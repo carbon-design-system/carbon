@@ -264,6 +264,39 @@ describe('Tile', () => {
       ).toBeInTheDocument();
       spy.mockRestore();
     });
+
+    it('should not render a title attribute when title prop is not provided', () => {
+      const { container } = render(
+        <SelectableTile id="tile-1">Default tile</SelectableTile>
+      );
+      expect(container.firstChild).not.toHaveAttribute('title');
+    });
+
+    it('should render the provided title attribute when title prop is passed', () => {
+      const { container } = render(
+        <SelectableTile id="tile-1" title="My tile">
+          Default tile
+        </SelectableTile>
+      );
+      expect(container.firstChild).toHaveAttribute('title', 'My tile');
+    });
+
+    it('should not give all tiles the same accessible name when title is omitted', () => {
+      render(
+        <div role="group" aria-label="selectable tiles">
+          <SelectableTile data-testid="tile-a" id="tile-1">
+            Tile 1
+          </SelectableTile>
+          <SelectableTile data-testid="tile-b" id="tile-2">
+            Tile 2
+          </SelectableTile>
+        </div>
+      );
+      const tileA = screen.getByTestId('tile-a');
+      const tileB = screen.getByTestId('tile-b');
+      expect(tileA).not.toHaveAttribute('title');
+      expect(tileB).not.toHaveAttribute('title');
+    });
   });
 
   describe('ExpandableTile', () => {
