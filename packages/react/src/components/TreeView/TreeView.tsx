@@ -84,7 +84,7 @@ type TreeViewComponent = {
  * `TreeView`, allowing external state to drive the active/selected nodes.
  *
  * Enable in your app:
- * ```jsx
+ * ```tsx
  * import { FeatureFlags } from '@carbon/react';
  *
  * <FeatureFlags enableTreeviewControllable>

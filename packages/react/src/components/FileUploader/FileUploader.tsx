@@ -179,7 +179,7 @@ export interface FileUploaderHandle {
  * events.
  *
  * Enable in your app:
- * ```jsx
+ * ```tsx
  * import { FeatureFlags } from '@carbon/react';
  *
  * <FeatureFlags enableEnhancedFileUploader>

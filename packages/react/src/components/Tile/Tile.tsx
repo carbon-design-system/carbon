@@ -221,7 +221,7 @@ export interface ClickableTileProps extends HTMLAttributes<HTMLAnchorElement> {
  * inside the tile. **Will be on by default in v12.**
  *
  * Enable in your app:
- * ```jsx
+ * ```tsx
  * import { FeatureFlags } from '@carbon/react';
  *
  * <FeatureFlags enableV12TileDefaultIcons>

@@ -263,7 +263,7 @@ export interface ComposedModalProps extends HTMLAttributes<HTMLDivElement> {
  * strategy that does not rely on sentinel DOM nodes. **Will be on by default in v12.**
  *
  * Enable in your app:
- * ```jsx
+ * ```tsx
  * import { FeatureFlags } from '@carbon/react';
  *
  * <FeatureFlags enableFocusWrapWithoutSentinels>

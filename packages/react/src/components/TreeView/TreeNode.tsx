@@ -253,7 +253,7 @@ const useEllipsisCheck = (
  * used internally by `TreeView` when the flag is on.
  *
  * Enable in your app:
- * ```jsx
+ * ```tsx
  * import { FeatureFlags } from '@carbon/react';
  *
  * <FeatureFlags enableTreeviewControllable>

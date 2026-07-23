@@ -933,7 +933,7 @@ export interface ActionableNotificationProps
  * **Will be on by default in v12.**
  *
  * Enable in your app:
- * ```jsx
+ * ```tsx
  * import { FeatureFlags } from '@carbon/react';
  *
  * <FeatureFlags enableFocusWrapWithoutSentinels>

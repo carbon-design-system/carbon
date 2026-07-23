@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2025
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -271,7 +271,7 @@ export interface ModalProps extends HTMLAttributes<HTMLDivElement> {
  * relying on sentinel DOM nodes. **Will be on by default in v12.**
  *
  * Enable in your app:
- * ```jsx
+ * ```tsx
  * import { FeatureFlags } from '@carbon/react';
  *
  * <FeatureFlags enablePresence enableDialogElement enableFocusWrapWithoutSentinels>

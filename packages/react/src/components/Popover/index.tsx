@@ -171,7 +171,7 @@ export type PopoverComponent = <E extends React.ElementType = 'span'>(
  * dynamic positioning of the popover. **Will be on by default in v12.**
  *
  * Enable in your app:
- * ```jsx
+ * ```tsx
  * import { FeatureFlags } from '@carbon/react';
  *
  * <FeatureFlags enableV12DynamicFloatingStyles>
