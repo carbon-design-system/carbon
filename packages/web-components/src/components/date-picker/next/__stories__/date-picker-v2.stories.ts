@@ -29,6 +29,7 @@ const sizes = {
 const defaultArgs = {
   dateFormat: 'm/d/Y',
   disabled: false,
+  locale: 'en',
   minDate: '',
   maxDate: '',
   readonly: false,
@@ -144,6 +145,7 @@ export const Default = {
     invalid,
     invalidText,
     kind,
+    locale,
     maxDate,
     minDate,
     placeholder,
@@ -156,6 +158,7 @@ export const Default = {
       <cds-preview-date-picker
         date-format="${dateFormat}"
         ?disabled="${disabled}"
+        locale="${locale}"
         max-date="${maxDate}"
         min-date="${minDate}"
         ?readonly="${readonly}">
@@ -196,6 +199,7 @@ export const RangeWithCalendar = {
     disabled,
     invalid,
     invalidText,
+    locale,
     maxDate,
     minDate,
     placeholder,
@@ -208,6 +212,7 @@ export const RangeWithCalendar = {
       <cds-preview-date-picker
         date-format="${dateFormat}"
         ?disabled="${disabled}"
+        locale="${locale}"
         max-date="${maxDate}"
         min-date="${minDate}"
         ?readonly="${readonly}">
@@ -245,6 +250,7 @@ export const RangeWithCalendarWithLayer = {
     disabled,
     invalid,
     invalidText,
+    locale,
     maxDate,
     minDate,
     placeholder,
@@ -257,6 +263,7 @@ export const RangeWithCalendarWithLayer = {
       <cds-preview-date-picker
         date-format="${dateFormat}"
         ?disabled="${disabled}"
+        locale="${locale}"
         max-date="${maxDate}"
         min-date="${minDate}"
         ?readonly="${readonly}">
@@ -293,6 +300,7 @@ export const Simple = {
     disabled,
     invalid,
     invalidText,
+    locale,
     maxDate,
     minDate,
     placeholder,
@@ -304,6 +312,7 @@ export const Simple = {
     return html`
       <cds-preview-date-picker
         date-format="${dateFormat}"
+        locale="${locale}"
         max-date="${maxDate}"
         min-date="${minDate}">
         <cds-preview-date-picker-input
@@ -331,6 +340,7 @@ export const SimpleWithLayer = {
     disabled,
     invalid,
     invalidText,
+    locale,
     maxDate,
     minDate,
     placeholder,
@@ -342,6 +352,7 @@ export const SimpleWithLayer = {
     return html`
       <cds-preview-date-picker
         date-format="${dateFormat}"
+        locale="${locale}"
         max-date="${maxDate}"
         min-date="${minDate}">
         <cds-preview-date-picker-input
@@ -368,6 +379,7 @@ export const SingleWithCalendar = {
     disabled,
     invalid,
     invalidText,
+    locale,
     maxDate,
     minDate,
     placeholder,
@@ -380,6 +392,7 @@ export const SingleWithCalendar = {
       <cds-preview-date-picker
         date-format="${dateFormat}"
         ?disabled="${disabled}"
+        locale="${locale}"
         max-date="${maxDate}"
         min-date="${minDate}"
         ?readonly="${readonly}">
@@ -407,6 +420,7 @@ export const SingleWithCalendarWithLayer = {
     dateFormat,
     invalid,
     invalidText,
+    locale,
     maxDate,
     minDate,
     placeholder,
@@ -419,6 +433,7 @@ export const SingleWithCalendarWithLayer = {
       <cds-preview-date-picker
         date-format="${dateFormat}"
         ?disabled="${disabled}"
+        locale="${locale}"
         max-date="${maxDate}"
         min-date="${minDate}"
         ?readonly="${readonly}">
@@ -504,6 +519,7 @@ export const WithAILabel = {
     disabled,
     invalid,
     invalidText,
+    locale,
     maxDate,
     minDate,
     placeholder,
@@ -516,6 +532,7 @@ export const WithAILabel = {
       <cds-preview-date-picker
         date-format="${dateFormat}"
         ?disabled="${disabled}"
+        locale="${locale}"
         max-date="${maxDate}"
         min-date="${minDate}"
         ?readonly="${readonly}">
