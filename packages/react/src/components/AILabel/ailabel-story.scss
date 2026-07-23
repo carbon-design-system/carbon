@@ -7,6 +7,7 @@
 
 @use '@carbon/styles/scss/type';
 @use '@carbon/styles/scss/theme';
+@use '@carbon/styles/scss/spacing';
 @use '@carbon/react/scss/components/tile';
 
 .ai-label-container-example {
@@ -176,15 +177,15 @@
 
 .ai-label-selectable-tile-container .cds--tile-group > div {
   display: flex;
+  gap: spacing.$spacing-05;
 }
 
 .ai-label-selectable-tile-container .cds--tile-group > div > div {
-  width: 33%;
+  flex: 1 1 0;
 }
 
 .ai-label-selectable-tile-container .cds--tile-group .ai-label-radio-tile,
 .ai-label-selectable-tile-container .cds--tile-group .ai-label-selectable-tile {
-  margin-inline-end: 1rem;
   height: 200px;
 }
 
