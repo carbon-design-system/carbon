@@ -253,25 +253,25 @@ class CDSCodeSnippet extends FocusMixin(LitElement) {
   /**
    * Specify the maximum number of rows to be shown when in collapsed view
    */
-  @property()
+  @property({ type: Number })
   maxCollapsedNumberOfRows = 15;
 
   /**
    * Specify the maximum number of rows to be shown when in expanded view
    */
-  @property()
+  @property({ type: Number })
   maxExpandedNumberOfRows = 0;
 
   /**
    * Specify the minimum number of rows to be shown when in collapsed view
    */
-  @property()
+  @property({ type: Number })
   minCollapsedNumberOfRows = 3;
 
   /**
    * Specify the minimum number of rows to be shown when in expanded view
    */
-  @property()
+  @property({ type: Number })
   minExpandedNumberOfRows = 16;
 
   /**
