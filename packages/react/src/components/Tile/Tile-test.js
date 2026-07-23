@@ -98,11 +98,23 @@ describe('Tile', () => {
       expect(screen.getByTestId('test')).toBeInTheDocument();
     });
 
-    it('should respect decorator prop', () => {
+    it('should respect decorator prop', async () => {
+      const onClick = jest.fn();
       render(
-        <ClickableTile decorator={<AILabel />}>Default tile</ClickableTile>
+        <ClickableTile href="/" decorator={<AILabel />} onClick={onClick}>
+          Default tile
+        </ClickableTile>
       );
-      expect(document.querySelector(`.${prefix}--cds--ai-label`));
+      const aiLabel = screen.getByRole('button', {
+        name: 'AI Show information',
+      });
+      const tile = screen.getByRole('link');
+
+      expect(aiLabel).toBeInTheDocument();
+      expect(tile).not.toContainElement(aiLabel);
+
+      await userEvent.click(aiLabel);
+      expect(onClick).not.toHaveBeenCalled();
     });
 
     it('should respect deprecated slug prop', () => {
