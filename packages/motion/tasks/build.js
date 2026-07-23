@@ -12,27 +12,50 @@ const path = require('path');
 const {
   buildDTCGMotionJS,
   buildDTCGMotionSCSS,
+  buildDTCGMotionSurfacesJS,
+  buildDTCGMotionSurfacesSCSS,
 } = require('./builders/dtcg-motion');
 
-// JS: js/generated/tokens.{js,d.ts}  (gitignored, imported by src/index.ts)
+// ── Output directories ────────────────────────────────────────────────────────
 const jsOutDir = path.resolve(__dirname, '../js/generated');
+const scssOutDir = path.resolve(__dirname, '../scss/generated');
 fs.mkdirSync(jsOutDir, { recursive: true });
+fs.mkdirSync(scssOutDir, { recursive: true });
 
-const { js, dts } = buildDTCGMotionJS();
+// ── JS: js/generated/tokens.{js,d.ts} ────────────────────────────────────────
+const { js: tokensJS, dts: tokensDTS } = buildDTCGMotionJS();
 
-const jsOutPath = path.join(jsOutDir, 'tokens.js');
+const jsTokensPath = path.join(jsOutDir, 'tokens.js');
 console.log('Generating js/generated/tokens.js from DTCG tokens...');
-fs.writeFileSync(jsOutPath, js, 'utf8');
-console.log(`Written: ${jsOutPath}`);
+fs.writeFileSync(jsTokensPath, tokensJS, 'utf8');
+console.log(`Written: ${jsTokensPath}`);
 
-const dtsOutPath = path.join(jsOutDir, 'tokens.d.ts');
+const dtsTokensPath = path.join(jsOutDir, 'tokens.d.ts');
 console.log('Generating js/generated/tokens.d.ts from DTCG tokens...');
-fs.writeFileSync(dtsOutPath, dts, 'utf8');
-console.log(`Written: ${dtsOutPath}`);
+fs.writeFileSync(dtsTokensPath, tokensDTS, 'utf8');
+console.log(`Written: ${dtsTokensPath}`);
 
-// Scss: scss/generated/_tokens.scss  (gitignored, @used by index.scss)
-const scssOutPath = path.resolve(__dirname, '../scss/generated/_tokens.scss');
-fs.mkdirSync(path.dirname(scssOutPath), { recursive: true });
+// ── JS: js/generated/surfaces.{js,d.ts} ──────────────────────────────────────
+const { js: surfacesJS, dts: surfacesDTS } = buildDTCGMotionSurfacesJS();
+
+const jsSurfacesPath = path.join(jsOutDir, 'surfaces.js');
+console.log('Generating js/generated/surfaces.js from DTCG surfaces...');
+fs.writeFileSync(jsSurfacesPath, surfacesJS, 'utf8');
+console.log(`Written: ${jsSurfacesPath}`);
+
+const dtsSurfacesPath = path.join(jsOutDir, 'surfaces.d.ts');
+console.log('Generating js/generated/surfaces.d.ts from DTCG surfaces...');
+fs.writeFileSync(dtsSurfacesPath, surfacesDTS, 'utf8');
+console.log(`Written: ${dtsSurfacesPath}`);
+
+// ── Sass: scss/generated/_tokens.scss ────────────────────────────────────────
+const scssTokensPath = path.join(scssOutDir, '_tokens.scss');
 console.log('Generating scss/generated/_tokens.scss from DTCG tokens...');
-fs.writeFileSync(scssOutPath, buildDTCGMotionSCSS(), 'utf8');
-console.log(`Written: ${scssOutPath}`);
+fs.writeFileSync(scssTokensPath, buildDTCGMotionSCSS(), 'utf8');
+console.log(`Written: ${scssTokensPath}`);
+
+// ── Sass: scss/generated/_surfaces.scss ──────────────────────────────────────
+const scssSurfacesPath = path.join(scssOutDir, '_surfaces.scss');
+console.log('Generating scss/generated/_surfaces.scss from DTCG surfaces...');
+fs.writeFileSync(scssSurfacesPath, buildDTCGMotionSurfacesSCSS(), 'utf8');
+console.log(`Written: ${scssSurfacesPath}`);

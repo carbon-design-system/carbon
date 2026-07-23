@@ -29,7 +29,7 @@
   "scripts": {
     "build:tokens": "node tasks/build.js",
     "build:types": "tsc -p tsconfig.types.json",
-    "build": "yarn clean && yarn build:tokens && carbon-cli bundle src/index.ts --name CarbonMotion && node tasks/build.mjs && yarn build:types",
+    "build": "yarn clean && yarn build:tokens && carbon-cli bundle src/index.ts --name CarbonMotion && yarn build:types",
     "clean": "rimraf es lib umd js/generated scss/generated",
     "postinstall": "ibmtelemetry --config=telemetry.yml"
   },

@@ -19,7 +19,30 @@ const DTCG_SCHEMA_URL =
 
 const SCHEMA_FETCH_TIMEOUT = 10000;
 
-describe('DTCG Schema Validation — src/dtcg/motion.json', () => {
+/**
+ * Validate a DTCG JSON file against the live spec schema, reporting all errors.
+ */
+function validateFile(filePath, validate) {
+  const tokens = JSON.parse(fs.readFileSync(filePath, 'utf8'));
+  const valid = validate(tokens);
+
+  if (!valid) {
+    const relPath = path.relative(path.resolve(__dirname, '..'), filePath);
+    console.error(`\n❌ Validation errors in ${relPath}:`);
+    validate.errors.forEach((err) => {
+      console.error(
+        `  - Path: ${err.instancePath || '/'} | Message: ${err.message}`
+      );
+      if (err.params) {
+        console.error(`    Params:`, JSON.stringify(err.params, null, 2));
+      }
+    });
+  }
+
+  return valid;
+}
+
+describe('DTCG Schema Validation — src/dtcg/', () => {
   let validate;
 
   beforeAll(async () => {
@@ -37,21 +60,11 @@ describe('DTCG Schema Validation — src/dtcg/motion.json', () => {
 
   test('motion.json validates against the DTCG schema', () => {
     const filePath = path.resolve(__dirname, '../src/dtcg/motion.json');
-    const tokens = JSON.parse(fs.readFileSync(filePath, 'utf8'));
-    const valid = validate(tokens);
+    expect(validateFile(filePath, validate)).toBe(true);
+  });
 
-    if (!valid) {
-      console.error('\n❌ Validation errors in motion.json:');
-      validate.errors.forEach((err) => {
-        console.error(
-          `  - Path: ${err.instancePath || '/'} | Message: ${err.message}`
-        );
-        if (err.params) {
-          console.error(`    Params:`, JSON.stringify(err.params, null, 2));
-        }
-      });
-    }
-
-    expect(valid).toBe(true);
+  test('surfaces.json validates against the DTCG schema', () => {
+    const filePath = path.resolve(__dirname, '../src/dtcg/surfaces.json');
+    expect(validateFile(filePath, validate)).toBe(true);
   });
 });
