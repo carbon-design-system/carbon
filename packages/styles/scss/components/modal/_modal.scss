@@ -18,6 +18,7 @@
 @use '../../utilities/component-reset';
 @use '../../utilities/focus-outline' as *;
 @use '../../utilities/high-contrast-mode' as *;
+@use '../../utilities/layout';
 @use '../../utilities/update_fields_on_layer' as *;
 @use '../../utilities/z-index' as *;
 
@@ -98,6 +99,10 @@
     display: grid;
     border: 1px solid $border-subtle-01;
     background-color: $layer;
+    border-end-end-radius: var(--cds-border-radius-box, 0);
+    border-end-start-radius: var(--cds-border-radius-box, 0);
+    border-start-end-radius: var(--cds-border-radius-box, 0);
+    border-start-start-radius: var(--cds-border-radius-box, 0);
     grid-template-columns: 100%;
     grid-template-rows: auto 1fr auto;
     inline-size: 100%;
@@ -321,17 +326,11 @@
   .#{$prefix}--modal-footer {
     display: flex;
     justify-content: flex-end;
-    block-size: convert.to-rem(64px);
-    grid-column: 1/-1;
-    grid-row: -1/-1;
     margin-block-start: auto;
   }
 
   .#{$prefix}--modal-footer .#{$prefix}--btn {
     flex: 0 1 50%;
-    align-items: baseline;
-    margin: 0;
-    block-size: convert.to-rem(64px);
     max-inline-size: none;
   }
 
@@ -349,18 +348,22 @@
   // -----------------------------
 
   .#{$prefix}--modal-close-button {
+    @include layout.use('size', $min: 'xs', $default: 'lg', $max: 'lg');
+    @include layout.use('density', $default: 'normal');
+
     position: absolute;
-    inset-block-start: 0;
-    inset-inline-end: 0;
+    inset-block-start: layout.density('padding-inline');
+    inset-inline-end: layout.density('padding-inline');
   }
 
   .#{$prefix}--modal-close {
-    padding: convert.to-rem(12px);
+    @include layout.use('size', $min: 'xs', $default: 'lg', $max: 'lg');
+    @include layout.use('density', $default: 'normal');
+
     border: 2px solid transparent;
     background-color: transparent;
-    block-size: 3rem;
     cursor: pointer;
-    inline-size: 3rem;
+
     transition: background-color $duration-fast-02 motion(standard, productive);
 
     &:hover {
@@ -372,19 +375,10 @@
       outline: none;
     }
   }
-
-  .#{$prefix}--modal-close::-moz-focus-inner {
-    border: 0;
-  }
-
   .#{$prefix}--modal-close__icon {
     block-size: convert.to-rem(20px);
     fill: $icon-primary;
     inline-size: convert.to-rem(20px);
-  }
-
-  .#{$prefix}--body--with-modal-open {
-    overflow: hidden;
   }
 
   .#{$prefix}--body--with-modal-open .#{$prefix}--modal .#{$prefix}--tooltip,

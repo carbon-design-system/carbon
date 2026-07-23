@@ -14,6 +14,7 @@ import {
   fluidButtonOptions,
 } from '../Button/__story__/fluid-button-set-args';
 import { action } from 'storybook/actions';
+import './button-set-story.scss';
 
 export default {
   title: 'Components/Button/Set Of Buttons',
@@ -85,6 +86,46 @@ export const Default = {
         <ButtonSet fluid={args.fluid} stacked={args.stacked}>
           {buttons.map(({ label, kind, key }) => (
             <Button key={key} kind={kind} onClick={action('onClick')}>
+              {label}
+            </Button>
+          ))}
+        </ButtonSet>
+      </div>
+    );
+  },
+};
+
+export const WithPotentialFix = {
+  render: (args) => {
+    const buttons = args.Buttons;
+    const containerStyle = {
+      inlineSize: args['Container width']
+        ? `${args['Container width']}px`
+        : undefined,
+      maxInlineSize: '100%',
+    };
+
+    if (args['Container visible']) {
+      // 42px is the padding around the story
+      containerStyle.boxShadow = '0 0 0 42px var(--cds-layer-01)';
+    }
+
+    if (!buttons || buttons.length === 0) {
+      return <div>Select one or more buttons.</div>;
+    }
+
+    return (
+      <div style={containerStyle}>
+        <ButtonSet
+          fluid={args.fluid}
+          stacked={args.stacked}
+          className="potential-fix-set">
+          {buttons.map(({ label, kind, key }) => (
+            <Button
+              key={key}
+              kind={kind}
+              onClick={action('onClick')}
+              className="potential-fix">
               {label}
             </Button>
           ))}

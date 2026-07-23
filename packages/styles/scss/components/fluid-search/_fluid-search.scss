@@ -19,6 +19,10 @@
 @mixin fluid-search {
   .#{$prefix}--search--fluid {
     block-size: convert.to-rem(64px);
+    border-end-end-radius: var(--cds-border-radius-input, 0);
+    border-end-start-radius: var(--cds-border-radius-input, 0);
+    border-start-end-radius: var(--cds-border-radius-input, 0);
+    border-start-start-radius: var(--cds-border-radius-input, 0);
   }
 
   .#{$prefix}--search--fluid .#{$prefix}--label {

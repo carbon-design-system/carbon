@@ -42,6 +42,10 @@
     background-color: $field;
     block-size: layout.size('height');
     border-block-end: 1px solid $border-strong;
+    border-end-end-radius: var(--cds-border-radius-input, 0);
+    border-end-start-radius: var(--cds-border-radius-input, 0);
+    border-start-end-radius: var(--cds-border-radius-input, 0);
+    border-start-start-radius: var(--cds-border-radius-input, 0);
     color: $text-primary;
     font-family: inherit;
 

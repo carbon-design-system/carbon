@@ -30,36 +30,25 @@ import theme from './theme';
 const devTools = {
   layoutSize: {
     description: "Set the layout context's size",
-    defaultValue: false,
+    defaultValue: 'Size: md',
     toolbar: {
       title: 'dev :: preview__Layout size',
       items: [
-        {
-          value: false,
-          title: 'None',
-        },
-        'xs',
-        'sm',
-        'md',
-        'lg',
-        'xl',
-        '2xl',
+        'Size: xs',
+        'Size: sm',
+        'Size: md',
+        'Size: lg',
+        'Size: xl',
+        'Size: 2xl',
       ],
     },
   },
   layoutDensity: {
     description: "Set the layout context's density",
-    defaultValue: false,
+    defaultValue: 'Density: normal',
     toolbar: {
       title: 'dev :: preview__Layout density',
-      items: [
-        {
-          value: false,
-          title: 'None',
-        },
-        'condensed',
-        'normal',
-      ],
+      items: ['Density: condensed', 'Density: normal'],
     },
   },
 };
@@ -123,7 +112,52 @@ const globalTypes = {
       ],
     },
   },
-  ...(process.env.NODE_ENV === 'development' ? devTools : {}),
+  borderRadiusBox: {
+    name: 'Border Radius - Box',
+    description: 'Set the border radius for box',
+    defaultValue: 'Box: 0rem',
+    toolbar: {
+      title: 'Border Radius - Box',
+      items: [
+        'Box: 0rem',
+        'Box: 0.25rem',
+        'Box: 0.5rem',
+        'Box: 1rem',
+        'Box: 2rem',
+      ],
+    },
+  },
+  borderRadiusButton: {
+    name: 'Border Radius - Button',
+    description: 'Set the border radius for button',
+    defaultValue: 'Button: 0rem',
+    toolbar: {
+      title: 'Border Radius - Button',
+      items: [
+        'Button: 0rem',
+        'Button: 0.25rem',
+        'Button: 0.5rem',
+        'Button: 1rem',
+        'Button: 2rem',
+      ],
+    },
+  },
+  borderRadiusInput: {
+    name: 'Border Radius - Input',
+    description: 'Set the border radius for Input',
+    defaultValue: 'Input: 0rem',
+    toolbar: {
+      title: 'Border Radius - Input',
+      items: [
+        'Input: 0rem',
+        'Input: 0.25rem',
+        'Input: 0.5rem',
+        'Input: 1rem',
+        'Input: 2rem',
+      ],
+    },
+  },
+  ...devTools,
 };
 
 const parameters = {
@@ -346,14 +380,72 @@ function getThemeFromBackground(backgroundValue) {
 
 const decorators = [
   (Story, context) => {
-    const { layoutDensity, layoutSize, locale, dir } = context.globals;
+    const {
+      layoutDensity,
+      layoutSize,
+      locale,
+      dir,
+      borderRadiusBox,
+      borderRadiusButton,
+      borderRadiusInput,
+    } = context.globals;
     const backgroundValue = context.globals.backgrounds?.value;
     const [randomKey, setRandomKey] = useState(1);
     const theme = getThemeFromBackground(backgroundValue);
 
+    // Helper function to extract rem value from prefixed format
+    // e.g., "Box: 0rem" -> "0rem", "Button: 0.25rem" -> "0.25rem"
+    const extractBorderRadiusValue = (prefixedValue) => {
+      if (!prefixedValue) return null;
+      const colonIndex = prefixedValue.indexOf(': ');
+      return colonIndex !== -1
+        ? prefixedValue.substring(colonIndex + 2)
+        : prefixedValue;
+    };
+
+    // Helper function to extract layout value from prefixed format
+    // e.g., "Size: xs" -> "xs", "Density: condensed" -> "condensed"
+    const extractLayoutValue = (prefixedValue) => {
+      if (!prefixedValue) return null;
+      const colonIndex = prefixedValue.indexOf(': ');
+      return colonIndex !== -1
+        ? prefixedValue.substring(colonIndex + 2)
+        : prefixedValue;
+    };
+
     useEffect(() => {
       document.documentElement.setAttribute('data-carbon-theme', theme);
     }, [theme]);
+
+    useEffect(() => {
+      if (borderRadiusBox) {
+        const value = extractBorderRadiusValue(borderRadiusBox);
+        if (value) {
+          document.documentElement.style.setProperty(
+            '--cds-border-radius-box',
+            value
+          );
+        }
+      }
+      if (borderRadiusButton) {
+        const value = extractBorderRadiusValue(borderRadiusButton);
+        if (value) {
+          document.documentElement.style.setProperty(
+            '--cds-border-radius-button',
+            value
+          );
+        }
+      }
+      if (borderRadiusInput) {
+        const value = extractBorderRadiusValue(borderRadiusInput);
+        if (value) {
+          document.documentElement.style.setProperty(
+            '--cds-border-radius-input',
+            value
+          );
+        }
+      }
+    }, [borderRadiusBox, borderRadiusButton, borderRadiusInput]);
 
     useIsomorphicEffect(() => {
       document.documentElement.lang = locale;
@@ -364,7 +456,9 @@ const decorators = [
 
     return (
       <GlobalTheme theme={theme}>
-        <Layout size={layoutSize || null} density={layoutDensity || null}>
+        <Layout
+          size={extractLayoutValue(layoutSize) || null}
+          density={extractLayoutValue(layoutDensity) || null}>
           <TextDirection
             getTextDirection={(text) => {
               return dir;

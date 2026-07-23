@@ -1,0 +1,22 @@
+/**
+ * Copyright IBM Corp. 2026
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+.potential-fix-set {
+  .potential-fix:first-child:not(:only-child) {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+
+  .potential-fix:last-child:not(:only-child) {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+
+  .potential-fix:not(:first-child):not(:last-child) {
+    border-radius: 0;
+  }
+}

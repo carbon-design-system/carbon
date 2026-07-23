@@ -29,6 +29,10 @@
   display: flex;
   flex-wrap: wrap;
   block-size: auto;
+  border-end-end-radius: var(--cds-border-radius-box, 0);
+  border-end-start-radius: var(--cds-border-radius-box, 0);
+  border-start-end-radius: var(--cds-border-radius-box, 0);
+  border-start-start-radius: var(--cds-border-radius-box, 0);
 
   color: $text-inverse;
   inline-size: 100%;
@@ -357,6 +361,10 @@
     border: none;
     background: transparent;
     block-size: convert.to-rem(48px);
+    border-end-end-radius: var(--cds-border-radius-button, 0);
+    border-end-start-radius: var(--cds-border-radius-button, 0);
+    border-start-end-radius: var(--cds-border-radius-button, 0);
+    border-start-start-radius: var(--cds-border-radius-button, 0);
     cursor: pointer;
     inline-size: convert.to-rem(48px);
     inset-block-start: 0;

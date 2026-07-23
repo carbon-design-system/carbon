@@ -50,7 +50,6 @@
     display: inline-flex;
     box-sizing: border-box;
     border: 0;
-    border-radius: 0;
 
     // Firefox: Hide spinner (up and down buttons)
     -moz-appearance: textfield;
@@ -58,6 +57,10 @@
     background-color: $field;
     block-size: convert.to-rem(40px);
     border-block-end: convert.to-rem(1px) solid $border-strong;
+    border-end-end-radius: var(--cds-border-radius-input, 0);
+    border-end-start-radius: var(--cds-border-radius-input, 0);
+    border-start-end-radius: var(--cds-border-radius-input, 0);
+    border-start-start-radius: var(--cds-border-radius-input, 0);
     color: $text-primary;
     font-family: font-family('sans');
     font-weight: 400;
@@ -165,6 +168,10 @@
     align-items: center;
     justify-content: center;
     block-size: 100%;
+    border-end-end-radius: var(--cds-border-radius-button, 0);
+    border-end-start-radius: var(--cds-border-radius-button, 0);
+    border-start-end-radius: var(--cds-border-radius-button, 0);
+    border-start-start-radius: var(--cds-border-radius-button, 0);
     color: $icon-primary;
 
     svg {
@@ -657,6 +664,10 @@
   .#{$prefix}--number.#{$prefix}--skeleton {
     @include skeleton;
 
+    border-end-end-radius: var(--cds-border-radius-input, 0);
+    border-end-start-radius: var(--cds-border-radius-input, 0);
+    border-start-end-radius: var(--cds-border-radius-input, 0);
+    border-start-start-radius: var(--cds-border-radius-input, 0);
     inline-size: 100%;
 
     input[type='number'],

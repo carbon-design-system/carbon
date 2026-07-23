@@ -71,8 +71,11 @@ $copy-btn-feedback: $background-inverse !default;
     display: inline;
     padding: 0;
     border: 1px solid transparent;
-    border-radius: 4px;
     background-color: $layer;
+    border-end-end-radius: var(--cds-border-radius-button, 0);
+    border-end-start-radius: var(--cds-border-radius-button, 0);
+    border-start-end-radius: var(--cds-border-radius-button, 0);
+    border-start-start-radius: var(--cds-border-radius-button, 0);
     color: $text-primary;
     cursor: pointer;
 
@@ -151,6 +154,10 @@ $copy-btn-feedback: $background-inverse !default;
     display: flex;
     align-items: center;
     block-size: $spacing-08;
+    border-end-end-radius: var(--cds-border-radius-box, 0);
+    border-end-start-radius: var(--cds-border-radius-box, 0);
+    border-start-end-radius: var(--cds-border-radius-box, 0);
+    border-start-start-radius: var(--cds-border-radius-box, 0);
     padding-inline-end: $spacing-08;
   }
 
@@ -167,6 +174,10 @@ $copy-btn-feedback: $background-inverse !default;
     display: flex;
     align-items: center;
     block-size: 100%;
+    border-end-end-radius: var(--cds-border-radius-box, 0);
+    border-end-start-radius: var(--cds-border-radius-box, 0);
+    border-start-end-radius: var(--cds-border-radius-box, 0);
+    border-start-start-radius: var(--cds-border-radius-box, 0);
     min-inline-size: 0;
     overflow-x: auto;
     padding-inline-start: $spacing-05;
@@ -194,6 +205,10 @@ $copy-btn-feedback: $background-inverse !default;
 
     display: flex;
     padding: $spacing-05;
+    border-end-end-radius: var(--cds-border-radius-box, 0);
+    border-end-start-radius: var(--cds-border-radius-box, 0);
+    border-start-end-radius: var(--cds-border-radius-box, 0);
+    border-start-start-radius: var(--cds-border-radius-box, 0);
   }
 
   //collapsed snippet container
@@ -326,6 +341,10 @@ $copy-btn-feedback: $background-inverse !default;
     border: 0;
     background-color: $layer;
     block-size: convert.to-rem(32px);
+    border-end-end-radius: var(--cds-border-radius-box, 0);
+    border-end-start-radius: 0;
+    border-start-end-radius: 0;
+    border-start-start-radius: 0;
     color: $text-primary;
     inset-block-end: 0;
     inset-inline-end: 0;

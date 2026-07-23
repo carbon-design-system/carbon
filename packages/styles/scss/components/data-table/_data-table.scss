@@ -37,11 +37,19 @@
 
   .#{$prefix}--data-table-content {
     display: block;
+    border-end-end-radius: var(--cds-border-radius-box, 0);
+    border-end-start-radius: var(--cds-border-radius-box, 0);
     overflow-x: auto;
   }
 
   .#{$prefix}--data-table-content:focus {
     @include focus-outline('outline');
+  }
+
+  .#{$prefix}--data-table-container:has(+ .#{$prefix}--pagination)
+    .#{$prefix}--data-table-content {
+    border-end-end-radius: 0;
+    border-end-start-radius: 0;
   }
 
   //----------------------------------------------------------------------------
@@ -87,6 +95,8 @@
   //----------------------------------------------------------------------------
   .#{$prefix}--data-table-header {
     background-color: $layer;
+    border-start-end-radius: var(--cds-border-radius-box, 0);
+    border-start-start-radius: var(--cds-border-radius-box, 0);
     padding-block: $spacing-05 $spacing-06;
     padding-inline: $spacing-05;
   }

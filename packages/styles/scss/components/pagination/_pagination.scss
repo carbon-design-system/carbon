@@ -26,6 +26,8 @@
 @mixin pagination {
   .#{$prefix}--data-table-container + .#{$prefix}--pagination {
     border-block-start: 0;
+    border-start-end-radius: 0;
+    border-start-start-radius: 0;
   }
 
   .#{$prefix}--pagination {
@@ -39,6 +41,10 @@
     justify-content: space-between;
     background-color: $layer;
     border-block-start: 1px solid $border-subtle;
+    border-end-end-radius: var(--cds-border-radius-box, 0);
+    border-end-start-radius: var(--cds-border-radius-box, 0);
+    border-start-end-radius: var(--cds-border-radius-box, 0);
+    border-start-start-radius: var(--cds-border-radius-box, 0);
     container-name: pagination;
     container-type: inline-size;
     inline-size: calc(100% - 1px);
@@ -208,7 +214,11 @@
     margin: 0;
     background: none;
     block-size: layout.size('height');
+    border-end-end-radius: var(--cds-border-radius-button, 0);
+    border-end-start-radius: var(--cds-border-radius-button, 0);
     border-inline-start: 1px solid $border-subtle;
+    border-start-end-radius: var(--cds-border-radius-button, 0);
+    border-start-start-radius: var(--cds-border-radius-button, 0);
     cursor: pointer;
     fill: $icon-primary;
     inline-size: layout.size('height');
