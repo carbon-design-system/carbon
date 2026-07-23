@@ -20,7 +20,7 @@ function parseISOToPlainDate(isoString) {
   return Temporal.PlainDate.from(isoString);
 }
 
-describe('cds-date-picker-v2 range focus restoration', () => {
+describe('cds-preview-date-picker range focus restoration', () => {
   // Skipped: two sequential calendar-date-select events on the same calendar
   // element reliably crash the headless Chromium instance used by
   // web-test-runner (browser disconnects with a detached Frame error).
@@ -28,22 +28,22 @@ describe('cds-date-picker-v2 range focus restoration', () => {
   // The behavior is verified correct in Storybook.
   it.skip('restores focus to the end input after selecting a range end date', async () => {
     const el = await fixture(html`
-      <cds-date-picker-v2 close-on-select>
-        <cds-date-picker-v2-input
+      <cds-preview-date-picker close-on-select>
+        <cds-preview-date-picker-input
           kind="from"
           label-text="Start date"
           placeholder="mm/dd/yyyy">
-        </cds-date-picker-v2-input>
-        <cds-date-picker-v2-input
+        </cds-preview-date-picker-input>
+        <cds-preview-date-picker-input
           kind="to"
           label-text="End date"
           placeholder="mm/dd/yyyy">
-        </cds-date-picker-v2-input>
-      </cds-date-picker-v2>
+        </cds-preview-date-picker-input>
+      </cds-preview-date-picker>
     `);
     await el.updateComplete;
 
-    const inputs = el.querySelectorAll('cds-date-picker-v2-input');
+    const inputs = el.querySelectorAll('cds-preview-date-picker-input');
     const endInput = inputs[1];
 
     // Open the calendar directly via the adapter (focus events are unreliable
@@ -53,7 +53,7 @@ describe('cds-date-picker-v2 range focus restoration', () => {
     await el.updateComplete;
 
     const calendar = el.shadowRoot?.querySelector(
-      'cds-date-picker-v2-calendar'
+      'cds-preview-date-picker-calendar'
     );
     expect(calendar).to.exist;
     await calendar.updateComplete;
@@ -62,7 +62,7 @@ describe('cds-date-picker-v2 range focus restoration', () => {
 
     // Select start date — in range mode the calendar remains open (SELECTING_END).
     calendar.dispatchEvent(
-      new CustomEvent('cds-date-picker-v2-calendar-date-select', {
+      new CustomEvent('cds-preview-date-picker-calendar-date-select', {
         detail: { date: parseISOToPlainDate('2026-01-01') },
         bubbles: true,
         composed: true,
@@ -72,9 +72,12 @@ describe('cds-date-picker-v2 range focus restoration', () => {
     await calendar.updateComplete;
 
     // The calendar is still open (SELECTING_END state); select the end date.
-    const stateChangePromise = oneEvent(el, 'cds-date-picker-v2-state-change');
+    const stateChangePromise = oneEvent(
+      el,
+      'cds-preview-date-picker-state-change'
+    );
     calendar.dispatchEvent(
-      new CustomEvent('cds-date-picker-v2-calendar-date-select', {
+      new CustomEvent('cds-preview-date-picker-calendar-date-select', {
         detail: { date: parseISOToPlainDate('2026-01-02') },
         bubbles: true,
         composed: true,
@@ -88,7 +91,7 @@ describe('cds-date-picker-v2 range focus restoration', () => {
 
     expect(el.open).to.be.false;
     expect(
-      el.shadowRoot?.querySelector('cds-date-picker-v2-calendar')
+      el.shadowRoot?.querySelector('cds-preview-date-picker-calendar')
     ).to.equal(null);
     expect(endInput.shadowRoot?.activeElement).to.equal(endInput.input);
   });

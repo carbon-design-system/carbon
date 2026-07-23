@@ -23,8 +23,8 @@ import * as DatePickerStories from './date-picker-v2.stories';
 - [Component API](#component-api)
   - [API Compatibility](#api-compatibility)
   - [Breaking changes](#breaking-changes)
-  - [`cds-date-picker-v2`](#cds-date-picker-v2)
-  - [`cds-date-picker-v2-input`](#cds-date-picker-v2-input)
+  - [`cds-preview-date-picker`](#cds-preview-date-picker)
+  - [`cds-preview-date-picker-input`](#cds-preview-date-picker-input)
   - [Date picker `date-format`](#date-picker-date-format)
   - [Date picker `kind`](#date-picker-kind)
   - [Date picker `max-date`](#date-picker-max-date)
@@ -43,8 +43,8 @@ Date pickers allow users to select a single or a range of dates. Pickers are
 used to display past, present, or future dates. The kind of date (exact,
 approximate, memorable) you are requesting from the user will determine which
 picker is best to use. Each picker's format can be customized depending on
-location or need. The `cds-date-picker-v2` component expects one or more
-`cds-date-picker-v2-input` elements as children.
+location or need. The `cds-preview-date-picker` component expects one or more
+`cds-preview-date-picker-input` elements as children.
 
 <Canvas of={DatePickerStories.SingleWithCalendar} />
 
@@ -73,7 +73,7 @@ together. The first input should use `kind="from"` and the second should use
 
 ### Skeleton state
 
-You can use the `cds-date-picker-v2-input-skeleton` component to render a
+You can use the `cds-preview-date-picker-input-skeleton` component to render a
 skeleton variant of a date picker. This is useful while the initial state or
 date range is loading.
 
@@ -93,7 +93,7 @@ This implementation maintains backward compatibility with the existing Carbon
 Web Components date picker API while replacing the internal Flatpickr-based
 behavior with shared primitives and a state machine.
 
-**`cds-date-picker-v2` attributes/properties:**
+**`cds-preview-date-picker` attributes/properties:**
 
 - `date-format` - Date display format (default: `m/d/Y`)
 - `disabled` - Disable the date picker
@@ -103,7 +103,7 @@ behavior with shared primitives and a state machine.
 - `readonly` - Make the date picker read-only
 - `value` - Selected date value
 
-**`cds-date-picker-v2-input` attributes/properties:**
+**`cds-preview-date-picker-input` attributes/properties:**
 
 - `color-scheme` - Color scheme variant
 - `disabled` - Disable the input
@@ -125,8 +125,8 @@ behavior with shared primitives and a state machine.
 
 **Events:**
 
-- `cds-date-picker-v2-changed` - Fired when date selection changes
-- `cds-date-picker-v2-error` - Fired when an error occurs
+- `cds-preview-date-picker-changed` - Fired when date selection changes
+- `cds-preview-date-picker-error` - Fired when an error occurs
 
 ### Breaking Changes
 
@@ -144,13 +144,13 @@ to the public API.
 
 **Migration:** No migration is required for existing usage patterns.
 
-## `cds-date-picker-v2`
+## `cds-preview-date-picker`
 
-<ArgTypes of="cds-date-picker-v2" />
+<ArgTypes of="cds-preview-date-picker" />
 
-## `cds-date-picker-v2-input`
+## `cds-preview-date-picker-input`
 
-<ArgTypes of="cds-date-picker-v2-input" />
+<ArgTypes of="cds-preview-date-picker-input" />
 
 ### Date picker `date-format`
 
@@ -163,19 +163,19 @@ Supported format tokens:
 - `d` - Day (1-31)
 - `Y` - Year (4 digits)
 
-<cds-date-picker-v2 date-format="Y-m-d">
-  <cds-date-picker-v2-input
+<cds-preview-date-picker date-format="Y-m-d">
+  <cds-preview-date-picker-input
     kind="single"
     label-text="Date format example"
-    placeholder="yyyy/mm/dd"></cds-date-picker-v2-input>
-</cds-date-picker-v2>
+    placeholder="yyyy/mm/dd"></cds-preview-date-picker-input>
+</cds-preview-date-picker>
 
 ```html
-<cds-date-picker-v2 date-format="Y-m-d">
-  <cds-date-picker-v2-input
+<cds-preview-date-picker date-format="Y-m-d">
+  <cds-preview-date-picker-input
     kind="single"
-    placeholder="yyyy/mm/dd"></cds-date-picker-v2-input>
-</cds-date-picker-v2>
+    placeholder="yyyy/mm/dd"></cds-preview-date-picker-input>
+</cds-preview-date-picker>
 ```
 
 ### Date picker `kind`
@@ -184,36 +184,36 @@ There are three supported variations of `date-picker` in Carbon.
 
 - `simple` will render a simple text input _without_ a calendar dropdown.
 - `single` will render a a single text input _with_ a calendar dropdown.
-- For `range` , two `cds-date-picker-v2-input` will need to be provided as
+- For `range` , two `cds-preview-date-picker-input` will need to be provided as
   children.
 
 For `simple` and `single`, set the `kind` attribute of the
-`cds-date-picker-v2-input` component to the desired version.
+`cds-preview-date-picker-input` component to the desired version.
 
 ```html
-<cds-date-picker-v2>
-  <cds-date-picker-v2-input
+<cds-preview-date-picker>
+  <cds-preview-date-picker-input
     kind="single"
-    placeholder="mm/dd/yyyy"></cds-date-picker-v2-input>
-</cds-date-picker-v2>
+    placeholder="mm/dd/yyyy"></cds-preview-date-picker-input>
+</cds-preview-date-picker>
 ```
 
 For the `range`, the `kind` attributes should be set to `from` and `to`,
 corresponding to the start and end dates of the range.
 
 ```html
-<cds-date-picker-v2>
-  <cds-date-picker-v2-input
+<cds-preview-date-picker>
+  <cds-preview-date-picker-input
     kind="from"
     label-text="Start date"
     placeholder="mm/dd/yyyy">
-  </cds-date-picker-v2-input>
-  <cds-date-picker-v2-input
+  </cds-preview-date-picker-input>
+  <cds-preview-date-picker-input
     kind="to"
     label-text="End date"
     placeholder="mm/dd/yyyy">
-  </cds-date-picker-v2-input>
-</cds-date-picker-v2>
+  </cds-preview-date-picker-input>
+</cds-preview-date-picker>
 ```
 
 ### Date picker `max-date`
@@ -221,19 +221,19 @@ corresponding to the start and end dates of the range.
 Limits the date selection to any date before the date specified. Dates after the
 maximum date will be disabled in the calendar and navigation will be restricted.
 
-<cds-date-picker-v2 max-date="09/15/2020">
-  <cds-date-picker-v2-input
+<cds-preview-date-picker max-date="09/15/2020">
+  <cds-preview-date-picker-input
     kind="single"
     label-text="max-date example"
-    placeholder="mm/dd/yyyy"></cds-date-picker-v2-input>
-</cds-date-picker-v2>
+    placeholder="mm/dd/yyyy"></cds-preview-date-picker-input>
+</cds-preview-date-picker>
 
 ```html
-<cds-date-picker-v2 max-date="09/15/2020">
-  <cds-date-picker-v2-input
+<cds-preview-date-picker max-date="09/15/2020">
+  <cds-preview-date-picker-input
     kind="single"
-    placeholder="mm/dd/yyyy"></cds-date-picker-v2-input>
-</cds-date-picker-v2>
+    placeholder="mm/dd/yyyy"></cds-preview-date-picker-input>
+</cds-preview-date-picker>
 ```
 
 ### Date picker `min-date`
@@ -241,40 +241,40 @@ maximum date will be disabled in the calendar and navigation will be restricted.
 Limits the date selection to any date after the date specified. Dates before the
 minimum date will be disabled in the calendar and navigation will be restricted.
 
-<cds-date-picker-v2 min-date="09/15/2025">
-  <cds-date-picker-v2-input
+<cds-preview-date-picker min-date="09/15/2025">
+  <cds-preview-date-picker-input
     kind="single"
     label-text="min-date example"
-    placeholder="mm/dd/yyyy"></cds-date-picker-v2-input>
-</cds-date-picker-v2>
+    placeholder="mm/dd/yyyy"></cds-preview-date-picker-input>
+</cds-preview-date-picker>
 
 ```html
-<cds-date-picker-v2 min-date="09/15/2025">
-  <cds-date-picker-v2-input
+<cds-preview-date-picker min-date="09/15/2025">
+  <cds-preview-date-picker-input
     kind="single"
-    placeholder="mm/dd/yyyy"></cds-date-picker-v2-input>
-</cds-date-picker-v2>
+    placeholder="mm/dd/yyyy"></cds-preview-date-picker-input>
+</cds-preview-date-picker>
 ```
 
 ### Date picker `value`
 
 Pass a value string to the input to initialize the selected date.
 
-<cds-date-picker-v2>
-  <cds-date-picker-v2-input
+<cds-preview-date-picker>
+  <cds-preview-date-picker-input
     kind="single"
     label-text="Value as a date example"
     placeholder="mm/dd/yyyy"
-    value="04/17/2025"></cds-date-picker-v2-input>
-</cds-date-picker-v2>
+    value="04/17/2025"></cds-preview-date-picker-input>
+</cds-preview-date-picker>
 
 ```html
-<cds-date-picker-v2>
-  <cds-date-picker-v2-input
+<cds-preview-date-picker>
+  <cds-preview-date-picker-input
     kind="single"
     placeholder="mm/dd/yyyy"
-    value="04/17/2025"></cds-date-picker-v2-input>
-</cds-date-picker-v2>
+    value="04/17/2025"></cds-preview-date-picker-input>
+</cds-preview-date-picker>
 ```
 
 ## Architecture
@@ -361,8 +361,8 @@ today's date for easy keyboard navigation.
 - Positioning uses
   [CSS Anchor Positioning](https://developer.chrome.com/blog/tether-elements-to-each-other-with-css-anchor-positioning)
   for smart placement
-- The `cds-date-picker-v2-input` component takes in similar attributes to the
-  `cds-text-input` component, such as `size` and `placeholder`. For more
+- The `cds-preview-date-picker-input` component takes in similar attributes to
+  the `cds-text-input` component, such as `size` and `placeholder`. For more
   information on these attributes, check out the
   [text input](../?path=/docs/components-text-input--overview) page.
 
@@ -370,4 +370,4 @@ today's date for easy keyboard navigation.
 
 Help us improve this component by providing feedback, asking questions on Slack,
 or updating this file on
-[GitHub](https://github.com/carbon-design-system/carbon/edit/main/packages/web-components/src/components/date-picker/next/__stories__/date-picker-v2.mdx).
+[GitHub](https://github.com/carbon-design-system/carbon/edit/main/packages/web-components/src/components/date-picker/next/__stories__/preview-date-picker.mdx).

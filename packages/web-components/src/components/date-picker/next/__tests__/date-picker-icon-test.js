@@ -24,13 +24,13 @@ function parseISOToPlainDate(isoString) {
  * Helper: open the calendar via the state machine adapter (avoids relying on
  * focus events which are unreliable in headless browser environments).
  *
- * @param {HTMLElement} el - The cds-date-picker-v2 element
+ * @param {HTMLElement} el - The cds-preview-date-picker element
  */
 async function openCalendar(el) {
   el._adapter.send('INPUT_FOCUS', { inputType: 'from' });
   el._adapter.send('CALENDAR_OPEN');
   await el.updateComplete;
-  const cal = el.shadowRoot?.querySelector('cds-date-picker-v2-calendar');
+  const cal = el.shadowRoot?.querySelector('cds-preview-date-picker-calendar');
   if (cal) {
     await cal.updateComplete;
   }
@@ -40,14 +40,14 @@ async function openCalendar(el) {
 /**
  * Helper: select a date via the calendar element.
  *
- * @param {HTMLElement} el - The cds-date-picker-v2 element
- * @param {HTMLElement} cal - The cds-date-picker-v2-calendar element
+ * @param {HTMLElement} el - The cds-preview-date-picker element
+ * @param {HTMLElement} cal - The cds-preview-date-picker-calendar element
  * @param {string} isoDate - ISO date string to select
  */
 async function selectDate(el, cal, isoDate) {
-  const stateChange = oneEvent(el, 'cds-date-picker-v2-state-change');
+  const stateChange = oneEvent(el, 'cds-preview-date-picker-state-change');
   cal.dispatchEvent(
-    new CustomEvent('cds-date-picker-v2-calendar-date-select', {
+    new CustomEvent('cds-preview-date-picker-calendar-date-select', {
       detail: { date: parseISOToPlainDate(isoDate) },
       bubbles: true,
       composed: true,
@@ -59,20 +59,20 @@ async function selectDate(el, cal, isoDate) {
   await new Promise((resolve) => setTimeout(resolve, 0));
 }
 
-describe('cds-date-picker-v2 icon-click reopen', () => {
+describe('cds-preview-date-picker icon-click reopen', () => {
   it('reopens the calendar when the icon is clicked after a date has been selected', async () => {
     const el = await fixture(html`
-      <cds-date-picker-v2 close-on-select>
-        <cds-date-picker-v2-input
+      <cds-preview-date-picker close-on-select>
+        <cds-preview-date-picker-input
           kind="single"
           label-text="Date"
           placeholder="mm/dd/yyyy">
-        </cds-date-picker-v2-input>
-      </cds-date-picker-v2>
+        </cds-preview-date-picker-input>
+      </cds-preview-date-picker>
     `);
     await el.updateComplete;
 
-    const inputEl = el.querySelector('cds-date-picker-v2-input');
+    const inputEl = el.querySelector('cds-preview-date-picker-input');
 
     // 1. Open and select a date — calendar should close.
     const cal = await openCalendar(el);
@@ -81,15 +81,15 @@ describe('cds-date-picker-v2 icon-click reopen', () => {
 
     expect(el.open).to.be.false;
     expect(
-      el.shadowRoot?.querySelector('cds-date-picker-v2-calendar')
+      el.shadowRoot?.querySelector('cds-preview-date-picker-calendar')
     ).to.equal(null);
 
     // 2. Simulate clicking the calendar icon.
-    //    The icon is a <button tabindex="-1"> that dispatches cds-date-picker-v2-icon-click
+    //    The icon is a <button tabindex="-1"> that dispatches cds-preview-date-picker-icon-click
     //    without moving focus to the text input, so the calendar must reopen via the
     //    icon-click path alone — not via the input focus path.
     inputEl.dispatchEvent(
-      new CustomEvent('cds-date-picker-v2-icon-click', {
+      new CustomEvent('cds-preview-date-picker-icon-click', {
         bubbles: true,
         composed: true,
       })
@@ -97,23 +97,23 @@ describe('cds-date-picker-v2 icon-click reopen', () => {
     await el.updateComplete;
 
     expect(el.open).to.be.true;
-    expect(el.shadowRoot?.querySelector('cds-date-picker-v2-calendar')).to
+    expect(el.shadowRoot?.querySelector('cds-preview-date-picker-calendar')).to
       .exist;
   });
 
   it('reopens the calendar when the icon is clicked after a date has been selected (FOCUSED state)', async () => {
     const el = await fixture(html`
-      <cds-date-picker-v2 close-on-select>
-        <cds-date-picker-v2-input
+      <cds-preview-date-picker close-on-select>
+        <cds-preview-date-picker-input
           kind="single"
           label-text="Date"
           placeholder="mm/dd/yyyy">
-        </cds-date-picker-v2-input>
-      </cds-date-picker-v2>
+        </cds-preview-date-picker-input>
+      </cds-preview-date-picker>
     `);
     await el.updateComplete;
 
-    const inputEl = el.querySelector('cds-date-picker-v2-input');
+    const inputEl = el.querySelector('cds-preview-date-picker-input');
 
     // 1. Select a date so state lands on DATE_SELECTED, then simulate an
     //    INPUT_FOCUS event (as if the focus was programmatically restored) so
@@ -131,7 +131,7 @@ describe('cds-date-picker-v2 icon-click reopen', () => {
 
     // 2. Click the icon — should open from FOCUSED state.
     inputEl.dispatchEvent(
-      new CustomEvent('cds-date-picker-v2-icon-click', {
+      new CustomEvent('cds-preview-date-picker-icon-click', {
         bubbles: true,
         composed: true,
       })
@@ -139,7 +139,7 @@ describe('cds-date-picker-v2 icon-click reopen', () => {
     await el.updateComplete;
 
     expect(el.open).to.be.true;
-    expect(el.shadowRoot?.querySelector('cds-date-picker-v2-calendar')).to
+    expect(el.shadowRoot?.querySelector('cds-preview-date-picker-calendar')).to
       .exist;
   });
 });

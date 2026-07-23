@@ -21,50 +21,50 @@
 // These styles add :host() selectors and ::slotted() for shadow DOM
 // =============================================================================
 
-:host(#{$prefix}-date-picker-v2) {
+:host(#{$prefix}-preview-date-picker) {
   @extend .#{$prefix}--date-picker;
 
   position: relative;
 }
 
-:host(#{$prefix}-date-picker-v2-input),
-:host(#{$prefix}-date-picker-v2-input-skeleton) {
+:host(#{$prefix}-preview-date-picker-input),
+:host(#{$prefix}-preview-date-picker-input-skeleton) {
   @extend .#{$prefix}--date-picker-container;
 }
 
-:host(#{$prefix}-date-picker-v2-input[warn]:not([invalid])) {
+:host(#{$prefix}-preview-date-picker-input[warn]:not([invalid])) {
   @extend .#{$prefix}--date-picker-container--warn;
 }
 
-:host(#{$prefix}-date-picker-v2-input[kind='simple']),
-:host(#{$prefix}-date-picker-v2-input-skeleton[kind='simple']) {
+:host(#{$prefix}-preview-date-picker-input[kind='simple']),
+:host(#{$prefix}-preview-date-picker-input-skeleton[kind='simple']) {
   @extend .#{$prefix}--date-picker-container--simple;
 }
 
-:host(#{$prefix}-date-picker-v2-input[kind='simple'][short]),
-:host(#{$prefix}-date-picker-v2-input-skeleton[kind='simple'][short]) {
+:host(#{$prefix}-preview-date-picker-input[kind='simple'][short]),
+:host(#{$prefix}-preview-date-picker-input-skeleton[kind='simple'][short]) {
   @extend .#{$prefix}--date-picker-container--simple;
   @extend .#{$prefix}--date-picker-container--short;
 }
 
-:host(#{$prefix}-date-picker-v2-input[kind='single']),
-:host(#{$prefix}-date-picker-v2-input-skeleton[kind='single']) {
+:host(#{$prefix}-preview-date-picker-input[kind='single']),
+:host(#{$prefix}-preview-date-picker-input-skeleton[kind='single']) {
   @extend .#{$prefix}--date-picker-container--single;
 }
 
-:host(#{$prefix}-date-picker-v2-input[kind='from']),
-:host(#{$prefix}-date-picker-v2-input-skeleton[kind='from']) {
+:host(#{$prefix}-preview-date-picker-input[kind='from']),
+:host(#{$prefix}-preview-date-picker-input-skeleton[kind='from']) {
   @extend .#{$prefix}--date-picker-container--from;
 }
 
-:host(#{$prefix}-date-picker-v2-input[kind='from']),
-:host(#{$prefix}-date-picker-v2-input[kind='to']),
-:host(#{$prefix}-date-picker-v2-input-skeleton[kind='from']),
-:host(#{$prefix}-date-picker-v2-input-skeleton[kind='to']) {
+:host(#{$prefix}-preview-date-picker-input[kind='from']),
+:host(#{$prefix}-preview-date-picker-input[kind='to']),
+:host(#{$prefix}-preview-date-picker-input-skeleton[kind='from']),
+:host(#{$prefix}-preview-date-picker-input-skeleton[kind='to']) {
   @extend .#{$prefix}--date-picker-container--from;
 }
 
-:host(#{$prefix}-date-picker-v2-input) {
+:host(#{$prefix}-preview-date-picker-input) {
   .#{$prefix}--date-picker__icon {
     @extend .#{$prefix}--date-picker__icon;
   }
@@ -91,20 +91,20 @@
   }
 }
 
-:host(#{$prefix}-date-picker-v2-input-skeleton) {
+:host(#{$prefix}-preview-date-picker-input-skeleton) {
   @extend .#{$prefix}--date-picker-input-skeleton;
 }
 
-:host(#{$prefix}-date-picker-v2-input-skeleton[range]) {
+:host(#{$prefix}-preview-date-picker-input-skeleton[range]) {
   @extend .#{$prefix}--date-picker-input-skeleton--range;
 }
 
-:host(#{$prefix}-date-picker-v2-input[ai-label]) {
+:host(#{$prefix}-preview-date-picker-input[ai-label]) {
   @extend .#{$prefix}--date-picker-container--ai-label;
 }
 
 // Calendar component in shadow DOM
-:host(#{$prefix}-date-picker-v2-calendar) {
+:host(#{$prefix}-preview-date-picker-calendar) {
   display: block;
   outline: none;
 

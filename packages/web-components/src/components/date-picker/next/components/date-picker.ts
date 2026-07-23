@@ -51,11 +51,11 @@ enum DATE_PICKER_MODE {
 /**
  * Date picker.
  *
- * @element cds-date-picker-v2
- * @fires cds-date-picker-v2-changed - The custom event fired when the date selection changes.
- * @fires cds-date-picker-v2-error - The custom event fired when an error occurs.
+ * @element cds-preview-date-picker
+ * @fires cds-preview-date-picker-changed - The custom event fired when the date selection changes.
+ * @fires cds-preview-date-picker-error - The custom event fired when an error occurs.
  */
-@customElement(`${prefix}-date-picker-v2`)
+@customElement(`${prefix}-preview-date-picker`)
 class CDSDatePicker extends HostListenerMixin(FormMixin(LitElement)) {
   /**
    * The slotted `<cds-date-input kind="from">`.
@@ -94,21 +94,23 @@ class CDSDatePicker extends HostListenerMixin(FormMixin(LitElement)) {
   private _restoringFocus = false;
 
   /**
-   * @returns The effective date picker mode, determined by the child `<cds-date-picker-v2-input>`.
+   * @returns The effective date picker mode, determined by the child `<cds-preview-date-picker-input>`.
    */
   private get _mode() {
     const { selectorInputTo } = this.constructor as typeof CDSDatePicker;
     if (this.querySelector(selectorInputTo)) {
       return DATE_PICKER_MODE.RANGE;
     }
-    if (this.querySelector(`${prefix}-date-picker-v2-input[kind="single"]`)) {
+    if (
+      this.querySelector(`${prefix}-preview-date-picker-input[kind="single"]`)
+    ) {
       return DATE_PICKER_MODE.SINGLE;
     }
     return DATE_PICKER_MODE.SIMPLE;
   }
 
   /**
-   * Handles `${prefix}-date-picker-v2-changed` event on this element.
+   * Handles `${prefix}-preview-date-picker-changed` event on this element.
    *
    * @param {CustomEvent} root0 - The event object
    * @param {object} root0.detail - The event detail
@@ -452,7 +454,7 @@ class CDSDatePicker extends HostListenerMixin(FormMixin(LitElement)) {
    */
   private _showCalendarPopover() {
     const popover = this.shadowRoot?.querySelector(
-      `#${prefix}-date-picker-v2-calendar-popover`
+      `#${prefix}-preview-date-picker-calendar-popover`
     ) as HTMLElement & { showPopover?: () => void };
     if (popover && typeof popover.showPopover === 'function') {
       try {
@@ -470,7 +472,7 @@ class CDSDatePicker extends HostListenerMixin(FormMixin(LitElement)) {
    */
   private _hideCalendarPopover() {
     const popover = this.shadowRoot?.querySelector(
-      `#${prefix}-date-picker-v2-calendar-popover`
+      `#${prefix}-preview-date-picker-calendar-popover`
     ) as HTMLElement & { hidePopover?: () => void };
     if (popover && typeof popover.hidePopover === 'function') {
       try {
@@ -673,11 +675,11 @@ class CDSDatePicker extends HostListenerMixin(FormMixin(LitElement)) {
 
       // Check if the target is the calendar element or within it
       const calendar = this.shadowRoot?.querySelector(
-        'cds-date-picker-v2-calendar'
+        'cds-preview-date-picker-calendar'
       ) as HTMLElement;
       const isFocusInCalendar =
         target === calendar ||
-        target.closest?.('cds-date-picker-v2-calendar') !== null ||
+        target.closest?.('cds-preview-date-picker-calendar') !== null ||
         composedPath.includes(calendar);
 
       // Case 0: Tab FROM input while closed -> reopen calendar and keep focus on input
@@ -702,7 +704,7 @@ class CDSDatePicker extends HostListenerMixin(FormMixin(LitElement)) {
         event.preventDefault();
         event.stopPropagation();
         const calendarElement = this.shadowRoot?.querySelector(
-          'cds-date-picker-v2-calendar'
+          'cds-preview-date-picker-calendar'
         );
         const calendarDiv = calendarElement?.shadowRoot?.querySelector(
           '.cds--date-picker__calendar'
@@ -725,7 +727,7 @@ class CDSDatePicker extends HostListenerMixin(FormMixin(LitElement)) {
         event.preventDefault();
         event.stopPropagation(); // Prevent input from handling the event
         const calendarElement = this.shadowRoot?.querySelector(
-          'cds-date-picker-v2-calendar'
+          'cds-preview-date-picker-calendar'
         );
         const calendarDiv = calendarElement?.shadowRoot?.querySelector(
           '.cds--date-picker__calendar'
@@ -1060,7 +1062,7 @@ class CDSDatePicker extends HostListenerMixin(FormMixin(LitElement)) {
         class="${prefix}--date-picker__calendar-container">
         ${mode !== DATE_PICKER_MODE.SIMPLE && open
           ? html`
-              <cds-date-picker-v2-calendar
+              <cds-preview-date-picker-calendar
                 .rangeMode="${mode === DATE_PICKER_MODE.RANGE}"
                 .dateFormat="${this.dateFormat || 'm/d/Y'}"
                 .locale="${this.locale}"
@@ -1069,11 +1071,11 @@ class CDSDatePicker extends HostListenerMixin(FormMixin(LitElement)) {
                 .selectedDates="${selectedDates}"
                 .viewDate="${context?.viewDate || undefined}"
                 .focusedDate="${context?.focusedDate || null}"
-                @cds-date-picker-v2-calendar-date-select="${this
+                @cds-preview-date-picker-calendar-date-select="${this
                   ._handleCalendarDateSelect}"
-                @cds-date-picker-v2-calendar-month-change="${this
+                @cds-preview-date-picker-calendar-month-change="${this
                   ._handleCalendarMonthChange}">
-              </cds-date-picker-v2-calendar>
+              </cds-preview-date-picker-calendar>
             `
           : ''}
       </div>
@@ -1148,56 +1150,56 @@ class CDSDatePicker extends HostListenerMixin(FormMixin(LitElement)) {
    * A selector that will return the `<input>` to enter starting date.
    */
   static get selectorInputFrom() {
-    return `${prefix}-date-picker-v2-input,${prefix}-date-picker-v2-input[kind="from"]`;
+    return `${prefix}-preview-date-picker-input,${prefix}-preview-date-picker-input[kind="from"]`;
   }
 
   /**
    * A selector that will return the `<input>` to enter end date.
    */
   static get selectorInputTo() {
-    return `${prefix}-date-picker-v2-input[kind="to"]`;
+    return `${prefix}-preview-date-picker-input[kind="to"]`;
   }
 
   /**
    * The name of the custom event when an error occurs.
    */
   static get eventError() {
-    return `${prefix}-date-picker-v2-error`;
+    return `${prefix}-preview-date-picker-error`;
   }
 
   /**
    * The name of the custom event fired when the date selection changes.
    */
   static get eventChange() {
-    return `${prefix}-date-picker-v2-changed`;
+    return `${prefix}-preview-date-picker-changed`;
   }
 
   /**
    * The name of the custom event fired when the calendar icon is clicked.
    */
   static get eventIconClick() {
-    return `${prefix}-date-picker-v2-icon-click`;
+    return `${prefix}-preview-date-picker-icon-click`;
   }
 
   /**
    * The name of the custom event fired when an input receives focus.
    */
   static get eventInputFocus() {
-    return `${prefix}-date-picker-v2-input-focus`;
+    return `${prefix}-preview-date-picker-input-focus`;
   }
 
   /**
    * The name of the custom event fired when an input loses focus.
    */
   static get eventInputBlur() {
-    return `${prefix}-date-picker-v2-input-blur`;
+    return `${prefix}-preview-date-picker-input-blur`;
   }
 
   /**
    * The name of the custom event fired when an input is clicked.
    */
   static get eventInputClick() {
-    return `${prefix}-date-picker-v2-input-click`;
+    return `${prefix}-preview-date-picker-input-click`;
   }
 
   static styles = styles;

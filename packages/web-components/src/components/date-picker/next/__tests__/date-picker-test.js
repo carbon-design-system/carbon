@@ -8,15 +8,15 @@
 import '@carbon/web-components/es/components/date-picker/next/index.js';
 import { fixture, html, expect } from '@open-wc/testing';
 
-describe('cds-date-picker-v2', () => {
+describe('cds-preview-date-picker', () => {
   describe('Invalid and Warning States with Disabled/ReadOnly', () => {
     it('should not show invalid state when disabled', async () => {
       const el = await fixture(html`
-        <cds-date-picker-v2-input
+        <cds-preview-date-picker-input
           invalid
           invalid-text="Invalid date"
           disabled
-          label-text="Date Input"></cds-date-picker-v2-input>
+          label-text="Date Input"></cds-preview-date-picker-input>
       `);
       await el.updateComplete;
 
@@ -37,11 +37,11 @@ describe('cds-date-picker-v2', () => {
 
     it('should not show warning state when disabled', async () => {
       const el = await fixture(html`
-        <cds-date-picker-v2-input
+        <cds-preview-date-picker-input
           warn
           warn-text="Warning message"
           disabled
-          label-text="Date Input"></cds-date-picker-v2-input>
+          label-text="Date Input"></cds-preview-date-picker-input>
       `);
       await el.updateComplete;
 
@@ -62,11 +62,11 @@ describe('cds-date-picker-v2', () => {
 
     it('should not show invalid state when readonly', async () => {
       const el = await fixture(html`
-        <cds-date-picker-v2-input
+        <cds-preview-date-picker-input
           invalid
           invalid-text="Invalid date"
           readonly
-          label-text="Date Input"></cds-date-picker-v2-input>
+          label-text="Date Input"></cds-preview-date-picker-input>
       `);
       await el.updateComplete;
 
@@ -87,11 +87,11 @@ describe('cds-date-picker-v2', () => {
 
     it('should not show warning state when readonly', async () => {
       const el = await fixture(html`
-        <cds-date-picker-v2-input
+        <cds-preview-date-picker-input
           warn
           warn-text="Warning message"
           readonly
-          label-text="Date Input"></cds-date-picker-v2-input>
+          label-text="Date Input"></cds-preview-date-picker-input>
       `);
       await el.updateComplete;
 
@@ -114,13 +114,13 @@ describe('cds-date-picker-v2', () => {
   describe('Date Picker Functionality', () => {
     it('should render date picker with calendar', async () => {
       const el = await fixture(html`
-        <cds-date-picker-v2>
-          <cds-date-picker-v2-input
+        <cds-preview-date-picker>
+          <cds-preview-date-picker-input
             kind="single"
             label-text="Date"
             placeholder="mm/dd/yyyy">
-          </cds-date-picker-v2-input>
-        </cds-date-picker-v2>
+          </cds-preview-date-picker-input>
+        </cds-preview-date-picker>
       `);
       await el.updateComplete;
       expect(el).to.exist;
@@ -128,13 +128,13 @@ describe('cds-date-picker-v2', () => {
 
     it('should handle value changes', async () => {
       const el = await fixture(html`
-        <cds-date-picker-v2 value="2024-01-15">
-          <cds-date-picker-v2-input
+        <cds-preview-date-picker value="2024-01-15">
+          <cds-preview-date-picker-input
             kind="single"
             label-text="Date"
             placeholder="mm/dd/yyyy">
-          </cds-date-picker-v2-input>
-        </cds-date-picker-v2>
+          </cds-preview-date-picker-input>
+        </cds-preview-date-picker>
       `);
       await el.updateComplete;
       expect(el.value).to.equal('2024-01-15');
@@ -142,18 +142,18 @@ describe('cds-date-picker-v2', () => {
 
     it('should support range mode', async () => {
       const el = await fixture(html`
-        <cds-date-picker-v2>
-          <cds-date-picker-v2-input
+        <cds-preview-date-picker>
+          <cds-preview-date-picker-input
             kind="from"
             label-text="Start date"
             placeholder="mm/dd/yyyy">
-          </cds-date-picker-v2-input>
-          <cds-date-picker-v2-input
+          </cds-preview-date-picker-input>
+          <cds-preview-date-picker-input
             kind="to"
             label-text="End date"
             placeholder="mm/dd/yyyy">
-          </cds-date-picker-v2-input>
-        </cds-date-picker-v2>
+          </cds-preview-date-picker-input>
+        </cds-preview-date-picker>
       `);
       await el.updateComplete;
       expect(el).to.exist;
@@ -161,13 +161,13 @@ describe('cds-date-picker-v2', () => {
 
     it('should handle disabled state', async () => {
       const el = await fixture(html`
-        <cds-date-picker-v2 disabled>
-          <cds-date-picker-v2-input
+        <cds-preview-date-picker disabled>
+          <cds-preview-date-picker-input
             kind="single"
             label-text="Date"
             placeholder="mm/dd/yyyy">
-          </cds-date-picker-v2-input>
-        </cds-date-picker-v2>
+          </cds-preview-date-picker-input>
+        </cds-preview-date-picker>
       `);
       await el.updateComplete;
       expect(el.disabled).to.be.true;
@@ -175,11 +175,11 @@ describe('cds-date-picker-v2', () => {
 
     it('should handle readonly state', async () => {
       const el = await fixture(html`
-        <cds-date-picker-v2-input
+        <cds-preview-date-picker-input
           readonly
           label-text="Date"
           placeholder="mm/dd/yyyy">
-        </cds-date-picker-v2-input>
+        </cds-preview-date-picker-input>
       `);
       await el.updateComplete;
       expect(el.readonly).to.be.true;
@@ -187,11 +187,11 @@ describe('cds-date-picker-v2', () => {
 
     it('should handle different sizes', async () => {
       const el = await fixture(html`
-        <cds-date-picker-v2-input
+        <cds-preview-date-picker-input
           size="lg"
           label-text="Date"
           placeholder="mm/dd/yyyy">
-        </cds-date-picker-v2-input>
+        </cds-preview-date-picker-input>
       `);
       await el.updateComplete;
       expect(el.size).to.equal('lg');
@@ -200,12 +200,12 @@ describe('cds-date-picker-v2', () => {
     it('should show invalid state with message', async () => {
       const invalidText = 'Invalid date format';
       const el = await fixture(html`
-        <cds-date-picker-v2-input
+        <cds-preview-date-picker-input
           invalid
           invalid-text="${invalidText}"
           label-text="Date"
           placeholder="mm/dd/yyyy">
-        </cds-date-picker-v2-input>
+        </cds-preview-date-picker-input>
       `);
       await el.updateComplete;
 
@@ -218,12 +218,12 @@ describe('cds-date-picker-v2', () => {
     it('should show warning state with message', async () => {
       const warnText = 'Date is in the past';
       const el = await fixture(html`
-        <cds-date-picker-v2-input
+        <cds-preview-date-picker-input
           warn
           warn-text="${warnText}"
           label-text="Date"
           placeholder="mm/dd/yyyy">
-        </cds-date-picker-v2-input>
+        </cds-preview-date-picker-input>
       `);
       await el.updateComplete;
 
