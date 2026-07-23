@@ -232,9 +232,17 @@ class CDSTextarea extends CDSTextInput {
       return null;
     };
 
+    const hasHelperText =
+      this.helperText ||
+      (this._slotHelperTextNode?.assignedNodes().length ?? 0) > 0;
+
     const helper = html`
       <div class="${helperTextClasses}" id="helper-text">
-        <slot name="helper-text">${this.helperText}</slot>
+        <slot
+          name="helper-text"
+          @slotchange="${this._handleHelperTextSlotChange}">
+          ${this.helperText}
+        </slot>
       </div>
     `;
 
@@ -271,6 +279,7 @@ class CDSTextarea extends CDSTextInput {
           cols="${ifDefined(this.cols)}"
           ?data-invalid="${this.invalid}"
           ?disabled="${this.disabled}"
+          ?aria-describedby="${hasHelperText ? 'helper-text' : undefined}"
           id="input"
           name="${ifNonEmpty(this.name)}"
           pattern="${ifNonEmpty(this.pattern)}"
