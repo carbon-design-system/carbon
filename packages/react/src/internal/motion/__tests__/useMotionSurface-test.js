@@ -62,19 +62,19 @@ describe('useMotionSurface', () => {
     expect(result.current.kind).toBe('reveal');
     expect(result.current.initial).toEqual({
       opacity: 0,
-      clipPath: 'inset(50% 0 50% 0)',
+      transform: 'scale(0.96)',
     });
     expect(result.current.animate).toEqual({
       opacity: 1,
-      clipPath: 'inset(0 0 0 0)',
-      // slow-01 = 400ms, entrance/expressive
-      transition: { duration: 0.4, ease: [0, 0, 0.3, 1] },
+      transform: 'scale(1)',
+      // fast-02 = 110ms, entrance/expressive
+      transition: { duration: 0.11, ease: [0, 0, 0.3, 1] },
     });
     expect(result.current.exit).toEqual({
       opacity: 0,
-      clipPath: 'inset(50% 0 50% 0)',
+      transform: 'scale(0.96)',
       // exit/expressive
-      transition: { duration: 0.4, ease: [0.4, 0.14, 1, 1] },
+      transition: { duration: 0.11, ease: [0.4, 0.14, 1, 1] },
     });
   });
 
