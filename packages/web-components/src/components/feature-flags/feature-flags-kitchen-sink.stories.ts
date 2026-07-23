@@ -108,15 +108,6 @@ export const KitchenSink = {
       )}
       ${section(
         'visual',
-        'cds-clickable-tile (contrast)',
-        'enable-tile-contrast',
-        'Sass only. v11: no border. v12: 1px border. Nothing is logged for this flag.',
-        html`<cds-clickable-tile href="#">
-          A border around this tile means enable-tile-contrast is on
-        </cds-clickable-tile>`
-      )}
-      ${section(
-        'visual',
         'cds-structured-list',
         'enable-v12-structured-list-visible-icons',
         'Sass only. v12 shows the selection icons without needing hover or focus. Use selection-name on cds-structured-list and selection-value on each row — the component renders the input and icon automatically.',

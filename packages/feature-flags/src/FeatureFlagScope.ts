@@ -19,10 +19,7 @@ const v12FlagPrefix = 'enable-v12-';
 // Keep in sync with `$unprefixed-v12-flags` in `index.scss`. The two are
 // separate implementations of the same rule, and a flag that appears in only
 // one of them gets v12 behavior in JavaScript but not Sass, or the reverse.
-const unprefixedV12Flags = new Set([
-  'enable-focus-wrap-without-sentinels',
-  'enable-tile-contrast',
-]);
+const unprefixedV12Flags = new Set(['enable-focus-wrap-without-sentinels']);
 
 /**
  * Whether a flag becomes the default behavior in v12, and so is turned on by

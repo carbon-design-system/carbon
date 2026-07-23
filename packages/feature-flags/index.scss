@@ -20,8 +20,7 @@ $v12-flag-prefix: 'enable-v12-';
 // are separate implementations of the same rule, and a flag that appears in
 // only one of them gets v12 behavior in Sass but not JavaScript, or the
 // reverse.
-$unprefixed-v12-flags: 'enable-focus-wrap-without-sentinels',
-  'enable-tile-contrast';
+$unprefixed-v12-flags: 'enable-focus-wrap-without-sentinels';
 
 $feature-flags: () !default;
 $feature-flags: map.merge(

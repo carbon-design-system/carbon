@@ -87,13 +87,11 @@ describe('@carbon/feature-flags', () => {
       FeatureFlags.merge({
         'enable-v12-release': true,
         'enable-focus-wrap-without-sentinels': false,
-        'enable-tile-contrast': false,
       });
 
       expect(FeatureFlags.enabled('enable-focus-wrap-without-sentinels')).toBe(
         true
       );
-      expect(FeatureFlags.enabled('enable-tile-contrast')).toBe(true);
     });
 
     it('should not enable the deprecated experimental flags via the v12 release flag', () => {
@@ -210,7 +208,7 @@ describe('@carbon/feature-flags', () => {
       );
     });
 
-    it.each(['enable-focus-wrap-without-sentinels', 'enable-tile-contrast'])(
+    it.each(['enable-focus-wrap-without-sentinels'])(
       'should notify for the unprefixed v12 flag %s',
       (flag) => {
         notifyAvailableFlag(flag, false);

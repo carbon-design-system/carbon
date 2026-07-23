@@ -169,16 +169,6 @@ export const KitchenSink = () => {
 
       <Section
         kind="visual"
-        title="ClickableTile"
-        flag="enable-tile-contrast"
-        note="Sass only. v11: no border. v12: 1px border. Nothing is logged for this flag.">
-        <ClickableTile id="kitchen-sink-clickable" href="#">
-          A border around this tile means enable-tile-contrast is on
-        </ClickableTile>
-      </Section>
-
-      <Section
-        kind="visual"
         title="StructuredList (old API)"
         flag="enable-v12-structured-list-visible-icons"
         note="Old API: StructuredListRow with no selection prop. Requires a manual StructuredListCell containing CheckmarkFilled.">
