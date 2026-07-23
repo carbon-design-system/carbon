@@ -25,6 +25,12 @@ export {
   type KeyboardEventInfo,
   type KeyboardEventResult,
 } from './keyboard-utils.js';
+export { generateCalendarGrid, type CalendarDay } from './calendar-grid.js';
+export {
+  getMonthYearLabel,
+  getFullDateLabel,
+  getWeekdayLabels,
+} from './calendar-labels.js';
 export {
   dateToPlainDate,
   plainDateToDate,

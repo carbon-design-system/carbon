@@ -9,12 +9,18 @@ import { LitElement, html } from 'lit';
 import type { PropertyValues } from 'lit';
 import { property, state } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
+import { ifDefined } from 'lit/directives/if-defined.js';
 import { prefix } from '../../../../globals/settings';
 import { carbonElement as customElement } from '../../../../globals/decorators/carbon-element';
 import ChevronLeft16 from '@carbon/icons/es/chevron--left/16.js';
 import ChevronRight16 from '@carbon/icons/es/chevron--right/16.js';
 import { iconLoader } from '../../../../globals/internal/icon-loader';
-import { plainDateToDate } from '@carbon/utilities/date-picker';
+import {
+  generateCalendarGrid,
+  getFullDateLabel,
+  getMonthYearLabel,
+  getWeekdayLabels,
+} from '@carbon/utilities/date-picker';
 import styles from './date-picker.scss?lit';
 
 /**
@@ -243,15 +249,6 @@ class CDSDatePickerCalendar extends LitElement {
   }
 
   /**
-   * Check if a date is today
-   * @param {Temporal.PlainDate} date - The date to check
-   */
-  private _isToday(date: Temporal.PlainDate): boolean {
-    const today = Temporal.Now.plainDateISO();
-    return Temporal.PlainDate.compare(date, today) === 0;
-  }
-
-  /**
    * Check if a date is focused (for keyboard navigation)
    * @param {Temporal.PlainDate} date - The date to check
    */
@@ -282,70 +279,13 @@ class CDSDatePickerCalendar extends LitElement {
   }
 
   /**
-   * Get the days to display in the calendar grid
-   */
-  private _getCalendarDays(): Temporal.PlainDate[] {
-    const firstDayOfMonth = this._currentMonth.toPlainDate({ day: 1 });
-
-    // Convert to JS Date to get day of week (0 = Sunday, 6 = Saturday)
-    const jsDate = new Date(
-      firstDayOfMonth.year,
-      firstDayOfMonth.month - 1,
-      firstDayOfMonth.day
-    );
-    const firstDayOfWeek = jsDate.getDay();
-
-    // Calculate the start date (may be in previous month)
-    const startDate = firstDayOfMonth.add({ days: -firstDayOfWeek });
-
-    // Generate 42 days (6 weeks) for consistent grid
-    const days: Temporal.PlainDate[] = [];
-    for (let i = 0; i < 42; i++) {
-      days.push(startDate.add({ days: i }));
-    }
-
-    return days;
-  }
-
-  /**
-   * Get weekday names
-   */
-  private _getWeekdayNames(): string[] {
-    // Start from Sunday
-    const baseDate = Temporal.PlainDate.from('2024-01-07'); // A Sunday
-    const weekdays: string[] = [];
-
-    for (let i = 0; i < 7; i++) {
-      const date = baseDate.add({ days: i });
-      const formatter = new Intl.DateTimeFormat(this.locale, {
-        weekday: 'short',
-      });
-      // Use plainDateToDate to properly convert Temporal.PlainDate to Date
-      let name = formatter.format(plainDateToDate(date));
-
-      // Special handling for Thursday to match Carbon's "Th" format
-      if (name === 'Thu') {
-        name = 'Th';
-      } else {
-        name = name.charAt(0);
-      }
-
-      weekdays.push(name);
-    }
-
-    return weekdays;
-  }
-
-  /**
    * Render the calendar header with month/year and navigation
    */
   private _renderHeader() {
-    // Convert Temporal.PlainYearMonth to Date properly to avoid month offset issues
-    const firstDayOfMonth = this._currentMonth.toPlainDate({ day: 1 });
-    const monthName = new Intl.DateTimeFormat(this.locale, {
-      month: 'long',
-      year: 'numeric',
-    }).format(plainDateToDate(firstDayOfMonth));
+    const monthName = getMonthYearLabel(
+      this._currentMonth.toPlainDate({ day: 1 }),
+      this.locale
+    );
 
     const isPrevDisabled = this._isPrevMonthDisabled();
     const isNextDisabled = this._isNextMonthDisabled();
@@ -381,7 +321,7 @@ class CDSDatePickerCalendar extends LitElement {
    * Render the weekday headers
    */
   private _renderWeekdays() {
-    const weekdays = this._getWeekdayNames();
+    const weekdays = getWeekdayLabels(this.locale);
 
     return html`
       <div class="${prefix}--date-picker__weekdays">
@@ -398,17 +338,19 @@ class CDSDatePickerCalendar extends LitElement {
    * Render the calendar days grid
    */
   private _renderDays() {
-    const days = this._getCalendarDays();
     const currentMonthValue = this._currentMonth.month;
+
+    const days = generateCalendarGrid(
+      this._currentMonth.toPlainDate({ day: 1 }),
+      this.minDate ?? null,
+      this.maxDate ?? null
+    ).flat();
 
     return html`
       <div class="${prefix}--date-picker__days" role="grid">
-        ${days.map((date) => {
-          const isCurrentMonth = date.month === currentMonthValue;
-          const isDisabled = this._isDateDisabled(date);
+        ${days.map(({ date, isCurrentMonth, isDisabled, isToday }) => {
           const isSelected = this._isDateSelected(date);
           const isInRange = this._isDateInRange(date);
-          const isToday = this._isToday(date);
           const isFocused = this._isDateFocused(date);
 
           const dayClasses = classMap({
@@ -432,7 +374,8 @@ class CDSDatePickerCalendar extends LitElement {
               @click="${() => this._handleDateSelect(date)}"
               @mouseenter="${() => this._handleDateMouseEnter(date)}"
               @mouseleave="${() => this._handleDateMouseLeave()}"
-              aria-label="${date.toString()}">
+              aria-label="${getFullDateLabel(date, this.locale)}"
+              aria-current="${ifDefined(isToday ? 'date' : undefined)}">
               ${date.day}
             </button>
           `;

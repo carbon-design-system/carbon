@@ -569,6 +569,12 @@ class CDSDatePicker extends HostListenerMixin(FormMixin(LitElement)) {
   dateFormat!: string;
 
   /**
+   * BCP 47 locale tag used to localize the calendar's month and weekday labels.
+   */
+  @property({ reflect: true })
+  locale = 'en';
+
+  /**
    * Controls the disabled state of the input
    */
   @property({ type: Boolean, reflect: true })
@@ -1057,6 +1063,7 @@ class CDSDatePicker extends HostListenerMixin(FormMixin(LitElement)) {
               <cds-date-picker-v2-calendar
                 .rangeMode="${mode === DATE_PICKER_MODE.RANGE}"
                 .dateFormat="${this.dateFormat || 'm/d/Y'}"
+                .locale="${this.locale}"
                 .minDate="${parseDateToPlainDate(this.minDate) || undefined}"
                 .maxDate="${parseDateToPlainDate(this.maxDate) || undefined}"
                 .selectedDates="${selectedDates}"

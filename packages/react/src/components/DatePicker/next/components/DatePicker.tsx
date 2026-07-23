@@ -293,6 +293,7 @@ export function DatePicker({
             context={context}
             onDateSelect={selectDate}
             onNavigate={handleNavigate}
+            locale={locale}
           />
         </div>
       )}
