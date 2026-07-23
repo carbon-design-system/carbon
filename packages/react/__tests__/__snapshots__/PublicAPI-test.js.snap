@@ -1598,6 +1598,9 @@ Map {
   "ComposedModal" => {
     "$$typeof": Symbol(react.forward_ref),
     "propTypes": {
+      "alert": {
+        "type": "bool",
+      },
       "aria-label": {
         "type": "string",
       },
