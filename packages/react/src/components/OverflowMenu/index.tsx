@@ -13,23 +13,6 @@ import {
   type OverflowMenuProps,
 } from './OverflowMenu';
 
-/**
- * Overflow menu component.
- *
- * @featureFlag enable-v12-overflowmenu - Switches to the newer `Menu`-based
- * implementation. **Will be on by default in v12.**
- *
- * Enable in your app:
- * ```tsx
- * import { FeatureFlags } from '@carbon/react';
- *
- * <FeatureFlags enableV12Overflowmenu>
- *   <OverflowMenu />
- * </FeatureFlags>
- * ```
- *
- * @see https://github.com/carbon-design-system/carbon/blob/main/docs/feature-flags.md
- */
 const OverflowMenu = forwardRef<HTMLDivElement, OverflowMenuProps>(
   (props, ref) => {
     const enableV12OverflowMenu = useFeatureFlag('enable-v12-overflowmenu');

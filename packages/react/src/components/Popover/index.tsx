@@ -164,25 +164,6 @@ export type PopoverComponent = <E extends React.ElementType = 'span'>(
   // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
 ) => React.ReactElement | any;
 
-/**
- * Popover component.
- *
- * @featureFlag enable-v12-dynamic-floating-styles - Uses Floating UI for
- * dynamic positioning of the popover. **Will be on by default in v12.**
- *
- * Enable in your app:
- * ```tsx
- * import { FeatureFlags } from '@carbon/react';
- *
- * <FeatureFlags enableV12DynamicFloatingStyles>
- *   <Popover open>
- *     <PopoverContent>Content</PopoverContent>
- *   </Popover>
- * </FeatureFlags>
- * ```
- *
- * @see https://github.com/carbon-design-system/carbon/blob/main/docs/feature-flags.md
- */
 export const Popover: PopoverComponent & {
   displayName?: string;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452

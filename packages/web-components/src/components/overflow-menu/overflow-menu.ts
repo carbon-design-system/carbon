@@ -60,23 +60,6 @@ const warnInDev = (message: string) => {
  *
  * @element cds-overflow-menu
  * @slot icon - The icon for the trigger button.
- *
- * @featureFlag enable-v12-overflowmenu - Replaces this implementation with the
- * newer `cds-menu`-based version. **Will be on by default in v12.**
- *
- * @featureFlag enable-v12-dynamic-floating-styles - Uses Floating UI for
- * dynamic positioning of the menu. **Will be on by default in v12.**
- *
- * Enable in your app:
- * ```html
- * import '@carbon/web-components/es/components/feature-flags/feature-flags.js';
- *
- * <feature-flags enable-v12-overflowmenu enable-v12-dynamic-floating-styles>
- *   <cds-overflow-menu></cds-overflow-menu>
- * </feature-flags>
- * ```
- *
- * @see https://github.com/carbon-design-system/carbon/blob/main/docs/feature-flags.md
  */
 @customElement(`${prefix}-overflow-menu`)
 class CDSOverflowMenu

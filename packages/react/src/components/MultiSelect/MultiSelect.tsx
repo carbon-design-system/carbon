@@ -293,23 +293,6 @@ export interface MultiSelectProps<ItemType>
   warnText?: ReactNode;
 }
 
-/**
- * Multi-select component.
- *
- * @featureFlag enable-v12-dynamic-floating-styles - Uses Floating UI for
- * dynamic positioning of the dropdown menu. **Will be on by default in v12.**
- *
- * Enable in your app:
- * ```tsx
- * import { FeatureFlags } from '@carbon/react';
- *
- * <FeatureFlags enableV12DynamicFloatingStyles>
- *   <MultiSelect id="my-multi-select" items={items} />
- * </FeatureFlags>
- * ```
- *
- * @see https://github.com/carbon-design-system/carbon/blob/main/docs/feature-flags.md
- */
 export const MultiSelect = React.forwardRef(
   <ItemType,>(
     {

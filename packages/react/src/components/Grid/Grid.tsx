@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2026
+ * Copyright IBM Corp. 2016, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -12,25 +12,6 @@ import { CSSGrid } from './CSSGrid';
 import { FlexGrid } from './FlexGrid';
 import { GridComponent, GridProps } from './GridTypes';
 
-/**
- * Grid component.
- *
- * @featureFlag enable-css-grid - Switches the grid implementation from
- * Flexbox (`FlexGrid`) to CSS Grid (`CSSGrid`).
- *
- * Enable in your app:
- * ```tsx
- * import { FeatureFlags } from '@carbon/react';
- *
- * <FeatureFlags flags={{ 'enable-css-grid': true }}>
- *   <Grid>
- *     <Column lg={4}>Content</Column>
- *   </Grid>
- * </FeatureFlags>
- * ```
- *
- * @see https://github.com/carbon-design-system/carbon/blob/main/docs/feature-flags.md
- */
 function Grid<T extends React.ElementType>(props: GridProps<T>) {
   const enableCSSGrid = useFeatureFlag('enable-css-grid');
   if (enableCSSGrid) {

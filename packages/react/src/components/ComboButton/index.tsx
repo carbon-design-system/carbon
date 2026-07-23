@@ -89,25 +89,6 @@ interface ComboButtonProps extends TranslateWithId<TranslationKey> {
   tooltipAlignment?: React.ComponentProps<typeof IconButton>['align'];
 }
 
-/**
- * Combo button component.
- *
- * @featureFlag enable-v12-dynamic-floating-styles - Uses Floating UI for
- * dynamic positioning of the menu. **Will be on by default in v12.**
- *
- * Enable in your app:
- * ```tsx
- * import { FeatureFlags } from '@carbon/react';
- *
- * <FeatureFlags enableV12DynamicFloatingStyles>
- *   <ComboButton label="Primary action">
- *     <MenuItem label="Option" />
- *   </ComboButton>
- * </FeatureFlags>
- * ```
- *
- * @see https://github.com/carbon-design-system/carbon/blob/main/docs/feature-flags.md
- */
 const ComboButton = React.forwardRef<HTMLDivElement, ComboButtonProps>(
   function ComboButton(
     {

@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2026
+ * Copyright IBM Corp. 2016, 2025
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -257,30 +257,6 @@ export interface ModalProps extends HTMLAttributes<HTMLDivElement> {
    */
   slug?: ReactNode;
 }
-
-/**
- * Modal component.
- *
- * @featureFlag enable-presence - Mounts the modal in the DOM only when open,
- * unmounts when closed.
- *
- * @featureFlag enable-dialog-element - Uses the native `<dialog>` element
- * instead of a `<div>` with ARIA attributes.
- *
- * @featureFlag enable-focus-wrap-without-sentinels - Wraps focus without
- * relying on sentinel DOM nodes. **Will be on by default in v12.**
- *
- * Enable in your app:
- * ```tsx
- * import { FeatureFlags } from '@carbon/react';
- *
- * <FeatureFlags enablePresence enableDialogElement enableFocusWrapWithoutSentinels>
- *   <Modal open={open} onRequestClose={handleClose} />
- * </FeatureFlags>
- * ```
- *
- * @see https://github.com/carbon-design-system/carbon/blob/main/docs/feature-flags.md
- */
 const Modal = React.forwardRef<HTMLDivElement, ModalProps>(function Modal(
   { open, ...props },
   ref

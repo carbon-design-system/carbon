@@ -214,23 +214,6 @@ export interface ClickableTileProps extends HTMLAttributes<HTMLAnchorElement> {
   slug?: boolean;
 }
 
-/**
- * Clickable tile component.
- *
- * @featureFlag enable-v12-tile-default-icons - Renders a default arrow icon
- * inside the tile. **Will be on by default in v12.**
- *
- * Enable in your app:
- * ```tsx
- * import { FeatureFlags } from '@carbon/react';
- *
- * <FeatureFlags enableV12TileDefaultIcons>
- *   <ClickableTile href="#" />
- * </FeatureFlags>
- * ```
- *
- * @see https://github.com/carbon-design-system/carbon/blob/main/docs/feature-flags.md
- */
 export const ClickableTile = React.forwardRef<
   HTMLAnchorElement,
   ClickableTileProps

@@ -285,23 +285,6 @@ function stateReducer(state, actionAndChanges) {
   }
 }
 
-/**
- * Dropdown component.
- *
- * @featureFlag enable-v12-dynamic-floating-styles - Uses Floating UI for
- * dynamic positioning of the dropdown menu. **Will be on by default in v12.**
- *
- * Enable in your app:
- * ```tsx
- * import { FeatureFlags } from '@carbon/react';
- *
- * <FeatureFlags enableV12DynamicFloatingStyles>
- *   <Dropdown id="my-dropdown" items={items} />
- * </FeatureFlags>
- * ```
- *
- * @see https://github.com/carbon-design-system/carbon/blob/main/docs/feature-flags.md
- */
 const Dropdown = React.forwardRef(
   <ItemType,>(
     {

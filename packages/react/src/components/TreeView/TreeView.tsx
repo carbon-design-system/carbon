@@ -77,25 +77,6 @@ type TreeViewComponent = {
   TreeNode: typeof TreeNode;
 };
 
-/**
- * Tree view component.
- *
- * @featureFlag enable-treeview-controllable - Enables the controllable API for
- * `TreeView`, allowing external state to drive the active/selected nodes.
- *
- * Enable in your app:
- * ```tsx
- * import { FeatureFlags } from '@carbon/react';
- *
- * <FeatureFlags enableTreeviewControllable>
- *   <TreeView label="Tree view">
- *     <TreeNode id="node-1" label="Node 1" />
- *   </TreeView>
- * </FeatureFlags>
- * ```
- *
- * @see https://github.com/carbon-design-system/carbon/blob/main/docs/feature-flags.md
- */
 const TreeView: TreeViewComponent = ({
   active: prespecifiedActive,
   children,

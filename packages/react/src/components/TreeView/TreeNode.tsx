@@ -246,25 +246,6 @@ const useEllipsisCheck = (
   };
 };
 
-/**
- * Tree node component.
- *
- * @featureFlag enable-treeview-controllable - Enables the controllable API;
- * used internally by `TreeView` when the flag is on.
- *
- * Enable in your app:
- * ```tsx
- * import { FeatureFlags } from '@carbon/react';
- *
- * <FeatureFlags enableTreeviewControllable>
- *   <TreeView label="Tree view">
- *     <TreeNode id="node-1" label="Node 1" />
- *   </TreeView>
- * </FeatureFlags>
- * ```
- *
- * @see https://github.com/carbon-design-system/carbon/blob/main/docs/feature-flags.md
- */
 const TreeNode = React.forwardRef<HTMLElement, TreeNodeProps>(
   (
     {
