@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2022
+ * Copyright IBM Corp. 2022, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -208,24 +208,30 @@ describe('RadioTile', () => {
   });
 
   it('should check decorator prop and if AILabel exists on radio tile and is xs', async () => {
-    render(
+    const { container } = render(
       <RadioTile value="standard" decorator={<AILabel />}>
         {' '}
         Option 1{' '}
       </RadioTile>
     );
     expect(screen.getByRole('button')).toHaveClass(`cds--ai-label__button--xs`);
+    expect(container.querySelector('label')).not.toContainElement(
+      screen.getByRole('button')
+    );
   });
 
   it('should check deprecated slug prop and if AILabel exists on radio tile and is xs', async () => {
     const spy = jest.spyOn(console, 'warn').mockImplementation(() => {});
-    render(
+    const { container } = render(
       <RadioTile value="standard" slug={<AILabel />}>
         {' '}
         Option 1{' '}
       </RadioTile>
     );
     expect(screen.getByRole('button')).toHaveClass(`cds--ai-label__button--xs`);
+    expect(container.querySelector('label')).not.toContainElement(
+      screen.getByRole('button')
+    );
     spy.mockRestore();
   });
 

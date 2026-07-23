@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2025
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -131,6 +131,10 @@ const RadioTile = React.forwardRef(
   ) => {
     const prefix = usePrefix();
     const inputId = useFallbackId(id);
+    const wrapperClassName = cx(`${prefix}--radio-tile__wrapper`, {
+      [`${prefix}--radio-tile__wrapper--slug`]: slug,
+      [`${prefix}--radio-tile__wrapper--decorator`]: decorator,
+    });
     const className = cx(
       customClassName,
       `${prefix}--tile`,
@@ -187,7 +191,7 @@ const RadioTile = React.forwardRef(
       : candidate;
 
     return (
-      <div>
+      <div className={wrapperClassName}>
         <input
           checked={checked}
           className={`${prefix}--tile-input`}
@@ -207,16 +211,14 @@ const RadioTile = React.forwardRef(
         <label {...labelProps} htmlFor={inputId} className={className}>
           <span className={`${prefix}--tile__checkmark`}>{icon()}</span>
           <Text className={`${prefix}--tile-content`}>{children}</Text>
-          {slug ? (
-            normalizedDecorator
-          ) : decorator ? (
-            <div className={`${prefix}--tile--inner-decorator`}>
-              {normalizedDecorator}
-            </div>
-          ) : (
-            ''
-          )}
         </label>
+        {slug ? (
+          normalizedDecorator
+        ) : decorator ? (
+          <div className={`${prefix}--tile--inner-decorator`}>
+            {normalizedDecorator}
+          </div>
+        ) : null}
       </div>
     );
   }
