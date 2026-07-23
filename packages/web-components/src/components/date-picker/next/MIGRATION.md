@@ -19,7 +19,7 @@ classic and preview can coexist while you migrate.
 | `<cds-date-picker>`       | `<cds-preview-date-picker>`       |
 | `<cds-date-picker-input>` | `<cds-preview-date-picker-input>` |
 | `cds-date-picker-changed` | `cds-preview-date-picker-changed` |
-| —                         | `cds-preview-date-picker-error`   |
+| `cds-date-picker...`      | `cds-preview-date-picker...`      |
 
 ## Import and markup
 
