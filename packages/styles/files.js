@@ -248,8 +248,11 @@ module.exports = {
 
     // If we have an `_index.scss` entrypoint, we can re-export from the
     // directory itself
+    // Sass import specifiers are always `/`-separated, so these are built with
+    // `path.posix` — plain `path.join` emits `\` on Windows and every generated
+    // `@forward` fails to resolve.
     if (basename === '_index.scss') {
-      importPath = path.dirname(filepath);
+      importPath = path.posix.dirname(filepath);
     } else if (filepath !== 'index.scss') {
       // Otherwise, let's drop the leading `_` and trailing `.scss` from the
       // file name to get the import
@@ -257,13 +260,13 @@ module.exports = {
         .basename(filepath)
         .replace(/^_/, '')
         .replace(/\.scss$/, '');
-      importPath = path.join(path.dirname(filepath), basename);
+      importPath = path.posix.join(path.posix.dirname(filepath), basename);
     }
 
     return {
       filepath,
       relativePath: importPath,
-      importPath: path.join('@carbon/styles', importPath),
+      importPath: path.posix.join('@carbon/styles', importPath),
     };
   }),
 };
