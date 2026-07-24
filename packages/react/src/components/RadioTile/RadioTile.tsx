@@ -12,7 +12,7 @@ import {
 } from '@carbon/icons-react';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
-import React, { cloneElement } from 'react';
+import React, { cloneElement, useRef } from 'react';
 import { keys, matches } from '../../internal/keyboard';
 import { useFallbackId } from '../../internal/useId';
 import { usePrefix } from '../../internal/usePrefix';
@@ -22,6 +22,7 @@ import { Text } from '../Text';
 import { useFeatureFlag } from '../FeatureFlags';
 import { AILabel } from '../AILabel';
 import { isComponentElement } from '../../internal';
+import { useNoInteractiveChildren } from '../../internal/useNoInteractiveChildren';
 
 export interface RadioTileProps {
   /**
@@ -131,6 +132,7 @@ const RadioTile = React.forwardRef(
   ) => {
     const prefix = usePrefix();
     const inputId = useFallbackId(id);
+    const labelRef = useRef<HTMLLabelElement>(null);
     const wrapperClassName = cx(`${prefix}--radio-tile__wrapper`, {
       [`${prefix}--radio-tile__wrapper--slug`]: slug,
       [`${prefix}--radio-tile__wrapper--decorator`]: decorator,
@@ -189,6 +191,10 @@ const RadioTile = React.forwardRef(
     const normalizedDecorator = candidateIsAILabel
       ? cloneElement(candidate, { size: 'xs' })
       : candidate;
+    useNoInteractiveChildren(
+      labelRef,
+      'The RadioTile component `children` prop must have no interactive content'
+    );
 
     return (
       <div className={wrapperClassName}>
@@ -208,7 +214,11 @@ const RadioTile = React.forwardRef(
           ref={ref}
           required={required}
         />
-        <label {...labelProps} htmlFor={inputId} className={className}>
+        <label
+          {...labelProps}
+          htmlFor={inputId}
+          className={className}
+          ref={labelRef}>
           <span className={`${prefix}--tile__checkmark`}>{icon()}</span>
           <Text className={`${prefix}--tile-content`}>{children}</Text>
         </label>
