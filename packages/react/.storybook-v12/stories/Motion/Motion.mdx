@@ -1,0 +1,171 @@
+# Motion
+
+{/* <!-- START doctoc generated TOC please keep comment here to allow auto update --> <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE --> */}
+
+## Table of Contents
+
+- [Overview](#overview)
+  - [Surface definitions](#surface-definitions)
+- [Usage](#usage)
+  - [Motion surface wrappers](#motion-surface-wrappers)
+  - [Native CSS](#native-css)
+
+{/* <!-- END doctoc generated TOC please keep comment here to allow auto update --> */}
+
+## Overview
+
+### Surface definitions
+
+`@carbon/motion` ships a set of named motion surfaces that describe how a UI
+region should animate. Each surface pairs a duration token, enter/exit easing
+curves, and optional keyframe values so the same intent can be consumed by plain
+CSS or the [Motion library](https://motion.dev/) without any re-configuration.
+
+Two surface kinds are defined:
+
+1. reveal — animates a single element between two CSS states (e.g. block-size,
+   opacity, clip-path). Works with the Motion library or can be done with the
+   static CSS output from the `@carbon/motion` package.
+2. shared-element — morphs one element into another. Currently implemented with
+   the Motion library.
+
+| Surface      | Kind             | Duration      | Use case                                                  |
+| ------------ | ---------------- | ------------- | --------------------------------------------------------- |
+| `disclosure` | `reveal`         | `moderate-01` | Accordion, table row expand — reveal in place             |
+| `contextual` | `reveal`         | `fast-02`     | Icon → tooltip / popover                                  |
+| `stretch`    | `reveal`         | `slow-01`     | Component reveal stretching from the vertical axis        |
+| `expand`     | `shared-element` | `moderate-02` | Card / tile → side-panel / tearsheet                      |
+| `invoke`     | `shared-element` | `moderate-02` | Button → modal / menu / popover (morphs from the trigger) |
+
+## Usage
+
+### Motion surface wrappers
+
+Two React wrapper components — `MotionSurface` and `MotionSurfaceOrigin` — are
+provided in `src/internal/motion/MotionSurface` to apply named surface
+definitions. These wrappers utilize the [Motion library](https://motion.dev/).
+
+**`MotionSurface`** is the animated target element. It accepts a `surface` name
+from `@carbon/motion` and drives enter/exit animation via `motion/react`. It
+renders its children only while `open` is `true` and calls `onExitComplete` once
+the exit animation finishes.
+
+- For **`reveal`** surfaces (`disclosure`, `contextual`, `stretch`): no
+  `surfaceId` is needed. The component animates between the surface's `enter`
+  and `exit` keyframes.
+- For **`shared-element`** surfaces (`expand`, `invoke`): a `surfaceId` is
+  required and must match the `surfaceId` on a paired `MotionSurfaceOrigin`.
+  Motion then morphs between the two elements.
+
+**`MotionSurfaceOrigin`** marks the source element of a shared-element morph. It
+only applies to `shared-element` surfaces and must be given the same `surface`
+and `surfaceId` as its paired `MotionSurface`. It stays mounted at all times —
+Motion transitions the layout between origin and target rather than
+mounting/unmounting.
+
+```jsx
+<MotionSurfaceOrigin surface="expand" surfaceId="expand-my-tile">
+  <ClickableTile onClick={() => setOpen(true)}>…</ClickableTile>
+</MotionSurfaceOrigin>
+
+<MotionSurface
+  surface="expand"
+  surfaceId="expand-my-tile"
+  open={open}
+  onExitComplete={() => setSelected(null)}>
+  {/* dialog or destination content */}
+</MotionSurface>
+```
+
+> Using `MotionSurfaceOrigin` with a `reveal` surface (e.g. `disclosure`) will
+> log a warning — `reveal` surfaces have no origin element and should use
+> `MotionSurface` directly.
+
+When the user has `prefers-reduced-motion` enabled, both components fall back to
+a plain `<div>` with immediate mount/unmount — no Motion runs at all.
+
+### Native CSS
+
+`reveal` surfaces (`disclosure`, `contextual`, `stretch`) can be driven entirely
+with CSS — no JavaScript animation library required. The `@carbon/motion`
+package exposes a `surface()` Sass mixin that writes all enter/exit styles,
+transitions, and `@starting-style` rules from the shared surface map.
+
+**`shared-element` surfaces (`expand`, `invoke`) currently don't have no
+CSS-only form** — they require the Motion library. The mixin will throw a Sass
+error if you pass one.
+
+#### Sass setup
+
+Apply the mixin to the element you want to animate, scoped to a
+`[data-carbon-surface]` attribute selector:
+
+```scss
+@use '@carbon/styles/scss/motion' as motion;
+
+[data-carbon-surface='stretch'] {
+  @include motion.surface(stretch);
+}
+```
+
+The mixin outputs:
+
+- **Enter styles** (resting state and `[data-carbon-surface-state='enter']`) —
+  applied unconditionally so the element is always in its visible state by
+  default.
+- **Exit styles** (`[data-carbon-surface-state='exit']`) — applied when you set
+  `data-carbon-surface-state="exit"`.
+- **Transitions and `@starting-style`** — guarded behind
+  `prefers-reduced-motion: no-preference`. Users who prefer reduced motion see
+  no animation at all; the element jumps directly between enter/exit styles.
+
+#### HTML / JSX usage
+
+Set `data-carbon-surface` to the surface name and toggle
+`data-carbon-surface-state` between `"enter"` and `"exit"` to drive the
+transition:
+
+```jsx
+<div
+  data-carbon-surface="stretch"
+  data-carbon-surface-state={open ? 'enter' : 'exit'}>
+  {/* content */}
+</div>
+```
+
+#### Mounting and unmounting
+
+Because CSS transitions require the element to be in the DOM on both ends of the
+transition, you must keep the element **mounted while the exit transition runs**
+and only unmount it once the transition completes. Listen for `transitionend`
+and filter to a single property to avoid double-firing:
+
+```jsx
+const [open, setOpen] = useState(false);
+const [present, setPresent] = useState(false);
+
+// Mount when opening
+useEffect(() => {
+  if (open) setPresent(true);
+}, [open]);
+
+// Unmount only after the exit transition finishes
+const handleTransitionEnd = (event) => {
+  // Only react to the element itself, not bubbled children
+  if (event.target !== event.currentTarget) return;
+  // opacity and clip-path both fire — complete once, on opacity
+  if (event.propertyName !== 'opacity') return;
+  if (!open) setPresent(false);
+};
+
+return (
+  present && (
+    <div
+      data-carbon-surface="stretch"
+      data-carbon-surface-state={open ? 'enter' : 'exit'}
+      onTransitionEnd={handleTransitionEnd}>
+      {/* content */}
+    </div>
+  )
+);
+```

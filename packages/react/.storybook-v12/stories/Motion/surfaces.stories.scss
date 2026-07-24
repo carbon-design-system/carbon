@@ -1,0 +1,85 @@
+//
+// Copyright IBM Corp. 2026
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+@use '@carbon/styles/scss/motion' as motion;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/utilities/box-shadow' as *;
+
+.motion-surface-demo__grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $spacing-05;
+}
+
+.motion-surface-demo__origin {
+  inline-size: 18rem;
+}
+
+.motion-surface-demo__trigger {
+  display: inline-block;
+}
+
+// Neutralize stock modal container animations so neither path fights the
+// modal stylesheet. Motion path also kills transitions (Motion writes inline
+// values each frame). CSS reveal path keeps transitions from `surface()`.
+// stylelint-disable declaration-no-important
+.motion-surface-demo__container {
+  animation: none !important;
+}
+
+.motion-surface-demo__container:not([data-carbon-surface]) {
+  transition: none !important;
+}
+
+// Stock modal fades the overlay and slides the container with a `transition`
+// shorthand that would override the surface mixin's clip-path transition.
+// Kill those so only the shared stretch surface styles drive the reveal.
+// Keep the closed overlay hidden so it doesn't block the trigger.
+.motion-surface-demo__modal--css {
+  transition: none !important;
+}
+
+.motion-surface-demo__modal--css .motion-surface-demo__container {
+  transform: none !important;
+}
+
+// Native CSS reveal for stretch surface variant— tokens from @carbon/motion.
+.motion-surface-demo__modal--css
+  .motion-surface-demo__container[data-carbon-surface='stretch'] {
+  @include motion.surface(stretch);
+}
+// stylelint-enable declaration-no-important
+.motion-surface-tile {
+  margin-block-end: 1px;
+}
+
+.motion-surface-demo__container--expand {
+  block-size: 100%;
+  inline-size: 95%;
+}
+// stylelint-disable declaration-no-important
+.motion-surface-tile:active {
+  color: inherit !important;
+  text-decoration: none !important;
+}
+// stylelint-enable declaration-no-important
+
+// This adds a subtle hover effect to the tile for the expand story, this
+// is not part of the expand surface definition but we could add it if we
+// want to standardize it.
+@media (prefers-reduced-motion: no-preference) {
+  .motion-surface-tile:hover {
+    z-index: 1000;
+    border-radius: $spacing-03;
+    transform: scale(1.025);
+    @include box-shadow();
+
+    transition:
+      transform motion.$duration-moderate-01 motion(standard, productive),
+      border-radius motion.$duration-moderate-01 motion(standard, productive),
+      box-shadow motion.$duration-moderate-01 motion(standard, productive);
+  }
+}
