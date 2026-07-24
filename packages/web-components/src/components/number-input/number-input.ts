@@ -924,7 +924,7 @@ class CDSNumberInput extends CDSTextInput {
         pattern="${this.type === NUMBER_INPUT_TYPE.TEXT
           ? ifNonEmpty(this.pattern)
           : ''}"
-        ?readonly="${this.readonly}"
+        ?readonly="${this.readonly && !normalizedProps.disabled}"
         ?required="${this.required}"
         type="${this.type}"
         inputmode="${this.type === NUMBER_INPUT_TYPE.TEXT

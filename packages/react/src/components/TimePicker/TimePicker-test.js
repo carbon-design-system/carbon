@@ -350,5 +350,14 @@ describe('TimePicker', () => {
       );
       expect(screen.getByRole('textbox')).not.toHaveAttribute('aria-invalid');
     });
+
+    it('should prioritize disabled over readOnly when both are true', () => {
+      render(<TimePicker id="timepicker" disabled={true} readOnly={true} />);
+
+      const input = screen.getByRole('textbox');
+      expect(input).toHaveAttribute('disabled', '');
+      expect(input.disabled).toBe(true);
+      expect(input.readOnly).toBe(false);
+    });
   });
 });

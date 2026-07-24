@@ -428,7 +428,7 @@ class CDSSelect extends FormMixin(LitElement) {
       invalid: boolean;
       warn: boolean;
     } = {
-      disabled: !readonly && disabled,
+      disabled: disabled,
       invalid: !readonly && !disabled && invalid,
       warn: !readonly && !invalid && !disabled && warn,
     };
@@ -477,7 +477,7 @@ class CDSSelect extends FormMixin(LitElement) {
         class="${inputClasses}"
         ?disabled="${disabled}"
         title="${value}"
-        aria-readonly="${String(readonly)}"
+        aria-readonly="${ifDefined(readonly && !disabled ? 'true' : undefined)}"
         aria-invalid="${String(normalizedProps.invalid)}"
         aria-describedby="${ifDefined(describedBy)}"
         @input="${handleInput}">

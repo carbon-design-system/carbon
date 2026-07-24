@@ -815,6 +815,7 @@ const ComboBox = forwardRef(
 
     const titleClasses = cx(`${prefix}--label`, {
       [`${prefix}--label--disabled`]: disabled,
+      [`${prefix}--label--readonly`]: readOnly && !disabled,
     });
     const helperTextId = `combobox-helper-text-${comboBoxInstanceId}`;
     const warnTextId = `combobox-warn-text-${comboBoxInstanceId}`;
@@ -1208,7 +1209,7 @@ const ComboBox = forwardRef(
               })}
               {...rest}
               {...readOnlyEventHandlers}
-              readOnly={readOnly}
+              {...(readOnly && !disabled ? { readOnly: true } : {})}
               aria-describedby={ariaDescribedBy}
             />
 

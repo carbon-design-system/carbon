@@ -243,6 +243,14 @@
     fill: $icon-disabled;
   }
 
+  // Disabled takes precedence over read-only
+  .#{$prefix}--date-picker__input:disabled {
+    background-color: $field;
+    border-block-end: 1px solid transparent;
+    color: $text-disabled;
+    cursor: not-allowed;
+  }
+
   // Skeleton State
   .#{$prefix}--date-picker.#{$prefix}--skeleton input,
   .#{$prefix}--date-picker__input.#{$prefix}--skeleton {

@@ -87,6 +87,26 @@ $css--plex: true !default;
   }
 }
 
+:host(#{$prefix}-combo-box[disabled]) {
+  // Disabled takes precedence over read-only
+  .#{$prefix}--combo-box,
+  .#{$prefix}--combo-box:hover {
+    background-color: $field;
+  }
+
+  .#{$prefix}--text-input {
+    border-block-end: 1px solid transparent;
+  }
+
+  .#{$prefix}--list-box {
+    border-block-end: none;
+  }
+
+  .#{$prefix}--form__helper-text {
+    color: $text-disabled;
+  }
+}
+
 :host(#{$prefix}-combo-box-item) {
   @extend .#{$prefix}--list-box__menu-item;
 
