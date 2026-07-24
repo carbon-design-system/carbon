@@ -760,6 +760,48 @@ describe('Tab', () => {
     }
   });
 
+  it('should hide next overflow button immediately when scrolling reaches the end', () => {
+    jest.useFakeTimers();
+    const clientWidthSpy = jest
+      .spyOn(HTMLElement.prototype, 'clientWidth', 'get')
+      .mockImplementation(function () {
+        return this.getAttribute?.('role') === 'tablist' ||
+          this.classList?.contains(`${prefix}--tabs`)
+          ? 100
+          : 0;
+      });
+    const scrollWidthSpy = jest
+      .spyOn(HTMLElement.prototype, 'scrollWidth', 'get')
+      .mockImplementation(function () {
+        return this.getAttribute?.('role') === 'tablist' ? 200 : 0;
+      });
+
+    try {
+      render(
+        <Tabs>
+          <TabList aria-label="List of tabs" />
+        </Tabs>
+      );
+
+      const tablist = screen.getByRole('tablist');
+      Object.defineProperty(tablist, 'scrollLeft', {
+        configurable: true,
+        writable: true,
+        value: 100,
+      });
+
+      fireEvent.scroll(tablist);
+
+      expect(screen.getByLabelText('Scroll right')).toHaveClass(
+        `${prefix}--tab--overflow-nav-button--hidden`
+      );
+    } finally {
+      clientWidthSpy.mockRestore();
+      scrollWidthSpy.mockRestore();
+      jest.useRealTimers();
+    }
+  });
+
   it('should not call onCloseTabRequest when dismissable and delete pressed on focused disabled tab', async () => {
     const onTabCloseRequest = jest.fn();
     render(

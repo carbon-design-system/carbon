@@ -563,14 +563,28 @@ function TabList({
   );
 
   const tabs = useRef<TabElement[]>([]);
-  const debouncedOnScroll = useCallback(() => {
-    const updateScroll = debounce(() => {
-      if (ref.current) {
-        setScrollLeft(ref.current.scrollLeft);
-      }
-    }, scrollDebounceWait);
-    updateScroll();
-  }, [scrollDebounceWait]);
+  const debouncedUpdateScroll = useMemo(
+    () =>
+      debounce(() => {
+        if (ref.current) {
+          setScrollLeft(ref.current.scrollLeft);
+        }
+      }, scrollDebounceWait),
+    [scrollDebounceWait]
+  );
+
+  useEffect(() => {
+    return () => {
+      debouncedUpdateScroll.cancel();
+    };
+  }, [debouncedUpdateScroll]);
+
+  const handleScroll = useCallback(() => {
+    // Keep the overflow controls in sync with smooth scrolling while the
+    // scroll position state continues to respect scrollDebounceWait.
+    updateOverflowState();
+    debouncedUpdateScroll();
+  }, [debouncedUpdateScroll, updateOverflowState]);
 
   function onKeyDown(event: KeyboardEvent) {
     if (
@@ -765,7 +779,7 @@ function TabList({
         ref={ref}
         role="tablist"
         className={`${prefix}--tab--list`}
-        onScroll={debouncedOnScroll}
+        onScroll={handleScroll}
         onKeyDown={onKeyDown}
         onBlur={handleBlur}>
         {Children.map(children, (child, index) => {
