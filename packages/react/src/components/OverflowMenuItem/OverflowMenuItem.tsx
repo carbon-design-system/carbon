@@ -176,6 +176,7 @@ const OverflowMenuItem = frFn((props, ref) => {
   return (
     <Text as="li" className={overflowMenuItemClasses} role="none">
       <TagToUse
+        aria-disabled={disabled ? true : undefined}
         className={overflowMenuBtnClasses}
         disabled={disabled}
         href={href}
