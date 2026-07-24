@@ -1,0 +1,92 @@
+//
+// Copyright IBM Corp. 2026
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use '../../config' as *;
+@use '../../spacing' as *;
+@use '../../theme' as *;
+@use '../../utilities/convert';
+
+/// Page footer styles
+/// @access public
+/// @group page-footer
+@mixin page-footer {
+  $inline-start-offset: $spacing-05;
+  $min-inline-button-size: convert.to-rem(176px);
+  $max-page-footer-buttons: 4;
+
+  .#{$prefix}--page-footer {
+    position: sticky;
+    z-index: 1;
+    background-color: $background;
+    border-block-start: 1px solid $border-subtle;
+    inline-size: 100%;
+    inset-block-end: 0;
+  }
+
+  .#{$prefix}--page-footer__button-set {
+    inline-size: 100%;
+  }
+
+  // Keep each inline action aligned to one quarter of the 16-column page
+  // layout. Include the ghost action's inline offset in the threshold so the
+  // fluid button set stacks before the actions can overflow.
+  @for $i from 1 through $max-page-footer-buttons {
+    @container (width <= #{($i * $min-inline-button-size) + $inline-start-offset}) {
+      .#{$prefix}--page-footer__button-set
+        .#{$prefix}--btn-set__fluid-inner--auto-stack:has(
+          :nth-child(#{$i}):last-child
+        ) {
+        --flex-direction: column;
+      }
+
+      .#{$prefix}--page-footer__button-set
+        .#{$prefix}--btn-set__fluid-inner--auto-stack:has(
+          :nth-child(#{$i}):last-child
+        )
+        .#{$prefix}--btn {
+        flex: initial;
+        inline-size: 100%;
+        max-inline-size: none;
+      }
+
+      .#{$prefix}--page-footer__button-set
+        .#{$prefix}--btn-set__fluid-inner--auto-stack:has(
+          :nth-child(#{$i}):last-child
+        )
+        .#{$prefix}--btn--ghost,
+      .#{$prefix}--page-footer__button-set
+        .#{$prefix}--btn-set__fluid-inner--auto-stack:has(
+          :nth-child(#{$i}):last-child
+        )
+        .#{$prefix}--btn--danger--ghost {
+        padding-inline-start: $spacing-05;
+      }
+    }
+
+    @container (width > #{($i * $min-inline-button-size) + $inline-start-offset}) {
+      .#{$prefix}--page-footer__button-set
+        .#{$prefix}--btn-set__fluid-inner:has(:nth-child(#{$i}):last-child)
+        .#{$prefix}--btn {
+        flex: 0 1 25%;
+        max-inline-size: none;
+      }
+
+      .#{$prefix}--page-footer__button-set
+        .#{$prefix}--btn-set__fluid-inner:has(:nth-child(#{$i}):last-child)
+        .#{$prefix}--btn--ghost,
+      .#{$prefix}--page-footer__button-set
+        .#{$prefix}--btn-set__fluid-inner:has(:nth-child(#{$i}):last-child)
+        .#{$prefix}--btn--danger--ghost {
+        flex: 0 1 25%;
+        margin-inline-end: auto;
+        margin-inline-start: $inline-start-offset;
+        max-inline-size: none;
+        padding-inline-start: $spacing-05;
+      }
+    }
+  }
+}

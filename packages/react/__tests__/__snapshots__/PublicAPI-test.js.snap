@@ -11945,6 +11945,18 @@ Map {
     },
   },
   "preview_OverflowMenuV2" => {},
+  "preview_PageFooter" => {
+    "$$typeof": Symbol(react.forward_ref),
+    "propTypes": {
+      "children": {
+        "type": "node",
+      },
+      "className": {
+        "type": "string",
+      },
+    },
+    "render": [Function],
+  },
   "preview_PageSelector" => {
     "propTypes": {
       "className": {

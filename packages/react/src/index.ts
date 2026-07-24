@@ -72,6 +72,7 @@ export * from './components/NumberInput';
 export * from './components/OrderedList';
 export * from './components/OverflowMenu';
 export * from './components/OverflowMenuItem';
+export { PageFooter as preview_PageFooter } from './components/PageFooter';
 export * as unstable__PageHeader from './components/PageHeader';
 export * as preview__PageHeader from './components/PageHeader';
 export * as preview__Dialog from './components/Dialog';
@@ -539,6 +540,9 @@ export type { OrderedListProps } from './components/OrderedList/OrderedList';
 //overflow menu
 export type { OverflowMenuProps } from './components/OverflowMenu/OverflowMenu';
 export type { OverflowMenuItemProps } from './components/OverflowMenuItem/OverflowMenuItem';
+
+//page footer
+export type { PageFooterProps } from './components/PageFooter/PageFooter';
 
 //page header
 export type {
