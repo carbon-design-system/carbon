@@ -172,6 +172,31 @@ describe('cds-checkbox', function () {
     expect(inputElement.hasAttribute('aria-readonly')).to.be.true;
   });
 
+  it('should announce readonly state to screen readers', async () => {
+    const checkbox = html`<cds-checkbox readOnly>Checkbox Label</cds-checkbox>`;
+    const el = await fixture(checkbox);
+
+    const visuallyHidden = el.shadowRoot.querySelector('.cds--visually-hidden');
+    expect(visuallyHidden).to.exist;
+    expect(visuallyHidden.textContent.trim()).to.equal('Read only');
+
+    const inputElement = el.shadowRoot.querySelector('input');
+    expect(inputElement.getAttribute('aria-describedby')).to.include(
+      'readonly-text'
+    );
+  });
+
+  it('should support a custom read-only-text', async () => {
+    const checkbox = html`<cds-checkbox readOnly read-only-text="Solo lectura"
+      >Checkbox Label</cds-checkbox
+    >`;
+    const el = await fixture(checkbox);
+
+    const visuallyHidden = el.shadowRoot.querySelector('.cds--visually-hidden');
+    expect(visuallyHidden).to.exist;
+    expect(visuallyHidden.textContent.trim()).to.equal('Solo lectura');
+  });
+
   it('should remain disabled when readOnly and disabled are both true', async () => {
     const checkbox = html`<cds-checkbox readOnly disabled
       >Checkbox Label</cds-checkbox

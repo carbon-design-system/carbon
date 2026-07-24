@@ -27,6 +27,10 @@ function translateWithId(id) {
     return 'decrement';
   }
 
+  if (id === 'carbon.number-input.read-only') {
+    return 'Read only';
+  }
+
   throw new Error(`Unknown message id: ${id}`);
 }
 
@@ -452,6 +456,37 @@ describe('NumberInput', () => {
         'readonly',
         ''
       );
+    });
+
+    it('should announce the readonly state to screen readers via a visually-hidden description', () => {
+      render(<NumberInput label="test-label" id="test" readOnly />);
+
+      const readOnlyText = screen.getByText('Read only');
+      expect(readOnlyText).toBeInTheDocument();
+      expect(readOnlyText).toHaveClass('cds--visually-hidden');
+      expect(readOnlyText).toHaveAttribute('id');
+
+      const input = screen.getByLabelText('test-label');
+      expect(input.getAttribute('aria-describedby')).toContain(
+        readOnlyText.getAttribute('id')
+      );
+    });
+
+    it('should support custom translation of the readonly state via translateWithId', () => {
+      const translateWithId = (id) =>
+        id === 'carbon.number-input.read-only' ? 'Nur lesen' : id;
+      render(
+        <NumberInput
+          label="test-label"
+          id="test"
+          readOnly
+          translateWithId={translateWithId}
+        />
+      );
+
+      const readOnlyText = screen.getByText('Nur lesen');
+      expect(readOnlyText).toBeInTheDocument();
+      expect(readOnlyText).toHaveClass('cds--visually-hidden');
     });
 
     it('should set the defaultValue of the <input> with `defaultValue`', () => {

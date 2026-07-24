@@ -88,6 +88,35 @@ describe('FilterableMultiSelect', () => {
     ).toBeFalsy();
   });
 
+  it('should announce readonly state to screen readers', async () => {
+    const items = generateItems(4, generateGenericItem);
+    const label = 'test-label';
+    const { container } = render(
+      <FilterableMultiSelect
+        id="test"
+        readOnly={true}
+        label={label}
+        items={items}
+      />
+    );
+    await waitForPosition();
+
+    // The visually-hidden "Read only" text node should exist
+    // eslint-disable-next-line testing-library/no-node-access
+    const readOnlyText = container.querySelector('#test-readonly-text');
+    expect(readOnlyText).toBeInTheDocument();
+    expect(readOnlyText).toHaveClass('cds--visually-hidden');
+    expect(readOnlyText).toHaveTextContent('Read only');
+
+    // The focusable combobox input should reference the readonly text and be aria-readonly
+    // eslint-disable-next-line testing-library/no-node-access
+    const input = container.querySelector('input');
+    expect(input).toHaveAttribute('aria-readonly', 'true');
+    expect(input.getAttribute('aria-describedby')).toContain(
+      'test-readonly-text'
+    );
+  });
+
   it('should display helper text instead of warning when disabled', async () => {
     render(
       <FilterableMultiSelect
@@ -1530,5 +1559,28 @@ describe('FilterableMultiSelect', () => {
       .getAllByRole('option')
       .slice(1)
       .forEach((opt) => expect(opt).toHaveAttribute('aria-selected', 'false'));
+  });
+});
+
+describe('FilterableMultiSelect readOnly translation', () => {
+  it('should support a custom translateWithId for the read-only text', async () => {
+    const items = generateItems(4, generateGenericItem);
+    const { container } = render(
+      <FilterableMultiSelect
+        id="test"
+        readOnly={true}
+        label="test-label"
+        items={items}
+        translateWithId={(id) =>
+          id === 'carbon.multi-select.read-only' ? 'Custom read only' : ''
+        }
+      />
+    );
+    await waitForPosition();
+
+    // eslint-disable-next-line testing-library/no-node-access
+    const readOnlyText = container.querySelector('#test-readonly-text');
+    expect(readOnlyText).toBeInTheDocument();
+    expect(readOnlyText).toHaveTextContent('Custom read only');
   });
 });

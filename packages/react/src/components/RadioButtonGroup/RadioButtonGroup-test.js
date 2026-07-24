@@ -177,6 +177,34 @@ describe('RadioButtonGroup', () => {
       expect(radio2).not.toBeChecked();
     });
 
+    it('should announce the readonly state to screen readers', () => {
+      const { container } = render(
+        <RadioButtonGroup
+          defaultSelected="test-1"
+          readOnly={true}
+          name="test"
+          legendText="test">
+          <RadioButton labelText="test-1" value="test-1" />
+          <RadioButton labelText="test-2" value="test-2" />
+        </RadioButtonGroup>
+      );
+
+      const fieldset = container.querySelector('fieldset');
+      expect(fieldset).toHaveAttribute('aria-readonly', 'true');
+
+      // The read-only announcement is carried by each focusable radio input
+      // (propagated from the group), not duplicated on the fieldset.
+      const radios = container.querySelectorAll('input[type="radio"]');
+      expect(radios.length).toBe(2);
+      radios.forEach((radio) => {
+        const describedBy = radio.getAttribute('aria-describedby');
+        expect(describedBy).toBeTruthy();
+        const readOnlyText = document.getElementById(describedBy);
+        expect(readOnlyText).toHaveClass(`${prefix}--visually-hidden`);
+        expect(readOnlyText).toHaveTextContent('Read only');
+      });
+    });
+
     it('should support `defaultSelected` as a way to select a radio button', () => {
       render(
         <RadioButtonGroup

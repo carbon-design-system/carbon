@@ -102,7 +102,9 @@ export interface FilterableMultiSelectProps<ItemType>
   extends MultiSelectSortingProps<ItemType>,
     React.RefAttributes<HTMLDivElement>,
     TranslateWithId<
-      ListBoxSelectionTranslationKey | ListBoxMenuIconTranslationKey
+      | ListBoxSelectionTranslationKey
+      | ListBoxMenuIconTranslationKey
+      | 'carbon.multi-select.read-only'
     > {
   /**
    * Specify a label to be read by screen readers on the container node
@@ -593,6 +595,7 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
   );
   const menuId = `${id}__menu`;
   const inputId = `${id}-input`;
+  const readOnlyId = `${id}-readonly-text`;
 
   useEffect(() => {
     if (!isOpen) {
@@ -1027,6 +1030,11 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
           <input
             className={inputClasses}
             {...inputProp}
+            aria-readonly={readOnly || undefined}
+            aria-describedby={
+              cx(inputProp['aria-describedby'], readOnly && readOnlyId) ||
+              undefined
+            }
             ref={mergedRef}
             {...readOnlyEventHandlers}
             readOnly={readOnly}
@@ -1142,6 +1150,11 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
         </ListBox.Menu>
       </ListBox>
       {!inline && showHelperText ? helper : null}
+      {readOnly && (
+        <span id={readOnlyId} className={`${prefix}--visually-hidden`}>
+          {translateWithId?.('carbon.multi-select.read-only') ?? 'Read only'}
+        </span>
+      )}
     </div>
   );
 }) as {

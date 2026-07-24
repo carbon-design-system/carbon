@@ -386,12 +386,14 @@ describe('CheckboxGroup', () => {
         class: `${prefix}--checkbox`,
         id: 'checkbox-1',
         'aria-readonly': 'true',
+        'aria-describedby': 'checkbox-1-readonly-text',
         type: 'checkbox',
       });
       expect(attributes2).toEqual({
         class: `${prefix}--checkbox`,
         id: 'checkbox-2',
         'aria-readonly': 'true',
+        'aria-describedby': 'checkbox-2-readonly-text',
         type: 'checkbox',
       });
     });
@@ -422,6 +424,7 @@ describe('CheckboxGroup', () => {
         id: 'checkbox-2',
         // Should be read-only because it inherits from the group.
         'aria-readonly': 'true',
+        'aria-describedby': 'checkbox-2-readonly-text',
         type: 'checkbox',
       });
     });
@@ -443,6 +446,7 @@ describe('CheckboxGroup', () => {
         class: `${prefix}--checkbox`,
         id: 'checkbox-1',
         'aria-readonly': 'true',
+        'aria-describedby': 'checkbox-1-readonly-text',
         type: 'checkbox',
       });
       expect(nonCheckboxAttributes).toEqual({

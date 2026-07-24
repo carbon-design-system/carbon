@@ -171,6 +171,19 @@ describe('Toggle', () => {
       expect(onClick).toHaveBeenCalledTimes(1);
       expect(onToggle).not.toHaveBeenCalled();
     });
+
+    it('supports translateWithId for the read-only screen reader text', () => {
+      const { container } = render(
+        <Toggle {...props} readOnly translateWithId={() => 'Solo lectura'} />
+      );
+
+      // eslint-disable-next-line testing-library/no-node-access
+      const readOnlyText = container.querySelector(
+        `.${prefix}--visually-hidden`
+      );
+      expect(readOnlyText).toBeInTheDocument();
+      expect(readOnlyText).toHaveTextContent('Solo lectura');
+    });
   });
 
   describe('emits events as expected', () => {

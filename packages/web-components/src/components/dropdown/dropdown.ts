@@ -1018,6 +1018,12 @@ class CDSDropdown extends ValidityMixin(
   readOnly = false;
 
   /**
+   * The text announced to screen readers when the component is read-only.
+   */
+  @property({ attribute: 'read-only-text' })
+  readOnlyText = 'Read only';
+
+  /**
    * `true` if the value is required.
    */
   @property({ type: Boolean, reflect: true })
@@ -1275,6 +1281,8 @@ class CDSDropdown extends ValidityMixin(
       ariaLabel,
       _classes: classes,
       disabled,
+      readOnly,
+      readOnlyText,
       helperText,
       invalidText,
       open,
@@ -1389,7 +1397,16 @@ class CDSDropdown extends ValidityMixin(
               : open
                 ? (activeDescendant ?? activeDescendantFallback)
                 : ''
+          )}"
+          aria-readonly="${ifDefined(readOnly ? 'true' : undefined)}"
+          aria-describedby="${ifDefined(
+            readOnly ? 'readonly-text' : undefined
           )}">
+          ${readOnly
+            ? html`<span id="readonly-text" class="${prefix}--visually-hidden"
+                >${readOnlyText}</span
+              >`
+            : null}
           ${this._renderPrecedingLabel()}${this._renderLabel()}${this._renderFollowingLabel()}
           <div id="trigger-caret" class="${iconContainerClasses}">
             ${iconLoader(ChevronDown16, { 'aria-label': toggleLabel })}

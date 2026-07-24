@@ -197,6 +197,12 @@ class CDSRadioButtonGroup extends FormMixin(HostListenerMixin(LitElement)) {
   readOnly = false;
 
   /**
+   * The text announced to screen readers when the component is read-only.
+   */
+  @property({ attribute: 'read-only-text' })
+  readOnlyText = 'Read only';
+
+  /**
    * `true` to specify if input selection in group is required.
    */
   @property({ type: Boolean, reflect: true })
@@ -296,8 +302,17 @@ class CDSRadioButtonGroup extends FormMixin(HostListenerMixin(LitElement)) {
     return html` <fieldset
         class="${fieldsetClasses}"
         ?disabled="${disabled}"
-        aria-describedby="${ifDefined(describedBy)}"
-        aria-readonly="${readOnly}">
+        aria-readonly=${ifDefined(readOnly ? 'true' : undefined)}
+        aria-describedby="${ifDefined(
+          [describedBy, readOnly ? 'readonly-text' : undefined]
+            .filter(Boolean)
+            .join(' ') || undefined
+        )}">
+        ${readOnly
+          ? html`<span id="readonly-text" class="${prefix}--visually-hidden"
+              >${this.readOnlyText}</span
+            >`
+          : null}
         ${legendText
           ? html` <legend class="${prefix}--label">
               ${legendText}

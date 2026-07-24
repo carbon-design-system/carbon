@@ -77,7 +77,9 @@ export interface OnChangeData<ItemType> {
 
 export interface DropdownProps<ItemType>
   extends Omit<HTMLAttributes<HTMLDivElement>, ExcludedAttributes>,
-    TranslateWithId<ListBoxMenuIconTranslationKey> {
+    TranslateWithId<
+      ListBoxMenuIconTranslationKey | 'carbon.dropdown.read-only'
+    > {
   /**
    * Specify a label to be read by screen readers on the container node
    * 'aria-label' of the ListBox component.
@@ -596,6 +598,8 @@ const Dropdown = React.forwardRef(
       }
     }, [readOnly, onKeyDownHandler]);
 
+    const readOnlyId = `${id}-readonly-text`;
+
     const menuProps = useMemo(
       () =>
         getMenuProps({
@@ -651,18 +655,20 @@ const Dropdown = React.forwardRef(
             // aria-expanded is already being passed through {...toggleButtonProps}
             className={`${prefix}--list-box__field`}
             disabled={normalizedProps.disabled}
-            aria-disabled={readOnly ? true : undefined} // aria-disabled to remain focusable
             aria-describedby={
-              !inline &&
-              !normalizedProps.invalid &&
-              !normalizedProps.warn &&
-              helper
-                ? normalizedProps.helperId
-                : normalizedProps.invalid
-                  ? normalizedProps.invalidId
-                  : normalizedProps.warn
-                    ? normalizedProps.warnId
-                    : undefined
+              cx(
+                !inline &&
+                  !normalizedProps.invalid &&
+                  !normalizedProps.warn &&
+                  helper
+                  ? normalizedProps.helperId
+                  : normalizedProps.invalid
+                    ? normalizedProps.invalidId
+                    : normalizedProps.warn
+                      ? normalizedProps.warnId
+                      : undefined,
+                { [readOnlyId]: readOnly }
+              ) || undefined
             }
             title={
               selectedItem && itemToString !== undefined
@@ -685,6 +691,11 @@ const Dropdown = React.forwardRef(
               translateWithId={translateWithId}
             />
           </button>
+          {readOnly && (
+            <span id={readOnlyId} className={`${prefix}--visually-hidden`}>
+              {translateWithId?.('carbon.dropdown.read-only') ?? 'Read only'}
+            </span>
+          )}
           {slug ? (
             normalizedDecorator
           ) : decorator ? (

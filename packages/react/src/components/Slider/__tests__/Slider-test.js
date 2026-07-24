@@ -535,6 +535,39 @@ describe('Slider', () => {
       expect(onChange).toHaveBeenCalledTimes(0);
     });
 
+    it('should announce readOnly state to screen readers', () => {
+      const { container } = renderSlider({
+        ariaLabelInput: inputAriaValue,
+        readOnly: true,
+      });
+
+      const readOnlyText = container.querySelector(
+        `.${prefix}--visually-hidden`
+      );
+      expect(readOnlyText).toBeInTheDocument();
+      expect(readOnlyText).toHaveTextContent('Read only');
+
+      const theSlider = screen.getByRole('slider');
+      expect(theSlider).toHaveAttribute('aria-readonly', 'true');
+      expect(theSlider).toHaveAttribute('aria-describedby', readOnlyText.id);
+    });
+
+    it('should support custom translation of the readOnly state via translateWithId', () => {
+      const translateWithId = (id) =>
+        id === 'carbon.slider.read-only' ? 'Nur lesen' : id;
+      const { container } = renderSlider({
+        ariaLabelInput: inputAriaValue,
+        readOnly: true,
+        translateWithId,
+      });
+
+      const readOnlyText = container.querySelector(
+        `.${prefix}--visually-hidden`
+      );
+      expect(readOnlyText).toBeInTheDocument();
+      expect(readOnlyText).toHaveTextContent('Nur lesen');
+    });
+
     it('should ignore direct change events when `readOnly` is `true`', () => {
       renderSlider({
         ariaLabelInput: inputAriaValue,
