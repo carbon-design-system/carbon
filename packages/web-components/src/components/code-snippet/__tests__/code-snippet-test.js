@@ -358,11 +358,12 @@ describe('maxCollapsedNumberOfRows / minCollapsedNumberOfRows / maxExpandedNumbe
 
     await el.updateComplete;
 
-    const showMoreButton = el.shadowRoot.querySelector(
-      '.cds--snippet-btn--expand'
-    );
-    expect(showMoreButton).to.exist;
-    showMoreButton.click();
+    // ResizeObserver never fires with real dimensions in a headless environment,
+    // so _shouldShowMoreLessBtn stays false and the show-more button is not
+    // rendered. Drive the expanded state directly to test the style application.
+    el._shouldShowMoreLessBtn = true;
+    el._expandedCode = true;
+    el.requestUpdate();
     await el.updateComplete;
 
     const container = el.shadowRoot.querySelector('.cds--snippet-container');
@@ -382,11 +383,12 @@ describe('maxCollapsedNumberOfRows / minCollapsedNumberOfRows / maxExpandedNumbe
 
     await el.updateComplete;
 
-    const showMoreButton = el.shadowRoot.querySelector(
-      '.cds--snippet-btn--expand'
-    );
-    expect(showMoreButton).to.exist;
-    showMoreButton.click();
+    // ResizeObserver never fires with real dimensions in a headless environment,
+    // so _shouldShowMoreLessBtn stays false and the show-more button is not
+    // rendered. Drive the expanded state directly to test the style application.
+    el._shouldShowMoreLessBtn = true;
+    el._expandedCode = true;
+    el.requestUpdate();
     await el.updateComplete;
 
     const container = el.shadowRoot.querySelector('.cds--snippet-container');
@@ -405,11 +407,12 @@ describe('maxCollapsedNumberOfRows / minCollapsedNumberOfRows / maxExpandedNumbe
 
     await el.updateComplete;
 
-    const showMoreButton = el.shadowRoot.querySelector(
-      '.cds--snippet-btn--expand'
-    );
-    expect(showMoreButton).to.exist;
-    showMoreButton.click();
+    // ResizeObserver never fires with real dimensions in a headless environment,
+    // so _shouldShowMoreLessBtn stays false and the show-more button is not
+    // rendered. Drive the expanded state directly to test the style application.
+    el._shouldShowMoreLessBtn = true;
+    el._expandedCode = true;
+    el.requestUpdate();
     await el.updateComplete;
 
     const container = el.shadowRoot.querySelector('.cds--snippet-container');
