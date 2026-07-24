@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2016, 2023
+// Copyright IBM Corp. 2016, 2026
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -388,8 +388,20 @@ $-icon-container-size: calc(#{layout.density('padding-inline')} * 2 + 1rem);
     fill: $icon-disabled;
   }
 
+  .#{$prefix}--clickable-tile__wrapper,
+  .#{$prefix}--radio-tile__wrapper--decorator,
+  .#{$prefix}--radio-tile__wrapper--slug {
+    position: relative;
+  }
+
   // AILabel styles
   .#{$prefix}--tile > .#{$prefix}--tile--inner-decorator > *,
+  .#{$prefix}--clickable-tile__wrapper > .#{$prefix}--tile--inner-decorator > *,
+  .#{$prefix}--radio-tile__wrapper--decorator
+    > .#{$prefix}--tile--inner-decorator
+    > *,
+  .#{$prefix}--radio-tile__wrapper--slug > .#{$prefix}--ai-label,
+  .#{$prefix}--radio-tile__wrapper--slug > .#{$prefix}--slug,
   .#{$prefix}--tile--expandable > div > .#{$prefix}--tile--inner-decorator > *,
   .#{$prefix}--tile > .#{$prefix}--ai-label,
   .#{$prefix}--tile--expandable > div > .#{$prefix}--ai-label,
@@ -404,18 +416,38 @@ $-icon-container-size: calc(#{layout.density('padding-inline')} * 2 + 1rem);
   .#{$prefix}--tile.#{$prefix}--tile--selectable
     > .#{$prefix}--tile--inner-decorator
     > *,
+  .#{$prefix}--radio-tile__wrapper--decorator
+    > .#{$prefix}--tile.#{$prefix}--tile--selectable
+    + .#{$prefix}--tile--inner-decorator
+    > *,
   .#{$prefix}--tile.#{$prefix}--tile--selectable > .#{$prefix}--ai-label,
-  .#{$prefix}--tile.#{$prefix}--tile--selectable > .#{$prefix}--slug {
+  .#{$prefix}--tile.#{$prefix}--tile--selectable > .#{$prefix}--slug,
+  .#{$prefix}--radio-tile__wrapper--slug
+    > .#{$prefix}--tile.#{$prefix}--tile--selectable
+    + .#{$prefix}--ai-label,
+  .#{$prefix}--radio-tile__wrapper--slug
+    > .#{$prefix}--tile.#{$prefix}--tile--selectable
+    + .#{$prefix}--slug {
     inset-inline-end: $spacing-08;
   }
 
   .#{$prefix}--tile.#{$prefix}--tile--selectable.#{$prefix}--tile--radio
     > .#{$prefix}--tile--inner-decorator
     > *,
+  .#{$prefix}--radio-tile__wrapper--decorator
+    > .#{$prefix}--tile.#{$prefix}--tile--selectable.#{$prefix}--tile--radio
+    + .#{$prefix}--tile--inner-decorator
+    > *,
   .#{$prefix}--tile.#{$prefix}--tile--selectable.#{$prefix}--tile--radio
     > .#{$prefix}--ai-label,
   .#{$prefix}--tile.#{$prefix}--tile--selectable.#{$prefix}--tile--radio
-    > .#{$prefix}--slug {
+    > .#{$prefix}--slug,
+  .#{$prefix}--radio-tile__wrapper--slug
+    > .#{$prefix}--tile.#{$prefix}--tile--selectable.#{$prefix}--tile--radio
+    + .#{$prefix}--ai-label,
+  .#{$prefix}--radio-tile__wrapper--slug
+    > .#{$prefix}--tile.#{$prefix}--tile--selectable.#{$prefix}--tile--radio
+    + .#{$prefix}--slug {
     inset-inline-end: $spacing-05;
     transition: inset-inline-end $duration-fast-02 motion(standard, productive);
 
@@ -431,25 +463,35 @@ $-icon-container-size: calc(#{layout.density('padding-inline')} * 2 + 1rem);
   .#{$prefix}--tile.#{$prefix}--tile--selectable.#{$prefix}--tile--radio.#{$prefix}--tile--is-selected
     > .#{$prefix}--tile--inner-decorator
     > *,
+  .#{$prefix}--radio-tile__wrapper--decorator
+    > .#{$prefix}--tile.#{$prefix}--tile--selectable.#{$prefix}--tile--radio.#{$prefix}--tile--is-selected
+    + .#{$prefix}--tile--inner-decorator
+    > *,
   .#{$prefix}--tile.#{$prefix}--tile--selectable.#{$prefix}--tile--radio.#{$prefix}--tile--is-selected
     > .#{$prefix}--ai-label,
   .#{$prefix}--tile.#{$prefix}--tile--selectable.#{$prefix}--tile--radio.#{$prefix}--tile--is-selected
-    > .#{$prefix}--slug {
+    > .#{$prefix}--slug,
+  .#{$prefix}--radio-tile__wrapper--slug
+    > .#{$prefix}--tile.#{$prefix}--tile--selectable.#{$prefix}--tile--radio.#{$prefix}--tile--is-selected
+    + .#{$prefix}--ai-label,
+  .#{$prefix}--radio-tile__wrapper--slug
+    > .#{$prefix}--tile.#{$prefix}--tile--selectable.#{$prefix}--tile--radio.#{$prefix}--tile--is-selected
+    + .#{$prefix}--slug {
     inset-inline-end: $spacing-08;
-  }
-
-  .#{$prefix}--tile.#{$prefix}--tile--clickable
-    > .#{$prefix}--tile--inner-decorator
-    > *,
-  .#{$prefix}--tile.#{$prefix}--tile--clickable > .#{$prefix}--ai-label,
-  .#{$prefix}--tile.#{$prefix}--tile--clickable > .#{$prefix}--slug {
-    pointer-events: none;
   }
 
   .#{$prefix}--tile--decorator:has(
       .#{$prefix}--tile--ai-label-icon
     ).#{$prefix}--tile,
   .#{$prefix}--tile--decorator:has(.#{$prefix}--ai-label).#{$prefix}--tile,
+  .#{$prefix}--clickable-tile__wrapper
+    > .#{$prefix}--tile--decorator:has(
+      + .#{$prefix}--tile--inner-decorator .#{$prefix}--ai-label
+    ).#{$prefix}--tile,
+  .#{$prefix}--radio-tile__wrapper--decorator
+    > .#{$prefix}--tile--decorator:has(
+      + .#{$prefix}--tile--inner-decorator .#{$prefix}--ai-label
+    ).#{$prefix}--tile,
   .#{$prefix}--tile--slug.#{$prefix}--tile {
     @include ai-popover-gradient('default', 0, 'layer');
 
@@ -486,8 +528,16 @@ $-icon-container-size: calc(#{layout.density('padding-inline')} * 2 + 1rem);
   .#{$prefix}--tile--decorator:has(
       .#{$prefix}--ai-label
     ).#{$prefix}--tile--selectable::before,
+  .#{$prefix}--radio-tile__wrapper--decorator
+    > .#{$prefix}--tile--decorator:has(
+      + .#{$prefix}--tile--inner-decorator .#{$prefix}--ai-label
+    ).#{$prefix}--tile--selectable::before,
   .#{$prefix}--tile--decorator:has(
       .#{$prefix}--ai-label
+    ).#{$prefix}--tile--clickable::before,
+  .#{$prefix}--clickable-tile__wrapper
+    > .#{$prefix}--tile--decorator:has(
+      + .#{$prefix}--tile--inner-decorator .#{$prefix}--ai-label
     ).#{$prefix}--tile--clickable::before,
   .#{$prefix}--tile--decorator:has(
       .#{$prefix}--tile--ai-label-icon
@@ -520,6 +570,10 @@ $-icon-container-size: calc(#{layout.density('padding-inline')} * 2 + 1rem);
   .#{$prefix}--tile--decorator:has(
       .#{$prefix}--tile--inner-decorator .#{$prefix}--ai-label
     ).#{$prefix}--tile--selectable::after,
+  .#{$prefix}--radio-tile__wrapper--decorator
+    > .#{$prefix}--tile--decorator:has(
+      + .#{$prefix}--tile--inner-decorator .#{$prefix}--ai-label
+    ).#{$prefix}--tile--selectable::after,
   .#{$prefix}--tile--slug.#{$prefix}--tile--selectable::after {
     @include ai-popover-gradient('selected', 0, 'layer');
 
@@ -541,6 +595,10 @@ $-icon-container-size: calc(#{layout.density('padding-inline')} * 2 + 1rem);
   .#{$prefix}--tile--decorator:has(
       .#{$prefix}--tile--inner-decorator
     ).#{$prefix}--tile--is-selected,
+  .#{$prefix}--radio-tile__wrapper--decorator
+    > .#{$prefix}--tile--decorator:has(
+      + .#{$prefix}--tile--inner-decorator
+    ).#{$prefix}--tile.#{$prefix}--tile--is-selected,
   .#{$prefix}--tile--slug.#{$prefix}--tile--is-selected {
     border-color: $border-inverse;
   }
@@ -561,6 +619,7 @@ $-icon-container-size: calc(#{layout.density('padding-inline')} * 2 + 1rem);
     .#{$prefix}--tile-content,
   .#{$prefix}--tile--decorator.#{$prefix}--tile--clickable
     .#{$prefix}--tile-content,
+  .#{$prefix}--clickable-tile__wrapper > .#{$prefix}--tile--inner-decorator > *,
   .#{$prefix}--tile--decorator.#{$prefix}--tile--selectable
     > .#{$prefix}--tile__checkmark,
   .#{$prefix}--tile--decorator.#{$prefix}--tile--is-selected
@@ -579,6 +638,12 @@ $-icon-container-size: calc(#{layout.density('padding-inline')} * 2 + 1rem);
   .#{$prefix}--tile--decorator.#{$prefix}--tile--selectable
     .#{$prefix}--tile--inner-decorator
     > *:has(> .#{$prefix}--popover--open),
+  .#{$prefix}--clickable-tile__wrapper
+    > .#{$prefix}--tile--inner-decorator
+    > *:has(> .#{$prefix}--popover--open),
+  .#{$prefix}--radio-tile__wrapper--decorator
+    > .#{$prefix}--tile--inner-decorator
+    > *:has(> .#{$prefix}--popover--open),
   .#{$prefix}--tile--slug.#{$prefix}--tile--selectable
     .#{$prefix}--ai-label:has(> .#{$prefix}--popover--open),
   .#{$prefix}--tile--slug.#{$prefix}--tile--selectable
@@ -589,10 +654,15 @@ $-icon-container-size: calc(#{layout.density('padding-inline')} * 2 + 1rem);
   .#{$prefix}--tile--decorator.#{$prefix}--tile--selectable
     > .#{$prefix}--tile--inner-decorator
     > *,
+  .#{$prefix}--radio-tile__wrapper--decorator
+    > .#{$prefix}--tile--inner-decorator
+    > *,
   .#{$prefix}--tile--decorator.#{$prefix}--tile--selectable
     > .#{$prefix}--tile__checkmark,
   .#{$prefix}--tile--slug.#{$prefix}--tile--selectable > .#{$prefix}--ai-label,
   .#{$prefix}--tile--slug.#{$prefix}--tile--selectable > .#{$prefix}--slug,
+  .#{$prefix}--radio-tile__wrapper--slug > .#{$prefix}--ai-label,
+  .#{$prefix}--radio-tile__wrapper--slug > .#{$prefix}--slug,
   .#{$prefix}--tile--slug.#{$prefix}--tile--selectable
     > .#{$prefix}--tile__checkmark {
     z-index: 1;

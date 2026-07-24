@@ -282,7 +282,8 @@ export const ClickableTile = React.forwardRef<
       [`${prefix}--tile--disabled-icon`]: v12DefaultIcons && disabled,
     });
 
-    return (
+    const hasElementDecorator = React.isValidElement(decorator);
+    const clickableTile = (
       <Link
         className={classes}
         href={href}
@@ -300,12 +301,20 @@ export const ClickableTile = React.forwardRef<
         {(slug === true || decorator === true) && (
           <AiLabel size="24" className={`${prefix}--tile--ai-label-icon`} />
         )}
-        {React.isValidElement(decorator) && (
-          <div className={`${prefix}--tile--inner-decorator`}>{decorator}</div>
-        )}
         {Icon && <Icon className={iconClasses} aria-hidden="true" />}
       </Link>
     );
+
+    if (hasElementDecorator) {
+      return (
+        <div className={`${prefix}--clickable-tile__wrapper`}>
+          {clickableTile}
+          <div className={`${prefix}--tile--inner-decorator`}>{decorator}</div>
+        </div>
+      );
+    }
+
+    return clickableTile;
   }
 );
 

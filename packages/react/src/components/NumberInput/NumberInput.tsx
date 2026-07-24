@@ -37,6 +37,7 @@ import { keys, match } from '../../internal/keyboard';
 import { NumberFormatOptionsPropType } from './NumberFormatPropTypes';
 import { AILabel } from '../AILabel';
 import { isComponentElement } from '../../internal';
+import { useNoInteractiveChildren } from '../../internal/useNoInteractiveChildren';
 
 const translationIds = {
   'increment.number': 'increment.number',
@@ -1329,15 +1330,20 @@ interface LabelProps {
 
 const Label = ({ disabled, id, hideLabel, label }: LabelProps) => {
   const prefix = usePrefix();
+  const labelRef = useRef<HTMLLabelElement>(null);
   const className = cx({
     [`${prefix}--label`]: true,
     [`${prefix}--label--disabled`]: disabled,
     [`${prefix}--visually-hidden`]: hideLabel,
   });
+  useNoInteractiveChildren(
+    labelRef,
+    'The NumberInput component `label` prop must have no interactive content'
+  );
 
   if (label) {
     return (
-      <Text as="label" htmlFor={id} className={className}>
+      <Text as="label" htmlFor={id} className={className} ref={labelRef}>
         {label}
       </Text>
     );

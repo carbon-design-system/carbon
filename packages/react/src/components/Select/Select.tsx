@@ -10,6 +10,7 @@ import React, {
   cloneElement,
   forwardRef,
   useContext,
+  useRef,
   useState,
   type ChangeEventHandler,
   type ComponentPropsWithRef,
@@ -31,6 +32,7 @@ import { AILabel } from '../AILabel';
 import { isComponentElement } from '../../internal';
 import { useNormalizedInputProps } from '../../internal/useNormalizedInputProps';
 import { hasHelperText } from '../../internal/hasHelperText';
+import { useNoInteractiveChildren } from '../../internal/useNoInteractiveChildren';
 
 type ExcludedAttributes = 'size';
 
@@ -172,6 +174,7 @@ const Select = forwardRef<HTMLSelectElement, SelectProps>(
   ) => {
     const prefix = usePrefix();
     const { isFluid } = useContext(FormContext);
+    const labelRef = useRef<HTMLLabelElement>(null);
     const [isFocused, setIsFocused] = useState(false);
 
     interface SelectItemProps {
@@ -287,6 +290,10 @@ const Select = forwardRef<HTMLSelectElement, SelectProps>(
     const normalizedDecorator = candidateIsAILabel
       ? cloneElement(candidate, { size: 'mini' })
       : candidate;
+    useNoInteractiveChildren(
+      labelRef,
+      'The Select component `labelText` prop must have no interactive content'
+    );
 
     const input = (() => {
       return (
@@ -321,7 +328,11 @@ const Select = forwardRef<HTMLSelectElement, SelectProps>(
       <div className={classNames(`${prefix}--form-item`, className)}>
         <div className={selectClasses}>
           {!noLabel && (
-            <Text as="label" htmlFor={id} className={labelClasses}>
+            <Text
+              as="label"
+              htmlFor={id}
+              className={labelClasses}
+              ref={labelRef}>
               {labelText}
             </Text>
           )}
