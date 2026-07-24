@@ -14,6 +14,38 @@ import userEvent from '@testing-library/user-event';
 
 const requiredProps = { labelText: 'Add file' };
 
+function createDropEvent(files) {
+  const event = new Event('drop', {
+    bubbles: true,
+    cancelable: true,
+  });
+  Object.defineProperty(event, 'dataTransfer', { value: { files } });
+  return event;
+}
+
+function mockDataTransfer(files) {
+  const dataTransferDescriptor = Object.getOwnPropertyDescriptor(
+    window,
+    'DataTransfer'
+  );
+  const add = jest.fn();
+  Object.defineProperty(window, 'DataTransfer', {
+    configurable: true,
+    value: jest.fn(() => ({ files, items: { add } })),
+  });
+
+  return {
+    add,
+    restore() {
+      if (dataTransferDescriptor) {
+        Object.defineProperty(window, 'DataTransfer', dataTransferDescriptor);
+      } else {
+        delete window.DataTransfer;
+      }
+    },
+  };
+}
+
 describe('FileUploaderDropContainer', () => {
   it('should not have axe violations', async () => {
     const { container } = render(
@@ -531,7 +563,7 @@ describe('FileUploaderDropContainer', () => {
     expect(handleDrop).not.toHaveBeenCalled();
   });
 
-  it('should only emit one file when multiple files are dropped and `multiple` is false', () => {
+  it('should only add one file when multiple files are dropped and `multiple` is false', async () => {
     const onAddFiles = jest.fn();
     const { container } = render(
       <FileUploaderDropContainer
@@ -541,21 +573,155 @@ describe('FileUploaderDropContainer', () => {
       />
     );
     const dropArea = container.firstChild;
+    const input = container.querySelector('input');
     const files = [
       new File(['content'], 'file1.txt', { type: 'text/plain' }),
       new File(['content'], 'file2.txt', { type: 'text/plain' }),
     ];
-    const dropEvent = {
-      dataTransfer: { files },
-      preventDefault: jest.fn(),
-      stopPropagation: jest.fn(),
-    };
+    const sourceInput = document.createElement('input');
+    sourceInput.type = 'file';
+    sourceInput.multiple = true;
+    await userEvent.upload(sourceInput, files);
+    const singleFileInput = document.createElement('input');
+    singleFileInput.type = 'file';
+    await userEvent.upload(singleFileInput, files[0]);
+    const dataTransfer = mockDataTransfer(singleFileInput.files);
+    const filesSetter = jest
+      .spyOn(input, 'files', 'set')
+      .mockImplementation(() => {});
 
-    fireEvent.drop(dropArea, dropEvent);
+    try {
+      fireEvent(dropArea, createDropEvent(sourceInput.files));
 
-    expect(onAddFiles).toHaveBeenCalledWith(expect.anything(), {
-      addedFiles: [files[0]],
+      expect(onAddFiles).toHaveBeenCalledWith(expect.anything(), {
+        addedFiles: [files[0]],
+      });
+      expect(dataTransfer.add).toHaveBeenCalledWith(files[0]);
+      expect(filesSetter).toHaveBeenCalledWith(singleFileInput.files);
+    } finally {
+      dataTransfer.restore();
+    }
+  });
+
+  it('should set the input files when files are dropped', async () => {
+    const { container } = render(
+      <FileUploaderDropContainer multiple {...requiredProps} />
+    );
+    const dropArea = container.firstChild;
+    const input = container.querySelector('input');
+    const file = new File(['content'], 'example.png', { type: 'image/png' });
+    const sourceInput = document.createElement('input');
+    sourceInput.type = 'file';
+    await userEvent.upload(sourceInput, file);
+    const dataTransfer = mockDataTransfer(sourceInput.files);
+    const filesSetter = jest.spyOn(input, 'files', 'set');
+
+    try {
+      fireEvent(dropArea, createDropEvent(sourceInput.files));
+
+      expect(dataTransfer.add).toHaveBeenCalledWith(file);
+      expect(filesSetter).toHaveBeenCalledWith(sourceInput.files);
+      const [droppedFiles] = filesSetter.mock.calls[0];
+      expect(droppedFiles).toHaveLength(1);
+      expect(droppedFiles[0]).toEqual(
+        expect.objectContaining({
+          name: 'example.png',
+          size: file.size,
+          type: 'image/png',
+        })
+      );
+    } finally {
+      dataTransfer.restore();
+    }
+  });
+
+  it('should still add files when setting the input files throws', async () => {
+    const onAddFiles = jest.fn();
+    const { container } = render(
+      <FileUploaderDropContainer
+        multiple
+        onAddFiles={onAddFiles}
+        {...requiredProps}
+      />
+    );
+    const dropArea = container.firstChild;
+    const input = container.querySelector('input');
+    const file = new File(['content'], 'example.png', { type: 'image/png' });
+    const sourceInput = document.createElement('input');
+    sourceInput.type = 'file';
+    await userEvent.upload(sourceInput, file);
+    const dataTransfer = mockDataTransfer(sourceInput.files);
+    const filesSetter = jest
+      .spyOn(input, 'files', 'set')
+      .mockImplementation(() => {
+        throw new TypeError('FileList assignment rejected');
+      });
+
+    try {
+      expect(() => {
+        fireEvent(dropArea, createDropEvent(sourceInput.files));
+      }).not.toThrow();
+
+      expect(filesSetter).toHaveBeenCalledWith(sourceInput.files);
+      expect(onAddFiles).toHaveBeenCalledWith(expect.anything(), {
+        addedFiles: [file],
+      });
+    } finally {
+      dataTransfer.restore();
+    }
+  });
+
+  it('should only set valid files on the input', async () => {
+    const onAddFiles = jest.fn();
+    const { container } = render(
+      <FileUploaderDropContainer
+        accept={['.txt']}
+        multiple
+        onAddFiles={onAddFiles}
+        pattern={'\\.[0-9a-z]+$'}
+        {...requiredProps}
+      />
+    );
+    const dropArea = container.firstChild;
+    const input = container.querySelector('input');
+    const acceptedFile = new File(['content'], 'accepted.txt', {
+      type: 'text/plain',
     });
+    const invalidFile = new File(['content'], 'invalid.pdf', {
+      type: 'application/pdf',
+    });
+    const filteredFile = new File(['content'], 'README', {
+      type: 'text/plain',
+    });
+    const sourceInput = document.createElement('input');
+    sourceInput.type = 'file';
+    sourceInput.multiple = true;
+    await userEvent.upload(sourceInput, [
+      acceptedFile,
+      invalidFile,
+      filteredFile,
+    ]);
+    const acceptedInput = document.createElement('input');
+    acceptedInput.type = 'file';
+    await userEvent.upload(acceptedInput, acceptedFile);
+    const dataTransfer = mockDataTransfer(acceptedInput.files);
+    const filesSetter = jest
+      .spyOn(input, 'files', 'set')
+      .mockImplementation(() => {});
+
+    try {
+      fireEvent(dropArea, createDropEvent(sourceInput.files));
+
+      expect(onAddFiles).toHaveBeenCalledWith(expect.anything(), {
+        addedFiles: [acceptedFile, invalidFile],
+      });
+      expect(invalidFile.invalidFileType).toBe(true);
+      expect(dataTransfer.add).toHaveBeenCalledTimes(1);
+      expect(dataTransfer.add).toHaveBeenCalledWith(acceptedFile);
+      expect(filesSetter).toHaveBeenCalledWith(acceptedInput.files);
+    } finally {
+      dataTransfer.restore();
+    }
   });
 
   it('should ignore directory items dropped via dataTransfer.items', () => {

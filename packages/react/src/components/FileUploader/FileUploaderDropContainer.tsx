@@ -168,19 +168,16 @@ function FileUploaderDropContainer({
     }, []);
   }
 
-  const handleFiles = (event: SyntheticEvent<HTMLElement>, files: File[]) => {
-    if (!files.length) return onAddFiles(event, { addedFiles: [] });
-
+  const getAddedFiles = (files: File[]) => {
+    if (!files.length) return [];
     const filesToValidate = multiple ? files : [files[0]];
-    const addedFiles = validateFiles(filesToValidate);
-
-    return onAddFiles(event, { addedFiles });
+    return validateFiles(filesToValidate);
   };
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     const files = [...(event.target.files ?? [])];
 
-    return handleFiles(event, files);
+    return onAddFiles(event, { addedFiles: getAddedFiles(files) });
   };
 
   const handleDrop = (event: DragEvent<HTMLDivElement>) => {
@@ -205,8 +202,21 @@ function FileUploaderDropContainer({
           return acc;
         }, [])
       : [...event.dataTransfer.files];
+    const addedFiles = getAddedFiles(files);
 
-    return handleFiles(event, files);
+    if (inputRef.current) {
+      try {
+        const dataTransfer = new DataTransfer();
+        addedFiles
+          .filter((file) => !file.invalidFileType)
+          .forEach((file) => dataTransfer.items.add(file));
+        inputRef.current.files = dataTransfer.files;
+      } catch {
+        // Some environments reject programmatic file input assignments.
+      }
+    }
+
+    return onAddFiles(event, { addedFiles });
   };
 
   const handleClick = () => {
