@@ -179,92 +179,12 @@ This reset sets some top-level properties on `html` and `body`, namely
 
 ### Replacing the typeface
 
-Carbon is designed, tested, and tuned for IBM Plex. We do not recommend
-replacing the Carbon typeface. If you absolutely need to use a different
-typeface, you'll need to treat it as a build-time Sass customization that your
-application owns. There is no support for runtime typeface overrides on
-prebuilt/CDN Carbon styles.
-
-<!-- prettier-ignore-start -->
-> [!WARNING]
-> **Use at your own risk**
->
-> Overriding the Carbon typeface has broad design and accessibility
-> implications. Carbon type styles are tuned with IBM Plex metrics in mind,
-> including line heights, letter spacing, weight, glyph proportions, ligatures,
-> and fallback behavior. A replacement typeface can change layout, wrapping,
-> density, readability, and interaction states. It can be a significant design
-> and engineering effort to make another typeface work correctly across an
-> application.
-<!-- prettier-ignore-end -->
-
-To use carbon with a different typeface, three things are needed:
-
-1. Turn off Carbon's Plex `@font-face` generation
-2. Change the root `font-family` definition(s)
-3. Supply your own `@font-face` rules
-
-You can accomplish the first two by configuring the sass entrypoint that your
-application compiles. This configuration must happen before any other `@use` of
-Carbon Sass modules.
-
-```scss
-@use 'sass:string';
-
-@use '@carbon/styles' with (
-  // Turn off Carbon's Plex `@font-face` generation
-  $css--font-face: false,
-
-  // Change the root `font-family` definition(s)
-  $font-families:
-    (
-      'sans':
-        string.unquote(
-          "'Inter Local', system-ui, -apple-system, BlinkMacSystemFont, '.SFNSText-Regular', sans-serif"
-        ),
-      'mono':
-        string.unquote(
-          "'IBM Plex Mono', system-ui, -apple-system, BlinkMacSystemFont, '.SFNSText-Regular', monospace"
-        ),
-      'serif':
-        string.unquote(
-          "'IBM Plex Serif', system-ui, -apple-system, BlinkMacSystemFont, '.SFNSText-Regular', serif"
-        ),
-      // Include any other Carbon font family keys your application compiles.
-    )
-);
-```
-
-`$font-families` is not merged with Carbon's defaults. If you configure this
-map, include every family key your compiled styles need, such as `sans`, `mono`,
-`serif`, or any additional language-specific Plex stacks used by your
-application.
-
-Then, supply your own `@font-face` rules to load your replacement font assets.
-
-```scss
-@font-face {
-  font-display: swap;
-  font-family: 'Inter Local';
-  font-style: normal;
-  font-weight: 400;
-  src: url('./fonts/inter-latin-400-normal.woff2') format('woff2');
-}
-
-@font-face {
-  font-display: swap;
-  font-family: 'Inter Local';
-  font-style: normal;
-  font-weight: 600;
-  src: url('./fonts/inter-latin-600-normal.woff2') format('woff2');
-}
-```
-
-Only load the weights, styles, and unicode ranges that your application needs,
-but make sure they cover the font weights and styles your Carbon usage emits. If
-you use a third-party font service, review its privacy and regional compliance
-implications carefully, including whether font requests expose user data in ways
-your application cannot accept.
+`@carbon/type` can configure the font families used by its own Sass APIs, but it
+does not generate Carbon component styles or control IBM Plex `@font-face`
+output. Carbon's type foundation and component styles are closely integrated, so
+application-wide typeface replacement must be configured through the
+`@carbon/styles` Sass entrypoint. See
+[Replacing the typeface in `@carbon/styles`](../styles/README.md#replacing-the-typeface).
 
 ### Type scale
 
