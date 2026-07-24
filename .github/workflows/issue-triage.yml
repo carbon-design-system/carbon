@@ -1,28 +1,107 @@
+# Purpose: Centralize issue keyword labeling, metadata initialization, managed
+# contribution comments, and Bob's preliminary Bug assessment in one workflow.
 name: Issue Triage
 on:
   issues:
-    types: [opened]
-  issue_comment:
-    types: [created]
+    types: [opened, edited, labeled, unlabeled, typed]
   workflow_call:
     secrets:
-      APP_ID:
+      CARBON_AUTOMATION_APP_CLIENT_ID:
         required: true
       APP_PRIVATE_KEY:
         required: true
+      BOB_AUTOMATION_APP_CLIENT_ID:
+        required: true
+      BOB_AUTOMATION_APP_PRIVATE_KEY:
+        required: true
+      BOB_INFERENCE_API_KEY:
+        required: true
+
+permissions:
+  contents: read
+  issues: write
+
+concurrency:
+  # Label mutations emit more issue events. Serialize by issue so idempotent
+  # plugins see the result of earlier runs instead of racing one another.
+  group: issue-triage-${{ github.event.issue.number || github.run_id }}
+  cancel-in-progress: false
 
 jobs:
-  comment:
+  label-issues:
+    # Run keyword labeling first so the main triage job starts after labels have
+    # been evaluated for newly opened issues.
+    name: Label issue based on keywords in title and body
+    if:
+      github.repository == 'carbon-design-system/carbon' && (github.event.action
+      == 'opened' || github.event.action == 'edited')
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
-      - name: Generate token
+      - name: Generate Carbon Automation token
+        # Keyword labels are not Bob output, so they use Carbon Automation.
         uses: actions/create-github-app-token@bcd2ba49218906704ab6c1aa796996da409d3eb1 # v3.2.0
         id: generate_token
         with:
-          app-id: ${{ secrets.APP_ID }}
+          client-id: ${{ secrets.CARBON_AUTOMATION_APP_CLIENT_ID }}
           private-key: ${{ secrets.APP_PRIVATE_KEY }}
-      - uses: carbon-design-system/carbon/actions/issues@main
+      - uses: github/issue-labeler@c1b0f9f52a63158c4adc09425e858e87b32e9685 # v3.4
         with:
+          configuration-path: .github/labeler.yml
+          not-before: 2025-08-14T00:00:00Z
+          enable-versioned-regex: 0
+          include-title: 1
+          repo-token: '${{ steps.generate_token.outputs.token }}'
+
+  triage-issue:
+    name: Triage issue and manage automated comments
+    needs: label-issues
+    if:
+      always() && github.repository == 'carbon-design-system/carbon' &&
+      github.event.action != 'edited'
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+        with:
+          # Bob can read the checkout, so never leave a GitHub credential in
+          # the repository's local Git configuration.
+          persist-credentials: false
+      - name: Log issue triage event
+        env:
+          EVENT_ACTION: ${{ github.event.action }}
+          EVENT_NAME: ${{ github.event_name }}
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+          ISSUE_TYPE: ${{ github.event.issue.type.name }}
+        run: |
+          echo "Event: ${EVENT_NAME}"
+          echo "Action: ${EVENT_ACTION}"
+          echo "Issue: ${ISSUE_NUMBER}"
+          echo "Issue type: ${ISSUE_TYPE:-none}"
+      - name: Generate Carbon Automation token
+        uses: actions/create-github-app-token@bcd2ba49218906704ab6c1aa796996da409d3eb1 # v3.2.0
+        id: generate_token
+        with:
+          client-id: ${{ secrets.CARBON_AUTOMATION_APP_CLIENT_ID }}
+          private-key: ${{ secrets.APP_PRIVATE_KEY }}
+      - name: Generate Bob Automation token
+        # This token is passed only to the Bob triage plugin, which uses it to
+        # create or update Bob's single managed output comment.
+        uses: actions/create-github-app-token@bcd2ba49218906704ab6c1aa796996da409d3eb1 # v3.2.0
+        id: generate_bob_token
+        with:
+          client-id: ${{ secrets.BOB_AUTOMATION_APP_CLIENT_ID }}
+          private-key: ${{ secrets.BOB_AUTOMATION_APP_PRIVATE_KEY }}
+          permission-issues: write
+      - name: Run issue triage plugins
+        uses: carbon-design-system/carbon/actions/issues@main
+        with:
+          # This remains the default for labels, fields, projects, and every
+          # managed comment except Bob's preliminary triage comment.
           GITHUB_TOKEN: ${{ steps.generate_token.outputs.token }}
+          # Only the Bob plugin receives this GitHub client, so only Bob's output
+          # comment is attributed to the Bob Automation app.
+          BOB_GITHUB_TOKEN: ${{ steps.generate_bob_token.outputs.token }}
+          # The Bob CLI uses this API key only to generate text; neither GitHub
+          # token is included in the Bob subprocess environment.
+          BOB_INFERENCE_API_KEY: ${{ secrets.BOB_INFERENCE_API_KEY }}
           enabled: true

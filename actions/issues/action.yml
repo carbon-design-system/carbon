@@ -1,8 +1,19 @@
+# Purpose: Public input and runtime contract for the Docker-based issue-triage
+# action. Keep these inputs aligned with .github/workflows/issue-triage.yml.
 name: Issue Triage
 description: A custom action for triaging issues
 inputs:
   GITHUB_TOKEN:
-    description: A GitHub token to execute GitHub tasks
+    # Default Octokit credential for every operation except Bob's output comment.
+    description: Carbon Automation token used for standard GitHub operations
+    required: true
+  BOB_GITHUB_TOKEN:
+    # Used only by the Bob plugin's managed-comment calls, never by the Bob CLI.
+    description: Bob Automation token used only for Bob's triage comment
+    required: true
+  BOB_INFERENCE_API_KEY:
+    # Used only by the Bob subprocess to produce preliminary triage text.
+    description: Bob Shell inference key used to generate preliminary bug triage
     required: true
   enabled:
     description: Specify whether this action should run
