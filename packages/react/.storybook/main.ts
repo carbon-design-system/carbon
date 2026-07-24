@@ -94,6 +94,7 @@ const config: StorybookConfig = {
         },
       },
       optimizeDeps: {
+        exclude: ['@carbon/motion'],
         rolldownOptions: {
           moduleTypes: {
             '.js': 'jsx',
