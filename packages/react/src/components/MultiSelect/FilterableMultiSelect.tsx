@@ -1032,9 +1032,8 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
             {...inputProp}
             aria-readonly={readOnly || undefined}
             aria-describedby={
-              cx(inputProp['aria-describedby'], {
-                [readOnlyId]: readOnly,
-              }) || undefined
+              cx(inputProp['aria-describedby'], readOnly && readOnlyId) ||
+              undefined
             }
             ref={mergedRef}
             {...readOnlyEventHandlers}

@@ -812,10 +812,11 @@ export const MultiSelect = React.forwardRef(
               aria-disabled={disabled || undefined}
               {...toggleButtonProps}
               aria-describedby={
-                cx(toggleButtonProps['aria-describedby'], {
-                  [helperId as string]: !inline && showHelperText && helperId,
-                  [readOnlyId]: readOnly,
-                }) || undefined
+                cx(
+                  toggleButtonProps['aria-describedby'],
+                  !inline && showHelperText && helperId,
+                  readOnly && readOnlyId
+                ) || undefined
               }
               ref={mergedRef}
               {...readOnlyEventHandlers}>

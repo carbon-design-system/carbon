@@ -229,9 +229,11 @@ const Checkbox = React.forwardRef(
           // see - https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/checkbox
           aria-readonly={readOnly}
           aria-describedby={
-            readOnly
-              ? classNames(readOnlyId, other['aria-describedby'])
-              : other['aria-describedby']
+            classNames(
+              other['aria-describedby'],
+              showHelper && helperId,
+              readOnly && readOnlyId
+            ) || undefined
           }
           onClick={(evt) => {
             if (readOnly) {

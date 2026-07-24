@@ -149,10 +149,9 @@ const CheckboxGroup = ({
       aria-readonly={readOnly}
       aria-disabled={disabled}
       aria-describedby={
-        cx({
-          [helperId as string]:
-            !normalizedProps.invalid && !normalizedProps.warn && helper,
-        }) || undefined
+        !normalizedProps.invalid && !normalizedProps.warn && helper
+          ? helperId
+          : undefined
       }
       {...rest}>
       <legend
