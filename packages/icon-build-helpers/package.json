@@ -31,7 +31,7 @@
     "change-case-all": "^2.1.0",
     "fs-extra": "^11.0.0",
     "joi": "^17.1.1",
-    "js-yaml": "^4.1.0",
+    "js-yaml": "^5.0.0",
     "memfs": "^4.0.0",
     "prettier": "^3.3.3",
     "prop-types": "^15.8.1",
