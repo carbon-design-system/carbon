@@ -1,26 +1,27 @@
 /**
- * Copyright IBM Corp. 2016, 2023
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
 import React from 'react';
-import { action } from 'storybook/actions';
 import {
   preview_PageSelector as PageSelector,
   preview_Pagination as Pagination,
 } from '../../..';
 
-const props = () => ({
-  disabled: false,
-  pagesUnknown: false,
+const defaultArgs = {
   backwardText: 'Previous page',
+  disabled: false,
   forwardText: 'Next page',
-  pageSize: 10,
+  initialPage: 1,
   itemsPerPageText: 'Items per page:',
-  onChange: action('onChange'),
-});
+  pageSize: 10,
+  pageSizes: [10, 20, 30],
+  pagesUnknown: false,
+  totalItems: 350,
+};
 
 export default {
   title: 'Deprecated/preview_Pagination',
@@ -28,11 +29,82 @@ export default {
   subcomponents: {
     PageSelector,
   },
+  argTypes: {
+    backwardText: {
+      control: {
+        type: 'text',
+      },
+    },
+    children: {
+      control: false,
+    },
+    className: {
+      control: false,
+    },
+    disabled: {
+      control: {
+        type: 'boolean',
+      },
+    },
+    forwardText: {
+      control: {
+        type: 'text',
+      },
+    },
+    id: {
+      control: false,
+    },
+    initialPage: {
+      control: {
+        type: 'number',
+      },
+    },
+    itemRangeText: {
+      control: false,
+    },
+    itemsPerPageText: {
+      control: {
+        type: 'text',
+      },
+    },
+    itemText: {
+      control: false,
+    },
+    onChange: {
+      action: 'onChange',
+    },
+    pageRangeText: {
+      control: false,
+    },
+    pageSize: {
+      control: {
+        type: 'number',
+      },
+    },
+    pageSizes: {
+      control: {
+        type: 'array',
+      },
+    },
+    pagesUnknown: {
+      control: {
+        type: 'boolean',
+      },
+    },
+    pageText: {
+      control: false,
+    },
+    totalItems: {
+      control: {
+        type: 'number',
+      },
+    },
+  },
   decorators: [(story) => <div style={{ width: '800px' }}>{story()}</div>],
 };
 
-export const WithAPageSelector = () => (
-  <Pagination {...props()} totalItems={350} pageSizes={[10, 20, 30]}>
+export const WithAPageSelector = (args) => (
+  <Pagination key={`${args.initialPage}-${args.pageSize}`} {...args}>
     {({ currentPage, onSetPage, totalPages }) => (
       <PageSelector
         currentPage={currentPage}
@@ -45,78 +117,30 @@ export const WithAPageSelector = () => (
 );
 
 WithAPageSelector.storyName = 'with a page selector';
+WithAPageSelector.args = {
+  ...defaultArgs,
+};
 
-export const WithNoSizerChildInputOrChildSelector = () => (
-  <Pagination {...props()} totalItems={350} />
+export const WithNoSizerChildInputOrChildSelector = (args) => (
+  <Pagination key={`${args.initialPage}-${args.pageSize}`} {...args} />
 );
 
 WithNoSizerChildInputOrChildSelector.storyName =
   'with no sizer, child input, or child selector';
+WithNoSizerChildInputOrChildSelector.args = {
+  ...defaultArgs,
+  pageSizes: undefined,
+};
+WithNoSizerChildInputOrChildSelector.parameters = {
+  controls: {
+    exclude: ['pageSizes'],
+  },
+};
 
-export const Playground = (args) => <Pagination {...args} />;
+export const Playground = (args) => (
+  <Pagination key={`${args.initialPage}-${args.pageSize}`} {...args} />
+);
 
-Playground.argTypes = {
-  className: {
-    control: false,
-  },
-  children: {
-    control: false,
-  },
-  id: {
-    control: false,
-  },
-  itemText: {
-    control: false,
-  },
-  forwardText: {
-    control: {
-      type: 'text',
-    },
-    defaultValue: 'Next page',
-  },
-  disabled: {
-    control: {
-      type: 'boolean',
-    },
-    defaultValue: 'false',
-  },
-  itemRangeText: {
-    control: false,
-  },
-  itemsPerPageText: {
-    control: {
-      type: 'text',
-    },
-    defaultValue: 'Items per page:',
-  },
-  initialPage: {
-    control: {
-      type: 'number',
-    },
-    defaultValue: 1,
-  },
-  pageSize: {
-    control: {
-      type: 'number',
-    },
-    defaultValue: 10,
-  },
-  pageSizes: {
-    control: {
-      type: 'array',
-    },
-    defaultValue: [10, 20, 30, 40, 50],
-  },
-  pagesUnknown: {
-    control: {
-      type: 'boolean',
-    },
-    defaultValue: 'false',
-  },
-  totalItems: {
-    control: {
-      type: 'number',
-    },
-    defaultValue: 350,
-  },
+Playground.args = {
+  ...defaultArgs,
 };
