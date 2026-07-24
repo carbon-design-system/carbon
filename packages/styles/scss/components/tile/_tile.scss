@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2016, 2023
+// Copyright IBM Corp. 2016, 2026
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -68,8 +68,10 @@ $-icon-container-size: calc(#{layout.density('padding-inline')} * 2 + 1rem);
     cursor: pointer;
     transition: $duration-moderate-01 motion(standard, productive);
 
-    &:hover {
-      background: $layer-hover;
+    @media (any-hover: hover) {
+      &:hover {
+        background: $layer-hover;
+      }
     }
   }
 
@@ -92,7 +94,14 @@ $-icon-container-size: calc(#{layout.density('padding-inline')} * 2 + 1rem);
       text-decoration: none;
     }
 
-    &:hover,
+    @media (any-hover: hover) {
+      &:hover {
+        .#{$prefix}--tile__checkmark {
+          opacity: 1;
+        }
+      }
+    }
+
     &:focus {
       .#{$prefix}--tile__checkmark {
         opacity: 1;
@@ -105,17 +114,22 @@ $-icon-container-size: calc(#{layout.density('padding-inline')} * 2 + 1rem);
     border: 0;
   }
 
-  .#{$prefix}--tile--clickable:hover,
+  @media (any-hover: hover) {
+    .#{$prefix}--tile--clickable:hover,
+    .#{$prefix}--tile--clickable:visited:hover {
+      color: $text-primary;
+      text-decoration: none;
+    }
+  }
+
   .#{$prefix}--tile--clickable:active,
-  .#{$prefix}--tile--clickable:visited,
-  .#{$prefix}--tile--clickable:visited:hover {
+  .#{$prefix}--tile--clickable:visited {
     color: $text-primary;
     text-decoration: none;
   }
 
   // Disabled ClickableTile
-  .#{$prefix}--tile--clickable.#{$prefix}--link--disabled,
-  .#{$prefix}--tile--clickable:hover.#{$prefix}--link--disabled {
+  .#{$prefix}--tile--clickable.#{$prefix}--link--disabled {
     display: block;
     padding: layout.density('padding-inline');
     background-color: $layer;
@@ -249,9 +263,11 @@ $-icon-container-size: calc(#{layout.density('padding-inline')} * 2 + 1rem);
       outline-offset: -2px;
     }
 
-    &:hover {
-      background-color: $layer-hover;
-      cursor: pointer;
+    @media (any-hover: hover) {
+      &:hover {
+        background-color: $layer-hover;
+        cursor: pointer;
+      }
     }
   }
 
@@ -278,8 +294,10 @@ $-icon-container-size: calc(#{layout.density('padding-inline')} * 2 + 1rem);
       border: 1px solid $border-tile;
     }
 
-    &:hover {
-      background: $layer-hover;
+    @media (any-hover: hover) {
+      &:hover {
+        background: $layer-hover;
+      }
     }
   }
 
@@ -288,8 +306,10 @@ $-icon-container-size: calc(#{layout.density('padding-inline')} * 2 + 1rem);
     cursor: default;
     transition: max-height $duration-moderate-01 motion(standard, productive);
 
-    &:hover {
-      background-color: $layer;
+    @media (any-hover: hover) {
+      &:hover {
+        background-color: $layer;
+      }
     }
 
     &:focus {
@@ -459,11 +479,13 @@ $-icon-container-size: calc(#{layout.density('padding-inline')} * 2 + 1rem);
       0 4px 8px 0 $ai-drop-shadow;
   }
 
-  .#{$prefix}--tile--decorator:has(
-      .#{$prefix}--ai-label
-    ).#{$prefix}--tile--expandable:hover,
-  .#{$prefix}--tile--slug.#{$prefix}--tile--expandable:hover {
-    @include ai-popover-gradient('default', 0, 'layer');
+  @media (any-hover: hover) {
+    .#{$prefix}--tile--decorator:has(
+        .#{$prefix}--ai-label
+      ).#{$prefix}--tile--expandable:hover,
+    .#{$prefix}--tile--slug.#{$prefix}--tile--expandable:hover {
+      @include ai-popover-gradient('default', 0, 'layer');
+    }
   }
 
   .#{$prefix}--tile--decorator.#{$prefix}--tile--selectable::before,
@@ -501,11 +523,13 @@ $-icon-container-size: calc(#{layout.density('padding-inline')} * 2 + 1rem);
       0 4px 10px 2px $ai-drop-shadow;
   }
 
-  .#{$prefix}--tile--decorator.#{$prefix}--tile--selectable:hover::before,
-  .#{$prefix}--tile--decorator.#{$prefix}--tile--clickable:hover::before,
-  .#{$prefix}--tile--slug.#{$prefix}--tile--selectable:hover::before,
-  .#{$prefix}--tile--slug.#{$prefix}--tile--clickable:hover::before {
-    opacity: 1;
+  @media (any-hover: hover) {
+    .#{$prefix}--tile--decorator.#{$prefix}--tile--selectable:hover::before,
+    .#{$prefix}--tile--decorator.#{$prefix}--tile--clickable:hover::before,
+    .#{$prefix}--tile--slug.#{$prefix}--tile--selectable:hover::before,
+    .#{$prefix}--tile--slug.#{$prefix}--tile--clickable:hover::before {
+      opacity: 1;
+    }
   }
 
   .#{$prefix}--tile--decorator.#{$prefix}--tile--selectable:focus,
@@ -528,9 +552,11 @@ $-icon-container-size: calc(#{layout.density('padding-inline')} * 2 + 1rem);
       0 4px 8px 0 $ai-drop-shadow;
   }
 
-  .#{$prefix}--tile--decorator.#{$prefix}--tile--selectable:hover::after,
-  .#{$prefix}--tile--slug.#{$prefix}--tile--selectable:hover::after {
-    opacity: 0;
+  @media (any-hover: hover) {
+    .#{$prefix}--tile--decorator.#{$prefix}--tile--selectable:hover::after,
+    .#{$prefix}--tile--slug.#{$prefix}--tile--selectable:hover::after {
+      opacity: 0;
+    }
   }
 
   .#{$prefix}--tile--decorator.#{$prefix}--tile--is-selected::after,
