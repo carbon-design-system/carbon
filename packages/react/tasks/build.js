@@ -83,6 +83,10 @@ async function build() {
     await tsdown({
       banner,
       clean: false,
+      deps: {
+        neverBundle: external,
+        onlyBundle: false,
+      },
       // `tsdown`/`rolldown-plugin-dts` bundles declarations. `@carbon/react`
       // intentionally publishes a wide `es/` + `lib/` file tree, and consumers
       // deep-import those paths. If we let tsdown own declaration generation we
@@ -91,9 +95,7 @@ async function build() {
       // type file.
       dts: false,
       entry: [reactEntrypoint, ...reactCompatEntrypoints],
-      external,
-      inlineOnly: false,
-      failOnWarn: false,
+      failOnWarn: true,
       format: format.type,
       logLevel: 'warn',
       loader: {
@@ -109,6 +111,7 @@ async function build() {
           ...options,
           chunkFileNames: '[name].js',
           entryFileNames: '[name].js',
+          exports: format.type === 'cjs' ? 'named' : undefined,
         };
       },
       platform: 'browser',
@@ -139,11 +142,13 @@ async function build() {
   await tsdown({
     banner,
     clean: false,
+    deps: {
+      neverBundle: external,
+      onlyBundle: false,
+    },
     dts: true,
     entry: [iconsEntrypoint],
-    external,
-    inlineOnly: false,
-    failOnWarn: false,
+    failOnWarn: true,
     format: 'cjs',
     logLevel: 'warn',
     loader: {
@@ -167,11 +172,13 @@ async function build() {
   await tsdown({
     banner,
     clean: false,
+    deps: {
+      neverBundle: external,
+      onlyBundle: false,
+    },
     dts: false,
     entry: [iconsEntrypoint],
-    external,
-    inlineOnly: false,
-    failOnWarn: false,
+    failOnWarn: true,
     format: 'esm',
     logLevel: 'warn',
     loader: {
@@ -265,11 +272,7 @@ async function emitReactDeclarations(tsconfigPath, outDir) {
   }
 
   if (diagnostics.length > 0) {
-    // Some source files currently report type issues during declaration emit,
-    // but TypeScript can still write the declaration files we need. Surface the
-    // diagnostics so they are visible during builds without making this package
-    // fail to publish.
-    console.warn(formatDiagnostics(diagnostics));
+    throw new Error(formatDiagnostics(diagnostics));
   }
 }
 

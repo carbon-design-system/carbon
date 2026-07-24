@@ -58,18 +58,20 @@ async function buildDist() {
 
   await tsdown({
     clean: false,
+    deps: {
+      alwaysBundle: [/.*/],
+      neverBundle: [],
+      onlyBundle: false,
+    },
     dts: false,
     entry,
-    external: [],
-    failOnWarn: false,
+    failOnWarn: true,
     format: 'esm',
     inputOptions: withInputCompatibilityAndPlugins({
       postCSSPlugins,
       packageRoot,
     }),
-    inlineOnly: false,
     logLevel: 'warn',
-    noExternal: [/.*/],
     minify: true,
     outDir: path.resolve(packageRoot, 'dist'),
     outputOptions(options) {

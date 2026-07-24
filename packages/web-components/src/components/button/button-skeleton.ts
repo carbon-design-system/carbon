@@ -46,8 +46,8 @@ class CDSButtonSkeleton extends CDSButton {
     const classes = classMap({
       [`${prefix}--btn`]: true,
       [`${prefix}--skeleton`]: true,
-      [`${prefix}--btn--${size}`]: size,
-      [`${prefix}--layout--size-${size}`]: size,
+      [`${prefix}--btn--${size}`]: size !== undefined,
+      [`${prefix}--layout--size-${size}`]: size !== undefined,
     });
     return href
       ? html`
