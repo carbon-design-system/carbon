@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2019, 2025
+ * Copyright IBM Corp. 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -9,25 +9,28 @@ import { classMap } from 'lit/directives/class-map.js';
 import { LitElement, html } from 'lit';
 import { property, query, state } from 'lit/decorators.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
-import { prefix } from '../../globals/settings';
-import FocusMixin from '../../globals/mixins/focus';
-import { INPUT_SIZE } from './defs';
-import { DATE_PICKER_INPUT_COLOR_SCHEME, DATE_PICKER_INPUT_KIND } from './defs';
+import { prefix } from '../../../../globals/settings';
+import FocusMixin from '../../../../globals/mixins/focus';
+import {
+  INPUT_SIZE,
+  DATE_PICKER_INPUT_COLOR_SCHEME,
+  DATE_PICKER_INPUT_KIND,
+} from '../../defs';
 import styles from './date-picker.scss?lit';
 import Calendar16 from '@carbon/icons/es/calendar/16.js';
 import WarningFilled16 from '@carbon/icons/es/warning--filled/16.js';
 import WarningAltFilled16 from '@carbon/icons/es/warning--alt--filled/16.js';
-import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
-import { iconLoader } from '../../globals/internal/icon-loader';
+import { carbonElement as customElement } from '../../../../globals/decorators/carbon-element';
+import { iconLoader } from '../../../../globals/internal/icon-loader';
 
 export { DATE_PICKER_INPUT_COLOR_SCHEME, DATE_PICKER_INPUT_KIND };
 
 /**
  * The input box for date picker.
  *
- * @element cds-date-picker-input
+ * @element cds-preview-date-picker-input
  */
-@customElement(`${prefix}-date-picker-input`)
+@customElement(`${prefix}-preview-date-picker-input`)
 class CDSDatePickerInput extends FocusMixin(LitElement) {
   /**
    * `true` if there is an AI Label.
@@ -36,6 +39,9 @@ class CDSDatePickerInput extends FocusMixin(LitElement) {
 
   /**
    * Handles `slotchange` event.
+   *
+   * @param {object} root0 - Event object
+   * @param {EventTarget} root0.target - The event target
    */
   protected _handleAILabelSlotChange({ target }: Event) {
     const hasContent = (target as HTMLSlotElement)
@@ -58,27 +64,45 @@ class CDSDatePickerInput extends FocusMixin(LitElement) {
   }
 
   /**
-   * The calendar icon.
+   * Handles `click` event on the calendar icon button.
+   * Dispatches a custom event and does NOT move focus to the text input,
+   * matching the React implementation where the icon is a separate button.
+   *
+   * @param {MouseEvent} event - The click event.
    */
-  @query(`.${prefix}--date-picker__icon`)
-  private _iconNode!: SVGElement;
+  private _handleIconButtonClick(event: MouseEvent) {
+    event.stopPropagation();
+    this.dispatchEvent(
+      new CustomEvent(`${prefix}-preview-date-picker-icon-click`, {
+        bubbles: true,
+        composed: true,
+      })
+    );
+  }
 
   /**
-   * Handles `click` event on the calendar icon.
-   *
-   * @param event The event.
+   * Handles `click` event on `<input>` in the shadow DOM.
+   * Dispatches a custom event so the parent date picker can reopen the calendar
+   * when the input already has focus (clicking a focused input does not fire
+   * a new `focus` event, so a dedicated click event is required).
    */
-  private _handleClickWrapper(event: MouseEvent) {
-    if (event.target === this._iconNode) {
-      this.input.focus();
-    }
-  }
+  private _handleInputClick = () => {
+    this.dispatchEvent(
+      new CustomEvent(`${prefix}-preview-date-picker-input-click`, {
+        bubbles: true,
+        composed: true,
+        detail: {
+          inputType: this.kind || 'from',
+        },
+      })
+    );
+  };
 
   /**
    * Handles `input` event on `<input>` in the shadow DOM.
    *
-   * @param event The event.
-   * @param event.target The event target.
+   * @param {Event} event - The event.
+   * @param {HTMLInputElement} event.target - The event target.
    */
   private _handleInput({ target }: Event) {
     const { value } = target as HTMLInputElement;
@@ -86,16 +110,55 @@ class CDSDatePickerInput extends FocusMixin(LitElement) {
   }
 
   /**
-   * @returns The template for the the calendar icon.
+   * Handles `focus` event on `<input>` in the shadow DOM.
+   */
+  private _handleFocus = () => {
+    // Dispatch custom event for input focus
+    this.dispatchEvent(
+      new CustomEvent(`${prefix}-preview-date-picker-input-focus`, {
+        bubbles: true,
+        composed: true,
+        detail: {
+          inputType: this.kind || 'from',
+        },
+      })
+    );
+  };
+
+  /**
+   * Handles `blur` event on `<input>` in the shadow DOM.
+   */
+  private _handleBlur = () => {
+    // Dispatch custom event for input blur
+    this.dispatchEvent(
+      new CustomEvent(`${prefix}-preview-date-picker-input-blur`, {
+        bubbles: true,
+        composed: true,
+        detail: {
+          inputType: this.kind || 'from',
+        },
+      })
+    );
+  };
+
+  /**
+   * @returns The template for the calendar icon button.
+   * Rendered as a focusable-false button (tabindex="-1") so clicking it does
+   * not move focus to the text input — matching the React implementation.
    */
   private _renderIcon() {
-    return this.kind === DATE_PICKER_INPUT_KIND.SIMPLE
-      ? undefined
-      : iconLoader(Calendar16, {
-          class: `${prefix}--date-picker__icon`,
-          role: 'img',
-          title: 'Open calendar',
-        });
+    if (this.kind === DATE_PICKER_INPUT_KIND.SIMPLE) {
+      return undefined;
+    }
+    return html`<button
+      type="button"
+      class="${prefix}--date-picker__icon"
+      ?disabled="${this.disabled || this.readonly}"
+      aria-label="Open calendar"
+      tabindex="-1"
+      @click="${this._handleIconButtonClick}">
+      ${iconLoader(Calendar16, { focusable: 'false', 'aria-hidden': 'true' })}
+    </button>`;
   }
 
   /**
@@ -106,6 +169,9 @@ class CDSDatePickerInput extends FocusMixin(LitElement) {
 
   /**
    * Handles `slotchange` event on the default `<slot>`.
+   *
+   * @param {object} root0 - Event object
+   * @param {EventTarget} root0.target - The event target
    */
   protected _handleSlotChange({ target }: Event) {
     if (!(target as HTMLSlotElement).name) {
@@ -226,6 +292,11 @@ class CDSDatePickerInput extends FocusMixin(LitElement) {
   @property({ attribute: 'warn-text' })
   warnText = '';
 
+  /**
+   * Renders the component template.
+   *
+   * @returns {TemplateResult} The template result
+   */
   render() {
     const constructor = this.constructor as typeof CDSDatePickerInput;
     const {
@@ -243,8 +314,10 @@ class CDSDatePickerInput extends FocusMixin(LitElement) {
       value,
       warn,
       warnText,
-      _handleClickWrapper: handleClickWrapper,
       _handleInput: handleInput,
+      _handleFocus: handleFocus,
+      _handleBlur: handleBlur,
+      _handleInputClick: handleInputClick,
       _hasAILabel: hasAILabel,
     } = this;
 
@@ -311,7 +384,7 @@ class CDSDatePickerInput extends FocusMixin(LitElement) {
       <label for="input" class="${labelClasses}">
         <slot name="label-text">${labelText}</slot>
       </label>
-      <div class="${inputWrapperClasses}" @click="${handleClickWrapper}">
+      <div class="${inputWrapperClasses}">
         <span>
           <input
             id="input"
@@ -323,6 +396,9 @@ class CDSDatePickerInput extends FocusMixin(LitElement) {
             .value="${ifDefined(value)}"
             ?data-invalid="${normalizedProps.invalid}"
             @input="${handleInput}"
+            @focus="${handleFocus}"
+            @blur="${handleBlur}"
+            @click="${handleInputClick}"
             ?readonly="${readonly}" />
           ${normalizedProps.icon || this._renderIcon()}
           <slot
@@ -340,12 +416,15 @@ class CDSDatePickerInput extends FocusMixin(LitElement) {
           ${normalizedProps['slot-text']}
         </slot>
       </div>
-      <div ?hidden="${hasHelperText}" class="${helperTextClasses}">
+      <div ?hidden="${!hasHelperText}" class="${helperTextClasses}">
         <slot name="helper-text" @slotchange="${this._handleSlotChange}"></slot>
       </div>
     `;
   }
 
+  /**
+   * Lifecycle method called after component updates.
+   */
   updated() {
     this.toggleAttribute('ai-label', this._hasAILabel);
     const label = this.shadowRoot?.querySelector("slot[name='ai-label']");
@@ -379,7 +458,7 @@ class CDSDatePickerInput extends FocusMixin(LitElement) {
    * A selector that will return the parent date picker.
    */
   static get selectorParent() {
-    return `${prefix}-date-picker`;
+    return `${prefix}-preview-date-picker`;
   }
 
   /**
@@ -396,6 +475,13 @@ class CDSDatePickerInput extends FocusMixin(LitElement) {
    */
   static get aiLabelItem() {
     return `${prefix}-ai-label`;
+  }
+
+  /**
+   * The name of the custom event fired when the input is clicked.
+   */
+  static get inputClickEventName() {
+    return `${prefix}-preview-date-picker-input-click`;
   }
 
   static shadowRootOptions = {
