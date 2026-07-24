@@ -3,6 +3,9 @@
   "description": "A collection of design elements in code for the IBM Design Language",
   "version": "11.93.0",
   "license": "Apache-2.0",
+  "sideEffects": [
+    "index.scss"
+  ],
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "module": "es/index.js",
