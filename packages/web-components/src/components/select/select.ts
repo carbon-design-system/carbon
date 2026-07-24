@@ -63,6 +63,18 @@ class CDSSelect extends FormMixin(LitElement) {
   private _selectedOptionNodes!: HTMLOptionElement[];
 
   /**
+   * The `<slot>` element for the AI label in the shadow DOM.
+   */
+  @query("slot[name='ai-label']")
+  private _slotAILabelNode!: HTMLSlotElement;
+
+  /**
+   * The `<slot>` element for the slug in the shadow DOM.
+   */
+  @query("slot[name='slug']")
+  private _slotSlugNode!: HTMLSlotElement;
+
+  /**
    * Specify whether the textarea is fluid or not
    */
   @property({ type: Boolean })
@@ -378,7 +390,7 @@ class CDSSelect extends FormMixin(LitElement) {
       }
     }
 
-    const label = this.shadowRoot?.querySelector("slot[name='ai-label']");
+    const label = this._slotAILabelNode;
 
     if (label) {
       if ((label as HTMLSlotElement).assignedNodes()?.length) {
@@ -392,12 +404,10 @@ class CDSSelect extends FormMixin(LitElement) {
         this.querySelector(`${prefix}-ai-label`)?.hasAttribute('revert-active')
       );
     } else {
-      this.shadowRoot
-        ?.querySelector("slot[name='slug']")
-        ?.classList.toggle(
-          `${prefix}--slug--revert`,
-          this.querySelector(`${prefix}-slug`)?.hasAttribute('revert-active')
-        );
+      this._slotSlugNode?.classList.toggle(
+        `${prefix}--slug--revert`,
+        this.querySelector(`${prefix}-slug`)?.hasAttribute('revert-active')
+      );
     }
   }
 

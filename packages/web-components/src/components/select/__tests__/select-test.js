@@ -6,6 +6,8 @@
  */
 
 import '@carbon/web-components/es/components/select/index.js';
+import '@carbon/web-components/es/components/ai-label/index.js';
+import '@carbon/web-components/es/components/slug/index.js';
 import { html, fixture, expect } from '@open-wc/testing';
 
 describe('cds-select', () => {
@@ -293,5 +295,74 @@ describe('cds-select', () => {
     `);
     const internalSelect = el.shadowRoot.querySelector('select');
     expect(internalSelect.getAttribute('aria-invalid')).to.equal('false');
+  });
+
+  describe('AI label and slug slot (@query decorator)', () => {
+    it('should resolve ai-label slot node via @query decorator', async () => {
+      const el = await fixture(html`
+        <cds-select label-text="With AI">
+          <cds-ai-label slot="ai-label"></cds-ai-label>
+          <cds-select-item value="1">One</cds-select-item>
+        </cds-select>
+      `);
+      await el.updateComplete;
+
+      const slotNode = el.shadowRoot.querySelector("slot[name='ai-label']");
+      expect(slotNode).to.exist;
+    });
+
+    it('should resolve slug slot node via @query decorator', async () => {
+      const el = await fixture(html`
+        <cds-select label-text="With Slug">
+          <cds-slug slot="slug"></cds-slug>
+          <cds-select-item value="1">One</cds-select-item>
+        </cds-select>
+      `);
+      await el.updateComplete;
+
+      const slotNode = el.shadowRoot.querySelector("slot[name='slug']");
+      expect(slotNode).to.exist;
+    });
+
+    it('should toggle cds--slug--revert class on ai-label slot when revert-active is set', async () => {
+      const el = await fixture(html`
+        <cds-select label-text="With AI">
+          <cds-ai-label slot="ai-label" revert-active></cds-ai-label>
+          <cds-select-item value="1">One</cds-select-item>
+        </cds-select>
+      `);
+      await el.updateComplete;
+
+      const aiLabelSlot = el.shadowRoot.querySelector("slot[name='ai-label']");
+      expect(aiLabelSlot.classList.contains('cds--slug--revert')).to.be.true;
+    });
+
+    it('should not add cds--slug--revert to slug slot when only cds-slug is present (ai-label slot takes precedence in shadow DOM)', async () => {
+      // The ai-label slot element always exists in shadow DOM, so the else-branch
+      // for the slug slot is never reached when only cds-slug is slotted.
+      const el = await fixture(html`
+        <cds-select label-text="With Slug">
+          <cds-slug slot="slug" revert-active></cds-slug>
+          <cds-select-item value="1">One</cds-select-item>
+        </cds-select>
+      `);
+      await el.updateComplete;
+
+      const slugSlot = el.shadowRoot.querySelector("slot[name='slug']");
+      expect(slugSlot.classList.contains('cds--slug--revert')).to.be.false;
+    });
+
+    it('should not set cds--slug--revert on ai-label slot when revert-active is absent', async () => {
+      const el = await fixture(html`
+        <cds-select label-text="With AI">
+          <cds-ai-label slot="ai-label"></cds-ai-label>
+          <cds-select-item value="1">One</cds-select-item>
+        </cds-select>
+      `);
+      await el.updateComplete;
+
+      const aiLabelSlot = el.shadowRoot.querySelector("slot[name='ai-label']");
+      expect(aiLabelSlot.classList.contains('cds--slug--revert')).to.be.false;
+    });
   });
 });

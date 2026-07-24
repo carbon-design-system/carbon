@@ -138,6 +138,18 @@ class CDSDropdown extends ValidityMixin(
   protected _slotTitleTextNode!: HTMLSlotElement;
 
   /**
+   * The `<slot>` element for the AI label in the shadow DOM.
+   */
+  @query("slot[name='ai-label']")
+  private _slotAILabelNode!: HTMLSlotElement;
+
+  /**
+   * The `<slot>` element for the slug in the shadow DOM.
+   */
+  @query("slot[name='slug']")
+  private _slotSlugNode!: HTMLSlotElement;
+
+  /**
    * @param itemToSelect A dropdown item. Absense of this argument means clearing selection.
    * @returns `true` if the selection of this dropdown should change if the given item is selected upon user interaction.
    */
@@ -1149,19 +1161,17 @@ class CDSDropdown extends ValidityMixin(
       this.removeAttribute('ai-label');
     }
 
-    const label = this.shadowRoot?.querySelector("slot[name='ai-label']");
+    const label = this._slotAILabelNode;
     if (label) {
       label?.classList.toggle(
         `${prefix}--slug--revert`,
         this.querySelector(`${prefix}-ai-label`)?.hasAttribute('revert-active')
       );
     } else {
-      this.shadowRoot
-        ?.querySelector("slot[name='slug']")
-        ?.classList.toggle(
-          `${prefix}--slug--revert`,
-          this.querySelector(`${prefix}-slug`)?.hasAttribute('revert-active')
-        );
+      this._slotSlugNode?.classList.toggle(
+        `${prefix}--slug--revert`,
+        this.querySelector(`${prefix}-slug`)?.hasAttribute('revert-active')
+      );
     }
 
     if (
