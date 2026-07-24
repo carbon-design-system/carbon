@@ -128,7 +128,9 @@ const didWarnAboutDeprecation = {};`;
       clean: false,
       dts: false,
       entry: input,
-      external,
+      deps: {
+        neverBundle: external,
+      },
       failOnWarn: false,
       format: format === 'commonjs' ? 'cjs' : 'esm',
       logLevel: 'warn',
@@ -162,7 +164,9 @@ const didWarnAboutDeprecation = {};`;
     entry: {
       index: 'index.ts',
     },
-    external,
+    deps: {
+      neverBundle: external,
+    },
     failOnWarn: false,
     format: 'iife',
     globalName: 'CarbonIconsReact',

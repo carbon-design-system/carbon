@@ -91,8 +91,10 @@ async function build() {
       // type file.
       dts: false,
       entry: [reactEntrypoint, ...reactCompatEntrypoints],
-      external,
-      inlineOnly: false,
+      deps: {
+        neverBundle: external,
+        onlyBundle: false,
+      },
       failOnWarn: false,
       format: format.type,
       logLevel: 'warn',
@@ -141,8 +143,10 @@ async function build() {
     clean: false,
     dts: true,
     entry: [iconsEntrypoint],
-    external,
-    inlineOnly: false,
+    deps: {
+      neverBundle: external,
+      onlyBundle: false,
+    },
     failOnWarn: false,
     format: 'cjs',
     logLevel: 'warn',
@@ -169,8 +173,10 @@ async function build() {
     clean: false,
     dts: false,
     entry: [iconsEntrypoint],
-    external,
-    inlineOnly: false,
+    deps: {
+      neverBundle: external,
+      onlyBundle: false,
+    },
     failOnWarn: false,
     format: 'esm',
     logLevel: 'warn',

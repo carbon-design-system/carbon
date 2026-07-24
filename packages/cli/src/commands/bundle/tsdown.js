@@ -52,7 +52,9 @@ export default async function bundle(entrypoint, options) {
       // tree to `es`, `lib`, and `umd`.
       dts: false,
       entry: [entrypoint],
-      external: Object.keys(dependencies),
+      deps: {
+        neverBundle: Object.keys(dependencies),
+      },
       failOnWarn: false,
       format,
       globalName: format === 'umd' ? name : undefined,
