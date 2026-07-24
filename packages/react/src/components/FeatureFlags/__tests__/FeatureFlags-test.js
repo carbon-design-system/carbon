@@ -1014,4 +1014,62 @@ describe('FeatureFlags', () => {
       });
     });
   });
+
+  // Notices are deduped per flag for the lifetime of the module, so each test
+  // uses a flag name of its own rather than resetting shared state.
+  describe('v12 flag notice', () => {
+    let info;
+
+    beforeEach(() => {
+      info = jest.spyOn(console, 'info').mockImplementation(() => {});
+    });
+
+    afterEach(() => {
+      info.mockRestore();
+    });
+
+    it('should notify when a v12 flag is available but not enabled', () => {
+      add('enable-v12-notice-available', false);
+
+      function TestComponent() {
+        useFeatureFlag('enable-v12-notice-available');
+        return null;
+      }
+
+      render(<TestComponent />);
+
+      expect(info).toHaveBeenCalledTimes(1);
+      expect(info.mock.calls[0][0]).toContain('enable-v12-notice-available');
+    });
+
+    it('should not notify for a flag enabled by the v12 release flag', () => {
+      add('enable-v12-notice-released', false);
+
+      function TestComponent() {
+        useFeatureFlag('enable-v12-notice-released');
+        return null;
+      }
+
+      render(
+        <FeatureFlags enableV12Release>
+          <TestComponent />
+        </FeatureFlags>
+      );
+
+      expect(info).not.toHaveBeenCalled();
+    });
+
+    it('should not notify for non-v12 flags', () => {
+      add('enable-notice-non-v12', false);
+
+      function TestComponent() {
+        useFeatureFlag('enable-notice-non-v12');
+        return null;
+      }
+
+      render(<TestComponent />);
+
+      expect(info).not.toHaveBeenCalled();
+    });
+  });
 });
