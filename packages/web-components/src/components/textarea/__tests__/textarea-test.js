@@ -52,14 +52,30 @@ describe('cds-textarea', () => {
     expect(el.value).to.equal('Updated content');
   });
 
-  it('should support readonly and disabled attributes', async () => {
+  it('should support readonly attribute', async () => {
+    const el = await fixture(html` <cds-textarea readonly></cds-textarea> `);
+
+    const textarea = el.shadowRoot.querySelector('textarea');
+    expect(textarea.readOnly).to.be.true;
+    expect(textarea.disabled).to.be.false;
+  });
+
+  it('should support disabled attribute', async () => {
+    const el = await fixture(html` <cds-textarea disabled></cds-textarea> `);
+
+    const textarea = el.shadowRoot.querySelector('textarea');
+    expect(textarea.disabled).to.be.true;
+    expect(textarea.readOnly).to.be.false;
+  });
+
+  it('should not disable the textarea when both readonly and disabled are set (readonly takes precedence)', async () => {
     const el = await fixture(html`
       <cds-textarea readonly disabled></cds-textarea>
     `);
 
     const textarea = el.shadowRoot.querySelector('textarea');
     expect(textarea.readOnly).to.be.true;
-    expect(textarea.disabled).to.be.true;
+    expect(textarea.disabled).to.be.false;
   });
 
   it('should show invalid text when invalid is set', async () => {
@@ -251,6 +267,224 @@ describe('cds-textarea', () => {
       const slot = el.shadowRoot.querySelector('slot[name="warn-text"]');
       const content = slot.assignedNodes({ flatten: true })[0];
       expect(content.textContent.trim()).to.equal('Slotted Warning');
+    });
+  });
+
+  describe('invalid and warn states are suppressed when not interactive', () => {
+    describe('normal (interactive) inputs still show validation states', () => {
+      it('should apply invalid CSS class and show message when invalid and interactive', async () => {
+        const el = await fixture(html`
+          <cds-textarea invalid invalid-text="Some error"></cds-textarea>
+        `);
+        await el.updateComplete;
+        const textarea = el.shadowRoot.querySelector('textarea');
+        const requirement = el.shadowRoot.querySelector(
+          '.cds--form-requirement'
+        );
+        const icon = el.shadowRoot.querySelector(
+          '.cds--text-area__invalid-icon:not(.cds--text-area__invalid-icon--warning)'
+        );
+        expect(textarea.classList.contains('cds--text-area--invalid')).to.be
+          .true;
+        expect(requirement.hidden).to.be.false;
+        expect(requirement.textContent).to.include('Some error');
+        expect(icon).to.exist;
+        expect(
+          el.shadowRoot
+            .querySelector('.cds--text-area__wrapper')
+            .hasAttribute('data-invalid')
+        ).to.be.true;
+      });
+
+      it('should apply warn CSS class and show message when warn and interactive', async () => {
+        const el = await fixture(html`
+          <cds-textarea warn warn-text="Some warning"></cds-textarea>
+        `);
+        await el.updateComplete;
+        const textarea = el.shadowRoot.querySelector('textarea');
+        const requirement = el.shadowRoot.querySelector(
+          '.cds--form-requirement'
+        );
+        const icon = el.shadowRoot.querySelector(
+          '.cds--text-area__invalid-icon--warning'
+        );
+        expect(textarea.classList.contains('cds--text-area--warn')).to.be.true;
+        expect(requirement.hidden).to.be.false;
+        expect(requirement.textContent).to.include('Some warning');
+        expect(icon).to.exist;
+      });
+    });
+
+    describe('disabled', () => {
+      it('should not apply invalid CSS class when disabled', async () => {
+        const el = await fixture(html`
+          <cds-textarea
+            disabled
+            invalid
+            invalid-text="Some error"></cds-textarea>
+        `);
+        await el.updateComplete;
+        const textarea = el.shadowRoot.querySelector('textarea');
+        expect(textarea.classList.contains('cds--text-area--invalid')).to.be
+          .false;
+      });
+
+      it('should not render the invalid icon when disabled', async () => {
+        const el = await fixture(html`
+          <cds-textarea
+            disabled
+            invalid
+            invalid-text="Some error"></cds-textarea>
+        `);
+        await el.updateComplete;
+        const icon = el.shadowRoot.querySelector(
+          '.cds--text-area__invalid-icon:not(.cds--text-area__invalid-icon--warning)'
+        );
+        expect(icon).to.not.exist;
+      });
+
+      it('should hide the invalid message when disabled', async () => {
+        const el = await fixture(html`
+          <cds-textarea
+            disabled
+            invalid
+            invalid-text="Some error"></cds-textarea>
+        `);
+        await el.updateComplete;
+        const requirement = el.shadowRoot.querySelector(
+          '.cds--form-requirement'
+        );
+        expect(requirement.hidden).to.be.true;
+      });
+
+      it('should not set data-invalid on the wrapper when disabled', async () => {
+        const el = await fixture(html`
+          <cds-textarea
+            disabled
+            invalid
+            invalid-text="Some error"></cds-textarea>
+        `);
+        await el.updateComplete;
+        const wrapper = el.shadowRoot.querySelector('.cds--text-area__wrapper');
+        expect(wrapper.hasAttribute('data-invalid')).to.be.false;
+      });
+
+      it('should not apply warn CSS class when disabled', async () => {
+        const el = await fixture(html`
+          <cds-textarea disabled warn warn-text="Some warning"></cds-textarea>
+        `);
+        await el.updateComplete;
+        const textarea = el.shadowRoot.querySelector('textarea');
+        expect(textarea.classList.contains('cds--text-area--warn')).to.be.false;
+      });
+
+      it('should not render the warn icon when disabled', async () => {
+        const el = await fixture(html`
+          <cds-textarea disabled warn warn-text="Some warning"></cds-textarea>
+        `);
+        await el.updateComplete;
+        const icon = el.shadowRoot.querySelector(
+          '.cds--text-area__invalid-icon--warning'
+        );
+        expect(icon).to.not.exist;
+      });
+
+      it('should hide the warn message when disabled', async () => {
+        const el = await fixture(html`
+          <cds-textarea disabled warn warn-text="Some warning"></cds-textarea>
+        `);
+        await el.updateComplete;
+        const requirement = el.shadowRoot.querySelector(
+          '.cds--form-requirement'
+        );
+        expect(requirement.hidden).to.be.true;
+      });
+    });
+
+    describe('readonly', () => {
+      it('should not apply invalid CSS class when readonly', async () => {
+        const el = await fixture(html`
+          <cds-textarea
+            readonly
+            invalid
+            invalid-text="Some error"></cds-textarea>
+        `);
+        await el.updateComplete;
+        const textarea = el.shadowRoot.querySelector('textarea');
+        expect(textarea.classList.contains('cds--text-area--invalid')).to.be
+          .false;
+      });
+
+      it('should not render the invalid icon when readonly', async () => {
+        const el = await fixture(html`
+          <cds-textarea
+            readonly
+            invalid
+            invalid-text="Some error"></cds-textarea>
+        `);
+        await el.updateComplete;
+        const icon = el.shadowRoot.querySelector(
+          '.cds--text-area__invalid-icon:not(.cds--text-area__invalid-icon--warning)'
+        );
+        expect(icon).to.not.exist;
+      });
+
+      it('should hide the invalid message when readonly', async () => {
+        const el = await fixture(html`
+          <cds-textarea
+            readonly
+            invalid
+            invalid-text="Some error"></cds-textarea>
+        `);
+        await el.updateComplete;
+        const requirement = el.shadowRoot.querySelector(
+          '.cds--form-requirement'
+        );
+        expect(requirement.hidden).to.be.true;
+      });
+
+      it('should not set data-invalid on the wrapper when readonly', async () => {
+        const el = await fixture(html`
+          <cds-textarea
+            readonly
+            invalid
+            invalid-text="Some error"></cds-textarea>
+        `);
+        await el.updateComplete;
+        const wrapper = el.shadowRoot.querySelector('.cds--text-area__wrapper');
+        expect(wrapper.hasAttribute('data-invalid')).to.be.false;
+      });
+
+      it('should not apply warn CSS class when readonly', async () => {
+        const el = await fixture(html`
+          <cds-textarea readonly warn warn-text="Some warning"></cds-textarea>
+        `);
+        await el.updateComplete;
+        const textarea = el.shadowRoot.querySelector('textarea');
+        expect(textarea.classList.contains('cds--text-area--warn')).to.be.false;
+      });
+
+      it('should not render the warn icon when readonly', async () => {
+        const el = await fixture(html`
+          <cds-textarea readonly warn warn-text="Some warning"></cds-textarea>
+        `);
+        await el.updateComplete;
+        const icon = el.shadowRoot.querySelector(
+          '.cds--text-area__invalid-icon--warning'
+        );
+        expect(icon).to.not.exist;
+      });
+
+      it('should hide the warn message when readonly', async () => {
+        const el = await fixture(html`
+          <cds-textarea readonly warn warn-text="Some warning"></cds-textarea>
+        `);
+        await el.updateComplete;
+        const requirement = el.shadowRoot.querySelector(
+          '.cds--form-requirement'
+        );
+        expect(requirement.hidden).to.be.true;
+      });
     });
   });
 });
