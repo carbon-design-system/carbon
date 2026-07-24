@@ -111,6 +111,9 @@ async function build() {
           ...options,
           chunkFileNames: '[name].js',
           entryFileNames: '[name].js',
+          // `unbundle` already emits `exports.default`
+          // `named` silences the `MIXED_EXPORTS` warning
+          exports: 'named',
         };
       },
       platform: 'browser',
