@@ -6,6 +6,7 @@
  */
 
 import React from 'react';
+import { action } from 'storybook/actions';
 
 import { WithLayer } from '../../../.storybook/templates/WithLayer';
 
@@ -20,11 +21,13 @@ export default {
   args: {
     closeButtonLabelText: 'Clear search input',
     disabled: false,
+    enableSubmit: false,
     defaultWidth: 800,
     labelText: 'Site search',
     placeholder: 'Placeholder text',
     size: 'md',
     type: 'search',
+    submitButtonLabelText: 'Submit search',
   },
   argTypes: {
     light: {
@@ -41,6 +44,11 @@ export default {
       },
     },
     disabled: {
+      control: {
+        type: 'boolean',
+      },
+    },
+    enableSubmit: {
       control: {
         type: 'boolean',
       },
@@ -133,6 +141,20 @@ export const Default = ({ defaultWidth, ...searchArgs }) => (
   </div>
 );
 Default.parameters = { ...defaultParameters };
+
+export const WithSubmit = ({ defaultWidth, ...searchArgs }) => (
+  <div style={{ width: defaultWidth }}>
+    <Search
+      id="search-with-submit"
+      {...searchArgs}
+      onSubmit={(_, searchValue) => action('onSubmit')(searchValue)}
+    />
+  </div>
+);
+WithSubmit.args = {
+  enableSubmit: true,
+};
+WithSubmit.parameters = { ...defaultParameters };
 
 export const Skeleton = ({ size, defaultWidth }) => (
   <div style={{ width: defaultWidth }}>

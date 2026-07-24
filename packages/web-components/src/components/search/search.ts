@@ -32,7 +32,9 @@ export { SEARCH_SIZE };
  * @csspart input The input box.
  * @csspart close-button The close button.
  * @csspart close-icon The close icon.
+ * @csspart submit-button The submit button.
  * @fires cds-search-input - The custom event fired after the search content is changed upon a user gesture.
+ * @fires cds-search-submit - The custom event fired after a valid search is submitted.
  */
 @customElement(`${prefix}-search`)
 class CDSSearch extends HostListenerMixin(FocusMixin(FormMixin(LitElement))) {
@@ -90,6 +92,30 @@ class CDSSearch extends HostListenerMixin(FocusMixin(FormMixin(LitElement))) {
   }
 
   /**
+   * Submits the current search value when it is valid.
+   */
+  private _handleSubmit() {
+    if (!this._isSubmitValid()) {
+      return;
+    }
+
+    this.dispatchEvent(
+      new CustomEvent((this.constructor as typeof CDSSearch).eventSubmit, {
+        bubbles: true,
+        composed: true,
+        cancelable: false,
+        detail: {
+          value: this.value,
+        },
+      })
+    );
+  }
+
+  private _isSubmitValid() {
+    return !!this.value && (this.validate ? this.validate(this.value) : true);
+  }
+
+  /**
    * Expand only when the magnifier icon is clicked
    */
 
@@ -125,11 +151,22 @@ class CDSSearch extends HostListenerMixin(FocusMixin(FormMixin(LitElement))) {
   private _handleKeys(event: KeyboardEvent) {
     const key = event.key;
 
+    const inputEl = this.shadowRoot?.getElementById(
+      'input'
+    ) as HTMLInputElement | null;
+
+    if (
+      key === 'Enter' &&
+      this.enableSubmit &&
+      this.shadowRoot?.activeElement === inputEl
+    ) {
+      event.preventDefault();
+      this._handleSubmit();
+      return;
+    }
+
     // Esc only works when the input is the active element
     if (key === 'Escape') {
-      const inputEl = this.shadowRoot?.getElementById(
-        'input'
-      ) as HTMLInputElement | null;
       if (this.shadowRoot?.activeElement === inputEl) {
         event.stopPropagation();
         event.preventDefault();
@@ -188,7 +225,13 @@ class CDSSearch extends HostListenerMixin(FocusMixin(FormMixin(LitElement))) {
     const icon = this.querySelector('svg');
     icon?.setAttribute('part', 'search-icon');
     icon?.setAttribute('class', `${prefix}--search-magnifier-icon`);
-    icon?.setAttribute('role', `img`);
+    if (this.enableSubmit) {
+      icon?.setAttribute('aria-hidden', 'true');
+      icon?.removeAttribute('role');
+    } else {
+      icon?.removeAttribute('aria-hidden');
+      icon?.setAttribute('role', `img`);
+    }
     this.hasCustomIcon = true;
   }
 
@@ -239,6 +282,12 @@ class CDSSearch extends HostListenerMixin(FocusMixin(FormMixin(LitElement))) {
   disabled = false;
 
   /**
+   * `true` if the Search should render a submit button.
+   */
+  @property({ type: Boolean, reflect: true, attribute: 'enable-submit' })
+  enableSubmit = false;
+
+  /**
    * `true` if the search bar can be expandable
    */
   @property({ type: Boolean, reflect: true })
@@ -284,6 +333,12 @@ class CDSSearch extends HostListenerMixin(FocusMixin(FormMixin(LitElement))) {
   size?: SEARCH_SIZE;
 
   /**
+   * Specify a label to be read by screen readers on the submit button.
+   */
+  @property({ attribute: 'submit-button-label-text' })
+  submitButtonLabelText = 'Submit search';
+
+  /**
    * The `<input>` name.
    */
   @property()
@@ -295,21 +350,31 @@ class CDSSearch extends HostListenerMixin(FocusMixin(FormMixin(LitElement))) {
   @property({ type: String })
   value = '';
 
+  /**
+   * Optional function used to determine whether the search value can be
+   * submitted. By default, any non-empty value is valid.
+   */
+  @property({ attribute: false })
+  validate?: (value: string) => boolean;
+
   render() {
     const {
       autoComplete,
       autofocus,
       closeButtonLabelText,
       disabled,
+      enableSubmit,
       hasCustomIcon,
       labelText,
       name,
       placeholder,
       role,
+      submitButtonLabelText,
       type,
       value = '',
       _handleInput: handleInput,
       _handleClearInputButtonClick: handleClearInputButtonClick,
+      _handleSubmit: handleSubmit,
       _handleSlotChange: handleSlotChange,
     } = this;
     const clearClasses = classMap({
@@ -317,17 +382,19 @@ class CDSSearch extends HostListenerMixin(FocusMixin(FormMixin(LitElement))) {
       [`${prefix}--search-close--hidden`]: !this.value,
     });
     return html`
-      <div class="${prefix}--search-magnifier">
-        <slot name="icon" @slotchange=${handleSlotChange}>
-          ${hasCustomIcon
-            ? html``
-            : iconLoader(Search16, {
-                part: 'search-icon',
-                class: `${prefix}--search-magnifier-icon`,
-                role: 'img',
-              })}
-        </slot>
-      </div>
+      ${enableSubmit
+        ? html``
+        : html`<div class="${prefix}--search-magnifier">
+            <slot name="icon" @slotchange=${handleSlotChange}>
+              ${hasCustomIcon
+                ? html``
+                : iconLoader(Search16, {
+                    part: 'search-icon',
+                    class: `${prefix}--search-magnifier-icon`,
+                    role: 'img',
+                  })}
+            </slot>
+          </div>`}
       <label for="input" part="label-text" class="${prefix}--label">
         <slot>${labelText}</slot>
       </label>
@@ -357,6 +424,26 @@ class CDSSearch extends HostListenerMixin(FocusMixin(FormMixin(LitElement))) {
           role: 'img',
         })}
       </button>
+      ${enableSubmit
+        ? html`<button
+            part="submit-button"
+            ?disabled="${disabled || !this._isSubmitValid()}"
+            class="${prefix}--search-button"
+            @click="${handleSubmit}"
+            type="button"
+            title="${submitButtonLabelText}"
+            aria-label="${submitButtonLabelText}">
+            <slot name="icon" @slotchange=${handleSlotChange}>
+              ${hasCustomIcon
+                ? html``
+                : iconLoader(Search16, {
+                    part: 'search-icon',
+                    class: `${prefix}--search-magnifier-icon`,
+                    'aria-hidden': 'true',
+                  })}
+            </slot>
+          </button>`
+        : html``}
     `;
   }
 
@@ -365,6 +452,13 @@ class CDSSearch extends HostListenerMixin(FocusMixin(FormMixin(LitElement))) {
    */
   static get eventInput() {
     return `${prefix}-search-input`;
+  }
+
+  /**
+   * The name of the custom event fired after a valid search is submitted.
+   */
+  static get eventSubmit() {
+    return `${prefix}-search-submit`;
   }
 
   static shadowRootOptions = {

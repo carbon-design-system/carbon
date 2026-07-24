@@ -7,6 +7,7 @@
 
 import { html } from 'lit';
 import { ifDefined } from 'lit/directives/if-defined.js';
+import { action } from 'storybook/actions';
 import { SEARCH_SIZE } from './defs';
 import './search-skeleton';
 import '../layer';
@@ -26,11 +27,13 @@ const args = {
   closeButtonLabelText: 'Clear search input',
   defaultWidth: 800,
   disabled: false,
+  enableSubmit: false,
   labelText: 'Search',
   placeholder: 'Placeholder text',
   role: 'searchbox',
   size: SEARCH_SIZE.MEDIUM,
   type: 'text',
+  submitButtonLabelText: 'Submit search',
   value: '',
 };
 
@@ -57,6 +60,10 @@ const argTypes = {
     control: 'boolean',
     description:
       'Specify whether the <code>&lt;input&gt;</code> should be disabled.',
+  },
+  enableSubmit: {
+    control: 'boolean',
+    description: 'Specify whether the Search should render a submit button.',
   },
   expanded: {
     control: 'boolean',
@@ -85,6 +92,11 @@ const argTypes = {
     control: 'text',
     description:
       'Optional prop to specify the type of the <code>&lt;input&gt;</code>.',
+  },
+  submitButtonLabelText: {
+    control: 'text',
+    description:
+      'Specify a label to be read by screen readers on the submit button.',
   },
   value: {
     control: 'text',
@@ -168,6 +180,45 @@ export const Expandable = {
           @cds-search-input="${onInput}"
           expandable
           ?expanded=${expanded}></cds-search>
+      </div>
+    `;
+  },
+};
+
+export const WithSubmit = {
+  args: { ...args, enableSubmit: true },
+  argTypes,
+  render: (args) => {
+    const {
+      autoComplete,
+      autofocus,
+      closeButtonLabelText,
+      defaultWidth,
+      disabled,
+      enableSubmit,
+      labelText,
+      placeholder,
+      size,
+      submitButtonLabelText,
+      type,
+      value,
+    } = args ?? {};
+    return html`
+      <div style="width: ${defaultWidth}px;">
+        <cds-search
+          autocomplete="${autoComplete}"
+          ?autofocus="${autofocus}"
+          close-button-label-text="${ifDefined(closeButtonLabelText)}"
+          ?disabled="${disabled}"
+          ?enable-submit="${enableSubmit}"
+          label-text="${ifDefined(labelText)}"
+          placeholder="${ifDefined(placeholder)}"
+          size="${ifDefined(size)}"
+          submit-button-label-text="${ifDefined(submitButtonLabelText)}"
+          type="${ifDefined(type)}"
+          value="${ifDefined(value)}"
+          @cds-search-submit="${(event) =>
+            action('cds-search-submit')(event.detail.value)}"></cds-search>
       </div>
     `;
   },

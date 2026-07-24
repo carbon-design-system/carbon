@@ -106,6 +106,71 @@ describe('Search', () => {
       expect(screen.getByRole('searchbox')).toBeDisabled();
     });
 
+    it('should render an opt-in submit button', () => {
+      render(
+        <Search
+          labelText="test-search"
+          enableSubmit
+          submitButtonLabelText="Run search"
+        />
+      );
+
+      expect(screen.getByRole('button', { name: 'Run search' })).toBeDisabled();
+    });
+
+    it('should submit the current value from the button and Enter key', async () => {
+      const onSubmit = jest.fn();
+      render(
+        <Search labelText="test-search" enableSubmit onSubmit={onSubmit} />
+      );
+      const input = screen.getByRole('searchbox');
+      const submitButton = screen.getByRole('button', {
+        name: 'Submit search',
+      });
+
+      await userEvent.type(input, 'carbon');
+
+      expect(submitButton).toBeEnabled();
+      await userEvent.click(submitButton);
+      expect(onSubmit).toHaveBeenLastCalledWith(
+        expect.objectContaining({ type: 'click' }),
+        'carbon'
+      );
+
+      await userEvent.type(input, '{Enter}');
+      expect(onSubmit).toHaveBeenLastCalledWith(
+        expect.objectContaining({ key: 'Enter' }),
+        'carbon'
+      );
+      expect(onSubmit).toHaveBeenCalledTimes(2);
+    });
+
+    it('should only submit values accepted by validate', async () => {
+      const onSubmit = jest.fn();
+      render(
+        <Search
+          labelText="test-search"
+          enableSubmit
+          onSubmit={onSubmit}
+          validate={(searchValue) => searchValue.length >= 3}
+        />
+      );
+      const input = screen.getByRole('searchbox');
+      const submitButton = screen.getByRole('button', {
+        name: 'Submit search',
+      });
+
+      await userEvent.type(input, 'ab');
+      expect(submitButton).toBeDisabled();
+      await userEvent.type(input, '{Enter}');
+      expect(onSubmit).not.toHaveBeenCalled();
+
+      await userEvent.type(input, 'c');
+      expect(submitButton).toBeEnabled();
+      await userEvent.click(submitButton);
+      expect(onSubmit).toHaveBeenCalledTimes(1);
+    });
+
     it('should respect id prop', () => {
       render(<Search labelText="test-search" id="test-id" />);
 
