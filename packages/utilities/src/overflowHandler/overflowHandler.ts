@@ -75,7 +75,9 @@ export interface UpdateOverflowHandlerOptions {
   onChange: (visibleItems: HTMLElement[], hiddenItems: HTMLElement[]) => void;
   /** An array of previously hidden items to compare against the new hidden items. */
   previousHiddenItems?: HTMLElement[];
+  /** Pixels to reserve from the container's available space, causing overflow to trigger earlier. */
   offsetValue?: number;
+  /** The gap (in px) between items, representing `column-gap` (width) or `row-gap` (height) of the container. */
   gap?: number;
 }
 
@@ -176,6 +178,11 @@ export interface OverflowHandlerOptions {
    * The dimension to consider for overflow calculations. Defaults to 'width'.
    */
   dimension?: 'width' | 'height';
+  /**
+   * Pixels to reserve from the container's available space, causing overflow to
+   * trigger earlier. Useful when an element within the container (e.g. a "show
+   * more" button) needs guaranteed room.
+   */
   offsetValue?: number;
   /**
    * The gap (in px) between items in the container's flex/grid layout.
