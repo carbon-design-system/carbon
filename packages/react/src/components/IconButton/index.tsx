@@ -366,7 +366,7 @@ IconButton.propTypes = {
   /**
    * Specify the size of the Button.
    */
-  size: PropTypes.oneOf(['sm', 'md', 'lg']),
+  size: PropTypes.oneOf(['xs', 'sm', 'md', 'lg']),
 
   /**
    * Optionally specify a `target` when using an `<a>` element.
