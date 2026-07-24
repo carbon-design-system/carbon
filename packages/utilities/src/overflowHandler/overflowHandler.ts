@@ -12,21 +12,40 @@
  * display style of the element if it is not currently visible. It then uses
  * `getBoundingClientRect` to retrieve the size of the element.
  *
+ * An optional `gap` value can be supplied to account for the spacing between
+ * siblings in a flex/grid container.
+ *
  * @param el - The HTML element whose size is to be calculated.
  * @param dimension - The dimension to measure ('width' or 'height').
+ * @param gap - Optional gap (in px) to add to each item's size, representing the `column-gap` (width) or `row-gap` (height) of the parent container.
  * @returns The size of the element in pixels. Returns 0 if the element is not provided.
  */
 export function getSize(
-  el: HTMLElement | undefined,
-  dimension: 'width' | 'height'
+  el: HTMLElement,
+  dimension: 'width' | 'height',
+  gap = 0
 ): number {
   if (!el) return 0;
   const originalDisplay = el.style.display;
   if (!el.offsetParent && getComputedStyle(el).display === 'none') {
     el.style.display = 'inline-block';
   }
-  const size = el.getBoundingClientRect()[dimension];
+  let size = el.getBoundingClientRect()[dimension];
   el.style.display = originalDisplay;
+  const computedStyles = getComputedStyle(el);
+  size =
+    dimension === 'width'
+      ? size +
+        parseInt(computedStyles.paddingLeft) +
+        parseInt(computedStyles.paddingRight) +
+        parseInt(computedStyles.marginLeft) +
+        parseInt(computedStyles.marginRight)
+      : size +
+        parseInt(computedStyles.paddingTop) +
+        parseInt(computedStyles.paddingBottom) +
+        parseInt(computedStyles.marginTop) +
+        parseInt(computedStyles.marginBottom);
+  size += gap;
   return size;
 }
 
@@ -56,6 +75,10 @@ export interface UpdateOverflowHandlerOptions {
   onChange: (visibleItems: HTMLElement[], hiddenItems: HTMLElement[]) => void;
   /** An array of previously hidden items to compare against the new hidden items. */
   previousHiddenItems?: HTMLElement[];
+  /** Pixels to reserve from the container's available space, causing overflow to trigger earlier. */
+  offsetValue?: number;
+  /** The gap (in px) between items, representing `column-gap` (width) or `row-gap` (height) of the container. */
+  gap?: number;
 }
 
 /**
@@ -75,6 +98,8 @@ export function updateOverflowHandler({
   dimension,
   onChange,
   previousHiddenItems = [],
+  offsetValue = 0,
+  gap = 0,
 }: UpdateOverflowHandlerOptions): HTMLElement[] {
   const containerSize =
     dimension === 'width' ? container.clientWidth : container.clientHeight;
@@ -91,21 +116,27 @@ export function updateOverflowHandler({
       : [...items];
     hiddenItems = maxVisibleItems ? items.slice(maxVisibleItems) : [];
   } else {
-    const available = containerSize - offsetSize;
+    // Each item's size includes a gap (for the space after it), but the last
+    // visible item has no gap after it — add one gap back to available space.
+    const available =
+      containerSize - offsetSize - totalFixedSize - offsetValue + gap;
     let accumulated = 0;
+    let breakIndex = items.length;
 
     for (let i = 0; i < items.length; i++) {
       const size = sizes[i];
       if (
-        accumulated + size + totalFixedSize <= available &&
+        accumulated + size <= available &&
         (!maxVisibleItems || visibleItems.length < maxVisibleItems)
       ) {
         visibleItems.push(items[i]);
         accumulated += size;
       } else {
-        hiddenItems.push(items[i]);
+        breakIndex = i;
+        break;
       }
     }
+    hiddenItems = items.slice(breakIndex);
   }
 
   if (
@@ -147,6 +178,16 @@ export interface OverflowHandlerOptions {
    * The dimension to consider for overflow calculations. Defaults to 'width'.
    */
   dimension?: 'width' | 'height';
+  /**
+   * Pixels to reserve from the container's available space, causing overflow to
+   * trigger earlier. Useful when an element within the container (e.g. a "show
+   * more" button) needs guaranteed room.
+   */
+  offsetValue?: number;
+  /**
+   * The gap (in px) between items in the container's flex/grid layout.
+   */
+  gap?: number;
 }
 
 /**
@@ -164,6 +205,8 @@ export function createOverflowHandler({
   maxVisibleItems,
   onChange,
   dimension = 'width',
+  offsetValue = 0,
+  gap = 0,
 }: OverflowHandlerOptions): OverflowHandler {
   // Error handling
   if (!(container instanceof HTMLElement)) {
@@ -179,18 +222,20 @@ export function createOverflowHandler({
     throw new Error('maxVisibleItems must be a positive integer');
   }
 
-  const children = Array.from(container.children).filter(
-    (item): item is HTMLElement => item instanceof HTMLElement
-  );
-  const offset = children.find((item) => item.hasAttribute('data-offset'));
-  const fixedItems = children.filter((item) => item.hasAttribute('data-fixed'));
+  const children = Array.from(container.children) as HTMLElement[];
+  const offset = children.find((item) =>
+    item.hasAttribute('data-offset')
+  ) as HTMLElement;
+  const fixedItems = children.filter((item) =>
+    item.hasAttribute('data-fixed')
+  ) as HTMLElement[];
   const items = children.filter(
     (item) => item !== offset && !fixedItems.includes(item)
   );
 
-  const fixedSizes = fixedItems.map((item) => getSize(item, dimension));
-  const sizes = items.map((item) => getSize(item, dimension));
-  const offsetSize = getSize(offset, dimension);
+  const fixedSizes = fixedItems.map((item) => getSize(item, dimension, gap));
+  const sizes = items.map((item) => getSize(item, dimension, gap));
+  const offsetSize = getSize(offset, dimension, gap);
 
   let previousHiddenItems: HTMLElement[] = [];
 
@@ -206,6 +251,8 @@ export function createOverflowHandler({
       dimension,
       onChange,
       previousHiddenItems,
+      offsetValue,
+      gap,
     });
   }
 
