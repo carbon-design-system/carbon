@@ -13,14 +13,12 @@ export const getTypeSize = (step: number): number => {
   return getTypeSize(step - 1) + Math.floor((step - 2) / 4 + 1) * 2;
 };
 
-/**
- * The individual type scale steps, where `scaleNN` is the size for step `NN`.
- *
- * Each step is exported as a scalar so other modules in this package can
- * reference it as a plain identifier. Member accesses like `scale[0]` at module
- * scope read as potential getter side effects to bundlers and block tree
- * shaking of otherwise-unused tokens.
- */
+// The individual type scale steps, where `scaleNN` is the size for step `NN`.
+//
+// Each step is exported as a scalar so other modules in this package can
+// reference it as a plain identifier. Member accesses like `scale[0]` at module
+// scope read as potential getter side effects to bundlers and block tree
+// shaking of otherwise-unused tokens.
 export const scale01 = 12;
 export const scale02 = 14;
 export const scale03 = 16;

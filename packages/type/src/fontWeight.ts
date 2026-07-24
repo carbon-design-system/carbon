@@ -5,8 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-// Individual weights are also exported as scalars so other modules in this
-// package can reference them as plain identifiers. Member accesses like
+// Individual weights are exported as scalars so other modules in this package
+// can reference them as plain identifiers. Member accesses like
 // `fontWeights.regular` at module scope read as potential getter side effects
 // to bundlers and block tree shaking of otherwise-unused tokens.
 export const light = 300;
