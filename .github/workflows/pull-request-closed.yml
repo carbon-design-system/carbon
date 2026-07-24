@@ -31,7 +31,7 @@ jobs:
   if_merged:
     if: github.event.pull_request.merged == true
     permissions:
-      issues: write
+      pull-requests: write
     runs-on: ubuntu-latest
     steps:
       - name: Comment the schedule release
