@@ -328,6 +328,31 @@ describe('TextInput', () => {
     });
   });
 
+  describe('WebMCP attributes', () => {
+    it('should render toolparamdescription attribute when provided', () => {
+      render(
+        <TextInput
+          id="input-1"
+          labelText="TextInput label"
+          toolParamDescription="Description for AI agent"
+        />
+      );
+
+      expect(screen.getByRole('textbox')).toHaveAttribute(
+        'toolparamdescription',
+        'Description for AI agent'
+      );
+    });
+
+    it('should not render toolparamdescription attribute when not provided', () => {
+      render(<TextInput id="input-1" labelText="TextInput label" />);
+
+      expect(screen.getByRole('textbox')).not.toHaveAttribute(
+        'toolparamdescription'
+      );
+    });
+  });
+
   describe('behaves as expected - Component API', () => {
     it('should respect onChange prop', async () => {
       const onChange = jest.fn();

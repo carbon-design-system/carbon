@@ -49,6 +49,30 @@ describe('FilterableMultiSelect', () => {
     expect(screen.getAllByRole('option').length).toBe(mockProps.items.length);
   });
 
+  describe('toolParamDescription', () => {
+    it('should render toolparamdescription attribute when toolParamDescription prop is provided', () => {
+      render(
+        <FilterableMultiSelect
+          {...mockProps}
+          toolParamDescription="Select multiple items from the list"
+        />
+      );
+
+      const input = screen.getByRole('combobox');
+      expect(input).toHaveAttribute(
+        'toolparamdescription',
+        'Select multiple items from the list'
+      );
+    });
+
+    it('should not render toolparamdescription attribute when toolParamDescription prop is not provided', () => {
+      render(<FilterableMultiSelect {...mockProps} />);
+
+      const input = screen.getByRole('combobox');
+      expect(input).not.toHaveAttribute('toolparamdescription');
+    });
+  });
+
   it('should call `onMenuChange` when the user clicks on the combobox', async () => {
     render(<FilterableMultiSelect {...mockProps} />);
     await waitForPosition();

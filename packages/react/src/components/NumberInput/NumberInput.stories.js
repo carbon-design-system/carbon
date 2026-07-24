@@ -48,6 +48,11 @@ const sharedArgTypes = {
   },
   label: { control: { type: 'text' } },
   helperText: { control: { type: 'text' } },
+  toolParamDescription: {
+    control: { type: 'text' },
+    description:
+      'Optional description for WebMCP (Web Model Context Protocol) to help AI agents understand the purpose of this input field.',
+  },
 };
 
 const reusableProps = {

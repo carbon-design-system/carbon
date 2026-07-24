@@ -56,6 +56,11 @@ export default {
       },
     },
     onChange: { action: 'onChange' },
+    toolParamDescription: {
+      control: { type: 'text' },
+      description:
+        'Optional description for WebMCP (Web Model Context Protocol) to help AI agents understand the purpose of this input field.',
+    },
   },
   parameters: {
     docs: {

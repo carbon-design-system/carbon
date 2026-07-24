@@ -303,6 +303,13 @@ export interface FilterableMultiSelectProps<ItemType>
   type?: ListBoxType;
 
   /**
+   * Optional description for WebMCP (Web Model Context Protocol) Declarative API.
+   * Maps to the `toolparamdescription` HTML attribute for AI agent integration.
+   * @see https://developer.chrome.com/docs/ai/webmcp/declarative-api
+   */
+  toolParamDescription?: string;
+
+  /**
    * Specify title to show title on hover
    */
   useTitleInItem?: boolean;
@@ -363,6 +370,7 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
     selectedItems: selected,
     size,
     sortItems = defaultSortItems,
+    toolParamDescription,
     translateWithId,
     useTitleInItem,
     warn = false,
@@ -1026,6 +1034,9 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
           )}
           <input
             className={inputClasses}
+            {...(toolParamDescription && {
+              toolparamdescription: toolParamDescription,
+            })}
             {...inputProp}
             ref={mergedRef}
             {...readOnlyEventHandlers}
@@ -1347,6 +1358,12 @@ FilterableMultiSelect.propTypes = {
   translateWithId: PropTypes.func,
 
   type: ListBoxTypePropType,
+
+  /**
+   * Optional description for WebMCP (Web Model Context Protocol) Declarative API.
+   * Maps to the `toolparamdescription` HTML attribute for AI agent integration.
+   */
+  toolParamDescription: PropTypes.string,
 
   /**
    * Specify title to show title on hover
