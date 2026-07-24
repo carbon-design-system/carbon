@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2019, 2024
+// Copyright IBM Corp. 2019, 2026
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -58,9 +58,11 @@ $css--plex: true !default;
     background-color: $layer;
     block-size: $spacing-09;
 
-    &:hover {
-      background-color: $background-hover;
-      color: $text-primary;
+    @media (any-hover: hover) {
+      &:hover {
+        background-color: $background-hover;
+        color: $text-primary;
+      }
     }
 
     &:active {
@@ -71,8 +73,10 @@ $css--plex: true !default;
   a.#{$prefix}--header__menu-item--current {
     background-color: $layer-selected;
 
-    &:hover {
-      background-color: $layer-selected-hover;
+    @media (any-hover: hover) {
+      &:hover {
+        background-color: $layer-selected-hover;
+      }
     }
 
     &::after {
@@ -92,8 +96,10 @@ $css--plex: true !default;
     fill: $icon-secondary;
   }
 
-  &:hover ::slotted(svg) {
-    fill: $icon-primary;
+  @media (any-hover: hover) {
+    &:hover ::slotted(svg) {
+      fill: $icon-primary;
+    }
   }
 
   .#{$prefix}--popover {
