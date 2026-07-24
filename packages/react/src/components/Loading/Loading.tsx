@@ -7,7 +7,7 @@
 
 import cx from 'classnames';
 import PropTypes from 'prop-types';
-import React, { type HTMLAttributes } from 'react';
+import React, { type HTMLAttributes, useEffect, useRef } from 'react';
 import { usePrefix } from '../../internal/usePrefix';
 import { deprecate } from '../../prop-types/deprecate';
 
@@ -52,6 +52,43 @@ function Loading({
   ...rest
 }: LoadingProps) {
   const prefix = usePrefix();
+  const overlayRef = useRef<HTMLDivElement>(null);
+  const savedFocusRef = useRef<HTMLElement>(null);
+
+  const trapActive = withOverlay && active;
+
+  useEffect(() => {
+    if (!trapActive) return;
+
+    savedFocusRef.current =
+      document.activeElement instanceof HTMLElement
+        ? document.activeElement
+        : null;
+    overlayRef.current?.focus();
+
+    return () => {
+      savedFocusRef.current?.focus();
+      savedFocusRef.current = null;
+    };
+  }, [trapActive]);
+
+  useEffect(() => {
+    if (!trapActive) return;
+
+    function handleKeyDown(e: KeyboardEvent) {
+      if (e.key !== 'Tab') return;
+      // Dialog has no tabbable children; keep focus on the dialog itself.
+      // Redirect too, so focus can't get stranded outside the overlay.
+      e.preventDefault();
+      overlayRef.current?.focus();
+    }
+
+    document.addEventListener('keydown', handleKeyDown, true);
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown, true);
+    };
+  }, [trapActive]);
+
   const loadingClassName = cx(customClassName, {
     [`${prefix}--loading`]: true,
     [`${prefix}--loading--small`]: small,
@@ -93,7 +130,16 @@ function Loading({
   );
 
   return withOverlay ? (
-    <div className={overlayClassName}>{loading}</div>
+    <div className={overlayClassName} role="presentation">
+      <div
+        ref={overlayRef}
+        role={active ? 'dialog' : undefined}
+        aria-modal={active ? 'true' : undefined}
+        aria-label={active ? description : undefined}
+        tabIndex={active ? -1 : undefined}>
+        {loading}
+      </div>
+    </div>
   ) : (
     loading
   );
