@@ -361,13 +361,12 @@ describe('maxCollapsedNumberOfRows / minCollapsedNumberOfRows / maxExpandedNumbe
     const showMoreButton = el.shadowRoot.querySelector(
       '.cds--snippet-btn--expand'
     );
-    if (showMoreButton) {
-      showMoreButton.click();
-      await el.updateComplete;
+    expect(showMoreButton).to.exist;
+    showMoreButton.click();
+    await el.updateComplete;
 
-      const container = el.shadowRoot.querySelector('.cds--snippet-container');
-      expect(container.style.maxHeight).to.equal(`${rows * rowHeight}px`);
-    }
+    const container = el.shadowRoot.querySelector('.cds--snippet-container');
+    expect(container.style.maxHeight).to.equal(`${rows * rowHeight}px`);
   });
 
   it('should apply minExpandedNumberOfRows as min-height on the snippet container when expanded', async () => {
@@ -386,13 +385,12 @@ describe('maxCollapsedNumberOfRows / minCollapsedNumberOfRows / maxExpandedNumbe
     const showMoreButton = el.shadowRoot.querySelector(
       '.cds--snippet-btn--expand'
     );
-    if (showMoreButton) {
-      showMoreButton.click();
-      await el.updateComplete;
+    expect(showMoreButton).to.exist;
+    showMoreButton.click();
+    await el.updateComplete;
 
-      const container = el.shadowRoot.querySelector('.cds--snippet-container');
-      expect(container.style.minHeight).to.equal(`${rows * rowHeight}px`);
-    }
+    const container = el.shadowRoot.querySelector('.cds--snippet-container');
+    expect(container.style.minHeight).to.equal(`${rows * rowHeight}px`);
   });
 
   it('should not apply max-height when maxExpandedNumberOfRows is 0 (expanded)', async () => {
@@ -410,13 +408,12 @@ describe('maxCollapsedNumberOfRows / minCollapsedNumberOfRows / maxExpandedNumbe
     const showMoreButton = el.shadowRoot.querySelector(
       '.cds--snippet-btn--expand'
     );
-    if (showMoreButton) {
-      showMoreButton.click();
-      await el.updateComplete;
+    expect(showMoreButton).to.exist;
+    showMoreButton.click();
+    await el.updateComplete;
 
-      const container = el.shadowRoot.querySelector('.cds--snippet-container');
-      expect(container.style.maxHeight).to.equal('');
-    }
+    const container = el.shadowRoot.querySelector('.cds--snippet-container');
+    expect(container.style.maxHeight).to.equal('');
   });
 
   it('should not apply max-height or min-height for non-multi snippet types', async () => {
