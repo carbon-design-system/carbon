@@ -179,6 +179,10 @@ class CDSTag extends HostListenerMixin(FocusMixin(LitElement)) {
         this.setAttribute('role', 'button');
         this.tabIndex = this.disabled ? -1 : 0;
       }
+      // Add operational class for proper styling
+      if (parent === `${prefix}-operational-tag`) {
+        this.classList.add(`${prefix}--tag--operational`);
+      }
     }
   }
 
