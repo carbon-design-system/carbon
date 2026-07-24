@@ -223,14 +223,25 @@ async function ensureIconsTypes(filepath) {
 
 async function emitReactDeclarations(tsconfigPath, outDir) {
   const sourceRoot = path.resolve(__dirname, '..', 'src');
+  const { excludeProductsComponents } = await import(
+    '../product-migrated-components.mjs'
+  );
   const configFile = ts.readConfigFile(tsconfigPath, ts.sys.readFile);
 
   if (configFile.error) {
     throw new Error(formatDiagnostics([configFile.error]));
   }
 
+  const config = {
+    ...configFile.config,
+    exclude: [
+      ...(configFile.config.exclude ?? []),
+      ...excludeProductsComponents,
+    ],
+  };
+
   const parsed = ts.parseJsonConfigFileContent(
-    configFile.config,
+    config,
     ts.sys,
     path.dirname(tsconfigPath),
     {

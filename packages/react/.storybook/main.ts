@@ -15,6 +15,8 @@ import babel from '@rolldown/plugin-babel';
 import react from '@vitejs/plugin-react';
 import { mergeConfig } from 'vite';
 
+import { productMigratedStoryGlobs } from '../product-migrated-components.mjs';
+
 const configDir = fileURLToPath(new URL('.', import.meta.url));
 
 // Keep top level MDX docs pages in Storybook, but exclude component level docs
@@ -40,7 +42,12 @@ const storyGlobs = [
 ];
 
 const stories = glob.sync(storyGlobs, {
-  ignore: ['../src/**/docs/*.mdx', '../src/**/next/docs/*.mdx'],
+  ignore: [
+    '../src/**/docs/*.mdx',
+    '../src/**/next/docs/*.mdx',
+    // ibm-products components in migration are v12-only; exclude from v11 Storybook
+    ...productMigratedStoryGlobs,
+  ],
   cwd: configDir,
 });
 

@@ -12,6 +12,8 @@ import './feature-flags';
 import './internal/warnAboutDeprecatedReactVersion';
 
 export * from './components/Accordion';
+// export { ActionSet } from './components/ActionSet';
+// export type { ActionSetProps } from './components/ActionSet';
 export * from './components/AccordionItem';
 export * from './components/AspectRatio';
 export * from './components/Breadcrumb';
@@ -592,6 +594,10 @@ export type { RadioTileProps } from './components/RadioTile/RadioTile';
 export type { SearchProps } from './components/Search/Search';
 export type { SearchSkeletonProps } from './components/Search/Search.Skeleton';
 
+//side panel (migrated from @carbon/ibm-products)
+// export { SidePanel } from './components/SidePanel';
+// export type { SidePanelProps } from './components/SidePanel';
+
 //select
 export type { SelectProps } from './components/Select/Select';
 export type { SelectSkeletonProps } from './components/Select/Select.Skeleton';
@@ -724,6 +730,10 @@ export type { SkipToContentProps } from './components/UIShell/SkipToContent';
 export type { BaseSwitcherProps } from './components/UIShell/Switcher';
 export type { SwitcherDividerProps } from './components/UIShell/SwitcherDivider';
 export type { SwitcherItemProps } from './components/UIShell/SwitcherItem';
+
+// TODO: ibm-products migration in progress — re-enable when component is ready
+// export { TruncatedText } from './components/TruncatedText';
+// export type { TruncatedTextProps } from './components/TruncatedText';
 
 //unordered list
 export type { UnorderedListProps } from './components/UnorderedList/UnorderedList';

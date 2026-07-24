@@ -1,0 +1,18 @@
+//
+// Copyright IBM Corp. 2021, 2025
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@forward 'action-set';
+@use 'action-set' as action-set-styles;
+
+/// Outputs the ActionSet component styles
+/// @access public
+/// @group action-set
+@mixin action-set {
+  @include action-set-styles.action-set;
+}
+
+@include action-set-styles.action-set;

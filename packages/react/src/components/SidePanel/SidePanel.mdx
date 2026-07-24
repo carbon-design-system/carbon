@@ -1,0 +1,89 @@
+import { Story, ArgTypes, Canvas, Meta } from '@storybook/addon-docs/blocks';
+import * as SidePanelStories from './SidePanel.stories';
+
+<Meta isTemplate />
+
+# SidePanel
+
+[Source code](https://github.com/carbon-design-system/carbon/tree/main/packages/react/src/components/SidePanel)
+&nbsp;|&nbsp;
+[Usage guidelines](https://www.carbondesignsystem.com/patterns/side-panel-pattern)
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Slide over](#slide-over)
+- [Slide in](#slide-in)
+- [With action toolbar](#with-action-toolbar)
+- [Multi-step](#multi-step)
+- [With AI Label](#with-ai-label)
+- [Component API](#component-api)
+- [Feedback](#feedback)
+
+## Overview
+
+`SidePanel` keeps users in-context of a page while performing tasks like
+navigating, editing, viewing details, or configuring something new. It can slide
+over the page content (default) or slide in and push the page content aside.
+
+Open and close the panel by toggling the `open` prop. Provide an
+`onRequestClose` handler to update the state when the user clicks the close
+button or presses Escape.
+
+```jsx
+const [open, setOpen] = useState(false);
+
+<SidePanel
+  open={open}
+  onRequestClose={() => setOpen(false)}
+  title="Panel title"
+  size="md">
+  Panel content
+</SidePanel>;
+```
+
+<Canvas of={SidePanelStories.SlideOver} />
+
+## Slide over
+
+The default variant slides over the page content from the right (or left with
+`placement="left"`). Add `includeOverlay` to render a backdrop overlay.
+
+<Canvas of={SidePanelStories.SlideOver} />
+
+## Slide in
+
+Set `slideIn` and provide a `selectorPageContent` CSS selector pointing to the
+page content element. The panel will push that element aside instead of
+overlapping it.
+
+<Canvas of={SidePanelStories.SlideIn} />
+
+## With action toolbar
+
+Use `actionToolbarButtons` to render a row of icon/ghost buttons in the header
+beneath the title.
+
+<Canvas of={SidePanelStories.WithActionToolbar} />
+
+## Multi-step
+
+Use `currentStep` and `onNavigationBack` to build a stepped side panel.
+
+<Canvas of={SidePanelStories.PanelWithSecondStep} />
+
+## With AI Label
+
+Pass an `AILabel` to the `decorator` prop to signal AI-generated content.
+
+<Canvas of={SidePanelStories.WithAILabel} />
+
+## Component API
+
+<ArgTypes />
+
+## Feedback
+
+Help us improve this component by submitting
+[issues](https://github.com/carbon-design-system/carbon/issues) and
+[pull requests](https://github.com/carbon-design-system/carbon/pulls) to Carbon.
