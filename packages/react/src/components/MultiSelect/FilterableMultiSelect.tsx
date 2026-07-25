@@ -12,8 +12,6 @@ import Downshift, {
   useMultipleSelection,
   type UseComboboxProps,
   type UseMultipleSelectionProps,
-  UseComboboxInterface,
-  UseComboboxStateChangeTypes,
   UseMultipleSelectionInterface,
 } from 'downshift';
 import isEqual from 'react-fast-compare';
@@ -89,9 +87,8 @@ const {
   InputChange,
   InputKeyDownEscape,
   FunctionSetHighlightedIndex,
-} = useCombobox.stateChangeTypes as UseComboboxInterface['stateChangeTypes'] & {
-  ToggleButtonClick: UseComboboxStateChangeTypes.ToggleButtonClick;
-};
+  FunctionSetInputValue,
+} = useCombobox.stateChangeTypes;
 
 const {
   SelectedItemKeyDownBackspace,
@@ -817,11 +814,14 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
     event?: KeyboardEvent<Element> | MouseEvent<HTMLButtonElement>
   ) {
     const value = textInput.current?.value;
-    if (
-      value?.length === 1 ||
-      (event && 'key' in event && match(event, keys.Escape))
-    ) {
+    const isEscape = event && 'key' in event && match(event, keys.Escape);
+    const isClick = value && !(event && 'key' in event);
+    if (value?.length === 1 || isEscape || isClick) {
       setInputValue('');
+      onInputValueChange?.({
+        inputValue: '',
+        type: FunctionSetInputValue,
+      });
     } else {
       setInputValue(value ?? '');
     }
@@ -1045,6 +1045,9 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
               disabled={disabled}
               translateWithId={translateWithId}
               readOnly={readOnly}
+              onMouseDown={(event) => {
+                event.preventDefault();
+              }}
               onMouseUp={(event: MouseEvent) => {
                 // If we do not stop this event from propagating,
                 // it seems like Downshift takes our event and

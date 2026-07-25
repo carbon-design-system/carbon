@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2015, 2023
+ * Copyright IBM Corp. 2015, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -70,6 +70,26 @@ describe('@carbon/feature-flags', () => {
 
       expect(FeatureFlags.enabled('flag-a')).toBe(true);
       expect(FeatureFlags.enabled('flag-b')).toBe(false);
+    });
+
+    it('should enable v12 flags when the v12 release flag is enabled', () => {
+      FeatureFlags.merge({
+        'enable-v12-release': true,
+        'enable-v12-example': false,
+        'enable-not-v12-example': false,
+      });
+
+      expect(FeatureFlags.enabled('enable-v12-example')).toBe(true);
+      expect(FeatureFlags.enabled('enable-not-v12-example')).toBe(false);
+    });
+
+    it('should allow v12 flags to be enabled independently of the v12 release flag', () => {
+      FeatureFlags.merge({
+        'enable-v12-release': false,
+        'enable-v12-example': true,
+      });
+
+      expect(FeatureFlags.enabled('enable-v12-example')).toBe(true);
     });
 
     it('should throw if the given flag does not exist', () => {

@@ -11,10 +11,17 @@
 @use '@carbon/styles/scss/motion' as *;
 @use '@carbon/styles/scss/utilities/convert';
 @use '@carbon/styles/scss/layout' as *;
+@use '@carbon/styles/scss/utilities/focus-outline' as *;
 @use '@carbon/styles/scss/components/overflow-menu/overflow-menu' as *;
 
 // https://github.com/carbon-design-system/carbon/issues/11408
 @include overflow-menu;
+
+// Fallback visible focus style when the trigger's native focus ring is not shown.
+:host(#{$prefix}-overflow-menu[data-programmatic-focus]),
+:host(#{$prefix}-breadcrumb-overflow-menu[data-programmatic-focus]) {
+  @include focus-outline('outline');
+}
 
 :host(#{$prefix}-overflow-menu),
 :host(#{$prefix}-breadcrumb-overflow-menu) {

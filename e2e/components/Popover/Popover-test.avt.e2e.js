@@ -64,6 +64,11 @@ test.describe('@avt Popover', () => {
     await page.keyboard.press('Space');
     await expect(page.locator('.cds--popover--open')).toBeVisible();
     await page.keyboard.press('Escape');
+
+    // should not close on Esc, focus is not inside the content
+    await expect(page.locator('.cds--popover--open')).toBeVisible();
+
+    await page.keyboard.press('Space');
     await expect(page.locator('.cds--popover--open')).toBeHidden();
 
     // Testing right popover
