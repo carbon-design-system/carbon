@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { action } from 'storybook/actions';
 
 import { MenuItem, MenuItemDivider } from '../Menu';
@@ -162,5 +162,55 @@ export const WithMenuAlignment = () => {
         </MenuButton>
       </div>
     </>
+  );
+};
+
+export const InScrollableContainer = () => {
+  const containerRef = useRef(null);
+  const [target, setTarget] = useState(undefined);
+  useEffect(() => {
+    if (containerRef.current) {
+      setTarget(containerRef.current);
+    }
+  }, []);
+
+  return (
+    <div className="app">
+      <div className="container">
+        <div
+          className="scrollable-container"
+          ref={containerRef}
+          style={{
+            height: '200px',
+            width: '8000px',
+            overflowY: 'auto',
+            overflowX: 'auto',
+            border: '1px solid #ddd',
+            padding: '20px',
+          }}>
+          <p> This is the scrollable container</p>
+          <div style={{ height: '300px' }}></div>
+          <MenuButton
+            label="Bottom"
+            menuTarget={target}
+            boundary={containerRef.current}>
+            <MenuItem label="First action with a long label description" />
+            <MenuItem label="Second action" />
+            <MenuItem label="Third action" disabled />
+          </MenuButton>
+          <div style={{ height: '100px' }}></div>
+          <MenuButton
+            label="Right"
+            menuTarget={target}
+            boundary={containerRef.current}
+            menuAlignment="right">
+            <MenuItem label="First action with a long label description" />
+            <MenuItem label="Second action" />
+            <MenuItem label="Third action" disabled />
+          </MenuButton>
+          <div style={{ height: '200px' }}></div>
+        </div>
+      </div>
+    </div>
   );
 };

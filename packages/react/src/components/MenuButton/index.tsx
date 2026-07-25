@@ -22,6 +22,8 @@ import {
   flip,
   size as floatingSize,
   autoUpdate,
+  type Placement,
+  hide,
 } from '@floating-ui/react';
 import { useFeatureFlag } from '../FeatureFlags';
 import { mergeRefs } from '../../tools/mergeRefs';
@@ -122,10 +124,48 @@ const MenuButton = forwardRef<HTMLDivElement, MenuButtonProps>(
     const prefix = usePrefix();
     const triggerRef = useRef<HTMLDivElement>(null);
     // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
-    let middlewares: any[] = [];
+    const middlewares: any[] = [];
+
+    // Helper function to get fallback placements based on menu alignment
+    const getFallbackPlacements = (): Placement[] => {
+      if (menuAlignment.includes('bottom')) {
+        return ['top', 'top-start', 'top-end'] as Placement[];
+      } else if (menuAlignment.includes('top')) {
+        return ['bottom', 'bottom-start', 'bottom-end'] as Placement[];
+      } else if (menuAlignment.includes('left')) {
+        return ['right', 'right-start', 'right-end'] as Placement[];
+      } else {
+        return ['left', 'left-start', 'left-end'] as Placement[];
+      }
+    };
+
+    // Helper function to create enhanced flip middleware config
+    const getEnhancedFlipConfig = (crossAxis = true) => ({
+      fallbackPlacements: getFallbackPlacements(),
+      fallbackStrategy: 'initialPlacement' as const,
+      fallbackAxisSideDirection: 'start' as const,
+      boundary: menuTarget,
+      crossAxis,
+    });
 
     if (!enableOnlyFloatingStyles) {
-      middlewares = [flip({ crossAxis: false })];
+      if (menuTarget) {
+        middlewares.push(flip(getEnhancedFlipConfig(false)));
+      } else {
+        middlewares.push(
+          flip({
+            crossAxis: false,
+          })
+        );
+      }
+    }
+
+    if (menuTarget && enableOnlyFloatingStyles) {
+      middlewares.push(flip(getEnhancedFlipConfig()));
+    }
+
+    if (menuTarget) {
+      middlewares.push(hide({ boundary: menuTarget }));
     }
 
     if (menuAlignment === 'bottom' || menuAlignment === 'top') {
@@ -185,7 +225,42 @@ const MenuButton = forwardRef<HTMLDivElement, MenuButtonProps>(
           refs.floating.current.style[style] = value;
         }
       });
-    }, [floatingStyles, refs.floating, middlewareData, placement, open]);
+
+      if (refs.floating.current && middlewareData.hide) {
+        refs.floating.current.style.visibility = middlewareData.hide
+          .referenceHidden
+          ? 'hidden'
+          : 'visible';
+      }
+
+      if (refs.floating.current && placement) {
+        const placementClasses = [
+          'top',
+          'bottom',
+          'left',
+          'right',
+          'top-start',
+          'top-end',
+          'bottom-start',
+          'bottom-end',
+          'left-start',
+          'left-end',
+          'right-start',
+          'right-end',
+        ].map((p) => `${prefix}--menu--${p}`);
+
+        refs.floating.current.classList.remove(...placementClasses);
+
+        refs.floating.current.classList.add(`${prefix}--menu--${placement}`);
+      }
+    }, [
+      floatingStyles,
+      refs.floating,
+      middlewareData,
+      placement,
+      open,
+      prefix,
+    ]);
 
     function handleClick() {
       if (triggerRef.current) {
