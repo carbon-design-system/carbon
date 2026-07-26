@@ -1,7 +1,7 @@
 # dateTimeFormat
 
-A wrapper utility around `Intl.RelativeTimeFormat` and `Intl.DateTimeFormat`.
-See the
+A wrapper utility around `Intl.RelativeTimeFormat`, `Intl.DateTimeFormat`, and
+`Intl.DurationFormat`. See the
 [Date and time guidance](https://pages.github.ibm.com/carbon/ibm-products/guidelines/content/date-and-time/)
 provided on the Carbon for IBM Products site.
 
@@ -10,7 +10,7 @@ provided on the Carbon for IBM Products site.
 - Supported styles: `"long" | "short" | "narrow"`
 - Default style: `"long"`
 
-```js
+```ts
 import { dateTimeFormat } from '@carbon/utilities';
 
 dateTimeFormat.relative.format(timestamp);
@@ -30,7 +30,7 @@ dateTimeFormat.relative.format(timestamp, { style: 'short' });
 - Supported styles: `"full" | "long" | "medium" | "short"`
 - Default style: `"short"`
 
-```js
+```ts
 import { dateTimeFormat } from '@carbon/utilities';
 
 dateTimeFormat.absolute.formatTime(timestamp);
@@ -48,7 +48,7 @@ dateTimeFormat.absolute.formatTime(timestamp, { style: 'long' });
 - Supported styles: `"full" | "long" | "medium" | "short"`
 - Default style: `"medium"`
 
-```js
+```ts
 import { dateTimeFormat } from '@carbon/utilities';
 
 dateTimeFormat.absolute.formatDate(timestamp);
@@ -70,7 +70,7 @@ dateTimeFormat.absolute.formatDate(timestamp, { style: 'full' });
 - Default time style: `"short"`
 - Default date style: `"medium"`
 
-```js
+```ts
 import { dateTimeFormat } from '@carbon/utilities';
 
 dateTimeFormat.absolute.format(timestamp);
@@ -100,7 +100,7 @@ dateTimeFormat.absolute.format(timestamp, { style: 'tooltip' });
 - Default time style: `"short"`
 - Default date style: `"medium"`
 
-```js
+```ts
 import { dateTimeFormat } from '@carbon/utilities';
 
 dateTimeFormat.absolute.formatRange(startDate, endDate);
@@ -123,7 +123,7 @@ dateTimeFormat.absolute.formatRange(startDate, endDate, { style: 'short' });
 
 The time can be omitted to only display the date range.
 
-```js
+```ts
 import { dateTimeFormat } from '@carbon/utilities';
 
 dateTimeFormat.absolute.formatRange(startDate, endDate, { timeStyle: null });
@@ -134,7 +134,7 @@ dateTimeFormat.absolute.formatRange(startDate, endDate, { timeStyle: null });
 
 The date can only be omitted if the day is the same between start and end.
 
-```js
+```ts
 import { dateTimeFormat } from '@carbon/utilities';
 
 dateTimeFormat.absolute.formatRange(startDate, sameDayEndDate, {
@@ -149,7 +149,7 @@ For `absolute` functions, you can provide `timeZone` as an optional property.
 This is useful when (for example) you want to display utc time instead of a
 local timezone.
 
-```js
+```ts
 import { dateTimeFormat } from '@carbon/utilities';
 
 dateTimeFormat.absolute.format(timestamp);
@@ -161,3 +161,21 @@ dateTimeFormat.absolute.format(timestamp, { timeZone: 'UTC' });
 
 Timezone options are according to
 [ECMAScript® 2026 Internationalization API Specification](https://tc39.es/ecma402/#datetimeformat-objects)
+
+## Duration
+
+- Supported styles: `"long" | "short" | "narrow" | "digital"`
+- Default style: `"narrow"`
+
+```ts
+import { dateTimeFormat } from '@carbon/utilities';
+
+dateTimeFormat.duration.format(time);
+// 1h 23m 45s
+
+dateTimeFormat.duration.format(time, { locale: 'de-DE' });
+// 1h, 23 Min. und 45 Sek.
+
+dateTimeFormat.duration.format(time, { style: 'long' });
+// 1 hour, 23 minutes, 45 seconds
+```
