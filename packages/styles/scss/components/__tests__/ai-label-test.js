@@ -15,25 +15,21 @@ const { SassRenderer } = require('@carbon/test-utils/scss');
 const { render } = SassRenderer.create(__dirname);
 
 describe('scss/components/ai-label', () => {
-  test('emits AI Label hover selectors only inside any-hover media query', async () => {
+  test('guards shared AI Label and Slug hover selectors with any-hover media query', async () => {
     const { result } = await render(`
       @use '../ai-label';
     `);
-    const hoverRules = [];
+    const guardedHoverRules = [];
+    const unguardedHoverRules = [];
 
     postcss.parse(result.css.toString()).walkRules((rule) => {
       if (
-        rule.selector.includes('.cds--ai-label') &&
+        (rule.selector.includes('.cds--ai-label') ||
+          rule.selector.includes('.cds--slug')) &&
         rule.selector.includes(':hover')
       ) {
-        hoverRules.push(rule);
-      }
-    });
-
-    expect(hoverRules.length).toBeGreaterThan(0);
-    expect(
-      hoverRules.every((rule) => {
         let parent = rule.parent;
+        let isGuarded = false;
 
         while (parent) {
           if (
@@ -41,14 +37,22 @@ describe('scss/components/ai-label', () => {
             parent.name === 'media' &&
             parent.params.includes('(any-hover: hover)')
           ) {
-            return true;
+            isGuarded = true;
+            break;
           }
 
           parent = parent.parent;
         }
 
-        return false;
-      })
-    ).toBe(true);
+        if (isGuarded) {
+          guardedHoverRules.push(rule);
+        } else {
+          unguardedHoverRules.push(rule);
+        }
+      }
+    });
+
+    expect(guardedHoverRules.length).toBeGreaterThan(0);
+    expect(unguardedHoverRules.map((rule) => rule.selector)).toEqual([]);
   });
 });
