@@ -28,7 +28,7 @@
   },
   "scripts": {
     "build:types": "tsc -p tsconfig.types.json",
-    "build": "yarn clean && carbon-cli bundle src/index.ts --name CarbonLayout && node tasks/build.js && yarn build:types",
+    "build": "yarn clean && carbon-cli bundle src/index.ts --name CarbonLayout && node tasks/build.mjs && yarn build:types",
     "clean": "rimraf es lib umd scss/generated",
     "postinstall": "ibmtelemetry --config=telemetry.yml"
   },

@@ -13,7 +13,7 @@
     "packages/*"
   ],
   "scripts": {
-    "build": "lerna run build --stream --prefix && node tasks/generate-repo-structure.js",
+    "build": "lerna run build --stream --prefix && node tasks/generate-repo-structure.mjs",
     "ci-check": "carbon-cli ci-check",
     "clean": "lerna run clean && lerna clean --yes && rimraf node_modules",
     "doctoc": "doctoc --title '## Table of Contents'",
