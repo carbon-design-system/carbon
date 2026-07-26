@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2019, 2025
+ * Copyright IBM Corp. 2019, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -14,8 +14,8 @@ const args = {
   copyButtonDescription: 'Copy to clipboard',
   copyText: '',
   disabled: false,
-  feedback: '',
-  feedbackTimeout: 0,
+  feedback: 'Copied to clipboard',
+  feedbackTimeout: 2000,
   hideCopyButton: false,
   maxCollapsedNumberOfRows: 15,
   maxExpandedNumberOfRows: 0,
@@ -451,11 +451,23 @@ export const SinglelineWithLayer = {
 };
 
 export const Skeleton = {
-  render: () => html`
-    <cds-code-snippet-skeleton
-      type="single"
-      style="margin-bottom: 8px;"></cds-code-snippet-skeleton>
-    <cds-code-snippet-skeleton type="multi"></cds-code-snippet-skeleton>
+  args: {
+    type: 'single',
+  },
+  argTypes: {
+    type: {
+      control: 'radio',
+      description: 'Specify the type of Code Snippet skeleton.',
+      options: ['single', 'multi'],
+    },
+  },
+  parameters: {
+    controls: {
+      include: ['type'],
+    },
+  },
+  render: ({ type }) => html`
+    <cds-code-snippet-skeleton type="${type}"></cds-code-snippet-skeleton>
   `,
 };
 
