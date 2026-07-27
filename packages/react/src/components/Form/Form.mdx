@@ -18,6 +18,7 @@ import { stackblitzPrefillConfig } from '../../../previewer/codePreviewer';
 
 - [Overview](#overview)
 - [With AI label](#with-ai-label)
+- [WebMCP Declarative API](#webmcp-declarative-api)
 - [Accessibility Considerations](#accessibility-considerations)
   - [Accessible Name](#accessible-name)
 - [Component API](#component-api)
@@ -52,6 +53,41 @@ suit their needs.
     },
   ]}
 />
+
+## WebMCP Declarative API
+
+The Form component supports the WebMCP (Web Model Context Protocol) Declarative
+API, which allows forms to be registered as tools that AI agents can interact
+with. This enables agentic workflows where AI can help users fill out and submit
+forms.
+
+<Canvas of={FormStories.WebMCP} />
+
+### WebMCP Props
+
+- **`toolName`**: A clear name for the tool based on its purpose (e.g.,
+  "createSupportRequest")
+- **`toolDescription`**: A description of what action the tool takes and its
+  purpose
+- **`onToolactivated`**: Event handler called when an AI agent activates the
+  tool and pre-fills form fields
+- **`onToolcancel`**: Event handler called when a user cancels the agentic
+  operation
+
+### How it works
+
+When you add `toolName` and `toolDescription` attributes to a form, the browser
+registers it as a tool that AI agents can discover and use. When an agent
+invokes the tool:
+
+1. The browser brings the form into focus
+2. Form fields are automatically populated with agent-provided values
+3. The `toolactivated` event fires on the window
+4. The form remains visible to the user for review and submission
+5. If the user cancels, the `toolcancel` event fires
+
+This allows for transparent AI assistance where users maintain control over form
+submissions while benefiting from AI-powered form filling.
 
 ## Accessibility Considerations
 

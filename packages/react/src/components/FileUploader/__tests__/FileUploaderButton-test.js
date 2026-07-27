@@ -49,6 +49,25 @@ describe('FileUploaderButton', () => {
     expect(onChange).toHaveBeenCalledTimes(1);
   });
 
+  it('should render toolparamdescription attribute when toolParamDescription prop is provided', () => {
+    const { container } = render(
+      <FileUploaderButton
+        labelText="test"
+        toolParamDescription="Upload your files"
+      />
+    );
+
+    const input = container.querySelector('input[type="file"]');
+    expect(input).toHaveAttribute('toolparamdescription', 'Upload your files');
+  });
+
+  it('should not render toolparamdescription attribute when toolParamDescription prop is not provided', () => {
+    const { container } = render(<FileUploaderButton labelText="test" />);
+
+    const input = container.querySelector('input[type="file"]');
+    expect(input).not.toHaveAttribute('toolparamdescription');
+  });
+
   it('should not trigger multiple file dialogs when using keyboard Enter', async () => {
     const onChange = jest.fn();
 

@@ -97,6 +97,11 @@ export interface ToggleProps
    * Specify whether the control is toggled
    */
   toggled?: boolean;
+
+  /**
+   * WebMCP: Map elements to a property description within the JSON Schema
+   */
+  toolParamDescription?: string;
 }
 
 export function Toggle({
@@ -114,6 +119,7 @@ export function Toggle({
   readOnly,
   size = 'md',
   toggled,
+  toolParamDescription,
   ...other
 }: ToggleProps) {
   const prefix = usePrefix();
@@ -195,6 +201,9 @@ export function Toggle({
         aria-labelledby={ariaLabelledby ?? (labelText ? labelId : undefined)}
         disabled={disabled}
         onClick={handleClick}
+        {...(toolParamDescription && {
+          toolparamdescription: toolParamDescription,
+        })}
       />
       <LabelComponent
         id={labelId}
@@ -300,6 +309,11 @@ Toggle.propTypes = {
    * Specify whether the control is toggled
    */
   toggled: PropTypes.bool,
+
+  /**
+   * WebMCP: Map elements to a property description within the JSON Schema
+   */
+  toolParamDescription: PropTypes.string,
 };
 
 export default Toggle;

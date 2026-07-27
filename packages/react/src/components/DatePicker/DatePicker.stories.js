@@ -121,6 +121,14 @@ const sharedArgTypes = {
       category: 'DatePickerInput',
     },
   },
+  toolParamDescription: {
+    control: { type: 'text' },
+    description:
+      'Optional description for WebMCP (Web Model Context Protocol) to help AI agents understand the purpose of this input field.',
+    table: {
+      category: 'DatePickerInput',
+    },
+  },
 };
 
 export const Default = ({ readOnly, ...args }) => {

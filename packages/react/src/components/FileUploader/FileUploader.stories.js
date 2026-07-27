@@ -127,6 +127,11 @@ DragAndDropUploadContainerExampleApplication.args = {
 };
 DragAndDropUploadContainerExampleApplication.argTypes = {
   onChange: { action: 'onChange' },
+  toolParamDescription: {
+    control: { type: 'text' },
+    description:
+      'Optional description for WebMCP (Web Model Context Protocol) to help AI agents understand the purpose of this input field.',
+  },
 };
 
 export const DragAndDropUploadSingleContainerExampleApplication = (args) =>
@@ -143,6 +148,11 @@ DragAndDropUploadSingleContainerExampleApplication.args = {
 };
 DragAndDropUploadSingleContainerExampleApplication.argTypes = {
   onChange: { action: 'onChange' },
+  toolParamDescription: {
+    control: { type: 'text' },
+    description:
+      'Optional description for WebMCP (Web Model Context Protocol) to help AI agents understand the purpose of this input field.',
+  },
 };
 
 export const Skeleton = () => {

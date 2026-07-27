@@ -112,6 +112,11 @@ Default.argTypes = {
   onClick: {
     action: 'onClick',
   },
+  toolParamDescription: {
+    control: { type: 'text' },
+    description:
+      'Optional description for WebMCP (Web Model Context Protocol) to help AI agents understand the purpose of this input field.',
+  },
   size: {
     options: ['xs', 'sm', 'md', 'lg'],
     control: {

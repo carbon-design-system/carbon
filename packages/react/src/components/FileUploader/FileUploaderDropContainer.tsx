@@ -98,6 +98,13 @@ export interface FileUploaderDropContainerProps
    * @deprecated The `tabIndex` prop for `FileUploaderButton` has been deprecated since it now renders a button element by default.
    */
   tabIndex?: number | string;
+
+  /**
+   * Optional description for WebMCP (Web Model Context Protocol) Declarative API.
+   * Maps to the `toolparamdescription` HTML attribute for AI agent integration.
+   * @see https://developer.chrome.com/docs/ai/webmcp/declarative-api
+   */
+  toolParamDescription?: string;
 }
 
 interface AddedFile extends File {
@@ -116,7 +123,7 @@ function FileUploaderDropContainer({
   onAddFiles = noopFn,
   onClick,
   pattern = '.[0-9a-z]+$',
-
+  toolParamDescription,
   innerRef,
   ...rest
 }: FileUploaderDropContainerProps) {
@@ -277,6 +284,9 @@ function FileUploaderDropContainer({
         onClick={(evt) => {
           (evt.target as HTMLInputElement).value = '';
         }}
+        {...(toolParamDescription && {
+          toolparamdescription: toolParamDescription,
+        })}
       />
     </div>
   );
@@ -358,6 +368,12 @@ FileUploaderDropContainer.propTypes = {
     'The `tabIndex` prop for `FileUploaderButton` has ' +
       'been deprecated since it now renders a button element by default.'
   ),
+
+  /**
+   * Optional description for WebMCP (Web Model Context Protocol) Declarative API.
+   * Maps to the `toolparamdescription` HTML attribute for AI agent integration.
+   */
+  toolParamDescription: PropTypes.string,
 };
 
 export default FileUploaderDropContainer;

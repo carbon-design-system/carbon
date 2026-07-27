@@ -15,6 +15,31 @@ import { AILabel } from '../AILabel';
 const prefix = 'cds';
 
 describe('TextArea', () => {
+  describe('WebMCP attributes', () => {
+    it('should render toolparamdescription attribute when provided', () => {
+      render(
+        <TextArea
+          id="textarea-1"
+          labelText="TextArea label"
+          toolParamDescription="Description for AI agent"
+        />
+      );
+
+      expect(screen.getByRole('textbox')).toHaveAttribute(
+        'toolparamdescription',
+        'Description for AI agent'
+      );
+    });
+
+    it('should not render toolparamdescription attribute when not provided', () => {
+      render(<TextArea id="textarea-1" labelText="TextArea label" />);
+
+      expect(screen.getByRole('textbox')).not.toHaveAttribute(
+        'toolparamdescription'
+      );
+    });
+  });
+
   describe('renders as expected - Component API', () => {
     it('should spread extra props onto the text area element', () => {
       render(

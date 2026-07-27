@@ -14,6 +14,36 @@ import { AILabel } from '../../AILabel';
 const prefix = 'cds';
 
 describe('RadioButton', () => {
+  describe('WebMCP attributes', () => {
+    it('should render toolparamdescription attribute when provided', () => {
+      render(
+        <RadioButton
+          name="test-name"
+          value="test-value"
+          labelText="test-label"
+          toolParamDescription="Test description for WebMCP"
+        />
+      );
+      expect(screen.getByRole('radio')).toHaveAttribute(
+        'toolparamdescription',
+        'Test description for WebMCP'
+      );
+    });
+
+    it('should not render toolparamdescription attribute when not provided', () => {
+      render(
+        <RadioButton
+          name="test-name"
+          value="test-value"
+          labelText="test-label"
+        />
+      );
+      expect(screen.getByRole('radio')).not.toHaveAttribute(
+        'toolparamdescription'
+      );
+    });
+  });
+
   it('should render an input with type="radio"', () => {
     render(
       <RadioButton name="test-name" value="test-value" labelText="test-label" />

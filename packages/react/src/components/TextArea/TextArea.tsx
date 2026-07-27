@@ -163,6 +163,11 @@ export interface TextAreaProps
    * Specify the method used for calculating the counter number
    */
   counterMode?: 'character' | 'word';
+
+  /**
+   * WebMCP: Map elements to a property description within the JSON Schema
+   */
+  toolParamDescription?: string;
 }
 
 const frFn = forwardRef<HTMLTextAreaElement, TextAreaProps>;
@@ -186,6 +191,7 @@ const TextArea = frFn((props, forwardRef) => {
     enableCounter = false,
     maxCount,
     counterMode = 'character',
+    toolParamDescription,
     warn = false,
     warnText = '',
     rows = 4,
@@ -508,6 +514,9 @@ const TextArea = frFn((props, forwardRef) => {
   const input = (
     <textarea
       {...other}
+      {...(toolParamDescription && {
+        toolparamdescription: toolParamDescription,
+      })}
       {...textareaProps}
       placeholder={placeholder}
       aria-readonly={other.readOnly}
@@ -709,6 +718,11 @@ TextArea.propTypes = {
     'The `slug` prop for `TextArea` has ' +
       'been deprecated in favor of the new `decorator` prop. It will be removed in the next major release.'
   ),
+
+  /**
+   * WebMCP: Map elements to a property description within the JSON Schema
+   */
+  toolParamDescription: PropTypes.string,
 
   /**
    * Provide the current value of the `<textarea>`

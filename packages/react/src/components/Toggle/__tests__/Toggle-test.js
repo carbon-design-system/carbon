@@ -7,12 +7,39 @@
 
 import React from 'react';
 import Toggle from '../Toggle';
-import { render, screen } from '@testing-library/react';
+import { render, screen, cleanup } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 const prefix = 'cds';
 
 describe('Toggle', () => {
+  describe('WebMCP attributes', () => {
+    it('should render toolparamdescription attribute when provided', () => {
+      const { container } = render(
+        <Toggle
+          id="toggle-webmcp-1"
+          labelText="Toggle label"
+          toolParamDescription="Test description for WebMCP"
+        />
+      );
+      const toggle = container.querySelector('#toggle-webmcp-1');
+      expect(toggle).toHaveAttribute(
+        'toolparamdescription',
+        'Test description for WebMCP'
+      );
+      cleanup();
+    });
+
+    it('should not render toolparamdescription attribute when not provided', () => {
+      const { container } = render(
+        <Toggle id="toggle-webmcp-2" labelText="Toggle label" />
+      );
+      const toggle = container.querySelector('#toggle-webmcp-2');
+      expect(toggle).not.toHaveAttribute('toolparamdescription');
+      cleanup();
+    });
+  });
+
   const props = {
     id: 'toggle-id',
     labelA: 'labelA-unchecked',

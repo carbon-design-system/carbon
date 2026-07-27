@@ -13,6 +13,39 @@ import { render, screen, fireEvent } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 describe('TimePicker', () => {
+  describe('TimePickerSelect WebMCP attributes', () => {
+    it('should render toolparamdescription attribute when provided', () => {
+      render(
+        <TimePicker id="time-picker">
+          <TimePickerSelect
+            id="time-picker-select"
+            toolParamDescription="Test description for WebMCP">
+            <SelectItem value="AM" text="AM" />
+            <SelectItem value="PM" text="PM" />
+          </TimePickerSelect>
+        </TimePicker>
+      );
+      expect(screen.getByRole('combobox')).toHaveAttribute(
+        'toolparamdescription',
+        'Test description for WebMCP'
+      );
+    });
+
+    it('should not render toolparamdescription attribute when not provided', () => {
+      render(
+        <TimePicker id="time-picker">
+          <TimePickerSelect id="time-picker-select">
+            <SelectItem value="AM" text="AM" />
+            <SelectItem value="PM" text="PM" />
+          </TimePickerSelect>
+        </TimePicker>
+      );
+      expect(screen.getByRole('combobox')).not.toHaveAttribute(
+        'toolparamdescription'
+      );
+    });
+  });
+
   describe('input', () => {
     it('renders as expected', () => {
       render(<TimePicker id="time-picker" />);

@@ -142,6 +142,11 @@ export interface DatePickerInputProps
    * Provide the text that is displayed when the control is in warning state
    */
   warnText?: ReactNodeLike;
+
+  /**
+   * WebMCP: Map elements to a property description within the JSON Schema
+   */
+  toolParamDescription?: string;
 }
 
 const frFn = forwardRef<HTMLDivElement, DatePickerInputProps>;
@@ -167,6 +172,7 @@ const DatePickerInput = frFn((props, ref) => {
     warn = false,
     warnText,
     readOnly,
+    toolParamDescription,
     ...rest
   } = props;
   const prefix = usePrefix();
@@ -260,6 +266,7 @@ const DatePickerInput = frFn((props, ref) => {
     disabled: normalizedProps.disabled,
     ref,
     ['aria-describedby']: ariaDescribedBy,
+    ...(toolParamDescription && { toolparamdescription: toolParamDescription }),
   };
   if (normalizedProps.invalid) {
     inputProps['data-invalid'] = true;
@@ -417,6 +424,11 @@ DatePickerInput.propTypes = {
    * Provide the text that is displayed when the control is in warning state
    */
   warnText: PropTypes.node,
+
+  /**
+   * WebMCP: Map elements to a property description within the JSON Schema
+   */
+  toolParamDescription: PropTypes.string,
 };
 
 interface DatePickerIconProps {

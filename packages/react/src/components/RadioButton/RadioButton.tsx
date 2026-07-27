@@ -131,6 +131,11 @@ export interface RadioButtonProps
    * Specify whether the RadioButton should be read-only
    */
   readOnly?: boolean;
+
+  /**
+   * WebMCP: Map elements to a property description within the JSON Schema
+   */
+  toolParamDescription?: string;
 }
 
 const RadioButton = React.forwardRef<HTMLInputElement, RadioButtonProps>(
@@ -153,6 +158,7 @@ const RadioButton = React.forwardRef<HTMLInputElement, RadioButtonProps>(
       warn = false,
       warnText,
       readOnly,
+      toolParamDescription,
       ...rest
     } = props;
 
@@ -218,6 +224,9 @@ const RadioButton = React.forwardRef<HTMLInputElement, RadioButtonProps>(
           name={name}
           required={required}
           readOnly={readOnly}
+          {...(toolParamDescription && {
+            toolparamdescription: toolParamDescription,
+          })}
         />
         <label htmlFor={uniqueId} className={`${prefix}--radio-button__label`}>
           <span className={`${prefix}--radio-button__appearance`} />
@@ -346,6 +355,11 @@ RadioButton.propTypes = {
     PropTypes.node,
     'The `slug` prop has been deprecated and will be removed in the next major version. Use the decorator prop instead.'
   ),
+
+  /**
+   * WebMCP: Map elements to a property description within the JSON Schema
+   */
+  toolParamDescription: PropTypes.string,
 
   /**
    * Specify the value of the `<RadioButton>`

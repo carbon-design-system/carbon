@@ -16,6 +16,40 @@ import { FormContext } from '../FluidForm';
 const prefix = 'cds';
 
 describe('DatePicker', () => {
+  describe('DatePickerInput WebMCP attributes', () => {
+    it('should render toolparamdescription attribute when provided', () => {
+      render(
+        <DatePicker onChange={() => {}} dateFormat="m/d/Y">
+          <DatePickerInput
+            id="date-picker-input-id"
+            placeholder="mm/dd/yyyy"
+            labelText="Date"
+            toolParamDescription="Test description for WebMCP"
+          />
+        </DatePicker>
+      );
+      expect(screen.getByPlaceholderText('mm/dd/yyyy')).toHaveAttribute(
+        'toolparamdescription',
+        'Test description for WebMCP'
+      );
+    });
+
+    it('should not render toolparamdescription attribute when not provided', () => {
+      render(
+        <DatePicker onChange={() => {}} dateFormat="m/d/Y">
+          <DatePickerInput
+            id="date-picker-input-id"
+            placeholder="mm/dd/yyyy"
+            labelText="Date"
+          />
+        </DatePicker>
+      );
+      expect(screen.getByPlaceholderText('mm/dd/yyyy')).not.toHaveAttribute(
+        'toolparamdescription'
+      );
+    });
+  });
+
   it('should add extra classes that are passed via className', () => {
     render(
       <DatePicker

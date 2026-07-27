@@ -175,6 +175,11 @@ export interface PasswordInputProps
    * Provide the text that is displayed when the control is in warning state
    */
   warnText?: ReactNode;
+
+  /**
+   * WebMCP: Map elements to a property description within the JSON Schema
+   */
+  toolParamDescription?: string;
 }
 
 const PasswordInput = forwardRef<unknown, PasswordInputProps>(
@@ -203,6 +208,7 @@ const PasswordInput = forwardRef<unknown, PasswordInputProps>(
       type = 'password',
       warn = false,
       warnText,
+      toolParamDescription,
       ...rest
     },
     ref
@@ -253,6 +259,9 @@ const PasswordInput = forwardRef<unknown, PasswordInputProps>(
       className: textInputClasses,
       readOnly,
       ref,
+      ...(toolParamDescription && {
+        toolparamdescription: toolParamDescription,
+      }),
       ...rest,
     };
     const inputWrapperClasses = classNames(
@@ -564,6 +573,11 @@ PasswordInput.propTypes = {
    * Provide the text that is displayed when the control is in warning state
    */
   warnText: PropTypes.node,
+
+  /**
+   * WebMCP: Map elements to a property description within the JSON Schema
+   */
+  toolParamDescription: PropTypes.string,
 };
 
 export default PasswordInput;

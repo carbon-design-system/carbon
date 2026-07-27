@@ -1986,4 +1986,40 @@ describe('ComboBox', () => {
       expect(findMenuItemNode(i)).toHaveAttribute('aria-selected', 'false');
     }
   });
+
+  describe('toolParamDescription', () => {
+    it('should render toolparamdescription attribute when toolParamDescription prop is provided', () => {
+      const items = generateItems(5, generateGenericItem);
+      render(
+        <ComboBox
+          id="test-combobox"
+          items={items}
+          itemToString={(item) => (item ? item.text : '')}
+          onChange={() => {}}
+          toolParamDescription="Select an option from the list"
+        />
+      );
+
+      const input = screen.getByRole('combobox');
+      expect(input).toHaveAttribute(
+        'toolparamdescription',
+        'Select an option from the list'
+      );
+    });
+
+    it('should not render toolparamdescription attribute when toolParamDescription prop is not provided', () => {
+      const items = generateItems(5, generateGenericItem);
+      render(
+        <ComboBox
+          id="test-combobox"
+          items={items}
+          itemToString={(item) => (item ? item.text : '')}
+          onChange={() => {}}
+        />
+      );
+
+      const input = screen.getByRole('combobox');
+      expect(input).not.toHaveAttribute('toolparamdescription');
+    });
+  });
 });
