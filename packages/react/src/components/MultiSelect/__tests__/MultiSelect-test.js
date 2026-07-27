@@ -218,6 +218,53 @@ describe('MultiSelect', () => {
     ).toBeNull();
   });
 
+  it('should move focus to the next control when the user tabs away with the menu open', async () => {
+    jest.useFakeTimers();
+
+    const user = userEvent.setup({
+      advanceTimers: jest.advanceTimersByTime,
+    });
+
+    try {
+      const items = generateItems(4, generateGenericItem);
+      render(
+        <>
+          <MultiSelect id="test" label="test-label" items={items} />
+          <input data-testid="next-input" type="text" />
+        </>
+      );
+
+      const combobox = screen.getByRole('combobox');
+      const nextInput = screen.getByTestId('next-input');
+
+      // Tab to focus the combobox
+      await user.tab();
+      expect(combobox).toHaveFocus();
+
+      // Open the menu with Space
+      await user.keyboard('[Space]');
+      expect(combobox).toHaveAttribute('aria-expanded', 'true');
+
+      // Verify focus is still on combobox before tabbing
+      expect(combobox).toHaveFocus();
+
+      // Tab away from the combobox
+      await user.tab();
+      act(() => {
+        jest.runOnlyPendingTimers();
+      });
+
+      // Verify focus moved to the next interactive element
+      expect(nextInput).toHaveFocus();
+      expect(document.activeElement).toBe(nextInput);
+
+      // Verify menu is closed after tabbing away
+      expect(combobox).toHaveAttribute('aria-expanded', 'false');
+    } finally {
+      jest.useRealTimers();
+    }
+  });
+
   it('close menu with click outside of field', async () => {
     const items = generateItems(4, generateGenericItem);
     const label = 'test-label';
@@ -391,17 +438,17 @@ describe('MultiSelect', () => {
 
     expect(
       // eslint-disable-next-line testing-library/no-node-access
-      document.querySelector('[aria-label="Clear all selected items"]')
+      document.querySelector('[aria-label="Clear selected item"]')
     ).toBeTruthy();
 
     await userEvent.click(
       // eslint-disable-next-line testing-library/no-node-access
-      document.querySelector('[aria-label="Clear all selected items"]')
+      document.querySelector('[aria-label="Clear selected item"]')
     );
 
     expect(
       // eslint-disable-next-line testing-library/no-node-access
-      document.querySelector('[aria-label="Clear all selected items"]')
+      document.querySelector('[aria-label="Clear selected item"]')
     ).toBeFalsy();
   });
 
@@ -419,7 +466,7 @@ describe('MultiSelect', () => {
 
     const combobox = screen.getByRole('combobox');
     expect(
-      screen.getByRole('button', { name: 'Clear all selected items' })
+      screen.getByRole('button', { name: 'Clear selected item' })
     ).toBeInTheDocument();
 
     await userEvent.click(combobox);
@@ -427,7 +474,7 @@ describe('MultiSelect', () => {
     await userEvent.keyboard('[Delete]');
 
     expect(
-      screen.queryByRole('button', { name: 'Clear all selected items' })
+      screen.queryByRole('button', { name: 'Clear selected item' })
     ).not.toBeInTheDocument();
     expect(screen.getByLabelText('all items have been cleared')).toBeVisible();
   });
@@ -484,7 +531,7 @@ describe('MultiSelect', () => {
 
       expect(
         // eslint-disable-next-line testing-library/no-node-access
-        document.querySelector('[aria-label="Clear all selected items"]')
+        document.querySelector('[aria-label="Clear selected items"]')
       ).toBeTruthy();
 
       // eslint-disable-next-line testing-library/prefer-screen-queries

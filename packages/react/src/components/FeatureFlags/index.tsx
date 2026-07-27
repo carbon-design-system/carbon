@@ -21,6 +21,7 @@ import { deprecate } from '../../prop-types/deprecate';
 export interface FeatureFlagsProps {
   children?: ReactNode;
   flags?: Record<string, boolean>;
+  enableV12Release?: boolean;
   enableV12TileDefaultIcons?: boolean;
   enableV12TileRadioIcons?: boolean;
   enableV12Overflowmenu?: boolean;
@@ -44,6 +45,22 @@ type FeatureFlagScope = typeof GlobalFeatureFlags;
  */
 const FeatureFlagContext = createContext<FeatureFlagScope>(GlobalFeatureFlags);
 
+// Maps each camelCase prop name to its kebab-case feature flag key.
+const PROP_TO_FLAG: Record<string, string> = {
+  enableV12Release: 'enable-v12-release',
+  enableV12TileDefaultIcons: 'enable-v12-tile-default-icons',
+  enableV12TileRadioIcons: 'enable-v12-tile-radio-icons',
+  enableV12Overflowmenu: 'enable-v12-overflowmenu',
+  enableTreeviewControllable: 'enable-treeview-controllable',
+  enableExperimentalFocusWrapWithoutSentinels:
+    'enable-experimental-focus-wrap-without-sentinels',
+  enableFocusWrapWithoutSentinels: 'enable-focus-wrap-without-sentinels',
+  enableDialogElement: 'enable-dialog-element',
+  enableV12DynamicFloatingStyles: 'enable-v12-dynamic-floating-styles',
+  enableEnhancedFileUploader: 'enable-enhanced-file-uploader',
+  enablePresence: 'enable-presence',
+};
+
 /**
  * Supports an object of feature flag values with the `flags` prop, merging them
  * along with the current `FeatureFlagContext` to provide consumers to check if
@@ -51,40 +68,56 @@ const FeatureFlagContext = createContext<FeatureFlagScope>(GlobalFeatureFlags);
  */
 export const FeatureFlags = ({
   children,
-  flags = {},
-  enableV12TileDefaultIcons = false,
-  enableV12TileRadioIcons = false,
-  enableV12Overflowmenu = false,
-  enableTreeviewControllable = false,
-  enableExperimentalFocusWrapWithoutSentinels = false,
-  enableFocusWrapWithoutSentinels = false,
-  enableDialogElement = false,
-  enableV12DynamicFloatingStyles = false,
-  enableEnhancedFileUploader = false,
-  enablePresence = false,
+  flags,
+  enableV12Release,
+  enableV12TileDefaultIcons,
+  enableV12TileRadioIcons,
+  enableV12Overflowmenu,
+  enableTreeviewControllable,
+  enableExperimentalFocusWrapWithoutSentinels,
+  enableFocusWrapWithoutSentinels,
+  enableDialogElement,
+  enableV12DynamicFloatingStyles,
+  enableEnhancedFileUploader,
+  enablePresence,
 }: FeatureFlagsProps) => {
   const parentScope = useContext(FeatureFlagContext);
 
   const scope = useMemo(() => {
-    const combinedFlags = {
-      'enable-v12-tile-default-icons': enableV12TileDefaultIcons,
-      'enable-v12-tile-radio-icons': enableV12TileRadioIcons,
-      'enable-v12-overflowmenu': enableV12Overflowmenu,
-      'enable-treeview-controllable': enableTreeviewControllable,
-      'enable-experimental-focus-wrap-without-sentinels':
-        enableExperimentalFocusWrapWithoutSentinels,
-      'enable-focus-wrap-without-sentinels': enableFocusWrapWithoutSentinels,
-      'enable-dialog-element': enableDialogElement,
-      'enable-v12-dynamic-floating-styles': enableV12DynamicFloatingStyles,
-      'enable-enhanced-file-uploader': enableEnhancedFileUploader,
-      'enable-presence': enablePresence,
-      ...flags,
+    // Only include flags that were explicitly provided (not undefined). This
+    // ensures that unspecified props do not shadow flags set by a parent
+    // FeatureFlags scope, which is the correct behaviour for nested scopes.
+    const flagProps = {
+      enableV12Release,
+      enableV12TileDefaultIcons,
+      enableV12TileRadioIcons,
+      enableV12Overflowmenu,
+      enableTreeviewControllable,
+      enableExperimentalFocusWrapWithoutSentinels,
+      enableFocusWrapWithoutSentinels,
+      enableDialogElement,
+      enableV12DynamicFloatingStyles,
+      enableEnhancedFileUploader,
+      enablePresence,
     };
+    const explicitFlags: Record<string, boolean> = {};
 
-    const scope = createScope(combinedFlags) as FeatureFlagScope;
+    for (const [prop, flagKey] of Object.entries(PROP_TO_FLAG)) {
+      const value = (flagProps as Record<string, boolean | undefined>)[prop];
+      if (value !== undefined) {
+        explicitFlags[flagKey] = value;
+      }
+    }
+
+    if (flags) {
+      Object.assign(explicitFlags, flags);
+    }
+
+    const scope = createScope(explicitFlags);
     scope.mergeWithScope(parentScope);
     return scope;
   }, [
+    enableV12Release,
     enableV12TileDefaultIcons,
     enableV12TileRadioIcons,
     enableV12Overflowmenu,
@@ -117,6 +150,7 @@ FeatureFlags.propTypes = {
       'been deprecated. Please run the `featureflag-deprecate-flags-prop` codemod to migrate to individual boolean props.' +
       `npx @carbon/upgrade migrate featureflag-deprecate-flags-prop --write`
   ),
+  enableV12Release: PropTypes.bool,
   enableV12TileDefaultIcons: PropTypes.bool,
   enableV12TileRadioIcons: PropTypes.bool,
   enableV12Overflowmenu: PropTypes.bool,

@@ -10,6 +10,9 @@ export type FeatureFlagRecord = Record<string, boolean>;
 /** @deprecated Use `FeatureFlagRecord` instead. */
 export type FeatureFlags = FeatureFlagRecord;
 
+const v12ReleaseFlag = 'enable-v12-release';
+const v12FlagPrefix = 'enable-v12-';
+
 export class FeatureFlagScope {
   flags: Map<string, boolean>;
 
@@ -84,6 +87,14 @@ export class FeatureFlagScope {
    */
   enabled(name: string) {
     this.checkForFlag(name);
+
+    if (
+      name !== v12ReleaseFlag &&
+      name.startsWith(v12FlagPrefix) &&
+      this.flags.get(v12ReleaseFlag) === true
+    ) {
+      return true;
+    }
 
     return this.flags.get(name) ?? false;
   }

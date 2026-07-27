@@ -32,6 +32,13 @@ describe('cds-menu', () => {
     expect(menu).to.have.class('cds--menu--open');
   });
 
+  it('should be closed if open is not supplied', async () => {
+    const el = await fixture(html`<cds-menu></cds-menu>`);
+    const menu = el.shadowRoot.querySelector('.cds--menu');
+    expect(el.open).to.be.false;
+    expect(menu).to.not.have.class('cds--menu--open');
+  });
+
   it('should change size based on size prop', async () => {
     const el = await fixture(html`<cds-menu size="lg"></cds-menu>`);
     const menu = el.shadowRoot.querySelector('.cds--menu');

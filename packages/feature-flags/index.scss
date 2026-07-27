@@ -1,12 +1,16 @@
 //
-// Copyright IBM Corp. 2015, 2023
+// Copyright IBM Corp. 2015, 2026
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
 //
 
 @use 'sass:map';
+@use 'sass:string';
 @use 'scss/generated/feature-flags';
+
+$v12-release-flag: 'enable-v12-release';
+$v12-flag-prefix: 'enable-v12-';
 
 $feature-flags: () !default;
 $feature-flags: map.merge(
@@ -19,6 +23,14 @@ $feature-flags: map.merge(
     @return true;
   }
   @error 'Unable to find a feature flag named: #{$name}';
+}
+
+@function enabled-by-v12-release($name) {
+  $is-v12-flag: string.index($name, $v12-flag-prefix) == 1;
+  $is-v12-release-enabled: map.get($feature-flags, $v12-release-flag) == true;
+
+  @return $name != $v12-release-flag and $is-v12-flag and
+    $is-v12-release-enabled;
 }
 
 @mixin add($name, $enabled: false) {
@@ -50,6 +62,10 @@ $feature-flags: map.merge(
 /// @returns {Boolean}
 @function enabled($name) {
   @if check-for-flag($name) == true {
+    @if enabled-by-v12-release($name) {
+      @return true;
+    }
+
     @return map.get($feature-flags, $name);
   }
 }

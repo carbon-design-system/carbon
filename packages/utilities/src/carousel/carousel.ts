@@ -42,6 +42,11 @@ export const initCarousel = (
   let previousViewIndexStack = [0];
   const refs: Record<number, HTMLElement | null> = {};
   const carouselListeners = new WeakMap<HTMLElement, EventListener>();
+  const prefersReducedMotion = window.matchMedia(
+    '(prefers-reduced-motion: reduce)'
+  ).matches;
+  // fallback check if animationend or transitionend events aren't present
+  let supportsAnimations: boolean;
 
   const minHeight = 4; // 4 rem
 
@@ -200,12 +205,20 @@ export const initCarousel = (
    * @returns {void}
    */
   const transitionToViewIndex = (idx: number): void => {
+    const viewItems = getCarouselItems();
     const sanitizedIndex = sanitizeIndex(idx);
     if (viewIndexStack[0] !== sanitizedIndex) {
       handleTransitionStart();
       viewIndexStack = [sanitizedIndex, ...viewIndexStack];
       syncLiveRegionWithActiveView();
       performAnimation(false);
+      if (
+        (prefersReducedMotion ||
+          (prefersReducedMotion === false && supportsAnimations === false)) &&
+        viewItems
+      ) {
+        handleTransitionEnd(viewItems[sanitizedIndex]);
+      }
     }
   };
 
@@ -360,6 +373,9 @@ export const initCarousel = (
             //transitionend will trigger twice for pervious card and current card
             transitionComplete(viewItem);
           }
+          if (!supportsAnimations) {
+            supportsAnimations = true;
+          }
         };
         carouselListeners.set(viewItem, listener);
 
@@ -393,10 +409,19 @@ export const initCarousel = (
    */
   const navigatePrev = () => {
     if (viewIndexStack.length - 1 >= 1) {
+      const viewItems = getCarouselItems();
       handleTransitionStart();
       viewIndexStack = viewIndexStack.slice(1);
       syncLiveRegionWithActiveView();
       performAnimation(false);
+      if (
+        (prefersReducedMotion ||
+          (prefersReducedMotion === false && !supportsAnimations)) &&
+        viewItems
+      ) {
+        const targetViewIndex = viewIndexStack[0];
+        handleTransitionEnd(viewItems[targetViewIndex]);
+      }
     }
   };
 

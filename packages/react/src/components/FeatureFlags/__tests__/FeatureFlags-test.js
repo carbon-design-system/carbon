@@ -117,6 +117,97 @@ describe('FeatureFlags', () => {
     });
   });
 
+  it('should enable v12 flags with the v12 release flag', () => {
+    const checkFlags = jest.fn();
+    const checkFlag = jest.fn();
+
+    function TestComponent() {
+      const featureFlags = useFeatureFlags();
+      const enableV12Release = useFeatureFlag('enable-v12-release');
+      const enableV12Overflowmenu = useFeatureFlag('enable-v12-overflowmenu');
+      const enableTreeviewControllable = useFeatureFlag(
+        'enable-treeview-controllable'
+      );
+
+      checkFlags({
+        enableV12Release: featureFlags.enabled('enable-v12-release'),
+        enableV12Overflowmenu: featureFlags.enabled('enable-v12-overflowmenu'),
+        enableTreeviewControllable: featureFlags.enabled(
+          'enable-treeview-controllable'
+        ),
+      });
+
+      checkFlag({
+        enableV12Release,
+        enableV12Overflowmenu,
+        enableTreeviewControllable,
+      });
+
+      return null;
+    }
+
+    render(
+      <FeatureFlags enableV12Release>
+        <TestComponent />
+      </FeatureFlags>
+    );
+
+    expect(checkFlags).toHaveBeenLastCalledWith({
+      enableV12Release: true,
+      enableV12Overflowmenu: true,
+      enableTreeviewControllable: false,
+    });
+    expect(checkFlag).toHaveBeenLastCalledWith({
+      enableV12Release: true,
+      enableV12Overflowmenu: true,
+      enableTreeviewControllable: false,
+    });
+  });
+
+  it('should inherit the v12 release flag through nested scopes', () => {
+    const checkFlag = jest.fn();
+
+    function TestComponent() {
+      const enableV12Overflowmenu = useFeatureFlag('enable-v12-overflowmenu');
+
+      checkFlag(enableV12Overflowmenu);
+
+      return null;
+    }
+
+    render(
+      <FeatureFlags enableV12Release>
+        <FeatureFlags enableV12Overflowmenu={false}>
+          <TestComponent />
+        </FeatureFlags>
+      </FeatureFlags>
+    );
+
+    expect(checkFlag).toHaveBeenLastCalledWith(true);
+  });
+
+  it('should allow nested scopes to disable the v12 release flag', () => {
+    const checkFlag = jest.fn();
+
+    function TestComponent() {
+      const enableV12Overflowmenu = useFeatureFlag('enable-v12-overflowmenu');
+
+      checkFlag(enableV12Overflowmenu);
+
+      return null;
+    }
+
+    render(
+      <FeatureFlags enableV12Release>
+        <FeatureFlags enableV12Release={false}>
+          <TestComponent />
+        </FeatureFlags>
+      </FeatureFlags>
+    );
+
+    expect(checkFlag).toHaveBeenLastCalledWith(false);
+  });
+
   it('should re-render when flags change', () => {
     const checkFlags = jest.fn();
     const checkFlag = jest.fn();
@@ -199,6 +290,8 @@ describe('FeatureFlags', () => {
       enableTreeviewControllable: true,
     });
 
+    // Inner scope adds enableV12Overflowmenu but does not specify
+    // enableTreeviewControllable, so the parent's true value is inherited.
     render(
       <FeatureFlags enableTreeviewControllable>
         <FeatureFlags enableV12Overflowmenu>
@@ -209,9 +302,11 @@ describe('FeatureFlags', () => {
 
     expect(checkFlag).toHaveBeenLastCalledWith({
       enableV12Overflowmenu: true,
-      enableTreeviewControllable: false,
+      enableTreeviewControllable: true,
     });
 
+    // Explicitly setting a flag to false in an inner scope overrides the
+    // parent scope's true value.
     render(
       <FeatureFlags enableTreeviewControllable>
         <FeatureFlags enableV12Overflowmenu>
@@ -227,6 +322,40 @@ describe('FeatureFlags', () => {
     expect(checkFlag).toHaveBeenLastCalledWith({
       enableV12Overflowmenu: false,
       enableTreeviewControllable: false,
+    });
+  });
+
+  it('should inherit parent scope flags not specified by a nested FeatureFlags scope', () => {
+    // When a component wraps itself in a FeatureFlags to enable an internal flag,
+    // it should not shadow flags set by the consumer in an outer FeatureFlags scope.
+    const checkFlag = jest.fn();
+
+    function TestComponent() {
+      const enableDialogElement = useFeatureFlag('enable-dialog-element');
+      const enableFocusWrapWithoutSentinels = useFeatureFlag(
+        'enable-focus-wrap-without-sentinels'
+      );
+
+      checkFlag({ enableDialogElement, enableFocusWrapWithoutSentinels });
+
+      return null;
+    }
+
+    render(
+      // Consumer enables enableDialogElement in an outer scope
+      <FeatureFlags enableDialogElement>
+        {/* Component internally wraps with FeatureFlags to set enableFocusWrapWithoutSentinels */}
+        <FeatureFlags enableFocusWrapWithoutSentinels>
+          <TestComponent />
+        </FeatureFlags>
+      </FeatureFlags>
+    );
+
+    // Both flags should be true: enableDialogElement inherited from outer scope,
+    // enableFocusWrapWithoutSentinels set by inner scope.
+    expect(checkFlag).toHaveBeenLastCalledWith({
+      enableDialogElement: true,
+      enableFocusWrapWithoutSentinels: true,
     });
   });
 
@@ -355,6 +484,56 @@ describe('FeatureFlags', () => {
   });
 
   describe('should support a prop for each feature flag', () => {
+    it('enable-v12-release - enableV12Release', () => {
+      const checkFlags = jest.fn();
+      const checkFlag = jest.fn();
+
+      function TestComponent() {
+        const featureFlags = useFeatureFlags();
+        const enableV12Release = useFeatureFlag('enable-v12-release');
+
+        checkFlags({
+          enableV12Release: featureFlags.enabled('enable-v12-release'),
+        });
+
+        checkFlag({
+          enableV12Release,
+        });
+
+        return null;
+      }
+
+      // Render the default
+      const { rerender } = render(
+        <FeatureFlags>
+          <TestComponent />
+        </FeatureFlags>
+      );
+
+      // Ensure the default value is as defined and as expected
+      expect(checkFlags).toHaveBeenLastCalledWith({
+        enableV12Release: false,
+      });
+      expect(checkFlag).toHaveBeenLastCalledWith({
+        enableV12Release: false,
+      });
+
+      // Enable the flag
+      rerender(
+        <FeatureFlags enableV12Release>
+          <TestComponent />
+        </FeatureFlags>
+      );
+
+      // Ensure that when enabled, this flag does not error
+      expect(checkFlags).toHaveBeenLastCalledWith({
+        enableV12Release: true,
+      });
+      expect(checkFlag).toHaveBeenLastCalledWith({
+        enableV12Release: true,
+      });
+    });
+
     it('enable-v12-tile-default-icons - enableV12TileDefaultIcons', () => {
       const checkFlags = jest.fn();
       const checkFlag = jest.fn();

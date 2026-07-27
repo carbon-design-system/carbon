@@ -40,6 +40,14 @@ import {
   Icon,
 } from '@carbon/icons-react';
 
+const lineTabsSizeArgType = {
+  size: {
+    control: { type: 'select' },
+    options: ['sm', 'md'],
+    description: 'Specify the size of the tabs',
+  },
+};
+
 const tabsSizeArgType = {
   size: {
     control: { type: 'select' },
@@ -144,7 +152,7 @@ Default.argTypes = {
       type: 'boolean',
     },
   },
-  ...tabsSizeArgType,
+  ...lineTabsSizeArgType,
 };
 
 export const Dismissable = (args) => {
@@ -218,7 +226,7 @@ export const Dismissable = (args) => {
   );
 };
 
-Dismissable.argTypes = tabsSizeArgType;
+Dismissable.argTypes = lineTabsSizeArgType;
 Dismissable.args = lineTabsSizeArgs;
 export const DismissableContained = (args) => {
   const tabs = [
@@ -367,7 +375,7 @@ export const DismissableWithIcons = ({ contained, size }) => {
   );
 };
 
-DismissableWithIcons.argTypes = tabsSizeArgType;
+DismissableWithIcons.argTypes = lineTabsSizeArgType;
 DismissableWithIcons.args = lineTabsSizeArgs;
 
 export const WithIcons = (args) => {
@@ -409,7 +417,7 @@ export const WithIcons = (args) => {
   );
 };
 
-WithIcons.argTypes = tabsSizeArgType;
+WithIcons.argTypes = lineTabsSizeArgType;
 WithIcons.args = lineTabsSizeArgs;
 
 export const Manual = () => {
@@ -513,7 +521,7 @@ export const IconOnly = (args) => {
 };
 
 IconOnly.argTypes = {
-  ...tabsSizeArgType,
+  ...lineTabsSizeArgType,
   badgeIndicator: {
     description: '**Experimental**: Display an empty dot badge on the Tab.',
     control: {
@@ -744,9 +752,10 @@ export const ContainedFullWidth = (args) => {
 };
 
 export const Vertical = (args) => {
+  const { size, ...tabsVerticalArgs } = args;
   return (
-    <TabsVertical {...args}>
-      <TabListVertical>
+    <TabsVertical {...tabsVerticalArgs}>
+      <TabListVertical size={size}>
         <Tab>Dashboard</Tab>
         <Tab>
           Extra long label that will go two lines then truncate when it goes
@@ -806,6 +815,7 @@ export const Vertical = (args) => {
 
 Vertical.args = {
   height: '',
+  size: 'xl',
 };
 
 Vertical.argTypes = {
@@ -813,6 +823,11 @@ Vertical.argTypes = {
     control: {
       type: 'text',
     },
+  },
+  size: {
+    control: { type: 'select' },
+    options: ['sm', 'md', 'lg', 'xl'],
+    description: 'Specify the size of the vertical tabs',
   },
 };
 

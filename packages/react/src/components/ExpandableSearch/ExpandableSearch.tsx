@@ -32,6 +32,7 @@ const ExpandableSearch = frFn((props, forwardedRef) => {
     isSearchValuePresent(defaultValue)
   );
   const searchRef = useRef<HTMLInputElement>(null);
+  const shouldFocusSearchRef = useRef(false);
   const prefix = usePrefix();
 
   function handleBlur(evt) {
@@ -48,13 +49,20 @@ const ExpandableSearch = frFn((props, forwardedRef) => {
     setExpanded(!!isExpanded);
   }, [isExpanded]);
 
+  useEffect(() => {
+    if (expanded && shouldFocusSearchRef.current) {
+      shouldFocusSearchRef.current = false;
+      searchRef.current?.focus?.();
+    }
+  }, [expanded]);
+
   function handleChange(evt) {
     setHasContent(evt.target.value !== '');
   }
 
   function handleExpand() {
+    shouldFocusSearchRef.current = true;
     setExpanded(true);
-    searchRef.current?.focus?.();
   }
 
   function handleKeyDown(evt) {

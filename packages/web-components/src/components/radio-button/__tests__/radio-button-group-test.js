@@ -32,6 +32,20 @@ describe('cds-radio-button-group', () => {
     expect(fieldset).to.exist;
   });
 
+  it('should associate helper text with the <fieldset>', async () => {
+    const el = await fixture(html`
+      <cds-radio-button-group helper-text="Helper text">
+        <cds-radio-button></cds-radio-button>
+        <cds-radio-button></cds-radio-button>
+      </cds-radio-button-group>
+    `);
+    const fieldset = el.shadowRoot?.querySelector('fieldset');
+    const helperText = el.shadowRoot?.querySelector('.cds--form__helper-text');
+
+    expect(helperText).to.exist;
+    expect(fieldset?.getAttribute('aria-describedby')).to.equal(helperText.id);
+  });
+
   it('should render `legend-text` inside a <fieldset>', async () => {
     const el = await fixture(html`
       <cds-radio-button-group legend-text="test">
@@ -187,6 +201,9 @@ describe('cds-radio-button-group', () => {
       const fieldset = el.shadowRoot?.querySelector('fieldset');
       expect(fieldset?.classList.contains('cds--radio-button-group--invalid'))
         .to.be.true;
+      expect(fieldset?.getAttribute('aria-describedby')).to.equal(
+        invalidMessage.id
+      );
     });
 
     it('should show warning message when warn prop is true', async () => {
@@ -206,6 +223,9 @@ describe('cds-radio-button-group', () => {
       const fieldset = el.shadowRoot?.querySelector('fieldset');
       expect(fieldset?.classList.contains('cds--radio-button-group--warning'))
         .to.be.true;
+      expect(fieldset?.getAttribute('aria-describedby')).to.equal(
+        warnMessage.id
+      );
     });
 
     it('should not show invalid message or class when disabled and invalid', async () => {

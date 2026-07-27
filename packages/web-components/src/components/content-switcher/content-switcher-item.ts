@@ -8,7 +8,7 @@
 import { classMap } from 'lit/directives/class-map.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { LitElement, html } from 'lit';
-import { property } from 'lit/decorators.js';
+import { property, query } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
 import FocusMixin from '../../globals/mixins/focus';
 import styles from './content-switcher.scss?lit';
@@ -63,6 +63,12 @@ class CDSContentSwitcherItem extends FocusMixin(LitElement) {
   icon = false;
 
   /**
+   * The tooltip element rendered inside this item (only present when `icon` is true).
+   */
+  @query(`${prefix}-tooltip`)
+  private _tooltip?: HTMLElement;
+
+  /**
    * Specify how the trigger should align with the tooltip for icon-only
    * switcher item
    */
@@ -91,9 +97,7 @@ class CDSContentSwitcherItem extends FocusMixin(LitElement) {
 
   updated(changedProperties) {
     if (changedProperties) {
-      this.shadowRoot
-        ?.querySelector(`${prefix}-tooltip`)
-        ?.classList.add(`${prefix}--icon-tooltip`);
+      this._tooltip?.classList.add(`${prefix}--icon-tooltip`);
     }
 
     if (
