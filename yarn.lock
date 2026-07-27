@@ -9141,7 +9141,6 @@ __metadata:
     "@types/react-is": "npm:^19.0.0"
     accessibility-checker: "npm:^4.0.17"
     cross-env: "npm:^10.0.0"
-    cross-spawn: "npm:^7.0.0"
     doctoc: "npm:^2.0.0"
     eslint: "npm:^9.32.0"
     eslint-plugin-jsdoc: "npm:^58.1.1"
@@ -10189,7 +10188,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cross-spawn@npm:^7.0.0, cross-spawn@npm:^7.0.3, cross-spawn@npm:^7.0.6":
+"cross-spawn@npm:^7.0.3, cross-spawn@npm:^7.0.6":
   version: 7.0.6
   resolution: "cross-spawn@npm:7.0.6"
   dependencies:
