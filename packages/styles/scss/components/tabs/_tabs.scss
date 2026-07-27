@@ -265,7 +265,7 @@
       .#{$prefix}--tabs__overflow-indicator--left {
         background-image: linear-gradient(
           to left,
-          rgba($background, 0),
+          color-mix(in oklch, #{$background} 0%, transparent),
           $background
         );
       }
@@ -273,7 +273,7 @@
       .#{$prefix}--tabs__overflow-indicator--right {
         background-image: linear-gradient(
           to right,
-          rgba($background, 0),
+          color-mix(in oklch, #{$background} 0%, transparent),
           $background
         );
       }
@@ -282,7 +282,7 @@
         .#{$prefix}--tabs__overflow-indicator--left {
         background-image: linear-gradient(
           to left,
-          rgba($layer-accent, 0),
+          color-mix(in oklch, #{$layer-accent} 0%, transparent),
           $layer-accent
         );
       }
@@ -291,7 +291,7 @@
         .#{$prefix}--tabs__overflow-indicator--right {
         background-image: linear-gradient(
           to right,
-          rgba($layer-accent, 0),
+          color-mix(in oklch, #{$layer-accent} 0%, transparent),
           $layer-accent
         );
       }
