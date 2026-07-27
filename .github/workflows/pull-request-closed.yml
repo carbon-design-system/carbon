@@ -1,9 +1,4 @@
 # https://docs.github.com/en/actions/using-workflows/caching-dependencies-to-speed-up-workflows#force-deleting-cache-entries
-#
-# Uses pull_request_target so the GITHUB_TOKEN retains write access when a PR
-# from a fork is closed/merged. pull_request always receives a read-only token
-# for forks, which causes intermittent 403s on createComment. This workflow does
-# not check out or execute PR code, so pull_request_target is safe here.
 name: Pull request closed
 on:
   pull_request_target:
@@ -38,7 +33,6 @@ jobs:
   if_merged:
     if: github.event.pull_request.merged == true
     permissions:
-      # createComment uses the Issues API; both scopes are required
       issues: write
       pull-requests: write
     runs-on: ubuntu-latest
