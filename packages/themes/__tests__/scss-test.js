@@ -158,7 +158,9 @@ describe('@carbon/themes/scss', () => {
 
         $_: get('background', themes.$background);
       `);
-      expect(unwrap('background')).toEqual('var(--test-background, #ffffff)');
+      expect(unwrap('background')).toEqual(
+        'var(--test-background, oklch(1 0 0))'
+      );
     });
   });
 });

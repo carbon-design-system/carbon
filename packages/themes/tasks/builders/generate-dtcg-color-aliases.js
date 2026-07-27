@@ -25,20 +25,29 @@
  * The $value shape matches what white.json / g10.json use:
  *   - Solid colors:  { colorSpace, components (0–1 floats), hex }
  *
- * All tokens in @carbon/colors are fully opaque hex values — there are no
+ * All tokens in @carbon/colors are fully opaque oklch values — there are no
  * alpha variants in the palette itself (alpha mixing happens at the theme
- * level, e.g. backgroundActive = adjustAlpha(gray50, 0.5)). Those alpha-mixed
- * theme tokens are NOT part of the palette and are not generated here.
+ * level). Those alpha-mixed theme tokens are NOT part of the palette and are
+ * not generated here.
  *
- * Theme and component token files can reference palette entries as DTCG
- * aliases, e.g.:  "$value": "{blue.60}"
+ * OKLCH is the source of truth (GitHub #22660).
+ * Every palette entry carries:
+ *   - $value.hex      — derived from oklch via culori (for downstream consumers)
+ *   - $value.components — sRGB components derived from oklch
+ *   - $extensions['org.carbon'].oklch — { l, c, h } stored at full precision
  *
- * This script is self-contained and only depends on @carbon/colors, which is
- * a listed runtime dependency of @carbon/themes.
+ * dtcg-converter.js reads $value.hex for CSS output.  When Phase 4/5 ships
+ * oklch() to browsers, dtcg-converter will switch to reading $extensions['org.carbon'].oklch
+ * instead — zero change required to this file.
  */
 
 const fs = require('fs-extra');
 const path = require('path');
+const { converter, formatHex } = require('culori');
+
+// culori converters — instantiated once at module load.
+//const toOklch = converter('oklch');
+const toRgb = converter('rgb');
 
 // Color families exported from @carbon/colors. Order matches the source file.
 const COLOR_FAMILIES = [
@@ -58,31 +67,58 @@ const COLOR_FAMILIES = [
   'warmGray',
 ];
 
+// Regex for parsing oklch() strings produced by @carbon/colors.
+// Matches: oklch(L C H)  — three space-separated floats, no alpha.
+const OKLCH_RE = /^oklch\(([\d.]+)\s+([\d.]+)\s+([\d.]+)\)$/;
+
 /**
- * Convert a hex color string to sRGB component array (values 0–1, 6 d.p.).
- * @param {string} hex  e.g. "#0f62fe"
- * @returns {[number, number, number]}
+ * Parse an oklch() string from @carbon/colors into { l, c, h }.
+ * Returns null for anything that isn't an oklch string (plain hex, objects…).
+ *
+ * @param {string} value  e.g. "oklch(0.5692 0.2174 25.93)"
+ * @returns {{ l: number, c: number, h: number } | null}
  */
-function hexToComponents(hex) {
-  const r = parseInt(hex.slice(1, 3), 16);
-  const g = parseInt(hex.slice(3, 5), 16);
-  const b = parseInt(hex.slice(5, 7), 16);
-  const round = (n) => Math.round((n / 255) * 1e6) / 1e6;
-  return [round(r), round(g), round(b)];
+function parseOklchString(value) {
+  if (typeof value !== 'string') return null;
+  const m = value.match(OKLCH_RE);
+  if (!m) return null;
+  return { l: +m[1], c: +m[2], h: +m[3] };
 }
 
 /**
- * Build the DTCG $value object for a solid (fully opaque) color, matching the
- * shape used throughout white.json / g10.json etc.
+ * Convert an oklch { l, c, h } object to a 7-character lowercase hex string.
  *
- * @param {string} hex
+ * @param {{ l: number, c: number, h: number }} oklch
+ * @returns {string}  e.g. "#0f62fe"
+ */
+function oklchToHex({ l, c, h }) {
+  return formatHex({ mode: 'oklch', l, c, h });
+}
+
+/**
+ * Convert an oklch { l, c, h } object to sRGB component array (0–1, 6 d.p.).
+ *
+ * @param {{ l: number, c: number, h: number }} oklch
+ * @returns {[number, number, number]}
+ */
+function oklchToComponents({ l, c, h }) {
+  const rgb = toRgb({ mode: 'oklch', l, c, h });
+  const round = (n) => Math.round(Math.max(0, Math.min(1, n)) * 1e6) / 1e6;
+  return [round(rgb.r), round(rgb.g), round(rgb.b)];
+}
+
+/**
+ * Build the DTCG $value object for a solid (fully opaque) color.
+ * Both hex and sRGB components are derived from the oklch source values.
+ *
+ * @param {{ l: number, c: number, h: number }} oklch
  * @returns {{ colorSpace: string, components: number[], hex: string }}
  */
-function solidColorValue(hex) {
+function solidColorValue(oklch) {
   return {
     colorSpace: 'srgb',
-    components: hexToComponents(hex),
-    hex,
+    components: oklchToComponents(oklch),
+    hex: oklchToHex(oklch),
   };
 }
 
@@ -90,15 +126,16 @@ function solidColorValue(hex) {
  * Parse a flat camelCase export name from @carbon/colors into
  * { family, scale } so we can nest it in the output JSON.
  *
- * Returns null for anything that isn't a scalar hex color (group objects,
- * duplicate aliases like black100 / white0, etc.).
+ * Returns null for anything that isn't a scalar oklch color string (group
+ * objects, duplicate aliases like black100 / white0, etc.).
  *
  * @param {string} name   - export name, e.g. "blue60", "blue60Hover", "black"
- * @param {string} value  - resolved value (must start with "#" to be included)
+ * @param {string} value  - resolved value (must be an oklch() string)
  * @returns {{ family: string, scale: string } | null}
  */
 function parseToken(name, value) {
-  if (typeof value !== 'string' || !value.startsWith('#')) {
+  if (!parseOklchString(value)) {
+    // Not an oklch scalar — skip group objects, non-color exports, etc.
     return null;
   }
 
@@ -153,10 +190,20 @@ function generateDTCGColorAliases() {
       output[family] = {};
     }
 
+    const oklch = parseOklchString(value);
+
     output[family][scale] = {
       $type: 'color',
-      $value: solidColorValue(value),
+      $value: solidColorValue(oklch),
       $description: `${family} ${scale}`,
+      $extensions: {
+        'org.carbon': {
+          // Full-precision oklch values — the source of truth.
+          // dtcg-converter currently reads $value.hex for CSS output.
+          // Phase 4/5: switch dtcg-converter to emit oklch() here instead.
+          oklch,
+        },
+      },
     };
   }
 

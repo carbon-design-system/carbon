@@ -15,15 +15,26 @@ const path = require('path');
 // ---------------------------------------------------------------------------
 
 /**
- * Lazily-loaded map of DTCG alias reference → hex string.
- * e.g. "{blue.60}" → "#0f62fe"
+ * Lazily-loaded map of DTCG alias reference → oklch() CSS string.
+ * e.g. "{blue.60}" → "oklch(0.5565 0.2430 261.95)"
  * Built once from color-palette.json on first use.
  * @type {Map<string, string> | null}
  */
 let _paletteAliasMap = null;
 
 /**
- * Return the alias→hex map, building it from color-palette.json on first call.
+ * Format an oklch { l, c, h } object as a CSS oklch() string.
+ * @param {{ l: number, c: number, h: number }} oklch
+ * @returns {string}  e.g. "oklch(0.5565 0.2430 261.95)"
+ */
+function formatOklch({ l, c, h }) {
+  return `oklch(${l} ${c} ${h})`;
+}
+
+/**
+ * Return the alias→oklch map, building it from color-palette.json on first call.
+ * Reads from $extensions['org.carbon'].oklch — the source of truth.
+ * Falls back to $value.hex for any entry that predates the oklch annotation.
  * @returns {Map<string, string>}
  */
 function getPaletteAliasMap() {
@@ -39,7 +50,15 @@ function getPaletteAliasMap() {
   for (const [family, scales] of Object.entries(palette)) {
     if (family.startsWith('$')) continue;
     for (const [scale, token] of Object.entries(scales)) {
-      if (token.$value && token.$value.hex) {
+      const oklch =
+        token.$extensions &&
+        token.$extensions['org.carbon'] &&
+        token.$extensions['org.carbon'].oklch;
+      if (oklch) {
+        _paletteAliasMap.set(`{${family}.${scale}}`, formatOklch(oklch));
+      } else if (token.$value && token.$value.hex) {
+        // Fallback for entries without oklch annotation (should not occur after
+        // the full palette migration, but kept for safety).
         _paletteAliasMap.set(`{${family}.${scale}}`, token.$value.hex);
       }
     }
@@ -49,7 +68,7 @@ function getPaletteAliasMap() {
 }
 
 /**
- * Resolve a DTCG alias reference string like "{blue.60}" to its hex value.
+ * Resolve a DTCG alias reference string like "{blue.60}" to its oklch() value.
  * Returns null if the reference is not found in the palette.
  *
  * @param {string} ref - e.g. "{blue.60}"
@@ -69,28 +88,30 @@ function resolveAliasRef(ref) {
  * Handles all shapes produced by this codebase:
  *
  *   1. Alias string          "{blue.60}"
- *      → looked up in color-palette.json → "#0f62fe"
+ *      → looked up in color-palette.json → "oklch(0.5565 0.2430 261.95)"
  *
  *   2. Alias + alpha object  { colorSpace:"srgb", color:"{gray.50}", alpha:0.5 }
- *      → alias resolved to hex, hex parsed to rgb channels → "rgba(r, g, b, a)"
+ *      → alias resolved to oklch, alpha appended → "oklch(L C H / alpha)"
  *
  *   3. Solid inline object   { colorSpace:"srgb", components:[…], hex:"#rrggbb" }
- *      → hex used directly (bespoke one-off values not in palette)
+ *      → $extensions['org.carbon'].oklch used when present, else hex fallback
  *
  *   4. Alpha inline object   { colorSpace:"srgb", components:[…], alpha:0.x }
- *      → components converted to rgb channels → "rgba(r, g, b, a)"
+ *      → components converted to oklch(L C H / alpha) when oklch present,
+ *         else rgba() from components (legacy fallback)
  *
  *   5. Anything else         returned unchanged
  *
  * @param {*} dtcgValue - The raw $value from a DTCG token
+ * @param {object} [tokenExtensions] - The token's $extensions (needed for shape 3/4)
  * @returns {string|*}
  */
-function resolveDTCGColorValue(dtcgValue) {
+function resolveDTCGColorValue(dtcgValue, tokenExtensions) {
   // ── Shape 1: plain alias string ──────────────────────────────────────────
   if (typeof dtcgValue === 'string') {
     if (dtcgValue.startsWith('{') && dtcgValue.endsWith('}')) {
-      const hex = resolveAliasRef(dtcgValue);
-      if (hex) return hex;
+      const oklch = resolveAliasRef(dtcgValue);
+      if (oklch) return oklch;
     }
     return dtcgValue;
   }
@@ -107,19 +128,29 @@ function resolveDTCGColorValue(dtcgValue) {
     return dtcgValue;
   }
 
-  // ── Shapes 2 & 3: inline components array ────────────────────────────────
+  // ── Shapes 3 & 4: inline components / hex object ─────────────────────────
   if (!Array.isArray(dtcgValue.components)) {
     return dtcgValue;
   }
 
-  // Shape 2: solid — hex present
-  if (typeof dtcgValue.hex === 'string') {
-    return dtcgValue.hex;
+  // Shape 3: solid — prefer oklch from extensions, fall back to hex
+  if (dtcgValue.alpha === undefined) {
+    const oklch =
+      tokenExtensions &&
+      tokenExtensions['org.carbon'] &&
+      tokenExtensions['org.carbon'].oklch;
+    if (oklch) return formatOklch(oklch);
+    if (typeof dtcgValue.hex === 'string') return dtcgValue.hex;
   }
 
-  // Shape 3: alpha — derive rgba from components
-  const [r, g, b] = dtcgValue.components.map((c) => Math.round(c * 255));
+  // Shape 4: alpha — prefer oklch(L C H / alpha), fall back to rgba()
   const alpha = dtcgValue.alpha !== undefined ? dtcgValue.alpha : 1;
+  const oklch =
+    tokenExtensions &&
+    tokenExtensions['org.carbon'] &&
+    tokenExtensions['org.carbon'].oklch;
+  if (oklch) return `oklch(${oklch.l} ${oklch.c} ${oklch.h} / ${alpha})`;
+  const [r, g, b] = dtcgValue.components.map((c) => Math.round(c * 255));
   return `rgba(${r}, ${g}, ${b}, ${alpha})`;
 }
 
@@ -139,17 +170,15 @@ function resolveWithExtensions(dtcgValue, extensions) {
     extensions['org.carbon'].alphaModifier;
 
   if (alphaModifier !== undefined) {
-    // $value must be a palette alias string — resolve it then apply alpha
-    const hex = resolveAliasRef(dtcgValue);
-    if (hex) {
-      const r = parseInt(hex.slice(1, 3), 16);
-      const g = parseInt(hex.slice(3, 5), 16);
-      const b = parseInt(hex.slice(5, 7), 16);
-      return `rgba(${r}, ${g}, ${b}, ${alphaModifier})`;
+    // $value must be a palette alias string — resolve to oklch then apply alpha
+    const oklch = resolveAliasRef(dtcgValue);
+    if (oklch) {
+      // oklch is already "oklch(L C H)" — append the alpha channel
+      return oklch.replace(/\)$/, ` / ${alphaModifier})`);
     }
   }
 
-  return resolveDTCGColorValue(dtcgValue);
+  return resolveDTCGColorValue(dtcgValue, extensions);
 }
 
 /**
@@ -170,17 +199,14 @@ function resolveComponentValueWithExtensions(themeValue, extensions, theme) {
   const alpha = alphaModifiers && alphaModifiers[theme];
 
   if (alpha !== undefined) {
-    // themeValue is now a plain alias string
-    const hex = resolveAliasRef(themeValue);
-    if (hex) {
-      const r = parseInt(hex.slice(1, 3), 16);
-      const g = parseInt(hex.slice(3, 5), 16);
-      const b = parseInt(hex.slice(5, 7), 16);
-      return `rgba(${r}, ${g}, ${b}, ${alpha})`;
+    // themeValue is a plain alias string — resolve to oklch then apply alpha
+    const oklch = resolveAliasRef(themeValue);
+    if (oklch) {
+      return oklch.replace(/\)$/, ` / ${alpha})`);
     }
   }
 
-  return resolveDTCGColorValue(themeValue);
+  return resolveDTCGColorValue(themeValue, extensions);
 }
 
 /**

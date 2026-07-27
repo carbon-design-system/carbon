@@ -39,7 +39,8 @@
     "@carbon/layout": "^11.55.0",
     "@carbon/type": "^11.63.0",
     "@ibm/telemetry-js": "^1.5.0",
-    "color": "^4.0.0"
+    "color": "^4.0.0",
+    "culori": "^4.0.2"
   },
   "devDependencies": {
     "@babel/node": "^7.27.1",
