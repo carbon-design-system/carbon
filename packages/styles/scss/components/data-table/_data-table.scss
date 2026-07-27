@@ -725,6 +725,12 @@
   //----------------------------------------------------------------------------
   // Large
   //----------------------------------------------------------------------------
+  .#{$prefix}--data-table--lg thead tr,
+  .#{$prefix}--data-table--lg tbody tr,
+  .#{$prefix}--data-table--lg tbody tr th {
+    block-size: convert.to-rem(48px);
+  }
+
   .#{$prefix}--data-table--lg .#{$prefix}--table-header-label {
     padding-block: $spacing-05 $spacing-05;
   }
