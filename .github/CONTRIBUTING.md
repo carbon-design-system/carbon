@@ -1,3 +1,9 @@
+<!--
+  Purpose: This is the contributor-facing entry point for finding work and
+  understanding how to participate. Keep issue search links aligned with the
+  repository's current issue fields and labels.
+-->
+
 # Contributing
 
 ## Our contribution model
@@ -82,7 +88,7 @@ Issues help us track work and streamline the contribution process.
 Looking for a good starting point? Try these:
 
 - [Good first issues 👋](https://github.com/carbon-design-system/carbon/issues?q=label%3A%22good%20first%20issue%20%F0%9F%91%8B%22)
-- [Low severity bugs 🐛](https://github.com/carbon-design-system/carbon/issues?q=is%3Aissue%20state%3Aopen%20label%3A%22severity%3A%203%22%20OR%20label%3A%22severity%3A%204%22)
+- [Medium and low severity bugs 🐛](https://github.com/carbon-design-system/carbon/issues?q=is%3Aissue%20state%3Aopen%20type%3ABug%20field.severity%3AMedium%2CLow)
 
 For something more advanced, the
 [enhancements that need a community contribution](https://github.com/carbon-design-system/carbon/issues?q=is%3Aissue%20state%3Aopen%20label%3A%22needs%3A%20community%20contribution%22%20label%3A%22type%3A%20enhancement%20%F0%9F%92%A1%22)
