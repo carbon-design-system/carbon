@@ -484,14 +484,6 @@ export default class CDSTabs extends HostListenerMixin(CDSContentSwitcher) {
   dismissable;
 
   /**
-   * `true` to opt into moving keyboard focus to the selected tab on initial
-   * mount. By default `cds-tabs` does not move focus on mount (WCAG 2.4.3);
-   * Settable for the rare cases where mount-time focus is desired.
-   */
-  @property({ type: Boolean, reflect: true })
-  autofocus = false;
-
-  /**
    * Specify the size of the tabs.
    *
    * Supports `sm` and `md` for line tabs.
@@ -625,20 +617,6 @@ export default class CDSTabs extends HostListenerMixin(CDSContentSwitcher) {
     this._cleanAndCreateIntersectionObserverContainer({ create: true });
     this._syncSecondaryLabels();
     this._syncSizeToTabs();
-    if (this.autofocus) {
-      const { selectorItemEnabled } = this.constructor as typeof CDSTabs;
-      const selected =
-        Array.from(this.querySelectorAll<CDSTab>(selectorItemEnabled)).find(
-          (tab) => tab.selected
-        ) ?? null;
-      if (selected) {
-        // Wait for the selected tab's `tabindex` to reflect `selected` before
-        // focusing, mirroring the user-gesture focus path.
-        Promise.resolve().then(() => {
-          selected.focus();
-        });
-      }
-    }
   }
 
   updated(changedProperties) {

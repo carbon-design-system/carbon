@@ -105,24 +105,6 @@ describe('cds-tabs', function () {
     }
   });
 
-  it('should move focus to the selected tab on mount when `autofocus` is set', async () => {
-    const el = await fixture(html`
-      <cds-tabs value="tab-2" autofocus>
-        <cds-tab value="tab-1" target="p-1">First</cds-tab>
-        <cds-tab value="tab-2" target="p-2" selected>Second</cds-tab>
-        <cds-tab value="tab-3" target="p-3">Third</cds-tab>
-      </cds-tabs>
-    `);
-
-    await el.updateComplete;
-    const tabs = el.querySelectorAll('cds-tab');
-    await Promise.all(Array.from(tabs, (tab) => tab.updateComplete));
-    await Promise.resolve();
-    await Promise.resolve();
-
-    expect(document.activeElement).to.equal(tabs[1]);
-  });
-
   it('should not move focus on a programmatic selectedIndex change', async () => {
     const el = await fixture(html`
       <cds-tabs>
