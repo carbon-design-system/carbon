@@ -162,20 +162,95 @@ WithIcons.argTypes = sharedArgTypes;
 WithIcons.parameters = sharedParameters;
 
 export const WithMenuAlignment = (args) => {
+  const buttonArgs = {
+    disabled: args.disabled,
+    onClick: args.onClick,
+    size: args.size,
+  };
   return (
-    <ComboButton {...args}>
-      <MenuItem label="Second action with a long label description" />
-      <MenuItem label="Third action" />
-      <MenuItem label="Fourth action" disabled />
-    </ComboButton>
+    <>
+      <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+        <ComboButton {...buttonArgs} label="Bottom" menuAlignment="bottom">
+          <MenuItem label="Second action with a long label description" />
+          <MenuItem label="Third action" />
+          <MenuItem label="Fourth action" disabled />
+        </ComboButton>
+
+        <ComboButton
+          {...buttonArgs}
+          label="Bottom start"
+          menuAlignment="bottom-start">
+          <MenuItem label="Second action with a long label description" />
+          <MenuItem label="Third action" />
+          <MenuItem label="Fourth action" disabled />
+        </ComboButton>
+
+        <ComboButton
+          {...buttonArgs}
+          label="Bottom end"
+          menuAlignment="bottom-end">
+          <MenuItem label="Second action with a long label description" />
+          <MenuItem label="Third action" />
+          <MenuItem label="Fourth action" disabled />
+        </ComboButton>
+      </div>
+
+      <div
+        style={{
+          display: 'flex',
+          marginTop: '15rem',
+          justifyContent: 'space-between',
+        }}>
+        <ComboButton
+          {...buttonArgs}
+          label="Top"
+          menuAlignment="top"
+          tooltipAlignment="bottom">
+          <MenuItem label="Second action with a long label description" />
+          <MenuItem label="Third action" />
+          <MenuItem label="Fourth action" disabled />
+        </ComboButton>
+
+        <ComboButton
+          {...buttonArgs}
+          label="Top start"
+          menuAlignment="top-start"
+          tooltipAlignment="bottom">
+          <MenuItem label="Second action with a long label description" />
+          <MenuItem label="Third action" />
+          <MenuItem label="Fourth action" disabled />
+        </ComboButton>
+
+        <ComboButton
+          {...buttonArgs}
+          label="Top end"
+          menuAlignment="top-end"
+          tooltipAlignment="bottom">
+          <MenuItem label="Second action with a long label description" />
+          <MenuItem label="Third action" />
+          <MenuItem label="Fourth action" disabled />
+        </ComboButton>
+      </div>
+    </>
   );
 };
 
 WithMenuAlignment.args = {
-  ...sharedArgs,
-  label: 'Top start',
-  menuAlignment: 'top-start',
-  tooltipAlignment: 'bottom',
+  disabled: false,
+  menuAlignment: 'bottom',
+  size: 'lg',
 };
-WithMenuAlignment.argTypes = sharedArgTypes;
-WithMenuAlignment.parameters = sharedParameters;
+WithMenuAlignment.argTypes = {
+  disabled: sharedArgTypes.disabled,
+  menuAlignment: {
+    ...sharedArgTypes.menuAlignment,
+    table: { readonly: true },
+  },
+  onClick: sharedArgTypes.onClick,
+  size: sharedArgTypes.size,
+};
+WithMenuAlignment.parameters = {
+  controls: {
+    include: Object.keys(WithMenuAlignment.argTypes),
+  },
+};
