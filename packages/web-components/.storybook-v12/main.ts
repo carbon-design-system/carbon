@@ -100,6 +100,7 @@ const stories = (baseConfig.stories ?? [])
   .concat(
     './Welcome/Welcome.mdx',
     './GettingStarted.mdx',
+    './Changelog.mdx',
     './CustomStyles.mdx',
     './CarbonCDNStyleHelpers.mdx',
     './FormParticipation.mdx',
