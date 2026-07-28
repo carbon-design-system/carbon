@@ -11,11 +11,15 @@ import './fluid-search';
 import './fluid-search-skeleton';
 
 const args = {
+  autoComplete: 'off',
   defaultWidth: 400,
   closeButtonLabelText: 'Clear search input',
   disabled: false,
   labelText: 'Search',
   placeholder: 'Prompt text',
+  role: 'searchbox',
+  type: 'search',
+  value: '',
 };
 
 const argTypes = {
@@ -60,6 +64,9 @@ const argTypes = {
     control: 'text',
     description: 'Specify the value of the <code>&lt;input&gt;</code>.',
   },
+  onInput: {
+    action: 'input',
+  },
 };
 
 export const Default = {
@@ -79,13 +86,13 @@ export const Default = {
   }) => html`
     <div style="width:${defaultWidth}px;">
       <cds-fluid-search
-        autocomplete="${autoComplete}"
+        autocomplete="${ifDefined(autoComplete)}"
         close-button-label-text="${ifDefined(closeButtonLabelText)}"
         ?disabled="${disabled}"
         label-text="${ifDefined(labelText)}"
         placeholder="${ifDefined(placeholder)}"
         type="${ifDefined(type)}"
-        role=${role}
+        role="${ifDefined(role)}"
         value="${ifDefined(value)}"
         @cds-search-input="${onInput}">
       </cds-fluid-search>
