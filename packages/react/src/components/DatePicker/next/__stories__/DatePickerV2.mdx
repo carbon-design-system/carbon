@@ -91,13 +91,12 @@ The input also supports Carbon AI label decoration through the `DatePickerInput`
 
 ### API Compatibility
 
-This implementation maintains **100% backward compatibility** with Carbon React
-v11 DatePicker API. All existing props and functionality work exactly as before:
+This implementation keeps the prop surface close to the Carbon React v11
+DatePicker API. Most existing props work exactly as before:
 
 **`DatePicker` props:**
 
 - `allowInput` - Allow manual date entry
-- `appendTo` - Append the calendar to a specific element
 - `className` - Additional CSS class names
 - `closeOnSelect` - Close calendar on date selection
 - `dateFormat` - Date display format (default: `m/d/Y`)
@@ -147,8 +146,33 @@ v11 DatePicker API. All existing props and functionality work exactly as before:
 
 ### Breaking Changes
 
-**None.** This implementation is a drop-in replacement with no breaking changes
-to the public API.
+**Import path.** Components are now exported under the `preview__DatePicker`
+namespace from `@carbon/react`. Destructure before use:
+
+```diff
+- import { DatePicker, DatePickerInput } from '@carbon/react';
++ import { preview__DatePicker } from '@carbon/react';
++
++ const { DatePicker, DatePickerInput, DatePickerSkeleton } = preview__DatePicker;
+```
+
+**`onChange` signature.** The v11 component called
+`onChange(selectedDates, dateStr, instance)`. `preview__DatePicker` calls
+`onChange(dates: Date[])` — an array of `Date` objects only:
+
+```diff
+- const handleChange = (selectedDates, dateStr, instance) => setValue(dateStr);
++ const handleChange = (dates) => {
++   const [start, end] = dates; // format yourself, e.g. Intl.DateTimeFormat
++ };
+```
+
+**`onClose` signature.** The v11 component passed
+`(selectedDates, dateStr, instance)`; `preview__DatePicker` calls `onClose()`
+with no arguments. Read the value from your own state.
+
+**No Flatpickr APIs.** `preview__DatePicker` is not backed by Flatpickr, so
+nothing Flatpickr-specific carries over.
 
 **What changed internally:**
 
@@ -157,17 +181,6 @@ to the public API.
 - Added shared state machine with Web Components implementation
 - Enhanced keyboard navigation
 - Improved accessibility
-
-**Migration:** No migration needed. Existing code continues to work without
-modifications. Simply update your import path:
-
-```tsx
-// Before (Carbon React v11)
-import { DatePicker, DatePickerInput } from '@carbon/react';
-
-// After (Carbon Labs)
-import { DatePicker, DatePickerInput } from '@carbon-labs/react/date-picker';
-```
 
 ## `DatePicker`
 
@@ -353,30 +366,49 @@ today's date for easy keyboard navigation.
 
 ## Migration from Carbon React v11
 
-This implementation is **100% backwards compatible** with Carbon React v11. No
-code changes are required:
+### Import path
 
-### Before (Carbon React v11)
+Import the `preview__DatePicker` namespace from `@carbon/react` and destructure
+— the JSX stays the same:
 
-```tsx
-import { DatePicker, DatePickerInput } from '@carbon/react';
-
-<DatePicker datePickerType="single" onChange={handleChange}>
-  <DatePickerInput id="date" labelText="Date" />
-</DatePicker>;
+```diff
+- import { DatePicker, DatePickerInput } from '@carbon/react';
++ import { preview__DatePicker } from '@carbon/react';
++
++ const { DatePicker, DatePickerInput, DatePickerSkeleton } = preview__DatePicker;
 ```
 
-### After (Carbon Labs)
+Once destructured, usage is identical:
 
 ```tsx
-import { DatePicker, DatePickerInput } from '@carbon-labs/react/date-picker';
-
 <DatePicker datePickerType="single" onChange={handleChange}>
-  <DatePickerInput id="date" labelText="Date" />
-</DatePicker>;
+  <DatePickerInput id="date" labelText="Date" placeholder="mm/dd/yyyy" />
+</DatePicker>
 ```
 
-**All props work exactly the same!** The only change is the import path.
+### Behavioral differences
+
+1. **`onChange` signature.** Update handlers that rely on `dateStr` or the
+   Flatpickr instance argument:
+
+   ```diff
+   - const handleChange = (selectedDates, dateStr, instance) => setValue(dateStr);
+   + const handleChange = (dates) => {
+   +   const [start, end] = dates; // format yourself, e.g. Intl.DateTimeFormat
+   + };
+   ```
+
+2. **`onClose` signature.** Classic passed `(selectedDates, dateStr, instance)`;
+   preview\_\_DatePicker calls **`onClose()`** with no arguments. Read the value
+   from your state.
+
+3. **No Flatpickr APIs.** Nothing Flatpickr-specific is available.
+
+### Migration checklist
+
+- [ ] Import from the `preview__DatePicker` namespace
+- [ ] Verify you've accounted for the new behavioral differences
+- [ ] No reliance on FlatPickr APIs
 
 ## References
 

@@ -34,6 +34,7 @@ import * as DatePickerStories from './date-picker-v2.stories';
   - [Modern implementation](#modern-implementation)
   - [State machine](#state-machine)
   - [Keyboard navigation](#keyboard-navigation)
+- [Migration from Carbon Web Components v11](#migration-from-carbon-web-components-v11)
 - [References](#references)
 - [Feedback](#feedback)
 
@@ -89,9 +90,9 @@ The input supports Carbon AI label content as slotted child content.
 
 ### API Compatibility
 
-This implementation maintains backward compatibility with the existing Carbon
-Web Components date picker API while replacing the internal Flatpickr-based
-behavior with shared primitives and a state machine.
+This implementation keeps the attribute/property surface close to the existing
+Carbon Web Components date picker API while replacing the internal
+Flatpickr-based behavior with shared primitives and a state machine.
 
 **`cds-preview-date-picker` attributes/properties:**
 
@@ -130,8 +131,34 @@ behavior with shared primitives and a state machine.
 
 ### Breaking Changes
 
-**None.** This implementation is a drop-in replacement with no breaking changes
-to the public API.
+**Tag renames.** All elements use new `cds-preview-*` tag names:
+
+| Classic v11               | Preview                           |
+| ------------------------- | --------------------------------- |
+| `<cds-date-picker>`       | `<cds-preview-date-picker>`       |
+| `<cds-date-picker-input>` | `<cds-preview-date-picker-input>` |
+
+**Import path.** The preview registers from a different module path:
+
+```diff
+- import '@carbon/web-components/es/components/date-picker/index.js';
++ import '@carbon/web-components/es/components/date-picker/next/index.js';
+```
+
+**Change event name and `detail` shape.** Update all listeners:
+
+```diff
+- el.addEventListener('cds-date-picker-changed', (e) => { /* flatpickr detail */ });
++ el.addEventListener('cds-preview-date-picker-changed', (e) => {
++   const { selectedDates, value } = e.detail;
++   // selectedDates: Temporal.PlainDate[]
++   // value: ISO string, range dates joined with "/"
++ });
+```
+
+**No Flatpickr APIs.** The preview is not backed by Flatpickr. Its format
+tokens, options, and instance API are unavailable. `date-format` accepts basic
+numeric tokens only: `m`, `d`, `Y`.
 
 **What changed internally:**
 
@@ -141,8 +168,6 @@ to the public API.
 - Added state machine for predictable behavior
 - Enhanced keyboard navigation
 - Improved accessibility
-
-**Migration:** No migration is required for existing usage patterns.
 
 ## `cds-preview-date-picker`
 
@@ -349,6 +374,54 @@ sequence.
 
 When the calendar opens without a selected date, focus automatically moves to
 today's date for easy keyboard navigation.
+
+## Migration from Carbon Web Components v11
+
+### Import and tag names
+
+Update the import path and replace all element tags:
+
+```diff
+- import '@carbon/web-components/es/components/date-picker/index.js';
++ import '@carbon/web-components/es/components/date-picker/next/index.js';
+```
+
+```diff
+- <cds-date-picker>
+-   <cds-date-picker-input kind="single" label-text="Date" placeholder="mm/dd/yyyy">
+-   </cds-date-picker-input>
+- </cds-date-picker>
++ <cds-preview-date-picker>
++   <cds-preview-date-picker-input kind="single" label-text="Date" placeholder="mm/dd/yyyy">
++   </cds-preview-date-picker-input>
++ </cds-preview-date-picker>
+```
+
+### Behavioral differences
+
+1. **Change event.** Listen for `cds-preview-date-picker-changed`. Its
+   `event.detail` is `{ selectedDates, value }`, where `selectedDates` is an
+   array of `Temporal.PlainDate` and `value` is the joined ISO string (range
+   dates joined with `/`).
+
+   ```diff
+   - el.addEventListener('cds-date-picker-changed', (e) => { /* flatpickr detail */ });
+   + el.addEventListener('cds-preview-date-picker-changed', (e) => {
+   +   const { selectedDates, value } = e.detail;
+   + });
+   ```
+
+2. **No Flatpickr APIs.** The preview is not backed by Flatpickr, so its format
+   tokens, options, and instance API are unavailable. `date-format` accepts
+   basic numeric tokens only: `m`, `d`, `Y`.
+
+### Migration checklist
+
+- [ ] Import from `date-picker/next/index.js`
+- [ ] `<cds-date-picker>` → `<cds-preview-date-picker>`, inputs →
+      `<cds-preview-date-picker-input>`
+- [ ] Verify you've accounted for the new behavioral differences
+- [ ] No reliance on FlatPickr APIs
 
 ## References
 
