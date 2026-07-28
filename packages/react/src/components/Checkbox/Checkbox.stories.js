@@ -194,7 +194,7 @@ const checkboxArgTypes = {
 const checkboxControls = Object.keys(checkboxArgTypes);
 
 export const Default = (args) => (
-  <CheckboxGroup {...args}>
+  <CheckboxGroup {...args} readOnly={args.readOnly || undefined}>
     <Checkbox labelText="Email notifications" id="checkbox-label-1" />
     <Checkbox labelText="SMS notifications" id="checkbox-label-2" />
   </CheckboxGroup>
@@ -214,7 +214,7 @@ Default.parameters = {
 
 export const Horizontal = (args) => {
   return (
-    <CheckboxGroup {...args}>
+    <CheckboxGroup {...args} readOnly={args.readOnly || undefined}>
       <Checkbox labelText="Email notifications" id="checkbox-label-1" />
       <Checkbox labelText="SMS notifications" id="checkbox-label-2" />
       <Checkbox labelText="Push notifications" id="checkbox-label-3" />
@@ -276,21 +276,21 @@ Single.parameters = {
 export const Skeleton = (args) => <CheckboxSkeleton {...args} />;
 
 Skeleton.args = {
-  'aria-label': 'Loading notification preference',
+  className: '',
 };
 
 Skeleton.argTypes = {
-  'aria-label': {
+  className: {
     control: {
       type: 'text',
     },
-    description: 'Provide an accessible label for the skeleton.',
+    description: 'Specify an optional class name to add to the skeleton.',
   },
 };
 
 Skeleton.parameters = {
   controls: {
-    include: ['aria-label'],
+    include: ['className'],
   },
 };
 
@@ -328,13 +328,16 @@ export const withAILabel = (args) => {
 
   return (
     <div className="ai-label-check-radio-container">
-      <CheckboxGroup decorator={AILabelFunc()} {...args}>
+      <CheckboxGroup
+        decorator={AILabelFunc()}
+        {...args}
+        readOnly={args.readOnly || undefined}>
         <Checkbox labelText="Email notifications" id="checkbox-label-1" />
         <Checkbox labelText="SMS notifications" id="checkbox-label-2" />
         <Checkbox labelText="Push notifications" id="checkbox-label-3" />
       </CheckboxGroup>
 
-      <CheckboxGroup {...args}>
+      <CheckboxGroup {...args} readOnly={args.readOnly || undefined}>
         <Checkbox
           labelText="Email notifications"
           id="checkbox-label-4"
@@ -348,7 +351,7 @@ export const withAILabel = (args) => {
         <Checkbox labelText="Push notifications" id="checkbox-label-6" />
       </CheckboxGroup>
 
-      <CheckboxGroup {...args}>
+      <CheckboxGroup {...args} readOnly={args.readOnly || undefined}>
         <Checkbox
           labelText="Email notifications"
           id="checkbox-label-7"

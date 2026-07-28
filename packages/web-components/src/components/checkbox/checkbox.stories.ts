@@ -294,22 +294,22 @@ export const Single = {
 
 export const Skeleton = {
   args: {
-    'aria-label': 'Loading notification preference',
+    class: '',
   },
   argTypes: {
-    'aria-label': {
+    class: {
       control: 'text',
-      description: 'Provide an accessible label for the skeleton.',
+      description: 'Specify an optional class name to add to the skeleton.',
     },
   },
   parameters: {
     controls: {
-      include: ['aria-label'],
+      include: ['class'],
     },
   },
-  render: ({ 'aria-label': ariaLabel }) => html`
+  render: ({ class: className }) => html`
     <fieldset class="${prefix}--fieldset">
-      <cds-checkbox-skeleton aria-label="${ariaLabel}"></cds-checkbox-skeleton>
+      <cds-checkbox-skeleton class="${className}"></cds-checkbox-skeleton>
     </fieldset>
   `,
 };
