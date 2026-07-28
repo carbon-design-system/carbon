@@ -58,6 +58,7 @@
     "@carbon/feature-flags": "^1.5.0",
     "@carbon/icons-react": "^11.84.0",
     "@carbon/layout": "^11.55.0",
+    "@carbon/motion": "^11.46.0",
     "@carbon/styles": "^1.111.0",
     "@carbon/utilities": "^0.22.0",
     "@floating-ui/react": "^0.27.4",
@@ -68,6 +69,7 @@
     "es-toolkit": "^1.27.0",
     "flatpickr": "4.6.13",
     "invariant": "^2.2.3",
+    "motion": "^12.42.0",
     "prop-types": "^15.8.1",
     "react-fast-compare": "^3.2.2",
     "tabbable": "^6.2.0"
