@@ -18,9 +18,9 @@ const args = {
   feedbackTimeout: 0,
   hideCopyButton: false,
   maxCollapsedNumberOfRows: 15,
-  maxExpandeddNumberOfRows: 0,
+  maxExpandedNumberOfRows: 0,
   minCollapsedNumberOfRows: 3,
-  minExpandeddNumberOfRows: 16,
+  minExpandedNumberOfRows: 16,
   showLessText: 'Show less',
   showMoreText: 'Show more',
   type: 'single',
@@ -61,7 +61,7 @@ const argTypes = {
     description:
       'Specify the maximum number of rows to be shown when in collapsed view.',
   },
-  maxExpandeddNumberOfRows: {
+  maxExpandedNumberOfRows: {
     control: 'number',
     description:
       'Specify the maximum number of rows to be shown when in expanded view.',
@@ -71,7 +71,7 @@ const argTypes = {
     description:
       'Specify the minimum number of rows to be shown when in collapsed view.',
   },
-  minExpandeddNumberOfRows: {
+  minExpandedNumberOfRows: {
     control: 'number',
     description:
       'Specify the minimum number of rows to be shown when in expanded view.',
