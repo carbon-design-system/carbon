@@ -65,6 +65,10 @@ async function compileIconComponent(outDir, moduleKind) {
     esModuleInterop: true,
     target: ts.ScriptTarget.ES2015,
     moduleResolution: ts.ModuleResolutionKind.NodeJs,
+    // `moduleResolution: node10` (NodeJs) is deprecated in TS 6.x and will be
+    // removed in TS 7.0. It's intentional for this declaration-only emit, so
+    // opt into keeping it without the deprecation error until we migrate.
+    ignoreDeprecations: '6.0',
     lib: ['lib.es2015.d.ts', 'lib.dom.d.ts'],
     types: ['react'],
   };
