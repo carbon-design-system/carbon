@@ -13,12 +13,21 @@ import './fluid-text-input-skeleton';
 
 const args = {
   defaultWidth: 300,
+  helperText: '',
+  hideLabel: false,
+  inline: false,
+  id: 'input-1',
   placeholder: 'Placeholder text',
   invalid: false,
   invalidText:
     'Error message that is really long can wrap to more lines but should not be excessively long.',
   disabled: false,
   labelText: 'Label',
+  enableCounter: false,
+  maxCount: 500,
+  readonly: false,
+  size: 'md',
+  value: '',
   warn: false,
   warnText:
     'Warning message that is really long can wrap to more lines but should not be excessively long.',
@@ -28,6 +37,10 @@ const argTypes = {
   defaultWidth: {
     control: { type: 'range', min: 300, max: 800, step: 50 },
   },
+  helperText: { control: 'text' },
+  hideLabel: { control: 'boolean' },
+  inline: { control: 'boolean' },
+  id: { control: 'text' },
   placeholder: {
     control: { type: 'text' },
   },
@@ -59,7 +72,7 @@ const argTypes = {
     action: `click`,
   },
   maxCount: {
-    control: 'text',
+    control: 'number',
     description: 'Max count (max-count)',
   },
   enableCounter: {
@@ -70,7 +83,57 @@ const argTypes = {
     control: 'boolean',
     description: 'Read only (readonly)',
   },
+  size: {
+    control: 'select',
+    options: ['xs', 'sm', 'md', 'lg'],
+  },
 };
+
+const renderTextInput = (
+  {
+    disabled,
+    enableCounter,
+    helperText,
+    hideLabel,
+    inline,
+    id,
+    invalid,
+    invalidText,
+    labelText,
+    maxCount,
+    onClick,
+    onInput,
+    placeholder,
+    readonly,
+    size,
+    value,
+    warn,
+    warnText,
+  },
+  labelSlot
+) => html`
+  <cds-fluid-text-input
+    ?disabled="${disabled}"
+    ?enable-counter="${enableCounter}"
+    helper-text="${ifDefined(helperText)}"
+    ?hide-label="${hideLabel}"
+    ?inline="${inline}"
+    id="${ifDefined(id)}"
+    ?invalid="${invalid}"
+    invalid-text="${ifDefined(invalidText)}"
+    label="${ifDefined(labelText)}"
+    max-count="${ifDefined(maxCount)}"
+    placeholder="${ifDefined(placeholder)}"
+    ?readonly="${readonly}"
+    size="${ifDefined(size)}"
+    value="${ifDefined(value)}"
+    ?warn="${warn}"
+    warn-text="${ifDefined(warnText)}"
+    @click="${onClick}"
+    @input="${onInput}">
+    ${labelSlot}
+  </cds-fluid-text-input>
+`;
 
 export const Default = {
   args,
@@ -80,46 +143,27 @@ export const Default = {
       exclude: ['onClick', 'onInput'],
     },
   },
-  render: ({
-    defaultWidth,
-    placeholder,
-    invalid,
-    invalidText,
-    disabled,
-    labelText,
-    warn,
-    warnText,
-    enableCounter,
-    maxCount,
-    value,
-    readonly,
-  }) => html`
+  render: ({ defaultWidth, ...textInputArgs }) => html`
     <div style="width:${defaultWidth}px;">
-      <cds-fluid-text-input
-        placeholder="${ifDefined(placeholder)}"
-        ?invalid="${invalid}"
-        invalid-text="${ifDefined(invalidText)}"
-        ?disabled="${disabled}"
-        label="${ifDefined(labelText)}"
-        ?warn="${warn}"
-        warn-text="${ifDefined(warnText)}"
-        value="${ifDefined(value)}"
-        ?enable-counter="${ifDefined(enableCounter)}"
-        max-count="${ifDefined(maxCount)}"
-        ?readonly="${ifDefined(readonly)}">
-      </cds-fluid-text-input>
+      ${renderTextInput(textInputArgs)}
     </div>
   `,
 };
 
 export const DefaultWithToggletip = {
-  render: () => html`
-    <cds-fluid-text-input placeholder="Placeholder text">
-      <cds-toggletip autoAlign="true" slot="label-text">
-        Label
-        <p slot="body-text">Additional field information here.</p>
-      </cds-toggletip>
-    </cds-fluid-text-input>
+  args,
+  argTypes,
+  parameters: { controls: { exclude: ['labelText', 'onClick', 'onInput'] } },
+  render: ({ defaultWidth, ...textInputArgs }) => html`
+    <div style="width:${defaultWidth}px;">
+      ${renderTextInput(
+        textInputArgs,
+        html`<cds-toggletip autoAlign="true" slot="label-text">
+          Label
+          <p slot="body-text">Additional field information here.</p>
+        </cds-toggletip>`
+      )}
+    </div>
   `,
 };
 
