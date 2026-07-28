@@ -6,27 +6,69 @@
  */
 
 import { html } from 'lit';
+import { keyed } from 'lit/directives/keyed.js';
 import './index';
 
-export const Default = () => html`
-  <cds-heading>h1</cds-heading>
-  <cds-section>
-    <cds-heading>h2</cds-heading>
-    <cds-section>
-      <cds-heading>h3</cds-heading>
-    </cds-section>
-  </cds-section>
-`;
+const headingArgTypes = {
+  rootHeading: {
+    control: 'text',
+    table: { category: 'Heading content' },
+  },
+  sectionHeading: {
+    control: 'text',
+    table: { category: 'Heading content' },
+  },
+  nestedHeading: {
+    control: 'text',
+    table: { category: 'Heading content' },
+  },
+};
 
-export const CustomLevel = () => html`
-  <cds-heading>h1</cds-heading>
-  <cds-section level="5">
-    <cds-heading>h5</cds-heading>
+const headingArgs = {
+  rootHeading: 'Account settings',
+  sectionHeading: 'Profile',
+  nestedHeading: 'Contact information',
+};
+
+export const Default = {
+  args: headingArgs,
+  argTypes: headingArgTypes,
+  render: ({ rootHeading, sectionHeading, nestedHeading }) => html`
+    <cds-heading>${rootHeading}</cds-heading>
     <cds-section>
-      <cds-heading>h6</cds-heading>
+      <cds-heading>${sectionHeading}</cds-heading>
+      <cds-section>
+        <cds-heading>${nestedHeading}</cds-heading>
+      </cds-section>
     </cds-section>
-  </cds-section>
-`;
+  `,
+};
+
+export const CustomLevel = {
+  args: {
+    ...headingArgs,
+    level: 5,
+  },
+  argTypes: {
+    ...headingArgTypes,
+    level: {
+      control: 'select',
+      options: [1, 2, 3, 4, 5, 6],
+      table: { category: 'Section' },
+    },
+  },
+  render: ({ rootHeading, sectionHeading, nestedHeading, level }) =>
+    html`<cds-heading>${rootHeading}</cds-heading> ${keyed(
+        level,
+        html`<cds-section .level=${level}>
+          <cds-heading>${sectionHeading}</cds-heading>
+          <cds-section>
+            <cds-heading>${nestedHeading}</cds-heading>
+          </cds-section>
+        </cds-section>`
+      )}`,
+};
+
 const meta = {
   title: 'Components/Heading',
 };

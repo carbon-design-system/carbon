@@ -19,33 +19,78 @@ export default {
     docs: {
       page: mdx,
     },
+    controls: {
+      exclude: ['children', 'className'],
+    },
   },
 };
 
-export const Default = () => {
+const headingArgTypes = {
+  rootHeading: {
+    control: { type: 'text' },
+    table: { category: 'Heading content' },
+  },
+  sectionHeading: {
+    control: { type: 'text' },
+    table: { category: 'Heading content' },
+  },
+  nestedHeading: {
+    control: { type: 'text' },
+    table: { category: 'Heading content' },
+  },
+};
+
+const headingArgs = {
+  rootHeading: 'Account settings',
+  sectionHeading: 'Profile',
+  nestedHeading: 'Contact information',
+};
+
+export const Default = ({ rootHeading, sectionHeading, nestedHeading }) => {
   return (
     <>
-      <Heading>h1</Heading>
+      <Heading>{rootHeading}</Heading>
       <Section>
-        <Heading>h2</Heading>
+        <Heading>{sectionHeading}</Heading>
         <Section>
-          <Heading>h3</Heading>
+          <Heading>{nestedHeading}</Heading>
         </Section>
       </Section>
     </>
   );
 };
 
-export const CustomLevel = () => {
+Default.args = headingArgs;
+Default.argTypes = headingArgTypes;
+
+export const CustomLevel = ({
+  rootHeading,
+  sectionHeading,
+  nestedHeading,
+  level,
+}) => {
   return (
     <>
-      <Heading>h1</Heading>
-      <Section level={5}>
-        <Heading>h5</Heading>
+      <Heading>{rootHeading}</Heading>
+      <Section level={level}>
+        <Heading>{sectionHeading}</Heading>
         <Section>
-          <Heading>h6</Heading>
+          <Heading>{nestedHeading}</Heading>
         </Section>
       </Section>
     </>
   );
+};
+
+CustomLevel.args = {
+  ...headingArgs,
+  level: 5,
+};
+CustomLevel.argTypes = {
+  ...headingArgTypes,
+  level: {
+    control: { type: 'select' },
+    options: [1, 2, 3, 4, 5, 6],
+    table: { category: 'Section' },
+  },
 };
