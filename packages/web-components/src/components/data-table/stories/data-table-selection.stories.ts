@@ -147,8 +147,27 @@ export const Default = {
 };
 
 export const WithRadioSelection = {
-  render: () => html`
-    <cds-table is-selectable with-header radio>
+  args: { radio: true },
+  argTypes: {
+    radio: { table: { readonly: true } },
+  },
+  render: ({
+    isSortable,
+    locale,
+    radio,
+    size,
+    useStaticWidth,
+    useZebraStyles,
+  }) => html`
+    <cds-table
+      is-selectable
+      with-header
+      ?is-sortable=${isSortable}
+      locale="${locale}"
+      ?radio=${radio}
+      size="${size}"
+      ?use-static-width=${useStaticWidth}
+      ?use-zebra-styles=${useZebraStyles}>
       <cds-table-header-title slot="title">DataTable</cds-table-header-title>
       <cds-table-header-description slot="description"
         >With selection</cds-table-header-description
@@ -223,8 +242,25 @@ export const WithRadioSelection = {
 };
 
 export const WithSelectionAndSorting = {
-  render: () => html`
-    <cds-table is-sortable>
+  args: { isSortable: true },
+  argTypes: {
+    isSortable: { table: { readonly: true } },
+  },
+  render: ({
+    isSortable,
+    locale,
+    radio,
+    size,
+    useStaticWidth,
+    useZebraStyles,
+  }) => html`
+    <cds-table
+      ?is-sortable=${isSortable}
+      locale="${locale}"
+      ?radio=${radio}
+      size="${size}"
+      ?use-static-width=${useStaticWidth}
+      ?use-zebra-styles=${useZebraStyles}>
       <cds-table-header-title slot="title">DataTable</cds-table-header-title>
       <cds-table-header-description slot="description"
         >With selection</cds-table-header-description
@@ -300,6 +336,8 @@ export const WithSelectionAndSorting = {
 
 const meta = {
   title: 'Components/DataTable/Selection',
+  args: defaultArgs,
+  argTypes: controls,
   parameters: {
     docs: {
       page: storyDocs,

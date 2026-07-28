@@ -159,8 +159,21 @@ export const Default = {
 };
 
 export const BatchExpansion = {
-  render: () => html`
-    <cds-table expandable batch-expansion>
+  render: ({
+    isSortable,
+    locale,
+    size,
+    useStaticWidth,
+    useZebraStyles,
+  }) => html`
+    <cds-table
+      expandable
+      batch-expansion
+      ?is-sortable=${isSortable}
+      locale="${locale}"
+      size="${size}"
+      ?use-static-width=${useStaticWidth}
+      ?use-zebra-styles=${useZebraStyles}>
       <cds-table-header-title slot="title">DataTable</cds-table-header-title>
       <cds-table-header-description slot="description"
         >With expansion</cds-table-header-description
@@ -252,6 +265,8 @@ export const BatchExpansion = {
 
 const meta = {
   title: 'Components/DataTable/Expansion',
+  args: defaultArgs,
+  argTypes: controls,
   parameters: {
     docs: {
       page: storyDocs,

@@ -26,7 +26,7 @@ import DataTable, {
   TableSelectAll,
   TableSelectRow,
 } from '..';
-import { rows, headers } from './shared';
+import { dataTableArgs, dataTableArgTypes, rows, headers } from './shared';
 import mdx from '../DataTable.mdx';
 import TableToolbarFilter from './examples/TableToolbarFilter';
 import './datatable-story.scss';
@@ -49,19 +49,8 @@ export default {
     TableHeader,
     TableRow,
   },
-  argTypes: {
-    size: {
-      options: ['xs', 'sm', 'md', 'lg', 'xl'],
-      control: { type: 'select' },
-    },
-    useZebraStyles: {
-      control: { type: 'boolean' },
-    },
-  },
-  args: {
-    size: 'lg',
-    useZebraStyles: false,
-  },
+  argTypes: dataTableArgTypes,
+  args: dataTableArgs,
   parameters: {
     docs: {
       page: mdx,

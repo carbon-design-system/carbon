@@ -119,8 +119,16 @@ export const Default = {
 };
 
 export const XLWithTwoLines = {
-  render: () => html`
-    <cds-table size="xl">
+  args: { size: TABLE_SIZE.XL },
+  argTypes: {
+    size: { table: { readonly: true } },
+  },
+  render: ({ locale, size, useStaticWidth, useZebraStyles }) => html`
+    <cds-table
+      locale="${locale}"
+      size="${size}"
+      ?use-static-width=${useStaticWidth}
+      ?use-zebra-styles=${useZebraStyles}>
       <cds-table-head>
         <cds-table-header-row>
           <cds-table-header-cell>Name</cds-table-header-cell>
@@ -208,6 +216,8 @@ export const XLWithTwoLines = {
 
 const meta = {
   title: 'Components/DataTable/Basic',
+  args: defaultArgs,
+  argTypes: controls,
   parameters: {
     docs: {
       page: storyDocs,

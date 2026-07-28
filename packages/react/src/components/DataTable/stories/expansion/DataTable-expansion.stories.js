@@ -19,13 +19,15 @@ import DataTable, {
   TableHeader,
   TableRow,
 } from '../..';
-import { rows, headers } from '../shared';
+import { dataTableArgs, dataTableArgTypes, rows, headers } from '../shared';
 import mdx from '../../DataTable.mdx';
 import { action } from 'storybook/actions';
 
 export default {
   title: 'Components/DataTable/Expansion',
   component: DataTable,
+  args: dataTableArgs,
+  argTypes: dataTableArgTypes,
   subcomponents: {
     TableExpandHeader,
     TableExpandRow,

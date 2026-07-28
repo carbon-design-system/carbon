@@ -31,7 +31,12 @@ import DataTable, {
   TableToolbarSearch,
   TableToolbarMenu,
 } from '../..';
-import { batchActionClick, headers } from '../shared';
+import {
+  batchActionClick,
+  dataTableArgs,
+  dataTableArgTypes,
+  headers,
+} from '../shared';
 import IconIndicator from '../../../IconIndicator';
 
 const rows = [
@@ -94,6 +99,8 @@ const rows = [
 export default {
   title: 'Components/DataTable/Dynamic',
   component: DataTable,
+  args: dataTableArgs,
+  argTypes: dataTableArgTypes,
 };
 
 export const Default = (args) => {
