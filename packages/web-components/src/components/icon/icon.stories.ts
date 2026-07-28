@@ -67,19 +67,10 @@ export const WithCustomSVG = {
     ...defaultArgs,
     ariaLabel: 'Custom shape',
   },
-  argTypes: {
-    size: {
-      table: {
-        disable: true,
-      },
-    },
-    class: {
-      control: 'text',
-      description: 'Specify a custom CSS class for the icon',
-    },
-    ariaLabel: {
-      control: 'text',
-      description: 'Specify an aria-label for the icon',
+  argTypes: controls,
+  parameters: {
+    controls: {
+      exclude: ['size'],
     },
   },
   decorators: [
@@ -117,15 +108,12 @@ export const WithCustomClasses = {
   args: {
     ...defaultArgs,
   },
-  argTypes: {
-    size: controls.size,
-    // Story purpose is demonstrating distinct color classes; keep class control off.
-    class: {
-      table: {
-        disable: true,
-      },
+  argTypes: controls,
+  parameters: {
+    controls: {
+      // Story purpose is demonstrating distinct color classes; keep class control off.
+      exclude: ['class'],
     },
-    ariaLabel: controls.ariaLabel,
   },
   decorators: [
     (story) =>
