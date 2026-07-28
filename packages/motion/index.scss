@@ -5,7 +5,9 @@
 // LICENSE file in the root directory of this source tree.
 //
 
+@use 'sass:list';
 @use 'sass:map';
+@use 'scss/generated/surfaces' as generated;
 
 /// Common component easings
 /// @type Map
@@ -121,3 +123,134 @@ $slow-01: $duration-slow-01;
 /// @type Duration
 /// @group @carbon/motion
 $slow-02: $duration-slow-02;
+
+/// Named motion intents shared across Carbon implementations
+/// @type Map
+/// @access public
+/// @group @carbon/motion
+$surfaces: generated.$surfaces;
+
+/// Get a named motion surface or one of its properties
+/// @param {String} $name - The motion surface name
+/// @param {String | Null} $property [null] - An optional surface property
+/// @access public
+/// @group @carbon/motion
+/// @return {Map | *} The surface definition or requested property
+@function surface($name, $property: null) {
+  @if not map.has-key($surfaces, $name) {
+    @error 'Unable to find a motion surface named #{$name}.';
+  }
+
+  $definition: map.get($surfaces, $name);
+
+  @if not $property {
+    @return $definition;
+  }
+
+  @if not map.has-key($definition, $property) {
+    @error 'Unable to find a property named #{$property} on the #{$name} motion surface.';
+  }
+
+  @return map.get($definition, $property);
+}
+
+/// Surface duration tokens mapped to their duration values
+/// @access private
+/// @group @carbon/motion
+$-durations: (
+  'fast-01': $duration-fast-01,
+  'fast-02': $duration-fast-02,
+  'moderate-01': $duration-moderate-01,
+  'moderate-02': $duration-moderate-02,
+  'slow-01': $duration-slow-01,
+  'slow-02': $duration-slow-02,
+);
+
+/// Apply a named reveal surface in CSS from the shared surface map.
+///
+/// Resting / `[data-carbon-surface-state='enter']` use the surface enter
+/// keyframes. `[data-carbon-surface-state='exit']` uses the exit keyframes.
+/// Transitions (and `@starting-style` for first-mount enter) are guarded
+/// behind `prefers-reduced-motion: no-preference` - users who prefer reduced
+/// motion get the resting styles with no animation at all.
+///
+/// Typical usage with controlled open/close:
+///
+/// ```scss
+/// [data-carbon-surface='contextual'] {
+///   @include motion.surface(contextual);
+/// }
+/// ```
+///
+/// Shared-element surfaces morph one element into another and have no
+/// CSS-only form; they need a JavaScript engine (Motion in React, View
+/// Transitions for web components), so this mixin rejects them
+/// @param {String} $name - The motion surface name
+/// @access public
+/// @group @carbon/motion
+@mixin surface($name) {
+  $definition: surface($name);
+  $kind: map.get($definition, kind);
+
+  @if $kind != 'reveal' {
+    @error 'The #{$name} surface is a shared-element morph with no CSS-only form. Pair it with a JavaScript engine instead.';
+  }
+
+  $enter: map.get($definition, enter);
+  $exit: map.get($definition, exit);
+  $duration: map.get($-durations, map.get($definition, duration));
+  $enter-easing: map.get($definition, enter-easing);
+  $exit-easing: map.get($definition, exit-easing);
+  $properties: ();
+
+  @each $property, $value in $enter {
+    $properties: list.append($properties, $property, $separator: comma);
+  }
+
+  // resting / enter styles apply regardless of motion preference
+  &,
+  &[data-carbon-surface-state='enter'] {
+    @each $property, $value in $enter {
+      #{$property}: #{$value};
+    }
+  }
+
+  &[data-carbon-surface-state='exit'] {
+    @each $property, $value in $exit {
+      #{$property}: #{$value};
+    }
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    // `auto` sizes, e.g. disclosure block-size, interpolate where
+    // supported
+    interpolate-size: allow-keywords;
+    transition-duration: $duration;
+    transition-property: $properties;
+
+    &,
+    &[data-carbon-surface-state='enter'] {
+      transition-timing-function: motion(
+        list.nth($enter-easing, 1),
+        list.nth($enter-easing, 2)
+      );
+    }
+
+    &[data-carbon-surface-state='exit'] {
+      transition-timing-function: motion(
+        list.nth($exit-easing, 1),
+        list.nth($exit-easing, 2)
+      );
+    }
+
+    // the styles the element enters from when it is first rendered
+    @starting-style {
+      &,
+      &[data-carbon-surface-state='enter'] {
+        @each $property, $value in $exit {
+          #{$property}: #{$value};
+        }
+      }
+    }
+  }
+}
