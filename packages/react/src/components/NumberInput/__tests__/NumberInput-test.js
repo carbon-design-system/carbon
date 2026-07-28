@@ -2728,4 +2728,26 @@ describe('NumberInput', () => {
       numberFormatSpy.mockRestore();
     });
   });
+
+  describe('validateNumberSeparators - Indian locale', () => {
+    it('should accept valid Indian digit grouping for en-IN', () => {
+      expect(validateNumberSeparators('5,00,000', 'en-IN')).toBe(true);
+      expect(validateNumberSeparators('1,23,45,678', 'en-IN')).toBe(true);
+    });
+
+    it('should reject invalid Indian digit grouping for en-IN', () => {
+      expect(validateNumberSeparators('5,000,00', 'en-IN')).toBe(false);
+      expect(validateNumberSeparators('5,0000', 'en-IN')).toBe(false);
+    });
+  });
+
+  describe('validateNumberSeparators - locale specific grouping', () => {
+    it('accepts Indian grouping for en-IN', () => {
+      expect(validateNumberSeparators('5,00,000', 'en-IN')).toBe(true);
+    });
+
+    it('continues to reject Indian grouping for en-US', () => {
+      expect(validateNumberSeparators('5,00,000', 'en-US')).toBe(false);
+    });
+  });
 });
