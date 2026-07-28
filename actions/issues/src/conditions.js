@@ -1,64 +1,39 @@
 /**
- * Copyright IBM Corp. 2020, 2023
+ * Copyright IBM Corp. 2020, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
+/**
+ * Shared predicates used by plugins to declare which GitHub issue actions they
+ * handle. Keeping event checks here makes the plugin registry readable and
+ * gives runner logs stable condition names.
+ */
 export const events = {
   issues: {
     opened: {
       key: 'issue_opened',
       run: action('opened'),
     },
-  },
-  comments: {
-    created: {
-      key: 'comment_created',
-      run: action('created'),
+    typed: {
+      key: 'issue_typed',
+      run: action('typed'),
     },
-  },
-};
-
-export const states = {
-  issues: {
-    from_non_collaborator: {
-      key: 'from_non_collaborator',
-      run(context) {
-        const { issue } = context.payload;
-        const roles = new Set(['OWNER', 'COLLABORATOR', 'MEMBER']);
-        return roles.has(issue.author_association);
-      },
+    labeled: {
+      key: 'issue_labeled',
+      run: action('labeled'),
     },
-    open: {
-      key: 'issue_is_open',
-      run(context) {
-        return !context.issue.closed_at;
-      },
-    },
-    closed: {
-      key: 'issue_is_closed',
-      run(context) {
-        return !!context.issue.closed_at;
-      },
-    },
-    has(label) {
-      return {
-        key: `has_issue_label_${label}`,
-        run(context) {
-          if (!context.payload.issue) {
-            return false;
-          }
-          return context.payload.issue.labels.find(({ name }) => {
-            return name === label;
-          });
-        },
-      };
+    unlabeled: {
+      key: 'issue_unlabeled',
+      run: action('unlabeled'),
     },
   },
 };
 
 export function or(...conditions) {
+  // Preserve the child keys in the combined key so a failed condition remains
+  // understandable in the GitHub Actions log.
   const key = conditions
     .map((condition) => {
       return condition.key;
@@ -80,5 +55,6 @@ export function or(...conditions) {
  * @returns {Function}
  */
 function action(name) {
+  // GitHub places the webhook action (for example, "opened") on the payload.
   return (context) => context.payload.action === name;
 }

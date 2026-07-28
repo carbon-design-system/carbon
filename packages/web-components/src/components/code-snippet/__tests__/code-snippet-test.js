@@ -289,3 +289,150 @@ describe('cds-code-snippet', function () {
     });
   });
 });
+
+describe('maxCollapsedNumberOfRows / minCollapsedNumberOfRows / maxExpandedNumberOfRows / minExpandedNumberOfRows', () => {
+  const rowHeight = 16;
+
+  it('should reflect default values for the four row attributes', async () => {
+    const el = await fixture(html`
+      <cds-code-snippet type="multi">${multiLong}</cds-code-snippet>
+    `);
+
+    await el.updateComplete;
+
+    expect(el.maxCollapsedNumberOfRows).to.equal(15);
+    expect(el.minCollapsedNumberOfRows).to.equal(3);
+    expect(el.maxExpandedNumberOfRows).to.equal(0);
+    expect(el.minExpandedNumberOfRows).to.equal(16);
+  });
+
+  it('should set maxCollapsedNumberOfRows from attribute', async () => {
+    const el = await fixture(html`
+      <cds-code-snippet type="multi" maxCollapsedNumberOfRows="5">
+        ${multiLong}
+      </cds-code-snippet>
+    `);
+
+    await el.updateComplete;
+    expect(el.maxCollapsedNumberOfRows).to.equal(5);
+  });
+
+  it('should apply maxCollapsedNumberOfRows as max-height on the snippet container when collapsed', async () => {
+    const rows = 5;
+    const el = await fixture(html`
+      <cds-code-snippet type="multi" maxCollapsedNumberOfRows="${rows}">
+        ${multiLong}
+      </cds-code-snippet>
+    `);
+
+    await el.updateComplete;
+
+    const container = el.shadowRoot.querySelector('.cds--snippet-container');
+    expect(container.style.maxHeight).to.equal(`${rows * rowHeight}px`);
+  });
+
+  it('should apply minCollapsedNumberOfRows as min-height on the snippet container when collapsed', async () => {
+    const rows = 3;
+    const el = await fixture(html`
+      <cds-code-snippet type="multi" minCollapsedNumberOfRows="${rows}">
+        ${multiLong}
+      </cds-code-snippet>
+    `);
+
+    await el.updateComplete;
+
+    const container = el.shadowRoot.querySelector('.cds--snippet-container');
+    expect(container.style.minHeight).to.equal(`${rows * rowHeight}px`);
+  });
+
+  it('should apply maxExpandedNumberOfRows as max-height on the snippet container when expanded', async () => {
+    const rows = 20;
+    const el = await fixture(html`
+      <cds-code-snippet
+        type="multi"
+        maxCollapsedNumberOfRows="5"
+        maxExpandedNumberOfRows="${rows}">
+        ${multiLong}
+      </cds-code-snippet>
+    `);
+
+    await el.updateComplete;
+
+    // ResizeObserver never fires with real dimensions in a headless environment,
+    // so _shouldShowMoreLessBtn stays false and the show-more button is not
+    // rendered. Drive the expanded state directly to test the style application.
+    el._shouldShowMoreLessBtn = true;
+    el._expandedCode = true;
+    el.requestUpdate();
+    await el.updateComplete;
+
+    const container = el.shadowRoot.querySelector('.cds--snippet-container');
+    expect(container.style.maxHeight).to.equal(`${rows * rowHeight}px`);
+  });
+
+  it('should apply minExpandedNumberOfRows as min-height on the snippet container when expanded', async () => {
+    const rows = 10;
+    const el = await fixture(html`
+      <cds-code-snippet
+        type="multi"
+        maxCollapsedNumberOfRows="5"
+        minExpandedNumberOfRows="${rows}">
+        ${multiLong}
+      </cds-code-snippet>
+    `);
+
+    await el.updateComplete;
+
+    // ResizeObserver never fires with real dimensions in a headless environment,
+    // so _shouldShowMoreLessBtn stays false and the show-more button is not
+    // rendered. Drive the expanded state directly to test the style application.
+    el._shouldShowMoreLessBtn = true;
+    el._expandedCode = true;
+    el.requestUpdate();
+    await el.updateComplete;
+
+    const container = el.shadowRoot.querySelector('.cds--snippet-container');
+    expect(container.style.minHeight).to.equal(`${rows * rowHeight}px`);
+  });
+
+  it('should not apply max-height when maxExpandedNumberOfRows is 0 (expanded)', async () => {
+    const el = await fixture(html`
+      <cds-code-snippet
+        type="multi"
+        maxCollapsedNumberOfRows="5"
+        maxExpandedNumberOfRows="0">
+        ${multiLong}
+      </cds-code-snippet>
+    `);
+
+    await el.updateComplete;
+
+    // ResizeObserver never fires with real dimensions in a headless environment,
+    // so _shouldShowMoreLessBtn stays false and the show-more button is not
+    // rendered. Drive the expanded state directly to test the style application.
+    el._shouldShowMoreLessBtn = true;
+    el._expandedCode = true;
+    el.requestUpdate();
+    await el.updateComplete;
+
+    const container = el.shadowRoot.querySelector('.cds--snippet-container');
+    expect(container.style.maxHeight).to.equal('');
+  });
+
+  it('should not apply max-height or min-height for non-multi snippet types', async () => {
+    const el = await fixture(html`
+      <cds-code-snippet
+        type="single"
+        maxCollapsedNumberOfRows="5"
+        minCollapsedNumberOfRows="2">
+        ${single}
+      </cds-code-snippet>
+    `);
+
+    await el.updateComplete;
+
+    const container = el.shadowRoot.querySelector('.cds--snippet-container');
+    expect(container.style.maxHeight).to.equal('');
+    expect(container.style.minHeight).to.equal('');
+  });
+});
