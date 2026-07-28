@@ -37,4 +37,3 @@ export const Default = (args) => {
 Default.args = {
   prefix: 'custom',
 };
-
