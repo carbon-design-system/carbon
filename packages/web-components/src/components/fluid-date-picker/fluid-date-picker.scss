@@ -178,10 +178,6 @@ $css--plex: true !default;
   }
 }
 
-:host(#{$prefix}-fluid-date-picker[range]) {
-  display: flex;
-}
-
 :host(#{$prefix}-fluid-date-picker-input[kind='to']) {
   border-inline-start: 1px solid $border-strong;
 }
@@ -266,10 +262,6 @@ $css--plex: true !default;
   @extend .#{$prefix}--date-picker--fluid__skeleton;
 
   display: block;
-}
-
-:host(#{$prefix}-fluid-date-picker-skeleton[range]) {
-  @extend .#{$prefix}--date-picker--fluid__skeleton--range;
 }
 
 .#{$prefix}--skeleton {

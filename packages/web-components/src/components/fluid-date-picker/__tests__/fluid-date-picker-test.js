@@ -234,3 +234,92 @@ describe('cds-fluid-date-picker', () => {
     });
   });
 });
+
+describe('cds-fluid-date-picker-skeleton', () => {
+  it('should render with default type (single)', async () => {
+    const el = await fixture(html`
+      <cds-fluid-date-picker-skeleton></cds-fluid-date-picker-skeleton>
+    `);
+    await el.updateComplete;
+
+    expect(el).to.exist;
+    expect(el.datePickerType).to.equal('single');
+    expect(el.getAttribute('date-picker-type')).to.equal('single');
+  });
+
+  it('should render a single container without range class for single type', async () => {
+    const el = await fixture(html`
+      <cds-fluid-date-picker-skeleton
+        date-picker-type="single"></cds-fluid-date-picker-skeleton>
+    `);
+    await el.updateComplete;
+
+    const wrapper = el.shadowRoot?.querySelector(
+      '.cds--date-picker--fluid__skeleton'
+    );
+    expect(wrapper).to.exist;
+    expect(
+      wrapper?.classList.contains('cds--date-picker--fluid__skeleton--range')
+    ).to.be.false;
+
+    const containers = el.shadowRoot?.querySelectorAll(
+      '.cds--date-picker--fluid__skeleton--container'
+    );
+    expect(containers?.length).to.equal(1);
+  });
+
+  it('should show the calendar icon for single type', async () => {
+    const el = await fixture(html`
+      <cds-fluid-date-picker-skeleton
+        date-picker-type="single"></cds-fluid-date-picker-skeleton>
+    `);
+    await el.updateComplete;
+
+    const icon = el.shadowRoot?.querySelector('.cds--date-picker__icon');
+    expect(icon).to.exist;
+  });
+
+  it('should not show the calendar icon for simple type', async () => {
+    const el = await fixture(html`
+      <cds-fluid-date-picker-skeleton
+        date-picker-type="simple"></cds-fluid-date-picker-skeleton>
+    `);
+    await el.updateComplete;
+
+    const icon = el.shadowRoot?.querySelector('.cds--date-picker__icon');
+    expect(icon).not.to.exist;
+  });
+
+  it('should render two containers with the range class for range type', async () => {
+    const el = await fixture(html`
+      <cds-fluid-date-picker-skeleton
+        date-picker-type="range"></cds-fluid-date-picker-skeleton>
+    `);
+    await el.updateComplete;
+
+    expect(el.getAttribute('date-picker-type')).to.equal('range');
+
+    const wrapper = el.shadowRoot?.querySelector(
+      '.cds--date-picker--fluid__skeleton'
+    );
+    expect(
+      wrapper?.classList.contains('cds--date-picker--fluid__skeleton--range')
+    ).to.be.true;
+
+    const containers = el.shadowRoot?.querySelectorAll(
+      '.cds--date-picker--fluid__skeleton--container'
+    );
+    expect(containers?.length).to.equal(2);
+  });
+
+  it('should show calendar icons in both containers for range type', async () => {
+    const el = await fixture(html`
+      <cds-fluid-date-picker-skeleton
+        date-picker-type="range"></cds-fluid-date-picker-skeleton>
+    `);
+    await el.updateComplete;
+
+    const icons = el.shadowRoot?.querySelectorAll('.cds--date-picker__icon');
+    expect(icons?.length).to.equal(2);
+  });
+});
