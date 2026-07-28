@@ -795,6 +795,37 @@ export const upgrades = [
         },
       },
       {
+        name: 'ibm-products-update-tearsheet',
+        description:
+          'Updates Tearsheet component to use preview__Tearsheet with composable API',
+        migrate: async (options) => {
+          const transform = path.join(
+            TRANSFORM_DIR,
+            'ibm-products-update-tearsheet.js'
+          );
+          const paths =
+            Array.isArray(options.paths) && options.paths.length > 0
+              ? options.paths
+              : await glob(['**/*.js', '**/*.jsx', '**/*.ts', '**/*.tsx'], {
+                  cwd: options.workspaceDir,
+                  ignore: [
+                    '**/es/**',
+                    '**/lib/**',
+                    '**/umd/**',
+                    '**/node_modules/**',
+                    '**/storybook-static/**',
+                  ],
+                });
+
+          await runCodemod(options, {
+            dry: !options.write,
+            transform,
+            paths,
+            verbose: options.verbose,
+          });
+        },
+      },
+      {
         name: 'rename-carbon-imports-to-preview',
         description: 'Update imports after PDLC status integration',
         migrate: async (options) => {
