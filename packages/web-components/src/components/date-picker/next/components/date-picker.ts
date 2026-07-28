@@ -583,12 +583,6 @@ class CDSDatePicker extends HostListenerMixin(FormMixin(LitElement)) {
   disabled = false;
 
   /**
-   * The date range that a user can pick in calendar dropdown.
-   */
-  @property({ attribute: 'enabled-range' })
-  enabledRange!: string;
-
-  /**
    * The maximum date that a user can start picking from.
    */
   @property({ attribute: 'max-date' })
