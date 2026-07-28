@@ -49,7 +49,7 @@ const hasOwn = <T extends object>(obj: T, key: PropertyKey): key is keyof T =>
  *
  * @attr {boolean} enable-v12-release - Enable the features and functionality
  * for the v12 Release. Enabling this turns on every `enable-v12-*` flag at
- * once.
+ * once, as well as `enable-focus-wrap-without-sentinels`.
  * @attr {boolean} enable-v12-tile-default-icons - Enable rendering of default
  * icons in the tile components. Becomes the default behavior in v12.
  * @attr {boolean} enable-v12-tile-radio-icons - Enable rendering of radio icons

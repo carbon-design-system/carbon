@@ -18,7 +18,7 @@ import {
   StructuredListCell,
 } from './';
 import { CheckmarkFilled } from '@carbon/icons-react';
-const prefix = 'cds'; // TODO: remove
+const prefix = 'cds';
 import StructuredListSkeleton from './StructuredList.Skeleton';
 
 export default {

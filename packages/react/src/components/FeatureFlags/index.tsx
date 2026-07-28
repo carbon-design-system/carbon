@@ -34,7 +34,8 @@ export interface FeatureFlagsProps {
   /**
    * Enable the features and functionality for the v12 Release.
    *
-   * Enabling this turns on every `enableV12*` flag at once.
+   * Enabling this turns on every `enableV12*` flag at once, as well as
+   * `enableFocusWrapWithoutSentinels`.
    */
   enableV12Release?: boolean;
 
