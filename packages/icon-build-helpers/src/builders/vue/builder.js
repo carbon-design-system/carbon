@@ -74,11 +74,11 @@ async function builder(metadata, { output }) {
   for (const { directory, format } of bundles) {
     await tsdown({
       clean: false,
+      dts: false,
+      entry: input,
       deps: {
         neverBundle: external,
       },
-      dts: false,
-      entry: input,
       failOnWarn: true,
       format: format === 'commonjs' ? 'cjs' : 'esm',
       logLevel: 'warn',
@@ -103,12 +103,12 @@ async function builder(metadata, { output }) {
 
   await tsdown({
     clean: false,
-    deps: {
-      neverBundle: external,
-    },
     dts: false,
     entry: {
       index: 'index.js',
+    },
+    deps: {
+      neverBundle: external,
     },
     failOnWarn: true,
     format: 'iife',

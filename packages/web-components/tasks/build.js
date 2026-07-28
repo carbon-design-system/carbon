@@ -69,15 +69,15 @@ async function build() {
     await tsdown({
       banner,
       clean: false,
-      deps: {
-        neverBundle: external,
-      },
       // use tsc for declaration emit instead of tsdown's dts plugin.
       // tsdown/rolldown-plugin-dts does not correctly handle mixin patterns
       // (e.g. HostListenerMixin) — it strips the generic base class type,
       // breaking downstream consumers
       dts: false,
       entry: format.inputs.map((input) => path.resolve(packageRoot, input)),
+      deps: {
+        neverBundle: external,
+      },
       failOnWarn: true,
       format: format.type,
       inputOptions: withInputCompatibilityAndPlugins,

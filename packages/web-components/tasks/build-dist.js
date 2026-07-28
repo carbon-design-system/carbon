@@ -58,13 +58,13 @@ async function buildDist() {
 
   await tsdown({
     clean: false,
-    deps: {
-      alwaysBundle: [/.*/],
-      neverBundle: [],
-      onlyBundle: false,
-    },
     dts: false,
     entry,
+    deps: {
+      neverBundle: [],
+      onlyBundle: false,
+      alwaysBundle: [/.*/],
+    },
     failOnWarn: true,
     format: 'esm',
     inputOptions: withInputCompatibilityAndPlugins({

@@ -2,12 +2,12 @@ import { defineConfig } from 'tsdown';
 
 export default defineConfig({
   clean: false,
-  deps: {
-    neverBundle: ['jscodeshift'],
-    onlyBundle: false,
-  },
   dts: false,
   entry: ['src/cli.js'],
+  deps: {
+    onlyBundle: false,
+    neverBundle: ['jscodeshift'],
+  },
   failOnWarn: true,
   logLevel: 'warn',
   platform: 'node',

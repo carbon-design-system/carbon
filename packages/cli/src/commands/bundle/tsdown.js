@@ -48,13 +48,13 @@ export default async function bundle(entrypoint, options) {
   for (const { format, directory } of outputFolders) {
     await build({
       clean: false,
-      deps: {
-        neverBundle: Object.keys(dependencies),
-      },
       // Emit declarations in a separate pass so we can mirror the same `.d.ts`
       // tree to `es`, `lib`, and `umd`.
       dts: false,
       entry: [entrypoint],
+      deps: {
+        neverBundle: Object.keys(dependencies),
+      },
       failOnWarn: true,
       format,
       globalName: format === 'umd' ? name : undefined,

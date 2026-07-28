@@ -180,11 +180,11 @@ async function builder(metadata, { output }) {
   for (const target of targets) {
     await tsdown({
       clean: false,
+      dts: false,
+      entry: input,
       deps: {
         neverBundle: external,
       },
-      dts: false,
-      entry: input,
       failOnWarn: true,
       format: target.format === 'commonjs' ? 'cjs' : 'esm',
       logLevel: 'warn',
