@@ -18,6 +18,8 @@ import '../ai-label';
 import '../icon-button';
 import { INPUT_SIZE } from './text-input';
 import { withLayers } from '../../../.storybook/decorators/with-layers';
+import '../textarea'; // remove before merging
+import '../password-input'; // remove before merging
 
 const content = html`
   <div slot="body-text">
@@ -317,6 +319,50 @@ export const WithLayer = {
     </div>
   `,
 };
+
+// remove before merging
+
+/* eslint-disable */
+
+const eventValue = (e: Event) => (e.target as HTMLInputElement).value;
+export const test = {
+  render: () => {
+    return html`
+      <cds-text-input
+        label="cds-text-input"
+        placeholder="placeholder text"
+        @input="${(e: Event) =>
+          console.log('text-input: input fired', eventValue(e))}"
+        @change="${(e: Event) =>
+          console.log(
+            'text-input: change fired',
+            eventValue(e)
+          )}"></cds-text-input>
+
+      <br />
+      <cds-password-input
+        label="cds-password-input"
+        placeholder="placeholder text"
+        @input="${(e: Event) =>
+          console.log('password-input: input fired', eventValue(e))}"
+        @change="${(e: Event) =>
+          console.log(
+            'password-input: change fired',
+            eventValue(e)
+          )}"></cds-password-input>
+
+      <br />
+      <cds-textarea
+        label="cds-textarea"
+        placeholder="placeholder text"
+        @input="${(e: Event) =>
+          console.log('textarea: input fired', eventValue(e))}"
+        @change="${(e: Event) =>
+          console.log('textarea: change fired', eventValue(e))}"></cds-textarea>
+    `;
+  },
+};
+//
 
 export default {
   title: 'Components/Text Input',
