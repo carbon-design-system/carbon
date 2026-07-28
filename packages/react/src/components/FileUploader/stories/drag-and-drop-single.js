@@ -87,6 +87,8 @@ const ExampleDropContainerApp = (props) => {
   };
 
   const onAddFilesButton = (event, { addedFiles }) => {
+    // eslint-disable-next-line react/prop-types
+    props.onAddFiles?.(event, { addedFiles });
     const file = addedFiles;
 
     const newFile = [
