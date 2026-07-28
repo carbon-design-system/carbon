@@ -28,11 +28,15 @@ import { withLayers } from '../../../.storybook/decorators/with-layers';
 const kinds = ['on-page', 'disclosed'];
 const sizes = ['sm', 'md', 'lg', 'xl'];
 
-const defaultArgs = {
+const sharedArgs = {
   label: 'List title',
   kind: 'on-page',
-  size: 'lg',
   isInset: false,
+};
+
+const defaultArgs = {
+  ...sharedArgs,
+  size: 'lg',
 };
 
 const controls = {
@@ -57,9 +61,36 @@ const controls = {
   },
 };
 
+const sharedParameters = {
+  controls: {
+    include: Object.keys(controls),
+  },
+};
+
+const customLabelParameters = {
+  controls: {
+    include: Object.keys(controls).filter((name) => name !== 'label'),
+  },
+};
+
+const renderContainedList = (
+  { id, label, kind, size, isInset },
+  content
+) => html`
+  <cds-contained-list
+    id=${ifDefined(id)}
+    label=${ifDefined(label)}
+    kind=${ifDefined(kind)}
+    size=${ifDefined(size)}
+    ?is-inset=${isInset}>
+    ${content}
+  </cds-contained-list>
+`;
+
 export const Default = {
   args: defaultArgs,
   argTypes: controls,
+  parameters: sharedParameters,
   render: ({ label, kind, size, isInset }) => html`
     ${Array.from({ length: 4 }).map(
       (_, i) => html`
@@ -82,77 +113,109 @@ export const Default = {
 };
 
 export const Disclosed = {
-  render: () => html`
-    <cds-contained-list label="List title" kind="disclosed">
-      <cds-contained-list-item>List item</cds-contained-list-item>
-      <cds-contained-list-item>List item</cds-contained-list-item>
-      <cds-contained-list-item>List item</cds-contained-list-item>
-      <cds-contained-list-item>List item</cds-contained-list-item>
-    </cds-contained-list>
-    <cds-contained-list label="List title" kind="disclosed">
-      <cds-contained-list-item>List item</cds-contained-list-item>
-      <cds-contained-list-item>List item</cds-contained-list-item>
-      <cds-contained-list-item>List item</cds-contained-list-item>
-      <cds-contained-list-item>List item</cds-contained-list-item>
-    </cds-contained-list>
+  args: {
+    ...sharedArgs,
+    kind: 'disclosed',
+  },
+  argTypes: {
+    ...controls,
+    kind: {
+      ...controls.kind,
+      table: { readonly: true },
+    },
+  },
+  parameters: sharedParameters,
+  render: (args) => html`
+    ${renderContainedList(
+      args,
+      html`
+        <cds-contained-list-item>List item</cds-contained-list-item>
+        <cds-contained-list-item>List item</cds-contained-list-item>
+        <cds-contained-list-item>List item</cds-contained-list-item>
+        <cds-contained-list-item>List item</cds-contained-list-item>
+      `
+    )}
+    ${renderContainedList(
+      args,
+      html`
+        <cds-contained-list-item>List item</cds-contained-list-item>
+        <cds-contained-list-item>List item</cds-contained-list-item>
+        <cds-contained-list-item>List item</cds-contained-list-item>
+        <cds-contained-list-item>List item</cds-contained-list-item>
+      `
+    )}
   `,
 };
 
 export const WithInteractiveItems = {
-  render: () => html`
-    <cds-contained-list label="List title" kind="on-page">
-      <cds-contained-list-item clickable>List item</cds-contained-list-item>
-      <cds-contained-list-item clickable disabled>
-        List item
-      </cds-contained-list-item>
-      <cds-contained-list-item clickable>List item</cds-contained-list-item>
-      <cds-contained-list-item clickable>List item</cds-contained-list-item>
-    </cds-contained-list>
-  `,
+  args: sharedArgs,
+  argTypes: controls,
+  parameters: sharedParameters,
+  render: (args) =>
+    renderContainedList(
+      args,
+      html`
+        <cds-contained-list-item clickable>List item</cds-contained-list-item>
+        <cds-contained-list-item clickable disabled>
+          List item
+        </cds-contained-list-item>
+        <cds-contained-list-item clickable>List item</cds-contained-list-item>
+        <cds-contained-list-item clickable>List item</cds-contained-list-item>
+      `
+    ),
 };
 
 export const WithActions = {
-  render: () => html`
-    <cds-contained-list label="List title" kind="on-page">
-      <cds-contained-list-item>
-        List item
-        <cds-icon-button slot="action" kind="ghost" size="lg">
-          ${iconLoader(Close16, { slot: 'icon' })}
-          <span slot="tooltip-content">Dismiss</span>
-        </cds-icon-button>
-      </cds-contained-list-item>
-      <cds-contained-list-item disabled>
-        List item
-        <cds-icon-button slot="action" kind="ghost" size="lg">
-          ${iconLoader(Close16, { slot: 'icon' })}
-          <span slot="tooltip-content">Dismiss</span>
-        </cds-icon-button>
-      </cds-contained-list-item>
-      <cds-contained-list-item>
-        List item
-        <cds-icon-button slot="action" kind="ghost" size="lg">
-          ${iconLoader(Close16, { slot: 'icon' })}
-          <span slot="tooltip-content">Dismiss</span>
-        </cds-icon-button>
-      </cds-contained-list-item>
-      <cds-contained-list-item>
-        List item
-        <cds-icon-button slot="action" kind="ghost" size="lg">
-          ${iconLoader(Close16, { slot: 'icon' })}
-          <span slot="tooltip-content">Dismiss</span>
-        </cds-icon-button>
-      </cds-contained-list-item>
-    </cds-contained-list>
-  `,
+  args: sharedArgs,
+  argTypes: controls,
+  parameters: sharedParameters,
+  render: (args) =>
+    renderContainedList(
+      args,
+      html`
+        <cds-contained-list-item>
+          List item
+          <cds-icon-button slot="action" kind="ghost" size="lg">
+            ${iconLoader(Close16, { slot: 'icon' })}
+            <span slot="tooltip-content">Dismiss</span>
+          </cds-icon-button>
+        </cds-contained-list-item>
+        <cds-contained-list-item disabled>
+          List item
+          <cds-icon-button slot="action" kind="ghost" size="lg">
+            ${iconLoader(Close16, { slot: 'icon' })}
+            <span slot="tooltip-content">Dismiss</span>
+          </cds-icon-button>
+        </cds-contained-list-item>
+        <cds-contained-list-item>
+          List item
+          <cds-icon-button slot="action" kind="ghost" size="lg">
+            ${iconLoader(Close16, { slot: 'icon' })}
+            <span slot="tooltip-content">Dismiss</span>
+          </cds-icon-button>
+        </cds-contained-list-item>
+        <cds-contained-list-item>
+          List item
+          <cds-icon-button slot="action" kind="ghost" size="lg">
+            ${iconLoader(Close16, { slot: 'icon' })}
+            <span slot="tooltip-content">Dismiss</span>
+          </cds-icon-button>
+        </cds-contained-list-item>
+      `
+    ),
 };
 
 export const WithExpandableSearch = {
-  render: () => {
+  args: sharedArgs,
+  argTypes: controls,
+  parameters: sharedParameters,
+  render: (args) => {
     const listId = 'list-expandable-search';
     const items = ['List item 1', 'List item 2', 'List item 3', 'List item 4'];
 
-    return html`
-      <cds-contained-list id="${listId}" label="List title" kind="on-page">
+    return renderContainedList(
+      { ...args, id: listId },
+      html`
         <cds-search
           slot="action"
           expandable
@@ -175,18 +238,22 @@ export const WithExpandableSearch = {
             <cds-contained-list-item>${item}</cds-contained-list-item>
           `
         )}
-      </cds-contained-list>
-    `;
+      `
+    );
   },
 };
 
 export const WithPersistentSearch = {
-  render: () => {
+  args: sharedArgs,
+  argTypes: controls,
+  parameters: sharedParameters,
+  render: (args) => {
     const listId = 'list-persistent-search';
     const items = ['List item 1', 'List item 2', 'List item 3', 'List item 4'];
 
-    return html`
-      <cds-contained-list id="${listId}" label="List title" kind="on-page">
+    return renderContainedList(
+      { ...args, id: listId },
+      html`
         <cds-search
           placeholder="Filter"
           label-text="Filter search"
@@ -207,159 +274,189 @@ export const WithPersistentSearch = {
             <cds-contained-list-item>${item}</cds-contained-list-item>
           `
         )}
-      </cds-contained-list>
-    `;
+      `
+    );
   },
 };
 
 export const WithInteractiveItemsAndActions = {
-  render: () => html`
-    <cds-contained-list label="List title" kind="on-page">
-      <cds-contained-list-item clickable>
-        List item
-        <cds-icon-button slot="action" kind="ghost" size="lg">
-          ${iconLoader(Close16, { slot: 'icon' })}
-          <span slot="tooltip-content">Dismiss</span>
-        </cds-icon-button>
-      </cds-contained-list-item>
-      <cds-contained-list-item clickable>
-        List item
-        <cds-icon-button slot="action" kind="ghost" size="lg">
-          ${iconLoader(Close16, { slot: 'icon' })}
-          <span slot="tooltip-content">Dismiss</span>
-        </cds-icon-button>
-      </cds-contained-list-item>
-      <cds-contained-list-item clickable>
-        List item
-        <cds-icon-button slot="action" kind="ghost" size="lg">
-          ${iconLoader(Close16, { slot: 'icon' })}
-          <span slot="tooltip-content">Dismiss</span>
-        </cds-icon-button>
-      </cds-contained-list-item>
-      <cds-contained-list-item clickable>
-        List item
-        <cds-icon-button slot="action" kind="ghost" size="lg">
-          ${iconLoader(Close16, { slot: 'icon' })}
-          <span slot="tooltip-content">Dismiss</span>
-        </cds-icon-button>
-      </cds-contained-list-item>
-    </cds-contained-list>
-  `,
+  args: sharedArgs,
+  argTypes: controls,
+  parameters: sharedParameters,
+  render: (args) =>
+    renderContainedList(
+      args,
+      html`
+        <cds-contained-list-item clickable>
+          List item
+          <cds-icon-button slot="action" kind="ghost" size="lg">
+            ${iconLoader(Close16, { slot: 'icon' })}
+            <span slot="tooltip-content">Dismiss</span>
+          </cds-icon-button>
+        </cds-contained-list-item>
+        <cds-contained-list-item clickable>
+          List item
+          <cds-icon-button slot="action" kind="ghost" size="lg">
+            ${iconLoader(Close16, { slot: 'icon' })}
+            <span slot="tooltip-content">Dismiss</span>
+          </cds-icon-button>
+        </cds-contained-list-item>
+        <cds-contained-list-item clickable>
+          List item
+          <cds-icon-button slot="action" kind="ghost" size="lg">
+            ${iconLoader(Close16, { slot: 'icon' })}
+            <span slot="tooltip-content">Dismiss</span>
+          </cds-icon-button>
+        </cds-contained-list-item>
+        <cds-contained-list-item clickable>
+          List item
+          <cds-icon-button slot="action" kind="ghost" size="lg">
+            ${iconLoader(Close16, { slot: 'icon' })}
+            <span slot="tooltip-content">Dismiss</span>
+          </cds-icon-button>
+        </cds-contained-list-item>
+      `
+    ),
 };
 
 export const WithListTitleDecorators = {
-  render: () => html`
-    <cds-contained-list kind="on-page">
-      <div
-        slot="label"
-        style="display: flex; align-items: center; justify-content: space-between;">
-        <span>List title</span>
-        <cds-tag size="sm">4</cds-tag>
-      </div>
-      <cds-contained-list-item>List item</cds-contained-list-item>
-      <cds-contained-list-item>List item</cds-contained-list-item>
-      <cds-contained-list-item>List item</cds-contained-list-item>
-      <cds-contained-list-item>List item</cds-contained-list-item>
-    </cds-contained-list>
-  `,
+  args: sharedArgs,
+  argTypes: controls,
+  parameters: customLabelParameters,
+  render: (args) =>
+    renderContainedList(
+      { ...args, label: undefined },
+      html`
+        <div
+          slot="label"
+          style="display: flex; align-items: center; justify-content: space-between;">
+          <span>List title</span>
+          <cds-tag size="sm">4</cds-tag>
+        </div>
+        <cds-contained-list-item>List item</cds-contained-list-item>
+        <cds-contained-list-item>List item</cds-contained-list-item>
+        <cds-contained-list-item>List item</cds-contained-list-item>
+        <cds-contained-list-item>List item</cds-contained-list-item>
+      `
+    ),
 };
 
 export const WithIcons = {
-  render: () => html`
-    <cds-contained-list label="List title" kind="on-page">
-      <cds-contained-list-item>
-        ${iconLoader(Apple16, { slot: 'icon' })} List item
-      </cds-contained-list-item>
-      <cds-contained-list-item>
-        ${iconLoader(Wheat16, { slot: 'icon' })} List item
-      </cds-contained-list-item>
-      <cds-contained-list-item>
-        ${iconLoader(Strawberry16, { slot: 'icon' })} List item
-      </cds-contained-list-item>
-      <cds-contained-list-item>
-        ${iconLoader(Fish16, { slot: 'icon' })} List item
-      </cds-contained-list-item>
-    </cds-contained-list>
-  `,
+  args: sharedArgs,
+  argTypes: controls,
+  parameters: sharedParameters,
+  render: (args) =>
+    renderContainedList(
+      args,
+      html`
+        <cds-contained-list-item>
+          ${iconLoader(Apple16, { slot: 'icon' })} List item
+        </cds-contained-list-item>
+        <cds-contained-list-item>
+          ${iconLoader(Wheat16, { slot: 'icon' })} List item
+        </cds-contained-list-item>
+        <cds-contained-list-item>
+          ${iconLoader(Strawberry16, { slot: 'icon' })} List item
+        </cds-contained-list-item>
+        <cds-contained-list-item>
+          ${iconLoader(Fish16, { slot: 'icon' })} List item
+        </cds-contained-list-item>
+      `
+    ),
 };
 
 export const _WithLayer = {
   decorators: [withLayers],
   parameters: {
     layout: 'fullscreen',
+    ...sharedParameters,
   },
-  render: () => html`
-    <cds-contained-list label="List title" kind="on-page">
-      <cds-contained-list-item>List item</cds-contained-list-item>
-      <cds-contained-list-item>List item</cds-contained-list-item>
-    </cds-contained-list>
-  `,
+  args: sharedArgs,
+  argTypes: controls,
+  render: (args) =>
+    renderContainedList(
+      args,
+      html`
+        <cds-contained-list-item>List item</cds-contained-list-item>
+        <cds-contained-list-item>List item</cds-contained-list-item>
+      `
+    ),
 };
 
 export const UsageExamples = {
-  render: () => html`
-    <cds-contained-list label="List title">
-      <cds-icon-button slot="action" kind="primary" align="left" size="lg">
-        ${iconLoader(Add16, { slot: 'icon' })}
-        <span slot="tooltip-content">Add</span>
-      </cds-icon-button>
-      ${[...Array(3)].map(
-        () => html`
-          <cds-contained-list-item>
-            List item
-            <cds-overflow-menu slot="action" size="lg">
-              ${iconLoader(OverflowMenuVertical16, {
-                class: `${prefix}--overflow-menu__icon`,
-                slot: 'icon',
-              })}
-              <span slot="tooltip-content">Options</span>
-              <cds-overflow-menu-body flipped>
-                <cds-overflow-menu-item>View details</cds-overflow-menu-item>
-                <cds-overflow-menu-item>Edit</cds-overflow-menu-item>
-                <cds-overflow-menu-item danger>
-                  <div class="${prefix}--overflow-menu-item__divider"></div>
-                  Remove
-                </cds-overflow-menu-item>
-              </cds-overflow-menu-body>
-            </cds-overflow-menu>
-          </cds-contained-list-item>
-        `
-      )}
-    </cds-contained-list>
-
-    <cds-contained-list label="List title">
-      <cds-icon-button slot="action" kind="ghost" size="lg" align="left">
-        ${iconLoader(Add16, { slot: 'icon' })}
-        <span slot="tooltip-content">Add</span>
-      </cds-icon-button>
-      ${[...Array(3)].map(
-        () => html`
-          <cds-contained-list-item>
-            <div>
-              List item<br />
-              <cds-contained-list-description>
-                Description text
-              </cds-contained-list-description>
-            </div>
-          </cds-contained-list-item>
-        `
-      )}
-    </cds-contained-list>
-
-    <cds-contained-list label="List title">
-      ${[...Array(3)].map(
-        () => html`
-          <cds-contained-list-item>
-            <div
-              style="display: grid; grid-template-columns: repeat(3, 1fr); column-gap: 1rem;">
-              <span>List item</span>
-              <span>List item details</span>
-              <span>List item details</span>
-            </div>
-          </cds-contained-list-item>
-        `
-      )}
-    </cds-contained-list>
+  args: sharedArgs,
+  argTypes: controls,
+  parameters: sharedParameters,
+  render: (args) => html`
+    ${renderContainedList(
+      args,
+      html`
+        <cds-icon-button slot="action" kind="primary" align="left" size="lg">
+          ${iconLoader(Add16, { slot: 'icon' })}
+          <span slot="tooltip-content">Add</span>
+        </cds-icon-button>
+        ${[...Array(3)].map(
+          () => html`
+            <cds-contained-list-item>
+              List item
+              <cds-overflow-menu slot="action" size="lg">
+                ${iconLoader(OverflowMenuVertical16, {
+                  class: `${prefix}--overflow-menu__icon`,
+                  slot: 'icon',
+                })}
+                <span slot="tooltip-content">Options</span>
+                <cds-overflow-menu-body flipped>
+                  <cds-overflow-menu-item>View details</cds-overflow-menu-item>
+                  <cds-overflow-menu-item>Edit</cds-overflow-menu-item>
+                  <cds-overflow-menu-item danger>
+                    <div class="${prefix}--overflow-menu-item__divider"></div>
+                    Remove
+                  </cds-overflow-menu-item>
+                </cds-overflow-menu-body>
+              </cds-overflow-menu>
+            </cds-contained-list-item>
+          `
+        )}
+      `
+    )}
+    ${renderContainedList(
+      args,
+      html`
+        <cds-icon-button slot="action" kind="ghost" size="lg" align="left">
+          ${iconLoader(Add16, { slot: 'icon' })}
+          <span slot="tooltip-content">Add</span>
+        </cds-icon-button>
+        ${[...Array(3)].map(
+          () => html`
+            <cds-contained-list-item>
+              <div>
+                List item<br />
+                <cds-contained-list-description>
+                  Description text
+                </cds-contained-list-description>
+              </div>
+            </cds-contained-list-item>
+          `
+        )}
+      `
+    )}
+    ${renderContainedList(
+      args,
+      html`
+        ${[...Array(3)].map(
+          () => html`
+            <cds-contained-list-item>
+              <div
+                style="display: grid; grid-template-columns: repeat(3, 1fr); column-gap: 1rem;">
+                <span>List item</span>
+                <span>List item details</span>
+                <span>List item details</span>
+              </div>
+            </cds-contained-list-item>
+          `
+        )}
+      `
+    )}
   `,
 };
 
