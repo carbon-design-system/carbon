@@ -41,11 +41,15 @@ const tooltipAlignments = {
 
 const args = {
   align: ICON_BUTTON_TOOLTIP_ALIGNMENT.BOTTOM,
+  autoalign: false,
+  closeOnActivation: true,
   defaultOpen: true,
   disabled: false,
+  enterDelayMs: 100,
   isSelected: false,
   kind: BUTTON_KIND.PRIMARY,
   label: 'Custom label',
+  leaveDelayMs: 100,
   size: ICON_BUTTON_SIZE.MEDIUM,
 };
 
@@ -54,6 +58,10 @@ const argTypes = {
     control: 'select',
     description: 'Specify how the trigger should align with the tooltip.',
     options: tooltipAlignments,
+  },
+  autoalign: {
+    control: 'boolean',
+    description: 'Specify whether auto alignment should be applied.',
   },
   closeOnActivation: {
     control: 'boolean',
@@ -106,6 +114,7 @@ export const Default = {
   argTypes,
   render: ({
     align,
+    autoalign,
     closeOnActivation,
     defaultOpen,
     disabled,
@@ -119,7 +128,8 @@ export const Default = {
     return html`
       <cds-icon-button
         align=${align}
-        ?close-on-activation=${closeOnActivation}
+        ?autoalign=${autoalign}
+        .closeOnActivation=${closeOnActivation}
         ?defaultOpen=${defaultOpen}
         ?disabled=${disabled}
         enter-delay-ms=${enterDelayMs}
@@ -137,25 +147,36 @@ export const Default = {
 export const withBadgeIndicator = {
   argTypes: {
     badgeCount: {
-      control: 'number',
+      control: {
+        type: 'number',
+        min: 0,
+      },
       description:
         'The count prop for "cds-badge-indicator" when slotted into the button',
     },
-    ...argTypes,
+    disabled: argTypes.disabled,
+    href: {
+      control: 'text',
+      description:
+        'Optionally specify a URL for the Icon Button to render as a link.',
+    },
+    label: argTypes.label,
   },
   args: {
     badgeCount: 4,
-    ...args,
+    disabled: false,
+    href: 'https://www.example.com',
+    label: 'Notifications',
   },
-  render: ({ badgeCount, disabled }) => {
+  render: ({ badgeCount, disabled, href, label }) => {
     return html`
       <cds-icon-button
         kind="ghost"
         size="lg"
-        href="https://www.example.com"
+        href=${href}
         ?disabled=${disabled}>
         ${iconLoader(Notification16, { slot: 'icon' })}
-        <span slot="tooltip-content">label</span>
+        <span slot="tooltip-content">${label}</span>
         ${badgeCount > 0
           ? html` <cds-badge-indicator
               count=${badgeCount}></cds-badge-indicator>`

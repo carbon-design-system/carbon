@@ -42,7 +42,7 @@ export default {
   parameters: {
     controls: {
       hideNoControlsWarning: true,
-      exclude: ['badgeCount'],
+      exclude: ['children'],
     },
     docs: {
       page: mdx,
@@ -65,10 +65,18 @@ export const Default = (args) => {
 
 Default.args = {
   align: 'bottom',
+  autoAlign: false,
+  closeOnActivation: true,
   defaultOpen: true,
   disabled: false,
+  dropShadow: false,
+  enterDelayMs: 100,
+  highContrast: true,
+  isSelected: false,
   label: 'Custom label',
   kind: 'primary',
+  leaveDelayMs: 100,
+  size: 'md',
 };
 
 Default.argTypes = {
@@ -88,7 +96,43 @@ Default.argTypes = {
       category: 'Deprecated',
     },
   },
+  autoAlign: {
+    control: {
+      type: 'boolean',
+    },
+  },
+  closeOnActivation: {
+    control: {
+      type: 'boolean',
+    },
+  },
+  defaultOpen: {
+    control: {
+      type: 'boolean',
+    },
+  },
   disabled: {
+    control: {
+      type: 'boolean',
+    },
+  },
+  dropShadow: {
+    control: {
+      type: 'boolean',
+    },
+  },
+  enterDelayMs: {
+    control: {
+      type: 'number',
+      min: 0,
+    },
+  },
+  highContrast: {
+    control: {
+      type: 'boolean',
+    },
+  },
+  isSelected: {
     control: {
       type: 'boolean',
     },
@@ -103,6 +147,24 @@ Default.argTypes = {
       type: 'select',
     },
     options: ['primary', 'secondary', 'ghost', 'tertiary'],
+  },
+  leaveDelayMs: {
+    control: {
+      type: 'number',
+      min: 0,
+    },
+  },
+  size: {
+    control: {
+      type: 'select',
+    },
+    options: ['xs', 'sm', 'md', 'lg'],
+  },
+};
+
+Default.parameters = {
+  controls: {
+    exclude: ['badgeCount', 'children'],
   },
 };
 
@@ -123,9 +185,29 @@ export const withBadgeIndicator = (args) => {
 
 withBadgeIndicator.args = {
   badgeCount: 4,
+  disabled: false,
+  label: 'Notifications',
+};
+withBadgeIndicator.argTypes = {
+  badgeCount: {
+    control: {
+      type: 'number',
+      min: 0,
+    },
+  },
+  disabled: {
+    control: {
+      type: 'boolean',
+    },
+  },
+  label: {
+    control: {
+      type: 'text',
+    },
+  },
 };
 withBadgeIndicator.parameters = {
   controls: {
-    exclude: ['size', 'kind'],
+    include: ['badgeCount', 'disabled', 'label'],
   },
 };
