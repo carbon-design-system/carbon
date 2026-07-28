@@ -24,20 +24,26 @@ export default {
 };
 
 export const Default = (args) => {
-  return <Loading className={'some-class'} {...args} />;
+  return <Loading {...args} />;
 };
 
 Default.args = {
   active: true,
+  className: 'some-class',
   withOverlay: false,
   small: false,
-  description: 'Loading',
+  description: 'Loading account settings',
 };
 
 Default.argTypes = {
   active: {
     control: {
       type: 'boolean',
+    },
+  },
+  className: {
+    control: {
+      type: 'text',
     },
   },
   withOverlay: {
