@@ -47,8 +47,12 @@ const ToggleTip = (
   </>
 );
 
-export const Skeleton = () => (
-  <div style={{ width: '300px' }}>
+const widthArgType = {
+  control: { type: 'range', min: 300, max: 800, step: 50 },
+};
+
+export const Skeleton = ({ defaultWidth }) => (
+  <div style={{ width: defaultWidth }}>
     <FluidTimePickerSkeleton />
     <br />
     <br />
@@ -56,10 +60,14 @@ export const Skeleton = () => (
   </div>
 );
 
-export const Default = (args) => {
+Skeleton.args = { defaultWidth: 300 };
+Skeleton.argTypes = { defaultWidth: widthArgType };
+Skeleton.parameters = { controls: { include: ['defaultWidth'] } };
+
+export const Default = ({ defaultWidth, ...timePickerArgs }) => {
   return (
-    <div style={{ width: '350px' }}>
-      <FluidTimePicker id="time-picker-1" {...args}>
+    <div style={{ width: defaultWidth }}>
+      <FluidTimePicker id="time-picker-1" {...timePickerArgs}>
         <FluidTimePickerSelect id="select-1" labelText={ToggleTip}>
           <SelectItem value="am" text="AM" />
           <SelectItem value="pm" text="PM" />
@@ -77,7 +85,7 @@ export const Default = (args) => {
         id="time-picker-2"
         labelText="Time"
         placeholder="hh:mm"
-        {...args}>
+        {...timePickerArgs}>
         <FluidTimePickerSelect id="select-3" labelText={ToggleTip}>
           <SelectItem value="am" text="AM" />
           <SelectItem value="pm" text="PM" />
@@ -88,20 +96,33 @@ export const Default = (args) => {
 };
 
 Default.args = {
+  className: 'test-class',
+  defaultWidth: 350,
+  disabled: false,
+  invalid: false,
   labelText: 'Time',
   invalidText:
     'Error message that is really long can wrap to more lines but should not be excessively long.',
   placeholder: 'hh:mm',
+  readOnly: false,
+  warn: false,
   warnText:
     'Warning message that is really long can wrap to more lines but should not be excessively long.',
 };
 
 Default.argTypes = {
+  className: {
+    control: { type: 'text' },
+  },
+  defaultValue: {
+    control: { type: 'text' },
+  },
+  defaultWidth: widthArgType,
   disabled: {
     control: { type: 'boolean' },
   },
   labelText: {
-    control: { type: 'string' },
+    control: { type: 'text' },
   },
   invalid: {
     control: { type: 'boolean' },
@@ -112,10 +133,28 @@ Default.argTypes = {
   placeholder: {
     control: { type: 'text' },
   },
+  onChange: {
+    action: 'onChange',
+  },
+  onClick: {
+    action: 'onClick',
+  },
+  readOnly: {
+    control: { type: 'boolean' },
+  },
+  value: {
+    control: { type: 'text' },
+  },
   warn: {
     control: { type: 'boolean' },
   },
   warnText: {
     control: { type: 'text' },
+  },
+};
+
+Default.parameters = {
+  controls: {
+    include: [...Object.keys(Default.argTypes)],
   },
 };
