@@ -60,7 +60,7 @@ const sharedArgTypes = {
 
 Default.argTypes = { ...sharedArgTypes };
 
-export const UXExample = () => {
+export const UXExample = (args) => {
   const [isActive, setIsActive] = useState(false);
   const timeoutRef = useRef(null);
 
@@ -76,7 +76,7 @@ export const UXExample = () => {
   return (
     <main>
       <Button onClick={startLoading}>Start</Button>
-      <Loading active={isActive} withOverlay />
+      <Loading {...args} active={isActive} withOverlay />
     </main>
   );
 };
