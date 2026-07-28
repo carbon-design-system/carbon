@@ -11,7 +11,14 @@ import useIsomorphicEffect from './useIsomorphicEffect';
 
 export const usePresence = (
   ref: RefObject<HTMLElement | null>,
-  isOpen: boolean
+  isOpen: boolean,
+  /**
+   * Number of pending JS-driven exit animations (e.g. motion surfaces)
+   * registered through the presence context. The exit does not finish while
+   * holds are outstanding, since those animations are invisible to
+   * `getAnimations()`.
+   */
+  exitHoldCount = 0
 ) => {
   const prefix = usePrefix();
   const [exitState, setExitState] = useState<'idle' | 'active' | 'finished'>(
@@ -34,6 +41,10 @@ export const usePresence = (
 
   useIsomorphicEffect(() => {
     if (!ref.current || !isExiting) return;
+
+    // wait for registered JS-driven exits; the effect re-runs when the last
+    // hold is released
+    if (exitHoldCount > 0) return;
 
     // resolve for JSDOM
     if (!('getAnimations' in ref.current)) {
@@ -67,7 +78,7 @@ export const usePresence = (
     return () => {
       cancelled = true;
     };
-  }, [ref, isExiting, prefix]);
+  }, [ref, isExiting, prefix, exitHoldCount]);
 
   return {
     /**
