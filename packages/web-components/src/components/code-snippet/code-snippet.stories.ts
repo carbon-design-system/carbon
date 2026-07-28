@@ -32,63 +32,76 @@ const argTypes = {
   copyButtonDescription: {
     control: 'text',
     description: 'Specify the description for the Copy Button.',
+    table: { defaultValue: { summary: '"Copy to clipboard"' } },
   },
   copyText: {
     control: 'text',
     description:
       "Optional text to copy. If not specified, the children node's <code>innerText</code> will be used as the copy value.",
+    table: { defaultValue: { summary: '""' } },
   },
   disabled: {
     control: 'boolean',
     description: 'Specify whether or not the CodeSnippet should be disabled.',
+    table: { defaultValue: { summary: false } },
   },
   feedback: {
     control: 'text',
     description: 'Specify the string displayed when the snippet is copied.',
+    table: { defaultValue: { summary: '"Copied!"' } },
   },
   feedbackTimeout: {
     control: 'number',
     description:
       'Specify the time it takes for the feedback message to timeout.',
+    table: { defaultValue: { summary: 2000 } },
   },
   hideCopyButton: {
     control: 'boolean',
     description:
       'Specify whether or not a copy button should be used/rendered.',
+    table: { defaultValue: { summary: false } },
   },
   maxCollapsedNumberOfRows: {
     control: 'number',
     description:
       'Specify the maximum number of rows to be shown when in collapsed view.',
+    table: { defaultValue: { summary: 15 } },
   },
   maxExpandedNumberOfRows: {
     control: 'number',
     description:
       'Specify the maximum number of rows to be shown when in expanded view.',
+    table: { defaultValue: { summary: 0 } },
   },
   minCollapsedNumberOfRows: {
     control: 'number',
     description:
       'Specify the minimum number of rows to be shown when in collapsed view.',
+    table: { defaultValue: { summary: 3 } },
   },
   minExpandedNumberOfRows: {
     control: 'number',
     description:
       'Specify the minimum number of rows to be shown when in expanded view.',
+    table: { defaultValue: { summary: 16 } },
   },
   showLessText: {
     control: 'text',
     description:
       'Specify a string that is displayed when the Code Snippet has been interacted with to show more lines.',
+    table: { defaultValue: { summary: '"Show less"' } },
   },
   showMoreText: {
     control: 'text',
     description:
       'Specify a string that is displayed when the Code Snippet text is more than 15 lines.',
+    table: { defaultValue: { summary: '"Show more"' } },
   },
   type: {
     control: 'radio',
     options: ['single', 'inline', 'multi'],
+    table: { defaultValue: { summary: '"single"' } },
   },
   text: {
     control: 'text',
@@ -97,6 +110,7 @@ const argTypes = {
   wrapText: {
     control: 'boolean',
     description: 'Specify whether or not to wrap the text.',
+    table: { defaultValue: { summary: false } },
   },
 };
 
@@ -459,6 +473,7 @@ export const Skeleton = {
       control: 'radio',
       description: 'Specify the type of Code Snippet skeleton.',
       options: ['single', 'multi'],
+      table: { defaultValue: { summary: '"single"' } },
     },
   },
   parameters: {
