@@ -38,8 +38,3 @@ Default.args = {
   prefix: 'custom',
 };
 
-Default.parameters = {
-  controls: {
-    include: ['prefix'],
-  },
-};
