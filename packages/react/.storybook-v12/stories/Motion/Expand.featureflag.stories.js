@@ -10,10 +10,7 @@ import { AspectRatio } from '../../../src/components/AspectRatio';
 import { ClickableTile } from '../../../src/components/Tile';
 import { Column, Grid } from '../../../src/components/Grid';
 import { ArrowRight } from '@carbon/icons-react';
-import {
-  MotionSurfaceOrigin,
-  MotionSurface,
-} from '../../../src/internal/motion/MotionSurface';
+import { MotionSurfaceOrigin } from '../../../src/internal/motion/MotionSurface';
 import { DemoDialog } from './DemoDialog';
 import mdx from './Motion.mdx';
 import './surfaces.stories.scss';
@@ -78,7 +75,7 @@ export const Expand = () => {
   return (
     <>
       <Grid condensed>
-        {solutionTiles.map((tile, index) => (
+        {solutionTiles.map((tile) => (
           <Column key={tile.id} sm={4} md={4} lg={5}>
             <MotionSurfaceOrigin
               key={tile.id}

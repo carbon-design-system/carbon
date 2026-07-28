@@ -138,6 +138,16 @@ describe('@carbon/motion', () => {
       exitEasing: ['exit', 'expressive'],
     });
 
+    const stretch = CarbonMotion.getMotionSurface('stretch');
+    expect(stretch).toEqual({
+      kind: 'reveal',
+      duration: 'slow-01',
+      enter: { opacity: 1, clipPath: 'inset(0 0 0 0)' },
+      exit: { opacity: 0, clipPath: 'inset(50% 0 50% 0)' },
+      enterEasing: ['entrance', 'expressive'],
+      exitEasing: ['exit', 'expressive'],
+    });
+
     expect(CarbonMotion.resolveDuration(disclosure.duration)).toBe('150ms');
     expect(CarbonMotion.resolveEasing(...disclosure.enterEasing)).toEqual([
       0, 0, 0.38, 0.9,
