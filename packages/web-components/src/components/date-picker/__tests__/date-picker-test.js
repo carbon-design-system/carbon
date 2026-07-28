@@ -328,5 +328,25 @@ describe('cds-date-picker', () => {
       const aiLabelSlot = el.shadowRoot.querySelector("slot[name='ai-label']");
       expect(aiLabelSlot.classList.contains('cds--slug--revert')).to.be.false;
     });
+
+    it('should toggle cds--slug--revert on slug slot when ai-label slot node is absent', async () => {
+      const el = await fixture(html`
+        <cds-date-picker-input label-text="Date" placeholder="mm/dd/yyyy">
+          <cds-slug slot="slug" revert-active></cds-slug>
+        </cds-date-picker-input>
+      `);
+      await el.updateComplete;
+
+      // Remove the ai-label slot from shadow DOM so _slotAILabelNode returns null,
+      // forcing the else-branch in updated() to run for the slug slot.
+      const aiLabelSlot = el.shadowRoot.querySelector("slot[name='ai-label']");
+      aiLabelSlot.remove();
+
+      el.requestUpdate();
+      await el.updateComplete;
+
+      const slugSlot = el.shadowRoot.querySelector("slot[name='slug']");
+      expect(slugSlot.classList.contains('cds--slug--revert')).to.be.true;
+    });
   });
 });

@@ -364,5 +364,41 @@ describe('cds-select', () => {
       const aiLabelSlot = el.shadowRoot.querySelector("slot[name='ai-label']");
       expect(aiLabelSlot.classList.contains('cds--slug--revert')).to.be.false;
     });
+
+    it('should add cds--select-input-has--ai-label class to internal select when ai-label is assigned', async () => {
+      const el = await fixture(html`
+        <cds-select label-text="With AI">
+          <cds-ai-label slot="ai-label"></cds-ai-label>
+          <cds-select-item value="1">One</cds-select-item>
+        </cds-select>
+      `);
+      await el.updateComplete;
+
+      const internalSelect = el.shadowRoot.querySelector('select');
+      expect(
+        internalSelect.classList.contains('cds--select-input-has--ai-label')
+      ).to.be.true;
+    });
+
+    it('should toggle cds--slug--revert on slug slot when ai-label slot node is absent', async () => {
+      const el = await fixture(html`
+        <cds-select label-text="With Slug">
+          <cds-slug slot="slug" revert-active></cds-slug>
+          <cds-select-item value="1">One</cds-select-item>
+        </cds-select>
+      `);
+      await el.updateComplete;
+
+      // Remove the ai-label slot from shadow DOM so _slotAILabelNode returns null,
+      // forcing the else-branch in updated() to run for the slug slot.
+      const aiLabelSlot = el.shadowRoot.querySelector("slot[name='ai-label']");
+      aiLabelSlot.remove();
+
+      el.requestUpdate();
+      await el.updateComplete;
+
+      const slugSlot = el.shadowRoot.querySelector("slot[name='slug']");
+      expect(slugSlot.classList.contains('cds--slug--revert')).to.be.true;
+    });
   });
 });

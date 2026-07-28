@@ -826,6 +826,27 @@ describe('AI label and slug slot (@query decorator)', () => {
 
     expect(el.hasAttribute('ai-label')).to.be.false;
   });
+
+  it('should toggle cds--slug--revert on slug slot when ai-label slot node is absent', async () => {
+    const el = await fixture(html`
+      <cds-dropdown title-text="Dropdown Label">
+        <cds-dropdown-item value="option-1">Option 1</cds-dropdown-item>
+        <cds-slug slot="slug" revert-active></cds-slug>
+      </cds-dropdown>
+    `);
+    await el.updateComplete;
+
+    // Remove the ai-label slot from shadow DOM so _slotAILabelNode returns null,
+    // forcing the else-branch in updated() to run for the slug slot.
+    const aiLabelSlot = el.shadowRoot.querySelector("slot[name='ai-label']");
+    aiLabelSlot.remove();
+
+    el.requestUpdate();
+    await el.updateComplete;
+
+    const slugSlot = el.shadowRoot.querySelector("slot[name='slug']");
+    expect(slugSlot.classList.contains('cds--slug--revert')).to.be.true;
+  });
 });
 
 describe('cds-dropdown-skeleton', function () {

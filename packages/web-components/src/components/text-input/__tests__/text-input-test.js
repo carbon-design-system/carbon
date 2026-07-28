@@ -387,5 +387,25 @@ describe('cds-text-input', () => {
 
       expect(el.hasAttribute('ai-label')).to.be.false;
     });
+
+    it('should toggle cds--slug--revert on slug slot when ai-label slot node is absent', async () => {
+      const el = await fixture(html`
+        <cds-text-input label-text="With Slug">
+          <cds-slug slot="slug" revert-active></cds-slug>
+        </cds-text-input>
+      `);
+      await el.updateComplete;
+
+      // Remove the ai-label slot from shadow DOM so _slotAILabelNode returns null,
+      // forcing the else-branch in updated() to run for the slug slot.
+      const aiLabelSlot = el.shadowRoot.querySelector("slot[name='ai-label']");
+      aiLabelSlot.remove();
+
+      el.requestUpdate();
+      await el.updateComplete;
+
+      const slugSlot = el.shadowRoot.querySelector("slot[name='slug']");
+      expect(slugSlot.classList.contains('cds--slug--revert')).to.be.true;
+    });
   });
 });
