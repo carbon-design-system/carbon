@@ -293,6 +293,14 @@ const Pagination = React.forwardRef(
       [`${prefix}--pagination__button--no-index`]: forwardButtonDisabled,
     });
     const selectItems = renderPageSelect ? [] : renderSelectItems(totalPages);
+    const pageSelectNode =
+      renderPageSelect?.({
+        currentPage: page,
+        totalPages,
+        currentPageSize: pageSize,
+        pageSelectLabelText: pageSelectLabelText(totalPages),
+        onSetPage: handleSetPage,
+      }) ?? null;
 
     const focusMap = {
       backward: backBtnRef,
@@ -550,32 +558,26 @@ const Pagination = React.forwardRef(
           ) : (
             <>
               {renderPageSelect ? (
-                renderPageSelect({
-                  currentPage: page,
-                  totalPages,
-                  currentPageSize: pageSize,
-                  pageSelectLabelText: pageSelectLabelText(totalPages),
-                  onSetPage: handleSetPage,
-                })
+                pageSelectNode
               ) : (
-                <>
-                  <Select
-                    id={`${prefix}-pagination-select-${inputId}-right`}
-                    className={`${prefix}--select__page-number`}
-                    labelText={pageSelectLabelText(totalPages)}
-                    inline
-                    hideLabel
-                    onChange={handlePageInputChange}
-                    value={page}
-                    key={page}
-                    disabled={pageInputDisabled || disabled}>
-                    {selectItems}
-                  </Select>
-                  <span className={`${prefix}--pagination__text`}>
-                    {pageRangeText(page, totalPages)}
-                  </span>
-                </>
+                <Select
+                  id={`${prefix}-pagination-select-${inputId}-right`}
+                  className={`${prefix}--select__page-number`}
+                  labelText={pageSelectLabelText(totalPages)}
+                  inline
+                  hideLabel
+                  onChange={handlePageInputChange}
+                  value={page}
+                  key={page}
+                  disabled={pageInputDisabled || disabled}>
+                  {selectItems}
+                </Select>
               )}
+              <span className={`${prefix}--pagination__text`}>
+                {pageSelectNode == null && renderPageSelect
+                  ? `${page} ${pageRangeText(page, totalPages)}`
+                  : pageRangeText(page, totalPages)}
+              </span>
             </>
           )}
           <div className={`${prefix}--pagination__control-buttons`}>
