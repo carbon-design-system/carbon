@@ -94,7 +94,10 @@ const DefinitionTooltip = ({
   const tooltipId = useFallbackId(id);
 
   function onKeyDown(event: React.KeyboardEvent) {
-    if (isOpen && match(event, keys.Escape)) {
+    if (match(event, keys.Enter) || match(event, keys.Space)) {
+      event.preventDefault();
+      setOpen(!isOpen);
+    } else if (isOpen && match(event, keys.Escape)) {
       event.stopPropagation();
       setOpen(false);
     }
