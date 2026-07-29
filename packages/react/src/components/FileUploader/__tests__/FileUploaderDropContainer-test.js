@@ -671,7 +671,7 @@ describe('FileUploaderDropContainer', () => {
     }
   });
 
-  it('should only set valid files on the input', async () => {
+  it('should set reported files on the input', async () => {
     const onAddFiles = jest.fn();
     const { container } = render(
       <FileUploaderDropContainer
@@ -701,10 +701,11 @@ describe('FileUploaderDropContainer', () => {
       invalidFile,
       filteredFile,
     ]);
-    const acceptedInput = document.createElement('input');
-    acceptedInput.type = 'file';
-    await userEvent.upload(acceptedInput, acceptedFile);
-    const dataTransfer = mockDataTransfer(acceptedInput.files);
+    const addedFilesInput = document.createElement('input');
+    addedFilesInput.type = 'file';
+    addedFilesInput.multiple = true;
+    await userEvent.upload(addedFilesInput, [acceptedFile, invalidFile]);
+    const dataTransfer = mockDataTransfer(addedFilesInput.files);
     const filesSetter = jest
       .spyOn(input, 'files', 'set')
       .mockImplementation(() => {});
@@ -716,9 +717,10 @@ describe('FileUploaderDropContainer', () => {
         addedFiles: [acceptedFile, invalidFile],
       });
       expect(invalidFile.invalidFileType).toBe(true);
-      expect(dataTransfer.add).toHaveBeenCalledTimes(1);
-      expect(dataTransfer.add).toHaveBeenCalledWith(acceptedFile);
-      expect(filesSetter).toHaveBeenCalledWith(acceptedInput.files);
+      expect(dataTransfer.add).toHaveBeenCalledTimes(2);
+      expect(dataTransfer.add).toHaveBeenNthCalledWith(1, acceptedFile);
+      expect(dataTransfer.add).toHaveBeenNthCalledWith(2, invalidFile);
+      expect(filesSetter).toHaveBeenCalledWith(addedFilesInput.files);
     } finally {
       dataTransfer.restore();
     }

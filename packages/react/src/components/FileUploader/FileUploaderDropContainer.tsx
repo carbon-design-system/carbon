@@ -207,9 +207,7 @@ function FileUploaderDropContainer({
     if (inputRef.current) {
       try {
         const dataTransfer = new DataTransfer();
-        addedFiles
-          .filter((file) => !file.invalidFileType)
-          .forEach((file) => dataTransfer.items.add(file));
+        addedFiles.forEach((file) => dataTransfer.items.add(file));
         inputRef.current.files = dataTransfer.files;
       } catch {
         // Some environments reject programmatic file input assignments.
