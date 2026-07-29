@@ -15,13 +15,14 @@
  * An optional `gap` value can be supplied to account for the spacing between
  * siblings in a flex/grid container.
  *
- * @param el - The HTML element whose size is to be calculated.
+ * @param el - The HTML element whose size is to be calculated. Returns 0 if
+ *   `null` or `undefined` is passed.
  * @param dimension - The dimension to measure ('width' or 'height').
  * @param gap - Optional gap (in px) to add to each item's size, representing the `column-gap` (width) or `row-gap` (height) of the parent container.
- * @returns The size of the element in pixels. Returns 0 if the element is not provided.
+ * @returns The size of the element in pixels, or 0 if no element is provided.
  */
 export function getSize(
-  el: HTMLElement,
+  el: HTMLElement | null | undefined,
   dimension: 'width' | 'height',
   gap = 0
 ): number {
@@ -36,13 +37,9 @@ export function getSize(
   size =
     dimension === 'width'
       ? size +
-        parseInt(computedStyles.paddingLeft) +
-        parseInt(computedStyles.paddingRight) +
         parseInt(computedStyles.marginLeft) +
         parseInt(computedStyles.marginRight)
       : size +
-        parseInt(computedStyles.paddingTop) +
-        parseInt(computedStyles.paddingBottom) +
         parseInt(computedStyles.marginTop) +
         parseInt(computedStyles.marginBottom);
   size += gap;
@@ -110,7 +107,7 @@ export function updateOverflowHandler({
   const totalSize = sizes.reduce((sum, size) => sum + size, 0);
   const totalFixedSize = fixedSizes.reduce((sum, size) => sum + size, 0);
 
-  if (totalSize + totalFixedSize <= containerSize) {
+  if (totalSize + totalFixedSize <= containerSize - offsetValue) {
     visibleItems = maxVisibleItems
       ? items.slice(0, maxVisibleItems)
       : [...items];
@@ -205,8 +202,8 @@ export function createOverflowHandler({
   maxVisibleItems,
   onChange,
   dimension = 'width',
-  offsetValue = 0,
-  gap = 0,
+  offsetValue,
+  gap,
 }: OverflowHandlerOptions): OverflowHandler {
   // Error handling
   if (!(container instanceof HTMLElement)) {
@@ -223,12 +220,8 @@ export function createOverflowHandler({
   }
 
   const children = Array.from(container.children) as HTMLElement[];
-  const offset = children.find((item) =>
-    item.hasAttribute('data-offset')
-  ) as HTMLElement;
-  const fixedItems = children.filter((item) =>
-    item.hasAttribute('data-fixed')
-  ) as HTMLElement[];
+  const offset = children.find((item) => item.hasAttribute('data-offset'));
+  const fixedItems = children.filter((item) => item.hasAttribute('data-fixed'));
   const items = children.filter(
     (item) => item !== offset && !fixedItems.includes(item)
   );

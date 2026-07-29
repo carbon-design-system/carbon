@@ -1,0 +1,147 @@
+//
+// Copyright IBM Corp. 2026
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use 'sass:math';
+@use '@carbon/styles/scss/spacing';
+@use '@carbon/styles/scss/theme';
+@use '@carbon/styles/scss/type';
+
+// Container that the overflow handler observes.
+// Width/height constraints are applied via modifier classes.
+.overflow-handler-container {
+  display: flex;
+  overflow: hidden;
+  position: relative;
+}
+
+.overflow-handler-container-horizontal {
+  flex-direction: row;
+  resize: horizontal;
+  width: 100%;
+}
+
+.overflow-handler-container-vertical {
+  flex-direction: column;
+  resize: vertical;
+  width: 12.5rem;
+  height: 12.5rem;
+}
+
+// Individual items rendered inside the container.
+.overflow-handler-item {
+  @include type.type-style('code-01');
+
+  flex-shrink: 0;
+  background: theme.$layer-accent;
+  white-space: nowrap;
+
+  .overflow-handler-container-horizontal & {
+    padding: 0 spacing.$spacing-04;
+    height: spacing.$spacing-07;
+    line-height: spacing.$spacing-07;
+  }
+
+  .overflow-handler-container-vertical & {
+    padding: math.div(spacing.$spacing-04, 2) spacing.$spacing-04;
+    width: 100%;
+  }
+}
+
+// Fixed (always-visible) item variant.
+.overflow-handler-item-fixed {
+  background: theme.$layer-selected;
+  outline: 2px solid theme.$focus;
+  outline-offset: -2px;
+}
+
+// The reserved-space offset element ("+N more" indicator).
+.overflow-handler-offset {
+  @include type.type-style('code-01');
+
+  flex-shrink: 0;
+  background: theme.$interactive;
+  color: theme.$text-on-color;
+  white-space: nowrap;
+
+  .overflow-handler-container-horizontal & {
+    padding: 0 spacing.$spacing-04;
+    height: spacing.$spacing-07;
+    line-height: spacing.$spacing-07;
+  }
+
+  .overflow-handler-container-vertical & {
+    padding: math.div(spacing.$spacing-04, 2) spacing.$spacing-04;
+    width: 100%;
+  }
+}
+
+// Legend row beneath the container.
+.overflow-handler-legend {
+  @include type.type-style('code-01');
+
+  display: flex;
+  flex-wrap: wrap;
+  gap: spacing.$spacing-05;
+  margin-top: spacing.$spacing-04;
+  color: theme.$text-secondary;
+}
+
+// Colour swatches used in the legend.
+.overflow-handler-swatch {
+  display: inline-block;
+  width: spacing.$spacing-04;
+  height: spacing.$spacing-04;
+  margin-right: math.div(spacing.$spacing-04, 2);
+  vertical-align: middle;
+  flex-shrink: 0;
+}
+
+.overflow-handler-swatch-regular {
+  background: theme.$layer-accent;
+}
+
+.overflow-handler-swatch-fixed {
+  background: theme.$layer-selected;
+  outline: 2px solid theme.$focus;
+  outline-offset: -2px;
+}
+
+.overflow-handler-swatch-offset {
+  background: theme.$interactive;
+}
+
+// Live log output beneath the legend.
+.overflow-handler-log {
+  @include type.type-style('code-01');
+
+  margin-top: spacing.$spacing-04;
+  padding: 0;
+  background: none;
+  white-space: pre-wrap;
+  color: theme.$text-secondary;
+}
+
+// Wrapper for a single duplicated instance.
+.overflow-handler-instance {
+  margin-top: spacing.$spacing-06;
+  padding-top: spacing.$spacing-06;
+  border-top: 1px solid theme.$border-subtle;
+
+  &:first-of-type {
+    margin-top: spacing.$spacing-04;
+    padding-top: 0;
+    border-top: none;
+  }
+}
+
+// "Instance N" label above each container.
+.overflow-handler-instance-label {
+  @include type.type-style('label-01');
+
+  margin: 0 0 spacing.$spacing-03;
+  color: theme.$text-secondary;
+}

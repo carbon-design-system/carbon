@@ -91,12 +91,12 @@ should only be 5 buttons visible when the handler runs.
 
 ## Item sizing
 
-Each item's effective size is calculated as:
+Each item's effective size is calculated as based on dimension:
 
 ```
 effectiveSize = boundingClientRect[dimension]
-              + padding (inline-start + inline-end)
-              + margin (inline-start + inline-end)
+              + margin (inline-start + inline-end)   ← width
+              + margin (block-start + block-end)     ← height
               + gap
 ```
 

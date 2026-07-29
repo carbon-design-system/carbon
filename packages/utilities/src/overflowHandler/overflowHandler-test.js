@@ -28,6 +28,16 @@ const setContainerDimension = (container, dimension, value) => {
     configurable: true,
     writable: true,
   });
+  // updateOverflowHandler now uses getBoundingClientRect instead of clientWidth/Height
+  // so we also need to stub it on the container element.
+  Object.defineProperty(container, 'getBoundingClientRect', {
+    value: () => ({
+      width: dimension === 'width' ? value : 0,
+      height: dimension === 'height' ? value : 0,
+    }),
+    configurable: true,
+    writable: true,
+  });
 };
 
 // getComputedStyle returns zero padding/margin by default so item sizes equal
@@ -90,49 +100,72 @@ describe('getSize', () => {
     expect(getSize(el, 'height', 8)).toBe(58);
   });
 
-  it('should add horizontal padding and margin to width', () => {
+  it('should add horizontal margin to width', () => {
     const el = document.createElement('div');
     Object.defineProperty(el, 'getBoundingClientRect', {
       value: () => ({ width: 100 }),
     });
     jest.spyOn(window, 'getComputedStyle').mockReturnValue({
       ...zeroSpacing,
-      paddingLeft: '10px',
-      paddingRight: '10px',
       marginLeft: '5px',
       marginRight: '5px',
     });
-    expect(getSize(el, 'width')).toBe(130); // 100 + 10 + 10 + 5 + 5
+    expect(getSize(el, 'width')).toBe(110); // 100 + 5 + 5
   });
 
-  it('should add vertical padding and margin to height', () => {
+  it('should not double-count padding when measuring width', () => {
+    // getBoundingClientRect already returns border-box (includes padding).
+    // getSize must not add paddingLeft/paddingRight on top of that.
+    const el = document.createElement('div');
+    Object.defineProperty(el, 'getBoundingClientRect', {
+      // Simulates an element that already has 20px padding baked in
+      value: () => ({ width: 140 }), // 100 content + 2×20 padding
+    });
+    jest.spyOn(window, 'getComputedStyle').mockReturnValue({
+      ...zeroSpacing,
+      paddingLeft: '20px',
+      paddingRight: '20px',
+    });
+    expect(getSize(el, 'width')).toBe(140); // must not add 40px again
+  });
+
+  it('should add vertical margin to height', () => {
     const el = document.createElement('div');
     Object.defineProperty(el, 'getBoundingClientRect', {
       value: () => ({ height: 60 }),
     });
     jest.spyOn(window, 'getComputedStyle').mockReturnValue({
       ...zeroSpacing,
-      paddingTop: '8px',
-      paddingBottom: '8px',
       marginTop: '4px',
       marginBottom: '4px',
     });
-    expect(getSize(el, 'height')).toBe(84); // 60 + 8 + 8 + 4 + 4
+    expect(getSize(el, 'height')).toBe(68); // 60 + 4 + 4
   });
 
-  it('should combine padding, margin, and gap for width', () => {
+  it('should not double-count padding when measuring height', () => {
+    const el = document.createElement('div');
+    Object.defineProperty(el, 'getBoundingClientRect', {
+      value: () => ({ height: 76 }), // 60 content + 2×8 padding
+    });
+    jest.spyOn(window, 'getComputedStyle').mockReturnValue({
+      ...zeroSpacing,
+      paddingTop: '8px',
+      paddingBottom: '8px',
+    });
+    expect(getSize(el, 'height')).toBe(76); // must not add 16px again
+  });
+
+  it('should combine margin and gap for width', () => {
     const el = document.createElement('div');
     Object.defineProperty(el, 'getBoundingClientRect', {
       value: () => ({ width: 100 }),
     });
     jest.spyOn(window, 'getComputedStyle').mockReturnValue({
       ...zeroSpacing,
-      paddingLeft: '4px',
-      paddingRight: '4px',
       marginLeft: '2px',
       marginRight: '2px',
     });
-    expect(getSize(el, 'width', 16)).toBe(128); // 100 + 4 + 4 + 2 + 2 + 16
+    expect(getSize(el, 'width', 16)).toBe(120); // 100 + 2 + 2 + 16
   });
 
   it('should not add horizontal spacing when measuring height', () => {
@@ -379,6 +412,21 @@ describe('createOverflowHandler', () => {
         expect(visible.length).toBe(4);
         expect(hidden.length).toBe(1);
       });
+
+      it('should apply offsetValue even when all items would otherwise fit', () => {
+        // 3 × 40 = 120 < 200, but offsetValue = 100 makes effective space 100.
+        // 2 × 40 = 80 fit; 3rd (120) > 100 → overflow.
+        container.append(...createItems(Array(3).fill(40), 'width'));
+        setContainerDimension(container, 'width', 200);
+        handler = createOverflowHandler({
+          container,
+          offsetValue: 100,
+          onChange: mockOnChange,
+        });
+        const [visible, hidden] = mockOnChange.mock.calls[0];
+        expect(visible.length).toBe(2);
+        expect(hidden.length).toBe(1);
+      });
     });
   });
 
@@ -464,13 +512,46 @@ describe('createOverflowHandler', () => {
       handler = createOverflowHandler({ container, onChange: mockOnChange });
       mockOnChange.mockClear();
 
-      container.clientWidth = 200;
+      setContainerDimension(container, 'width', 200);
       observeCallback([]);
 
       expect(mockOnChange).toHaveBeenCalled();
       const [visible, hidden] = mockOnChange.mock.calls[0];
       expect(visible.length).toBe(3);
       expect(hidden.length).toBe(0);
+    });
+
+    it('should deduplicate concurrent rAF requests when ResizeObserver fires multiple times before a frame', () => {
+      container.append(...createItems(Array(3).fill(40), 'width'));
+      setContainerDimension(container, 'width', 80);
+      handler = createOverflowHandler({ container, onChange: mockOnChange });
+      mockOnChange.mockClear();
+
+      // Fire the ResizeObserver callback three times in the same synchronous block.
+      // Only one rAF should be queued, so onChange fires at most once per frame.
+      setContainerDimension(container, 'width', 200);
+      observeCallback([]);
+      observeCallback([]);
+      observeCallback([]);
+
+      // jsdom runs rAF synchronously; a single rAF = a single update call.
+      expect(mockOnChange).toHaveBeenCalledTimes(1);
+    });
+
+    it('should cancel a pending rAF when disconnect() is called', () => {
+      const cancelSpy = jest.spyOn(global, 'cancelAnimationFrame');
+      container.append(...createItems(Array(3).fill(40), 'width'));
+      setContainerDimension(container, 'width', 80);
+
+      // Spy on rAF so we can capture the id it returns.
+      const rafSpy = jest
+        .spyOn(global, 'requestAnimationFrame')
+        .mockImplementation(() => 42); // return a stable fake id
+
+      handler = createOverflowHandler({ container, onChange: mockOnChange });
+      handler.disconnect();
+
+      expect(cancelSpy).toHaveBeenCalledWith(42);
     });
   });
 });
