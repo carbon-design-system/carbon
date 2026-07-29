@@ -2065,7 +2065,7 @@ __metadata:
     change-case-all: "npm:^2.1.0"
     color: "npm:^4.0.0"
     core-js: "npm:^3.16.0"
-    culori: "npm:^4.0.1"
+    culori: "npm:^4.0.2"
     fs-extra: "npm:^11.0.0"
     js-yaml: "npm:^4.1.0"
     rimraf: "npm:^6.0.1"
@@ -10371,7 +10371,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"culori@npm:^4.0.1":
+"culori@npm:^4.0.2":
   version: 4.0.2
   resolution: "culori@npm:4.0.2"
   checksum: 10/9d297ca5c6fc86b2637200e1d9edb5a7d1015a2e978a6748781ef53c9577269ce1df96dc0925b0002239c85665ba881a3d580564dfd2807c65ee65dc2e829849

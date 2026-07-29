@@ -158,8 +158,9 @@ describe('@carbon/themes/scss', () => {
 
         $_: get('background', themes.$background);
       `);
+      // Sass normalises oklch() values: 1 → 100%, 0deg appended to hue.
       expect(unwrap('background')).toEqual(
-        'var(--test-background, oklch(1 0 0))'
+        'var(--test-background, oklch(100% 0 0deg))'
       );
     });
   });

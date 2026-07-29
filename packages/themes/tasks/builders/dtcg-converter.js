@@ -24,11 +24,14 @@ let _paletteAliasMap = null;
 
 /**
  * Format an oklch { l, c, h } object as a CSS oklch() string.
+ * Values are rounded to 4 decimal places to avoid Sass floating-point
+ * representation issues (e.g. 261.95 → 261.95000000000005).
  * @param {{ l: number, c: number, h: number }} oklch
- * @returns {string}  e.g. "oklch(0.5565 0.2430 261.95)"
+ * @returns {string}  e.g. "oklch(0.5565 0.243 261.95)"
  */
 function formatOklch({ l, c, h }) {
-  return `oklch(${l} ${c} ${h})`;
+  const r = (n) => Math.round(n * 1e4) / 1e4;
+  return `oklch(${r(l)} ${r(c)} ${r(h)})`;
 }
 
 /**
