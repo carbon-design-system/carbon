@@ -293,14 +293,15 @@ const Pagination = React.forwardRef(
       [`${prefix}--pagination__button--no-index`]: forwardButtonDisabled,
     });
     const selectItems = renderPageSelect ? [] : renderSelectItems(totalPages);
-    const pageSelectNode =
-      renderPageSelect?.({
-        currentPage: page,
-        totalPages,
-        currentPageSize: pageSize,
-        pageSelectLabelText: pageSelectLabelText(totalPages),
-        onSetPage: handleSetPage,
-      }) ?? null;
+    const pageSelectNode = pagesUnknown
+      ? null
+      : (renderPageSelect?.({
+          currentPage: page,
+          totalPages,
+          currentPageSize: pageSize,
+          pageSelectLabelText: pageSelectLabelText(totalPages),
+          onSetPage: handleSetPage,
+        }) ?? null);
 
     const focusMap = {
       backward: backBtnRef,
