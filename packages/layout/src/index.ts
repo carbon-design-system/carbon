@@ -22,6 +22,10 @@ export type SizeName =
   | 'Large'
   | 'XLarge'
   | '2XLarge';
+export type BorderRadiusToken =
+  | 'border-radius-02'
+  | 'border-radius-04'
+  | 'border-radius-08';
 
 // Convert
 // Default, Use with em() and rem() functions
@@ -179,3 +183,13 @@ export const sizes: Record<SizeName, string> = {
 export const iconSize01 = '1rem';
 export const iconSize02 = '1.25rem';
 export const iconSize = [iconSize01, iconSize02];
+
+// Border radius
+export const borderRadius02 = rem(2);
+export const borderRadius04 = rem(4);
+export const borderRadius08 = rem(8);
+export const borderRadius: Record<BorderRadiusToken, string> = {
+  'border-radius-02': borderRadius02,
+  'border-radius-04': borderRadius04,
+  'border-radius-08': borderRadius08,
+};
