@@ -8,6 +8,10 @@
 import { featureFlagInfo } from './generated/feature-flags';
 import { FeatureFlagScope, type FeatureFlagRecord } from './FeatureFlagScope';
 export type { FeatureFlagRecord } from './FeatureFlagScope';
+// Exported for framework packages whose flag lookup can resolve without
+// reaching a scope. Web Components do this when a component has no
+// `<feature-flags>` ancestor.
+export { notifyAvailableFlag } from './notify';
 
 export const createScope = (flags?: FeatureFlagRecord) =>
   new FeatureFlagScope(flags);
