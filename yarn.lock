@@ -1685,7 +1685,6 @@ __metadata:
     chalk: "npm:^5.4.1"
     change-case-all: "npm:^2.1.0"
     child-process-promise: "npm:^2.2.1"
-    enquirer: "npm:^2.4.1"
     fast-glob: "npm:^3.3.3"
     fs-extra: "npm:^11.2.0"
     inquirer: "npm:^12.5.0"
@@ -11178,7 +11177,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"enquirer@npm:^2.3.6, enquirer@npm:^2.4.1":
+"enquirer@npm:^2.3.6":
   version: 2.4.1
   resolution: "enquirer@npm:2.4.1"
   dependencies:
