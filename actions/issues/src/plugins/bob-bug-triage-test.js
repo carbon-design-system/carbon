@@ -64,7 +64,7 @@ describe('createBobEnvironment', () => {
         'bob-api-key'
       )
     ).toEqual({
-      BOB_INFERENCE_API_KEY: 'bob-api-key',
+      BOBSHELL_API_KEY: 'bob-api-key',
       PATH: '/usr/bin',
     });
   });

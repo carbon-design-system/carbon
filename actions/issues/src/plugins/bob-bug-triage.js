@@ -180,7 +180,10 @@ export function createBobEnvironment(environment, apiKey) {
       bobEnvironment[name] = environment[name];
     }
   }
-  bobEnvironment.BOB_INFERENCE_API_KEY = apiKey;
+  // Keep the GitHub Actions secret/input name descriptive, then translate it
+  // at the process boundary to the fixed environment variable Bob Shell 1.0.6
+  // reads when `--auth-method api-key` is used.
+  bobEnvironment.BOBSHELL_API_KEY = apiKey;
   return bobEnvironment;
 }
 
@@ -205,7 +208,7 @@ async function executeBob(workspace, apiKey) {
   ];
 
   core.info(
-    '[bob-triage] Starting Bob CLI with bug-triage mode and no GitHub token in its environment'
+    '[bob-triage] Starting Bob CLI with bug-triage mode; mapping the inference input to BOBSHELL_API_KEY and excluding GitHub tokens'
   );
   const result = await execFileAsync('bob', argumentsList, {
     cwd: workspace,
