@@ -44,18 +44,27 @@ const argTypes = {
       step: 1,
     },
     description: 'Specify a selected index for the initially selected content',
+    table: {
+      defaultValue: { summary: 0 },
+    },
   },
   selectionMode: {
     control: 'radio',
     options: ['automatic', 'manual'],
     description:
       'Choose whether or not to automatically change selection on focus when left/right arrow pressed. Defaults to `automatic`',
+    table: {
+      defaultValue: { summary: '"automatic"' },
+    },
   },
   size: {
     control: 'radio',
     options: sizes,
     description:
       'Specify the size of the Content Switcher. Currently supports either sm, md (default) or lg as an option.',
+    table: {
+      defaultValue: { summary: '"md"' },
+    },
   },
   onBeforeSelect: {
     action: `${prefix}-content-switcher-beingselected`,
@@ -66,16 +75,22 @@ const argTypes = {
   lowContrast: {
     control: 'boolean',
     description: '`true` to use the low contrast version.',
+    table: {
+      defaultValue: { summary: false },
+    },
   },
   disabled: {
     control: 'boolean',
     description: 'Specify disabled attribute to `true` to disable a button.',
+    table: {
+      defaultValue: { summary: false },
+    },
   },
 };
 
 const sharedParameters = {
   controls: {
-    include: Object.keys(argTypes),
+    include: Object.keys(sharedArgs),
   },
 };
 
@@ -242,6 +257,7 @@ export const LowContrast = {
     lowContrast: {
       ...argTypes.lowContrast,
       table: {
+        ...argTypes.lowContrast.table,
         readonly: true,
       },
     },
@@ -302,6 +318,7 @@ export const lowContrastIconOnly = {
     lowContrast: {
       ...argTypes.lowContrast,
       table: {
+        ...argTypes.lowContrast.table,
         readonly: true,
       },
     },

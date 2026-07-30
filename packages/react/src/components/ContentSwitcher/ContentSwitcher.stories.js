@@ -38,6 +38,9 @@ const sharedArgTypes = {
   },
   lowContrast: {
     control: 'boolean',
+    table: {
+      defaultValue: { summary: false },
+    },
   },
   onChange: {
     action: 'onChange',
@@ -49,20 +52,29 @@ const sharedArgTypes = {
       max: 2,
       step: 1,
     },
+    table: {
+      defaultValue: { summary: 0 },
+    },
   },
   selectionMode: {
     control: 'radio',
     options: ['automatic', 'manual'],
+    table: {
+      defaultValue: { summary: '"automatic"' },
+    },
   },
   size: {
     control: 'radio',
     options: ['sm', 'md', 'lg'],
+    table: {
+      defaultValue: { summary: '"md"' },
+    },
   },
 };
 
 const sharedParameters = {
   controls: {
-    include: Object.keys(sharedArgTypes),
+    include: Object.keys(sharedArgs),
   },
 };
 
@@ -158,6 +170,7 @@ lowContrast.argTypes = {
   lowContrast: {
     ...sharedArgTypes.lowContrast,
     table: {
+      ...sharedArgTypes.lowContrast.table,
       readonly: true,
     },
   },
@@ -186,6 +199,7 @@ lowContrastIconOnly.argTypes = {
   lowContrast: {
     ...sharedArgTypes.lowContrast,
     table: {
+      ...sharedArgTypes.lowContrast.table,
       readonly: true,
     },
   },
