@@ -8,11 +8,4 @@
 @forward 'side-panel';
 @use 'side-panel';
 
-/// Outputs the SidePanel component styles
-/// @access public
-/// @group side-panel
-@mixin side-panel {
-  @include side-panel.side-panel;
-}
-
 @include side-panel.side-panel;

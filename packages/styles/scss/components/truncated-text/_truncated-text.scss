@@ -46,7 +46,6 @@
       text-align: inherit;
 
       &:focus-visible {
-        display: inline-block;
         outline: 2px solid theme.$focus;
         outline-offset: 2px;
       }

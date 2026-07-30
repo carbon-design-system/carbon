@@ -6,13 +6,6 @@
 //
 
 @forward 'action-set';
-@use 'action-set' as action-set-styles;
+@use 'action-set';
 
-/// Outputs the ActionSet component styles
-/// @access public
-/// @group action-set
-@mixin action-set {
-  @include action-set-styles.action-set;
-}
-
-@include action-set-styles.action-set;
+@include action-set.action-set;

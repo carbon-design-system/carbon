@@ -6,13 +6,6 @@
 //
 
 @forward 'truncated-text';
-@use 'truncated-text' as truncated-text-styles;
+@use 'truncated-text';
 
-/// Outputs the TruncatedText component styles
-/// @access public
-/// @group truncated-text
-@mixin truncated-text {
-  @include truncated-text-styles.truncated-text;
-}
-
-@include truncated-text-styles.truncated-text;
+@include truncated-text.truncated-text;
