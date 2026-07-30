@@ -275,7 +275,7 @@ const TextInput = forwardRef<unknown, TextInputProps>(
     const labelClasses = classNames(`${prefix}--label`, {
       [`${prefix}--visually-hidden`]: hideLabel,
       [`${prefix}--label--disabled`]: normalizedProps.disabled,
-      [`${prefix}--label--readonly`]: readOnly,
+      [`${prefix}--label--readonly`]: readOnly && !normalizedProps.disabled,
       [`${prefix}--label--inline`]: inline,
       [`${prefix}--label--inline--${size}`]: inline && !!size, // TODO v12 - remove this class
     });
