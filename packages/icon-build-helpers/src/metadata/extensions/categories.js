@@ -7,7 +7,7 @@
 
 'use strict';
 
-const Joi = require('@hapi/joi');
+const Joi = require('joi');
 
 // Supports both top-level categories and subcategories
 //
