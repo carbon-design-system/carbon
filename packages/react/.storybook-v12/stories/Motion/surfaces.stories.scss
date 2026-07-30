@@ -95,6 +95,11 @@
   color: inherit !important;
   text-decoration: none !important;
 }
+
+.motion-surface-demo__container--expand {
+  block-size: 100%;
+  inline-size: 95%;
+}
 // stylelint-enable declaration-no-important
 
 // This adds a subtle hover effect to the tile for the expand story, this
@@ -112,9 +117,4 @@
       border-radius motion.$duration-moderate-01 motion(standard, productive),
       box-shadow motion.$duration-moderate-01 motion(standard, productive);
   }
-}
-
-.motion-surface-demo__container--expand {
-  block-size: 100%;
-  inline-size: 95%;
 }
