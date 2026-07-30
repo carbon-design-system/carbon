@@ -114,12 +114,23 @@ const argTypes = {
   },
 };
 
+const variantArgTypes = {
+  ...argTypes,
+  type: {
+    ...argTypes.type,
+    table: {
+      ...argTypes.type.table,
+      readonly: true,
+    },
+  },
+};
+
 export const Inline = {
   args: {
     ...args,
     type: 'inline',
   },
-  argTypes,
+  argTypes: variantArgTypes,
   render: (args) => {
     const {
       copyButtonDescription,
@@ -169,7 +180,7 @@ export const InlineWithLayer = {
     ...args,
     type: 'inline',
   },
-  argTypes,
+  argTypes: variantArgTypes,
   render: (args) => {
     const {
       copyButtonDescription,
@@ -244,7 +255,7 @@ export const Multiline = {
     "@commitlint/cli": "^8.3.5",
 `,
   },
-  argTypes,
+  argTypes: variantArgTypes,
 
   render: (args) => {
     const {
@@ -324,7 +335,7 @@ export const MultilineWithLayer = {
     "@commitlint/cli": "^8.3.5",
 `,
   },
-  argTypes,
+  argTypes: variantArgTypes,
   render: (args) => {
     const {
       copyButtonDescription,
@@ -372,7 +383,7 @@ export const Singleline = {
     type: 'single',
     text: 'yarn add carbon-components@latest carbon-components-react@latest @carbon/icons-react@latest carbon-icons@latest',
   },
-  argTypes,
+  argTypes: variantArgTypes,
   render: (args) => {
     const {
       copyButtonDescription,
@@ -423,7 +434,7 @@ export const SinglelineWithLayer = {
     type: 'single',
     text: 'yarn add carbon-components@latest carbon-components-react@latest @carbon/icons-react@latest carbon-icons@latest',
   },
-  argTypes,
+  argTypes: variantArgTypes,
   render: (args) => {
     const {
       copyButtonDescription,

@@ -27,6 +27,22 @@ const alignOptions = [
   'right-end',
 ];
 
+const typeArgType = {
+  control: 'radio',
+  options: ['single', 'inline', 'multi'],
+  table: { defaultValue: { summary: '"single"' } },
+};
+
+const variantArgTypes = {
+  type: {
+    ...typeArgType,
+    table: {
+      ...typeArgType.table,
+      readonly: true,
+    },
+  },
+};
+
 export default {
   title: 'Components/CodeSnippet',
   component: CodeSnippet,
@@ -67,11 +83,7 @@ export default {
         disable: true,
       },
     },
-    type: {
-      control: 'radio',
-      options: ['single', 'inline', 'multi'],
-      table: { defaultValue: { summary: '"single"' } },
-    },
+    type: typeArgType,
     text: {
       control: 'text',
       description: 'Specify the text that is inside the code snippet',
@@ -174,6 +186,7 @@ export const Inline = {
     ...codeSnippetArgs,
     type: 'inline',
   },
+  argTypes: variantArgTypes,
   parameters: codeSnippetParameters,
   render: renderCodeSnippet,
 };
@@ -184,6 +197,7 @@ export const Multiline = {
     text: multilineCode,
     type: 'multi',
   },
+  argTypes: variantArgTypes,
   parameters: codeSnippetParameters,
   render: renderCodeSnippet,
 };
@@ -193,6 +207,7 @@ export const Singleline = {
     ...codeSnippetArgs,
     text: singlelineCode,
   },
+  argTypes: variantArgTypes,
   parameters: codeSnippetParameters,
   render: renderCodeSnippet,
 };
@@ -202,6 +217,7 @@ export const InlineWithLayer = {
     ...codeSnippetArgs,
     type: 'inline',
   },
+  argTypes: variantArgTypes,
   parameters: codeSnippetParameters,
   render: renderCodeSnippetWithLayer,
 };
@@ -212,6 +228,7 @@ export const MultilineWithLayer = {
     text: multilineCode,
     type: 'multi',
   },
+  argTypes: variantArgTypes,
   parameters: codeSnippetParameters,
   render: renderCodeSnippetWithLayer,
 };
@@ -221,6 +238,7 @@ export const SinglelineWithLayer = {
     ...codeSnippetArgs,
     text: singlelineCode,
   },
+  argTypes: variantArgTypes,
   parameters: codeSnippetParameters,
   render: renderCodeSnippetWithLayer,
 };
