@@ -715,7 +715,7 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
     const numberInputClasses = cx({
       [`${prefix}--number`]: true,
       [`${prefix}--number--helpertext`]: true,
-      [`${prefix}--number--readonly`]: readOnly,
+      [`${prefix}--number--readonly`]: readOnly && !normalizedProps.disabled,
       [`${prefix}--number--light`]: light,
       [`${prefix}--number--nolabel`]: hideLabel,
       [`${prefix}--number--nosteppers`]: hideSteppers,
@@ -1374,7 +1374,7 @@ const Label = ({ disabled, readOnly, id, hideLabel, label }: LabelProps) => {
   const className = cx({
     [`${prefix}--label`]: true,
     [`${prefix}--label--disabled`]: disabled,
-    [`${prefix}--label--readonly`]: readOnly,
+    [`${prefix}--label--readonly`]: readOnly && !disabled,
     [`${prefix}--visually-hidden`]: hideLabel,
   });
 

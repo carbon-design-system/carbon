@@ -222,7 +222,7 @@ const TimePicker = frFn((props, ref) => {
   const labelClasses = cx(`${prefix}--label`, {
     [`${prefix}--visually-hidden`]: hideLabel,
     [`${prefix}--label--disabled`]: disabled,
-    [`${prefix}--label--readonly`]: readOnly,
+    [`${prefix}--label--readonly`]: readOnly && !normalizedProps.disabled,
   });
 
   const label = typeof labelText !== 'undefined' && labelText !== null && (
