@@ -59,10 +59,13 @@ describe('@carbon/styles/scss/compat', () => {
       $_: get('variable', theme.$background);
     `);
 
-    const theme = unwrap('theme');
     const variable = unwrap('variable');
 
-    expect(variable).toEqual(`var(--cds-background, ${theme['background']})`);
+    // The inline var() fallback is always a sRGB hex value — never oklch() —
+    // so browsers that don't support CSS Color Level 4 receive a valid colour
+    // even when the custom property is not defined on any ancestor.
+    // g100 background = gray.10 hex = #161616
+    expect(variable).toEqual('var(--cds-background, #161616)');
   });
 
   it('should export v10 type tokens', async () => {

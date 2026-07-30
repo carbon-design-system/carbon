@@ -17,6 +17,7 @@ const buildDTCGThemesFile = require('./builders/dtcg-themes');
 const buildDTCGComponentTokensFile = require('./builders/dtcg-component-tokens');
 const buildDTCGTokens = require('./builders/dtcg-tokens');
 const generateDTCGColorAliases = require('./builders/generate-dtcg-color-aliases');
+const generateHexFallbacks = require('./builders/generate-hex-fallbacks');
 
 async function build() {
   reporter.info('Building scss files for themes...');
@@ -25,6 +26,13 @@ async function build() {
   reporter.info('Generating DTCG color palette aliases from @carbon/colors...');
   const paletteFile = generateDTCGColorAliases();
   reporter.success(`Written: ${paletteFile}`);
+
+  // 2. Generate _hex-fallbacks.scss from the palette (must run after step 1).
+  reporter.info(
+    'Generating oklch → hex fallback map for legacy browser support...'
+  );
+  const fallbackFile = generateHexFallbacks();
+  reporter.success(`Written: ${fallbackFile}`);
 
   const SCSS_DIR = path.resolve(__dirname, '../scss');
   const GENERATED_DTCG_DIR = path.join(SCSS_DIR, 'generated');

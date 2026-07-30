@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2018, 2023
+// Copyright IBM Corp. 2018, 2026
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -9,3 +9,18 @@ $prefix: 'cds' !default;
 
 /// Specify if a fallback value should be provided for the CSS Custom Property
 $use-fallback-value: true !default;
+
+/// When true, every CSS custom property whose value is an oklch() color will
+/// be emitted twice: first as a sRGB hex (or rgba) fallback for browsers that
+/// do not support CSS Color Level 4, then as the oklch() value for modern
+/// browsers.  The cascade handles the rest — an unsupported declaration is
+/// silently dropped, so the hex wins on old browsers and oklch wins on modern
+/// ones.
+///
+/// Set to true when you need to support browsers that predate oklch() support:
+///   Chrome < 111, Firefox < 113, Safari < 15.4, Edge < 111 (released 2022–2023)
+///
+/// @example scss
+///   @use '@carbon/themes/scss/config' with ($enable-oklch-fallback: true);
+///
+$enable-oklch-fallback: false !default;
