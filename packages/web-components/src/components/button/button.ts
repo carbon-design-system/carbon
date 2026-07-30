@@ -223,7 +223,7 @@ class CDSButton extends HostListenerMixin(FocusMixin(LitElement)) {
    * Specify the size of the button, from the following list of sizes: `xs`, `sm`, `md`, `lg`, `xl`, `2xl`
    */
   @property({ type: String, reflect: true })
-  size = 'lg';
+  size?: BUTTON_SIZE | string = 'lg';
 
   /**
    * Optional prop to specify the tabIndex of the Button
@@ -300,8 +300,8 @@ class CDSButton extends HostListenerMixin(FocusMixin(LitElement)) {
       [`${prefix}--btn--danger--ghost`]: kind === BUTTON_KIND.DANGER_GHOST,
       [`${prefix}--btn--disabled`]: disabled,
       [`${prefix}--btn--icon-only`]: hasIcon && !hasMainContent,
-      [`${prefix}--btn--${size}`]: size,
-      [`${prefix}--layout--size-${size}`]: size,
+      [`${prefix}--btn--${size}`]: !!size,
+      [`${prefix}--layout--size-${size}`]: !!size,
       [`${prefix}-ce--btn--has-icon`]: hasIcon,
       [`${prefix}--btn--expressive`]: isExpressive,
       [`${prefix}--btn--selected`]: isSelected && kind === 'ghost',

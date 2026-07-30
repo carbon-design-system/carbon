@@ -375,6 +375,100 @@ describe('Popover', () => {
 
       expect(onRequestClose).toHaveBeenCalled();
     });
+
+    it('should call onRequestClose when pressing Escape while the popover content is focused', async () => {
+      const onRequestClose = jest.fn();
+      render(
+        <Popover open onRequestClose={() => onRequestClose()}>
+          <button type="button" data-testid="trigger">
+            Settings
+          </button>
+          <PopoverContent>
+            <button data-testid="inside-button">Inside Button</button>
+          </PopoverContent>
+        </Popover>
+      );
+
+      screen.getByTestId('inside-button').focus();
+      await userEvent.keyboard('{Escape}');
+
+      expect(onRequestClose).toHaveBeenCalled();
+
+      // focus should return to trigger
+      expect(screen.getByTestId('trigger')).toHaveFocus();
+    });
+
+    it('should NOT call onRequestClose when pressing Escape while the trigger is focused', async () => {
+      const onRequestClose = jest.fn();
+      render(
+        <Popover open onRequestClose={() => onRequestClose()}>
+          <button type="button" data-testid="trigger">
+            Settings
+          </button>
+          <PopoverContent>test</PopoverContent>
+        </Popover>
+      );
+
+      screen.getByTestId('trigger').focus();
+      await userEvent.keyboard('{Escape}');
+
+      expect(onRequestClose).not.toHaveBeenCalled();
+
+      // focus should remain on trigger
+      expect(screen.getByTestId('trigger')).toHaveFocus();
+    });
+
+    it('should NOT call onRequestClose when a control inside the content handles Escape via preventDefault', async () => {
+      const onRequestClose = jest.fn();
+      render(
+        <Popover open onRequestClose={() => onRequestClose()}>
+          <button type="button" data-testid="trigger">
+            Settings
+          </button>
+          <PopoverContent>
+            <button
+              data-testid="inside-button"
+              onKeyDown={(event) => {
+                if (event.key === 'Escape') {
+                  event.preventDefault();
+                }
+              }}>
+              Inside Button
+            </button>
+          </PopoverContent>
+        </Popover>
+      );
+
+      screen.getByTestId('inside-button').focus();
+      await userEvent.keyboard('{Escape}');
+
+      expect(onRequestClose).not.toHaveBeenCalled();
+    });
+
+    it('should only call onRequestClose for the innermost nested popover on Escape', async () => {
+      const onOuterRequestClose = jest.fn();
+      const onInnerRequestClose = jest.fn();
+
+      render(
+        <Popover open onRequestClose={onOuterRequestClose}>
+          <button>Outer trigger</button>
+          <PopoverContent>
+            <Popover open onRequestClose={onInnerRequestClose}>
+              <button>Inner trigger</button>
+              <PopoverContent>
+                <button data-testid="inner-button">Inner button</button>
+              </PopoverContent>
+            </Popover>
+          </PopoverContent>
+        </Popover>
+      );
+
+      screen.getByTestId('inner-button').focus();
+      await userEvent.keyboard('{Escape}');
+
+      expect(onInnerRequestClose).toHaveBeenCalled();
+      expect(onOuterRequestClose).not.toHaveBeenCalled();
+    });
   });
 
   it('should NOT call onRequestClose when clicking inside the popover content', async () => {

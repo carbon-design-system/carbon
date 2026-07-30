@@ -1533,6 +1533,29 @@ describe('Range date picker', () => {
       expect(end.value).toBe('03/09/2025');
     });
 
+    it('should preserve the start date when the end input blurs after manual entry', async () => {
+      render(
+        <DatePicker
+          dateFormat="Y-m-d"
+          onChange={() => {}}
+          datePickerType="range">
+          <DatePickerInput id="start-blur" labelText="Start date" />
+          <DatePickerInput id="end-blur" labelText="End date" />
+        </DatePicker>
+      );
+
+      const start = screen.getByLabelText('Start date');
+      const end = screen.getByLabelText('End date');
+
+      await userEvent.type(start, '2023-01-05{enter}');
+      await userEvent.type(end, '2023-01-19');
+
+      fireEvent.blur(end);
+
+      expect(start).toHaveValue('2023-01-05');
+      expect(end).toHaveValue('2023-01-19');
+    });
+
     it('should not fire end input blur handlers when Enter is pressed', async () => {
       const handleBlur = jest.fn();
 

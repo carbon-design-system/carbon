@@ -3575,6 +3575,9 @@ Map {
       "enableV12Overflowmenu": {
         "type": "bool",
       },
+      "enableV12Release": {
+        "type": "bool",
+      },
       "enableV12TileDefaultIcons": {
         "type": "bool",
       },
@@ -5891,6 +5894,7 @@ Map {
       "size": {
         "args": [
           [
+            "xs",
             "sm",
             "md",
             "lg",
@@ -7924,6 +7928,9 @@ Map {
       },
       "pagesUnknown": {
         "type": "bool",
+      },
+      "renderPageSelect": {
+        "type": "func",
       },
       "size": {
         "args": [
@@ -11842,6 +11849,9 @@ Map {
       "enableV12Overflowmenu": {
         "type": "bool",
       },
+      "enableV12Release": {
+        "type": "bool",
+      },
       "enableV12TileDefaultIcons": {
         "type": "bool",
       },
@@ -14072,6 +14082,9 @@ Map {
         "type": "bool",
       },
       "enableV12Overflowmenu": {
+        "type": "bool",
+      },
+      "enableV12Release": {
         "type": "bool",
       },
       "enableV12TileDefaultIcons": {
