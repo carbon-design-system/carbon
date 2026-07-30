@@ -7,6 +7,7 @@
 
 @use 'sass:list';
 @use 'sass:map';
+@use 'sass:meta';
 @use 'scss/generated/surfaces' as generated;
 
 /// Common component easings
@@ -166,6 +167,96 @@ $-durations: (
   'slow-02': $duration-slow-02,
 );
 
+/// Name a surface argument for error messages, so an incorrect inline
+/// definition doesn't report itself as a problem with a catalog name
+/// @param {String | Map} $surface - A surface name or an inline definition
+/// @access private
+/// @group @carbon/motion
+/// @return {String} A phrase naming the surface
+@function -describe($surface) {
+  @if meta.type-of($surface) == 'map' {
+    @return 'inline surface definition';
+  }
+
+  @return '`#{$surface}` surface';
+}
+
+/// Resolve a surface argument to a definition map. A name is looked up in the
+/// shared catalog; allows one-off animations reuse this API without being
+/// added to the public API
+/// @param {String | Map} $surface - A surface name or an inline definition
+/// @access private
+/// @group @carbon/motion
+/// @return {Map} The surface definition
+@function -resolve($surface) {
+  @if meta.type-of($surface) == 'map' {
+    @return $surface;
+  }
+
+  @return surface($surface);
+}
+
+/// Assert that a definition carries every key the reveal mixin reads, with
+/// values the token system recognizes.
+///
+/// If a key is missing, Sass fails silently: `map.get($-durations, 'slo-01')`
+/// returns `null`, the resulting `transition-duration: null` declaration is
+/// dropped, and the element renders as expected while never animating. Catalog
+/// entries are generated and so are always well-formed, but inline definitions
+/// are user-defined, so every key is checked up front and mistakes are raised
+/// as build errors
+/// @param {Map} $definition - The resolved surface definition
+/// @param {String} $label - A phrase naming the surface, for error messages
+/// @access private
+/// @group @carbon/motion
+/// @return {Map} The validated definition
+@function -validate-reveal($definition, $label) {
+  @if meta.type-of($definition) != 'map' {
+    @error 'Expected the #{$label} to be a map of surface properties, but received a #{meta.type-of($definition)}.';
+  }
+
+  $kind: map.get($definition, kind);
+
+  @if $kind == 'shared-element' {
+    @error 'The #{$label} is a shared-element morph with no CSS-only form. Pair it with a JavaScript engine instead.';
+  }
+
+  @if $kind != 'reveal' {
+    @error 'Expected the #{$label} to declare `kind: reveal`, but found `#{if($kind, $kind, 'nothing')}`.';
+  }
+
+  @each $key in (enter, exit) {
+    $keyframe: map.get($definition, $key);
+
+    @if meta.type-of($keyframe) != 'map' {
+      @error 'Expected the #{$label} to define `#{$key}` as a map of CSS property/value pairs.';
+    }
+
+    @if list.length(map.keys($keyframe)) == 0 {
+      @error 'Expected the #{$label} to define at least one property in `#{$key}`.';
+    }
+  }
+
+  $duration: map.get($definition, duration);
+
+  @if not map.has-key($-durations, $duration) {
+    @error 'Unable to find duration `#{if($duration, $duration, 'nothing')}` for the #{$label}. Expected one of: #{map.keys($-durations)}.';
+  }
+
+  @each $key in (enter-easing, exit-easing) {
+    $easing: map.get($definition, $key);
+
+    @if meta.type-of($easing) != 'list' or list.length($easing) != 2 {
+      @error 'Expected the #{$label} to define `#{$key}` as a two item list of an easing name and mode, for example `(entrance expressive)`.';
+    }
+
+    // `motion()` raises its own error for an unknown easing name or mode
+    $-easing-check: motion(list.nth($easing, 1), list.nth($easing, 2));
+  }
+
+  @return $definition;
+}
+
 /// Apply a named reveal surface in CSS from the shared surface map.
 ///
 /// Resting / `[data-carbon-surface-state='enter']` use the surface enter
@@ -182,19 +273,32 @@ $-durations: (
 /// }
 /// ```
 ///
+/// Allow users to provide their own one-off animations by passing a definition
+/// map of the same shape instead of adding a new entry. Duration and easing are
+/// token names instead of raw values, so inline definitions still pass through
+/// the token system.
+///
+/// ```scss
+/// .my-panel {
+///   @include motion.surface((
+///     kind: reveal,
+///     duration: slow-01,
+///     enter: (opacity: 1, clip-path: inset(0 0 0 0)),
+///     exit: (opacity: 0, clip-path: inset(50% 0 50% 0)),
+///     enter-easing: (entrance expressive),
+///     exit-easing: (exit expressive),
+///   ));
+/// }
+/// ```
+///
 /// Shared-element surfaces morph one element into another and have no
 /// CSS-only form; they need a JavaScript engine (Motion in React, View
 /// Transitions for web components), so this mixin rejects them
-/// @param {String} $name - The motion surface name
+/// @param {String | Map} $surface - A surface name, or an inline definition
 /// @access public
 /// @group @carbon/motion
-@mixin surface($name) {
-  $definition: surface($name);
-  $kind: map.get($definition, kind);
-
-  @if $kind != 'reveal' {
-    @error 'The #{$name} surface is a shared-element morph with no CSS-only form. Pair it with a JavaScript engine instead.';
-  }
+@mixin surface($surface) {
+  $definition: -validate-reveal(-resolve($surface), -describe($surface));
 
   $enter: map.get($definition, enter);
   $exit: map.get($definition, exit);

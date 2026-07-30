@@ -191,4 +191,108 @@ describe('@carbon/motion', () => {
       `)
     ).rejects.toThrow(/shared-element morph with no CSS-only form/);
   });
+
+  // one-off animations so the mixin accepts a definition of the
+  // same shape inline
+  test('surface mixin accepts an inline definition', async () => {
+    const { result } = await render(`
+      @use '../index.scss' as motion;
+
+      .surface {
+        @include motion.surface((
+          kind: reveal,
+          duration: slow-01,
+          enter: (opacity: 1, clip-path: inset(0 0 0 0)),
+          exit: (opacity: 0, clip-path: inset(50% 0 50% 0)),
+          enter-easing: (entrance expressive),
+          exit-easing: (exit expressive),
+        ));
+      }
+    `);
+    const css = result.css;
+
+    expect(css).toContain('clip-path: inset(0 0 0 0)');
+    expect(css).toContain('[data-carbon-surface-state=exit]');
+    expect(css).toContain('clip-path: inset(50% 0 50% 0)');
+    expect(css).toContain('@media (prefers-reduced-motion: no-preference)');
+    // duration and easing still resolve through the token system
+    expect(css).toContain('transition-duration: 400ms');
+    expect(css).toContain('transition-property: opacity, clip-path');
+    expect(css).toContain(
+      'transition-timing-function: cubic-bezier(0, 0, 0.3, 1)'
+    );
+    expect(css).toContain('@starting-style');
+  });
+
+  // missing keys would otherwise resolve to `null`, drop the declaration, and
+  // renders correctly but never animate
+  //
+  test('surface mixin rejects an inline definition with an unknown duration', async () => {
+    await expect(
+      render(`
+        @use '../index.scss' as motion;
+
+        .surface {
+          @include motion.surface((
+            kind: reveal,
+            duration: slo-01,
+            enter: (opacity: 1),
+            exit: (opacity: 0),
+            enter-easing: (entrance expressive),
+            exit-easing: (exit expressive),
+          ));
+        }
+      `)
+    ).rejects.toThrow(
+      /Unable to find duration `slo-01` for the inline surface definition/
+    );
+  });
+
+  test('surface mixin rejects a malformed inline definition', async () => {
+    await expect(
+      render(`
+        @use '../index.scss' as motion;
+
+        .surface {
+          @include motion.surface((
+            duration: slow-01,
+            enter: (opacity: 1),
+            exit: (opacity: 0),
+            enter-easing: (entrance expressive),
+            exit-easing: (exit expressive),
+          ));
+        }
+      `)
+    ).rejects.toThrow(/to declare `kind: reveal`, but found `nothing`/);
+
+    await expect(
+      render(`
+        @use '../index.scss' as motion;
+
+        .surface {
+          @include motion.surface((
+            kind: reveal,
+            duration: slow-01,
+            exit: (opacity: 0),
+            enter-easing: (entrance expressive),
+            exit-easing: (exit expressive),
+          ));
+        }
+      `)
+    ).rejects.toThrow(/define `enter` as a map of CSS property\/value pairs/);
+  });
+
+  test('surface mixin rejects inline shared-element definitions', async () => {
+    await expect(
+      render(`
+        @use '../index.scss' as motion;
+
+        .surface {
+          @include motion.surface((kind: shared-element, duration: slow-01));
+        }
+      `)
+    ).rejects.toThrow(
+      /inline surface definition is a shared-element morph with no CSS-only form/
+    );
+  });
 });
