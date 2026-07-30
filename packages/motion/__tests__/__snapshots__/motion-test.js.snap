@@ -21,6 +21,8 @@ exports[`@carbon/motion @carbon/motion/scss/motion.scss 1`] = `
 
 exports[`@carbon/motion Public API 1`] = `
 {
+  "defineMotionSurface": [Function],
+  "describeSurface": [Function],
   "durationFast01": "70ms",
   "durationFast02": "110ms",
   "durationModerate01": "150ms",

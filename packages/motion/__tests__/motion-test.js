@@ -151,6 +151,80 @@ describe('@carbon/motion', () => {
     );
   });
 
+  // One-off animations compose a definition instead of taking a public name.
+  test('getMotionSurface accepts an inline definition', () => {
+    const definition = {
+      kind: 'reveal',
+      duration: 'slow-01',
+      enter: { opacity: 1, clipPath: 'inset(0 0 0 0)' },
+      exit: { opacity: 0, clipPath: 'inset(50% 0 50% 0)' },
+      enterEasing: ['entrance', 'expressive'],
+      exitEasing: ['exit', 'expressive'],
+    };
+
+    expect(CarbonMotion.getMotionSurface(definition)).toBe(definition);
+    expect(CarbonMotion.defineMotionSurface(definition)).toBe(definition);
+  });
+
+  test('describeSurface names inline definitions separately from catalog names', () => {
+    expect(CarbonMotion.describeSurface('expand')).toBe('`expand` surface');
+    expect(CarbonMotion.describeSurface({ kind: 'reveal' })).toBe(
+      'inline surface definition'
+    );
+  });
+
+  // A reveal missing `enter` would otherwise resolve to an empty keyframe and
+  // animate nothing, and a missing `kind` falls through to shared-element.
+  test('rejects a malformed inline definition', () => {
+    const base = {
+      duration: 'slow-01',
+      enter: { opacity: 1 },
+      exit: { opacity: 0 },
+      enterEasing: ['entrance', 'expressive'],
+      exitEasing: ['exit', 'expressive'],
+    };
+
+    expect(() => CarbonMotion.defineMotionSurface({ ...base })).toThrow(
+      /declare a `kind` of `reveal` or `shared-element`, but found `nothing`/
+    );
+
+    expect(() =>
+      CarbonMotion.defineMotionSurface({ ...base, kind: 'reveal', enter: {} })
+    ).toThrow(/define `enter` as an object with at least one CSS property/);
+
+    // shared-element keyframes stay optional
+    expect(() =>
+      CarbonMotion.defineMotionSurface({
+        kind: 'shared-element',
+        duration: 'moderate-02',
+        enterEasing: ['standard', 'productive'],
+        exitEasing: ['standard', 'productive'],
+      })
+    ).not.toThrow();
+  });
+
+  test('rejects inline definitions that leave the token system', () => {
+    const base = {
+      kind: 'reveal',
+      enter: { opacity: 1 },
+      exit: { opacity: 0 },
+      enterEasing: ['entrance', 'expressive'],
+      exitEasing: ['exit', 'expressive'],
+    };
+
+    expect(() =>
+      CarbonMotion.defineMotionSurface({ ...base, duration: '400ms' })
+    ).toThrow(/Invalid inline surface definition\. Unable to find duration/);
+
+    expect(() =>
+      CarbonMotion.defineMotionSurface({
+        ...base,
+        duration: 'slow-01',
+        enterEasing: ['swift', 'expressive'],
+      })
+    ).toThrow(/Invalid inline surface definition\. Unable to find easing/);
+  });
+
   // the mixin emits enter/exit attribute states plus transitions behind a
   // reduced-motion preference guard
   test('surface mixin emits reveal styles behind a reduced-motion guard', async () => {

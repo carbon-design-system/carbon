@@ -5,7 +5,13 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import type { DurationName, EasingMode, EasingName } from './tokens';
+import {
+  resolveDuration,
+  resolveEasing,
+  type DurationName,
+  type EasingMode,
+  type EasingName,
+} from './tokens';
 
 type MotionEasing = readonly [EasingName, EasingMode];
 
@@ -92,16 +98,115 @@ export const surfaces = {
 
 export type MotionSurfaceName = keyof typeof surfaces;
 
-// Give JavaScript consumers a clear error for an unknown surface name.
-export const getMotionSurface = (name: MotionSurfaceName) => {
-  const surface = surfaces[name];
+/**
+ * Anywhere a surface is accepted, it can be named or supplied inline. Not
+ * every animation is a system-wide intent, and every name in `surfaces` is
+ * public API, so a one-off composes a definition of the same shape rather than
+ * claiming a name.
+ */
+export type MotionSurfaceInput = MotionSurfaceName | MotionSurfaceDefinition;
 
-  if (!surface) {
+const isSurfaceDefinition = (
+  surface: MotionSurfaceInput
+): surface is MotionSurfaceDefinition => typeof surface === 'object';
+
+/**
+ * Name a surface for error messages, so a mistake in an inline definition is
+ * not reported as a problem with a catalog name.
+ */
+export const describeSurface = (surface: MotionSurfaceInput) =>
+  isSurfaceDefinition(surface)
+    ? 'inline surface definition'
+    : `\`${surface}\` surface`;
+
+const isKeyframe = (value: unknown) =>
+  typeof value === 'object' && value !== null && Object.keys(value).length > 0;
+
+/**
+ * Assert that a definition carries every key its `kind` requires, with values
+ * the token system recognizes.
+ *
+ * Catalog entries are generated and so are always well formed, but inline
+ * definitions are user-defined and several mistakes are otherwise silent: a
+ * reveal missing `enter` resolves to an empty keyframe and animates nothing,
+ * and a missing `kind` falls through to the shared-element path. Token names
+ * are checked by `resolveDuration`/`resolveEasing`, which raise their own
+ * errors.
+ */
+const validateSurface = (
+  definition: MotionSurfaceDefinition,
+  label: string
+): MotionSurfaceDefinition => {
+  const { kind } = definition;
+
+  if (kind !== 'reveal' && kind !== 'shared-element') {
     throw new Error(
-      `Unable to find motion surface \`${name}\`. Expected one of: ` +
+      `Expected the ${label} to declare a \`kind\` of \`reveal\` or ` +
+        `\`shared-element\`, but found \`${kind ?? 'nothing'}\`.`
+    );
+  }
+
+  // shared-element keyframes are optional; reveal surfaces animate between them
+  if (kind === 'reveal') {
+    for (const key of ['enter', 'exit'] as const) {
+      if (!isKeyframe(definition[key])) {
+        throw new Error(
+          `Expected the ${label} to define \`${key}\` as an object with at ` +
+            'least one CSS property.'
+        );
+      }
+    }
+  }
+
+  try {
+    resolveDuration(definition.duration);
+    resolveEasing(...definition.enterEasing);
+    resolveEasing(...definition.exitEasing);
+  } catch (error) {
+    throw new Error(
+      `Invalid ${label}. ${error instanceof Error ? error.message : error}`
+    );
+  }
+
+  return definition;
+};
+
+/**
+ * Author a one-off surface definition.
+ *
+ * Nothing here changes the value — it is returned as given. What it buys is
+ * type inference at the definition site and validation at module load rather
+ * than at first animation. Assigning a bare object to `MotionSurfaceDefinition`
+ * reports against the wrong union member (a `kind: 'reveal'` object is faulted
+ * for not being a `SharedElementSurface`); the generic constraint here narrows
+ * the literals so errors point at the property actually at fault.
+ *
+ * Define these at module scope. React adapters key their memoization on the
+ * surface, so an object rebuilt each render restarts in-flight animations.
+ */
+export const defineMotionSurface = <T extends MotionSurfaceDefinition>(
+  definition: T
+): T => validateSurface(definition, 'inline surface definition') as T;
+
+/**
+ * Resolve a surface to its definition. A name is looked up in the shared
+ * catalog; an inline definition is validated and passed through.
+ */
+export function getMotionSurface(
+  surface: MotionSurfaceInput
+): MotionSurfaceDefinition {
+  if (isSurfaceDefinition(surface)) {
+    return validateSurface(surface, describeSurface(surface));
+  }
+
+  const definition: MotionSurfaceDefinition | undefined = surfaces[surface];
+
+  if (!definition) {
+    throw new Error(
+      `Unable to find motion surface \`${surface}\`. Expected one of: ` +
         Object.keys(surfaces).join(', ')
     );
   }
 
-  return surface;
-};
+  return definition;
+}
