@@ -32,14 +32,14 @@ export default {
 
 const groupArgs = {
   disabled: false,
-  helperText: 'Choose how you want to receive account updates.',
+  helperText: 'Helper text goes here',
   invalid: false,
-  invalidText: 'Choose at least one notification method.',
-  legendText: 'Notification methods',
+  invalidText: 'Invalid message goes here',
+  legendText: 'Group label',
   orientation: 'vertical',
   readOnly: false,
   warn: false,
-  warnText: 'Review your notification settings before continuing.',
+  warnText: 'Warning message goes here',
 };
 
 const groupArgTypes = {
@@ -116,16 +116,16 @@ const groupControls = [
 const checkboxArgs = {
   checked: false,
   disabled: false,
-  helperText: 'You can change this preference at any time.',
+  helperText: 'Helper text goes here',
   hideLabel: false,
   indeterminate: false,
   invalid: false,
-  invalidText: 'Select this option to continue.',
-  labelText: 'Email me product updates',
+  invalidText: 'Invalid text goes here',
+  labelText: 'Checkbox label',
   readOnly: false,
   title: '',
   warn: false,
-  warnText: 'Review this preference before continuing.',
+  warnText: 'Warning text goes here',
 };
 
 const checkboxArgTypes = {
@@ -195,8 +195,8 @@ const checkboxControls = Object.keys(checkboxArgTypes);
 
 export const Default = (args) => (
   <CheckboxGroup {...args} readOnly={args.readOnly || undefined}>
-    <Checkbox labelText="Email notifications" id="checkbox-label-1" />
-    <Checkbox labelText="SMS notifications" id="checkbox-label-2" />
+    <Checkbox labelText="Checkbox label" id="checkbox-label-1" />
+    <Checkbox labelText="Checkbox label" id="checkbox-label-2" />
   </CheckboxGroup>
 );
 
@@ -215,9 +215,9 @@ Default.parameters = {
 export const Horizontal = (args) => {
   return (
     <CheckboxGroup {...args} readOnly={args.readOnly || undefined}>
-      <Checkbox labelText="Email notifications" id="checkbox-label-1" />
-      <Checkbox labelText="SMS notifications" id="checkbox-label-2" />
-      <Checkbox labelText="Push notifications" id="checkbox-label-3" />
+      <Checkbox labelText="Checkbox label" id="checkbox-label-1" />
+      <Checkbox labelText="Checkbox label" id="checkbox-label-2" />
+      <Checkbox labelText="Checkbox label" id="checkbox-label-3" />
     </CheckboxGroup>
   );
 };
@@ -273,24 +273,11 @@ Single.parameters = {
   },
 };
 
-export const Skeleton = (args) => <CheckboxSkeleton {...args} />;
-
-Skeleton.args = {
-  className: '',
-};
-
-Skeleton.argTypes = {
-  className: {
-    control: {
-      type: 'text',
-    },
-    description: 'Specify an optional class name to add to the skeleton.',
-  },
-};
+export const Skeleton = () => <CheckboxSkeleton />;
 
 Skeleton.parameters = {
   controls: {
-    include: ['className'],
+    disable: true,
   },
 };
 
@@ -303,12 +290,12 @@ export const withAILabel = (args) => {
           <h2 className="ai-label-heading">84%</h2>
           <p className="secondary bold">Confidence score</p>
           <p className="secondary">
-            This recommendation is based on your notification activity from the
-            last 30 days.
+            Lorem ipsum dolor sit amet, di os consectetur adipiscing elit, sed
+            do eiusmod tempor incididunt ut fsil labore et dolore magna aliqua.
           </p>
           <hr />
           <p className="secondary">Model type</p>
-          <p className="bold">Notification preference model</p>
+          <p className="bold">Foundation model</p>
         </div>
         <AILabelActions>
           <IconButton kind="ghost" label="View">
@@ -332,37 +319,37 @@ export const withAILabel = (args) => {
         decorator={AILabelFunc()}
         {...args}
         readOnly={args.readOnly || undefined}>
-        <Checkbox labelText="Email notifications" id="checkbox-label-1" />
-        <Checkbox labelText="SMS notifications" id="checkbox-label-2" />
-        <Checkbox labelText="Push notifications" id="checkbox-label-3" />
+        <Checkbox labelText="Checkbox label" id="checkbox-label-1" />
+        <Checkbox labelText="Checkbox label" id="checkbox-label-2" />
+        <Checkbox labelText="Checkbox label" id="checkbox-label-3" />
       </CheckboxGroup>
 
       <CheckboxGroup {...args} readOnly={args.readOnly || undefined}>
         <Checkbox
-          labelText="Email notifications"
+          labelText="Checkbox label"
           id="checkbox-label-4"
           decorator={AILabelFunc()}
         />
         <Checkbox
-          labelText="SMS notifications"
+          labelText="Checkbox label"
           id="checkbox-label-5"
           decorator={AILabelFunc()}
         />
-        <Checkbox labelText="Push notifications" id="checkbox-label-6" />
+        <Checkbox labelText="Checkbox label" id="checkbox-label-6" />
       </CheckboxGroup>
 
       <CheckboxGroup {...args} readOnly={args.readOnly || undefined}>
         <Checkbox
-          labelText="Email notifications"
+          labelText="Checkbox label"
           id="checkbox-label-7"
           decorator={AILabelFunc('inline')}
         />
         <Checkbox
-          labelText="SMS notifications"
+          labelText="Checkbox label"
           id="checkbox-label-8"
           decorator={AILabelFunc('inline')}
         />
-        <Checkbox labelText="Push notifications" id="checkbox-label-9" />
+        <Checkbox labelText="Checkbox label" id="checkbox-label-9" />
       </CheckboxGroup>
     </div>
   );
@@ -370,6 +357,8 @@ export const withAILabel = (args) => {
 
 withAILabel.args = {
   ...groupArgs,
+  helperText: '',
+  legendText: 'Group Label',
 };
 
 withAILabel.argTypes = { ...groupArgTypes };

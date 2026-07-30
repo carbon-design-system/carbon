@@ -16,21 +16,17 @@ import { CHECKBOX_ORIENTATION } from './defs';
 import { iconLoader } from '../../globals/internal/icon-loader';
 import { useArgs } from 'storybook/preview-api';
 
-const checkboxLabels = {
-  email: 'Email notifications',
-  sms: 'SMS notifications',
-  push: 'Push notifications',
-};
+const checkboxLabel = 'Checkbox label';
 
 const groupArgs = {
   disabled: false,
-  helperText: 'Choose how you want to receive account updates.',
+  helperText: 'Helper text goes here',
   invalid: false,
-  invalidText: 'Choose at least one notification method.',
-  legendText: 'Notification methods',
+  invalidText: 'Invalid message goes here',
+  legendText: 'Group label',
   readonly: false,
   warn: false,
-  warnText: 'Review your notification settings before continuing.',
+  warnText: 'Warn message goes here',
   orientation: 'vertical',
 };
 
@@ -82,16 +78,16 @@ const groupControls = Object.keys(groupArgTypes);
 const checkboxArgs = {
   checked: false,
   disabled: false,
-  helperText: 'You can change this preference at any time.',
+  helperText: 'Helper text goes here',
   hideLabel: false,
   indeterminate: false,
   invalid: false,
-  invalidText: 'Select this option to continue.',
-  labelText: 'Email me product updates',
+  invalidText: 'Invalid test goes here',
+  labelText: checkboxLabel,
   readonly: false,
   title: '',
   warn: false,
-  warnText: 'Review this preference before continuing.',
+  warnText: 'Warning test goes here',
 };
 
 const checkboxArgTypes = {
@@ -221,10 +217,10 @@ export const Default = {
       ?warn="${warn}"
       warn-text="${warnText}">
       <cds-checkbox @cds-checkbox-changed="${onChange}"
-        >${checkboxLabels.email}</cds-checkbox
+        >${checkboxLabel}</cds-checkbox
       >
       <cds-checkbox @cds-checkbox-changed="${onChange}"
-        >${checkboxLabels.sms}</cds-checkbox
+        >${checkboxLabel}</cds-checkbox
       >
     </cds-checkbox-group>
   `,
@@ -272,10 +268,10 @@ export const Horizontal = {
       ?warn="${warn}"
       warn-text="${warnText}">
       <cds-checkbox @cds-checkbox-changed="${onChange}"
-        >${checkboxLabels.email}</cds-checkbox
+        >${checkboxLabel}</cds-checkbox
       >
       <cds-checkbox @cds-checkbox-changed="${onChange}"
-        >${checkboxLabels.sms}</cds-checkbox
+        >${checkboxLabel}</cds-checkbox
       >
     </cds-checkbox-group>
   `,
@@ -293,23 +289,14 @@ export const Single = {
 };
 
 export const Skeleton = {
-  args: {
-    class: '',
-  },
-  argTypes: {
-    class: {
-      control: 'text',
-      description: 'Specify an optional class name to add to the skeleton.',
-    },
-  },
   parameters: {
     controls: {
-      include: ['class'],
+      disable: true,
     },
   },
-  render: ({ class: className }) => html`
+  render: () => html`
     <fieldset class="${prefix}--fieldset">
-      <cds-checkbox-skeleton class="${className}"></cds-checkbox-skeleton>
+      <cds-checkbox-skeleton></cds-checkbox-skeleton>
     </fieldset>
   `,
 };
@@ -320,12 +307,12 @@ const content = html`
     <h2 class="ai-label-heading">84%</h2>
     <p class="secondary bold">Confidence score</p>
     <p class="secondary">
-      This recommendation is based on your notification activity from the last
-      30 days.
+      Lorem ipsum dolor sit amet, di os consectetur adipiscing elit, sed do
+      eiusmod tempor incididunt ut fsil labore et dolore magna aliqua.
     </p>
     <hr />
     <p class="secondary">Model type</p>
-    <p class="bold">Notification preference model</p>
+    <p class="bold">Foundation model</p>
   </div>
 `;
 
@@ -380,13 +367,13 @@ export const WithAILabel = {
           ${content}${actions}</cds-ai-label
         >
         <cds-checkbox @cds-checkbox-changed="${onChange}"
-          >${checkboxLabels.email}</cds-checkbox
+          >${checkboxLabel}</cds-checkbox
         >
         <cds-checkbox @cds-checkbox-changed="${onChange}"
-          >${checkboxLabels.sms}</cds-checkbox
+          >${checkboxLabel}</cds-checkbox
         >
         <cds-checkbox @cds-checkbox-changed="${onChange}"
-          >${checkboxLabels.push}</cds-checkbox
+          >${checkboxLabel}</cds-checkbox
         >
       </cds-checkbox-group>
       <br></br>
@@ -401,19 +388,19 @@ export const WithAILabel = {
       ?warn="${warn}"
         warn-text="${warnText}">
         <cds-checkbox @cds-checkbox-changed="${onChange}">
-          ${checkboxLabels.email}
+          ${checkboxLabel}
           <cds-ai-label alignment="bottom-left">
             ${content}${actions}</cds-ai-label
           >
         </cds-checkbox>
         <cds-checkbox @cds-checkbox-changed="${onChange}">
-          ${checkboxLabels.sms}
+          ${checkboxLabel}
           <cds-ai-label alignment="bottom-left">
             ${content}${actions}</cds-ai-label
           >
         </cds-checkbox>
         <cds-checkbox @cds-checkbox-changed="${onChange}"
-          >${checkboxLabels.push}</cds-checkbox
+          >${checkboxLabel}</cds-checkbox
         >
       </cds-checkbox-group>
        <br></br>
@@ -428,19 +415,19 @@ export const WithAILabel = {
       ?warn="${warn}"
         warn-text="${warnText}">
         <cds-checkbox @cds-checkbox-changed="${onChange}">
-          ${checkboxLabels.email}
+          ${checkboxLabel}
           <cds-ai-label alignment="bottom-left" kind="inline">
             ${content}${actions}
           </cds-ai-label>
         </cds-checkbox>
         <cds-checkbox @cds-checkbox-changed="${onChange}">
-          ${checkboxLabels.sms}
+          ${checkboxLabel}
           <cds-ai-label alignment="bottom-left" kind="inline">
             ${content}${actions}
           </cds-ai-label>
         </cds-checkbox>
         <cds-checkbox @cds-checkbox-changed="${onChange}"
-          >${checkboxLabels.push}</cds-checkbox
+          >${checkboxLabel}</cds-checkbox
         >
       </cds-checkbox-group>
     </div>
