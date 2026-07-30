@@ -104,7 +104,9 @@ const useFocusTrap = (
         ? document.activeElement
         : null;
 
-    overlay.focus();
+    if (!isLayeredOnTop(previouslyFocused, overlay)) {
+      overlay.focus();
+    }
 
     let reclaiming = false;
 

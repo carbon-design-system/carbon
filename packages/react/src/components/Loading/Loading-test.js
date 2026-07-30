@@ -213,6 +213,25 @@ describe('Loading', () => {
       expect(document.activeElement).toBe(modalButton);
     });
 
+    it('should not claim focus when mounted under an already open modal', () => {
+      render(
+        <div role="dialog" aria-modal="true" aria-label="Layered modal">
+          <button data-testid="modal-button">Confirm</button>
+        </div>
+      );
+
+      const modalButton = screen.getByTestId('modal-button');
+      modalButton.focus();
+      expect(document.activeElement).toBe(modalButton);
+
+      render(<Loading withOverlay active />);
+
+      expect(
+        screen.getByRole('dialog', { name: 'loading' })
+      ).toBeInTheDocument();
+      expect(document.activeElement).toBe(modalButton);
+    });
+
     const stubModalSelector = (element, isModal) => {
       const { matches } = element;
       element.matches = (selector) =>
@@ -329,14 +348,14 @@ describe('Loading', () => {
         </div>
       );
 
-      const second = screen.getByRole('dialog', { name: 'second' });
+      const first = screen.getByRole('dialog', { name: 'first' });
 
       await waitFor(() => {
-        expect(document.activeElement).toBe(second);
+        expect(document.activeElement).toBe(first);
       });
 
       await user.tab();
-      expect(document.activeElement).toBe(second);
+      expect(document.activeElement).toBe(first);
     });
 
     it('should restore focus when overlay deactivates', () => {
