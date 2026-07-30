@@ -90,15 +90,14 @@
   margin-block-end: 1px;
 }
 
+.motion-surface-demo__container--expand {
+  block-size: 100%;
+  inline-size: 95%;
+}
 // stylelint-disable declaration-no-important
 .motion-surface-tile:active {
   color: inherit !important;
   text-decoration: none !important;
-}
-
-.motion-surface-demo__container--expand {
-  block-size: 100%;
-  inline-size: 95%;
 }
 // stylelint-enable declaration-no-important
 
