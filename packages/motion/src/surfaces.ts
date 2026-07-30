@@ -71,15 +71,6 @@ export const surfaces = {
     enterEasing: ['entrance', 'expressive'],
     exitEasing: ['exit', 'expressive'],
   },
-  // Component reveal, "stretching" from vertical axis
-  stretch: {
-    kind: 'reveal',
-    duration: 'slow-01',
-    enter: { opacity: 1, clipPath: 'inset(0 0 0 0)' },
-    exit: { opacity: 0, clipPath: 'inset(50% 0 50% 0)' },
-    enterEasing: ['entrance', 'expressive'],
-    exitEasing: ['exit', 'expressive'],
-  },
   // Card/tile > side-panel/tearsheet
   expand: {
     kind: 'shared-element',

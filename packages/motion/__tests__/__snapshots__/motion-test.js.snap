@@ -125,26 +125,6 @@ exports[`@carbon/motion Public API 1`] = `
       "kind": "shared-element",
       "origin": "trigger",
     },
-    "stretch": {
-      "duration": "slow-01",
-      "enter": {
-        "clipPath": "inset(0 0 0 0)",
-        "opacity": 1,
-      },
-      "enterEasing": [
-        "entrance",
-        "expressive",
-      ],
-      "exit": {
-        "clipPath": "inset(50% 0 50% 0)",
-        "opacity": 0,
-      },
-      "exitEasing": [
-        "exit",
-        "expressive",
-      ],
-      "kind": "reveal",
-    },
   },
   "unstable_tokens": [
     "fast01",

@@ -138,16 +138,6 @@ describe('@carbon/motion', () => {
       exitEasing: ['exit', 'expressive'],
     });
 
-    const stretch = CarbonMotion.getMotionSurface('stretch');
-    expect(stretch).toEqual({
-      kind: 'reveal',
-      duration: 'slow-01',
-      enter: { opacity: 1, clipPath: 'inset(0 0 0 0)' },
-      exit: { opacity: 0, clipPath: 'inset(50% 0 50% 0)' },
-      enterEasing: ['entrance', 'expressive'],
-      exitEasing: ['exit', 'expressive'],
-    });
-
     expect(CarbonMotion.resolveDuration(disclosure.duration)).toBe('150ms');
     expect(CarbonMotion.resolveEasing(...disclosure.enterEasing)).toEqual([
       0, 0, 0.38, 0.9,
@@ -157,7 +147,7 @@ describe('@carbon/motion', () => {
   // Explain which surface names are available when a name is not valid.
   test('should throw for an unknown motion surface', () => {
     expect(() => CarbonMotion.getMotionSurface('nope')).toThrow(
-      'Unable to find motion surface `nope`. Expected one of: disclosure, contextual, stretch, expand, invoke'
+      'Unable to find motion surface `nope`. Expected one of: disclosure, contextual, expand, invoke'
     );
   });
 
