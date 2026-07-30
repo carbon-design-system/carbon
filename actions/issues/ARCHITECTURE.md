@@ -75,6 +75,12 @@ limited to eligible Bug events and may fail without stopping Carbon-backed
 plugins; the eligible Bob plugin then records the missing dedicated token and
 keeps the workflow failure visible.
 
+The workflow queues all events for an issue in one concurrency group instead of
+allowing a newer pending delivery to replace an older one. Bob token creation is
+limited to eligible Bug events and may fail without stopping Carbon-backed
+plugins; the eligible Bob plugin then records the missing dedicated token and
+keeps the workflow failure visible.
+
 ## Managed comments
 
 [`./src/manage-comment.js`](./src/manage-comment.js) identifies an automated
