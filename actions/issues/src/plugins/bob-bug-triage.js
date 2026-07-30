@@ -6,16 +6,17 @@
  */
 
 /**
- * Plugin for a read-only Bob assessment of newly opened formal Bugs. Bob sees
- * issue context and repository guidance, returns plain text, and never receives
- * a GitHub token; the Bob Automation client posts validated output afterward.
+ * Plugin for one read-only Bob assessment when an issue opens or becomes a
+ * formal Bug. Bob sees issue context and repository guidance, returns plain
+ * text, and never receives a GitHub token; the Bob Automation client posts
+ * validated output afterward.
  */
 import * as core from '@actions/core';
 import { execFile } from 'node:child_process';
 import { access, mkdir, rm, writeFile } from 'node:fs/promises';
 import { join } from 'node:path';
 import { promisify } from 'node:util';
-import { events } from '../conditions.js';
+import { events, or } from '../conditions.js';
 import { manageComment } from '../manage-comment.js';
 
 const execFileAsync = promisify(execFile);
@@ -133,6 +134,39 @@ function buildIssueContext(context) {
 }
 
 /**
+ * Look for Bob's hidden header before spending inference time. The `typed`
+ * fallback may arrive after an `opened` run, so this read makes the two eligible
+ * events behave as one logical operation.
+ *
+ * @param {object} context
+ * @param {object} octokit
+ * @returns {Promise<boolean>}
+ */
+async function hasExistingBobTriage(context, octokit) {
+  const { issue, repository } = context.payload;
+  core.info(
+    `[bob-triage] Checking issue #${issue.number} for an existing managed Bob comment`
+  );
+  const comments = await octokit.paginate(octokit.rest.issues.listComments, {
+    owner: repository.owner.login,
+    repo: repository.name,
+    issue_number: issue.number,
+    per_page: 100,
+  });
+  const existingComment = comments.find((comment) => {
+    return comment.body?.trim().startsWith(BOB_COMMENT_HEADER);
+  });
+  if (existingComment) {
+    core.info(
+      `[bob-triage] Found managed Bob comment ${existingComment.id}; skipping duplicate inference`
+    );
+    return true;
+  }
+  core.info('[bob-triage] No managed Bob comment exists; inference is needed');
+  return false;
+}
+
+/**
  * Give Bob only the environment it needs, explicitly excluding GitHub tokens.
  *
  * @param {object} environment
@@ -189,7 +223,9 @@ async function executeBob(workspace, apiKey) {
 }
 
 /**
- * Generate and post Bob's preliminary triage for a newly opened formal Bug.
+ * Generate and post Bob's preliminary triage once for a formal Bug. Supporting
+ * both opened and typed handles GitHub applying an issue form's type in a
+ * separate event without producing duplicate inference or comments.
  *
  * @param {object} context
  * @param {object} octokit
@@ -202,6 +238,10 @@ export async function runBobBugTriage(context, octokit, runBob = executeBob) {
   );
   if (issue.type?.name !== 'Bug') {
     core.info('[bob-triage] Formal issue type is not Bug; skipping Bob');
+    return;
+  }
+
+  if (await hasExistingBobTriage(context, octokit)) {
     return;
   }
 
@@ -258,7 +298,17 @@ export async function runBobBugTriage(context, octokit, runBob = executeBob) {
 
 const plugin = {
   name: 'Generate preliminary Bob bug triage',
-  conditions: [events.issues.opened],
+  conditions: [
+    or(events.issues.opened, events.issues.typed),
+    {
+      // Check the formal type before the runner requests Bob's optional token.
+      // Labels are user-editable and are not a trusted substitute for Issue Type.
+      key: 'formal_bug',
+      run(context) {
+        return context.payload.issue?.type?.name === 'Bug';
+      },
+    },
+  ],
   // The runner creates an Octokit client from this input only for this plugin.
   // That makes Bob's managed comment the Bob Automation app's only output.
   githubTokenInput: 'BOB_GITHUB_TOKEN',

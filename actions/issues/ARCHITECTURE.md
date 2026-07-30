@@ -50,12 +50,21 @@ optional instance of `octokit` to use for API requests. A plugin can do any
 operations needed during its lifecycle to the issue in question.
 
 The registered plugins initialize formal Bug metadata, manage contribution
-comments, and run Bob's preliminary triage for newly opened formal Bugs. Carbon
-Automation is the default GitHub client. The Bob plugin declares
-`BOB_GITHUB_TOKEN`, so only Bob's managed triage comment uses the Bob Automation
-client. The Bob CLI receives only its API key and returns text; it receives
-neither GitHub token. That inference credential is passed through the
+comments, and run Bob's preliminary triage for newly opened or newly typed
+formal Bugs. Carbon Automation is the default GitHub client. The Bob plugin
+declares the optional-at-the-action-boundary `BOB_GITHUB_TOKEN`; the plugin
+runner requires it only after Bob's event and formal-Bug conditions pass, so
+only Bob's managed triage comment uses the Bob Automation client. Before
+invoking Bob, the plugin checks for its hidden comment header and skips an issue
+it already assessed. The Bob CLI receives only its API key and returns text; it
+receives neither GitHub token. That inference credential is passed through the
 `BOB_INFERENCE_API_KEY` action input and child-process environment variable.
+
+The workflow queues all events for an issue in one concurrency group instead of
+allowing a newer pending delivery to replace an older one. Bob token creation is
+limited to eligible Bug events and may fail without stopping Carbon-backed
+plugins; the eligible Bob plugin then records the missing dedicated token and
+keeps the workflow failure visible.
 
 ## Managed comments
 
