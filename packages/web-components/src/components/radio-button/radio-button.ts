@@ -491,7 +491,7 @@ class CDSRadioButton extends HostListenerMixin(FocusMixin(LitElement)) {
         name=${ifDefined(name)}
         value=${ifDefined(value)} />
       <label
-        for="radio"
+        for="input"
         class="${prefix}--radio-button__label ${normalizedProps.invalid
           ? `${prefix}--radio-button__label--invalid`
           : ''} ${normalizedProps.warn
