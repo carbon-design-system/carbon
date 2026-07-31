@@ -5,35 +5,35 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-export const fast01 = '70ms';
-export const fast02 = '110ms';
-export const moderate01 = '150ms';
-export const moderate02 = '240ms';
-export const slow01 = '400ms';
-export const slow02 = '700ms';
+// Token values are generated from src/dtcg/motion.json by `yarn build:tokens`
+// (tasks/build.js) and written to js/generated/tokens.js before this file is
+// bundled. Run `yarn build` to regenerate them.
+import {
+  durationFast01,
+  durationFast02,
+  durationModerate01,
+  durationModerate02,
+  durationSlow01,
+  durationSlow02,
+  easings,
+} from '../js/generated/tokens.js';
 
-// V11 Tokens
-export const durationFast01 = fast01;
-export const durationFast02 = fast02;
-export const durationModerate01 = moderate01;
-export const durationModerate02 = moderate02;
-export const durationSlow01 = slow01;
-export const durationSlow02 = slow02;
-
-export const unstable_tokens = [
-  'fast01',
-  'fast02',
-  'moderate01',
-  'moderate02',
-  'slow01',
-  'slow02',
-  'durationFast01',
-  'durationFast02',
-  'durationModerate01',
-  'durationModerate02',
-  'durationSlow01',
-  'durationSlow02',
-] as const;
+export {
+  durationFast01,
+  durationFast02,
+  durationModerate01,
+  durationModerate02,
+  durationSlow01,
+  durationSlow02,
+  fast01,
+  fast02,
+  moderate01,
+  moderate02,
+  slow01,
+  slow02,
+  easings,
+  unstable_tokens,
+} from '../js/generated/tokens.js';
 
 export type DurationName =
   | 'fast-01'
@@ -42,6 +42,11 @@ export type DurationName =
   | 'moderate-02'
   | 'slow-01'
   | 'slow-02';
+
+export type EasingName = 'standard' | 'entrance' | 'exit';
+export type EasingMode = 'productive' | 'expressive';
+export type CubicBezier = readonly [number, number, number, number];
+export type EasingMap = Record<EasingName, Record<EasingMode, string>>;
 
 // Map the surface names to the existing Carbon duration tokens.
 const durations: Record<DurationName, string> = {
@@ -53,13 +58,10 @@ const durations: Record<DurationName, string> = {
   'slow-02': durationSlow02,
 };
 
-export type EasingName = 'standard' | 'entrance' | 'exit';
-export type EasingMode = 'productive' | 'expressive';
-export type CubicBezier = readonly [number, number, number, number];
-export type EasingMap = Record<EasingName, Record<EasingMode, string>>;
 type EasingCurveMap = Record<EasingName, Record<EasingMode, CubicBezier>>;
 
 // Keep one numeric source for every Carbon easing curve.
+// Used by resolveEasing() — surfaces need raw numeric arrays, not CSS strings.
 const easingCurves: EasingCurveMap = {
   standard: {
     productive: [0.2, 0, 0.38, 0.9],
@@ -75,40 +77,20 @@ const easingCurves: EasingCurveMap = {
   },
 };
 
-const formatEasing = (curve: CubicBezier) =>
-  `cubic-bezier(${curve.join(', ')})`;
-
-export const easings: EasingMap = {
-  standard: {
-    productive: formatEasing(easingCurves.standard.productive),
-    expressive: formatEasing(easingCurves.standard.expressive),
-  },
-  entrance: {
-    productive: formatEasing(easingCurves.entrance.productive),
-    expressive: formatEasing(easingCurves.entrance.expressive),
-  },
-  exit: {
-    productive: formatEasing(easingCurves.exit.productive),
-    expressive: formatEasing(easingCurves.exit.expressive),
-  },
-};
-
 export const motion = (name: EasingName, mode: EasingMode) => {
-  if (!easings[name]) {
+  const easing = easings[name];
+  if (!easing) {
     throw new Error(
       `Unable to find easing \`${name}\` in our supported easings. Expected ` +
         `one of: ${Object.keys(easings).join(', ')}`
     );
   }
-
-  const easing = easings[name];
   if (!easing[mode]) {
     throw new Error(
       `Unable to find a mode for the easing \`${name}\` called: \`${mode}\`. ` +
         `Expected one of: ${Object.keys(easing).join(', ')}`
     );
   }
-
   return easing[mode];
 };
 
