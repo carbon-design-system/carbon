@@ -17,8 +17,6 @@ const args = {
   defaultWidth: 300,
   disabled: false,
   enableCounter: true,
-  hideLabel: false,
-  helperText: 'Optional helper text',
   invalid: false,
   invalidText:
     'Error message that is really long can wrap to more lines but should not be excessively long.',
@@ -54,14 +52,6 @@ const argTypes = {
   enableCounter: {
     control: 'boolean',
     description: 'Enable character counter (enable-counter)',
-  },
-  hideLabel: {
-    control: 'boolean',
-    description: 'Hide label (hide-label)',
-  },
-  helperText: {
-    control: 'text',
-    description: 'Optional helper text (helper-text)',
   },
   invalid: {
     control: 'boolean',
@@ -114,8 +104,6 @@ const renderTextArea = (
     counterMode,
     disabled,
     enableCounter,
-    hideLabel,
-    helperText,
     invalid,
     invalidText,
     label,
@@ -133,8 +121,6 @@ const renderTextArea = (
   <cds-fluid-textarea
     ?enable-counter="${enableCounter}"
     counter-mode="${ifDefined(counterMode)}"
-    ?hide-label="${hideLabel}"
-    helper-text="${ifDefined(helperText)}"
     ?invalid="${invalid}"
     invalid-text="${ifDefined(invalidText)}"
     label="${ifDefined(label)}"
@@ -160,48 +146,8 @@ export const Default = {
       exclude: ['onInput'],
     },
   },
-  render: ({
-    cols,
-    counterMode,
-    defaultWidth,
-    disabled,
-    enableCounter,
-    hideLabel,
-    helperText,
-    invalid,
-    invalidText,
-    label,
-    maxCount,
-    onInput,
-    placeholder,
-    readonly,
-    rows,
-    value,
-    warn,
-    warnText,
-  }) => html`
-    <div style="width:${defaultWidth}px;">
-      <cds-fluid-textarea
-        ?enable-counter="${enableCounter}"
-        counter-mode="${ifDefined(counterMode)}"
-        ?hide-label="${hideLabel}"
-        helper-text="${ifDefined(helperText)}"
-        ?invalid="${invalid}"
-        invalid-text="${ifDefined(invalidText)}"
-        label="${ifDefined(label)}"
-        ?readonly="${readonly}"
-        value="${ifDefined(value)}"
-        ?warn="${warn}"
-        warn-text="${ifDefined(warnText)}"
-        ?disabled="${disabled}"
-        max-count="${ifDefined(maxCount)}"
-        placeholder="${ifDefined(placeholder)}"
-        @input="${onInput}"
-        rows="${ifDefined(rows)}"
-        cols="${ifDefined(cols)}">
-        ${value}
-      </cds-fluid-textarea>
-    </div>
+  render: ({ defaultWidth, ...storyArgs }) => html`
+    <div style="width:${defaultWidth}px;">${renderTextArea(storyArgs)}</div>
   `,
 };
 

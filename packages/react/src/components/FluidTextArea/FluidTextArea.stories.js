@@ -35,6 +35,16 @@ export default {
     FluidTextAreaSkeleton,
   },
   argTypes: {
+    hideLabel: {
+      table: {
+        disable: true,
+      },
+    },
+    helperText: {
+      table: {
+        disable: true,
+      },
+    },
     light: {
       table: {
         disable: true,
@@ -74,17 +84,10 @@ const sharedArgTypes = {
       type: 'number',
     },
   },
+  defaultWidth: {
+    control: { type: 'range', min: 300, max: 800, step: 50 },
+  },
   enableCounter: {
-    control: {
-      type: 'boolean',
-    },
-  },
-  helperText: {
-    control: {
-      type: 'text',
-    },
-  },
-  hideLabel: {
     control: {
       type: 'boolean',
     },
@@ -130,10 +133,9 @@ const sharedArgTypes = {
 const sharedArgs = {
   className: 'test-class',
   cols: 40,
+  defaultWidth: 300,
   disabled: false,
   enableCounter: false,
-  helperText: 'Optional helper text',
-  hideLabel: false,
   invalid: false,
   invalidText:
     'Error message that is really long can wrap to more lines but should not be excessively long.',
@@ -146,11 +148,6 @@ const sharedArgs = {
   warnText: 'This is a warning message.',
 };
 
-const sharedControls = Object.keys(sharedArgTypes);
-const widthArgType = {
-  control: { type: 'range', min: 300, max: 800, step: 50 },
-};
-
 export const Default = ({ defaultWidth, ...textAreaArgs }) => (
   <div style={{ width: defaultWidth }}>
     <FluidTextArea {...textAreaArgs} />
@@ -159,16 +156,10 @@ export const Default = ({ defaultWidth, ...textAreaArgs }) => (
 
 Default.args = {
   ...sharedArgs,
-  defaultWidth: 300,
 };
 
 Default.argTypes = {
   ...sharedArgTypes,
-  defaultWidth: widthArgType,
-};
-
-Default.parameters = {
-  controls: { include: [...sharedControls, 'defaultWidth'] },
 };
 
 export const DefaultWithLayers = ({ defaultWidth, ...textAreaArgs }) => (
@@ -183,16 +174,10 @@ export const DefaultWithLayers = ({ defaultWidth, ...textAreaArgs }) => (
 
 DefaultWithLayers.args = {
   ...sharedArgs,
-  defaultWidth: 300,
 };
 
 DefaultWithLayers.argTypes = {
   ...sharedArgTypes,
-  defaultWidth: widthArgType,
-};
-
-DefaultWithLayers.parameters = {
-  controls: { include: [...sharedControls, 'defaultWidth'] },
 };
 
 const ToggleTip = (
@@ -217,20 +202,15 @@ export const DefaultWithToggletip = ({ defaultWidth, ...textAreaArgs }) => (
 
 DefaultWithToggletip.args = {
   ...sharedArgs,
-  defaultWidth: 300,
 };
 
 DefaultWithToggletip.argTypes = {
   ...sharedArgTypes,
-  defaultWidth: widthArgType,
 };
 
 DefaultWithToggletip.parameters = {
   controls: {
-    include: [
-      ...sharedControls.filter((control) => control !== 'labelText'),
-      'defaultWidth',
-    ],
+    exclude: ['id', 'value', 'defaultValue', 'labelText'],
   },
 };
 
@@ -240,6 +220,6 @@ export const Skeleton = ({ defaultWidth }) => (
   </div>
 );
 
-Skeleton.args = { defaultWidth: 300 };
-Skeleton.argTypes = { defaultWidth: widthArgType };
+Skeleton.args = { defaultWidth: sharedArgs.defaultWidth };
+Skeleton.argTypes = { defaultWidth: sharedArgTypes.defaultWidth };
 Skeleton.parameters = { controls: { include: ['defaultWidth'] } };
