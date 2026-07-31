@@ -46,6 +46,34 @@
   transform: none !important;
 }
 // stylelint-enable declaration-no-important
+
+// custom, user-defined reveal
+.motion-surface-demo__modal--css
+  .motion-surface-demo__container[data-carbon-surface='custom-panel'] {
+  @include motion.surface(
+    (
+      kind: reveal,
+      duration: slow-01,
+      enter: (
+        opacity: 1,
+        clip-path: inset(0 0 0 0),
+      ),
+      exit: (
+        opacity: 0,
+        clip-path: inset(50% 0 50% 0),
+      ),
+      enter-easing: (
+        name: entrance,
+        mode: expressive,
+      ),
+      exit-easing: (
+        name: exit,
+        mode: expressive,
+      ),
+    )
+  );
+}
+
 .motion-surface-tile {
   margin-block-end: 1px;
 }

@@ -9,6 +9,7 @@
 - [Usage](#usage)
   - [Motion surface wrappers](#motion-surface-wrappers)
   - [Native CSS](#native-css)
+  - [Custom surfaces](#custom-surfaces)
 
 {/* <!-- END doctoc generated TOC please keep comment here to allow auto update --> */}
 
@@ -168,3 +169,88 @@ return (
   )
 );
 ```
+
+### Custom surfaces
+
+The built-in surfaces cover motion the design system has an opinion about. When
+what you need isn't one of them, write your own — anywhere a surface name is
+accepted, you can pass a definition instead.
+
+Your own surfaces still animate on Carbon's timing: `duration` and the easings
+are token names rather than raw values, so you can only reach for curves and
+speeds the system already defines.
+
+#### Sass
+
+```scss
+@use '@carbon/styles/scss/motion' as motion;
+
+.my-panel {
+  @include motion.surface(
+    (
+      kind: reveal,
+      duration: slow-01,
+      enter: (
+        opacity: 1,
+        clip-path: inset(0 0 0 0),
+      ),
+      exit: (
+        opacity: 0,
+        clip-path: inset(50% 0 50% 0),
+      ),
+      enter-easing: (
+        name: entrance,
+        mode: expressive,
+      ),
+      exit-easing: (
+        name: exit,
+        mode: expressive,
+      ),
+    )
+  );
+}
+```
+
+Easings are keyed rather than positional, so nothing about how the map is
+formatted can change what it means.
+
+User-defined surfaces are hand written rather than generated, so the mixin
+checks every ey it reads. That matters more than it sounds: Sass fails silently
+on a missing key, so a typo like `slo-01` would otherwise drop the
+`transition-duration` declaration and leave an element that renders correctly
+and never animates.
+
+#### React
+
+`defineMotionSurface` returns the definition unchanged. What it adds is type
+inference at the definition site — a bare object assigned to
+`MotionSurfaceDefinition` reports against the wrong union member — and
+validation at import rather than at first animation.
+
+```jsx
+import { defineMotionSurface } from '@carbon/motion';
+
+const panelReveal = defineMotionSurface({
+  kind: 'reveal',
+  duration: 'slow-01',
+  enter: { opacity: 1, clipPath: 'inset(0 0 0 0)' },
+  exit: { opacity: 0, clipPath: 'inset(50% 0 50% 0)' },
+  enterEasing: { name: 'entrance', mode: 'expressive' },
+  exitEasing: { name: 'exit', mode: 'expressive' },
+});
+
+<MotionSurface surface={panelReveal} open={open}>
+  {/* content */}
+</MotionSurface>;
+```
+
+`useMotionSurface` keys its memo on the definition's structure rather than its
+identity, so writing the object inline in JSX works too and stays referentially
+stable across renders.
+
+Note the casing difference between the two: Sass maps use `clip-path` and
+`enter-easing`, JavaScript uses `clipPath` and `enterEasing`. The generated
+catalog converts between them, but hand-written definitions follow their own
+language's convention.
+
+See the **Custom surface** stories for both paths driving the same dialog.

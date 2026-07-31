@@ -49,8 +49,8 @@ describe('@carbon/motion', () => {
       duration: surface.duration,
       'enter-opacity': surface.enter.opacity,
       'exit-opacity': surface.exit.opacity,
-      'enter-easing': [...surface.enterEasing],
-      'exit-easing': [...surface.exitEasing],
+      'enter-easing': { ...surface.enterEasing },
+      'exit-easing': { ...surface.exitEasing },
     });
   });
 
@@ -97,8 +97,8 @@ describe('@carbon/motion', () => {
       duration: 'moderate-02',
       enter: { opacity: 1, transform: 'scale(1)' },
       exit: { opacity: 0, transform: 'scale(0.96)' },
-      enterEasing: ['standard', 'productive'],
-      exitEasing: ['standard', 'productive'],
+      enterEasing: { name: 'standard', mode: 'productive' },
+      exitEasing: { name: 'standard', mode: 'productive' },
     });
 
     const invoke = CarbonMotion.getMotionSurface('invoke');
@@ -106,14 +106,17 @@ describe('@carbon/motion', () => {
       kind: 'shared-element',
       origin: 'trigger',
       duration: 'moderate-02',
-      enterEasing: ['standard', 'expressive'],
-      exitEasing: ['standard', 'expressive'],
+      enterEasing: { name: 'standard', mode: 'expressive' },
+      exitEasing: { name: 'standard', mode: 'expressive' },
     });
 
     expect(CarbonMotion.resolveDuration(expand.duration)).toBe('240ms');
-    expect(CarbonMotion.resolveEasing(...expand.enterEasing)).toEqual([
-      0.2, 0, 0.38, 0.9,
-    ]);
+    expect(
+      CarbonMotion.resolveEasing(
+        expand.enterEasing.name,
+        expand.enterEasing.mode
+      )
+    ).toEqual([0.2, 0, 0.38, 0.9]);
   });
 
   // Resolve the reveal surface tokens without choosing an animation engine.
@@ -124,8 +127,8 @@ describe('@carbon/motion', () => {
       duration: 'moderate-01',
       enter: { blockSize: 'auto', opacity: 1 },
       exit: { blockSize: 0, opacity: 0 },
-      enterEasing: ['entrance', 'productive'],
-      exitEasing: ['exit', 'productive'],
+      enterEasing: { name: 'entrance', mode: 'productive' },
+      exitEasing: { name: 'exit', mode: 'productive' },
     });
 
     const contextual = CarbonMotion.getMotionSurface('contextual');
@@ -134,14 +137,17 @@ describe('@carbon/motion', () => {
       duration: 'fast-02',
       enter: { opacity: 1, transform: 'scale(1)' },
       exit: { opacity: 0, transform: 'scale(0.96)' },
-      enterEasing: ['entrance', 'expressive'],
-      exitEasing: ['exit', 'expressive'],
+      enterEasing: { name: 'entrance', mode: 'expressive' },
+      exitEasing: { name: 'exit', mode: 'expressive' },
     });
 
     expect(CarbonMotion.resolveDuration(disclosure.duration)).toBe('150ms');
-    expect(CarbonMotion.resolveEasing(...disclosure.enterEasing)).toEqual([
-      0, 0, 0.38, 0.9,
-    ]);
+    expect(
+      CarbonMotion.resolveEasing(
+        disclosure.enterEasing.name,
+        disclosure.enterEasing.mode
+      )
+    ).toEqual([0, 0, 0.38, 0.9]);
   });
 
   // Explain which surface names are available when a name is not valid.
@@ -151,25 +157,25 @@ describe('@carbon/motion', () => {
     );
   });
 
-  // One-off animations compose a definition instead of taking a public name.
+  // Custom surfaces compose a definition instead of taking a public name.
   test('getMotionSurface accepts an inline definition', () => {
     const definition = {
       kind: 'reveal',
       duration: 'slow-01',
       enter: { opacity: 1, clipPath: 'inset(0 0 0 0)' },
       exit: { opacity: 0, clipPath: 'inset(50% 0 50% 0)' },
-      enterEasing: ['entrance', 'expressive'],
-      exitEasing: ['exit', 'expressive'],
+      enterEasing: { name: 'entrance', mode: 'expressive' },
+      exitEasing: { name: 'exit', mode: 'expressive' },
     };
 
     expect(CarbonMotion.getMotionSurface(definition)).toBe(definition);
     expect(CarbonMotion.defineMotionSurface(definition)).toBe(definition);
   });
 
-  test('describeSurface names inline definitions separately from catalog names', () => {
+  test('describeSurface names custom surfaces separately from built-in names', () => {
     expect(CarbonMotion.describeSurface('expand')).toBe('`expand` surface');
     expect(CarbonMotion.describeSurface({ kind: 'reveal' })).toBe(
-      'inline surface definition'
+      'custom surface'
     );
   });
 
@@ -180,8 +186,8 @@ describe('@carbon/motion', () => {
       duration: 'slow-01',
       enter: { opacity: 1 },
       exit: { opacity: 0 },
-      enterEasing: ['entrance', 'expressive'],
-      exitEasing: ['exit', 'expressive'],
+      enterEasing: { name: 'entrance', mode: 'expressive' },
+      exitEasing: { name: 'exit', mode: 'expressive' },
     };
 
     expect(() => CarbonMotion.defineMotionSurface({ ...base })).toThrow(
@@ -197,8 +203,8 @@ describe('@carbon/motion', () => {
       CarbonMotion.defineMotionSurface({
         kind: 'shared-element',
         duration: 'moderate-02',
-        enterEasing: ['standard', 'productive'],
-        exitEasing: ['standard', 'productive'],
+        enterEasing: { name: 'standard', mode: 'productive' },
+        exitEasing: { name: 'standard', mode: 'productive' },
       })
     ).not.toThrow();
   });
@@ -208,21 +214,21 @@ describe('@carbon/motion', () => {
       kind: 'reveal',
       enter: { opacity: 1 },
       exit: { opacity: 0 },
-      enterEasing: ['entrance', 'expressive'],
-      exitEasing: ['exit', 'expressive'],
+      enterEasing: { name: 'entrance', mode: 'expressive' },
+      exitEasing: { name: 'exit', mode: 'expressive' },
     };
 
     expect(() =>
       CarbonMotion.defineMotionSurface({ ...base, duration: '400ms' })
-    ).toThrow(/Invalid inline surface definition\. Unable to find duration/);
+    ).toThrow(/Invalid custom surface\. Unable to find duration/);
 
     expect(() =>
       CarbonMotion.defineMotionSurface({
         ...base,
         duration: 'slow-01',
-        enterEasing: ['swift', 'expressive'],
+        enterEasing: { name: 'swift', mode: 'expressive' },
       })
-    ).toThrow(/Invalid inline surface definition\. Unable to find easing/);
+    ).toThrow(/Invalid custom surface\. Unable to find easing/);
   });
 
   // the mixin emits enter/exit attribute states plus transitions behind a
@@ -266,7 +272,7 @@ describe('@carbon/motion', () => {
     ).rejects.toThrow(/shared-element morph with no CSS-only form/);
   });
 
-  // one-off animations so the mixin accepts a definition of the
+  // custom surfaces so the mixin accepts a definition of the
   // same shape inline
   test('surface mixin accepts an inline definition', async () => {
     const { result } = await render(`
@@ -278,8 +284,8 @@ describe('@carbon/motion', () => {
           duration: slow-01,
           enter: (opacity: 1, clip-path: inset(0 0 0 0)),
           exit: (opacity: 0, clip-path: inset(50% 0 50% 0)),
-          enter-easing: (entrance expressive),
-          exit-easing: (exit expressive),
+          enter-easing: (name: entrance, mode: expressive),
+          exit-easing: (name: exit, mode: expressive),
         ));
       }
     `);
@@ -312,13 +318,13 @@ describe('@carbon/motion', () => {
             duration: slo-01,
             enter: (opacity: 1),
             exit: (opacity: 0),
-            enter-easing: (entrance expressive),
-            exit-easing: (exit expressive),
+            enter-easing: (name: entrance, mode: expressive),
+            exit-easing: (name: exit, mode: expressive),
           ));
         }
       `)
     ).rejects.toThrow(
-      /Unable to find duration `slo-01` for the inline surface definition/
+      /Unable to find duration `slo-01` for the custom surface/
     );
   });
 
@@ -332,8 +338,8 @@ describe('@carbon/motion', () => {
             duration: slow-01,
             enter: (opacity: 1),
             exit: (opacity: 0),
-            enter-easing: (entrance expressive),
-            exit-easing: (exit expressive),
+            enter-easing: (name: entrance, mode: expressive),
+            exit-easing: (name: exit, mode: expressive),
           ));
         }
       `)
@@ -348,12 +354,29 @@ describe('@carbon/motion', () => {
             kind: reveal,
             duration: slow-01,
             exit: (opacity: 0),
-            enter-easing: (entrance expressive),
-            exit-easing: (exit expressive),
+            enter-easing: (name: entrance, mode: expressive),
+            exit-easing: (name: exit, mode: expressive),
           ));
         }
       `)
     ).rejects.toThrow(/define `enter` as a map of CSS property\/value pairs/);
+
+    await expect(
+      render(`
+        @use '../index.scss' as motion;
+
+        .surface {
+          @include motion.surface((
+            kind: reveal,
+            duration: slow-01,
+            enter: (opacity: 1),
+            exit: (opacity: 0),
+            enter-easing: (name: entrance),
+            exit-easing: (name: exit, mode: expressive),
+          ));
+        }
+      `)
+    ).rejects.toThrow(/for example `\(name: entrance, mode: expressive\)`/);
   });
 
   test('surface mixin rejects inline shared-element definitions', async () => {
@@ -366,7 +389,7 @@ describe('@carbon/motion', () => {
         }
       `)
     ).rejects.toThrow(
-      /inline surface definition is a shared-element morph with no CSS-only form/
+      /custom surface is a shared-element morph with no CSS-only form/
     );
   });
 });

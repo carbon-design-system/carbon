@@ -109,7 +109,8 @@ DemoDialog.propTypes = {
   onClose: PropTypes.func,
   onExitComplete: PropTypes.func,
   open: PropTypes.bool,
-  surface: PropTypes.string.isRequired,
+  // accepts default surface names or user-defined
+  surface: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   surfaceId: PropTypes.string,
   useNativeCSS: PropTypes.bool,
 };

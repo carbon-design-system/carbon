@@ -13,7 +13,11 @@ import {
   type EasingName,
 } from './tokens';
 
-type MotionEasing = readonly [EasingName, EasingMode];
+// easing curve token names
+interface MotionEasing {
+  name: EasingName;
+  mode: EasingMode;
+}
 
 /**
  * from/to styles for reveal surface - plain CSS property/value pairs
@@ -65,8 +69,8 @@ export const surfaces = {
     duration: 'moderate-01',
     enter: { blockSize: 'auto', opacity: 1 },
     exit: { blockSize: 0, opacity: 0 },
-    enterEasing: ['entrance', 'productive'],
-    exitEasing: ['exit', 'productive'],
+    enterEasing: { name: 'entrance', mode: 'productive' },
+    exitEasing: { name: 'exit', mode: 'productive' },
   },
   // Icon > tooltip/popover
   contextual: {
@@ -74,8 +78,8 @@ export const surfaces = {
     duration: 'fast-02',
     enter: { opacity: 1, transform: 'scale(1)' },
     exit: { opacity: 0, transform: 'scale(0.96)' },
-    enterEasing: ['entrance', 'expressive'],
-    exitEasing: ['exit', 'expressive'],
+    enterEasing: { name: 'entrance', mode: 'expressive' },
+    exitEasing: { name: 'exit', mode: 'expressive' },
   },
   // Card/tile > side-panel/tearsheet
   expand: {
@@ -83,26 +87,26 @@ export const surfaces = {
     duration: 'moderate-02',
     enter: { opacity: 1, transform: 'scale(1)' },
     exit: { opacity: 0, transform: 'scale(0.96)' },
-    enterEasing: ['standard', 'productive'],
-    exitEasing: ['standard', 'productive'],
+    enterEasing: { name: 'standard', mode: 'productive' },
+    exitEasing: { name: 'standard', mode: 'productive' },
   },
   // Button > modal/menu/popover - morphs from the trigger
   invoke: {
     kind: 'shared-element',
     origin: 'trigger',
     duration: 'moderate-02',
-    enterEasing: ['standard', 'expressive'],
-    exitEasing: ['standard', 'expressive'],
+    enterEasing: { name: 'standard', mode: 'expressive' },
+    exitEasing: { name: 'standard', mode: 'expressive' },
   },
 } as const satisfies Record<string, MotionSurfaceDefinition>;
 
 export type MotionSurfaceName = keyof typeof surfaces;
 
 /**
- * Anywhere a surface is accepted, it can be named or supplied inline. Not
- * every animation is a system-wide intent, and every name in `surfaces` is
- * public API, so a one-off composes a definition of the same shape rather than
- * claiming a name.
+ * Anywhere a surface is accepted, it can be one of the built-in names or a
+ * user-defined definition. Not every animation is a system-wide intent, and
+ * every name in `surfaces` is public API, so a custom surface supplies a
+ * definition of the same shape rather than claiming a name.
  */
 export type MotionSurfaceInput = MotionSurfaceName | MotionSurfaceDefinition;
 
@@ -115,9 +119,7 @@ const isSurfaceDefinition = (
  * not reported as a problem with a catalog name.
  */
 export const describeSurface = (surface: MotionSurfaceInput) =>
-  isSurfaceDefinition(surface)
-    ? 'inline surface definition'
-    : `\`${surface}\` surface`;
+  isSurfaceDefinition(surface) ? 'custom surface' : `\`${surface}\` surface`;
 
 const isKeyframe = (value: unknown) =>
   typeof value === 'object' && value !== null && Object.keys(value).length > 0;
@@ -158,10 +160,21 @@ const validateSurface = (
     }
   }
 
+  for (const key of ['enterEasing', 'exitEasing'] as const) {
+    const easing = definition[key];
+
+    if (!easing || typeof easing !== 'object' || !easing.name || !easing.mode) {
+      throw new Error(
+        `Expected the ${label} to define \`${key}\` as \`{ name, mode }\`, ` +
+          "for example `{ name: 'entrance', mode: 'expressive' }`."
+      );
+    }
+  }
+
   try {
     resolveDuration(definition.duration);
-    resolveEasing(...definition.enterEasing);
-    resolveEasing(...definition.exitEasing);
+    resolveEasing(definition.enterEasing.name, definition.enterEasing.mode);
+    resolveEasing(definition.exitEasing.name, definition.exitEasing.mode);
   } catch (error) {
     throw new Error(
       `Invalid ${label}. ${error instanceof Error ? error.message : error}`
@@ -172,7 +185,7 @@ const validateSurface = (
 };
 
 /**
- * Author a one-off surface definition.
+ * Author a custom surface.
  *
  * Nothing here changes the value — it is returned as given. What it buys is
  * type inference at the definition site and validation at module load rather
@@ -181,12 +194,13 @@ const validateSurface = (
  * for not being a `SharedElementSurface`); the generic constraint here narrows
  * the literals so errors point at the property actually at fault.
  *
- * Define these at module scope. React adapters key their memoization on the
- * surface, so an object rebuilt each render restarts in-flight animations.
+ * Module scope is the natural home for one, but it is not required — the React
+ * adapter keys its memoization on the definition's structure rather than its
+ * identity, so writing one inline in JSX is also fine.
  */
 export const defineMotionSurface = <T extends MotionSurfaceDefinition>(
   definition: T
-): T => validateSurface(definition, 'inline surface definition') as T;
+): T => validateSurface(definition, 'custom surface') as T;
 
 /**
  * Resolve a surface to its definition. A name is looked up in the shared

@@ -175,14 +175,14 @@ $-durations: (
 /// @return {String} A phrase naming the surface
 @function -describe($surface) {
   @if meta.type-of($surface) == 'map' {
-    @return 'inline surface definition';
+    @return 'custom surface';
   }
 
   @return '`#{$surface}` surface';
 }
 
 /// Resolve a surface argument to a definition map. A name is looked up in the
-/// shared catalog; allows one-off animations reuse this API without being
+/// shared catalog; allows custom surfaces reuse this API without being
 /// added to the public API
 /// @param {String | Map} $surface - A surface name or an inline definition
 /// @access private
@@ -246,12 +246,16 @@ $-durations: (
   @each $key in (enter-easing, exit-easing) {
     $easing: map.get($definition, $key);
 
-    @if meta.type-of($easing) != 'list' or list.length($easing) != 2 {
-      @error 'Expected the #{$label} to define `#{$key}` as a two item list of an easing name and mode, for example `(entrance expressive)`.';
+    @if meta.type-of($easing) !=
+      'map' or not
+      map.has-key($easing, name) or not
+      map.has-key($easing, mode)
+    {
+      @error 'Expected the #{$label} to define `#{$key}` as `(name: ..., mode: ...)`, for example `(name: entrance, mode: expressive)`.';
     }
 
     // `motion()` raises its own error for an unknown easing name or mode
-    $-easing-check: motion(list.nth($easing, 1), list.nth($easing, 2));
+    $-easing-check: motion(map.get($easing, name), map.get($easing, mode));
   }
 
   @return $definition;
@@ -273,7 +277,7 @@ $-durations: (
 /// }
 /// ```
 ///
-/// Allow users to provide their own one-off animations by passing a definition
+/// Allow users to provide their own custom surfaces by passing a definition
 /// map of the same shape instead of adding a new entry. Duration and easing are
 /// token names instead of raw values, so inline definitions still pass through
 /// the token system.
@@ -285,8 +289,8 @@ $-durations: (
 ///     duration: slow-01,
 ///     enter: (opacity: 1, clip-path: inset(0 0 0 0)),
 ///     exit: (opacity: 0, clip-path: inset(50% 0 50% 0)),
-///     enter-easing: (entrance expressive),
-///     exit-easing: (exit expressive),
+///     enter-easing: (name: entrance, mode: expressive),
+///     exit-easing: (name: exit, mode: expressive),
 ///   ));
 /// }
 /// ```
@@ -335,15 +339,15 @@ $-durations: (
     &,
     &[data-carbon-surface-state='enter'] {
       transition-timing-function: motion(
-        list.nth($enter-easing, 1),
-        list.nth($enter-easing, 2)
+        map.get($enter-easing, name),
+        map.get($enter-easing, mode)
       );
     }
 
     &[data-carbon-surface-state='exit'] {
       transition-timing-function: motion(
-        list.nth($exit-easing, 1),
-        list.nth($exit-easing, 2)
+        map.get($exit-easing, name),
+        map.get($exit-easing, mode)
       );
     }
 

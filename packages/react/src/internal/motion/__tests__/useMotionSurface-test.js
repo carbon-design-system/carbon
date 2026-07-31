@@ -85,4 +85,66 @@ describe('useMotionSurface', () => {
 
     expect(result.current.enabled).toBe(false);
   });
+
+  // Custom surfaces compose a definition instead of taking a public name.
+  it('resolves an inline definition', () => {
+    const { result } = renderHook(() =>
+      useMotionSurface({
+        kind: 'reveal',
+        duration: 'slow-01',
+        enter: { opacity: 1, clipPath: 'inset(0 0 0 0)' },
+        exit: { opacity: 0, clipPath: 'inset(50% 0 50% 0)' },
+        enterEasing: { name: 'entrance', mode: 'expressive' },
+        exitEasing: { name: 'exit', mode: 'expressive' },
+      })
+    );
+
+    expect(result.current.kind).toBe('reveal');
+    expect(result.current.initial).toEqual({
+      opacity: 0,
+      clipPath: 'inset(50% 0 50% 0)',
+    });
+    expect(result.current.animate).toEqual({
+      opacity: 1,
+      clipPath: 'inset(0 0 0 0)',
+      // slow-01 = 400ms, entrance/expressive
+      transition: { duration: 0.4, ease: [0, 0, 0.3, 1] },
+    });
+  });
+
+  // An inline definition is a fresh object every render. Keying the memo on
+  // structure keeps the resolved targets referentially stable, so Motion is not
+  // handed new objects on each pass.
+  it('keeps resolved values stable across renders of an inline definition', () => {
+    const renderInline = () =>
+      useMotionSurface({
+        kind: 'reveal',
+        duration: 'slow-01',
+        enter: { opacity: 1 },
+        exit: { opacity: 0 },
+        enterEasing: { name: 'entrance', mode: 'expressive' },
+        exitEasing: { name: 'exit', mode: 'expressive' },
+      });
+
+    const { result, rerender } = renderHook(renderInline);
+    const first = result.current;
+
+    rerender();
+
+    expect(result.current).toBe(first);
+  });
+
+  it('surfaces validation errors from inline definitions', () => {
+    expect(() =>
+      renderHook(() =>
+        useMotionSurface({
+          kind: 'reveal',
+          duration: 'slow-01',
+          exit: { opacity: 0 },
+          enterEasing: { name: 'entrance', mode: 'expressive' },
+          exitEasing: { name: 'exit', mode: 'expressive' },
+        })
+      )
+    ).toThrow(/define `enter` as an object with at least one CSS property/);
+  });
 });
