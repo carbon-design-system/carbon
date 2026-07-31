@@ -142,7 +142,7 @@ const sharedArgTypes = {
   },
   size: {
     control: { type: 'select' },
-    options: ['sm', 'md', 'lg'],
+    options: ['xs', 'sm', 'md', 'lg'],
   },
   titleText: {
     control: {
