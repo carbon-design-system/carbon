@@ -190,6 +190,12 @@ const RadioButtonGroup = React.forwardRef(
           onChange: handleOnChange,
           checked: radioButton.props.value === selected,
           required: required,
+          // Propagate the group's read-only state so each focusable radio
+          // input carries the read-only announcement, unless the child opts out.
+          ...(typeof readOnly !== 'undefined' &&
+          typeof radioButton.props.readOnly === 'undefined'
+            ? { readOnly }
+            : {}),
         };
 
         if (!selected && radioButton.props.checked) {
@@ -262,8 +268,14 @@ const RadioButtonGroup = React.forwardRef(
           className={fieldsetClasses}
           disabled={disabled}
           data-invalid={invalid ? true : undefined}
-          aria-describedby={showHelper && hasHelper ? helperId : undefined}
-          {...rest}>
+          {...rest}
+          aria-readonly={readOnly || undefined}
+          aria-describedby={
+            classNames(
+              showHelper && hasHelper ? helperId : undefined,
+              rest['aria-describedby']
+            ) || undefined
+          }>
           {legendText && (
             <Legend className={`${prefix}--label`}>
               {legendText}

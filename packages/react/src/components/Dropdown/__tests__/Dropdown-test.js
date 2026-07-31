@@ -679,6 +679,31 @@ describe('Test useEffect ', () => {
   });
 });
 
+describe('Dropdown readOnly accessibility', () => {
+  it('should announce readOnly state to screen readers without using aria-disabled', async () => {
+    render(
+      <Dropdown
+        id="my-dropdown"
+        titleText="Dropdown label"
+        label="input"
+        items={generateItems(5, generateGenericItem)}
+        readOnly
+      />
+    );
+    await waitForPosition();
+
+    const readOnlyText = document.querySelector('.cds--visually-hidden');
+    expect(readOnlyText).toBeInTheDocument();
+    expect(readOnlyText).toHaveTextContent('Read only');
+
+    const button = screen.getByRole('combobox');
+    expect(button).not.toHaveAttribute('aria-disabled', 'true');
+    expect(button.getAttribute('aria-describedby')).toContain(
+      readOnlyText.getAttribute('id')
+    );
+  });
+});
+
 describe('Validation message ids', () => {
   const mockProps = {
     id: 'test-dropdown',
@@ -717,5 +742,27 @@ describe('Validation message ids', () => {
       'aria-describedby',
       'test-dropdown-warn-msg'
     );
+  });
+});
+
+describe('Dropdown readOnly translation', () => {
+  it('should support a custom translateWithId for the read-only text', async () => {
+    render(
+      <Dropdown
+        id="my-dropdown"
+        titleText="Dropdown label"
+        label="input"
+        items={generateItems(5, generateGenericItem)}
+        readOnly
+        translateWithId={(id) =>
+          id === 'carbon.dropdown.read-only' ? 'Custom read only' : ''
+        }
+      />
+    );
+    await waitForPosition();
+
+    const readOnlyText = document.querySelector('.cds--visually-hidden');
+    expect(readOnlyText).toBeInTheDocument();
+    expect(readOnlyText).toHaveTextContent('Custom read only');
   });
 });

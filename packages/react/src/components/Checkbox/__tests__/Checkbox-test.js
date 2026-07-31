@@ -213,6 +213,21 @@ describe('Checkbox', () => {
     );
   });
 
+  it('supports translateWithId for the read-only screen reader text', () => {
+    const { container } = render(
+      <Checkbox
+        labelText="Checkbox label"
+        id="checkbox-label-1"
+        readOnly
+        translateWithId={() => 'Solo lectura'}
+      />
+    );
+
+    const readOnlyText = container.querySelector(`.${prefix}--visually-hidden`);
+    expect(readOnlyText).toBeInTheDocument();
+    expect(readOnlyText).toHaveTextContent('Solo lectura');
+  });
+
   it('should respect warn prop', () => {
     const { container } = render(
       <Checkbox

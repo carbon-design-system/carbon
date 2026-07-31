@@ -41,6 +41,7 @@ import { isComponentElement } from '../../internal';
 const translationIds = {
   'increment.number': 'increment.number',
   'decrement.number': 'decrement.number',
+  'carbon.number-input.read-only': 'carbon.number-input.read-only',
 } as const;
 
 type TranslationKey = keyof typeof translationIds;
@@ -48,6 +49,7 @@ type TranslationKey = keyof typeof translationIds;
 const defaultTranslations: Record<TranslationKey, string> = {
   [translationIds['increment.number']]: 'Increment number',
   [translationIds['decrement.number']]: 'Decrement number',
+  [translationIds['carbon.number-input.read-only']]: 'Read only',
 };
 
 const defaultTranslateWithId: TFunc<TranslationKey> = (messageId) => {
@@ -774,6 +776,11 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
       ariaDescribedBy = helperText ? normalizedProps.helperId : undefined;
     }
 
+    const readOnlyId = `${id}-readonly-text`;
+    const inputDescribedBy = readOnly
+      ? cx(readOnlyId, ariaDescribedBy) || undefined
+      : ariaDescribedBy;
+
     function handleOnChange(event) {
       if (disabled) {
         return;
@@ -954,7 +961,7 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
               {...rest}
               data-invalid={normalizedProps.invalid ? true : undefined}
               aria-invalid={normalizedProps.invalid}
-              aria-describedby={ariaDescribedBy}
+              aria-describedby={inputDescribedBy}
               aria-readonly={readOnly}
               disabled={normalizedProps.disabled}
               ref={ref}
@@ -1071,6 +1078,11 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
               type={type}
               value={type === 'number' ? value : inputValue}
             />
+            {readOnly && (
+              <span id={readOnlyId} className={`${prefix}--visually-hidden`}>
+                {t('carbon.number-input.read-only')}
+              </span>
+            )}
             {slug ? (
               normalizedDecorator
             ) : decorator ? (

@@ -8,6 +8,7 @@
 import { html, PropertyValues, TemplateResult } from 'lit';
 import { property, query } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
+import { ifDefined } from 'lit/directives/if-defined.js';
 import { prefix } from '../../globals/settings';
 import Close16 from '@carbon/icons/es/close/16.js';
 import { filter, forEach } from '../../globals/internal/collection-helpers';
@@ -431,7 +432,6 @@ class CDSMultiSelect extends CDSDropdown {
   protected _renderPrecedingLabel() {
     const {
       disabled,
-      readOnly,
       clearSelectionLabel,
       _selectedItemsCount: selectedItemsCount,
     } = this;
@@ -452,7 +452,7 @@ class CDSMultiSelect extends CDSDropdown {
             role="button"
             class="${selectionButtonClasses}"
             tabindex="-1"
-            aria-disabled=${readOnly}
+            aria-disabled=${ifDefined(disabled ? 'true' : undefined)}
             title="${clearSelectionLabel}">
             ${selectedItemsCount}
             ${iconLoader(Close16, {

@@ -304,6 +304,12 @@ class CDSSelect extends FormMixin(LitElement) {
   readonly = false;
 
   /**
+   * The text announced to screen readers when the component is read-only.
+   */
+  @property({ attribute: 'read-only-text' })
+  readOnlyText = 'Read only';
+
+  /**
    * Boolean property to set the required status
    */
   @property({ type: Boolean, reflect: true })
@@ -414,6 +420,7 @@ class CDSSelect extends FormMixin(LitElement) {
       labelText,
       placeholder,
       readonly,
+      readOnlyText,
       size,
       warn,
       warnText,
@@ -471,6 +478,11 @@ class CDSSelect extends FormMixin(LitElement) {
       describedBy = 'helper-text';
     }
 
+    const describedById =
+      [describedBy ?? '', readonly ? 'readonly-text' : '']
+        .filter(Boolean)
+        .join(' ') || undefined;
+
     const input = html`
       <select
         id="${id}"
@@ -479,7 +491,7 @@ class CDSSelect extends FormMixin(LitElement) {
         title="${value}"
         aria-readonly="${String(readonly)}"
         aria-invalid="${String(normalizedProps.invalid)}"
-        aria-describedby="${ifDefined(describedBy)}"
+        aria-describedby="${ifDefined(describedById)}"
         @input="${handleInput}">
         ${!placeholder || value
           ? undefined
@@ -494,6 +506,11 @@ class CDSSelect extends FormMixin(LitElement) {
             `}
         ${this._renderItems(this)}
       </select>
+      ${readonly
+        ? html`<span id="readonly-text" class="${prefix}--visually-hidden"
+            >${readOnlyText}</span
+          >`
+        : null}
       ${iconLoader(ChevronDown16, {
         class: `${prefix}--select__arrow`,
         'aria-hidden': 'true',

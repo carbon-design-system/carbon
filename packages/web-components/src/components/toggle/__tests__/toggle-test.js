@@ -145,6 +145,17 @@ describe('cds-toggle', () => {
     expect(el.toggled).to.be.false;
   });
 
+  it('should support a custom read-only-text', async () => {
+    const el = await fixture(html`
+      <cds-toggle read-only read-only-text="Solo lectura"></cds-toggle>
+    `);
+    await el.updateComplete;
+
+    const visuallyHidden = el.shadowRoot.querySelector('.cds--visually-hidden');
+    expect(visuallyHidden).to.exist;
+    expect(visuallyHidden.textContent.trim()).to.equal('Solo lectura');
+  });
+
   it('can be controlled with using toggled', async () => {
     const el = await fixture(html` <cds-toggle> </cds-toggle> `);
     await el.updateComplete;

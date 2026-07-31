@@ -80,6 +80,7 @@ const ThumbWrapper = ({
 const translationIds = {
   'carbon.slider.auto-correct-announcement':
     'carbon.slider.auto-correct-announcement',
+  'carbon.slider.read-only': 'carbon.slider.read-only',
 } as const;
 
 type TranslationKey = keyof typeof translationIds;
@@ -87,6 +88,7 @@ type TranslationKey = keyof typeof translationIds;
 const defaultTranslations: Record<TranslationKey, string> = {
   [translationIds['carbon.slider.auto-correct-announcement']]:
     'The inputted value "{correctedValue}" was corrected to the nearest allowed digit.',
+  [translationIds['carbon.slider.read-only']]: 'Read only',
 };
 
 type TranslationArgs = { correctedValue?: string };
@@ -1285,6 +1287,7 @@ const Slider = (props: SliderProps) => {
       (twoHandles ? isValidUpper : isValid));
 
   const labelId = `${id}-label`;
+  const readOnlyId = `${id}-readonly-text`;
   const labelClasses = classNames(`${prefix}--label`, {
     [`${prefix}--visually-hidden`]: hideLabel,
     [`${prefix}--label--disabled`]: disabled,
@@ -1461,6 +1464,8 @@ const Slider = (props: SliderProps) => {
               aria-valuenow={value}
               aria-labelledby={twoHandles ? undefined : labelId}
               aria-label={twoHandles ? ariaLabelInput : undefined}
+              aria-readonly={readOnly || undefined}
+              aria-describedby={readOnly ? readOnlyId : undefined}
               ref={thumbRef}
               onFocus={() => setState({ activeHandle: HandlePosition.LOWER })}>
               {twoHandles && !isRtl ? (
@@ -1491,6 +1496,8 @@ const Slider = (props: SliderProps) => {
                 aria-valuemin={value}
                 aria-valuenow={valueUpper}
                 aria-label={ariaLabelInputUpper}
+                aria-readonly={readOnly || undefined}
+                aria-describedby={readOnly ? readOnlyId : undefined}
                 ref={thumbRefUpper}
                 onFocus={() =>
                   setState({ activeHandle: HandlePosition.UPPER })
@@ -1514,6 +1521,11 @@ const Slider = (props: SliderProps) => {
             className={`${prefix}--slider__filled-track`}
             ref={filledTrackRef}
           />
+          {readOnly && (
+            <span id={readOnlyId} className={`${prefix}--visually-hidden`}>
+              {t('carbon.slider.read-only')}
+            </span>
+          )}
         </div>
         <Text className={`${prefix}--slider__range-label`}>
           {formatLabel(max, maxLabel)}

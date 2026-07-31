@@ -14,6 +14,7 @@ import Add16 from '@carbon/icons/es/add/16.js';
 import Subtract16 from '@carbon/icons/es/subtract/16.js';
 import WarningFilled16 from '@carbon/icons/es/warning--filled/16.js';
 import WarningAltFilled16 from '@carbon/icons/es/warning--alt--filled/16.js';
+import { ifDefined } from 'lit/directives/if-defined.js';
 import ifNonEmpty from '../../globals/directives/if-non-empty';
 import {
   NUMBER_INPUT_VALIDATION_STATUS,
@@ -354,6 +355,12 @@ class CDSNumberInput extends CDSTextInput {
    */
   @property({ type: Boolean, attribute: 'hide-steppers', reflect: true })
   hideSteppers = false;
+
+  /**
+   * The text announced to screen readers when the component is read-only.
+   */
+  @property({ attribute: 'read-only-text' })
+  readOnlyText = 'Read only';
 
   /**
    * `true` to allow empty string.
@@ -883,6 +890,10 @@ class CDSNumberInput extends CDSTextInput {
 
     const inputValue = this._getInputValue();
 
+    const describedById =
+      [this.readonly ? 'readonly-text' : ''].filter(Boolean).join(' ') ||
+      undefined;
+
     const incrementButton = html`
       <button
         class="${prefix}--number__control-btn up-icon"
@@ -925,6 +936,8 @@ class CDSNumberInput extends CDSTextInput {
           ? ifNonEmpty(this.pattern)
           : ''}"
         ?readonly="${this.readonly}"
+        aria-readonly=${ifDefined(this.readonly ? 'true' : undefined)}
+        aria-describedby=${ifDefined(describedById)}
         ?required="${this.required}"
         type="${this.type}"
         inputmode="${this.type === NUMBER_INPUT_TYPE.TEXT
@@ -985,6 +998,11 @@ class CDSNumberInput extends CDSTextInput {
         </label>
         <div class="${inputWrapperClasses}">
           ${normalizedProps.icon} ${input}
+          ${this.readonly
+            ? html`<span id="readonly-text" class="${prefix}--visually-hidden"
+                >${this.readOnlyText}</span
+              >`
+            : null}
           <slot name="ai-label" @slotchange="${this._handleSlotChange}"></slot>
           <slot name="slug" @slotchange="${this._handleSlotChange}"></slot>
           <div class="${prefix}--number__controls">
