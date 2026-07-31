@@ -12,8 +12,10 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/utilities/convert' as *;
 @use '@carbon/styles/scss/utilities' as *;
 @use '@carbon/styles/scss/components/text-input/index';
-@use '@carbon/styles/scss/layout' as *;
+@use '@carbon/styles/scss/utilities/layout' as *;
 @use '@carbon/styles/scss/utilities/ai-gradient' as *;
+
+@include emit-layout-context-classes();
 
 :host(#{$prefix}-text-input),
 :host(#{$prefix}-text-input-skeleton) {

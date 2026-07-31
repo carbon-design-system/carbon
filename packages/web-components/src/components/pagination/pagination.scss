@@ -14,7 +14,7 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/breakpoint' as *;
 @use '@carbon/styles/scss/components/pagination' as *;
 @use '@carbon/styles/scss/utilities/visually-hidden' as *;
-@use '@carbon/styles/scss/layout' as *;
+@use '@carbon/styles/scss/utilities/layout' as *;
 
 :host(#{$prefix}-pagination) {
   @extend .#{$prefix}--pagination;
