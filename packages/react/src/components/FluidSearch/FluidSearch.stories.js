@@ -41,6 +41,9 @@ export default {
     labelText: {
       control: { type: 'text' },
     },
+    onChange: {
+      action: 'onChange',
+    },
     placeholder: {
       control: { type: 'text' },
     },
