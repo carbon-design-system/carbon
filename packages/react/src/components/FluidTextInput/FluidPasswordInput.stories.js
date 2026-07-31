@@ -118,7 +118,3 @@ Default.argTypes = {
     },
   },
 };
-
-Default.parameters = {
-  controls: { include: Object.keys(Default.argTypes) },
-};
