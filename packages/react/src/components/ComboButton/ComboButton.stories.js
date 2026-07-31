@@ -79,6 +79,13 @@ export default {
     MenuItem,
     MenuItemDivider,
   },
+  decorators: [
+    (Story) => (
+      <div style={{ display: 'flex', justifyContent: 'center' }}>
+        <Story />
+      </div>
+    ),
+  ],
   parameters: {
     docs: {
       page: mdx,
