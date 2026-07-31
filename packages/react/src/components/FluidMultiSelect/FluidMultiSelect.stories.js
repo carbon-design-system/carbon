@@ -87,16 +87,6 @@ const sharedArgTypes = {
       type: 'text',
     },
   },
-  isCondensed: {
-    control: {
-      type: 'boolean',
-    },
-  },
-  isFilterable: {
-    control: {
-      type: 'boolean',
-    },
-  },
   disabled: {
     control: {
       type: 'boolean',
@@ -126,9 +116,6 @@ const sharedArgTypes = {
   },
   onChange: {
     action: 'onChange',
-  },
-  onInputValueChange: {
-    action: 'onInputValueChange',
   },
   onMenuChange: {
     action: 'onMenuChange',
@@ -180,8 +167,6 @@ const sharedArgs = {
   invalid: false,
   invalidText:
     'Error message that is really long can wrap to more lines but should not be excessively long.',
-  isCondensed: false,
-  isFilterable: false,
   label: 'Choose an option',
   locale: 'en',
   readOnly: false,
@@ -195,6 +180,23 @@ const sharedArgs = {
 };
 
 const sharedControls = Object.keys(sharedArgTypes);
+const filterableArgTypes = {
+  ...sharedArgTypes,
+  isFilterable: {
+    control: { type: 'boolean' },
+    table: { readonly: true },
+  },
+  onInputValueChange: {
+    action: 'onInputValueChange',
+  },
+};
+const condensedArgTypes = {
+  ...sharedArgTypes,
+  isCondensed: {
+    control: { type: 'boolean' },
+    table: { readonly: true },
+  },
+};
 const widthArgType = {
   control: { type: 'range', min: 300, max: 800, step: 50 },
 };
@@ -248,16 +250,14 @@ Filterable.args = {
 };
 
 Filterable.argTypes = {
-  ...sharedArgTypes,
+  ...filterableArgTypes,
   defaultWidth: widthArgType,
-  isFilterable: {
-    ...sharedArgTypes.isFilterable,
-    table: { readonly: true },
-  },
 };
 
 Filterable.parameters = {
-  controls: { include: [...sharedControls, 'defaultWidth'] },
+  controls: {
+    include: [...Object.keys(filterableArgTypes), 'defaultWidth'],
+  },
 };
 
 export const _FilterableWithLayer = ({ defaultWidth, ...multiSelectArgs }) => (
@@ -308,16 +308,14 @@ Condensed.args = {
 };
 
 Condensed.argTypes = {
-  ...sharedArgTypes,
+  ...condensedArgTypes,
   defaultWidth: widthArgType,
-  isCondensed: {
-    ...sharedArgTypes.isCondensed,
-    table: { readonly: true },
-  },
 };
 
 Condensed.parameters = {
-  controls: { include: [...sharedControls, 'defaultWidth'] },
+  controls: {
+    include: [...Object.keys(condensedArgTypes), 'defaultWidth'],
+  },
 };
 
 const aiLabel = (
