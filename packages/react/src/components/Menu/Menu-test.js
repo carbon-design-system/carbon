@@ -500,6 +500,52 @@ describe('MenuItem', () => {
         expect(child).toHaveFocus();
       });
     });
+
+    it('should not steal focus when hovering over a leaf item then moving mouse away', async () => {
+      // Regression test: useHover was unconditionally enabled on every MenuItem.
+      // On mouseleave it called onOpenChange(false) which then called
+      // menuItem.current?.focus(), stealing focus from the trigger/outside element.
+      const triggerRef = React.createRef();
+      render(
+        <>
+          <button ref={triggerRef}>Trigger</button>
+          <Menu open label="Menu">
+            <MenuItem label="Item 1" />
+            <MenuItem label="Item 2" />
+          </Menu>
+        </>
+      );
+
+      // Wait for the menu to focus item 1 on open
+      const item1 = await screen.findByRole('menuitem', { name: 'Item 1' });
+      expect(item1).toHaveFocus();
+
+      // Hover over item 2 (mouseenter + mouseleave simulates moving through)
+      const item2 = screen.getByRole('menuitem', { name: 'Item 2' });
+      await userEvent.hover(item2);
+      await userEvent.unhover(item2);
+
+      // Focus must NOT have moved to item 2 after unhovering
+      expect(item2).not.toHaveFocus();
+    });
+
+    it('should open submenu on hover for items with children', async () => {
+      // Verify useHover remains enabled for items that have a nested submenu.
+      render(
+        <Menu open label="Menu">
+          <MenuItem label="Parent">
+            <MenuItem label="Child" />
+          </MenuItem>
+        </Menu>
+      );
+
+      const parentItem = screen.getByRole('menuitem', { name: 'Parent' });
+      await userEvent.hover(parentItem);
+
+      await waitFor(() => {
+        expect(screen.getByRole('menuitem', { name: 'Child' })).toBeVisible();
+      });
+    });
   });
 
   it('navigates through dynamically added MenuItems in the correct order', async () => {
