@@ -134,6 +134,34 @@ describe('OverflowMenuItem - RTL', () => {
       expect(screen.getByRole('menuitem')).not.toHaveAttribute('aria-disabled');
     });
 
+    it('should block activation of a disabled link', async () => {
+      const onClick = jest.fn();
+      const closeMenu = jest.fn();
+      render(
+        <OverflowMenuItem
+          closeMenu={closeMenu}
+          href="https://carbondesignsystem.com"
+          itemText="one"
+          onClick={onClick}
+          disabled
+        />
+      );
+
+      // userEvent refuses to click elements it considers non-interactive, so
+      // dispatch a real click event to assert the component blocks it.
+      const menuItem = screen.getByRole('menuitem');
+      const clickEvent = new MouseEvent('click', {
+        bubbles: true,
+        cancelable: true,
+      });
+      menuItem.dispatchEvent(clickEvent);
+
+      // preventDefault stops the browser from following the href
+      expect(clickEvent.defaultPrevented).toBe(true);
+      expect(onClick).not.toHaveBeenCalled();
+      expect(closeMenu).not.toHaveBeenCalled();
+    });
+
     it('should have divider', () => {
       const { container } = render(
         <OverflowMenuItem closeMenu={jest.fn()} itemText="one" hasDivider />

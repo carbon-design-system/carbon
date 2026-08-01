@@ -123,6 +123,13 @@ const OverflowMenuItem = frFn((props, ref) => {
   }
 
   function handleClick(evt) {
+    // The native `disabled` attribute has no effect on anchor elements, so
+    // when rendered as a link the item must block activation itself to match
+    // the disabled state conveyed via `aria-disabled`.
+    if (disabled) {
+      evt.preventDefault();
+      return;
+    }
     onClick(evt);
     if (closeMenu) {
       closeMenu();
