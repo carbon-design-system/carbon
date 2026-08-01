@@ -104,7 +104,12 @@ export interface AccordionToggleProps {
   className?: string;
   disabled?: boolean;
   onClick?: MouseEventHandler<HTMLButtonElement>;
-  onKeyDown?: (event: KeyboardEvent<HTMLButtonElement>) => void;
+  /**
+   * @deprecated `AccordionItem` no longer passes an `onKeyDown` handler to
+   * the toggle. This prop is kept only so custom `renderToggle`
+   * implementations that reference it don't hit a breaking type change.
+   */
+  onKeyDown?: (event: KeyboardEvent<HTMLButtonElement>) => void; // TODO: V12 - Remove this prop
   type?: 'button';
 }
 

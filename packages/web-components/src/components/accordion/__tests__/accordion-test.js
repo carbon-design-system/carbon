@@ -71,6 +71,19 @@ describe('cds-accordion', function () {
 
       expect(firstItem.hasAttribute('open')).to.be.true;
     });
+
+    it('should not close an open item when Escape is pressed', async () => {
+      const el = await fixture(accordion);
+      const firstItem = el.firstElementChild;
+
+      await triggerFocusFor(firstItem);
+      await sendKeys({ press: 'Enter' });
+      expect(firstItem.hasAttribute('open')).to.be.true;
+
+      await sendKeys({ press: 'Escape' });
+
+      expect(firstItem.hasAttribute('open')).to.be.true;
+    });
   });
 
   describe('Flush align', () => {
