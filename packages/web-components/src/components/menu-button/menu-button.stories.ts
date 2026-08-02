@@ -12,12 +12,14 @@ import Group16 from '@carbon/icons/es/group/16.js';
 import { iconLoader } from '../../globals/internal/icon-loader';
 
 const args = {
+  disabled: false,
   label: 'Actions',
   kind: 'primary',
   size: 'lg',
   menuAlignment: 'bottom',
   menuBackgroundToken: 'layer',
   menuBorder: false,
+  tabIndex: 0,
 };
 
 const argTypes = {
@@ -212,10 +214,8 @@ export const withDividers = {
 export const withIcons = {
   argTypes: argTypes,
   args: {
+    ...args,
     label: 'Add',
-    kind: 'primary',
-    size: 'lg',
-    menuAlignment: 'bottom',
   },
   render: ({
     disabled,
@@ -291,8 +291,14 @@ export const withNestedMenu = {
 };
 
 export const withMenuAlignment = {
-  argTypes: argTypes,
-  args: args,
+  argTypes: {
+    menuBackgroundToken: argTypes.menuBackgroundToken,
+    menuBorder: argTypes.menuBorder,
+  },
+  args: {
+    menuBackgroundToken: args.menuBackgroundToken,
+    menuBorder: args.menuBorder,
+  },
   render: ({ menuBackgroundToken, menuBorder }) => html`
     <div style="display: flex; justify-content: space-between;">
       <cds-menu-button
