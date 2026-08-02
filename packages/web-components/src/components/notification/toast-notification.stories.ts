@@ -23,7 +23,7 @@ const args = {
   role: 'status',
   statusIconDescription: 'notification',
   subtitle: 'Subtitle text goes here',
-  timeout: '0',
+  timeout: 0,
   title: 'Notification title',
 };
 
@@ -62,7 +62,7 @@ const argTypes = {
     description: 'Specify the subtitle.',
   },
   timeout: {
-    control: 'text',
+    control: 'number',
     description:
       'Specify an optional duration the notification should be closed in.',
   },
@@ -78,65 +78,59 @@ const argTypes = {
   },
 };
 
+const renderNotification = (args) => {
+  const {
+    kind,
+    title,
+    subtitle,
+    caption,
+    hideCloseButton,
+    statusIconDescription,
+    lowContrast,
+    timeout,
+    role,
+    disableClose,
+    onBeforeClose = noop,
+    onClose = noop,
+  } = args ?? {};
+  const handleBeforeClose = (event: CustomEvent) => {
+    onBeforeClose(event);
+    if (disableClose) {
+      event.preventDefault();
+    }
+  };
+  return html`
+    <cds-toast-notification
+      kind="${ifDefined(kind)}"
+      title="${ifDefined(title)}"
+      subtitle="${ifDefined(subtitle)}"
+      caption="${ifDefined(caption)}"
+      role="${ifDefined(role)}"
+      ?hide-close-button="${hideCloseButton}"
+      ?low-contrast="${lowContrast}"
+      status-icon-description="${ifDefined(statusIconDescription)}"
+      timeout="${ifDefined(timeout)}"
+      @cds-notification-beingclosed="${handleBeforeClose}"
+      @cds-notification-closed="${onClose}">
+    </cds-toast-notification>
+  `;
+};
+
 export const Default = {
-  render: () => {
-    return html`
-      <cds-toast-notification
-        kind="${NOTIFICATION_KIND.ERROR}"
-        title="Notification title"
-        subtitle="Subtitle text goes here"
-        caption="00:00:00 AM"
-        role="status"
-        timeout="0">
-      </cds-toast-notification>
-    `;
+  args: {
+    kind: NOTIFICATION_KIND.ERROR,
   },
+  render: renderNotification,
 };
 
 export const Playground = {
-  args,
-  argTypes,
-  render: (args) => {
-    const {
-      kind,
-      title,
-      subtitle,
-      caption,
-      hideCloseButton,
-      statusIconDescription,
-      lowContrast,
-      timeout,
-      role,
-      disableClose,
-      onBeforeClose = noop,
-      onClose = noop,
-    } = args ?? {};
-    const handleBeforeClose = (event: CustomEvent) => {
-      onBeforeClose(event);
-      if (disableClose) {
-        event.preventDefault();
-      }
-    };
-    return html`
-      <cds-toast-notification
-        kind="${ifDefined(kind)}"
-        title="${ifDefined(title)}"
-        subtitle="${ifDefined(subtitle)}"
-        caption="${ifDefined(caption)}"
-        role="${ifDefined(role)}"
-        ?hide-close-button="${hideCloseButton}"
-        ?low-contrast="${lowContrast}"
-        status-icon-description="${ifDefined(statusIconDescription)}"
-        timeout="${ifDefined(timeout)}"
-        @cds-notification-beingclosed="${handleBeforeClose}"
-        @cds-notification-closed="${onClose}">
-      </cds-toast-notification>
-    `;
-  },
+  render: renderNotification,
 };
 
 const meta = {
   title: 'Components/Notifications/Toast',
+  args,
+  argTypes,
   parameters: {
     docs: {
       page: storyDocs,
