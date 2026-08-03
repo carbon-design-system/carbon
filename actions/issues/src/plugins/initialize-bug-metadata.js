@@ -373,6 +373,11 @@ async function ensureProjectItem(
     return item;
   } catch (error) {
     if (!isDuplicateProjectItemError(error)) {
+      // GraphQL does not include an accepted-permissions header, so include the
+      // exact GitHub App permission needed for this mutation in the job log.
+      core.error(
+        `[bug-metadata] Could not add issue to Project ${PROJECT_NUMBER}. Verify that the Carbon Automation GitHub App has Organization permissions > Projects set to Read and write. GitHub response: ${error.message}`
+      );
       throw error;
     }
     core.info(
