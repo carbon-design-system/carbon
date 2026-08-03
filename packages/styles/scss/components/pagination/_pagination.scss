@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2016, 2023
+// Copyright IBM Corp. 2016, 2026
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -101,8 +101,10 @@
     padding-inline: $spacing-05 2.25rem;
   }
 
-  .#{$prefix}--pagination .#{$prefix}--select-input:hover {
-    background: $layer-hover;
+  @media (any-hover: hover) {
+    .#{$prefix}--pagination .#{$prefix}--select-input:hover {
+      background: $layer-hover;
+    }
   }
 
   .#{$prefix}--pagination
@@ -235,9 +237,11 @@
     border-inline-start: 0;
   }
 
-  .#{$prefix}--pagination__button:hover,
-  .#{$prefix}--btn--ghost:hover.#{$prefix}--pagination__button {
-    background: $layer-hover;
+  @media (any-hover: hover) {
+    .#{$prefix}--pagination__button:hover,
+    .#{$prefix}--btn--ghost:hover.#{$prefix}--pagination__button {
+      background: $layer-hover;
+    }
   }
 
   .#{$prefix}--pagination__button--no-index,
@@ -246,14 +250,16 @@
     fill: $icon-disabled;
   }
 
-  .#{$prefix}--pagination__button:disabled:hover,
-  .#{$prefix}--pagination__button--no-index:hover,
-  .#{$prefix}--btn--ghost:disabled:hover.#{$prefix}--pagination__button,
-  .#{$prefix}--btn--ghost:hover.#{$prefix}--pagination__button--no-index {
-    border-color: $border-subtle;
-    background: $layer;
-    cursor: not-allowed;
-    fill: $icon-disabled;
+  @media (any-hover: hover) {
+    .#{$prefix}--pagination__button:disabled:hover,
+    .#{$prefix}--pagination__button--no-index:hover,
+    .#{$prefix}--btn--ghost:disabled:hover.#{$prefix}--pagination__button,
+    .#{$prefix}--btn--ghost:hover.#{$prefix}--pagination__button--no-index {
+      border-color: $border-subtle;
+      background: $layer;
+      cursor: not-allowed;
+      fill: $icon-disabled;
+    }
   }
 
   // Skeleton state
@@ -276,10 +282,15 @@
   // Override for disabled select inputs to maintain layer background color
   .#{$prefix}--pagination
     .#{$prefix}--select--inline
-    .#{$prefix}--select-input[disabled],
-  .#{$prefix}--pagination
-    .#{$prefix}--select--inline
-    .#{$prefix}--select-input[disabled]:hover {
+    .#{$prefix}--select-input[disabled] {
     background-color: $layer;
+  }
+
+  @media (any-hover: hover) {
+    .#{$prefix}--pagination
+      .#{$prefix}--select--inline
+      .#{$prefix}--select-input[disabled]:hover {
+      background-color: $layer;
+    }
   }
 }
