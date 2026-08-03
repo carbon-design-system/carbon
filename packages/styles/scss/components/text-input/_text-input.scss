@@ -33,7 +33,7 @@
 /// @group text-input
 @mixin text-input {
   .#{$prefix}--text-input {
-    border-radius: $border-radius-08; // <-- usage example
+    border-radius: $border-radius-04; // <-- usage example
     @include layout.use('size', $default: 'md', $min: 'xs', $max: 'lg');
     @include layout.use('density', $default: 'normal');
     @include component-reset.reset;

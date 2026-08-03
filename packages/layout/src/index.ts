@@ -25,7 +25,10 @@ export type SizeName =
 export type BorderRadiusToken =
   | 'border-radius-02'
   | 'border-radius-04'
-  | 'border-radius-08';
+  | 'border-radius-08'
+  | 'border-radius-16'
+  | 'border-radius-24'
+  | 'border-radius-max';
 
 // Convert
 // Default, Use with em() and rem() functions
@@ -188,8 +191,14 @@ export const iconSize = [iconSize01, iconSize02];
 export const borderRadius02 = rem(2);
 export const borderRadius04 = rem(4);
 export const borderRadius08 = rem(8);
+export const borderRadius16 = rem(16);
+export const borderRadius24 = rem(24);
+export const borderRadiusMax = '999999px';
 export const borderRadius: Record<BorderRadiusToken, string> = {
   'border-radius-02': borderRadius02,
   'border-radius-04': borderRadius04,
   'border-radius-08': borderRadius08,
+  'border-radius-16': borderRadius16,
+  'border-radius-24': borderRadius24,
+  'border-radius-max': borderRadiusMax,
 };
