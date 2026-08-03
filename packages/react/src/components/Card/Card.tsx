@@ -117,7 +117,6 @@ const CardComponent = forwardRef<HTMLDivElement, CardProps>(
     // In horizontal mode, split children into media and content, then order
     // them by the position of Card.Media in the JSX — media before content
     // children = left, media after content children = right.
-    // Memoised so repeated parent-state updates don't re-run the split on every render.
     const { mediaChildren, contentChildren, mediaIsFirst } = useMemo(() => {
       if (!horizontal) {
         return { mediaChildren: [], contentChildren: [], mediaIsFirst: false };

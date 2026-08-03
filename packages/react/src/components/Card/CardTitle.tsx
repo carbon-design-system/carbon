@@ -85,12 +85,6 @@ export interface CardTitleProps {
  * Typography is driven by density on the parent Card:
  * - Productive: $heading-compact-02 (16px/22px)
  * - Expressive: $heading-03 (20px/28px)
- *
- * Structure:
- *   <div __title>                 ← flex-column container, grid item
- *     <div __label>               ← optional, $label-01 / $text-secondary
- *     <span __title-text-row>     ← icon + text + end-icon, truncation lives here
- *     <div __description>         ← optional, $label-01 / $text-secondary
  */
 export const CardTitle = forwardRef<HTMLDivElement, CardTitleProps>(
   (

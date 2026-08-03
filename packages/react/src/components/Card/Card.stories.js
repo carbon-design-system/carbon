@@ -838,11 +838,6 @@ export const WithAILabel = () => (
   </Grid>
 );
 
-/**
- * Title Media Story
- * Demonstrates CardTitleMedia component for icon alongside label+title+description block.
- * CSS Grid handles the side-by-side layout — no JS wrapper needed.
- */
 export const WithTitleMedia = () => (
   <Grid withRowGap>
     <Column lg={4} md={4} sm={4}>
@@ -1192,14 +1187,6 @@ export const WithVideo = () => (
   </Grid>
 );
 
-/**
- * Horizontal layout: Card.Media on the left, Header/Body/Footer stacked on the right.
- *
- * Usage notes:
- * - Card.Media must be a direct child of Card (not inside Card.Header).
- * - mediaWidth controls the media column width (default: 33.33%).
- * - Content inside Card.Media should fill it: width/height 100% + object-fit: cover.
- */
 export const WithHorizontalMedia = () => (
   <Grid withRowGap>
     <Column lg={8} md={4} sm={4}>

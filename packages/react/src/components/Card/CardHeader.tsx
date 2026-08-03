@@ -16,13 +16,6 @@ const componentName = 'CardHeader';
 
 /**
  * CardHeader — header section of the card.
- *
- * Layout is handled entirely by CSS Grid on __header:
- *   - CardHeaderMedia spans both columns (full-width row above the title area)
- *   - CardTitleMedia occupies column 1 (left icon slot)
- *   - CardTitle occupies column 2 (right text slot), or spans full width when
- *     CardTitleMedia is absent — detected by the :has selector in SCSS.
- * No child-scanning or wrapper injection is needed.
  */
 export const CardHeader = forwardRef<HTMLDivElement, CardHeaderProps>(
   ({ className, children, ...rest }, ref) => {
