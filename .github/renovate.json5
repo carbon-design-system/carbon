@@ -1,19 +1,26 @@
 {
   extends: [
-    "config:js-lib",
-    ":maintainLockFilesWeekly",
-    ":preserveSemverRanges",
-    "security:minimumReleaseAgeNpm",
+    'config:js-lib',
+    ':maintainLockFilesWeekly',
+    ':preserveSemverRanges',
+    'security:minimumReleaseAgeNpm',
   ],
   schedule: [
-    "after 10pm every weekday",
-    "before 5am every weekday",
-    "every weekend",
+    'after 10pm every weekday',
+    'before 5am every weekday',
+    'every weekend',
+  ],
+  packageRules: [
+    {
+      description: 'Bump @figma/code-connect for in-range updates',
+      matchPackageNames: ['@figma/code-connect'],
+      rangeStrategy: 'bump',
+    },
   ],
   vulnerabilityAlerts: {
     enabled: true,
   },
-  rebaseWhen: "never",
+  rebaseWhen: 'never',
   lockFileMaintenance: {
     enabled: false,
   },
