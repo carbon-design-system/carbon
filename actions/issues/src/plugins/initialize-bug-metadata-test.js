@@ -16,6 +16,7 @@ import {
 jest.mock(
   '@actions/core',
   () => ({
+    error: jest.fn(),
     info: jest.fn(),
     warning: jest.fn(),
   }),
@@ -279,6 +280,26 @@ describe('initializeBugMetadata', () => {
       3,
       expect.stringContaining('SetBugProjectSingleSelect'),
       expect.objectContaining({ itemId: 'added-item-id' })
+    );
+  });
+
+  it('logs the required App permission when project membership fails', async () => {
+    const projectError = new Error('Resource not accessible by integration');
+    const octokit = createOctokit({
+      projectStates: [createProjectState({ item: null }), projectError],
+    });
+
+    await expect(
+      initializeBugMetadata(createContext(), octokit)
+    ).rejects.toThrow(projectError);
+
+    expect(core.error).toHaveBeenCalledWith(
+      expect.stringContaining(
+        'Organization permissions > Projects set to Read and write'
+      )
+    );
+    expect(core.error).toHaveBeenCalledWith(
+      expect.stringContaining('Resource not accessible by integration')
     );
   });
 
