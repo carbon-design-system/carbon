@@ -12,6 +12,7 @@
   // Gutter modes
   .cds--css-grid {
     background-color: $blue-20;
+    color: $gray-100;
     outline: 1px dashed $blue-40;
   }
 
@@ -40,6 +41,7 @@
     background: #eef4ff;
     outline: 1px solid black;
     padding-block: 2rem;
+    color: $gray-100;
   }
 
   .cds--css-grid,

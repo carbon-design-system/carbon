@@ -229,12 +229,13 @@ class CDSActionableNotification extends HostListenerMixin(
   }
 
   protected _renderIcon() {
-    const { kind, inline } = this;
+    const { statusIconDescription, kind, inline } = this;
     const IconComponent = iconsForKinds[kind];
     return !IconComponent
       ? undefined
       : iconLoader(IconComponent, {
           class: `${prefix}--${inline ? 'inline' : 'toast'}-notification__icon`,
+          'aria-label': statusIconDescription,
         });
   }
 

@@ -6,7 +6,7 @@
  */
 
 import { LitElement, html, nothing } from 'lit';
-import { property } from 'lit/decorators.js';
+import { property, query } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
 import styles from './data-table.scss?lit';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
@@ -21,6 +21,18 @@ import { carbonElement as customElement } from '../../globals/decorators/carbon-
 
 @customElement(`${prefix}-table-batch-actions`)
 class CDSTableBatchActions extends LitElement {
+  /**
+   * The slot element
+   */
+  @query('slot')
+  private _slotElement?: HTMLSlotElement;
+
+  /**
+   * The cancel button element
+   */
+  @query(`${prefix}-button.${prefix}--batch-summary__cancel`)
+  private _cancelButton?: HTMLElement;
+
   /**
    * Handles `click` event on the Cancel button.
    */
@@ -84,23 +96,20 @@ class CDSTableBatchActions extends LitElement {
   }
 
   private _setupHoverListeners() {
-    const slot = this.shadowRoot?.querySelector('slot');
-    const cancelButton = this.shadowRoot?.querySelector(
-      `${prefix}-button.${prefix}--batch-summary__cancel`
-    ) as HTMLElement;
-
-    if (slot && cancelButton) {
+    if (this._slotElement && this._cancelButton) {
       const setupListeners = () => {
-        const buttons = slot.assignedElements();
+        const buttons = this._slotElement?.assignedElements();
+        if (!buttons) return;
+
         const lastButton = buttons[buttons.length - 1] as HTMLElement;
 
         if (lastButton) {
           const handleEnter = () => {
-            cancelButton.style.setProperty('--divider-opacity', '0');
+            this._cancelButton?.style.setProperty('--divider-opacity', '0');
           };
 
           const handleLeave = () => {
-            cancelButton.style.setProperty('--divider-opacity', '1');
+            this._cancelButton?.style.setProperty('--divider-opacity', '1');
           };
 
           lastButton.removeEventListener('mouseenter', handleEnter);
@@ -112,7 +121,7 @@ class CDSTableBatchActions extends LitElement {
       };
 
       setupListeners();
-      slot.addEventListener('slotchange', setupListeners);
+      this._slotElement.addEventListener('slotchange', setupListeners);
     }
   }
 

@@ -1,12 +1,11 @@
 /**
- * Copyright IBM Corp. 2019, 2025
+ * Copyright IBM Corp. 2019, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
 import { html } from 'lit';
-import { ifDefined } from 'lit/directives/if-defined.js';
 import { OVERFLOW_MENU_SIZE } from './overflow-menu';
 import './overflow-menu-body';
 import './overflow-menu-item';
@@ -69,7 +68,7 @@ export const Default = {
           slot: 'icon',
         })}
         <span slot="tooltip-content"> ${iconDescription} </span>
-        <cds-overflow-menu-body ?flipped="${ifDefined(flipped)}">
+        <cds-overflow-menu-body ?flipped="${flipped}">
           <cds-overflow-menu-item>Stop app</cds-overflow-menu-item>
           <cds-overflow-menu-item>Restart app</cds-overflow-menu-item>
           <cds-overflow-menu-item>Rename app</cds-overflow-menu-item>
@@ -87,6 +86,7 @@ export const Default = {
     `;
   },
 };
+
 export const RenderCustomIcon = {
   render: () => {
     return html`

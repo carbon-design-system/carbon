@@ -77,3 +77,6 @@ blob-report
 **/.yarn/cache/
 **/.yarn/build-state.yml
 **/.yarn/install-state.gz
+
+# Generated DTCG color palette (built from @carbon/colors at build time)
+packages/themes/src/dtcg/color-palette.json
