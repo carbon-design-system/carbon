@@ -1785,7 +1785,7 @@ __metadata:
     "@carbon/icon-helpers": "npm:^10.79.0"
     change-case-all: "npm:^2.1.0"
     fs-extra: "npm:^11.0.0"
-    joi: "npm:^17.1.1"
+    joi: "npm:^18.0.0"
     js-yaml: "npm:^5.0.0"
     memfs: "npm:^4.0.0"
     prettier: "npm:^3.3.3"
@@ -2175,8 +2175,8 @@ __metadata:
     "@types/lodash-es": "npm:^4.17.5"
     "@types/node": "npm:^24.0.0"
     "@web/test-runner": "npm:^0.20.0"
-    "@web/test-runner-commands": "npm:^0.9.0"
-    "@web/test-runner-playwright": "npm:^0.11.0"
+    "@web/test-runner-commands": "npm:^1.0.0"
+    "@web/test-runner-playwright": "npm:^1.0.0"
     "@web/test-runner-puppeteer": "npm:^1.0.0"
     "@webcomponents/webcomponentsjs": "npm:^2.8.0"
     autoprefixer: "npm:^10.4.0"
@@ -3174,6 +3174,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@hapi/address@npm:^5.1.1":
+  version: 5.1.1
+  resolution: "@hapi/address@npm:5.1.1"
+  dependencies:
+    "@hapi/hoek": "npm:^11.0.2"
+  checksum: 10/9462b22f96f1081a07b3bb07f046c5fdfa1940805b3433476f56c0df3b8eded026f62a2e8395534a14a48f689757f9eb8b44c0c4360d96a12ad34ff21989a534
+  languageName: node
+  linkType: hard
+
 "@hapi/bourne@npm:^3.0.0":
   version: 3.0.0
   resolution: "@hapi/bourne@npm:3.0.0"
@@ -3181,19 +3190,40 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@hapi/hoek@npm:^9.0.0, @hapi/hoek@npm:^9.3.0":
-  version: 9.3.0
-  resolution: "@hapi/hoek@npm:9.3.0"
-  checksum: 10/ad83a223787749f3873bce42bd32a9a19673765bf3edece0a427e138859ff729469e68d5fdf9ff6bbee6fb0c8e21bab61415afa4584f527cfc40b59ea1957e70
+"@hapi/formula@npm:^3.0.2":
+  version: 3.0.2
+  resolution: "@hapi/formula@npm:3.0.2"
+  checksum: 10/c6d4fdcd19fdeb02f0995174497b69ca1f2d534d9f55d512b404ce78a3ce4c53618d4c339fb708c812de4ad1db49122cef960eb1d2cc17e284aa9a7ce4283e2b
   languageName: node
   linkType: hard
 
-"@hapi/topo@npm:^5.1.0":
-  version: 5.1.0
-  resolution: "@hapi/topo@npm:5.1.0"
+"@hapi/hoek@npm:^11.0.2, @hapi/hoek@npm:^11.0.7":
+  version: 11.0.7
+  resolution: "@hapi/hoek@npm:11.0.7"
+  checksum: 10/d0cbacf2edcedac1f06dd1d731c1f8c83ef32f2432630c4b1ebe119729cbf79e3da69fa3e5991f19d80e344f5d246b03b7e96998a032940e18bfda7ba2a56f0e
+  languageName: node
+  linkType: hard
+
+"@hapi/pinpoint@npm:^2.0.1":
+  version: 2.0.1
+  resolution: "@hapi/pinpoint@npm:2.0.1"
+  checksum: 10/28e72305c13de10893be33273cd33c7d7b1c89cfcf707de5a7e214b08f8e3c440adf7df0ff1c9ab4d86744eefdab3ae549456b641f66a2af47ed862f764d6c49
+  languageName: node
+  linkType: hard
+
+"@hapi/tlds@npm:^1.1.1":
+  version: 1.1.7
+  resolution: "@hapi/tlds@npm:1.1.7"
+  checksum: 10/d22ee05b2809a63d90db24bef576e32a9d48a87b34e83ee7a5d91b3ef57f6b93555f589e5f7ee70dfc2fd4f947df584bf82f142c24117fdb7c749bec1565c2ba
+  languageName: node
+  linkType: hard
+
+"@hapi/topo@npm:^6.0.2":
+  version: 6.0.2
+  resolution: "@hapi/topo@npm:6.0.2"
   dependencies:
-    "@hapi/hoek": "npm:^9.0.0"
-  checksum: 10/084bfa647015f4fd3fdd51fadb2747d09ef2f5e1443d6cbada2988b0c88494f85edf257ec606c790db146ac4e34ff57f3fcb22e3299b8e06ed5c87ba7583495c
+    "@hapi/hoek": "npm:^11.0.2"
+  checksum: 10/ef959d3796638e11e5f7a9f2a64295ded7c638d6a21fa37bf1265b14c3a6636da593c9976138826c5b8972830a706d18a82b489e3d902e77026f7f0bec908704
   languageName: node
   linkType: hard
 
@@ -5485,29 +5515,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@sideway/address@npm:^4.1.5":
-  version: 4.1.5
-  resolution: "@sideway/address@npm:4.1.5"
-  dependencies:
-    "@hapi/hoek": "npm:^9.0.0"
-  checksum: 10/c4c73ac0339504f34e016d3a687118e7ddf197c1c968579572123b67b230be84caa705f0f634efdfdde7f2e07a6e0224b3c70665dc420d8bc95bf400cfc4c998
-  languageName: node
-  linkType: hard
-
-"@sideway/formula@npm:^3.0.1":
-  version: 3.0.1
-  resolution: "@sideway/formula@npm:3.0.1"
-  checksum: 10/8d3ee7f80df4e5204b2cbe92a2a711ca89684965a5c9eb3b316b7051212d3522e332a65a0bb2a07cc708fcd1d0b27fcb30f43ff0bcd5089d7006c7160a89eefe
-  languageName: node
-  linkType: hard
-
-"@sideway/pinpoint@npm:^2.0.0":
-  version: 2.0.0
-  resolution: "@sideway/pinpoint@npm:2.0.0"
-  checksum: 10/1ed21800128b2b23280ba4c9db26c8ff6142b97a8683f17639fd7f2128aa09046461574800b30fb407afc5b663c2331795ccf3b654d4b38fa096e41a5c786bf8
-  languageName: node
-  linkType: hard
-
 "@sigstore/bundle@npm:^4.0.0":
   version: 4.0.0
   resolution: "@sigstore/bundle@npm:4.0.0"
@@ -5625,6 +5632,13 @@ __metadata:
   version: 1.11.0
   resolution: "@stackblitz/sdk@npm:1.11.0"
   checksum: 10/351647b818f2e40135ff92d3de61f94a925635acb769862014f4a0eb252011f1c42ede2c6952ab4848ed7512777f3f6d3944914f5750499f35069b54231d6cb2
+  languageName: node
+  linkType: hard
+
+"@standard-schema/spec@npm:^1.1.0":
+  version: 1.1.0
+  resolution: "@standard-schema/spec@npm:1.1.0"
+  checksum: 10/a209615c9e8b2ea535d7db0a5f6aa0f962fd4ab73ee86a46c100fb78116964af1f55a27c1794d4801e534a196794223daa25ff5135021e03c7828aa3d95e1763
   languageName: node
   linkType: hard
 
@@ -7567,14 +7581,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@web/test-runner-playwright@npm:^0.11.0":
-  version: 0.11.0
-  resolution: "@web/test-runner-playwright@npm:0.11.0"
+"@web/test-runner-playwright@npm:^1.0.0":
+  version: 1.0.0
+  resolution: "@web/test-runner-playwright@npm:1.0.0"
   dependencies:
-    "@web/test-runner-core": "npm:^0.13.0"
-    "@web/test-runner-coverage-v8": "npm:^0.8.0"
-    playwright: "npm:^1.22.2"
-  checksum: 10/82cd63a339434269b638010228bafa4896375476d537c86aa4eb0f4e866490b4346d6331b6074a3b0da36eada43c92336452fa6b05251d9ee9c5a19e81ebf3c1
+    "@web/test-runner-core": "npm:^1.0.0"
+    "@web/test-runner-coverage-v8": "npm:^1.0.0"
+    playwright: "npm:^1.53.0"
+  checksum: 10/0e13d5b2de0048e25629e76b8ffae337bbe9dd0cfc3ef7161602325707b007fc4fd5d7b1eb2d2e60b07475b64dfe4ba11d4f34aa4147006698c9fedb0367e105
   languageName: node
   linkType: hard
 
@@ -15425,16 +15439,18 @@ __metadata:
   languageName: node
   linkType: hard
 
-"joi@npm:^17.1.1":
-  version: 17.13.4
-  resolution: "joi@npm:17.13.4"
+"joi@npm:^18.0.0":
+  version: 18.2.3
+  resolution: "joi@npm:18.2.3"
   dependencies:
-    "@hapi/hoek": "npm:^9.3.0"
-    "@hapi/topo": "npm:^5.1.0"
-    "@sideway/address": "npm:^4.1.5"
-    "@sideway/formula": "npm:^3.0.1"
-    "@sideway/pinpoint": "npm:^2.0.0"
-  checksum: 10/0e407d4cc6cb0830b93c2d107f8b85113338473296025c31a931589359b58883e61fd183dd7532d3ab1ee014a01a20830a8fca90d9f0217d0c0894ee2cbf9ff5
+    "@hapi/address": "npm:^5.1.1"
+    "@hapi/formula": "npm:^3.0.2"
+    "@hapi/hoek": "npm:^11.0.7"
+    "@hapi/pinpoint": "npm:^2.0.1"
+    "@hapi/tlds": "npm:^1.1.1"
+    "@hapi/topo": "npm:^6.0.2"
+    "@standard-schema/spec": "npm:^1.1.0"
+  checksum: 10/95beb88e78c884e1b2650837b31f1fecc52b035f1b48f771f5a4c07b2202a1fcce87819b4706734d708f277875f19c813b4c695246bdf9c65659f210b681a613
   languageName: node
   linkType: hard
 
@@ -19231,12 +19247,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"playwright-core@npm:1.50.1":
-  version: 1.50.1
-  resolution: "playwright-core@npm:1.50.1"
+"playwright-core@npm:1.62.0":
+  version: 1.62.0
+  resolution: "playwright-core@npm:1.62.0"
   bin:
     playwright-core: cli.js
-  checksum: 10/9a310b8a66bf7fd926e620c1c8e27be29bdbdce91640e5f975b2fd4dc706d0307faec2bb0456cc8e7dedb1e71c0b5eb35c6a58acd5cedc7d8fd849a9067e637b
+  checksum: 10/1cf036e9ed51ea80d311ac25a871dddbc57d5e7e7a5ad23fc2741452aa8406c95e820901ec38aeecc6fca2ddc383ccc8acb0e2f29a4c12942dd0a1a63e7134a2
   languageName: node
   linkType: hard
 
@@ -19255,18 +19271,18 @@ __metadata:
   languageName: node
   linkType: hard
 
-"playwright@npm:^1.22.2":
-  version: 1.50.1
-  resolution: "playwright@npm:1.50.1"
+"playwright@npm:^1.53.0":
+  version: 1.62.0
+  resolution: "playwright@npm:1.62.0"
   dependencies:
     fsevents: "npm:2.3.2"
-    playwright-core: "npm:1.50.1"
+    playwright-core: "npm:1.62.0"
   dependenciesMeta:
     fsevents:
       optional: true
   bin:
     playwright: cli.js
-  checksum: 10/a3687614ac3238a81cbe3018e4f4a2ae92c71f3f65110cc6087068c020f6134f0628308da33177b9b08102644706e835d4053f6890beeb4a935f433bc4ac107a
+  checksum: 10/52401b5f2b67abcb555c1b1c229e5204a3ac72a604343a99e60b00bd0cd46ad661a9471ced4e6c3ff39de957a0b1f413810d191ce81cd40e455700d73a6a80a5
   languageName: node
   linkType: hard
 
