@@ -1,7 +1,7 @@
 {
   "name": "@carbon/cli",
   "description": "Task automation for working with the Carbon Design System",
-  "version": "11.47.0-rc.0",
+  "version": "11.47.0",
   "license": "Apache-2.0",
   "type": "module",
   "bin": {
@@ -37,7 +37,6 @@
     "chalk": "^5.4.1",
     "change-case-all": "^2.1.0",
     "child-process-promise": "^2.2.1",
-    "enquirer": "^2.4.1",
     "fast-glob": "^3.3.3",
     "fs-extra": "^11.2.0",
     "inquirer": "^12.5.0",
