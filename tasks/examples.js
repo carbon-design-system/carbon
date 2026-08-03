@@ -30,6 +30,7 @@ const IGNORE_EXAMPLE_DIRS = new Set([
   'vue-cli',
   'storybook',
   'sass-modules',
+  'theme-tokens-dtcg',
 ]);
 
 /**
@@ -166,6 +167,44 @@ async function main() {
     })
   );
 
+  // Build theme-tokens-dtcg separately (it's a Next.js app excluded from the
+  // auto-generated links above, but its static export goes into the same build tree).
+  const dtcgExample = {
+    filepath: path.join(
+      PACKAGES_DIR,
+      'themes',
+      'examples',
+      'theme-tokens-dtcg'
+    ),
+    name: 'theme-tokens-dtcg',
+  };
+  reporter.info('Building example `theme-tokens-dtcg` in package `themes`');
+  const dtcgDir = path.join(
+    BUILD_DIR,
+    'themes',
+    'examples',
+    'theme-tokens-dtcg'
+  );
+  await fs.ensureDir(dtcgDir);
+  const dtcgInstall = spawn.sync('yarn', ['install'], {
+    stdio: 'inherit',
+    cwd: dtcgExample.filepath,
+  });
+  if (dtcgInstall.status !== 0) {
+    throw new Error(
+      'Error installing dependencies for themes:theme-tokens-dtcg'
+    );
+  }
+  const dtcgBuild = spawn.sync('yarn', ['build'], {
+    stdio: 'inherit',
+    cwd: dtcgExample.filepath,
+  });
+  if (dtcgBuild.status !== 0) {
+    throw new Error('Error building example theme-tokens-dtcg for themes');
+  }
+  await fs.copy(path.join(dtcgExample.filepath, 'build'), dtcgDir);
+  reporter.success('Built example `theme-tokens-dtcg` in package `themes`');
+
   const links = packagesWithExamples.reduce((html, pkg) => {
     const links = pkg.examples.reduce((acc, example) => {
       const href = `./${pkg.name}/examples/${example.name}/`;
@@ -186,6 +225,16 @@ async function main() {
     );
   }, '');
 
+  const tokensSection = `
+<section>
+  <header>
+    <h2>Tokens</h2>
+  </header>
+  <ul>
+    <li><a href="./themes/examples/theme-tokens-dtcg/">Theme Tokens (DTCG)</a></li>
+  </ul>
+</section>`;
+
   const indexFile = `
 <!DOCTYPE html>
 <html lang="en">
@@ -195,7 +244,7 @@ async function main() {
   <title>Carbon Elements</title>
   <style>body { font-family: 'IBM Plex Mono', monospaces; }</style>
 </head>
-<body>${links}<footer>Last built on ${lastBuiltOn}</footer></body>
+<body>${links}${tokensSection}<footer>Last built on ${lastBuiltOn}</footer></body>
 </html>
 `;
 

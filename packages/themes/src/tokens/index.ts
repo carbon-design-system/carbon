@@ -17,7 +17,7 @@ import { layout } from './layout';
 import { v10 } from './v10';
 import type { TokenMetadata } from './types';
 
-export { Token, TokenFormat, TokenGroup, TokenSet, group, set };
+export { Token, TokenFormat, TokenGroup, TokenSet, group, contextual, set };
 
 const formatMetadata = (name: string, type: TokenMetadata['type']) => ({
   name,
