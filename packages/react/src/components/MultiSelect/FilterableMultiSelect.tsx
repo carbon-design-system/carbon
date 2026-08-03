@@ -12,8 +12,6 @@ import Downshift, {
   useMultipleSelection,
   type UseComboboxProps,
   type UseMultipleSelectionProps,
-  UseComboboxInterface,
-  UseComboboxStateChangeTypes,
   UseMultipleSelectionInterface,
 } from 'downshift';
 import isEqual from 'react-fast-compare';
@@ -66,7 +64,11 @@ import {
 } from '@floating-ui/react';
 import type { TranslateWithId } from '../../types/common';
 import { AILabel } from '../AILabel';
-import { defaultItemToString, isComponentElement } from '../../internal';
+import {
+  defaultItemToString,
+  isComponentElement,
+  isItemDisabled,
+} from '../../internal';
 import { hasHelperText } from '../../internal/hasHelperText';
 import { useNormalizedInputProps } from '../../internal/useNormalizedInputProps';
 import useIsomorphicEffect from '../../internal/useIsomorphicEffect';
@@ -85,9 +87,8 @@ const {
   InputChange,
   InputKeyDownEscape,
   FunctionSetHighlightedIndex,
-} = useCombobox.stateChangeTypes as UseComboboxInterface['stateChangeTypes'] & {
-  ToggleButtonClick: UseComboboxStateChangeTypes.ToggleButtonClick;
-};
+  FunctionSetInputValue,
+} = useCombobox.stateChangeTypes;
 
 const {
   SelectedItemKeyDownBackspace,
@@ -241,8 +242,7 @@ export interface FilterableMultiSelectProps<ItemType>
   onChange?(changes: { selectedItems: ItemType[] }): void;
 
   /**
-   * A utility for this controlled component
-   * to communicate to the currently typed input.
+   * Called whenever the input value changes.
    */
   onInputValueChange?: UseComboboxProps<ItemType>['onInputValueChange'];
 
@@ -407,8 +407,7 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
 
   const selectAllStatus = useMemo(() => {
     const selectable = nonSelectAllItems.filter(
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
-      (item) => !(item as any).disabled
+      (item) => !isItemDisabled(item)
     );
 
     const nonSelectedCount = selectable.filter(
@@ -423,8 +422,9 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
   }, [controlledSelectedItems, nonSelectAllItems]);
 
   const handleSelectAllClick = useCallback(() => {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
-    const selectable = nonSelectAllItems.filter((i) => !(i as any).disabled);
+    const selectable = nonSelectAllItems.filter(
+      (item) => !isItemDisabled(item)
+    );
     const { checked, indeterminate } = selectAllStatus;
 
     // clear all options if select-all state is checked or indeterminate
@@ -500,8 +500,7 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
     const selectAllItem = items.find(isSelectAllItem);
 
     const selectableRealItems = nonSelectAllItems.filter(
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
-      (item) => !(item as any).disabled
+      (item) => !isItemDisabled(item)
     );
 
     // Sort only non-select-all items, select-all item must stay at the top
@@ -676,11 +675,9 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
     menuId,
     inputId,
     inputValue,
+    onInputValueChange,
     stateReducer,
-    isItemDisabled(item) {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- https://github.com/carbon-design-system/carbon/issues/20452
-      return (item as any)?.disabled;
-    },
+    isItemDisabled,
   });
   function stateReducer(state, actionAndChanges) {
     const { type, props, changes } = actionAndChanges;
@@ -694,7 +691,7 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
         if (sortedItems.length === 0) {
           return changes;
         }
-        if (changes.selectedItem && changes.selectedItem.disabled !== true) {
+        if (changes.selectedItem && !isItemDisabled(changes.selectedItem)) {
           if (isSelectAllItem(changes.selectedItem)) {
             handleSelectAllClick();
           } else {
@@ -728,9 +725,6 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
           highlightedIndex: controlledSelectedItems.length > 0 ? 0 : -1,
         };
       case InputChange:
-        if (onInputValueChange) {
-          onInputValueChange(changes);
-        }
         setInputValue(changes.inputValue ?? '');
         setIsOpen(true);
         return { ...changes, highlightedIndex: 0 };
@@ -817,11 +811,14 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
     event?: KeyboardEvent<Element> | MouseEvent<HTMLButtonElement>
   ) {
     const value = textInput.current?.value;
-    if (
-      value?.length === 1 ||
-      (event && 'key' in event && match(event, keys.Escape))
-    ) {
+    const isEscape = event && 'key' in event && match(event, keys.Escape);
+    const isClick = value && !(event && 'key' in event);
+    if (value?.length === 1 || isEscape || isClick) {
       setInputValue('');
+      onInputValueChange?.({
+        inputValue: '',
+        type: FunctionSetInputValue,
+      });
     } else {
       setInputValue(value ?? '');
     }
@@ -1045,6 +1042,9 @@ export const FilterableMultiSelect = forwardRef(function FilterableMultiSelect<
               disabled={disabled}
               translateWithId={translateWithId}
               readOnly={readOnly}
+              onMouseDown={(event) => {
+                event.preventDefault();
+              }}
               onMouseUp={(event: MouseEvent) => {
                 // If we do not stop this event from propagating,
                 // it seems like Downshift takes our event and
@@ -1290,8 +1290,7 @@ FilterableMultiSelect.propTypes = {
   onChange: PropTypes.func,
 
   /**
-   * `onInputValueChange` is a utility for this controlled component to communicate to
-   * the currently typed input.
+   * Called whenever the input value changes.
    */
   onInputValueChange: PropTypes.func,
 

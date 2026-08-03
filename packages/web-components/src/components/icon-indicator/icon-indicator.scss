@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2019, 2024
+// Copyright IBM Corp. 2019, 2026
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -8,7 +8,10 @@
 $css--plex: true !default;
 
 @use '@carbon/styles/scss/config' as *;
+@use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/styles/scss/components/icon-indicator/index' as *;
+@use '@carbon/styles/scss/utilities/custom-property';
+@use '@carbon/styles/scss/utilities/visually-hidden' as *;
 
 :host(#{$prefix}-icon-indicator) {
   @extend .#{$prefix}--icon-indicator;
@@ -64,4 +67,19 @@ $css--plex: true !default;
 
 :host(#{$prefix}-icon-indicator[kind='informative']) svg {
   @extend .#{$prefix}--icon-indicator--informative;
+}
+
+:host(#{$prefix}-icon-indicator[compact]) {
+  #{$prefix}-definition-tooltip {
+    @include custom-property.declaration('tooltip-padding-block', $spacing-01);
+  }
+
+  #{$prefix}-definition-tooltip::part(definition-term) {
+    display: flex;
+    border: none;
+  }
+}
+
+.#{$prefix}--visually-hidden {
+  @extend .#{$prefix}--visually-hidden;
 }
