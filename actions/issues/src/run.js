@@ -10,50 +10,26 @@ import * as core from '@actions/core';
 import { plugins } from './plugins/index.js';
 
 /**
- * Main Docker-action entrypoint. It builds the default Carbon Automation
- * Octokit client, creates an alternate client only when a plugin explicitly
- * requests one, and logs the complete condition and token-routing decision path.
+ * Evaluate and run plugins in registry order. Keeping this loop separate from
+ * action startup makes the failure-isolation contract directly testable: one
+ * missing optional App token must not undo an earlier independent plugin.
+ *
+ * @param {object} context
+ * @param {object} carbonOctokit
+ * @param {Array<object>} registeredPlugins
  */
-async function run() {
-  core.info('[triage] Starting issue triage action');
-  const enabled = core.getInput('enabled');
-  core.info(`[triage] Action enabled input=${enabled || 'not set'}`);
-  if (enabled === 'false') {
-    core.info('[triage] Action is disabled; exiting');
-    return;
-  }
-
-  const { context } = github;
+export async function runPlugins(
+  context,
+  carbonOctokit,
+  registeredPlugins = plugins
+) {
   core.info(
-    `[triage] Event=${context.eventName}; action=${context.payload.action ?? 'none'}`
+    `[triage] Evaluating ${registeredPlugins.length} registered plugins`
   );
-  const carbonToken = core.getInput('GITHUB_TOKEN', {
-    required: true,
-  });
-  core.info('[triage] Carbon Automation GitHub token input is present');
-  const carbonOctokit = github.getOctokit(carbonToken);
-  const { issue } = context.payload;
-
-  // workflow_call and future event types may not contain an issue. Treat those
-  // payloads as a successful no-op instead of failing while reading properties.
-  if (!issue) {
-    core.info('[triage] Event has no issue payload; nothing to process');
-    return;
-  }
-
-  core.info(
-    `[triage] Processing issue #${issue.number}; type=${issue.type?.name ?? 'none'}; labels=${issue.labels?.length ?? 0}`
-  );
-  if (issue.pull_request) {
-    core.info('[triage] Payload is a Pull Request; exiting');
-    return;
-  }
-
-  core.info(`[triage] Evaluating ${plugins.length} registered plugins`);
   // Continue after an individual plugin error so independent plugins can run
   // and leave their own diagnostic trail. The action still fails at the end.
   const pluginFailures = [];
-  for (const plugin of plugins) {
+  for (const plugin of registeredPlugins) {
     core.startGroup(`[triage] Plugin: ${plugin.name}`);
     let failedCondition;
 
@@ -113,18 +89,64 @@ async function run() {
 
   if (pluginFailures.length > 0) {
     // A single summary failure makes the workflow red without discarding logs
-    // from plugins that ran successfully after the first failure.
+    // from plugins that ran successfully before or after the failed plugin.
     throw new Error(
       `${pluginFailures.length} issue triage plugin(s) failed: ${pluginFailures.join(', ')}`
     );
   }
+}
 
+/**
+ * Main Docker-action entrypoint. It builds the default Carbon Automation
+ * Octokit client, creates an alternate client only when a plugin explicitly
+ * requests one, and logs the complete condition and token-routing decision path.
+ */
+async function run() {
+  core.info('[triage] Starting issue triage action');
+  const enabled = core.getInput('enabled');
+  core.info(`[triage] Action enabled input=${enabled || 'not set'}`);
+  if (enabled === 'false') {
+    core.info('[triage] Action is disabled; exiting');
+    return;
+  }
+
+  const { context } = github;
+  core.info(
+    `[triage] Event=${context.eventName}; action=${context.payload.action ?? 'none'}`
+  );
+  const carbonToken = core.getInput('GITHUB_TOKEN', {
+    required: true,
+  });
+  core.info('[triage] Carbon Automation GitHub token input is present');
+  const carbonOctokit = github.getOctokit(carbonToken);
+  const { issue } = context.payload;
+
+  // workflow_call and future event types may not contain an issue. Treat those
+  // payloads as a successful no-op instead of failing while reading properties.
+  if (!issue) {
+    core.info('[triage] Event has no issue payload; nothing to process');
+    return;
+  }
+
+  core.info(
+    `[triage] Processing issue #${issue.number}; type=${issue.type?.name ?? 'none'}; labels=${issue.labels?.length ?? 0}`
+  );
+  if (issue.pull_request) {
+    core.info('[triage] Payload is a Pull Request; exiting');
+    return;
+  }
+
+  await runPlugins(context, carbonOctokit);
   core.info('[triage] Issue triage action completed successfully');
 }
 
-run().catch((error) => {
-  // setFailed reports the error through the Actions toolkit and sets a non-zero
-  // action result without terminating before buffered logs are flushed.
-  const message = error instanceof Error ? error.stack : String(error);
-  core.setFailed(`[triage] Action failed: ${message}`);
-});
+// Jest sets NODE_ENV=test before loading modules. Suppress only automatic action
+// startup there so unit tests can call runPlugins without launching a second run.
+if (process.env.NODE_ENV !== 'test') {
+  run().catch((error) => {
+    // setFailed reports the error through the Actions toolkit and sets a non-zero
+    // action result without terminating before buffered logs are flushed.
+    const message = error instanceof Error ? error.stack : String(error);
+    core.setFailed(`[triage] Action failed: ${message}`);
+  });
+}
