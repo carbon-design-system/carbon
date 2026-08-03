@@ -88,9 +88,11 @@
     }
   }
 
-  .#{$prefix}--menu-item:hover {
-    background-color: $layer-hover;
-    color: $text-primary;
+  @media (any-hover: hover) {
+    .#{$prefix}--menu-item:hover {
+      background-color: $layer-hover;
+      color: $text-primary;
+    }
   }
 
   $supported-sizes: (
@@ -194,14 +196,20 @@
     cursor: not-allowed;
   }
 
-  .#{$prefix}--menu-item--disabled:hover,
-  .#{$prefix}--menu-item--disabled.#{$prefix}--menu-item--danger:hover {
-    background-color: $layer;
-    color: $text-disabled;
+  @media (any-hover: hover) {
+    .#{$prefix}--menu-item--disabled:hover,
+    .#{$prefix}--menu-item--disabled.#{$prefix}--menu-item--danger:hover {
+      background-color: $layer;
+      color: $text-disabled;
+    }
+
+    .#{$prefix}--menu-item--danger:hover {
+      background-color: button-tokens.$button-danger-primary;
+      color: $text-on-color;
+    }
   }
 
-  .#{$prefix}--menu-item--danger:focus,
-  .#{$prefix}--menu-item--danger:hover {
+  .#{$prefix}--menu-item--danger:focus {
     background-color: button-tokens.$button-danger-primary;
     color: $text-on-color;
   }
