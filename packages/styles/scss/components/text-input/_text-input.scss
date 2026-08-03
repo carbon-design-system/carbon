@@ -15,6 +15,7 @@
 @use '../../type' as *;
 @use '../../spacing' as *;
 @use '../../border-radius' as *;
+@use '../../feature-flags' as *;
 @use '../../motion' as *;
 @use '../../utilities/ai-gradient' as *;
 @use '../../utilities/component-reset';
@@ -40,7 +41,6 @@
 
     padding: 0 layout.density('padding-inline');
     border: none;
-    border-radius: $border-radius-04;
     background-color: $field;
     block-size: layout.size('height');
     border-block-end: 1px solid $border-strong;
@@ -51,6 +51,10 @@
     transition:
       background-color $duration-fast-01 motion(standard, productive),
       outline $duration-fast-01 motion(standard, productive);
+
+    @if enabled('enable-v12-release') {
+      border-radius: $border-radius-04;
+    }
 
     &:focus,
     &:active {
