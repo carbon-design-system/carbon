@@ -157,6 +157,12 @@ function generateDTCGColorAliases() {
       $type: 'color',
       $value: solidColorValue(value),
       $description: `${family} ${scale}`,
+      // Mark every palette entry as a reference token so Style Dictionary
+      // (and the carbon/scss-themes format) can filter them out of theme-map
+      // output — palette tokens are inputs to alias resolution, not outputs.
+      $extensions: {
+        'org.carbon': { role: 'reference' },
+      },
     };
   }
 
