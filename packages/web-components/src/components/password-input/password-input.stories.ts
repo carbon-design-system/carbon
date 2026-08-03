@@ -24,16 +24,17 @@ const sizes = {
 };
 
 const args = {
+  autocomplete: 'current-password',
   defaultWidth: 300,
   disabled: false,
-  helperText: 'Optional help text',
+  helperText: 'Use at least 8 characters',
   hideLabel: false,
   hidePasswordLabel: 'Hide password',
   inline: false,
   invalid: false,
-  invalidText: 'Error message goes here',
-  labelText: 'Text input label',
-  placeholder: 'Placeholder text',
+  invalidText: 'Password must be at least 8 characters',
+  labelText: 'Password',
+  placeholder: 'Enter your password',
   readonly: false,
   showPasswordLabel: 'Show password',
   size: INPUT_SIZE.MEDIUM,
@@ -42,11 +43,14 @@ const args = {
   type: 'password',
   value: '',
   warn: false,
-  warnText:
-    'Warning message that is really long can wrap to more lines but should not be excessively long.',
+  warnText: 'Password strength is low',
 };
 
 const argTypes = {
+  autocomplete: {
+    control: 'text',
+    description: 'May be any of the standard HTML autocomplete options',
+  },
   defaultWidth: {
     control: { type: 'range', min: 300, max: 800, step: 50 },
   },
@@ -88,6 +92,9 @@ const argTypes = {
     control: 'text',
     description:
       'Provide the text that will be read by a screen reader when visiting this control',
+  },
+  onInput: {
+    action: 'input',
   },
   placeholder: {
     control: 'text',
@@ -139,9 +146,8 @@ const argTypes = {
 };
 
 export const Default = {
-  args,
-  argTypes,
   render: ({
+    autocomplete,
     defaultWidth,
     disabled,
     helperText,
@@ -151,6 +157,7 @@ export const Default = {
     invalid,
     invalidText,
     labelText,
+    onInput,
     placeholder,
     readonly,
     showPasswordLabel,
@@ -164,6 +171,7 @@ export const Default = {
   }) => html`
     <div style="width: ${defaultWidth}px;">
       <cds-password-input
+        autocomplete="${ifDefined(autocomplete)}"
         ?disabled="${disabled}"
         helper-text="${ifDefined(helperText)}"
         ?hide-label="${hideLabel}"
@@ -173,15 +181,16 @@ export const Default = {
         invalid-text="${ifDefined(invalidText)}"
         label="${ifDefined(labelText)}"
         placeholder="${ifDefined(placeholder)}"
-        ?readonly="${ifDefined(readonly)}"
+        ?readonly="${readonly}"
         show-password-label="${ifDefined(showPasswordLabel)}"
         size="${ifDefined(size)}"
         tooltip-alignment="${ifDefined(tooltipAlignment)}"
         tooltip-position="${ifDefined(tooltipPosition)}"
         type="${ifDefined(type)}"
-        value="${ifDefined(value)}"
-        ?warn="${ifDefined(warn)}"
-        warn-text="${ifDefined(warnText)}">
+        .value="${value}"
+        ?warn="${warn}"
+        warn-text="${ifDefined(warnText)}"
+        @input="${onInput}">
       </cds-password-input>
     </div>
   `,
@@ -190,4 +199,6 @@ export const Default = {
 export default {
   title: 'Components/Password Input',
   actions: { argTypesRegex: '^on.*' },
+  args,
+  argTypes,
 };
