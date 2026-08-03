@@ -3,6 +3,10 @@
   "description": "Motion helpers for digital and software products using the Carbon Design System",
   "version": "11.49.0",
   "license": "Apache-2.0",
+  "sideEffects": [
+    "index.scss",
+    "scss/**/*.scss"
+  ],
   "main": "lib/index.js",
   "module": "es/index.js",
   "types": "lib/index.d.ts",
@@ -27,9 +31,10 @@
     "provenance": true
   },
   "scripts": {
+    "build:tokens": "node tasks/build.js",
     "build:types": "tsc -p tsconfig.types.json",
-    "build": "yarn clean && carbon-cli bundle src/index.ts --name CarbonMotion && node tasks/build.mjs && yarn build:types",
-    "clean": "rimraf es lib umd scss/generated",
+    "build": "yarn clean && yarn build:tokens && carbon-cli bundle src/index.ts --name CarbonMotion && yarn build:types",
+    "clean": "rimraf es lib umd js/generated scss/generated",
     "postinstall": "ibmtelemetry --config=telemetry.yml"
   },
   "devDependencies": {
