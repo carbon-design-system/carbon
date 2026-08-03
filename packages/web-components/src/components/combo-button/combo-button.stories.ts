@@ -190,6 +190,11 @@ export const withIcons = {
 
 const meta = {
   title: 'Components/Combo Button',
+  decorators: [
+    (story) => html`
+      <div style="display: flex; justify-content: center">${story()}</div>
+    `,
+  ],
   parameters: {
     layout: 'centered',
   },
