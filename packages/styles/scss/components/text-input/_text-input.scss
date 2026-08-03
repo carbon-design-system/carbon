@@ -5,7 +5,6 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-/* stylelint-disable */
 //-----------------------------
 // Text
 //-----------------------------
@@ -15,7 +14,7 @@
 @use '../../theme' as *;
 @use '../../type' as *;
 @use '../../spacing' as *;
-@use '../../border-radius' as *; // <-- import
+@use '../../border-radius' as *;
 @use '../../motion' as *;
 @use '../../utilities/ai-gradient' as *;
 @use '../../utilities/component-reset';
@@ -33,7 +32,6 @@
 /// @group text-input
 @mixin text-input {
   .#{$prefix}--text-input {
-    border-radius: $border-radius-04; // <-- usage example
     @include layout.use('size', $default: 'md', $min: 'xs', $max: 'lg');
     @include layout.use('density', $default: 'normal');
     @include component-reset.reset;
@@ -42,6 +40,7 @@
 
     padding: 0 layout.density('padding-inline');
     border: none;
+    border-radius: $border-radius-04;
     background-color: $field;
     block-size: layout.size('height');
     border-block-end: 1px solid $border-strong;
