@@ -864,5 +864,22 @@ describe('Pagination', () => {
         screen.queryByLabelText('Items per page:')
       ).not.toBeInTheDocument();
     });
+
+    it('should reset pageSize to DEFAULT_PAGE_SIZE when pageSizes is removed', () => {
+      const { rerender } = render(
+        <Pagination
+          totalItems={350}
+          pageSizes={[20, 50]}
+          pageSize={20}
+          page={1}
+        />
+      );
+
+      expect(screen.getByText('1–20 of 350 items')).toBeInTheDocument();
+
+      rerender(<Pagination totalItems={350} page={1} />);
+
+      expect(screen.getByText('1–10 of 350 items')).toBeInTheDocument();
+    });
   });
 });
