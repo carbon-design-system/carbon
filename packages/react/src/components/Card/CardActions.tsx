@@ -114,7 +114,7 @@ export const CardActions = ({
     });
 
     return () => handler.disconnect();
-  }, [children]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [actionItems]);
 
   return (
     <div ref={containerRef} className={classes} {...rest}>
