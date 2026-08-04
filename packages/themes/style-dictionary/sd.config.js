@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2025
+ * Copyright IBM Corp. 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -10,33 +10,8 @@
 /**
  * Style Dictionary configuration for @carbon/themes.
  *
- * ─────────────────────────────────────────────────────────────────────────────
- * WHAT THIS FILE DOES
- * ─────────────────────────────────────────────────────────────────────────────
- * Wires together the custom plugins in this directory to replace stages 2–4
- * of the original build pipeline (dtcg-converter.js, dtcg-themes.js, …,
- * build.js / generate-js-tokens.js).
+ * Wires together the custom plugins in this directory
  *
- * Stage 1 (generate-dtcg-color-aliases.js → color-palette.json) is unchanged —
- * run it first, then call SD.
- *
- * ─────────────────────────────────────────────────────────────────────────────
- * STATUS (be honest about what is tested vs. stubbed)
- * ─────────────────────────────────────────────────────────────────────────────
- * TESTED    Theme tokens (234/234 exact match) — carbon/alpha-modifier +
- *           carbon/color-flatten replace dtcg-converter's resolution logic.
- * UNTESTED  Component-token preprocessor expansion and the JS/SCSS formats —
- *           run `node style-dictionary/sd.config.js` and diff against the
- *           existing generated files to verify before removing the old builders.
- *
- * ─────────────────────────────────────────────────────────────────────────────
- * RUNNING
- * ─────────────────────────────────────────────────────────────────────────────
- *   # From packages/themes/
- *   node -e "require('./style-dictionary/sd.config.js').run()"
- *
- * Or add to package.json scripts:
- *   "build:sd": "node -e \"require('./style-dictionary/sd.config.js').run()\""
  */
 
 const path = require('path');
@@ -94,15 +69,10 @@ const carbonNameKebab = {
   name: 'carbon/name-kebab',
   type: 'name',
   transform(token) {
-    return (
-      token.path
-        .filter((p) => p !== '_self')
-        // Strip leading underscore from path segments (e.g. `_by_theme` → `by_theme`)
-        // then replace remaining underscores with hyphens, to match what the SD
-        // built-in `name/kebab` produces.
-        .map((p) => p.replace(/^_/, '').replace(/_/g, '-'))
-        .join('-')
-    );
+    return token.path
+      .filter((p) => p !== '_self')
+      .map((p) => p.replace(/^_/, '').replace(/_/g, '-'))
+      .join('-');
   },
 };
 
@@ -293,9 +263,6 @@ function createBase() {
 //   scss/generated/_button-tokens.scss   (and tag, notification, status, content-switcher)
 async function runScss() {
   const base = createBase();
-
-  // _tokens.scss — calls the format function directly; no SD tokens needed.
-  // SD v5 won't write a file with no tokens, so we bypass SD here entirely.
   const scssTokensContent = await carbonScssTokens.format({
     dictionary: { allTokens: [] },
     options: {},

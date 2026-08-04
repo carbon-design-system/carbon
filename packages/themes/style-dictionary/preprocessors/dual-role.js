@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2025
+ * Copyright IBM Corp. 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -8,7 +8,6 @@
 'use strict';
 
 /**
- * Preprocessor: carbon/dual-role
  *
  * DTCG source files (g10.json, g90.json, g100.json) contain nodes that are
  * simultaneously token leaves (they have a `$value`) AND token groups (they
