@@ -177,6 +177,9 @@ class CDSSlider extends HostListenerMixin(FormMixin(FocusMixin(LitElement))) {
   @query('#track')
   private _trackNode!: HTMLDivElement;
 
+  @query(`.${prefix}--slider__filled-track`)
+  private _sliderFilledTrack!: HTMLDivElement | null;
+
   /**
    * Handles `click` event on the `<label>` to focus on the thumb.
    */
@@ -578,8 +581,8 @@ class CDSSlider extends HostListenerMixin(FormMixin(FocusMixin(LitElement))) {
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20452
   // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
   private _handleChangeInput = (event: CustomEvent) => {
-    const input = event.target as HTMLElement;
-    const inputElement = input.shadowRoot?.querySelector('input');
+    const input = event.target as CDSSliderInput;
+    const inputElement = input._inputNode;
     this.isValid =
       input.tagName === 'CDS-SLIDER-INPUT'
         ? this._getInputValidity(input)
@@ -785,7 +788,7 @@ class CDSSlider extends HostListenerMixin(FormMixin(FocusMixin(LitElement))) {
   @property({ type: Boolean })
   isValid;
   _getInputValidity(input) {
-    const inputElement = input?.shadowRoot?.querySelector('input');
+    const inputElement = input?._inputNode;
     if (this.invalid) {
       return false;
     }
@@ -830,22 +833,21 @@ class CDSSlider extends HostListenerMixin(FormMixin(FocusMixin(LitElement))) {
     super.disconnectedCallback();
   }
   updated() {
-    const sliderfilledTrack = this?.shadowRoot?.querySelector(
-      `.${prefix}--slider__filled-track`
-    ) as HTMLElement;
-    if (sliderfilledTrack) {
+    if (this._sliderFilledTrack) {
       if (this.unstable_valueUpper || this.unstable_valueUpper === '') {
-        sliderfilledTrack.style.transform = this.unstable_valueUpper
+        this._sliderFilledTrack.style.transform = this.unstable_valueUpper
           ? `translate(${this._rate * 100}%, -50%) scaleX(${this._rateUpper - this._rate})`
           : `translate(0%, -50%) scaleX(${this._rate})`;
       } else {
-        sliderfilledTrack.style.transform = this.unstable_valueUpper
+        this._sliderFilledTrack.style.transform = this.unstable_valueUpper
           ? `translate(${this._rate * 100}%, -50%) scaleX(${this._rateUpper - this._rate})`
           : `translate(0%, -50%) scaleX(${this._rate})`;
       }
     }
   }
   shouldUpdate(changedProperties) {
+    // Slider inputs are light-DOM children and must be synchronized before the
+    // initial render, when queries based on rendered slots are not available.
     const inputs = this.querySelectorAll(
       (this.constructor as typeof CDSSlider).selectorInput
     ) as NodeListOf<CDSSliderInput>;

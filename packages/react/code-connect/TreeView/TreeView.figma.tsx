@@ -25,8 +25,8 @@ figma.connect(
     },
     example: ({ children, treeNode }) => (
       <TreeView size={treeNode.size}>
-        {/* Figma component doesn't currently nest TreeNodes accurately
-      code sample below is incomplete */}
+        {/* TODO: Figma component doesn't currently nest TreeNodes accurately
+      code sample below is incomplete (Issue #17607). */}
         {children}
       </TreeView>
     ),

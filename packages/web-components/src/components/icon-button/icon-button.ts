@@ -70,7 +70,7 @@ class CDSIconButton extends CDSButton {
    * Specify the size of the Button. Defaults to `md`.
    */
   @property({ reflect: true })
-  size = 'md';
+  size?: ICON_BUTTON_SIZE | string = 'md';
 
   connectedCallback() {
     super.connectedCallback();

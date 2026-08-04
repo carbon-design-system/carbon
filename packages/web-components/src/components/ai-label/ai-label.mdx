@@ -1,4 +1,10 @@
-import { ArgTypes, Canvas, Markdown, Meta } from '@storybook/addon-docs/blocks';
+import {
+  ArgTypes,
+  Canvas,
+  Markdown,
+  Meta,
+  Unstyled,
+} from '@storybook/addon-docs/blocks';
 import { cdnJs } from '../../globals/internal/storybook-cdn';
 import * as AILabelStories from './ai-label.stories';
 
@@ -81,11 +87,17 @@ callout. To achieve this, you can add a set of actions as children of
 If needed, you can change the text inside the `AI Label` when translating to
 different languages.
 
-<div style={{ display: 'flex', alignItems: 'left' }}>
+<Unstyled
+  style={{
+    padding: '1rem',
+    background: 'var(--cds-background)',
+    display: 'flex',
+    alignItems: 'start',
+  }}>
   <cds-ai-label ai-text="IA">
     <div slot="body-text">Explanation of AI-generated content</div>
   </cds-ai-label>
-</div>
+</Unstyled>
 
 ```html
 <cds-ai-label ai-text="IA">
@@ -98,17 +110,23 @@ different languages.
 When using the `inline` variant, you can add text adjacent to the `AI Label`
 with the `ai-text-label` attribute.
 
-<div style={{ display: 'flex', alignItems: 'left' }}>
+<Unstyled
+  style={{
+    padding: '1rem',
+    background: 'var(--cds-background)',
+    display: 'flex',
+    alignItems: 'start',
+    flexDirection: 'column',
+    gap: '1rem',
+  }}>
   <cds-ai-label kind="inline" ai-text-label="Text goes here">
     <div slot="body-text">Explanation of AI-generated content</div>
   </cds-ai-label>
-</div>
-<br />
-<div style={{ display: 'flex', alignItems: 'left' }}>
+
   <cds-ai-label kind="inline">
     <div slot="body-text">Explanation of AI-generated content</div>
   </cds-ai-label>
-</div>
+</Unstyled>
 
 ```html
 <cds-ai-label kind="inline" ai-text-label="Text goes here">
@@ -124,11 +142,17 @@ with the `ai-text-label` attribute.
 
 The `AI Label` component has two variants, `default` and `inline`.
 
-<div style={{ display: 'flex', alignItems: 'left' }}>
+<Unstyled
+  style={{
+    padding: '1rem',
+    background: 'var(--cds-background)',
+    display: 'flex',
+    alignItems: 'start',
+  }}>
   <cds-ai-label size="xs">
     <div slot="body-text">AI was used to generate this content</div>
   </cds-ai-label>
-</div>
+</Unstyled>
 
 ```html
 <cds-ai-label size="xs">
@@ -139,11 +163,17 @@ The `AI Label` component has two variants, `default` and `inline`.
 The `inline` `AI Label` with the standard icon can also trigger the AI
 explainability callout.
 
-<div style={{ display: 'flex', alignItems: 'left' }}>
+<Unstyled
+  style={{
+    padding: '1rem',
+    background: 'var(--cds-background)',
+    display: 'flex',
+    alignItems: 'start',
+  }}>
   <cds-ai-label kind="inline" ai-text-label="Text goes here" size="xs">
     <div slot="body-text">Explanation of AI-generated content</div>
   </cds-ai-label>
-</div>
+</Unstyled>
 
 ```html
 <cds-ai-label kind="inline" ai-text-label="Text goes here" size="xs">

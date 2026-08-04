@@ -53,7 +53,11 @@ import { autoUpdate, flip, hide, useFloating } from '@floating-ui/react';
 import type { TranslateWithId } from '../../types/common';
 import { useFeatureFlag } from '../FeatureFlags';
 import { AILabel } from '../AILabel';
-import { defaultItemToString, isComponentElement } from '../../internal';
+import {
+  defaultItemToString,
+  isComponentElement,
+  isItemDisabled,
+} from '../../internal';
 
 const {
   InputBlur,
@@ -69,12 +73,6 @@ const {
 } = useCombobox.stateChangeTypes;
 
 const defaultShouldFilterItem = () => true;
-
-const isDisabledItem = (item: unknown) =>
-  item !== null &&
-  typeof item === 'object' &&
-  'disabled' in item &&
-  Boolean(item.disabled);
 
 const autocompleteCustomFilter = ({
   item,
@@ -139,7 +137,7 @@ const findHighlightedIndex = <ItemType,>(
 
   for (let i = 0; i < items.length; i++) {
     const item = itemToString(items[i]).toLowerCase();
-    if (!isDisabledItem(items[i]) && item.indexOf(searchValue) !== -1) {
+    if (!isItemDisabled(items[i]) && item.indexOf(searchValue) !== -1) {
       return i;
     }
   }
@@ -334,7 +332,7 @@ export interface ComboBoxProps<ItemType>
   }) => boolean;
 
   /**
-   * Specify the size of the ListBox. Currently supports either `sm`, `md` or `lg` as an option.
+   * Specify the size of the ListBox. Currently supports either `xs`, `sm`, `md` or `lg` as an option.
    */
   size?: ListBoxSize;
 
@@ -476,7 +474,7 @@ const ComboBox = forwardRef(
           if (inputValue) {
             const filteredItems = items.filter(
               (item) =>
-                !isDisabledItem(item) &&
+                !isItemDisabled(item) &&
                 autocompleteCustomFilter({
                   item: itemToString(item),
                   inputValue: inputValue,
@@ -510,6 +508,14 @@ const ComboBox = forwardRef(
     const prevSelectedItemProp = useRef<ItemType | null | undefined>(
       selectedItemProp
     );
+    const isSyncingControlledSelectionRef = useRef(false);
+    const pendingControlledSelectionRef = useRef<{
+      pending: boolean;
+      value: ItemType | null | undefined;
+    }>({
+      pending: false,
+      value: undefined,
+    });
 
     useEffect(() => {
       isManualClearingRef.current = isClearing;
@@ -523,6 +529,10 @@ const ComboBox = forwardRef(
     // fully controlled combobox: handle changes to selectedItemProp
     useEffect(() => {
       if (prevSelectedItemProp.current !== selectedItemProp) {
+        pendingControlledSelectionRef.current = {
+          pending: true,
+          value: selectedItemProp,
+        };
         const currentInputValue = getInputValue({
           initialSelectedItem,
           itemToString,
@@ -680,7 +690,7 @@ const ComboBox = forwardRef(
                 );
                 const highlightedItem = filteredList[state.highlightedIndex];
 
-                if (highlightedItem && !isDisabledItem(highlightedItem)) {
+                if (highlightedItem && !isItemDisabled(highlightedItem)) {
                   return {
                     ...changes,
                     selectedItem: highlightedItem,
@@ -692,7 +702,7 @@ const ComboBox = forwardRef(
                 if (autoIndex !== -1) {
                   const matchingItem = items[autoIndex];
 
-                  if (matchingItem && !isDisabledItem(matchingItem)) {
+                  if (matchingItem && !isItemDisabled(matchingItem)) {
                     return {
                       ...changes,
                       selectedItem: matchingItem,
@@ -882,16 +892,20 @@ const ComboBox = forwardRef(
       initialSelectedItem: initialSelectedItem,
       inputId: id,
       stateReducer,
-      isItemDisabled: isDisabledItem,
+      isItemDisabled,
       ...downshiftProps,
       onStateChange: ({ type, selectedItem: newSelectedItem }) => {
+        if (
+          isManualClearingRef.current ||
+          isSyncingControlledSelectionRef.current
+        ) {
+          isSyncingControlledSelectionRef.current = false;
+          return;
+        }
         downshiftProps?.onStateChange?.({
           type,
           selectedItem: newSelectedItem,
         });
-        if (isManualClearingRef.current) {
-          return;
-        }
         if (
           (type === ItemClick ||
             type === FunctionSelectItem ||
@@ -913,6 +927,19 @@ const ComboBox = forwardRef(
     // Downshift's own selection when uncontrolled.
     const currentSelectedItem =
       typeof selectedItemProp !== 'undefined' ? selectedItemProp : selectedItem;
+
+    useEffect(() => {
+      if (pendingControlledSelectionRef.current.pending) {
+        const { value } = pendingControlledSelectionRef.current;
+        const nextSelectedItem = typeof value === 'undefined' ? null : value;
+        pendingControlledSelectionRef.current.pending = false;
+
+        if (!isEqual(selectedItem, nextSelectedItem)) {
+          isSyncingControlledSelectionRef.current = true;
+          selectItem(nextSelectedItem);
+        }
+      }
+    }, [selectedItem, selectedItemProp, selectItem]);
 
     useEffect(() => {
       // Used to expose the downshift actions to consumers for use with downshiftProps
@@ -1166,7 +1193,7 @@ const ComboBox = forwardRef(
                     //  event.preventDefault();
                     const matchingItem = items.find(
                       (item) =>
-                        !isDisabledItem(item) &&
+                        !isItemDisabled(item) &&
                         itemToString(item)
                           .toLowerCase()
                           .startsWith(inputValue.toLowerCase())
@@ -1479,7 +1506,7 @@ ComboBox.propTypes = {
   shouldFilterItem: PropTypes.func,
 
   /**
-   * Specify the size of the ListBox. Currently supports either `sm`, `md` or `lg` as an option.
+   * Specify the size of the ListBox. Currently supports either `xs`, `sm`, `md` or `lg` as an option.
    */
   size: ListBoxSizePropType,
 

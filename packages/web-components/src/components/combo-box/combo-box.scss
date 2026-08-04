@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2019, 2025
+// Copyright IBM Corp. 2019, 2026
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -13,7 +13,7 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/utilities' as *;
 @use '@carbon/styles/scss/utilities/focus-outline' as *;
 @use '@carbon/styles/scss/utilities/convert' as *;
-@use '@carbon/styles/scss/layout' as *;
+@use '@carbon/styles/scss/utilities/layout' as *;
 @use '@carbon/styles/scss/components/combo-box' as *;
 @use '@carbon/styles/scss/components/form';
 @use '@carbon/styles/scss/components/text-input/text-input';
@@ -319,3 +319,5 @@ $css--plex: true !default;
     inset-inline-end: to-rem(116px) !important;
   }
 }
+
+@include emit-layout-tokens-to-shadow-host('#{$prefix}-combo-box');

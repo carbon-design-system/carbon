@@ -51,6 +51,8 @@ const directionOptions = {
 };
 
 const sizes = {
+  [`Extra small size (${DROPDOWN_SIZE.EXTRA_SMALL})`]:
+    DROPDOWN_SIZE.EXTRA_SMALL,
   [`Small size (${DROPDOWN_SIZE.SMALL})`]: DROPDOWN_SIZE.SMALL,
   'Regular size': null,
   [`Large size (${DROPDOWN_SIZE.LARGE})`]: DROPDOWN_SIZE.LARGE,

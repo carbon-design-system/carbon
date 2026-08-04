@@ -1,12 +1,14 @@
+import { g10, g90, g100 } from '@carbon/themes';
+
 export const allModes = {
   g10: {
-    theme: 'g10',
+    backgrounds: { value: g10.background },
   },
   g90: {
-    theme: 'g90',
+    backgrounds: { value: g90.background },
   },
   g100: {
-    theme: 'g100',
+    backgrounds: { value: g100.background },
   },
   'breakpoint-sm': {
     viewport: 'Small',

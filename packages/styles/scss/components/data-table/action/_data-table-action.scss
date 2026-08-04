@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2016, 2023
+// Copyright IBM Corp. 2016, 2026
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -16,6 +16,7 @@
 @use '../../../utilities/button-reset';
 @use '../../../utilities/convert';
 @use '../../../utilities/focus-outline' as *;
+@use '../../../utilities/layout';
 
 /// Data table action styles
 /// @access public
@@ -25,36 +26,36 @@
   //TOOLBAR
   //-------------------------------------------------
   .#{$prefix}--table-toolbar {
+    @include layout.use('size', $default: 'lg', $min: 'xs', $max: 'lg');
+    @include layout.redefine-tokens(
+      (
+        size: (
+          height: (
+            md: convert.to-rem(48px),
+            xl: convert.to-rem(48px),
+          ),
+        ),
+      )
+    );
     // Need for batch actions
     position: relative;
     z-index: 1;
     display: flex;
     background-color: $layer;
+    block-size: layout.size('height');
     inline-size: 100%;
-    min-block-size: $spacing-09;
+    min-block-size: layout.size('height');
   }
 
   .#{$prefix}--toolbar-content {
     display: flex;
     justify-content: flex-end;
-    block-size: $spacing-09;
+    block-size: layout.size('height');
     inline-size: 100%;
     transform: translate3d(0, 0, 0);
     transition:
       transform $duration-fast-02 motion(standard, productive),
       clip-path $duration-fast-02 motion(standard, productive);
-  }
-
-  .#{$prefix}--toolbar-content .#{$prefix}--search .#{$prefix}--search-input {
-    padding: 0 3rem;
-    // For toolbar animation with (esp.) persistent search box
-    background-color: transparent;
-    block-size: 3rem;
-  }
-
-  .#{$prefix}--toolbar-content .#{$prefix}--overflow-menu {
-    block-size: 3rem;
-    inline-size: 3rem;
   }
 
   //-------------------------------------------------
@@ -71,11 +72,6 @@
   //HIDDEN SEARCH - DEFAULT TOOLBAR
   //-------------------------------------------------
   .#{$prefix}--toolbar-search-container-expandable {
-    position: relative;
-    block-size: $spacing-09;
-    box-shadow: none;
-    cursor: pointer;
-    inline-size: $spacing-09;
     transition:
       width $transition-expansion $standard-easing,
       background-color $duration-fast-02 motion(entrance, productive);
@@ -86,7 +82,7 @@
   }
 
   .#{$prefix}--search.#{$prefix}--toolbar-search-container-expandable {
-    inline-size: 3rem;
+    inline-size: layout.size('height');
   }
 
   .#{$prefix}--toolbar-search-container-expandable .#{$prefix}--search-input {
@@ -109,69 +105,6 @@
   .#{$prefix}--toolbar-search-container-expandable.#{$prefix}--search
     .#{$prefix}--label {
     visibility: hidden;
-  }
-
-  .#{$prefix}--toolbar-search-container-expandable.#{$prefix}--search
-    .#{$prefix}--search-close {
-    block-size: $spacing-09;
-    inline-size: $spacing-09;
-
-    &::before {
-      background-color: $field-hover;
-      block-size: calc(100% - #{convert.to-rem(4px)});
-      inset-block-start: convert.to-rem(2px);
-    }
-  }
-
-  .#{$prefix}--toolbar-search-container-expandable.#{$prefix}--search
-    .#{$prefix}--search-close:focus::before {
-    background-color: $focus;
-  }
-
-  //-------------------------------------------------
-  // Seach icon
-  //-------------------------------------------------v
-  // lg expandable icon spacing
-  .#{$prefix}--table-toolbar
-    .#{$prefix}--search--lg
-    .#{$prefix}--search-magnifier-icon {
-    inset-inline-start: 0;
-  }
-
-  // lg persistent icon spacing
-  .#{$prefix}--table-toolbar:not(.#{$prefix}--table-toolbar--sm)
-    .#{$prefix}--toolbar-search-container-persistent.#{$prefix}--search--lg
-    .#{$prefix}--search-magnifier-icon {
-    inset-inline-start: 1rem;
-  }
-
-  // sm expandable icon spacing
-  .#{$prefix}--table-toolbar.#{$prefix}--table-toolbar--sm
-    .#{$prefix}--search--sm:not(
-      .#{$prefix}--toolbar-search-container-active
-    ):not(.#{$prefix}--toolbar-search-container-persistent)
-    .#{$prefix}--search-magnifier-icon {
-    inset-inline-start: 0;
-  }
-
-  .#{$prefix}--table-toolbar.#{$prefix}--table-toolbar--sm
-    .#{$prefix}--search--sm.#{$prefix}--toolbar-search-container-active
-    .#{$prefix}--search-magnifier-icon {
-    inset-inline-start: 0.5rem;
-  }
-
-  // sm persistent icon spacing
-  .#{$prefix}--table-toolbar
-    .#{$prefix}--toolbar-search-container-persistent.#{$prefix}--search--sm
-    .#{$prefix}--search-magnifier-icon {
-    inset-inline-start: 0.5rem;
-  }
-
-  .#{$prefix}--toolbar-search-container-expandable
-    .#{$prefix}--search-magnifier-icon {
-    padding: $spacing-05;
-    block-size: $spacing-09;
-    inline-size: $spacing-09;
   }
 
   .#{$prefix}--toolbar-search-container-expandable.#{$prefix}--search--disabled
@@ -206,7 +139,7 @@
 
   .#{$prefix}--toolbar-search-container-active .#{$prefix}--label,
   .#{$prefix}--toolbar-search-container-active .#{$prefix}--search-input {
-    padding: 0 $spacing-09;
+    padding: 0 layout.size('height');
     cursor: text;
   }
 
@@ -248,10 +181,10 @@
     @include button-reset.reset;
 
     display: flex;
-    padding: $spacing-05;
-    block-size: $spacing-09;
+    padding: calc(layout.size('height') / 2);
+    block-size: layout.size('height');
     cursor: pointer;
-    inline-size: $spacing-09;
+    inline-size: layout.size('height');
     transition: background $duration-fast-02 motion(entrance, productive);
   }
 
@@ -260,9 +193,9 @@
     @include button-reset.reset;
 
     display: flex;
-    block-size: $spacing-09;
+    block-size: layout.size('height');
     cursor: pointer;
-    inline-size: $spacing-09;
+    inline-size: layout.size('height');
     transition: background $duration-fast-02 motion(entrance, productive);
   }
 
@@ -327,7 +260,6 @@
   //-------------------------------------------------
   .#{$prefix}--toolbar-search-container-persistent {
     position: relative;
-    block-size: $spacing-09;
     inline-size: 100%;
     opacity: 1;
   }
@@ -342,15 +274,8 @@
     position: initial;
   }
 
-  .#{$prefix}--toolbar-search-container-persistent
-    .#{$prefix}--search-magnifier-icon {
-    inset-inline-start: $spacing-05;
-  }
-
   .#{$prefix}--toolbar-search-container-persistent .#{$prefix}--search-input {
-    padding: 0 $spacing-09;
     border: none;
-    block-size: $spacing-09;
   }
 
   .#{$prefix}--toolbar-search-container-persistent
@@ -370,15 +295,10 @@
     background-color: $field-hover;
   }
 
-  .#{$prefix}--toolbar-search-container-persistent .#{$prefix}--search-close {
-    block-size: $spacing-09;
-    inline-size: $spacing-09;
-  }
-
   .#{$prefix}--batch-actions--active ~ .#{$prefix}--toolbar-search-container,
   .#{$prefix}--batch-actions--active ~ .#{$prefix}--toolbar-content {
     clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
-    transform: translate3d(0, 48px, 0);
+    transform: translate3d(0, layout.size('height'), 0);
     transition:
       transform $duration-fast-02 motion(standard, productive),
       clip-path $duration-fast-02 motion(standard, productive);
@@ -398,7 +318,7 @@
     inset-inline: 0;
     opacity: 0;
     pointer-events: none;
-    transform: translate3d(0, 48px, 0);
+    transform: translate3d(0, layout.size('height'), 0);
     transition:
       transform $duration-fast-02 motion(standard, productive),
       clip-path $duration-fast-02 motion(standard, productive),
@@ -523,145 +443,40 @@
     padding-inline-start: $spacing-03;
   }
 
-  //-------------------------------------------------
-  //SMALL TOOLBAR
-  //-------------------------------------------------
-
-  .#{$prefix}--table-toolbar--sm {
-    block-size: convert.to-rem(32px);
-    min-block-size: convert.to-rem(32px);
-
-    .#{$prefix}--toolbar-search-container-expandable,
-    .#{$prefix}--toolbar-search-container-persistent {
-      block-size: convert.to-rem(32px);
-    }
-
-    .#{$prefix}--toolbar-search-container-expandable .#{$prefix}--search-input,
-    .#{$prefix}--toolbar-search-container-persistent .#{$prefix}--search-input {
-      block-size: convert.to-rem(32px);
-    }
-
-    .#{$prefix}--toolbar-search-container-expandable .#{$prefix}--search-close,
-    .#{$prefix}--toolbar-search-container-persistent .#{$prefix}--search-close {
-      block-size: convert.to-rem(32px);
-      inline-size: convert.to-rem(32px);
-    }
-
-    .#{$prefix}--toolbar-search-container-expandable
-      .#{$prefix}--search-magnifier-icon,
-    .#{$prefix}--toolbar-search-container-persistent
-      .#{$prefix}--search-magnifier-icon {
-      padding: $spacing-03;
-      block-size: convert.to-rem(32px);
-      inline-size: convert.to-rem(32px);
-    }
-
-    .#{$prefix}--toolbar-action.#{$prefix}--toolbar-search-container-persistent {
-      inline-size: 100%;
-    }
-
-    //hidden
-    .#{$prefix}--toolbar-search-container-expandable {
-      inline-size: convert.to-rem(32px);
-    }
-
-    .#{$prefix}--toolbar-search-container-expandable
-      .#{$prefix}--search
-      .#{$prefix}--search-input {
-      padding: 0 $spacing-09;
-    }
-
-    //active
-    .#{$prefix}--toolbar-search-container-active {
-      flex: auto;
-      transition: flex 175ms $standard-easing;
-    }
-
-    .#{$prefix}--toolbar-search-container-active .#{$prefix}--search-input {
-      visibility: inherit;
-    }
-
-    .#{$prefix}--toolbar-search-container-active
-      .#{$prefix}--search-input:focus {
-      @include focus-outline('outline');
-
-      background-color: $field-hover;
-    }
-
-    .#{$prefix}--toolbar-search-container-active
-      .#{$prefix}--search-input:active,
-    .#{$prefix}--toolbar-search-container-active
-      .#{$prefix}--search-input:not(:placeholder-shown) {
-      background-color: $field-hover;
-    }
-
-    .#{$prefix}--toolbar-search-container-active
-      .#{$prefix}--search-magnifier-icon:focus,
-    .#{$prefix}--toolbar-search-container-active
-      .#{$prefix}--search-magnifier-icon:active,
-    .#{$prefix}--toolbar-search-container-active
-      .#{$prefix}--search-magnifier-icon:hover {
-      @include focus-outline('reset');
-
-      background-color: transparent;
-    }
-
-    .#{$prefix}--overflow-menu.#{$prefix}--toolbar-action {
-      block-size: convert.to-rem(32px);
-      inline-size: convert.to-rem(32px);
-      //:after element is 2rem but w/o this trigger button is for some reason 28px
-      min-inline-size: convert.to-rem(32px);
-    }
-
-    .#{$prefix}--toolbar-content {
-      block-size: convert.to-rem(32px);
-    }
-
-    .#{$prefix}--toolbar-content .#{$prefix}--overflow-menu {
-      block-size: 2rem;
-      inline-size: 2rem;
-    }
+  .#{$prefix}--table-toolbar .#{$prefix}--batch-actions {
+    block-size: layout.size('height');
   }
 
-  .#{$prefix}--search--disabled .#{$prefix}--search-magnifier-icon:hover {
-    background-color: transparent;
-  }
-
-  //-------------------------------------------------
-  // SMALL BATCH ACTIONS
-  //-------------------------------------------------
-
-  .#{$prefix}--table-toolbar--sm
+  .#{$prefix}--table-toolbar
     .#{$prefix}--batch-actions
     .#{$prefix}--action-list {
-    block-size: convert.to-rem(32px);
+    block-size: layout.size('height');
   }
 
-  .#{$prefix}--table-toolbar--sm .#{$prefix}--toolbar-action {
+  .#{$prefix}--table-toolbar .#{$prefix}--toolbar-action {
     padding: $spacing-03 0;
-    block-size: convert.to-rem(32px);
-    inline-size: convert.to-rem(32px);
+    block-size: layout.size('height');
+    inline-size: layout.size('height');
   }
 
-  .#{$prefix}--table-toolbar--sm .#{$prefix}--btn--primary {
-    block-size: convert.to-rem(32px);
+  .#{$prefix}--table-toolbar .#{$prefix}--btn--primary {
+    block-size: layout.size('height');
     min-block-size: auto;
-    padding-block: 0.375rem;
   }
 
-  .#{$prefix}--table-toolbar--sm
+  .#{$prefix}--table-toolbar
     .#{$prefix}--btn--primary.#{$prefix}--batch-summary__cancel::before {
-    inset-block-start: convert.to-rem(8px);
+    // Vertically center the 1rem divider: row_height - divider_height gives
+    // the leftover space, and dividing by 2 puts half the space above and half below.
+    inset-block-start: calc((layout.size('height') - 1rem) / 2);
   }
 
-  .#{$prefix}--table-toolbar--sm
-    .#{$prefix}--toolbar-action
-    ~ .#{$prefix}--btn {
+  .#{$prefix}--table-toolbar .#{$prefix}--toolbar-action ~ .#{$prefix}--btn {
     overflow: hidden;
-    block-size: convert.to-rem(32px);
+    block-size: layout.size('height');
   }
 
-  .#{$prefix}--table-toolbar--sm .#{$prefix}--batch-summary {
-    min-block-size: 2rem;
+  .#{$prefix}--table-toolbar .#{$prefix}--batch-summary {
+    min-block-size: layout.size('height');
   }
 }

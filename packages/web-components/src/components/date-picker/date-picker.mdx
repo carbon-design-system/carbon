@@ -1,4 +1,10 @@
-import { ArgTypes, Canvas, Markdown, Meta } from '@storybook/addon-docs/blocks';
+import {
+  ArgTypes,
+  Canvas,
+  Markdown,
+  Meta,
+  Unstyled,
+} from '@storybook/addon-docs/blocks';
 import { cdnJs } from '../../globals/internal/storybook-cdn';
 import * as DatePickerStories from './date-picker.stories';
 
@@ -86,12 +92,18 @@ displayed in the input. For a complete list of supported date formatting tokens,
 please see the Flatpickr
 [documentation](https://flatpickr.js.org/formatting/#date-formatting-tokens).
 
-<cds-date-picker date-format="Y-m-d">
-  <cds-date-picker-input
-    kind="single"
-    label-text="Date format example"
-    placeholder="yyyy/mm/dd"></cds-date-picker-input>
-</cds-date-picker>
+<Unstyled
+  style={{
+    padding: '1rem',
+    background: 'var(--cds-background)',
+  }}>
+  <cds-date-picker date-format="Y-m-d">
+    <cds-date-picker-input
+      kind="single"
+      label-text="Date format example"
+      placeholder="yyyy/mm/dd"></cds-date-picker-input>
+  </cds-date-picker>
+</Unstyled>
 
 ```html
 <cds-date-picker date-format="Y-m-d">
@@ -143,12 +155,18 @@ corresponding to the start and end dates of the range.
 
 Limits the date selection to any date before the date specified.
 
-<cds-date-picker max-date="09/15/2020">
-  <cds-date-picker-input
-    kind="single"
-    label-text="max-date example"
-    placeholder="mm/dd/yyyy"></cds-date-picker-input>
-</cds-date-picker>
+<Unstyled
+  style={{
+    padding: '1rem',
+    background: 'var(--cds-background)',
+  }}>
+  <cds-date-picker max-date="09/15/2020">
+    <cds-date-picker-input
+      kind="single"
+      label-text="max-date example"
+      placeholder="mm/dd/yyyy"></cds-date-picker-input>
+  </cds-date-picker>
+</Unstyled>
 
 ```html
 <cds-date-picker max-date="09/15/2020">
@@ -162,12 +180,18 @@ Limits the date selection to any date before the date specified.
 
 Works similarly to the `min-date` attribute. [See above](#date-picker-max-date).
 
-<cds-date-picker min-date="09/15/2025">
-  <cds-date-picker-input
-    kind="single"
-    label-text="min-date example"
-    placeholder="mm/dd/yyyy"></cds-date-picker-input>
-</cds-date-picker>
+<Unstyled
+  style={{
+    padding: '1rem',
+    background: 'var(--cds-background)',
+  }}>
+  <cds-date-picker min-date="09/15/2025">
+    <cds-date-picker-input
+      kind="single"
+      label-text="min-date example"
+      placeholder="mm/dd/yyyy"></cds-date-picker-input>
+  </cds-date-picker>
+</Unstyled>
 
 ```html
 <cds-date-picker min-date="09/15/2025">
@@ -182,13 +206,19 @@ Works similarly to the `min-date` attribute. [See above](#date-picker-max-date).
 By default the date picker will set the current date as its value. If you'd like
 to start this at a different date, you can pass in a date string or date object.
 
-<cds-date-picker>
-  <cds-date-picker-input
-    kind="single"
-    label-text="Value as a date example"
-    placeholder="mm/dd/yyyy"
-    value="04/17/2025"></cds-date-picker-input>
-</cds-date-picker>
+<Unstyled
+  style={{
+    padding: '1rem',
+    background: 'var(--cds-background)',
+  }}>
+  <cds-date-picker>
+    <cds-date-picker-input
+      kind="single"
+      label-text="Value as a date example"
+      placeholder="mm/dd/yyyy"
+      value="04/17/2025"></cds-date-picker-input>
+  </cds-date-picker>
+</Unstyled>
 
 ```html
 <cds-date-picker>

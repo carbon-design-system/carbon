@@ -17,6 +17,8 @@ categories:
           - continue--filled
           - dashboard
           - dashboard--reference
+          - double-chevron--left
+          - double-chevron--right
           - fit-to-height
           - fit-to-width
           - fit-to-screen
@@ -282,6 +284,7 @@ categories:
           - vertical-view
       - name: Navigation
         members:
+          - activity--task
           - adapter-notification
           - add
           - add--alt
@@ -327,6 +330,7 @@ categories:
           - point
           - select--window
           - stickies
+          - subprocess
           - subtract
           - subtract--alt
           - subtract--filled
@@ -412,6 +416,7 @@ categories:
           - drill-back
           - drill-down
           - drill-through
+          - end-to-end--monitoring
           - equal--approximately
           - exit
           - expand-all
@@ -447,6 +452,7 @@ categories:
           - launch
           - layers
           - layers--external
+          - location--switch
           - login
           - logout
           - loop
@@ -537,10 +543,13 @@ categories:
           - tag--import
           - tag--none
           - test-tool
+          - tilde
+          - tilde--large
           - timing-belt
           - tour
           - translate
           - transpose
+          - unassigned--work-order
           - undo
           - unfold--open
           - update-complete
@@ -774,6 +783,7 @@ categories:
           - cloud-satellite--services
           - cobol-upgrade-advisor
           - content-delivery-network
+          - database--backups
           - database--datastax
           - database--elastic
           - database--enterprisedb
@@ -1040,6 +1050,7 @@ categories:
           - pricing--traditional
           - purchase
           - receipt
+          - receipt--verification
           - recycle
           - shipment--delivery
           - shopping--bag
@@ -1346,6 +1357,7 @@ categories:
           - chart--multitype
           - chart--network
           - chart--parallel
+          - chart--performance
           - chart--pie
           - chart--planning-waterfall
           - chart--point
@@ -1375,6 +1387,7 @@ categories:
           - color-picker
           - column-dependency
           - concept
+          - connection
           - container-software
           - cost
           - cost--total
@@ -1384,6 +1397,8 @@ categories:
           - curved-line--solid
           - data--1
           - data--2
+          - data--add
+          - data--alert
           - data--base
           - data--base--alt
           - data--categorical
@@ -1505,13 +1520,17 @@ categories:
           - partition--specific
           - phrase-sentiment
           - presentation-file
+          - program
+          - program--action
           - progress-bar
           - progress-bar--round
           - qq-plot
           - quadrant-plot
           - query-queue
           - report
+          - report--chart
           - report--data
+          - report--growth
           - row--collapse
           - row--expand
           - swot
@@ -1549,6 +1568,7 @@ categories:
           - table--built
           - table--shortcut
           - table--split
+          - target
           - term
           - term--reference
           - text-link
@@ -1556,6 +1576,7 @@ categories:
           - text-mining
           - text-mining--applier
           - time-plot
+          - timeline
           - trace
           - transform--binary
           - transform--code
@@ -1606,6 +1627,7 @@ categories:
           - certificate
           - certificate--check
           - classification
+          - classification--groups
           - closed-caption
           - closed-caption--alt
           - closed-caption--filled
@@ -1652,7 +1674,9 @@ categories:
           - documentation
           - download
           - DVR
+          - energy--report
           - export
+          - facility--groups
           - feedback-documentation
           - file--change
           - file--diff
@@ -1729,8 +1753,11 @@ categories:
           - PNG
           - policy
           - popup
+          - portfolio--groups
           - PPT
           - product
+          - product-categories
+          - purchasing-organizations
           - RAW
           - reference-architecture
           - repo--artifact
@@ -1765,8 +1792,12 @@ categories:
           - task--add
           - task--approved
           - task--asset-view
+          - task--blank
           - task--complete
+          - task--edit
+          - task--hold
           - task--location
+          - task--progress
           - task--remove
           - task--settings
           - task--star
@@ -1843,10 +1874,13 @@ categories:
           - information--square--filled
           - key--values
           - locked-and-blocked
+          - missing-data--warning
           - misuse
           - misuse--outline
           - pending
           - pending--filled
+          - priority--high
+          - priority--low
           - queued
           - shield--alert
           - square-fill
@@ -1931,6 +1965,7 @@ categories:
           - container-image--push
           - container-image--push-pull
           - container-services
+          - coupling-facility
           - coupling-facility-encryption
           - data--center
           - data-accessor
@@ -1973,7 +2008,12 @@ categories:
           - fork-node
           - gateway
           - gateway--api
+          - gateway--exclusive
+          - gateway--inclusive
+          - gateway--inclusive--alt
           - gateway--mail
+          - gateway--parallel
+          - gateway--parallel--alt
           - gateway--public
           - gateway--security
           - gateway--user-access
@@ -2127,6 +2167,7 @@ categories:
           - z--lpar
           - z--systems
           - zos
+          - zos--partition
           - zos--sysplex
   - name: Person
     subcategories:
@@ -2160,6 +2201,7 @@ categories:
           - customer-service--filled
           - dog-walker
           - education
+          - email--user
           - events
           - events--alt
           - face--activated
@@ -2185,8 +2227,10 @@ categories:
           - gender--male
           - group
           - group--presentation
+          - helmet
           - identification
           - partnership
+          - party-popper
           - person
           - person--favorite
           - running
@@ -2212,6 +2256,7 @@ categories:
           - user--follow
           - user--identification
           - user--military
+          - user--minus
           - user--multiple
           - user--online
           - user--profile
@@ -2239,9 +2284,12 @@ categories:
           - calendar--add--alt
           - calendar--settings
           - calendar--tools
+          - delay
           - delivery--time
           - event
+          - event--number
           - event--schedule
+          - history
           - hourglass
           - reminder
           - reminder--medical
@@ -2321,13 +2369,18 @@ categories:
           - earth--filled
           - earth--southeast-asia
           - earth--southeast-asia--filled
+          - facility--group
+          - facility--group--alternate
           - fire
           - fire--fill
           - flagging-taxi
           - flight--international
           - flight--roster
           - flight--schedule
+          - fuel-can
           - gas-station
+          - gas-station--diesel
+          - gas-station--eco
           - gas-station--filled
           - globe
           - harbor
@@ -2341,6 +2394,7 @@ categories:
           - location--company
           - location--company--filled
           - location--filled
+          - location--group
           - location--hazard
           - location--hazard--filled
           - location--heart
@@ -2352,6 +2406,7 @@ categories:
           - location--save
           - location--star
           - location--star--filled
+          - location--supplier
           - map
           - map--center
           - map--identify
@@ -2385,6 +2440,7 @@ categories:
           - plane--private
           - plane--sea
           - police
+          - refrigerant
           - restaurant
           - restaurant--fine
           - road
@@ -2435,6 +2491,7 @@ categories:
           - dew-point--filled
           - drought
           - earthquake
+          - emissions
           - energy--renewable
           - flood
           - flood--warning
@@ -2463,6 +2520,7 @@ categories:
           - not-available
           - observed--hail
           - observed--lightning
+          - offset--environmental
           - outlook-severe
           - partly-cloudy
           - partly-cloudy--night
@@ -2591,6 +2649,7 @@ categories:
           - breaking-change
           - build--image
           - build--run
+          - building--electrical
           - building--insights-1
           - building--insights-2
           - building--insights-3
@@ -2610,6 +2669,7 @@ categories:
           - code--hide
           - code--reference
           - connection-signal
+          - connection--signal--alt
           - connection-signal--off
           - connection--receive
           - connection--send
@@ -2635,6 +2695,7 @@ categories:
           - edge-service
           - email
           - email--new
+          - energy--waste
           - equalizer
           - fetch-upload
           - fetch-upload--cloud
@@ -2687,6 +2748,7 @@ categories:
           - rocket
           - rss
           - satellite
+          - sensor
           - share
           - signal-strength
           - sim-card
@@ -2699,6 +2761,7 @@ categories:
           - transmission-lte
           - trigger
           - USB
+          - utility--expense
           - vintage-mac
           - voicemail
           - VPN

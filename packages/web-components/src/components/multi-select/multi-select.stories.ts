@@ -58,6 +58,8 @@ const actions = html`
 `;
 
 const sizes = {
+  [`Extra small size (${DROPDOWN_SIZE.EXTRA_SMALL})`]:
+    DROPDOWN_SIZE.EXTRA_SMALL,
   [`Small size (${DROPDOWN_SIZE.SMALL})`]: DROPDOWN_SIZE.SMALL,
   [`Medium size (${DROPDOWN_SIZE.MEDIUM})`]: DROPDOWN_SIZE.MEDIUM,
   [`Large size (${DROPDOWN_SIZE.LARGE})`]: DROPDOWN_SIZE.LARGE,

@@ -21,6 +21,30 @@ const contentScenarios = [
 
 describe('Search', () => {
   describe('renders as expected - Component API', () => {
+    it('should label the search landmark using labelText via aria-labelledby', () => {
+      render(<Search labelText="Search A" />);
+
+      expect(
+        screen.getByRole('search', { name: 'Search A' })
+      ).toBeInTheDocument();
+    });
+
+    it('should give each search landmark a unique accessible name when labelText differs', () => {
+      render(
+        <>
+          <Search labelText="Search A" />
+          <Search labelText="Search B" />
+        </>
+      );
+
+      expect(
+        screen.getByRole('search', { name: 'Search A' })
+      ).toBeInTheDocument();
+      expect(
+        screen.getByRole('search', { name: 'Search B' })
+      ).toBeInTheDocument();
+    });
+
     it('should spread extra props onto the input element', () => {
       render(<Search labelText="test-search" data-testid="test-id" />);
 
@@ -163,16 +187,68 @@ describe('Search', () => {
     });
 
     it('should have tabbable button and untabbable input if expandable and not expanded', async () => {
-      render(
+      const { container } = render(
         <Search
           labelText="test-search"
           onExpand={() => {}}
           isExpanded={false}
         />
       );
+      const input = container.querySelector('input');
 
       expect(screen.getAllByRole('button')[0]).toHaveAttribute('tabIndex', '0');
-      expect(screen.getByRole('searchbox')).toHaveAttribute('tabIndex', '-1');
+      expect(input).toHaveAttribute('inert');
+      expect(input).toHaveAttribute('tabIndex', '-1');
+    });
+
+    it('should not make the input inert if expandable and expanded', () => {
+      const { container } = render(
+        <Search labelText="test-search" onExpand={() => {}} isExpanded />
+      );
+
+      expect(container.querySelector('input')).not.toHaveAttribute('inert');
+    });
+
+    it('should respect input tabIndex and inert props if not expandable', () => {
+      const { container } = render(
+        <Search labelText="test-search" inert tabIndex={-1} />
+      );
+      const input = container.querySelector('input');
+
+      expect(input).toHaveAttribute('inert');
+      expect(input).toHaveAttribute('tabIndex', '-1');
+    });
+
+    it('should respect input tabIndex and inert props if expandable and expanded', () => {
+      const { container } = render(
+        <Search
+          labelText="test-search"
+          onExpand={() => {}}
+          isExpanded
+          inert
+          tabIndex={-1}
+        />
+      );
+      const input = container.querySelector('input');
+
+      expect(input).toHaveAttribute('inert');
+      expect(input).toHaveAttribute('tabIndex', '-1');
+    });
+
+    it('should enforce collapsed input a11y state even if input props attempt to override it', () => {
+      const { container } = render(
+        <Search
+          labelText="test-search"
+          onExpand={() => {}}
+          isExpanded={false}
+          inert={false}
+          tabIndex={0}
+        />
+      );
+      const input = container.querySelector('input');
+
+      expect(input).toHaveAttribute('inert');
+      expect(input).toHaveAttribute('tabIndex', '-1');
     });
 
     it('should have tabbable input and untabbable button if not expandable', async () => {

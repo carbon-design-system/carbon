@@ -21,6 +21,7 @@ import { useId } from '../../internal/useId';
 import { usePrefix } from '../../internal/usePrefix';
 import { noopFn } from '../../internal/noopFn';
 import type { TFunc, TranslateWithId } from '../../types/common';
+import { useTableToolbar } from './TableToolbar';
 
 const translationIds = {
   'carbon.table.toolbar.search.label': 'carbon.table.toolbar.search.label',
@@ -46,8 +47,7 @@ type ExcludedInheritedProps =
   | 'onChange'
   | 'onExpand'
   | 'onFocus'
-  | 'tabIndex'
-  | 'size'; // TODO: remove this exclusion once 'xs' is implemented for TableToolbar #21345
+  | 'tabIndex';
 
 export type TableToolbarSearchHandleExpand = (
   event: FocusEvent<HTMLInputElement>,
@@ -129,12 +129,6 @@ export interface TableToolbarSearchProps
    */
   searchContainerClass?: string;
 
-  // TODO: remove once 'xs' is implemented for TableToolbar #21345, since TableToolbarSearch and Search will then have the same available sizes
-  /**
-   * Specify the size of the Search
-   */
-  size?: 'sm' | 'md' | 'lg';
-
   tabIndex?: number | string;
 }
 
@@ -155,10 +149,12 @@ const TableToolbarSearch = ({
   id,
   onBlur,
   onFocus,
-  size = 'lg',
+  size: sizeProp,
   tabIndex = '0',
   ...rest
 }: TableToolbarSearchProps) => {
+  const toolbarContext = useTableToolbar();
+  const size = sizeProp ?? toolbarContext.size;
   const { current: controlled } = useRef(expandedProp !== undefined);
 
   const [expandedState, setExpandedState] = useState<boolean>(
@@ -332,7 +328,7 @@ TableToolbarSearch.propTypes = {
   /**
    * Specify the size of the Search
    */
-  size: PropTypes.oneOf(['sm', 'md', 'lg']),
+  size: PropTypes.oneOf(['xs', 'sm', 'md', 'lg']),
 
   /**
    * Optional prop to specify the tabIndex of the <Search> (in expanded state) or the container (in collapsed state)
