@@ -15,7 +15,7 @@ import {
   statusTokens,
   contentSwitcherTokens,
 } from '../../../../src';
-import { TokenFormat, group, contextual } from '../../../../src/tokens';
+import { TokenFormat, group } from '../../../../src/tokens';
 import * as componentGroups from '../../../../src/tokens/components';
 
 import whiteJson from '../../../../src/dtcg/white.json';
@@ -148,17 +148,6 @@ const CATEGORIES = [
       label: g.name,
       tokens: g.getTokens(),
     })),
-  },
-  {
-    id: 'contextual',
-    label: 'Contextual',
-    groups: [
-      {
-        id: 'contextual-group',
-        label: 'Contextual',
-        tokens: contextual.getTokens(),
-      },
-    ],
   },
   ...Object.values(componentGroups).map((g) => ({
     id: `comp-${g.name}`,
@@ -498,9 +487,6 @@ export default function GraphPage() {
           </button>
           <Link href="/" className="nav-link">
             Table view
-          </Link>
-          <Link href="/tree" className="nav-link">
-            Tree view
           </Link>
         </div>
       </header>

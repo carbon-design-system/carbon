@@ -15,12 +15,7 @@ import {
   statusTokens,
   contentSwitcherTokens,
 } from '../../../../src';
-import {
-  TokenFormat,
-  group,
-  contextual,
-  set as tokenSet,
-} from '../../../../src/tokens';
+import { TokenFormat, group, set as tokenSet } from '../../../../src/tokens';
 import * as componentGroups from '../../../../src/tokens/components';
 
 import whiteJson from '../../../../src/dtcg/white.json';
@@ -143,21 +138,17 @@ function formatAlias(entry) {
   return alpha != null ? `${ref} × ${alpha}α` : ref;
 }
 
-// ─── Build token rows from the full token registry (group + contextual + components) ──
+// ─── Build token rows from the full token registry (group + components) ──────
 
 const baseTokens = group.getTokens().map((t) => ({ ...t, _category: 'Root' }));
-const contextualTokens = contextual
-  .getTokens()
-  .map((t) => ({ ...t, _category: 'Contextual' }));
 const componentTokens = Object.values(componentGroups).flatMap((g) =>
   g.getTokens().map((t) => ({ ...t, _category: g.name }))
 );
-const tokens = [...baseTokens, ...contextualTokens, ...componentTokens];
+const tokens = [...baseTokens, ...componentTokens];
 
 const CATEGORIES = [
   'All',
   'Root',
-  'Contextual',
   ...Object.values(componentGroups).map((g) => g.name),
 ];
 
@@ -307,9 +298,6 @@ export default function IndexPage({ lastBuiltOn }) {
                 Reset filters
               </button>
             )}
-            <Link href="/tree" className="nav-link">
-              Tree view
-            </Link>
             <Link href="/graph" className="nav-link">
               Graph view
             </Link>
