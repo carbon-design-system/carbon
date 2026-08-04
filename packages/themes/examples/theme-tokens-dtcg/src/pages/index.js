@@ -582,51 +582,45 @@ export default function IndexPage({ lastBuiltOn }) {
             </select>
           </div>
 
-          {/* Token group (table only — less useful in graph) */}
-          {!isGraph && (
-            <div className="control-group">
-              <label htmlFor="token-group">Token group</label>
-              <select
-                id="token-group"
-                value={activeGroup}
-                onChange={(e) => setActiveGroup(e.target.value)}>
-                {groups.map((g) => (
-                  <option key={g.name}>{g.name}</option>
-                ))}
-              </select>
-            </div>
-          )}
+          {/* Token group */}
+          <div className="control-group">
+            <label htmlFor="token-group">Token group</label>
+            <select
+              id="token-group"
+              value={activeGroup}
+              onChange={(e) => setActiveGroup(e.target.value)}>
+              {groups.map((g) => (
+                <option key={g.name}>{g.name}</option>
+              ))}
+            </select>
+          </div>
 
-          {/* Token set (table only) */}
-          {!isGraph && (
-            <div className="control-group">
-              <label htmlFor="token-set">Token set</label>
-              <select
-                id="token-set"
-                value={activeSet}
-                onChange={(e) => setActiveSet(e.target.value)}>
-                {tokenSets.map((s) => (
-                  <option key={s.name}>{s.name}</option>
-                ))}
-              </select>
-            </div>
-          )}
+          {/* Token set */}
+          <div className="control-group">
+            <label htmlFor="token-set">Token set</label>
+            <select
+              id="token-set"
+              value={activeSet}
+              onChange={(e) => setActiveSet(e.target.value)}>
+              {tokenSets.map((s) => (
+                <option key={s.name}>{s.name}</option>
+              ))}
+            </select>
+          </div>
 
-          {/* Properties (table only) */}
-          {!isGraph && (
-            <div className="control-group">
-              <label htmlFor="property">Properties</label>
-              <select
-                id="property"
-                value={activeProperty}
-                onChange={(e) => setActiveProperty(e.target.value)}>
-                <option>All</option>
-                {properties.map((p) => (
-                  <option key={p}>{p}</option>
-                ))}
-              </select>
-            </div>
-          )}
+          {/* Properties */}
+          <div className="control-group">
+            <label htmlFor="property">Properties</label>
+            <select
+              id="property"
+              value={activeProperty}
+              onChange={(e) => setActiveProperty(e.target.value)}>
+              <option>All</option>
+              {properties.map((p) => (
+                <option key={p}>{p}</option>
+              ))}
+            </select>
+          </div>
 
           {hasFilters && (
             <button
