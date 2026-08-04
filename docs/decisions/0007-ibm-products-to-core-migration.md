@@ -1,6 +1,7 @@
 # 7. Migrate components from carbon-for-ibm-products to Carbon core
 
-Date: 2025-01-01
+Date: 2025-01-01 DRI: Carbon core team / dev leads Deciders: Carbon dev leads
+(aligned 13 July 2026 for Storybook sub-decision)
 
 ## Status
 
@@ -42,7 +43,7 @@ Carbon Labs.
 
 ## Decision
 
-### Migration strategy: selective migration with full audit (Option 2)
+### Chosen: Option 2 — Selective component migration
 
 After evaluating two alternatives (see
 [Options Considered](#options-considered)), we will selectively migrate
@@ -51,6 +52,21 @@ high-value components into the Carbon core monorepo. The
 source of truth for migrated components will become this monorepo. After the v12
 transition, `carbon-for-ibm-products` will enter a minimal maintenance and
 support mode with no new feature development.
+
+### Why Option 1 was rejected
+
+Moving the entire package as-is gives adopters zero short-term migration cost,
+but it does not eliminate the dual-package install burden, does not promote
+components to first-class Carbon API status, and imports c4ip's infrastructure
+wholesale without aligning it to Carbon conventions. It defers the hard problem
+rather than solving it.
+
+### Why Option 2 was chosen
+
+The audit-gated approach concentrates effort on components with proven adoption
+or clear strategic value, limits package-size growth to components that earn
+their place, and preserves the option to not migrate low-value components at
+all. The one-time import-path cost for adopters is manageable with codemods.
 
 ### What moves and where
 
@@ -263,15 +279,20 @@ packages/web-components/src/components/<component-name>/
 Move the entire `@carbon/ibm-products` package into this monorepo without
 altering the package name or its public API. The package would continue to be
 published under its existing name and adopters would see no import-path changes.
-The benefit is zero migration cost for adopters in the short term.
 
-This option was rejected because it does not eliminate the duplicate package
-overhead for adopters, does not give components first-class status in Carbon's
-public API, and does not simplify the package landscape toward a single
-consumption point. It also carries c4ip's full infrastructure into the monorepo
-without taking the opportunity to align with Carbon conventions.
+- **Pros:** Zero migration cost for adopters short-term; all components land in
+  one repo immediately.
+- **Cons:** Does not eliminate the dual-package install burden; does not promote
+  components to first-class status in `@carbon/react`; carries c4ip's full CI
+  and infrastructure into the monorepo unchanged; package landscape remains
+  fragmented for consumers.
+- **Cost / effort:** Low upfront (copy-paste), high ongoing (two parallel
+  infrastructure footprints indefinitely).
+- **Risk:** High — the structural problems this ADR aims to solve persist.
 
-### Option 2: Selective component migration (selected)
+**Status: Rejected.**
+
+### Option 2: Selective component migration _(selected)_
 
 Retain the `carbon-for-ibm-products` repository and package, but migrate
 individual high-value components into the core monorepo over time through a
@@ -280,7 +301,18 @@ with minimal maintenance, or moved to Carbon Labs. Adopters consuming migrated
 components will have a one-time import-path change from `@carbon/ibm-products`
 to `@carbon/react`.
 
-This is the approach we are proceeding with.
+- **Pros:** Components earn first-class API status; package landscape converges
+  toward a single consumption point; effort is focused on high-value components
+  only; v12 adoption is accelerated; CI/tooling overhead is reduced over time.
+- **Cons:** One-time breaking import-path change for adopters of migrated
+  components; parallel maintenance window during the v11–v12 transition;
+  per-component porting effort (TypeScript conversion, Sass adaptation,
+  web-components port).
+- **Cost / effort:** Moderate per-component; bounded by the audit list.
+- **Risk:** Medium — adopter disruption is mitigated by codemods; migration
+  completeness risk is mitigated by the audit and tracking issue.
+
+**Status: Selected.**
 
 ## Consequences
 
@@ -337,15 +369,56 @@ a follow-up PR for the web-components port where needed. Dependency order is
 respected: lower-level components (e.g. `ActionSet`) are merged before
 dependents (e.g. `SidePanel`).
 
+## Reversibility
+
+This is a **one-way door** for migrated components. Once a component is exported
+from `@carbon/react` as part of the v12 public API, removing it would be a
+breaking change for consumers. The decision on _which_ components to migrate
+(the audit list) is a two-way door — components can be added to or removed from
+the migration set until they are publicly exported. The deprecation of c4ip is
+also reversible up to the point where the minimal maintenance announcement is
+made publicly.
+
+## Open Questions / Dissent
+
+- `TagOverflow` inclusion decision required before v12 exports are uncommented.
+  Whether `TagOverflow` migrates to core or is superseded by existing overflow
+  utilities is still unresolved (see audit table row 16). _Owner needed.
+  Unresolved at time of writing._
+
+- **⚠️ Composable-readiness two-track migration.** Composability work across
+  c4ip has been a multi-release effort. The outcome is two distinct tracks at
+  migration time:
+  - **Already composable (migrate as stable):** `InterstitialScreen`,
+    `Coachmark`, `Tearsheet`, `PageHeader`, `Card`, `AddSelect` — all have been
+    re-implemented as composable systems and are ready for stable export from
+    v12.
+  - \*\*Not yet composable (migrate as `preview__candidate` ) Post-v12,
+    composable redesigns will be developed and delivered as `preview`, promoted
+    to `stable`, and at that point the original migrated `preview__candidate`
+    will be deprecated.
+  - An audit tracking which components fall into which track exists in
+    [carbon#22881](https://github.com/carbon-design-system/carbon/issues/22881).
+    _Review the audit before finalising the v12 export list._
+
+> Silence in this section is not consent. Reviewers are encouraged to add
+> dissenting views or unresolved concerns before this ADR is accepted.
+
 ## Risks and Mitigations
 
-| Risk                                                                | Mitigation                                                                                                                                             |
-| ------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Adopter confusion during the v11–v12 transition window              | Publish a clear migration guide with automated codemods; maintain deprecation warnings in c4ip for migrated components pointing to the new import path |
-| Component parity gaps between React and web-components ports        | The dual-flagship model is enforced through review; web-components ports are tracked in the same issue as the React migration                          |
-| Audit list becomes stale as c4ip receives new components            | Maintain the audit as a living document; re-evaluate new c4ip components against migration criteria before each release cycle                          |
-| Circular imports when migrated components reference `@carbon/react` | All cross-component imports inside the monorepo must use relative paths rather than the package name; enforced through lint and code review            |
-| Package size regression for existing `@carbon/react` adopters       | Monitor bundle-size CI checks; ensure components are tree-shakeable and not included in the default build unless imported                              |
+| Risk                                                   | Mitigation                                                                                                                                             |
+| ------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Adopter confusion during the v11–v12 transition window | Publish a clear migration guide with automated codemods; maintain deprecation warnings in c4ip for migrated components pointing to the new import path |
+
+|  
+| Audit list becomes stale as c4ip receives new components | Maintain the audit
+as a living document; re-evaluate new c4ip components against migration criteria
+before each release cycle | | Circular imports when migrated components
+reference `@carbon/react` | All cross-component imports inside the monorepo must
+use relative paths rather than the package name; enforced through lint and code
+review | | Package size regression for existing `@carbon/react` adopters |
+Monitor bundle-size CI checks; ensure components are tree-shakeable and not
+included in the default build unless imported |
 
 ## References
 
