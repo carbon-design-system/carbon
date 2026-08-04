@@ -23,9 +23,29 @@ import { rows, headers } from '../shared';
 import mdx from '../../DataTable.mdx';
 import { action } from 'storybook/actions';
 
+const sharedArgTypes = {
+  size: {
+    control: 'select',
+    options: ['xs', 'sm', 'md', 'lg', 'xl'],
+    description: 'Change the row height of table',
+  },
+  stickyHeader: {
+    control: 'boolean',
+    description:
+      'Specify whether the header should be sticky. Still in preview: may not work with every combination of table props',
+  },
+};
+
+const sharedArgs = {
+  size: 'lg',
+  stickyHeader: false,
+};
+
 export default {
   title: 'Components/DataTable/Expansion',
   component: DataTable,
+  args: sharedArgs,
+  argTypes: sharedArgTypes,
   subcomponents: {
     TableExpandHeader,
     TableExpandRow,
@@ -103,6 +123,17 @@ export const Default = (args) => (
     )}
   </DataTable>
 );
+
+export const StickyHeader = Default.bind({});
+StickyHeader.args = {
+  stickyHeader: true,
+};
+StickyHeader.play = async ({ canvas, userEvent }) => {
+  const [firstExpandButton] = canvas.getAllByRole('button', {
+    name: 'Expand current row',
+  });
+  await userEvent.click(firstExpandButton);
+};
 
 export const BatchExpansion = (args) => (
   <DataTable {...args} rows={rows} headers={headers}>
