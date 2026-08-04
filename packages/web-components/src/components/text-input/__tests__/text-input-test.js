@@ -145,6 +145,23 @@ describe('cds-text-input', () => {
     expect(event).to.exist;
   });
 
+  it('should re-dispatch change event', async () => {
+    const el = await fixture(defaultInput);
+    const input = el.shadowRoot.querySelector('input');
+    const changeEvent = oneEvent(el, 'change');
+
+    input.value = 'text';
+    input.dispatchEvent(new Event('change', { bubbles: true }));
+
+    const event = await changeEvent;
+    expect(event).to.exist;
+    expect(event.composed).to.be.true;
+
+    expect(event.target).to.equal(el);
+    expect(event.target.value).to.equal('text');
+    expect(el.value).to.equal('text');
+  });
+
   it('should reflect value set via attribute', async () => {
     // Setting the value property directly should update the internal input,
     // useful for controlled components (React-like behavior)
