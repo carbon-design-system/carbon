@@ -7,6 +7,7 @@
 
 import plugin, {
   createBobEnvironment,
+  parseBobStreamLine,
   runBobBugTriage,
   validateBobTriage,
 } from './bob-bug-triage.js';
@@ -18,6 +19,7 @@ jest.mock(
   () => ({
     getInput: jest.fn(),
     info: jest.fn(),
+    setSecret: jest.fn(),
   }),
   { virtual: true }
 );
@@ -66,6 +68,56 @@ describe('createBobEnvironment', () => {
     ).toEqual({
       BOBSHELL_API_KEY: 'bob-api-key',
       PATH: '/usr/bin',
+    });
+  });
+});
+
+describe('parseBobStreamLine', () => {
+  it('logs tool progress without exposing parameters or tool output', () => {
+    const toolNames = new Map();
+    const toolUse = parseBobStreamLine(
+      JSON.stringify({
+        type: 'tool_use',
+        tool_id: 'tool-1',
+        tool_name: 'browser_action',
+        parameters: { apiKey: 'secret', prompt: 'private reasoning' },
+      }),
+      toolNames
+    );
+    const toolResult = parseBobStreamLine(
+      JSON.stringify({
+        type: 'tool_result',
+        tool_id: 'tool-1',
+        status: 'success',
+        output: 'sensitive page contents',
+      }),
+      toolNames
+    );
+
+    expect(toolUse).toEqual({
+      stage: 'running browser_action',
+      message: '[bob-triage] Bob started tool=browser_action',
+    });
+    expect(toolResult).toEqual({
+      stage: 'completed browser_action (success)',
+      message: '[bob-triage] Bob completed tool=browser_action; status=success',
+    });
+    expect(JSON.stringify([toolUse, toolResult])).not.toMatch(
+      /secret|private reasoning|sensitive page contents/
+    );
+  });
+
+  it('suppresses model messages and returns non-events as final output', () => {
+    expect(
+      parseBobStreamLine(
+        JSON.stringify({
+          type: 'message',
+          content: 'internal model response',
+        })
+      )
+    ).toEqual({ stage: 'generating response' });
+    expect(parseBobStreamLine('Move this valid bug to Backlog.')).toEqual({
+      output: 'Move this valid bug to Backlog.',
     });
   });
 });
