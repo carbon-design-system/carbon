@@ -194,17 +194,14 @@ function measureCatHeight(cat, expandedCats, expandedGroups) {
   let h = 0;
   for (const grp of cat.groups) {
     if (cat.groups.length > 1) {
-      // group node + its tokens
+      // multi-group: group node + its tokens (need separate expand)
       const tokH = expandedGroups.has(grp.id)
         ? grp.tokens.length * (NODE_H + ROW_GAP) - ROW_GAP
         : GRP_H;
       h += Math.max(GRP_H, tokH) + GRP_GAP;
     } else {
-      // no group level — tokens hang directly off category
-      const tokH = expandedGroups.has(grp.id)
-        ? grp.tokens.length * (NODE_H + ROW_GAP) - ROW_GAP
-        : CAT_H;
-      h += Math.max(CAT_H, tokH);
+      // single-group: tokens expand directly from category, no group node
+      h += grp.tokens.length * (NODE_H + ROW_GAP) - ROW_GAP;
     }
   }
   return h;
@@ -282,42 +279,25 @@ function buildLayout(expandedCats, expandedGroups, theme) {
             }
           }
         } else {
-          // Single group — tokens hang directly off category
-          nodes.push({
-            id: grp.id,
-            type: 'group',
-            label: grp.label,
-            cx: GRP_X + GRP_W / 2,
-            cy: grpCy,
-            w: GRP_W,
-            h: GRP_H,
-            hidden: true,
-          });
-          links.push({ from: cat.id, to: grp.id });
-
-          if (grpExpanded) {
-            let tokY = grpY;
-            for (const tok of grp.tokens) {
-              const color = resolveColor(theme, tok.name);
-              const alias = getAlias(theme, tok.name);
-              nodes.push({
-                id: tok.name,
-                type: 'token',
-                label: tok.name,
-                color,
-                alias,
-                cx: GRP_X + NODE_W / 2,
-                cy: tokY + NODE_H / 2,
-                w: NODE_W,
-                h: NODE_H,
-              });
-              links.push({ from: cat.id, to: tok.name });
-              tokY += NODE_H + ROW_GAP;
-            }
-          } else {
-            // show a collapsed group node in the group column
-            nodes.find((n) => n.id === grp.id).hidden = false;
-            links.push({ from: cat.id, to: grp.id });
+          // Single group — tokens expand directly from the category node,
+          // no intermediate group node needed.
+          let tokY = grpY;
+          for (const tok of grp.tokens) {
+            const color = resolveColor(theme, tok.name);
+            const alias = getAlias(theme, tok.name);
+            nodes.push({
+              id: tok.name,
+              type: 'token',
+              label: tok.name,
+              color,
+              alias,
+              cx: GRP_X + NODE_W / 2,
+              cy: tokY + NODE_H / 2,
+              w: NODE_W,
+              h: NODE_H,
+            });
+            links.push({ from: cat.id, to: tok.name });
+            tokY += NODE_H + ROW_GAP;
           }
         }
 
