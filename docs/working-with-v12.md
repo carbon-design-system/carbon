@@ -48,6 +48,42 @@ Prefer enabling `enable-v12-release` when you want the v12 preview as a whole.
 Use individual `enable-v12-*` flags only when a story, test, or migration path
 needs to isolate one behavior.
 
+## Required v12 migration documentation
+
+Every code change that affects v12 behavior must meaningfully update
+[`docs/migration/v12.md`](migration/v12.md) in the same pull request. This
+includes code reached through `enable-v12-release`, code behind an individual
+`enable-v12-*` flag, v12-only code, and associated changes in another package
+such as styles or upgrade tooling.
+
+"Meaningfully update" means keeping `docs/migration/v12.md` accurate from the
+perspective of a consumer or agent moving an application from v11 to v12. For
+every affected package, document only externally visible behavior, application
+changes, and areas consumers should review. Include a small code example only
+when it clarifies a changed API or consumer action, and link related package
+sections instead of duplicating or hiding cross-package effects.
+
+If a change modifies behavior that is already documented, update that existing
+section so it describes the current v12 result and remove or rewrite anything
+that is no longer true. Prefer extending or consolidating an existing section
+over creating another heading for the same consumer concern. Add a section only
+for a distinct consumer-facing migration burden. Internal-only changes, small
+implementation details with no consumer impact, and notes intended for
+maintainers do not belong in the document.
+
+Documentation work may be split across agents or contributors by package or
+existing section. After parallel work, reconcile the sections into one coherent
+consumer view, remove duplicate entries, and verify cross-package links.
+
+Do not copy flag inventories, package availability, opt-in instructions, or
+codemod metadata into the v12 migration document. The
+[feature flag documentation](feature-flags.md) owns the flag inventory,
+availability, and codemod associations. Package `FeatureFlags` documentation
+owns opt-in APIs, while the
+[`@carbon/upgrade` README](../packages/upgrade/README.md) owns detailed codemod
+usage and limitations. A no-op or maintainer-only edit does not satisfy this
+requirement.
+
 ## React usage
 
 The React v12 Storybook has the `enable-v12-release` flag turned on globally for
@@ -306,6 +342,9 @@ settings are intentionally not handled here.
   still enable non-v12 flags or carry documentation-specific parameters.
 - Keep Web Components attribute syncing in mind for Sass selectors that depend
   on host attributes.
+- Do not merge code that affects v12 without a meaningful update to
+  `docs/migration/v12.md` that keeps the current consumer migration impact
+  accurate. Update existing sections instead of adding duplicate entries.
 - Do not treat the v12 Storybooks as VRT coverage yet. They are intentionally
   outside Chromatic until they replace the current default Storybooks for v12.
 - When adding a new `enable-v12-*` flag, make sure it is represented anywhere
