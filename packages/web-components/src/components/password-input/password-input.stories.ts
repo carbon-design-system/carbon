@@ -24,7 +24,6 @@ const sizes = {
 };
 
 const args = {
-  autocomplete: 'current-password',
   defaultWidth: 300,
   disabled: false,
   helperText: 'Use at least 8 characters',
@@ -47,10 +46,6 @@ const args = {
 };
 
 const argTypes = {
-  autocomplete: {
-    control: 'text',
-    description: 'May be any of the standard HTML autocomplete options',
-  },
   defaultWidth: {
     control: { type: 'range', min: 300, max: 800, step: 50 },
   },
@@ -147,7 +142,6 @@ const argTypes = {
 
 export const Default = {
   render: ({
-    autocomplete,
     defaultWidth,
     disabled,
     helperText,
@@ -171,7 +165,6 @@ export const Default = {
   }) => html`
     <div style="width: ${defaultWidth}px;">
       <cds-password-input
-        autocomplete="${ifDefined(autocomplete)}"
         ?disabled="${disabled}"
         helper-text="${ifDefined(helperText)}"
         ?hide-label="${hideLabel}"
@@ -181,14 +174,14 @@ export const Default = {
         invalid-text="${ifDefined(invalidText)}"
         label="${ifDefined(labelText)}"
         placeholder="${ifDefined(placeholder)}"
-        ?readonly="${readonly}"
+        ?readonly="${ifDefined(readonly)}"
         show-password-label="${ifDefined(showPasswordLabel)}"
         size="${ifDefined(size)}"
         tooltip-alignment="${ifDefined(tooltipAlignment)}"
         tooltip-position="${ifDefined(tooltipPosition)}"
         type="${ifDefined(type)}"
-        .value="${value}"
-        ?warn="${warn}"
+        .value="${ifDefined(value)}"
+        ?warn="${ifDefined(warn)}"
         warn-text="${ifDefined(warnText)}"
         @input="${onInput}">
       </cds-password-input>
