@@ -1969,7 +1969,7 @@ __metadata:
     "@carbon/test-utils": "npm:^10.41.0"
     "@carbon/themes": "npm:^11.78.0"
     "@carbon/utilities": "npm:^0.23.0"
-    "@figma/code-connect": "npm:^1.4.9"
+    "@figma/code-connect": "npm:^1.5.1"
     "@floating-ui/react": "npm:^0.27.4"
     "@ibm/telemetry-js": "npm:^1.5.0"
     "@rolldown/plugin-babel": "npm:^0.2.0"
@@ -3123,9 +3123,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@figma/code-connect@npm:^1.4.9":
-  version: 1.4.9
-  resolution: "@figma/code-connect@npm:1.4.9"
+"@figma/code-connect@npm:^1.5.1":
+  version: 1.5.2
+  resolution: "@figma/code-connect@npm:1.5.2"
   dependencies:
     boxen: "npm:5.1.1"
     chalk: "npm:^4.1.2"
@@ -3133,6 +3133,7 @@ __metadata:
     compare-versions: "npm:^6.1.0"
     cross-spawn: "npm:^7.0.3"
     dotenv: "npm:^16.3.1"
+    esbuild-wasm: "npm:0.27.3"
     fast-fuzzy: "npm:^1.12.0"
     find-up: "npm:^5.0.0"
     glob: "npm:^11.0.4"
@@ -3151,7 +3152,7 @@ __metadata:
     zod-validation-error: "npm:^3.2.0"
   bin:
     figma: bin/figma
-  checksum: 10/539793ad6c83335f87ade9d3f275f816f65c8891bdef98aed6ba71e30ba6b468bb87f733ebce9372ed0e93c332e808857610e65f9b42d92568d9396bcdce69e2
+  checksum: 10/a3d4a618b13753a734cf7be50a0458cb59f8f38e9897358b3965a7562c475dbb8cc93c4b345cbc0ff50ae8d8677907418d24f7c01b39a35571fb2973b5cdd1a6
   languageName: node
   linkType: hard
 
@@ -11801,6 +11802,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"esbuild-wasm@npm:0.27.3":
+  version: 0.27.3
+  resolution: "esbuild-wasm@npm:0.27.3"
+  bin:
+    esbuild: bin/esbuild
+  checksum: 10/2e6a178ad5b61d782b2540cabbb8191008ae21fdba647b8ff3a98e1932f3769df42f3ae245c16268be85bfa8ae49d64c6d980f85a49deccc48fc4bd1d2dedf2f
+  languageName: node
+  linkType: hard
+
 "esbuild@npm:^0.18.0 || ^0.19.0 || ^0.20.0 || ^0.21.0 || ^0.22.0 || ^0.23.0 || ^0.24.0 || ^0.25.0 || ^0.26.0 || ^0.27.0":
   version: 0.27.7
   resolution: "esbuild@npm:0.27.7"
@@ -12812,9 +12822,9 @@ __metadata:
   linkType: hard
 
 "fast-uri@npm:^3.0.1":
-  version: 3.1.4
-  resolution: "fast-uri@npm:3.1.4"
-  checksum: 10/1c1ff8e7b6f7b38e997b1528aa2c97e290e0173d51250bfe4e11a303e454fc297a287555b5cb2ded59dbfce7876855fb15994a1a6b439f2497a2b8926513e397
+  version: 3.1.5
+  resolution: "fast-uri@npm:3.1.5"
+  checksum: 10/784bef687ca3ecfb4587a05104a4d41101796f0fec72be47a9abed743b10109e69a24d1ad0854ee7d2705912dc2ca9d93e03d35b65df0a3da0339e05b5d83b5c
   languageName: node
   linkType: hard
 
