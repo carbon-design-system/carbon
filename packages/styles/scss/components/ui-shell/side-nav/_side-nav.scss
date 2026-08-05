@@ -155,8 +155,8 @@
   }
 
   @media (any-hover: hover) {
-    .#{$prefix}--side-nav__item:not(.#{$prefix}--side-nav__item--active):hover
-      .#{$prefix}--side-nav__item:not(.#{$prefix}--side-nav__item--active)
+    .#{$prefix}--side-nav__item:not(.#{$prefix}--side-nav__item--active):hover,
+    .#{$prefix}--side-nav__item:not(.#{$prefix}--side-nav__item--active)
       > .#{$prefix}--side-nav__submenu:hover,
     .#{$prefix}--side-nav__item:not(.#{$prefix}--side-nav__item--active)
       > .#{$prefix}--side-nav__link:hover,
@@ -171,7 +171,6 @@
       background-color: $background-hover;
       color: $text-primary;
     }
-
     .#{$prefix}--side-nav__item:not(.#{$prefix}--side-nav__item--active)
       > .#{$prefix}--side-nav__link:hover
       > span,
@@ -262,6 +261,10 @@
   }
 
   @media (any-hover: hover) {
+    .#{$prefix}--side-nav__submenu:hover {
+      background-color: $background-hover;
+      color: $text-primary;
+    }
     .#{$prefix}--side-nav__item--active .#{$prefix}--side-nav__submenu:hover {
       //the active className is used for selected styles, hence using the selected tokens
       background-color: $background-selected;

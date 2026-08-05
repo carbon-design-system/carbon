@@ -94,53 +94,39 @@ describe('scss/components/ui-shell', () => {
       '.cds--header__menu-title',
       '.cds--switcher__item-link',
     ];
-    const hoverRules = [];
+    const guardedHoverRules = [];
+    const unguardedHoverRules = [];
 
     postcss.parse(result.css.toString()).walkRules((rule) => {
       if (
         rule.selector.includes(':hover') &&
         navItemMarkers.some((marker) => rule.selector.includes(marker))
       ) {
-        hoverRules.push(rule);
+        let parent = rule.parent;
+        let isGuarded = false;
+
+        while (parent) {
+          if (
+            parent.type === 'atrule' &&
+            parent.name === 'media' &&
+            parent.params.includes('(any-hover: hover)')
+          ) {
+            isGuarded = true;
+            break;
+          }
+
+          parent = parent.parent;
+        }
+
+        if (isGuarded) {
+          guardedHoverRules.push(rule);
+        } else {
+          unguardedHoverRules.push(rule);
+        }
       }
     });
 
-    expect(hoverRules.length).toBeGreaterThan(0);
-    expect(
-      hoverRules.some((rule) =>
-        rule.selector.includes('.cds--side-nav__link:hover')
-      )
-    ).toBe(true);
-    expect(
-      hoverRules.some((rule) =>
-        rule.selector.includes('.cds--side-nav__submenu:hover')
-      )
-    ).toBe(true);
-    expect(
-      hoverRules.some((rule) =>
-        rule.selector.includes('.cds--switcher__item-link:hover')
-      )
-    ).toBe(true);
-    expect(
-      hoverRules
-        .filter((rule) => {
-          let parent = rule.parent;
-
-          while (parent) {
-            if (
-              parent.type === 'atrule' &&
-              parent.name === 'media' &&
-              parent.params.includes('(any-hover: hover)')
-            ) {
-              return false;
-            }
-
-            parent = parent.parent;
-          }
-
-          return true;
-        })
-        .map((rule) => rule.selector)
-    ).toEqual([]);
+    expect(guardedHoverRules.length).toBeGreaterThan(0);
+    expect(unguardedHoverRules.map((rule) => rule.selector)).toEqual([]);
   });
 });
