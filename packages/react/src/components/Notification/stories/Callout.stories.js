@@ -60,7 +60,7 @@ WithInteractiveElements.args = {
   lowContrast: true,
   statusIconDescription: 'notification',
   title: 'Notification title',
-  titleId: 'my fancy id 123',
+  titleId: 'callout-title-interactive'',
 };
 
 WithInteractiveElements.parameters = {
