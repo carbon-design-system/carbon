@@ -40,7 +40,6 @@ const deprecatedAlignOptions = [
 const defaultArgs = {
   align: 'bottom-start',
   autoAlign: false,
-  defaultOpen: false,
   definition:
     'Uniform Resource Locator; the address of a resource (such as a document or website) on the Internet.',
   openOnHover: true,
@@ -60,9 +59,6 @@ const argTypes = {
     },
   },
   autoAlign: {
-    control: 'boolean',
-  },
-  defaultOpen: {
     control: 'boolean',
   },
   definition: {
@@ -95,18 +91,13 @@ export default {
   ],
 };
 export const Default = (args) => {
-  const { align, alignDeprecated, defaultOpen, ...rest } = args;
+  const { align, alignDeprecated, ...rest } = args;
   const resolvedAlign = alignDeprecated || align;
   return (
     <p>
       Custom domains direct requests for your apps in this Cloud Foundry
       organization to a{' '}
-      <DefinitionTooltip
-        key={defaultOpen ? 'open' : 'closed'}
-        openOnHover
-        align={resolvedAlign}
-        defaultOpen={defaultOpen}
-        {...rest}>
+      <DefinitionTooltip openOnHover align={resolvedAlign} {...rest}>
         URL
       </DefinitionTooltip>{' '}
       that you own. A custom domain can be a shared domain, a shared subdomain,
