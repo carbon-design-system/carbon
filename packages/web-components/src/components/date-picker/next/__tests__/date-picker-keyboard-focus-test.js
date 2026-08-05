@@ -142,7 +142,7 @@ describe('cds-preview-date-picker keyboard navigation – Tab from calendar (Iss
 
     const sentinel = getExitSentinel(picker);
     // Deliver focus to the sentinel directly (simulates the browser completing Tab).
-    sentinel.focus();
+    sentinel.dispatchEvent(new FocusEvent('focus'));
     await picker.updateComplete;
     await new Promise((resolve) => setTimeout(resolve, 0));
 
@@ -184,6 +184,7 @@ describe('cds-preview-date-picker keyboard navigation – Tab from calendar (Iss
     // deliver focus to the now-tabbable sentinel.
     const sentinel = getExitSentinel(picker);
     sentinel.focus();
+    sentinel.dispatchEvent(new FocusEvent('focus'));
 
     // Allow state machine + Lit render cycle to settle.
     await picker.updateComplete;
@@ -287,7 +288,7 @@ describe('cds-preview-date-picker keyboard navigation – Tab from calendar (Iss
       })
     );
     const sentinel = getExitSentinel(picker);
-    sentinel.focus(); // simulates browser Tab delivering focus to sentinel
+    sentinel.dispatchEvent(new FocusEvent('focus')); // simulates browser Tab delivering focus to sentinel
 
     await picker.updateComplete;
     await new Promise((resolve) => setTimeout(resolve, 50));
