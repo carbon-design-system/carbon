@@ -14,6 +14,7 @@ import React, {
 } from 'react';
 import { rem } from '@carbon/layout';
 import { usePrefix } from '../../internal/usePrefix';
+import { useMergedRefs } from '../../internal/useMergedRefs';
 import cx from 'classnames';
 import debounce from '../../internal/debounce';
 
@@ -37,7 +38,7 @@ export interface ResizerProps extends React.HTMLAttributes<HTMLDivElement> {
     event:
       | React.MouseEvent<HTMLDivElement>
       | React.KeyboardEvent<HTMLDivElement>,
-    ref: React.RefObject<HTMLDivElement>
+    ref: React.RefObject<HTMLDivElement | null>
   ) => void;
   /** Called on double-click. When provided the default reset-to-initial-sizes behavior is suppressed. */
   onDoubleClick?: (event: React.MouseEvent<HTMLDivElement>) => void;
@@ -50,15 +51,6 @@ export interface ResizerProps extends React.HTMLAttributes<HTMLDivElement> {
 }
 
 const componentName = 'Resizer';
-
-const getRefElement = <T extends HTMLElement>(
-  ref: React.RefObject<T> | React.ForwardedRef<T>
-): T | null => {
-  if (!ref || !('current' in ref)) {
-    return null;
-  }
-  return ref.current;
-};
 
 export const Resizer = forwardRef<HTMLDivElement, ResizerProps>(
   (
@@ -78,7 +70,7 @@ export const Resizer = forwardRef<HTMLDivElement, ResizerProps>(
     const blockClass = `${prefix}--resizer`;
 
     const internalRef = useRef<HTMLDivElement>(null);
-    const ref = forwardedRef || internalRef;
+    const ref = useMergedRefs([internalRef, forwardedRef]);
     const [isResizing, setIsResizing] = useState(false);
     const startPos = useRef({ x: 0, y: 0 });
     const sizes = useRef({
@@ -92,15 +84,15 @@ export const Resizer = forwardRef<HTMLDivElement, ResizerProps>(
 
     const debouncedResizeEnd = useRef(
       debounce((event) => {
-        const element = getRefElement(ref);
+        const element = internalRef.current;
         if (element && onResizeEnd) {
-          onResizeEnd(event, ref as React.RefObject<HTMLDivElement>);
+          onResizeEnd(event, internalRef);
         }
       }, DEBOUNCE_DELAY)
     );
 
     useEffect(() => {
-      const element = getRefElement(ref);
+      const element = internalRef.current;
       if (!element) {
         return;
       }
@@ -120,11 +112,11 @@ export const Resizer = forwardRef<HTMLDivElement, ResizerProps>(
           ? { width: rect(nextSibling).width, height: rect(nextSibling).height }
           : { width: 0, height: 0 },
       };
-    }, [ref, thickness, orientation]);
+    }, [internalRef, thickness, orientation]);
 
     const updateSizes = useCallback(
       (event, delta: number) => {
-        const element = getRefElement(ref);
+        const element = internalRef.current;
         if (!element) {
           return;
         }
@@ -147,7 +139,7 @@ export const Resizer = forwardRef<HTMLDivElement, ResizerProps>(
             `${sizes.current.nextSiblingSize[prop] - delta}px`;
         }
       },
-      [onResize, orientation, ref]
+      [onResize, orientation, internalRef]
     );
 
     const handleMouseMove = useCallback(
@@ -165,13 +157,13 @@ export const Resizer = forwardRef<HTMLDivElement, ResizerProps>(
 
     const handleMouseUp = useCallback(
       (event) => {
-        const element = getRefElement(ref);
+        const element = internalRef.current;
         if (!element) {
           return;
         }
         setIsResizing(false);
         if (onResizeEnd) {
-          onResizeEnd(event, ref as React.RefObject<HTMLDivElement>);
+          onResizeEnd(event, internalRef as React.RefObject<HTMLDivElement>);
         }
         const prevSibling = element.previousElementSibling as HTMLElement;
         const nextSibling = element.nextElementSibling as HTMLElement;
@@ -182,7 +174,7 @@ export const Resizer = forwardRef<HTMLDivElement, ResizerProps>(
           nextSibling.style.transition = '';
         }
       },
-      [onResizeEnd, ref]
+      [onResizeEnd, internalRef]
     );
 
     useEffect(() => {
@@ -199,7 +191,7 @@ export const Resizer = forwardRef<HTMLDivElement, ResizerProps>(
 
     const handleMouseDown = useCallback(
       (event) => {
-        const element = getRefElement(ref);
+        const element = internalRef.current;
         if (!element || event.button !== 0) {
           return;
         }
@@ -231,7 +223,7 @@ export const Resizer = forwardRef<HTMLDivElement, ResizerProps>(
             : { width: 0, height: 0 },
         };
       },
-      [ref]
+      [internalRef]
     );
 
     const handleKeyDown = useCallback(
@@ -249,7 +241,7 @@ export const Resizer = forwardRef<HTMLDivElement, ResizerProps>(
           return;
         }
 
-        const element = getRefElement(ref);
+        const element = internalRef.current;
         if (!element) {
           return;
         }
@@ -311,12 +303,12 @@ export const Resizer = forwardRef<HTMLDivElement, ResizerProps>(
         updateSizes(event, delta);
         debouncedResizeEnd?.current(event);
       },
-      [orientation, updateSizes, debouncedResizeEnd, ref]
+      [orientation, updateSizes, debouncedResizeEnd, internalRef]
     );
 
     const handleDoubleClick = (event) => {
       event.preventDefault();
-      const element = getRefElement(ref);
+      const element = internalRef.current;
       if (!element) {
         return;
       }

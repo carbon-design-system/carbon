@@ -5,17 +5,13 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { ArrowLeft, Close } from '@carbon/react/icons';
+import { ArrowLeft, Close } from '@carbon/icons-react';
 // Carbon and package components we use.
-import {
-  Button,
-  ButtonProps,
-  Heading,
-  IconButton,
-  Layer,
-  Section,
-} from '@carbon/react';
-import type { PopoverAlignment } from '@carbon/react';
+import Button, { type ButtonProps } from '../Button';
+import { Heading, Section } from '../Heading';
+import { IconButton } from '../IconButton';
+import { Layer } from '../Layer';
+import type { PopoverAlignment } from '../Popover';
 // Import portions of React that are needed.
 import React, {
   ReactNode,
@@ -25,6 +21,7 @@ import React, {
   useRef,
   useState,
 } from 'react';
+import { canUseDOM } from '../../internal/environment';
 import { useFocus, getSpecificElement } from '../../internal/useFocus';
 import { usePreviousValue } from '../../internal/usePreviousValue';
 import { useSidePanelPresence as usePresence } from '../../internal/useSidePanelPresence';
@@ -743,6 +740,7 @@ export const SidePanel = React.forwardRef<HTMLDivElement, SidePanelProps>(
           pageContentElement.style.inlineSize = 'auto';
         } else {
           warning(
+            !selectorPageContent,
             'SidePanel prop `selectorPageContent` was not provided a selector that matches any element on your page. If an element is not found, the panel will render as a slide over.'
           );
         }
@@ -814,7 +812,8 @@ export const SidePanel = React.forwardRef<HTMLDivElement, SidePanelProps>(
         [`${blockClass}--right-placement`]: placement === 'right',
         [`${blockClass}--left-placement`]: placement === 'left',
         [`${blockClass}--slide-in`]: slideIn,
-        [`${blockClass}--resizable`]: resizable && window.innerWidth > 768,
+        [`${blockClass}--resizable`]:
+          resizable && canUseDOM && window.innerWidth > 768,
         [`${blockClass}--has-decorator`]: decorator,
         [`${blockClass}--has-slug`]: slug,
         [`${blockClass}--has-ai-label`]: aiLabel,
@@ -1035,7 +1034,7 @@ export const SidePanel = React.forwardRef<HTMLDivElement, SidePanelProps>(
           onAnimationEnd={onAnimationEnd}
           onAnimationStart={onAnimationStart}
           onKeyDown={handleKeyDown}>
-          {!slideIn && resizable && window.innerWidth > 768 && (
+          {!slideIn && resizable && canUseDOM && window.innerWidth > 768 && (
             <Resizer
               ref={resizerRef}
               orientation="vertical"
