@@ -60,5 +60,8 @@
     "typescript": "^6.0.3",
     "typescript-config-carbon": "workspace:^0.11.0"
   },
-  "sideEffects": false
+  "sideEffects": false,
+  "engines": {
+    "node": ">=22"
+  }
 }
