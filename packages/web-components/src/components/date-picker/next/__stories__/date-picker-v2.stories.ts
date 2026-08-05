@@ -1,22 +1,24 @@
 /**
- * Copyright IBM Corp. 2019, 2025
+ * Copyright IBM Corp. 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
 import { html } from 'lit';
-import { prefix } from '../../globals/settings';
-import { iconLoader } from '../../globals/internal/icon-loader';
-import { INPUT_SIZE } from './defs';
+import { prefix } from '../../../../globals/settings';
+import { iconLoader } from '../../../../globals/internal/icon-loader';
+import { INPUT_SIZE } from '../../defs';
 import View16 from '@carbon/icons/es/view/16.js';
 import FolderOpen16 from '@carbon/icons/es/folder--open/16.js';
 import Folders16 from '@carbon/icons/es/folders/16.js';
-import './date-picker';
-import './date-picker-input-skeleton';
-import '../layer/index';
-import '../ai-label';
-import { withLayers } from '../../../.storybook/decorators/with-layers';
+import '../components/date-picker';
+import '../components/date-picker-input';
+import '../components/date-picker-input-skeleton';
+import '../components/calendar-renderer';
+import '../../../layer/index';
+import '../../../ai-label';
+import { withLayers } from '../../../../../.storybook/decorators/with-layers';
 
 const sizes = {
   [`Small (${INPUT_SIZE.SMALL})`]: INPUT_SIZE.SMALL,
@@ -27,38 +29,33 @@ const sizes = {
 const defaultArgs = {
   dateFormat: 'm/d/Y',
   disabled: false,
-  allowInput: true,
-  closeOnSelect: true,
+  locale: 'en',
   minDate: '',
   maxDate: '',
   readonly: false,
   short: false,
   helperText: '',
   invalid: false,
-  invalidText: 'Error message goes here',
-  warnText: 'Warning message goes here',
+  invalidText: '',
   warn: false,
+  warnText: '',
   placeholder: 'mm/dd/yyyy',
   size: INPUT_SIZE.MEDIUM,
 };
 
 const controls = {
-  allowInput: {
-    control: 'boolean',
-    description:
-      'Flatpickr prop passthrough enables direct date input, and when set to false, we must clear dates manually by resetting the value prop to empty string making it a controlled input.',
-  },
-  closeOnSelect: {
-    control: 'boolean',
-    description:
-      'Flatpickr prop passthrough. Controls whether the calendar dropdown closes upon selection.',
-  },
   dateFormat: {
     control: 'text',
-    description: 'The date format.',
+    description: 'The date format (e.g., m/d/Y, Y-m-d).',
   },
-  disabled: { control: 'boolean' },
-  helperText: { control: 'text' },
+  disabled: {
+    control: 'boolean',
+    description: 'Specify whether the date picker should be disabled.',
+  },
+  helperText: {
+    control: 'text',
+    description: 'Helper text to display below the input.',
+  },
   invalid: {
     control: 'boolean',
     description: 'Specify if the currently value is invalid.',
@@ -67,25 +64,39 @@ const controls = {
     control: 'text',
     description: 'Message which is displayed if the value is invalid.',
   },
+  locale: {
+    control: 'text',
+    description:
+      'BCP 47 locale tag used to localize the calendar month and weekday labels. Open the calendar to see the effect.',
+  },
   maxDate: {
     control: 'text',
-    description: 'The maximum date that a user can pick to.',
+    description:
+      'The maximum date that a user can pick to (mm/dd/yyyy format).',
   },
   minDate: {
     control: 'text',
-    description: 'The minimum date that a user can start picking from.',
+    description:
+      'The minimum date that a user can start picking from (mm/dd/yyyy format).',
   },
-  placeholder: { control: 'text' },
+  placeholder: {
+    control: 'text',
+    description: 'Placeholder text for the input field.',
+  },
   readonly: {
     control: 'boolean',
     description:
-      'Whether the DatePicker is to be readOnly if boolean applies to all inputs if array applies to each input in order.',
+      'Whether the DatePicker is to be readOnly. If boolean, applies to all inputs; if array, applies to each input in order.',
   },
   short: {
     control: 'boolean',
     description: '<code>true</code> to use the short version.',
   },
-  size: { control: 'select', options: sizes },
+  size: {
+    control: 'select',
+    options: sizes,
+    description: 'Specify the size of the input.',
+  },
   warn: {
     control: 'boolean',
     description: 'Specify whether the control is currently in warning state.',
@@ -96,7 +107,7 @@ const controls = {
       'Provide the text that is displayed when the control is in warning state.',
   },
   onChange: {
-    action: `${prefix}-date-picker-changed`,
+    action: `${prefix}-preview-date-picker-changed`,
   },
   onInput: {
     action: 'input',
@@ -104,7 +115,11 @@ const controls = {
 };
 
 export const Default = {
-  args: { ...defaultArgs, kind: 'single' },
+  args: {
+    ...defaultArgs,
+    kind: 'single',
+    dateFormat: 'm/d/Y',
+  },
   argTypes: {
     ...controls,
     kind: {
@@ -125,13 +140,12 @@ export const Default = {
     },
   },
   render: ({
-    allowInput,
-    closeOnSelect,
     dateFormat,
     disabled,
     invalid,
     invalidText,
     kind,
+    locale,
     maxDate,
     minDate,
     placeholder,
@@ -141,15 +155,14 @@ export const Default = {
     warnText,
   }) => {
     return html`
-      <cds-date-picker
-        allow-input="${allowInput}"
-        close-on-select="${closeOnSelect}"
+      <cds-preview-date-picker
         date-format="${dateFormat}"
         ?disabled="${disabled}"
+        locale="${locale}"
         max-date="${maxDate}"
         min-date="${minDate}"
         ?readonly="${readonly}">
-        <cds-date-picker-input
+        <cds-preview-date-picker-input
           kind="${kind === 'range' ? 'from' : kind}"
           label-text="Date Picker label"
           placeholder="${placeholder}"
@@ -158,10 +171,10 @@ export const Default = {
           invalid-text="${invalidText}"
           ?warn="${warn}"
           warn-text="${warnText}">
-        </cds-date-picker-input>
+        </cds-preview-date-picker-input>
         ${kind === 'range'
           ? html`
-              <cds-date-picker-input
+              <cds-preview-date-picker-input
                 kind="to"
                 label-text="End date"
                 placeholder="${placeholder}"
@@ -170,10 +183,10 @@ export const Default = {
                 invalid-text="${invalidText}"
                 ?warn="${warn}"
                 warn-text="${warnText}">
-              </cds-date-picker-input>
+              </cds-preview-date-picker-input>
             `
           : null}
-      </cds-date-picker>
+      </cds-preview-date-picker>
     `;
   },
 };
@@ -182,12 +195,11 @@ export const RangeWithCalendar = {
   args: defaultArgs,
   argTypes: controls,
   render: ({
-    allowInput,
-    closeOnSelect,
     dateFormat,
     disabled,
     invalid,
     invalidText,
+    locale,
     maxDate,
     minDate,
     placeholder,
@@ -197,15 +209,14 @@ export const RangeWithCalendar = {
     warnText,
   }) => {
     return html`
-      <cds-date-picker
-        allow-input="${allowInput}"
-        close-on-select="${closeOnSelect}"
+      <cds-preview-date-picker
         date-format="${dateFormat}"
         ?disabled="${disabled}"
+        locale="${locale}"
         max-date="${maxDate}"
         min-date="${minDate}"
         ?readonly="${readonly}">
-        <cds-date-picker-input
+        <cds-preview-date-picker-input
           kind="from"
           label-text="Start date"
           placeholder="${placeholder}"
@@ -214,8 +225,8 @@ export const RangeWithCalendar = {
           invalid-text="${invalidText}"
           ?warn="${warn}"
           warn-text="${warnText}">
-        </cds-date-picker-input>
-        <cds-date-picker-input
+        </cds-preview-date-picker-input>
+        <cds-preview-date-picker-input
           kind="to"
           label-text="End date"
           placeholder="${placeholder}"
@@ -224,26 +235,22 @@ export const RangeWithCalendar = {
           invalid-text="${invalidText}"
           ?warn="${warn}"
           warn-text="${warnText}">
-        </cds-date-picker-input>
-      </cds-date-picker>
+        </cds-preview-date-picker-input>
+      </cds-preview-date-picker>
     `;
   },
 };
 
 export const RangeWithCalendarWithLayer = {
   decorators: [withLayers],
-  parameters: {
-    layout: 'fullscreen',
-  },
   args: defaultArgs,
   argTypes: controls,
   render: ({
-    allowInput,
-    closeOnSelect,
     dateFormat,
     disabled,
     invalid,
     invalidText,
+    locale,
     maxDate,
     minDate,
     placeholder,
@@ -253,15 +260,14 @@ export const RangeWithCalendarWithLayer = {
     warnText,
   }) => {
     return html`
-      <cds-date-picker
-        allow-input="${allowInput}"
-        close-on-select="${closeOnSelect}"
+      <cds-preview-date-picker
         date-format="${dateFormat}"
         ?disabled="${disabled}"
+        locale="${locale}"
         max-date="${maxDate}"
         min-date="${minDate}"
         ?readonly="${readonly}">
-        <cds-date-picker-input
+        <cds-preview-date-picker-input
           kind="from"
           label-text="Start date"
           placeholder="${placeholder}"
@@ -270,8 +276,8 @@ export const RangeWithCalendarWithLayer = {
           invalid-text="${invalidText}"
           ?warn="${warn}"
           warn-text="${warnText}">
-        </cds-date-picker-input>
-        <cds-date-picker-input
+        </cds-preview-date-picker-input>
+        <cds-preview-date-picker-input
           kind="to"
           label-text="End date"
           placeholder="${placeholder}"
@@ -280,8 +286,8 @@ export const RangeWithCalendarWithLayer = {
           invalid-text="${invalidText}"
           ?warn="${warn}"
           warn-text="${warnText}">
-        </cds-date-picker-input>
-      </cds-date-picker>
+        </cds-preview-date-picker-input>
+      </cds-preview-date-picker>
     `;
   },
 };
@@ -290,12 +296,11 @@ export const Simple = {
   args: defaultArgs,
   argTypes: controls,
   render: ({
-    allowInput,
-    closeOnSelect,
     dateFormat,
     disabled,
     invalid,
     invalidText,
+    locale,
     maxDate,
     minDate,
     placeholder,
@@ -305,13 +310,12 @@ export const Simple = {
     warnText,
   }) => {
     return html`
-      <cds-date-picker
-        allow-input="${allowInput}"
-        close-on-select="${closeOnSelect}"
+      <cds-preview-date-picker
         date-format="${dateFormat}"
+        locale="${locale}"
         max-date="${maxDate}"
         min-date="${minDate}">
-        <cds-date-picker-input
+        <cds-preview-date-picker-input
           ?disabled="${disabled}"
           label-text="Date Picker label"
           placeholder="${placeholder}"
@@ -321,26 +325,22 @@ export const Simple = {
           invalid-text="${invalidText}"
           ?warn="${warn}"
           warn-text="${warnText}">
-        </cds-date-picker-input>
-      </cds-date-picker>
+        </cds-preview-date-picker-input>
+      </cds-preview-date-picker>
     `;
   },
 };
 
 export const SimpleWithLayer = {
   decorators: [withLayers],
-  parameters: {
-    layout: 'fullscreen',
-  },
   args: defaultArgs,
   argTypes: controls,
   render: ({
-    allowInput,
-    closeOnSelect,
     dateFormat,
     disabled,
     invalid,
     invalidText,
+    locale,
     maxDate,
     minDate,
     placeholder,
@@ -350,13 +350,12 @@ export const SimpleWithLayer = {
     warnText,
   }) => {
     return html`
-      <cds-date-picker
-        allow-input="${allowInput}"
-        close-on-select="${closeOnSelect}"
+      <cds-preview-date-picker
         date-format="${dateFormat}"
+        locale="${locale}"
         max-date="${maxDate}"
         min-date="${minDate}">
-        <cds-date-picker-input
+        <cds-preview-date-picker-input
           ?disabled="${disabled}"
           label-text="Date Picker label"
           placeholder="${placeholder}"
@@ -366,8 +365,8 @@ export const SimpleWithLayer = {
           invalid-text="${invalidText}"
           ?warn="${warn}"
           warn-text="${warnText}">
-        </cds-date-picker-input>
-      </cds-date-picker>
+        </cds-preview-date-picker-input>
+      </cds-preview-date-picker>
     `;
   },
 };
@@ -376,12 +375,11 @@ export const SingleWithCalendar = {
   args: defaultArgs,
   argTypes: controls,
   render: ({
-    allowInput,
-    closeOnSelect,
     dateFormat,
     disabled,
     invalid,
     invalidText,
+    locale,
     maxDate,
     minDate,
     placeholder,
@@ -391,15 +389,14 @@ export const SingleWithCalendar = {
     warnText,
   }) => {
     return html`
-      <cds-date-picker
-        allow-input="${allowInput}"
-        close-on-select="${closeOnSelect}"
+      <cds-preview-date-picker
         date-format="${dateFormat}"
         ?disabled="${disabled}"
+        locale="${locale}"
         max-date="${maxDate}"
         min-date="${minDate}"
         ?readonly="${readonly}">
-        <cds-date-picker-input
+        <cds-preview-date-picker-input
           kind="single"
           label-text="Date Picker label"
           placeholder="${placeholder}"
@@ -408,26 +405,22 @@ export const SingleWithCalendar = {
           invalid-text="${invalidText}"
           ?warn="${warn}"
           warn-text="${warnText}">
-        </cds-date-picker-input>
-      </cds-date-picker>
+        </cds-preview-date-picker-input>
+      </cds-preview-date-picker>
     `;
   },
 };
 
 export const SingleWithCalendarWithLayer = {
   decorators: [withLayers],
-  parameters: {
-    layout: 'fullscreen',
-  },
   args: defaultArgs,
   argTypes: controls,
   render: ({
-    allowInput,
-    closeOnSelect,
     disabled,
     dateFormat,
     invalid,
     invalidText,
+    locale,
     maxDate,
     minDate,
     placeholder,
@@ -437,15 +430,14 @@ export const SingleWithCalendarWithLayer = {
     warnText,
   }) => {
     return html`
-      <cds-date-picker
-        allow-input="${allowInput}"
-        close-on-select="${closeOnSelect}"
+      <cds-preview-date-picker
         date-format="${dateFormat}"
         ?disabled="${disabled}"
+        locale="${locale}"
         max-date="${maxDate}"
         min-date="${minDate}"
         ?readonly="${readonly}">
-        <cds-date-picker-input
+        <cds-preview-date-picker-input
           kind="single"
           label-text="Date Picker label"
           placeholder="${placeholder}"
@@ -454,8 +446,8 @@ export const SingleWithCalendarWithLayer = {
           invalid-text="${invalidText}"
           ?warn="${warn}"
           warn-text="${warnText}">
-        </cds-date-picker-input>
-      </cds-date-picker>
+        </cds-preview-date-picker-input>
+      </cds-preview-date-picker>
     `;
   },
 };
@@ -475,12 +467,17 @@ export const Skeleton = {
   args: { hideLabel: false, range: true },
   argTypes: skeletonControls,
   render: ({ hideLabel, range }) => html`
-    <cds-date-picker-input-skeleton
+    <cds-preview-date-picker-input-skeleton
       ?hide-label="${hideLabel}"
       ?range="${range}">
-    </cds-date-picker-input-skeleton>
+    </cds-preview-date-picker-input-skeleton>
   `,
   decorators: [(story) => html` <div>${story()}</div> `],
+  parameters: {
+    percy: {
+      skip: true,
+    },
+  },
 };
 
 const content = html`
@@ -518,12 +515,11 @@ export const WithAILabel = {
   args: defaultArgs,
   argTypes: controls,
   render: ({
-    allowInput,
-    closeOnSelect,
     dateFormat,
     disabled,
     invalid,
     invalidText,
+    locale,
     maxDate,
     minDate,
     placeholder,
@@ -533,15 +529,14 @@ export const WithAILabel = {
     warnText,
   }) => {
     return html`
-      <cds-date-picker
-        allow-input="${allowInput}"
-        close-on-select="${closeOnSelect}"
+      <cds-preview-date-picker
         date-format="${dateFormat}"
         ?disabled="${disabled}"
+        locale="${locale}"
         max-date="${maxDate}"
         min-date="${minDate}"
         ?readonly="${readonly}">
-        <cds-date-picker-input
+        <cds-preview-date-picker-input
           kind="single"
           label-text="Date Picker label"
           placeholder="${placeholder}"
@@ -553,14 +548,14 @@ export const WithAILabel = {
           <cds-ai-label alignment="bottom-left">
             ${content}${actions}</cds-ai-label
           >
-        </cds-date-picker-input>
-      </cds-date-picker>
+        </cds-preview-date-picker-input>
+      </cds-preview-date-picker>
     `;
   },
 };
 
 const meta = {
-  title: 'Components/Date picker',
+  title: 'Preview/Date Picker',
   parameters: {
     docs: {
       controls: { exclude: ['calendar'] },
