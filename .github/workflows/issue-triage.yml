@@ -23,9 +23,12 @@ permissions:
 
 concurrency:
   # Label mutations emit more issue events. Serialize by issue so idempotent
-  # plugins see the result of earlier runs instead of racing one another.
+  # plugins see the result of earlier runs instead of racing one another. Keep
+  # every pending delivery because GitHub otherwise replaces an older pending
+  # opened/typed/labeled run when another event arrives for the same issue.
   group: issue-triage-${{ github.event.issue.number || github.run_id }}
   cancel-in-progress: false
+  queue: max
 
 jobs:
   label-issues:
@@ -84,14 +87,25 @@ jobs:
           client-id: ${{ secrets.CARBON_AUTOMATION_APP_CLIENT_ID }}
           private-key: ${{ secrets.APP_PRIVATE_KEY }}
       - name: Generate Bob Automation token
-        # This token is passed only to the Bob triage plugin, which uses it to
-        # create or update Bob's single managed output comment.
+        # Only formal Bug events eligible for Bob need this separate identity.
+        # A token failure must not prevent Carbon-backed metadata plugins from
+        # running; the action will still report Bob's missing token afterward.
+        if:
+          github.event.issue.type.name == 'Bug' && (github.event.action ==
+          'opened' || github.event.action == 'typed')
+        continue-on-error: true
         uses: actions/create-github-app-token@bcd2ba49218906704ab6c1aa796996da409d3eb1 # v3.2.0
         id: generate_bob_token
         with:
           client-id: ${{ secrets.BOB_AUTOMATION_APP_CLIENT_ID }}
           private-key: ${{ secrets.BOB_AUTOMATION_APP_PRIVATE_KEY }}
           permission-issues: write
+      - name: Log unavailable Bob Automation token
+        # Make the recovery path obvious in the job log without exposing secret
+        # values. Independent plugins continue under Carbon Automation.
+        if: steps.generate_bob_token.outcome == 'failure'
+        run: |
+          echo "::warning::Bob Automation token creation failed. Carbon-backed issue triage will continue, then the eligible Bob plugin will report its missing dedicated token."
       - name: Run issue triage plugins
         uses: carbon-design-system/carbon/actions/issues@main
         with:
