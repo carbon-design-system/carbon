@@ -183,7 +183,6 @@ describe('cds-preview-date-picker keyboard navigation – Tab from calendar (Iss
     // browser's native Tab focus traversal.  Simulate what the browser would do:
     // deliver focus to the now-tabbable sentinel.
     const sentinel = getExitSentinel(picker);
-    sentinel.focus();
     sentinel.dispatchEvent(new FocusEvent('focus'));
 
     // Allow state machine + Lit render cycle to settle.
