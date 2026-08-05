@@ -82,7 +82,7 @@ async function carbonScssTokensFormat() {
   ]);
 
   const { code } = generate(stylesheet);
-  return FILE_BANNER + '\n' + code;
+  return FILE_BANNER + '\n' + (await code);
 }
 
 module.exports = {
