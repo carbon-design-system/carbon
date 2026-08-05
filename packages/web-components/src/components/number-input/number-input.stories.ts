@@ -208,76 +208,79 @@ const argTypes = {
   },
 };
 
+const storyParameters = {
+  controls: {
+    exclude: ['onInput'],
+  },
+};
+
+const renderNumberInput = (args, { children = '', id, validate } = {}) => {
+  const {
+    allowEmpty,
+    decrementButtonDescription,
+    incrementButtonDescription,
+    disabled,
+    helperText,
+    hideLabel,
+    hideSteppers,
+    invalid,
+    invalidText,
+    label,
+    readOnly,
+    warn,
+    warnText,
+    value,
+    min,
+    max,
+    size,
+    step,
+    type,
+    locale,
+    inputMode,
+    stepStartValue,
+    disableWheel,
+    onInput,
+  } = args ?? {};
+
+  return html`
+    <cds-number-input
+      id="${ifDefined(id)}"
+      ?allow-empty="${allowEmpty}"
+      decrement-button-assistive-text="${ifDefined(decrementButtonDescription)}"
+      increment-button-assistive-text="${ifDefined(incrementButtonDescription)}"
+      helper-text="${ifDefined(helperText)}"
+      ?hide-steppers="${hideSteppers}"
+      ?hide-label="${hideLabel}"
+      ?invalid="${invalid}"
+      invalid-text="${ifDefined(invalidText)}"
+      label="${ifDefined(label)}"
+      ?readonly="${readOnly}"
+      value="${ifDefined(value)}"
+      ?warn="${warn}"
+      warn-text="${ifDefined(warnText)}"
+      ?disabled="${disabled}"
+      min="${ifDefined(min)}"
+      max="${ifDefined(max)}"
+      size="${ifDefined(size)}"
+      step="${ifDefined(step)}"
+      type="${ifDefined(type)}"
+      locale="${ifDefined(locale)}"
+      input-mode="${ifDefined(inputMode)}"
+      step-start-value="${ifDefined(stepStartValue)}"
+      ?disable-wheel="${disableWheel}"
+      .validate="${validate}"
+      @cds-number-input="${onInput}">
+      ${children}
+    </cds-number-input>
+  `;
+};
+
 export const Default = {
   args,
   argTypes,
-  parameters: {
-    controls: {
-      exclude: ['onInput'],
-    },
-  },
-  render: (args) => {
-    const {
-      allowEmpty,
-      decrementButtonDescription,
-      incrementButtonDescription,
-      disabled,
-      helperText,
-      hideLabel,
-      hideSteppers,
-      invalid,
-      invalidText,
-      label,
-      readOnly,
-      warn,
-      warnText,
-      value,
-      min,
-      max,
-      size,
-      step,
-      type,
-      locale,
-      inputMode,
-      stepStartValue,
-      disableWheel,
-      onInput,
-    } = args ?? {};
-    return html`
-      <cds-form-item>
-        <cds-number-input
-          ?allow-empty="${allowEmpty}"
-          decrement-button-assistive-text="${ifDefined(
-            decrementButtonDescription
-          )}"
-          increment-button-assistive-text="${ifDefined(
-            incrementButtonDescription
-          )}"
-          helper-text="${ifDefined(helperText)}"
-          ?hide-steppers="${hideSteppers}"
-          ?hide-label="${hideLabel}"
-          ?invalid="${invalid}"
-          invalid-text="${ifDefined(invalidText)}"
-          label="${ifDefined(label)}"
-          ?readonly="${readOnly}"
-          value="${ifDefined(value)}"
-          ?warn="${warn}"
-          warn-text="${ifDefined(warnText)}"
-          ?disabled="${disabled}"
-          min="${ifDefined(min)}"
-          max="${ifDefined(max)}"
-          size="${ifDefined(size)}"
-          step="${ifDefined(step)}"
-          type="${ifDefined(type)}"
-          locale="${ifDefined(locale)}"
-          input-mode="${ifDefined(inputMode)}"
-          step-start-value="${ifDefined(stepStartValue)}"
-          ?disable-wheel="${disableWheel}"
-          @cds-number-input="${onInput}">
-        </cds-number-input>
-      </cds-form-item>
-    `;
-  },
+  parameters: storyParameters,
+  render: (args) =>
+    html`<cds-form-item>${renderNumberInput(args)}</cds-form-item>`,
 };
 
 export const Skeleton = {
@@ -318,33 +321,42 @@ export const Skeleton = {
 };
 
 export const WithAILabel = {
+  args: {
+    ...args,
+    helperText: 'Optional helper text.',
+    invalidText: 'Number is not valid',
+    max: reusableProps.max,
+    min: reusableProps.min,
+  },
   argTypes,
-  render: (args) => {
-    const { onInput } = args ?? {};
-    return html`
-      <div style="width: 400px">
-        <cds-number-input
-          value="50"
-          min="${reusableProps.min}"
-          max="${reusableProps.max}"
-          step="1"
-          label="NumberInput label"
-          helper-text="Optional helper text."
-          invalid-text="Number is not valid"
-          @cds-number-input="${onInput}">
+  parameters: storyParameters,
+  render: (args) => html`
+    <div style="width: 400px">
+      ${renderNumberInput(args, {
+        children: html`
           <cds-ai-label alignment="bottom-left">
             ${content}${actions}
           </cds-ai-label>
-        </cds-number-input>
-      </div>
-    `;
-  },
+        `,
+      })}
+    </div>
+  `,
 };
 
 export const WithTypeOfCustomValidation = {
+  args: {
+    ...args,
+    allowEmpty: true,
+    helperText: 'Optional helper text. Uses en-US formatting.',
+    invalidText: `Number is not valid. Must be between ${reusableProps.min} and ${reusableProps.max}`,
+    max: reusableProps.max,
+    min: reusableProps.min,
+    type: 'text',
+    value: '',
+  },
   argTypes,
-  render: (args, { globals: { locale } }) => {
-    const { onInput } = args ?? {};
+  parameters: storyParameters,
+  render: (args) => {
     // Custom user-passed validator
     const validateNumberSeparators = (
       input: string,
@@ -454,21 +466,10 @@ export const WithTypeOfCustomValidation = {
 
     return html`
       <cds-form-item>
-        <cds-number-input
-          id="custom-validation-number-input"
-          type="text"
-          input-mode="decimal"
-          allow-empty
-          min="${reusableProps.min}"
-          invalid-text="Number is not valid. Must be between ${reusableProps.min} and ${reusableProps.max}"
-          max="${reusableProps.max}"
-          step="1"
-          locale="${locale}"
-          label="NumberInput label"
-          helper-text="Optional helper text. Uses ${locale} formatting."
-          .validate="${validateNumberSeparators}"
-          @cds-number-input="${onInput}">
-        </cds-number-input>
+        ${renderNumberInput(args, {
+          id: 'custom-validation-number-input',
+          validate: validateNumberSeparators,
+        })}
       </cds-form-item>
       <button
         @click="${() => {
@@ -486,49 +487,37 @@ export const WithTypeOfCustomValidation = {
 };
 
 export const WithTypeOfText = {
-  argTypes,
-  render: (args, { globals: { locale } }) => {
-    const { onInput } = args ?? {};
-    return html`
-      <cds-form-item>
-        <cds-number-input
-          type="text"
-          input-mode="decimal"
-          allow-empty
-          default-value="50"
-          min="${reusableProps.min}"
-          max="${reusableProps.max}"
-          step="1"
-          locale="${locale}"
-          label="NumberInput label"
-          invalid-text="Number is not valid. Must be between ${reusableProps.min} and ${reusableProps.max}"
-          helper-text="Optional helper text. Uses ${locale} formatting."
-          @cds-number-input="${onInput}">
-        </cds-number-input>
-      </cds-form-item>
-    `;
+  args: {
+    ...args,
+    allowEmpty: true,
+    helperText: 'Optional helper text. Uses en-US formatting.',
+    invalidText: `Number is not valid. Must be between ${reusableProps.min} and ${reusableProps.max}`,
+    max: reusableProps.max,
+    min: reusableProps.min,
+    type: 'text',
   },
+  argTypes,
+  parameters: storyParameters,
+  render: (args) =>
+    html`<cds-form-item>${renderNumberInput(args)}</cds-form-item>`,
 };
 
 export const WithTypeOfTextControlled = {
+  args: {
+    ...args,
+    allowEmpty: true,
+    helperText: 'Optional helper text. Uses en-US formatting.',
+    max: reusableProps.max,
+    min: 0,
+    type: 'text',
+    value: '',
+  },
   argTypes,
-  render: (args, { globals: { locale } }) => {
-    const { onInput } = args ?? {};
+  parameters: storyParameters,
+  render: (args) => {
     return html`
       <cds-form-item>
-        <cds-number-input
-          id="controlled-number-input"
-          type="text"
-          input-mode="decimal"
-          allow-empty
-          min="0"
-          max="100000000"
-          step="1"
-          locale="${locale}"
-          label="NumberInput label"
-          helper-text="Optional helper text. Uses ${locale} formatting."
-          @cds-number-input="${onInput}">
-        </cds-number-input>
+        ${renderNumberInput(args, { id: 'controlled-number-input' })}
       </cds-form-item>
       <button
         @click="${() => {
