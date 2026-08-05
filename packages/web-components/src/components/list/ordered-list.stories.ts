@@ -55,6 +55,16 @@ export const Default = {
 
 export const NativeListStyles = {
   args: { native: true, nested: true },
+  argTypes: {
+    native: {
+      ...controls.native,
+      control: false,
+    },
+    nested: {
+      ...controls.nested,
+      control: false,
+    },
+  },
   render: ({ isExpressive, native, nested }) =>
     html`<cds-ordered-list ?is-expressive="${isExpressive}" ?native="${native}">
       <cds-list-item>Ordered List level 1</cds-list-item>
@@ -85,6 +95,12 @@ export const NativeListStyles = {
 
 export const Nested = {
   args: { nested: true },
+  argTypes: {
+    nested: {
+      ...controls.nested,
+      control: false,
+    },
+  },
   render: ({ isExpressive, native, nested }) =>
     html`<cds-ordered-list ?is-expressive="${isExpressive}" ?native="${native}">
       <cds-list-item>

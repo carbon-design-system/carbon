@@ -93,6 +93,12 @@ Nested.args = {
   nested: true,
 };
 
+Nested.argTypes = {
+  nested: {
+    control: false,
+  },
+};
+
 export const NativeListStyles = ({ nested, ...listArgs }) => {
   return (
     <OrderedList {...listArgs}>
@@ -123,4 +129,13 @@ export const NativeListStyles = ({ nested, ...listArgs }) => {
 NativeListStyles.args = {
   native: true,
   nested: true,
+};
+
+NativeListStyles.argTypes = {
+  native: {
+    control: false,
+  },
+  nested: {
+    control: false,
+  },
 };
