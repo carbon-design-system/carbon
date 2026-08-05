@@ -1,11 +1,19 @@
 //
-// Copyright IBM Corp. 2018, 2023
+// Copyright IBM Corp. 2018, 2026
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
 //
 
+@use 'sass:color';
+@use 'sass:map';
+@use 'sass:math';
+@use 'sass:meta';
+@use 'sass:string';
 @use '../config';
+// Hex fallback map — resolves oklch Sass colors to #rrggbb / rgba() strings.
+// Used by get-var() so the var() inline fallback is always browser-safe.
+@use '@carbon/themes/scss/generated/hex-fallbacks' as hex-fb;
 
 // Some CSS Custom Property terminology
 // @see https://www.w3.org/TR/css-variables-1/
@@ -35,13 +43,59 @@
   @return --#{config.$prefix}-#{$name};
 }
 
-/// Get the var() representation for a given token
+/// Convert an oklch Sass color to its sRGB hex or rgba() equivalent.
+///
+/// When an oklch value is used as the inline fallback in a var() call,
+/// browsers that predate CSS Color Level 4 (Chrome < 111, Firefox < 113,
+/// Safari < 15.4) cannot parse oklch() and silently drop the entire property.
+/// This function converts oklch colors to hex/rgba at Sass compile time so
+/// every var() fallback is always readable by every browser.
+///
+/// Non-oklch values (hex strings, rgb(), named colors) are returned unchanged.
+///
+/// @param {Color|any} $value
+/// @returns {String|any}
+/// @access private
+@function -oklch-fallback($value) {
+  @if meta.type-of($value) != color or color.space($value) != oklch {
+    @return $value;
+  }
+
+  $l: math.div(color.channel($value, 'lightness', $space: oklch), 100%);
+  $c: color.channel($value, 'chroma', $space: oklch);
+  $h: math.div(color.channel($value, 'hue', $space: oklch), 1deg);
+  $alpha: color.channel($value, 'alpha');
+
+  // Round to 4dp — matches keys written by generate-hex-fallbacks.js.
+  $l-r: math.div(math.round($l * 10000), 10000);
+  $c-r: math.div(math.round($c * 10000), 10000);
+  $h-r: math.div(math.round($h * 10000), 10000);
+  $key: 'oklch(#{$l-r} #{$c-r} #{$h-r})';
+
+  @if not map.has-key(hex-fb.$oklch-to-hex, $key) {
+    @return $value;
+  }
+
+  $hex: map.get(hex-fb.$oklch-to-hex, $key);
+
+  @if $alpha < 1 {
+    @return string.unquote('rgba(#{$hex}, #{$alpha})');
+  }
+
+  @return string.unquote($hex);
+}
+
+/// Get the var() representation for a given token.
+/// The inline fallback is always a sRGB hex or rgba() value — never oklch() —
+/// so browsers that don't support CSS Color Level 4 receive a valid colour
+/// even when the custom property is not defined on any ancestor.
 /// @param {String} $name
 /// @param {Any} $fallback
 /// @returns var()
 @function get-var($name, $fallback: false) {
   @if $fallback {
-    @return var(--#{config.$prefix}-#{$name}, #{$fallback});
+    $safe: -oklch-fallback($fallback);
+    @return var(--#{config.$prefix}-#{$name}, #{$safe});
   }
   @return var(--#{config.$prefix}-#{$name});
 }

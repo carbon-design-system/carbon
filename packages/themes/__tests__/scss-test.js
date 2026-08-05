@@ -158,6 +158,9 @@ describe('@carbon/themes/scss', () => {
 
         $_: get('background', themes.$background);
       `);
+      // The inline var() fallback is now always a sRGB hex value, never oklch().
+      // This ensures browsers without CSS Color Level 4 support receive a valid
+      // colour when the custom property is not defined on any ancestor.
       expect(unwrap('background')).toEqual('var(--test-background, #ffffff)');
     });
   });

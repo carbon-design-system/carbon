@@ -104,7 +104,7 @@
     &:disabled,
     &.#{$prefix}--pagination-nav__page--disabled {
       background: none;
-      color: rgba($text-secondary, 0.5);
+      color: color-mix(in oklch, #{$text-secondary} 50%, transparent);
       outline: none;
       pointer-events: none;
     }

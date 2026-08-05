@@ -1,14 +1,18 @@
 //
-// Copyright IBM Corp. 2018, 2023
+// Copyright IBM Corp. 2018, 2026
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
 //
 
+@use 'sass:color';
 @use 'sass:map';
+@use 'sass:math';
 @use 'sass:meta';
+@use 'sass:string';
 @use 'config';
 @use 'themes';
+@use 'generated/hex-fallbacks' as hex-fb;
 
 /// Specify the fallback theme, used as a catch-all for tokens that you may not
 /// have defined in your custom theme
@@ -115,6 +119,59 @@ $-component-tokens: ();
       }
     }
   } @else {
-    --#{config.$prefix}-#{$name}: #{$value};
+    // When $enable-oklch-fallback is true and the token is a native Sass color
+    // in the oklch color space, emit a sRGB hex/rgba fallback first so browsers
+    // that predate CSS Color Level 4 still receive a usable value.
+    //
+    // Sass parses every oklch() map value as a native color object — so we use
+    // color.space() to detect it rather than string matching (which would fail
+    // because Sass normalises oklch(1 0 0) to oklch(100% 0 0deg) during
+    // interpolation, making the raw CSS string unpredictable).
+    //
+    // The cascade ensures:
+    //   - Old browser:    reads hex/rgba, ignores the unknown oklch() line ✓
+    //   - Modern browser: reads hex/rgba, then overrides with oklch()     ✓
+    @if config.$enable-oklch-fallback and
+      meta.type-of($value) ==
+      color and
+      color.space($value) ==
+      oklch
+    {
+      // Extract the 0–1 L, raw C, and degree-less H from the color object.
+      // math.div(…, 1%) converts "55.65%" → 0.5565.
+      // math.div(…, 1deg) converts "261.95deg" → 261.95.
+      $l: math.div(color.channel($value, 'lightness', $space: oklch), 100%);
+      $c: color.channel($value, 'chroma', $space: oklch);
+      $h: math.div(color.channel($value, 'hue', $space: oklch), 1deg);
+      $alpha: color.channel($value, 'alpha');
+
+      // Round to 4 dp — mirrors formatOklch() in dtcg-converter.js so the
+      // lookup key matches what generate-hex-fallbacks.js wrote into the map.
+      $l-r: math.div(math.round($l * 10000), 10000);
+      $c-r: math.div(math.round($c * 10000), 10000);
+      $h-r: math.div(math.round($h * 10000), 10000);
+
+      $solid-key: 'oklch(#{$l-r} #{$c-r} #{$h-r})';
+
+      @if $alpha < 1 {
+        // ── Semi-transparent token: emit rgba() fallback ─────────────────
+        @if map.has-key(hex-fb.$oklch-to-hex, $solid-key) {
+          $hex: map.get(hex-fb.$oklch-to-hex, $solid-key);
+          --#{config.$prefix}-#{$name}: rgba(#{$hex}, #{$alpha});
+        }
+      } @else {
+        // ── Fully opaque token: emit hex fallback ─────────────────────────
+        @if map.has-key(hex-fb.$oklch-to-hex, $solid-key) {
+          --#{config.$prefix}-#{$name}: #{map.get(
+              hex-fb.$oklch-to-hex,
+              $solid-key
+            )};
+        }
+      }
+      // Always follow with the original oklch() — modern browsers use this.
+      --#{config.$prefix}-#{$name}: #{$value};
+    } @else {
+      --#{config.$prefix}-#{$name}: #{$value};
+    }
   }
 }

@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="jest tests" tests="86" failures="0" errors="0" time="2.004">
+  <testsuite name="DTCG Generated SCSS Snapshots" errors="0" failures="0" skipped="0" timestamp="2026-07-27T12:32:42" time="0.642" tests="7">
+    <testcase classname="DTCG Generated SCSS Snapshots _themes.scss should match snapshot" name="DTCG Generated SCSS Snapshots _themes.scss should match snapshot" time="0.008">
+    </testcase>
+    <testcase classname="DTCG Generated SCSS Snapshots _tokens.scss should match snapshot" name="DTCG Generated SCSS Snapshots _tokens.scss should match snapshot" time="0.002">
+    </testcase>
+    <testcase classname="DTCG Generated SCSS Snapshots _button-tokens.scss should match snapshot" name="DTCG Generated SCSS Snapshots _button-tokens.scss should match snapshot" time="0.002">
+    </testcase>
+    <testcase classname="DTCG Generated SCSS Snapshots _content-switcher-tokens.scss should match snapshot" name="DTCG Generated SCSS Snapshots _content-switcher-tokens.scss should match snapshot" time="0">
+    </testcase>
+    <testcase classname="DTCG Generated SCSS Snapshots _notification-tokens.scss should match snapshot" name="DTCG Generated SCSS Snapshots _notification-tokens.scss should match snapshot" time="0">
+    </testcase>
+    <testcase classname="DTCG Generated SCSS Snapshots _status-tokens.scss should match snapshot" name="DTCG Generated SCSS Snapshots _status-tokens.scss should match snapshot" time="0.003">
+    </testcase>
+    <testcase classname="DTCG Generated SCSS Snapshots _tag-tokens.scss should match snapshot" name="DTCG Generated SCSS Snapshots _tag-tokens.scss should match snapshot" time="0">
+    </testcase>
+  </testsuite>
+  <testsuite name="OKLCH source-of-truth validation (full palette)" errors="0" failures="0" skipped="0" timestamp="2026-07-27T12:32:42" time="0.655" tests="3">
+    <testcase classname="OKLCH source-of-truth validation (full palette) color-palette.json contains palette entries" name="OKLCH source-of-truth validation (full palette) color-palette.json contains palette entries" time="0.003">
+    </testcase>
+    <testcase classname="OKLCH source-of-truth validation (full palette) every entry has an oklch field (OKLCH is source of truth)" name="OKLCH source-of-truth validation (full palette) every entry has an oklch field (OKLCH is source of truth)" time="0">
+    </testcase>
+    <testcase classname="OKLCH source-of-truth validation (full palette) every entry hex is consistent with its stored oklch values" name="OKLCH source-of-truth validation (full palette) every entry hex is consistent with its stored oklch values" time="0.004">
+    </testcase>
+  </testsuite>
+  <testsuite name="undefined" errors="0" failures="0" skipped="0" timestamp="2026-07-27T12:32:42" time="0.75" tests="2">
+    <testcase classname=" colors" name=" colors" time="0.005">
+    </testcase>
+    <testcase classname=" hoverColors" name=" hoverColors" time="0.002">
+    </testcase>
+  </testsuite>
+  <testsuite name="@carbon/colors" errors="0" failures="0" skipped="0" timestamp="2026-07-27T12:32:42" time="0.835" tests="1">
+    <testcase classname="@carbon/colors Public API" name="@carbon/colors Public API" time="0.066">
+    </testcase>
+  </testsuite>
+  <testsuite name="JS generated theme files match lib output" errors="0" failures="0" skipped="0" timestamp="2026-07-27T12:32:42" time="1.019" tests="54">
+    <testcase classname="JS generated theme files match lib output white generated file exists" name="JS generated theme files match lib output white generated file exists" time="0.004">
+    </testcase>
+    <testcase classname="JS generated theme files match lib output white has the same token names as lib" name="JS generated theme files match lib output white has the same token names as lib" time="0.001">
+    </testcase>
+    <testcase classname="JS generated theme files match lib output white all token values match lib exactly" name="JS generated theme files match lib output white all token values match lib exactly" time="0">
+    </testcase>
+    <testcase classname="JS generated theme files match lib output g10 generated file exists" name="JS generated theme files match lib output g10 generated file exists" time="0">
+    </testcase>
+    <testcase classname="JS generated theme files match lib output g10 has the same token names as lib" name="JS generated theme files match lib output g10 has the same token names as lib" time="0.001">
+    </testcase>
+    <testcase classname="JS generated theme files match lib output g10 all token values match lib exactly" name="JS generated theme files match lib output g10 all token values match lib exactly" time="0">
+    </testcase>
+    <testcase classname="JS generated theme files match lib output g90 generated file exists" name="JS generated theme files match lib output g90 generated file exists" time="0">
+    </testcase>
+    <testcase classname="JS generated theme files match lib output g90 has the same token names as lib" name="JS generated theme files match lib output g90 has the same token names as lib" time="0">
+    </testcase>
+    <testcase classname="JS generated theme files match lib output g90 all token values match lib exactly" name="JS generated theme files match lib output g90 all token values match lib exactly" time="0.001">
+    </testcase>
+    <testcase classname="JS generated theme files match lib output g100 generated file exists" name="JS generated theme files match lib output g100 generated file exists" time="0">
+    </testcase>
+    <testcase classname="JS generated theme files match lib output g100 has the same token names as lib" name="JS generated theme files match lib output g100 has the same token names as lib" time="0.001">
+    </testcase>
+    <testcase classname="JS generated theme files match lib output g100 all token values match lib exactly" name="JS generated theme files match lib output g100 all token values match lib exactly" time="0">
+    </testcase>
+    <testcase classname="JS generated component token files match lib output button generated file exists" name="JS generated component token files match lib output button generated file exists" time="0">
+    </testcase>
+    <testcase classname="JS generated component token files match lib output button has the same token names as lib" name="JS generated component token files match lib output button has the same token names as lib" time="0">
+    </testcase>
+    <testcase classname="JS generated component token files match lib output button all token values and theme entries match lib exactly" name="JS generated component token files match lib output button all token values and theme entries match lib exactly" time="0">
+    </testcase>
+    <testcase classname="JS generated component token files match lib output tag generated file exists" name="JS generated component token files match lib output tag generated file exists" time="0">
+    </testcase>
+    <testcase classname="JS generated component token files match lib output tag has the same token names as lib" name="JS generated component token files match lib output tag has the same token names as lib" time="0.001">
+    </testcase>
+    <testcase classname="JS generated component token files match lib output tag all token values and theme entries match lib exactly" name="JS generated component token files match lib output tag all token values and theme entries match lib exactly" time="0">
+    </testcase>
+    <testcase classname="JS generated component token files match lib output notification generated file exists" name="JS generated component token files match lib output notification generated file exists" time="0">
+    </testcase>
+    <testcase classname="JS generated component token files match lib output notification has the same token names as lib" name="JS generated component token files match lib output notification has the same token names as lib" time="0">
+    </testcase>
+    <testcase classname="JS generated component token files match lib output notification all token values and theme entries match lib exactly" name="JS generated component token files match lib output notification all token values and theme entries match lib exactly" time="0">
+    </testcase>
+    <testcase classname="JS generated component token files match lib output status generated file exists" name="JS generated component token files match lib output status generated file exists" time="0">
+    </testcase>
+    <testcase classname="JS generated component token files match lib output status has the same token names as lib" name="JS generated component token files match lib output status has the same token names as lib" time="0">
+    </testcase>
+    <testcase classname="JS generated component token files match lib output status all token values and theme entries match lib exactly" name="JS generated component token files match lib output status all token values and theme entries match lib exactly" time="0">
+    </testcase>
+    <testcase classname="JS generated component token files match lib output content-switcher generated file exists" name="JS generated component token files match lib output content-switcher generated file exists" time="0">
+    </testcase>
+    <testcase classname="JS generated component token files match lib output content-switcher has the same token names as lib" name="JS generated component token files match lib output content-switcher has the same token names as lib" time="0">
+    </testcase>
+    <testcase classname="JS generated component token files match lib output content-switcher all token values and theme entries match lib exactly" name="JS generated component token files match lib output content-switcher all token values and theme entries match lib exactly" time="0">
+    </testcase>
+    <testcase classname="JS generated theme files match DTCG JSON source white every DTCG token is present in the generated file" name="JS generated theme files match DTCG JSON source white every DTCG token is present in the generated file" time="0">
+    </testcase>
+    <testcase classname="JS generated theme files match DTCG JSON source white no extra tokens in generated file beyond DTCG source" name="JS generated theme files match DTCG JSON source white no extra tokens in generated file beyond DTCG source" time="0">
+    </testcase>
+    <testcase classname="JS generated theme files match DTCG JSON source white all token values match DTCG source exactly" name="JS generated theme files match DTCG JSON source white all token values match DTCG source exactly" time="0">
+    </testcase>
+    <testcase classname="JS generated theme files match DTCG JSON source g10 every DTCG token is present in the generated file" name="JS generated theme files match DTCG JSON source g10 every DTCG token is present in the generated file" time="0">
+    </testcase>
+    <testcase classname="JS generated theme files match DTCG JSON source g10 no extra tokens in generated file beyond DTCG source" name="JS generated theme files match DTCG JSON source g10 no extra tokens in generated file beyond DTCG source" time="0.001">
+    </testcase>
+    <testcase classname="JS generated theme files match DTCG JSON source g10 all token values match DTCG source exactly" name="JS generated theme files match DTCG JSON source g10 all token values match DTCG source exactly" time="0">
+    </testcase>
+    <testcase classname="JS generated theme files match DTCG JSON source g90 every DTCG token is present in the generated file" name="JS generated theme files match DTCG JSON source g90 every DTCG token is present in the generated file" time="0">
+    </testcase>
+    <testcase classname="JS generated theme files match DTCG JSON source g90 no extra tokens in generated file beyond DTCG source" name="JS generated theme files match DTCG JSON source g90 no extra tokens in generated file beyond DTCG source" time="0">
+    </testcase>
+    <testcase classname="JS generated theme files match DTCG JSON source g90 all token values match DTCG source exactly" name="JS generated theme files match DTCG JSON source g90 all token values match DTCG source exactly" time="0">
+    </testcase>
+    <testcase classname="JS generated theme files match DTCG JSON source g100 every DTCG token is present in the generated file" name="JS generated theme files match DTCG JSON source g100 every DTCG token is present in the generated file" time="0">
+    </testcase>
+    <testcase classname="JS generated theme files match DTCG JSON source g100 no extra tokens in generated file beyond DTCG source" name="JS generated theme files match DTCG JSON source g100 no extra tokens in generated file beyond DTCG source" time="0.001">
+    </testcase>
+    <testcase classname="JS generated theme files match DTCG JSON source g100 all token values match DTCG source exactly" name="JS generated theme files match DTCG JSON source g100 all token values match DTCG source exactly" time="0">
+    </testcase>
+    <testcase classname="JS generated component token files match DTCG JSON source button every DTCG token is present in the generated file" name="JS generated component token files match DTCG JSON source button every DTCG token is present in the generated file" time="0">
+    </testcase>
+    <testcase classname="JS generated component token files match DTCG JSON source button no extra tokens in generated file beyond DTCG source" name="JS generated component token files match DTCG JSON source button no extra tokens in generated file beyond DTCG source" time="0">
+    </testcase>
+    <testcase classname="JS generated component token files match DTCG JSON source button all token values and theme entries match DTCG source exactly" name="JS generated component token files match DTCG JSON source button all token values and theme entries match DTCG source exactly" time="0">
+    </testcase>
+    <testcase classname="JS generated component token files match DTCG JSON source tag every DTCG token is present in the generated file" name="JS generated component token files match DTCG JSON source tag every DTCG token is present in the generated file" time="0">
+    </testcase>
+    <testcase classname="JS generated component token files match DTCG JSON source tag no extra tokens in generated file beyond DTCG source" name="JS generated component token files match DTCG JSON source tag no extra tokens in generated file beyond DTCG source" time="0">
+    </testcase>
+    <testcase classname="JS generated component token files match DTCG JSON source tag all token values and theme entries match DTCG source exactly" name="JS generated component token files match DTCG JSON source tag all token values and theme entries match DTCG source exactly" time="0">
+    </testcase>
+    <testcase classname="JS generated component token files match DTCG JSON source notification every DTCG token is present in the generated file" name="JS generated component token files match DTCG JSON source notification every DTCG token is present in the generated file" time="0">
+    </testcase>
+    <testcase classname="JS generated component token files match DTCG JSON source notification no extra tokens in generated file beyond DTCG source" name="JS generated component token files match DTCG JSON source notification no extra tokens in generated file beyond DTCG source" time="0">
+    </testcase>
+    <testcase classname="JS generated component token files match DTCG JSON source notification all token values and theme entries match DTCG source exactly" name="JS generated component token files match DTCG JSON source notification all token values and theme entries match DTCG source exactly" time="0">
+    </testcase>
+    <testcase classname="JS generated component token files match DTCG JSON source status every DTCG token is present in the generated file" name="JS generated component token files match DTCG JSON source status every DTCG token is present in the generated file" time="0">
+    </testcase>
+    <testcase classname="JS generated component token files match DTCG JSON source status no extra tokens in generated file beyond DTCG source" name="JS generated component token files match DTCG JSON source status no extra tokens in generated file beyond DTCG source" time="0">
+    </testcase>
+    <testcase classname="JS generated component token files match DTCG JSON source status all token values and theme entries match DTCG source exactly" name="JS generated component token files match DTCG JSON source status all token values and theme entries match DTCG source exactly" time="0">
+    </testcase>
+    <testcase classname="JS generated component token files match DTCG JSON source content-switcher every DTCG token is present in the generated file" name="JS generated component token files match DTCG JSON source content-switcher every DTCG token is present in the generated file" time="0.001">
+    </testcase>
+    <testcase classname="JS generated component token files match DTCG JSON source content-switcher no extra tokens in generated file beyond DTCG source" name="JS generated component token files match DTCG JSON source content-switcher no extra tokens in generated file beyond DTCG source" time="0">
+    </testcase>
+    <testcase classname="JS generated component token files match DTCG JSON source content-switcher all token values and theme entries match DTCG source exactly" name="JS generated component token files match DTCG JSON source content-switcher all token values and theme entries match DTCG source exactly" time="0">
+    </testcase>
+  </testsuite>
+  <testsuite name="DTCG Schema Validation" errors="0" failures="0" skipped="0" timestamp="2026-07-27T12:32:42" time="1.138" tests="12">
+    <testcase classname="DTCG Schema Validation should successfully fetch the global DTCG schema" name="DTCG Schema Validation should successfully fetch the global DTCG schema" time="0.002">
+    </testcase>
+    <testcase classname="DTCG Schema Validation should have a valid Ajv validator compiled" name="DTCG Schema Validation should have a valid Ajv validator compiled" time="0">
+    </testcase>
+    <testcase classname="DTCG Schema Validation Theme token files should validate /Users/nikhil/Desktop/try3/carbon/carbon/packages/themes/src/dtcg/white.json against DTCG schema" name="DTCG Schema Validation Theme token files should validate /Users/nikhil/Desktop/try3/carbon/carbon/packages/themes/src/dtcg/white.json against DTCG schema" time="0.008">
+    </testcase>
+    <testcase classname="DTCG Schema Validation Theme token files should validate /Users/nikhil/Desktop/try3/carbon/carbon/packages/themes/src/dtcg/g10.json against DTCG schema" name="DTCG Schema Validation Theme token files should validate /Users/nikhil/Desktop/try3/carbon/carbon/packages/themes/src/dtcg/g10.json against DTCG schema" time="0.004">
+    </testcase>
+    <testcase classname="DTCG Schema Validation Theme token files should validate /Users/nikhil/Desktop/try3/carbon/carbon/packages/themes/src/dtcg/g90.json against DTCG schema" name="DTCG Schema Validation Theme token files should validate /Users/nikhil/Desktop/try3/carbon/carbon/packages/themes/src/dtcg/g90.json against DTCG schema" time="0.003">
+    </testcase>
+    <testcase classname="DTCG Schema Validation Theme token files should validate /Users/nikhil/Desktop/try3/carbon/carbon/packages/themes/src/dtcg/g100.json against DTCG schema" name="DTCG Schema Validation Theme token files should validate /Users/nikhil/Desktop/try3/carbon/carbon/packages/themes/src/dtcg/g100.json against DTCG schema" time="0.002">
+    </testcase>
+    <testcase classname="DTCG Schema Validation Component token files should validate against DTCG schema" name="DTCG Schema Validation Component token files should validate against DTCG schema" time="0.001">
+    </testcase>
+    <testcase classname="DTCG Schema Validation Component token files should validate against DTCG schema" name="DTCG Schema Validation Component token files should validate against DTCG schema" time="0">
+    </testcase>
+    <testcase classname="DTCG Schema Validation Component token files should validate against DTCG schema" name="DTCG Schema Validation Component token files should validate against DTCG schema" time="0.001">
+    </testcase>
+    <testcase classname="DTCG Schema Validation Component token files should validate against DTCG schema" name="DTCG Schema Validation Component token files should validate against DTCG schema" time="0">
+    </testcase>
+    <testcase classname="DTCG Schema Validation Component token files should validate against DTCG schema" name="DTCG Schema Validation Component token files should validate against DTCG schema" time="0">
+    </testcase>
+    <testcase classname="DTCG Schema Validation All DTCG token files should validate all DTCG token files in the repository" name="DTCG Schema Validation All DTCG token files should validate all DTCG token files in the repository" time="0.017">
+    </testcase>
+  </testsuite>
+  <testsuite name="@carbon/themes/scss" errors="0" failures="0" skipped="0" timestamp="2026-07-27T12:32:42" time="1.664" tests="7">
+    <testcase classname="@carbon/themes/scss index.scss" name="@carbon/themes/scss index.scss" time="0.145">
+    </testcase>
+    <testcase classname="@carbon/themes/scss scss/_themes.scss" name="@carbon/themes/scss scss/_themes.scss" time="0.07">
+    </testcase>
+    <testcase classname="@carbon/themes/scss configuration $theme" name="@carbon/themes/scss configuration $theme" time="0.06">
+    </testcase>
+    <testcase classname="@carbon/themes/scss configuration custom $theme" name="@carbon/themes/scss configuration custom $theme" time="0.057">
+    </testcase>
+    <testcase classname="@carbon/themes/scss configuration $fallback" name="@carbon/themes/scss configuration $fallback" time="0.05">
+    </testcase>
+    <testcase classname="@carbon/themes/scss configuration $use-fallback-value" name="@carbon/themes/scss configuration $use-fallback-value" time="0.045">
+    </testcase>
+    <testcase classname="@carbon/themes/scss configuration $property-prefix" name="@carbon/themes/scss configuration $property-prefix" time="0.048">
+    </testcase>
+  </testsuite>
+</testsuites>

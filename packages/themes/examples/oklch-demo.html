@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<!--
+  OKLCH Spike — Visual Demo
+  Open directly in Chrome/Safari/Firefox. No server needed.
+  Data is loaded from oklch-tokens.js sitting next to this file.
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>OKLCH Spike — Visual Demo</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: -apple-system, "Segoe UI", system-ui, sans-serif;
+    font-size: 14px;
+    line-height: 1.65;
+    color: #1f2328;
+    background: #f4f4f4;
+    padding: 2rem;
+  }
+
+  /* ── page header ── */
+  .page-header {
+    background: #1f2328;
+    color: #fff;
+    border-radius: 10px;
+    padding: 1.5rem 1.8rem;
+    margin-bottom: 2rem;
+  }
+  .page-header h1 { font-size: 22px; font-weight: 800; margin-bottom: .3rem; }
+  .page-header .sub { font-size: 13px; color: #8b949e; margin-bottom: 1rem; }
+  .page-header .explainer {
+    font-size: 13px;
+    color: #e6edf3;
+    background: rgba(255,255,255,.07);
+    border-radius: 6px;
+    padding: .8rem 1rem;
+    line-height: 1.7;
+  }
+
+  /* ── browser support banner ── */
+  #support-banner {
+    display: inline-flex;
+    align-items: center;
+    gap: .5rem;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 5px 14px;
+    border-radius: 20px;
+    margin-bottom: 2rem;
+  }
+  #support-banner.ok { background: #dcfce7; color: #166534; }
+  #support-banner.no { background: #fee2e2; color: #991b1b; }
+  .dot { width: 8px; height: 8px; border-radius: 50%; background: currentColor; }
+
+  /* ── section wrapper ── */
+  .section {
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+    padding: 1.4rem 1.6rem;
+    margin-bottom: 2rem;
+  }
+  .section-title {
+    font-size: 16px;
+    font-weight: 800;
+    margin-bottom: .3rem;
+  }
+  .section-desc {
+    font-size: 13px;
+    color: #57606a;
+    margin-bottom: 1.2rem;
+    max-width: 640px;
+    line-height: 1.6;
+  }
+  .section-desc strong { color: #1f2328; }
+
+  /* ── swatch grid ── */
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 1rem;
+  }
+  .card {
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    overflow: hidden;
+    background: #fafafa;
+  }
+
+  /* two-half swatch */
+  .swatch-strip {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    height: 80px;
+    position: relative;
+  }
+  .swatch-strip::after {
+    content: '';
+    position: absolute;
+    left: 50%; top: 8px; bottom: 8px;
+    width: 2px;
+    transform: translateX(-50%);
+    background: rgba(255,255,255,.55);
+    border-radius: 2px;
+  }
+  .swatch-strip.dark::after { background: rgba(0,0,0,.25); }
+
+  .swatch-half {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 6px 8px;
+  }
+  .half-label {
+    font-size: 9px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: .08em;
+    opacity: .75;
+  }
+  .half-value {
+    font-size: 10px;
+    font-family: "SFMono-Regular", "Consolas", monospace;
+    opacity: .85;
+    word-break: break-all;
+  }
+
+  /* 4px colour bar under swatch */
+  .color-bar {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    height: 4px;
+  }
+
+  /* card details */
+  .card-body { padding: .75rem 1rem; }
+  .token-name { font-size: 13px; font-weight: 700; margin-bottom: .5rem; }
+  .token-role { font-size: 11px; color: #57606a; margin-bottom: .6rem; }
+
+  .values-grid {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 2px 8px;
+    font-size: 12px;
+  }
+  .val-label { color: #57606a; font-weight: 600; white-space: nowrap; }
+  .val-divider {
+    grid-column: 1 / -1;
+    height: 1px;
+    background: #f0f1f3;
+    margin: 4px 0;
+  }
+  .val-label.accent { color: #0f62fe; }
+  code {
+    font-family: "SFMono-Regular", "Consolas", monospace;
+    font-size: 11px;
+    background: #f0f1f3;
+    padding: 1px 4px;
+    border-radius: 3px;
+  }
+
+  /* ── proof strip ── */
+  .proof-strip {
+    display: grid;
+    grid-template-columns: repeat(9, 1fr);
+    border-radius: 8px;
+    overflow: hidden;
+    height: 90px;
+    border: 1px solid #e5e7eb;
+    margin-bottom: .6rem;
+  }
+  .proof-col { display: flex; flex-direction: column; cursor: default; }
+  .proof-top, .proof-bottom { flex: 1; }
+  .proof-midline {
+    height: 2px;
+    background: rgba(255,255,255,.4);
+  }
+  .proof-legend {
+    display: flex;
+    gap: 1.5rem;
+    font-size: 12px;
+    color: #57606a;
+  }
+  .proof-legend span { display: flex; align-items: center; gap: 5px; }
+  .legend-dot { width: 10px; height: 10px; border-radius: 2px; flex-shrink: 0; }
+
+  /* ── lightness chart ── */
+  .chart-rows { display: flex; flex-direction: column; gap: 6px; }
+  .bar-row { display: flex; align-items: center; gap: .75rem; }
+  .bar-token { width: 130px; flex-shrink: 0; font-size: 11px; color: #57606a; text-align: right; font-family: monospace; }
+  .bar-track { flex: 1; background: #e5e7eb; border-radius: 4px; height: 22px; overflow: hidden; }
+  .bar-fill {
+    height: 100%;
+    border-radius: 4px;
+    display: flex; align-items: center;
+    padding: 0 8px;
+    font-size: 11px; font-weight: 700;
+  }
+  .bar-num { width: 52px; flex-shrink: 0; font-size: 11px; color: #57606a; text-align: right; }
+
+  /* ── gradient demo ── */
+  .grad-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: .6rem; }
+  .grad-item {}
+  .grad-bar { height: 40px; border-radius: 6px; border: 1px solid rgba(0,0,0,.08); margin-bottom: 5px; }
+  .grad-label { font-size: 12px; color: #57606a; }
+  .grad-label strong { color: #1f2328; }
+</style>
+</head>
+<body>
+
+<!-- ══ PAGE HEADER ═══════════════════════════════════════════════════════════ -->
+<div class="page-header">
+  <h1>OKLCH Spike — Visual Demo</h1>
+  <p class="sub">packages/themes · Phase 1–3 · GitHub #22660 · Data from color-palette.json</p>
+  <div class="explainer">
+    <strong style="color:#fff">What you're looking at:</strong>
+    Carbon's 9 background color tokens, each shown in two formats side by side —
+    <strong style="color:#7ee787">hex</strong> (what browsers get today, e.g. <code style="background:rgba(255,255,255,.15); color:#e6edf3">#0f62fe</code>)
+    and
+    <strong style="color:#79c0ff">oklch()</strong> (a smarter description of the exact same color, e.g. <code style="background:rgba(255,255,255,.15); color:#e6edf3">oklch(0.557 0.243 262)</code>).
+    <br><br>
+    The point of every section below is the same: <strong style="color:#fff">these two formats describe identical colors</strong>.
+    The conversion is lossless. Nothing shipped to users changes.
+  </div>
+</div>
+
+<!-- ══ BROWSER SUPPORT BANNER ════════════════════════════════════════════════ -->
+<div id="support-banner">
+  <span class="dot"></span>
+  <span id="support-text">Checking your browser…</span>
+</div>
+
+<!-- ══ SECTION 1 — SWATCH CARDS ══════════════════════════════════════════════ -->
+<div class="section">
+  <div class="section-title">Section 1 — The 9 background tokens, hex vs oklch()</div>
+  <div class="section-desc">
+    Each card is one background token. The color swatch is split down the middle —
+    <strong>left half painted with hex</strong> (today's format),
+    <strong>right half painted with oklch()</strong> (future format).
+    They should look <strong>pixel-identical</strong> — because they describe the same color.
+    The thin vertical line in the middle is the divider between the two halves.
+    <br><br>
+    Below the swatch: the token name, which design role it plays, and all its numbers.
+    <strong>L = lightness</strong> (0–1), <strong>C = chroma/vividness</strong> (0 = grey), <strong>H = hue angle</strong> (degrees on a color wheel).
+  </div>
+  <div class="grid" id="swatch-grid"></div>
+</div>
+
+<!-- ══ SECTION 2 — PROOF STRIP ═══════════════════════════════════════════════ -->
+<div class="section">
+  <div class="section-title">Section 2 — Are they really the same? The proof strip</div>
+  <div class="section-desc">
+    All 9 tokens shown side by side. <strong>Top half of each column = hex. Bottom half = oklch().</strong>
+    Hover over any column to see the token name.
+    <br>
+    Look for any visible seam or colour difference between the top and bottom halves.
+    There should be none — if the conversion is lossless, both halves are identical.
+  </div>
+  <div class="proof-strip" id="proof-grid"></div>
+  <div class="proof-legend">
+    <span><span class="legend-dot" style="background:#d0d7de; border:1px solid #ccc"></span> Top half = hex (today)</span>
+    <span><span class="legend-dot" style="background:#3b82d4"></span> Bottom half = oklch() (future)</span>
+  </div>
+</div>
+
+<!-- ══ SECTION 3 — LIGHTNESS CHART ═══════════════════════════════════════════ -->
+<div class="section">
+  <div class="section-title">Section 3 — Lightness (L) at a glance</div>
+  <div class="section-desc">
+    This is what OKLCH unlocks that hex never could.
+    Each bar shows how <strong>perceptually light</strong> a token is —
+    <strong>0 = pure black, 1 = pure white</strong>.
+    The bar length is the L value. The bar is filled with the actual token color.
+    <br><br>
+    Notice: all the greys are spread evenly across the scale.
+    Blue 60 sits in the middle — it's medium-light, which is why it works as an accessible brand color on white backgrounds.
+    You could never read this information from a hex code.
+  </div>
+  <div class="chart-rows" id="chart"></div>
+</div>
+
+<!-- ══ SECTION 4 — GRADIENT COMPARISON ══════════════════════════════════════ -->
+<div class="section">
+  <div class="section-title">Section 4 — Why OKLCH matters for transitions and motion</div>
+  <div class="section-desc">
+    Both gradients below go from <strong>white → IBM blue</strong>.
+    The only difference is the color space used to calculate the in-between colors.
+    <br><br>
+    <strong>sRGB</strong> (the old way, used by hex colors) produces a washed-out grey in the middle.
+    <strong>OKLCH</strong> stays vivid all the way through.
+    This is what a theme-switch animation looks like in each space — and why OKLCH matters for v12 motion work.
+    <br><br>
+    <em>Both gradients are rendered live by your browser right now — no images.</em>
+  </div>
+  <div class="grad-pair">
+    <div class="grad-item">
+      <div class="grad-bar" style="background: linear-gradient(to right, #ffffff, #0f62fe)"></div>
+      <div class="grad-label"><strong>sRGB interpolation</strong> — hex colors use this. Notice the grey/muddy middle.</div>
+    </div>
+    <div class="grad-item">
+      <div class="grad-bar" style="background: linear-gradient(in oklch, #ffffff, #0f62fe)"></div>
+      <div class="grad-label"><strong>OKLCH interpolation</strong> — stays vivid and clean. No grey midpoint.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ SCRIPTS ════════════════════════════════════════════════════════════════ -->
+<script src="oklch-tokens.js"></script>
+<script>
+
+// ── What each token is used for (design role) ────────────────────────────────
+// Looked up from white.json / g10.json / g90.json / g100.json
+const ROLES = {
+  '{white.default}':  'Default page background — White theme',
+  '{gray.10}':        'Default page background — Gray 10 theme',
+  '{gray.50}':        'Active / hover / selected state overlay — all themes',
+  '{gray.80}':        'Inverse background — White and Gray 10 themes',
+  '{gray.90}':        'Default page background — Gray 90 theme',
+  '{gray.100}':       'Default page background — Gray 100 theme',
+  '{blue.60}':        'Brand background — all themes',
+  '{gray.80Hover}':   'Inverse background hover — White and Gray 10 themes',
+  '{gray.10Hover}':   'Inverse background hover — Gray 90 and Gray 100 themes',
+};
+
+// ── Helpers ───────────────────────────────────────────────────────────────────
+
+// Build the oklch() CSS string from { l, c, h }
+function toOklchCSS({ l, c, h }) {
+  return `oklch(${l.toFixed(6)} ${c.toFixed(6)} ${h.toFixed(4)})`;
+}
+
+// Choose white or dark label text based on how light the background is
+function textColor(l) {
+  return l > 0.55 ? '#1f2328' : '#ffffff';
+}
+
+// ── Browser support check ─────────────────────────────────────────────────────
+const supportsOklch = CSS.supports('color', 'oklch(0.5 0.1 200)');
+const banner = document.getElementById('support-banner');
+banner.classList.add(supportsOklch ? 'ok' : 'no');
+document.getElementById('support-text').textContent = supportsOklch
+  ? '✓ Your browser supports oklch() — both halves of every swatch are rendered natively'
+  : '✗ Your browser does not support oklch() — right halves will fall back (upgrade to Chrome 111+, Safari 16.4+, or Firefox 113+)';
+
+// ── Section 1: Swatch cards ───────────────────────────────────────────────────
+const grid = document.getElementById('swatch-grid');
+
+TOKENS.forEach(t => {
+  const oklchCSS = toOklchCSS(t);
+  const fg       = textColor(t.l);
+  const isDark   = t.l < 0.5;
+  const role     = ROLES[t.alias] || '—';
+
+  const card = document.createElement('div');
+  card.className = 'card';
+  card.innerHTML = `
+    <!-- Swatch: left = hex, right = oklch() -->
+    <div class="swatch-strip ${isDark ? 'dark' : ''}">
+      <div class="swatch-half" style="background:${t.hex}">
+        <span class="half-label" style="color:${fg}">hex — today</span>
+        <span class="half-value" style="color:${fg}">${t.hex}</span>
+      </div>
+      <div class="swatch-half" style="background:${oklchCSS}">
+        <span class="half-label" style="color:${fg}">oklch() — future</span>
+        <span class="half-value" style="color:${fg}">L ${t.l.toFixed(3)}</span>
+      </div>
+    </div>
+
+    <!-- 4px colour bar: confirms both halves are the same colour -->
+    <div class="color-bar">
+      <div style="background:${t.hex}"></div>
+      <div style="background:${oklchCSS}"></div>
+    </div>
+
+    <!-- Token details -->
+    <div class="card-body">
+      <div class="token-name">${t.alias}</div>
+      <div class="token-role">${role}</div>
+      <div class="values-grid">
+        <span class="val-label">hex</span>
+        <span><code>${t.hex}</code> ← what browsers get today</span>
+
+        <span class="val-label">oklch()</span>
+        <span><code>${oklchCSS}</code></span>
+
+        <div class="val-divider"></div>
+
+        <span class="val-label accent">L</span>
+        <span><code>${t.l.toFixed(4)}</code> — lightness (0 = black, 1 = white)</span>
+
+        <span class="val-label accent">C</span>
+        <span><code>${t.c.toFixed(4)}</code> — chroma (0 = grey, higher = more vivid)</span>
+
+        <span class="val-label accent">H</span>
+        <span><code>${t.h.toFixed(1)}°</code> — hue angle on the color wheel</span>
+      </div>
+    </div>
+  `;
+  grid.appendChild(card);
+});
+
+// ── Section 2: Proof strip ────────────────────────────────────────────────────
+const proofGrid = document.getElementById('proof-grid');
+
+TOKENS.forEach(t => {
+  const col = document.createElement('div');
+  col.className = 'proof-col';
+  // Tooltip on hover shows the token details
+  col.title = `${t.alias}\nRole: ${ROLES[t.alias] || '—'}\nHex: ${t.hex}\nOklch: ${toOklchCSS(t)}`;
+  col.innerHTML = `
+    <div class="proof-top"   style="background:${t.hex}"></div>
+    <div class="proof-midline"></div>
+    <div class="proof-bottom" style="background:${toOklchCSS(t)}"></div>
+  `;
+  proofGrid.appendChild(col);
+});
+
+// ── Section 3: Lightness chart ────────────────────────────────────────────────
+const chart = document.getElementById('chart');
+
+// Sort lightest first so white is at the top
+const sorted = [...TOKENS].sort((a, b) => b.l - a.l);
+
+sorted.forEach(t => {
+  const pct   = (t.l * 100).toFixed(1);
+  const barFg = t.l > 0.55 ? '#1f2328' : '#ffffff';
+  const row   = document.createElement('div');
+  row.className = 'bar-row';
+  row.innerHTML = `
+    <div class="bar-token">${t.alias}</div>
+    <div class="bar-track">
+      <div class="bar-fill" style="width:${pct}%; background:${t.hex}; color:${barFg}">
+        ${Number(pct) > 18 ? t.hex : ''}
+      </div>
+    </div>
+    <div class="bar-num">L = ${t.l.toFixed(3)}</div>
+  `;
+  chart.appendChild(row);
+});
+
+</script>
+</body>
+</html>
