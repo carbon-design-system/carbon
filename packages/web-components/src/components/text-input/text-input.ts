@@ -96,6 +96,18 @@ class CDSTextInput extends ValidityMixin(FormMixin(LitElement)) {
     this.value = (target as HTMLInputElement).value;
   }
 
+  /**
+   * Handles `onchange` event on the `input`.
+   *
+   * The native `change` event is not composed, so it stops at the shadow root
+   * and never reaches listeners on the host. This re-emits it as a composed event so
+   * consumers can listen for `change` on `<cds-text-input>` exactly as they
+   * would on a native `<input>`.
+   */
+  protected _handleChange() {
+    this.dispatchEvent(new Event('change', { bubbles: true, composed: true }));
+  }
+
   _handleFormdata(event: FormDataEvent) {
     const { formData } = event;
     const { disabled, name, value } = this;
@@ -341,6 +353,7 @@ class CDSTextInput extends ValidityMixin(FormMixin(LitElement)) {
       warnText,
       value,
       _handleInput: handleInput,
+      _handleChange: handleChange,
       _hasAILabel: hasAILabel,
       _handleSlotChange: handleSlotChange,
     } = this;
@@ -533,7 +546,8 @@ class CDSTextInput extends ValidityMixin(FormMixin(LitElement)) {
               type="${ifNonEmpty(type)}"
               .value="${this._value}"
               maxlength="${ifNonEmpty(maxCount)}"
-              @input="${handleInput}" />
+              @input="${handleInput}"
+              @change="${handleChange}" />
             ${normalizedProps.icon}
             <slot name="ai-label" @slotchange="${handleSlotChange}"></slot>
             <slot name="slug" @slotchange="${handleSlotChange}"></slot>
