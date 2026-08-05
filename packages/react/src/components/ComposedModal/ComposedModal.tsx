@@ -185,6 +185,13 @@ export interface ComposedModalProps extends HTMLAttributes<HTMLDivElement> {
   'aria-labelledby'?: string;
 
   /**
+   * Specify the aria-describedby for cds--modal-container.
+   * Useful for alert/confirmation modals where the body content
+   * needs to be announced to screen readers.
+   */
+  'aria-describedby'?: string;
+
+  /**
    * Specify the content to be placed in the ComposedModal
    */
   children?: ReactNode;
@@ -292,6 +299,7 @@ const ComposedModalDialog = React.forwardRef<
   {
     ['aria-labelledby']: ariaLabelledBy,
     ['aria-label']: ariaLabel,
+    ['aria-describedby']: ariaDescribedBy,
     children,
     className: customClassName,
     containerClassName,
@@ -606,6 +614,7 @@ const ComposedModalDialog = React.forwardRef<
       className={containerClass}
       aria-label={ariaLabel ? ariaLabel : generatedAriaLabel}
       aria-labelledby={ariaLabelledBy}
+      aria-describedby={ariaDescribedBy}
       data-exiting={presenceContext?.isExiting || undefined}>
       <div ref={innerModal} className={`${prefix}--modal-container-body`}>
         {slug ? (
@@ -626,7 +635,8 @@ const ComposedModalDialog = React.forwardRef<
       role="dialog"
       aria-modal="true"
       aria-label={ariaLabel ? ariaLabel : generatedAriaLabel}
-      aria-labelledby={ariaLabelledBy}>
+      aria-labelledby={ariaLabelledBy}
+      aria-describedby={ariaDescribedBy}>
       {/* Non-translatable: Focus-wrap code makes this `<button>` not actually read by screen readers */}
       {!focusTrapWithoutSentinels && (
         <button
@@ -700,6 +710,11 @@ ComposedModal.propTypes = {
    * Specify the aria-labelledby for cds--modal-container
    */
   ['aria-labelledby']: PropTypes.string,
+
+  /**
+   * Specify the aria-describedby for cds--modal-container
+   */
+  ['aria-describedby']: PropTypes.string,
 
   /**
    * Specify the content to be placed in the ComposedModal
