@@ -122,9 +122,7 @@ $input-label-weight: 400 !default;
   .#{$prefix}--list-box[data-invalid]:not(
       .#{$prefix}--multi-select--invalid--focused,
       .#{$prefix}--combo-box--invalid--focused
-    ),
-  .#{$prefix}--combo-box[data-invalid]:not(.#{$prefix}--multi-select--selected)
-    .#{$prefix}--text-input:not(:focus) {
+    ) {
     @include focus-outline('invalid');
   }
 
