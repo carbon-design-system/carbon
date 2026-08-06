@@ -291,6 +291,7 @@ describe('Carbon Components React', () => {
         "preview__AiSkeletonText",
         "preview__ChatButton",
         "preview__ChatButtonSkeleton",
+        "preview__DatePicker",
         "preview__Dialog",
         "preview__FluidComboBox",
         "preview__FluidComboBoxSkeleton",
