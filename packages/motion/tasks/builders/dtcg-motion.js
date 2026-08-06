@@ -326,6 +326,53 @@ function toSassLiteral(value, indent = 0) {
 }
 
 /**
+ * Recursively convert a recipe value to its TypeScript type string.
+ *
+ * Literal vs widened is determined by depth, not by field name:
+ * - Top-level scalar strings (kind, duration, origin, …) are semantic tokens
+ *   and get literal types so TypeScript can narrow on them.
+ * - Strings nested inside an object (CSS keyframe values like transform,
+ *   clipPath, blockSize, …) are widened to `string` — their exact values are
+ *   not meaningful to the type system.
+ * - Strings inside arrays (easing tuples) are always emitted as literals.
+ * - Numbers are always `number`.
+ *
+ * This avoids a hardcoded field-name allowlist: the recipe structure itself
+ * encodes the intent — keyframe values live one level deeper than tokens.
+ *
+ * @param {*}      value
+ * @param {boolean} topLevel - true when called directly on a recipe field
+ * @returns {string}
+ */
+function recipeValueToDTSType(value, topLevel) {
+  if (Array.isArray(value)) {
+    // Easing tuples: ["entrance", "productive"] → ['entrance', 'productive']
+    const items = value
+      .map((v) => (typeof v === 'string' ? `'${v}'` : String(v)))
+      .join(', ');
+    return `[${items}]`;
+  }
+
+  if (value !== null && typeof value === 'object') {
+    // Nested object — its string values are CSS keyframe values, not tokens.
+    const entries = Object.entries(value)
+      .map(([k, v]) => `${k}: ${recipeValueToDTSType(v, false)}`)
+      .join(', ');
+    return `{ ${entries} }`;
+  }
+
+  if (typeof value === 'number') return 'number';
+
+  if (typeof value === 'string') {
+    // Top-level strings are semantic tokens; preserve the literal type.
+    // Nested strings are CSS values; widen to `string`.
+    return topLevel ? `'${value}'` : 'string';
+  }
+
+  return String(value);
+}
+
+/**
  * Build a JS module + sibling .d.ts from surfaces.json.
  * Written to js/generated/surfaces.{js,d.ts} — gitignored.
  * Consumed by the hand-authored src/surfaces.ts.
@@ -358,12 +405,12 @@ function buildDTCGMotionSurfacesJS() {
     jsLines.push(
       `export const ${exportName} = ${JSON.stringify(recipe, null, 2)};`
     );
-    dtsLines.push(
-      `export declare const ${exportName}: ${JSON.stringify(recipe, null, 2)
-        .replace(/"([^"]+)":/g, '$1:')
-        .replace(/: "([^"]+)"/g, ': string')
-        .replace(/: (\d+)/g, ': number')};`
-    );
+    // Build the type inline — top-level fields get literal types, nested
+    // object fields (CSS keyframe values) are widened to `string`.
+    const fields = Object.entries(recipe)
+      .map(([k, v]) => `${k}: ${recipeValueToDTSType(v, true)}`)
+      .join(', ');
+    dtsLines.push(`export declare const ${exportName}: { ${fields} };`);
     jsLines.push('');
     dtsLines.push('');
   }
@@ -397,10 +444,15 @@ function buildDTCGMotionSurfacesJS() {
     ``
   );
 
+  // MotionSurfaceName and the return type of getMotionSurface are derived
+  // entirely from the surface constants declared above.
+  // The mapped-type lookup `(typeof surfaces)[name]` resolves to the union of
+  // all individual surface types, each of which already carries literal types
+  // for `kind`, `duration`, and `origin` thanks to recipeValueToDTSType.
+  const nameLiterals = surfaceNames.map((n) => `'${n}'`).join(' | ');
   dtsLines.push(
-    `export declare function getMotionSurface(name: ${surfaceNames
-      .map((n) => `'${n}'`)
-      .join(' | ')}): (typeof surfaces)[typeof name];`,
+    `export type MotionSurfaceName = ${nameLiterals};`,
+    `export declare function getMotionSurface<N extends MotionSurfaceName>(name: N): (typeof surfaces)[N];`,
     ``
   );
 
