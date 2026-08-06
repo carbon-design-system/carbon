@@ -34,6 +34,7 @@ export * from './components/DataTable';
 export * from './components/DataTableSkeleton';
 export * from './components/DatePicker';
 export * from './components/DatePickerInput';
+export * as preview__DatePicker from './components/DatePicker/next';
 export * from './components/Dropdown';
 export * from './components/ErrorBoundary';
 export * from './components/ExpandableSearch';
