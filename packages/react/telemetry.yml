@@ -511,6 +511,7 @@ collect:
         - pageSizes
         - pagesUnknown
         - pageText
+        - renderPageSelect
         # PaginationNav
         - disableOverflow
         - itemsShown
