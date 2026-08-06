@@ -50,19 +50,14 @@ const ToggleTip = (
 
 const sharedArgTypes = {
   className: { control: { type: 'text' } },
-  defaultValue: { control: { type: 'text' } },
   disabled: { control: { type: 'boolean' } },
   enableCounter: { control: { type: 'boolean' } },
-  id: { control: { type: 'text' } },
   invalid: { control: { type: 'boolean' } },
   invalidText: { control: { type: 'text' } },
   labelText: { control: { type: 'text' } },
   maxCount: { control: { type: 'number' } },
-  onChange: { action: 'onChange' },
-  onClick: { action: 'onClick' },
   placeholder: { control: { type: 'text' } },
   readOnly: { control: { type: 'boolean' } },
-  value: { control: { type: 'text' } },
   warn: { control: { type: 'boolean' } },
   warnText: { control: { type: 'text' } },
 };
