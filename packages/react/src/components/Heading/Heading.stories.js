@@ -15,6 +15,30 @@ export default {
   subcomponents: {
     Section,
   },
+  args: {
+    as: 'section',
+    level: 2,
+  },
+  argTypes: {
+    as: {
+      control: { type: 'text' },
+      description:
+        'Provide an alternative tag or component to use instead of the default <section> element',
+      table: {
+        category: 'Section',
+      },
+    },
+    level: {
+      control: {
+        type: 'select',
+      },
+      description: 'Overrides the level of the section',
+      options: [1, 2, 3, 4, 5, 6],
+      table: {
+        category: 'Section',
+      },
+    },
+  },
   parameters: {
     docs: {
       page: mdx,
@@ -25,57 +49,28 @@ export default {
   },
 };
 
-const headingArgTypes = {
-  rootHeading: {
-    control: { type: 'text' },
-    table: { category: 'Heading content' },
-  },
-  sectionHeading: {
-    control: { type: 'text' },
-    table: { category: 'Heading content' },
-  },
-  nestedHeading: {
-    control: { type: 'text' },
-    table: { category: 'Heading content' },
-  },
-};
-
-const headingArgs = {
-  rootHeading: 'Account settings',
-  sectionHeading: 'Profile',
-  nestedHeading: 'Contact information',
-};
-
-export const Default = ({ rootHeading, sectionHeading, nestedHeading }) => {
+export const Default = (args) => {
   return (
     <>
-      <Heading>{rootHeading}</Heading>
-      <Section>
-        <Heading>{sectionHeading}</Heading>
+      <Heading>Project overview</Heading>
+      <Section as={args.as} level={args.level}>
+        <Heading>Delivery milestones</Heading>
         <Section>
-          <Heading>{nestedHeading}</Heading>
+          <Heading>Release readiness</Heading>
         </Section>
       </Section>
     </>
   );
 };
 
-Default.args = headingArgs;
-Default.argTypes = headingArgTypes;
-
-export const CustomLevel = ({
-  rootHeading,
-  sectionHeading,
-  nestedHeading,
-  level,
-}) => {
+export const CustomLevel = (args) => {
   return (
     <>
-      <Heading>{rootHeading}</Heading>
-      <Section level={level}>
-        <Heading>{sectionHeading}</Heading>
+      <Heading>Project overview</Heading>
+      <Section as={args.as} level={args.level}>
+        <Heading>Release readiness</Heading>
         <Section>
-          <Heading>{nestedHeading}</Heading>
+          <Heading>Final approvals</Heading>
         </Section>
       </Section>
     </>
@@ -83,14 +78,5 @@ export const CustomLevel = ({
 };
 
 CustomLevel.args = {
-  ...headingArgs,
   level: 5,
-};
-CustomLevel.argTypes = {
-  ...headingArgTypes,
-  level: {
-    control: { type: 'select' },
-    options: [1, 2, 3, 4, 5, 6],
-    table: { category: 'Section' },
-  },
 };
