@@ -12,6 +12,8 @@
 @use '../../motion' as *;
 @use '../../spacing' as *;
 @use '../../theme' as *;
+@use '../../border-radius' as *;
+@use '../../feature-flags' as *;
 @use '../../utilities/convert';
 @use '../../utilities/focus-outline' as *;
 @use '../../utilities/skeleton' as *;
@@ -252,8 +254,21 @@
 
   // Skeleton styles
   .#{$prefix}--list-box__wrapper--fluid .#{$prefix}--skeleton {
-    background: $skeleton-background;
-    border-block-end: 1px solid $skeleton-element;
+    @if enabled('enable-v12-release') {
+      border: 1px solid transparent;
+      border-radius: $border-radius-04;
+      background:
+        linear-gradient($skeleton-background, $skeleton-background) padding-box,
+        linear-gradient(
+            to bottom,
+            $border-subtle calc(100% - 4px),
+            $skeleton-element 100%
+          )
+          border-box;
+    } @else {
+      background: $skeleton-background;
+      border-block-end: 1px solid $skeleton-element;
+    }
   }
 
   .#{$prefix}--list-box__wrapper--fluid
