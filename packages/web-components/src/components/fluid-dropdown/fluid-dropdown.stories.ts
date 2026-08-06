@@ -75,7 +75,7 @@ const items = [
 const args = {
   defaultWidth: 400,
   ariaLabel: '',
-  autoalign: false,
+  'auto-align': false,
   direction: 'bottom',
   disabled: false,
   isCondensed: false,
@@ -101,7 +101,7 @@ const argTypes = {
     description:
       'Specify a label to be read by screen readers on the container node.',
   },
-  autoalign: {
+  'auto-align': {
     control: 'boolean',
     description:
       'Will auto-align the dropdown. This attribute is currently experimental and is subject to future changes.',
@@ -167,7 +167,7 @@ export const Default = {
   render: ({
     defaultWidth,
     ariaLabel,
-    autoalign,
+    'auto-align': autoAlign,
     direction,
     disabled,
     isCondensed,
@@ -184,7 +184,7 @@ export const Default = {
     <div style="width:${defaultWidth}px;">
       <cds-fluid-dropdown
         aria-label="${ifDefined(ariaLabel || undefined)}"
-        ?autoalign="${autoalign}"
+        ?auto-align="${autoAlign}"
         direction="${ifDefined(direction)}"
         ?disabled="${disabled}"
         ?is-condensed="${isCondensed}"
@@ -224,7 +224,7 @@ export const Condensed = {
   render: ({
     defaultWidth,
     ariaLabel,
-    autoalign,
+    'auto-align': autoAlign,
     direction,
     disabled,
     isCondensed,
@@ -241,7 +241,7 @@ export const Condensed = {
     <div style="width:${defaultWidth}px;">
       <cds-fluid-dropdown
         aria-label="${ifDefined(ariaLabel || undefined)}"
-        ?autoalign="${autoalign}"
+        ?auto-align="${autoAlign}"
         direction="${ifDefined(direction)}"
         ?disabled="${disabled}"
         ?is-condensed="${isCondensed}"
@@ -295,7 +295,7 @@ export const WithAILabel = {
   render: ({
     defaultWidth,
     ariaLabel,
-    autoalign,
+    'auto-align': autoAlign,
     direction,
     disabled,
     isCondensed,
@@ -312,7 +312,7 @@ export const WithAILabel = {
     <div style="width:${defaultWidth}px;">
       <cds-fluid-dropdown
         aria-label="${ifDefined(ariaLabel || undefined)}"
-        ?autoalign="${autoalign}"
+        ?auto-align="${autoAlign}"
         direction="${ifDefined(direction)}"
         ?disabled="${disabled}"
         ?is-condensed="${isCondensed}"
