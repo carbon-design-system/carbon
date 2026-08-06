@@ -131,6 +131,10 @@
     inset-inline-end: 0;
     min-block-size: auto;
     transition: outline $duration-fast-01 motion(standard, productive);
+
+    @if enabled('enable-v12-release') {
+      border-radius: $border-radius-04;
+    }
   }
 
   .#{$prefix}--toggle-password-tooltip .#{$prefix}--popover {
