@@ -784,6 +784,9 @@ Map {
         "className": {
           "type": "string",
         },
+        "isFlush": {
+          "type": "bool",
+        },
       },
       "render": [Function],
     },
@@ -915,6 +918,9 @@ Map {
       "render": [Function],
     },
     "propTypes": {
+      "as": {
+        "type": "elementType",
+      },
       "children": {
         "type": "node",
       },
@@ -947,6 +953,19 @@ Map {
       },
       "onKeyDown": {
         "type": "func",
+      },
+      "renderFooterIcon": {
+        "args": [
+          [
+            {
+              "type": "func",
+            },
+            {
+              "type": "object",
+            },
+          ],
+        ],
+        "type": "oneOfType",
       },
     },
     "render": [Function],
@@ -987,6 +1006,9 @@ Map {
       },
       "className": {
         "type": "string",
+      },
+      "isFlush": {
+        "type": "bool",
       },
     },
     "render": [Function],
