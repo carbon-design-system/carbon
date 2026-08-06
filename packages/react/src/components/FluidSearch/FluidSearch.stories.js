@@ -12,6 +12,51 @@ import mdx from './FluidSearch.mdx';
 export default {
   title: 'Components/Fluid Components/FluidSearch',
   component: FluidSearch,
+  args: {
+    autoComplete: 'off',
+    closeButtonLabelText: 'Clear search input',
+    defaultWidth: 400,
+    disabled: false,
+    labelText: 'Search',
+    placeholder: 'Prompt text',
+    role: 'searchbox',
+    type: 'search',
+  },
+  argTypes: {
+    autoComplete: {
+      control: { type: 'text' },
+    },
+    closeButtonLabelText: {
+      control: { type: 'text' },
+    },
+    defaultValue: {
+      control: { type: 'text' },
+    },
+    defaultWidth: {
+      control: { type: 'range', min: 300, max: 800, step: 50 },
+    },
+    disabled: {
+      control: { type: 'boolean' },
+    },
+    labelText: {
+      control: { type: 'text' },
+    },
+    onChange: {
+      action: 'onChange',
+    },
+    placeholder: {
+      control: { type: 'text' },
+    },
+    role: {
+      control: { type: 'text' },
+    },
+    type: {
+      control: { type: 'text' },
+    },
+    value: {
+      control: { type: 'text' },
+    },
+  },
   parameters: {
     docs: {
       page: mdx,
@@ -25,53 +70,20 @@ export default {
   },
 };
 
-export const Skeleton = () => (
-  <div style={{ width: '400px' }}>
+export const Skeleton = ({ defaultWidth }) => (
+  <div style={{ width: defaultWidth }}>
     <FluidSearchSkeleton />
   </div>
 );
+
+Skeleton.parameters = {
+  controls: {
+    include: ['defaultWidth'],
+  },
+};
 
 export const Default = ({ defaultWidth, ...searchArgs }) => (
   <div style={{ width: defaultWidth }}>
     <FluidSearch {...searchArgs} />
   </div>
 );
-
-Default.args = {
-  defaultWidth: 400,
-  closeButtonLabelText: 'Clear search input',
-  disabled: false,
-  labelText: 'Search',
-  placeholder: 'Prompt text',
-};
-
-Default.argTypes = {
-  defaultWidth: {
-    control: { type: 'range', min: 300, max: 800, step: 50 },
-  },
-  closeButtonLabelText: {
-    control: {
-      type: 'text',
-    },
-  },
-  disabled: {
-    control: {
-      type: 'boolean',
-    },
-  },
-  defaultValue: {
-    control: {
-      type: 'text',
-    },
-  },
-  labelText: {
-    control: {
-      type: 'text',
-    },
-  },
-  placeholder: {
-    control: {
-      type: 'text',
-    },
-  },
-};

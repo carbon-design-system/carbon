@@ -11,7 +11,7 @@ import { property, query, state } from 'lit/decorators.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { prefix } from '../../globals/settings';
 import FocusMixin from '../../globals/mixins/focus';
-import { INPUT_SIZE } from '../text-input/text-input';
+import { INPUT_SIZE } from './defs';
 import { DATE_PICKER_INPUT_COLOR_SCHEME, DATE_PICKER_INPUT_KIND } from './defs';
 import styles from './date-picker.scss?lit';
 import Calendar16 from '@carbon/icons/es/calendar/16.js';
@@ -62,6 +62,18 @@ class CDSDatePickerInput extends FocusMixin(LitElement) {
    */
   @query(`.${prefix}--date-picker__icon`)
   private _iconNode!: SVGElement;
+
+  /**
+   * The `<slot>` element for the AI label in the shadow DOM.
+   */
+  @query("slot[name='ai-label']")
+  private _slotAILabelNode!: HTMLSlotElement;
+
+  /**
+   * The `<slot>` element for the slug in the shadow DOM.
+   */
+  @query("slot[name='slug']")
+  private _slotSlugNode!: HTMLSlotElement;
 
   /**
    * Handles `click` event on the calendar icon.
@@ -348,7 +360,7 @@ class CDSDatePickerInput extends FocusMixin(LitElement) {
 
   updated() {
     this.toggleAttribute('ai-label', this._hasAILabel);
-    const label = this.shadowRoot?.querySelector("slot[name='ai-label']");
+    const label = this._slotAILabelNode;
 
     if (label) {
       label?.classList.toggle(
@@ -356,12 +368,10 @@ class CDSDatePickerInput extends FocusMixin(LitElement) {
         this.querySelector(`${prefix}-ai-label`)?.hasAttribute('revert-active')
       );
     } else {
-      this.shadowRoot
-        ?.querySelector("slot[name='slug']")
-        ?.classList.toggle(
-          `${prefix}--slug--revert`,
-          this.querySelector(`${prefix}-slug`)?.hasAttribute('revert-active')
-        );
+      this._slotSlugNode?.classList.toggle(
+        `${prefix}--slug--revert`,
+        this.querySelector(`${prefix}-slug`)?.hasAttribute('revert-active')
+      );
     }
   }
 

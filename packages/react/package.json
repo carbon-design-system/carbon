@@ -85,7 +85,7 @@
     "@babel/preset-typescript": "^7.27.1",
     "@carbon/test-utils": "^10.41.0",
     "@carbon/themes": "^11.78.0",
-    "@figma/code-connect": "^1.4.9",
+    "@figma/code-connect": "^1.5.1",
     "@rolldown/plugin-babel": "^0.2.0",
     "@stackblitz/sdk": "^1.11.0",
     "@storybook/addon-a11y": "^10.3.5",
