@@ -339,7 +339,6 @@ export const FileUploaderItem = {
 };
 
 export const Skeleton = {
-  parameters: { controls: { disable: true } },
   render: () => {
     return html` <cds-file-uploader-skeleton></cds-file-uploader-skeleton> `;
   },
