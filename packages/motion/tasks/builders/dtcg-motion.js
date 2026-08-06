@@ -325,6 +325,48 @@ function toSassLiteral(value, indent = 0) {
   return `'${String(value)}'`;
 }
 
+// Fields whose string values must be emitted as literal types in the .d.ts so
+// that TypeScript can narrow on them (e.g. `surface.kind === 'reveal'`).
+const LITERAL_STRING_FIELDS = new Set(['kind', 'duration', 'origin']);
+
+/**
+ * Recursively convert a recipe value to its TypeScript type string.
+ * - Strings in LITERAL_STRING_FIELDS are emitted as string literals ('reveal').
+ * - Strings inside easing tuples (arrays) are emitted as string literals too.
+ * - Other strings become `string`, numbers become `number`.
+ *
+ * @param {*}      value
+ * @param {string} key   - the parent key name (used for literal field detection)
+ * @returns {string}
+ */
+function recipeValueToDTSType(value, key) {
+  if (Array.isArray(value)) {
+    // Easing tuples: ["entrance", "productive"] → ["entrance", "productive"]
+    const items = value
+      .map((v) => (typeof v === 'string' ? `'${v}'` : String(v)))
+      .join(', ');
+    return `[${items}]`;
+  }
+
+  if (value !== null && typeof value === 'object') {
+    const entries = Object.entries(value)
+      .map(([k, v]) => `${k}: ${recipeValueToDTSType(v, k)}`)
+      .join(', ');
+    return `{ ${entries} }`;
+  }
+
+  if (typeof value === 'number') return 'number';
+
+  if (typeof value === 'string') {
+    // Semantic fields keep their literal type for narrowing/assignability.
+    if (LITERAL_STRING_FIELDS.has(key)) return `'${value}'`;
+    // CSS property values (transform, clipPath, etc.) are widened.
+    return 'string';
+  }
+
+  return String(value);
+}
+
 /**
  * Build a JS module + sibling .d.ts from surfaces.json.
  * Written to js/generated/surfaces.{js,d.ts} — gitignored.
@@ -358,12 +400,12 @@ function buildDTCGMotionSurfacesJS() {
     jsLines.push(
       `export const ${exportName} = ${JSON.stringify(recipe, null, 2)};`
     );
-    dtsLines.push(
-      `export declare const ${exportName}: ${JSON.stringify(recipe, null, 2)
-        .replace(/"([^"]+)":/g, '$1:')
-        .replace(/: "([^"]+)"/g, ': string')
-        .replace(/: (\d+)/g, ': number')};`
-    );
+    // Build the type inline, field by field, preserving literal types for
+    // semantic fields (kind, duration, origin) while widening CSS values.
+    const fields = Object.entries(recipe)
+      .map(([k, v]) => `${k}: ${recipeValueToDTSType(v, k)}`)
+      .join(', ');
+    dtsLines.push(`export declare const ${exportName}: { ${fields} };`);
     jsLines.push('');
     dtsLines.push('');
   }
@@ -397,10 +439,15 @@ function buildDTCGMotionSurfacesJS() {
     ``
   );
 
+  // MotionSurfaceName and the return type of getMotionSurface are derived
+  // entirely from the surface constants declared above.
+  // The mapped-type lookup `(typeof surfaces)[name]` resolves to the union of
+  // all individual surface types, each of which already carries literal types
+  // for `kind`, `duration`, and `origin` thanks to recipeValueToDTSType.
+  const nameLiterals = surfaceNames.map((n) => `'${n}'`).join(' | ');
   dtsLines.push(
-    `export declare function getMotionSurface(name: ${surfaceNames
-      .map((n) => `'${n}'`)
-      .join(' | ')}): (typeof surfaces)[typeof name];`,
+    `export type MotionSurfaceName = ${nameLiterals};`,
+    `export declare function getMotionSurface<N extends MotionSurfaceName>(name: N): (typeof surfaces)[N];`,
     ``
   );
 
