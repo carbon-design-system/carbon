@@ -9,7 +9,11 @@
 // `yarn build:tokens` (tasks/build.js) and written to
 // js/generated/surfaces.js before this file is bundled.
 // Run `yarn build` to regenerate them.
-export { surfaces, getMotionSurface } from '../js/generated/surfaces.js';
+export {
+  surfaces,
+  getMotionSurface,
+  type MotionSurfaceName,
+} from '../js/generated/surfaces.js';
 
 // ── TypeScript types ─────────────────────────────────────────────────────────
 // These are hand-authored here rather than generated because they describe the
@@ -51,9 +55,3 @@ interface SharedElementSurface extends MotionSurfaceBase {
 }
 
 export type MotionSurfaceDefinition = SharedElementSurface | RevealSurface;
-export type MotionSurfaceName =
-  | 'disclosure'
-  | 'contextual'
-  | 'stretch'
-  | 'expand'
-  | 'invoke';

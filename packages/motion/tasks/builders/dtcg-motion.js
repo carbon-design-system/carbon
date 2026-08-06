@@ -325,23 +325,28 @@ function toSassLiteral(value, indent = 0) {
   return `'${String(value)}'`;
 }
 
-// Fields whose string values must be emitted as literal types in the .d.ts so
-// that TypeScript can narrow on them (e.g. `surface.kind === 'reveal'`).
-const LITERAL_STRING_FIELDS = new Set(['kind', 'duration', 'origin']);
-
 /**
  * Recursively convert a recipe value to its TypeScript type string.
- * - Strings in LITERAL_STRING_FIELDS are emitted as string literals ('reveal').
- * - Strings inside easing tuples (arrays) are emitted as string literals too.
- * - Other strings become `string`, numbers become `number`.
+ *
+ * Literal vs widened is determined by depth, not by field name:
+ * - Top-level scalar strings (kind, duration, origin, …) are semantic tokens
+ *   and get literal types so TypeScript can narrow on them.
+ * - Strings nested inside an object (CSS keyframe values like transform,
+ *   clipPath, blockSize, …) are widened to `string` — their exact values are
+ *   not meaningful to the type system.
+ * - Strings inside arrays (easing tuples) are always emitted as literals.
+ * - Numbers are always `number`.
+ *
+ * This avoids a hardcoded field-name allowlist: the recipe structure itself
+ * encodes the intent — keyframe values live one level deeper than tokens.
  *
  * @param {*}      value
- * @param {string} key   - the parent key name (used for literal field detection)
+ * @param {boolean} topLevel - true when called directly on a recipe field
  * @returns {string}
  */
-function recipeValueToDTSType(value, key) {
+function recipeValueToDTSType(value, topLevel) {
   if (Array.isArray(value)) {
-    // Easing tuples: ["entrance", "productive"] → ["entrance", "productive"]
+    // Easing tuples: ["entrance", "productive"] → ['entrance', 'productive']
     const items = value
       .map((v) => (typeof v === 'string' ? `'${v}'` : String(v)))
       .join(', ');
@@ -349,8 +354,9 @@ function recipeValueToDTSType(value, key) {
   }
 
   if (value !== null && typeof value === 'object') {
+    // Nested object — its string values are CSS keyframe values, not tokens.
     const entries = Object.entries(value)
-      .map(([k, v]) => `${k}: ${recipeValueToDTSType(v, k)}`)
+      .map(([k, v]) => `${k}: ${recipeValueToDTSType(v, false)}`)
       .join(', ');
     return `{ ${entries} }`;
   }
@@ -358,10 +364,9 @@ function recipeValueToDTSType(value, key) {
   if (typeof value === 'number') return 'number';
 
   if (typeof value === 'string') {
-    // Semantic fields keep their literal type for narrowing/assignability.
-    if (LITERAL_STRING_FIELDS.has(key)) return `'${value}'`;
-    // CSS property values (transform, clipPath, etc.) are widened.
-    return 'string';
+    // Top-level strings are semantic tokens; preserve the literal type.
+    // Nested strings are CSS values; widen to `string`.
+    return topLevel ? `'${value}'` : 'string';
   }
 
   return String(value);
@@ -400,10 +405,10 @@ function buildDTCGMotionSurfacesJS() {
     jsLines.push(
       `export const ${exportName} = ${JSON.stringify(recipe, null, 2)};`
     );
-    // Build the type inline, field by field, preserving literal types for
-    // semantic fields (kind, duration, origin) while widening CSS values.
+    // Build the type inline — top-level fields get literal types, nested
+    // object fields (CSS keyframe values) are widened to `string`.
     const fields = Object.entries(recipe)
-      .map(([k, v]) => `${k}: ${recipeValueToDTSType(v, k)}`)
+      .map(([k, v]) => `${k}: ${recipeValueToDTSType(v, true)}`)
       .join(', ');
     dtsLines.push(`export declare const ${exportName}: { ${fields} };`);
     jsLines.push('');
