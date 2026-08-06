@@ -188,3 +188,4 @@ export { default as CDSDialogTitle } from './components/dialog/dialog-title';
 export { default as CDSLayout } from './components/layout/layout';
 export { default as CDSLayoutConstraint } from './components/layout/layout-constraint';
 export { default as CDSTruncatedText } from './components/truncated-text/truncated-text';
+export { default as CDSActionSet } from './components/action-set/action-set';
