@@ -16,6 +16,7 @@ import { forEach } from '../../globals/internal/collection-helpers';
 import ChevronLeft16 from '@carbon/icons/es/chevron--left/16.js';
 import ChevronRight16 from '@carbon/icons/es/chevron--right/16.js';
 import CDSContentSwitcher, {
+  type ContentSwitcherSelectionInteractionType,
   NAVIGATION_DIRECTION,
 } from '../content-switcher/content-switcher';
 import {
@@ -407,8 +408,8 @@ export default class CDSTabs extends HostListenerMixin(CDSContentSwitcher) {
 
   protected _selectionDidChange(
     itemToSelect: CDSTab,
-    interactionType?: 'mouse' | 'keyboard' | undefined
-  ) {
+    interactionType?: ContentSwitcherSelectionInteractionType
+  ): void {
     super._selectionDidChange(itemToSelect, interactionType);
     this._assistiveStatusText = this.selectedItemAssistiveText;
   }
@@ -609,7 +610,7 @@ export default class CDSTabs extends HostListenerMixin(CDSContentSwitcher) {
     return true;
   }
 
-  firstUpdated() {
+  firstUpdated(): void {
     // Call super to run content-switcher init logic (initial selection)
     super.firstUpdated();
     this._tabInitialLoad();
@@ -772,23 +773,25 @@ export default class CDSTabs extends HostListenerMixin(CDSContentSwitcher) {
     });
   }
 
-  protected _tabInitialLoad() {
+  protected _tabInitialLoad(): void {
     const { selectorTablist, selectorItemEnabled } = this
       .constructor as typeof CDSTabs;
-    const { selectionMode, selectedIndex } = this;
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
     const tablist = this.shadowRoot!.querySelector(selectorTablist)!;
     this.tablist = tablist;
-    const firstItem =
-      this.querySelectorAll<CDSTab>(selectorItemEnabled)[selectedIndex];
-    if (firstItem) {
-      if (selectionMode === 'manual') {
-        firstItem.highlighted = true;
+    if (this.selectionMode === 'manual') {
+      const items = this.querySelectorAll<CDSTab>(selectorItemEnabled);
+      // Highlight the consumer-selected tab if present, else the first enabled
+      // tab, so it becomes the roving-tabindex focus target. Selection itself is
+      // owned by the consumer-aware base init; do not force it here.
+      const highlighted =
+        Array.from(items).find((tab) => tab.selected) ?? items[0] ?? null;
+      if (highlighted) {
+        highlighted.highlighted = true;
       }
-      firstItem.selected = true;
-      this.value = firstItem.value;
     }
   }
+
   /**
    * Symbols of keys that triggers opening/closing menu and selecting/deselecting menu item.
    */
