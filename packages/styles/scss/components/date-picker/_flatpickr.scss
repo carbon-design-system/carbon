@@ -236,8 +236,10 @@
       transition: none;
     }
 
-    &:hover {
-      background-color: $layer-hover;
+    @media (any-hover: hover) {
+      &:hover {
+        background-color: $layer-hover;
+      }
     }
   }
 
@@ -247,9 +249,11 @@
     fill: $icon-disabled;
   }
 
-  .flatpickr-next-month.disabled:hover svg,
-  .flatpickr-prev-month.disabled:hover svg {
-    fill: $icon-disabled;
+  @media (any-hover: hover) {
+    .flatpickr-next-month.disabled:hover svg,
+    .flatpickr-prev-month.disabled:hover svg {
+      fill: $icon-disabled;
+    }
   }
 
   .flatpickr-current-month {
@@ -265,8 +269,10 @@
   .flatpickr-current-month .cur-month {
     margin-inline: $spacing-02 $spacing-02;
 
-    &:hover {
-      background-color: $layer-hover;
+    @media (any-hover: hover) {
+      &:hover {
+        background-color: $layer-hover;
+      }
     }
   }
 
@@ -274,8 +280,10 @@
     position: relative;
     inline-size: convert.to-rem(60px);
 
-    &:hover {
-      background-color: $background-hover;
+    @media (any-hover: hover) {
+      &:hover {
+        background-color: $background-hover;
+      }
     }
   }
 
@@ -351,9 +359,11 @@
       inset-block-start: 33%;
     }
 
-    &:hover::after {
-      border-block-end-color: $button-primary;
-      border-block-start-color: $button-primary;
+    @media (any-hover: hover) {
+      &:hover::after {
+        border-block-end-color: $button-primary;
+        border-block-start-color: $button-primary;
+      }
     }
 
     &:active::after {
@@ -370,14 +380,16 @@
     border-block-start-color: $text-disabled;
   }
 
-  .numInputWrapper:hover .arrowUp,
-  .numInputWrapper:hover .arrowDown {
-    opacity: 1;
-  }
+  @media (any-hover: hover) {
+    .numInputWrapper:hover .arrowUp,
+    .numInputWrapper:hover .arrowDown {
+      opacity: 1;
+    }
 
-  .numInputWrapper:hover .numInput[disabled] ~ .arrowUp,
-  .numInputWrapper:hover .numInput[disabled] ~ .arrowDown {
-    opacity: 0;
+    .numInputWrapper:hover .numInput[disabled] ~ .arrowUp,
+    .numInputWrapper:hover .numInput[disabled] ~ .arrowDown {
+      opacity: 0;
+    }
   }
 
   .flatpickr-weekdays {
@@ -445,8 +457,10 @@
     inline-size: convert.to-rem(40px);
     transition: all $duration-fast-01 motion(standard, productive);
 
-    &:hover {
-      background: $layer-hover;
+    @media (any-hover: hover) {
+      &:hover {
+        background: $layer-hover;
+      }
     }
 
     &:focus {
@@ -522,11 +536,13 @@
     background: $layer-01;
   }
 
-  .flatpickr-day.endRange:hover {
-    @include focus-outline('outline');
+  @media (any-hover: hover) {
+    .flatpickr-day.endRange:hover {
+      @include focus-outline('outline');
 
-    background: $layer-01;
-    color: $text-primary;
+      background: $layer-01;
+      color: $text-primary;
+    }
   }
 
   .flatpickr-day.endRange.inRange.selected {
@@ -538,8 +554,10 @@
     color: $text-disabled;
     cursor: not-allowed;
 
-    &:hover {
-      background-color: transparent;
+    @media (any-hover: hover) {
+      &:hover {
+        background-color: transparent;
+      }
     }
   }
 
