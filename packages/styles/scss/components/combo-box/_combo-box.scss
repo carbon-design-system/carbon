@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2016, 2023
+// Copyright IBM Corp. 2016, 2026
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -9,6 +9,7 @@
 @use '../../config' as *;
 @use '../../theme' as *;
 @use '../../utilities/convert';
+@use '../../feature-flags' as *;
 @use '../../utilities/focus-outline' as *;
 
 /// Combo box styles
@@ -52,14 +53,23 @@
     @include focus-outline('outline');
   }
 
-  .#{$prefix}--combo-box.#{$prefix}--list-box--expanded:has(
-      input[aria-activedescendant]:not([aria-activedescendant=''])
-    )
-    .#{$prefix}--combo-box--input--focus.#{$prefix}--text-input {
-    outline-offset: convert.to-rem(-1px);
-    outline-width: convert.to-rem(1px);
+  // v12 focus outline is on the combo-box itself, don't select cds--text-input
+  @if enabled('enable-v12-release') {
+    .#{$prefix}--combo-box.#{$prefix}--list-box--expanded:has(
+        input[aria-activedescendant]:not([aria-activedescendant=''])
+      ) {
+      outline-offset: convert.to-rem(-1px);
+      outline-width: convert.to-rem(1px);
+    }
+  } @else {
+    .#{$prefix}--combo-box.#{$prefix}--list-box--expanded:has(
+        input[aria-activedescendant]:not([aria-activedescendant=''])
+      )
+      .#{$prefix}--combo-box--input--focus.#{$prefix}--text-input {
+      outline-offset: convert.to-rem(-1px);
+      outline-width: convert.to-rem(1px);
+    }
   }
-
   .#{$prefix}--combo-box .#{$prefix}--list-box__field,
   .#{$prefix}--combo-box.#{$prefix}--list-box[data-invalid]
     .#{$prefix}--list-box__field,
