@@ -109,6 +109,10 @@ export { default as CDSProgressStep } from './components/progress-indicator/prog
 export { default as CDSRadioButton } from './components/radio-button/radio-button';
 export { default as CDSRadioButtonGroup } from './components/radio-button/radio-button-group';
 export { default as CDSRadioButtonSkeleton } from './components/radio-button/radio-button-skeleton';
+export { default as CDSResizerGrid } from './components/resizer/resizer-grid';
+export { default as CDSResizerHandle } from './components/resizer/resizer-handle';
+export { default as CDSResizerHandlePivot } from './components/resizer/resizer-handle-pivot';
+export { default as CDSResizerPanel } from './components/resizer/resizer-panel';
 export { default as CDSSearch } from './components/search/search';
 export { default as CDSSearchSkeleton } from './components/search/search-skeleton';
 export { default as CDSSelect } from './components/select/select';
