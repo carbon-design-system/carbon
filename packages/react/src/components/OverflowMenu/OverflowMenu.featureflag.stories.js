@@ -123,6 +123,12 @@ AutoAlign.args = {
   autoAlign: true,
 };
 
+AutoAlign.argTypes = {
+  autoAlign: {
+    table: { readonly: true },
+  },
+};
+
 export const Nested = (args) => {
   return (
     <FeatureFlags

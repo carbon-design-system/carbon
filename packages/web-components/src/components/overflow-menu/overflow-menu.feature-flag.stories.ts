@@ -140,6 +140,11 @@ export const AutoAlign = {
   args: {
     autoAlign: true,
   },
+  argTypes: {
+    autoAlign: {
+      table: { readonly: true },
+    },
+  },
   render: (args) => {
     requestAnimationFrame(() => {
       document.querySelector('cds-overflow-menu[autoalign]')?.scrollIntoView({
