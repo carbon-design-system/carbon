@@ -86,7 +86,7 @@
   - '/\bComboBox\b/'
   - '/\bcds-combo-box(?!-)/i'
 'component: combo-button':
-  - '/\bComboButton\b/'
+  - '/\b(ComboButton|combo button)\b/i'
   - '/\bcds-combo-button(?!-)/i'
 'component: contained-list':
   - '/\bContainedList(Item)?\b/'
