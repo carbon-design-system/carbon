@@ -11,7 +11,7 @@ import * as babelTypes from '@babel/types';
 import { types as t, generate } from '@carbon/scss-generator';
 import { camelCase, constantCase } from 'change-case-all';
 import fs from 'fs-extra';
-import yaml from 'js-yaml';
+import * as yaml from 'js-yaml';
 import path from 'path';
 import { fileURLToPath } from 'url';
 

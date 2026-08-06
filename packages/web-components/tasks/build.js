@@ -75,7 +75,9 @@ async function build() {
       // breaking downstream consumers
       dts: false,
       entry: format.inputs.map((input) => path.resolve(packageRoot, input)),
-      external,
+      deps: {
+        neverBundle: external,
+      },
       failOnWarn: false,
       format: format.type,
       inputOptions: withInputCompatibilityAndPlugins,

@@ -274,7 +274,7 @@ export const ActionSet = React.forwardRef<HTMLDivElement, ActionSetProps>(
             <ActionSetButton
               key={action.key || index}
               {...actionProps}
-              size={buttonSize}
+              {...(buttonSize !== undefined && { size: buttonSize })}
             />
           );
         })}

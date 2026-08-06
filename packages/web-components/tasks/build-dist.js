@@ -60,16 +60,18 @@ async function buildDist() {
     clean: false,
     dts: false,
     entry,
-    external: [],
+    deps: {
+      neverBundle: [],
+      onlyBundle: false,
+      alwaysBundle: [/.*/],
+    },
     failOnWarn: false,
     format: 'esm',
     inputOptions: withInputCompatibilityAndPlugins({
       postCSSPlugins,
       packageRoot,
     }),
-    inlineOnly: false,
     logLevel: 'warn',
-    noExternal: [/.*/],
     minify: true,
     outDir: path.resolve(packageRoot, 'dist'),
     outputOptions(options) {
