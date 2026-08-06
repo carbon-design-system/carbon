@@ -20,15 +20,14 @@ export default {
   title: 'Components/FormLabel',
   component: FormLabel,
   args: {
-    children: 'Form label',
-    className: 'custom-form-label',
+    label: 'Form label',
   },
   argTypes: {
-    children: {
+    label: {
       control: { type: 'text' },
-    },
-    className: {
-      control: { type: 'text' },
+      table: {
+        category: 'story controls',
+      },
     },
     id: {
       control: { type: 'text' },
@@ -41,15 +40,15 @@ export default {
   },
 };
 
-export const Default = (args) => {
-  return <FormLabel {...args} />;
+export const Default = ({ label, ...args }) => {
+  return <FormLabel {...args}>{label}</FormLabel>;
 };
 
-export const WithToggletip = ({ align, ...formLabelArgs }) => {
+export const WithToggletip = ({ align, label, ...formLabelArgs }) => {
   return (
     <>
       <div className="form-wrapper">
-        <FormLabel {...formLabelArgs} />
+        <FormLabel {...formLabelArgs}>{label}</FormLabel>
         <Toggletip align={align}>
           <ToggletipButton label="Show information">
             <Information />
@@ -89,7 +88,7 @@ export const WithToggletip = ({ align, ...formLabelArgs }) => {
 };
 
 WithToggletip.args = {
-  children: 'Form label with Toggletip',
+  label: 'Form label with Toggletip',
   align: 'bottom',
 };
 
