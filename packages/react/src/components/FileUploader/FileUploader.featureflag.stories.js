@@ -61,9 +61,6 @@ export default {
   title: 'Components/FileUploader/Feature Flag',
   component: FileUploader,
   tags: ['!autodocs'],
-  parameters: {
-    controls: { include: Object.keys(argTypes) },
-  },
   decorators: [
     (Story) => (
       <WithFeatureFlags
