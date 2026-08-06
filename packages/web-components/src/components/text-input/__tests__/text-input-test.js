@@ -147,6 +147,23 @@ describe('cds-text-input', () => {
     expect(event).to.exist;
   });
 
+  it('should re-dispatch change event', async () => {
+    const el = await fixture(defaultInput);
+    const input = el.shadowRoot.querySelector('input');
+    const changeEvent = oneEvent(el, 'change');
+
+    input.value = 'text';
+    input.dispatchEvent(new Event('change', { bubbles: true }));
+
+    const event = await changeEvent;
+    expect(event).to.exist;
+    expect(event.composed).to.be.true;
+
+    expect(event.target).to.equal(el);
+    expect(event.target.value).to.equal('text');
+    expect(el.value).to.equal('text');
+  });
+
   it('should reflect value set via attribute', async () => {
     // Setting the value property directly should update the internal input,
     // useful for controlled components (React-like behavior)
@@ -303,6 +320,50 @@ describe('cds-text-input', () => {
     const wrapper = el.shadowRoot.querySelector('.cds--text-input-wrapper');
     expect(wrapper.classList.contains('cds--text-input-wrapper--inline')).to.be
       .true;
+  });
+
+  it('should associate the label with the input via matching for/id', async () => {
+    const el = await fixture(defaultInput);
+    const label = el.shadowRoot.querySelector('label');
+    const input = el.shadowRoot.querySelector('input');
+
+    expect(input.id).to.exist;
+    expect(label.getAttribute('for')).to.equal(input.id);
+  });
+
+  it('should describe the input with the helper text', async () => {
+    const el = await fixture(html`
+      <cds-text-input
+        label="Text input label"
+        helper-text="Helpful info"></cds-text-input>
+    `);
+    const input = el.shadowRoot.querySelector('input');
+    const helper = el.shadowRoot.querySelector('.cds--form__helper-text');
+
+    expect(input.getAttribute('aria-describedby')).to.equal('helper-text');
+    expect(helper.id).to.equal('helper-text');
+  });
+
+  it('should not set aria-describedby when there is no helper text', async () => {
+    const el = await fixture(defaultInput);
+    const input = el.shadowRoot.querySelector('input');
+
+    expect(input.hasAttribute('aria-describedby')).to.be.false;
+  });
+
+  it('should describe the input with the validation message when invalid', async () => {
+    const el = await fixture(html`
+      <cds-text-input
+        label="Text input label"
+        helper-text="Helpful info"
+        invalid
+        invalid-text="Something is wrong"></cds-text-input>
+    `);
+    const input = el.shadowRoot.querySelector('input');
+    const errorText = el.shadowRoot.querySelector('.cds--form-requirement');
+
+    expect(input.getAttribute('aria-describedby')).to.equal('error-text');
+    expect(errorText.id).to.equal('error-text');
   });
 
   describe('AI label and slug slot (@query decorator)', () => {

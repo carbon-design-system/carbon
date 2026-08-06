@@ -9,6 +9,7 @@ import { LitElement, html } from 'lit';
 import { property, query } from 'lit/decorators.js';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import { classMap } from 'lit/directives/class-map.js';
+import { ifDefined } from 'lit/directives/if-defined.js';
 import { prefix } from '../../globals/settings';
 import { iconLoader } from '../../globals/internal/icon-loader';
 import ifNonEmpty from '../../globals/directives/if-non-empty';
@@ -106,6 +107,18 @@ class CDSTextInput extends ValidityMixin(FormMixin(LitElement)) {
    */
   protected _handleInput({ target }: Event) {
     this.value = (target as HTMLInputElement).value;
+  }
+
+  /**
+   * Handles `onchange` event on the `input`.
+   *
+   * The native `change` event is not composed, so it stops at the shadow root
+   * and never reaches listeners on the host. This re-emits it as a composed event so
+   * consumers can listen for `change` on `<cds-text-input>` exactly as they
+   * would on a native `<input>`.
+   */
+  protected _handleChange() {
+    this.dispatchEvent(new Event('change', { bubbles: true, composed: true }));
   }
 
   _handleFormdata(event: FormDataEvent) {
@@ -353,6 +366,7 @@ class CDSTextInput extends ValidityMixin(FormMixin(LitElement)) {
       warnText,
       value,
       _handleInput: handleInput,
+      _handleChange: handleChange,
       _hasAILabel: hasAILabel,
       _handleSlotChange: handleSlotChange,
     } = this;
@@ -487,7 +501,7 @@ class CDSTextInput extends ValidityMixin(FormMixin(LitElement)) {
         : null;
 
     const labelWrapper = html`<div class="${prefix}--text-input__label-wrapper">
-      <label class="${labelClasses}">
+      <label class="${labelClasses}" for="input">
         <slot name="label-text">${label}</slot>
       </label>
       ${counter}
@@ -513,12 +527,22 @@ class CDSTextInput extends ValidityMixin(FormMixin(LitElement)) {
       normalizedProps.invalid || normalizedProps.warn
         ? html`<div
             class="${prefix}--form-requirement"
+            id="error-text"
             ?hidden="${!normalizedProps.invalid && !normalizedProps.warn}">
             <slot name="${normalizedProps['slot-name']}">
               ${normalizedProps['slot-text']}
             </slot>
           </div>`
         : null;
+
+    // Mirrors `cds-select`: the validation message takes precedence over the
+    // helper text, which is hidden while the input is invalid or in warning.
+    let describedBy: string | undefined;
+    if (normalizedProps.invalid || normalizedProps.warn) {
+      describedBy = 'error-text';
+    } else if (hasHelperText) {
+      describedBy = 'helper-text';
+    }
 
     return html`
       <div class="${inputWrapperClasses}">
@@ -535,7 +559,7 @@ class CDSTextInput extends ValidityMixin(FormMixin(LitElement)) {
               class="${inputClasses}"
               ?data-invalid="${invalid}"
               ?disabled="${disabled}"
-              ?aria-describedby="${hasHelperText ? 'helper-text' : undefined}"
+              aria-describedby="${ifDefined(describedBy)}"
               id="input"
               name="${ifNonEmpty(this.name)}"
               pattern="${ifNonEmpty(this.pattern)}"
@@ -545,7 +569,8 @@ class CDSTextInput extends ValidityMixin(FormMixin(LitElement)) {
               type="${ifNonEmpty(type)}"
               .value="${this._value}"
               maxlength="${ifNonEmpty(maxCount)}"
-              @input="${handleInput}" />
+              @input="${handleInput}"
+              @change="${handleChange}" />
             ${normalizedProps.icon}
             <slot name="ai-label" @slotchange="${handleSlotChange}"></slot>
             <slot name="slug" @slotchange="${handleSlotChange}"></slot>
