@@ -16,6 +16,7 @@ import {
 jest.mock(
   '@actions/core',
   () => ({
+    error: jest.fn(),
     info: jest.fn(),
     warning: jest.fn(),
   }),
@@ -258,33 +259,87 @@ describe('initializeBugMetadata', () => {
     );
   });
 
-  it('adds a missing project item before setting its defaults', async () => {
+  it('waits for project automation before setting defaults', async () => {
+    const autoAddedItem = {
+      id: 'auto-added-item-id',
+      project: { id: project.id },
+      fieldValues: { nodes: [] },
+    };
     const octokit = createOctokit({
       projectStates: [
         createProjectState({ item: null }),
-        { addProjectV2ItemById: { item: { id: 'added-item-id' } } },
+        createProjectState({ item: autoAddedItem }),
         { updateProjectV2ItemFieldValue: { projectV2Item: {} } },
         { updateProjectV2ItemFieldValue: { projectV2Item: {} } },
       ],
     });
+    const delay = jest.fn().mockResolvedValue();
 
-    await initializeBugMetadata(createContext(), octokit);
+    await initializeBugMetadata(createContext(), octokit, delay);
 
-    expect(octokit.graphql).toHaveBeenNthCalledWith(
-      2,
-      expect.stringContaining('AddBugToProject'),
-      { contentId: 'issue-id', projectId: 'project-id' }
-    );
+    expect(delay).toHaveBeenCalledWith(1000);
+    expect(octokit.graphql).toHaveBeenCalledTimes(4);
+    expect(
+      octokit.graphql.mock.calls.some(([query]) =>
+        query.includes('AddBugToProject')
+      )
+    ).toBe(false);
     expect(octokit.graphql).toHaveBeenNthCalledWith(
       3,
       expect.stringContaining('SetBugProjectSingleSelect'),
-      expect.objectContaining({ itemId: 'added-item-id' })
+      expect.objectContaining({ itemId: 'auto-added-item-id' })
     );
   });
 
-  it('recovers when project auto-add wins the membership race', async () => {
-    const racedItem = {
-      id: 'raced-item-id',
+  it('explains auto-add and App permissions when membership stays invisible', async () => {
+    const invisibleStates = Array.from({ length: 6 }, () =>
+      createProjectState({ item: null })
+    );
+    const octokit = createOctokit({
+      projectStates: invisibleStates,
+    });
+    const delay = jest.fn().mockResolvedValue();
+
+    await expect(
+      initializeBugMetadata(createContext(), octokit, delay)
+    ).rejects.toThrow(
+      "Verify the project's auto-add workflow and that the Carbon Automation GitHub App has Organization permissions > Projects set to Read and write"
+    );
+
+    expect(delay).toHaveBeenCalledTimes(5);
+    expect(delay.mock.calls.map(([milliseconds]) => milliseconds)).toEqual([
+      1000, 2000, 3000, 4000, 5000,
+    ]);
+    expect(
+      octokit.graphql.mock.calls.some(([query]) =>
+        query.includes('AddBugToProject')
+      )
+    ).toBe(false);
+  });
+
+  it('logs the required App permission when project metadata update fails', async () => {
+    const projectError = new Error('Resource not accessible by integration');
+    const octokit = createOctokit({
+      projectStates: [createProjectState(), projectError],
+    });
+
+    await expect(
+      initializeBugMetadata(createContext(), octokit)
+    ).rejects.toThrow(projectError);
+
+    expect(core.error).toHaveBeenCalledWith(
+      expect.stringContaining(
+        'Organization permissions > Projects set to Read and write'
+      )
+    );
+    expect(core.error).toHaveBeenCalledWith(
+      expect.stringContaining('Resource not accessible by integration')
+    );
+  });
+
+  it('preserves project fields present on an auto-added item', async () => {
+    const autoAddedItem = {
+      id: 'auto-added-item-id',
       project: { id: project.id },
       fieldValues: {
         nodes: [{ field: { id: 'area-field-id' } }],
@@ -293,8 +348,7 @@ describe('initializeBugMetadata', () => {
     const octokit = createOctokit({
       projectStates: [
         createProjectState({ item: null }),
-        new Error('Content already exists in this project'),
-        createProjectState({ item: racedItem }),
+        createProjectState({ item: autoAddedItem }),
         { updateProjectV2ItemFieldValue: { projectV2Item: {} } },
       ],
     });
@@ -303,10 +357,10 @@ describe('initializeBugMetadata', () => {
     await initializeBugMetadata(createContext(), octokit, delay);
 
     expect(delay).toHaveBeenCalledTimes(1);
-    expect(octokit.graphql).toHaveBeenCalledTimes(4);
+    expect(octokit.graphql).toHaveBeenCalledTimes(3);
     expect(octokit.graphql).toHaveBeenLastCalledWith(
       expect.stringContaining('SetBugProjectNumber'),
-      expect.objectContaining({ itemId: 'raced-item-id', value: 3 })
+      expect.objectContaining({ itemId: 'auto-added-item-id', value: 3 })
     );
   });
 
