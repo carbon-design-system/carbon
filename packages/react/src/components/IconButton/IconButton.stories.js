@@ -173,10 +173,10 @@ export const withBadgeIndicator = (args) => {
     <div style={{ margin: '3rem' }}>
       <IconButton
         label="Notification"
-        kind="ghost"
-        size="lg"
         autoAlign
-        {...args}>
+        {...args}
+        kind="ghost"
+        size="lg">
         <Notification />
       </IconButton>
     </div>
@@ -184,30 +184,40 @@ export const withBadgeIndicator = (args) => {
 };
 
 withBadgeIndicator.args = {
+  align: 'bottom',
+  autoAlign: true,
   badgeCount: 4,
+  closeOnActivation: true,
+  defaultOpen: true,
   disabled: false,
+  dropShadow: false,
+  enterDelayMs: 100,
+  highContrast: true,
+  isSelected: false,
+  kind: 'ghost',
   label: 'Notifications',
+  leaveDelayMs: 100,
+  size: 'lg',
 };
 withBadgeIndicator.argTypes = {
+  ...Default.argTypes,
   badgeCount: {
     control: {
       type: 'number',
       min: 0,
     },
   },
-  disabled: {
-    control: {
-      type: 'boolean',
-    },
+  kind: {
+    ...Default.argTypes.kind,
+    control: false,
   },
-  label: {
-    control: {
-      type: 'text',
-    },
+  size: {
+    ...Default.argTypes.size,
+    control: false,
   },
 };
 withBadgeIndicator.parameters = {
   controls: {
-    include: ['badgeCount', 'disabled', 'label'],
+    exclude: ['children'],
   },
 };
