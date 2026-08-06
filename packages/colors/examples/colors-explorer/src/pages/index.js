@@ -319,7 +319,10 @@ export default function IndexPage({ lastBuiltOn }) {
       : buildGraphLayout(filteredTokens, expandedSwatches),
     [filteredTokens, expandedSwatches, isRelations, selectedColorToken, activeTheme]
   );
-  const nodeMap = Object.fromEntries(nodes.map((n) => [n.id, n]));
+  const nodeMap = React.useMemo(
+    () => Object.fromEntries(nodes.map((n) => [n.id, n])),
+    [nodes]
+  );
 
   function toggleSwatch(id) {
     setExpandedSwatches((prev) => {
@@ -352,6 +355,27 @@ export default function IndexPage({ lastBuiltOn }) {
     });
   }
   function onMouseUp() { dragging.current = null; }
+  function fitToScreen() {
+    if (!svgRef.current || nodes.length === 0) return;
+    const { width, height } = svgRef.current.getBoundingClientRect();
+    const PAD = 40;
+    const minX = Math.min(...nodes.map((n) => n.cx - n.w / 2));
+    const maxX = Math.max(...nodes.map((n) => n.cx + n.w / 2));
+    const minY = Math.min(...nodes.map((n) => n.cy - n.h / 2));
+    const maxY = Math.max(...nodes.map((n) => n.cy + n.h / 2));
+    const contentW = maxX - minX;
+    const contentH = maxY - minY;
+    const z = Math.min(
+      (width - PAD * 2) / contentW,
+      (height - PAD * 2) / contentH,
+      1
+    );
+    setPan({
+      x: PAD - minX * z,
+      y: PAD - minY * z + (height - PAD * 2 - contentH * z) / 2,
+    });
+    setZoom(z);
+  }
   function onWheel(e) {
     if (e.ctrlKey || e.metaKey) {
       e.preventDefault();
@@ -368,7 +392,7 @@ export default function IndexPage({ lastBuiltOn }) {
     if (!el) return;
     el.addEventListener('wheel', onWheel, { passive: false });
     return () => el.removeEventListener('wheel', onWheel);
-  });
+  }, [activeView]);
 
   return (
     <main
@@ -776,6 +800,11 @@ export default function IndexPage({ lastBuiltOn }) {
             })()}
           </g>
         </svg>
+      )}
+      {isGraph && (
+        <button className="fit-btn" onClick={fitToScreen} title="Fit to screen">
+          ⤢
+        </button>
       )}
     </main>
   );

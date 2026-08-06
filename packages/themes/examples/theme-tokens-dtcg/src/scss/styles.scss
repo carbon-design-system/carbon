@@ -166,6 +166,31 @@ th {
   color: #fff;
 }
 
+// ── Fit to screen button ──────────────────────────────────────────────────────
+
+.fit-btn {
+  position: fixed;
+  inset-block-end: 1.5rem;
+  inset-inline-end: 1.5rem;
+  width: 2.5rem;
+  height: 2.5rem;
+  font-size: 1.25rem;
+  line-height: 1;
+  font-family: inherit;
+  border: 1px solid #0f62fe;
+  background: #fff;
+  color: #0f62fe;
+  cursor: pointer;
+  border-radius: 4px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  z-index: 10;
+
+  &:hover {
+    background: #0f62fe;
+    color: #fff;
+  }
+}
+
 // ── Content ──────────────────────────────────────────────────────────────────
 
 .content {
