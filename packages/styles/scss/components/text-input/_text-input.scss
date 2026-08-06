@@ -20,7 +20,6 @@
 @use '../../utilities/ai-gradient' as *;
 @use '../../utilities/component-reset';
 @use '../../utilities/placeholder-colors' as *;
-@use '../../utilities/tooltip' as *;
 @use '../../utilities/skeleton' as *;
 @use '../../utilities/convert';
 @use '../../utilities/layout';
@@ -44,9 +43,9 @@
     background-color: $field;
     block-size: layout.size('height');
     border-block-end: 1px solid $border-strong;
+    caret-color: $text-primary;
     color: $text-primary;
     font-family: inherit;
-
     inline-size: 100%;
     transition:
       background-color $duration-fast-01 motion(standard, productive),
@@ -116,12 +115,6 @@
     opacity: 1;
   }
 
-  // TODO: deprecate this style block
-  .#{$prefix}--text-input--password__visibility {
-    @include tooltip--trigger('icon', 'bottom');
-    @include tooltip--placement('icon', 'bottom', 'center');
-  }
-
   .#{$prefix}--btn.#{$prefix}--text-input--password__visibility__toggle.#{$prefix}--tooltip__trigger {
     @include focus-outline('reset');
 
@@ -185,21 +178,9 @@
     ~ .#{$prefix}--text-input--password__visibility__toggle.#{$prefix}--tooltip__trigger
     svg {
     fill: $icon-disabled;
-
-    &:hover {
-      fill: $icon-disabled;
-    }
   }
 
   .#{$prefix}--text-input--password__visibility__toggle:disabled.#{$prefix}--tooltip__trigger {
-    svg {
-      fill: $icon-disabled;
-    }
-
-    cursor: default;
-  }
-
-  .#{$prefix}--text-input--password__visibility__toggle:disabled.#{$prefix}--tooltip__trigger:hover {
     svg {
       fill: $icon-disabled;
     }
@@ -224,9 +205,7 @@
   .#{$prefix}--text-input:disabled {
     @include focus-outline('reset');
 
-    background-color: $field;
-
-    border-block-end: 1px solid transparent;
+    background: $field;
     color: $text-disabled;
     cursor: not-allowed;
     // Needed to fix disabled text in Safari #6673
@@ -257,100 +236,6 @@
   //-----------------------------
   .#{$prefix}--skeleton.#{$prefix}--text-input {
     @include skeleton;
-  }
-
-  // Deprecated -- Styles have been moved to `fluid-text-input.scss`
-  // V12 - Remove this block
-  //-----------------------------
-  // Fluid Text Input
-  //-----------------------------
-  .#{$prefix}--form--fluid .#{$prefix}--text-input-wrapper {
-    position: relative;
-    // background: $field;
-    transition:
-      background-color $duration-fast-01 motion(standard, productive),
-      outline $duration-fast-01 motion(standard, productive);
-  }
-
-  .#{$prefix}--form--fluid .#{$prefix}--label {
-    position: absolute;
-    z-index: 1;
-    display: flex;
-    align-items: center;
-    margin: 0;
-    block-size: convert.to-rem(16px);
-    inset-block-start: convert.to-rem(13px);
-    inset-inline-start: $spacing-05;
-  }
-
-  .#{$prefix}--form--fluid .#{$prefix}--form__helper-text {
-    display: none;
-  }
-
-  .#{$prefix}--form--fluid .#{$prefix}--text-input {
-    padding: convert.to-rem(32px) $spacing-05 convert.to-rem(13px);
-    min-block-size: convert.to-rem(64px);
-  }
-
-  .#{$prefix}--text-input__divider,
-  .#{$prefix}--form--fluid .#{$prefix}--text-input__divider {
-    display: none;
-  }
-
-  .#{$prefix}--form--fluid .#{$prefix}--text-input--invalid,
-  .#{$prefix}--form--fluid .#{$prefix}--text-input--warning {
-    border-block-end: none;
-  }
-
-  .#{$prefix}--form--fluid
-    .#{$prefix}--text-input--invalid
-    + .#{$prefix}--text-input__divider,
-  .#{$prefix}--form--fluid
-    .#{$prefix}--text-input--warning
-    + .#{$prefix}--text-input__divider {
-    display: block;
-    border-style: solid;
-    border-color: $border-subtle;
-    margin: 0 1rem;
-    border-block-end: none;
-  }
-
-  .#{$prefix}--form--fluid .#{$prefix}--text-input__invalid-icon {
-    inset-block-start: convert.to-rem(80px);
-  }
-
-  .#{$prefix}--form--fluid
-    .#{$prefix}--text-input__field-wrapper[data-invalid]
-    > .#{$prefix}--text-input--invalid,
-  .#{$prefix}--form--fluid
-    .#{$prefix}--text-input__field-wrapper--warning
-    > .#{$prefix}--text-input--warning {
-    outline: none;
-  }
-
-  .#{$prefix}--form--fluid .#{$prefix}--text-input__field-wrapper--warning {
-    border-block-end: 1px solid $border-strong;
-  }
-
-  .#{$prefix}--form--fluid
-    .#{$prefix}--text-input__field-wrapper[data-invalid]:not(:focus) {
-    @include focus-outline('invalid');
-  }
-
-  .#{$prefix}--form--fluid
-    .#{$prefix}--text-input__field-wrapper[data-invalid]:focus-within,
-  .#{$prefix}--form--fluid
-    .#{$prefix}--text-input__field-wrapper--warning:focus-within {
-    @include focus-outline('outline');
-  }
-
-  .#{$prefix}--form--fluid
-    .#{$prefix}--text-input__field-wrapper[data-invalid]
-    > .#{$prefix}--text-input--invalid:focus,
-  .#{$prefix}--form--fluid
-    .#{$prefix}--text-input__field-wrapper--warning
-    > .#{$prefix}--text-input--warning:focus {
-    outline: none;
   }
 
   //-----------------------------
