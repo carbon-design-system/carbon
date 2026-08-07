@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2019, 2025
+ * Copyright IBM Corp. 2019, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -15,6 +15,12 @@ import Edit16 from '@carbon/icons/es/edit/16.js';
 import Notification16 from '@carbon/icons/es/notification/16.js';
 import { BUTTON_KIND } from '../button/defs';
 import { iconLoader } from '../../globals/internal/icon-loader';
+import {
+  radiusArgTypes,
+  radiusArgs,
+  radiusSource,
+  withRadiusVars,
+} from '../button/story-radius-controls';
 
 const kinds = {
   [`Primary button (${BUTTON_KIND.PRIMARY})`]: BUTTON_KIND.PRIMARY,
@@ -47,6 +53,7 @@ const args = {
   kind: BUTTON_KIND.PRIMARY,
   label: 'Custom label',
   size: ICON_BUTTON_SIZE.MEDIUM,
+  ...radiusArgs,
 };
 
 const argTypes = {
@@ -99,6 +106,7 @@ const argTypes = {
     description: 'Specify the size of the Button. Defaults to <code>md</code>.',
     options: ICON_BUTTON_SIZE,
   },
+  ...radiusArgTypes,
 };
 
 export const Default = {
@@ -166,8 +174,12 @@ export const withBadgeIndicator = {
 };
 
 const meta = {
-  decorators: [(story) => html`<div style="padding: 3rem">${story()}</div>`],
+  decorators: [
+    (story) => html`<div style="padding: 3rem">${story()}</div>`,
+    withRadiusVars,
+  ],
   title: 'Components/Icon Button',
+  parameters: { docs: { source: radiusSource } },
 };
 
 export default meta;

@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2019, 2023
+ * Copyright IBM Corp. 2019, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -21,6 +21,13 @@ import Add16 from '@carbon/icons/es/add/16.js';
 import Notification16 from '@carbon/icons/es/notification/16.js';
 import Filter16 from '@carbon/icons/es/filter/16.js';
 import { iconLoader } from '../../globals/internal/icon-loader';
+import {
+  radiusArgTypes,
+  radiusArgs,
+  radiusNames,
+  radiusSource,
+  withRadiusVars,
+} from './story-radius-controls';
 
 /**
  * Prop parity
@@ -44,6 +51,7 @@ const textButtonControls = [
   'tabindex',
   'target',
   'type',
+  ...radiusNames,
 ];
 
 const iconButtonControls = [
@@ -226,6 +234,7 @@ const sharedArgTypes = {
       None: undefined,
     },
   },
+  ...radiusArgTypes,
 };
 
 const baseButtonTemplate = (args) => html`
@@ -276,9 +285,12 @@ const iconButtonTemplate = (args) => html`
 const meta = {
   title: 'Components/Button',
   argTypes: sharedArgTypes,
+  args: radiusArgs,
+  decorators: [withRadiusVars],
   parameters: {
     actions: { argTypesRegex: '^on.*' },
     controls: { include: textButtonControls },
+    docs: { source: radiusSource },
   },
   render: baseButtonTemplate,
 };
@@ -430,7 +442,7 @@ export const SetOfButtons = {
   },
   parameters: {
     controls: {
-      include: ['stacked'],
+      include: ['stacked', ...radiusNames],
     },
   },
   render: (args) => html`
@@ -448,7 +460,7 @@ export const Skeleton = {
   },
   parameters: {
     controls: {
-      include: ['size', 'href'],
+      include: ['size', 'href', ...radiusNames],
     },
   },
   render: (args) =>

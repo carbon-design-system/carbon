@@ -14,19 +14,29 @@ import {
   fluidButtonOptions,
 } from '../Button/__story__/fluid-button-set-args';
 import { action } from 'storybook/actions';
+import {
+  radiusArgTypes,
+  radiusArgs,
+  radiusSource,
+  withRadiusVars,
+} from '../Button/story-radius-controls';
 
 export default {
   title: 'Components/Button/Set Of Buttons',
   component: ButtonSet,
   subcomponents: { Button },
+  decorators: [withRadiusVars],
+  parameters: { docs: { source: radiusSource } },
 
   args: {
     Buttons: 4,
     'Container width': 600,
     'Container visible': false,
+    ...radiusArgs,
   },
 
   argTypes: {
+    ...radiusArgTypes,
     Buttons: {
       control: {
         type: 'select',

@@ -19,6 +19,12 @@
 @use '../../utilities/layout';
 @use 'tokens' as *;
 
+// get this from https://github.com/carbon-design-system/carbon/pull/22814
+$button-radius-max: custom-property.get-var(
+  'border-radius',
+  convert.to-rem(999999px)
+);
+
 $button-focus-color: custom-property.get-var('button-focus-color', $focus);
 
 @mixin button-base {
@@ -48,9 +54,24 @@ $button-focus-color: custom-property.get-var('button-focus-color', $focus);
   display: inline-flex;
   flex-shrink: 0;
   justify-content: space-between;
-  border-radius: $button-border-radius;
   // Fix to remove added margins on buttons in safari (see #5155)
   margin: 0;
+  border-end-end-radius: custom-property.get-var(
+    'border-radius-ee',
+    $button-radius-max
+  );
+  border-end-start-radius: custom-property.get-var(
+    'border-radius-es',
+    $button-radius-max
+  );
+  border-start-end-radius: custom-property.get-var(
+    'border-radius-se',
+    $button-radius-max
+  );
+  border-start-start-radius: custom-property.get-var(
+    'border-radius-ss',
+    $button-radius-max
+  );
   cursor: pointer;
   inline-size: max-content;
   max-inline-size: convert.to-rem(320px);

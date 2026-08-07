@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2025
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -12,6 +12,14 @@ import { default as Button, ButtonSkeleton } from '../Button';
 import { Stack } from '../Stack';
 import mdx from './Button.mdx';
 import './button-story.scss';
+import {
+  radiusArgTypes,
+  radiusArgs,
+  radiusNames,
+  radiusSource,
+  withRadiusVars,
+  withoutRadiusArgs,
+} from './story-radius-controls';
 
 // Note: we explicitly define the defaultValue here, as the Button component takes `props` and forwards them
 // to the underlying `button` or `a` element, as a result storybook cannot infer the default values from the component.
@@ -109,6 +117,7 @@ const sharedArgTypes = {
     control: { type: 'select' },
     options: ['Add', 'None'],
   },
+  ...radiusArgTypes,
 };
 
 const textButtonControls = [
@@ -124,24 +133,28 @@ const textButtonControls = [
   'tabIndex',
   'target',
   'type',
+  ...radiusNames,
 ];
 
-const skeletonControls = ['href', 'size'];
+const skeletonControls = ['href', 'size', ...radiusNames];
 
 export default {
   title: 'Components/Button',
   component: Button,
   subcomponents: { ButtonSkeleton },
   argTypes: sharedArgTypes,
+  args: radiusArgs,
+  decorators: [withRadiusVars],
   parameters: {
     docs: {
       page: mdx,
+      source: radiusSource,
     },
   },
 };
 
 export const Default = (args) => {
-  const { renderIcon, ...rest } = args;
+  const { renderIcon, ...rest } = withoutRadiusArgs(args);
   return (
     <Button
       {...rest}
@@ -163,7 +176,7 @@ Default.parameters = {
 };
 
 export const Secondary = (args) => {
-  const { renderIcon, ...rest } = args;
+  const { renderIcon, ...rest } = withoutRadiusArgs(args);
   return (
     <Button
       {...rest}
@@ -194,7 +207,7 @@ Secondary.parameters = {
 };
 
 export const Tertiary = (args) => {
-  const { renderIcon, ...rest } = args;
+  const { renderIcon, ...rest } = withoutRadiusArgs(args);
   return (
     <Button
       {...rest}
@@ -225,7 +238,7 @@ Tertiary.parameters = {
 };
 
 export const Ghost = (args) => {
-  const { renderIcon, ...rest } = args;
+  const { renderIcon, ...rest } = withoutRadiusArgs(args);
   return (
     <Button
       {...rest}
@@ -256,7 +269,7 @@ Ghost.parameters = {
 };
 
 export const Danger = (args) => {
-  const { renderIcon, ...rest } = args;
+  const { renderIcon, ...rest } = withoutRadiusArgs(args);
   return (
     <Button
       {...rest}
@@ -287,7 +300,7 @@ Danger.parameters = {
 };
 
 export const DangerTertiary = (args) => {
-  const { renderIcon, ...rest } = args;
+  const { renderIcon, ...rest } = withoutRadiusArgs(args);
   return (
     <Button
       {...rest}
@@ -318,7 +331,7 @@ DangerTertiary.parameters = {
 };
 
 export const DangerGhost = (args) => {
-  const { renderIcon, ...rest } = args;
+  const { renderIcon, ...rest } = withoutRadiusArgs(args);
   return (
     <Button
       {...rest}
@@ -349,7 +362,7 @@ DangerGhost.parameters = {
 };
 
 export const IconButton = (args) => {
-  const { renderIcon, ...rest } = args;
+  const { renderIcon, ...rest } = withoutRadiusArgs(args);
   return (
     <Button
       {...rest}
@@ -381,7 +394,7 @@ IconButton.args = {
 };
 
 export const IconButtonWithBadge = (args) => {
-  const { renderIcon, ...rest } = args;
+  const { renderIcon, ...rest } = withoutRadiusArgs(args);
   return (
     <Button
       {...rest}
@@ -430,7 +443,9 @@ IconButtonWithBadge.args = {
   size: 'lg',
 };
 
-export const Skeleton = (args) => <ButtonSkeleton {...args} />;
+export const Skeleton = (args) => (
+  <ButtonSkeleton {...withoutRadiusArgs(args)} />
+);
 
 Skeleton.parameters = {
   controls: {

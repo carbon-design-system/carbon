@@ -9,6 +9,13 @@ import { Edit, Notification } from '@carbon/icons-react';
 import React from 'react';
 import { IconButton } from '../IconButton';
 import mdx from './IconButton.mdx';
+import {
+  radiusArgTypes,
+  radiusArgs,
+  radiusSource,
+  withRadiusVars,
+  withoutRadiusArgs,
+} from '../Button/story-radius-controls';
 
 const alignOptions = [
   'top',
@@ -39,6 +46,9 @@ const deprecatedAlignOptions = [
 export default {
   title: 'Components/IconButton',
   component: IconButton,
+  argTypes: radiusArgTypes,
+  args: radiusArgs,
+  decorators: [withRadiusVars],
   parameters: {
     controls: {
       hideNoControlsWarning: true,
@@ -46,13 +56,14 @@ export default {
     },
     docs: {
       page: mdx,
+      source: radiusSource,
     },
     layout: 'centered',
   },
 };
 
 export const Default = (args) => {
-  const { align, alignDeprecated, ...rest } = args;
+  const { align, alignDeprecated, ...rest } = withoutRadiusArgs(args);
   const resolvedAlign = alignDeprecated || align;
   return (
     <div style={{ margin: '3rem' }}>
@@ -114,7 +125,7 @@ export const withBadgeIndicator = (args) => {
         kind="ghost"
         size="lg"
         autoAlign
-        {...args}>
+        {...withoutRadiusArgs(args)}>
         <Notification />
       </IconButton>
     </div>
