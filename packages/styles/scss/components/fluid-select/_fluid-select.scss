@@ -12,6 +12,8 @@
 @use '../../motion' as *;
 @use '../../spacing' as *;
 @use '../../theme' as *;
+@use '../../border-radius' as *;
+@use '../../feature-flags' as *;
 @use '../../utilities/convert';
 @use '../../utilities/focus-outline' as *;
 @use '../select';
@@ -19,7 +21,6 @@
 @mixin fluid-select {
   .#{$prefix}--select--fluid .#{$prefix}--select {
     position: relative;
-    background: $field;
     block-size: 100%;
     transition:
       background-color $duration-fast-01 motion(standard, productive),
@@ -109,6 +110,7 @@
 
   .#{$prefix}--select--fluid .#{$prefix}--select-input__wrapper {
     display: block;
+    border-radius: $border-radius-04;
   }
 
   .#{$prefix}--select--fluid

@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2016, 2023
+// Copyright IBM Corp. 2016, 2026
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -13,6 +13,8 @@
 @use '../../theme' as *;
 @use '../../spacing' as *;
 @use '../../type' as *;
+@use '../../border-radius' as *;
+@use '../../feature-flags' as *;
 @use '../../utilities/ai-gradient' as *;
 @use '../../utilities/component-reset';
 @use '../../utilities/convert';
@@ -128,6 +130,44 @@
 
     &::placeholder {
       @include placeholder-colors;
+    }
+  }
+
+  @if enabled('enable-v12-release') {
+    .#{$prefix}--date-picker__calendar.open.arrowTop {
+      // flatpickr calendar renders with 2px margin-top, add $spacing-01 to get 4px
+      margin-block-start: $spacing-01;
+    }
+    .#{$prefix}--date-picker__calendar.open {
+      border-radius: $border-radius-08;
+    }
+
+    .#{$prefix}--date-picker__input {
+      border: 1px solid transparent;
+      border-radius: $border-radius-04;
+      // (gray-20 → gray-50)
+      background:
+        linear-gradient($field, $field) padding-box,
+        linear-gradient(
+            to bottom,
+            $border-subtle calc(100% - 4px),
+            $border-strong 100%
+          )
+          border-box;
+    }
+
+    .#{$prefix}--date-picker--range:not(.#{$prefix}--skeleton) {
+      .#{$prefix}--date-picker-container:first-of-type
+        .#{$prefix}--date-picker__input {
+        border-end-end-radius: 0;
+        border-start-end-radius: 0;
+      }
+
+      .#{$prefix}--date-picker-container:last-of-type
+        .#{$prefix}--date-picker__input {
+        border-end-start-radius: 0;
+        border-start-start-radius: 0;
+      }
     }
   }
 

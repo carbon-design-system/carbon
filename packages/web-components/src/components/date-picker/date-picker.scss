@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2019, 2025
+// Copyright IBM Corp. 2019, 2026
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -12,6 +12,9 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/utilities' as *;
 @use '@carbon/styles/scss/colors' as *;
 @use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/border-radius' as *;
+@use '@carbon/styles/scss/feature-flags' as *;
+
 @use '@carbon/styles/scss/components/form';
 @use '@carbon/styles/scss/components/date-picker/date-picker' as *;
 @use '@carbon/styles/scss/utilities/ai-gradient' as *;
@@ -29,7 +32,11 @@ $css--plex: true !default;
   }
 
   .#{$prefix}--date-picker__calendar.open {
-    margin-block-start: 0;
+    @if enabled('enable-v12-release') {
+      margin-block-start: $spacing-02;
+    } @else {
+      margin-block-start: 0;
+    }
   }
 
   .flatpickr-next-month,
@@ -125,6 +132,22 @@ $css--plex: true !default;
 
   .#{$prefix}--date-picker__input {
     inline-size: rem(143.5px);
+  }
+}
+
+@if enabled('enable-v12-release') {
+  :host(#{$prefix}-date-picker-input[kind='from']) {
+    .#{$prefix}--date-picker__input {
+      border-end-end-radius: 0;
+      border-start-end-radius: 0;
+    }
+  }
+
+  :host(#{$prefix}-date-picker-input[kind='to']) {
+    .#{$prefix}--date-picker__input {
+      border-end-start-radius: 0;
+      border-start-start-radius: 0;
+    }
   }
 }
 

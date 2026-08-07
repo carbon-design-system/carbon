@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2016, 2023
+// Copyright IBM Corp. 2016, 2026
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -7,6 +7,7 @@
 
 @use '../list-box';
 @use '../../config' as *;
+@use '../../feature-flags' as *;
 @use '../../layer' as *;
 @use '../../motion' as *;
 @use '../../spacing' as *;
@@ -68,6 +69,10 @@
     &:hover {
       background-color: $field-hover;
     }
+
+    @if enabled('enable-v12-release') {
+      border: 1px solid transparent;
+    }
   }
 
   // Menu's triggering element updated to button with Downshift v5 upgrade
@@ -101,8 +106,23 @@
     outline: none;
   }
 
-  .#{$prefix}--dropdown--focus .#{$prefix}--list-box__field {
-    @include focus-outline('outline');
+  @if not enabled('enable-v12-release') {
+    .#{$prefix}--dropdown--focus .#{$prefix}--list-box__field {
+      @include focus-outline('outline');
+    }
+  } @else {
+    // v12 focus outline is on the dropdown itself
+    .#{$prefix}--dropdown--focus,
+    .#{$prefix}--dropdown:not(.#{$prefix}--dropdown--open):has(
+        .#{$prefix}--list-box__field:focus
+      ) {
+      @include focus-outline('outline');
+    }
+
+    // prevent nested borders
+    .#{$prefix}--dropdown .#{$prefix}--list-box__field:focus {
+      outline: transparent;
+    }
   }
 
   .#{$prefix}--dropdown--invalid {

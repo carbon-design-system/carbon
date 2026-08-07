@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2016, 2025
+// Copyright IBM Corp. 2016, 2026
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -14,6 +14,8 @@
 @use '../../utilities/convert';
 @use '../../utilities/focus-outline' as *;
 @use '../../utilities/layout';
+@use '../../border-radius' as *;
+@use '../../feature-flags' as *;
 
 /// Multi select styles
 /// @access public
@@ -133,16 +135,35 @@
     outline: none;
   }
 
-  .#{$prefix}--multi-select--filterable--input-focused,
-  .#{$prefix}--multi-select
-    .#{$prefix}--list-box__field--wrapper--input-focused:has(
-      button[aria-expanded='false']
-    ),
-  .#{$prefix}--multi-select
-    .#{$prefix}--list-box__field--wrapper--input-focused:has(
-      button[aria-expanded='true']
-    ) {
-    @include focus-outline('outline');
+  @if not enabled('enable-v12-release') {
+    .#{$prefix}--multi-select--filterable--input-focused,
+    .#{$prefix}--multi-select
+      .#{$prefix}--list-box__field--wrapper--input-focused:has(
+        button[aria-expanded='false']
+      ),
+    .#{$prefix}--multi-select
+      .#{$prefix}--list-box__field--wrapper--input-focused:has(
+        button[aria-expanded='true']
+      ) {
+      @include focus-outline('outline');
+    }
+  } @else {
+    .#{$prefix}--multi-select--filterable--input-focused,
+    .#{$prefix}--multi-select:has(
+        .#{$prefix}--list-box__field--wrapper--input-focused
+      ):has(button[aria-expanded='false']),
+    .#{$prefix}--multi-select:has(
+        .#{$prefix}--list-box__field--wrapper--input-focused
+      ):has(button[aria-expanded='true']) {
+      @include focus-outline('outline');
+    }
+
+    .#{$prefix}--multi-select.#{$prefix}--list-box--expanded:has(
+        button[aria-activedescendant]:not([aria-activedescendant=''])
+      ) {
+      outline-offset: convert.to-rem(-1px);
+      outline-width: convert.to-rem(1px);
+    }
   }
 
   .#{$prefix}--multi-select.#{$prefix}--list-box--expanded
