@@ -10,7 +10,6 @@ import PropTypes from 'prop-types';
 import React, {
   cloneElement,
   forwardRef,
-  useRef,
   type HTMLAttributes,
   type MouseEventHandler,
   type ReactNode,
@@ -168,13 +167,11 @@ const TableHeader = frFn((props, ref) => {
   const uniqueId = useId('table-sort');
 
   // AILabel is always size `mini`
-  const AILableRef = useRef<HTMLInputElement>(null);
-
   const candidate = slug ?? decorator;
   const candidateIsAILabel = isComponentElement(candidate, AILabel);
   const colHasAILabel = candidateIsAILabel;
   const normalizedDecorator = candidateIsAILabel
-    ? cloneElement(candidate, { size: 'mini', ref: AILableRef })
+    ? cloneElement(candidate, { size: 'mini' })
     : candidate;
 
   const headerLabelClassNames = classNames({
@@ -224,21 +221,10 @@ const TableHeader = frFn((props, ref) => {
     });
 
   const headerClasses = cx(headerClassName, `${prefix}--table-sort__header`, {
+    [`${prefix}--table-sort__header--slug`]: slug,
     [`${prefix}--table-sort__header--ai-label`]: colHasAILabel,
     [`${prefix}--table-sort__header--decorator`]: decorator,
   });
-
-  const handleClick = (evt) => {
-    if (
-      colHasAILabel &&
-      AILableRef.current &&
-      AILableRef.current.contains(evt.target)
-    ) {
-      return;
-    } else if (onClick) {
-      return onClick(evt);
-    }
-  };
 
   return (
     <th
@@ -255,7 +241,7 @@ const TableHeader = frFn((props, ref) => {
         type="button"
         aria-describedby={uniqueId}
         className={className}
-        onClick={handleClick}
+        onClick={onClick}
         {...rest}>
         <span className={`${prefix}--table-sort__flex`}>
           <div className={`${prefix}--table-header-label`}>{children}</div>
@@ -264,11 +250,13 @@ const TableHeader = frFn((props, ref) => {
             size={20}
             className={`${prefix}--table-sort__icon-unsorted`}
           />
-          <div className={`${prefix}--table-header-label--decorator-inner`}>
-            {normalizedDecorator}
-          </div>
         </span>
       </button>
+      {(slug || decorator) && (
+        <div className={`${prefix}--table-header-label--decorator-inner`}>
+          {normalizedDecorator}
+        </div>
+      )}
     </th>
   );
 });

@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2022, 2023
+ * Copyright IBM Corp. 2022, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -9,6 +9,9 @@ import React from 'react';
 import { Table, TableHead, TableRow, TableHeader } from '../';
 import userEvent from '@testing-library/user-event';
 import { render, screen } from '@testing-library/react';
+import { AILabel } from '../../AILabel';
+
+const prefix = 'cds';
 
 describe('TableHeader', () => {
   describe('renders as expected - Component API', () => {
@@ -130,6 +133,53 @@ describe('TableHeader', () => {
       );
 
       expect(screen.getByTestId('test-id')).toHaveClass('cds--table-sort');
+    });
+
+    it('should not render the decorator inside the sort button', () => {
+      const { container } = render(
+        <Table>
+          <TableHead>
+            <TableRow>
+              <TableHeader decorator={<AILabel />} isSortable>
+                Header
+              </TableHeader>
+            </TableRow>
+          </TableHead>
+        </Table>
+      );
+
+      expect(
+        container.querySelector(`.${prefix}--table-sort`)
+      ).not.toContainElement(
+        screen.getByRole('button', {
+          name: 'AI Show information',
+        })
+      );
+    });
+
+    it('should position the deprecated slug outside the sort button', () => {
+      const { container } = render(
+        <Table>
+          <TableHead>
+            <TableRow>
+              <TableHeader slug={<AILabel />} isSortable>
+                Header
+              </TableHeader>
+            </TableRow>
+          </TableHead>
+        </Table>
+      );
+
+      expect(container.querySelector('th')).toHaveClass(
+        `${prefix}--table-sort__header--slug`
+      );
+      expect(
+        container.querySelector(`.${prefix}--table-sort`)
+      ).not.toContainElement(
+        screen.getByRole('button', {
+          name: 'AI Show information',
+        })
+      );
     });
 
     it('should respect scope prop', () => {
