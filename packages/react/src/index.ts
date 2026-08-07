@@ -14,6 +14,13 @@ import './internal/warnAboutDeprecatedReactVersion';
 export * from './components/Accordion';
 // export { ActionSet } from './components/ActionSet';
 // export type { ActionSetProps } from './components/ActionSet';
+// BigNumber is a preview candidate — exported with the `preview__` namespace.
+// Once stable, move to a direct `export * from` line in alphabetical order.
+export {
+  BigNumber as preview__BigNumber,
+  BigNumberSkeleton as preview__BigNumberSkeleton,
+} from './components/BigNumber';
+export type { BigNumberProps as preview__BigNumberProps } from './components/BigNumber';
 export * from './components/AccordionItem';
 export * from './components/AspectRatio';
 export * from './components/Breadcrumb';
