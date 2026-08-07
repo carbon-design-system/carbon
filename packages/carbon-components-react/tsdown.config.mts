@@ -16,7 +16,7 @@ const sharedConfig = defineConfig({
   deps: {
     neverBundle: ['@carbon/react'],
   },
-  failOnWarn: false,
+  failOnWarn: true,
   logLevel: 'warn',
   outputOptions(options) {
     return {
