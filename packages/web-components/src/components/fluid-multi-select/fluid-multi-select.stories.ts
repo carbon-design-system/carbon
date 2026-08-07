@@ -69,7 +69,9 @@ const selectionFeedbackOptions = {
 };
 
 const args = {
+  autoalign: false,
   defaultWidth: 400,
+  clearSelectionLabel: 'Clear all selected items',
   clearSelectionDescription: 'Total items selected: ',
   clearSelectionText: 'To clear selection, press Delete or Backspace.',
   disabled: false,
@@ -81,34 +83,30 @@ const args = {
   titleText: 'Label',
   label: 'Choose an option',
   selectionFeedback: SELECTION_FEEDBACK_OPTION.TOP_AFTER_REOPEN,
+  size: 'md',
   readOnly: false,
   isCondensed: false,
   warn: false,
   warnText:
     'Warning message that is really long can wrap to more lines but should not be excessively long.',
+  value: '',
 };
 
 const filterableArgs = {
-  defaultWidth: 400,
-  clearSelectionDescription: 'Total items selected: ',
-  clearSelectionText: 'To clear selection, press Delete or Backspace.',
-  disabled: false,
-  direction: DROPDOWN_DIRECTION.BOTTOM,
-  locale: 'en',
-  invalid: false,
-  invalidText:
-    'Error message that is really long can wrap to more lines but should not be excessively long.',
-  titleText: 'Label',
+  ...args,
   label: '',
-  selectionFeedback: SELECTION_FEEDBACK_OPTION.TOP_AFTER_REOPEN,
-  readOnly: false,
-  isCondensed: false,
-  warn: false,
-  warnText:
-    'Warning message that is really long can wrap to more lines but should not be excessively long.',
 };
 
 const argTypes = {
+  autoalign: {
+    control: 'boolean',
+    description:
+      'Will auto-align the multi-select to avoid viewport collisions.',
+  },
+  clearSelectionLabel: {
+    control: 'text',
+    description: 'Specify the label for the button that clears selection.',
+  },
   clearSelectionDescription: {
     control: 'text',
     description:
@@ -158,6 +156,11 @@ const argTypes = {
       "Specify feedback (mode) of the selection. <code>top</code>: selected item jumps to top <code>fixed</code>: selected item stays at it's position <code>top-after-reopen</code>: selected item jump to top after reopen dropdown.",
     options: selectionFeedbackOptions,
   },
+  size: {
+    control: 'select',
+    options: ['sm', 'md', 'lg'],
+    description: 'Specify the size of the multi-select.',
+  },
   readOnly: {
     control: 'boolean',
     description: 'Whether or not the Dropdown is readonly.',
@@ -179,6 +182,10 @@ const argTypes = {
     description:
       'Specify if the multiselect should render its menu items in condensed mode.',
   },
+  value: {
+    control: 'text',
+    description: 'The value of the selected items.',
+  },
 };
 
 export const Default = {
@@ -186,7 +193,10 @@ export const Default = {
   argTypes,
   render: (args) => {
     const {
+      autoalign,
       clearSelectionLabel,
+      clearSelectionDescription,
+      clearSelectionText,
       defaultWidth,
       direction,
       disabled,
@@ -206,12 +216,15 @@ export const Default = {
     return html`
       <div style="width:${defaultWidth}px">
         <cds-fluid-multi-select
+          ?autoalign=${autoalign}
           direction=${ifDefined(direction)}
           ?disabled=${disabled}
           ?invalid=${invalid}
           ?is-condensed=${isCondensed}
           invalid-text=${ifDefined(invalidText)}
           clear-selection-label=${ifDefined(clearSelectionLabel)}
+          clear-selection-description=${ifDefined(clearSelectionDescription)}
+          clear-selection-text=${ifDefined(clearSelectionText)}
           locale=${ifDefined(locale)}
           ?read-only=${readOnly}
           title-text=${ifDefined(titleText)}
@@ -245,10 +258,19 @@ export const Condensed = {
     ...args,
     isCondensed: true,
   },
-  argTypes,
+  argTypes: {
+    ...argTypes,
+    isCondensed: {
+      ...argTypes.isCondensed,
+      table: { readonly: true },
+    },
+  },
   render: (args) => {
     const {
+      autoalign,
       clearSelectionLabel,
+      clearSelectionDescription,
+      clearSelectionText,
       direction,
       defaultWidth,
       disabled,
@@ -269,12 +291,15 @@ export const Condensed = {
     return html`
       <div style="width:${defaultWidth}px">
         <cds-fluid-multi-select
+          ?autoalign=${autoalign}
           direction=${ifDefined(direction)}
           ?is-condensed="${isCondensed}"
           ?disabled=${disabled}
           ?invalid=${invalid}
           invalid-text=${ifDefined(invalidText)}
           clear-selection-label=${ifDefined(clearSelectionLabel)}
+          clear-selection-description=${ifDefined(clearSelectionDescription)}
+          clear-selection-text=${ifDefined(clearSelectionText)}
           locale=${ifDefined(locale)}
           ?read-only=${readOnly}
           title-text=${ifDefined(titleText)}
@@ -308,7 +333,10 @@ export const Filterable = {
   argTypes,
   render: (args) => {
     const {
+      autoalign,
       clearSelectionLabel,
+      clearSelectionDescription,
+      clearSelectionText,
       direction,
       disabled,
       locale,
@@ -328,6 +356,7 @@ export const Filterable = {
     return html`
       <div style="width:${defaultWidth}px">
         <cds-fluid-multi-select
+          ?autoalign=${autoalign}
           direction=${ifDefined(direction)}
           filterable="true"
           ?is-condensed="${isCondensed}"
@@ -335,6 +364,8 @@ export const Filterable = {
           ?invalid=${invalid}
           invalid-text=${ifDefined(invalidText)}
           clear-selection-label=${ifDefined(clearSelectionLabel)}
+          clear-selection-description=${ifDefined(clearSelectionDescription)}
+          clear-selection-text=${ifDefined(clearSelectionText)}
           locale=${ifDefined(locale)}
           ?read-only=${readOnly}
           title-text=${ifDefined(titleText)}
@@ -372,11 +403,13 @@ export const FilterableWithLayer = {
   argTypes,
   render: (args) => {
     const {
+      autoalign,
       clearSelectionLabel,
+      clearSelectionDescription,
+      clearSelectionText,
       direction,
       defaultWidth,
       disabled,
-      helperText,
       locale,
       isCondensed,
       invalid,
@@ -393,13 +426,15 @@ export const FilterableWithLayer = {
     return html`
       <div style="width:${defaultWidth}px">
         <cds-fluid-multi-select
+          ?autoalign=${autoalign}
           direction=${ifDefined(direction)}
           ?disabled=${disabled}
           ?is-condensed=${isCondensed}
           ?invalid=${invalid}
           invalid-text=${ifDefined(invalidText)}
           clear-selection-label=${ifDefined(clearSelectionLabel)}
-          helper-text=${ifDefined(helperText)}
+          clear-selection-description=${ifDefined(clearSelectionDescription)}
+          clear-selection-text=${ifDefined(clearSelectionText)}
           locale=${ifDefined(locale)}
           ?read-only=${readOnly}
           title-text=${ifDefined(titleText)}
@@ -435,8 +470,14 @@ export const Skeleton = {
       skip: true,
     },
   },
-  render: () =>
-    html` <div style="width:400px;">
+  args: {
+    defaultWidth: 400,
+  },
+  argTypes: {
+    defaultWidth: argTypes.defaultWidth,
+  },
+  render: ({ defaultWidth }) =>
+    html` <div style="width:${defaultWidth}px;">
       <cds-fluid-multi-select-skeleton></cds-fluid-multi-select-skeleton>
     </div>`,
 };
@@ -448,14 +489,22 @@ export const WithAILabel = {
   },
   render: (args) => {
     const {
+      autoalign,
+      clearSelectionDescription,
+      clearSelectionLabel,
+      clearSelectionText,
+      direction,
       disabled,
       invalid,
       invalidText,
+      locale,
       titleText,
       isCondensed,
       label,
       name,
       readOnly,
+      selectionFeedback,
+      value,
       warn,
       warnText,
       defaultWidth,
@@ -463,14 +512,22 @@ export const WithAILabel = {
 
     return html` <div style="width:${defaultWidth}px;">
       <cds-fluid-multi-select
+        ?autoalign=${autoalign}
+        clear-selection-description=${ifDefined(clearSelectionDescription)}
+        clear-selection-label=${ifDefined(clearSelectionLabel)}
+        clear-selection-text=${ifDefined(clearSelectionText)}
+        direction=${ifDefined(direction)}
         ?disabled="${disabled}"
         ?is-condensed="${isCondensed}"
         title-text=${ifDefined(titleText)}
         ?invalid="${invalid}"
         invalid-text="${ifDefined(invalidText)}"
         label=${ifDefined(label)}
+        locale=${ifDefined(locale)}
         name="${ifDefined(name)}"
-        ?readonly="${readOnly}"
+        ?read-only="${readOnly}"
+        selection-feedback=${ifDefined(selectionFeedback)}
+        value=${ifDefined(value)}
         ?warn="${warn}"
         warn-text="${ifDefined(warnText)}">
         <cds-ai-label alignment="bottom-left">
