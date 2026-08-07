@@ -1,0 +1,91 @@
+/**
+ * Copyright IBM Corp. 2026, 2026
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+$css--plex: true !default;
+
+@use '@carbon/styles/scss/config' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/theme';
+@use '@carbon/styles/scss/components/button/tokens' as button-tokens;
+@use '@carbon/styles/scss/utilities/convert' as *;
+@use '@carbon/styles/scss/components/action-set';
+
+$block-class: #{$prefix}--action-set;
+
+// Mixin for button separator styles (DRY principle)
+@mixin button-separator($direction: horizontal) {
+  $shadow: if(
+    $direction == horizontal,
+    to-rem(-1px) 0 0 0 button-tokens.$button-separator,
+    0 to-rem(-1px) 0 0 button-tokens.$button-separator
+  );
+
+  // Slotted buttons
+  ::slotted(#{$prefix}-button:not(:first-of-type)) {
+    z-index: 1;
+    box-shadow: $shadow;
+  }
+
+  ::slotted(#{$prefix}-button:focus-within),
+  ::slotted(#{$prefix}-button:not(:first-of-type)[hide-margin]) {
+    box-shadow: inherit;
+  }
+
+  // Directly rendered buttons (from actions prop)
+  #{$prefix}-button:not(:first-of-type) {
+    z-index: 1;
+    box-shadow: $shadow;
+  }
+
+  #{$prefix}-button:focus-within,
+  #{$prefix}-button:not(:first-of-type)[hide-margin] {
+    box-shadow: inherit;
+  }
+}
+
+:host(#{$prefix}-action-set) {
+  @extend .#{$block-class} !optional;
+
+  // Override padding-inline-start for ghost buttons
+  .#{$block-class}__action-button--ghost {
+    /* stylelint-disable-next-line declaration-no-important */
+    padding-inline-start: 0 !important;
+  }
+
+  // Button separator styles for horizontal layout
+  @include button-separator(horizontal);
+}
+
+// Stacked layout styles
+:host(#{$prefix}-action-set[stacked]) {
+  @include button-separator(vertical);
+}
+
+// Button width overrides per actions-multiple attribute
+:host(#{$prefix}-action-set[actions-multiple='single']) {
+  ::slotted(#{$prefix}-button),
+  #{$prefix}-button {
+    flex: 0 0 100%;
+    max-inline-size: none;
+  }
+}
+
+:host(#{$prefix}-action-set[actions-multiple='double']) {
+  ::slotted(#{$prefix}-button),
+  #{$prefix}-button {
+    flex: 0 1 50%;
+    max-inline-size: none;
+  }
+}
+
+:host(#{$prefix}-action-set[actions-multiple='triple']) {
+  ::slotted(#{$prefix}-button),
+  #{$prefix}-button {
+    flex: 0 1 33.33%;
+    max-inline-size: none;
+  }
+}
