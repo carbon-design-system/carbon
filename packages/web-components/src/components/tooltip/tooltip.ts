@@ -64,7 +64,7 @@ class CDSTooltip extends HostListenerMixin(CDSPopover) {
    * Specify the duration in milliseconds to delay before hiding the tooltip
    */
   @property({ attribute: 'leave-delay-ms', type: Number })
-  leaveDelayMs = 300;
+  leaveDelayMs = 0;
 
   /**
    * Only open tooltip on keyboard interactions, this is used for interactive tags

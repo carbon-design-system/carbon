@@ -123,7 +123,7 @@ const Tooltip: TooltipComponent = React.forwardRef(
       label,
       description,
       enterDelayMs = 100,
-      leaveDelayMs = 300,
+      leaveDelayMs = 0,
       defaultOpen = false,
       closeOnActivation = false,
       dropShadow = false,
