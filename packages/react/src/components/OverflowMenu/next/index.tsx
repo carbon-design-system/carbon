@@ -45,6 +45,18 @@ interface OverflowMenuProps {
   className?: string;
 
   /**
+   * Specify the duration in milliseconds to delay before displaying the tooltip
+   * on the trigger button.
+   */
+  tooltipEnterDelayMs?: number;
+
+  /**
+   * Specify the duration in milliseconds to delay before hiding the tooltip
+   * on the trigger button.
+   */
+  tooltipLeaveDelayMs?: number;
+
+  /**
    * A label describing the options available. Is used in the trigger tooltip and as the menu's accessible label.
    */
   label?: string;
@@ -82,6 +94,8 @@ const OverflowMenu = React.forwardRef<HTMLDivElement, OverflowMenuProps>(
       autoAlign = false,
       children,
       className,
+      tooltipEnterDelayMs = 100,
+      tooltipLeaveDelayMs = 100,
       label = 'Options',
       renderIcon: IconElement = OverflowMenuVertical,
       size = defaultSize,
@@ -199,6 +213,8 @@ const OverflowMenu = React.forwardRef<HTMLDivElement, OverflowMenuProps>(
           className={triggerClasses}
           onClick={handleTriggerClick}
           onMouseDown={handleMousedown}
+          enterDelayMs={tooltipEnterDelayMs}
+          leaveDelayMs={tooltipLeaveDelayMs}
           ref={floatingRef}
           label={label}
           align={tooltipAlignment}
@@ -233,6 +249,7 @@ OverflowMenu.propTypes = {
    * @see https://github.com/carbon-design-system/carbon/issues/18714
    */
   autoAlign: PropTypes.bool,
+
   /**
    * A collection of MenuItems to be rendered within this OverflowMenu.
    */
@@ -242,6 +259,18 @@ OverflowMenu.propTypes = {
    * Additional CSS class names for the trigger button.
    */
   className: PropTypes.string,
+
+  /**
+   * Specify the duration in milliseconds to delay before displaying the tooltip
+   * on the trigger button.
+   */
+  tooltipEnterDelayMs: PropTypes.number,
+
+  /**
+   * Specify the duration in milliseconds to delay before hiding the tooltip
+   * on the trigger button.
+   */
+  tooltipLeaveDelayMs: PropTypes.number,
 
   /**
    * A label describing the options available. Is used in the trigger tooltip and as the menu's accessible label.
