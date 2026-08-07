@@ -21,17 +21,106 @@ export default {
     docs: {
       page: mdx,
     },
+    controls: {
+      exclude: [
+        'iconClass',
+        'id',
+        'light',
+        'menuOffset',
+        'menuOffsetFlip',
+        'menuOptionsClass',
+      ],
+    },
+  },
+  args: {
+    flipped: document?.dir === 'rtl',
+    focusTrap: false,
+    open: false,
+    label: 'Options',
+  },
+  argTypes: {
+    align: {
+      options: [
+        'top',
+        'top-start',
+        'top-end',
+
+        'bottom',
+        'bottom-start',
+        'bottom-end',
+
+        'left',
+        'left-end',
+        'left-start',
+
+        'right',
+        'right-end',
+        'right-start',
+      ],
+      control: { type: 'select' },
+      description: 'Specify how the tooltip should be aligned with the button',
+    },
+    autoAlign: {
+      control: { type: 'boolean' },
+      description:
+        'Will attempt to automatically align the floating element to avoid collisions with the viewport and being clipped by ancestor elements',
+    },
+    defaultOpen: {
+      control: { type: 'boolean' },
+      description:
+        'Specify whether the tooltip should be open when it first renders',
+    },
+    disabled: {
+      control: { type: 'boolean' },
+      description: 'Specify whether the trigger button should be disabled',
+    },
+    enterDelayMs: {
+      control: { type: 'number' },
+      description:
+        'Specify the duration in milliseconds to delay before displaying the tooltip',
+    },
+    flipped: {
+      control: {
+        type: 'boolean',
+      },
+    },
+    focusTrap: {
+      control: {
+        type: 'boolean',
+      },
+    },
+    iconDescription: {
+      control: { type: 'text' },
+      description: 'The icon description',
+    },
+    leaveDelayMs: {
+      control: { type: 'number' },
+      description:
+        'Specify the duration in milliseconds to delay before hiding the tooltip',
+    },
+    open: {
+      control: {
+        type: 'boolean',
+      },
+    },
+    size: {
+      options: ['xs', 'sm', 'md', 'lg'],
+      control: { type: 'select' },
+      description:
+        'Specify the size of the OverflowMenu. Currently supports either `xs`, `sm`, `md` (default) or `lg` as an option.',
+    },
   },
 };
 
-export const RenderCustomIcon = () => {
+export const RenderCustomIcon = (args) => {
   return (
-    <OverflowMenu flipped={document?.dir === 'rtl'} renderIcon={Filter}>
+    <OverflowMenu {...args}>
       <OverflowMenuItem itemText="Filter A" />
       <OverflowMenuItem itemText="Filter B" />
     </OverflowMenu>
   );
 };
+
 export const Default = (args) => (
   <OverflowMenu aria-label="overflow-menu" {...args}>
     <OverflowMenuItem itemText="Stop app" />
@@ -43,67 +132,6 @@ export const Default = (args) => (
   </OverflowMenu>
 );
 
-Default.args = {
-  flipped: document?.dir === 'rtl',
-  focusTrap: false,
-  open: false,
-};
-
-Default.argTypes = {
-  align: {
-    options: [
-      'top',
-      'top-start',
-      'top-end',
-
-      'bottom',
-      'bottom-start',
-      'bottom-end',
-
-      'left',
-      'left-end',
-      'left-start',
-
-      'right',
-      'right-end',
-      'right-start',
-    ],
-  },
-  flipped: {
-    control: {
-      type: 'boolean',
-    },
-  },
-  focusTrap: {
-    control: {
-      type: 'boolean',
-    },
-  },
-  iconDescription: {
-    control: { type: 'text' },
-  },
-  open: {
-    control: {
-      type: 'boolean',
-    },
-  },
-  size: {
-    options: ['xs', 'sm', 'md', 'lg'],
-    control: { type: 'select' },
-  },
-};
-
-Default.parameters = {
-  controls: {
-    exclude: [
-      'direction',
-      'iconClass',
-      'id',
-      'light',
-      'menuOffset',
-      'menuOffsetFlip',
-      'menuOptionsClass',
-      'renderIcon',
-    ],
-  },
+RenderCustomIcon.args = {
+  renderIcon: Filter,
 };

@@ -8,6 +8,7 @@
 import React, { act } from 'react';
 import { OverflowMenu } from '.';
 import { MenuItem } from '../../Menu';
+import { Filter } from '@carbon/icons-react';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
@@ -100,6 +101,49 @@ describe('OverflowMenu (enable-v12-overflowmenu)', () => {
     expect(container.firstChild).toHaveAttribute('id', 'custom-id');
   });
 
+  it('should spread extra props on the button element', () => {
+    render(
+      <OverflowMenu
+        label="Options"
+        renderIcon={() => <Filter aria-label="filter icon" />}
+        tooltipDefaultOpen>
+        <MenuItem label="item" className="test-child">
+          one
+        </MenuItem>
+        <MenuItem label="item" className="test-child">
+          two
+        </MenuItem>
+      </OverflowMenu>
+    );
+
+    const tooltip = screen.getByRole('tooltip');
+    expect(tooltip).toHaveAttribute('aria-hidden', 'false');
+    expect(tooltip).toHaveTextContent('Options');
+
+    const button = screen.getByRole('button');
+    const icon = button.querySelector('svg');
+    expect(icon).toHaveAttribute('aria-label', 'filter icon');
+  });
+
+  it('should apply disabled styling classes', () => {
+    render(
+      <OverflowMenu disabled>
+        <MenuItem label="item" className="test-child">
+          one
+        </MenuItem>
+        <MenuItem label="item" className="test-child">
+          two
+        </MenuItem>
+      </OverflowMenu>
+    );
+
+    const button = screen.getByRole('button');
+    expect(button).toHaveClass('cds--btn--disabled');
+    const icon = button.querySelector('svg');
+    expect(icon).toHaveClass('cds--overflow-menu__icon');
+    expect(icon).toHaveClass('cds--btn__icon');
+  });
+
   it('should always use button kind=ghost', () => {
     render(
       <OverflowMenu>
@@ -114,6 +158,27 @@ describe('OverflowMenu (enable-v12-overflowmenu)', () => {
 
     expect(screen.getByRole('button')).not.toHaveClass('cds--btn--primary');
     expect(screen.getByRole('button')).toHaveClass('cds--btn--ghost');
+  });
+
+  it('should not open menu when disabled', async () => {
+    render(
+      <OverflowMenu disabled>
+        <MenuItem label="item" className="test-child">
+          one
+        </MenuItem>
+        <MenuItem label="item" className="test-child">
+          two
+        </MenuItem>
+      </OverflowMenu>
+    );
+
+    expect(screen.getByRole('button')).toBeDisabled();
+
+    await userEvent.click(screen.getByRole('button'));
+    expect(screen.getByRole('button')).toHaveAttribute(
+      'aria-expanded',
+      'false'
+    );
   });
 
   it('should close menu on outside click', async () => {
