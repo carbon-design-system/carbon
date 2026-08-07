@@ -21,11 +21,11 @@ import Add16 from '@carbon/icons/es/add/16.js';
 import Notification16 from '@carbon/icons/es/notification/16.js';
 import Filter16 from '@carbon/icons/es/filter/16.js';
 import { iconLoader } from '../../globals/internal/icon-loader';
+import styles from './button-story.scss?lit';
 import {
   radiusArgTypes,
   radiusArgs,
   radiusNames,
-  radiusSource,
   withRadiusVars,
 } from './story-radius-controls';
 
@@ -290,7 +290,6 @@ const meta = {
   parameters: {
     actions: { argTypesRegex: '^on.*' },
     controls: { include: textButtonControls },
-    docs: { source: radiusSource },
   },
   render: baseButtonTemplate,
 };
@@ -468,4 +467,125 @@ export const Skeleton = {
       size=${ifDefined(args.size)}
       href=${ifDefined(args.href)}>
     </cds-button-skeleton>`,
+};
+
+const example = (label, note, content) => html`
+  <div class="button-story-example">
+    <code>${label}</code>
+    <span class="button-story-example__note">${note}</span>
+    <div>${content}</div>
+  </div>
+`;
+
+const iconButtons = (args) => html`
+  <cds-button kind="secondary" size=${ifDefined(args.size)}
+    >${iconLoader(Add16, { slot: 'icon' })}</cds-button
+  >
+  <cds-button kind="secondary" size=${ifDefined(args.size)}
+    >${iconLoader(Filter16, { slot: 'icon' })}</cds-button
+  >
+  <cds-button kind="secondary" size=${ifDefined(args.size)}
+    >${iconLoader(Notification16, { slot: 'icon' })}</cds-button
+  >
+`;
+
+export const ButtonsInContext = {
+  name: 'Buttons in Context',
+  render: (args) => html`
+    <div class="button-story-grid">
+      ${example(
+        'single',
+        'follows the base property',
+        html`<cds-button size=${ifDefined(args.size)}>Button</cds-button>`
+      )}
+      ${example(
+        'form actions',
+        'the common pairing',
+        html`<div class="button-story-row">
+          <cds-button kind="secondary" size=${ifDefined(args.size)}
+            >Cancel</cds-button
+          >
+          <cds-button size=${ifDefined(args.size)}>Create</cds-button>
+        </div>`
+      )}
+      ${example(
+        'joined',
+        'inner corners squared',
+        html`<div class="button-story-joined">
+          <cds-button kind="secondary" size=${ifDefined(args.size)}
+            >Day</cds-button
+          >
+          <cds-button kind="secondary" size=${ifDefined(args.size)}
+            >Week</cds-button
+          >
+          <cds-button kind="secondary" size=${ifDefined(args.size)}
+            >Month</cds-button
+          >
+        </div>`
+      )}
+      ${example(
+        'joined icons',
+        'same result with icon buttons',
+        html`<div class="button-story-joined">${iconButtons(args)}</div>`
+      )}
+      ${example(
+        'toolbar on a layer',
+        'container = buttons + padding, so the gap is even',
+        html`<div class="button-story-toolbar">${iconButtons(args)}</div>`
+      )}
+      ${example(
+        'joined icons on a layer',
+        "container follows the group's outer corners",
+        html`<div class="button-story-toolbar">
+          <div class="button-story-joined">${iconButtons(args)}</div>
+        </div>`
+      )}
+      ${example(
+        'nested radius',
+        'outer = inner + padding',
+        html`<div class="button-story-nested">
+          <cds-button size=${ifDefined(args.size)}>Inset</cds-button>
+        </div>`
+      )}
+      ${example(
+        'badge',
+        'sits where the corner pulls in',
+        html`<cds-button kind="ghost" size="lg">
+          ${iconLoader(Notification16, { slot: 'icon' })}
+          <cds-badge-indicator count="4"></cds-badge-indicator>
+        </cds-button>`
+      )}
+      ${example(
+        'flush with a field',
+        'leading corners squared',
+        html`<div class="button-story-flush">
+          <span class="button-story-flush__field">Search</span>
+          <cds-button size=${ifDefined(args.size)}>Go</cds-button>
+        </div>`
+      )}
+      ${example(
+        'asymmetric',
+        'one corner opted out',
+        html`<div class="button-story-asymmetric">
+          <cds-button size=${ifDefined(args.size)}>Notched</cds-button>
+        </div>`
+      )}
+      ${example(
+        'fluid',
+        'stretched, corners unchanged',
+        html`<div class="button-story-fluid">
+          <cds-button size=${ifDefined(args.size)}>Full width</cds-button>
+        </div>`
+      )}
+      ${example(
+        'skeleton',
+        'clipped by overflow: hidden',
+        html`<cds-button-skeleton
+          size=${ifDefined(args.size)}></cds-button-skeleton>`
+      )}
+    </div>
+    <style>
+      ${styles}
+    </style>
+  `,
 };

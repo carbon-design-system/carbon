@@ -22,6 +22,37 @@ $button-font-size: 0.875rem !default;
 /// @group button
 $button-border-radius: 0 !default;
 
+/// get these from https://github.com/carbon-design-system/carbon/pull/22814
+/// @type Number
+/// @access public
+/// @group button
+$border-radius-02: 0.125rem !default;
+
+/// @type Number
+/// @access public
+/// @group button
+$border-radius-04: 0.25rem !default;
+
+/// @type Number
+/// @access public
+/// @group button
+$border-radius-08: 0.5rem !default;
+
+/// @type Number
+/// @access public
+/// @group button
+$border-radius-16: 1rem !default;
+
+/// @type Number
+/// @access public
+/// @group button
+$border-radius-24: 1.5rem !default;
+
+/// @type Number
+/// @access public
+/// @group button
+$border-radius-max: 999999px !default;
+
 /// @type Number
 /// @access public
 /// @group button

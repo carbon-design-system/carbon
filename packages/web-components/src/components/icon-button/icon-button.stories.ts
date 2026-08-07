@@ -18,7 +18,6 @@ import { iconLoader } from '../../globals/internal/icon-loader';
 import {
   radiusArgTypes,
   radiusArgs,
-  radiusSource,
   withRadiusVars,
 } from '../button/story-radius-controls';
 
@@ -179,7 +178,6 @@ const meta = {
     withRadiusVars,
   ],
   title: 'Components/Icon Button',
-  parameters: { docs: { source: radiusSource } },
 };
 
 export default meta;

@@ -17,7 +17,6 @@ import { action } from 'storybook/actions';
 import {
   radiusArgTypes,
   radiusArgs,
-  radiusSource,
   withRadiusVars,
 } from '../Button/story-radius-controls';
 
@@ -26,7 +25,6 @@ export default {
   component: ButtonSet,
   subcomponents: { Button },
   decorators: [withRadiusVars],
-  parameters: { docs: { source: radiusSource } },
 
   args: {
     Buttons: 4,

@@ -1,0 +1,34 @@
+//
+// Copyright IBM Corp. 2026
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use '@carbon/styles/scss/components/button/vars' as *;
+@use '@carbon/styles/scss/utilities/custom-property';
+
+// The steps the border-radius controls offer. Keep in sync with `stepNames` in
+// `story-radius-controls.ts`, which turns a slider index into a class name.
+$radius-steps: (
+  '0': 0rem,
+  '02': $border-radius-02,
+  '04': $border-radius-04,
+  '08': $border-radius-08,
+  '16': $border-radius-16,
+  '24': $border-radius-24,
+  'max': $border-radius-max,
+);
+
+$radius-parts: 'radius', 'radius-ss', 'radius-se', 'radius-es', 'radius-ee';
+
+// One class per property and step, so the decorator can declare the custom
+// properties by toggling classes rather than writing an inline style. Setting
+// them here is also how a consumer would do it.
+@each $part in $radius-parts {
+  @each $step, $value in $radius-steps {
+    .button-story-#{$part}--#{$step} {
+      @include custom-property.declaration('border-#{$part}', $value);
+    }
+  }
+}

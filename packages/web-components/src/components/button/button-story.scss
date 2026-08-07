@@ -5,10 +5,10 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-@use '@carbon/styles/scss/theme' as *;
-@use '@carbon/styles/scss/spacing' as *;
-@use '@carbon/styles/scss/type' as *;
 @use '@carbon/styles/scss/components/button/vars' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/type' as *;
 
 // Falls back to the same value the button mixin uses, for the cases where a
 // container has to match a radius it does not set itself.
@@ -39,17 +39,18 @@ $corners: (
 // columns and still drops to two or one when there is no room.
 .button-story-grid {
   display: grid;
+  align-items: start;
   gap: $spacing-07;
   grid-template-columns: repeat(
     auto-fill,
     minmax(max(16rem, calc((100% - #{$spacing-07} * 2) / 3)), 1fr)
   );
-  align-items: start;
 }
 
 .button-story-example {
   display: flex;
   flex-direction: column;
+  color: $text-primary;
   gap: $spacing-03;
 }
 
@@ -68,9 +69,7 @@ $corners: (
 }
 
 // A joined set keeps the radius on the outer corners of the set only, which is
-// what the per-corner properties are for. The properties are set on the direct
-// children, so they land on the button whether it is the child itself or is
-// wrapped in a tooltip, as icon-only buttons are.
+// what the per-corner properties are for.
 .button-story-joined {
   display: inline-flex;
 
@@ -83,6 +82,17 @@ $corners: (
     --cds-border-radius-se: 0;
     --cds-border-radius-ee: 0;
   }
+}
+
+// A toolbar on a layer. The buttons take all four corner properties as they
+// are set, and the container derives its own from the same properties.
+.button-story-toolbar {
+  @include concentric-corners($spacing-03);
+
+  display: inline-flex;
+  padding: $spacing-03;
+  background: $layer;
+  gap: $spacing-03;
 }
 
 // Concentric corners: the container has to add its padding to the radius its
@@ -109,11 +119,11 @@ $corners: (
 .button-story-flush__field {
   display: flex;
   align-items: center;
-  padding-inline: $spacing-05;
-  border-start-start-radius: $radius;
-  border-end-start-radius: $radius;
   background: $field;
+  border-end-start-radius: $radius;
+  border-start-start-radius: $radius;
   color: $text-secondary;
+  padding-inline: $spacing-05;
 }
 
 // Opting a single corner out of the shared radius.
@@ -121,18 +131,12 @@ $corners: (
   --cds-border-radius-ee: 0;
 }
 
-.button-story-fluid .cds--btn {
+// The host has to stretch as well, or the part fills a shrink-wrapped box.
+.button-story-fluid > * {
   inline-size: 100%;
-  max-inline-size: none;
 }
 
-// A toolbar on a layer. The buttons take all four corner properties as they
-// are set, and the container derives its own from the same properties.
-.button-story-toolbar {
-  @include concentric-corners($spacing-03);
-
-  display: inline-flex;
-  gap: $spacing-03;
-  padding: $spacing-03;
-  background: $layer;
+.button-story-fluid > *::part(button) {
+  inline-size: 100%;
+  max-inline-size: none;
 }

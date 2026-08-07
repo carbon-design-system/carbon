@@ -12,7 +12,6 @@ import mdx from './IconButton.mdx';
 import {
   radiusArgTypes,
   radiusArgs,
-  radiusSource,
   withRadiusVars,
   withoutRadiusArgs,
 } from '../Button/story-radius-controls';
@@ -56,7 +55,6 @@ export default {
     },
     docs: {
       page: mdx,
-      source: radiusSource,
     },
     layout: 'centered',
   },

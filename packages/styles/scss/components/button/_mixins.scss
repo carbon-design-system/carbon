@@ -19,12 +19,6 @@
 @use '../../utilities/layout';
 @use 'tokens' as *;
 
-// get this from https://github.com/carbon-design-system/carbon/pull/22814
-$button-radius-max: custom-property.get-var(
-  'border-radius',
-  convert.to-rem(999999px)
-);
-
 $button-focus-color: custom-property.get-var('button-focus-color', $focus);
 
 @mixin button-base {
@@ -58,19 +52,19 @@ $button-focus-color: custom-property.get-var('button-focus-color', $focus);
   margin: 0;
   border-end-end-radius: custom-property.get-var(
     'border-radius-ee',
-    $button-radius-max
+    custom-property.get-var('border-radius', $border-radius-max)
   );
   border-end-start-radius: custom-property.get-var(
     'border-radius-es',
-    $button-radius-max
+    custom-property.get-var('border-radius', $border-radius-max)
   );
   border-start-end-radius: custom-property.get-var(
     'border-radius-se',
-    $button-radius-max
+    custom-property.get-var('border-radius', $border-radius-max)
   );
   border-start-start-radius: custom-property.get-var(
     'border-radius-ss',
-    $button-radius-max
+    custom-property.get-var('border-radius', $border-radius-max)
   );
   cursor: pointer;
   inline-size: max-content;

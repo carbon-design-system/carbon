@@ -6,21 +6,20 @@
  */
 
 import { html } from 'lit';
+import styles from './story-radius-controls.scss?lit';
 
-// Slider positions; the arg holds the index into this list.
-export const radiusSteps = [
-  '0px',
-  '2px',
-  '4px',
-  '8px',
-  '16px',
-  '24px',
-  '999999px',
-];
+// Slider positions, named after the `$border-radius-*` variables that declare
+// them. Keep in sync with `$radius-steps` in `story-radius-controls.scss`; the
+// arg holds the index into this list.
+const stepNames = ['0', '02', '04', '08', '16', '24', 'max'];
+
+const stepLabels = stepNames
+  .map((step) => (step === '0' ? '0' : `$border-radius-${step}`))
+  .join(', ');
 
 const argType = (description: string) => ({
-  description: `${description} Steps: ${radiusSteps.join(', ')}.`,
-  control: { type: 'range', min: 0, max: radiusSteps.length - 1, step: 1 },
+  description: `${description} Steps: ${stepLabels}.`,
+  control: { type: 'range', min: 0, max: stepNames.length - 1, step: 1 },
   table: { category: 'border-radius' },
 });
 
@@ -38,34 +37,26 @@ export const radiusArgTypes = {
 
 export const radiusNames = Object.keys(radiusArgTypes);
 
-export const radiusArgs = { '--cds-border-radius': radiusSteps.length - 1 };
+export const radiusArgs = { '--cds-border-radius': stepNames.length - 1 };
 
-const radiusStyle = (args) =>
+// `--cds-border-radius-ss` is declared by `.button-story-radius-ss--04`, and so
+// on for each property and step.
+const radiusClasses = (args) =>
   radiusNames
     .filter((name) => args?.[name] != null)
-    .map((name) => `${name}: ${radiusSteps[args[name]]};`)
+    .map(
+      (name) =>
+        `button-story-${name.replace('--cds-border-', '')}--${
+          stepNames[args[name]]
+        }`
+    )
     .join(' ');
 
-// Sets the custom properties on a wrapper. They inherit through the shadow
+// The classes declare the custom properties, which inherit through the shadow
 // boundary into the button.
-export const withRadiusVars = (story, { args }) =>
-  html`<div style="${radiusStyle(args)}">${story()}</div>`;
-
-// Shows the custom properties that are set in the docs code snippet.
-export const radiusSource = {
-  transform: (code: string, { args }) => {
-    const style = radiusStyle(args);
-
-    if (!style) {
-      return code;
-    }
-
-    const story = code
-      .trimEnd()
-      .split('\n')
-      .map((line) => `  ${line}`)
-      .join('\n');
-
-    return `<!-- set this in your scss with the border-tokens -->\n<div style="${style}">\n${story}\n</div>`;
-  },
-};
+export const withRadiusVars = (story, { args }) => html`
+  <div class="${radiusClasses(args)}">${story()}</div>
+  <style>
+    ${styles}
+  </style>
+`;
