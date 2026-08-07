@@ -745,6 +745,401 @@ Map {
       },
     },
   },
+  "Card" => {
+    "$$typeof": Symbol(react.forward_ref),
+    "Action": {
+      "displayName": "Card.Action",
+      "propTypes": {
+        "children": {
+          "type": "node",
+        },
+        "className": {
+          "type": "string",
+        },
+        "label": {
+          "type": "string",
+        },
+      },
+    },
+    "Actions": {
+      "displayName": "Card.Actions",
+      "propTypes": {
+        "children": {
+          "type": "node",
+        },
+        "className": {
+          "type": "string",
+        },
+        "overflowMenuLabel": {
+          "type": "string",
+        },
+      },
+    },
+    "Body": {
+      "$$typeof": Symbol(react.forward_ref),
+      "propTypes": {
+        "children": {
+          "type": "node",
+        },
+        "className": {
+          "type": "string",
+        },
+        "isFlush": {
+          "type": "bool",
+        },
+      },
+      "render": [Function],
+    },
+    "Footer": {
+      "$$typeof": Symbol(react.forward_ref),
+      "propTypes": {
+        "children": {
+          "type": "node",
+        },
+        "className": {
+          "type": "string",
+        },
+      },
+      "render": [Function],
+    },
+    "Header": {
+      "$$typeof": Symbol(react.forward_ref),
+      "propTypes": {
+        "children": {
+          "type": "node",
+        },
+        "className": {
+          "type": "string",
+        },
+      },
+      "render": [Function],
+    },
+    "HeaderMedia": {
+      "displayName": "Card.HeaderMedia",
+      "propTypes": {
+        "children": {
+          "type": "node",
+        },
+        "className": {
+          "type": "string",
+        },
+      },
+    },
+    "Media": {
+      "displayName": "Card.Media",
+      "propTypes": {
+        "children": {
+          "type": "node",
+        },
+        "className": {
+          "type": "string",
+        },
+        "mediaWidth": {
+          "type": "string",
+        },
+      },
+    },
+    "Title": {
+      "$$typeof": Symbol(react.forward_ref),
+      "propTypes": {
+        "children": {
+          "type": "node",
+        },
+        "className": {
+          "type": "string",
+        },
+        "description": {
+          "type": "node",
+        },
+        "descriptionTruncate": {
+          "args": [
+            [
+              {
+                "type": "bool",
+              },
+              {
+                "type": "number",
+              },
+            ],
+          ],
+          "type": "oneOfType",
+        },
+        "label": {
+          "type": "node",
+        },
+        "labelTruncate": {
+          "args": [
+            [
+              {
+                "type": "bool",
+              },
+              {
+                "type": "number",
+              },
+            ],
+          ],
+          "type": "oneOfType",
+        },
+        "maxWidth": {
+          "type": "string",
+        },
+        "titleEnd": {
+          "type": "node",
+        },
+        "titleStart": {
+          "type": "node",
+        },
+        "titleTruncate": {
+          "args": [
+            [
+              {
+                "type": "bool",
+              },
+              {
+                "type": "number",
+              },
+            ],
+          ],
+          "type": "oneOfType",
+        },
+      },
+      "render": [Function],
+    },
+    "TitleMedia": {
+      "$$typeof": Symbol(react.forward_ref),
+      "propTypes": {
+        "children": {
+          "type": "node",
+        },
+        "className": {
+          "type": "string",
+        },
+      },
+      "render": [Function],
+    },
+    "propTypes": {
+      "as": {
+        "type": "elementType",
+      },
+      "children": {
+        "type": "node",
+      },
+      "className": {
+        "type": "string",
+      },
+      "clickable": {
+        "type": "bool",
+      },
+      "decorator": {
+        "type": "node",
+      },
+      "density": {
+        "args": [
+          [
+            "productive",
+            "expressive",
+          ],
+        ],
+        "type": "oneOf",
+      },
+      "disabled": {
+        "type": "bool",
+      },
+      "horizontal": {
+        "type": "bool",
+      },
+      "onClick": {
+        "type": "func",
+      },
+      "onKeyDown": {
+        "type": "func",
+      },
+      "renderFooterIcon": {
+        "args": [
+          [
+            {
+              "type": "func",
+            },
+            {
+              "type": "object",
+            },
+          ],
+        ],
+        "type": "oneOfType",
+      },
+    },
+    "render": [Function],
+  },
+  "CardAction" => {
+    "displayName": "Card.Action",
+    "propTypes": {
+      "children": {
+        "type": "node",
+      },
+      "className": {
+        "type": "string",
+      },
+      "label": {
+        "type": "string",
+      },
+    },
+  },
+  "CardActions" => {
+    "displayName": "Card.Actions",
+    "propTypes": {
+      "children": {
+        "type": "node",
+      },
+      "className": {
+        "type": "string",
+      },
+      "overflowMenuLabel": {
+        "type": "string",
+      },
+    },
+  },
+  "CardBody" => {
+    "$$typeof": Symbol(react.forward_ref),
+    "propTypes": {
+      "children": {
+        "type": "node",
+      },
+      "className": {
+        "type": "string",
+      },
+      "isFlush": {
+        "type": "bool",
+      },
+    },
+    "render": [Function],
+  },
+  "CardFooter" => {
+    "$$typeof": Symbol(react.forward_ref),
+    "propTypes": {
+      "children": {
+        "type": "node",
+      },
+      "className": {
+        "type": "string",
+      },
+    },
+    "render": [Function],
+  },
+  "CardHeader" => {
+    "$$typeof": Symbol(react.forward_ref),
+    "propTypes": {
+      "children": {
+        "type": "node",
+      },
+      "className": {
+        "type": "string",
+      },
+    },
+    "render": [Function],
+  },
+  "CardHeaderMedia" => {
+    "displayName": "Card.HeaderMedia",
+    "propTypes": {
+      "children": {
+        "type": "node",
+      },
+      "className": {
+        "type": "string",
+      },
+    },
+  },
+  "CardMedia" => {
+    "displayName": "Card.Media",
+    "propTypes": {
+      "children": {
+        "type": "node",
+      },
+      "className": {
+        "type": "string",
+      },
+      "mediaWidth": {
+        "type": "string",
+      },
+    },
+  },
+  "CardTitle" => {
+    "$$typeof": Symbol(react.forward_ref),
+    "propTypes": {
+      "children": {
+        "type": "node",
+      },
+      "className": {
+        "type": "string",
+      },
+      "description": {
+        "type": "node",
+      },
+      "descriptionTruncate": {
+        "args": [
+          [
+            {
+              "type": "bool",
+            },
+            {
+              "type": "number",
+            },
+          ],
+        ],
+        "type": "oneOfType",
+      },
+      "label": {
+        "type": "node",
+      },
+      "labelTruncate": {
+        "args": [
+          [
+            {
+              "type": "bool",
+            },
+            {
+              "type": "number",
+            },
+          ],
+        ],
+        "type": "oneOfType",
+      },
+      "maxWidth": {
+        "type": "string",
+      },
+      "titleEnd": {
+        "type": "node",
+      },
+      "titleStart": {
+        "type": "node",
+      },
+      "titleTruncate": {
+        "args": [
+          [
+            {
+              "type": "bool",
+            },
+            {
+              "type": "number",
+            },
+          ],
+        ],
+        "type": "oneOfType",
+      },
+    },
+    "render": [Function],
+  },
+  "CardTitleMedia" => {
+    "$$typeof": Symbol(react.forward_ref),
+    "propTypes": {
+      "children": {
+        "type": "node",
+      },
+      "className": {
+        "type": "string",
+      },
+    },
+    "render": [Function],
+  },
   "Checkbox" => {
     "$$typeof": Symbol(react.forward_ref),
     "propTypes": {
