@@ -246,6 +246,12 @@ $popover-caret-height: custom-property.get-var(
     display: block;
   }
 
+  // When the motion flag is active the `--open` class is omitted; this
+  // class-level selector restores the ::before hover-bridge gap.
+  .#{$prefix}--popover-content--motion-open::before {
+    display: block;
+  }
+
   // Popover caret
   .#{$prefix}--popover-caret,
   .#{$prefix}--popover--auto-align.#{$prefix}--popover-caret {
@@ -293,10 +299,29 @@ $popover-caret-height: custom-property.get-var(
     display: block;
   }
 
+  .#{$prefix}--popover--caret[data-popover-open='true']
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-caret {
+    display: block;
+  }
+
   // autoAlign uses a different dom structure where the caret is within the content instead of a sibling
   .#{$prefix}--popover--auto-align.#{$prefix}--popover--caret.#{$prefix}--popover--open
     > .#{$prefix}--popover
     > .#{$prefix}--popover-content
+    > .#{$prefix}--popover-caret {
+    display: block;
+  }
+
+  // For autoAlign, the caret lives inside .cds--popover-content which is
+  // wrapped by a MotionSurface div, so `data-popover-open` on the container
+  // can't traverse two `>` hops. Use the motion-open modifier class instead.
+  .#{$prefix}--popover--auto-align.#{$prefix}--popover--caret[data-popover-open='true']
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-content
+    > .#{$prefix}--popover-caret,
+  .#{$prefix}--popover--auto-align.#{$prefix}--popover--caret
+    .#{$prefix}--popover-content--motion-open
     > .#{$prefix}--popover-caret {
     display: block;
   }
