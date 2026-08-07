@@ -79,7 +79,7 @@ async function builder(metadata, { output }) {
       deps: {
         neverBundle: external,
       },
-      failOnWarn: false,
+      failOnWarn: true,
       format: format === 'commonjs' ? 'cjs' : 'esm',
       logLevel: 'warn',
       inputOptions(inputOptions) {
@@ -110,7 +110,7 @@ async function builder(metadata, { output }) {
     deps: {
       neverBundle: external,
     },
-    failOnWarn: false,
+    failOnWarn: true,
     format: 'iife',
     globalName: 'CarbonIconsVue',
     logLevel: 'warn',
