@@ -206,6 +206,10 @@
     color: $text-on-color;
   }
 
+  .#{$prefix}--menu-item--danger:focus {
+    box-shadow: inset 0 0 0 convert.to-rem(3px) $background;
+  }
+
   // MenuItemDivider
 
   .#{$prefix}--menu-item-divider {

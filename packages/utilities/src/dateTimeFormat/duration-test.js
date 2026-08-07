@@ -17,6 +17,12 @@ const time = {
 
 describe(locale, () => {
   describe('format', () => {
+    test('should default to narrow style', () => {
+      const expectedOutput = duration.format(time, { locale, style: 'narrow' });
+      const actualOutput = duration.format(time, { locale });
+      expect(actualOutput).toBe(expectedOutput);
+    });
+
     styles.forEach((style) => {
       const df = new Intl.DurationFormat(locale, { style });
       const expectedOutput = df.format(time);

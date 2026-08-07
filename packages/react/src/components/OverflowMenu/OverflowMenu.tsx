@@ -14,6 +14,7 @@ import React, {
   useCallback,
   useContext,
   useEffect,
+  useReducer,
   useRef,
   useState,
   type ElementType,
@@ -280,7 +281,7 @@ export const OverflowMenu = forwardRef<HTMLButtonElement, OverflowMenuProps>(
       open: openProp,
       renderIcon: IconElement = OverflowMenuVertical,
       selectorPrimaryFocus = '[data-floating-menu-primary-focus]',
-      size = 'md',
+      size,
       innerRef,
       ...other
     },
@@ -300,6 +301,8 @@ export const OverflowMenu = forwardRef<HTMLButtonElement, OverflowMenuProps>(
     /** The element ref of the tooltip's trigger button. */
     const triggerRef = useRef<HTMLButtonElement | null>(null);
     const wrapperRef = useRef<HTMLSpanElement | null>(null);
+    const [, forceUpdate] = useReducer((x) => x + 1, 0);
+    const resizeObserverRef = useRef<ResizeObserver | null>(null);
 
     // Sync open prop changes.
     useEffect(() => {
@@ -315,6 +318,36 @@ export const OverflowMenu = forwardRef<HTMLButtonElement, OverflowMenuProps>(
         setHasMountedTrigger(true);
       }
     }, []);
+
+    /**
+     * When `size` is brought in from a contextual layout token, FloatingMenu can't detect size changes
+     * while the menu is open since there is no state/prop update. This ResizeObserver watches
+     * the trigger button when the menu is open and calls `forceUpdate()` on resize to force a re-render if its
+     * size changes while the menu is open
+     */
+
+    useEffect(() => {
+      resizeObserverRef.current = new ResizeObserver(() => {
+        forceUpdate();
+      });
+
+      return () => {
+        resizeObserverRef.current?.disconnect();
+        resizeObserverRef.current = null;
+      };
+    }, []);
+
+    useEffect(() => {
+      if (!triggerRef.current || !resizeObserverRef.current) {
+        return;
+      }
+
+      if (open) {
+        resizeObserverRef.current.observe(triggerRef.current);
+      } else {
+        resizeObserverRef.current.disconnect();
+      }
+    }, [open]);
 
     useEffect(() => {
       if (open && !prevOpenState.current) {
@@ -496,7 +529,9 @@ export const OverflowMenu = forwardRef<HTMLButtonElement, OverflowMenuProps>(
       const triggerEl = triggerRef.current;
       if (triggerEl instanceof Element) {
         return (
-          triggerEl.closest('[data-floating-menu-container]') || document.body
+          triggerEl.closest('[data-floating-menu-container]') ||
+          triggerEl.closest(`.${prefix}--layout`) ||
+          document.body
         );
       }
       return document.body;
@@ -510,7 +545,8 @@ export const OverflowMenu = forwardRef<HTMLButtonElement, OverflowMenuProps>(
       {
         [`${prefix}--overflow-menu--open`]: open,
         [`${prefix}--overflow-menu--light`]: light,
-        [`${prefix}--overflow-menu--${size}`]: size,
+        [`${prefix}--overflow-menu--${size}`]: size, // TODO: V12 - Remove this class
+        [`${prefix}--layout--size-${size}`]: size,
       }
     );
 
@@ -521,13 +557,18 @@ export const OverflowMenu = forwardRef<HTMLButtonElement, OverflowMenuProps>(
         [`${prefix}--overflow-menu--flip`]: flipped,
         [`${prefix}--overflow-menu-options--open`]: open,
         [`${prefix}--overflow-menu-options--light`]: light,
-        [`${prefix}--overflow-menu-options--${size}`]: size,
+        [`${prefix}--overflow-menu-options--${size}`]: size, // TODO: V12 - Remove this class
+        [`${prefix}--layout--size-${size}`]: size,
       }
     );
 
     const overflowMenuIconClasses = classNames(
       `${prefix}--overflow-menu__icon`,
       iconClass
+    );
+
+    const overflowMenuWrapperClasses = classNames(
+      `${prefix}--overflow-menu__wrapper`
     );
 
     const childrenWithProps = Children.toArray(children).map((child, index) => {
@@ -580,7 +621,7 @@ export const OverflowMenu = forwardRef<HTMLButtonElement, OverflowMenuProps>(
     return (
       <>
         <span
-          className={`${prefix}--overflow-menu__wrapper`}
+          className={overflowMenuWrapperClasses}
           aria-owns={open ? menuBodyId : undefined}
           ref={wrapperRef}>
           <IconButton

@@ -260,7 +260,7 @@ class CDSOverflowMenu
    * Overflow menu size.
    */
   @property({ reflect: true })
-  size = OVERFLOW_MENU_SIZE.MEDIUM;
+  size?: OVERFLOW_MENU_SIZE | string = undefined;
 
   /**
    * `true` if this menu is a toolbar action
@@ -279,6 +279,82 @@ class CDSOverflowMenu
    */
   get triggerPosition() {
     return this.getBoundingClientRect();
+  }
+
+  /**
+   * Delegates host focus to the trigger and preserves visible focus when needed.
+   */
+  focus(options?: FocusOptions): void {
+    const triggerButton = this._getTriggerButton();
+    if (!triggerButton) {
+      HTMLElement.prototype.focus.call(this, options);
+      return;
+    }
+
+    HTMLElement.prototype.focus.call(this, options);
+
+    if (this.shadowRoot?.activeElement !== triggerButton) {
+      triggerButton.focus(options);
+    }
+
+    if (this.shadowRoot?.activeElement !== triggerButton) {
+      return;
+    }
+
+    if (triggerButton.matches(':focus')) {
+      return;
+    }
+
+    // Some browsers do not expose `:focus` or emit `focus` for the tooltip
+    // trigger after delegated programmatic focus.
+    triggerButton.dispatchEvent(new FocusEvent('focus'));
+    this.toggleAttribute('data-programmatic-focus', true);
+    triggerButton.addEventListener('blur', this._handleTriggerBlur, {
+      once: true,
+    });
+    this.ownerDocument.addEventListener(
+      'pointerdown',
+      this._handleDocumentInteraction,
+      true
+    );
+    this.ownerDocument.addEventListener(
+      'focusin',
+      this._handleDocumentInteraction,
+      true
+    );
+  }
+
+  private _handleTriggerBlur = () => {
+    this._clearProgrammaticFocus();
+  };
+
+  private _handleDocumentInteraction = (event: Event) => {
+    const triggerButton = this._getTriggerButton();
+    if (!triggerButton || !event.composedPath().includes(triggerButton)) {
+      this._clearProgrammaticFocus();
+    }
+  };
+
+  private _clearProgrammaticFocus() {
+    const triggerButton = this._getTriggerButton();
+    const hadProgrammaticFocus = this.hasAttribute('data-programmatic-focus');
+
+    this.toggleAttribute('data-programmatic-focus', false);
+    triggerButton?.removeEventListener('blur', this._handleTriggerBlur);
+    this.ownerDocument.removeEventListener(
+      'pointerdown',
+      this._handleDocumentInteraction,
+      true
+    );
+    this.ownerDocument.removeEventListener(
+      'focusin',
+      this._handleDocumentInteraction,
+      true
+    );
+
+    if (hadProgrammaticFocus) {
+      triggerButton?.dispatchEvent(new FocusEvent('focusout'));
+    }
   }
 
   connectedCallback() {
@@ -309,6 +385,7 @@ class CDSOverflowMenu
     this.removeEventListener('click', this._handleClickTrigger);
     this.removeEventListener('keydown', this._handleKeydownTrigger);
     this.removeEventListener('mousedown', this._handleMousedownTrigger);
+    this._clearProgrammaticFocus();
     super.disconnectedCallback();
   }
 
@@ -353,7 +430,7 @@ class CDSOverflowMenu
           menuBody.id ||= this._menuId;
           menuBody.setAttribute('breadcrumb', String(this.breadcrumb));
           menuBody.open = open;
-          menuBody.size = size;
+          menuBody.size = size as OVERFLOW_MENU_SIZE;
         }
       }
     }
@@ -376,9 +453,26 @@ class CDSOverflowMenu
           button?.classList.remove(item);
         }
       });
-      button?.classList.add(`${prefix}--overflow-menu--${this.size}`);
+      this.classList.forEach((item) => {
+        if (item.startsWith(`${prefix}--layout--size-`)) {
+          this.classList.remove(item);
+        }
+      });
 
-      this._tooltip?.setAttribute('size', this.size);
+      if (this.size) {
+        button?.classList.add(`${prefix}--overflow-menu--${this.size}`); // TODO: V12 - Remove this class
+        this.classList.add(`${prefix}--layout--size-${this.size}`);
+      }
+
+      if (this.size) {
+        this._tooltip?.setAttribute('size', this.size);
+      } else {
+        this._tooltip?.removeAttribute('size');
+      }
+
+      if (this._menuBody) {
+        this._menuBody.size = this.size as OVERFLOW_MENU_SIZE;
+      }
     }
 
     if (changedProperties.has('toolbarAction') && this.toolbarAction) {
@@ -607,7 +701,9 @@ class CDSOverflowMenu
     menu.y = [top, bottom];
   }
 
-  private _toMenuSize(size: OVERFLOW_MENU_SIZE | string): CDSMenu['size'] {
+  private _toMenuSize(
+    size: OVERFLOW_MENU_SIZE | string | undefined
+  ): CDSMenu['size'] {
     switch (size) {
       case OVERFLOW_MENU_SIZE.EXTRA_SMALL:
         return MENU_SIZE.EXTRA_SMALL;
@@ -618,6 +714,8 @@ class CDSOverflowMenu
       case OVERFLOW_MENU_SIZE.LARGE:
         return MENU_SIZE.LARGE;
       default:
+        // TODO: Remove fallback to `md` when contextual layout token support
+        // is implemented for `cds-menu`.
         return MENU_SIZE.MEDIUM;
     }
   }

@@ -1,0 +1,1345 @@
+{
+  "$schema": "https://tr.designtokens.org/format/",
+  "$description": "White theme - Light theme with high contrast for optimal readability",
+  "$extensions": {
+    "org.carbon": {
+      "color-scheme": "light"
+    }
+  },
+  "background": {
+    "$type": "color",
+    "$value": "{white.default}",
+    "$description": "Default page background color. Use as the base surface for the entire application or page."
+  },
+  "background-inverse": {
+    "$type": "color",
+    "$value": "{gray.80}",
+    "$description": "Inverse background color for dark UI elements. Use for tooltips, inverse buttons, or dark-themed sections."
+  },
+  "background-brand": {
+    "$type": "color",
+    "$value": "{blue.60}",
+    "$description": "Brand color for backgrounds. Use for branded sections, headers, or promotional areas."
+  },
+  "background-active": {
+    "$type": "color",
+    "$value": "{gray.50}",
+    "$description": "Background color for active/pressed state. Use when user clicks or presses interactive elements.",
+    "$extensions": {
+      "org.carbon": {
+        "alphaModifier": 0.5
+      }
+    }
+  },
+  "background-hover": {
+    "$type": "color",
+    "$value": "{gray.50}",
+    "$description": "Background color for hover state. Use when user hovers over interactive elements to provide visual feedback.",
+    "$extensions": {
+      "org.carbon": {
+        "alphaModifier": 0.12
+      }
+    }
+  },
+  "background-inverse-hover": {
+    "$type": "color",
+    "$value": "{gray.80Hover}",
+    "$description": "Hover state for inverse backgrounds"
+  },
+  "background-selected": {
+    "$type": "color",
+    "$value": "{gray.50}",
+    "$description": "Background color for selected state. Use to highlight currently selected items or active states.",
+    "$extensions": {
+      "org.carbon": {
+        "alphaModifier": 0.2
+      }
+    }
+  },
+  "background-selected-hover": {
+    "$type": "color",
+    "$value": "{gray.50}",
+    "$description": "Hover state for selected backgrounds",
+    "$extensions": {
+      "org.carbon": {
+        "alphaModifier": 0.32
+      }
+    }
+  },
+  "layer": {
+    "01": {
+      "$type": "color",
+      "$value": "{gray.10}",
+      "$description": "01. Token for 01 in the design system."
+    },
+    "active-01": {
+      "$type": "color",
+      "$value": "{gray.30}",
+      "$description": "01. Token for 01 in the design system."
+    },
+    "background-01": {
+      "$type": "color",
+      "$value": "{white.default}",
+      "$description": "01. Token for 01 in the design system."
+    },
+    "hover-01": {
+      "$type": "color",
+      "$value": "{gray.10Hover}",
+      "$description": "01. Token for 01 in the design system."
+    },
+    "selected-01": {
+      "$type": "color",
+      "$value": "{gray.20}",
+      "$description": "01. Token for 01 in the design system."
+    },
+    "selected-hover-01": {
+      "$type": "color",
+      "$value": "{gray.20Hover}",
+      "$description": "01. Token for 01 in the design system."
+    },
+    "02": {
+      "$type": "color",
+      "$value": "{white.default}",
+      "$description": "02. Token for 02 in the design system."
+    },
+    "active-02": {
+      "$type": "color",
+      "$value": "{gray.30}",
+      "$description": "02. Token for 02 in the design system."
+    },
+    "background-02": {
+      "$type": "color",
+      "$value": "{gray.10}",
+      "$description": "02. Token for 02 in the design system."
+    },
+    "hover-02": {
+      "$type": "color",
+      "$value": "{gray.10Hover}",
+      "$description": "02. Token for 02 in the design system."
+    },
+    "selected-02": {
+      "$type": "color",
+      "$value": "{gray.20}",
+      "$description": "02. Token for 02 in the design system."
+    },
+    "selected-hover-02": {
+      "$type": "color",
+      "$value": "{gray.20Hover}",
+      "$description": "02. Token for 02 in the design system."
+    },
+    "03": {
+      "$type": "color",
+      "$value": "{gray.10}",
+      "$description": "03. Token for 03 in the design system."
+    },
+    "active-03": {
+      "$type": "color",
+      "$value": "{gray.30}",
+      "$description": "03. Token for 03 in the design system."
+    },
+    "background-03": {
+      "$type": "color",
+      "$value": "{white.default}",
+      "$description": "03. Token for 03 in the design system."
+    },
+    "hover-03": {
+      "$type": "color",
+      "$value": "{gray.10Hover}",
+      "$description": "03. Token for 03 in the design system."
+    },
+    "selected-03": {
+      "$type": "color",
+      "$value": "{gray.20}",
+      "$description": "03. Token for 03 in the design system."
+    },
+    "selected-hover-03": {
+      "$type": "color",
+      "$value": "{gray.20Hover}",
+      "$description": "03. Token for 03 in the design system."
+    },
+    "selected-inverse": {
+      "$type": "color",
+      "$value": "{gray.100}",
+      "$description": "Inverse. Token for inverse in the design system."
+    },
+    "selected-disabled": {
+      "$type": "color",
+      "$value": "{gray.50}",
+      "$description": "Disabled. Token for disabled in the design system."
+    },
+    "accent-01": {
+      "$type": "color",
+      "$value": "{gray.20}",
+      "$description": "01. Token for 01 in the design system."
+    },
+    "accent-active-01": {
+      "$type": "color",
+      "$value": "{gray.40}",
+      "$description": "01. Token for 01 in the design system."
+    },
+    "accent-hover-01": {
+      "$type": "color",
+      "$value": "{gray.20Hover}",
+      "$description": "01. Token for 01 in the design system."
+    },
+    "accent-02": {
+      "$type": "color",
+      "$value": "{gray.20}",
+      "$description": "02. Token for 02 in the design system."
+    },
+    "accent-active-02": {
+      "$type": "color",
+      "$value": "{gray.40}",
+      "$description": "02. Token for 02 in the design system."
+    },
+    "accent-hover-02": {
+      "$type": "color",
+      "$value": "{gray.20Hover}",
+      "$description": "02. Token for 02 in the design system."
+    },
+    "accent-03": {
+      "$type": "color",
+      "$value": "{gray.20}",
+      "$description": "03. Token for 03 in the design system."
+    },
+    "accent-active-03": {
+      "$type": "color",
+      "$value": "{gray.40}",
+      "$description": "03. Token for 03 in the design system."
+    },
+    "accent-hover-03": {
+      "$type": "color",
+      "$value": "{gray.20Hover}",
+      "$description": "03. Token for 03 in the design system."
+    }
+  },
+  "field": {
+    "01": {
+      "$type": "color",
+      "$value": "{gray.10}",
+      "$description": "Background color for form fields on layer 01. Use for input fields, text areas, and selects on first layer."
+    },
+    "hover-01": {
+      "$type": "color",
+      "$value": "{gray.10Hover}",
+      "$description": "Hover background for fields on layer 01. Use when user hovers over input fields on first layer."
+    },
+    "02": {
+      "$type": "color",
+      "$value": "{white.default}",
+      "$description": "Background color for form fields on layer 02. Use for input fields on second layer surfaces."
+    },
+    "hover-02": {
+      "$type": "color",
+      "$value": "{gray.10Hover}",
+      "$description": "Hover background for fields on layer 02. Use when user hovers over input fields on second layer."
+    },
+    "03": {
+      "$type": "color",
+      "$value": "{gray.10}",
+      "$description": "Background color for form fields on layer 03. Use for input fields on third layer surfaces."
+    },
+    "hover-03": {
+      "$type": "color",
+      "$value": "{gray.10Hover}",
+      "$description": "Hover background for fields on layer 03. Use when user hovers over input fields on third layer."
+    }
+  },
+  "border": {
+    "subtle-00": {
+      "$type": "color",
+      "$value": "{gray.20}",
+      "$description": "Subtle border color for base layer. Use for low-contrast borders on page background."
+    },
+    "subtle-01": {
+      "$type": "color",
+      "$value": "{gray.30}",
+      "$description": "Subtle border color for layer 01. Use for low-contrast borders on first layer surfaces."
+    },
+    "subtle-selected-01": {
+      "$type": "color",
+      "$value": "{gray.30}",
+      "$description": "Subtle border for selected items on layer 01. Use for low-contrast borders on selected elements."
+    },
+    "subtle-02": {
+      "$type": "color",
+      "$value": "{gray.20}",
+      "$description": "Subtle border color for layer 02. Use for low-contrast borders on second layer surfaces."
+    },
+    "subtle-selected-02": {
+      "$type": "color",
+      "$value": "{gray.30}",
+      "$description": "Subtle border for selected items on layer 02. Use for low-contrast borders on selected elements."
+    },
+    "subtle-03": {
+      "$type": "color",
+      "$value": "{gray.30}",
+      "$description": "Subtle border color for layer 03. Use for low-contrast borders on third layer surfaces."
+    },
+    "subtle-selected-03": {
+      "$type": "color",
+      "$value": "{gray.30}",
+      "$description": "Subtle border for selected items on layer 03. Use for low-contrast borders on selected elements."
+    },
+    "strong-01": {
+      "$type": "color",
+      "$value": "{gray.50}",
+      "$description": "Strong border color for layer 01. Use for high-contrast borders that need clear definition on first layer."
+    },
+    "strong-02": {
+      "$type": "color",
+      "$value": "{gray.50}",
+      "$description": "Strong border color for layer 02. Use for high-contrast borders on second layer surfaces."
+    },
+    "strong-03": {
+      "$type": "color",
+      "$value": "{gray.50}",
+      "$description": "Strong border color for layer 03. Use for high-contrast borders on third layer surfaces."
+    },
+    "tile-01": {
+      "$type": "color",
+      "$value": "{gray.30}",
+      "$description": "Border color for tiles on layer 01. Use for card or tile borders on first layer."
+    },
+    "tile-02": {
+      "$type": "color",
+      "$value": "{gray.40}",
+      "$description": "Border color for tiles on layer 02. Use for card or tile borders on second layer."
+    },
+    "tile-03": {
+      "$type": "color",
+      "$value": "{gray.30}",
+      "$description": "Border color for tiles on layer 03. Use for card or tile borders on third layer."
+    },
+    "inverse": {
+      "$type": "color",
+      "$value": "{gray.100}",
+      "$description": "Border color for inverse/dark UI elements. Use for borders on dark backgrounds or inverse components."
+    },
+    "interactive": {
+      "$type": "color",
+      "$value": "{blue.60}",
+      "$description": "Border color for interactive elements. Use for focused inputs, active selections, or clickable borders."
+    },
+    "disabled": {
+      "$type": "color",
+      "$value": "{gray.30}",
+      "$description": "Border color for disabled elements. Use when borders need to indicate unavailable or inactive state."
+    }
+  },
+  "text": {
+    "primary": {
+      "$type": "color",
+      "$value": "{gray.100}",
+      "$description": "Primary. Token for primary in the design system."
+    },
+    "secondary": {
+      "$type": "color",
+      "$value": "{gray.70}",
+      "$description": "Secondary. Token for secondary in the design system."
+    },
+    "placeholder": {
+      "$type": "color",
+      "$value": "{gray.100}",
+      "$description": "Placeholder. Token for placeholder in the design system.",
+      "$extensions": {
+        "org.carbon": {
+          "alphaModifier": 0.4
+        }
+      }
+    },
+    "helper": {
+      "$type": "color",
+      "$value": "{gray.60}",
+      "$description": "Helper. Token for helper in the design system."
+    },
+    "error": {
+      "$type": "color",
+      "$value": "{red.60}",
+      "$description": "Error. Token for error in the design system."
+    },
+    "inverse": {
+      "$type": "color",
+      "$value": "{white.default}",
+      "$description": "Inverse. Token for inverse in the design system."
+    },
+    "on-color": {
+      "$type": "color",
+      "$value": "{white.default}",
+      "$description": "Color. Token for color in the design system."
+    },
+    "on-color-disabled": {
+      "$type": "color",
+      "$value": "{gray.50}",
+      "$description": "Disabled. Token for disabled in the design system."
+    },
+    "disabled": {
+      "$type": "color",
+      "$value": "{gray.100}",
+      "$description": "Disabled. Token for disabled in the design system.",
+      "$extensions": {
+        "org.carbon": {
+          "alphaModifier": 0.25
+        }
+      }
+    }
+  },
+  "link": {
+    "primary": {
+      "$type": "color",
+      "$value": "{blue.60}",
+      "$description": "Primary. Token for primary in the design system."
+    },
+    "primary-hover": {
+      "$type": "color",
+      "$value": "{blue.70}",
+      "$description": "Hover. Token for hover in the design system."
+    },
+    "secondary": {
+      "$type": "color",
+      "$value": "{blue.70}",
+      "$description": "Secondary. Token for secondary in the design system."
+    },
+    "inverse": {
+      "$type": "color",
+      "$value": "{blue.40}",
+      "$description": "Inverse. Token for inverse in the design system."
+    },
+    "visited": {
+      "$type": "color",
+      "$value": "{purple.60}",
+      "$description": "Visited. Token for visited in the design system."
+    },
+    "inverse-visited": {
+      "$type": "color",
+      "$value": "{purple.40}",
+      "$description": "Visited. Token for visited in the design system."
+    },
+    "inverse-active": {
+      "$type": "color",
+      "$value": "{gray.10}",
+      "$description": "Active. Token for active in the design system."
+    },
+    "inverse-hover": {
+      "$type": "color",
+      "$value": "{blue.30}",
+      "$description": "Hover. Token for hover in the design system."
+    }
+  },
+  "icon": {
+    "primary": {
+      "$type": "color",
+      "$value": "{gray.100}",
+      "$description": "Primary icon color. Use for main icons with highest visual priority and emphasis."
+    },
+    "secondary": {
+      "$type": "color",
+      "$value": "{gray.70}",
+      "$description": "Secondary. Token for secondary in the design system."
+    },
+    "inverse": {
+      "$type": "color",
+      "$value": "{white.default}",
+      "$description": "Icon color for inverse/dark backgrounds. Use for icons on dark surfaces or inverse components."
+    },
+    "on-color": {
+      "$type": "color",
+      "$value": "{white.default}",
+      "$description": "Icon color for colored backgrounds. Use for icons on brand colors, buttons, or colored surfaces."
+    },
+    "on-color-disabled": {
+      "$type": "color",
+      "$value": "{gray.50}",
+      "$description": "Disabled icon color on colored backgrounds. Use when icons on colored surfaces are inactive."
+    },
+    "disabled": {
+      "$type": "color",
+      "$value": "{gray.100}",
+      "$description": "Icon color for disabled state. Use when icons need to indicate unavailable or inactive functionality.",
+      "$extensions": {
+        "org.carbon": {
+          "alphaModifier": 0.25
+        }
+      }
+    },
+    "interactive": {
+      "$type": "color",
+      "$value": "{blue.60}",
+      "$description": "Icon color for interactive elements. Use for clickable icons, buttons, and actionable items."
+    }
+  },
+  "support": {
+    "error": {
+      "$type": "color",
+      "$value": "{red.60}",
+      "$description": "Error. Token for error in the design system."
+    },
+    "success": {
+      "$type": "color",
+      "$value": "{green.50}",
+      "$description": "Success. Token for success in the design system."
+    },
+    "warning": {
+      "$type": "color",
+      "$value": "{yellow.30}",
+      "$description": "Warning. Token for warning in the design system."
+    },
+    "info": {
+      "$type": "color",
+      "$value": "{blue.70}",
+      "$description": "Info. Token for info in the design system."
+    },
+    "error-inverse": {
+      "$type": "color",
+      "$value": "{red.50}",
+      "$description": "Inverse. Token for inverse in the design system."
+    },
+    "success-inverse": {
+      "$type": "color",
+      "$value": "{green.40}",
+      "$description": "Inverse. Token for inverse in the design system."
+    },
+    "warning-inverse": {
+      "$type": "color",
+      "$value": "{yellow.30}",
+      "$description": "Inverse. Token for inverse in the design system."
+    },
+    "info-inverse": {
+      "$type": "color",
+      "$value": "{blue.50}",
+      "$description": "Inverse. Token for inverse in the design system."
+    },
+    "caution-minor": {
+      "$type": "color",
+      "$value": "{yellow.30}",
+      "$description": "Minor. Token for minor in the design system."
+    },
+    "caution-major": {
+      "$type": "color",
+      "$value": "{orange.40}",
+      "$description": "Major. Token for major in the design system."
+    },
+    "caution-undefined": {
+      "$type": "color",
+      "$value": "{purple.60}",
+      "$description": "Undefined. Token for undefined in the design system."
+    }
+  },
+  "focus": {
+    "$type": "color",
+    "$value": "{blue.60}",
+    "$description": "Focus indicator color. Use for focus rings and outlines on interactive elements for keyboard navigation."
+  },
+  "focus-inset": {
+    "$type": "color",
+    "$value": "{white.default}",
+    "$description": "Inset focus indicator color. Use for inner focus rings on elements with colored backgrounds."
+  },
+  "focus-inverse": {
+    "$type": "color",
+    "$value": "{white.default}",
+    "$description": "Focus indicator for inverse/dark elements. Use for focus rings on dark backgrounds."
+  },
+  "interactive": {
+    "$type": "color",
+    "$value": "{blue.60}",
+    "$description": "Interactive element color. Use for clickable elements, links, and actionable items."
+  },
+  "highlight": {
+    "$type": "color",
+    "$value": "{blue.20}",
+    "$description": "Highlight color for selected text or emphasized content. Use for text selection or search result highlighting."
+  },
+  "overlay": {
+    "$type": "color",
+    "$value": "{black.default}",
+    "$description": "Overlay color for modal backgrounds. Use to dim content behind dialogs and modals.",
+    "$extensions": {
+      "org.carbon": {
+        "alphaModifier": 0.6
+      }
+    }
+  },
+  "toggle-off": {
+    "$type": "color",
+    "$value": "{gray.50}",
+    "$description": "Off. Token for off in the design system."
+  },
+  "shadow": {
+    "$type": "color",
+    "$value": "{black.default}",
+    "$description": "Shadow color for elevation. Provides depth and layering for elevated components.",
+    "$extensions": {
+      "org.carbon": {
+        "alphaModifier": 0.3
+      }
+    }
+  },
+  "skeleton": {
+    "background": {
+      "$type": "color",
+      "$value": "{gray.10Hover}",
+      "$description": "Background. Token for background in the design system."
+    },
+    "element": {
+      "$type": "color",
+      "$value": "{gray.30}",
+      "$description": "Element. Token for element in the design system."
+    }
+  },
+  "syntax": {
+    "comment": {
+      "$type": "color",
+      "$value": "{green.60}",
+      "$description": "Syntax highlighting color for comments. Use for all comment types in code editors."
+    },
+    "line-comment": {
+      "$type": "color",
+      "$value": "{green.60}",
+      "$description": "Syntax highlighting color for line comments. Use for single-line comments in code."
+    },
+    "block-comment": {
+      "$type": "color",
+      "$value": "{green.60}",
+      "$description": "Syntax highlighting color for block comments. Use for multi-line comment blocks."
+    },
+    "doc-comment": {
+      "$type": "color",
+      "$value": "{green.60}",
+      "$description": "Syntax highlighting color for documentation comments. Use for JSDoc, docstrings, etc."
+    },
+    "string": {
+      "$type": "color",
+      "$value": "{gray.100}",
+      "$description": "Syntax highlighting color for strings. Use for string literals in code."
+    },
+    "doc-string": {
+      "$type": "color",
+      "$value": "{gray.100}",
+      "$description": "Syntax highlighting color for documentation strings. Use for docstring literals."
+    },
+    "keyword": {
+      "$type": "color",
+      "$value": "{blue.60}",
+      "$description": "Syntax highlighting color for keywords. Use for language keywords like if, for, class."
+    },
+    "operator-keyword": {
+      "$type": "color",
+      "$value": "{blue.60}",
+      "$description": "Syntax highlighting color for operator keywords. Use for keywords like and, or, not."
+    },
+    "control-keyword": {
+      "$type": "color",
+      "$value": "{purple.70}",
+      "$description": "Syntax highlighting color for control flow keywords. Use for if, else, while, return."
+    },
+    "definition-keyword": {
+      "$type": "color",
+      "$value": "{cyan.70}",
+      "$description": "Syntax highlighting color for definition keywords. Use for def, function, class declarations."
+    },
+    "module-keyword": {
+      "$type": "color",
+      "$value": "{purple.70}",
+      "$description": "Syntax highlighting color for module keywords. Use for import, export, require."
+    },
+    "variable": {
+      "$type": "color",
+      "$value": "{blue.60}",
+      "$description": "Syntax highlighting color for variables. Use for variable names and identifiers."
+    },
+    "name": {
+      "$type": "color",
+      "$value": "{blue.60}",
+      "$description": "Syntax name"
+    },
+    "variable-name": {
+      "$type": "color",
+      "$value": "{blue.60}",
+      "$description": "Syntax variable name"
+    },
+    "label-name": {
+      "$type": "color",
+      "$value": "{blue.60}",
+      "$description": "Syntax label name"
+    },
+    "attribute": {
+      "$type": "color",
+      "$value": "{cyan.70}",
+      "$description": "Syntax attribute"
+    },
+    "attribute-name": {
+      "$type": "color",
+      "$value": "{cyan.70}",
+      "$description": "Syntax attribute name"
+    },
+    "property-name": {
+      "$type": "color",
+      "$value": "{cyan.70}",
+      "$description": "Syntax property name"
+    },
+    "tag": {
+      "$type": "color",
+      "$value": "{teal.60}",
+      "$description": "Syntax tag"
+    },
+    "tag-name": {
+      "$type": "color",
+      "$value": "{teal.60}",
+      "$description": "Syntax tag name"
+    },
+    "type": {
+      "$type": "color",
+      "$value": "{teal.60}",
+      "$description": "Syntax type"
+    },
+    "type-name": {
+      "$type": "color",
+      "$value": "{teal.60}",
+      "$description": "Syntax type name"
+    },
+    "class-name": {
+      "$type": "color",
+      "$value": "{teal.60}",
+      "$description": "Syntax class name"
+    },
+    "namespace": {
+      "$type": "color",
+      "$value": "{teal.60}",
+      "$description": "Syntax namespace"
+    },
+    "macro-name": {
+      "$type": "color",
+      "$value": "{gray.100}",
+      "$description": "Syntax macro name"
+    },
+    "atom": {
+      "$type": "color",
+      "$value": "{gray.100}",
+      "$description": "Syntax atom"
+    },
+    "literal": {
+      "$type": "color",
+      "$value": "{gray.100}",
+      "$description": "Syntax literal"
+    },
+    "bool": {
+      "$type": "color",
+      "$value": "{gray.100}",
+      "$description": "Syntax bool"
+    },
+    "null": {
+      "$type": "color",
+      "$value": "{gray.100}",
+      "$description": "Syntax null"
+    },
+    "self": {
+      "$type": "color",
+      "$value": "{teal.60}",
+      "$description": "Syntax self"
+    },
+    "number": {
+      "$type": "color",
+      "$value": "{green.60}",
+      "$description": "Syntax number"
+    },
+    "integer": {
+      "$type": "color",
+      "$value": "{green.60}",
+      "$description": "Syntax integer"
+    },
+    "float": {
+      "$type": "color",
+      "$value": "{green.60}",
+      "$description": "Syntax float"
+    },
+    "unit": {
+      "$type": "color",
+      "$value": "{green.60}",
+      "$description": "Syntax unit"
+    },
+    "character": {
+      "$type": "color",
+      "$value": "{gray.100}",
+      "$description": "Syntax character"
+    },
+    "attribute-value": {
+      "$type": "color",
+      "$value": "{gray.100}",
+      "$description": "Syntax attribute value"
+    },
+    "special-string": {
+      "$type": "color",
+      "$value": "{purple.60}",
+      "$description": "Syntax special string"
+    },
+    "regexp": {
+      "$type": "color",
+      "$value": "{purple.70}",
+      "$description": "Syntax regexp"
+    },
+    "escape": {
+      "$type": "color",
+      "$value": "{coolGray.80}",
+      "$description": "Syntax escape"
+    },
+    "url": {
+      "$type": "color",
+      "$value": "{coolGray.80}",
+      "$description": "Syntax url"
+    },
+    "color": {
+      "$type": "color",
+      "$value": "{gray.100}",
+      "$description": "Syntax color"
+    },
+    "operator": {
+      "$type": "color",
+      "$value": "{coolGray.80}",
+      "$description": "Syntax operator"
+    },
+    "deref-operator": {
+      "$type": "color",
+      "$value": "{coolGray.80}",
+      "$description": "Syntax deref operator"
+    },
+    "arithmetic-operator": {
+      "$type": "color",
+      "$value": "{coolGray.80}",
+      "$description": "Syntax arithmetic operator"
+    },
+    "logic-operator": {
+      "$type": "color",
+      "$value": "{coolGray.80}",
+      "$description": "Syntax logic operator"
+    },
+    "bitwise-operator": {
+      "$type": "color",
+      "$value": "{coolGray.80}",
+      "$description": "Syntax bitwise operator"
+    },
+    "compare-operator": {
+      "$type": "color",
+      "$value": "{coolGray.80}",
+      "$description": "Syntax compare operator"
+    },
+    "update-operator": {
+      "$type": "color",
+      "$value": "{coolGray.80}",
+      "$description": "Syntax update operator"
+    },
+    "definition-operator": {
+      "$type": "color",
+      "$value": "{cyan.70}",
+      "$description": "Syntax definition operator"
+    },
+    "type-operator": {
+      "$type": "color",
+      "$value": "{teal.60}",
+      "$description": "Syntax type operator"
+    },
+    "control-operator": {
+      "$type": "color",
+      "$value": "{purple.70}",
+      "$description": "Syntax control operator"
+    },
+    "modifier": {
+      "$type": "color",
+      "$value": "{blue.60}",
+      "$description": "Syntax modifier"
+    },
+    "punctuation": {
+      "$type": "color",
+      "$value": "{coolGray.80}",
+      "$description": "Syntax punctuation"
+    },
+    "separator": {
+      "$type": "color",
+      "$value": "{coolGray.80}",
+      "$description": "Syntax separator"
+    },
+    "bracket": {
+      "$type": "color",
+      "$value": "{coolGray.80}",
+      "$description": "Syntax bracket"
+    },
+    "angle-bracket": {
+      "$type": "color",
+      "$value": "{coolGray.60}",
+      "$description": "Syntax angle bracket"
+    },
+    "square-bracket": {
+      "$type": "color",
+      "$value": "{coolGray.80}",
+      "$description": "Syntax square bracket"
+    },
+    "paren": {
+      "$type": "color",
+      "$value": "{coolGray.80}",
+      "$description": "Syntax paren"
+    },
+    "brace": {
+      "$type": "color",
+      "$value": "{coolGray.80}",
+      "$description": "Syntax brace"
+    },
+    "content": {
+      "$type": "color",
+      "$value": "{gray.100}",
+      "$description": "Syntax content"
+    },
+    "list": {
+      "$type": "color",
+      "$value": "{gray.100}",
+      "$description": "Syntax list"
+    },
+    "emphasis": {
+      "$type": "color",
+      "$value": "{gray.100}",
+      "$description": "Syntax emphasis"
+    },
+    "strong": {
+      "$type": "color",
+      "$value": "{gray.100}",
+      "$description": "Syntax strong"
+    },
+    "monospace": {
+      "$type": "color",
+      "$value": "{gray.100}",
+      "$description": "Syntax monospace"
+    },
+    "strikethrough": {
+      "$type": "color",
+      "$value": "{gray.100}",
+      "$description": "Syntax strikethrough"
+    },
+    "heading": {
+      "$type": "color",
+      "$value": "{cyan.70}",
+      "$description": "Syntax heading"
+    },
+    "content-separator": {
+      "$type": "color",
+      "$value": "{coolGray.80}",
+      "$description": "Syntax content separator"
+    },
+    "quote": {
+      "$type": "color",
+      "$value": "{green.60}",
+      "$description": "Syntax quote"
+    },
+    "link": {
+      "$type": "color",
+      "$value": "{blue.60}",
+      "$description": "Syntax link"
+    },
+    "invalid": {
+      "$type": "color",
+      "$value": "{red.60}",
+      "$description": "Syntax invalid"
+    },
+    "meta": {
+      "$type": "color",
+      "$value": "{green.60}",
+      "$description": "Syntax meta"
+    },
+    "document-meta": {
+      "$type": "color",
+      "$value": "{green.60}",
+      "$description": "Syntax document meta"
+    },
+    "annotation": {
+      "$type": "color",
+      "$value": "{teal.60}",
+      "$description": "Syntax annotation"
+    },
+    "processing-instruction": {
+      "$type": "color",
+      "$value": "{gray.100}",
+      "$description": "Syntax processing instruction"
+    },
+    "definition": {
+      "$type": "color",
+      "$value": "{cyan.70}",
+      "$description": "Syntax definition"
+    },
+    "constant": {
+      "$type": "color",
+      "$value": "{blue.60}",
+      "$description": "Syntax constant"
+    },
+    "function": {
+      "$type": "color",
+      "$value": "{yellow.60}",
+      "$description": "Syntax function"
+    },
+    "standard": {
+      "$type": "color",
+      "$value": "{blue.60}",
+      "$description": "Syntax standard"
+    },
+    "local": {
+      "$type": "color",
+      "$value": "{blue.60}",
+      "$description": "Syntax local"
+    },
+    "special": {
+      "$type": "color",
+      "$value": "{blue.60}",
+      "$description": "Syntax special"
+    },
+    "inserted": {
+      "$type": "color",
+      "$value": "{green.20}",
+      "$description": "Syntax inserted"
+    },
+    "deleted": {
+      "$type": "color",
+      "$value": "{red.20}",
+      "$description": "Syntax deleted"
+    },
+    "heading-1": {
+      "$type": "color",
+      "$value": "{cyan.70}",
+      "$description": "Syntax heading 1"
+    },
+    "heading-2": {
+      "$type": "color",
+      "$value": "{cyan.70}",
+      "$description": "Syntax heading 2"
+    },
+    "heading-3": {
+      "$type": "color",
+      "$value": "{cyan.70}",
+      "$description": "Syntax heading 3"
+    },
+    "heading-4": {
+      "$type": "color",
+      "$value": "{cyan.70}",
+      "$description": "Syntax heading 4"
+    },
+    "heading-5": {
+      "$type": "color",
+      "$value": "{cyan.70}",
+      "$description": "Syntax heading 5"
+    },
+    "heading-6": {
+      "$type": "color",
+      "$value": "{cyan.70}",
+      "$description": "Syntax heading 6"
+    }
+  },
+  "ai": {
+    "inner-shadow": {
+      "$type": "color",
+      "$value": "{blue.50}",
+      "$description": "AI inner shadow",
+      "$extensions": {
+        "org.carbon": {
+          "alphaModifier": 0.1
+        }
+      }
+    },
+    "aura-start-sm": {
+      "$type": "color",
+      "$value": "{blue.50}",
+      "$description": "AI aura start small",
+      "$extensions": {
+        "org.carbon": {
+          "alphaModifier": 0.16
+        }
+      }
+    },
+    "aura-start": {
+      "$type": "color",
+      "$value": "{blue.50}",
+      "$description": "AI aura start",
+      "$extensions": {
+        "org.carbon": {
+          "alphaModifier": 0.1
+        }
+      }
+    },
+    "aura-end": {
+      "$type": "color",
+      "$value": "{white.default}",
+      "$description": "AI aura end",
+      "$extensions": {
+        "org.carbon": {
+          "alphaModifier": 0
+        }
+      }
+    },
+    "border-strong": {
+      "$type": "color",
+      "$value": "{blue.50}",
+      "$description": "AI strong border"
+    },
+    "border-start": {
+      "$type": "color",
+      "$value": "{blue.30}",
+      "$description": "AI border start",
+      "$extensions": {
+        "org.carbon": {
+          "alphaModifier": 0.64
+        }
+      }
+    },
+    "border-end": {
+      "$type": "color",
+      "$value": "{blue.40}",
+      "$description": "AI border end"
+    },
+    "drop-shadow": {
+      "$type": "color",
+      "$value": "{blue.60}",
+      "$description": "AI drop shadow",
+      "$extensions": {
+        "org.carbon": {
+          "alphaModifier": 0.1
+        }
+      }
+    },
+    "aura-hover-background": {
+      "$type": "color",
+      "$value": "{blue.10}",
+      "$description": "AI aura hover background"
+    },
+    "aura-hover-start": {
+      "$type": "color",
+      "$value": "{blue.50}",
+      "$description": "AI aura hover start",
+      "$extensions": {
+        "org.carbon": {
+          "alphaModifier": 0.32
+        }
+      }
+    },
+    "aura-hover-end": {
+      "$type": "color",
+      "$value": "{white.default}",
+      "$description": "AI aura hover end",
+      "$extensions": {
+        "org.carbon": {
+          "alphaModifier": 0
+        }
+      }
+    },
+    "popover-background": {
+      "$type": "color",
+      "$value": "{white.default}",
+      "$description": "AI popover background"
+    },
+    "popover-shadow-outer-01": {
+      "$type": "color",
+      "$value": "{blue.70}",
+      "$description": "AI popover outer shadow 01",
+      "$extensions": {
+        "org.carbon": {
+          "alphaModifier": 0.06
+        }
+      }
+    },
+    "popover-shadow-outer-02": {
+      "$type": "color",
+      "$value": "{black.default}",
+      "$description": "AI popover outer shadow 02",
+      "$extensions": {
+        "org.carbon": {
+          "alphaModifier": 0.04
+        }
+      }
+    },
+    "skeleton-background": {
+      "$type": "color",
+      "$value": "{blue.20}",
+      "$description": "AI skeleton background"
+    },
+    "skeleton-element-background": {
+      "$type": "color",
+      "$value": "{blue.50}",
+      "$description": "AI skeleton element background"
+    },
+    "overlay": {
+      "$type": "color",
+      "$value": "{blue.100}",
+      "$description": "AI modal overlay",
+      "$extensions": {
+        "org.carbon": {
+          "alphaModifier": 0.5
+        }
+      }
+    },
+    "popover-caret-center": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.627451,
+          0.764706,
+          1
+        ],
+        "hex": "#a0c3ff"
+      },
+      "$description": "AI popover caret center"
+    },
+    "popover-caret-bottom": {
+      "$type": "color",
+      "$value": "{blue.40}",
+      "$description": "AI popover caret bottom"
+    },
+    "popover-caret-bottom-background-actions": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.913725,
+          0.937255,
+          0.980392
+        ],
+        "hex": "#e9effa"
+      },
+      "$description": "AI popover caret bottom background for actions"
+    },
+    "popover-caret-bottom-background": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.917647,
+          0.945098,
+          1
+        ],
+        "hex": "#eaf1ff"
+      },
+      "$description": "AI popover caret bottom background"
+    }
+  },
+  "chat": {
+    "prompt-background": {
+      "$type": "color",
+      "$value": "{white.default}",
+      "$description": "Chat prompt background"
+    },
+    "prompt-border-start": {
+      "$type": "color",
+      "$value": "{gray.10}",
+      "$description": "Chat prompt border start"
+    },
+    "prompt-border-end": {
+      "$type": "color",
+      "$value": "{gray.10}",
+      "$description": "Chat prompt border end",
+      "$extensions": {
+        "org.carbon": {
+          "alphaModifier": 0
+        }
+      }
+    },
+    "prompt-text": {
+      "$type": "color",
+      "$value": "{gray.100}",
+      "$description": "Chat prompt text"
+    },
+    "bubble-user": {
+      "$type": "color",
+      "$value": "{gray.20}",
+      "$description": "Chat bubble user background"
+    },
+    "bubble-user-text": {
+      "$type": "color",
+      "$value": "{gray.100}",
+      "$description": "Chat bubble user text"
+    },
+    "bubble-agent": {
+      "$type": "color",
+      "$value": "{white.default}",
+      "$description": "Chat bubble agent background"
+    },
+    "bubble-agent-text": {
+      "$type": "color",
+      "$value": "{gray.100}",
+      "$description": "Chat bubble agent text"
+    },
+    "bubble-border": {
+      "$type": "color",
+      "$value": "{gray.20}",
+      "$description": "Chat bubble border"
+    },
+    "avatar-bot": {
+      "$type": "color",
+      "$value": "{gray.60}",
+      "$description": "Chat avatar bot"
+    },
+    "avatar-agent": {
+      "$type": "color",
+      "$value": "{gray.80}",
+      "$description": "Chat avatar agent"
+    },
+    "avatar-user": {
+      "$type": "color",
+      "$value": "{blue.60}",
+      "$description": "Chat avatar user"
+    },
+    "shell-background": {
+      "$type": "color",
+      "$value": "{white.default}",
+      "$description": "Chat shell background"
+    },
+    "header-background": {
+      "$type": "color",
+      "$value": "{white.default}",
+      "$description": "Chat header background"
+    },
+    "header-text": {
+      "$type": "color",
+      "$value": "{gray.100}",
+      "$description": "Chat header text"
+    },
+    "button": {
+      "$type": "color",
+      "$value": "{blue.60}",
+      "$description": "Chat button color"
+    },
+    "button-hover": {
+      "$type": "color",
+      "$value": "{gray.50}",
+      "$description": "Chat button hover background",
+      "$extensions": {
+        "org.carbon": {
+          "alphaModifier": 0.12
+        }
+      }
+    },
+    "button-text-hover": {
+      "$type": "color",
+      "$value": "{blue.70}",
+      "$description": "Chat button text hover"
+    },
+    "button-active": {
+      "$type": "color",
+      "$value": "{gray.50}",
+      "$description": "Chat button active background",
+      "$extensions": {
+        "org.carbon": {
+          "alphaModifier": 0.5
+        }
+      }
+    },
+    "button-selected": {
+      "$type": "color",
+      "$value": "{gray.50}",
+      "$description": "Chat button selected background",
+      "$extensions": {
+        "org.carbon": {
+          "alphaModifier": 0.2
+        }
+      }
+    },
+    "button-text-selected": {
+      "$type": "color",
+      "$value": "{gray.70}",
+      "$description": "Chat button text selected"
+    }
+  }
+}
