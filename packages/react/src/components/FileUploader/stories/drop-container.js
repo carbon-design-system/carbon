@@ -105,6 +105,8 @@ const ExampleDropContainerApp = (props) => {
   const onAddFiles = useCallback(
     (evt, { addedFiles }) => {
       evt.stopPropagation();
+      // eslint-disable-next-line react/prop-types
+      props.onAddFiles?.(evt, { addedFiles });
       const newFiles = addedFiles.map((file) => ({
         uuid: uniqueId + file.name + file.size,
         name: file.name,
@@ -123,7 +125,7 @@ const ExampleDropContainerApp = (props) => {
       }
     },
     // eslint-disable-next-line react/prop-types
-    [files, props.multiple]
+    [files, props.multiple, props.onAddFiles]
   );
 
   const handleFileUploaderItemClick = useCallback(
