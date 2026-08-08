@@ -23,6 +23,12 @@ export default {
     lowContrast: false,
     statusIconDescription: 'notification',
   },
+  argTypes: {
+    kind: {
+      options: ['info', 'warning'],
+      control: { type: 'select' },
+    },
+  },
 };
 
 export const Default = (args) => (
@@ -33,24 +39,38 @@ export const Default = (args) => (
   />
 );
 
-export const WithInteractiveElements = () => (
-  <Callout
-    title="Notification title"
-    titleId="my fancy id 123"
-    kind="info"
-    lowContrast>
+Default.args = {
+  subtitle: 'Subtitle text goes here',
+  title: 'Notification title',
+};
+
+export const WithInteractiveElements = ({ titleId, ...args }) => (
+  <Callout titleId={titleId} {...args}>
     <div className="cds--inline-notification__subtitle">
       Additional text can describe the notification, or a link to{' '}
-      <Link inline href="#" aria-describedby="my fancy id 123">
+      <Link inline href="#" aria-describedby={titleId}>
         learn more
       </Link>
     </div>
   </Callout>
 );
 
-Default.argTypes = {
-  kind: {
-    options: ['info', 'warning'],
-    control: { type: 'select' },
+WithInteractiveElements.args = {
+  kind: 'info',
+  lowContrast: true,
+  statusIconDescription: 'notification',
+  title: 'Notification title',
+  titleId: 'callout-title-interactive'',
+};
+
+WithInteractiveElements.parameters = {
+  controls: {
+    include: [
+      'kind',
+      'lowContrast',
+      'statusIconDescription',
+      'title',
+      'titleId',
+    ],
   },
 };
