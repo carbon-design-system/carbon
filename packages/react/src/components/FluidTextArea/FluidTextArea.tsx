@@ -126,7 +126,13 @@ export interface FluidTextAreaProps {
 
 const FluidTextArea = ({ className, ...other }: FluidTextAreaProps) => {
   const prefix = usePrefix();
-  const classNames = classnames(`${prefix}--text-area--fluid`, className);
+  const classNames = classnames(
+    {
+      [`${prefix}--text-area--fluid`]: true,
+      [`${prefix}--text-area--fluid--disabled`]: other.disabled,
+    },
+    className
+  );
 
   return (
     <FormContext.Provider value={{ isFluid: true }}>

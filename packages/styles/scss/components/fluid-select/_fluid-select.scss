@@ -200,6 +200,12 @@
     fill: $icon-disabled;
   }
 
+  .#{$prefix}--select--fluid
+    .#{$prefix}--select--disabled
+    .#{$prefix}--select-input {
+    border-block-end-color: $border-subtle;
+  }
+
   // AILabel styles
   .#{$prefix}--select--fluid
     .#{$prefix}--select--decorator

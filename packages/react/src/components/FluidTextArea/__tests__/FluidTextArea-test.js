@@ -67,6 +67,17 @@ describe('FluidTextArea', () => {
       expect(screen.getByTestId('test-id-2')).toBeDisabled();
     });
 
+    it('should add disabled classes when disabled', () => {
+      const { container } = render(
+        <FluidTextArea disabled id="input-1" labelText="FluidTextArea label" />
+      );
+
+      expect(container.firstChild).toHaveClass(
+        `${prefix}--text-area--fluid--disabled`
+      );
+      expect(screen.getByLabelText('FluidTextArea label')).toBeDisabled();
+    });
+
     it('should respect id prop', () => {
       render(
         <FluidTextArea

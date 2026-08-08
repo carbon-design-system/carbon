@@ -124,10 +124,7 @@
   .#{$prefix}--date-picker--fluid:not(
       .#{$prefix}--date-picker--fluid--invalid
     ):not(.#{$prefix}--date-picker--fluid--warn)
-    .#{$prefix}--date-picker--range
-    .#{$prefix}--date-picker-container:not(
-      .#{$prefix}--date-picker--fluid--invalid
-    ) {
+    .#{$prefix}--date-picker__input {
     border-block-end: 1px solid $border-strong;
   }
 
@@ -138,7 +135,7 @@
     .#{$prefix}--date-picker--range
     .#{$prefix}--date-picker-container {
     inline-size: 100%;
-    min-block-size: convert.to-rem(63px);
+    min-block-size: convert.to-rem(64px);
     min-inline-size: convert.to-rem(144px);
   }
 
@@ -153,6 +150,27 @@
     > .#{$prefix}--date-picker-container:last-child
     .#{$prefix}--date-picker__input {
     border-inline-start: 1px solid $border-strong;
+  }
+
+  // Disabled states
+  .#{$prefix}--date-picker--fluid--disabled:not(
+      .#{$prefix}--date-picker--fluid--invalid
+    ):not(.#{$prefix}--date-picker--fluid--warn)
+    :is(
+      .#{$prefix}--date-picker--range,
+      .#{$prefix}--date-picker--simple,
+      .#{$prefix}--date-picker--single
+    )
+    .#{$prefix}--date-picker__input {
+    border-block-end: 1px solid $border-subtle;
+    transition: none;
+  }
+
+  .#{$prefix}--date-picker--fluid--disabled
+    .#{$prefix}--date-picker--range
+    > .#{$prefix}--date-picker-container:last-child
+    .#{$prefix}--date-picker__input {
+    border-inline-start: 1px solid $border-subtle;
   }
 
   // Invalid
