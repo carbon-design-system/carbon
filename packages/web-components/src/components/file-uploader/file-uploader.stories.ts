@@ -346,8 +346,6 @@ export const Skeleton = {
 
 const meta = {
   title: 'Components/File uploader',
-const meta = {
-  title: 'Components/File uploader',
   parameters: {
     controls: {
       exclude: ['onChange'],
