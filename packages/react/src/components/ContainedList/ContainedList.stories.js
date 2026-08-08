@@ -38,9 +38,45 @@ export default {
     docs: {
       page: mdx,
     },
-    controls: {
-      exclude: ['action'],
-    },
+  },
+};
+
+const sharedArgs = {
+  className: '',
+  isInset: false,
+  kind: 'on-page',
+  label: 'List title',
+};
+
+const sharedArgTypes = {
+  className: {
+    control: 'text',
+  },
+  isInset: {
+    control: 'boolean',
+  },
+  kind: {
+    control: 'select',
+    options: ['on-page', 'disclosed'],
+  },
+  label: {
+    control: 'text',
+  },
+  size: {
+    control: 'select',
+    options: ['sm', 'md', 'lg', 'xl'],
+  },
+};
+
+const sharedParameters = {
+  controls: {
+    include: Object.keys(sharedArgTypes),
+  },
+};
+
+const customLabelParameters = {
+  controls: {
+    include: Object.keys(sharedArgTypes).filter((name) => name !== 'label'),
   },
 };
 
@@ -59,21 +95,22 @@ const DefaultStory = (args) => (
 export const Default = DefaultStory.bind({});
 
 Default.args = {
-  label: 'List title',
-  kind: 'on-page',
+  ...sharedArgs,
   size: 'lg',
 };
+Default.argTypes = sharedArgTypes;
+Default.parameters = sharedParameters;
 
-export const Disclosed = () => {
+export const Disclosed = (args) => {
   return (
     <>
-      <ContainedList label="List title" kind="disclosed">
+      <ContainedList {...args} kind="disclosed">
         <ContainedListItem>List item</ContainedListItem>
         <ContainedListItem>List item</ContainedListItem>
         <ContainedListItem>List item</ContainedListItem>
         <ContainedListItem>List item</ContainedListItem>
       </ContainedList>
-      <ContainedList label="List title" kind="disclosed">
+      <ContainedList {...args} kind="disclosed">
         <ContainedListItem>List item</ContainedListItem>
         <ContainedListItem>List item</ContainedListItem>
         <ContainedListItem>List item</ContainedListItem>
@@ -83,11 +120,24 @@ export const Disclosed = () => {
   );
 };
 
-export const WithInteractiveItems = () => {
+Disclosed.args = {
+  ...sharedArgs,
+  kind: 'disclosed',
+};
+Disclosed.argTypes = {
+  ...sharedArgTypes,
+  kind: {
+    ...sharedArgTypes.kind,
+    table: { readonly: true },
+  },
+};
+Disclosed.parameters = sharedParameters;
+
+export const WithInteractiveItems = (args) => {
   const onClick = action('onClick (ContainedListItem)');
 
   return (
-    <ContainedList label="List title" kind="on-page">
+    <ContainedList {...args}>
       <ContainedListItem onClick={onClick}>List item</ContainedListItem>
       <ContainedListItem onClick={onClick} disabled>
         List item
@@ -98,7 +148,11 @@ export const WithInteractiveItems = () => {
   );
 };
 
-export const WithActions = () => {
+WithInteractiveItems.args = { ...sharedArgs };
+WithInteractiveItems.argTypes = sharedArgTypes;
+WithInteractiveItems.parameters = sharedParameters;
+
+export const WithActions = (args) => {
   const itemAction = (
     <Button
       kind="ghost"
@@ -110,7 +164,7 @@ export const WithActions = () => {
   );
 
   return (
-    <ContainedList label="List title" kind="on-page" action={''}>
+    <ContainedList {...args} action={''}>
       <ContainedListItem action={itemAction}>List item</ContainedListItem>
       <ContainedListItem action={itemAction} disabled>
         List item
@@ -121,7 +175,11 @@ export const WithActions = () => {
   );
 };
 
-export const WithExpandableSearch = () => {
+WithActions.args = { ...sharedArgs };
+WithActions.argTypes = sharedArgTypes;
+WithActions.parameters = sharedParameters;
+
+export const WithExpandableSearch = (args) => {
   const [searchTerm, setSearchTerm] = React.useState('');
   const [searchResults, setSearchResults] = React.useState([]);
   const handleChange = (event) => {
@@ -144,8 +202,7 @@ export const WithExpandableSearch = () => {
 
   return (
     <ContainedList
-      label="List title"
-      kind="on-page"
+      {...args}
       action={
         <ExpandableSearch
           placeholder="Filter"
@@ -163,7 +220,11 @@ export const WithExpandableSearch = () => {
   );
 };
 
-export const WithPersistentSearch = () => {
+WithExpandableSearch.args = { ...sharedArgs };
+WithExpandableSearch.argTypes = sharedArgTypes;
+WithExpandableSearch.parameters = sharedParameters;
+
+export const WithPersistentSearch = (args) => {
   const [searchTerm, setSearchTerm] = React.useState('');
   const [searchResults, setSearchResults] = React.useState([]);
   const handleChange = (event) => {
@@ -185,7 +246,7 @@ export const WithPersistentSearch = () => {
   }, [searchTerm]);
 
   return (
-    <ContainedList label="List title" kind="on-page" action={''}>
+    <ContainedList {...args} action={''}>
       <Search
         placeholder="Filter"
         value={searchTerm}
@@ -201,7 +262,11 @@ export const WithPersistentSearch = () => {
   );
 };
 
-export const WithInteractiveItemsAndActions = () => {
+WithPersistentSearch.args = { ...sharedArgs };
+WithPersistentSearch.argTypes = sharedArgTypes;
+WithPersistentSearch.parameters = sharedParameters;
+
+export const WithInteractiveItemsAndActions = (args) => {
   const onClick = action('onClick (ContainedListItem)');
   const itemAction = (
     <Button
@@ -214,7 +279,7 @@ export const WithInteractiveItemsAndActions = () => {
   );
 
   return (
-    <ContainedList label="List title" kind="on-page" action={''}>
+    <ContainedList {...args} action={''}>
       <ContainedListItem action={itemAction} onClick={onClick}>
         List item
       </ContainedListItem>
@@ -231,9 +296,14 @@ export const WithInteractiveItemsAndActions = () => {
   );
 };
 
-export const WithListTitleDecorators = () => {
+WithInteractiveItemsAndActions.args = { ...sharedArgs };
+WithInteractiveItemsAndActions.argTypes = sharedArgTypes;
+WithInteractiveItemsAndActions.parameters = sharedParameters;
+
+export const WithListTitleDecorators = (args) => {
   return (
     <ContainedList
+      {...args}
       label={
         <div
           style={{
@@ -246,8 +316,7 @@ export const WithListTitleDecorators = () => {
             4
           </Tag>
         </div>
-      }
-      kind="on-page">
+      }>
       <ContainedListItem>List item</ContainedListItem>
       <ContainedListItem>List item</ContainedListItem>
       <ContainedListItem>List item</ContainedListItem>
@@ -256,9 +325,13 @@ export const WithListTitleDecorators = () => {
   );
 };
 
-export const WithIcons = () => {
+WithListTitleDecorators.args = { ...sharedArgs };
+WithListTitleDecorators.argTypes = sharedArgTypes;
+WithListTitleDecorators.parameters = customLabelParameters;
+
+export const WithIcons = (args) => {
   return (
-    <ContainedList label="List title" kind="on-page">
+    <ContainedList {...args}>
       <ContainedListItem renderIcon={Apple}>List item</ContainedListItem>
       <ContainedListItem renderIcon={Wheat}>List item</ContainedListItem>
       <ContainedListItem renderIcon={Strawberry}>List item</ContainedListItem>
@@ -267,10 +340,14 @@ export const WithIcons = () => {
   );
 };
 
-export const _WithLayer = () => {
+WithIcons.args = { ...sharedArgs };
+WithIcons.argTypes = sharedArgTypes;
+WithIcons.parameters = sharedParameters;
+
+export const _WithLayer = (args) => {
   return (
     <WithLayer>
-      <ContainedList label="List title" kind="on-page">
+      <ContainedList {...args}>
         <ContainedListItem>List item</ContainedListItem>
         <ContainedListItem>List item</ContainedListItem>
       </ContainedList>
@@ -278,13 +355,17 @@ export const _WithLayer = () => {
   );
 };
 
-export const UsageExamples = () => {
+_WithLayer.args = { ...sharedArgs };
+_WithLayer.argTypes = sharedArgTypes;
+_WithLayer.parameters = sharedParameters;
+
+export const UsageExamples = (args) => {
   const prefix = 'cds';
 
   return (
     <>
       <ContainedList
-        label="List title"
+        {...args}
         action={
           <Button
             hasIconOnly
@@ -308,7 +389,7 @@ export const UsageExamples = () => {
         ))}
       </ContainedList>
       <ContainedList
-        label="List title"
+        {...args}
         action={
           <Button
             hasIconOnly
@@ -328,7 +409,7 @@ export const UsageExamples = () => {
           </ContainedListItem>
         ))}
       </ContainedList>
-      <ContainedList label="List title">
+      <ContainedList {...args}>
         {[...Array(3)].map((_, i) => (
           <ContainedListItem key={i}>
             <div
@@ -347,3 +428,7 @@ export const UsageExamples = () => {
     </>
   );
 };
+
+UsageExamples.args = { ...sharedArgs };
+UsageExamples.argTypes = sharedArgTypes;
+UsageExamples.parameters = sharedParameters;
