@@ -19,6 +19,7 @@ export * from './components/AspectRatio';
 export * from './components/Breadcrumb';
 export * from './components/Button';
 export * from './components/ButtonSet';
+export * from './components/Card';
 export * from './components/Checkbox';
 export * from './components/CheckboxGroup';
 export * from './components/ClassPrefix';
