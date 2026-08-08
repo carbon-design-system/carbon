@@ -1707,7 +1707,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@carbon/cli-reporter@workspace:packages/cli-reporter"
   dependencies:
-    chalk: "npm:^5.4.1"
+    chalk: "npm:^6.0.0"
   languageName: unknown
   linkType: soft
 
@@ -1721,7 +1721,7 @@ __metadata:
     "@octokit/plugin-retry": "npm:^3.0.7"
     "@octokit/plugin-throttling": "npm:^4.0.0"
     "@octokit/rest": "npm:^22.0.0"
-    chalk: "npm:^5.4.1"
+    chalk: "npm:^6.0.0"
     change-case-all: "npm:^2.1.0"
     child-process-promise: "npm:^2.2.1"
     fast-glob: "npm:^3.3.3"
@@ -2134,7 +2134,7 @@ __metadata:
   resolution: "@carbon/upgrade@workspace:packages/upgrade"
   dependencies:
     "@ibm/telemetry-js": "npm:^1.5.0"
-    chalk: "npm:^5.4.1"
+    chalk: "npm:^6.0.0"
     execa: "npm:^9.6.0"
     fast-glob: "npm:^3.3.3"
     fs-extra: "npm:^11.0.0"
@@ -9375,7 +9375,7 @@ __metadata:
     babel-plugin-dev-expression: "npm:^0.2.3"
     babel-preset-carbon: "npm:^0.8.0"
     browserslist-config-carbon: "npm:^11.2.0"
-    chalk: "npm:5.6.2"
+    chalk: "npm:6.0.0"
     fs-extra: "npm:^11.0.0"
     react: "npm:^19.2.3"
     react-dom: "npm:^19.2.3"
@@ -9395,7 +9395,7 @@ __metadata:
     "@carbon/styles": "npm:^1.112.0"
     "@carbon/test-utils": "npm:^10.41.0"
     "@ibm/telemetry-js": "npm:^1.5.0"
-    chalk: "npm:5.6.2"
+    chalk: "npm:6.0.0"
     fs-extra: "npm:^11.0.0"
     rimraf: "npm:^6.0.1"
     sass: "npm:^1.93.2"
@@ -9520,10 +9520,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"chalk@npm:5.6.2, chalk@npm:^5.2.0, chalk@npm:^5.3.0, chalk@npm:^5.4.1":
-  version: 5.6.2
-  resolution: "chalk@npm:5.6.2"
-  checksum: 10/1b2f48f6fba1370670d5610f9cd54c391d6ede28f4b7062dd38244ea5768777af72e5be6b74fb6c6d54cb84c4a2dff3f3afa9b7cb5948f7f022cfd3d087989e0
+"chalk@npm:6.0.0, chalk@npm:^6.0.0":
+  version: 6.0.0
+  resolution: "chalk@npm:6.0.0"
+  checksum: 10/bdcb895b9c848ddbce38f38df5a10a3e272d6c04d759161789c4a2fa5a1fa78bf9eecf4eef73433a2a3be7324d6da96c3c9baf5c80862f37683cc0b890597831
   languageName: node
   linkType: hard
 
@@ -9545,6 +9545,13 @@ __metadata:
     ansi-styles: "npm:^4.1.0"
     supports-color: "npm:^7.1.0"
   checksum: 10/cb3f3e594913d63b1814d7ca7c9bafbf895f75fbf93b92991980610dfd7b48500af4e3a5d4e3a8f337990a96b168d7eb84ee55efdce965e2ee8efc20f8c8f139
+  languageName: node
+  linkType: hard
+
+"chalk@npm:^5.2.0, chalk@npm:^5.3.0":
+  version: 5.6.2
+  resolution: "chalk@npm:5.6.2"
+  checksum: 10/1b2f48f6fba1370670d5610f9cd54c391d6ede28f4b7062dd38244ea5768777af72e5be6b74fb6c6d54cb84c4a2dff3f3afa9b7cb5948f7f022cfd3d087989e0
   languageName: node
   linkType: hard
 
@@ -15324,7 +15331,7 @@ __metadata:
     accessibility-checker: "npm:^4.0.17"
     axe-core: "npm:^4.10.3"
     babel-jest: "npm:^30.0.5"
-    chalk: "npm:^5.4.1"
+    chalk: "npm:^6.0.0"
     jest-environment-jsdom: "npm:^30.0.5"
     jest-watch-typeahead: "npm:^3.0.1"
     react: "npm:^19.2.3"

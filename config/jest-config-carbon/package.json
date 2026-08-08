@@ -31,7 +31,7 @@
     "accessibility-checker": "^4.0.17",
     "axe-core": "^4.10.3",
     "babel-jest": "^30.0.5",
-    "chalk": "^5.4.1",
+    "chalk": "^6.0.0",
     "jest-environment-jsdom": "^30.0.5",
     "jest-watch-typeahead": "^3.0.1",
     "sass": "^1.77.7"
