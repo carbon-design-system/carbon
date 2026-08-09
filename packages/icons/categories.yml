@@ -2343,6 +2343,10 @@ categories:
           - direction--loop-right--filled
           - direction--merge
           - direction--merge--filled
+          - direction--merge-left
+          - direction--merge-left--filled
+          - direction--merge-right
+          - direction--merge-right--filled
           - direction--right--01
           - direction--right--01--filled
           - direction--right--02
