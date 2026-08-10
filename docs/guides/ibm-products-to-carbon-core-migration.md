@@ -107,15 +107,16 @@ Apply every conversion in this table:
   c4p-specific feature flags                DELETE unless Carbon core equivalent exists
 
 TypeScript rules — CRITICAL:
-  • Keep `import React from 'react'` — Carbon core components need it for propTypes
+  • Keep `import React from 'react'` — Carbon core components need it
+  • Do NOT add PropTypes — delete `import PropTypes from 'prop-types'` and any
+    `.propTypes = { … }` block. The TypeScript interface is the sole source of truth.
   • forwardRef generic: use HTMLDivElement when the root/skeleton renders <div>.
     Use HTMLElement for semantic elements (<figure>, <section>, <article>).
     CRITICAL: parent forwardRef MUST match skeleton forwardRef exactly.
     Mismatch causes TS2322 — the most common migration error.
   • Skeleton rest-props type: MUST be React.HTMLAttributes
     NOT Record — classnames cx() cannot accept `unknown` arguments
-  • Interface JSDoc = propTypes JSDoc: comments must be word-for-word identical
-  • Props in alphabetical order in: (a) interface, (b) destructure, (c) propTypes
+  • Props in alphabetical order in: (a) interface, (b) destructure
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 STEP 3 — index.ts
@@ -125,23 +126,43 @@ STEP 3 — index.ts
   // if skeleton exists:
   export { {{ComponentName}}Skeleton } from './{{ComponentName}}Skeleton';
 
+  Note: ALL exports are uncommented here. This is the component's own barrel
+  file — it always exports everything. Gating for the public package API is
+  handled by packages/react/src/index.ts and product-migrated-components.mjs.
+
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 STEP 4 — REGISTER IN packages/react/src/index.ts
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-PREVIEW component:
-  Add alphabetically with other preview__ exports:
-    // {{ComponentName}} is a preview candidate.
-    // Once stable, move to a direct `export * from` line.
-    export {
-      {{ComponentName}} as preview__{{ComponentName}},
-      {{ComponentName}}Skeleton as preview__{{ComponentName}}Skeleton,
-    } from './components/{{ComponentName}}';
-    export type { {{ComponentName}}Props } from './components/{{ComponentName}}';
+ALL components (stable, preview, utility) — add as a commented-out block.
+The component is excluded from the published v11 bundle via
+product-migrated-components.mjs (Step 4b). Write the export line now so it
+only needs to be uncommented when the component ships in v12.
 
-STABLE or UTILITY component:
-  Add commented-out (v11 strategy — exported in v12):
-    // TODO: uncomment in v12
+  For PREVIEW:
+    // TODO: uncomment in v12 — also remove from excludeProductsComponents
+    // export {
+    //   {{ComponentName}} as preview__{{ComponentName}},
+    //   {{ComponentName}}Skeleton as preview__{{ComponentName}}Skeleton,
+    // } from './components/{{ComponentName}}';
+    // export type { {{ComponentName}}Props } from './components/{{ComponentName}}';
+
+  For STABLE or UTILITY:
+    // TODO: uncomment in v12 — also remove from excludeProductsComponents
     // export * from './components/{{ComponentName}}';
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+STEP 4b — REGISTER IN packages/react/product-migrated-components.mjs
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+This file controls which components are excluded from the v11 Storybook build
+and the published JS / .d.ts bundle. Every migrated component MUST appear here.
+
+Add to BOTH arrays (maintain alphabetical order within each):
+
+  productMigratedStoryGlobs — excludes stories from the v11 Storybook:
+    '../src/components/{{ComponentName}}/{{ComponentName}}.stories.js',
+
+  excludeProductsComponents — excludes from the published bundle until v12:
+    'src/components/{{ComponentName}}/**/*',
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 STEP 5 — SCSS STYLES
@@ -337,12 +358,15 @@ Run before declaring done:
 Component files:
   ☐ packages/react/src/components/{{ComponentName}}/ has ONLY the files from Step 1
   ☐ No _storybook-styles.scss, _carbon-imports.scss, _index-with-carbon.scss
-  ☐ story.scss loads component styles (preview) or is comment-only (stable)
+  ☐ story.scss loads component styles only if NOT already in global bundle;
+      if already in _index.scss — comment-only (double-@use causes Sass build error)
   ☐ stories file is .js not .jsx/.tsx
+  ☐ No PropTypes — TypeScript interface is the only prop documentation
   ☐ Test file is in __tests__/{{ComponentName}}-test.js
 
 TypeScript:
   ☐ No imports from '../../global/js/utils/', '../../settings', '@carbon/ibm-products'
+  ☐ No `import PropTypes from 'prop-types'` and no `.propTypes = { … }` block
   ☐ forwardRef generic matches between parent and skeleton — no TS2322
   ☐ Skeleton rest-props is React.HTMLAttributes (not Record)
   ☐ blockClass declared inside the component function body (not at module level)
@@ -355,12 +379,16 @@ SCSS (all three locations):
   ☐ packages/react/scss/components/{{component-name}}/ has _index.scss + _{{component-name}}.scss
       (kebab-case directory, forwarding to PascalCase path in @carbon/styles)
   ☐ packages/styles/scss/components/_index.scss entry added
-      (active for stable, commented with TODO for preview)
+      (active for stable/utility, commented with TODO for preview)
   ☐ packages/react/scss/components/_index.scss is NOT modified
 
-index.ts exports:
-  ☐ preview__{{ComponentName}} export added for preview components
-  ☐ Commented TODO export added for stable components (v11 strategy)
+packages/react/src/index.ts:
+  ☐ Export block present — commented out with TODO for v12
+  ☐ Comment includes reminder to remove from excludeProductsComponents when shipping
+
+packages/react/product-migrated-components.mjs:
+  ☐ Story glob added to productMigratedStoryGlobs
+  ☐ Component glob added to excludeProductsComponents
 
 Stories:
   ☐ import './story.scss'; is the first import (not ?inline)
