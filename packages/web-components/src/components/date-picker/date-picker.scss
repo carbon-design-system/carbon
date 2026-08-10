@@ -139,6 +139,7 @@ $css--plex: true !default;
   :host(#{$prefix}-date-picker-input[kind='from']) {
     .#{$prefix}--date-picker__input {
       border-end-end-radius: 0;
+      border-inline-end: none;
       border-start-end-radius: 0;
     }
   }
@@ -146,6 +147,7 @@ $css--plex: true !default;
   :host(#{$prefix}-date-picker-input[kind='to']) {
     .#{$prefix}--date-picker__input {
       border-end-start-radius: 0;
+      border-inline-start: none;
       border-start-start-radius: 0;
     }
   }

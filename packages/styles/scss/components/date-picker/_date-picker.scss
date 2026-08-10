@@ -160,12 +160,14 @@
       .#{$prefix}--date-picker-container:first-of-type
         .#{$prefix}--date-picker__input {
         border-end-end-radius: 0;
+        border-inline-end: none;
         border-start-end-radius: 0;
       }
 
       .#{$prefix}--date-picker-container:last-of-type
         .#{$prefix}--date-picker__input {
         border-end-start-radius: 0;
+        border-inline-start: none;
         border-start-start-radius: 0;
       }
     }
