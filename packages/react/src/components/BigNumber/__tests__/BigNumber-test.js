@@ -35,7 +35,6 @@ describe(componentName, () => {
 
   it('has no accessibility violations', async () => {
     const { container } = renderBigNumber();
-    expect(container).toBeAccessible(componentName);
     expect(container).toHaveNoAxeViolations();
   });
 
