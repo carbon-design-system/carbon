@@ -6,6 +6,7 @@
 //
 
 @use 'accordion';
+@use 'action-set';
 @use 'ai-label';
 @use 'aspect-ratio';
 @use 'badge-indicator';
@@ -61,6 +62,8 @@
 @use 'progress-bar';
 @use 'progress-indicator';
 @use 'radio-button';
+@use 'resizer';
+@use 'side-panel';
 @use 'search';
 @use 'select';
 @use 'shape-indicator';
@@ -79,4 +82,5 @@
 @use 'toggle';
 @use 'tooltip';
 @use 'treeview';
+@use 'truncated-text';
 @use 'ui-shell';

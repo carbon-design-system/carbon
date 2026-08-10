@@ -6,7 +6,6 @@
  */
 
 import React, { forwardRef } from 'react';
-import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { CardBodyProps } from './Card.types';
 import { usePrefix } from '../../internal/usePrefix';
@@ -32,18 +31,3 @@ export const CardBody = forwardRef<HTMLDivElement, CardBodyProps>(
 );
 
 CardBody.displayName = componentName;
-
-CardBody.propTypes = {
-  /**
-   * Body content
-   */
-  children: PropTypes.node,
-  /**
-   * Additional CSS class names
-   */
-  className: PropTypes.string,
-  /**
-   * When true, removes all padding so content fills the body edge-to-edge.
-   */
-  isFlush: PropTypes.bool,
-};

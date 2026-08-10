@@ -6,7 +6,6 @@
  */
 
 import React from 'react';
-import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { AspectRatio } from '../AspectRatio';
 import { type AspectRatioProps } from '../AspectRatio/AspectRatio';
@@ -72,13 +71,6 @@ export const CardMedia = ({
       {children}
     </AspectRatio>
   );
-};
-
-CardMedia.propTypes = {
-  children: PropTypes.node,
-  className: PropTypes.string,
-  /** Width of the media column in horizontal layout. Any valid CSS width value. */
-  mediaWidth: PropTypes.string,
 };
 
 CardMedia.displayName = componentName;
