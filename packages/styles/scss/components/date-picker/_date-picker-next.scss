@@ -12,6 +12,7 @@
 @use '../../utilities/convert' as *;
 @use '../../utilities/skeleton' as *;
 @use '../../feature-flags' as *;
+@use '../../border-radius' as *;
 
 /// Shared v12 date-picker rules for both React and Web Components. Each one
 /// scopes them differently so they don't clash with the v11 date picker:
@@ -307,6 +308,10 @@
     inline-size: rem(288px);
     max-inline-size: rem(288px);
     outline: none;
+
+    @if enabled('enable-v12-release') {
+      border-radius: $border-radius-08;
+    }
 
     &:focus {
       outline: none;
