@@ -12,6 +12,7 @@
 @use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/styles/scss/theme' as *;
 @use '@carbon/styles/scss/utilities' as *;
+@use '@carbon/styles/scss/feature-flags' as flags;
 
 @include date-picker;
 @include date-picker-next.date-picker-next-rules;
@@ -120,5 +121,21 @@
   .#{$prefix}--date-picker__day,
   .#{$prefix}--date-picker__month-nav {
     font-family: inherit;
+  }
+}
+
+@if flags.enabled('enable-v12-release') {
+  :host(#{$prefix}-preview-date-picker-input[kind='from']) {
+    .#{$prefix}--date-picker__input {
+      border-end-end-radius: 0;
+      border-start-end-radius: 0;
+    }
+  }
+
+  :host(#{$prefix}-preview-date-picker-input[kind='to']) {
+    .#{$prefix}--date-picker__input {
+      border-end-start-radius: 0;
+      border-start-start-radius: 0;
+    }
   }
 }
