@@ -82,7 +82,7 @@ onwards.
 | #   | Component           | c4ip export name(s)                                     | Notes                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
 | --- | ------------------- | ------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | 1   | Add and select      | `MultiAddSelect`, `SingleAddSelect` → composable system | The monolithic `MultiAddSelect`/`SingleAddSelect` prebuilt pattern is deprecated. Replaced by a composable component system: smaller, focused presentation components are composed together rather than driven by a single opinionated component. Includes `AddSelectData`, a framework-agnostic utility class that manages hierarchical selection data and state separately from the UI, enabling efficient data operations while keeping components presentation-only |
-| 2   | Big number          | `BigNumber`                                             | Lightweight component with good potential but low current adoption. Entering core as a preview candidate. Labs remains the fallback if adoption does not grow post-v12                                                                                                                                                                                                                                                                                                  |
+| 2   | Big number          | `BigNumber`                                             | Lightweight component with good potential but low current adoption. Entering core as a preview. Labs remains the fallback if adoption does not grow post-v12                                                                                                                                                                                                                                                                                                            |
 | 3   | Coachmark           | `Coachmark`                                             | Old monolithic version deprecated; new composable version already delivered in c4ip as a preview. Moving to core as **stable** — no further composability work required                                                                                                                                                                                                                                                                                                 |
 | 4   | Composable card     | `Card`                                                  | Replaces the expressive/productive card split, which will be deprecated and left in c4ip. Unlike other migrating components, this will be visible in the Carbon core Storybook and exported from `@carbon/react` **before v12** as a preview component                                                                                                                                                                                                                  |
 | 5   | Condition builder   | `ConditionBuilder`                                      | Currently a preview candidate in c4ip with ~5 product adoptions and strong expressed potential. Accessibility and composability reviews must be completed before moving to core. Moves to core as **preview**. No web components equivalent exists yet — WC port is a follow-up                                                                                                                                                                                         |
@@ -90,12 +90,12 @@ onwards.
 | 7   | Guide banner        | `GuideBanner`                                           | ~6–7 product adoptions                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
 | 8   | Inline edit         | `EditInPlace`                                           | moves to core as stable                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
 | 9   | Interstitial screen | `InterstitialScreen`                                    | Already re-implemented as a stable composable component in c4ip. Migrating to core as **stable**                                                                                                                                                                                                                                                                                                                                                                        |
-| 10  | Notifications panel | `NotificationsPanel`                                    | Moves to core as a **preview candidate**. Post-v12, a composable redesign will be developed and delivered as preview → stable                                                                                                                                                                                                                                                                                                                                           |
+| 10  | Notifications panel | `NotificationsPanel`                                    | Moves to core as stable (non-composable). Post-v12, a composable redesign will be developed and delivered as preview → stable — at which point the legacy import will be deprecated. See [migration strategy discussion](#non-composable-component-migration-strategy) below                                                                                                                                                                                            |
 | 11  | Options tile        | `OptionsTile`                                           | Good adoption. Migrating to core as **stable**                                                                                                                                                                                                                                                                                                                                                                                                                          |
 | 12  | Page header         | `PageHeader`                                            | Old `PageHeader` deprecated; new composable version already delivered in c4ip as a preview. Migrating to core as **stable**                                                                                                                                                                                                                                                                                                                                             |
-| 13  | Scroll gradient     | `ScrollGradient`                                        |                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
-| 14  | Side panel          | `SidePanel`                                             | Stable in c4ip but identified for composability improvements. Moves to core as a **preview candidate**; composable redesign will follow alongside new design exploration                                                                                                                                                                                                                                                                                                |
-| 15  | Tag overflow        | `TagOverflow`                                           | Functions as a utility rather than a standalone component. Originally intended to replace `TagSet` with greater flexibility (supporting avatars, icons, and other non-tag content). Similar functionality can now be achieved with overflow utilities, but those require more boilerplate — which is why migrating `TagOverflow` is still under consideration                                                                                                           |
+| 13  | Scroll gradient     | `ScrollGradient`                                        | Migrate to core as utility component                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+| 14  | Side panel          | `SidePanel`                                             | Stable in c4ip; design exploration for a composable redesign is not yet complete. Moves to core **as-is** (non-composable, stable). A composable redesign will be developed post-v12, shipped as preview, and eventually promoted to stable — at which point the legacy import will be deprecated. See [migration strategy discussion](#non-composable-component-migration-strategy) below                                                                              |
+| 15  | Tag overflow        | `TagOverflow`                                           | Moves to core as stable. Originally intended to replace `TagSet` with greater flexibility (supporting avatars, icons, and other non-tag content). Similar functionality can now be achieved with overflow utilities, but those require more boilerplate — which is why migrating `TagOverflow` is still under consideration                                                                                                                                             |
 | 16  | Tearsheet           | `Tearsheet`                                             | Old monolithic `Tearsheet` deprecated; new composable version already delivered in c4ip as a preview. Migrating to core as **stable**                                                                                                                                                                                                                                                                                                                                   |
 | 17  | Truncated text      | `TruncatedText`                                         | Lightweight utility used internally across multiple components (`Tearsheet`, `PageHeader`, etc.). Exporting it lets adopters handle overflowing text with the same behaviour as the built-in usages                                                                                                                                                                                                                                                                     |
 | 18  | User avatar         | `UserAvatar`                                            | Migrating to core as **stable**                                                                                                                                                                                                                                                                                                                                                                                                                                         |
@@ -126,20 +126,19 @@ pattern rather than an exported component.
 | --- | ---------------- | ------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | 1   | About modal      | `AboutModal`        | At its core a simple modal with structured content. Suitable to be treated as a reusable pattern rather than an exported component. Deprecated and shared as an example pattern                                                                                                                                                                          |
 | 2   | Action bar       | `ActionBar`         | No adoption; used only internally by the old `PageHeader`. With the new composable `PageHeader` migrating to core, this internal dependency is no longer needed                                                                                                                                                                                          |
-| 3   | Action set       | `ActionSet`         | `ButtonSet` covers the use case. No need to migrate a separate component                                                                                                                                                                                                                                                                                 |
-| 4   | Decorator        | `Decorator`         | No adoption                                                                                                                                                                                                                                                                                                                                              |
-| 5   | Expressive card  | `ExpressiveCard`    | Replaced by the new composable `Card` component migrating to core                                                                                                                                                                                                                                                                                        |
-| 6   | Get started card | `GetStartedCard`    | Can be delivered as a pattern built on top of the new composable `Card` component                                                                                                                                                                                                                                                                        |
-| 7   | Productive card  | `ProductiveCard`    | Replaced by the new composable `Card` component migrating to core                                                                                                                                                                                                                                                                                        |
-| 8   | Search bar       | `SearchBar`         | No adoption                                                                                                                                                                                                                                                                                                                                              |
-| 9   | Tag set          | `TagSet`            | `TagSet` has solid adoption and has been treated as stable. `TagOverflow` was originally intended to replace it with greater flexibility (avatars, icons, non-tag content). That flexibility can be recreated with overflow utilities, though at the cost of more boilerplate. Decision: deprecate `TagSet` in favour of `TagOverflow` migrating to core |
-| 10  | Toolbar          | `Toolbar`           | No adoption                                                                                                                                                                                                                                                                                                                                              |
+| 3   | Decorator        | `Decorator`         | No adoption                                                                                                                                                                                                                                                                                                                                              |
+| 4   | Expressive card  | `ExpressiveCard`    | Replaced by the new composable `Card` component migrating to core                                                                                                                                                                                                                                                                                        |
+| 5   | Get started card | `GetStartedCard`    | Can be delivered as a pattern built on top of the new composable `Card` component                                                                                                                                                                                                                                                                        |
+| 6   | Productive card  | `ProductiveCard`    | Replaced by the new composable `Card` component migrating to core                                                                                                                                                                                                                                                                                        |
+| 7   | Search bar       | `SearchBar`         | No adoption                                                                                                                                                                                                                                                                                                                                              |
+| 8   | Tag set          | `TagSet`            | `TagSet` has solid adoption and has been treated as stable. `TagOverflow` was originally intended to replace it with greater flexibility (avatars, icons, non-tag content). That flexibility can be recreated with overflow utilities, though at the cost of more boilerplate. Decision: deprecate `TagSet` in favour of `TagOverflow` migrating to core |
+| 9   | Toolbar          | `Toolbar`           | No adoption                                                                                                                                                                                                                                                                                                                                              |
 
 #### Patterns and examples
 
 These are usage patterns and example flows built on top of Carbon and c4ip
 components. They are not exported as standalone components but will be
-documented in the Carbon core Storybook under a `Patterns/` section. The
+documented in the Carbon core Storybook under a `Examples/` section. The
 underlying composed components (e.g. `Tearsheet`, `SidePanel`) are what gets
 migrated and exported; the patterns show adopters how to compose them.
 
@@ -152,6 +151,80 @@ migrated and exported; the patterns show adopters how to compose them.
 | 5   | Export                  | `ExportModal`                                                                                  | Pattern for export confirmation flows                                                                |
 | 6   | Generate an API key     | `APIKeyModal`                                                                                  | Pattern for API key generation flows                                                                 |
 | 7   | Import and upload       | `ImportModal`                                                                                  | Pattern for import and file upload flows                                                             |
+
+### Non-composable component migration strategy
+
+Several components arriving from c4ip are **stable but not yet composable** —
+their design explorations or composability specifications are incomplete at the
+time of migration. `SidePanel` and `NotificationsPanel` are the primary
+examples. Because these components have significant product adoption and
+represent real consumer surface area, a decision was needed on _how_ to handle
+the gap between "move now" and "composable implementation ready".
+
+This was discussed and three approaches were evaluated:
+
+#### Approach 1 — Move to core as-is, composable implementation follows (selected)
+
+Non-composable component moves to `@carbon/react` as **stable** at v12.
+Composable redesign is developed post-v12 , shipped as preview
+(`preview__SidePanel`, etc.), and eventually promoted to stable while the legacy
+export is deprecated.
+
+Import path evolution for adopters:
+
+```
+v11:             import { SidePanel } from '@carbon/ibm-products';
+v12:             import { SidePanel } from '@carbon/react';            // moves here — no usage change yet
+post-v12:        import { preview__SidePanel } from '@carbon/react';   // new composable version lands as preview
+stabilization:   import { deprecated__SidePanel } from '@carbon/react'; // old non-composable export is deprecated
+                 import { SidePanel } from '@carbon/react';            // composable version promoted to stable
+```
+
+**Why selected:** Simplifies the initial v12 migration — adopters change only
+the import path at v12, not their usage. The second breaking change (usage
+refactor) is deferred until the composable design is complete and stable,
+preventing a rushed implementation.
+
+**Acknowledged downsides** :
+
+- Two rounds of migration churn for consumers (import-path change at v12, then
+  usage change when the composable version stabilises).
+- The team must support and eventually deprecate the legacy non-composable
+  export in the monorepo for the duration of the preview period.
+
+#### Approach 2 — Preview-first migration (rejected)
+
+Non-composable component moves to `@carbon/react` as a **preview candidate**
+(`previewCandidate__SidePanel`) at v12. Composable version lands as
+`preview__SidePanel` post-v12. Composable version is eventually promoted to
+stable; preview candidate is deprecated.
+
+```
+v11:             import { SidePanel } from '@carbon/ibm-products';
+v12:             import { previewCandidate__SidePanel } from '@carbon/react';
+post-v12:        import { preview__SidePanel } from '@carbon/react';   // e.g. preview__SidePanel.Header, ...Body
+stabilization:   import { SidePanel } from '@carbon/react';            // composable promoted; preview candidate deprecated
+```
+
+**Why rejected:** Introduces the most import-path churn (three changes for some
+adopters). The "preview candidate" status is unfamiliar to consumers and
+increases the communication overhead without shortening the timeline.
+
+#### Approach 3 — Parallel track, no migration (rejected)
+
+Non-composable components are **not moved to core**. Adopters continue using
+`@carbon/ibm-products` while fresh composable implementations are built in core
+after v12 (estimated several additional months). Key v12 updates (tokens,
+theming, infrastructure alignment) would need to be back-ported to the products
+repo to prevent drift.
+
+**Why rejected:** Extends the parallel-maintenance window significantly and
+delays the single-package consumption goal. The longer `carbon-for-ibm-products`
+must absorb v12 changes, the more expensive the eventual migration becomes.
+Scott Strubberg also raised the desire to stop feature development in c4ip as
+soon as possible.
+
+---
 
 ### Storybook organisation
 
@@ -199,10 +272,9 @@ The dev-leads discussion on 13 July 2026 aligned on Option 2. Concretely:
 - Migrated components are placed in the standard `Components/` tree alongside
   existing core components, ordered alphabetically.
 - A `Utilities/` section (already present in the monorepo Storybook) will house
-  utility components such as `TruncatedText`, `ActionSet`, `ScrollGradient`, and
-  any other components that are utility-oriented rather than
-  UI-pattern-oriented.
-- A `Patterns/` sub-section may be added to cover pattern examples previously
+  utility components such as `TruncatedText`, `ScrollGradient`, and any other
+  components that are utility-oriented rather than UI-pattern-oriented.
+- A `Examples/` sub-section may be added to cover pattern examples previously
   carried in c4ip — these are usage demonstrations, not exported components, and
   follow the guidance in [ADR 0006](./0006-storybook-organization.md).
 - For components where composability work is still pending at the time of
@@ -397,31 +469,6 @@ breaking change for consumers. The decision on _which_ components to migrate
 the migration set until they are publicly exported. The deprecation of c4ip is
 also reversible up to the point where the minimal maintenance announcement is
 made publicly.
-
-## Open Questions / Dissent
-
-- `TagOverflow` inclusion decision required before v12 exports are uncommented.
-  Whether `TagOverflow` migrates to core or is superseded by existing overflow
-  utilities is still unresolved (see audit table row 16). _Owner needed.
-  Unresolved at time of writing._
-
-- **⚠️ Composable-readiness two-track migration.** Composability work across
-  c4ip has been a multi-release effort. The outcome is two distinct tracks at
-  migration time:
-  - **Already composable (migrate as stable):** `InterstitialScreen`,
-    `Coachmark`, `Tearsheet`, `PageHeader`, `Card`, `AddSelect` — all have been
-    re-implemented as composable systems and are ready for stable export from
-    v12.
-  - \*\*Not yet composable (migrate as `preview__candidate` ) Post-v12,
-    composable redesigns will be developed and delivered as `preview`, promoted
-    to `stable`, and at that point the original migrated `preview__candidate`
-    will be deprecated.
-  - An audit tracking which components fall into which track exists in
-    [carbon#22881](https://github.com/carbon-design-system/carbon/issues/22881).
-    _Review the audit before finalising the v12 export list._
-
-> Silence in this section is not consent. Reviewers are encouraged to add
-> dissenting views or unresolved concerns before this ADR is accepted.
 
 ## Risks and Mitigations
 
