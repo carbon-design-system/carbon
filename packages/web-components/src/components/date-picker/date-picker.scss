@@ -13,7 +13,7 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/colors' as *;
 @use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/styles/scss/border-radius' as *;
-@use '@carbon/styles/scss/feature-flags' as *;
+@use '@carbon/styles/scss/feature-flags' as flags;
 
 @use '@carbon/styles/scss/components/form';
 @use '@carbon/styles/scss/components/date-picker/date-picker' as *;
@@ -32,7 +32,7 @@ $css--plex: true !default;
   }
 
   .#{$prefix}--date-picker__calendar.open {
-    @if enabled('enable-v12-release') {
+    @if flags.enabled('enable-v12-release') {
       margin-block-start: $spacing-02;
     } @else {
       margin-block-start: 0;
@@ -135,7 +135,7 @@ $css--plex: true !default;
   }
 }
 
-@if enabled('enable-v12-release') {
+@if flags.enabled('enable-v12-release') {
   :host(#{$prefix}-date-picker-input[kind='from']) {
     .#{$prefix}--date-picker__input {
       border-end-end-radius: 0;
