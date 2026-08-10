@@ -30,8 +30,8 @@ const content = html`
     <h2 class="ai-label-heading">84%</h2>
     <p class="secondary bold">Confidence score</p>
     <p class="secondary">
-      Lorem ipsum dolor sit amet, di os consectetur adipiscing elit, sed do
-      eiusmod tempor incididunt ut fsil labore et dolore magna aliqua.
+      This recommendation is based on current service availability and the
+      location of your existing resources.
     </p>
     <hr />
     <p class="secondary">Model type</p>
@@ -62,35 +62,26 @@ const sizes = {
   [`Large size (${INPUT_SIZE.LARGE})`]: INPUT_SIZE.LARGE,
 };
 
-const args = {
+const sharedArgs = {
   disabled: false,
-  helperText: 'Optional helper text',
+  helperText: 'Select the region where your resources will be hosted.',
   hideLabel: false,
   id: 'select',
   inline: false,
   invalid: false,
-  invalidText: 'Error message',
+  invalidText: 'Select a deployment region.',
   labelStylesDisable: false,
-  labelText: 'Select an option',
+  labelText: 'Deployment region',
+  name: 'deployment-region',
   placeholder: '',
   size: INPUT_SIZE.MEDIUM,
   readOnly: false,
   warn: false,
-  warnText: 'Warning message',
+  warnText: 'This region has limited availability.',
   value: '',
-  children: html`
-    <cds-select-item value=""></cds-select-item>
-    <cds-select-item value="all"
-      >An example option that is really long to show what should be done to
-      handle long text</cds-select-item
-    >
-    <cds-select-item value="cloudFoundry">Option 2</cds-select-item>
-    <cds-select-item value="staging">Option 3</cds-select-item>
-    <cds-select-item value="dea">Option 4</cds-select-item>
-  `,
 };
 
-const argTypes = {
+const sharedArgTypes = {
   disabled: {
     control: 'boolean',
     description: 'Specify whether the control is disabled.',
@@ -129,6 +120,10 @@ const argTypes = {
     description:
       'Provide label text to be read by screen readers when interacting with the control.',
   },
+  name: {
+    control: 'text',
+    description: 'Specify the name used when submitting form data.',
+  },
   placeholder: {
     control: 'text',
     description:
@@ -161,11 +156,29 @@ const argTypes = {
   },
 };
 
-// const optionsEl = ;
+const sharedControls = Object.keys(sharedArgTypes);
+const nonInlineArgTypes = {
+  ...sharedArgTypes,
+  inline: {
+    ...sharedArgTypes.inline,
+    table: { readonly: true },
+  },
+};
+
+const selectItems = html`
+  <cds-select-item value="">Choose a region</cds-select-item>
+  <cds-select-item value="us-south">Dallas (us-south)</cds-select-item>
+  <cds-select-item value="us-east">Washington, DC (us-east)</cds-select-item>
+  <cds-select-item value="eu-de">Frankfurt (eu-de)</cds-select-item>
+  <cds-select-item value="au-syd">Sydney (au-syd)</cds-select-item>
+`;
 
 export const Default = {
-  args,
-  argTypes,
+  args: sharedArgs,
+  argTypes: sharedArgTypes,
+  parameters: {
+    controls: { include: sharedControls },
+  },
   render: (args) => {
     const {
       disabled,
@@ -184,7 +197,6 @@ export const Default = {
       warn,
       warnText,
       value,
-      children,
       onInput,
     } = args ?? {};
     return html`
@@ -206,17 +218,8 @@ export const Default = {
           ?warn="${warn}"
           warn-text="${ifDefined(warnText)}"
           value="${ifDefined(value)}"
-          @cds-select-selected="${ifDefined(onInput)}">
-          ${children} helper-text="Optional helper text" label-text="Select an
-          option">
-          <cds-select-item
-            value="An example option that is really long to show what should be done to handle long text"
-            >An example option that is really long to show what should be done
-            to handle long text</cds-select-item
-          >
-          <cds-select-item selected value="option-2">Option 2</cds-select-item>
-          <cds-select-item value="option-3">Option 3</cds-select-item>
-          <cds-select-item value="option-4">Option 4</cds-select-item>
+          @cds-select-selected="${onInput}">
+          ${selectItems}
         </cds-select>
       </cds-form-item>
     `;
@@ -225,10 +228,19 @@ export const Default = {
 
 export const Inline = {
   args: {
-    ...args,
+    ...sharedArgs,
     inline: true,
   },
-  argTypes,
+  argTypes: {
+    ...sharedArgTypes,
+    inline: {
+      ...sharedArgTypes.inline,
+      table: { readonly: true },
+    },
+  },
+  parameters: {
+    controls: { include: sharedControls },
+  },
   render: (args) => {
     const {
       disabled,
@@ -247,7 +259,6 @@ export const Inline = {
       warn,
       warnText,
       value,
-      children,
       onInput,
     } = args ?? {};
     return html`
@@ -269,8 +280,8 @@ export const Inline = {
           ?warn="${warn}"
           warn-text="${ifDefined(warnText)}"
           value="${ifDefined(value)}"
-          @cds-select-selected="${ifDefined(onInput)}">
-          ${children}
+          @cds-select-selected="${onInput}">
+          ${selectItems}
         </cds-select>
       </cds-form-item>
     `;
@@ -278,17 +289,25 @@ export const Inline = {
 };
 
 export const Skeleton = {
-  render: () => html` <cds-select-skeleton></cds-select-skeleton> `,
+  args: {
+    hideLabel: false,
+  },
+  argTypes: {
+    hideLabel: sharedArgTypes.hideLabel,
+  },
+  parameters: {
+    controls: { include: ['hideLabel'] },
+  },
+  render: ({ hideLabel }) => html`
+    <cds-select-skeleton ?hide-label="${hideLabel}"></cds-select-skeleton>
+  `,
 };
 
 export const WithAILabel = {
-  args,
-  argTypes: {
-    ...argTypes,
-    inline: {
-      ...argTypes.inline,
-      control: false,
-    },
+  args: sharedArgs,
+  argTypes: nonInlineArgTypes,
+  parameters: {
+    controls: { include: sharedControls },
   },
   render: (args) => {
     const {
@@ -307,7 +326,6 @@ export const WithAILabel = {
       warn,
       warnText,
       value,
-      children,
       onInput,
     } = args ?? {};
 
@@ -329,11 +347,11 @@ export const WithAILabel = {
         ?warn="${warn}"
         warn-text="${ifDefined(warnText)}"
         value="${ifDefined(value)}"
-        @cds-select-selected="${ifDefined(onInput)}">
+        @cds-select-selected="${onInput}">
         <cds-ai-label alignment="bottom-left">
           ${content}${actions}</cds-ai-label
         >
-        ${children}
+        ${selectItems}
       </cds-select>
     </div>`;
   },
@@ -343,15 +361,10 @@ export const WithLayer = {
   decorators: [withLayers],
   parameters: {
     layout: 'fullscreen',
+    controls: { include: sharedControls },
   },
-  args,
-  argTypes: {
-    ...argTypes,
-    inline: {
-      ...argTypes.inline,
-      control: false,
-    },
-  },
+  args: sharedArgs,
+  argTypes: nonInlineArgTypes,
   render: (args) => {
     const {
       disabled,
@@ -369,7 +382,6 @@ export const WithLayer = {
       warn,
       warnText,
       value,
-      children,
       onInput,
     } = args ?? {};
 
@@ -391,8 +403,8 @@ export const WithLayer = {
         ?warn="${warn}"
         warn-text="${ifDefined(warnText)}"
         value="${ifDefined(value)}"
-        @cds-select-selected="${ifDefined(onInput)}">
-        ${children}
+        @cds-select-selected="${onInput}">
+        ${selectItems}
       </cds-select>
     `;
   },
