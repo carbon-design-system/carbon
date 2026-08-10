@@ -325,6 +325,12 @@ Source (on GitHub): carbon-design-system/ibm-products
 
 Target: e2e/components/{{ComponentName}}/{{ComponentName}}-test.avt.e2e.js
 
+⚠ ALL tests must use test.skip() — migrated component stories are in
+  productMigratedStoryGlobs and are excluded from the v11 Storybook.
+  The v11 Storybook is what the AVT suite runs against. Tests will fail
+  with a "story not found" error if not skipped.
+  Re-enable (change test.skip → test) when the v12 Storybook is running in CI.
+
 If the source file exists, migrate it with these adaptations:
 
   ibm-products                        Carbon core
@@ -333,19 +339,19 @@ If the source file exists, migrate it with these adaptations:
   import { visitStory } from '…'       const { visitStory } = require('../../test-utils/storybook');
   globals: { carbonTheme: 'white' }   globals: { theme: 'white' }
   component: '{{ComponentName}}'       PREVIEW: component: 'preview__{{ComponentName}}'
-                                        STABLE:  component: '{{ComponentName}}'
+                                        STABLE/UTILITY: component: '{{ComponentName}}'
   story id from ibm-products title     Recalculate from Carbon core title + export name:
                                           id = kebab(title.replace('/','-')) + '--' + kebab(exportName)
                                           e.g. 'Preview/BigNumber' + Default → 'preview-bignumber--default'
                                                'Components/SidePanel' + SlideOver → 'components-sidepanel--slide-over'
                                                'Utilities/TruncatedText' + WithTooltip → 'utilities-truncatedtext--with-tooltip'
   test.describe('X @avt', …)          test.describe('@avt {{ComponentName}}', …)
+  test('…', …)                         test.skip('…', …) with TODO comment (see above)
   Copyright 'yyyy, yyyy'               Update to current year range
 
   If a story referenced in the AVT test does NOT exist in Carbon core:
-    → Add as test.skip() with a TODO comment explaining what must be added first
-    → DO NOT invent or write tests for stories that don't exist
-    → DO NOT create additional advanced-states tests beyond what ibm-products had
+    → Also test.skip() — one skip covers both "story not in Storybook" and
+      "story not yet written"; update the TODO to name which stories are missing
 
 If the source AVT file does NOT exist in ibm-products:
   → Do not create one — no invented tests
@@ -412,7 +418,9 @@ AVT:
   ☐ Uses require() not import
   ☐ globals.theme (not globals.carbonTheme)
   ☐ Story IDs recalculated for Carbon core Storybook title/export
-  ☐ Missing stories are test.skip() with TODO — not invented
+  ☐ ALL tests use test.skip() with TODO — stories excluded from v11 Storybook
+  ☐ preview component: visitStory component: field is 'preview__{{ComponentName}}'
+      not '{{ComponentName}}'
 ```
 
 ---
