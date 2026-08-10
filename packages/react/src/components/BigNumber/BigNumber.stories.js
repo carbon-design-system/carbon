@@ -48,7 +48,7 @@ const iconButtonOptions = {
 };
 
 export default {
-  title: 'Preview/BigNumber',
+  title: 'Preview/preview__BigNumber',
   component: BigNumber,
   tags: ['autodocs'],
   argTypes: {
