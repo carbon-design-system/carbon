@@ -6,7 +6,6 @@
  */
 
 import React, { ReactNode } from 'react';
-import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { usePrefix } from '../../internal/usePrefix';
 
@@ -52,23 +51,6 @@ export const CardAction = ({
       {children}
     </div>
   );
-};
-
-CardAction.propTypes = {
-  /**
-   * Provide the contents of the CardAction.
-   */
-  children: PropTypes.node,
-
-  /**
-   * Provide an optional class to be applied to the containing node.
-   */
-  className: PropTypes.string,
-
-  /**
-   * Label shown in the overflow menu when this action is hidden.
-   */
-  label: PropTypes.string,
 };
 
 CardAction.displayName = componentName;

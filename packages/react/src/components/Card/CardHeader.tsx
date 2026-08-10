@@ -6,7 +6,6 @@
  */
 
 import React, { forwardRef, useCallback } from 'react';
-import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { CardHeaderProps } from './Card.types';
 import { useCardContext } from './CardContext';
@@ -54,8 +53,3 @@ export const CardHeader = forwardRef<HTMLDivElement, CardHeaderProps>(
 );
 
 CardHeader.displayName = componentName;
-
-CardHeader.propTypes = {
-  children: PropTypes.node,
-  className: PropTypes.string,
-};

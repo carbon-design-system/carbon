@@ -6,7 +6,6 @@
  */
 
 import React, { forwardRef, ReactNode } from 'react';
-import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { usePrefix } from '../../internal/usePrefix';
 
@@ -43,15 +42,3 @@ export const CardTitleMedia = forwardRef<HTMLDivElement, CardTitleMediaProps>(
 );
 
 CardTitleMedia.displayName = componentName;
-
-CardTitleMedia.propTypes = {
-  /**
-   * Content to be rendered in the title media slot (typically an icon or small image)
-   */
-  children: PropTypes.node,
-
-  /**
-   * Optional class name for custom styling
-   */
-  className: PropTypes.string,
-};

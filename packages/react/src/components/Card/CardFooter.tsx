@@ -6,7 +6,6 @@
  */
 
 import React, { forwardRef } from 'react';
-import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { CardFooterProps } from './Card.types';
 import { usePrefix } from '../../internal/usePrefix';
@@ -30,14 +29,3 @@ export const CardFooter = forwardRef<HTMLDivElement, CardFooterProps>(
 );
 
 CardFooter.displayName = componentName;
-
-CardFooter.propTypes = {
-  /**
-   * Footer content
-   */
-  children: PropTypes.node,
-  /**
-   * Additional CSS class names
-   */
-  className: PropTypes.string,
-};

@@ -6,7 +6,6 @@
  */
 
 import React, { forwardRef, isValidElement, useCallback, useMemo } from 'react';
-import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { AILabel } from '../AILabel';
 import { CardProps } from './Card.types';
@@ -165,45 +164,6 @@ const CardComponent = forwardRef<HTMLDivElement, CardProps>(
 );
 
 CardComponent.displayName = componentName;
-
-CardComponent.propTypes = {
-  /**
-   * Card content
-   */
-  children: PropTypes.node,
-  /**
-   * Additional CSS class names
-   */
-  className: PropTypes.string,
-  /**
-   * Makes the entire card clickable
-   */
-  clickable: PropTypes.bool,
-  /**
-   * Optional decorator component (typically AILabel from Carbon)
-   */
-  decorator: PropTypes.node,
-  /**
-   * Density variant: productive uses heading-compact-02, expressive uses heading-03
-   */
-  density: PropTypes.oneOf(['productive', 'expressive']),
-  /**
-   * Disables the card and all interactive elements
-   */
-  disabled: PropTypes.bool,
-  /**
-   * When true, renders media on the left and content (header/body/footer) on the right
-   */
-  horizontal: PropTypes.bool,
-  /**
-   * Click handler for clickable cards
-   */
-  onClick: PropTypes.func,
-  /**
-   * Keyboard event handler for clickable cards
-   */
-  onKeyDown: PropTypes.func,
-};
 
 /**
  * -------

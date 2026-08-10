@@ -6,7 +6,6 @@
  */
 
 import React, { forwardRef, ReactNode } from 'react';
-import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { usePrefix } from '../../internal/usePrefix';
 
@@ -182,18 +181,5 @@ export const CardTitle = forwardRef<HTMLDivElement, CardTitleProps>(
     );
   }
 );
-
-CardTitle.propTypes = {
-  children: PropTypes.node,
-  className: PropTypes.string,
-  description: PropTypes.node,
-  descriptionTruncate: PropTypes.oneOfType([PropTypes.bool, PropTypes.number]),
-  label: PropTypes.node,
-  labelTruncate: PropTypes.oneOfType([PropTypes.bool, PropTypes.number]),
-  maxWidth: PropTypes.string,
-  titleEnd: PropTypes.node,
-  titleStart: PropTypes.node,
-  titleTruncate: PropTypes.oneOfType([PropTypes.bool, PropTypes.number]),
-};
 
 CardTitle.displayName = componentName;

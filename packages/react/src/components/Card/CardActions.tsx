@@ -13,7 +13,6 @@ import React, {
   useState,
   Children,
 } from 'react';
-import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { OverflowMenu } from '../OverflowMenu/next';
 import { MenuItem } from '../Menu';
@@ -153,23 +152,6 @@ export const CardActions = ({
       </div>
     </div>
   );
-};
-
-CardActions.propTypes = {
-  /**
-   * Provide the contents of the CardActions.
-   */
-  children: PropTypes.node,
-
-  /**
-   * Provide an optional class to be applied to the containing node.
-   */
-  className: PropTypes.string,
-
-  /**
-   * Aria label for the overflow menu
-   */
-  overflowMenuLabel: PropTypes.string,
 };
 
 CardActions.displayName = componentName;
