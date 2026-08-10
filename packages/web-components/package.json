@@ -91,7 +91,7 @@
     "@storybook/web-components-vite": "^10.3.5",
     "@types/lodash-es": "^4.17.5",
     "@types/node": "^24.0.0",
-    "@web/test-runner": "^0.20.0",
+    "@web/test-runner": "^1.0.0",
     "@web/test-runner-commands": "^1.0.0",
     "@web/test-runner-playwright": "^1.0.0",
     "@web/test-runner-puppeteer": "^1.0.0",
