@@ -19,6 +19,7 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/utilities/ai-gradient' as *;
 @use '@carbon/styles/scss/utilities/convert' as convert;
 @use '@carbon/styles/scss/layout' as *;
+@use '@carbon/styles/scss/feature-flags' as flags;
 
 // https://github.com/carbon-design-system/carbon/issues/11408
 @include list-box;
@@ -55,6 +56,29 @@ $css--plex: true !default;
 
 :host(#{$prefix}-dropdown[ai-label]) .#{$prefix}--list-box__wrapper--decorator {
   @include ai-gradient;
+
+  @if flags.enabled('enable-v12-release') {
+    // Reset the bottom-edge color override from @include ai-gradient so the
+    // border-box gradient layer controls all four sides uniformly.
+    background:
+      linear-gradient(
+          0deg,
+          $ai-aura-start-sm 0%,
+          15%,
+          $ai-aura-end 50%,
+          transparent 100%
+        )
+        padding-box,
+      linear-gradient($field, $field) padding-box,
+      // (ai-border-start → ai-border-end), mirroring the default v12 border gradient
+      linear-gradient(
+          to bottom,
+          $ai-border-start calc(100% - 4px),
+          $ai-border-strong 100%
+        )
+        border-box;
+    border-block-end-color: transparent;
+  }
 }
 
 :host(#{$prefix}-dropdown[invalid]:not([disabled]):not([read-only])) {
