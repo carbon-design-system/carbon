@@ -105,16 +105,21 @@ $list-box-menu-width: convert.to-rem(300px);
     @if enabled('enable-v12-release') {
       border: 1px solid transparent;
       border-radius: $border-radius-04;
-      // (gray-20 → gray-50)
-      background:
-        linear-gradient($field, $field) padding-box,
-        linear-gradient(
-            to bottom,
-            $border-subtle calc(100% - 4px),
-            $border-strong 100%
-          )
-          border-box;
       transition: background $duration-fast-01 motion(standard, productive);
+
+      &:not(.#{$prefix}--list-box--inline):not(
+          .#{$prefix}--dropdown--inline
+        ):not(.#{$prefix}--multi-select--inline) {
+        // (gray-20 → gray-50)
+        background:
+          linear-gradient($field, $field) padding-box,
+          linear-gradient(
+              to bottom,
+              $border-subtle calc(100% - 4px),
+              $border-strong 100%
+            )
+            border-box;
+      }
     }
   }
 
