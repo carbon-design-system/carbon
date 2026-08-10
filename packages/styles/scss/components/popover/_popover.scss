@@ -603,21 +603,36 @@ $popover-caret-height: custom-property.get-var(
     > .#{$prefix}--popover
     > .#{$prefix}--popover-content
     > .#{$prefix}--popover-caret,
+  .#{$prefix}--popover--bottom.#{$prefix}--popover--auto-align
+    .#{$prefix}--popover-content--motion-open
+    > .#{$prefix}--popover-caret,
   .#{$prefix}--popover--bottom-left.#{$prefix}--popover--auto-align
     > .#{$prefix}--popover
     > .#{$prefix}--popover-content
+    > .#{$prefix}--popover-caret,
+  .#{$prefix}--popover--bottom-left.#{$prefix}--popover--auto-align
+    .#{$prefix}--popover-content--motion-open
     > .#{$prefix}--popover-caret,
   .#{$prefix}--popover--bottom-start.#{$prefix}--popover--auto-align
     > .#{$prefix}--popover
     > .#{$prefix}--popover-content
     > .#{$prefix}--popover-caret,
+  .#{$prefix}--popover--bottom-start.#{$prefix}--popover--auto-align
+    .#{$prefix}--popover-content--motion-open
+    > .#{$prefix}--popover-caret,
   .#{$prefix}--popover--bottom-right.#{$prefix}--popover--auto-align
     > .#{$prefix}--popover
     > .#{$prefix}--popover-content
     > .#{$prefix}--popover-caret,
+  .#{$prefix}--popover--bottom-right.#{$prefix}--popover--auto-align
+    .#{$prefix}--popover-content--motion-open
+    > .#{$prefix}--popover-caret,
   .#{$prefix}--popover--bottom-end.#{$prefix}--popover--auto-align
     > .#{$prefix}--popover
     > .#{$prefix}--popover-content
+    > .#{$prefix}--popover-caret,
+  .#{$prefix}--popover--bottom-end.#{$prefix}--popover--auto-align
+    .#{$prefix}--popover-content--motion-open
     > .#{$prefix}--popover-caret {
     block-size: $popover-caret-height;
     inline-size: $popover-caret-width;
@@ -634,21 +649,36 @@ $popover-caret-height: custom-property.get-var(
     > .#{$prefix}--popover
     > .#{$prefix}--popover-content
     > .#{$prefix}--popover-caret,
+  .#{$prefix}--popover--border.#{$prefix}--popover--bottom.#{$prefix}--popover--auto-align
+    .#{$prefix}--popover-content--motion-open
+    > .#{$prefix}--popover-caret,
   .#{$prefix}--popover--border.#{$prefix}--popover--bottom-left.#{$prefix}--popover--auto-align
     > .#{$prefix}--popover
     > .#{$prefix}--popover-content
+    > .#{$prefix}--popover-caret,
+  .#{$prefix}--popover--border.#{$prefix}--popover--bottom-left.#{$prefix}--popover--auto-align
+    .#{$prefix}--popover-content--motion-open
     > .#{$prefix}--popover-caret,
   .#{$prefix}--popover--border.#{$prefix}--popover--bottom-start.#{$prefix}--popover--auto-align
     > .#{$prefix}--popover
     > .#{$prefix}--popover-content
     > .#{$prefix}--popover-caret,
+  .#{$prefix}--popover--border.#{$prefix}--popover--bottom-start.#{$prefix}--popover--auto-align
+    .#{$prefix}--popover-content--motion-open
+    > .#{$prefix}--popover-caret,
   .#{$prefix}--popover--border.#{$prefix}--popover--bottom-right.#{$prefix}--popover--auto-align
     > .#{$prefix}--popover
     > .#{$prefix}--popover-content
     > .#{$prefix}--popover-caret,
+  .#{$prefix}--popover--border.#{$prefix}--popover--bottom-right.#{$prefix}--popover--auto-align
+    .#{$prefix}--popover-content--motion-open
+    > .#{$prefix}--popover-caret,
   .#{$prefix}--popover--border.#{$prefix}--popover--bottom-end.#{$prefix}--popover--auto-align
     > .#{$prefix}--popover
     > .#{$prefix}--popover-content
+    > .#{$prefix}--popover-caret,
+  .#{$prefix}--popover--border.#{$prefix}--popover--bottom-end.#{$prefix}--popover--auto-align
+    .#{$prefix}--popover-content--motion-open
     > .#{$prefix}--popover-caret {
     &::before {
       block-size: $popover-caret-height;
@@ -827,21 +857,36 @@ $popover-caret-height: custom-property.get-var(
     > .#{$prefix}--popover
     > .#{$prefix}--popover-content
     > .#{$prefix}--popover-caret,
+  .#{$prefix}--popover--top.#{$prefix}--popover--auto-align
+    .#{$prefix}--popover-content--motion-open
+    > .#{$prefix}--popover-caret,
   .#{$prefix}--popover--top-left.#{$prefix}--popover--auto-align
     > .#{$prefix}--popover
     > .#{$prefix}--popover-content
+    > .#{$prefix}--popover-caret,
+  .#{$prefix}--popover--top-left.#{$prefix}--popover--auto-align
+    .#{$prefix}--popover-content--motion-open
     > .#{$prefix}--popover-caret,
   .#{$prefix}--popover--top-start.#{$prefix}--popover--auto-align
     > .#{$prefix}--popover
     > .#{$prefix}--popover-content
     > .#{$prefix}--popover-caret,
+  .#{$prefix}--popover--top-start.#{$prefix}--popover--auto-align
+    .#{$prefix}--popover-content--motion-open
+    > .#{$prefix}--popover-caret,
   .#{$prefix}--popover--top-right.#{$prefix}--popover--auto-align
     > .#{$prefix}--popover
     > .#{$prefix}--popover-content
     > .#{$prefix}--popover-caret,
+  .#{$prefix}--popover--top-right.#{$prefix}--popover--auto-align
+    .#{$prefix}--popover-content--motion-open
+    > .#{$prefix}--popover-caret,
   .#{$prefix}--popover--top-end.#{$prefix}--popover--auto-align
     > .#{$prefix}--popover
     > .#{$prefix}--popover-content
+    > .#{$prefix}--popover-caret,
+  .#{$prefix}--popover--top-end.#{$prefix}--popover--auto-align
+    .#{$prefix}--popover-content--motion-open
     > .#{$prefix}--popover-caret {
     block-size: $popover-caret-height;
     inline-size: $popover-caret-width;
@@ -858,21 +903,36 @@ $popover-caret-height: custom-property.get-var(
     > .#{$prefix}--popover
     > .#{$prefix}--popover-content
     > .#{$prefix}--popover-caret,
+  .#{$prefix}--popover--border.#{$prefix}--popover--top.#{$prefix}--popover--auto-align
+    .#{$prefix}--popover-content--motion-open
+    > .#{$prefix}--popover-caret,
   .#{$prefix}--popover--border.#{$prefix}--popover--top-left.#{$prefix}--popover--auto-align
     > .#{$prefix}--popover
     > .#{$prefix}--popover-content
+    > .#{$prefix}--popover-caret,
+  .#{$prefix}--popover--border.#{$prefix}--popover--top-left.#{$prefix}--popover--auto-align
+    .#{$prefix}--popover-content--motion-open
     > .#{$prefix}--popover-caret,
   .#{$prefix}--popover--border.#{$prefix}--popover--top-start.#{$prefix}--popover--auto-align
     > .#{$prefix}--popover
     > .#{$prefix}--popover-content
     > .#{$prefix}--popover-caret,
+  .#{$prefix}--popover--border.#{$prefix}--popover--top-start.#{$prefix}--popover--auto-align
+    .#{$prefix}--popover-content--motion-open
+    > .#{$prefix}--popover-caret,
   .#{$prefix}--popover--border.#{$prefix}--popover--top-right.#{$prefix}--popover--auto-align
     > .#{$prefix}--popover
     > .#{$prefix}--popover-content
     > .#{$prefix}--popover-caret,
+  .#{$prefix}--popover--border.#{$prefix}--popover--top-right.#{$prefix}--popover--auto-align
+    .#{$prefix}--popover-content--motion-open
+    > .#{$prefix}--popover-caret,
   .#{$prefix}--popover--border.#{$prefix}--popover--top-end.#{$prefix}--popover--auto-align
     > .#{$prefix}--popover
     > .#{$prefix}--popover-content
+    > .#{$prefix}--popover-caret,
+  .#{$prefix}--popover--border.#{$prefix}--popover--top-end.#{$prefix}--popover--auto-align
+    .#{$prefix}--popover-content--motion-open
     > .#{$prefix}--popover-caret {
     &::before {
       block-size: $popover-caret-height;
@@ -1096,21 +1156,36 @@ $popover-caret-height: custom-property.get-var(
     > .#{$prefix}--popover
     > .#{$prefix}--popover-content
     > .#{$prefix}--popover-caret,
+  .#{$prefix}--popover--right.#{$prefix}--popover--auto-align
+    .#{$prefix}--popover-content--motion-open
+    > .#{$prefix}--popover-caret,
   .#{$prefix}--popover--right-top.#{$prefix}--popover--auto-align
     > .#{$prefix}--popover
     > .#{$prefix}--popover-content
+    > .#{$prefix}--popover-caret,
+  .#{$prefix}--popover--right-top.#{$prefix}--popover--auto-align
+    .#{$prefix}--popover-content--motion-open
     > .#{$prefix}--popover-caret,
   .#{$prefix}--popover--right-start.#{$prefix}--popover--auto-align
     > .#{$prefix}--popover
     > .#{$prefix}--popover-content
     > .#{$prefix}--popover-caret,
+  .#{$prefix}--popover--right-start.#{$prefix}--popover--auto-align
+    .#{$prefix}--popover-content--motion-open
+    > .#{$prefix}--popover-caret,
   .#{$prefix}--popover--right-bottom.#{$prefix}--popover--auto-align
     > .#{$prefix}--popover
     > .#{$prefix}--popover-content
     > .#{$prefix}--popover-caret,
+  .#{$prefix}--popover--right-bottom.#{$prefix}--popover--auto-align
+    .#{$prefix}--popover-content--motion-open
+    > .#{$prefix}--popover-caret,
   .#{$prefix}--popover--right-end.#{$prefix}--popover--auto-align
     > .#{$prefix}--popover
     > .#{$prefix}--popover-content
+    > .#{$prefix}--popover-caret,
+  .#{$prefix}--popover--right-end.#{$prefix}--popover--auto-align
+    .#{$prefix}--popover-content--motion-open
     > .#{$prefix}--popover-caret {
     block-size: $popover-caret-width;
     inline-size: $popover-caret-height;
@@ -1128,21 +1203,36 @@ $popover-caret-height: custom-property.get-var(
     > .#{$prefix}--popover
     > .#{$prefix}--popover-content
     > .#{$prefix}--popover-caret,
+  .#{$prefix}--popover--border.#{$prefix}--popover--right.#{$prefix}--popover--auto-align
+    .#{$prefix}--popover-content--motion-open
+    > .#{$prefix}--popover-caret,
   .#{$prefix}--popover--border.#{$prefix}--popover--right-top.#{$prefix}--popover--auto-align
     > .#{$prefix}--popover
     > .#{$prefix}--popover-content
+    > .#{$prefix}--popover-caret,
+  .#{$prefix}--popover--border.#{$prefix}--popover--right-top.#{$prefix}--popover--auto-align
+    .#{$prefix}--popover-content--motion-open
     > .#{$prefix}--popover-caret,
   .#{$prefix}--popover--border.#{$prefix}--popover--right-start.#{$prefix}--popover--auto-align
     > .#{$prefix}--popover
     > .#{$prefix}--popover-content
     > .#{$prefix}--popover-caret,
+  .#{$prefix}--popover--border.#{$prefix}--popover--right-start.#{$prefix}--popover--auto-align
+    .#{$prefix}--popover-content--motion-open
+    > .#{$prefix}--popover-caret,
   .#{$prefix}--popover--border.#{$prefix}--popover--right-bottom.#{$prefix}--popover--auto-align
     > .#{$prefix}--popover
     > .#{$prefix}--popover-content
     > .#{$prefix}--popover-caret,
+  .#{$prefix}--popover--border.#{$prefix}--popover--right-bottom.#{$prefix}--popover--auto-align
+    .#{$prefix}--popover-content--motion-open
+    > .#{$prefix}--popover-caret,
   .#{$prefix}--popover--border.#{$prefix}--popover--right-end.#{$prefix}--popover--auto-align
     > .#{$prefix}--popover
     > .#{$prefix}--popover-content
+    > .#{$prefix}--popover-caret,
+  .#{$prefix}--popover--border.#{$prefix}--popover--right-end.#{$prefix}--popover--auto-align
+    .#{$prefix}--popover-content--motion-open
     > .#{$prefix}--popover-caret {
     &::before {
       block-size: $popover-caret-width;
@@ -1162,7 +1252,23 @@ $popover-caret-height: custom-property.get-var(
     > .#{$prefix}--popover
     > .#{$prefix}--popover-content
     > .#{$prefix}--popover-caret,
+  .#{$prefix}--popover--border.#{$prefix}--popover--right.#{$prefix}--popover--auto-align:dir(
+      rtl
+    )
+    .#{$prefix}--popover-content--motion-open
+    > .#{$prefix}--popover-caret,
   .#{$prefix}--popover--border.#{$prefix}--popover--right-top.#{$prefix}--popover--auto-align:dir(
+      rtl
+    )
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-content
+    > .#{$prefix}--popover-caret,
+  .#{$prefix}--popover--border.#{$prefix}--popover--right-top.#{$prefix}--popover--auto-align:dir(
+      rtl
+    )
+    .#{$prefix}--popover-content--motion-open
+    > .#{$prefix}--popover-caret,
+  .#{$prefix}--popover--border.#{$prefix}--popover--right-start.#{$prefix}--popover--auto-align:dir(
       rtl
     )
     > .#{$prefix}--popover
@@ -1171,10 +1277,20 @@ $popover-caret-height: custom-property.get-var(
   .#{$prefix}--popover--border.#{$prefix}--popover--right-start.#{$prefix}--popover--auto-align:dir(
       rtl
     )
+    .#{$prefix}--popover-content--motion-open
+    > .#{$prefix}--popover-caret,
+  .#{$prefix}--popover--border.#{$prefix}--popover--right-bottom.#{$prefix}--popover--auto-align:dir(
+      rtl
+    )
     > .#{$prefix}--popover
     > .#{$prefix}--popover-content
     > .#{$prefix}--popover-caret,
   .#{$prefix}--popover--border.#{$prefix}--popover--right-bottom.#{$prefix}--popover--auto-align:dir(
+      rtl
+    )
+    .#{$prefix}--popover-content--motion-open
+    > .#{$prefix}--popover-caret,
+  .#{$prefix}--popover--border.#{$prefix}--popover--right-end.#{$prefix}--popover--auto-align:dir(
       rtl
     )
     > .#{$prefix}--popover
@@ -1183,8 +1299,7 @@ $popover-caret-height: custom-property.get-var(
   .#{$prefix}--popover--border.#{$prefix}--popover--right-end.#{$prefix}--popover--auto-align:dir(
       rtl
     )
-    > .#{$prefix}--popover
-    > .#{$prefix}--popover-content
+    .#{$prefix}--popover-content--motion-open
     > .#{$prefix}--popover-caret {
     &::before {
       margin-inline-start: 1px;
@@ -1411,21 +1526,36 @@ $popover-caret-height: custom-property.get-var(
     > .#{$prefix}--popover
     > .#{$prefix}--popover-content
     > .#{$prefix}--popover-caret,
+  .#{$prefix}--popover--left.#{$prefix}--popover--auto-align
+    .#{$prefix}--popover-content--motion-open
+    > .#{$prefix}--popover-caret,
   .#{$prefix}--popover--left-top.#{$prefix}--popover--auto-align
     > .#{$prefix}--popover
     > .#{$prefix}--popover-content
+    > .#{$prefix}--popover-caret,
+  .#{$prefix}--popover--left-top.#{$prefix}--popover--auto-align
+    .#{$prefix}--popover-content--motion-open
     > .#{$prefix}--popover-caret,
   .#{$prefix}--popover--left-start.#{$prefix}--popover--auto-align
     > .#{$prefix}--popover
     > .#{$prefix}--popover-content
     > .#{$prefix}--popover-caret,
+  .#{$prefix}--popover--left-start.#{$prefix}--popover--auto-align
+    .#{$prefix}--popover-content--motion-open
+    > .#{$prefix}--popover-caret,
   .#{$prefix}--popover--left-bottom.#{$prefix}--popover--auto-align
     > .#{$prefix}--popover
     > .#{$prefix}--popover-content
     > .#{$prefix}--popover-caret,
+  .#{$prefix}--popover--left-bottom.#{$prefix}--popover--auto-align
+    .#{$prefix}--popover-content--motion-open
+    > .#{$prefix}--popover-caret,
   .#{$prefix}--popover--left-end.#{$prefix}--popover--auto-align
     > .#{$prefix}--popover
     > .#{$prefix}--popover-content
+    > .#{$prefix}--popover-caret,
+  .#{$prefix}--popover--left-end.#{$prefix}--popover--auto-align
+    .#{$prefix}--popover-content--motion-open
     > .#{$prefix}--popover-caret {
     block-size: $popover-caret-width;
     inline-size: $popover-caret-height;
@@ -1442,21 +1572,36 @@ $popover-caret-height: custom-property.get-var(
     > .#{$prefix}--popover
     > .#{$prefix}--popover-content
     > .#{$prefix}--popover-caret,
+  .#{$prefix}--popover--border.#{$prefix}--popover--left.#{$prefix}--popover--auto-align
+    .#{$prefix}--popover-content--motion-open
+    > .#{$prefix}--popover-caret,
   .#{$prefix}--popover--border.#{$prefix}--popover--left-top.#{$prefix}--popover--auto-align
     > .#{$prefix}--popover
     > .#{$prefix}--popover-content
+    > .#{$prefix}--popover-caret,
+  .#{$prefix}--popover--border.#{$prefix}--popover--left-top.#{$prefix}--popover--auto-align
+    .#{$prefix}--popover-content--motion-open
     > .#{$prefix}--popover-caret,
   .#{$prefix}--popover--border.#{$prefix}--popover--left-start.#{$prefix}--popover--auto-align
     > .#{$prefix}--popover
     > .#{$prefix}--popover-content
     > .#{$prefix}--popover-caret,
+  .#{$prefix}--popover--border.#{$prefix}--popover--left-start.#{$prefix}--popover--auto-align
+    .#{$prefix}--popover-content--motion-open
+    > .#{$prefix}--popover-caret,
   .#{$prefix}--popover--border.#{$prefix}--popover--left-bottom.#{$prefix}--popover--auto-align
     > .#{$prefix}--popover
     > .#{$prefix}--popover-content
     > .#{$prefix}--popover-caret,
+  .#{$prefix}--popover--border.#{$prefix}--popover--left-bottom.#{$prefix}--popover--auto-align
+    .#{$prefix}--popover-content--motion-open
+    > .#{$prefix}--popover-caret,
   .#{$prefix}--popover--border.#{$prefix}--popover--left-end.#{$prefix}--popover--auto-align
     > .#{$prefix}--popover
     > .#{$prefix}--popover-content
+    > .#{$prefix}--popover-caret,
+  .#{$prefix}--popover--border.#{$prefix}--popover--left-end.#{$prefix}--popover--auto-align
+    .#{$prefix}--popover-content--motion-open
     > .#{$prefix}--popover-caret {
     &::before {
       block-size: $popover-caret-width;
@@ -1475,7 +1620,23 @@ $popover-caret-height: custom-property.get-var(
     > .#{$prefix}--popover
     > .#{$prefix}--popover-content
     > .#{$prefix}--popover-caret,
+  .#{$prefix}--popover--border.#{$prefix}--popover--left.#{$prefix}--popover--auto-align:dir(
+      rtl
+    )
+    .#{$prefix}--popover-content--motion-open
+    > .#{$prefix}--popover-caret,
   .#{$prefix}--popover--border.#{$prefix}--popover--left-top.#{$prefix}--popover--auto-align:dir(
+      rtl
+    )
+    > .#{$prefix}--popover
+    > .#{$prefix}--popover-content
+    > .#{$prefix}--popover-caret,
+  .#{$prefix}--popover--border.#{$prefix}--popover--left-top.#{$prefix}--popover--auto-align:dir(
+      rtl
+    )
+    .#{$prefix}--popover-content--motion-open
+    > .#{$prefix}--popover-caret,
+  .#{$prefix}--popover--border.#{$prefix}--popover--left-start.#{$prefix}--popover--auto-align:dir(
       rtl
     )
     > .#{$prefix}--popover
@@ -1484,10 +1645,20 @@ $popover-caret-height: custom-property.get-var(
   .#{$prefix}--popover--border.#{$prefix}--popover--left-start.#{$prefix}--popover--auto-align:dir(
       rtl
     )
+    .#{$prefix}--popover-content--motion-open
+    > .#{$prefix}--popover-caret,
+  .#{$prefix}--popover--border.#{$prefix}--popover--left-bottom.#{$prefix}--popover--auto-align:dir(
+      rtl
+    )
     > .#{$prefix}--popover
     > .#{$prefix}--popover-content
     > .#{$prefix}--popover-caret,
   .#{$prefix}--popover--border.#{$prefix}--popover--left-bottom.#{$prefix}--popover--auto-align:dir(
+      rtl
+    )
+    .#{$prefix}--popover-content--motion-open
+    > .#{$prefix}--popover-caret,
+  .#{$prefix}--popover--border.#{$prefix}--popover--left-end.#{$prefix}--popover--auto-align:dir(
       rtl
     )
     > .#{$prefix}--popover
@@ -1496,8 +1667,7 @@ $popover-caret-height: custom-property.get-var(
   .#{$prefix}--popover--border.#{$prefix}--popover--left-end.#{$prefix}--popover--auto-align:dir(
       rtl
     )
-    > .#{$prefix}--popover
-    > .#{$prefix}--popover-content
+    .#{$prefix}--popover-content--motion-open
     > .#{$prefix}--popover-caret {
     &::before {
       margin-inline-start: -1px;
