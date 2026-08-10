@@ -11,7 +11,10 @@ const { expect, test } = require('@playwright/test');
 const { visitStory } = require('../../test-utils/storybook');
 
 test.describe('@avt BigNumber', () => {
-  test('@avt-default-state', async ({ page }) => {
+  // TODO: BigNumber stories are excluded from the v11 Storybook via
+  // productMigratedStoryGlobs in product-migrated-components.mjs.
+  // Re-enable once the v12 Storybook is running in CI.
+  test.skip('@avt-default-state', async ({ page }) => {
     await visitStory(page, {
       component: 'preview__BigNumber',
       id: 'preview-bignumber--default',

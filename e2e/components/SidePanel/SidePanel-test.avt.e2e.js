@@ -11,7 +11,10 @@ const { expect, test } = require('@playwright/test');
 const { visitStory } = require('../../test-utils/storybook');
 
 test.describe('@avt SidePanel', () => {
-  test('@avt-default-state', async ({ page }) => {
+  // TODO: SidePanel stories are excluded from the v11 Storybook via
+  // productMigratedStoryGlobs in product-migrated-components.mjs.
+  // Re-enable once the v12 Storybook is running in CI.
+  test.skip('@avt-default-state', async ({ page }) => {
     await visitStory(page, {
       component: 'SidePanel',
       id: 'components-sidepanel--slide-over',
@@ -22,7 +25,7 @@ test.describe('@avt SidePanel', () => {
     await expect(page).toHaveNoACViolations('SidePanel');
   });
 
-  test('@avt-multi-step', async ({ page }) => {
+  test.skip('@avt-multi-step', async ({ page }) => {
     await visitStory(page, {
       component: 'SidePanel',
       id: 'components-sidepanel--panel-with-second-step',
@@ -37,7 +40,7 @@ test.describe('@avt SidePanel', () => {
     await expect(page.getByText('Main view')).toBeVisible();
   });
 
-  test('@avt-action-toolbar', async ({ page }) => {
+  test.skip('@avt-action-toolbar', async ({ page }) => {
     await visitStory(page, {
       component: 'SidePanel',
       id: 'components-sidepanel--with-action-toolbar',
@@ -54,7 +57,7 @@ test.describe('@avt SidePanel', () => {
     await expect(page.getByLabel('Delete')).toBeFocused();
   });
 
-  test('@avt-focus-trap', async ({ page }) => {
+  test.skip('@avt-focus-trap', async ({ page }) => {
     await visitStory(page, {
       component: 'SidePanel',
       id: 'components-sidepanel--slide-over',
