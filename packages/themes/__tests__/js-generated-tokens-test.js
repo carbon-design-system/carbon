@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2025
+ * Copyright IBM Corp. 2025, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -31,11 +31,104 @@ const JS_GENERATED_DIR = path.resolve(__dirname, '../js/generated');
 const LIB_DIR = path.resolve(__dirname, '../lib');
 const DTCG_DIR = path.resolve(__dirname, '../src/dtcg');
 
-const {
-  convertDTCGToTheme,
-  convertDTCGComponentTokens,
-  normalizeComponentThemeName,
-} = require('../tasks/builders/dtcg-converter');
+// SD transform pipeline helpers (replaces dtcg-converter which was deleted)
+const alphaModifierTransform = require('../style-dictionary/transforms/alpha-modifier');
+const colorFlattenTransform = require('../style-dictionary/transforms/color-flatten');
+const componentTokensPreprocessor = require('../style-dictionary/preprocessors/component-tokens');
+const themeMetadataPreprocessor = require('../style-dictionary/preprocessors/theme-metadata');
+
+/**
+ * Normalize component theme key for JS output, e.g. 'white' → 'whiteTheme'.
+ */
+function normalizeComponentThemeName(theme) {
+  if (theme === 'white') return 'whiteTheme';
+  return theme;
+}
+
+function buildPaletteAliasMap() {
+  const palette = JSON.parse(
+    fs.readFileSync(path.join(DTCG_DIR, 'color-palette.json'), 'utf8')
+  );
+  const map = new Map();
+  for (const [family, scales] of Object.entries(palette)) {
+    if (family.startsWith('$')) continue;
+    for (const [scale, token] of Object.entries(scales)) {
+      if (token.$value?.hex) map.set(`{${family}.${scale}}`, token.$value.hex);
+    }
+  }
+  return map;
+}
+
+const paletteMap = buildPaletteAliasMap();
+
+function resolveAlias(value) {
+  if (typeof value === 'string' && value.startsWith('{') && value.endsWith('}'))
+    return paletteMap.get(value) ?? value;
+  return value;
+}
+
+function applyTransforms(node) {
+  const resolvedValue = resolveAlias(node.$value);
+  const syntheticToken = {
+    $type: node.$type ?? 'color',
+    $value: node.$value,
+    value: resolvedValue,
+    $extensions: node.$extensions,
+    extensions: node.$extensions,
+  };
+  if (alphaModifierTransform.filter(syntheticToken))
+    syntheticToken.value = syntheticToken.$value =
+      alphaModifierTransform.transform(syntheticToken);
+  if (colorFlattenTransform.filter(syntheticToken))
+    syntheticToken.value = colorFlattenTransform.transform(syntheticToken);
+  return syntheticToken.value;
+}
+
+function convertDTCGToTheme(dtcgTokens) {
+  const preprocessed = themeMetadataPreprocessor.preprocessor(dtcgTokens);
+  const theme = {};
+  const colorSchemeNode = preprocessed.color?.scheme;
+  if (colorSchemeNode?.$value !== undefined)
+    theme['color-scheme'] = applyTransforms(colorSchemeNode);
+  function traverse(obj, pathParts = []) {
+    for (const [key, value] of Object.entries(obj)) {
+      if (key.startsWith('$') || !value || typeof value !== 'object') continue;
+      let tokenPath = pathParts;
+      if (pathParts[0] === 'color' && key !== 'scheme')
+        tokenPath = pathParts.slice(1);
+      const tokenPath2 = [...tokenPath, key];
+      const role = value.$extensions?.['org.carbon']?.role;
+      if (role !== 'reference' && value.$value !== undefined) {
+        const name = tokenPath2.join('-');
+        if (name !== 'color-scheme') theme[name] = applyTransforms(value);
+      }
+      if (Object.keys(value).some((k) => !k.startsWith('$')))
+        traverse(value, tokenPath2);
+    }
+  }
+  traverse(preprocessed);
+  return theme;
+}
+
+function convertDTCGComponentTokens(dtcgTokens) {
+  const preprocessed = componentTokensPreprocessor.preprocessor(dtcgTokens);
+  const result = {};
+  function walk(obj, pathParts = []) {
+    for (const [key, value] of Object.entries(obj)) {
+      if (key.startsWith('$') || !value || typeof value !== 'object') continue;
+      if (key === '_by_theme') {
+        const tokenName = pathParts.join('-');
+        result[tokenName] = result[tokenName] ?? {};
+        for (const [theme, themeNode] of Object.entries(value))
+          result[tokenName][theme] = applyTransforms(themeNode);
+        continue;
+      }
+      walk(value, [...pathParts, key]);
+    }
+  }
+  walk(preprocessed);
+  return result;
+}
 
 const jsGeneratedExists = fs.existsSync(JS_GENERATED_DIR);
 const libExists = fs.existsSync(LIB_DIR);
