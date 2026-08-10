@@ -6,7 +6,6 @@
  */
 
 import React, { forwardRef } from 'react';
-import PropTypes from 'prop-types';
 import cx from 'classnames';
 
 import { usePrefix } from '../../internal/usePrefix';
@@ -54,21 +53,4 @@ export const BigNumberSkeleton = forwardRef<
   );
 });
 
-// The display name of the component, used by React. Note that displayName
-// is used in preference to relying on function.name.
 BigNumberSkeleton.displayName = componentName;
-
-BigNumberSkeleton.propTypes = {
-  /**
-   * Provide an optional class to be applied to the containing node.
-   */
-  className: PropTypes.string,
-  /**
-   * Controls the visual size of the skeleton.
-   */
-  size: PropTypes.oneOf([
-    BigNumberSize.Default,
-    BigNumberSize.Large,
-    BigNumberSize.XLarge,
-  ]),
-};

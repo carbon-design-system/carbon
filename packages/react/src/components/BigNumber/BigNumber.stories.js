@@ -5,8 +5,6 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import './story.scss';
-
 import React from 'react';
 import { Button } from '../Button';
 import { Edit } from '@carbon/icons-react';

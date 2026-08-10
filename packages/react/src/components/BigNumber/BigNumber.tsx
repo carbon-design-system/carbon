@@ -6,7 +6,6 @@
  */
 
 import React, { forwardRef, ReactNode } from 'react';
-import PropTypes from 'prop-types';
 import cx from 'classnames';
 
 import { usePrefix } from '../../internal/usePrefix';
@@ -234,87 +233,4 @@ export const BigNumber = forwardRef<HTMLDivElement, BigNumberProps>(
   }
 );
 
-// The display name of the component, used by React. Note that displayName
-// is used in preference to relying on function.name.
 BigNumber.displayName = componentName;
-
-// The types and DocGen commentary for the component props,
-// in alphabetical order (for consistency).
-// See https://www.npmjs.com/package/prop-types#usage.
-BigNumber.propTypes = {
-  /**
-   * Provide an optional class to be applied to the containing node.
-   */
-  className: PropTypes.string,
-
-  /**
-   * The default behavior will hide `total` if `undefined` or is the same as `value`.
-   *
-   * Set to `true` to ignore the default behavior and show the `total`.
-   */
-  forceShowTotal: PropTypes.bool,
-
-  /**
-   * Specifies the number of fraction digits when truncating `value` and `total`.
-   */
-  fractionDigits: PropTypes.number,
-
-  /**
-   * Displays an icon button next to `value`.
-   */
-  iconButton: PropTypes.node,
-
-  /**
-   * Text label above the `value`.
-   */
-  label: PropTypes.string.isRequired,
-
-  /**
-   * When `true`, will show the loading state.
-   */
-  loading: PropTypes.bool,
-
-  /**
-   * Determines how `value` and `total` will be formatted.
-   */
-  locale: PropTypes.string,
-
-  /**
-   * Appends a percent sign (_%_) after `value` and hides `total`.
-   */
-  percentage: PropTypes.bool,
-
-  /**
-   * Controls the visual size of the component.
-   */
-  size: PropTypes.oneOf(['default', 'lg', 'xl']),
-
-  /**
-   * When applied, an information icon will be rendered next to the
-   * `label` and the description will be applied to its tooltip.
-   */
-  tooltipDescription: PropTypes.string,
-
-  /**
-   * The number that will appear after the slash (i.e. the "denominator" of a fraction).
-   *
-   * This number will not be rendered if it's the same as `value` or
-   * `percentage` is true. See also the **forceShowTotal** prop.
-   */
-  total: PropTypes.number,
-
-  /**
-   * When `true`, will render a "trending up" icon.
-   */
-  trending: PropTypes.bool,
-
-  /**
-   * Abbreviates the number when `true`. E.g. from _1,000_ to _1K_.
-   */
-  truncate: PropTypes.bool,
-
-  /**
-   * The primary value to display (or the "numerator" of a fraction).
-   */
-  value: PropTypes.number,
-};
