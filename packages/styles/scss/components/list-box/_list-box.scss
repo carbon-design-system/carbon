@@ -107,9 +107,16 @@ $list-box-menu-width: convert.to-rem(300px);
       border-radius: $border-radius-04;
       transition: background $duration-fast-01 motion(standard, productive);
 
-      &:not(.#{$prefix}--list-box--inline):not(
-          .#{$prefix}--dropdown--inline
-        ):not(.#{$prefix}--multi-select--inline) {
+      &:not(
+          .#{$prefix}--list-box--inline,
+          .#{$prefix}--dropdown--inline,
+          .#{$prefix}--multi-select--inline,
+          .#{$prefix}--list-box--disabled,
+          .#{$prefix}--dropdown--disabled,
+          .#{$prefix}--dropdown--readonly,
+          .#{$prefix}--combo-box--readonly,
+          .#{$prefix}--multi-select--readonly
+        ) {
         // (gray-20 → gray-50)
         background:
           linear-gradient($field, $field) padding-box,
@@ -120,6 +127,14 @@ $list-box-menu-width: convert.to-rem(300px);
             )
             border-box;
       }
+    }
+  }
+
+  @if enabled('enable-v12-release') {
+    .#{$prefix}--combo-box--readonly,
+    .#{$prefix}--multi-select--readonly,
+    .#{$prefix}--dropdown--readonly {
+      border-block-end-color: $border-subtle;
     }
   }
 
