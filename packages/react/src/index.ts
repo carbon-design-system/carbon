@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2025
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -71,6 +71,9 @@ export * from './components/Modal';
 export * from './components/ModalWrapper';
 export * from './components/MultiSelect';
 export * from './components/Notification';
+// TODO: uncomment in v12 — also remove from excludeProductsComponents
+// export { NotificationsPanel } from './components/NotificationsPanel';
+// export type { NotificationsPanelProps } from './components/NotificationsPanel';
 export * from './components/NumberInput';
 export * from './components/OrderedList';
 export * from './components/OverflowMenu';

@@ -52,6 +52,8 @@
 @use 'modal';
 @use 'multiselect';
 @use 'notification';
+// TODO: uncomment in v12 — also remove from excludeProductsComponents
+// @use 'notifications-panel';
 @use 'number-input';
 @use 'overflow-menu';
 @use 'page-header';

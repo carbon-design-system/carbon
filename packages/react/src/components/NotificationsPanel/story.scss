@@ -1,0 +1,18 @@
+/**
+ * Copyright IBM Corp. 2020, 2026
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+// Load the NotificationsPanel component styles directly for Storybook.
+// The global bundle (@carbon/styles) has this commented out while the
+// component is still in migration, so we load it explicitly here.
+@use '@carbon/styles/scss/components/notifications-panel';
+@use '@carbon/styles/scss/theme' as *;
+
+.sb-show-main,
+.docs-story {
+  /* stylelint-disable-next-line declaration-no-important */
+  background-color: $layer-01 !important;
+}
