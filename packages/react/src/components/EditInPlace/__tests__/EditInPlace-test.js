@@ -6,7 +6,7 @@
  */
 
 import React from 'react';
-import { render, screen, fireEvent, act } from '@testing-library/react';
+import { render, screen, fireEvent } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { EditInPlace } from '..';
 
@@ -45,28 +45,28 @@ describe(componentName, () => {
     const input = screen.getByDisplayValue(defaultProps.value);
     expect(input).toHaveAttribute('readOnly');
     const inputContainer = container.querySelector(`.${blockClass}`);
-    await act(() => userEvent.click(inputContainer));
+    await userEvent.click(inputContainer);
     expect(screen.getByText('This field is read-only')).toBeInTheDocument();
   });
 
   it('renders in invalid mode', async () => {
     render(<EditInPlace {...defaultProps} invalid />);
     const input = screen.getByDisplayValue(defaultProps.value);
-    await act(() => userEvent.click(input));
+    await userEvent.click(input);
     expect(screen.getByText(defaultProps.invalidText)).toBeVisible();
   });
 
   it('focuses the input when the component is clicked', async () => {
     render(<EditInPlace {...defaultProps} />);
     const input = screen.getByDisplayValue(defaultProps.value);
-    await act(() => userEvent.click(input));
+    await userEvent.click(input);
     expect(screen.getByLabelText(defaultProps.cancelLabel)).toBeVisible();
   });
 
   it('focuses the input when the edit button is clicked', async () => {
     render(<EditInPlace {...defaultProps} />);
     const editBtn = screen.getByLabelText(defaultProps.editLabel);
-    await act(() => userEvent.click(editBtn));
+    await userEvent.click(editBtn);
     expect(screen.getByLabelText(defaultProps.cancelLabel)).toBeVisible();
   });
 
@@ -97,8 +97,8 @@ describe(componentName, () => {
     };
     const { rerender } = render(<EditInPlace {...props} />);
     rerender(<EditInPlace {...props} value="new value" />);
-    await act(() => userEvent.click(screen.getByLabelText(props.editLabel)));
-    await act(() => userEvent.click(screen.getByLabelText(props.saveLabel)));
+    await userEvent.click(screen.getByLabelText(props.editLabel));
+    await userEvent.click(screen.getByLabelText(props.saveLabel));
     expect(onSave).toHaveBeenCalled();
   });
 
@@ -110,8 +110,8 @@ describe(componentName, () => {
     };
     const { rerender } = render(<EditInPlace {...props} />);
     rerender(<EditInPlace {...props} value="new value" />);
-    await act(() => userEvent.click(screen.getByLabelText(props.editLabel)));
-    await act(() => userEvent.click(screen.getByLabelText(props.cancelLabel)));
+    await userEvent.click(screen.getByLabelText(props.editLabel));
+    await userEvent.click(screen.getByLabelText(props.cancelLabel));
     expect(onCancel).toHaveBeenCalled();
   });
 
@@ -120,7 +120,7 @@ describe(componentName, () => {
       ...defaultProps,
     };
     render(<EditInPlace {...props} />);
-    await act(() => userEvent.click(screen.getByLabelText(props.editLabel)));
+    await userEvent.click(screen.getByLabelText(props.editLabel));
     const cancelBtn = screen.getByLabelText(props.cancelLabel);
     expect(cancelBtn).toBeDisabled();
   });
@@ -130,7 +130,7 @@ describe(componentName, () => {
       ...defaultProps,
     };
     const { rerender } = render(<EditInPlace {...props} />);
-    await act(() => userEvent.click(screen.getByLabelText(props.editLabel)));
+    await userEvent.click(screen.getByLabelText(props.editLabel));
 
     // Change the value
     rerender(<EditInPlace {...props} value="new value" />);
@@ -145,7 +145,7 @@ describe(componentName, () => {
       value: 'test',
     };
     const { rerender } = render(<EditInPlace {...props} />);
-    await act(() => userEvent.click(screen.getByLabelText(props.editLabel)));
+    await userEvent.click(screen.getByLabelText(props.editLabel));
 
     // Change to whitespace only (trimmed values are the same)
     rerender(<EditInPlace {...props} value="test   " />);
@@ -160,7 +160,7 @@ describe(componentName, () => {
       value: 'test',
     };
     const { rerender } = render(<EditInPlace {...props} />);
-    await act(() => userEvent.click(screen.getByLabelText(props.editLabel)));
+    await userEvent.click(screen.getByLabelText(props.editLabel));
 
     // Change to different value with whitespace
     rerender(<EditInPlace {...props} value="  new value  " />);
@@ -175,7 +175,7 @@ describe(componentName, () => {
       invalid: true,
     };
     const { rerender } = render(<EditInPlace {...props} />);
-    await act(() => userEvent.click(screen.getByLabelText(props.editLabel)));
+    await userEvent.click(screen.getByLabelText(props.editLabel));
 
     // Change the value
     rerender(<EditInPlace {...props} value="new value" invalid={true} />);
@@ -197,7 +197,7 @@ describe(componentName, () => {
     };
     const { rerender } = render(<EditInPlace {...props} />);
     rerender(<EditInPlace {...props} value="new value" />);
-    await act(() => userEvent.click(screen.getByLabelText(props.editLabel)));
+    await userEvent.click(screen.getByLabelText(props.editLabel));
     const input = screen.getByDisplayValue('new value');
     fireEvent.blur(input);
     expect(onSave).toHaveBeenCalled();
@@ -210,7 +210,7 @@ describe(componentName, () => {
       onCancel,
     };
     render(<EditInPlace {...props} />);
-    await act(() => userEvent.click(screen.getByLabelText(props.editLabel)));
+    await userEvent.click(screen.getByLabelText(props.editLabel));
     const input = screen.getByDisplayValue(props.value);
     fireEvent.blur(input);
     expect(onCancel).toHaveBeenCalled();
