@@ -9,6 +9,7 @@ import './story.scss';
 import React, { useState } from 'react';
 import { action } from 'storybook/actions';
 import { EditInPlace } from '.';
+import { DisplayBox } from '../../internal/DisplayBox';
 import mdx from './EditInPlace.mdx';
 
 const tooltipAlignmentOptions = {
@@ -59,9 +60,9 @@ export default {
   },
   decorators: [
     (Story) => (
-      <div className="edit-in-place-example">
+      <DisplayBox className="edit-in-place-example__viewport">
         <Story />
-      </div>
+      </DisplayBox>
     ),
   ],
 };
@@ -116,7 +117,7 @@ const EditInPlaceTemplate = ({ containerWidth, ...args }) => {
 
   return (
     <div style={{ width: containerWidth }}>
-      <EditInPlace {...props} />
+      <EditInPlace {...props} className="edit-in-place-example" />
     </div>
   );
 };
@@ -162,7 +163,7 @@ const EditInPlaceBlurTemplate = ({ containerWidth, ...args }) => {
 
   return (
     <div style={{ width: containerWidth }}>
-      <EditInPlace {...props} />
+      <EditInPlace {...props} className="edit-in-place-example" />
     </div>
   );
 };

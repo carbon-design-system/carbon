@@ -5,6 +5,8 @@
 // Story-specific layout styles for EditInPlace.
 // Component styles are provided globally through @carbon/styles.
 
+@use '../../internal/DisplayBox';
+
 .edit-in-place-example {
   padding: 1rem;
 }
