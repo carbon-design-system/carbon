@@ -11,32 +11,32 @@ import { usePrefix } from '../../internal/usePrefix';
 import useIsomorphicEffect from '../../internal/useIsomorphicEffect';
 import { ScrollStates, useIsOverflow } from './constants';
 
-// ---------------------------------------------------------------------------
-// Props
-// ---------------------------------------------------------------------------
 export interface ScrollGradientProps
   extends React.HTMLAttributes<HTMLDivElement> {
   /** Provide the contents of the ScrollGradient. */
   children?: React.ReactNode;
   /** Provide an optional class to be applied to the containing node. */
   className?: string;
-  /** Fade-out color. Any valid CSS color value. */
+  /**
+   * Fade-out color. Any valid CSS color value. Defaults to the current
+   * `$layer-01` token so the gradient blends with the page background.
+   */
   color?: string;
   /** Optional function to get a reference to the scrollable DOM element. */
   getScrollElementRef?: (element: HTMLDivElement | null) => void;
-  /** Set to true to hide the gradient on the start side (top or left). */
+  /**
+   * Set to true to hide the gradient on the start side (top for vertical
+   * scroll, left for horizontal scroll).
+   */
   hideStartGradient?: boolean;
   /** Optional scroll handler. */
   onScroll?: React.UIEventHandler<HTMLDivElement>;
-  /** Optional className for the scroll element. */
+  /** Optional className applied to the inner scrollable element. */
   scrollElementClassName?: string;
 }
 
 const componentName = 'ScrollGradient';
 
-// ---------------------------------------------------------------------------
-// Component
-// ---------------------------------------------------------------------------
 export const ScrollGradient = forwardRef<HTMLDivElement, ScrollGradientProps>(
   (
     {
@@ -54,7 +54,6 @@ export const ScrollGradient = forwardRef<HTMLDivElement, ScrollGradientProps>(
     const prefix = usePrefix();
     const blockClass = `${prefix}--scroll-gradient`;
     const fallbackColor = `var(--${prefix}-layer-01)`;
-    const resolvedColor = color ?? fallbackColor;
 
     const scrollContainer = useRef<HTMLDivElement>(null);
     const contentChildrenContainer = useRef<HTMLDivElement>(null);
@@ -85,25 +84,31 @@ export const ScrollGradient = forwardRef<HTMLDivElement, ScrollGradientProps>(
         : 0;
 
     useIsomorphicEffect(() => {
+      const resolvedColor = color ?? fallbackColor;
+
+      // start vertical styles
       if (startVerticalRef.current) {
         startVerticalRef.current.style.right = String(gradientRight);
         startVerticalRef.current.style.backgroundImage = `linear-gradient(0deg, transparent, ${resolvedColor} 90%)`;
       }
+      // start horizontal styles
       if (startHorizontalRef.current) {
         startHorizontalRef.current.style.backgroundImage = `linear-gradient(-90deg, transparent, ${resolvedColor} 90%)`;
         startHorizontalRef.current.style.bottom = String(gradientBottom);
       }
+      // end vertical styles
       if (endVerticalRef.current) {
         endVerticalRef.current.style.right = String(gradientRight);
         endVerticalRef.current.style.bottom = String(gradientBottom);
         endVerticalRef.current.style.backgroundImage = `linear-gradient(0deg, ${resolvedColor} 10%, transparent)`;
       }
+      // end horizontal styles
       if (endHorizontalRef.current) {
         endHorizontalRef.current.style.right = String(gradientRight);
         endHorizontalRef.current.style.bottom = String(gradientBottom);
         endHorizontalRef.current.style.backgroundImage = `linear-gradient(-90deg, ${resolvedColor} 10%, transparent)`;
       }
-    }, [resolvedColor, gradientRight, gradientBottom]);
+    }, [color, fallbackColor, gradientRight, gradientBottom]);
 
     const setGradientOnIntersection = (
       entry: IntersectionObserverEntry,

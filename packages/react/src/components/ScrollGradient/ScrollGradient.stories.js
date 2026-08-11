@@ -38,6 +38,15 @@ export default {
   argTypes: {
     children: { table: { disable: true } },
     className: { table: { disable: true } },
+    color: {
+      control: 'color',
+      description:
+        'Fade-out color. Any valid CSS color value. Defaults to the current layer-01 token.',
+    },
+    getScrollElementRef: { table: { disable: true } },
+    hideStartGradient: { control: 'boolean' },
+    onScroll: { table: { disable: true } },
+    scrollElementClassName: { table: { disable: true } },
   },
 };
 
@@ -47,9 +56,7 @@ export const Default = {
   },
   render: (args) => (
     <div className="scroll-gradient-story-container">
-      <ScrollGradient className="myScrollGradient" {...args}>
-        {storyChildren}
-      </ScrollGradient>
+      <ScrollGradient {...args}>{storyChildren}</ScrollGradient>
     </div>
   ),
 };
@@ -61,7 +68,7 @@ export const WithXAndYAxis = {
   },
   render: (args) => (
     <div className="scroll-gradient-story-container--sm">
-      <ScrollGradient className="myScrollGradient" {...args}>
+      <ScrollGradient {...args}>
         <div style={{ width: '1500px' }}>{storyChildren}</div>
       </ScrollGradient>
     </div>

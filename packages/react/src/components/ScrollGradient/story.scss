@@ -9,6 +9,16 @@
 // @carbon/styles bundle via packages/styles/scss/components/_index.scss.
 // Only story-layout rules are needed here.
 
+@use '@carbon/styles/scss/theme' as *;
+
+// Match the story background to $layer-01 so the default gradient fallback
+// color (--cds-layer-01) blends correctly and the effect is visible.
+.sb-show-main,
+.docs-story {
+  /* stylelint-disable-next-line declaration-no-important */
+  background-color: $layer-01 !important;
+}
+
 .scroll-gradient-story-container {
   block-size: 400px;
   inline-size: 300px;

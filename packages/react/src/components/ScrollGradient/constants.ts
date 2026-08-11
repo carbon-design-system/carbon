@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { useState, useEffect, useCallback, useRef } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import useIsomorphicEffect from '../../internal/useIsomorphicEffect';
 
 export const ScrollStates = {
@@ -21,15 +21,16 @@ export const ScrollStates = {
 
 export type ScrollState = (typeof ScrollStates)[keyof typeof ScrollStates];
 
-export function useIsOverflow(ref: React.RefObject<HTMLDivElement | null>) {
-  const [isHorizontallyScrollable, setIsHorizontallyScrollable] = useState<
-    boolean | undefined
-  >();
-  const [isVerticallyScrollable, setIsVerticallyScrollable] = useState<
-    boolean | undefined
-  >();
-  const mutationObserverRef = useRef<MutationObserver | undefined>();
-  const resizeObserverRef = useRef<ResizeObserver | undefined>();
+export function useIsOverflow(ref: React.RefObject<HTMLDivElement | null>): {
+  xScrollable: boolean | undefined;
+  yScrollable: boolean | undefined;
+} {
+  const [isHorizontallyScrollable, setIsHorizontallyScrollable] =
+    useState<boolean>(false);
+  const [isVerticallyScrollable, setIsVerticallyScrollable] =
+    useState<boolean>(false);
+  const mutationObserverRef = useRef<MutationObserver | null>(null);
+  const resizeObserverRef = useRef<ResizeObserver | null>(null);
 
   const checkOverflow = useCallback(() => {
     if (!ref.current) {
