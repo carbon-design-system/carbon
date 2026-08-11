@@ -16,6 +16,7 @@ export const productMigratedStoryGlobs = [
   '../src/components/TruncatedText/TruncatedText.stories.js',
   '../src/components/Resizer/Resizer.stories.js',
   '../src/components/SidePanel/SidePanel.stories.js',
+  '../src/components/EditInPlace/EditInPlace.stories.js',
 ];
 
 /**
@@ -34,4 +35,5 @@ export const excludeProductsComponents = [
   'src/components/ActionSet/**/*',
   'src/components/TruncatedText/**/*',
   'src/components/SidePanel/**/*',
+  'src/components/EditInPlace/**/*',
 ];
