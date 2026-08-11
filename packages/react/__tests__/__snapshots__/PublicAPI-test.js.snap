@@ -745,74 +745,6 @@ Map {
       },
     },
   },
-  "Card" => {
-    "$$typeof": Symbol(react.forward_ref),
-    "Action": {
-      "displayName": "Card.Action",
-    },
-    "Actions": {
-      "displayName": "Card.Actions",
-    },
-    "Body": {
-      "$$typeof": Symbol(react.forward_ref),
-      "render": [Function],
-    },
-    "Footer": {
-      "$$typeof": Symbol(react.forward_ref),
-      "render": [Function],
-    },
-    "Header": {
-      "$$typeof": Symbol(react.forward_ref),
-      "render": [Function],
-    },
-    "HeaderMedia": {
-      "displayName": "Card.HeaderMedia",
-    },
-    "Media": {
-      "displayName": "Card.Media",
-    },
-    "Title": {
-      "$$typeof": Symbol(react.forward_ref),
-      "render": [Function],
-    },
-    "TitleMedia": {
-      "$$typeof": Symbol(react.forward_ref),
-      "render": [Function],
-    },
-    "render": [Function],
-  },
-  "CardAction" => {
-    "displayName": "Card.Action",
-  },
-  "CardActions" => {
-    "displayName": "Card.Actions",
-  },
-  "CardBody" => {
-    "$$typeof": Symbol(react.forward_ref),
-    "render": [Function],
-  },
-  "CardFooter" => {
-    "$$typeof": Symbol(react.forward_ref),
-    "render": [Function],
-  },
-  "CardHeader" => {
-    "$$typeof": Symbol(react.forward_ref),
-    "render": [Function],
-  },
-  "CardHeaderMedia" => {
-    "displayName": "Card.HeaderMedia",
-  },
-  "CardMedia" => {
-    "displayName": "Card.Media",
-  },
-  "CardTitle" => {
-    "$$typeof": Symbol(react.forward_ref),
-    "render": [Function],
-  },
-  "CardTitleMedia" => {
-    "$$typeof": Symbol(react.forward_ref),
-    "render": [Function],
-  },
   "Checkbox" => {
     "$$typeof": Symbol(react.forward_ref),
     "propTypes": {
@@ -12203,6 +12135,68 @@ Map {
       "width": {
         "type": "string",
       },
+    },
+  },
+  "preview__Card" => {
+    "Card": {
+      "$$typeof": Symbol(react.forward_ref),
+      "Action": [Function],
+      "Actions": [Function],
+      "Body": {
+        "$$typeof": Symbol(react.forward_ref),
+        "render": [Function],
+      },
+      "Footer": {
+        "$$typeof": Symbol(react.forward_ref),
+        "render": [Function],
+      },
+      "Header": {
+        "$$typeof": Symbol(react.forward_ref),
+        "render": [Function],
+      },
+      "HeaderMedia": [Function],
+      "Media": [Function],
+      "Title": {
+        "$$typeof": Symbol(react.forward_ref),
+        "render": [Function],
+      },
+      "TitleMedia": {
+        "$$typeof": Symbol(react.forward_ref),
+        "render": [Function],
+      },
+      "render": [Function],
+    },
+    "CardAction": {
+      "displayName": "Card.Action",
+    },
+    "CardActions": {
+      "displayName": "Card.Actions",
+    },
+    "CardBody": {
+      "$$typeof": Symbol(react.forward_ref),
+      "render": [Function],
+    },
+    "CardFooter": {
+      "$$typeof": Symbol(react.forward_ref),
+      "render": [Function],
+    },
+    "CardHeader": {
+      "$$typeof": Symbol(react.forward_ref),
+      "render": [Function],
+    },
+    "CardHeaderMedia": {
+      "displayName": "Card.HeaderMedia",
+    },
+    "CardMedia": {
+      "displayName": "Card.Media",
+    },
+    "CardTitle": {
+      "$$typeof": Symbol(react.forward_ref),
+      "render": [Function],
+    },
+    "CardTitleMedia": {
+      "$$typeof": Symbol(react.forward_ref),
+      "render": [Function],
     },
   },
   "preview__ChatButton" => {
