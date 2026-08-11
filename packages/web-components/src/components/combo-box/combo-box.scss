@@ -10,6 +10,7 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/config' as *;
 @use '@carbon/styles/scss/feature-flags' as flags;
 @use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/border-radius' as *;
 @use '@carbon/styles/scss/theme' as *;
 @use '@carbon/styles/scss/utilities' as *;
 @use '@carbon/styles/scss/utilities/focus-outline' as *;
@@ -37,8 +38,11 @@ $css--plex: true !default;
   }
 
   .#{$prefix}--list-box__menu {
-    inset-block-start: 100%;
-    margin-block-start: 1px;
+    @if not flags.enabled('enable-v12-release') {
+      inset-block-start: 100%;
+      margin-block-start: 1px;
+    }
+
     outline: none;
   }
 }
@@ -130,12 +134,17 @@ $css--plex: true !default;
     position: absolute;
     border: 2px solid $focus;
     block-size: 100%;
-    border-block-start: 1px solid $focus;
     content: '';
     inline-size: 100%;
     inset-block-start: 0;
     inset-inline-start: 0;
     pointer-events: none;
+
+    @if not flags.enabled('enable-v12-release') {
+      border-block-start: 1px solid $focus;
+    } @else {
+      border-radius: $border-radius-04;
+    }
   }
 }
 

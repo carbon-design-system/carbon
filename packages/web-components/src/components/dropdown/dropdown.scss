@@ -48,8 +48,11 @@ $css--plex: true !default;
   }
 
   .#{$prefix}--list-box__menu {
-    inset-block-start: 100%;
-    margin-block-start: 1px;
+    @if not flags.enabled('enable-v12-release') {
+      inset-block-start: 100%;
+      margin-block-start: 1px;
+    }
+
     outline: none;
   }
 }

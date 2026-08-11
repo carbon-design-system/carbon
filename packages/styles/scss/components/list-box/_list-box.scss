@@ -558,6 +558,13 @@ $list-box-menu-width: convert.to-rem(300px);
     overflow-y: auto;
     transition: max-height $duration-fast-02 motion(standard, productive);
 
+    @if enabled('enable-v12-release') {
+      box-sizing: border-box;
+      padding: $spacing-02;
+      border-radius: $border-radius-08;
+      margin-block-start: $spacing-02;
+    }
+
     &:focus {
       // remove default browser focus in firefox
       @include focus-outline('border');
@@ -600,6 +607,10 @@ $list-box-menu-width: convert.to-rem(300px);
 
     &:active {
       background-color: $layer-selected;
+    }
+
+    @if enabled('enable-v12-release') {
+      border-radius: $border-radius-04;
     }
   }
 
@@ -704,6 +715,12 @@ $list-box-menu-width: convert.to-rem(300px);
       padding: calc((layout.size('height') - 1rem) / 2) convert.to-rem(16px);
       border-color: transparent;
       margin: 0;
+    }
+
+    @if enabled('enable-v12-release') {
+      border-radius: $border-radius-04;
+      border-block-end: none;
+      border-block-start: none;
     }
 
     &:hover {
