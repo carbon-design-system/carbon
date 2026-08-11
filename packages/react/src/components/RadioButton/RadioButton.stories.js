@@ -156,13 +156,7 @@ const groupControls = Object.keys(groupArgTypes);
 
 const GroupStory = (args) => {
   const [{ valueSelected }, updateArgs] = useArgs();
-  const {
-    hideLabel,
-    labelText,
-    onChange,
-    thirdItemDisabled,
-    ...radioButtonGroupArgs
-  } = args;
+  const { hideLabel, labelText, onChange, ...radioButtonGroupArgs } = args;
 
   return (
     <RadioButtonGroup
@@ -179,7 +173,6 @@ const GroupStory = (args) => {
           value={option.value}
           id={option.id}
           hideLabel={hideLabel}
-          disabled={index === 2 && thirdItemDisabled}
         />
       ))}
     </RadioButtonGroup>
@@ -202,12 +195,35 @@ Default.parameters = {
   },
 };
 
-export const Vertical = GroupStory;
+export const Vertical = (args) => {
+  const [{ valueSelected }, updateArgs] = useArgs();
+  const { hideLabel, labelText, onChange, ...radioButtonGroupArgs } = args;
+
+  return (
+    <RadioButtonGroup
+      {...radioButtonGroupArgs}
+      valueSelected={valueSelected}
+      onChange={(selection, name, event) => {
+        updateArgs({ valueSelected: selection });
+        onChange?.(selection, name, event);
+      }}>
+      {radioButtonOptions.map((option, index) => (
+        <RadioButton
+          key={option.value}
+          labelText={index === 0 ? labelText : option.label}
+          value={option.value}
+          id={option.id}
+          hideLabel={hideLabel}
+          disabled={index === 2}
+        />
+      ))}
+    </RadioButtonGroup>
+  );
+};
 
 Vertical.args = {
   ...groupArgs,
   orientation: 'vertical',
-  thirdItemDisabled: true,
 };
 
 Vertical.argTypes = {
@@ -218,17 +234,11 @@ Vertical.argTypes = {
       readonly: true,
     },
   },
-  thirdItemDisabled: {
-    description: 'Specify whether the third radio button is disabled',
-    control: {
-      type: 'boolean',
-    },
-  },
 };
 
 Vertical.parameters = {
   controls: {
-    include: [...groupControls, 'thirdItemDisabled'],
+    include: groupControls,
   },
 };
 

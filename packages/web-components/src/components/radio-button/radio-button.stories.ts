@@ -180,7 +180,6 @@ const GroupStory = (args) => {
     hideLabel,
     labelText,
     required,
-    thirdItemDisabled,
   } = args;
 
   const handleChange = (event) => {
@@ -209,7 +208,60 @@ const GroupStory = (args) => {
           <cds-radio-button
             ?hide-label="${hideLabel}"
             label-text="${ifDefined(index === 0 ? labelText : option.label)}"
-            .disabledItem="${index === 2 && thirdItemDisabled}"
+            value="${option.value}"></cds-radio-button>
+        `
+      )}
+    </cds-radio-button-group>
+  `;
+};
+
+const VerticalStory = (args) => {
+  const [{ value }, updateArgs] = useArgs();
+  const {
+    disabled,
+    readOnly,
+    helperText,
+    invalid,
+    invalidText,
+    labelPosition,
+    legendText,
+    orientation,
+    name,
+    warn,
+    warnText,
+    onChange,
+    hideLabel,
+    labelText,
+    required,
+  } = args;
+
+  const handleChange = (event) => {
+    updateArgs({ value: event.detail.value });
+    onChange?.(event);
+  };
+
+  return html`
+    <cds-radio-button-group
+      ?readOnly="${readOnly}"
+      ?disabled="${disabled}"
+      helper-text="${ifDefined(helperText)}"
+      ?invalid="${invalid}"
+      invalid-text="${ifDefined(invalidText)}"
+      label-position="${ifDefined(labelPosition)}"
+      legend-text="${ifDefined(legendText)}"
+      orientation="${ifDefined(orientation)}"
+      name="${ifDefined(name)}"
+      .value="${value}"
+      ?required="${required}"
+      ?warn="${warn}"
+      warn-text="${ifDefined(warnText)}"
+      @cds-radio-button-group-changed="${handleChange}">
+      ${radioButtonOptions.map(
+        (option, index) => html`
+          <cds-radio-button
+            ?hide-label="${hideLabel}"
+            label-text="${ifDefined(index === 0 ? labelText : option.label)}"
+            .disabledItem="${index === 2}"
             value="${option.value}"></cds-radio-button>
         `
       )}
@@ -232,7 +284,6 @@ export const Vertical = {
   args: {
     ...groupArgs,
     orientation: RADIO_BUTTON_ORIENTATION.VERTICAL,
-    thirdItemDisabled: true,
   },
   argTypes: {
     ...groupArgTypes,
@@ -242,17 +293,13 @@ export const Vertical = {
         readonly: true,
       },
     },
-    thirdItemDisabled: {
-      control: 'boolean',
-      description: 'Specify whether the third radio button is disabled.',
-    },
   },
   parameters: {
     controls: {
-      include: [...groupControls, 'thirdItemDisabled'],
+      include: groupControls,
     },
   },
-  render: GroupStory,
+  render: VerticalStory,
 };
 
 export const Skeleton = {
