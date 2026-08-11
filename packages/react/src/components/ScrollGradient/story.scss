@@ -13,7 +13,7 @@
 
 // Match the story background to $layer-01 so the default gradient fallback
 // color (--cds-layer-01) blends correctly and the effect is visible.
-.sb-show-main,
+.sb-show-main.sb-main-padded,
 .docs-story {
   /* stylelint-disable-next-line declaration-no-important */
   background-color: $layer-01 !important;
