@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2022
+// Copyright IBM Corp. 2022, 2026
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -15,12 +15,41 @@
 @use '../../utilities/ai-gradient' as *;
 @use '../../utilities/convert';
 @use '../../utilities/focus-outline' as *;
+@use '../../border-radius' as *;
+@use '../../feature-flags' as *;
 @use '../date-picker';
 
 @mixin fluid-date-picker {
   .#{$prefix}--date-picker--fluid {
     display: inline-flex;
     background: $field;
+
+    @if enabled('enable-v12-release') {
+      border-radius: $border-radius-04;
+
+      &:not(.#{$prefix}--date-picker--fluid--readonly) {
+        border: 1px solid transparent;
+        // (gray-20 → gray-50)
+        background:
+          linear-gradient($field, $field) padding-box,
+          linear-gradient(
+              to bottom,
+              $border-subtle calc(100% - 4px),
+              $border-strong 100%
+            )
+            border-box;
+      }
+
+      &.#{$prefix}--date-picker--fluid--readonly {
+        border: 1px solid $border-subtle;
+      }
+
+      &:focus-within {
+        .#{$prefix}--date-picker__input {
+          outline-offset: -1px;
+        }
+      }
+    }
   }
 
   .#{$prefix}--date-picker--fluid .#{$prefix}--date-picker {
@@ -93,7 +122,9 @@
   .#{$prefix}--date-picker--fluid
     .#{$prefix}--date-picker--simple
     .#{$prefix}--date-picker--fluid--warn {
-    border-block-end: 1px solid $border-strong;
+    @if not enabled('enable-v12-release') {
+      border-block-end: 1px solid $border-strong;
+    }
   }
 
   // Single, Range
@@ -117,7 +148,9 @@
       .#{$prefix}--date-picker__input--invalid
     ),
   .#{$prefix}--date-picker--single .#{$prefix}--date-picker--fluid--warn {
-    border-block-end: 1px solid $border-strong;
+    @if not enabled('enable-v12-release') {
+      border-block-end: 1px solid $border-strong;
+    }
   }
 
   // Range
@@ -128,7 +161,9 @@
     .#{$prefix}--date-picker-container:not(
       .#{$prefix}--date-picker--fluid--invalid
     ) {
-    border-block-end: 1px solid $border-strong;
+    @if not enabled('enable-v12-release') {
+      border-block-end: 1px solid $border-strong;
+    }
   }
 
   .#{$prefix}--date-picker--fluid

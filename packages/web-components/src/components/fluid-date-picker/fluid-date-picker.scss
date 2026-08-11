@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2025
+ * Copyright IBM Corp. 2025, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -10,12 +10,14 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/config' as *;
 @use '@carbon/styles/scss/theme' as *;
 @use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/border-radius' as *;
 @use '@carbon/styles/scss/layout' as *;
 @use '@carbon/styles/scss/utilities/convert';
 @use '@carbon/styles/scss/utilities/skeleton' as *;
 @use '@carbon/styles/scss/components/fluid-date-picker' as *;
 @use '@carbon/styles/scss/components/date-picker/index';
 @use '@carbon/styles/scss/utilities/focus-outline' as *;
+@use '@carbon/styles/scss/feature-flags' as flags;
 
 // ── Fluid date picker (wrapper) ──────────────────────────────────────────────
 
@@ -79,7 +81,9 @@ $css--plex: true !default;
 }
 
 :host(#{$prefix}-fluid-date-picker[readonly]) {
-  @extend .#{$prefix}--date-picker--fluid--readonly;
+  @if not flags.enabled('enable-v12-release') {
+    @extend .#{$prefix}--date-picker--fluid--readonly;
+  }
 }
 
 // ── Fluid date picker input ──────────────────────────────────────────────────
@@ -90,15 +94,57 @@ $css--plex: true !default;
   box-sizing: border-box;
   background: $field;
   block-size: convert.to-rem(64px);
-  border-block-end: 1px solid $border-strong;
   inline-size: 100%;
   max-inline-size: 100%;
   outline: none;
+
+  @if flags.enabled('enable-v12-release') {
+    border: 1px solid transparent;
+    border-radius: $border-radius-04;
+  } @else {
+    border-block-end: 1px solid $border-strong;
+  }
 }
 
-:host(#{$prefix}-fluid-date-picker-input[disabled]),
-:host(#{$prefix}-fluid-date-picker-input[readonly]) {
-  border-block-end: 1px solid $border-subtle;
+@if not flags.enabled('enable-v12-release') {
+  :host(#{$prefix}-fluid-date-picker-input[disabled]),
+  :host(#{$prefix}-fluid-date-picker-input[readonly]) {
+    border-block-end: 1px solid $border-subtle;
+  }
+}
+
+@if flags.enabled('enable-v12-release') {
+  :host(#{$prefix}-fluid-date-picker-input) {
+    // (gray-20 → gray-50)
+    background:
+      linear-gradient($field, $field) padding-box,
+      linear-gradient(
+          to bottom,
+          $border-subtle calc(100% - 4px),
+          $border-strong 100%
+        )
+        border-box;
+  }
+
+  :host(#{$prefix}-fluid-date-picker-input[readonly]) {
+    border-color: $border-subtle;
+  }
+
+  :host(#{$prefix}-fluid-date-picker-input[kind='from']) {
+    border-end-end-radius: 0;
+    border-inline-end: none;
+    border-start-end-radius: 0;
+  }
+
+  :host(#{$prefix}-fluid-date-picker-input[kind='to']) {
+    border-end-start-radius: 0;
+    border-inline-start: none;
+    border-start-start-radius: 0;
+  }
+
+  :host(#{$prefix}-fluid-date-picker-input:focus-within) {
+    @include focus-outline('outline');
+  }
 }
 
 // When invalid or warn, allow host to grow beyond 64px for error message
@@ -225,8 +271,13 @@ $css--plex: true !default;
   padding-block-start: convert.to-rem(32px);
   padding-inline: $spacing-05;
 
-  &:focus {
-    @include focus-outline('outline');
+  @if flags.enabled('enable-v12-release') {
+    // outline is drawn on the host instead
+    @include focus-outline('reset');
+  } @else {
+    &:focus {
+      @include focus-outline('outline');
+    }
   }
 }
 
