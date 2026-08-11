@@ -736,5 +736,9 @@ export type { SwitcherItemProps } from './components/UIShell/SwitcherItem';
 // export { TruncatedText } from './components/TruncatedText';
 // export type { TruncatedTextProps } from './components/TruncatedText';
 
+// TODO: uncomment in v12 — also remove from excludeProductsComponents
+// export { ScrollGradient } from './components/ScrollGradient';
+// export type { ScrollGradientProps } from './components/ScrollGradient';
+
 //unordered list
 export type { UnorderedListProps } from './components/UnorderedList/UnorderedList';

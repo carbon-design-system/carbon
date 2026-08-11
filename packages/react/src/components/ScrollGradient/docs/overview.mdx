@@ -1,0 +1,28 @@
+import { Controls, Canvas, Story, Meta } from '@storybook/addon-docs/blocks';
+import * as ScrollGradientStories from './ScrollGradient.stories';
+
+<Meta isTemplate />
+
+# ScrollGradient
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Example usage](#example-usage)
+- [Component API](#component-api)
+
+## Overview
+
+ScrollGradient implements gradient fades in horizontal and vertical directions
+based on the user's scroll position. Visually, it informs the user that more
+content exists beyond the visible area and can be scrolled to.
+
+## Example usage
+
+<Canvas>
+  <Story of={ScrollGradientStories.Default} />
+</Canvas>
+
+## Component API
+
+<Controls />

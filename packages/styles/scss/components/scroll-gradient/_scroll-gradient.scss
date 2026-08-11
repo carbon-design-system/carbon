@@ -1,0 +1,135 @@
+//
+// Copyright IBM Corp. 2024, 2025
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+//-----------------------------
+// Scroll gradient
+//-----------------------------
+
+@use '../../config' as *;
+@use '../../spacing' as *;
+
+/// ScrollGradient styles
+/// @access public
+/// @group scroll-gradient
+@mixin scroll-gradient {
+  $intersection-value: 3rem;
+
+  .#{$prefix}--scroll-gradient {
+    position: relative;
+    display: flex;
+    align-items: stretch;
+    justify-content: stretch;
+    block-size: inherit;
+    inline-size: inherit;
+  }
+
+  .#{$prefix}--scroll-gradient__content {
+    display: grid;
+    overflow: auto;
+    block-size: inherit;
+    grid-template-columns: 1fr;
+    inline-size: 100%;
+  }
+
+  .#{$prefix}--scroll-gradient__content-children {
+    block-size: 100%;
+    grid-column-start: 1;
+    grid-row-start: 1;
+    inline-size: 100%;
+  }
+
+  .#{$prefix}--scroll-gradient__content-children > * {
+    grid-area: 1 / 1;
+  }
+
+  .#{$prefix}--scroll-gradient__start-vertical,
+  .#{$prefix}--scroll-gradient__start-horizontal,
+  .#{$prefix}--scroll-gradient__end-vertical,
+  .#{$prefix}--scroll-gradient__end-horizontal {
+    position: absolute;
+    z-index: 1;
+    display: none;
+    pointer-events: none;
+  }
+
+  .#{$prefix}--scroll-gradient--y-scrollable
+    .#{$prefix}--scroll-gradient__start-vertical {
+    block-size: $spacing-09;
+    inset-block-start: 0;
+    inset-inline-start: 0;
+  }
+
+  .#{$prefix}--scroll-gradient--y-scrollable
+    .#{$prefix}--scroll-gradient__end-vertical {
+    block-size: $spacing-09;
+    inset-block-end: 0;
+    inset-inline-start: 0;
+  }
+
+  .#{$prefix}--scroll-gradient--x-scrollable
+    .#{$prefix}--scroll-gradient__start-horizontal {
+    inline-size: $spacing-09;
+    inset-block-start: 0;
+    inset-inline-start: 0;
+  }
+
+  .#{$prefix}--scroll-gradient--x-scrollable
+    .#{$prefix}--scroll-gradient__end-horizontal {
+    inline-size: $spacing-09;
+    inset-block-start: 0;
+    inset-inline-end: 0;
+  }
+
+  .#{$prefix}--scroll-gradient--y-started.#{$prefix}--scroll-gradient--y-scrollable
+    .#{$prefix}--scroll-gradient__start-vertical,
+  .#{$prefix}--scroll-gradient--y-end.#{$prefix}--scroll-gradient--y-scrollable
+    .#{$prefix}--scroll-gradient__start-vertical {
+    display: block;
+  }
+
+  .#{$prefix}--scroll-gradient--y-initial.#{$prefix}--scroll-gradient--y-scrollable
+    .#{$prefix}--scroll-gradient__end-vertical,
+  .#{$prefix}--scroll-gradient--y-started.#{$prefix}--scroll-gradient--y-scrollable
+    .#{$prefix}--scroll-gradient__end-vertical {
+    display: block;
+  }
+
+  .#{$prefix}--scroll-gradient--x-started.#{$prefix}--scroll-gradient--x-scrollable
+    .#{$prefix}--scroll-gradient__start-horizontal,
+  .#{$prefix}--scroll-gradient--x-end.#{$prefix}--scroll-gradient--x-scrollable
+    .#{$prefix}--scroll-gradient__start-horizontal {
+    display: block;
+  }
+
+  .#{$prefix}--scroll-gradient--x-initial.#{$prefix}--scroll-gradient--x-scrollable
+    .#{$prefix}--scroll-gradient__end-horizontal,
+  .#{$prefix}--scroll-gradient--x-started.#{$prefix}--scroll-gradient--x-scrollable
+    .#{$prefix}--scroll-gradient__end-horizontal {
+    display: block;
+  }
+
+  .#{$prefix}--scroll-gradient [data-start-vertical],
+  .#{$prefix}--scroll-gradient [data-end-vertical] {
+    block-size: $intersection-value;
+    grid-column-start: 1;
+    grid-row-start: 1;
+    inline-size: 100%;
+  }
+
+  .#{$prefix}--scroll-gradient [data-end-vertical],
+  .#{$prefix}--scroll-gradient [data-end-horizontal] {
+    place-self: flex-end;
+  }
+
+  .#{$prefix}--scroll-gradient [data-start-horizontal],
+  .#{$prefix}--scroll-gradient [data-end-horizontal] {
+    block-size: 100%;
+    grid-column-start: 1;
+    grid-row-start: 1;
+    inline-size: $intersection-value;
+  }
+}

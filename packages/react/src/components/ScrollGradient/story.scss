@@ -1,0 +1,26 @@
+//
+// Copyright IBM Corp. 2024, 2025
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+// ScrollGradient is a utility component — styles are included in the global
+// @carbon/styles bundle via packages/styles/scss/components/_index.scss.
+// Only story-layout rules are needed here.
+
+.scroll-gradient-story-container {
+  block-size: 400px;
+  inline-size: 300px;
+  margin: auto;
+  overflow: auto;
+  resize: both;
+}
+
+.scroll-gradient-story-container--sm {
+  block-size: 250px;
+  inline-size: 300px;
+  margin: auto;
+  overflow: auto;
+  resize: both;
+}
