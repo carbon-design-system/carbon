@@ -81,6 +81,44 @@ The following codemods help you adopt changes introduced by feature flags in
 preparation for Carbon v12. Each codemod transforms your code to work with
 specific feature flags enabled.
 
+### Enable v12 release
+
+Enables the complete Carbon v12 experience for a React application.
+
+**Usage:**
+
+```bash
+npx @carbon/upgrade migrate enable-v12-release --write
+```
+
+This codemod wraps the application passed to a React root with
+`<FeatureFlags enableV12Release>` and adds or updates the necessary
+`@carbon/react` import. It supports modern `createRoot` and `hydrateRoot` entry
+points as well as legacy `ReactDOM.render`.
+
+**Example:**
+
+```jsx
+// Before
+import { createRoot } from 'react-dom/client';
+import App from './App';
+
+const root = createRoot(document.getElementById('root'));
+root.render(<App />);
+
+// After
+import { createRoot } from 'react-dom/client';
+import { FeatureFlags } from '@carbon/react';
+import App from './App';
+
+const root = createRoot(document.getElementById('root'));
+root.render(
+  <FeatureFlags enableV12Release>
+    <App />
+  </FeatureFlags>
+);
+```
+
 ### Enable v12 tile default icons
 
 Enables default icons for Tile components.
