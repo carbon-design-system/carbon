@@ -54,7 +54,7 @@
     border: none;
     border-radius: 0;
     appearance: none;
-    background-color: $field;
+    background: $field;
     block-size: layout.size('height');
     border-block-end: 1px solid $border-strong;
     color: $text-primary;
@@ -295,7 +295,7 @@
 
   // readonly
   .#{$prefix}--select--readonly .#{$prefix}--select-input {
-    background-color: transparent;
+    background: transparent;
     border-block-end-color: $border-subtle;
     cursor: default;
   }
@@ -306,7 +306,7 @@
 
   .#{$prefix}--select--readonly.#{$prefix}--select--inline
     .#{$prefix}--select-input:hover {
-    background-color: transparent;
+    background: transparent;
   }
 
   // Skeleton State

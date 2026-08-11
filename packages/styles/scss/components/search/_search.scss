@@ -10,6 +10,8 @@
 //-----------------------------
 
 @use '../text-input';
+@use '../../border-radius' as *;
+@use '../../feature-flags' as *;
 @use '../../theme' as *;
 @use '../../config' as *;
 @use '../../type';
@@ -64,7 +66,7 @@
     padding: 0 layout.size('height');
     border: none;
     appearance: none;
-    background-color: $field;
+    background: $field;
     block-size: layout.size('height');
     border-block-end: 1px solid $border-strong;
     color: $text-primary;
@@ -74,6 +76,20 @@
     transition:
       background-color $duration-fast-02 motion(standard, productive),
       outline $duration-fast-02 motion(standard, productive);
+
+    @if enabled('enable-v12-release') {
+      border: 1px solid transparent;
+      border-radius: $border-radius-04;
+      // (gray-20 → gray-50)
+      background:
+        linear-gradient($field, $field) padding-box,
+        linear-gradient(
+            to bottom,
+            $border-subtle calc(100% - 4px),
+            $border-strong 100%
+          )
+          border-box;
+    }
 
     &:focus {
       @include focus-outline('outline');
@@ -98,7 +114,7 @@
   }
 
   .#{$prefix}--search-input[disabled] {
-    background-color: $field;
+    background: $field;
     border-block-end: 1px solid transparent;
     color: $text-disabled;
     cursor: not-allowed;
@@ -135,12 +151,9 @@
     @include focus-outline('reset');
 
     position: absolute;
+    background-clip: padding-box;
     inset-block-start: 0;
     inset-inline-end: 0;
-
-    &:hover {
-      border-block-end: 1px solid $border-strong;
-    }
   }
 
   .#{$prefix}--search-button {
@@ -168,7 +181,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    border-width: 0 0 1px;
+    border-width: 1px;
     border-style: solid;
     border-color: transparent;
     block-size: layout.size('height');
@@ -177,6 +190,10 @@
     inline-size: layout.size('height');
     opacity: 1;
     visibility: inherit;
+
+    @if enabled('enable-v12-release') {
+      border-radius: $border-radius-04;
+    }
 
     &:hover {
       background-color: $field-hover;
@@ -252,6 +269,11 @@
     inline-size: 100%;
   }
 
+  .#{$prefix}--search--expandable:not(.#{$prefix}--search--expanded)
+    .#{$prefix}--search-input {
+    visibility: hidden;
+  }
+
   .#{$prefix}--search--expandable .#{$prefix}--search-input {
     padding: 0;
     inline-size: 0;
@@ -283,8 +305,12 @@
     position: absolute;
     cursor: pointer;
 
+    @if enabled('enable-v12-release') {
+      border-radius: $border-radius-04;
+    }
+
     &:focus {
-      outline: 2px solid $focus;
+      @include focus-outline('outline');
     }
   }
 
