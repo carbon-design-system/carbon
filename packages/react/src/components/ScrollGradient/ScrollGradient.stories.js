@@ -24,8 +24,6 @@ const storyChildren = (
   </div>
 );
 
-const style = { width: '100%', height: '100%' };
-
 export default {
   title: 'Utilities/ScrollGradient',
   component: ScrollGradient,
@@ -36,39 +34,49 @@ export default {
     },
   },
   argTypes: {
-    children: { table: { disable: true } },
-    className: { table: { disable: true } },
+    // Component-specific props
     color: {
       control: 'color',
       description:
-        'Fade-out color. Any valid CSS color value. Defaults to the current layer-01 token.',
+        'Fade-out color. Any valid CSS color value. Defaults to the current layer-01 token so the gradient blends with the page background.',
     },
+    hideStartGradient: {
+      control: 'boolean',
+      description:
+        'Set to true to hide the gradient on the start side (top for vertical scroll, left for horizontal scroll).',
+    },
+    scrollElementClassName: {
+      control: 'text',
+      description:
+        'Optional className applied to the inner scrollable element.',
+    },
+    // Node/function props — no useful interactive control
+    children: { table: { disable: true } },
+    className: { table: { disable: true } },
     getScrollElementRef: { table: { disable: true } },
-    hideStartGradient: { control: 'boolean' },
     onScroll: { table: { disable: true } },
-    scrollElementClassName: { table: { disable: true } },
+    // Inherited HTML attributes — hide to keep the panel clean
+    style: { table: { disable: true } },
   },
 };
 
 export const Default = {
-  args: {
-    style,
-  },
+  args: {},
   render: (args) => (
     <div className="scroll-gradient-story-container">
-      <ScrollGradient {...args}>{storyChildren}</ScrollGradient>
+      <ScrollGradient style={{ width: '100%', height: '100%' }} {...args}>
+        {storyChildren}
+      </ScrollGradient>
     </div>
   ),
 };
 Default.storyName = 'Default (vertical)';
 
 export const WithXAndYAxis = {
-  args: {
-    style,
-  },
+  args: {},
   render: (args) => (
     <div className="scroll-gradient-story-container--sm">
-      <ScrollGradient {...args}>
+      <ScrollGradient style={{ width: '100%', height: '100%' }} {...args}>
         <div style={{ width: '1500px' }}>{storyChildren}</div>
       </ScrollGradient>
     </div>
