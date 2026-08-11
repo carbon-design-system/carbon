@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2018, 2023
+// Copyright IBM Corp. 2018, 2026
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -68,16 +68,18 @@ $content-padding: 0 0 0 $spacing-05 !default;
   }
 
   .#{$prefix}--accordion__item:not(.#{$prefix}--accordion__item--active) {
-    // Blend border on hover
-    &:hover,
-    // Blend top border of the next component on hover
-    &:hover + .#{$prefix}--accordion__item {
-      border-block-start-color: $layer-hover;
-    }
+    @media (any-hover: hover) {
+      // Blend border on hover
+      &:hover,
+      // Blend top border of the next component on hover
+      &:hover + .#{$prefix}--accordion__item {
+        border-block-start-color: $layer-hover;
+      }
 
-    // Blend bottom border of last item on hover
-    &:last-child:hover {
-      border-block-end-color: $layer-hover;
+      // Blend bottom border of last item on hover
+      &:last-child:hover {
+        border-block-end-color: $layer-hover;
+      }
     }
   }
 
@@ -99,9 +101,11 @@ $content-padding: 0 0 0 $spacing-05 !default;
       padding-inline-end: layout.density('padding-inline');
     }
 
-    &:hover {
-      background-color: $layer-hover;
-      outline: none;
+    @media (any-hover: hover) {
+      &:hover {
+        background-color: $layer-hover;
+        outline: none;
+      }
     }
 
     &:focus {
@@ -137,8 +141,10 @@ $content-padding: 0 0 0 $spacing-05 !default;
     fill: $icon-disabled;
   }
 
-  .#{$prefix}--accordion__heading[disabled]:hover::before {
-    background-color: transparent;
+  @media (any-hover: hover) {
+    .#{$prefix}--accordion__heading[disabled]:hover::before {
+      background-color: transparent;
+    }
   }
 
   .#{$prefix}--accordion__item--disabled,
@@ -276,10 +282,7 @@ $content-padding: 0 0 0 $spacing-05 !default;
     position: relative;
     border-color: transparent;
 
-    &:last-child,
-    &:hover,
-    &:last-child:hover,
-    &:hover + .#{$prefix}--accordion__item {
+    &:last-child {
       border-color: transparent;
     }
 
@@ -309,38 +312,50 @@ $content-padding: 0 0 0 $spacing-05 !default;
     }
   }
 
-  .#{$prefix}--accordion--flush .#{$prefix}--accordion__heading:hover {
-    position: relative;
-    z-index: 1;
+  @media (any-hover: hover) {
+    .#{$prefix}--accordion--flush .#{$prefix}--accordion__item:hover,
+    .#{$prefix}--accordion--flush .#{$prefix}--accordion__item:last-child:hover,
+    .#{$prefix}--accordion--flush
+      .#{$prefix}--accordion__item:hover
+      + .#{$prefix}--accordion__item {
+      border-color: transparent;
+    }
+  }
 
-    // blend top/bottom border into heading hover state
-    &::before,
-    &::after {
-      position: absolute;
-      display: block;
-      background: $layer-hover;
-      block-size: 1px;
-      content: '';
-      inline-size: 100%;
-      inset-inline-start: 0;
-      transition: background motion(standard, productive) $duration-fast-02;
+  @media (any-hover: hover) {
+    .#{$prefix}--accordion--flush .#{$prefix}--accordion__heading:hover {
+      position: relative;
+      z-index: 1;
 
-      @media screen and (prefers-reduced-motion: reduce) {
-        transition: none;
+      // blend top/bottom border into heading hover state
+      &::before,
+      &::after {
+        position: absolute;
+        display: block;
+        background: $layer-hover;
+        block-size: 1px;
+        content: '';
+        inline-size: 100%;
+        inset-inline-start: 0;
+        transition: background motion(standard, productive) $duration-fast-02;
+
+        @media screen and (prefers-reduced-motion: reduce) {
+          transition: none;
+        }
       }
-    }
 
-    &::before {
-      inset-block-start: -1px;
-    }
+      &::before {
+        inset-block-start: -1px;
+      }
 
-    &::after {
-      inset-block-end: -1px;
-    }
+      &::after {
+        inset-block-end: -1px;
+      }
 
-    &:focus::after,
-    &:focus::before {
-      background: none;
+      &:focus::after,
+      &:focus::before {
+        background: none;
+      }
     }
   }
 
@@ -355,7 +370,6 @@ $content-padding: 0 0 0 $spacing-05 !default;
     fill: $icon-primary;
     pointer-events: none;
 
-    &:hover,
     &:focus,
     &:active {
       border: none;
@@ -364,11 +378,22 @@ $content-padding: 0 0 0 $spacing-05 !default;
     }
   }
 
-  .#{$prefix}--accordion.#{$prefix}--skeleton
-    .#{$prefix}--accordion__heading:hover::before,
-  .#{$prefix}--accordion.#{$prefix}--skeleton
-    .#{$prefix}--accordion__heading:hover {
-    background-color: transparent;
+  @media (any-hover: hover) {
+    .#{$prefix}--accordion.#{$prefix}--skeleton
+      .#{$prefix}--accordion__arrow:hover {
+      border: none;
+      cursor: default;
+      outline: none;
+    }
+  }
+
+  @media (any-hover: hover) {
+    .#{$prefix}--accordion.#{$prefix}--skeleton
+      .#{$prefix}--accordion__heading:hover::before,
+    .#{$prefix}--accordion.#{$prefix}--skeleton
+      .#{$prefix}--accordion__heading:hover {
+      background-color: transparent;
+    }
   }
 
   .#{$prefix}--accordion--end.#{$prefix}--skeleton

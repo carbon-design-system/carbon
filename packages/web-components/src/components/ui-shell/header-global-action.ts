@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2023, 2025
+ * Copyright IBM Corp. 2023, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -124,13 +124,9 @@ class CDSHeaderGlobalAction extends CDSButton {
       // see if there is related panel for header-global-action button first
       // and then set the expanded attr of it accordingly
       if (panel) {
-        const expanded = panel.getAttribute('expanded');
+        const expanded = panel.hasAttribute('expanded');
 
-        if (expanded) {
-          panel.removeAttribute('expanded');
-        } else {
-          panel.setAttribute('expanded', 'true');
-        }
+        panel.toggleAttribute('expanded', !expanded);
 
         const active = !this.active;
         this.active = active;

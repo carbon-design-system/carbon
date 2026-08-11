@@ -12,6 +12,8 @@ import './feature-flags';
 import './internal/warnAboutDeprecatedReactVersion';
 
 export * from './components/Accordion';
+// export { ActionSet } from './components/ActionSet';
+// export type { ActionSetProps } from './components/ActionSet';
 export * from './components/AccordionItem';
 export * from './components/AspectRatio';
 export * from './components/Breadcrumb';
@@ -34,6 +36,7 @@ export * from './components/DataTable';
 export * from './components/DataTableSkeleton';
 export * from './components/DatePicker';
 export * from './components/DatePickerInput';
+export * as preview__DatePicker from './components/DatePicker/next';
 export * from './components/Dropdown';
 export * from './components/ErrorBoundary';
 export * from './components/ExpandableSearch';
@@ -224,6 +227,9 @@ export {
   OverflowMenuV2 as unstable_OverflowMenuV2,
   OverflowMenuV2 as preview_OverflowMenuV2,
 } from './components/OverflowMenuV2';
+// unstable_Pagination / preview_Pagination are deprecated. Use the stable
+// `Pagination` component with the `renderPageSelect` prop instead.
+// TODO: These exports will be removed in v12.
 export {
   PageSelector as unstable_PageSelector,
   Pagination as unstable_Pagination,
@@ -589,6 +595,10 @@ export type { RadioTileProps } from './components/RadioTile/RadioTile';
 export type { SearchProps } from './components/Search/Search';
 export type { SearchSkeletonProps } from './components/Search/Search.Skeleton';
 
+//side panel (migrated from @carbon/ibm-products)
+// export { SidePanel } from './components/SidePanel';
+// export type { SidePanelProps } from './components/SidePanel';
+
 //select
 export type { SelectProps } from './components/Select/Select';
 export type { SelectSkeletonProps } from './components/Select/Select.Skeleton';
@@ -721,6 +731,10 @@ export type { SkipToContentProps } from './components/UIShell/SkipToContent';
 export type { BaseSwitcherProps } from './components/UIShell/Switcher';
 export type { SwitcherDividerProps } from './components/UIShell/SwitcherDivider';
 export type { SwitcherItemProps } from './components/UIShell/SwitcherItem';
+
+// TODO: ibm-products migration in progress — re-enable when component is ready
+// export { TruncatedText } from './components/TruncatedText';
+// export type { TruncatedTextProps } from './components/TruncatedText';
 
 //unordered list
 export type { UnorderedListProps } from './components/UnorderedList/UnorderedList';

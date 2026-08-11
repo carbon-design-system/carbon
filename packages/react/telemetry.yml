@@ -13,6 +13,7 @@ collect:
         - accept
         - action
         - actionButtonLabel
+        - actions
         - activation
         - active
         - addFocusListeners
@@ -43,6 +44,7 @@ collect:
         - closeOnActivation
         - cols
         - colSpan
+        - compact
         - compareItems
         - condensed
         - contained
@@ -173,6 +175,7 @@ collect:
         - onKeyUp
         - onLoadingSuccess
         - onMenuChange
+        - onMouseDown
         - onMouseEnter
         - onMouseLeave
         - onMouseUp
@@ -261,6 +264,9 @@ collect:
         # ActionableNotification
         - closeOnEscape
         - hasFocus
+        # ActionSet
+        - buttonSize
+        - disableStacking
         # AILabel
         - AILabelContent
         - aiText
@@ -277,6 +283,10 @@ collect:
         # ButtonSet
         - fluid
         - stacked
+        # Calendar
+        - context
+        - onDateSelect
+        - onNavigate
         # ChatButton
         - isQuickAction
         # ClickableTile
@@ -324,6 +334,9 @@ collect:
         - parseDate
         - prevMonthAriaLabel
         - short
+        # DatePickerInput
+        - hideIcon
+        - onIconClick
         # DatePickerSkeleton
         - range
         # DefinitionTooltip
@@ -358,6 +371,7 @@ collect:
         - enableTreeviewControllable
         - enableV12DynamicFloatingStyles
         - enableV12Overflowmenu
+        - enableV12Release
         - enableV12TileDefaultIcons
         - enableV12TileRadioIcons
         - flags
@@ -474,7 +488,6 @@ collect:
         - closeMenu
         - handleOverflowMenuItemFocus
         - isDelete
-        - onMouseDown
         - requireTitle
         - wrapperClassName
         # PageHeaderBreadcrumbBar
@@ -484,7 +497,6 @@ collect:
         # PageHeaderContent
         - contextualActions
         # PageHeaderContentPageActions
-        - actions
         - menuButtonLabel
         # PageHeaderTabBar
         - tags
@@ -493,7 +505,9 @@ collect:
         - totalPages
         # Pagination
         - backwardText
+        - backwardTextTooltipPosition
         - forwardText
+        - forwardTextTooltipPosition
         - initialPage
         - isLastPage
         - itemRangeText
@@ -507,6 +521,7 @@ collect:
         - pageSizes
         - pagesUnknown
         - pageText
+        - renderPageSelect
         # PaginationNav
         - disableOverflow
         - itemsShown
@@ -524,11 +539,17 @@ collect:
         - current
         - overflowTooltipProps
         - tooltipId
+        # Resizer
+        - onDoubleClick
+        - onResize
+        - onResizeEnd
+        - thickness
         # Select
         - noLabel
         # SelectItem
         - hidden
         # ShapeIndicator
+        - shapeDescription
         - textSize
         # SideNav
         - addMouseListeners
@@ -541,6 +562,20 @@ collect:
         - assistiveText
         # SideNavSwitcher
         - options
+        # SidePanel
+        - actionToolbarButtons
+        - aiLabel
+        - animateTitle
+        - closeIconDescription
+        - closeIconTooltipAlignment
+        - condensedActions
+        - currentStep
+        - includeOverlay
+        - navigationBackIconDescription
+        - placement
+        - resizable
+        - selectorPageContent
+        - slideIn
         # Slider
         - ariaLabelInput
         - formatLabel
@@ -634,6 +669,12 @@ collect:
         # TreeView
         - multiselect
         - onActivate
+        # TruncatedText
+        - collapseLabel
+        - expandLabel
+        - lines
+        # WithCustomContext
+        - onLog
         # React
         - key
         - ref
@@ -884,6 +925,7 @@ collect:
         - cool-gray
         - cyan
         - default
+        - expand
         - gray
         - green
         - high-contrast
@@ -901,6 +943,7 @@ collect:
         - submit
         - teal
         - text
+        - tooltip
         - warm-gray
         # AspectRatio - ratio
         - 16x9
@@ -948,11 +991,24 @@ collect:
         - actionable
         - inline
         - toast
+        # Pagination - backwardTextTooltipPosition
+        - bottom
+        - left
+        - right
+        - top
+        # Pagination - forwardTextTooltipPosition
+        - bottom
+        - left
+        - right
+        - top
         # Popover - autoAlignBoundary
         - clippingAncestors
         # ShapeIndicator - textSize
         - "12"
         - "14"
+        # SidePanel - placement
+        - left
+        - right
         # TableBody - aria-live
         - assertive
         - off

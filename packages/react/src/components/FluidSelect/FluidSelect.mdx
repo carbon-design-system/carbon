@@ -1,4 +1,4 @@
-import { ArgTypes, Meta } from '@storybook/addon-docs/blocks';
+import { ArgTypes, Meta, Unstyled } from '@storybook/addon-docs/blocks';
 
 import FluidSelect from './';
 
@@ -36,14 +36,16 @@ used option that is on the list.
 To get a default empty selection on your select, make the first child in your
 `FluidSelect` component a `SelectItem` with empty `text` and `value` props.
 
-<FluidSelect
-  id={`select-1`}
-  labelText="Select an option"
-  helperText="Optional helper text">
-  <SelectItem value="" text="" />
-  <SelectItem value="option-1" text="Option 1" />
-  <SelectItem value="option-2" text="Option 2" />
-</FluidSelect>
+<Unstyled style={{ padding: '1rem', background: 'var(--cds-background)' }}>
+  <FluidSelect
+    id={`select-1`}
+    labelText="Select an option"
+    helperText="Optional helper text">
+    <SelectItem value="" text="" />
+    <SelectItem value="option-1" text="Option 1" />
+    <SelectItem value="option-2" text="Option 2" />
+  </FluidSelect>
+</Unstyled>
 
 ```jsx
 <FluidSelect
@@ -64,14 +66,16 @@ Carbon's design guidance is to present select options in alphabetical order. If
 you need an option pre-selected that isn't displayed in first place, see
 [Custom option default](#custom-option-default)
 
-<FluidSelect
-  id={`select-2`}
-  labelText="Select an option"
-  helperText="Optional helper text">
-  <SelectItem value="option-1" text="Option 1" />
-  <SelectItem value="option-2" text="Option 2" />
-  <SelectItem value="option-3" text="Option 3" />
-</FluidSelect>
+<Unstyled style={{ padding: '1rem', background: 'var(--cds-background)' }}>
+  <FluidSelect
+    id={`select-2`}
+    labelText="Select an option"
+    helperText="Optional helper text">
+    <SelectItem value="option-1" text="Option 1" />
+    <SelectItem value="option-2" text="Option 2" />
+    <SelectItem value="option-3" text="Option 3" />
+  </FluidSelect>
+</Unstyled>
 
 ```jsx
 <FluidSelect
@@ -90,15 +94,17 @@ To have a custom option from the select's option list be selected by default,
 simply set a `defaultValue` on the `Select` component equal to the value of the
 desired option.
 
-<FluidSelect
-  id={`select-3`}
-  labelText="Select an option"
-  helperText="Optional helper text"
-  defaultValue="option-3">
-  <SelectItem value="option-1" text="Option 1" />
-  <SelectItem value="option-2" text="Option 2" />
-  <SelectItem value="option-3" text="Option 3" />
-</FluidSelect>
+<Unstyled style={{ padding: '1rem', background: 'var(--cds-background)' }}>
+  <FluidSelect
+    id={`select-3`}
+    labelText="Select an option"
+    helperText="Optional helper text"
+    defaultValue="option-3">
+    <SelectItem value="option-1" text="Option 1" />
+    <SelectItem value="option-2" text="Option 2" />
+    <SelectItem value="option-3" text="Option 3" />
+  </FluidSelect>
+</Unstyled>
 
 ```jsx
 <FluidSelect
