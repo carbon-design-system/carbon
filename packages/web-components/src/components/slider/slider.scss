@@ -78,7 +78,8 @@ $css--plex: true !default;
 
 :host(#{$prefix}-slider-input[readonly]) {
   input {
-    background-color: transparent;
+    background: transparent;
+    border-block-end-color: var(--cds-border-subtle);
   }
 }
 .#{$prefix}--slider__thumb-wrapper:focus-within .#{$prefix}--slider__thumb-icon,
