@@ -9,6 +9,15 @@ import React from 'react';
 import { render, screen } from '@testing-library/react';
 import { ScrollGradient } from '../ScrollGradient';
 
+// IntersectionObserver is not implemented in jsdom — provide a no-op mock.
+beforeAll(() => {
+  window.IntersectionObserver = jest.fn(() => ({
+    observe: jest.fn(),
+    unobserve: jest.fn(),
+    disconnect: jest.fn(),
+  }));
+});
+
 const prefix = 'cds';
 const blockClass = `${prefix}--scroll-gradient`;
 const componentName = ScrollGradient.displayName;
