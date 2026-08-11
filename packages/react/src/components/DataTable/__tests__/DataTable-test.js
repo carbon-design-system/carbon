@@ -1090,6 +1090,38 @@ describe('DataTable', () => {
         expect(selectedRows.length).toBe(3);
       });
 
+      it('should clear selection state when selected rows are removed', () => {
+        const renderSpy = jest.fn(() => null);
+        const { rerender } = render(
+          <DataTable
+            rows={mockProps.rows}
+            headers={mockProps.headers}
+            render={renderSpy}
+          />
+        );
+
+        act(() => {
+          getLastCallFor(renderSpy)[0].selectRow('b');
+        });
+
+        let { getBatchActionProps, selectedRows } =
+          getLastCallFor(renderSpy)[0];
+        expect(getBatchActionProps().shouldShowBatchActions).toBe(true);
+        expect(selectedRows).toHaveLength(1);
+
+        rerender(
+          <DataTable
+            rows={mockProps.rows.filter((row) => row.id !== 'b')}
+            headers={mockProps.headers}
+            render={renderSpy}
+          />
+        );
+
+        ({ getBatchActionProps, selectedRows } = getLastCallFor(renderSpy)[0]);
+        expect(getBatchActionProps().shouldShowBatchActions).toBe(false);
+        expect(selectedRows).toHaveLength(0);
+      });
+
       it('should update rows when receiving new props', () => {
         const { rerender } = render(<DataTable {...mockProps} />);
         const args = mockProps.render.mock.calls[0][0];

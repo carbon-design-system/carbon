@@ -21,6 +21,11 @@ const getDerivedStateFromProps = (props, prevState) => {
     props.headers,
     prevState
   );
+  const hasSelectedRows = rowIds.some((id) => {
+    const row = rowsById[id];
+
+    return row.isSelected && !row.disabled;
+  });
   const state = {
     rowIds,
     rowsById,
@@ -34,7 +39,8 @@ const getDerivedStateFromProps = (props, prevState) => {
 
     // Optional state field to indicate whether a consumer should show a
     // batch actions menu
-    shouldShowBatchActions: prevState.shouldShowBatchActions || false,
+    shouldShowBatchActions:
+      (prevState.shouldShowBatchActions && hasSelectedRows) || false,
     // TODO: Investigate deleting this property when this util is ported to
     // TypeScript. The only reason it was added was to address a type error in
     // packages/react/src/components/DataTable/DataTable.tsx
