@@ -7,7 +7,6 @@
 
 import { html, fixture, expect, oneEvent, aTimeout } from '@open-wc/testing';
 import '../index';
-import sinon from 'sinon';
 
 describe('cds-resizer-grid', function () {
   it('should render cds-resizer-grid', async () => {
@@ -317,13 +316,15 @@ describe('cds-resizer-handle', function () {
     const handle = await fixture(html`
       <cds-resizer-handle></cds-resizer-handle>
     `);
-    const spy = sinon.spy();
-    handle.addEventListener('resize-drag', spy);
+    let called = false;
+    handle.addEventListener('resize-drag', () => {
+      called = true;
+    });
     handle.dispatchEvent(
       new KeyboardEvent('keydown', { key: 'a', bubbles: true })
     );
     await aTimeout(100);
-    expect(spy.called).to.be.false;
+    expect(called).to.be.false;
   });
 
   it('should set and clear synthetic hover state', async () => {
