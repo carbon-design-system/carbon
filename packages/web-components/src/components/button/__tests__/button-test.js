@@ -217,7 +217,8 @@ describe('cds-button', () => {
         </cds-button>
       `);
 
-      expect(el.getAttribute('aria-pressed')).to.equal('true');
+      const button = el.shadowRoot?.querySelector('button');
+      expect(button.hasAttribute('aria-pressed')).to.be.true;
     });
   });
 
