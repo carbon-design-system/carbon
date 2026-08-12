@@ -389,6 +389,8 @@ $-icon-container-size: calc(#{layout.density('padding-inline')} * 2 + 1rem);
   }
 
   .#{$prefix}--clickable-tile__wrapper,
+  .#{$prefix}--selectable-tile__wrapper--decorator,
+  .#{$prefix}--selectable-tile__wrapper--slug,
   .#{$prefix}--radio-tile__wrapper--decorator,
   .#{$prefix}--radio-tile__wrapper--slug {
     position: relative;
@@ -397,6 +399,11 @@ $-icon-container-size: calc(#{layout.density('padding-inline')} * 2 + 1rem);
   // AILabel styles
   .#{$prefix}--tile > .#{$prefix}--tile--inner-decorator > *,
   .#{$prefix}--clickable-tile__wrapper > .#{$prefix}--tile--inner-decorator > *,
+  .#{$prefix}--selectable-tile__wrapper--decorator
+    > .#{$prefix}--tile--inner-decorator
+    > *,
+  .#{$prefix}--selectable-tile__wrapper--slug > .#{$prefix}--ai-label,
+  .#{$prefix}--selectable-tile__wrapper--slug > .#{$prefix}--slug,
   .#{$prefix}--radio-tile__wrapper--decorator
     > .#{$prefix}--tile--inner-decorator
     > *,
@@ -416,12 +423,22 @@ $-icon-container-size: calc(#{layout.density('padding-inline')} * 2 + 1rem);
   .#{$prefix}--tile.#{$prefix}--tile--selectable
     > .#{$prefix}--tile--inner-decorator
     > *,
+  .#{$prefix}--selectable-tile__wrapper--decorator
+    > .#{$prefix}--tile.#{$prefix}--tile--selectable
+    + .#{$prefix}--tile--inner-decorator
+    > *,
   .#{$prefix}--radio-tile__wrapper--decorator
     > .#{$prefix}--tile.#{$prefix}--tile--selectable
     + .#{$prefix}--tile--inner-decorator
     > *,
   .#{$prefix}--tile.#{$prefix}--tile--selectable > .#{$prefix}--ai-label,
   .#{$prefix}--tile.#{$prefix}--tile--selectable > .#{$prefix}--slug,
+  .#{$prefix}--selectable-tile__wrapper--slug
+    > .#{$prefix}--tile.#{$prefix}--tile--selectable
+    + .#{$prefix}--ai-label,
+  .#{$prefix}--selectable-tile__wrapper--slug
+    > .#{$prefix}--tile.#{$prefix}--tile--selectable
+    + .#{$prefix}--slug,
   .#{$prefix}--radio-tile__wrapper--slug
     > .#{$prefix}--tile.#{$prefix}--tile--selectable
     + .#{$prefix}--ai-label,
@@ -488,6 +505,10 @@ $-icon-container-size: calc(#{layout.density('padding-inline')} * 2 + 1rem);
     > .#{$prefix}--tile--decorator:has(
       + .#{$prefix}--tile--inner-decorator .#{$prefix}--ai-label
     ).#{$prefix}--tile,
+  .#{$prefix}--selectable-tile__wrapper--decorator
+    > .#{$prefix}--tile--decorator:has(
+      + .#{$prefix}--tile--inner-decorator .#{$prefix}--ai-label
+    ).#{$prefix}--tile,
   .#{$prefix}--radio-tile__wrapper--decorator
     > .#{$prefix}--tile--decorator:has(
       + .#{$prefix}--tile--inner-decorator .#{$prefix}--ai-label
@@ -527,6 +548,10 @@ $-icon-container-size: calc(#{layout.density('padding-inline')} * 2 + 1rem);
 
   .#{$prefix}--tile--decorator:has(
       .#{$prefix}--ai-label
+    ).#{$prefix}--tile--selectable::before,
+  .#{$prefix}--selectable-tile__wrapper--decorator
+    > .#{$prefix}--tile--decorator:has(
+      + .#{$prefix}--tile--inner-decorator .#{$prefix}--ai-label
     ).#{$prefix}--tile--selectable::before,
   .#{$prefix}--radio-tile__wrapper--decorator
     > .#{$prefix}--tile--decorator:has(
@@ -570,6 +595,10 @@ $-icon-container-size: calc(#{layout.density('padding-inline')} * 2 + 1rem);
   .#{$prefix}--tile--decorator:has(
       .#{$prefix}--tile--inner-decorator .#{$prefix}--ai-label
     ).#{$prefix}--tile--selectable::after,
+  .#{$prefix}--selectable-tile__wrapper--decorator
+    > .#{$prefix}--tile--decorator:has(
+      + .#{$prefix}--tile--inner-decorator .#{$prefix}--ai-label
+    ).#{$prefix}--tile--selectable::after,
   .#{$prefix}--radio-tile__wrapper--decorator
     > .#{$prefix}--tile--decorator:has(
       + .#{$prefix}--tile--inner-decorator .#{$prefix}--ai-label
@@ -595,6 +624,10 @@ $-icon-container-size: calc(#{layout.density('padding-inline')} * 2 + 1rem);
   .#{$prefix}--tile--decorator:has(
       .#{$prefix}--tile--inner-decorator
     ).#{$prefix}--tile--is-selected,
+  .#{$prefix}--selectable-tile__wrapper--decorator
+    > .#{$prefix}--tile--decorator:has(
+      + .#{$prefix}--tile--inner-decorator
+    ).#{$prefix}--tile.#{$prefix}--tile--is-selected,
   .#{$prefix}--radio-tile__wrapper--decorator
     > .#{$prefix}--tile--decorator:has(
       + .#{$prefix}--tile--inner-decorator
@@ -620,6 +653,9 @@ $-icon-container-size: calc(#{layout.density('padding-inline')} * 2 + 1rem);
   .#{$prefix}--tile--decorator.#{$prefix}--tile--clickable
     .#{$prefix}--tile-content,
   .#{$prefix}--clickable-tile__wrapper > .#{$prefix}--tile--inner-decorator > *,
+  .#{$prefix}--selectable-tile__wrapper--decorator
+    > .#{$prefix}--tile--inner-decorator
+    > *,
   .#{$prefix}--tile--decorator.#{$prefix}--tile--selectable
     > .#{$prefix}--tile__checkmark,
   .#{$prefix}--tile--decorator.#{$prefix}--tile--is-selected
@@ -641,17 +677,27 @@ $-icon-container-size: calc(#{layout.density('padding-inline')} * 2 + 1rem);
   .#{$prefix}--clickable-tile__wrapper
     > .#{$prefix}--tile--inner-decorator
     > *:has(> .#{$prefix}--popover--open),
+  .#{$prefix}--selectable-tile__wrapper--decorator
+    > .#{$prefix}--tile--inner-decorator
+    > *:has(> .#{$prefix}--popover--open),
   .#{$prefix}--radio-tile__wrapper--decorator
     > .#{$prefix}--tile--inner-decorator
     > *:has(> .#{$prefix}--popover--open),
   .#{$prefix}--tile--slug.#{$prefix}--tile--selectable
     .#{$prefix}--ai-label:has(> .#{$prefix}--popover--open),
   .#{$prefix}--tile--slug.#{$prefix}--tile--selectable
-    .#{$prefix}--slug:has(> .#{$prefix}--popover--open) {
+    .#{$prefix}--slug:has(> .#{$prefix}--popover--open),
+  .#{$prefix}--selectable-tile__wrapper--slug
+    > .#{$prefix}--ai-label:has(> .#{$prefix}--popover--open),
+  .#{$prefix}--selectable-tile__wrapper--slug
+    > .#{$prefix}--slug:has(> .#{$prefix}--popover--open) {
     z-index: 2;
   }
 
   .#{$prefix}--tile--decorator.#{$prefix}--tile--selectable
+    > .#{$prefix}--tile--inner-decorator
+    > *,
+  .#{$prefix}--selectable-tile__wrapper--decorator
     > .#{$prefix}--tile--inner-decorator
     > *,
   .#{$prefix}--radio-tile__wrapper--decorator
@@ -661,6 +707,8 @@ $-icon-container-size: calc(#{layout.density('padding-inline')} * 2 + 1rem);
     > .#{$prefix}--tile__checkmark,
   .#{$prefix}--tile--slug.#{$prefix}--tile--selectable > .#{$prefix}--ai-label,
   .#{$prefix}--tile--slug.#{$prefix}--tile--selectable > .#{$prefix}--slug,
+  .#{$prefix}--selectable-tile__wrapper--slug > .#{$prefix}--ai-label,
+  .#{$prefix}--selectable-tile__wrapper--slug > .#{$prefix}--slug,
   .#{$prefix}--radio-tile__wrapper--slug > .#{$prefix}--ai-label,
   .#{$prefix}--radio-tile__wrapper--slug > .#{$prefix}--slug,
   .#{$prefix}--tile--slug.#{$prefix}--tile--selectable
