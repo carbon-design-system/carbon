@@ -1,4 +1,6 @@
 /**
+ * @license
+ *
  * Copyright IBM Corp. 2023, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
@@ -6,38 +8,28 @@
  */
 
 import { LitElement, html } from 'lit';
-import {
-  property,
-  query,
-  queryAssignedElements,
-  state,
-} from 'lit/decorators.js';
+import { property, query, state } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
-import { iconLoader } from '../../globals/internal/icon-loader';
 import HostListener from '../../globals/decorators/host-listener';
 import HostListenerMixin from '../../globals/mixins/host-listener';
 import { SIDE_PANEL_SIZE, SIDE_PANEL_PLACEMENT } from './defs';
+import styles from './side-panel.scss?lit';
 import { selectorTabbable } from '../../globals/settings';
 import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
-import ArrowLeft16 from '@carbon/icons/es/arrow--left/16.js';
-import Close20 from '@carbon/icons/es/close/20.js';
+import ArrowLeft16 from '@carbon/icons/es/arrow--left/16';
+import Close16 from '@carbon/icons/es/close/16';
+import { iconLoader } from '../../globals/internal/icon-loader';
 import { moderate02 } from '@carbon/motion';
+import Handle from '../../globals/internal/handle';
 import '../button/index';
 import '../icon-button/index';
 import '../layer/index';
-import Handle from '../../globals/internal/handle';
-import '../button/button-set-base';
+import '../action-set/index.js';
+import '../resizer/index.js';
 
 export { SIDE_PANEL_SIZE, SIDE_PANEL_PLACEMENT };
 
-const PRECEDING =
-  Node.DOCUMENT_POSITION_PRECEDING | Node.DOCUMENT_POSITION_CONTAINS;
-
-const FOLLOWING =
-  Node.DOCUMENT_POSITION_FOLLOWING | Node.DOCUMENT_POSITION_CONTAINED_BY;
-
 const blockClass = `${prefix}--side-panel`;
-const blockClassActionSet = `${prefix}--action-set`;
 
 /**
  * Observes resize of the given element with the given resize observer.
@@ -59,42 +51,8 @@ const observeResize = (observer: ResizeObserver, elem: Element) => {
 };
 
 /**
- * Tries to focus on the given elements and bails out if one of them is successful.
- *
- * @param elems The elements.
- * @param reverse `true` to go through the list in reverse order.
- * @returns `true` if one of the attempts is successful, `false` otherwise.
- */
-function tryFocusElems(elems: NodeListOf<HTMLElement>, reverse: boolean) {
-  if (!reverse) {
-    for (let i = 0; i < elems.length; ++i) {
-      const elem = elems[i];
-      elem.focus();
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
-      if (elem.ownerDocument!.activeElement === elem) {
-        return true;
-      }
-    }
-  } else {
-    for (let i = elems.length - 1; i >= 0; --i) {
-      const elem = elems[i];
-      elem.focus();
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
-      if (elem.ownerDocument!.activeElement === elem) {
-        return true;
-      }
-    }
-  }
-  return false;
-}
-
-/**
  * SidePanel.
  *
- * @deprecated Use Carbon for IBM Products `side-panel` component.
- *   This component has been deprecated in `@carbon/web-components` and will instead be maintained
- *   in the Carbon for IBM Products library:
- *   https://github.com/carbon-design-system/ibm-products/tree/main/packages/ibm-products-web-components
  * @element cds-side-panel
  * @csspart dialog The dialog.
  * @fires cds-side-panel-beingclosed
@@ -114,18 +72,6 @@ class CDSSidePanel extends HostListenerMixin(LitElement) {
    * The element that had focus before this side-panel gets open.
    */
   private _launcher: Element | null = null;
-
-  /**
-   * Node to track focus going outside of side-panel content.
-   */
-  @query('#start-sentinel')
-  private _startSentinelNode!: HTMLAnchorElement;
-
-  /**
-   * Node to track focus going outside of side-panel content.
-   */
-  @query('#end-sentinel')
-  private _endSentinelNode!: HTMLAnchorElement;
 
   /**
    * Node to track side panel.
@@ -148,8 +94,11 @@ class CDSSidePanel extends HostListenerMixin(LitElement) {
   @query(`.${blockClass}__inner-content`)
   private _innerContent!: HTMLElement;
 
-  @queryAssignedElements({ slot: 'actions', selector: `${prefix}-button` })
-  private _actions!: Array<HTMLElement>;
+  /**
+   * Reference to the resizer handle element
+   */
+  @query(`${prefix}-resizer-handle`)
+  private _resizerHandle?: HTMLElement;
 
   @state()
   _doAnimateTitle = true;
@@ -173,76 +122,195 @@ class CDSSidePanel extends HostListenerMixin(LitElement) {
   _actionsCount = 0;
 
   @state()
+  _actionsMultiple: 'single' | 'double' | 'triple' | '' = '';
+
+  @state()
   _slugCloseSize = 'sm';
 
+  @state()
+  _customHeaderElements: Element[] = [];
+
+  @state()
+  _sidePanelWidth?: number;
+
+  @state()
+  _accumulatedDelta = 0;
+
   /**
-   * Handles `blur` event on this element.
+   * Get focusable elements.
    *
-   * @param event The event.
-   * @param event.target The event target.
-   * @param event.relatedTarget The event relatedTarget.
+   * Querying all tabbable items.
+   *
+   * @returns {{first: HTMLElement, last: HTMLElement, all: HTMLElement[]}} Returns an object with various elements.
    */
-  @HostListener('shadowRoot:focusout')
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20452
-  // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
-  private _handleBlur = async ({ target, relatedTarget }: FocusEvent) => {
-    const {
-      open,
-      _startSentinelNode: startSentinelNode,
-      _endSentinelNode: endSentinelNode,
-    } = this;
+  private getFocusable(): {
+    first: HTMLElement | undefined;
+    last: HTMLElement | undefined;
+    all: HTMLElement[];
+  } {
+    const elements: HTMLElement[] = [];
 
-    const oldContains = target !== this && this.contains(target as Node);
-    const currentContains =
-      relatedTarget !== this &&
-      (this.contains(relatedTarget as Node) ||
-        (this.shadowRoot?.contains(relatedTarget as Node) &&
-          relatedTarget !== (startSentinelNode as Node) &&
-          relatedTarget !== (endSentinelNode as Node)));
-
-    // Performs focus wrapping if _all_ of the following is met:
-    // * This side-panel is open
-    // * The viewport still has focus
-    // * SidePanel body used to have focus but no longer has focus
-    const { selectorTabbable: selectorTabbableForSidePanel } = this
-      .constructor as typeof CDSSidePanel;
-
-    if (open && relatedTarget && oldContains && !currentContains) {
-      const comparisonResult = (target as Node).compareDocumentPosition(
-        relatedTarget as Node
+    // Add back button if present (shadow DOM)
+    if (this.currentStep > 0) {
+      const backButton = this.shadowRoot?.querySelector<HTMLElement>(
+        `.${blockClass}__navigation-back-button`
       );
+      if (backButton) {
+        elements.push(backButton);
+      }
+    }
 
-      if (relatedTarget === startSentinelNode || comparisonResult & PRECEDING) {
-        await (this.constructor as typeof CDSSidePanel)._delay();
-        if (
-          !tryFocusElems(
-            this.querySelectorAll(selectorTabbableForSidePanel),
-            true
-          ) &&
-          relatedTarget !== this
-        ) {
-          this.focus();
-        }
-      } else if (
-        relatedTarget === endSentinelNode ||
-        comparisonResult & FOLLOWING
+    // Add tabbable elements from above-title slot (light DOM - breadcrumbs, etc.)
+    const aboveTitleSlot = this.shadowRoot?.querySelector<HTMLSlotElement>(
+      'slot[name="above-title"]'
+    );
+    if (aboveTitleSlot) {
+      const aboveTitleElements = aboveTitleSlot
+        .assignedElements({ flatten: true })
+        .flatMap((el) =>
+          Array.from(el.querySelectorAll<HTMLElement>(selectorTabbable))
+        );
+      elements.push(...aboveTitleElements);
+    }
+
+    // Add label text if present (shadow DOM)
+    const labelText = this.shadowRoot?.querySelector<HTMLElement>(
+      `.${blockClass}__label-text`
+    );
+    if (labelText) {
+      elements.push(labelText);
+    }
+
+    // Add title if present (shadow DOM)
+    const titleText = this.shadowRoot?.querySelector<HTMLElement>(
+      `.${blockClass}__title-text`
+    );
+    if (titleText) {
+      elements.push(titleText);
+    }
+
+    // Add slug elements if present (light DOM)
+    if (this._hasSlug) {
+      const slugElements = Array.from(
+        this.querySelectorAll<HTMLElement>(`${prefix}-slug`)
+      );
+      elements.push(...slugElements);
+    }
+
+    // Add close button if not hidden (shadow DOM)
+    if (!this.hideCloseButton) {
+      const closeButton = this.shadowRoot?.querySelector<HTMLElement>(
+        `.${blockClass}__close-button`
+      );
+      if (closeButton) {
+        elements.push(closeButton);
+      }
+    }
+
+    // Add subtitle if present (shadow DOM)
+    const subtitleText = this.shadowRoot?.querySelector<HTMLElement>(
+      `.${blockClass}__subtitle-text`
+    );
+    if (subtitleText && !subtitleText.hidden) {
+      elements.push(subtitleText);
+    }
+
+    // Add tabbable elements from below-title slot (light DOM)
+    const belowTitleSlot = this.shadowRoot?.querySelector<HTMLSlotElement>(
+      'slot[name="below-title"]'
+    );
+    if (belowTitleSlot) {
+      const belowTitleElements = belowTitleSlot
+        .assignedElements({ flatten: true })
+        .flatMap((el) =>
+          Array.from(el.querySelectorAll<HTMLElement>(selectorTabbable))
+        );
+      elements.push(...belowTitleElements);
+    }
+
+    // Add action toolbar elements (light DOM)
+    const actionToolbarSlot = this.shadowRoot?.querySelector<HTMLSlotElement>(
+      'slot[name="action-toolbar"]'
+    );
+    if (actionToolbarSlot) {
+      const actionToolbarElements = actionToolbarSlot
+        .assignedElements({ flatten: true })
+        .filter(
+          (el): el is HTMLElement =>
+            el instanceof HTMLElement &&
+            typeof (el as HTMLElement).focus === 'function'
+        );
+      elements.push(...actionToolbarElements);
+    }
+
+    // Add body content tabbable elements (light DOM - default slot)
+    const defaultSlot =
+      this.shadowRoot?.querySelector<HTMLSlotElement>('slot:not([name])');
+    if (defaultSlot) {
+      const bodyElements = defaultSlot
+        .assignedElements({ flatten: true })
+        .flatMap((el) =>
+          Array.from(el.querySelectorAll<HTMLElement>(selectorTabbable))
+        );
+      elements.push(...bodyElements);
+    }
+
+    // Add action buttons (light DOM)
+    const actionsSlot = this.shadowRoot?.querySelector<HTMLSlotElement>(
+      'slot[name="actions"]'
+    );
+    if (actionsSlot) {
+      const actionElements = actionsSlot
+        .assignedElements({ flatten: true })
+        .filter(
+          (el): el is HTMLElement =>
+            el instanceof HTMLElement &&
+            typeof (el as HTMLElement).focus === 'function'
+        );
+      elements.push(...actionElements);
+    }
+
+    // Filter for focusable items
+    const all = elements.filter(
+      (el): el is HTMLElement => typeof el?.focus === 'function'
+    );
+
+    return {
+      first: all[0],
+      last: all[all.length - 1],
+      all,
+    };
+  }
+
+  /**
+   * Handle the keydown event.
+   * Trap the focus inside the side-panel by tracking keydown.key == `Tab`
+   *
+   * @param {KeyboardEvent} event The keyboard event object.
+   */
+  @HostListener('keydown')
+  protected _handleHostKeydown = (event: KeyboardEvent) => {
+    if (event.key === 'Tab' && !this.slideIn) {
+      const { first: _firstElement, last: _lastElement } = this.getFocusable();
+
+      if (
+        event.shiftKey &&
+        (this.shadowRoot?.activeElement === _firstElement ||
+          document.activeElement === _firstElement)
       ) {
-        await (this.constructor as typeof CDSSidePanel)._delay();
-        if (
-          !tryFocusElems(
-            this.querySelectorAll(selectorTabbableForSidePanel),
-            true
-          )
-        ) {
-          this.focus();
-        }
+        event.preventDefault();
+
+        _lastElement?.focus();
+      } else if (!event.shiftKey && document.activeElement === _lastElement) {
+        event.preventDefault();
+
+        _firstElement?.focus();
       }
     }
   };
 
   @HostListener('document:keydown')
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20452
-  // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
+  // @ts-expect-error: The decorator refers to this method but TS thinks this method is not referred to
   private _handleKeydown = ({ key, target }: KeyboardEvent) => {
     if (key === 'Esc' || key === 'Escape') {
       this._handleUserInitiatedClose(target);
@@ -347,10 +415,11 @@ class CDSSidePanel extends HostListenerMixin(LitElement) {
             newValues.marginInlineEnd = `${this?._sidePanel?.offsetWidth}px`;
           }
         }
-
-        Object.keys(newValues).forEach((key) => {
-          pageContentEl.style[key] = newValues[key];
-        });
+        if (this.slideIn) {
+          Object.keys(newValues).forEach((key) => {
+            pageContentEl.style[key] = newValues[key];
+          });
+        }
       }
     }
   };
@@ -358,7 +427,7 @@ class CDSSidePanel extends HostListenerMixin(LitElement) {
   private _checkSetOpen = () => {
     const { _sidePanel: sidePanel } = this;
     if (sidePanel && this._isOpen) {
-      if (this._reducedMotion) {
+      if (this._reducedMotion?.matches) {
         this._isOpen = false;
       } else {
         // wait until the side panel has transitioned off the screen to remove
@@ -366,9 +435,15 @@ class CDSSidePanel extends HostListenerMixin(LitElement) {
           this._isOpen = false;
         });
       }
-    } else {
+    } else if (this.open) {
       // allow the html to render before animating in the side panel
-      this._isOpen = this.open;
+      // Use requestAnimationFrame to ensure the DOM is rendered before triggering animation
+      requestAnimationFrame(() => {
+        this._isOpen = this.open;
+      });
+    } else {
+      // When closing, set immediately
+      this._isOpen = false;
     }
   };
 
@@ -415,6 +490,17 @@ class CDSSidePanel extends HostListenerMixin(LitElement) {
     this._hasSubtitle = subtitle.length > 0;
   }
 
+  private _handleCustomHeaderSlotChange(e: Event) {
+    const target = e.target as HTMLSlotElement;
+    const customHeaderElms = target?.assignedElements();
+    customHeaderElms.forEach((el) => {
+      if (el instanceof HTMLElement) {
+        el.style.opacity = `calc(1 - var(--${blockClass}--scroll-animation-progress))`;
+        this._customHeaderElements.push(el);
+      }
+    });
+  }
+
   private _handleActionToolbarChange(e: Event) {
     const target = e.target as HTMLSlotElement;
     const toolbarActions = target?.assignedElements();
@@ -422,25 +508,25 @@ class CDSSidePanel extends HostListenerMixin(LitElement) {
     this._hasActionToolbar = toolbarActions && toolbarActions.length > 0;
 
     if (this._hasActionToolbar) {
-      for (const toolbarAction of toolbarActions) {
+      for (let i = 0; i < toolbarActions.length; i++) {
+        const toolbarAction = toolbarActions[i];
         // toolbar actions size should always be sm
         toolbarAction.setAttribute('size', 'sm');
+
+        // Add leading button class to first button
+        if (i === 0) {
+          toolbarAction.classList.add(
+            `${blockClass}__action-toolbar-leading-button`
+          );
+        } else {
+          toolbarAction.classList.remove(
+            `${blockClass}__action-toolbar-leading-button`
+          );
+        }
       }
     }
   }
 
-  private _checkUpdateActionSizes = () => {
-    if (this._actions) {
-      for (let i = 0; i < this._actions.length; i++) {
-        this._actions[i].setAttribute(
-          'size',
-          this.condensedActions ? 'lg' : 'xl'
-        );
-      }
-    }
-  };
-
-  private _maxActions = 3;
   private _handleActionsChange(e: Event) {
     const target = e.target as HTMLSlotElement;
     const actions = target?.assignedElements();
@@ -449,29 +535,18 @@ class CDSSidePanel extends HostListenerMixin(LitElement) {
     this._checkUpdateIconButtonSizes();
 
     const actionsCount = actions?.length ?? 0;
-    if (actionsCount > this._maxActions) {
-      this._actionsCount = this._maxActions;
-      if (process.env.NODE_ENV === 'development') {
-        // eslint-disable-next-line no-console
-        console.error(`Too many side-panel actions, max ${this._maxActions}.`);
-      }
-    } else {
-      this._actionsCount = actionsCount;
-    }
+    this._actionsCount = actionsCount;
 
-    for (let i = 0; i < actions?.length; i++) {
-      if (i + 1 > this._maxActions) {
-        // hide excessive side panel actions
-        actions[i].setAttribute('hidden', 'true');
-        actions[i].setAttribute(
-          `data-actions-limit-${this._maxActions}-exceeded`,
-          `${actions.length}`
-        );
-      } else {
-        actions[i].classList.add(`${blockClassActionSet}__action-button`);
-      }
+    // Set actions-multiple attribute for container query styling
+    if (actionsCount === 1) {
+      this._actionsMultiple = 'single';
+    } else if (actionsCount === 2) {
+      this._actionsMultiple = 'double';
+    } else if (actionsCount === 3) {
+      this._actionsMultiple = 'triple';
+    } else {
+      this._actionsMultiple = '';
     }
-    this._checkUpdateActionSizes();
   }
 
   private _checkSetDoAnimateTitle = () => {
@@ -516,9 +591,6 @@ class CDSSidePanel extends HostListenerMixin(LitElement) {
   /**
    * The `ResizeObserver` instance for observing element resizes for re-positioning floating menu position.
    */
-  // TODO: Wait for `.d.ts` update to support `ResizeObserver`
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- https://github.com/carbon-design-system/carbon/issues/20452
-  // @ts-ignore
   private _resizeObserver = new ResizeObserver(() => {
     if (this._sidePanel) {
       this._checkSetDoAnimateTitle();
@@ -538,11 +610,143 @@ class CDSSidePanel extends HostListenerMixin(LitElement) {
   private _scrollObserver = () => {
     const scrollTop = this._animateScrollWrapper?.scrollTop ?? 0;
     const scrollAnimationDistance = this._getScrollAnimationDistance();
+    const animationProgress =
+      Math.min(scrollTop, scrollAnimationDistance) / scrollAnimationDistance;
+
     this?._sidePanel?.style?.setProperty(
       `--${blockClass}--scroll-animation-progress`,
-      `${
-        Math.min(scrollTop, scrollAnimationDistance) / scrollAnimationDistance
-      }`
+      `${animationProgress}`
+    );
+
+    if (animationProgress === 1) {
+      this._customHeaderElements.forEach((el) => {
+        el.classList.add(`cds--visually-hidden`);
+      });
+    } else {
+      this._customHeaderElements.forEach((el) => {
+        el.classList.remove(`cds--visually-hidden`);
+      });
+    }
+  };
+
+  /**
+   * Handles resize start event from the resizer handle
+   */
+  private _handleResizeStart = () => {
+    this._sidePanelWidth = this._sidePanel?.clientWidth;
+    this._accumulatedDelta = 0;
+  };
+
+  /**
+   * Handles resize drag event from the resizer handle
+   */
+  private _handleResizeDrag = (event: CustomEvent) => {
+    const { delta, isKeyboard, key } = event.detail;
+
+    if (!this._sidePanelWidth) {
+      this._sidePanelWidth = this._sidePanel?.clientWidth;
+    }
+
+    // Handle Home/End keys specially (like React implementation)
+    if (isKeyboard && (key === 'Home' || key === 'End')) {
+      if (key === 'Home') {
+        // Home = maximize to 75vw
+        this.style.setProperty('--cds-side-panel-modified-size', '75vw');
+      } else {
+        // End = minimize to 16rem
+        this.style.setProperty('--cds-side-panel-modified-size', '16rem');
+      }
+      return;
+    }
+
+    let calculatedWidth: number;
+
+    if (isKeyboard) {
+      // For keyboard arrow keys, accumulate delta (like React implementation)
+      this._accumulatedDelta += delta;
+      calculatedWidth =
+        this._sidePanelWidth -
+        (this.placement === 'right'
+          ? this._accumulatedDelta
+          : -this._accumulatedDelta);
+    } else {
+      // For mouse events, use delta directly
+      calculatedWidth =
+        this._sidePanelWidth - (this.placement === 'right' ? delta : -delta);
+    }
+
+    // Remove transition during drag for smooth resizing
+    if (this._sidePanel?.style) {
+      this._sidePanel.style.transition = 'none';
+    }
+
+    // Clamp width between minimum (16rem = 256px) and maximum (75% of viewport)
+    const minWidth = 256; // 16rem
+    const maxWidth = window.innerWidth * 0.75;
+    const newWidth = Math.max(minWidth, Math.min(maxWidth, calculatedWidth));
+
+    // Apply the new width via CSS variable
+    this.style.setProperty('--cds-side-panel-modified-size', `${newWidth}px`);
+  };
+
+  /**
+   * Handles resize end event from the resizer handle
+   */
+  private _handleResizeEnd = () => {
+    this._accumulatedDelta = 0;
+    this._sidePanel?.style?.removeProperty('transition');
+    this._sidePanelWidth = this._sidePanel?.clientWidth;
+
+    // Update ARIA attributes on the resizer handle
+    if (this._resizerHandle) {
+      this._resizerHandle.setAttribute(
+        'aria-label',
+        `side panel is covering ${this._getPanelWidthPercent()}% of screen`
+      );
+      this._resizerHandle.setAttribute(
+        'aria-valuenow',
+        this._getPanelWidthPercent().toString()
+      );
+    }
+  };
+
+  /**
+   * Handles double-click/double-tap on resizer to reset size
+   */
+  private _handleResizeReset = () => {
+    // Get the default size for current size setting
+    const sizeMap = {
+      xs: '16rem',
+      sm: '20rem',
+      md: '30rem',
+      lg: '40rem',
+      xl: '65rem',
+      '2xl': '80rem',
+    };
+
+    const defaultSize = sizeMap[this.size] || sizeMap.md;
+    const defaultSizeInPx = parseFloat(defaultSize) * 16;
+
+    // Reset to default size (or 75vw if default is larger)
+    this._sidePanelWidth = Math.min(defaultSizeInPx, window.innerWidth * 0.75);
+
+    // Remove custom size
+    this.style.removeProperty('--cds-side-panel-modified-size');
+  };
+
+  /**
+   * Get the percentage of screen width the panel is covering
+   */
+  private _getPanelWidthPercent = (customWidth?: string): number => {
+    if (customWidth) {
+      const remValue = parseFloat(customWidth);
+      const remInPixels =
+        remValue *
+        parseFloat(getComputedStyle(document.documentElement).fontSize);
+      return Math.round((remInPixels / window.innerWidth) * 100);
+    }
+    return Math.round(
+      ((this._sidePanel?.clientWidth || 0) / window.innerWidth) * 100
     );
   };
 
@@ -562,8 +766,22 @@ class CDSSidePanel extends HostListenerMixin(LitElement) {
   /**
    * Sets the close button icon description
    */
-  @property({ reflect: true, attribute: 'close-icon-description' })
+  @property({
+    reflect: true,
+    attribute: 'close-icon-description',
+    type: String,
+  })
   closeIconDescription = 'Close';
+
+  /**
+   * Sets the close button tooltip alignment
+   */
+  @property({
+    reflect: true,
+    attribute: 'close-icon-tooltip-alignment',
+    type: String,
+  })
+  closeIconTooltipAlignment = 'left';
 
   /**
    * Determines whether the side panel should render the condensed version (affects action buttons primarily)
@@ -630,6 +848,12 @@ class CDSSidePanel extends HostListenerMixin(LitElement) {
   selectorPageContent = '';
 
   /**
+   * Show/hide the "X" close button
+   */
+  @property({ attribute: 'hide-close-button', type: Boolean })
+  hideCloseButton = false;
+
+  /**
    * SidePanel size.
    */
   @property({ reflect: true, type: String })
@@ -640,6 +864,12 @@ class CDSSidePanel extends HostListenerMixin(LitElement) {
    */
   @property({ attribute: 'slide-in', type: Boolean, reflect: true })
   slideIn = false;
+
+  /**
+   * Determines if the side panel is resizable
+   */
+  @property({ type: Boolean, reflect: true })
+  resizable = false;
 
   /**
    * Sets the title text
@@ -662,16 +892,50 @@ class CDSSidePanel extends HostListenerMixin(LitElement) {
     super.connectedCallback();
     this.disconnectObservers();
     this.connectObservers();
+
+    // Listen for resize events from resizer handle
+    this.addEventListener(
+      'resize-start',
+      this._handleResizeStart as EventListener
+    );
+    this.addEventListener(
+      'resize-drag',
+      this._handleResizeDrag as EventListener
+    );
+    this.addEventListener('resize-end', this._handleResizeEnd as EventListener);
+    this.addEventListener(
+      'resize-reset',
+      this._handleResizeReset as EventListener
+    );
   }
 
   disconnectedCallback() {
     super.disconnectedCallback();
     this.disconnectObservers();
+
+    // Remove resize event listeners
+    this.removeEventListener(
+      'resize-start',
+      this._handleResizeStart as EventListener
+    );
+    this.removeEventListener(
+      'resize-drag',
+      this._handleResizeDrag as EventListener
+    );
+    this.removeEventListener(
+      'resize-end',
+      this._handleResizeEnd as EventListener
+    );
+    this.removeEventListener(
+      'resize-reset',
+      this._handleResizeReset as EventListener
+    );
   }
 
   render() {
     const {
       closeIconDescription,
+      closeIconTooltipAlignment,
       condensedActions,
       currentStep,
       includeOverlay,
@@ -679,6 +943,7 @@ class CDSSidePanel extends HostListenerMixin(LitElement) {
       navigationBackIconDescription,
       open,
       placement,
+      hideCloseButton,
       size,
       slideIn,
       title,
@@ -688,21 +953,15 @@ class CDSSidePanel extends HostListenerMixin(LitElement) {
       return html``;
     }
 
-    const actionsMultiple = ['', 'single', 'double', 'triple'][
-      this._actionsCount
-    ];
-
-    const titleTemplate = html`<div
+    const titleTemplate = html` <div
       class=${`${blockClass}__title`}
       ?no-label=${!!labelText}>
-      <h2 class=${title ? `${blockClass}__title-text` : ''} title=${title}>
+      <h2 class=${title ? `${blockClass}__title-text` : ''} tabindex="0">
         ${title}
       </h2>
-
       ${this._doAnimateTitle
         ? html`<h2
             class=${`${blockClass}__collapsed-title-text`}
-            title=${title}
             aria-hidden="true">
             ${title}
           </h2>`
@@ -734,9 +993,16 @@ class CDSSidePanel extends HostListenerMixin(LitElement) {
             </cds-icon-button>`
           : ''}
 
+        <!-- slot for custom header components -->
+        <slot
+          name="above-title"
+          @slotchange=${this._handleCustomHeaderSlotChange}></slot>
+
         <!-- render title label -->
         ${title?.length && labelText?.length
-          ? html` <p class=${`${blockClass}__label-text`}>${labelText}</p>`
+          ? html` <p class=${`${blockClass}__label-text`} tabindex="0">
+              ${labelText}
+            </p>`
           : ''}
 
         <!-- title -->
@@ -746,16 +1012,18 @@ class CDSSidePanel extends HostListenerMixin(LitElement) {
         <div class=${`${blockClass}__slug-and-close`}>
           <slot name="slug" @slotchange=${this._handleSlugChange}></slot>
           <!-- {normalizedSlug} -->
-          <cds-icon-button
-            align="bottom-right"
-            aria-label=${closeIconDescription}
-            kind="ghost"
-            size="sm"
-            class=${`${blockClass}__close-button`}
-            @click=${this._handleCloseClick}>
-            ${iconLoader(Close20, { slot: 'icon' })}
-            <span slot="tooltip-content"> ${closeIconDescription} </span>
-          </cds-icon-button>
+          ${!hideCloseButton
+            ? html`<cds-icon-button
+                align=${closeIconTooltipAlignment}
+                aria-label=${closeIconDescription}
+                kind="ghost"
+                size="sm"
+                class=${`${blockClass}__close-button`}
+                @click=${this._handleCloseClick}>
+                ${iconLoader(Close16, { slot: 'icon' })}
+                <span slot="tooltip-content"> ${closeIconDescription} </span>
+              </cds-icon-button>`
+            : ''}
         </div>
 
         <!-- render sub title -->
@@ -764,11 +1032,17 @@ class CDSSidePanel extends HostListenerMixin(LitElement) {
           ?hidden=${!this._hasSubtitle}
           ?no-title-animation=${!this._doAnimateTitle}
           ?no-action-toolbar=${!this._hasActionToolbar}
-          ?no-title=${!title}>
+          ?no-title=${!title}
+          tabindex="0">
           <slot
             name="subtitle"
             @slotchange=${this._handleSubtitleChange}></slot>
         </p>
+
+        <!-- slot for custom header components -->
+        <slot
+          name="below-title"
+          @slotchange=${this._handleCustomHeaderSlotChange}></slot>
 
         <div
           class=${this._hasActionToolbar ? `${blockClass}__action-toolbar` : ''}
@@ -806,35 +1080,38 @@ class CDSSidePanel extends HostListenerMixin(LitElement) {
         ?condensed-actions=${condensedActions}
         ?overlay=${includeOverlay || slideIn}
         ?slide-in=${slideIn}
+        ?resizable=${this.resizable && !slideIn}
         size=${size}>
-        <a
-          id="start-sentinel"
-          class="sentinel"
-          hidden
-          href="javascript:void 0"
-          role="navigation"></a>
-
+        ${!slideIn &&
+        this.resizable &&
+        typeof window !== 'undefined' &&
+        window.innerWidth > 768
+          ? html`<cds-resizer-handle
+              class="${blockClass}__resizer"
+              orientation="horizontal"
+              aria-valuemin="${this._getPanelWidthPercent('16rem')}"
+              aria-valuemax="75"
+              aria-valuenow="${this._getPanelWidthPercent()}"
+              aria-label="side panel is covering ${this._getPanelWidthPercent()}% of screen"
+              @resize-start=${this._handleResizeStart}
+              @resize-drag=${this._handleResizeDrag}
+              @resize-end=${this._handleResizeEnd}
+              @resize-reset=${this._handleResizeReset}></cds-resizer-handle>`
+          : ''}
         ${this._doAnimateTitle
           ? html`<div class=${`${blockClass}__animated-scroll-wrapper`} scrolls>
               ${headerTemplate} ${mainTemplate}
             </div>`
           : html` ${headerTemplate} ${mainTemplate}`}
 
-        <cds-button-set-base
+        <cds-action-set
           class=${`${blockClass}__actions-container`}
           ?hidden=${this._actionsCount === 0}
-          ?condensed=${condensedActions}
-          actions-multiple=${actionsMultiple}
-          size=${size}>
+          size=${/^(lg|xl|2xl)$/.test(size) ? 'lg' : 'md'}
+          button-size=${condensedActions ? 'md' : 'lg'}
+          actions-multiple=${this._actionsMultiple}>
           <slot name="actions" @slotchange=${this._handleActionsChange}></slot>
-        </cds-button-set-base>
-
-        <a
-          id="end-sentinel"
-          class="sentinel"
-          hidden
-          href="javascript:void 0"
-          role="navigation"></a>
+        </cds-action-set>
       </div>
 
       ${includeOverlay
@@ -851,10 +1128,6 @@ class CDSSidePanel extends HostListenerMixin(LitElement) {
   }
 
   async updated(changedProperties) {
-    if (changedProperties.has('condensedActions')) {
-      this._checkUpdateActionSizes();
-    }
-
     if (changedProperties.has('currentStep')) {
       this._handleCurrentStepUpdate();
     }
@@ -900,34 +1173,46 @@ class CDSSidePanel extends HostListenerMixin(LitElement) {
       this.disconnectObservers();
       if (this.open) {
         this.connectObservers();
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- https://github.com/carbon-design-system/carbon/issues/20452
-        this._launcher = this.ownerDocument!.activeElement;
-        const focusNode =
-          this.selectorInitialFocus &&
-          this.querySelector(this.selectorInitialFocus);
+
+        this._launcher = this.ownerDocument?.activeElement ?? null;
 
         await (this.constructor as typeof CDSSidePanel)._delay();
-        if (focusNode) {
-          // For cases where a `carbon-web-components` component (e.g. `<cds-button>`) being `primaryFocusNode`,
-          // where its first update/render cycle that makes it focusable happens after `<cds-side-panel>`'s first update/render cycle
-          (focusNode as HTMLElement).focus();
-        } else if (
-          !tryFocusElems(
-            this.querySelectorAll(
-              (this.constructor as typeof CDSSidePanel).selectorTabbable
-            ),
-            true
-          )
-        ) {
-          this.focus();
+
+        if (this.selectorInitialFocus?.trim()?.length) {
+          const focusNode = this.querySelector(this.selectorInitialFocus);
+
+          (focusNode as HTMLElement)?.focus();
+        } else if (!this.slideIn) {
+          const { first: _firstElement } = this.getFocusable();
+
+          _firstElement?.focus();
         }
       } else if (
         this._launcher &&
-        typeof (this._launcher as HTMLElement).focus === 'function'
+        typeof (this._launcher as HTMLElement)?.focus === 'function'
       ) {
-        (this._launcher as HTMLElement).focus();
+        (this._launcher as HTMLElement)?.focus();
         this._launcher = null;
       }
+    }
+
+    // Reset custom size when size prop changes or when resizable is disabled
+    if (
+      (changedProperties.has('size') && this.resizable && !this.slideIn) ||
+      (changedProperties.has('resizable') && !this.resizable)
+    ) {
+      this.style.removeProperty('--cds-side-panel-modified-size');
+    }
+
+    // Update stored width when resizable changes or panel opens
+    if (
+      (changedProperties.has('resizable') || changedProperties.has('open')) &&
+      this.resizable &&
+      !this.slideIn &&
+      this.open
+    ) {
+      await this.updateComplete;
+      this._sidePanelWidth = this._sidePanel?.clientWidth;
     }
   }
 
@@ -969,6 +1254,8 @@ class CDSSidePanel extends HostListenerMixin(LitElement) {
   static get eventNavigateBack() {
     return `${prefix}-side-panel-navigate-back`;
   }
+
+  static styles = styles; // `styles` here is a `CSSResult` generated by custom WebPack loader
 }
 
 export default CDSSidePanel;
