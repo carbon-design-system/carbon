@@ -62,6 +62,8 @@ export * from './components/Icon/Icon.Skeleton';
 export * from './components/IdPrefix';
 export { InlineCheckbox } from './components/InlineCheckbox';
 export * from './components/InlineLoading';
+// TODO: uncomment in v12 — also remove from excludeProductsComponents
+// export * from './components/InterstitialScreen';
 export * from './components/Link';
 export * from './components/ListItem';
 export * from './components/Loading';
