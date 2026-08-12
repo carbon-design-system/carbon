@@ -33,58 +33,284 @@ export default {
     },
   },
   argTypes: {
-    // Hide all inherited HTML attributes
+    // ── Hidden: inherited HTML attrs not relevant to this component ──────────
     style: { table: { disable: true } },
     id: { table: { disable: true } },
     tabIndex: { table: { disable: true } },
     ref: { table: { disable: true } },
-    // Hide node/function props with no useful Storybook control
     children: { table: { disable: true } },
     className: { table: { disable: true } },
-    triggerButtonRef: { table: { disable: true } },
-    onClickOutside: { table: { disable: true } },
-    onDismissAllNotifications: { table: { disable: true } },
-    onDismissSingleNotification: { table: { disable: true } },
-    onDoNotDisturbChange: { table: { disable: true } },
-    onSettingsClick: { table: { disable: true } },
-    onViewAllClick: { table: { disable: true } },
-    // Component-specific props
-    open: { control: 'boolean' },
-    doNotDisturbDefaultToggled: { control: 'boolean' },
+
+    // ── Required / data props ────────────────────────────────────────────────
+    data: {
+      control: false,
+      description:
+        'Array of notification objects to render. Each object supports: `id`, `type` (`"error"` | `"warning"` | `"success"` | `"informational"`), `timestamp` (Date), `title`, `description`, `link` (`{ text, url }`), `unread` (boolean), `onNotificationClick` (function).',
+      table: { category: 'Data', type: { summary: 'NotificationData[]' } },
+    },
+
+    // ── Boolean props ────────────────────────────────────────────────────────
+    open: {
+      control: 'boolean',
+      description: 'Whether the notifications panel is visible.',
+      table: { category: 'State' },
+    },
+    doNotDisturbDefaultToggled: {
+      control: 'boolean',
+      description:
+        'Initial toggled state of the "Do not disturb" toggle. Only rendered when `onDoNotDisturbChange` is provided.',
+      table: { category: 'State' },
+    },
+
+    // ── Localization ─────────────────────────────────────────────────────────
+    dateTimeLocale: {
+      control: 'text',
+      description:
+        'BCP 47 locale string (e.g. `"de"`, `"fr-CA"`) used to format relative timestamps via `@carbon/utilities`. When provided, the deprecated `*AgoText` props are ignored.',
+      table: { category: 'Localization' },
+    },
     dateTimeStyle: {
       control: { type: 'select' },
       options: ['long', 'short', 'narrow'],
+      description:
+        'Verbosity of the relative timestamp when `dateTimeLocale` is set. `"long"` → "6 minutes ago", `"short"` → "6m ago".',
+      table: { category: 'Localization' },
+    },
+
+    // ── Label props ──────────────────────────────────────────────────────────
+    dismissAllLabel: {
+      control: 'text',
+      description: 'Label for the "Dismiss all" button.',
+      table: { category: 'Labels' },
+    },
+    dismissSingleNotificationIconDescription: {
+      control: 'text',
+      description:
+        "Accessible label for each notification's dismiss icon button.",
+      table: { category: 'Labels' },
+    },
+    doNotDisturbLabel: {
+      control: 'text',
+      description: 'Label text for the "Do not disturb" toggle.',
+      table: { category: 'Labels' },
+    },
+    emptyStateLabel: {
+      control: 'text',
+      description:
+        'Text shown in the empty state when there are no notifications.',
+      table: { category: 'Labels' },
+    },
+    previousLabel: {
+      control: 'text',
+      description: 'Section heading for notifications older than yesterday.',
+      table: { category: 'Labels' },
+    },
+    readLessLabel: {
+      control: 'text',
+      description:
+        'Label for the collapse button on long notification descriptions.',
+      table: { category: 'Labels' },
+    },
+    readMoreLabel: {
+      control: 'text',
+      description:
+        'Label for the expand button on long notification descriptions.',
+      table: { category: 'Labels' },
+    },
+    settingsIconDescription: {
+      control: 'text',
+      description: 'Accessible label for the settings gear icon button.',
+      table: { category: 'Labels' },
+    },
+    title: {
+      control: 'text',
+      description: 'Panel heading text.',
+      table: { category: 'Labels' },
+    },
+    todayLabel: {
+      control: 'text',
+      description: "Section heading for today's notifications.",
+      table: { category: 'Labels' },
+    },
+    yesterdayLabel: {
+      control: 'text',
+      description: "Section heading for yesterday's notifications.",
+      table: { category: 'Labels' },
+    },
+    viewAllLabel: {
+      control: false,
+      description:
+        'Function returning the "View all" button label. Receives the total notification count. Example: `(n) => `View all (${n})``.',
+      table: {
+        category: 'Labels',
+        type: { summary: '(count: number) => string' },
+      },
     },
     illustrationTheme: {
       control: { type: 'select' },
       options: ['light', 'dark'],
+      description:
+        'Theme of the empty-state illustration. Pass `"dark"` when your app uses a dark Carbon theme.',
+      table: { category: 'Appearance' },
     },
-    dismissAllLabel: { control: 'text' },
-    dismissSingleNotificationIconDescription: { control: 'text' },
-    doNotDisturbLabel: { control: 'text' },
-    emptyStateLabel: { control: 'text' },
-    previousLabel: { control: 'text' },
-    readLessLabel: { control: 'text' },
-    readMoreLabel: { control: 'text' },
-    settingsIconDescription: { control: 'text' },
-    title: { control: 'text' },
-    todayLabel: { control: 'text' },
-    yesterdayLabel: { control: 'text' },
-    // Hide deprecated text-function props
-    daysAgoText: { table: { disable: true } },
-    hourAgoText: { table: { disable: true } },
-    hoursAgoText: { table: { disable: true } },
-    minuteAgoText: { table: { disable: true } },
-    minutesAgoText: { table: { disable: true } },
-    monthAgoText: { table: { disable: true } },
-    monthsAgoText: { table: { disable: true } },
-    nowText: { table: { disable: true } },
-    secondsAgoText: { table: { disable: true } },
-    yearAgoText: { table: { disable: true } },
-    yearsAgoText: { table: { disable: true } },
-    yesterdayAtText: { table: { disable: true } },
-    viewAllLabel: { table: { disable: true } },
-    data: { table: { disable: true } },
+
+    // ── Callbacks ────────────────────────────────────────────────────────────
+    onClickOutside: {
+      control: false,
+      description: 'Called when a click is detected outside the panel.',
+      table: { category: 'Callbacks', type: { summary: '() => void' } },
+    },
+    onDismissAllNotifications: {
+      control: false,
+      description: 'Called when the "Dismiss all" button is clicked.',
+      table: { category: 'Callbacks', type: { summary: '() => void' } },
+    },
+    onDismissSingleNotification: {
+      control: false,
+      description:
+        "Called when a single notification's dismiss button is clicked. Receives the notification data object.",
+      table: {
+        category: 'Callbacks',
+        type: { summary: '(notification: NotificationData) => void' },
+      },
+    },
+    onDoNotDisturbChange: {
+      control: false,
+      description:
+        'Called when the "Do not disturb" toggle changes. Receives the new boolean value. Panel renders the toggle only when this prop is provided.',
+      table: {
+        category: 'Callbacks',
+        type: { summary: '(checked: boolean) => void' },
+      },
+    },
+    onSettingsClick: {
+      control: false,
+      description:
+        'Called when the settings gear icon is clicked. The settings button is only rendered when both `onSettingsClick` and `onViewAllClick` are provided.',
+      table: { category: 'Callbacks', type: { summary: '() => void' } },
+    },
+    onViewAllClick: {
+      control: false,
+      description:
+        'Called when the "View all" button is clicked. The button is only rendered when both `onViewAllClick` and `onSettingsClick` are provided.',
+      table: { category: 'Callbacks', type: { summary: '() => void' } },
+    },
+    triggerButtonRef: {
+      control: false,
+      description:
+        'Ref to the trigger button element. Used to return focus to the trigger when the panel is closed.',
+      table: {
+        category: 'Callbacks',
+        type: { summary: 'RefObject<HTMLElement>' },
+      },
+    },
+
+    // ── Deprecated: legacy timestamp text functions ──────────────────────────
+    daysAgoText: {
+      control: false,
+      description:
+        '**Deprecated** — use `dateTimeLocale` instead. Function returning the "N days ago" string.',
+      table: {
+        category: 'Deprecated',
+        type: { summary: '(value: number) => string' },
+      },
+    },
+    hourAgoText: {
+      control: false,
+      description:
+        '**Deprecated** — use `dateTimeLocale` instead. Function returning the "1 hour ago" string.',
+      table: {
+        category: 'Deprecated',
+        type: { summary: '(value: number) => string' },
+      },
+    },
+    hoursAgoText: {
+      control: false,
+      description:
+        '**Deprecated** — use `dateTimeLocale` instead. Function returning the "N hours ago" string.',
+      table: {
+        category: 'Deprecated',
+        type: { summary: '(value: number) => string' },
+      },
+    },
+    minuteAgoText: {
+      control: false,
+      description:
+        '**Deprecated** — use `dateTimeLocale` instead. Function returning the "1 minute ago" string.',
+      table: {
+        category: 'Deprecated',
+        type: { summary: '(value: number) => string' },
+      },
+    },
+    minutesAgoText: {
+      control: false,
+      description:
+        '**Deprecated** — use `dateTimeLocale` instead. Function returning the "N minutes ago" string.',
+      table: {
+        category: 'Deprecated',
+        type: { summary: '(value: number) => string' },
+      },
+    },
+    monthAgoText: {
+      control: false,
+      description:
+        '**Deprecated** — use `dateTimeLocale` instead. Function returning the "1 month ago" string.',
+      table: {
+        category: 'Deprecated',
+        type: { summary: '(value: number) => string' },
+      },
+    },
+    monthsAgoText: {
+      control: false,
+      description:
+        '**Deprecated** — use `dateTimeLocale` instead. Function returning the "N months ago" string.',
+      table: {
+        category: 'Deprecated',
+        type: { summary: '(value: number) => string' },
+      },
+    },
+    nowText: {
+      control: false,
+      description:
+        '**Deprecated** — use `dateTimeLocale` instead. String displayed for timestamps within the last 10 seconds.',
+      table: { category: 'Deprecated', type: { summary: 'string' } },
+    },
+    secondsAgoText: {
+      control: false,
+      description:
+        '**Deprecated** — use `dateTimeLocale` instead. Function returning the "N seconds ago" string.',
+      table: {
+        category: 'Deprecated',
+        type: { summary: '(value: number) => string' },
+      },
+    },
+    yearAgoText: {
+      control: false,
+      description:
+        '**Deprecated** — use `dateTimeLocale` instead. Function returning the "1 year ago" string.',
+      table: {
+        category: 'Deprecated',
+        type: { summary: '(value: number) => string' },
+      },
+    },
+    yearsAgoText: {
+      control: false,
+      description:
+        '**Deprecated** — use `dateTimeLocale` instead. Function returning the "N years ago" string.',
+      table: {
+        category: 'Deprecated',
+        type: { summary: '(value: number) => string' },
+      },
+    },
+    yesterdayAtText: {
+      control: false,
+      description:
+        '**Deprecated** — use `dateTimeLocale` instead. Function returning the "Yesterday at HH:MM" string.',
+      table: {
+        category: 'Deprecated',
+        type: { summary: '(value: number) => string' },
+      },
+    },
   },
 };
 
