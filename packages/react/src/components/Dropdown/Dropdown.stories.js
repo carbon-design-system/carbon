@@ -6,23 +6,15 @@
  */
 
 import React from 'react';
-import { FolderOpen, Folders, Information, View } from '@carbon/icons-react';
+import { FolderOpen, Folders, View } from '@carbon/icons-react';
 
 import { WithLayer } from '../../../.storybook/templates/WithLayer';
 
 import { default as Dropdown, DropdownSkeleton } from './';
 import Button from '../Button';
 import { AILabel, AILabelContent, AILabelActions } from '../AILabel';
-import {
-  Toggletip,
-  ToggletipActions,
-  ToggletipButton,
-  ToggletipContent,
-  ToggletipLabel,
-} from '../Toggletip';
 import { IconButton } from '../IconButton';
 import mdx from './Dropdown.mdx';
-import Link from '../Link';
 
 const items = [
   {
@@ -501,46 +493,6 @@ withAILabel.args = {
   ...sharedArgs,
   label: 'Option 1',
 };
-
-export const withToggletipLabel = ({ titleText, ...args }) => {
-  return (
-    <div style={{ width: 400 }}>
-      <Dropdown
-        {...args}
-        id="dropdown"
-        items={[]}
-        titleText={
-          <div style={{ display: 'flex', alignItems: 'center' }}>
-            <ToggletipLabel>{titleText}</ToggletipLabel>
-            <Toggletip>
-              <ToggletipButton label="Show information">
-                <Information />
-              </ToggletipButton>
-              <ToggletipContent>
-                <p>
-                  Lorem ipsum dolor sit amet, di os consectetur adipiscing elit,
-                  sed do eiusmod tempor incididunt ut fsil labore et dolore
-                  magna aliqua.
-                </p>
-                <ToggletipActions>
-                  <Link href="#">Link action</Link>
-                  <Button size="sm">Button</Button>
-                </ToggletipActions>
-              </ToggletipContent>
-            </Toggletip>
-          </div>
-        }
-      />
-    </div>
-  );
-};
-
-withToggletipLabel.args = {
-  ...sharedArgs,
-  helperText: '',
-  label: 'placeholder',
-};
-withToggletipLabel.argTypes = { ...sharedArgTypes };
 
 // Hidden Test-Only Story. This story tests for a bug where the invalid-text would overlap with components below it. #19960
 export const TestInvalidTextNoOverlap = () => {
