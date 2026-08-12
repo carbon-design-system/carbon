@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2025
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -591,6 +591,10 @@ export type { RadioButtonSkeletonProps } from './components/RadioButton/RadioBut
 export type { RadioButtonGroupProps } from './components/RadioButtonGroup/RadioButtonGroup';
 export type { RadioTileProps } from './components/RadioTile/RadioTile';
 
+// TODO: uncomment in v12 — also remove from excludeProductsComponents (migrated from @carbon/ibm-products)
+// export { ScrollGradient } from './components/ScrollGradient';
+// export type { ScrollGradientProps } from './components/ScrollGradient';
+
 //search
 export type { SearchProps } from './components/Search/Search';
 export type { SearchSkeletonProps } from './components/Search/Search.Skeleton';
@@ -735,10 +739,6 @@ export type { SwitcherItemProps } from './components/UIShell/SwitcherItem';
 // TODO: ibm-products migration in progress — re-enable when component is ready
 // export { TruncatedText } from './components/TruncatedText';
 // export type { TruncatedTextProps } from './components/TruncatedText';
-
-// TODO: uncomment in v12 — also remove from excludeProductsComponents
-// export { ScrollGradient } from './components/ScrollGradient';
-// export type { ScrollGradientProps } from './components/ScrollGradient';
 
 //unordered list
 export type { UnorderedListProps } from './components/UnorderedList/UnorderedList';
