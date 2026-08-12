@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2020, 2026
+ * Copyright IBM Corp. 2020, 2024
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -10,9 +10,41 @@
 // component is still in migration, so we load it explicitly here.
 @use '@carbon/styles/scss/components/notifications-panel';
 @use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/spacing' as *;
 
 .sb-show-main,
 .docs-story {
   /* stylelint-disable-next-line declaration-no-important */
   background-color: $layer-01 !important;
+}
+
+// ---------------------------------------------------------------------------
+// Story layout helpers
+// ---------------------------------------------------------------------------
+
+$story-block-class: 'cds--notifications-panel__story';
+
+.#{$story-block-class}--full-height {
+  block-size: 100vh;
+}
+
+.#{$story-block-class}__add {
+  padding: $spacing-10 0 0 $spacing-05;
+}
+
+.#{$story-block-class}__header-panel {
+  padding: $spacing-10 $spacing-05 0;
+  font-weight: bold;
+  line-height: 1.4;
+  text-align: center;
+}
+
+// Ensure the header global bar sits above the notification panel
+.cds--header__global {
+  z-index: 2;
+}
+
+// Mirror unread notification bell SVG in RTL
+[dir='rtl'] .sb-unread-notification-icon {
+  transform: scaleX(-1);
 }

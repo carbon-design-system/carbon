@@ -19,6 +19,9 @@ import {
   HeaderPanel,
 } from '../..';
 import { Close, Notification, Switcher, User } from '@carbon/icons-react';
+import { UnreadNotificationBell } from './UnreadNotificationBell';
+
+const storyBlockClass = 'cds--notifications-panel__story';
 
 export default {
   title: 'Components/NotificationsPanel',
@@ -183,6 +186,7 @@ const sampleData = [
 export const Default = (args) => {
   const { open, ...rest } = args;
   const [notificationsData, setNotificationsData] = useState(sampleData);
+  const [hasUnreadNotifications, setHasUnreadNotifications] = useState(true);
   const [notificationsOpen, setNotificationsOpen] = useState(open);
   const [userOpen, setUserOpen] = useState(false);
   const [switcherOpen, setSwitcherOpen] = useState(false);
@@ -190,13 +194,27 @@ export const Default = (args) => {
   const notificationActionRef = useRef(null);
   const switcherActionRef = useRef(null);
 
+  // Track whether any notification is unread
+  useEffect(() => {
+    setHasUnreadNotifications(notificationsData.some((n) => n.unread === true));
+  }, [notificationsData]);
+
+  // Mark all as read when panel opens
+  useEffect(() => {
+    if (notificationsOpen) {
+      setNotificationsData((prev) =>
+        prev.map((n) => ({ ...n, unread: false }))
+      );
+    }
+  }, [notificationsOpen]);
+
   // Sync Storybook control → local state
   useEffect(() => {
     setNotificationsOpen(open);
   }, [open]);
 
   return (
-    <div style={{ minHeight: '40rem' }}>
+    <div className={`${storyBlockClass}--full-height`}>
       <Header aria-label="IBM Cloud Pak">
         <HeaderName href="/" prefix="IBM" onClick={(e) => e.preventDefault()}>
           Cloud Pak
@@ -214,7 +232,9 @@ export const Default = (args) => {
             {userOpen ? <Close size={20} /> : <User size={20} />}
           </HeaderGlobalAction>
           <HeaderPanel expanded={userOpen}>
-            <div style={{ padding: '1rem' }}>User account panel</div>
+            <div className={`${storyBlockClass}__header-panel`}>
+              User account panel
+            </div>
           </HeaderPanel>
 
           <HeaderGlobalAction
@@ -231,6 +251,8 @@ export const Default = (args) => {
             }}>
             {notificationsOpen ? (
               <Close size={20} />
+            ) : hasUnreadNotifications ? (
+              <UnreadNotificationBell />
             ) : (
               <Notification size={20} />
             )}
@@ -271,11 +293,13 @@ export const Default = (args) => {
             {switcherOpen ? <Close size={20} /> : <Switcher size={20} />}
           </HeaderGlobalAction>
           <HeaderPanel expanded={switcherOpen}>
-            <div style={{ padding: '1rem' }}>App switcher panel</div>
+            <div className={`${storyBlockClass}__header-panel`}>
+              App switcher panel
+            </div>
           </HeaderPanel>
         </HeaderGlobalBar>
       </Header>
-      <main style={{ padding: '1rem' }}>
+      <main className={`${storyBlockClass}__add`}>
         <Button
           onClick={() => {
             const newItem = {
