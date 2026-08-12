@@ -73,6 +73,8 @@ export * from './components/MultiSelect';
 export * from './components/Notification';
 export * from './components/NumberInput';
 export * from './components/OrderedList';
+// TODO: uncomment in v12 — also remove from excludeProductsComponents
+// export * from './components/OptionsTile';
 export * from './components/OverflowMenu';
 export * from './components/OverflowMenuItem';
 export * as unstable__PageHeader from './components/PageHeader';
@@ -538,6 +540,9 @@ export type { NumberInputSkeletonProps } from './components/NumberInput/NumberIn
 
 //ordered list
 export type { OrderedListProps } from './components/OrderedList/OrderedList';
+
+//options tile (migrated from @carbon/ibm-products)
+// export type { OptionsTileProps } from './components/OptionsTile';
 
 //overflow menu
 export type { OverflowMenuProps } from './components/OverflowMenu/OverflowMenu';
