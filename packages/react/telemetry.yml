@@ -13,6 +13,7 @@ collect:
         - accept
         - action
         - actionButtonLabel
+        - actions
         - activation
         - active
         - addFocusListeners
@@ -263,6 +264,9 @@ collect:
         # ActionableNotification
         - closeOnEscape
         - hasFocus
+        # ActionSet
+        - buttonSize
+        - disableStacking
         # AILabel
         - AILabelContent
         - aiText
@@ -279,6 +283,10 @@ collect:
         # ButtonSet
         - fluid
         - stacked
+        # Calendar
+        - context
+        - onDateSelect
+        - onNavigate
         # ChatButton
         - isQuickAction
         # ClickableTile
@@ -326,6 +334,9 @@ collect:
         - parseDate
         - prevMonthAriaLabel
         - short
+        # DatePickerInput
+        - hideIcon
+        - onIconClick
         # DatePickerSkeleton
         - range
         # DefinitionTooltip
@@ -486,7 +497,6 @@ collect:
         # PageHeaderContent
         - contextualActions
         # PageHeaderContentPageActions
-        - actions
         - menuButtonLabel
         # PageHeaderTabBar
         - tags
@@ -529,6 +539,11 @@ collect:
         - current
         - overflowTooltipProps
         - tooltipId
+        # Resizer
+        - onDoubleClick
+        - onResize
+        - onResizeEnd
+        - thickness
         # Select
         - noLabel
         # SelectItem
@@ -547,6 +562,20 @@ collect:
         - assistiveText
         # SideNavSwitcher
         - options
+        # SidePanel
+        - actionToolbarButtons
+        - aiLabel
+        - animateTitle
+        - closeIconDescription
+        - closeIconTooltipAlignment
+        - condensedActions
+        - currentStep
+        - includeOverlay
+        - navigationBackIconDescription
+        - placement
+        - resizable
+        - selectorPageContent
+        - slideIn
         # Slider
         - ariaLabelInput
         - formatLabel
@@ -640,6 +669,12 @@ collect:
         # TreeView
         - multiselect
         - onActivate
+        # TruncatedText
+        - collapseLabel
+        - expandLabel
+        - lines
+        # WithCustomContext
+        - onLog
         # React
         - key
         - ref
@@ -890,6 +925,7 @@ collect:
         - cool-gray
         - cyan
         - default
+        - expand
         - gray
         - green
         - high-contrast
@@ -907,6 +943,7 @@ collect:
         - submit
         - teal
         - text
+        - tooltip
         - warm-gray
         # AspectRatio - ratio
         - 16x9
@@ -969,6 +1006,9 @@ collect:
         # ShapeIndicator - textSize
         - "12"
         - "14"
+        # SidePanel - placement
+        - left
+        - right
         # TableBody - aria-live
         - assertive
         - off
