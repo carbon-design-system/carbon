@@ -10,6 +10,7 @@ import PropTypes from 'prop-types';
 import React, {
   cloneElement,
   forwardRef,
+  useRef,
   type HTMLAttributes,
   type MouseEventHandler,
   type ReactNode,
@@ -25,6 +26,7 @@ import type { TFunc, TranslateWithId } from '../../types/common';
 import { sortStates, type DataTableSortState } from './state/sortStates';
 import { AILabel } from '../AILabel';
 import { isComponentElement } from '../../internal';
+import { useNoInteractiveChildren } from '../../internal/useNoInteractiveChildren';
 
 const defaultScope = 'col';
 
@@ -165,6 +167,7 @@ const TableHeader = frFn((props, ref) => {
 
   const prefix = usePrefix();
   const uniqueId = useId('table-sort');
+  const headerLabelRef = useRef<HTMLDivElement>(null);
 
   // AILabel is always size `mini`
   const candidate = slug ?? decorator;
@@ -180,6 +183,11 @@ const TableHeader = frFn((props, ref) => {
       colHasAILabel,
     [`${prefix}--table-header-label--decorator`]: decorator,
   });
+
+  useNoInteractiveChildren(
+    headerLabelRef,
+    'The TableHeader component `children` prop must have no interactive content when `isSortable` is true'
+  );
 
   if (!isSortable) {
     return (
@@ -244,7 +252,9 @@ const TableHeader = frFn((props, ref) => {
         onClick={onClick}
         {...rest}>
         <span className={`${prefix}--table-sort__flex`}>
-          <div className={`${prefix}--table-header-label`}>{children}</div>
+          <div className={`${prefix}--table-header-label`} ref={headerLabelRef}>
+            {children}
+          </div>
           <Arrow size={20} className={`${prefix}--table-sort__icon`} />
           <Arrows
             size={20}
