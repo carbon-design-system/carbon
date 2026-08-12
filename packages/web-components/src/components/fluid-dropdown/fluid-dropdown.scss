@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp.2026
+ * Copyright IBM Corp. 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -11,7 +11,9 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/components/dropdown' as *;
 @use '@carbon/styles/scss/components/list-box' as *;
 @use '@carbon/styles/scss/utilities/layout' as *;
+@use '@carbon/styles/scss/feature-flags' as flags;
 @use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/border-radius' as *;
 @use '@carbon/styles/scss/theme' as *;
 @use '@carbon/styles/scss/type' as *;
 @use '@carbon/styles/scss/utilities/skeleton' as *;
@@ -46,9 +48,11 @@ $css--plex: true !default;
   }
 
   .#{$prefix}--list-box__menu {
-    inset-block-start: 100%;
-    margin-block-start: 1px;
     outline: none;
+    @if not flags.enabled('enable-v12-release') {
+      inset-block-start: 100%;
+      margin-block-start: 1px;
+    }
   }
 
   .#{$prefix}--list-box--disabled {
@@ -191,6 +195,11 @@ $css--plex: true !default;
   .#{$prefix}--list-box__selection {
     pointer-events: none;
   }
+  @if flags.enabled('enable-v12-release') {
+    .#{$prefix}--list-box {
+      border-color: $border-subtle;
+    }
+  }
 }
 
 :host(#{$prefix}-fluid-dropdown[invalid]:not([disabled]):not([read-only])),
@@ -203,6 +212,9 @@ $css--plex: true !default;
 
   .#{$prefix}--list-box {
     border-block-end: 1px solid transparent;
+    @if flags.enabled('enable-v12-release') {
+      background: none;
+    }
   }
 
   .#{$prefix}--list-box.#{$prefix}--list-box--warning
@@ -211,6 +223,13 @@ $css--plex: true !default;
     inset-block-start: to-rem(81px);
     inset-inline-end: $spacing-05;
     pointer-events: none;
+  }
+}
+
+@if flags.enabled('enable-v12-release') {
+  :host(#{$prefix}-fluid-dropdown[warn]:not([disabled]):not([read-only])) {
+    border-radius: $border-radius-04;
+    border-block-end: 1px solid $border-strong;
   }
 }
 

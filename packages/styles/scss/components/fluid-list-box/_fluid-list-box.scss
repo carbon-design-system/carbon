@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2022
+// Copyright IBM Corp. 2022, 2026
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -26,6 +26,15 @@
     transition:
       background-color $duration-fast-01 motion(standard, productive),
       outline $duration-fast-01 motion(standard, productive);
+
+    @if enabled('enable-v12-release') {
+      .#{$prefix}--list-box[data-invalid],
+      .#{$prefix}--list-box--warning {
+        background: none;
+      }
+
+      border-radius: $border-radius-04;
+    }
   }
 
   .#{$prefix}--list-box__wrapper--fluid .#{$prefix}--list-box {
@@ -180,6 +189,10 @@
     ~ .#{$prefix}--form-requirement {
     padding: convert.to-rem(8px) 4rem convert.to-rem(8px) $spacing-05;
     margin-block-start: 0;
+
+    @if enabled('enable-v12-release') {
+      border-radius: $border-radius-04;
+    }
   }
 
   .#{$prefix}--list-box__wrapper--fluid
