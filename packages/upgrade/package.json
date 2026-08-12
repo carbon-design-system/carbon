@@ -39,7 +39,7 @@
     "postinstall": "ibmtelemetry --config=telemetry.yml"
   },
   "devDependencies": {
-    "chalk": "^5.4.1",
+    "chalk": "^6.0.0",
     "execa": "^9.6.0",
     "fast-glob": "^3.3.3",
     "fs-extra": "^11.0.0",
