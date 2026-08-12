@@ -8,6 +8,7 @@ export default defineConfig({
     onlyBundle: false,
     neverBundle: ['jscodeshift'],
   },
+  failOnWarn: true,
   logLevel: 'warn',
   platform: 'node',
   target: 'node14',
