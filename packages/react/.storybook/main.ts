@@ -11,8 +11,11 @@ import { fileURLToPath } from 'node:url';
 
 import remarkGfm from 'remark-gfm';
 import glob from 'fast-glob';
+import babel from '@rolldown/plugin-babel';
 import react from '@vitejs/plugin-react';
 import { mergeConfig } from 'vite';
+
+import { productMigratedStoryGlobs } from '../product-migrated-components.mjs';
 
 const configDir = fileURLToPath(new URL('.', import.meta.url));
 
@@ -39,7 +42,12 @@ const storyGlobs = [
 ];
 
 const stories = glob.sync(storyGlobs, {
-  ignore: ['../src/**/docs/*.mdx', '../src/**/next/docs/*.mdx'],
+  ignore: [
+    '../src/**/docs/*.mdx',
+    '../src/**/next/docs/*.mdx',
+    // ibm-products components in migration are v12-only; exclude from v11 Storybook
+    ...productMigratedStoryGlobs,
+  ],
   cwd: configDir,
 });
 
@@ -93,6 +101,7 @@ const config: StorybookConfig = {
         },
       },
       optimizeDeps: {
+        exclude: ['@carbon/motion'],
         rolldownOptions: {
           moduleTypes: {
             '.js': 'jsx',
@@ -107,11 +116,9 @@ const config: StorybookConfig = {
           // parse as JS. using regex matches the same set of files (and the
           // plugin's own default) without that bug
           include: /\.[jt]sx?$/,
-          babel: {
-            presets: ['babel-preset-carbon'],
-            babelrc: false,
-            configFile: false,
-          },
+        }),
+        babel({
+          presets: ['babel-preset-carbon'],
         }),
       ],
       resolve: {

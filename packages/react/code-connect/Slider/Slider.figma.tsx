@@ -58,8 +58,6 @@ figma.connect(
         false: true,
         true: false,
       }),
-      invalidText: figma.string('Error text'),
-      warnText: figma.string('Warning text'),
       disabled: figma.enum('State', {
         Disabled: true,
       }),
@@ -81,7 +79,7 @@ figma.connect(
   }
 );
 
-//single
+// single skeleton
 figma.connect(
   SliderSkeleton,
   'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=3673-40574&m=dev',
@@ -91,7 +89,7 @@ figma.connect(
   }
 );
 
-//two handle
+// two handle skeleton
 figma.connect(
   SliderSkeleton,
   'https://www.figma.com/design/YAnB1jKx0yCUL29j6uSLpg/(v11)-All-themes---Carbon-Design-System?node-id=41061-1531&m=dev',

@@ -13,7 +13,7 @@
     "packages/*"
   ],
   "scripts": {
-    "build": "lerna run build --stream --prefix && node tasks/generate-repo-structure.js",
+    "build": "lerna run build --stream --prefix && node tasks/generate-repo-structure.mjs",
     "ci-check": "carbon-cli ci-check",
     "clean": "lerna run clean && lerna clean --yes && rimraf node_modules",
     "doctoc": "doctoc --title '## Table of Contents'",
@@ -39,7 +39,8 @@
     "flatpickr@4.6.13": "patch:flatpickr@npm%3A4.6.13#./.yarn/patches/flatpickr-npm-4.6.13-06399933fc.patch",
     "@octokit/rest": "^22.0.0",
     "eslint": "9.39.4",
-    "typescript-eslint": "8.61.0"
+    "typescript-eslint": "8.66.0",
+    "immutable": "^5.1.8"
   },
   "devDependencies": {
     "@babel/core": "^7.27.3",
@@ -57,7 +58,7 @@
     "@eslint/js": "^9.24.0",
     "@playwright/test": "^1.36.2",
     "@testing-library/dom": "^10.1.0",
-    "@testing-library/jest-dom": "^6.0.0",
+    "@testing-library/jest-dom": "^7.0.0",
     "@testing-library/react": "^16.0.0",
     "@testing-library/user-event": "^14.4.3",
     "@types/prop-types": "^15.7.13",
@@ -75,11 +76,11 @@
     "eslint-plugin-testing-library": "^7.6.6",
     "fs-extra": "^11.0.0",
     "glob": "^13.0.0",
-    "globals": "17.7.0",
+    "globals": "17.9.0",
     "husky": "^9.0.0",
     "jest": "^30.0.5",
     "jest-junit": "^17.0.0",
-    "lerna": "^9.0.1",
+    "lerna": "^10.0.0",
     "lint-staged": "^17.0.0",
     "prettier": "^3.3.3",
     "react": "^19.2.3",

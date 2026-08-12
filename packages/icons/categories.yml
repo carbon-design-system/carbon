@@ -284,6 +284,7 @@ categories:
           - vertical-view
       - name: Navigation
         members:
+          - activity--task
           - adapter-notification
           - add
           - add--alt
@@ -329,6 +330,7 @@ categories:
           - point
           - select--window
           - stickies
+          - subprocess
           - subtract
           - subtract--alt
           - subtract--filled
@@ -414,6 +416,7 @@ categories:
           - drill-back
           - drill-down
           - drill-through
+          - end-to-end--monitoring
           - equal--approximately
           - exit
           - expand-all
@@ -449,6 +452,7 @@ categories:
           - launch
           - layers
           - layers--external
+          - location--switch
           - login
           - logout
           - loop
@@ -539,10 +543,13 @@ categories:
           - tag--import
           - tag--none
           - test-tool
+          - tilde
+          - tilde--large
           - timing-belt
           - tour
           - translate
           - transpose
+          - unassigned--work-order
           - undo
           - unfold--open
           - update-complete
@@ -776,6 +783,7 @@ categories:
           - cloud-satellite--services
           - cobol-upgrade-advisor
           - content-delivery-network
+          - database--backups
           - database--datastax
           - database--elastic
           - database--enterprisedb
@@ -1619,6 +1627,7 @@ categories:
           - certificate
           - certificate--check
           - classification
+          - classification--groups
           - closed-caption
           - closed-caption--alt
           - closed-caption--filled
@@ -1667,6 +1676,7 @@ categories:
           - DVR
           - energy--report
           - export
+          - facility--groups
           - feedback-documentation
           - file--change
           - file--diff
@@ -1743,8 +1753,11 @@ categories:
           - PNG
           - policy
           - popup
+          - portfolio--groups
           - PPT
           - product
+          - product-categories
+          - purchasing-organizations
           - RAW
           - reference-architecture
           - repo--artifact
@@ -1861,6 +1874,7 @@ categories:
           - information--square--filled
           - key--values
           - locked-and-blocked
+          - missing-data--warning
           - misuse
           - misuse--outline
           - pending
@@ -1994,7 +2008,12 @@ categories:
           - fork-node
           - gateway
           - gateway--api
+          - gateway--exclusive
+          - gateway--inclusive
+          - gateway--inclusive--alt
           - gateway--mail
+          - gateway--parallel
+          - gateway--parallel--alt
           - gateway--public
           - gateway--security
           - gateway--user-access
