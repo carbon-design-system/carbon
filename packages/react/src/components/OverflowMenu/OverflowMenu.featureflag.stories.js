@@ -17,6 +17,52 @@ import { OverflowMenu } from './';
 import { WithFeatureFlags } from '../../../.storybook/templates/WithFeatureFlags';
 import { FeatureFlags } from '../FeatureFlags';
 
+const args = {
+  autoAlign: false,
+  label: 'Options',
+  menuAlignment: 'bottom-start',
+  size: 'md',
+  tooltipAlignment: 'top',
+};
+
+const tooltipAlignmentOptions = [
+  'top',
+  'top-start',
+  'top-end',
+  'bottom',
+  'bottom-start',
+  'bottom-end',
+  'left',
+  'left-start',
+  'left-end',
+  'right',
+  'right-start',
+  'right-end',
+];
+
+const argTypes = {
+  autoAlign: {
+    control: { type: 'boolean' },
+  },
+  label: {
+    control: { type: 'text' },
+  },
+  menuAlignment: {
+    options: ['bottom-start', 'bottom-end', 'top-start', 'top-end'],
+    control: { type: 'select' },
+    description:
+      'Specify how the menu should align with the button element `bottom-start` `bottom-end` `top-start` `top-end`',
+  },
+  size: {
+    options: ['xs', 'sm', 'md', 'lg'],
+    control: { type: 'select' },
+  },
+  tooltipAlignment: {
+    options: tooltipAlignmentOptions,
+    control: { type: 'select' },
+  },
+};
+
 export default {
   title: 'Components/OverflowMenu/Feature Flag',
   component: OverflowMenu,
@@ -182,10 +228,13 @@ export const Nested = (args) => {
 };
 
 export const WithMenuAlignment = (args) => {
+  const { autoAlign, label, size } = args;
+  const menuArgs = { autoAlign, label, size };
+
   return (
     <>
       <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-        <OverflowMenu {...args} menuAlignment="bottom-start">
+        <OverflowMenu {...menuArgs} menuAlignment="bottom-start">
           <MenuItem label="Stop app" />
           <MenuItem label="Restart app" />
           <MenuItem label="Rename app" />
@@ -194,7 +243,7 @@ export const WithMenuAlignment = (args) => {
           <MenuItem label="Delete app" kind="danger" />
         </OverflowMenu>
 
-        <OverflowMenu {...args} menuAlignment="bottom-end">
+        <OverflowMenu {...menuArgs} menuAlignment="bottom-end">
           <MenuItem label="Stop app" />
           <MenuItem label="Restart app" />
           <MenuItem label="Rename app" />
@@ -211,7 +260,7 @@ export const WithMenuAlignment = (args) => {
           justifyContent: 'space-between',
         }}>
         <OverflowMenu
-          {...args}
+          {...menuArgs}
           menuAlignment="top-start"
           tooltipAlignment="bottom">
           <MenuItem label="Stop app" />
@@ -223,7 +272,7 @@ export const WithMenuAlignment = (args) => {
         </OverflowMenu>
 
         <OverflowMenu
-          {...args}
+          {...menuArgs}
           menuAlignment="top-end"
           tooltipAlignment="bottom">
           <MenuItem label="Stop app" />

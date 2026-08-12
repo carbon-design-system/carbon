@@ -135,3 +135,22 @@ export const Default = (args) => (
 RenderCustomIcon.args = {
   renderIcon: Filter,
 };
+
+export const RenderCustomIcon = (args) => {
+  return (
+    <OverflowMenu {...args} renderIcon={Filter}>
+      <OverflowMenuItem itemText="Filter A" />
+      <OverflowMenuItem itemText="Filter B" />
+    </OverflowMenu>
+  );
+};
+export const Default = (args) => (
+  <OverflowMenu aria-label="overflow-menu" {...args}>
+    <OverflowMenuItem itemText="Stop app" />
+    <OverflowMenuItem itemText="Restart app" />
+    <OverflowMenuItem itemText="Rename app" />
+    <OverflowMenuItem itemText="Clone and move app" disabled requireTitle />
+    <OverflowMenuItem itemText="Edit routes and access" requireTitle />
+    <OverflowMenuItem hasDivider isDelete itemText="Delete app" />
+  </OverflowMenu>
+);

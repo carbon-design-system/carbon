@@ -184,3 +184,9 @@ $css--plex: true !default;
   .#{$prefix}--date-picker__input--decorator {
   @include ai-gradient;
 }
+
+.#{$prefix}--form-requirement {
+  box-sizing: border-box;
+  inline-size: 0;
+  min-inline-size: 100%;
+}
