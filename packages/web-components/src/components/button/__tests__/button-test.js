@@ -209,6 +209,16 @@ describe('cds-button', () => {
       expect(el).to.have.attribute('badge-count', '1200');
       await expect(el).shadowDom.to.equalSnapshot();
     });
+
+    it('should set aria-pressed for ghost variant when is-selected is true', async () => {
+      const el = await fixture(html`
+        <cds-button has-icon-only is-selected kind="ghost" size="lg">
+          <svg slot="icon" data-testid="svg"></svg>
+        </cds-button>
+      `);
+
+      expect(el.getAttribute('aria-pressed')).to.equal('true');
+    });
   });
 
   describe('Tooltip popover position classes', () => {
@@ -260,7 +270,7 @@ describe('cds-button', () => {
       `);
       el.openTooltip = true;
       await el.updateComplete;
-      await new Promise((resolve) => requestAnimationFrame(resolve));
+      await new Promise((resolve) => setTimeout(resolve, 0));
       const root = el.shadowRoot;
       return {
         el,
