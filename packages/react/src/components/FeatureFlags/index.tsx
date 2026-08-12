@@ -108,7 +108,7 @@ export interface FeatureFlagsProps {
    * Enable the contextual motion surface on `Popover` so it fades and scales
    * in/out when opened or closed.
    */
-  enableV12PopoverMotion?: boolean;
+  enableV12Motion?: boolean;
 }
 
 // Reuse the runtime scope shape from `@carbon/feature-flags` directly. A local
@@ -136,7 +136,7 @@ const PROP_TO_FLAG: Record<string, string> = {
   enableV12DynamicFloatingStyles: 'enable-v12-dynamic-floating-styles',
   enableEnhancedFileUploader: 'enable-enhanced-file-uploader',
   enablePresence: 'enable-presence',
-  enableV12PopoverMotion: 'enable-v12-popover-motion',
+  enableV12Motion: 'enable-v12-motion',
 };
 
 /**
@@ -158,7 +158,7 @@ export const FeatureFlags = ({
   enableV12DynamicFloatingStyles,
   enableEnhancedFileUploader,
   enablePresence,
-  enableV12PopoverMotion,
+  enableV12Motion,
 }: FeatureFlagsProps) => {
   const parentScope = useContext(FeatureFlagContext);
 
@@ -178,7 +178,7 @@ export const FeatureFlags = ({
       enableV12DynamicFloatingStyles,
       enableEnhancedFileUploader,
       enablePresence,
-      enableV12PopoverMotion,
+      enableV12Motion,
     };
     const explicitFlags: Record<string, boolean> = {};
 
@@ -208,7 +208,7 @@ export const FeatureFlags = ({
     enableV12DynamicFloatingStyles,
     enableEnhancedFileUploader,
     enablePresence,
-    enableV12PopoverMotion,
+    enableV12Motion,
     flags,
     parentScope,
   ]);
@@ -242,7 +242,7 @@ FeatureFlags.propTypes = {
   enableV12DynamicFloatingStyles: PropTypes.bool,
   enableEnhancedFileUploader: PropTypes.bool,
   enablePresence: PropTypes.bool,
-  enableV12PopoverMotion: PropTypes.bool,
+  enableV12Motion: PropTypes.bool,
 };
 
 /**

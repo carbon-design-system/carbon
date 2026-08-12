@@ -29,7 +29,7 @@ export const PopoverWithContextualMotion = () => {
   const [open, setOpen] = useState(false);
 
   return (
-    <FeatureFlags enableV12PopoverMotion>
+    <FeatureFlags enableV12Motion>
       <Popover
         open={open}
         onRequestClose={() => setOpen(false)}
@@ -57,13 +57,13 @@ export const PopoverWithContextualMotion = () => {
 /**
  * Tooltip. Tooltip is a thin wrapper around Popover + PopoverContent, so it
  * inherits the contextual surface motion automatically — no changes to
- * Tooltip.tsx are needed. The `enable-v12-popover-motion` flag activates the
+ * Tooltip.tsx are needed. The `enable-v12-motion` flag activates the
  * same fade + scale reveal on the tooltip panel.
  *
  * Hover or focus the icon button to see the animation.
  */
 export const TooltipWithContextualMotion = () => (
-  <FeatureFlags enableV12PopoverMotion>
+  <FeatureFlags enableV12Motion>
     <div style={{ display: 'flex', gap: '2rem', alignItems: 'center' }}>
       <Tooltip autoAlign align="bottom" description="tooltip label">
         <Button>This button has a tooltip</Button>

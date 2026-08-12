@@ -443,7 +443,7 @@ export const Popover: PopoverComponent & {
     }
   }, [enableFloatingStyles, open, elements, update]);
 
-  const enableMotion = useFeatureFlag('enable-v12-popover-motion');
+  const enableMotion = useFeatureFlag('enable-v12-motion');
 
   const value = useMemo(() => {
     return {
@@ -773,7 +773,7 @@ export const PopoverContent = frFn((props, forwardRef) => {
   const ref = useMergedRefs([setFloating, forwardRef]);
   const enableFloatingStyles =
     useFeatureFlag('enable-v12-dynamic-floating-styles') || autoAlign;
-  const enableMotion = useFeatureFlag('enable-v12-popover-motion');
+  const enableMotion = useFeatureFlag('enable-v12-motion');
 
   // When Motion owns visibility, AnimatePresence handles mount/unmount so the
   // CSS `display: none` base rule on `.cds--popover-content` must not apply.

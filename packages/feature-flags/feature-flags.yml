@@ -81,7 +81,7 @@ feature-flags:
       Enable components to remain unmounted in closed state and mount in open
       state.
     enabled: false
-  - name: enable-v12-popover-motion
+  - name: enable-v12-motion
     description: >
       Enable the contextual motion surface on Popover (fade and scale reveal on
       open/close).
