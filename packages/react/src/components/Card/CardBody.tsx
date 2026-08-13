@@ -16,9 +16,11 @@ const componentName = 'CardBody';
  * CardBody component - Body section of the card for free-form content
  */
 export const CardBody = forwardRef<HTMLDivElement, CardBodyProps>(
-  ({ className, children, ...rest }, ref) => {
+  ({ className, children, isFlush = false, ...rest }, ref) => {
     const prefix = usePrefix();
-    const bodyClasses = cx(`${prefix}--card__body`, className);
+    const bodyClasses = cx(`${prefix}--card__body`, className, {
+      [`${prefix}--card__body--flush`]: isFlush,
+    });
 
     return (
       <div {...rest} ref={ref} className={bodyClasses}>
