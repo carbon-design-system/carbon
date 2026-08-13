@@ -142,16 +142,18 @@ $list-box-menu-width: convert.to-rem(300px);
     cursor: default;
   }
 
-  .#{$prefix}--list-box--expanded {
-    border-block-end-color: $border-subtle-01;
-  }
+  @if not enabled('enable-v12-release') {
+    .#{$prefix}--list-box--expanded {
+      border-block-end-color: $border-subtle-01;
+    }
 
-  .#{$prefix}--layer-two .#{$prefix}--list-box--expanded {
-    border-block-end-color: $border-subtle-02;
-  }
+    .#{$prefix}--layer-two .#{$prefix}--list-box--expanded {
+      border-block-end-color: $border-subtle-02;
+    }
 
-  .#{$prefix}--layer-three .#{$prefix}--list-box--expanded {
-    border-block-end-color: $border-subtle-03;
+    .#{$prefix}--layer-three .#{$prefix}--list-box--expanded {
+      border-block-end-color: $border-subtle-03;
+    }
   }
 
   .#{$prefix}--list-box--expanded:hover {

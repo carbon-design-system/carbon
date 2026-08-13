@@ -99,7 +99,9 @@
   }
 
   .#{$prefix}--dropdown--open {
-    border-block-end-color: $border-subtle;
+    @if not enabled('enable-v12-release') {
+      border-block-end-color: $border-subtle;
+    }
   }
 
   .#{$prefix}--dropdown--open .#{$prefix}--list-box__field {

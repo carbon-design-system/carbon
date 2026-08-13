@@ -33,8 +33,10 @@ $css--plex: true !default;
     box-sizing: border-box;
   }
 
-  .#{$prefix}--list-box--expanded {
-    border-block-end-color: $border-subtle;
+  @if not flags.enabled('enable-v12-release') {
+    .#{$prefix}--list-box--expanded {
+      border-block-end-color: $border-subtle;
+    }
   }
 
   .#{$prefix}--assistive-text {
