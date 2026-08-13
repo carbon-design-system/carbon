@@ -9,7 +9,6 @@ import { Information } from '@carbon/icons-react';
 import React, { useRef, useEffect } from 'react';
 import { default as Button } from '../Button';
 import { default as Link } from '../Link';
-import Modal from '../Modal';
 import {
   ToggletipLabel,
   Toggletip,
@@ -45,6 +44,86 @@ const deprecatedAlignOptions = [
   'right-top',
 ];
 
+const defaultArgs = {
+  align: 'bottom',
+  alignmentAxisOffset: 0,
+  autoAlign: true,
+  bodyText:
+    'Your available balance reflects completed transactions and may not include pending activity.',
+  buttonLabel: 'Show account balance details',
+  buttonText: 'View balance',
+  defaultOpen: false,
+  labelText: 'Account balance',
+  linkText: 'Learn more',
+};
+
+const argTypes = {
+  align: {
+    options: alignOptions,
+    control: 'select',
+  },
+  alignDeprecated: {
+    name: 'align (deprecated)',
+    options: deprecatedAlignOptions,
+    control: 'select',
+    table: {
+      category: 'Deprecated',
+    },
+  },
+  alignmentAxisOffset: {
+    control: 'number',
+    if: { arg: 'autoAlign', eq: true },
+  },
+  autoAlign: {
+    control: 'boolean',
+  },
+  bodyText: {
+    control: 'text',
+    table: {
+      category: 'ToggletipContent',
+    },
+  },
+  buttonLabel: {
+    control: 'text',
+    table: {
+      category: 'ToggletipButton',
+    },
+  },
+  buttonText: {
+    control: 'text',
+    table: {
+      category: 'ToggletipActions',
+    },
+  },
+  defaultOpen: {
+    control: 'boolean',
+  },
+  labelText: {
+    control: 'text',
+    table: {
+      category: 'ToggletipLabel',
+    },
+  },
+  linkText: {
+    control: 'text',
+    table: {
+      category: 'ToggletipActions',
+    },
+  },
+};
+
+const experimentalArgTypes = {
+  ...argTypes,
+  autoAlign: {
+    ...argTypes.autoAlign,
+    table: { readonly: true },
+  },
+  defaultOpen: {
+    ...argTypes.defaultOpen,
+    table: { readonly: true },
+  },
+};
+
 export default {
   title: 'Components/Toggletip',
   component: Toggletip,
@@ -55,17 +134,33 @@ export default {
     ToggletipActions,
   },
   parameters: {
+    controls: {
+      include: Object.keys(argTypes),
+    },
     docs: {
       page: mdx,
     },
   },
 };
 
-export const ExperimentalAutoAlign = () => {
+export const ExperimentalAutoAlign = (args) => {
   const ref = useRef();
   useEffect(() => {
     ref?.current?.scrollIntoView({ block: 'center', inline: 'center' });
   });
+
+  const {
+    align,
+    alignDeprecated,
+    bodyText,
+    buttonLabel,
+    buttonText,
+    defaultOpen,
+    labelText,
+    linkText,
+    ...rest
+  } = args;
+  const resolvedAlign = alignDeprecated || align;
 
   return (
     <div style={{ width: '5000px', height: '5000px' }}>
@@ -76,21 +171,20 @@ export const ExperimentalAutoAlign = () => {
           left: '2500px',
           inlineSize: '8rem',
         }}>
-        <ToggletipLabel>Toggletip label</ToggletipLabel>
-        <Toggletip align="bottom" autoAlign defaultOpen>
-          <ToggletipButton label="Show information">
+        <ToggletipLabel>{labelText}</ToggletipLabel>
+        <Toggletip
+          key={defaultOpen ? 'open' : 'closed'}
+          align={resolvedAlign}
+          defaultOpen={defaultOpen}
+          {...rest}>
+          <ToggletipButton label={buttonLabel}>
             <Information ref={ref} />
           </ToggletipButton>
           <ToggletipContent>
-            <p>
-              Scroll the container up, down, left or right to observe how the
-              Toggletip will automatically change its position in attempt to
-              stay within the viewport. This works on initial render in addition
-              to on scroll.
-            </p>
+            <p>{bodyText}</p>
             <ToggletipActions>
-              <Link href="#">Link action</Link>
-              <Button size="sm">Button</Button>
+              <Link href="#">{linkText}</Link>
+              <Button size="sm">{buttonText}</Button>
             </ToggletipActions>
           </ToggletipContent>
         </Toggletip>
@@ -99,26 +193,49 @@ export const ExperimentalAutoAlign = () => {
   );
 };
 
+ExperimentalAutoAlign.args = {
+  ...defaultArgs,
+  autoAlign: true,
+  bodyText:
+    'Scroll the container to observe how the toggletip automatically changes position to stay within the viewport.',
+  buttonLabel: 'Show auto-alignment details',
+  buttonText: 'View details',
+  defaultOpen: true,
+  labelText: 'Automatic alignment',
+};
+ExperimentalAutoAlign.argTypes = experimentalArgTypes;
+
 // Note: autoAlign is used here only to make tooltips visible in StackBlitz,
 // autoAlign is in preview and not part of the actual implementation.
 export const Default = (args) => {
-  const { align, alignDeprecated, ...rest } = args;
+  const {
+    align,
+    alignDeprecated,
+    bodyText,
+    buttonLabel,
+    buttonText,
+    defaultOpen,
+    labelText,
+    linkText,
+    ...rest
+  } = args;
   const resolvedAlign = alignDeprecated || align;
   return (
     <>
-      <ToggletipLabel>Toggletip label</ToggletipLabel>
-      <Toggletip autoAlign align={resolvedAlign} {...rest}>
-        <ToggletipButton label="Show information">
+      <ToggletipLabel>{labelText}</ToggletipLabel>
+      <Toggletip
+        key={defaultOpen ? 'open' : 'closed'}
+        align={resolvedAlign}
+        defaultOpen={defaultOpen}
+        {...rest}>
+        <ToggletipButton label={buttonLabel}>
           <Information />
         </ToggletipButton>
         <ToggletipContent>
-          <p>
-            Lorem ipsum dolor sit amet, di os consectetur adipiscing elit, sed
-            do eiusmod tempor incididunt ut fsil labore et dolore magna aliqua.
-          </p>
+          <p>{bodyText}</p>
           <ToggletipActions>
-            <Link href="#">Link action</Link>
-            <Button size="sm">Button</Button>
+            <Link href="#">{linkText}</Link>
+            <Button size="sm">{buttonText}</Button>
           </ToggletipActions>
         </ToggletipContent>
       </Toggletip>
@@ -126,24 +243,8 @@ export const Default = (args) => {
   );
 };
 
-Default.argTypes = {
-  align: {
-    options: alignOptions,
-    control: {
-      type: 'select',
-    },
-  },
-  alignDeprecated: {
-    name: 'align (deprecated)',
-    options: deprecatedAlignOptions,
-    control: {
-      type: 'select',
-    },
-    table: {
-      category: 'Deprecated',
-    },
-  },
-};
+Default.args = defaultArgs;
+Default.argTypes = argTypes;
 
 Default.story = {
   decorators: [
