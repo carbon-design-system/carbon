@@ -287,6 +287,20 @@ collect:
         - context
         - onDateSelect
         - onNavigate
+        # Card
+        - clickable
+        - horizontal
+        # CardActions
+        - overflowMenuLabel
+        # CardMedia
+        - mediaWidth
+        # CardTitle
+        - descriptionTruncate
+        - labelTruncate
+        - maxWidth
+        - titleEnd
+        - titleStart
+        - titleTruncate
         # ChatButton
         - isQuickAction
         # ClickableTile
@@ -732,7 +746,9 @@ collect:
         - single
         # General - density
         - condensed
+        - expressive
         - normal
+        - productive
         # General - dir
         - auto
         - ltr
