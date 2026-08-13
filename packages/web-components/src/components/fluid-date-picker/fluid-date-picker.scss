@@ -111,14 +111,13 @@ $css--plex: true !default;
 }
 
 @if not flags.enabled('enable-v12-release') {
-  :host(#{$prefix}-fluid-date-picker-input[disabled]),
   :host(#{$prefix}-fluid-date-picker-input[readonly]) {
     border-block-end: 1px solid $border-subtle;
   }
 }
 
 @if flags.enabled('enable-v12-release') {
-  :host(#{$prefix}-fluid-date-picker-input) {
+  :host(#{$prefix}-fluid-date-picker-input:not([disabled]):not([readonly])) {
     // (gray-20 → gray-50)
     background:
       linear-gradient($field, $field) padding-box,
@@ -131,7 +130,7 @@ $css--plex: true !default;
   }
 
   :host(#{$prefix}-fluid-date-picker-input[readonly]) {
-    border-color: $border-subtle;
+    border-block-end-color: $border-subtle;
   }
 
   :host(#{$prefix}-fluid-date-picker-input[kind='from']) {

@@ -91,7 +91,8 @@ $css--plex: true !default;
 
   @if flags.enabled('enable-v12-release') {
     .#{$prefix}--list-box {
-      border-color: $border-subtle;
+      background: $field;
+      border-block-end-color: $border-subtle;
     }
   }
 }
