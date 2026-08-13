@@ -25,6 +25,10 @@
     transition:
       background-color $duration-fast-01 motion(standard, productive),
       outline $duration-fast-01 motion(standard, productive);
+
+    @if not enabled('enable-v12-release') {
+      background: $field;
+    }
   }
 
   .#{$prefix}--select--fluid .#{$prefix}--label {
@@ -110,7 +114,26 @@
 
   .#{$prefix}--select--fluid .#{$prefix}--select-input__wrapper {
     display: block;
-    border-radius: $border-radius-04;
+
+    @if enabled('enable-v12-release') {
+      border-radius: $border-radius-04;
+    }
+  }
+
+  .#{$prefix}--select--fluid .#{$prefix}--select-input__wrapper[data-invalid],
+  .#{$prefix}--select--fluid
+    .#{$prefix}--select--warning
+    .#{$prefix}--select-input__wrapper {
+    @if enabled('enable-v12-release') {
+      border-radius: $border-radius-04;
+      background: $field;
+
+      .#{$prefix}--select-input {
+        border: none;
+        border-radius: 0;
+        background: transparent;
+      }
+    }
   }
 
   .#{$prefix}--select--fluid

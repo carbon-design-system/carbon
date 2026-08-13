@@ -25,6 +25,10 @@
     transition:
       background-color $duration-fast-01 motion(standard, productive),
       outline $duration-fast-01 motion(standard, productive);
+
+    @if not enabled('enable-v12-release') {
+      background: $field;
+    }
   }
 
   .#{$prefix}--text-input--fluid .#{$prefix}--label {
@@ -93,6 +97,17 @@
   .#{$prefix}--text-input--fluid
     .#{$prefix}--text-input__field-wrapper--warning {
     display: block;
+
+    @if enabled('enable-v12-release') {
+      border-radius: $border-radius-04;
+      background: $field;
+
+      .#{$prefix}--text-input {
+        border: none;
+        border-radius: 0;
+        background: transparent;
+      }
+    }
   }
 
   .#{$prefix}--text-input--fluid input[data-invalid] {
