@@ -39,7 +39,7 @@
     "flatpickr@4.6.13": "patch:flatpickr@npm%3A4.6.13#./.yarn/patches/flatpickr-npm-4.6.13-06399933fc.patch",
     "@octokit/rest": "^22.0.0",
     "eslint": "9.39.4",
-    "typescript-eslint": "8.65.0",
+    "typescript-eslint": "8.66.0",
     "immutable": "^5.1.8"
   },
   "devDependencies": {
@@ -80,7 +80,7 @@
     "husky": "^9.0.0",
     "jest": "^30.0.5",
     "jest-junit": "^17.0.0",
-    "lerna": "^9.0.1",
+    "lerna": "^10.0.0",
     "lint-staged": "^17.0.0",
     "prettier": "^3.3.3",
     "react": "^19.2.3",
