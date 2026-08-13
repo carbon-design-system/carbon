@@ -210,7 +210,7 @@ describe('cds-button', () => {
       await expect(el).shadowDom.to.equalSnapshot();
     });
 
-    it('should set aria-pressed for ghost variant when is-selected is true', async () => {
+    it('should set aria-pressed for ghost variant when isSelected is true', async () => {
       const el = await fixture(html`
         <cds-button has-icon-only isSelected kind="ghost" size="lg">
           <svg slot="icon" data-testid="svg"></svg>
