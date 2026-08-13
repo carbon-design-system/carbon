@@ -271,7 +271,7 @@ describe('cds-button', () => {
       `);
       el.openTooltip = true;
       await el.updateComplete;
-      await new Promise((resolve) => setTimeout(resolve, 0));
+      await new Promise((resolve) => requestAnimationFrame(resolve));
       const root = el.shadowRoot;
       return {
         el,
