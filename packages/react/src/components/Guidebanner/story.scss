@@ -1,0 +1,24 @@
+//
+// Copyright IBM Corp. 2023, 2026
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+// Load the Guidebanner component styles directly for Storybook.
+// The global bundle (@carbon/styles) has this commented out while the
+// component is still in migration (PREVIEW), so we load it explicitly here.
+@use '@carbon/styles/scss/components/guidebanner';
+@use '@carbon/styles/scss/theme' as *;
+
+#storybook-root {
+  overflow-x: hidden;
+
+  @supports (overflow-inline: hidden) {
+    overflow-inline: hidden;
+  }
+}
+
+.non-linear-reading-stories__viewport {
+  margin: 0;
+}

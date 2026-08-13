@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2025
+ * Copyright IBM Corp. 2016, 2026
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -14,6 +14,17 @@ import './internal/warnAboutDeprecatedReactVersion';
 export * from './components/Accordion';
 // export { ActionSet } from './components/ActionSet';
 // export type { ActionSetProps } from './components/ActionSet';
+// TODO: uncomment in v12 — also remove from excludeProductsComponents
+// export {
+//   Guidebanner as preview__Guidebanner,
+//   GuidebannerElement as preview__GuidebannerElement,
+//   GuidebannerElementButton as preview__GuidebannerElementButton,
+//   GuidebannerElementLink as preview__GuidebannerElementLink,
+// } from './components/Guidebanner';
+// export type { GuidebannerProps } from './components/Guidebanner';
+// export type { GuidebannerElementProps } from './components/Guidebanner';
+// export type { GuidebannerElementButtonProps } from './components/Guidebanner';
+// export type { GuidebannerElementLinkProps } from './components/Guidebanner';
 export * from './components/AccordionItem';
 export * from './components/AspectRatio';
 export * from './components/Breadcrumb';
