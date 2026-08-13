@@ -173,6 +173,19 @@ export const Default = {
   ),
 };
 
+const readonlyArgTypes = {
+  density: { control: false },
+  clickable: { control: false },
+  disabled: { control: false },
+  horizontal: { control: false },
+  label: { control: false },
+  title: { control: false },
+  description: { control: false },
+  bodyText: { control: false },
+  titleTruncate: { control: false },
+  actionCount: { control: false },
+};
+
 export const Clickable = () => (
   <Grid withRowGap>
     {/* Action card — onClick handler */}
@@ -285,6 +298,8 @@ export const Clickable = () => (
   </Grid>
 );
 
+Clickable.argTypes = readonlyArgTypes;
+
 export const Disabled = () => {
   const [disabled, setDisabled] = React.useState(true);
   return (
@@ -328,6 +343,8 @@ export const Disabled = () => {
   );
 };
 
+Disabled.argTypes = readonlyArgTypes;
+
 export const Minimal = () => (
   <Grid withRowGap>
     <Column lg={4} md={4} sm={4}>
@@ -353,6 +370,8 @@ export const Minimal = () => (
     </Column>
   </Grid>
 );
+
+Minimal.argTypes = readonlyArgTypes;
 
 export const ProductiveAndExpressive = () => (
   <Grid withRowGap>
@@ -394,6 +413,8 @@ export const ProductiveAndExpressive = () => (
     </Column>
   </Grid>
 );
+
+ProductiveAndExpressive.argTypes = readonlyArgTypes;
 
 export const WithAILabel = () => (
   <Grid withRowGap>
@@ -522,6 +543,8 @@ export const WithAILabel = () => (
   </Grid>
 );
 
+WithAILabel.argTypes = readonlyArgTypes;
+
 export const WithFlushBody = () => (
   <Grid withRowGap>
     {/* Default — 16px padding */}
@@ -563,6 +586,8 @@ export const WithFlushBody = () => (
     </Column>
   </Grid>
 );
+
+WithFlushBody.argTypes = readonlyArgTypes;
 
 export const WithHeaderActions = () => (
   <Grid withRowGap>
@@ -770,6 +795,8 @@ export const WithHeaderActions = () => (
   </Grid>
 );
 
+WithHeaderActions.argTypes = readonlyArgTypes;
+
 export const WithHeaderMedia = () => (
   <Grid withRowGap>
     <Column lg={4} md={4} sm={4}>
@@ -855,6 +882,8 @@ export const WithHeaderMedia = () => (
     </Column>
   </Grid>
 );
+
+WithHeaderMedia.argTypes = readonlyArgTypes;
 
 export const WithHorizontalMedia = () => (
   <Grid withRowGap>
@@ -963,6 +992,8 @@ export const WithHorizontalMedia = () => (
   </Grid>
 );
 
+WithHorizontalMedia.argTypes = readonlyArgTypes;
+
 export const WithIcon = () => (
   <Grid withRowGap>
     <Column lg={4} md={4} sm={4}>
@@ -1042,6 +1073,8 @@ export const WithIcon = () => (
   </Grid>
 );
 
+WithIcon.argTypes = readonlyArgTypes;
+
 export const WithMedia = () => (
   <Grid withRowGap>
     <Column lg={4} md={4} sm={4}>
@@ -1106,6 +1139,8 @@ export const WithMedia = () => (
   </Grid>
 );
 
+WithMedia.argTypes = readonlyArgTypes;
+
 export const WithTitleLeadingIcon = () => (
   <Grid withRowGap>
     <Column lg={4} md={4} sm={4}>
@@ -1149,6 +1184,8 @@ export const WithTitleLeadingIcon = () => (
     </Column>
   </Grid>
 );
+
+WithTitleLeadingIcon.argTypes = readonlyArgTypes;
 
 export const WithTitleMedia = () => (
   <Grid withRowGap>
@@ -1313,6 +1350,8 @@ export const WithTitleMedia = () => (
   </Grid>
 );
 
+WithTitleMedia.argTypes = readonlyArgTypes;
+
 export const WithTitleTrailingIcon = () => (
   <Grid withRowGap>
     <Column lg={4} md={4} sm={4}>
@@ -1356,6 +1395,8 @@ export const WithTitleTrailingIcon = () => (
     </Column>
   </Grid>
 );
+
+WithTitleTrailingIcon.argTypes = readonlyArgTypes;
 
 export const WithTruncatedTitle = () => (
   <Grid withRowGap>
@@ -1415,6 +1456,8 @@ export const WithTruncatedTitle = () => (
     </Column>
   </Grid>
 );
+
+WithTruncatedTitle.argTypes = readonlyArgTypes;
 
 export const WithVideo = () => (
   <Grid withRowGap>
@@ -1489,3 +1532,5 @@ export const WithVideo = () => (
     </Column>
   </Grid>
 );
+
+WithVideo.argTypes = readonlyArgTypes;
