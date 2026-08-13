@@ -53,7 +53,12 @@ function menuReducer(state: StateType, action: ActionType) {
       };
     case 'registerItem': {
       const newItem = action.payload;
-      const items = state.items.filter((item) => item.ref.current);
+      // Drop stale entries (unmounted refs) as well as any existing entry
+      // for this same ref, so registering the same item twice (e.g. React
+      // StrictMode's double-invoked effects) doesn't duplicate it.
+      const items = state.items.filter(
+        (item) => item.ref.current && item.ref !== newItem.ref
+      );
       const next = newItem.ref.current?.nextElementSibling;
       const idx = items.findIndex((item) => item.ref.current === next);
       items.splice(idx < 0 ? items.length : idx, 0, newItem);
