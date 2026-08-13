@@ -125,7 +125,30 @@ $css--plex: true !default;
   :host(#{$prefix}-fluid-multi-select[warn]:not([disabled]):not([read-only])) {
     .#{$prefix}--form__helper-text {
       border-radius: $border-radius-04;
-      border-block-end: 1px solid $border-strong;
+    }
+
+    .#{$prefix}--list-box__wrapper--fluid {
+      border: 1px solid transparent;
+      border-radius: $border-radius-04;
+      background:
+        linear-gradient($field, $field) padding-box,
+        linear-gradient(
+            to bottom,
+            $border-subtle calc(100% - 4px),
+            $border-strong 100%
+          )
+          border-box;
+
+      // 2px to offset the wrapper's border, keeping the field 64px.
+      .#{$prefix}--list-box {
+        border: none;
+        min-block-size: to-rem(62px);
+      }
+      .#{$prefix}--label {
+        inline-size: calc(100% - 2rem + 2px);
+        inset-block-start: to-rem(12px);
+        inset-inline-start: calc(#{$spacing-05} - 1px);
+      }
     }
   }
 }
