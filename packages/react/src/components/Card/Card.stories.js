@@ -556,8 +556,8 @@ export const WithFlushBody = () => (
         <Card.Body>
           <div
             style={{
-              background: '#e8daff',
-              border: '1px dashed #6929c4',
+              background: 'var(--cds-highlight)',
+              border: '1px dashed var(--cds-link-primary)',
               padding: '1rem',
             }}>
             Content with 16px body padding
@@ -575,8 +575,8 @@ export const WithFlushBody = () => (
         <Card.Body isFlush>
           <div
             style={{
-              background: '#e8daff',
-              border: '1px dashed #6929c4',
+              background: 'var(--cds-highlight)',
+              border: '1px dashed var(--cds-link-primary)',
               padding: '1rem',
             }}>
             Content fills edge-to-edge
