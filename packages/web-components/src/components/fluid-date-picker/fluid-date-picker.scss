@@ -35,7 +35,11 @@ $css--plex: true !default;
   }
 
   .#{$prefix}--date-picker__calendar.open {
-    margin-block-start: 0;
+    @if flags.enabled('enable-v12-release') {
+      margin-block-start: $spacing-02;
+    } @else {
+      margin-block-start: 0;
+    }
   }
 
   .flatpickr-next-month,

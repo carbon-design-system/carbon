@@ -498,4 +498,10 @@
     .#{$prefix}--date-picker__input {
     padding-inline-end: $spacing-10;
   }
+
+  @if enabled('enable-v12-release') {
+    .#{$prefix}--date-picker__calendar.#{$prefix}--date-picker__calendar--fluid.open.arrowTop {
+      margin-block-start: $spacing-02;
+    }
+  }
 }
