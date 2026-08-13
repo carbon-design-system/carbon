@@ -1,0 +1,449 @@
+//
+// Copyright IBM Corp. 2026
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+//-----------------------------
+// Card
+//-----------------------------
+
+@use '../../config' as *;
+@use '../../motion' as *;
+@use '../../spacing' as *;
+@use '../../theme' as *;
+@use '../../type' as *;
+@use '../../utilities/ai-gradient' as *;
+@use '../../utilities/focus-outline' as *;
+
+/// Card styles
+/// @access public
+/// @group card
+@mixin card {
+  // ─── Base ────────────────────────────────────────────────────────────
+  .#{$prefix}--card {
+    position: relative;
+    border: 1px solid $border-subtle-01;
+    background-color: $layer-01;
+    color: $text-primary;
+  }
+
+  // ─── Clickable ───────────────────────────────────────────────────────
+  .#{$prefix}--card--clickable {
+    cursor: pointer;
+    transition: background-color $duration-fast-02 motion(standard, productive);
+
+    &:hover {
+      background-color: $layer-hover-01;
+    }
+
+    &:focus {
+      @include focus-outline('outline');
+    }
+
+    &:active {
+      background-color: $layer-active-01;
+    }
+  }
+
+  // ─── Disabled ────────────────────────────────────────────────────────
+  .#{$prefix}--card--disabled {
+    border-color: $border-disabled;
+    background-color: $layer-01;
+    color: $text-disabled;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+
+  // ─── Header ──────────────────────────────────────────────────────────
+  .#{$prefix}--card__header {
+    position: relative;
+    display: grid;
+    // 16px gap between __title-media and __title
+    column-gap: $spacing-05;
+    grid-template-columns: auto 1fr;
+    // vertical rhythm is handled by margin-block on each child
+    row-gap: 0;
+  }
+
+  // ─── Body ────────────────────────────────────────────────────────────
+  .#{$prefix}--card__body {
+    @include type-style('body-compact-01');
+
+    margin-block: $spacing-05;
+    margin-block-start: 0;
+    margin-inline: $spacing-05;
+  }
+
+  // When body is the first child (no header), restore top padding
+  .#{$prefix}--card > .#{$prefix}--card__body:first-child {
+    margin-block-start: $spacing-05;
+  }
+
+  // ─── Footer ──────────────────────────────────────────────────────────
+  // Default: padded, no border (raw-content slot)
+  .#{$prefix}--card__footer {
+    display: flex;
+    align-items: center;
+    padding: $spacing-05;
+  }
+
+  // Action-set layout: triggered when CardAction children are present
+  .#{$prefix}--card__footer:has(> .#{$prefix}--card__action) {
+    overflow: hidden;
+    padding: 0;
+    border-block-start: 1px solid $border-subtle;
+    gap: 1px;
+  }
+
+  // Text/secondary actions stretch to fill width
+  .#{$prefix}--card__footer
+    > .#{$prefix}--card__action:not(:has(.#{$prefix}--btn--icon-only)) {
+    flex: 1 0 0;
+    min-inline-size: 0;
+
+    > .#{$prefix}--btn,
+    > * > .#{$prefix}--btn {
+      inline-size: 100%;
+      max-inline-size: none;
+    }
+  }
+
+  // Icon-only actions are fixed-width, pushed to the right
+  .#{$prefix}--card__footer
+    > .#{$prefix}--card__action:has(.#{$prefix}--btn--icon-only) {
+    flex: 0 0 auto;
+    margin-inline-start: auto;
+  }
+
+  // Consecutive icon-only actions: only the first gets the auto margin
+  .#{$prefix}--card__footer
+    > .#{$prefix}--card__action:has(.#{$prefix}--btn--icon-only)
+    + .#{$prefix}--card__action:has(.#{$prefix}--btn--icon-only) {
+    margin-inline-start: 0;
+  }
+
+  // ─── Action wrapper ───────────────────────────────────────────────────
+  .#{$prefix}--card__action {
+    display: inline-flex;
+  }
+
+  // ─── Header media (icon / avatar slot) ───────────────────────────────
+  // Spans both grid columns so it always sits above the title-media+title row.
+  .#{$prefix}--card__header-media {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    grid-column: 1 / -1;
+    margin-block: $spacing-05;
+    margin-inline: $spacing-05;
+    // 64px max height
+    max-block-size: $spacing-10;
+  }
+
+  // ─── Media (AspectRatio slot) ────────────────────────────────────────
+  .#{$prefix}--card__media {
+    grid-column: 1 / -1;
+    inline-size: 100%;
+
+    // Disable Carbon's float-based padding-top trick
+    &::before,
+    &::after {
+      display: none;
+    }
+  }
+
+  // Re-apply aspect ratio using the native CSS property
+  .#{$prefix}--card__media.#{$prefix}--aspect-ratio--16x9 {
+    aspect-ratio: 16 / 9;
+  }
+  .#{$prefix}--card__media.#{$prefix}--aspect-ratio--9x16 {
+    aspect-ratio: 9 / 16;
+  }
+  .#{$prefix}--card__media.#{$prefix}--aspect-ratio--2x1 {
+    aspect-ratio: 2 / 1;
+  }
+  .#{$prefix}--card__media.#{$prefix}--aspect-ratio--1x2 {
+    aspect-ratio: 1 / 2;
+  }
+  .#{$prefix}--card__media.#{$prefix}--aspect-ratio--4x3 {
+    aspect-ratio: 4 / 3;
+  }
+  .#{$prefix}--card__media.#{$prefix}--aspect-ratio--3x4 {
+    aspect-ratio: 3 / 4;
+  }
+  .#{$prefix}--card__media.#{$prefix}--aspect-ratio--3x2 {
+    aspect-ratio: 3 / 2;
+  }
+  .#{$prefix}--card__media.#{$prefix}--aspect-ratio--2x3 {
+    aspect-ratio: 2 / 3;
+  }
+  .#{$prefix}--card__media.#{$prefix}--aspect-ratio--1x1 {
+    aspect-ratio: 1 / 1;
+  }
+
+  // Children of the media slot (images, video) must fill the container
+  .#{$prefix}--card__media > * {
+    position: static;
+    block-size: 100%;
+    inline-size: 100%;
+    object-fit: cover;
+  }
+
+  // ─── Horizontal layout ───────────────────────────────────────────────
+  .#{$prefix}--card--horizontal {
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+  }
+
+  .#{$prefix}--card__media--horizontal {
+    overflow: hidden;
+    flex-basis: var(--#{$prefix}--card--media-width, 33.33%);
+    flex-shrink: 0;
+    align-self: stretch;
+  }
+
+  .#{$prefix}--card--horizontal > .#{$prefix}--card__content {
+    display: flex;
+    flex: 1 1 0;
+    flex-direction: column;
+    min-inline-size: 0;
+  }
+
+  .#{$prefix}--card--horizontal
+    > .#{$prefix}--card__content
+    > .#{$prefix}--card__body {
+    flex: 1 0 auto;
+  }
+
+  .#{$prefix}--card--horizontal
+    > .#{$prefix}--card__content
+    > .#{$prefix}--card__footer {
+    margin-block-start: auto;
+  }
+
+  // ─── Label (nested inside __title via label prop on CardTitle) ─────────
+  .#{$prefix}--card__title > .#{$prefix}--card__label {
+    @include type-style('label-01');
+
+    color: $text-secondary;
+  }
+
+  .#{$prefix}--card__label--truncate {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .#{$prefix}--card__label--truncate-multi {
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: var(--#{$prefix}--card--label-line-clamp);
+    text-overflow: ellipsis;
+  }
+
+  // ─── Title ───────────────────────────────────────────────────────────
+  .#{$prefix}--card__title {
+    display: flex;
+    overflow: hidden;
+    flex-direction: column;
+    color: $text-primary;
+    // 2px between label / text-row / description
+    gap: $spacing-01;
+    margin-inline: $spacing-05;
+    min-inline-size: 0;
+  }
+
+  .#{$prefix}--card__header > .#{$prefix}--card__title {
+    margin-block: $spacing-05;
+  }
+
+  .#{$prefix}--card--expressive .#{$prefix}--card__title-text-row {
+    @include type-style('heading-03');
+  }
+
+  .#{$prefix}--card--productive .#{$prefix}--card__title-text-row {
+    @include type-style('heading-compact-02');
+  }
+
+  // ─── Title text row ──────────────────────────────────────────────────
+  .#{$prefix}--card__title-text-row {
+    display: block;
+  }
+
+  .#{$prefix}--card__title-text-row--truncate {
+    overflow: hidden;
+    max-inline-size: var(--#{$prefix}--card--title-max-width, 100%);
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .#{$prefix}--card__title-text-row--truncate-multi {
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: var(--#{$prefix}--card--title-line-clamp);
+    max-inline-size: var(--#{$prefix}--card--title-max-width, 100%);
+    text-overflow: ellipsis;
+  }
+
+  // Leading icon: flex row so icon and text sit side-by-side
+  .#{$prefix}--card__title-text-row--with-start-icon {
+    display: flex;
+    align-items: flex-start;
+    gap: $spacing-03;
+  }
+
+  // Trailing icon — no override needed; icon span is inline-flex inside block text
+  .#{$prefix}--card__title-text-row--with-end-icon {
+    display: block;
+  }
+
+  // Title leading icon wrapper
+  .#{$prefix}--card__title-start-icon {
+    display: flex;
+    flex-shrink: 0;
+    // 2px to align with first text line
+    margin-block-start: $spacing-01;
+  }
+
+  // Title trailing icon wrapper — inline so it flows with text
+  .#{$prefix}--card__title-end-icon {
+    display: inline-flex;
+    align-items: center;
+    margin-inline-start: $spacing-03;
+    vertical-align: middle;
+  }
+
+  // ─── Description (nested inside __title via description prop) ──────────
+  .#{$prefix}--card__title > .#{$prefix}--card__description {
+    @include type-style('label-01');
+
+    color: $text-secondary;
+  }
+
+  .#{$prefix}--card__description--truncate {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .#{$prefix}--card__description--truncate-multi {
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: var(--#{$prefix}--card--description-line-clamp);
+    text-overflow: ellipsis;
+  }
+
+  // ─── Title media ─────────────────────────────────────────────────────
+  .#{$prefix}--card__title-media {
+    display: flex;
+    flex-shrink: 0;
+    // top-align so it tracks the first line on long titles
+    align-items: flex-start;
+    justify-content: center;
+    grid-column: 1;
+    // aligns top edge with title text top margin
+    margin-block-start: $spacing-05;
+    // 16px from card edge
+    margin-inline-start: $spacing-05;
+    // 64px max height
+    max-block-size: $spacing-10;
+  }
+
+  .#{$prefix}--card__header:has(> .#{$prefix}--card__title-media)
+    > .#{$prefix}--card__title {
+    grid-column: 2;
+    // left margin is provided by the gap from __title-media
+    margin-inline-start: 0;
+  }
+
+  // ─── Header actions ───────────────────────────────────────────────────
+  .#{$prefix}--card__actions {
+    position: absolute;
+    display: inline-flex;
+    align-items: center;
+    justify-content: flex-end;
+    block-size: $spacing-07;
+    gap: $spacing-02;
+    inline-size: 50%;
+    inset-block-start: $spacing-03;
+    inset-inline-end: $spacing-03;
+    max-inline-size: 50%;
+  }
+
+  // ─── AI Label (decorator) ─────────────────────────────────────────────
+  .#{$prefix}--card--has-ai-label {
+    @include ai-popover-gradient('default', 0, 'layer');
+
+    border: 1px solid transparent;
+    box-shadow:
+      inset 0 -80px 70px -65px $ai-inner-shadow,
+      0 4px 10px 2px $ai-drop-shadow;
+  }
+
+  .#{$prefix}--card__decorator {
+    position: absolute;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    block-size: $spacing-07;
+    inset-block-start: $spacing-03;
+    inset-inline-end: $spacing-03;
+  }
+
+  .#{$prefix}--card--has-ai-label .#{$prefix}--card__title {
+    padding-inline-end: calc($spacing-07 + $spacing-05);
+  }
+
+  .#{$prefix}--card--has-ai-label:has(.#{$prefix}--card__actions)
+    .#{$prefix}--card__title {
+    padding-inline-end: $spacing-13;
+  }
+
+  .#{$prefix}--card--has-ai-label .#{$prefix}--card__label {
+    padding-inline-end: calc($spacing-07 + $spacing-05);
+  }
+
+  .#{$prefix}--card--has-ai-label:has(.#{$prefix}--card__actions)
+    .#{$prefix}--card__label {
+    padding-inline-end: $spacing-13;
+  }
+
+  .#{$prefix}--card--has-ai-label .#{$prefix}--card__description {
+    padding-inline-end: calc($spacing-07 + $spacing-05);
+  }
+
+  .#{$prefix}--card--has-ai-label:has(.#{$prefix}--card__actions)
+    .#{$prefix}--card__description {
+    padding-inline-end: $spacing-13;
+  }
+
+  .#{$prefix}--card--has-ai-label .#{$prefix}--card__actions {
+    inset-inline-end: calc($spacing-03 + $spacing-06 + $spacing-03);
+  }
+
+  // AI label hover state for clickable cards
+  .#{$prefix}--card--clickable.#{$prefix}--card--has-ai-label::before {
+    @include ai-popover-gradient('hover', 0, 'layer');
+
+    position: absolute;
+    display: block;
+    block-size: 100%;
+    box-shadow: inset 0 -80px 70px -65px $ai-inner-shadow;
+    content: '';
+    inline-size: 100%;
+    inset-block-start: 0;
+    inset-inline-start: 0;
+    opacity: 0;
+    transition: opacity $duration-fast-02 motion(standard, productive);
+  }
+
+  .#{$prefix}--card--clickable.#{$prefix}--card--has-ai-label:hover::before {
+    opacity: 1;
+  }
+}
