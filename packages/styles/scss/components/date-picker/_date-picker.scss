@@ -159,7 +159,7 @@
       }
     }
 
-    .#{$prefix}--date-picker--range:not(.#{$prefix}--skeleton) {
+    .#{$prefix}--date-picker--range {
       .#{$prefix}--date-picker-container:first-of-type
         .#{$prefix}--date-picker__input {
         border-end-end-radius: 0;

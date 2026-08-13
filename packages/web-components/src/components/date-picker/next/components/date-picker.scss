@@ -12,6 +12,7 @@
 @use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/styles/scss/theme' as *;
 @use '@carbon/styles/scss/utilities' as *;
+@use '@carbon/styles/scss/feature-flags' as flags;
 
 @include date-picker;
 @include date-picker-next.date-picker-next-rules;
@@ -96,10 +97,31 @@
 
 :host(#{$prefix}-preview-date-picker-input-skeleton) {
   @extend .#{$prefix}--date-picker-input-skeleton;
+
+  @if flags.enabled('enable-v12-release') {
+    display: inline-flex;
+    flex-direction: row;
+  }
 }
 
 :host(#{$prefix}-preview-date-picker-input-skeleton[range]) {
   @extend .#{$prefix}--date-picker-input-skeleton--range;
+
+  @if flags.enabled('enable-v12-release') {
+    column-gap: rem(1px);
+
+    .#{$prefix}--date-picker-input-skeleton-container:first-of-type
+      .#{$prefix}--date-picker__input {
+      border-end-end-radius: 0;
+      border-start-end-radius: 0;
+    }
+
+    .#{$prefix}--date-picker-input-skeleton-container:last-of-type
+      .#{$prefix}--date-picker__input {
+      border-end-start-radius: 0;
+      border-start-start-radius: 0;
+    }
+  }
 }
 
 :host(#{$prefix}-preview-date-picker-input[ai-label]) {

@@ -353,6 +353,10 @@
     background: $skeleton-background;
     block-size: convert.to-rem(64px);
     border-block-end: 1px solid $skeleton-element;
+
+    @if enabled('enable-v12-release') {
+      border-radius: $border-radius-04;
+    }
   }
 
   .#{$prefix}--date-picker--fluid__skeleton--container {

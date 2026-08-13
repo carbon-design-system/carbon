@@ -14,7 +14,6 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/styles/scss/border-radius' as *;
 @use '@carbon/styles/scss/feature-flags' as flags;
-
 @use '@carbon/styles/scss/components/form';
 @use '@carbon/styles/scss/components/date-picker/date-picker' as *;
 @use '@carbon/styles/scss/utilities/ai-gradient' as *;
@@ -180,7 +179,12 @@ $css--plex: true !default;
 }
 
 :host(#{$prefix}-date-picker-input-skeleton) {
-  display: inline-block;
+  @if flags.enabled('enable-v12-release') {
+    display: inline-flex;
+    flex-direction: row;
+  } @else {
+    display: inline-block;
+  }
 
   .#{$prefix}--label {
     @include skeleton;
@@ -201,6 +205,22 @@ $css--plex: true !default;
 
     .#{$prefix}--date-picker__input {
       inline-size: rem(143.5px);
+    }
+  }
+
+  @if flags.enabled('enable-v12-release') {
+    column-gap: rem(1px);
+
+    .#{$prefix}--date-picker-input-skeleton-container:first-of-type
+      .#{$prefix}--date-picker__input {
+      border-end-end-radius: 0;
+      border-start-end-radius: 0;
+    }
+
+    .#{$prefix}--date-picker-input-skeleton-container:last-of-type
+      .#{$prefix}--date-picker__input {
+      border-end-start-radius: 0;
+      border-start-start-radius: 0;
     }
   }
 }
