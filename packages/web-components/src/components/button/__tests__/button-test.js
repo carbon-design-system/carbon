@@ -209,6 +209,40 @@ describe('cds-button', () => {
       expect(el).to.have.attribute('badge-count', '1200');
       await expect(el).shadowDom.to.equalSnapshot();
     });
+
+    it('should set aria-pressed on a selected ghost icon button', async () => {
+      const el = await fixture(html`
+        <cds-button kind="ghost" isSelected tooltip-text="Icon button">
+          <svg slot="icon" data-testid="svg"></svg>
+        </cds-button>
+      `);
+      await el.updateComplete;
+
+      const button = el.shadowRoot?.querySelector('button');
+      expect(button).to.have.attribute('aria-pressed', 'true');
+    });
+
+    it('should set aria-pressed to false on a ghost icon button that is not selected', async () => {
+      const el = await fixture(html`
+        <cds-button kind="ghost" tooltip-text="Icon button">
+          <svg slot="icon" data-testid="svg"></svg>
+        </cds-button>
+      `);
+      await el.updateComplete;
+
+      const button = el.shadowRoot?.querySelector('button');
+      expect(button).to.have.attribute('aria-pressed', 'false');
+    });
+
+    it('should not set aria-pressed on a non-icon ghost button', async () => {
+      const el = await fixture(html`
+        <cds-button kind="ghost" isSelected>test</cds-button>
+      `);
+      await el.updateComplete;
+
+      const button = el.shadowRoot?.querySelector('button');
+      expect(button).to.not.have.attribute('aria-pressed');
+    });
   });
 
   describe('Tooltip popover position classes', () => {

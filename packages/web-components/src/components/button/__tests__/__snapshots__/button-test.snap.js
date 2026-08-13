@@ -832,3 +832,47 @@ snapshots['cds-button supports props.size size="2xl"'] = `<button
 </slot>
 `;
 /* end snapshot cds-button supports props.size size="2xl" */
+snapshots['cds-button Icon Button variant should support badge indicator'] =
+  `<button
+  aria-pressed="false"
+  class="cds--btn cds--btn--ghost cds--btn--icon-only cds--btn--lg cds--layout--size-lg cds-ce--btn--has-icon"
+  id="button"
+  part="button"
+  tabindex="0"
+  type="button"
+>
+  <slot>
+  </slot>
+  <slot name="icon">
+  </slot>
+</button>
+<slot
+  id="badge-indicator"
+  name="badge-indicator"
+>
+</slot>
+`;
+/* end snapshot cds-button Icon Button variant should support badge indicator */
+
+snapshots[
+  'cds-button Icon Button variant should support badge indicator and truncate'
+] = `<button
+  aria-pressed="false"
+  class="cds--btn cds--btn--ghost cds--btn--icon-only cds--btn--lg cds--layout--size-lg cds-ce--btn--has-icon"
+  id="button"
+  part="button"
+  tabindex="0"
+  type="button"
+>
+  <slot>
+  </slot>
+  <slot name="icon">
+  </slot>
+</button>
+<slot
+  id="badge-indicator"
+  name="badge-indicator"
+>
+</slot>
+`;
+/* end snapshot cds-button Icon Button variant should support badge indicator and truncate */
