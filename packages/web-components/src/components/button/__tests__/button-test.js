@@ -212,7 +212,7 @@ describe('cds-button', () => {
 
     it('should set aria-pressed for ghost variant when is-selected is true', async () => {
       const el = await fixture(html`
-        <cds-button has-icon-only is-selected kind="ghost" size="lg">
+        <cds-button has-icon-only isSelected kind="ghost" size="lg">
           <svg slot="icon" data-testid="svg"></svg>
         </cds-button>
       `);

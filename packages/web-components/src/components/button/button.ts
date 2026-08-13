@@ -186,7 +186,7 @@ class CDSButton extends HostListenerMixin(FocusMixin(LitElement)) {
   /**
    * Specify whether the Button is currently selected. Only applies to the icon only Ghost variant.
    */
-  @property({ type: Boolean, reflect: true, attribute: 'is-selected' })
+  @property({ type: Boolean, reflect: true })
   isSelected = false;
 
   /**
