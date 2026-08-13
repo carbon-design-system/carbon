@@ -41,6 +41,7 @@ the following:
 | `$fluid-spacing-03`  |             | ✅       |
 | `$fluid-spacing-04`  |             | ✅       |
 | `$fluid-spacing `    |             |          |
+| `$border-radius-00`  |             | ✅       |
 | `$border-radius-02`  |             | ✅       |
 | `$border-radius-04`  |             | ✅       |
 | `$border-radius-08`  |             | ✅       |
