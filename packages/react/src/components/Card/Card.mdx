@@ -1,0 +1,146 @@
+import { ArgTypes, Meta, Canvas } from '@storybook/addon-docs/blocks';
+import * as CardStories from './Card.stories';
+
+<Meta isTemplate />
+
+# Card
+
+[Source code](https://github.com/carbon-design-system/carbon/tree/main/packages/react/src/components/Card)
+&nbsp;
+
+{/* <!-- START doctoc generated TOC please keep comment here to allow auto update --> <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE --> */}
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Subcomponents](#subcomponents)
+- [Density](#density)
+- [Clickable cards](#clickable-cards)
+- [Disabled state](#disabled-state)
+- [Media](#media)
+- [Header actions](#header-actions)
+- [AI label](#ai-label)
+- [Horizontal layout](#horizontal-layout)
+- [Component API](#component-api)
+- [Feedback](#feedback)
+
+{/* <!-- END doctoc generated TOC please keep comment here to allow auto update --> */}
+
+## Overview
+
+The `Card` component is a flexible container for displaying related content and
+actions. Cards are composed from a set of subcomponents — `Card.Header`,
+`Card.Body`, `Card.Footer`, `Card.Media`, and more — that slot into a structured
+layout.
+
+```jsx
+import { Card } from '@carbon/react';
+
+function Example() {
+  return (
+    <Card>
+      <Card.Header>
+        <Card.Title>Card title</Card.Title>
+      </Card.Header>
+      <Card.Body>
+        <p>Card body content.</p>
+      </Card.Body>
+      <Card.Footer>
+        <Button kind="tertiary" size="md">
+          Action
+        </Button>
+      </Card.Footer>
+    </Card>
+  );
+}
+```
+
+<Canvas of={CardStories.Minimal} />
+
+## Subcomponents
+
+| Subcomponent      | Alias              | Purpose                                                                    |
+| ----------------- | ------------------ | -------------------------------------------------------------------------- |
+| `CardHeader`      | `Card.Header`      | Contains title, media, and actions                                         |
+| `CardBody`        | `Card.Body`        | Primary content area                                                       |
+| `CardFooter`      | `Card.Footer`      | Bottom action bar                                                          |
+| `CardMedia`       | `Card.Media`       | Image/video slot (aspect ratio wrapper)                                    |
+| `CardHeaderMedia` | `Card.HeaderMedia` | Icon/image slot spanning the full header width above the title             |
+| `CardTitleMedia`  | `Card.TitleMedia`  | Media slot to the left of the title                                        |
+| `CardTitle`       | `Card.Title`       | Primary heading text; accepts `label` and `description` props for sub-text |
+| `CardActions`     | `Card.Actions`     | Action button group in the header                                          |
+| `CardAction`      | `Card.Action`      | Individual action wrapper (footer or header)                               |
+
+## Density
+
+Cards support two density variants via the `density` prop:
+
+- **`productive`** (default) — uses `$heading-compact-02` for a compact layout
+- **`expressive`** — uses `$heading-03` for a more spacious layout
+
+<Canvas of={CardStories.ProductiveAndExpressive} />
+
+## Clickable cards
+
+Pass `clickable` and `onClick` to make the entire card interactive. The card
+renders as a `<button>` and gains focus/hover styles. Interactive elements
+inside a clickable card should call `e.stopPropagation()` to prevent the card
+click from firing.
+
+```jsx
+<Card clickable onClick={() => navigate('/detail')}>
+  <Card.Body>Content</Card.Body>
+</Card>
+```
+
+## Disabled state
+
+Pass `disabled` to mute the card visually and prevent all interaction. Manually
+pass `disabled` to any interactive elements inside the card (buttons, inputs)
+since the card itself does not propagate the disabled state.
+
+<Canvas of={CardStories.Disabled} />
+
+## Media
+
+Use `Card.Media` with a `ratio` prop to render an aspect-ratio-constrained media
+slot. Supported ratios are those accepted by the Carbon `AspectRatio` component
+(`16x9`, `9x16`, `2x1`, `1x2`, `4x3`, `3x4`, `1x1`).
+
+Place `Card.Media` inside `Card.Header` for a top-positioned image, or as a
+direct child of `Card` with the `horizontal` prop for a side-by-side layout.
+
+<Canvas of={CardStories.WithMedia} />
+
+## Header actions
+
+Place `Card.Actions` inside `Card.Header` to add icon or text buttons
+right-aligned in the header row.
+
+<Canvas of={CardStories.WithHeaderActions} />
+
+## AI label
+
+Pass an `AILabel` to the `decorator` prop to render an AI label in the top-right
+corner of the card with a gradient border treatment.
+
+<Canvas of={CardStories.WithAILabel} />
+
+## Horizontal layout
+
+Pass `horizontal` to the `Card` to render media and content side-by-side.
+`Card.Media` must be a direct child of `Card` (not nested in `Card.Header`). Use
+`mediaWidth` on `Card.Media` to control the media column width (default:
+`33.33%`).
+
+<Canvas of={CardStories.WithHorizontalMedia} />
+
+## Component API
+
+<ArgTypes />
+
+## Feedback
+
+Help us improve this component by providing feedback, asking questions on Slack,
+or updating this file on
+[GitHub](https://github.com/carbon-design-system/carbon/edit/main/packages/react/src/components/Card/Card.mdx).
